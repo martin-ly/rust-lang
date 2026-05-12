@@ -10,6 +10,85 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Send/Sync 矩阵、同步原语对比、fearless concurrency 形式化论证、思维导图、示例反例
+- v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+> **学习递进**: 从单线程直觉出发，逐层揭示多线程引入的新问题与 Rust 的解决方案。
+
+### 第 1 步：为什么单线程没问题？
+
+在单线程程序中，借用检查器（Borrow Checker）已经保证了**Alias XOR Mutation**：任意时刻，对同一块内存要么有多个不可变引用，要么只有一个可变引用。编译器在 `01_foundation/01_ownership.md §3.1` 中通过所有权规则消除了 use-after-free 和数据竞争的所有可能。
+
+**过渡**：单线程的问题域是"时间顺序可预测"的；但多线程意味着执行顺序不再线性，同一时刻多个线程可能观察到彼此的中间状态。
+
+### 第 2 步：多线程哪里变了？
+
+多线程引入了**交错执行（interleaving）**：线程 A 的 `load` 可能发生在线程 B 的 `store` 之前或之后，产生不可预测的结果。`01_foundation/01_ownership.md §2.2` 中的所有权转移规则仍然成立，但"转移给谁"变成了"跨线程转移"。
+
+> **对应标注**：此处为 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §2.2 "所有权转移规则" 的并发延伸。
+
+**过渡**：既然多个线程能同时访问内存，我们需要先理解"数据竞争"的精确定义——它比普通竞争条件更严格。
+
+### 第 3 步：为什么数据会竞争？
+
+数据竞争需要四个条件同时满足：
+
+1. 多个线程访问同一内存位置
+2. 至少一个访问是写操作
+3. 访问之间没有同步（如锁、原子操作）
+4. 至少一个访问是非原子的
+
+单线程中条件 1 不存在（严格说是顺序执行），而多线程中条件 2+3 的组合使得中间状态暴露。
+
+**过渡**：Rust 没有选择在运行时检测数据竞争，而是在编译期通过类型系统排除它——这是 fearless concurrency 的核心。
+
+### 第 4 步：编译器怎么预防？
+
+Rust 通过 `Send` 和 `Sync` 两个 marker trait 将"线程安全性"编码进类型系统：
+
+- `T: Send` ⟹ 线程间转移 `T` 的值是安全的
+- `T: Sync` ⟹ 线程间共享 `&T` 是安全的（等价于 `&T: Send`）
+
+编译器自动推导复合类型的 Send/Sync 实现，非线程安全类型（如 `Rc<T>`）被编译期拒绝跨线程使用，产生 `E0277` 错误。
+
+**过渡**：编译期排除了数据竞争，但运行时仍有其他并发风险——死锁、活锁、饥饿、以及 unsafe 代码引入的 UB。
+
+### 第 5 步：运行时还有什么风险？
+
+- **死锁**：Mutex 嵌套且获取顺序不一致
+- **Poisoning**：Mutex 持有者在临界区内 panic，锁被标记为 poisoned
+- **活锁/饥饿**：线程持续改变状态但无法推进，或长期得不到调度
+- **Unsafe 边界**：`unsafe impl Send/Sync` 或裸指针解引用可能绕过类型系统
+
+这些属于**活性（liveness）**或**逻辑错误**，不在类型系统的安全保证范围内。
+
+**过渡**：既然编译期和运行时的风险都已识别，我们需要系统化的方法来验证并发程序的正确性。
+
+### 第 6 步：怎么验证正确性？
+
+| 验证层级 | 工具/方法 | 验证目标 |
+|:---|:---|:---|
+| 编译期 | `rustc` + `Send`/`Sync` | 排除数据竞争 |
+| 运行时测试 | `loom` 模型检查 | 枚举所有线程交错 |
+| 运行时检测 | ThreadSanitizer / Miri | 检测实际数据竞争 |
+| 形式化证明 | RustBelt / Iris CSL | 证明无 UB |
+
+> **对应标注**：此处为 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §5 "所有权规则的验证路径" 的并发扩展。
+
+---
+
+> **[TRPL: Ch16.0]** 认知类比：`Arc<Mutex<T>>` 被描述为共享保险箱——任何线程都能打开，但一次只能一个；`Arc` 提供共享所有权。✅ 已验证
+>
+> **[RustBelt: POPL 2017]** 形式化过渡路径：类型标记 (`Send`/`Sync`) → 并发分离逻辑 (CSL) → Iris Protocols。这是 Rust 并发安全从工程到理论的完整链条。✅ 已验证
+
+**认知脚手架**:
+
+- **类比**: `Arc<Mutex<T>>` 像"共享保险箱"——任何人（线程）都能开，但一次只能一个人，`Arc` 是保险箱的共享钥匙串。
+- **反直觉点**: Rust 的并发安全是**类型级**的（编译期），而非运行时检查。但死锁仍可能发生。
+- **形式化过渡**: 从"类型标记" → `Send`/`Sync` → "并发分离逻辑 (CSL)" → "Iris Protocols"。 💡 原创分析
 
 ---
 
@@ -49,11 +128,15 @@
   Mutex<T>: Send + Sync（若 T: Send）
 ```
 
+> **下一章**：在理解 Send/Sync 的抽象定义后，我们将在 §2 中通过属性矩阵查看具体类型的判定结果，并在 §3 中建立其形式化理论根基。
+
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
 ### 2.1 Send/Sync 判定矩阵
+
+> **对应标注**：此处为 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §2.1 "所有权与借用规则" 的并发类型级对应。
 
 | **类型** | **Send** | **Sync** | **原因** |
 |:---|:---|:---|:---|
@@ -65,6 +148,7 @@
 | `RefCell<T>` | ✅（若 T: Send） | ❌ | 运行时借用检查非线程安全 |
 | `Mutex<T>` | ✅（若 T: Send） | ✅（若 T: Send） | 锁保护共享访问 |
 | `RwLock<T>` | ✅（若 T: Send） | ✅（若 T: Send） | 读写锁保护 |
+| `AtomicUsize` | ✅ | ✅ | 硬件原子指令保证 |
 | `Cell<T>` | ✅（若 T: Send） | ❌ | 内部可变非原子 |
 | `*const T`, `*mut T` | ✅ | ✅ | 裸指针本身只是地址值 |
 | `dyn Trait` | 视 Trait | 视 Trait | 依赖具体类型 |
@@ -92,6 +176,8 @@
 | **消息传递** | Channel（所有权转移） | Channel（值拷贝） | BlockingQueue | 无内置 | 核心机制 |
 | **调度** | OS 调度 | M:N 调度 | OS 调度 | OS 调度 | BEAM 调度 |
 | **错误处理** | Result + panic | 返回值 | 异常 | 异常 | 监督树 |
+
+> **下一章**：掌握具体类型的 Send/Sync 属性后，我们将在 §3 中构建 fearless concurrency 的形式化证明，理解这些属性如何从公理推导出"无数据竞争"的定理。
 
 ---
 
@@ -142,6 +228,8 @@ Send 和 Sync 形成类型系统的"安全格":
   Mutex<T>: Sync  ⇔  T: Send
 ```
 
+> **下一章**：形式化理论确立了"什么是对的"，§4 的思维导图将帮助你在全局视角下组织这些概念，§5 的决策树则指导"怎么选"。
+
 ---
 
 ## 四、思维导图（Mind Map）
@@ -176,6 +264,8 @@ graph TD
     F --> F3[Actor 模型]
 ```
 
+> **下一章**：思维导图展示了概念全景，§5 的决策树将提供具体场景下的选择逻辑。
+
 ---
 
 ## 五、决策/边界判定树（Decision / Boundary Tree）
@@ -206,6 +296,8 @@ graph TD
     B3[为含 Cell/RefCell 的类型实现 Sync] -->|编译期| E1[E0225: conflicting impl / 逻辑错误]
     B4[跨线程使用 Rc] -->|编译期| E2[E0277: `Rc<T>` cannot be sent between threads safely]
 ```
+
+> **下一章**：决策树给出了选择逻辑，§6 的定理一致性矩阵将理论根基系统化为可追踪的推理链。
 
 ---
 
@@ -247,19 +339,31 @@ graph TD
 
 ### 6.3 定理一致性矩阵
 
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
-|:---|:---|:---|:---|:---|:---|:---|
-| Fearless Concurrency | `T: Send + Sync` | 跨线程共享无数据竞争 | 并发分离逻辑 (CSL) | 所有并发代码 | `unsafe impl Send/Sync` | — |
-| Mutex 互斥安全 | 单线程持有锁 | 临界区独占访问 | 分离逻辑 (资源令牌) | 条件变量、并发集合 | 死锁（lock 后 panic） | — |
-| Atomic 无锁安全 | 正确内存序 | 原子操作无撕裂 | C11 内存模型 | 无锁数据结构 | 错误 Ordering | — |
-| Channel 消息安全 | 所有权转移入 Channel | 接收方获得唯一所有权 | 线性逻辑 ⊗ | Actor 模式 | 发送后继续使用 | E0382 |
-| Rayon 数据并行 | 闭包满足 `Send` | 并行迭代正确 | 参数性 (Parametricity) | 并行算法 | 闭包捕获非 Send | — |
+> **推理链标注**：每行末尾的 "⟹" 表示从前提到结论的推导方向，展示从公理到定理到推论的递进关系。
 
-> **[RustBelt + C11 内存模型]** 一致性检查: Send/Sync 类型安全 ⟹ Mutex/Channel 运行时安全 ⟹ Atomic 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证
+| 编号 | 定理/引理/推论 | 前提条件 | 结论 | 依赖公理 | 被依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|:---|
+| L1 | Send/Sync marker trait 安全性 | 类型满足 auto trait 推导规则 | ⟹ 线程间数据传递安全 | RustBelt CSL + Auto trait 公理 | T1, T2, L2 | `unsafe impl` 违背内部不变式 | E0225 |
+| L2 | `Mutex<T: Send>` 互斥安全 | 锁获取/释放协议正确 | ⟹ 跨线程共享安全 | 分离逻辑 (资源令牌) | T1, 并发集合 | 死锁、poison、lock 后 panic | — |
+| T1 | 类型系统排他性 | `T: Send + Sync` + 借用检查通过 | ⟹ 编译期排除数据竞争 | Alias-XOR-Mutation + CSL | 所有并发代码 | `unsafe` 绕过检查、错误 `Ordering` | E0277/E0382 |
+| T2 | `Arc<T>` 共享所有权 | `T: Send + Sync` | ⟹ 引用计数共享的所有权语义 | 线性逻辑 ⊗ + RAII | L1, Channel | 循环引用导致内存泄漏 | — |
+| T3 | Atomic 无锁安全 | 正确使用 `Ordering` | ⟹ 原子操作无撕裂 | C11 内存模型 | 无锁数据结构 | 错误 `Ordering`（如 `Relaxed` 做同步） | — |
+| T4 | Channel 消息安全 | 所有权转移入 Channel | ⟹ 接收方获得唯一所有权 | 线性逻辑 ⊗ | Actor 模式、T2 | 发送后继续使用已 move 值 | E0382 |
+| T5 | Rayon 数据并行 | 闭包满足 `Send` | ⟹ 并行迭代正确 | 参数性 (Parametricity) | 并行算法 | 闭包捕获非 Send 类型 | E0277 |
+| C1 | Send 不满足 | `Rc<T>`, `*mut T` 解引用等跨线程传递 | ⟹ 编译错误 E0277 | Auto trait 推导 | — | 无（编译期强制） | E0277 |
+| C2 | Sync 不满足 | `RefCell<T>`, `Cell<T>` 跨线程共享引用 | ⟹ 跨线程读不安全 | Sync 定义 (`&T: Send`) | — | 无（编译期强制） | E0277 |
+| C3 | Mutex 误用 | 同线程重入、跨 await 持有 `std::sync::Mutex` | ⟹ 死锁 / 编译错误 | 锁协议 | — | 逻辑错误、调度时序 | — |
+| C4 | Arc 循环引用 | `Arc::clone` 成环且未使用 `Weak` | ⟹ 内存泄漏 | 引用计数语义 | — | 设计缺陷 | — |
+
+> **对应标注**：T1 中"编译期排除数据竞争"为 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §3.1 "借用检查器的安全性定理" 的并发延伸。
+
+> **[RustBelt + C11 内存模型]** 一致性检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证
 >
 > **[Rust Reference: Deadlocks]** Rust 不保证防止死锁；死锁是活性（liveness）性质，而非安全性（safety）性质，超出当前类型系统的保证范围。✅ 已验证
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性" · §4.3 "async 正确性"
+
+> **下一章**：定理链说明了"为什么正确"，§7 将展示"什么会出错"以及出错时的具体形态。
 
 ---
 
@@ -280,6 +384,8 @@ fn main() {
     // println!("{}", v);  // ❌ 编译错误: value moved into closure
 }
 ```
+
+> **对应标注**：`move` 闭包的所有权转移行为与 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §2.2 "所有权转移规则" 完全一致，只是接收方变为新线程。
 
 ### 7.2 正确示例：Mutex 共享状态
 
@@ -396,13 +502,10 @@ fn main() {
 
 **注意**: 死锁不是数据竞争，Rust 不保证防止死锁（属于逻辑错误）。
 
-**修正方案**：
-
 ```rust
 // ✅ 修正: 统一锁顺序或使用 std::sync::LockGuard 层次
 use std::sync::Mutex;
 use std::collections::HashMap;
-
 // 更好的设计: 避免细粒度锁，或使用锁层次
 ```
 
@@ -410,35 +513,84 @@ use std::collections::HashMap;
 
 ### 7.6 反命题与边界分析
 
-#### 命题: "Send + Sync 保证并发安全"
+#### 反命题 1: "并发总是安全的"
 
 ```mermaid
 graph TD
-    P["命题: Send+Sync 保证并发安全"] --> Q1{"使用 unsafe impl Send?"}
-    Q1 -->|是| F1["反例: 手动实现 Send 但内部有裸指针<br/>→ 数据竞争（UB）"]
-    Q1 -->|否| Q2{"使用 UnsafeCell 跨线程?"}
-    Q2 -->|是| F2["反例: UnsafeCell 允许 &mut 构造<br/>→ 手动同步责任"]
-    Q2 -->|否| Q3{"死锁?"}
-    Q3 -->|是| F3["反例: Mutex 嵌套锁 A→B, B→A<br/>→ 死锁（非数据竞争，但并发失败）"]
-    Q3 -->|否| T["定理成立: 无数据竞争<br/>✅ CSL + Iris 保证"]
+    P["命题: 并发总是安全的"] --> Q1{"仅使用 Safe Rust?"}
+    Q1 -->|否| F1["反例: unsafe 代码 / 错误 impl Send/Sync<br/>→ 数据竞争（UB）<br/>style fill:#f66"]
+    Q1 -->|是| Q2{"存在共享可变状态?"}
+    Q2 -->|否| Q3{"使用消息传递 channel?"}
+    Q2 -->|是| Q4{"使用 Mutex/RwLock/Atomic 同步?"}
+    Q4 -->|否| F2["反例: 无同步的共享写<br/>→ 编译错误 E0277/E0382<br/>style fill:#f66"]
+    Q4 -->|是| Q5{"锁顺序一致且无嵌套?"}
+    Q5 -->|否| F3["反例: 死锁 A→B, B→A<br/>→ 线程永久阻塞<br/>style fill:#f66"]
+    Q5 -->|是| Q6{"是否存在活锁/饥饿?"}
+    Q6 -->|是| F4["反例: 线程持续改变状态但无法推进<br/>→ 活性失败<br/>style fill:#f96"]
+    Q6 -->|否| Q7{"panic 处理是否正确?"}
+    Q7 -->|否| F5["反例: Mutex poisoned<br/>→ 后续 lock 返回 PoisonError<br/>style fill:#f96"]
+    Q7 -->|是| T1["定理成立: Safe Rust 无数据竞争<br/>✅ CSL + Iris 保证<br/>style fill:#6f6"]
 
     style F1 fill:#f66
-    style F2 fill:#f96
-    style F3 fill:#f96
-    style T fill:#6f6
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style F4 fill:#f96
+    style F5 fill:#f96
+    style T1 fill:#6f6
 ```
 
-#### 命题: "Mutex 保证临界区安全"
+**分析**: 并发安全是多层保证的——编译期排除数据竞争，但运行时仍需避免死锁、活锁、poison 和 unsafe 误用。
 
-| 条件 | 结果 | 说明 |
-|:---|:---|:---|
-| 正确使用 `lock()` | ✅ 互斥 | 每次只有一个线程进入 |
-| 同线程重复 `lock()` | ❌ 死锁 | `std::sync::Mutex` 不可重入 |
-| `lock()` 后 panic | ⚠️  Poison | Mutex 被标记为 poisoned |
-| `RwLock` 读锁升级写锁 | ❌ 死锁 | 不支持升级 |
-| 跨 await 持有锁 | ❌ 可能死锁 | async 中应使用 `tokio::sync::Mutex` |
+#### 反命题 2: "Mutex 保证线程安全"
 
-> **[Rust Reference: Mutex]** 死锁属于逻辑错误，Safe Rust 的编译器和类型系统不保证防止死锁。⚠️ 存在争议（形式化方法可证明部分无死锁模式，但通用问题不可判定）
+```mermaid
+graph TD
+    P2["命题: Mutex 保证线程安全"] --> R1{"使用 std::sync::Mutex?"}
+    R1 -->|否| R2{"使用 tokio::sync::Mutex?"}
+    R2 -->|否| G1["⚠️ 自定义锁实现需单独验证"]
+    R1 -->|是| R3{"同线程是否重复 lock?"}
+    R3 -->|是| E1["反例: 不可重入死锁<br/>→ 同线程阻塞自身<br/>style fill:#f66"]
+    R3 -->|否| R4{"lock 后是否可能 panic?"}
+    R4 -->|是| E2["反例: Mutex poisoning<br/>→ 锁状态被破坏，其他线程收到 PoisonError<br/>style fill:#f66"]
+    R4 -->|否| R5{"是否在 async 中跨越 await 点持有锁?"}
+    R5 -->|是| E3["反例: 阻塞线程导致 async 执行器停滞<br/>→ 应使用 tokio::sync::Mutex<br/>style fill:#f66"]
+    R5 -->|否| R6{"锁粒度是否过细 / 竞争是否激烈?"}
+    R6 -->|是| W1["反例: 性能瓶颈<br/>→ 内核 futex 上下文切换开销大<br/>style fill:#f96"]
+    R6 -->|否| T2["定理成立: Mutex 提供互斥访问<br/>✅ 临界区数据竞争被排除<br/>style fill:#6f6"]
+
+    style E1 fill:#f66
+    style E2 fill:#f66
+    style E3 fill:#f66
+    style W1 fill:#f96
+    style T2 fill:#6f6
+```
+
+**分析**: Mutex 保证的是"互斥"（mutual exclusion），即安全性；但不保证无死锁、无性能瓶颈、无 poison。这些属于活性或工程问题。
+
+> **对应标注**：Mutex 的不可重入性与 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §7.2 "常见陷阱：双重释放" 同属"同一实体多次获取导致错误"的模式。
+
+#### 反命题 3: "Arc 替代所有所有权共享"
+
+```mermaid
+graph TD
+    P3["命题: Arc 替代所有所有权共享"] --> S1{"是否存在循环引用?"}
+    S1 -->|是| D1["反例: Arc 循环引用<br/>→ 引用计数永不为零，内存泄漏<br/>style fill:#f66"]
+    S1 -->|否| S2{"共享数据是否频繁读写?"}
+    S2 -->|是| D2["反例: Arc 仅共享所有权，不保护数据<br/>→ 需配合 Mutex/RwLock，引入额外开销<br/>style fill:#f96"]
+    S2 -->|否| S3{"是否只需要单次共享、无需动态生命周期?"}
+    S3 -->|是| D3["反例: Arc 有原子计数开销<br/>→ 可用 scoped thread 的引用或 channel 替代<br/>style fill:#f96"]
+    S3 -->|否| S4{"是否需要弱引用打破循环?"}
+    S4 -->|是| D4["边界: 应使用 Weak<T><br/>→ 不增加强引用计数<br/>style fill:#ff9"]
+    S4 -->|否| T3["定理成立: Arc 正确提供共享所有权<br/>✅ 引用计数 = 安全的多所有者语义<br/>style fill:#6f6"]
+
+    style D1 fill:#f66
+    style D2 fill:#f96
+    style D3 fill:#f96
+    style D4 fill:#ff9
+    style T3 fill:#6f6
+```
+
+**分析**: `Arc` 解决的是"多个所有者"问题，不是"可变共享"问题，也不是"循环引用"问题。需配合 `Mutex`/`RwLock` 做内部可变，配合 `Weak` 打破循环。
 
 #### 边界极限测试
 
@@ -446,62 +598,26 @@ graph TD
 // 边界: 死锁（Safe Rust 中的并发失败）
 use std::sync::{Mutex, Arc};
 
-let a = Arc::new(Mutex::new(1));
-let b = Arc::new(Mutex::new(2));
+fn main() {
+    let a = Arc::new(Mutex::new(1));
+    let b = Arc::new(Mutex::new(2));
 
-let a2 = a.clone();
-let b2 = b.clone();
+    let a2 = a.clone();
+    let b2 = b.clone();
 
-std::thread::spawn(move || {
-    let _guard_a = a2.lock().unwrap();
-    let _guard_b = b2.lock().unwrap();  // 可能死锁！
-});
+    std::thread::spawn(move || {
+        let _guard_a = a2.lock().unwrap();
+        let _guard_b = b2.lock().unwrap();  // 可能死锁！
+    });
 
-let _guard_b = b.lock().unwrap();
-let _guard_a = a.lock().unwrap();  // 可能死锁！
-// 线程 1: lock A → 等 B
-// 主线程: lock B → 等 A
-// → 循环等待 → 死锁
+    let _guard_b = b.lock().unwrap();
+    let _guard_a = a.lock().unwrap();  // 线程1: lock A→等 B; 主线程: lock B→等 A → 死锁
+}
 ```
 
 ---
 
-## 零、认知路径（Cognitive Path）
-
-```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"多线程怎么安全？"           "两个线程同时            "Send/Sync =          "并发分离            "编译器检查          "unsafe impl
-                             读写一个变量"            类型级并发证明"        逻辑 (CSL)"         Send/Sync 约束"     Send/Sync"
-
-"怎么共享可变状态？"         "多个线程需要            "Mutex/Arc =          "资源令牌:           "运行时锁           "死锁、
-                             修改同一数据"            互斥 + 共享所有权"     持有即权限"          竞争检测"           poison"
-
-"无锁编程怎么保证？"         "原子操作需要            "Atomic + Ordering =   "C11 内存模型:      "miri 检测          "错误 Ordering
-                             同步顺序？"             可见性 + 有序性"       happens-before"    数据竞争"           导致重排"
-```
-
-> **[TRPL: Ch16.0]** 认知类比：Arc<Mutex<T>> 被描述为共享保险箱——任何线程都能打开，但一次只能一个；Arc 提供共享所有权。✅ 已验证
->
-> **[RustBelt: POPL 2017]** 形式化过渡路径：类型标记 (Send/Sync) → 并发分离逻辑 (CSL) → Iris Protocols。这是 Rust 并发安全从工程到理论的完整链条。✅ 已验证
-
-**认知脚手架**:
-
-- **类比**: `Arc<Mutex<T>>` 像"共享保险箱"——任何人（线程）都能开，但一次只能一个人，`Arc` 是保险箱的共享钥匙串。
-- **反直觉点**: Rust 的并发安全是**类型级**的（编译期），而非运行时检查。但死锁仍可能发生。
-- **形式化过渡**: 从"类型标记" → `Send/Sync` → "并发分离逻辑 (CSL)" → "Iris Protocols"。 💡 原创分析
-
-### 6.4 国际课程与论文对齐
-
-| 来源 | 核心内容 | 与本文件对应 |
-|:---|:---|:---|
-| **[Stanford CS340R: Rusty Systems]** | 并发安全实践、Rudra 检测、内存安全 | L3 Concurrency 完整覆盖 |
-| **[CMU 17-350: Safe Systems Programming]** | Send/Sync、Mutex、Atomics、数据并行 | L3 Concurrency 核心 |
-| **[CMU 17-363: Programming Language Pragmatics]** | Rust 并发模型、类型安全 | 形式化视角 |
-| **[RustBelt: POPL 2018]** | 并发分离逻辑 (CSL)、Send/Sync 语义 | 形式化根基 §3 |
-| **[Iris: JFP 2018]** | 高阶并发分离逻辑 | RustBelt 基础 |
-| **[Stacked Borrows: POPL 2019]** | 别名模型与并发内存安全 | 内存模型 |
+> **下一章**：§8 将汇总所有论断的知识来源与可信度评估。
 
 ---
 
@@ -516,6 +632,10 @@ let _guard_a = a.lock().unwrap();  // 可能死锁！
 | Arc 原子引用计数 | [TRPL: Ch16.3] | ✅ |
 | Mutex 提供内部可变性 + 线程安全 | [TRPL: Ch16.3] | ✅ |
 | Rust 不防止死锁 | [TRPL: Ch16] · [Wikipedia: Deadlock] | ✅ |
+| Atomic Ordering 映射 C11 模型 | [Rust Reference] · [C11 Standard] | ✅ |
+| Send/Sync 是 auto trait | [Rust Reference] | ✅ |
+
+> **下一章**：§9 列出待补充内容与后续演进方向。
 
 ---
 
@@ -523,67 +643,51 @@ let _guard_a = a.lock().unwrap();  // 可能死锁！
 
 - [ ] **TODO**: 补充 `crossbeam` 生态（scoped thread、epoch GC、channel） —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `rayon` 数据并行（join、par_iter） —— 优先级: 中 —— 预计: Phase 3
+- [ ] **TODO**: 补充 `parking_lot` 与标准库锁的对比 —— 优先级: 低 —— 预计: Phase 4
+
+> **下一章预告**：[`02_async.md`](./02_async.md) 将探讨 async/await 模型——协作式调度、Future 语义、`Pin` 与执行器的关系，以及异步并发与 OS 线程并发的本质差异。
+
+---
 
 ### 补充章节：tokio::sync 异步同步原语
 
-#### 异步 Mutex vs 标准库 Mutex
-
 ```rust
-use tokio::sync::Mutex;  // 异步 Mutex，await 获取锁
+use tokio::sync::{Mutex, Semaphore, Barrier};
 
 // ✅ tokio::sync::Mutex: .await 不阻塞线程
 async fn async_mutex_demo() {
     let data = Arc::new(Mutex::new(0));
     let mut handles = vec![];
-
     for _ in 0..10 {
         let d = Arc::clone(&data);
         handles.push(tokio::spawn(async move {
-            let mut guard = d.lock().await;  // await，不阻塞线程！
+            let mut guard = d.lock().await;
             *guard += 1;
         }));
     }
-
     for h in handles { h.await.unwrap(); }
-    assert_eq!(*data.lock().await, 10);
 }
-```
 
-#### Semaphore（信号量）
-
-```rust
-use tokio::sync::Semaphore;
-
-// ✅ 限制并发数量
+// ✅ Semaphore: 限制并发数量
 async fn semaphore_demo() {
-    let sem = Arc::new(Semaphore::new(3));  // 最多 3 个并发
-
+    let sem = Arc::new(Semaphore::new(3));
     for i in 0..10 {
         let sem = Arc::clone(&sem);
         tokio::spawn(async move {
             let _permit = sem.acquire().await.unwrap();
             println!("Task {} running", i);
-            tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
         });
     }
 }
-```
 
-#### Barrier（屏障）
-
-```rust
-use tokio::sync::Barrier;
-
-// ✅ 等待所有任务到达某点
+// ✅ Barrier: 等待所有任务到达某点
 async fn barrier_demo() {
     let barrier = Arc::new(Barrier::new(3));
-
     for i in 0..3 {
         let b = Arc::clone(&barrier);
         tokio::spawn(async move {
-            println!("Task {} before barrier", i);
-            b.wait().await;  // 等待所有 3 个任务
-            println!("Task {} after barrier", i);
+            b.wait().await;
+            println!("Task {} passed barrier", i);
         });
     }
 }
@@ -613,14 +717,11 @@ async fn barrier_demo() {
 
 ```text
 Release-Acquire 同步:
-  线程 A:  data.store(42, Release);  // 发布
-  线程 B:  let v = data.load(Acquire);  // 获取
+  线程 A:  data.store(42, Release);       // 发布
+  线程 B:  let v = data.load(Acquire);    // 获取
+  保证: 若 B 看到 Release 值，则能看到 A 之前的所有写入
 
-  保证: 若 B 看到 A 的 Release 值，则 B 能看到 A 在 Release 之前的所有写入
-
-SeqCst 同步:
-  所有 SeqCst 操作在全局有一个一致的顺序
-  代价: 所有 CPU 核心需达成一致，性能开销大
+SeqCst: 所有操作全局一致顺序，代价最大
 ```
 
 ```rust
@@ -628,57 +729,33 @@ use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::thread;
 
-// ✅ 标准模式: Release-Store + Acquire-Load
 fn message_passing() {
     let ready = Arc::new(AtomicBool::new(false));
     let data = Arc::new(AtomicUsize::new(0));
-
-    let ready2 = Arc::clone(&ready);
-    let data2 = Arc::clone(&data);
-
+    let (r2, d2) = (Arc::clone(&ready), Arc::clone(&data));
     thread::spawn(move || {
-        data2.store(42, Ordering::Relaxed);      // 先写数据
-        ready2.store(true, Ordering::Release);   // 再发布标志
+        d2.store(42, Ordering::Relaxed);
+        r2.store(true, Ordering::Release);
     });
-
-    while !ready.load(Ordering::Acquire) {}      // 获取标志
-    assert_eq!(data.load(Ordering::Relaxed), 42); // 保证看到 42
-}
-
-// ✅ SeqCst: 全局顺序（简单但慢）
-fn seq_cst_flag() {
-    let flag = Arc::new(AtomicBool::new(false));
-    let flag2 = Arc::clone(&flag);
-
-    thread::spawn(move || {
-        flag2.store(true, Ordering::SeqCst);
-    });
-
-    while !flag.load(Ordering::SeqCst) {}
-    println!("Flag set!");
+    while !ready.load(Ordering::Acquire) {}
+    assert_eq!(data.load(Ordering::Relaxed), 42);
 }
 ```
 
 #### 常见陷阱
 
 ```rust
-// ❌ 错误: Relaxed 不能用于同步标志
-while !ready.load(Ordering::Relaxed) {}
-// 可能永远循环，即使另一个线程已 store true！
-
-// ❌ 错误: 锁内数据用 Relaxed
-mutex.lock().unwrap().data.store(1, Relaxed);
-// 锁的 Release-Acquire 保证互斥，但内部数据仍需适当序
+// ❌ Relaxed 不能用于同步标志
+while !ready.load(Ordering::Relaxed) {}  // 可能永远循环！
 ```
 
 ---
 
 - [x] **TODO**: 补充 `std::sync::atomic` 内存序（Relaxed/Acquire/Release/SeqCst） —— 优先级: 高 —— 已完成 v1.1
-- [ ] **TODO**: 补充 `parking_lot` 与标准库锁的对比 —— 优先级: 低 —— 预计: Phase 4
 
 ### 补充章节：Send/Sync 的 unsafe impl 规范与责任
 
-> **[Rust Reference: Auto traits]** 编译器自动推导 Send/Sync：复合类型若所有字段均满足则自动实现；引用 &T: Send 当且仅当 T: Sync；裸指针总是 Send + Sync（仅地址值）。✅ 已验证
+> **[Rust Reference: Auto traits]** 编译器自动推导 Send/Sync：复合类型若所有字段均满足该 trait 的类型实现；引用 &T: Send 当且仅当 T: Sync；裸指针总是 Send + Sync（仅地址值）。✅ 已验证
 
 #### 自动推导规则
 
@@ -695,40 +772,31 @@ mutex.lock().unwrap().data.store(1, Relaxed);
 ```rust
 // ✅ 安全实现: 为线程安全的 C 库句柄实现 Send/Sync
 pub struct SafeHandle { raw: *mut libc::c_void }
-
-// Safety: 底层 C 库保证此句柄可跨线程安全传递
 unsafe impl Send for SafeHandle {}
 unsafe impl Sync for SafeHandle {}
-```
 
-```rust
 // ❌ 危险实现: 错误地为非线程安全类型实现 Send
 use std::rc::Rc;
-
 struct Bad { data: Rc<String> }
-
-unsafe impl Send for Bad {}  // ⚠️ 极度危险！
-// Rc 使用非原子计数，跨线程 clone/drop 导致数据竞争
-
-// 若将此类型传给 thread::spawn:
-// let bad = Bad { data: Rc::new("hello".to_string()) };
-// thread::spawn(move || { drop(bad); });  // UB! 数据竞争
+unsafe impl Send for Bad {}  // ⚠️ Rc 非原子计数 → 跨线程 UB
 ```
 
 #### Send/Sync 实现检查清单
 
-在 `unsafe impl Send/Sync` 前，验证：
-
-- [ ] **Send**: 类型的所有字段在线程间 move 是安全的
-  - 无 `Rc`/`RefCell`/`Cell` 等非 Send 字段（除非有特殊处理）
-  - 裸指针本身可 Send，但解引用的安全性由程序员保证
-  - 不隐含堆数据自动线程安全（仅地址值安全）
-
-- [ ] **Sync**: 类型的共享引用 `&T` 可安全跨线程传递
-  - 所有字段是 Sync
-  - 无内部可变状态（除非用 Mutex/RwLock/Atomic 保护）
-  - `Cell`/`RefCell` 不是 Sync（无同步机制）
+- **Send**: 所有字段在线程间 move 安全；裸指针仅地址值安全
+- **Sync**: `&T` 可安全共享；无未受保护的内部可变状态
 
 ---
 
 - [x] **TODO**: 补充 Send/Sync 的 unsafe impl 规范与责任 —— 优先级: 高 —— 已完成 v1.1
+
+### 补充章节：国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[Stanford CS340R: Rusty Systems]** | 并发安全实践、Rudra 检测、内存安全 | L3 Concurrency 完整覆盖 |
+| **[CMU 17-350: Safe Systems Programming]** | Send/Sync、Mutex、Atomics、数据并行 | L3 Concurrency 核心 |
+| **[CMU 17-363: Programming Language Pragmatics]** | Rust 并发模型、类型安全 | 形式化视角 |
+| **[RustBelt: POPL 2018]** | 并发分离逻辑 (CSL)、Send/Sync 语义 | 形式化根基 §3 |
+| **[Iris: JFP 2018]** | 高阶并发分离逻辑 | RustBelt 基础 |
+| **[Stacked Borrows: POPL 2019]** | 别名模型与并发内存安全 | 内存模型 |

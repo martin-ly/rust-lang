@@ -10,10 +10,15 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例
+- v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注
 
 ---
 
+<!-- L3::权威定义 -->
+
 ## 一、权威定义（Definition）
+
+> 从形式系统角度看，`unsafe` 是 Rust 类型证明系统的显式边界突破。理解 unsafe 的权威定义，是区分"编译器保证"与"人工保证"的第一道门槛。
 
 ### 1.1 Wikipedia 权威定义
 
@@ -27,7 +32,7 @@
 
 > **[TRPL: Ch19.1]** Rust has a second language hiding out inside it, unsafe Rust, which works just like regular Rust but gives you extra superpowers. Unsafe Rust exists because, by nature, static analysis is conservative. When the compiler tries to determine whether or not code upholds the guarantees, it's better for it to reject some valid programs than to accept some invalid programs.
 
-### 1.2 Rustonomicon 定义
+### 1.3 Rustonomicon 定义
 
 > **[Rustonomicon]** A block of code prefixed with `unsafe` does not permit the writing of arbitrary code. The `unsafe` keyword has two meanings: it declares the existence of a contract the compiler doesn't know about, and it declares that you have verified that contract.
 
@@ -35,7 +40,7 @@
 >
 > **[TRPL: Ch19.1]** Safe Rust = 编译器可证明安全的程序集合；Unsafe Rust = Safe Rust ∪ 需要人工证明安全性的操作集合。✅ 已验证
 
-### 1.3 形式化定义
+### 1.4 形式化定义
 
 `unsafe` 是**形式系统的显式边界突破**：
 
@@ -50,7 +55,11 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 ---
 
+<!-- L3::操作分类 -->
+
 ## 二、概念属性矩阵（Attribute Matrix）
+
+> 在明确定义后，我们需要对 unsafe 提供的操作进行系统分类。以下三个矩阵分别覆盖：操作能力、未定义行为类型、以及各角色的安全责任。
 
 ### 2.1 Unsafe 操作分类矩阵
 
@@ -89,7 +98,11 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 ---
 
+<!-- L3::理论根基 -->
+
 ## 三、形式化理论根基（Formal Foundation）
+
+> 概念分类之后，需要从类型系统视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性。
 
 > **[Rustonomicon: The Safe/Unsafe Boundary]** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
 
@@ -134,7 +147,118 @@ unsafe 代码的责任:
 
 ---
 
-## 四、思维导图（Mind Map）
+<!-- L3::认知路径 -->
+
+## 四、认知路径（Cognitive Path）
+
+> 理论需要转化为可遵循的认知路径。以下六步递进从"为什么"到"什么时候"，构建完整的 unsafe 决策思维链。
+
+### Step 1 — 动机：为什么需要 unsafe？
+
+静态分析是保守的。编译器为了绝对安全，会拒绝一些**实际上安全但无法自动证明**的程序。unsafe 是程序员对编译器的显式声明："此处交给我人工验证。"
+
+> **[TRPL: Ch19.1]** Safe Rust = 编译器可证明安全的程序集合；Unsafe Rust = 需要人工证明安全性的操作集合。✅ 已验证
+
+### Step 2 — 机制：unsafe 到底关掉了什么？
+
+`unsafe` **不关闭类型系统**。类型检查、泛型约束、trait bound 检查仍在运行。它仅关闭编译器无法自动验证的**特定检查**：
+
+- 裸指针解引用的生命周期/别名追踪
+- FFI 外部函数契约验证
+- `unsafe trait`（如 Send/Sync）的语义约束验证
+- `union` 活跃变体检査
+
+### Step 3 — 保证：怎么保证 unsafe 代码安全？
+
+三层防御体系：
+
+1. **最小化范围**：unsafe 块尽可能小
+2. **Safety Contract**：文档化所有前置条件、后置条件和不变量
+3. **安全抽象**：`unsafe 实现 + safe 接口 + 人工证明内部正确`
+
+> **[Rustonomicon]** 安全抽象定理：unsafe 实现 + safe 接口 + 人工证明 = 用户无需了解内部 unsafe 即可安全使用。✅ 已验证
+
+### Step 4 — 边界：UB 和安全的边界在哪？
+
+| 不变量 | 违反后果 | 责任对象 |
+|:---|:---|:---|
+| **Validity Invariant** | 立即 UB | unsafe 实现者 → 编译器 |
+| **Safety Invariant** | 可能通过 safe API 触发 UB | safe 接口设计者 → 用户 |
+
+边界判定原则：**不破坏 Validity Invariant**是底线；**维护 Safety Invariant**是安全抽象的契约。
+
+### Step 5 — 验证：Miri 能检测什么？
+
+```text
+Miri (Rust 解释器) 可检测:
+  ✅ 悬垂指针解引用
+  ✅ 越界访问
+  ✅ 未对齐访问
+  ✅ 数据竞争（部分）
+  ✅ 无效枚举值
+  ❌ 所有可能的 UB（停机问题）
+  ❌ 与硬件相关的行为（如内联汇编）
+  ❌ FFI 边界错误（外部代码不透明）
+```
+
+> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
+
+### Step 6 — 决策：什么时候必须写 unsafe？
+
+仅当 Safe Rust 无法表达需求，且已确认无 safe 替代方案时：
+
+- **FFI 调用**（C 库互操作）
+- **极致性能优化**（已 profile 确认瓶颈）
+- **底层内存布局控制**（自定义数据结构、零拷贝）
+- **实现 unsafe trait**（Send/Sync 等全局语义标记）
+
+```text
+六步递进总览:
+
+为什么需要 unsafe？ ──→ unsafe 到底关掉了什么？ ──→ 怎么保证 unsafe 代码安全？
+        │                       │                       │
+        ▼                       ▼                       ▼
+   静态分析保守性          仅关闭特定检查            Safety Contract
+   某些合法程序            （借用/别名/FFI）          + 人工证明
+   无法被自动证明
+
+UB 和安全的边界在哪？ ──→ Miri 能检测什么？ ──→ 什么时候必须写 unsafe？
+        │                       │                       │
+        ▼                       ▼                       ▼
+   Validity vs Safety       动态检测子集            Safe Rust 无法实现
+   Invariant 二分           （非完备）               且已确认无替代方案
+```
+
+> **[Rustonomicon]** 类比：unsafe 像手术刀——精确、强大，但需要专业训练和明确的安全协议。✅ 已验证
+>
+> **[TRPL: Ch19.1]** 反直觉点：unsafe 块不意味着代码一定有 UB，而是意味着编译器不再保证无 UB。✅ 已验证
+>
+> **[Ralf Jung Blog + RustBelt]** 形式化过渡路径：编译器不检查 → 安全契约 → 公理化语义 → RustBelt 逐步覆盖。🔍 待验证（RustBelt 对 unsafe 的覆盖仍在进行中）
+
+**认知脚手架**:
+
+- **类比**: `unsafe` 像"手术刀"——精确、强大，但需要专业训练和明确的安全协议。
+- **反直觉点**: `unsafe` 块**不意味着**代码一定有 UB，而是意味着**编译器不再保证**无 UB。
+- **形式化过渡**: 从"编译器不检查" → "安全契约" → "公理化语义" → "RustBelt 对 unsafe 的逐步覆盖"。 💡 原创分析
+
+### 4.1 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-350: Safe Systems Programming]** | Unsafe、FFI、UB 边界、Safety Contracts | L3 Unsafe 完整覆盖 |
+| **[CMU 17-363: Programming Language Pragmatics]** | unsafe 作为类型系统边界突破 | 形式化视角 |
+| **[Rustonomicon]** | Unsafe 编程规范、安全抽象设计 | 实践指南 |
+| **[Stacked Borrows: POPL 2019]** | 别名模型操作语义 | 内存模型 §3 |
+| **[Tree Borrows]** | 更宽松的别名模型 | Miri 检测基础 |
+| **[RustHornBelt: PLDI 2022]** | unsafe 代码功能正确性验证 | 形式化验证 |
+
+---
+
+<!-- L3::思维导图 -->
+
+## 五、思维导图（Mind Map）
+
+> 以下思维导图提供 Unsafe Rust 的全局知识结构，覆盖操作分类、UB 类型、安全抽象、验证工具与常见模式。
 
 ```mermaid
 graph TD
@@ -172,9 +296,13 @@ graph TD
 
 ---
 
-## 五、决策/边界判定树（Decision / Boundary Tree）
+<!-- L3::决策树 -->
 
-### 5.1 "我需要用 unsafe 吗？" 决策树
+## 六、决策/边界判定树（Decision / Boundary Tree）
+
+> 将知识结构转化为工程决策能力。本节提供三类决策工具：是否需要 unsafe 的判别、UB 边界判定、以及四个常见反命题的澄清。
+
+### 6.1 "我需要用 unsafe 吗？" 决策树
 
 ```mermaid
 graph TD
@@ -195,7 +323,7 @@ graph TD
     A4[内存布局控制]
 ```
 
-### 5.2 UB 边界判定
+### 6.2 UB 边界判定
 
 ```mermaid
 graph TD
@@ -206,15 +334,106 @@ graph TD
     B5[读取未初始化内存] -->|运行时| E4[UB: 读取任意值]
 ```
 
+### 6.3 反命题决策树
+
+反命题用于澄清 unsafe Rust 的常见误解。每个决策树从**错误命题**出发，通过条件分支到达正确结论。
+
+#### 反命题 1: "unsafe 块内没有安全检查"
+
+```mermaid
+graph TD
+    P1["❌ 命题: unsafe 块内没有安全检查"] --> Q1{"类型检查是否运行?"}
+    Q1 -->"|✅ 仍运行|" A1["类型系统未关闭<br/>泛型约束、trait bound 仍生效"]
+    Q1 -->"|仅特定检查关闭|" Q2{"哪些检查关闭?"}
+    Q2 -->"|裸指针解引用|" A2["借用检查器对 *const/*mut 不追踪"]
+    Q2 -->"|FFI 调用|" A3["编译器不验证外部函数契约"]
+    Q2 -->"|unsafe trait impl|" A4["编译器不验证 Send/Sync 语义"]
+
+    style P1 fill:#f66,color:#fff
+    style A1 fill:#6f6
+    style A2 fill:#ff9
+    style A3 fill:#ff9
+    style A4 fill:#ff9
+```
+
+> **正确结论**: `unsafe` 不是关闭整个类型系统，而是**局部关闭**编译器无法自动验证的特定检查。类型检查、生命周期检查（对引用而言）仍在运行。
+
+#### 反命题 2: "只要用了 unsafe 就会触发 UB"
+
+```mermaid
+graph TD
+    P2["❌ 命题: 用 unsafe = 必然 UB"] --> Q1{"unsafe 块内是否违反 Validity Invariant?"}
+    Q1 -->"|否|" Q2{"Safety Contract 是否完整?"}
+    Q1 -->"|是|" A1["UB 触发"]
+    Q2 -->"|是|" A2["✅ 正确使用 unsafe 是安全的"]
+    Q2 -->"|否|" A3["可能通过 safe API 泄露 UB"]
+
+    style P2 fill:#f66,color:#fff
+    style A1 fill:#f66,color:#fff
+    style A2 fill:#6f6
+    style A3 fill:#f96
+```
+
+> **正确结论**: 正确使用 unsafe（满足所有契约、不破坏不变量）**不会**触发 UB。Rust 标准库大量底层代码（Vec、String、Arc）都是 unsafe 实现 + safe 接口。
+
+#### 反命题 3: "raw pointer 和引用等价"
+
+```mermaid
+graph TD
+    P3["❌ 命题: raw pointer ≡ 引用"] --> Q1{"是否有生命周期检查?"}
+    Q1 -->"|引用: ✅ 有|" A1["编译器保证生命周期内有效"]
+    Q1 -->"|裸指针: ❌ 无|" Q2{"是否有对齐保证?"}
+    Q2 -->"|引用: ✅ 自动对齐|" A2["&T 必须对齐且非空"]
+    Q2 -->"|裸指针: ❌ 无|" Q3{"是否有有效值保证?"}
+    Q3 -->"|引用: ✅ 必须指向有效值|" A3["bool 必须是 0/1，enum 必须有效"]
+    Q3 -->"|裸指针: ❌ 无|" A4["可指向任意位模式"]
+
+    style P3 fill:#f66,color:#fff
+    style A1 fill:#6f6
+    style A2 fill:#6f6
+    style A3 fill:#6f6
+    style A4 fill:#ff9
+```
+
+> **正确结论**: 裸指针 `*const T` / `*mut T` **不是**引用 `&T` / `&mut T` 的等价物。差异体现在：**生命周期追踪**、**对齐约束**、**有效值约束**（Validity Invariant）三个方面。
+
+#### 反命题 4: "FFI 调用总是安全的"
+
+```mermaid
+graph TD
+    P4["❌ 命题: FFI 调用总是安全的"] --> Q1{"ABI 是否匹配?"}
+    Q1 -->"|否|" A1["调用约定不匹配 → 栈损坏/崩溃"]
+    Q1 -->"|是|" Q2{"内存布局是否兼容?"}
+    Q2 -->"|否|" A2["#[repr(C)] 遗漏 → 字段偏移错误"]
+    Q2 -->"|是|" Q3{"指针生命周期是否一致?"}
+    Q3 -->"|否|" A3["C 返回悬垂指针 → UAF"]
+    Q3 -->"|是|" Q4{"C 端是否遵守协议?"}
+    Q4 -->"|否|" A4["数据竞争/内存篡改"]
+    Q4 -->"|是|" A5["✅ FFI 调用可安全"]
+
+    style P4 fill:#f66,color:#fff
+    style A1 fill:#f66,color:#fff
+    style A2 fill:#f66,color:#fff
+    style A3 fill:#f66,color:#fff
+    style A4 fill:#f96
+    style A5 fill:#6f6
+```
+
+> **正确结论**: FFI 是 Rust 形式系统的**公理缺口**。编译器无法验证外部代码，程序员必须人工保证 ABI 匹配、`#[repr(C)]` 布局一致、指针有效性和 C 端协议遵守。
+
 ---
 
-## 六、定理推理链（Theorem Chain）
+<!-- L3::定理链 -->
+
+## 七、定理推理链（Theorem Chain）
+
+> 决策树背后需要定理支撑。本节建立从安全抽象到验证边界的推理链，并通过一致性矩阵将所有定理联结成网。
 
 > **[Rustonomicon: Safe Abstractions]** 安全抽象定理：unsafe 实现 + safe 接口 + 人工证明 = 用户无需了解内部 unsafe 即可安全使用。Rust 标准库的核心类型（Vec, String, HashMap 等）均基于此模式构建。✅ 已验证
 >
 > **[Rust API Guidelines]** 封装 unsafe 的 safe API 必须文档化 Safety Contract，且对所有合法输入保证不触发 UB。✅ 已验证
 
-### 6.1 安全抽象定理
+### 7.1 安全抽象定理
 
 ```text
 前提 1: unsafe 块实现了某些底层操作
@@ -231,7 +450,7 @@ graph TD
 >
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
 
-### 6.2 Miri 的验证边界
+### 7.2 Miri 的验证边界
 
 ```text
 Miri (Rust 解释器) 可检测:
@@ -244,15 +463,20 @@ Miri (Rust 解释器) 可检测:
   ❌ 与硬件相关的行为（如内联汇编）
 ```
 
-### 6.3 定理一致性矩阵
+### 7.3 定理一致性矩阵（⟹ 推理链）
 
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型场景 |
-|:---|:---|:---|:---|:---|:---|:---|
-| unsafe 边界明确性 | `unsafe {}` / `unsafe fn` 标记 | 程序员承担安全责任 | —（证明范围外） | 所有 safe 抽象 | 安全契约不完整 | UB |
-| 裸指针解引用安全 | 指针有效 + 类型正确 + 无别名违规 | 解引用行为良好 | —（手动验证） | FFI、底层数据结构 | 悬垂指针、未对齐、已释放 | UB |
-| FFI 调用安全 | 外部函数契约匹配 | 调用行为符合预期 | —（假设） | C 互操作 | ABI 不匹配、生命周期不一致 | 崩溃/UB |
-| Union 访问安全 | 当前活跃的字段已知 | 读取正确变体 | —（程序员责任） | C 兼容、低层解析 | 读取未初始化/非活跃字段 | UB |
-| MaybeUninit 安全 | 写入后才读取 | 避免未初始化读取 | —（部分形式化） | 延迟初始化、FFI | 读取未写入 | UB |
+| 编号 | 定理（前提 ⟹ 结论） | 推理链 | 失效条件 | 典型场景 | 层级标注 |
+|:---|:---|:---|:---|:---|:---|
+| **L1** | `unsafe {}` 或 `unsafe fn` ⟹ 程序员承担不变量责任 | 标记存在 ⟹ 编译器移交证明义务 ⟹ 程序员手动验证局部不变量 | 安全契约遗漏或证明不完整 | 任何 unsafe 块入口 | `L3::责任转移` |
+| **L2** | raw pointer 解引用 ⟹ 绕过借用检查器 | `*const T` / `*mut T` ⟹ 无生命周期检查 ⟹ 无别名追踪 ⟹ 程序员保证内存有效且合法别名 | 悬垂指针、未对齐、已释放、非法别名 | FFI、底层数据结构、自引用结构 | `L3::借用绕过` |
+| **L3** | `unsafe fn` 调用 ⟹ 需满足函数安全契约 | 调用发生 ⟹ 前置条件必须成立 ⟹ 否则调用方触发 UB | 前置条件未验证即调用 | `std::ptr::read`、`std::mem::transmute` | `L3::契约调用` |
+| **T1** | unsafe 不关闭类型系统 ⟹ 仅关闭特定检查 | `unsafe` 关键字 ⟹ 类型检查仍运行 ⟹ 仅裸指针/FFI/trait/union 等特定检查关闭 | 误以为类型系统完全失效、在 unsafe 内放松类型约束 | 泛型在 unsafe 块内、trait bound 推导 | `L3::类型保持` |
+| **T2** | FFI 边界 ⟹ 类型布局兼容性要求 | `extern "C"` ⟹ `#[repr(C)]` 保证布局一致 ⟹ ABI 调用约定匹配 ⟹ 调用行为可预期 | 布局不匹配、ABI 错误、字节序差异 | C 结构体互操作、系统 API 调用 | `L3::FFI布局` |
+| **T3** | Union 字段访问 ⟹ 程序员追踪活跃变体 | `union.field` ⟹ 编译器不检查活跃性 ⟹ 程序员保证读取的变体是最后写入的 | 读取未初始化/非活跃字段、类型混淆 | C 兼容解析、手动内存复用 | `L3::联合类型` |
+| **C1** | 未定义行为条件 ⟹ Miri 可检测子集 | UB 触发 ⟹ Miri 解释执行 MIR ⟹ 检测内存/对齐/枚举/别名违规 ⟹ 无法检测全部（停机问题不可解） | 依赖硬件行为、FFI 不透明调用、活性问题 | 测试阶段验证、CI 集成 Miri | `L3::动态验证` |
+| **C2** | `unsafe impl Send/Sync` ⟹ 人工证明安全性 | trait 契约 ⟹ 全局语义约束 ⟹ 人工证明线程安全/无数据竞争 ⟹ 编译器信任并开放全局使用 | 实际非线程安全、内部可变性未同步 | `Arc<T>`、自定义外部句柄、FFI 包装 | `L3::并发契约` |
+| **C3** | `static mut` 修改 ⟹ 数据竞争风险 | 可变静态变量 ⟹ 无所有权保护 ⟹ 多线程同时访问 ⟹ 数据竞争（UB） | 未同步访问、跨线程读写无原子保护 | 全局状态（应极力避免使用 `static mut`） | `L3::静态可变` |
+| **C4** | 内联汇编 `asm!` ⟹ 完全人工验证 | 汇编指令 ⟹ 编译器无分析能力 ⟹ 程序员负责所有副作用、内存模型、寄存器约定 | 任意错误（完全不受控） | 极致优化、内核代码、特殊指令 | `L3::汇编边界` |
 
 > **[Rustonomicon]** 一致性说明: unsafe 领域的定理不依赖 L4 形式化——它们处于证明范围之外。Miri 提供动态检测作为近似验证手段。RustBelt 正在扩展以覆盖部分 unsafe 模式。✅ 已验证
 >
@@ -262,9 +486,13 @@ Miri (Rust 解释器) 可检测:
 
 ---
 
-## 七、示例与反例（Examples & Counter-examples）
+<!-- L3::示例 -->
 
-### 7.1 正确示例：安全封装裸指针（Vec 简化版）
+## 八、示例与反例（Examples & Counter-examples）
+
+> 定理需要通过代码验证。本节提供正确示例（安全抽象模式）与反例（常见 UB 触发模式），以及 Stacked Borrows 的边界极限测试。
+
+### 8.1 正确示例：安全封装裸指针（Vec 简化版）
 
 ```rust
 // ✅ 正确: unsafe 实现 + safe 接口
@@ -309,7 +537,7 @@ impl<T> Drop for MyVec<T> {
 }
 ```
 
-### 7.2 正确示例：手动实现 Send/Sync
+### 8.2 正确示例：手动实现 Send/Sync
 
 ```rust
 // ✅ 正确: 为线程安全的外部类型实现 Send/Sync
@@ -320,7 +548,7 @@ unsafe impl Send for MyHandle {}
 unsafe impl Sync for MyHandle {}
 ```
 
-### 7.3 反例：悬垂裸指针（UB）
+### 8.3 反例：悬垂裸指针（UB）
 
 ```rust
 // ❌ 反例: 返回局部变量的裸指针
@@ -335,7 +563,7 @@ fn main() {
 }
 ```
 
-### 7.4 反例：transmute 滥用（UB）
+### 8.4 反例：transmute 滥用（UB）
 
 ```rust
 // ❌ 反例: transmute 不相关类型
@@ -345,7 +573,7 @@ unsafe fn evil_transmute() {
 }
 ```
 
-### 7.5 反例：无效枚举值（UB）
+### 8.5 反例：无效枚举值（UB）
 
 ```rust
 // ❌ 反例: 创建无效枚举值
@@ -356,9 +584,11 @@ unsafe fn invalid_enum() -> Color {
 }
 ```
 
----
+### 8.6 边界极限测试
 
-### 7.6 反命题与边界分析
+> **[Miri Documentation]** Miri 支持 Stacked Borrows 和实验性的 Tree Borrows 两种内存模型；Tree Borrows 更宽松，可覆盖更多合法 unsafe 模式。✅ 已验证
+>
+> **[Ralf Jung Blog]** Miri 无法检测 FFI 边界错误和活性性质（死锁/无限循环），因为 FFI 调用不透明且活性问题不可判定。✅ 已验证
 
 #### 命题: "unsafe 代码可以安全地封装"
 
@@ -378,23 +608,19 @@ graph TD
     style T fill:#6f6
 ```
 
-> **[Miri Documentation]** Miri 支持 Stacked Borrows 和实验性的 Tree Borrows 两种内存模型；Tree Borrows 更宽松，可覆盖更多合法 unsafe 模式。✅ 已验证
->
-> **[Ralf Jung Blog]** Miri 无法检测 FFI 边界错误和活性性质（死锁/无限循环），因为 FFI 调用不透明且活性问题不可判定。✅ 已验证
-
 #### 命题: "Miri 可以检测所有 UB"
 
 | 条件 | 结果 | 说明 |
 |:---|:---|:---|
 | Stacked Borrows 模型 | ⚠️ 部分检测 | 严格的别名规则 |
 | Tree Borrows 模型 | ⚠️ 更宽松检测 | 实验性，覆盖更多合法模式 |
-| 数据竞争 | ✅ 检测 |  happens-before 分析 |
+| 数据竞争 | ✅ 检测 | happens-before 分析 |
 | 未初始化读取 | ✅ 检测 | `MaybeUninit` 追踪 |
 | 悬垂指针解引用 | ✅ 检测 | 内存分配追踪 |
 | 与外部代码交互 | ❌ 不检测 | FFI 调用不透明 |
 | 无限循环 / 死锁 | ❌ 不检测 | 活性性质 |
 
-#### 边界极限测试
+#### 边界极限测试代码
 
 ```rust
 // 边界: 未定义行为（UB）的微妙性
@@ -426,49 +652,9 @@ fn safe_raw_pointer() {
 
 ---
 
-## 零、认知路径（Cognitive Path）
+<!-- L3::来源 -->
 
-```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"unsafe 到底多危险？"        "FFI 调用 C 函数         "unsafe = 程序员       "手动证明            "Miri 检测           "所有 safe
-                             怎么保证安全？"          承担证明责任"          义务"               UB"                定理失效"
-
-"什么时候必须用 unsafe？"     "自引用结构、             "Safe 抽象无法         "类型系统限制:      "编译器拒绝         "过度使用
-                             底层内存操作"            表达时使用"           某些合法程序        safe 替代"         unsafe"
-                                                     无法被证明安全"
-
-"怎么验证 unsafe 代码？"     "手写 unsafe 后           "Safety Contract      "公理化语义:        "Miri +              "FFI 边界
-                             怎么测试？"              + Miri 动态检测"       假设-保证"         模糊测试"           假设不可验证"
-```
-
-> **[Rustonomicon]** 类比：unsafe 像手术刀——精确、强大，但需要专业训练和明确的安全协议。✅ 已验证
->
-> **[TRPL: Ch19.1]** 反直觉点：unsafe 块不意味着代码一定有 UB，而是意味着编译器不再保证无 UB。✅ 已验证
->
-> **[Ralf Jung Blog + RustBelt]** 形式化过渡路径：编译器不检查 → 安全契约 → 公理化语义 → RustBelt 逐步覆盖。🔍 待验证（RustBelt 对 unsafe 的覆盖仍在进行中）
-
-**认知脚手架**:
-
-- **类比**: `unsafe` 像"手术刀"——精确、强大，但需要专业训练和明确的安全协议。
-- **反直觉点**: `unsafe` 块**不意味着**代码一定有 UB，而是意味着**编译器不再保证**无 UB。
-- **形式化过渡**: 从"编译器不检查" → "安全契约" → "公理化语义" → "RustBelt 对 unsafe 的逐步覆盖"。 💡 原创分析
-
-### 6.4 国际课程与论文对齐
-
-| 来源 | 核心内容 | 与本文件对应 |
-|:---|:---|:---|
-| **[CMU 17-350: Safe Systems Programming]** | Unsafe、FFI、UB 边界、Safety Contracts | L3 Unsafe 完整覆盖 |
-| **[CMU 17-363: Programming Language Pragmatics]** | unsafe 作为类型系统边界突破 | 形式化视角 |
-| **[Rustonomicon]** | Unsafe 编程规范、安全抽象设计 | 实践指南 |
-| **[Stacked Borrows: POPL 2019]** | 别名模型操作语义 | 内存模型 §3 |
-| **[Tree Borrows]** | 更宽松的别名模型 | Miri 检测基础 |
-| **[RustHornBelt: PLDI 2022]** | unsafe 代码功能正确性验证 | 形式化验证 |
-
----
-
-## 八、知识来源关系（Provenance）
+## 九、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -478,12 +664,18 @@ fn safe_raw_pointer() {
 | Validity vs Safety Invariant | [Rustonomicon: What is unsafe?] · [Ralf Jung Blog] | ✅ |
 | Miri 可检测部分 UB | [Miri Documentation] | ✅ |
 | 安全抽象封装 unsafe | [Rust API Guidelines] | ✅ |
+| Stacked Borrows / Tree Borrows | [POPL 2019] · [Miri 实验性文档] | ✅ |
+| RustBelt 覆盖部分 unsafe 模式 | [PLDI 2017] · [后续论文] | 🔍 进行中 |
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+<!-- L3::FFI补充 -->
+
+## 十、待补充与演进方向（TODOs）
 
 ### 补充章节：FFI 与 repr 属性完整规范
+
+> FFI 是 unsafe 最常见的使用场景之一。以下补充 ABI、内存布局和对齐属性的完整规范，作为 unsafe 实践的具体延伸。
 
 #### ABI 与 Calling Convention
 

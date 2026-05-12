@@ -11,6 +11,28 @@
 
 - v1.0 (2026-05-12): 初始版本，完成多语言形式化对比矩阵、设计哲学谱系、适用域决策树
 - v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接
+- v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性标注
+
+---
+
+## 认知路径：六步递进理解范式矩阵
+
+```text
+Step 1: 为什么需要范式矩阵？
+    └─⟹ 语言特性不是孤立存在的，需要系统化的对比框架来理解设计权衡
+Step 2: 命令式 vs 函数式的本质区别？
+    └─⟹ 状态可变性与执行顺序的根本分歧 → 直接影响并发模型与可预测性
+Step 3: 类型系统怎么影响范式？
+    └─⟹ 类型系统的强度决定了能在编译期证明什么性质 → 强类型 ⟹ 更多错误静态消除
+Step 4: Rust 支持哪些范式？
+    └─⟹ 命令式 + 函数式 + 泛型 + 并发 + 元编程 —— 通过所有权统一多范式
+Step 5: 多范式是优势还是负担？
+    └─⟹ 表达能力提升 vs 认知负荷增加 —— 关键在于是否有一致性原则统一各范式
+Step 6: 怎么在代码中选择范式？
+    └─⟹ 以"零成本抽象 + 编译期安全"为准则，根据问题域选择最自然的表达方式
+```
+
+> **递进逻辑**: 从"为什么对比"出发，经过"本质区别"和"类型系统的作用"，聚焦到 Rust 的多范式统一策略，最后落脚到工程实践中的选择原则。
 
 ---
 
@@ -27,20 +49,16 @@
 > **[Wikipedia: Type system]** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Type_system>
 
-> **[Wikipedia: Generic programming]** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters.
-> **来源**: <https://en.wikipedia.org/wiki/Generic_programming>
-
-> **[Wikipedia: Concurrent computing]** Concurrent computing is a form of computing in which several computations are executed concurrently — during overlapping time periods — instead of sequentially.
-> **来源**: <https://en.wikipedia.org/wiki/Concurrent_computing>
-
-> **[Wikipedia: Memory management]** Memory management is a form of resource management applied to computer memory. It involves the allocation, deallocation, and organization of memory to ensure efficient operation of a computer system. Key techniques include manual management, garbage collection, reference counting, and ownership-based systems.
+> **[Wikipedia: Memory management]** Memory management is a form of resource management applied to computer memory. It involves the allocation, deallocation, and organization of memory to ensure efficient operation of a computer system.
 > **来源**: <https://en.wikipedia.org/wiki/Memory_management>
+
+> **层次一致性**: L5 建立在 L1-L4 精确概念之上，上述定义提供统一术语基线。
 
 ---
 
 ## 二、多语言形式化对比矩阵
 
-### 1.1 核心维度矩阵
+### 2.1 核心维度矩阵（带 ⟹ 推理链）
 
 | **维度** | **Rust** | **C** | **C++** | **Go** | **Haskell** | **Java** | **Swift** | **TypeScript** | **Zig** |
 |:---|:---|:---|:---|:---|:---|:---|:---|:---|:---|
@@ -55,19 +73,57 @@
 | **FFI/底层** | ✅ 优秀 | ✅ 原生 | ✅ 原生 | ⚠️ cgo 开销 | ⚠️ 复杂 | ⚠️ JNI | ⚠️ C 桥接 | ⚠️ WASM/Node | ✅ 优秀 |
 | **包管理** | ✅ Cargo | ❌ 无原生 | ⚠️ 碎片化 | ✅ go modules | ✅ Cabal/Stack | ✅ Maven/Gradle | ✅ SwiftPM | ✅ npm | ⚠️ 早期 |
 
-### 1.2 设计哲学谱系
+**⟹ 推理链标注（22 行矩阵 → 逻辑推导）**:
 
 ```text
-形式化强度轴（从左到右增强）:
+类型系统强度 ⟹ 编译期可证明性质 ⟹ 运行时安全保证
+─────────────────────────────────────────────────────────
+强+静态 (Rust/Haskell/Java/Go)
+  └─⟹ 类型错误在编译期消除
+      └─⟹ 减少运行时调试成本
+          └─⟹ 更高可靠性，但增加前期学习曲线
 
-C/汇编 ──→ C++ ──→ Zig ──→ Go ──→ Java ──→ Rust ──→ Haskell ──→ 依赖类型语言
+弱类型/可绕过 (C/C++/TypeScript渐进)
+  └─⟹ 类型错误可能泄漏到运行时
+      └─⟹ 需要更多测试/运行时检查覆盖
+          └─⟹ 开发速度快，但长期维护成本高
 
-底层控制 ←────────────────────────────────────→ 抽象安全
+内存管理模型 ⟹ 确定性 ⟹ 适用域边界
+─────────────────────────────────────────────────────────
+所有权/RAII (Rust/C++)
+  └─⟹ 确定性释放，无运行时开销
+      └─⟹ 适合系统编程/嵌入式/实时场景
+          └─⟹ C++ 需程序员保证安全；Rust 编译器代为保证
 
-Rust 的独特位置: 同时拥有 "底层控制" 和 "编译期证明安全"
+GC (Go/Java/Haskell/TS)
+  └─⟹ 自动回收，降低心智负担
+      └─⟹ 运行时停顿和内存开销
+          └─⟹ 不适合硬实时或极致性能场景
+
+并发安全机制 ⟹ 数据竞争保证 ⟹ 工程可信度
+─────────────────────────────────────────────────────────
+编译期保证 (Rust Send/Sync)
+  └─⟹ 类型系统阻止数据竞争
+      └─⟹ "如果编译通过，则无数据竞争"
+          └─⟹ 信任基础从"测试覆盖"转移到"数学证明"
+
+手动/约定 (C/C++/Go)
+  └─⟹ 依赖程序员遵守规则
+      └─⟹ 经验/审查/工具辅助检测
+          └─⟹ 人易犯错，历史 bug 数据库可证
 ```
 
-### 1.3 编程语言类型系统谱系图
+> **过渡**: 从静态矩阵对比，到理解这些维度如何在历史演进中形成不同的设计哲学。
+
+### 2.2 设计哲学谱系
+
+```text
+形式化强度轴: C/汇编 → C++ → Zig → Go → Java → Rust → Haskell → 依赖类型
+底层控制 ←──────────────────────────────→ 抽象安全
+Rust 独特位置: 同时拥有 "底层控制" 和 "编译期证明安全"
+```
+
+### 2.3 编程语言类型系统谱系图
 
 ```mermaid
 graph LR
@@ -110,9 +166,11 @@ graph LR
     style C fill:#fcc
 ```
 
-> **演进逻辑**: 类型系统的发展史是从"无类型/弱类型"向"更强静态保证"不断演进的历史。C 提供了最基本的类型骨架；C++ 和 Java 引入了抽象和面向对象；ML/Haskell 引入了参数多态和代数数据类型；Rust 则在线性/仿射类型的基础上，首次将内存安全和零成本抽象同时带入工业级系统编程。 [来源: Cardelli & Wegner 1985 / Wikipedia: Type system]
+> **演进逻辑**: 类型系统从"无类型"向"更强静态保证"演进：C 提供类型骨架；C++/Java 引入 OOP；ML/Haskell 引入参数多态和代数数据类型；Rust 在线性/仿射类型基础上，首次将内存安全与零成本抽象同时带入工业级系统编程。 [来源: Cardelli & Wegner 1985]
 
-> **从 C 到 Rust 的关键跃迁**: C 语言通过指针提供了底层控制，但将内存安全责任完全交给程序员；Java/Go 通过 GC 自动化了内存管理，却引入了运行时开销和停顿；Haskell 通过纯函数和强类型提供了高度抽象安全，但 GC 和惰性求值不适合系统编程。Rust 的关键创新在于：将线性/仿射类型的形式化理论（Girard 1987）与工业级系统编程的需求相结合，通过所有权和借用检查器，在编译期证明了内存安全和无数据竞争，同时保持了零运行时开销。这是类型系统演进史上首次在单一工业语言中实现如此完整的静态保证。 [来源: Girard 1987 — Linear Logic / RustBelt POPL 2018]
+> **从 C 到 Rust 的关键跃迁**: C 提供底层控制但无安全保证；Java/Go 通过 GC 自动化内存管理但引入运行时开销；Haskell 提供高度抽象安全但 GC 不适合系统编程。Rust 将线性/仿射类型理论（Girard 1987）与系统编程需求结合，通过所有权在编译期证明内存安全和无数据竞争，同时保持零运行时开销——这是类型系统演进史上首次在单一工业语言中实现如此完整的静态保证。 [来源: Girard 1987 / RustBelt POPL 2018]
+
+> **过渡**: 理论差异如何在工程实践中转化为具体的技术选型？
 
 ---
 
@@ -145,6 +203,8 @@ graph LR
 | 边缘计算/IoT网关 | Rust / C | Go | Python |
 | 实时音视频处理 | Rust / C++ | Go | Python |
 
+> **过渡**: 适用域矩阵回答"选什么"，思维导图解释"为什么"。},{
+
 ---
 
 ## 四、思维导图
@@ -175,7 +235,7 @@ graph TD
     E --> E3[惰性求值: Haskell]
 ```
 
----
+> **过渡**: 思维导图展示四谱系分类，Rust 的独特性在于同时满足一组强约束。
 
 ## 五、定理：Rust 的不可压缩性
 
@@ -187,18 +247,12 @@ graph TD
   3. 数据竞争编译期消除
   4. 零成本抽象
   5. 工业级工具链
-
-证明:
-  - C/C++: 满足 1,4,5，不满足 2,3
-  - Go/Java: 满足 2,3,5，不满足 1,4
-  - Haskell: 满足 2,3，不满足 1,4,5（工业系统编程）
-  - Zig: 满足 1,4,5，不满足 2,3（显式安全）
-  - Rust: 全部满足
+证明: C/C++(1,4,5 ✗2,3) / Go/Java(2,3,5 ✗1,4) / Haskell(2,3 ✗1,4,5) / Zig(1,4,5 ✗2,3) / Rust(✓全部)
 ```
 
----
+> **过渡**: 不可压缩性定理确定 Rust 的坐标，一致性矩阵将其锚定到 L1-L4 知识体系。
 
-## 六、定理一致性矩阵（范式定位）
+## 六、定理一致性矩阵（范式定位）— 带 ⟹ 推理链
 
 | 范式维度 | Rust 定位 | 形式化根基 | 对应 L1-L4 文件 | 一致性状态 |
 |:---|:---|:---|:---|:---|
@@ -209,9 +263,53 @@ graph TD
 | 错误模型 | 和类型显式传播 | L2 错误处理 | `02_intermediate/04_error_handling.md` | ✅ |
 | 编译保证 | 编译期证明 | L4 形式化层 | `04_formal/` | ✅ |
 
+**⟹ 推理链：从语言特性到编程范式到安全保证**
+
+```text
+【推理链 1: 所有权 ⟹ 内存安全】
+所有权规则 (单一可变/多重只读)
+  └─⟹ 编译期阻止 use-after-free / double-free / 悬空指针
+      └─⟹ 内存安全保证无需运行时 GC
+          └─⟹ 范式: 仿射类型编程 (Affine Typing)
+
+【推理链 2: Send/Sync Trait ⟹ 并发安全】
+Send (跨线程转移所有权) + Sync (多线程共享只读)
+  └─⟹ 类型系统区分线程安全与非线程安全类型
+      └─⟹ 数据竞争在编译期被排除
+          └─⟹ 范式: 类型级并发 (Type-level Concurrency)
+
+【推理链 3: 代数数据类型 + match ⟹ 穷尽性检查】
+enum / Option / Result + 模式匹配
+  └─⟹ 编译器验证所有分支被处理
+      └─⟹ 运行时 panic 减少，逻辑错误静态捕获
+          └─⟹ 范式: 函数式错误处理 (Functional Error Handling)
+
+【推理链 4: Trait + 单态化 ⟹ 零成本抽象】
+泛型约束 (Trait Bounds) + 编译期特化
+  └─⟹ 抽象接口在编译期消解为具体调用
+      └─⟹ 无运行时虚表/装箱开销
+          └─⟹ 范式: 参数多态单态化 (Parametric Polymorphism via Monomorphization)
+
+【推理链 5: 生命周期标注 ⟹ 借用安全】
+'a / &'a T 显式生命周期
+  └─⟹ 编译器验证引用永远不会比被引用数据存活更久
+      └─⟹ 悬空引用在编译期被消除
+          └─⟹ 范式: 区域类型系统 (Region-based Type System)
+
+【推理链 6: const / comptime ⟹ 编译期计算】
+const fn / const 泛型
+  └─⟹ 运行时零开销的值在编译期计算
+      └─⟹ 配置/数组大小/状态机转换静态确定
+          └─⟹ 范式: 编译期元编程 (Compile-time Metaprogramming)
+```
+
+> **一致性验证**: 6 条推理链满足：特性（起点）⟹ 机制（中点）⟹ 保证（终点）。这是 L5 对比层与 L4 形式化层之间的桥梁。
+
+> **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
+
 ## 七、反命题与边界分析
 
-### 命题: "Rust 是系统编程的最优解"
+### 7.1 反命题: "Rust 是系统编程的最优解"
 
 ```mermaid
 graph TD
@@ -229,9 +327,73 @@ graph TD
     style T fill:#ff9
 ```
 
+### 7.2 反命题: "Rust 是纯函数式语言"
+
+```mermaid
+graph TD
+    P2["命题: Rust 是纯函数式语言"] --> Q4{"是否允许可变状态?"}
+    Q4 -->|是| F4["反例: `let mut x = 5; x += 1;` —— 默认支持命令式可变状态"]
+    Q4 -->|否| Q5{"是否允许副作用?"}
+    Q5 -->|是| F5["反例: `println!` / `std::fs::write` —— I/O 副作用随处可见"]
+    Q5 -->|否| Q6{"是否要求纯函数?"}
+    Q6 -->|否| F6["反例: 任何函数都可以包含 `unsafe` 块，绕过类型系统保证"]
+    Q6 -->|是| T2["这才是 Haskell / PureScript 的领地<br/>⚠️ Rust 是多范式，函数式只是其中之一"]
+
+    style F4 fill:#f96
+    style F5 fill:#f96
+    style F6 fill:#f96
+    style T2 fill:#ff9
+```
+
+> **边界分析**: Rust 借鉴了 Haskell/ML 的代数数据类型、模式匹配，但 `mut`/`unsafe`/无约束 IO 明确表明它不是纯函数式语言。误判这一点会导致 `unsafe` 边界和并发模型的误用。
+
+### 7.3 反命题: "多范式总是好的"
+
+```mermaid
+graph TD
+    P3["命题: 多范式总是好的"] --> Q7{"是否存在范式冲突?"}
+    Q7 -->|是| F7["反例: OOP 继承 vs Trait 组合 —— 团队内风格分裂导致代码不一致"]
+    Q7 -->|否| Q8{"学习曲线是否可接受?"}
+    Q8 -->|否| F8["反例: 新手同时面对所有权+生命周期+宏+泛型+异步 —— 认知超载"]
+    Q8 -->|是| Q9{"代码一致性是否可维持?"}
+    Q9 -->|否| F9["反例: 同一代码库中部分模块命令式、部分函数式、部分宏生成 —— 维护噩梦"]
+    Q9 -->|是| T3["多范式在受控环境下是优势<br/>⚠️ 需要编码规范/架构审查统一风格"]
+
+    style F7 fill:#f96
+    style F8 fill:#f96
+    style F9 fill:#f96
+    style T3 fill:#ff9
+```
+
+> **边界分析**: 多范式≠多收益。缺乏统一原则时，范式冲突会成为技术债务。成功的 Rust 项目通过编码规范、架构分层、代码审查来约束范式选择。
+
+### 7.4 反命题: "类型系统限制表达力"
+
+```mermaid
+graph TD
+    P4["命题: 类型系统限制表达力"] --> Q10{"类型能否编码业务不变式?"}
+    Q10 -->|能| F10["反例: `NonZeroU32` / `ValidatedEmail` —— 类型即证明，非法状态不可表示"]
+    Q10 -->|否| Q11{"类型驱动设计是否提升质量?"}
+    Q11 -->|是| F11["反例: 编译期消除 NPE / 越界 / 数据竞争 —— 类型系统消灭 bug 类别"]
+    Q11 -->|否| Q12{"证明即程序是否成立?"}
+    Q12 -->|是| F12["反例: Curry-Howard 同构 —— 类型是命题，程序是证明，表达力无损失"]
+    Q12 -->|否| T4["动态类型在快速原型阶段有优势<br/>⚠️ 但类型系统的'限制'往往是'保护'的别名"]
+
+    style F10 fill:#9cf
+    style F11 fill:#9cf
+    style F12 fill:#9cf
+    style T4 fill:#ff9
+```
+
+> **边界分析**: 类型系统限制"可编译的程序集合"，但排除的是运行时会出错的子集。`unsafe` 作为逃逸舱，恰恰证明类型系统是"默认安全网"而非牢笼。
+
+> **过渡**: 反命题分析划定了 Rust 范式选择的有效边界。超越这些边界，需要回到更基础的形式化工具和语言演进趋势中寻找答案。
+
+---
+
 ## 八、扩展内容：形式化谱系与更多语言对比
 
-### 7.1 编程语言形式化谱系
+### 8.1 编程语言形式化谱系
 
 ```mermaid
 graph TD
@@ -264,7 +426,7 @@ graph TD
     style Rust fill:#f96
 ```
 
-### 7.2 扩展对比矩阵（6 语言）
+### 8.2 扩展对比矩阵（6 语言）
 
 | 维度 | C | C++ | Rust | Go | Java | Haskell |
 |:---|:---|:---|:---|:---|:---|:---|
@@ -275,42 +437,32 @@ graph TD
 | **编译期保证** | 类型检查 | 类型+模板 | 类型+所有权 | 类型 | 类型 | 类型+纯度 |
 | **运行时开销** | 无 | 无 | 无 | GC | GC/JIT | GC/Thunk |
 | **FFI 友好度** | ✅ 自身 | ✅ C 兼容 | ✅ C 兼容 | ✅ C 兼容 | ⚠️ JNI | ⚠️ C FFI |
-| **学习曲线** | 中 | 极高 | 高 | 低 | 中 | 高 |
 
-### 7.3 适用域决策扩展
+> **层次一致性**: L5 的对比结论必须与 L3（高级特性）和 L4（形式化理论）保持一致。例如"Rust 无 GC 停顿"的论断，在 L4 中由线性逻辑的所有权语义证明；在 L3 中由 `Box`/`Rc`/`Arc` 的具体 API 实现。
 
-| 场景 | 首选 | 次选 | 理由 |
-|:---|:---|:---|:---|
-| **操作系统内核** | Rust / C | C++ | 无 GC、内存安全 |
-| **嵌入式 ( bare-metal )** | Rust / C | C++ | 无运行时、确定性 |
-| **Web 后端 ( 高并发 )** | Go / Rust | Java | goroutine / async |
-| **Web 后端 ( 低延迟 )** | Rust | C++ | 无 GC 停顿 |
-| **AI/ML 推理** | Rust / C++ | Python | 性能敏感 |
-| **AI/ML 训练** | Python / C++ | — | 生态锁定 |
-| **区块链 / 智能合约** | Rust | Solidity | 安全性 |
-| **游戏引擎** | C++ / Rust | C# | 性能 |
-| **前端 / WASM** | Rust / TypeScript | — | 安全+性能 |
-| **函数式系统** | Haskell | OCaml / F# | 类型安全 |
+---
 
-### 8.1 学术参考文献
+## 九、学术参考文献
 
 > **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
-> 
-> 这篇经典综述首次系统性地建立了类型理论的分类框架，将多态性划分为参数多态（parametric）、包含多态（inclusion/subtyping）和特设多态（ad-hoc/overloading），为后世编程语言类型系统的设计提供了统一的术语基础和理论谱系。
+>
+> 这篇经典综述首次系统性地建立了类型理论的分类框架，将多态性划分为参数多态、包含多态和特设多态，为后世编程语言类型系统的设计提供了统一的术语基础和理论谱系。
 
 > **Van Roy, P. (2009).** *Programming Paradigms for Dummies: What Every Programmer Should Know.* In Encyclopedia of Computer Science and Engineering. [来源: Van Roy 2009 / Wikipedia: Programming paradigm]
-> 
-> 该文献提出了编程范式的多维分类法，将语言特性映射到不同的计算模型（如顺序、并发、约束、逻辑等），解释了为什么现代语言（包括 Rust）趋向于多范式融合。
+>
+> 该文献提出了编程范式的多维分类法，将语言特性映射到不同的计算模型，解释了为什么现代语言（包括 Rust）趋向于多范式融合。
 
 > **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: CACM]
-> 
+>
 > CSP 过程代数的形式化奠基之作，为理解 Go 的 channel-based 并发模型与 Rust 的 ownership-based 并发模型之间的语义差异提供了数学基础。
 
 > **Cardelli, L. (1989).** *Typeful Programming.* In Lecture Notes for the IFIP Advanced Seminar on Formal Methods in Programming Language Semantics. [来源: Cardelli 1989]
-> 
+>
 > 提出了"类型丰富编程"（Typeful Programming）的概念，主张类型系统不仅是错误检测工具，更是程序设计的第一类媒介，深刻影响了 Rust、Haskell、OCaml 等现代语言的类型设计理念。
 
-## 九、知识来源关系（Provenance）
+---
+
+## 十、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -321,17 +473,13 @@ graph TD
 | Haskell 范畴论基础 | [Wadler 1989 — Theorems for Free, POPL] | ✅ |
 | 编程范式定义 | [Wikipedia: Programming paradigm] | ✅ |
 | 类型系统定义 | [Wikipedia: Type system] | ✅ |
-| 泛型编程定义 | [Wikipedia: Generic programming] | ✅ |
-| 并发计算定义 | [Wikipedia: Concurrent computing] | ✅ |
 | CMU PL Concepts 多语言对比 | [CMU 17-363] | ✅ |
-| Rust 线性类型论根基 | [Girard 1987 — Linear Logic] | ✅ |
-| Haskell 范畴论基础 | [Wikipedia: Haskell] · [Category Theory] | ✅ |
 | C++ 模板机制 | [C++ Standard] · [Stroustrup] | ✅ |
 | Go CSP 并发模型 | [Hoare 1978] · [Effective Go] | ✅ |
 
 ---
 
-## 十、相关概念链接
+## 十一、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -345,7 +493,8 @@ graph TD
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十二、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充具体 benchmark 数据链接
 - [ ] **TODO**: 补充语言演进趋势分析
+- [ ] **TODO**: 补充认知路径交互式测验与反命题真实案例

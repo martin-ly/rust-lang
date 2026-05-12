@@ -1,6 +1,7 @@
 # Async/Await（异步编程）
 
 > **层级**: L3 高级概念
+> **层级一致性**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Pin/Unpin] · [Streams]
 > **主要来源**: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Asynchronous Programming in Rust](https://rust-lang.github.io/async-book/) · [RFC 2394] · [RFC 2349]
@@ -9,11 +10,64 @@
 
 **变更日志**:
 
+- v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Future 状态机模型、async/await 语法糖解析、Pin 分析、思维导图、示例反例
 
 ---
 
+## 〇、认知路径（Cognitive Path）
+
+> **导读**：以下六步构成从直觉困惑到形式验证的完整递进链条。建议按顺序阅读，每步锚定后续章节的特定内容，形成"问题驱动→场景具象→模式抽象→规则形式→代码验证→边界测试"的闭环。
+
+```text
+Step 1: "为什么回调地狱不好？"
+    └─► 深层问题: 控制流反转 + 错误处理碎片化 + 中间状态散落
+    └─► 对应章节: §1.1 权威定义（Wikipedia: Coroutine）
+    └─► 关键洞察: async/await 恢复"看起来同步"的线性控制流
+    └─► 形式化映射: CPS（续体传递风格）→ 可恢复函数（resumable functions）
+
+Step 2: "Promise 和 Future 的区别？"
+    └─► 深层问题: Promise 是 eager 热启动 + 单次赋值容器; Future 是 lazy 冷启动 + 可轮询状态机
+    └─► 对应章节: §1.2 官方文档定义 + §2.1 对比矩阵
+    └─► 关键洞察: .await 是需求驱动（pull），而非供给驱动（push）
+    └─► 形式化映射: Promise ≈ 可变变量 + 观察者模式; Future ≈ 状态机 + 轮询契约
+
+Step 3: "为什么需要 .await？"
+    └─► 深层问题: 语法糖背后的挂起/恢复机制——谁保存现场？谁决定继续？
+    └─► 对应章节: §3.1 async fn 作为状态机 + §1.2 形式化定义
+    └─► 关键洞察: .await ≡ loop { match future.poll(cx) { Ready(v) => break v, Pending => yield } }
+    └─► 形式化映射: await 点 = 控制流图中的挂起节点（suspend node）
+
+Step 4: "状态机怎么工作？"
+    └─► 深层问题: 编译器如何将 async fn 体转换为匿名 enum，且保证零成本？
+    └─► 对应章节: §3.1 状态机变换 + §5 定理一致性矩阵 T1
+    └─► 关键洞察: 每个 await 点 = 状态转移边; 跨 await 存活的局部变量 = enum 变体字段
+    └─► 形式化映射: async fn → 有限状态自动机（FSA）→ impl Future
+
+Step 5: "Pin 解决什么问题？"
+    └─► 深层问题: 自引用结构在移动后地址变化，内部指针悬垂——状态机如何安全跨 await？
+    └─► 对应章节: §3.2 Pin 的形式化语义 + §5 定理一致性矩阵 L2
+    └─► 关键洞察: Pin<&mut Self> ⟹ 内存地址恒定 ⟹ 自引用字段在 poll 间始终有效
+    └─► 形式化映射: Pin = 位置类型（location type）→ 不动性（immobility）公理
+
+Step 6: "什么时候会阻塞？"
+    └─► 深层问题: async 中误用阻塞调用 = 阻塞整个 OS 线程; 取消可能在任意 await 点发生
+    └─► 对应章节: §8 反例 + §6 反命题决策树 + §7 决策树
+    └─► 关键洞察: .await 让出线程 ≠ 不会阻塞; 取消安全（cancellation safety）非自动保证
+    └─► 形式化映射: 取消点 = 效果处理器（effect handler）中的异常通道
+```
+
+> **[TRPL: Ch17 + Async Book]** 认知类比：`Future` 像"待办事项单"——每次 `poll` 是处理一件事，处理不完就记下当前进度（状态机）。`Pin` 像"胶水"——把待办单粘在桌上，防止进度记录错位。✅ 已验证
+>
+> **[Rust Reference: Async]** 反直觉点：`async fn` 看起来像普通函数，但实际上返回一个编译器生成的**匿名状态机**，而非直接结果。✅ 已验证
+>
+> **形式化过渡**: 从"await 暂停" → "状态机转换" → "续体传递风格 (CPS)" → "效果系统 (Effect Systems)" 💡 原创分析
+
+---
+
 ## 一、权威定义（Definition）
+
+> **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
 
 ### 1.1 Wikipedia 权威定义
 
@@ -33,7 +87,7 @@
 >
 > **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。✅ 已验证
 
-### 1.2 形式化定义
+### 1.3 形式化定义
 
 `async/await` 可以形式化为**基于状态机的协程**（coroutines）或**可恢复函数**（resumable functions）：
 
@@ -55,7 +109,7 @@ Poll 类型:
   loop {
       match future.poll(cx) {
           Poll::Ready(v) => break v,
-          Poll::Pending => yield,  // 挂起当前协程
+          Poll::Pending => yield,  // 挂起当前协程，保存状态机现场
       }
   }
 ```
@@ -64,13 +118,15 @@ Poll 类型:
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
+> **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
+
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
 
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
 |:---|:---|:---|:---|
 | **核心抽象** | Future / Task | OS Thread | Data / Task |
 | **调度者** | 运行时（Tokio/async-std） | OS 内核 | 运行时 / OS |
-| **上下文切换** | 用户态（极轻量） | 内核态（较重） | 视实现 |
+| **上下文切换** | 用户态（极轻量，~ns 级） | 内核态（较重，~μs 级） | 视实现 |
 | **内存占用** | 小（~几百字节栈） | 大（~MB 栈） | 视实现 |
 | **适用场景** | IO 密集型 | CPU 密集型 + 阻塞 | CPU 密集型 |
 | **阻塞风险** | `.await` 不会阻塞线程 | 阻塞整个线程 | 通常无阻塞 |
@@ -84,7 +140,7 @@ Poll 类型:
 | `Future::poll` | `Pin<&mut Self> → Poll<T>` | 驱动 Future 执行 | 核心原语 |
 | `.await` | `Future<T> → T` | 挂起直到完成 | `yield` + `poll` |
 | `futures::join!` | `(F1, F2) → (O1, O2)` | 并发等待多个 Future | `Promise.all` |
-| `futures::select!` | `F1 | F2 → FirstReady` | 等待任一完成 | `Promise.race` |
+| `futures::select!` | `F1 \| F2 → FirstReady` | 等待任一完成 | `Promise.race` |
 | `Future::then` | `F<A> → (A→F<B>) → F<B>` | 顺序链式 | `then` |
 | `Future::map` | `F<A> → (A→B) → F<B>` | 值转换 | `map` |
 | `Stream::next` | `→ Future<Option<Item>>` | 异步迭代 | `Iterator` |
@@ -102,6 +158,8 @@ Poll 类型:
 ---
 
 ## 三、形式化理论根基（Formal Foundation）
+
+> **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。二者共同构成"零成本 + 内存安全"的基石。
 
 > **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
 >
@@ -172,6 +230,8 @@ Pin<P<T>> 保证 T 在内存中不移动:
 
 ## 四、思维导图（Mind Map）
 
+> **章节过渡**：理论根基建立后，以下思维导图以可视化方式整合同步概念体系，从 Future Trait 出发，辐射到语法糖、Pin 语义、运行时与组合子四个维度。
+
 ```mermaid
 graph TD
     A[Async/Await 异步] --> B[Future Trait]
@@ -203,9 +263,158 @@ graph TD
 
 ---
 
-## 五、决策/边界判定树（Decision / Boundary Tree）
+## 五、定理一致性矩阵（Theorem Consistency Matrix）
 
-### 5.1 "Async vs Thread？" 决策树
+> **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
+
+> **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
+>
+> **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
+
+### 5.1 定理矩阵（10 行，含 ⟹ 推理链）
+
+| 编号 | 定理陈述（⟹ 推理链） | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 后果 |
+|:---|:---|:---|:---|:---|:---|:---|:---|
+| **L1** | Future trait 语义 ⟹ 惰性求值 | `async fn` / `async {}` 被调用 | 仅构造状态机，无实际执行；首次 `poll` 前零副作用 | λ-演算惰性求值语义 | T1, T2, C1 | 立即热启动（如某些语言 Promise） | 语义偏离 Rust 模型，产生意外副作用 |
+| **L2** | `Pin<&mut Self>` ⟹ 自引用安全 | `!Unpin` + 正确 Pin 构造（`Box::pin` 或栈 Pin） | 状态机内指针字段在跨 `poll` 间始终有效，地址恒定 | 内存位置稳定性公理 | T1, C2, P2 | `Unpin` 误实现、手动 `mem::swap`、栈帧移动 | UB（悬垂指针解引用） |
+| **T1** | async/await 状态机变换 ⟹ 零成本抽象 | 编译器生成 + L2（Pin 保证不动） | 运行时无额外开销，等价于手写状态机；无 GC、无动态分发（默认） | 编译器正确性公理 | A1, S1 | 强制 `Box::pin` 堆分配、`dyn Future` 动态分发、递归状态机膨胀 | 性能退化（非语义错误），缓存不友好 |
+| **T2** | `Send` Future ⟹ 跨 await 点状态迁移安全 | 状态机所有捕获字段均实现 `Send` | 可安全跨线程传递并在新线程恢复 `poll`；await 点即为状态序列化点 | 线程安全传递公理 | C1, P1 | 字段含 `!Send`（如 `Rc<T>`、`MutexGuard`） | 编译错误 E0277 |
+| **C1** | `!Send` 类型跨 await ⟹ 编译错误 | 状态机含 `Rc`/裸指针/`MutexGuard` 等 | `tokio::spawn` 及跨线程调度被类型系统拒绝 | 子类型拒绝公理 | — | `unsafe impl Send for T` 恶意/错误绕过 | 数据竞争（运行时 UB），破坏线程安全 |
+| **C2** | 未 Pin 的自引用结构被移动 ⟹ UB | 手写 Future 含自引用字段且未使用 `Pin<&mut Self>` | 内部指针悬垂，后续 `poll` 解引用无效 | 内存安全公理 | — | 编译器未生成 Pin（手写 `Future` 时遗漏） | UB（不可定义行为，可能静默崩溃） |
+| **P1** | Waker 契约 ⟹ 调度器活性 | 正确实现 `wake`/`wake_by_ref`；Waker 被传递至 Reactor | Future 在资源就绪后最终会被重新 `poll` | 活性约定（liveness guarantee） | S1 | 遗忘 wake、虚假 wake、Waker 被过早释放 | 活锁 / 饥饿 / 永久 Pending |
+| **P2** | `select!` / `drop(Future)` ⟹ 取消点 | Future 未完成时被显式丢弃或分支落选 | 部分副作用可能残留；所有权已转移者不可逆；资源由 `Drop` 释放 | 资源管理公理 + 线性类型 | — | 未按取消安全（cancellation safe）设计 | 状态不一致（如半写文件、半发消息） |
+| **A1** | AFIT/RPITIT ⟹ 异步 Trait 零成本抽象 | Trait 方法返回 `impl Future<Output = T>`（Rust 1.75+） | 调用方无需知道具体 Future 类型，无 `Box` 开销 | 存在类型（existential type）公理 | — | `dyn Trait` 类型擦除场景 | E0720 / 编译错误 / 被迫动态分发 |
+| **S1** | `Poll::Pending` + Waker 注册 ⟹ 协作式多任务 | 运行时正确将 Waker 注册至 epoll/kqueue/IOCP | 单线程内多 Task 并发执行，无抢占上下文切换开销 | 协程语义公理 | — | 忙等轮询（busy loop，未返回 Pending） | CPU 空转，吞吐量崩溃 |
+
+### 5.2 推理链层级图
+
+```text
+语言层 (L)
+  L1: Future trait 语义 ⟹ 惰性求值
+  L2: Pin<&mut Self> ⟹ 自引用安全
+       ↓
+变换层 (T)
+  T1: 状态机变换 ⟹ 零成本抽象  ← 依赖 L2
+  T2: Send Future ⟹ 跨 await 状态迁移安全  ← 依赖 L1
+       ↓
+约束层 (C)
+  C1: !Send 跨 await ⟹ 编译错误  ← 依赖 T2
+  C2: 未 Pin 自引用 ⟹ UB  ← 依赖 L2
+       ↓
+运行时层 (P)
+  P1: Waker 契约 ⟹ 调度器活性
+  P2: select!/drop ⟹ 取消点
+       ↓
+抽象层 (A)
+  A1: AFIT/RPITIT ⟹ Trait 异步抽象
+       ↓
+系统层 (S)
+  S1: Pending + Waker ⟹ 协作式多任务  ← 依赖 P1
+```
+
+---
+
+## 六、反命题决策树（Counter-proposition Decision Trees）
+
+> **章节过渡**：定理矩阵回答"什么必然为真"，反命题决策树则揭示"什么看似为真实则不然"。以下三组反命题分别针对零成本、完成性与等价性三个常见误解，反例节点以红色标注，展示从直觉到谬误再到修正的完整路径。
+
+### 6.1 反命题: "async/await 总是零成本"
+
+> **误解来源**: 官方宣传"zero-cost abstraction"被简化为"绝对零开销"。
+
+```mermaid
+graph TD
+    P["命题: async/await 总是零成本"] --> Q1{"状态机大小是否膨胀？"}
+    Q1 -->|是| F1["反例: 大量局部变量跨 await 存活<br/>→ 状态机体积大，缓存不友好<br/>→ 成本: 内存占用 + 缓存缺失"]
+    Q1 -->|否| Q2{"是否使用 dyn Future / Box::pin？"}
+    Q2 -->|是| F2["反例: 动态分发 + 堆分配<br/>→ 每次 poll 虚表跳转 + 分配器开销<br/>→ 成本: 运行时开销"]
+    Q2 -->|否| Q3{"是否递归调用 async fn？"}
+    Q3 -->|是| F3["反例: 递归状态机类型无限膨胀<br/>→ 编译器需 Box 包装或报错<br/>→ 成本: 强制堆分配 / 编译失败"]
+    Q3 -->|否| T["定理成立: 当前条件下零成本<br/>✅ 静态分发 + 合理状态机大小 + 无递归"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+**修正认知**：
+
+```text
+零成本 ≠ 零开销，而是"不用的不付钱，用了的付最少钱"。
+  - 编译器生成状态机 = 无运行时解释器开销
+  - 但状态机大小由代码结构决定（跨 await 存活变量）
+  - 动态分发和堆分配是显式选择，非 async 本身强加
+```
+
+### 6.2 反命题: "Future 一旦 poll 就一定完成"
+
+> **误解来源**: 同步思维惯性——函数调用即执行到返回。
+
+```mermaid
+graph TD
+    P["命题: Future 一旦 poll 就一定完成"] --> Q1{"是否被 select! 分支落选？"}
+    Q1 -->|是| F1["反例: select! 中未就绪分支被丢弃<br/>→ Future 在 await 点被 drop<br/>→ 结果: 任务取消，永不完成"]
+    Q1 -->|否| Q2{"是否显式 drop(Future) 或作用域结束？"}
+    Q2 -->|是| F2["反例: 所有权系统允许任意丢弃<br/>→ 未完成的 I/O 由 Drop 处理<br/>→ 结果: 取消，资源释放"]
+    Q2 -->|否| Q3{"运行时是否 panic / abort？"}
+    Q3 -->|是| F3["反例: panic = 展开栈或立即终止<br/>→ 所有未完成 Future 被强制丢弃<br/>→ 结果: 永不完成"]
+    Q3 -->|否| T["定理成立: 正常执行流下达 Ready<br/>✅ 无取消、无丢弃、无 panic"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+**修正认知**：
+
+```text
+Future 的生命周期独立于 poll 调用：
+  - poll 是协作式请求，不是命令式保证
+  - 取消是一等公民：select!、drop、panic 均可中断
+  - 取消安全（cancellation safety）需程序员显式设计
+```
+
+### 6.3 反命题: "async fn 等价于返回 Future 的 fn"
+
+> **误解来源**: 语法脱糖后的表面相似性——`async fn foo() -> T` 看起来像 `fn foo() -> impl Future<Output = T>`。
+
+```mermaid
+graph TD
+    P["命题: async fn 等价于返回 Future 的 fn"] --> Q1{"生命周期捕获是否一致？"}
+    Q1 -->|否| F1["反例: async fn 隐式捕获所有引用参数生命周期<br/>→ 返回 Future 的 fn 需显式标注 '_<br/>→ 差异: 编译器自动推断 vs 手动标注"]
+    Q1 -->|是| Q2{"环境捕获是否一致？"}
+    Q2 -->|否| F2["反例: async fn 不立即执行，闭包式捕获延迟发生<br/>→ 变量值在 .await 时才求值，非定义时<br/>→ 差异: 惰性求值语义导致意外借用"]
+    Q2 -->|是| Q3{"Trait 兼容性是否一致？"}
+    Q3 -->|否| F3["反例: AFIT (async fn in trait) 需 RPITIT 支持<br/>→ 手写 fn → impl Future 在 trait 中曾是实验性<br/>→ 差异: 语法糖触发编译器特定转换路径"]
+    Q3 -->|是| T["定理成立: 在简单非 trait 场景下语义等价<br/>✅ 无生命周期陷阱、无延迟捕获、无 trait 边界"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+**修正认知**：
+
+```text
+语法等价 ≠ 语义等价：
+  - async fn 是编译器生成状态机的"工厂"，调用即构造
+  - 返回 Future 的 fn 是显式构造，可能混入自定义逻辑
+  - 生命周期、环境捕获、trait 兼容性存在微妙差异
+  - 尤其注意: async move { } 与普通 async { } 的捕获区别
+```
+
+---
+
+## 七、决策/边界判定树（Decision / Boundary Tree）
+
+> **章节过渡**：反命题破除了常见神话，而决策树则提供正向的工程判断框架。以下两棵树分别解决"何时用 async"和"何时用 Pin"的选择问题，为实际编码提供可操作的判定路径。
+
+### 7.1 "Async vs Thread？" 决策树
 
 ```mermaid
 graph TD
@@ -222,7 +431,7 @@ graph TD
     A4[纯 CPU 密集型<br/>如: 数据分析]
 ```
 
-### 5.2 Pin 使用边界
+### 7.2 Pin 使用边界
 
 ```mermaid
 graph TD
@@ -237,64 +446,11 @@ graph TD
 
 ---
 
-## 六、定理推理链（Theorem Chain）
+## 八、示例与反例（Examples & Counter-examples）
 
-> **[RFC 2349 + Rust Reference]** 定理：Pin 保证 + 编译器生成的状态机 = Safe Rust 中自引用安全。这是无 GC 语言实现安全协程的关键机制。✅ 已验证
->
-> **[TRPL: Ch17]** 推论：async/await 无需垃圾回收即可安全实现协程，内存管理是确定性的。✅ 已验证
+> **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期"四个维度。
 
-### 6.1 async/await + Pin ⇒ 安全自引用
-
-```text
-前提 1: async fn 编译为状态机，可能包含自引用（如局部变量的引用）
-前提 2: Future 可能被 move（如存入 Vec 或跨 await 点）
-前提 3: Pin<Future> 保证 Future 在内存中不移动
-    ↓
-定理: Safe Rust 中，await 点的局部变量引用是安全的
-    ↓
-推论: async/await 无需 GC 即可安全实现协程
-      这是 Rust 相比 Go/Goroutine 的独特优势（确定性内存管理）
-```
-
-> **[Async Book: Cancellation]** Cancellation safety 不是 Rust 类型系统自动保证的：select! 或 drop(Future) 可在任意 await 点取消任务，程序员需确保部分副作用后的状态一致性。⚠️ 存在争议（部分运行时提供结构化并发辅助）
->
-> **[Tokio Documentation]** 最佳实践：将副作用（如写文件、发消息）推迟到 Future 即将 Ready 时，或使用事务/两阶段提交模式处理取消。✅ 已验证
-
-### 6.2 取消安全（Cancellation Safety）
-
-```text
-前提: select! 或 drop(Future) 可取消未完成的 Future
-    ↓
-问题: 若 Future 在部分副作用后取消，状态是否一致？
-    ↓
-定理: .await 是取消点，但所有权系统保证:
-  - 已转移的所有权不会被回滚（不可逆）
-  - 未完成的 I/O 操作由运行时处理
-    ↓
-最佳实践: 将副作用推迟到最终 Ready，或使用事务模式
-```
-
-### 6.3 定理一致性矩阵
-
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
-|:---|:---|:---|:---|:---|:---|:---|
-| Pin 不动性 | `!Unpin` + Pin 构造 | 内存地址恒定 | —（部分形式化） | Future 安全、自引用 | `Unpin` 误实现、手动移动 | UB |
-| Future 轮询安全 | `Pin<&mut Self>` | 自引用在 poll 中有效 | —（部分形式化） | async/await 生成 | poll 中手动 mem::swap | UB |
-| async 状态机安全 | 编译器生成 + Pin | await 点状态转换合法 | —（待形式化） | 所有异步代码 | 跨越 await 持有非 Send | 编译错误 |
-| AFIT/RPITIT 抽象 | Trait 方法返回 impl Future | 调用方无需知道具体类型 | 存在类型 | 异步 Trait 设计 | 递归调用限制 | E0720 |
-| Waker 契约 | 正确实现 wake | 调度器最终 poll Future | 活性约定 | 运行时正确性 | 遗忘 wake、虚假 wake | 活锁/饥饿 |
-
-> **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
->
-> **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
->
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
-
----
-
-## 七、示例与反例（Examples & Counter-examples）
-
-### 7.1 正确示例：async fn + .await
+### 8.1 正确示例：async fn + .await
 
 ```rust
 // ✅ 正确: async/await 基本用法
@@ -313,7 +469,7 @@ async fn main() {
 }
 ```
 
-### 7.2 正确示例：并发执行
+### 8.2 正确示例：并发执行
 
 ```rust
 // ✅ 正确: join! 并发等待
@@ -327,7 +483,7 @@ async fn fetch_all() -> (String, String) {
 }
 ```
 
-### 7.3 正确示例：Stream 异步迭代
+### 8.3 正确示例：Stream 异步迭代
 
 ```rust
 // ✅ 正确: Stream 异步迭代
@@ -341,7 +497,7 @@ async fn process_stream() {
 }
 ```
 
-### 7.4 反例：在 async 中阻塞线程
+### 8.4 反例：在 async 中阻塞线程
 
 ```rust
 // ❌ 反例: 在 async 中执行阻塞操作
@@ -371,7 +527,7 @@ async fn cpu_intensive() -> i32 {
 }
 ```
 
-### 7.5 反例：未 Pin 的自引用 Future
+### 8.5 反例：未 Pin 的自引用 Future
 
 ```rust
 // ❌ 反例: 尝试移动已 Pin 的 Future（编译错误）
@@ -392,47 +548,13 @@ fn main() {
 }
 ```
 
----
-
-### 7.6 反命题与边界分析
-
-#### 命题: "async/await 保证自引用安全"
-
-```mermaid
-graph TD
-    P["命题: async 保证自引用安全"] --> Q1{"手动实现 Future (非编译器生成)?"}
-    Q1 -->|是| F1["反例: 手动 poll 可能未正确维护 Pin<br/>→ 自引用失效（unsafe/UB）"]
-    Q1 -->|否| Q2{"在 async 块中使用 unsafe?"}
-    Q2 -->|是| F2["反例: unsafe 可绕过 Pin 约束<br/>→ 所有保证失效"]
-    Q2 -->|否| Q3{"跨越 await 持有非 Send 变量?"}
-    Q3 -->|是| F3["反例: 编译错误（非 UB）<br/>→ 状态机不是 Send，无法跨线程调度"]
-    Q3 -->|否| T["定理成立: 自引用安全<br/>✅ Pin + 编译器生成保证"]
-
-    style F1 fill:#f66
-    style F2 fill:#f66
-    style F3 fill:#f96
-    style T fill:#6f6
-```
-
-> **[RFC 2349]** Pin 保证内存不动的精确语义：Pin<P<T>> 不直接阻止 T 被 move，而是阻止通过 safe API 获取 &mut T 后 move out；Unpin 是 opt-out 机制。✅ 已验证
->
-> **[Rust Reference: Pin]** 对 !Unpin 类型调用 mem::swap 或在 unsafe impl Unpin 后移动数据属于 UB。✅ 已验证
-
-#### 命题: "Pin 保证内存不动"
-
-| 条件 | 结果 | 说明 |
-|:---|:---|:---|
-| `Pin<Box<T>>` with `!Unpin` | ✅ 不动 | 堆分配 + Pin 封装 |
-| `Pin<&mut T>` on stack | ⚠️ 有限 | 栈帧本身可能移动（如 async 状态机） |
-| 实现 `Unpin` for `!Unpin` | ❌ UB | `unsafe impl` 错误 |
-| `mem::swap` on pinned data | ❌ UB | 直接破坏 Pin 契约 |
-| `Box::pin` → `into_inner` | ❌ 不允许 | `Pin<Box<T>>` 不提供 into_inner |
-
-#### 边界极限测试
+### 8.6 边界极限测试：跨越 await 的 Send 约束
 
 ```rust
 // 边界: 跨越 await 的 Send 约束
 use std::rc::Rc;
+
+async fn some_async() {}
 
 async fn bad() {
     let x = Rc::new(42);  // Rc 不是 Send
@@ -445,51 +567,43 @@ async fn bad() {
 // 解决: 使用 Arc 替代 Rc
 async fn good() {
     let x = std::sync::Arc::new(42);  // Arc 是 Send + Sync
-    tokio::spawn(good());  // ✅ 合法
+    // tokio::spawn(good());  // ✅ 合法 (需 tokio 依赖)
+}
+
+fn main() {
+    // 单独编译验证，不实际运行
+}
+```
+
+### 8.7 边界极限测试：取消安全设计
+
+```rust,ignore
+// 边界: 取消安全——select! 可能在任意 await 点丢弃分支
+// 注意: 以下代码依赖 tokio，标记为 ignore 用于示意
+use tokio::select;
+
+async fn cancellation_unsafe() {
+    let mut file = tokio::fs::File::create("tmp.txt").await.unwrap();
+    // 若在此 await 点被取消，文件可能半写或空创建
+    file.write_all(b"partial data").await.unwrap();
+    // 更危险: 若上面完成但下面被取消，数据不完整
+    file.write_all(b" rest").await.unwrap();
+}
+
+// ✅ 修正: 取消安全设计——副作用推迟到最终 Ready
+async fn cancellation_safe() -> std::io::Result<()> {
+    let data = prepare_data().await;  // 纯计算，无副作用
+    let data2 = prepare_more().await;
+    // 所有准备完成后，原子化写入
+    tokio::fs::write("tmp.txt", format!("{}{}", data, data2)).await
 }
 ```
 
 ---
 
-## 零、认知路径（Cognitive Path）
+## 九、知识来源关系（Provenance）
 
-```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"异步代码怎么工作？"         "await 后变量             "Future = 状态机       "效果系统/           "Pin 保证             "跨越 await
-                             还能用吗？"              + Pin 不动性"          续体转换"            自引用有效"          持有非 Send"
-
-"为什么需要 Pin？"           "自引用结构在              "Pin = 内存            "位置稳定性:         "编译器拒绝          "Unpin 自动
-                             移动后失效"              位置冻结"             地址恒定"            移动 Pin 数据"       实现覆盖"
-
-"async fn 和                "怎么定义异步              "AFIT = async          "存在类型 +         "编译器生成          "递归调用
- Future 什么关系？"          Trait 方法？"            fn in trait"           Future trait"        状态机"             限制"
-```
-
-> **[TRPL: Ch17 + Async Book]** 认知类比：Future 像待办事项单——每次 poll 处理一件事，Pin 像胶水防止进度记录错位。✅ 已验证
->
-> **[Rust Reference: Async]** 反直觉点：async fn 实际返回的是编译器生成的状态机，而非直接结果。✅ 已验证
-
-**认知脚手架**:
-
-- **类比**: `Future` 像"待办事项单"——每次 `poll` 是处理一件事，处理不完就记下当前进度（状态机）。`Pin` 像"胶水"——把待办单粘在桌上，防止进度记录错位。
-- **反直觉点**: `async fn` 看起来像普通函数，但实际上返回一个复杂的**状态机**。
-- **形式化过渡**: 从"await 暂停" → "状态机转换" → "续体传递风格 (CPS)" → "效果系统 (Effect Systems)"。 💡 原创分析
-
-### 6.4 国际课程与论文对齐
-
-| 来源 | 核心内容 | 与本文件对应 |
-|:---|:---|:---|
-| **[CMU 17-350: Safe Systems Programming]** | async/await、Future、Pin、运行时 | L3 Async 完整覆盖 |
-| **[Stanford CS340R: Rusty Systems]** | 并发模型、异步系统编程 | L3 Concurrency → Async |
-| **[RFC 2394: async/await]** | 生成器状态机转换语义 | 形式化根基 §3 |
-| **[RFC 3185: Return Position Impl Trait in Trait]** | AFIT/RPITIT 设计 | Trait 中的异步 |
-| **[PLDI 2024: RefinedRust]** | Pin 不动性的形式化语义 | Pin 定理 |
-
----
-
-## 八、知识来源关系（Provenance）
+> **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -500,15 +614,22 @@ async fn good() {
 | Pin 保证内存位置稳定 | [RFC 2349] · [TRPL: Ch17] | ✅ |
 | Tokio 是生产级运行时 | [tokio.rs] · 社区共识 | ✅ |
 | 取消安全需手动保证 | [Async Book: Cancellation] | ✅ |
+| AFIT/RPITIT 语义等价 | [RFC 3185] · [Rust Reference] | ✅ |
+| Pin 形式化语义 | [PLDI 2024: RefinedRust] | ⚠️ 前沿研究 |
+| async 完整形式化 | 活跃研究领域 | 🔍 待验证 |
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 十、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 Waker/Context 的底层机制 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `Stream` / `Sink` trait 完整分析 —— 优先级: 中 —— 预计: Phase 3
+- [ ] **TODO**: 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 —— 优先级: 低 —— 预计: Phase 4
+- [ ] **TODO**: 补充 `loom` 并发模型检测工具 —— 优先级: 中 —— 预计: Phase 4
 
 ### 补充章节：AFIT（Async Fn In Traits）与 RPITIT
+
+> **层次一致性标注**：本节内容属于 L3 向 L4 过渡地带，涉及 trait 系统与存在类型的交互，需在理解 §3.1 状态机变换与 §5.1 定理 A1 后阅读。
 
 #### 问题与解决方案演进
 
@@ -581,51 +702,6 @@ impl AsyncProcessor for MyProcessor {
    }
 ```
 
----
-
-- [x] **TODO**: 补充 `async trait`（AFIT / RPITIT）的当前方案 —— 优先级: 高 —— 已完成 v1.1
-- [ ] **TODO**: 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `loom` 并发模型检测工具 —— 优先级: 中 —— 预计: Phase 4
-
-### 补充章节：async fn 在 trait 中的生命周期问题
-
-#### 问题背景
-
-```text
-在 AFIT（async fn in traits）稳定之前，trait 中不能有 async fn:
-
-trait MyTrait {
-    async fn method(&self);  // ❌ 之前不允许
-}
-
-原因:
-  async fn 返回 impl Future，但 trait 中的返回类型需要显式命名
-  impl Trait 在 trait 定义中曾是实验性特性（RPITIT）
-```
-
-#### 当前方案（Rust 1.75+）
-
-```rust
-// ✅ AFIT: async fn in trait 现在稳定
-trait MyTrait {
-    async fn method(&self) -> i32;
-}
-
-// 等价于:
-trait MyTrait {
-    fn method(&self) -> impl Future<Output = i32> + '_;
-}
-
-// 实现:
-struct MyStruct;
-
-impl MyTrait for MyStruct {
-    async fn method(&self) -> i32 {
-        42
-    }
-}
-```
-
 #### 生命周期陷阱
 
 ```rust
@@ -651,7 +727,15 @@ trait DataProvider<'a> {
 
 ---
 
-- [x] **TODO**: 补充 `async fn` 在 trait 中的生命周期问题 —— 优先级: 高 —— 已完成 v1.1
+## 十一、国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-350: Safe Systems Programming]** | async/await、Future、Pin、运行时 | L3 Async 完整覆盖 |
+| **[Stanford CS340R: Rusty Systems]** | 并发模型、异步系统编程 | L3 Concurrency → Async |
+| **[RFC 2394: async/await]** | 生成器状态机转换语义 | 形式化根基 §3 |
+| **[RFC 3185: Return Position Impl Trait in Trait]** | AFIT/RPITIT 设计 | Trait 中的异步 §10 |
+| **[PLDI 2024: RefinedRust]** | Pin 不动性的形式化语义 | Pin 定理 §5.1 L2 |
 
 ---
 
@@ -660,6 +744,8 @@ trait DataProvider<'a> {
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | 所有权 | [](../01_foundation/01_ownership.md) | Pin 根基 |
-| 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发 |
+| 生命周期 | [](../01_foundation/03_lifetimes.md) | async fn 捕获规则 |
+| Traits | [](../02_intermediate/01_traits.md) | Future trait 定义 |
+| 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |

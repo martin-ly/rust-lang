@@ -29,6 +29,34 @@
 
 ---
 
+## 认知路径（Cognitive Path）
+
+> **学习递进**: 从直觉出发，逐层深入核心概念。
+
+### 第 1 步：Rust的设计哲学是什么？
+
+零成本抽象/内存安全/实用性/稳定性
+
+### 第 2 步：Rust的演化历史关键点？
+
+1.0发布/2018/2021 Edition/borrow checker改进
+
+### 第 3 步：RFC流程如何保证质量？
+
+社区讨论/实现/稳定化/三列火车模型
+
+### 第 4 步：Rust的稳定性承诺意味着什么？
+
+Editions保证向后兼容/稳定API永不破坏
+
+### 第 5 步：未来语言特性方向？
+
+const泛型完善/GAT/ specialization/ type alias impl Trait
+
+### 第 6 步：Rust社区的治理和挑战？
+
+基金会/BDFL退位/可持续发展/多样性
+
 ## 二、Rust 演进机制
 
 ### 2.1 RFC 流程详解
@@ -336,3 +364,117 @@ timeline
 | Effects 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 未来方向 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 协同演进 |
 | 语言对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 定位参考 |
+
+## 断言一致性矩阵（Assertion Consistency Matrix）
+
+> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。
+
+| 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
+
+|:---|:---|:---|:---|:---|
+
+| **Edition 保证向后兼容** | 不破坏现有代码 ⟹ | 选择性迁移 | 跨Edition复杂性 | 长期稳定性 |
+
+| **RFC流程保证质量** | 社区审查 ⟹ | 实现验证 | 时间成本高 | 语言演化控制 |
+
+| **零成本抽象是核心承诺** | 运行时无开销 ⟹ | 抽象即优化 | 编译时间代价 | 设计基石 |
+
+| **async/await 是重大演进** | 语法糖简化 ⟹ | 生态广泛采用 | Pin复杂性 | 2019-2021 |
+
+| **const generics 持续完善** | 编译期计算 ⟹ | 类型级编程 | 编译时间影响 | 2021+ |
+
+| **社区治理影响演化方向** | 基金会模式 ⟹ | 工作组驱动 | 资源限制 | 可持续发展 |
+
+## 反命题分析（Anti-Propositions）
+
+> **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。
+
+### 1. "Rust 语言已经完成演化"
+
+```mermaid
+
+graph TD
+
+    P1["Rust 语言已经完成演化"] --> Q{成立？}
+
+    Q -->|反例1| C1_0["const generics未完成"]
+
+    style C1_0 fill:#f66
+
+    Q -->|反例2| C1_1["specialization未稳定"]
+
+    style C1_1 fill:#f66
+
+    Q -->|反例3| C1_2["async trait不完备"]
+
+    style C1_2 fill:#f66
+
+    Q -->|反例4| C1_3["新领域需求"]
+
+    style C1_3 fill:#f66
+
+    Q -->|修正| T1["命题在限定条件下成立"]
+
+    style T1 fill:#6f6
+
+```
+
+### 2. "Edition 机制完美解决兼容性"
+
+```mermaid
+
+graph TD
+
+    P2["Edition 机制完美解决兼容性"] --> Q{成立？}
+
+    Q -->|反例1| C2_0["跨Edition交互复杂性"]
+
+    style C2_0 fill:#f66
+
+    Q -->|反例2| C2_1["生态迁移成本"]
+
+    style C2_1 fill:#f66
+
+    Q -->|反例3| C2_2["认知负担"]
+
+    style C2_2 fill:#f66
+
+    Q -->|反例4| C2_3["工具链支持"]
+
+    style C2_3 fill:#f66
+
+    Q -->|修正| T2["命题在限定条件下成立"]
+
+    style T2 fill:#6f6
+
+```
+
+### 3. "Rust 的成功完全因为技术优越性"
+
+```mermaid
+
+graph TD
+
+    P3["Rust 的成功完全因为技术优越性"] --> Q{成立？}
+
+    Q -->|反例1| C3_0["社区治理"]
+
+    style C3_0 fill:#f66
+
+    Q -->|反例2| C3_1["Mozilla支持历史"]
+
+    style C3_1 fill:#f66
+
+    Q -->|反例3| C3_2["时机因素"]
+
+    style C3_2 fill:#f66
+
+    Q -->|反例4| C3_3["营销和文档"]
+
+    style C3_3 fill:#f66
+
+    Q -->|修正| T3["命题在限定条件下成立"]
+
+    style T3 fill:#6f6
+
+```

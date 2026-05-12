@@ -10,8 +10,11 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
+- v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
 
 ---
+
+<!-- 层级一致性: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
 ## 一、权威定义（Definition）
 
@@ -31,7 +34,7 @@
 >
 > **[Rust Reference: Macros]** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统约束。✅ 已验证
 
-### 1.2 形式化定义
+### 1.3 形式化定义
 
 宏对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
 
@@ -46,7 +49,11 @@ Rust 宏 hygiene:
   形式化: α-等价（alpha-equivalence）在宏展开中保持
 ```
 
+> **过渡说明**: 从"宏是什么"的抽象定义，到"宏有哪些类型"的具体属性对比，认知路径遵循从 L3 理论定义 → L2 概念分类 → L1 工程选择的降维逻辑。
+
 ---
+
+<!-- 层级一致性: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
 
 ## 二、概念属性矩阵（Attribute Matrix）
 
@@ -72,7 +79,11 @@ Rust 宏 hygiene:
 | **Lisp** | 宏（代码即数据） | ✅ 符号隔离 | ⚠️ 展开后检查 | S-expression |
 | **Nim** | 宏 + 模板 | ✅ 卫生 | ✅ 编译期执行 | AST |
 
+> **过渡说明**: 概念矩阵回答了"有哪些宏"和"与其他语言相比如何"，接下来需要深入 Rust 宏的**形式化理论根基**——卫生性、模式匹配语义、以及它们如何保证编译期变换的正确性。
+
 ---
+
+<!-- 层级一致性: L3 形式化理论 — 卫生宏的 α-等价保持、模式匹配的语法树正则语义 -->
 
 ## 三、形式化理论根基（Formal Foundation）
 
@@ -114,7 +125,11 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
   展开: <[_]>::into_vec(Box::new([1, 2, 3]))
 ```
 
+> **过渡说明**: 形式化理论阐明了宏"为什么能正确工作"，但工程实践中更常问的是"什么时候该用宏"以及"宏有哪些陷阱"。思维导图提供全景视图，随后的决策树将形式化定理转化为可执行的工程判断。
+
 ---
+
+<!-- 层级一致性: L2 全景认知 → L1 工程决策 — 思维导图为导航，决策树为操作手册 -->
 
 ## 四、思维导图（Mind Map）
 
@@ -148,6 +163,8 @@ graph TD
 
 ## 五、决策/边界判定树（Decision / Boundary Tree）
 
+> **过渡说明**: 以下决策树将 L3 理论（卫生性、编译期展开）和 L2 概念（四种宏类型）转化为 L1 工程实践中的可执行判断。每个节点对应一个具体的编程困境，每条边对应一个形式化保证或工程约束。
+
 ### 5.1 "宏 vs 泛型/函数？" 决策树
 
 ```mermaid
@@ -168,7 +185,74 @@ graph TD
     A3[函数 / 泛型]
 ```
 
+### 5.2 反命题决策树一："宏和函数等价"
+
+> **命题来源**: 初学者常误认为宏只是"内联的函数"，二者可以互换。
+> **形式化反驳**: 函数是语义级抽象（类型检查后再调用），宏是语法级变换（类型检查前展开）。二者在 λ-演算层面属于不同计算阶段。
+
+```mermaid
+graph TD
+    P1["命题: 宏和函数等价"] --> Q1{"宏展开在类型检查前?"}
+    Q1 -->|是| F1["反例: 宏不感知类型<br/>→ macro_rules! 无法根据类型做分支<br/>→ 过程宏只能解析 Token 语法"]
+    Q1 -->|否| Q2{"函数调用有栈帧和调试信息?"}
+    Q2 -->|是| F2["反例: 宏展开后无独立栈帧<br/>→ 调试时错误信息指向宏调用处<br/>→ cargo expand 才能查看展开代码"]
+    Q2 -->|否| Q3{"函数参数有类型检查?"}
+    Q3 -->|是| F3["反例: 宏参数是 Token 模式匹配<br/>→ 错误延迟到展开后才暴露<br/>→ 错误信息晦涩难懂"]
+    Q3 -->|否| T1["仅在纯语法替换场景近似等价<br/>⚠️ 但 hygiene、重复模式、编译期计算均不可互换"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T1 fill:#ff9
+```
+
+### 5.3 反命题决策树二："宏可以执行任意计算"
+
+> **命题来源**: 因宏在"编译期执行"，易误解为宏具备完整的编译期计算能力。
+> **形式化反驳**: Rust 宏系统故意设计为**非图灵完备**——递归深度受限、无法执行 I/O、无法访问类型信息。真正的编译期计算应由 `const fn` 和 `const generics` 承担。
+
+```mermaid
+graph TD
+    P2["命题: 宏可以执行任意计算"] --> Q1{"递归深度是否受限?"}
+    Q1 -->|是| F1["反例: macro_rules! 递归默认限制 128 层<br/>→ 编译错误: recursion limit reached<br/>→ 无法表达任意递归算法"]
+    Q1 -->|否| Q2{"宏能否读取文件/环境变量?"}
+    Q2 -->|否| F2["反例: 过程宏在编译期无 I/O 能力<br/>→ 无法根据外部状态生成代码<br/>→ 与 C++ 模板元编程或 Nim 宏不同"]
+    Q2 -->|是| Q3{"宏能否访问类型表/语义信息?"}
+    Q3 -->|否| F3["反例: 过程宏仅见 TokenStream<br/>→ 无法知道变量类型或 trait 实现<br/>→ 生成代码依赖编译器二次检查"]
+    Q3 -->|是| T2["定理不成立: Rust 宏非图灵完备<br/>→ 仅为语法变换器，非通用计算引擎<br/>→ 编译期计算应使用 const fn"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T2 fill:#ff9
+```
+
+### 5.4 反命题决策树三："过程宏总是类型安全的"
+
+> **命题来源**: 因过程宏生成的是 Rust 代码，直觉上认为"生成的代码自然会通过类型检查"。
+> **形式化反驳**: 过程宏的输入是未类型化的 TokenStream，解析失败或逻辑错误会直接生成非法代码；类型安全是编译器**后续阶段**的保证，而非宏本身的保证。
+
+```mermaid
+graph TD
+    P3["命题: 过程宏总是类型安全的"] --> Q1{"TokenStream 解析是否可能失败?"}
+    Q1 -->|是| F1["反例: syn::parse 返回 Result<br/>→ 若宏作者未处理 Err，宏 panic<br/>→ 编译错误: proc macro panicked"]
+    Q1 -->|否| Q2{"生成的代码是否可能类型不匹配?"}
+    Q2 -->|是| F2["反例: derive 宏生成的 impl 可能遗漏约束<br/>→ 如 impl Clone 但字段未实现 Clone<br/>→ 展开后编译器报类型错误"]
+    Q2 -->|否| Q3{"过程宏 panic 是否导致运行时错误?"}
+    Q3 -->|否| F3["反例: 过程宏 panic 仅产生编译错误<br/>→ 但错误信息指向宏调用处<br/>→ 调试时需查看展开代码定位原因"]
+    Q3 -->|是| T3["近似成立: 过程宏生成代码最终经编译器类型检查<br/>→ 类型安全是编译器的保证，不是宏的保证<br/>→ 宏仅保证 Token 语法合法性"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T3 fill:#ff9
+```
+
+> **过渡说明**: 决策树从工程视角揭示了宏的边界与反直觉特性，而定理推理链则从形式化视角将这些边界上升为严格的数学命题。下面的矩阵将每个反命题对应到一条带 ⟹ 的推理链，形成"前提-结论-失效条件"的完整逻辑闭环。
+
 ---
+
+<!-- 层级一致性: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->
 
 ## 六、定理推理链（Theorem Chain）
 
@@ -190,14 +274,21 @@ graph TD
       SQUARE(a + b) → a + b * a + b  （错误！）
 ```
 
-### 6.3 定理一致性矩阵
+### 6.2 定理一致性矩阵（带 ⟹ 推理链）
 
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型场景 |
-|:---|:---|:---|:---|:---|:---|:---|
-| 卫生宏安全 | `macro_rules!` 遵循 | 宏变量不污染外部 | 卫生宏理论 (Hygienic) | 所有宏代码 | 过程宏可绕过卫生性 | 命名冲突 |
-| 派生宏正确性 | `#[derive(Trait)]` | 自动实现符合 Trait 语义 | —（约定俗成） | 所有派生使用 | 自定义实现与派生行为不一致 | 语义错误 |
-| 过程宏类型安全 | TokenStream 解析成功 | 生成代码类型正确 | —（编译期二次检查） | DSL、框架 | 生成错误 Token | 编译错误 |
-| 编译期计算安全 | `const fn` / `macro` | 无运行时开销 | —（求值策略） | 常量泛型、配置 | 递归过深、资源限制 | 编译失败 |
+| 编号 | 前提 ⟹ 结论 | 类型 | 依赖定理 | 失效条件 | 典型场景 |
+|:---|:---|:---|:---|:---|:---|
+| **L1** | 声明宏 hygienic ⟹ 避免标识符冲突 | 语法保证 | Kohlbecker 1986 | 过程宏手动构造标识符（`format_ident!`） | `macro_rules!` 局部变量与外部同名变量共存 |
+| **L2** | 过程宏操作 TokenStream ⟹ 编译期元编程 | 阶段隔离 | RFC 1566 | 宏 panic 导致编译中断 | `#[derive(Debug)]` 自动生成 impl |
+| **L3** | 宏重复模式 `$($x:expr),*` ⟹ 零开销抽象 | 语法生成 | TLBORM 模式语义 | 重复模式与尾随逗号不匹配 | `vec![1, 2, 3]` 展开为数组初始化 |
+| **L4** | Token 操作 vs 文本替换 ⟹ 类型安全增强 | 对比定理 | L1 + L2 | C 风格预处理器绕过 Token 层 | Rust 宏避免 C `#define` 优先级陷阱 |
+| **T1** | 宏展开在语义分析前 ⟹ 语法级变换 | 编译阶段 | Rust Reference | 宏依赖类型信息做分支（不可行） | 过程宏无法根据字段类型选择生成逻辑 |
+| **T2** | 编译期计算受限 ⟹ 非图灵完备 | 能力边界 | 递归深度限制 | 提高递归限制（`#![recursion_limit]`） | 递归宏处理嵌套结构深度受限 |
+| **T3** | derive 宏生成 impl ⟹ 自动 trait 实现 | 代码合成 | L2 + T1 | 自定义 impl 与派生 impl 冲突 | `#[derive(Clone)]` 与手动 `impl Clone` 重复 |
+| **T4** | 编译期展开 ⟹ 零运行时开销 | 性能保证 | T1 + T2 | 生成代码含大量冗余表达式 | `macro_rules!` 内联展开 vs 函数调用 |
+| **C1** | 递归宏展开 ⟹ 编译期栈深度限制 | 资源约束 | T2 | 修改 `#![recursion_limit = "1024"]` | 深度嵌套的 AST 处理宏 |
+| **C2** | 过程宏 panic ⟹ 编译错误而非运行时错误 | 安全边界 | L2 | 过程宏内部 `unwrap()` 未处理 | `syn::parse` 失败导致宏 panic |
+| **C3** | 宏内部变量隔离 ⟹ 外部作用域不受影响 | 作用域保证 | L1 | 使用 `macro_export` 跨 crate 时标签冲突 | `break 'label` 在宏内外的作用域边界 |
 
 > **[Kohlbecker et al. 1986 + Rust Reference]** 一致性说明: 卫生宏有严格理论支撑（Hygienic Macros for Scheme），但过程宏的生成正确性主要依赖编译器的二次类型检查。✅ 已验证
 >
@@ -205,7 +296,11 @@ graph TD
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 
+> **过渡说明**: 定理矩阵提供了"什么条件下什么保证成立"的静态知识，但工程能力的真正习得需要穿越"示例-反例-边界测试"的循环。下一章通过可运行的代码，将上述定理转化为肌肉记忆。
+
 ---
+
+<!-- 层级一致性: L1 工程实践 — 正确示例、反例、边界极限测试的三段式验证 -->
 
 ## 七、示例与反例（Examples & Counter-examples）
 
@@ -276,9 +371,84 @@ macro_rules! infinite {
 // 编译错误: recursion limit reached
 ```
 
----
+### 7.5 边界极限测试
 
-### 7.5 反命题与边界分析
+#### 边界测试 1：宏展开后的错误信息定位
+
+```rust,compile_fail
+// 边界: 宏内部编译错误指向调用处（故意展示编译错误）
+
+macro_rules! complex {
+    ($($x:expr),*) => {{
+        let mut temp_vec = Vec::new();
+        $(
+            temp_vec.push($x);
+        )*
+        temp_vec
+    }};
+}
+
+fn main() {
+    let v = complex![1, 2, "not a number"];
+    // 编译错误将指向 complex! 调用处，而非宏定义内部
+    // 调试策略: cargo expand 查看展开后的代码
+}
+```
+
+#### 边界测试 2：递归宏的栈深度极限
+
+```rust
+// 边界: 递归宏深度限制（默认 128）
+
+macro_rules! count {
+    () => { 0 };
+    ($head:tt $($tail:tt)*) => { 1 + count!($($tail)*) };
+}
+
+fn main() {
+    // 以下在 129 个 token 时将编译失败
+    // let n = count!(1 2 3 ... 129);
+    // 错误: recursion limit reached
+    // 解决: #![recursion_limit = "256"]
+}
+```
+
+#### 边界测试 3：过程宏的 TokenStream 解析失败
+
+```rust
+// 边界: 过程宏遇到非法输入时的 panic
+
+// 假设某 derive 宏期望 struct，但收到 fn:
+// #[derive(MyDerive)]
+// fn not_a_struct() {}
+//
+// 宏内部 syn::parse::<DeriveInput>(input) 将失败
+// 若未处理 Result，宏 panic → 编译错误
+// 正确做法: 返回 compile_error! 而非 panic
+```
+
+#### 边界测试 4：卫生宏与标签（label）的边界
+
+```rust,compile_fail
+// 边界: break/continue 标签在宏内外的作用域（故意展示编译错误）
+
+macro_rules! break_outer {
+    () => { break 'outer; };  // ❌ 错误: 找不到 'outer 标签
+}
+
+fn main() {
+    'outer: loop {
+        break_outer!();  // 宏内部看不到外部标签！
+    }
+}
+
+// 修正: 将标签作为参数传入
+macro_rules! break_label {
+    ($label:lifetime) => { break $label; };
+}
+```
+
+### 7.6 反命题与边界分析补充
 
 #### 命题: "宏生成代码总是安全的"
 
@@ -311,64 +481,269 @@ graph TD
 | 过程宏生成标识符 | ⚠️ 可控 | 程序员控制生成名称 |
 | `macro_export` 跨 crate | ✅ 卫生 | 完全隔离 |
 
-#### 边界极限测试
-
-```rust
-// 边界: 宏的复杂展开与调试困难
-
-macro_rules! complex {
-    ($($x:expr),*) => {{
-        let mut temp_vec = Vec::new();
-        $(
-            temp_vec.push($x);
-        )*
-        temp_vec
-    }};
-}
-
-fn main() {
-    let v = complex![1, 2, 3];
-    // 展开后:
-    // let mut temp_vec = Vec::new();
-    // temp_vec.push(1);
-    // temp_vec.push(2);
-    // temp_vec.push(3);
-    // temp_vec
-    // 若宏内部有编译错误，错误信息指向宏调用处，调试困难
-}
-```
+> **过渡说明**: 示例与反例完成了"知识验证"阶段，但认知科学表明，真正的理解需要一条从直觉困惑到专家直觉的**递进路径**。下一章的六步认知路径，模拟了学习者从"为什么"到"怎么做"的完整心路历程。
 
 ---
 
-## 零、认知路径（Cognitive Path）
+<!-- 层级一致性: L0 认知脚手架 → L1 实践 → L2 概念 → L3 理论 — 六步递进模拟学习者心路历程 -->
 
-```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"宏怎么写？"                 "重复代码怎么            "宏 = 语法树           "准引用/             "proc_macro          "编译错误
-                             自动生成？"             代码生成"              元类型论"            调试"               信息晦涩"
+## 八、认知路径（Cognitive Path）
 
-"派生宏怎么工作？"           "#[derive(Debug)]        "Derive Macro =        "编译器插件:         "cargo expand        "派生与手动
-                             怎么自动实现？"          TokenStream 转换"      AST → AST"          查看展开"           impl 冲突"
+> **设计原理**: 以下六步遵循"先问为什么，再问是什么，最后问怎么做"的认知科学顺序。每一步回答一个具体困惑，并自然引出下一步的更深层次问题。
 
-"宏和函数的区别？"           "什么时候用宏             "宏 = 编译期            "语法变换 vs        "编译期求值          "过度使用
-                             什么时候用函数？"        语法变换"              语义求值"           零运行时开销"       降低可读性"
+### 步骤 1："为什么重复代码不好？"
+
+> **直觉困惑**: "复制粘贴最快，为什么要学宏这么复杂的东西？"
+
+**概念解答**: DRY（Don't Repeat Yourself）不仅是代码行数问题，更是**语义一致性**问题。当同一模式在 10 处重复时，任何修改都面临"漏改一处"的风险。泛型解决类型层面的重复，宏解决语法模式层面的重复。
+
+```rust
+// 反面: 重复代码
+let v1 = {
+    let mut temp = Vec::new();
+    temp.push(1);
+    temp.push(2);
+    temp
+};
+let v2 = {
+    let mut temp = Vec::new();
+    temp.push(3);
+    temp.push(4);
+    temp
+};
+
+// 正面: 宏抽象模式
+macro_rules! make_vec {
+    ($($x:expr),*) => {{
+        let mut temp = Vec::new();
+        $(temp.push($x);)*
+        temp
+    }};
+}
+let v1 = make_vec![1, 2];
+let v2 = make_vec![3, 4];
 ```
 
-> **[TRPL: Ch19.5 + Rust Reference]** 认知类比：macro_rules! 像文本模板引擎（但操作 Token 而非纯文本），过程宏像编译器插件。✅ 已验证
+**过渡**: 重复代码的抽象手段不止宏一种——泛型也是强大的 DRY 工具。那么，什么时候泛型够用了，什么时候必须上宏？
+
+---
+
+### 步骤 2："泛型能替代宏吗？"
+
+> **直觉困惑**: "泛型也能抽象代码，为什么还需要宏？"
+
+**概念解答**: 泛型抽象的是**类型**，宏抽象的是**语法模式**。泛型要求参数数量固定、语法结构固定；宏允许可变参数数量、自定义语法结构。
+
+| 场景 | 泛型 | 宏 |
+|:---|:---|:---|
+| 不同类型，相同逻辑 | ✅ `fn foo<T>(x: T)` | ❌ 不必要 |
+| 可变参数数量 | ❌ 不支持 | ✅ `vec![1, 2, 3]` |
+| 自定义语法（DSL） | ❌ 不支持 | ✅ `sql!(SELECT * FROM users)` |
+| 编译期代码生成 | ❌ 不支持 | ✅ `#[derive(Debug)]` |
+
+```rust
+// 泛型无法做到: 可变参数
+fn print_all<T>(items: &[T]) { /* 只能接收切片 */ }
+
+// 宏可以做到: 任意数量参数
+macro_rules! print_all {
+    ($($x:expr),*) => { $(println!("{}", $x);)* };
+}
+print_all!(1, "hello", 3.14);  // 三个不同类型参数
+```
+
+**过渡**: 既然宏在语法抽象上不可替代，那它在编译流程中到底发生在哪一步？理解这一点才能避免"宏为什么看不到类型"的困惑。
+
+---
+
+### 步骤 3："宏在哪一步展开？"
+
+> **直觉困惑**: "宏展开后是不是跟普通代码一样走完整编译流程？"
+
+**概念解答**: Rust 编译阶段依次为：**词法分析 → 语法分析 → 宏展开 → 语义分析（类型检查）→ 代码生成**。宏展开在**语义分析之前**，这是理解宏一切行为的关键约束。
+
+```text
+编译阶段流水线:
+  源代码
+    ↓ 词法分析
+  Token 流
+    ↓ 语法分析
+  AST（抽象语法树）
+    ↓ 【宏展开发生在这里】
+  展开后的 AST
+    ↓ 语义分析（类型检查、借用检查）
+  中间表示 (MIR)
+    ↓ 代码生成
+  机器码
+```
+
+**关键推论**: 因为宏在类型检查之前，所以：
+
+1. 宏看不到类型信息（过程宏只能解析 Token 语法）
+2. 宏生成的代码如果有类型错误，错误信息指向宏调用处
+3. 宏无法改变语义分析阶段的决策
+
+```rust
+macro_rules! identity {
+    ($x:expr) => { $x };
+}
+
+fn main() {
+    identity!("string" + 1);  // 编译错误指向 main() 中的 identity! 调用处
+    // 宏不知道 "string" 是 &str，也不知道 + 1 是非法的
+}
+```
+
+**过渡**: 知道了宏在编译期的位置，下一个问题自然是：Rust 的宏有哪些种类，它们各自适用于什么场景？
+
+---
+
+### 步骤 4："声明宏和过程宏的区别？"
+
+> **直觉困惑**: `macro_rules!` 和 `#[derive(...)]` 看起来完全不同，它们有什么关系？
+
+**概念解答**: Rust 宏分两大类：**声明宏**（`macro_rules!`）和**过程宏**（Procedural Macros）。前者是"模式匹配+模板替换"，后者是"用 Rust 代码写 Rust 代码生成器"。
+
+| 特性 | `macro_rules!` | 过程宏 |
+|:---|:---|:---|
+| 编程模型 | 声明式（规则匹配） | 命令式（Rust 函数） |
+| 实现位置 | 同 crate 或导出 | 独立 proc-macro crate |
+| 输入处理 | 片段分类器匹配 | 完整 TokenStream 解析 |
+| 复杂度上限 | 中（重复、递归） | 高（任意逻辑） |
+| 调试难度 | 中（cargo expand） | 高（需日志/测试） |
+| 典型代表 | `vec!`、`println!` | `#[derive(Debug)]`、`serde::Serialize` |
+
+```rust
+// 声明宏: 模式匹配
+macro_rules! say_hello {
+    () => { println!("Hello!"); };
+    ($name:expr) => { println!("Hello, {}!", $name); };
+}
+
+// 过程宏: 用函数处理 TokenStream
+// #[proc_macro]
+// pub fn sql(input: TokenStream) -> TokenStream { ... }
+```
+
+**过渡**: 声明宏有一个关键特性经常被忽视—— hygienic。这个词是什么意思？为什么它让 Rust 宏比 C 宏安全得多？
+
+---
+
+### 步骤 5："hygienic 是什么意思？"
+
+> **直觉困惑**: " hygienic 翻译成'卫生的'，这和宏有什么关系？"
+
+**概念解答**: Hygienic macro（卫生宏）= 宏内部定义的标识符不会与外部标识符意外冲突。这是 Rust 宏相较于 C 预处理器 `#define` 的根本安全优势。
+
+```rust
+// C 预处理器: 不卫生，名称冲突！
+// #define SWAP(a, b) { int temp = a; a = b; b = temp; }
+// int temp = 5; SWAP(temp, x); // temp 被覆盖！灾难！
+
+// Rust macro_rules!: 卫生，无冲突
+macro_rules! swap {
+    ($a:ident, $b:ident) => {
+        let temp = $a;
+        $a = $b;
+        $b = temp;
+    };
+}
+
+fn main() {
+    let temp = 5;
+    let mut x = 10;
+    swap!(temp, x);  // ✅ 宏内部的 temp 和外部的 temp 是不同的标识符！
+    println!("temp={}, x={}", temp, x);  // temp=5, x=10
+}
+```
+
+**形式化理解**: 卫生性 = α-重命名保持。编译器在宏展开时为每个标识符附加"上下文指纹"，使得同名标识符在不同上下文中实质不同。
+
+```text
+alpha-等价保持:
+  macro_rules! m { () => { let x = 1; } }
+  fn main() {
+      let x = 2;
+      m!();  // 展开后: let x#macro_ctx_1 = 1;
+      // x#macro_ctx_1 与 main 中的 x 是完全不同的标识符
+  }
+```
+
+**过渡**: 卫生性解决了宏的安全问题，但宏的调试一直是痛点。编译错误指向宏调用处而非宏内部，如何有效调试？
+
+---
+
+### 步骤 6："宏的调试技巧？"
+
+> **直觉困惑**: "宏出错了，编译器只告诉我宏调用处有问题，怎么看到展开后的代码？"
+
+**概念解答**: 宏调试的核心工具链是 **cargo-expand** + **编译器错误信息** + **分而治之的测试策略**。
+
+**技巧 1：cargo expand 查看展开代码**
+
+```bash
+# 安装 cargo-expand
+cargo install cargo-expand
+
+# 查看某个函数的宏展开结果
+cargo expand --lib path::to::module::function_name
+```
+
+**技巧 2：使用 `trace_macros!` 调试匹配过程**（nightly）
+
+```rust
+#![feature(trace_macros)]
+
+macro_rules! test {
+    ($x:expr) => { $x + 1 };
+}
+
+fn main() {
+    trace_macros!(true);
+    let _ = test!(5);  // 编译器将打印宏展开过程
+    trace_macros!(false);
+}
+```
+
+**技巧 3：分阶段验证过程宏**
+
+```rust
+// 过程宏调试: 将输入和输出打印到 stderr
+#[proc_macro_derive(MyDerive)]
+pub fn my_derive(input: TokenStream) -> TokenStream {
+    eprintln!("INPUT: {}", input);
+    let output = generate_code(input);
+    eprintln!("OUTPUT: {}", output);
+    output
+}
+```
+
+**技巧 4：使用 `compile_error!` 在宏内部产生有意义的错误**
+
+```rust
+macro_rules! assert_impl {
+    ($t:ty: $trait:path) => {
+        const _: () = {
+            fn assert_impl<T: $trait>() {}
+            let _ = assert_impl::<$t>;
+        };
+    };
+    // 错误用法提示
+    ($($other:tt)*) => {
+        compile_error!("用法: assert_impl!(Type: Trait)");
+    };
+}
+```
+
+**认知总结**: 从"为什么不要重复代码"到"如何调试宏"，六步递进覆盖了从动机→替代方案→编译阶段→类型区别→安全保证→工程技巧的完整认知闭环。掌握这条路径，意味着不仅能使用宏，更能**判断何时不该用宏**。
+
+> **[TRPL: Ch19.5 + Rust Reference]** 认知类比：macro_rules! 像"文本模板引擎"（但操作 Token 而非纯文本），过程宏像"编译器插件"。✅ 已验证
 >
 > **[Rust Reference: Macros]** 反直觉点：宏展开在类型检查之前，宏无法"知道"类型信息；过程宏只能解析 Token 语法，无法访问类型表。✅ 已验证
 >
 > **[Quasiquotation 理论]** 形式化过渡路径：代码生成 → 语法树变换 → 准引用 (Quasiquotation) → 元类型论。💡 原创分析
 
-**认知脚手架**:
-
-- **类比**: `macro_rules!` 像"文本模板引擎"（但操作 Token 而非纯文本），过程宏像"编译器插件"。
-- **反直觉点**: 宏展开在**类型检查之前**，所以宏无法"知道"类型信息（过程宏只能解析 Token 语法）。
-- **形式化过渡**: 从"代码生成" → "语法树变换" → "准引用 (Quasiquotation)" → "元类型论"。 💡 原创分析
-
-### 6.4 国际课程与论文对齐
+### 8.1 国际课程与论文对齐
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
@@ -378,9 +753,13 @@ fn main() {
 | **[RFC 2564: Procedural Macros]** | 过程宏设计 | 派生宏 §3 |
 | **[Hygienic Macros (Kohlbecker 1986)]** | 卫生宏理论基础 | 形式化根基 §3 |
 
+> **过渡说明**: 认知路径和国际课程对齐完成了"如何学"的导航，而知识的可信赖性需要明确的来源标注。下一章的 provenance 表格将每个关键论断锚定到权威来源。
+
 ---
 
-## 八、知识来源关系（Provenance）
+<!-- 层级一致性: L3 知识溯源 — 每个论断的可信度评级与来源锚定 -->
+
+## 九、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -392,16 +771,19 @@ fn main() {
 | 编译期代码生成零运行时开销 | [Rust Reference: Macros] | ✅ |
 | 卫生宏原始论文 | [Kohlbecker et al. 1986 — Macro-by-Example: Deriving Syntactic Transformations from their Specifications, POPL] | ✅ |
 | 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
+| 宏非图灵完备 | [Rust Reference: recursion limit] · [TLBORM] | ✅ |
+| 过程宏 panic 仅产生编译错误 | [RFC 1566] · [proc_macro 文档] | ✅ |
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 十、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充属性宏修改函数体的完整示例 —— 优先级: 中 —— 预计: Phase 3
+- [ ] **TODO**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 优先级: 低 —— 预计: Phase 4
 
 ---
 
@@ -413,3 +795,4 @@ fn main() {
 | 类型系统 | [](../01_foundation/04_type_system.md) | 宏与类型交互 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |
+| 编译期计算 | [](../03_advanced/03_const_generics.md) | const fn 替代宏的趋势 |

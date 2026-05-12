@@ -26,6 +26,15 @@
 > **[Wikipedia — Typestate analysis]** Typestate analysis is a technique to do static reasoning about the states of objects. It can be seen as an extension of type systems where the type of an object changes as operations are performed on it.
 > **来源**: <https://en.wikipedia.org/wiki/Typestate_analysis>
 
+> **认知路径（6步递进）**
+>
+> 1. **为什么需要设计模式？** → 复用经过验证的方案，降低认知负荷与沟通成本
+> 2. **GoF模式在Rust中怎么用？** → 以Trait替代继承，以enum+match替代多态类层次
+> 3. **Rust特有的模式？** → RAII、Typestate、Newtype——所有权与类型系统的直接产物
+> 4. **类型系统怎么替代模式？** → 编译期保证消除运行时校验需求（Typestate替代状态机检查）
+> 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益
+> 6. **模式选择的决策框架？** → 约束驱动：先问"类型系统能否证明"，再问"是否需要运行时多态"
+
 ---
 
 ## 二、模式分类矩阵
@@ -52,6 +61,20 @@
 | **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块热插拔 |
 
 > **来源**: [Rust Design Patterns] · [GoF Design Patterns] · 可信度: ✅
+
+### 2.3 断言/推理矩阵
+
+| **模式** | **核心问题** | **解决方案** | **Rust特性** | **反模式/失效条件** |
+|:---|:---|:---|:---|:---|
+| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权+作用域 | 边界：`mem::forget`、引用循环泄漏 |
+| **Typestate** | 非法状态可达 | 不可表示非法状态 ⟹ 编译期拒绝 | 泛型+`PhantomData` | 边界：状态空间爆炸（>10状态） |
+| **Builder** | 复杂对象构造易错 | 分步初始化 ⟹ 消费型链式API | 所有权转移+方法链 | 边界：字段<3时过度工程 |
+| **Newtype** | 类型语义混淆 | 零成本区分 ⟹ 编译期标签 | `struct Wrapper(T)` | 边界：需重复实现大量标准Trait |
+| **Strategy** | 算法硬编码难扩展 | 行为参数化 ⟹ 静态/动态分发 | `dyn Trait`/泛型单态化 | 边界：仅一种实现时的无用抽象 |
+| **Visitor** | 异构结构操作扩展 | 遍历与操作分离 ⟹ 双重分发 | Trait+enum `accept` | 边界：频繁新增变体破坏开放封闭 |
+| **State Machine** | 状态转换遗漏 | 穷尽性匹配 ⟹ 非法转换编译错误 | `enum`+`match` | 边界：状态>20时enum难以维护 |
+
+> **过渡**：以上模式展示了Rust如何利用类型系统实现零成本抽象。然而，模式的滥用同样会产生"抽象债务"。以下反命题与反模式分析，旨在建立模式选择的批判性框架。
 
 ---
 
@@ -368,6 +391,8 @@ unsafe {
 
 > **来源**: [Rust API Guidelines] · [libloading docs] · 可信度: ✅
 
+> **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
+
 ---
 
 ## 五、反模式（Anti-patterns）
@@ -440,9 +465,58 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 > **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines/predictability.html) · 可信度: ✅
 
+> **过渡**：反模式聚焦具体编码实践中的陷阱。以下反命题决策树则上升一层，批判性审视关于设计模式的元认知谬误。
+
+## 六、反命题决策树 {L6}
+
+### 命题一："设计模式是语言缺陷的补丁"
+
+```mermaid
+graph TD
+    P1["设计模式是语言缺陷的补丁"] --> Q1{成立？}
+    Q1 -->|反例1| C1_0["GoF模式弥补OOP继承限制"]
+    Q1 -->|反例2| C1_1["所有权+Trait已消除若干模式需求"]
+    Q1 -->|反例3| C1_2["完全拒绝模式导致重复发明"]
+    Q1 -->|修正| T1["Rust减少但非消除模式需求"]
+    style C1_0 fill:#f66
+    style C1_1 fill:#f66
+    style C1_2 fill:#f66
+    style T1 fill:#6f6
+```
+
+### 命题二："所有GoF模式都适用于Rust"
+
+```mermaid
+graph TD
+    P2["所有GoF模式都适用于Rust"] --> Q2{成立？}
+    Q2 -->|反例1| C2_0["继承强相关模式需范式转换"]
+    Q2 -->|反例2| C2_1["Template Method → Trait默认方法"]
+    Q2 -->|反例3| C2_2["强行套用导致dyn Trait滥用"]
+    Q2 -->|修正| T2["约70%直接映射，30%需特化改写"]
+    style C2_0 fill:#f66
+    style C2_1 fill:#f66
+    style C2_2 fill:#f66
+    style T2 fill:#6f6
+```
+
+### 命题三："模式选择纯凭经验"
+
+```mermaid
+graph TD
+    P3["模式选择纯凭经验"] --> Q3{成立？}
+    Q3 -->|反例1| C3_0["Rust提供类型→性能→经验层级路径"]
+    Q3 -->|反例2| C3_1["约束可编码优先Typestate/Phantom"]
+    Q3 -->|反例3| C3_2["仅凭经验选dyn Trait丧失内联优化"]
+    Q3 -->|修正| T3["类型驱动→性能驱动→经验驱动"]
+    style C3_0 fill:#f66
+    style C3_1 fill:#f66
+    style C3_2 fill:#f66
+    style T3 fill:#6f6
+```
+
 ---
 
-## 六、与 L1-L3 的概念映射
+## 七、与 L1-L3 的概念映射 {L6}
 
 | 设计模式 | 依赖的 Rust 概念 | 概念来源文件 | 形式化意义 |
 |:---|:---|:---|:---|
@@ -459,7 +533,7 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 ---
 
-## 七、学术来源
+## 八、学术来源 {L6}
 
 | **论文/著作** | **作者** | **核心贡献** | **与 Rust 的关联** |
 |:---|:---|:---|:---|
@@ -472,7 +546,7 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 ---
 
-## 八、知识来源关系（Provenance）
+## 九、知识来源关系（Provenance） {L6}
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -492,7 +566,7 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 ---
 
-## 九、相关概念链接
+## 十、相关概念链接 {L6}
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -507,7 +581,7 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+## 十一、待补充与演进方向（TODOs） {L6}
 
 - [ ] **高**: 补充更多 Rust 特有模式（如 GATs 模式、Type Erasure）
 - [ ] **高**: 补充 async/await 设计模式

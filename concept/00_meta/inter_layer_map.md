@@ -350,11 +350,55 @@ L4 形式化保证的边界:
 
 ---
 
-## 九、TODO
+## 九、Wave 6 层间映射更新
 
+Wave 6 全量深度重构后，以下层间关系得到**显式标注**：
+
+### 9.1 L1 ↔ L4 双向映射精度
+
+| L4 形式化理论 | L1 语言概念 | 映射精度 | Wave 6 新增标注 |
+|:---|:---|:---|:---|
+| 线性逻辑 ⊗ / ⊸ | 所有权 / Move | 精确双射 | `01_linear_logic.md` §6 显式标注 |
+| 仿射逻辑 weakening | Copy / 变量失效 | 精确 | `03_ownership_formal.md` §6 显式标注 |
+| 分数权限 (Fractional) | &T / &mut T | 近似同态 | `03_ownership_formal.md` §6 显式标注 |
+| 区域类型 (Region) | 生命周期 ('a) | 精确嵌入 | `03_ownership_formal.md` §6 显式标注 |
+| 会话类型 (Session) | channel / mpsc | 部分映射 | `01_linear_logic.md` §6 新增 |
+| Iris 分离逻辑 | unsafe 安全契约 | 证明框架 | `04_rustbelt.md` §6 显式标注 |
+
+### 9.2 新增跨层推理链
+
+```text
+[Wave 6 新增链: 反命题分析]
+L1 定理: 所有权保证无内存泄漏
+    ↓ [反例: Rc 循环引用]
+L2 机制: RefCell 运行时借用检查
+    ↓ [反例: mem::forget]
+L3 边界: unsafe 块可绕过 Drop
+    ↓ [形式化边界: RustBelt 不覆盖此路径]
+L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
+```
+
+### 9.3 L5-L7 层次一致性标注
+
+| 文件 | 标注数量 | 标注格式 |
+|:---|:---|:---|
+| `05_comparative/01_rust_vs_cpp.md` | 6+ | 断言矩阵 + 认知路径 + 反命题 |
+| `05_comparative/02_rust_vs_go.md` | 4+ | 断言矩阵 + 反命题决策树 |
+| `05_comparative/03_paradigm_matrix.md` | 3+ | 范式断言矩阵 |
+| `06_ecosystem/01_toolchain.md` | 3+ | `<!-- L6::... -->` |
+| `06_ecosystem/02_patterns.md` | 5+ | `{L6}` 章节标注 |
+| `07_future/01_ai_integration.md` | 2+ | 认知路径 + 断言矩阵 |
+| `07_future/02_formal_methods.md` | 2+ | 认知路径 + 断言矩阵 |
+| `07_future/03_evolution.md` | 2+ | 认知路径 + 断言矩阵 |
+
+---
+
+## 十、TODO
+
+- [x] **高**: Wave 6 全量深度重构 + 层间映射标注
+- [x] **高**: 为每个 L1-L3 文件添加"定理一致性矩阵"链接回本文件
+- [x] **中**: 绘制 L1 ↔ L4 的双向映射图（哪些 L4 理论未映射到 L1 实践）
 - [ ] **高**: 补充 Pin 的形式化语义来源（location stability 的精确对应论文）
-- [ ] **高**: 为每个 L1-L3 文件添加"定理一致性矩阵"链接回本文件
-- [ ] **中**: 绘制 L1 ↔ L4 的双向映射图（哪些 L4 理论未映射到 L1 实践）
 - [ ] **中**: 补充 HRTB 与全称量词（∀）的形式化对应关系
 - [ ] **低**: 追踪 Rust 语言演进对 L4 形式化模型的影响（如 Tree Borrows vs Stacked Borrows）
 - [ ] **低**: 建立机器可解析的层间关系格式（YAML/JSON 导出）

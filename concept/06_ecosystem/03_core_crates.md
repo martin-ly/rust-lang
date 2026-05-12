@@ -40,6 +40,34 @@
 
 ---
 
+## 认知路径（Cognitive Path）
+
+> **学习递进**: 从直觉出发，逐层深入核心概念。
+
+### 第 1 步：为什么需要了解核心crate？
+
+Rust的强大来自于生态，核心crate是基石
+
+### 第 2 步：标准库和第三方crate的关系？
+
+std提供基础，serde/tokio等扩展能力
+
+### 第 3 步：怎么选择生产级crate？
+
+下载量/维护状态/文档/测试覆盖/安全审计
+
+### 第 4 步：核心crate的设计模式？
+
+零成本抽象/组合优于继承/类型驱动API
+
+### 第 5 步：async生态的核心组件？
+
+tokio/async-std/futures/smol的比较和选择
+
+### 第 6 步：crate生态的边界和风险？
+
+supply chain/版本兼容性/维护者疲劳
+
 ## 二、概念属性矩阵
 
 ### 2.1 核心 Crate 功能域总矩阵
@@ -397,3 +425,117 @@ graph TD
 - [ ] **低**: 补充游戏开发 crate 生态（bevy / wgpu / rapier）
 - [ ] **低**: 补充 ML 推理 crate 生态（candle / burn / tract）
 - [ ] **低**: 建立 crates.io 下载量/趋势的自动化追踪
+
+## 断言一致性矩阵（Assertion Consistency Matrix）
+
+> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。
+
+| 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
+
+|:---|:---|:---|:---|:---|
+
+| **serde 是序列化标准** | derive宏简化实现 ⟹ | 跨格式统一API | 编译时间增加 | 几乎所有项目必需 |
+
+| **tokio 是 async 运行时主流** | 生态最丰富 ⟹ | 生产验证 | 学习曲线 | IO密集型应用 |
+
+| **clap 简化 CLI 解析** | derive宏 ⟹ | 自动生成help | 编译时间 | 命令行工具 |
+
+| **rayon 简化数据并行** | parallel迭代器 ⟹ | 自动负载均衡 | 非所有场景适用 | CPU密集型任务 |
+
+| **thiserror/anyhow 简化错误** | 类型安全/人体工学 ⟹ | 减少样板代码 | 隐式转换注意 | 错误处理策略 |
+
+| **cargo audit 检测漏洞** | Advisory DB ⟹ | 供应链安全 | 零日漏洞延迟 | CI必需步骤 |
+
+## 反命题分析（Anti-Propositions）
+
+> **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。
+
+### 1. "标准库足够完成所有任务"
+
+```mermaid
+
+graph TD
+
+    P1["标准库足够完成所有任务"] --> Q{成立？}
+
+    Q -->|反例1| C1_0["async需要tokio/async-std"]
+
+    style C1_0 fill:#f66
+
+    Q -->|反例2| C1_1["序列化需要serde"]
+
+    style C1_1 fill:#f66
+
+    Q -->|反例3| C1_2["CLI需要clap"]
+
+    style C1_2 fill:#f66
+
+    Q -->|反例4| C1_3["HTTP需要hyper/reqwest"]
+
+    style C1_3 fill:#f66
+
+    Q -->|修正| T1["命题在限定条件下成立"]
+
+    style T1 fill:#6f6
+
+```
+
+### 2. "下载量最高的crate总是最安全"
+
+```mermaid
+
+graph TD
+
+    P2["下载量最高的crate总是最安全"] --> Q{成立？}
+
+    Q -->|反例1| C2_0["供应链攻击"]
+
+    style C2_0 fill:#f66
+
+    Q -->|反例2| C2_1["维护者变更"]
+
+    style C2_1 fill:#f66
+
+    Q -->|反例3| C2_2["transitive依赖风险"]
+
+    style C2_2 fill:#f66
+
+    Q -->|反例4| C2_3["需要cargo audit"]
+
+    style C2_3 fill:#f66
+
+    Q -->|修正| T2["命题在限定条件下成立"]
+
+    style T2 fill:#6f6
+
+```
+
+### 3. "所有场景都应该用最新版本"
+
+```mermaid
+
+graph TD
+
+    P3["所有场景都应该用最新版本"] --> Q{成立？}
+
+    Q -->|反例1| C3_0["SemVer破坏性变更"]
+
+    style C3_0 fill:#f66
+
+    Q -->|反例2| C3_1["生态系统协调"]
+
+    style C3_1 fill:#f66
+
+    Q -->|反例3| C3_2["LTS需求"]
+
+    style C3_2 fill:#f66
+
+    Q -->|反例4| C3_3["锁定文件重要性"]
+
+    style C3_3 fill:#f66
+
+    Q -->|修正| T3["命题在限定条件下成立"]
+
+    style T3 fill:#6f6
+
+```

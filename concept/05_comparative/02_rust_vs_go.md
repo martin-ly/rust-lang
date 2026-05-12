@@ -54,14 +54,42 @@
 ### 1.5 学术论文引用
 
 > **Hoare, C.A.R. (1978).** *Communicating Sequential Processes.* Communications of the ACM, 21(8), 666-677. [来源: ACM Digital Library / CACM]
-> 
+>
 > 这篇奠基性论文首次提出了 CSP 形式化模型，定义了进程间通过通道（channel）进行同步通信的代数语义，为 Go 的 goroutine + channel 并发模型提供了理论源头。
 
-> **The Go Memory Model (官方文档).** https://go.dev/ref/mem [来源: go.dev / Russ Cox et al.]
-> 
+> **The Go Memory Model (官方文档).** <https://go.dev/ref/mem> [来源: go.dev / Russ Cox et al.]
+>
 > Go 内存模型定义了 goroutine 之间内存可见性的 happens-before 关系，明确无数据竞争（data-race-free）程序具有顺序一致性（DRF-SC）。该模型的形式化基础参考了 Boehm & Adve (PLDI 2008) 的 C++ 并发内存模型工作。
 
 ---
+
+## 认知路径（Cognitive Path）
+
+> **学习递进**: 从直觉出发，逐层深入核心概念。
+
+### 第 1 步：为什么比较 Rust 和 Go？
+
+两者都是现代系统语言，但设计哲学截然不同
+
+### 第 2 步：GC vs 所有权：根本差异是什么？
+
+Go用垃圾回收简化内存管理，Rust用所有权实现零成本安全
+
+### 第 3 步：并发模型：CSP vs 所有权线程？
+
+Go的channel和goroutine vs Rust的 ownership + Send/Sync
+
+### 第 4 步：编译速度和运行时性能怎么权衡？
+
+Go编译快但运行时GC暂停，Rust编译慢但运行时可预测
+
+### 第 5 步：生态系统成熟度和适用场景？
+
+Go在云原生/微服务领先，Rust在系统/嵌入式/性能敏感场景领先
+
+### 第 6 步：什么时候选Go，什么时候选Rust？
+
+团队经验/性能需求/安全需求/生态依赖的综合决策
 
 ## 二、概念属性矩阵
 
@@ -351,6 +379,7 @@ func main() {
 ### 7.4 混合架构建议
 
 > 在现代云原生系统中，Rust 与 Go 的混合架构越来越常见：
+>
 > - **Go 负责编排层**：API Gateway、K8s Operator、控制平面——利用 Go 的快速编译、大生态和低延迟 GC。
 > - **Rust 负责数据平面**：高性能代理（如 Linkerd2-proxy）、存储引擎、实时计算模块——利用 Rust 的零成本抽象和无 GC 特性。
 > - **FFI 边界**：通过 C ABI 或 gRPC 进行跨语言通信，避免 cgo 的高开销。 [来源: Linkerd 架构文档 / 工业实践]
