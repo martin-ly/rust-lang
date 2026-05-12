@@ -27,14 +27,30 @@ REPORT_PATH = Path("reports/kb_quality_dashboard.md")
 JSON_PATH = Path("concept_kb.json")
 
 
+# 非核心文件排除列表
+EXCLUDE_FILES = {
+    "00.md", "01.md", "02.md", "03.md", "04.md", "05.md", "06.md", "07.md",
+    "README.md", "PLAN.md", "PLAN_Semantic_Space_Wave.md",
+    "LSIP_Unified_Model_Panorama.md", "PostgreSQL_LSIP_Unified_Model.md",
+}
+EXCLUDE_PREFIXES = ("sandbox",)
+
 def find_md_files() -> list[Path]:
-    """查找所有 markdown 文件，按层级排序"""
+    """查找核心 markdown 文件，排除非知识体系文件"""
     files = []
     for root, _, names in os.walk(CONCEPT_DIR):
         for name in names:
-            if name.endswith(".md"):
-                files.append(Path(root) / name)
-    # 按路径排序确保稳定输出
+            if not name.endswith(".md"):
+                continue
+            if name in EXCLUDE_FILES:
+                continue
+            if any(name.startswith(p) for p in EXCLUDE_PREFIXES):
+                continue
+            # 只包含 00_meta/ 和 0X_*/ 目录下的文件
+            rel = Path(root).relative_to(CONCEPT_DIR)
+            if not (str(rel).startswith("00_meta") or str(rel).startswith("0") and len(str(rel)) >= 2 and str(rel)[1].isdigit()):
+                continue
+            files.append(Path(root) / name)
     files.sort()
     return files
 
@@ -44,6 +60,9 @@ def detect_layer(filepath: Path) -> str:
     parts = filepath.parts
     for p in parts:
         if p.startswith("0") and len(p) >= 2 and p[1].isdigit():
+            # 排除 00.md 等顶层文件
+            if p in ("00", "01", "02", "03", "04", "05", "06", "07"):
+                continue
             return f"L{p[1]}"
     return "L?"
 
@@ -63,13 +82,19 @@ def extract_positioning(content: str) -> str:
 def extract_theorem_chains(content: str) -> list[dict]:
     """提取 ⟹ 推理链标注"""
     chains = []
-    # 匹配表格行中的 ⟹
     for line in content.split("\n"):
-        if "⟹" in line and line.strip().startswith("|"):
-            chains.append({"text": line.strip(), "type": "table_row"})
-        # 匹配独立段落中的 ⟹
-        elif "⟹" in line and (line.strip().startswith("> **") or "定理" in line or "引理" in line):
-            chains.append({"text": line.strip(), "type": "paragraph"})
+        stripped = line.strip()
+        if "⟹" not in stripped:
+            continue
+        # 表格行
+        if stripped.startswith("|"):
+            chains.append({"text": stripped, "type": "table_row"})
+        # 引用段落、定义段落、定理/引理/推论段落
+        elif any(stripped.startswith(p) for p in ("> **", "##", "###", "**", "- ", "  ")):
+            chains.append({"text": stripped, "type": "paragraph"})
+        # 独立行中包含定理相关关键词
+        elif any(kw in stripped for kw in ("定理", "引理", "推论", "公理", "前提", "结论")):
+            chains.append({"text": stripped, "type": "paragraph"})
     return chains
 
 
@@ -122,16 +147,32 @@ def extract_cross_references(content: str) -> list[str]:
 
 
 def extract_transitions(content: str) -> list[str]:
-    """提取过渡段落"""
+    """提取过渡段落（支持多种格式）"""
     transitions = []
-    for match in re.finditer(r"> \*\*过渡\*\*[:：]\s*(.+?)(?:\n|$)", content):
-        transitions.append(match.group(1).strip())
+    patterns = [
+        r">\s*\*\*过渡\*\*[:：]?\s*(.+?)(?:\n|$)",
+        r">\s*过渡[:：]?\s*(.+?)(?:\n|$)",
+        r">\s*\*\*过渡.*\*\*[:：]?\s*(.+?)(?:\n|$)",
+    ]
+    for pat in patterns:
+        for match in re.finditer(pat, content, re.MULTILINE):
+            transitions.append(match.group(1).strip())
     return transitions
 
 
 def extract_cognitive_path(content: str) -> bool:
-    """检查是否有认知路径章节"""
-    return bool(re.search(r"^## [〇零]、认知路径", content, re.MULTILINE))
+    """检查是否有认知路径章节（支持多种标题格式）"""
+    patterns = [
+        r"^##\s*[〇零一二三四五六七八九十]+[、A-Za-z\-\s]*认知路径",
+        r"^##\s*\d+\s*[\.、]?\s*认知路径",
+        r"^##\s*认知路径",
+        r">\s*\*\*认知路径\*\*",
+        r"^#+\s*Cognitive Path",
+    ]
+    for pat in patterns:
+        if re.search(pat, content, re.MULTILINE | re.IGNORECASE):
+            return True
+    return False
 
 
 def extract_mermaid_blocks(content: str) -> list[str]:

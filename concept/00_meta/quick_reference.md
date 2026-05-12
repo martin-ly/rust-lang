@@ -1,0 +1,627 @@
+# Rust 概念速查卡片（Quick Reference）
+
+> **定位**：面试前/编码时的快速查阅手册。每个核心概念"一页纸"——定义 + 代码 + 错误码 + 关联概念。
+> **使用方式**：按 Ctrl+F 搜索概念名，或按字母序浏览。
+
+---
+
+## 一、核心概念速查（按字母序）
+
+### A
+
+#### `async` / `await`
+
+**定义**: 协作式多任务的语法糖，`async fn` 编译为 `enum Future` 状态机
+**代码**:
+
+```rust
+async fn foo() -> i32 { 42 }
+// 等价于: fn foo() -> impl Future<Output = i32>
+```
+
+**常见错误**: 在 `async` 块中使用阻塞 IO → 阻塞整个执行器线程
+**关联**: Future · Pin · Waker · Tokio
+**深入**: [`02_async.md`](../03_advanced/02_async.md)
+
+#### `Arc<T>`
+
+**定义**: 原子引用计数智能指针，线程安全的共享所有权
+**代码**: `let a = Arc::new(Mutex::new(0)); let b = Arc::clone(&a);`
+**常见错误**: `Arc<RefCell<T>>` — RefCell 不是 Sync，不能跨线程共享
+**关联**: Rc · Mutex · Send/Sync
+**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+
+### B
+
+#### `Box<T>`
+
+**定义**: 堆分配的唯一所有权指针
+**代码**: `let b = Box::new(5);`
+**常见错误**: `Box<dyn Trait>` 是胖指针，大小不固定
+**关联**: Own · Drop · 递归类型
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+
+#### Borrowing（借用）
+
+**定义**: 所有权的临时授权，不改变资源最终归属
+**规则**: 任意时刻，要么一个 `&mut T`，要么任意多个 `&T`
+**代码**:
+
+```rust
+let r = &x; let r2 = &x;     // ✅ 共享借用
+let r = &x; let r2 = &mut x; // ❌ E0502
+```
+
+**关联**: 生命周期 · 分离逻辑 · 分数权限
+**深入**: [`02_borrowing.md`](../01_foundation/02_borrowing.md)
+
+#### Builder Pattern
+
+**定义**: 用方法链逐步构造复杂对象，编译期保证必填字段
+**代码**:
+
+```rust
+HttpRequestBuilder::new()
+    .method("GET")
+    .url("/")
+    .build()  // 编译错误如果缺少必填字段
+```
+
+**关联**: 消费型方法链 · 类型状态
+**深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
+
+### C
+
+#### `const` / `const fn`
+
+**定义**: 编译期常量 / 编译期可执行的函数
+**代码**: `const N: usize = 10; const fn square(n: i32) -> i32 { n * n }`
+**常见错误**: `const` 变量在多处使用会被内联复制，而非共享引用
+**关联**: Const Generics · 编译期计算
+**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+
+#### `Copy` Trait
+
+**定义**: 标记类型可以按位复制，赋值后原变量仍可用
+**代码**:
+
+```rust
+#[derive(Copy, Clone)]
+struct Point { x: i32, y: i32 }
+let p1 = Point { x: 1, y: 2 };
+let p2 = p1;  // p1 仍可用（Copy）
+```
+
+**常见错误**: 为含 `String`/`Vec` 的类型实现 Copy → 编译错误 E0204
+**关联**: Move · Clone · 仿射逻辑 weakening
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+
+#### `crossbeam` / Channel
+
+**定义**: 跨线程通信通道（MPSC），所有权通过通道转移
+**代码**: `let (tx, rx) = crossbeam::channel(); tx.send(data); let received = rx.recv();`
+**关联**: Send · Sync · CSP
+**深入**: [`01_concurrency.md`](../03_advanced/01_concurrency.md)
+
+### D
+
+#### `Drop` Trait
+
+**定义**: 资源释放的钩子，值离开作用域时自动调用
+**代码**:
+
+```rust
+impl Drop for MyType {
+    fn drop(&mut self) { println!("Dropping!"); }
+}
+```
+
+**常见错误**: `mem::forget` 或循环引用（Rc）会阻止 Drop 执行
+**关联**: RAII · 所有权 · 资源管理
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+
+#### `dyn Trait`
+
+**定义**: Trait 对象，动态分发，运行时通过 vtable 调用方法
+**代码**: `let items: Vec<Box<dyn Drawable>> = vec![Box::new(Circle), Box::new(Rect)];`
+**常见错误**: `dyn Trait` 要求 Trait 是对象安全的（无泛型方法、无 Self: Sized bound）
+**关联**: enum + match · 静态/动态分发 · vtable
+**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+### E
+
+#### `enum`（代数数据类型）
+
+**定义**: 和类型（Sum Type），变体间互斥，编译期穷尽检查
+**代码**:
+
+```rust
+enum Option<T> { None, Some(T) }
+enum Result<T, E> { Ok(T), Err(E) }
+```
+
+**常见错误**: `match` 未穷尽 → 编译错误 E0004
+**关联**: 模式匹配 · ADT · 和类型
+**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+#### Error Handling（`Result<T, E>`）
+
+**定义**: 显式错误传播，`?` 运算符自动展开/传播错误
+**代码**:
+
+```rust
+fn read_file(path: &str) -> Result<String, io::Error> {
+    let mut file = File::open(path)?;  // ? 传播错误
+    let mut buf = String::new();
+    file.read_to_string(&mut buf)?;
+    Ok(buf)
+}
+```
+
+**关联**: Option · panic · Try trait
+**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+
+### F
+
+#### `Future` Trait
+
+**定义**: 异步计算的抽象，`poll` 方法驱动状态机推进
+**代码**:
+
+```rust
+trait Future {
+    type Output;
+    fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
+}
+```
+
+**关联**: async/await · Pin · Waker · Executor
+**深入**: [`02_async.md`](../03_advanced/02_async.md)
+
+#### FFI（Foreign Function Interface）
+
+**定义**: 与其他语言（主要是 C）互操作的边界
+**代码**:
+
+```rust
+extern "C" {
+    fn sqrt(x: f64) -> f64;
+}
+```
+
+**常见错误**: ABI 不匹配、内存布局差异、未初始化的悬垂指针
+**关联**: unsafe · repr(C) · 内存布局
+**深入**: [`03_unsafe.md`](../03_advanced/03_unsafe.md)
+
+### G
+
+#### `Generic<T>`
+
+**定义**: 参数多态，编译期单态化为具体类型，零运行时开销
+**代码**:
+
+```rust
+fn identity<T>(x: T) -> T { x }
+// 单态化后生成: fn identity_i32(x: i32) -> i32 { x }
+```
+
+**常见错误**: 过度泛化导致编译时间爆炸、二进制膨胀
+**关联**: Trait bounds · 单态化 · 参数性定理
+**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+
+#### `Generic Associated Types (GATs)`
+
+**定义**: 泛型关联类型，允许关联类型携带自己的泛型参数
+**代码**:
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+**关联**: 关联类型 · 生命周期泛型 · HKT 模拟
+**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+
+### H
+
+#### `HashMap<K, V>`
+
+**定义**: 基于 Robin Hood 哈希的哈希表，默认使用 SipHash 防 HashDoS
+**代码**: `let mut map = HashMap::new(); map.insert("key", 42);`
+**常见错误**: 自定义类型作 Key 需实现 `Eq + Hash`；修改已插入 Key 的哈希值 → UB
+**关联**: 集合类型 · 哈希 · BTreeMap
+**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+#### `HRTB`（Higher-Ranked Trait Bounds）
+
+**定义**: 高阶 Trait Bound，`for<'a>` 表示对所有生命周期成立
+**代码**: `fn foo<F>(f: F) where F: for<'a> Fn(&'a str) -> &'a str;`
+**关联**: 生命周期 · System F ∀ · 全称量化
+**深入**: [`02_type_theory.md`](../04_formal/02_type_theory.md)
+
+### I
+
+#### `impl Trait`
+
+**定义**: 抽象返回类型，调用者只知道实现了某 Trait，不知道具体类型
+**代码**:
+
+```rust
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()
+}
+```
+
+**常见错误**: `impl Trait` 在 Trait 定义中不稳定（需 RPITIT）；不能作为结构体字段类型
+**关联**: dyn Trait · 存在类型 · 零成本抽象
+**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+#### Interior Mutability（内部可变性）
+
+**定义**: 在不可变引用背后修改数据，运行时检查借用规则
+**选择矩阵**:
+
+| 类型 | 线程安全 | 运行时检查 | 使用场景 |
+|:---|:---|:---|:---|
+| `Cell<T>` | ❌ | 无（按位替换）| `T: Copy`，简单值替换 |
+| `RefCell<T>` | ❌ | 借用计数（panic）| 单线程，复杂借用模式 |
+| `Mutex<T>` | ✅ | 锁 | 多线程互斥 |
+| `RwLock<T>` | ✅ | 锁 | 多读单写 |
+| `Atomic*` | ✅ | 硬件指令 | 整数/指针的原子操作 |
+
+**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+
+### L
+
+#### Lifetimes（生命周期）
+
+**定义**: 引用的有效期限，编译期约束引用不悬垂
+**代码**:
+
+```rust
+fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+**常见错误**: 返回局部变量的引用 → E0597
+**关联**: 借用 · 区域类型 · 子类型
+**深入**: [`03_lifetimes.md`](../01_foundation/03_lifetimes.md)
+
+#### `Lock` / `Mutex<T>`
+
+**定义**: 互斥锁，保证同一时间只有一个线程访问数据
+**代码**: `let data = Mutex::new(0); *data.lock().unwrap() += 1;`
+**常见错误**: 死锁（嵌套锁顺序不一致）；`MutexGuard` 跨 await → 编译错误
+**关联**: Send/Sync · 内部可变性 · 死锁
+**深入**: [`01_concurrency.md`](../03_advanced/01_concurrency.md)
+
+### M
+
+#### `macro_rules!`
+
+**定义**: 声明宏，基于模式匹配的语法扩展
+**代码**:
+
+```rust
+macro_rules! vec {
+    ($($x:expr),*) => {{
+        let mut temp_vec = Vec::new();
+        $(temp_vec.push($x);)*
+        temp_vec
+    }};
+}
+```
+
+**常见错误**: 宏展开后的优先级问题（需用 `{}` 包裹）；递归宏深度溢出
+**关联**: 过程宏 · 卫生宏 · 元编程
+**深入**: [`04_macros.md`](../03_advanced/04_macros.md)
+
+#### `Move` Semantics
+
+**定义**: 所有权转移，原变量失效，目标变量获得资源控制权
+**代码**:
+
+```rust
+let s1 = String::from("hello");
+let s2 = s1;  // s1 被 move，之后不可用
+// println!("{}", s1); // E0382
+```
+
+**关联**: Copy · Drop · 线性逻辑
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+
+### N
+
+#### Newtype Pattern
+
+**定义**: 用元组结构体包装已有类型，实现零成本抽象的类型区分
+**代码**:
+
+```rust
+struct Meters(u32);
+struct Kilometers(u32);
+// Meters 和 Kilometers 是不同的类型，不能混用
+```
+
+**关联**: 类型安全 · 零大小类型 · 封装
+**深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
+
+#### `no_std`
+
+**定义**: 不使用标准库，仅依赖 `core` 和 `alloc`，用于嵌入式/WASM
+**代码**: `#![no_std]`
+**常见错误**: `no_std` 环境下没有 `std::io`、`std::thread`；需使用 `alloc::vec::Vec`
+**关联**: 嵌入式 · 裸机 · libcore
+**深入**: [`04_application_domains.md`](../06_ecosystem/04_application_domains.md)
+
+### O
+
+#### `Option<T>`
+
+**定义**: 可能为空的值，`Some(T)` 或 `None`，强制调用者处理空值
+**代码**:
+
+```rust
+let x: Option<i32> = Some(5);
+let y = x.unwrap_or(0);  // 安全取值
+```
+
+**关联**: Result · ? 运算符 · Monad
+**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+
+#### `Ownership`
+
+**定义**: 每个值有且仅有一个 owner，owner 离开作用域时值被 drop
+**核心规则**:
+
+1. 每个值有唯一 owner
+2. 值可以 move 到新的 owner
+3. owner 离开作用域 → 值被 drop
+**关联**: Move · Borrow · Drop · RAII
+**深入**: [`01_ownership.md`](../01_foundation/01_ownership.md)
+
+### P
+
+#### `Pin<P<T>>`
+
+**定义**: 保证 `T` 的内存地址不变，用于自引用结构
+**代码**:
+
+```rust
+let mut future = Box::pin(my_async_fn());
+let _ = future.as_mut().poll(cx);
+```
+
+**常见错误**: `Unpin` 类型上 Pin 无实际约束；手动创建 Pin 需 unsafe
+**关联**: async · Future · 自引用 · !Unpin
+**深入**: [`02_async.md`](../03_advanced/02_async.md)
+
+#### `PhantomData<T>`
+
+**定义**: 零大小类型，用于向编译器标记逻辑上的类型关联
+**代码**:
+
+```rust
+struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
+// 告诉编译器 MyPtr<T> 拥有 T 的 variance
+```
+
+**关联**: 方差 · 类型标记 · 零大小类型
+**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+
+### R
+
+#### `Rc<T>` / `Arc<T>`
+
+**定义**: 引用计数共享所有权，`Arc` 是 `Rc` 的原子化线程安全版本
+**选择**: 单线程 → `Rc<T>`；多线程 → `Arc<T>`
+**常见错误**: `Rc` 循环引用 → 内存泄漏；`Arc` 性能开销来自原子操作
+**关联**: 共享所有权 · 内部可变性 · 弱引用
+**深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
+
+#### `Result<T, E>`
+
+**定义**: 可能失败的操作结果，`Ok(T)` 或 `Err(E)`
+**代码**:
+
+```rust
+fn may_fail() -> Result<i32, String> {
+    if random() { Ok(42) } else { Err("failed".to_string()) }
+}
+let val = may_fail()?;  // ? 传播错误
+```
+
+**关联**: Option · ? 运算符 · panic
+**深入**: [`04_error_handling.md`](../02_intermediate/04_error_handling.md)
+
+### S
+
+#### `Send` / `Sync`
+
+**定义**: Auto Trait，标记类型的线程安全属性
+
+- `T: Send` — T 可以安全地跨线程转移所有权
+- `T: Sync` — `&T` 可以安全地跨线程共享（即 `&T: Send`）
+**常见错误**: 手动 `unsafe impl Send for MyType` 需证明线程安全
+**关联**: 并发 · 所有权 · 数据竞争
+**深入**: [`01_concurrency.md`](../03_advanced/01_concurrency.md)
+
+#### `Sized` / `?Sized`
+
+**定义**: `Sized` 标记编译期已知大小的类型；`?Sized` 允许动态大小类型（DST）
+**代码**: `fn foo<T: ?Sized>(x: &T) { }` — 可接受 `&str`、`&[i32]`、`&dyn Trait`
+**常见错误**: 泛型参数默认 `Sized`，需显式 `?Sized` 才能使用 trait object
+**关联**: DST · 胖指针 · vtable
+**深入**: [`02_generics.md`](../02_intermediate/02_generics.md)
+
+#### `std::mem`
+
+**定义**: 内存操作原语，包括 `replace`、`swap`、`take`、`drop`、`forget`
+**常见错误**: `mem::forget` 跳过 Drop → 资源泄漏；`mem::transmute` 最危险，破坏类型系统
+**关联**: unsafe · 内存布局 · ManuallyDrop
+**深入**: [`03_unsafe.md`](../03_advanced/03_unsafe.md)
+
+### T
+
+#### `Trait`
+
+**定义**: 行为抽象，类似 Java Interface / Haskell Typeclass，但基于组合而非继承
+**代码**:
+
+```rust
+trait Drawable { fn draw(&self); }
+impl Drawable for Circle { fn draw(&self) { ... } }
+```
+
+**关键限制**: Orphan Rule — 不能为外部类型实现外部 Trait
+**关联**: 泛型 · dyn Trait · 关联类型 · 特化
+**深入**: [`01_traits.md`](../02_intermediate/01_traits.md)
+
+#### Typestate Pattern
+
+**定义**: 用泛型将运行时状态编码为编译期类型，状态转换由类型系统保证
+**代码**:
+
+```rust
+struct Door<State> { _marker: PhantomData<State> }
+struct Closed; struct Open;
+impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
+// 只有 Door<Closed> 能调用 open()
+```
+
+**关联**: PhantomData · 泛型 · 编译期状态机
+**深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
+
+### U
+
+#### `Unsafe Rust`
+
+**定义**: 打开 5 个特定逃逸门：原始指针、unsafe 函数、extern 函数、静态变量、union
+**代码**:
+
+```rust
+unsafe {
+    let raw_ptr = &mut x as *mut i32;
+    *raw_ptr = 42;  // 编译器不检查别名规则
+}
+```
+
+**核心原则**: unsafe 块的安全性由程序员保证，但类型系统仍有效
+**关联**: 原始指针 · Miri · FFI · Safety Contract
+**深入**: [`03_unsafe.md`](../03_advanced/03_unsafe.md)
+
+### V
+
+#### `Vec<T>`
+
+**定义**: 动态数组，堆分配，连续内存，O(1) 随机访问，O(1) 平摊尾部插入
+**常见操作**:
+
+```rust
+let mut v = vec![1, 2, 3];
+v.push(4);           // O(1) amortized
+let x = v[0];        // O(1)
+v.insert(1, 5);      // O(n)
+```
+
+**常见错误**: `v[i]` 越界 → panic；迭代时修改 → 编译错误 E0499
+**关联**: Slice · 迭代器 · 集合类型
+**深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+### W
+
+#### `Waker`
+
+**定义**: 异步任务的唤醒机制，`Future` 挂起时注册 Waker，事件就绪时调用
+**代码**:
+
+```rust
+fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
+    if !self.is_ready() {
+        self.waker = Some(cx.waker().clone());  // 注册 Waker
+        return Poll::Pending;
+    }
+    Poll::Ready(self.result)
+}
+```
+
+**关联**: Future · async · Executor · 协作式调度
+**深入**: [`02_async.md`](../03_advanced/02_async.md)
+
+---
+
+## 二、编译错误码速查
+
+| 错误码 | 含义 | 触发场景 | 解决方向 | 深入文件 |
+|:---|:---|:---|:---|:---|
+| **E0382** | borrow of moved value | Move 后使用原变量 | 改用 `clone()` 或重新设计所有权 | [01_ownership](../01_foundation/01_ownership.md) |
+| **E0499** | cannot borrow as mutable more than once | 同时存在两个 `&mut T` | 缩小借用作用域或使用内部可变性 | [02_borrowing](../01_foundation/02_borrowing.md) |
+| **E0502** | cannot borrow as mutable because borrowed as immutable | `&T` 和 `&mut T` 共存 | 确保 `&T` 在 `&mut T` 之前结束 | [02_borrowing](../01_foundation/02_borrowing.md) |
+| **E0597** | borrowed value does not live long enough | 悬垂引用 | 确保引用 outlive 其指向的数据 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+| **E0106** | missing lifetime specifier | 函数返回引用无生命周期标注 | 显式标注 `'a` 或使用 `'static` | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+| **E0204** | trait bound not satisfied | 为不满足条件的类型实现 Trait | 检查类型参数是否满足 Trait bounds | [01_traits](../02_intermediate/01_traits.md) |
+| **E0277** | size not known at compile time | 使用 `?Sized` 但未正确处理 DST | 通过引用/Box 使用 DST | [02_generics](../02_intermediate/02_generics.md) |
+| **E0308** | mismatched types | 类型不匹配 | 检查泛型参数、类型推断歧义 | [04_type_system](../01_foundation/04_type_system.md) |
+| **E0384** | reassignment of immutable variable | 修改不可变变量 | 改用 `let mut` 或 `Cell`/`RefCell` | [02_borrowing](../01_foundation/02_borrowing.md) |
+| **E0392** | parameter `T` is never used | 泛型参数未在类型中使用 | 使用 `PhantomData<T>` 标记 | [02_generics](../02_intermediate/02_generics.md) |
+| **E0433** | failed to resolve use statement | 模块路径错误 | 检查 `use` 路径和模块结构 | [04_type_system](../01_foundation/04_type_system.md) |
+| **E0495** | cannot infer an appropriate lifetime | 生命周期推断失败 | 显式标注生命周期约束 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+| **E0520** | requires `Sync` bound | 跨线程共享非 Sync 类型 | 使用 `Mutex`/`RwLock` 包装 | [01_concurrency](../03_advanced/01_concurrency.md) |
+| **E0596** | cannot borrow data in dereference of ... as mutable | 不可变上下文中需要可变引用 | 检查 `Deref` 返回的是否为 `&mut` | [02_borrowing](../01_foundation/02_borrowing.md) |
+| **E0603** | module is private | 访问私有模块 | 使用 `pub` 暴露或检查可见性 | [04_type_system](../01_foundation/04_type_system.md) |
+| **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../07_future/03_evolution.md) |
+| **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
+
+---
+
+## 三、模式选择决策树（速查版）
+
+```text
+我需要...?
+  ├─ 共享所有权？
+  │   ├─ 单线程 → Rc<T>
+  │   └─ 多线程 → Arc<T>
+  ├─ 内部可变性？
+  │   ├─ T: Copy（简单值）→ Cell<T>
+  │   ├─ 单线程复杂借用 → RefCell<T>
+  │   ├─ 多线程互斥 → Mutex<T>
+  │   └─ 多读单写 → RwLock<T>
+  ├─ 动态分发？
+  │   ├─ 变体封闭（编译期已知）→ enum + match
+  │   └─ 变体开放（运行时扩展）→ dyn Trait
+  ├─ 错误处理？
+  │   ├─ 可恢复错误 → Result<T, E>
+  │   └─ 不可恢复错误 → panic!
+  ├─ 异步？
+  │   ├─ I/O 密集型 → async/await + Tokio
+  │   └─ CPU 密集型 → std::thread
+  └─ 零成本抽象？
+      ├─ 泛型 → <T: Trait>
+      └─ 编译期计算 → const generics / const fn
+```
+
+---
+
+## 四、跨语言对照速查
+
+| Rust | C++ | Java | Go | Haskell |
+|:---|:---|:---|:---|:---|
+| `Box<T>` | `unique_ptr<T>` | — | — | — |
+| `Rc<T>` | `shared_ptr<T>` | — | — | — |
+| `Arc<T>` | `shared_ptr<T>` (atomic) | — | — | — |
+| `&T` / `&mut T` | `const T&` / `T&` | 引用 | — | — |
+| `Trait` | 抽象类 / Interface | `interface` | `interface` | Typeclass |
+| `enum` | `variant` (C++17) | — | — | ADT |
+| `Option<T>` | `std::optional<T>` | `Optional<T>` | 多返回值 | `Maybe a` |
+| `Result<T, E>` | `std::expected<T,E>` (C++23) | 异常 | 多返回值 | `Either e a` |
+| `async/await` | Coroutines (C++20) | `CompletableFuture` | goroutine | `IO` monad |
+| `panic!` | `std::terminate` | `RuntimeException` | `panic` | `error` |
+| `Send/Sync` | — | — | — | — |
+| `unsafe` | 默认开放 | `sun.misc.Unsafe` | `unsafe` | `unsafePerformIO` |
+
+---
+
+> **深入阅读**: 本速查的完整理论背景见 [`semantic_space.md`](./semantic_space.md) §4（等价表达的语义保持）；系统学习路径见 [`learning_guide.md`](./learning_guide.md)。

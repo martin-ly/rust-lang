@@ -625,7 +625,128 @@ fn main() {
 
 ---
 
-## 十二、待补充与演进方向（TODOs）
+## 十二、Polonius：下一代 Borrow Checker
+
+> **定位**：Polonius 是 Rust 的下一代借用检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。
+> **状态**：`-Zpolonius` 可在 nightly 启用；尚未默认，但设计已稳定。
+
+### 12.1 为什么需要 Polonius？
+
+当前 borrow checker（基于 NLL）存在**过度保守**的问题：
+
+```rust
+fn get_default<'r, K, V>(
+    map: &'r mut HashMap<K, V>,
+    key: K,
+) -> &'r mut V
+where
+    K: Clone + Eq + Hash,
+{
+    match map.get_mut(&key) {  // &'r1 mut HashMap → Option<&'r1 mut V>
+        Some(value) => value, // 返回 &'r1 mut V（与 'r 兼容）
+        None => {
+            map.insert(key.clone(), V::default()); // ❌ 当前 borrow checker 报错
+            map.get_mut(&key).unwrap()            // 但此代码是安全的
+        }
+    }
+}
+```
+
+**当前系统错误**：`map.get_mut(&key)` 的借用在整个 `match` 期间被认为有效，导致 `map.insert` 被判定为冲突。
+
+**实际安全**：`Some` 分支已返回，`None` 分支中 `get_mut` 的借用实际上已结束——但当前系统无法在控制流层面表达这种"路径敏感"的借用终结。
+
+### 12.2 Polonius 的核心设计
+
+Polonius 将借用检查重构为 **Datalog 程序**，在三元关系上进行推理：
+
+| 关系 | 含义 |
+|:---|:---|
+| `loan_originates_from(loan, point)` | 借用在哪个程序点创建 |
+| `loan_killed_at(loan, point)` | 借用在哪个程序点被"杀死"（不再有效） |
+| `loan_invalidated_at(loan, point)` | 借用在哪个程序点被非法使用 |
+| `path_accessed_at(path, point)` | 哪个路径在哪个程序点被访问 |
+
+**关键洞察**：Polonius 追踪的不是"区域包含哪些借用"，而是**每个借用在什么条件下仍然有效**——这种"条件敏感"的分析能精确处理上述 `match` 场景。
+
+### 12.3 Polonius vs 当前系统
+
+| 维度 | 当前 Borrow Checker | Polonius |
+|:---|:---|:---|
+| **理论基础** | 区域子类型（Tofte-Talpin） | Datalog 约束求解（Datafrog） |
+| **路径敏感** | ❌ 路径不敏感 | ✅ 路径敏感 |
+| **精度** | 过度保守（拒绝合法代码） | 更精确（接受更多合法代码） |
+| **编译时间** | O(n) 区域合并 | O(n³) Datalog 求解（优化中） |
+| **可用性** | 默认启用 | `-Zpolonius`（nightly） |
+| **错误信息** | 区域推导结果 | 更精确的"为什么此借用仍有效" |
+
+### 12.4 Polonius 的语义进步
+
+Polonius 解决了当前系统的三个理论局限：
+
+**T1：路径敏感的借用终结**
+
+```rust
+let mut x = 0;
+let p = &mut x;
+if condition {
+    *p = 1;
+    // p 在此路径不再使用
+} else {
+    // p 从未在此路径创建？不——但 Polonius 知道 p 在 else 分支无效
+}
+// 当前系统：p 的借用覆盖整个 if-else
+// Polonius：p 的借用仅在 condition 为 true 的路径有效
+```
+
+**T2：两阶段借用（Two-Phase Borrows）的完整支持**
+
+当前系统对 `&mut` 自借用有特殊的两阶段处理，但实现 ad-hoc。Polonius 将两阶段借用作为 Datalog 规则的自然结果，无需特殊处理。
+
+**T3：更精确的错误定位**
+
+当前错误："`x` 被借用为可变，所以不能用"
+Polonius 错误："`x` 被借用是因为在 line 42 的 `match` 分支中仍可能需要访问"
+
+### 12.5 形式化过渡
+
+> **认知路径**："当前 borrow checker 过度保守" → "路径敏感的借用分析" → "Datalog 作为约束求解引擎" → "Polonius 的 loan-based 语义"
+
+从形式化角度，Polonius 将 Rust 的借用检查从 **区域子类型系统** 推进到 **基于 loans 的流敏感分析**：
+
+$$
+\text{Current: } \Gamma \vdash \&'a \, x : \tau \quad \text{其中 } 'a \text{ 是一个区域变量}
+$$
+
+$$
+\text{Polonius: } \text{loan}(\&x) \text{ 在 } P \text{ 有效} \iff \forall Q \text{ 从 } P \text{ 可达}, \neg\text{killed}(\text{loan}(\&x), Q)
+$$
+
+### 12.6 工程实践
+
+```bash
+# 使用 Polonius 编译（nightly）
+rustup default nightly
+rustc -Zpolonius main.rs
+
+# Cargo 中使用
+RUSTFLAGS="-Zpolonius" cargo build
+```
+
+**何时使用 Polonius**：
+
+- 当前 borrow checker 报"过度保守"的错误，但代码逻辑上安全
+- 需要更精确的借用分析以简化复杂控制流
+
+**限制**：
+
+- 编译时间更长（Datalog 求解开销）
+- 仅在 nightly 可用
+- 未来可能改变错误信息格式
+
+---
+
+## 十三、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 Lifetime Elision 的三条规则的完整形式化描述 —— 优先级: 中 —— 预计: Phase 1
 - [ ] **TODO**: 补充 `impl Trait` 与生命周期推断的交互 —— 优先级: 中 —— 预计: Phase 2

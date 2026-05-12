@@ -1,55 +1,10 @@
 {
   "meta": {
     "version": "1.0",
-    "total_files": 49,
+    "total_files": 37,
     "generated_at": "The system cannot accept the date entered.\nEnter the new date: (yy-mm-dd)"
   },
   "files": [
-    {
-      "path": "concept\\00.md",
-      "layer": "L0",
-      "title": "信任层次模型：从 PostgreSQL 到区块链的零信任谱系",
-      "positioning": "",
-      "line_count": 5657,
-      "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "id": "7.1",
-          "title": "充分性：场景覆盖评估"
-        },
-        {
-          "id": "7.2",
-          "title": "完整性：机制链条无断裂"
-        },
-        {
-          "id": "7.3",
-          "title": "完备性：形式化定理的最终确认"
-        },
-        {
-          "id": "7.1",
-          "title": "语法层的标准化"
-        },
-        {
-          "id": "7.1",
-          "title": "我们遗漏了什么？"
-        },
-        {
-          "id": "7.2",
-          "title": "混沌工程的形式化"
-        }
-      ],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "PostgreSQL_18_Plus_Formal_Analysis.md",
-        "sandbox:///mnt/agents/output/PostgreSQL_18_Cognitive_Map.md",
-        "sandbox:///mnt/agents/output/PostgreSQL_18_Data_Index_Analysis.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 366
-    },
     {
       "path": "concept\\00_meta\\audit_checklist.md",
       "layer": "L0",
@@ -62,7 +17,7 @@
       "sources": [],
       "cross_references": [],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 0,
       "matrix_rows": 62
     },
@@ -232,9 +187,47 @@
       "sources": [],
       "cross_references": [],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 1,
       "matrix_rows": 67
+    },
+    {
+      "path": "concept\\00_meta\\learning_guide.md",
+      "layer": "L0",
+      "title": "Rust 知识体系学习指南（Learning Guide）",
+      "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
+      "line_count": 287,
+      "theorem_chains": [
+        {
+          "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？<br>2. ⟹ 推理链的格式要求是什么？ |",
+          "type": "table_row"
+        },
+        {
+          "text": "| 读完 L1 后 | 重读 `01_ownership.md` 的定理矩阵，验证能否独立解释所有 ⟹ 推理链 |",
+          "type": "table_row"
+        }
+      ],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [
+            "` 代码块，观察编译结果"
+          ],
+          "lines": 51,
+          "should_fail": false,
+          "code_preview": "2. **修改实验**：故意修改代码使其编译失败，理解错误信息 3. **扩展练习**：基于代码示例写一个变体，验证理解  ---  ## 五、常见困难与突破建..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "./concept_index.md",
+        "./inter_layer_map.md",
+        "./semantic_space.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 56
     },
     {
       "path": "concept\\00_meta\\methodology.md",
@@ -271,6 +264,356 @@
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 33
+    },
+    {
+      "path": "concept\\00_meta\\quick_reference.md",
+      "layer": "L0",
+      "title": "Rust 概念速查卡片（Quick Reference）",
+      "positioning": "面试前/编码时的快速查阅手册。每个核心概念\"一页纸\"——定义 + 代码 + 错误码 + 关联概念。",
+      "line_count": 535,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "async fn foo() -> i32 { 42 } // 等价于: fn foo() -> impl Future<Output = i32> ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let r = &x; let r2 = &x;     // ✅ 共享借用 let r = &x; let r2 = &mut x; // ❌ E0502 ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "HttpRequestBuilder::new()     .method(\"GET\")     .url(\"/\")     .build()  // 编译错误..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[derive(Copy, Clone)] struct Point { x: i32, y: i32 } let p1 = Point { x: 1, y:..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "impl Drop for MyType {     fn drop(&mut self) { println!(\"Dropping!\"); } } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "enum Option<T> { None, Some(T) } enum Result<T, E> { Ok(T), Err(E) } ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "fn read_file(path: &str) -> Result<String, io::Error> {     let mut file = File:..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Future {     type Output;     fn poll(self: Pin<&mut Self>, cx: &mut Conte..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "extern \"C\" {     fn sqrt(x: f64) -> f64; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn identity<T>(x: T) -> T { x } // 单态化后生成: fn identity_i32(x: i32) -> i32 { x } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait LendingIterator {     type Item<'a> where Self: 'a;     fn next<'a>(&'a mu..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn make_iter() -> impl Iterator<Item = i32> {     vec![1, 2, 3].into_iter() } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {     if x.len() > y.len() { x..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "macro_rules! vec {     ($($x:expr),*) => {{         let mut temp_vec = Vec::new(..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let s1 = String::from(\"hello\"); let s2 = s1;  // s1 被 move，之后不可用 // println!(\"{}..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "struct Meters(u32); struct Kilometers(u32); // Meters 和 Kilometers 是不同的类型，不能混用 ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let x: Option<i32> = Some(5); let y = x.unwrap_or(0);  // 安全取值 ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let mut future = Box::pin(my_async_fn()); let _ = future.as_mut().poll(cx); ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> } // 告诉编译器 MyPtr<T> 拥有 T..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn may_fail() -> Result<i32, String> {     if random() { Ok(42) } else { Err(\"fa..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "trait Drawable { fn draw(&self); } impl Drawable for Circle { fn draw(&self) { ...."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "struct Door<State> { _marker: PhantomData<State> } struct Closed; struct Open; i..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "unsafe {     let raw_ptr = &mut x as *mut i32;     *raw_ptr = 42;  // 编译器不检查别名规则..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let mut v = vec![1, 2, 3]; v.push(4);           // O(1) amortized let x = v[0]; ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {     ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "../01_foundation/01_ownership.md",
+        "../01_foundation/02_borrowing.md",
+        "../01_foundation/03_lifetimes.md",
+        "../01_foundation/04_type_system.md",
+        "../02_intermediate/01_traits.md",
+        "../02_intermediate/02_generics.md",
+        "../02_intermediate/03_memory_management.md",
+        "../02_intermediate/04_error_handling.md",
+        "../03_advanced/01_concurrency.md",
+        "../03_advanced/02_async.md",
+        "../03_advanced/03_unsafe.md",
+        "../03_advanced/04_macros.md",
+        "../04_formal/02_type_theory.md",
+        "../06_ecosystem/02_patterns.md",
+        "../06_ecosystem/04_application_domains.md",
+        "../07_future/03_evolution.md",
+        "./learning_guide.md",
+        "./semantic_space.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 37
+    },
+    {
+      "path": "concept\\00_meta\\self_assessment.md",
+      "layer": "L0",
+      "title": "Rust 知识体系自测题库（Self-Assessment）",
+      "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
+      "line_count": 779,
+      "theorem_chains": [],
+      "anti_propositions": [],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let s1 = String::from(\"hello\"); let s2 = s1; println!(\"{}\", s1); ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let mut x = 5; let r1 = &x; let r2 = &mut x; println!(\"{}\", r1); ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn first_word(s: &str) -> &str {     &s[0..1] } ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "fn first_word<'a>(s: &'a str) -> &'a str ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "enum Color { Red, Green, Blue } fn describe(c: Color) -> &'static str {     matc..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Drawable {     fn draw(&self);     fn new() -> Self where Self: Sized; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn read_config(path: &str) -> String {     let contents = std::fs::read_to_strin..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn read_config(path: &str) -> Result<String, std::io::Error> {     let contents ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "struct A(&'static str); impl Drop for A {     fn drop(&mut self) { println!(\"{}\"..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "fn identity<T>(x: T) -> T { x } let a = identity(5i32); let b = identity(3.14f64..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn print_debug<T>(x: T) {     println!(\"{:?}\", x); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "struct MyPtr<T> {     ptr: *mut (),     _marker: std::marker::PhantomData<T>, } ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "use std::cell::RefCell; let cell = RefCell::new(0); let _b1 = cell.borrow(); let..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn foo() -> Result<(), MyError> {     std::fs::read_to_string(\"file.txt\")?;  // ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "impl From<std::io::Error> for MyError { ... } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "fn process<T>(data: T) {     let size = std::mem::size_of::<T>(); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 4,
+          "should_fail": false,
+          "code_preview": "let x = String::from(\"hello\"); let f = || println!(\"{}\", x);  // 捕获方式？ let g = m..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "async fn fetch_and_update(data: &Mutex<i32>) {     let mut guard = data.lock().u..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "async fn fetch_and_update(data: &Mutex<i32>) {     let value = fetch_from_networ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "let a = Mutex::new(0); let b = Mutex::new(0); let a2 = Arc::clone(&a); let b2 = ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "macro_rules! make_var {     ($name:ident, $val:expr) => {         let $name = $v..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "unsafe impl Send for MyType {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "fn identity<T>(x: T) -> T { ... } ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "fn process<F>(f: F) where F: for<'a> Fn(&'a str) -> &'a str, ..."
+        }
+      ],
+      "sources": [],
+      "cross_references": [
+        "./learning_guide.md",
+        "./semantic_space.md"
+      ],
+      "transitions": 0,
+      "has_cognitive_path": false,
+      "mermaid_blocks": 0,
+      "matrix_rows": 0
     },
     {
       "path": "concept\\00_meta\\semantic_space.md",
@@ -437,64 +780,6 @@
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
       "matrix_rows": 94
-    },
-    {
-      "path": "concept\\01.md",
-      "layer": "L1",
-      "title": "Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证",
-      "positioning": "",
-      "line_count": 1791,
-      "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "id": "7.1",
-          "title": "Rust 的\"不可表征\"区域（静态-动态鸿沟）"
-        },
-        {
-          "id": "7.2",
-          "title": "C++ 的\"机制累积\"问题"
-        },
-        {
-          "id": "7.1",
-          "title": "趋势一：AI × 形式方法的\"三层闭环\""
-        },
-        {
-          "id": "7.2",
-          "title": "趋势二：从\"证明一次\"到\"持续验证\""
-        },
-        {
-          "id": "7.3",
-          "title": "趋势三：Rust 作为形式化基础设施的\"宿主语言\""
-        },
-        {
-          "id": "7.1",
-          "title": "核心论断"
-        },
-        {
-          "id": "7.2",
-          "title": "最终综合"
-        }
-      ],
-      "code_blocks": [
-        {
-          "flags": [],
-          "lines": 4,
-          "should_fail": false,
-          "code_preview": "let s = String::from(\"hello\"); process(s);           // 形式规则1: 所有权转移（move），s 被消耗..."
-        },
-        {
-          "flags": [],
-          "lines": 12,
-          "should_fail": false,
-          "code_preview": "// Trait 不是接口，而是逻辑命题 pub trait Monoid {     fn empty() -> Self;     fn combine(s..."
-        }
-      ],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 10,
-      "matrix_rows": 159
     },
     {
       "path": "concept\\01_foundation\\01_ownership.md",
@@ -719,8 +1004,8 @@
         "./03_lifetimes.md",
         "./04_type_system.md"
       ],
-      "transitions": 8,
-      "has_cognitive_path": false,
+      "transitions": 16,
+      "has_cognitive_path": true,
       "mermaid_blocks": 7,
       "matrix_rows": 57
     },
@@ -949,8 +1234,8 @@
         "./03_lifetimes.md",
         "./04_type_system.md"
       ],
-      "transitions": 10,
-      "has_cognitive_path": false,
+      "transitions": 20,
+      "has_cognitive_path": true,
       "mermaid_blocks": 6,
       "matrix_rows": 64
     },
@@ -958,8 +1243,8 @@
       "path": "concept\\01_foundation\\03_lifetimes.md",
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
-      "positioning": "",
-      "line_count": 633,
+      "positioning": "Polonius 是 Rust 的下一代借用检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。",
+      "line_count": 751,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -978,6 +1263,10 @@
           "type": "paragraph"
         },
         {
+          "text": "公理: 'a ⊑ 'b 且 'b ⊑ 'c  ⟹  'a ⊑ 'c（传递性）",
+          "type": "paragraph"
+        },
+        {
           "text": "### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性",
           "type": "paragraph"
         },
@@ -987,6 +1276,22 @@
         },
         {
           "text": "### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性",
+          "type": "paragraph"
+        },
+        {
+          "text": "结论: 'long ⊇ 'short  ⟹  &'long T <: &'short T（协变安全）",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.6 推论：'static 生命周期 ⟹ 全局/泄漏数据的安全性",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.7 推论：HRTB 全称量化 ⟹ 高阶回调的类型安全",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.8 推论：GATs + where Self: 'a ⟹ 自引用集合的表达能力",
           "type": "paragraph"
         },
         {
@@ -1068,6 +1373,18 @@
           "lines": 25,
           "should_fail": false,
           "code_preview": "use std::sync::LazyLock;  // 测试: Box::leak 制造 'static，再协变收窄 fn make_static_then_..."
+        },
+        {
+          "flags": [],
+          "lines": 16,
+          "should_fail": false,
+          "code_preview": "fn get_default<'r, K, V>(     map: &'r mut HashMap<K, V>,     key: K, ) -> &'r m..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "let mut x = 0; let p = &mut x; if condition {     *p = 1;     // p 在此路径不再使用 } el..."
         }
       ],
       "sources": [
@@ -1111,10 +1428,10 @@
         "./01_ownership.md",
         "./02_borrowing.md"
       ],
-      "transitions": 8,
-      "has_cognitive_path": false,
+      "transitions": 16,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 48
+      "matrix_rows": 60
     },
     {
       "path": "concept\\01_foundation\\04_type_system.md",
@@ -1145,6 +1462,18 @@
         },
         {
           "text": "### 4.5 定理：类型一致性（Progress + Preservation）⟹ 运行时无类型错误",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.6 推论：Option<T> ⟹ 空指针在类型层面消除",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.7 推论：Result<T, E> ⟹ 错误在类型层面强制处理",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.8 推论：! (Never type) ⟹ 发散类型的逻辑完备性",
           "type": "paragraph"
         },
         {
@@ -1280,48 +1609,10 @@
         "./02_borrowing.md",
         "./03_lifetimes.md"
       ],
-      "transitions": 8,
-      "has_cognitive_path": false,
+      "transitions": 16,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 65
-    },
-    {
-      "path": "concept\\01_foundation\\README.md",
-      "layer": "L1",
-      "title": "L1 基础概念层（Foundation）",
-      "positioning": "Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。",
-      "line_count": 173,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "../00_meta/inter_layer_map.md",
-        "./01_ownership.md",
-        "./02_borrowing.md",
-        "./03_lifetimes.md",
-        "./04_type_system.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 26
-    },
-    {
-      "path": "concept\\02.md",
-      "layer": "L2",
-      "title": "Unknown",
-      "positioning": "",
-      "line_count": 125,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 29
     },
     {
       "path": "concept\\02_intermediate\\01_traits.md",
@@ -1352,6 +1643,14 @@
         },
         {
           "text": "定理: Trait 对象安全 ⟹ dyn Trait 是合法类型",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.4 Trait + 泛型 ⟹ 零成本抽象",
           "type": "paragraph"
         },
         {
@@ -1463,8 +1762,8 @@
         "../04_formal/04_rustbelt.md",
         "./02_generics.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 10,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 74
     },
@@ -1500,6 +1799,14 @@
           "type": "paragraph"
         },
         {
+          "text": "### 4.3 推论：Const Generics ⟹ 类型级编程",
+          "type": "paragraph"
+        },
+        {
+          "text": "推论: Const Generics ⟹ 类型级编程（type-level programming）",
+          "type": "paragraph"
+        },
+        {
           "text": "| **引理**: 参数多态 ⟹ System F | 泛型参数合法声明，类型变量分离 | 类型规则可判定，替换保持良类型 | System F 良类型性 | 约束可满足性、泛型一致性 | `for<'a>` 过度约束不可满足 | — |",
           "type": "table_row"
         },
@@ -1525,6 +1832,18 @@
         },
         {
           "text": "> **一致性检查**: 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 语义保持 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。参数性定理（Wadler 1989）是单态化语义保持的核心依据——正因泛型函数不能基于类型参数的内部表示做分支，单态化才保持行为等价。Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。",
+          "type": "paragraph"
+        },
+        {
+          "text": "结论: 参数性 ⟹ f 只能是恒等函数或发散函数",
+          "type": "paragraph"
+        },
+        {
+          "text": "结论: 参数性 ⟹ g 的行为等价于 λx.λh. h(x) 或其发散变体",
+          "type": "paragraph"
+        },
+        {
+          "text": "结论: 参数性 ⟹ 输出是输入的子序列（元素顺序保持，无新构造）",
           "type": "paragraph"
         },
         {
@@ -1636,8 +1955,8 @@
         "../04_formal/04_rustbelt.md",
         "./01_traits.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 8,
+      "has_cognitive_path": true,
       "mermaid_blocks": 6,
       "matrix_rows": 89
     },
@@ -1670,6 +1989,18 @@
         },
         {
           "text": "定理: Rc/Arc ⟹ 共享所有权安全（引用计数）",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.3 推论：RefCell ⟹ 内部可变性运行时检查",
+          "type": "paragraph"
+        },
+        {
+          "text": "推论: RefCell ⟹ 内部可变性运行时检查",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.4 RAII + 所有权 ⟹ 确定性释放",
           "type": "paragraph"
         },
         {
@@ -1783,8 +2114,8 @@
         "../04_formal/04_rustbelt.md",
         "./01_traits.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 7,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 74
     },
@@ -1813,6 +2144,14 @@
         },
         {
           "text": "定理: ? 运算符 ⟹ 错误传播自动化",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 4.3 推论：panic ⟹ 不可恢复错误的显式边界",
+          "type": "paragraph"
+        },
+        {
+          "text": "推论: panic ⟹ 不可恢复错误的显式边界",
           "type": "paragraph"
         },
         {
@@ -1927,31 +2266,10 @@
         "./01_traits.md",
         "./02_generics.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 7,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 70
-    },
-    {
-      "path": "concept\\02_intermediate\\README.md",
-      "layer": "L2",
-      "title": "L2 进阶概念层（Intermediate）",
-      "positioning": "在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。",
-      "line_count": 215,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_traits.md",
-        "./02_generics.md",
-        "./03_memory_management.md",
-        "./04_error_handling.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 22
     },
     {
       "path": "concept\\03_advanced\\01_concurrency.md",
@@ -1962,6 +2280,14 @@
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
+          "type": "paragraph"
+        },
+        {
+          "text": "- `T: Send` ⟹ 线程间转移 `T` 的值是安全的",
+          "type": "paragraph"
+        },
+        {
+          "text": "- `T: Sync` ⟹ 线程间共享 `&T` 是安全的（等价于 `&T: Send`）",
           "type": "paragraph"
         },
         {
@@ -2014,6 +2340,10 @@
         },
         {
           "text": "> **[RustBelt + C11 内存模型]** 一致性检查: `Send/Sync` 类型安全 ⟹ `Mutex`/`Channel` 运行时安全 ⟹ `Atomic` 无锁安全，形成**从编译期到运行时的**递进链。注意：死锁不在 Rust 安全保证范围内（属于活性性质，非安全性）。✅ 已验证",
+          "type": "paragraph"
+        },
+        {
+          "text": "**编译期确定性**：借用检查器 ⟹ 无数据竞争（对所有执行路径）。",
           "type": "paragraph"
         }
       ],
@@ -2488,7 +2818,7 @@
         "../04_formal/04_rustbelt.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 9,
       "matrix_rows": 108
     },
@@ -2719,31 +3049,10 @@
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md"
       ],
-      "transitions": 0,
-      "has_cognitive_path": false,
+      "transitions": 8,
+      "has_cognitive_path": true,
       "mermaid_blocks": 8,
       "matrix_rows": 76
-    },
-    {
-      "path": "concept\\03_advanced\\README.md",
-      "layer": "L3",
-      "title": "L3 高级概念层（Advanced）",
-      "positioning": "Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。",
-      "line_count": 219,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_concurrency.md",
-        "./02_async.md",
-        "./03_unsafe.md",
-        "./04_macros.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 22
     },
     {
       "path": "concept\\04_formal\\01_linear_logic.md",
@@ -2866,7 +3175,7 @@
         "./04_rustbelt.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 73
     },
@@ -2992,7 +3301,7 @@
         "./04_rustbelt.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 97
     },
@@ -3001,7 +3310,7 @@
       "layer": "L4",
       "title": "Ownership Formalization（所有权形式化）",
       "positioning": "",
-      "line_count": 484,
+      "line_count": 573,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 \"⟹\" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注",
@@ -3066,7 +3375,7 @@
       "transitions": 0,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 68
+      "matrix_rows": 82
     },
     {
       "path": "concept\\04_formal\\04_rustbelt.md",
@@ -3078,6 +3387,10 @@
         {
           "text": "| **T3** | 逻辑关系（Logical Relation） | L1-A + L2-A + L2-B | 语义类型安全：类型 ⟹ 行为 | 无（顶层综合） | `transmute`；类型边界被违反；布局假设错误 | **L3** |",
           "type": "table_row"
+        },
+        {
+          "text": "### 2.2 ⟹ 推理链",
+          "type": "paragraph"
         },
         {
           "text": "> **一致性检查**: L1-A ⟹ {L1-B, L1-C, L2-A, L2-B} ⟹ {T1, T2, T3}，形成**从逻辑基础设施到语义模型再到安全定理**的三层推导链。C1 与 C2 分别标记了人工验证边界与形式化不可判定边界。",
@@ -3119,52 +3432,10 @@
         "./02_type_theory.md",
         "./03_ownership_formal.md"
       ],
-      "transitions": 5,
-      "has_cognitive_path": false,
+      "transitions": 10,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 105
-    },
-    {
-      "path": "concept\\04_formal\\README.md",
-      "layer": "L4",
-      "title": "L4 形式化理论层（Formal Methods）",
-      "positioning": "Rust 概念体系的**数学根基**与形式化验证。本层为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的\"地基\"。",
-      "line_count": 199,
-      "theorem_chains": [
-        {
-          "text": "| 分离逻辑 | 并发安全 | 同态 | **近似** | Send/Sync ⟹ CSL 资源安全 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 线性资源 ⟹ 所有权安全 | 线性逻辑证明系统 | 无 use-after-move | 线性逻辑 ⊗ 规则 | 允许 weakening（Copy） | 逻辑推导 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 区域约束可满足 ⟹ 无悬垂指针 | 区域偏序约束 | 所有引用合法 | Tofte-Talpin 区域类型 | HRTB 不可判定片段 | 约束求解器 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| 分数权限 ⟹ AXM | 分离逻辑框架 | &T 与 &mut T 不共存 | 分数权限分配规则 | UnsafeCell 绕过 | Iris 证明助手 |",
-          "type": "table_row"
-        },
-        {
-          "text": "| RustBelt ⟹ Safe Rust 无数据竞争 | λRust 操作语义 | 所有 safe 程序安全 | Iris 高阶分离逻辑 | unsafe 块、FFI | Coq 证明 |",
-          "type": "table_row"
-        }
-      ],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_linear_logic.md",
-        "./02_type_theory.md",
-        "./03_ownership_formal.md",
-        "./04_rustbelt.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 31
     },
     {
       "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
@@ -3173,6 +3444,10 @@
       "positioning": "",
       "line_count": 1852,
       "theorem_chains": [
+        {
+          "text": "以下矩阵将文中的核心断言分解为**前提条件 → 结论 → 反例/边界**的推理链，用 `⟹` 标明逻辑推导关系：",
+          "type": "paragraph"
+        },
         {
           "text": "| \"RAII保证确定性析构\" ⟹ | C++也具备RAII机制 | Rust差异在**move语义**（资源转移即消耗） | `std::mem::forget` 可故意泄漏；C++析构顺序依赖程序员 | 资源池管理、文件句柄释放 |",
           "type": "table_row"
@@ -3262,7 +3537,7 @@
         "./safety_boundaries.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 13,
       "matrix_rows": 200
     },
@@ -3322,7 +3597,7 @@
         "./safety_boundaries.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 99
     },
@@ -3334,7 +3609,23 @@
       "line_count": 501,
       "theorem_chains": [
         {
+          "text": "- v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性标注",
+          "type": "paragraph"
+        },
+        {
+          "text": "### 2.1 核心维度矩阵（带 ⟹ 推理链）",
+          "type": "paragraph"
+        },
+        {
+          "text": "**⟹ 推理链标注（22 行矩阵 → 逻辑推导）**:",
+          "type": "paragraph"
+        },
+        {
           "text": "## 六、定理一致性矩阵（范式定位）— 带 ⟹ 推理链",
+          "type": "paragraph"
+        },
+        {
+          "text": "**⟹ 推理链：从语言特性到编程范式到安全保证**",
           "type": "paragraph"
         },
         {
@@ -3371,30 +3662,10 @@
         "./02_rust_vs_go.md",
         "./safety_boundaries.md"
       ],
-      "transitions": 7,
-      "has_cognitive_path": false,
+      "transitions": 14,
+      "has_cognitive_path": true,
       "mermaid_blocks": 7,
       "matrix_rows": 70
-    },
-    {
-      "path": "concept\\05_comparative\\README.md",
-      "layer": "L5",
-      "title": "L5 对比分析层（Comparative Analysis）",
-      "positioning": "将 Rust 置于更广泛的编程语言范式和技术栈语境中，通过**多维对比**揭示其设计本体论、形式化优势与工程权衡。本层是原有 `01.md` 核心内容的结构化重组与扩展。",
-      "line_count": 155,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_rust_vs_cpp.md",
-        "./02_rust_vs_go.md",
-        "./03_paradigm_matrix.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 29
     },
     {
       "path": "concept\\05_comparative\\safety_boundaries.md",
@@ -3447,7 +3718,7 @@
         "../04_formal/04_rustbelt.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 72
     },
@@ -3534,8 +3805,8 @@
         "../07_future/02_formal_methods.md",
         "./02_patterns.md"
       ],
-      "transitions": 4,
-      "has_cognitive_path": false,
+      "transitions": 8,
+      "has_cognitive_path": true,
       "mermaid_blocks": 7,
       "matrix_rows": 131
     },
@@ -3656,7 +3927,7 @@
         "../05_comparative/03_paradigm_matrix.md",
         "./01_toolchain.md"
       ],
-      "transitions": 3,
+      "transitions": 6,
       "has_cognitive_path": false,
       "mermaid_blocks": 4,
       "matrix_rows": 60
@@ -3741,7 +4012,7 @@
         "./04_application_domains.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 171
     },
@@ -3821,30 +4092,9 @@
         "./03_core_crates.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 163
-    },
-    {
-      "path": "concept\\06_ecosystem\\README.md",
-      "layer": "L6",
-      "title": "L6 生态工程层（Ecosystem & Engineering）",
-      "positioning": "Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。",
-      "line_count": 122,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_toolchain.md",
-        "./02_patterns.md",
-        "./03_core_crates.md",
-        "./04_application_domains.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 23
     },
     {
       "path": "concept\\07_future\\01_ai_integration.md",
@@ -3908,17 +4158,17 @@
       "cross_references": [
         "../01_foundation/01_ownership.md",
         "../01_foundation/04_type_system.md",
+        "../02_intermediate/01_traits.md",
         "../03_advanced/03_unsafe.md",
         "../04_formal/04_rustbelt.md",
         "../05_comparative/01_rust_vs_cpp.md",
         "../05_comparative/safety_boundaries.md",
         "../06_ecosystem/01_toolchain.md",
         "./02_formal_methods.md",
-        "./02_intermediate/01_traits.md",
         "./03_evolution.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 46
     },
@@ -4008,7 +4258,7 @@
         "./03_evolution.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 7,
       "matrix_rows": 77
     },
@@ -4084,124 +4334,9 @@
         "../07_future/02_formal_methods.md"
       ],
       "transitions": 0,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 64
-    },
-    {
-      "path": "concept\\07_future\\README.md",
-      "layer": "L7",
-      "title": "L7 前沿趋势层（Future & Trends）",
-      "positioning": "Rust 在 AI 时代、形式化方法工业化、分布式系统形式化等前沿方向的**演进预测**与**需求驱动**。本层是知识体系的\"前锋\"，反向约束下层设计。",
-      "line_count": 143,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./01_ai_integration.md",
-        "./02_formal_methods.md",
-        "./03_evolution.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 16
-    },
-    {
-      "path": "concept\\LSIP_Unified_Model_Panorama.md",
-      "layer": "L?",
-      "title": "软件工程世界的 LSIP 统一模型全景",
-      "positioning": "",
-      "line_count": 584,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 1,
-      "matrix_rows": 111
-    },
-    {
-      "path": "concept\\PLAN.md",
-      "layer": "L?",
-      "title": "Rust 概念知识体系 —— 可持续推进计划与任务",
-      "positioning": "",
-      "line_count": 186,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 70
-    },
-    {
-      "path": "concept\\PLAN_Semantic_Space_Wave.md",
-      "layer": "L?",
-      "title": "Wave 11 计划：Rust 表征空间与语义边界全面梳理",
-      "positioning": "",
-      "line_count": 250,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 36
-    },
-    {
-      "path": "concept\\PostgreSQL_LSIP_Unified_Model.md",
-      "layer": "L?",
-      "title": "PostgreSQL 18+ 系统化形式化分析",
-      "positioning": "",
-      "line_count": 683,
-      "theorem_chains": [],
-      "anti_propositions": [
-        {
-          "id": "7.1",
-          "title": "一致性故障诊断决策树"
-        },
-        {
-          "id": "7.2",
-          "title": "MVCC 可见性判定推理树"
-        },
-        {
-          "id": "7.3",
-          "title": "跨系统一致性策略决策矩阵"
-        }
-      ],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 63
-    },
-    {
-      "path": "concept\\README.md",
-      "layer": "L?",
-      "title": "Rust 概念知识体系 —— 全面分析论证与权威对齐",
-      "positioning": "本文件夹致力于构建 Rust 编程语言的**全面、权威、国际化、可持续演进**的概念知识体系。所有内容以 **Wikipedia 权威定义**、**国际顶尖大学课程**、**著名研究机构成果** 为基准，结合多种思维表征方式（思维导图、多维矩阵、决策树、定理推理树、边界判定树等），形成层次化的理论-模型-实践结构。",
-      "line_count": 129,
-      "theorem_chains": [],
-      "anti_propositions": [],
-      "code_blocks": [],
-      "sources": [],
-      "cross_references": [
-        "./PLAN.md"
-      ],
-      "transitions": 0,
-      "has_cognitive_path": false,
-      "mermaid_blocks": 0,
-      "matrix_rows": 23
     }
   ]
 }

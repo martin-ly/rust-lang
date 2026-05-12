@@ -474,10 +474,102 @@ Oxide 视角:
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 九、Polonius：Loan-based 形式化语义
 
+### 9.1 从区域到 Loans
+
+当前 borrow checker 的形式化基于 **区域（Region）**：
+
+$$
+\text{Region} \; r ::= \alpha \mid \{ \ell_1, \ldots, \ell_n \}
+$$
+
+Polonius 将基本单元从"区域"改为 **Loan**——一个具体的借用实例：
+
+| 概念 | 当前系统 | Polonius |
+|:---|:---|:---|
+| 基本单元 | Region（集合 of 程序点）| Loan（单个借用实例）|
+| 约束 | 区域包含关系 | Loan 的 live-at 关系 |
+| 求解 | 最小不动点（区域合并）| Datalog 推理（Datafrog）|
+| 精度 | 流不敏感（区域覆盖整个作用域）| 流敏感+路径敏感 |
+
+### 9.2 Polonius 的 Datalog 规则（核心）
+
+Polonius 的核心推理通过 Datalog 规则表达：
+
+```prolog
+% 规则 1：借用从创建点开始有效
+loan_live_at(L, P) :- loan_originates_from(L, P).
+
+% 规则 2：借用沿控制流传递
+loan_live_at(L, Q) :- loan_live_at(L, P), cfg_edge(P, Q), !loan_killed_at(L, P).
+
+% 规则 3：如果借用有效，则其路径不可被非法访问
+error(P) :- loan_live_at(L, P), loan_invalidated_at(L, P).
+```
+
+**定理 9.1（Polonius Soundness）**：若 Polonius 不报 error，则程序在动态执行中不会出现数据竞争。
+
+> **证明思路**：`loan_live_at(L, P)` 精确追踪每个借用在每个程序点的有效性。`loan_invalidated_at` 检测对该借用所引用的路径的冲突访问。若 Datalog 推导不出 `error(P)`，则不存在程序点同时满足"借用有效"和"冲突访问"。
+
+### 9.3 Polonius 对 T3（区域约束）的影响
+
+回顾 T3 定理（当前系统）：
+
+> **T3**：$\Gamma \vdash \tau <: \tau' \iff \text{Region}(\tau) \supseteq \text{Region}(\tau')$
+
+在 Polonius 中，子类型关系被重新表述为 **loan 包含关系**：
+
+> **T3-Polonius**：$\tau <:_{P} \tau' \iff \forall \text{loan } L \in \text{Loans}(\tau'), \text{loan_live_at}(L, P) \Rightarrow L \in \text{Loans}(\tau)$
+
+**关键区别**：
+
+- **当前**：子类型是全局的区域包含，与程序点无关
+- **Polonius**：子类型是**路径敏感的**，在不同程序点可能不同
+
+### 9.4 Polonius 的复杂度
+
+| 问题 | 当前系统 | Polonius |
+|:---|:---|:---|
+| 约束求解 | O(n × m) 区域合并 | O(n³) Datalog 求值 |
+| 空间复杂度 | O(n × m) | O(n²) loans × points |
+| n = 程序点数, m = 区域数 | | |
+
+**优化方向**：
+
+1. **局部性优化**：仅分析受影响的 loans
+2. **增量求解**：利用上次编译结果
+3. **并行化**：Datalog 的固定点计算天然可并行
+
+### 9.5 与 Oxide 的衔接
+
+Oxide 形式化（§2）使用 **ownership typing**：
+
+$$
+\Gamma \vdash e : \tau \dashv \Phi
+$$
+
+Polonius 可视为 Oxide 的**实现层优化**：
+
+- Oxide 的 $\Phi$（effect）记录了所有权变化
+- Polonius 的 `loan_originates_from` + `loan_killed_at` 精确实现了 $\Phi$ 的语义
+- **差异**：Oxide 是类型系统的形式化描述，Polonius 是编译器中的高效算法实现
+
+### 9.6 开放问题
+
+| 问题 | 状态 | 说明 |
+|:---|:---|:---|
+| Polonius 的完整形式化证明 | 🔍 开放 | 尚无 published paper 给出完整 soundness proof |
+| Polonius + Unsafe 的交互 | 🔍 开放 | Tree Borrows 如何与 loan-based 分析统一？|
+| Polonius 的性能优化 | ⚠️ 进行中 | rustc 团队持续优化 Datalog 求解速度 |
+| Polonius 的错误信息质量 | ✅ 已解决 | 比当前系统更精确地指出借用冲突原因 |
+
+---
+
+## 十、待补充与演进方向（TODOs）
+
+- [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
 - [ ] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比
 - [ ] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析
-- [ ] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估
 - [ ] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系
 - [ ] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应（参见 L3 `02_async.md` §8）
