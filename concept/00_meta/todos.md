@@ -142,17 +142,63 @@
 - [x] 文件夹结构完整（L0-L7）
 - [x] 各层级 README 索引完整
 
-### 4.2 待完成的门禁检查
+### 4.2 已完成的门禁检查（v1.1 关系审计）
 
-- [ ] 来源标注率 ≥80% 的论断（需抽样审计）
-- [ ] 跨文件链接密度 ≥3 个外链/文件（需补充）
-- [ ] 高优先级 TODO 完成率 ≥50%（当前 ~0%）
+- [x] 跨层关系图谱构建 (`inter_layer_map.md`)
+- [x] 全局概念索引构建 (`concept_index.md`)
+- [x] 各层 README 关系图更新
+- [x] L1-L4 定理一致性矩阵补充
+- [x] L1-L4 反命题树补充
+- [x] L1-L4 认知路径补充
+- [x] L5-L7 关系映射补充
+- [x] 跨文件链接密度 ≥3 个外链/文件
+
+### 4.3 待完成的门禁检查
+
+- [ ] 来源标注率 ≥85% 的论断（需抽样审计）
+- [ ] Wikipedia 引用覆盖率 100%（核心概念）
+- [ ] 国际课程引用覆盖率 100%（核心概念）
+- [ ] 学术论文引用覆盖率 100%（L1-L4）
+- [ ] 高优先级 TODO 完成率 ≥50%
 - [ ] L4-L7 文件内容深度达到 L1-L3 的 60%
 
 ---
 
-## 五、下一步推进建议
+## 五、v1.1 权威来源对齐任务清单
 
-1. **短期（1-2 周）**: 完成高优先级 TODO 中的核心交叉概念（Variance、Pin、GATs、Atomic 内存序）
-2. **中期（1 个月）**: 完成所有高优先级 TODO，补充 L4-L7 文件深度
-3. **长期（季度）**: 完成中优先级 TODO，建立跨文件链接网络，来源标注审计
+### Wave 1: 元信息层（已完成）
+
+- [x] 扩展 `sources.md` —— 新增 Wikipedia 词条、国际课程、学术论文
+
+### Wave 2: L3 权威来源补充（进行中）
+
+- [ ] `03_advanced/02_async.md` —— 补充 Wikipedia、CMU 17-350、PLDI 论文
+- [ ] `03_advanced/03_unsafe.md` —— 补充 Wikipedia、Rustonomicon、Miri 论文
+- [ ] `03_advanced/04_macros.md` —— 补充 Wikipedia、CMU 17-363、Hygienic Macros
+- [ ] `03_advanced/01_concurrency.md` —— 补充 Stanford CS340R、RustBelt CSL
+
+### Wave 3: L5-L7 深度扩展（待开始）
+
+- [ ] `05_comparative/02_rust_vs_go.md` —— 扩展至 400+ 行
+- [ ] `05_comparative/03_paradigm_matrix.md` —— 扩展至 350+ 行
+- [ ] `06_ecosystem/01_toolchain.md` —— 扩展至 300+ 行
+- [ ] `06_ecosystem/02_patterns.md` —— 扩展至 300+ 行
+- [ ] `07_future/01_ai_integration.md` —— 扩展至 250+ 行
+- [ ] `07_future/02_formal_methods.md` —— 扩展至 250+ 行
+- [ ] `07_future/03_evolution.md` —— 扩展至 250+ 行
+
+### Wave 4: L2-L4 精细化增强（待开始）
+
+- [ ] `02_intermediate/01_traits.md` —— CMU 17-363 traits、Type Class 论文
+- [ ] `02_intermediate/02_generics.md` —— System F 论文、Const Generics RFC
+- [ ] `04_formal/01_linear_logic.md` —— 扩展至 450+ 行
+- [ ] `04_formal/02_type_theory.md` —— 扩展至 400+ 行
+- [ ] `04_formal/03_ownership_formal.md` —— 扩展至 350+ 行
+- [ ] `04_formal/04_rustbelt.md` —— 扩展至 350+ 行
+
+## 六、下一步推进建议
+
+1. **当前（进行中）**: Wave 2 —— L3 权威来源对齐
+2. **短期（1-2 周）**: Wave 3 —— L5-L7 深度扩展
+3. **中期（2-3 周）**: Wave 4 —— L2-L4 精细化 + 高优先级 TODO
+4. **长期（季度）**: 完成中优先级 TODO，来源标注审计

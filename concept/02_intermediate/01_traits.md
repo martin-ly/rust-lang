@@ -27,6 +27,8 @@
 
 ### 1.3 形式化定义
 
+> **[类型论: Wadler & Blott 1989, "How to Make Ad-hoc Polymorphism Less Ad-hoc"]** Trait 形式化为带约束的接口类型，对应类型类（type class）的构造性证明模型。 ✅ 已验证
+
 Trait 可以形式化为**带约束的接口类型**（constrained interface types），对应范畴论中的**类型类**（type class）：
 
 ```text
@@ -86,6 +88,8 @@ Trait 作为逻辑命题:
 
 ### 3.1 类型类作为逻辑命题
 
+> **[类型论: Curry-Howard 同构 / 直觉主义类型论]** Trait 系统对应逻辑命题与构造性证明的 Curry-Howard 对应。 ✅ 已验证
+
 Trait 系统对应**直觉主义类型论**中的**依赖类型约束**：
 
 ```text
@@ -103,6 +107,8 @@ Trait 定义 = 类型上的逻辑谓词
 ```
 
 ### 3.2 Trait 组合与子类型
+
+> **[类型论: Wikipedia / Haskell Type Class]** Trait Bounds 的组合语义对应逻辑合取（∧），Supertrait 对应逻辑蕴含（→），Blanket impl 对应全称量词 + 蕴含。 ✅ 已验证
 
 ```text
 Trait 组合（Trait Bounds）:
@@ -188,6 +194,8 @@ graph TD
 
 ### 6.1 Trait + 泛型 ⇒ 零成本抽象
 
+> **[TRPL: Ch10.2] · [Rust Reference: Monomorphization]** Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
+
 ```text
 前提 1: Trait 定义接口契约
 前提 2: 泛型通过单态化在编译期为每个具体类型生成专用代码
@@ -200,6 +208,8 @@ graph TD
 
 ### 6.2 Coherence 定理
 
+> **[RFC 1023] · [Rust Reference: Coherence]** Coherence 保证全局唯一 impl，是 Orphan Rule 和重叠实现禁止的直接推论。 ✅ 已验证
+
 ```text
 前提: Orphan Rule + 重叠 impl 禁止
     ↓
@@ -207,6 +217,22 @@ graph TD
     ↓
 推论: 编译器可以唯一确定调用哪个 impl，无需运行时查找（静态分发场景）
 ```
+
+### 6.3 定理一致性矩阵
+
+> **[原创分析] · [Rust Reference: Type System]** 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳。 💡 原创分析
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| Orphan Rule 一致性 | crate 边界清晰 | 无矛盾 impl | Coherence (类型论) | 泛型约束、特化 | 覆盖 impl（不稳定） | E0117 |
+| Trait 对象安全 | 方法满足对象安全条件 | dyn Trait 可行 | 存在类型 + vtable | 运行时多态 | Self: Sized、泛型方法 | E0038 |
+| Auto Trait 推导 | 所有字段满足 Trait | 结构体自动实现 | 结构化推导规则 | Send/Sync 安全 | `unsafe impl` 手动覆盖 | — |
+| GATs 约束可满足 | 关联类型参数合法 | 泛型关联类型可用 | System Fω 约束 | HKT 模拟 | 无界递归、不一致约束 | — |
+| Supertrait 传递 | `trait A: B` | A 的实现者必须实现 B | 子类型传递性 | Trait 层次设计 | 循环 supertrait | E0399 |
+
+> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ Trait 对象安全，形成**从定义到使用**的递进链。Auto Trait 推导是编译器对结构性质的自动证明。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
 ---
 
@@ -332,6 +358,101 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 ---
 
+### 7.6 反命题与边界分析
+
+> **[RFC 1023] · [Rust Reference: Orphan Rules]** 反命题分析基于 Orphan Rule 的形式化语义和已知边界案例。 ✅ 已验证
+
+#### 命题: "Orphan Rule 保证全局一致性"
+
+```mermaid
+graph TD
+    P["命题: Orphan Rule 保证全局一致性"] --> Q1{"使用特征覆盖 (feature coverage)?"}
+    Q1 -->|是| F1["反例: 不稳定特性允许局部覆盖<br/>→ 可能破坏全局一致性"]
+    Q1 -->|否| Q2{"使用 newtype 模式?"}
+    Q2 -->|是| F2["反例: newtype 是绕过 Orphan Rule 的合法技巧<br/>→ 非反例，是工程解"]
+    Q2 -->|否| Q3{"跨 crate 同名类型?"}
+    Q3 -->|是| F3["反例: 不同 crate 对第三方类型 impl 同一 trait<br/>→ 链接错误"]
+    Q3 -->|否| T["定理成立: 全局唯一 impl<br/>✅ Coherence 保证"]
+
+    style F1 fill:#f96
+    style F2 fill:#6f6
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+#### 命题: "Trait Bounds 充分表达约束"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| 标准 Trait Bounds | ✅ 充分 | `T: Display + Clone` |
+| 关联类型约束 | ✅ 充分 | `T: Iterator<Item = u32>` |
+| GATs | ⚠️ 部分充分 | 高阶类型需额外技巧 |
+| 类型级整数约束 | ❌ 不充分 | 需 `typenum` 或 const generics |
+| 否定约束 (`T: !Trait`) | ❌ 不支持 | 可能未来添加 |
+
+#### 边界极限测试
+
+```rust
+// 边界: Orphan Rule 的限制与绕过
+
+// crate A: 定义 Trait
+trait MyTrait {}
+
+// crate B: 定义类型
+struct BType;
+
+// crate C: 无法为 BType impl MyTrait（Orphan Rule）
+// impl MyTrait for BType {}  // E0117
+
+// 绕过 1: newtype 模式
+struct Wrapper(BType);
+impl MyTrait for Wrapper {}  // ✅ 合法: Wrapper 是本地类型
+
+// 绕过 2: 泛型参数
+struct Generic<T>(T);
+impl<T> MyTrait for Generic<T> {}  // ✅ 合法: Generic 是本地类型
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+> **[原创分析] · [TRPL: Ch10.2]** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构。 💡 原创分析
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"Trait 和接口                "Java 接口 vs             "Trait = 行为          "Type Class:        "impl Trait          "Orphan Rule
+ 有什么区别？"               Rust Trait 的区别？"     的抽象定义"           类型类 + 约束"       for Type"           限制外部 impl"
+
+"怎么约束泛型                "泛型函数需要             "Trait Bounds =        "Horn 子句:         "where 子句         "GATs 约束
+ 参数的能力？"               特定能力"                能力需求表达"          约束可满足"         编译检查"           求解复杂度"
+
+"为什么 Send/Sync             "跨线程传递              "Auto Trait =          "结构化推导:        "编译器自动          "unsafe impl
+ 自动实现？"                 自动安全？"              结构性质自动证明"      成员都满足则整体满足" 推导"              手动覆盖"
+```
+
+**认知脚手架**:
+
+- **类比**: Trait 像"岗位描述"——定义了能力要求，具体谁（哪个类型）来干由 `impl` 决定。
+- **反直觉点**: 其他语言的接口通常与类型定义在一起，Rust 的 Trait impl 可以在任何位置（受 Orphan Rule 约束）。
+- **形式化过渡**: 从"共享行为" → "Type Class" → "System F 约束多态"。
+
+### 7.7 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-363: Programming Language Pragmatics]** | Traits、Type Class、对象安全 | L2 Trait 完整覆盖 |
+| **[CMU 17-350: Safe Systems Programming]** | Trait 在系统编程中的应用 | 工程实践 |
+| **[Wikipedia: Type class]** | Haskell Type Class 概念 | Trait 的理论前身 |
+| **[Wikipedia: Polymorphism]** | 参数多态、特设多态 | Trait 的多态机制 |
+| **[RFC 255: Object Safety]** | Trait 对象安全规则 | 对象安全 §3 |
+| **[RFC 1210: Specialization]** | 特化设计 | 未来演进 |
+| **[Type Classes in Haskell (Hall et al. 1996)]** | Type Class 形式化 | 理论根基 |
+
+---
+
 ## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -398,6 +519,8 @@ default impl<T: Copy> MyTrait for T {
 ```
 
 #### 当前状态与替代方案
+
+> **[RFC 1210] · [Rust Reference: Specialization]** Specialization 因 soundness 问题尚未稳定，min_specialization 已部分稳定。 ⚠️ 存在争议
 
 ```text
 状态: Specialization 自 2016 年以来在 nightly，尚未稳定
@@ -514,6 +637,8 @@ Auto trait = 编译器自动为类型推导实现的标记 trait
 ```
 
 #### Send/Sync 的自动推导规则
+
+> **[Rust Reference: Auto Traits] · [TRPL: Ch16]** Send/Sync 的自动推导基于结构成员递归检查，原始指针为保守假设。 ✅ 已验证
 
 ```text
 编译器推导算法（简化）:

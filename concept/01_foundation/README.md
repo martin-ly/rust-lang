@@ -1,88 +1,172 @@
 # L1 基础概念层（Foundation）
 
-> **定位**：Rust 最核心的基础性概念，是所有进阶内容的必要前提。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
+> **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
+> **Bloom 层级**: 记忆 → 理解
+> **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统 · 代数类型论
 
 ---
 
-## 一、本层概念图谱
+## 一、本层概念关系图（完整版）
 
 ```mermaid
-graph TD
-    A[L1 基础概念层] --> B[01 Ownership 所有权]
-    A --> C[02 Borrowing 借用]
-    A --> D[03 Lifetimes 生命周期]
-    A --> E[04 Type System 类型系统基础]
+graph TB
+    subgraph L1_Core["L1 核心四概念"]
+        O[01 Ownership<br/>所有权]
+        B[02 Borrowing<br/>借用]
+        L[03 Lifetimes<br/>生命周期]
+        TS[04 Type System<br/>类型系统]
+    end
 
-    B --> B1[线性逻辑/仿射逻辑]
-    B --> B2[Move / Copy / Drop]
-    B --> B3[RAII]
+    %% 递进关系： Ownership → Borrowing → Lifetimes
+    O ==>|"提供唯一性前提"| B
+    B ==>|"引用需时效约束"| L
+    O -.->|"在类型中体现"| TS
+    B -.->|"引用是类型的一部分"| TS
+    L -.->|"生命周期是泛型参数"| TS
 
-    C --> C1[&T / &mut T]
-    C --> C2[Alias-XOR-Mutation]
-    C --> C3[Reborrow]
+    %% 循环强化
+    TS -.->|"ADT 决定 Move/Copy"| O
+    L -.->|"生命周期验证借用合法性"| B
 
-    D --> D1[Lifetime Annotation]
-    D --> D2[Elision Rules]
-    D --> D3[NLL]
+    %% 内部结构
+    O --> O1[Move / Copy / Drop]
+    O --> O2[RAII]
+    O --> O3[线性/仿射逻辑]
 
-    E --> E1[Scalar / Compound]
-    E --> E2[ADT: enum / struct]
-    E --> E3[Option / Result]
+    B --> B1[&T / &mut T]
+    B --> B2[Alias-XOR-Mutation<br/>AXM 规则]
+    B --> B3[Reborrow]
 
-    B -.->|前提| C
-    C -.->|前提| D
-    B -.->|基础| E
+    L --> L1[Lifetime Annotation]
+    L --> L2[Elision Rules]
+    L --> L3[NLL]
+    L --> L4[HRTB]
+    L --> L5[Variance]
+
+    TS --> TS1[Scalar / Compound]
+    TS --> TS2[ADT: enum / struct]
+    TS --> TS3[impl Trait / dyn Trait]
+
+    style O fill:#f96,stroke:#333
+    style B fill:#bbf,stroke:#333
+    style L fill:#9f9,stroke:#333
+    style TS fill:#ff9,stroke:#333
+```
+
+### 1.1 概念间语义链接
+
+| 关系 | 从 | 到 | 语义类型 | 说明 |
+|:---|:---|:---|:---|:---|
+| 1 | **Ownership** | **Borrowing** | `==>` 前提/启用 | 所有权唯一性是借用规则成立的根本前提。若无唯一 owner，则无法安全地出借引用。 |
+| 2 | **Borrowing** | **Lifetimes** | `==>` 导致/约束 | 引用（&T）必须在其指向数据的生命周期内有效，借用规则直接产生生命周期约束需求。 |
+| 3 | **Ownership** | **Type System** | `-.->` 体现/映射 | Move/Copy/Drop 在类型层面通过 trait 和编译器内建规则实现。 |
+| 4 | **Type System** | **Ownership** | `-.->` 反馈/决定 | 类型（如 `Copy` / `!Copy`）决定值在传递时是 move 还是 copy。 |
+| 5 | **Lifetimes** | **Borrowing** | `-.->` 验证/约束 | 生命周期约束的求解结果直接决定借用检查是否通过。 |
+
+### 1.2 学习路径的严格依赖
+
+```text
+Ownership（理解"唯一拥有"）
+    │ 必须先掌握：无（L1 入口）
+    │ 后置：Borrowing
+    │ 反事实：若无唯一 owner，则借用无法安全实现
+    ↓
+Borrowing（理解"临时租借"）
+    │ 必须先掌握：Ownership
+    │ 后置：Lifetimes
+    │ 反事实：若允许 &mut T 与 &T 共存，则产生数据竞争
+    ↓
+Lifetimes（理解"时效约束"）
+    │ 必须先掌握：Ownership + Borrowing
+    │ 后置：Generics（L2）, Concurrency（L3）
+    │ 反事实：若无生命周期，引用可能成为悬垂指针
+    ↓
+Type System（理解"类型即证明"）
+    │ 必须先掌握：Ownership（影响 ADT 的语义）
+    │ 后置：Trait（L2）, 所有类型相关概念
+    │ 反事实：弱类型系统无法表达所有权语义
 ```
 
 ---
 
-## 二、文件索引
+## 二、文件索引与关系
 
-| 文件 | 概念 | 核心内容 | 状态 |
-|:---|:---|:---|:---|
-| [01_ownership.md](./01_ownership.md) | 所有权 | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 |
-| [02_borrowing.md](./02_borrowing.md) | 借用 | `&T`/`&mut T`、借用规则、Alias-XOR-Mutation、NLL | ✅ v1.0 |
-| [03_lifetimes.md](./03_lifetimes.md) | 生命周期 | 标注、Elision、NLL、`'static`、HRTB | ✅ v1.0 |
-| [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、Option/Result、类型推断 | ✅ v1.0 |
-
----
-
-## 三、学习路径建议
-
-### 3.1 标准路径（推荐）
-
-```
-Ownership → Borrowing → Lifetimes → Type System
-     ↑_________|__________|___________|
-              （循环强化）
-```
-
-### 3.2 课程对齐路径
-
-| 阶段 | TRPL 章节 | Stanford CS340R | CMU 17-363 |
-|:---|:---|:---|:---|
-| 所有权 | Ch 4.1 | Week 1-2 基础 | Lecture: Ownership in Rust |
-| 借用 | Ch 4.2 | Week 1-2 基础 | Lecture: Borrowing & Lifetimes |
-| 生命周期 | Ch 10.3 | Week 3 | Lecture: Lifetime Elision |
-| 类型系统 | Ch 3, 6, 8 | Week 1 | Lecture: ADT & Pattern Matching |
+| 文件 | 概念 | 核心内容 | 状态 | 前置 | 后置 |
+|:---|:---|:---|:---|:---|:---|
+| [01_ownership.md](./01_ownership.md) | 所有权 | 唯一所有权、Move/Copy/Drop、线性/仿射逻辑、RAII | ✅ v1.0 | 无（L1 入口） | Borrowing, Type System |
+| [02_borrowing.md](./02_borrowing.md) | 借用 | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
+| [03_lifetimes.md](./03_lifetimes.md) | 生命周期 | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
+| [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断 | ✅ v1.0 | Ownership | Trait, Generics, Macros |
 
 ---
 
-## 四、形式化层级定位
+## 三、课程对齐路径
+
+| 阶段 | TRPL 章节 | Stanford CS340R | CMU 17-363 | Bloom 目标 |
+|:---|:---|:---|:---|:---|
+| 所有权 | Ch 4.1 | Week 1-2 基础 | Lecture: Ownership | 记忆 → 理解 |
+| 借用 | Ch 4.2 | Week 1-2 基础 | Lecture: Borrowing | 理解 |
+| 生命周期 | Ch 10.3 | Week 3 | Lecture: Lifetime Elision | 理解 → 应用 |
+| 类型系统 | Ch 3, 6, 8 | Week 1 | Lecture: ADT & Pattern Matching | 记忆 → 理解 |
+
+---
+
+## 四、形式化层级定位（理论-模型-实践）
 
 本层概念在理论-模型-实践三层中的分布：
 
-| 概念 | 理论层 | 模型层 | 实践层 |
-|:---|:---|:---|:---|
-| 所有权 | 线性/仿射逻辑 | 所有权状态机 | `move`、`Copy`、`Drop` |
-| 借用 | 分离逻辑、权限分割 | 借用检查器算法 | `&T`、`&mut T`、编译错误 |
-| 生命周期 | 区域类型系统 | 偏序约束求解 | 标注、Elision、NLL |
-| 类型系统 | 类型论、范畴论 | HM 推断 + 所有权约束 | `enum`、`match`、类型标注 |
+| 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | L4 形式化对应 |
+|:---|:---|:---|:---|:---|
+| **所有权** | 线性/仿射逻辑：资源不可复制 | 所有权状态机：有主/无主 | `move`、`Copy`、`Drop`、RAII | Linear Logic ⊗ · Affine weakening |
+| **借用** | 分离逻辑：分数权限 | 借用检查器算法 | `&T`、`&mut T`、编译错误 E0382/E0502 | Fractional Permissions · Separation Logic |
+| **生命周期** | 区域类型系统：偏序约束 | 约束图、偏序求解 | 标注、`'a`、Elision、NLL | Region Types (Tofte & Talpin 1994) |
+| **类型系统** | 类型论、范畴论：和/积类型 | HM 推断 + 所有权约束 | `enum`、`struct`、`match`、类型标注 | Algebraic Type Theory · Hindley-Milner |
 
 ---
 
-## 五、待创建内容
+## 五、本层定理一致性概览
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|
+| 所有权唯一性 | 每个值有唯一 owner | 无 double-free | 线性逻辑 ⊗ | `Rc` 循环、`mem::forget` | — |
+| AXM (Alias-XOR-Mutation) | 借用检查器接受 | 无数据竞争 | 分离逻辑 | `UnsafeCell`、裸指针 | E0502 |
+| 引用有效性 | 生命周期约束满足 | 无悬垂指针 | 区域类型 | `'static` 误用、循环引用 | E0597 |
+| Move 语义安全 | 非 Copy 类型赋值后 | 原变量不可访问 | 仿射逻辑 | 隐式 Copy（意外） | E0382 |
+
+> 完整定理一致性矩阵见各文件"定理推理链"章节。跨层映射见 [`../00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md)。
+
+---
+
+## 六、认知路径（从直觉到形式化）
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"为什么 s1 赋值后            "函数传参后原变量          "所有权转移            "Affine Logic:       "编译器检查           "Rc 循环、
+ 不能用了？"                  不能用了？"               就是消耗"             资源不可复用"          move 后访问报错"       mem::forget"
+
+"为什么 &mut s               "同时读和修改            "AXM 规则:              "分离逻辑:            "编译错误            "UnsafeCell
+ 和 &s 不能共存？"            会出错？"                读写互斥"              分数权限"            E0502"              运行时 panic"
+
+"为什么返回值引用            "返回局部变量引用          "引用不能比             "区域类型:            "编译错误            "'static 陷阱、
+ 不能指向局部变量？"          会崩溃？"                 指向对象活得长"        偏序约束"            E0597"              self-referential"
+```
+
+---
+
+## 七、待创建内容
 
 - [ ] `05_stack_heap.md` —— Stack vs Heap 内存模型（可与 Ownership 合并或独立）
 - [ ] `06_slice_string.md` —— Slice 与 String 类型详解
 - [ ] `07_pattern_matching.md` —— Pattern Matching 完整分析
+
+---
+
+## 八、跨层出口
+
+掌握 L1 后可进入：
+
+- **L2 进阶**: Trait（类型系统延伸）、泛型（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
+- **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用形式化）
+- **L5 对比**: Rust vs C++（所有权 vs 智能指针）

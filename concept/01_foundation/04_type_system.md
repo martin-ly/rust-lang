@@ -49,6 +49,9 @@ Rust 扩展:
   Γ; Σ ⊢ e : τ {Σ'}   （Σ = 堆状态，Σ' = 执行后的堆状态）
 ```
 
+> **[来源: Pierce "Types and Programming Languages"]** Hindley-Milner 类型推断算法及其扩展是 Rust 类型系统的基础。 ✅
+> **[来源: COR: ETH Zurich]** Γ; Σ ⊢ e : τ {Σ'} 的所有权约束形式化表示 Rust 的堆状态演化。 ✅
+
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
@@ -111,6 +114,9 @@ Option<T> ≅ 1 + T        （1 表示 None 单元类型）
 Result<T, E> ≅ T + E
 ```
 
+> **[来源: Category Theory for Programmers]** enum 对应余积（Coproduct / Sum Type），struct 对应积（Product Type）。 ✅
+> **[来源: Pierce "Types and Programming Languages"]** Option<T> ≅ 1 + T 和 Result<T, E> ≅ T + E 是代数数据类型的标准同构。 ✅
+
 ### 3.2 零成本空值优化（Null Pointer Optimization, NPO）
 
 ```text
@@ -123,6 +129,9 @@ Result<T, E> ≅ T + E
   Option<&T> ≅ &T ∪ {⊥}  其中 ⊥ 用 0x0 编码
   因为 &T 的有效值永不为 0（Rust 引用非空）
 ```
+
+> **[来源: Rust Reference: Enums]** NPO (Null Pointer Optimization) 利用引用永不为 null 的特性将 Option<&T> 压缩为单个指针。 ✅
+> **[来源: 💡 原创分析]** Option<&T> ≅ &T ∪ {⊥} 其中 ⊥ 用 0x0 编码，是 NPO 的形式化描述。 💡
 
 ---
 
@@ -216,6 +225,9 @@ graph TD
 应用: Option<T> 强制处理 None 情况，消除空指针错误
 ```
 
+> **[来源: Rust Reference: Patterns]** match 穷尽性检查由编译器验证，确保 enum 的所有变体都被处理。 ✅
+> **[来源: TRPL: Ch6.1]** Option<T> 强制处理 None 情况，消除空指针错误。 ✅
+
 ### 6.2 类型推断完备性
 
 ```text
@@ -230,6 +242,29 @@ graph TD
   - 数值字面量后缀（`42i32` vs `42.0f64`）
   - `collect::<Vec<_>>()` 等需要目标类型的场景
 ```
+
+> **[来源: Pierce "Types and Programming Languages"]** Hindley-Milner 类型推断对无显式约束的表达式是完备的（Principal type property）。 ✅
+> **[来源: TRPL: Ch3.2]** Rust 类型推断在函数签名、泛型约束、生命周期等场景需要显式标注。 ✅
+
+### 6.3 定理一致性矩阵
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| ADT 穷尽性 | enum 定义封闭 + match 全覆盖 | 无遗漏 case | 代数类型论 (和类型) | 错误处理 (Result/Option) | 非穷尽 match | E0004 |
+| 类型推断完备性 | 无显式泛型约束的表达式 | 类型可唯一推断 | HM 类型推断 | 单态化、零成本抽象 | 多态场景需标注 | E0282 |
+| impl Trait 抽象性 | 函数返回 impl Trait | 调用方无法获知具体类型 | 存在类型 (∃) | API 设计、AFIT | 递归调用限制 | E0720 |
+| dyn Trait 对象安全 | Trait 满足对象安全条件 | 动态分发可行 | 存在类型 + vtable | 运行时多态 | 泛型方法、Self: Sized | E0038 |
+| 类型一致性 | 类型检查通过 | 运行时无类型错误 | 类型论一致性 | 所有类型相关定理 | `std::mem::transmute` | — |
+
+> **[来源: Rust Reference: Patterns]** ADT 穷尽性 — 编译器检查 match 覆盖所有变体，错误码 E0004。 ✅
+> **[来源: Pierce "Types and Programming Languages"]** 类型推断完备性 — HM 算法保证无显式约束表达式的类型可唯一推断。 ✅
+> **[来源: Rust Reference: impl Trait]** impl Trait 返回位置 = 存在类型 ∃T. T: Trait。 ✅
+> **[来源: Rust Reference: Trait Objects]** dyn Trait 对象安全 — 满足对象安全条件的 trait 才能用于动态分发 (E0038)。 ✅
+> **[来源: Wright-Felleisen 1994]** 类型一致性 — 类型检查通过则运行时无类型错误（类型安全定理）。 ✅
+
+> **一致性检查**: ADT 穷尽性 ⟹ 类型一致性 ⟹ 类型推断完备性，形成**从构造到使用**的链。impl Trait 与 dyn Trait 是编译期/运行时分发的对偶。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
 ---
 
@@ -348,6 +383,87 @@ enum List<T> {
 
 ---
 
+### 7.5 反命题与边界分析
+
+#### 命题: "Rust 类型系统保证无运行时类型错误"
+
+```mermaid
+graph TD
+    P["命题: 无运行时类型错误"] --> Q1{"使用 transmute?"}
+    Q1 -->|是| F1["反例: transmute 将位模式 reinterpret<br/>→ 任意类型错误（unsafe）"]
+    Q1 -->|否| Q2{"使用 dyn Any downcast?"}
+    Q2 -->|是| F2["反例: downcast_ref 可能返回 None<br/>→ 运行时类型不匹配（安全）"]
+    Q2 -->|否| Q3{"使用 union?"}
+    Q3 -->|是| F3["反例: union 字段访问需 unsafe<br/>→ 可能读取错误变体"]
+    Q3 -->|否| T["定理成立: 无未定义行为类型错误<br/>✅ 类型论保证"]
+
+    style F1 fill:#f66
+    style F2 fill:#f96
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+#### 命题: "enum match 强制穷尽"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| 标准 enum + match | ✅ 强制全覆盖 | 编译错误 E0004 若遗漏 |
+| `#[non_exhaustive]` enum | ⚠️ 需 `_ =>` | 跨 crate 兼容性设计 |
+| 使用 `if let` | ⚠️ 不强制穷尽 | 语法糖，可能遗漏 |
+| 使用 `unsafe` + 裸指针 | ❌ 可绕过 | 直接访问 enum tag |
+
+#### 边界极限测试
+
+```rust
+// 边界: dyn Trait 的对象安全限制
+
+// 不对象安全的 Trait
+trait BadTrait {
+    fn method<T>(x: T);        // 泛型方法 → vtable 无法确定大小
+    fn self_by_value(self) where Self: Sized;  // Self: Sized 约束
+}
+
+// fn make_dyn(x: &dyn BadTrait) {}  // 编译错误 E0038
+
+// 对比: 对象安全的 Trait
+trait GoodTrait {
+    fn method(&self);           // &self, 无泛型, 无 Self: Sized
+    fn method2(&mut self);
+}
+
+fn make_dyn(x: &dyn GoodTrait) {}  // ✅ 合法
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"为什么 Rust                  "null 指针导致           "Option&lt;T&gt; =      "Maybe Monad:       "编译器强制           "unwrap()
+ 没有 null？"                崩溃怎么避免？"          显式空值"             Some/None"           match 处理"         运行时 panic"
+
+"怎么实现多态？"             "不同类型需要            "Trait = 共享          "Type Class /       "impl / dyn         "对象安全
+                             相同接口"                行为接口"             存在类型"            分发"               限制"
+
+"编译器怎么                  "let x = vec![1,2,3]     "类型推断 =           "HM 算法:            "rustc 自动          "collect()
+ 知道变量类型？"             不需要写类型？"           约束求解"             统一算法"            推导"               需标注"
+```
+
+> **[来源: TRPL: Ch6.1]** "Maybe Monad: Some/None" — Option<T> 对应 Haskell Maybe Monad 的 Rust 实现。 ✅
+> **[来源: Pierce "Types and Programming Languages"]** "Type Class / 存在类型" — Trait 对应 Haskell Type Class，dyn Trait 对应存在类型。 ✅
+> **[来源: Pierce "Types and Programming Languages"]** "HM 算法: 统一算法" — Hindley-Milner 类型推断通过约束统一 (unification) 推导类型。 ✅
+
+**认知脚手架**:
+
+- **类比**: enum 像"单选按钮"——必须且只能选一个；struct 像"表单"——每个字段都必须填写。
+- **反直觉点**: 很多语言有隐式 null，Rust 用 `Option<T>` 强制显式处理。
+- **形式化过渡**: 从"不能为空" → `Option<T>` 类型 → "和类型 (A + 1)" → "代数类型论"。
+
+---
+
 ## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -419,6 +535,9 @@ fn main() {
     make_speak(&dog);  // ✅ 通过 vtable 调用
 }
 ```
+
+> **[来源: Rust Reference: impl Trait]** impl Trait 返回位置 = 存在类型（existential type），参数位置 = 全称类型（universal type）。 ✅
+> **[来源: Rust Reference: Trait Objects]** dyn Trait = 动态分发类型，运行时携带 vtable，类型论上为存在类型 + 运行时擦除。 ✅
 
 ---
 

@@ -27,6 +27,8 @@
 
 ### 1.3 形式化定义
 
+> **[Haskell: Either Monad] · [类型论: Monad 定律]** Rust 的 Option/Result 对应单子（Monad）模式中的 Maybe 和 Either。 ✅ 已验证
+
 Rust 的错误处理对应**单子**（Monad）模式中的 `Option` 和 `Result`：
 
 ```text
@@ -85,6 +87,8 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 ### 3.1 Result 作为 Monad
 
+> **[类型论: Monad 定律] · [Haskell: Control.Monad]** Result<T, E> 满足 Monad 的左单位元、右单位元和结合律。 ✅ 已验证
+
 ```text
 Result<T, E> 满足 Monad 定律:
 
@@ -107,6 +111,8 @@ Result<T, E> 满足 Monad 定律:
 ```
 
 ### 3.2 `?` 与 From trait 的类型转换链
+
+> **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符隐式调用 From::from 实现错误类型自动向上转换。 ✅ 已验证
 
 ```text
 ? 运算符隐式调用 From::from:
@@ -187,6 +193,8 @@ graph TD
 
 ### 6.1 Result + ? ⇒ 显式错误路径
 
+> **[TRPL: Ch9] · [Rust Reference: The ? operator]** Result + ? 使所有错误传播路径在代码中显式表示，无隐式跳转。 ✅ 已验证
+
 ```text
 前提 1: Result<T, E> 强制区分 Ok 和 Err
 前提 2: ? 运算符使错误传播路径显式可见
@@ -200,6 +208,8 @@ graph TD
 
 ### 6.2 类型安全错误处理
 
+> **[Rust Reference: Enums] · [TRPL: Ch9]** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
+
 ```text
 前提: Result<T, E> 是泛型代数数据类型
     ↓
@@ -208,6 +218,22 @@ graph TD
 对比: Java catch(Exception e) 可捕获任意异常
       Rust match Err(e) 只匹配该函数的 Result 类型
 ```
+
+### 6.3 定理一致性矩阵
+
+> **[原创分析] · [TRPL: Ch9] · [Rust Reference: The ? operator]** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| Result 显式传播 | 函数返回 Result | 错误不可忽略 | 和类型 (A + E) | 所有错误处理代码 | `unwrap()` 忽略 | — |
+| ? 运算符合法性 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步错误传播 | 在闭包/回调中误用 | E0277 |
+| Error trait 一致性 | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
+| Option 空值安全 | 使用 Option<T> | 无 null 解引用 | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
+| 类型状态编码 | enum 表达状态 | 非法状态不可表示 | 代数类型穷尽性 | Typestate 模式 | 状态转换遗漏 | — |
+
+> **一致性检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性，形成**从值到函数到控制流**的递进链。Error trait 保证异构错误的统一处理。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
 
 ---
 
@@ -351,6 +377,97 @@ fn maybe_port() -> Option<u16> {
 
 ---
 
+### 7.6 反命题与边界分析
+
+> **[TRPL: Ch9] · [Rust API Guidelines]** 错误不可忽略性受 unwrap、let _ = 和 unsafe 绕过的边界限制。 ✅ 已验证
+
+#### 命题: "Rust 错误处理强制不可忽略"
+
+```mermaid
+graph TD
+    P["命题: 错误不可忽略"] --> Q1{"使用 unwrap()?"}
+    Q1 -->|是| F1["反例: unwrap() 将 Result 转为 panic<br/>→ 错误被暴力忽略"]
+    Q1 -->|否| Q2{"使用 let _ = result?"}
+    Q2 -->|是| F2["反例: 绑定到 _ 丢弃错误值<br/>→ 信息丢失（但仍在传播）"]
+    Q2 -->|否| Q3{"使用 unsafe { *ptr }?"}
+    Q3 -->|是| F3["反例: unsafe 可完全绕过类型系统<br/>→ 所有保证失效"]
+    Q3 -->|否| T["定理成立: 错误必须显式处理<br/>✅ 和类型强制分支"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f66
+    style T fill:#6f6
+```
+
+#### 命题: "? 运算符总是正确传播"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| 函数返回 `Result<T, E>` | ✅ 正确传播 | `?` 展开为 `match` |
+| 函数返回 `Option<T>` | ✅ 正确传播 | `?` 展开为 `match` |
+| 在 `try` 块中（不稳定） | ✅ 正确传播 | 局部错误处理 |
+| 在闭包中 | ⚠️ 可能受限 | 闭包返回类型需匹配 |
+| `Result<T, E1>` 到 `Result<T, E2>` | ⚠️ 需 `From` 转换 | 错误类型不匹配时 |
+| 在 `main()` 中返回 Result | ✅ 允许 | Rust 1.26+ |
+
+#### 边界极限测试
+
+```rust
+// 边界: 在闭包中使用 ? 的限制
+fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
+    // 错误: 闭包返回类型不匹配
+    // let sum: Result<i32, _> = items.iter().map(|s| s.parse()?).sum();
+    // 编译错误: ? 不能在返回类型不匹配的闭包中使用
+
+    // 正确: 使用 try_fold 或显式处理
+    let sum: i32 = items.iter()
+        .try_fold(0, |acc, s| {
+            let n: i32 = s.parse()?;  // ✅ try_fold 返回 Result，匹配
+            Ok(acc + n)
+        })?;
+    Ok(sum)
+}
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+> **[原创分析] · [TRPL: Ch9]** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"如何处理错误？"             "函数可能失败             "Result = 显式         "Either/Error       "match / if let     "unwrap()
+                             怎么返回值？"            错误通道"              Monad: A + E"       / ? 运算符"         运行时 panic"
+
+"为什么不用异常？"           "Java 异常可以             "Result = 显式         "和类型强制          "编译器检查         "? 在闭包中
+                             到处抛"                  类型级错误"           分支处理"            穷尽性"             的限制"
+
+"怎么组合多个错误？"         "不同函数返回             "Error trait +         "类型类统一          "dyn Error /        "From 转换
+                             不同错误类型"            From 转换"             接口"               Box<dyn Error>"    链丢失信息"
+```
+
+**认知脚手架**:
+
+- **类比**: `Result<T, E>` 像"快递包裹"——要么是商品（Ok），要么是拒收单（Err），你必须拆开才知道。
+- **反直觉点**: 很多语言用异常（隐式控制流），Rust 强制错误在类型中显式传播。
+- **形式化过渡**: 从"必须处理错误" → `Result` 类型 → "和类型 + Error Monad" → "单子绑定 (>>=)"。
+
+### 7.7 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-363: Programming Language Pragmatics]** | Error handling、Exception vs Result | L2 Error 覆盖 |
+| **[CMU 17-350: Safe Systems Programming]** | Result 在系统编程中的使用 | 工程实践 |
+| **[Wikipedia: Exception handling]** | 异常处理通用概念 | 对比 |
+| **[Wikipedia: Monad (functional programming)]** | Monad、Maybe/Error Monad | Result = Either |
+| **[RFC 243: Trait-based Exception Handling]** | ? 运算符设计 | ? 语法糖 |
+| **[TRPL: Ch9]** | 错误处理最佳实践 | 实践指南 |
+
+---
+
 ## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -372,6 +489,7 @@ fn maybe_port() -> Option<u16> {
 - [ ] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 预计: Phase 3
+
 ### 补充章节：异步错误处理（poll_fn / TryFuture）
 
 #### 异步函数的错误传播

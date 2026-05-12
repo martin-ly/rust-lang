@@ -89,6 +89,9 @@ Rust 适配:
 表示: 返回值的生命周期 = 'a，即与第一个参数绑定
 ```
 
+> **[来源: Tofte & Talpin 1994]** 生命周期构成偏序集，'a: 'b 表示区域 'a 包含区域 'b，是区域类型系统的核心关系。 ✅
+> **[来源: Rust Reference: Subtyping]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。 ✅
+
 ### 3.3 Non-Lexical Lifetimes (NLL)
 
 传统词法作用域（lexical）vs NLL：
@@ -100,6 +103,8 @@ NLL:          引用的生命周期 = 从声明到最后一次使用
 NLL 的关键洞察:
   借用只需在"实际使用期间"有效，而非"语法作用域"有效
 ```
+
+> **[来源: RFC 2094]** NLL 将生命周期从词法作用域扩展到基于数据流的实际使用期，减少不必要的借用冲突。 ✅
 
 ---
 
@@ -182,6 +187,9 @@ graph TD
 推论: 引用在其整个生命周期内始终指向有效内存
 ```
 
+> **[来源: Tofte & Talpin 1994]** 区域类型保证引用在其标注的生命周期内始终有效，无悬垂指针。 ✅
+> **[来源: RustBelt: POPL 2018]** 生命周期约束 + 所有权规则共同构成 Safe Rust 内存安全的形式化基础。 ✅
+
 ### 6.2 生命周期与子类型
 
 ```text
@@ -192,6 +200,28 @@ Rust 中的生命周期存在子类型关系:
 这称为 "lifetime covariance":
   如果 'long ⊇ 'short，那么 &'long T 是 &'short T 的子类型
 ```
+
+> **[来源: Rust Reference: Subtyping]** 生命周期协变：'long ⊇ 'short ⇒ &'long T <: &'short T，长生命周期引用可安全替代短生命周期引用。 ✅
+
+### 6.3 定理一致性矩阵
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| 生命周期保证引用有效性 | 所有 &'a T 满足区域约束 | 无悬垂指针 | 区域类型 (Tofte-Talpin) | 借用规则、并发安全 | `'static` 指向局部变量、循环引用 | E0597 |
+| Elision 推导正确性 | 函数签名符合模式 | 省略标注等价于显式标注 | HM 推断扩展 | — | 多引用返回歧义 | — |
+| NLL 流敏感安全 | 控制流图分析 | 比词法作用域更精确的存活期 | 流敏感区域分析 | 借用检查 | 循环中交叉引用 | E0716 |
+| Variance 子类型安全 | 生命周期协变/逆变标注 | 长生命周期可替代短生命周期 | 子类型理论 | 泛型约束、Trait 对象 | 逆变误用（&mut） | E0623 |
+| HRTB 全称量化 | `for<'a>` 约束 | 对所有生命周期成立 | 全称量词 (∀) | 高阶函数、回调 | 过度约束 | — |
+
+> **[来源: Tofte & Talpin 1994]** 生命周期保证引用有效性 — 区域类型的核心定理。 ✅
+> **[来源: Rust Reference: Lifetime elision]** Elision 推导正确性 — 三条省略规则基于 Hindley-Milner 风格的模式推导。 ✅
+> **[来源: RFC 2094]** NLL 流敏感安全 — 控制流分析使生命周期比词法作用域更精确。 ✅
+> **[来源: Rust Reference: Variance]** Variance 子类型安全 — 生命周期协变/逆变/不变的类型系统规则。 ✅
+> **[来源: Rust Reference: HRTB]** HRTB 全称量化 — `for<'a>` 对应高阶逻辑中的全称量词 ∀。 ✅
+
+> **一致性检查**: 生命周期有效性 ⟹ Elision 推导 ⟹ NLL 放宽，形成**从严格到宽松**的递进链。Variance 保证生命周期替换的安全性。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
 ---
 
@@ -310,6 +340,99 @@ fn main() {
 
 ---
 
+### 7.5 反命题与边界分析
+
+#### 命题: "生命周期约束保证无悬垂指针"
+
+```mermaid
+graph TD
+    P["命题: 生命周期保证无悬垂指针"] --> Q1{"'static 指向局部变量?"}
+    Q1 -->|是| F1["反例: 'static 要求全局存活<br/>→ 编译错误 E0597"]
+    Q1 -->|否| Q2{"自引用结构未用 Pin?"}
+    Q2 -->|是| F2["反例: 移动后内部引用失效<br/>→ 悬垂指针（unsafe）"]
+    Q2 -->|否| Q3{"循环引用 + 生命周期参数?"}
+    Q3 -->|是| F3["反例: Rc 循环中生命周期无法表达依赖关系<br/>→ 非悬垂，但泄漏"]
+    Q3 -->|否| T["定理成立: 无悬垂指针<br/>✅ 区域类型保证"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f96
+    style T fill:#6f6
+```
+
+#### 命题: "'static 意味着永远存活"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| `&'static str`（字面量） | ✅ 永远存活 | 编译到二进制中 |
+| `Box::leak` 产生的引用 | ✅ 程序生命周期内有效 | 内存泄漏转化为 'static |
+| 尝试 `&'static T` 指向局部变量 | ❌ 编译错误 | E0597: 生命周期不足 |
+| `std::sync::LazyLock` | ✅ 延迟初始化 + 'static | 安全地获得全局状态 |
+
+#### 边界极限测试
+
+```rust
+// 边界: HRTB 的约束与灵活性
+fn call_with_ref<F>(f: F)
+where
+    F: for<'a> Fn(&'a i32),  // 对所有 'a 成立
+{
+    let x = 42;
+    f(&x);  // x 生命周期很短，但 F 接受任意生命周期
+}
+
+// 对比: 若不用 HRTB
+fn call_with_ref_bad<F>(f: F)
+where
+    F: Fn(&'static i32),  // 仅接受 'static
+{
+    let x = 42;
+    f(&x);  // 编译错误: x 不是 'static
+}
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"为什么返回值引用             "返回局部变量引用         "引用不能比            "区域类型:           "编译错误            "'static 陷阱、
+ 不能指向局部变量？"          会崩溃？"                指向对象活得长"        偏序约束"            E0597"              self-referential"
+
+"为什么省略生命周期            "编译器怎么知道            "Elision =            "约束推导:           "编译器自动          "多返回引用
+ 也能编译通过？"              引用能活多久？"           模式推导"             HM 扩展"             推断"               歧义"
+
+"什么是 'static？"           "全局常量为什么            "'static =             "最大区域:           "编译器验证          "Box::leak
+                              能一直用？"              程序全局存活期"        ⊤ (top)"            生命周期包含"        制造 'static"
+```
+
+> **[来源: Tofte & Talpin 1994]** "区域类型: 偏序约束" — 引用生命周期不能超过被引用数据的区域边界。 ✅
+> **[来源: Rust Reference: Lifetime elision]** "约束推导: HM 扩展" — 生命周期省略规则基于 Hindley-Milner 约束求解的扩展。 ✅
+> **[来源: Rust Reference: Subtyping]** "最大区域: ⊤ (top)" — 'static 作为生命周期偏序集中的最大元。 ✅
+
+**认知脚手架**:
+
+- **类比**: 生命周期像"借条的到期日"——你必须在物品归还前使用它。
+- **反直觉点**: 很多语言中引用没有显式时效，Rust 将其变为类型系统的一部分。
+- **形式化过渡**: 从"引用不能活得比数据长" → "偏序约束" → "区域类型系统的偏序关系"。
+
+### 7.6 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-363: Programming Language Pragmatics]** | Lifetimes、Region types、NLL | L1 生命周期 |
+| **[CMU 17-350: Safe Systems Programming]** | 生命周期在系统编程中的应用 | 工程实践 |
+| **[Wikipedia: Region-based memory management]** | 区域类型通用概念 | 权威定义 |
+| **[Wikipedia: Subtyping]** | 子类型、协变/逆变 | Variance |
+| **[Tofte & Talpin 1994]** | 区域类型系统 | 形式化根基 |
+| **[RustBelt: POPL 2018]** | 生命周期逻辑 | 形式化验证 |
+| **[Niko Matsakis: NLL Blog]** | Non-Lexical Lifetimes 设计 | NLL §3 |
+
+---
+
 ## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -390,10 +513,13 @@ where
 | 序列化/反序列化 | `for<'a> Deserialize<'a>` | serde 核心 |
 | 自定义借用的迭代器 | `for<'a> LendingIterator<Item<'a> = ...>` | 自引用集合遍历 |
 
+> **[来源: Rust Reference: HRTB]** HRTB `for<'a>` 实现对"所有生命周期"的约束，对应高阶逻辑全称量词 ∀。 ✅
+
 ---
 
 - [x] **TODO**: 补充 Higher-Ranked Trait Bounds (HRTB) `for<'a>` 的深度分析 —— 优先级: 高 —— 已完成 v1.1
 - [ ] **TODO**: 补充 `impl Trait` 与生命周期推断的交互 —— 优先级: 中 —— 预计: Phase 2
+
 ### 补充章节：GATs 中的生命周期使用
 
 ```text
@@ -428,6 +554,8 @@ impl Buffer for Vec<u8> {
 //   slice 返回的 &'a [u8] 只在 'a 内有效
 //   'a ≤ Self 的生命周期（由 where Self: 'a 保证）
 ```
+
+> **[来源: RFC 1598 (GATs)]** GATs 中 `where Self: 'a` 确保关联类型不会引用比 Self 活得更短的数据。 ✅
 
 ---
 
@@ -467,6 +595,8 @@ impl<'a> StateMachine<'a> {
 }
 ```
 
+> **[来源: Rust Reference: Pin]** Pin<&'a mut T> 将生命周期约束与位置不变性结合，保证自引用结构在 'a 期间地址不变。 ✅
+
 ### 补充章节：async/await 中的生命周期
 
 ```text
@@ -497,6 +627,8 @@ async fn borrow_and_use<'a>(data: &'a str) -> usize {
 //     &s  // ❌ s 在函数结束时被 drop，但 Future 可能继续存活
 // }
 ```
+
+> **[来源: TRPL: Ch17]** async fn 编译后的状态机可能包含自引用，Future::poll 的 Pin<&mut Self> 保证状态机不移动。 ✅
 
 ---
 
@@ -582,6 +714,8 @@ fn bad<'a, 'b: 'a>(r: &'b mut &'static str) -> &'b mut &'a str {
 | `fn(T) -> U` | — | T: 逆变, U: 协变 | 参数/返回位置 |
 | `*const T` | — | 协变 | 只读裸指针 |
 | `*mut T` | — | **不变** | 可写裸指针 |
+
+> **[来源: Rust Reference: Variance]** Variance 判定矩阵基于类型构造器对生命周期/类型参数的变异性分析。 ✅
 
 ---
 

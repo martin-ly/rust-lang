@@ -94,6 +94,15 @@ graph TD
 | Futures and promises | <https://en.wikipedia.org/wiki/Futures_and_promises> | 异步/Future | `[Wikipedia: Futures and promises]` |
 | Communicating sequential processes | <https://en.wikipedia.org/wiki/Communicating_sequential_processes> | CSP / Go对比 | `[Wikipedia: CSP]` |
 | Substructural type system | <https://en.wikipedia.org/wiki/Substructural_type_system> | 子结构类型 | `[Wikipedia: Substructural type system]` |
+| Asynchronous programming | <https://en.wikipedia.org/wiki/Asynchronous_programming> | 异步编程模型 | `[Wikipedia: Asynchronous programming]` |
+| Coroutine | <https://en.wikipedia.org/wiki/Coroutine> | 协程/续体 | `[Wikipedia: Coroutine]` |
+| Undefined behavior | <https://en.wikipedia.org/wiki/Undefined_behavior> | 未定义行为 | `[Wikipedia: Undefined behavior]` |
+| Memory safety | <https://en.wikipedia.org/wiki/Memory_safety> | 内存安全 | `[Wikipedia: Memory safety]` |
+| Foreign function interface | <https://en.wikipedia.org/wiki/Foreign_function_interface> | FFI | `[Wikipedia: FFI]` |
+| Macro (computer science) | <https://en.wikipedia.org/wiki/Macro_(computer_science)> | 宏系统 | `[Wikipedia: Macro]` |
+| Metaprogramming | <https://en.wikipedia.org/wiki/Metaprogramming> | 元编程 | `[Wikipedia: Metaprogramming]` |
+| Hazard pointer | <https://en.wikipedia.org/wiki/Hazard_pointer> | 无锁并发 | `[Wikipedia: Hazard pointer]` |
+| Compare-and-swap | <https://en.wikipedia.org/wiki/Compare-and-swap> | 原子操作 | `[Wikipedia: Compare-and-swap]` |
 
 ### 3.2 学术论文与形式化验证
 
@@ -106,8 +115,16 @@ graph TD
 | **Creusot** | Xavier Denis, et al. | Rust 功能正确性验证工具 | `[Creusot]` |
 | **Verus** | Chris Hawblitzel, et al. (Microsoft) | Rust 自动化验证 | `[Verus]` |
 | **Kani** | AWS | Rust 模型检测 | `[Kani: AWS]` |
-| **Aeneas** | Aymeric Fromherz, et al. | MIR → 纯函数式语义翻译 | `[Aeneas]` |
-| **RefinedRust** | Lennard Gäher, et al. | 分离逻辑 + Rust 自动化验证 | `[RefinedRust]` |
+| **Aeneas** | Aymeric Fromherz, et al. | MIR → 纯函数式语义翻译 | `[Aeneas: ICFP 2022]` |
+| **RefinedRust** | Lennard Gäher, et al. (ETH) | 分离逻辑 + Rust 自动化验证 | `[RefinedRust: PLDI 2024]` |
+| **RustHornBelt** | Yusuke Matsushita, et al. (MPI-SWS) | Rust 功能正确性验证（含 unsafe） | `[RustHornBelt: PLDI 2022]` |
+| **Stacked Borrows** | Ralf Jung, et al. (MPI-SWS) | Rust 别名模型操作语义 | `[Stacked Borrows: POPL 2019]` |
+| **Tree Borrows** | Neven Villani, et al. | 更宽松的别名模型 | `[Tree Borrows]` |
+| **Iris from the Ground Up** | Ralf Jung, et al. | 高阶并发分离逻辑基础 | `[Iris: JFP 2018]` |
+| **The Meaning of Memory Safety** | Wright & Felleisen | 内存安全的形式化定义 | `[Wright-Felleisen 1994]` |
+| **Calculus of Ownership and Reference** | ETH Zurich | Rust 核心语言形式化 | `[COR: ETH]` |
+| **RefinedC** | Michael Sammler, et al. | C 语言自动化验证（Rust 工具参考） | `[RefinedC]` |
+| **Gillian-Rust** | Arnaud Daby-Seesaram, et al. | 混合验证（Creusot + unsafe） | `[Gillian-Rust: 2024]` |
 
 ---
 
@@ -132,11 +149,22 @@ graph TD
 | 属性 | 内容 |
 |:---|:---|
 | **URL** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> |
-| **学期** | Fall 2024 |
+| **学期** | Fall 2024 / Fall 2025 |
 | **授课** | Jonathan Aldrich |
 | **特点** | 以 Rust 为出发点的 PL 课程，结合证明助手 SASyLF |
-| **核心内容** | Ownership、Type Soundness、Dynamic Semantics、Proof Assistant |
+| **核心内容** | Ownership、Type Soundness、Dynamic Semantics、Traits、Macros、Concurrency |
 | **引用格式** | `[CMU 17-363: 主题]` |
+
+### 4.2b 卡内基梅隆大学 CMU 17-350: Safe Systems Programming in Rust
+
+| 属性 | 内容 |
+|:---|:---|
+| **URL** | <https://www.cs.cmu.edu/~aldrich/courses/17-350/> |
+| **学期** | Fall 2024 |
+| **授课** | Jonathan Aldrich / Staff |
+| **特点** | 专门针对 Rust 的系统编程安全课程 |
+| **核心内容** | Ownership、Borrowing、Lifetimes、Concurrency、Async、Unsafe、FFI、Traits |
+| **引用格式** | `[CMU 17-350: 主题]` |
 
 ### 4.3 MIT Rust 课程材料
 
@@ -155,13 +183,24 @@ graph TD
 | **核心内容** | Ownership-types in practice, affine type system, move semantics |
 | **引用格式** | `[Utrecht: Ownership Types]` |
 
-### 4.5 其他著名课程
+### 4.5 宾夕法尼亚大学 Penn CIS 1905: Rust Programming
+
+| 属性 | 内容 |
+|:---|:---|
+| **URL** | <https://www.cis.upenn.edu/~cis1905/> |
+| **学期** | 2025 Fall |
+| **特点** | 系统编程导向的 Rust 课程 |
+| **核心内容** | Ownership、Borrowing、Traits、Collections、Lifetime、Smart Pointers |
+| **引用格式** | `[Penn CIS 1905: 主题]` |
+
+### 4.6 其他著名课程
 
 | 课程 | 机构 | 特点 | 引用格式 |
 |:---|:---|:---|:---|
 | Programming Languages (WebAssembly + Rust) | 某校 (arXiv 1904.06750) | 用 Rust 实现 WebAssembly 解释器 | `[PL Wasm+Rust]` |
 | Learn Rust by Algorithms & Patterns | rust-raid (GitHub) | 项目驱动学习 | `[rust-raid]` |
 | Rust Patterns & Engineering How-Tos | Microsoft SCHIE | 工业级模式 | `[MS Rust Patterns]` |
+| teach-rs | Trifecta Tech Foundation | 模块化 Rust 教学资源 | `[teach-rs]` |
 
 ---
 
@@ -177,6 +216,9 @@ graph TD
 | **MongoDB TLA+ / Trace-Checking** | MongoDB | 工业级形式化验证实践 | `[MongoDB Formal]` |
 | **Google Rust in Android** | Google/Android | 大规模 Rust 采用实践 | `[Android Rust]` |
 | **Ferrous Systems Training** | Ferrous Systems | 嵌入式 Rust 培训 | `[Ferrous]` |
+| **Rust Foundation** | Rust Foundation | 年度报告、采用数据、生态统计 | `[Rust Foundation]` |
+| **Google Rust in Chromium** | Google | 大规模 C++ → Rust 迁移实践 | `[Chromium Rust]` |
+| **Linux Kernel Rust** | Linux Foundation | 内核 Rust 子系统 | `[Linux Rust]` |
 
 ---
 
@@ -251,7 +293,9 @@ graph LR
 
 ## 九、待补充来源
 
-- [ ] Wikipedia 德语/法语/日语版 Rust 词条（多语言视角）
+- [x] Wikipedia 扩展词条（Async、Unsafe、Macros、FFI 等） —— 2026-05-12 完成
+- [x] 国际课程扩展（CMU 17-350、Penn CIS 1905） —— 2026-05-12 完成
+- [x] 学术论文扩展（RustHornBelt、Stacked Borrows、RefinedRust） —— 2026-05-12 完成
 - [ ] IEEE/ACM 2024-2025 最新 Rust 相关论文
 - [ ] Rust Foundation 年度报告（工业采用数据）
 - [ ] Rust 用户调研（Rust Survey 2023/2024）

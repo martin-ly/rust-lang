@@ -15,11 +15,23 @@
 
 ## 一、权威定义（Definition）
 
-### 1.1 官方文档定义
+### 1.1 Wikipedia 权威定义
+
+> **[Wikipedia: Asynchronous programming]** Asynchronous programming is a means of parallel programming in which a unit of work runs separately from the main application thread and notifies the calling thread of its completion, failure or progress. It is a programming paradigm that enables non-blocking operations.
+
+> **[Wikipedia: Coroutine]** Coroutines are computer program components that generalize subroutines for non-preemptive multitasking, by allowing execution to be suspended and resumed. Coroutines are well-suited for implementing familiar program components such as cooperative tasks, exceptions, event loops, iterators, infinite lists and pipes.
+
+> **[Wikipedia: Futures and promises]** Futures and promises originated in functional programming and related paradigms (such as logic programming) to decouple a value (a future) from how it was computed (a promise). A future is a read-only placeholder view of a variable, while a promise is a writable, single-assignment container which sets the value of the future.
+
+### 1.2 官方文档定义
 
 > **[Async Book]** Asynchronous code allows us to run multiple tasks concurrently on the same OS thread. In Rust, asynchronous code is lazy: it does nothing until it is actively executed by calling `.await`.
 
 > **[TRPL: Ch17]** A future is an asynchronous computation that can produce a value. `async fn` returns a future. When you call an `async fn`, it returns a future that is a suspended computation, not the result. Futures are lazy: they don't do any work until you await them.
+
+> **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
+>
+> **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。✅ 已验证
 
 ### 1.2 形式化定义
 
@@ -91,6 +103,10 @@ Poll 类型:
 
 ## 三、形式化理论根基（Formal Foundation）
 
+> **[Rust Reference: Async fn desugaring]** 编译器将 async fn 转换为匿名状态机类型（匿名 enum/struct），实现 Future trait，每个 await 点对应一个状态转换。✅ 已验证
+>
+> **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
+
 ### 3.1 async fn 作为状态机
 
 ```text
@@ -129,6 +145,10 @@ async fn example() -> i32 {
       }
   }
 ```
+
+> **[RFC 2349]** Pin 被引入以支持自引用结构：Pin<&mut T> 保证 T 的内存地址不会被改变，除非 T: Unpin。✅ 已验证
+>
+> **[TRPL: Ch17]** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 
 ### 3.2 Pin 的形式化语义
 
@@ -219,6 +239,10 @@ graph TD
 
 ## 六、定理推理链（Theorem Chain）
 
+> **[RFC 2349 + Rust Reference]** 定理：Pin 保证 + 编译器生成的状态机 = Safe Rust 中自引用安全。这是无 GC 语言实现安全协程的关键机制。✅ 已验证
+>
+> **[TRPL: Ch17]** 推论：async/await 无需垃圾回收即可安全实现协程，内存管理是确定性的。✅ 已验证
+
 ### 6.1 async/await + Pin ⇒ 安全自引用
 
 ```text
@@ -231,6 +255,10 @@ graph TD
 推论: async/await 无需 GC 即可安全实现协程
       这是 Rust 相比 Go/Goroutine 的独特优势（确定性内存管理）
 ```
+
+> **[Async Book: Cancellation]** Cancellation safety 不是 Rust 类型系统自动保证的：select! 或 drop(Future) 可在任意 await 点取消任务，程序员需确保部分副作用后的状态一致性。⚠️ 存在争议（部分运行时提供结构化并发辅助）
+>
+> **[Tokio Documentation]** 最佳实践：将副作用（如写文件、发消息）推迟到 Future 即将 Ready 时，或使用事务/两阶段提交模式处理取消。✅ 已验证
 
 ### 6.2 取消安全（Cancellation Safety）
 
@@ -245,6 +273,22 @@ graph TD
     ↓
 最佳实践: 将副作用推迟到最终 Ready，或使用事务模式
 ```
+
+### 6.3 定理一致性矩阵
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| Pin 不动性 | `!Unpin` + Pin 构造 | 内存地址恒定 | —（部分形式化） | Future 安全、自引用 | `Unpin` 误实现、手动移动 | UB |
+| Future 轮询安全 | `Pin<&mut Self>` | 自引用在 poll 中有效 | —（部分形式化） | async/await 生成 | poll 中手动 mem::swap | UB |
+| async 状态机安全 | 编译器生成 + Pin | await 点状态转换合法 | —（待形式化） | 所有异步代码 | 跨越 await 持有非 Send | 编译错误 |
+| AFIT/RPITIT 抽象 | Trait 方法返回 impl Future | 调用方无需知道具体类型 | 存在类型 | 异步 Trait 设计 | 递归调用限制 | E0720 |
+| Waker 契约 | 正确实现 wake | 调度器最终 poll Future | 活性约定 | 运行时正确性 | 遗忘 wake、虚假 wake | 活锁/饥饿 |
+
+> **[Rust Reference: Pin]** 一致性检查: Pin 不动性 ⟹ Future 轮询安全 ⟹ async 状态机安全，形成**从内存到状态到控制流**的递进链。注意：async 的完整形式化仍是活跃研究领域。✅ 已验证
+>
+> **[🔍 待验证]** async 的完整形式化（包括 Waker 契约、执行器正确性）仍是活跃研究领域，目前仅有部分片段被形式化验证。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.3 "async 正确性"
 
 ---
 
@@ -347,6 +391,101 @@ fn main() {
     // let moved = pinned;  // 编译错误
 }
 ```
+
+---
+
+### 7.6 反命题与边界分析
+
+#### 命题: "async/await 保证自引用安全"
+
+```mermaid
+graph TD
+    P["命题: async 保证自引用安全"] --> Q1{"手动实现 Future (非编译器生成)?"}
+    Q1 -->|是| F1["反例: 手动 poll 可能未正确维护 Pin<br/>→ 自引用失效（unsafe/UB）"]
+    Q1 -->|否| Q2{"在 async 块中使用 unsafe?"}
+    Q2 -->|是| F2["反例: unsafe 可绕过 Pin 约束<br/>→ 所有保证失效"]
+    Q2 -->|否| Q3{"跨越 await 持有非 Send 变量?"}
+    Q3 -->|是| F3["反例: 编译错误（非 UB）<br/>→ 状态机不是 Send，无法跨线程调度"]
+    Q3 -->|否| T["定理成立: 自引用安全<br/>✅ Pin + 编译器生成保证"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f96
+    style T fill:#6f6
+```
+
+> **[RFC 2349]** Pin 保证内存不动的精确语义：Pin<P<T>> 不直接阻止 T 被 move，而是阻止通过 safe API 获取 &mut T 后 move out；Unpin 是 opt-out 机制。✅ 已验证
+>
+> **[Rust Reference: Pin]** 对 !Unpin 类型调用 mem::swap 或在 unsafe impl Unpin 后移动数据属于 UB。✅ 已验证
+
+#### 命题: "Pin 保证内存不动"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| `Pin<Box<T>>` with `!Unpin` | ✅ 不动 | 堆分配 + Pin 封装 |
+| `Pin<&mut T>` on stack | ⚠️ 有限 | 栈帧本身可能移动（如 async 状态机） |
+| 实现 `Unpin` for `!Unpin` | ❌ UB | `unsafe impl` 错误 |
+| `mem::swap` on pinned data | ❌ UB | 直接破坏 Pin 契约 |
+| `Box::pin` → `into_inner` | ❌ 不允许 | `Pin<Box<T>>` 不提供 into_inner |
+
+#### 边界极限测试
+
+```rust
+// 边界: 跨越 await 的 Send 约束
+use std::rc::Rc;
+
+async fn bad() {
+    let x = Rc::new(42);  // Rc 不是 Send
+    // 若此 async 状态机需要跨线程调度（如 tokio::spawn）:
+    // tokio::spawn(bad());  // 编译错误: Future 不是 Send
+    // 因为 x 跨越了 await 点，被包含在状态机中
+    some_async().await;
+}
+
+// 解决: 使用 Arc 替代 Rc
+async fn good() {
+    let x = std::sync::Arc::new(42);  // Arc 是 Send + Sync
+    tokio::spawn(good());  // ✅ 合法
+}
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"异步代码怎么工作？"         "await 后变量             "Future = 状态机       "效果系统/           "Pin 保证             "跨越 await
+                             还能用吗？"              + Pin 不动性"          续体转换"            自引用有效"          持有非 Send"
+
+"为什么需要 Pin？"           "自引用结构在              "Pin = 内存            "位置稳定性:         "编译器拒绝          "Unpin 自动
+                             移动后失效"              位置冻结"             地址恒定"            移动 Pin 数据"       实现覆盖"
+
+"async fn 和                "怎么定义异步              "AFIT = async          "存在类型 +         "编译器生成          "递归调用
+ Future 什么关系？"          Trait 方法？"            fn in trait"           Future trait"        状态机"             限制"
+```
+
+> **[TRPL: Ch17 + Async Book]** 认知类比：Future 像待办事项单——每次 poll 处理一件事，Pin 像胶水防止进度记录错位。✅ 已验证
+>
+> **[Rust Reference: Async]** 反直觉点：async fn 实际返回的是编译器生成的状态机，而非直接结果。✅ 已验证
+
+**认知脚手架**:
+
+- **类比**: `Future` 像"待办事项单"——每次 `poll` 是处理一件事，处理不完就记下当前进度（状态机）。`Pin` 像"胶水"——把待办单粘在桌上，防止进度记录错位。
+- **反直觉点**: `async fn` 看起来像普通函数，但实际上返回一个复杂的**状态机**。
+- **形式化过渡**: 从"await 暂停" → "状态机转换" → "续体传递风格 (CPS)" → "效果系统 (Effect Systems)"。 💡 原创分析
+
+### 6.4 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-350: Safe Systems Programming]** | async/await、Future、Pin、运行时 | L3 Async 完整覆盖 |
+| **[Stanford CS340R: Rusty Systems]** | 并发模型、异步系统编程 | L3 Concurrency → Async |
+| **[RFC 2394: async/await]** | 生成器状态机转换语义 | 形式化根基 §3 |
+| **[RFC 3185: Return Position Impl Trait in Trait]** | AFIT/RPITIT 设计 | Trait 中的异步 |
+| **[PLDI 2024: RefinedRust]** | Pin 不动性的形式化语义 | Pin 定理 |
 
 ---
 

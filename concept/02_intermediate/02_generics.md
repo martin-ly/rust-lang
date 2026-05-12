@@ -25,6 +25,8 @@
 
 ### 1.3 形式化定义
 
+> **[类型论: Girard-Reynolds System F]** 泛型对应参数多态，Rust 通过单态化实现，对应 System F 的二阶 λ 演算。 ✅ 已验证
+
 泛型对应**参数多态**（parametric polymorphism），Rust 通过**单态化**（monomorphization）实现：
 
 ```text
@@ -84,6 +86,8 @@
 
 ### 3.1 参数多态与 System F
 
+> **[Wikipedia: System F] · [类型论标准教材]** Rust 泛型核心对应 Girard-Reynolds System F（二阶 λ 演算）。 ✅ 已验证
+
 Rust 泛型的核心对应**Girard-Reynolds System F**（二阶 λ 演算）：
 
 ```text
@@ -99,6 +103,8 @@ Rust 对应:
 ```
 
 ### 3.2 单态化的范畴论语义
+
+> **[类型论: 范畴论语义]** 单态化的范畴论语义为从泛型到具体的结构保持映射（homomorphism）。 ✅ 已验证
 
 ```text
 单态化 = 从泛型到具体的函子（Functor）映射:
@@ -186,6 +192,8 @@ graph TD
 
 ### 6.1 单态化 ⇒ 零成本抽象
 
+> **[TRPL: Ch10.1] · [Rust Reference: Monomorphization]** 单态化生成与手写代码等价的专用实例，LLVM 优化消除额外开销。 ✅ 已验证
+
 ```text
 前提 1: 泛型函数 <T>fn(x: T) 在编译期为每个具体类型生成专用代码
 前提 2: 生成的代码与手写具体类型代码等价
@@ -199,6 +207,8 @@ graph TD
 
 ### 6.2 约束多态的类型安全
 
+> **[Rust Reference: Trait Bounds] · [TRPL: Ch10.2]** Trait Bounds 在编译期验证类型能力，泛型函数体调用保证类型安全。 ✅ 已验证
+
 ```text
 前提: <T: Trait> 约束确保 T 具有 Trait 定义的所有方法
     ↓
@@ -207,6 +217,22 @@ graph TD
 推论: 泛型函数的验证与具体类型函数同等严格
     不需要运行时类型检查（对比 Java 的类型擦除 + 转换）
 ```
+
+### 6.3 定理一致性矩阵
+
+> **[原创分析] · [Rust Reference: Generic Parameters]** 泛型定理矩阵基于 Rust 类型系统约束可满足性和单态化语义。 💡 原创分析
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| 单态化零成本 | 泛型函数编译时实例化 | 无运行时开销 | Parametricity | 所有性能敏感代码 | `dyn Trait` 动态分发 | — |
+| 约束可满足性 | where 子句为 Horn 子句 | 类型推导可判定 | HM 推断扩展 | Trait 解析、编译通过 | GATs 无界递归 | E0275 |
+| Const Generics 安全性 | 常量参数为编译期求值 | 类型参数包含常量值 | 依赖类型基础 | 数组抽象、类型级状态 | 非 const 表达式 | E0435 |
+| HRTB 全称约束 | `for<'a>` 合法 | 高阶函数类型安全 | 全称量词 (∀) | 回调、生命周期抽象 | 过度约束不可满足 | — |
+| 泛型一致性 | 单态化后类型检查通过 | 所有实例类型安全 | 类型替换引理 | — | `transmute` 绕过 | — |
+
+> **一致性检查**: 约束可满足性 ⟹ 单态化零成本 ⟹ 泛型一致性，形成**从检查到生成到验证**的链。Const Generics 是依赖类型的有限形式。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
 ---
 
@@ -328,6 +354,100 @@ struct LongTermStore<T: 'static> {
     data: T,
 }
 ```
+
+---
+
+### 7.6 反命题与边界分析
+
+> **[TRPL: Ch10.1] · [Rust Performance Book]** 零成本抽象的边界分析基于单态化与动态分发的性能权衡。 ✅ 已验证
+
+#### 命题: "泛型保证零成本抽象"
+
+```mermaid
+graph TD
+    P["命题: 泛型保证零成本"] --> Q1{"使用 dyn Trait?"}
+    Q1 -->|是| F1["反例: dyn Trait 使用 vtable<br/>→ 间接调用开销 + 指针胖化"]
+    Q1 -->|否| Q2{"使用 &dyn Trait?"}
+    Q2 -->|是| F2["反例: 胖指针 (data + vtable)<br/>→ 内存布局变化"]
+    Q2 -->|否| Q3{"泛型递归无界?"}
+    Q3 -->|是| F3["反例: 单态化代码膨胀<br/>→ 编译时间增加 + 二进制变大"]
+    Q3 -->|否| T["定理成立: 零运行时开销<br/>✅ Parametricity 保证"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T fill:#6f6
+```
+
+#### 命题: "类型推断总是成功"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| 简单表达式 | ✅ 推断成功 | `let x = 42` → `i32` |
+| 泛型函数调用 | ⚠️ 可能需标注 | `collect::<Vec<_>>()` |
+| 闭包参数 | ⚠️ 可能需标注 | 上下文不足时 |
+| 数值字面量 | ⚠️ 默认 `i32`/`f64` | 可能非预期类型 |
+| 递归类型 | ❌ 可能失败 | 需显式标注打破循环 |
+
+#### 边界极限测试
+
+```rust
+// 边界: 单态化代码膨胀
+
+// 一个泛型函数被多次实例化
+fn process<T: Display>(x: T) { println!("{}", x); }
+
+fn main() {
+    process(42i32);      // 实例 1: process<i32>
+    process(42i64);      // 实例 2: process<i64>
+    process(42u32);      // 实例 3: process<u32>
+    process("hello");    // 实例 4: process<&str>
+    process(String::new()); // 实例 5: process<String>
+    // 每个实例独立编译 → 代码膨胀
+}
+
+// 缓解: 使用 impl Trait 或动态分发
+fn process_dyn(x: &dyn Display) { println!("{}", x); }
+// 只有一个实例，但有一次间接调用开销
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+> **[原创分析] · [TRPL: Ch10.1]** 认知路径从"通用代码"直觉到 System F 形式化的渐进映射。 💡 原创分析
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"如何写通用函数？"           "swap 任何类型            "Generics =            "System F           "fn swap&lt;T&gt;(a, b)"  "Const Generics
+                             都要能交换"              参数化类型"            参数多态"                                数组长度"
+
+"为什么 Rust 泛型             "C++ 模板编译错误          "Trait Bounds =       "约束多态:           "where 子句         "Orphan Rule
+ 错误信息更友好？"            很难读"                  显式约束"             类型类限制"          编译检查"           冲突"
+
+"泛型有性能开销吗？"          "Java 泛型有               "Monomorphization =   "Parametricity:     "反汇编对比         "dyn Trait
+                             装箱开销"                编译期实例化"          零运行时开销"       无间接调用"        vs impl Trait"
+```
+
+**认知脚手架**:
+
+- **类比**: 泛型像"填空题模板"——结构固定，具体内容由调用方填入。
+- **反直觉点**: C++ 模板是"编译期代码生成"，Rust 泛型是"类型参数化"，错误检查时机不同。
+- **形式化过渡**: 从"通用代码" → "参数多态" → "System F / 参数性定理"。
+
+### 7.7 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-363: Programming Language Pragmatics]** | Parametric polymorphism、System F | L2 Generics 理论基础 |
+| **[CMU 17-350: Safe Systems Programming]** | 泛型在系统编程中的应用 | 工程实践 |
+| **[Wikipedia: Generic programming]** | 泛型编程通用概念 | C++ 模板对比 |
+| **[Wikipedia: System F]** | 参数多态 λ 演算 | 形式化根基 |
+| **[RFC 2000: Const Generics]** | 常量泛型设计 | Const Generics |
+| **[RFC 1598: Generic Associated Types]** | GATs 设计 | 关联类型泛型 |
+| **[Cardelli & Wegner 1985]** | 多态类型论综述 | 理论根基 |
 
 ---
 

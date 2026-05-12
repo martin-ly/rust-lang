@@ -34,6 +34,8 @@
 借用后:  x : Own(T)               （所有权归还）
 ```
 
+> **[来源: RustBelt: POPL 2018]** 借用的形式化语义为"所有权的临时授权"，不改变资源的最终归属（所有权归还）。 ✅
+
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
@@ -104,6 +106,9 @@ Rust 借用的核心定理：
 ```
 
 这是 Rust 消除数据竞争的**充分条件**。
+
+> **[来源: RustBelt: POPL 2018]** Alias-XOR-Mutation 是 Rust 消除数据竞争的充分条件，基于分离逻辑中的分数权限 (fractional permissions)。 ✅
+> **[来源: Wikipedia: Alias analysis]** 别名分析中"可变与别名互斥"是内存安全的核心条件。 ✅
 
 ---
 
@@ -194,6 +199,9 @@ graph TD
 推论: 所有并发数据访问要么是只读的，要么是同步的独占访问
 ```
 
+> **[来源: RustBelt: POPL 2018]** Safe Rust 中不存在数据竞争的形式化定理，基于 AXM 规则与 Send/Sync 的类型约束。 ✅
+> **[来源: Wright-Felleisen 1994]** 类型安全保证可推导出并发安全，前提是所有权与别名规则被严格执行。 ✅
+
 ### 6.2 借用有效性定理
 
 ```text
@@ -206,6 +214,27 @@ graph TD
   - 被引用数据在引用存活期间不会被 move（借用规则）
   - 被引用数据在引用存活期间不会被释放（Drop 顺序 + NLL）
 ```
+
+> **[来源: Rust Reference: References]** 引用有效性由生命周期约束和借用检查器共同保证。 ✅
+> **[来源: Tofte & Talpin 1994]** 引用不能比被引用数据活得更久 — 区域类型的核心约束。 ✅
+
+### 6.3 定理一致性矩阵
+
+| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+|:---|:---|:---|:---|:---|:---|:---|
+| AXM (Alias-XOR-Mutation) | 借用检查器接受 | 无数据竞争 | 分离逻辑分数权限 | Send/Sync 推导、并发安全 | `UnsafeCell`、裸指针别名 | E0502 |
+| 引用有效性 | 生命周期约束满足 | 无悬垂引用 | 区域类型 | 所有引用使用场景 | `'static` 误用、自引用 | E0597 |
+| Reborrow 安全 | &mut T 可降级为 &T | 不可变借用共存 | 权限降级规则 | 迭代器模式 | 降级后仍尝试修改 | E0502 |
+| NLL 放宽 | 控制流分析 | 词法作用域外的合法借用 | 流敏感分析 | — | 循环中的借用 | — |
+
+> **[来源: RustBelt: POPL 2018]** AXM (Alias-XOR-Mutation) — 基于分离逻辑分数权限的独占访问保证。 ✅
+> **[来源: Tofte & Talpin 1994]** 引用有效性 — 区域类型保证引用在其生命周期内指向有效内存。 ✅
+> **[来源: Rust Reference: NLL]** NLL 流敏感安全 — 基于控制流图的精确存活期分析 (RFC 2094)。 ✅
+> **[来源: 💡 原创分析]** Reborrow 安全 — 权限降级规则的形式化直觉，&mut T → &T 保持只读共享的安全性。 💡
+
+> **一致性检查**: AXM ⟹ 引用有效性（引用若共存则必须合法），Reborrow 是 AXM 的特化应用。三个定理形成**递进推理链**。
+>
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
 
 ---
 
@@ -313,6 +342,90 @@ fn main() {
 
 ---
 
+### 7.6 反命题与边界分析
+
+#### 命题: "借用规则保证无数据竞争"
+
+```mermaid
+graph TD
+    P["命题: 借用规则保证无数据竞争"] --> Q1{"使用 UnsafeCell?"}
+    Q1 -->|是| F1["反例: UnsafeCell 允许 &T 与 *mut T 共存<br/>→ 运行时数据竞争"]
+    Q1 -->|否| Q2{"使用裸指针?"}
+    Q2 -->|是| F2["反例: *mut T 与 &T 指向同一内存<br/>→ UB（unsafe）"]
+    Q2 -->|否| Q3{"使用 Rc&lt;RefCell&lt;T&gt;&gt;?"}
+    Q3 -->|是| F3["反例: 运行时借用检查 panic<br/>→ 非数据竞争，但并发安全失败"]
+    Q3 -->|否| T["定理成立: 无数据竞争<br/>✅ 分离逻辑保证"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f96
+    style T fill:#6f6
+```
+
+#### 命题: "&mut T 保证独占访问"
+
+| 条件 | 结果 | 说明 |
+|:---|:---|:---|
+| Safe Rust 中 | ✅ 独占 | 编译器保证 |
+| `UnsafeCell<T>` | ⚠️ 可共享 | 显式标注的内部可变性 |
+| `unsafe` + 裸指针 | ❌ 可突破 | 程序员责任 |
+| `mem::transmute` | ❌ 可突破 | 类型系统欺骗 |
+
+#### 边界极限测试
+
+```rust
+// 边界: UnsafeCell 允许共享可变访问
+use std::cell::UnsafeCell;
+
+let x = UnsafeCell::new(42);
+let r1 = unsafe { &*x.get() };      // &i32
+let r2 = unsafe { &mut *x.get() };  // &mut i32
+// 编译通过！但运行时若同时读写 → 数据竞争（UB）
+// 这是 unsafe，程序员必须保证不同时使用 r1 和 r2
+```
+
+---
+
+## 零、认知路径（Cognitive Path）
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"为什么 &mut s               "同时读和修改            "AXM 规则:             "分离逻辑:           "编译错误            "UnsafeCell
+ 和 &s 不能共存？"            会出错？"                读写互斥"              分数权限"            E0502"              运行时 panic"
+
+"为什么函数返回后             "返回局部变量             "引用不能比            "区域类型:           "编译错误            "自引用结构
+ 引用还能用？"               引用会崩溃？"            指向对象活得长"        偏序约束"            E0597"              (Pin 解决)"
+
+"为什么 for 循环中            "迭代器遍历同时            "Reborrow =           "权限降级:           "编译器自动          "嵌套借用
+ 可以读不能改？"              修改集合会出错？"         &mut → & 降级"         只读共享"            降级"               复杂度"
+```
+
+> **[来源: RustBelt: POPL 2018]** "分离逻辑: 分数权限" — 不可变借用将所有权分割为只读分数，可变借用要求完整独占权限。 ✅
+> **[来源: Tofte & Talpin 1994]** "区域类型: 偏序约束" — 引用的生命周期不能超过被引用数据的区域。 ✅
+> **[来源: Rust Reference: NLL]** "NLL: 实际使用期有效" — 非词法生命周期基于数据流分析 (RFC 2094)。 ✅
+
+**认知脚手架**:
+
+- **类比**: &T 像"多人同时阅读公告板"，&mut T 像"一人独自编辑文档"。
+- **反直觉点**: 很多语言允许多个可变引用（如 Java 对象引用），Rust 强制分离。
+- **形式化过渡**: 从"不能同时有" → "读写互斥" → "分离逻辑中的分数权限分配"。
+
+### 7.7 国际课程与论文对齐
+
+| 来源 | 核心内容 | 与本文件对应 |
+|:---|:---|:---|
+| **[CMU 17-363: Programming Language Pragmatics]** | Ownership、Borrowing、Lifetime | L1-L2 基础概念 |
+| **[CMU 17-350: Safe Systems Programming]** | 借用规则、内部可变性 | 工程实践 |
+| **[Stanford CS340R: Rusty Systems]** | 内存安全实践 | 并发安全 |
+| **[Wikipedia: Pointer aliasing]** | 别名分析通用概念 | AXM 规则 |
+| **[Wikipedia: Reference (computer science)]** | 引用概念 | 借用语义 |
+| **[Reynolds 2002: Separation Logic]** | 分离逻辑 | 借用形式化 |
+| **[RustBelt: POPL 2018]** | 分数权限、借用语义 | 形式化验证 |
+
+---
+
 ## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -387,6 +500,8 @@ impl SelfRef {
 // 可以修改非自引用的字段（通过 Pin::map_unchecked_mut）
 ```
 
+> **[来源: Rust Reference: Pin]** Pin<&mut T> 通过 !Unpin 标记与位置不变性约束解决自引用结构的移动问题。 ✅
+
 ---
 
 - [x] **TODO**: 补充 `Pin<&mut T>` 的自引用结构借用 —— 优先级: 高 —— 已完成 v1.1
@@ -456,6 +571,23 @@ fn refcell_demo() {
   代价: 运行时 panic 风险
   收益: 更灵活的数据结构（如图、树中的父指针回溯）
 ```
+
+> **[来源: Rust Reference: Interior Mutability]** Cell<T> / RefCell<T> 通过运行时检查替代编译期检查，是内部可变性的安全抽象。 ✅
+> **[来源: 💡 原创分析]** "RefCell 不是'绕过'规则，而是将检查延迟到运行时" — 对内部可变性与借用规则关系的精确概括。 💡
+
+---
+
+## 十、相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 所有权 | [`./01_ownership.md`](./01_ownership.md) | 借用规则的前提 |
+| 生命周期 | [`./03_lifetimes.md`](./03_lifetimes.md) | 引用时效约束 |
+| 类型系统 | [`./04_type_system.md`](./04_type_system.md) | 引用是类型的一部分 |
+| Trait | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | Borrow trait |
+| 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | RefCell 运行时借用 |
+| 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | AXM → 并发安全 |
+| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 借用规则边界 |
 
 ---
 

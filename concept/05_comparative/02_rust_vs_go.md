@@ -115,7 +115,91 @@ graph TD
 
 ---
 
-## 五、知识来源关系
+## 五、定理一致性矩阵（对比层关系）
+
+| 对比维度 | Rust 机制 | Go 机制 | 形式化差距 | 工程权衡 |
+|:---|:---|:---|:---|:---|
+| 并发安全 | 编译期类型证明 (Send/Sync) | 运行时 channel + GC | Rust 有形式化保证，Go 依赖工程纪律 | Rust 更严格，Go 更简单 |
+| 内存安全 | 所有权 + 借用检查 | GC | Rust 无运行时开销，Go 有 GC 停顿 | 性能敏感选 Rust |
+| 错误处理 | Result（显式） | 多返回值 + error | Rust 强制处理，Go 可忽略 | 可靠性敏感选 Rust |
+| 接口抽象 | Trait（编译期） | interface（运行时） | Rust 零成本，Go 有接口开销 | 高频调用选 Rust |
+| 编译速度 | 慢（单态化） | 快 | Go 迭代更快 | 快速原型选 Go |
+| 部署体积 | 小（无运行时） | 较大（含 runtime） | Rust 更适合容器/嵌入式 | 资源受限选 Rust |
+
+> **一致性检查**: 上述对比与 L1-L4 概念定义一致。Rust 的每个优势点均可追溯到具体的形式化定理（如 Send/Sync ⟹ CSL 安全）。
+
+## 六、反命题与边界分析
+
+### 命题: "Rust 比 Go 更适合所有后端服务"
+
+```mermaid
+graph TD
+    P["命题: Rust 比 Go 更适合所有后端"] --> Q1{"团队规模小 + 快速迭代?"}
+    Q1 -->|是| F1["反例: Go 的学习曲线和编译速度更适合快速迭代"]
+    Q1 -->|否| Q2{"需要复杂泛型/元编程?"}
+    Q2 -->|是| F2["反例: Rust 的泛型系统更强大，Go 的泛型能力有限"]
+    Q2 -->|否| Q3{"CPU 密集型 + 低延迟?"}
+    Q3 -->|是| F3["反例: Rust 无 GC 停顿，更适合低延迟"]
+    Q3 -->|否| T["两者均可，工程因素（团队熟悉度）更重要"]
+
+    style F1 fill:#f96
+    style F2 fill:#6f6
+    style F3 fill:#6f6
+    style T fill:#ff9
+```
+
+## 七、扩展内容：CSP 形式化与并发模型对比
+
+### 7.1 CSP 形式化基础
+
+> **[Wikipedia: Communicating sequential processes]** CSP is a formal language for describing patterns of interaction in concurrent systems. It was first described by Tony Hoare in 1978 and has been influential in the design of concurrent programming languages.
+
+CSP 的核心操作：
+```text
+P ::= STOP | SKIP | a → P | P □ Q | P ⊓ Q | P || Q | P \ A
+```
+
+| 操作 | 含义 | Rust 对应 |
+|:---|:---|:---|
+| `a → P` | 事件 a 后执行 P | 函数调用后继续 |
+| `P □ Q` | 外部选择 | `select!` (tokio) |
+| `P || Q` | 并行组合 | `thread::spawn` |
+| `P \ A` | 隐藏事件集 | 私有 channel |
+
+### 7.2 Rust 所有权并发 vs Go CSP 对比矩阵
+
+| 维度 | Rust 所有权并发 | Go CSP |
+|:---|:---|:---|
+| **核心抽象** | 类型级证明 (Send/Sync) | Channel + Goroutine |
+| **编译期保证** | ✅ 无数据竞争 | ❌ 运行时检测 (race detector) |
+| **内存模型** | 所有权 + 借用 | GC + 共享内存 |
+| **Channel 语义** | `mpsc` / `mpmc` (外部库) | 内置 `chan`，有缓冲/无缓冲 |
+| **错误处理** | `Result` 显式传播 | 多返回值 + `error` |
+| **Select** | `tokio::select!` / `futures::select` | 内置 `select` |
+| **关闭语义** | 显式 `drop(sender)` | 关闭 channel 广播 |
+| **性能特征** | 零成本抽象 | goroutine 轻量调度 (≈2KB 栈) |
+
+### 7.3 Mermaid 并发模型对比图
+
+```mermaid
+graph LR
+    subgraph Rust["Rust: 所有权并发"]
+        R1[类型检查] --> R2[Send/Sync]
+        R2 --> R3[无数据竞争]
+        R4[Channel] --> R5[所有权转移]
+    end
+
+    subgraph Go["Go: CSP"]
+        G1[Goroutine] --> G2[Channel]
+        G2 --> G3[消息传递]
+        G4[GC] --> G5[共享内存安全]
+    end
+
+    Rust -.->|"编译期保证"| Safe["内存安全"]
+    Go -.->|"GC + 运行时检测"| Safe
+```
+
+## 八、知识来源关系
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -125,6 +209,18 @@ graph TD
 | Rust 无 GC 有确定性释放 | [TRPL] | ✅ |
 
 ---
+
+## 七、相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Rust 并发模型 |
+| 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | Rust 所有权 vs Go GC |
+| 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result vs 多返回值 |
+| Rust vs C++ | [`./01_rust_vs_cpp.md`](./01_rust_vs_cpp.md) | 同层对比 |
+| 范式矩阵 | [`./03_paradigm_matrix.md`](./03_paradigm_matrix.md) | 定位参考 |
+| 安全边界 | [`./safety_boundaries.md`](./safety_boundaries.md) | 安全保证对比 |
+| 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证能力对比 |
 
 ## 六、待补充
 

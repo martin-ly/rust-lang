@@ -1,67 +1,214 @@
 # L2 进阶概念层（Intermediate）
 
-> **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
+> **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
+> **Bloom 层级**: 理解 → 应用
+> **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
 
 ---
 
-## 一、本层概念图谱
+## 一、本层概念关系图（完整版）
 
 ```mermaid
-graph TD
-    A[L2 进阶概念层] --> B[01 Traits]
-    A --> C[02 Generics]
-    A --> D[03 Memory Management]
-    A --> E[04 Error Handling]
+graph TB
+    subgraph L2_Core["L2 核心四概念"]
+        TR[01 Traits]
+        G[02 Generics]
+        MM[03 Memory Management]
+        EH[04 Error Handling]
+    end
 
-    B --> B1[Trait Definition]
-    B --> B2[Trait Bounds]
-    B --> B3[Orphan Rule]
-    B --> B4[Associated Types]
+    %% 核心交叉：Trait ↔ Generics
+    TR <-.->|"Trait Bounds 是交叉点"| G
 
-    C --> C1[Monomorphization]
-    C --> C2[Const Generics]
-    C --> C3[GATs]
+    %% Trait → Memory / Error
+    TR ==>|"Drop trait 管理释放"| MM
+    TR -.->|"Error trait"| EH
 
-    D --> D1[Smart Pointers]
-    D --> D2[Interior Mutability]
-    D --> D3[Custom Allocators]
+    %% Generics → Memory / Error
+    G -.->|"泛型智能指针"| MM
+    G -.->|"Result<T, E>"| EH
 
-    E --> E1[Option / Result]
-    E --> E2[? Operator]
-    E --> E3[Custom Errors]
+    %% Memory ↔ Error
+    MM -.->|"内存分配失败"| EH
 
-    B -.->|依赖| C
-    C -.->|依赖| D
-    B -.->|依赖| E
+    %% L1 输入
+    L1_O[↳ L1 Ownership] -.->|"Drop/Copy trait"| TR
+    L1_TS[↳ L1 Type System] -.->|"ADT/impl/dyn"| TR
+    L1_L[↳ L1 Lifetimes] -.->|"<'a> 参数化"| G
+
+    %% L3 输出
+    TR ==>|"Send/Sync 是 Auto Trait"| L3_CON[→ L3 Concurrency]
+    G ==>|"泛型 Future"| L3_ASYNC[→ L3 Async]
+    MM ==>|"Rc→Arc"| L3_CON
+    EH -.->|"Result 在异步中"| L3_ASYNC
+
+    %% 内部结构
+    TR --> TR1[Trait Definition]
+    TR --> TR2[Trait Bounds & where]
+    TR --> TR3[Orphan Rule]
+    TR --> TR4[Associated Types / GATs]
+    TR --> TR5[Auto Traits: Send/Sync]
+
+    G --> G1[Monomorphization]
+    G --> G2[Const Generics]
+    G --> G3[GATs]
+    G --> G4[HRTB in Bounds]
+
+    MM --> MM1[Box<T>]
+    MM --> MM2[Rc / Arc]
+    MM --> MM3[RefCell / Mutex]
+    MM --> MM4[Cell / UnsafeCell]
+    MM --> MM5[Pin<&mut T>]
+
+    EH --> EH1[Result<T, E>]
+    EH --> EH2[Option<T>]
+    EH --> EH3[? Operator]
+    EH --> EH4[Custom Error Types]
+
+    style TR fill:#f96,stroke:#333
+    style G fill:#bbf,stroke:#333
+    style MM fill:#9f9,stroke:#333
+    style EH fill:#ff9,stroke:#333
+```
+
+### 1.1 概念间语义链接
+
+| 关系 | 从 | 到 | 语义类型 | 说明 |
+|:---|:---|:---|:---|:---|
+| 1 | **Trait** | **Generics** | `<-.->` 交叉/互构 | Trait Bounds (`T: Trait`) 是 Trait 和 Generics 的**核心交叉点**。无 Trait 则泛型无约束；无泛型则 Trait 无参数化能力。 |
+| 2 | **Trait** | **Memory Management** | `==>` 启用 | `Drop` / `Copy` / `Clone` 等核心 trait 直接定义内存管理语义。 |
+| 3 | **L1 Lifetimes** | **Generics** | `-.->` 前置/参数化 | 生命周期 `'a` 本质上是泛型参数的一种（region parameter），L1 → L2 的严格递进。 |
+| 4 | **Generics** | **L3 Async** | `==>` 启用 | `Future` 是泛型 trait，`async fn` 的返回类型是匿名的 `impl Future<Output = T>`。 |
+| 5 | **Trait (Send/Sync)** | **L3 Concurrency** | `==>` 启用 | `Send` 和 `Sync` 是 marker trait，它们是并发安全的**类型级证明**。 |
+
+### 1.2 关键交叉点：Trait Bounds
+
+```text
+Trait Bounds 是 L2 的"枢纽概念"：
+
+    Trait 定义          Generics 参数化
+        │                    │
+        └──────┬─────────────┘
+               │
+          Trait Bounds (T: Display + Clone)
+               │
+        ┌──────┴─────────────┐
+        ▼                    ▼
+    编译期多态            类型约束求解
+    (静态分发)            (Horn 子句)
+        │                    │
+        └──────┬─────────────┘
+               ▼
+          零成本抽象
 ```
 
 ---
 
-## 二、文件索引
+## 二、文件索引与关系
 
-| 文件 | 概念 | 核心内容 | 状态 |
-|:---|:---|:---|:---|
-| `01_traits.md` | Trait 系统 | 定义、约束、Orphan Rule、关联类型、Supertrait | ✅ v1.0 |
-| `02_generics.md` | 泛型系统 | 单态化、约束、Const Generics、GATs | ✅ v1.0 |
-| `03_memory_management.md` | 内存管理 | Box/Rc/Arc、RefCell/Mutex、自定义分配器 | ✅ v1.0 |
-| `04_error_handling.md` | 错误处理 | Result/Option、`?`、自定义错误、Error trait | ✅ v1.0 |
+| 文件 | 概念 | 核心内容 | 状态 | 前置（L1） | 后置（L3） |
+|:---|:---|:---|:---|:---|:---|
+| [01_traits.md](./01_traits.md) | Trait 系统 | 定义、约束、Orphan Rule、关联类型/GATs、Supertrait、Auto Trait | ✅ v1.0 | Type System, Ownership | Concurrency (Send/Sync), Async (Future) |
+| [02_generics.md](./02_generics.md) | 泛型系统 | 单态化、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
+| [03_memory_management.md](./03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
+| [04_error_handling.md](./04_error_handling.md) | 错误处理 | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
 
 ---
 
 ## 三、学习路径建议
 
-```
+```text
 L1 Foundation
+    │
+    ├──→ Traits ←──────→ Generics
+    │       │                 │
+    │       │                 │
+    │       └──────┬──────────┘
+    │              │
+    │              ▼
+    │    ┌─────────────────┐
+    │    │  Memory Mgmt    │
+    │    │  Error Handling │
+    │    └─────────────────┘
+    │              │
+    ▼              ▼
+L3 Advanced (Concurrency / Async)
+```
+
+### 3.1 严格依赖路径
+
+```text
+Traits
+    │ 必须先掌握: L1 Type System (impl/dyn), L1 Ownership (Drop trait)
+    │ 后置: Trait Bounds → Generics
+    │ 反事实: 若无 Trait，则无法定义泛型约束，类型系统退化为 C 模板
     ↓
-Traits ←────→ Generics
-    ↓             ↓
-Error Handling ← Memory Management
+Generics
+    │ 必须先掌握: Traits (bounds), L1 Lifetimes (<'a>)
+    │ 后置: 泛型 Future, GATs
+    │ 反事实: 若无单态化，则泛型有运行时开销（如 Java 泛型擦除）
     ↓
-L3 Advanced
+Memory Management
+    │ 必须先掌握: L1 Ownership (Rc 突破), Traits (Drop/Clone)
+    │ 后置: Arc (并发), Pin (异步), MaybeUninit (unsafe)
+    │ 反事实: 若无内部可变性，则共享状态需 unsafe
+    ↓
+Error Handling
+    │ 必须先掌握: L1 Type System (enum), Traits (Error trait)
+    │ 后置: 异步错误传播, ? 在闭包中的使用
+    │ 反事实: 若无 Result 类型，错误处理退化为异常或返回值检查
 ```
 
 ---
 
-## 四、待创建内容（按 Phase 2 计划）
+## 四、形式化层级定位
 
-详见 [PLAN.md](../PLAN.md) Phase 2 部分。
+| 概念 | 理论层 (Why) | 模型层 (What) | 实践层 (How) | L4 形式化对应 |
+|:---|:---|:---|:---|:---|
+| **Trait** | 接口/类型类 (Type Class) | Trait 对象表、vtable | `trait` / `impl` / `dyn` | Type Class (Haskell) · 存在类型 (∃) |
+| **Generics** | 参数多态 (Parametricity) | 单态化算法、约束求解 | `<T>`、`where` 子句 | System F / Fω · HM 扩展 |
+| **Memory Mgmt** | 资源管理逻辑 | 引用计数、运行时借用检查 | `Rc`/`RefCell`/`Arc` | 无（运行时机制，非编译期） |
+| **Error Handling** | 异常代数 (Exception Monad) | Result 类型、? 运算符脱糖 | `Result<T,E>`、`?` | 和类型的错误通道 (A + E) |
+
+---
+
+## 五、本层定理一致性概览
+
+| 定理 | 前提 | 结论 | 依赖的 L4 理论 | 失效条件 | 典型场景 |
+|:---|:---|:---|:---|:---|:---|
+| Orphan Rule 保证一致性 | crate 边界清晰 | 无矛盾 impl | Coherence (类型论) | 允许覆盖 impl（特化） | 孤儿规则冲突 |
+| 单态化零成本 | 泛型函数编译时实例化 | 无运行时分发开销 | Parametricity | `dyn Trait` 动态分发 | vtable 间接调用 |
+| Rc 共享安全 | 单线程 | 共享所有权无 UAF | —（运行时） | 跨线程使用 Rc | 编译错误：Rc 非 Send |
+| RefCell 运行时借用检查 | 单线程 | 运行时检测借用违规 | —（运行时） | 已借出时再次借用 | panic: already borrowed |
+| ? 运算符传播 | 函数返回 Result/Option | 自动错误短路 | Monad bind (>>=) | 在非 Result 返回函数中使用 | 编译错误 |
+
+---
+
+## 六、认知路径
+
+```text
+直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
+    │                         │                       │                     │                    │                    │
+    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
+"如何实现多态？"             "不同类型打印            "Trait = 共享          "Type Class         "impl Display        "Orphan Rule
+                             需要不同代码"            行为接口"              / 存在类型"           for MyType"         限制外部 impl"
+
+"如何写通用函数？"           "swap 任何类型           "Generics =            "System F           "fn swap<T>(a, b)"    "Const Generics
+                             都要能交换"              参数化类型"            参数多态"                                数组长度"
+
+"如何共享可变状态？"         "多个 owner 同时         "Rc/RefCell =         "运行时借用         "Rc::new(RefCell::new)" "循环引用
+                             修改数据"                共享 + 内部可变性"     检查替代编译期"                          内存泄漏"
+
+"如何处理错误？"             "函数可能失败            "Result = 显式         "错误 Monad         "fn f() -> Result<T,E>" "? 在闭包中的
+                             怎么返回值？"            错误通道"             (Either A E)"                           限制"
+```
+
+---
+
+## 七、跨层出口
+
+掌握 L2 后可进入：
+
+- **L3 高级**: Concurrency（Send/Sync 是 Auto Trait）、Async（Future 是泛型 Trait）、Unsafe（MaybeUninit、UnsafeCell）
+- **L4 形式化**: 类型论（参数多态、约束求解）、子类型与 Variance
+- **L6 生态**: 设计模式（Typestate、Builder 依赖 Trait）
