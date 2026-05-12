@@ -11,9 +11,9 @@ Enter the new date: (yy-mm-dd)
 | 总文件数 | 37 | 27 | ✅ |
 | 总定理链 (⟹) | 277 | ≥400 | ⚠️ |
 | 总反命题 | 98 | ≥40 | ✅ |
-| 总 Mermaid 图 | 174 | ≥50 | ✅ |
-| 编译验证代码块 | 270 | ≥150 | ✅ |
-| 定理矩阵总行 | 3343 | — | — |
+| 总 Mermaid 图 | 177 | ≥50 | ✅ |
+| 编译验证代码块 | 308 | ≥150 | ✅ |
+| 定理矩阵总行 | 3524 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -26,8 +26,8 @@ Enter the new date: (yy-mm-dd)
 | L3 | 4 | 16.0 | 4.2 | 4/4 (100%) |
 | L4 | 4 | 11.5 | 4.8 | 4/4 (100%) |
 | L5 | 4 | 6.2 | 8.0 | 4/4 (100%) |
-| L6 | 4 | 7.2 | 3.5 | 4/4 (100%) |
-| L7 | 3 | 7.3 | 0.0 | 3/3 (100%) |
+| L6 | 4 | 7.2 | 5.0 | 4/4 (100%) |
+| L7 | 3 | 7.3 | 3.0 | 3/3 (100%) |
 
 ## 风险文件
 
@@ -42,11 +42,6 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\semantic_space.md | L0 | 过渡段落不足 (0 < 3) |
 | concept\00_meta\sources.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
 | concept\00_meta\todos.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| concept\06_ecosystem\03_core_crates.md | L6 | 过渡段落不足 (0 < 3) |
-| concept\06_ecosystem\04_application_domains.md | L6 | 过渡段落不足 (0 < 3) |
-| concept\07_future\01_ai_integration.md | L7 | 过渡段落不足 (0 < 3) |
-| concept\07_future\02_formal_methods.md | L7 | 过渡段落不足 (0 < 3) |
-| concept\07_future\03_evolution.md | L7 | 过渡段落不足 (0 < 3) |
 
 ## 文件详细统计
 
@@ -58,7 +53,7 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\learning_guide.md | L0 | 303 | 2 | 0 | 0 | 1 | 0 | ❌ |
 | concept\00_meta\methodology.md | L0 | 359 | 0 | 1 | 4 | 1 | 0 | ✅ |
 | concept\00_meta\quick_reference.md | L0 | 628 | 0 | 0 | 0 | 25 | 0 | ❌ |
-| concept\00_meta\self_assessment.md | L0 | 855 | 0 | 0 | 0 | 24 | 0 | ❌ |
+| concept\00_meta\self_assessment.md | L0 | 1989 | 0 | 0 | 0 | 49 | 0 | ❌ |
 | concept\00_meta\semantic_space.md | L0 | 1017 | 9 | 1 | 4 | 8 | 0 | ✅ |
 | concept\00_meta\sources.md | L0 | 302 | 0 | 0 | 2 | 0 | 0 | ❌ |
 | concept\00_meta\todos.md | L0 | 205 | 0 | 0 | 0 | 0 | 0 | ❌ |
@@ -82,10 +77,10 @@ Enter the new date: (yy-mm-dd)
 | concept\05_comparative\02_rust_vs_go.md | L5 | 612 | 3 | 3 | 6 | 4 | 6 | ✅ |
 | concept\05_comparative\03_paradigm_matrix.md | L5 | 602 | 6 | 5 | 8 | 0 | 16 | ✅ |
 | concept\05_comparative\safety_boundaries.md | L5 | 547 | 7 | 1 | 6 | 2 | 7 | ✅ |
-| concept\06_ecosystem\01_toolchain.md | L6 | 653 | 8 | 1 | 7 | 3 | 8 | ✅ |
-| concept\06_ecosystem\02_patterns.md | L6 | 680 | 7 | 1 | 4 | 11 | 6 | ✅ |
-| concept\06_ecosystem\03_core_crates.md | L6 | 619 | 7 | 2 | 5 | 2 | 0 | ✅ |
-| concept\06_ecosystem\04_application_domains.md | L6 | 625 | 7 | 2 | 5 | 1 | 0 | ✅ |
-| concept\07_future\01_ai_integration.md | L7 | 539 | 7 | 1 | 5 | 1 | 0 | ✅ |
-| concept\07_future\02_formal_methods.md | L7 | 738 | 8 | 1 | 7 | 3 | 0 | ✅ |
-| concept\07_future\03_evolution.md | L7 | 515 | 7 | 1 | 4 | 4 | 0 | ✅ |
+| concept\06_ecosystem\01_toolchain.md | L6 | 797 | 8 | 1 | 8 | 5 | 8 | ✅ |
+| concept\06_ecosystem\02_patterns.md | L6 | 875 | 7 | 1 | 4 | 16 | 6 | ✅ |
+| concept\06_ecosystem\03_core_crates.md | L6 | 772 | 7 | 2 | 6 | 5 | 3 | ✅ |
+| concept\06_ecosystem\04_application_domains.md | L6 | 838 | 7 | 2 | 6 | 4 | 3 | ✅ |
+| concept\07_future\01_ai_integration.md | L7 | 557 | 7 | 1 | 5 | 1 | 3 | ✅ |
+| concept\07_future\02_formal_methods.md | L7 | 756 | 8 | 1 | 7 | 3 | 3 | ✅ |
+| concept\07_future\03_evolution.md | L7 | 533 | 7 | 1 | 4 | 4 | 3 | ✅ |

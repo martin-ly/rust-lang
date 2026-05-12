@@ -282,6 +282,138 @@ graph TD
 | **wasm-bindgen** | Rust ↔ JS | WASM 与 JS 互操作、DOM 绑定 | WASM + unsafe |
 | **uniffi** | Rust → 多语言 | Mozilla 开发、Kotlin/Swift/Python | FFI 抽象 |
 
+### 4.11 核心并发 Crate 深度解析
+
+#### crossbeam：无锁并发原语
+
+**[crossbeam]** A set of tools for concurrent programming in Rust.
+
+| **模块** | **功能** | **核心机制** | **何时使用** |
+|:---|:---|:---|:---|
+| `crossbeam::channel` | MPMC 通道 | 基于 epoch 的无锁队列 | 需要 `select!` 或动态关闭的场景 |
+| `crossbeam::epoch` | 无锁内存回收 | 三代 epoch 垃圾回收 | 实现自定义无锁数据结构 |
+| `crossbeam::deque` | 工作窃取双端队列 | Chase-Lev 算法 | 自定义调度器、并行运行时 |
+
+> **关键洞察**: crossbeam 的 epoch GC 解决了无锁数据结构的**安全内存回收问题**——当读者可能正在访问节点时，延迟释放直到所有读者进入新 epoch。这是 Rust 无法直接用所有权解决的问题（因为无锁读取不持有所有权）。
+
+#### rayon：数据并行迭代器
+
+**[rayon]** A data parallelism library for Rust.
+
+```rust
+use rayon::prelude::*;
+
+// 自动 work-stealing：将大数据集分片到线程池
+let sum: i32 = (0..1_000_000).into_par_iter().map(|x| x * x).sum();
+
+// 与标准库 API 几乎完全一致
+let max = vec.par_iter().max();
+```
+
+| **特性** | **标准库** | **rayon** |
+|:---|:---|:---|
+| 迭代器 | `iter()` | `par_iter()` |
+| 并行度 | 单线程 | 自适应线程池（默认 = CPU 核心数） |
+| 负载均衡 | 无 | work-stealing 动态均衡 |
+| 嵌套并行 | 阻塞 | 自适应（防止线程爆炸） |
+
+> **关键洞察**: rayon 的 `join` 和 `scope` 允许**嵌套并行**——在并行任务内部再次调用并行操作。rayon 通过线程池的 work-stealing 动态调整，避免传统线程池的线程爆炸问题。
+
+#### parking_lot：轻量级同步原语
+
+| **原语** | **std 实现** | **parking_lot** | **优势** |
+|:---|:---|:---|:---|
+| `Mutex` | 系统 futex + poison | 纯用户态 + 无 poison | 体积小 1/10、速度快 1.5-3x |
+| `RwLock` | 写优先/系统依赖 | 读优先、可升级 | 更好的读并发 |
+| `Condvar` | 系统条件变量 | 组合锁 + 等待队列 | 避免虚假唤醒 |
+
+```rust
+use parking_lot::Mutex; // 无 poisoning，API 更简洁
+
+let data = Mutex::new(0);
+*data.lock() += 1; // 自动 DerefMut，无需 unwrap
+// 无 poisoning：panic 时锁正常释放
+```
+
+> **选型决策**: 当 `std::sync::Mutex` 成为性能瓶颈（高竞争场景）或二进制体积敏感（嵌入式）时，优先替换为 `parking_lot`。API 兼容度 > 95%，迁移成本极低。
+
+#### dashmap：并发 HashMap
+
+```rust
+use dashmap::DashMap;
+
+let map = DashMap::new();
+map.insert("key", 42);
+// 并发读写无需外部 Mutex
+let value = map.get("key").map(|r| *r.value());
+```
+
+| **维度** | `std::collections::HashMap` + `RwLock` | `dashmap` |
+|:---|:---|:---|
+| 并发度 | 全局锁 | 分片锁（默认 4 倍 CPU 核心数） |
+| 读性能 | 串行 | 高并发并行读 |
+| 写性能 | 串行 | 分片并行写（不同 key） |
+| 内存开销 | 低 | 中（分片数组 + 每个分片独立 HashMap） |
+
+> **关键洞察**: dashmap 通过**分片锁**（sharding）将全局锁竞争转化为局部竞争。当 key 的哈希分布均匀时，不同 key 的读写几乎无竞争。这是标准库 `HashMap` 无法实现的，因为 `std` 不提供并发安全保证。
+
+> **来源**: [crossbeam docs] · [rayon README] · [parking_lot docs] · [dashmap docs] · 可信度: ✅
+
+### 4.12 Crate 选择决策树：标准库 vs 第三方
+
+```mermaid
+graph TD
+    Q1[需要此功能？] -->|std 有等价实现| Q2{性能/功能满足？}
+    Q1 -->|std 无| Q3{生态标准 crate？}
+
+    Q2 -->|是| A1[用 std<br/>减少依赖]
+    Q2 -->|否| Q3
+
+    Q3 -->|是| Q4{unsafe 审计通过？}
+    Q3 -->|否| Q5{功能简单？}
+
+    Q4 -->|是| A2[用生态标准<br/>serde/tokio/clap]
+    Q4 -->|否| A3[审计 unsafe 或<br/>寻找替代]
+
+    Q5 -->|是| A4[手写实现<br/>减少依赖]
+    Q5 -->|否| A5[fork 或<br/>向生态贡献]
+
+    style A1 fill:#6f6
+    style A2 fill:#6f6
+    style A3 fill:#f66
+    style A4 fill:#ff9
+    style A5 fill:#ff9
+```
+
+| **场景** | **用 std** | **用第三方** |
+|:---|:---|:---|
+| 序列化 | `Debug`/`Display` | `serde`（生态标准，不可替代） |
+| 异步 | 无 | `tokio`（生态标准） |
+| 并发 HashMap | `Mutex<HashMap>` | `dashmap`（高并发场景） |
+| 锁 | `std::sync::Mutex` | `parking_lot`（性能敏感） |
+| HTTP 客户端 | 无 | `reqwest`（功能丰富） |
+| 日志 | `eprintln!` | `tracing`（结构化/分布式） |
+| 错误处理 | `Box<dyn Error>` | `anyhow`/`thiserror`（人体工学） |
+
+### 4.13 crates.io 生态健康度指标深度评估
+
+| **指标** | **测量方式** | **健康阈值** | **风险信号** |
+|:---|:---|:---|:---|
+| 总下载量 | crates.io 页面 | > 100 万 | < 1 万且增长停滞 |
+| 近期下载趋势 | crates.io / lib.rs | 月环比稳定或增长 | 连续 3 个月下降 > 30% |
+| 维护状态 | GitHub last commit | < 3 个月 | > 12 个月无提交 |
+| Issue/PR 响应 | GitHub issues | 关闭率 > 50% | 大量未回复 issue |
+| MSRV 政策 | `Cargo.toml` / README | 明确声明 | 无声明且频繁 break |
+| 安全审计 | RustSec / `cargo audit` | 无 RUSTSEC | 存在未修复漏洞 |
+| 反向依赖数 | crates.io dependents | > 20 个知名 crate | 几乎无下游依赖 |
+| 文档完整度 | docs.rs | 所有 pub API 有文档 | 大量 `#[allow(missing_docs)]` |
+| 测试覆盖率 | codecov / 自述 | > 70% | 无测试或覆盖率 < 30% |
+| unsafe 密度 | `cargo geiger` | < 1% 或完全审计 | > 10% 且无审计记录 |
+
+> **关键洞察**: 下载量是**popularity 指标**，不是**质量指标**。`cargo audit` 和 `cargo geiger` 才是生产选型的硬性门槛。优先选择被大型项目（tokio、serde、rustls）作为依赖的 crate——它们的代码质量经过最广泛的实际验证。
+
+> **来源**: [crates.io] · [lib.rs] · [RustSec] · [cargo-geiger] · 可信度: ✅
+
 ---
 
 ## 五、Crate 与 L1-L5 概念映射
@@ -494,12 +626,15 @@ fn main() {
 
 ## 十、待补充与演进方向（TODOs）
 
+- [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）
+- [x] **高**: 补充 crate 选择决策树（std vs 第三方）
+- [x] **中**: 补充 crates.io 生态健康度指标深度评估
 - [ ] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例）
 - [ ] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈）
 - [ ] **中**: 补充 `cargo vet` 供应链安全审计流程
 - [ ] **中**: 补充 WASM 前端框架对比（leptos / dioxus / yew）
 - [ ] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs）
-- [ ] **低**: 补充游戏开发 crate 生态（bevy / wgpu / rapier）
+- [ ] **低**: 补充游戏开发 crate 生态深度案例
 - [ ] **低**: 补充 ML 推理 crate 生态（candle / burn / tract）
 - [ ] **低**: 建立 crates.io 下载量/趋势的自动化追踪
 
@@ -616,3 +751,21 @@ graph TD
     style T3 fill:#6f6
 
 ```
+
+> **过渡: L6 → L1**
+>
+> Crate 生态不是 Rust 语言的附加品——它是所有权系统的自然延伸。`serde` 的 derive 宏利用编译期反射，`tokio` 的异步运行时建立在 `Pin` 和生命周期之上，`rayon` 的数据并行依赖 `Send`/`Sync` 的保证。理解这些 crate 的设计，需要回到 Rust 核心概念。
+>
+> 核心概念见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全）。
+
+> **过渡: L6 → L4**
+>
+> 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。
+>
+> 形式化工具链见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)。
+
+> **过渡: L6 → L7**
+>
+> Rust 生态仍在快速增长：2024 年 crates.io 下载量突破 500 亿，嵌入式、WASM、AI 推理等新领域正在涌现。生态的成熟度决定了 Rust 能否从"系统语言"扩展为"通用语言"。
+>
+> 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进）与 [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md)（AI 集成）。

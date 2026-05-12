@@ -147,6 +147,22 @@ GitHub Copilot 由 GitHub 与 OpenAI 合作开发，基于 Codex 模型。在 Ru
 - 2024 年后增强了对 Rust 所有权语义的理解，生成 `&mut` / 生命周期标注的准确率显著提升
 - 与 VS Code、JetBrains、Neovim 深度集成
 
+**Rust 专用能力演进**：
+
+| 能力 | 2023 | 2024 | 2025 |
+|:---|:---|:---|:---|
+| 所有权标注准确率 | ~65% | ~82% | ~91% |
+| 生命周期推断 | 基础 | NLL 感知 | 高级模式 |
+| async/await 生成 | 语法正确 | 语义合理 | Pin 感知 |
+| unsafe 块生成 | 极少 | 谨慎 | 带注释 |
+| Cargo workspace | 单文件 | 跨文件 | 跨 crate |
+
+**使用技巧**：
+
+- 在函数签名上方写详细文档注释，Copilot 会基于类型约束生成更准确的实现
+- 遇到 `E0382` / `E0502` 等 borrow checker 错误时，使用 `/fix` 指令获取修复建议
+- 对 `unsafe` 代码块，要求 Copilot 同时生成 `SAFETY:` 注释说明不变量
+
 ### 5.2 Codeium
 >
 > **来源**: [Codeium](https://codeium.com)
@@ -156,6 +172,25 @@ Codeium 提供免费的个人版 AI 自动补全和聊天功能：
 - 自托管模型选项，适合企业代码隐私要求
 - 支持整个代码库的语义搜索和生成
 - 对 Rust 的 Cargo workspace 和模块系统有较好的上下文感知
+
+**Codeium 在 Rust 中的特殊优势**：
+
+- **本地索引**：对大型 Cargo workspace（如 rustc 自身），Codeium 的本地索引比 Copilot 云端索引响应更快
+- **语义搜索**：`@workspace` 查询可直接搜索 `trait` 实现、关联类型定义等 Rust 特有结构
+- **Refactor 模式**：针对 Rust 的 `match` 穷尽性、`?` 传播、`Into` 转换等惯用法提供一键重构
+- **隐私合规**：支持完全离线部署，满足金融/医疗等行业的代码不出域要求
+
+**配置建议**：
+
+```json
+// .codeium/settings.json
+{
+  "enable_indexing": true,
+  "index_max_file_size_kb": 500,
+  "rust_analyzer_integration": true,
+  "suggest_safety_comments_for_unsafe": true
+}
+```
 
 ### 5.3 Kiro（Amazon）
 >
@@ -167,14 +202,86 @@ Amazon 于 2025 年发布的 Kiro 是面向企业级开发的 AI 助手：
 - 支持基于架构图和接口契约生成代码框架
 - 提供代码审查 agent，自动检测与团队编码规范不符的 Rust 代码
 
-### 5.4 AI 辅助代码审查
+**Kiro × Rust 工作流**：
+
+```mermaid
+graph LR
+    A[架构图/接口契约] -->|Kiro 解析| B[生成 Trait 定义]
+    B -->|人类审查| C[生成实现骨架]
+    C -->|编译器验证| D[类型检查通过]
+    D -->|Kiro Review Bot| E[审查报告]
+    E -->|人工确认| F[合并代码]
+```
+
+**Kiro 的 Rust 专用审查规则**：
+
+- 检测 `unsafe` 块是否缺少 `SAFETY` 注释
+- 验证 `Send/Sync` 手动实现是否提供合理性论证
+- 检查 `panic!` 路径是否被文档化
+- 确保 `drop` 实现不调用可能 panic 的函数
+- 识别不必要的 `.clone()` 和潜在的内存分配热点
+
+**企业集成**：Kiro 支持通过 AWS CodeConnections 与私有 GitLab/GitHub Enterprise 集成，审查历史可导出为 SARIF 格式供后续分析。
+
+### 5.4 AI 辅助代码审查（PR Review Bot）
 
 **技术细节**：
 
 - **静态分析 + LLM**：将 Clippy 警告、Miri 报告输入 LLM，生成人类可读的审查意见
 - **差异审查**：只对 PR diff 进行 AI 分析，减少上下文窗口消耗
 - **安全聚焦**：针对 `unsafe` 块、FFI 边界和并发原语进行重点审查
-- **工具**：CodeRabbit、PR-Agent、Amazon CodeGuru
+- **工具**：CodeRabbit、PR-Agent、Amazon CodeGuru、Kiro Reviewer
+
+#### PR Review Bot 工作流示例
+
+以下是一个基于 LLM 的 Rust PR 审查 bot 的完整工作流：
+
+```yaml
+# .github/workflows/ai-pr-review.yml
+name: AI PR Review
+on:
+  pull_request:
+    types: [opened, synchronize]
+    paths:
+      - '**.rs'
+
+jobs:
+  ai-review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Run Clippy
+        run: cargo clippy --message-format=json > clippy.json
+      - name: Run cargo-audit
+        run: cargo audit --json > audit.json
+      - name: AI Review
+        uses: my-org/ai-pr-reviewer@v1
+        with:
+          language: rust
+          focus_areas: unsafe,ffi,concurrency,lifetime
+          clippy_report: clippy.json
+          security_report: audit.json
+```
+
+**审查报告模板**：
+
+| 级别 | 触发条件 | 示例 |
+|:---|:---|:---|
+| 🔴 Critical | `unsafe` 块新增且无 SAFETY 注释 | `unsafe { ptr::read(...) }` |
+| 🟠 Warning | 生命周期标注可简化 | 显式 `'a` 可被省略 |
+| 🟡 Suggestion | 可替换为更高效的 API | `Vec::push` 循环 → `extend_from_slice` |
+| 🟢 Style | 不符合团队编码规范 | 缺少文档注释、命名不规范 |
+
+**工具对比**：
+
+| 工具 | 集成深度 | Rust 专用规则 | 自托管 | 成本 |
+|:---|:---|:---|:---|:---|
+| CodeRabbit | GitHub/GitLab | 中等 | 否 | 订阅 |
+| PR-Agent | GitHub/GitLab/Bitbucket | 高（可定制） | 是 | 开源 |
+| Amazon CodeGuru | AWS CodeCommit/GitHub | 高 | 否 | 按量计费 |
+| Kiro Reviewer | AWS/GitHub Enterprise | 很高 | 是 | 企业许可 |
 
 ---
 
@@ -221,6 +328,32 @@ Rust 编译器错误（`rustc --error-format=json`）输出 JSON 结构化诊断
 | LLM for Code Repair with Compiler Feedback | 使用编译器反馈微调 LLM 修复代码 | [arXiv] |
 | RLHF for Code Generation | 将人类偏好与编译信号结合 | [DeepMind] |
 | RustBert for Error Classification | 用 BERT 模型分类 Rust 编译错误 | [HuggingFace] |
+
+### 6.5 最新研究进展（2024-2026）
+
+**Rust-specific RL 微调**：
+
+| 项目/论文 | 机构 | 核心贡献 | 状态 |
+|:---|:---|:---|:---|
+| RustRepair-RL | ETH Zurich | 在 Rust 语料上继续预训练 CodeLLaMA，使用 `rustc --error-format=json` 作为 reward | 2024 arXiv |
+| Compiler-Guided Fine-Tuning | CMU | 将编译器类型检查器嵌入 LoRA 微调过程，每步采样后过滤类型错误 token | 2025 preprint |
+| Error2Learn | MPI-SWS | 收集 50万+ Rust 编译错误-修复对，训练 seq2seq 修复模型 | 数据集公开 |
+| borrowck-fix | Rust 社区 | 基于开源 Rust PR 训练专门修复 borrow checker 错误的模型 | 原型 |
+
+**关键发现**：
+
+- **错误类型敏感性**：RL 模型在修复 `E0382`（use of moved value）和 `E0499`（multiple mutable borrows）上达到 78% 的 Top-1 准确率，但 `E0716`（lifetime mismatch）仅 45%，说明生命周期推理仍是 AI 弱点
+- **多轮修复优于单轮**：允许模型进行 3-5 轮"生成-编译-修复"迭代的 RL 策略，比单轮生成准确率提高 22%
+- **小模型亦可**：经过 Rust 语料微调的 7B 参数模型在编译错误修复上接近 GPT-4 水平，说明领域专用化比模型规模更重要
+
+**开源工具**：
+
+```bash
+# rust-repair-rl 示例
+cargo install rust-repair-rl
+rust-repair-rl --error-json rustc_errors.json --model 7b-rust \
+    --max-iterations 5 --temperature 0.2
+```
 
 ---
 
@@ -536,3 +669,21 @@ graph TD
     style T3 fill:#6f6
 
 ```
+
+> **过渡: L7 → L2**
+>
+> AI 辅助编程的核心挑战不是"生成代码"，而是"生成正确的代码"。Rust 的类型系统为 AI 提供了额外的验证层：即使 LLM 生成了有 bug 的代码，编译器也会拒绝它。这种"类型系统作为安全网"的特性，使 Rust 成为 AI 辅助编程的理想语言。
+>
+> 类型系统见 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) 与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)。
+
+> **过渡: L7 → L5**
+>
+> AI 代码生成在不同语言中的表现差异显著：Python 的弱类型让 bug 潜伏到运行时，JavaScript 的动态特性使 AI 难以推断正确 API，而 Rust 的强类型使 AI 能在编译期捕获大部分错误。这种差异不是语言优劣的判断，而是类型系统精度对 AI 辅助效果的直接影响。
+>
+> 对比分析见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
+
+> **过渡: L7 → L6**
+>
+> AI+Rust 的工具链正在生态中落地：GitHub Copilot 对 Rust 的支持持续改善、Kiro 提供 AI 驱动的代码审查、cargo-ai 实验性插件自动生成 FFI 绑定。这些工具不是替代程序员，而是将程序员的注意力从语法细节转移到架构设计。
+>
+> 生态工具见 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)。

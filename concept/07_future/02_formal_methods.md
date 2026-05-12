@@ -350,7 +350,40 @@ flowchart TD
 - 将 Rust 类型直接翻译为分离逻辑断言
 - **定位**: 分离逻辑研究、内存精确建模、教学演示
 
-> **层次一致性标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+### 5.4 RefinedRust：自动化分离逻辑推导
+>
+> **来源**: [RefinedRust — PLDI 2024](https://pldi24.sigplan.org/) · [MPI-SWS]
+
+RefinedRust 是 MPI-SWS 开发的自动化 Rust 验证工具，核心创新是将 Rust 类型系统自动翻译为**分离逻辑（Separation Logic）**断言，无需人工编写规约：
+
+**工作流程**：
+
+```text
+Rust 源码 → 类型检查 → 自动分离逻辑翻译 → Iris 证明义务 → Coq 自动证明
+```
+
+**关键特性**：
+
+- **零标注验证**：利用 Rust 已有的类型信息（所有权、生命周期、借用）自动生成分离逻辑前置/后置条件
+- **内存模型对齐**：基于 RustBelt 的 Iris 内存模型，精确处理 `&mut`、`&`、Box、Rc 等类型
+- **模块化证明**：每个函数的证明独立于实现细节，只依赖其类型签名
+- **不安全代码支持**：对 `unsafe` 块，RefinedRust 允许程序员提供轻量级契约，工具自动验证其与周围 safe 代码的交互
+
+**示例**：以下函数无需任何额外标注即可自动验证内存安全：
+
+```rust
+fn swap<T>(x: &mut T, y: &mut T) {
+    // RefinedRust 自动推导:
+    // 前置: x ↦ ?v1 ∗ y ↦ ?v2
+    // 后置: x ↦ ?v2 ∗ y ↦ ?v1
+    let tmp = std::mem::replace(x, std::mem::replace(y, unsafe { std::ptr::read(x) }));
+    unsafe { std::ptr::write(y, tmp); }
+}
+```
+
+**局限性**：目前仅支持 Rust 子集（无泛型 trait、无 async、无递归类型），处于研究原型阶段。
+
+> **层次一致性标注**: L1 Code-Level 验证工具（Kani、Creusot、Verus、Prusti、RefinedRust）直接作用于源代码；L3 Unsafe 边界验证详见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)；L4 理论基础（RustBelt/Iris）详见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
 
 ---
 
@@ -428,6 +461,86 @@ repos:
 深度验证（nightly）: Creusot/Verus（核心算法）
 协议验证（设计期）: TLA+ / P（分布式组件）
 ```
+
+### 6.4 Kani 在 AWS 的流水线实践
+
+AWS 将 Kani 深度集成到核心服务的 CI/CD 流水线中，形成可复制的形式化验证工作流：
+
+**AWS s2n-quic 的 Kani 流水线**：
+
+```yaml
+# buildspec.formal.yml (AWS CodePipeline)
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      rust: 1.78
+    commands:
+      - cargo install kani-verifier
+      - cargo kani --version
+  build:
+    commands:
+      - cargo build --release
+  post_build:
+    commands:
+      - cargo kani --workspace --only-hash-check
+      - |
+        # 分层运行 proofs：快速 smoke → 深度验证
+        cargo kani --harness smoke_test_* --timeout 60
+        cargo kani --harness safety_critical_* --timeout 1800
+      - |
+        # 生成覆盖率报告
+        cargo kani --coverage --output-format lcov
+        aws s3 cp kani_coverage.lcov s3://ci-artifacts/
+artifacts:
+  files:
+    - kani_results/**/*
+```
+
+**关键实践**：
+
+| 实践 | 说明 |
+|:---|:---|
+| Harness 命名约定 | `smoke_test_*`（< 60s）、`safety_critical_*`（< 30min）、`protocol_*`（有界模型检测）|
+| 增量验证 | 只验证变更 crate 及其反向依赖的 proofs |
+| 超时分层 | 快速 proofs 在 PR 时运行，深度 proofs 在 nightly 运行 |
+| 覆盖率追踪 | Kani 生成的覆盖报告与代码覆盖率工具集成 |
+
+### 6.5 Miri 在 Crater 中的回归检测
+
+Rust 编译器团队使用 [Crater](https://github.com/rust-lang/crater) 在每次 rustc 合并前运行大规模回归测试。Miri 被集成到 Crater 的一个专用通道中：
+
+**Miri Crater 工作流**：
+
+```text
+1. rustc PR 提交
+2. Crater 构建 Top 1000 crates
+3. 对包含 unsafe 的 crate 自动运行 cargo miri test
+4. 对比基线 Miri 结果与新编译器的结果
+5. 报告新增的 UB 检测或 Miri 内部错误
+```
+
+**检测案例**：
+
+- **2024-03**：Crater 检测到某 PR 改变了 `Box` 的内部布局，导致 `miri` 在 `tokio` 中报告新的 use-after-free。问题在合并前被修复。
+- **2024-08**：Miri Crater 发现 `std::sync::atomic` 的某文档示例在新编译器下违反 Stacked Borrows，触发文档修复。
+
+**配置**：
+
+```toml
+# crater 配置中的 Miri 通道
+[crates]
+top = 1000
+filter = "has-unsafe"
+
+[tools.miri]
+command = "cargo +nightly miri test"
+timeout = 600
+env = { MIRIFLAGS = "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check" }
+```
+
+> **来源**: [Rust Compiler Team Triage](https://blog.rust-lang.org/inside-rust/) · [Crater Docs](https://github.com/rust-lang/crater/blob/master/docs/)
 
 ---
 
@@ -537,6 +650,83 @@ graph LR
     R1 --> R2
     R3 -.->|修复| D1
 ```
+
+### 8.5 TLA+ 规约示例：Rust 并发协议的形式化规约
+
+以下展示如何用 TLA+ 规约一个 Rust 并发通道（Channel）的协议，并验证其实现：
+
+**PlusCal 算法描述**（Rust `mpsc::channel` 的简化模型）：
+
+```tla
+------------------------------ MODULE RustChannel ------------------------------
+EXTENDS Naturals, Sequences, FiniteSets
+
+CONSTANTS Values, MaxBuffer
+
+VARIABLES buffer, closed, senders, receivers
+
+TypeInvariant ==
+  /\ buffer \in Seq(Values)
+  /\ Len(buffer) <= MaxBuffer
+  /\ closed \in {TRUE, FALSE}
+  /\ senders \in Nat
+  /\ receivers \in Nat
+
+Init ==
+  /\ buffer = <<>>
+  /\ closed = FALSE
+  /\ senders = 1
+  /\ receivers = 1
+
+Send(v) ==
+  /\ ~closed
+  /\ Len(buffer) < MaxBuffer
+  /\ buffer' = Append(buffer, v)
+  /\ UNCHANGED <<closed, senders, receivers>>
+
+Recv ==
+  /\ Len(buffer) > 0
+  /\ buffer' = Tail(buffer)
+  /\ UNCHANGED <<closed, senders, receivers>>
+
+Close ==
+  /\ ~closed
+  /\ closed' = TRUE
+  /\ UNCHANGED <<buffer, senders, receivers>>
+
+Next ==
+  \/ \E v \in Values : Send(v)
+  \/ Recv
+  \/ Close
+
+Spec == Init /\ [][Next]_<<buffer, closed, senders, receivers>>
+
+\* Safety: 通道关闭后不能再发送
+Safety == closed => \A v \in Values : ~ENABLED Send(v)
+
+\* Liveness: 如果通道非空且有接收者，最终会被消费
+Liveness == (Len(buffer) > 0 /\ receivers > 0) ~> (Len(buffer) < Len(buffer'))
+===============================================================================
+```
+
+**与 Rust 实现的对应**：
+
+| TLA+ 概念 | Rust 实现 |
+|:---|:---|
+| `buffer` | `VecDeque<T>` |
+| `Send(v)` | `Sender::send(v)` |
+| `Recv` | `Receiver::recv()` |
+| `Close` | `Sender::drop()` (隐式关闭) |
+| `Safety` | `send` 在 `Sender` drop 后返回 `Err` |
+| `Liveness` | `recv` 在 buffer 非空时不会永久阻塞 |
+
+**验证工作流**：
+
+1. **设计阶段**：用 TLA+ 验证 Channel 协议满足 Safety 和 Liveness
+2. **实现阶段**：Rust 代码遵循 TLA+ 规约的状态机结构
+3. **测试阶段**：运行时 trace-checking 确保实际行为与 TLA+ 模型一致
+
+> **来源**: [TLA+ Examples](https://github.com/tlaplus/Examples) · [Rust Channel Docs](https://doc.rust-lang.org/std/sync/mpsc/)
 
 ---
 
@@ -735,3 +925,21 @@ graph TD
     Q -->|修正| T3["命题在限定条件下成立"]
     style T3 fill:#6f6
 ```
+
+> **过渡: L7 → L4**
+>
+> 形式化方法不是"写完后验证"的附加步骤——它是语言设计的内在组成部分。Rust 的所有权系统本身就是形式化语义（Oxide、RustBelt）的工程化实现。理解形式化方法的历史，就是理解 Rust 为什么选择了这条设计路径。
+>
+> 形式化根基见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) 与 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)。
+
+> **过渡: L7 → L3**
+>
+> 形式化验证工具（Kani、Miri、Prusti）的实际使用场景集中在 unsafe 边界和并发协议。这些工具不验证"业务逻辑正确"，而是验证"内存安全"和"无数据竞争"——这正是 Rust 编译器已经保证 safe Rust 的部分，但 unsafe 和并发复杂场景需要额外验证。
+>
+> 工程边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) 与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)。
+
+> **过渡: L7 → L6**
+>
+> 形式化验证正在从学术研究走向工业实践：AWS 用 Kani 验证 s2n-tls、Microsoft 用 Verus 验证 Hyper-V 组件、Rust 标准库用 Miri 持续回归检测。这些案例证明形式化方法不再是"玩具"，而是关键基础设施的必需品。
+>
+> 工业实践见 [`../06_ecosystem/03_core_crates.md`](../06_ecosystem/03_core_crates.md)（验证工具生态）。

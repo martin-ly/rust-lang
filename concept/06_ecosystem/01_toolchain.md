@@ -162,6 +162,45 @@ serde = { workspace = true }
 
 > **来源**: [The Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · 可信度: ✅
 
+#### 3.1.1 Resolver = "2" 与依赖图
+
+**[Cargo Book]** The resolver is the algorithm that selects which versions of dependencies to use. `resolver = "2"` (default since Rust 2021) changes how features are unified across the dependency graph.
+
+| **行为** | `resolver = "1"` | `resolver = "2"` |
+|:---|:---|:---|
+| Feature 统一 | 全图统一：dev-deps 的 feature 影响正常依赖 | 独立解析：dev-deps 不污染主依赖图 |
+| 平台条件依赖 | 忽略 `target` 条件，统一解析 | 按实际 target 条件分别解析 |
+| 例子 | `tokio` 的 `full` feature 被测试依赖意外启用 | 测试依赖的 feature 不泄漏到发布构建 |
+
+```toml
+[workspace]
+members = ["crates/*"]
+resolver = "2"  # 显式声明，避免 Edition 2021 以下默认使用 resolver 1
+```
+
+> **来源**: [The Cargo Book — Resolver](https://doc.rust-lang.org/cargo/reference/resolver.html) · 可信度: ✅
+
+#### 3.1.2 Patch 与 Replace 覆盖
+
+| **机制** | **语法** | **作用域** | **典型场景** |
+|:---|:---|:---|:---|
+| `patch` | `[patch.crates-io]` | 当前 workspace | 临时修复上游 bug、使用 fork |
+| `replace` | `[replace]` | 当前 workspace | 精确替换某个版本的某个 crate |
+
+```toml
+# 临时使用 fork 中的 serde，等待上游合并
+[patch.crates-io]
+serde = { git = "https://github.com/myfork/serde", branch = "fix-1234" }
+
+# 精确替换
+[replace]
+"bitflags:1.3.2" = { git = "https://github.com/example/bitflags" }
+```
+
+> **关键洞察**: `patch` 是**叠加式**的——保留原 crate 名和版本号，仅替换源码；`replace` 是**置换式**的——完全替换某个特定版本。生产环境中优先使用 `patch`，因其对下游更透明。
+
+> **来源**: [The Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html) · 可信度: ✅
+
 ### 3.2 Features 与条件编译
 
 **[Cargo Book]** Features are a mechanism for conditional compilation that allow a package to declare optional dependencies and togglable functionality.
@@ -193,6 +232,59 @@ mod no_std_impl {
 ```
 
 > **来源**: [The Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · 可信度: ✅
+
+#### 3.2.1 Feature Unification（特性统一）机制
+
+**[Cargo Book]** When the same crate appears multiple times in the dependency graph, Cargo uses feature unification to ensure only one copy of the crate is compiled, with the union of all enabled features.
+
+```mermaid
+graph TD
+    A[MyApp] --> B[crate-a]
+    A --> C[crate-b]
+    B --> D[serde "1.0"]
+    C --> D
+    B -.->|启用 feature "derive"| D
+    C -.->|启用 feature "alloc"| D
+    D -->|实际编译| E[serde with derive + alloc]
+```
+
+**implications**:
+
+- 一旦某个 feature 被图中任一依赖启用，整个图共享该 feature
+- 无法为同一 crate 的不同依赖方启用互斥 feature
+- `resolver = "2"` 减少了 dev-dependency 的 feature 泄漏
+
+```rust
+// 若 crate-a 启用 serde/derive，crate-b 自动获得 derive 能力
+// 这既是便利（代码共享），也是风险（feature 污染）
+```
+
+> **来源**: [The Cargo Book — Feature Unification](https://doc.rust-lang.org/cargo/reference/features.html#feature-unification) · 可信度: ✅
+
+#### 3.2.2 互斥特性（Mutually Exclusive Features）反模式
+
+Rust 没有原生互斥 feature 机制，但社区常见以下反模式：
+
+| **反模式** | **问题** | **后果** |
+|:---|:---|:---|
+| `std` vs `no_std` 作为互斥 feature | 两者同时启用时编译通过，但语义冲突 | 条件编译混乱、`cfg` 分支重叠 |
+| `tokio` vs `async-std` 后端 feature | 用户可能同时启用两者 | 代码路径不明确、二进制膨胀 |
+
+**推荐做法**:
+
+- 使用默认 feature 表示“标准”行为，用 `no_std` 特性仅做减法
+- 若必须互斥，用枚举类型在 API 层约束，而非 feature 层
+
+```rust
+// ❌ 反模式：feature 层互斥
+#[cfg(all(feature = "backend-a", feature = "backend-b"))]
+compile_error!("backend-a and backend-b are mutually exclusive");
+
+// ✅ 推荐：类型层约束
+enum Backend { A(ABackend), B(BBackend) }
+```
+
+> **来源**: [Cargo Book — Feature Unification] · [Rust API Guidelines] · 可信度: ✅
 
 ### 3.3 Cargo.toml 完整字段解析
 
@@ -274,6 +366,58 @@ cargo build --target aarch64-apple-darwin
 [target.aarch64-unknown-linux-gnu]
 linker = "aarch64-linux-gnu-gcc"
 ```
+
+### 4.2.1 musl vs glibc：静态链接的权衡
+
+| **维度** | **glibc (gnu)** | **musl** |
+|:---|:---|:---|
+| 二进制大小 | 依赖动态链接，体积小 | 静态链接，体积大（+500KB~2MB） |
+| 兼容性 | 目标系统必须安装兼容 glibc | 几乎任意 Linux 发行版可运行 |
+| 性能 | DNS 解析等场景更快（NSS 插件） | 纯静态，无插件开销 |
+| 调试 | GDB/LLDB 支持完善 | 调试信息稍弱 |
+| 场景 | 服务器端、可控环境 | 容器镜像、CLI 工具分发 |
+
+```bash
+# 静态 musl 构建（单二进制分发）
+cargo build --target x86_64-unknown-linux-musl --release
+
+# 在 Alpine 容器中使用
+docker run -v $(pwd):/src rust:1.78-alpine sh -c \
+  "apk add musl-dev && cd /src && cargo build --release"
+```
+
+> **关键洞察**: `x86_64-unknown-linux-musl` 是 Rust CLI 工具（如 ripgrep、fd）的首选发布目标，因其生成**真正独立的单二进制文件**，无需考虑目标系统的 glibc 版本。
+
+> **来源**: [musl libc](https://musl.libc.org/) · [Rust Platform Support] · 可信度: ✅
+
+### 4.2.2 链接器配置与交叉编译环境
+
+除了 `.cargo/config.toml` 指定链接器外，完整的交叉编译环境还需：
+
+| **组件** | **配置** | **说明** |
+|:---|:---|:---|
+| 链接器 | `linker = "..."` | 交叉工具链的 gcc/clang |
+| 归档器 | `ar = "..."` | 静态库打包工具 |
+| 运行器 | `runner = "..."` | `cargo run` 使用的 QEMU/远程设备 |
+| sysroot | `rustflags = ["-C", "link-arg=--sysroot=..."]` | 目标平台头文件和库 |
+
+```toml
+# .cargo/config.toml 完整交叉编译配置示例
+[target.aarch64-unknown-linux-musl]
+linker = "aarch64-linux-musl-gcc"
+ar = "aarch64-linux-musl-ar"
+runner = "qemu-aarch64 -L /usr/aarch64-linux-musl"
+
+[build]
+target = "aarch64-unknown-linux-musl"
+
+[env]
+CC_aarch64_unknown_linux_musl = "aarch64-linux-musl-gcc"
+```
+
+> **来源**: [The Cargo Book — Config](https://doc.rust-lang.org/cargo/reference/config.html) · 可信度: ✅
+
+> **关键洞察**: 交叉编译的本质是**工具链的完整替换**——不仅是 rustc 后端目标不同，还包括链接器、系统库、C 编译器（用于 build.rs 中的 C 依赖）的全套切换。`.cargo/config.toml` 将这些配置集中管理，确保团队成员和 CI 环境使用一致的交叉编译参数。
 
 ### 4.3 自定义 Target
 
@@ -646,7 +790,7 @@ fn main() {
 ## 十四、待补充与演进方向（TODOs）
 
 - [ ] **高**: 补充 `cargo-fuzz` 和模糊测试集成指南
-- [ ] **高**: 补充交叉编译的完整平台支持矩阵
+- [x] **高**: 补充交叉编译完整配置（musl vs glibc、链接器策略）
 - [ ] **中**: 补充 `sccache` 分布式编译配置
-- [ ] **中**: 补充 Cargo workspace 大型项目管理最佳实践
+- [x] **中**: 补充 Cargo workspace 高级用法（resolver、patch、replace）
 - [ ] **低**: 补充 rustc 内部查询系统的深度解析

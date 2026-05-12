@@ -313,6 +313,146 @@ Rust 在区块链领域占据**主导地位**的原因：
 
 > **来源**: [Tauri Docs] · [Dioxus Docs] · 可信度: ✅
 
+### 4.9 WASM（WebAssembly）与全栈 Rust
+
+**技术栈**: `wasm-bindgen` / `wasm-pack` + `leptos` / `dioxus` / `yew` + `trunk`
+
+Rust 编译为 WASM 的核心优势：
+
+| **维度** | **Rust WASM** | **JavaScript** | **C/C++ WASM** |
+|:---|:---|:---|:---|
+| 包体积 | 小（tree-shaking + LTO） | 无额外体积 | 大（无标准库精简机制） |
+| 性能 | 接近原生（SIMD 就绪） | 解释/JIT | 接近原生 |
+| 内存安全 | 编译期保证 | GC | 手动管理（WASM 中更难调试） |
+| 工具链 | `wasm-pack` / `cargo generate` | npm | emscripten（复杂） |
+| 与 JS 互操作 | `wasm-bindgen` 自动生成 | 原生 | 手动 C-API 封装 |
+
+**前端框架选型**:
+
+| **框架** | **范式** | **特点** | **成熟度** |
+|:---|:---|:---|:---|
+| **Leptos** | 细粒度响应式 | 编译期优化、无虚拟 DOM、WASM 体积小 | ⭐⭐⭐⭐ 快速增长 |
+| **Dioxus** | 类 React | RSX 语法、跨平台（Web/桌面/移动端） | ⭐⭐⭐⭐ |
+| **Yew** | 类 React | 成熟稳定、生态文档完善 | ⭐⭐⭐⭐ |
+| **Sycamore** | 细粒度响应式 | 类似 Solid.js、性能优先 | ⭐⭐⭐ |
+
+> **关键洞察**: Leptos 的**细粒度响应式**系统不在 WASM 层面做虚拟 DOM diff，而是直接在编译期生成信号（signal）依赖图。这使得其 WASM 输出体积极小，且运行时性能与手写 JavaScript 相当。
+
+> **来源**: [WebAssembly.org] · [Leptos Book] · [Dioxus Docs] · 可信度: ✅
+
+### 4.10 嵌入式（no_std）深度解析
+
+**技术栈扩展**: `embedded-hal` + `defmt` + `probe-rs` + `cortex-m-rt`
+
+| **维度** | `std` 环境 | `no_std` 环境 |
+|:---|:---|:---|
+| 内存分配 | `std::alloc::GlobalAlloc` | `alloc` crate（可选）或完全无堆 |
+| panic 处理 | 默认栈展开 | `panic-halt` / `panic-semihosting` |
+| 打印输出 | `println!` | `defmt`（二进制日志，极小体积）/ `rtt` |
+| 并发 | `std::thread` | `embassy` async / 中断 / RTIC |
+| 调试 | GDB + stdlib | `probe-rs` + RTT + `defmt` |
+
+```rust
+#![no_std]
+#![no_main]
+
+use cortex_m_rt::entry;
+use panic_halt as _;
+
+#[entry]
+fn main() -> ! {
+    let dp = stm32f4::Peripherals::take().unwrap();
+    // 无堆分配、无标准库、确定性执行
+    loop {
+        // 轮询或中断驱动
+    }
+}
+```
+
+**选型决策**：
+
+- 需要 `alloc`（Vec、String）但无 std → 启用 `extern crate alloc`
+- 完全无堆（最严格）→ 使用 `heapless::Vec`、`heapless::String`
+- 异步多任务 → `embassy`（协作式）或 `RTIC`（基于中断）
+
+> **关键洞察**: `defmt`（deferred formatting）通过将格式化字符串留在主机端，仅传输原始数据到调试器，将日志开销降低 **10-100 倍**。这是 Rust 嵌入式生态的**杀手级工具**。
+
+> **来源**: [Ferrous Systems] · [Embassy Book] · [probe-rs] · 可信度: ✅
+
+### 4.11 CLI 工具工程化
+
+**完整技术栈**: `clap` + `serde` + `anyhow`/`thiserror` + `tracing` + `indicatif` + `human-panic`
+
+| **工程维度** | **Rust CLI 方案** | **对比 Python/Node** |
+|:---|:---|:---|
+| 参数解析 | `clap` derive（编译期验证） | `argparse` / `yargs`（运行时） |
+| 配置文件 | `serde` + `toml`/`json`（类型安全） | 字典解析（运行时错误） |
+| 错误报告 | `miette`（美观诊断） | traceback（冗长） |
+| 进度反馈 | `indicatif`（多进度条） | `tqdm`（功能类似） |
+| 崩溃处理 | `human-panic`（用户友好报告） | 堆栈泄露 |
+| 发布分发 | `cargo-dist`（自动构建多平台） | PyInstaller / pkg（复杂） |
+
+```rust
+use clap::Parser;
+use anyhow::Result;
+
+#[derive(Parser)]
+#[command(name = "mytool")]
+struct Cli {
+    #[arg(short, long, default_value = "config.toml")]
+    config: std::path::PathBuf,
+}
+
+fn main() -> Result<()> {
+    let args = Cli::parse();
+    // clap 自动处理 --help、错误提示、shell 补全
+    let config: Config = std::fs::read_to_string(&args.config)
+        .map_err(|e| anyhow::anyhow!("无法读取配置: {}", e))?;
+    Ok(())
+}
+```
+
+> **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
+
+> **来源**: [Rust CLI Book] · [cargo-dist docs] · 可信度: ✅
+
+### 4.12 游戏开发：Bevy 生态深度
+
+**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` + `bevy_ecs`
+
+| **子系统** | **Crate** | **功能** | **替代方案** |
+|:---|:---|:---|:---|
+| ECS | `bevy_ecs` | 数据驱动、并行系统调度 | `hecs`, `legion` |
+| 渲染 | `bevy_render` / `wgpu` | 跨平台 GPU（D3D12/Metal/Vulkan） | `glium`, `macroquad` |
+| 物理 | `bevy_rapier` | 刚体/碰撞/关节 | `heron` (2D), `xpbd` |
+| 音频 | `bevy_kira_audio` / `rodio` | 空间音频、流播放 | `cpal` (底层) |
+| 输入 | `bevy_input` | 键盘/鼠标/手柄/触摸 | — |
+| 资产 | `bevy_asset` | 热重载、异步加载 | — |
+| UI | `bevy_ui` | 即时模式 + 保留模式混合 | `egui` (工具UI) |
+
+**ECS 与所有权的同构性（深度）**：
+
+```rust
+// Bevy 系统：函数签名即数据依赖声明
+fn move_player(
+    time: Res<Time>,
+    mut query: Query<(&mut Transform, &Velocity), With<Player>>,
+) {
+    for (mut transform, velocity) in &mut query {
+        transform.translation += velocity.0 * time.delta_seconds();
+    }
+}
+
+// 编译期保证：
+// 1. mut Transform 和 &Velocity 不冲突（同一组件不可同时读写）
+// 2. With<Player> 过滤保证仅处理玩家实体
+// 3. 多个不重叠的 Query 可并行调度
+```
+
+> **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用检查器在**运行时调度**中的延伸应用。
+
+> **来源**: [Bevy Book] · [Bevy Cheatsheet] · 可信度: ✅
+
 ---
 
 ## 五、领域与 L1-L5 概念映射
@@ -412,6 +552,56 @@ graph TD
 | *Candle: ML Framework in Rust* | Hugging Face, 2023 | 无 Python 依赖推理 | ML 应用领域 |
 | *Bevy ECS Architecture* | Bevy Team | 数据驱动游戏引擎 | 游戏领域设计模式 |
 
+### 7.4 领域选择决策框架
+
+面对具体项目，如何选择 Rust 的应用领域？以下决策矩阵从约束出发：
+
+#### 7.4.1 四维评估模型
+
+| **维度** | **权重** | **评估问题** | **Rust 优势领域** |
+|:---|:---|:---|:---|
+| **性能敏感度** | 高 | 是否需要接近 C++ 的性能？ | 系统编程、游戏、数据工程 |
+| **安全关键度** | 高 | 内存漏洞是否会导致严重事故？ | 嵌入式、区块链、密码学 |
+| **并发复杂度** | 高 | 是否需要高并发且避免数据竞争？ | Web 后端、网络基础设施 |
+| **部署约束** | 高 | 是否需要单二进制/小体积/无运行时？ | CLI、嵌入式、WASM |
+| **开发速度** | 高 | 是否需要快速迭代/MVP？ | ⚠️ Python/Go 可能更优 |
+| **生态成熟度** | 中 | 该领域是否有成熟的 crate 栈？ | Web、CLI、密码学 ✅；GUI、ML 训练 ⚠️ |
+
+#### 7.4.2 决策树
+
+```mermaid
+graph TD
+    Q1[项目需要极高性能<br/>或内存安全保证？] -->|是| Q2{需要快速原型？}
+    Q1 -->|否| A1[考虑 Python/Go/TS<br/>开发效率优先]
+
+    Q2 -->|是| A2[混合架构：<br/>Python 原型 + Rust 核心]
+    Q2 -->|否| Q3{领域类型？}
+
+    Q3 -->|系统/内核/驱动| A3[Rust for Linux<br/>bindgen + unsafe]
+    Q3 -->|Web 后端/API| A4[axum + tokio + sqlx<br/>高并发 + 类型安全]
+    Q3 -->|CLI 工具| A5[clap + serde + anyhow<br/>单二进制分发]
+    Q3 -->|嵌入式/IoT| A6[embassy + no_std<br/>确定性 + 安全]
+    Q3 -->|游戏| A7[bevy + wgpu<br/>ECS + WASM]
+    Q3 -->|区块链| A8[Solana/Substrate<br/>确定执行 + 无 GC]
+    Q3 -->|WASM 前端| A9[leptos/dioxus<br/>全栈 Rust]
+    Q3 -->|数据工程| A10[polars + arrow<br/>内存安全 + SIMD]
+
+    style A1 fill:#f96
+    style A2 fill:#ff9
+    style A3 fill:#6f6
+    style A4 fill:#6f6
+    style A5 fill:#6f6
+    style A6 fill:#6f6
+    style A7 fill:#6f6
+    style A8 fill:#6f6
+    style A9 fill:#6f6
+    style A10 fill:#6f6
+```
+
+> **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
+
+> **来源**: [Rust in Production] · [Rust Foundation Survey] · 可信度: ✅
+
 ---
 
 ## 八、知识来源关系（Provenance）
@@ -500,6 +690,11 @@ fn main() {
 
 ## 十、待补充与演进方向（TODOs）
 
+- [x] **高**: 补充 WASM 全栈开发领域深度解析
+- [x] **高**: 补充嵌入式 no_std 工程化深度案例
+- [x] **高**: 补充 CLI 工具工程化完整技术栈
+- [x] **高**: 补充游戏开发 Bevy 生态深度解析
+- [x] **中**: 补充领域选择决策框架（四维评估 + 决策树）
 - [ ] **高**: 补充每个应用领域的最小可运行项目骨架（hello-world 级别）
 - [ ] **高**: 补充领域间迁移指南（如从 Python/Go 迁移到 Rust 的路线图）
 - [ ] **中**: 补充具体 benchmark 数据（Web 框架 RPS、CLI 启动时间、嵌入式内存占用）
@@ -622,3 +817,21 @@ graph TD
     style T3 fill:#6f6
 
 ```
+
+> **过渡: L6 → L3**
+>
+> 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
+>
+> unsafe 边界见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
+
+> **过渡: L6 → L5**
+>
+> 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。
+>
+> 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
+
+> **过渡: L6 → L7**
+>
+> 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
+>
+> 未来方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)。

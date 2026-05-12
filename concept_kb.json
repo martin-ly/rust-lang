@@ -394,20 +394,26 @@
       "layer": "L0",
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
-      "line_count": 855,
+      "line_count": 1989,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0382"
+          ],
           "lines": 4,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "let s1 = String::from(\"hello\"); let s2 = s1; println!(\"{}\", s1); ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0502"
+          ],
           "lines": 5,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "let mut x = 5; let r1 = &x; let r2 = &mut x; println!(\"{}\", r1); ..."
         },
         {
@@ -423,9 +429,12 @@
           "code_preview": "fn first_word<'a>(s: &'a str) -> &'a str ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0004"
+          ],
           "lines": 8,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "enum Color { Red, Green, Blue } fn describe(c: Color) -> &'static str {     matc..."
         },
         {
@@ -435,9 +444,12 @@
           "code_preview": "trait Drawable {     fn draw(&self);     fn new() -> Self where Self: Sized; } ..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
           "lines": 5,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn read_config(path: &str) -> String {     let contents = std::fs::read_to_strin..."
         },
         {
@@ -459,9 +471,12 @@
           "code_preview": "fn identity<T>(x: T) -> T { x } let a = identity(5i32); let b = identity(3.14f64..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
           "lines": 4,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn print_debug<T>(x: T) {     println!(\"{:?}\", x); } ..."
         },
         {
@@ -477,9 +492,12 @@
           "code_preview": "use std::cell::RefCell; let cell = RefCell::new(0); let _b1 = cell.borrow(); let..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
           "lines": 4,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "fn foo() -> Result<(), MyError> {     std::fs::read_to_string(\"file.txt\")?;  // ..."
         },
         {
@@ -501,9 +519,12 @@
           "code_preview": "let x = String::from(\"hello\"); let f = || println!(\"{}\", x);  // 捕获方式？ let g = m..."
         },
         {
-          "flags": [],
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
           "lines": 5,
-          "should_fail": false,
+          "should_fail": true,
           "code_preview": "async fn fetch_and_update(data: &Mutex<i32>) {     let mut guard = data.lock().u..."
         },
         {
@@ -541,6 +562,165 @@
           "lines": 3,
           "should_fail": false,
           "code_preview": "fn process<F>(f: F) where F: for<'a> Fn(&'a str) -> &'a str, ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0204"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "struct Wrapper<T>(T);  fn main() {     let w = Wrapper(String::from(\"hello\"));  ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "let s: &'static str = \"hello\"; let r: &str = s; ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0277"
+          ],
+          "lines": 17,
+          "should_fail": true,
+          "code_preview": "trait Drawable { fn draw(&self); }  fn render<T>(item: T) where     T: Drawable ..."
+        },
+        {
+          "flags": [
+            "compile_fail",
+            "E0562"
+          ],
+          "lines": 8,
+          "should_fail": true,
+          "code_preview": "struct MyIter(Vec<i32>);  impl MyIter {     fn iter(&self) -> impl Iterator<Item..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::sync::atomic::{AtomicUsize, Ordering};  static COUNTER: AtomicUsize = A..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "trait AsyncTrait {     async fn method(&self) -> i32; }  struct MyStruct; impl A..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "#[repr(C)] struct Point { x: f64, y: f64 } ..."
+        },
+        {
+          "flags": [],
+          "lines": 14,
+          "should_fail": false,
+          "code_preview": "use std::ops::Deref;  struct MyBox<T>(T);  impl<T> Deref for MyBox<T> {     type..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "use std::borrow::Cow;  fn process(input: &str) -> Cow<str> {     if input.contai..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use crossbeam::scope;  fn main() {     let mut data = [1, 2, 3];     scope(|s| {..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "fn identity<T>(x: T) -> T { x } ..."
+        },
+        {
+          "flags": [],
+          "lines": 12,
+          "should_fail": false,
+          "code_preview": "use std::mem::ManuallyDrop;  struct Resource; impl Drop for Resource {     fn dr..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "unsafe { ManuallyDrop::drop(&mut r); } ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "let nums = vec![1, 2, 3, 0, 4]; let result: Result<i32, &'static str> = nums.ite..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// 错误实现！ fn project(self: Pin<&mut Self>) -> Pin<&mut T> {     unsafe { Pin::new..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use std::any::{Any, TypeId};  fn main() {     let a: &dyn Any = &42i32;     prin..."
+        },
+        {
+          "flags": [],
+          "lines": 2,
+          "should_fail": false,
+          "code_preview": "struct Array<T, const N: usize>([T; N * 2]); ..."
+        },
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "struct Array<T, const N: usize>([T; N * 2]);  // ✅ struct Matrix<T, const N: usi..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "let Some(x) = opt else {     return; }; // x 在此作用域可用 ..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// let-else: 简洁 let Some(config) = load_config() else {     bail!(\"config not fo..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "use std::backtrace::Backtrace;  #[derive(Debug)] struct MyError {     msg: Strin..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[target_feature(enable = \"sse2\")] unsafe fn simd_add(a: &[f32], b: &[f32]) -> V..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "if is_x86_feature_detected!(\"avx2\") {     unsafe { avx2_optimized() } } else {  ..."
+        },
+        {
+          "flags": [],
+          "lines": 19,
+          "should_fail": false,
+          "code_preview": "use std::alloc::{GlobalAlloc, Layout, System};  struct LoggingAllocator;  unsafe..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "#[wasm_bindgen] pub fn greet(name: &str) -> String {     format!(\"Hello, {}!\", n..."
         }
       ],
       "sources": [],
@@ -551,7 +731,7 @@
       "transitions": 0,
       "has_cognitive_path": false,
       "mermaid_blocks": 0,
-      "matrix_rows": 0
+      "matrix_rows": 61
     },
     {
       "path": "concept\\00_meta\\semantic_space.md",
@@ -3779,7 +3959,7 @@
       "layer": "L6",
       "title": "Toolchain（工具链与 Cargo）",
       "positioning": "",
-      "line_count": 653,
+      "line_count": 797,
       "theorem_chains": [
         {
           "text": "| **断言** | **前提** | **结论（⟹ 推理链）** | **工具链组件** | **失效条件** |",
@@ -3827,6 +4007,18 @@
           "code_preview": "// Cargo.toml // [features] // default = [\"std\"] // std = [] // no_std = []  #[c..."
         },
         {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "// 若 crate-a 启用 serde/derive，crate-b 自动获得 derive 能力 // 这既是便利（代码共享），也是风险（feature ..."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// ❌ 反模式：feature 层互斥 #[cfg(all(feature = \"backend-a\", feature = \"backend-b\"))] c..."
+        },
+        {
           "flags": [
             "` 代码块自动作为测试运行"
           ],
@@ -3854,15 +4046,15 @@
       ],
       "transitions": 8,
       "has_cognitive_path": true,
-      "mermaid_blocks": 7,
-      "matrix_rows": 131
+      "mermaid_blocks": 8,
+      "matrix_rows": 152
     },
     {
       "path": "concept\\06_ecosystem\\02_patterns.md",
       "layer": "L6",
       "title": "Design Patterns（设计模式）",
       "positioning": "",
-      "line_count": 680,
+      "line_count": 875,
       "theorem_chains": [
         {
           "text": "| **RAII** | 资源泄漏 | 确定性资源管理 ⟹ `Drop`自动调用 | 所有权+作用域 | 边界：`mem::forget`、引用循环泄漏 |",
@@ -3949,6 +4141,36 @@
         },
         {
           "flags": [],
+          "lines": 22,
+          "should_fail": false,
+          "code_preview": "// GATs 实现的 Lending Iterator：每次迭代借用自己的数据 trait LendingIterator {     type Item<'..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// 手动 vtable：将任意 Write 类型擦除为统一句柄 struct DynWriter {     ptr: *mut (),     vtable..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Graceful Shutdown 模式 use tokio::sync::mpsc;  async fn server(mut rx: mpsc::Re..."
+        },
+        {
+          "flags": [],
+          "lines": 33,
+          "should_fail": false,
+          "code_preview": "// 深度案例：封装 C 库 libfoo 的上下文句柄 pub struct FooContext {     raw: NonNull<ffi::foo_c..."
+        },
+        {
+          "flags": [],
+          "lines": 38,
+          "should_fail": false,
+          "code_preview": "// thiserror：库的首选 use thiserror::Error;  #[derive(Error, Debug)] pub enum Config..."
+        },
+        {
+          "flags": [],
           "lines": 7,
           "should_fail": false,
           "code_preview": "// ❌ Stringly typed fn run_command(name: &str) { /* ... */ }  // ✅ 强类型 enum Comm..."
@@ -3981,14 +4203,14 @@
       "transitions": 6,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 60
+      "matrix_rows": 83
     },
     {
       "path": "concept\\06_ecosystem\\03_core_crates.md",
       "layer": "L6",
       "title": "Core Crates（核心开源库谱系）",
       "positioning": "",
-      "line_count": 619,
+      "line_count": 772,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -4030,6 +4252,24 @@
       "code_blocks": [
         {
           "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "use rayon::prelude::*;  // 自动 work-stealing：将大数据集分片到线程池 let sum: i32 = (0..1_000..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "use parking_lot::Mutex; // 无 poisoning，API 更简洁  let data = Mutex::new(0); *data...."
+        },
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "use dashmap::DashMap;  let map = DashMap::new(); map.insert(\"key\", 42); // 并发读写无..."
+        },
+        {
+          "flags": [],
           "lines": 41,
           "should_fail": false,
           "code_preview": "// 模拟 serde 的核心抽象：编译期派生与类型同构 // 实际使用需添加 serde 依赖；此处展示类型约束模式 trait Serialize { fn..."
@@ -4046,27 +4286,29 @@
         "../01_foundation/01_ownership.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
+        "../03_advanced/01_concurrency.md",
         "../03_advanced/02_async.md",
         "../03_advanced/03_unsafe.md",
         "../03_advanced/04_macros.md",
         "../05_comparative/safety_boundaries.md",
+        "../07_future/01_ai_integration.md",
         "../07_future/02_formal_methods.md",
         "../07_future/03_evolution.md",
         "./01_toolchain.md",
         "./02_patterns.md",
         "./04_application_domains.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 5,
-      "matrix_rows": 171
+      "mermaid_blocks": 6,
+      "matrix_rows": 208
     },
     {
       "path": "concept\\06_ecosystem\\04_application_domains.md",
       "layer": "L6",
       "title": "Application Domains（软件工程应用主题）",
       "positioning": "",
-      "line_count": 625,
+      "line_count": 838,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -4108,6 +4350,24 @@
       "code_blocks": [
         {
           "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "#![no_std] #![no_main]  use cortex_m_rt::entry; use panic_halt as _;  #[entry] f..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "use clap::Parser; use anyhow::Result;  #[derive(Parser)] #[command(name = \"mytoo..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "// Bevy 系统：函数签名即数据依赖声明 fn move_player(     time: Res<Time>,     mut query: Query..."
+        },
+        {
+          "flags": [],
           "lines": 31,
           "should_fail": false,
           "code_preview": "// 模拟 Web 路由框架的核心类型约束（类似 axum 的设计） use std::collections::HashMap;  trait Handler..."
@@ -4122,6 +4382,7 @@
         "../03_advanced/03_unsafe.md",
         "../05_comparative/01_rust_vs_cpp.md",
         "../05_comparative/02_rust_vs_go.md",
+        "../05_comparative/03_paradigm_matrix.md",
         "../05_comparative/safety_boundaries.md",
         "../07_future/01_ai_integration.md",
         "../07_future/02_formal_methods.md",
@@ -4130,17 +4391,17 @@
         "./02_patterns.md",
         "./03_core_crates.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
-      "mermaid_blocks": 5,
-      "matrix_rows": 163
+      "mermaid_blocks": 6,
+      "matrix_rows": 202
     },
     {
       "path": "concept\\07_future\\01_ai_integration.md",
       "layer": "L7",
       "title": "AI × Rust：生成-验证闭环与确定性容器",
       "positioning": "",
-      "line_count": 539,
+      "line_count": 557,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -4189,15 +4450,17 @@
         "../01_foundation/01_ownership.md",
         "../01_foundation/04_type_system.md",
         "../02_intermediate/01_traits.md",
+        "../02_intermediate/02_generics.md",
         "../03_advanced/03_unsafe.md",
         "../04_formal/04_rustbelt.md",
         "../05_comparative/01_rust_vs_cpp.md",
+        "../05_comparative/03_paradigm_matrix.md",
         "../05_comparative/safety_boundaries.md",
         "../06_ecosystem/01_toolchain.md",
         "./02_formal_methods.md",
         "./03_evolution.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
       "matrix_rows": 46
@@ -4207,7 +4470,7 @@
       "layer": "L7",
       "title": "Formal Methods Industrialization（形式化方法工业化）",
       "positioning": "",
-      "line_count": 738,
+      "line_count": 756,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -4275,10 +4538,11 @@
         "../04_formal/04_rustbelt.md",
         "../05_comparative/safety_boundaries.md",
         "../06_ecosystem/01_toolchain.md",
+        "../06_ecosystem/03_core_crates.md",
         "./01_ai_integration.md",
         "./03_evolution.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 7,
       "matrix_rows": 77
@@ -4288,7 +4552,7 @@
       "layer": "L7",
       "title": "Language Evolution（语言演进）",
       "positioning": "",
-      "line_count": 515,
+      "line_count": 533,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -4352,13 +4616,17 @@
       ],
       "sources": [],
       "cross_references": [
+        "../01_foundation/01_ownership.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
         "../03_advanced/02_async.md",
+        "../04_formal/02_type_theory.md",
+        "../05_comparative/01_rust_vs_cpp.md",
+        "../05_comparative/02_rust_vs_go.md",
         "../05_comparative/03_paradigm_matrix.md",
         "../07_future/02_formal_methods.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 64

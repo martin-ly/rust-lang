@@ -393,6 +393,202 @@ unsafe {
 
 > **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
 
+### 4.6 Rust 特有高级模式
+
+#### GATs（Generic Associated Types）模式
+
+**[Rust RFC 1598]** Generic Associated Types allow type constructors to be associated with traits, enabling patterns previously impossible in Rust's type system.
+
+| **模式** | **GATs 解决的核心问题** | **典型应用** |
+|:---|:---|:---|
+| Lending Iterator | 返回引用生命周期与迭代器本身绑定 | `windows()`, `array_chunks()` |
+| Type Families | 关联类型参数化 | 异步 trait、流式 API |
+| Higher-Kinded Types 模拟 | 类型构造器的抽象 | 泛型集合接口 |
+
+```rust
+// GATs 实现的 Lending Iterator：每次迭代借用自己的数据
+trait LendingIterator {
+    type Item<'a>
+    where
+        Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+struct Windows<'a, T> {
+    slice: &'a [T],
+    size: usize,
+}
+
+impl<'a, T> LendingIterator for Windows<'a, T> {
+    type Item<'b> = &'b [T] where Self: 'b;
+    fn next<'b>(&'b mut self) -> Option<Self::Item<'b>> {
+        let (head, tail) = self.slice.split_at_checked(self.size)?;
+        self.slice = &tail.get(1..).unwrap_or(&[]);
+        Some(head)
+    }
+}
+```
+
+> **来源**: [RFC 1598 — GATs] · [Rust Design Patterns] · 可信度: ✅
+
+#### Type Erasure（类型擦除）模式
+
+当需要存储异构类型且避免泛型传播时，使用类型擦除：
+
+```rust
+// 手动 vtable：将任意 Write 类型擦除为统一句柄
+struct DynWriter {
+    ptr: *mut (),
+    vtable: &'static WriterVTable,
+}
+
+struct WriterVTable {
+    write: unsafe fn(*mut (), buf: &[u8]) -> io::Result<usize>,
+    flush: unsafe fn(*mut ()) -> io::Result<()>,
+    drop: unsafe fn(*mut ()),
+}
+
+// 标准库中的类型擦除：Box<dyn Trait> / Arc<dyn Trait>
+// 零成本替代：enum 类型擦除（如 io::Write 的 Either<L, R>）
+```
+
+> **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
+
+#### async/await 设计模式
+
+| **模式** | **问题** | **Rust 方案** |
+|:---|:---|:---|
+| **Cancellation Token** | 优雅取消长时间运行的异步任务 | `tokio_util::sync::CancellationToken` |
+| **Graceful Shutdown** | 运行时有序退出，完成 inflight 请求 | `tokio::select!` + `mpsc::channel` 关闭信号 |
+| **Backpressure** | 防止生产者过载消费者 | `tokio::sync::Semaphore` + bounded channel |
+| **Resource Pool** | 异步环境下的连接/对象复用 | `deadpool` / `bb8` |
+| **Stream 适配** | 异步迭代与转换 | `futures::Stream` + `StreamExt` |
+
+```rust
+// Graceful Shutdown 模式
+use tokio::sync::mpsc;
+
+async fn server(mut rx: mpsc::Receiver<Request>, mut shutdown: mpsc::Receiver<()>) {
+    loop {
+        tokio::select! {
+            Some(req) = rx.recv() => handle(req).await,
+            _ = shutdown.recv() => {
+                drain(&mut rx).await;  // 处理剩余请求
+                break;
+            }
+        }
+    }
+}
+```
+
+> **来源**: [Tokio Docs — Patterns] · [Async Rust Design Patterns] · 可信度: ✅
+
+### 4.7 FFI 边界的安全封装深度案例
+
+与 C 互操作时，核心挑战是将**不安全契约**封装为**安全 API**：
+
+| **C 端风险** | **Rust 封装策略** | **类型系统保证** |
+|:---|:---|:---|
+| 空指针 | `NonNull<T>` / `Option<&T>` | 空值不可表示 |
+| 未初始化内存 | `MaybeUninit<T>` | 明确区分已初始化/未初始化 |
+| 裸资源句柄 | `struct Handle(u32);` + `Drop` | RAII 自动释放 |
+| 字符串编码 | `CStr` / `CString` | 保证 NUL 终止 |
+| 线程安全 | `Send` / `Sync` 手动实现 | 文档化 + 编译期标记 |
+
+```rust
+// 深度案例：封装 C 库 libfoo 的上下文句柄
+pub struct FooContext {
+    raw: NonNull<ffi::foo_ctx>,
+}
+
+// 安全不变式：raw 始终有效，且仅由当前实例释放
+unsafe impl Send for FooContext {} // 仅当底层 C 库线程安全时
+
+impl FooContext {
+    pub fn new() -> Result<Self, FooError> {
+        let ptr = unsafe { ffi::foo_init() };
+        NonNull::new(ptr).map(|raw| Self { raw }).ok_or(FooError::Init)
+    }
+
+    pub fn process(&mut self, data: &[u8]) -> Result<Vec<u8>, FooError> {
+        // 前置条件：data 长度不超过 C 库限制
+        if data.len() > ffi::FOO_MAX_SIZE {
+            return Err(FooError::TooLarge);
+        }
+        // 不变式：self.raw 有效，由 new() 和 Drop 保证
+        unsafe {
+            ffi::foo_process(self.raw.as_ptr(), data.as_ptr(), data.len());
+            // ...
+        }
+    }
+}
+
+impl Drop for FooContext {
+    fn drop(&mut self) {
+        unsafe { ffi::foo_free(self.raw.as_ptr()) };
+    }
+}
+```
+
+> **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
+
+> **来源**: [The Rustonomicon — FFI] · [Rust FFI Guidelines] · 可信度: ✅
+
+### 4.8 错误处理模式对比：thiserror / miette / snafu
+
+| **维度** | **thiserror** | **miette** | **snafu** |
+|:---|:---|:---|:---|
+| **定位** | 最小样板错误枚举 | 诊断丰富（报告、源码标注） | 结构化上下文错误 |
+| **derive 宏** | 极简化：`#[derive(Error)]` | 丰富：`#[derive(Diagnostic)]` | 显式：`#[derive(Snafu)]` |
+| **错误链** | `#[source]` 自动 `source()` | `#[related]` 支持多错误 | `source` + 上下文构造 |
+| **源码位置** | 需手动 | 自动捕获 span / 源码片段 | 需手动 |
+| **适用场景** | 库作者（轻量） | CLI/应用（用户友好报告） | 复杂领域错误（状态机） |
+| **额外依赖** | 几乎零 | `miette` 自身 + `owo-colors` | `snafu` 自身 |
+
+```rust
+// thiserror：库的首选
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum ConfigError {
+    #[error("invalid port: {0}")]
+    InvalidPort(u16),
+    #[error("IO error")]
+    Io(#[from] std::io::Error),
+}
+
+// miette：诊断优先
+use miette::{Diagnostic, NamedSource};
+#[derive(Debug, Diagnostic, thiserror::Error)]
+#[error("配置解析失败")]
+#[diagnostic(
+    code(config::parse),
+    help("端口号应在 1024-65535 之间")
+)]
+struct ParseError {
+    #[source_code]
+    src: NamedSource,
+    #[label("此处")]
+    span: SourceSpan,
+}
+
+// snafu：上下文敏感
+use snafu::{Snafu, ResultExt, ensure};
+#[derive(Debug, Snafu)]
+enum Error {
+    #[snafu(display("无法读取配置文件 {path}"))]
+    ReadConfig { source: std::io::Error, path: String },
+}
+
+fn load(path: &str) -> Result<Config, Error> {
+    std::fs::read_to_string(path).context(ReadConfigSnafu { path })?;
+}
+```
+
+> **选型决策**: 编写库 → **thiserror**（生态最轻）；构建 CLI/终端应用 → **miette**（诊断美观）；复杂状态机/领域错误 → **snafu**（结构化上下文）。
+
+> **来源**: [thiserror docs] · [miette docs] · [snafu docs] · 可信度: ✅
+
 ---
 
 ## 五、反模式（Anti-patterns）
@@ -672,8 +868,7 @@ fn main() {
 
 ## 十一、待补充与演进方向（TODOs） {L6}
 
-- [ ] **高**: 补充更多 Rust 特有模式（如 GATs 模式、Type Erasure）
-- [ ] **高**: 补充 async/await 设计模式
-- [ ] **中**: 补充 FFI 边界的安全封装模式深度案例
-- [ ] **中**: 补充错误处理模式（`thiserror`/`miette`/`snafu` 对比）
+- [x] **高**: 补充 GATs 模式、Type Erasure、async/await 设计模式
+- [x] **中**: 补充 FFI 边界的安全封装模式深度案例
+- [x] **中**: 补充错误处理模式对比（`thiserror`/`miette`/`snafu`）
 - [ ] **低**: 补充各模式的 benchmark 对比数据
