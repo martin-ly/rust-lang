@@ -3,7 +3,7 @@
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Generics](./02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference: Traits] · [Wikipedia: Type class] · [RFC 255]
+> **主要来源**: [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html) · [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html)
 
 ---
 
@@ -18,17 +18,23 @@
 
 ### 1.1 Wikipedia 对齐定义
 
-> **[Wikipedia: Type class]** A type class is a type system construct that supports ad hoc polymorphism. This is achieved by adding constraints to type variables in parametrically polymorphic types. Rust's traits are directly inspired by Haskell's type classes.
+> **[Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class)** A type class is a type system construct that supports ad hoc polymorphism. This is achieved by adding constraints to type variables in parametrically polymorphic types. Functions defined in a type class and applied via a type class constraint can use different implementations depending on the particular types of the parameters at each call site. Rust's traits are directly inspired by Haskell's type classes.
 
-> **[Wikipedia: Trait (computer programming)]** In computer programming, a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class. Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
+> **[Wikipedia: Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming))** In computer programming, a trait is a concept used in object-oriented programming that represents a set of methods that can be used to extend the functionality of a class. Rust uses traits to define shared behavior in an abstract way, enabling ad hoc polymorphism without inheritance.
 
-### 1.2 TRPL 官方定义
+> **[Wikipedia: Ad hoc polymorphism](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism)** Ad hoc polymorphism is a kind of polymorphism in which polymorphic functions can be applied to arguments of different types, because a polymorphic function can denote a number of distinct and potentially heterogeneous implementations depending on the type of the argument(s). Rust traits provide this through explicit implementation.
 
-> **[TRPL: Ch10.2]** A trait defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior.
+### 1.2 TRPL 与 RFC 官方定义
+
+> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** A trait defines functionality a particular type has and can share with other types. We can use traits to define shared behavior in an abstract way. We can use trait bounds to specify that a generic type can be any type that has certain behavior.
+
+> **[Rust Reference: Traits](https://doc.rust-lang.org/reference/items/traits.html)** A trait describes an abstract interface that types can implement. This interface is made up of associated items, which come in three varieties: functions, types, and constants. All traits define an implicit type parameter `Self` that refers to the type implementing the trait.
+
+> **[RFC 255: Object Safety](https://rust-lang.github.io/rfcs/0255-object-safety.html)** A trait is object safe if it has a sensible vtable representation. Object safety rules ensure that trait objects (`dyn Trait`) can be constructed and that method dispatch through vtables is well-defined.
 
 ### 1.3 形式化定义
 
-> **[类型论: Wadler & Blott 1989, "How to Make Ad-hoc Polymorphism Less Ad-hoc"]** Trait 形式化为带约束的接口类型，对应类型类（type class）的构造性证明模型。 ✅ 已验证
+> **[类型论: Wadler & Blott 1989, "How to Make Ad-hoc Polymorphism Less Ad-hoc"](http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf)** Trait 形式化为带约束的接口类型，对应类型类（type class）的构造性证明模型。 ✅ 已验证
 
 Trait 可以形式化为**带约束的接口类型**（constrained interface types），对应范畴论中的**类型类**（type class）：
 
@@ -46,7 +52,7 @@ Trait 作为逻辑命题:
   定理: "对所有满足 Monoid 的类型 T，reduce 成立"
 ```
 
-> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型 Trait 等）构成的层次化体系。下一节通过属性矩阵对这些子类型进行系统分类，并与其他语言的类似机制进行正交对比。
+> **过渡到属性矩阵**: 从定义出发，Trait 系统并非单一概念，而是由多种子类型（自动 Trait、标记 Trait、泛型 Trait 等）构成的层次化体系。下一节通过属性矩阵对这些子类型进行系统分类，并与其他语言的类似机制进行正交对比。属性矩阵回答"Trait 有哪些种类"，为后续定理推理链提供概念基础。
 
 ---
 
@@ -105,9 +111,9 @@ graph TD
     B --> B4[Blanket impl]
 
     C --> C1[<T: Trait>]
-    C --> C2<T: TraitA + TraitB>
-    C --> C3<impl Trait>
-    C --> C4<dyn Trait>
+    C --> C2<T: TraitA + TraitB>]
+    C --> C3[impl Trait]
+    C --> C4[dyn Trait]
 
     D --> D1[静态分发: 单态化]
     D --> D2[动态分发: vtable]
@@ -123,7 +129,7 @@ graph TD
     F --> F3[Negative impls]
 ```
 
-> **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络。
+> **过渡到定理推理链**: 思维导图呈现了 Trait 系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Orphan Rule、Coherence、对象安全、Auto Trait 推导等核心命题形式化为可验证的推理网络，建立从编译规则到运行行为的完整因果链。
 
 ---
 
@@ -131,7 +137,7 @@ graph TD
 
 ### 4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl
 
-> **[RFC 1023] · [Rust Reference: Coherence]** Orphan Rule 限制 impl 的声明位置，是 Coherence（全局一致性）的必要前提。 ✅ 已验证
+> **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Coherence](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence)** Orphan Rule 限制 impl 的声明位置，是 Coherence（全局一致性）的必要前提。 ✅ 已验证
 
 ```text
 前提 1: Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate
@@ -146,7 +152,7 @@ graph TD
 
 ### 4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性
 
-> **[RFC 255] · [Rust Reference: Object Safety]** Trait 对象安全是 `dyn Trait` 类型的充要条件，违反任一条件即触发 E0038。 ✅ 已验证
+> **[RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** Trait 对象安全是 `dyn Trait` 类型的充要条件，违反任一条件即触发 E0038。 ✅ 已验证
 
 ```text
 前提 1: Trait 的所有方法满足对象安全条件（无 Self: Sized、无泛型方法等）
@@ -160,7 +166,7 @@ graph TD
 
 ### 4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现
 
-> **[Rust Reference: Auto Traits] · [TRPL: Ch16]** Auto Trait 的自动实现基于结构成员递归检查，是编译器自动证明的特例。 ✅ 已验证
+> **[Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** · **[TRPL: Ch16](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)** Auto Trait 的自动实现基于结构成员递归检查，是编译器自动证明的特例。 ✅ 已验证
 
 ```text
 前提 1: Auto trait 声明为 unsafe auto trait
@@ -170,12 +176,12 @@ graph TD
     ↓
 推论: 编译器自动为符合条件的类型实现 Send/Sync/Sized/Unpin
     ↓
-边界: 可通过 unsafe impl 手动覆盖（负向实现 unstable），原始指针保守默认为 Send+Sync
+边界: 可通过 unsafe impl 手动覆盖（负向实现 unstable），原始指针保守默认为 !Send/!Sync
 ```
 
 ### 4.4 Trait + 泛型 ⟹ 零成本抽象
 
-> **[TRPL: Ch10.2] · [Rust Reference: Monomorphization]** Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
+> **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** · **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization)** Trait 泛型的零成本抽象由单态化和编译器内联优化保证。 ✅ 已验证
 
 ```text
 前提 1: Trait 定义接口契约
@@ -189,24 +195,26 @@ graph TD
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析] · [Rust Reference: Type System]** 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳。 💡 原创分析
+> **[原创分析]** · **[Rust Reference: Type System](https://doc.rust-lang.org/reference/type-system.html)** 定理一致性矩阵基于 Rust 编译器错误码和类型系统公理的系统归纳，每条推理链标注"⟹"因果关系。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
-| **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰 | 无矛盾 impl | 类型论一致性 | 全局唯一 impl | `#[fundamental]` 例外（不稳定） | E0117 |
-| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定 | Coherence | 单态化零成本 | specialization（不稳定） | E0119 |
-| **定理**: Trait 对象安全 | 方法满足对象安全条件 | `dyn Trait` 可行 | 存在类型 + vtable | 运行时多态 | `Self: Sized`、泛型方法 | E0038 |
-| **推论**: Auto Trait 结构化推导 | 所有字段满足 Trait | 结构体自动实现 | 结构化推导规则 | Send/Sync 安全 | `unsafe impl` 手动覆盖 | — |
-| **引理**: Supertrait 传递 | `trait A: B` | A 的实现者必须实现 B | 子类型传递性 | Trait 层次设计 | 循环 supertrait | E0399 |
-| **定理**: Trait + 泛型零成本 | 单态化 + 内联 | 无运行时开销 | Parametricity | 性能敏感代码 | `dyn Trait` 动态分发 | — |
-| **引理**: Blanket impl 可满足 | `impl<T: A> B for T` | 全称量词 + 蕴含 | Horn 子句可满足 | 默认行为提供 | 与具体 impl 重叠 | E0119 |
-| **推论**: GATs 约束可满足 | 关联类型参数合法 | 泛型关联类型可用 | System Fω 约束 | HKT 模拟 | 无界递归、不一致约束 | — |
+| **引理**: Orphan Rule ⟹ Coherence | crate 边界清晰；至少一方本地 | impl 声明位置受限，无跨 crate 孤儿 impl | 类型论一致性；模块化封装 | 全局唯一 impl；Blanket impl 可满足 | `#[fundamental]` 类型例外（`&T`, `Box<T>`, `&mut T`） | E0117 |
+| **定理**: 全局唯一 impl | Orphan Rule + 无重叠 impl | 调用目标唯一确定；单态化可行 | Coherence 公理 | 单态化零成本；Trait 对象安全 | specialization（min_specialization 不稳定） | E0119 |
+| **定理**: Trait 对象安全 | 方法无 `Self: Sized`；无泛型方法；无静态方法 | `dyn Trait` 是合法类型；vtable 可构造 | 存在类型 + vtable 理论 | 运行时多态分发；`Box<dyn Trait>` | `Self: Sized` superbound；泛型方法 | E0038 |
+| **推论**: Auto Trait 结构化推导 | 所有字段满足 Auto Trait；类型非 `!Trait` 覆盖 | 复合类型自动实现 Send/Sync/Sized/Unpin | 结构化推导规则；归纳定义 | 并发安全分析；类型布局推导 | `unsafe impl !Send for T` 手动否定；原始指针保守 | — |
+| **引理**: Supertrait 传递 | `trait A: B` 声明 | A 的实现者必须实现 B | 子类型传递性；偏序关系 | Trait 层次设计；对象安全传递 | 循环 supertrait（`trait A: B; trait B: A`） | E0399 / E0398 |
+| **定理**: Trait + 泛型零成本 | 单态化 + LLVM 内联优化 | 无运行时开销；直接函数调用 | Parametricity；β-归约 | 性能敏感代码路径优化 | `dyn Trait` 动态分发选择 | — |
+| **引理**: Blanket impl 可满足 | `impl<T: A> B for T` 形式 | 全称量词 + 蕴含；Horn 子句可满足 | Horn 子句逻辑；一阶可满足性 | 默认行为提供；组合子设计 | 与具体 impl 重叠（如 `impl Foo for Vec<T>` + `impl<T> Foo for T`） | E0119 |
+| **推论**: GATs 约束可满足 | 关联类型参数合法；无递归约束 | 泛型关联类型可实例化 | System Fω 约束；类型族 | HKT 模拟；类型级编程 | 无界递归归一化；不一致约束 | E0275 / E0049 |
+| **引理**: `impl Trait` 存在类型 | 返回类型满足 Trait；单一具体类型 | 抽象返回类型；隐藏实现细节 | 存在量化 ∃T.Trait(T) | API 设计；版本兼容性 | 多分支返回不同类型（除非 `dyn Trait`） | E0746 / E0706 |
+| **定理**: Negative impl 语义 | `impl !Trait for T` 声明 | 显式排除自动实现；类型不实现 Trait | 否定信息逻辑；非单调推理 | Auto Trait 手动控制；unsafe 边界 | 与正 impl 冲突；与 blanket impl 交互复杂 | E0751 |
 
-> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl，且 Trait 对象安全 ⟹ dyn Trait 可行性，形成**从定义约束到使用能力**的两条正交推理链。Auto Trait 推导是编译器对结构性质的自动证明，与对象安全共同构成 Trait 系统的"静动两面"。
+> **一致性检查**: Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl（链 A），且 Trait 对象安全 ⟹ dyn Trait 可行性（链 B），形成**从定义约束到使用能力**的两条正交推理链。Auto Trait 推导是编译器对结构性质的自动证明，Blanket impl 提供全称量词的默认行为，`impl Trait` 引入存在量化——三者与对象安全共同构成 Trait 系统的"静动两面"。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
-> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制。
+> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示定理的适用场景，通过反例揭示定理失效的精确条件——特别是 E0117、E0119、E0038 等编译错误的触发机制，将抽象定理映射到具体代码行为。
 
 ---
 
@@ -330,13 +338,13 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 // 限制: 不能返回多种不同类型（除非 dyn Trait）
 ```
 
-> **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。
+> **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[RFC 1023] · [Rust Reference: Orphan Rules] · [Rust Reference: Object Safety]** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时/语义/工程）系统分类。 ✅ 已验证
+> **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
 
 ### 6.1 反命题 1: "Trait 实现总是无冲突的"
 
@@ -363,28 +371,25 @@ graph TD
 |:---|:---|:---|
 | 编译期 | 重叠 impl 被编译器拒绝（E0119） | ✅ 安全 |
 | 运行时 | 无运行时冲突（编译期已阻止） | ✅ 安全 |
-| 语义 | specialization（不稳定）意图允许分层 impl，但 soundness 未解决 | ⚠️ 存在争议 |
+| 语义 | specialization（不稳定）意图允许分层 impl，但 soundness 未完全解决 | ⚠️ 存在争议 |
 | 工程 | 通过更精确的 Trait Bound 或 newtype 避免重叠 | ✅ 可解 |
 
-### 6.2 反命题 2: "Orphan Rule 保证全局一致性"
+### 6.2 反命题 2: "Blanket impl 覆盖所有类型"
 
-> 工程层 — Orphan Rule 在绝大多数情况下保证 Coherence，但存在合法绕过和例外。
+> 编译期/语义层 — Blanket impl 的全称量词 `∀T` 在具体 impl 面前失效，这是 Horn 子句可满足性的工程体现。
 
 ```mermaid
 graph TD
-    P["命题: Orphan Rule 保证全局一致性"] --> Q1{"使用特征覆盖 (feature coverage)?"}
-    Q1 -->|是| F1["反例: 不稳定特性允许局部覆盖<br/>→ 可能破坏全局一致性"]
-    Q1 -->|否| Q2{"使用 newtype 模式?"}
-    Q2 -->|是| N1["工程解: newtype 是绕过 Orphan Rule 的合法技巧<br/>→ 非反例，是设计模式"]
-    Q2 -->|否| Q3{"跨 crate 同名类型?"}
-    Q3 -->|是| F2["反例: 不同 crate 对第三方类型 impl 同一 trait<br/>→ 链接错误"]
-    Q3 -->|否| Q4{"使用 #[fundamental] 类型?"}
-    Q4 -->|是| F3["反例: &T, &mut T, Box<T> 等为 fundamental<br/>→ 允许外部为外部类型实现（有限例外）"]
-    Q4 -->|否| T1["定理成立: 全局唯一 impl<br/>✅ Coherence 保证"]
+    P["命题: Blanket impl 覆盖所有类型"] --> Q1{"存在具体 impl<T> Foo for Concrete?"}
+    Q1 -->|是| F1["反例: E0119 具体 impl 与 blanket impl 冲突<br/>→ impl<T> Foo for T 与 impl Foo for u32"]
+    Q1 -->|否| Q2{"存在更精确的 blanket impl?"}
+    Q2 -->|是| F2["反例: E0119 两个 blanket impl 重叠<br/>→ impl<T: A> Foo for T 与 impl<T: B> Foo for T<br/>当存在 T: A + B 时冲突"]
+    Q2 -->|否| Q3{"使用了 specialization (unstable)?"}
+    Q3 -->|是| N1["工程解: specialization 允许分层 default impl<br/>→ impl<T> Foo for T { default fn bar() {} }"]
+    Q3 -->|否| T1["定理成立: Blanket impl 覆盖所有未特化类型<br/>✅ 全称量词成立"]
 
     style F1 fill:#f66
     style F2 fill:#f66
-    style F3 fill:#f66
     style N1 fill:#69f
     style T1 fill:#6f6
 ```
@@ -393,26 +398,26 @@ graph TD
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | E0117 阻止非法 impl | ✅ 安全 |
-| 运行时 | 无运行时影响（纯编译期规则） | ✅ 安全 |
-| 语义 | `#[fundamental]` 是语义例外 | ⚠️ 有限例外 |
-| 工程 | newtype 模式是工程标准解 | ✅ 可解 |
+| 编译期 | E0119 检测 blanket 与具体 impl 重叠 | ✅ 安全 |
+| 运行时 | 无运行时影响（编译期决议） | ✅ 安全 |
+| 语义 | `∀T` 与 `Concrete` 的特化关系需偏序定义；specialization 是理论扩展 | ⚠️ 复杂 |
+| 工程 | 避免为已存在具体 impl 的类型写 blanket；优先窄约束 | ✅ 可解 |
 
-### 6.3 反命题 3: "Trait Bounds 充分表达所有约束"
+### 6.3 反命题 3: "`dyn Trait` 和 `impl Trait` 等价"
 
-> 语义层 — 当前 Trait Bounds 系统存在表达能力边界，某些约束无法直接编码。
+> 语义/编译期层 — 两者在类型论中不等价：`impl Trait` 是存在类型（编译期擦除），`dyn Trait` 是动态分发（运行时擦除），分发方式和大小信息有本质差异。
 
 ```mermaid
 graph TD
-    P["命题: Trait Bounds 充分表达所有约束"] --> Q1{"需要类型级整数约束?"}
-    Q1 -->|是| F1["反例: 无法表达 N > M 或 N 为素数<br/>→ 需 const generics 或 typenum"]
-    Q1 -->|否| Q2{"需要否定约束 T: !Trait?"}
-    Q2 -->|是| F2["反例: Rust 不支持否定约束<br/>→ 无法表达"某类型不实现某 Trait""]
-    Q2 -->|否| Q3{"需要高阶类型 HKT?"}
-    Q3 -->|是| F3["反例: 无法直接抽象 Vec<T> 和 Option<T> 的容器共性<br/>→ GATs 是部分解，但 HKT 不完全"]
-    Q3 -->|否| Q4{"需要关联常量约束?"}
-    Q4 -->|是| F4["反例: 关联类型不能作为常量泛型参数<br/>→ const generics 与关联类型交互受限"]
-    Q4 -->|否| T1["定理成立: 标准 Trait Bounds 充分<br/>✅ 表达能力覆盖绝大多数场景"]
+    P["命题: dyn Trait 和 impl Trait 等价"] --> Q1{"需要返回多个不同类型?"}
+    Q1 -->|是| F1["反例: impl Trait 要求单一具体类型<br/>→ fn f(b: bool) -> impl Display {<br/>if b { 1 } else { 'a' } // E0746! }"]
+    Q1 -->|否| Q2{"需要运行时异构集合?"}
+    Q2 -->|是| F2["反例: impl Trait 无法构造 Vec<impl Display><br/>→ 需 Vec<Box<dyn Display>> 或 Vec<&dyn Display>"]
+    Q2 -->|否| Q3{"需要 vtable 间接调用?"}
+    Q3 -->|是| F3["反例: impl Trait 是静态分发零成本<br/>→ dyn Trait 有 vtable 指针间接开销"]
+    Q3 -->|否| Q4{"Trait 满足对象安全?"}
+    Q4 -->|否| F4["反例: 非对象安全 Trait 不能 dyn<br/>→ Clone 不能 dyn，但可用 impl Clone"]
+    Q4 -->|是| T1["定理局部成立: 单一类型 + 对象安全时<br/>功能等价但机制不同<br/>✅ 静态分发 vs 动态分发"]
 
     style F1 fill:#f66
     style F2 fill:#f66
@@ -425,14 +430,14 @@ graph TD
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | 不支持的约束直接编译错误 | ✅ 明确拒绝 |
-| 运行时 | 无运行时影响 | ✅ 安全 |
-| 语义 | HKT、否定约束、类型级整数是已知理论缺口 | ⚠️ 表达能力边界 |
-| 工程 | typenum、const generics、宏是 workaround | ✅ 可解 |
+| 编译期 | `impl Trait` 单态化；`dyn Trait` vtable | ✅ 机制不同 |
+| 运行时 | `impl Trait` 零开销；`dyn Trait` 指针间接 | ✅ 性能差异 |
+| 语义 | `impl Trait` = ∃T.Trait(T) + 编译期已知；`dyn Trait` = 存在类型 + 运行时已知 | ⚠️ 不等价 |
+| 工程 | 返回类型用 `impl Trait`，异构集合用 `dyn Trait` | ✅ 互补 |
 
 ### 6.4 反命题 4: "Trait 对象安全等价于 Trait 可用"
 
-> 编译期层 — 非对象安全 Trait 不能构造 dyn Trait，但仍可用于泛型约束。
+> 编译期层 — 非对象安全 Trait 不能构造 `dyn Trait`，但仍可用于泛型约束。对象安全是 `dyn Trait` 的充要条件，不是 Trait 本身的可用性条件。
 
 ```mermaid
 graph TD
@@ -453,21 +458,28 @@ graph TD
     style T2 fill:#6f6
 ```
 
+**四层分析**:
+
+| **层面** | **分析** | **结果** |
+|:---|:---|:---|
+| 编译期 | E0038 阻止非对象安全 Trait 构造 dyn | ✅ 安全 |
+| 运行时 | 无运行时影响 | ✅ 安全 |
+| 语义 | 对象安全是 dyn 的充要条件，不是 Trait 可用性的充要条件 | ⚠️ 概念区分 |
+| 工程 | 拆分为对象安全部分 + Sized 部分（如 Iterator + ExactSizeIterator） | ✅ 可解 |
+
 > **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性。
 
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
 
-### 7.1 测试 1: Orphan Rule 多层嵌套边界
+### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
 
 ```rust
-// 边界: Orphan Rule 对嵌套泛型的精确判定
-// crate A: struct Wrapper<T>(T);
-// crate B: trait MyTrait {}
+// 边界: Orphan Rule 对嵌套泛型、元组、引用的精确判定
 
 // 情况 1: 为外部 Wrapper 实现外部 Trait —— 非法
-// impl<T> MyTrait for Wrapper<T> {}  // E0117
+// impl<T> std::fmt::Display for Vec<T> {}  // E0117
 
 // 情况 2: 为本地类型实现外部 Trait —— 合法
 struct Local<T>(T);
@@ -481,15 +493,18 @@ impl<T> std::fmt::Debug for Local<T> where T: std::fmt::Debug {
 trait LocalTrait {}
 impl<T> LocalTrait for Vec<T> {}
 
-// 情况 4: 为 (Local, External) 元组实现外部 Trait —— 取决于 orphan rule 放宽规则
+// 情况 4: 为 (Local, External) 元组实现外部 Trait —— 取决于 orphan rule 放宽
 // Rust 2021: 如果元组中至少一个本地类型，通常允许
-// 但具体取决于 RFC 2451 的实现细节
+// impl<T> std::fmt::Debug for (Local<T>, i32) where T: std::fmt::Debug { ... }
+
+// 情况 5: #[fundamental] 类型例外 —— &T, &mut T, Box<T> 允许外部 impl
+// impl std::fmt::Display for &mut MyExternalType { ... } // 可能允许
 ```
 
-### 7.2 测试 2: Trait 对象安全边界
+### 7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界
 
 ```rust
-// 边界: 对象安全条件的精确测试
+// 边界: 对象安全条件的精确测试与分发方式差异
 
 // ✅ 对象安全: 方法返回引用，不涉及 Self
 trait SafeTrait {
@@ -523,12 +538,20 @@ trait CloneSelf: SafeObject + Sized {
     fn clone_self(&self) -> Self;
 }
 // dyn SafeObject 合法，CloneSelf 仅用于泛型约束
+
+// ✅ impl Trait vs dyn Trait 差异
+fn static_dispatch() -> impl Iterator<Item = u32> {
+    vec![1, 2, 3].into_iter()  // 编译期已知具体类型
+}
+fn dynamic_dispatch() -> Box<dyn Iterator<Item = u32>> {
+    Box::new(vec![1, 2, 3].into_iter())  // 运行时 vtable
+}
 ```
 
-### 7.3 测试 3: Blanket impl + 关联类型递归约束
+### 7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界
 
 ```rust
-// 边界: Blanket impl 与关联类型的递归约束求解
+// 边界: Blanket impl 与关联类型的递归约束求解 + Auto Trait 保守推导
 
 trait Convert<T> {
     type Output;
@@ -549,31 +572,23 @@ impl<T, U> Convert<U> for T where T: Into<U> {
 //     type Output = <T::Next as Convert<i32>>::Output;  // 可能 E0275: overflow
 // }
 
-// 编译器限制: 关联类型归一化 (normalization) 深度有限
-// 递归过深 → E0275: overflow evaluating the requirement
-```
-
-### 7.4 测试 4: Auto Trait 推导的保守边界
-
-```rust
+// Auto Trait 推导边界
 use std::rc::Rc;
 use std::cell::RefCell;
 use std::sync::Arc;
 
-// 边界: Auto Trait 推导对泛型参数的精确行为
 struct Wrapper<T>(T);
-
 // Wrapper<T>: Send 当且仅当 T: Send
 // Wrapper<T>: Sync 当且仅当 T: Sync
 
 fn assert_send<T: Send>(_: T) {}
 fn assert_sync<T: Sync>(_: T) {}
 
-fn test() {
-    assert_send(Wrapper(42i32));      // ✅ i32: Send
-    assert_sync(Wrapper(42i32));      // ✅ i32: Sync
-
-    assert_send(Wrapper(Rc::new(1))); // ❌ Rc<i32>: !Send
+fn test_auto_trait() {
+    assert_send(Wrapper(42i32));           // ✅ i32: Send
+    assert_sync(Wrapper(42i32));           // ✅ i32: Sync
+    assert_send(Wrapper(Arc::new(1)));     // ✅ Arc<i32>: Send
+    // assert_send(Wrapper(Rc::new(1)));   // ❌ Rc<i32>: !Send
     // assert_sync(Wrapper(RefCell::new(1))); // ❌ RefCell<i32>: !Sync
 }
 
@@ -583,13 +598,13 @@ fn test() {
 // impl !Send for RawPtr {}
 ```
 
-> **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，这些概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释，将"Trait 是什么"逐步转化为"Trait 为什么这样设计"。
+> **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，这些概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释，将"Trait 是什么"逐步转化为"Trait 为什么这样设计"，最终达到"我设计的 Trait 体系是否自洽"的自主验证能力。
 
 ---
 
 ## 八、认知路径（Cognitive Path）
 
-> **[原创分析] · [TRPL: Ch10.2]** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构。 💡 原创分析
+> **[原创分析]** · **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构，六步形成"感性→知性→理性"的完整认知螺旋。 💡 原创分析
 
 ### Step 1: 直觉类比 — "Trait 像岗位描述"
 
@@ -608,7 +623,7 @@ fn test() {
 
 **核心问题**: "怎么写 Trait？怎么用它约束泛型？"
 
-**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `trait` 定义、`impl` 实现、`where` 约束、关联类型等核心语法。关键是建立"Trait 是编译器检查契约的工具"这一操作性理解。从 Step 2 到 Step 3 的过渡自然发生：当学习者尝试为外部类型实现外部 Trait 时，会遇到 E0117——这恰好引出"自由并非无限"的规则层认知。
+**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `trait` 定义、`impl` 实现、`where` 约束、关联类型等核心语法。关键是建立"Trait 是编译器检查契约的工具"这一操作性理解。从 Step 2 到 Step 3 的过渡自然发生：当学习者尝试为外部类型实现外部 Trait 时，会遇到 E0117——这恰好引出"自由并非无限"的规则层认知，语法实践自然驱动规则探索。
 
 ```rust
 // 核心语法模式:
@@ -622,7 +637,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "为什么我不能为 Vec 实现 Display？"
 
-**过渡解释**: 语法熟练后，学习者首次遭遇"设计意图"层面的问题。Orphan Rule 看似武断限制，实则是 Coherence 的工程代价。这一步需要解释：如果两个 crate 都为 `Vec<u8>` 实现了 `Display`，链接时谁赢？没有全局唯一性，编译器的单态化就会崩溃。从 Step 3 到 Step 4 的过渡是认知的关键跃迁——从"为什么不允许"到"如果允许会发生什么"的反事实推理，这正是形式化思维的入口。
+**过渡解释**: 语法熟练后，学习者首次遭遇"设计意图"层面的问题。Orphan Rule 看似武断限制，实则是 Coherence 的工程代价。这一步需要解释：如果两个 crate 都为 `Vec<u8>` 实现了 `Display`，链接时谁赢？没有全局唯一性，编译器的单态化就会崩溃。从 Step 3 到 Step 4 的过渡是认知的关键跃迁——从"为什么不允许"到"如果允许会发生什么"的反事实推理，这正是形式化思维的入口。理解 Orphan Rule 后，学习者已经站在了类型论的门槛上。
 
 ```text
 反事实推理:
@@ -637,7 +652,7 @@ fn notify<T: Summary>(item: &T) { ... }
 
 **核心问题**: "Trait 在类型论里到底是什么？"
 
-**过渡解释**: 当学习者理解了工程约束（Orphan Rule、Coherence）后，自然会追问这些规则的数学来源。Curry-Howard 同构揭示：Trait 是逻辑谓词，`impl` 是构造性证明，Trait Bounds 是蕴含式。这一步将 Rust 的 Trait 放入更广泛的 PL 理论谱系（Haskell Type Class、C++ Concepts、System F 约束多态）。从 Step 4 到 Step 5 的过渡是"从理论回到实践"——类型论解释了规则的存在，但工程场景要求在具体问题中权衡不同设计。
+**过渡解释**: 当学习者理解了工程约束（Orphan Rule、Coherence）后，自然会追问这些规则的数学来源。Curry-Howard 同构揭示：Trait 是逻辑谓词，`impl` 是构造性证明，Trait Bounds 是蕴含式。这一步将 Rust 的 Trait 放入更广泛的 PL 理论谱系（Haskell Type Class、C++ Concepts、System F 约束多态）。从 Step 4 到 Step 5 的过渡是"从理论回到实践"——类型论解释了规则的存在，但工程场景要求在具体问题中权衡不同设计。理论为工程提供了预言能力：看到 `impl<T: A> B for T` 就能联想到全称量词和 Horn 子句。
 
 ```text
 形式化映射:
@@ -649,26 +664,28 @@ fn notify<T: Summary>(item: &T) { ... }
 
   T: Eq + Display  ≡  Eq(T) ∧ Display(T)  （逻辑合取）
   impl<T: A> B for T  ≡  ∀T. A(T) → B(T)  （全称量词 + 蕴含）
+  dyn Trait           ≡  ∃T.Trait(T)       （存在类型）
 ```
 
 ### Step 5: 工程权衡 — 静态分发 vs 动态分发
 
 **核心问题**: "什么时候用 dyn Trait？什么时候用泛型约束？"
 
-**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化膨胀）、灵活性（运行时多态）之间做工程决策。Trait 对象安全条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合对象安全条件的 Trait。
+**过渡解释**: 类型论提供了静态分发的零成本保证，但工程中有异构集合、递归类型、隐藏实现细节等场景需要动态分发。这一步要求学习者在性能（零成本抽象）、二进制体积（单态化膨胀）、灵活性（运行时多态）之间做工程决策。Trait 对象安全条件是这一决策的硬性边界——不是所有 Trait 都能 dyn。从 Step 5 到 Step 6 的过渡是"从使用到设计"——不仅会选择分发方式，还能设计符合对象安全条件的 Trait，将对象安全规则内化为设计直觉。
 
 ```text
 决策框架:
   类型封闭且编译期已知  →  <T: Trait> / impl Trait  →  零成本
   类型开放或需异构集合  →  dyn Trait / Box<dyn Trait>  →  运行时开销
   需要递归类型          →  dyn Trait（打破无限大小）   →  运行时开销
+  需要隐藏实现细节      →  impl Trait（返回类型）      →  零成本 + 抽象
 ```
 
 ### Step 6: 形式化掌控 — 定理链与设计验证
 
 **核心问题**: "我设计的 Trait 体系在逻辑上自洽吗？"
 
-**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait 对象安全 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义——这些不再是孤立的语法点，而是构成一个可推理的形式系统。
+**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl；Trait 对象安全 ⟹ dyn Trait 可行性），可以预判设计决策的远期后果。Auto Trait 的结构化推导、Supertrait 的传递性、Blanket impl 的 Horn 子句语义、`impl Trait` 的存在量化——这些不再是孤立的语法点，而是构成一个可推理的形式系统。掌握定理链后，学习者能在编码前预判编译器的行为，从"试错编程"进化为"推理编程"。
 
 ```text
 设计验证清单:
@@ -678,7 +695,11 @@ fn notify<T: Summary>(item: &T) { ... }
   □ Supertrait: 是否存在循环依赖？
   □ Auto Trait: 字段类型是否自动推导 Send/Sync？
   □ 零成本: 性能敏感路径是否避免 dyn Trait？
+  □ Blanket impl: 是否与具体 impl 冲突？
+  □ 关联类型: 递归约束是否会导致 E0275 overflow？
 ```
+
+> **过渡到知识来源**: 认知路径构建了从直觉到形式的完整理解框架，但这些论断的可信度如何？下一节通过知识来源关系表，明确每个定理和定义的文献出处，区分已验证事实与原创分析，建立可追溯的知识谱系。
 
 ---
 
@@ -686,19 +707,22 @@ fn notify<T: Summary>(item: &T) { ... }
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Trait 定义共享行为 | [TRPL: Ch10.2] | ✅ |
-| Trait 受 Haskell Type Class 启发 | [Wikipedia: Type class] · [Rust FAQ] | ✅ |
-| Orphan Rule 限制 impl 位置 | [Rust Reference: Orphan Rules] · [RFC 1023] | ✅ |
-| 单态化实现零成本抽象 | [TRPL: Ch10.2] · [Rust Reference: Monomorphization] | ✅ |
-| Coherence 保证全局唯一性 | [RFC 1023] | ✅ |
-| 关联类型对比泛型参数 | [TRPL: Ch19.3] | ✅ |
-| Trait 对象安全规则 | [RFC 255] · [Rust Reference: Object Safety] | ✅ |
-| Auto Trait 结构化推导 | [Rust Reference: Auto Traits] | ✅ |
-| Trait 作为逻辑命题 | [Category Theory for Programmers] · 原创分析 | 💡 |
-| Type Classes 原始论文 | [Wadler & Blott 1989 — POPL] | ✅ |
-| 参数化类型类 | [Jones 1993 — POPL] | ✅ |
-| Specialization 设计 | [RFC 1210] | ✅ |
-| GATs 设计 | [RFC 1598] | ✅ |
+| Trait 定义共享行为 | [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) | ✅ |
+| Trait 受 Haskell Type Class 启发 | [Wikipedia: Type class](https://en.wikipedia.org/wiki/Type_class) · [Rust FAQ](https://prev.rust-lang.org/faq.html#why-does-rust-have-traits) | ✅ |
+| Orphan Rule 限制 impl 位置 | [Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) · [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) | ✅ |
+| 单态化实现零成本抽象 | [TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization) | ✅ |
+| Coherence 保证全局唯一性 | [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) | ✅ |
+| 关联类型对比泛型参数 | [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |
+| Trait 对象安全规则 | [RFC 255](https://rust-lang.github.io/rfcs/0255-object-safety.html) · [Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety) | ✅ |
+| Auto Trait 结构化推导 | [Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits) | ✅ |
+| Trait 作为逻辑命题 | [Category Theory for Programmers](https://bartoszmilewski.com/2014/10/28/category-theory-for-programmers-the-preface/) · 原创分析 | 💡 |
+| Type Classes 原始论文 | [Wadler & Blott 1989 — POPL](http://ropas.snu.ac.kr/~bruno/papers/TypeClasses.pdf) | ✅ |
+| 参数化类型类 | [Jones 1993 — POPL](https://web.cecs.pdx.edu/~mpj/pubs/fundeps.html) | ✅ |
+| Specialization 设计 | [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) | ✅ |
+| GATs 设计 | [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) | ✅ |
+| Negative impls | [RFC 683](https://rust-lang.github.io/rfcs/0683-trait-system-refactor.html) | ✅ |
+
+> **过渡到相关概念链接**: 知识来源确立了单个论断的可信度，但 Trait 系统不是孤立存在的。下一节通过相关概念链接，将 Trait 与泛型、所有权、并发、异步等前置和后置概念编织成知识网络，为跨章节学习提供导航。
 
 ---
 
@@ -712,6 +736,8 @@ fn notify<T: Summary>(item: &T) { ... }
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | Auto Trait 的核心应用 |
 | 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | 关联类型 Trait 的典型场景 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | Trait 系统的逻辑基础 |
+
+> **过渡到待补充方向**: 相关概念链接描绘了 Trait 在知识体系中的坐标，但任何文档都有演进空间。最后一节记录已识别的待补充项和优先级，为后续迭代提供明确的路线图。
 
 ---
 

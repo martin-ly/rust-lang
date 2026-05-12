@@ -3,13 +3,13 @@
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Traits](./01_traits.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
-> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: Errors] · [Wikipedia: Exception handling]
+> **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: Errors] · [Wikipedia: Exception handling] · [RFC 243]
 
 ---
-
 **变更日志**:
 
-- v1.0 (2026-05-12): 初始版本，完成权威定义、错误类型矩阵、`?` 运算符语义、形式化视角、思维导图、示例反例
+- v2.0 (2026-05-12): 深度重构——定理推理链、反命题决策树、边界极限测试、6步认知路径与章节过渡
+- v1.0 (2026-05-12): 初始版本
 
 ---
 
@@ -27,7 +27,7 @@
 
 ### 1.3 形式化定义
 
-> **[Haskell: Either Monad] · [类型论: Monad 定律]** Rust 的 Option/Result 对应单子（Monad）模式中的 Maybe 和 Either。 ✅ 已验证
+> **[Haskell: Either Monad] · [类型论: Monad 定律]** Option/Result 对应单子中的 Maybe 和 Either。 ✅ 已验证
 
 Rust 的错误处理对应**单子**（Monad）模式中的 `Option` 和 `Result`：
 
@@ -43,6 +43,8 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 
 即: ? 是 Result/Option 的 monadic bind 的语法糖
 ```
+
+> **过渡到属性矩阵**: 从形式化定义出发，错误处理不仅是"返回错误码"的简单概念，而是由不可恢复错误（panic）、可恢复错误（Result/Option）、错误传播（? 运算符）和错误组合（map/and_then）构成的多层次系统。下一节通过属性矩阵对这些机制进行系统分类与跨语言对比。
 
 ---
 
@@ -81,52 +83,11 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 | `unwrap_or` | `Result<T,E> → T → T` | 失败时提供默认值 | `getOrElse` |
 | `?` | `Result<T,E> → T` 或提前返回 | 错误自动传播 | `try` 关键字 |
 
----
-
-## 三、形式化理论根基（Formal Foundation）
-
-### 3.1 Result 作为 Monad
-
-> **[类型论: Monad 定律] · [Haskell: Control.Monad]** Result<T, E> 满足 Monad 的左单位元、右单位元和结合律。 ✅ 已验证
-
-```text
-Result<T, E> 满足 Monad 定律:
-
-1. 左单位元 (Left Identity):
-   return(x) >>= f  ≡  f(x)
-   Ok(x).and_then(f)  ≡  f(x)
-
-2. 右单位元 (Right Identity):
-   m >>= return  ≡  m
-   result.and_then(|x| Ok(x))  ≡  result
-
-3. 结合律 (Associativity):
-   (m >>= f) >>= g  ≡  m >>= (|x| f(x) >>= g)
-   result.and_then(f).and_then(g)  ≡  result.and_then(|x| f(x).and_then(g))
-
-? 运算符 = monadic bind 的语法糖:
-  let a = fa?;    // fa: Result<A, E>
-  let b = fb?;    // fb: Result<B, E>  (E 需可转换)
-  Ok(transform(a, b))
-```
-
-### 3.2 `?` 与 From trait 的类型转换链
-
-> **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符隐式调用 From::from 实现错误类型自动向上转换。 ✅ 已验证
-
-```text
-? 运算符隐式调用 From::from:
-  expr?: Result<T, E1>
-  在返回 Result<T, E2> 的函数中
-  → 自动插入: Err(e) => return Err(E2::from(e))
-
-要求: E1: Into<E2> 或 E2: From<E1>
-这形成错误类型的自动向上转换（error type coercion）
-```
+> **过渡到思维导图**: 属性矩阵展示了错误处理机制的静态分类，但未能表达概念间的动态关联与控制流路径。思维导图通过拓扑结构揭示错误处理从 panic 分支、Result 构造、? 传播到自定义错误的完整概念网络。
 
 ---
 
-## 四、思维导图（Mind Map）
+## 三、思维导图（Mind Map）
 
 ```mermaid
 graph TD
@@ -155,58 +116,66 @@ graph TD
     E --> E4[From trait 转换]
 ```
 
----
-
-## 五、决策/边界判定树（Decision / Boundary Tree）
-
-### 5.1 "panic vs Result？" 决策树
-
-```mermaid
-graph TD
-    Q1[调用者可能恢复?] -->|是| A1[使用 Result<T, E>]
-    Q1 -->|否| Q2[违反函数契约/内部不变量?]
-    Q2 -->|是| A2[使用 panic! / assert!]
-    Q2 -->|否| Q3[是程序逻辑不可能到达的分支?]
-    Q3 -->|是| A3[使用 unreachable!]
-    Q3 -->|否| A4[重新设计: 这是可恢复错误]
-
-    A1[可恢复错误<br/>调用者决定如何处理]
-    A2[不可恢复 bug<br/>立即停止]
-    A3[编译器辅助优化<br/>文档化不可能状态]
-    A4[通常是 API 设计问题]
-```
-
-### 5.2 `unwrap` 使用边界判定
-
-```mermaid
-graph TD
-    B1[生产代码中随意 unwrap] -->|代码审查| W1[⚠️ 警告: 可能 panic]
-    B2[unwrap 在已知 Ok 的路径] -->|编译期| R1[✅ 接受: 如 parse 已验证后的 parse]
-    B3[unwrap 在测试代码] -->|惯例| R2[✅ 接受: 测试失败即 bug]
-    B4[unwrap 在快速原型] -->|后续| W2[⚠️ 必须在生产化前替换]
-    B5[unwrap 在 const/static 初始化] -->|编译期| R3[✅ 接受: 编译期已知]
-```
+> **过渡到定理推理链**: 思维导图呈现了错误处理的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Result 和类型、? 运算符传播、panic 边界等核心命题形式化为可验证的推理网络。
 
 ---
 
-## 六、定理推理链（Theorem Chain）
+## 四、定理推理链（Theorem Chain）
 
-### 6.1 Result + ? ⇒ 显式错误路径
+### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
 
-> **[TRPL: Ch9] · [Rust Reference: The ? operator]** Result + ? 使所有错误传播路径在代码中显式表示，无隐式跳转。 ✅ 已验证
+> **[TRPL: Ch9] · [Rust Reference: Enums]** Result<T, E> 作为和类型（sum type），编译器通过穷尽性检查强制处理所有分支。 ✅ 已验证
 
 ```text
-前提 1: Result<T, E> 强制区分 Ok 和 Err
-前提 2: ? 运算符使错误传播路径显式可见
-前提 3: 编译器要求 Result 返回值被处理或使用 ?
+前提 1: Result<T, E> 是代数数据类型，具有 Ok(T) 和 Err(E) 两个变体
+前提 2: match 表达式要求穷尽所有变体（或显式使用 _ 通配）
+前提 3: 未使用的 Result 值触发编译器警告（#[must_use]）
     ↓
-定理: Rust 程序中的所有错误传播路径在代码中显式表示
+引理: Result<T,E> ⟹ 和类型强制错误处理
     ↓
-推论: 与异常（Exception）相比，不存在"隐式跳转"的控制流
-      调用栈的任何跳跃都通过 ? 或 match 显式标记
+定理: 在 Rust 中，可恢复错误无法被静默忽略（对比 Go 的 error 可忽略）
+    ↓
+推论: 编译器通过类型系统保证错误处理路径的完备性（无隐式跳过）
+边界: unwrap() / expect() 将 Result 转为 panic，是显式的"我保证这里不会错"
 ```
 
-### 6.2 类型安全错误处理
+### 4.2 定理：? 运算符 ⟹ 错误传播自动化
+
+> **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
+
+```text
+前提 1: ? 运算符展开为 match，Err 分支提前返回
+前提 2: From trait 提供错误类型的自动向上转换
+前提 3: 函数返回类型必须兼容（Result/Option）
+    ↓
+引理: ? 运算符 = monadic bind 的语法糖（Result >>= 的特化）
+    ↓
+定理: ? 运算符 ⟹ 错误传播自动化
+    ↓
+推论 1: 链式调用中每个 ? 点都是潜在的错误返回点（控制流显式）
+推论 2: 不同错误类型通过 From 自动统一，无需手动转换
+边界: 闭包/回调中 ? 可能受限（返回类型需匹配）
+```
+
+### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
+
+> **[TRPL: Ch9] · [Rust Reference: panic]** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
+
+```text
+前提 1: panic 立即终止当前线程的执行（默认展开栈）
+前提 2: panic 仅应用于不可恢复的内部不变量违反（bug）
+前提 3: catch_unwind 可在 FFI 边界隔离 panic（非通用恢复机制）
+    ↓
+引理: panic 将不可恢复错误与可恢复错误在类型层面分离
+    ↓
+推论: panic ⟹ 不可恢复错误的显式边界
+    ↓
+边界 1: 不应使用 panic 处理预期错误（如文件不存在）
+边界 2: 不应使用 panic 处理用户输入验证（应用 Result）
+边界 3: 库代码应优先返回 Result，让调用者决定是否 panic
+```
+
+### 4.4 类型安全错误处理
 
 > **[Rust Reference: Enums] · [TRPL: Ch9]** Result 的错误类型在编译期确定，match 穷尽性检查保证处理完备性。 ✅ 已验证
 
@@ -217,29 +186,35 @@ graph TD
     ↓
 对比: Java catch(Exception e) 可捕获任意异常
       Rust match Err(e) 只匹配该函数的 Result 类型
+推论: 错误处理的类型安全由编译器静态保证
 ```
 
-### 6.3 定理一致性矩阵
+### 4.5 定理一致性矩阵
 
 > **[原创分析] · [TRPL: Ch9] · [Rust Reference: The ? operator]** 错误处理定理矩阵基于和类型、Monad bind 和 Rust 编译器检查。 💡 原创分析
 
-| 定理 | 前提 | 结论 | 依赖的 L4 公理 | 被哪些定理依赖 | 失效条件 | 典型错误码 |
+| **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
-| Result 显式传播 | 函数返回 Result | 错误不可忽略 | 和类型 (A + E) | 所有错误处理代码 | `unwrap()` 忽略 | — |
-| ? 运算符合法性 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步错误传播 | 在闭包/回调中误用 | E0277 |
-| Error trait 一致性 | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
-| Option 空值安全 | 使用 Option<T> | 无 null 解引用 | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
-| 类型状态编码 | enum 表达状态 | 非法状态不可表示 | 代数类型穷尽性 | Typestate 模式 | 状态转换遗漏 | — |
+| **引理**: Result ⟹ 和类型强制 | Result 返回 + 编译器检查 | 错误不可忽略 | 和类型 (A + E) | 所有错误处理代码 | `unwrap()` 忽略 | — |
+| **定理**: ? 运算符传播 | 函数返回兼容 Result/Option | 自动错误短路 | Monad bind (>>=) | 异步错误传播 | 在闭包/回调中误用 | E0277 |
+| **推论**: panic 边界 | 不可恢复状态 | 显式程序终止 | —（运行时机制） | 设计决策 | 滥用 panic 处理预期错误 | panic |
+| **定理**: Error trait 一致性 | 自定义错误实现 Error | 可与 ? 和其他错误互操作 | 类型类一致性 | 错误链、报告 | 未实现 Source | — |
+| **引理**: Option 空值安全 | 使用 Option<T> | 无 null 解引用 | Maybe Monad | 所有可空场景 | `unwrap()` on None | — |
+| **推论**: From 转换链 | E1: From<E2> | 错误类型自动统一 | 类型类传递性 | ? 运算符 | 未实现 From | E0277 |
+| **定理**: 类型状态编码 | enum 表达状态 | 非法状态不可表示 | 代数类型穷尽性 | Typestate 模式 | 状态转换遗漏 | — |
+| **引理**: catch_unwind 隔离 | 闭包内 panic | 线程级别隔离 | —（运行时机制） | FFI 边界 | 跨线程 panic 传播 | panic |
 
-> **一致性检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性，形成**从值到函数到控制流**的递进链。Error trait 保证异构错误的统一处理。
+> **一致性检查**: Option 空值安全 ⟹ Result 显式传播 ⟹ ? 运算符合法性 ⟹ From 转换链，形成**从值到函数到控制流到类型统一**的递进链。panic 是独立维度（不可恢复边界），与 Result 形成互补。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性"
 
+> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示错误处理的正确使用方式，通过反例揭示定理失效的精确条件——特别是 unwrap panic、? 类型不匹配、错误忽略等边界场景。
+
 ---
 
-## 七、示例与反例（Examples & Counter-examples）
+## 五、示例与反例（Examples & Counter-examples）
 
-### 7.1 正确示例：`?` 运算符链式传播
+### 5.1 正确示例：`?` 运算符链式传播
 
 ```rust
 // ✅ 正确: ? 运算符使错误传播简洁
@@ -261,7 +236,7 @@ fn read_username() -> Result<String, io::Error> {
 }
 ```
 
-### 7.2 正确示例：自定义错误类型
+### 5.2 正确示例：自定义错误类型
 
 ```rust
 // ✅ 正确: thiserror 风格自定义错误
@@ -302,7 +277,7 @@ fn load_config() -> Result<i32, AppError> {
 }
 ```
 
-### 7.3 反例：`?` 在错误返回类型中不匹配
+### 5.3 反例：`?` 在错误返回类型中不匹配
 
 ```rust
 // ❌ 反例: ? 的错误类型无法自动转换
@@ -334,7 +309,7 @@ fn parse_or_zero(s: &str) -> Result<i32> {
 }
 ```
 
-### 7.4 反例：忽略 Result 导致 bug
+### 5.4 反例：忽略 Result 导致 bug
 
 ```rust
 // ❌ 反例: 忽略 Result 返回值
@@ -358,11 +333,13 @@ fn main() {
 // 也可以通过 let _ = ... 显式忽略（但通常不建议）
 ```
 
-### 7.5 边界示例：`Option` 与 `Result` 互转
+### 5.5 边界示例：`Option` 与 `Result` 互转
 
 ```rust
 // ✅ 边界: Option 与 Result 的优雅互转
-fn find_user(id: u64) -> Option<User> { /* ... */ }
+struct User { name: String }
+
+fn find_user(id: u64) -> Option<User> { /* ... */ None }
 
 fn get_user_name(id: u64) -> Result<String, &'static str> {
     let user = find_user(id).ok_or("User not found")?;  // Option → Result
@@ -375,100 +352,413 @@ fn maybe_port() -> Option<u16> {
 }
 ```
 
+> **过渡到反命题分析**: 示例展示了错误处理的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"错误处理定理何时成立/何时失效"形式化为可遍历的决策树，重点揭示 Result 的"强制不可忽略"边界与 ? 运算符的适用限制。
+
 ---
 
-### 7.6 反命题与边界分析
+## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL: Ch9] · [Rust API Guidelines]** 错误不可忽略性受 unwrap、let _ = 和 unsafe 绕过的边界限制。 ✅ 已验证
+> **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
-#### 命题: "Rust 错误处理强制不可忽略"
+### 6.1 反命题 1: "Result 消除了所有错误"
+
+> 运行时层 — Result 消除了静默错误忽略，但 unwrap 和 panic 仍是错误爆发的通道。
 
 ```mermaid
 graph TD
-    P["命题: 错误不可忽略"] --> Q1{"使用 unwrap()?"}
-    Q1 -->|是| F1["反例: unwrap() 将 Result 转为 panic<br/>→ 错误被暴力忽略"]
+    P["命题: Result 消除了所有错误"] --> Q1{"使用 unwrap() / expect()?"}
+    Q1 -->|是| F1["反例: unwrap() 将 Err 转为 panic<br/>→ 错误被暴力转换为崩溃"]
     Q1 -->|否| Q2{"使用 let _ = result?"}
-    Q2 -->|是| F2["反例: 绑定到 _ 丢弃错误值<br/>→ 信息丢失（但仍在传播）"]
+    Q2 -->|是| F2["反例: 绑定到 _ 丢弃错误值<br/>→ 信息丢失，但 panic 风险仍在（? 会传播）"]
     Q2 -->|否| Q3{"使用 unsafe { *ptr }?"}
-    Q3 -->|是| F3["反例: unsafe 可完全绕过类型系统<br/>→ 所有保证失效"]
-    Q3 -->|否| T["定理成立: 错误必须显式处理<br/>✅ 和类型强制分支"]
+    Q3 -->|是| F3["反例: unsafe 可完全绕过类型系统<br/>→ 所有保证失效，UAF/DF 可能发生"]
+    Q3 -->|否| Q4{"函数返回 Result 但调用方不处理?"}
+    Q4 -->|是| F4["反例: #[must_use] 仅警告，不强制<br/>→ 编译通过但逻辑错误"]
+    Q4 -->|否| T1["定理成立: 错误必须显式处理<br/>✅ 和类型强制分支"]
 
-    style F1 fill:#f96
-    style F2 fill:#f96
+    style F1 fill:#f66
+    style F2 fill:#f66
     style F3 fill:#f66
-    style T fill:#6f6
+    style F4 fill:#f66
+    style T1 fill:#6f6
 ```
 
-#### 命题: "? 运算符总是正确传播"
+**四层分析**:
 
-| 条件 | 结果 | 说明 |
+| **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 函数返回 `Result<T, E>` | ✅ 正确传播 | `?` 展开为 `match` |
-| 函数返回 `Option<T>` | ✅ 正确传播 | `?` 展开为 `match` |
-| 在 `try` 块中（不稳定） | ✅ 正确传播 | 局部错误处理 |
-| 在闭包中 | ⚠️ 可能受限 | 闭包返回类型需匹配 |
-| `Result<T, E1>` 到 `Result<T, E2>` | ⚠️ 需 `From` 转换 | 错误类型不匹配时 |
-| 在 `main()` 中返回 Result | ✅ 允许 | Rust 1.26+ |
+| 编译期 | #[must_use] 警告未处理 Result，但不阻止编译 | ⚠️ 弱强制 |
+| 运行时 | unwrap 导致 panic，是显式放弃安全性 | ❌ 可能崩溃 |
+| 语义 | Result 的语义是"错误存在"，不保证"错误被正确处理" | ⚠️ 语义边界 |
+| 工程 | clippy 有 `unwrap_used` lint，anyhow/thiserror 是标准 | ✅ 可缓解 |
 
-#### 边界极限测试
+### 6.2 反命题 2: "? 运算符总是正确传播"
+
+> 编译期层 — ? 运算符有明确的类型约束，违反时编译失败。
+
+```mermaid
+graph TD
+    P["命题: ? 运算符总是正确传播"] --> Q1{"函数返回 Result<T, E>?"}
+    Q1 -->|否| Q2{"函数返回 Option<T>?"}
+    Q1 -->|是| Q3{"Err 类型实现 From<内部错误类型>?"}
+    Q2 -->|否| F1["反例: ? 在返回非 Result/Option 的函数中<br/>→ E0277: the `?` operator can only be used in a function that returns `Result` or `Option`"]
+    Q2 -->|是| T1["定理成立: Option 内 ? 正确传播<br/>✅ Some 继续，None 提前返回"]
+    Q3 -->|是| T2["定理成立: ? 正确传播并自动转换<br/>✅ From trait 完成类型统一"]
+    Q3 -->|否| F2["反例: E0277 couldn't convert the error<br/>→ 错误类型不匹配且无 From 实现"]
+    Q3 -->|部分| Q4{"在闭包/回调中使用?"}
+    Q4 -->|返回类型不匹配| F3["反例: 闭包返回类型与外部函数不同<br/>→ ? 展开后的 return 目标错误"]
+    Q4 -->|返回类型匹配| T3["定理成立: try_fold 等闭包中 ? 可用<br/>✅ 闭包返回 Result，与外部一致"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style T1 fill:#6f6
+    style T2 fill:#6f6
+    style T3 fill:#6f6
+```
+
+**四层分析**:
+
+| **层面** | **分析** | **结果** |
+|:---|:---|:---|
+| 编译期 | 类型不匹配时编译错误（E0277） | ✅ 安全 |
+| 运行时 | 无运行时检查开销（纯语法糖） | ✅ 零成本 |
+| 语义 | 要求 From 实现，语义边界明确 | ✅ 语义清晰 |
+| 工程 | map_err 或 anyhow 是标准 workaround | ✅ 可解 |
+
+### 6.3 反命题 3: "panic 只应在完全不可能时发生"
+
+> 工程层 — panic 的"不可恢复"定义在实践中存在灰色地带。
+
+```mermaid
+graph TD
+    P["命题: panic 只应在完全不可能时发生"] --> Q1{"是内部不变量违反?"}
+    Q1 -->|是| T1["定理成立: panic 正确<br/>✅ 例如数组索引越界（逻辑已保证不可能）"]
+    Q1 -->|否| Q2{"是用户输入无效?"}
+    Q2 -->|是| F1["反例: 用户输入不应 panic<br/>→ 应返回 Result，让调用者决定"]
+    Q2 -->|否| Q3{"是外部资源暂时不可用?"}
+    Q3 -->|是| F2["反例: 网络/文件错误不应 panic<br/>→ 应返回 Result，支持重试"]
+    Q3 -->|否| Q4{"是快速原型/测试代码?"}
+    Q4 -->|是| N1["工程解: unwrap 在原型中可接受<br/>→ 但生产化前必须替换"]
+    Q4 -->|否| Q5{"是 const/static 初始化?"}
+    Q5 -->|是| T2["定理成立: 编译期求值失败可 panic<br/>✅ 编译期已知不可能"]
+    Q5 -->|否| F3["反例: panic 在库代码中强制调用方崩溃<br/>→ 库应优先返回 Result"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style N1 fill:#69f
+    style T1 fill:#6f6
+    style T2 fill:#6f6
+```
+
+**四层分析**:
+
+| **层面** | **分析** | **结果** |
+|:---|:---|:---|
+| 编译期 | panic 编译通过，无静态检查限制使用场景 | ⚠️ 无编译期阻止 |
+| 运行时 | panic 立即终止线程，不可恢复 | ❌ 可能过度使用 |
+| 语义 | Rust API Guidelines 明确区分 panic vs Result 场景 | ✅ 语义明确 |
+| 工程 | 库代码应返回 Result，应用代码可酌情 panic | ✅ 有指导原则 |
+
+### 6.4 反命题 4: "Option<T> 完全替代 null"
+
+> 语义层 — Option 替代了空指针，但 unwrap 重新引入了 null 解引用的等价风险。
+
+```mermaid
+graph TD
+    P["命题: Option<T> 完全替代 null"] --> Q1{"使用 unwrap() 或 unwrap_unchecked()?"}
+    Q1 -->|是| F1["反例: unwrap() on None → panic<br/>→ 等价于 null 解引用（只是有定义的行为：panic）"]
+    Q1 -->|否| Q2{"使用 if let Some(x) = opt?"}
+    Q2 -->|是| T1["定理成立: 模式匹配强制处理 None<br/>✅ 编译器检查穷尽性"]
+    Q2 -->|否| Q3{"使用 opt.map / and_then?"}
+    Q3 -->|是| T2["定理成立: 组合子保持 Option 语义<br/>✅ 无直接解包风险"]
+    Q3 -->|否| Q4{"将 Option 转为 Result 再 ?"}
+    Q4 -->|是| T3["定理成立: ok_or / ok_or_else 显式提供错误信息<br/>✅ None 被转化为明确的 Err"]
+    Q4 -->|否| F2["反例: let x = opt; 后续 *x 假设 Some<br/>→ 逻辑错误，编译器不阻止"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style T1 fill:#6f6
+    style T2 fill:#6f6
+    style T3 fill:#6f6
+```
+
+**四层分析**:
+
+| **层面** | **分析** | **结果** |
+|:---|:---|:---|
+| 编译期 | Option 类型替代 null，但 unwrap 仍编译通过 | ⚠️ 弱强制 |
+| 运行时 | unwrap on None 是 panic，非 UB（优于 null 解引用） | ✅ 更安全 |
+| 语义 | None 是显式的，不同于 null 的隐式存在 | ✅ 语义清晰 |
+| 工程 | 优先使用 ?、match、组合子，避免 unwrap | ✅ 有指导原则 |
+
+> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为。
+
+---
+
+## 七、边界极限测试代码（Boundary Limit Tests）
+
+### 7.1 测试 1: ? 运算符在闭包中的限制
 
 ```rust
-// 边界: 在闭包中使用 ? 的限制
+use std::num::ParseIntError;
+
+// 边界: ? 在闭包中的精确限制
+
 fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
-    // 错误: 闭包返回类型不匹配
+    // ❌ 错误: 闭包返回类型不匹配
     // let sum: Result<i32, _> = items.iter().map(|s| s.parse()?).sum();
     // 编译错误: ? 不能在返回类型不匹配的闭包中使用
+    // 因为 map 闭包返回 i32，但 ? 需要返回 Result
 
-    // 正确: 使用 try_fold 或显式处理
+    // ✅ 正确: 使用 try_fold 或 try_for_each（闭包返回 Result）
     let sum: i32 = items.iter()
         .try_fold(0, |acc, s| {
             let n: i32 = s.parse()?;  // ✅ try_fold 返回 Result，匹配
             Ok(acc + n)
         })?;
+
+    // ✅ 正确: collect 到 Result<Vec<_>, _>
+    let nums: Vec<i32> = items.iter()
+        .map(|s| s.parse())
+        .collect::<Result<Vec<_>, _>>()?;
+
     Ok(sum)
 }
 ```
 
+### 7.2 测试 2: From 转换链的边界
+
+```rust
+use std::fmt;
+use std::io;
+
+// 边界: From 转换链的自动推导与断点
+
+#[derive(Debug)]
+enum MyError {
+    Io(io::Error),
+    Parse(std::num::ParseIntError),
+    Custom(String),
+}
+
+impl fmt::Display for MyError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{:?}", self)
+    }
+}
+impl std::error::Error for MyError {}
+
+impl From<io::Error> for MyError {
+    fn from(e: io::Error) -> Self { MyError::Io(e) }
+}
+
+impl From<std::num::ParseIntError> for MyError {
+    fn from(e: std::num::ParseIntError) -> Self { MyError::Parse(e) }
+}
+
+// 断点测试: String 没有实现 From<String> for MyError
+fn may_fail() -> Result<i32, MyError> {
+    let s = std::fs::read_to_string("num.txt")?;  // io::Error → MyError ✅
+    let n: i32 = s.trim().parse()?;                // ParseIntError → MyError ✅
+
+    // let custom: String = "error".to_string();
+    // custom?;  // ❌ E0277: String 不能转为 MyError
+
+    Ok(n)
+}
+
+// 缓解: 使用 map_err 或 anyhow
+fn may_fail_anyhow() -> anyhow::Result<i32> {
+    let s = std::fs::read_to_string("num.txt")?;   // 任何错误自动转换 ✅
+    let n: i32 = s.trim().parse()?;                 // 任何错误自动转换 ✅
+    Ok(n)
+}
+```
+
+### 7.3 测试 3: panic 边界与 catch_unwind
+
+```rust
+use std::panic;
+
+fn may_panic(flag: bool) -> i32 {
+    if flag { panic!("intentional panic"); }
+    42
+}
+
+fn test_catch_unwind() {
+    let result = panic::catch_unwind(|| may_panic(true) );
+    match result {
+        Ok(v) => println!("Success: {}", v),
+        Err(_) => println!("Caught panic!"),
+    }
+    // 边界: catch_unwind 不捕获 abort 策略；要求 UnwindSafe；非通用异常处理
+}
+```
+
+### 7.4 测试 4: Result 与 Option 的组合边界
+
+```rust
+// 边界: Result<Option<T>, E> 与 Option<Result<T, E>> 的精确语义
+
+fn nested_result_option() {
+    // 场景: 查询可能失败（Result），成功时可能无数据（Option）
+    let ro: Result<Option<i32>, &str> = Ok(Some(42));
+
+    // 模式 1: 先处理 Result，再处理 Option
+    match ro {
+        Ok(Some(v)) => println!("Value: {}", v),
+        Ok(None) => println!("No data"),
+        Err(e) => println!("Error: {}", e),
+    }
+
+    // 模式 2: 使用 ? 和 if let 分层处理
+    fn get_value() -> Result<Option<i32>, &'static str> {
+        Ok(Some(10))
+    }
+
+    fn process() -> Result<i32, &'static str> {
+        let opt = get_value()?;  // 先解 Result
+        if let Some(v) = opt {
+            Ok(v * 2)
+        } else {
+            Err("No value")
+        }
+    }
+
+    // 模式 3: transpose — Result<Option<T>, E> ↔ Option<Result<T, E>>
+    let ro: Result<Option<i32>, &str> = Ok(Some(5));
+    let or: Option<Result<i32, &str>> = ro.transpose();
+    // Ok(Some(5)) → Some(Ok(5))
+    // Ok(None)    → None
+    // Err(e)      → Some(Err(e))
+}
+```
+
+> **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，错误处理概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释。
+
 ---
 
-## 零、认知路径（Cognitive Path）
+## 八、认知路径（Cognitive Path）
 
 > **[原创分析] · [TRPL: Ch9]** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
 
+### Step 1: 直觉类比 — "快递包裹"
+
+**核心问题**: "Rust 没有异常，那错误怎么处理？"
+
+**过渡解释**: 从熟悉的概念出发建立直觉锚点。将 `Result<T, E>` 类比为"快递包裹"——要么是商品（Ok），要么是拒收单（Err），你必须拆开才知道。这与 Java/C++ 的异常（快递员突然冲进房间大喊"出事了！"）形成鲜明对比。这一步建立 Rust 错误处理的显式性直觉。从 Step 1 到 Step 2 的过渡发生在学习者写第一个返回 `Result` 的函数时，发现编译器要求调用方必须处理返回值。
+
 ```text
-直觉困惑                    具体场景                  模式抽象               形式规则              代码验证              边界测试
-    │                         │                       │                     │                    │                    │
-    ▼                         ▼                       ▼                     ▼                    ▼                    ▼
-"如何处理错误？"             "函数可能失败             "Result = 显式         "Either/Error       "match / if let     "unwrap()
-                             怎么返回值？"            错误通道"              Monad: A + E"       / ? 运算符"         运行时 panic"
-
-"为什么不用异常？"           "Java 异常可以             "Result = 显式         "和类型强制          "编译器检查         "? 在闭包中
-                             到处抛"                  类型级错误"           分支处理"            穷尽性"             的限制"
-
-"怎么组合多个错误？"         "不同函数返回             "Error trait +         "类型类统一          "dyn Error /        "From 转换
-                             不同错误类型"            From 转换"             接口"               Box<dyn Error>"    链丢失信息"
+直觉映射:
+  Result<T, E>  ≈  快递包裹（要么是商品，要么是拒收单）
+  unwrap()      ≈  "我保证里面是商品，直接拆"（如果不是就崩溃）
+  ? 运算符      ≈  "如果是拒收单，直接退给上级"（错误传播）
+  match         ≈  "拆开包裹，分别处理两种情况"
 ```
 
-**认知脚手架**:
+### Step 2: 语法熟悉 — Result/Option 与 match
 
-- **类比**: `Result<T, E>` 像"快递包裹"——要么是商品（Ok），要么是拒收单（Err），你必须拆开才知道。
-- **反直觉点**: 很多语言用异常（隐式控制流），Rust 强制错误在类型中显式传播。
-- **形式化过渡**: 从"必须处理错误" → `Result` 类型 → "和类型 + Error Monad" → "单子绑定 (>>=)"。
+**核心问题**: "怎么写错误处理代码？match 太啰嗦怎么办？"
 
-### 7.7 国际课程与论文对齐
+**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `Result::Ok/Err`、`Option::Some/None`、`match`、`if let`、`?` 等核心语法。关键是建立"错误是值，不是控制流异常"的理解。从 Step 2 到 Step 3 的过渡由简洁性需求驱动：当学习者发现嵌套 match 过于冗长时，`?` 运算符成为自然的学习目标。
 
-| 来源 | 核心内容 | 与本文件对应 |
-|:---|:---|:---|
-| **[CMU 17-363: Programming Language Pragmatics]** | Error handling、Exception vs Result | L2 Error 覆盖 |
-| **[CMU 17-350: Safe Systems Programming]** | Result 在系统编程中的使用 | 工程实践 |
-| **[Wikipedia: Exception handling]** | 异常处理通用概念 | 对比 |
-| **[Wikipedia: Monad (functional programming)]** | Monad、Maybe/Error Monad | Result = Either |
-| **[RFC 243: Trait-based Exception Handling]** | ? 运算符设计 | ? 语法糖 |
-| **[TRPL: Ch9]** | 错误处理最佳实践 | 实践指南 |
+```rust
+// 核心语法模式:
+fn may_fail() -> Result<i32, String> {
+    Ok(42)
+}
+
+// 显式处理
+match may_fail() {
+    Ok(v) => println!("{}", v),
+    Err(e) => println!("Error: {}", e),
+}
+
+// 简洁处理
+if let Ok(v) = may_fail() { println!("{}", v); }
+
+// 传播处理
+fn caller() -> Result<i32, String> {
+    let v = may_fail()?;  // Err 则提前返回
+    Ok(v + 1)
+}
+```
+
+### Step 3: 传播自动化 — ? 运算符与 From
+
+**核心问题**: "不同函数返回不同错误类型，怎么统一？"
+
+**过渡解释**: 语法熟练后，学习者需要处理多函数链式调用中的错误传播。`?` 运算符不仅简化语法，还通过 `From` trait 实现错误类型的自动转换。这一步是认知的关键跃迁——理解 Rust 错误处理不是"每个错误单独处理"，而是"错误类型自动向上转换"的层级结构。从 Step 3 到 Step 4 的过渡由设计需求驱动：当学习者需要定义自己的错误类型时，进入自定义错误设计领域。
+
+```text
+错误层级:
+  底层错误: io::Error, ParseIntError, serde::Error ...
+      ↓ 通过 From 自动转换
+  中层错误: AppError { Io(...), Parse(...), Config(...) }
+      ↓ 通过 From 自动转换
+  顶层错误: anyhow::Error（通用包装器）
+
+? 运算符的魔力:
+  let n = s.parse()?;  // ParseIntError → AppError（自动）
+```
+
+### Step 4: 自定义错误 — thiserror 与 anyhow
+
+**核心问题**: "怎么设计好的错误类型？"
+
+**过渡解释**: 当学习者理解了错误传播机制后，需要面对错误类型的设计决策。`thiserror` 适合库（结构化错误，调用者可以 match），`anyhow` 适合应用（快速传播，无需自定义错误类型）。这一步建立"错误设计是 API 设计的一部分"的认知。从 Step 4 到 Step 5 的过渡由边界问题驱动：当学习者发现某些场景下 Result 不够用时（如内部不变量违反），需要理解 panic 的精确语义。
+
+```text
+设计决策:
+  库代码（被调用）: thiserror + enum AppError
+    → 调用者需要区分错误类型并采取不同行动
+
+  应用代码（主逻辑）: anyhow + Result<T, anyhow::Error>
+    → 快速开发，统一错误处理，错误链报告
+
+  快速原型: unwrap / expect
+    → 标记 TODO，后续替换为 proper error handling
+```
+
+### Step 5: 边界认知 — panic 与不可恢复错误
+
+**核心问题**: "什么时候用 panic？什么时候用 Result？"
+
+**过渡解释**: 学习者在前四步建立了对 Result 的信任，这一步需要精确校准 panic 的使用边界。核心原则是：Result 用于"预期可能失败的操作"，panic 用于"逻辑上不可能发生的状态"。关键区分：文件不存在 → Result；数组索引越界（已验证逻辑保证不会）→ panic。从 Step 5 到 Step 6 的过渡是"从现象到原理"——理解为什么 Rust 这样设计（和类型 vs 异常，显式控制流 vs 隐式跳转）。
+
+```text
+决策框架:
+  调用者可能恢复?        → Result<T, E>
+  违反函数契约/不变量?   → panic! / assert!
+  逻辑不可能到达?        → unreachable!
+  快速原型/已知安全?      → unwrap（带注释）
+```
+
+### Step 6: 形式化掌控 — Monad 与类型级错误处理
+
+**核心问题**: "Result 在数学上是什么？为什么 ? 能自动传播？"
+
+**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过类型论视角，`Result<T, E>` 是 Either Monad，`?` 是 monadic bind（`>>=`）的语法糖。Monad 定律（左单位元、右单位元、结合律）保证了错误传播的可组合性。这一形式化视角不仅解释了 ? 为什么工作，还揭示了 `and_then`、`map`、`or_else` 等组合子的数学本质。
+
+```text
+形式化映射:
+  Result<T, E>  ≅  Either E T
+  ? 运算符      ≅  >>= / bind 的语法糖
+  and_then      ≅  >>=（monadic bind）
+  map           ≅  fmap（functor map）
+
+Monad 定律验证:
+  左单位元: Ok(x).and_then(f)  ≡  f(x) ✅
+  右单位元: result.and_then(|x| Ok(x))  ≡  result ✅
+  结合律:   result.and_then(f).and_then(g)
+            ≡  result.and_then(|x| f(x).and_then(g)) ✅
+```
 
 ---
 
-## 八、知识来源关系（Provenance）
+## 九、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -481,88 +771,30 @@ fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
 | unwrap 在生产代码中需谨慎 | [Rust API Guidelines] | ✅ |
 | Monad 与错误处理 | [Wadler 1992 — The Essence of Functional Programming, POPL] | ✅ |
 | 代数效应与异常 | [Plotkin & Pretnar 2009 — Handlers of Algebraic Effects] | ✅ |
+| ? 运算符设计 | [RFC 243] | ✅ |
+| 和类型穷尽性检查 | [类型论标准教材] · [Rust Reference: Enums] | ✅ |
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 十、相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| Trait 系统 | [01_traits.md](./01_traits.md) | Error/From trait 的实现基础 |
+| 泛型系统 | [02_generics.md](./02_generics.md) | Result<T, E> 的泛型参数约束 |
+| 所有权与生命周期 | [01_foundation/01_ownership.md](../01_foundation/01_ownership.md) | panic 时的资源清理 |
+| 类型系统基础 | [01_foundation/04_type_system.md](../01_foundation/04_type_system.md) | 和类型的理论基础 |
+| 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 跨线程错误传播 |
+| 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | async 中的 ? 运算符 |
+| 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | 错误处理的逻辑基础 |
+
+---
+
+## 十一、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 预计: Phase 3
-
-### 补充章节：异步错误处理（poll_fn / TryFuture）
-
-#### 异步函数的错误传播
-
-```rust
-use std::future::Future;
-use std::pin::Pin;
-use std::task::{Context, Poll};
-
-// ✅ 自定义 Future 中的错误处理
-struct FallibleFuture {
-    attempt: u32,
-}
-
-impl Future for FallibleFuture {
-    type Output = Result<String, std::io::Error>;
-
-    fn poll(mut self: Pin<&mut Self>, _cx: &mut Context<'_>) -> Poll<Self::Output> {
-        if self.attempt < 3 {
-            self.attempt += 1;
-            Poll::Pending  // 模拟重试
-        } else {
-            Poll::Ready(Ok("success".to_string()))
-        }
-    }
-}
-```
-
-#### poll_fn 快速创建 Future
-
-```rust
-use std::future::poll_fn;
-
-// ✅ poll_fn: 从闭包创建 Future
-async fn using_poll_fn() {
-    let mut count = 0;
-    poll_fn(|_cx| {
-        count += 1;
-        if count >= 3 {
-            Poll::Ready("done")
-        } else {
-            Poll::Pending
-        }
-    }).await;
-}
-```
-
-#### TryFuture 与 ? 运算符
-
-```rust
-use futures::future::TryFutureExt;
-
-// ✅ 异步链中的错误传播
-async fn async_chain() -> Result<i32, String> {
-    let a = fetch_data().await?;       // Result<A, E> + ?
-    let b = process(a).await?;         // Result<B, E> + ?
-    Ok(b)
-}
-
-// 等价于:
-async fn async_chain_expanded() -> Result<i32, String> {
-    match fetch_data().await {
-        Ok(a) => match process(a).await {
-            Ok(b) => Ok(b),
-            Err(e) => return Err(e),
-        },
-        Err(e) => return Err(e),
-    }
-}
-```
-
----
-
-- [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 v1.1
+- [ ] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 预计: Phase 3

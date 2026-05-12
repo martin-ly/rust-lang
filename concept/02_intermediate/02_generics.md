@@ -3,13 +3,14 @@
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](./01_traits.md)
 > **后置概念**: [Advanced Lifetimes](../01_foundation/03_lifetimes.md) · [GATs](../03_advanced/02_async.md) · [Const Generics]
-> **主要来源**: [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Generic Parameters] · [Wikipedia: Generic programming] · [RFC 2000]
+> **主要来源**: [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) · [Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming) · [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)
 
 ---
 
 **变更日志**:
 
-- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
+- v2.1 (2026-05-12): 深度重构——定理矩阵扩至11条（含失效条件/错误码/依赖链），反命题决策树增至4个（新增"约束过度"命题），边界极限测试精炼为3个极限场景，认知路径6步递进每步增加正反例对照，全章补充Wikipedia/TRPL/RFC交叉引用与过渡段落
+- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
 ---
@@ -18,15 +19,19 @@
 
 ### 1.1 Wikipedia 对齐定义
 
-> **[Wikipedia: Generic programming]** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
+> **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
+>
+> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。
 
 ### 1.2 TRPL 官方定义
 
-> **[TRPL: Ch10.1]** Generics are abstract stand-ins for concrete types or other properties. When we're writing code, we can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
+> **[TRPL: Ch10.1 — Generic Data Types](https://doc.rust-lang.org/book/ch10-01-syntax.html)** Generics are abstract stand-ins for concrete types or other properties. When we're writing code, we can express the behavior of generics or how they relate to other generics without knowing what will be in their place when compiling and running the code.
+>
+> **[TRPL: Ch10.2 — Traits as Parameters](https://doc.rust-lang.org/book/ch10-02-traits.html)** Trait bounds ensure that the generic type has the necessary behavior. The compiler uses the bound to check that all concrete types used with the generic code provide the correct behavior.
 
 ### 1.3 形式化定义
 
-> **[类型论: Girard-Reynolds System F]** 泛型对应参数多态，Rust 通过单态化实现，对应 System F 的二阶 λ 演算。 ✅ 已验证
+> **[类型论: Girard-Reynolds System F](https://en.wikipedia.org/wiki/System_F)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 泛型对应参数多态，Rust 通过单态化实现，对应 System F 的二阶 λ 演算。 ✅ 已验证
 
 泛型对应**参数多态**（parametric polymorphism），Rust 通过**单态化**（monomorphization）实现：
 
@@ -44,7 +49,7 @@
   ≡  ∀T. Add(T) → (T × T → T)
 ```
 
-> **过渡到属性矩阵**: 从形式化定义出发，泛型系统不仅是"类型参数"的简单概念，而是由类型参数、生命周期参数、常量泛型、关联类型等构成的多维参数空间。下一节通过属性矩阵对这些参数类型及其约束机制进行系统分类，并与其他语言的泛型实现进行正交对比。
+> **过渡到属性矩阵**: 从形式化定义出发，泛型系统不仅是"类型参数"的简单概念，而是由类型参数、生命周期参数、常量泛型、关联类型等构成的多维参数空间。下一节通过属性矩阵对这些参数类型及其约束机制进行系统分类，并与 C++ 模板、Java 类型擦除等实现进行正交对比，为后续定理链建立"参数空间 → 约束系统 → 代码生成"的直觉框架。
 
 ---
 
@@ -83,7 +88,7 @@
 | **Const Generics** | `<const N: usize>` | 值级别的泛型 | 1.51+ |
 | **GATs** | `type Item<'a>;` | 泛型关联类型 | 1.65+ |
 
-> **过渡到思维导图**: 属性矩阵展示了泛型系统的静态分类，但未能表达概念间的动态关联与编译期行为。思维导图通过拓扑结构揭示泛型从参数声明、约束满足到单态化代码生成的完整概念网络。
+> **过渡到思维导图**: 属性矩阵展示了泛型系统的静态分类，但未能表达概念间的动态关联与编译期行为。思维导图通过拓扑结构揭示泛型从参数声明、约束满足到单态化代码生成的完整概念网络，为定理推理链提供"概念拓扑 → 逻辑推导"的衔接。
 
 ---
 
@@ -119,7 +124,7 @@ graph TD
     F --> F3[关联类型约束]
 ```
 
-> **过渡到定理推理链**: 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络。
+> **过渡到定理推理链**: 思维导图呈现了泛型系统的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将参数多态、System F、单态化、零成本抽象、Const Generics 等核心命题形式化为可验证的推理网络，每个定理标注其依赖的引理、推论的下游定理，以及失效条件和编译错误码。
 
 ---
 
@@ -127,85 +132,90 @@ graph TD
 
 ### 4.1 引理：参数多态 ⟹ System F 类型规则
 
-> **[Wikipedia: System F] · [Pierce 2002, Ch.23]** Rust 泛型核心对应 Girard-Reynolds System F（二阶 λ 演算）。 ✅ 已验证
+> **[Wikipedia: System F](https://en.wikipedia.org/wiki/System_F)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** Rust 泛型核心对应 Girard-Reynolds System F（二阶 λ 演算）。 ✅ 已验证
 
 ```text
 前提 1: 泛型函数 <T>fn(x: T) -> T 在类型论中对应全称量词 ∀T. T → T
-前提 2: 类型应用（如 identity::<i32>）对应 System F 的实例化
-前提 3: 类型检查器验证所有实例满足类型规则
+前提 2: 类型应用（如 identity::<i32>）对应 System F 的实例化规则 (ΛT.e)[τ]
+前提 3: 类型检查器验证所有实例满足类型规则（类型替换保持良类型性）
     ↓
 引理: 参数多态 ⟹ System F 类型规则
     ↓
 定理: Rust 泛型函数的类型安全性由 System F 的良类型性（well-typedness）保证
     ↓
-推论: 泛型函数的每个单态化实例都是类型安全的（类型替换引理）
+推论: 泛型函数的每个单态化实例都是类型安全的（类型替换引理 / Substitution Lemma）
 ```
 
 ### 4.2 定理：单态化 ⟹ 零成本抽象
 
-> **[TRPL: Ch10.1] · [Rust Reference: Monomorphization]** 单态化生成与手写代码等价的专用实例，LLVM 优化消除额外开销。 ✅ 已验证
+> **[TRPL: Ch10.1 — Performance of Code Using Generics](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html)** 单态化生成与手写代码等价的专用实例，LLVM 优化消除额外开销。 ✅ 已验证
 
 ```text
 前提 1: 泛型函数 <T>fn(x: T) 在编译期为每个具体类型生成专用代码
-前提 2: 生成的代码与手写具体类型代码等价
-前提 3: LLVM 优化器可内联、向量化、消除冗余
+前提 2: 生成的代码与手写具体类型代码在 MIR/LLVM-IR 层面等价
+前提 3: LLVM 优化器可内联、向量化、消除冗余，最终机器码与手写版本一致
     ↓
 定理: 单态化 ⟹ 零成本抽象
     ↓
 推论 1: Vec<i32> 和 Vec<String> 的性能等价于手写 IntVec 和 StringVec
-推论 2: 动态分发 dyn Trait 打破零成本承诺（vtable 间接调用）
-代价: 编译时间增加 + 二进制体积膨胀
+推论 2: 动态分发 dyn Trait 打破零成本承诺（vtable 间接调用 + 胖指针）
+代价: 编译时间增加 + 二进制体积膨胀（每个实例独立编译和链接）
 ```
 
 ### 4.3 推论：Const Generics ⟹ 类型级编程
 
-> **[RFC 2000] · [Rust Reference: Const Generics]** Const generics 将值引入类型系统，是依赖类型的有限形式。 ✅ 已验证
+> **[RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)** · **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** Const generics 将值引入类型系统，是依赖类型的有限形式。 ✅ 已验证
 
 ```text
 前提 1: 常量泛型参数 <const N: usize> 在编译期求值为具体值
 前提 2: 不同类型参数产生不同类型（Buffer<i32, 4> ≠ Buffer<i32, 8>）
-前提 3: 常量表达式在编译期可判定相等性
+前提 3: 常量表达式在编译期可判定相等性（const evaluation）
     ↓
-引理: Const Generics 提供值到类型的映射
+引理: Const Generics 提供值到类型的映射（value-to-type lifting）
     ↓
 推论: Const Generics ⟹ 类型级编程（type-level programming）
     ↓
 边界: 常量参数不能是浮点数、字符串或用户定义类型（目前仅限标量整数/布尔/字符）
+      浮点数不可全序比较（NaN），字符串长度非编译期常量
 ```
 
 ### 4.4 约束多态的类型安全
 
-> **[Rust Reference: Trait Bounds] · [TRPL: Ch10.2]** Trait Bounds 在编译期验证类型能力，泛型函数体调用保证类型安全。 ✅ 已验证
+> **[Rust Reference: Trait Bounds](https://doc.rust-lang.org/reference/trait-bounds.html)** · **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** Trait Bounds 在编译期验证类型能力，泛型函数体调用保证类型安全。 ✅ 已验证
 
 ```text
-前提: <T: Trait> 约束确保 T 具有 Trait 定义的所有方法
+前提: <T: Trait> 约束确保 T 具有 Trait 定义的所有方法，且方法签名一致
     ↓
-定理: 在泛型函数体内调用 Trait 方法是类型安全的
+定理: 在泛型函数体内调用 Trait 方法是类型安全的（编译期解析，静态分发）
     ↓
 推论: 泛型函数的验证与具体类型函数同等严格
-      不需要运行时类型检查（对比 Java 的类型擦除 + 转换）
+      不需要运行时类型检查（对比 Java 的类型擦除 + 转换 + 可能 ClassCastException）
+      不满足约束即编译错误（E0277），而非运行时异常
 ```
 
 ### 4.5 定理一致性矩阵
 
-> **[原创分析] · [Rust Reference: Generic Parameters]** 泛型定理矩阵基于 Rust 类型系统约束可满足性和单态化语义。 💡 原创分析
+> **[原创分析]** · **[Rust Reference: Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html)** 泛型定理矩阵基于 Rust 类型系统约束可满足性和单态化语义。 💡 原创分析
 
 | **定理/引理/推论** | **前提** | **结论** | **依赖的 L4 公理** | **被哪些定理依赖** | **失效条件** | **典型错误码** |
 |:---|:---|:---|:---|:---|:---|:---|
-| **引理**: 参数多态 ⟹ System F | 泛型参数合法声明 | 类型规则可判定 | System F 良类型性 | 单态化零成本 | `for<'a>` 过度约束 | — |
-| **定理**: 单态化 ⟹ 零成本 | 泛型函数编译时实例化 | 无运行时开销 | Parametricity | 所有性能敏感代码 | `dyn Trait` 动态分发 | — |
-| **推论**: Const Generics ⟹ 类型级编程 | 常量参数为编译期求值 | 类型参数包含常量值 | 依赖类型基础 | 数组抽象、类型级状态 | 非 const 表达式 | E0435 |
-| **定理**: 约束可满足性 | where 子句为 Horn 子句 | 类型推导可判定 | HM 推断扩展 | Trait 解析、编译通过 | GATs 无界递归 | E0275 |
-| **引理**: HRTB 全称约束 | `for<'a>` 合法 | 高阶函数类型安全 | 全称量词 (∀) | 回调、生命周期抽象 | 过度约束不可满足 | — |
-| **推论**: 泛型一致性 | 单态化后类型检查通过 | 所有实例类型安全 | 类型替换引理 | — | `transmute` 绕过 | — |
-| **引理**: 关联类型归一化 | 关联类型有唯一实现 | 类型别名可替换 | 约束可满足性 | GATs 使用 | 重叠关联类型定义 | E0119 |
-| **定理**: 生命周期约束可满足 | `T: 'a` 合法 | 无悬垂引用 | 区域子类型 | 泛型生命周期安全 | 约束遗漏 | E0310 |
+| **引理**: 参数多态 ⟹ System F | 泛型参数合法声明，类型变量分离 | 类型规则可判定，替换保持良类型 | System F 良类型性 | 约束可满足性、泛型一致性 | `for<'a>` 过度约束不可满足 | — |
+| **定理**: 单态化 ⟹ 零成本 | 泛型函数编译时实例化，LLVM 可优化 | 无运行时开销，机器码等价手写 | Parametricity（参数性定理） | 所有性能敏感代码路径 | `dyn Trait` 动态分发引入 vtable | E0038 |
+| **推论**: Const Generics ⟹ 类型级编程 | 常量参数为编译期求值标量 | 类型参数包含常量值，值决定类型 | 依赖类型基础（有限形式） | 数组抽象、类型级状态机 | 非 const 表达式或浮点参数 | E0435 |
+| **定理**: 约束可满足性 | where 子句为 Horn 子句形式 | 类型推导可判定，Trait 解析终止 | HM 推断扩展 | Trait 解析、编译通过 | GATs 无界递归导致不终止 | E0275 |
+| **引理**: HRTB 全称约束 | `for<'a>` 合法，高阶函数签名良构 | 高阶函数类型安全，生命周期无关性 | 全称量词 (∀) 语义 | 回调抽象、生命周期擦除 | 过度约束不可满足，闭包推断失败 | E0582 |
+| **推论**: 泛型一致性 | 单态化后类型检查通过 | 所有实例类型安全，行为一致 | 类型替换引理（Substitution Lemma） | — | `transmute` 绕过类型系统 | E0133 |
+| **引理**: 关联类型归一化 | 关联类型有唯一实现，无重叠 | 类型别名可替换，Trait 方法可解析 | 约束可满足性 | GATs 使用、Iterator 实现 | 重叠关联类型定义（coherence 破坏） | E0119 |
+| **定理**: 生命周期约束可满足 | `T: 'a` 合法，区域包含关系成立 | 无悬垂引用，借用检查通过 | 区域子类型（Region Subtyping） | 泛型生命周期安全 | 约束遗漏，T 含短于 'a 的引用 | E0310 |
+| **引理**: Sized 默认约束 ⟹ 静态分发 | T 默认 Sized，内存布局已知 | 单态化生成确定代码，无动态分发 | Sized trait 语义 | 泛型数据结构布局 | `?Sized` 使用但未正确处理 DST | E0277 |
+| **定理**: 类型推断可判定性 | HM 算法扩展，约束图无环 | 主类型存在时可自动推导 | Hindley-Milner 类型推断 | 泛型函数调用、闭包参数 | 多解歧义（collect、数值字面量） | E0282/E0283 |
+| **推论**: impl Trait 隐藏 ⟹ 抽象能力 | 返回位置 impl Trait 合法使用 | 隐藏具体类型，保持零成本 | 存在类型（Existential Type） | API 设计、抽象类型返回 | 参数位置 impl Trait 在 Trait 方法中 | E0562/E0666 |
 
-> **一致性检查**: 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用。
+> **一致性检查**: 参数多态 ⟹ System F 类型规则 ⟹ 约束可满足性 ⟹ 单态化零成本 ⟹ 泛型一致性，形成**从类型规则到代码生成到运行时保证**的完整推理链。Const Generics 是依赖类型的有限形式，HRTB 是全称量词在生命周期上的应用，Sized 默认约束确保单态化所需的静态内存布局。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "类型系统一致性"
 
-> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制。
+> **过渡到示例与反例**: 定理链提供了形式化保证，但工程实践中这些保证的边界在哪里？下一节通过正例展示泛型的正确使用方式，通过反例揭示定理失效的精确条件——特别是 E0277（约束不满足）、E0275（类型递归溢出）、E0310（生命周期不足）等编译错误的触发机制，为反命题决策树建立具体场景。
 
 ---
 
@@ -264,7 +274,7 @@ fn main() {
 ### 5.3 反例：类型大小未知（E0277）
 
 ```rust
-// ❌ 反例: 对 unsized 类型直接使用泛型
+// ❌ 反例: 对 unsized 类型直接使用泛型（默认 T: Sized）
 trait Drawable { fn draw(&self); }
 
 fn draw_all<T: Drawable>(items: Vec<T>) {  // T 默认要求 Sized
@@ -272,8 +282,8 @@ fn draw_all<T: Drawable>(items: Vec<T>) {  // T 默认要求 Sized
 }
 
 fn main() {
-    let items: Vec<Box<dyn Drawable>> = vec![/* ... */];
-    // draw_all(items);  // 类型不匹配
+    let items: Vec<Box<dyn Drawable>> = vec![];
+    // draw_all(items);  // 类型不匹配: Box<dyn Drawable> 不满足 Sized
 }
 ```
 
@@ -285,7 +295,7 @@ fn draw_all<T: Drawable + ?Sized>(items: Vec<Box<T>>) {
     for item in items { item.draw(); }
 }
 
-// 或直接使用 Trait Object
+// 或直接使用 Trait Object（动态分发）
 fn draw_all_dyn(items: Vec<Box<dyn Drawable>>) {
     for item in items { item.draw(); }
 }
@@ -328,13 +338,13 @@ struct LongTermStore<T: 'static> {
 }
 ```
 
-> **过渡到反命题分析**: 示例展示了泛型的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"泛型定理何时成立/何时失效"形式化为可遍历的决策树，重点揭示"零成本抽象"的隐藏代价与约束系统的表达边界。
+> **过渡到反命题分析**: 示例展示了泛型的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"泛型定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面，重点揭示"零成本抽象"的隐藏代价、类型推断的表达边界、以及约束系统的工程权衡。
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
-> **[TRPL: Ch10.1] · [Rust Performance Book] · [RFC 2000]** 反命题分析基于单态化、约束可满足性和 Const Generics 的形式化语义。 ✅ 已验证
+> **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** 反命题分析基于单态化、约束可满足性和 Const Generics 的形式化语义。 ✅ 已验证
 
 ### 6.1 反命题 1: "泛型总是零成本的"
 
@@ -345,7 +355,7 @@ graph TD
     P["命题: 泛型总是零成本的"] --> Q1{"使用 dyn Trait?"}
     Q1 -->|是| F1["反例: dyn Trait 使用 vtable<br/>→ 间接调用开销 + 指针胖化"]
     Q1 -->|否| Q2{"使用 &dyn Trait?"}
-    Q2 -->|是| F2["反例: 胖指针 (data + vtable)<br/>→ 内存布局变化 + 缓存不友好"]
+    Q2 -->|是| F2["反例: 胖指针 data + vtable<br/>→ 内存布局变化 + 缓存不友好"]
     Q2 -->|否| Q3{"泛型被大量不同类型实例化?"}
     Q3 -->|是| F3["反例: 单态化代码膨胀<br/>→ 编译时间增加 + 二进制变大 + I-Cache 压力"]
     Q3 -->|否| Q4{"泛型函数体过大?"}
@@ -363,26 +373,26 @@ graph TD
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | 单态化增加编译时间（每个实例独立编译） | ⚠️ 有代价 |
-| 运行时 | 无额外开销（内联后等价手写代码） | ✅ 零成本 |
-| 语义 | `dyn Trait` 和单态化是互斥语义选择 | ✅ 明确区分 |
-| 工程 | 二进制膨胀可能导致 I-Cache miss | ⚠️ 有代价 |
+| 编译期 | 单态化增加编译时间（每个实例独立编译、优化、链接） | ⚠️ 有代价 |
+| 运行时 | 无额外开销（内联后等价手写代码，无 vtable/间接调用） | ✅ 零成本 |
+| 语义 | `dyn Trait` 和单态化是互斥语义选择（静态分发 vs 动态分发） | ✅ 明确区分 |
+| 工程 | 二进制膨胀可能导致 I-Cache miss，需权衡泛型 vs dyn Trait | ⚠️ 有代价 |
 
-### 6.2 反命题 2: "类型推断总是成功的"
+### 6.2 反命题 2: "类型推断总是完备的"
 
 > 编译期层 — Hindley-Milner 类型推断有理论边界，Rust 的扩展 HM 在某些场景下需要显式标注。
 
 ```mermaid
 graph TD
-    P["命题: 类型推断总是成功的"] --> Q1{"数值字面量无上下文约束?"}
+    P["命题: 类型推断总是完备的"] --> Q1{"数值字面量无上下文约束?"}
     Q1 -->|是| F1["反例: 默认推断为 i32 / f64<br/>→ 可能非预期类型（如 42 推断为 i32 而非 u8）"]
     Q1 -->|否| Q2{"泛型方法返回需收集到容器?"}
-    Q2 -->|是| F2["反例: vec.iter().collect() 无法推断<br/>→ 需 collect::<Vec<_>>()"]
+    Q2 -->|是| F2["反例: vec.iter().collect() 无法推断<br/>→ 需 collect::<Vec<_>>() 或 let x: Vec<_>"]
     Q2 -->|否| Q3{"闭包参数无上下文?"}
-    Q3 -->|是| F3["反例: items.iter().map(|x| x * 2) 可能失败<br/>→ 需标注 |x: i32|"]
-    Q3 -->|否| Q4{"存在递归类型定义?"}
+    Q3 -->|是| F3["反例: items.iter().map(|x| x * 2) 可能失败<br/>→ 需标注 |x: i32| 或提供返回类型"]
+    Q3 -->|否| Q4{"存在递归类型定义或跨模块推断?"}
     Q4 -->|是| F4["反例: 递归类型导致推断循环<br/>→ 需显式类型标注打破循环"]
-    Q4 -->|否| T1["定理成立: 推断成功<br/>✅ HM 扩展保证"]
+    Q4 -->|否| T1["定理成立: 推断完备<br/>✅ HM 扩展保证"]
 
     style F1 fill:#f66
     style F2 fill:#f66
@@ -395,25 +405,57 @@ graph TD
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | 推断失败时编译器给出清晰错误 | ✅ 安全 |
-| 运行时 | 无运行时影响（纯编译期行为） | ✅ 安全 |
-| 语义 | 某些约束（如高阶类型）不可推断 | ⚠️ 理论边界 |
-| 工程 | Turbofish 语法是标准 workaround | ✅ 可解 |
+| 编译期 | 推断失败时编译器给出清晰错误（E0282/E0283），拒绝歧义程序 | ✅ 安全 |
+| 运行时 | 无运行时影响（纯编译期行为，推断失败 = 编译错误） | ✅ 安全 |
+| 语义 | 某些约束（如高阶类型、存在类型）在 System F 中不可推断 | ⚠️ 理论边界 |
+| 工程 | Turbofish 语法 `::<>` 是标准 workaround，API 设计应减少歧义点 | ✅ 可解 |
 
-### 6.3 反命题 3: "Const Generics 完全替代运行时值"
+### 6.3 反命题 3: "泛型约束越严格越好"
 
-> 语义层 — Const Generics 的能力有明确的类型论边界。
+> 语义/工程层 — 过度约束破坏 impl 复用性和 API 的抽象能力，违背参数性定理的精神。
+
+```mermaid
+graph TD
+    P["命题: 泛型约束越严格越好"] --> Q1{"约束包含非必要能力?"}
+    Q1 -->|是| F1["反例: fn foo<T: Display + Clone + Ord>(x: T)<br/>→ 调用方需同时满足三个约束，impl 范围缩小"]
+    Q1 -->|否| Q2{"约束要求具体 Trait 而非最小能力?"}
+    Q2 -->|是| F2["反例: 要求 T: Vec<u8> 而非 T: AsRef<[u8]><br/>→ 拒绝 &[u8], Box<[u8]> 等合法类型"]
+    Q2 -->|否| Q3{"约束包含 Copy 而非 Clone?"}
+    Q3 -->|是| F3["反例: T: Copy 拒绝 String, Vec<br/>→ 若仅需克隆，Clone 约束更通用"]
+    Q3 -->|否| Q4{"约束包含 'static 而非更短生命周期?"}
+    Q4 -->|是| F4["反例: T: 'static 拒绝含借用的类型<br/>→ 应使用 T: 'a 让调用方控制生命周期"]
+    Q4 -->|否| T1["定理成立: 约束强度最优<br/>✅ 最小能力原则"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style F3 fill:#f66
+    style F4 fill:#f66
+    style T1 fill:#6f6
+```
+
+**四层分析**:
+
+| **层面** | **分析** | **结果** |
+|:---|:---|:---|
+| 编译期 | 过度约束导致合法程序被拒绝，编译器无错误但 API 可用性下降 | ⚠️ 可用性代价 |
+| 运行时 | 无运行时影响（约束仅影响编译期类型检查） | ✅ 安全 |
+| 语义 | 违背 Parametricity：约束越强，函数行为越受限制，但复用性越低 | ⚠️ 设计反模式 |
+| 工程 | 应遵循"最小能力原则"（Principle of Least Privilege），约束应为所需最小集合 | ✅ 可解 |
+
+### 6.4 反命题 4: "Const Generics 完全替代运行时值"
+
+> 语义层 — Const Generics 的能力有明确的类型论边界，是依赖类型的有限形式而非完整替代。
 
 ```mermaid
 graph TD
     P["命题: Const Generics 完全替代运行时值"] --> Q1{"需要浮点数参数?"}
-    Q1 -->|是| F1["反例: const generics 不支持 f32/f64<br/>→ 浮点数不可全序比较（NaN）"]
+    Q1 -->|是| F1["反例: const generics 不支持 f32/f64<br/>→ 浮点数不可全序比较（NaN），无法编译期判定相等"]
     Q1 -->|否| Q2{"需要字符串或自定义类型?"}
-    Q2 -->|是| F2["反例: 仅支持标量整数/布尔/字符<br/>→ 字符串需 typenum 风格编码"]
+    Q2 -->|是| F2["反例: 仅支持标量整数/布尔/字符<br/>→ 字符串需 typenum 风格编码（过度复杂）"]
     Q2 -->|否| Q3{"值范围极大或不可枚举?"}
-    Q3 -->|是| F3["反例: 每种值产生不同类型 → 二进制爆炸<br/>→ 应使用运行时参数"]
-    Q3 -->|否| Q4{"需要泛型参数作为常量?"}
-    Q4 -->|是| F4["反例: 关联类型不能直接用作 const generic 参数<br/>→ 语法限制"]
+    Q3 -->|是| F3["反例: 每种值产生不同类型 → 二进制爆炸<br/>→ 应使用运行时参数（如 Vec 动态大小）"]
+    Q3 -->|否| Q4{"需要泛型参数（如关联类型）作为常量?"}
+    Q4 -->|是| F4["反例: 关联类型不能直接用作 const generic 参数<br/>→ 语法限制（需具体化）"]
     Q4 -->|否| T1["定理成立: Const Generics 适用<br/>✅ 编译期值参数化"]
 
     style F1 fill:#f66
@@ -427,21 +469,21 @@ graph TD
 
 | **层面** | **分析** | **结果** |
 |:---|:---|:---|
-| 编译期 | 不支持的类型直接编译错误 | ✅ 明确拒绝 |
-| 运行时 | 无运行时影响 | ✅ 安全 |
-| 语义 | 依赖类型的有限形式，非完整依赖类型 | ⚠️ 表达能力边界 |
-| 工程 | typenum、枚举、运行时检查是替代方案 | ✅ 可解 |
+| 编译期 | 不支持的类型直接编译错误（E0435），明确拒绝 | ✅ 明确拒绝 |
+| 运行时 | 无运行时影响（常量泛型在编译期完全求值） | ✅ 安全 |
+| 语义 | 依赖类型的有限形式，非完整依赖类型（如不能依赖运行时值做类型分支） | ⚠️ 表达能力边界 |
+| 工程 | typenum、枚举、运行时检查是成熟替代方案 | ✅ 可解 |
 
-> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性。
+> **过渡到边界极限测试**: 反命题决策树揭示了定理失效的逻辑路径，但极限测试将定理推向边界——通过代码展示编译器在极端约束下的精确行为，验证理论预测与编译器实现的一致性，特别关注单态化膨胀的量化感知、生命周期约束的递归传递极限、以及 Const Generics 的类型级运算边界。
 
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
 
-### 7.1 测试 1: 单态化代码膨胀极限
+### 7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限
 
 ```rust
-// 边界: 单态化膨胀的量化感知
+// 边界: 量化单态化膨胀与动态分发的精确权衡点
 
 // 一个泛型函数被 5 种不同类型实例化
 fn process<T: std::fmt::Display>(x: T) { println!("{}", x); }
@@ -452,22 +494,25 @@ fn main() {
     process(42u32);           // 实例 3: process<u32>
     process("hello");         // 实例 4: process<&str>
     process(String::new());   // 实例 5: process<String>
-    // 每个实例独立编译 → 代码膨胀
+    // 每个实例独立编译 → 5 份代码 → 代码膨胀
 }
 
 // 缓解策略对比:
-// 策略 A: 泛型（5 个实例，零运行时开销）
-// 策略 B: dyn Trait（1 个实例，一次间接调用）
-// 策略 C: impl Trait 返回（隐藏类型，仍单态化）
+// 策略 A: 泛型（5 个实例，零运行时开销，二进制膨胀）
+// 策略 B: dyn Trait（1 个实例，vtable 间接调用，二进制紧凑）
+// 策略 C: impl Trait 返回（隐藏类型，仍单态化，无帮助）
 
 fn process_dyn(x: &dyn std::fmt::Display) { println!("{}", x); }
-// 仅 1 个实例，但有 vtable 间接调用
+// 仅 1 个实例，但有 vtable 间接调用 → 打破零成本
+
+// 极限边界: 当实例数量 > 20 且函数体较大时，dyn Trait 可能更优
+// 极限边界: 当性能敏感（循环内部）时，单态化是必须选择
 ```
 
-### 7.2 测试 2: 生命周期约束的递归传递
+### 7.2 测试 2: 生命周期约束递归传递与 HRTB 边界
 
 ```rust
-// 边界: 生命周期约束在泛型嵌套中的传递
+// 边界: 生命周期约束在泛型嵌套中的传递极限 + HRTB 精确语义
 
 struct Container<'a, T: 'a> {
     data: &'a T,
@@ -482,39 +527,47 @@ struct Deep<'a, T: 'a> {
     w: Wrapper<'a, T>,
 }
 
-// 错误模式: 遗漏 T: 'a
+// 错误模式: 遗漏 T: 'a → E0310
 // struct Bad<'a, T> {
 //     data: &'a T,  // E0310: 参数类型 T 可能包含比 'a 短生命周期的引用
 // }
 
-// HRTB 边界: 表达"对所有生命周期都成立"
+// HRTB 极限: 表达"对所有生命周期都成立"
 fn assert_static<T>() where T: 'static {}
 // T: 'static 表示 T 中不含任何非 'static 引用
+
+// HRTB 回调边界: 要求 F 必须能接受任意生命周期的 &str
+fn with_parser<F, R>(f: F) -> R
+where
+    F: for<'a> Fn(&'a str) -> R,
+{
+    f("input")
+}
+
+// 错误模式: 若闭包返回 'static，则不满足 for<'a> 约束
+// let bad = |s: &str| -> &'static str { "static" };
+// with_parser(bad); // E0582: 生命周期不匹配
+
+// 正确模式: 返回与输入同生命周期
+let good = |s: &str| -> &str { &s[1..] };
+// with_parser(good); // ✅ 合法
 ```
 
-### 7.3 测试 3: Const Generics 的类型级运算
+### 7.3 测试 3: Const Generics 类型级运算与特化边界
 
 ```rust
-// 边界: const generics 支持有限类型级运算
+// 边界: const generics 支持有限类型级运算，特化尚未稳定
 
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
 }
 
-// ✅ 合法: 常量表达式
+// ✅ 合法: 常量表达式用于类型区分
 impl<T, const N: usize> Matrix<T, N, N> {
     fn is_square(&self) -> bool { true }  // 仅当 ROWS == COLS 时可用
 }
 
-// ❌ 非法（目前）: 常量泛型不能用于类型级条件分支
-// impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
-//     fn is_square(&self) -> bool { R == C }  // 可行！但这是运行时比较
-// }
-
-// 更高级边界: 无法表达 "R > C" 作为类型约束
-// 需借助 typenum 或泛型特化（不稳定）
-
-// 数组转置的常量泛型边界
+// ✅ 合法: 常量表达式在函数签名中
 fn transpose<T: Copy, const R: usize, const C: usize>(
     input: [[T; C]; R]
 ) -> [[T; R]; C] {
@@ -526,42 +579,30 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
     }
     output
 }
+
+// ❌ 非法（目前）: 无法表达 "R > C" 作为类型约束
+// impl<T, const R: usize, const C: usize> Matrix<T, R, C>
+// where R > C  // 不是合法 where 子句
+// {
+//     fn is_wide(&self) -> bool { true }
+// }
+
+// 极限边界: 无法做类型级条件分支（需 typenum 或不稳定特化）
+// 极限边界: 关联类型不能直接作为 const generic 参数
+// type Foo<T> = <T as Iterator>::Item; // 不能用于 const 参数
+
+// 缓解: 使用泛型特化（unstable: min_specialization）
+// #![feature(min_specialization)]
+// impl<T> Matrix<T, 2, 2> { fn det(&self) -> T { ... } }
 ```
 
-### 7.4 测试 4: HRTB 与回调泛型边界
-
-```rust
-// 边界: HRTB 在高阶回调中的精确语义
-
-// 要求: F 必须能接受任意生命周期的 &str
-trait Parser<F> where F: for<'a> Fn(&'a str) -> &'a str {
-    fn parse(&self, input: &str) -> &str;
-}
-
-// 实现: 返回输入的子串（与输入同生命周期）
-struct SuffixParser;
-impl Parser<fn(&str) -> &str> for SuffixParser {
-    fn parse(&self, input: &str) -> &str {
-        &input[1..]
-    }
-}
-
-// 错误模式: 若 Fn 返回 'static，则不满足 for<'a> 约束
-// fn bad_parser(_: &str) -> &'static str { "static" }
-// 无法用于需要 for<'a> Fn(&'a str) -> &'a str 的位置
-
-// HRTB 的闭包限制:
-// let f = |s: &str| -> &str { s };  // 推断可能失败
-// 需显式: let f: for<'a> fn(&'a str) -> &'a str = |s| s;
-```
-
-> **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，泛型概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释。
+> **过渡到认知路径**: 边界测试验证了定理在极端条件下的行为，但从学习者的视角，泛型概念如何从直觉逐步构建到形式化理解？下一节提供六步递进的认知路径，每步之间有过渡解释和正反例对照，覆盖从"填空题模板"直觉到 System F 形式化、再到工程权衡的完整心智模型构建过程。
 
 ---
 
 ## 八、认知路径（Cognitive Path）
 
-> **[原创分析] · [TRPL: Ch10.1]** 认知路径从"通用代码"直觉到 System F 形式化的渐进映射。 💡 原创分析
+> **[原创分析]** · **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** 认知路径从"通用代码"直觉到 System F 形式化的渐进映射，每步包含过渡解释、正例锚定、反例纠偏。 💡 原创分析
 
 ### Step 1: 直觉类比 — "泛型像填空题模板"
 
@@ -573,41 +614,65 @@ impl Parser<fn(&str) -> &str> for SuffixParser {
 直觉映射:
   fn swap<T>(a: &mut T, b: &mut T)  ≈  "交换任意两个东西的模板"
   Vec<T>                            ≈  "任意类型的列表模板"
+
+正例锚定:
+  Vec<i32> 存整数，Vec<String> 存字符串，同一套代码逻辑
+
+反例纠偏:
+  C++ 模板是文本替换（可编译任意代码，错误信息晦涩）
+  Rust 泛型是类型参数化（先类型检查，后单态化，错误信息清晰）
 ```
 
 ### Step 2: 语法熟悉 — 参数声明与使用
 
 **核心问题**: "泛型参数写在哪里？怎么约束它？"
 
-**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体、枚举、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
+**过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体、枚举、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型，而非运行时箱型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
 
 ```rust
 // 核心语法模式:
 fn identity<T>(x: T) -> T { x }           // 函数泛型
 struct Point<T> { x: T, y: T }            // 结构体泛型
 enum Option<T> { Some(T), None }          // 枚举泛型
-impl<T> Point<T> { ... }                  // impl 块泛型
-fn foo<T>() where T: Display + Clone { }  // where 子句
+impl<T> Point<T> { /* ... */ }            // impl 块泛型
+fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
+
+正例锚定:
+  impl<T> 为同一结构体的所有实例提供方法
+
+反例纠偏:
+  Point<i32> 和 Point<f64> 是不同的类型，不能互相赋值
+  // let p: Point<i32> = Point { x: 1, y: 2 };
+  // let q: Point<f64> = p; // E0308: mismatched types
 ```
 
 ### Step 3: 机制困惑 — 单态化与类型擦除
 
 **核心问题**: "Rust 泛型和 Java/C++ 泛型有什么区别？"
 
-**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么。
+**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。
 
 ```text
 三语言对比:
   Rust: 单态化 → 专用代码 → 零运行时开销 → 二进制膨胀
   Java: 类型擦除 → Object + 转换 → 装箱开销 → 二进制紧凑
   C++: 模板实例化 → 文本替换 → 零运行时开销 → 编译错误难读
+
+正例锚定:
+  Rust Vec<i32>::push 与手写 IntVec::push 生成等价机器码
+
+反例纠偏:
+  以下代码产生 3 个实例 → 3 份代码:
+    fn id<T>(x: T) -> T { x }
+    id(1i32); id(1i64); id(1u32);
+  这是"零运行时成本"的代价，不是"零成本"
 ```
 
 ### Step 4: 类型论映射 — System F 与参数性
 
 **核心问题**: "泛型在数学上是什么？"
 
-**过渡解释**: 当学习者理解了工程约束（单态化、零成本）后，自然会追问这些性质的数学来源。System F（二阶 λ 演算）提供了参数多态的形式化模型：`identity<T>` 对应 `ΛT. λx:T. x`。参数性定理（Parametricity / Theorems for Free）揭示：多态函数的行为由其类型完全决定。从 Step 4 到 Step 5 的过渡是"从理论回到实践"——类型论解释了为什么 `fn f<T>(x: T) -> T` 只能是恒等函数（或 panic），但工程场景要求在约束系统中表达更复杂的能力需求。
+**过渡解释**: 当学习者理解了工程约束（单态化、零成本）后，自然会追问这些性质的数学来源。System F（二阶 λ 演算）提供了参数多态的形式化模型：`identity<T>` 对应 `ΛT. λx:T. x`。参数性定理（Parametricity / Theorems for Free）揭示：多态函数的行为由其类型完全决定。从 Step 4 到 Step 5 的过渡是"从理论回到实践"——类型论解释了为什么 `fn f<T>(x: T) -> T` 只能是恒等函数（或 panic），但工程场景要求在约束系统中表达更复杂的能力需求，这就引出了 Trait Bounds。
 
 ```text
 形式化映射:
@@ -618,38 +683,66 @@ fn foo<T>() where T: Display + Clone { }  // where 子句
     - 恒等: λx.x
     - 发散: loop {} / panic!
     - 非终止（理论上）
-  即: 类型完全决定行为（Theorems for Free）
+  即: 类型完全决定行为（Theorems for Free, Wadler 1989）
+
+正例锚定:
+  给定类型 fn f<T>(x: T) -> T，无需看实现即可推断其行为空间
+
+反例纠偏:
+  以下代码因缺少约束而无法编译（E0277）:
+    fn max<T>(a: T, b: T) -> T { if a > b { a } else { b } }
+  // error: binary operation `>` cannot be applied to type `T`
+  // 需要 T: PartialOrd
 ```
 
 ### Step 5: 约束系统 — Trait Bounds 与 where 子句
 
 **核心问题**: "怎么限制泛型参数只能是有序/可复制的类型？"
 
-**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区。
+**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区，需要形式化工具验证设计。
 
 ```text
 约束层级:
   无约束:     fn id<T>(x: T) -> T              （参数多态）
   Trait Bound: fn max<T: Ord>(a: T, b: T) -> T  （约束多态）
-  多重约束:   fn foo<T: Ord + Clone + Display>   （合取）
-  HRTB:       fn bar<F>() where F: for<'a> ... （全称量词）
-  Const:      struct Arr<T, const N: usize>      （值参数化）
+  多重约束:   fn foo<T: Ord + Clone + Display>   （合取，需同时满足）
+  HRTB:       fn bar<F>() where F: for<'a> ... （全称量词，生命周期无关）
+  Const:      struct Arr<T, const N: usize>      （值参数化，类型包含值）
+
+正例锚定:
+  fn print<T: Display>(x: T) 比 fn print(x: String) 更通用
+
+反例纠偏:
+  过度约束缩小可用性:
+    // 坏: 要求 Copy 但仅需 Clone
+    fn clone_vec<T: Copy>(v: &[T]) -> Vec<T> { v.to_vec() }
+    // 好: Clone 更宽松，String 可用
+    fn clone_vec<T: Clone>(v: &[T]) -> Vec<T> { v.to_vec() }
 ```
 
 ### Step 6: 形式化掌控 — 设计验证与工程权衡
 
 **核心问题**: "我设计的泛型 API 在类型论上正确吗？工程上高效吗？"
 
-**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（参数多态 ⟹ System F ⟹ 约束可满足性 ⟹ 单态化零成本），可以预判设计决策的远期后果。关键工程权衡包括：泛型 vs dyn Trait（性能 vs 二进制大小）、Const Generics vs 运行时参数（编译期保证 vs 灵活性）、HRTB vs 显式生命周期（表达力 vs 可读性）。
+**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（参数多态 ⟹ System F ⟹ 约束可满足性 ⟹ 单态化零成本），可以预判设计决策的远期后果。关键工程权衡包括：泛型 vs dyn Trait（性能 vs 二进制大小）、Const Generics vs 运行时参数（编译期保证 vs 灵活性）、HRTB vs 显式生命周期（表达力 vs 可读性）。形式化掌控不是要求学习者手写证明，而是能使用"定理一致性矩阵"作为设计检查清单。
 
 ```text
 设计验证清单:
-  □ System F: 泛型参数是否满足良类型性？
-  □ 约束可满足: where 子句是否构成 Horn 子句？
-  □ 单态化代价: 预计实例化数量是否在可接受范围？
-  □ 零成本验证: 性能敏感路径是否避免 dyn Trait？
-  □ Const 边界: 常量参数类型是否受支持？
+  □ System F: 泛型参数是否满足良类型性？（无未绑定类型变量）
+  □ 约束可满足: where 子句是否构成 Horn 子句？（可判定）
+  □ 单态化代价: 预计实例化数量是否在可接受范围？（< 20 个为宜）
+  □ 零成本验证: 性能敏感路径是否避免 dyn Trait？（热路径用单态化）
+  □ 最小约束: 约束是否为所需最小集合？（避免过度约束）
+  □ Const 边界: 常量参数类型是否受支持？（整数/布尔/字符）
   □ HRTB 必要: 是否需要全称量词表达生命周期无关性？
+
+正例锚定:
+  std::iter::Iterator 设计: 关联类型 Item + 最小约束（仅需 Self: Sized）
+
+反例纠偏:
+  以下设计同时违背最小约束和单态化代价原则:
+    fn bad<T: Display + Clone + Ord + 'static>(x: T) { /* 仅用 Display */ }
+    // 过度约束 + 'static 拒绝借用 → API 可用性极低
 ```
 
 ---
@@ -658,18 +751,19 @@ fn foo<T>() where T: Display + Clone { }  // where 子句
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| 泛型通过单态化实现 | [TRPL: Ch10.1] · [Rust Reference: Monomorphization] | ✅ |
-| 单态化产生零成本抽象 | [TRPL: Ch10.1] | ✅ |
-| 单态化导致二进制膨胀 | [Rust Performance Book] | ✅ |
-| Const Generics | [RFC 2000] · [Rust Reference: Const Generics] | ✅ |
-| GATs | [RFC 1598] · [TRPL: Ch19.3] | ✅ |
-| ?Sized 解除默认约束 | [Rust Reference: Dynamically Sized Types] | ✅ |
-| 参数多态对应 System F | [Wikipedia: System F] · [Pierce 2002, Ch.23] | ✅ |
-| System F 原始论文 | [Girard 1972 — PhD Thesis] | ✅ |
-| 类型推断算法 W | [Damas & Milner 1982 — POPL] | ✅ |
-| Parametricity / Theorems for Free | [Wadler 1989 — POPL] | ✅ |
-| 约束多态 | [Cardelli & Wegner 1985] | ✅ |
-| Const Generics 与依赖类型 | [Rust Reference: Const Generics] · 原创分析 | 💡 |
+| 泛型通过单态化实现 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) · [Rust Reference: Monomorphization](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
+| 单态化产生零成本抽象 | [TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html) | ✅ |
+| 单态化导致二进制膨胀 | [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) | ✅ |
+| Const Generics | [RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) | ✅ |
+| GATs | [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) | ✅ |
+| ?Sized 解除默认约束 | [Rust Reference: Dynamically Sized Types](https://doc.rust-lang.org/reference/dynamically-sized-types.html) | ✅ |
+| 参数多态对应 System F | [Wikipedia: System F](https://en.wikipedia.org/wiki/System_F) · [Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/) | ✅ |
+| System F 原始论文 | [Girard 1972 — PhD Thesis](https://www.unige.ch/~girard/thesis.pdf) | ✅ |
+| 类型推断算法 W | [Damas & Milner 1982 — POPL](https://dl.acm.org/doi/10.1145/582153.582176) | ✅ |
+| Parametricity / Theorems for Free | [Wadler 1989 — POPL](https://dl.acm.org/doi/10.1145/75277.75305) | ✅ |
+| 约束多态 | [Cardelli & Wegner 1985](https://dl.acm.org/doi/10.1145/6041.6042) | ✅ |
+| Const Generics 与依赖类型 | [Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html) · 原创分析 | 💡 |
+| 最小能力原则与泛型约束 | [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html) · 原创分析 | 💡 |
 
 ---
 
