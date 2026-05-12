@@ -1011,3 +1011,21 @@ unsafe impl Send for Bad {}  // ⚠️ Rc 非原子计数 → 跨线程 UB
 | **[RustBelt: POPL 2018]** | 并发分离逻辑 (CSL)、Send/Sync 语义 | 形式化根基 §3 |
 | **[Iris: JFP 2018]** | 高阶并发分离逻辑 | RustBelt 基础 |
 | **[Stacked Borrows: POPL 2019]** | 别名模型与并发内存安全 | 内存模型 |
+
+> **过渡: L3 → L4**
+>
+> 本章的并发安全保证建立在编译期类型检查之上，但类型检查的正确性本身需要证明。RustBelt 使用 Iris 分离逻辑将 `Send`/`Sync` 的语义形式化为并发分离逻辑（CSL）中的资源协议，而 Tree Borrows 则用形式化的别名模型精确刻画 "共享 XOR 可变" 在内存层面的含义。
+>
+> 从工程实践到形式化验证的跃迁见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)（Iris 验证框架）与 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md)（别名模型的形式化规则）。
+
+> **过渡: L3 → L5**
+>
+> 并发安全不是 Rust 独有的——Go 用 goroutine + channel、Erlang 用 Actor 模型、C++ 用原子操作和内存序。比较这些方案能揭示 "为什么 Rust 选择类型系统作为并发安全的第一道防线"——不是因为类型系统最强，而是因为它在"零运行时开销"和"编译期保证"之间找到了最优权衡。
+>
+> 对比视角见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（语言谱系定位）。
+
+> **过渡: L3 → L6**
+>
+> `tokio::sync`、`crossbeam`、`rayon`——这些 crate 将标准库的并发原语扩展为工业级工具。理解 "什么时候用标准库、什么时候用第三方" 需要掌握生态层的 crate 选择决策框架。
+>
+> 生态实践见 [`../06_ecosystem/03_core_crates.md`](../06_ecosystem/03_core_crates.md)（核心 crate 选型）。

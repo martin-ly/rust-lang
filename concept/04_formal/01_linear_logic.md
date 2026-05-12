@@ -462,6 +462,12 @@ fn session_demo() {
 
 ---
 
+> **过渡: L4 → L1**
+>
+> 线性逻辑的 `⊗`（tensor）对应 Rust 的元组所有权，`⊸`（lollipop）对应所有权的转移（move），`!`（exponential）对应 `Copy` trait 的 weakening 规则。从形式化符号到编译器实际行为的映射，是理解 "为什么 Rust 不需要垃圾回收" 的理论根基。
+>
+> 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
+
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -480,3 +486,15 @@ fn session_demo() {
 - [ ] **TODO**: 补充 Phase semantics（相位语义）与 Rust 编译期/运行期阶段的直观联系
 - [ ] **TODO**: 补充 Proof nets（证明网）作为并发程序可视化的形式化工具
 - [ ] **TODO**: 补充 Linear Haskell 与 Rust 的跨语言类型系统对比
+
+> **过渡: L4 → L3**
+>
+> 线性逻辑的 `⊗`（tensor）和 `⊸`（lollipop）不是纯理论游戏——它们直接对应 Rust 的元组构造和所有权转移。当你写 `let y = x;` 时，你正在执行一个 lollipop 消除规则；当你写 `let pair = (x, y);` 时，你正在构造一个 tensor 积。
+>
+> 工程对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 作为线性规则的逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发作为线性资源的交互）。
+
+> **过渡: L4 → L5**
+>
+> 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全，但内存安全不需要完整的线性类型系统。
+>
+> 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。

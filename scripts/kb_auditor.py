@@ -80,32 +80,44 @@ def extract_positioning(content: str) -> str:
 
 
 def extract_theorem_chains(content: str) -> list[dict]:
-    """提取 ⟹ 推理链标注"""
+    """提取 ⟹ 推理链标注（排除代码块内）"""
     chains = []
+    in_code_block = False
     for line in content.split("\n"):
         stripped = line.strip()
+        # 代码块边界检测
+        if stripped.startswith("```"):
+            in_code_block = not in_code_block
+            continue
+        if in_code_block:
+            continue
         if "⟹" not in stripped:
             continue
         # 表格行
         if stripped.startswith("|"):
             chains.append({"text": stripped, "type": "table_row"})
         # 引用段落、定义段落、定理/引理/推论段落
-        elif any(stripped.startswith(p) for p in ("> **", "##", "###", "**", "- ", "  ")):
+        elif any(stripped.startswith(p) for p in ("> **", "##", "###", "**", "- ", "  ", "> ")):
             chains.append({"text": stripped, "type": "paragraph"})
         # 独立行中包含定理相关关键词
-        elif any(kw in stripped for kw in ("定理", "引理", "推论", "公理", "前提", "结论")):
+        elif any(kw in stripped for kw in ("定理", "引理", "推论", "公理", "前提", "结论", "证明", "定理")):
             chains.append({"text": stripped, "type": "paragraph"})
+        # 正文中的独立 ⟹ 行（新增）
+        elif stripped and not stripped.startswith("|"):
+            chains.append({"text": stripped, "type": "inline"})
     return chains
 
 
 def extract_anti_propositions(content: str) -> list[dict]:
-    """提取反命题决策树"""
+    """提取反命题决策树（支持多种标题格式）"""
     anti = []
-    for match in re.finditer(r"^### (7\.\d+)\s+(.+)$", content, re.MULTILINE):
-        anti.append({
-            "id": match.group(1),
-            "title": match.group(2).strip(),
-        })
+    # 匹配: ### 7.1 反命题... / ### 5.2 反命题决策树 / ## 四、反命题...
+    # 也匹配: ### 反例：... / ### 6.3 反命题 1: "..."
+    pattern = r"^#{2,3}\s*(?:[\d一二三四五六七八九十\.\s、]+)?(?:反命题|反例|边界分析)"
+    for match in re.finditer(pattern, content, re.MULTILINE | re.IGNORECASE):
+        # 提取整行作为标题
+        line = match.group(0).strip()
+        anti.append({"title": line})
     return anti
 
 
@@ -166,7 +178,7 @@ def extract_cognitive_path(content: str) -> bool:
         r"^##\s*[〇零一二三四五六七八九十]+[、A-Za-z\-\s]*认知路径",
         r"^##\s*\d+\s*[\.、]?\s*认知路径",
         r"^##\s*认知路径",
-        r">\s*\*\*认知路径\*\*",
+        r">\s*\*\*认知路径",
         r"^#+\s*Cognitive Path",
     ]
     for pat in patterns:

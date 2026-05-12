@@ -1849,3 +1849,21 @@ graph TD
 - [ ] **中**: 补充具体 benchmark 数据（编译时间、运行时性能、内存占用）
 - [ ] **中**: 补充混合 Rust+C++ 项目的 FFI 最佳实践
 - [ ] **低**: 补充 CMU/Stanford 等课程中对 Rust vs C++ 的教学对比
+
+> **过渡: L5 → L1**
+>
+> C++ 和 Rust 都声称支持 RAII，但 Rust 的所有权是编译期强制的，而 C++ 的 RAII 依赖程序员自律。这种差异不是工程选择，而是类型系统的根本不同——Rust 的 `Box<T>` 在类型层面编码了唯一所有权，C++ 的 `unique_ptr` 只是运行时约定。
+>
+> 深入所有权的类型系统根基见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)。
+
+> **过渡: L5 → L4**
+>
+> C++ 的内存模型（C++11 memory model）与 Rust 的别名模型（SB/TB）都试图形式化 "什么内存访问是合法的"，但出发点不同：C++ 从多线程同步出发，Rust 从所有权出发。比较两者的形式化精度，能揭示 "零成本抽象" 的安全边界究竟在哪里。
+>
+> 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §11（别名模型对比）。
+
+> **过渡: L5 → L7**
+>
+> C++23 的 Concepts 和 Coroutines、Rust 的 GATs 和 Async/Await——两种语言都在向 "更精确的类型表达" 演进，但路径不同。C++ 向后兼容优先，Rust 可以打破兼容（Edition 系统）。这种设计哲学的差异决定了两者在未来 10 年的演进轨迹。
+>
+> 演进对比见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）。

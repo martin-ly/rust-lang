@@ -168,16 +168,79 @@ graph TD
 
 > **[Rust Reference: Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits)** · **[TRPL: Ch16](https://doc.rust-lang.org/book/ch16-04-extensible-concurrency-sync-and-send.html)** Auto Trait 的自动实现基于结构成员递归检查，是编译器自动证明的特例。 ✅ 已验证
 
-```text
-前提 1: Auto trait 声明为 unsafe auto trait
-前提 2: 类型的所有字段都实现了该 Auto Trait
-    ↓
-引理: 结构化推导 — 复合类型的属性由其字段属性决定
-    ↓
-推论: 编译器自动为符合条件的类型实现 Send/Sync/Sized/Unpin
-    ↓
-边界: 可通过 unsafe impl 手动覆盖（负向实现 unstable），原始指针保守默认为 !Send/!Sync
+#### 定义与语法
+
+Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。标准库中最重要的 Auto trait 是 `Send` 和 `Sync`：
+
+```rust
+pub unsafe auto trait Send {}
+pub unsafe auto trait Sync {}
 ```
+
+与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全与线程安全的正确性责任。
+
+#### 自动推导规则
+
+编译器对 Auto trait 的实现遵循**结构化归纳推导**：
+
+```text
+前提 1: Trait 声明为 unsafe auto trait
+前提 2: 复合类型的所有字段都实现了该 Auto Trait
+    ↓
+引理: 结构化推导 — 类型的 Auto Trait 属性由其字段属性递归决定
+    ↓
+推论: 若所有字段满足条件，编译器自动为该类型实现 Send/Sync/Unpin
+    ↓
+边界: 可通过 unsafe impl 手动覆盖；原始指针保守默认为 !Send/!Sync
+```
+
+具体规则如下：
+
+| **类型构造** | **Send 推导条件** | **Sync 推导条件** | **备注** |
+|:---|:---|:---|:---|
+| `struct Foo<T>` | 所有字段 `T: Send` | 所有字段 `T: Sync` | 逐字段递归检查 |
+| `enum Bar` | 所有变体的所有字段满足 | 所有变体的所有字段满足 | 取变体并集 |
+| `Vec<T>` | `T: Send` | `T: Sync` | 标准库内部已声明 |
+| `*const T` / `*mut T` | ❌ 默认 !Send | ❌ 默认 !Sync | 原始指针保守策略 |
+| `Rc<T>` | ❌ !Send（非原子引用计数） | ❌ !Sync | 内部状态非线程安全 |
+| `PhantomData<T>` | `T: Send` | `T: Sync` | 零大小，仅作标记 |
+
+```rust
+// ✅ 自动推导示例
+struct Point { x: i32, y: i32 }           // Send + Sync（i32 是）
+struct Wrapper<T>(T);                     // Wrapper<T>: Send 当且仅当 T: Send
+
+// ❌ 保守排除示例
+struct RawBox(*mut u8);                   // 默认 !Send/!Sync
+struct Mixed {
+    data: Vec<u8>,
+    ptr: *const u8,
+}                                         // 默认 !Send（ptr 不满足）
+```
+
+#### `unsafe impl` 的例外情况
+
+当编译器的保守推导过于严格时，开发者可通过 `unsafe impl` 手动声明实现：
+
+```rust
+struct MyPtr(*mut u8);
+
+// 开发者保证：该指针总是指向线程安全的堆内存
+unsafe impl Send for MyPtr {}
+unsafe impl Sync for MyPtr {}
+```
+
+在不稳定特性（`negative_impls`）下，还可显式**否定**自动推导：
+
+```rust
+#![feature(negative_impls)]
+struct RawFd(i32);
+
+impl !Send for RawFd {}  // 显式阻止自动 Send
+impl !Sync for RawFd {}  // 显式阻止自动 Sync
+```
+
+> **⚠️ 安全边界**: `unsafe impl Send/Sync` 是 Rust 并发抽象的安全根基。错误的实现会导致数据竞争、悬垂指针等未定义行为（UB）。仅在类型内部同步机制（如 Mutex、原子操作）确实保证线程安全时才应手动实现。一旦违反，整个程序的类型系统保证即告失效。
 
 ### 4.4 Trait + 泛型 ⟹ 零成本抽象
 
@@ -337,6 +400,101 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 // 优点: 隐藏实现细节，仍享有静态分发优化
 // 限制: 不能返回多种不同类型（除非 dyn Trait）
 ```
+
+### 5.6 正确示例：Generic Associated Types (GATs)
+
+> **[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)** · **[Rust Reference: Generic Associated Types](https://doc.rust-lang.org/reference/items/associated-items.html#associated-types)** GATs 允许关联类型携带自己的泛型参数，是 Rust 对 System Fω 中类型族（type family）的部分模拟。 ✅ 已验证
+
+#### 语法与动机
+
+普通关联类型只能表达"每个实现者对应一个类型"：
+
+```rust
+trait Iterator {
+    type Item;           // 无泛型参数
+    fn next(&mut self) -> Option<Self::Item>;
+}
+```
+
+GATs 将这一能力扩展到"每个实现者对应一个类型构造器"：
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;  // 关联类型带生命周期参数
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+#### 与 HKT（Higher-Kinded Types）的关系
+
+Haskell 等语言通过 HKT 直接操作类型构造器（如 `* -> *`）。Rust 有意避免引入完整的 HKT 系统，因为：
+
+- HKT 会显著增加类型系统的复杂性和编译器实现成本；
+- GATs 在工程实践中已能覆盖 HKT 的绝大多数使用场景。
+
+GATs 本质上是**受限的 HKT 模拟**：关联类型上的泛型参数允许表达"类型族"，而不需要类型构造器作为一等公民。
+
+#### Lending Iterator 示例
+
+GATs 的经典用例是"出借迭代器"——每次 `next` 返回的引用生命周期依赖于 `self` 的借用：
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+struct Windows<'t, T> {
+    slice: &'t [T],
+    size: usize,
+}
+
+impl<'t, T> LendingIterator for Windows<'t, T> {
+    // 每次返回的切片生命周期与 &mut self 相同
+    type Item<'a> = &'a [T] where Self: 'a;
+
+    fn next<'a>(&'a mut self) -> Option<&'a [T]> {
+        let window = self.slice.get(..self.size)?;
+        self.slice = &self.slice[1..];
+        Some(window)
+    }
+}
+```
+
+> 普通 `Iterator` 无法表达 `Item` 依赖于 `&mut self` 生命周期的情况，因为 `type Item` 不允许带参数。
+
+#### 为什么 GATs 解决了关联类型不能泛型的问题
+
+在 GATs 之前，若 trait 需要与泛型参数相关的类型，只能将泛型参数提升到 trait 本身：
+
+```rust
+// GATs 之前：笨拙的 trait 级泛型
+trait Convert<Input> {
+    type Output;
+    fn convert(input: Input) -> Self::Output;
+}
+```
+
+这会导致 impl 和使用处的泛型参数爆炸。GATs 将泛型参数下放到关联类型，使 trait 签名保持简洁：
+
+```rust
+// GATs 之后：trait 简洁，关联类型承载泛型
+trait Convert {
+    type Output<Input>;
+    fn convert<Input>(input: Input) -> Self::Output<Input>;
+}
+```
+
+**核心优势总结**：
+
+| **维度** | **普通关联类型** | **GATs** |
+|:---|:---|:---|
+| 表达能力 | 一对一（类型 → 类型） | 一对多（类型 → 类型族） |
+| trait 签名 | 可能臃肿（trait 级泛型） | 简洁（泛型在关联类型） |
+| 典型场景 | `Iterator::Item` | `LendingIterator`、`类型级映射` |
+| 编译器支持 | 稳定 | 稳定（Rust 1.65+） |
+
+> **⚠️ 边界**: GATs 要求 `where Self: 'a` 等约束来确保生命周期合法；无界递归或矛盾的关联类型约束仍会导致编译错误（E0275、E0049）。
 
 > **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
 

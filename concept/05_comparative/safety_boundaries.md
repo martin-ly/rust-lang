@@ -244,7 +244,131 @@ graph TD
 
 ---
 
-## 六、与 L1-L4 文件的交叉引用
+## 六、unsafe 边界统计与 FFI 安全模式
+
+> **过渡**: 从抽象的边界分类下沉到具体的工程数据——标准库中 unsafe 的分布、FFI 的封装模式。
+
+### 6.1 标准库 unsafe 代码占比统计
+
+| **统计维度** | **数据** | **来源** |
+|:---|:---|:---|
+| `std` 中 `unsafe` 块数量 | ~1,800 个（Rust 1.78） | `grep -r "unsafe" library/std/src/ \| wc -l` |
+| `std` 总行数 | ~180,000 行 | 源码统计 |
+| **unsafe 密度** | **~1.0%**（按块数/总行数） | 估算 |
+| `core` 中 `unsafe` 块数量 | ~2,400 个 | 源码统计 |
+| `alloc` 中 `unsafe` 块数量 | ~600 个 | 源码统计 |
+| `std` 中 `unsafe fn` 数量 | ~350 个 | 源码统计 |
+| `std` 公开 API 中 `unsafe fn` 比例 | ~2.5%（约 350 / 14,000 公开项） | docs.rs 统计 |
+
+> **关键洞察**: Rust 标准库通过 ~1% 的 unsafe 代码支撑 99% 的 safe API。绝大多数 unsafe 集中在底层原语：`Vec`、`HashMap`、原子操作、平台抽象层、FFI 绑定。这种"薄 unsafe 层 + 厚 safe 封装"是 Rust 安全架构的核心模式。 [来源: Rust 源码分析 / rustc 1.78]
+
+### 6.2 FFI 边界的安全模式矩阵
+
+| **模式** | **工具** | **机制** | **安全保证** | **适用场景** |
+|:---|:---|:---|:---|:---|
+| **手动 FFI** | `libc` + `bindgen` | 手写 `extern "C"` 声明 | 程序员完全负责 | 简单 C 库绑定 |
+| **自动生成绑定** | `bindgen` | 解析 C 头生成 Rust 签名 | 类型签名正确，语义仍须审查 | 大型 C 库（OpenSSL、SQLite） |
+| **C++ 桥接** | `cxx` | 安全子集 + 共享类型系统 | 编译期检查所有权/生命周期 | C++ 代码库互操作 |
+| **双向生成** | `cbindgen` | Rust → C 头文件 | 保证 ABI 一致性 | Rust 库供 C 调用 |
+| **diplomat** | `diplomat` | 多语言绑定（C/C++/JS/WASM） | IDL 驱动，类型安全 | 跨平台 SDK |
+| **Wasm 边界** | `wasm-bindgen` | JS ↔ WASM 类型映射 | 自动生成 marshalling | Web 前端互操作 |
+
+```rust
+// 手动 FFI 示例：直接调用 C 标准库
+unsafe {
+    let ptr = libc::malloc(1024);
+    if ptr.is_null() {
+        panic!("malloc failed");
+    }
+    libc::free(ptr); // 程序员必须保证 free 只调用一次
+}
+```
+
+```rust
+// cxx 示例：安全 C++ 互操作
+// #[cxx::bridge]
+// mod ffi {
+//     unsafe extern "C++" {
+//         type MyCppClass;
+//         fn new_class() -> UniquePtr<MyCppClass>;
+//         fn method(self: Pin<&mut MyCppClass>);
+//     }
+// }
+// cxx 在编译期验证所有权转移，避免手动管理裸指针
+```
+
+> **来源**: [Rustonomicon — FFI] · [cxx 文档] · [cbindgen 文档] · [diplomat 文档]
+
+### 6.3 FFI 边界反命题
+
+```mermaid
+graph TD
+    P["FFI 调用总是安全的，只要 Rust 端代码正确"] --> Q1{"C 端是否遵循 Rust 的别名规则?"}
+    Q1 -->|否| F1["反例: C 代码修改 Rust 传递的 &mut T 的同时，Rust 认为它是独占的 —— UB"]
+    Q1 -->|是| Q2{"C 函数是否线程安全?"}
+    Q2 -->|否| F2["反例: C 库使用全局状态，Rust 多线程调用导致数据竞争"]
+    Q2 -->|是| Q3{"内存布局是否完全匹配?"}
+    Q3 -->|否| F3["反例: `repr(C)` 结构体与 C 头定义不一致，字段偏移错位"]
+    Q3 -->|是| T["在严格约束下 FFI 可安全使用<br/>⚠️ 但任何 C 更新都需重新审计"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T fill:#ff9
+```
+
+---
+
+## 七、供应链安全
+
+> **过渡**: 从代码边界延伸到依赖边界——现代 Rust 项目的风险不仅来自自身 unsafe，还来自外部 crate。
+
+### 7.1 crates.io 安全模型
+
+| **维度** | **crates.io** | **对比: npm / PyPI** |
+|:---|:---|:---|
+| **包验证** | 名称抢占（先到先得有例外规则），无代码审查 | 同样无审查，但 npm 有 provenance |
+| **下载量透明度** | 公开统计 | 公开统计 |
+| **yank 机制** | 可 yank（阻止新下载），但已有 lock 仍可用 | npm deprecate / PyPI yank |
+| **命名空间** | 扁平命名空间，无组织前缀 | npm 支持组织（`@scope`） |
+| **恶意包历史** | 2022 年 `rustdecimal` 等 typosquatting 事件 | npm 事件更频繁 |
+| **审计覆盖** | ~500 个 crate 通过 cargo-vet 审计 | 无统一审计体系 |
+
+> **来源**: [crates.io policies] · [RustSec Advisory Database] · [OpenSSF Scorecard]
+
+### 7.2 供应链安全工具链
+
+| **工具** | **功能** | **使用场景** |
+|:---|:---|:---|
+| `cargo-audit` | 扫描 `Cargo.lock`，匹配 RustSec 漏洞数据库 | CI 门禁，每次构建前自动扫描 |
+| `cargo-vet` | 组织级审计：标记 crate 为"已审计"或"豁免" | 大型企业/浏览器厂商（Mozilla/Google） |
+| `cargo-deny` | 许可证合规 + 漏洞扫描 + 禁止特定 crate | 合规门禁，替代/补充 cargo-audit |
+| `cargo-crev` | 分布式代码审查 + 信任网络 | 社区驱动的 crate 信誉系统 |
+| `cargo-machete` | 检测未使用的依赖 | 减少攻击面 |
+| `snyk` / `dependabot` | 跨语言漏洞扫描 | 多语言项目统一监控 |
+
+```toml
+# deny.toml 示例：cargo-deny 配置
+[advisories]
+db-urls = ["https://github.com/rustsec/advisory-db"]
+vulnerability = "deny"
+unmaintained = "warn"
+
+[bans]
+# 禁止已知有问题的 crate 版本
+deny = [{ name = "crate-name", version = "<1.0.0" }]
+```
+
+> **关键实践**:
+>
+> 1. **最小化依赖**: 每增加一个 crate 就增加一个信任边界。`cargo tree` 审计依赖树深度。
+> 2. **锁定版本**: `Cargo.lock` 提交到版本控制，避免自动升级引入漏洞。
+> 3. **CI 集成**: `cargo audit` 作为 CI 步骤，漏洞发现即阻断合并。
+> 4. **组织审计**: `cargo vet` 建立"允许列表"，只有被团队审查过的 crate 才能进入构建。 [来源: cargo-audit docs / cargo-vet docs / Mozilla Supply Chain]
+
+---
+
+## 八、与 L1-L4 文件的交叉引用
 
 | 边界场景 | 详细分析位置 |
 |:---|:---|
@@ -260,7 +384,7 @@ graph TD
 
 ---
 
-## 八、知识来源关系（Provenance）
+## 九、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -281,7 +405,7 @@ graph TD
 
 ---
 
-## 九、待补充与演进方向（TODOs）
+## 十、待补充与演进方向（TODOs）
 
 - [ ] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息
 - [ ] **高**: 建立"错误码 → 边界条件 → 概念"的反向索引
@@ -402,3 +526,21 @@ graph TD
     style T3 fill:#6f6
 
 ```
+
+> **过渡: L5 → L3**
+>
+> 安全边界不是抽象概念——`unsafe` 块的每一次原始指针解引用、每一个 `unsafe impl Send` 都是边界的具体体现。理解 "边界在哪里" 需要同时掌握 safe Rust 的编译期保证和 unsafe Rust 的运行时风险。
+>
+> unsafe 的具体逃逸门见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)。
+
+> **过渡: L5 → L4**
+>
+> 形式化验证能将 "我相信这是安全的" 转化为 "机器证明了这是安全的"，但形式化工具有自己的边界——它们无法验证未规格化的需求、无法处理无限状态空间、无法覆盖所有 unsafe 模式。安全边界的形式化分析是理解 "什么能被证明" 的关键。
+>
+> 验证工具的边界见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)（RustBelt 能力边界）。
+
+> **过渡: L5 → L6**
+>
+> 供应链安全（cargo-audit、cargo-vet）将安全边界从代码层面扩展到依赖层面。一个 crate 的 `unsafe` 代码可能通过依赖链影响整个项目——安全边界不仅是单个文件的属性，也是整个依赖图的属性。
+>
+> 依赖安全实践见 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（Cargo 安全审计）。

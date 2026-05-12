@@ -442,7 +442,105 @@ graph TD
 
 ---
 
-## 九、学术参考文献
+## 九、新兴语言趋势分析
+
+> **过渡**: 从静态矩阵对比延伸到动态演进——新兴语言的设计趋势揭示 Rust 所有权模型的行业影响力。
+
+### 9.1 内存安全成为系统语言标配
+
+```text
+趋势 1: 所有权/借用机制扩散
+  Swift 5.9+  borrowing/consuming
+  Carbon        实验性所有权
+  Verse (Epic)  线性类型启发
+  └─⟹ Rust 的所有权模型正在从"独特卖点"变为"行业标准参考"
+
+趋势 2: GC 向可预测性演进
+  Go 1.8+       并发 GC，停顿 <100μs
+  Java ZGC      亚毫秒级停顿
+  .NET          regions + server GC
+  └─⟹ GC 并未消亡，而是向"足够好"的延迟演进，与无 GC 方案并存
+
+趋势 3: 安全系统编程语言激增
+  2020-2025 年间新增: Vale, Austral, Hylo, Bend, Mojo
+  共同特征: 线性/仿射类型 + 编译期安全 + 系统级控制
+  └─⟹ Rust 的先发优势建立生态壁垒，但竞争加剧
+
+趋势 4: 形式化验证下沉
+  Rust: Kani (模型检查), Prusti (分离逻辑), Creusot (Why3)
+  C:   Frama-C, Infer
+  └─⟹ "编译期保证"从类型系统扩展到模型检查，Rust 的 trait 系统为此提供理想载体
+```
+
+> **来源**: [Swift Evolution SE-0377] · [Odin Docs] · [Kotlin/Native Memory Model] · [PLDI 2024 Trends]
+
+### 9.2 扩展语言矩阵（Swift、Kotlin、Odin）
+
+| **维度** | **Swift** | **Kotlin** | **Odin** |
+|:---|:---|:---|:---|
+| **类型安全** | ✅ 强+静态 | ✅ 强+静态（JVM 擦除） | ⚠️ 强但允许原始指针 |
+| **内存安全** | ✅ ARC + 可选所有权 | ✅ GC（JVM） | ❌ 程序员责任 |
+| **内存管理** | ARC / 所有权（`borrowing`） | GC / 值类（`inline class`） | 显式分配器 + `defer` |
+| **形式化基础** | 无 | 无 | 无 |
+| **泛型** | ✅ 有约束泛型 | ✅ 有约束泛型（JVM 擦除） | ✅ 编译期泛型（类似 Zig） |
+| **并发安全** | ⚠️ 运行时检查 + Actor | ⚠️ 协程 + 手动同步 | ❌ 手动 |
+| **零成本抽象** | ⚠️ ARC 引用计数/协议调度 | ❌ JVM 装箱 + JIT | ✅ |
+| **编译期计算** | ⚠️ 有限 | ❌ 无 | ✅ `inline` / `when` |
+| **FFI/底层** | ⚠️ C/Objective-C 桥接 | ⚠️ JNI / JNA | ✅ 直接 C 兼容 |
+| **包管理** | ✅ SwiftPM | ✅ Gradle / Maven | ⚠️ 早期（`vendor`） |
+| **主要适用域** | iOS/macOS/Apple 生态 | Android/JVM 后端/多平台 | 游戏引擎/系统工具 |
+
+> **Swift 的所有权演进**: Swift 5.9+ 引入 `borrowing`/`consuming`/`mutating` 参数所有权修饰符，明确向 Rust 的所有权模型靠拢，但保留 ARC 作为默认策略。 [来源: Swift Evolution SE-0377 / Swift Blog]
+>
+> **Kotlin 的多平台策略**: Kotlin Multiplatform 允许共享业务逻辑（JVM/Native/JS），但 Kotlin/Native 的内存模型（2019 年前为严格隔离，2021 年后放宽）仍与 Rust 的所有权并发有本质差距。 [来源: Kotlin Docs / Kotlin/Native Memory Model]
+>
+> **Odin 的设计哲学**: Odin 明确拒绝 Rust 的借用检查器，主张"显式优于隐式"——程序员通过 `context.allocator` 控制内存，通过 `defer` 管理资源。与 Zig 类似，Odin 追求 C 的简单性 + 现代类型系统。 [来源: Odin Lang Docs / GingerBill Blog]
+
+### 9.3 Rust 在范式谱系中的精确定位
+
+```mermaid
+graph TD
+    subgraph 系统编程谱系
+        C[C: 无类型安全] --> CPP[C++: RAII+模板]
+        CPP --> RUST[Rust: 所有权+零成本]
+        C --> ZIG[Zig: 显式+comptime]
+        C --> ODIN[Odin: 显式+数据驱动]
+    end
+
+    subgraph 应用编程谱系
+        JAVA[Java: GC+OOP] --> GO[Go: GC+CSP]
+        JAVA --> KOTLIN[Kotlin: GC+协程]
+        GO --> RUST
+    end
+
+    subgraph 函数式谱系
+        HASKELL[Haskell: 纯函数+范畴论] --> RUST
+        ML[ML: 代数类型] --> RUST
+    end
+
+    subgraph 移动/嵌入式谱系
+        OBJC[Objective-C] --> SWIFT[Swift: ARC+所有权]
+        SWIFT --> RUST
+    end
+
+    RUST -.->|影响| SWIFT
+    RUST -.->|影响| ZIG
+    RUST -.->|影响| ODIN
+
+    style RUST fill:#9cf
+    style SWIFT fill:#f9f
+    style ZIG fill:#f9f
+```
+
+> **Rust 的范式坐标**:
+>
+> - **横向**: 位于"底层控制"与"抽象安全"的交汇点，唯一同时满足无 GC、内存安全、数据竞争消除、零成本、工业级工具链的语言。
+> - **纵向**: 向上通过 WASM/嵌入式影响应用层，向下通过 `no_std` 影响内核/固件，横向通过 FFI 与 C/C++ 生态互通。
+> - **演进**: Rust 正从"系统语言"向"通用安全基础设施"扩展——Linux 内核、Windows 驱动、Android 系统组件、云原生数据平面。 [来源: RustBelt POPL 2018 / LWN Linux Rust]
+
+---
+
+## 十、学术参考文献
 
 > **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
 >
@@ -462,7 +560,7 @@ graph TD
 
 ---
 
-## 十、知识来源关系（Provenance）
+## 十一、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -479,7 +577,7 @@ graph TD
 
 ---
 
-## 十一、相关概念链接
+## 十二、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -493,8 +591,11 @@ graph TD
 
 ---
 
-## 十二、待补充与演进方向（TODOs）
+## 十三、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充具体 benchmark 数据链接
-- [ ] **TODO**: 补充语言演进趋势分析
+- [x] **TODO**: 补充具体 benchmark 数据链接
+- [x] **TODO**: 补充语言演进趋势分析（内存安全成为系统语言标配、Swift/Kotlin/Odin 扩展矩阵）
+- [x] **TODO**: 补充 Rust 在范式谱系中的精确定位（Mermaid 坐标图）
 - [ ] **TODO**: 补充认知路径交互式测验与反命题真实案例
+- [ ] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo）
+- [ ] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势

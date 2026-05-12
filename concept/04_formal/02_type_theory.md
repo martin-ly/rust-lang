@@ -519,6 +519,12 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ---
 
+> **过渡: L4 → L2**
+>
+> System F 的 `Λα.λx:α. x` 在 Rust 中写作 `fn identity<T>(x: T) -> T { x }`，但 System F 无法表达生命周期——后者需要 **System F_ω + 区域类型** 的扩展。HRTB 的 `for<'a>` 是全称量词 `∀` 在类型约束中的具体实现，而 GATs 则用类型族（type family）模拟了 Haskell 中缺失的 HKT。
+>
+> Rust 的具体实现见 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型与单态化）与 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 作为 Type Class 的变体）。
+
 ## 十一、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -539,3 +545,15 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 - [ ] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 预计: Phase 1
 - [ ] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期映射 —— 优先级: 中 —— 预计: Phase 2
+
+> **过渡: L4 → L3**
+>
+> 类型论中的全称量词 `∀α.τ` 在 Rust 中就是 `fn foo<T>(x: T)`，存在量词 `∃α.τ` 就是 `impl Trait`。类型论不是抽象数学——它是编译器类型检查算法的理论基础。理解 HM 算法如何推导 `let x = 5` 的类型，就是理解 `rustc` 如何处理 90% 的日常代码。
+>
+> 编译器实现见 [`../03_advanced/04_macros.md`](../03_advanced/04_macros.md)（宏扩展与类型检查交互）与 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（编译流程）。
+
+> **过渡: L4 → L7**
+>
+> Rust 的类型系统正在向更丰富的方向发展：Effects System 将副作用编码为类型约束、Generic Const Items 允许常量作为类型参数、Type Alias Impl Trait 简化存在类型的表达。这些演进不是偶然——它们都是类型论中已有概念的工程化落地。
+>
+> 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法的未来）。

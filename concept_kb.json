@@ -12,7 +12,11 @@
       "positioning": "本文件定义 `concept/` 知识体系的**质量门禁**，用于定期审计概念文件的一致性、完备性和关系清晰度。",
       "line_count": 180,
       "theorem_chains": [],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 三、反例"
+        }
+      ],
       "code_blocks": [],
       "sources": [],
       "cross_references": [],
@@ -35,12 +39,7 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "Wave 11 等价表达速查"
-        },
-        {
-          "id": "7.1",
-          "title": "反例 → 概念 速查索引"
+          "title": "### 7.1 反例"
         }
       ],
       "code_blocks": [],
@@ -88,58 +87,6 @@
         {
           "text": "| — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |",
           "type": "table_row"
-        },
-        {
-          "text": "[定理: Send/Sync 充分性]    Send + Sync ⟹ 无数据竞争",
-          "type": "paragraph"
-        },
-        {
-          "text": "目标定理: Rust 类型系统 + 借用检查器 ⟹ 无数据竞争 ∧ 无悬垂指针 ∧ 无 use-after-free",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 1 (L1): 所有权唯一性 ⟹ 无 double-free",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 2 (L1): 借用规则 (AXM) ⟹ 无数据竞争",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 3 (L1): 生命周期约束 ⟹ 无悬垂指针",
-          "type": "paragraph"
-        },
-        {
-          "text": "组合定理 (L2-L3): Send + Sync ⟹ 跨线程安全",
-          "type": "paragraph"
-        },
-        {
-          "text": "形式化完备 (L4): RustBelt ⟹ 上述所有定理可机械验证",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 1 (L4): HM 类型推断 + Trait 约束 ⟹ 可判定",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 2 (L4): 区域约束系统 ⟹ 可满足性可判定",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 3 (L2-L3): 单态化 ⟹ 零成本抽象",
-          "type": "paragraph"
-        },
-        {
-          "text": "目标定理: async/await + Pin ⟹ 自引用结构安全",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 1 (L3): Pin<&mut T> ⟹ T 在内存中不可移动",
-          "type": "paragraph"
-        },
-        {
-          "text": "子定理 2 (L3): Future 轮询 ⟹ 协作式多任务安全",
-          "type": "paragraph"
         },
         {
           "text": "| 无数据竞争 | L1 + L3 | 借用规则 ⟹ AXM ⟹ 并发安全 | ✅ 一致 |",
@@ -196,10 +143,10 @@
       "layer": "L0",
       "title": "Rust 知识体系学习指南（Learning Guide）",
       "positioning": "本文件是 `concept/` 知识体系的**用户手册**，回答三个核心问题——\"我应该从哪里开始？\"\"按什么顺序读？\"\"如何验证自己掌握了？\"",
-      "line_count": 287,
+      "line_count": 303,
       "theorem_chains": [
         {
-          "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？<br>2. ⟹ 推理链的格式要求是什么？ |",
+          "text": "| `methodology.md` | 0.5h | — | 理解本知识体系的组织方法论 | 1. Bloom 层级如何映射到文件层级？2. ⟹ 推理链的格式要求是什么？ |",
           "type": "table_row"
         },
         {
@@ -213,7 +160,7 @@
           "flags": [
             "` 代码块，观察编译结果"
           ],
-          "lines": 51,
+          "lines": 55,
           "should_fail": false,
           "code_preview": "2. **修改实验**：故意修改代码使其编译失败，理解错误信息 3. **扩展练习**：基于代码示例写一个变体，验证理解  ---  ## 五、常见困难与突破建..."
         }
@@ -238,16 +185,7 @@
       "theorem_chains": [],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "语义链接类型"
-        },
-        {
-          "id": "7.2",
-          "title": "跨层映射规范"
-        },
-        {
-          "id": "7.3",
-          "title": "交叉概念一致性"
+          "title": "### 8.2 反命题"
         }
       ],
       "code_blocks": [
@@ -270,7 +208,7 @@
       "layer": "L0",
       "title": "Rust 概念速查卡片（Quick Reference）",
       "positioning": "面试前/编码时的快速查阅手册。每个核心概念\"一页纸\"——定义 + 代码 + 错误码 + 关联概念。",
-      "line_count": 535,
+      "line_count": 628,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -456,7 +394,7 @@
       "layer": "L0",
       "title": "Rust 知识体系自测题库（Self-Assessment）",
       "positioning": "每个层级配套的自测题，用于验证知识掌握程度。答案和解析附在每题之后（可折叠）。",
-      "line_count": 779,
+      "line_count": 855,
       "theorem_chains": [],
       "anti_propositions": [],
       "code_blocks": [
@@ -661,16 +599,7 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "\"Rust 可以表达任何程序\""
-        },
-        {
-          "id": "7.2",
-          "title": "\"safe Rust 的封闭性限制了表达力\""
-        },
-        {
-          "id": "7.3",
-          "title": "\"Rust 的等价表达与其他语言完全等价\""
+          "title": "## 七、反命题"
         }
       ],
       "code_blocks": [
@@ -807,32 +736,21 @@
         {
           "text": "| **C2: 无所有权 ⟹ 裸指针危险** | C1 + 裸指针 `*const T`/`*mut T` | 无编译器保护，UB 风险完全由程序员承担 | 无（超出 Safe Rust 公理） | — | 悬垂指针、类型混淆、未对齐访问、UAF | — |",
           "type": "table_row"
+        },
+        {
+          "text": "> `L1(所有权唯一性) ⟹ L2(Move一致) ⟹ T1(RAII释放) ⟹ T2(无DF) + T3(无UAF) + T4(&mut唯一) ⟹ T5(无数据竞争) ⟹ C3(Safe Rust完备性)`；`C1(无所有权⇒无Drop) ⟹ C2(裸指针危险)`",
+          "type": "paragraph"
         }
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "正确示例：所有权转移"
+          "title": "### 7.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "正确示例：Copy 类型"
+          "title": "### 7.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "反例：使用已 move 的值（编译错误 E0382）"
-        },
-        {
-          "id": "7.4",
-          "title": "反例：在函数间错误地假设所有权保留"
-        },
-        {
-          "id": "7.5",
-          "title": "反命题与边界分析"
-        },
-        {
-          "id": "7.6",
-          "title": "边界极限测试代码"
+          "title": "### 7.5 反命题"
         }
       ],
       "code_blocks": [
@@ -1031,36 +949,13 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "正确示例：不可变借用共存"
+          "title": "### 7.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "正确示例：可变借用的独占性"
+          "title": "### 7.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "反例：可变 + 不可变借用共存（E0502）"
-        },
-        {
-          "id": "7.4",
-          "title": "反例：多个可变借用（E0499）"
-        },
-        {
-          "id": "7.5",
-          "title": "边界示例：Two-Phase Borrows"
-        },
-        {
-          "id": "7.6",
-          "title": "反命题与边界分析"
-        },
-        {
-          "id": "7.7",
-          "title": "边界极限测试代码"
-        },
-        {
-          "id": "7.7",
-          "title": "国际课程与论文对齐"
+          "title": "### 7.6 反命题"
         }
       ],
       "code_blocks": [
@@ -1244,7 +1139,7 @@
       "layer": "L1",
       "title": "Lifetimes（生命周期）",
       "positioning": "Polonius 是 Rust 的下一代借用检查器，以 **Datalog 约束求解** 替代当前的基于集合的区域推断，能编译更多当前系统拒绝的**合法程序**。",
-      "line_count": 751,
+      "line_count": 920,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡",
@@ -1263,10 +1158,6 @@
           "type": "paragraph"
         },
         {
-          "text": "公理: 'a ⊑ 'b 且 'b ⊑ 'c  ⟹  'a ⊑ 'c（传递性）",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性",
           "type": "paragraph"
         },
@@ -1276,10 +1167,6 @@
         },
         {
           "text": "### 4.5 定理：Variance 子类型安全 ⟹ 生命周期替换的合法性",
-          "type": "paragraph"
-        },
-        {
-          "text": "结论: 'long ⊇ 'short  ⟹  &'long T <: &'short T（协变安全）",
           "type": "paragraph"
         },
         {
@@ -1301,16 +1188,13 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "边界：生命周期偏序的传递链"
+          "title": "### 5.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "边界：HRTB 与闭包生命周期的极限"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "边界：'static 的构造与协变收窄"
+          "title": "## 六、反命题"
         }
       ],
       "code_blocks": [
@@ -1385,6 +1269,42 @@
           "lines": 11,
           "should_fail": false,
           "code_preview": "let mut x = 0; let p = &mut x; if condition {     *p = 1;     // p 在此路径不再使用 } el..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// Rule 1: 每个输入引用获得独立生命周期 fn print(s: &str);           // ⟹ fn print<'a>(s: &'a ..."
+        },
+        {
+          "flags": [],
+          "lines": 8,
+          "should_fail": false,
+          "code_preview": "// 编译器自动捕获所有输入生命周期到 impl Trait 中 fn make_iter<'a>(items: &'a [i32]) -> impl Iter..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// Rust 1.75+ 支持: trait Factory {     fn create(&self) -> impl Iterator<Item = i..."
+        },
+        {
+          "flags": [],
+          "lines": 35,
+          "should_fail": false,
+          "code_preview": "// 定义: 每次迭代返回的元素可以借用迭代器自身 trait LendingIterator {     type Item<'a>     where   ..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Iterator {     type Item;     fn next(&mut self) -> Option<Self::Item>; } ..."
+        },
+        {
+          "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ❌ 编译错误: 标准 Iterator 无法自引用 impl<'s> Iterator for Words<'s> {     type Item = &..."
         }
       ],
       "sources": [
@@ -1419,6 +1339,18 @@
         {
           "source": "RFC 1598 (GATs)",
           "context": "GATs 中 `where Self: 'a` 确保关联类型的生命周期自洽。✅"
+        },
+        {
+          "source": "Rust Reference: Lifetime elision",
+          "context": "三条规则按顺序应用，Rule 3 优先于 Rule 2（方法签名场景）。✅"
+        },
+        {
+          "source": "RFC 2289 (TAFIT)",
+          "context": "`impl Trait` 在参数位置（APIT）和返回位置（RPIT）的生命周期推断遵循不同的隐式捕获策略。✅"
+        },
+        {
+          "source": "RFC 1598 (GATs)",
+          "context": "`where Self: 'a` 约束确保关联类型不会引用比 `Self` 更短的生命周期，构成自引用集合的类型安全基础。✅"
         }
       ],
       "cross_references": [
@@ -1431,7 +1363,7 @@
       "transitions": 16,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 60
+      "matrix_rows": 68
     },
     {
       "path": "concept\\01_foundation\\04_type_system.md",
@@ -1483,16 +1415,13 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "边界：unsafe 绕过类型系统后的行为"
+          "title": "### 5.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "边界：#[non_exhaustive] 对穷尽性的削弱"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "边界：NPO 与 Option<&T> 的内存同构验证"
+          "title": "## 六、反命题"
         }
       ],
       "code_blocks": [
@@ -1619,7 +1548,7 @@
       "layer": "L2",
       "title": "Traits（Trait 系统）",
       "positioning": "",
-      "line_count": 751,
+      "line_count": 909,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -1634,15 +1563,7 @@
           "type": "paragraph"
         },
         {
-          "text": "引理: Orphan Rule ⟹ Coherence",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性",
-          "type": "paragraph"
-        },
-        {
-          "text": "定理: Trait 对象安全 ⟹ dyn Trait 是合法类型",
           "type": "paragraph"
         },
         {
@@ -1672,19 +1593,52 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "测试 1: Orphan Rule + Coherence 多层嵌套边界"
+          "title": "### 5.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "测试 2: Trait 对象安全 + dyn/impl 分发边界"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界"
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 6.1 反命题"
+        },
+        {
+          "title": "### 6.2 反命题"
+        },
+        {
+          "title": "### 6.3 反命题"
+        },
+        {
+          "title": "### 6.4 反命题"
         }
       ],
       "code_blocks": [
+        {
+          "flags": [],
+          "lines": 3,
+          "should_fail": false,
+          "code_preview": "pub unsafe auto trait Send {} pub unsafe auto trait Sync {} ..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// ✅ 自动推导示例 struct Point { x: i32, y: i32 }           // Send + Sync（i32 是） stru..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "struct MyPtr(*mut u8);  // 开发者保证：该指针总是指向线程安全的堆内存 unsafe impl Send for MyPtr {} u..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "#![feature(negative_impls)] struct RawFd(i32);  impl !Send for RawFd {}  // 显式阻止..."
+        },
         {
           "flags": [],
           "lines": 23,
@@ -1729,6 +1683,36 @@
         },
         {
           "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait Iterator {     type Item;           // 无泛型参数     fn next(&mut self) -> Opt..."
+        },
+        {
+          "flags": [],
+          "lines": 5,
+          "should_fail": false,
+          "code_preview": "trait LendingIterator {     type Item<'a> where Self: 'a;  // 关联类型带生命周期参数     fn..."
+        },
+        {
+          "flags": [],
+          "lines": 21,
+          "should_fail": false,
+          "code_preview": "trait LendingIterator {     type Item<'a> where Self: 'a;     fn next<'a>(&'a mu..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// GATs 之前：笨拙的 trait 级泛型 trait Convert<Input> {     type Output;     fn convert(..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// GATs 之后：trait 简洁，关联类型承载泛型 trait Convert {     type Output<Input>;     fn conv..."
+        },
+        {
+          "flags": [],
           "lines": 24,
           "should_fail": false,
           "code_preview": "// 边界: Orphan Rule 对嵌套泛型、元组、引用的精确判定  // 情况 1: 为外部 Wrapper 实现外部 Trait —— 非法 // im..."
@@ -1765,14 +1749,14 @@
       "transitions": 10,
       "has_cognitive_path": true,
       "mermaid_blocks": 5,
-      "matrix_rows": 74
+      "matrix_rows": 86
     },
     {
       "path": "concept\\02_intermediate\\02_generics.md",
       "layer": "L2",
       "title": "Generics（泛型系统）",
       "positioning": "",
-      "line_count": 945,
+      "line_count": 1051,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡",
@@ -1787,23 +1771,11 @@
           "type": "paragraph"
         },
         {
-          "text": "引理: 参数多态 ⟹ System F 类型规则",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.2 定理：单态化 ⟹ 零成本抽象 ⟹ 语义保持",
           "type": "paragraph"
         },
         {
-          "text": "定理 4.2a: 单态化 ⟹ 零成本抽象",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.3 推论：Const Generics ⟹ 类型级编程",
-          "type": "paragraph"
-        },
-        {
-          "text": "推论: Const Generics ⟹ 类型级编程（type-level programming）",
           "type": "paragraph"
         },
         {
@@ -1835,38 +1807,31 @@
           "type": "paragraph"
         },
         {
-          "text": "结论: 参数性 ⟹ f 只能是恒等函数或发散函数",
-          "type": "paragraph"
-        },
-        {
-          "text": "结论: 参数性 ⟹ g 的行为等价于 λx.λh. h(x) 或其发散变体",
-          "type": "paragraph"
-        },
-        {
-          "text": "结论: 参数性 ⟹ 输出是输入的子序列（元素顺序保持，无新构造）",
-          "type": "paragraph"
-        },
-        {
-          "text": "P[\"参数性定理: 类型 ⟹ 行为\"] --> Q1{\"存在 Trait Bound?\"}",
-          "type": "paragraph"
-        },
-        {
           "text": "**过渡解释**: 认知路径的最终目标是让学习者具备自主验证能力。通过定理链（参数多态 ⟹ System F ⟹ 约束可满足性 ⟹ 单态化零成本），可以预判设计决策的远期后果。关键工程权衡包括：泛型 vs dyn Trait（性能 vs 二进制大小）、Const Generics vs 运行时参数（编译期保证 vs 灵活性）、HRTB vs 显式生命周期（表达力 vs 可读性）。形式化掌控不是要求学习者手写证明，而是能使用\"定理一致性矩阵\"作为设计检查清单。",
           "type": "paragraph"
         }
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "测试 1: 单态化代码膨胀与 dyn Trait 权衡极限"
+          "title": "### 5.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "测试 2: 生命周期约束递归传递与 HRTB 边界"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "测试 3: Const Generics 类型级运算与特化边界"
+          "title": "## 六、反命题"
+        },
+        {
+          "title": "### 6.1 反命题"
+        },
+        {
+          "title": "### 6.2 反命题"
+        },
+        {
+          "title": "### 6.3 反命题"
+        },
+        {
+          "title": "### 6.4 反命题"
         }
       ],
       "code_blocks": [
@@ -1920,6 +1885,36 @@
         },
         {
           "flags": [],
+          "lines": 10,
+          "should_fail": false,
+          "code_preview": "// ✅ 合法: 常量表达式用于数组类型 fn double_array<T: Default + Copy, const N: usize>() -> [T;..."
+        },
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// ✅ 合法: 显式约束数组类型满足 Sized fn process_array<T, const N: usize>(arr: [T; N]) -> [T..."
+        },
+        {
+          "flags": [],
+          "lines": 17,
+          "should_fail": false,
+          "code_preview": "// ✅ 合法: 默认常量泛型参数 struct Array<T, const N: usize = 4> {     data: [T; N], }  imp..."
+        },
+        {
+          "flags": [],
+          "lines": 15,
+          "should_fail": false,
+          "code_preview": "const fn next_power_of_two(n: usize) -> usize {     1usize << (usize::BITS - n.l..."
+        },
+        {
+          "flags": [],
+          "lines": 13,
+          "should_fail": false,
+          "code_preview": "// ✅ 合法: 类型参数 + const generic 混合 fn foo<T, const N: usize>(arr: [T; N]) -> Vec<T..."
+        },
+        {
+          "flags": [],
           "lines": 25,
           "should_fail": false,
           "code_preview": "// 边界: 量化单态化膨胀与动态分发的精确权衡点  // 一个泛型函数被 5 种不同类型实例化 fn process<T: std::fmt::Display..."
@@ -1958,7 +1953,7 @@
       "transitions": 8,
       "has_cognitive_path": true,
       "mermaid_blocks": 6,
-      "matrix_rows": 89
+      "matrix_rows": 96
     },
     {
       "path": "concept\\02_intermediate\\03_memory_management.md",
@@ -1980,23 +1975,11 @@
           "type": "paragraph"
         },
         {
-          "text": "引理: Box<T> ⟹ 堆分配 + 唯一所有权",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.2 定理：Rc/Arc ⟹ 共享所有权安全（引用计数）",
           "type": "paragraph"
         },
         {
-          "text": "定理: Rc/Arc ⟹ 共享所有权安全（引用计数）",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.3 推论：RefCell ⟹ 内部可变性运行时检查",
-          "type": "paragraph"
-        },
-        {
-          "text": "推论: RefCell ⟹ 内部可变性运行时检查",
           "type": "paragraph"
         },
         {
@@ -2018,20 +2001,25 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "测试 1: Rc<RefCell<T>> 循环引用极限"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.2",
-          "title": "测试 2: RefCell 嵌套借用边界"
+          "title": "### 5.5 反例"
         },
         {
-          "id": "7.3",
-          "title": "测试 3: Box::leak 与 ManuallyDrop 边界"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.4",
-          "title": "测试 4: Arc 跨线程原子序边界"
+          "title": "### 6.1 反命题"
+        },
+        {
+          "title": "### 6.2 反命题"
+        },
+        {
+          "title": "### 6.3 反命题"
+        },
+        {
+          "title": "### 6.4 反命题"
         }
       ],
       "code_blocks": [
@@ -2135,23 +2123,11 @@
           "type": "paragraph"
         },
         {
-          "text": "引理: Result<T,E> ⟹ 和类型强制错误处理",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.2 定理：? 运算符 ⟹ 错误传播自动化",
           "type": "paragraph"
         },
         {
-          "text": "定理: ? 运算符 ⟹ 错误传播自动化",
-          "type": "paragraph"
-        },
-        {
           "text": "### 4.3 推论：panic ⟹ 不可恢复错误的显式边界",
-          "type": "paragraph"
-        },
-        {
-          "text": "推论: panic ⟹ 不可恢复错误的显式边界",
           "type": "paragraph"
         },
         {
@@ -2165,20 +2141,25 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "测试 1: ? 运算符在闭包中的限制"
+          "title": "### 5.3 反例"
         },
         {
-          "id": "7.2",
-          "title": "测试 2: From 转换链的边界"
+          "title": "### 5.4 反例"
         },
         {
-          "id": "7.3",
-          "title": "测试 3: panic 边界与 catch_unwind"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.4",
-          "title": "测试 4: Result 与 Option 的组合边界"
+          "title": "### 6.1 反命题"
+        },
+        {
+          "title": "### 6.2 反命题"
+        },
+        {
+          "title": "### 6.3 反命题"
+        },
+        {
+          "title": "### 6.4 反命题"
         }
       ],
       "code_blocks": [
@@ -2276,7 +2257,7 @@
       "layer": "L3",
       "title": "Concurrency（并发模型）",
       "positioning": "",
-      "line_count": 1014,
+      "line_count": 1032,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注",
@@ -2349,28 +2330,13 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "正确示例：spawn + move 闭包"
+          "title": "### 7.4 反例"
         },
         {
-          "id": "7.2",
-          "title": "正确示例：Mutex 共享状态"
+          "title": "### 7.5 反例"
         },
         {
-          "id": "7.3",
-          "title": "正确示例：Channel 消息传递"
-        },
-        {
-          "id": "7.4",
-          "title": "反例：跨线程共享 Rc（E0277）"
-        },
-        {
-          "id": "7.5",
-          "title": "反例：死锁"
-        },
-        {
-          "id": "7.6",
-          "title": "反命题与边界分析"
+          "title": "### 7.6 反命题"
         }
       ],
       "code_blocks": [
@@ -2472,10 +2438,15 @@
         "../01_foundation/02_borrowing.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/03_memory_management.md",
+        "../04_formal/03_ownership_formal.md",
+        "../04_formal/04_rustbelt.md",
+        "../05_comparative/02_rust_vs_go.md",
+        "../05_comparative/03_paradigm_matrix.md",
+        "../06_ecosystem/03_core_crates.md",
         "./02_async.md",
         "./03_unsafe.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 10,
       "matrix_rows": 81
@@ -2485,7 +2456,7 @@
       "layer": "L3",
       "title": "Async/Await（异步编程）",
       "positioning": "",
-      "line_count": 948,
+      "line_count": 966,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注",
@@ -2550,12 +2521,22 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "\"Async vs Thread？\" 决策树"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.2",
-          "title": "Pin 使用边界"
+          "title": "### 6.1 反命题"
+        },
+        {
+          "title": "### 6.2 反命题"
+        },
+        {
+          "title": "### 6.3 反命题"
+        },
+        {
+          "title": "### 8.4 反例"
+        },
+        {
+          "title": "### 8.5 反例"
         }
       ],
       "code_blocks": [
@@ -2665,9 +2646,12 @@
         "../01_foundation/03_lifetimes.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
-        "../02_intermediate/04_error_handling.md"
+        "../02_intermediate/04_error_handling.md",
+        "../04_formal/02_type_theory.md",
+        "../04_formal/03_ownership_formal.md",
+        "../05_comparative/02_rust_vs_go.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 8,
       "matrix_rows": 65
@@ -2677,7 +2661,7 @@
       "layer": "L3",
       "title": "Unsafe Rust",
       "positioning": "",
-      "line_count": 947,
+      "line_count": 965,
       "theorem_chains": [
         {
           "text": "- v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注",
@@ -2734,16 +2718,16 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "安全抽象定理"
+          "title": "### 6.3 反命题"
         },
         {
-          "id": "7.2",
-          "title": "Miri 的验证边界"
+          "title": "### 8.3 反例"
         },
         {
-          "id": "7.3",
-          "title": "定理一致性矩阵（⟹ 推理链）"
+          "title": "### 8.4 反例"
+        },
+        {
+          "title": "### 8.5 反例"
         }
       ],
       "code_blocks": [
@@ -2815,9 +2799,12 @@
         "../01_foundation/02_borrowing.md",
         "../02_intermediate/03_memory_management.md",
         "../03_advanced/01_concurrency.md",
-        "../04_formal/04_rustbelt.md"
+        "../04_formal/03_ownership_formal.md",
+        "../04_formal/04_rustbelt.md",
+        "../06_ecosystem/01_toolchain.md",
+        "../07_future/02_formal_methods.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 9,
       "matrix_rows": 108
@@ -2832,6 +2819,18 @@
         {
           "text": "- v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注",
           "type": "paragraph"
+        },
+        {
+          "text": "1. **宏展开在语义分析之前** ⟹ 宏无法访问类型信息。过程宏接收的是 `TokenStream`，不是带有类型标注的 AST。",
+          "type": "inline"
+        },
+        {
+          "text": "2. **宏展开在 AST 层面** ⟹ 宏操作的是 Token/AST 节点，不是字符串。这与 C 预处理器（纯文本替换）有本质区别。",
+          "type": "inline"
+        },
+        {
+          "text": "3. **宏展开后进入类型检查** ⟹ 宏生成的类型错误在展开后才被捕获，错误信息通常指向宏调用处。",
+          "type": "inline"
         },
         {
           "text": "> **过渡说明**: 决策树从工程视角揭示了宏的边界与反直觉特性，而定理推理链则从形式化视角将这些边界上升为严格的数学命题。下面的矩阵将每个反命题对应到一条带 ⟹ 的推理链，形成\"前提-结论-失效条件\"的完整逻辑闭环。",
@@ -2896,28 +2895,28 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "正确示例：`macro_rules!` 声明宏"
+          "title": "### 5.2 反命题"
         },
         {
-          "id": "7.2",
-          "title": "正确示例：Derive 过程宏框架"
+          "title": "### 5.3 反命题"
         },
         {
-          "id": "7.3",
-          "title": "反例：不卫生的宏（C 风格问题在 Rust 中不会出现）"
+          "title": "### 5.4 反命题"
         },
         {
-          "id": "7.4",
-          "title": "反例：宏的递归溢出"
+          "title": "### 5.6 反命题"
         },
         {
-          "id": "7.5",
-          "title": "边界极限测试"
+          "title": "### 5.7 反命题"
         },
         {
-          "id": "7.6",
-          "title": "反命题与边界分析补充"
+          "title": "### 7.3 反例"
+        },
+        {
+          "title": "### 7.4 反例"
+        },
+        {
+          "title": "### 7.6 反命题"
         }
       ],
       "code_blocks": [
@@ -3059,7 +3058,7 @@
       "layer": "L4",
       "title": "Linear Logic & Affine Logic（线性逻辑与仿射逻辑）",
       "positioning": "",
-      "line_count": 483,
+      "line_count": 501,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理矩阵扩展至10行并引入⟹推理链、新增3组反命题决策树、5步认知路径、层次一致性标注（L1-L3精确对应）、补充Pierce TAPL引用",
@@ -3067,10 +3066,6 @@
         },
         {
           "text": "> **[学术来源: Wadler 1990, *Linear Types can Change the World*; RustBelt: POPL 2018, Jung et al.; Pierce TAPL §15.3]** 仿射类型系统通过资源唯一性保证内存安全。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。",
-          "type": "paragraph"
-        },
-        {
-          "text": "T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语义)",
           "type": "paragraph"
         },
         {
@@ -3124,16 +3119,16 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "Rust 中的线性/仿射对应"
+          "title": "## 五、反命题"
         },
         {
-          "id": "7.2",
-          "title": "会话类型与线性通道"
+          "title": "### 5.1 反命题"
         },
         {
-          "id": "7.3",
-          "title": "映射精度评估"
+          "title": "### 5.2 反命题"
+        },
+        {
+          "title": "### 5.3 反命题"
         }
       ],
       "code_blocks": [
@@ -3168,13 +3163,16 @@
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/04_type_system.md",
+        "../03_advanced/01_concurrency.md",
+        "../03_advanced/03_unsafe.md",
         "../05_comparative/01_rust_vs_cpp.md",
+        "../05_comparative/03_paradigm_matrix.md",
         "../05_comparative/safety_boundaries.md",
         "./02_type_theory.md",
         "./03_ownership_formal.md",
         "./04_rustbelt.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 73
@@ -3184,7 +3182,7 @@
       "layer": "L4",
       "title": "Type Theory（类型论基础）",
       "positioning": "",
-      "line_count": 542,
+      "line_count": 560,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注",
@@ -3261,16 +3259,16 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "L4 → L1 下行映射"
+          "title": "## 五、反命题"
         },
         {
-          "id": "7.2",
-          "title": "L4 → L2 下行映射"
+          "title": "### 5.1 反命题"
         },
         {
-          "id": "7.3",
-          "title": "L2/L1 → L4 上行映射"
+          "title": "### 5.2 反命题"
+        },
+        {
+          "title": "### 5.3 反命题"
         }
       ],
       "code_blocks": [
@@ -3295,12 +3293,16 @@
         "../01_foundation/04_type_system.md",
         "../02_intermediate/01_traits.md",
         "../02_intermediate/02_generics.md",
+        "../03_advanced/04_macros.md",
         "../05_comparative/03_paradigm_matrix.md",
+        "../06_ecosystem/01_toolchain.md",
+        "../07_future/02_formal_methods.md",
+        "../07_future/03_evolution.md",
         "./01_linear_logic.md",
         "./03_ownership_formal.md",
         "./04_rustbelt.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 97
@@ -3310,7 +3312,7 @@
       "layer": "L4",
       "title": "Ownership Formalization（所有权形式化）",
       "positioning": "",
-      "line_count": 573,
+      "line_count": 697,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 \"⟹\" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注",
@@ -3351,10 +3353,25 @@
         {
           "text": "> **一致性检查**: **L1（权限分离） ⟹ L2（分数权限） ⟹ T1（100% 移交） ⟹ C1（弱化失效）** 构成\"从权限定义到转移再到失效\"的静态链；**T3（区域） ⟹ T5（别名模型） ⟹ T6（内存模型）** 构成\"从时间约束到空间约束到并发有序\"的动态链。两条链在 **C2（内部可变性）** 处交汇，体现静态规则与运行时检查的互补。",
           "type": "paragraph"
+        },
+        {
+          "text": "> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Miri 选择 TB 作为未来方向，意味着社区共识倾向于更宽松的别名假设——这不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型）。",
+          "type": "paragraph"
         }
       ],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "### 5.2 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 7,
+          "should_fail": false,
+          "code_preview": "// 合法 Safe Rust，但 Stacked Borrows 下 Miri 报错 let mut x = 0; let r1 = &mut x;     ..."
+        }
+      ],
       "sources": [
         {
           "source": "💡 原创推断",
@@ -3366,16 +3383,21 @@
         "../01_foundation/01_ownership.md",
         "../01_foundation/02_borrowing.md",
         "../01_foundation/03_lifetimes.md",
+        "../03_advanced/01_concurrency.md",
         "../03_advanced/02_async.md",
         "../03_advanced/03_unsafe.md",
+        "../05_comparative/01_rust_vs_cpp.md",
+        "../05_comparative/03_paradigm_matrix.md",
+        "../07_future/02_formal_methods.md",
+        "../07_future/03_evolution.md",
         "./01_linear_logic.md",
         "./02_type_theory.md",
         "./04_rustbelt.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 4,
-      "matrix_rows": 82
+      "matrix_rows": 94
     },
     {
       "path": "concept\\04_formal\\04_rustbelt.md",
@@ -3397,7 +3419,11 @@
           "type": "paragraph"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 四、反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -3442,7 +3468,7 @@
       "layer": "L5",
       "title": "Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证",
       "positioning": "",
-      "line_count": 1852,
+      "line_count": 1870,
       "theorem_chains": [
         {
           "text": "以下矩阵将文中的核心断言分解为**前提条件 → 结论 → 反例/边界**的推理链，用 `⟹` 标明逻辑推导关系：",
@@ -3483,24 +3509,19 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "Rust 的\"不可表征\"区域（静态-动态鸿沟）"
+          "title": "## 反命题"
         },
         {
-          "id": "7.2",
-          "title": "C++ 的\"机制累积\"问题"
+          "title": "### 反命题"
         },
         {
-          "id": "7.1",
-          "title": "趋势一：AI × 形式方法的\"三层闭环\""
+          "title": "### 反命题"
         },
         {
-          "id": "7.2",
-          "title": "趋势二：从\"证明一次\"到\"持续验证\""
+          "title": "### 反命题"
         },
         {
-          "id": "7.3",
-          "title": "趋势三：Rust 作为形式化基础设施的\"宿主语言\""
+          "title": "### 反命题"
         }
       ],
       "code_blocks": [
@@ -3528,6 +3549,7 @@
         "../03_advanced/03_unsafe.md",
         "../04_formal/01_linear_logic.md",
         "../04_formal/02_type_theory.md",
+        "../04_formal/03_ownership_formal.md",
         "../04_formal/04_rustbelt.md",
         "../07_future/01_ai_integration.md",
         "../07_future/02_formal_methods.md",
@@ -3536,7 +3558,7 @@
         "./03_paradigm_matrix.md",
         "./safety_boundaries.md"
       ],
-      "transitions": 0,
+      "transitions": 3,
       "has_cognitive_path": true,
       "mermaid_blocks": 13,
       "matrix_rows": 200
@@ -3546,29 +3568,30 @@
       "layer": "L5",
       "title": "Rust vs Go：线性所有权 vs CSP 过程逻辑",
       "positioning": "",
-      "line_count": 430,
+      "line_count": 612,
       "theorem_chains": [
         {
           "text": "> **一致性检查**: 上述对比与 L1-L4 概念定义一致。Rust 的每个优势点均可追溯到具体的形式化定理（如 Send/Sync ⟹ CSL 安全）。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **推理链**: Rust 的所有权系统 ⟹ 编译期消除数据竞争 ⟹ 零运行时 GC 开销 ⟹ 适合系统编程与高性能服务。",
+          "type": "paragraph"
+        },
+        {
+          "text": "> **推理链**: Go 的 GC 简化内存管理 ⟹ 降低开发者心智负担 ⟹ 适合快速开发与云原生微服务 ⟹ 但无法保证最坏情况延迟。",
           "type": "paragraph"
         }
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "Rust Channel（所有权转移）"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.2",
-          "title": "Go Channel（值拷贝 + 共享堆）"
+          "title": "### 6.2 反例"
         },
         {
-          "id": "7.3",
-          "title": "对比总结"
-        },
-        {
-          "id": "7.4",
-          "title": "混合架构建议"
+          "title": "### 6.3 反例"
         }
       ],
       "code_blocks": [
@@ -3583,6 +3606,18 @@
           "lines": 19,
           "should_fail": false,
           "code_preview": "use std::sync::mpsc; use std::thread;  fn main() {     let (tx, rx) = mpsc::chan..."
+        },
+        {
+          "flags": [],
+          "lines": 18,
+          "should_fail": false,
+          "code_preview": "// Rust: 错误处理通过类型系统强制传播 use std::fs::File; use std::io::{self, Read};  fn read_c..."
+        },
+        {
+          "flags": [],
+          "lines": 6,
+          "should_fail": false,
+          "code_preview": "// Rust: 文档测试——代码即文档，文档即测试 /// 将字符串解析为无符号整数 /// /// # Examples /// /// ..."
         }
       ],
       "sources": [],
@@ -3596,17 +3631,17 @@
         "./03_paradigm_matrix.md",
         "./safety_boundaries.md"
       ],
-      "transitions": 0,
+      "transitions": 6,
       "has_cognitive_path": true,
-      "mermaid_blocks": 4,
-      "matrix_rows": 99
+      "mermaid_blocks": 6,
+      "matrix_rows": 129
     },
     {
       "path": "concept\\05_comparative\\03_paradigm_matrix.md",
       "layer": "L5",
       "title": "Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）",
       "positioning": "",
-      "line_count": 501,
+      "line_count": 602,
       "theorem_chains": [
         {
           "text": "- v2.0 (2026-05-13): 重构——添加认知路径、⟹推理链、反命题决策树、章节过渡、层次一致性标注",
@@ -3635,20 +3670,19 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "反命题: \"Rust 是系统编程的最优解\""
+          "title": "## 七、反命题"
         },
         {
-          "id": "7.2",
-          "title": "反命题: \"Rust 是纯函数式语言\""
+          "title": "### 7.1 反命题"
         },
         {
-          "id": "7.3",
-          "title": "反命题: \"多范式总是好的\""
+          "title": "### 7.2 反命题"
         },
         {
-          "id": "7.4",
-          "title": "反命题: \"类型系统限制表达力\""
+          "title": "### 7.3 反命题"
+        },
+        {
+          "title": "### 7.4 反命题"
         }
       ],
       "code_blocks": [],
@@ -3662,17 +3696,17 @@
         "./02_rust_vs_go.md",
         "./safety_boundaries.md"
       ],
-      "transitions": 14,
+      "transitions": 16,
       "has_cognitive_path": true,
-      "mermaid_blocks": 7,
-      "matrix_rows": 70
+      "mermaid_blocks": 8,
+      "matrix_rows": 82
     },
     {
       "path": "concept\\05_comparative\\safety_boundaries.md",
       "layer": "L5",
       "title": "Rust 安全保证的边界条件全景（Safety Boundary Panorama）",
       "positioning": "本文件汇总 Rust 所有**编译期安全保证**的边界条件、失效场景和反例，形成完整的\"安全 ⇄ 不安全\"边界地图。",
-      "line_count": 405,
+      "line_count": 547,
       "theorem_chains": [
         {
           "text": "> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。",
@@ -3703,8 +3737,25 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
-      "code_blocks": [],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
+      "code_blocks": [
+        {
+          "flags": [],
+          "lines": 9,
+          "should_fail": false,
+          "code_preview": "// 手动 FFI 示例：直接调用 C 标准库 unsafe {     let ptr = libc::malloc(1024);     if ptr.is..."
+        },
+        {
+          "flags": [],
+          "lines": 11,
+          "should_fail": false,
+          "code_preview": "// cxx 示例：安全 C++ 互操作 // #[cxx::bridge] // mod ffi { //     unsafe extern \"C++\" {..."
+        }
+      ],
       "sources": [],
       "cross_references": [
         "../01_foundation/01_ownership.md",
@@ -3715,12 +3766,13 @@
         "../03_advanced/01_concurrency.md",
         "../03_advanced/02_async.md",
         "../03_advanced/03_unsafe.md",
-        "../04_formal/04_rustbelt.md"
+        "../04_formal/04_rustbelt.md",
+        "../06_ecosystem/01_toolchain.md"
       ],
-      "transitions": 0,
+      "transitions": 7,
       "has_cognitive_path": true,
-      "mermaid_blocks": 5,
-      "matrix_rows": 72
+      "mermaid_blocks": 6,
+      "matrix_rows": 101
     },
     {
       "path": "concept\\06_ecosystem\\01_toolchain.md",
@@ -3764,12 +3816,7 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "rustc_driver"
-        },
-        {
-          "id": "7.2",
-          "title": "LLVM IR"
+          "title": "## 十、反命题"
         }
       ],
       "code_blocks": [
@@ -3846,7 +3893,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 六、反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],
@@ -3928,7 +3979,7 @@
         "./01_toolchain.md"
       ],
       "transitions": 6,
-      "has_cognitive_path": false,
+      "has_cognitive_path": true,
       "mermaid_blocks": 4,
       "matrix_rows": 60
     },
@@ -3970,16 +4021,10 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "crates.io 生态健康度指标"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.2",
-          "title": "2025-2026 生态趋势"
-        },
-        {
-          "id": "7.3",
-          "title": "学术论文引用"
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -4054,16 +4099,10 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "大规模工业采用矩阵"
+          "title": "## 六、反命题"
         },
         {
-          "id": "7.2",
-          "title": "2025-2026 应用领域趋势"
-        },
-        {
-          "id": "7.3",
-          "title": "学术论文引用"
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -4134,16 +4173,7 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "概念定义"
-        },
-        {
-          "id": "7.2",
-          "title": "为什么对 AI 重要"
-        },
-        {
-          "id": "7.3",
-          "title": "Rust 生态实践"
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -4214,16 +4244,7 @@
       ],
       "anti_propositions": [
         {
-          "id": "7.1",
-          "title": "AWS Kani"
-        },
-        {
-          "id": "7.2",
-          "title": "Microsoft Verus"
-        },
-        {
-          "id": "7.3",
-          "title": "Linux Kernel Verification"
+          "title": "## 反命题"
         }
       ],
       "code_blocks": [
@@ -4298,7 +4319,11 @@
           "type": "table_row"
         }
       ],
-      "anti_propositions": [],
+      "anti_propositions": [
+        {
+          "title": "## 反命题"
+        }
+      ],
       "code_blocks": [
         {
           "flags": [],

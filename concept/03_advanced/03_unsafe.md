@@ -933,6 +933,12 @@ C 端保证:
 - [ ] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 预计: Phase 3
 
+> **过渡: L3 → L4**
+>
+> `unsafe` 块的安全性契约由程序员保证，但这种保证能否被形式化验证？RustBelt 将 safe Rust 的语义嵌入 Iris 逻辑并证明其 soundness，而 Aeneas 和 Kani 等工具则尝试将 unsafe 边界上的手工推理自动化。形式化方法不消除 `unsafe`，但能将 "我相信这是安全的" 转化为 "机器验证了这是安全的"。
+>
+> 验证框架见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)，别名模型的精确规则见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §5（Tree Borrows / Stacked Borrows 对比）。
+
 ---
 
 ## 相关概念链接
@@ -944,3 +950,15 @@ C 端保证:
 | 内存管理 | [](../02_intermediate/03_memory_management.md) | 裸指针 |
 | 形式化验证 | [](../04_formal/04_rustbelt.md) | unsafe 证明边界 |
 | 安全边界 | [](../05_comparative/safety_boundaries.md) | 全局边界汇总 |
+
+> **过渡: L3 → L1**
+>
+> `unsafe` 不是 Rust 的例外——它是所有权系统的延伸。`unsafe` 块中的原始指针解引用之所以危险，正是因为它绕过了借用检查器对 `&T`/`&mut T` 的约束。理解 unsafe 的安全契约，需要首先理解 safe Rust 中这些约束的精确含义。
+>
+> 安全基础见 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用规则）与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权转移）。
+
+> **过渡: L3 → L6**
+>
+> `cbindgen`、`cxx`、`diplomat` 等工具将 FFI 的 unsafe 边界自动化，而 `Miri` 和 `Kani` 则在 CI 中持续验证 unsafe 代码的正确性。unsafe 不是 "放弃安全"，而是 "将安全的责任从编译器转移到工具和流程"。
+>
+> 工具化实践见 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（工具链安全审计）与 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化验证工具）。

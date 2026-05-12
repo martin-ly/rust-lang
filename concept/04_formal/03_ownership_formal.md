@@ -569,7 +569,128 @@ Polonius 可视为 Oxide 的**实现层优化**：
 ## 十、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
-- [ ] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比
+- [x] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
 - [ ] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析
 - [ ] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系
 - [ ] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应（参见 L3 `02_async.md` §8）
+
+---
+
+## 十一、别名模型：Stacked Borrows 与 Tree Borrows
+
+> **[学术来源: Jung et al. 2019 POPL, *Stacked Borrows: An Aliasing Model for Rust*; Pichon-Pharabod & Dreyer 2024, *Tree Borrows: A New Aliasing Model for Rust*]** Rust 的别名模型定义了引用在内存中的合法使用方式，是 Miri 检测未定义行为的核心依据。
+
+### 11.1 Stacked Borrows 核心规则
+
+Stacked Borrows 将每个内存位置建模为一个**标签栈（tag stack）**，每个引用携带一个标签（Tag），解引用时执行栈操作：
+
+```text
+标签类型:
+  Unique(id)          —— 独占引用 &mut T，要求栈顶且唯一
+  SharedReadOnly(id)  —— 共享只读引用 &T，可位于栈中任意位置
+  SharedReadWrite(id) —— 共享读写引用（UnsafeCell 内部），可重叠
+
+核心操作规则:
+  1. 创建 &mut x   → 压入 Unique(id)，弹出所有上方不兼容标签
+  2. 创建 &x       → 压入 SharedReadOnly(id)，保留下方标签
+  3. 通过 &mut 写   → 要求栈顶为同一 Unique(id)，否则 UB
+  4. 通过 & 读      → 要求栈中存在匹配的 SharedReadOnly(id)
+  5. 通过裸指针访问 → 不检查标签，但可能使栈中引用失效（pop）
+```
+
+**> [L1↔L4: unsafe / raw pointer]** L1 中 `unsafe` 代码通过裸指针构造别名，在 L4 的 Stacked Borrows 模型中表现为**栈弹出**：裸指针写可能 pop 掉栈中所有引用标签，导致后续通过原引用访问被判定为 UB。这是 Miri 报错 `tag does not exist in the borrow stack` 的本质。
+
+### 11.2 Tree Borrows 核心规则
+
+Tree Borrows 以**树结构（provenance tree）**替代栈，每个内存位置有一个根节点，引用创建产生子节点：
+
+```text
+节点权限（Permissions）:
+  Unique        —— 独占读写，禁止任何后代节点活跃
+  Reserved    —— 预留独占（延迟激活），允许只读别名存在
+  Active        —— 活跃读写（&mut），可转为 Frozen
+  Frozen      —— 冻结只读（&），允许任意后代只读访问
+  Disabled    —— 已失效，任何访问均为 UB
+
+核心操作规则:
+  1. 创建 &mut x   → 父节点转为 Reserved/Active，新建 Active 子节点
+  2. 创建 &x       → 父节点转为 Frozen，新建 Frozen 子节点
+  3. 子节点读      → 父节点若为 Active 需兼容，Frozen 允许任意只读子树
+  4. 子节点写      → 从该节点到根路径上，所有兄弟子树必须 Disabled
+  5. 裸指针访问    → 仅影响对应节点的权限，不全局 pop 兄弟节点
+```
+
+**定理 11.1（Tree Borrows 精度提升）**：
+
+```text
+前提: 程序在 Safe Rust 中通过编译，且仅使用合法的内部可变性模式
+    ↓
+结论: Tree Borrows 接受 ⟹ Stacked Borrows 未必接受 [来源] ✅
+```
+
+### 11.3 对比矩阵
+
+| **维度** | **Stacked Borrows** | **Tree Borrows** | **影响** |
+|:---|:---|:---|:---|
+| **数据结构** | 线性栈（LIFO） | 分支树（树形权限传播） | Tree Borrows 支持同层级多个合法别名 |
+| **精度** | 保守：裸指针访问全局 pop | 精确：仅禁用冲突分支 | TB 减少误报 |
+| **自引用支持** | ❌ 拒绝部分合法自引用 | ✅ 接受更多自引用模式 | Pin + 自引用结构更安全 |
+| **UnsafeCell 处理** | SharedReadWrite 压栈 | Frozen/Active 分支隔离 | TB 模型更符合直觉 |
+| **性能（Miri）** | 栈操作 O(1) | 树遍历 O(depth) | TB 略慢，但可接受 |
+| **标准库兼容** | 部分代码 Miri 失败 | 更贴近 rustc 实际假设 | TB 是未来默认方向 |
+| **UB 检测能力** | 强（严格模型） | 强且更精确 | 二者均检测真 UB，TB 减少假阳性 |
+
+### 11.4 为什么 Tree Borrows 更优
+
+Stacked Borrows 的**全局 pop** 机制过于严格。典型反例——合法自引用模式：
+
+```rust
+// 合法 Safe Rust，但 Stacked Borrows 下 Miri 报错
+let mut x = 0;
+let r1 = &mut x;          // 栈: [Unique(r1)]
+let raw = r1 as *mut i32; // 裸指针不压栈
+let r2 = &mut *raw;       // SB: 裸指针写可能使 r1 失效 → UB
+*r2 = 1;                  // TB: raw 与 r1 同分支，允许延迟激活
+```
+
+Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与原始引用在只读阶段共存，仅在真正发生冲突写时才标记 Disabled。这更准确地反映了 rustc/LLVM 的实际优化假设。
+
+**> [L1↔L4: Pin / 自引用]** L1 的 `Pin<&mut Self>` 构造自引用结构时，常涉及 `&mut` → 裸指针 → `&mut` 的转换。Tree Borrows 的 Reserved 权限使这些模式在形式化层面被接受，而 Stacked Borrows 的严格栈模型会保守拒绝。
+
+### 11.5 与 RustBelt / Miri 的关系
+
+```text
+定理（Miri 双模型支持）:
+  Miri 默认使用 Stacked Borrows
+  Miri -Zmiri-tree-borrows 启用 Tree Borrows
+      ↓
+  结论: 两种模型都是 Rust 别名假设的候选形式化 [来源] ✅
+```
+
+| 工具/框架 | 支持的模型 | 作用 |
+|:---|:---|:---|
+| **Miri** | SB（默认）/ TB（`-Zmiri-tree-borrows`）| 动态检测 UB、验证 `unsafe` 代码 |
+| **RustBelt** | 基于 Iris 的逻辑模型（独立于 SB/TB）| 证明 Safe Rust 的 soundness |
+| **rustc** | 无显式模型（优化假设近似 TB）| 编译器优化不破坏合法别名 |
+
+> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Miri 选择 TB 作为未来方向，意味着社区共识倾向于更宽松的别名假设——这不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型）。
+
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "别名模型与 Miri 检测"
+
+> **过渡: L4 → L3**
+>
+> 形式化的别名模型（SB/TB）和所有权逻辑（Oxide）是 Rust 编译器优化假设的理论根基，但程序员日常接触的只是 `&T`/`&mut T` 的语法糖。从形式化规则到工程实践的认知桥梁在于：理解 "为什么 `&mut T` 保证唯一性" 不需要掌握分离逻辑，但掌握分离逻辑能帮你写出更安全的 `unsafe` 代码。
+>
+> 工程实践中的对应见 [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md)（unsafe 逃逸门）与 [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md)（并发安全的编译期保证）。
+
+> **过渡: L4 → L5**
+>
+> Rust 的所有权形式化是独特的——C++ 没有系统性的所有权逻辑，Go 依赖 GC 消除所有权问题，Haskell 用纯函数隔离副作用。理解这些差异需要在形式化层面比较 "语言如何表达资源的生命周期"。
+>
+> 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md)（RAII 语义差异）与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
+
+> **过渡: L4 → L7**
+>
+> 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
+>
+> 演进方向见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）。

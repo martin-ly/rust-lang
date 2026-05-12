@@ -492,6 +492,113 @@ graph TD
 | **跨 crate ABI** | 不保持（需 `dyn Trait`） | 保持（擦除后统一） | 不保持（需虚函数） |
 | **类型安全保证** | 编译期完全保证 | 运行时可能失败 | 编译期完全保证 |
 
+### 5.7 Const Generics 进阶用法
+
+> **[Rust Reference: Const Generics](https://doc.rust-lang.org/reference/items/generics.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** Const Generics 在 Rust 1.51 稳定后，后续版本逐步开放了常量表达式、默认参数、where 约束等进阶能力。 ✅ 已验证
+
+#### 5.7.1 常量表达式
+
+Rust 允许在类型位置使用编译期常量表达式，复杂表达式需用大括号包裹：
+
+```rust
+// ✅ 合法: 常量表达式用于数组类型
+fn double_array<T: Default + Copy, const N: usize>() -> [T; N * 2] {
+    [T::default(); N * 2]
+}
+
+// ✅ 合法: 块表达式（1.79+）
+fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
+    [T::default(); { N + 4 }]
+}
+```
+
+#### 5.7.2 where 约束中的 const generics
+
+`where` 子句可对含 const generics 的复合类型施加约束：
+
+```rust
+// ✅ 合法: 显式约束数组类型满足 Sized
+fn process_array<T, const N: usize>(arr: [T; N]) -> [T; N]
+where
+    [T; N]: Sized,
+    T: Copy,
+{
+    arr
+}
+```
+
+#### 5.7.3 默认 const generic 参数
+
+const generics 支持默认值，省略时自动填充（1.59+）：
+
+```rust
+// ✅ 合法: 默认常量泛型参数
+struct Array<T, const N: usize = 4> {
+    data: [T; N],
+}
+
+impl<T: Default + Copy> Array<T> {
+    fn new() -> Self {
+        Self { data: [T::default(); 4] }
+    }
+}
+
+impl<T: Default + Copy, const N: usize> Array<T, N> {
+    fn new_sized() -> Self {
+        Self { data: [T::default(); N] }
+    }
+}
+```
+
+#### 5.7.4 与 const fn 协同：编译期计算
+
+`const fn` 与 const generics 结合，可在类型层面驱动编译期计算：
+
+```rust
+const fn next_power_of_two(n: usize) -> usize {
+    1usize << (usize::BITS - n.leading_zeros())
+}
+
+// 使用 const fn 计算类型参数
+struct RingBuffer<T, const N: usize> {
+    data: [Option<T>; N],
+}
+
+impl<T: Default, const N: usize> RingBuffer<T, { next_power_of_two(N) }> {
+    fn with_capacity() -> Self {
+        Self { data: [const { None }; { next_power_of_two(N) }], head: 0, tail: 0 }
+    }
+}
+```
+
+#### 5.7.5 类型参数与 const generics 混合使用
+
+const generics 可与类型参数、生命周期参数自由组合：
+
+```rust
+// ✅ 合法: 类型参数 + const generic 混合
+fn foo<T, const N: usize>(arr: [T; N]) -> Vec<T> {
+    arr.into_iter().collect()
+}
+
+// ✅ 合法: 多重 const generics
+fn concat<T: Copy, const M: usize, const N: usize>(a: [T; M], b: [T; N]) -> [T; M + N] {
+    let mut result = [a[0]; M + N];
+    for i in 0..M { result[i] = a[i]; }
+    for i in 0..N { result[M + i] = b[i]; }
+    result
+}
+```
+
+| **特性** | **语法** | **稳定版本** | **说明** |
+|:---|:---|:---|:---|
+| 常量表达式 | `[T; N + 1]` | 1.51+ | 简单算术表达式可直接使用 |
+| 块表达式 | `[T; { N * 2 }]` | 1.79+ | 复杂表达式需大括号包裹 |
+| where 约束 | `where [T; N]: Sized` | 1.51+ | 可对含 const 的复合类型施加约束 |
+| 默认参数 | `const N: usize = 4` | 1.59+ | 省略时自动填充默认值 |
+| const fn 协同 | `const fn f() -> usize` | 1.46+ | 编译期函数驱动类型构造 |
+| 混合使用 | `<T, const N: usize>` | 1.51+ | 与类型/生命周期参数自由组合 |
+
 > **过渡到反命题分析**: 示例与参数性定理揭示了泛型的正确使用方式和形式化性质，但工程实践中定理的边界在哪里？下一节通过系统化的反命题分析，将"泛型定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面，重点揭示"零成本抽象"的隐藏代价、参数性定理的失效条件、类型推断的表达边界、以及约束系统的工程权衡。
 
 ---
@@ -936,7 +1043,6 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充 Const Generics 的进阶用法（表达式、where 约束） —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充 `min_specialization` 的当前状态与使用 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充泛型代码的编译时间优化策略（Turbofish、显式标注） —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 Type-level programming（Peano arithmetic、typenum） —— 优先级: 低 —— 预计: Phase 4
