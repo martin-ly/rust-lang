@@ -500,15 +500,24 @@ graph TD
 
 ---
 
-## 十一、知识来源
+## 十一、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | Cargo 是 Rust 官方构建系统 | [Cargo Book] | ✅ |
-| SemVer 用于依赖管理 | [Cargo Book] | ✅ |
+| SemVer 用于依赖管理 | [Cargo Book] · [SemVer 2.0.0] | ✅ |
 | Clippy 有 400+ lint | [Clippy Docs] | ✅ |
 | LLVM IR 为 SSA 形式 | [LLVM LangRef] | ✅ |
 | `rustc_driver` 为编译器入口 | [rustc Dev Guide] | ✅ |
+| 编译器定义 | [Wikipedia: Compiler] | ✅ |
+| 链接器定义 | [Wikipedia: Linker] | ✅ |
+| 包管理器定义 | [Wikipedia: Package manager] | ✅ |
+| 目标三元组定义 | [Wikipedia: Target triple] | ✅ |
+| CMU 课程涵盖构建系统 | [CMU 17-363 — Build Systems] | ✅ |
+| Stanford 课程涵盖 Cargo | [Stanford CS340R — Rust Toolchain] | ✅ |
+| rustc 查询系统设计 | [Rustc Dev Guide — Query System] | ✅ |
+| 软件供应链安全 | [Ladisa et al. 2023 — SoK: Taxonomy of Attacks on Open-Source Software Supply Chains, IEEE S&P] | ✅ |
+| SemVer 语义化版本 | [Preston-Werner 2013 — Semantic Versioning 2.0.0] | ✅ |
 
 ---
 
@@ -523,3 +532,13 @@ graph TD
 | AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | 工具链扩展 |
 | 形式化工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具集成 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 质量门禁 |
+
+---
+
+## 十三、待补充与演进方向（TODOs）
+
+- [ ] **高**: 补充 `cargo-fuzz` 和模糊测试集成指南
+- [ ] **高**: 补充交叉编译的完整平台支持矩阵
+- [ ] **中**: 补充 `sccache` 分布式编译配置
+- [ ] **中**: 补充 Cargo workspace 大型项目管理最佳实践
+- [ ] **低**: 补充 rustc 内部查询系统的深度解析

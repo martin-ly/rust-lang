@@ -461,7 +461,9 @@ fn process_dyn(x: &dyn Display) { println!("{}", x); }
 | Const Generics | [RFC 2000] · [Rust Reference: Const Generics] | ✅ |
 | GATs | [RFC 1598] · [TRPL: Ch19.3] | ✅ |
 | ?Sized 解除默认约束 | [Rust Reference: Dynamically Sized Types] | ✅ |
-| 参数多态对应 System F | [Wikipedia: System F] · 类型论标准教材 | ✅ |
+| 参数多态对应 System F | [Wikipedia: System F] · [Pierce 2002, Ch.23] | ✅ |
+| System F 原始论文 | [Girard 1972 — PhD Thesis] | ✅ |
+| 类型推断算法 W | [Damas & Milner 1982 — POPL] | ✅ |
 
 ---
 

@@ -308,7 +308,7 @@ graph TD
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证框架 |
 | 范式矩阵 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 类型系统谱系 |
 
-## 八、待补充
+## 八、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 Dependent type 与 Const Generics 的关系
 - [ ] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround

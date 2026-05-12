@@ -390,6 +390,8 @@ fn main() {
 | Rust 宏是卫生的 | [TRPL] · [Scheme 卫生宏论文] | ✅ |
 | `vec!` / `format!` 是宏 | [TRPL] | ✅ |
 | 编译期代码生成零运行时开销 | [Rust Reference: Macros] | ✅ |
+| 卫生宏原始论文 | [Kohlbecker et al. 1986 — Macro-by-Example: Deriving Syntactic Transformations from their Specifications, POPL] | ✅ |
+| 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
 
 ---
 
@@ -400,3 +402,14 @@ fn main() {
 - [ ] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充属性宏修改函数体的完整示例 —— 优先级: 中 —— 预计: Phase 3
+
+---
+
+## 相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| Trait 系统 | [](../02_intermediate/01_traits.md) | Derive 宏目标 |
+| 类型系统 | [](../01_foundation/04_type_system.md) | 宏与类型交互 |
+| 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
+| 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |

@@ -464,7 +464,8 @@ impl<T> MyTrait for Generic<T> {}  // ✅ 合法: Generic 是本地类型
 | Coherence 保证全局唯一性 | [RFC 1023] | ✅ |
 | 关联类型对比泛型参数 | [TRPL: Ch19.3] | ✅ |
 | Trait 作为逻辑命题 | [Category Theory for Programmers] · 原创分析 | 💡 |
-| Negative impls（不稳定） | [RFC 1268] · [Rust Reference] | ⚠️ 实验性 |
+| Type Classes 原始论文 | [Wadler & Blott 1989 — How to make ad-hoc polymorphism less ad hoc, POPL] | ✅ |
+| 参数化类型类 | [Jones 1993 — POPL] | ✅ |
 
 ---
 

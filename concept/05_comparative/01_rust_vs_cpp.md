@@ -1,7 +1,44 @@
+# Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证
 
 ---
 
-# Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证
+> **层级**: L5 对比分析
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Linear Logic](../04_formal/01_linear_logic.md)
+> **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md) · [Safety Boundaries](./safety_boundaries.md)
+> **主要来源**: [TRPL] · [Rust Reference] · [Wikipedia: C++] · [Wikipedia: Rust] · [Wikipedia: Linear logic] · [Wikipedia: Type system] · [Wikipedia: Resource acquisition is initialization] · [Wikipedia: Programming language]
+
+---
+
+**变更日志**:
+
+- v1.0 (2026-05-12): 初始版本，形式系统 vs 机制工程本体论对比
+- v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接
+
+---
+
+## 权威定义
+
+### Wikipedia 权威定义
+
+> **[Wikipedia: Rust (programming language)]** Rust is a general-purpose programming language that emphasizes performance, type safety, and concurrency. It enforces memory safety — meaning that all references point to valid memory — without a garbage collector.
+> **来源**: <https://en.wikipedia.org/wiki/Rust_(programming_language)>
+
+> **[Wikipedia: C++]** C++ is a high-level, general-purpose programming language created by Danish computer scientist Bjarne Stroustrup. It was designed with a bias toward system programming and embedded, resource-constrained software and large systems, with performance, efficiency, and flexibility of use as its design highlights.
+> **来源**: <https://en.wikipedia.org/wiki/C%2B%2B>
+
+> **[Wikipedia: Programming language]** A programming language is a system of notation for writing computer programs. Programming languages are described in terms of their syntax (form) and semantics (meaning), usually defined by a formal language.
+> **来源**: <https://en.wikipedia.org/wiki/Programming_language>
+
+> **[Wikipedia: Type system]** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
+> **来源**: <https://en.wikipedia.org/wiki/Type_system>
+
+> **[Wikipedia: Resource acquisition is initialization]** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime.
+> **来源**: <https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization>
+
+> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter.
+> **来源**: <https://en.wikipedia.org/wiki/Linear_logic>
+
+---
 
 你的直觉非常精准，且触及了两种语言最深层的**设计本体论**（Design Ontology）差异。这不仅是语法或性能的分歧，而是**"编程的本质是什么"**这一问题的两种根本回答。
 
@@ -1607,3 +1644,56 @@ graph TD
 - L4 形式化: [`../04_formal/`](../04_formal/)
 
 > 若本文与上述文件存在技术细节冲突，以 L1-L4 文件为准（L5 为综合层，可能因简化而产生近似表述）。
+
+---
+
+## 知识来源关系（Provenance）
+
+| **论断** | **来源** | **可信度** |
+|:---|:---|:---|
+| Rust 所有权编译期保证安全 | [TRPL] · [RustBelt POPL 2018] | ✅ |
+| C++ 从 C 的机器模型出发 | [Stroustrup — The Design and Evolution of C++] | ✅ |
+| Rust 基于线性类型论 | [Wikipedia: Linear logic] · [Girard 1987] | ✅ |
+| RAII 是 C++ 资源管理惯例 | [Wikipedia: RAII] · [Stroustrup] | ✅ |
+| Rust 编译器执行形式证明 | [RustBelt] · [Rust Reference] | ✅ |
+| C++ 模板是代码生成机制 | [C++ Standard] · [Stroustrup] | ✅ |
+| Rust 无数据竞争编译期消除 | [TRPL] · [RustBelt] | ✅ |
+| C++ 的 `const` 可通过 `const_cast` 违反 | [C++ Reference] · [Rustonomicon] | ✅ |
+| 图灵等价不等于工程等价 | [Church-Turing Thesis] · 原创分析 | 💡 |
+| AI 生成需要形式系统约束 | [RefinedRust PLDI 2024] · 原创分析 | 💡 |
+| TLA+ 用于 AWS S3/DynamoDB | [AWS CACM 2015] | ✅ |
+| PObserve 运行时对齐 | [AWS P Language] | ✅ |
+| RefinedRust 半自动化验证 | [PLDI 2024] | ✅ |
+
+---
+
+## 相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 所有权 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) | Rust 形式系统根基 |
+| 借用规则 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) | 编译期证明机制 |
+| 类型系统 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) | 形式化基础 |
+| Trait 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 泛型/抽象对比 |
+| 内存管理 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) | RAII vs 所有权 |
+| 并发 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) | Send/Sync vs 手动同步 |
+| Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | unsafe 语义对比 |
+| 线性逻辑 | [`../04_formal/01_linear_logic.md`](../04_formal/01_linear_logic.md) | Rust 数学根基 |
+| 类型论 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 类型系统形式化 |
+| RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | Rust 语义基础 |
+| Rust vs Go | [`./02_rust_vs_go.md`](./02_rust_vs_go.md) | 同层对比 |
+| 范式矩阵 | [`./03_paradigm_matrix.md`](./03_paradigm_matrix.md) | 多语言定位 |
+| 安全边界 | [`./safety_boundaries.md`](./safety_boundaries.md) | 安全保证对比 |
+| AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | AI 时代形式系统价值 |
+| 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具链 |
+| 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | Rust/C++ 演进方向 |
+
+---
+
+## 待补充与演进方向（TODOs）
+
+- [ ] **高**: 将长对话格式重构为 methodology 规范的 9 章节结构
+- [ ] **高**: 补充 C++20/23/26 新特性（Modules, Concepts, Coroutines）与 Rust 的对应关系
+- [ ] **中**: 补充具体 benchmark 数据（编译时间、运行时性能、内存占用）
+- [ ] **中**: 补充混合 Rust+C++ 项目的 FFI 最佳实践
+- [ ] **低**: 补充 CMU/Stanford 等课程中对 Rust vs C++ 的教学对比

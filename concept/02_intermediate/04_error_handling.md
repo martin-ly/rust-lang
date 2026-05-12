@@ -479,6 +479,8 @@ fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
 | Result 是 Monad | [Haskell: Either Monad] · 类型论 | ✅ |
 | thiserror / anyhow 是生态标准 | [crates.io] · 社区实践 | ✅ |
 | unwrap 在生产代码中需谨慎 | [Rust API Guidelines] | ✅ |
+| Monad 与错误处理 | [Wadler 1992 — The Essence of Functional Programming, POPL] | ✅ |
+| 代数效应与异常 | [Plotkin & Pretnar 2009 — Handlers of Algebraic Effects] | ✅ |
 
 ---
 

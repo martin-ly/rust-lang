@@ -476,7 +476,9 @@ fn make_dyn(x: &dyn GoodTrait) {}  // ✅ 合法
 | NPO 优化 Option<&T> | [Rust Reference: Enums] | ✅ |
 | ADT 对应积与余积 | [Category Theory for Programmers] | 💡 |
 | match 穷尽性检查 | [Rust Reference: Patterns] | ✅ |
-| 递归类型需要间接层 | [TRPL: Ch15] | ✅ |
+| 类型系统理论基础 | [Pierce 2002 — Types and Programming Languages] | ✅ |
+| 类型安全定理 (Progress + Preservation) | [Wright & Felleisen 1994 — JFP] | ✅ |
+| 子类型理论基础 | [Cardelli 1996 — Type Systems, ACM Computing Surveys] | ✅ |
 
 ---
 

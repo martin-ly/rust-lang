@@ -207,7 +207,7 @@ graph TD
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 工具化 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 验证范围 |
 
-## 五、待补充
+## 五、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充各工具的具体代码示例
 - [ ] **TODO**: 补充验证工具与 CI/CD 的集成

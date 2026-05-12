@@ -2,29 +2,38 @@
 
 > **层级**: L7 前沿趋势
 > **前置概念**: 全部前置层级
-> **主要来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog] · [Edition Guide]
+> **主要来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Inside Rust](https://blog.rust-lang.org/inside-rust/) · [Wikipedia]
 
 ---
 
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本
+- v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
 
 ---
 
-## 一、权威定义
+## 一、基础定义
 
-### 1.1 Wikipedia 权威定义
+### 1.1 编程语言演进（Programming Language Evolution）
+> **来源**: [Wikipedia — Programming language](https://en.wikipedia.org/wiki/Programming_language)
 
-> **[Wikipedia: Programming language evolution]** Programming language evolution is the process by which programming languages change over time. This can include the addition of new features, the removal of deprecated features, and changes to the language's syntax or semantics.
+编程语言演进是指编程语言的设计、规范、实现和生态随时间发展的过程。演进驱动力包括：硬件架构变化（多核、GPU、量子计算）、软件工程需求（规模、可靠性、安全性）、理论计算机科学进展（类型理论、证明论）以及社区实践反馈。成功的语言演进需要在向后兼容、表达力和学习曲线之间取得平衡。
 
-> **[Wikipedia: Software release life cycle]** A software release life cycle is the sum of the stages of development and maturity for a piece of computer software. Cycles range from its initial development to its eventual release, and include updated versions of the released version to help improve software or fix software bugs still present in the software.
+### 1.2 软件发布生命周期（Software Release Life Cycle）
+> **来源**: [Wikipedia — Software release life cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 
-> **[Wikipedia: Backward compatibility]** Backward compatibility is a property of a system, product, or technology that allows for interoperability with an older legacy system, or with input designed for such a system.
+软件发布生命周期描述了软件从开发到退役的各个阶段：预 alpha → alpha → beta → release candidate (RC) → general availability (GA)。Rust 编译器采用"train model"——每 6 周发布一个稳定版本，nightly → beta → stable 的晋升机制确保新特性经过充分测试。这与传统的"大爆炸式发布"不同，提供了持续、可预测的演进节奏。
 
-### 1.2 Rust 演进机制
+---
 
-### 1.1 RFC 流程
+## 二、Rust 演进机制
+
+### 2.1 RFC 流程详解
+
+RFC（Request for Comments）是 Rust 语言特性演进的正式提案流程。
+
+#### 2.1.1 完整流程
 
 ```text
 想法 → 预 RFC 讨论 → RFC 草案 → 团队评审 → 接受/拒绝 → 实现 → 稳定化
@@ -32,61 +41,246 @@
                               （反馈循环）
 ```
 
-### 1.2 Edition 机制
+#### 2.1.2 各阶段说明
 
-| **Edition** | **年份** | **核心变化** |
-|:---|:---|:---|
-| Rust 2015 | 2015 | 初始版本 |
-| Rust 2018 | 2018 | NLL, `async/await` (预留), 模块系统简化 |
-| Rust 2021 | 2021 | 预lude 添加, `IntoIterator` for arrays, disjoint capture |
-| Rust 2024 | 2024 | `gen` blocks, `never_type`, lifetime capture rules |
+| **阶段** | **描述** | **参与方** | **典型耗时** |
+|:---|:---|:---|:---|
+| **想法** | 开发者识别痛点或新需求 | 社区任何人 | 不定 |
+| **Pre-RFC** | 在 internals.rust-lang.org 或 IRLO 讨论概念可行性 | 社区 + 感兴趣团队成员 | 数周 |
+| **RFC 草案** | 撰写正式 RFC 文档，提交到 rust-lang/rfcs PR | 提案者 | 数天-数周 |
+| **团队评审** | 对应团队（lang/compiler/libs）进行技术评审 | 核心团队 | 数周-数月 |
+| **FCP** | Final Comment Period，最后 10 天收集反对意见 | 全社区 | 10 天 |
+| **接受/拒绝** | 团队做出决定并合并或关闭 PR | 团队负责人 | 即时 |
+| **实现** | 在 rustc 中实现，通常先进入 nightly | 实现者（常是提案者） | 数周-数月 |
+| **稳定化** | 通过稳定化报告，进入 beta → stable | 团队 | 6-18 周 |
+
+#### 2.1.3 关键原则
+
+- **无重大决策在 issue 中做出**：所有重要语言变更必须有 RFC 文档
+- **共识优先于投票**：Rust 决策追求共识而非简单多数
+- **实验优先**：复杂特性先在 nightly 实现，积累实际使用经验后再稳定化
+- **Edition 机制**：破坏性变更通过 Edition 聚合，保证 crate 级向后兼容
+
+### 2.2 Edition 机制详解
+
+Edition 是 Rust 解决"如何安全地引入不兼容语法变更"的核心机制。
+
+#### 2.2.1 设计哲学
+
+- **Crate 级选择**：每个 crate 在 `Cargo.toml` 中声明 `edition = "2021"`，同一依赖图可混合不同 edition
+- **编译器永远理解所有 edition**：rustc 不会丢弃对旧 edition 的支持
+- **Edition 之间可互操作**：不同 edition 的 crate 可以无缝链接和调用
+- **迁移工具自动化**：`cargo fix --edition` 自动应用大部分迁移
+
+#### 2.2.2 Edition 2021 → 2024 变更清单
+
+> **来源**: [Rust Edition Guide 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
+
+| **类别** | **变更** | **影响** | **迁移方式** |
+|:---|:---|:---|:---|
+| **所有权** | `gen` 关键字预留 | 为生成器语法预留关键字 | `cargo fix` 自动重命名变量 |
+| **生命周期** | Lifetime capture rules (`use<>`) | RPITIT 更精确捕获生命周期 | 编译器自动推断，极少需手动 |
+| **Trait** | `impl Trait` 生命周期捕获 | `impl Trait` 隐式捕获所有生命周期 | 可能需添加 `+ use<'a>` |
+| **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn | unsafe fn 内的 unsafe 操作需显式标记 | 添加 `unsafe { }` 块 |
+| **宏** | `macro_rules` 可见性 | `macro_rules!` 支持 `pub` 和 `pub(crate)` | 可选显式声明 |
+| **匹配** | `match` ergonomics | 简化 `&` 和 `ref` 模式匹配 | 完全向后兼容 |
+| **never_type** | `!` 类型稳定（严格版） | 表达发散函数和空枚举 | 需 `feature(never_type)` 至 2024 |
+| **异步** | `gen` blocks / async gen | 生成器和异步生成器 | 新语法，不影响旧代码 |
+| **指针** | 裸指针比较方法 | `ptr::addr_eq` 替代 `==` on pointers | `cargo fix` |
+| **尾部表达式** | 临时值生命周期调整 | 某些尾部表达式的临时值生命周期延长 | 编译器自动处理 |
 
 ---
 
-## 二、关键趋势
+## 三、关键趋势深度分析
 
-| **趋势** | **状态** | **影响** |
+### 3.1 Effects 系统
+
+> **来源**: [Rust RFC: Effects] · [Lang Team Blog] · [类型理论研究]
+
+Effects 系统是将"计算效果"（如 IO、异常、异步、非确定性）显式编码到类型系统中的理论框架。
+
+**在 Rust 中的映射**：
+- **async**：`async fn` 具有 `Async` effect，调用者必须 `await`
+- **unsafe**：`unsafe fn` 具有 `Unsafe` effect，调用者必须在 `unsafe` 上下文中调用
+- **异常**：`?` 运算符传播 `Result` / `Try` effect
+- **未来方向**：统一的 `effect` 关键字，允许用户定义自定义 effect（如 `Logging`、`Transaction`）
+
+**设计挑战**：
+- 与现有 `async`/`unsafe` 语法的兼容性
+- Effect 多态（"我不关心这个函数有什么 effect"）的表达
+- 编译器实现复杂度
+
+### 3.2 特化（Specialization）
+
+> **来源**: [RFC 1210: Specialization] · [Unstable Book]
+
+特化允许为更具体的类型参数提供 Trait 的专门实现：
+
+```rust
+impl<T> Clone for T { /* 默认实现 */ }
+impl Clone for String { /* 专门实现，更高效 */ }
+```
+
+**当前状态**：
+- 部分特化（min_specialization）在 nightly 可用，用于标准库内部优化
+- 完整特化因 soundness 问题（与 lifetime 交互）被无限期推迟
+- 2024-2026 年的工作重点是解决 "lattice impls" 的 coherence 问题
+
+**应用场景**：
+- 标准库中 `Vec<u8>` 的 `write_all` 使用 `copy_from_slice` 而非逐元素循环
+- 为零大小类型（ZST）提供无操作实现
+- 图形/数值库为特定 SIMD 宽度优化
+
+### 3.3 Const 泛型完整化
+
+> **来源**: [Rust RFC: Const Generics] · [min_const_generics 稳定报告]
+
+Const 泛型允许类型参数包含常量值（而不仅仅是类型）：
+
+```rust
+struct Array<T, const N: usize> {
+    data: [T; N],
+}
+```
+
+**已稳定（Rust 1.51+）**：
+- 整数、布尔、字符常量作为泛型参数
+- 简单的 const 泛型表达式（`N + 1`）
+
+**演进中**：
+- **Const 泛型表达式**：允许 `Array<T, {N * 2}>` 这样的复杂表达式
+- **Const 泛型 where 约束**：`where N > 0` 这样的常量约束
+- **泛型 const 项**：`const fn foo<const N: usize>() -> [u8; N]`
+
+**影响**：使 `typenum` 等编译期数值库成为历史，数组操作更加自然。
+
+### 3.4 GATs 的成熟应用
+
+> **来源**: [RFC 1598: GATs] · [Stabilization Report 1.65]
+
+泛型关联类型（Generic Associated Types, GATs）允许关联类型带自己的泛型参数：
+
+```rust
+trait LendingIterator {
+    type Item<'a>;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+```
+
+**成熟应用场景**：
+- **lending iterators**：返回借用自迭代器本身的数据
+- **类型族（Type Families）**：将运行时类型映射到编译期类型
+- **HKT（高阶类型）模拟**：通过 GATs 部分实现 Haskell 风格的 HKT
+- **异步 trait**：`async fn` in trait 的 desugaring 依赖 GATs
+
+### 3.5 SIMD / Portable SIMD
+
+> **来源**: [Portable SIMD Project Group] · [std::simd]
+
+Rust 的 SIMD 支持经历从平台特定内联函数到可移植抽象的发展：
+
+- **std::arch**：平台特定的 SIMD 内联函数（`x86_64::__m256` 等）
+- **std::simd**（portable-simd）：平台无关的 SIMD 类型，编译到最佳指令集
+- **Auto-vectorization**：LLVM 后端自动向量化，无需手动 SIMD
+
+**演进方向**：
+- `std::simd` 稳定化进入标准库
+- Const 泛型与 SIMD lane 宽度结合
+- `generic_simd` 特性：根据目标平台自动选择最优 SIMD 宽度
+
+### 3.6 Rust 在 Linux 内核中的演进
+
+> **来源**: [Rust for Linux] · [LWN.net] · [Kernel Summit]
+
+Rust 进入 Linux 内核是语言演进史上最重大的外部验证事件：
+
+| **里程碑** | **时间** | **内容** |
 |:---|:---|:---|
-| `async fn` in traits (AFIT) | ✅ 稳定 | 异步生态统一 |
-| Const Generics | ✅ 稳定 | 类型级编程 |
-| GATs | ✅ 稳定 | 关联类型泛型 |
-| Specialization | 🚧 不稳定 | 泛型特化 |
-| `gen` / coroutines | 🚧 演进中 | 生成器 |
-| Effects / linear types | 📋 研究 | 更精确的资源跟踪 |
+| RFC 提交 | 2020 | Rust for Linux 项目启动 |
+| 内核 6.1 | 2022-12 | Rust 基础设施合并（allocator、panic handler） |
+| 内核 6.2 | 2023-02 | 首个 Rust 驱动（NVMe） |
+| 内核 6.7 | 2024-01 | Rust 网络驱动子系统支持 |
+| 内核 6.8+ | 2024+ | 更多驱动、DMA 抽象、GPIO 抽象 |
+
+**技术演进**：
+- **内核特定的标准库**：`core` + `alloc` 的裁剪版，无 `std`
+- **Unsafe 封装**：将 C 内核 API 包装为安全的 Rust 抽象
+- **Pin 与自引用**：内核中的异步工作队列大量依赖 `Pin`
+- **FFI 边界演进**：从手动 `bindgen` 到半自动的内核 API 绑定生成
 
 ---
 
-## 三、思维导图
+## 四、Rust 语言演进路线图
 
 ```mermaid
-graph TD
-    A[Language Evolution] --> B[RFC Process]
-    A --> C[Edition System]
-    A --> D[Recent Features]
-    A --> E[Future Directions]
-
-    B --> B1[Pre-RFC]
-    B --> B2[RFC Draft]
-    B --> B3[Implementation]
-    B --> B4[Stabilization]
-
-    C --> C1[2015]
-    C --> C2[2018]
-    C --> C3[2021]
-    C --> C4[2024]
-
-    D --> D1[AFIT]
-    D --> D2[Const Generics]
-    D --> D3[GATs]
-
-    E --> E1[Specialization]
-    E --> E2[Effects]
-    E --> E3[Linear Types]
+timeline
+    title Rust 语言演进时间线
+    section 2015-2018
+        Rust 1.0 : 2015-05
+        初始稳定 : 所有权系统
+        Rust 2018 : 2018-12
+        NLL : 非词法生命周期
+    section 2019-2021
+        async/await : 2019-11 (1.39)
+        Const Generics : 2021-03 (1.51)
+        Rust 2021 : 2021-10
+        Prelude 扩展 : 数组 IntoIterator
+    section 2022-2024
+        GATs 稳定 : 2022-10 (1.65)
+        AFIT : 2023-12 (1.75)
+        Rust 2024 : 2024-10
+        gen blocks : 生成器语法
+    section 2025-2027
+        Effects 系统 : 研究/设计
+        Specialization : 解决 soundness
+        Const 完整化 : 表达式 + where
+        Portable SIMD : 标准库集成
+    section 长期
+        Linux 内核成熟 : 驱动生态
+        形式化验证 : 编译器集成
+        AI 辅助编译 : 类型推断增强
 ```
 
 ---
 
-## 四、与 L2-L3 的演进关联
+## 五、官方来源与追踪
+
+### 5.1 Rust Lang Team Blog
+> **来源**: [blog.rust-lang.org](https://blog.rust-lang.org/)
+
+语言团队发布重大特性稳定化公告、Edition 计划和长期路线图。关键文章系列：
+- "Roadmap for XXXX"：年度路线图
+- "Stabilization Report"：特性稳定化的详细技术报告
+- "Edition XXXX"：Edition 变更的深度解释
+
+### 5.2 Inside Rust
+> **来源**: [blog.rust-lang.org/inside-rust/](https://blog.rust-lang.org/inside-rust/)
+
+面向核心贡献者的技术博客，包含：
+- Compiler Team 的 triage 报告
+- Lang Team 的设计会议记录
+- Working Group 的进展更新
+- 比主博客更技术化、更频繁更新
+
+### 5.3 RFC 追踪
+
+| **资源** | **URL** | **用途** |
+|:---|:---|:---|
+| RFC 列表 | https://rust-lang.github.io/rfcs/ | 所有已接受/拒绝的 RFC |
+| RFC Book | https://rust-lang.github.io/rfcs/ | 按主题分类的 RFC |
+| 特性追踪 | https://github.com/rust-lang/rust/labels/C-tracking-issue | 实现进展 |
+| 不稳定特性 | https://doc.rust-lang.org/nightly/unstable-book/index.html | nightly 特性文档 |
+
+### 5.4 其他官方渠道
+
+- **This Week in Rust**：社区周报，汇总 PR、RFC 和博客
+- **Rust Reference**：语言规范的权威文档
+- **Rust Compiler Development Guide**：rustc 内部实现文档
+- **Zulip**：rust-lang.zulipchat.com，实时讨论平台
+
+---
+
+## 六、与 L2-L3 的演进关联
 
 | 演进方向 | 影响的概念层 | 关联文件 | 演进风险 |
 |:---|:---|:---|:---|
@@ -95,102 +289,26 @@ graph TD
 | 特化 (Specialization) | L2 Trait | `02_intermediate/01_traits.md` | Coherence 破坏 |
 | Const 泛型扩展 | L2 泛型 | `02_intermediate/02_generics.md` | 编译时间 |
 | 异步生态统一 | L3 Async | `03_advanced/02_async.md` | 生态系统分裂 |
+| SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/03_unsafe.md` | 平台差异 |
+| 内核 Rust | L1-L3 全部 | 多个文件 | API 不稳定 |
 
-## 五、知识来源
+---
+
+## 七、知识来源
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
 | Edition 保证向后兼容 | [Rust Edition Guide] | ✅ |
 | RFC 流程公开透明 | [Rust RFCs Repo] | ✅ |
 | AFIT 2024 稳定 | [Rust Blog] | ✅ |
-
-## 三、扩展内容：关键趋势详解与演进路线图
-
-### 3.1 Effects 系统（Effect System）
-
-> **[研究前沿]** Effects 系统将 IO、异步、异常等副作用显式标注在类型中：
-
-```rust
-// 假想语法（非当前 Rust）
-effect Async {
-    async fn fetch() -> Data;
-}
-
-fn process() -> Data / Async {  // 显式标注需要 Async effect
-    fetch().await
-}
-```
-
-| Effect 类型 | 当前 Rust | 理想 Effects |
-|:---|:---|:---|
-| IO | `std::io::Result` | `fn f() -> T / IO` |
-| Async | `async fn` | `fn f() -> T / Async` |
-| 异常 | `Result` / `panic` | `fn f() -> T / Throws E` |
-| 状态突变 | `&mut` | `fn f() -> T / State` |
-
-### 3.2 特化 (Specialization) 完整设计
-
-```rust
-// 当前 Rust（不稳定，需 nightly）
-#![feature(min_specialization)]
-
-trait Display {
-    fn display(&self);
-}
-
-// 通用实现
-impl<T> Display for T {
-    default fn display(&self) { println!("generic"); }
-}
-
-// 特化实现
-impl Display for i32 {
-    fn display(&self) { println!("i32: {}", self); }
-}
-```
-
-| 维度 | 现状 | 风险 |
-|:---|:---|:---|
-| 语法 | `default impl` | 不稳定 |
-| 一致性 | 需保证 Coherence | 重叠 impl 冲突 |
-| 使用场景 | 性能优化 | 编译时间增加 |
-
-### 3.3 Const 泛型完整化路线图
-
-| 阶段 | 功能 | 状态 |
-|:---|:---|:---|
-| ✅ Rust 1.51 | 基本 const generics `N: usize` | 稳定 |
-| ✅ Rust 1.79 | `where N > 0` 简单约束 | 稳定 |
-| 🚧 开发中 | 常量表达式泛型 `N + 1` | nightly |
-| 🚧 开发中 | `const fn` in traits | 不稳定 |
-| 🔮 未来 | 依赖类型（有限形式） | 研究 |
-
-### 3.4 Rust in Linux 内核演进
-
-```mermaid
-timeline
-    title Rust for Linux 演进
-    2020 : 初始 RFC
-    2021 : Linux 5.14 合并实验支持
-    2022 : 驱动示例 (Android Binder)
-    2023 : 更多驱动、内存安全改进
-    2024 : 生产环境测试
-    2025+ : 主线全面采用
-```
-
-### 3.5 Edition 2024 预期变更
-
-| 领域 | 可能变更 | 影响 |
-|:---|:---|:---|
-| `impl Trait` | 递归位置允许 | 简化类型标注 |
-| Lifetime | 隐式 `'static` 调整 | 减少标注 |
-| Match ergonomics | 继续改进 | 减少 `ref` |
-| Unsafe | 更精确的 unsafe 操作标注 | 安全审计 |
-| Async | 异步闭包改进 | 更易用 |
+| Effects 系统研究状态 | [Lang Team Blog / RFC] | 📋 早期设计 |
+| Specialization soundness 问题 | [Unstable Book / I-promise-disagreement] | ✅ |
+| Rust 内核 6.1 合并 | [LWN.net / Kernel Newbies] | ✅ |
+| Portable SIMD 进展 | [Portable SIMD Project Group] | 🚧 演进中 |
 
 ---
 
-## 六、相关概念链接
+## 八、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -200,10 +318,3 @@ timeline
 | Effects 系统 | [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) | 未来方向 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 协同演进 |
 | 语言对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 定位参考 |
-
----
-
-## 五、待补充
-
-- [ ] **TODO**: 补充每个 edition 的完整变更清单
-- [ ] **TODO**: 补充不稳定特性的 nightly 使用指南

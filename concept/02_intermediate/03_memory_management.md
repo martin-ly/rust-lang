@@ -475,6 +475,8 @@ struct NodeFixed {
 | Weak 打破循环引用 | [TRPL: Ch15] | ✅ |
 | Rust 泄漏不被视为 unsafe | [Rust Reference: Safety] | ✅ |
 | 内存分配器 API | [Rust Reference: GlobalAlloc] | ✅ |
+| 区域类型内存管理 | [Tofte & Talpin 1994 — POPL] | ✅ |
+| 分数权限理论 | [Boyland 2003 — Checking Interference with Fractional Permissions] | ✅ |
 
 ---
 
@@ -612,3 +614,15 @@ fn main() {
 - [x] **TODO**: 补充 `Pin<&mut T>` 的堆内存语义 —— 优先级: 高 —— 已完成 v1.1
 - [ ] **TODO**: 补充 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略 —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 预计: Phase 4
+
+---
+
+## 相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 所有权 / Drop | [](../01_foundation/01_ownership.md) | 内存管理根基 |
+| 借用规则 | [](../01_foundation/02_borrowing.md) | 内部可变性前提 |
+| Pin 与自引用 | [](../03_advanced/02_async.md) | 堆内存语义 |
+| Unsafe | [](../03_advanced/03_unsafe.md) | 裸指针边界 |
+| 形式化验证 | [](../04_formal/04_rustbelt.md) | 内存安全证明 |

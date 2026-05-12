@@ -91,6 +91,7 @@ graph TD
 **定义**：将请求封装为对象，从而使你可用不同的请求、队列或日志来参数化其他对象。
 
 **适用场景**：
+
 - 需要撤销/重做操作
 - 请求队列或异步任务
 - 操作日志与事务系统
@@ -126,6 +127,7 @@ impl Invoker {
 ```
 
 **与其他语言对比**：
+
 - **Java/C++**: 通常依赖 GC 或智能指针管理命令对象生命周期；Rust 需显式处理所有权，`Box<dyn Command>` 提供了堆分配动态分发。
 - **Go**: 使用函数值或接口；Rust 的 trait 对象在 vtable 布局上与 Go interface 类似，但 Rust 要求显式 `Box`/`&dyn`。
 
@@ -136,6 +138,7 @@ impl Invoker {
 **定义**：表示一个作用于某对象结构中各元素的操作，使你可以在不改变各元素类的前提下定义作用于这些元素的新操作。
 
 **适用场景**：
+
 - AST（抽象语法树）遍历与代码生成
 - 文档对象模型（DOM）处理
 - 复杂异构数据结构需要多种遍历策略
@@ -166,6 +169,7 @@ mod ast {
 ```
 
 **与其他语言对比**：
+
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。
 - **Haskell**: 利用类型类（type class）和代数数据类型直接建模，Rust 的 enum + trait 在表达能力上非常接近。
 
@@ -176,6 +180,7 @@ mod ast {
 **定义**：定义一系列算法，把它们一个个封装起来，并且使它们可互相替换。
 
 **适用场景**：
+
 - 排序、搜索等可替换算法
 - 不同平台/配置下的行为差异
 - 避免大量条件分支
@@ -223,6 +228,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 ```
 
 **与其他语言对比**：
+
 - **C++**: 模板（静态）+ 虚函数（动态）；Rust 的泛型单态化与 C++ 模板实例化类似，但类型检查更严格。
 - **Java**: 接口 + 多态；无静态分发零成本特性，所有策略均为动态。
 - **Go**: 接口值隐式实现；Rust trait 需显式实现，静态分发默认内联。
@@ -234,6 +240,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 **定义**：允许对象在其内部状态改变时改变它的行为，对象看起来好像修改了它的类。
 
 **适用场景**：
+
 - 协议实现（TCP、HTTP/2 状态机）
 - 业务工作流引擎
 - 游戏角色状态（Idle、Walk、Attack）
@@ -296,6 +303,7 @@ impl Connection<Open> {
 ```
 
 **与其他语言对比**：
+
 - **C**: 通常用整数状态码 + `switch`，无类型安全，易遗漏状态处理。
 - **Rust**: `match` 穷尽性检查强制处理所有状态；Typestate 变体将非法转换上移至编译期。
 - **TypeScript**: 可用 discriminated union 模拟，但运行期仍可能处于无效状态。
@@ -307,6 +315,7 @@ impl Connection<Open> {
 **定义**：在运行时动态加载并注册扩展模块，无需修改核心代码。
 
 **适用场景**：
+
 - 编辑器/IDE 扩展系统
 - Web 服务器中间件链
 - 游戏模组（mod）系统
@@ -352,6 +361,7 @@ unsafe {
 ```
 
 **与其他语言对比**：
+
 - **Python**: `importlib` 动态导入，运行时灵活但无类型安全；Rust 的 `libloading` + trait 对象在 FFI 边界提供类型约束。
 - **Java**: `ServiceLoader` / OSGi 模块化；Rust 无内置类加载器，需手动管理动态库生命周期。
 - **C/C++**: `dlopen` / `LoadLibrary`；Rust 的 `libloading` 是对这些 API 的安全封装。
@@ -367,6 +377,7 @@ unsafe {
 **定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。
 
 **Rust 表现**：
+
 - 为单一函数引入复杂的 Trait 层次和泛型参数，而仅有一个实现。
 - 使用 `async` / `tokio` 处理完全同步、I/O 极少的任务。
 
@@ -379,6 +390,7 @@ unsafe {
 **定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。
 
 **Rust 表现**：
+
 - 过早将内部模块拆分为独立 crate，导致 Workspace 依赖环。
 - 过早定义 `dyn Trait` 接口，而实际调用方只有一处且性能敏感。
 
@@ -391,10 +403,12 @@ unsafe {
 **定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。
 
 **Rust 表现**：
+
 - 用 `String` 传递命令名称而非 enum。
 - 用字符串拼接 SQL / 路径，而非使用类型安全的构造器。
 
 **Rust 对策**：
+
 - 使用 enum + `match`。
 - 使用 `std::path::PathBuf` 代替裸字符串路径。
 - 使用 `sqlx` 等编译期检查的查询构造器。
@@ -415,10 +429,12 @@ fn run_command(cmd: Command) { match cmd { ... } }
 **定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。
 
 **Rust 表现**：
+
 - 一个 `Context` struct 持有数十个字段和几十种方法。
 - `Mutex<GlobalState>` 包裹整个应用状态，导致锁竞争和逻辑纠缠。
 
 **Rust 对策**：
+
 - 按领域拆分 struct，使用组合代替堆砌。
 - 利用所有权系统将状态分散到不同模块，通过消息传递（channel）或 Actor 模式通信。
 
@@ -456,15 +472,23 @@ fn run_command(cmd: Command) { match cmd { ... } }
 
 ---
 
-## 八、知识来源
+## 八、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| RAII 是 Rust 核心模式 | [TRPL] | ✅ |
-| Typestate 利用类型系统 | [Rust Design Patterns] | ✅ |
+| RAII 是 Rust 核心模式 | [TRPL] · [Wikipedia: RAII] | ✅ |
+| Typestate 利用类型系统 | [Rust Design Patterns] · [Aldrich et al. 2009] | ✅ |
 | Newtype 零成本 | [TRPL] · [Rust Reference] | ✅ |
-| Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns] | ✅ |
+| Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns, 1994] | ✅ |
 | Stringly typed 为反模式 | [Rust API Guidelines] | ✅ |
+| 设计模式定义 | [Wikipedia: Design pattern] | ✅ |
+| Typestate analysis 定义 | [Wikipedia: Typestate analysis] | ✅ |
+| 所有权类型理论基础 | [Clarke et al. 1998 — Ownership Types] | ✅ |
+| CMU 课程涵盖设计模式 | [CMU 17-363 — PL Concepts] | ✅ |
+| Stanford 课程涵盖 Rust 模式 | [Stanford CS340R] | ✅ |
+| Rust API 设计规范 | [Rust API Guidelines] | ✅ |
+| 设计模式系统化 | [Gamma et al. 1994 — Design Patterns: Elements of Reusable Object-Oriented Software] | ✅ |
+| Typestate 工业实现 | [Aldrich et al. 2009 — Typestates for Objects, ECOOP] | ✅ |
 
 ---
 
@@ -480,3 +504,13 @@ fn run_command(cmd: Command) { match cmd { ... } }
 | 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
 | 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
+
+---
+
+## 十、待补充与演进方向（TODOs）
+
+- [ ] **高**: 补充更多 Rust 特有模式（如 GATs 模式、Type Erasure）
+- [ ] **高**: 补充 async/await 设计模式
+- [ ] **中**: 补充 FFI 边界的安全封装模式深度案例
+- [ ] **中**: 补充错误处理模式（`thiserror`/`miette`/`snafu` 对比）
+- [ ] **低**: 补充各模式的 benchmark 对比数据

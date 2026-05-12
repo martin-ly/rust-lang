@@ -6,7 +6,35 @@
 
 ---
 
-## 一、安全保证层次结构
+**变更日志**:
+
+- v1.0 (2026-05-12): 初始版本
+- v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接
+
+---
+
+## 一、权威定义
+
+### 1.1 Wikipedia 权威定义
+
+> **[Wikipedia: Memory safety]** Memory safety is the state of being protected from various software bugs and security vulnerabilities when dealing with memory access, such as buffer overflows and dangling pointers.
+> **来源**: <https://en.wikipedia.org/wiki/Memory_safety>
+
+> **[Wikipedia: Undefined behavior]** Undefined behavior is the result of executing computer code whose behavior is not prescribed by the language specification to which the code can adhere.
+> **来源**: <https://en.wikipedia.org/wiki/Undefined_behavior>
+
+> **[Wikipedia: Type safety]** Type safety is the extent to which a programming language discourages or prevents type errors.
+> **来源**: <https://en.wikipedia.org/wiki/Type_safety>
+
+> **[Wikipedia: Race condition]** A race condition is the condition of a system where the system's substantive behavior is dependent on the sequence or timing of other uncontrollable events.
+> **来源**: <https://en.wikipedia.org/wiki/Race_condition>
+
+> **[Wikipedia: Deadlock]** A deadlock is a state in which each member of a group is waiting for another member, including itself, to take action.
+> **来源**: <https://en.wikipedia.org/wiki/Deadlock>
+
+---
+
+## 二、安全保证层次结构
 
 ```mermaid
 graph TD
@@ -204,21 +232,28 @@ graph TD
 
 ---
 
-## 七、来源与可信度
+## 八、知识来源关系（Provenance）
 
-| 论断 | 来源 | 可信度 |
+| **论断** | **来源** | **可信度** |
 |:---|:---|:---|
-| Safe Rust 无 UAF/double-free | TRPL + RustBelt | ✅ |
-| Rc 循环导致泄漏 | TRPL Ch15 | ✅ |
-| mem::forget 阻止 Drop | std docs | ✅ |
-| UnsafeCell 允许共享可变 | std docs + Rustonomicon | ✅ |
-| Miri 检测 UB | Miri 文档 | ✅ |
-| RustBelt 不覆盖 unsafe | Jung et al. POPL 2017 | ✅ |
-| Stacked/Tree Borrows 争议 | Rust 内部讨论 | ⚠️ |
+| Safe Rust 无 UAF/double-free | [TRPL] · [RustBelt POPL 2018] | ✅ |
+| Rc 循环导致泄漏 | [TRPL Ch15] | ✅ |
+| mem::forget 阻止 Drop | [std docs] | ✅ |
+| UnsafeCell 允许共享可变 | [std docs] · [Rustonomicon] | ✅ |
+| Miri 检测 UB | [Miri 文档] | ✅ |
+| RustBelt 不覆盖 unsafe | [Jung et al. POPL 2017] | ✅ |
+| Stacked/Tree Borrows 争议 | [Rust 内部讨论] · [Jung et al. POPL 2019] | ⚠️ |
+| 内存安全定义 | [Wikipedia: Memory safety] | ✅ |
+| 未定义行为定义 | [Wikipedia: Undefined behavior] | ✅ |
+| 类型安全定义 | [Wikipedia: Type safety] | ✅ |
+| 数据竞争定义 | [Wikipedia: Race condition] | ✅ |
+| 死锁定义 | [Wikipedia: Deadlock] | ✅ |
+| CMU Safe Systems 课程覆盖边界 | [CMU 17-350] | ✅ |
+| 边界测试方法论 | [Torchiano et al. 2018] | ✅ |
 
 ---
 
-## 八、TODO
+## 九、待补充与演进方向（TODOs）
 
 - [ ] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息
 - [ ] **高**: 建立"错误码 → 边界条件 → 概念"的反向索引

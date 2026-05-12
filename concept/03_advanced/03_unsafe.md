@@ -574,3 +574,15 @@ C 端保证:
 - [ ] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 预计: Phase 2
 - [ ] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 预计: Phase 4
 - [ ] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 预计: Phase 3
+
+---
+
+## 相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 所有权 | [](../01_foundation/01_ownership.md) | safe 边界 |
+| 借用规则 | [](../01_foundation/02_borrowing.md) | unsafe 突破 |
+| 内存管理 | [](../02_intermediate/03_memory_management.md) | 裸指针 |
+| 形式化验证 | [](../04_formal/04_rustbelt.md) | unsafe 证明边界 |
+| 安全边界 | [](../05_comparative/safety_boundaries.md) | 全局边界汇总 |

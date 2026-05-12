@@ -652,3 +652,14 @@ trait DataProvider<'a> {
 ---
 
 - [x] **TODO**: 补充 `async fn` 在 trait 中的生命周期问题 —— 优先级: 高 —— 已完成 v1.1
+
+---
+
+## 相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| 所有权 | [](../01_foundation/01_ownership.md) | Pin 根基 |
+| 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发 |
+| Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
+| 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |

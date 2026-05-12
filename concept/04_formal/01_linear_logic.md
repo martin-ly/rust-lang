@@ -321,7 +321,7 @@ graph TD
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 边界分析 |
 
-## 九、待补充
+## 九、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集
 - [ ] **TODO**: 补充 Phase semantics 与 Rust 的直观联系

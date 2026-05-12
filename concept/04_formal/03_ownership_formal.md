@@ -258,7 +258,7 @@ graph TD
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 别名模型应用 |
 
-## 七、待补充
+## 七、待补充与演进方向（TODOs）
 
 - [ ] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型
 - [ ] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例
