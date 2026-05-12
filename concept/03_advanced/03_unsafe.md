@@ -11,6 +11,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例
 - v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注
+- v1.2 (2026-05-13): 深度重构——新增 §5.5 Stacked Borrows 操作语义、§5.6 Tree Borrows 演进；增强 §7.2 Miri 检测边界（覆盖范围表格+MIRIFLAGS使用）；补充层次一致性标注（L1/L4映射）与章节过渡段落
 
 ---
 
@@ -201,6 +202,8 @@ Miri (Rust 解释器) 可检测:
   ❌ FFI 边界错误（外部代码不透明）
 ```
 
+> 详见 §7.2 的完整覆盖范围表格与 `MIRIFLAGS` 使用方式。
+>
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
 
 ### Step 6 — 决策：什么时候必须写 unsafe？
@@ -293,6 +296,125 @@ graph TD
     F --> F3[Send/Sync 实现]
     F --> F4[零拷贝解析]
 ```
+
+> 思维导图展示了 Unsafe Rust 的知识全景，但 unsafe 代码与内存模型的精确交互需要更深入的别名语义。以下两节引入 Stacked Borrows 与 Tree Borrows 两种操作语义模型，建立 unsafe 代码在运行时的权限边界。
+
+<!-- L3::别名模型 -->
+
+### 5.5 Stacked Borrows 操作语义
+
+> **权威来源**: Jung et al., *Stacked Borrows: An Aliasing Model for Rust*, POPL 2019
+> **核心思想**: 为每个内存位置维护一个访问权限栈（Borrow Stack），在解释执行时动态验证引用与裸指针的别名规则是否被违反。
+
+**动机**：Rust 的引用规则（`&T` 不可变共享、`&mut T` 唯一可变）在编译时静态检查，但 `unsafe` 代码中的裸指针可以绕过这些检查。Stacked Borrows 提供了一个**操作语义模型**，使得 Miri 能够在解释执行时动态检测别名违规。
+
+**核心概念：Borrow Stack**
+
+每个内存位置关联一个权限栈，栈中的每个条目代表一种**访问权限**（Permission）：
+
+| 权限类型 | 符号 | 创建方式 | 语义 |
+|:---|:---|:---|:---|
+| **Unique** | `Unique` | `&mut T` | 独占读写；不允许其他活跃引用/指针访问同一位置 |
+| **SharedReadOnly** | `ShrRo` | `&T` | 只读共享；允许任意多个 `&T` 同时存在 |
+| **SharedReadWrite** | `ShrRw` | `UnsafeCell` 内部可变借用 | 允许读写，但不保证独占性 |
+| **Foreign** | `Fr` | `*const T` / `*mut T`（裸指针） | 无别名保证；与栈中所有权限兼容，但会触发弹栈 |
+
+**规则**
+
+1. **`&T` 创建 SharedReadOnly**：当通过引用读取时，在栈顶压入 `ShrRo`。多个 `&T` 可共存。
+2. **`&mut T` 创建 Unique**：当通过可变引用访问时，在栈顶压入 `Unique`。如果栈顶已存在不兼容权限（如另一个 `Unique`），则触发 UB。
+3. **裸指针创建 Foreign**：从引用转换而来的裸指针获得 `Foreign` 权限。它不享有别名保证。
+4. **失效规则（Pop）**：当新访问与**栈顶**权限不兼容时，不断 pop 栈顶，直到栈顶兼容或栈空。如果最终仍不兼容，则触发 UB。
+
+**代码示例：合法代码**
+
+```rust
+fn stacked_borrows_legal() {
+    let mut x = 0i32;
+    let r1 = &mut x;      // 栈: [Unique(r1)]
+    *r1 = 1;
+    let r2 = &*r1;        // 栈: [Unique(r1), ShrRo(r2)]
+    println!("{}", r2);   // 读取 ShrRo，合法
+    // r2 生命周期结束，弹出 ShrRo
+    *r1 = 2;              // 回到 Unique(r1)，合法
+}
+```
+
+**代码示例：触发 UB**
+
+```rust
+fn stacked_borrows_ub() {
+    let mut x = 0i32;
+    let r1 = &mut x;          // 栈: [Unique(r1)]
+    let raw = r1 as *mut i32; // raw 获得 Foreign，但 r1 的 Unique 仍在栈顶
+    let r2 = &mut x;          // ❌ 新 Unique(r2) 与栈顶 Unique(r1) 不兼容
+                              //    弹出 Unique(r1) → raw 也失效
+    unsafe {
+        *raw = 1;             // UB! raw 已被弹出，悬垂/失效
+    }
+}
+```
+
+> **注意**：上面的简化示例在最新编译器中可能因优化而表现不同，但 Miri 在解释模式下会精确追踪 Borrow Stack。
+
+**Borrow Stack 状态变化图**
+
+```mermaid
+graph LR
+    S0["栈: [Root]"] -->|&mut x → r1| S1["栈: [Root, Unique(r1)]"]
+    S1 -->|&*r1 → r2| S2["栈: [Root, Unique(r1), ShrRo(r2)]"]
+    S2 -->|r2 结束| S3["栈: [Root, Unique(r1)]"]
+    S3 -->|&mut x → r3| S4{"兼容?"}
+    S4 -->|是| S5["栈: [Root, Unique(r3)]"]
+    S4 -->|否<br/>Unique 冲突| S6["弹出 Unique(r1)"]
+    S6 --> S7["栈: [Root, Foreign(raw)]"]
+    S7 -->|*raw| S8["✅ 合法"]
+    S6 -->|弹出到 Root<br/>raw 也失效| S9["❌ UB: raw 失效"]
+```
+
+> Stacked Borrows 提供了直观的栈式别名模型，但其严格性导致部分合法 unsafe 模式被误判。Tree Borrows 在此基础上放宽约束，形成更贴近实际需求的树形结构。
+
+<!-- L3::TreeBorrows -->
+
+### 5.6 Tree Borrows 演进
+
+> **权威来源**: Jung & Villani, *Tree Borrows*, 2023
+> **层级标注**: `L3::别名模型` → `L4::RustBelt` 放宽前提 · `L1::借用` 重叠读取扩展
+
+**动机**：Stacked Borrows 对许多**合法的 unsafe 模式**过于严格。例如，某些链表操作、自引用结构、以及从同一原始指针派生出的多个只读指针的交替使用，在 Stacked Borrows 下会被判定为 UB，但它们在直觉上是安全的。
+
+**核心变化：从栈到树**
+
+Tree Borrows 用**树形结构**替代线性栈：
+
+- **根节点（Root）**：原始指针（最初分配内存时获得）
+- **子节点（Child）**：从父节点派生的借用分支
+- **路径兼容**：两个借用是否冲突取决于它们在树中的**路径关系**，而不仅仅是时间顺序
+
+关键改进：
+
+| 特性 | Stacked Borrows | Tree Borrows |
+|:---|:---|:---|
+| 结构 | 线性栈（LIFO） | 树（父子路径） |
+| 重叠读取 | 严格时序依赖 | 支持来自不同路径的多个 `&T` |
+| 裸指针宽容度 | 低（容易弹栈失效） | 高（保留更多合法模式） |
+| 链表/自引用 | 常被误判为 UB | 覆盖更多合法模式 |
+| Miri 默认 | ❌（曾默认） | ✅（2023 年后默认） |
+
+**与 RustBelt 的关系**
+
+| 维度 | Stacked/Tree Borrows | RustBelt |
+|:---|:---|:---|
+| **类型** | 操作语义（Operational Semantics） | 逻辑关系（Logical Relation） |
+| **目标** | 定义"哪些程序行为是 UB" | 证明"类型系统保证内存安全" |
+| **工具** | Miri 动态检查 | Iris/Coq 形式化证明 |
+| **关系** | 为 RustBelt 提供**执行层面的 UB 定义** | 为别名模型提供**类型安全定理** |
+
+> **[Ralf Jung Blog]** Tree Borrows 是向 RustBelt 逐步对齐的桥梁：操作语义定义了 Miri 可检测的边界，而 RustBelt 试图证明 Safe Rust 在该边界内永远不会触发 UB。🔍 待验证（RustBelt 对 unsafe 的完整覆盖仍在进行中）
+
+> **跨层映射**: `L3::别名模型` ↔ [`L1::借用规则`](../01_foundation/02_borrowing.md) 静态检查 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 形式化证明
+
+> 理解了别名模型的操作语义后，我们可以将 unsafe 的决策从"直觉判断"转化为"规则判定"。以下决策树提供工程实践中的判别工具。
 
 ---
 
@@ -452,16 +574,43 @@ graph TD
 
 ### 7.2 Miri 的验证边界
 
-```text
-Miri (Rust 解释器) 可检测:
-  ✅ 悬垂指针解引用
-  ✅ 越界访问
-  ✅ 未对齐访问
-  ✅ 数据竞争（部分）
-  ✅ 无效枚举值
-  ❌ 所有可能的 UB（停机问题）
-  ❌ 与硬件相关的行为（如内联汇编）
+> **权威来源**: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html)
+> **层级标注**: `L3::动态验证` → `L1::借用` Miri 可检测别名违规 · `L4::RustBelt` 操作语义动态近似
+
+Miri 是 Rust 的 MIR（Mid-level IR）解释器，其核心功能之一是作为 **Stacked Borrows / Tree Borrows 的动态检查器**。它在解释执行时维护每个内存位置的 Borrow Stack（或 Borrow Tree），实时检测别名违规、悬垂指针、未初始化读取等 UB。
+
+**覆盖范围表格**
+
+| 问题类型 | Miri 检测 | 说明 | 工具补充 |
+|:---|:---:|:---|:---|
+| **别名违规** | ✅ | Stacked/Tree Borrows 动态追踪 | — |
+| **未初始化内存读取** | ✅ | `MaybeUninit` 状态追踪 | — |
+| **悬空指针解引用** | ✅ | 分配-释放追踪 | — |
+| **越界访问** | ✅ | 内存边界检查 | — |
+| **未对齐访问** | ✅ | 对齐约束验证 | — |
+| **无效枚举值** | ✅ | discriminant 合法性检查 | — |
+| **数据竞争** | ❌ | Miri 为单线程解释器 | [Loom](https://docs.rs/loom) |
+| **死锁** | ❌ | 活性性质不可判定 | 静态分析 / 模型检测 |
+| **逻辑错误** | ❌ | 功能正确性超出范围 | 测试 / [Kani](https://github.com/model-checking/kani) |
+| **硬件相关行为** | ❌ | 如内联汇编、SIMD | 真机测试 |
+| **FFI 边界错误** | ❌ | 外部代码不透明 | 人工审查 |
+
+**使用方式**
+
+```bash
+# 默认使用 Tree Borrows（推荐）
+MIRIFLAGS=-Zmiri-tree-borrows cargo miri test
+
+# 显式使用 Stacked Borrows（旧行为）
+MIRIFLAGS=-Zmiri-stacked-borrows cargo miri test
+
+# 仅运行单个测试
+MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 ```
+
+> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
+>
+> **[Miri Book]** Tree Borrows 模式（`-Zmiri-tree-borrows`）自 2023 年起成为 Miri 的推荐默认配置，对合法 unsafe 代码更宽容。✅ 已验证
 
 ### 7.3 定理一致性矩阵（⟹ 推理链）
 
@@ -483,6 +632,8 @@ Miri (Rust 解释器) 可检测:
 > **[🔍 待验证]** RustBelt 对 unsafe 的完整形式化覆盖仍在活跃研究中，目前仅覆盖部分常见模式（如 Vec、Rc、Arc 等）。
 >
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性" · §6.1 "形式化保证失效条件"
+>
+> **新增跨层映射**: `L3::别名模型` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 运行时动态验证 · [`L4::RustBelt`](../04_formal/04_rustbelt.md) 操作语义实例与逻辑关系
 
 ---
 

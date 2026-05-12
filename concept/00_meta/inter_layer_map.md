@@ -11,6 +11,7 @@
 graph TB
     subgraph L0["L0 元信息层"]
         M[methodology]
+        SS[semantic_space]
         S[sources]
         T[todos]
     end
@@ -64,6 +65,10 @@ graph TB
 
     %% 正向形式化映射
     M -.->|"规范"| L1 & L2 & L3 & L4 & L5 & L6 & L7
+    SS -.->|"表征空间映射"| L1 & L2 & L3 & L4 & L5
+    SS ==>|"封闭性公理"| L4
+    SS -.->|"等价表达对比"| L5
+    SS -.->|"未来扩展"| L7
     LL ==>|"形式化根基"| OF
     OF ==>|"证明 L1 安全"| O & B & L
     TT ==>|"类型规则"| TS & G & TR
@@ -401,4 +406,5 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 - [ ] **高**: 补充 Pin 的形式化语义来源（location stability 的精确对应论文）
 - [ ] **中**: 补充 HRTB 与全称量词（∀）的形式化对应关系
 - [ ] **低**: 追踪 Rust 语言演进对 L4 形式化模型的影响（如 Tree Borrows vs Stacked Borrows）
+- [x] **高**: Wave 11 表征空间元分析（semantic_space.md）+ 索引同步
 - [ ] **低**: 建立机器可解析的层间关系格式（YAML/JSON 导出）

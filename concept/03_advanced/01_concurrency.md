@@ -11,6 +11,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、Send/Sync 矩阵、同步原语对比、fearless concurrency 形式化论证、思维导图、示例反例
 - v1.1 (2026-05-13): 增强定理一致性矩阵（11行 ⟹ 推理链）、反命题决策树、6步认知路径、章节过渡、层次一致性标注
+- v1.2 (2026-05-13): 新增 §6.5 happens-before 推理链、§6.6 同步原语谱系、§6.7 确定性推理；扩展反命题决策树（3个）；新增 Mermaid 图与代码示例
 
 ---
 
@@ -592,6 +593,64 @@ graph TD
 
 **分析**: `Arc` 解决的是"多个所有者"问题，不是"可变共享"问题，也不是"循环引用"问题。需配合 `Mutex`/`RwLock` 做内部可变，配合 `Weak` 打破循环。
 
+#### 反命题 4: "Atomic 操作总是线程安全的"
+
+```mermaid
+graph TD
+    P4["命题: Atomic 操作总是线程安全的"] --> T1{"使用 Ordering::Relaxed 做同步?"}
+    T1 -->|是| F1["反例: Relaxed 无顺序保证<br/>→ 可能看到乱序写入，同步标志失效<br/>style fill:#f66"]
+    T1 -->|否| T2{"Acquire/Release 是否覆盖所有观察者?"}
+    T2 -->|否| F2["反例: 第三方线程可能仍看到旧值<br/>→ 需 SeqCst 或显式链式同步<br/>style fill:#f66"]
+    T2 -->|是| T3{"是否存在 ABA 问题?"}
+    T3 -->|是| W1["边界: CAS 可能错过中间变化<br/>→ 需 tagged pointer 或 epoch GC<br/>style fill:#ff9"]
+    T3 -->|否| T4["定理成立: Atomic + 正确 Ordering 安全<br/>✅ 无数据竞争，正确建立 happens-before<br/>style fill:#6f6"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style W1 fill:#ff9
+    style T4 fill:#6f6
+```
+
+**分析**: Atomic 只保证操作本身的原子性，不保证内存可见顺序。`Relaxed` 不提供 happens-before，错误的 Ordering 假设会导致同步失败。
+
+#### 反命题 5: "Mutex 保证临界区内指令不被重排"
+
+```mermaid
+graph TD
+    P5["命题: Mutex 保证临界区内指令不被重排"] --> U1{"是否需要跨临界区的顺序保证?"}
+    U1 -->|否| U2["Mutex lock/unlock 隐含 Acquire/Release<br/>→ 临界区之间不会穿越锁边界重排<br/>style fill:#6f6"]
+    U1 -->|是| U3{"是否需要禁止编译器重排?"}
+    U3 -->|否| U4["Release/Acquire 语义已足够<br/>→ 临界区之间的 happens-before 已建立<br/>style fill:#6f6"]
+    U3 -->|是| F1["反例: 编译器可在临界区内重排无关指令<br/>→ 需 compiler_fence 或 atomic::fence<br/>style fill:#f96"]
+
+    style U2 fill:#6f6
+    style U4 fill:#6f6
+    style F1 fill:#f96
+```
+
+**分析**: Mutex 的 `lock()` 隐含 Acquire，`unlock()` 隐含 Release，保证临界区之间的 happens-before。但**编译器仍可在临界区内重排无关指令**。若需禁止编译器重排（如与外部设备交互），需显式使用 `compiler_fence`。
+
+#### 反命题 6: "SeqCst 总是最佳选择"
+
+```mermaid
+graph TD
+    P6["命题: SeqCst 总是最佳选择"] --> V1{"是否需要全局全序协调多个变量?"}
+    V1 -->|否| V2{"单变量同步是否足够?"}
+    V2 -->|是| F1["反例: SeqCst 性能代价显著<br/>→ 所有主流架构产生更强内存屏障<br/>→ Release/Acquire 通常足够<br/>style fill:#f96"]
+    V2 -->|否| V3{"多变量但仅需 pairwise 同步?"}
+    V3 -->|是| F2["反例: 多个 R/A 配对可独立建立 hb<br/>→ 无需全局 SeqCst 顺序<br/>style fill:#f96"]
+    V3 -->|否| V4{"是否追求极致性能?"}
+    V4 -->|是| F3["反例: SeqCst 可能成为瓶颈<br/>→ 考虑 Relaxed + 显式 fence<br/>style fill:#f96"]
+    V4 -->|否| T1["定理成立: SeqCst 提供最强保证<br/>✅ 全局一致顺序，心智负担最低<br/>style fill:#6f6"]
+
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style F3 fill:#f96
+    style T1 fill:#6f6
+```
+
+**分析**: `SeqCst` 是"最安全"但非"最佳"选择。绝大多数场景下，`Release`/`Acquire` 或 `AcqRel` 已足以建立所需 happens-before，且性能更优。SeqCst 的过度使用会导致不必要的内存屏障开销。
+
 #### 边界极限测试
 
 ```rust
@@ -752,6 +811,158 @@ while !ready.load(Ordering::Relaxed) {}  // 可能永远循环！
 ---
 
 - [x] **TODO**: 补充 `std::sync::atomic` 内存序（Relaxed/Acquire/Release/SeqCst） —— 优先级: 高 —— 已完成 v1.1
+
+### 6.5 happens-before 推理链
+
+> **[Rustonomicon: Atomics]** · **[C11 Standard §5.1.2.4]** Rust 的并发安全不仅依赖原子操作，更依赖操作之间建立的 happens-before 关系。以下推理链从单线程程序序出发，逐步构建全局偏序。
+
+**Step 1: sequenced-before（单线程程序序）**
+
+- 定义：同一线程内，语句按源码顺序执行
+- 代码：`x = 1; y = 2;` 则 `x=1` sequenced-before `y=2`
+
+**Step 2: synchronizes-with（线程间同步）**
+
+- 定义：线程 A 的 Release store 与线程 B 的 Acquire load 同地址且读取该值
+- 代码：Release/Acquire 配对建立跨线程同步
+
+**Step 3: inter-thread-happens-before（传递闭包）**
+
+- 定义：sequenced-before ∪ synchronizes-with 的传递闭包
+- 若 A sequenced-before B，B synchronizes-with C，则 A inter-thread-happens-before C
+
+**Step 4: happens-before（全局偏序）**
+
+- 定义：sequenced-before ∪ inter-thread-happens-before
+- 结论：若 A happens-before B，则 A 的所有内存写入对 B 可见
+
+```mermaid
+graph LR
+    S1[sequenced-before<br/>单线程程序序] --> S2[synchronizes-with<br/>Release→Acquire]
+    S2 --> S3[inter-thread-happens-before<br/>传递闭包]
+    S3 --> S4[happens-before<br/>全局偏序]
+```
+
+```rust
+use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::sync::Arc;
+use std::thread;
+
+let ready = Arc::new(AtomicBool::new(false));
+let data = Arc::new(AtomicUsize::new(0));
+let (r2, d2) = (Arc::clone(&ready), Arc::clone(&data));
+
+thread::spawn(move || {
+    d2.store(42, Ordering::Relaxed);
+    r2.store(true, Ordering::Release); // Step 2: Release
+});
+
+while !ready.load(Ordering::Acquire) {} // Step 2: Acquire → synchronizes-with
+assert_eq!(data.load(Ordering::Relaxed), 42); // Step 3-4: happens-before 保证可见
+```
+
+> **为什么需要下一节**：happens-before 定义了"何时可见"，但不同同步原语建立 happens-before 的方式各异。§6.6 将系统梳理这些原语的谱系，展示它们如何在同一套 happens-before 框架下协同工作。
+
+---
+
+### 6.6 同步原语谱系与交互保持
+
+| 原语 | happens-before 建立方式 | 阻塞性 | 确定性 | 适用场景 |
+|:---|:---|:---|:---|:---|
+| Atomic Relaxed | 仅原子性，无顺序 | 无阻塞 | 非确定 | 计数器 |
+| Atomic Release/Acquire | Release store → Acquire load | 无阻塞 | 部分确定 | 标志位 |
+| Atomic SeqCst | 全局全序 | 无阻塞 | 完全确定 | 多标志同步 |
+| Mutex | unlock → lock（隐含 R/A） | 阻塞 | 确定 | 共享状态 |
+| RwLock | 读共享/写互斥的 hb | 阻塞 | 确定 | 多读少写 |
+| Condvar | wait/notify 同步点 | 阻塞 | 非确定（spurious wakeup） | 条件等待 |
+| Barrier | wait 返回前 rendezvous | 阻塞 | 确定 | 分阶段并行 |
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Mutex, RwLock, Condvar, Barrier, Arc};
+use std::thread;
+
+// Atomic Relaxed: 无 hb，仅原子性
+let c = Arc::new(AtomicUsize::new(0));
+let c2 = Arc::clone(&c);
+thread::spawn(move || { c2.fetch_add(1, Ordering::Relaxed); });
+
+// Atomic Release/Acquire: 显式 synchronizes-with
+let f = Arc::new(AtomicUsize::new(0));
+let f2 = Arc::clone(&f);
+thread::spawn(move || { f2.store(1, Ordering::Release); });
+while f.load(Ordering::Acquire) == 0 {}
+
+// Atomic SeqCst: 全局全序（所有 SeqCst 操作有统一顺序）
+let s = Arc::new(AtomicUsize::new(0));
+s.store(1, Ordering::SeqCst);
+
+// Mutex: unlock → lock 隐含 hb
+let m = Arc::new(Mutex::new(0));
+let m2 = Arc::clone(&m);
+thread::spawn(move || { *m2.lock().unwrap() = 42; }); // unlock 隐式 Release
+
+// RwLock: write unlock → read/write lock 建立 hb
+let rw = Arc::new(RwLock::new(0));
+let rw2 = Arc::clone(&rw);
+thread::spawn(move || { *rw2.write().unwrap() = 42; });
+
+// Condvar: wait/notify 同步点（spurious wakeup 可能）
+let pair = Arc::new((Mutex::new(false), Condvar::new()));
+let pair2 = Arc::clone(&pair);
+thread::spawn(move || {
+    let (lock, cvar) = &*pair2;
+    *lock.lock().unwrap() = true;
+    cvar.notify_one();
+});
+
+// Barrier: wait 返回前 rendezvous
+let b = Arc::new(Barrier::new(3));
+for _ in 0..3 { let b2 = Arc::clone(&b); thread::spawn(move || { b2.wait(); }); }
+```
+
+> **为什么需要下一节**：同步原语谱系展示了"用什么工具建立 happens-before"，但它没有回答：Rust 的并发安全保证究竟确定到了什么程度？编译期能消除哪些不确定性，运行时又有哪些因素永远无法消除？§6.7 将厘清这条确定性边界。
+
+---
+
+### 6.7 确定性推理
+
+> **[Herlihy & Shavit: The Art of Multiprocessor Programming]** 并发程序的"正确性"分为安全性（safety）和活性（liveness）。Rust 的类型系统保证安全性中的无数据竞争，但不保证活性和逻辑正确性。
+
+**编译期确定性**：借用检查器 ⟹ 无数据竞争（对所有执行路径）。
+
+```text
+定理: 任意通过编译的 Safe Rust 程序，所有执行路径无数据竞争。
+依据: Alias-XOR-Mutation + Send/Sync 约束覆盖所有路径，与调度无关。
+```
+
+**运行时非确定性**：
+
+| 来源 | 表现 | Rust 能否控制 |
+|:---|:---|:---|
+| 调度顺序 | 线程交错不可预测 | ❌ OS 调度器决定 |
+| Spurious wakeup | Condvar::wait 虚假唤醒 | ❌ 标准允许，需循环检查 |
+| 弱内存模型 | 非 SeqCst 重排序 | ⚠️ 仅通过 Ordering 约束 |
+
+**边界**：Rust 保证"没有数据竞争"但不保证"正确结果"。
+
+```rust
+// ✅ 编译通过，无数据竞争；❌ 但逻辑错误（非原子 RMW）
+let d = Arc::new(Mutex::new(0));
+for _ in 0..2 {
+    let d2 = Arc::clone(&d);
+    thread::spawn(move || {
+        let old = *d2.lock().unwrap();
+        *d2.lock().unwrap() = old + 1; // 两个线程可能读到相同 old
+    });
+}
+```
+
+**反例**：即使无数据竞争，程序仍可能死锁或产生逻辑错误（见 §7.5）。
+
+> **对应标注**：本节的"安全性 vs 活性"二分与 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §5 的验证路径分层逻辑一致。
+
+---
 
 ### 补充章节：Send/Sync 的 unsafe impl 规范与责任
 

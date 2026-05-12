@@ -164,6 +164,7 @@
 | **Rc / RefCell** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L1 借用、L4 内存安全 | 分析 | ← 内部可变性 → 循环引用 |
 | **Region Types** | [L4: 所有权形式化](../04_formal/03_ownership_formal.md) | L1 生命周期 | 评价 | ≡ 生命周期 |
 | **repr** | [L3: Unsafe](../03_advanced/03_unsafe.md) | L5 Rust vs C++ | 应用 | ← FFI → 内存布局控制 |
+| **Representational Space (表征空间)** | [L0: 语义空间](semantic_space.md) | 所有层 | 评价 | ← 所有概念 → 能/不能表达边界 |
 | **RPITIT (Return Position Impl Trait In Trait)** | [L3: 异步](../03_advanced/02_async.md) | L2 Trait、L7 演进 | 评价 | ← AFIT → 关联返回类型 |
 | **RustBelt** | [L4: RustBelt](../04_formal/04_rustbelt.md) | L3 Unsafe、L7 形式化方法 | 评价 | ← Iris → Rust 安全验证 |
 
@@ -204,6 +205,7 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Unsafe Rust** | [L3: Unsafe](../03_advanced/03_unsafe.md) | L1 所有权、L4 RustBelt、L5 对比 | 评价 | ⚡ 所有 safe 定理的边界 |
+| **Unsafe Escape Hatch** | [L0: 语义空间](semantic_space.md) | L3 Unsafe、L5 对比 | 分析 | ⊘ safe 封闭性 → 局部逃逸 |
 | **Unpin** | [L3: 异步](../03_advanced/02_async.md) | L3 Pin | 分析 | ⊘ Pin → 默认可移动 |
 
 ### V
@@ -217,6 +219,7 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **Zero-cost Abstraction** | [L6: 设计模式](../06_ecosystem/02_patterns.md) | L2 泛型、L5 对比 | 评价 | ← 单态化 → 运行时零开销 |
+| **Zero-cost Safety** | [L0: 语义空间](semantic_space.md) | L1-L4 | 评价 | ← 编译期检查 → 运行时零开销安全 |
 
 ---
 
@@ -331,7 +334,34 @@
 
 ---
 
-## 七、Wave 6 新增概念索引
+## 七、Wave 11 新增概念索引
+
+以下概念为 Wave 11（表征空间元分析）中**新增或强化**的元概念：
+
+| 新增概念 | 出现文件 | 说明 | 类型 |
+|:---|:---|:---|:---|
+| **表征空间 (Representational Space)** | L0 元层 | 从能表达/不能表达/等价表达视角的 Rust 元分析 | 🔷 元结构 |
+| **语义封闭性 (Semantic Closure)** | L0 元层 | Safe Rust 作为封闭形式系统的公理与定理 | 🔷 元结构 |
+| **表达力三维分类** | L0 元层 | 能且高效 / 能但痛苦 / 不能排除 | 🔷 元结构 |
+| **等价表达谱系** | L0 元层 | 继承→Trait、异常→Result、虚函数→enum/dyn 等 | 🔶 交叉 |
+| **机制组合代数** | L0 元层 | Own/Borrow/Lifetime/Trait/Generic 的合法/非法组合 | 🔷 元结构 |
+| **跨语言表征空间对比** | L0 元层 | Rust vs C++/Haskell/Go/Java 五维矩阵 | 🔶 交叉 |
+| **未来特性对表征空间的扩展** | L0 元层 | const trait、effects、specialization 等 | 🔶 交叉 |
+
+### 7.1 Wave 11 等价表达速查
+
+| 原概念 | Rust 等价表达 | 语义等价性 | 性能等价性 | 扩展性等价性 |
+|:---|:---|:---|:---|:---|
+| 继承 | Trait + 组合 | ✅ 观察等价 | ✅ 更优（静态分发）| ⚠️ 不等价（Orphan Rule）|
+| 异常 | Result<T, E> | ✅ 观察等价 | ⚠️ 不等价（返回值 vs 异常表）| ✅ 更清晰 |
+| 虚函数 | enum + match / dyn Trait | ✅ 观察等价 | ✅ 可控（静态/动态）| ⚠️ enum 封闭 / dyn 开放 |
+| GC | 所有权 + Rc/Arc/Weak | ⚠️ 回收时机不等价 | ⚠️ 成本不等价 | ⚠️ 循环引用需手动处理 |
+| 模板元编程 | const generics + 宏 | ⚠️ 能力不等价 | ✅ 等价（编译期）| ⚠️ 宏无类型信息 |
+| 绿色线程 | async/await + OS 线程 | ⚠️ 调度不等价 | ✅ 相近 | ⚠️ 阻塞语义不同 |
+
+---
+
+## 八、Wave 6 新增概念索引
 
 以下概念为 Wave 6 全量深度重构中**新增或强化**的元概念与结构化元素：
 
@@ -368,4 +398,5 @@
 - [x] **中**: 建立"反例 → 概念"索引（如 Rc 循环引用 → 所有权边界）
 - [ ] **中**: 边界极限测试代码的 `cargo check` 编译验证
 - [ ] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查
+- [x] **高**: Wave 11 表征空间元分析（semantic_space.md）
 - [ ] **低**: 与 `inter_layer_map.md` 的层间映射同步更新

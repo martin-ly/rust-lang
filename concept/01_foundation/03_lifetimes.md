@@ -28,6 +28,8 @@
 
 > **[Wikipedia: Region-based memory management]** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
+> **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权、借用系统的交互约束。
+
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
@@ -62,6 +64,8 @@
 | **Rule 3** | 若有 `&self` 或 `&mut self`，输出生命周期等于 `self` | `fn foo(&self) -> &T` → `fn foo<'a>(&'a self) -> &'a T` | `impl MyStruct { fn get(&self) -> &T }` |
 
 ---
+
+> **过渡**: 属性矩阵展示了生命周期规则的静态特征，接下来需要建立概念之间的关联网络——生命周期如何与借用、泛型、异步等机制交织，形成完整的引用安全体系。
 
 ## 三、思维导图（Mind Map）
 
@@ -98,6 +102,8 @@ graph TD
 ```
 
 ---
+
+> **过渡**: 思维导图呈现了生命周期的静态知识结构，而定理推理链则回答"为什么能这么保证"——通过区域类型、子类型、约束可满足性的层层演绎，建立引用有效性的形式化保证。
 
 ## 四、定理推理链（Theorem Chain）
 

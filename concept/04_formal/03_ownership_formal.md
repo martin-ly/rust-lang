@@ -407,6 +407,7 @@ graph TD
 | 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | 约束求解 |
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 别名模型应用 |
+| Pin / 自引用 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §8 | 🔍 待补充: Pin 的形式化语义（location stability）|
 
 ---
 
@@ -416,3 +417,4 @@ graph TD
 - [ ] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析
 - [ ] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估
 - [ ] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系
+- [ ] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应（参见 L3 `02_async.md` §8）
