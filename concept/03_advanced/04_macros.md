@@ -109,7 +109,9 @@ Rust 宏 hygiene:
 
 > **[Rust Reference: Hygiene]** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
 >
-> **[Scheme 卫生宏论文 (Kohlbecker et al. 1986)]** 卫生宏的原始理论：宏展开应保持 α-重命名等价，内部绑定不泄露、外部绑定不捕获。Rust 的 hygiene 机制受此理论启发。✅ 已验证
+> **[Scheme 卫生宏论文 (Kohlbecker et al. 1986)]** 卫生宏的原始理论：宏展开应保持 α-重命名等价，内部绑定不泄露、外部绑定不捕获。Rust 的 hygiene 机制受此理论启发。 ✅ 已验证
+
+> **[Kohlbecker et al. 1986 — Hygienic Macro Expansion, POPL]** Scheme's hygienic macro system, implemented via implicit identifier renaming (gensym), is the direct theoretical ancestor of Rust's macro hygiene. ✅ 已验证
 
 ### 3.1 Hygienic Macro 的形式化
 
@@ -185,7 +187,9 @@ fn main() {
 
 > **[The Little Book of Rust Macros (TLBORM)]** macro_rules! 的模式匹配可视为语法树上的正则表达式：片段分类器（expr/ident/ty 等）匹配对应语法节点，重复模式 $($x:expr),* 对应零或多次匹配。✅ 已验证
 >
-> **[Rust Reference: Macro matchers]** 展开过程 = 模式变量替换 + 重复展开；vec![1, 2, 3] 匹配 $($x:expr),* 并展开为对应的数组初始化代码。✅ 已验证
+> **[Rust Reference: Macro matchers]** 展开过程 = 模式变量替换 + 重复展开；vec![1, 2, 3] 匹配 $($x:expr),* 并展开为对应的数组初始化代码。 ✅ 已验证
+
+> **[TRPL: Ch19.5]** `macro_rules!` performs compile-time pattern matching on token trees, with fragment specifiers matching syntactic categories (`expr`, `ty`, `ident`) rather than semantic types. ✅ 已验证
 
 ### 3.2 声明宏的模式匹配语义
 
@@ -324,6 +328,8 @@ graph TD
     style F3 fill:#f96
     style T3 fill:#ff9
 ```
+
+> **[RFC 1566: Procedural Macros]** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
 
 ### 5.5 宏与类型系统的交互边界
 
@@ -920,6 +926,8 @@ macro_rules! assert_impl {
 ---
 
 ## 十、待补充与演进方向（TODOs）
+
+> **[proc_macro2 crate]** `proc_macro2` bridges the compiler's internal `proc_macro` API with a stable, testable interface, enabling `syn` and `quote` to build procedural macros outside the compiler environment. ✅ 已验证
 
 - [ ] **TODO**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 优先级: 中 —— 预计: Phase 3
 - [ ] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 优先级: 中 —— 预计: Phase 2

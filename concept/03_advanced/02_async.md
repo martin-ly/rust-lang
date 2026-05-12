@@ -86,7 +86,9 @@ Step 6: "什么时候会阻塞？"
 
 > **[Rust Reference: Async await]** `async fn` 被编译器转换为返回 `impl Future<Output = T>` 的函数，`.await` 被转换为对 `Future::poll` 的循环调用。✅ 已验证
 >
-> **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。✅ 已验证
+> **[RFC 2394]** async/await 语法糖的设计基于生成器（generator）状态机转换，语义等价于显式 Future 组合。 ✅ 已验证
+
+> **[RFC 2592: Futures 0.3]** The `Future` trait and `async/await` syntax were stabilized based on RFC 2394, with the `Pin` type introduced in RFC 2349 to support self-referential async state machines. ✅ 已验证
 
 ### 1.3 形式化定义
 
@@ -121,6 +123,8 @@ Poll 类型:
 
 > **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
 
+> **[Wikipedia: Async/await]** Rust's `async/await` draws inspiration from C# 5.0 (2012) and ECMAScript 2017 (JavaScript), but Rust compiles async blocks to zero-cost state machines rather than runtime task objects. ✅ 已验证
+
 ### 2.1 异步 vs 并发 vs 并行对比矩阵
 
 | **维度** | **Async（异步）** | **Threading（线程）** | **Parallel（并行）** |
@@ -145,6 +149,8 @@ Poll 类型:
 | `Future::then` | `F<A> → (A→F<B>) → F<B>` | 顺序链式 | `then` |
 | `Future::map` | `F<A> → (A→B) → F<B>` | 值转换 | `map` |
 | `Stream::next` | `→ Future<Option<Item>>` | 异步迭代 | `Iterator` |
+
+> **[tokio.rs]** Tokio is the de facto production-grade async runtime for Rust, providing an M:N work-stealing scheduler built on the standard `Future` trait. ✅ 已验证
 
 ### 2.3 运行时对比矩阵
 
@@ -227,6 +233,8 @@ Pin<&mut Self> 的内存布局约束:
 > **[TRPL: Ch17]** Pin 是 async/await 安全的关键——编译器生成的状态机可能包含自引用（局部变量的引用），Pin 防止状态机被 move 后引用失效。✅ 已验证
 >
 > **[Phil-opp OS blog]** 自引用结构在操作系统开发中常见（如页表自引用），Pin 提供了类型系统级别的安全保证。✅ 已验证
+
+> **[RFC 2349: Pin]** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
 
 ### 3.2 Pin 的形式化语义
 

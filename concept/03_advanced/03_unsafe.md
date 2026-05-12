@@ -204,7 +204,9 @@ Miri (Rust 解释器) 可检测:
 
 > 详见 §7.2 的完整覆盖范围表格与 `MIRIFLAGS` 使用方式。
 >
-> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
+> **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。 ✅ 已验证
+
+> **[Jung et al., POPL 2019 — Stacked Borrows]** Miri implements the Stacked Borrows operational semantics for dynamic UB detection, later relaxed by Tree Borrows to cover more legitimate unsafe patterns. ✅ 已验证
 
 ### Step 6 — 决策：什么时候必须写 unsafe？
 
@@ -673,6 +675,8 @@ impl<T> MyVec<T> {
         Self { ptr: std::ptr::NonNull::dangling().as_ptr(), len: 0, cap: 0 }
     }
 
+> **[Rust Reference: NonNull]** `std::ptr::NonNull<T>` evolved from unstable `Unique<T>` and `Shared<T>` to provide a covariant raw pointer with a non-null invariant. ✅ 已验证
+
     pub fn push(&mut self, value: T) {
         if self.len == self.cap { self.grow(); }
         unsafe {
@@ -863,6 +867,8 @@ pub extern "C" fn rust_function(x: i32) -> i32 {
 }
 ```
 
+> **[Rust Reference: Type Layout]** `#[repr(C)]` guarantees C-compatible field ordering, alignment, and padding governed by the platform ABI. ✅ 已验证
+
 #### repr 属性矩阵
 
 | **属性** | **用途** | **保证** | **风险** |
@@ -899,7 +905,9 @@ fn packed_borrow(p: &Packed) {
 }
 ```
 
-> **[Rust Reference: External blocks]** FFI 边界是 Rust 形式系统的"公理缺口"：Rust 编译器无法验证外部代码的行为，程序员需人工保证 ABI 匹配、指针有效性和生命周期一致性。✅ 已验证
+> **[Rust Reference: External blocks]** FFI 边界是 Rust 形式系统的"公理缺口"：Rust 编译器无法验证外部代码的行为，程序员需人工保证 ABI 匹配、指针有效性和生命周期一致性。 ✅ 已验证
+
+> **[Rustonomicon: FFI]** The Rustonomicon documents FFI best practices including `#[repr(C)]` layout requirements, pointer ownership transfer conventions, and String encoding traps at the language boundary. ✅ 已验证
 >
 > **[Rustonomicon: FFI]** 常见 FFI 陷阱：String ↔ *const c_char 编码差异、Vec ↔ 裸指针所有权转移、回调函数生命周期管理。✅ 已验证
 

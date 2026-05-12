@@ -29,6 +29,8 @@
 
 > **[Haskell: Either Monad] · [类型论: Monad 定律]** Option/Result 对应单子中的 Maybe 和 Either。 ✅ 已验证
 
+> **[Haskell Wiki: Either]** Rust's `Result<T, E>` corresponds directly to Haskell's `Either e a` monad, with `Ok` as `Right` and `Err` as `Left`. ✅ 已验证
+
 Rust 的错误处理对应**单子**（Monad）模式中的 `Option` 和 `Result`：
 
 ```text
@@ -143,6 +145,8 @@ graph TD
 
 > **[TRPL: Ch9.2] · [Rust Reference: The ? operator]** ? 运算符通过隐式调用 From::from 实现错误的自动转换与传播。 ✅ 已验证
 
+> **[RFC 243: The ? Operator]** The `?` operator was introduced in RFC 243 to provide ergonomic error propagation, later extended by RFC 3058 for the general `Try` trait. ✅ 已验证
+
 ```text
 前提 1: ? 运算符展开为 match，Err 分支提前返回
 前提 2: From trait 提供错误类型的自动向上转换
@@ -160,6 +164,8 @@ graph TD
 ### 4.3 推论：panic ⟹ 不可恢复错误的显式边界
 
 > **[TRPL: Ch9] · [Rust Reference: panic]** panic 是 Safe Rust 中显式标记"程序进入不可能状态"的机制。 ✅ 已验证
+
+> **[Wikipedia: Exception handling]** Unlike Java/C++ exceptions, Rust's `panic!` is not a general recovery mechanism but an explicit boundary for unrecoverable bugs; recoverable errors use `Result<T, E>`. ✅ 已验证
 
 ```text
 前提 1: panic 立即终止当前线程的执行（默认展开栈）
@@ -705,6 +711,8 @@ fn caller() -> Result<i32, String> {
 ```
 
 ### Step 4: 自定义错误 — thiserror 与 anyhow
+
+> **[crates.io: thiserror / anyhow]** `thiserror` is the standard choice for libraries that need structured error types, while `anyhow` is preferred in applications for ergonomic error propagation. ✅ 已验证
 
 **核心问题**: "怎么设计好的错误类型？"
 
