@@ -285,7 +285,7 @@ graph TD
 
 ### 6.3 反例: Go 的接口运行时开销 vs Rust 的零成本抽象
 
-```rust
+```rust,ignore
 // Rust: trait 静态派发 — 编译期内联，零运行时开销
 fn process<T: Serializer>(item: T) -> Vec<u8> {
     item.serialize() // 单态化后直接内联

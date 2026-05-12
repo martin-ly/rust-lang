@@ -342,6 +342,7 @@ fn print_color(c: Color) {
         // E0004: non-exhaustive patterns: `Blue` not covered
     }
 }
+
 ```
 
 **错误分析**：
@@ -374,12 +375,13 @@ fn print_color(c: Color) {
 
 ### 5.4 反例：递归类型需要间接层（E0072）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 递归类型直接自包含
 enum List<T> {
     Cons(T, List<T>),  // E0072: recursive type has infinite size
     Nil,
 }
+
 ```
 
 **错误分析**：
@@ -746,7 +748,7 @@ graph TD
     A4[泛型约束<br/>零成本 + 类型参数暴露]
 ```
 
-```rust
+```rust,ignore
 // ✅ impl Trait: 隐藏实现，零成本
 fn make_iter() -> impl Iterator<Item = u32> {
     vec![1, 2, 3].into_iter()

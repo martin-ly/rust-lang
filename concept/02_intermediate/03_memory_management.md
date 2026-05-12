@@ -676,7 +676,7 @@ fn arc_interior_mutability() {
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `Box::new`、`Rc::clone`、`RefCell::borrow/borrow_mut` 等核心 API。关键是建立"智能指针拥有数据，Drop 自动释放"的操作性理解。从 Step 2 到 Step 3 的过渡由困惑驱动：当学习者发现可以 `Rc::clone` 出多个所有者时，会问"如果两个人同时修改怎么办？"——这自然引出内部可变性模式。
 
-```rust
+```rust,ignore
 // 核心语法模式:
 let b = Box::new(5);                  // 堆分配
 let r = Rc::new(vec![1, 2, 3]);      // 共享所有权
@@ -813,7 +813,7 @@ let initialized: [u8; 1024] = unsafe {
 | **`assume_init`** | 隐式在返回值中发生 | 显式、需 unsafe、契约明确 |
 | **状态** | ❌ 已废弃（Rust 1.39+） | ✅ 标准方式 |
 
-```rust
+```rust,ignore
 use std::mem;
 
 // ❌ 危险：uninitialized 立即产生无效 T（bool 可能不是 0/1）

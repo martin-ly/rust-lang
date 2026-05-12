@@ -280,7 +280,7 @@ fn main() {
 
 ### 5.3 反例：返回局部引用（E0106 / E0716）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 返回悬垂引用
 fn dangling() -> &String {
     let s = String::from("hello");  // s 是局部变量
@@ -290,6 +290,7 @@ fn dangling() -> &String {
 fn main() {
     let d = dangling();  // E0716: temporary value dropped while borrowed
 }
+
 ```
 
 **错误分析**：
@@ -314,7 +315,7 @@ fn borrow_from_input<'a>(s: &'a str) -> &'a str {
 
 ### 5.4 反例：生命周期不匹配（E0597）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 结构体引用比数据活得长
 fn main() {
     let excerpt;
@@ -325,6 +326,7 @@ fn main() {
     } // novel 在这里被 drop
     println!("{}", excerpt);  // E0597: borrowed value does not live long enough
 }
+
 ```
 
 **修正方案**：
@@ -634,13 +636,17 @@ fn main() {
 
 当前 borrow checker（基于 NLL）存在**过度保守**的问题：
 
-```rust
+```rust,compile_fail
+use std::collections::HashMap;
+use std::hash::Hash;
+
 fn get_default<'r, K, V>(
     map: &'r mut HashMap<K, V>,
     key: K,
 ) -> &'r mut V
 where
     K: Clone + Eq + Hash,
+    V: Default,
 {
     match map.get_mut(&key) {  // &'r1 mut HashMap → Option<&'r1 mut V>
         Some(value) => value, // 返回 &'r1 mut V（与 'r 兼容）
@@ -686,7 +692,7 @@ Polonius 解决了当前系统的三个理论局限：
 
 **T1：路径敏感的借用终结**
 
-```rust
+```rust,ignore
 let mut x = 0;
 let p = &mut x;
 if condition {
@@ -776,7 +782,7 @@ $$
 
 这保证了 Elision 不会引入额外的 outlives 约束，也不会遗漏必要的约束。其证明依赖于**生命周期偏序的可判定性**（引理 L2）和**单输入单输出的函数式依赖**（函数返回值的生命周期必须源自某个输入，防止悬垂引用）。
 
-rust,ignore
+```rust,ignore
 // Rule 1: 每个输入引用获得独立生命周期
 fn print(s: &str);           // ⟹ fn print<'a>(s: &'a str)
 
@@ -785,6 +791,7 @@ fn first(s: &str) -> &str;   // ⟹ fn first<'a>(s: &'a str) -> &'a str
 
 // Rule 3: &self 优先
 fn get(&self) -> &T;         // ⟹ fn get<'a>(&'a self) -> &'a T
+
 ```
 
 > **核心洞察**：Elision 是编译器在"不引入歧义"的前提下的最大努力推导。它的 soundness 来源于**函数返回值不能凭空产生引用**这一 Rust 核心公理——任何返回的引用必须"继承"自某个输入。
@@ -902,7 +909,7 @@ trait Iterator {
 2. **HRTB 失效**：即使尝试用 `for<'a> Iterator<Item = &'a T>`，也无法关联 `'a` 与 `self` 的借用周期
 3. **编译期拒绝**：若强行实现 `Iterator<Item = &str>` 并返回 `self.source` 的切片，编译器会报 E0495（生命周期不匹配），因为返回引用的生命周期必须比 `next` 的 `&mut self` 短，但 `Iterator` trait 无法表达这种依赖
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 编译错误: 标准 Iterator 无法自引用
 impl<'s> Iterator for Words<'s> {
     type Item = &str;  // 隐含 'static 或独立生命周期
@@ -912,6 +919,7 @@ impl<'s> Iterator for Words<'s> {
         Some(&self.source[..])  // E0495: 无法证明 's 与 &self 的关系
     }
 }
+
 ```
 
 Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where Self: 'a` 确保**迭代器本身至少存活到返回引用的生命周期**，从而安全地表达自引用迭代。这是 GATs 解决表达力鸿沟的经典案例。

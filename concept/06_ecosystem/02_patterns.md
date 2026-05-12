@@ -238,7 +238,7 @@ impl<'a> ShoppingCart<'a> {
 
 **Rust 实现（静态分发 / 零成本）**：
 
-```rust
+```rust,ignore
 struct ShoppingCart<S: PaymentStrategy> {
     strategy: S,
 }
@@ -270,7 +270,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 
 **Rust 实现（enum + match）**：
 
-```rust
+```rust,ignore
 enum ConnectionState {
     Closed,
     SynSent,
@@ -381,6 +381,7 @@ unsafe {
     let create: Symbol<CreatePlugin> = lib.get(b"create_plugin").ok()?;
     let plugin = Box::from_raw(create());
 }
+
 ```
 
 **与其他语言对比**：
@@ -479,6 +480,7 @@ async fn server(mut rx: mpsc::Receiver<Request>, mut shutdown: mpsc::Receiver<()
         }
     }
 }
+
 ```
 
 > **来源**: [Tokio Docs — Patterns] · [Async Rust Design Patterns] · 可信度: ✅
@@ -495,7 +497,7 @@ async fn server(mut rx: mpsc::Receiver<Request>, mut shutdown: mpsc::Receiver<()
 | 字符串编码 | `CStr` / `CString` | 保证 NUL 终止 |
 | 线程安全 | `Send` / `Sync` 手动实现 | 文档化 + 编译期标记 |
 
-```rust
+```rust,ignore
 // 深度案例：封装 C 库 libfoo 的上下文句柄
 pub struct FooContext {
     raw: NonNull<ffi::foo_ctx>,
@@ -549,7 +551,8 @@ rust,ignore
 // thiserror：库的首选
 use thiserror::Error;
 
-#[derive(Error, Debug)]
+# [derive(Error, Debug)]
+
 pub enum ConfigError {
     #[error("invalid port: {0}")]
     InvalidPort(u16),
@@ -559,9 +562,13 @@ pub enum ConfigError {
 
 // miette：诊断优先
 use miette::{Diagnostic, NamedSource};
-#[derive(Debug, Diagnostic, thiserror::Error)]
-#[error("配置解析失败")]
-#[diagnostic(
+
+# [derive(Debug, Diagnostic, thiserror::Error)]
+
+# [error("配置解析失败")]
+
+# [diagnostic(
+
     code(config::parse),
     help("端口号应在 1024-65535 之间")
 )]
@@ -574,7 +581,9 @@ struct ParseError {
 
 // snafu：上下文敏感
 use snafu::{Snafu, ResultExt, ensure};
-#[derive(Debug, Snafu)]
+
+# [derive(Debug, Snafu)]
+
 enum Error {
     #[snafu(display("无法读取配置文件 {path}"))]
     ReadConfig { source: std::io::Error, path: String },
@@ -583,6 +592,7 @@ enum Error {
 fn load(path: &str) -> Result<Config, Error> {
     std::fs::read_to_string(path).context(ReadConfigSnafu { path })?;
 }
+
 ```
 
 > **选型决策**: 编写库 → **thiserror**（生态最轻）；构建 CLI/终端应用 → **miette**（诊断美观）；复杂状态机/领域错误 → **snafu**（结构化上下文）。

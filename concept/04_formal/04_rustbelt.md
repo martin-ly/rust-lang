@@ -190,7 +190,7 @@ ArcInvariant(rc, data, P) ≜  ∃n. rc ↦ n * (n > 0 → data ↦ v * P(v))
 
 以下伪代码展示如何用 CSL 注释描述 Rust 并发原语的契约：
 
-```rust
+```rust,ignore
 // CSL 规范: Mutex 守卫整数不变量 "x ≥ 0"
 // Invariant: ∃v. l ↦ v * (v ≥ 0)
 let m: Mutex<i32> = Mutex::new(0);
@@ -204,7 +204,7 @@ drop(guard);   // 不变量恢复，线程不再持有资源
 // { emp }
 ```
 
-```rust
+```rust,ignore
 // CSL 规范: Arc 共享不可变字符串
 // Invariant: ∃n. rc ↦ n * (n>0 → data ↦ "shared")
 let arc1: Arc<String> = Arc::new("shared".to_string());

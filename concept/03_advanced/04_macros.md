@@ -163,7 +163,7 @@ fn main() {
 
 **代码示例：卫生宏如何避免名称冲突**
 
-```rust
+```rust,ignore
 // C 预处理器（不卫生）:
 // #define SWAP(a, b) { int temp = a; a = b; b = temp; }
 // int temp = 5; SWAP(temp, x); // temp 被覆盖！灾难！
@@ -480,7 +480,8 @@ rust,ignore
 // crate: my_derive
 use proc_macro::TokenStream;
 
-#[proc_macro_derive(MyDebug)]
+# [proc_macro_derive(MyDebug)]
+
 pub fn my_debug_derive(input: TokenStream) -> TokenStream {
     // 解析 input（结构体/枚举定义）
     // 生成 impl Debug for Type { ... }
@@ -491,6 +492,7 @@ pub fn my_debug_derive(input: TokenStream) -> TokenStream {
 // 使用方:
 // #[derive(MyDebug)]
 // struct Point { x: i32, y: i32 }
+
 ```
 
 ### 7.3 反例：不卫生的宏（C 风格问题在 Rust 中不会出现）
@@ -518,6 +520,7 @@ macro_rules! infinite {
 
 // fn main() { infinite!(); }
 // 编译错误: recursion limit reached
+
 ```
 
 ### 7.5 边界极限测试
@@ -595,6 +598,7 @@ fn main() {
 macro_rules! break_label {
     ($label:lifetime) => { break $label; };
 }
+
 ```
 
 ### 7.6 反命题与边界分析补充
@@ -741,6 +745,7 @@ fn main() {
     identity!("string" + 1);  // 编译错误指向 main() 中的 identity! 调用处
     // 宏不知道 "string" 是 &str，也不知道 + 1 是非法的
 }
+
 ```
 
 **过渡**: 知道了宏在编译期的位置，下一个问题自然是：Rust 的宏有哪些种类，它们各自适用于什么场景？
@@ -858,13 +863,16 @@ fn main() {
 
 rust,ignore
 // 过程宏调试: 将输入和输出打印到 stderr
-#[proc_macro_derive(MyDerive)]
+
+# [proc_macro_derive(MyDerive)]
+
 pub fn my_derive(input: TokenStream) -> TokenStream {
     eprintln!("INPUT: {}", input);
     let output = generate_code(input);
     eprintln!("OUTPUT: {}", output);
     output
 }
+
 ```
 
 **技巧 4：使用 `compile_error!` 在宏内部产生有意义的错误**

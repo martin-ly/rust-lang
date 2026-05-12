@@ -193,7 +193,7 @@ graph TD
 | **性能** | 等价手写版本，可内联优化 | 不可内联，有间接跳转开销 |
 | **语义** | 行为等价于手写专用代码 | 行为等价，但性能不等价 |
 
-```rust
+```rust,ignore
 // 单态化：每个调用点生成专用代码，直接内联
 fn push_mono(v: &mut Vec<i32>, x: i32) {
     v.push(x);  // 编译为 Vec<i32>::push 的直接调用，可内联
@@ -349,7 +349,7 @@ fn main() {
 
 **修正方案**：
 
-```rust
+```rust,ignore
 // ✅ 修正: 使用 ?Sized 解除 Sized 约束
 fn draw_all<T: Drawable + ?Sized>(items: Vec<Box<T>>) {
     for item in items { item.draw(); }
@@ -444,7 +444,7 @@ struct LongTermStore<T: 'static> {
 
 **反例边界：参数性何时失效**:
 
-```rust
+```rust,ignore
 // ❌ 边界 1: Trait Bound 提供构造能力，打破纯参数性
 fn evil<T: Default>() -> T { T::default() }  // 有 Default bound 时可以构造 T
 
@@ -500,16 +500,17 @@ graph TD
 
 Rust 允许在类型位置使用编译期常量表达式，复杂表达式需用大括号包裹：
 
-rust,ignore
+```rust,ignore
 // ✅ 合法: 常量表达式用于数组类型
-fn double_array<T: Default + Copy, const N: usize>() -> [T; N * 2] {
-    [T::default(); N * 2]
+fn double_array<T: Default + Copy, const N: usize>() -> [T; N *2] {
+    [T::default(); N* 2]
 }
 
 // ✅ 合法: 块表达式（1.79+）
 fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
     [T::default(); { N + 4 }]
 }
+
 ```
 
 #### 5.7.2 where 约束中的 const generics
@@ -569,13 +570,14 @@ impl<T: Default, const N: usize> RingBuffer<T, { next_power_of_two(N) }> {
         Self { data: [const { None }; { next_power_of_two(N) }], head: 0, tail: 0 }
     }
 }
+
 ```
 
 #### 5.7.5 类型参数与 const generics 混合使用
 
 const generics 可与类型参数、生命周期参数自由组合：
 
-rust,ignore
+```rust,ignore
 // ✅ 合法: 类型参数 + const generic 混合
 fn foo<T, const N: usize>(arr: [T; N]) -> Vec<T> {
     arr.into_iter().collect()
@@ -890,12 +892,12 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `<T>` 在函数、结构体、枚举、impl 块中的位置，以及 `where` 子句的使用。关键是建立"泛型参数是编译期变量"的理解——它在编译时被替换为具体类型，而非运行时箱型。从 Step 2 到 Step 3 的过渡发生在学习者发现 `Vec<i32>` 和 `Vec<String>` 是不同类型时，意识到泛型不是"运行时多态"，而是"编译期复制"。
 
-rust,ignore
+```rust,ignore
 // 核心语法模式:
 fn identity<T>(x: T) -> T { x }           // 函数泛型
 struct Point<T> { x: T, y: T }            // 结构体泛型
 enum Option<T> { Some(T), None }          // 枚举泛型
-impl<T> Point<T> { /* ... */ }            // impl 块泛型
+impl<T> Point<T> { /*...*/ }            // impl 块泛型
 fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 正例锚定:
@@ -905,6 +907,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
   Point<i32> 和 Point<f64> 是不同的类型，不能互相赋值
   // let p: Point<i32> = Point { x: 1, y: 2 };
   // let q: Point<f64> = p; // E0308: mismatched types
+
 ```
 
 ### Step 3: 机制困惑 — 单态化与类型擦除

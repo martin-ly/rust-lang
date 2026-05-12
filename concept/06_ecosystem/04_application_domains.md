@@ -352,14 +352,17 @@ Rust 编译为 WASM 的核心优势：
 | 并发 | `std::thread` | `embassy` async / 中断 / RTIC |
 | 调试 | GDB + stdlib | `probe-rs` + RTT + `defmt` |
 
-rust,ignore
-#![no_std]
-#![no_main]
+```rust,ignore
+
+# ![no_std]
+
+# ![no_main]
 
 use cortex_m_rt::entry;
-use panic_halt as _;
+use panic_halt as_;
 
-#[entry]
+# [entry]
+
 fn main() -> ! {
     let dp = stm32f4::Peripherals::take().unwrap();
     // 无堆分配、无标准库、确定性执行
@@ -367,6 +370,7 @@ fn main() -> ! {
         // 轮询或中断驱动
     }
 }
+
 ```
 
 **选型决策**：
@@ -392,12 +396,14 @@ fn main() -> ! {
 | 崩溃处理 | `human-panic`（用户友好报告） | 堆栈泄露 |
 | 发布分发 | `cargo-dist`（自动构建多平台） | PyInstaller / pkg（复杂） |
 
-rust,ignore
+```rust,ignore
 use clap::Parser;
 use anyhow::Result;
 
-#[derive(Parser)]
-#[command(name = "mytool")]
+# [derive(Parser)]
+
+# [command(name = "mytool")]
+
 struct Cli {
     #[arg(short, long, default_value = "config.toml")]
     config: std::path::PathBuf,
@@ -410,6 +416,7 @@ fn main() -> Result<()> {
         .map_err(|e| anyhow::anyhow!("无法读取配置: {}", e))?;
     Ok(())
 }
+
 ```
 
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
@@ -432,7 +439,7 @@ fn main() -> Result<()> {
 
 **ECS 与所有权的同构性（深度）**：
 
-```rust
+```rust,ignore
 // Bevy 系统：函数签名即数据依赖声明
 fn move_player(
     time: Res<Time>,

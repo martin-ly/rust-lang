@@ -284,6 +284,7 @@ fn main() {
     let t = s;           // s 的所有权转移到 t
     println!("{}", s);   // E0382: borrow of moved value: `s`
 }
+
 ```
 
 **错误分析**：
@@ -668,20 +669,20 @@ C 侧保证:
 
 ```rust
 // ✅ 模式 1: Rust 所有权转移给 C
-pub extern "C" fn give_to_c() -> *mut String {
+pub unsafe extern "C" fn give_to_c() -> *mut String {
     let s = Box::new(String::from("hello"));
     Box::into_raw(s)  // 所有权转移给 C，C 需调用 rust_free
 }
 
-#[no_mangle]
-pub extern "C" fn rust_free(ptr: *mut String) {
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn rust_free(ptr: *mut String) {
     if !ptr.is_null() {
         unsafe { drop(Box::from_raw(ptr)); }
     }
 }
 
 // ✅ 模式 2: Rust 借用给 C（短期）
-pub extern "C" fn borrow_to_c(s: *const u8, len: usize) {
+pub unsafe extern "C" fn borrow_to_c(s: *const u8, len: usize) {
     let slice = unsafe { std::slice::from_raw_parts(s, len) };
     println!("{:?}", slice);
     // slice 借用结束，不释放 s

@@ -65,6 +65,7 @@ HttpRequestBuilder::new()
     .method("GET")
     .url("/")
     .build()  // 编译错误如果缺少必填字段
+
 ```
 
 **关联**: 消费型方法链 · 类型状态
@@ -114,6 +115,7 @@ rust,ignore
 impl Drop for MyType {
     fn drop(&mut self) { println!("Dropping!"); }
 }
+
 ```
 
 **常见错误**: `mem::forget` 或循环引用（Rc）会阻止 Drop 执行
@@ -149,7 +151,7 @@ enum Result<T, E> { Ok(T), Err(E) }
 **定义**: 显式错误传播，`?` 运算符自动展开/传播错误
 **代码**:
 
-```rust
+```rust,ignore
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = File::open(path)?;  // ? 传播错误
     let mut buf = String::new();
@@ -168,7 +170,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 **定义**: 异步计算的抽象，`poll` 方法驱动状态机推进
 **代码**:
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -407,6 +409,7 @@ let _ = future.as_mut().poll(cx);
 rust,ignore
 struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 // 告诉编译器 MyPtr<T> 拥有 T 的 variance
+
 ```
 
 **关联**: 方差 · 类型标记 · 零大小类型
@@ -474,6 +477,7 @@ let val = may_fail()?;  // ? 传播错误
 rust,ignore
 trait Drawable { fn draw(&self); }
 impl Drawable for Circle { fn draw(&self) { ... } }
+
 ```
 
 **关键限制**: Orphan Rule — 不能为外部类型实现外部 Trait
@@ -485,7 +489,7 @@ impl Drawable for Circle { fn draw(&self) { ... } }
 **定义**: 用泛型将运行时状态编码为编译期类型，状态转换由类型系统保证
 **代码**:
 
-```rust
+```rust,ignore
 struct Door<State> { _marker: PhantomData<State> }
 struct Closed; struct Open;
 impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
@@ -502,7 +506,7 @@ impl Door<Closed> { fn open(self) -> Door<Open> { ... } }
 **定义**: 打开 5 个特定逃逸门：原始指针、unsafe 函数、extern 函数、静态变量、union
 **代码**:
 
-```rust
+```rust,ignore
 unsafe {
     let raw_ptr = &mut x as *mut i32;
     *raw_ptr = 42;  // 编译器不检查别名规则
@@ -546,6 +550,7 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     }
     Poll::Ready(self.result)
 }
+
 ```
 
 **关联**: Future · async · Executor · 协作式调度

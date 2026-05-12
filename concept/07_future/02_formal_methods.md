@@ -241,7 +241,7 @@ Rust 的引用类型直接对应分离逻辑中的权限（permissions）：
 ```rust
 // 类型: Box<i32>
 // 逻辑: ∃l. l ↦ 5  （存在某个地址 l，存储值 5）
-let x = Box::new(5);
+let mut x = Box::new(5);
 
 // 类型: &mut i32
 // 逻辑: l ↦ 5  （独占访问权限）

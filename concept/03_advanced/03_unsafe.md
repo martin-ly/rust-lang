@@ -662,7 +662,7 @@ MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 
 ### 8.1 正确示例：安全封装裸指针（Vec 简化版）
 
-rust,ignore
+```rust,ignore
 // ✅ 正确: unsafe 实现 + safe 接口
 pub struct MyVec<T> {
     ptr: *mut T,
@@ -701,46 +701,50 @@ impl<T> Drop for MyVec<T> {
     fn drop(&mut self) {
         unsafe {
             // Safety: 我们只释放自己分配的内存
-            std::alloc::dealloc(/* ... */);
+            std::alloc::dealloc(/*...*/);
         }
     }
 }
+
 ```
 
 ### 8.2 正确示例：手动实现 Send/Sync
 
-rust,ignore
+```rust,ignore
 // ✅ 正确: 为线程安全的外部类型实现 Send/Sync
 pub struct MyHandle { raw: *mut libc::c_void }
 
 // Safety: 底层 C 库保证此句柄可跨线程安全使用
 unsafe impl Send for MyHandle {}
 unsafe impl Sync for MyHandle {}
+
 ```
 
 ### 8.3 反例：悬垂裸指针（UB）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 返回局部变量的裸指针
 unsafe fn dangling_ptr() -> *const i32 {
     let x = 42;
-    &x as *const i32  // x 在函数返回后被释放
+    &x as*const i32  // x 在函数返回后被释放
 }
 
 fn main() {
     let ptr = dangling_ptr();
     println!("{}", unsafe { *ptr });  // UB: UAF
 }
+
 ```
 
 ### 8.4 反例：transmute 滥用（UB）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: transmute 不相关类型
 unsafe fn evil_transmute() {
     let f: f32 = 1.0;
     let b: bool = std::mem::transmute(f);  // UB! f32 位模式不全是有效 bool
 }
+
 ```
 
 ### 8.5 反例：无效枚举值（UB）
@@ -851,13 +855,13 @@ fn safe_raw_pointer() {
 
 ```rust
 // extern "C" = 使用 C 调用约定
-extern "C" {
+unsafe extern "C" {
     fn c_function(x: i32) -> i32;  // 声明 C 函数
 }
 
 // Rust 函数的 C 导出
-#[no_mangle]
-pub extern "C" fn rust_function(x: i32) -> i32 {
+#[unsafe(no_mangle)]
+pub unsafe extern "C" fn rust_function(x: i32) -> i32 {
     x * 2
 }
 ```
@@ -907,14 +911,14 @@ pub struct Point {
     pub y: f64,
 }
 
-extern "C" {
+unsafe extern "C" {
     fn distance(p: *const Point) -> f64;
 }
 
 // ✅ repr(transparent)：零成本类型安全包装
 #[repr(transparent)]
 pub struct SocketFd(i32);
-extern "C" {
+unsafe extern "C" {
     fn socket_create() -> SocketFd;  // ABI 与 i32 完全相同
 }
 

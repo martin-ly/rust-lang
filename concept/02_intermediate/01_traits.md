@@ -334,7 +334,7 @@ impl Iterator for Counter {
 
 ### 5.3 反例：违反 Orphan Rule（E0117）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 为外部类型实现外部 Trait
 use std::fmt::Display;
 
@@ -343,6 +343,7 @@ impl Display for Vec<u8> {  // E0117!
         write!(f, "{:?}", self)
     }
 }
+
 ```
 
 **错误分析**：
@@ -353,7 +354,7 @@ impl Display for Vec<u8> {  // E0117!
 
 **修正方案**：
 
-rust,ignore
+```rust,ignore
 // ✅ 方案 1: Newtype 模式
 struct MyVec(pub Vec<u8>);
 
@@ -366,21 +367,23 @@ impl Display for MyVec {
 // ✅ 方案 2: 本地 Trait
 trait MyDisplay { fn my_fmt(&self) -> String; }
 impl MyDisplay for Vec<u8> { ... }  // Trait 是本地的，允许
+
 ```
 
 ### 5.4 反例：重叠实现（E0119）
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 重叠 blanket impl
 trait Foo {}
 
 impl<T> Foo for T {}           // 为所有 T 实现 Foo
 impl<T> Foo for Vec<T> {}      // E0119! 与上一行重叠
+
 ```
 
 **修正方案**：
 
-```rust
+```rust,ignore
 // ✅ 修正: 使用更精确的约束或 specialization（nightly）
 trait Bar {}
 impl<T: Bar> Foo for T {}      // 只为实现 Bar 的类型实现 Foo
@@ -783,12 +786,13 @@ fn test_auto_trait() {
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `trait` 定义、`impl` 实现、`where` 约束、关联类型等核心语法。关键是建立"Trait 是编译器检查契约的工具"这一操作性理解。从 Step 2 到 Step 3 的过渡自然发生：当学习者尝试为外部类型实现外部 Trait 时，会遇到 E0117——这恰好引出"自由并非无限"的规则层认知，语法实践自然驱动规则探索。
 
-rust,ignore
+```rust,ignore
 // 核心语法模式:
 trait Summary { fn summarize(&self) -> String; }
 impl Summary for NewsArticle { ... }
 fn notify<T: Summary>(item: &T) { ... }
 // 或: fn notify(item: &impl Summary) { ... }
+
 ```
 
 ### Step 3: 规则困惑 — Orphan Rule 与 Coherence
@@ -934,7 +938,7 @@ impl Drawable for Point {
 | **trait object** | ✅ 支持 `dyn Trait` | ❌ **不能用于 trait object** |
 | **生命周期表达** | 可精确标注 | 需 `impl Trait + 'a` 形式 |
 
-```rust
+```rust,ignore
 // 显式关联类型版本（等价但冗长）
 trait DrawableExplicit {
     type Output: std::fmt::Display;

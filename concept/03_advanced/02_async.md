@@ -178,7 +178,7 @@ Poll 类型:
 >
 > **[TRPL: Ch17]** async fn 返回的 Future 是惰性的（lazy），直到被 .await 或执行器 poll 才会执行。✅ 已验证
 
-```rust
+```rust,ignore
 // 原始 async fn
 async fn foo() -> T {
     let a = bar().await;  // 挂起点 1
@@ -208,7 +208,7 @@ impl Future for FooFuture {
 
 状态机可能包含自引用字段。考虑以下代码：
 
-```rust
+```rust,ignore
 async fn self_ref() {
     let s = String::from("hello");
     let r = &s;  // r 是指向 s 的引用（自引用）
@@ -521,7 +521,7 @@ graph TD
 
 ### 8.1 正确示例：async fn + .await
 
-rust,ignore
+```rust,ignore
 // ✅ 正确: async/await 基本用法
 use tokio::time::{sleep, Duration};
 
@@ -530,17 +530,19 @@ async fn fetch_data(id: u32) -> String {
     format!("data-{}", id)
 }
 
-#[tokio::main]
+# [tokio::main]
+
 async fn main() {
     let d1 = fetch_data(1).await;
     let d2 = fetch_data(2).await;
     println!("{}, {}", d1, d2);
 }
+
 ```
 
 ### 8.2 正确示例：并发执行
 
-rust,ignore
+```rust,ignore
 // ✅ 正确: join! 并发等待
 use tokio::join;
 
@@ -550,11 +552,12 @@ async fn fetch_all() -> (String, String) {
     let (d1, d2) = join!(f1, f2);  // 同时执行，等待两者完成
     (d1, d2)
 }
+
 ```
 
 ### 8.3 正确示例：Stream 异步迭代
 
-rust,ignore
+```rust,ignore
 // ✅ 正确: Stream 异步迭代
 use tokio_stream::{self as stream, StreamExt};
 
@@ -564,6 +567,7 @@ async fn process_stream() {
         println!("{}", v);
     }
 }
+
 ```
 
 ### 8.4 反例：在 async 中阻塞线程
@@ -580,7 +584,7 @@ async fn bad_fetch() -> String {
 
 **修正方案**：
 
-rust,ignore
+```rust,ignore
 // ✅ 修正: 使用非阻塞 await
 async fn good_fetch() -> String {
     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
@@ -594,11 +598,12 @@ async fn cpu_intensive() -> i32 {
         42
     }).await.unwrap()
 }
+
 ```
 
 ### 8.5 反例：未 Pin 的自引用 Future
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: 尝试移动已 Pin 的 Future（编译错误）
 use std::pin::Pin;
 
@@ -615,6 +620,7 @@ fn main() {
     // pinned 不能再被 move!
     // let moved = pinned;  // 编译错误
 }
+
 ```
 
 ### 8.6 边界极限测试：跨越 await 的 Send 约束

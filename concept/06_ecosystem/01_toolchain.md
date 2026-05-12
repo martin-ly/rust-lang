@@ -275,7 +275,7 @@ Rust 没有原生互斥 feature 机制，但社区常见以下反模式：
 - 使用默认 feature 表示“标准”行为，用 `no_std` 特性仅做减法
 - 若必须互斥，用枚举类型在 API 层约束，而非 feature 层
 
-```rust
+```rust,ignore
 // ❌ 反模式：feature 层互斥
 #[cfg(all(feature = "backend-a", feature = "backend-b"))]
 compile_error!("backend-a and backend-b are mutually exclusive");
