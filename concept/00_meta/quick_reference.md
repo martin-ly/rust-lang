@@ -14,7 +14,7 @@
 **定义**: 协作式多任务的语法糖，`async fn` 编译为 `enum Future` 状态机
 **代码**:
 
-```rust
+```rust,ignore
 async fn foo() -> i32 { 42 }
 // 等价于: fn foo() -> impl Future<Output = i32>
 ```
@@ -47,7 +47,7 @@ async fn foo() -> i32 { 42 }
 **规则**: 任意时刻，要么一个 `&mut T`，要么任意多个 `&T`
 **代码**:
 
-```rust
+```rust,ignore
 let r = &x; let r2 = &x;     // ✅ 共享借用
 let r = &x; let r2 = &mut x; // ❌ E0502
 ```
@@ -135,7 +135,7 @@ impl Drop for MyType {
 **定义**: 和类型（Sum Type），变体间互斥，编译期穷尽检查
 **代码**:
 
-```rust
+```rust,ignore
 enum Option<T> { None, Some(T) }
 enum Result<T, E> { Ok(T), Err(E) }
 ```
@@ -183,7 +183,7 @@ trait Future {
 **定义**: 与其他语言（主要是 C）互操作的边界
 **代码**:
 
-```rust
+```rust,ignore
 extern "C" {
     fn sqrt(x: f64) -> f64;
 }
@@ -364,7 +364,7 @@ struct Kilometers(u32);
 **定义**: 可能为空的值，`Some(T)` 或 `None`，强制调用者处理空值
 **代码**:
 
-```rust
+```rust,ignore
 let x: Option<i32> = Some(5);
 let y = x.unwrap_or(0);  // 安全取值
 ```
@@ -390,7 +390,7 @@ let y = x.unwrap_or(0);  // 安全取值
 **定义**: 保证 `T` 的内存地址不变，用于自引用结构
 **代码**:
 
-```rust
+```rust,ignore
 let mut future = Box::pin(my_async_fn());
 let _ = future.as_mut().poll(cx);
 ```

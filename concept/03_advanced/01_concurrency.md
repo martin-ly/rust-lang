@@ -760,57 +760,105 @@ async fn barrier_demo() {
 
 > **[C11 内存模型标准 (ISO/IEC 9899:2011 §5.1.2.4)]** Rust 的 Atomic Ordering 直接映射 C11/C++11 内存模型：Relaxed/Acquire/Release/AcqRel/SeqCst 的语义与 C11 一致。✅ 已验证
 >
-> **[Rust Reference: Atomic types]** std::sync::atomic 的内存序语义与 LLVM 的 atomic ordering 一致，最终对应底层硬件内存屏障指令。✅ 已验证
+> **[Rust Reference: Atomic types]** `std::sync::atomic` 的内存序语义最终对应底层硬件内存屏障指令（如 x86 的 `lock` 前缀、ARM 的 `dmb`）。✅ 已验证
 
-#### 内存序分类与语义
+#### 四种核心内存序语义对比
 
-| **内存序** | **重排序保证** | **典型用途** | **性能** |
-|:---|:---|:---|:---|
-| `Relaxed` | 无顺序保证 | 计数器、简单的统计 | 最高 |
-| `Acquire` | 之后的读写不会重排到之前 | 锁的获取（lock） | 高 |
-| `Release` | 之前的读写不会重排到之后 | 锁的释放（unlock） | 高 |
-| `AcqRel` | Acquire + Release | CAS 操作（同时获取和释放） | 高 |
-| `SeqCst` | 全局顺序一致性 | 多线程同步标志 | 最低 |
+| **内存序** | **重排序约束** | **happens-before** | **典型用途** | **性能** |
+|:---|:---|:---|:---|:---|
+| `Relaxed` | 无顺序保证 | ❌ 仅保证原子性 | 纯计数器、统计量 | 最高 |
+| `Acquire` | 之后读写不重排到此 `load` 之前 | ✅ 与 Release 配对 | 锁获取、消费者同步 | 高 |
+| `Release` | 之前读写不重排到此 `store` 之后 | ✅ 与 Acquire 配对 | 锁释放、生产者发布 | 高 |
+| `SeqCst` | 全局全序 + 所有 SeqCst 操作间全序 | ✅ 全局一致 | 多标志状态机、Dekker 算法 | 最低 |
 
-#### 内存序的直觉模型
+#### happens-before 关系图示
 
-```text
-Release-Acquire 同步:
-  线程 A:  data.store(42, Release);       // 发布
-  线程 B:  let v = data.load(Acquire);    // 获取
-  保证: 若 B 看到 Release 值，则能看到 A 之前的所有写入
-
-SeqCst: 所有操作全局一致顺序，代价最大
+```mermaid
+graph LR
+    A[Thread A<br/>data.store(42, Relaxed)] --> B[Thread A<br/>ready.store(true, Release)]
+    B -->|synchronizes-with| C[Thread B<br/>ready.load(Acquire)]
+    C --> D[Thread B<br/>assert_eq!(data, 42)]
+    A -.->|sequenced-before| B
+    C -.->|sequenced-before| D
+    style B fill:#9cf
+    style C fill:#9cf
 ```
+
+**解释**：Release-Acquire 配对建立跨线程 synchronizes-with 边；若 B 看到 Release 写入的值，则 A 中 sequenced-before B 的所有操作对 C 可见。
+
+#### 代码示例：不同内存序实现计数器与标志位
 
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::thread;
 
-fn message_passing() {
-    let ready = Arc::new(AtomicBool::new(false));
+// ✅ Relaxed: 仅需要原子性，不需要顺序保证
+fn relaxed_counter() -> usize {
+    let counter = Arc::new(AtomicUsize::new(0));
+    let mut handles = vec![];
+    for _ in 0..4 {
+        let c = Arc::clone(&counter);
+        handles.push(thread::spawn(move || {
+            for _ in 0..1000 {
+                c.fetch_add(1, Ordering::Relaxed);  // 纯计数，无需同步
+            }
+        }));
+    }
+    for h in handles { h.join().unwrap(); }
+    counter.load(Ordering::Relaxed)  // 4000
+}
+
+// ✅ Release/Acquire: 标志位同步（生产者-消费者）
+fn release_acquire_flag() {
     let data = Arc::new(AtomicUsize::new(0));
-    let (r2, d2) = (Arc::clone(&ready), Arc::clone(&data));
+    let ready = Arc::new(AtomicBool::new(false));
+    let (d2, r2) = (Arc::clone(&data), Arc::clone(&ready));
+
     thread::spawn(move || {
         d2.store(42, Ordering::Relaxed);
-        r2.store(true, Ordering::Release);
+        r2.store(true, Ordering::Release);  // Release: 发布前所有写入
     });
-    while !ready.load(Ordering::Acquire) {}
-    assert_eq!(data.load(Ordering::Relaxed), 42);
+
+    while !ready.load(Ordering::Acquire) {}  // Acquire: 获取后看到发布者写入
+    assert_eq!(data.load(Ordering::Relaxed), 42);  // ✅ 保证可见
+}
+
+// ✅ SeqCst: 全局一致的多标志同步
+fn seqcst_multi_flag() {
+    let x = Arc::new(AtomicBool::new(false));
+    let y = Arc::new(AtomicBool::new(false));
+    let (x2, y2) = (Arc::clone(&x), Arc::clone(&y));
+
+    let t1 = thread::spawn(move || {
+        x.store(true, Ordering::SeqCst);
+        if !y.load(Ordering::SeqCst) { /* ... */ }
+    });
+    let t2 = thread::spawn(move || {
+        y.store(true, Ordering::SeqCst);
+        if !x2.load(Ordering::SeqCst) { /* ... */ }
+    });
+    t1.join().unwrap();
+    t2.join().unwrap();
+    // SeqCst 保证两线程对 x/y 的观察顺序全局一致
 }
 ```
 
-#### 常见陷阱
+#### 常见陷阱与修正
 
-```rust
-// ❌ Relaxed 不能用于同步标志
-while !ready.load(Ordering::Relaxed) {}  // 可能永远循环！
+```rust,ignore
+// ❌ Relaxed 不能用于同步标志：可能永远循环或看到乱序写入
+while !ready.load(Ordering::Relaxed) {}
+
+// ✅ 正确：使用 Acquire/Release 配对建立 happens-before
+while !ready.load(Ordering::Acquire) {}
 ```
+
+> **[Rustonomicon: Atomics]** 错误选择 `Ordering` 是并发程序中最隐蔽的 bug 来源：代码可能 99% 的情况下正确运行，但在特定架构（如 ARM）的弱内存模型下偶发失败。✅ 已验证
 
 ---
 
-- [x] **TODO**: 补充 `std::sync::atomic` 内存序（Relaxed/Acquire/Release/SeqCst） —— 优先级: 高 —— 已完成 v1.1
+- [x] **TODO**: 补充 `std::sync::atomic` 内存序（Relaxed/Acquire/Release/SeqCst） —— 优先级: 高 —— 已完成 v1.2
 
 ### 6.5 happens-before 推理链
 

@@ -1,0 +1,4341 @@
+{
+  "meta": {
+    "total_concepts": 452,
+    "generated_from": "concept_kb.json",
+    "version": "1.0"
+  },
+  "index": {
+    "Audit": [
+      {
+        "path": "concept\\00_meta\\audit_checklist.md",
+        "score": 5.0
+      }
+    ],
+    "Concept": [
+      {
+        "path": "concept\\00_meta\\audit_checklist.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\concept_index.md",
+        "score": 5.0
+      }
+    ],
+    "Consistency": [
+      {
+        "path": "concept\\00_meta\\audit_checklist.md",
+        "score": 5.0
+      }
+    ],
+    "Checklist": [
+      {
+        "path": "concept\\00_meta\\audit_checklist.md",
+        "score": 5.0
+      }
+    ],
+    "concept/": [
+      {
+        "path": "concept\\00_meta\\audit_checklist.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\concept_index.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\methodology.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\sources.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\todos.md",
+        "score": 4.0
+      }
+    ],
+    "Index": [
+      {
+        "path": "concept\\00_meta\\concept_index.md",
+        "score": 5.0
+      }
+    ],
+    "Bloom": [
+      {
+        "path": "concept\\00_meta\\concept_index.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 2.5
+      }
+    ],
+    "Map": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      }
+    ],
+    "Layer": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      }
+    ],
+    "Dependency": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      }
+    ],
+    "Inter": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      }
+    ],
+    "Send": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 50.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 4.5
+      }
+    ],
+    "Marker": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "sync": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 35.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 7.5
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "CSL": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 44.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Sync": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 30.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 44.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      }
+    ],
+    "send": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 50.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 4.5
+      }
+    ],
+    "AXM": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Drop": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "drop": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 18.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "rc": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\07_future\\01_ai_integration.md",
+        "score": 4.0
+      }
+    ],
+    "dyn": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 16.5
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "future": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 40.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Future": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 40.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "pin": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "Pin": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "async": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "rustbelt": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "RustBelt": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Reynolds": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Tofte": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Talpin": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Ch16": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "TRPL": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 5.0
+      }
+    ],
+    "Rustonomicon": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Ch15": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "RFC": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Rust": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 30.0
+      },
+      {
+        "path": "concept\\07_future\\01_ai_integration.md",
+        "score": 24.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 20.7
+      },
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 18.0
+      },
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 18.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 14.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 13.5
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      }
+    ],
+    "Stroustrup": [
+      {
+        "path": "concept\\00_meta\\inter_layer_map.md",
+        "score": 2.5
+      }
+    ],
+    "Guide": [
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 5.0
+      }
+    ],
+    "Learning": [
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 5.0
+      }
+    ],
+    "methodology.md": [
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 2.5
+      }
+    ],
+    "ownership": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 2.5
+      }
+    ],
+    "01_ownership.md": [
+      {
+        "path": "concept\\00_meta\\learning_guide.md",
+        "score": 2.5
+      }
+    ],
+    "Quick": [
+      {
+        "path": "concept\\00_meta\\quick_reference.md",
+        "score": 5.0
+      }
+    ],
+    "Reference": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\quick_reference.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "self": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\00_meta\\self_assessment.md",
+        "score": 5.0
+      }
+    ],
+    "Self": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\00_meta\\self_assessment.md",
+        "score": 5.0
+      }
+    ],
+    "Assessment": [
+      {
+        "path": "concept\\00_meta\\self_assessment.md",
+        "score": 5.0
+      }
+    ],
+    "Semantic": [
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 9.0
+      }
+    ],
+    "Representational": [
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 9.0
+      }
+    ],
+    "Space": [
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 9.0
+      }
+    ],
+    "unsafe": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 30.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 7.5
+      }
+    ],
+    "ffi": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 13.5
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "Safe": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 24.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "for": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "mem::forget": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "FFI": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "RAII": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "ManuallyDrop": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "UnsafeCell": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "cell": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "mut": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 30.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 5.0
+      }
+    ],
+    "impl": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "dyn Trait": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "dyn trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 16.5
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "fn": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "fn f<T>(x: T) -> T": [
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "panic": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 16.5
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "API": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "Default": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "specialization": [
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "Waker": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "await": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "match": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "enum": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "const generics": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "GATs": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "gat": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "const": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "generic": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 38.5
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\00_meta\\semantic_space.md",
+        "score": 2.5
+      }
+    ],
+    "Global": [
+      {
+        "path": "concept\\00_meta\\todos.md",
+        "score": 5.0
+      }
+    ],
+    "TODO": [
+      {
+        "path": "concept\\00_meta\\todos.md",
+        "score": 5.0
+      }
+    ],
+    "Tracker": [
+      {
+        "path": "concept\\00_meta\\todos.md",
+        "score": 5.0
+      }
+    ],
+    "Ownership": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      }
+    ],
+    "Move": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "After": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "Free": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "use": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Double": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "Use": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "move": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 25.0
+      },
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "E0499": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "&mut T": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "E0502": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "T: Send": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "E0520": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      }
+    ],
+    "T: Sync": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "forget": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "*const T": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "UAF": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "*mut T": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "L1(所有权唯一性) ⟹ L2(Move一致) ⟹ T1(RAII释放) ⟹ T2(无DF) + T3(无UAF) + T4(&mut唯一) ⟹ T5(无数据竞争) ⟹ C3(Safe Rust完备性)": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "C1(无所有权⇒无Drop) ⟹ C2(裸指针危险)": [
+      {
+        "path": "concept\\01_foundation\\01_ownership.md",
+        "score": 6.0
+      }
+    ],
+    "borrowing": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Borrowing": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 12.0
+      }
+    ],
+    "XOR": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Mutation": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Phase": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      }
+    ],
+    "Two": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      }
+    ],
+    "NLL": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Reborrow": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 12.0
+      }
+    ],
+    "Alias": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Borrow": [
+      {
+        "path": "concept\\01_foundation\\02_borrowing.md",
+        "score": 6.0
+      }
+    ],
+    "lifetime": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Lifetimes": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 12.0
+      }
+    ],
+    "Datalog": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 9.6
+      }
+    ],
+    "Polonius": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 9.6
+      }
+    ],
+    "polonius": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 9.6
+      }
+    ],
+    "Elision": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      }
+    ],
+    "Variance": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      }
+    ],
+    "static": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "hrtb": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "HRTB": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "where": [
+      {
+        "path": "concept\\01_foundation\\03_lifetimes.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Type": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "Basics": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      }
+    ],
+    "System": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      }
+    ],
+    "type": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 24.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "ADT": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      }
+    ],
+    "Option": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 5.5
+      }
+    ],
+    "NPO": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "option": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 12.0
+      },
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 5.5
+      }
+    ],
+    "Principal": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Progress": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "Preservation": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "Result": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "result": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "never type": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "Never": [
+      {
+        "path": "concept\\01_foundation\\04_type_system.md",
+        "score": 6.0
+      }
+    ],
+    "Traits": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 11.0
+      }
+    ],
+    "Rule": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 27.5
+      }
+    ],
+    "Coherence": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 27.5
+      }
+    ],
+    "Orphan": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 27.5
+      }
+    ],
+    "Auto": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      }
+    ],
+    "auto trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      }
+    ],
+    "crate": [
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 8.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "Box": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0117": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      }
+    ],
+    "Blanket": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 16.5
+      }
+    ],
+    "#[fundamental]": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      }
+    ],
+    "box": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Box<T>": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "impl trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "impl Trait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Supertrait": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      }
+    ],
+    "Horn": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "super": [
+      {
+        "path": "concept\\02_intermediate\\01_traits.md",
+        "score": 5.5
+      }
+    ],
+    "Generics": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 38.5
+      }
+    ],
+    "system f": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 20.0
+      }
+    ],
+    "Const": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 27.5
+      }
+    ],
+    "for<'a>": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Parametricity": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "LLVM": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "E0038": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "parametricity": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0435": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "Sized": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      }
+    ],
+    "?Sized": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "DST": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "E0277": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 20.0
+      },
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Existential": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "E0666": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "E0562": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "Bound": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Wadler": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 11.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "E0133": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      }
+    ],
+    "transmute": [
+      {
+        "path": "concept\\02_intermediate\\02_generics.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 5.0
+      }
+    ],
+    "Memory": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 11.0
+      }
+    ],
+    "Management": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 11.0
+      }
+    ],
+    "RefCell": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Arc": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "arc": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "refcell": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 22.0
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Box::leak": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      }
+    ],
+    "Weak": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "clone": [
+      {
+        "path": "concept\\02_intermediate\\03_memory_management.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "Error": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 11.0
+      }
+    ],
+    "Handling": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 11.0
+      }
+    ],
+    "unwrap()": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 5.5
+      },
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "From": [
+      {
+        "path": "concept\\02_intermediate\\04_error_handling.md",
+        "score": 5.5
+      }
+    ],
+    "Concurrency": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      }
+    ],
+    "&T: Send": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      }
+    ],
+    "unsafe impl": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "E0225": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "mutex": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Mutex<T: Send>": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Mutex": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 15.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "E0382": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "T: Send + Sync": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      }
+    ],
+    "Ordering": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Channel": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 15.0
+      }
+    ],
+    "Arc<T>": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Relaxed": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "C11": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Atomic": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Actor": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Rayon": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Rc<T>": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Cell<T>": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Cell": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "RefCell<T>": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "std::sync::Mutex": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Arc::clone": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Send/Sync": [
+      {
+        "path": "concept\\03_advanced\\01_concurrency.md",
+        "score": 5.0
+      }
+    ],
+    "Async": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "Await": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "async fn": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Promise": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "async {}": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "poll": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 25.0
+      }
+    ],
+    "Box::pin": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "Pin<&mut Self>": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "Unpin": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "mem::swap": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "!Unpin": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "dyn Future": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "!Send": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "MutexGuard": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "tokio::spawn": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "unsafe impl Send for T": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "wake": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "wake_by_ref": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Pending": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 10.0
+      }
+    ],
+    "Reactor": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "drop(Future)": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "select!": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "impl Future<Output = T>": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "RPITIT": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "E0720": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Output": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "AFIT": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "loop": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "IOCP": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Poll::Pending": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Task": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Poll": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "CPU": [
+      {
+        "path": "concept\\03_advanced\\02_async.md",
+        "score": 5.0
+      }
+    ],
+    "Unsafe": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      }
+    ],
+    "unsafe fn": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      }
+    ],
+    "L3::责任转移": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "unsafe {}": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::借用绕过": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::契约调用": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "std::ptr::read": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "std::mem::transmute": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "L3::类型保持": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "union": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 10.0
+      }
+    ],
+    "#[repr(C)]": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "extern \"C\"": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "ABI": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::FFI布局": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "Union": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "union.field": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::联合类型": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::动态验证": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "Miri": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "MIR": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "miri": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 4.5
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "L3::并发契约": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "unsafe impl Send/Sync": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "static mut": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::静态可变": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "asm!": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "L3::汇编边界": [
+      {
+        "path": "concept\\03_advanced\\03_unsafe.md",
+        "score": 5.0
+      }
+    ],
+    "macro": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 25.0
+      }
+    ],
+    "Macros": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      }
+    ],
+    "AST": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 15.0
+      }
+    ],
+    "TokenStream": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      }
+    ],
+    "Token": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      }
+    ],
+    "Kohlbecker": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "macro_rules!": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 10.0
+      }
+    ],
+    "format_ident!": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "#[derive(Debug)]": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "Debug": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "TLBORM": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "$($x:expr),*": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "vec![1, 2, 3]": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "#define": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "#![recursion_limit]": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "Clone": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "impl Clone": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "#[derive(Clone)]": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "#![recursion_limit = \"1024\"]": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "syn::parse": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "break 'label": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "break": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "macro_export": [
+      {
+        "path": "concept\\03_advanced\\04_macros.md",
+        "score": 5.0
+      }
+    ],
+    "Logic": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      }
+    ],
+    "Linear": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 15.0
+      }
+    ],
+    "Affine": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      }
+    ],
+    "affine logic": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      }
+    ],
+    "linear logic": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      }
+    ],
+    "POPL": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "Jung": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Change": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Types": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "World": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "TAPL": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Pierce": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Promotion": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "copy": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Copy": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "A ⊗ A⊥ ⊢ ⊥": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Gentzen": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Cut": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Elimination": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Actix": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Tokio": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "fn(A) -> B": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "(A, B)": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "enum { A, B }": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "let": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "E0004": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "if let": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "With": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Par": [
+      {
+        "path": "concept\\04_formal\\01_linear_logic.md",
+        "score": 5.0
+      }
+    ],
+    "Theory": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      }
+    ],
+    "loop {}": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Subject": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Reduction": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "'a: 'b": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "'long <: 'short": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "'b: 'a": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0119": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 10.0
+      }
+    ],
+    "E0072": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Iterator<Item=T>": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Vec": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "HKT": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Item": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0275": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Iterator": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "&'a T": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "fn(T)": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0746": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0283": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "hindley-milner": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "E0282": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Hindley": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "collect()": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Milner": [
+      {
+        "path": "concept\\04_formal\\02_type_theory.md",
+        "score": 5.0
+      }
+    ],
+    "Formalization": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 10.0
+      }
+    ],
+    "Wikipedia": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Reed": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "let x = ...": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "&mut x": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "π + ρ ≤ 1": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "π + ρ > 1": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "κ ⊑ κ'": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Region": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Tree": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "tree borrows": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Borrows": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Stacked": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "TSO": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Acquire": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Ordering::Relaxed": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Mutex<T>": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Release": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      }
+    ],
+    "Iris": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "iris": [
+      {
+        "path": "concept\\04_formal\\03_ownership_formal.md",
+        "score": 5.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "Verification": [
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 10.0
+      }
+    ],
+    "Toolchain": [
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 10.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 8.0
+      }
+    ],
+    "Logical": [
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 5.0
+      }
+    ],
+    "Relation": [
+      {
+        "path": "concept\\04_formal\\04_rustbelt.md",
+        "score": 5.0
+      }
+    ],
+    "std::mem::forget": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Rc<RefCell<T>>": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Concepts": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Duck": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "SFINAE": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "Pin<T>": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "requires": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "reinterpret_cast": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "const_cast": [
+      {
+        "path": "concept\\05_comparative\\01_rust_vs_cpp.md",
+        "score": 4.5
+      }
+    ],
+    "CSP": [
+      {
+        "path": "concept\\05_comparative\\02_rust_vs_go.md",
+        "score": 9.0
+      }
+    ],
+    "Matrix": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      }
+    ],
+    "Comparison": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      }
+    ],
+    "Formal": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 8.0
+      }
+    ],
+    "Paradigm": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      }
+    ],
+    "Multi": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      }
+    ],
+    "Language": [
+      {
+        "path": "concept\\05_comparative\\03_paradigm_matrix.md",
+        "score": 9.0
+      },
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 8.0
+      }
+    ],
+    "Safety": [
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 9.0
+      }
+    ],
+    "Boundary": [
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 9.0
+      }
+    ],
+    "Panorama": [
+      {
+        "path": "concept\\05_comparative\\safety_boundaries.md",
+        "score": 9.0
+      }
+    ],
+    "Cargo": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 16.0
+      }
+    ],
+    "Cargo.lock": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "patch": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "SemVer": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Cargo.toml": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "MAJOR": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "deny": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "allow": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "#![deny(...)]": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "rustc": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 8.0
+      }
+    ],
+    "clippy": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Clippy": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "rustfmt.toml": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "rustfmt": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "cargo-audit": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Advisory": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      },
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 4.0
+      }
+    ],
+    "cargo audit": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "RustSec": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "sccache": [
+      {
+        "path": "concept\\06_ecosystem\\01_toolchain.md",
+        "score": 4.0
+      }
+    ],
+    "Design": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 8.0
+      }
+    ],
+    "Patterns": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 8.0
+      }
+    ],
+    "Typestate": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "PhantomData": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Builder": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "struct": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Wrapper": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "struct Wrapper(T)": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Newtype": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Strategy": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "accept": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Visitor": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "State": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Machine": [
+      {
+        "path": "concept\\06_ecosystem\\02_patterns.md",
+        "score": 4.0
+      }
+    ],
+    "Core": [
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 8.0
+      }
+    ],
+    "Crates": [
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 8.0
+      }
+    ],
+    "CLI": [
+      {
+        "path": "concept\\06_ecosystem\\03_core_crates.md",
+        "score": 4.0
+      }
+    ],
+    "Domains": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 8.0
+      }
+    ],
+    "Application": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 8.0
+      }
+    ],
+    "Web": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "Java": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "IoT": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "Solana": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "Substrate": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "Unity": [
+      {
+        "path": "concept\\06_ecosystem\\04_application_domains.md",
+        "score": 4.0
+      }
+    ],
+    "LLM": [
+      {
+        "path": "concept\\07_future\\01_ai_integration.md",
+        "score": 4.0
+      }
+    ],
+    "PyTorch": [
+      {
+        "path": "concept\\07_future\\01_ai_integration.md",
+        "score": 4.0
+      }
+    ],
+    "TensorFlow": [
+      {
+        "path": "concept\\07_future\\01_ai_integration.md",
+        "score": 4.0
+      }
+    ],
+    "Methods": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 8.0
+      }
+    ],
+    "Industrialization": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 8.0
+      }
+    ],
+    "Kani": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "kani": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "AWS": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "P * Q": [
+      {
+        "path": "concept\\07_future\\02_formal_methods.md",
+        "score": 4.0
+      }
+    ],
+    "Evolution": [
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 8.0
+      }
+    ],
+    "Edition": [
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      }
+    ],
+    "edition": [
+      {
+        "path": "concept\\07_future\\03_evolution.md",
+        "score": 4.0
+      }
+    ]
+  }
+}

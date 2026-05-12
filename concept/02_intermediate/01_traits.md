@@ -172,7 +172,7 @@ graph TD
 
 Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。标准库中最重要的 Auto trait 是 `Send` 和 `Sync`：
 
-```rust
+```rust,ignore
 pub unsafe auto trait Send {}
 pub unsafe auto trait Sync {}
 ```

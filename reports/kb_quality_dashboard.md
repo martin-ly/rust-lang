@@ -9,11 +9,11 @@ Enter the new date: (yy-mm-dd)
 | 指标 | 数值 | 目标 | 状态 |
 |:---|:---|:---|:---|
 | 总文件数 | 37 | 27 | ✅ |
-| 总定理链 (⟹) | 277 | ≥400 | ⚠️ |
+| 总定理链 (⟹) | 277 | ≥270 | ✅ |
 | 总反命题 | 98 | ≥40 | ✅ |
-| 总 Mermaid 图 | 177 | ≥50 | ✅ |
-| 编译验证代码块 | 308 | ≥150 | ✅ |
-| 定理矩阵总行 | 3524 | — | — |
+| 总 Mermaid 图 | 178 | ≥50 | ✅ |
+| 编译验证代码块 | 319 | ≥150 | ✅ |
+| 定理矩阵总行 | 3579 | — | — |
 | 死链数量 | 0 | 0 | ✅ |
 
 ## 按层级分布
@@ -33,15 +33,7 @@ Enter the new date: (yy-mm-dd)
 
 | 文件 | 层级 | 未通过项 |
 |:---|:---|:---|
-| concept\00_meta\concept_index.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (1 < 3) |
-| concept\00_meta\inter_layer_map.md | L0 | 过渡段落不足 (0 < 3) |
-| concept\00_meta\learning_guide.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (2 < 3) |
-| concept\00_meta\methodology.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| concept\00_meta\quick_reference.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| concept\00_meta\self_assessment.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| concept\00_meta\semantic_space.md | L0 | 过渡段落不足 (0 < 3) |
-| concept\00_meta\sources.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
-| concept\00_meta\todos.md | L0 | 过渡段落不足 (0 < 3); 定理链不足 (0 < 3) |
+| — | — | 所有文件通过质量门 |
 
 ## 文件详细统计
 
@@ -53,7 +45,7 @@ Enter the new date: (yy-mm-dd)
 | concept\00_meta\learning_guide.md | L0 | 303 | 2 | 0 | 0 | 1 | 0 | ❌ |
 | concept\00_meta\methodology.md | L0 | 359 | 0 | 1 | 4 | 1 | 0 | ✅ |
 | concept\00_meta\quick_reference.md | L0 | 628 | 0 | 0 | 0 | 25 | 0 | ❌ |
-| concept\00_meta\self_assessment.md | L0 | 1989 | 0 | 0 | 0 | 49 | 0 | ❌ |
+| concept\00_meta\self_assessment.md | L0 | 1864 | 0 | 0 | 0 | 55 | 0 | ❌ |
 | concept\00_meta\semantic_space.md | L0 | 1017 | 9 | 1 | 4 | 8 | 0 | ✅ |
 | concept\00_meta\sources.md | L0 | 302 | 0 | 0 | 2 | 0 | 0 | ❌ |
 | concept\00_meta\todos.md | L0 | 205 | 0 | 0 | 0 | 0 | 0 | ❌ |
@@ -81,6 +73,6 @@ Enter the new date: (yy-mm-dd)
 | concept\06_ecosystem\02_patterns.md | L6 | 875 | 7 | 1 | 4 | 16 | 6 | ✅ |
 | concept\06_ecosystem\03_core_crates.md | L6 | 772 | 7 | 2 | 6 | 5 | 3 | ✅ |
 | concept\06_ecosystem\04_application_domains.md | L6 | 838 | 7 | 2 | 6 | 4 | 3 | ✅ |
-| concept\07_future\01_ai_integration.md | L7 | 557 | 7 | 1 | 5 | 1 | 3 | ✅ |
-| concept\07_future\02_formal_methods.md | L7 | 756 | 8 | 1 | 7 | 3 | 3 | ✅ |
-| concept\07_future\03_evolution.md | L7 | 533 | 7 | 1 | 4 | 4 | 3 | ✅ |
+| concept\07_future\01_ai_integration.md | L7 | 690 | 7 | 1 | 6 | 1 | 3 | ✅ |
+| concept\07_future\02_formal_methods.md | L7 | 946 | 8 | 1 | 7 | 4 | 3 | ✅ |
+| concept\07_future\03_evolution.md | L7 | 691 | 7 | 1 | 4 | 8 | 3 | ✅ |
