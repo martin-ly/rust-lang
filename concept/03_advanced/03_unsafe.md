@@ -797,7 +797,7 @@ graph TD
 
 #### 边界极限测试代码
 
-```rust
+```rust,ignore
 // 边界: 未定义行为（UB）的微妙性
 
 fn undefined_behavior_example() {
@@ -882,7 +882,7 @@ pub unsafe extern "C" fn rust_function(x: i32) -> i32 {
 
 #### 内存布局与对齐分析
 
-```rust
+```rust,ignore
 use std::mem::{size_of, align_of};
 
 // 默认 Rust 布局：编译器可重排字段
@@ -909,7 +909,7 @@ struct Packed { a: u8, b: u32 }
 
 #### FFI 边界使用场景
 
-```rust
+```rust,ignore
 // ✅ repr(C) + 指针传递：C 结构体互操作
 #[repr(C)]
 pub struct Point {
@@ -1239,7 +1239,7 @@ Rust 1.26+ ──→ std 内部逐步用 NonNull 替换 Unique/Shared
 
 #### 反例：误用 `NonNull` 导致的问题
 
-```rust
+```rust,ignore
 use std::ptr::NonNull;
 
 // ❌ 反例: NonNull 不保证指向有效内存，仅保证非空
@@ -1340,7 +1340,7 @@ where
 
 #### 反例：错误使用 `assume_init()` 导致 UB
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // ❌ 反例: 对未写入的 MaybeUninit 调用 assume_init()

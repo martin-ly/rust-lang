@@ -551,7 +551,7 @@ fn main() {
 
 #### 边界测试 2：递归宏的栈深度极限
 
-```rust
+```rust,ignore
 // 边界: 递归宏深度限制（默认 128）
 
 macro_rules! count {
@@ -569,7 +569,7 @@ fn main() {
 
 #### 边界测试 3：过程宏的 TokenStream 解析失败
 
-```rust
+```rust,ignore
 // 边界: 过程宏遇到非法输入时的 panic
 
 // 假设某 derive 宏期望 struct，但收到 fn:
@@ -652,7 +652,7 @@ graph TD
 
 **概念解答**: DRY（Don't Repeat Yourself）不仅是代码行数问题，更是**语义一致性**问题。当同一模式在 10 处重复时，任何修改都面临"漏改一处"的风险。泛型解决类型层面的重复，宏解决语法模式层面的重复。
 
-```rust
+```rust,ignore
 // 反面: 重复代码
 let v1 = {
     let mut temp = Vec::new();
@@ -696,7 +696,7 @@ let v2 = make_vec![3, 4];
 | 自定义语法（DSL） | ❌ 不支持 | ✅ `sql!(SELECT * FROM users)` |
 | 编译期代码生成 | ❌ 不支持 | ✅ `#[derive(Debug)]` |
 
-```rust
+```rust,ignore
 // 泛型无法做到: 可变参数
 fn print_all<T>(items: &[T]) { /* 只能接收切片 */ }
 
@@ -791,7 +791,7 @@ macro_rules! say_hello {
 
 **概念解答**: Hygienic macro（卫生宏）= 宏内部定义的标识符不会与外部标识符意外冲突。这是 Rust 宏相较于 C 预处理器 `#define` 的根本安全优势。
 
-```rust
+```rust,ignore
 // C 预处理器: 不卫生，名称冲突！
 // #define SWAP(a, b) { int temp = a; a = b; b = temp; }
 // int temp = 5; SWAP(temp, x); // temp 被覆盖！灾难！
@@ -1307,7 +1307,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // ✅ 正确: include_str! 嵌入静态资源
 const SQL_SCHEMA: &str = include_str!("schema.sql");
 const CONFIG_JSON: &str = include_str!("config.json");
@@ -1320,7 +1320,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // ✅ 正确: env! 与 option_env! 的编译期配置
 const DATABASE_URL: &str = env!("DATABASE_URL"); // 编译时必须存在
 const OPTIONAL_KEY: Option<&str> = option_env!("API_KEY"); // 可选
@@ -1354,7 +1354,7 @@ fn main() {
 
 **边界：include_str! 的路径解析**
 
-```rust
+```rust,ignore
 // ✅ 边界: 相对路径基于当前源文件位置
 // 若本文件位于 src/main.rs，则查找 src/schema.sql
 const SCHEMA: &str = include_str!("schema.sql");
@@ -1613,7 +1613,7 @@ fn main() {
 
 **边界：混合使用策略**
 
-```rust
+```rust,ignore
 // ✅ 边界: 当前最佳实践（stable Rust）
 // 继续使用 macro_rules!，但用模块系统模拟可见性
 

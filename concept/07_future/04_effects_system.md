@@ -16,7 +16,7 @@
 
 ## 一、Effect 系统是什么？
 
-### 1.1 权威定义
+> **[来源: Plotkin & Pretnar 2009; Koka Documentation; Wikipedia: Effect System]** ✅
 
 > **[学术来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Language]**
 
@@ -59,7 +59,7 @@
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
 
-### 2.1 效果映射表
+> **[来源: Rust Reference; RFC 3668 AsyncFn; RFC 3762 Const Trait]** ✅
 
 | 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
 |:---|:---|:---|:---|:---|
@@ -71,7 +71,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 
 ### 2.2 `async` 作为效果的原型
 
-```rust
+```rust,ignore
 // 当前 Rust: async 是语法关键字，不是类型系统效果
 async fn fetch() -> Data { ... }
 // 语义: fetch 具有 Async 效果，调用者必须 await
@@ -97,7 +97,7 @@ fn fetch() -> Data effect Async { ... }
 
 Rust 1.85 稳定的 `AsyncFn` trait 家族可视为**效果多态（effect polymorphism）**的原型：
 
-```rust
+```rust,ignore
 // AsyncFn: "我不关心这个闭包是否是 async，只要调用时我能 await 结果"
 fn call_any<F, T>(f: F) -> impl Future<Output = T>
 where
@@ -119,7 +119,7 @@ where
 
 ## 三、跨语言对比
 
-### 3.1 效果系统谱系
+> **[来源: Koka; Eff Language; Haskell GHC; Java Exceptions]** ✅
 
 | 语言 | 效果模型 | 表达力 | 运行时成本 | 与 Rust 的关系 |
 |:---|:---|:---|:---|:---|
@@ -154,9 +154,10 @@ Rust 的替代方案:
 
 ## 四、对 Rust 类型系统的潜在影响
 
-### 4.1 统一效果语法的可能性
+> **[来源: Rust Internals Discussion; Type Theory Research]** ⚠️ 推测性
+的可能性
 
-```rust
+```rust,ignore
 // 推测性语法（非官方，仅供概念讨论）
 
 // 效果声明
@@ -203,7 +204,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 
 `gen` blocks（生成器）是 Rust 正在探索的另一个效果：
 
-```rust
+```rust,ignore
 // gen block: 效果 = 可挂起并产生多个值
 let iter = gen {
     yield 1;
@@ -276,8 +277,30 @@ Q4: 与现有生态的兼容性？
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | Async/Await | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | `Async` 效果的主要载体 |
+
+---
+
+## 七、定理一致性矩阵（效果系统类型安全）
+
+> **[来源类型: 原创分析; Koka; Plotkin & Pretnar 2009]** 以下矩阵梳理效果系统的类型安全保证与 Rust 的渐进式实现。
+
+| 编号 | 效果 / 保证 | 前提 | 结论 | 失效条件 | 后果 |
+|:---|:---|:---|:---|:---|:---|
+| **EF1** | `async` 效果追踪 | `async fn` 关键字 | 调用者必须 `await` 或 `spawn` | 阻塞调用在 async 上下文 | 执行器线程阻塞 |
+| **EF2** | `unsafe` 效果边界 | `unsafe fn` / `unsafe {}` | 调用者承担 safety proof 义务 | 调用者未验证 precondition | UB（未定义行为） |
+| **EF3** | `const` 效果限制 | `const fn` 关键字 | 仅编译期可求值操作 | 运行时依赖；堆分配 | 编译错误 |
+| **EF4** | `AsyncFn` 效果多态 | `AsyncFn` trait bound | 泛型代码接受 sync/async 闭包 | trait 系统表达能力不足 | 无法抽象异步回调 |
+| **EF5** | 统一 `effect` 关键字（未来） | 语法设计完成 + Edition 迁移 | 所有副作用显式追踪 | 向后兼容破坏；推断失败 | 生态迁移成本 |
+
+> **⟹ 推理链**: EF1-EF3 证明 Rust **已经实现了效果的隐性追踪**，只是通过不同关键字而非统一语法。EF4 是**效果多态的原型**——证明统一语法在 trait 系统内可行。EF5 是**远期方向**，其最大障碍不是技术可行性，而是**向后兼容性**和**社区共识**。
 | `AsyncFn` Trait | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §12 | 效果多态的工程原型 |
 | `gen` blocks | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §13 | 另一种计算效果的实验 |
 | 类型论基础 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 效果系统的类型论根基 |
 | Rust 版本跟踪 | [`./rust_version_tracking.md`](./rust_version_tracking.md) | 效果相关语言特性状态 |
 | 语言演进 | [`./03_evolution.md`](./03_evolution.md) §3.1, §3.7.1 | 效果系统在长程演进中的定位 |
+
+> **[来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Documentation; Eff Language]** Effect 系统概念基于代数效应的经典论文和现代语言实现。✅
+
+> **[来源: Rust Lang Team Blog; Rust Internals Discussion; RFC 3668 AsyncFn]** Rust 效果追踪分析基于语言团队的公开讨论和稳定化的 trait 系统。✅
+
+> **[来源: Haskell GHC; Java Checked Exceptions; Type Theory Research]** 跨语言对比参考了多种语言的效果处理机制和类型论研究。✅

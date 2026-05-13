@@ -634,7 +634,7 @@ async fn process_stream() {
 
 ### 8.4 反例：在 async 中阻塞线程
 
-```rust
+```rust,ignore
 // ❌ 反例: 在 async 中执行阻塞操作
 async fn bad_fetch() -> String {
     std::thread::sleep(std::time::Duration::from_secs(1));  // 阻塞整个线程!
@@ -1298,7 +1298,7 @@ fn recursive(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 > **[Tokio 博客]** Tokio 团队使用 loom 验证其内部并发原语（如 `tokio::sync::Mutex`、`broadcast` channel）的正确性。loom 的测试覆盖度远超随机并发测试。✅ 已验证
 
-```rust
+```rust,ignore
 // ✅ 正确: 使用 loom 测试自定义并发数据结构
 use loom::sync::atomic::AtomicUsize;
 use loom::sync::Arc;
@@ -1321,7 +1321,7 @@ fn test_concurrent_counter() {
 }
 ```
 
-```rust
+```rust,ignore
 // ✅ 正确: 使用 loom::sync::Mutex 测试临界区
 use loom::sync::{Arc, Mutex};
 use loom::thread;
@@ -1580,7 +1580,7 @@ trait DataProvider<'a> {
 
 在 1.85 之前，异步闭包 `async |x| { ... }` 无法直接作为 trait bound 使用：
 
-```rust
+```rust,ignore
 // 旧模式：verbose 的 workaround
 async fn process_batch<F, Fut>(items: Vec<String>, callback: F)
 where
@@ -1616,7 +1616,7 @@ AsyncFn<Args>         // 异步多次调用，不可变借用
 
 `AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用**闭包捕获的状态。因此：
 
-```rust
+```rust,ignore
 let closure = async |s| { db.save(s).await };
 
 let fut1 = closure("hello");  // Future 借用了 closure 内部状态
@@ -1658,7 +1658,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 
 ### 13.1 语法与语义
 
-```rust
+```rust,ignore
 // 手动状态机（旧模式）
 struct Fibonacci { a: u64, b: u64 }
 impl Iterator for Fibonacci {

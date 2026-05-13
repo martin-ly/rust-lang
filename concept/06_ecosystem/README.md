@@ -10,12 +10,15 @@
 
 ```mermaid
 graph TB
-    subgraph L6_Core["L6 核心五文件"]
+    subgraph L6_Core["L6 核心八文件"]
         TOOL[01 Toolchain]
         PAT[02 Patterns]
         CRATES[03 Core Crates]
         APP[04 Application Domains]
         FORMAL[05 Formal Ecosystem Tower]
+        BC[06 Blockchain]
+        GAME[07 Game ECS]
+        WASI[08 WASI]
     end
 
     %% L1-L5 输入
@@ -77,6 +80,9 @@ graph TB
 | [03_core_crates.md](./03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
 | [04_application_domains.md](./04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
 | [05_formal_ecosystem_tower.md](./05_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
+| [06_blockchain.md](./06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
+| [07_game_ecs.md](./07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
+| [08_wasi.md](./08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、wasm32-wasi | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
 
 ---
 

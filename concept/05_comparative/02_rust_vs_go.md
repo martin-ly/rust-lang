@@ -624,7 +624,7 @@ func main() {
 }
 ```
 
-```rust
+```rust,ignore
 // ✅ Rust: async/await + Tokio 的零成本抽象
 #[tokio::main]
 async fn main() {

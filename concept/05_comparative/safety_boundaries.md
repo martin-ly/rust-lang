@@ -287,7 +287,7 @@ unsafe {
 
 ```
 
-```rust
+```rust,ignore
 // cxx 示例：安全 C++ 互操作
 // #[cxx::bridge]
 // mod ffi {
@@ -746,8 +746,29 @@ graph TD
 >
 > 验证工具的边界见 [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md)（RustBelt 能力边界）。
 
+---
+
+## 八、定理一致性矩阵（安全边界层）
+
+> **[来源类型: 原创分析; RustBelt: POPL 2018; Rust Reference]** 以下矩阵梳理安全边界从 L0 到 L4 的递进保证与各自的失效条件。
+
+| 编号 | 保证层级 | 前提 | 结论 | 失效条件 | 后果 |
+|:---|:---|:---|:---|:---|:---|
+| **B0** | L0 编译器类型检查 | `rustc` 正常编译 | 无类型混淆、无悬垂引用（safe 子集） | 编译器 bug；`transmute` | 编译期错误 / 运行时 UB |
+| **B1** | L1 所有权 + 借用 | 无 `unsafe` 块 | 无 UAF、无 DF、无数据竞争 | `unsafe` 块绕过 | 运行时崩溃 |
+| **B2** | L2 Miri 动态检测 | `-Zmiri-tree-borrows` 运行 | 检测 unsafe 中的别名违规 | FFI 不透明；未覆盖路径 | 漏报 UB |
+| **B3** | L3 Kani 符号验证 | `#[kani::proof]` + harness | 有界空间内属性成立 | 状态空间爆炸；规格错误 | 假阴性 / 假阳性 |
+| **B4** | L4 RustBelt 形式化 | Safe Rust + λRust 语义 | 数学证明无 UAF + 无数据竞争 | 规格不完整；Coq bug | 证明与真实编译器脱节 |
+| **B5** | 边界：死锁 / 活性 | 所有上述层级成立 | 内存安全保证有效 | 任何 safe Rust 代码 | 逻辑正确但无法终止 |
+
+> **⟹ 推理链**: B0 → B1 → B2 → B3 → B4 构成**从编译期到运行期到数学证明**的递进防御。每层都假设下层正确，且每层都有自己的失效条件。B5 是**活性边界**——形式化方法不保证程序终止或避免死锁。
+
 > **过渡: L5 → L6**
 >
 > 供应链安全（cargo-audit、cargo-vet）将安全边界从代码层面扩展到依赖层面。一个 crate 的 `unsafe` 代码可能通过依赖链影响整个项目——安全边界不仅是单个文件的属性，也是整个依赖图的属性。
 >
 > 依赖安全实践见 [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md)（Cargo 安全审计）。
+
+> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+
+> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅

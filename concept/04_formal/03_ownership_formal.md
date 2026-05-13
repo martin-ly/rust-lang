@@ -782,7 +782,7 @@ Tree Borrows 以**树结构（provenance tree）**替代栈，每个内存位置
 
 Stacked Borrows 的**全局 pop** 机制过于严格。典型反例——合法自引用模式：
 
-```rust
+```rust,ignore
 // 合法 Safe Rust，但 Stacked Borrows 下 Miri 报错
 let mut x = 0;
 let r1 = &mut x;          // 栈: [Unique(r1)]

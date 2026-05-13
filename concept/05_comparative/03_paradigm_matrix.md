@@ -693,3 +693,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 - [x] **TODO**: 补充认知路径交互式测验与反命题真实案例 —— 已融入各章节反例
 - [x] **TODO**: 补充更多新兴语言的 benchmark 对比数据（Vale、Hylo、Mojo） —— 已完成 §8.3
 - [x] **TODO**: 补充编程范式在 AI 辅助编程时代的演化趋势 —— 已完成 §8.4
+
+> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+
+> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅

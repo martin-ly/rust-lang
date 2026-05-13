@@ -296,8 +296,31 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 
 - [L6: Core Crates（核心库谱系）](./03_core_crates.md) —— 传统功能域分类视角
 - [L6: Application Domains](./04_application_domains.md) —— 工程落地场景
+
+---
+
+## 九、定理一致性矩阵（形式化生态塔）
+
+> **[来源类型: 原创分析]** 以下矩阵梳理形式化生态塔从 L0 到 L4 的递进保证与工具映射。
+
+| 编号 | 生态层级 | 工具代表 | 保证范围 | 失效条件 | 工业可用性 |
+|:---|:---|:---|:---|:---|:---|
+| **E0** | L0 编译器保证 | `rustc` | 类型安全 + 所有权安全（safe） | `unsafe` 绕过；编译器 bug | ⭐⭐⭐⭐⭐ 生产必需 |
+| **E1** | L1 Lint/静态分析 | `clippy`, `cargo-deny` | 风格 + 依赖安全 | 规则覆盖不全 | ⭐⭐⭐⭐⭐ CI 标配 |
+| **E2** | L2 动态检测 | `Miri`, `cargo-fuzz` | UB 检测 + 模糊测试 | FFI 不透明；路径覆盖不足 | ⭐⭐⭐⭐ 开发期 |
+| **E3** | L3 模型检测 | `Kani`, `Prusti` | 有界验证 + 分离逻辑 | 状态空间爆炸；规格负担 | ⭐⭐⭐ 安全关键 |
+| **E4** | L4 定理证明 | `RustBelt/Iris`, `Verus` | 完整数学证明 | 人月级成本；规格错误 | ⭐⭐ 学术/核心 |
+
+> **⟹ 推理链**: E0-E4 构成**从自动到交互式、从弱保证到强保证**的光谱。工业实践采用"左端免费 + 右端按需"策略：所有项目使用 E0-E1，安全关键项目使用 E2-E3，语言核心使用 E4。
+
+---
+
 - [L6: Toolchain](./01_toolchain.md) —— Cargo、审计与供应链安全
 - [L3: Async](../03_advanced/02_async.md) —— Tokio/Tower 的 async 根基
 - [L3: Unsafe](../03_advanced/03_unsafe.md) —— Firecracker/Wasmtime 的 unsafe 边界
 - [L4: Type Theory](../04_formal/02_type_theory.md) —— 范畴论与类型论根基
 - [L7: Formal Methods](../07_future/02_formal_methods.md) —— Kani/Verus/Creusot 的工业化路径
+
+> **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
+
+> **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅

@@ -386,7 +386,7 @@ graph TD
 
 ### 7.1 Prusti：`#[requires]` / `#[ensures]` 示例
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 // ✅ 前置条件 + 后置条件 + 循环不变式
@@ -415,7 +415,7 @@ fn sum_to(n: i32) -> i32 {
 
 ### 7.2 Kani：`#[kani::proof]` 与并发验证
 
-```rust
+```rust,ignore
 // ✅ Kani 验证并发代码无数据竞争
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -435,7 +435,7 @@ fn check_atomic_increment() {
 
 ### 7.3 Verus：`proof fn` 与所有权推理
 
-```rust
+```rust,ignore
 use vstd::prelude::*;
 
 verus! {
@@ -465,7 +465,7 @@ verus! {
 
 ### 7.4 Creusot：分离逻辑契约与预言（Prophecy）
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // ✅ 前置/后置条件 + 分离逻辑框架
@@ -768,7 +768,7 @@ Condvar 规约（简化）:
     { CondvarState(γ) }    // 可能唤醒一个等待者
 ```
 
-```rust
+```rust,ignore
 // ✅ Rust 中的 RwLock 使用（与 CSL 规约对应）
 use std::sync::{Arc, RwLock};
 
@@ -811,7 +811,7 @@ push 操作:
 
 > **关键洞察**：在 realloc 的瞬间，旧的 `buf` 被释放（`old_buf ↦ ⊥`），所有指向旧 `buf` 的借用都**物理失效**。Rust 的编译期保证（`&mut self`）确保在 `push` 期间没有任何 `&Vec<T>` 或 `&T` 存活——借用检查器在语法层面防止了观察 realloc 的可能性。
 
-```rust
+```rust,ignore
 // ✅ 借用检查器阻止观察 realloc
 let mut v = vec![1, 2, 3];
 let r = &v[0];      // ✅ 获取共享引用

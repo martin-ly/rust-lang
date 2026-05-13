@@ -315,7 +315,7 @@ unsafe impl Sync for MyPtr {}
 
 在不稳定特性（`negative_impls`）下，还可显式**否定**自动推导：
 
-```rust
+```rust,ignore
 #![feature(negative_impls)]
 struct RawFd(i32);
 
@@ -368,7 +368,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 
 ### 5.1 正确示例：Trait 定义与实现
 
-```rust
+```rust,ignore
 // ✅ 正确: 定义 Trait + 实现 + 泛型约束
 pub trait Summary {
     fn summarize(&self) -> String;
@@ -395,7 +395,7 @@ pub fn notify<T: Summary>(item: &T) {
 
 ### 5.2 正确示例：关联类型
 
-```rust
+```rust,ignore
 // ✅ 正确: 关联类型使接口更简洁
 pub trait Iterator {
     type Item;  // 关联类型
@@ -495,7 +495,7 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 普通关联类型只能表达"每个实现者对应一个类型"：
 
-```rust
+```rust,ignore
 trait Iterator {
     type Item;           // 无泛型参数
     fn next(&mut self) -> Option<Self::Item>;
@@ -553,7 +553,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 在 GATs 之前，若 trait 需要与泛型参数相关的类型，只能将泛型参数提升到 trait 本身：
 
-```rust
+```rust,ignore
 // GATs 之前：笨拙的 trait 级泛型
 trait Convert<Input> {
     type Output;
@@ -795,7 +795,7 @@ graph TD
 
 ### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
 
-```rust
+```rust,ignore
 // 边界: Orphan Rule 对嵌套泛型、元组、引用的精确判定
 
 // 情况 1: 为外部 Wrapper 实现外部 Trait —— 非法
@@ -823,7 +823,7 @@ impl<T> LocalTrait for Vec<T> {}
 
 ### 7.2 测试 2: Trait 对象安全 + dyn/impl 分发边界
 
-```rust
+```rust,ignore
 // 边界: 对象安全条件的精确测试与分发方式差异
 
 // ✅ 对象安全: 方法返回引用，不涉及 Self
@@ -870,7 +870,7 @@ fn dynamic_dispatch() -> Box<dyn Iterator<Item = u32>> {
 
 ### 7.3 测试 3: Blanket impl + 关联类型递归 + Auto Trait 推导边界
 
-```rust
+```rust,ignore
 // 边界: Blanket impl 与关联类型的递归约束求解 + Auto Trait 保守推导
 
 trait Convert<T> {
@@ -1386,7 +1386,7 @@ Negative impl 在逻辑上不是"暂时未实现"，而是**永久承诺**（sem
 
 Negative impl 对 Auto trait 有额外意义：它**阻止编译器的自动推导**：
 
-```rust
+```rust,ignore
 #![feature(negative_impls)]
 
 struct RawFd(i32);

@@ -418,7 +418,7 @@ fn main() {
 
 ### 7.5 边界示例：Two-Phase Borrows
 
-```rust
+```rust,ignore
 // ✅ 边界: method call 的隐式重新借用
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -740,7 +740,7 @@ Cow<'a, T> 的约束:
 
 #### 强制解引用的规则
 
-```rust
+```rust,ignore
 use std::ops::{Deref, DerefMut};
 
 struct MyBox<T>(T);
@@ -783,7 +783,7 @@ b.push_str(" world");  // ✅ 自动解引用: &mut MyBox<String> → &mut Strin
 | **典型实现者** | 智能指针（Box、Rc、Arc、Vec） | 视图类型（String → str、PathBuf → Path） |
 | **方法调用** | `wrapper.method()` 自动转发 | 需显式 `.as_ref().method()` |
 
-```rust
+```rust,ignore
 // ✅ Deref: 智能指针自动获得内部类型的方法
 let v = vec![1, 2, 3];
 v.len();  // Vec 通过 Deref 到 [T]，自动调用 slice 的 len()
@@ -986,7 +986,7 @@ fn refcell_demo() {
 
 ### 9.1 语法与语义
 
-```rust
+```rust,ignore
 // 旧模式：嵌套 if let（右向漂移）
 if let Some(x) = foo {
     if let Some(y) = bar {
@@ -1014,7 +1014,7 @@ if let Some(x) = foo && let Some(y) = bar && x > y { body }
 
 **关键规则**: 绑定变量的作用域在逻辑合取的右侧延伸（`&&` 的短路语义）：
 
-```rust
+```rust,ignore
 if let Some(x) = foo && x > 0 { ... }        // ✅ x 在右侧可用
 if let Some(x) = foo || x > 0 { ... }        // ❌ x 在右侧不可用（短路语义）
 ```

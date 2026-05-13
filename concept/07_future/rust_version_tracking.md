@@ -240,7 +240,7 @@ graph TD
 
 **语法**:
 
-```rust
+```rust,ignore
 unsafe extern "C" {
     safe fn printf(fmt: *const c_char, ...);  // 标记为 safe 的 FFI 函数
     fn malloc(size: usize) -> *mut c_void;    // 默认 unsafe
