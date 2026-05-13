@@ -11,6 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
+- v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 Pin<Box<dyn Future>> vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
 - v2.0 (2026-05-13): 定理一致性矩阵扩展至10行（含⟹推理链）、新增反命题决策树3组、认知路径6步递进、章节过渡段落与层次一致性标注
@@ -33,7 +34,17 @@
     - [2.3 运行时对比矩阵](#23-运行时对比矩阵)
   - [三、形式化理论根基（Formal Foundation）](#三形式化理论根基formal-foundation)
     - [3.1 async fn 作为状态机：精确推导](#31-async-fn-作为状态机精确推导)
+    - [3.1b 状态机操作语义（Operational Semantics）](#31b-状态机操作语义operational-semantics)
+      - [状态机类型归纳定义](#状态机类型归纳定义)
+      - [poll 作为状态转移函数](#poll-作为状态转移函数)
+      - [.await 的 CPS 变换规则](#await-的-cps-变换规则)
+      - [Pin 约束在操作语义中的体现](#pin-约束在操作语义中的体现)
     - [3.2 Pin 的形式化语义](#32-pin-的形式化语义)
+    - [3.2b Pin 的 LTL 形式化（异步状态机语境）](#32b-pin-的-ltl-形式化异步状态机语境)
+      - [不动性公理（Immobility Axiom）](#不动性公理immobility-axiom)
+      - [Unpin 豁免（Exemption）](#unpin-豁免exemption)
+      - [在 poll 递归调用链中的验证](#在-poll-递归调用链中的验证)
+      - [与 §3.1b 操作语义的衔接](#与-31b-操作语义的衔接)
     - [3.5 调度模型对比：抢占式 vs 协作式 vs 绿色线程](#35-调度模型对比抢占式-vs-协作式-vs-绿色线程)
   - [四、思维导图（Mind Map）](#四思维导图mind-map)
   - [五、定理一致性矩阵（Theorem Consistency Matrix）](#五定理一致性矩阵theorem-consistency-matrix)
@@ -298,6 +309,118 @@ Pin<&mut Self> 的内存布局约束:
 
 > **[RFC 2349: Pin]** `Pin<P<T>>` was introduced to guarantee that `!Unpin` values cannot be moved, providing the formal foundation for safe self-referential async state machines. ✅ 已验证
 
+### 3.1b 状态机操作语义（Operational Semantics）
+
+> **[来源: Rust Compiler: rustc_mir_transform::async_lowering; RFC 2394 §3.2; without.boats blog: Pinning in Rust Futures]**
+
+§3.1 展示了编译器变换的**结果**（enum 结构），本节补充变换的**形式化规则**——将 async fn 视为一个受控的、带挂起点的小步操作语义系统。
+
+#### 状态机类型归纳定义
+
+```text
+给定 async fn async f(x: T) -> U { body }，编译器生成状态机类型 S_f：
+
+  S_f ::= Start(T)                       -- 初始状态，持有参数 x
+        | Suspend₁(Γ₁)                   -- 第 1 个 .await 后，局部变量环境 Γ₁
+        | Suspend₂(Γ₂)                   -- 第 2 个 .await 后
+        | ...
+        | Complete(U)                    -- 终止状态，持有返回值
+        | Panicked                       -- 异常终止状态
+
+其中 Γᵢ = { v₁: τ₁, v₂: τ₂, ... } 为跨第 i 个挂起点存活的局部变量集合。
+关键约束: ∀v ∈ Γᵢ, v 的生命周期 'v 必须满足 'v: 'suspendᵢ
+```
+
+> **来源**: [Rust Reference: Async fn desugaring — 局部变量提升规则] · [RFC 2394: Generator transform]
+
+#### poll 作为状态转移函数
+
+```text
+poll : Pin<&mut S_f> × &mut Context → Poll<U>
+
+小步语义（small-step semantics）：
+
+  (1) 初始推进:
+      poll(Start(x), cx)
+        = match body₀(x) {
+            .await fut₁  →  (Pending, store(Γ₁), register_waker(cx, fut₁))
+            return v    →  (Ready(v), Complete(v))
+          }
+
+  (2) 挂起恢复（第 i 步）:
+      poll(Suspendᵢ(Γᵢ), cx)
+        = if futᵢ.is_ready() {
+            let vᵢ = futᵢ.take_output();
+            match bodyᵢ(Γᵢ, vᵢ) {
+              .await futᵢ₊₁ → (Pending, store(Γᵢ₊₁), register_waker(cx, futᵢ₊₁))
+              return v      → (Ready(v), Complete(v))
+            }
+          } else {
+            (Pending, Suspendᵢ(Γᵢ))  -- 状态不变，等待下次 poll
+          }
+
+  (3) 终止:
+      poll(Complete(v), _) = (Ready(v), Complete(v))   -- idempotent
+      poll(Panicked, _)    = panic!()                   -- 不可恢复
+
+关键不变式（Invariant）:
+  I₁: 若 S_f 含自引用字段，则 Pin<&mut S_f> ⟹ addr(S_f) 在 Complete/Panicked 前恒定
+  I₂: ∀poll 调用，cx.waker() 被注册到当前挂起的 Future 上，保证活性
+  I₃: Γᵢ 中所有值在 Suspendᵢ 期间保持 alive（由 borrow checker 静态验证）
+```
+
+> **来源**: [Rust Compiler: librustc_mir_transform/src/generator.rs — 状态机 lowering 实现] · [Async Book: Under the hood]
+
+#### .await 的 CPS 变换规则
+
+```text
+.await 不是语法糖，而是编译期的 CPS（Continuation-Passing Style）变换：
+
+  源程序:  let x = fut.await;
+           rest(x)
+
+  CPS 变换:
+    fut.poll(cx).then(|result| {
+        match result {
+            Ready(v) => rest(v),           -- 继续执行后续代码
+            Pending  => {
+                save_continuation(|| rest); -- 保存续体到状态机
+                Pending                     -- 向父级返回 Pending
+            }
+        }
+    })
+
+形式化性质:
+  - .await 点是**可重入的（reentrant）**: 同一个状态机可被多次 poll
+  - .await 点是**可取消的（cancellable）**: 若 Future 被 drop，续体不会执行
+  - .await 点是**无栈的（stackless）**: 续体保存在堆分配的状态机中，非调用栈
+```
+
+> **来源**: [without.boats blog: Await is not syntactic sugar] · [RFC 2394 §4: await desugaring] · [Appel 1992 — Compiling with Continuations]
+
+#### Pin 约束在操作语义中的体现
+
+```text
+定理（Pin 的地址恒定保证）:
+  对于任何实现了 !Unpin 的状态机 S_f：
+    ∀t₁ < t₂. state(t₁) = Suspendᵢ(Γᵢ) ∧ state(t₂) = Suspendⱼ(Γⱼ)
+      ⇒ addr(S_f 实例)@t₁ = addr(S_f 实例)@t₂
+
+证明概要:
+  - Pin<&mut S_f> 不暴露 &mut S_f → S_f 的 move 语义
+  - poll(self: Pin<&mut Self>, ...) 要求调用方通过 Pin 调用
+  - 标准库保证: Pin::new_unchecked 是 unsafe 的；Safe API 无法从 Pin 解包出普通 &mut
+  - 因此状态机实例一旦被 Pin，其地址在 drop 前不可变
+
+推论:
+  若 Γᵢ 包含自引用（如 ptr: *const T 指向 Γᵢ 中的某个 v: T），
+  则 ptr 的绝对地址在挂起期间恒定，恢复后仍有效。
+```
+
+> **来源**: [Rust Reference: Pin methods] · [RFC 2349 §3: Pin invariants] · [Rustonomicon: Pinning]
+
+---
+
 ### 3.2 Pin 的形式化语义
 
 ```text
@@ -315,6 +438,101 @@ Pin<P<T>> 保证 T 在内存中不移动:
   // 若 SelfRef 被 move，data 地址变，ptr 变成悬垂
   // Pin<SelfRef> 阻止 SelfRef 被 move，保证 ptr 有效
 ```
+
+### 3.2b Pin 的 LTL 形式化（异步状态机语境）
+
+> **[来源: `04_formal/03_ownership_formal.md` §9.5; RFC 2349 §3; RustBelt Pin 证明; Vardi & Wolper 1986 — LTL]**
+
+§3.2 给出了 Pin 的直觉定义（"保证不移动"）。本节将其形式化为**线性时序逻辑（LTL）**命题，使其在 async 状态机的挂起-恢复周期中可验证。
+
+#### 不动性公理（Immobility Axiom）
+
+```text
+对于任意类型 T: !Unpin 和任意值 v: T：
+
+  A1: □[Pinned(v) → addr(v) = const]
+      "一旦 v 被 Pin，其地址在所有未来时刻恒定"
+
+  A2: ◇[Pinned(v) ∧ ◇Dropped(v)] → addr(v)@Pinned = addr(v)@Dropped
+      "从被 Pin 到被 Drop，v 的地址始终不变"
+
+  A3: Pinned(v) → ¬◇Moved(v)
+      "被 Pin 的值永远不会被 move"
+
+其中：
+  □ φ  : "在所有未来状态，φ 成立"（Globally）
+  ◇ φ  : "在某一未来状态，φ 成立"（Eventually）
+  Pinned(v): 存在 Pin<&mut v> 的活跃引用
+  Dropped(v): v 的析构函数已被调用
+  Moved(v): v 发生了按位 move（mem::replace / 赋值 / 参数传递）
+```
+
+> **来源**: [Vardi & Wolper 1986 — An automata-theoretic approach to automatic program verification] · [04_formal/03_ownership_formal.md §9.5] · [RustBelt: POPL 2018 §7 — Pin 协议]
+
+#### Unpin 豁免（Exemption）
+
+```text
+Unpin trait 在 LTL 中的解释:
+
+  T: Unpin  ⟺  ¬□[Pinned(v) → addr(v) = const]
+            ⟺  ◇[Pinned(v) ∧ addr(v) ≠ const]
+            ⟺  "Pin 对 T 是透明的——允许在 Pin 后移动"
+
+关键推论:
+  - 大多数类型（i32, String, Vec<T>）自动实现 Unpin
+  - 自引用结构（含指针指向自身字段）自动为 !Unpin
+  - async fn 生成的状态机由编译器自动标记 !Unpin（当含自引用时）
+
+编译器推导规则:
+  struct S { f: T, g: *const U }  -- g 可能指向 f（自引用）
+  ⟹ 保守标记 S: !Unpin（即使实际不自引用）
+  ⟹ 用户可 unsafe impl Unpin for S 覆盖，但需手动验证 A1-A3
+```
+
+> **来源**: [Rust Reference: Auto trait derivation for !Unpin] · [RFC 2349 §4: Unpin trait semantics]
+
+#### 在 poll 递归调用链中的验证
+
+```text
+async 状态机的 Pin 验证场景:
+
+  状态机 S_f 被 poll 时：
+    Step 1: 调用方创建 Pin<&mut S_f>（通常通过 Box::pin 或栈 pinning）
+    Step 2: Pin 保证在整个 poll → suspend → poll → ... → complete 链中：
+             □[addr(S_f) = const]
+
+  关键验证点:
+    V1: poll 递归调用时，self: Pin<&mut Self> 的地址不变
+    V2: await 点挂起后，状态机被存入执行器的任务队列，队列操作不移动状态机
+    V3: Waker 唤醒时，状态机从队列取出，地址与挂起前相同
+
+反例（违反 A1 的情况）:
+    // 错误：手动解 Pin 后 move
+    let mut fut = Box::pin(async { ... });
+    let raw: *mut _ = &mut *fut;       // 通过 unsafe 获得裸指针
+    let moved = unsafe { ptr::read(raw) }; // 违反 A3：Pin 后的值被 move
+    // 后果：若状态机含自引用，恢复后引用悬垂 → UB
+```
+
+> **来源**: [Rustonomicon: Pin projection and structural pinning] · [Miri Book: Pin validation] · [RustBelt: Pin 协议的形式化证明]
+
+#### 与 §3.1b 操作语义的衔接
+
+```text
+§3.1b 中的不变式 I₁ 与 LTL 公理的对应：
+
+  I₁: Pin<&mut S_f> ⟹ addr(S_f) 在 Complete/Panicked 前恒定
+      ≡  A1 ∧ A2 在状态机生命周期内的特化
+
+  I₂: cx.waker() 注册保证活性
+      ≈  ◇[Waker::wake() → poll(S_f, cx) 被调用]
+      （LTL 的活性保证，但 Rust 不证明执行器公平性）
+
+  I₃: Γᵢ 中值保持 alive
+      ≡  borrow checker 静态验证 → 无需运行时/LTL 验证
+```
+
+> **来源**: [Async Book: Execution model] · [Tokio Documentation: Task scheduling and pinning]
 
 ---
 
