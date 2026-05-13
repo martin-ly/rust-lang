@@ -1906,7 +1906,7 @@ macro_rules! trace_fn {
 
 > **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
 >
-> **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/03_type_theory.md`](../04_formal/03_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
+> **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
 
 ---
 

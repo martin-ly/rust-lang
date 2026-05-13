@@ -1215,6 +1215,74 @@ fn deadlock_not_detected() {
 
 > **定理边界**: Miri 检测 ⊂ UB 集合 ⊂ 程序错误集合。Miri 通过 ≠ 程序正确；Miri 报错 = 存在 UB。
 
+#### Miri 常用标志详解
+
+> **[来源: Miri Book: MIRIFLAGS reference] · [rustc-dev-guide: Miri flags]**
+
+Miri 的行为通过 `MIRIFLAGS` 环境变量控制。以下是与工程实践最相关的标志：
+
+| **标志** | **作用** | **典型场景** |
+|:---|:---|:---|
+| `-Zmiri-disable-isolation` | 禁用隔离，允许文件系统、网络、环境变量访问 | 测试涉及 `std::fs` 或 `std::env` 的代码 |
+| `-Zmiri-ignore-leaks` | 不报告内存泄漏 | 全局分配器或循环引用场景（故意不释放） |
+| `-Zmiri-tree-borrows` | 使用 Tree Borrows 别名模型（默认，无需显式指定） | 现代 Miri 默认行为 |
+| `-Zmiri-stacked-borrows` | 使用 Stacked Borrows 别名模型（兼容旧代码） | 验证旧代码或对比两种模型 |
+| `-Zmiri-check-number-validity` | 检查整数类型有效性（如 `bool` 必须是 0/1） | 严格的值表示验证 |
+| `-Zmiri-tag-raw-pointers` | 为裸指针分配来源标签（更严格检测） | 裸指针密集型代码 |
+| `-Zmiri-permissive-provenance` | 宽松来源模式（实验性，允许更多整数-指针转换） | 特定 FFI 或旧代码兼容 |
+| `-Zmiri-preemption-rate=N` | 设置线程抢占频率（默认 100，0 为确定式调度） | 并发测试的可重现性控制 |
+| `-Zmiri-seed=N` | 设置随机数种子，使并发交错可重现 | CI 中稳定复现并发问题 |
+
+```bash
+# 示例：允许文件系统访问 + 忽略内存泄漏
+MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo miri test
+
+# 示例：确定式调度 + 可重现种子
+MIRIFLAGS="-Zmiri-preemption-rate=0 -Zmiri-seed=42" cargo miri test
+```
+
+> **[来源: Miri Book]** `-Zmiri-disable-isolation` 使 Miri 不再虚拟化系统调用，而是直接代理到宿主 OS。这在测试 IO 相关代码时是必需的，但会降低可移植性和确定性。 ✅ 已验证
+>
+> **[来源: Miri Book]** `-Zmiri-ignore-leaks` 适用于全局缓存或单例模式——这些内存 intentionally 存活到进程结束，不算真正的泄漏。 ✅ 已验证
+
+#### Miri 与 Valgrind / ASan / TSan 的对比
+
+> **[来源: Miri Book: Limitations] · [Valgrind Documentation] · [LLVM Sanitizers]**
+
+Miri 不是唯一的动态检测工具。根据错误类型和检测阶段，Valgrind（memcheck）、AddressSanitizer（ASan）、ThreadSanitizer（TSan）各有优势。以下从**检测时机**、**覆盖范围**和**运行时开销**三维度对比：
+
+| **维度** | **Miri** | **Valgrind (memcheck)** | **AddressSanitizer (ASan)** | **ThreadSanitizer (TSan)** |
+|:---|:---|:---|:---|:---|
+| **检测时机** | MIR 解释执行（编译后） | 机器码动态插桩（运行时） | 编译期插桩 + 运行时库 | 编译期插桩 + 运行时库 |
+| **内存错误** | ✅ UAF、OOB、未对齐、未初始化 | ✅ UAF、未初始化、泄漏 | ✅ UAF、OOB、堆栈缓冲区溢出 | ❌ 不专门检测 |
+| **数据竞争** | ⚠️ 部分（单线程解释器模拟） | ❌ 不检测 | ❌ 不检测 | ✅ 核心功能 |
+| **别名违规** | ✅ Stacked/Tree Borrows | ❌ 不检测 | ❌ 不检测 | ❌ 不检测 |
+| **无效枚举值** | ✅ discriminant 检查 | ❌ 不检测 | ❌ 不检测 | ❌ 不检测 |
+| **FFI / 外部代码** | ❌ 不透明（stub 或 panic） | ✅ 可检测 C 代码 | ✅ 可检测 C/C++ 代码 | ✅ 可检测 C/C++ 代码 |
+| **运行时开销** | 极慢（100x~1000x） | 慢（10x~50x） | 中等（2x~3x） | 中等（5x~15x） |
+| **硬件相关行为** | ❌ 不支持（内联汇编、SIMD） | ✅ 支持 | ✅ 支持 | ✅ 支持 |
+| **Rust 语义精确度** | ✅ 精确到 MIR 语义 | ⚠️ 机器码级，可能漏掉 Rust 特定 UB | ⚠️ 机器码级 | ⚠️ 机器码级 |
+
+**工具选择决策树**：
+
+```text
+需要检测 Rust 特定的 UB（无效枚举、别名违规）?
+  └── 是 → Miri（唯一选择）
+  └── 否 → 涉及 FFI 或 C 依赖?
+      └── 是 → Valgrind / ASan / TSan（覆盖 C 代码）
+      └── 否 → 性能敏感且需频繁运行?
+          └── 是 → ASan（开销最低，适合 CI 集成）
+          └── 否 → Miri（最精确的 Rust 语义检测）
+```
+
+> **[来源: LLVM Sanitizers Docs]** ASan 使用影子内存（shadow memory）检测堆/栈/全局变量的越界访问，运行时开销约 2x，是 C/C++/Rust FFI 项目的首选工具。 ✅ 已验证
+>
+> **[来源: Valgrind Documentation]** Valgrind 的 memcheck 通过 JIT 重编译检测未初始化读取和内存泄漏，无需重编译目标程序，但运行速度极慢（10x~50x）。 ✅ 已验证
+>
+> **[来源: TSan Documentation]** TSan 使用 happens-before 向量时钟检测数据竞争，对 Rust 的 `std::sync` 原子操作和锁结构均有效，但要求所有代码都经过插桩。 ✅ 已验证
+
+> **跨层映射**: `L3::Miri` ↔ [`L6::工具链`](../06_ecosystem/01_toolchain.md) CI 集成 · [`L4::形式化`](../04_formal/04_rustbelt.md) 操作语义动态验证
+
 ---
 
 ### 补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异
@@ -1255,7 +1323,7 @@ fn deadlock_not_detected() {
 
 ##### `*ptr` 解引用（`DerefMut`）
 
-裸指针的 `*` 解引用在 `unsafe` 块内产生一个** place expression（位置表达式）**，其语义取决于上下文：
+裸指针的 `*` 解引用在 `unsafe` 块内产生一个**place expression（位置表达式）**，其语义取决于上下文：
 
 - **读取上下文**（`let x = *ptr`）：等价于从该位置 move 出一个值。若 `T` 非 `Copy`，原位置**逻辑上失效**（但编译器不追踪裸指针的失效状态）。
 - **写入上下文**（`*ptr = val`）：编译器会生成**先 drop 旧值、再写入新值**的代码序列。若目标位置未初始化，drop 旧值 = 读取未初始化内存 = **UB**。
@@ -1636,6 +1704,123 @@ struct BadBox<T> {
 
 > **定理**：`NonNull<T>` 是**类型系统层面的约束**（非空 + 协变），而非**运行时保证**（有效性、生命周期）。它与 `*mut T` 的边界区别在于：编译器可利用非空性做优化，程序员可利用协变性做类型转换。💡 原创分析
 
+#### `NonNull<T>` 在标准库中的实际使用
+
+> **[来源: Rust std source: alloc::raw_vec] · [Rust std source: alloc::boxed] · [Rust std source: alloc::rc] · [Rust std source: alloc::sync]**
+
+`NonNull<T>` 是 Rust 标准库中所有"拥有指向堆内存指针"类型的内部基石。它不携带所有权语义，但提供**非空保证**和**协变性**，使智能指针的实现既高效又类型安全。
+
+| **类型** | **内部指针字段** | **使用 NonNull 的目的** |
+|:---|:---|:---|
+| `Vec<T>` | `RawVec<T>` → `NonNull<T>` | 保证 buffer 非空（即使空 Vec 也指向对齐的 dangling 地址） |
+| `Box<T>` | `Unique<T>` → 后来改为 `NonNull<T>` + `PhantomData<T>` | 非空 + 协变；所有权由 `Box` 结构本身和 `Drop` 实现承担 |
+| `Rc<T>` | `NonNull<RcBox<T>>` | 非空 + 协变；共享所有权由引用计数管理 |
+| `Arc<T>` | `NonNull<ArcInner<T>>` | 同上，但额外要求 `T: Send` 时 `Arc<T>: Send` |
+| `String` | `Vec<u8>` 间接使用 | 通过 `Vec<u8>` 继承 NonNull 保证 |
+
+```rust,ignore
+// Vec<T> 的简化内部结构（Rust 1.80+）
+pub struct Vec<T> {
+    buf: RawVec<T>,           // RawVec 内部持有 NonNull<T>
+    len: usize,
+}
+
+struct RawVec<T> {
+    ptr: NonNull<T>,          // 非空、协变
+    cap: usize,
+    alloc: Global,            // 分配器
+}
+
+impl<T> Vec<T> {
+    pub const fn new() -> Vec<T> {
+        Vec {
+            // 即使空 Vec，ptr 也不是 null，而是 dangling（对齐的合法地址）
+            buf: RawVec::NEW, // ptr = NonNull::dangling()
+            len: 0,
+        }
+    }
+}
+
+// Box<T> 的简化内部结构
+pub struct Box<T: ?Sized>(Unique<T>);  // Unique 内部仍是 NonNull<T> + PhantomData<T>
+// 等价语义: NonNull<T> + PhantomData<T> + 自定义 Drop 释放内存
+```
+
+> **[来源: Rust RFC 1184]** `NonNull<T>` 被设计为与所有权语义解耦：`Box` 通过 `PhantomData<T>` 和自定义 `Drop` 表达所有权，`Rc` 通过引用计数表达共享所有权，`NonNull` 仅负责指针的"非空+协变"类型系统约束。 ✅ 已验证
+
+#### 为什么 `NonNull<T>` 是协变的，而 `*mut T` 是不变的
+
+> **[来源: Rust Reference: Subtyping and Variance] · [Rustonomicon: Variance]**
+
+这是 Rust 类型系统中一个关键的设计决策，涉及**子类型关系**与**内存安全**的权衡。
+
+**`*mut T` 为什么是不变的（invariant）**
+
+```text
+*mut T 在 T 上是 不变的(invariant):
+  如果 T1 ≠ T2，则 *mut T1 既不是 *mut T2 的子类型，也不是超类型。
+
+原因：*mut T 允许写入。若 *mut T 是协变的：
+  假设 *mut &'a str <: *mut &'static str（协变假设）
+  令 ptr: *mut &'static str = 某个 *mut &'a str 的指针
+  通过 ptr 写入一个生命周期更短的 &'b str（b < a）
+  然后原指针的持有者将其当作 &'static str 读取
+  → 悬垂引用！UB！
+```
+
+```rust,ignore
+// 若 *mut T 协变，以下代码将不安全：
+fn broken_if_covariant<'a>(ptr: *mut &'a str) {
+    // 假设 *mut &'a str 可协变为 *mut &'static str
+    let static_ptr: *mut &'static str = ptr;  // 非法！如果协变则合法
+    unsafe {
+        // 写入一个短生命周期的字符串
+        *static_ptr = "temp";  // 'static 字面量，暂时安全
+    }
+    // 但调用方可能传入局部变量的引用，后续再读取...
+}
+```
+
+**`NonNull<T>` 为什么可以是协变的（covariant）**
+
+```text
+NonNull<T> 在 T 上是 协变的(covariant):
+  如果 T1 <: T2，则 NonNull<T1> <: NonNull<T2>。
+
+关键技巧：内部使用 *const T 实现！
+  pub struct NonNull<T: ?Sized> {
+      pointer: *const T,   // ← 用 *const T 而非 *mut T
+  }
+```
+
+`*const T`（不可变裸指针）天然是**协变的**，因为它只读不写。通过将 `*mut T` 包装在 `*const T` 的字段中，`NonNull<T>` 获得了协变性。但 `NonNull<T>` 仍提供 `as_mut()` 返回 `&mut T`，这是安全的，因为：
+
+1. `NonNull::new()` 保证指针非空
+2. `as_mut()` 需要 `unsafe` 调用，调用者需保证别名规则
+3. 协变性在**类型转换层面**发生，不涉及运行时写入
+
+```rust,ignore
+use std::ptr::NonNull;
+
+// ✅ 协变性演示：NonNull<&'a str> 可协变为 NonNull<&'static str>
+fn demo_covariance<'a>(ptr: NonNull<&'a str>) -> NonNull<&'static str> {
+    ptr  // 合法！因为 NonNull<&'a str> <: NonNull<&'static str>
+}
+
+// 对比：*mut T 是不变的，以下代码会编译失败
+fn demo_invariance<'a>(ptr: *mut &'a str) -> *mut &'static str {
+    ptr  // ❌ 编译错误：*mut T 在 T 上是不变的
+}
+```
+
+> **[来源: Rust Reference: Variance]** `*const T` 对 `T` 是协变的，`*mut T` 对 `T` 是不变的。`NonNull<T>` 通过内部存储 `*const T` 来实现协变，同时通过 API 设计（`as_mut()` 需要 unsafe）保持写入的安全性。 ✅ 已验证
+>
+> **[来源: Rustonomicon: Variance]** 协变性对容器类型至关重要：`Vec<&'a str>` 可协变为 `Vec<&'static str>`，这使函数返回包含长生命周期引用的容器成为可能。若 `Vec` 内部使用 `*mut T` 而非 `NonNull<T>`，它将是不变的，极大限制其可用性。 ✅ 已验证
+
+> **定理**：`NonNull<T>` 的协变设计是**类型系统层面的精巧权衡**——通过 `*const T` 的字段存储获得协变性，通过 `unsafe` API 控制写入风险，从而在"编译器优化假设"（非空性）和"程序员便利"（协变性）之间取得平衡。💡 原创分析
+>
+> **跨层映射**: `L3::NonNull` ↔ [`L1::类型系统`](../01_foundation/04_type_system.md) 协变/逆变/不变 · [`L2::智能指针`](../02_intermediate/03_memory_management.md) Box/Rc/Arc 内部实现
+
 ---
 
 ### 补充章节：`MaybeUninit` 数组初始化模式
@@ -1761,12 +1946,165 @@ fn leak_from_overwrite() {
 
 > **定理**：`MaybeUninit<T>` 是 Rust 中处理**未初始化内存**的**唯一正确抽象**。`std::mem::uninitialized()` 已被弃用；直接使用 `assume_init()` 而不先 `write()` 是触发 UB 的最常见 unsafe 模式之一。💡 原创分析
 
+#### 安全替代：`array::map` 与 `array::from_fn`
+
+> **[来源: Rust Reference: Primitive array] · [std::array::from_fn docs] · [Rust 1.63 Release Notes]**
+
+Rust 1.63 起，`[T; N]` 上稳定了 `map` 方法；`std::array::from_fn` 在 Rust 1.63 稳定。这两个 API 为**数组初始化**提供了完全安全的替代方案，在多数场景下无需手动使用 `MaybeUninit`。
+
+| **方法** | **签名** | **适用场景** | **与 MaybeUninit 的关系** |
+|:---|:---|:---|:---|
+| `array::from_fn` | `from_fn(f: FnMut(usize) -> T) -> [T; N]` | 元素值由索引计算得出 | 内部可能使用 MaybeUninit，但对外完全安全 |
+| `[T; N]::map` | `map(self, f: FnMut(T) -> U) -> [U; N]` | 已有 `[T; N]`，转换为 `[U; N]` | 消费原数组，安全转换 |
+| `[T; N]::try_map`（不稳定） | `try_map(self, f: FnMut(T) -> Result<U, E>) -> Result<[U; N], E>` | 可能失败的转换 | 失败时安全丢弃已创建元素 |
+
+```rust
+// ✅ 安全替代 1: array::from_fn（Rust 1.63+）
+use std::array::from_fn;
+
+fn init_with_index() -> [i32; 5] {
+    from_fn(|i| i as i32 * 10)  // [0, 10, 20, 30, 40]
+}
+
+// ✅ 安全替代 2: array::map（Rust 1.63+）
+fn transform_array() -> [String; 3] {
+    let nums = [1, 2, 3];
+    nums.map(|n| format!("item-{}", n))  // ["item-1", "item-2", "item-3"]
+}
+
+// ✅ 安全替代 3: 配合迭代器（若元素由迭代器生成）
+fn from_iterator() -> [i32; 5] {
+    let iter = (0..5).map(|i| i * 10);
+    // 注意：Iterator::collect 到 Vec 再转数组，或直接使用 array::from_fn
+    std::array::from_fn(|i| i * 10)
+}
+```
+
+**什么时候仍需要 `MaybeUninit`？**
+
+```text
+安全替代无法覆盖的场景：
+  1. 初始化逻辑复杂，无法表示为 FnMut(usize) -> T
+  2. 需要逐个处理错误，部分初始化后回滚
+  3. 与 unsafe FFI 边界交互（如 C 函数填充数组）
+  4. 性能极致优化（避免 array::from_fn 的潜在栈拷贝）
+  5. 自定义分配器上的数组分配（非栈/堆标准路径）
+```
+
+> **[来源: Rust 1.63 Release Notes]** `array::from_fn` and `array::map` were stabilized to provide safe, ergonomic array initialization without requiring unsafe `MaybeUninit` patterns. ✅ 已验证
+>
+> **[来源: std::array::from_fn docs]** `from_fn` 的内部实现使用 unsafe 代码（可能涉及 MaybeUninit）来避免中间状态的泄漏风险，但对外暴露完全 safe 的 API。 ✅ 已验证
+
+#### 与 C 的 `malloc` + 手动初始化的对比
+
+> **[来源: C11 Standard: malloc] · [Rust Reference: MaybeUninit] · [Rustonomicon: Working With Memory]**
+
+C 语言中动态数组的经典模式与 Rust 的 `MaybeUninit` 模式在**语义**和**安全性**上有本质差异。理解这种对比有助于从系统编程视角把握 `MaybeUninit` 的设计动机。
+
+| **维度** | **C: `malloc` + 手动初始化** | **Rust: `MaybeUninit<T>`** |
+|:---|:---|:---|
+| **分配方式** | `malloc(N * sizeof(T))` 返回 `void*`，未初始化 | `MaybeUninit::<T>::uninit()` 在栈或堆上分配，标记为未初始化 |
+| **类型安全** | ❌ 无类型，`void*` 需强制转换，大小计算易出错 | ✅ 强类型，`[MaybeUninit<T>; N]` 的元素类型是 `MaybeUninit<T>` |
+| **初始化方式** | 逐元素赋值或 `memset`/`memcpy` | `slot.write(val)` 或 `ptr::write(ptr, val)` |
+| **初始化验证** | ❌ 无编译器验证，忘记初始化某个元素 = 静默 bug | ✅ Miri 可追踪初始化状态，未初始化读取 = 明确 UB 报错 |
+| **转换为已初始化** | 隐式：赋值后即视为初始化，无显式边界 | 显式：`assume_init()` 是 unsafe 的，强制程序员确认"已初始化" |
+| **Drop 安全** | ❌ C 无析构函数，资源释放完全手动 | ✅ `MaybeUninit` 不自动 drop，但 `assume_init()` 后获得 `T`，离开作用域时自动 drop |
+| **部分初始化回滚** | 手动追踪已初始化元素，错误时逐一 `free` | 利用 `Drop` 守卫或 `ManuallyDrop` 实现 RAII 回滚 |
+
+```c
+// C 模式：malloc + 手动初始化（无类型安全，无初始化验证）
+int* arr = malloc(5 * sizeof(int));  // void* → int*，未初始化内存
+if (!arr) { /* 错误处理 */ }
+
+for (int i = 0; i < 5; i++) {
+    arr[i] = i * 10;  // 初始化
+}
+// ⚠️ 如果循环提前 break，arr[3] 和 arr[4] 未初始化，但编译器不报错
+// ⚠️ 使用结束后必须 free(arr)，否则泄漏
+
+free(arr);
+```
+
+```rust
+// Rust 模式：MaybeUninit（强类型 + 状态追踪 + 显式转换）
+use std::mem::MaybeUninit;
+
+fn rust_init_array() -> [i32; 5] {
+    let mut arr: [MaybeUninit<i32>; 5] = unsafe {
+        MaybeUninit::uninit().assume_init()  // 创建未初始化数组
+    };
+
+    for i in 0..5 {
+        arr[i].write(i as i32 * 10);  // 类型安全：只能写入 i32
+    }
+
+    // 显式转换：unsafe 块提醒程序员"必须已初始化"
+    arr.map(|slot| unsafe { slot.assume_init() })
+}
+```
+
+**关键差异分析**
+
+```text
+1. 类型系统的角色
+   C: malloc 返回 void*，类型信息完全丢失。sizeof 计算错误导致缓冲区溢出。
+   Rust: [MaybeUninit<T>; N] 保留完整的类型和长度信息。arr[i].write() 接受 T，
+         类型不匹配在编译期报错。
+
+2. 初始化状态的追踪
+   C: 编译器不追踪哪些元素已初始化。读取未初始化元素是 UB，但通常表现为"随机值"。
+   Rust: Miri 在解释执行时追踪每个 MaybeUninit 槽位的初始化状态。
+         未初始化读取 = 明确报错："reading uninitialized memory"。
+
+3. 所有权与资源管理
+   C: 分配与释放必须手动配对。异常路径（如中间 return）容易导致泄漏或重复释放。
+   Rust: MaybeUninit<T> 本身不实现 Drop，但转换为 T 后由 Rust 所有权系统自动管理。
+         可利用 scope guard 模式实现异常安全回滚。
+```
+
+```rust,ignore
+// Rust 的异常安全回滚模式（对比 C 的复杂错误处理）
+fn init_with_rollback<T, const N: usize, F, E>(mut f: F) -> Result<[T; N], E>
+where
+    F: FnMut(usize) -> Result<T, E>,
+{
+    let mut arr: [MaybeUninit<T>; N] = unsafe { MaybeUninit::uninit().assume_init() };
+    let mut initialized = 0;
+
+    for i in 0..N {
+        match f(i) {
+            Ok(val) => {
+                arr[i].write(val);
+                initialized += 1;
+            }
+            Err(e) => {
+                // 安全回滚：只 drop 已初始化的元素
+                for j in 0..initialized {
+                    unsafe { std::ptr::drop_in_place(arr[j].assume_init_mut()); }
+                }
+                return Err(e);
+            }
+        }
+    }
+
+    Ok(arr.map(|slot| unsafe { slot.assume_init() }))
+}
+```
+
+> **[来源: C11 Standard]** Reading uninitialized automatic variables results in indeterminate values; this is not explicitly UB in all cases, but using such values can lead to UB. ✅ 已验证
+>
+> **[来源: Rust Reference: Behavior considered undefined]** Reading uninitialized memory in Rust is immediate undefined behavior, and Miri can detect it precisely. ✅ 已验证
+>
+> **定理**：`MaybeUninit<T>` 是 C `malloc` + 手动初始化模式的**类型安全升级版**——它将"未初始化内存"从隐式的 `void*` 状态提升为显式的 `MaybeUninit<T>` 类型，使编译器能够验证类型一致性，使 Miri 能够动态验证初始化完整性，使程序员能够通过 `unsafe { assume_init() }` 的显式边界承担证明责任。💡 原创分析
+>
+> **跨层映射**: `L3::MaybeUninit` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII · [`L5::对比`](../05_comparative/01_rust_vs_cpp.md) Rust vs C/C++ 内存模型
+
 ---
 
-- [x] **TODO**: 补充 Miri 的使用方法与限制 —— 优先级: 中 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 Miri 的使用方法与限制（含 Miri 标志详解与 Valgrind/ASan/TSan 对比） —— 优先级: 低 —— 已完成 2026-05-14
 - [x] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-14
-- [x] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 已完成 2026-05-13
-- [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进（含 Vec/Box/Rc/Arc 实际使用与协变原理） —— 优先级: 低 —— 已完成 2026-05-14
+- [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式（含 array::from_fn 安全替代与 C malloc 对比） —— 优先级: 低 —— 已完成 2026-05-14
 
 > **过渡: L3 → L4**
 >

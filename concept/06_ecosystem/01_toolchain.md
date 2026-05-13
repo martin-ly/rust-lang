@@ -208,7 +208,75 @@ serde = { git = "https://github.com/myfork/serde", branch = "fix-1234" }
 
 > **关键洞察**: `patch` 是**叠加式**的——保留原 crate 名和版本号，仅替换源码；`replace` 是**置换式**的——完全替换某个特定版本。生产环境中优先使用 `patch`，因其对下游更透明。
 
+> **工作区作用域细节**: `[patch]` 和 `[replace]` 定义在**根 `Cargo.toml`** 时，会作用于整个工作区的依赖解析。子 crate 的 `Cargo.toml` 中定义的 `[patch]` 仅在以该 crate 为根构建时生效。因此，多 crate 工作区应统一在根配置覆盖，避免成员级 patch 导致的解析不一致。
 > **来源**: [The Cargo Book — Overriding Dependencies](https://doc.rust-lang.org/cargo/reference/overriding-dependencies.html) · 可信度: ✅
+
+#### 3.1.3 多 Crate 工作区的发布管理
+
+**[Cargo Book]** Publishing a workspace can be done crate by crate, but external tools like `cargo-workspaces` automate topological ordering and version bumping.
+
+| **任务** | **命令/配置** | **说明** |
+|:---|:---|:---|
+| 单 crate 发布 | `cargo publish -p crate-name` | 仅发布指定成员 |
+| 全工作区发布 | `cargo workspaces publish` | 按依赖拓扑序批量发布 |
+| 版本协调 | `[workspace.package]` 统一元信息 | 版本、作者、许可证集中定义 |
+| 发布前验证 | `cargo publish --dry-run` | 模拟打包与依赖解析 |
+
+```toml
+# 根 Cargo.toml：统一发布元信息
+[workspace.package]
+version = "2.0.0"
+authors = ["Team <team@example.com>"]
+license = "MIT OR Apache-2.0"
+repository = "https://github.com/example/project"
+
+# 子 crate 继承全部发布字段
+[package]
+name = "my-crate"
+version.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+```
+
+**发布顺序约束**: 工作区内部若存在跨 crate 依赖（`path = "../foo"` 且指定了 `version`），必须按**依赖拓扑序**自下而上发布——先发布叶子 crate，再发布依赖它们的父 crate。`cargo-workspaces` 自动解析 `Cargo.toml` 中的依赖图并计算此顺序。
+
+> **关键洞察**: `[workspace.package]` 的继承机制将发布元信息从"散在各 crate 中的重复数据"提升为"根目录的统一事实来源"，与 DRY 原则一致。修改版本号时只需改动一处，即可驱动全工作区发布流程。
+> **来源**: [The Cargo Book — Publishing](https://doc.rust-lang.org/cargo/reference/publishing.html) · [cargo-workspaces](https://github.com/pksunkara/cargo-workspaces) · 可信度: ✅
+
+#### 3.1.4 工作区内的 Feature 传递与条件编译
+
+在工作区中，feature 的启用遵循**统一（unification）**原则：同一 crate 在工作区中只编译一次，其 feature 为所有依赖方需求的**并集**。
+
+```toml
+# 根 Cargo.toml
+[workspace.dependencies]
+tokio = { version = "1", default-features = false }
+
+# crate-a/Cargo.toml
+[dependencies]
+tokio = { workspace = true, features = ["rt"] }
+
+# crate-b/Cargo.toml
+[dependencies]
+tokio = { workspace = true, features = ["macros"] }
+```
+
+**结果**: `tokio` 在工作区中被编译时同时启用 `rt` + `macros`，因为 feature 是累加的。`resolver = "2"` 确保 dev-dependencies 的 feature 不泄漏到主构建。
+
+工作区级别的条件编译可通过 `[workspace.dependencies]` 中的 `default-features = false` 配合成员显式启用，避免隐式 feature 膨胀：
+
+```rust
+// 在 workspace member 中根据 feature 选择代码路径
+#[cfg(all(feature = "async", not(feature = "sync")))]
+mod async_impl;
+
+#[cfg(feature = "sync")]
+mod sync_impl;
+```
+
+> **关键洞察**: 工作区放大了 feature unification 的影响范围——一个成员启用的 feature 会通过共享依赖传播到整个工作区。设计工作区依赖时，应在 `[workspace.dependencies]` 中关闭 `default-features`，由各个成员按需精确启用，否则易出现"开发 crate-a 时意外获得 crate-b 启用的 feature"的隐性依赖。
+> **来源**: [The Cargo Book — Feature Unification](https://doc.rust-lang.org/cargo/reference/features.html#feature-unification) · [The Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · 可信度: ✅
 
 ### 3.2 Features 与条件编译
 
@@ -294,6 +362,73 @@ enum Backend { A(ABackend), B(BBackend) }
 ```
 
 > **来源**: [Cargo Book — Feature Unification] · [Rust API Guidelines] · 可信度: ✅
+
+#### 3.2.3 `weak-dep-features` 与 `namespaced-features`（Cargo 1.60+）
+
+**[Cargo Book]** Cargo 1.60 引入 `namespaced-features`，允许在 `[features]` 中显式引用可选依赖而不将其自动暴露为公共 feature 名。
+
+| **机制** | **语法** | **说明** | **最低版本** |
+|:---|:---|:---|:---|
+| `namespaced-features` | `foo = ["dep:bar", "baz"]` | 显式声明 feature 由依赖构成 | 1.60 |
+| `weak-dep-features` | `foo = ["bar?/feature"]` | 仅在 `bar` 被启用时才传递 feature | 1.60 |
+| 可选依赖不暴露 | `bar = { optional = true }` | 默认不自动生成 `bar` feature（需显式 `dep:bar`） | 1.60 |
+
+```toml
+[dependencies]
+serde = { version = "1.0", optional = true }
+indexmap = { version = "2.0", optional = true }
+
+[features]
+default = ["std"]
+std = ["dep:indexmap"]                      # indexmap 作为内部实现细节，不暴露为 feature
+serde = ["dep:serde", "indexmap?/serde"]    # 仅当 indexmap 启用时才要求 serde support
+```
+
+**语义解析**:
+
+- `dep:serde`: 将可选依赖 `serde` 作为 feature 的构成元素，显式控制其暴露方式。过去 `optional = true` 会自动生成同名 feature，现在必须通过 `dep:` 前缀显式引用。
+- `indexmap?/serde`: **弱依赖 feature**。若 `indexmap` 因其他原因被启用，则同时启用其 `serde` feature；若 `indexmap` 未启用，则不产生错误（问号 `?` 表示"仅在依赖存在时传递"）。
+
+> **关键洞察**: `namespaced-features` 解决了"可选依赖自动成为 feature 名"的历史设计缺陷，使得 crate 作者可以隐藏内部实现细节（如 `indexmap` 是哈希表的底层实现，用户不应直接依赖它）；`weak-dep-features` 则允许构建**条件性 feature 传递链**，避免强制启用未使用的依赖。
+> **来源**: [The Cargo Book — Features — Dependency features](https://doc.rust-lang.org/cargo/reference/features.html#dependency-features) · [Cargo 1.60 Release Notes](https://blog.rust-lang.org/2022/04/07/Rust-1.60.0.html) · 可信度: ✅
+
+#### 3.2.4 Feature 与编译时间、二进制体积的权衡
+
+Feature 在编译期和链接期产生可量化的工程影响：
+
+| **维度** | **机制** | **影响** |
+|:---|:---|:---|
+| 编译时间 | 每个 feature 可能引入新的泛型实例化、额外的 `mono_item` | 更多 feature ⟹ 更长的 LLVM codegen 时间 |
+| 增量编译 | feature 变更导致依赖该 feature 的 crate 重新编译 | 全工作区级联失效 |
+| 二进制体积 | 未使用的 feature 代码在链接期被 `--gc-sections` 移除 | 但泛型单态化代码可能保留（跨 crate 内联边界） |
+| 依赖树 | `std` feature 常引入额外 sys crate | `no_std` 构建可显著减少依赖 |
+
+```toml
+# 体积敏感场景：显式禁用默认 feature，按需启用
+[dependencies]
+tokio = { version = "1", default-features = false, features = ["rt"] }
+
+# 对比：启用全部 feature（开发体验好，体积大）
+tokio = { version = "1", features = ["full"] }
+```
+
+**工程建议**:
+
+1. **库作者**: 将 `std` 拆分为独立 feature，提供 `no_std` / `alloc` 降级路径；避免在 `default` 中启用重型 feature（如 `regex`、`serde` 的 derive）。
+2. **应用开发者**: 使用 `cargo tree -e features` 可视化 feature 依赖图，识别意外启用的 feature。
+3. **CI 监控**: 在 CI 中对比 `default-features = false` 与全 feature 的编译时间和二进制体积，建立体积回归测试。
+
+```bash
+# 分析 feature 对编译时间的影响
+cargo build --timings
+
+# 分析 feature 对体积的影响
+cargo bloat --features full
+cargo bloat --no-default-features
+```
+
+> **关键洞察**: Feature 在 Cargo 中是**累加的集合（additive set）**，不是开关（toggle）。这种设计保证了依赖解析的单调性——增加 feature 不会破坏已编译的代码——但也意味着无法通过 feature 做互斥选择。编译时间与体积的权衡本质上是"代码生成量"与"功能完整性"之间的帕累托前沿。
+> **来源**: [The Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat) · [Rust Performance Book — Compile Times](https://nnethercote.github.io/perf-book/compile-times.html) · 可信度: ✅
 
 ### 3.3 Cargo.toml 完整字段解析
 
@@ -429,6 +564,141 @@ CC_aarch64_unknown_linux_musl = "aarch64-linux-musl-gcc"
 > **来源**: [The Cargo Book — Config](https://doc.rust-lang.org/cargo/reference/config.html) · 可信度: ✅
 
 > **关键洞察**: 交叉编译的本质是**工具链的完整替换**——不仅是 rustc 后端目标不同，还包括链接器、系统库、C 编译器（用于 build.rs 中的 C 依赖）的全套切换。`.cargo/config.toml` 将这些配置集中管理，确保团队成员和 CI 环境使用一致的交叉编译参数。
+
+#### 4.2.3 `cross` 工具：基于容器的交叉编译
+
+**[cross]** `cross` 利用 Docker/Podman 容器封装完整的交叉编译环境，避免在宿主机安装多架构工具链。
+
+| **命令** | **作用** |
+|:---|:---|
+| `cargo install cross` | 安装 cross |
+| `cross build --target aarch64-unknown-linux-gnu` | 在容器内交叉编译 |
+| `cross test --target aarch64-unknown-linux-gnu` | 在容器/QEMU 内运行测试 |
+| `cross run --target aarch64-unknown-linux-gnu` | 在容器/QEMU 内运行 |
+
+**`Cross.toml` 配置**（自定义镜像或环境变量）：
+
+```toml
+[target.aarch64-unknown-linux-gnu]
+image = "ghcr.io/cross-rs/aarch64-unknown-linux-gnu:main"
+pre-build = ["apt-get update && apt-get install -y libssl-dev"]
+```
+
+**优势与边界**:
+
+| **场景** | `cross` | 手动配置（`.cargo/config.toml`） |
+|:---|:---|:---|
+| 快速开始 | ✅ 零配置 | ❌ 需安装交叉工具链 |
+| 复杂系统依赖 | ✅ 容器内可安装任意库 | ⚠️ 需手动处理 sysroot |
+| CI/CD | ✅ 一致性高 | ⚠️ 环境差异风险 |
+| 自定义目标 | ⚠️ 需自定义 Docker 镜像 | ✅ 完全可控 |
+
+> **关键洞察**: `cross` 的核心价值不是"简化配置"，而是**环境可复现性**——编译环境以 Docker 镜像形式版本化，消除了"在我机器上能编译"的变异源。对于需要多平台发布的开源项目（如 `ripgrep`、`bat`），`cross` 是 CI 管道的标准组件。
+> **来源**: [cross 文档](https://github.com/cross-rs/cross) · 可信度: ✅
+
+#### 4.2.4 条件编译与目标平台
+
+Rust 的 `cfg` 属性不仅用于 feature，还广泛用于目标平台条件编译：
+
+| **`cfg` 条件** | **示例值** | **典型用途** |
+|:---|:---|:---|
+| `target_os` | `"linux"`, `"windows"`, `"macos"` | OS 特定 API 调用 |
+| `target_arch` | `"x86_64"`, `"aarch64"`, `"wasm32"` | 架构特定指令或内联汇编 |
+| `target_family` | `"unix"`, `"windows"` | 平台家族通用代码 |
+| `target_env` | `"gnu"`, `"musl"`, `"msvc"` | ABI/运行时库选择 |
+| `target_pointer_width` | `"32"`, `"64"` | 指针宽度相关数据结构 |
+| `target_endian` | `"little"`, `"big"` | 字节序敏感序列化 |
+
+```rust
+// 多平台文件路径处理
+#[cfg(target_family = "unix")]
+mod path {
+    pub const SEPARATOR: char = '/';
+}
+
+#[cfg(target_family = "windows")]
+mod path {
+    pub const SEPARATOR: char = '\\';
+}
+
+// 架构特定的 SIMD 优化
+#[cfg(all(target_arch = "x86_64", target_feature = "sse2"))]
+pub fn fast_sum(data: &[f32]) -> f32 {
+    // SSE2 实现
+    data.iter().copied().sum()
+}
+
+#[cfg(not(all(target_arch = "x86_64", target_feature = "sse2")))]
+pub fn fast_sum(data: &[f32]) -> f32 {
+    data.iter().sum()
+}
+```
+
+**与 Cargo features 的交互**: `cfg` 条件编译由编译器根据目标平台自动推断，无需 Cargo 介入；而 `cfg(feature = "...")` 由 Cargo 根据 `[features]` 解析后传递给 `rustc`。两者在编译期正交组合：
+
+```rust
+#[cfg(all(feature = "parallel", target_os = "linux"))]
+mod linux_parallel_impl;
+```
+
+> **来源**: [The Rust Reference — Conditional Compilation](https://doc.rust-lang.org/reference/conditional-compilation.html) · [The rustc Book — Platform Support](https://doc.rust-lang.org/rustc/platform-support.html) · 可信度: ✅
+
+#### 4.2.5 `no_std` 目标的交叉编译特殊考量
+
+嵌入式和内核开发常需针对**无操作系统**目标（`none`）交叉编译，此时标准库不可用。
+
+| **层级** | **可用性** | **内容** | **配置要求** |
+|:---|:---|:---|:---|
+| `core` | 始终可用 | 基础类型、trait、`panic!` 宏 | 无需配置 |
+| `alloc` | 需显式引入 | `Vec`、`String`、`Box`、Rc/Arc | `extern crate alloc;` + `alloc_error_handler`（nightly） |
+| `std` | 不可用 | 文件、线程、网络、进程 | — |
+| Panic 处理 | 必须自定义 | 无默认 panic handler | `#[panic_handler]` |
+| 启动运行时 | 无 `main` | 需自定义入口或链接脚本 | `#[no_main]` |
+
+```rust
+// 嵌入式裸机目标示例（thumbv7em-none-eabihf）
+#![no_std]
+#![no_main]
+
+use core::panic::PanicInfo;
+
+#[panic_handler]
+fn panic(_info: &PanicInfo) -> ! {
+    loop {}
+}
+
+#[no_mangle]
+pub extern "C" fn _start() -> ! {
+    // 自定义启动逻辑
+    loop {}
+}
+```
+
+**`.cargo/config.toml` 中的 `no_std` 配置**:
+
+```toml
+[build]
+target = "thumbv7em-none-eabihf"
+
+[target.thumbv7em-none-eabihf]
+runner = "probe-rs run --chip STM32F407VG"
+rustflags = [
+  "-C", "link-arg=-Tlink.x",
+  "-C", "linker=rust-lld",
+]
+
+[unstable]
+build-std = ["core", "alloc"]  # cargo build -Z build-std
+```
+
+**关键差异**:
+
+- `build-std`: Cargo nightly 特性，允许从源码编译 `core`/`alloc`/`std`，用于自定义目标或应用特定编译器补丁。
+- 链接器: `no_std` 目标通常使用 `rust-lld`（LLVM 链接器）或 GNU `ld`，需通过链接脚本指定内存布局。
+- `alloc` 错误处理: 在 `no_std` + `alloc` 环境中，必须提供 `alloc_error_handler` 以处理堆分配失败（ nightly 特性，稳定版需通过条件编译处理）。
+
+> **关键洞察**: `no_std` 交叉编译的本质是**从"应用程序"降级为"裸机程序"**——失去标准库的同时，也失去了其背后的运行时假设（堆分配、线程、文件系统）。每个降级层级（std → alloc → core）都意味着更多的手动基础设施重建，对应嵌入式开发中"HAL（硬件抽象层）→ PAC（外设访问 crate）→ 寄存器操作"的抽象梯度。
+> **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rust Reference — No_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [cargo-build-std RFC](https://github.com/rust-lang/wg-cargo-std-aware) · 可信度: ✅
 
 ### 4.3 自定义 Target
 
@@ -930,6 +1200,9 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 - [x] **中**: 补充 `sccache` 分布式编译配置 —— 已完成 §13.2
 - [x] **中**: 补充 Cargo workspace 高级用法（resolver、patch、replace）
 - [x] **低**: 补充 rustc 内部查询系统的深度解析 —— 已补充 `sccache` 分布式编译（§13.2），rustc 查询系统参见 [rustc dev guide](https://rustc-dev-guide.rust-lang.org/query.html)
+- [x] **低**: 补充 Workspace 高级用法（workspace 依赖统一、workspace 继承、多 crate 发布管理、feature 传递、`[patch]`/`[replace]`）—— 已完成 §3.1.3–3.1.4（2026-05-14）
+- [x] **低**: 补充 Features 与条件编译（features 设计、条件编译语义、weak-dep-features、namespaced features、编译时间/体积权衡）—— 已完成 §3.2.3–3.2.4（2026-05-14）
+- [x] **低**: 补充 Cross-compilation 配置（cross 工具、条件编译与目标平台、`no_std` 特殊考量）—— 已完成 §4.2.3–4.2.5（2026-05-14）
 
 > **[来源: rustc Dev Guide; LLVM Documentation; Cargo Book; crates.io Docs; SemVer Spec]** 工具链分析基于官方文档和社区最佳实践。✅
 

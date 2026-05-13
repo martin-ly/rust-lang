@@ -91,7 +91,14 @@
   - [十五、Lending Iterator 的完整 GATs + HRTB 案例](#十五lending-iterator-的完整-gats--hrtb-案例)
     - [15.1 Lending Iterator Trait 定义（GATs + HRTB）](#151-lending-iterator-trait-定义gats--hrtb)
     - [15.2 为什么标准 Iterator 无法表达](#152-为什么标准-iterator-无法表达)
-  - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos)
+  - [十六、union 的类型安全边界](#十六union-的类型安全边界)
+    - [16.1 union 的内存布局与 enum 的本质区别](#161-union-的内存布局与-enum-的本质区别)
+    - [16.2 unsafe 读取 union field 的必要性](#162-unsafe-读取-union-field-的必要性)
+    - [16.3 `ManuallyDrop<T>` 在 union 中的使用](#163-manuallydropt-在-union-中的使用)
+    - [16.4 union 的 impl 限制](#164-union-的-impl-限制)
+    - [16.5 与 C 语言 union 的 FFI 互操作](#165-与-c-语言-union-的-ffi-互操作)
+    - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误)
+  - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
 
@@ -1422,7 +1429,310 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 
 ---
 
-## 十六、待补充与演进方向（TODOs）
+## 十六、union 的类型安全边界
+
+> **Bloom 层级**: 分析 → 评价
+>
+> `union` 是 Rust 中唯一允许在同一内存位置存储不同类型的语言构造。它与 `enum` 形成鲜明对比：enum 用 tag 保证类型安全，union 则将类型安全的责任完全交给程序员。本节从内存布局、drop 语义、`ManuallyDrop` 机制、impl 限制与 FFI 互操作五个维度，建立 union 的完整安全模型。
+>
+> **交叉链接**: [L1 类型系统: ADT 与 Union 对比](./04_type_system.md) · [L3 unsafe: union 字段访问](../03_advanced/03_unsafe.md) · [L3 unsafe: ManuallyDrop](../03_advanced/03_unsafe.md)
+
+### 16.1 union 的内存布局与 enum 的本质区别
+
+**内存布局**:
+
+| **特性** | `enum` | `union` |
+|:---|:---|:---|
+| 内存模型 | Tagged union（标签 + 最大变体） | Untagged union（无标签，最大变体） |
+| 类型安全 | 编译器追踪活跃变体（tag） | 程序员负责追踪活跃变体 |
+| 大小 | tag + max(variant) + padding | max(variant) + padding |
+| Drop 语义 | 自动 drop 活跃变体 | 不自动 drop 任何变体 |
+| 访问安全性 | Safe（match 检查 tag） | `unsafe` 必需 |
+| 与 C 兼容 | `#[repr(C)]` 下兼容 C enum | `#[repr(C)]` 下兼容 C union |
+
+> **[来源: Rust Reference: Unions]** `union` 的所有 variant 共享同一起始地址，内存对齐等于所有 variant 对齐的最大值。✅
+> **[来源: Rust Reference: Type Layout]** `enum` 的内存布局包含 discriminant（tag），而 `union` 不含 tag。✅
+
+```rust,ignore
+union IntOrFloat {
+    i: i32,
+    f: f32,
+}
+
+// 内存布局（假设 4 字节对齐）:
+// 偏移 0: i32 / f32（共享同一起始地址）
+// 大小: 4 bytes
+// 无 tag！
+```
+
+**本质区别**:
+
+```text
+enum Value {
+    Int(i32),    // 内存: [tag=0 | i32 payload]
+    Float(f32),  // 内存: [tag=1 | f32 payload]
+}
+
+union Value {
+    i: i32,      // 内存: [i32 / f32]（无 tag）
+    f: f32,
+}
+```
+
+> **[来源: The Rustonomicon: Unions]** `union` 的设计哲学是"零成本类型双关（type punning）"——允许在同一内存位置用不同类型视角解读位模式，但放弃了编译期变体追踪。✅
+
+### 16.2 unsafe 读取 union field 的必要性
+
+Rust 的内存安全模型要求：读取一个值时必须知道其有效类型（valid type）。`union` 消除了编译器对活跃变体的追踪能力，因此**所有字段访问都必须通过 `unsafe` 块**显式声明"程序员保证读取的变体是最后写入的"。
+
+> **[来源: Rust Reference: Unions]** 访问 union 字段是 `unsafe` 的，因为编译器无法验证当前激活的变体。读取非活跃变体属于未定义行为（如果位模式对目标类型无效）。✅
+
+```rust
+union IntOrFloat {
+    i: i32,
+    f: f32,
+}
+
+fn main() {
+    let mut u = IntOrFloat { i: 42 };
+    unsafe {
+        assert_eq!(u.i, 42);  // ✅ 正确: u.i 是最后写入的变体
+        // u.f 也指向同一块内存，但按 f32 解释位模式
+        let f = u.f;  // ⚠️ 未定义行为风险: 42 的位模式可能不是合法 f32
+    }
+}
+```
+
+**未定义行为边界**:
+
+| **场景** | 行为 | 说明 |
+|:---|:---|:---|
+| 读取最后写入的变体 | ✅ 安全 | 位模式与写入时一致 |
+| 读取未初始化的变体 | ❌ UB | 读取任意内存内容 |
+| 读取非活跃但位模式有效的变体 | ⚠️ 实现定义 | 如 `i: 0` 读为 `f: 0.0`，行为取决于具体位模式 |
+| 通过共享引用读取 | ⚠️ 需 `unsafe` | `&union.field` 仍需要 `unsafe` 块 |
+
+> **[来源: Unsafe Code Guidelines: Unions]** 读取 union 的非活跃字段时，如果位模式对目标类型不是有效值（如非规范浮点 NaN payload），行为在 Safe Rust 的抽象机模型中属于未定义行为。✅
+
+### 16.3 `ManuallyDrop<T>` 在 union 中的使用
+
+**核心问题**：若 union 的某个 variant 实现了 `Drop`，当 union 离开作用域时，编译器**不知道该调用哪个变体的 `drop`**。
+
+> **[来源: Rust Reference: Unions]** union 不会自动 `Drop` 其字段。若 union 包含需要 drop 的类型，必须显式使用 `ManuallyDrop<T>` 包裹。✅
+
+```rust
+use std::mem::ManuallyDrop;
+
+union StringOrVec {
+    s: ManuallyDrop<String>,
+    v: ManuallyDrop<Vec<u8>>,
+}
+
+impl Drop for StringOrVec {
+    fn drop(&mut self) {
+        unsafe {
+            // 必须手动选择正确的变体进行 drop
+            ManuallyDrop::drop(&mut self.s);
+            // 或 ManuallyDrop::drop(&mut self.v);
+        }
+    }
+}
+
+fn main() {
+    let mut u = StringOrVec {
+        s: ManuallyDrop::new(String::from("hello")),
+    };
+    unsafe {
+        // 使用完毕后手动 drop
+        ManuallyDrop::drop(&mut u.s);
+    }
+    // u 离开作用域时不再二次 drop
+}
+```
+
+**典型错误：双重释放**:
+
+```rust,compile_fail
+union BadUnion {
+    s: String,  // ❌ 错误: 非 ManuallyDrop 的 Drop 类型
+    v: Vec<u8>,
+}
+// 编译错误: unions cannot have fields that need dropping
+```
+
+> **[来源: The Rustonomicon: Unions]** `ManuallyDrop<T>` 阻止编译器自动调用 `T::drop`，使 union 的析构语义完全由程序员控制。这是 union 实现"手动内存管理"的关键抽象。✅
+
+### 16.4 union 的 impl 限制
+
+| **限制** | 说明 | 原因 |
+|:---|:---|:---|
+| 自动 `Drop` | ❌ 编译器不自动为 union 生成 `Drop` | 无法知道活跃变体 |
+| 自动 `Copy` | ⚠️ 仅当所有 variant 都 `Copy` 时 | 否则复制可能触发未定义 drop |
+| 字段为 `Drop` 类型 | ❌ 直接禁止（除非 `ManuallyDrop`） | 防止隐式 drop 错误变体 |
+| 字段初始化 | 必须指定且仅指定一个变体 | 无 tag 意味着无法表达"未初始化" |
+| 模式匹配 | 不支持 `match` on union | 无 tag 无法区分变体 |
+| `impl Trait` for union | ✅ 允许 | 可通过方法封装 unsafe 访问 |
+
+```rust
+// ✅ union 可自动实现 Copy（所有 variant 都是 Copy）
+union CopyUnion {
+    i: i32,
+    f: f32,
+}
+// CopyUnion 自动实现 Copy
+
+// ❌ 若任一 variant 非 Copy，union 整体不能 Copy
+union NonCopyUnion {
+    i: i32,
+    s: ManuallyDrop<String>,  // String: !Copy
+}
+// NonCopyUnion: !Copy
+```
+
+> **[来源: Rust Reference: Unions]** union 的 `Copy` 推导遵循与 struct 相同的规则：仅当所有字段都实现 `Copy`。union 的字段若为 `ManuallyDrop<T>`，则 `Copy` 性取决于 `T`。✅
+
+### 16.5 与 C 语言 union 的 FFI 互操作
+
+`#[repr(C)]` 使 Rust 的 `union` 与 C 的 `union` 内存布局完全兼容，是 FFI 的核心工具。
+
+```c
+// C 定义
+typedef union {
+    int i;
+    float f;
+} c_union_t;
+```
+
+```rust
+#[repr(C)]
+union RustUnion {
+    i: i32,
+    f: f32,
+}
+
+extern "C" {
+    fn process_union(u: RustUnion) -> i32;
+}
+
+fn main() {
+    let u = RustUnion { i: 42 };
+    unsafe {
+        let result = process_union(u);
+    }
+}
+```
+
+> **[来源: Rust Reference: Unions]** `#[repr(C)]` 保证 union 的字段顺序、对齐和大小与 C 一致。Rust union 不支持位域（bitfields），需用 `#[repr(C)] struct` 模拟。✅
+
+**C 互操作边界**:
+
+| **场景** | Rust 支持 | 注意 |
+|:---|:---|:---|
+| 基本类型 union | ✅ 直接映射 | `i32` ↔ `int`, `f32` ↔ `float` |
+| 指针 union | ✅ 直接映射 | `*mut T` ↔ `T*` |
+| 嵌套 struct | ✅ `#[repr(C)] struct` | 确保布局一致 |
+| 位域（bitfields） | ❌ 不支持 | 需手动掩码模拟 |
+| 变长数组尾部 | ⚠️ 需 `#[repr(C)]` + 不透明类型 | 参见 [Rustonomicon: FFI] |
+
+### 16.6 代码示例：正确使用 + 典型错误
+
+**正确使用：手动追踪活跃变体 + ManuallyDrop**
+
+```rust
+use std::mem::ManuallyDrop;
+
+union Value {
+    text: ManuallyDrop<String>,
+    num: i64,
+}
+
+impl Value {
+    fn as_text(&self) -> Option<&str> {
+        // 假设调用方知道当前是 text 变体
+        unsafe { Some(&self.text) }
+    }
+
+    fn as_num(&self) -> Option<i64> {
+        unsafe { Some(self.num) }
+    }
+}
+
+impl Drop for Value {
+    fn drop(&mut self) {
+        // ⚠️ 必须知道活跃变体才能安全 drop
+        // 实际工程中通常用外部 tag 或 enum 包装
+        unsafe {
+            ManuallyDrop::drop(&mut self.text);
+        }
+    }
+}
+```
+
+**典型错误 1：读取非活跃变体导致类型混淆**
+
+```rust
+union U {
+    i: i32,
+    f: f32,
+}
+
+fn main() {
+    let u = U { i: 0x3F800000 };  // i32 位模式
+    unsafe {
+        let f = u.f;  // ⚠️ 按 f32 解释: 0x3F800000 = 1.0f
+        // 虽然这次"碰巧"得到合法值，但编译器不做任何保证
+        println!("{}", f);
+    }
+}
+```
+
+**典型错误 2：未使用 ManuallyDrop 导致编译失败**
+
+```rust,compile_fail
+union Bad {
+    s: String,
+    v: Vec<u8>,
+}
+// 编译错误: unions cannot have fields that need dropping
+```
+
+**典型错误 3：活跃变体追踪错误导致双重释放**
+
+```rust,ignore
+union DoubleFreeRisk {
+    s: ManuallyDrop<String>,
+    v: ManuallyDrop<Vec<u8>>,
+}
+
+fn risky(u: &mut DoubleFreeRisk) {
+    unsafe {
+        ManuallyDrop::drop(&mut u.s);  // drop String
+        // 假设错误地以为当前是 v 变体
+        ManuallyDrop::drop(&mut u.v);  // ❌ 双重释放！同一块内存被两次 drop
+    }
+}
+```
+
+> **[来源: The Rustonomicon: Unions]** union 的正确使用模式是：外部维护一个 tag（enum 包装）或使用 `MaybeUninit` 语义，绝不在不知道活跃变体的情况下执行 drop。✅
+
+**安全包装模式：Tagged Union**
+
+```rust
+enum SafeValue {
+    Text(String),
+    Num(i64),
+}
+
+// 工程实践：几乎总是用 enum 替代裸 union
+// union 仅用于: 1) FFI 互操作; 2) 极端内存优化; 3) 底层系统编程
+```
+
+> **一致性检查**: union 是 Rust 类型系统的"逃生舱"——它在 `unsafe` 边界内提供了 C 兼容的零成本类型双关，但将类型安全的全部责任转移给程序员。Safe Rust 的默认选择应是 `enum`。✅
+
+---
+
+## 十七、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充 Lifetime Elision 的三条规则的完整形式化描述（∀, ⇒ 符号、每个规则的正例+反例、Rust Reference 来源）—— 已完成 §13 —— 2026-05-14
 - [x] **TODO**: 补充 `impl Trait` 与生命周期推断的交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比）—— 已完成 §14 —— 2026-05-14
+- [x] **TODO**: 补充 `union` 的类型安全边界（内存布局、enum 对比、unsafe 必要性、ManuallyDrop、impl 限制、FFI、代码示例）—— 已完成 §16 —— 2026-05-14

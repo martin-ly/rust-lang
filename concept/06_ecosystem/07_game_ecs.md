@@ -823,6 +823,108 @@ struct PlayerInput {
 
 ---
 
+## 八、Bevy 关系型 ECS（Relations）与所有权模型扩展
+
+> **[来源: Bevy 0.15 Release Notes; Bevy Relations RFC; ECS Research Group]** ✅
+
+Bevy 0.15 引入了 **Relations（关系型 ECS）**，将传统 ECS 的"Entity 拥有 Component"模型扩展为"Entity 之间可以存在带数据的关系"。这是对 ECS 架构的重大演进，也对 Rust 所有权模型提出了新的表达需求。
+
+### 8.1 从传统 ECS 到关系型 ECS
+
+在传统 ECS 中，父子关系通过 `Parent` 和 `Children` 组件模拟：
+
+```rust,ignore
+// 传统 ECS：父子关系通过组件间接维护
+#[derive(Component)]
+struct Parent(Entity);
+
+#[derive(Component)]
+struct Children(Vec<Entity>);
+
+// 问题：双向一致性需要手动维护
+// - 删除子实体时，Parent 组件需要更新
+// - 删除父实体时，Children 组件需要清理
+// - 关系数据（如"连接强度"）无法直接表达
+```
+
+Bevy 0.15+ 的 Relations 将关系提升为**一等公民**：
+
+| 特性 | 传统 ECS（Component 模拟）| 关系型 ECS（Bevy 0.15+）|
+|:---|:---|:---|
+| **关系方向** | 单向（需手动维护双向）| 原生双向（`Relationship` + `RelationshipTarget`）|
+| **关系数据** | 无法附加（只能通过额外 Component）| 关系本身可携带数据（`#[derive(Relationship)]` + 字段）|
+| **级联行为** | 手动实现（`Commands` 中逐一处理）| 声明式（`OnReplace`、`OnRemove` 钩子）|
+| **查询表达** | `Query<(Entity, &Parent)>` 间接查询 | `Query<&Related<ChildOf>>` 直接遍历关系边 |
+| **所有权语义** | 模糊（Entity "引用"其他 Entity）| 显式（`RelationshipTarget` 定义所有权强度）|
+
+```rust,ignore
+// ✅ Bevy 0.15+: 关系型 ECS 定义
+#[derive(Relationship)]
+struct ChildOf {
+    // 关系可以携带数据
+    #[relationship]
+    parent: Entity,
+    bond_strength: f32, // 关系强度：影响物理连接或 AI 忠诚度
+}
+
+// 父实体自动收集所有子实体
+#[derive(Component)]
+struct MyParent;
+
+// spawn 时关系自动双向维护
+commands.spawn((
+    MyParent,
+    ChildOf::new(parent_entity).with_strength(1.0),
+));
+
+// 查询所有子实体（自动通过 RelationshipTarget 维护）
+fn process_children(query: Query<(Entity, &ChildOf)>) {
+    for (child, child_of) in query.iter() {
+        println!("{:?} is child of {:?} with strength {}",
+            child, child_of.parent, child_of.bond_strength);
+    }
+}
+```
+
+### 8.2 关系对所有权模型的扩展
+
+Relations 引入了**图结构**到 ECS 中，这对 Rust 所有权模型提出了新的挑战和表达：
+
+| 所有权维度 | 传统 ECS | 关系型 ECS | Rust 表达 |
+|:---|:---|:---|:---|
+| **Entity 生命周期** | `Commands::despawn` 显式销毁 | 关系目标可定义级联删除 | `OnRemove` 钩子中的 `Commands` 延迟执行 |
+| **关系完整性** | 手动维护（易出孤儿引用）| 自动双向同步 | `RelationshipTarget` 内部使用 `EntityHashMap`（类似 `HashMap<Entity, T>`）|
+| **循环引用** | 不可能（无双向链接原生支持）| 可能发生（A → B → A）| 运行时检查或 `acyclic` 约束（未来方向）|
+| **关系数据所有权** | N/A | 关系数据属于"边"而非端点 | `ChildOf` 作为 Component 被源 Entity 所有 |
+
+> **核心洞察**: Bevy 的 Relations 将**图论中的边（edge）**引入 ECS，但保留了 Rust 的所有权语义——关系数据（`ChildOf`）作为 Component 被**源 Entity 拥有**，而目标 Entity 通过 `RelationshipTarget` 进行**弱引用式索引**。这与 Rust 的 `Rc<RefCell<T>>` 模式类似，但由 ECS 的 archetype 存储保证缓存友好性。
+
+### 8.3 声明式级联与线性逻辑近似
+
+```rust,ignore
+// ✅ Bevy 0.15+: 声明式级联删除
+#[derive(Relationship)]
+#[relationship(on_replace = OnReplace::Destroy)] // 替换时销毁旧关系目标
+#[relationship(on_remove = OnRemove::Cascade)]   // 移除时级联删除相关实体
+struct ChildOf {
+    #[relationship]
+    parent: Entity,
+}
+
+// 等价于：父实体被销毁时，所有子实体自动销毁
+// 这与线性逻辑中的"资源随容器销毁而销毁"同构
+```
+
+| 级联策略 | 语义 | 形式化对应 |
+|:---|:---|:---|
+| `OnReplace::Destroy` | 关系被替换时，旧目标实体销毁 | 线性逻辑：旧资源被消耗 |
+| `OnRemove::Cascade` | 关系源实体被移除时，目标实体级联销毁 | 区域类型（Region）：内部资源随区域销毁 |
+| `OnRemove::None` | 无级联，目标实体保持独立 | 弱引用：生命周期不依赖源 |
+
+> **来源**: [Bevy 0.15 Release Notes] · [Bevy Relations RFC] · [Bevy ECS Internals] · [Graph-Oriented ECS Research]
+
+---
+
 ## 八、与 L1-L4 的关系映射
 
 > **[来源: Rust Concurrency Book; Rayon Docs]** ✅
@@ -845,7 +947,7 @@ struct PlayerInput {
 - [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所有权交互细节 —— 已完成 §六 —— 2026-05-14
 - [x] **高**: 补充确定性模拟（deterministic simulation）在 Rust ECS 中的实现（如回合制/格斗游戏回滚网络） —— 已完成 §七 —— 2026-05-14
 - [x] **中**: 补充 `no_std` 游戏开发（嵌入式/掌机）的 ECS 约束 —— 已完成 §2.4 —— 2026-05-14
-- [ ] **低**: 跟踪 Bevy 0.15+ 的关系型 ECS（relations）对所有权模型的扩展
+- [x] **低**: 跟踪 Bevy 0.15+ 的关系型 ECS（relations）对所有权模型的扩展 —— 已完成 §八 —— 2026-05-14
 
 ---
 

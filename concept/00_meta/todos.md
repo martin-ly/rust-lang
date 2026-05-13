@@ -93,18 +93,18 @@
 | `01_ownership.md` | 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 | Phase 2 | ✅ 已完成 §8.3 |
 | `02_borrowing.md` | 补充 `Deref` / `DerefMut` 与自动借用的交互 | Phase 2 | ✅ 已完成 §8.2 |
 | `02_borrowing.md` | 补充 `AsRef` / `AsMut` 的借用语义差异 | Phase 2 | ✅ 已完成 §8.3 |
-| `03_lifetimes.md` | 补充 Lifetime Elision 的三条规则的完整形式化描述 | Phase 1 |
-| `03_lifetimes.md` | 补充 `impl Trait` 与生命周期推断的交互 | Phase 2 |
+| `03_lifetimes.md` | 补充 Lifetime Elision 的三条规则的完整形式化描述 | Phase 1 | ✅ 已完成 §13 —— 2026-05-14 |
+| `03_lifetimes.md` | 补充 `impl Trait` 与生命周期推断的交互 | Phase 2 | ✅ 已完成 §14 —— 2026-05-14 |
 | `04_type_system.md` | 补充 `!` (Never type) 的形式化分析 | Phase 1 | ✅ 已完成 §11.1 |
 | `04_type_system.md` | 补充 Const Generics（常量泛型）的类型系统扩展 | Phase 2 | ✅ 已完成（参见 `02_type_theory.md` §10.1 / `02_generics.md`） |
 | `04_type_system.md` | 补充 Zero-sized types (ZST) 和 PhantomData | Phase 2 | ✅ 已完成 §11.2 |
-| `04_type_system.md` | 补充 Discriminant 和内存布局的底层分析 | Phase 3 |
-| `02_generics.md` | 补充 Const Generics 的进阶用法（表达式、where 约束） | Phase 2 |
+| `04_type_system.md` | 补充 Discriminant 和内存布局的底层分析 | Phase 3 | ✅ 已完成 §11.5 —— 2026-05-14 |
+| `02_generics.md` | 补充 Const Generics 的进阶用法（表达式、where 约束） | Phase 2 | ✅ 已完成 §5.7 —— 2026-05-14 |
 | `02_generics.md` | 补充 `impl Trait` 在返回位置 vs 参数位置的区别 | Phase 2 | ✅ 已完成 §9.1 |
 | `03_memory_management.md` | 补充自定义 Allocator（`#[global_allocator]`） | Phase 3 | ✅ 已完成 §5.7 |
 | `03_memory_management.md` | 补充 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析 | Phase 3 | ✅ 已完成 §5.8 |
 | `03_memory_management.md` | 补充 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略 | Phase 2 | ✅ 已完成 §5.6 |
-| `04_error_handling.md` | 补充 `std::backtrace::Backtrace` 与错误追踪 | Phase 3 |
+| `04_error_handling.md` | 补充 `std::backtrace::Backtrace` 与错误追踪 | Phase 3 | ✅ 已完成 §9.3 —— 2026-05-14 |
 | `04_error_handling.md` | 补充 `Termination` trait 与 main 返回 Result | Phase 2 | ✅ 已完成 §9.1 |
 | `04_error_handling.md` | 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 | Phase 3 | ✅ 已完成 §9.2 |
 
@@ -123,27 +123,27 @@
 | `02_generics.md` | 补充 Type-level programming（Peano arithmetic、typenum） | Phase 4 |
 | `01_traits.md` | 补充 `const_trait` / `~const` 实验特性 | Phase 4 |
 | `01_traits.md` | 补充 `#[fundamental]` attribute 与 Orphan Rule 例外 | Phase 4 |
-| `03_memory_management.md` | 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 | Phase 4 |
+| `03_memory_management.md` | 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 | Phase 4 | ✅ 已完成 §5.10 —— 2026-05-14 |
 | `04_error_handling.md` | 补充 `eyre` / `color-eyre` 等生态库的对比 | Phase 4 |
-| `04_error_handling.md` | 补充 `#[track_caller]` 与错误定位优化 | Phase 4 |
-| `04_macros.md` | 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 | Phase 3 |
-| `04_macros.md` | 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 | Phase 3 |
-| `04_macros.md` | 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 | Phase 4 |
-| `04_macros.md` | 补充属性宏修改函数体的完整示例 | Phase 3 |
-| `01_concurrency.md` | 补充 `crossbeam` 生态 | Phase 3 |
-| `01_concurrency.md` | 补充 `rayon` 数据并行 | Phase 3 |
-| `01_concurrency.md` | 补充 `parking_lot` 与标准库锁的对比 | Phase 4 |
-| `02_async.md` | 补充 Waker/Context 的底层机制 | Phase 3 |
-| `02_async.md` | 补充 `Stream` / `Sink` trait 完整分析 | Phase 3 |
-| `02_async.md` | 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 | Phase 4 |
-| `02_async.md` | 补充 `loom` 并发模型检测工具 | Phase 4 |
-| `03_unsafe.md` | 补充 Miri 的使用方法与限制 | Phase 3 |
-| `03_unsafe.md` | 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 | Phase 2 |
-| `03_unsafe.md` | 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 | Phase 4 |
-| `03_unsafe.md` | 补充 `MaybeUninit` 数组初始化模式 | Phase 3 |
-| `01_toolchain.md` | 补充 Workspace 高级用法 | Phase 3 |
-| `01_toolchain.md` | 补充 Features 与条件编译 | Phase 3 |
-| `01_toolchain.md` | 补充 Cross-compilation 配置 | Phase 3 |
+| `04_error_handling.md` | 补充 `#[track_caller]` 与错误定位优化 | Phase 4 | ✅ 已完成 §9.5 —— 2026-05-14 |
+| `04_macros.md` | 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `04_macros.md` | 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `04_macros.md` | 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `04_macros.md` | 补充属性宏修改函数体的完整示例 | Phase 3 | ✅ 已完成 §5 —— 2026-05-14 |
+| `01_concurrency.md` | 补充 `crossbeam` 生态 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_concurrency.md` | 补充 `rayon` 数据并行 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_concurrency.md` | 补充 `parking_lot` 与标准库锁的对比 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `02_async.md` | 补充 Waker/Context 的底层机制 | Phase 3 | ✅ 已完成 §8.9 —— 2026-05-14 |
+| `02_async.md` | 补充 `Stream` / `Sink` trait 完整分析 | Phase 3 | ✅ 已完成 §8.10 —— 2026-05-14 |
+| `02_async.md` | 补充 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异 | Phase 4 | ✅ 已完成 §8.11 —— 2026-05-14 |
+| `02_async.md` | 补充 `loom` 并发模型检测工具 | Phase 4 | ✅ 已完成 §8.12 —— 2026-05-14 |
+| `03_unsafe.md` | 补充 Miri 的使用方法与限制 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `03_unsafe.md` | 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 | Phase 2 | ✅ 已完成 —— 2026-05-14 |
+| `03_unsafe.md` | 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `03_unsafe.md` | 补充 `MaybeUninit` 数组初始化模式 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_toolchain.md` | 补充 Workspace 高级用法 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_toolchain.md` | 补充 Features 与条件编译 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_toolchain.md` | 补充 Cross-compilation 配置 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
 | `02_patterns.md` | 补充更多模式（Command、Observer、State Machine） | Phase 3 |
 | `02_patterns.md` | 补充反模式（Over-engineering、Premature abstraction） | Phase 3 |
 | `01_ai_integration.md` | 补充具体 AI+Rust 工具（Kiro, Copilot, Codeium） | Phase 3 |

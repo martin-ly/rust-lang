@@ -443,6 +443,74 @@ fn verify_weight_calculation_does_not_overflow() {
 
 ---
 
+## 八、Rust 区块链语言规范的形式化语义进展
+
+> **[来源: Solana Docs — SBF; Polkadot Docs — PVF; eBPF Spec; Wasm Spec]** ✅
+
+区块链合约不仅需要源代码级别的安全，还需要**字节码级别**的可验证性。Solana 的 SBF（Solana Bytecode Format）和 Polkadot 的 PVF（Parachain Validation Function）代表了两种将 Rust 程序转化为可验证字节码的路径，其形式化语义研究正在推进。
+
+### 8.1 Solana SBF：eBPF 的受限安全子集
+
+SBF 是 Solana 对 eBPF（extended Berkeley Packet Filter）的扩展，用于在 Solana 虚拟机（SVM）中执行合约：
+
+| 维度 | SBF 设计 | Rust 角色 | 安全约束 |
+|:---|:---|:---|:---|
+| **指令集** | eBPF 64-bit 子集 + Solana 专用调用指令 | `solana-program` crate 提供 Rust API | 无循环指令（通过 verifier 拒绝向后跳转）|
+| **内存模型** | 寄存器 + 栈 + 堆（通过 CPI 分配）| Rust 所有权编译为线性内存访问 | 越界访问被 verifier 拒绝 |
+| **调用语义** | 跨程序调用（CPI）通过 `invoke` 指令 | `solana_program::program::invoke` 封装 | CPI 深度限制（4 层）防止递归攻击 |
+| **确定性** | 指令计数器（Compute Unit）计量执行 | Rust 的确定性执行保证可预测的资源消耗 | CU 耗尽即交易失败 |
+
+```rust,ignore
+// ✅ Solana: Rust 合约编译为 SBF 字节码
+use solana_program::{account_info::AccountInfo, entrypoint, pubkey::Pubkey};
+
+entrypoint!(process_instruction);
+
+// 这段 Rust 代码被编译为 SBF，经 Solana 字节码验证器检查：
+// - 无向后跳转（无循环）
+// - 所有内存访问通过已知基址 + 偏移
+// - 调用目标为白名单内的程序
+fn process_instruction(
+    _program_id: &Pubkey,
+    accounts: &[AccountInfo],
+    instruction_data: &[u8],
+) -> ProgramResult {
+    let account = &accounts[0];
+    let mut data = account.try_borrow_mut_data()?;
+    data[0] = instruction_data[0];
+    Ok(())
+}
+```
+
+> **SBF Verifier 的形式化根基**: Solana 字节码验证器实现了**控制流完整性（CFI）**和**内存安全**的静态检查。这与 Rust 编译器的借用检查器是互补的——Rust 保证源代码级安全，SBF verifier 保证字节码级安全。
+
+### 8.2 Polkadot PVF：Wasm 验证函数的形式化
+
+Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，由中继链（Relay Chain）验证者执行：
+
+| 维度 | PVF 设计 | Rust 角色 | 安全约束 |
+|:---|:---|:---|:---|
+| **字节码格式** | Wasm 核心规范子集 | Substrate runtime 编译为 `wasm32-unknown-unknown` | Wasm 验证器拒绝非结构化控制流 |
+| **执行环境** | 沙箱化 Wasm 虚拟机（Wasmi/Wasmtime）| `sp_runtime` 提供 Rust 抽象 |  gas 计量（ref_time + proof_size）防止无限执行 |
+| **状态转换** | PVF 输入：前一个状态根 + 区块数据 → 输出：新状态根 | Rust 函数式状态转换 | 状态根哈希确保输出可验证 |
+| **确定性** | Wasm 指令集的确定性执行 | Rust 无 GC、无未定义行为 | 所有验证者必须得到相同状态根 |
+
+> **PVF 的形式化方向**: Polkadot 团队正在研究 Wasm 子集的**形式化语义**，以确保 PVF 的执行在所有 Wasm 运行时（Wasmi、Wasmtime）上产生相同结果。这与 Rust 的 `unsafe` 代码指南项目类似——定义哪些 Wasm 构造是" well-defined "的。
+
+### 8.3 形式化语义进展对比
+
+| 规范 | 字节码层 | 形式化验证状态 | Rust 编译链路 | 关键挑战 |
+|:---|:---|:---|:---|:---|
+| **Solana SBF** | eBPF 扩展 | 字节码验证器（静态分析）| `rustc` → LLVM → SBF | 将 Rust 所有权语义映射到 eBPF 验证器的内存安全检查 |
+| **Polkadot PVF** | Wasm 子集 | 进行中（Wasm 核心形式化）| `rustc` → LLVM → Wasm | Wasm 宿主函数（Host Functions）的副作用形式化 |
+| **Move Bytecode** | Move IR → Move Bytecode | Move Prover（Boogie/Z3）| `movec` → Move Bytecode | 资源语义的形式化已较成熟（ abilities 系统）|
+
+> **核心洞察**: 区块链字节码的形式化语义研究遵循一个共同模式——**将高级语言（Rust/Move）的类型安全保证"下沉"到低级字节码的验证规则中**。SBF 的 verifier、PVF 的 Wasm 规范、Move 的字节码验证器，都是同一理念在不同技术路径上的实现。
+
+> **来源**: [Solana — SBF Specification] · [Polkadot — PVF Documentation] · [eBPF ISA Specification] · [Wasm Core Spec] · [Move Prover Paper]
+
+---
+
 ## 七、与 L1-L4 的关系映射
 
 | L1-L4 核心概念 | 在区块链中的表达 | 安全效应 |
@@ -460,7 +528,7 @@ fn verify_weight_calculation_does_not_overflow() {
 - [x] **高**: 补充 Move 语言（Sui/Aptos）与 Rust 合约的所有权模型对比 —— 已完成 §四 —— 2026-05-14
 - [x] **高**: 补充形式化验证工具在 Substrate pallet 中的实际案例（如 Interlay 的 Kani 应用） —— 已完成 §五 —— 2026-05-14
 - [x] **中**: 补充 Rust 合约的 gas 计量模型与 EVM gas 的对比分析 —— 已完成 §六 —— 2026-05-14
-- [ ] **低**: 跟踪 Rust 区块链语言规范（如 Solana SBF、Polkadot PVF）的形式化语义进展
+- [x] **低**: 跟踪 Rust 区块链语言规范（如 Solana SBF、Polkadot PVF）的形式化语义进展 —— 已完成 §九 —— 2026-05-14
 
 ---
 
