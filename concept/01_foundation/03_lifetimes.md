@@ -11,6 +11,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期规则矩阵、形式化视角、NLL 分析、示例反例
+- v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
 ---
@@ -23,6 +24,11 @@
     - [1.1 TRPL 官方定义](#11-trpl-官方定义)
     - [1.2 Wikipedia 对齐定义](#12-wikipedia-对齐定义)
     - [1.3 形式化定义（区域类型）](#13-形式化定义区域类型)
+    - [1.3b Tofte-Talpin 区域推断算法的 Rust 适配](#13b-tofte-talpin-区域推断算法的-rust-适配)
+      - [原始算法（ML 语言）](#原始算法ml-语言)
+      - [Rust 的三项关键适配](#rust-的三项关键适配)
+      - [Rust 中的区域约束生成与求解](#rust-中的区域约束生成与求解)
+      - [与 Polonius 的演进关系](#与-polonius-的演进关系)
   - [二、概念属性矩阵（Attribute Matrix）](#二概念属性矩阵attribute-matrix)
     - [2.1 生命周期标注矩阵](#21-生命周期标注矩阵)
     - [2.2 生命周期关系矩阵](#22-生命周期关系矩阵)
@@ -94,6 +100,119 @@
 > **[Wikipedia: Region-based memory management]** Rust uses a system of lifetimes that can be understood as **region types** (Tofte & Talpin, 1994) adapted for an imperative, non-GC language. Each reference `&'a T` is parameterized by a lifetime `'a` representing the region during which the reference is guaranteed to be valid.
 
 > **过渡**: 权威定义从学术和官方来源确立了生命周期的语义——引用有效期的编译期保证。而概念属性矩阵则将这些语义转化为可操作的规则对比——`'a` 标注的不同形式、生命周期关系的推导规则、以及它们与所有权、借用系统的交互约束。
+
+### 1.3b Tofte-Talpin 区域推断算法的 Rust 适配
+
+> **[来源: Tofte & Talpin 1994, *Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions*; Walker 2000, *A Type System for Expressive Security Policies*; Rust Reference: Lifetime elision; rustc NLL design]** Rust 的生命周期系统不是凭空创造的——它直接继承自 Tofte-Talpin 的区域类型理论（Region-based memory management），但进行了关键的命令式适配。
+
+#### 原始算法（ML 语言）
+
+```text
+Tofte-Talpin 区域推断的核心思想:
+
+  每个值分配在"区域（region）"中，区域是内存的逻辑分区。
+  区域的创建和销毁遵循词法作用域（lexical scope）。
+  引用（指针）的类型标注其指向值所在的区域。
+
+  类型规则（简化）:
+    Γ ⊢ e : τ @ ρ
+    含义: 在环境 Γ 下，表达式 e 的类型为 τ，且存储在区域 ρ 中
+
+  关键约束:
+    1. 引用只能指向存活区域中的值: &τ @ ρ' 要求 ρ' ⊇ ρ（ρ' outlives ρ）
+    2. 区域在作用域结束时统一释放所有值（类似栈分配）
+    3. 值可跨区域移动（move），但引用不能跨区域共享
+
+  ML 中的实现:
+    - 编译器自动推断区域参数
+    - 运行时由区域栈管理内存（无需 GC，但需区域分配器）
+    - 所有引用都是局部的——没有全局/静态引用
+```
+
+> **来源**: [Tofte & Talpin 1994 — POPL] · [Walker 2000 — Cornell Tech Report]
+
+#### Rust 的三项关键适配
+
+```text
+适配 1: 从函数式到命令式
+  ML: 引用是只读的、函数式的——值一旦创建不可变
+  Rust: 引用可以是可变的（&mut），且支持原地修改
+  影响: 区域约束需增加 "Alias XOR Mutation" 规则
+        &mut T 要求区域 ρ 在写期间独占，而 &T 允许多个只读共享
+
+适配 2: 从 GC 到所有权
+  ML: 区域管理值的生命周期，但值本身由 GC 或区域分配器回收
+  Rust: 所有权决定值的释放时机——drop 在所有权转移或作用域结束时
+  影响: 区域 ρ 的结束不自动释放所有值，只释放该作用域拥有的值
+        生命周期 'a 成为 "引用的有效期"，而非 "值的存储区域"
+
+适配 3: 从词法到非词法（NLL）
+  ML: 区域严格词法——从声明点到作用域结束
+  Rust: NLL 允许引用在其最后一次使用后提前"死亡"
+  影响: 区域约束的求解从"基于作用域树"变为"基于控制流图（CFG）"
+        引用的生命周期是 CFG 上的一组点，而非连续的语法范围
+```
+
+> **来源**: [Rust Reference: Non-Lexical Lifetimes] · [rustc NLL RFC 2094] · [Rust Internals: NLL design notes]
+
+#### Rust 中的区域约束生成与求解
+
+```text
+编译器生命周期检查的两阶段算法:
+
+阶段 1: 约束生成（Constraint Generation）
+  对函数体进行数据流分析，生成生命周期约束：
+
+    - 引用创建: let r = &x  →  生成约束: lifetime(r) ≤ lifetime(x)
+    - 函数调用: foo(&x, &y) → 根据签名生成 outlives 约束
+    - 赋值: r1 = r2       →  生成约束: lifetime(r1) = lifetime(r2)
+    - 返回: return &x      →  生成约束: lifetime(return) ≤ lifetime(x)
+
+  约束形式: 'a: 'b（'a outlives 'b）或 'a = 'b
+
+阶段 2: 约束求解（Constraint Solving）
+  将所有约束输入偏序约束求解器：
+
+    1. 构建约束图: 节点 = 生命周期变量，边 = outlives 关系
+    2. 检查图中是否存在矛盾环（如 'a: 'b 且 'b: 'a 且 'a ≠ 'b 的非法场景）
+    3. 为每个引用计算最小满足约束的生命周期范围
+    4. 若存在未满足的约束 → 编译错误（E0597、E0106 等）
+
+NLL 的关键改进:
+  传统（词法）: 生命周期 = 语法作用域范围
+  NLL: 生命周期 = 控制流图（CFG）中从定义点到最后一次使用点的路径集合
+  求解器: 从基于"作用域嵌套树"变为基于"CFG 数据流分析"
+```
+
+> **来源**: [rustc NLL RFC 2094 — Non-Lexical Lifetimes] · [Rust Reference: Lifetime resolution] · [rustc borrow_check/src/region_inference/mod.rs]
+
+#### 与 Polonius 的演进关系
+
+```text
+NLL 的局限性:
+  - 仍基于"基于点的分析"（point-based），某些合法模式被拒绝
+  - 例如: 两个分支分别借用不同字段，合并后无法使用整体
+
+Polonius 的改进:
+  - 基于"基于起源的分析"（origin-based）
+  - 将生命周期视为"值的来源集合"而非"时间范围"
+  - 更精确地追踪 "哪个值被哪个引用借用"
+
+形式化演进链:
+  Tofte-Talpin (1994) 词法区域
+       ↓
+  Rust 传统生命周期（词法作用域）
+       ↓
+  NLL (2018) 非词法 CFG 分析
+       ↓
+  Polonius (未来) 基于 Datalog 的起源推理
+
+关键洞察:
+  每一代都在 "保持 soundness" 的前提下 "减少保守拒绝"
+  即: 接受集单调递增，拒绝集单调递减
+```
+
+> **来源**: [Polonius GitHub: README and design docs] · [rustc Polonius tracking issue] · [Niko Matsakis blog: From NLL to Polonius]
 
 ---
 

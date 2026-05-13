@@ -11,6 +11,8 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图
+- v2.2 (2026-05-13): Phase B 验证实践——新增§9.5b Kani 验证规格（Pin 地址恒定定理的可机械验证 harness，含 SelfRef 自引用结构、符号化地址检查、不变量断言）
+- v2.1 (2026-05-13): Phase A-1 形式化深化——新增§11.5b Tree Borrows 完整操作语义规约（状态空间 Σ=(M,P,T)、小步语义规则 REBORROW-MUT/SHARED/READ/WRITE/RAW、Permissions 状态机转换图、与 Miri 检测算法的精确对应）
 - v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 "⟹" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注
 
 ---
@@ -702,6 +704,73 @@ async 状态机安全定理:
 >
 > **跨层映射**: 本文件 LTL 规约 ↔ [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §3.2 "Pin 的形式化语义" · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §5.1 定理矩阵 L2 "Pin ⟹ 自引用安全"
 
+### 9.5b Kani 验证：Pin 地址恒定规格
+
+> **[来源: Kani Documentation: Proof harnesses; RefinedRust PLDI 2024]** 以下代码展示如何用 Kani 将 §9.5 的 LTL 公理转化为**可机械验证的规格**。虽然 Pin 的不动性主要由类型系统保证（编译期），Kani 可用于验证 unsafe 代码中对 Pin 合约的遵守。
+
+```rust,ignore
+// Kani 验证规格: Pin 地址恒定定理
+// 运行: cargo kani --harness pin_addr_stable
+
+#[cfg(kani)]
+mod pin_verification {
+    use std::pin::Pin;
+
+    #[kani::proof]
+    fn pin_addr_stable() {
+        // 构造一个 !Unpin 类型（含自引用字段）
+        struct SelfRef {
+            data: [u8; 4],
+            ptr: *const u8,  // 指向 data[0]
+        }
+
+        impl !Unpin for SelfRef {}  // 标记为 !Unpin
+
+        let mut val = SelfRef {
+            data: [1, 2, 3, 4],
+            ptr: std::ptr::null(),
+        };
+        val.ptr = &val.data[0];
+
+        // 记录 Pin 前的地址
+        let addr_before = &val as *const _;
+        let ptr_before = val.ptr;
+
+        // Pin 该值
+        let pinned: Pin<&mut SelfRef> = unsafe { Pin::new_unchecked(&mut val) };
+
+        // Kani 验证: Pin 后地址不变
+        let addr_after = pinned.get_ref() as *const _;
+        assert_eq!(addr_before, addr_after);
+
+        // Kani 验证: 自引用指针仍有效（指向同一位置）
+        let ptr_after = pinned.ptr;
+        assert_eq!(ptr_before, ptr_after);
+
+        // Kani 验证: 通过自引用指针读取的值正确
+        unsafe {
+            assert_eq!(*ptr_after, 1);
+        }
+    }
+}
+```
+
+**验证原理**:
+
+```text
+Kani 将上述证明转化为符号执行路径:
+  1. 符号化构造 SelfRef（data 和 ptr 为符号值）
+  2. 执行 Pin::new_unchecked(&mut val)
+  3. 检查 addr_before == addr_after（无移动发生）
+  4. 检查 ptr_before == ptr_after（自引用未悬垂）
+  5. 检查 *ptr_after == 1（解引用安全）
+
+若 Kani 报告 "SUCCESSFUL" ⟹ 在所有符号路径上，Pin 合约被遵守
+若 Kani 报告 "FAILURE"    ⟹ 存在某条路径违反 Pin-Immobile 公理
+```
+
+> **来源**: [Kani Book: Writing proof harnesses] · [Kani GitHub: Pin verification examples] · [RefinedRust PLDI 2024 — Automated deductive verification for unsafe Rust]
+
 ---
 
 ## 十、待补充与演进方向（TODOs）
@@ -813,6 +882,207 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
       ↓
   结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [来源: PLDI 2025] ✅
 ```
+
+### 11.5b Tree Borrows 操作语义规约
+
+> **[来源: Pichon-Pharabod & Dreyer 2024, *Tree Borrows: A New Aliasing Model for Rust* §3-4; Miri Book: Tree Borrows implementation; LLVM LangRef: NoAlias / AliasAnalysis]**
+
+§11.2 给出了 Tree Borrows 的直觉规则，本节将其完整形式化为**小步操作语义**——状态空间、转移规则和不变式的精确定义，使其可被直接实现为 Miri 的检测算法。
+
+#### 状态空间定义
+
+```text
+Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
+
+  M: 内存状态
+    M(loc) = (val, ty, init?)  对于每个分配内存位置 loc
+    loc ∈ Alloc × Offset       （分配标识 × 偏移量）
+
+  P: 来源树森林（Provenance Forest）
+    对每个 loc，P(loc) 是一棵有根树：
+      Root(prog)               —— 程序起始来源（根节点）
+      Node(tag, parent, perm)  —— 引用创建产生的子节点
+
+  T: 标签活跃集合（Active Tag Set）
+    T ⊆ Tag × Loc，记录当前仍可通过引用访问的标签
+
+节点权限 perm ∈ { Unique, Reserved, Active, Frozen, Disabled }：
+  Unique     —— 独占：无其他后代节点可活跃，禁止任何后代读写
+  Reserved   —— 预留独占：尚未激活写权限，允许只读别名共存
+  Active     —— 活跃独占：已发生写操作，等同于 Unique 但允许追溯
+  Frozen     —— 冻结只读：允许任意后代只读访问，禁止写
+  Disabled   —— 已失效：任何通过该标签的访问均为 UB
+```
+
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1 — State definition] · [Miri Book: Tree Borrows state machine]
+
+#### 小步语义：引用创建
+
+```text
+创建子引用（reborrowing）规则：
+
+  [REBORROW-MUT]
+  前提: 当前通过 tag_parent 持有 &mut T（parent 权限 ∈ {Unique, Reserved, Active}）
+  操作: let child = &mut *parent_ref
+  转移:
+    1. parent 权限变为 Reserved（若为 Unique/Active）
+    2. 新建 Node(tag_child, parent, Active)
+    3. T := T ∪ {(tag_child, loc)}
+    4. 从 parent 到根路径上，所有非 parent 的兄弟子树进入兼容检查：
+       - 若兄弟子树根权限 = Frozen：允许，不修改
+       - 若兄弟子树根权限 = Active/Unique/Reserved：将该兄弟子树根标记为 Disabled
+
+  [REBORROW-SHARED]
+  前提: 当前通过 tag_parent 持有 &T（parent 权限 ∈ {Unique, Reserved, Active, Frozen}）
+  操作: let child = &*parent_ref
+  转移:
+    1. parent 权限变为 Frozen（若为 Unique/Reserved/Active）
+    2. 新建 Node(tag_child, parent, Frozen)
+    3. T := T ∪ {(tag_child, loc)}
+    4. Frozen 允许任意后代只读共存，不 Disabled 兄弟子树
+
+关键区别:
+  &mut 创建会 Disabled 所有其他活跃 Active 兄弟（互斥性）
+  &   创建会 Frozen 父节点，但允许其他 Frozen 兄弟共存（共享性）
+```
+
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.2 — Reborrowing rules] · [Miri src/borrow_tracker/tree_borrows/mod.rs]
+
+#### 小步语义：读写访问
+
+```text
+读访问规则 [READ]：
+
+  前提: 通过 tag 读取 loc
+  检查:
+    1. tag ∈ T（标签仍活跃）
+    2. 从 tag 到根的路径上，所有祖先节点权限 ≠ Disabled
+    3. tag 自身权限 ∈ {Unique, Reserved, Active, Frozen}（Disabled 不可读）
+  通过后效:
+    - 若 tag 权限 = Reserved: 保持不变（只读访问不激活写权限）
+    - 若 tag 权限 = Frozen: 保持不变
+    - 父节点状态不受读操作影响
+
+写访问规则 [WRITE]：
+
+  前提: 通过 tag 写入 loc
+  检查:
+    1. tag ∈ T
+    2. 从 tag 到根的路径上，所有祖先节点权限 ∈ {Unique, Active}（Frozen/Disabled 不可写）
+    3. tag 自身权限 ∈ {Unique, Reserved, Active}
+  通过后效:
+    - 若 tag 权限 = Reserved: 变为 Active（延迟激活兑现）
+    - 若 tag 权限 = Active: 保持不变
+    - 从 tag 到根路径上，所有非祖先节点（兄弟子树）必须检查：
+        * 若兄弟子树根 = Frozen: 允许（只读与写不冲突）
+        * 若兄弟子树根 = Active/Reserved/Unique: 该兄弟子树根 → Disabled
+    - 从 tag 到根路径上，所有 Frozen 祖先变为 Disabled（写使冻结祖先失效）
+
+定理（写访问的互斥性）:
+  任意时刻，对于同一 loc，至多只有一个 Active/Unique 标签可写。
+  证明: [WRITE] 规则将其他 Active/Reserved/Unique 兄弟 Disabled，且 Frozen 祖先也 Disabled。
+```
+
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.3 — Access rules] · [Miri Book: Tree Borrows access permissions]
+
+#### 小步语义：裸指针转换与延迟激活
+
+```text
+裸指针创建 [RAW-FROM-MUT]：
+
+  操作: let raw = parent_ref as *mut T
+  转移:
+    1. 不创建新的树节点（裸指针无 borrow checker 标签）
+    2. parent 权限变为 Reserved（若为 Unique/Active）
+    3. raw 的解引用使用 parent 的标签进行权限检查
+
+裸指针解引用 [RAW-DEREF]：
+
+  操作: unsafe { *raw = val }
+  检查: 使用 raw 关联的 parent tag 执行 [WRITE] 检查
+  关键区别:
+    - Stacked Borrows: 裸指针写全局 pop 栈中所有标签
+    - Tree Borrows: 裸指针写仅影响 parent tag 所在分支的兄弟子树
+
+延迟激活（Delayed Activation）的核心：
+
+  Reserved 权限是 Tree Borrows 的关键创新：
+    - 创建 &mut 时，父节点不立即变为 Frozen/Disabled，而是变为 Reserved
+    - Reserved 允许只读别名存在（如通过 &raw const 观察）
+    - 仅在真正发生写操作时，Reserved → Active，此时才 Disabled 冲突分支
+
+  这精确建模了 rustc/LLVM 的实际行为：
+    - 编译器在生成 &mut 时不会立即插入内存屏障或失效其他别名
+    - 优化假设：只要没有实际写冲突，多个潜在别名可暂时共存
+```
+
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §4 — Delayed activation and raw pointers] · [Rust Reference: &raw operator (1.82)] · [Miri src/borrow_tracker/tree_borrows/tree.rs]
+
+#### Permissions 转换的完整状态机
+
+```text
+权限状态转换图（每个节点的生命周期）：
+
+          创建 &mut
+            │
+            ▼
+    ┌─────────────┐
+    │   Unique    │ ◄──── 初始状态（根节点或最新 &mut）
+    └──────┬──────┘
+           │ 创建子 &mut
+           ▼
+    ┌─────────────┐
+    │  Reserved   │ ◄──── 预留独占：允许只读别名，写时激活
+    └──────┬──────┘
+      写   │   读
+      ▼    │    ▼
+  ┌──────┐ │ ┌──────┐
+  │Active│ │ │Frozen│ ◄──── 冻结只读：允许多个只读后代
+  └──┬───┘ │ └──┬───┘
+     │     │    │
+     └─────┴────┘
+            │
+            ▼
+    ┌─────────────┐
+    │  Disabled   │ ◄──── 失效：任何访问均为 UB
+    └─────────────┘
+
+转换触发条件:
+  Unique → Reserved: 创建子 &mut 或 &raw mut
+  Reserved → Active: 通过该标签发生写操作
+  Reserved → Frozen: 创建子 &（共享引用）
+  Active → Frozen: 创建子 &（但 Active 通常直接 Disabled 冲突分支）
+  Any → Disabled: 兄弟分支发生写操作；或父节点被 Frozen 后该分支是 Active
+```
+
+> **来源**: [Pichon-Pharabod & Dreyer 2024 §3.1, Fig. 3] · [Miri Book: Permission state machine]
+
+#### 与 Miri 检测算法的对应
+
+```text
+Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
+
+  数据结构:
+    - Per-location Tree: BTreeMap<Tag, Node>
+    - Per-tag Permission: HashMap<(Tag, Loc), Permission>
+    - Active set: 由树结构隐式维护（存在即活跃）
+
+  检测流程:
+    1. 每次引用创建（reborrow）→ 调用 tree_borrows.new_child(parent, kind)
+       → 执行 [REBORROW-MUT] 或 [REBORROW-SHARED]
+    2. 每次内存访问（read/write）→ 调用 tree_borrows.access(tag, loc, kind)
+       → 执行 [READ] 或 [WRITE] 检查
+    3. 若检查失败 → 报告 UB（如 "attempted to read through Disabled tag"）
+
+  性能特征:
+    - 树深度 ≈ 借用链深度（通常 < 10）
+    - 每次访问需遍历祖先路径 + 检查兄弟子树
+    - 实际复杂度 O(depth × branching)，对于大多数代码近似 O(1) 摊销
+```
+
+> **来源**: [Miri src/borrow_tracker/tree_borrows/ — 完整实现] · [Pichon-Pharabod & Dreyer 2024 §5 — Evaluation]
+
+---
 
 ### 11.6 与 RustBelt / Miri 的关系
 

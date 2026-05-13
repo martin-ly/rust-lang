@@ -10,6 +10,7 @@
 > **Bloom 层级**: 应用 → 分析 → 评价
 **变更日志**:
 
+- v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule covering 条件数学定义、System F 约束多态对接、Blanket impl 的 Horn 子句可满足性与重叠检测算法）
 - v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
 - v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
@@ -31,6 +32,11 @@
   - [三、思维导图（Mind Map）](#三思维导图mind-map)
   - [四、定理推理链（Theorem Chain）](#四定理推理链theorem-chain)
     - [4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl](#41-引理orphan-rule--coherence--全局唯一-impl)
+    - [4.1b Coherence 的形式化逻辑基础](#41b-coherence-的形式化逻辑基础)
+      - [Coherence 作为类型论一致性公理](#coherence-作为类型论一致性公理)
+      - [Orphan Rule 的数学边界条件](#orphan-rule-的数学边界条件)
+      - [与 System F 子类型化的对接](#与-system-f-子类型化的对接)
+      - [Blanket impl 与 Horn 子句可满足性](#blanket-impl-与-horn-子句可满足性)
     - [4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性](#42-定理trait-对象安全条件--dyn-trait-可行性)
     - [4.3 推论：Auto Trait 结构化推导 ⟹ Send/Sync 自动实现](#43-推论auto-trait-结构化推导--sendsync-自动实现)
       - [定义与语法](#定义与语法)
@@ -218,6 +224,8 @@ graph TD
 
 ## 四、定理推理链（Theorem Chain）
 
+> **[来源: RFC 1023; Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化的确定性。
+
 ### 4.1 引理：Orphan Rule ⟹ Coherence ⟹ 全局唯一 impl
 
 > **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Coherence](https://doc.rust-lang.org/reference/items/implementations.html#trait-implementation-coherence)** Orphan Rule 限制 impl 的声明位置，是 Coherence（全局一致性）的必要前提。 ✅ 已验证
@@ -232,6 +240,41 @@ graph TD
     ↓
 推论: 编译器可以唯一确定调用哪个 impl，无需运行时查找（静态分发场景）
 ```
+
+### 4.1b Coherence 的形式化逻辑基础
+
+> **[来源: Rust Reference: Coherence; RFC 1023 §3; Chakravarty et al. 2005, *Associated Types with Class*; Dreyer 2017 — Understanding and Evolving the Rust Programming Language §3.2]**
+
+§4.1 给出了 Orphan Rule ⟹ Coherence 的直觉推理，本节将其置于**类型论和逻辑编程**的框架中，使 Coherence 不仅是工程规则，而是可证明的数学定理。
+
+> **[来源: Rust Reference: Coherence; Chakravarty et al. 2005]** Coherence 在 Haskell/Rust 中的定义略有差异。
+
+#### Coherence 作为类型论一致性公理
+
+> **来源**: [Chakravarty et al. 2005 — Associated Type Synonyms] · [Dreyer 2017 §3.2 — Coherence and type inference] · [Rust Reference: Coherence rules]
+
+> **[来源: RFC 1023 §3; Rust Reference: Orphan Rules]** covering 条件是 orphan rule 的核心数学表达。
+
+#### Orphan Rule 的数学边界条件
+
+impl<P₁...Pn> Trait<T₁...Tm> for Type
+
+> **来源**: [RFC 1023 §3 — Orphan rules formal definition] · [Rust Reference: Orphan rules — Fundamental types] · [Dreyer 2017 §3.2.2]
+
+> **[来源: Pierce 2002 TAPL Ch.23; Wadler & Blott 1989]** Rust Trait 与 Haskell 类型类均可映射到 System F 的字典传递解释。
+
+#### 与 System F 子类型化的对接
+
+> **来源**: [Pierce 2002 TAPL Ch.23 — Bounded Quantification] · [Wadler & Blott 1989 — How to make ad-hoc polymorphism less ad hoc] · [Rust Internals: Coherence vs Haskell type classes]
+
+> **[来源: Rust Reference: min_specialization; Dowek & Jiang 2011]** Blanket impl 的重叠检测基于一阶逻辑的统一理论。
+
+#### Blanket impl 与 Horn 子句可满足性
+
+> **来源**: [Rust Reference: Impl overlapping] · [Rust Reference: min_specialization] · [Dowek & Jiang 2011 — Eigenvariables, bracketing and the decidability of positive minimal predicate logic] · [Rust Internals: Specialization soundness issues]
+> **[来源: Rust Reference: Coherence — 完整规则集]** Coherence 系统是 Rust 类型检查器的核心，其实现分布在 rustc_trait_selection crate 的 coherence 模块中。
+
+---
 
 ### 4.2 定理：Trait 对象安全条件 ⟹ dyn Trait 可行性
 

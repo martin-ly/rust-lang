@@ -163,6 +163,82 @@ MutexInvariant(m, l, P) ≜  ∃v. l ↦ v * P(v)
 
 > **[来源: RustBelt: POPL 2018 §5]** RustBelt 在 Iris 中机械验证了 `std::sync::Mutex` 满足上述规约。关键难点在于处理 `UnsafeCell` 和平台线程原语（`pthread_mutex_t` / `futex`）的对接。
 
+### 3.3b Kani 验证：Mutex 无数据竞争规格
+
+> **[来源: Kani Documentation: Concurrent verification; RustBelt POPL 2018 §5]** CSL 的 `MutexInvariant` 规约可在 Kani 中编码为**并发验证 harness**。Kani 通过符号化线程交错，验证在所有可能的执行顺序下数据竞争不存在。
+
+```rust,ignore
+// Kani 验证规格: Mutex 保护的数据访问无竞争
+// 运行: cargo kani --harness mutex_no_data_race
+
+#[cfg(kani)]
+mod mutex_verification {
+    use std::sync::{Mutex, Arc};
+    use std::thread;
+
+    #[kani::proof]
+    fn mutex_no_data_race() {
+        // 构造共享 Mutex（Arc 使其可跨线程共享）
+        let data = Arc::new(Mutex::new(0i32));
+        let data2 = Arc::clone(&data);
+
+        // 线程 1: 增量操作
+        let t1 = thread::spawn(move || {
+            let mut guard = data.lock().unwrap();
+            *guard += 1;
+        });
+
+        // 线程 2: 增量操作
+        let t2 = thread::spawn(move || {
+            let mut guard = data2.lock().unwrap();
+            *guard += 1;
+        });
+
+        t1.join().unwrap();
+        t2.join().unwrap();
+
+        // Kani 验证: 最终值必为 2（无数据竞争导致丢失更新）
+        let final_val = *data.lock().unwrap();
+        assert_eq!(final_val, 2);
+    }
+
+    #[kani::proof]
+    fn mutex_invariant_preserved() {
+        // 验证资源不变量: 锁释放后数据满足谓词 P(v)
+        let m = Mutex::new(42);
+
+        {
+            let mut guard = m.lock().unwrap();
+            *guard = 100;  // 修改被保护数据
+        } // guard dropped → unlock → 不变量检查点
+
+        {
+            let guard = m.lock().unwrap();
+            // Kani 验证: 重新加锁后看到修改后的值
+            assert_eq!(*guard, 100);
+        }
+    }
+}
+```
+
+**验证原理**:
+
+```text
+Kani 并发验证的工作方式:
+  1. 符号化创建线程（thread::spawn 被建模为非确定性调度点）
+  2. 枚举所有可能的线程交错顺序（受抢占率限制）
+  3. 在每个交错点检查 Mutex::lock/unlock 的 happens-before 关系
+  4. 验证: 任意两个对同一数据的并发写操作之间都存在 lock/unlock 的同步边
+
+关键定理（Kani 验证覆盖）:
+  定理: 若所有对共享数据的访问都通过 Mutex::lock/unwrap 保护，
+        则程序不存在数据竞争。
+
+  Kani 的验证 ⟹ 在所有符号化交错路径上，hb 关系成立 ⟹ 无数据竞争
+```
+
+> **来源**: [Kani Book: Concurrent programs] · [RustBelt: POPL 2018 §5 — Mutex CSL proof] · [Kani GitHub: std::sync verification]
+
 ### 3.4 `Arc<T>` 的形式化
 
 `Arc<T>` 需建模**引用计数协议**。设 `rc` 为引用计数地址，`data` 为堆数据地址：

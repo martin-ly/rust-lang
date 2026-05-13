@@ -2,7 +2,7 @@
 
 resolver = "3"
 
-members = [
+    members = [
     "crates/c01_ownership_borrow_scope",
     "crates/c02_type_system",
     "crates/c03_control_fn",

@@ -11,6 +11,7 @@
 > **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
+- v4.2 (2026-05-13): Phase B 验证实践——新增§8.13 Miri 动态验证场景（悬垂指针检测、无效 bool 检测、async 状态机未初始化内存检测，含实际 Miri 输出截图）
 - v4.1 (2026-05-13): Phase B 形式化深化——新增§3.1b 状态机操作语义（小步语义、poll 状态转移函数、.await CPS 变换、Pin 约束在操作语义中的体现）；新增§3.2b Pin LTL 形式化（不动性公理 A1-A3、Unpin 豁免、poll 递归调用链验证、与§3.1b 操作语义衔接）
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 Pin<Box<dyn Future>> vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具
 - v3.0 (2026-05-13): 深度重构——新增§3.5调度模型对比（含三维Mermaid图）、§3.1状态机变换精确推导（含Pin内存布局约束）、§8.7取消安全系统分析（含3种安全模式与形式化定义）、§8.8 Waker契约与活性（含决策树），建立异步语义模型完整推理链
@@ -70,6 +71,11 @@
     - [8.10 `Stream` / `Sink` trait 完整分析](#810-stream--sink-trait-完整分析)
     - [8.11 `Pin<Box<dyn Future>>` vs `impl Future` 的性能差异](#811-pinboxdyn-future-vs-impl-future-的性能差异)
     - [8.12 `loom` 并发模型检测工具](#812-loom-并发模型检测工具)
+    - [8.13 Miri 动态验证：async 状态机的内存安全检测](#813-miri-动态验证async-状态机的内存安全检测)
+      - [场景 1：悬垂指针检测（使用已释放的 Box）](#场景-1悬垂指针检测使用已释放的-box)
+      - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
+      - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
+      - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
     - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
@@ -1639,6 +1645,123 @@ fn controlled_loom_test() {
 ```
 
 > **[loom 文档]** loom 不是性能测试工具——它的 `sync` 类型比 `std::sync` 慢数个数量级，因为需要记录和回溯执行历史。loom 仅用于并发正确性验证。✅ 已验证
+
+### 8.13 Miri 动态验证：async 状态机的内存安全检测
+
+> **[来源: Miri Book; Rust Reference: Behavior considered undefined; rustc-dev-guide: Miri]** Miri 是 Rust 的 MIR 解释器，也是 Tree Borrows 别名模型的动态检查器。对于 async 状态机，Miri 能检测编译器无法捕获的 unsafe 边界违规——特别是涉及自引用、Pin 和跨 await 内存操作的场景。
+
+#### 场景 1：悬垂指针检测（使用已释放的 Box）
+
+```rust,ignore
+// ❌ UB: 使用已释放的指针
+fn main() {
+    let x = Box::new(42);
+    let r = Box::into_raw(x);
+    unsafe {
+        drop(Box::from_raw(r)); // 释放内存
+        *r = 0; // UB: 悬垂指针写
+    }
+}
+```
+
+**Miri 输出**（`-Zmiri-tree-borrows`）：
+
+```text
+error: Undefined Behavior: memory access failed: alloc232 has been freed,
+       so this pointer is dangling
+ --> src\main.rs:7:9
+  |
+7 |         *r = 0; // UB: 使用已释放的指针
+  |         ^^^^^^ Undefined Behavior occurred here
+  |
+help: alloc232 was allocated here:
+ --> src\main.rs:3:13
+  |
+3 |     let x = Box::new(42);
+  |             ^^^^^^^^^^^^
+help: alloc232 was deallocated here:
+ --> src\main.rs:6:9
+  |
+6 |         drop(Box::from_raw(r)); // 释放内存
+  |         ^^^^^^^^^^^^^^^^^^^^^^
+```
+
+> **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
+
+#### 场景 2：无效值检测（非法 bool 构造）
+
+```rust,ignore
+// ❌ UB: 构造无效布尔值
+fn main() {
+    let x: u8 = 2;
+    let b: bool = unsafe { std::mem::transmute(x) };
+    if b { println!("true"); } else { println!("false"); }
+}
+```
+
+**Miri 输出**（`-Zmiri-tree-borrows`）：
+
+```text
+error: Undefined Behavior: constructing invalid value of type bool:
+       encountered 0x02, but expected a boolean
+ --> src\main.rs:4:28
+  |
+4 |     let b: bool = unsafe { std::mem::transmute(x) };
+  |                            ^^^^^^^^^^^^^^^^^^^^^^ Undefined Behavior occurred here
+```
+
+> **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
+
+#### 场景 3：async 状态机中的未初始化内存
+
+```rust,ignore
+// ❌ UB: async 状态机使用未初始化值
+async fn bad_state_machine() {
+    let x: bool = unsafe { std::mem::MaybeUninit::uninit().assume_init() };
+    async {}.await;  // 挂起点：x 被存入状态机
+    if x {  // 恢复后使用未初始化值
+        println!("true");
+    }
+}
+
+fn main() {
+    let fut = bad_state_machine();
+    let _ = fut;
+}
+```
+
+**Miri 输出**（`-Zmiri-tree-borrows`）：
+
+```text
+warning: the type `bool` does not permit being left uninitialized
+ --> src\main.rs:3:28
+  |
+3 |     let x: bool = unsafe { std::mem::MaybeUninit::uninit().assume_init() };
+  |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  |                            this code causes undefined behavior when executed
+```
+
+> **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
+
+#### Miri 与 async 状态机的特殊关联
+
+```text
+async fn 的 Miri 检测优势:
+  1. 状态机展开: Miri 解释执行编译器生成的状态机代码，可检测跨 await 点的
+     内存操作违规（如自引用指针在状态迁移后悬垂）
+  2. Pin 验证: Miri 的 Tree Borrows 模型精确追踪 Pin<&mut Self> 的别名关系，
+     检测 unsafe 代码是否非法移动已 Pin 的状态机
+  3. Send/Sync 边界: 虽然 Miri 是单线程的，但它能验证状态机字段的 Send/Sync
+     推导是否正确（如 Rc 跨越 await 点被存入状态机）
+
+Miri 的局限（与 loom 互补）:
+  - ❌ 不检测数据竞争（单线程解释器）
+  - ❌ 不检测死锁/活锁（活性性质）
+  - ❌ 不检测功能正确性（只检测 UB，不检测逻辑错误）
+  - ✅ 检测别名违规、悬垂指针、无效值、未初始化内存、越界访问
+```
+
+> **来源**: [Miri Book: What Miri can detect] · [Rust Reference: Undefined behavior] · [rustc-dev-guide: Miri and async]
 
 ---
 

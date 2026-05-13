@@ -12,6 +12,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例
 - v1.1 (2026-05-13): 重构增强——定理一致性矩阵扩展至10行（⟹推理链）、反命题决策树×4、认知路径六步递进、章节过渡段落、层次一致性标注
+- v1.3 (2026-05-13): Phase BC 形式化深化——新增§2.2b Unsafe Code Guidelines 完整 UB 分类（内存访问/类型系统/并发/其他四大类 15 子类 + UB 检测不可判定性定理）；新增§7.2b Miri 检测算法原理（核心解释循环、与 LLVM 优化假设关系、MIRIFLAGS 完整选项速查）
 - v1.2 (2026-05-13): 深度重构——新增 §5.5 Stacked Borrows 操作语义、§5.6 Tree Borrows 演进；增强 §7.2 Miri 检测边界（覆盖范围表格+MIRIFLAGS使用）；补充层次一致性标注（L1/L4映射）与章节过渡段落
 
 ---
@@ -63,6 +64,8 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 
 > 在明确定义后，我们需要对 unsafe 提供的操作进行系统分类。以下三个矩阵分别覆盖：操作能力、未定义行为类型、以及各角色的安全责任。
 
+> **[来源: Rust Reference: Unsafe Rust; Rustonomicon]** Unsafe 操作分为 7 类，每类有明确的安全契约。
+
 ### 2.1 Unsafe 操作分类矩阵
 
 | **操作** | **语法** | **安全风险** | **典型用途** | **Safe 封装示例** |
@@ -89,6 +92,72 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 | **ABI** | 调用约定不匹配、布局假设错误 | 难 | FFI 类型宽度不匹配 |
 | **特殊** | 递归 panic、栈溢出、除以零 | 中等 | `panic!` in `Drop` |
 
+### 2.2b Unsafe Code Guidelines 完整 UB 分类
+
+> **[来源: Rust Reference: Behavior considered undefined; The Rust Unsafe Code Guidelines (UCG) Book; Ralf Jung Blog]** Rust 的 UB 清单不是封闭的——随着编译器优化假设的演进，新的 UB 类别可能被加入。以下分类基于 Rust Reference 和 UCG 的最权威定义。
+
+> **[来源: Rust Reference: Behavior considered undefined]** 内存访问类 UB 是最常见的未定义行为，Miri 检测覆盖率高。
+
+#### 内存访问类 UB
+
+| **UB 子类** | **精确条件** | **Miri 检测** | **典型触发代码** |
+|:---|:---|:---:|:---|
+| **悬垂指针解引用** | 解引用已释放/已重新分配的内存地址 | ✅ | `let r = &x; drop(x); *r` |
+| **越界访问** | 通过指针/引用访问分配区域之外的内存 | ✅ | `let v = vec![1]; v[10]` |
+| **未对齐访问** | 访问地址不满足类型的 align 要求 | ✅ | `ptr::read_unaligned` 误用 |
+| **读取未初始化内存** | 读取 `MaybeUninit::uninit()` 或 padding 字节 | ✅ | `mem::uninitialized::<bool>()` |
+| **空指针解引用** | 解引用 `ptr::null()` / `ptr::null_mut()` | ✅ | `*ptr::null::<i32>()` |
+
+> **[来源: Rust Reference: Invalid values]** 类型系统类 UB 涉及编译器对值表示的优化假设。
+
+#### 类型系统类 UB
+
+| **UB 子类** | **精确条件** | **Miri 检测** | **典型触发代码** |
+|:---|:---|:---:|:---|
+| **无效枚举值** | discriminant 不在枚举声明的变体范围内 | ✅ | `mem::transmute::<u8, Option<bool>>(3)` |
+| **类型混淆（Type punning）** | 通过 `union` 读取非活跃变体；或 `transmute` 到不兼容布局 | ✅ | `union.u32` 写入后读 `union.f32` |
+| **无效布尔值** | bool 的内存表示不是 0x00 或 0x01 | ✅ | `mem::transmute::<u8, bool>(2)` |
+| **无效字符值** | char 的内存表示不是合法 Unicode scalar value | ✅ | `mem::transmute::<u32, char>(0xD800)` |
+| **无效引用/Box** | `&T` 为 dangling/null/unaligned；`Box<T>` 指向已释放内存 | ✅ | `mem::transmute::<usize, &i32>(0)` |
+
+> **[来源: Rust Reference: Data races]** 并发类 UB 在 Miri 中无法检测，需用 Loom 或 ThreadSanitizer。
+
+#### 并发与同步类 UB
+
+| **UB 子类** | **精确条件** | **Miri 检测** | **典型触发代码** |
+|:---|:---|:---:|:---|
+| **数据竞争** | 两个线程无同步地访问同一内存，至少一个写 | ❌（单线程解释器） | `static mut X: i32 = 0;` 多线程读写 |
+| **原子操作序违规** | `AtomicOrdering::Relaxed` 用于保护数据依赖 | ⚠️（部分） | `Relaxed` load 读另一线程的 `Release` store |
+
+#### 其他 UB
+
+| **UB 子类** | **精确条件** | **Miri 检测** | **典型触发代码** |
+|:---|:---|:---:|:---|
+| **ABI 不匹配** | FFI 调用时参数类型/调用约定与声明不符 | ❌ | `extern "C"` 函数签名与 C 头不匹配 |
+| **内联汇编违规** | 汇编约束与实际副作用不符 | ❌ | `asm!("..." : "=r"(x))` 但实际修改内存 |
+| **栈溢出** | 递归/大数组导致栈空间耗尽 | ⚠️（OS 信号） | 无限递归 |
+
+> **来源**: [Rust Reference: Behavior considered undefined — 完整清单] · [UCG Book: What is undefined behavior?] · [Ralf Jung Blog: The scope of unsafe]
+
+#### UB 检测的不可判定性边界
+
+```text
+定理（UB 检测的停机问题归约）:
+  判定"程序 P 是否触发 UB" 是不可判定的。
+    ↓
+  证明概要: 可将其归约为停机问题
+    - 构造程序 P': "若原程序停机，则执行某个 UB 操作"
+    - 判定 P' 是否触发 UB ⟺ 判定原程序是否停机
+    - 由停机问题不可知 ⟹ UB 检测不可判定
+
+  工程影响:
+    - Miri 是**近似检测器**：它检测常见 UB 模式，但不保证发现所有 UB
+    - Kani 等符号执行工具可覆盖更多路径，但仍受状态空间爆炸限制
+    - 形式化证明（RustBelt/Iris）覆盖 safe 子集，unsafe 仍需人工验证
+```
+
+> **来源**: [Miri Book: Limitations] · [Kani Documentation: Verification bounds] · [Rice 1953 — Theorem: All non-trivial semantic properties are undecidable]
+
 ### 2.3 Safety Contract 责任矩阵
 
 | **角色** | **责任** | **证明对象** | **工具支持** |
@@ -107,6 +176,8 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 > 概念分类之后，需要从类型系统视角理解 unsafe 的本质。unsafe 不是"关闭编译器"，而是在封闭证明系统中引入新的公理，并由程序员人工保证其一致性。
 
 > **[Rustonomicon: The Safe/Unsafe Boundary]** Safe Rust 是封闭的证明系统；unsafe 是显式引入新公理并人工保证一致性的扩展。类比：Safe Rust = 欧氏几何，Unsafe = 非欧几何。💡 原创分析
+
+> **[来源: Rustonomicon: The Safe/Unsafe Boundary]** Unsafe 不是关闭检查器，而是引入人工验证的公理。
 
 ### 3.1 Unsafe 作为公理缺口
 
@@ -442,6 +513,8 @@ Tree Borrows 用**树形结构**替代线性栈：
 
 > 将知识结构转化为工程决策能力。本节提供三类决策工具：是否需要 unsafe 的判别、UB 边界判定、以及四个常见反命题的澄清。
 
+> **[来源: TRPL: Ch19.1]** 决策树帮助判断是否真的需要 unsafe。
+
 ### 6.1 "我需要用 unsafe 吗？" 决策树
 
 ```mermaid
@@ -629,6 +702,90 @@ MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
 >
 > **[Miri Book]** Tree Borrows 自 2024 年末起成为 Miri 的**默认**别名模型（原 `-Zmiri-tree-borrows` 不再需显式指定；Stacked Borrows 退为 `-Zmiri-stacked-borrows` 兼容选项）。PLDI 2025 Distinguished Paper 正式确立了 Tree Borrows 作为 Rust 别名假设工业级标准的地位。✅ 已验证
+
+### 7.2b Miri 检测算法原理与编译器优化关系
+
+> **[来源: Miri Book: How Miri works; rustc-dev-guide: MIR interpretation; LLVM LangRef: AliasAnalysis]** Miri 不是普通解释器——它维护了一个与编译器优化假设一致的内存模型，因此其检测具有"如果 Miri 报错，则 rustc/LLVM 可能基于此做危险优化"的语义。
+
+> **[来源: Miri Book: Implementation details]** Miri 基于 MIR 解释执行，维护内存和别名模型的完整状态。
+
+#### Miri 检测的核心算法
+
+```text
+Miri 解释执行循环:
+
+  1. 读取下一条 MIR 指令
+  2. 若指令涉及内存访问（load/store/retag）：
+     a. 确定访问的内存位置 loc 和大小 size
+     b. 确定访问的标签 tag（引用的 provenance）
+     c. 查询该 loc 的 Borrow Stack / Borrow Tree 状态
+     d. 根据 SB/TB 规则验证访问合法性
+     e. 若不合法 → 报告 UB（panic + 堆栈跟踪）
+  3. 若指令是函数调用：
+     a. 若是 safe 函数 → 正常解释
+     b. 若是 unsafe 函数 → 同样解释，但标记为 unsafe 上下文
+     c. 若是 extern 函数 → 若提供 shim 则解释，否则 stub（默认 panic）
+  4. 更新程序状态，继续下一条指令
+
+关键数据结构:
+  - Memory: HashMap<AllocId, Allocation>，每个 Allocation 含 bytes + relocations + borrow stack
+  - Borrow Stack/Tree: 每个 Allocation 关联的别名追踪结构
+  - Frame Stack: 调用栈，含局部变量和 resume 点
+```
+
+> **来源**: [Miri Book: Memory model] · [rustc-dev-guide: MIR interpretation] · [Miri src/machine.rs]
+
+> **[来源: LLVM LangRef: Function Attributes]** Miri 的检测与 LLVM 优化假设一一对应。
+
+#### Miri 与编译器优化的关系
+
+```text
+为什么 Miri 的检测不是"过度敏感"？
+
+  编译器优化假设（以 LLVM 为例）:
+    - `noalias` 属性: &mut T 指向的内存不会被其他指针访问
+    - `dereferenceable` 属性: &T 在生命周期内始终指向有效内存
+    - `noundef` 属性: bool/enum/char 等类型的值始终在合法范围内
+
+  Miri 的检测 = 这些优化假设的动态验证:
+    - 悬垂指针 → LLVM 可能做 dead store elimination，导致值"消失"
+    - 无效枚举值 → LLVM 可能将 match 优化为跳转表，非法 discriminant 跳转到任意位置
+    - 数据竞争 → LLVM 可能重排内存操作，导致观察到不一致状态
+
+  关键洞察:
+    Miri 报错 ⟹ "该程序违反了 rustc/LLVM 的优化假设"
+    这不等于"程序一定会崩溃"，但等于"程序行为不再由 Rust 语义定义"
+```
+
+> **来源**: [LLVM LangRef: Function Attributes — noalias, dereferenceable, noundef] · [Rustonomicon: What is undefined behavior?] · [Ralf Jung Blog: Why undefined behavior is scary]
+
+> **[来源: rustc-dev-guide: Miri flags]** MIRIFLAGS 控制 Miri 的检测严格度和并发行为。
+
+#### MIRIFLAGS 完整选项速查
+
+```bash
+# 别名模型
+-Zmiri-tree-borrows          # Tree Borrows（默认，无需显式指定）
+-Zmiri-stacked-borrows       # Stacked Borrows（兼容模式）
+
+# 并发与隔离
+-Zmiri-disable-isolation     # 允许文件系统/网络/环境变量访问
+-Zmiri-preemption-rate=N     # 线程抢占频率（默认 100，越低越确定式）
+-Zmiri-seed=N                # 随机数种子（可重现的并发交错）
+
+# 内存与检查严格度
+-Zmiri-check-number-validity # 检查整数有效性（如 bool 必须是 0/1）
+-Zmiri-tag-raw-pointers      # 为裸指针分配标签（更严格）
+-Zmiri-permissive-provenance # 宽松来源模式（实验性）
+
+# 其他
+-Zmiri-ignore-leaks          # 不报告内存泄漏
+-Zmiri-panic-on-unsupported  # 遇到不支持的操作时 panic 而非跳过
+```
+
+> **来源**: [Miri Book: MIRIFLAGS reference] · [rustc-dev-guide: Miri flags]
+
+---
 
 ### 7.3 定理一致性矩阵（⟹ 推理链）
 
