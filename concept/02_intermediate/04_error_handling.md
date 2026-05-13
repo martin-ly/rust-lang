@@ -285,7 +285,7 @@ fn load_config() -> Result<i32, AppError> {
 
 ### 5.3 反例：`?` 在错误返回类型中不匹配
 
-rust,compile_fail
+```rust,compile_fail
 // ❌ 反例: ? 的错误类型无法自动转换
 fn parse_or_zero(s: &str) -> Result<i32, std::io::Error> {
     let n: i32 = s.parse()?;  // E0277: `?` couldn't convert the error
@@ -294,11 +294,12 @@ fn parse_or_zero(s: &str) -> Result<i32, std::io::Error> {
 // parse() 返回 Result<i32, ParseIntError>
 // 但函数返回 Result<i32, io::Error>
 // ParseIntError 不实现 From<io::Error>
+
 ```
 
 **修正方案**：
 
-rust,ignore
+```rust,ignore
 // ✅ 方案 1: 使用 map_err 显式转换
 fn parse_or_zero(s: &str) -> Result<i32, std::io::Error> {
     let n = s.parse().map_err(|e| {
@@ -536,13 +537,14 @@ fn process(items: Vec<&str>) -> Result<i32, ParseIntError> {
 
 ### 7.2 测试 2: From 转换链的边界
 
-rust,ignore
+```rust,ignore
 use std::fmt;
 use std::io;
 
 // 边界: From 转换链的自动推导与断点
 
-#[derive(Debug)]
+# [derive(Debug)]
+
 enum MyError {
     Io(io::Error),
     Parse(std::num::ParseIntError),
@@ -581,6 +583,7 @@ fn may_fail_anyhow() -> anyhow::Result<i32> {
     let n: i32 = s.trim().parse()?;                 // 任何错误自动转换 ✅
     Ok(n)
 }
+
 ```
 
 ### 7.3 测试 3: panic 边界与 catch_unwind

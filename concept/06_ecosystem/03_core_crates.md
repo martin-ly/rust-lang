@@ -300,7 +300,7 @@ graph TD
 
 **[rayon]** A data parallelism library for Rust.
 
-rust,ignore
+```rust,ignore
 use rayon::prelude::*;
 
 // 自动 work-stealing：将大数据集分片到线程池
@@ -308,6 +308,7 @@ let sum: i32 = (0..1_000_000).into_par_iter().map(|x| x * x).sum();
 
 // 与标准库 API 几乎完全一致
 let max = vec.par_iter().max();
+
 ```
 
 | **特性** | **标准库** | **rayon** |
@@ -327,25 +328,27 @@ let max = vec.par_iter().max();
 | `RwLock` | 写优先/系统依赖 | 读优先、可升级 | 更好的读并发 |
 | `Condvar` | 系统条件变量 | 组合锁 + 等待队列 | 避免虚假唤醒 |
 
-rust,ignore
+```rust,ignore
 use parking_lot::Mutex; // 无 poisoning，API 更简洁
 
 let data = Mutex::new(0);
 *data.lock() += 1; // 自动 DerefMut，无需 unwrap
 // 无 poisoning：panic 时锁正常释放
+
 ```
 
 > **选型决策**: 当 `std::sync::Mutex` 成为性能瓶颈（高竞争场景）或二进制体积敏感（嵌入式）时，优先替换为 `parking_lot`。API 兼容度 > 95%，迁移成本极低。
 
 #### dashmap：并发 HashMap
 
-rust,ignore
+```rust,ignore
 use dashmap::DashMap;
 
 let map = DashMap::new();
 map.insert("key", 42);
 // 并发读写无需外部 Mutex
 let value = map.get("key").map(|r| *r.value());
+
 ```
 
 | **维度** | `std::collections::HashMap` + `RwLock` | `dashmap` |

@@ -136,7 +136,7 @@ trait Drawable { fn draw(&self); }
 
 **非法组合**（编译器拒绝）：
 
-rust,compile_fail
+```rust,compile_fail
 fn illegal_combinations() {
     let mut s = String::from("hello");
 
@@ -146,6 +146,7 @@ fn illegal_combinations() {
     println!("{}", r1);
     println!("{}", r2);
 }
+
 ```
 
 > **关键洞察**: 非法组合不是"语法错误"，而是**语义冲突**——它们对应着内存不安全的形式化定义（数据竞争、use-after-free、悬垂指针）。编译器的拒绝是对这些语义冲突的预防性排除。
@@ -364,13 +365,14 @@ fn main() {
 }
 ```
 
-rust,ignore
+```rust,ignore
 // const generics 的当前边界：泛型常量表达式不稳定
 fn concat<const M: usize, const N: usize>(a: [i32; M], b: [i32; N]) -> [i32; M + N] {
     // error: generic parameters may not be used in const operations
     // 需要 `#![feature(generic_const_exprs)]`
     todo!()
 }
+
 ```
 
 > **关键洞察**: `Array<T, 3>` 和 `Array<T, 5>` 是**完全不同的类型**（单态化生成两份代码），这与依赖类型中 `Vec<n>` 的语义有本质区别——Rust 的 `N` 是编译期常量，不是运行时值的类型级投影。

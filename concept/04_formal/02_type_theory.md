@@ -411,7 +411,7 @@ graph TD
 
 ### 9.1 Variance 示例
 
-rust,compile_fail
+```rust,compile_fail
 // ✅ 协变: &'static str 可转为 &'a str
 fn covariant<'a>(s: &'static str) -> &'a str { s }
 
@@ -424,6 +424,7 @@ fn dog_handler(d: Dog) {}
 fn invariant<'a, 'b: 'a>(r: &'b mut &'static str) -> &'b mut &'a str {
     r  // ❌ 编译错误: &mut 对生命周期不变
 }
+
 ```
 
 ### 9.2 递归类型边界
