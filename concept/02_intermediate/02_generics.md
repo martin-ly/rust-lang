@@ -1558,6 +1558,8 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 | 异步与 Future | [03_advanced/02_async.md](../03_advanced/02_async.md) | 关联类型泛型（GATs）的典型应用 |
 | 并发与 Send/Sync | [03_advanced/01_concurrency.md](../03_advanced/01_concurrency.md) | 泛型约束的线程安全应用 |
 | 形式化验证 | [04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) | 泛型系统的逻辑基础 |
+| Rust 版本特性演进 | [07_future/rust_version_tracking.md](../07_future/rust_version_tracking.md) | `use<..>` precise capturing 等类型系统扩展 |
+| 异步与泛型 | [03_advanced/02_async.md](../03_advanced/02_async.md) | `AsyncFn` trait 家族、GATs 在 async 中的应用 |
 
 ---
 

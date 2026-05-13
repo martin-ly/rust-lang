@@ -1027,3 +1027,147 @@ graph TD
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
 >
 > 未来方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)。
+
+---
+
+## 十一、生态前沿的形式化梳理（2026.05）
+
+> **定位**: 本章节从**形式模型视角**梳理各生态前沿方向，不展开使用教程，聚焦"该领域与 Rust 所有权/类型系统的交互、安全边界、与 L1-L4 的映射"。
+> **原则**: 点到为止，每方向一段形式化分析。
+
+---
+
+### 11.1 Embassy：异步嵌入式的形式化调度
+
+**形式化定位**: Embassy 是 Rust `async/await` 在 `no_std` 环境下的**零运行时调度器**。其核心洞察：通过编译期状态机转换（L3 Async 的 `Future` 降阶），在裸机上实现协作式多任务，无需堆分配、无需 OS 线程。
+
+**与 L1-L4 的映射**:
+
+- **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期由编译期证明管理。
+- **L3 Async**: `embassy::executor` 是 `Future` 状态机的手动轮询器，与 Tokio 的运行时对偶——Tokio 提供**运行时抽象**，Embassy 提供**编译期调度**。
+- **L4 形式化**: Embassy 的调度器是**确定性有限自动机（DFA）**——任务优先级、中断向量、DMA 完成回调构成状态转换函数，无非确定性调度（无抢占、无优先级反转）。
+
+**安全边界**: Embassy 通过 `embassy::time` 的 `Instant` 类型和 `embassy::sync` 的通道，将中断上下文与任务上下文的形式化隔离封装为 safe API。`critical_section` 是唯一的 `unsafe` 边界，标记中断屏蔽的短暂区域。
+
+> **[来源: Embassy Book]** `embassy` 的 `async` 不是运行时的专利——通过编译期状态机转换，裸机上也能获得协作式多任务。
+
+---
+
+### 11.2 Rust for Linux：内核安全抽象的形式化边界
+
+**形式化定位**: Rust for Linux 是 Rust 类型系统与 Linux 内核 C API 的**形式化边界工程**。其核心挑战：将内核的复杂不变量（锁规则、引用计数、IRQ 上下文）编码为 Rust 的类型契约。
+
+**与 L1-L4 的映射**:
+
+- **L1 所有权**: 内核对象的引用计数（`Arc` 的等价物）通过 `Ref<T>` 类型封装，编译期保证无 use-after-free。但内核的 `kref` 与 Rust 的所有权模型存在**语义间隙**——`kref` 允许从 C 代码任意获取引用，Rust 编译器无法验证这些引用的合法性。
+- **L3 Unsafe**: 内核 Rust 代码的 `unsafe` 比例显著高于用户空间代码（约 10-20%），因为每个 C API 调用都是 FFI 边界。Rust for Linux 的创新在于：**将 unsafe 封装为 safe 抽象**，例如 `spinlock_t` → `SpinLock<T>` 的类型化封装。
+- **L4 形式化**: 内核的并发模型（RCU、seqlock、per-CPU 变量）尚无完整的 Rust 形式化证明。RustBelt 的并发分离逻辑（CSL）理论上可覆盖 `SpinLock<T>` 和 `Mutex<T>`，但 RCU 的读侧临界区（read-side critical section）无锁语义超出了当前 RustBelt 的证明范围。
+
+**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。
+
+> **[来源: Rust for Linux Docs]** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
+
+---
+
+### 11.3 eBPF + Aya：沙箱验证与类型系统的结合
+
+**形式化定位**: eBPF 是 Linux 内核的**沙箱虚拟机**，Aya 是用 Rust 编写 eBPF 程序的工具链。其核心洞察：eBPF 验证器（verifier）在加载期证明程序的安全性（无无限循环、无越界访问、无无效指令），而 Rust 的类型系统在编译期证明内存安全——**双层形式化验证**。
+
+**与 L1-L4 的映射**:
+
+- **L1 所有权**: eBPF 程序运行在内核地址空间的受限子集，无堆分配、无动态内存。Rust 的所有权模型在此退化为**静态单分配（SSA）形式**——每个变量有唯一的定义点，无别名。
+- **L3 Unsafe**: Aya 的 `#[aya_ebpf]` 宏将 Rust 函数编译为 eBPF 字节码。Rust 代码中的 `unsafe` 对应 eBPF 验证器的**信任边界**——验证器无法验证 `bpf_probe_read` 等 helper 函数的语义正确性，只能验证其调用合法性。
+- **L4 形式化**: eBPF 验证器本身是一个**形式化证明工具**（基于抽象解释），但其证明能力有限（例如不支持循环变量分析）。Rust 的类型系统补充了验证器的不足：Rust 编译期保证的内存安全，减少了验证器需要证明的断言数量。
+
+**安全边界**: Aya 的 `aya::maps` 模块将 eBPF map 操作封装为类型安全的 API。`PerCpuArray<T>` 的类型参数 `T` 必须在编译期满足 `Pod`（Plain Old Data）约束，确保 eBPF 验证器可以推断其内存布局。
+
+> **[来源: Aya Book]** eBPF 验证器在加载期证明程序安全性，Rust 类型系统在编译期证明内存安全。
+
+---
+
+### 11.4 io_uring：异步 IO 与所有权模型的交互
+
+**形式化定位**: io_uring 是 Linux 5.1+ 的**异步 IO 接口**，`tokio-uring` 和 `monoio` 将其封装为 Rust 的 async API。其核心洞察：io_uring 的**共享环形缓冲区**（submission queue / completion queue）是 Rust 所有权模型的**压力测试**——多个生产者/消费者共享同一内存区域，但 Rust 编译器要求明确的所有权归属。
+
+**与 L1-L4 的映射**:
+
+- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。
+- **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
+- **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
+
+**安全边界**: `tokio-uring` 的 `Buffer` trait 要求提交的缓冲区在操作完成前保持有效。`unsafe` 边界在于：如果用户在 `Op` 完成前 `drop` 缓冲区，会导致内核写入已释放内存。封装层通过**生命周期标注**（`&'a [u8]`）将这一约束编码到类型系统。
+
+> **[来源: tokio-rs/io-uring]** io_uring 的共享环形缓冲区是 Rust 所有权模型的压力测试。
+
+---
+
+### 11.5 QUIC/HTTP3：协议状态机的类型安全
+
+**形式化定位**: `quinn` 和 `h3` 是纯 Rust 的 QUIC/HTTP3 实现。其核心洞察：QUIC 的**有状态连接**（connection state machine）和**流多路复用**（stream multiplexing）天然适合 Rust 的类型状态（Typestate）模式——每个连接状态对应一个类型，状态转换由编译期保证合法。
+
+**与 L1-L4 的映射**:
+
+- **L1 类型系统**: `quinn` 的 `Connection` 类型通过**内部可变性**（`ConnectionRef`）管理连接状态。QUIC 的**零 RTT 握手**（0-RTT）要求客户端在握手完成前发送数据——这在 Rust 中对应于**部分初始化状态**（`MaybeUninit` 的协议级类比）。
+- **L3 并发**: QUIC 的**流隔离**（stream isolation）是 Rust `Send/Sync` 的理想场景——每个流独立拥有其数据，流间无共享状态。`quinn` 的 `SendStream` 和 `RecvStream` 分别实现 `Send` 和 `Sync`，编译期保证无跨流数据竞争。
+- **L4 形式化**: QUIC 的协议状态机（Idle → Handshake → Connected → Draining → Closed）可通过**会话类型（Session Types）**形式化。Rust 的 `enum` + `match` 是会话类型的工程近似，但缺少**线性通道**（linear channel）的显式表达。
+
+**安全边界**: QUIC 的**连接迁移**（connection migration）允许客户端在 IP 变化后保持连接——这在 Rust 中对应于**资源标识符的生命周期管理**。`quinn` 通过 `ConnectionId` 的类型化封装，确保迁移后的连接身份验证在编译期可验证。
+
+> **[来源: Quinn Docs]** QUIC 的有状态连接天然适合 Rust 的类型状态模式。
+
+---
+
+### 11.6 GUI（egui / iced）：立即模式 vs 保留模式的类型状态
+
+**形式化定位**: `egui`（立即模式）和 `iced`（保留模式/Elm 架构）代表了 GUI 编程的两种**所有权模型**。立即模式每帧重建 UI 状态，保留模式维护持久化的 UI 树——这与 Rust 的所有权模型有不同的交互方式。
+
+**与 L1-L4 的映射**:
+
+- **L1 所有权**: `egui` 的立即模式每帧丢弃 UI 状态，所有权模型简化为**栈分配 + 借用**——无长期状态管理，无循环引用。`iced` 的保留模式维护 `Element` 树，需要 `Rc` 或 arena 分配器管理父子关系。
+- **L2 Trait**: `egui` 的 `Widget` trait 是**纯函数式**的——`ui(ui: &mut Ui) -> Response`，无状态副作用。`iced` 的 `Element` 是**代数数据类型**——`Element::new(widget).on_event(handler)`，事件处理通过 `Message` enum 分发。
+- **L4 形式化**: `egui` 的纯函数式 Widget 对应于**线性逻辑中的消耗性资源**——每帧的 `Ui` 对象被消耗后不可重用。`iced` 的 `Message` 分发对应于**代数效应（Algebraic Effects）**的简化形式——事件是效应，处理器是效应处理器。
+
+**安全边界**: GUI 的**跨线程 UI 更新**是 `Send/Sync` 的典型应用场景。`iced` 的 `Command<Message>` 通过 `Send` 约束保证后台任务的结果可以安全传递回 UI 线程。`egui` 的纯函数式设计避免了跨线程问题——UI 状态完全由单线程的 `Context` 管理。
+
+> **[来源: egui Docs]** 立即模式每帧重建 UI 状态，所有权模型简化为栈分配 + 借用。
+
+---
+
+### 11.7 AI/ML 推理（Candle / Burn）：确定性容器与张量安全
+
+**形式化定位**: `candle`（Hugging Face）和 `burn`（Rust 原生）是 Rust 的 AI 推理框架。其核心洞察：**张量操作**（tensor operations）是所有权模型在**数值计算**上的应用——张量的形状（shape）和类型（dtype）可在编译期验证，避免运行时的形状不匹配错误。
+
+**与 L1-L4 的映射**:
+
+- **L1 类型系统**: `candle` 的 `Tensor` 类型携带**形状信息**（`Shape`）和**数据类型**（`DType`）。矩阵乘法的形状约束（`(m, k) × (k, n) → (m, n)`）在编译期通过 trait 约束验证——这是**依赖类型**（dependent types）的 Rust 近似。
+- **L2 泛型**: `burn` 的 `Backend` trait 抽象了计算后端（CPU/CUDA/WGPU）。`Tensor<B, D>` 的泛型参数 `B` 是后端，`D` 是维度——这是**类型级编程**（type-level programming）的工程应用。
+- **L3 Unsafe**: 张量操作底层依赖 `unsafe` 的 SIMD/BLAS 调用。`candle` 通过 `Storage` trait 封装内存布局，将 `unsafe` 限制在 `src/storage/` 模块内。`burn` 的 `NdArray` 后端完全用 safe Rust 实现，无 `unsafe`。
+- **L4 形式化**: 张量的**形状安全**（shape safety）是 Rust 类型系统向**数组语言**（APL/J）形式化能力的逼近。但 Rust 目前无法在编译期证明**动态形状**（如基于运行时输入的 reshape）的合法性——这需要 const generics 的进一步扩展或 dependent types 的引入。
+
+**安全边界**: AI 推理的**确定性**是关键需求——相同的输入必须产生相同的输出。Rust 的无 GC 确定性内存管理使其成为**确定性容器**的理想载体。`candle` 的 `no_std` 支持使其可在嵌入式设备上运行 LLaMA 模型，无 Python 解释器的非确定性干扰。
+
+> **[来源: Candle Book]** 张量的形状和类型可在编译期验证，避免运行时的形状不匹配。
+
+---
+
+### 11.8 Cargo Script：单文件 Rust 的模块系统压缩
+
+**形式化定位**: Cargo Script（Frontmatter）是单文件 Rust 脚本的**模块系统压缩**。其核心洞察：将 `Cargo.toml` 的依赖声明压缩为文件头部的注释/frontmatter，使单文件脚本成为**自包含的形式化单元**。
+
+**与 L1-L4 的映射**:
+
+- **L6 工具链**: Cargo Script 不是语言特性，而是**包管理系统的语法压缩**。但它改变了 Rust 的**最小可运行单元**——从"crate + Cargo.toml"压缩为"单文件"。
+- **L4 形式化**: 单文件脚本的形式化语义等价于一个**匿名 crate**——文件即模块，frontmatter 即 `Cargo.toml` 的语法糖。这对形式化验证工具的影响是：验证目标从"crate 级"变为"文件级"，粒度更细。
+
+**关键限制**: Cargo Script 的 frontmatter 语法（`cargo +nightly -Zscript`）仍在 FCP 阶段。预计 1.96+ 稳定。
+
+> **[来源: Cargo RFC]** Cargo Script / Frontmatter FCP 已通过。
+
+---
+
+## 变更日志
+
+| 版本 | 日期 | 变更 |
+|:---|:---|:---|
+| v1.0 | 2026-05-12 | 初始版本 |
+| v1.1 | 2026-05-13 | 新增 §11 生态前沿的形式化梳理（Embassy/内核/eBPF/io_uring/QUIC/GUI/AI/Cargo Script）|

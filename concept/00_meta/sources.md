@@ -28,6 +28,9 @@
   - [六、五级来源：社区级（Community Sources）](#六五级来源社区级community-sources)
   - [七、知识来源关系图谱](#七知识来源关系图谱)
   - [八、使用规范](#八使用规范)
+    - [8.1 引用规范](#81-引用规范)
+    - [8.2 来源优先级与 Wikipedia 定位](#82-来源优先级与-wikipedia-定位)
+    - [8.3 版本对齐要求](#83-版本对齐要求)
   - [九、待补充来源](#九待补充来源)
 
 ## 一、来源分级体系
@@ -310,10 +313,32 @@ graph LR
 
 ## 八、使用规范
 
+### 8.1 引用规范
+
 1. **首次引用**：每个概念文件首次出现时，使用完整引用格式
 2. **重复引用**：同一文件内后续引用可使用简写（如 `[TRPL: Ch4]`）
 3. **多来源冲突**：在 `00_meta/disputes.md` 中记录并分析（如存在）
 4. **来源失效**：若 URL 失效，优先查找 Wayback Machine 归档，并更新本文件
+
+### 8.2 来源优先级与 Wikipedia 定位
+
+> **2026-05-13 更新**: Wikipedia 的定位从"二级来源（学术级）"调整为**"辅助参考"**。原因：
+>
+> - Wikipedia 的 Rust 词条更新滞后于语言演进（`Tree Borrows`、`Safety Tags`、`Effects` 等前沿概念缺失或过时）
+> - 概念定义的最终仲裁者应为 **Rust Reference / RFCs / 官方博客**
+> - Wikipedia 仍可用于**概念入门、历史背景、跨语言对比**，但不应作为技术细节的唯一来源
+
+**来源优先级（冲突时）**:
+
+```text
+Rust Reference / RFCs / 官方博客  >  学术论文  >  TRPL  >  工业实践报告  >  Wikipedia  >  社区博客
+```
+
+### 8.3 版本对齐要求
+
+- 引用 Rust 语言特性时，必须标注**稳定版本号**（如 `1.85 stable`）
+- 引用 nightly 特性时，必须标注**跟踪 issue 或 RFC 编号**
+- 引用已弃用特性时，必须标注**弃用版本和替代方案**
 
 ---
 
@@ -325,3 +350,11 @@ graph LR
 - [x] IEEE/ACM 2024-2025 最新 Rust 相关论文 —— ✅ 已补充：PLDI 2024 RefinedRust、OOPSLA 2022 RustHornBelt
 - [x] Rust Foundation 年度报告（工业采用数据） —— ✅ 已补充：Linux 内核、Android、Windows 采用数据
 - [x] Rust 用户调研（Rust Survey 2023/2024） —— ✅ 已补充：生产力、采用障碍、领域分布
+- [x] **2025-2026 最新论文补充**:
+  - PLDI 2025 Tree Borrows Distinguished Paper —— ✅ 已补充
+  - ECOOP 2026 智能合约协调模型 —— ✅ 已补充
+  - arXiv 2026-04 Filament（信息流控制库） —— ✅ 已补充
+  - POPL 2026 Creusot unsafe 代码验证教程 —— ✅ 已补充
+- [x] **Rust 官方博客/Inside Rust 系统性引用** —— ✅ 已纳入一级来源补充
+- [x] **Rust 1.95 Release Notes / releases.rs** —— ✅ 已纳入版本特性跟踪
+- [x] **Embassy Book / Aya Book / Rust for Linux Docs** —— ✅ 已纳入工业级来源
