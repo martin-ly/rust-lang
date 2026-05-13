@@ -1394,6 +1394,69 @@ fn leak_from_overwrite() {
 
 ---
 
+## 九、`unsafe_op_in_unsafe_fn`：权限分离模型（2024 Edition）
+
+> **稳定版本**: Rust 2024 Edition（默认行为） · **1.95 完全稳定**
+> **形式化意义**: **调用者权限（unsafe fn 声明）与实现者权限（unsafe {} 块）的显式分离**
+
+### 9.1 问题：权限的混淆
+
+在 Rust 2021 及之前，`unsafe fn` 的函数体被视为一个**隐式的 `unsafe` 块**：
+
+```rust
+// Rust 2021：隐式 unsafe
+unsafe fn old_style(ptr: *mut u32) -> u32 {
+    *ptr  // 隐式 unsafe，直接解引用
+}
+```
+
+这混淆了两种权限：
+
+- **`unsafe fn`**: "调用此函数需要 unsafe 权限"（约束**调用者**）
+- **`unsafe {}`**: "此块内的操作需要 unsafe 权限"（约束**实现者**）
+
+### 9.2 2024 Edition 的权限分离
+
+```rust
+// Rust 2024：显式权限分离
+unsafe fn new_style(ptr: *mut u32) -> u32 {
+    unsafe { *ptr }  // 实现者的 unsafe 块显式可见
+}
+```
+
+| 权限层级 | 声明方式 | 约束对象 | 可见性 |
+|:---|:---|:---|:---|
+| 调用者权限 | `unsafe fn` | 调用者必须包裹 `unsafe {}` | 函数签名 |
+| 实现者权限 | `unsafe {}` 块 | 实现者必须显式标记 unsafe 操作 | 函数体内 |
+
+### 9.3 形式化模型：权限的模块化
+
+```text
+Rust 2021: unsafe fn f() { *ptr }   // 权限 A ∧ 权限 B 混合
+Rust 2024: unsafe fn f() { unsafe { *ptr } }  // 权限 A → 权限 B（分离）
+
+形式化表达：
+    unsafe fn f:  ∀ caller. CallerHasUnsafePrivilege → CanCall(f)
+    unsafe { e }: ∀ implementer. ImplementerAssertsSafety(e) → CanEvaluate(e)
+```
+
+**关键洞察**: 权限分离使代码审查更清晰——每一行 unsafe 操作都可见。这是安全契约的**模块化**：契约声明（`unsafe fn`）与契约实现（`unsafe {}`）分离。
+
+### 9.4 与 `unsafe extern` + `safe` 的关系
+
+| 机制 | 权限方向 | 粒度 |
+|:---|:---|:---|
+| `unsafe_op_in_unsafe_fn` | 实现者权限分离 | 函数体内 |
+| `unsafe extern` block | 调用者权限声明 | FFI 边界 |
+| `safe` in `extern` block | 调用者权限豁免 | FFI 函数级 |
+
+三者共同构成 Rust **unsafe 权限的模块化体系**：从"块级"向"函数级/操作级"细化。
+
+> **[来源: Rust 2024 Edition Guide]** `unsafe_op_in_unsafe_fn` clarifies the separation between caller and implementer unsafe obligations.
+> **[来源: RFC 2585]** `unsafe_op_in_unsafe_fn` lint.
+
+---
+
 ## 相关概念链接
 
 | 概念 | 文件 | 关系 |

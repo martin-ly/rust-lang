@@ -86,7 +86,12 @@
       - [GATs 与 System F\_ω 的映射](#gats-与-system-f_ω-的映射)
       - [GATs vs HKT（Haskell Higher-Kinded Types）](#gats-vs-hkthaskell-higher-kinded-types)
       - [Lending Iterator 的完整类型论分析](#lending-iterator-的完整类型论分析)
-  - [十、相关概念链接](#十相关概念链接)
+  - [十、Rust 2024 Edition：`use<..>` Precise Capturing（RFC 3617）](#十rust-2024-editionuse-precise-capturingrfc-3617)
+    - [10.1 问题：隐式捕获的泄漏](#101-问题隐式捕获的泄漏)
+    - [10.2 解决方案：显式捕获](#102-解决方案显式捕获)
+    - [10.3 形式化视角：存在类型的区域量化](#103-形式化视角存在类型的区域量化)
+    - [10.4 与 2024 Edition 的关系](#104-与-2024-edition-的关系)
+  - [十一、相关概念链接](#十一相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
@@ -1475,7 +1480,75 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 ---
 
-## 十、相关概念链接
+## 十、Rust 2024 Edition：`use<..>` Precise Capturing（RFC 3617）
+
+> **稳定版本**: Rust 1.82 (stable) · **2024 Edition 默认行为变更**
+> **形式化意义**: 存在类型的区域参数显化——从"隐式闭包"到"显式契约"
+
+### 10.1 问题：隐式捕获的泄漏
+
+`impl Trait`（RPIT）返回类型在 2024 Edition 之前**隐式捕获所有输入生命周期**，导致 API 契约不稳定：
+
+```rust
+// Rust 2021：impl Trait 不捕获生命周期（除非显式使用）
+fn foo<'a>(x: &'a str) -> impl Display { x }  // 不捕获 'a
+
+// 但某些情况下，编译器会意外泄漏生命周期
+// 导致 downstream 代码在升级编译器后编译失败
+```
+
+### 10.2 解决方案：显式捕获
+
+```rust
+// Rust 2024 + use<..>：显式声明捕获哪些生命周期
+fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
+    x  // 只捕获 'a，不捕获 'b
+}
+```
+
+| 语法 | 捕获范围 | 适用场景 |
+|:---|:---|:---|
+| `impl Trait` (2021) | 不捕获 | 简单的返回值抽象 |
+| `impl Trait` (2024) | 捕获所有输入生命周期 | 安全的默认值 |
+| `impl Trait + use<'a>` | 显式捕获指定生命周期 | 精确的 API 契约 |
+| `impl Trait + use<>` | 不捕获任何生命周期 | 完全独立的返回值 |
+
+### 10.3 形式化视角：存在类型的区域量化
+
+```text
+// 2021 Edition：存在类型的隐式闭包
+fn f<'a>(x: &'a str) -> impl Display  ≈  ∃T. T: Display ∧ lifetime(T) = ?
+
+// 2024 Edition：存在类型的显式量化
+fn f<'a>(x: &'a str) -> impl Display + use<'a>  ≈  ∃T. T: Display ∧ lifetime(T) ⊇ 'a
+
+// use<>：空捕获
+fn f() -> impl Display + use<>  ≈  ∃T. T: Display ∧ lifetime(T) = 'static
+```
+
+**关键洞察**: `use<..>` 是 Rust 类型系统向 **System Fω** 的**显式区域量化**（`∀<'a>` / `∃<'a>`）靠拢的一步。此前 Rust 通过隐式推断处理区域参数，现在允许程序员显式声明存在类型的区域约束。
+
+### 10.4 与 2024 Edition 的关系
+
+2024 Edition 的 **breaking change**: `impl Trait` 默认捕获所有输入生命周期。
+
+```rust
+// 2021 Edition 代码
+fn foo<'a>(x: &'a str) -> impl Display { x }
+
+// 2024 Edition 等效代码（自动迁移后）
+fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
+```
+
+**形式化洞察**: 这是 Rust 类型系统从"**隐式推断**"向"**显式契约**"演进的重要一步。显式契约使形式化验证更容易（契约即规约），但增加了学习曲线。
+
+> **[来源: RFC 3617]** Explicit lifetime capture in `impl Trait`.
+> **[来源: Rust 2024 Edition Guide]** RPIT capture rules changed.
+> **[来源: Rustify.rs 2026]** "显式契约使形式化验证更容易，但增加了学习曲线。"
+
+---
+
+## 十一、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

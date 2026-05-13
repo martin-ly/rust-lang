@@ -492,6 +492,7 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 | Effects 系统 | L2 Trait + L3 Async | `02_intermediate/01_traits.md`, `03_advanced/02_async.md` | 学习曲线 |
 | 特化 (Specialization) | L2 Trait | `02_intermediate/01_traits.md` | Coherence 破坏 |
 | Const 泛型扩展 | L2 泛型 | `02_intermediate/02_generics.md` | 编译时间 |
+| `gen` blocks / 协程 | L3 Async + L2 泛型 | `03_advanced/02_async.md` | 异步生成器仍在 RFC 中 |
 | 异步生态统一 | L3 Async | `03_advanced/02_async.md` | 生态系统分裂 |
 | SIMD 标准库 | L3 Unsafe/FFI | `03_advanced/03_unsafe.md` | 平台差异 |
 | 内核 Rust | L1-L3 全部 | 多个文件 | API 不稳定 |

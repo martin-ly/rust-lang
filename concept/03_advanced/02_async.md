@@ -66,6 +66,15 @@
       - [限制与注意事项](#限制与注意事项)
       - [生命周期陷阱](#生命周期陷阱)
   - [十一、国际课程与论文对齐](#十一国际课程与论文对齐)
+  - [十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）](#十二asyncfn-trait-家族异步闭包的类型化185-stablerfc-3668)
+    - [12.1 问题：异步闭包的类型真空](#121-问题异步闭包的类型真空)
+    - [12.2 `AsyncFn` 家族层级](#122-asyncfn-家族层级)
+    - [12.3 关键形式化特性：可重入性限制](#123-关键形式化特性可重入性限制)
+    - [12.4 效果系统原型](#124-效果系统原型)
+  - [十三、`gen` blocks：同步协程的语义定位](#十三gen-blocks同步协程的语义定位)
+    - [13.1 语法与语义](#131-语法与语义)
+    - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
+    - [13.3 形式化定位](#133-形式化定位)
   - [相关概念链接](#相关概念链接)
 
 ## 〇、认知路径（Cognitive Path）
@@ -1558,6 +1567,148 @@ trait DataProvider<'a> {
 > `async/await` 的编译期正确性依赖于状态机的自引用安全性，而 `Pin<&mut Self>` 保证的"地址不变性"在类型论中对应于 **location stability** 约束。当前 borrow checker 对自引用的分析存在过度保守的问题，Polonius 的下一代 Datalog 求解器正试图用路径敏感的 loan-based 语义精确刻画这一边界。
 >
 > 形式化视角见 [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §9.2（Polonius）与 [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §4.1（存在类型与 `impl Trait`）。
+
+---
+
+## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
+
+> **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
+> **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
+
+### 12.1 问题：异步闭包的类型真空
+
+在 1.85 之前，异步闭包 `async |x| { ... }` 无法直接作为 trait bound 使用：
+
+```rust
+// 旧模式：verbose 的 workaround
+async fn process_batch<F, Fut>(items: Vec<String>, callback: F)
+where
+    F: Fn(String) -> Fut,
+    Fut: Future<Output = Result<(), Error>>,
+{ ... }
+
+// 新模式：clean 的 AsyncFn bound
+async fn process_batch(
+    items: Vec<String>,
+    callback: impl AsyncFn(String) -> Result<(), Error>,
+) { ... }
+```
+
+### 12.2 `AsyncFn` 家族层级
+
+```text
+AsyncFnOnce<Args>     // 异步调用一次，消耗所有权
+    ↑
+AsyncFnMut<Args>      // 异步多次调用，可变借用
+    ↑
+AsyncFn<Args>         // 异步多次调用，不可变借用
+```
+
+| 维度 | 同步 `Fn` | 异步 `AsyncFn` |
+|:---|:---|:---|
+| 调用语法 | `f(args)` | `f(args).await` |
+| 返回类型 | `R` | `impl Future<Output = R>` |
+| 可重入性 | 调用后立即可再次调用 | Future 完成前不可重入 |
+| 捕获模式 | `&self` / `&mut self` / `self` | 同左，但返回 Future |
+
+### 12.3 关键形式化特性：可重入性限制
+
+`AsyncFn` 的 `call` 方法返回 `impl Future`，该 Future 可能**借用**闭包捕获的状态。因此：
+
+```rust
+let closure = async |s| { db.save(s).await };
+
+let fut1 = closure("hello");  // Future 借用了 closure 内部状态
+// let fut2 = closure("world");  // ❌ 编译错误：closure 已被借用
+
+fut1.await;  // Future 完成后，借用释放
+let fut2 = closure("world");  // ✅ 现在可以再次调用
+```
+
+**形式化洞察**: `AsyncFn` 将闭包的**同步可重入性**（`Fn` 的 `&self`）与**异步借用生命周期**（Future 的存活期）耦合。这是 Rust 借用检查器在**高阶异步函数**上的自然扩展。
+
+### 12.4 效果系统原型
+
+`AsyncFn` 可视为 Rust 向**显式效果追踪**迈出的第一步：
+
+```rust
+// 同步：无效果
+fn sync_fn(f: impl Fn(i32) -> i32) -> i32 { f(42) }
+
+// 异步：携带 "async 效果"
+async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
+
+// 未来可能的 Effects 语法（讨论中）
+// fn effect_fn(f: impl Fn(i32) -> i32) -> i32 async { f(42).await }
+```
+
+**形式化洞察**: `AsyncFn` 不是独立的类型系统扩展，而是 `Fn` + `Future` 的组合。但它在**函数签名层面**显式标记了"异步效果"，为未来的 `effect` 关键字提供了设计原型。
+
+> **[来源: RFC 3668]** Async closures trait family.
+> **[来源: Rust 1.85 Release Notes]** Async closures stabilized.
+> **[来源: rustify.rs 2026]** "`AsyncFn` 是 Rust 异步编程的类型系统拼图的最后一块。"
+
+---
+
+## 十三、`gen` blocks：同步协程的语义定位
+
+> **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
+> **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
+
+### 13.1 语法与语义
+
+```rust
+// 手动状态机（旧模式）
+struct Fibonacci { a: u64, b: u64 }
+impl Iterator for Fibonacci {
+    type Item = u64;
+    fn next(&mut self) -> Option<Self::Item> {
+        let val = self.a;
+        (self.a, self.b) = (self.b, self.a + self.b);
+        Some(val)
+    }
+}
+
+// gen block（新模式）
+fn fibonacci() -> impl Iterator<Item = u64> {
+    gen move {
+        let (mut a, mut b) = (0u64, 1u64);
+        loop {
+            yield a;
+            (a, b) = (b, a + b);
+        }
+    }
+}
+```
+
+### 13.2 与 `async` 的对偶关系
+
+| 维度 | `async` block | `gen` block |
+|:---|:---|:---|
+| 状态机类型 | `Future`（协作式多任务） | `Iterator`（协作式生成） |
+| 暂停关键字 | `.await`（等待外部 Future） | `yield`（产生值给调用者） |
+| 恢复方式 | 运行时 poll | 调用者 `next()` |
+| 异步能力 | ✅ 可用 `.await` | ❌ 不可用 `.await` |
+| 返回实现 | `impl Future<Output = T>` | `impl Iterator<Item = T>` |
+
+### 13.3 形式化定位
+
+`gen` block 是 **Continuation** 的受限形式：
+
+```text
+async block  =  λ(). suspend(await) → Future   // 协作式多任务
+gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
+
+两者的编译期降阶（desugaring）共享同一套状态机转换框架：
+    - 暂停点 → enum 变体
+    - 局部变量 → 状态机字段
+    - 恢复执行 → match 分支 + 状态跳转
+```
+
+**关键限制**: `gen` block 是**同步的**。异步生成器（`Stream`，支持 `.await` + `yield`）仍在 RFC 讨论中。
+
+> **[来源: rust-lang/rust #117078]** Gen blocks tracking issue.
+> **[来源: Rust 1.95 Release Notes]** `gen` blocks stabilized with feature gate.
 
 ---
 
