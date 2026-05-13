@@ -289,7 +289,274 @@ fn extract_sprites(
 
 ---
 
-## 六、与 L1-L4 的关系映射
+## 六、Bevy RenderGraph 与 wgpu 的所有权交互
+
+> **[来源: Bevy Render Graph Docs; wgpu Documentation; WebGPU Spec]** ✅
+
+Bevy 的渲染管线通过 `RenderGraph` 将 GPU 资源管理抽象为**节点依赖图**，其设计与 Rust 所有权模型深度同构——每个渲染节点声明其资源需求（读/写），图调度器在编译期（节点注册时）和运行期（图执行时）双重验证资源生命周期安全。
+
+### 6.1 RenderGraph 的节点与边
+
+RenderGraph 由**节点（Node）**和**边（Edge）**组成：
+
+| 图元素 | Rust 类型表达 | 所有权语义 |
+|:---|:---|:---|
+| **Node** | `impl Node` 或 `NodeLabel` | 节点本身无状态，通过 `run()` 的参数获取资源 |
+| **NodeInput** | `Slot` 系统（`SlotLabel` + `SlotType`） | 输入槽位 = 对上游节点输出的 `&T` 借用 |
+| **NodeOutput** | `SlotValue`（`TextureView`、`Buffer` 等） | 输出槽位 = 由当前节点 `&mut T` 独占写入，之后可转移所有权 |
+| **Edge** | `NodeEdge::SlotEdge` | 声明资源从输出槽到输入槽的转移关系 |
+
+```rust,ignore
+// ✅ Bevy: 自定义渲染节点声明资源需求
+impl Node for MyRenderNode {
+    fn input(&self) -> Vec<SlotInfo> {
+        vec![
+            SlotInfo::new("color_texture", SlotType::TextureView),
+            SlotInfo::new("depth_texture", SlotType::TextureView),
+        ]
+    }
+
+    fn output(&self) -> Vec<SlotInfo> {
+        vec![
+            SlotInfo::new("output_texture", SlotType::TextureView),
+        ]
+    }
+
+    fn run(
+        &self,
+        graph: &mut RenderGraphContext,
+        render_context: &mut RenderContext,
+        world: &World,
+    ) -> Result<(), NodeRunError> {
+        // 从输入槽位获取 TextureView（&T 借用）
+        let color = graph.get_input_texture("color_texture")?;
+        let depth = graph.get_input_texture("depth_texture")?;
+
+        // 创建 CommandEncoder（&mut T 独占）
+        let mut encoder = render_context
+            .render_device()
+            .create_command_encoder(&wgpu::CommandEncoderDescriptor::default());
+
+        // 从输出槽位获取可写的 RenderPass（所有权转移进 Encoder）
+        {
+            let mut pass = encoder.begin_render_pass(&wgpu::RenderPassDescriptor {
+                color_attachments: &[Some(wgpu::RenderPassColorAttachment {
+                    view: color,      // &TextureView 借用
+                    resolve_target: None,
+                    ops: wgpu::Operations::default(),
+                })],
+                depth_stencil_attachment: Some(wgpu::RenderPassDepthStencilAttachment {
+                    view: depth,      // &TextureView 借用
+                    depth_ops: Some(wgpu::Operations::default()),
+                    stencil_ops: None,
+                }),
+                ..default()
+            });
+
+            // 绘制命令...
+        } // RenderPass 在这里被消费（drop），所有权归还 encoder
+
+        // CommandEncoder 被 finish 后所有权转移给 Queue
+        let command_buffer = encoder.finish();
+        render_context.render_queue().submit(vec![command_buffer]);
+
+        // 将输出纹理注册到输出槽位
+        graph.set_output("output_texture", output_texture)?;
+        Ok(())
+    }
+}
+```
+
+> **RenderGraph 的所有权层级**: `TextureView`（借用）→ `RenderPass`（`&mut encoder` 的临时借用）→ `CommandBuffer`（`encoder.finish()` 消耗所有权）→ `Queue::submit()`（最终所有权转移）。每一层消费都确保前一层不再可访问——**线性使用链**。
+
+### 6.2 Extract → Prepare → Render 三阶段的所有权转移
+
+Bevy 将渲染分为三个阶段，对应所有权的逐步转移：
+
+```mermaid
+graph LR
+    A[MainWorld<br/>游戏逻辑状态] -->|Extract: Send| B[RenderWorld<br/>渲染专用状态]
+    B -->|Prepare: &mut| C[RenderGraph<br/>节点参数]
+    C -->|Render: consume| D[CommandBuffer<br/>GPU 命令]
+    D -->|Submit: move| E[Queue<br/>驱动层]
+```
+
+| 阶段 | 所有权操作 | Rust 保证 |
+|:---|:---|:---|
+| **Extract** | `Extract<T>` 要求 `T: Send`，将 MainWorld 的 Component 复制/移动到 RenderWorld | 跨线程数据传递安全 |
+| **Prepare** | RenderWorld 中的资源被 `&` / `&mut` 借出给 RenderNode | 同一资源不被多个节点 `&mut` |
+| **Render** | `CommandEncoder` 被 `&mut` 借出生成 `RenderPass`，`finish()` 消耗 encoder 生成 `CommandBuffer` | 命令编码器单次消费 |
+| **Submit** | `CommandBuffer` 所有权转移给 `Queue` | 提交后无 use-after-submit |
+
+### 6.3 wgpu 资源的线性类型近似
+
+wgpu 的 API 设计刻意模仿**线性类型（Linear Types）**——核心资源只能被**消费一次**：
+
+| wgpu 资源 | 创建 | 使用 | 消费 | 不可复制性 |
+|:---|:---|:---|:---|:---|
+| `CommandEncoder` | `device.create_command_encoder()` | `begin_render_pass()` 借用 `&mut` | `encoder.finish()` → `CommandBuffer` | `finish()` 消耗 `self`，防止二次提交 |
+| `RenderPass` | `encoder.begin_render_pass()` | 绘制命令 | `drop`（隐式）| 生命周期绑定到 `&mut encoder`，不能逃逸 |
+| `CommandBuffer` | `encoder.finish()` | 无（已编码命令）| `queue.submit([cb])` | `submit` 接受 `CommandBuffer`，之后不可再用 |
+| `TextureView` | `texture.create_view()` | 作为 attachment 绑定 | 无（可多次绑定不同 pass）| 借用自 `Texture`，生命周期不超过纹理 |
+
+```rust,ignore
+// ❌ 编译错误：encoder 已被 finish 消费
+let mut encoder = device.create_command_encoder(...);
+let cb = encoder.finish();
+queue.submit(vec![cb]);
+// encoder.begin_render_pass(...); // 错误：encoder 已被 move
+
+// ❌ 编译错误：RenderPass 生命周期不能超过 encoder 的 borrow 范围
+let pass: RenderPass;
+{
+    let mut encoder = device.create_command_encoder(...);
+    pass = encoder.begin_render_pass(...); // 错误：pass 引用 encoder，encoder 在此作用域结束后失效
+}
+```
+
+> **核心洞察**: wgpu 的 API 通过 Rust 所有权系统实现了**GPU 资源的编译期线性检查**——CommandEncoder 的一次性消费、RenderPass 的借用生命周期、TextureView 的不超过纹理生命期，这些都是线性类型理论在 GPU 编程中的工程实现。
+
+> **来源**: [Bevy — Render Graph Internals] · [wgpu — API Design Rationale] · [WebGPU — Command Encoder Spec]
+
+---
+
+## 七、确定性模拟与回滚网络（Rollback Netcode）
+
+> **[来源: GGPO Docs; Backroll Crate; Bevy GGRS Plugin; Fighting Game Network Architecture]** ✅
+
+格斗游戏、平台格斗（如《任天堂明星大乱斗》）和快节奏竞技游戏对网络延迟极度敏感。**回滚网络（Rollback Netcode）**通过**确定性模拟**实现帧级同步：所有客户端在相同输入下必须产生完全相同的世界状态，从而允许本地预测 + 远程校正。
+
+### 7.1 确定性模拟的核心要求
+
+确定性模拟要求：**相同初始状态 + 相同输入序列 = 完全相同的状态序列**。
+
+| 确定性维度 | 挑战 | Rust/ECS 解决方案 |
+|:---|:---|:---|
+| **逻辑确定性** | System 执行顺序 | Bevy 的 `SystemSet` 和显式依赖图固定执行顺序 |
+| **数值确定性** | 浮点数运算（`f32` 加法结合律不成立） | 使用 `fixed` 定点数库（如 `fixed` crate）或 `libm` 的确定性实现 |
+| **随机确定性** | `rand::thread_rng()` 非确定性 | 使用种子化 PRNG（`StdRng::seed_from_u64`），将随机状态作为 Resource |
+| **哈希确定性** | `HashMap` 遍历顺序非确定性 | 使用 `BTreeMap` 或 `IndexMap`；Bevy 的 `Query` 迭代按 archetype 顺序，确定性的 |
+| **时间确定性** | `Instant::now()` 非确定性 | 使用模拟时间（`FixedTime` Resource），而非系统时间 |
+
+```rust,ignore
+// ✅ Bevy: 确定性游戏的 FixedUpdate 调度
+use bevy::prelude::*;
+use fixed::types::I20F12; // 定点数：20 位整数 + 12 位小数
+
+#[derive(Resource)]
+struct GameRandom {
+    rng: StdRng,
+}
+
+#[derive(Resource)]
+struct SimTime {
+    frame: u64,
+    fixed_delta: I20F12,
+}
+
+fn physics_system(
+    mut query: Query<(&mut Transform, &Velocity)>,
+    time: Res<SimTime>,
+) {
+    // 使用定点数而非 f32，确保跨平台确定性
+    for (mut transform, velocity) in query.iter_mut() {
+        transform.translation.x += (velocity.x * time.fixed_delta).to_num::<i32>();
+    }
+}
+
+// 在 FixedUpdate 调度中注册，确保固定时间步长
+app.add_systems(
+    FixedUpdate,
+    physics_system.in_set(PhysicsSet::Step),
+);
+```
+
+### 7.2 回滚网络的工作原理
+
+```mermaid
+sequenceDiagram
+    participant A as 本地客户端 (P1)
+    participant B as 远程客户端 (P2)
+    participant S as 模拟状态
+
+    A->>S: 帧 N: 输入 A↑
+    A->>B: 发送输入 A↑ (延迟 2 帧)
+    S->>S: 预测: 假设 P2 输入 = 上一帧
+    Note over S: 本地显示预测状态
+
+    B->>A: 帧 N: 收到输入 B↑ (延迟到达)
+    A->>S: 发现远程输入与预测不符
+    S->>S: **回滚**: 恢复到帧 N-2 的快照
+    S->>S: 用真实输入重新模拟 N-2 → N
+    Note over S: 状态校正，可能产生跳帧
+```
+
+| 回滚阶段 | ECS 实现 | 所有权考量 |
+|:---|:---|:---|
+| **快照（Snapshot）** | 每帧将 `World` 的 Component 数据序列化到 `Vec<u8>` | 快照是 World 状态的 deep copy，不影响当前模拟的所有权 |
+| **预测（Prediction）** | 本地玩家输入立即应用，远程玩家输入假设为上一帧 | `&mut Component` 的独占保证预测期间的本地状态一致性 |
+| **回滚（Rollback）** | 从快照恢复 World 状态，丢弃当前帧后的所有修改 | `World::clear_entities()` + `World::spawn_batch(snapshot)`，所有权重新初始化 |
+| **重模拟（Resimulation）** | 从回滚点到当前帧，用真实输入重新执行所有 System | `Commands` 队列在重模拟期间累积，阶段边界统一应用 |
+
+### 7.3 Bevy GGRS 集成实践
+
+`bevy_ggrps`（基于 `backroll` crate）是 Bevy 的回滚网络官方插件：
+
+```rust,ignore
+// ✅ Bevy GGRS: 回滚网络配置
+use bevy_ggrs::*;
+use ggrs::*;
+
+fn main() {
+    let mut app = App::new();
+
+    // GGRS 会话配置
+    let sess_build = SessionBuilder::<Config>::new()
+        .with_num_players(2)
+        .with_input_delay(2); // 2 帧输入延迟，平滑网络抖动
+
+    // 注册回滚类型的 Component
+    app.rollback_component_with_clone::<Transform>();
+    app.rollback_component_with_clone::<Velocity>();
+    app.rollback_resource_with_clone::<SimTime>();
+
+    // 注册回滚系统
+    app.add_systems(
+        ReadInputs,
+        read_local_inputs, // 读取本地控制器输入
+    );
+    app.add_systems(
+        GgrsSchedule,
+        (physics_system, collision_system, animation_system).chain(),
+    );
+
+    app.run();
+}
+
+// 输入必须实现 Compress/Decompress（位压缩）
+#[derive(Copy, Clone, PartialEq, Eq, Pod, Zeroable)]
+struct PlayerInput {
+    buttons: u8, // 位掩码：上/下/左/右/攻击/跳跃
+}
+```
+
+> **GGRS 的关键设计**: 回滚类型必须通过 `rollback_component_with_clone` 注册，GGRS 在后台每帧自动快照这些 Component 的 clone。Rust 的 `Clone` trait 确保了快照的 deep copy 是显式的、无隐式共享可变状态的。
+
+### 7.4 非确定性陷阱与 Rust 的防御
+
+| 陷阱 | 典型表现 | Rust 检测/防御 |
+|:---|:---|:---|
+| **浮点不一致** | 不同 CPU 架构（x86 vs ARM）的 `f32` 结果不同 | `static_assertions` + `fixed` 定点数替代；CI 跨架构测试 |
+| **无序集合遍历** | `HashMap`/`HashSet` 迭代顺序影响 System 执行 | 使用 `BTreeMap` 或 `IndexMap`；Clippy lint 检测 `HashMap` 遍历依赖 |
+| **系统时间依赖** | `Instant::now()` 导致不同客户端时间基准不同 | 模拟时间 Resource 强制所有逻辑使用 `Res<SimTime>` |
+| **指针地址依赖** | `Entity` 的生成顺序影响哈希 | Bevy 的 `Entity` 使用递增整数，确定性的 |
+| **并发不确定性** | `rayon` 并行迭代结果顺序不确定 | 回滚路径禁用并行 System，或使用确定性的 `ParallelIterator` |
+
+> **来源**: [GGPO — Rollback Network Design] · [backroll — Rust Rollback Library] · [bevy_ggrs — Plugin Docs] · [Fighting Game Network Architecture — GDC Talk]
+
+---
+
+## 八、与 L1-L4 的关系映射
 
 > **[来源: Rust Concurrency Book; Rayon Docs]** ✅
 
@@ -304,12 +571,12 @@ fn extract_sprites(
 
 ---
 
-## 七、待补充与演进方向（TODOs）
+## 九、待补充与演进方向（TODOs）
 
 > **[来源: Data-Oriented Design Book; Richard Fabian]** ✅
 
-- [ ] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所有权交互细节
-- [ ] **高**: 补充确定性模拟（deterministic simulation）在 Rust ECS 中的实现（如回合制/格斗游戏回滚网络）
+- [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所有权交互细节 —— 已完成 §六 —— 2026-05-14
+- [x] **高**: 补充确定性模拟（deterministic simulation）在 Rust ECS 中的实现（如回合制/格斗游戏回滚网络） —— 已完成 §七 —— 2026-05-14
 - [ ] **中**: 补充 `no_std` 游戏开发（嵌入式/掌机）的 ECS 约束
 - [ ] **低**: 跟踪 Bevy 0.15+ 的关系型 ECS（relations）对所有权模型的扩展
 

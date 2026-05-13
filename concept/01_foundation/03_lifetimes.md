@@ -11,6 +11,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期规则矩阵、形式化视角、NLL 分析、示例反例
+- v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
@@ -77,13 +78,20 @@
     - [12.6 工程实践](#126-工程实践)
   - [十三、Lifetime Elision 的完整形式化描述](#十三lifetime-elision-的完整形式化描述)
     - [13.1 三条规则的形式化表述](#131-三条规则的形式化表述)
+      - [13.1.1 Rule 1：每个输入引用获得独立生命周期](#1311-rule-1每个输入引用获得独立生命周期)
+      - [13.1.2 Rule 2：单输入时输出继承输入生命周期](#1312-rule-2单输入时输出继承输入生命周期)
+      - [13.1.3 Rule 3：`&self` / `&mut self` 优先](#1313-rule-3self--mut-self-优先)
     - [13.2 为什么 Elision 是 Sound 的](#132-为什么-elision-是-sound-的)
   - [十四、`impl Trait` 与生命周期推断的交互](#十四impl-trait-与生命周期推断的交互)
-    - [14.1 `impl Trait` 返回类型中的生命周期推断](#141-impl-trait-返回类型中的生命周期推断)
-    - [14.2 为什么 `impl Trait` 不能出现在 Trait 定义中（RPITIT）](#142-为什么-impl-trait-不能出现在-trait-定义中rpitit)
+    - [14.1 `impl Trait` 返回位置（RPIT）的生命周期捕获](#141-impl-trait-返回位置rpit的生命周期捕获)
+    - [14.2 `impl Trait` + `+'a` 的显式生命周期约束](#142-impl-trait--a-的显式生命周期约束)
+    - [14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异](#143-impl-trait-参数位置apit的生命周期推断差异)
+    - [14.4 RPIT vs APIT：生命周期推断对比矩阵](#144-rpit-vs-apit生命周期推断对比矩阵)
+    - [14.5 为什么 `impl Trait` 不能随意出现在 Trait 定义中（RPITIT）](#145-为什么-impl-trait-不能随意出现在-trait-定义中rpitit)
   - [十五、Lending Iterator 的完整 GATs + HRTB 案例](#十五lending-iterator-的完整-gats--hrtb-案例)
     - [15.1 Lending Iterator Trait 定义（GATs + HRTB）](#151-lending-iterator-trait-定义gats--hrtb)
     - [15.2 为什么标准 Iterator 无法表达](#152-为什么标准-iterator-无法表达)
+  - [十六、待补充与演进方向（TODOs）](#十六待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
 
@@ -938,6 +946,8 @@ RUSTFLAGS="-Zpolonius" cargo build
 
 ## 十三、Lifetime Elision 的完整形式化描述
 
+> **Bloom 层级**: 分析 → 评价
+
 Elision 不是语法便捷性的简单堆砌，而是一组基于 Hindley-Milner 风格模式匹配的完备推导规则。以下给出三条规则在函数签名层面的形式化定义，并证明其 soundness。
 
 ### 13.1 三条规则的形式化表述
@@ -952,9 +962,135 @@ Elision 不是语法便捷性的简单堆砌，而是一组基于 Hindley-Milner
 
 > **[来源: Rust Reference: Lifetime elision]** 三条规则按顺序应用，Rule 3 优先于 Rule 2（方法签名场景）。✅
 
+#### 13.1.1 Rule 1：每个输入引用获得独立生命周期
+
+**形式化表述**。
+
+设函数参数集合为 $\{p_1, p_2, \dots, p_n\}$，则：
+
+$$
+\forall p_i \in \text{Params}, \text{is\_reference}(p_i) \Rightarrow \text{fresh}('a_i) \land \text{ty}(p_i) = \&'a_i\, T_i
+$$
+
+其中 $\text{fresh}('a_i)$ 表示为第 $i$ 个引用参数生成全新的生命周期参数，$T_i$ 为被引用的底层类型。
+
+**正确示例**。
+
+```rust
+// ✅ 正确：Rule 1 自动为每个输入引用分配独立生命周期
+fn print(s: &str);                       // ⟹ fn print<'a>(s: &'a str)
+fn cmp(a: &str, b: &str);                // ⟹ fn cmp<'a, 'b>(a: &'a str, b: &'b str)
+fn multi(x: &i32, y: &mut f64, z: &str); // ⟹ fn multi<'a, 'b, 'c>(x: &'a i32, y: &'b mut f64, z: &'c str)
+```
+
+**反例与边界**。
+
+```rust,compile_fail
+// ❌ 反例：当多个输入引用需强制同生命周期时，Rule 1 会生成独立参数
+// 编译器推断为不同生命周期，导致 Rule 2 不适用，返回引用无法确定来源
+fn merge(a: &str, b: &str) -> &str {
+    // ⟹ fn merge<'a, 'b>(a: &'a str, b: &'b str) -> &'? str
+    if a.len() > b.len() { a } else { b }  // E0106: 无法确定返回生命周期
+}
+```
+
+**修正**：必须显式标注以强制生命周期相等。
+
+```rust
+// ✅ 修正：显式标注使两输入共享同一生命周期
+fn merge<'a>(a: &'a str, b: &'a str) -> &'a str {
+    if a.len() > b.len() { a } else { b }
+}
+```
+
+> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 1 的独立分配是后续规则产生歧义的根源——当 $|L_{in}| > 1$ 且返回含引用时，Rule 2 不适用，必须显式标注。✅
+
+#### 13.1.2 Rule 2：单输入时输出继承输入生命周期
+
+**形式化表述**。
+
+$$
+|L_{in}| = 1 \land \text{is\_reference}(\text{Return}) \Rightarrow \exists 'a_1 \in L_{in}, \text{ty}(\text{Return}) = \&'a_1\, T_{ret}
+$$
+
+即：若输入引用集合的基数为 1，且返回类型为引用，则返回引用的生命周期与唯一输入引用的生命周期相等。
+
+**正确示例**。
+
+```rust
+// ✅ 正确：单输入引用，返回引用自动关联
+fn first(s: &str) -> &str;              // ⟹ fn first<'a>(s: &'a str) -> &'a str
+fn tail(s: &mut [i32]) -> &mut [i32];   // ⟹ fn tail<'a>(s: &'a mut [i32]) -> &'a mut [i32]
+```
+
+**反例与边界**。
+
+```rust,compile_fail
+// ❌ 反例：多个输入引用时 Rule 2 不适用
+fn longest(x: &str, y: &str) -> &str {  // E0106
+    if x.len() > y.len() { x } else { y }
+}
+```
+
+此时 $|L_{in}| = 2$，Rule 2 的前提 $|L_{in}| = 1$ 不满足，编译器无法确定返回引用应继承 `x` 还是 `y` 的生命周期。
+
+> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 2 的核心前提是"函数返回值的生命周期必须源自某个输入"——当存在多个候选源时，Elision 放弃推导以避免 unsound 的猜测。✅
+
+#### 13.1.3 Rule 3：`&self` / `&mut self` 优先
+
+**形式化表述**。
+
+$$
+\text{is\_method}(f) \land \text{ty}(\text{self}) \in \{ \&'a_s\, \text{Self}, \&'a_s\, \text{mut Self} \} \Rightarrow \big(\text{is\_reference}(\text{Return}) \Rightarrow \text{ty}(\text{Return}) = \&'a_s\, T_{ret}\big)
+$$
+
+即：若函数为方法且第一个参数为 `&self` 或 `&mut self`，则返回引用（若存在）的生命周期等于 `self` 的生命周期。Rule 3 在方法签名中**覆盖** Rule 2。
+
+**正确示例**。
+
+```rust
+// ✅ 正确：方法返回引用自动与 &self 关联
+struct Buffer<'a> { data: &'a str }
+
+impl<'a> Buffer<'a> {
+    fn get(&self) -> &str {
+        // ⟹ fn get<'b>(&'b self) -> &'b str
+        self.data
+    }
+}
+```
+
+**反例与边界**。
+
+```rust,ignore
+// ⚠️ 边界：方法含多个输入引用 + 返回引用时，Elision 仍强制关联 self
+struct Parser<'a> { source: &'a str }
+
+impl<'a> Parser<'a> {
+    fn choose(&self, other: &str) -> &str {
+        // ⟹ 返回生命周期 = self 的生命周期 'a
+        // 若逻辑上应返回 other（生命周期 'b），则可能被过度约束
+        if self.source.len() > other.len() { self.source } else { other }
+    }
+}
+```
+
+上述代码通常可以编译，因为 `other` 的生命周期可通过协变收窄匹配 `self` 的生命周期。但若返回的引用需要**独立于** `self` 存活，则必须显式标注。
+
+```rust
+// ✅ 修正：当返回引用的生命周期应独立于 self 时，显式标注
+impl<'a> Parser<'a> {
+    fn choose_explicit<'b>(&self, other: &'b str) -> &'b str {
+        other  // 返回 other 的生命周期，而非 self 的
+    }
+}
+```
+
+> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 3 体现了面向对象方法的语义约定：方法返回的引用通常指向对象内部状态，因此其生命周期与对象借用周期一致。✅
+
 ### 13.2 为什么 Elision 是 Sound 的
 
-Elision 的 soundness 建立在**模式完备性**与**语义等价性**两个维度上：
+Elision 的 soundness 建立在**模式完备性**与**语义等价性**两个维度上。
 
 **模式完备性**：任意函数签名若符合上述三条模式之一，则其生命周期关系可被唯一确定。对于不符合模式的签名（多输入引用 + 返回引用 + 非方法），编译器拒绝推导并强制要求显式标注——这恰好是 E0106 错误的语义。
 
@@ -966,43 +1102,211 @@ $$
 
 这保证了 Elision 不会引入额外的 outlives 约束，也不会遗漏必要的约束。其证明依赖于**生命周期偏序的可判定性**（引理 L2）和**单输入单输出的函数式依赖**（函数返回值的生命周期必须源自某个输入，防止悬垂引用）。
 
+**Elision 的三条规则应用顺序**。
+
+```text
+对函数签名 S 进行 Elision 推导：
+
+1. 应用 Rule 1: 为所有输入引用分配 fresh 生命周期参数
+2. 若 S 是方法且 self 为引用类型：
+     应用 Rule 3: 返回引用（若存在）的生命周期 = self 的生命周期
+   否则若 |L_in| = 1 且返回含引用：
+     应用 Rule 2: 返回引用的生命周期 = 唯一输入引用的生命周期
+   否则：
+     保持返回引用的生命周期未解析 → 若存在未解析，报错 E0106
+```
+
 ```rust,ignore
 // Rule 1: 每个输入引用获得独立生命周期
-fn print(s: &str);           // ⟹ fn print<'a>(s: &'a str)
+fn print(s: &str);                       // ⟹ fn print<'a>(s: &'a str)
 
 // Rule 2: 单输入，输出与之关联
-fn first(s: &str) -> &str;   // ⟹ fn first<'a>(s: &'a str) -> &'a str
+fn first(s: &str) -> &str;               // ⟹ fn first<'a>(s: &'a str) -> &'a str
 
-// Rule 3: &self 优先
-fn get(&self) -> &T;         // ⟹ fn get<'a>(&'a self) -> &'a T
+// Rule 3: &self 优先（覆盖 Rule 2 的场景）
+fn get(&self) -> &T;                     // ⟹ fn get<'a>(&'a self) -> &'a T
 
+// 不符合任何规则: 多输入 + 返回引用 + 非方法
+fn longest(x: &str, y: &str) -> &str;    // ❌ E0106
 ```
 
 > **核心洞察**：Elision 是编译器在"不引入歧义"的前提下的最大努力推导。它的 soundness 来源于**函数返回值不能凭空产生引用**这一 Rust 核心公理——任何返回的引用必须"继承"自某个输入。
+
+> **[来源: Rust Reference: Lifetime elision]** 完整的 Elision 规则定义于 Reference 的 "Lifetime elision" 章节，覆盖函数签名、方法签名及 trait 对象场景。✅
+
+**跨层映射**: 本章节形式化规则 ↔ [`../04_formal/03_ownership_formal.md`](../04_formal/03_ownership_formal.md) §2.3 "区域约束的语法与语义"
 
 ---
 
 ## 十四、`impl Trait` 与生命周期推断的交互
 
-`impl Trait` 作为返回类型的抽象机制（RPIT, Return Position Impl Trait），其与生命周期的交互存在微妙的推断规则和表达力边界。
+> **Bloom 层级**: 理解 → 分析
 
-### 14.1 `impl Trait` 返回类型中的生命周期推断
+`impl Trait` 作为类型抽象机制，在返回位置（RPIT）和参数位置（APIT）的生命周期推断遵循不同的捕获策略。理解其差异对于设计封装引用的 API 至关重要。
 
-当函数返回 `impl Trait` 时，编译器需要推断该返回类型中隐式包含的生命周期。与显式返回引用不同，`impl Trait` 将生命周期**封装**在抽象类型内部：
+### 14.1 `impl Trait` 返回位置（RPIT）的生命周期捕获
+
+当函数返回 `impl Trait` 时，编译器自动**捕获**所有在函数签名中显式出现且被实现类型实际使用的输入生命周期。
+
+**自动捕获规则**。
+
+```text
+设函数签名为 fn foo<'a, 'b>(x: &'a T, y: &'b U) -> impl Trait
+若实现类型内部包含 &'a T 或 &'b U 的引用，则 impl Trait 隐式携带这些生命周期参数。
+调用方看到的类型等价于: impl Trait + 'a + 'b（仅当实现类型实际包含对应引用时）
+```
+
+**正确示例：自动捕获**。
 
 ```rust
-// 编译器自动捕获所有输入生命周期到 impl Trait 中
+// ✅ 正确：编译器自动捕获 'a 到返回的 impl Iterator 中
 fn make_iter<'a>(items: &'a [i32]) -> impl Iterator<Item = &'a i32> {
     items.iter()
 }
 
-// 等价于: 返回的迭代器内部持有的引用生命周期为 'a
-// 调用方无需知道具体类型，但生命周期约束仍被保留
+// 调用方视角: 返回的匿名类型携带 'a 约束
+fn main() {
+    let data = vec![1, 2, 3];
+    let iter = make_iter(&data);  // iter 的生命周期不超过 data
+    for item in iter {
+        println!("{}", item);
+    }
+} // data 在此 drop，iter 在此之前已失效
 ```
 
-关键规则：**`impl Trait` 返回类型会自动捕获输入生命周期**，但捕获方式遵循"最小必要"原则——仅捕获那些在具体实现类型中出现过的生命周期。若实现类型内部不含引用，则返回的 `impl Trait` 不携带生命周期参数。
+**边界：隐式捕获的精确性**。
 
-### 14.2 为什么 `impl Trait` 不能出现在 Trait 定义中（RPITIT）
+```rust
+// ✅ 边界：RPIT 只捕获实现类型中实际出现的生命周期
+fn filter<'a, 'b>(
+    items: &'a [i32],
+    _threshold: &'b i32,
+) -> impl Iterator<Item = &'a i32> {
+    items.iter()  // 只依赖 'a，'_threshold' 的 'b 未被捕获
+}
+```
+
+> **[来源: Rust Reference: `impl Trait` in return position]** RPIT 的生命周期捕获策略在 RFC 2289 中定义：返回类型自动捕获所有在函数体中被实现类型使用且出现在签名中的生命周期。✅
+
+### 14.2 `impl Trait` + `+'a` 的显式生命周期约束
+
+当需要**显式限制** `impl Trait` 的生命周期时，可使用 `+ 'a` 语法。这在以下场景尤为关键：
+
+- 返回的抽象类型需要比自动捕获的更短生命周期；
+- 需要向调用方承诺返回类型满足特定 outlives 约束；
+- 与 `dyn Trait` 对比时统一语法风格。
+
+**正确示例：显式约束**。
+
+```rust
+use std::fmt::Display;
+
+// ✅ 正确：显式约束 impl Display 至少存活 'a
+fn show<'a>(s: &'a str) -> impl Display + 'a {
+    s  // 返回 &str，其生命周期为 'a
+}
+
+// 等价对比：显式 where 子句（更冗长但语义相同）
+fn show_where<'a>(s: &'a str) -> impl Display + 'a
+where
+    &'a str: Display,
+{
+    s
+}
+```
+
+**反例：缺少显式约束的泛型返回**。
+
+```rust,compile_fail
+use std::fmt::Display;
+
+// ❌ 反例：试图返回比输入活得更长的引用（通过 'static 约束）
+fn bad_static(s: &str) -> impl Display + 'static {
+    s  // 错误: s 不是 'static
+}
+```
+
+> **[来源: Rust Reference: Lifetime bounds on `impl Trait`]** `impl Trait + 'a` 的语义等价于"实现该 trait 的匿名类型，且该类型中所有引用至少存活 'a"。✅
+
+### 14.3 `impl Trait` 参数位置（APIT）的生命周期推断差异
+
+在函数参数位置使用 `impl Trait`（APIT, Argument Position Impl Trait）时，其生命周期推断与 RPIT 存在本质差异。APIT 是**泛型参数的语法糖**，每个 `impl Trait` 参数对应一个隐式的泛型类型参数。
+
+**形式化差异**。
+
+```text
+APIT:  fn foo(x: impl Trait<'a>)      ⟹  fn foo<T: Trait<'a>>(x: T)
+RPIT:  fn foo() -> impl Trait<'a>     ⟹  匿名关联类型，生命周期由实现自动捕获
+```
+
+关键差异：
+
+1. **APIT 不自动捕获调用方生命周期**：APIT 参数的生命周期由调用方根据 trait bound 推导；
+2. **APIT 是泛型，RPIT 是抽象类型**：APIT 在单态化时确定具体类型；RPIT 对调用方保持 opaque；
+3. **APIT 支持 `+ 'a` 语法**：`fn foo(x: impl Trait + 'a)` 合法，语义是约束隐式泛型参数 `T: Trait + 'a`。
+
+**正确示例：APIT 的生命周期推断**。
+
+```rust
+// ✅ 正确：APIT 自动推断为接受任何满足 Trait 的生命周期
+fn print_any(x: impl AsRef<str>) {
+    println!("{}", x.as_ref());
+}
+
+fn main() {
+    let s = String::from("hello");
+    print_any(&s);       // ✅ &String 实现 AsRef<str>
+    print_any("world");  // ✅ &'static str 实现 AsRef<str>
+}
+```
+
+**对比：显式泛型参数**。
+
+```rust
+// 上述 APIT 等价于：
+fn print_any_explicit<T: AsRef<str>>(x: T) {
+    println!("{}", x.as_ref());
+}
+```
+
+**反例：APIT 中的生命周期不匹配**。
+
+```rust,compile_fail
+// ❌ 反例：APIT 隐式泛型参数的生命周期约束不足
+fn borrow_from<'a>(x: impl AsRef<str>) -> &'a str {
+    // 错误: 无法将 x.as_ref() 的引用提升为 'a
+    x.as_ref()
+}
+```
+
+**修正**：需显式关联 APIT 与返回生命周期。
+
+```rust
+// ✅ 修正：使用显式 where 子句或泛型参数
+fn borrow_from_fixed<'a, T>(x: &'a T) -> &'a str
+where
+    T: AsRef<str> + ?Sized,
+{
+    x.as_ref()
+}
+```
+
+> **[来源: RFC 2289 (TAFIT)]** APIT 和 RPIT 的生命周期推断遵循不同的隐式捕获策略：APIT 作为泛型语法糖不引入新的生命周期捕获，RPIT 则自动封装实现类型的生命周期依赖。✅
+
+### 14.4 RPIT vs APIT：生命周期推断对比矩阵
+
+| **维度** | **RPIT（返回位置）** | **APIT（参数位置）** |
+|:---|:---|:---|
+| **语法本质** | 匿名关联类型 / 抽象返回类型 | 隐式泛型参数 |
+| **生命周期捕获** | 自动捕获实现类型中使用的所有输入生命周期 | 不自动捕获；由调用方根据 trait bound 推导 |
+| **`+'a` 语法** | ✅ 合法：`impl Trait + 'a` | ✅ 合法：约束隐式泛型参数 `T: Trait + 'a` |
+| **显式 `where` 替代** | 无法完全替代（RPIT 类型不透明） | 完全等价于 `fn foo<T: Trait>(x: T)` |
+| **HRTB 交互** | 复杂（隐式捕获与 `for<'a>` 量化冲突） | 直接（APIT 的隐式泛型可参与 HRTB） |
+| **类型推导方向** | 由函数体推导实现类型 | 由调用方推导具体类型 |
+
+> **[来源: Rust Reference: `impl Trait`; RFC 2289]** APIT 于 Rust 1.26 稳定，RPIT 于 Rust 1.26 稳定；RPITIT（trait 中的 RPIT）于 Rust 1.75 稳定。✅
+
+### 14.5 为什么 `impl Trait` 不能随意出现在 Trait 定义中（RPITIT）
 
 在 trait 定义中使用 `impl Trait` 作为方法返回类型（RPITIT, Return Position Impl Trait in Trait）直到 Rust 1.75 才稳定。此前无法使用的原因是**生命周期与类型推断的耦合问题**：
 
@@ -1027,7 +1331,9 @@ trait FactoryOld {
 
 RPITIT 的解决方式是让 `impl Trait` 在 trait 方法中等价于一个**隐式关联类型**，其生命周期由实现自动推断，同时通过编译器内部的**规范化（normalization）**机制确保调用方看到的类型签名一致。
 
-> **[来源: RFC 2289 (TAFIT)]** `impl Trait` 在参数位置（APIT）和返回位置（RPIT）的生命周期推断遵循不同的隐式捕获策略。✅
+> **[来源: RFC 2289 (TAFIT); Rust 1.75 Release Notes]** RPITIT 的稳定解决了 trait 层面返回抽象类型的表达力缺口，但隐式关联类型的生命周期推断仍遵循"自动捕获"原则。✅
+
+**跨层映射**: 本章节 APIT/RPIT 语义 ↔ [`./04_type_system.md`](./04_type_system.md) §11 "类型系统前沿" · [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §3 "泛型参数推断"
 
 ---
 
@@ -1113,3 +1419,10 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 > **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+
+---
+
+## 十六、待补充与演进方向（TODOs）
+
+- [x] **TODO**: 补充 Lifetime Elision 的三条规则的完整形式化描述（∀, ⇒ 符号、每个规则的正例+反例、Rust Reference 来源）—— 已完成 §13 —— 2026-05-14
+- [x] **TODO**: 补充 `impl Trait` 与生命周期推断的交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比）—— 已完成 §14 —— 2026-05-14

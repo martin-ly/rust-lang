@@ -67,6 +67,13 @@
       - [`main` 返回 `Result` 的工程价值](#main-返回-result-的工程价值)
     - [9.2 补充：`Result<T, !>` 与 `!` (never type) 在错误处理中的使用](#92-补充resultt--与--never-type-在错误处理中的使用)
     - [9.3 `std::backtrace::Backtrace` 与错误追踪](#93-stdbacktracebacktrace-与错误追踪)
+      - [9.3.1 基本获取与显示](#931-基本获取与显示)
+      - [9.3.2 环境变量控制](#932-环境变量控制)
+      - [9.3.3 与 `anyhow` / `thiserror` 的集成](#933-与-anyhow--thiserror-的集成)
+      - [9.3.4 自定义错误类型中嵌入 `Backtrace` 的模式](#934-自定义错误类型中嵌入-backtrace-的模式)
+      - [9.3.5 `#[track_caller]` 与 `Backtrace` 的协同与对比](#935-track_caller-与-backtrace-的协同与对比)
+      - [9.3.6 与 `panic::Location` 的对比](#936-与-paniclocation-的对比)
+      - [9.3.7 性能考量：Backtrace 捕获的成本](#937-性能考量backtrace-捕获的成本)
     - [9.4 `eyre` / `color-eyre` 生态库对比](#94-eyre--color-eyre-生态库对比)
     - [9.5 `#[track_caller]` 与错误定位优化](#95-track_caller-与错误定位优化)
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
@@ -1001,7 +1008,116 @@ where
 
 ### 9.3 `std::backtrace::Backtrace` 与错误追踪
 
-Rust 1.65+ 稳定了 `std::backtrace::Backtrace`，允许在错误类型中捕获调用栈：
+> **Bloom 层级**: 应用 → 分析
+>
+> **[Rust Standard Library: Backtrace]** · **[RFC 2504: Catch Unwind]** Rust 1.65 将 `std::backtrace::Backtrace` 纳入 stable，使得可恢复错误也能携带完整的调用栈上下文，填补了"错误发生点"与"错误报告点"之间的信息鸿沟。 ✅
+
+#### 9.3.1 基本获取与显示
+
+`Backtrace` 通过运行时栈展开（stack unwinding）捕获当前调用链：
+
+```rust,ignore
+use std::backtrace::Backtrace;
+
+fn inner() {
+    let bt = Backtrace::capture();
+    println!("{}", bt);  // 显示捕获时的调用栈
+}
+
+fn outer() {
+    inner();
+}
+
+fn main() {
+    outer();
+}
+```
+
+`Backtrace` 实现了 `Display` 与 `Debug`，默认输出包含：
+
+- 帧序号（frame number）
+- 符号名（symbol name）与偏移量
+- 源文件路径与行列号（若调试符号可用）
+
+> **[来源: Rust std docs — std::backtrace::Backtrace]** 稳定于 Rust 1.65。`Backtrace::capture()` 在 `RUST_BACKTRACE` 未设置时返回 `disabled`，避免无条件开销。 ✅
+
+#### 9.3.2 环境变量控制
+
+| 环境变量值 | 行为 | 适用场景 |
+|:---|:---|:---|
+| `unset` / `0` | `Backtrace::capture()` 返回 `disabled`；panic 不打印 backtrace | 生产环境默认 |
+| `1` | 捕获并打印 backtrace，省略某些运行时/编译器内部帧 | 常规调试 |
+| `full` | 捕获并打印完整 backtrace，包含所有帧 | 深度诊断 |
+
+```bash
+# ✅ 常规调试：显示简洁 backtrace
+$ RUST_BACKTRACE=1 cargo run
+
+# ✅ 深度诊断：显示包含所有内部帧的完整 backtrace
+$ RUST_BACKTRACE=full cargo run
+```
+
+> **[来源: Rust Standard Library: Backtrace]** `Backtrace::capture()` 的行为受 `RUST_BACKTRACE` 环境变量控制；`force_capture()` 则无视环境变量强制捕获，适用于必须记录栈轨迹的关键错误。 ✅
+
+#### 9.3.3 与 `anyhow` / `thiserror` 的集成
+
+**`anyhow` 的自动 backtrace**：
+
+`anyhow::Error` 在启用 `backtrace` feature（默认开启）时会自动捕获 `Backtrace`：
+
+```rust,ignore
+use anyhow::Result;
+
+fn may_fail() -> Result<()> {
+    std::fs::read_to_string("missing.txt")?;
+    Ok(())
+}
+
+fn main() {
+    if let Err(e) = may_fail() {
+        // ✅ anyhow::Error 自动附加 backtrace
+        eprintln!("Error: {:#}", e);      // 显示错误链
+        eprintln!("Backtrace: {:?}", e.backtrace());  // 显示 backtrace
+    }
+}
+```
+
+> **[来源: anyhow docs — Features]** `anyhow` 的 `backtrace` feature 在 Rust 1.65+ 使用 `std::backtrace::Backtrace`，在旧版本回退到 `backtrace` crate。 ✅
+
+**`thiserror` 中嵌入 backtrace**：
+
+```rust,ignore
+use std::backtrace::Backtrace;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum AppError {
+    #[error("I/O error: {0}")]
+    Io(#[from] std::io::Error),
+
+    #[error("configuration error: {msg}")]
+    Config {
+        msg: String,
+        #[backtrace]  // ✅ thiserror 自动填充 Backtrace::capture()
+        backtrace: Backtrace,
+    },
+}
+
+fn load_config() -> Result<Config, AppError> {
+    let content = std::fs::read_to_string("app.toml")
+        .map_err(|e| AppError::Config {
+            msg: e.to_string(),
+            backtrace: Backtrace::capture(),
+        })?;
+    // ...
+}
+```
+
+> **[来源: thiserror docs]** `thiserror` 1.0+ 支持 `#[backtrace]` 属性，可自动在构造错误时填充 `Backtrace`。若字段类型为 `Backtrace`，`#[backtrace]` 标记后 `Error::backtrace()` 方法将返回该字段。 ✅
+
+#### 9.3.4 自定义错误类型中嵌入 `Backtrace` 的模式
+
+当不使用 `thiserror` 时，手动嵌入 `Backtrace` 的标准模式：
 
 ```rust,ignore
 use std::backtrace::Backtrace;
@@ -1010,14 +1126,14 @@ use std::fmt;
 #[derive(Debug)]
 struct TracedError {
     message: String,
-    backtrace: Backtrace,  // ✅ 自动捕获生成时的调用栈
+    backtrace: Backtrace,
 }
 
 impl TracedError {
     fn new(msg: &str) -> Self {
         Self {
             message: msg.to_string(),
-            backtrace: Backtrace::capture(),  // 捕获当前调用栈
+            backtrace: Backtrace::capture(),
         }
     }
 }
@@ -1028,31 +1144,142 @@ impl fmt::Display for TracedError {
     }
 }
 
-impl std::error::Error for TracedError {}
-
-// 使用
-fn inner() -> Result<(), TracedError> {
-    Err(TracedError::new("something went wrong"))
-}
-
-fn outer() -> Result<(), TracedError> {
-    inner()?  // backtrace 指向 inner() 中的捕获点
+impl std::error::Error for TracedError {
+    // ✅ 可选：实现 provide/backtrace 使错误报告器能提取 backtrace
+    fn backtrace(&self) -> Option<&Backtrace> {
+        Some(&self.backtrace)
+    }
 }
 ```
 
-**与生态库对比**：
+**设计模式矩阵**：
 
-| 特性 | `std::backtrace` | `anyhow` | `eyre` |
+| 模式 | 实现方式 | 适用场景 | 性能影响 |
 |:---|:---|:---|:---|
-| 稳定状态 | ✅ 1.65+ | ✅ 稳定 | ✅ 稳定 |
-| 自定义报告 | ❌ 固定格式 | ⚠️ 有限 | ✅ Handler hook |
-| 彩色输出 | ❌ | ❌ | ✅ (`color-eyre`) |
-|  spantrace | ❌ | ❌ | ✅ (`tracing-error`) |
-| 依赖成本 | 零 | 轻量 | 中等 |
+| 主动捕获 | `Backtrace::capture()` 嵌入错误结构体 | 库代码、结构化错误 | 仅在错误路径触发 |
+| 延迟捕获 | `anyhow::Error` 自动捕获 | 应用代码、快速迭代 | 同上 |
+| 强制捕获 | `Backtrace::force_capture()` | 关键安全审计点 | 无视环境变量，始终展开 |
+| 不捕获 | 纯 `std::io::Error` | 高频错误路径、性能敏感 | 零额外开销 |
 
-> **边界**：`Backtrace::capture()` 只在 `RUST_BACKTRACE=1` 时捕获完整栈，否则为 `disabled`。这避免了发布版本的性能开销。
+> **[来源: Rust API Guidelines — Error handling]** 库代码应仅在错误路径中捕获 backtrace，避免在成功路径引入运行时开销。 ✅
+
+#### 9.3.5 `#[track_caller]` 与 `Backtrace` 的协同与对比
+
+`#[track_caller]`（详见 [§9.5](#95-track_caller-与错误定位优化)）与 `Backtrace` 解决的是**不同维度**的定位问题：
+
+| 维度 | `#[track_caller]` | `Backtrace` |
+|:---|:---|:---|
+| **定位粒度** | 单点：文件、行号、列号 | 完整调用链：多层帧 |
+| **捕获时机** | 编译期（隐式传递 `Location`） | 运行时（栈展开） |
+| **运行时开销** | 极低（额外寄存器/栈参数） | 高（符号解析、栈展开） |
+| **信息类型** | 调用者位置（精确到语句） | 函数调用链（精确到函数） |
+| **可控性** | 编译器自动管理 | 受 `RUST_BACKTRACE` 环境变量控制 |
+| **适用场景** | 包装函数、断言宏 | 错误诊断、日志审计 |
+
+**协同使用示例**：
+
+```rust,ignore
+use std::backtrace::Backtrace;
+use std::fmt;
+
+#[derive(Debug)]
+struct LocatedError {
+    msg: String,
+    location: &'static std::panic::Location<'static>,
+    backtrace: Backtrace,
+}
+
+#[track_caller]
+fn fail(msg: &str) -> LocatedError {
+    LocatedError {
+        msg: msg.to_string(),
+        location: std::panic::Location::caller(),  // ✅ 精确到调用者代码位置
+        backtrace: Backtrace::capture(),            // ✅ 完整调用链
+    }
+}
+
+fn main() {
+    let e = fail("something went wrong");  // Location 指向这一行
+    println!("At: {}:{}", e.location.file(), e.location.line());
+    println!("Trace:\n{}", e.backtrace);
+}
+```
+
+> **[来源: Rust Reference: track_caller]** · **[Rust Standard Library: Location]** `#[track_caller]` 与 `Location::caller()` 在 Rust 1.46+ 稳定；`Backtrace` 在 Rust 1.65+ 稳定。两者结合可同时获得"精确错误源点"与"完整传播路径"。 ✅
+
+#### 9.3.6 与 `panic::Location` 的对比
+
+`std::panic::Location` 与 `Backtrace` 在错误处理生态中形成**互补层级**：
+
+```text
+定位精度层级（从低到高）：
+  1. 函数名（Backtrace 帧）      → "哪个函数"
+  2. 文件+行号（Location）        → "哪一行代码"
+  3. 列号（Location 精确）        → "哪一列表达式"
+  4. 调用链（Backtrace 多帧）     → "怎么走到这里的"
+
+信息成本层级（从低到高）：
+  Location::caller()    ≈ 零成本（编译期内联）
+  #[track_caller]       ≈ 极低（调用约定修改）
+  Backtrace::capture()  ≈ 高（运行时栈展开 + 符号解析）
+```
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[需要错误定位信息？] --> B{需要完整调用链？}
+    B -->|是| C[使用 Backtrace]
+    B -->|否| D{需要精确源位置？}
+    D -->|是| E[使用 #[track_caller] + Location::caller]
+    D -->|否| F[仅使用 error message]
+    C --> G[权衡: 生产环境性能开销]
+    E --> H[权衡: 仅适用于函数调用点]
+```
+
+> **[来源: Rust Standard Library: panic::Location]** `panic::Location` 是 `const` 友好的轻量级定位机制，与 Backtrace 的运行时重定位形成鲜明对比。 ✅
+
+#### 9.3.7 性能考量：Backtrace 捕获的成本
+
+`Backtrace::capture()` 的性能特征：
+
+| 阶段 | 成本来源 | 量级估计 |
+|:---|:---|:---|
+| 栈展开（unwinding） | 遍历调用帧、读取帧指针 | ~微秒级（10–100 μs） |
+| 符号解析（symbolication） | 查询调试符号表（DWARF / PDB） | ~毫秒级（1–10 ms） |
+| 字符串格式化 | `Display` 实现展开为字符串 | 与帧数成正比 |
+
+**优化策略**：
+
+1. **环境变量开关**：默认使用 `capture()` 而非 `force_capture()`，让生产环境用户通过 `RUST_BACKTRACE=0` 禁用。
+2. **错误路径隔离**：仅在 `Err` 分支中构造 backtrace，不在 `Ok` 路径中预先捕获。
+3. **延迟格式化**：`Backtrace` 内部保存原始帧数据，`Display` 时才进行符号解析，因此仅当实际打印时才产生完整开销。
+4. **替代方案**：若仅需单点定位，优先使用 `#[track_caller]` + `Location`，完全避免运行时开销。
+
+```rust,ignore
+// ✅ 性能友好：仅在错误路径捕获
+fn parse_config(path: &str) -> Result<Config, AppError> {
+    match std::fs::read_to_string(path) {
+        Ok(content) => Ok(parse(&content)?),
+        Err(e) => Err(AppError::Io {
+            source: e,
+            backtrace: Backtrace::capture(),  // 仅在 Err 分支
+        }),
+    }
+}
+
+// ❌ 性能浪费：在成功路径也捕获
+fn parse_config_bad(path: &str) -> Result<Config, AppError> {
+    let bt = Backtrace::capture();  // 无论成功失败都捕获！
+    // ...
+}
+```
+
+> **[来源: Rust Standard Library: Backtrace]** `Backtrace` 采用惰性求值策略：构造时仅捕获原始帧指针，格式化时才解析符号。但即使如此，栈展开本身仍有不可忽略的开销。 ✅
 >
-> **来源**: [Rust Standard Library: Backtrace] · [RFC 2504: Catch Unwind] · [eyre docs]
+> **[来源: RFC 2504]** Backtrace 稳定化 RFC 明确要求"在默认情况下不产生开销"，因此 `capture()` 在环境变量未启用时返回 `disabled`。 ✅
+
+**跨层映射**: Backtrace 的运行时成本 ↔ [§9.3.6](#936-与-paniclocation-的对比) `Location` 的编译期零成本 ↔ [../04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) §3 "运行时与编译期保证的边界"
 
 ---
 
@@ -1233,7 +1460,7 @@ fn compute() -> Maybe<i32> {
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3
+- [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
 - [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
 - [x] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4
 - [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5

@@ -48,6 +48,7 @@ python scripts/kb_auditor.py
 ```
 
 输出：
+
 - 37个文件的7项质量检查
 - 死链检测、风险文件识别
 - 定理链/反命题/代码块/Mermaid图统计
@@ -56,6 +57,7 @@ python scripts/kb_auditor.py
 ### 🔗 跨层映射
 
 每个核心概念文件包含：
+
 - **认知路径**：从直觉到形式化的学习递进
 - **过渡段**：跨层映射（L3 → L4 形式化、L4 → L5 对比）
 - **来源标注**：Wikipedia、CMU课程、POPL论文可追溯

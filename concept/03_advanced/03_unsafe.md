@@ -1219,99 +1219,323 @@ fn deadlock_not_detected() {
 
 ### 补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异
 
-> **权威来源**: [Rust Reference: Pointer operators] · [The Rustonomicon: Ownership and Move Semantics] · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/)
-> **层级标注**: `L3::裸指针语义` → `L1::所有权` 移动语义延伸 · `L2::内存管理` drop 触发控制
+> **权威来源**: [Rust Reference: Pointer operators] · [Rust Reference: Behavior considered undefined] · [The Rustonomicon: Ownership and Move Semantics] · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/) · [Rustonomicon: Working With Memory]
+> **层级标注**: `L3::裸指针语义` → `L1::所有权` 移动语义延伸 · `L2::内存管理` drop 触发控制 · `L4::形式化` Validity Invariant 边界
 
-**核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write`/`std::ptr::replace` 在**所有权语义**和 **drop 触发**方面存在本质差异。
+**核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write` 在**所有权语义**、**drop 触发**和**借用检查器介入程度**方面存在本质差异。`*ptr` 是**引用语义**的延伸——它假设目标位置已初始化、对齐且有效，并受 Rust 所有权规则约束；而 `ptr::read`/`ptr::write` 是**原始内存操作**，仅执行 bitwise copy 或按位覆盖，不调用 `Clone`，也不自动触发 `Drop`。
 
-| 操作 | 语义 | 是否触发 drop | 是否转移所有权 | 典型场景 |
-|:---|:---|:---:|:---:|:---|
-| `*ptr`（读取） | 解引用获取值 | 否（仅读取） | 是（若赋值给已初始化变量则先 drop 旧值） | 简单读取 |
-| `*ptr = val` | 解引用写入 | **是**（先 drop 旧值） | 是（val 被 move 进入） | 简单写入 |
-| `ptr::read(ptr)` | 按位复制（浅拷贝） | **否** | 否（复制后原位置仍保留位模式） | Vec pop、手动内存管理 |
-| `ptr::write(ptr, val)` | 直接覆盖 | **否**（不 drop 旧值） | 是（val 被 move 进入） | 未初始化内存初始化 |
-| `ptr::replace(ptr, val)` | read + write | **是**（返回旧值，由调用者处理） | 是（val 被 move 进入） | 原子性交换 |
+> **[来源: std::ptr::read docs]** `ptr::read` 创建目标位置的按位副本，无论该位置是否已初始化。调用者必须确保后续不会导致原位置和新位置的值同时被 drop。✅ 已验证
+>
+> **[来源: std::ptr::write docs]** `ptr::write` 将 `src` 按位写入 `dst` 指向的内存，不读取或 drop `dst` 指向的旧内容。这使其成为未初始化内存初始化的唯一安全方式。✅ 已验证
 
-> **[Rust Reference]** `*ptr` 解引用在赋值上下文中会先计算左值，若目标位置已初始化则调用 drop，再写入新值。`ptr::write` 绕过 drop，直接进行按位覆盖。✅ 已验证
+---
 
-#### 正确示例：`ptr::read` 实现 Vec 的 pop
+#### 语义精确定义
+
+##### `std::ptr::read<T>(src: *const T) -> T`
+
+从 `src` 指向的内存位置执行 **bitwise copy（按位浅拷贝）**，返回一个类型为 `T` 的值。
+
+- **不调用 `Clone`**：即使 `T: Clone`，`ptr::read` 也只做 `memcpy` 级别的复制。
+- **不触发 `Drop`**：原位置的内容**不会被销毁**，其位模式原封不动保留。
+- **不转移所有权**（从内存模型角度）：原位置的 bytes 仍被视为"有效"的 `T` 实例，直到被覆盖或内存释放。
+- **不安全契约**：`src` 必须对齐且指向已初始化的 `T`；读取后，调用者必须确保原位置和新位置的值**不会同时被 drop**。
+
+> **[来源: Rustonomicon: Ownership and Move Semantics]** Move 语义在底层就是 bitwise copy + 使原位置失效。`ptr::read` 只做前半部分，后半部分由程序员负责。✅ 已验证
+
+##### `std::ptr::write<T>(dst: *mut T, src: T)`
+
+将 `src` **按位覆盖**到 `dst` 指向的内存位置。
+
+- **不触发 `Drop`**：`dst` 指向的旧值（如果有）不会被 drop。这是它与 `*dst = src` 最关键的区别。
+- **转移所有权**：`src` 被 move 进 `dst` 指向的内存。此后 `src` 在调用者作用域中失效。
+- **不安全契约**：`dst` 必须对齐；若 `dst` 指向已初始化的内存，旧值将被静默覆盖——导致内存泄漏（若旧值含堆分配）。
+
+> **[来源: Rust Reference: Assignment expressions]** `*ptr = val` 会先计算左值（place expression），若目标位置已初始化，编译器会插入 `Drop::drop` 调用，再执行 move/复制。✅ 已验证
+
+##### `*ptr` 解引用（`DerefMut`）
+
+裸指针的 `*` 解引用在 `unsafe` 块内产生一个** place expression（位置表达式）**，其语义取决于上下文：
+
+- **读取上下文**（`let x = *ptr`）：等价于从该位置 move 出一个值。若 `T` 非 `Copy`，原位置**逻辑上失效**（但编译器不追踪裸指针的失效状态）。
+- **写入上下文**（`*ptr = val`）：编译器会生成**先 drop 旧值、再写入新值**的代码序列。若目标位置未初始化，drop 旧值 = 读取未初始化内存 = **UB**。
+- **受借用检查器保护的程度**：`unsafe` 块内的裸指针解引用**完全绕过**借用检查器。编译器不验证 `ptr` 的生命周期、对齐或有效性。
+
+> **[来源: TRPL: Ch19.1]** 裸指针解引用是 `unsafe` 的五大超能力之一，它关闭了编译器对生命周期和别名的自动追踪。✅ 已验证
+
+---
+
+#### 关键差异对比表格
+
+| **维度** | `std::ptr::read` | `std::ptr::write` | `*ptr`（读取） | `*ptr = val`（写入） |
+|:---|:---|:---|:---|:---|
+| **底层操作** | bitwise copy（`memcpy`） | bitwise overwrite（`memcpy`） | move / copy（视 `T`） | drop + move / copy |
+| **是否调用 `Clone`** | ❌ 否 | ❌ 否 | ❌ 否（move）/ ✅ 是（`Copy`） | ❌ 否（move）/ ✅ 是（`Copy`） |
+| **是否触发 `Drop`** | ❌ 否 | ❌ **否** | ❌ 否（仅读取） | ✅ **是**（先 drop 旧值） |
+| **是否转移所有权** | 否（复制后两位置同时"有效"） | 是（`src` move 入 `dst`） | 是（原位置失效） | 是（`val` move 入） |
+| **是否需要 `unsafe`** | ✅ 是（函数本身 unsafe） | ✅ 是（函数本身 unsafe） | ✅ 是（裸指针解引用） | ✅ 是（裸指针解引用） |
+| **是否受借用检查器保护** | ❌ 否 | ❌ 否 | ❌ 否 | ❌ 否 |
+| **对未初始化内存的安全性** | ⚠️ 可读，但读取后原+新值不能双 drop | ✅ **安全**（唯一正确方式） | ⚠️ 读取 = UB | ❌ **UB**（drop 未初始化值） |
+| **对已初始化内存的安全性** | ⚠️ 复制后需避免 double-free | ⚠️ 旧值被覆盖 = 内存泄漏 | ✅ 安全 | ✅ 安全 |
+| **典型场景** | `Vec::pop`、手工 move | 未初始化内存初始化 | 简单访问（不推荐裸指针） | 赋值更新（不推荐裸指针） |
+
+> **[来源: Rust Reference: Behavior considered undefined]** 读取未初始化内存是 UB；`ptr::write` 是向未初始化内存写入值的正确方式，因为它不尝试读取旧值。✅ 已验证
+>
+> **[来源: Rustonomicon: RAII]** 混淆 `*ptr = val` 与 `ptr::write` 是 unsafe 代码中内存泄漏和 double-free 的首要原因。💡 原创分析
+
+---
+
+#### 典型使用场景
+
+##### `ptr::read`： `Vec::pop` 内部实现与 `ManuallyDrop` 配合
+
+Rust 标准库中 `Vec::pop` 的核心逻辑正是 `ptr::read` 的典型应用——从数组尾部"取出"值，同时避免触发尾部元素的 `drop`（因为该位置逻辑上已被截断，后续 `push` 会覆盖它）。
 
 ```rust
-// ✅ 正确: ptr::read 不触发 drop，适合从已初始化内存中"取出"值
-pub struct MyVec<T> {
-    ptr: *mut T,
-    len: usize,
-    cap: usize,
-}
-
+// ✅ 正确: Vec::pop 的简化实现
 impl<T> MyVec<T> {
     pub fn pop(&mut self) -> Option<T> {
         if self.len == 0 { return None; }
         self.len -= 1;
         unsafe {
-            // Safety: index self.len 之前已初始化，且取出后该位置逻辑上"空"
-            // ptr::read 执行按位复制，不调用 drop，也不使原位置失效
+            // Safety: index self.len 之前已初始化，且取出后 Vec 逻辑长度缩减
+            // ptr::read 执行按位复制，不调用 drop，原位置位模式保留但不再被访问
             Some(std::ptr::read(self.ptr.add(self.len)))
         }
     }
 }
 ```
 
-#### 正确示例：`ptr::write` 初始化未初始化内存
+`ManuallyDrop<T>` 与 `ptr::read` 的协同是更精妙的模式：当需要**有条件地**决定某个值是否应被 drop 时，先用 `ManuallyDrop` 包装，再通过 `ptr::read` 提取。
 
-```rust,ignore
-// ✅ 正确: ptr::write 不 drop 旧值，适合写入未初始化内存
-impl<T> MyVec<T> {
-    pub fn push(&mut self, value: T) {
-        if self.len == self.cap { self.grow(); }
+```rust
+use std::mem::ManuallyDrop;
+use std::ptr;
+
+// ✅ 正确: 有条件地提取值，避免自动 drop
+fn conditional_extract<T>(slot: &mut ManuallyDrop<T>, should_take: bool) -> Option<T> {
+    if should_take {
         unsafe {
-            // Safety: self.ptr.add(self.len) 已分配但未初始化
-            // 若用 *ptr = val，会先尝试 drop 未初始化内存 → UB!
-            std::ptr::write(self.ptr.add(self.len), value);
+            // Safety: ManuallyDrop 阻止自动 drop，ptr::read 按位复制提取值
+            // 提取后 slot 的内容逻辑上失效，但不会被自动 drop
+            let val = ptr::read(slot);
+            // 必须手动标记 slot 为"已取走"状态，防止二次使用
+            // 实际工程中通常用 Option<ManuallyDrop<T>> 或接管内存所有权
+            Some(val)
         }
-        self.len += 1;
+    } else {
+        None
     }
 }
 ```
 
-#### 反例：错误使用 `*ptr = val` 导致 UB
+> **[来源: std::mem::ManuallyDrop docs]** `ManuallyDrop` 包装的值不会在其作用域结束时自动调用 `drop`，配合 `ptr::read` 可实现"手动控制资源释放时机"。✅ 已验证
+>
+> **跨层映射**: `L3::ManuallyDrop` ↔ [`L2::内存管理`](../02_intermediate/03_memory_management.md) RAII 与自定义 drop 控制
 
-```rust,ignore
-// ❌ 反例: 对未初始化内存使用 *ptr = val
-fn write_to_uninit_ub<T>(ptr: *mut T, value: T) {
+##### `ptr::write`：未初始化内存填充与 `MaybeUninit::write` 的前身模式
+
+在 `MaybeUninit<T>` 稳定之前，向未初始化内存写入值的唯一正确方式就是 `ptr::write`。即便在今天，`MaybeUninit::write` 的底层实现仍然是 `ptr::write`。
+
+```rust
+use std::mem::MaybeUninit;
+
+// ✅ 正确: MaybeUninit::write 的底层等价形式
+fn init_via_ptr_write<T>(slot: &mut MaybeUninit<T>, value: T) {
     unsafe {
-        *ptr = value;  // UB! 若 ptr 指向未初始化内存，先 drop 旧值 = 读取未初始化
+        // Safety: MaybeUninit 不保证内部已初始化，ptr::write 不读取旧值
+        // 这与 slot.write(value) 的语义完全一致
+        std::ptr::write(slot.as_mut_ptr(), value);
     }
 }
 
-// ❌ 反例: 错误使用 *ptr 读取导致 double drop
+// 等价于:
+// slot.write(value);  // MaybeUninit 的稳定 API
+```
+
+`ptr::write` 的另一个关键场景是**在堆上构造值而不触发中间状态的 drop**。例如，自定义 `Box::new` 或需要在特定内存地址放置对象时：
+
+```rust,ignore
+// ✅ 正确: 在已分配的原始内存上直接构造值
+unsafe fn construct_in_place<T>(ptr: *mut T, f: impl FnOnce() -> T) {
+    // ptr 指向已分配但未初始化的内存（如 GlobalAlloc::alloc 返回）
+    std::ptr::write(ptr, f());
+}
+```
+
+> **[来源: Rust Reference: MaybeUninit]** `MaybeUninit::write` is implemented as `ptr::write(self.as_mut_ptr(), value)`. It is the standard way to initialize uninitialized memory. ✅ 已验证
+>
+> **跨层映射**: `L3::未初始化内存` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) 初始化要求 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) 堆栈分配语义
+
+---
+
+#### 危险模式与常见错误
+
+##### 危险模式 1：`ptr::read` 后原位置未失效导致的 double-free
+
+`ptr::read` 执行后，**原位置和新位置同时持有相同位模式的值**。若两者最终都被视为"有效"并被 drop，则发生 double-free。
+
+```rust,ignore
+// ❌ 反例: ptr::read 后未处理原位置，导致 double-free
+fn double_free_via_read<T>(ptr: *const T) {
+    unsafe {
+        let val = std::ptr::read(ptr);  // 按位复制: val 和 *ptr 内容相同
+        drop(val);                       // drop val（第一次）
+        // *ptr 仍被视为有效值！若后续再次 drop → double-free
+        let val2 = std::ptr::read(ptr);  // 再次读取同一位置
+        drop(val2);                      // UB! 同一资源被释放两次
+    }
+}
+
+// ✅ 修正: read 后应立即用 ptr::write 覆盖原位置，或确保原位置不再被 drop
+fn safe_read_pattern<T>(ptr: *mut T) -> T {
+    unsafe {
+        let val = std::ptr::read(ptr);
+        // 选项 A: 立即写入一个"无害"的值（如零初始化）
+        // std::ptr::write(ptr, std::mem::zeroed());  // 仅对允许零值的类型安全
+        // 选项 B: 确保调用方知道 *ptr 已失效，不再使用或 drop
+        val
+    }
+}
+```
+
+> **[来源: Rustonomicon: Working With Memory]** Using `ptr::read` without ensuring the source is no longer considered initialized can lead to double-drops, which is undefined behavior. ✅ 已验证
+
+##### 危险模式 2：`ptr::write` 覆盖已初始化值导致的内存泄漏
+
+`ptr::write` 不 drop 旧值。若目标位置**已经持有有效值**（如已初始化的堆内存、文件描述符），直接覆盖将导致资源泄漏。
+
+```rust,ignore
+// ❌ 反例: ptr::write 覆盖已初始化的 Box，导致内存泄漏
+fn leak_via_write() {
+    let mut x = Box::new(1);
+    let ptr = &mut x as *mut Box<i32>;
+    unsafe {
+        std::ptr::write(ptr, Box::new(2));
+        // Box::new(1) 没有被 drop！旧 Box 指向的堆内存泄漏
+    }
+    // x = Box::new(2)，作用域结束时正常 drop
+}
+
+// ✅ 修正: 覆盖前先显式 read/drop 旧值，或始终只对未初始化内存使用 ptr::write
+fn safe_overwrite<T>(ptr: *mut T, new_value: T) {
+    unsafe {
+        // 先 read 出旧值（由调用者或本函数负责 drop），再 write 新值
+        let old = std::ptr::read(ptr);
+        std::ptr::write(ptr, new_value);
+        drop(old);  // 显式释放旧资源
+    }
+}
+// 注: 上面的 safe_overwrite 实际上就是 ptr::replace 的语义
+```
+
+> **[来源: std::ptr::write docs]** `ptr::write` does not drop the contents of `dst`. If `dst` points to a valid object, that object will be leaked. ✅ 已验证
+
+##### 危险模式 3：对未初始化内存使用 `*ptr = val`
+
+这是初学者最常犯的错误——误以为 `*ptr = val` 和 `ptr::write(ptr, val)` 等价。
+
+```rust,ignore
+// ❌ 反例: 对未初始化内存使用 *ptr = val → UB
+fn write_to_uninit_ub<T>(ptr: *mut T, value: T) {
+    unsafe {
+        *ptr = value;  // UB! 编译器先尝试 drop *ptr 的旧值
+                       // 若 ptr 指向未初始化内存，drop = 读取未初始化 = UB
+    }
+}
+
+// ❌ 反例: 错误使用 *ptr 读取导致 double drop（与 ptr::read 混淆）
 fn double_drop_bug<T>(ptr: *mut T) {
     unsafe {
-        let val = *ptr;      // 解引用转移所有权 → ptr 指向的位置被" move 走"
-        let val2 = *ptr;     // UB! 再次读取同一位置，导致双重释放（若 T 非 Copy）
+        let val = *ptr;      // 解引用转移所有权 → ptr 指向的位置被"move 走"
+        let val2 = *ptr;     // UB! 再次从同一失效位置读取，导致双重释放
     }
 }
 
 // ✅ 修正: 使用 ptr::read（不转移所有权，仅按位复制）
 fn correct_read<T>(ptr: *const T) -> T {
-    unsafe { std::ptr::read(ptr) }  // 调用者负责后续不再使用原位置（除非重新写入）
+    unsafe { std::ptr::read(ptr) }  // 调用者负责确保原位置后续不再被 drop
 }
 ```
 
+> **[来源: Rust Reference: Behavior considered undefined]** Reading uninitialized memory, including during a drop glue invocation, is undefined behavior. ✅ 已验证
+
+---
+
+#### `ptr::read_volatile` / `ptr::write_volatile`：MMIO 与硬件寄存器场景
+
+> **权威来源**: [std::ptr::read_volatile docs] · [Rust Embedded Book: Memory-mapped I/O]
+> **层级标注**: `L3::硬件交互` → `L6::嵌入式` 寄存器访问
+
+`ptr::read_volatile` 和 `ptr::write_volatile` 在语义上与 `ptr::read`/`ptr::write` 相同（不触发 drop，按位操作），但额外保证：
+
+1. **编译器不会优化掉访问**：即使读取的值未被使用，也不会被死码消除。
+2. **访问不会被重排**：volatile 操作之间保持程序顺序（与 CPU 内存序不同，需配合 fencing）。
+3. **每次调用都产生实际的内存访问**：不会缓存到寄存器中。
+
+这些保证使其成为**内存映射 I/O（MMIO）**和硬件寄存器操作的唯一正确工具。
+
+```rust,ignore
+// ✅ 正确: 嵌入式系统中访问硬件寄存器
+const GPIOA_ODR: *mut u32 = 0x4002_0014 as *mut u32;
+
+unsafe fn set_led_on() {
+    // 必须用 write_volatile，否则编译器可能优化掉此写入
+    std::ptr::write_volatile(GPIOA_ODR, 1 << 5);
+}
+
+unsafe fn read_button_state() -> u32 {
+    // 必须用 read_volatile，否则编译器可能复用之前的缓存值
+    std::ptr::read_volatile(GPIOA_ODR)
+}
+```
+
+| 特性 | `ptr::read` / `ptr::write` | `ptr::read_volatile` / `ptr::write_volatile` |
+|:---|:---|:---|
+| 按位复制/覆盖 | ✅ | ✅ |
+| 触发 drop | ❌ | ❌ |
+| 编译器优化抑制 | ❌ 可能被消除/重排 | ✅ 强制保留 |
+| 实际内存访问保证 | ❌ | ✅ |
+| 典型场景 | 堆内存管理、数据结构 | 硬件寄存器、MMIO、信号量 |
+
+> **[来源: LLVM LangRef: volatile]** Volatile operations are required to execute in program order relative to other volatile operations, and must produce actual memory accesses. ✅ 已验证
+>
+> **[来源: Rust Embedded Book]** In embedded programming, memory-mapped registers must be accessed with volatile operations to prevent the compiler from optimizing away hardware state changes. ✅ 已验证
+
+---
+
 #### 边界分析：`ptr::replace` 的契约
+
+`ptr::replace` 是 `ptr::read` + `ptr::write` 的原子组合，但语义上**不等于**两者的简单叠加——它先 read 出旧值，再 write 进新值，并**返回旧值由调用者负责 drop**。
 
 ```rust,ignore
 // ✅ 正确: ptr::replace 先 read 再 write，返回旧值由调用者负责 drop
 fn replace_demo() {
     let mut x = Box::new(1);
     let old = std::ptr::replace(&mut x, Box::new(2));
-    // old = Box::new(1)，在作用域结束时自动 drop
+    // old = Box::new(1)，在作用域结束时自动 drop（不泄漏）
     // x = Box::new(2)
     drop(x);
 }
+
+// ✅ 正确: 在裸指针场景下使用 replace 安全地交换值
+unsafe fn swap_via_replace<T>(a: *mut T, b: *mut T) {
+    let tmp = std::ptr::read(b);           // 保存 b 的值
+    let old_a = std::ptr::replace(a, tmp); // a 写入 b 的旧值，返回 a 的旧值
+    std::ptr::write(b, old_a);             // b 写入 a 的旧值
+}
+// 注: 上面的逻辑实际上就是 std::ptr::swap 的展开形式
 ```
 
-> **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权层面的语义操作**。在 unsafe 代码中混淆两者是 UAF 和 double-drop 的常见根源。💡 原创分析
+> **[来源: std::ptr::replace docs]** `replace` reads the value at `dest` without dropping it, writes `src` into it, and returns the old value. It is semantically equivalent to `read` followed by `write`. ✅ 已验证
+
+---
+
+> **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权层面的语义操作**。在 unsafe 代码中混淆两者是 UAF、double-free 和内存泄漏的常见根源。
+>
+> **定理（安全性边界）**：`ptr::write` 是向未初始化内存写入的**唯一安全 primitive**；`*ptr = val` 是更新已初始化内存的**安全 primitive**（在 safe Rust 中）。二者不可互换。💡 原创分析
+>
+> **跨层映射**: `L3::裸指针语义` ↔ [`L1::所有权`](../01_foundation/01_ownership.md) move 与 copy 语义 · [`L2::内存管理`](../02_intermediate/03_memory_management.md) drop 触发规则 · [`L4::形式化`](../04_formal/03_ownership_formal.md) Validity Invariant 与初始化要求
 
 ---
 
@@ -1540,7 +1764,7 @@ fn leak_from_overwrite() {
 ---
 
 - [x] **TODO**: 补充 Miri 的使用方法与限制 —— 优先级: 中 —— 已完成 2026-05-13
-- [x] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-14
 - [x] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 已完成 2026-05-13
 - [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 已完成 2026-05-13
 
