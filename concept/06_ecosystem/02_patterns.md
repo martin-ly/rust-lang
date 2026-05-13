@@ -64,6 +64,7 @@
 | **Strategy** | 行为型 | 运行时算法切换 | `dyn Trait` / 泛型参数 | 静态/动态分发选择 |
 | **State Machine** | 行为型 | 状态转换管理 | enum + `match` / `transition` 方法 | 穷尽性检查保证完整覆盖 |
 | **Plugin** | 结构型 | 运行时扩展能力 | `dyn Trait` + 注册表 | 模块热插拔 |
+| **Observer** | 行为型 | 一对多状态通知 | `Vec<Box<dyn Fn(&T)>>` / `broadcast` / `event-listener` | 解耦状态变化与响应 |
 
 > **来源**: [Rust Design Patterns] · [GoF Design Patterns] · 可信度: ✅
 
@@ -106,6 +107,7 @@ graph TD
     D --> D2[Visitor]
     D --> D3[Strategy]
     D --> D4[State Machine]
+    D --> D5[Observer]
 
     E --> E1[Typestate]
     E --> E2[Zero-cost Abstraction]
@@ -403,7 +405,265 @@ unsafe {
 
 > **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
 
-### 4.6 Rust 特有高级模式
+### 4.6 Observer 模式
+
+**定义**：定义对象间的一对多依赖关系，当一个对象（Subject）状态发生改变时，所有依赖于它的观察者（Observer）都得到通知并被自动更新。
+
+**适用场景**：
+
+- UI 事件监听与响应式更新
+- 数据模型与视图的同步（MVC/MVVM）
+- 分布式系统中的事件传播与消息总线
+- 异步任务完成通知与回调机制
+
+**核心问题**：一对多依赖关系中，如何在不硬编码订阅者列表的前提下，通知多个订阅者状态变化，同时避免所有权循环引用导致的内存泄漏？
+
+> **[来源: GoF Design Patterns, 1994]** Observer 模式解耦了主题与观察者，使得主题无需知道观察者的具体类型。✅
+
+---
+
+#### Rust 实现方式一：回调列表（同步）
+
+使用 `Vec<Box<dyn Fn(&T)>>` 存储闭包回调，适用于单线程同步场景。所有权核心挑战在于：Subject 持有 Observer 回调，而 Observer 可能持有 Subject 的引用。
+
+```rust,ignore
+use std::cell::RefCell;
+use std::rc::{Rc, Weak};
+
+/// 被观察者（Subject）
+struct TemperatureSensor {
+    temperature: f32,
+    observers: Vec<Box<dyn Fn(f32)>>,
+}
+
+impl TemperatureSensor {
+    fn new() -> Self {
+        Self {
+            temperature: 0.0,
+            observers: vec![],
+        }
+    }
+
+    fn subscribe(&mut self, observer: Box<dyn Fn(f32)>) {
+        self.observers.push(observer);
+    }
+
+    fn set_temperature(&mut self, value: f32) {
+        self.temperature = value;
+        // 通知所有订阅者
+        for obs in &self.observers {
+            obs(value);
+        }
+    }
+}
+
+/// 使用 Weak 打破循环引用：Display 持有 Sensor 的弱引用
+struct TemperatureDisplay {
+    sensor: Weak<RefCell<TemperatureSensor>>,
+}
+
+impl TemperatureDisplay {
+    fn update(&self, temp: f32) {
+        println!("Display: 当前温度 {}°C", temp);
+    }
+
+    fn attach(sensor: &Rc<RefCell<TemperatureSensor>>) -> Rc<RefCell<Self>> {
+        let display = Rc::new(RefCell::new(Self {
+            sensor: Rc::downgrade(sensor),
+        }));
+        let weak_display = Rc::downgrade(&display);
+
+        sensor.borrow_mut().subscribe(Box::new(move |temp| {
+            if let Some(disp) = weak_display.upgrade() {
+                disp.borrow().update(temp);
+            }
+        }));
+
+        display
+    }
+}
+```
+
+**关键洞察**：`Weak<T>` 不增加引用计数，当 Subject 被释放时，`upgrade()` 返回 `None`，Observer 自动失效。这避免了 `Rc`/`Arc` 循环引用导致的内存泄漏。[来源: TRPL Ch.15 — Smart Pointers] · [Rust API Guidelines]
+
+> **[来源: TRPL]** `Rc::downgrade` 产生 `Weak<T>`，允许引用而不拥有所有权，是打破循环引用的标准手段。✅
+
+---
+
+#### Rust 实现方式二：异步广播（`tokio::sync::broadcast`）
+
+在异步场景中，`tokio::sync::broadcast` 提供了多生产者多消费者的广播通道，天然适合 Observer 模式：
+
+```rust,ignore
+use tokio::sync::broadcast;
+
+struct AsyncEventBus<T: Clone + Send + 'static> {
+    sender: broadcast::Sender<T>,
+}
+
+impl<T: Clone + Send + 'static> AsyncEventBus<T> {
+    fn new(capacity: usize) -> Self {
+        let (sender, _receiver) = broadcast::channel(capacity);
+        Self { sender }
+    }
+
+    fn publish(&self, event: T) -> Result<usize, broadcast::error::SendError<T>> {
+        self.sender.send(event)
+    }
+
+    fn subscribe(&self) -> broadcast::Receiver<T> {
+        self.sender.subscribe()
+    }
+}
+
+// 使用示例
+async fn async_observer_example() {
+    let bus = AsyncEventBus::new(16);
+
+    let mut rx1 = bus.subscribe();
+    let mut rx2 = bus.subscribe();
+
+    bus.publish("event".to_string()).unwrap();
+
+    assert_eq!(rx1.recv().await.unwrap(), "event");
+    assert_eq!(rx2.recv().await.unwrap(), "event");
+}
+```
+
+**关键洞察**：`broadcast` 通道解耦了生产者和消费者的生命周期——接收者可以独立存在，即使发送者已关闭，`recv()` 会返回错误而非悬垂引用。[来源: Tokio Documentation]
+
+> **[来源: Tokio Docs — broadcast]** broadcast 通道实现 fan-out：每个订阅者接收事件的独立拷贝。✅
+
+---
+
+#### Rust 实现方式三：`event-listener` crate 轻量级实现
+
+对于不需要完整 tokio runtime 的场景，`event-listener` 提供了无锁的轻量级事件通知：
+
+```rust,ignore
+use event_listener::Event;
+
+struct LightWeightSubject {
+    value: i32,
+    event: Event,
+}
+
+impl LightWeightSubject {
+    fn new() -> Self {
+        Self { value: 0, event: Event::new() }
+    }
+
+    fn set_value(&mut self, v: i32) {
+        self.value = v;
+        self.event.notify(usize::MAX); // 通知所有等待者
+    }
+
+    fn listen(&self) -> event_listener::EventListener {
+        self.event.listen()
+    }
+}
+
+// 使用示例
+async fn lightweight_observer_example() {
+    let subject = std::sync::Arc::new(std::sync::Mutex::new(LightWeightSubject::new()));
+
+    let mut listener = subject.lock().unwrap().listen();
+    // 另一个任务修改值并通知
+    subject.lock().unwrap().set_value(42);
+
+    listener.await; // 等待通知
+}
+```
+
+**关键洞察**：`event-listener` 使用无锁原子操作实现通知，相比 `Mutex<Vec<Callback>>` 减少了锁竞争，适用于高并发细粒度事件场景。[来源: event-listener crate docs]
+
+---
+
+#### 所有权挑战：循环引用与 `Weak<T>` 的作用
+
+Rust 的所有权模型使 Observer 模式面临独特挑战。当 Observer 需要访问 Subject 的当前状态，而 Subject 又持有 Observer 回调时，双向引用形成所有权循环：
+
+| **挑战** | **经典 OOP 方案** | **Rust 方案** | **原理** |
+|:---|:---|:---|:---|
+| Subject ↔ Observer 双向引用 | GC 自动回收 | `Rc<RefCell<T>>` + `Weak<T>` | 引用计数，弱引用不阻止释放 |
+| 多线程共享状态 | 同步锁 + GC | `Arc<Mutex<T>>` + `Weak<T>` | `Arc` 原子引用计数，`Weak` 打破循环 |
+| Observer 在通知时移除自身 | 迭代中修改集合 | `retain` 或 `Weak::upgrade` 检查 | 失效观察者自然过滤 |
+
+```rust,ignore
+use std::sync::{Arc, Mutex, Weak};
+
+// 多线程安全版本：Arc + Mutex + Weak
+struct ThreadSafeSubject {
+    observers: Mutex<Vec<Weak<dyn Fn(i32) + Send + Sync>>>,
+}
+
+impl ThreadSafeSubject {
+    fn notify(&self, value: i32) {
+        let mut observers = self.observers.lock().unwrap();
+        // retain 自动清理已释放的 Weak 引用
+        observers.retain(|weak| {
+            if let Some(callback) = weak.upgrade() {
+                callback(value);
+                true
+            } else {
+                false
+            }
+        });
+    }
+}
+```
+
+`Weak<T>` 在此起到关键作用：它允许 Observer 引用 Subject（或反之）而不增加强引用计数，从而保证当所有强引用消失时，资源可以被确定性释放。[来源: `../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) · [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md)
+
+> **[来源: Rust API Guidelines]** 当需要共享所有权且可能存在循环引用时，优先使用 `Weak` 打破循环，避免内存泄漏。✅
+
+---
+
+#### 与 Bevy `EventWriter<T>` / `EventReader<T>` 的对比
+
+Bevy ECS 中的事件系统是现代 Rust Observer 模式的高性能实现，它从根本上规避了所有权循环问题：
+
+| **维度** | **经典 Observer（回调列表）** | **Bevy EventWriter/EventReader** |
+|:---|:---|:---|
+| **耦合度** | Subject 直接持有 Observer 引用 | 完全解耦：通过 ECS World 中介 |
+| **生命周期** | 手动管理订阅/取消订阅 | 系统自动跟踪实体生命周期 |
+| **性能** | 动态分发 + 锁开销 | 无锁环形缓冲区（`Events<T>`） |
+| **批量处理** | 逐个回调调用 | 每帧批量读取，支持事件排序 |
+| **适用场景** | 小规模、紧耦合模块 | 游戏引擎、大规模 ECS 架构 |
+
+```rust,ignore
+// Bevy 风格的事件系统（概念示意）
+use bevy::prelude::*;
+
+#[derive(Event)]
+struct TemperatureChanged(f32);
+
+fn sensor_system(mut writer: EventWriter<TemperatureChanged>) {
+    writer.send(TemperatureChanged(25.0));
+}
+
+fn display_system(mut reader: EventReader<TemperatureChanged>) {
+    for event in reader.read() {
+        println!("Display: {}°C", event.0);
+    }
+}
+```
+
+**关键洞察**：Bevy 的事件系统消除了 Observer 与 Subject 之间的直接引用关系，将所有权交由 ECS 调度器统一管理，从根本上规避了循环引用问题。[来源: Bevy Engine Documentation]
+
+---
+
+#### 与其他语言对比
+
+- **Java/C#**: 经典 Observer 接口（`java.util.Observer`，现已被弃用），依赖 GC 处理循环引用；Rust 必须在编译期通过 `Weak` 显式打破循环。
+- **C++**: `std::shared_ptr` + `std::weak_ptr` 与 Rust 的 `Rc`/`Weak` 机制类似，但 Rust 的 borrow checker 额外防止了数据竞争。
+- **Go**: 使用 channel 实现发布-订阅，无所有权循环问题，但丧失了编译期类型安全（`interface{}` 类型断言）。
+
+> **来源**: [GoF Design Patterns] · [Rust API Guidelines] · [Bevy Docs] · 可信度: ✅
+
+> **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
+
+### 4.7 Rust 特有高级模式
 
 #### GATs（Generic Associated Types）模式
 
@@ -494,7 +754,7 @@ async fn server(mut rx: mpsc::Receiver<Request>, mut shutdown: mpsc::Receiver<()
 
 > **来源**: [Tokio Docs — Patterns] · [Async Rust Design Patterns] · 可信度: ✅
 
-### 4.7 FFI 边界的安全封装深度案例
+### 4.8 FFI 边界的安全封装深度案例
 
 与 C 互操作时，核心挑战是将**不安全契约**封装为**安全 API**：
 
@@ -545,7 +805,7 @@ impl Drop for FooContext {
 
 > **来源**: [The Rustonomicon — FFI] · [Rust FFI Guidelines] · 可信度: ✅
 
-### 4.8 错误处理模式对比：thiserror / miette / snafu
+### 4.9 错误处理模式对比：thiserror / miette / snafu
 
 | **维度** | **thiserror** | **miette** | **snafu** |
 |:---|:---|:---|:---|
@@ -612,75 +872,286 @@ fn load(path: &str) -> Result<Config, Error> {
 
 ## 五、反模式（Anti-patterns）
 
-> **[来源: RFC 1598 GATs; Rust Reference: GATs]** ✅
+> **Bloom 层级**: 应用 → 分析
+
+> **[来源: RFC 1598 GATs; Rust Reference: GATs; Rust API Guidelines]** ✅
+
+反模式是"看似正确、实则有害"的惯用做法。Rust 的类型系统与所有权模型在消除某些经典反模式（如悬空指针、数据竞争）的同时，也催生了特有的抽象陷阱——过度使用泛型、过早拆分模块、`Rc<RefCell<...>>` 迷宫等。以下从工程直觉到成本分析，建立反模式的识别框架。
+
+---
 
 ### 5.1 Over-engineering（过度工程）
 
-**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。
+> **Bloom 层级**: 分析
+
+**定义**：为应对不太可能出现的需求而引入不必要的抽象层次，导致代码复杂度远超实际需要。[来源: Rust Design Patterns — Gold Plating]
 
 **Rust 表现**：
 
 - 为单一函数引入复杂的 Trait 层次和泛型参数，而仅有一个实现。
 - 使用 `async` / `tokio` 处理完全同步、I/O 极少的任务。
+- 为仅含 2-3 个字段的 struct 实现完整的消费型 Builder 模式。
+- 在 crate 内部引入动态分发（`dyn Trait`）以追求"可扩展性"，而所有调用方均为编译期已知类型。
 
-**避免方法**：YAGNI（You Aren't Gonna Need It）；先用 concrete type 实现，待确需多态时再抽象。
+**代码示例：过度工程 vs 适度设计**
 
-> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) · 可信度: ✅
+```rust
+// ❌ 过度工程：为单一实现引入泛型 + Trait 边界
+trait Processor<T, E> {
+    fn process(&self, input: T) -> Result<Vec<u8>, E>;
+}
+
+struct JsonProcessor;
+impl<T: serde::Serialize, E: std::error::Error> Processor<T, E> for JsonProcessor {
+    fn process(&self, input: T) -> Result<Vec<u8>, E> {
+        serde_json::to_vec(&input).map_err(|e| /* 类型不匹配 */ unimplemented!())
+    }
+}
+
+// ✅ 适度设计：先用具体类型实现，待确需多态时再抽象
+fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> {
+    serde_json::to_vec(&input)
+}
+```
+
+**成本分析**：
+
+| 维度 | 过度工程代价 | 检测信号 |
+|:---|:---|:---|
+| **认知负荷** | 新贡献者需理解多层抽象才能修改一行代码 | 修改简单功能需跨越 >3 个文件 |
+| **编译时间** | 泛型单态化导致代码膨胀 | debug 编译时间增长 >50% |
+| **运行时** | `dyn Trait` vtable 间接调用 | 性能敏感路径出现虚调用 |
+| **维护性** | 抽象泄漏时修复成本指数增长 | 抽象层变更导致连锁修改 >5 处 |
+
+**避免方法**：YAGNI（You Aren't Gonna Need It）。当满足以下任一条件时，才考虑引入泛型或 Trait：
+1. 同一 crate 内已出现 ≥3 种不同实现；
+2. 性能测试证明单态化带来的内联优化有显著收益；
+3. 该抽象为公共 API，需向外部用户承诺稳定接口。
+
+**与 L1-L4 的关联**：过度工程的泛型滥用直接违背 [L2 泛型](../02_intermediate/02_generics.md) 中"约束即文档"的原则——无约束的泛型参数丧失类型信息；过度使用 `dyn Trait` 则绕过了 [L1 所有权](../01_foundation/01_ownership.md) 的编译期精确分析，引入运行时间接调用。
+
+> **来源**: [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) · [Rust Design Patterns — Gold Plating](https://rust-unofficial.github.io/patterns/anti_patterns/gold-plating.html) · 可信度: ✅
+
+---
 
 ### 5.2 Premature abstraction（过早抽象）
 
-**定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。
+> **Bloom 层级**: 分析
+
+**定义**：在问题域尚未稳定、需求尚不清晰时建立抽象边界，导致后续修改牵一发而动全身。[来源: Rust API Guidelines]
 
 **Rust 表现**：
 
 - 过早将内部模块拆分为独立 crate，导致 Workspace 依赖环。
 - 过早定义 `dyn Trait` 接口，而实际调用方只有一处且性能敏感。
+- 在需求变更一次后即提取泛型工具函数，而非等待模式稳定。
+- 过早为 enum 的每个变体定义独立模块和子 Trait，导致导航成本超过收益。
 
-**避免方法**：遵循 "三次法则"（Rule of Three）；重复出现三次以上再提取抽象。
+**代码示例：过早抽象 vs 稳定后抽象**
 
-> **来源**: [Rust API Guidelines] · [TRPL] · 可信度: ✅
+```rust
+// ❌ 过早抽象：仅两个变体即引入 dyn Trait + 模块拆分
+pub trait Transport { fn send(&self, data: &[u8]); }
+
+pub struct TcpTransport;
+impl Transport for TcpTransport { fn send(&self, _data: &[u8]) {} }
+
+pub struct UdpTransport;
+impl Transport for UdpTransport { fn send(&self, _data: &[u8]) {} }
+
+// 调用方仅有一处，且性能敏感——dyn Trait 阻碍内联
+fn dispatch(t: &dyn Transport) { t.send(b"hello"); }
+
+// ✅ 先具体后抽象：用 enum 聚合，待接口稳定后再考虑 Trait
+enum Transport {
+    Tcp(std::net::TcpStream),
+    Udp(std::net::UdpSocket),
+}
+
+impl Transport {
+    fn send(&self, data: &[u8]) -> std::io::Result<()> {
+        match self {
+            Transport::Tcp(t) => t.write_all(data),
+            Transport::Udp(u) => u.send(data).map(|_| ()),
+        }
+    }
+}
+```
+
+**三次法则（Rule of Three）的 Rust 适配**：
+
+> **[来源: Rust API Guidelines]** "不要为第一次出现的情况抽象；甚至不要为第二次；第三次出现时，抽象的成本才被摊薄。"
+
+| 出现次数 | 推荐做法 | Rust 机制 |
+|:---|:---|:---|
+| 1 | 直接复制/内联 | 具体类型 |
+| 2 | 注释标记"若再次出现则提取" | 模块级 `// TODO: extract if reused` |
+| 3 | 提取为泛型函数或 Trait | `fn foo<T: Bound>(x: T)` / `trait Foo` |
+| ≥5 | 考虑 crate 级拆分 | Workspace 独立 crate |
+
+**与 L1-L4 的关联**：过早抽象常表现为对 [L2 Trait](../02_intermediate/01_traits.md) 的过早承诺——Trait 一旦作为公共 API 发布，其变更即构成破坏性修改；同时，enum 优先于 dyn Trait 的策略正是 [L1 类型系统](../01_foundation/04_type_system.md) 中"代数数据类型 + 穷尽性检查"优势的体现。
+
+> **来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/about.html) · [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) · 可信度: ✅
+
+---
 
 ### 5.3 Stringly typed（字符串类型化）
 
-**定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。
+> **Bloom 层级**: 应用
+
+**定义**：使用字符串替代强类型来表示结构化数据或枚举状态，丧失编译期检查能力。[来源: Rust API Guidelines — Type Safety]
 
 **Rust 表现**：
 
 - 用 `String` 传递命令名称而非 enum。
 - 用字符串拼接 SQL / 路径，而非使用类型安全的构造器。
+- 用 `&str` 表示有限状态集（如 `"pending" | "running" | "done"`），而非 `enum Status`。
 
 **Rust 对策**：
 
-- 使用 enum + `match`。
+- 使用 enum + `match`，利用穷尽性检查。
 - 使用 `std::path::PathBuf` 代替裸字符串路径。
 - 使用 `sqlx` 等编译期检查的查询构造器。
 
 ```rust
-// ❌ Stringly typed
-fn run_command(name: &str) { /* ... */ }
+// ❌ Stringly typed：运行时拼写错误导致 panic
+fn run_command(name: &str) {
+    match name {
+        "start" => {},
+        "stop" => {},
+        "resart" => {}, // 拼写错误！编译器无法发现
+        _ => panic!("unknown command"),
+    }
+}
 
-// ✅ 强类型
+// ✅ 强类型：非法状态不可表示
+#[derive(Debug)]
 enum Command { Start, Stop, Restart }
-fn run_command(cmd: Command) { match cmd { ... } }
+
+fn run_command(cmd: Command) {
+    match cmd {
+        Command::Start => {},
+        Command::Stop => {},
+        Command::Restart => {},
+    } // 新增变体时编译器强制此处更新
+}
 ```
+
+**与 L1-L4 的关联**：Stringly typed 直接违背 [L1 类型系统](../01_foundation/04_type_system.md) 的核心原则——"使非法状态不可表示"（Making Illegal States Unrepresentable）。enum 的穷尽性检查是 Rust 编译期保证的关键机制，参见 [L1 类型系统](../01_foundation/04_type_system.md) §代数数据类型。
 
 > **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html) · 可信度: ✅
 
+---
+
 ### 5.4 God Object（上帝对象）
 
-**定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。
+> **Bloom 层级**: 分析
+
+**定义**：一个对象或结构体掌握了过多职责和状态，成为系统中所有操作的中心枢纽，违反单一职责原则。[来源: Rust API Guidelines — Structs]
 
 **Rust 表现**：
 
 - 一个 `Context` struct 持有数十个字段和几十种方法。
 - `Mutex<GlobalState>` 包裹整个应用状态，导致锁竞争和逻辑纠缠。
+- `AppState` 被所有 handler 共享，任何字段变更都需重新编译所有依赖模块。
+
+**代码示例：上帝对象 vs 领域拆分**
+
+```rust
+// ❌ God Object：所有状态集中，任何修改都影响全局
+struct AppState {
+    db_pool: DbPool,
+    cache: Cache,
+    config: Config,
+    user_sessions: HashMap<SessionId, User>,
+    metrics: MetricsCollector,
+    // ... 数十个字段
+}
+
+// 所有 handler 都持有 &AppState 或 Arc<AppState>
+async fn handler(state: Arc<Mutex<AppState>>) { /* ... */ }
+
+// ✅ 按领域拆分：状态分散，组合代替堆砌
+struct DatabaseLayer { pool: DbPool }
+struct CacheLayer { cache: Cache }
+struct SessionLayer { sessions: HashMap<SessionId, User> }
+
+struct App {
+    db: DatabaseLayer,
+    cache: CacheLayer,
+    sessions: SessionLayer,
+}
+
+// Handler 只依赖所需子集
+async fn handler(db: &DatabaseLayer, sessions: &SessionLayer) { /* ... */ }
+```
 
 **Rust 对策**：
 
 - 按领域拆分 struct，使用组合代替堆砌。
 - 利用所有权系统将状态分散到不同模块，通过消息传递（channel）或 Actor 模式通信。
+- 对跨线程共享状态，优先使用 `tokio::sync::mpsc` 而非 `Arc<Mutex<GlobalState>>`，将共享可变转化为消息传递。
 
-> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines/predictability.html) · 可信度: ✅
+**与 L1-L4 的关联**：上帝对象的 `Mutex<GlobalState>` 模式违背了 [L1 所有权](../01_foundation/01_ownership.md) 的核心理念——"单一所有者决定生命周期"。通过 Actor / Channel 模型将状态拆分，正是 [L3 并发](../03_advanced/01_concurrency.md) 中"共享状态转化为消息传递"原则的实践。参见 [L1 借用](../01_foundation/02_borrowing.md) §内部可变性、[L3 并发](../03_advanced/01_concurrency.md) §Actor 模型。
+
+> **来源**: [Rust API Guidelines — Structs](https://rust-lang.github.io/api-guidelines/predictability.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · 可信度: ✅
+
+---
+
+### 5.5 Spaghetti Code（意大利面条式代码）
+
+> **Bloom 层级**: 分析
+
+**定义**：控制流和数据流纠缠不清，模块间依赖关系呈网状而非树状，导致理解局部代码必须遍历全局系统。[来源: Wikipedia — Spaghetti code]
+
+**Rust 表现**：
+
+- 过度使用 `Rc<RefCell<T>>` 或 `Arc<Mutex<T>>` 构建复杂的共享可变状态图，所有权关系难以追踪。
+- `async` 块嵌套过深，配合 `select!` 和通道读写形成"回调地狱"的变体。
+- 跨模块的 `unsafe` 块散落于各处，安全不变式被隐含地传递而非显式封装。
+- 生命周期标注泛滥且相互引用，形成"生命周期意大利面"（Lifetime Spaghetti）。
+
+**代码示例：控制流纠缠 vs 结构化设计**
+
+```rust
+use std::rc::Rc;
+use std::cell::RefCell;
+
+// ❌ 面条代码：共享状态 + 嵌套回调 + 隐式控制流
+fn process_items(items: Rc<RefCell<Vec<Item>>>) {
+    let items2 = Rc::clone(&items);
+    let cb = move || {
+        let mut borrowed = items2.borrow_mut();
+        if let Some(item) = borrowed.pop() {
+            // 控制流隐式分叉，借用关系难以追踪
+            spawn_processing(Rc::clone(&items), item);
+        }
+    };
+    schedule_on_idle(cb);
+}
+
+// ✅ 结构化设计：明确所有权转移 + 返回结果
+fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
+    items.into_iter()
+        .map(|item| process_one(item))
+        .collect()
+}
+```
+
+**Rust 对策**：
+
+| 症状 | 根因 | 重构策略 |
+|:---|:---|:---|
+| `Rc<RefCell<...>>` 网状结构 | 所有权设计回避 | 引入 Actor / Channel 模型，显式消息传递 |
+| `async` 嵌套 >4 层 | 回调思维残留 | 提取 `async fn` + `?` 传播，扁平化错误处理 |
+| `unsafe` 散布于业务代码 | FFI 封装不完整 | 集中 `unsafe` 到最小封装层，外层 API 全安全 |
+| 生命周期标注 >3 个嵌套 | 自引用或过度借用 | 考虑 `Pin<&mut Self>` 或所有权重新分配 |
+
+**与 L1-L4 的关联**：Spaghetti Code 在 Rust 中最危险的变体是生命周期意大利面——过度复杂的生命周期标注往往意味着违背了 [L1 所有权](../01_foundation/01_ownership.md) 的"单一所有者"原则，或需要 [L3 异步](../03_advanced/02_async.md) 中的 `Pin` 来安全表达自引用。`Rc<RefCell<...>>` 的滥用则是 [L2 内存管理](../02_intermediate/03_memory_management.md) 中内部可变性机制的误用，参见该文件 §`RefCell<T>` 边界。
+
+> **来源**: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html) · [Rust Design Patterns — Anti-patterns](https://rust-unofficial.github.io/patterns/anti_patterns/index.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Wikipedia — Spaghetti code](https://en.wikipedia.org/wiki/Spaghetti_code) · 可信度: ✅
+
+---
 
 > **过渡**：反模式聚焦具体编码实践中的陷阱。以下反命题决策树则上升一层，批判性审视关于设计模式的元认知谬误。
 
@@ -840,6 +1311,7 @@ fn main() {
 | Visitor | L2 Trait + enum | `../02_intermediate/01_traits.md` | 结构归纳 |
 | Strategy | L2 Trait + 泛型 | `../02_intermediate/01_traits.md` | 多态分发 |
 | State Machine | L1 enum + match | `01_foundation/04_type_system.md` | 代数数据类型穷尽性 |
+| Observer | L1 所有权 + L2 内部可变性 + L3 并发 | `../01_foundation/02_borrowing.md` · `../02_intermediate/03_memory_management.md` | 发布-订阅解耦与循环引用打破 |
 
 ---
 
@@ -869,6 +1341,10 @@ fn main() {
 | Newtype 零成本 | [TRPL] · [Rust Reference] | ✅ |
 | Command/Visitor/Strategy 为 GoF 经典模式 | [GoF Design Patterns, 1994] | ✅ |
 | Stringly typed 为反模式 | [Rust API Guidelines] | ✅ |
+| Over-engineering 定义与检测 | [Rust API Guidelines] · [Rust Design Patterns — Gold Plating] | ✅ |
+| Premature abstraction 与三次法则 | [Rust API Guidelines] · [TRPL] | ✅ |
+| God Object 违反单一职责 | [Rust API Guidelines — Structs] | ✅ |
+| Spaghetti Code 形式化定义 | [Wikipedia — Spaghetti code] | ✅ |
 | 设计模式定义 | [Wikipedia: Design pattern] | ✅ |
 | Typestate analysis 定义 | [Wikipedia: Typestate analysis] | ✅ |
 | 所有权类型理论基础 | [Clarke et al. 1998 — Ownership Types] | ✅ |
@@ -877,6 +1353,8 @@ fn main() {
 | Rust API 设计规范 | [Rust API Guidelines] | ✅ |
 | 设计模式系统化 | [Gamma et al. 1994 — Design Patterns: Elements of Reusable Object-Oriented Software] | ✅ |
 | Typestate 工业实现 | [Aldrich et al. 2009 — Typestates for Objects, ECOOP] | ✅ |
+| Observer 模式定义 | [GoF Design Patterns, 1994] | ✅ |
+| Weak 打破循环引用 | [TRPL] · [Rust API Guidelines] | ✅ |
 
 ---
 
@@ -894,6 +1372,7 @@ fn main() {
 | 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result 模式 |
 | 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | 工程支撑 |
 | 设计模式对比 | [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md) | 范式定位 |
+| 并发 / 异步 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | Observer 异步实现基础 |
 
 ---
 
@@ -941,6 +1420,8 @@ fn main() {
 - [x] **中**: 补充 FFI 边界的安全封装模式深度案例
 - [x] **中**: 补充错误处理模式对比（`thiserror`/`miette`/`snafu`）
 - [x] **低**: 补充各模式的 benchmark 对比数据 —— 已完成 §8.1
+- [x] **高**: 补充 Observer 模式 —— 已完成 §4.6，2026-05-14
+- [x] **低**: 补充反模式（Over-engineering、Premature abstraction）—— 已完成 §5.1–5.5，2026-05-14
 
 > **[来源: Rust Design Patterns Book; Rust API Guidelines; Rust Performance Book]** 设计模式的分析基于 Rust 官方和社区最佳实践。✅
 

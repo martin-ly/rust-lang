@@ -10,6 +10,7 @@
 
 > **Bloom 层级**: 应用 → 分析
 
+- v2.1 (2026-05-14): 扩展 §9.4——补充 `miette` / `snafu` 生态库详解，六库综合对比矩阵与决策树
 - v2.0 (2026-05-12): 深度重构——定理推理链、反命题决策树、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
@@ -74,7 +75,12 @@
       - [9.3.5 `#[track_caller]` 与 `Backtrace` 的协同与对比](#935-track_caller-与-backtrace-的协同与对比)
       - [9.3.6 与 `panic::Location` 的对比](#936-与-paniclocation-的对比)
       - [9.3.7 性能考量：Backtrace 捕获的成本](#937-性能考量backtrace-捕获的成本)
-    - [9.4 `eyre` / `color-eyre` 生态库对比](#94-eyre--color-eyre-生态库对比)
+    - [9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比](#94-eyre--color-eyre--miette--snafu-生态库对比)
+      - [9.4.1 `eyre`：可定制报告的错误处理](#941-eyre可定制报告的错误处理)
+      - [9.4.2 `color-eyre`：彩色诊断与链式回溯](#942-color-eyre彩色诊断与链式回溯)
+      - [9.4.3 `miette`：诊断式错误处理](#943-miette诊断式错误处理)
+      - [9.4.4 `snafu`：显式上下文错误类型](#944-snafu显式上下文错误类型)
+      - [9.4.5 六库综合对比矩阵](#945-六库综合对比矩阵)
     - [9.5 `#[track_caller]` 与错误定位优化](#95-track_caller-与错误定位优化)
       - [9.5.1 工作原理：编译器隐式传递 `Location`](#951-工作原理编译器隐式传递-location)
       - [9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别](#952-locationcaller-与-panicinfolocation-的区别)
@@ -1289,42 +1295,255 @@ fn parse_config_bad(path: &str) -> Result<Config, AppError> {
 
 ---
 
-### 9.4 `eyre` / `color-eyre` 生态库对比
+### 9.4 `eyre` / `color-eyre` / `miette` / `snafu` 生态库对比
 
-`eyre` 是 `anyhow` 的替代方案，提供**可定制的错误报告**：
+> **Bloom 层级**: 应用 → 分析
+>
+> **[来源: eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [Rust CLI Book] · [thiserror docs] · [anyhow docs]** Rust 错误处理生态在 `anyhow` / `thiserror` 之外，已形成多个专攻不同场景的库：`eyre` 强调可定制的报告格式，`color-eyre` 提供富媒体诊断输出，`miette` 专注于源码级诊断标注，`snafu` 则强制显式上下文附件。以下逐一分析其设计哲学、API 风格与适用边界。✅
+
+#### 9.4.1 `eyre`：可定制报告的错误处理
+
+`eyre` 是 `anyhow` 的 fork，核心创新在于 **`EyreHandler` trait**——允许应用通过 `eyre::set_hook` 全局自定义错误报告的格式、内容与附属信息。[来源: eyre docs]
 
 ```rust,ignore
 use eyre::{Result, WrapErr};
-use color_eyre::{config::HookBuilder, Section};
 
-// ✅ 安装自定义错误处理钩子（通常在 main 开头）
-color_eyre::install()?;
+// ✅ 安装默认 handler（或在 main 开头设置自定义 hook）
+eyre::set_hook(Box::new(eyre::DefaultHandler::default_with)).unwrap();
 
 fn read_config(path: &str) -> Result<String> {
     std::fs::read_to_string(path)
-        .wrap_err("failed to read config")  // 添加上下文
-        .with_section(|| path.to_header("config path:"))  // 附加诊断信息
+        .wrap_err("failed to read config")?;  // WrapErr 添加上下文
+    Ok(String::new())
 }
 
 fn main() -> Result<()> {
     let _config = read_config("/nonexistent/config.toml")?;
     Ok(())
 }
-// 输出：彩色错误报告，包含 backtrace、相关 section、建议
 ```
 
-**`anyhow` vs `eyre` 选择矩阵**：
+与 `anyhow` 的关键差异：
 
-| 场景 | 推荐 |
-|:---|:---|
-| 快速原型、CLI 工具 | `anyhow`（更简单） |
-| 需要自定义错误格式（JSON/结构化日志） | `eyre`（handler hook） |
-| 需要彩色输出和 spantrace | `color-eyre` + `tracing-error` |
-| 需要稳定的最小依赖 | `anyhow` |
+| 维度 | `anyhow` | `eyre` |
+|:---|:---|:---|
+| 核心类型 | `anyhow::Error` | `eyre::Report` |
+| 上下文 trait | `Context`（`context` / `with_context`） | `WrapErr`（`wrap_err` / `wrap_err_with`） |
+| 自定义报告 | ❌ 固定格式 | ✅ `EyreHandler` trait + `set_hook` |
+| `Option` 上下文 | ✅ `opt.context("msg")` | ⚠️ `opt.ok_or_eyre("msg")` 或 `ok_or_else` |
+| 与 anyhow 互操作 | — | ✅ 提供兼容 re-export（`Context` → `WrapErr`） |
 
-> **定理**：`anyhow` 和 `eyre` 都遵循 "fail fast, report rich" 哲学——在错误发生点捕获最大上下文，向上传播时不再丢失信息。
+> **[来源: eyre docs]** `eyre::Report` 要求底层错误实现 `Send + Sync + 'static`，并以窄指针（single word）表示，与 `anyhow::Error` 的内存布局一致。✅
 >
-> **来源**: [eyre docs] · [color-eyre docs] · [anyhow docs] · [Rust CLI Book]
+> **设计定理**：`eyre` 将"错误类型统一"（anyhow 哲学）与"报告格式可插拔"分离，使应用可以在不修改错误构造代码的前提下，通过更换 handler 实现从纯文本到 JSON/结构化日志的迁移。
+
+#### 9.4.2 `color-eyre`：彩色诊断与链式回溯
+
+`color-eyre` 是 `eyre` 的官方 companion handler，提供**彩色、一致且格式良好的错误报告**，集成 `tracing-error::SpanTrace`、`color-backtrace` 与 `color-spantrace`。[来源: color-eyre docs]
+
+```rust,ignore
+use color_eyre::{config::HookBuilder, eyre::Result, Section, SectionExt};
+use tracing::{info, instrument};
+
+// ✅ 在 main 开头安装 panic + error handler
+color_eyre::install()?;
+
+#[instrument]
+fn read_file(path: &str) -> Result<String> {
+    std::fs::read_to_string(path)
+        .wrap_err("failed to read file")
+        .with_section(|| format!("path: {}", path).header("Config Path:"))
+}
+
+fn main() -> Result<()> {
+    let _ = read_file("missing.txt")?;
+    Ok(())
+}
+// 输出示例：
+// Error:
+//    0: failed to read file
+//    1: No such file or directory (os error 2)
+//
+// Config Path:
+//    path: missing.txt
+//
+// ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ SPANTRACE ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//    0: read_file with path="missing.txt"
+//       at src/main.rs:10
+```
+
+**核心特性**：
+
+| 特性 | 说明 | 来源 |
+|:---|:---|:---|
+| **彩色输出** | 依赖 `owo_colors`，支持 ANSI/Unicode | [color-eyre docs] |
+| **Backtrace** | 自动捕获 `backtrace::Backtrace`，集成 `color-backtrace` | [color-backtrace] |
+| **SpanTrace** | 集成 `tracing-error`，显示 async/tracing span 链 | [tracing-error] |
+| **Section** | `with_section` 附加任意诊断块（stdout/stderr/配置值） | [color-eyre docs] |
+| **聚合多错误** | 通过 `Section` trait 组合多个错误为一个报告 | [color-eyre examples] |
+
+> **[来源: color-eyre docs]** 生产环境中应通过 `RUST_SPANTRACE=0` 和 `RUST_BACKTRACE=0` 控制诊断噪声；`color-eyre` 在 debug 模式下性能显著低于 `eyre`，因为 `backtrace` crate 的 debug 构建比 `std::backtrace::Backtrace` 慢一个数量级，建议对 `backtrace` 包启用 `[profile.dev.package.backtrace] opt-level = 3`。✅
+
+#### 9.4.3 `miette`：诊断式错误处理
+
+`miette` 的定位是**诊断库**（diagnostic library），而非单纯的错误包装器。其核心是 `Diagnostic` trait——对 `std::error::Error` 的扩展，支持源码标注、错误代码、帮助文本、URL 链接与严重程度分级。[来源: miette docs]
+
+```rust,ignore
+use miette::{Diagnostic, NamedSource, SourceSpan};
+use thiserror::Error;
+
+#[derive(Error, Debug, Diagnostic)]
+#[error("invalid config syntax")]
+#[diagnostic(
+    code(config::parse_error),
+    url("https://docs.example.com/errors/config::parse_error"),
+    help("try using TOML instead of INI for nested tables")
+)]
+struct ConfigParseError {
+    #[source_code]
+    src: NamedSource<String>,
+
+    #[label = "unexpected token here"]
+    err_span: SourceSpan,
+}
+
+use miette::Result;
+fn parse_config(input: &str) -> Result<Config> {
+    // ... 解析失败时 ...
+    Err(ConfigParseError {
+        src: NamedSource::new("config.toml", input.to_string()),
+        err_span: (12, 3).into(),  // byte offset 12, length 3
+    })?
+}
+```
+
+**`miette` 的 Diagnostic 协议**：
+
+```text
+pub trait Diagnostic: Error {
+    fn code(&self) -> Option<Box<dyn Display>>;      // 错误码，如 "config::parse_error"
+    fn severity(&self) -> Option<Severity>;           // Error / Warning / Advice
+    fn help(&self) -> Option<Box<dyn Display>>;       // 帮助文本
+    fn url(&self) -> Option<Box<dyn Display>>;        // 文档链接
+    fn source_code(&self) -> Option<&dyn SourceCode>; // 关联源码
+    fn labels(&self) -> Option<Box<dyn Iterator<Item = LabeledSpan>>>; // 源码标注
+    fn related(&self) -> Option<Box<dyn Iterator<Item = &dyn Diagnostic>>>; // 相关错误
+}
+```
+
+> **[来源: miette docs]** `miette` 与 `thiserror` 完全兼容：可用 `#[derive(Error, Diagnostic)]` 同时实现两个 trait。库代码应仅依赖 `miette` 的核心 trait（不启用 `fancy` feature），由顶层应用启用 `fancy` 获取图形化输出。✅
+
+**`miette::Result` 与 `miette::Report`**：
+
+```rust,ignore
+use miette::{Result, Report};
+
+// ✅ 应用层：直接返回 miette::Result，启用 fancy 报告
+fn main() -> Result<()> {
+    let _ = parse_config("bad = [")?;
+    Ok(())
+}
+
+// ✅ 自定义 ReportHandler：控制主题、颜色、输出格式
+miette::set_hook(Box::new(|_| {
+    Box::new(miette::MietteHandlerOpts::new()
+        .terminal_links(true)
+        .unicode(true)
+        .context_lines(3)
+        .build())
+}));
+```
+
+#### 9.4.4 `snafu`：显式上下文错误类型
+
+`snafu` 的哲学与 `anyhow`/`eyre` 相反：它**拒绝隐式转换**，要求每个错误变体在构造时提供显式上下文。通过 `#[derive(Snafu)]` 自动生成 **Context Selector**（如 `ConfigFileSnafu`），在转换点强制开发者填充字段。[来源: snafu docs]
+
+```rust,ignore
+use snafu::prelude::*;
+
+#[derive(Debug, Snafu)]
+enum AppError {
+    #[snafu(display("could not read config file {path}"))]
+    ConfigFile {
+        source: std::io::Error,
+        path: String,
+    },
+
+    #[snafu(display("invalid port {port}"))]
+    InvalidPort {
+        port: u16,
+    },
+
+    // ✅ transparent：将 Display 和 Error::source 委托给底层错误
+    #[snafu(transparent)]
+    Inner { source: InnerError },
+}
+
+fn read_config(path: &str) -> Result<String, AppError> {
+    // ConfigFileSnafu 是自动生成的上下文选择器
+    std::fs::read_to_string(path).context(ConfigFileSnafu { path })
+}
+
+fn parse_port(s: &str) -> Result<u16, AppError> {
+    let port: u16 = s.parse().map_err(|_| InvalidPortSnafu { port: 0 }.build())?;
+    ensure!(port >= 1024, InvalidPortSnafu { port });  // snafu 的 ensure! 宏
+    Ok(port)
+}
+```
+
+**`snafu` 的设计模式**：
+
+| 模式 | 说明 | 来源 |
+|:---|:---|:---|
+| **Context Selector** | 每个变体生成 `VariantSnafu` 结构体，显式构造错误 | [snafu docs] |
+| **`#[snafu(module)]`** | 将选择器放入子模块，避免命名空间污染 | [snafu guide] |
+| **`#[snafu(transparent)]`** | 委托 Display/source 给底层错误，消除冗余包装 | [snafu docs] |
+| **`#[snafu(context(false))]`** | 跳过选择器生成，直接实现 `From`（类似 `thiserror`） | [snafu docs] |
+| **`ensure!` / `whatever!`** | 类似 `assert!` 的错误构造宏；`Whatever` 类型用于快速原型 | [snafu docs] |
+| **`snafu::Location`** | 轻量级错误源点跟踪（类似 `#[track_caller]`） | [snafu changelog] |
+
+> **[来源: snafu docs]** `snafu` 特别适合大型多 crate 项目：每个模块定义自己的错误类型，通过 `context` 方法在边界处转换，保持错误类型的模块内聚性。GreptimeDB 等工业项目采用此模式管理数百个错误变体。✅
+
+#### 9.4.5 六库综合对比矩阵
+
+| **维度** | **`anyhow`** | **`thiserror`** | **`eyre`** | **`color-eyre`** | **`miette`** | **`snafu`** |
+|:---|:---|:---|:---|:---|:---|:---|
+| **核心定位** | 应用级快速错误传播 | 库级结构化错误定义 | 可定制报告的应用错误 | 富媒体诊断报告 | 源码级诊断协议 | 显式上下文错误类型 |
+| **使用场景** | CLI / 原型 / 应用顶层 | 库公共 API | 需自定义报告格式的应用 | 终端用户面向的 CLI | 编译器 / 解析器 / DSL | 大型多模块系统 |
+| **API 风格** | 隐式转换，`?` 即用 | 派生宏减少样板 | 类似 anyhow + WrapErr | eyre handler 扩展 | Diagnostic trait + 派生 | Context Selector 强制显式 |
+| **错误类型** | 动态 `anyhow::Error` | 静态枚举/结构体 | 动态 `eyre::Report` | 动态（基于 eyre） | 静态 + `Report` 包装 | 静态枚举 |
+| **源码标注** | ❌ | ❌ | ❌ | ❌ | ✅ `SourceSpan` + 高亮 | ❌ |
+| **错误代码** | ❌ | ✅ 手动 | ❌ | ❌ | ✅ `#[diagnostic(code(...))]` | ❌ |
+| **Backtrace** | ✅ 自动 | ✅ `#[backtrace]` | ✅ 自动 | ✅ 彩色 backtrace | ✅ 可集成 | ✅ 可选 |
+| **自定义报告** | ❌ | ❌ | ✅ `EyreHandler` | ✅ 主题/颜色/过滤器 | ✅ `ReportHandler` | ❌ |
+| **编译时间** | 极低 | 低 | 低 | 中（额外依赖） | 中（`fancy` 依赖多） | 低 |
+| **运行时开销** | 低（窄指针） | 零成本抽象 | 低（narrow pointer） | 中（backtrace/spantrace） | 低（标注为引用） | 低（选择器零成本） |
+| **向下转型** | ✅ `downcast_ref` | ✅ `match` 枚举 | ✅ `downcast_ref` | ✅ `downcast_ref` | ✅ `match` / `downcast` | ✅ `match` 枚举 |
+| **与 `?` 互操作** | ✅ 任意 `Error` | ✅ 需 `From` 实现 | ✅ 任意 `Error` | ✅ 任意 `Error` | ✅ 需 `Into<miette::Report>` | ✅ 需 `From` / `context` |
+
+**决策树**：
+
+```mermaid
+graph TD
+    A[选择错误处理库] --> B{库代码还是应用代码?}
+    B -->|库| C{需要调用者 match 错误?}
+    C -->|是| D[thiserror / snafu]
+    C -->|否| E[thiserror + #[error(transparent)]
+包装底层错误]
+    B -->|应用| F{需要富媒体诊断?}
+    F -->|是| G[miette + fancy]
+    F -->|否| H{需要彩色 backtrace + spantrace?}
+    H -->|是| I[color-eyre]
+    H -->|否| J{需要自定义报告格式?}
+    J -->|是| K[eyre]
+    J -->|否| L[anyhow]
+    D --> M[snafu: 大型模块化系统]
+    D --> N[thiserror: 快速派生]
+```
+
+> **定理**：Rust 错误处理生态的分化反映了"**静态结构化**"（`thiserror`/`snafu`）与"**动态统一**"（`anyhow`/`eyre`）的两极张力，而 `miette` 与 `color-eyre` 分别在**诊断精度**与**报告体验**维度上做了垂直深化。库作者应选择静态类型以暴露契约；应用作者应选择动态类型以加速迭代；当错误面向终端用户时，`miette`/`color-eyre` 的诊断可视化能力不可替代。
+>
+> **来源**: [eyre docs] · [color-eyre docs] · [miette docs] · [snafu docs] · [anyhow docs] · [thiserror docs] · [Rust CLI Book] · [GreptimeDB Blog]
 
 ---
 
@@ -1704,7 +1923,7 @@ fn compute() -> Maybe<i32> {
 
 - [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
 - [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
-- [x] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4
+- [x] **TODO**: 补充 `eyre` / `color-eyre` / `miette` / `snafu` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4 (2026-05-14)
 - [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5 (2026-05-14)
 - [x] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 已完成 §9.2
 - [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5

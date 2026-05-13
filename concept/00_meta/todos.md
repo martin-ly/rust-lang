@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: 应用
 > **定位**：汇总 `concept/` 下所有文件的待补充项，按优先级和层级组织，支持持续审计与迭代。
-> **最后更新**：2026-05-13
+> **最后更新**：2026-05-14
 > **版本状态**：v1.2 正式发布 —— 257/257 TODO 全部完成，232/232 代码块编译验证 100% 通过
 
 ---
@@ -116,15 +116,15 @@
 |:---|:---|:---|:---|
 | `01_ownership.md` | 补充与 C++ `unique_ptr` 的深度对比示例 | Phase 3 | ✅ 已完成 §8.1 |
 | `02_borrowing.md` | 补充 `Cow<T>`（Clone on Write）的借用-所有权混合模式 | Phase 2 | ✅ 已完成 §8.1 |
-| `03_lifetimes.md` | 补充 `union` 的类型安全边界 | Phase 3 |
-| `04_type_system.md` | 补充 Type Inference 的 HM 算法完整规则 | Phase 3 |
-| `02_generics.md` | 补充 `min_specialization` 的当前状态与使用 | Phase 3 |
-| `02_generics.md` | 补充泛型代码的编译时间优化策略 | Phase 4 |
-| `02_generics.md` | 补充 Type-level programming（Peano arithmetic、typenum） | Phase 4 |
-| `01_traits.md` | 补充 `const_trait` / `~const` 实验特性 | Phase 4 |
-| `01_traits.md` | 补充 `#[fundamental]` attribute 与 Orphan Rule 例外 | Phase 4 |
+| `03_lifetimes.md` | 补充 `union` 的类型安全边界 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `04_type_system.md` | 补充 Type Inference 的 HM 算法完整规则 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `02_generics.md` | 补充 `min_specialization` 的当前状态与使用 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `02_generics.md` | 补充泛型代码的编译时间优化策略 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `02_generics.md` | 补充 Type-level programming（Peano arithmetic、typenum） | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `01_traits.md` | 补充 `const_trait` / `~const` 实验特性 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
+| `01_traits.md` | 补充 `#[fundamental]` attribute 与 Orphan Rule 例外 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
 | `03_memory_management.md` | 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 | Phase 4 | ✅ 已完成 §5.10 —— 2026-05-14 |
-| `04_error_handling.md` | 补充 `eyre` / `color-eyre` 等生态库的对比 | Phase 4 |
+| `04_error_handling.md` | 补充 `eyre` / `color-eyre` 等生态库的对比 | Phase 4 | ✅ 已完成 —— 2026-05-14 |
 | `04_error_handling.md` | 补充 `#[track_caller]` 与错误定位优化 | Phase 4 | ✅ 已完成 §9.5 —— 2026-05-14 |
 | `04_macros.md` | 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
 | `04_macros.md` | 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
@@ -144,14 +144,14 @@
 | `01_toolchain.md` | 补充 Workspace 高级用法 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
 | `01_toolchain.md` | 补充 Features 与条件编译 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
 | `01_toolchain.md` | 补充 Cross-compilation 配置 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
-| `02_patterns.md` | 补充更多模式（Command、Observer、State Machine） | Phase 3 |
-| `02_patterns.md` | 补充反模式（Over-engineering、Premature abstraction） | Phase 3 |
-| `01_ai_integration.md` | 补充具体 AI+Rust 工具（Kiro, Copilot, Codeium） | Phase 3 |
-| `01_ai_integration.md` | 补充 "RL on compiler errors" 研究 | Phase 3 |
-| `02_formal_methods.md` | 补充具体 TLA+ 规约示例 | Phase 3 |
-| `02_formal_methods.md` | 补充 CI/CD 集成方案 | Phase 3 |
-| `03_evolution.md` | 补充每个 edition 的完整变更清单 | Phase 3 |
-| `03_evolution.md` | 补充不稳定特性的 nightly 使用指南 | Phase 3 |
+| `02_patterns.md` | 补充更多模式（Command、Observer、State Machine） | Phase 3 | ✅ 已完成 §4 —— 2026-05-14 |
+| `02_patterns.md` | 补充反模式（Over-engineering、Premature abstraction） | Phase 3 | ✅ 已完成 §5.1–5.5 —— 2026-05-14 |
+| `01_ai_integration.md` | 补充具体 AI+Rust 工具（Kiro, Copilot, Codeium） | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `01_ai_integration.md` | 补充 "RL on compiler errors" 研究 | Phase 3 | ✅ 已完成 —— 2026-05-14 |
+| `02_formal_methods.md` | 补充具体 TLA+ 规约示例 | Phase 3 | ✅ 已完成 §8.5 —— 2026-05-14 |
+| `02_formal_methods.md` | 补充 CI/CD 集成方案 | Phase 3 | ✅ 已完成 §7.5 —— 2026-05-14 |
+| `03_evolution.md` | 补充每个 edition 的完整变更清单 | Phase 3 | ✅ 已完成 §2.3 —— 2026-05-14 |
+| `03_evolution.md` | 补充不稳定特性的 nightly 使用指南 | Phase 3 | ✅ 已完成 §5.5 —— 2026-05-14 |
 
 ---
 

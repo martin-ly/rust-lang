@@ -557,6 +557,167 @@ env = { MIRIFLAGS = "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check" }
 
 > **来源**: [Rust Compiler Team Triage](https://blog.rust-lang.org/inside-rust/) · [Crater Docs](https://github.com/rust-lang/crater/blob/master/docs/)
 
+### 6.6 Miri 在项目级 CI 中的配置
+
+`cargo miri test` 不仅用于 Rust 编译器团队的 Crater 回归检测，也应成为含 `unsafe` 代码的 Rust 项目标准 CI 步骤：
+
+```yaml
+# .github/workflows/miri.yml
+name: Miri UB Detection
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  schedule:
+    - cron: '0 2 * * *'  # nightly at 2am
+
+jobs:
+  miri:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Miri
+        run: |
+          rustup toolchain install nightly --component miri
+          rustup override set nightly
+          cargo miri setup
+      - name: Run Miri tests
+        run: cargo miri test
+        env:
+          MIRIFLAGS: "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check"
+      - name: Run Miri doctests
+        run: cargo miri test --doc
+```
+
+**配置要点**：
+
+| 配置项 | 推荐值 | 说明 |
+|:---|:---|:---|
+| `MIRIFLAGS` | `-Zmiri-strict-provenance` | 启用严格来源检查，捕获更多 UB |
+| `MIRIFLAGS` | `-Zmiri-symbolic-alignment-check` | 符号化对齐检查 |
+| 触发条件 | `push` + `pull_request` + `schedule` | PR 时快速检测 + nightly 全量检测 |
+| 超时设置 | `timeout-minutes: 60` | Miri 解释执行比原生慢 10-100 倍 |
+
+> **来源**: [Miri README](https://github.com/rust-lang/miri) · [GitHub Actions Docs](https://docs.github.com/en/actions)
+
+### 6.7 `cargo fuzz` 与持续模糊测试
+
+模糊测试（Fuzzing）通过自动生成畸形输入发现 panic、内存安全漏洞和逻辑错误。`cargo-fuzz` 基于 `libFuzzer`，与 Rust 无缝集成：
+
+**`cargo fuzz` 初始化与运行**：
+
+```bash
+# 安装 cargo-fuzz
+cargo install cargo-fuzz
+
+# 初始化 fuzz 目标
+cargo fuzz init
+
+# 编写 fuzz target: fuzz/fuzz_targets/parser.rs
+# ```rust
+# #![no_main]
+# use libfuzzer_sys::fuzz_target;
+#
+# fuzz_target!(|data: &[u8]| {
+#     let _ = my_crate::parse(data);
+# });
+# ```
+
+# 运行 fuzz（默认无限循环，需配合 timeout）
+cargo fuzz run parser
+```
+
+**GitHub Actions 持续模糊测试配置**：
+
+```yaml
+# .github/workflows/fuzz.yml
+name: Continuous Fuzzing
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'  # weekly
+  workflow_dispatch:
+
+jobs:
+  fuzz:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install cargo-fuzz
+        run: cargo install cargo-fuzz
+      - name: Build fuzz targets
+        run: cargo fuzz build
+      - name: Run fuzz targets (timed)
+        run: |
+          for target in $(cargo fuzz list); do
+            echo "Fuzzing target: $target"
+            timeout 600 cargo fuzz run "$target" || true
+          done
+      - name: Upload corpus crashes
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fuzz-crashes
+          path: fuzz/artifacts/
+```
+
+**模糊测试与形式化验证的关系**：
+
+| 方法 | 保证性质 | 成本 | 适用场景 |
+|:---|:---|:---|:---|
+| **Fuzzing** | 概率性发现错误（无数学保证） | 低（全自动） | 输入解析器、协议解码器 |
+| **Kani** | 有界 exhaustive（有界保证） | 中（计算资源） | unsafe 代码、状态机 |
+| **Verus** | 完整功能正确性（假设规格正确） | 高（人工规约） | 核心算法 |
+| **TLA+** | 协议级 Safety/Liveness | 中（协议建模） | 分布式设计 |
+
+> **最佳实践**：对解析器和 FFI 边界使用 `cargo fuzz` 进行持续模糊测试；对发现的问题用 Kani 构造最小反例验证修复。 [来源: cargo-fuzz docs; Rust Fuzz Book]
+
+### 6.8 形式化验证的 CI 成本与触发策略
+
+形式化验证工具的计算成本差异显著，CI 集成必须采用**分层触发策略**以平衡验证深度与反馈速度：
+
+| 工具/阶段 | 典型耗时 | 资源需求 | 推荐触发策略 | 是否 PR-gated | Bloom 层级 |
+|:---|:---|:---|:---|:---:|:---|
+| `cargo check` + `clippy` | < 1 min | 1 vCPU / 2GB | PR + push | ✅ | 应用 |
+| `cargo test` | 1-5 min | 1 vCPU / 2GB | PR + push | ✅ | 应用 |
+| `cargo miri test`（lib） | 10-30 min | 1 vCPU / 4GB | PR（若修改 unsafe）+ nightly | ⚠️ | 分析 |
+| `cargo miri test`（全量） | 30-120 min | 1 vCPU / 4GB | Nightly | ❌ | 分析 |
+| `cargo kani`（smoke） | 1-5 min | 2 vCPU / 4GB | PR（若修改 proofs） | ⚠️ | 分析 |
+| `cargo kani`（深度） | 10-60 min | 4 vCPU / 16GB | Nightly | ❌ | 分析 |
+| `cargo fuzz` | 1-24 h | 4+ vCPU / 8GB | Weekly / Nightly | ❌ | 应用 |
+| `cargo creusot` | 30-120 min | 2 vCPU / 4GB | Nightly / On-demand | ❌ | 评价 |
+| `verus` | 10-60 min | 4 vCPU / 8GB | Nightly / On-demand | ❌ | 评价 |
+
+**触发策略决策树**：
+
+```mermaid
+flowchart TD
+    Start([CI 触发]) --> Q1{修改了哪些文件？}
+    Q1 -->|unsafe / proofs| Kani1["Kani smoke test<br/>PR-gated"]
+    Q1 -->|普通 Rust| Standard["cargo test + clippy"]
+    Q1 -->|协议设计| TLA1["TLA+ TLC<br/>手动触发"]
+
+    Nightly["Nightly 调度"] --> Kani2["Kani 深度 proofs"]
+    Nightly --> Miri2["Miri 全量 test"]
+    Nightly --> Fuzz["cargo fuzz 30min+"]
+    Nightly --> Verus1["Verus / Creusot"]
+
+    Standard --> Nightly
+    Kani1 --> Nightly
+```
+
+**成本优化策略**：
+
+1. **增量验证**：只运行受影响 crate 的 proofs（Kani、Verus 支持 crate 级过滤）
+2. **超时分层**：smoke proofs 超时 60s，深度 proofs 超时 30min
+3. **缓存**：Kani 的 CBMC 中间表示可缓存，减少重复翻译开销
+4. **nightly 异步**：深度验证失败不阻塞 PR 合并，但需在 24h 内修复
+5. **自托管 Runner**：Kani/Verus 需要大内存，GitHub 免费 runner（7GB）可能不足，建议使用自托管 runner
+
+> **来源**: [Kani CI Best Practices](https://model-checking.github.io/kani/ci.html) · [GitHub Actions Pricing](https://docs.github.com/en/billing/managing-billing-for-github-actions) · [AWS CodePipeline Docs]
+
 ---
 
 ## 七、工业案例研究
@@ -672,7 +833,28 @@ graph LR
 
 ### 8.5 TLA+ 规约示例：Rust 并发协议的形式化规约
 
-以下展示如何用 TLA+ 规约一个 Rust 并发通道（Channel）的协议，并验证其实现：
+> **来源**: [TLA+ Spec](https://lamport.azurewebsites.net/tla/tla.html) · [Specifying Systems, Lamport 2002](https://lamport.azurewebsites.net/tla/book.html) · [TLA+ Examples](https://github.com/tlaplus/Examples)
+
+#### 8.5.1 TLA+ 核心语法体系
+
+TLA+（Temporal Logic of Actions）由 Leslie Lamport 设计，其规约由**状态变量**、**初始化谓词**、**下一步动作**和**时序公式**四层结构组成：
+
+| 要素 | 语法/记法 | 语义 | 在规约中的角色 |
+|:---|:---|:---|:---|
+| **状态变量（Variables）** | `VARIABLES v1, v2` | 描述系统全局状态 | 状态函数的载体 |
+| **初始化（Init）** | `Init == ...` | 系统初始状态谓词 | 规约起点 |
+| **动作（Action）** | `A == /\ P /\ v' = e` | 描述状态转移的谓词，`v'` 表示下一状态值 | 状态机边 |
+| **下一步（Next）** | `Next == A \/ B` | 所有可能动作的析取 | 状态机转移关系 |
+| **规约（Spec）** | `Spec == Init /\ [][Next]_vars` | 完整系统行为：初始满足 Init，且每步满足 Next 或 stuttering | 完整时序逻辑公式 |
+| **不变式（Invariant）** | `Inv == ...` | 所有可达状态必须满足的性质 | Safety 属性 |
+| **时序算子** | `[]P`（总是）、`<>P`（最终）、`P ~> Q`（导致） | 描述跨状态的时序属性 | Liveness 属性 |
+| **动作公式** | `[A]_v` / `<A>_v` | A 发生或 v 不变（stuttering）/ A 发生且 v 变化 | 允许或禁止 stuttering |
+
+> **[来源: Specifying Systems, Lamport 2002; TLA+ Video Course]** TLA+ 的数学基础是 ZF 集合论 + 线性时序逻辑。`[Next]_vars` 的 stuttering 不变性（stuttering invariance）是 TLA+ 支持层次化规约和实现精化的关键——规约不限制系统"什么都不做"的次数，从而允许不同抽象层级的规约相互精化。
+
+#### 8.5.2 示例一：Rust `mpsc::channel` 的 TLA+ 规约
+
+以下展示如何用 TLA+ 规约一个 Rust 并发通道（Channel）的协议：
 
 **PlusCal 算法描述**（Rust `mpsc::channel` 的简化模型）：
 
@@ -730,22 +912,185 @@ Liveness == (Len(buffer) > 0 /\ receivers > 0) ~> (Len(buffer) < Len(buffer'))
 
 **与 Rust 实现的对应**：
 
-| TLA+ 概念 | Rust 实现 |
-|:---|:---|
-| `buffer` | `VecDeque<T>` |
-| `Send(v)` | `Sender::send(v)` |
-| `Recv` | `Receiver::recv()` |
-| `Close` | `Sender::drop()` (隐式关闭) |
-| `Safety` | `send` 在 `Sender` drop 后返回 `Err` |
-| `Liveness` | `recv` 在 buffer 非空时不会永久阻塞 |
+| TLA+ 概念 | Rust 实现 | 验证属性 |
+|:---|:---|:---|
+| `buffer` | `VecDeque<T>` | 缓冲区有界性 |
+| `Send(v)` | `Sender::send(v)` | 发送操作的原子性假设 |
+| `Recv` | `Receiver::recv()` | 接收顺序保持 FIFO |
+| `Close` | `Sender::drop()` (隐式关闭) | 关闭后发送返回 `Err` |
+| `Safety` | `send` 在 `Sender` drop 后返回 `Err` | 关闭后无新消息 |
+| `Liveness` | `recv` 在 buffer 非空时不会永久阻塞 | 无饥饿（依赖公平调度） |
 
 **验证工作流**：
 
-1. **设计阶段**：用 TLA+ 验证 Channel 协议满足 Safety 和 Liveness
+1. **设计阶段**：用 TLC 验证 Channel 协议满足 Safety 和 Liveness
 2. **实现阶段**：Rust 代码遵循 TLA+ 规约的状态机结构
 3. **测试阶段**：运行时 trace-checking 确保实际行为与 TLA+ 模型一致
 
-> **来源**: [TLA+ Examples](https://github.com/tlaplus/Examples) · [Rust Channel Docs](https://doc.rust-lang.org/std/sync/mpsc/)
+#### 8.5.3 示例二：Rust `Mutex` 的正确性规约
+
+`std::sync::Mutex` 的核心安全契约是**互斥性**（Mutual Exclusion）和**所有权追踪**（只有持有锁的线程才能访问受保护数据）。以下 TLA+ 规约建模了 Rust `Mutex<T>` 的简化行为，聚焦于锁状态机而非数据值：
+
+```tla
+------------------------------ MODULE RustMutex ------------------------------
+EXTENDS Naturals, FiniteSets, Sequences
+
+CONSTANTS Threads, NULL
+
+VARIABLES owner, waiting, lock_state, guard_count
+
+TypeInvariant ==
+  /\ owner \in Threads \cup {NULL}
+  /\ waiting \subseteq Threads
+  /\ lock_state \in {"UNLOCKED", "LOCKED"}
+  /\ guard_count \in Nat
+
+Init ==
+  /\ owner = NULL
+  /\ waiting = {}
+  /\ lock_state = "UNLOCKED"
+  /\ guard_count = 0
+
+\* 线程 t 成功获取锁（无竞争路径）
+Acquire(t) ==
+  /\ lock_state = "UNLOCKED"
+  /\ owner = NULL
+  /\ owner' = t
+  /\ lock_state' = "LOCKED"
+  /\ guard_count' = guard_count + 1
+  /\ waiting' = waiting \ {t}
+  /\ UNCHANGED <<>>
+
+\* 线程 t 尝试获取已被持有的锁，进入等待队列
+AcquireBlocked(t) ==
+  /\ lock_state = "LOCKED"
+  /\ owner /= t
+  /\ t \notin waiting
+  /\ waiting' = waiting \cup {t}
+  /\ UNCHANGED <<owner, lock_state, guard_count>>
+
+\* 线程 t 释放锁（对应 MutexGuard 的 Drop）
+Release(t) ==
+  /\ owner = t
+  /\ lock_state = "LOCKED"
+  /\ guard_count > 0
+  /\ owner' = NULL
+  /\ lock_state' = "UNLOCKED"
+  /\ guard_count' = guard_count - 1
+  /\ UNCHANGED <<waiting>>
+
+\* 状态转移：任一线程执行任一动作，或 stuttering
+Next ==
+  \/ \E t \in Threads : Acquire(t) \/ AcquireBlocked(t) \/ Release(t)
+
+\* 完整规约：Init + [][Next]_vars + 弱公平性（保证等待线程最终获得锁）
+Fairness == \A t \in Threads : WF_<<owner, waiting, lock_state, guard_count>>(Acquire(t))
+
+Spec == Init /\ [][Next]_<<owner, waiting, lock_state, guard_count>> /\ Fairness
+
+\* Safety 1: 类型不变式始终成立
+TypeSafe == []TypeInvariant
+
+\* Safety 2: 互斥性——锁被持有时只有一个所有者
+MutualExclusion ==
+  [](lock_state = "LOCKED" =>
+    (owner /= NULL /\ \A t1, t2 \in Threads : (owner = t1 /\ owner = t2) => t1 = t2))
+
+\* Safety 3: guard_count 与 lock_state 一致
+GuardConsistency == [](guard_count > 0 <=> lock_state = "LOCKED")
+
+\* Safety 4: 只有持有者能释放
+OnlyOwnerReleases == [][\A t \in Threads : Release(t) => owner = t]_<<owner, waiting, lock_state, guard_count>>
+
+\* Liveness: 等待的线程最终获得锁（无饥饿）
+NoStarvation == \A t \in Threads : (t \in waiting) ~> (owner = t)
+
+THEOREM Spec => TypeSafe
+THEOREM Spec => MutualExclusion
+THEOREM Spec => GuardConsistency
+THEOREM Spec => NoStarvation
+===============================================================================
+```
+
+**与 Rust `Mutex` 实现的映射**：
+
+| TLA+ 概念 | Rust 实现 | 语义对应 |
+|:---|:---|:---|
+| `Acquire(t)` | `Mutex::lock()` 成功返回 | `lock()` 在锁空闲时立即获得所有权 |
+| `AcquireBlocked(t)` | `Mutex::lock()` 阻塞等待 | 锁被持有时线程进入 OS 等待队列 |
+| `Release(t)` | `MutexGuard::drop()` | Guard 离开作用域自动释放锁 |
+| `owner` | `Mutex` 内部的所有权标记 | 追踪当前持有线程 |
+| `guard_count` | `MutexGuard` 的生命周期计数 | 编译期通过类型系统保证 `guard_count \in {0, 1}`（标准 Mutex） |
+| `MutualExclusion` | `unsafe` 内的原子操作/系统调用 | 底层 futex/`pthread_mutex` 提供 |
+| `NoStarvation` | 依赖 OS 调度策略 | Rust 标准库不保证公平性，但 TLC 可验证公平调度下的无饥饿 |
+
+> **关键差异**：TLA+ 规约验证了**协议设计**层面的正确性；Rust 的 `Mutex` 实现还需要 Kani/Miri 验证 `unsafe` 内的原子操作和内存顺序是否正确实现了这一状态机。 [来源: Rust std::sync::Mutex docs; TLA+ Examples]
+
+#### 8.5.4 tlaplus 工具链与 Rust 的集成现状
+
+| 工具/组件 | 功能 | 与 Rust 的关联 | 成熟度 |
+|:---|:---|:---|:---:|
+| **TLC Model Checker** | 穷举状态空间验证 Safety/Liveness | 独立运行，验证 TLA+ 规约 | 成熟 |
+| **TLA+ Toolbox** | Eclipse 基础的 IDE | 无直接编译器集成 | 成熟 |
+| **VS Code 扩展** (`tlaplus-community/vscode-tlaplus`) | 语法高亮、TLC 运行、错误诊断、PlusCal 翻译 | 可在同一 IDE 中编辑 Rust 和 TLA+ | 活跃 |
+| **Apalache** | SMT-based 符号模型检测器（处理无限/大状态空间） | 适合验证参数化协议（N 线程 Mutex） | 活跃 |
+| **tree-sitter-tlaplus** | 语法解析库 | 可被 Rust 工具链消费用于 IDE 集成 | 社区 |
+| `stateright` crate | Rust 原生分布式模型检测库 | 与 TLA+ 互补：Rust 生态内的轻量级替代，可直接用 Rust 写规约 | 活跃 |
+
+**典型集成工作流**：
+
+```mermaid
+flowchart LR
+    subgraph Design["设计阶段"]
+        T1[TLA+ Toolbox / VS Code]
+        T2[TLC / Apalache]
+    end
+    subgraph Impl["实现阶段"]
+        R1[Rust 代码]
+        R2[Kani / Miri]
+    end
+    subgraph Runtime["运行时对齐"]
+        P1[PObserve / 自定义 trace]
+    end
+    T1 -->|验证协议| T2
+    T2 -->|规约通过| R1
+    R1 -->|验证 unsafe 实现| R2
+    R1 -->|收集轨迹| P1
+    P1 -->|比对 TLA+ 规约| T1
+```
+
+> **来源**: [TLA+ Home Page](https://lamport.azurewebsites.net/tla/tla.html) · [Apalache GitHub](https://github.com/apalache-mc/apalache) · [stateright crate](https://docs.rs/stateright) · [VS Code TLA+](https://marketplace.visualstudio.com/items?itemName=alygin.vscode-tlaplus)
+
+#### 8.5.5 TLA+ 与 Kani/Verus 的对比：协议设计 vs 代码实现
+
+TLA+ 和 Kani/Verus 处于形式化验证光谱的不同位置，二者是**互补**而非竞争关系：
+
+| 维度 | TLA+ | Kani | Verus |
+|:---|:---|:---|:---|
+| **验证层级** | L3 协议级（设计） | L1 代码级（实现） | L1 代码级（实现） |
+| **抽象目标** | 状态机、时序属性、分布式协议 | unsafe 代码安全属性 | 功能正确性、算法规约 |
+| **形式化方法** | 时序逻辑 + 集合论 + 模型检测 | 有界模型检测 + 符号执行 | SMT 求解 + 演绎验证 |
+| **Rust 集成度** | 无直接集成（设计层工具） | `#[kani::proof]` 注解 MIR | `#[verifier::spec]` 内联规约 |
+| **活性验证** | 原生支持（`~>`、`WF`） | 有限（需手动构造 progress 属性） | 有限（需 termination 证明） |
+| **状态空间处理** | 显式有界（TLC）或 SMT（Apalache） | 符号化（有界展开） | SMT（理论组合） |
+| **规约编写成本** | 中（需学习 PlusCal/TLA+） | 低（harness + `kani::any()`） | 中高（spec/proof 函数） |
+| **反例呈现** | 状态轨迹（error trace） | 具体输入值 + 执行路径 | SMT 反例模型 |
+| **工业应用** | AWS S3/DynamoDB, Azure Cosmos DB, Kafka | AWS s2n-quic, Firecracker | Microsoft IronRDP, GhostCell |
+| **典型工作流位置** | **设计阶段**：验证算法设计无缺陷 | **实现阶段**：验证 unsafe 代码无 UB | **实现阶段**：验证函数满足数学规约 |
+
+**协同验证策略**：
+
+```text
+设计阶段: TLA+ 验证协议设计正确（Safety + Liveness）
+    ↓
+实现阶段: Rust 编码 + Kani 验证 unsafe 实现与 TLA+ 状态机一致
+    ↓
+回归阶段: Miri 检测 UB + cargo test 覆盖功能路径
+    ↓
+运行时:   PObserve / trace-checking 确保实际行为符合 TLA+ 规约
+```
+
+> **[来源: AWS CACM 2015 — How Amazon Web Services Uses Formal Methods; Kani Docs; Verus Docs]** TLA+ 用于验证"设计是否正确"，Kani/Verus 用于验证"实现是否与设计一致"。在工业实践中，TLA+ 往往在项目早期使用（甚至先于代码），而 Kani/Verus 在编码阶段迭代使用。
 
 ---
 

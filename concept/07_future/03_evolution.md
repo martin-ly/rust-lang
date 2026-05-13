@@ -11,6 +11,7 @@
 
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
+- v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
 
 ---
 
@@ -100,69 +101,322 @@ RFC（Request for Comments）是 Rust 语言特性演进的正式提案流程。
 
 ### 2.2 Edition 机制详解
 
-Edition 是 Rust 解决"如何安全地引入不兼容语法变更"的核心机制。
+> **[来源: Rust Edition Guide; RFC 2052]** ✅
 
-#### 2.2.1 设计哲学
+Edition 是 Rust 解决"如何安全地引入不兼容语法变更"的核心机制。Rust 采用约每 3 年发布一个新 Edition 的节奏（2015 → 2018 → 2021 → 2024），在不破坏现有 crate 的前提下，允许语言清理历史包袱、引入更优雅的语法。
 
-- **Crate 级选择**：每个 crate 在 `Cargo.toml` 中声明 `edition = "2021"`，同一依赖图可混合不同 edition
-- **编译器永远理解所有 edition**：rustc 不会丢弃对旧 edition 的支持
-- **Edition 之间可互操作**：不同 edition 的 crate 可以无缝链接和调用
-- **迁移工具自动化**：`cargo fix --edition` 自动应用大部分迁移
+#### 2.2.1 核心概念与设计哲学
 
-#### 2.2.2 Edition 2021 → 2024 变更清单
+**Edition 的本质**是**同一 crate 内源代码解析规则的版本**。它不同于编译器版本（`rustc 1.XX`）或 Cargo 版本，而是一种 opt-in 的语法方言开关。核心设计原则包括：
 
-> **来源**: [Rust Edition Guide 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html)
+| **原则** | **说明** | **工程意义** |
+|:---|:---|:---|
+| **Crate 级选择** | 每个 crate 在 `Cargo.toml` 中声明 `edition = "2021"` | 同一依赖图可混合不同 edition，互不干扰 |
+| **编译器永远理解所有 edition** | `rustc` 不会丢弃对旧 edition 的支持 | 2015 年的代码在 2030 年的编译器上仍可编译 |
+| **Edition 之间可互操作** | 不同 edition 的 crate 可以无缝链接和调用 | ABI 兼容，仅语法解析差异 |
+| **迁移工具自动化** | `cargo fix --edition` 自动应用大部分迁移 | 降低升级成本，鼓励社区跟进 |
 
-| **类别** | **变更** | **影响** | **迁移方式** |
-|:---|:---|:---|:---|
-| **所有权** | `gen` 关键字预留 | 为生成器语法预留关键字 | `cargo fix` 自动重命名变量 |
-| **生命周期** | Lifetime capture rules (`use<>`) | RPITIT 更精确捕获生命周期 | 编译器自动推断，极少需手动 |
-| **Trait** | `impl Trait` 生命周期捕获 | `impl Trait` 隐式捕获所有生命周期 | 可能需添加 `+ use<'a>` |
-| **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn | unsafe fn 内的 unsafe 操作需显式标记 | 添加 `unsafe { }` 块 |
-| **宏** | `macro_rules` 可见性 | `macro_rules!` 支持 `pub` 和 `pub(crate)` | 可选显式声明 |
-| **匹配** | `match` ergonomics | 简化 `&` 和 `ref` 模式匹配 | 完全向后兼容 |
-| **never_type** | `!` 类型稳定（严格版） | 表达发散函数和空枚举 | 需 `feature(never_type)` 至 2024 |
-| **异步** | `gen` blocks / async gen | 生成器和异步生成器 | 新语法，不影响旧代码 |
-| **指针** | 裸指针比较方法 | `ptr::addr_eq` 替代 `==` on pointers | `cargo fix` |
-| **尾部表达式** | 临时值生命周期调整 | 某些尾部表达式的临时值生命周期延长 | 编译器自动处理 |
+> **[来源: Rust Edition Guide — What are editions?]** ✅
+
+**Bloom 层级**: 🎯 理解 → 分析
+
+#### 2.2.2 Edition 与 rustc 版本解耦
+
+> **[来源: Rust Reference; Edition Guide]** ✅
+
+Rust 编译器的版本（如 `rustc 1.85.0`）与 Edition（如 `2024`）是**正交的两个维度**：
+
+```text
+rustc 1.85.0 ──┬── 支持 edition = "2015"
+               ├── 支持 edition = "2018"
+               ├── 支持 edition = "2021"
+               └── 支持 edition = "2024"（默认）
+```
+
+- **编译器版本**决定**可用特性**和**标准库 API**。例如 `rustc 1.75` 稳定了 `async fn` in trait，该特性在所有 edition 中均可用（只要编译器版本足够新）。
+- **Edition**决定**语法解析规则**。例如 `dyn Trait` 在 2015 edition 中可省略 `dyn`，在 2018+ 中必须显式写出；但 `rustc 1.85` 同时支持这两种写法，取决于 crate 声明的 edition。
+
+```toml
+# Cargo.toml 中的 edition 选择
+[package]
+name = "my-crate"
+version = "0.1.0"
+edition = "2024"      # 语法解析规则版本
+rust-version = "1.85" # MSRV：最低编译器版本
+```
+
+> **[来源: Cargo Reference — The edition field; rust-version field]** ✅
+
+这种解耦是 Rust 稳定承诺的基石：**升级编译器不会破坏现有代码**（只要不更改 edition），而**升级 edition 是 crate 作者的主动选择**。
+
+#### 2.2.3 `cargo fix --edition` 自动迁移机制
+
+> **[来源: Rust Edition Guide — Transitioning an existing project]** ✅
+
+`cargo fix` 是 Rust 工具链内置的自动迁移工具，其核心工作流如下：
+
+```bash
+# 1. 在当前 edition 下修复所有警告（推荐先执行）
+cargo fix
+
+# 2. 检查迁移到目标 edition 的兼容性
+cargo fix --edition --allow-dirty
+
+# 3. 手动修改 Cargo.toml: edition = "2024"
+# 4. 重新构建验证
+cargo build
+```
+
+**自动迁移的能力边界**：
+
+| **可自动修复** | **需手动审查** |
+|:---|:---|
+| 关键字冲突重命名（`async` → `r#async`） | `unsafe fn` 内 unsafe 操作的语义审查 |
+| `dyn Trait` 显式标注 | `impl Trait` + `use<>` 的生命周期设计 |
+| 路径系统迁移（`extern crate` 移除） | `static mut` 引用移除后的并发安全重构 |
+| `macro_rules!` 片段指定符补全 | 闭包 disjoint capture 导致的 Drop 顺序变化 |
+| `unsafe extern` 块标记 | 指针比较从值语义到地址语义的逻辑影响 |
+
+> **[来源: Rust Edition Guide — Advanced migrations; rustc lint groups]** ✅
+
+对于无法自动修复的变更，编译器通过 `rust-2024-compatibility` lint group 提供诊断信息，开发者可按警告逐个处理：
+
+```bash
+# 手动启用特定迁移 lint
+cargo check -W rust-2024-compatibility
+```
+
+---
 
 ### 2.3 完整 Edition 变更清单（2015 → 2018 → 2021 → 2024）
 
-#### Rust 2015 → 2018
+> **[来源: Rust Edition Guide — 各 Edition 索引; RFC 2052; RFC 2963; RFC 3502; RFC 3503]** ✅
+
+以下表格汇总每个 Edition 的完整语法与语义变更。每个变更均标注：**类别**、**具体变更**、**影响范围**、**迁移方式**。
+
+#### 2.3.1 Rust 2015 → 2018（Rust 1.31，2018-12）
+
+> **[来源: Rust Edition Guide — Rust 2018; Rust Blog 1.31]** ✅
 
 | **类别** | **变更** | **影响** | **迁移方式** |
 |:---|:---|:---|:---|
-| 模块系统 | `extern crate` 不再需要 | 简化依赖声明 | 自动（2018 默认）|
-| 路径 | `crate::` 绝对路径 | 消除 `super::` 混乱 | `cargo fix` |
-| 关键字 | `async`/`await` 预留 | 为异步语法做准备 | 重命名变量 |
-| 生命周期 | `'_` 匿名生命周期 | 简化泛型签名 | 可选 |
-| Trait | `dyn Trait` 显式标注 | 消除 object safety 隐式性 | `cargo fix` |
-| 宏 | `macro_export` + `crate` 路径 | 宏可见性改进 | 手动 |
+| **模块系统** | `extern crate` 不再需要（宏 crate 除外） | 依赖自动进入 extern prelude | 自动，无需 `extern crate` |
+| **模块系统** | `crate::` 作为当前 crate 绝对路径根 | 统一路径语义 | `cargo fix` 自动重写路径 |
+| **模块系统** | Uniform paths：`use` 路径相对当前模块 | 消除 `use` 与其他路径的不一致 | 自动 |
+| **模块系统** | `foo.rs` + `foo/` 共存，`mod.rs` 非必需 | 更灵活的目录布局 | 可选迁移 |
+| **关键字** | `async`、`await`、`try` 成为保留关键字 | 禁止作为标识符 | `cargo fix` 重命名或 `r#` 原始标识符 |
+| **关键字** | `dyn` 成为严格关键字 | 禁止作为标识符 | `cargo fix` |
+| **Trait** | `dyn Trait` 必须显式标注 | `Box<Trait>` → `Box<dyn Trait>` | `cargo fix` 自动添加 `dyn` |
+| **生命周期** | `'_` 匿名生命周期参数占位符 | 简化泛型签名中的显式生命周期 | 可选使用 |
+| **生命周期** | NLL（Non-Lexical Lifetimes）默认启用 | 借用检查更精确，释放更早 | 编译器自动（后回传至 2015 edition）|
+| **宏** | 过程宏（`proc_macro`）稳定；可用 `use` 导入宏 | 宏系统现代化 | 手动迁移宏导入方式 |
+| **Trait** | Trait 方法参数禁止匿名（必须有参数名） | `fn foo(&self, u8)` → `fn foo(&self, _: u8)` | `cargo fix` |
+| **类型推断** | 裸指针方法分派改进 | 对推断变量的原始指针更精确 | 自动 |
 
-#### Rust 2018 → 2021
+> **[来源: Rust Edition Guide — Path changes; New keywords; dyn Trait]** ✅
+
+**关键洞察**：Rust 2018 的核心主题是**路径清晰化（Path Clarity）**。`extern crate` 的消除、`crate::` 统一根路径、`use` 的相对化，共同构成了 "1path" 理念——无论身处 crate 的哪个模块，`use` 路径与非 `use` 路径的解析规则一致。[来源: Rust Blog — Rust 1.31 and Rust 2018]
+
+#### 2.3.2 Rust 2018 → 2021（Rust 1.56，2021-10）
+
+> **[来源: Rust Edition Guide — Rust 2021; Rust Blog 1.56]** ✅
 
 | **类别** | **变更** | **影响** | **迁移方式** |
 |:---|:---|:---|:---|
-| 预lude | `TryInto`/`TryFrom`/`FromIterator` 自动导入 | 减少 `use` 语句 | 自动 |
-| 数组 | 数组实现 `IntoIterator` | `for x in [1,2,3]` 合法 | 自动 |
-| 闭包 | Disjoint capture | 只捕获字段而非整个结构体 | 自动 |
-| 模式 | 嵌套 `or` 模式 | `matches!(x, A \| B \| C)` | 新语法 |
-| 包解析 | Resolver 2 | 按特性解析依赖 | `resolver = "2"` |
+| **Prelude** | `TryInto`、`TryFrom`、`FromIterator` 加入 prelude | 无需手动 `use` 即可调用 `.try_into()` 等 | 自动，删除冗余 `use` |
+| **迭代器** | 数组 `[T; N]` 实现 `IntoIterator<Item = T>` | `for x in [1,2,3]` 按值移动迭代 | 自动，但需审查 `array.into_iter()` 语义变化 |
+| **闭包** | Disjoint capture（不相交捕获） | 闭包仅捕获用到的字段，而非整个变量 | 自动，极少数 Drop 顺序变化需手动处理 |
+| **模式** | 嵌套 `or` 模式在 `macro_rules!` `:pat` 中可用 | `matches!(x, A \| B \| C)` 在宏内合法 | 新语法，无需迁移 |
+| **包解析** | Cargo Resolver 2 默认启用 | 按特性（feature）解析依赖，避免 feature 过度统一 | `resolver = "2"` 在 `Cargo.toml` 中声明 |
+| **宏** | `panic!` 宏一致性：必须传格式字符串 | `panic!(val)` → `panic!("{}", val)` | `cargo fix` 自动改写 |
+| **语法预留** | 预留 `ident#`、`ident"..."` 语法 | 为未来语法扩展保留空间 | 自动检查冲突 |
+| **Lint 升级** | `bare_trait_objects`、`ellipsis_inclusive_range_patterns` 从 warn 升为 error | 强制 `dyn Trait` 和 `..=` 语法 | 编译器报错后手动修复 |
+| **生命周期** | `'_` 在更多上下文可用 | 进一步简化显式生命周期 | 可选 |
 
-#### Rust 2021 → 2024
+> **[来源: Rust Edition Guide — Additions to the prelude; IntoIterator for arrays; Disjoint capture]** ✅
 
-> 详见 §2.2.2，此处补充完整清单：
+**关键洞察**：Rust 2021 的核心主题是**精细化所有权与捕获**。Disjoint capture 使闭包不再过度捕获整个结构体，这是 Rust 所有权系统在「更精确、更细粒度」方向上的重要演进，与 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) 中的「最小权限原则」一脉相承。
+
+#### 2.3.3 Rust 2021 → 2024（Rust 1.85，2025-02）
+
+> **[来源: Rust Edition Guide — Rust 2024; Rust Blog 1.85]** ✅
 
 | **类别** | **变更** | **影响** | **迁移方式** |
 |:---|:---|:---|:---|
-| 关键字 | `gen` 预留 | 生成器语法准备 | `cargo fix` |
-| 生命周期 | `use<>` precise capturing | RPITIT 精确捕获 | 自动推断 |
-| Unsafe | `unsafe_op_in_unsafe_fn` warn | 显式标记 unsafe 操作 | `cargo fix` |
-| 指针 | `ptr::addr_eq` | 比较指针地址而非值 | `cargo fix` |
-| 匹配 | Match ergonomics | `&` 和 `ref` 简化 | 自动 |
-| never type | `!` 严格版稳定 | 发散函数类型 | 需 edition 2024 |
-| 尾部表达式 | 临时值生命周期 | 某些尾部表达式延长生命周期 | 自动 |
-| 宏 | `macro_rules` 可见性 | `pub macro_rules!` | 可选 |
+| **关键字** | `gen` 成为保留关键字 | 为生成器（generator）语法预留 | `cargo fix` 自动重命名变量为 `r#gen` |
+| **关键字** | 预留 `#"foo"#` 和 `##` 语法 | 为守护字符串字面量预留 | 自动检查 |
+| **生命周期** | RPIT lifetime capture rules | `impl Trait` 默认捕获所有输入生命周期 | 自动（旧代码通常直接编译），反向需 `+ use<>` |
+| **生命周期** | `use<..>` precise capturing 语法稳定 | 显式控制 `impl Trait` 捕获哪些生命周期 | 手动设计（新 API 推荐显式标注）|
+| **Unsafe** | `unsafe_op_in_unsafe_fn` 默认 warn → deny | `unsafe fn` 体内的 unsafe 操作需显式 `unsafe { }` | `cargo fix` 自动包裹 |
+| **Unsafe** | `extern` 块必须标记 `unsafe` | `extern "C" { }` → `unsafe extern "C" { }` | `cargo fix` 自动添加 |
+| **Unsafe** | `no_mangle`、`export_name`、`link_section` 需 `#[unsafe(...)]` | 属性显式标记 unsafe | `cargo fix` 自动改写 |
+| **Unsafe** | 禁止引用 `static mut` | `&STATIC_MUT` 成为硬错误 | 手动重构为 `UnsafeCell` 或原子类型 |
+| **Unsafe** | `std::env::set_var` / `remove_var` 变为 `unsafe fn` | 修改环境变量需显式 unsafe | 手动添加 `unsafe` 块 |
+| **Never type** | `!` fallback 规则调整 | never type 向目标类型的强制转换更严格 | 自动，极少数需显式类型标注 |
+| **匹配** | Match ergonomics reservations | 禁止某些易混淆的 `&` + `ref` 模式组合 | 编译器报错后手动修复 |
+| **临时值** | `if let` 临时值作用域变化 | `if let Some(x) = expr()` 中临时值作用域调整 | 自动，通常无感知 |
+| **临时值** | 尾部表达式临时值作用域变化 | 块尾部表达式的临时值生命周期延长 | 自动 |
+| **宏** | `:expr` 片段指定符匹配 `const` 和 `_` | 宏更灵活 | 自动 |
+| **宏** | 缺失片段指定符成为硬错误 | `($x)` → `($x:tt)` 必须补全 | `cargo fix` |
+| **宏** | `macro_rules!` 支持 `pub` / `pub(crate)` | 宏可见性可控 | 可选显式声明 |
+| **Prelude** | `Future`、`IntoFuture` 加入 prelude | async 生态更无缝 | 自动 |
+| **迭代器** | `Box<[T]>` 实现 `IntoIterator<Item = T>` | 盒装切片可按值迭代 | 自动（方法解析隐藏旧行为）|
+| **Cargo** | Rust-version aware resolver | 依赖解析考虑 `rust-version` 字段 | 自动 |
+
+> **[来源: Rust Edition Guide — RPIT lifetime capture; Unsafe extern blocks; Unsafe attributes; unsafe_op_in_unsafe_fn]** ✅
+
+**关键洞察**：Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。`unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) 中的泛型约束理论直接相关。
+
+---
+
+#### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
+
+> **[来源: Rust Edition Guide; 官方 RFC 示例]** ✅
+
+**示例 1：`dyn Trait` 显式标注**
+
+```rust
+// Rust 2015 — dyn 可省略
+fn process(x: &MyTrait) -> Box<MyTrait> { /* ... */ }
+
+// Rust 2018+ — dyn 必须显式
+fn process(x: &dyn MyTrait) -> Box<dyn MyTrait> { /* ... */ }
+```
+
+**示例 2：`extern crate` 与路径系统**
+
+```rust
+// Rust 2015
+extern crate serde;
+use serde::Serialize;
+
+mod foo {
+    use ::serde::Deserialize; // 必须从 crate 根开始
+}
+
+// Rust 2018+
+use serde::Serialize; // extern crate 不再需要
+
+mod foo {
+    use serde::Deserialize; // 路径相对当前模块，自动查找 extern prelude
+}
+```
+
+**示例 3：数组按值迭代**
+
+```rust
+// Rust 2018 — array.into_iter() 实际迭代的是 &[T]（按引用）
+let arr = [1, 2, 3];
+for x in arr.iter() { println!("{}", x); } // x: &i32
+
+// Rust 2021+ — array.into_iter() 按值移动迭代
+let arr = [1, 2, 3];
+for x in arr { println!("{}", x); } // x: i32（按值）
+// 注意：arr 在此处被移动，后续不可再使用
+```
+
+**示例 4：闭包 disjoint capture**
+
+```rust
+#[derive(Debug)]
+struct Point { x: i32, y: i32 }
+
+let mut p = Point { x: 0, y: 0 };
+let mut c = || p.x += 1;
+
+// Rust 2018 — 闭包捕获整个 p，因此 p.y 也无法访问
+// c(); // 先调用
+// println!("{}", p.y); // ERROR: p 已被可变捕获
+
+// Rust 2021+ — 闭包仅捕获 p.x，p.y 仍可访问
+c();
+println!("{}", p.y); // OK: p.y 未被捕获
+```
+
+> **[来源: Rust Edition Guide — Disjoint capture in closures]** ✅
+
+**示例 5：`impl Trait` 生命周期捕获（2024 核心变化）**
+
+```rust
+// Rust 2021 — impl Trait 默认不捕获生命周期，导致常见编译错误
+fn numbers(nums: &[i32]) -> impl Iterator<Item = i32> {
+    nums.iter().copied() // ERROR: captures lifetime '_
+}
+
+// 修复 1：显式标注捕获（Rust 2021 向后兼容写法）
+fn numbers<'a>(nums: &'a [i32]) -> impl Iterator<Item = i32> + 'a {
+    nums.iter().copied()
+}
+
+// Rust 2024 — 默认捕获所有输入生命周期，上述代码直接编译通过
+fn numbers(nums: &[i32]) -> impl Iterator<Item = i32> {
+    nums.iter().copied() // OK: 自动捕获 &'
+}
+
+// Rust 2024 — 若不想捕获，显式排除
+fn numbers(nums: &[i32]) -> impl Iterator<Item = i32> + use<> {
+    [1, 2, 3].iter().copied() // OK: 不依赖 nums 的生命周期
+}
+```
+
+> **[来源: Rust Edition Guide — RPIT lifetime capture rules]** ✅
+
+**示例 6：`unsafe fn` 内的显式 unsafe 块（Rust 2024）**
+
+```rust
+// Rust 2021 — unsafe fn 体内的 unsafe 操作可直接写
+unsafe fn legacy_write(ptr: *mut u8, val: u8) {
+    *ptr = val; // 编译通过（但有 lint 警告）
+}
+
+// Rust 2024 — unsafe fn 体内的 unsafe 操作仍需显式 unsafe 块
+unsafe fn modern_write(ptr: *mut u8, val: u8) {
+    unsafe { *ptr = val; } // 必须显式包裹
+}
+```
+
+> **[来源: Rust Edition Guide — unsafe_op_in_unsafe_fn]** ✅
+
+**示例 7：`unsafe extern` 块（Rust 2024）**
+
+```rust
+// Rust 2021
+extern "C" {
+    fn strlen(p: *const c_char) -> usize;
+}
+
+// Rust 2024
+unsafe extern "C" {
+    pub safe fn sqrt(x: f64) -> f64;        // safe 项无需 unsafe 块调用
+    pub unsafe fn strlen(p: *const c_char) -> usize; // unsafe 项需 unsafe 块
+}
+```
+
+> **[来源: RFC 3484; Rust Edition Guide — Unsafe extern blocks]** ✅
+
+---
+
+### 2.4 未来 Edition 方向（2027+）
+
+> **[来源: Rust Lang Team Roadmap; Inside Rust Blog; 社区讨论]** 📋 推测性内容
+
+Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。基于当前 nightly 特性、RFC 草案和 Lang Team 博客，2027 Edition 可能聚焦以下方向：
+
+| **可能方向** | **当前状态** | **预期变更形式** | **与现有系统的关联** |
+|:---|:---|:---|:---|
+| **Effects 系统语法** | Lang Team 早期设计 | 统一 `async`/`unsafe`/`const` 为 effect 标注 | L2 Trait 系统 + L3 Async |
+| **生成器（Generators）稳定** | `gen` 已预留关键字 | `gen { yield 1; }` 语法稳定 | L3 Async / 协程 |
+| **特化（Specialization）** | `min_specialization` 内部使用 | 逐步向用户开放安全子集 | L2 Trait Coherence |
+| **Const 泛型完整化** | `generic_const_exprs` nightly | 常量表达式 `where N > 0` | L2 泛型系统 |
+| **Type Alias Impl Trait (TAIT)** | nightly，预计 2025-2026 稳定 | `type MyIter = impl Iterator<Item = i32>` | L2 泛型 + 存在类型 |
+| **用户自定义 allocators** | nightly (`allocator_api`) | 容器类型默认 allocator 参数化 | L1 内存管理 |
+| **Safe 子集外部函数** | `safe fn` in `extern` 块已部分实现 | 更精细的 FFI 安全边界 | L3 Unsafe/FFI |
+
+> **[来源: Lang Team Blog — Roadmap 2024+; RFC 3624 (Effects); Unstable Book]** 📋
+
+**设计约束**：新 Edition 的变更必须满足三个条件——(1) 无法在不破坏兼容的前提下在旧 edition 中实现；(2) 有自动迁移工具支持或影响面极小；(3) 与现有 edition 的 crate 保持 ABI 互操作。[来源: Rust Edition Guide — Edition design principles]
+
+---
 
 ---
 
@@ -741,3 +995,20 @@ graph TD
 > **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅
 
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
+
+---
+
+## 十、TODO 完成记录
+
+> **[Bloom 层级]: 管理**
+
+- [x] **补充每个 edition 的完整变更清单** —— 完成于 2026-05-14
+  - 已补充 §2.2.1 核心概念与设计哲学（Edition 概念、每 3 年周期）
+  - 已补充 §2.2.2 Edition 与 rustc 版本解耦
+  - 已补充 §2.2.3 `cargo fix --edition` 自动迁移机制
+  - 已补充 §2.3.1 Rust 2015 → 2018 完整变更清单（12 项）
+  - 已补充 §2.3.2 Rust 2018 → 2021 完整变更清单（9 项）
+  - 已补充 §2.3.3 Rust 2021 → 2024 完整变更清单（19 项）
+  - 已补充 §2.3.4 跨 Edition 代码示例（7 组对比）
+  - 已补充 §2.4 未来 Edition 方向（2027+）
+  - 所有论断附 `[来源: ...]` 标注，含 Bloom 层级标注，与 L1-L4 文件交叉链接
