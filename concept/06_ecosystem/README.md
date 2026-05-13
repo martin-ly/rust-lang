@@ -10,11 +10,12 @@
 
 ```mermaid
 graph TB
-    subgraph L6_Core["L6 核心四文件"]
+    subgraph L6_Core["L6 核心五文件"]
         TOOL[01 Toolchain]
         PAT[02 Patterns]
         CRATES[03 Core Crates]
         APP[04 Application Domains]
+        FORMAL[05 Formal Ecosystem Tower]
     end
 
     %% L1-L5 输入
@@ -30,6 +31,8 @@ graph TB
     PAT -.->|"Cargo 工作空间"| TOOL
     CRATES -.->|"选型支撑"| APP
     APP -.->|"需求反馈"| CRATES
+    FORMAL -.->|"形式化评估"| CRATES
+    CRATES -.->|"数据反馈"| FORMAL
 
     %% L7 输出
     TOOL ==>|"工具链支撑语言演进"| L7_EV[→ L7 Evolution]
@@ -73,6 +76,7 @@ graph TB
 | [02_patterns.md](./02_patterns.md) | 设计模式 | Typestate、Builder、Newtype、RAII、Zero-cost | ✅ v1.0 | L1 Ownership、L2 Trait、L5 对比 | 可维护代码结构 |
 | [03_core_crates.md](./03_core_crates.md) | 核心库谱系 | serde、tokio、axum、clap、tracing、sqlx 等 40+ crate | ✅ v1.0 | L1-L5 全部概念 | 工程选型决策 |
 | [04_application_domains.md](./04_application_domains.md) | 应用主题 | Web、CLI、嵌入式、游戏、区块链、数据工程、系统、GUI | ✅ v1.0 | L1-L5 全部概念 + 核心 crate | 领域工程落地 |
+| [05_formal_ecosystem_tower.md](./05_formal_ecosystem_tower.md) | 形式化生态塔 | 核心 crate 的形式化根基/可组合性/可观测性三维评估；L0-L4 形式化分层 | ✅ v1.0 | L4 类型论、L3 Async/Unsafe | 形式化选型决策 |
 
 ---
 
@@ -92,6 +96,8 @@ graph TB
 | 生命周期 | `sqlx` 编译期查询检查 | 数据库类型安全 |
 | 过程宏 | `serde`、`clap` derive | 声明式代码生成 |
 | Pin | `tokio` 自引用任务 | 异步状态机安全 |
+| 范畴论/态射 | `Tower` Service Trait 复合 | 架构组合层的代数结构 |
+| 同态/结构保持 | `Serde`/`SQLx`/`Prost` | 数据层的类型安全转换 |
 
 ---
 

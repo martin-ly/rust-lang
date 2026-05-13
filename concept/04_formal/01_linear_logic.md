@@ -277,9 +277,96 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 
 ---
 
-## 七、示例与反例
+## 七、sequent calculus 完整规则集与 Phase Semantics
 
-### 7.1 Rust 中的线性/仿射对应
+> **[Girard 1987 · Linear Logic]** · **[Wikipedia: Sequent calculus]** · **[Wikipedia: Phase semantics]** 本节补充线性逻辑的三层规则系统（乘法/加法/指数）及其相位语义与 Rust 编译阶段的直观映射。✅
+
+### 7.1 乘法片段（Multiplicatives）：所有权与资源分解
+
+```text
+───────── (Ax)        Γ ⊢ A, Δ    Γ' ⊢ B, Δ'
+A ⊢ A                      ─────────────────── (⊗R)
+                           Γ, Γ' ⊢ A ⊗ B, Δ, Δ'
+
+Γ, A, B ⊢ Δ              Γ ⊢ A, Δ    Γ' ⊢ B, Δ'
+─────────── (⊗L)         ─────────────────────── (⊸R)
+Γ, A ⊗ B ⊢ Δ             Γ, Γ' ⊢ A ⊸ B, Δ, Δ'
+```
+
+| 规则 | 逻辑形式 | Rust 对应 | 语义 |
+|:---|:---|:---|:---|
+| **⊗R** (Tensor Right) | 合并两个独立证明 | `(a, b)` 元组构造 | 资源 A 和资源 B 同时存在，互不干扰 |
+| **⊗L** (Tensor Left) | 解构合并资源 | `let (a, b) = pair` | 从元组中提取两个独立所有权 |
+| **⊸R** (Lollipop Right) | 假设 A 证明 B | 闭包 `\|a\| -> b` | 消耗 A 的所有权，产生 B 的所有权 |
+| **Ax** (Axiom) | 恒等规则 | `let y = x;` (move) | 资源自证其有效性 |
+
+### 7.2 加法片段（Additives）：选择与穷尽性
+
+```text
+Γ ⊢ A, Δ                Γ ⊢ B, Δ
+─────────── (⊕L₁)       ─────────── (⊕L₂)
+Γ ⊢ A ⊕ B, Δ            Γ ⊢ A ⊕ B, Δ
+
+Γ, A ⊢ Δ    Γ, B ⊢ Δ
+─────────────────────── (⊕R)
+Γ, A & B ⊢ Δ
+```
+
+| 规则 | 逻辑形式 | Rust 对应 | 语义 |
+|:---|:---|:---|:---|
+| **⊕** (Plus/和类型) | 选择 A 或 B | `enum E { A, B }` | 资源是 A 或 B 之一，但非同时 |
+| **&** (With/积类型) | 提供 A 和 B 两种选择 | `trait` 的多个方法 | 环境可选择使用 A 或 B，但不同时消耗两者 |
+| **⊕R** | match 穷尽性 | `match e { A => ..., B => ... }` | 编译器检查所有分支（穷尽性 = 加法规则的完整性） |
+
+### 7.3 指数片段（Exponentials）：Copy 与 weakening
+
+```text
+!Γ ⊢ A
+─────────── (!R)
+!Γ ⊢ !A
+
+Γ, A ⊢ Δ
+─────────── (!L)
+Γ, !A ⊢ Δ
+```
+
+| 规则 | 逻辑形式 | Rust 对应 | 语义 |
+|:---|:---|:---|:---|
+| **!A** (Of course/Bang) | 资源 A 可任意复制 | `impl Copy for T` | 从线性资源降级为直觉主义资源，允许 weakening 和 contraction |
+| **!R** | 从线性证明构造可复制的 | `#[derive(Copy)]` | 编译器验证所有字段都满足 Copy |
+| **!L** | 使用可复制资源 | `let x = a; let y = a;`（a: Copy） | 不消耗所有权，可多次使用 |
+
+> **关键洞察**: Rust 的 `Copy` trait  precisely 对应线性逻辑的 `!`（bang）算子——它将一个受线性约束的资源转化为可 weakening（忽略）和 contraction（复制）的资源。这正是 Rust 不需要 GC 的核心：默认线性（无 weakening），显式标记 `Copy` 才允许 weakening。
+
+### 7.4 Phase Semantics：编译期 vs 运行期的相位映射
+
+Phase semantics（相位语义）将逻辑公式的真值解释为**资源集合的闭包**。与 Rust 的对应：
+
+| Phase 语义概念 | 数学定义 | Rust 编译/运行对应 |
+|:---|:---|:---|
+| **相位（Phase）** | 资源集合 P ⊆ M | 程序执行的"阶段"：编译期检查、运行期执行、链接期解析 |
+| **事实（Fact）** | 公式 A 在相位 P 中为真 ⟺ A 的资源需求被 P 满足 | 类型 `T` 在上下文 `Γ` 中合法 ⟺ `Γ` 提供 `T` 所需的所有权 |
+| **闭包（Closure）** | P^⊥⊥ = { x \| ∀y∈P^⊥, x·y ∈ ⊥ } | 借用检查器的闭包推导：从初始约束推导所有隐含约束 |
+| **正交（Orthogonal）** | P^⊥ = { y \| ∀x∈P, x·y ∈ ⊥ } | 生命周期的"不重叠"关系：`'a` 和 `'b` 正交 ⟺ 没有共享数据 |
+
+```text
+Rust 编译期的相位模型:
+  Phase 1 (解析): 语法树构造 ──→ 对应线性逻辑的公式结构
+  Phase 2 (类型检查): 约束求解 ──→ 对应 sequent calculus 的证明搜索
+  Phase 3 (借用检查): NLL/Polonius ──→ 对应 phase semantics 的闭包计算
+  Phase 4 (单态化): 泛型展开 ──→ 对应证明的具体实例化
+  Phase 5 (运行期): 实际执行 ──→ 对应 proof nets 的归约（cut elimination）
+```
+
+> **[来源: Girard 1987 §5 Phase Semantics]** 相位语义将线性逻辑从证明论（proof theory）延伸到模型论（model theory）。Rust 编译器的 borrow checker 可视为一个**自动定理证明器**：它验证程序代码是否是"资源安全"这一逻辑定理的有效证明。
+>
+> **[来源: 💡 原创映射]** "编译期检查 = 证明验证；运行期执行 = 证明归约"——这是 Curry-Howard 对应在 Rust 工程中的直接体现。💡
+
+---
+
+## 八、示例与反例
+
+### 8.1 Rust 中的线性/仿射对应
 
 ```rust
 // ✅ 仿射逻辑: String 是线性资源（ Affine ）
@@ -480,12 +567,211 @@ fn session_demo() {
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、Proof nets（证明网）与并发程序可视化
 
-- [ ] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）
-- [ ] **TODO**: 补充 Phase semantics（相位语义）与 Rust 编译期/运行期阶段的直观联系
-- [ ] **TODO**: 补充 Proof nets（证明网）作为并发程序可视化的形式化工具
-- [ ] **TODO**: 补充 Linear Haskell 与 Rust 的跨语言类型系统对比
+> **[学术来源: Girard 1987, *Linear Logic* §6; Danos & Regnier 1989, *The Structure of Multiplicatives*; Wikipedia: Proof net]** Proof nets 是线性逻辑证明的**图形化规范形式**，消除了 sequent calculus 中因规则应用顺序不同而产生的**句法冗余**。它们将证明表示为图结构，其中逻辑连接词是节点，公式是边，cut 是连接两个对偶公式的边。
+
+### 11.1 Proof nets 的语法与正确性
+
+在乘法片段（multiplicative fragment）中，proof net 是一个带标签的有向图：
+
+```text
+公理链接 (Axiom link):    A ──── A⊥
+张量节点 (⊗):             A ──┐
+                          B ──┘── A ⊗ B
+Par 节点 (⅋):             A ──┐
+                          B ──┘── A ⅋ B
+切 (Cut):                 A ──── A⊥
+```
+
+**正确性标准（Correctness Criterion）**: 一个 proof net 是**正确**的，当且仅当对其中每个 ⊗ 节点，删除该节点后图分为两个不连通分量（Danos-Regnier 标准）。这确保了证明结构对应于一个有效的 sequent calculus 证明。
+
+> **与 sequent calculus 的等价性**: Girard 证明了任何 cut-free sequent calculus 证明都可以唯一地转换为一个 proof net，反之，任何正确的 proof net 都可以顺序化（sequentialize）为一个 sequent calculus 证明。Proof nets 是线性逻辑的 **Church-Rosser 规范形式**。
+
+### 11.2 Proof nets 作为并发程序的可视化工具
+
+Proof nets 的图结构天然适合建模**并发资源流**：
+
+| Proof net 概念 | 并发编程对应 | 可视化含义 |
+|:---|:---|:---|
+| **Axiom link** | 通道/消息的创建 | 资源的生产点 |
+| **⊗ 节点** | `fork` / `join` | 两个独立任务并行执行，各自消耗独立资源 |
+| **⅋ 节点** | 选择/交替执行 | 两个任务共享同一资源，交替访问 |
+| **Cut** | 通道通信 | 资源从一个线程线性转移到另一个线程 |
+| **Cut 消除** | 消息传递归约 | 通信规约为直接资源转移 |
+
+**形式化对应**:
+
+```text
+并发进程 P ∥ Q 对应 proof net 中的 ⊗ 结构:
+  Γ ⊢ P : A    Δ ⊢ Q : B
+  ─────────────────────────  (⊗-intro in process calculus)
+  Γ, Δ ⊢ P ∥ Q : A ⊗ B
+```
+
+### 11.3 Rust 并发通道的 Proof net 可视化
+
+```rust
+use std::sync::mpsc;
+
+// 对应 proof net: !String ──cut── String⊥
+// （!String = 可复制的发送端，String⊥ = 接收端的对偶）
+fn channel_as_proof_net() {
+    let (tx, rx) = mpsc::channel::<String>();
+
+    // ⊗ 左分支: 生产资源
+    std::thread::spawn(move || {
+        let data = String::from("resource");  // 创建资源 A
+        tx.send(data).unwrap();               // Cut: A ──── A⊥
+        // data 被线性转移（move），此后不可用
+    });
+
+    // ⊗ 右分支: 消费资源
+    let received = rx.recv().unwrap();        // Cut 消除: A⊥ 被消耗
+    println!("{}", received);                // 资源在新的上下文中使用
+}
+```
+
+**> [L1↔L4: concurrency]** L3/c05_threads.md §3 "通道通信" 的精确对应——`mpsc::channel()` 的 `send`/`recv` 在 proof net 中是一条 **Cut 边**，连接生产者线程的 `A` 和消费者线程的 `A⊥`。Cut 消除定理保证了这条边可以被安全地归约为直接资源转移，即通信是无数据竞争的。
+
+### 11.4 Proof nets 的归约与 Cut 消除
+
+```text
+Cut 消除规则（线性逻辑核心元定理）:
+
+  Axiom:   A ──── A⊥    ──→    （直接删除，无剩余）
+
+  ⊗-⅋:     A ──┐                A ──── A⊥    B ──── B⊥
+           B ──┘── A ⊗ B ──── A⊥ ⅋ B⊥         ──→    （两个独立 Cut）
+
+  对应并发语义:  fork/join 归约为直接组合
+```
+
+> **关键洞察**: Cut 消除定理在并发语义中对应 **进程归约**——复杂的通信协议可以被逐步简化为直接资源交换。这是 Caires & Pfenning 2010 会话类型（Session Types）与线性逻辑深层对应的图形化表达。
+
+---
+
+## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
+
+> **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统中嵌入线性约束。
+
+### 12.1 Linear Haskell 的核心语法
+
+Linear Haskell 引入**重数箭头** `⊸`（在源码中写作 `%1 ->`），表示函数**必须恰好一次**消耗其参数：
+
+```haskell
+{-# LANGUAGE LinearTypes #-}
+
+-- 线性箭头: f 必须恰好使用 x 一次
+f :: a %1 -> b
+f x = ...  -- x 必须被使用恰好一次，否则编译错误
+
+-- 普通箭头: f 可任意使用 x（对应直觉主义逻辑）
+g :: a -> b
+g x = ...  -- x 可被使用 0 次、1 次或多次
+
+-- 重数多态: h 对使用次数不做承诺
+h :: a %m -> b
+h x = ...  -- m 是重数变量
+```
+
+**重数（Multiplicity）格**:
+
+```text
+      ω（无限制）
+     /
+    1（线性，恰好一次）
+```
+
+### 12.2 Rust vs Linear Haskell: 类型系统对比
+
+| **维度** | **Rust** | **Linear Haskell** |
+|:---|:---|:---|
+| **逻辑基础** | **仿射逻辑**（Affine） | **线性逻辑**（Linear） |
+| **Weakening（丢弃）** | ✅ 允许（未使用变量 warning） | ❌ 不允许（除非显式 `drop`） |
+| **Contraction（复制）** | ❌ 不允许（非 Copy 类型 move） | ❌ 不允许 |
+| **Copy 语义** | `Copy` trait 标记可复制类型 | `Dupable` 类型类（通过 `ω` 重数隐式支持） |
+| **生命周期** | 内置区域类型系统（`'a`） | 无内置生命周期；依赖 GC 或外部框架 |
+| **借用模型** | `&T` / `&mut T` 编译期检查 | 无原生借用；线性值只能 move |
+| **unsafe 支持** | 原生支持，可封装安全抽象 | 无 direct 对应（FFI 通过 C 调用） |
+| **生态状态** | 工业级，稳定 | 实验性，GHC 9.x+ 可用 |
+
+> **核心区别**: Rust 是**仿射类型系统**（允许 weakening，即资源可丢弃），而 Linear Haskell 是**严格线性类型系统**（weakening 不成立，资源必须精确使用一次）。这使得 Linear Haskell 在形式化上更"纯粹"，但工程上更受限。
+
+### 12.3 代码对比: 线性资源管理
+
+**Linear Haskell**:
+
+```haskell
+{-# LANGUAGE LinearTypes #-}
+import Prelude.Linear
+import qualified System.IO as IO
+
+-- 线性 Handle: 必须被关闭恰好一次
+readFileLinear :: FilePath %1 -> IO String
+readFileLinear path = do
+    handle <- IO.openFile path IO.ReadMode
+    contents <- IO.hGetContents handle
+    IO.hClose handle          -- ✅ 必须显式关闭
+    return contents
+
+-- 错误示例: 忘记关闭 handle → 编译错误
+-- readFileBad :: FilePath %1 -> IO String
+-- readFileBad path = do
+--     handle <- IO.openFile path IO.ReadMode
+--     IO.hGetContents handle  -- ❌ handle 未被使用（未关闭）
+```
+
+**Rust**:
+
+```rust
+use std::fs::File;
+use std::io::{self, Read};
+use std::mem::ManuallyDrop;
+
+// 仿射 File: handle 可隐式丢弃（weakening）
+fn read_file_affine(path: &str) -> io::Result<String> {
+    let mut file = File::open(path)?;  // 获得资源
+    let mut contents = String::new();
+    file.read_to_string(&mut contents)?; // 使用资源
+    // file 可隐式 drop（Affine weakening）
+    Ok(contents)
+}
+
+// 若需强制线性使用，可禁用 Drop 并配合 ManuallyDrop
+fn read_file_manual(path: &str) -> io::Result<String> {
+    let mut file = ManuallyDrop::new(File::open(path)?);
+    let mut contents = String::new();
+    unsafe { file.read_to_string(&mut contents)?; }
+    // 必须显式关闭，否则泄漏（但编译器不强制）
+    Ok(contents)
+}
+```
+
+### 12.4 形式化定位
+
+```text
+Linear Haskell 重数系统:
+  τ ::= ... | τ %m -> τ'    where m ∈ {1, ω}
+  Γ ⊢ e : τ  with  usage(Γ) ≤ multiplicity(τ)
+
+Rust 所有权系统（仿射变体）:
+  Σ; Γ ⊢ e : τ {Σ'}
+  where Γ 允许未使用变量（weakening），Σ 追踪 move 状态
+```
+
+> **关键洞察**: Linear Haskell 的 `%1 ->` 精确对应线性逻辑的 `⊸`（线性蕴含），而 Rust 的 `fn(T) -> U` 更接近**仿射蕴含**——允许调用者丢弃参数而不使用。这是两种语言在"资源敏感性"光谱上的关键差异：Linear Haskell 追求**形式纯度**，Rust 追求**工程实用性**。
+
+> **来源**: [Bernardy et al. 2017, *Linear Haskell*] · [GHC 9.0+ LinearTypes Documentation] · [Pierce 2002, TAPL §15.3] · [Wikipedia: Linear logic]
+
+---
+
+## 十三、待补充与演进方向（TODOs）
+
+- [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）—— 已完成 §7.1–7.3
+- [x] **TODO**: 补充 Phase semantics（相位语义）与 Rust 编译期/运行期阶段的直观联系 —— 已完成 §7.4
+- [x] **TODO**: 补充 Proof nets（证明网）作为并发程序可视化的形式化工具 —— 已完成 §11，2026-05-13
+- [x] **TODO**: 补充 Linear Haskell 与 Rust 的跨语言类型系统对比 —— 已完成 §12，2026-05-13
 
 > **过渡: L4 → L3**
 >

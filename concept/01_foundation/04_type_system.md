@@ -767,13 +767,204 @@ fn max<T: Ord>(a: T, b: T) -> T { if a > b { a } else { b } }
 
 ---
 
+### 11.1 补充：`!` (Never type) 的形式化分析
+
+> **[Rust Reference: Never type]** · **[Wikipedia: Bottom type]** · **[TAPL Ch.11]** `!` 是 Rust 的 **bottom type**（底类型），表示"永无返回"。它在类型论中是**所有类型的子类型**（`! <: T` 对任意 `T`），在控制流分析中扮演关键角色。✅
+
+#### 形式化定义
+
+```text
+语法:  fn diverges() -> ! { loop {} }
+语义:  diverges() 不终止 ⟹ 不存在值属于类型 !
+类型论: ! 是空集 ∅，是任意类型 T 的子类型（! <: T）
+```
+
+#### 控制流交互：`!` 作为统一分支类型
+
+```rust
+fn main() -> Result<(), String> {
+    let value = match maybe_error() {
+        Ok(v) => v,           // v: i32
+        Err(e) => return Err(e.into()),  // return 表达式类型为 !
+    };
+    // ✅ 编译器知道：若 Err 分支执行，则不会到达此处
+    //    因此 value 的类型 = Ok 分支的 i32
+    println!("{}", value);
+    Ok(())
+}
+```
+
+#### `Result<T, !>`：表示"不可能出错"
+
+```rust
+// ✅ Result<T, !> 表示操作总是成功，Err 变体不可构造
+fn infallible_op() -> Result<String, !> {
+    Ok(String::from("always success"))
+}
+
+let s = infallible_op()?;  // ? 不会返回，因为 Err(!) 无法构造
+// s 的类型直接为 String，无需 unwrap
+```
+
+| 用法 | 类型签名 | 含义 |
+|:---|:---|:---|
+| `fn foo() -> !` | 返回底类型 | 函数永不返回（panic/loop/exit） |
+| `Result<T, !>` | 成功类型 T，错误类型 ! | 操作不可能失败 |
+| `Option<!>` | 无值类型 | 等价于 `()`，但语义更精确 |
+| `match` 统一 | `!` 作为缺失分支的类型 | 允许 match 分支类型不一致时通过子类型统一 |
+
+> **来源**: [Rust Reference: Diverging functions] · [Wikipedia: Bottom type] · [TAPL Ch.11: Subtyping] · [RFC 1216: Never type]
+
+### 11.2 补充：Zero-Sized Types (ZST) 与 `PhantomData`
+
+> **[Rust Reference: Zero-sized types]** · **[Rust Reference: PhantomData]** ZST 是**运行时大小为 0 字节**的类型，在类型论中是**单元类型（unit type）**的泛化。`PhantomData<T>` 是 ZST 的代表，用于**在类型系统中携带编译期信息**，而不产生运行时开销。✅
+
+#### ZST 的类型论意义
+
+```rust
+// ✅ 所有 ZST 在运行时占 0 字节
+struct Unit;           // 单元结构体
+enum Void {}          // 空枚举（无变体）
+struct Wrapper<T>(std::marker::PhantomData<T>);  // 泛型但零大小
+
+assert_eq!(std::mem::size_of::<Unit>(), 0);
+assert_eq!(std::mem::size_of::<Wrapper<String>>(), 0);
+```
+
+| ZST | 大小 | 类型论语义 | 典型用途 |
+|:---|:---|:---|:---|
+| `()` | 0 | 单元类型（terminal object） | 无返回值、无副作用 |
+| `!` | 0 | 底类型（initial object） | 永不返回 |
+| `Void`（空 enum） | 0 | 空类型（无 inhabitant） | 不可达分支标记 |
+| `PhantomData<T>` | 0 | 类型标记（type token） | 编译期携带泛型参数信息 |
+
+#### `PhantomData<T>` 的工程用途
+
+```rust
+use std::marker::PhantomData;
+
+// ✅ 用 PhantomData 在类型系统中编码"所有权"
+struct Handle<T> {
+    raw: *mut T,
+    _marker: PhantomData<T>,  // 告诉编译器：这个 handle 逻辑上拥有 T
+}
+
+impl<T> Drop for Handle<T> {
+    fn drop(&mut self) {
+        unsafe { drop(Box::from_raw(self.raw)); }
+    }
+}
+
+// ✅ 自动实现 Send/Sync 基于 T
+// 若没有 PhantomData<T>，编译器不知道 Handle 与 T 的关系
+// 可能错误实现 Send（即使 T: !Send）
+```
+
+#### `PhantomData` 与 variance
+
+```rust
+// ✅ 用 PhantomData 控制泛型参数的 variance
+struct Covariant<T>(PhantomData<T>);        // T 协变
+struct Contravariant<T>(PhantomData<fn(T)>); // T 逆变
+struct Invariant<T>(PhantomData<*mut T>);    // T 不变
+```
+
+| `PhantomData` 形式 | Variance |
+|:---|:---|
+| `PhantomData<T>` | 协变（covariant） |
+| `PhantomData<fn(T)>` | 逆变（contravariant） |
+| `PhantomData<*mut T>` | 不变（invariant） |
+| `PhantomData<fn() -> T>` | 协变（covariant） |
+
+> **关键洞察**: `PhantomData` 是 Rust 类型系统的"幽灵字段"——它在运行时完全不存在，但在编译期决定了：1) 类型的自动 trait 推导（Send/Sync）；2) 泛型参数的 variance；3) drop check 的行为。这是"零成本抽象"的极致体现。
+>
+> **来源**: [Rust Reference: PhantomData] · [Rust Reference: Variance] · [Rustonomicon: PhantomData] · [Wikipedia: Unit type]
+
+---
+
+### 11.3 Const Generics（常量泛型）
+
+**定义**：Const Generics 允许类型参数中包含**编译期常量值**（如 `N: usize`），使数组长度等值成为类型系统的一部分：
+
+```rust
+// ✅ Const Generics：数组长度作为类型参数
+struct Array<T, const N: usize> {
+    data: [T; N],  // N 是编译期已知的常量
+}
+
+// 不同类型（长度不同）
+let a: Array<i32, 3> = Array { data: [1, 2, 3] };
+let b: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
+// a 和 b 是不同类型！
+```
+
+**与 Dependent Type 的关系**：Const Generics 是**受限的依赖类型**（Dependent Type）——值（`N`）可以出现在类型中，但值的计算必须是编译期可求值的常量表达式。
+
+> **来源**: [RFC 2000: Const Generics] · [Rust Reference: Const Generics] · [Wikipedia: Dependent type]
+
+### 11.4 Type Inference：HM 算法
+
+**Hindley-Milner (HM) 算法**是 Rust 类型推断的核心：
+
+```text
+HM 算法核心步骤:
+  1. 为每个表达式生成类型变量（如 α, β, γ）
+  2. 根据语法结构生成约束（如 `5` ⟹ `α = i32`，`x + y` ⟹ `α = β = γ`）
+  3. 通过 unification（统一）求解约束
+  4. 对 `let` 绑定应用泛化（generalization），引入多态
+```
+
+Rust 的扩展：trait bound 推断、关联类型推断使 HM 算法更复杂，但核心思想不变。
+
+> **来源**: [Damas & Milner 1982: Principal Type-Schemes] · [Wikipedia: Hindley-Milner] · [Rust Reference: Type Inference]
+
+### 11.5 Discriminant 与 Enum 内存布局
+
+Rust enum 使用 **discriminant**（标签）标识激活的变体：
+
+```rust
+enum Message {
+    Quit,           // discriminant = 0
+    Move { x: i32, y: i32 },  // discriminant = 1
+    Write(String),  // discriminant = 2
+}
+
+// 内存布局（概念）：
+// { discriminant: u8, payload: union { (), Move, Write } }
+// 通过 niche optimization，Option<&T> 可用 null pointer 作为 None，无需额外标签
+```
+
+> **来源**: [Rust Reference: Enums] · [Unsafe Code Guidelines: Enum Layout] · [Wikipedia: Tagged union]
+
+### 11.6 `union` 的类型安全边界
+
+`union` 允许在同一内存位置存储不同类型（C 兼容），但**所有访问都必须 unsafe**：
+
+```rust
+union IntOrFloat {
+    i: i32,
+    f: f32,
+}
+
+let mut u = IntOrFloat { i: 42 };
+unsafe {
+    assert_eq!(u.i, 42);
+    // u.f 也指向同一块内存，但按 f32 解释
+}
+```
+
+> **边界**：`union` 不自动 drop 未激活的变体，需使用 `ManuallyDrop` 避免双重释放。
+>
+> **来源**: [Rust Reference: Unions] · [The Rustonomicon: Unions]
+
+---
+
 ## 十二、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充 `impl Trait` 与 `dyn Trait` 的类型论差异 —— 优先级: 高 —— 已完成 v1.2
-
-- [ ] **TODO**: 补充 `!` (Never type) 的完整形式化分析与控制流图交互 —— 优先级: 中 —— 预计: Phase 1
-- [ ] **TODO**: 补充 Const Generics（常量泛型）的类型系统扩展 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 Type Inference 的 HM 算法完整规则与 Rust 扩展 —— 优先级: 低 —— 预计: Phase 3
-- [ ] **TODO**: 补充 Zero-sized types (ZST) 和 PhantomData 的类型论意义 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 Discriminant 和内存布局的底层分析 —— 优先级: 低 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `union` 的类型安全边界与使用模式 —— 优先级: 低 —— 预计: Phase 3
+- [x] **TODO**: 补充 `!` (Never type) 的完整形式化分析与控制流图交互 —— 优先级: 中 —— 已完成 §11.1
+- [x] **TODO**: 补充 Const Generics（常量泛型）的类型系统扩展 —— 优先级: 中 —— 已完成 §11.3
+- [x] **TODO**: 补充 Type Inference 的 HM 算法完整规则与 Rust 扩展 —— 优先级: 低 —— 已完成 §11.4
+- [x] **TODO**: 补充 Zero-sized types (ZST) 和 PhantomData 的类型论意义 —— 优先级: 中 —— 已完成 §11.2
+- [x] **TODO**: 补充 Discriminant 和内存布局的底层分析 —— 优先级: 低 —— 已完成 §11.5
+- [x] **TODO**: 补充 `union` 的类型安全边界与使用模式 —— 优先级: 低 —— 已完成 §11.6

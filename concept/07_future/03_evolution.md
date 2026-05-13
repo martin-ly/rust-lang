@@ -319,7 +319,7 @@ fn fetch_data() -> String
 
 允许 `const` 和 `static` 拥有泛型参数，解决当前 `const` 必须完全单态化的问题：
 
-```rust
+```rust,ignore
 // 当前：必须为每个类型写单独的 const
 const MAX_U32: u32 = u32::MAX;
 
@@ -338,7 +338,7 @@ fn array_of_zeros<const N: usize>() -> [i32; N] {
 
 TAIT 允许在类型别名中使用 `impl Trait`，解决当前 `impl Trait` 只能在函数返回类型中使用的限制：
 
-```rust
+```rust,ignore
 // 当前：必须暴露具体类型或使用 Box<dyn>
 type MyIterator = std::vec::IntoIter<i32>;
 

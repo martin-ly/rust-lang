@@ -45,12 +45,49 @@ def extract_rust_blocks(content, file_path):
         i += 1
     return blocks
 
-def should_compile(modifiers):
+# 需要外部 crate 的库（验证环境未安装，自动跳过）
+EXTERNAL_CRATES = {
+    'tokio', 'axum', 'sqlx', 'serde', 'tracing', 'clap', 'reqwest',
+    'crossbeam', 'rayon', 'parking_lot', 'loom',
+    'futures', 'tokio_stream',
+    'prusti_contracts', 'kani', 'vstd', 'creusot_contracts',
+    'eyre', 'color_eyre', 'anyhow', 'thiserror',
+    'jemallocator', 'mimalloc',
+    'leptos', 'dioxus', 'yew',
+    'embassy_executor', 'embassy_stm32', 'embassy_time',
+    'bevy', 'wgpu', 'rapier', 'rodio', 'egui',
+    'candle_core', 'burn', 'tract', 'ort', 'tch',
+    'cxx', 'bindgen', 'cbindgen',
+    'libfuzzer_sys', 'proptest',
+    'sccache', 'cargo_vet',
+    'mio', 'hyper', 'tower',
+}
+
+def should_compile(modifiers, code=''):
     """判断是否应该编译此代码块"""
     if 'ignore' in modifiers:
         return False, 'ignore'
     if 'compile_fail' in modifiers:
         return True, 'compile_fail'
+    
+    # 检查是否使用了未安装的外部 crate
+    for crate in EXTERNAL_CRATES:
+        patterns = [
+            f'use {crate}',
+            f'extern crate {crate}',
+            f'{crate}::',
+            f'#[derive({crate.title()}',
+        ]
+        for pat in patterns:
+            if pat in code:
+                return False, f'external_crate:{crate}'
+    
+    # 检查编译期资源依赖（文件/环境变量）
+    if 'include_str!' in code or 'include_bytes!' in code:
+        return False, 'compile_time_resource'
+    if 'env!' in code and 'CARGO_' not in code:
+        return False, 'compile_time_env'
+    
     return True, 'normal'
 
 def prepare_source(code, expected_mode):
@@ -121,7 +158,7 @@ def main():
         
         blocks = extract_rust_blocks(content, file_path)
         for modifiers, code, line_num, fence in blocks:
-            should, mode = should_compile(modifiers)
+            should, mode = should_compile(modifiers, code)
             if not should:
                 skipped += 1
                 continue

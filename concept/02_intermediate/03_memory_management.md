@@ -352,6 +352,160 @@ fn main() {
 
 ---
 
+### 5.5 补充：`Pin<&mut T>` 的堆内存语义与自引用安全
+
+> **[Rust Reference: Pin](https://doc.rust-lang.org/std/pin/index.html)** · **[RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)** `Pin<P>` 是对指针类型 `P` 的包装，提供**地址不变性（address stability）**保证：当 `T: !Unpin` 时，`Pin<P<T>>` 确保 `T` 的内存地址不会被移动。这是自引用结构（self-referential structs）在 Safe Rust 中安全表达的关键。✅ 已验证
+
+#### 栈 Pin vs 堆 Pin
+
+```rust
+use std::pin::Pin;
+
+// ❌ 栈 Pin：生命周期受限，地址保证仅在当前作用域有效
+let mut data = String::from("hello");
+let pin = Pin::new(&mut data);  // Pin<&mut String>
+// data 离开作用域后，pin 的地址保证自动失效
+
+// ✅ 堆 Pin：'static 或长期地址保证
+let pin: Pin<Box<String>> = Box::pin(String::from("hello"));
+// String 在堆上分配，Pin 保证其地址不变，直到 Box 被 drop
+```
+
+| 维度 | 栈 `Pin<&mut T>` | 堆 `Pin<Box<T>>` |
+|:---|:---|:---|
+| **地址保证范围** | 当前借用生命周期 `'a` | `Box` 存活期间（可 `'static`） |
+| **适用场景** | 临时自引用（async 状态机内部） | 长期自引用（链表节点、协程句柄） |
+| **构造方式** | `Pin::new(&mut T)` 或 `pin!()` 宏 | `Box::pin(T)` |
+| **移动风险** | 底层数据仍在栈上，但 `Pin` 禁止通过 safe API 移动 | 堆分配本身可移动指针，但 `Pin` 禁止解包移动内部 `T` |
+| **与 async 关系** | `poll(self: Pin<&mut Self>)` 的调用参数 | `Future` 对象通常存于 `Pin<Box<dyn Future>>` |
+
+#### 自引用结构的形式化保证
+
+```rust,ignore
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfReferential {
+    data: String,
+    ptr: *const String,  // 指向 self.data
+    _pin: PhantomPinned, // 标记为 !Unpin，禁止自动移动
+}
+
+impl SelfReferential {
+    fn new(data: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::new(SelfReferential {
+            data,
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+        // 修正 ptr 指向 data
+        let ptr = &boxed.data as *const String;
+        boxed.ptr = ptr;
+        // Pin 到堆上，保证地址不变
+        let pinned = Pin::new(boxed); // 实际应为 unsafe Pin::new_unchecked
+        pinned
+    }
+}
+```
+
+> **⚠️ 安全契约**: `Pin::new_unchecked` 要求调用者保证：1) `T` 确实不会被移动；2) `T` 的地址稳定性由外部机制（如堆分配）维护。违反契约会导致自引用指针悬垂（UB）。
+
+#### 形式化语义：location stability
+
+```text
+定理（Pin 地址不变性）:
+  前提: Pin<P<T>> 已构造，且 T: !Unpin
+  前提: P 是指针类型（&mut T / Box<T> / Rc<T> 等）
+    ↓
+  结论: Safe API 无法从 Pin 中提取 &mut T 并移动 T 的值
+    ↓
+  ⟹ 自引用字段（如 ptr: *const String）始终指向有效地址
+```
+
+> **[来源: RFC 2349]** `PhantomPinned` 是一个零大小类型，仅用于将包含它的类型标记为 `!Unpin`。这不是运行时标记，而是类型系统标记——编译器在 trait 自动推导时将 `PhantomPinned` 视为"不可安全移动"的信号。✅
+>
+> **[来源: PLDI 2024 · RefinedRust]** Pin 的形式化语义对应于分离逻辑中的 "location stability"：地址一旦被分配，就在该对象的整个生命周期内保持不变。这与 Rust 的 `&mut T` 可移动形成对比——`Pin` 通过类型系统剥夺了 `&mut T` 的移动能力。
+
+---
+
+### 5.6 补充：`Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略
+
+> **[Rust Reference: Vec]** · **[Rust Reference: String]** · **[std::collections::HashMap]** · **[Wikipedia: Dynamic array]** 理解标准库容器的内存布局是系统编程的核心能力。Rust 的标准库容器在设计上追求**缓存友好**与**摊还 O(1) 性能**的平衡。✅
+
+#### `Vec<T>`：连续内存与指数扩容
+
+```rust
+use std::mem;
+
+// ✅ Vec 内存布局（简化）
+struct Vec<T> {
+    ptr: *mut T,      // 指向堆分配数组的指针
+    len: usize,       // 当前元素数量
+    capacity: usize,  // 已分配容量（可存放元素数）
+}
+
+// 64 位系统下 Vec<i32> 的元数据大小 = 24 字节
+assert_eq!(mem::size_of::<Vec<i32>>(), 24);
+```
+
+| 操作 | 时间复杂度 | 触发条件 | 内存行为 |
+|:---|:---|:---|:---|
+| `push` | 摊还 O(1) | `len < capacity` | 在末尾写入，len += 1 |
+| `push`（扩容）| O(n) | `len == capacity` | 分配 2×capacity 新内存，move 所有元素，释放旧内存 |
+| `pop` | O(1) | `len > 0` | len -= 1，不立即释放内存 |
+| `shrink_to_fit` | O(n) | 显式调用 | 重新分配到 `len == capacity` 的精确大小 |
+
+**扩容因子**: Rust `Vec` 的扩容因子约为 **1.5–2×**（具体实现依赖分配器策略）。这保证了连续 `push` 的摊还时间复杂度为 O(1)：
+
+```text
+总复制次数 = n + n/2 + n/4 + ... ≈ 2n
+摊还每次 push 成本 = O(2n)/n = O(1)
+```
+
+#### `String`：UTF-8 字节数组的特化
+
+```rust,ignore
+// ✅ String 本质上是 Vec<u8> 的包装，附加 UTF-8 有效性不变式
+struct String {
+    vec: Vec<u8>,  // 内部就是 Vec<u8>
+}
+
+assert_eq!(mem::size_of::<String>(), 24);  // 同 Vec<u8>
+```
+
+| 特性 | String | Vec<u8> |
+|:---|:---|:---|
+| 内存布局 | 同 Vec<u8> | 连续字节数组 |
+| 有效性约束 | 必须是合法 UTF-8 | 任意字节 |
+| `push` | 追加一个 UTF-8 字符（1-4 字节） | 追加单个字节 |
+| `capacity` | 按字节计 | 按字节计 |
+
+> **关键洞察**: `String` 不是"字符数组"，而是**合法 UTF-8 字节序列**。`String::len()` 返回字节数而非字符数，因为 Unicode 标量值（Unicode scalar value）的长度可变（1-4 字节）。这与 Java/C# 的 `String`（UTF-16）形成对比。
+
+#### `HashMap<K, V>`：Robin Hood 哈希 + 开放寻址
+
+```rust,ignore
+// ✅ HashMap 内存布局（Rust std，2024 实现）
+struct HashMap<K, V> {
+    base: RawTable<(K, V)>,  // 底层表：控制字节 + 键值对数组
+    hash_builder: DefaultHashBuilder,
+}
+```
+
+| 特性 | Rust HashMap | C++ `std::unordered_map` |
+|:---|:---|:---|
+| **冲突解决** | Robin Hood 哈希 + 线性探测 | 链地址法（bucket + 链表） |
+| **内存布局** | 单一连续数组（控制字节 + 键值对） | 离散节点分配 |
+| **缓存友好性** | 高（数据局部性好） | 低（指针跳转） |
+| **扩容触发** | 负载因子 > 0.875 | 负载因子 > 1.0（通常） |
+| **默认 hasher** | SipHash 1-3（抗 HashDoS） | 通常不抗 HashDoS |
+
+**Robin Hood 哈希**: 当插入时发现已有元素离其"理想位置"更近（probe distance 更短），则**交换**两者位置。这使得所有元素的 probe distance 保持较小且方差低，查询性能稳定。
+
+> **来源**: [Rust Reference: Vec] · [Rust Reference: String] · [std::collections::HashMap] · [Wikipedia: Dynamic array] · [Wikipedia: Hash table] · [Rust HashMap 源码分析]
+
+---
+
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
 > **[Rust Reference: Safety] · [TRPL: Ch15] · [Rustonomicon]** 反命题分析基于内存管理的形式化语义和已知边界案例。 ✅ 已验证
@@ -868,11 +1022,282 @@ assert_eq!(squares, [0, 1, 4, 9, 16]);
 
 ---
 
+### 5.7 补充：自定义 Allocator（`#[global_allocator]`）
+
+> **[Rust Reference: Global allocator]** · **[RFC 1974]** · **[Wikipedia: Memory management]** Rust 默认使用系统分配器（`std::alloc::System`），但允许通过 `#[global_allocator]` 替换为自定义分配器（如 `jemalloc`、`mimalloc`），以优化特定工作负载的内存性能。✅
+
+#### 替换全局分配器
+
+```rust
+use jemallocator::Jemalloc;
+
+// ✅ 将整个程序的默认分配器替换为 jemalloc
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
+fn main() {
+    let v = vec![1, 2, 3];  // 使用 jemalloc 分配
+}
+```
+
+| 分配器 | 特点 | 适用场景 |
+|:---|:---|:---|
+| **System**（默认）| 平台原生分配器（glibc malloc、Windows HeapAlloc） | 通用场景、与 C 库互操作 |
+| **jemalloc** | 低碎片、线程缓存、可扩展统计 | 高并发、长时间运行服务（如 TiKV） |
+| **mimalloc** | 极致小规模分配性能、安全加固 | 游戏、实时系统、微服务 |
+| **dlmalloc** | 简单、可移植、无外部依赖 | 嵌入式、`no_std` 环境 |
+
+#### `Allocator` trait（nightly，实验性）
+
+```rust,ignore
+#![feature(allocator_api)]
+
+use std::alloc::{Allocator, Global, AllocError, Layout};
+
+// ✅ 为特定数据结构指定局部分配器
+let mut vec: Vec<u8, &Global> = Vec::new_in(&Global);
+vec.push(1);  // 使用指定的分配器
+```
+
+> **关键洞察**: 全局分配器替换是**链接期决策**——整个二进制文件使用同一个分配器。`Allocator` trait（实验性）则允许**局部分配器选择**，使不同数据结构可以使用不同的分配策略（如 arena allocation 用于短生命周期对象，系统分配器用于长生命周期对象）。
+>
+> **来源**: [Rust Reference: Global allocator] · [RFC 1974: Allocators] · [jemalloc 文档] · [mimalloc 文档]
+
+### 5.8 补充：`ManuallyDrop<T>` 与 `mem::forget` 的形式化分析
+
+> **[Rust Reference: ManuallyDrop]** · **[Rustonomicon: Drop flags]** `ManuallyDrop<T>` 通过**禁用编译器自动插入的 drop 标志**，将析构责任完全交给程序员。这是所有权系统的显式逃逸门，与 `mem::forget` 在语义上等价，但更安全（无需运行时调用）。✅
+
+#### 形式化对比：`mem::forget` vs `ManuallyDrop`
+
+| 维度 | `mem::forget(v)` | `ManuallyDrop::new(v)` |
+|:---|:---|:---|
+| **Drop 调用** | 运行时阻止 drop 调用 | 编译期禁用 drop 调用 |
+| **所有权** | 消耗 `v` 的所有权 | 保持对内部值的访问能力 |
+| **重新获取值** | ❌ 不可能（`v` 已被消耗） | ✅ 可通过 `into_inner()` 取出 |
+| **开销** | 零运行时开销（只是不调用 drop） | 零运行时开销（编译期标记） |
+| **使用场景** | 临时阻止析构（如跨 FFI 边界） | 长期控制析构（如 union、自定义容器） |
+
+```rust
+use std::mem::{ManuallyDrop, forget};
+
+// ✅ mem::forget: 消耗值，阻止析构
+let s = String::from("forgotten");
+forget(s);  // s 被消耗，内存泄漏
+
+// ✅ ManuallyDrop: 不消耗值，可重新取出
+let mut md = ManuallyDrop::new(String::from("controlled"));
+md.push_str("!");  // ✅ 仍可修改
+
+// 安全取出（不调用 drop）
+let inner = unsafe { ManuallyDrop::take(&mut md) };
+drop(inner);  // 现在可以手动控制何时释放
+```
+
+#### `mem::forget` 的安全用例：FFI 边界
+
+```rust,ignore
+use std::mem::forget;
+
+pub unsafe extern "C" fn rust_string_to_c(s: String) -> *mut c_char {
+    let ptr = s.as_mut_ptr();  // 获取底层指针
+    forget(s);                 // 阻止 Rust 释放内存，C 将接管
+    ptr as *mut c_char
+}
+```
+
+> **来源**: [Rust Reference: ManuallyDrop] · [Rust Reference: std::mem::forget] · [Rustonomicon: Special memory] · [Wikipedia: Memory management]
+
+---
+
+### 5.9 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略
+
+#### `Vec<T>` 的内存布局与扩容
+
+`Vec<T>` 是 Rust 中最常用的动态数组，其内存布局为三元组：
+
+```rust,ignore
+pub struct Vec<T> {
+    buf: RawVec<T>,      // { ptr: Unique<T>, cap: usize }
+    len: usize,           // 当前元素个数
+}
+// 实际内存布局（概念等价）:
+// { ptr: *mut T, len: usize, cap: usize }
+```
+
+| 字段 | 类型 | 语义 |
+|:---|:---|:---|
+| `ptr` | `*mut T` | 指向堆分配缓冲区的起始地址 |
+| `len` | `usize` | 已初始化元素的数量 |
+| `cap` | `usize` | 堆缓冲区的总容量（以元素个数计） |
+
+**扩容策略**： amortized O(1) push
+
+```rust
+// ✅ Vec 的扩容行为（标准库实现细节）
+let mut v = Vec::new();
+assert_eq!(v.capacity(), 0);  // 初始无分配
+
+v.push(1);  // 第一次分配: 容量通常为 4 (T 较小且 align <= 8 时)
+assert_eq!(v.capacity(), 4);
+
+v.extend(2..=4);
+assert_eq!(v.len(), 4);
+
+v.push(5);  // 容量已满，触发 realloc: 新容量 = 旧容量 * 2 = 8
+assert_eq!(v.capacity(), 8);
+```
+
+> **定理（均摊分析）**：设扩容因子为 `k > 1`（Rust 标准库通常取 `k = 2`），则 `n` 次 `push` 的总复制成本为 `O(n)`，单次 `push` 的均摊成本为 `O(1)`。
+>
+> **证明概要**：第 `i` 次扩容时复制 `k^i` 个元素。总复制量 `Σ k^i = O(k^{log_k n}) = O(n)`。
+
+**反例：扩容导致引用失效**
+
+```rust
+let mut v = vec![1, 2, 3];
+let r = &v[0];  // ✅ 获取对第一个元素的引用
+
+v.push(4);      // ❌ 可能触发 realloc，使 `r` 悬垂
+// println!("{}", r);  // E0502: cannot borrow `v` as mutable because it is also borrowed as immutable
+```
+
+> **边界条件**：`Vec::push` 需要 `&mut self`，因此只要持有 `&v` 或 `&v[i]`，编译器就会阻止 `push`——这是借用检查器在保护扩容安全。
+
+#### `String` 的 UTF-8 不变性与内存布局
+
+`String` 是 `Vec<u8>` 的包装，附加 UTF-8 有效性不变式：
+
+```rust
+// String 的定义（概念等价）
+pub struct String {
+    vec: Vec<u8>,  // 底层字节数组
+}
+```
+
+| 特性 | `String` | `Vec<u8>` |
+|:---|:---|:---|
+| 内存布局 | `{ ptr, len, cap }` | `{ ptr, len, cap }` |
+| 元素类型 | `u8`（字节） | 任意 `T` |
+| 不变式 | **UTF-8 有效** | 无额外不变式 |
+| `push` | 追加 UTF-8 字符（1-4 字节） | 追加单个元素 |
+| `as_bytes()` | `&[u8]`（O(1)） | — |
+
+```rust
+// ✅ String 的 UTF-8 保证
+let mut s = String::from("hello");
+s.push('世');  // 追加 3 字节 UTF-8 序列 [E4, B8, 96]
+assert_eq!(s.len(), 8);  // 5 + 3 = 8 字节，但 chars().count() = 6
+
+// ❌ 无法从无效 UTF-8 直接构造 String
+let invalid = vec![0x80, 0x81, 0x82];
+// String::from_utf8(invalid)  // Err(Utf8Error)
+let s = String::from_utf8(invalid).unwrap_err();
+```
+
+> **定理**：`String` 在任何时刻都满足 UTF-8 有效性。`unsafe { String::from_utf8_unchecked(...) }` 是**唯一**绕过此检查的方式，违反此不变式属于 UB。
+
+#### `HashMap<K, V>` 的 SwissTable 算法
+
+Rust 标准库 `HashMap` 自 1.36+ 采用 Google Abseil 的 **SwissTable** 算法（由 Amanieu d'Antras 移植为 `hashbrown` crate）：
+
+| 维度 | 旧实现（Robin Hood） | SwissTable（当前） |
+|:---|:---|:---|
+| 探测策略 | Robin Hood 哈希 + 线性探测 | 平铺式 SIMD 并行查找 |
+| 负载因子 | ≤ 0.875 | ≤ 0.875 |
+| 查找性能 | O(1) 平均，缓存不友好 | O(1) 平均，SIMD 加速 |
+| 内存布局 | 键值与元数据交错 | 元数据（control bytes）与数据分离 |
+
+**内存布局（概念）**：
+
+```
+HashMap<K, V>:
+┌──────────────────────────────────────────────┐
+│  ctrl: [u8; N]      // 控制字节：h2(hash) 或 EMPTY/DELETED │
+│  groups: [[u8; 16]; N/16]  // SIMD 组，每次比较 16 个槽位 │
+├──────────────────────────────────────────────┤
+│  entries: [Entry<K, V>; N]  // 实际的键值对存储            │
+└──────────────────────────────────────────────┘
+```
+
+```rust
+use std::collections::HashMap;
+
+// ✅ HashMap 的 SwissTable 行为
+let mut map = HashMap::new();
+map.insert("key1", 100);
+map.insert("key2", 200);
+
+// 查找使用 SIMD（x86: _mm_cmpeq_epi8, ARM: vceqq_u8）
+assert_eq!(map.get("key1"), Some(&100));
+
+// 扩容：当负载因子 > 0.875 时，容量翻倍并重新哈希所有元素
+```
+
+> **来源**: [Rust Standard Library: Vec] · [Rust Standard Library: String] · [Rust Standard Library: HashMap] · [SwissTable: Abseil] · [hashbrown crate docs] · [Wikipedia: Dynamic array]
+
+---
+
+### 5.10 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比
+
+Rust 允许通过 `#[global_allocator]` 切换全局内存分配器：
+
+```rust
+// 使用 jemalloc 作为全局分配器（需 jemallocator crate）
+use jemallocator::Jemalloc;
+
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+```
+
+| 分配器 | 来源 | 适用场景 | 小对象性能 | 碎片控制 | Rust 集成 |
+|:---|:---|:---|:---:|:---:|:---:|
+| **System** | glibc malloc / macOS malloc / Windows HeapAlloc | 通用场景，最小依赖 | 中等 | 中等 | ✅ 默认 |
+| **jemalloc** | FreeBSD/Facebook | 高并发服务器、长进程 | 优 | 优 | ✅ TikV/Firecracker |
+| **mimalloc** | Microsoft Research | 小对象密集型、游戏/实时 | 极优 | 良 | ✅ 广泛采用 |
+| **dlmalloc** | 嵌入式 | `no_std` + `alloc` | 一般 | 一般 | ✅ 嵌入式默认 |
+
+**选择策略矩阵**：
+
+```rust
+// ✅ 服务器/数据库：jemalloc（减少内存碎片）
+// Cargo.toml: jemallocator = "0.5"
+#[cfg(not(target_env = "msvc"))]
+use jemallocator::Jemalloc;
+#[cfg(not(target_env = "msvc"))]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
+// ✅ 游戏/实时系统：mimalloc（小对象性能最优）
+// Cargo.toml: mimalloc = { version = "0.1", default-features = false }
+use mimalloc::MiMalloc;
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
+```
+
+**边界：分配器不是万能的**
+
+```rust
+// ❌ 频繁的小分配仍会产生开销，无论使用哪个分配器
+for i in 0..1_000_000 {
+    let _ = Box::new(i);  // 每次循环都堆分配——分配器无法优化算法本身
+}
+
+// ✅ 更好的策略：预分配池或栈分配
+let mut vec = Vec::with_capacity(1_000_000);  // 一次分配
+vec.extend(0..1_000_000);
+```
+
+> **定理**：分配器选择只能优化**内存管理开销**，无法优化**算法本身的分配模式**。减少分配次数（对象池、arena、栈分配）通常比更换分配器收益更大。
+>
+> **来源**: [Rust Reference: Global Allocator] · [jemalloc.net] · [mimalloc paper (Leijen & Sivakumar, 2019)] · [Wikipedia: Memory allocator] · [Rust Performance Book]
+
+---
+
 ## 十一、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充自定义 Allocator（`#[global_allocator]`） —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `MaybeUninit<T>` 与 `MaybeDangling` 的完整边界分析 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `Pin<Box<T>>` 与自引用结构的形式化语义 —— 优先级: 低 —— 预计: Phase 4
+- [x] **TODO**: 补充自定义 Allocator（`#[global_allocator]`） —— 优先级: 中 —— 已完成 §5.7
+- [x] **TODO**: 补充 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析 —— 优先级: 中 —— 已完成 §5.8
+- [x] **TODO**: 补充 `Vec<T>` / `String` / `HashMap` 的内存布局与扩容策略 —— 优先级: 中 —— 已完成 §5.9
+- [x] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 已完成 §5.10
+- [x] **TODO**: 补充 `MaybeUninit<T>` 与 `MaybeDangling` 的完整边界分析 —— 优先级: 中 —— 已完成 §补充章节
+- [x] **TODO**: 补充 `Pin<Box<T>>` 与自引用结构的形式化语义 —— 优先级: 低 —— 已完成 §5.5

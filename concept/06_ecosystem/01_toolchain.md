@@ -787,10 +787,100 @@ fn main() {
 
 ---
 
+### 13.1 `cargo-fuzz`：模糊测试集成
+
+`cargo-fuzz` 基于 LLVM 的 libFuzzer，为 Rust 提供覆盖率引导的模糊测试：
+
+```bash
+# 安装 cargo-fuzz
+cargo install cargo-fuzz
+
+# 初始化模糊测试目标
+cargo fuzz init  # 创建 fuzz/ 目录
+
+# 编写模糊目标
+cargo fuzz add parse_target
+```
+
+```rust
+// ✅ fuzz/fuzz_targets/parse_target.rs
+#![no_main]
+use libfuzzer_sys::fuzz_target;
+
+fuzz_target!(|data: &[u8]| {
+    // 模糊测试：尝试用任意字节解析为 UTF-8 字符串
+    if let Ok(s) = std::str::from_utf8(data) {
+        // 测试解析逻辑
+        let _ = my_parser::parse(s);
+    }
+});
+```
+
+```bash
+# 运行模糊测试（自动生成语料库）
+cargo fuzz run parse_target -- -max_total_time=300
+```
+
+**与 property-based testing 对比**：
+
+| 特性 | `cargo-fuzz` | `proptest` |
+|:---|:---|:---|
+| 策略 | 覆盖率引导，随机变异 | 结构化生成，失败收缩 |
+| 输入类型 | 字节流 `&[u8]` | 任意类型（`Arbitrary` trait） |
+| 适用场景 | 解析器、协议、unsafe 代码 | 业务逻辑、算法不变量 |
+| CI 集成 | 推荐夜间长时间运行 | 推荐每次提交快速运行 |
+
+> **来源**: [cargo-fuzz 文档] · [libFuzzer 文档] · [LLVM Fuzzing] · [Rust Fuzz Book]
+
+### 13.2 `sccache`：分布式编译缓存
+
+`sccache`（Mozilla 开发）为 Rust/C/C++ 提供编译缓存和分布式编译：
+
+```bash
+# 安装
+cargo install sccache
+
+# 配置环境变量
+export RUSTC_WRAPPER=sccache
+export SCCACHE_BUCKET=rust-cache       # S3 存储桶
+export SCCACHE_REGION=us-east-1        # AWS 区域
+# 或本地模式（无需云存储）
+# export SCCACHE_DIR=/tmp/sccache
+```
+
+**缓存后端对比**：
+
+| 后端 | 配置 | 适用场景 |
+|:---|:---|:---|
+| **本地磁盘** | `SCCACHE_DIR` | 个人开发 |
+| **S3** | `SCCACHE_BUCKET` | CI/CD 共享缓存 |
+| **GCS** | `SCCACHE_GCS_BUCKET` | GCP 环境 |
+| **Azure Blob** | `SCCACHE_AZURE_BLOB_CONTAINER` | Azure 环境 |
+| **Redis** | `SCCACHE_REDIS_URL` | 团队共享缓存 |
+
+**GitHub Actions 集成示例**：
+
+```yaml
+- name: Setup sccache
+  uses: mozilla-actions/sccache-action@v0.0.3
+  with:
+    version: "v0.7.4"
+
+- name: Build with cache
+  env:
+    SCCACHE_GHA_ENABLED: "true"
+    RUSTC_WRAPPER: "sccache"
+  run: cargo build --release
+```
+
+> **来源**: [sccache 文档] · [Mozilla sccache GitHub] · [GitHub Actions: sccache]
+
+---
+
 ## 十四、待补充与演进方向（TODOs）
 
-- [ ] **高**: 补充 `cargo-fuzz` 和模糊测试集成指南
+- [x] **高**: 补充 `cargo-fuzz` 和模糊测试集成指南 —— 已完成 §13.1
 - [x] **高**: 补充交叉编译完整配置（musl vs glibc、链接器策略）
-- [ ] **中**: 补充 `sccache` 分布式编译配置
+- [x] **中**: 补充 `sccache` 分布式编译配置 —— 已完成 §13.2
 - [x] **中**: 补充 Cargo workspace 高级用法（resolver、patch、replace）
-- [ ] **低**: 补充 rustc 内部查询系统的深度解析
+- [ ] **低**: 补充 rustc 内部查询系统的深度解析 —— 待 rustc dev guide 深入

@@ -1,0 +1,380 @@
+{
+  "total_files": 53,
+  "total_lines": 40465,
+  "total_todos_open": 166,
+  "total_todos_done": 88,
+  "total_source_annotations": 122,
+  "files": [
+    {
+      "path": "concept/00.md",
+      "lines": 5658,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/audit_checklist.md",
+      "lines": 179,
+      "todos_open": 5,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/concept_index.md",
+      "lines": 450,
+      "todos_open": 3,
+      "todos_done": 7,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/inter_layer_map.md",
+      "lines": 410,
+      "todos_open": 4,
+      "todos_done": 4,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/learning_guide.md",
+      "lines": 302,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/methodology.md",
+      "lines": 358,
+      "todos_open": 18,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/quick_reference.md",
+      "lines": 632,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/self_assessment.md",
+      "lines": 1879,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/semantic_space.md",
+      "lines": 1018,
+      "todos_open": 1,
+      "todos_done": 5,
+      "source_annotations": 1
+    },
+    {
+      "path": "concept/00_meta/sources.md",
+      "lines": 301,
+      "todos_open": 3,
+      "todos_done": 3,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/00_meta/todos.md",
+      "lines": 204,
+      "todos_open": 23,
+      "todos_done": 15,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/01.md",
+      "lines": 1798,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/01_foundation/01_ownership.md",
+      "lines": 835,
+      "todos_open": 0,
+      "todos_done": 6,
+      "source_annotations": 23
+    },
+    {
+      "path": "concept/01_foundation/02_borrowing.md",
+      "lines": 913,
+      "todos_open": 1,
+      "todos_done": 5,
+      "source_annotations": 19
+    },
+    {
+      "path": "concept/01_foundation/03_lifetimes.md",
+      "lines": 927,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 11
+    },
+    {
+      "path": "concept/01_foundation/04_type_system.md",
+      "lines": 894,
+      "todos_open": 4,
+      "todos_done": 3,
+      "source_annotations": 12
+    },
+    {
+      "path": "concept/01_foundation/README.md",
+      "lines": 172,
+      "todos_open": 3,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/02.md",
+      "lines": 126,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/02_intermediate/01_traits.md",
+      "lines": 1077,
+      "todos_open": 4,
+      "todos_done": 1,
+      "source_annotations": 1
+    },
+    {
+      "path": "concept/02_intermediate/02_generics.md",
+      "lines": 1117,
+      "todos_open": 4,
+      "todos_done": 1,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/02_intermediate/03_memory_management.md",
+      "lines": 1119,
+      "todos_open": 2,
+      "todos_done": 4,
+      "source_annotations": 3
+    },
+    {
+      "path": "concept/02_intermediate/04_error_handling.md",
+      "lines": 965,
+      "todos_open": 4,
+      "todos_done": 3,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/02_intermediate/README.md",
+      "lines": 214,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/03_advanced/01_concurrency.md",
+      "lines": 1093,
+      "todos_open": 3,
+      "todos_done": 3,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/03_advanced/02_async.md",
+      "lines": 982,
+      "todos_open": 4,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/03_advanced/03_unsafe.md",
+      "lines": 990,
+      "todos_open": 4,
+      "todos_done": 2,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/03_advanced/04_macros.md",
+      "lines": 962,
+      "todos_open": 6,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/03_advanced/README.md",
+      "lines": 218,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/04_formal/01_linear_logic.md",
+      "lines": 587,
+      "todos_open": 2,
+      "todos_done": 2,
+      "source_annotations": 2
+    },
+    {
+      "path": "concept/04_formal/02_type_theory.md",
+      "lines": 681,
+      "todos_open": 1,
+      "todos_done": 3,
+      "source_annotations": 11
+    },
+    {
+      "path": "concept/04_formal/03_ownership_formal.md",
+      "lines": 696,
+      "todos_open": 2,
+      "todos_done": 3,
+      "source_annotations": 1
+    },
+    {
+      "path": "concept/04_formal/04_rustbelt.md",
+      "lines": 694,
+      "todos_open": 4,
+      "todos_done": 2,
+      "source_annotations": 6
+    },
+    {
+      "path": "concept/04_formal/README.md",
+      "lines": 198,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/05_comparative/01_rust_vs_cpp.md",
+      "lines": 1871,
+      "todos_open": 5,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/05_comparative/02_rust_vs_go.md",
+      "lines": 611,
+      "todos_open": 3,
+      "todos_done": 0,
+      "source_annotations": 20
+    },
+    {
+      "path": "concept/05_comparative/03_paradigm_matrix.md",
+      "lines": 601,
+      "todos_open": 3,
+      "todos_done": 3,
+      "source_annotations": 10
+    },
+    {
+      "path": "concept/05_comparative/README.md",
+      "lines": 154,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/05_comparative/safety_boundaries.md",
+      "lines": 643,
+      "todos_open": 5,
+      "todos_done": 0,
+      "source_annotations": 2
+    },
+    {
+      "path": "concept/06_ecosystem/01_toolchain.md",
+      "lines": 796,
+      "todos_open": 3,
+      "todos_done": 2,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/06_ecosystem/02_patterns.md",
+      "lines": 884,
+      "todos_open": 1,
+      "todos_done": 3,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/06_ecosystem/03_core_crates.md",
+      "lines": 774,
+      "todos_open": 8,
+      "todos_done": 3,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/06_ecosystem/04_application_domains.md",
+      "lines": 844,
+      "todos_open": 8,
+      "todos_done": 5,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/06_ecosystem/05_formal_ecosystem_tower.md",
+      "lines": 215,
+      "todos_open": 6,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/06_ecosystem/README.md",
+      "lines": 127,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/07_future/01_ai_integration.md",
+      "lines": 689,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/07_future/02_formal_methods.md",
+      "lines": 945,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/07_future/03_evolution.md",
+      "lines": 693,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/07_future/README.md",
+      "lines": 142,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/LSIP_Unified_Model_Panorama.md",
+      "lines": 583,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/PLAN.md",
+      "lines": 185,
+      "todos_open": 6,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/PLAN_Semantic_Space_Wave.md",
+      "lines": 249,
+      "todos_open": 13,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/PostgreSQL_LSIP_Unified_Model.md",
+      "lines": 682,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    },
+    {
+      "path": "concept/README.md",
+      "lines": 128,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 0
+    }
+  ]
+}

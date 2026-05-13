@@ -1,0 +1,88 @@
+### 5.7 补充：自定义 Allocator（`#[global_allocator]`）与分配器对比
+
+> **[Rust Reference: Global allocator]** · **[RFC 1974]** · **[Wikipedia: Memory management]** · **[jemalloc 文档]** · **[mimalloc 论文 (Microsoft Research)]** Rust 默认使用系统分配器（`std::alloc::System`），但允许通过 `#[global_allocator]` 替换为自定义分配器（如 `jemalloc`、`mimalloc`），以优化特定工作负载的内存性能。✅
+
+#### 替换全局分配器
+
+```rust
+use jemallocator::Jemalloc;
+
+// ✅ 将整个程序的默认分配器替换为 jemalloc
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+
+fn main() {
+    let v = vec![1, 2, 3];  // 使用 jemalloc 分配
+}
+```
+
+#### `std::alloc::System` vs `jemalloc` vs `mimalloc` 深度对比
+
+| 维度 | **System**（默认） | **jemalloc** | **mimalloc** |
+|:---|:---|:---|:---|
+| **底层实现** | glibc `malloc` / macOS `malloc_zone` / Windows `HeapAlloc` | Jason Evans 的 jemalloc（FreeBSD 默认） | Microsoft Research 的 mimalloc |
+| **线程缓存** | 依赖平台（glibc 2.26+ 有 per-thread cache） | 显式线程缓存（tcache），减少竞争 | 显式线程局部分页（thread-local pages） |
+| **小对象优化** | 一般（glibc 使用 ptmalloc2/3） | 优秀（size-class 分级精细） | **极致**（按大小分离的 free list，O(1) 分配） |
+| **碎片化控制** | 一般 | 优秀（延迟 coalesce、arena 隔离） | 良好（segregated free lists 天然低碎） |
+| **统计/调试** | 有限（依赖平台工具） | 丰富（`malloc_stats`, `prof`） | 内置遥测（可导出 JSON） |
+| **跨平台** | 最佳（平台原生） | 良好（主要 Unix + Windows） | 良好（主要平台 + WASM） |
+| **典型使用者** | 通用 Rust 程序 | TiKV、Firecracker、Redis、Firefox | Rust 编译器自身（`-Z malloc=mimalloc`）、游戏引擎 |
+| **Cargo 集成** | 内置 | `jemallocator` crate | `mimalloc` crate |
+
+**性能特征边界**:
+
+```rust
+// ✅ mimalloc：小对象（< 8KB）分配密集型场景
+// 例如：AST 节点、短生命周期字符串、微服务请求上下文
+// Cargo.toml: mimalloc = "0.1"
+#[cfg(feature = "use-mimalloc")]
+use mimalloc::MiMalloc;
+
+#[cfg(feature = "use-mimalloc")]
+#[global_allocator]
+static GLOBAL: MiMalloc = MiMalloc;
+
+// ✅ jemalloc：高并发、长时间运行、内存碎片敏感服务
+// 例如：数据库（TiKV）、长时间运行的 Web 服务
+// Cargo.toml: jemallocator = "0.5"
+#[cfg(feature = "use-jemalloc")]
+use jemallocator::Jemalloc;
+
+#[cfg(feature = "use-jemalloc")]
+#[global_allocator]
+static GLOBAL: Jemalloc = Jemalloc;
+```
+
+**反例与边界**:
+
+```rust
+// ❌ 反例: 全局分配器只能设置一次
+// 以下代码编译错误：重复定义 global_allocator
+// #[global_allocator]
+// static GLOBAL2: System = System;
+
+// ❌ 反例: 全局分配器替换不自动改善所有工作负载
+// 大量大对象（> 1MB）分配时，jemalloc/mimalloc 优势缩小
+// 因为所有分配器最终都依赖 OS 的 mmap/VirtualAlloc
+
+// ⚠️ 边界: no_std / 嵌入式环境无法使用 jemalloc/mimalloc
+// 嵌入式通常使用 dlmalloc 或自定义 bump allocator
+// #[global_allocator]
+// static ALLOCATOR: MyEmbeddedAllocator = MyEmbeddedAllocator;
+```
+
+#### `Allocator` trait（nightly，实验性）
+
+```rust,ignore
+#![feature(allocator_api)]
+
+use std::alloc::{Allocator, Global, AllocError, Layout};
+
+// ✅ 为特定数据结构指定局部分配器
+let mut vec: Vec<u8, &Global> = Vec::new_in(&Global);
+vec.push(1);  // 使用指定的分配器
+```
+
+> **关键洞察**: 全局分配器替换是**链接期决策**——整个二进制文件使用同一个分配器。`jemalloc` 适合**长时间运行、高并发、碎片敏感**的服务型工作负载；`mimalloc` 适合**小对象分配密集、低延迟**的交互型工作负载；`System` 在通用场景下表现良好且零外部依赖。`Allocator` trait（实验性）则允许**局部分配器选择**，使不同数据结构可以使用不同的分配策略（如 arena allocation 用于短生命周期对象，系统分配器用于长生命周期对象）。
+> 
+> **来源**: [Rust Reference: Global allocator] · [RFC 1974: Allocators] · [jemalloc 文档] · [mimalloc 论文 (Microsoft Research)] · [Wikipedia: Memory management]

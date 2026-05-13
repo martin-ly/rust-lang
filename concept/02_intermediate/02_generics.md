@@ -9,6 +9,7 @@
 
 **变更日志**:
 
+- v2.3 (2026-05-13): 补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新 TODO 列表
 - v2.2 (2026-05-13): 深度重构——新增 §5.5 参数性定理（Wadler 1989），含3个示例推导、工程意义、反例边界与 Mermaid 推理树；增强 §4.2 单态化语义保持定理与证明草图、dyn Trait 反例、跨 crate ABI 边界；新增 §5.6 三语言实现机制对比表；定理矩阵扩至13条；全章补充 L4 类型论映射标注与过渡段落
 - v2.1 (2026-05-12): 深度重构——定理矩阵扩至11条（含失效条件/错误码/依赖链），反命题决策树增至4个（新增"约束过度"命题），边界极限测试精炼为3个极限场景，认知路径6步递进每步增加正反例对照，全章补充Wikipedia/TRPL/RFC交叉引用与过渡段落
 - v2.0 (2026-05-12): 补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
@@ -1031,6 +1032,377 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ---
 
+### 9.1 补充：`impl Trait` 在返回位置 vs 参数位置的区别
+
+> **[Rust Reference: Impl trait]** · **[RFC 1951]** · **[RFC 2289]** `impl Trait` 在**参数位置**（argument position）和**返回位置**（return position）有截然不同的语义——前者是**全称量词 ∀**（调用者决定具体类型），后者是**存在量词 ∃**（实现者决定具体类型）。✅
+
+#### 参数位置 `impl Trait` = Universal（全称）
+
+```rust
+// ✅ 参数位置：调用者提供具体类型，函数体内只能使用 Trait bounds
+fn print_all(items: impl Iterator<Item = i32>) {
+    for item in items {
+        println!("{}", item);
+    }
+}
+
+// 去糖后等价于：
+fn print_all<T: Iterator<Item = i32>>(items: T) { ... }
+```
+
+**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。
+
+#### 返回位置 `impl Trait` = Existential（存在）
+
+```rust
+// ✅ 返回位置：实现者决定具体类型，调用者只能使用 Trait bounds
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()  // 具体类型：Vec<i32>::IntoIter
+}
+
+// 调用者无法知道返回的是 Vec::IntoIter 还是 array::IntoIter
+let iter = make_iter();  // iter 的类型 = 匿名存在类型 ∃T: Iterator<Item=i32>
+```
+
+**语义**: `make_iter` 承诺返回**某个**满足 `Iterator<Item = i32>` 的类型，但**不暴露具体类型**。这允许实现者在未来版本中更换内部实现（如从 `Vec` 改为 `Array`），而不破坏 API。
+
+#### 对比矩阵
+
+| 维度 | 参数位置 `fn foo(x: impl Trait)` | 返回位置 `fn foo() -> impl Trait` |
+|:---|:---|:---|
+| **逻辑量词** | ∀（全称） | ∃（存在） |
+| **谁决定具体类型** | 调用者 | 实现者 |
+| **去糖等价** | `fn foo<T: Trait>(x: T)` | 编译器生成匿名类型 |
+| **能否用于 trait object** | ✅ 可以（因本质是泛型） | ❌ 不能直接用于 `dyn`（vtable 大小未知） |
+| **零成本抽象** | ✅ 单态化 | ✅ 单态化 |
+| **适用场景** | 接受多种输入类型 | 隐藏实现细节、保持 API 灵活性 |
+
+#### 返回位置 impl Trait 在 trait 中的特殊规则（RPITIT）
+
+```rust
+trait Factory {
+    fn create() -> impl Product;  // RPITIT: 每个实现者决定具体 Product 类型
+}
+
+struct WidgetFactory;
+impl Factory for WidgetFactory {
+    fn create() -> Widget { ... }  // 具体类型由 impl 决定
+}
+```
+
+> **关键洞察**: 参数位置的 `impl Trait` 是语法糖（糖衣），返回位置的 `impl Trait` 是类型系统的核心扩展（存在类型）。RPITIT 将这一能力进一步扩展到 trait 定义中，使 trait 方法也能返回不透明类型。
+>
+> **来源**: [Rust Reference: Impl trait] · [RFC 1951: Extend impl Trait to function arguments] · [RFC 2289: Associated type bounds] · [TAPL Ch.24: Existential types]
+
+---
+
+### 9.2 补充：`min_specialization` 的当前状态与使用
+
+> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** · **[Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)** `min_specialization` 是 Rust 当前可用的 specialization 子集，限制为仅允许"更具体参数类型"的特化，禁止基于 trait bound 的特化。⚠️ nightly only。
+
+#### 与 full specialization 的核心区别
+
+| **维度** | `min_specialization` | Full specialization（RFC 1210） |
+|:---|:---|:---|
+| **稳定性** | nightly only | 未实现 |
+| **特化依据** | 仅参数类型具体度 | 参数类型 + trait bound |
+| **部分特化** | ❌ 不支持 | ✅ 支持（如 `Vec<T>` vs `T`） |
+| **默认方法覆盖** | ✅ 支持 | ✅ 支持 |
+| **重叠检查** | 严格全序 | 更宽松的偏序 |
+
+`min_specialization` 的核心限制：**特化 impl 的约束必须是默认 impl 约束的实例化**，不能引入新的 trait bound：
+
+```rust,ignore
+#![feature(min_specialization)]
+
+trait Convert<T> {
+    fn convert(&self) -> T;
+}
+
+// ✅ 默认实现
+impl<T, U> Convert<U> for T where T: Into<U> {
+    fn convert(&self) -> U { self.into() }
+}
+
+// ✅ min_specialization 允许：参数类型更具体
+impl Convert<String> for &str {
+    fn convert(&self) -> String { String::from(*self) }
+}
+```
+
+```rust,ignore
+#![feature(min_specialization)]
+
+trait Foo {}
+trait Bar {}
+
+impl<T> Foo for T {}              // 默认
+
+// ❌ 错误：min_specialization 禁止基于 trait bound 的特化
+impl<T: Bar> Foo for T {}         // E0751: 不能基于 trait bound 特化
+```
+
+#### 为什么限制为 min_specialization
+
+Full specialization 允许基于 trait bound 的特化（如 `impl<T: Display> Foo for T` vs `impl<T: Debug> Foo for T`），这会导致**语义交集重叠**（`T: Display + Debug` 时两者都适用），使编译器需要复杂的偏序裁决。`min_specialization` 通过限制特化仅基于类型构造子的具体度，保证了特化链的**全序性**和可判定性。
+
+> **来源**: [RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Reference: Specialization](https://doc.rust-lang.org/reference/items/implementations.html#specialization)
+
+---
+
+### 9.3 补充：泛型代码的编译时间优化策略
+
+> **[Rust Performance Book: Compile Times](https://nnethercote.github.io/perf-book/compile-times.html)** · **[rustc dev guide](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)** 泛型的单态化在编译期生成大量代码，是 Rust 编译时间的主要瓶颈之一。以下策略可在工程实践中缓解这一问题。
+
+#### 策略 1：Turbofish 显式标注减少类型推断开销
+
+复杂泛型表达式的类型推断可能触发 trait solver 的指数级搜索。显式使用 turbofish `::<>` 可减少编译器负担：
+
+```rust
+// ❌ 推断负担重：编译器需遍历多个候选 impl
+let x = vec![1, 2, 3].into_iter().collect();
+
+// ✅ Turbofish 显式标注，消除推断搜索空间
+let x = vec![1, 2, 3].into_iter().collect::<Vec<i32>>();
+```
+
+#### 策略 2：dyn Trait 替代单态化（运行时代码共享）
+
+对非热路径的泛型函数，使用 `dyn Trait` 避免单态化膨胀：
+
+```rust
+// ❌ 每个 T 生成一份代码，二进制膨胀
+fn process_all<T: Drawable>(items: &[T]) {
+    for item in items { item.draw(); }
+}
+
+// ✅ 共享一份代码，通过 vtable 分发
+fn process_all_dyn(items: &[&dyn Drawable]) {
+    for item in items { item.draw(); }
+}
+```
+
+**权衡**: `dyn Trait` 引入虚函数调用开销，仅适用于调用频率不高或对吞吐量不敏感的路径。
+
+#### 策略 3：编译单元拆分与 `-Zshare-generics`
+
+```text
+前提: 单态化默认在每个 crate 中独立进行
+问题: Crate A 和 Crate B 都使用 Vec<i32>::push → 两份机器码
+缓解 1: 增量编译 + 更细粒度的编译单元
+缓解 2: -Zshare-generics（unstable）允许跨 crate 共享单态化实例
+```
+
+```toml
+# Cargo.toml（nightly only）
+[profile.release]
+codegen-units = 16  # 更多编译单元，并行度更高，但可能失去内联机会
+```
+
+> **⚠️ 边界**: `codegen-units` 过多会降低 LLVM 内联优化效果；`-Zshare-generics` 目前仅限 nightly 且增加链接复杂度。最佳实践是在 CI 中测量编译时间与运行时性能的平衡点。
+
+> **来源**: [Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html) · [rustc dev guide: Monomorphization](https://rustc-dev-guide.rust-lang.org/backend/monomorph.html)
+
+---
+
+### 9.4 补充：Type-level Programming（Peano 算术与 typenum）
+
+> **[typenum 文档](https://docs.rs/typenum)** · **[generic-array 文档](https://docs.rs/generic-array)** Rust 的类型系统图灵完备，允许在类型层面进行数值计算。`typenum` 和 `generic-array` 是这一范式的工程化实现。💡
+
+#### Peano 数编码：理论模型
+
+Peano 算术通过归纳法定义自然数：
+
+```text
+Z  := 零（基础情形）
+S<N> := N 的后继（归纳步骤）
+
+示例:
+  0 = Z
+  1 = S<Z>
+  2 = S<S<Z>>
+  3 = S<S<S<Z>>>
+```
+
+Rust 中的类型级 Peano 实现：
+
+```rust
+// Peano 数：Z 和 S<N>
+struct Z;
+struct S<N>(std::marker::PhantomData<N>);
+
+// 类型级加法 trait
+trait Add<Rhs> {
+    type Output;
+}
+impl<Rhs> Add<Rhs> for Z {
+    type Output = Rhs;  // 0 + Rhs = Rhs
+}
+impl<N, Rhs> Add<Rhs> for S<N>
+where
+    N: Add<Rhs>,
+{
+    type Output = S<<N as Add<Rhs>>::Output>;  // S<N> + Rhs = S<N + Rhs>
+}
+
+// ✅ 使用
+type Two = S<S<Z>>;
+type Three = S<S<S<Z>>>;
+type Five = <Two as Add<Three>>::Output;  // 2 + 3 = 5
+```
+
+#### typenum：工业级类型级整数
+
+`typenum` 使用二进制编码（而非 Peano 的链式编码）实现高效编译期计算：
+
+```rust
+use typenum::{Sum, Prod, Integer, P2, P3, U4};
+
+// ✅ 类型级加法
+type Five = Sum<P2, P3>;
+assert_eq!(<Five as Integer>::to_i32(), 5);
+
+// ✅ 类型级乘法
+type Twelve = Prod<P3, U4>;
+assert_eq!(<Twelve as Integer>::to_i32(), 12);
+```
+
+#### generic-array：类型级数组长度
+
+`generic-array` 将 `typenum` 的类型级整数用于数组长度泛型：
+
+```rust
+use generic_array::{GenericArray, ArrayLength};
+use typenum::U5;
+
+struct Buffer<N: ArrayLength<u8>> {
+    data: GenericArray<u8, N>,
+}
+
+// ✅ Buffer 的大小在类型层面确定
+let buf: Buffer<U5> = Buffer {
+    data: GenericArray::default(),
+};
+// buf.data 等价于 [u8; 5]，但可用于泛型 trait 实现
+```
+
+#### 边界：编译时间膨胀与错误信息可读性
+
+```rust,ignore
+// ❌ 问题：深层类型级递归导致编译时间指数增长
+type Huge = <U1000 as Add<U1000>>::Output;  // 可能触发递归深度限制
+
+// ❌ 问题：类型错误信息难以阅读
+// expected type `UInt<UInt<UInt<UTerm, B1>, B0>, B1>`
+// found type `UInt<UInt<UInt<UTerm, B1>, B1>, B0>`
+```
+
+> **关键洞察**: Type-level programming 是 Rust 对依赖类型（dependent types）的有限模拟。`typenum` 的二进制编码比 Peano 的 O(n) 链式编码更高效（O(log n)），但 Const Generics（`const N: usize`）在 Rust 1.51+ 后已覆盖大多数场景。type-level programming 仅在需要"类型作为计算结果"（如 GATs 返回类型级数值）时仍不可替代。
+
+> **来源**: [typenum docs](https://docs.rs/typenum) · [generic-array docs](https://docs.rs/generic-array) · [Rust Type System Turing Completeness](https://sdleffler.github.io/RustTypeSystemTuringComplete/) · [Pierce 2002, Ch.29: Type Operators and Kinding]
+
+---
+
+### 9.5 补充：Generic Associated Types (GATs) 的完整形式化视角
+
+> **[RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html)** · **[System F_ω](https://en.wikipedia.org/wiki/System_F)** GATs 将关联类型从"零阶类型别名"扩展为"类型族"（type family），对应类型论中 System F_ω 的类型构造器抽象。✅
+
+#### GATs 与 System F_ω 的映射
+
+System F_ω 引入**类型构造器**（type constructors）作为一等公民，允许抽象 over types of kinds `* -> *`。GATs 是这一能力的 Rust 化表达：
+
+```text
+System F_ω:
+  Λ(α : * -> *). λ(x : α Int). x
+  （高阶类型参数 α 接受一个类型构造器）
+
+Rust GATs:
+  trait Container {
+      type Item<'a> where Self: 'a;  // Item 是类型族：lifetime -> type
+  }
+
+  // 对应 F_ω 的 kind:
+  // Container::Item : lifetime -> *
+```
+
+#### GATs vs HKT（Haskell Higher-Kinded Types）
+
+| **维度** | Haskell HKT | Rust GATs |
+|:---|:---|:---|
+| **类型论基础** | System F_ω 完整高阶类型 | System F_ω 的受限子集 |
+| **类型构造器** | `f :: * -> *` 可作为参数 | 仅关联类型可携带参数 |
+| **使用场景** | `Functor f => fmap :: (a -> b) -> f a -> f b` | `LendingIterator::Item<'a>` |
+| **表达力** | 完整（任意高阶 kind） | 受限（仅关联类型上的参数） |
+| **类型推断** | 需要显式 kind 标注 | 编译器推断，更友好 |
+
+Rust 刻意避免完整 HKT，因为：
+
+1. HKT 会显著增加类型系统的认知复杂性和编译器实现成本；
+2. GATs 在工程实践中已覆盖 HKT 的绝大多数使用场景（如 Lending Iterator、类型级映射）。
+
+#### Lending Iterator 的完整类型论分析
+
+Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：
+
+```rust
+trait LendingIterator {
+    type Item<'a> where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+}
+
+// 形式化类型规则:
+// ∀'a. Self: 'a  ⊢  next : &'a mut Self → Option<Self::Item<'a>>
+```
+
+**为什么标准 Iterator 不足**:
+
+```rust
+trait Iterator {
+    type Item;  // 无生命周期参数
+    fn next(&mut self) -> Option<Self::Item>;
+}
+
+// 形式化:
+// next : &mut Self → Option<Self::Item>
+// 问题: Self::Item 的生命周期与 &mut self 解耦，无法表达"返回借用自 self 的数据"
+```
+
+**Lending Iterator 的类型安全保证**:
+
+```text
+前提 1: GAT Item<'a> 的 where Self: 'a 约束确保返回类型不超过 self 的生命周期
+前提 2: &'a mut self 保证在 Item<'a> 存活期间无其他可变访问
+    ↓
+定理: LendingIterator 的 next 调用不会导致悬垂引用或数据竞争
+    ↓
+边界: 实现者必须正确标注 where Self: 'a，否则编译错误（E0310）
+```
+
+```rust
+// ✅ 正确实现：生命周期精确关联
+struct Windows<'t, T> {
+    slice: &'t [T],
+    size: usize,
+}
+
+impl<'t, T> LendingIterator for Windows<'t, T> {
+    type Item<'a> = &'a [T] where Self: 'a;
+    fn next<'a>(&'a mut self) -> Option<&'a [T]> { ... }
+}
+
+// ❌ 错误实现：生命周期约束遗漏
+impl<'t, T> LendingIterator for Windows<'t, T> {
+    type Item<'a> = &'a [T];  // E0310: 缺少 where Self: 'a
+    // 编译器无法证明 &'a [T] 的生命周期不超过 Self
+}
+```
+
+> **L4 映射**: GATs 对应范畴论中的**索引范畴**（indexed category）——关联类型从单对象（single type）到类型族（type family）的扩展，是依赖类型理论中 Π 类型（product type）的 Rust 近似。Lending Iterator 的类型安全正是 borrow checker（区域子类型）与 GATs（类型族）协同的形式化体现。
+
+> **来源**: [RFC 1598](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [TRPL: Ch19.3](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) · [TAPL Ch.29: Type Operators and Kinding] · [Haskell Type Families](https://wiki.haskell.org/Type_families)
+
+---
+
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -1046,8 +1418,8 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充 `min_specialization` 的当前状态与使用 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充泛型代码的编译时间优化策略（Turbofish、显式标注） —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 Type-level programming（Peano arithmetic、typenum） —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `impl Trait` 在返回位置 vs 参数位置的区别 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 预计: Phase 3
+- [x] **TODO**: 补充 `min_specialization` 的当前状态与使用 —— 优先级: 中 —— 已完成 §9.2 —— 2026-05-13
+- [x] **TODO**: 补充泛型代码的编译时间优化策略（Turbofish、显式标注） —— 优先级: 低 —— 已完成 §9.3 —— 2026-05-13
+- [x] **TODO**: 补充 Type-level programming（Peano arithmetic、typenum） —— 优先级: 低 —— 已完成 §9.4 —— 2026-05-13
+- [x] **TODO**: 补充 `impl Trait` 在返回位置 vs 参数位置的区别 —— 优先级: 中 —— 已完成 §9.1
+- [x] **TODO**: 补充 Generic Associated Types (GATs) 的完整形式化视角 —— 优先级: 中 —— 已完成 §9.5 —— 2026-05-13

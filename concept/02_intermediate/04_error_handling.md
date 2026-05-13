@@ -363,6 +363,82 @@ fn maybe_port() -> Option<u16> {
 
 ---
 
+### 5.5 补充：异步错误处理与 `poll_fn` / `TryFuture` 模式
+
+> **[RFC 243]** · **[futures-rs 文档]** · **[Rust Reference: Async]** 异步错误处理不是同步 `Result` 的简单平移——`Future` 的惰性求值、取消（cancellation）和 `Waker` 驱动模型引入了新的错误传播边界。✅
+
+#### `poll_fn`：将闭包提升为 Future
+
+```rust,ignore
+use std::future::poll_fn;
+use std::task::Poll;
+
+// ✅ 用 poll_fn 包装底层异步原语
+async fn read_with_timeout<R>(reader: &mut R, timeout: Duration) -> Result<Vec<u8>, Error>
+where
+    R: AsyncRead + Unpin,
+{
+    poll_fn(|cx| {
+        // 直接操作 Poll<Result<T, E>>
+        match reader.poll_read(cx, &mut buf) {
+            Poll::Ready(Ok(n)) => Poll::Ready(Ok(buf[..n].to_vec())),
+            Poll::Ready(Err(e)) => Poll::Ready(Err(e.into())),
+            Poll::Pending => {
+                // 检查超时...
+                Poll::Pending
+            }
+        }
+    }).await
+}
+```
+
+`poll_fn` 的核心价值：**在 `async` 块内部手动控制 `Poll` 状态转换**，常用于：
+
+1. 桥接非 `async` 的底层 IO（如 `mio`）到 `Future` 接口
+2. 实现自定义超时、重试逻辑
+3. 在 `select!` 中嵌入临时 Future
+
+#### `TryFuture` 与 `?` 运算符的异步扩展
+
+虽然标准库中没有独立的 `TryFuture` trait，但 `Future<Output = Result<T, E>>` 在生态中形成了**隐式的 TryFuture 模式**：
+
+```rust
+use futures::future::TryFutureExt; // futures crate 扩展
+
+// ✅ 链式错误处理：map_err + and_then
+let result = fetch_user(id)
+    .map_err(|e| Error::Network(e))          // Future<Output = Result<User, Error>>
+    .and_then(|user| fetch_orders(user.id))  // 自动传递 Err，扁平化嵌套 Future
+    .await?;
+```
+
+| 模式 | 同步等价 | 异步形式 | 适用场景 |
+|:---|:---|:---|:---|
+| `?` 传播 | `Result::?` | `Future<Output = Result<T, E>>` 后接 `?` | 顺序异步操作，错误立即返回 |
+| `map_err` | `Result::map_err` | `TryFutureExt::map_err` | 错误类型转换 |
+| `and_then` | `Result::and_then` | `TryFutureExt::and_then` | 顺序组合两个可能失败的 Future |
+| `try_join!` | — | `futures::try_join!` | 并行执行多个 Future，任一失败即返回 Err |
+| `try_select!` | — | `futures::future::select` + 错误处理 | 竞争执行，需手动处理取消与错误 |
+
+#### 取消安全（Cancellation Safety）与错误处理
+
+```rust
+use tokio::select!;
+
+let result = select! {
+    // ✅ 取消安全：recv 被取消后，channel 状态一致（无半读消息）
+    msg = rx.recv() => msg.ok_or(Error::ChannelClosed),
+    // ⚠️ 非取消安全：send 被取消后，数据可能已部分写入 socket
+    _ = tx.send(data) => Ok(()),
+};
+```
+
+> **关键洞察**: 异步错误处理有**两个维度**：1) `Result` 维度的业务错误（IO 失败、解析错误）；2) **取消维度**的生命周期错误（Future 被 `select!` 丢弃时资源未清理）。`Drop` 实现负责后者，`?` 运算符负责前者，但两者在 `unsafe` 或 FFI 边界处可能交互产生 UB。
+>
+> **来源**: [Tokio 文档: Cancellation Safety] · [RFC 243: ? in main] · [futures-rs: TryFutureExt]
+
+---
+
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
 
 > **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
@@ -787,6 +863,300 @@ Monad 定律验证:
 
 ---
 
+### 9.1 补充：`Termination` trait 与 `main` 返回 `Result`
+
+> **[Rust Reference: Termination]** · **[RFC 1937]** Rust 程序入口 `main` 可以返回 `Result<T, E>` 或 `()`，这由 `Termination` trait 统一处理。该 trait 定义了程序退出时的**退出码转换规则**和**错误报告行为**。✅
+
+#### `Termination` trait 定义
+
+```rust,ignore
+pub trait Termination {
+    fn report(self) -> ExitCode;
+}
+
+// ✅ 为 () 实现：正常退出，退出码 0
+impl Termination for () {
+    fn report(self) -> ExitCode { ExitCode::SUCCESS }
+}
+
+// ✅ 为 Result<T, E> 实现：Ok → 0, Err → 非零
+impl<T: Termination, E: Debug> Termination for Result<T, E> {
+    fn report(self) -> ExitCode {
+        match self {
+            Ok(val) => val.report(),
+            Err(err) => {
+                eprintln!("Error: {:?}", err);  // 自动打印错误信息
+                ExitCode::FAILURE
+            }
+        }
+    }
+}
+```
+
+#### `main` 返回 `Result` 的工程价值
+
+```rust,ignore
+// ✅ main 可以直接返回 Result，? 运算符在顶层可用
+fn main() -> Result<(), Box<dyn std::error::Error>> {
+    let config = std::fs::read_to_string("config.json")?;
+    let settings: Settings = serde_json::from_str(&config)?;
+    run_server(settings)?;
+    Ok(())
+}
+```
+
+| `main` 返回类型 | 退出码 | 错误输出 | 适用场景 |
+|:---|:---|:---|:---|
+| `()` | 0 | 无 | 简单程序、 CLI 工具 |
+| `Result<(), E>` | 0 (Ok) / 1 (Err) | `eprintln!("Error: {:?}", err)` | 需要错误传播的应用 |
+| `Result<T, E>`（T 非 ()） | 同 Result<(), E> | 同上 | 极少使用（T 的 report 通常也返回 0） |
+| `!`（永不返回） | 无 | 无 | 守护进程、事件循环 |
+
+> **来源**: [Rust Reference: Termination] · [RFC 1937: const fn] · [TRPL: Ch12.6] · [Wikipedia: Exit status]
+
+### 9.2 补充：`Result<T, !>` 与 `!` (never type) 在错误处理中的使用
+
+```rust,ignore
+// ✅ Result<T, !> 表示"不可能失败"的操作
+fn parse_known_good() -> Result<i32, !> {
+    // 若输入是编译期已知的合法字符串，解析不可能失败
+    Ok("42".parse().unwrap())  // unwrap 安全，因为输入已知合法
+}
+
+// ✅ 在泛型代码中统一处理"可能失败"和"不可能失败"
+fn process<T, E>(result: Result<T, E>) -> T
+where
+    E: std::fmt::Debug,
+{
+    match result {
+        Ok(v) => v,
+        Err(e) => panic!("unexpected error: {:?}", e),
+    }
+}
+```
+
+> **关键洞察**: `Result<T, !>` 将"不可能出错"这一信息编码进类型系统。当泛型函数要求 `Result<T, E>` 时，传入 `Result<T, !>` 完全合法——因为 `!` 是任意类型的子类型，`Result<T, !>` 自然满足 `Result<T, E>` 的约束（当 `E` 接收 `!` 时）。这是子类型多态在错误处理中的优雅应用。
+>
+> **来源**: [Rust Reference: Never type] · [RFC 1216: Never type] · [TAPL Ch.11: Bottom type]
+
+### 9.3 `std::backtrace::Backtrace` 与错误追踪
+
+Rust 1.65+ 稳定了 `std::backtrace::Backtrace`，允许在错误类型中捕获调用栈：
+
+```rust,ignore
+use std::backtrace::Backtrace;
+use std::fmt;
+
+#[derive(Debug)]
+struct TracedError {
+    message: String,
+    backtrace: Backtrace,  // ✅ 自动捕获生成时的调用栈
+}
+
+impl TracedError {
+    fn new(msg: &str) -> Self {
+        Self {
+            message: msg.to_string(),
+            backtrace: Backtrace::capture(),  // 捕获当前调用栈
+        }
+    }
+}
+
+impl fmt::Display for TracedError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{}\n\nBacktrace:\n{}", self.message, self.backtrace)
+    }
+}
+
+impl std::error::Error for TracedError {}
+
+// 使用
+fn inner() -> Result<(), TracedError> {
+    Err(TracedError::new("something went wrong"))
+}
+
+fn outer() -> Result<(), TracedError> {
+    inner()?  // backtrace 指向 inner() 中的捕获点
+}
+```
+
+**与生态库对比**：
+
+| 特性 | `std::backtrace` | `anyhow` | `eyre` |
+|:---|:---|:---|:---|
+| 稳定状态 | ✅ 1.65+ | ✅ 稳定 | ✅ 稳定 |
+| 自定义报告 | ❌ 固定格式 | ⚠️ 有限 | ✅ Handler hook |
+| 彩色输出 | ❌ | ❌ | ✅ (`color-eyre`) |
+|  spantrace | ❌ | ❌ | ✅ (`tracing-error`) |
+| 依赖成本 | 零 | 轻量 | 中等 |
+
+> **边界**：`Backtrace::capture()` 只在 `RUST_BACKTRACE=1` 时捕获完整栈，否则为 `disabled`。这避免了发布版本的性能开销。
+>
+> **来源**: [Rust Standard Library: Backtrace] · [RFC 2504: Catch Unwind] · [eyre docs]
+
+---
+
+### 9.4 `eyre` / `color-eyre` 生态库对比
+
+`eyre` 是 `anyhow` 的替代方案，提供**可定制的错误报告**：
+
+```rust
+use eyre::{Result, WrapErr};
+use color_eyre::{config::HookBuilder, Section};
+
+// ✅ 安装自定义错误处理钩子（通常在 main 开头）
+color_eyre::install()?;
+
+fn read_config(path: &str) -> Result<String> {
+    std::fs::read_to_string(path)
+        .wrap_err("failed to read config")  // 添加上下文
+        .with_section(|| path.to_header("config path:"))  // 附加诊断信息
+}
+
+fn main() -> Result<()> {
+    let _config = read_config("/nonexistent/config.toml")?;
+    Ok(())
+}
+// 输出：彩色错误报告，包含 backtrace、相关 section、建议
+```
+
+**`anyhow` vs `eyre` 选择矩阵**：
+
+| 场景 | 推荐 |
+|:---|:---|
+| 快速原型、CLI 工具 | `anyhow`（更简单） |
+| 需要自定义错误格式（JSON/结构化日志） | `eyre`（handler hook） |
+| 需要彩色输出和 spantrace | `color-eyre` + `tracing-error` |
+| 需要稳定的最小依赖 | `anyhow` |
+
+> **定理**：`anyhow` 和 `eyre` 都遵循 "fail fast, report rich" 哲学——在错误发生点捕获最大上下文，向上传播时不再丢失信息。
+>
+> **来源**: [eyre docs] · [color-eyre docs] · [anyhow docs] · [Rust CLI Book]
+
+---
+
+### 9.5 `#[track_caller]` 与错误定位优化
+
+`#[track_caller]`（Rust 1.46+ 稳定）允许函数在 panic 或错误报告中**显示调用者的位置**而非函数内部位置：
+
+```rust
+// ✅ 使用 #[track_caller] 的包装函数
+#[track_caller]
+fn my_unwrap<T>(opt: Option<T>) -> T {
+    match opt {
+        Some(v) => v,
+        None => panic!("unwrap failed"),  // panic 位置显示为调用者位置
+    }
+}
+
+fn main() {
+    let x: Option<i32> = None;
+    my_unwrap(x);  // panic 信息指向这一行，而非 my_unwrap 内部
+}
+```
+
+**核心机制**：编译器在调用 `#[track_caller]` 函数时，隐式传递 `Location` 信息（文件、行号、列号），代价为额外的寄存器/栈参数。
+
+**适用范围矩阵**：
+
+| 函数类型 | 支持 `#[track_caller]` | 效果 |
+|:---|:---:|:---|
+| 普通函数 | ✅ | panic location 指向调用者 |
+| 泛型函数 | ✅ | 同上 |
+| `const fn` | ✅ | 编译期错误定位 |
+| `async fn` | ✅ | await 点定位 |
+| trait 方法 | ❌ | 当前不稳定（RFC 2091 扩展中） |
+| 闭包 | ❌ | 不适用 |
+
+> **边界**：`#[track_caller]` 增加调用约定开销（传递 Location 指针）。仅应在错误报告/包装函数中使用，不应在性能敏感的热路径中滥用。
+>
+> **来源**: [Rust Reference: track_caller] · [RFC 2091: track_caller] · [Rust Standard Library: Location]
+
+---
+
+### 9.6 `Try` trait 与自定义 `?` 行为（稳定化中）
+
+`Try` trait（Tracking: RFC 3058）将 `?` 运算符泛化到任意类型：
+
+```rust,ignore
+// ✅ Try trait 的核心定义（概念等价，稳定化中）
+pub trait Try {
+    type Output;   // 成功时的值类型
+    type Residual; // 失败时的残差类型
+
+    fn from_output(output: Self::Output) -> Self;
+    fn branch(self) -> ControlFlow<Self::Residual, Self::Output>;
+}
+```
+
+`ControlFlow` 枚举区分 "继续" 与 "提前返回"：
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+// ✅ ControlFlow 的语义
+enum ControlFlow<B, C> {
+    Continue(C),  // 正常继续，C 为中间结果
+    Break(B),     // 提前终止，B 为残差
+}
+
+// Result 的 Try 实现（概念等价）
+impl<T, E> Try for Result<T, E> {
+    type Output = T;
+    type Residual = Result<!, E>;  // ! 为 never type
+
+    fn branch(self) -> ControlFlow<Result<!, E>, T> {
+        match self {
+            Ok(v) => ControlFlow::Continue(v),
+            Err(e) => ControlFlow::Break(Err(e)),
+        }
+    }
+}
+```
+
+**自定义 `?` 行为示例**：
+
+```rust,ignore
+use std::ops::ControlFlow;
+
+// ✅ 自定义类型支持 ? 运算符
+enum Maybe<T> {
+    Just(T),
+    Nothing,
+}
+
+impl<T> Try for Maybe<T> {
+    type Output = T;
+    type Residual = Maybe<!>;
+
+    fn from_output(output: T) -> Self { Maybe::Just(output) }
+    fn branch(self) -> ControlFlow<Maybe<!>, T> {
+        match self {
+            Maybe::Just(v) => ControlFlow::Continue(v),
+            Maybe::Nothing => ControlFlow::Break(Maybe::Nothing),
+        }
+    }
+}
+
+fn try_divide(a: i32, b: i32) -> Maybe<i32> {
+    if b == 0 { Maybe::Nothing } else { Maybe::Just(a / b) }
+}
+
+fn compute() -> Maybe<i32> {
+    let x = try_divide(10, 2)?;  // ✅ 自定义 ? 行为
+    let y = try_divide(x, 0)?;   // 返回 Maybe::Nothing
+    Maybe::Just(y)
+}
+```
+
+> **定理**：`Try` trait 将 `?` 从 `Result`/`Option` 的语法糖提升为**通用的控制流抽象**。任何满足代数结构的类型（含成功/失败两种分支）都可实现 `Try`。
+>
+> **边界**：`Try` trait 当前尚未完全稳定（`Residual` 关联类型在演进中）。`ControlFlow` 本身已稳定（Rust 1.55+），但直接实现 `Try` 需要 nightly。
+>
+> **来源**: [RFC 3058: Try trait v2] · [Rust Reference: The ? operator] · [Rust Standard Library: ControlFlow]
+
+---
+
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -803,9 +1173,10 @@ Monad 定律验证:
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 预计: Phase 3
+- [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3
+- [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
+- [x] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4
+- [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5
+- [x] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 已完成 §9.2
+- [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5
+- [x] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 已完成 §9.6

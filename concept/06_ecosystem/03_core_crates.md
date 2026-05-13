@@ -627,19 +627,245 @@ fn main() {
 
 ---
 
+### 9.1 核心 Crate 最小可用示例
+
+| Crate | 最小示例 | 关键 API |
+|:---|:---|:---|
+| **Tokio** | `#[tokio::main] async fn main() { tokio::spawn(async {}).await; }` | `spawn`, `select!`, `join!` |
+| **Axum** | `Router::new().route("/", get(handler))` | `Router`, `handler`, `extract::State` |
+| **SQLx** | `sqlx::query!("SELECT * FROM users WHERE id = $1", id).fetch_one(&pool).await` | `query!`, `Pool`, `migrate!` |
+| **Serde** | `serde_json::to_string(&data)?` | `Serialize`, `Deserialize`, `json`, `yaml` |
+| **Tracing** | `tracing::info!("request processed");` | `info!`, `span!`, `instrument` |
+| **Clap** | `#[derive(Parser)] struct Cli { #[arg] name: String }` | `Parser`, `Subcommand`, `Args` |
+| **Reqwest** | `reqwest::get("https://api.example.com").await?.json::<T>().await?` | `get`, `post`, `Client` |
+
+### 9.2 Crate 组合最佳实践：Axum + SQLx + Tracing 完整栈
+
+```rust
+// ✅ Cargo.toml
+// [dependencies]
+// axum = "0.7"
+// sqlx = { version = "0.8", features = ["runtime-tokio", "postgres"] }
+// tracing = "0.1"
+// tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+// tokio = { version = "1", features = ["full"] }
+// serde = { version = "1", features = ["derive"] }
+
+use axum::{
+    extract::{State, Path},
+    routing::get,
+    Json, Router,
+};
+use sqlx::PgPool;
+use tracing::{info, instrument};
+use serde::Serialize;
+
+#[derive(Clone)]
+struct AppState {
+    db: PgPool,
+}
+
+#[derive(Serialize)]
+struct User {
+    id: i64,
+    name: String,
+}
+
+#[instrument(skip(state))]
+async fn get_user(State(state): State<AppState>, Path(id): Path<i64>) -> Result<Json<User>, axum::http::StatusCode> {
+    info!("fetching user {}", id);
+    let user = sqlx::query_as!(User, "SELECT id, name FROM users WHERE id = $1", id)
+        .fetch_one(&state.db)
+        .await
+        .map_err(|_| axum::http::StatusCode::NOT_FOUND)?;
+    Ok(Json(user))
+}
+
+#[tokio::main]
+async fn main() {
+    tracing_subscriber::fmt::init();
+    let pool = PgPool::connect("postgres://localhost/db").await.unwrap();
+    let app = Router::new()
+        .route("/users/:id", get(get_user))
+        .with_state(AppState { db: pool });
+    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
+    axum::serve(listener, app).await.unwrap();
+}
+```
+
+> **关键设计**：`State` 提取器共享 `PgPool`（基于 Arc 的克隆）；`#[instrument]` 自动生成 tracing span；`sqlx::query_as!` 编译期检查 SQL。
+
+### 9.3 `cargo vet`：供应链安全审计
+
+`cargo vet`（Mozilla 开发）对 crate 依赖进行**人工审计追踪**：
+
+```bash
+# 初始化审计配置
+cargo vet init
+
+# 检查当前依赖是否需要审计
+cargo vet
+
+# 审查特定 crate
+cargo vet inspect tokio@1.37.0
+
+# 认证已审查的 crate
+cargo vet certify tokio@1.37.0 --criteria safe-to-deploy
+
+# 使用聚合审计源（如 Mozilla 的公共审计）
+# 在 supply-chain/config.toml 中添加：
+# [imports.mozilla]
+# url = "https://raw.githubusercontent.com/mozilla/supply-chain/main/audits.toml"
+```
+
+**与 `cargo audit` 对比**：
+
+| 工具 | 检测目标 | 机制 | CI 集成 |
+|:---|:---|:---|:---|
+| `cargo audit` | 已知 CVE（安全漏洞） | 自动查询 Advisory DB | 推荐每次构建 |
+| `cargo vet` | 供应链可信度 | 人工审计 + 聚合认证 | 推荐每周/每月 |
+
+> **来源**: [cargo-vet 文档] · [Mozilla Supply Chain] · [Rust Secure Code WG]
+
+### 9.4 WASM 前端框架对比
+
+| 框架 | 渲染模型 | 状态管理 | JS 互操作 | 成熟度 | 推荐场景 |
+|:---|:---|:---|:---:|:---:|:---|
+| **Leptos** | 细粒度响应式（Signal）| 内置 Signal | 良好 | ⭐⭐⭐⭐ | 全栈 Rust（含 SSR）|
+| **Dioxus** | VDOM |  hooks (`use_state`) | 优秀 | ⭐⭐⭐⭐ | 跨平台（Web/Desktop/Mobile）|
+| **Yew** | VDOM |  hooks / 代理 | 良好 | ⭐⭐⭐ | 传统 React-like 开发 |
+
+```rust
+// ✅ Leptos 最小示例
+use leptos::*;
+
+#[component]
+fn App() -> impl IntoView {
+    let (count, set_count) = create_signal(0);
+    view! {
+        <button on:click=move |_| set_count.update(|n| *n += 1)>
+            "Click me: " {count}
+        </button>
+    }
+}
+```
+
+> **来源**: [Leptos 文档] · [Dioxus 文档] · [Yew 文档] · [Are We Web Yet]
+
+### 9.5 嵌入式 Crate 生态
+
+| Crate | 用途 | 关键特性 |
+|:---|:---|:---|
+| **embedded-hal** | 硬件抽象层（HAL）trait | `InputPin`, `OutputPin`, `SPI`, `I2C`, `UART` |
+| **embassy** | 异步嵌入式运行时 | `async` 中断处理、`executor`、`time` |
+| **probe-rs** | 调试/烧录工具链 | `cargo flash`, `cargo embed`, RTT 日志 |
+| **defmt** | 结构化日志 | 编译期格式化、极低开销 |
+| **cortex-m-rt** | Cortex-M 运行时 | 启动代码、中断向量表 |
+| **heapless** | 无分配数据结构 | `Vec<T, N>`, `String<N>`, `Queue<T, N>` |
+
+```rust
+// ✅ Embassy 异步闪烁 LED
+use embassy_executor::Spawner;
+use embassy_time::{Duration, Timer};
+use embassy_stm32::gpio::{Level, Output, Speed};
+
+#[embassy_executor::main]
+async fn main(_spawner: Spawner) {
+    let p = embassy_stm32::init(Default::default());
+    let mut led = Output::new(p.PA5, Level::Low, Speed::Low);
+    loop {
+        led.set_high();
+        Timer::after(Duration::from_millis(500)).await;
+        led.set_low();
+        Timer::after(Duration::from_millis(500)).await;
+    }
+}
+```
+
+> **来源**: [Embedded Rust Book] · [embassy.dev] · [probe.rs] · [defmt docs]
+
+---
+
+### 9.6 游戏开发 Crate 生态
+
+| Crate | 用途 | 关键特性 |
+|:---|:---|:---|
+| **bevy** | ECS 游戏引擎 | 数据驱动、并行系统、资产管道 |
+| **winit** | 跨平台窗口管理 | Windows/macOS/Linux/Web |
+| **wgpu** | 跨平台 GPU 渲染 | WebGPU 标准、Vulkan/Metal/DX12 |
+| **rapier** | 物理引擎 | 2D/3D、确定性仿真 |
+| **rodio** | 音频播放 | 多格式支持、空间音频 |
+| **egui** | 即时模式 GUI | 纯 Rust、易于集成 |
+
+```rust
+// ✅ Bevy ECS 最小示例
+use bevy::prelude::*;
+
+#[derive(Component)]
+struct Player { health: i32 }
+
+fn spawn_player(mut commands: Commands) {
+    commands.spawn(Player { health: 100 });
+}
+
+fn player_system(query: Query<&Player>) {
+    for player in &query {
+        println!("Player health: {}", player.health);
+    }
+}
+
+fn main() {
+    App::new()
+        .add_plugins(DefaultPlugins)
+        .add_systems(Startup, spawn_player)
+        .add_systems(Update, player_system)
+        .run();
+}
+```
+
+> **来源**: [Bevy 引擎文档] · [wgpu 文档] · [Rapier 物理引擎] · [Are We Game Yet]
+
+### 9.7 ML 推理 Crate 生态
+
+| Crate | 用途 | 后端 | 说明 |
+|:---|:---|:---|:---|
+| **candle** | 推理框架 | CPU/GPU (Metal/CUDA) | Hugging Face 出品，极简 API |
+| **burn** | 训练+推理 | WGPU/NDArray/Candle | 纯 Rust 深度学习框架 |
+| **tract** | ONNX 推理 | CPU (ARM/x86) | 边缘设备优化 |
+| **ort** | ONNX Runtime 绑定 | CPU/GPU/DirectML | 微软官方运行时 |
+| **tch-rs** | PyTorch C++ API 绑定 | CPU/CUDA | 与 PyTorch 生态兼容 |
+
+```rust
+// ✅ Candle：极简推理
+use candle_core::{Device, Tensor};
+
+fn main() -> anyhow::Result<()> {
+    let device = Device::new_cuda(0)?;
+    let a = Tensor::randn(0f32, 1., (2, 3), &device)?;
+    let b = Tensor::randn(0f32, 1., (3, 4), &device)?;
+    let c = a.matmul(&b)?;
+    println!("{}", c);
+    Ok(())
+}
+```
+
+> **来源**: [Candle GitHub] · [Burn Book] · [Tract 文档] · [Hugging Face Rust]
+
+---
+
 ## 十、待补充与演进方向（TODOs）
 
 - [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）
 - [x] **高**: 补充 crate 选择决策树（std vs 第三方）
 - [x] **中**: 补充 crates.io 生态健康度指标深度评估
-- [ ] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例）
-- [ ] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈）
-- [ ] **中**: 补充 `cargo vet` 供应链安全审计流程
-- [ ] **中**: 补充 WASM 前端框架对比（leptos / dioxus / yew）
-- [ ] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs）
-- [ ] **低**: 补充游戏开发 crate 生态深度案例
-- [ ] **低**: 补充 ML 推理 crate 生态（candle / burn / tract）
-- [ ] **低**: 建立 crates.io 下载量/趋势的自动化追踪
+- [x] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例） —— 已完成 §9.1
+- [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2
+- [x] **中**: 补充 `cargo vet` 供应链安全审计流程 —— 已完成 §9.3
+- [x] **中**: 补充 WASM 前端框架对比（leptos / dioxus / yew） —— 已完成 §9.4
+- [x] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs） —— 已完成 §9.5
+- [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6
+- [x] **低**: 补充 ML 推理 crate 生态（candle / burn / tract） —— 已完成 §9.7
+- [ ] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 待自动化脚本
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 

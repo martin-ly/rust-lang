@@ -566,13 +566,99 @@ Polonius 可视为 Oxide 的**实现层优化**：
 
 ---
 
+### 9.3 Reed 2009 资源标签与 Iris 幽灵状态的对应
+
+Reed 2009 "Patina: A Formalization of the Rust Programming Language" 是首个系统形式化 Rust 所有权系统的尝试。其核心贡献是**资源标签（resource tags）**模型：
+
+**Reed 的资源标签**：
+
+```text
+资源状态:  { Owned(τ), Borrowed(τ, mutability), Freed }
+
+转移规则:
+  Owned(τ) ──move──→ Freed          (所有权转移)
+  Owned(τ) ──borrow──→ Borrowed(τ, mut) + Owned(τ)  (可变借用：原 owner 冻结)
+  Owned(τ) ──borrow──→ Borrowed(τ, imm) + Owned(τ)  (不可变借用：原 owner 只读)
+  Borrowed(τ, *) ──return──→ Owned(τ)  (借用归还)
+```
+
+**与 Iris 幽灵状态的映射**：
+
+| Reed 2009 | Iris 框架 | 语义 |
+|:---|:---|:---|
+| 资源标签 | Ghost state（幽灵状态） | 程序状态之外的逻辑资源 |
+| `Owned(τ)` | `points_to(l, v)` | 位置 `l` 存储值 `v` |
+| `Borrowed(τ, mut)` | `&mut{l}` | 独占访问权（exclusive permission） |
+| `Borrowed(τ, imm)` | `&shr{l}` | 共享访问权（shared permission） |
+| 标签一致性 | Resource algebra（资源代数） | 确保资源不重复、不丢失 |
+
+> **关键演进**：Reed 2009 的标签模型是**一阶**的（仅跟踪所有权状态），而 Iris 的幽灵状态是**高阶**的（支持任意资源代数、不变量、高阶协议）。RustBelt（Jung et al. 2017）将 Reed 的直觉扩展为完整的 Iris 实例，使得所有权规则可以表达为可组合的高阶协议。
+>
+> **来源**: [Reed 2009 · Patina] · [Jung et al. 2018 · Iris] · [RustBelt: POPL 2018]
+
+### 9.4 `Pin<T>` 的形式化语义：location stability
+
+`Pin<T>` 的地址不变性在形式化中的核心问题是：**如何在移动语义的语言中表达 "此值不可移动"**？
+
+**形式化定义（RefinedRust / PLDI 2024）**：
+
+```text
+Pin<P<T>> 的不变性:
+  ∀ t₁, t₂.  pinned(P) at t₁ ∧ value_valid(P) at t₂
+  ⇒  addr(P.inner)@t₁ = addr(P.inner)@t₂
+
+即：若 P 在某个时刻被 pin，则其内部值的地址在所有后续时刻保持不变。
+```
+
+**与线性逻辑的对应**：
+
+| 概念 | Rust `Pin<T>` | 线性逻辑 |
+|:---|:---|:---|
+| 核心保证 | 地址不变性 | **Location stability**：资源的位置是证明的一部分 |
+| 移动语义 | `!Unpin` 类型不可移动 | 资源一旦分配即固定 |
+| 借用 | `Pin<&mut T>` 提供可变访问 | `!A`（of course）允许只读共享 |
+| 释放 | Drop 仍被调用，但地址不变 | 资源消耗不改变位置 |
+
+```rust
+// ✅ Pin 的形式化直觉：地址作为资源的一部分
+use std::pin::Pin;
+use std::marker::PhantomPinned;
+
+struct SelfRef {
+    data: String,
+    ptr: *const String,  // 指向 self.data
+    _pin: PhantomPinned, // 标记为 !Unpin
+}
+
+impl SelfRef {
+    fn new(s: String) -> Pin<Box<Self>> {
+        let mut boxed = Box::new(Self {
+            data: s,
+            ptr: std::ptr::null(),
+            _pin: PhantomPinned,
+        });
+        let ptr = &boxed.data as *const String;
+        boxed.ptr = ptr;
+        // Pin::new_unchecked 后，boxed 的地址不再改变
+        // ptr 始终有效，因为 SelfRef 不会被移动
+        unsafe { Pin::new_unchecked(boxed) }
+    }
+}
+```
+
+> **定理（Pin 地址不变性）**：若 `Pin<P<T>>` 被构造且 `T: !Unpin`，则 `P` 指向的内存地址在所有可观测程序点保持不变。这是 RefinedRust（PLDI 2024）中通过 **lifetime token** 和 **location ownership** 联合保证的。
+>
+> **来源**: [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Rust Reference: Pin] · [Jung et al. 2019: Stacked Borrows]
+
+---
+
 ## 十、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
 - [x] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
-- [ ] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析
-- [ ] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系
-- [ ] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应（参见 L3 `02_async.md` §8）
+- [x] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析 —— 已完成（参见 `04_rustbelt.md` §7.1–7.4）
+- [x] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系 —— 已完成 §9.3
+- [x] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应 —— 已完成 §9.4
 
 ---
 

@@ -540,12 +540,217 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ---
 
+## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
+
+> **[Wikipedia: Dependent type]** · **[Wikipedia: Higher-kinded type]** · **[RFC 2000: Const Generics]** · **[Rust Reference: Const Generics]** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅
+
+### 10.1 Dependent Type 与 Const Generics 的关系
+
+**Dependent type**（依赖类型）是**值可出现在类型中**的类型系统。在完整依赖类型（如 Coq、Agda、Idris）中，类型可以依赖项（term）的值：
+
+```text
+Idris:  Vec : Nat -> Type -> Type
+       Vec 3 Int  -- 长度为 3 的 Int 向量，类型本身包含值 3
+```
+
+Rust 的 **Const Generics**（常量泛型，Rust 1.51+ 稳定）是依赖类型的**有限子集**：
+
+```rust
+// ✅ Rust: 值（常量）出现在类型参数中
+struct Array<T, const N: usize> {
+    data: [T; N],  // N 是编译期常量，属于类型的一部分
+}
+
+let a: Array<i32, 3> = Array { data: [1, 2, 3] };
+let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
+// Array<i32, 3> 和 Array<i32, 4> 是不同的类型
+```
+
+| 维度 | 完整依赖类型（Idris/Coq） | Rust Const Generics |
+|:---|:---|:---|
+| **值的范围** | 任意项（包括递归函数结果） | 仅 `usize`、`bool`、`char` 等少量原始类型的常量表达式 |
+| **类型检查时机** | 编译期 + 运行期（依赖值可能运行时才知） | 仅编译期（常量求值器 `miri` 子集） |
+| **表达能力** | 可证明任意性质（对应 Curry-Howard 的完整对应） | 可表达数组长度、位掩码尺寸等工程场景 |
+| **类型相等判定** | 依赖项的归约（可能不可判定） | 常量表达式的编译期求值（可判定） |
+| **与unsafe关系** | 无 unsafe 概念（证明即程序） | 仍依赖 unsafe 进行底层优化 |
+
+> **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
+>
+> **来源**: [Wikipedia: Dependent type] · [RFC 2000: Const Generics] · [Idris 文档: Dependent Types]
+
+### 10.2 Higher-Kinded Types（HKT）的缺失与 workaround
+
+**HKT** 允许类型构造器（如 `Vec`、`Option`）本身作为类型参数：
+
+```text
+Haskell:  fmap :: Functor f => (a -> b) -> f a -> f b
+          -- f 不是类型，而是类型构造器（kind: * -> *）
+```
+
+Rust **当前不支持 HKT**。`Vec<T>` 中的 `Vec` 不能作为泛型参数传递。
+
+#### Workaround 1: GATs 模拟类型族
+
+```rust
+// 用 GATs 模拟 "类型构造器作为关联类型"
+trait TypeConstructor {
+    type Apply<T>;  // 模拟 * -> *
+}
+
+struct VecConstructor;
+impl TypeConstructor for VecConstructor {
+    type Apply<T> = Vec<T>;
+}
+
+struct OptionConstructor;
+impl TypeConstructor for OptionConstructor {
+    type Apply<T> = Option<T>;
+}
+```
+
+#### Workaround 2: 宏生成单态代码
+
+```rust
+macro_rules! monomorphic_map {
+    ($container:ty, $f:expr, $input:expr) => {{
+        $input.into_iter().map($f).collect::<$container>()
+    }};
+}
+
+let v: Vec<i32> = monomorphic_map!(Vec<i32>, |x| x + 1, vec![1, 2, 3]);
+```
+
+#### Workaround 3: 显式 trait 层级（Rust 标准库做法）
+
+```rust,ignore
+// 不为 "所有 Functor" 抽象，而为每种容器单独定义方法
+impl<T> Vec<T> { fn map<U>(self, f: impl FnMut(T) -> U) -> Vec<U> { ... } }
+impl<T> Option<T> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Option<U> { ... } }
+impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> { ... } }
+```
+
+> **形式化视角**: HKT 需要 **System F_ω**（允许类型抽象的类型构造器）。Rust 的类型系统接近 System F_ω + 区域类型，但出于**单态化实现的复杂性**和**类型推断的实用性**，HKT 尚未加入语言。GATs 提供了约 80% 的 HKT 表达能力，剩余 20%（高阶类型抽象）需通过宏或显式实例化弥补。
+>
+> **来源**: [Wikipedia: Higher-kinded type] · [TAPL Ch.29] · [Rust Internals: HKT Discussion] · [RFC 1598: GATs]
+
+### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
+
+**Curry-Howard 对应**断言：**命题 = 类型，证明 = 程序**。在线性逻辑与 Rust 的语境下：
+
+| 线性逻辑 | Rust 类型/构造 | 逻辑语义 | 计算语义 |
+|:---|:---|:---|:---|
+| **A ⊗ B** | `(A, B)` | A 且 B（同时成立，各自独立） | 元组：两个资源同时存在 |
+| **A ⊸ B** | `fn(A) -> B` | A 蕴含 B | 函数：消耗 A，产生 B |
+| **A ⊕ B** | `enum { A, B }` | A 或 B（二者择一） | 枚举：只有一个变体激活 |
+| **!A** | `impl Copy` | A 可任意复制 | Copy：资源可 weakening/contraction |
+| **切消（Cut）** | `let y = f(x)` | 中间命题的消除 | 函数调用：求值后替换为结果 |
+| **证明网（Proof Net）** | 控制流图（CFG） | 无冗余的规范证明形式 | 编译器的中间表示（MIR） |
+
+```text
+Curry-Howard 在 Rust 中的具体实例:
+
+  命题 "若拥有 String，则可获得其长度"
+    ⟺ 类型 `fn(String) -> usize`
+    ⟺ 程序 `fn len(s: String) -> usize { s.len() }`
+
+  证明的正确性（类型检查通过）
+    ⟺ 程序的资源安全（borrow checker 通过）
+```
+
+> **来源**: [Wikipedia: Curry–Howard correspondence] · [Wadler 2015 · Propositions as Types] · [Girard 1989 · Proofs and Types] · [TAPL Ch.9]
+
+---
+
+### 10.4 Pierce *TAPL* Ch.15 子类型与 Rust 生命周期映射
+
+#### 子类型的核心规则（TAPL Ch.15）
+
+子类型关系 `S <: T`（S 是 T 的子类型）的核心规则集：
+
+**自反与传递**：
+
+```text
+S-Refl:  ───────────    S-Trans:  S <: U   U <: T
+         S <: S                   ─────────────────
+                                          S <: T
+```
+
+**函数子类型（逆变-协变）**：
+
+```text
+S-Arrow:  T₁ <: S₁    S₂ <: T₂
+          ─────────────────────────────
+          (S₁ → S₂) <: (T₁ → T₂)
+```
+
+> **关键洞察**：函数类型的参数位置是**逆变**的（contravariant），返回位置是**协变**的（covariant）。这对应 Rust 中 `fn(T) -> U` 的参数 `T` 必须满足逆变约束。
+
+**记录子类型（宽度子类型化）**：
+
+```text
+S-Record:  {lᵢ: Tᵢ} <: {lᵢ: Sᵢ}  若 ∀i. Tᵢ <: Sᵢ
+           ─────────────────────────────────────────
+           {lᵢ: Tᵢ, lⱼ: Tⱼ} <: {lᵢ: Sᵢ}  （字段多的是子类型）
+```
+
+#### Rust 生命周期作为子类型关系
+
+Rust 中生命周期 `'a: 'b` 的语法表示 **"'a 至少和 'b 一样长"**，即 `'a` 是 `'b` 的子类型：
+
+```rust
+// ✅ 生命周期子类型的直观理解
+fn example<'a, 'b>(x: &'a i32, y: &'b i32)
+where
+    'a: 'b,  // 'a 是 'b 的子类型：'a 活得比 'b 长
+{
+    let z: &'b i32 = x;  // ✅ 合法：&'a i32 <: &'b i32（协变）
+}
+```
+
+**生命周期方差与子类型**：
+
+| 类型构造器 | 参数位置 | 方差 | 子类型方向 |
+|:---|:---|:---:|:---|
+| `&'a T` | `'a` | 协变 | `'long <: 'short` ⟹ `&'long T <: &'short T` |
+| `&'a T` | `T` | 协变 | `U <: V` ⟹ `&'a U <: &'a V` |
+| `&'a mut T` | `'a` | 协变 | `'long <: 'short` ⟹ `&'long mut T <: &'short mut T` |
+| `&'a mut T` | `T` | 不变 | `U <: V` ⟹ `&'a mut U` ⋈ `&'a mut V`（无子类型关系） |
+| `fn(T) -> U` | `T` | 逆变 | `V <: U` ⟹ `fn(U) -> R <: fn(V) -> R` |
+| `fn(T) -> U` | `U` | 协变 | `R <: S` ⟹ `fn(T) -> R <: fn(T) -> S` |
+| `Box<T>` | `T` | 协变 | `U <: V` ⟹ `Box<U> <: Box<V>` |
+| `*const T` | `T` | 协变 | `U <: V` ⟹ `*const U <: *const V` |
+| `*mut T` | `T` | 不变 | `U <: V` ⟹ `*mut U` ⋈ `*mut V` |
+
+```rust,ignore
+// ✅ 协变示例：&'a T 对 'a 和 T 都是协变
+fn covariant_lifetime<'long: 'short>(x: &'long i32) -> &'short i32 {
+    x  // &'long i32 <: &'short i32，因为 'long <: 'short
+}
+
+fn covariant_type(x: &'static String) -> &'static str {
+    x.as_str()  // String <: str ⟹ &'static String 可安全转为 &'static str
+}
+
+// ❌ 不变示例：&mut T 对 T 是不变的
+fn invariant<'a>(x: &'a mut String) -> &'a mut str {
+    // x  // E0308: 无法将 &mut String 转为 &mut str
+    // &mut T 对 T 是不变的，因为写入操作要求类型完全匹配
+    unimplemented!()
+}
+```
+
+> **定理**：Rust 的生命周期子类型化是**结构子类型**（structural subtyping）的特例——子类型关系由类型的结构（生命周期参数）决定，而非名义（name-based）。
+>
+> **来源**: [Pierce · Types and Programming Languages Ch.15–16] · [Rust Reference: Subtyping] · [Rust Nomicon: Variance] · [Wikipedia: Subtyping]
+
+---
+
 ## 十二、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 预计: Phase 1
-- [ ] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期映射 —— 优先级: 中 —— 预计: Phase 2
+- [x] **TODO**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 已完成 §10.1
+- [x] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 已完成 §10.2
+- [x] **TODO**: 补充线性逻辑（Linear Logic）与所有权类型的 Curry-Howard 对应 —— 优先级: 高 —— 已完成 §10.3
+- [x] **TODO**: 补充 Pierce *TAPL* Ch.15 子类型章节的完整规则与 Rust 生命周期映射 —— 优先级: 中 —— 已完成 §10.4
 
 > **过渡: L4 → L3**
 >

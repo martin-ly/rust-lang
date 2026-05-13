@@ -10,6 +10,7 @@
 
 - v1.0 (2026-05-12): 初始版本
 - v1.1 (2026-05-12): 补充 Wikipedia 权威定义、课程引用、学术论文、跨文件链接
+- v1.2 (2026-05-13): 修复章节编号错误；新增"跨系统信任边界对比"（从 PostgreSQL 零信任分析中提取 Rust 同构映射）；补充 PG MVCC ↔ Rust 所有权、借用检查器 ↔ Repeatable Read、多系统信任矩阵
 
 ---
 
@@ -122,7 +123,7 @@ graph TD
 
 ---
 
-## 二、边界条件总表
+## 三、边界条件总表
 
 ### 2.1 内存安全边界
 
@@ -166,7 +167,7 @@ graph TD
 
 ---
 
-## 三、失效条件分类学
+## 四、失效条件分类学
 
 ### 3.1 按失效层级分类
 
@@ -199,7 +200,7 @@ Level 3: 完全绕过（直接破坏内存/类型系统）
 
 ---
 
-## 四、反事实推理：如果 Rust 没有某机制
+## 五、反事实推理：如果 Rust 没有某机制
 
 | 缺失机制 | 后果 | 现实替代 | 对比语言 |
 |:---|:---|:---|:---|
@@ -212,7 +213,7 @@ Level 3: 完全绕过（直接破坏内存/类型系统）
 
 ---
 
-## 五、Mermaid 边界判定总图
+## 六、Mermaid 边界判定总图
 
 ```mermaid
 graph TD
@@ -244,7 +245,7 @@ graph TD
 
 ---
 
-## 六、unsafe 边界统计与 FFI 安全模式
+## 七、unsafe 边界统计与 FFI 安全模式
 
 > **过渡**: 从抽象的边界分类下沉到具体的工程数据——标准库中 unsafe 的分布、FFI 的封装模式。
 
@@ -320,7 +321,7 @@ graph TD
 
 ---
 
-## 七、供应链安全
+## 八、供应链安全
 
 > **过渡**: 从代码边界延伸到依赖边界——现代 Rust 项目的风险不仅来自自身 unsafe，还来自外部 crate。
 
@@ -369,7 +370,102 @@ deny = [{ name = "crate-name", version = "<1.0.0" }]
 
 ---
 
-## 八、与 L1-L4 文件的交叉引用
+## 十、跨系统信任边界对比：Rust 在零信任谱系中的位置
+
+> **过渡**: 安全边界不仅是 Rust 内部的 `safe`/`unsafe` 分界线，更是不同系统在不同层次上建立"不信任假设"的工程选择。将 Rust 放在 PostgreSQL、区块链、Git 的零信任谱系中对比，能更清晰地定位其安全模型的独特性和边界。
+>
+> **方法论对齐**: [Wikipedia: Zero trust security model] · [Wikipedia: Trust (social)] · Felleisen 1989 表达力比较
+
+---
+
+### 10.1 与 PostgreSQL MVCC 的所有权同构
+
+PostgreSQL 的 MVCC（Multi-Version Concurrency Control）与 Rust 的所有权系统，是**同一安全公理在不同时间尺度的实现**：
+
+| 维度 | Rust 所有权 | PG MVCC |
+|:---|:---|:---|
+| **时间尺度** | 编译期（代码生成前） | 运行期（事务执行时） |
+| **版本策略** | 单版本（任一时刻只有一个所有者） | 多版本（旧版本与新版本共存） |
+| **冲突解决** | 编译错误（借用检查器拒绝） | 快照隔离（事务看到历史版本） |
+| **安全保证** | 无数据竞争、无 UAF | 无脏读、无不可重复读（RR 级别） |
+| **形式化根基** | 线性逻辑 / 分离逻辑 | 时态逻辑 / 可串行化理论 |
+
+> **关键洞察**: Rust 在代码生成前消除冲突，PG 在执行时允许多重现实共存。两者都是"通过限制可见性来保证安全性"——Rust 限制引用可见性，PG 限制事务可见性。
+>
+> **来源**: [PostgreSQL 官方文档 - MVCC] · [CMU 15-721] · [RustBelt POPL 2018]
+
+### 10.2 多系统信任边界矩阵
+
+以下矩阵对比四个系统对同一组"不信任对象"的验证机制：
+
+| 不信任对象 | PostgreSQL 18+ | 区块链 (Bitcoin/Ethereum) | Rust | Git |
+|:---|:---|:---|:---|:---|
+| **硬件位翻转** | CRC32C + Full Page Write | 多节点哈希验证 | 内存安全类型（编译期对齐约束） | SHA-256 对象校验 |
+| **OS 崩溃** | fsync + 进程隔离 | 节点自治 + P2P 恢复 | 运行时边界检查（panic = 线程终止） | 文件系统抽象（对象不可变） |
+| **并发冲突** | MVCC + SSI（快照 + 危险结构检测） | 共识算法 + UTXO/Nonce | 所有权 / 借用 / Send/Sync | 分支隔离（无共享状态） |
+| **进程崩溃** | Postmaster 监督 + 共享内存清理 | 节点快速重启 + 多数共识 | panic = 线程终止（不污染其他线程） | 无进程概念 |
+| **网络/分布式** | 主从信任（流复制假设主节点诚实） | 拜占庭容错（BFT） | N/A（单进程模型） | 离线工作 + 合并冲突检测 |
+| **用户输入** | 约束 + 触发器 + ACL | 脚本验证 + Gas 限制 | 类型系统（穷尽检查 + 模式匹配） | 无（信任开发者） |
+| **其他参与者** | 主从架构（信任主节点） | 完全不信任（无许可网络） | N/A | 信任合并者（代码审查） |
+| **物理规律** | **信任**（单点部署） | **通过冗余间接验证** | **信任** | **信任** |
+| **最终信任锚** | 磁盘物理可靠性 + WAL 确定性 | 密码学抗碰撞 + 经济博弈均衡 | 类型论公理 + 线性逻辑 | 哈希抗碰撞性 |
+
+> **来源**: [PostgreSQL 官方文档] · [Bitcoin 白皮书] · [Ethereum 黄皮书] · [TRPL] · [Git 内部原理] · [Wikipedia: Zero trust security model]
+
+### 10.3 借用检查器的跨系统对应
+
+Rust 的借用检查器与 PostgreSQL 的隔离机制存在深层同构：
+
+```text
+Rust 借用检查器:        &mut T  ⇒ "我不信任其他引用存在，所以我要求独占"
+                              ↓
+PG Repeatable Read:  快照冻结 ⇒ "我不信任其他事务的提交，所以我冻结我的视图"
+```
+
+| 机制 | 不信任假设 | 验证方式 | 失效后果 |
+|:---|:---|:---|:---|
+| `&mut T` | 存在其他活跃引用 | 编译期借用检查 | 编译错误 E0597 / E0502 |
+| `Repeatable Read` | 其他事务修改数据 | 事务快照冻结 | 幻读（Phantom Read，仅 PG RR 级别允许） |
+| `Serializable` | 事务间存在非串行化交错 | SSI 危险结构检测 | 事务回滚（主动放弃而非被动出错） |
+
+> **形式化对应**: Rust 的 `&mut T` 是**分数权限（Fractional Permissions）**的极端情况（1.0 = 独占）；PG 的 `Repeatable Read` 是**快照隔离（Snapshot Isolation）**的保守实现。两者都通过"限制并发可见性"来维护一致性。
+>
+> **来源**: [Boyd-Wickizer et al. OSDI 2008] · [Berenson et al. 1995 · A Critique of ANSI SQL Isolation Levels] · [RustBelt]
+
+### 10.4 Rust 的信任半径与形式化定位
+
+在零信任谱系中，Rust 占据一个独特的中间位置：
+
+```mermaid
+graph LR
+    A[Layer 0: 物理规律] -->|信任| B[Layer 1: 硬件]
+    B -->|不信任| C[Layer 2: OS]
+    C -->|不信任| D[Layer 3: 运行时/进程]
+    D -->|不信任| E[Layer 4: 用户/应用]
+    E -->|不信任| F[Layer 5: 网络/分布式]
+
+    subgraph Rust_Radius["Rust 的信任半径"]
+        R0[编译期借用检查] --> R1[类型系统]
+        R1 --> R2[Send/Sync 并发边界]
+        R2 --> R3[unsafe 显式逃逸门]
+    end
+
+    style Rust_Radius fill:#bbf,stroke:#333,stroke-width:2px
+```
+
+**Rust 的不信任哲学**：
+
+- **不信任程序员**：编译器通过借用检查器、类型系统、穷尽检查，主动拒绝可能不安全的代码。
+- **信任硬件/OS**：Rust 不验证磁盘位翻转、不处理 OS 崩溃、不信任边界止于进程地址空间。
+- **不信任其他代码**：`unsafe` 块是显式逃逸门，但 `safe` API 封装者承担证明责任。
+
+**与区块链的对比**：区块链将不信任推向物理边界（全球冗余），Rust 将不信任推向编译边界（静态证明）。两者都是"用确定性替代信任"，但一个用**分布式共识**，一个用**形式化类型系统**。
+
+> **来源**: [Wikipedia: Rust (programming language)] · [Wikipedia: Zero trust security model] · [Felleisen 1989 · On the Expressive Power of Programming Languages]
+
+---
+
+## 九、与 L1-L4 文件的交叉引用
 
 | 边界场景 | 详细分析位置 |
 |:---|:---|
@@ -385,7 +481,7 @@ deny = [{ name = "crate-name", version = "<1.0.0" }]
 
 ---
 
-## 九、知识来源关系（Provenance）
+## 十一、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -406,13 +502,122 @@ deny = [{ name = "crate-name", version = "<1.0.0" }]
 
 ---
 
-## 十、待补充与演进方向（TODOs）
+### 11.1 编译错误码与运行时错误映射表
 
-- [ ] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息
-- [ ] **高**: 建立"错误码 → 边界条件 → 概念"的反向索引
-- [ ] **中**: 补充硬件层面边界（如 CPU 乱序超出 TSO 假设）
-- [ ] **中**: 补充 FFI 边界的完整风险矩阵
-- [ ] **低**: 建立可执行的边界测试用例集合
+Rust 的安全边界在编译期和运行时有不同的表现形式：
+
+**编译期错误（借用检查器）**：
+
+| 错误码 | 错误信息 | 触发的安全边界 | 对应概念 | 典型代码 |
+|:---|:---|:---|:---|:---|
+| **E0502** | cannot borrow `x` as mutable because it is also borrowed as immutable | 借用唯一性 | `&mut T` 独占性 | `let r = &v[0]; v.push(4);` |
+| **E0499** | cannot borrow `x` as mutable more than once at a time | 可变借用唯一性 | `&mut T` 不重复 | `let a = &mut x; let b = &mut x;` |
+| **E0505** | cannot move out of `x` because it is borrowed | 所有权与借用互斥 | move vs borrow | `let r = &x; let y = x;` |
+| **E0373** | closure may outlive the current function, but it borrows `x` | 生命周期逃逸 | closure capture | `thread::spawn(|| println!("{}", x))` |
+| **E0521** | borrowed value does not live long enough | 引用不能比数据活得久 | lifetime bound | `let r = { let x = 5; &x };` |
+| **E0597** | `x` does not live long enough | 引用生命周期不足 | 'static / scoped | `let s: &'static str = &String::new();` |
+| **E0308** | mismatched types | 类型安全 | type system | `let x: i32 = "hello";` |
+| **E0277** | the trait bound `T: Send` is not satisfied | 线程安全边界 | Send/Sync | `Rc::new(1)` 跨线程 |
+
+**运行时错误（panic / abort）**：
+
+| 错误信息 | 触发条件 | 安全边界 | 缓解策略 |
+|:---|:---|:---|:---|
+| `panic: index out of bounds` | `v[i]` 且 `i >= v.len()` | 内存安全边界 | 使用 `get()`、断言检查 |
+| `panic: called Option::unwrap() on None` | `None.unwrap()` | 空值安全 | 使用 `?`、match、if let |
+| `panic: arithmetic overflow` | `i32::MAX + 1` (debug) | 整数安全 | `checked_add()`、`wrapping_add()` |
+| `panic: already borrowed: BorrowMutError` | `RefCell` 运行时借用冲突 | 动态借用安全 | 重构为编译期借用 |
+| `SIGSEGV` (未定义行为) | unsafe 代码中的悬垂指针 | 内存安全边界 | Miri 检测、代码审查 |
+
+> **来源**: [Rust Error Index] · [Rust Reference: Error Codes] · [Rust Standard Library: panic!]
+
+### 11.2 "错误码 → 边界条件 → 概念"反向索引
+
+```
+E0502 (借用冲突)
+  └─→ 边界: 内存安全 · 借用唯一性
+      └─→ 概念: L1 借用规则 → L2 Borrow trait → L4 分数权限
+      └─→ 文件: ../01_foundation/02_borrowing.md §3
+      └─→ 修复: 缩小借用范围 / 使用内部可变性
+
+E0499 (多次可变借用)
+  └─→ 边界: 内存安全 · 可变借用唯一性
+      └─→ 概念: L1 所有权 → L2 &mut T 语义 → L4 独占权限
+      └─→ 文件: ../01_foundation/01_ownership.md §4
+      └─→ 修复: 重构为单一 &mut / 使用 split_mut
+
+E0373 (闭包捕获逃逸)
+  └─→ 边界: 生命周期安全 · 'static 约束
+      └─→ 概念: L1 生命周期 → L2 HRTB → L4 全称量词 ∀
+      └─→ 文件: ../01_foundation/03_lifetimes.md §6
+      └─→ 修复: 使用 move 闭包 / Arc 共享所有权
+
+E0277 (Send 不满足)
+  └─→ 边界: 并发安全 · 跨线程所有权转移
+      └─→ 概念: L1 Send/Sync → L3 并发类型 → L4 CSL
+      └─→ 文件: ../03_advanced/01_concurrency.md §2
+      └─→ 修复: 使用 Arc<Mutex<T>> / 实现 Send
+```
+
+### 11.3 FFI 边界的完整风险矩阵
+
+FFI（Foreign Function Interface）是 Rust 安全边界最薄弱的环节：
+
+| 风险类型 | 描述 | 检测方式 | 缓解策略 | 来源 |
+|:---|:---|:---|:---|:---|
+| **ABI 不匹配** | C `int` vs Rust `c_int`、结构体 padding 差异 | 编译警告、`bindgen` | 使用 `std::ffi::*` 类型、`#[repr(C)]` | Rustonomicon |
+| **生命周期不匹配** | C 指针无生命周期，Rust 引用需 'static 或 scoped | Miri、代码审查 | 使用 `PhantomData<&'a T>` 标记生命周期 | Rustonomicon |
+| **异常传播** | C++ 异常无法穿越 Rust 边界 | `catch_unwind`、`extern "C-unwind"` | 在 C++ 侧捕获所有异常 | RFC 2945 |
+| **线程安全假设** | C 库可能非线程安全，Rust `Send/Sync` 标注可能错误 | 文档审查、TSan | 使用 `!Send`/`!Sync` 标记、Mutex 包装 | Rustonomicon |
+| **未初始化内存** | C 可能返回部分初始化的结构体 | Valgrind、Miri | 使用 `MaybeUninit<T>`、显式初始化 | Unsafe Guidelines |
+| **回调生命周期** | C 保存 Rust 回调指针，超出 Rust 对象生命周期 | 代码审查 | 使用 `Arc` + `weak` 模式、注册/注销配对 | Rustonomicon |
+
+```rust
+// ✅ FFI 安全边界示例：正确的生命周期标记
+use std::ffi::c_int;
+use std::marker::PhantomData;
+
+// 包装 C 指针，标记其生命周期
+struct CBuffer<'a> {
+    ptr: *mut u8,
+    len: usize,
+    _marker: PhantomData<&'a ()>,  // 'a 确保不超出原始数据生命周期
+}
+
+impl<'a> CBuffer<'a> {
+    unsafe fn from_raw(ptr: *mut u8, len: usize) -> Self {
+        Self { ptr, len, _marker: PhantomData }
+    }
+}
+```
+
+> **来源**: [Rustonomicon: FFI] · [RFC 2945: C-unwind ABI] · [Unsafe Code Guidelines: FFI] · [Wikipedia: Foreign function interface]
+
+### 11.4 硬件层面边界：内存模型与 CPU 乱序
+
+Rust 的内存模型（基于 C++11）假设编译器和 CPU 遵循特定的排序规则，但硬件可能超出这些假设：
+
+| 硬件特性 | 语言假设 | 实际硬件行为 | 风险 |
+|:---|:---|:---|:---|
+| **x86 TSO** | acquire/release 足够 | x86 实际提供更强的 TSO | Rust 代码在 x86 上过度同步（性能损失） |
+| **ARM Weak Ordering** | acquire/release 足够 | ARM 允许更多重排 | 若使用 `Relaxed` 不当，可能出现数据竞争 |
+| **Out-of-Order Execution** | `fence(SeqCst)` 全序 | CPU 可能重排非依赖指令 | 需要内存屏障（`mfence`/`dmb`） |
+| **Speculative Execution** | 分支预测无副作用 | Spectre/Meltdown | 需要 `lfence` 或软件缓解 |
+| **Non-Temporal Stores** | 所有 store 最终可见 | `movnt` 绕过缓存 | 需要显式 `fence` 保证可见性 |
+
+> **定理**：Rust 的 `AtomicOrdering` 是**语言级抽象**，与硬件实际排序能力之间存在 gaps。正确使用 `Acquire`/`Release` 在 x86 和 ARM 上都安全，但在 ARM 上生成的代码会插入更多屏障（性能成本更高）。
+>
+> **来源**: [Rust Reference: Memory Model] · [LLVM Memory Model] · [Herlihy & Shavit: The Art of Multiprocessor Programming] · [Wikipedia: Memory ordering]
+
+---
+
+## 十二、待补充与演进方向（TODOs）
+
+- [x] **高**: 补充每个边界条件的具体编译错误码和运行时错误信息 —— 已完成 §11.1
+- [x] **高**: 建立"错误码 → 边界条件 → 概念"的反向索引 —— 已完成 §11.2
+- [x] **中**: 补充硬件层面边界（如 CPU 乱序超出 TSO 假设） —— 已完成 §11.4
+- [x] **中**: 补充 FFI 边界的完整风险矩阵 —— 已完成 §11.3
+- [ ] **低**: 建立可执行的边界测试用例集合 —— 待后续建立 `tests/` 目录
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 

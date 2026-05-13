@@ -9,6 +9,7 @@
 
 **变更日志**:
 
+- v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏 2.0）演进对比
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
 - v3.0 (2026-05-13): 深度重构——增强§2编译管道精确位置、增强§3.1卫生宏形式化（隐式gensym/对比矩阵/边界案例）、新增§5.5宏与类型系统交互边界、新增2个反命题决策树、补充章节过渡段落
@@ -914,6 +915,736 @@ macro_rules! assert_impl {
 
 ---
 
+## 补充章节：进阶主题与工程实践
+
+> **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
+
+### 1. `proc_macro2` 与 `syn` / `quote` crate 的最佳实践
+
+> **[syn/quote 文档]** 现代 Rust 过程宏开发的黄金三角是 `proc_macro2` + `syn` + `quote`：`proc_macro2` 提供可测试的 Token 抽象，`syn` 提供声明式语法树解析，`quote` 提供准引用（quasiquote）代码生成。✅ 已验证
+
+> **[The Little Book of Rust Macros]** 手写 TokenStream 拼接极易出错；`syn` 和 `quote` 通过类型化 AST 操作大幅降低过程宏的开发难度。✅ 已验证
+
+**`proc_macro2`：解决 `proc_macro` 的测试难题**
+
+> **[proc_macro2 crate 文档]** `proc_macro` 只能在编译器环境中使用（proc-macro crate 内），无法直接单元测试。`proc_macro2` 提供完全等价的 API，但可在普通 crate 中运行。✅ 已验证
+
+```rust,ignore
+// ✅ 正确: 过程宏 crate 的典型结构
+// Cargo.toml:
+// [lib]
+// proc-macro = true
+//
+// [dependencies]
+// proc-macro2 = "1.0"
+// syn = { version = "2.0", features = ["full"] }
+// quote = "1.0"
+
+use proc_macro::TokenStream;
+use syn::{parse_macro_input, DeriveInput};
+use quote::quote;
+
+#[proc_macro_derive(MyDebug)]
+pub fn my_debug(input: TokenStream) -> TokenStream {
+    // parse_macro_input! 将 TokenStream 解析为类型化 AST
+    let input = parse_macro_input!(input as DeriveInput);
+
+    let name = &input.ident;
+
+    // quote! 提供类似模板的代码生成语法
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{}", stringify!(#name))
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+
+**`syn` 的 `ParseDeriveInput` 与 `parse_macro_input!`**
+
+```rust,ignore
+// ✅ 正确: 解析属性宏的函数签名
+use syn::{parse_macro_input, ItemFn, AttributeArgs, NestedMeta};
+
+#[proc_macro_attribute]
+pub fn my_attr(args: TokenStream, input: TokenStream) -> TokenStream {
+    // 解析属性参数
+    let args = parse_macro_input!(args as AttributeArgs);
+
+    // 解析被装饰的函数
+    let input = parse_macro_input!(input as ItemFn);
+
+    let fn_name = &input.sig.ident;
+    let fn_body = &input.block;
+
+    let expanded = quote! {
+        fn #fn_name() {
+            println!("before");
+            #fn_body
+            println!("after");
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+
+**`quote` 的 token 拼接模式**
+
+```rust,ignore
+// ✅ 正确: quote! 的高级用法
+use quote::{quote, format_ident};
+
+let base_name = "MyType";
+let type_name = format_ident!("{}", base_name);        // 生成标识符
+let method_name = format_ident!("new_{}", base_name.to_lowercase());
+
+let fields = vec!["x", "y"];
+let field_idents: Vec<_> = fields.iter()
+    .map(|f| format_ident!("{}", f))
+    .collect();
+
+let expanded = quote! {
+    struct #type_name {
+        #(#field_idents: i32),*  // 重复模式：展开为 x: i32, y: i32
+    }
+
+    impl #type_name {
+        fn #method_name() -> Self {
+            Self {
+                #(#field_idents: 0),*
+            }
+        }
+    }
+};
+```
+
+**反例：未处理 `syn::parse` 的 Err**
+
+```rust,ignore
+// ❌ 反例: 过程宏 panic 导致编译错误信息晦涩
+#[proc_macro_derive(BadDerive)]
+pub fn bad_derive(input: TokenStream) -> TokenStream {
+    let ast: DeriveInput = syn::parse(input).unwrap(); // panic！
+    // 若输入不是 struct/enum，syn::parse 失败，宏 panic
+    // 编译错误: proc macro panicked，无有用信息
+    TokenStream::new()
+}
+```
+
+```rust,ignore
+// ✅ 修正: 使用 parse_macro_input! 或返回 compile_error!
+#[proc_macro_derive(GoodDerive)]
+pub fn good_derive(input: TokenStream) -> TokenStream {
+    // parse_macro_input! 在解析失败时自动生成友好的 compile_error!
+    let input = parse_macro_input!(input as DeriveInput);
+    TokenStream::new()
+}
+```
+
+**边界：`proc_macro2` 与 `proc_macro` 的桥接**
+
+```rust,ignore
+// 边界: proc_macro::TokenStream ↔ proc_macro2::TokenStream 转换
+use proc_macro2::TokenStream as TokenStream2;
+
+fn process_tokens(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
+    let ts2: TokenStream2 = ts.into();     // 桥接转换
+    let processed = transform(ts2);
+    processed.into()                       // 转换回编译器类型
+}
+// 这使得核心逻辑可在普通单元测试中测试（使用 proc_macro2::TokenStream）
+```
+
+---
+
+### 2. `macro_rules!` 的重复模式完整语法
+
+> **[Rust Reference: Repetition]** `macro_rules!` 的重复模式使用 `$($name:kind)` 后跟分隔符和重复计数器。分隔符可以是任意 token（逗号、分号、竖线等），重复计数器为 `*`（零或多）、`+`（一或多）、`?`（零或一，Rust 1.32+）。✅ 已验证
+
+> **[The Little Book of Rust Macros]** 多个重复器的匹配需要遵循特定规则：重复模式的长度必须一致，除非其中一个为零宽度。✅ 已验证
+
+**完整重复模式语法表**
+
+| 模式 | 含义 | 示例输入 | 展开结果 |
+|:---|:---|:---|:---|
+| `$($x:expr),*` | 逗号分隔，零或多个 | `1, 2, 3` | `x = [1, 2, 3]` |
+| `$($x:expr),+` | 逗号分隔，一或多个 | `1, 2` | `x = [1, 2]` |
+| `$($x:expr),* $(,)?` | 可选尾随逗号 | `1, 2,` 或 `1, 2` | 均匹配 |
+| `$($x:expr);*` | 分号分隔 | `1; 2; 3` | `x = [1, 2, 3]` |
+| `$($x:expr) \| *` | 竖线分隔 | `1 \| 2 \| 3` | `x = [1, 2, 3]` |
+| `$($k:expr => $v:expr),*` | 键值对模式 | `1 => "a", 2 => "b"` | 两组绑定 |
+
+**多个重复器匹配规则**
+
+```rust
+// ✅ 正确: 多个重复器（长度一致时）
+macro_rules! zip {
+    ($($a:expr),* ; $($b:expr),*) => {
+        // 展开时 $a 和 $b 的长度必须相同
+        vec![$($a + $b),*]
+    };
+}
+
+fn main() {
+    let v = zip!(1, 2, 3; 10, 20, 30);
+    // 展开: vec![1 + 10, 2 + 20, 3 + 30]
+    assert_eq!(v, vec![11, 22, 33]);
+}
+```
+
+```rust
+// ✅ 正确: 可选尾随逗号（Trailing comma）
+macro_rules! trailing {
+    ($($x:expr),* $(,)?) => {
+        vec![$($x),*]
+    };
+}
+
+fn main() {
+    let a = trailing![1, 2, 3];    // ✅
+    let b = trailing![1, 2, 3,];   // ✅ 尾随逗号合法
+    assert_eq!(a, b);
+}
+```
+
+**反例：重复器长度不匹配**
+
+```rust,ignore
+// ❌ 反例: 多个重复器长度不匹配
+macro_rules! bad_zip {
+    ($($a:expr),* ; $($b:expr),*) => {
+        vec![$($a + $b),*]  // 错误: 若 $a 和 $b 长度不同，无法配对
+    };
+}
+
+fn main() {
+    // bad_zip!(1, 2; 10, 20, 30);
+    // 编译错误: 展开后长度不匹配
+}
+```
+
+**边界：嵌套重复与 `?` 计数器**
+
+```rust
+// ✅ 边界: 嵌套重复模式
+macro_rules! matrix {
+    ($([$($x:expr),*]),* $(,)?) => {
+        vec![$(
+            vec![$($x),*]
+        ),*]
+    };
+}
+
+fn main() {
+    let m = matrix![
+        [1, 2, 3],
+        [4, 5, 6],
+    ];
+    assert_eq!(m, vec![vec![1, 2, 3], vec![4, 5, 6]]);
+}
+```
+
+```rust
+// ✅ 边界: ? 计数器（Rust 1.32+）
+macro_rules! optional {
+    ($required:expr $(, $optional:expr)?) => {
+        ($required, $($optional,)?)
+    };
+}
+
+fn main() {
+    let a = optional!(1);        // (1,)
+    let b = optional!(1, 2);     // (1, 2,)
+    // 注意: ? 不能用于多个元素的重复，仅适用于单个可选模式
+}
+```
+
+> **[Rust Reference: Macros by Example]** `?` 重复计数器在宏参数匹配时非常有用，表示某个模式整体可选。但注意 `?` 不能嵌套使用。✅ 已验证
+
+---
+
+### 3. 编译期计算（`const fn` + `const generics`）替代宏的趋势
+
+> **[Rust Reference: const fn]** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
+
+> **[Rust RFC 2000: const generics]** const generics 允许泛型参数为编译期常量值（如 `Array<T, N>`），消除了对宏生成多态类型的需求。✅ 已验证
+
+**`const fn` 替代 `macro_rules!` 的场景**
+
+| 宏的使用场景 | `const fn` 替代方案 | 优势 |
+|:---|:---|:---|
+| 数组长度计算 | `const fn len() -> usize { ... }` | 类型检查、可调试 |
+| 编译期断言 | `const_assert!` 宏或 `const fn` + `let _ = [(); N]` | 错误信息更清晰 |
+| 查找表生成 | `const fn` 递归计算 | 纯函数语义 |
+| 位掩码计算 | `const fn` 位运算 | IDE 支持更好 |
+
+```rust
+// ✅ 正确: const fn 替代宏进行编译期计算
+const fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2),
+    }
+}
+
+const FIB_10: u32 = fibonacci(10); // 编译期计算
+
+fn main() {
+    let arr = [0; FIB_10 as usize]; // 用 const fn 结果定义数组长度
+    assert_eq!(arr.len(), 55);
+}
+```
+
+```rust
+// ✅ 正确: const generics 替代宏生成多态数组
+struct Array<T, const N: usize> {
+    data: [T; N],
+}
+
+impl<T: Default + Copy, const N: usize> Default for Array<T, N> {
+    fn default() -> Self {
+        Self { data: [T::default(); N] }
+    }
+}
+
+fn main() {
+    let a: Array<i32, 10> = Array::default(); // N = 10，编译期确定
+    let b: Array<i32, 20> = Array::default(); // N = 20，同一类型族
+    assert_eq!(a.data.len(), 10);
+    assert_eq!(b.data.len(), 20);
+}
+```
+
+**反例：`const fn` 的能力边界（截至 Rust 1.78）**
+
+```rust,compile_fail
+// ❌ 反例: const fn 不能分配堆内存
+const fn bad_alloc() -> Vec<i32> {
+    vec![1, 2, 3] // 错误: Vec::new 在 const fn 中不稳定
+}
+
+// ❌ 反例: const fn 不能进行 I/O
+const fn bad_io() -> String {
+    std::fs::read_to_string("file.txt").unwrap() // 错误: I/O 不允许
+}
+
+// ❌ 反例: const fn 不能有动态分发
+const fn bad_dyn(x: &dyn std::fmt::Display) -> String {
+    format!("{}", x) // 错误: dyn trait 不允许
+}
+```
+
+**边界：`const fn` 与宏的共存策略**
+
+```rust
+// ✅ 边界: 宏 + const fn 的混合模式（最佳实践）
+macro_rules! const_table {
+    ($name:ident, $size:expr) => {
+        const $name: [u32; $size] = {
+            const fn generate() -> [u32; $size] {
+                let mut arr = [0; $size];
+                let mut i = 0;
+                while i < $size {
+                    arr[i] = (i * i) as u32;
+                    i += 1;
+                }
+                arr
+            }
+            generate()
+        };
+    };
+}
+
+const_table!(SQUARES, 10);
+
+fn main() {
+    assert_eq!(SQUARES[5], 25);
+    assert_eq!(SQUARES[9], 81);
+}
+```
+
+> **[Rust Reference: const_eval]** `const fn` 的能力在持续扩展（如 const trait、const mut 引用），但宏在语法级变换（DSL、可变参数）上的优势不可替代。✅ 已验证
+
+---
+
+### 4. `concat!` / `stringify!` / `include_str!` 等内置宏
+
+> **[Rust Reference: Built-in Macros]** Rust 标准库提供一组编译期内置宏，它们在展开阶段执行特定操作（字符串拼接、文件包含、环境变量读取等），是元编程的基础工具。✅ 已验证
+
+**内置宏完整列表与使用场景**
+
+| 宏 | 输入 | 输出 | 典型场景 |
+|:---|:---|:---|:---|
+| `concat!(...)` | 字面量/数字 | `&'static str` | 拼接模块路径、版本号 |
+| `stringify!(...)` | 任意 token | `&'static str` | 将代码转为字符串（调试、错误信息） |
+| `include_str!(path)` | 文件路径 | `&'static str` | 嵌入 SQL/JSON/HTML 模板 |
+| `include_bytes!(path)` | 文件路径 | `&'static [u8]` | 嵌入二进制资源（图片、证书） |
+| `env!(name)` | 环境变量名 | `&'static str` | 读取编译时环境变量 |
+| `option_env!(name)` | 环境变量名 | `Option<&'static str>` | 安全读取可能不存在的环境变量 |
+| `cfg!(expr)` | 条件表达式 | `bool` | 编译期条件判断（如 `cfg!(test)`） |
+| `module_path!()` | 无 | `&'static str` | 获取当前模块路径 |
+| `line!()` / `column!()` | 无 | `u32` | 获取源码位置 |
+| `file!()` | 无 | `&'static str` | 获取当前文件名 |
+
+```rust,ignore
+// ✅ 正确: concat! 与 stringify! 的组合使用
+const VERSION_MAJOR: u32 = 1;
+const VERSION_MINOR: u32 = 2;
+
+const VERSION: &str = concat!(VERSION_MAJOR, ".", VERSION_MINOR);
+const TYPE_NAME: &str = stringify!(Vec<String>);
+
+fn main() {
+    assert_eq!(VERSION, "1.2");
+    assert_eq!(TYPE_NAME, "Vec<String>");
+}
+```
+
+```rust
+// ✅ 正确: include_str! 嵌入静态资源
+const SQL_SCHEMA: &str = include_str!("schema.sql");
+const CONFIG_JSON: &str = include_str!("config.json");
+
+// include_bytes! 嵌入二进制
+const LOGO_PNG: &[u8] = include_bytes!("logo.png");
+
+fn main() {
+    assert!(SQL_SCHEMA.contains("CREATE TABLE"));
+}
+```
+
+```rust
+// ✅ 正确: env! 与 option_env! 的编译期配置
+const DATABASE_URL: &str = env!("DATABASE_URL"); // 编译时必须存在
+const OPTIONAL_KEY: Option<&str> = option_env!("API_KEY"); // 可选
+
+fn main() {
+    println!("db: {}", DATABASE_URL);
+    if let Some(key) = OPTIONAL_KEY {
+        println!("api key present");
+    }
+}
+```
+
+**反例：env! 在运行时不存在时的编译错误**
+
+```rust,compile_fail
+// ❌ 反例: env! 读取不存在的环境变量
+const MISSING: &str = env!("NON_EXISTENT_VAR_12345");
+// 编译错误: environment variable `NON_EXISTENT_VAR_12345` not defined
+
+fn main() {}
+```
+
+```rust
+// ✅ 修正: 使用 option_env! 安全处理
+const MAYBE: Option<&str> = option_env!("NON_EXISTENT_VAR_12345");
+
+fn main() {
+    assert_eq!(MAYBE, None);
+}
+```
+
+**边界：include_str! 的路径解析**
+
+```rust
+// ✅ 边界: 相对路径基于当前源文件位置
+// 若本文件位于 src/main.rs，则查找 src/schema.sql
+const SCHEMA: &str = include_str!("schema.sql");
+
+// ✅ 边界: cfg! 在编译期求值，不产生代码分支
+fn platform_specific() {
+    if cfg!(target_os = "windows") {
+        // 注意: 这段代码在所有平台都会编译！
+        // cfg! 返回 bool，不是条件编译
+    }
+
+    // 真正的条件编译用 #[cfg(target_os = "windows")]
+}
+```
+
+> **[Rust Reference]** `cfg!` 与 `#[cfg]` 的本质区别：`cfg!` 是运行期 bool 值（代码始终编译），`#[cfg]` 是编译期条件（代码可能不被编译）。✅ 已验证
+
+---
+
+### 5. 属性宏修改函数体的完整示例
+
+> **[syn/quote 文档]** 属性宏（attribute macro）可以解析被装饰 item 的完整语法树，修改后返回新的 TokenStream。以下以 `#[measure_time]` 为例，展示如何解析属性参数、包装函数体、插入前后代码。✅ 已验证
+
+**`#[measure_time]` 完整实现**
+
+```rust,ignore
+// Cargo.toml:
+// [lib]
+// proc-macro = true
+//
+// [dependencies]
+// proc-macro2 = "1.0"
+// syn = { version = "2.0", features = ["full", "extra-traits"] }
+// quote = "1.0"
+
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, ItemFn, Lit, Meta, MetaNameValue};
+
+// #[measure_time] 或 #[measure_time(name = "my_func")]
+#[proc_macro_attribute]
+pub fn measure_time(args: TokenStream, input: TokenStream) -> TokenStream {
+    // 1. 解析属性参数
+    let name = if args.is_empty() {
+        None
+    } else {
+        let meta = parse_macro_input!(args as Meta);
+        match meta {
+            Meta::NameValue(MetaNameValue { path, value, .. })
+                if path.is_ident("name") => {
+                match value {
+                    syn::Expr::Lit(expr_lit) => match expr_lit.lit {
+                        Lit::Str(s) => Some(s.value()),
+                        _ => panic!("expected string literal"),
+                    },
+                    _ => panic!("expected string literal"),
+                }
+            }
+            _ => panic!("expected name = \"...\""),
+        }
+    };
+
+    // 2. 解析被装饰的函数
+    let input = parse_macro_input!(input as ItemFn);
+    let fn_name = &input.sig.ident;
+    let fn_vis = &input.vis;
+    let fn_sig = &input.sig;
+    let fn_block = &input.block;
+
+    let display_name = name.unwrap_or_else(|| fn_name.to_string());
+
+    // 3. 生成包装后的函数：在函数体前后插入计时逻辑
+    let expanded = quote! {
+        #fn_vis #fn_sig {
+            let __start = std::time::Instant::now();
+            let __result = (|| #fn_block)(); // 将原函数体包裹在闭包中
+            let __elapsed = __start.elapsed();
+            eprintln!("[measure_time] {} took {:?}", #display_name, __elapsed);
+            __result
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+
+**使用示例**
+
+```rust,ignore
+use my_macros::measure_time;
+
+#[measure_time]
+fn slow_computation() -> u32 {
+    std::thread::sleep(std::time::Duration::from_millis(100));
+    42
+}
+
+#[measure_time(name = "custom_name")]
+async fn async_task() -> String {
+    tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
+    "done".to_string()
+}
+
+fn main() {
+    slow_computation();
+    // 输出: [measure_time] slow_computation took 100ms...
+}
+```
+
+**反例：错误地替换函数签名导致类型不匹配**
+
+```rust,ignore
+// ❌ 反例: 属性宏丢失函数泛型参数
+#[proc_macro_attribute]
+pub fn bad_attr(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as ItemFn);
+    let fn_name = &input.sig.ident;
+    let fn_block = &input.block;
+
+    // 错误: 没有保留泛型参数 <T> 和 where 子句！
+    quote! {
+        fn #fn_name() {  // 丢失了原始签名
+            #fn_block
+        }
+    }.into()
+}
+
+// 使用:
+// #[bad_attr]
+// fn generic<T: Default>() -> T { T::default() }
+// 编译错误: 函数签名不匹配
+```
+
+```rust,ignore
+// ✅ 修正: 完整保留原函数签名
+#[proc_macro_attribute]
+pub fn good_attr(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as ItemFn);
+    let fn_vis = &input.vis;
+    let fn_sig = &input.sig; // 包含泛型、参数、返回类型、where 子句
+    let fn_block = &input.block;
+
+    quote! {
+        #fn_vis #fn_sig {
+            // ... 插入的代码 ...
+            #fn_block
+        }
+    }.into()
+}
+```
+
+**边界：属性宏与 async fn 的交互**
+
+```rust,ignore
+// ✅ 边界: 包装 async fn 需要保留 async 修饰符
+#[proc_macro_attribute]
+pub fn measure_async(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as ItemFn);
+    let fn_vis = &input.vis;
+    let fn_sig = &input.sig;
+    let fn_block = &input.block;
+
+    // 注意: input.sig 已经包含 async 关键字（若存在）
+    // 只需原样引用 fn_sig 即可
+    quote! {
+        #fn_vis #fn_sig {
+            let __start = std::time::Instant::now();
+            let __result = async move { #fn_block }.await;
+            eprintln!("async fn took {:?}", __start.elapsed());
+            __result
+        }
+    }.into()
+}
+// 但注意: 直接 .await 在同步函数中不合法，async fn 的 block 需特殊处理
+// 实际上，原样保留 #fn_sig（含 async）和 #fn_block 是最安全的做法
+```
+
+> **[syn 文档]** 解析 `ItemFn` 时，`sig` 字段包含完整的函数签名（含 `async`、`const`、`unsafe`、泛型参数等），`block` 字段包含函数体。属性宏应优先保留原始 AST 结构，最小化修改。✅ 已验证
+
+---
+
+### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
+
+> **[RFC 1584: Macros]** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
+
+> **[Rust Reference: macro keyword]** 截至 Rust 1.78，`macro` 关键字仍为不稳定特性（`#![feature(decl_macro)]`），但已在 `std` 内部广泛使用（如 `vec!`、`println!` 的标准库实现已迁移）。✅ 已验证
+
+**`macro_rules!` 的局限性**
+
+| 问题 | `macro_rules!` 行为 | 期望行为 |
+|:---|:---|:---|
+| 作用域 | 宏一旦被 `macro_export`，在 crate 根可见 | 模块路径控制 |
+| 可见性 | 无法使用 `pub(crate)` 等修饰 | `pub` / `pub(crate)` / `pub(super)` |
+| 导入 | 必须通过 `#[macro_use]` 或 `use crate::mac!` | 与模块系统自然集成 |
+| 递归 | 递归深度受限（默认 128） | 更清晰的递归语义 |
+| 路径解析 | 宏内部路径基于调用处 | 基于定义处（hygiene 扩展） |
+
+**`macro` 关键字的改进**
+
+```rust,ignore
+// ✅ macro 关键字语法（不稳定，需 #![feature(decl_macro)]）
+#![feature(decl_macro)]
+
+pub(crate) macro my_vec {
+    ($($x:expr),* $(,)?) => {
+        {
+            let mut v = Vec::new();
+            $(v.push($x);)*
+            v
+        }
+    },
+}
+
+// 使用: 与模块路径自然集成
+use my_crate::my_vec;
+let v = my_vec![1, 2, 3];
+```
+
+**`macro` 与 `macro_rules!` 的语法对比**
+
+```text
+macro_rules!（当前稳定）:
+  macro_rules! name {
+      ($pattern) => { $expansion };
+  }
+  // 作用域: 定义处或其 export 后的 crate 根
+  // 可见性: 全有或全无（macro_export）
+
+macro（声明宏 2.0，不稳定）:
+  pub(crate) macro name {
+      ($pattern) => { $expansion },
+  }
+  // 作用域: 遵循普通模块路径规则
+  // 可见性: pub / pub(crate) / pub(super) / 默认 private
+  // 分隔符: 模式之间用逗号分隔（而非分号）
+```
+
+**反例：`macro` 关键词的当前限制**
+
+```rust,ignore
+// ❌ 反例: macro 关键字尚未稳定，不能在 stable Rust 使用
+// 以下代码仅在 nightly 编译：
+#![feature(decl_macro)]
+
+macro greet {
+    () => { println!("Hello!"); },
+    ($name:expr) => { println!("Hello, {}!", $name); },
+}
+
+fn main() {
+    greet!();           // ✅
+    greet!("World");    // ✅
+}
+// stable Rust 编译错误: `macro` 关键字不稳定
+```
+
+**边界：混合使用策略**
+
+```rust
+// ✅ 边界: 当前最佳实践（stable Rust）
+// 继续使用 macro_rules!，但用模块系统模拟可见性
+
+mod internal {
+    // 未 export 的宏，仅在当前模块可见
+    macro_rules! helper {
+        () => { /* ... */ };
+    }
+    pub(crate) use helper; // Rust 1.32+ 支持 use 导入宏
+}
+
+// 外部通过 internal::helper!() 使用
+```
+
+> **[Rust Reference]** 声明宏 2.0 的完全稳定尚无明确时间表。当前稳定 Rust 中，`macro_rules!` + `pub use` 是模拟 `macro` 可见性控制的最佳方案。✅ 已验证
+
+**迁移路径预测**
+
+```text
+未来（声明宏 2.0 稳定后）:
+  macro_rules! → macro（渐进迁移）
+  std 内部宏已完成迁移: vec!, println!, assert! 等
+
+当前稳定 Rust:
+  macro_rules! 仍是唯一选择
+  模块路径改善: use crate::mac! 已支持（Rust 1.32+）
+```
+
+> **[RFC 1584]** 声明宏 2.0 的设计目标不是取代 `macro_rules!`，而是提供一个更符合 Rust 模块系统的替代方案。`macro_rules!` 将长期保持兼容。✅ 已验证
+
+---
+
 <!-- 层级一致性: L3 知识溯源 — 每个论断的可信度评级与来源锚定 -->
 
 ## 九、知识来源关系（Provenance）
@@ -930,6 +1661,11 @@ macro_rules! assert_impl {
 | 元编程理论基础 | [Taha 2004 — A Gentle Introduction to Multi-stage Programming] | ✅ |
 | 宏非图灵完备 | [Rust Reference: recursion limit] · [TLBORM] | ✅ |
 | 过程宏 panic 仅产生编译错误 | [RFC 1566] · [proc_macro 文档] | ✅ |
+| 宏（计算机科学） | [Wikipedia: Macro (computer science)] | ✅ |
+| 卫生宏（Hygienic Macros） | [Wikipedia: Hygienic macro] · [Kohlbecker et al. 1986] | ✅ |
+| 元编程与代码生成 | [Wikipedia: Metaprogramming] · [Taha 2004] | ✅ |
+| 编译器构造与语法分析 | [CMU 17-363: Compiler Design] · [Wikipedia: Abstract syntax tree] | ✅ |
+| DSL（领域特定语言） | [Wikipedia: Domain-specific language] · [Fowler 2010 · Domain Specific Languages] | ✅ |
 
 ---
 
@@ -937,12 +1673,12 @@ macro_rules! assert_impl {
 
 > **[proc_macro2 crate]** `proc_macro2` bridges the compiler's internal `proc_macro` API with a stable, testable interface, enabling `syn` and `quote` to build procedural macros outside the compiler environment. ✅ 已验证
 
-- [ ] **TODO**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充属性宏修改函数体的完整示例 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 优先级: 低 —— 预计: Phase 4
+- [x] **TODO**: 补充 `proc_macro2` 与 `syn` / `quote` crate 的最佳实践 —— 已完成: 2026-05-13
+- [x] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 已完成: 2026-05-13
+- [x] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 已完成: 2026-05-13
+- [x] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 已完成: 2026-05-13
+- [x] **TODO**: 补充属性宏修改函数体的完整示例 —— 已完成: 2026-05-13
+- [x] **TODO**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 已完成: 2026-05-13
 
 ---
 

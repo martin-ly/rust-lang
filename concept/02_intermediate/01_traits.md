@@ -9,6 +9,7 @@
 
 **变更日志**:
 
+- v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
 - v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
 
@@ -111,7 +112,7 @@ graph TD
     B --> B4[Blanket impl]
 
     C --> C1[<T: Trait>]
-    C --> C2<T: TraitA + TraitB>]
+    C --> C2[<T: TraitA + TraitB>]
     C --> C3[impl Trait]
     C --> C4[dyn Trait]
 
@@ -500,6 +501,82 @@ trait Convert {
 > **⚠️ 边界**: GATs 要求 `where Self: 'a` 等约束来确保生命周期合法；无界递归或矛盾的关联类型约束仍会导致编译错误（E0275、E0049）。
 
 > **过渡到反命题分析**: 示例展示了 Trait 系统的正确使用方式，但反例只是孤立场景。下一节通过系统化的反命题分析，将"定理何时成立/何时失效"形式化为可遍历的决策树，覆盖编译期、运行时、语义、工程四个层面。每个反命题对应定理矩阵中的一个失效条件，形成"定理—反命题—决策树"的三位一体逻辑结构。
+
+---
+
+### 5.7 正确示例：Specialization（特化）的语义与边界
+
+> **[RFC 1210](https://rust-lang.github.io/rfcs/1210-impl-specialization.html)** · **[Rust Reference: Implementation](https://doc.rust-lang.org/reference/items/implementations.html)** Specialization 允许为**更具体的类型子集**提供特化的 trait 实现，同时保留对更广泛类型的默认实现。这是 Rust 对**ad-hoc 多态**的扩展，与 C++ 模板特化（template specialization）形成跨语言对照。⚠️ 当前仅 `min_specialization` 子集在 nightly 可用，稳定版尚不支持。
+
+#### 问题与默认实现
+
+```rust,ignore
+// 默认实现：覆盖所有类型
+trait Convert<T> {
+    fn convert(&self) -> T;
+}
+
+impl<T, U> Convert<U> for T
+where
+    T: Into<U>,
+{
+    fn convert(&self) -> U {
+        self.into()
+    }
+}
+```
+
+#### 特化实现：为具体类型提供更优路径
+
+```rust,ignore
+// ⚠️ 需 #![feature(min_specialization)]
+impl Convert<String> for &str {
+    fn convert(&self) -> String {
+        // 特化路径：直接分配，避免 Into 的通用转换开销
+        String::from(*self)
+    }
+}
+```
+
+#### 编译器如何裁决重叠 impl
+
+```text
+重叠 impl 裁决规则（Chalk / 新 trait solver）:
+  1. 默认 impl: impl<T, U> Convert<U> for T where T: Into<U>
+     ↓ 更通用（全称量词 ∀T,U）
+  2. 特化 impl: impl Convert<String> for &str
+     ↓ 更具体（&str ⊂ T, String ⊂ U）
+  3. 编译器选择：当类型为 (&str, String) 时，选择 impl 2；其他情况 fallback 到 impl 1
+```
+
+#### 与 C++ 模板特化的对比
+
+| 维度 | Rust Specialization | C++ Template Specialization |
+|:---|:---|:---|
+| **类型安全** | 编译期检查重叠；Coherence 保证唯一性 | 无类型系统检查；SFINAE 复杂 |
+| **默认实现** | ✅ 支持默认 impl + 特化 impl | ✅ 支持默认模板 + 特化模板 |
+| **部分特化** | ❌ `min_specialization` 限制多参数 | ✅ 支持部分特化（`template<T> class Foo<T*>`） |
+| **零成本抽象** | 单态化后无运行时开销 | 单态化后无运行时开销 |
+| **稳定状态** | ❌ nightly only（`min_specialization`） | ✅ 稳定 20+ 年 |
+
+> **[来源: RFC 1210]** Specialization 的核心约束是**永远特化（always applicable）**：特化 impl 的约束必须是默认 impl 约束的**逻辑子集**，否则编译器拒绝。⚠️ 这防止了 "特化 impl 在某些情况下不适用" 的语义陷阱。
+
+#### 编译错误：非法重叠
+
+```rust,compile_fail
+#![feature(min_specialization)]
+
+trait Foo { fn foo(); }
+
+impl<T> Foo for T { fn foo() {} }          // 默认
+impl<T> Foo for Vec<T> { fn foo() {} }     // 特化
+impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
+// ❌ 错误：impl 2 和 impl 3 都可应用于 Vec<u8>，且互不覆盖
+```
+
+**原因**: `Vec<u8>` 同时满足 `Vec<T>`（T=u8）和 `Vec<u8>`，但两者不是严格的子类型关系。`min_specialization` 要求特化链必须是**全序（total order）**，禁止这种菱形重叠。
+
+> **关键洞察**: Specialization 不是"多继承"的替代物。它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
 
 ---
 
@@ -990,12 +1067,308 @@ trait FactoryFixed {
 
 > **[Rust Reference: Object Safety]** 含 RPITIT 的方法使 trait 不满足对象安全（object safety），因为 vtable 无法存储异构返回类型的大小信息。✅ 已验证
 
+#### 形式化语义：存在类型 vs 全称类型
+
+RPITIT 在类型论中的核心身份是**存在类型**（existential type），与参数位置 `impl Trait` 的**全称类型**（universal type）形成严格对偶：
+
+```text
+参数位置 impl Trait（Universal）:
+  trait Processor {
+      fn process(&self, input: impl Iterator<Item = u8>);  // ∀T: Iterator<Item=u8>
+  }
+  语义: 调用方选择任何满足约束的具体类型传入
+
+返回位置 impl Trait in Trait（Existential）:
+  trait Generator {
+      fn generate(&self) -> impl Iterator<Item = u8>;       // ∃T: Iterator<Item=u8>
+  }
+  语义: 实现方选择具体类型，调用方仅知其满足约束
+```
+
+**对偶关系矩阵**:
+
+| **维度** | 参数位置 `impl Trait` | 返回位置 `impl Trait`（含 RPITIT） |
+|:---|:---|:---|
+| **逻辑量词** | ∀（全称） | ∃（存在） |
+| **类型决定权** | 调用者（caller） | 实现者（implementer） |
+| **类型论对应** | System F 的 ∀ 引入 | System F_ω 的存在类型包装（pack/unpack） |
+| **去糖后形式** | `fn foo<T: Trait>(x: T)` | `type __ret: Trait; fn foo() -> Self::__ret` |
+| **信息隐藏** | ❌ 不隐藏（调用者知道具体类型） | ✅ 隐藏（仅编译器知道） |
+| **trait object 兼容** | ✅ 支持 | ❌ 不支持 |
+
+> **[TAPL Ch.24]** 存在类型通过 `pack` 构造和 `unpack` 消去实现信息隐藏。Rust 的 RPITIT 在编译期完成 pack/unpack，不存在运行时开销。✅
+
+#### 高阶边界：RPITIT 与 HRTB / 生命周期参数
+
+RPITIT 可与高阶 Trait Bound（HRTB）结合，表达返回类型对所有生命周期的无关性，但存在明确的语法边界：
+
+```rust
+// ✅ 正确：RPITIT + 生命周期约束
+trait Parser {
+    fn parse<'a>(&self, input: &'a str) -> impl Iterator<Item = &'a str>;
+}
+
+struct WordParser;
+impl Parser for WordParser {
+    fn parse<'a>(&self, input: &'a str) -> impl Iterator<Item = &'a str> {
+        input.split_whitespace()
+    }
+}
+```
+
+```rust,ignore
+// ❌ 错误：参数位置 impl Trait 在 trait 定义中不允许
+trait Builder {
+    fn build(source: impl Default) -> Self;  // E0562: trait 方法参数位置不支持 impl Trait
+}
+```
+
+**高阶限制**：RPITIT 目前**不支持**在 trait 定义中同时存在多个 `impl Trait` 返回类型或嵌套存在类型；每个方法只能有一个匿名的存在类型返回值。这保持了类型推断的可判定性——避免 System F_ω 中无限制存在类型导致的类型检查不可判定问题。
+
+> **[RFC 2289]** RPITIT 的设计刻意限制在"单个返回位置存在类型"，以平衡表达力与编译器实现复杂度。✅
+
+---
+
+### 补充章节：Const Trait 与 `~const` 实验特性
+
+> **[Tracking Issue #143874](https://github.com/rust-lang/rust/issues/143874)** · **[RFC 3762](https://rust-lang.github.io/rfcs/3762-const-trait-impl.html)** `~const`（及演进中的 `[const]` 语法）是 Rust 为支持在 const context 中使用泛型 trait bound 而引入的实验性机制，目的是让 `const fn` 能接受受 trait 约束的泛型参数。⚠️ 当前为 nightly only，语法仍在迭代。
+
+#### 问题背景：const fn 中的 Trait Bound 限制
+
+在稳定 Rust 中，`const fn` 不能使用 trait bound，因为编译器无法在编译期保证 trait 方法的 const 安全性：
+
+```rust,ignore
+// ❌ 稳定版错误：const fn 中不能使用 Trait Bound
+const fn double<T: Add<Output = T>>(x: T) -> T {
+    x + x  // 错误：不能确定 `+` 在 const context 中是否合法
+}
+```
+
+#### `~const` 语法与 `#[const_trait]`
+
+`~const` 标记一个 trait bound 在 const context 中可用；`#[const_trait]` 标记一个 trait 承诺其方法在 const context 中是安全的：
+
+```rust,ignore
+#![feature(const_trait_impl)]
+
+#[const_trait]
+trait AddConst {
+    fn add_const(self, other: Self) -> Self;
+}
+
+// ✅ 正确：~const bound 允许在 const fn 中使用
+const fn double<T: ~const AddConst>(x: T) -> T {
+    x.add_const(x)  // 编译期保证 add_const 可在 const context 调用
+}
+
+impl const AddConst for i32 {
+    fn add_const(self, other: Self) -> Self { self + other }
+}
+
+const RESULT: i32 = double(21);  // ✅ 编译期求值为 42
+```
+
+> **⚠️ 语法演进提示**: RFC 3762 提出用 `const trait Trait` 替代 `#[const_trait]`，用 `T: [const] Trait` 替代 `~const`。当前 nightly 仍支持 `~const`，但未来可能迁移。✅
+
+#### 编译器如何保证 const 安全性
+
+```text
+前提 1: Trait 声明为 #[const_trait]，其所有方法承诺在 const context 安全
+前提 2: impl 声明为 impl const Trait for T，方法体通过 const 检查
+前提 3: 泛型参数约束为 T: ~const Trait
+    ↓
+定理: const fn 内调用 T 的 trait 方法是编译期安全的
+    ↓
+边界: 非 const impl（如运行时分配内存的 impl）不满足 ~const bound，调用即编译错误
+```
+
+#### 反例：非 const impl 不满足 ~const bound
+
+```rust,ignore
+#![feature(const_trait_impl)]
+
+#[const_trait]
+trait Zero {
+    fn zero() -> Self;
+}
+
+// 非 const impl：使用运行时 Vec 分配
+impl Zero for Vec<u8> {
+    fn zero() -> Self { vec![0] }  // 非 const impl
+}
+
+const fn make_zero<T: ~const Zero>() -> T {
+    T::zero()
+}
+
+// ❌ 错误：Vec<u8> 的 impl 不是 const impl，不满足 ~const Zero
+const V: Vec<u8> = make_zero::<Vec<u8>>();  // E0015: 不能在 const 中调用非 const fn
+```
+
+> **⚠️ 当前状态**: `const_trait_impl` 在 nightly 可用，但语义仍在演进。Rust 2026 Project Goals 中包含 "Prepare const traits for stabilization"。使用此特性需关注 Tracking Issue #143874。⚠️
+
+> **来源**: [Tracking Issue #143874](https://github.com/rust-lang/rust/issues/143874) · [RFC 3762](https://rust-lang.github.io/rfcs/3762-const-trait-impl.html) · [Rust Reference: const_eval](https://doc.rust-lang.org/reference/const_eval.html)
+
+---
+
+### 补充章节：`#[fundamental]` Attribute 与 Orphan Rule 例外
+
+> **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** `#[fundamental]` 是 Rust 编译器内部使用的 unstable attribute，用于标记某些类型在 Orphan Rule 判定中具有"透明性"——其泛型参数被视为裸露的本地类型。⚠️ 当前为编译器内部特性，用户代码不建议使用。
+
+#### 目的：为智能指针和引用打开 impl 空间
+
+Orphan Rule 默认要求 impl 中至少一方（trait 或类型）是本地的。但对于 `Box<T>`、`&T`、`&mut T` 等**透明包装类型**（transparent wrapper），标准库需要在下游 crate 中为外部类型实现外部 trait：
+
+```text
+场景: Crate A 定义类型 MyType，Crate B 定义 trait MyTrait
+问题: 用户想在当前 crate 中 impl MyTrait for Box<MyType>
+Orphan Rule 默认: ❌ 不允许（Box 来自 std，MyType 来自 A，MyTrait 来自 B）
+#[fundamental] 作用: ✅ 将 Box<T> 中的 T 视为"裸露"，若 T 是本地类型，则整个 Box<T> 被视为本地
+```
+
+#### 哪些类型是 fundamental
+
+| **类型** | **是否 fundamental** | **语义** |
+|:---|:---|:---|
+| `Box<T>` | ✅ | `T` 被视为裸露 |
+| `&T` | ✅ | `T` 被视为裸露 |
+| `&mut T` | ✅ | `T` 被视为裸露 |
+| `Pin<T>` | ❌ | 非 fundamental（但内部包装类型可能为） |
+| `Vec<T>` | ❌ | 非 fundamental |
+| `Option<T>` | ❌ | 非 fundamental |
+
+#### 形式化判定规则
+
+```text
+标准 Orphan Rule:
+  impl<T> ForeignTrait for LocalType<T>  ✅ 允许（LocalType 是本地类型）
+
+fundamental 扩展规则:
+  impl<T> ForeignTrait for Box<LocalType<T>>  ✅ 允许（Box 是 fundamental，T 裸露后 LocalType 使整体本地化）
+  impl<T> ForeignTrait for &LocalType<T>       ✅ 允许
+  impl<T> ForeignTrait for Vec<LocalType<T>>   ❌ 不允许（Vec 非 fundamental）
+```
+
+```rust,ignore
+// ✅ 实际案例：标准库中 impl Add for &str（基于 &T 的 fundamental 属性）
+impl Add<&str> for &str {
+    type Output = String;
+    fn add(self, rhs: &str) -> String { ... }
+}
+
+// 若无 #[fundamental] 作用于 &T，则以下 impl 在标准库外不可能存在：
+// impl ForeignTrait for &ExternalType  ← 需要 &T 的 fundamental 属性
+```
+
+#### 边界与反例：滥用 fundamental 会破坏 coherence
+
+```rust,ignore
+#![feature(fundamental)]
+
+#[fundamental]
+struct Wrapper<T>(T);
+
+// 若允许用户随意为任意类型标记 #[fundamental]：
+// Crate A: impl ExternalTrait for Wrapper<ExternalType> {}
+// Crate B: impl ExternalTrait for Wrapper<ExternalType> {}
+// 结果: ⚠️ 冲突 impl，coherence 被破坏！
+
+// 因此 #[fundamental] 仅限编译器/标准库内部使用
+```
+
+> **关键洞察**: `#[fundamental]` 是 Orphan Rule 的**安全阀**（safety valve），而非通用工具。它仅授予那些"语义上完全透明"的类型（引用、Box），因为这些类型的行为完全由其内容类型决定。将 `#[fundamental]` 开放给任意用户定义类型会导致 coherence 的系统性崩溃。
+
+> **来源**: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) · [RFC 2451](https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html)
+
+---
+
+### 补充章节：Negative Impls（`impl !Trait for T`）的形式化语义
+
+> **[RFC 683](https://rust-lang.github.io/rfcs/0683-trait-system-refactor.html)** · **[Tracking Issue #68318](https://github.com/rust-lang/rust/issues/68318)** · **[Rust Reference: Negative Impls](https://doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html)** Negative impl 显式声明某类型**不**实现某 trait，是 coherence 系统的负向公理补充。⚠️ 当前需 `#![feature(negative_impls)]`，稳定版不支持。
+
+#### 形式化语义：负向公理
+
+```text
+正向实现（Positive Impl）:
+  impl Trait for T   →   命题: "T 满足 Trait"
+  逻辑: +Trait(T)
+
+负向实现（Negative Impl）:
+  impl !Trait for T  →   命题: "T 永远不满足 Trait"
+  逻辑: ¬Trait(T)  （否定公理，语义承诺）
+```
+
+Negative impl 在逻辑上不是"暂时未实现"，而是**永久承诺**（semver guarantee）：一旦声明 `impl !Trait for T`，未来版本也不能为 `T` 添加 `Trait` 实现，否则构成破坏兼容性变更。
+
+#### Auto Trait 的负向实现
+
+Negative impl 对 Auto trait 有额外意义：它**阻止编译器的自动推导**：
+
+```rust
+#![feature(negative_impls)]
+
+struct RawFd(i32);
+
+// ✅ 显式阻止自动 Send/Sync 推导
+impl !Send for RawFd {}
+impl !Sync for RawFd {}
+
+// RawFd 现在: !Send + !Sync（即使 i32 是 Send + Sync）
+```
+
+对比不声明 negative impl 的情况：
+
+```rust
+struct RawFd(i32);
+// 默认: RawFd 自动获得 Send + Sync（因为 i32 是）
+```
+
+#### 与 Coherence 的交互：阻止下游 impl
+
+Negative impl 不仅是语义承诺，还通过 coherence 机制**物理阻止**下游 crate 添加冲突实现：
+
+```rust,ignore
+#![feature(negative_impls)]
+
+trait Marker {}
+
+// 在当前 crate 中声明：
+struct LocalType;
+impl !Marker for LocalType {}
+
+// ❌ 下游 crate 无法执行：
+// impl Marker for LocalType {}  // E0119: 与 negative impl 冲突
+```
+
+这正是标准库中 `&T: !DerefMut` 和 `&mut T: !Clone` 的实现方式——它们通过 negative impl 向编译器提供**不可推翻的证据**，用于 `Pin` 等 unsafe 抽象的正确性证明。
+
+#### 反例：Negative impl 不能与普通 impl 重叠
+
+```rust,ignore
+#![feature(negative_impls)]
+
+trait Foo {}
+
+struct Bar<T>(T);
+
+impl<T> Foo for Bar<T> {}        // 默认正向实现
+impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
+
+// 编译器拒绝：Bar<String> 同时满足 impl<T> Foo for Bar<T> 和 impl !Foo for Bar<String>
+```
+
+**原因**: Negative impl 必须满足与正向 impl 相同的 non-overlapping 约束。在 specialization 稳定之前，同一类型不能同时存在正负实现。
+
+> **关键洞察**: Negative impl 是 Rust trait 系统从**纯归纳定义**（只有正向规则）向**经典逻辑**（允许否定公理）的扩展。它为 unsafe 代码的形式化验证提供了关键基础设施——通过 `impl !Send for T`，开发者可以向编译器证明"此类型永远不会被发送到其他线程"，这是数据竞争自由证明的基石。
+
+> **来源**: [RFC 683](https://rust-lang.github.io/rfcs/0683-trait-system-refactor.html) · [Tracking Issue #68318](https://github.com/rust-lang/rust/issues/68318) · [Rust Unstable Book: negative_impls](https://doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html)
+
 ---
 
 ## 十一、待补充与演进方向（TODOs）
 
-- [ ] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `Const Trait` / `~const` 实验特性 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `#[fundamental]` attribute 与 Orphan Rule 例外 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 预计: Phase 4
+- [x] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 已完成 §补充章节 RPITIT —— 2026-05-13
+- [x] **TODO**: 补充 `Const Trait` / `~const` 实验特性 —— 优先级: 低 —— 已完成 §补充章节 Const Trait —— 2026-05-13
+- [x] **TODO**: 补充 `#[fundamental]` attribute 与 Orphan Rule 例外 —— 优先级: 低 —— 已完成 §补充章节 #[fundamental] —— 2026-05-13
+- [x] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 已完成 §5.7
+- [x] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 已完成 §补充章节 Negative Impls —— 2026-05-13

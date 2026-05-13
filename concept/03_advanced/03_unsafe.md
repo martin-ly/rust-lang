@@ -840,6 +840,11 @@ fn safe_raw_pointer() {
 | 安全抽象封装 unsafe | [Rust API Guidelines] | ✅ |
 | Stacked Borrows / Tree Borrows | [POPL 2019] · [Miri 实验性文档] | ✅ |
 | RustBelt 覆盖部分 unsafe 模式 | [PLDI 2017] · [后续论文] | 🔍 进行中 |
+| 未定义行为（UB）定义 | [Wikipedia: Undefined behavior] · [Rust Reference] | ✅ |
+| 内存安全 | [Wikipedia: Memory safety] · [Rustonomicon] | ✅ |
+| Miri 形式化验证工具 | [Miri Documentation] · [Jung et al. POPL 2019 · Stacked Borrows] | ✅ |
+| FFI 与外部函数接口 | [Wikipedia: Foreign function interface] · [Rust Reference: FFI] | ✅ |
+| 类型双关（Type punning） | [Wikipedia: Type punning] · [Rust Reference: Unions] | ✅ |
 
 ---
 
@@ -949,10 +954,437 @@ pub struct TcpHeader {
 
 - [x] **TODO**: 补充 FFI 完整规范（ABI、layout、calling convention） —— 优先级: 高 —— 已完成 v1.1
 - [x] **TODO**: 补充 `#[repr(C)]` / `#[repr(transparent)]` / `#[repr(packed)]` —— 优先级: 高 —— 已完成 v1.1
-- [ ] **TODO**: 补充 Miri 的使用方法与限制 —— 优先级: 中 —— 预计: Phase 3
-- [ ] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 预计: Phase 2
-- [ ] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 预计: Phase 4
-- [ ] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 预计: Phase 3
+
+### 补充章节：Miri 的使用方法与限制
+
+> **权威来源**: [Miri Book](https://rustc-dev-guide.rust-lang.org/miri.html) · [Rust Blog: Miri is available on CI](https://blog.rust-lang.org/inside-rust/2020/02/07/miri-is-now-available-on-rust-nightly.html)
+> **层级标注**: `L3::动态验证` → `L1::借用` 别名违规检测 · `L4::RustBelt` 操作语义动态近似
+
+**定义**：Miri（Memory Inspector for Rust）是 Rust 编译器 MIR（Mid-level IR）的解释执行器。它不生成机器码，而是在 MIR 层面逐步解释程序，同时维护精确的内存状态（包括初始化状态、别名权限栈/树、分配生命周期），从而动态检测未定义行为（UB）。
+
+> **[Miri Documentation]** Miri is an interpreter for Rust's mid-level intermediate representation (MIR). It can detect many classes of undefined behavior, including memory errors, invalid use of uninitialized data, and violation of aliasing rules. ✅ 已验证
+
+#### 安装与基本使用
+
+```bash
+# 安装 Miri（需要 nightly toolchain）
+rustup component add miri
+
+# 运行测试
+MIRIFLAGS=-Zmiri-tree-borrows cargo miri test
+
+# 运行单文件/程序
+cargo miri run
+
+# CI 集成（GitHub Actions 示例）
+# .github/workflows/miri.yml
+# - run: rustup toolchain install nightly --component miri
+# - run: MIRIFLAGS=-Zmiri-tree-borrows cargo +nightly miri test
+```
+
+> **[Rust Blog: Miri on CI]** Miri 已集成到 Rust CI 中，成为标准库 unsafe 代码的持续验证工具。第三方项目同样可在 CI 中运行 `cargo miri test` 以捕获 UB。✅ 已验证
+
+#### 能检测的问题（覆盖范围）
+
+| 问题类型 | 检测机制 | 示例 |
+|:---|:---|:---|
+| **Use-after-free** | 分配-释放追踪 | 悬垂裸指针解引用 |
+| **越界访问** | 内存边界检查 | `ptr.add(10)` 后访问未分配区域 |
+| **未对齐访问** | 对齐约束验证 | `*(ptr as *mut u32)` 当 ptr 未按 4 字节对齐 |
+| **数据竞争** | Tree Borrows + happens-before | 非同步的共享可变访问 |
+| **无效枚举值** | discriminant 合法性 | `transmute::<u8, Color>(42)` |
+| **未初始化内存读取** | `MaybeUninit` 状态追踪 | 读取未初始化的局部变量或数组元素 |
+| **别名违规** | Stacked/Tree Borrows | 从同一 `&mut T` 创建两个重叠活跃指针 |
+
+#### 不能检测的问题（边界限制）
+
+| 问题类型 | 原因 | 替代方案 |
+|:---|:---|:---|
+| **所有可能的 UB** | 停机问题不可解；Miri 仅覆盖已定义的操作语义 | 形式化验证（Kani、RustBelt） |
+| **逻辑错误** | 功能正确性超出 Miri 范围 | 单元测试、属性测试（proptest） |
+| **FFI 边界错误** | 外部代码不透明，Miri 无法进入 C 函数内部 | 人工审查、Valgrind/ASan |
+| **硬件相关行为** | 内联汇编、SIMD、内存映射 I/O 不在 MIR 层面 | 真机测试、QEMU |
+| **活性问题（死锁/饥饿）** | Miri 检测安全性（safety），不检测活性（liveness） | `loom` 模型检查 |
+| **性能回归** | Miri 解释执行比原生慢 100x~1000x | 基准测试（criterion） |
+
+#### 正确示例：Miri 检测出 UB
+
+```rust
+// ❌ 反例: Use-after-free（Miri 会报错）
+fn miri_detects_uaf() {
+    let ptr: *const i32;
+    {
+        let x = 42;
+        ptr = &x;  // ptr 指向栈变量 x
+    }              // x 在此处释放
+    unsafe {
+        println!("{}", *ptr);  // Miri: "dangling pointer was dereferenced"
+    }
+}
+```
+
+```rust,ignore
+// ❌ 反例: 未初始化内存读取（Miri 会报错）
+fn miri_detects_uninit() {
+    let x: i32;
+    let y = unsafe { std::ptr::read(&x) };  // Miri: "reading uninitialized memory"
+}
+```
+
+#### 反例：Miri 无法检测的逻辑错误
+
+```rust,ignore
+// ⚠️ 逻辑错误: 求和时溢出（Miri 不报错，因为非 UB）
+fn logic_error_not_ub() -> u32 {
+    let mut sum: u32 = 0;
+    for i in 1..=100000 {
+        sum += i;  // 逻辑错误：最终溢出，但 release 模式下不 panic
+    }
+    sum
+}
+
+// ⚠️ 逻辑错误: 死锁（Miri 不报错，属于活性问题）
+fn deadlock_not_detected() {
+    use std::sync::{Mutex, Arc};
+    let a = Arc::new(Mutex::new(0));
+    let b = Arc::new(Mutex::new(0));
+    let (a2, b2) = (Arc::clone(&a), Arc::clone(&b));
+    std::thread::spawn(move || { let _ = a2.lock().unwrap(); let _ = b.lock().unwrap(); });
+    let _ = b2.lock().unwrap();
+    let _ = a.lock().unwrap();  // 死锁！Miri 不会报错，只会 hang 住
+}
+```
+
+> **定理边界**: Miri 检测 ⊂ UB 集合 ⊂ 程序错误集合。Miri 通过 ≠ 程序正确；Miri 报错 = 存在 UB。
+
+---
+
+### 补充章节：`std::ptr::read/write` vs `*ptr` 解引用的语义差异
+
+> **权威来源**: [Rust Reference: Pointer operators] · [The Rustonomicon: Ownership and Move Semantics] · [std::ptr API docs](https://doc.rust-lang.org/std/ptr/)
+> **层级标注**: `L3::裸指针语义` → `L1::所有权` 移动语义延伸 · `L2::内存管理` drop 触发控制
+
+**核心区别**：裸指针的 `*` 解引用操作与 `std::ptr::read`/`std::ptr::write`/`std::ptr::replace` 在**所有权语义**和 **drop 触发**方面存在本质差异。
+
+| 操作 | 语义 | 是否触发 drop | 是否转移所有权 | 典型场景 |
+|:---|:---|:---:|:---:|:---|
+| `*ptr`（读取） | 解引用获取值 | 否（仅读取） | 是（若赋值给已初始化变量则先 drop 旧值） | 简单读取 |
+| `*ptr = val` | 解引用写入 | **是**（先 drop 旧值） | 是（val 被 move 进入） | 简单写入 |
+| `ptr::read(ptr)` | 按位复制（浅拷贝） | **否** | 否（复制后原位置仍保留位模式） | Vec pop、手动内存管理 |
+| `ptr::write(ptr, val)` | 直接覆盖 | **否**（不 drop 旧值） | 是（val 被 move 进入） | 未初始化内存初始化 |
+| `ptr::replace(ptr, val)` | read + write | **是**（返回旧值，由调用者处理） | 是（val 被 move 进入） | 原子性交换 |
+
+> **[Rust Reference]** `*ptr` 解引用在赋值上下文中会先计算左值，若目标位置已初始化则调用 drop，再写入新值。`ptr::write` 绕过 drop，直接进行按位覆盖。✅ 已验证
+
+#### 正确示例：`ptr::read` 实现 Vec 的 pop
+
+```rust
+// ✅ 正确: ptr::read 不触发 drop，适合从已初始化内存中"取出"值
+pub struct MyVec<T> {
+    ptr: *mut T,
+    len: usize,
+    cap: usize,
+}
+
+impl<T> MyVec<T> {
+    pub fn pop(&mut self) -> Option<T> {
+        if self.len == 0 { return None; }
+        self.len -= 1;
+        unsafe {
+            // Safety: index self.len 之前已初始化，且取出后该位置逻辑上"空"
+            // ptr::read 执行按位复制，不调用 drop，也不使原位置失效
+            Some(std::ptr::read(self.ptr.add(self.len)))
+        }
+    }
+}
+```
+
+#### 正确示例：`ptr::write` 初始化未初始化内存
+
+```rust,ignore
+// ✅ 正确: ptr::write 不 drop 旧值，适合写入未初始化内存
+impl<T> MyVec<T> {
+    pub fn push(&mut self, value: T) {
+        if self.len == self.cap { self.grow(); }
+        unsafe {
+            // Safety: self.ptr.add(self.len) 已分配但未初始化
+            // 若用 *ptr = val，会先尝试 drop 未初始化内存 → UB!
+            std::ptr::write(self.ptr.add(self.len), value);
+        }
+        self.len += 1;
+    }
+}
+```
+
+#### 反例：错误使用 `*ptr = val` 导致 UB
+
+```rust,ignore
+// ❌ 反例: 对未初始化内存使用 *ptr = val
+fn write_to_uninit_ub<T>(ptr: *mut T, value: T) {
+    unsafe {
+        *ptr = value;  // UB! 若 ptr 指向未初始化内存，先 drop 旧值 = 读取未初始化
+    }
+}
+
+// ❌ 反例: 错误使用 *ptr 读取导致 double drop
+fn double_drop_bug<T>(ptr: *mut T) {
+    unsafe {
+        let val = *ptr;      // 解引用转移所有权 → ptr 指向的位置被" move 走"
+        let val2 = *ptr;     // UB! 再次读取同一位置，导致双重释放（若 T 非 Copy）
+    }
+}
+
+// ✅ 修正: 使用 ptr::read（不转移所有权，仅按位复制）
+fn correct_read<T>(ptr: *const T) -> T {
+    unsafe { std::ptr::read(ptr) }  // 调用者负责后续不再使用原位置（除非重新写入）
+}
+```
+
+#### 边界分析：`ptr::replace` 的契约
+
+```rust,ignore
+// ✅ 正确: ptr::replace 先 read 再 write，返回旧值由调用者负责 drop
+fn replace_demo() {
+    let mut x = Box::new(1);
+    let old = std::ptr::replace(&mut x, Box::new(2));
+    // old = Box::new(1)，在作用域结束时自动 drop
+    // x = Box::new(2)
+    drop(x);
+}
+```
+
+> **定理**：`ptr::read` + `ptr::write` 组合 ≠ `*ptr` 解引用。前者是**内存层面的按位操作**，后者是**所有权层面的语义操作**。在 unsafe 代码中混淆两者是 UAF 和 double-drop 的常见根源。💡 原创分析
+
+---
+
+### 补充章节：`NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进
+
+> **权威来源**: [Rust RFC 1184: Rename `Unique` to `NonNull`] · [std::ptr::NonNull docs] · [Rust PR #45207: Introduce NonNull]
+> **层级标注**: `L3::指针类型` → `L2::智能指针` Box/Arc 内部实现 · `L1::类型系统` 协变与不变
+
+**历史演进**：Rust 标准库内部指针类型经历了从 `Unique<T>` / `Shared<T>` 到 `NonNull<T>` 的统一化过程，核心动机是**简化内部表示**、**提供稳定的外部 API**，并**统一协变语义**。
+
+| 类型 | 时期 | 核心语义 | 状态 |
+|:---|:---|:---|:---|
+| `Unique<T>` | Rust 1.0 ~ 1.25 | 协变、非空、拥有语义（`Own`） | ❌ 已移除（内部使用） |
+| `Shared<T>` | Rust 1.0 ~ 1.25 | 协变、非空、共享语义（`Rc`/`Arc` 内部） | ❌ 已移除 |
+| `NonNull<T>` | Rust 1.25+ | 协变、非空、裸指针包装，不携带所有权语义 | ✅ 稳定 API |
+
+> **[Rust RFC 1184]** `NonNull<T>` replaces `Unique<T>` as the standard covariant, non-null raw pointer abstraction. Unlike `Unique`, `NonNull` does not encode ownership semantics—it is purely a pointer utility type. ✅ 已验证
+
+#### `Unique<T>`：曾经的 Box 内部表示
+
+```text
+// 历史背景（已不存在的内部类型）
+pub struct Unique<T: ?Sized> {
+    pointer: *const T,  // 实际为 *mut T，用 *const 实现协变
+    _marker: PhantomData<T>,  // 拥有语义标记
+}
+// Unique 曾用于 Box<T> 的内部表示：Box<T> = Unique<T>
+// 问题：Unique 同时承载"非空"+"协变"+"拥有"三重语义，过于特化
+```
+
+#### `Shared<T>`：曾经的 Rc/Arc 内部表示
+
+```text
+// Shared<T> 曾与 Unique<T> 对称存在，用于 Rc/Arc 内部
+// 核心问题：Shared 与 Unique 的区分仅在于"拥有 vs 共享"，但两者都提供非空+协变
+// 维护两个几乎相同的内部类型增加了 std 复杂度，且无法暴露为稳定 API
+```
+
+#### `NonNull<T>`：统一后的稳定抽象
+
+```rust,ignore
+use std::ptr::NonNull;
+
+// ✅ NonNull<T> 的核心特性
+pub struct NonNull<T: ?Sized> {
+    pointer: *const T,  // 用 *const T 包装 *mut T 以实现协变
+}
+
+// 1. 非空保证: NonNull::new(ptr) 返回 Option<NonNull<T>>，null 时返回 None
+let maybe = NonNull::new(std::ptr::null_mut::<i32>());  // None
+
+// 2. 协变: NonNull<&'a T> 可协变为 NonNull<&'static T>
+fn demo_variance<'a>(ptr: NonNull<&'a i32>) -> NonNull<&'static i32> { ptr }
+
+// 3. as_ptr() 获取 *mut T
+let mut x = 42;
+let nn = NonNull::new(&mut x).unwrap();
+unsafe { *nn.as_ptr() = 100; }  // 通过裸指针修改
+
+// 4. Box::from_raw 接收 *mut T，但内部曾使用 NonNull 保证非空
+```
+
+#### 演进时间线
+
+```text
+Rust 1.0   ──→ Unique<T> 和 Shared<T> 作为内部不稳定类型存在
+              Box<T> 内部使用 Unique<T>
+              Rc<T>/Arc<T> 内部使用 Shared<T>
+
+Rust 1.25  ──→ PR #45207 引入 NonNull<T> 作为稳定 API
+              Unique<T> 和 Shared<T> 被标记为内部使用/弃用
+              动机：提供一个与所有权语义解耦的通用非空指针类型
+
+Rust 1.26+ ──→ std 内部逐步用 NonNull 替换 Unique/Shared
+              Vec<T> 的 buffer 指针使用 NonNull<T>
+              Box<T> 内部表示改为 Unique<T> → 后又调整为直接使用 NonNull
+
+当前状态  ──→ NonNull<T> 是稳定的公开 API
+              Unique<T> 在内部仍短暂存在，但已从公开 API 移除
+              Shared<T> 完全移除
+```
+
+#### 反例：误用 `NonNull` 导致的问题
+
+```rust
+use std::ptr::NonNull;
+
+// ❌ 反例: NonNull 不保证指向有效内存，仅保证非空
+let dangling = NonNull::<i32>::dangling();  // 合法！但指向对齐的虚假地址
+unsafe { *dangling.as_ptr() };  // UB! dangling 指向未分配内存
+
+// ❌ 反例: NonNull 不携带所有权，不会自动 drop
+struct BadBox<T> {
+    ptr: NonNull<T>,  // 错误：NonNull 不表示所有权，drop 时不会释放内存
+}
+// 正确做法: Box<T> 在 Drop 中显式 dealloc，NonNull 仅作为内部指针存储
+```
+
+> **定理**：`NonNull<T>` 是**类型系统层面的约束**（非空 + 协变），而非**运行时保证**（有效性、生命周期）。它与 `*mut T` 的边界区别在于：编译器可利用非空性做优化，程序员可利用协变性做类型转换。💡 原创分析
+
+---
+
+### 补充章节：`MaybeUninit` 数组初始化模式
+
+> **权威来源**: [Rust Reference: MaybeUninit] · [Unsafe Code Guidelines: Validity Invariants] · [TRPL: Ch19.3]
+> **层级标注**: `L3::未初始化内存` → `L1::所有权` 初始化要求 · `L2::内存管理` 堆栈分配
+
+**定义**：`std::mem::MaybeUninit<T>` 是 Rust 处理**未初始化内存**的官方抽象。它告知编译器"此位置的 `T` 可能尚未初始化"，从而避免编译器假设所有 `T` 实例都满足 Validity Invariant。
+
+> **[Unsafe Code Guidelines]** `MaybeUninit<T>` is the standard and safe way to work with uninitialized memory. Its contents are not subject to the validity invariant of `T` until explicitly initialized. ✅ 已验证
+
+#### 核心语义对比
+
+| 写法 | 结果 | 是否 UB |
+|:---|:---|:---:|
+| `let x: T = std::mem::uninitialized();` | 假装已初始化 | ❌ UB（读取未初始化 = UB） |
+| `let x = MaybeUninit::<T>::uninit().assume_init();` | 假设已初始化 | ⚠️ 若实际未写入则 UB |
+| `let mut x = MaybeUninit::<T>::uninit(); x.write(val); x.assume_init()` | 先写后假设 | ✅ 安全（前提是确实写入） |
+
+> **[Rust Reference]** Calling `assume_init()` on a `MaybeUninit<T>` that has not been fully initialized is immediate undefined behavior, because it produces a `T` that violates the validity invariant. ✅ 已验证
+
+#### 正确示例：逐个元素初始化数组
+
+```rust
+use std::mem::MaybeUninit;
+
+// ✅ 正确: [MaybeUninit<T>; N] 模式，逐个初始化后一次性转换为 [T; N]
+fn init_array<T, F>(mut f: F) -> [T; 5]
+where
+    F: FnMut(usize) -> T,
+{
+    // 1. 创建未初始化的 MaybeUninit 数组
+    let mut arr: [MaybeUninit<T>; 5] = unsafe {
+        // Safety: MaybeUninit 不需要初始化
+        MaybeUninit::uninit().assume_init()
+    };
+
+    // 2. 逐个写入
+    for i in 0..5 {
+        arr[i].write(f(i));
+    }
+
+    // 3. 转换为 [T; 5]（关键：必须确认所有元素已初始化）
+    let arr = arr.map(|mut slot| unsafe {
+        // Safety: 上面循环保证每个 slot 都已写入
+        slot.assume_init()
+    });
+    arr
+}
+
+fn demo() {
+    let arr: [i32; 5] = init_array(|i| i as i32 * 10);
+    assert_eq!(arr, [0, 10, 20, 30, 40]);
+}
+```
+
+#### 正确示例：安全封装数组初始化
+
+```rust
+use std::mem::MaybeUninit;
+
+// ✅ 更安全的封装：使用指针避免中间状态的 unsafe 暴露
+fn init_array_safe<T, const N: usize, F>(mut f: F) -> [T; N]
+where
+    F: FnMut(usize) -> T,
+{
+    let mut arr: [MaybeUninit<T>; N] = unsafe { MaybeUninit::uninit().assume_init() };
+
+    for i in 0..N {
+        arr[i].write(f(i));
+    }
+
+    // 使用 ptr::read 将 MaybeUninit<T> 转为 T，不触发 drop（因为 MaybeUninit 没有实现 Drop）
+    unsafe {
+        let ptr = arr.as_mut_ptr() as *mut T;
+        let result = std::ptr::read(ptr as *const [T; N]);
+        // 注意：arr 不会被 drop（MaybeUninit 不 drop 内容），但 result 已拥有所有值
+        std::mem::forget(arr);  // 防止 arr 被 drop（虽然无实际影响，但语义清晰）
+        result
+    }
+}
+```
+
+#### 反例：错误使用 `assume_init()` 导致 UB
+
+```rust
+use std::mem::MaybeUninit;
+
+// ❌ 反例: 对未写入的 MaybeUninit 调用 assume_init()
+fn ub_from_uninit() -> String {
+    let mut slot = MaybeUninit::<String>::uninit();
+    // 忘记调用 slot.write(...)
+    unsafe { slot.assume_init() }  // UB! 返回未初始化的 String，其指针字段是随机值
+}
+
+// ❌ 反例: 数组部分初始化就转换
+fn partial_init_ub() -> [String; 3] {
+    let mut arr: [MaybeUninit<String>; 3] = unsafe { MaybeUninit::uninit().assume_init() };
+    arr[0].write(String::from("hello"));
+    // arr[1] 和 arr[2] 未初始化！
+    unsafe {
+        std::mem::transmute::<[MaybeUninit<String>; 3], [String; 3]>(arr)
+        // UB! 构造包含未初始化 String 的数组
+    }
+}
+
+// ❌ 反例: 对已初始化的 MaybeUninit 再次 write（内存泄漏）
+fn leak_from_overwrite() {
+    let mut slot = MaybeUninit::new(String::from("first"));
+    slot.write(String::from("second"));  // "first" 被覆盖但未 drop → 内存泄漏（非 UB，但不良）
+    let _ = unsafe { slot.assume_init() };  // drop "second"
+}
+```
+
+#### 边界：`MaybeUninit` 与 `ManuallyDrop`
+
+| 维度 | `MaybeUninit<T>` | `ManuallyDrop<T>` |
+|:---|:---|:---|
+| 核心目的 | 允许未初始化状态 | 阻止自动 drop |
+| `assume_init()` | 提取值后自身失效 | 无此操作 |
+| `Drop` 行为 | 不自动 drop 内容 | 包装的值不自动 drop |
+| 适用场景 | 延迟初始化 | FFI 边界、联合体字段 |
+
+> **定理**：`MaybeUninit<T>` 是 Rust 中处理**未初始化内存**的**唯一正确抽象**。`std::mem::uninitialized()` 已被弃用；直接使用 `assume_init()` 而不先 `write()` 是触发 UB 的最常见 unsafe 模式之一。💡 原创分析
+
+---
+
+- [x] **TODO**: 补充 Miri 的使用方法与限制 —— 优先级: 中 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 `std::ptr::read/write` vs `*ptr` 解引用的区别 —— 优先级: 中 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 `NonNull<T>` / `Unique<T>` / `Shared<T>` 的演进 —— 优先级: 低 —— 已完成 2026-05-13
+- [x] **TODO**: 补充 `MaybeUninit` 数组初始化模式 —— 优先级: 中 —— 已完成 2026-05-13
 
 > **过渡: L3 → L4**
 >

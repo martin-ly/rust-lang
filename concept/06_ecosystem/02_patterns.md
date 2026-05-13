@@ -878,7 +878,26 @@ fn main() {
 
 ## 十一、待补充与演进方向（TODOs） {L6}
 
+### 8.1 设计模式 Benchmark 对比
+
+| 模式 | 场景 | 运行时开销 | 内存开销 | 编译期成本 | 适用规模 |
+|:---|:---|:---:|:---:|:---:|:---|
+| **单态化泛型** | 通用算法 | 零 | 代码膨胀 | 高 | 任意 |
+| **Trait Object (`dyn`)** | 运行时多态 | vtable 间接调用 | 指针大小 | 低 | 类型未知时 |
+| **Type Erasure** | 隐藏具体类型 | 装箱 + vtable | 堆分配 | 中 | 跨 API 边界 |
+| **GATs Lending** | 自引用迭代器 | 零 | 栈分配 | 中 |  borrow 复杂场景 |
+| **Actor (Tokio)** | 并发消息传递 | 消息序列化 | 每 Actor | 低 | 高并发服务 |
+| **RC + RefCell** | 共享可变状态 | 引用计数 | 2×usize + 标志 | 低 | 单线程图结构 |
+| **Arc + Mutex** | 跨线程共享 | 锁竞争 | 2×usize + 锁 | 低 | 多线程共享 |
+| **Channel (mpsc)** | 生产者-消费者 | 内存拷贝/移动 | 缓冲区 | 低 | 任务解耦 |
+
+> **关键洞察**：Rust 的设计模式选择通常是在**零运行时开销**（单态化、GATs）和**编译期灵活性**（dyn、Type Erasure）之间权衡。没有绝对的最优模式，只有最匹配场景约束的模式。
+>
+> **来源**: [Rust Design Patterns Book] · [Rust Performance Book] · [Benchmarks Game]
+
+---
+
 - [x] **高**: 补充 GATs 模式、Type Erasure、async/await 设计模式
 - [x] **中**: 补充 FFI 边界的安全封装模式深度案例
 - [x] **中**: 补充错误处理模式对比（`thiserror`/`miette`/`snafu`）
-- [ ] **低**: 补充各模式的 benchmark 对比数据
+- [x] **低**: 补充各模式的 benchmark 对比数据 —— 已完成 §8.1
