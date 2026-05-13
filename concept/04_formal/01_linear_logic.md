@@ -15,6 +15,8 @@
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 一、权威定义（Definition）
 
 ### 1.1 Wikipedia 定义
@@ -31,6 +33,8 @@
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 二、概念属性矩阵（Attribute Matrix）
 
 ### 2.1 结构规则对比矩阵
@@ -70,6 +74,8 @@
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 三、形式化理论根基（Formal Foundation）
 
 > **[学术来源: Girard 1987; Wadler 1990, *Linear Types can Change the World* (ICFP); Pierce TAPL §15.3]** 以下自然演绎规则及 Rust 映射源自线性逻辑的 sequent calculus 及其在程序语言中的对应。
@@ -134,6 +140,8 @@ Rust 对应:
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 四、思维导图（Mind Map）
 
 ```mermaid
@@ -170,6 +178,8 @@ graph TD
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 五、反命题决策树（Anti-Proposition Decision Trees）
 
 > 以下决策树用于拆解三个常见的**过度简化命题**，每个树从命题出发，经过 2-3 层判定到达反例或修正结论。
@@ -243,6 +253,8 @@ graph TD
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 六、定理推理链（Theorem Chain）
 
 > **[学术来源: Wadler 1990, *Linear Types can Change the World*; RustBelt: POPL 2018, Jung et al.; Pierce TAPL §15.3]** 仿射类型系统通过资源唯一性保证内存安全。本节引入 ⟹ 符号表示定理间的**逻辑依赖方向**——若 A ⟹ B，则 A 是 B 的必要前提或逻辑前驱。
@@ -278,6 +290,8 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 七、sequent calculus 完整规则集与 Phase Semantics
 
 > **[Girard 1987 · Linear Logic]** · **[Wikipedia: Sequent calculus]** · **[Wikipedia: Phase semantics]** 本节补充线性逻辑的三层规则系统（乘法/加法/指数）及其相位语义与 Rust 编译阶段的直观映射。✅
@@ -365,6 +379,8 @@ Rust 编译期的相位模型:
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 八、示例与反例
 
 ### 8.1 Rust 中的线性/仿射对应
@@ -439,6 +455,8 @@ fn session_demo() {
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 八、认知路径（Cognitive Path）
 
 > 形式化直觉化的 5 步认知路径，每步从直觉困惑出发，经具体场景→模式抽象→形式规则→代码验证→边界测试的完整闭环。
@@ -556,6 +574,8 @@ fn session_demo() {
 >
 > 工程实践中的对应见 [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md)（所有权规则）与 [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md)（借用作为分数权限的弱化形式）。
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
@@ -568,6 +588,8 @@ fn session_demo() {
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
 | 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十一、Proof nets（证明网）与并发程序可视化
 
 > **[学术来源: Girard 1987, *Linear Logic* §6; Danos & Regnier 1989, *The Structure of Multiplicatives*; Wikipedia: Proof net]** Proof nets 是线性逻辑证明的**图形化规范形式**，消除了 sequent calculus 中因规则应用顺序不同而产生的**句法冗余**。它们将证明表示为图结构，其中逻辑连接词是节点，公式是边，cut 是连接两个对偶公式的边。
@@ -652,6 +674,8 @@ Cut 消除规则（线性逻辑核心元定理）:
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
 
 > **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统中嵌入线性约束。
@@ -767,6 +791,8 @@ Rust 所有权系统（仿射变体）:
 
 ---
 
+> **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
+>
 ## 十三、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充线性逻辑的 sequent calculus 完整规则集（multiplicative/additive/exponential 三层）—— 已完成 §7.1–7.3

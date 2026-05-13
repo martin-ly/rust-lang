@@ -6,6 +6,8 @@
 
 ---
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 📑 目录
 
 - [跨层知识图谱（Inter-Layer Dependency Map）](#跨层知识图谱inter-layer-dependency-map)
@@ -34,6 +36,8 @@
     - [9.3 L5-L7 层次一致性标注](#93-l5-l7-层次一致性标注)
   - [十、TODO](#十todo)
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 一、全局层级依赖图
 
 ```mermaid
@@ -144,6 +148,8 @@ graph TB
 
 ---
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 二、语义链接类型定义
 
 所有跨层关系必须标注以下**语义类型**之一：

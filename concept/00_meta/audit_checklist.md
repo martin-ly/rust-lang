@@ -6,6 +6,8 @@
 
 ---
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 📑 目录
 
 - [概念一致性检查清单（Concept Consistency Audit Checklist）](#概念一致性检查清单concept-consistency-audit-checklist)
@@ -34,6 +36,8 @@
     - [评审周期](#评审周期)
     - [评审检查单](#评审检查单)
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 一、关系清晰度检查（Inter-File Consistency）
 
 ### 1.1 跨层关系
@@ -65,6 +69,8 @@
 
 ---
 
+> **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
+>
 ## 二、定理一致性检查（Theorem Consistency）
 
 ### 2.1 每个核心文件的定理链

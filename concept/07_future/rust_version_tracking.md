@@ -377,6 +377,23 @@ unsafe extern "C" {
 | **Specialization** | 部分实现 | 重叠 impl 的特化版本，需要类型论上的一致性保证 |
 | **`build-std` 稳定化** | 推进中 | 标准库编译的标准化，影响 no_std 和嵌入式形式化 |
 
+### 9.1 Rust 1.96 特性待跟踪表
+
+> **[来源: Rust nightly 2026-05-10; Rust Reference nightly; RFC tracking issues]** 本表基于 nightly 扫描，标记各特性对 D1-D7 语义维度的影响。待 1.96 stable 发布后更新状态并填充详细分析。
+
+| 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
+|:---|:---|:---|:---|:---:|:---|
+| `return_type_notation` (RTN) | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 可能稳定 |
+| `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 可能稳定 |
+| `generic_const_exprs` | unstable | D1 计算 / D2 类型 | `02_intermediate/02_generics.md` | 中 | 继续演进 |
+| `unsafe_fields` | experimental | D7 安全边界 | `03_advanced/03_unsafe.md` | **高** | 早期实验 |
+| `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/04_type_system.md` | 低 | 可能稳定 |
+| `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
+| `const_trait_impl` (`~const`) | unstable | D1 计算 | `01_foundation/01_ownership.md` | **高** | 继续演进 |
+| `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 可能稳定 |
+
+**已覆盖的 stable 特性（1.95 及之前）**: `inline_const` · `async_fn_in_trait` · `impl_trait_in_assoc_type` · `let_chains` · `type_alias_impl_trait` · `async_closure` · `precise_capturing` · `trait_upcasting`
+
 ---
 
 ## 十、变更日志

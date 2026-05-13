@@ -19,8 +19,12 @@
 
 <!-- 层级一致性: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 一、权威定义（Definition）
 
+> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+>
 ### 1.1 Wikipedia 权威定义
 
 > **[Wikipedia: Macro (computer science)]** A macro (short for "macroinstruction") is a rule or pattern that specifies how a certain input sequence should be mapped to a replacement output sequence according to a defined procedure. The mapping process that instantiates a macro use into a specific sequence is known as macro expansion.
@@ -29,6 +33,8 @@
 
 > **[Wikipedia: Hygienic macro]** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. A hygienic macro system preserves lexical scoping and ensures that binding structure is respected during macro expansion.
 
+> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+>
 ### 1.2 TRPL 官方定义
 
 > **[TRPL: Ch19.5]** Macros are a way of writing code that writes other code, which is known as metaprogramming. In Appendix C, we discuss the derive attribute, which generates an implementation of various traits for you. We've also used the `println!` and `vec!` macros throughout the book. All of these macros expand to produce more code than the code you've written manually.
@@ -37,6 +43,8 @@
 >
 > **[Rust Reference: Macros]** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统约束。✅ 已验证
 
+> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+>
 ### 1.3 形式化定义
 
 宏对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
@@ -58,6 +66,8 @@ Rust 宏 hygiene:
 
 <!-- 层级一致性: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 二、概念属性矩阵（Attribute Matrix）
 
 ### 2.1 宏类型对比矩阵
@@ -107,6 +117,8 @@ Rust 宏 hygiene:
 
 <!-- 层级一致性: L3 形式化理论 — 卫生宏的 α-等价保持、模式匹配的语法树正则语义 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 三、形式化理论根基（Formal Foundation）
 
 > **[Rust Reference: Hygiene]** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
@@ -214,6 +226,8 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
 
 <!-- 层级一致性: L2 全景认知 → L1 工程决策 — 思维导图为导航，决策树为操作手册 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 四、思维导图（Mind Map）
 
 ```mermaid
@@ -244,6 +258,8 @@ graph TD
 
 ---
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 五、决策/边界判定树（Decision / Boundary Tree）
 
 > **过渡说明**: 以下决策树将 L3 理论（卫生性、编译期展开）和 L2 概念（四种宏类型）转化为 L1 工程实践中的可执行判断。每个节点对应一个具体的编程困境，每条边对应一个形式化保证或工程约束。
@@ -405,6 +421,8 @@ graph TD
 
 <!-- 层级一致性: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 六、定理推理链（Theorem Chain）
 
 > **[Rust Reference: Hygiene]** 定理：Rust 宏系统是卫生的——宏内部定义的变量不会与外部变量冲突，宏不会意外捕获外部变量。这是 macro_rules! 和过程宏的核心保证。✅ 已验证
@@ -453,6 +471,8 @@ graph TD
 
 <!-- 层级一致性: L1 工程实践 — 正确示例、反例、边界极限测试的三段式验证 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 七、示例与反例（Examples & Counter-examples）
 
 ### 7.1 正确示例：`macro_rules!` 声明宏
@@ -642,6 +662,8 @@ graph TD
 
 <!-- 层级一致性: L0 认知脚手架 → L1 实践 → L2 概念 → L3 理论 — 六步递进模拟学习者心路历程 -->
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 八、认知路径（Cognitive Path）
 
 > **设计原理**: 以下六步遵循"先问为什么，再问是什么，最后问怎么做"的认知科学顺序。每一步回答一个具体困惑，并自然引出下一步的更深层次问题。
@@ -916,6 +938,8 @@ macro_rules! assert_impl {
 
 ---
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 补充章节：进阶主题与工程实践
 
 > **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
@@ -1670,6 +1694,8 @@ mod internal {
 
 ---
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 十、待补充与演进方向（TODOs）
 
 > **[proc_macro2 crate]** `proc_macro2` bridges the compiler's internal `proc_macro` API with a stable, testable interface, enabling `syn` and `quote` to build procedural macros outside the compiler environment. ✅ 已验证
@@ -1683,6 +1709,8 @@ mod internal {
 
 ---
 
+> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+>
 ## 相关概念链接
 
 | 概念 | 文件 | 关系 |
