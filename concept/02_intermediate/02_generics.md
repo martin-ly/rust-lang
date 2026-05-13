@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 应用 → 分析 → 评价
 **变更日志**:
 
 - v2.3 (2026-05-13): 补充 min_specialization 状态与限制、泛型编译时间优化策略（Turbofish / dyn Trait / -Zshare-generics）、Type-level Programming（Peano 算术与 typenum）、GATs 完整形式化视角（System F_ω / HKT / Lending Iterator 类型论分析）；更新 TODO 列表

@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
 - v2.0 (2026-05-13): 深度重构——定理一致性矩阵扩展至11行（带⟹推理链），新增3个反命题决策树，认知路径重构为5步递进，全章补充Wikipedia/Pierce TAPL/Cardelli引用与L1-L3层次一致性标注
@@ -577,6 +578,70 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 > **关键洞察**: Const Generics 不是"依赖类型的弱化版"，而是**工程上的精确裁剪**——它保留了依赖类型在系统编程中最有用的子集（数组长度、缓冲区大小、维度参数），同时避免了完整依赖类型带来的编译期不可判定性问题。
 >
 > **来源**: [Wikipedia: Dependent type] · [RFC 2000: Const Generics] · [Idris 文档: Dependent Types]
+
+### 10.1b Const Generics 的形式化演进（1.89+）
+
+> **[来源: Rust 1.89 Release Notes; RFC 2000]** Rust 1.89 稳定了 `_` 推断 const generics 参数，使常量参数获得与类型参数同等的 HM 推断能力。
+
+**`_` 推断的形式化意义**:
+
+```text
+此前（1.89 之前）:
+  let arr: Array<i32, 3> = Array::new();
+  // 必须显式提供 const generic 参数 3
+
+1.89 之后:
+  let arr = Array::new();  // 编译器从上下文推断 _: usize = 3
+  // HM 推断扩展到常量级别: Γ ⊢ e : Array<i32, N>, N 由约束求解确定
+```
+
+这对应类型论中的**隐式参数推断（implicit argument synthesis）**：常量参数 `N` 现在与类型参数 `T` 一样，可由局部约束图推导。
+
+**单态化语义（Monomorphization）**:
+
+Const Generics 的单态化与类型泛型一致，但常量参数在实例化时**被求值为具体值**：
+
+```text
+泛型定义:   struct Array<T, const N: usize> { ... }
+实例化:     Array<i32, 3>
+单态化后:   struct Array_i32_3 { data: [i32; 3] }
+
+常量参数在单态化时完全消解:
+  Array<i32, {2+1}>  ──求值──→  Array<i32, 3>  ──单态化──→  Array_i32_3
+```
+
+**Const Trait Impl（`~const Trait` / `[const]`）**:
+
+> **[来源: RFC 3762; Tracking Issue #143874]** ⚠️ nightly only
+
+`const fn` 中无法调用泛型 trait 方法，因为编译器无法确认该 impl 是否在 const context 中有效。`~const Trait`（演进中语法可能变为 `[const] Trait`）允许标记某些 trait impl 为"const 安全"：
+
+```rust
+// 推测性语法（ nightly 迭代中）
+impl const Add for MyInt {  // 此 impl 在 const context 中可用
+    fn add(self, other: Self) -> Self { ... }
+}
+
+const fn sum<T: ~const Add>(a: T, b: T) -> T {  // T 必须支持 const Add
+    a + b  // ✅ 合法：在 const fn 中调用泛型 + 运算符
+}
+```
+
+形式化上，`~const Trait` 将 trait 约束系统从**二值**（实现/未实现）扩展为**三值**（实现 + const 安全 / 实现但仅运行时 / 未实现），增加了约束求解的复杂度。
+
+**与 System Fω 的关联**:
+
+Const Generics 将 Rust 的类型系统从 System F（类型抽象）向 **System Fω 的受限形式**推进：
+
+```text
+System F:     Λα.λx:α. x          —— 类型抽象（泛型）
+System Fω:    Λα:*→*. λx:α Int. x  —— 类型构造器抽象（HKT）
+Rust Const:   Λn:usize. λx:[i32;n]. x  —— 值级抽象（依赖类型子集）
+```
+
+Rust 目前不支持 HKT，但 Const Generics 在另一个维度上扩展了表达能力：**值 → 类型**的依赖性。
+
+> **跨层映射**: 本文件 Const Generics 形式化 ↔ [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §5.7 "Const Generics 进阶用法" · [`../07_future/rust_version_tracking.md`](../07_future/rust_version_tracking.md) §3.3 "`_` 推断 const generics"
 
 ### 10.2 Higher-Kinded Types（HKT）的缺失与 workaround
 

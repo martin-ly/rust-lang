@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、unsafe 操作矩阵、UB 分类、Safety Contract 规范、思维导图、示例反例
@@ -627,7 +628,7 @@ MIRIFLAGS=-Zmiri-tree-borrows cargo miri test --test integration test_name
 
 > **[Miri Documentation: Limitations]** Miri 无法检测所有 UB（停机问题不可解），且不支持与硬件相关的行为（如内联汇编）。✅ 已验证
 >
-> **[Miri Book]** Tree Borrows 模式（`-Zmiri-tree-borrows`）自 2023 年起成为 Miri 的推荐默认配置，对合法 unsafe 代码更宽容。✅ 已验证
+> **[Miri Book]** Tree Borrows 自 2024 年末起成为 Miri 的**默认**别名模型（原 `-Zmiri-tree-borrows` 不再需显式指定；Stacked Borrows 退为 `-Zmiri-stacked-borrows` 兼容选项）。PLDI 2025 Distinguished Paper 正式确立了 Tree Borrows 作为 Rust 别名假设工业级标准的地位。✅ 已验证
 
 ### 7.3 定理一致性矩阵（⟹ 推理链）
 

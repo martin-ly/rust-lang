@@ -1,0 +1,283 @@
+# Effects System: Concept Pre-study（效果系统：概念预研）
+
+> **层级**: L7 前沿趋势
+> **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
+> **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
+> **主要来源**: [Koka] · [Eff] · [Haskell GHC] · [Rust Lang Team Blog] · [类型理论研究]
+
+---
+
+> **Bloom 层级**: 分析 → 评价
+**变更日志**:
+
+- v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
+
+---
+
+## 一、Effect 系统是什么？
+
+### 1.1 权威定义
+
+> **[学术来源: Plotkin & Pretnar 2009 — Algebraic Effects; Koka Language]**
+
+**Effect 系统**（Effect System）是将"计算效果"（computational effects）显式编码到类型系统中的理论框架。与类型系统回答"这个函数接受/返回什么值"不同，Effect 系统回答"这个函数在计算过程中**还做了什么**"。
+
+经典效果包括：
+
+| 效果 | 直觉含义 | Rust 当前表达 | 理想的显式表达 |
+|:---|:---|:---|:---|
+| **IO** | 与外部世界交互 | 无标记 | `fn foo() -> i32 effect Io` |
+| **Async** | 可能挂起/恢复 | `async fn` | `fn foo() -> i32 effect Async` |
+| **Unsafe** | 可能触发 UB | `unsafe fn` | `fn foo() -> i32 effect Unsafe` |
+| **异常** | 可能失败/短路 | `Result` / `?` | `fn foo() -> i32 effect Throws` |
+| **非确定性** | 结果不唯一 | 无标记 | `fn foo() -> i32 effect NonDet` |
+| **状态** | 修改堆/全局状态 | `&mut T` | `fn foo() -> i32 effect State` |
+
+### 1.2 代数效应（Algebraic Effects）vs 类型效应（Type Effects）
+
+```text
+代数效应（Plotkin & Pretnar 2009）:
+  ─────────────────────────────────────────
+  效果 = 操作签名 + 处理器（handler）
+  例: effect State { get(): S; put(s: S): () }
+  处理器捕获效果的具体语义（如状态映射到状态单子）
+  → 代表语言: Eff, Koka, Flix
+
+类型效应（Rust 方向）:
+  ─────────────────────────────────────────
+  效果 = 函数类型上的标记集合
+  例: fn foo() -> i32 effects {Async, Io}
+  编译器检查效果传播，不引入运行时处理器
+  → 代表语言: Java checked exceptions（雏形）, Rust（探索中）
+```
+
+> **关键区别**: 代数效应强调**效果的处理（handling）**——可以拦截、转换、恢复效果；类型效应强调**效果的追踪（tracking）**——确保调用者知晓被调用函数的所有副作用。Rust 语言团队目前探索的方向更接近**类型效应**，因为引入完整的代数效应处理器会显著增加运行时复杂性和零成本抽象的破坏。
+
+---
+
+## 二、Rust 中的现有 Effect 表达
+
+Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
+
+### 2.1 效果映射表
+
+| 效果类别 | 当前 Rust 语法 | 效果语义 | 追踪方式 | 多态支持 |
+|:---|:---|:---|:---|:---|
+| **异步** | `async fn` | 可能挂起，返回 `Future` | 关键字 + `Future` trait | `AsyncFn` trait (1.85+) |
+| **Unsafe** | `unsafe fn` | 可能违反 safety invariant | 关键字 + 调用者义务 | ❌ 无多态 |
+| **常量** | `const fn` | 编译期可求值 | 关键字 + MIR const eval | `~const Trait` (unstable) |
+| **异常** | `Result<T, E>` + `?` | 可能短路/失败 | 类型承载 + `Try` trait | `?` 自动传播 |
+| **泛型约束** | `where T: Send` | 线程安全约束 | Trait bound | 泛型参数多态 |
+
+### 2.2 `async` 作为效果的原型
+
+```rust
+// 当前 Rust: async 是语法关键字，不是类型系统效果
+async fn fetch() -> Data { ... }
+// 语义: fetch 具有 Async 效果，调用者必须 await
+
+// 理想化效果系统视角:
+fn fetch() -> Data effect Async { ... }
+// 语义: fetch 的类型签名显式携带 Async 效果
+```
+
+`async fn` 的关键设计决策——**效果污染（effect pollution）**：
+
+```text
+若 fn foo 调用 async fn bar，则 foo 也必须是 async（或 block_on）
+  ↓
+效果向上传播：调用者必须处理被调用者的效果
+  ↓
+这与 checked exceptions 类似：Java 中调用 throws 方法必须 catch 或声明 throws
+```
+
+### 2.3 `AsyncFn`：Effect 多态的第一次尝试
+
+> **[来源: RFC 3668; Rust 1.85 Release Notes]**
+
+Rust 1.85 稳定的 `AsyncFn` trait 家族可视为**效果多态（effect polymorphism）**的原型：
+
+```rust
+// AsyncFn: "我不关心这个闭包是否是 async，只要调用时我能 await 结果"
+fn call_any<F, T>(f: F) -> impl Future<Output = T>
+where
+    F: AsyncFn() -> T,  // 效果多态：F 可以是 sync 或 async
+{ ... }
+```
+
+在效果系统理论中，这对应于：
+
+```text
+效果多态签名:
+  fn call_any<F>(f: F) where F: Fn() -> T effect e
+  // e 是一个效果变量，可以被实例化为 {}（无效果）或 {Async}
+```
+
+> **关键洞察**: `AsyncFn` 没有引入完整的 effect 变量语法，而是通过 trait 系统模拟了效果多态。这是 Rust "用类型系统解决问题"设计哲学的延续——不添加新语法，而是用已有机制（trait、关联类型、HRTB）表达新概念。
+
+---
+
+## 三、跨语言对比
+
+### 3.1 效果系统谱系
+
+| 语言 | 效果模型 | 表达力 | 运行时成本 | 与 Rust 的关系 |
+|:---|:---|:---|:---|:---|
+| **Koka** | 代数效应 + 处理器 | ⭐⭐⭐⭐⭐ 完整 | 有（handler 栈） | 理论参考，Rust 不引入运行时处理器 |
+| **Eff** | 代数效应 + 子类型 | ⭐⭐⭐⭐⭐ 完整 | 有 | 学术原型 |
+| **Haskell** | Monad 变换器 | ⭐⭐⭐⭐ 强 | 有（RTS） | Rust `async` 受 Haskell 启发，但拒绝 Monad |
+| **Java** | Checked exceptions | ⭐⭐ 弱 | 零 | Rust 可能借鉴"显式传播"，但拒绝异常机制 |
+| **Rust（当前）** | 关键字 + Trait | ⭐⭐⭐ 中 | 零 | 渐进式：async/unsafe/const 各走各的路 |
+| **Rust（理想）** | 类型效应 | ⭐⭐⭐⭐ 强 | 零 | 统一语法，保持零成本 |
+
+### 3.2 为什么 Rust 拒绝 Monad？
+
+```text
+Haskell 效果模型:
+  IO a = 世界状态 → (a, 世界状态')
+  任何 IO 操作都显式传递"世界 token"
+  → 纯函数式，但所有效果通过 Monad 组合
+
+Rust 设计哲学冲突:
+  1. 零成本抽象: Monad 变换器有运行时成本（即使被优化，语义复杂）
+  2. 显式控制: Rust 程序员想要知道每次内存分配和上下文切换
+  3.  FFI 兼容: Haskell 的 IO monad 与 C ABI 不直接映射
+  4. 学习曲线: Monad 是 Haskell 最大门槛，Rust 有意避免
+
+Rust 的替代方案:
+  async/await 语法糖 → 编译为状态机（零运行时开销）
+  unsafe 关键字 → 边界标记而非类型变换
+  Result<T, E> → 显式错误传播（无隐式异常）
+```
+
+---
+
+## 四、对 Rust 类型系统的潜在影响
+
+### 4.1 统一效果语法的可能性
+
+```rust
+// 推测性语法（非官方，仅供概念讨论）
+
+// 效果声明
+effect Async;
+effect Io;
+effect Unsafe;
+
+// 效果标记函数
+fn read_file(path: &str) -> String effects {Io, Async} { ... }
+
+// 效果多态泛型
+fn map<T, U, E>(f: impl Fn(T) -> U effects E, xs: Vec<T>) -> Vec<U> effects E {
+    xs.into_iter().map(f).collect()
+    // map 的效果 = f 的效果（效果多态传播）
+}
+
+// 效果消除
+fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
+    // 将 Async 效果消除，同步返回结果
+}
+```
+
+### 4.2 与 Trait 系统的整合挑战
+
+```text
+挑战 1: Trait bound 与效果约束的交互
+  trait Reader {
+      fn read(&mut self, buf: &mut [u8]) -> Result<usize, Error>;
+      // 如果 read 需要 Io effect，trait 定义是否需要标注？
+  }
+
+挑战 2: 效果子类型
+  fn foo() -> i32 effects {Io}  <:  fn foo() -> i32 effects {Io, Async}
+  // 效果更少 = 更"纯" = 子类型？（与常规子类型方向相反）
+
+挑战 3: 向后兼容
+  现有 async/unsafe/const 关键字如何迁移到统一效果系统？
+  → 最可能路径: 保留关键字，内部 desugar 为效果标记
+```
+
+### 4.3 `gen` blocks 与效果叠加
+
+> **[来源: rust-lang/rust #117078]**
+
+`gen` blocks（生成器）是 Rust 正在探索的另一个效果：
+
+```rust
+// gen block: 效果 = 可挂起并产生多个值
+let iter = gen {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+```
+
+`gen` 与 `async` 的对偶关系：
+
+| 维度 | `async {}` | `gen {}` |
+|:---|:---|:---|
+| 效果 | 异步挂起 | 同步产生 |
+| 返回 | 单个 `Future` | 多个 `Iterator` 元素 |
+| 挂起点 | `.await` | `yield` |
+| 状态机 | Future 状态机 | Generator 状态机 |
+| 形式化 | Continuation monad | 余代数（coalgebra） |
+
+> **理论洞察**: `async` 和 `gen` 都是**计算效果**的具体实例。在完整的代数效应框架中，它们可以由统一的效果声明派生：`async = effect Suspend with Resume; gen = effect Yield with Next`。
+
+---
+
+## 五、演进路线图与开放问题
+
+### 5.1 语言团队已知讨论（公开信息）
+
+| 时间 | 事件 | 状态 |
+|:---|:---|:---|
+| 2023 | Lang Team Blog: "Effects in Rust" 概念文章 | 概念探索 |
+| 2024 | `AsyncFn` trait 稳定（1.85） | ✅ 效果多态原型落地 |
+| 2024 | `gen` blocks 进入 nightly | 🚧 新效果类型实验 |
+| 2025 | Effects 语法讨论在 internals.rust-lang.org | 🚧 社区辩论中 |
+| 202? | 统一 `effect` 关键字 | 🔮 远期可能 |
+
+### 5.2 开放问题（Research Questions）
+
+```text
+Q1: Rust 需要完整的代数效应，还是类型效应就足够了？
+    → 观点 A: 类型效应足够，保持零成本和简单性
+    → 观点 B: 代数效应的 handler 机制能统一 async/iterator/exception
+
+Q2: 效果系统如何与 Unsafe 交互？
+    → unsafe 是一种"能力（capability）"而非"效果"
+    → 但 unsafe fn 确实改变了调用上下文的要求
+
+Q3: 效果多态的编译期代价？
+    → 效果约束增加类型推断复杂度
+    → 需要评估对编译时间的实际影响
+
+Q4: 与现有生态的兼容性？
+    → async_trait crate 的 workaround 是否会被原生替代？
+    → `futures::Stream` 与 `gen` blocks 的语义对齐
+```
+
+### 5.3 概念预研 → 工业落地的条件
+
+```text
+必要条件:
+  ✅ AsyncFn 证明效果多态在 trait 系统中可行
+  ✅ gen blocks 证明多种效果可以共存
+  🚧 需要统一的语法设计（不破坏现有代码）
+  🚧 需要编译器实现团队承诺支持
+  🚧 需要 Edition 迁移策略（可能 2027+）
+```
+
+---
+
+## 六、相关概念链接
+
+| 概念 | 文件 | 关系 |
+|:---|:---|:---|
+| Async/Await | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) | `Async` 效果的主要载体 |
+| `AsyncFn` Trait | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §12 | 效果多态的工程原型 |
+| `gen` blocks | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §13 | 另一种计算效果的实验 |
+| 类型论基础 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 效果系统的类型论根基 |
+| Rust 版本跟踪 | [`./rust_version_tracking.md`](./rust_version_tracking.md) | 效果相关语言特性状态 |
+| 语言演进 | [`./03_evolution.md`](./03_evolution.md) §3.1, §3.7.1 | 效果系统在长程演进中的定位 |

@@ -1,5 +1,6 @@
 # Rust 表征空间（Semantic / Representational Space）
 
+> **Bloom 层级**: 分析 → 评价
 > **定位**：本文件是 `concept/` 知识体系的**元层总论**，从表征空间（Representational Space）与语义空间（Semantic Space）的视角，系统分析 Rust 语言"能表达什么"、"不能表达什么"、"等价表达的组合关系"，以及其内部机制的完备性与封闭性。
 > **核心命题**：Rust 的 safe 子集是一个**内部完备但封闭**的形式系统；其设计空间的边界由编译器强制，而非程序员自律。
 > **方法论对齐**: Felleisen 1989 "On the Expressive Power of Programming Languages" · Observational Equivalence · Turing Completeness · Semantic Closure

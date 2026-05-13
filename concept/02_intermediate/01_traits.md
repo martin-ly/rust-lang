@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 应用 → 分析 → 评价
 **变更日志**:
 
 - v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表

@@ -8,6 +8,7 @@
 
 ---
 
+> **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增§8.9 Waker/Context 底层机制（VTable、自定义 Reactor）、§8.10 Stream/Sink trait 完整分析（异步迭代器与生产者）、§8.11 Pin<Box<dyn Future>> vs impl Future 性能差异（动态/静态分发、栈 pinning）、§8.12 loom 并发模型检测工具

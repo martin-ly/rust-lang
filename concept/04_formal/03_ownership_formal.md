@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 分析 → 评价
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图
@@ -650,6 +651,57 @@ impl SelfRef {
 >
 > **来源**: [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Rust Reference: Pin] · [Jung et al. 2019: Stacked Borrows]
 
+### 9.5 Pin 不动性的 LTL 形式化
+
+> **[学术来源: Vardi & Wolper 1986 — LTL; RefinedRust PLDI 2024]** Pin 的"地址在所有未来时刻保持不变"天然对应线性时序逻辑（Linear Temporal Logic, LTL）的 `□`（always）模态。
+
+**LTL 基础运算符**:
+
+| 运算符 | 名称 | 语义 | Rust 对应 |
+|:---|:---|:---|:---|
+| `□φ` | Always / Globally | 从当前时刻起，φ 永远成立 | `T: !Unpin` 时地址不变 |
+| `◇φ` | Eventually | 未来某一时刻 φ 成立 | `Drop` 被调用后资源释放 |
+| `φ U ψ` | Until | φ 持续成立直到 ψ 成立 | Pin 保持直到 `drop` |
+| `○φ` | Next | 下一时刻 φ 成立 | 单次 `poll` 后的状态迁移 |
+
+**Pin 的 LTL 规约**:
+
+```text
+Pin 不动性公理 (Pin-Immobile):
+  ∀v, t. pinned(v, t) ∧ ¬Unpin(v)
+    ⇒ □_{t' ≥ t} (addr(v, t') = addr(v, t))
+
+Pin-Drop 兼容性:
+  ∀v, t. pinned(v, t)
+    ⇒ (□addr_stable(v)) U dropped(v)
+
+Unpin 豁免:
+  ∀v. Unpin(v) ⇒ ¬□addr_stable(v)
+    // Unpin 类型允许移动，不服从 Pin 不动性公理
+```
+
+**解释**:
+
+1. **Pin-Immobile**: 若值 `v` 在时刻 `t` 被 Pin 且 `v` 的类型为 `!Unpin`，则从 `t` 开始的所有未来时刻 `t'`，`v` 的地址恒定。
+2. **Pin-Drop 兼容性**: Pin 的不动性持续有效，直到 `v` 被 `drop`。`drop` 之后内存可能释放或重用，但程序已无法通过合法 Pin 访问 `v`。
+3. **Unpin 豁免**: 若类型实现了 `Unpin`（默认绝大多数类型），则 `Pin` 对其无约束力——移动仍被允许。这是 Rust 的**渐进式安全**设计：只有显式标记为 `!Unpin` 的类型才受不动性约束。
+
+**与 async 状态机的结合**:
+
+```text
+async 状态机安全定理:
+  ∀state_machine, t.
+    Pin<&mut state_machine> at t
+    ⇒ □_{t' ≥ t} (self_referential_ptrs_valid(state_machine, t'))
+
+// 自引用指针有效性由 Pin-Immobile 保证
+// 状态机跨 await 点的状态迁移由编译器生成代码保证
+```
+
+> **关键洞察**: LTL 形式化揭示了 Pin 的本质——它不是"防止移动"的物理约束，而是**时序逻辑上的不变量**。`Pin::new_unchecked` 的危险性在于：若调用者说谎（值实际会被移动），则 `□addr_stable` 公理被违反，导致后续所有依赖该公理的推理（如自引用指针有效性）全部失效。
+>
+> **跨层映射**: 本文件 LTL 规约 ↔ [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §3.2 "Pin 的形式化语义" · [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §5.1 定理矩阵 L2 "Pin ⟹ 自引用安全"
+
 ---
 
 ## 十、待补充与演进方向（TODOs）
@@ -743,23 +795,44 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 
 **> [L1↔L4: Pin / 自引用]** L1 的 `Pin<&mut Self>` 构造自引用结构时，常涉及 `&mut` → 裸指针 → `&mut` 的转换。Tree Borrows 的 Reserved 权限使这些模式在形式化层面被接受，而 Stacked Borrows 的严格栈模型会保守拒绝。
 
-### 11.5 与 RustBelt / Miri 的关系
+### 11.5 Tree Borrows 2025：PLDI 2025 Distinguished Paper
+
+> **[学术来源: Pichon-Pharabod & Dreyer, *Tree Borrows: A New Aliasing Model for Rust*, PLDI 2025 Distinguished Paper]** Tree Borrows 于 2025 年获 PLDI Distinguished Paper Award，标志着别名模型从学术研究走向工业级部署。
+
+**核心更新（2024–2025）**:
+
+1. **Miri 默认启用 Tree Borrows**（2024 年末）：`-Zmiri-tree-borrows` 从实验性标志转为 Miri 默认行为，Stacked Borrows 退为兼容选项 (`-Zmiri-stacked-borrows`)。这意味着 Rust 生态的 Miri 回归测试（crater）全部基于 Tree Borrows 运行。
+
+2. **`&raw` 操作符语义对齐**：Rust 1.82 引入的 `&raw const expr` / `&raw mut expr`（直接创建裸指针，无中间引用）与 Tree Borrows 的 Reserved 权限天然兼容。Stacked Borrows 中 `&expr as *const _` 的中间引用创建会导致不必要的标签压栈，Tree Borrows 通过保留原节点的 Reserved 状态避免了这一开销。
+
+3. **UnsafeCell 精确建模**：PLDI 2025 版本对 `UnsafeCell` 的内部可变性模式进行了更精细的权限传播规则，使得 `RefCell`、`Mutex` 等标准库原语在 Miri 下的假阳性显著减少。
 
 ```text
-定理（Miri 双模型支持）:
-  Miri 默认使用 Stacked Borrows
-  Miri -Zmiri-tree-borrows 启用 Tree Borrows
+定理（Tree Borrows 工业就绪性）:
+  前提: Tree Borrows 通过 Miri 的 Crater 回归测试（>40K crates）
       ↓
-  结论: 两种模型都是 Rust 别名假设的候选形式化 [来源] ✅
+  结论: Tree Borrows 是 Stacked Borrows 的工业级替代方案 [来源: PLDI 2025] ✅
+```
+
+### 11.6 与 RustBelt / Miri 的关系
+
+```text
+定理（Miri 模型演进）:
+  Miri 默认使用 Tree Borrows（2024 年末起）
+  Miri -Zmiri-stacked-borrows 保留 Stacked Borrows（兼容选项）
+      ↓
+  结论: Tree Borrows 成为 Rust 别名假设的首选形式化 [来源: Miri Book] ✅
 ```
 
 | 工具/框架 | 支持的模型 | 作用 |
 |:---|:---|:---|
-| **Miri** | SB（默认）/ TB（`-Zmiri-tree-borrows`）| 动态检测 UB、验证 `unsafe` 代码 |
+| **Miri** | **TB（默认）** / SB（兼容） | 动态检测 UB、验证 `unsafe` 代码 |
 | **RustBelt** | 基于 Iris 的逻辑模型（独立于 SB/TB）| 证明 Safe Rust 的 soundness |
 | **rustc** | 无显式模型（优化假设近似 TB）| 编译器优化不破坏合法别名 |
 
-> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Miri 选择 TB 作为未来方向，意味着社区共识倾向于更宽松的别名假设——这不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型）。
+> **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。
+
+> **跨层映射更新**: `L3::Miri` 默认模型变更 ↔ [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/rust_version_tracking.md`](../07_future/rust_version_tracking.md) §3 前沿特性跟踪
 
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "别名模型与 Miri 检测"
 

@@ -4,9 +4,13 @@
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
 > **状态**: v1.0（2026-05-13 创建，对齐 Rust 1.95.0 stable）
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
 ---
 
+> **Bloom 层级**: 分析 → 应用
+>
 ## 一、演进总览：五个形式模型维度
 
 ```mermaid

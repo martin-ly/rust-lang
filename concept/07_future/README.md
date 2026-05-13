@@ -97,6 +97,7 @@ graph TB
 | [02_formal_methods.md](./02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 | L4 RustBelt, L6 工具链, L3 Unsafe | L4 验证范围扩展 |
 | [03_evolution.md](./03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
 | [rust_version_tracking.md](./rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
+| [04_effects_system.md](./04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
 ---
 

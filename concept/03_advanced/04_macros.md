@@ -7,6 +7,7 @@
 
 ---
 
+> **Bloom 层级**: 应用 → 分析
 **变更日志**:
 
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏 2.0）演进对比
