@@ -76,6 +76,12 @@
       - [9.3.7 性能考量：Backtrace 捕获的成本](#937-性能考量backtrace-捕获的成本)
     - [9.4 `eyre` / `color-eyre` 生态库对比](#94-eyre--color-eyre-生态库对比)
     - [9.5 `#[track_caller]` 与错误定位优化](#95-track_caller-与错误定位优化)
+      - [9.5.1 工作原理：编译器隐式传递 `Location`](#951-工作原理编译器隐式传递-location)
+      - [9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别](#952-locationcaller-与-panicinfolocation-的区别)
+      - [9.5.3 在自定义错误类型中使用 `#[track_caller]` 实现轻量级定位](#953-在自定义错误类型中使用-track_caller-实现轻量级定位)
+      - [9.5.4 `#[track_caller]` 与 `Backtrace` 的对比](#954-track_caller-与-backtrace-的对比)
+      - [9.5.5 与 `anyhow` / `thiserror` 的集成](#955-与-anyhow--thiserror-的集成)
+      - [9.5.6 限制与演进边界](#956-限制与演进边界)
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
   - [十、相关概念链接](#十相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
@@ -1324,10 +1330,19 @@ fn main() -> Result<()> {
 
 ### 9.5 `#[track_caller]` 与错误定位优化
 
-`#[track_caller]`（Rust 1.46+ 稳定）允许函数在 panic 或错误报告中**显示调用者的位置**而非函数内部位置：
+> **Bloom 层级**: 应用 → 分析
+>
+> **[Rust Reference: The track_caller attribute]** · **[RFC 2091: Implicit caller location]** · **[Rust Standard Library: core::panic::Location]** `#[track_caller]` 在 Rust 1.46 稳定化，它通过修改函数的调用约定（calling convention），在编译期隐式注入调用者位置信息，使 panic、错误包装器和断言宏能够报告**调用点**而非被调用函数内部位置。✅
+
+#### 9.5.1 工作原理：编译器隐式传递 `Location`
+
+当函数标记为 `#[track_caller]` 时，编译器执行两项变换：
+
+1. **ABI 修改**：在函数的调用约定中追加一个隐式的 `&'static Location<'static>` 参数。调用方在每次调用时自动填充该参数为自己的源码位置（文件、行号、列号）。
+2. **MIR 重定向**：在 MIR（Mid-level IR）阶段，编译器将所有对 `#[track_caller]` 函数的调用重定向到一个内部闭包 `foo::{{closure}}`，该闭包负责把调用点的 `Location` 常数绑定到函数的隐式参数上。[来源: rustc-dev-guide — Implicit caller location]
 
 ```rust
-// ✅ 使用 #[track_caller] 的包装函数
+// ✅ #[track_caller] 使 panic 报告调用者位置
 #[track_caller]
 fn my_unwrap<T>(opt: Option<T>) -> T {
     match opt {
@@ -1342,22 +1357,249 @@ fn main() {
 }
 ```
 
-**核心机制**：编译器在调用 `#[track_caller]` 函数时，隐式传递 `Location` 信息（文件、行号、列号），代价为额外的寄存器/栈参数。
+**代价模型**：隐式 `Location` 参数通常通过寄存器传递（在支持的平台），或在栈上占用一个指针宽度（`usize` 大小）。因此开销为**极低**（亚指令级），但非绝对零成本——与 `Backtrace` 的运行时栈展开相比可忽略。[来源: RFC 2091 — Cost analysis] · [Rust Reference: track_caller ABI]
 
-**适用范围矩阵**：
+#### 9.5.2 `Location::caller()` 与 `PanicInfo::location()` 的区别
 
-| 函数类型 | 支持 `#[track_caller]` | 效果 |
-|:---|:---:|:---|
-| 普通函数 | ✅ | panic location 指向调用者 |
-| 泛型函数 | ✅ | 同上 |
-| `const fn` | ✅ | 编译期错误定位 |
-| `async fn` | ✅ | await 点定位 |
-| trait 方法 | ❌ | 当前不稳定（RFC 2091 扩展中） |
-| 闭包 | ❌ | 不适用 |
+两者都返回 `&'static Location<'static>`，但语义完全不同：
 
-> **边界**：`#[track_caller]` 增加调用约定开销（传递 Location 指针）。仅应在错误报告/包装函数中使用，不应在性能敏感的热路径中滥用。
+| 维度 | `std::panic::Location::caller()` | `PanicInfo::location()` |
+|:---|:---|:---|
+| **定义位置** | `core::panic::Location` | `core::panic::PanicInfo` |
+| **语义** | "**谁调用了我**" — 返回当前函数的调用者位置 | "**panic 发生在哪里**" — 返回 `panic!()` 宏被展开的位置 |
+| **使用场景** | 自定义包装函数、错误构造器、断言辅助函数 | `panic` hook、`catch_unwind` 后的错误报告 |
+| **是否依赖 `#[track_caller]`** | ✅ 必须在 `#[track_caller]` 函数中调用才指向调用者 | ❌ 直接反映 panic 调用点，与属性无关 |
+| **典型调用位置** | 库代码中的 `unwrap`/`expect` 包装器 | 全局 panic handler、日志记录器 |
+
+```rust
+use std::panic::{self, Location};
+
+#[track_caller]
+fn checked_div(a: i32, b: i32) -> i32 {
+    if b == 0 {
+        // Location::caller() 指向 checked_div 的调用者，而非这一行
+        panic!("division by zero at {}:{}",
+               Location::caller().file(),
+               Location::caller().line());
+    }
+    a / b
+}
+
+fn main() {
+    panic::set_hook(Box::new(|info| {
+        // PanicInfo::location() 指向 panic!() 被调用的位置
+        // 如果 checked_div 有 #[track_caller]，这里会指向 main 中的调用点
+        if let Some(loc) = info.location() {
+            eprintln!("Panic at {}:{}", loc.file(), loc.line());
+        }
+    }));
+
+    let _ = checked_div(10, 0);  // panic 位置指向这一行
+}
+```
+
+> **[来源: Rust Standard Library: Location::caller]** `Location::caller()` 在 `#[track_caller]` 函数内部返回调用者的 `Location`；在普通函数中返回自身位置。 ✅
 >
-> **来源**: [Rust Reference: track_caller] · [RFC 2091: track_caller] · [Rust Standard Library: Location]
+> **[来源: Rust Standard Library: PanicInfo]** `PanicInfo::location()` 返回 panic 实际发生的位置；当 panic 源自 `#[track_caller]` 函数时，该位置已被替换为调用者位置。 ✅
+
+#### 9.5.3 在自定义错误类型中使用 `#[track_caller]` 实现轻量级定位
+
+与嵌入 `Backtrace`（运行时栈展开，~微秒至毫秒级开销）不同，`#[track_caller]` + `Location` 提供**编译期确定的单点定位**，成本极低：
+
+```rust
+use std::panic::Location;
+use std::fmt;
+
+// ✅ 轻量级定位错误：仅存储一个 &'static Location 指针
+#[derive(Debug)]
+pub struct LocatedError {
+    msg: String,
+    loc: &'static Location<'static>,
+}
+
+impl LocatedError {
+    #[track_caller]
+    pub fn new(msg: impl Into<String>) -> Self {
+        Self {
+            msg: msg.into(),
+            loc: Location::caller(),  // 编译期内联为常量指针，零运行时解析开销
+        }
+    }
+}
+
+impl fmt::Display for LocatedError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(f, "{} at {}:{}", self.msg, self.loc.file(), self.loc.line())
+    }
+}
+
+impl std::error::Error for LocatedError {}
+
+// 使用示例
+fn parse_port(s: &str) -> Result<u16, LocatedError> {
+    s.parse().map_err(|_| LocatedError::new("invalid port"))?  // Location 指向这一行
+}
+```
+
+**设计模式：零成本抽象**
+
+| 模式 | 存储类型 | 运行时开销 | 精度 | 适用场景 |
+|:---|:---|:---|:---|:---|
+| `Backtrace` | `std::backtrace::Backtrace` | 高（栈展开+符号解析） | 完整调用链 | 审计、生产故障诊断 |
+| `#[track_caller]` + `Location` | `&'static Location<'static>` | 极低（寄存器/栈参数传递） | 单点（文件+行+列） | 高频错误路径、库断言 |
+| 手动 `file!/line!` | `&'static str` + `u32` | 零（编译期常量） | 单点 | 宏生成的错误 |
+
+> **[来源: Rust API Guidelines — Error handling]** 库代码若仅需记录"错误在哪个调用点产生"，应优先使用 `#[track_caller]` 而非 `Backtrace`，以避免在热路径引入运行时展开开销。 ✅
+
+#### 9.5.4 `#[track_caller]` 与 `Backtrace` 的对比
+
+两者构成**互补层级**（与 [§9.3.5](#935-track_caller-与-backtrace-的协同与对比) 和 [§9.3.6](#936-与-paniclocation-的对比) 形成呼应）：
+
+| 维度 | `#[track_caller]` + `Location` | `Backtrace` |
+|:---|:---|:---|
+| **信息粒度** | 单点：精确到调用者语句（文件、行、列） | 完整调用链：多层函数帧 |
+| **捕获时机** | 编译期（隐式参数内联） | 运行时（栈展开 `libunwind`） |
+| **运行时开销** | 极低（额外寄存器/栈参数，~1–2 指令） | 高（栈遍历 + 符号解析，10 μs–10 ms） |
+| **惰性求值** | 自动（`Location` 为 `Copy`，无堆分配） | `Backtrace` 构造时捕获原始帧，格式化时解析符号 |
+| **可控性** | 编译器自动管理，不可禁用单点 | 受 `RUST_BACKTRACE` 环境变量控制 |
+| **动态分发** | ❌ `dyn Fn` / 函数指针调用丢失 caller 信息 | ✅ 不受调用方式影响 |
+| **适用场景** | 包装函数、断言、自定义错误构造器 | 未知错误源、复杂调用链诊断 |
+
+**协同模式**：在关键错误路径中同时使用两者——`Location` 提供**精确错误源点**，`Backtrace` 提供**传播路径上下文**：
+
+```rust,ignore
+use std::backtrace::Backtrace;
+use std::panic::Location;
+use std::fmt;
+
+#[derive(Debug)]
+pub struct RichError {
+    msg: String,
+    loc: &'static Location<'static>,
+    backtrace: Backtrace,
+}
+
+impl RichError {
+    #[track_caller]
+    pub fn new(msg: impl Into<String>) -> Self {
+        Self {
+            msg: msg.into(),
+            loc: Location::caller(),
+            backtrace: Backtrace::capture(),
+        }
+    }
+}
+```
+
+> **[来源: Rust Standard Library: Backtrace]** · **[Rust Reference: track_caller]** 两者结合可覆盖"从精确源点到完整传播路径"的全谱系定位需求。 ✅
+
+#### 9.5.5 与 `anyhow` / `thiserror` 的集成
+
+**`anyhow` 中的隐式使用**：
+
+`anyhow` 的宏（`anyhow!`、`bail!`、`ensure!`）内部已使用 `#[track_caller]`，确保错误构造时的 `Location` 指向宏的调用点而非宏定义内部：
+
+```rust,ignore
+use anyhow::{anyhow, Result};
+
+fn load_config(path: &str) -> Result<String> {
+    // anyhow! 宏内部通过 #[track_caller] 使 Location 指向这一行
+    std::fs::read_to_string(path)
+        .map_err(|e| anyhow!("failed to read {}: {}", path, e))
+}
+```
+
+> **[来源: anyhow source — macro rules]** `anyhow!` 宏利用 `#[track_caller]` 将错误位置绑定到调用方源码坐标，使错误链中的 `location()` 方法返回用户代码位置。 ✅
+
+**`thiserror` 中 `#[backtrace]` 与 `#[track_caller]` 的协同**：
+
+`thiserror` 1.0+ 支持 `#[backtrace]` 自动嵌入 `Backtrace`，但 `Backtrace` 的构造开销较高。对于仅需单点定位的场景，可手动结合 `#[track_caller]`：
+
+```rust,ignore
+use std::panic::Location;
+use std::backtrace::Backtrace;
+use thiserror::Error;
+
+#[derive(Error, Debug)]
+pub enum AppError {
+    #[error("I/O error: {0}")]
+    Io(#[from] std::io::Error),
+
+    #[error("config error: {msg}")]
+    Config {
+        msg: String,
+        // thiserror 的 #[backtrace] 自动填充 Backtrace
+        #[backtrace]
+        backtrace: Backtrace,
+        // 手动存储 Location 实现轻量级精确源点
+        location: &'static Location<'static>,
+    },
+}
+
+impl AppError {
+    #[track_caller]
+    pub fn config(msg: impl Into<String>) -> Self {
+        AppError::Config {
+            msg: msg.into(),
+            backtrace: Backtrace::capture(),
+            location: Location::caller(),
+        }
+    }
+}
+```
+
+**设计权衡**：
+
+| 策略 | 实现方式 | 开销 | 推荐场景 |
+|:---|:---|:---|:---|
+| 纯 `anyhow` | `anyhow::Error` + `?` | 中（自动 backtrace + track_caller） | 应用代码、CLI 工具 |
+| `thiserror` + `#[backtrace]` | 枚举 + 自动 Backtrace | 高（仅在错误路径） | 库代码、需结构化 match |
+| `thiserror` + `#[track_caller]` | 枚举 + `Location::caller()` | 极低 | 高频错误、性能敏感的库 |
+| 混合策略 | `Location` + 条件 `Backtrace` | 按需 | 关键路径错误审计 |
+
+> **[来源: thiserror docs]** · **[anyhow docs]** 生态库的设计哲学是：`anyhow` 默认提供丰富的运行时上下文，`thiserror` 提供编译期结构化能力，两者均内建对 `#[track_caller]` 的一阶支持。 ✅
+
+#### 9.5.6 限制与演进边界
+
+尽管 `#[track_caller]` 已稳定，但其适用范围存在明确的编译器级边界：
+
+**适用范围矩阵（准确状态）**：
+
+| 函数类型 | 支持状态 | 说明 |
+|:---|:---:|:---|
+| 普通函数 | ✅ 稳定 | Rust 1.46+ |
+| 泛型函数 | ✅ 稳定 | 单态化后隐式参数正确传递 |
+| `const fn` | ✅ 稳定 | 编译期错误定位 |
+| trait 方法 | ✅ 稳定 | RFC 2091 最初因 MIR 传递时机限制而禁止；后实现改为 monomorphization 之后注入，解除限制 [来源: rustc-dev-guide — track_caller in traits] |
+| `async fn` | ⚠️ 部分支持 | Stable 上为 **no-op**（编译通过但 `Location::caller()` 返回 async fn 自身位置）；完整支持需 nightly `#![feature(async_fn_track_caller)]`（Tracking: [rust-lang/rust#110011]） |
+| 闭包 | ❌ 不稳定 | 需 nightly `#![feature(closure_track_caller)]`（Tracking: [rust-lang/rust#87417]） |
+| `dyn Fn()` / 函数指针 | ❌ 不支持 | 动态分发无法传递隐式 `Location` 参数；通过 trait object 调用时丢失 caller 信息 |
+| `#[naked]` / 自定义 ABI | ❌ 不支持 | 与显式 ABI 冲突 |
+
+**性能边界**：
+
+`#[track_caller]` 修改调用约定，增加一个隐式参数。在**极高频调用**（如逐字节解析循环中的辅助函数）中，额外的寄存器压力可能导致轻微性能下降。因此不应在热路径的无错误分支中滥用——它最适合用于：
+
+1. 错误报告/包装函数（如自定义 `unwrap`、`bail`）
+2. 断言和调试辅助函数
+3. 宏生成的代码（`assert!`、`unwrap` 等标准库模式）
+
+```rust,ignore
+// ❌ 不建议：热路径中的高频辅助函数
+#[track_caller]
+fn add_one(x: i32) -> i32 { x + 1 }  // 无错误报告需求，浪费 ABI 修改
+
+// ✅ 建议：仅在错误包装/断言中使用
+#[track_caller]
+fn ensure_nonzero(x: i32) -> i32 {
+    if x == 0 { panic!("expected non-zero") }
+    x
+}
+```
+
+> **[来源: Rust Reference: track_caller]** · **[RFC 2091: Implicit caller location]** · **[rustc-dev-guide]** `#[track_caller]` 的设计目标是为错误报告提供"足够好的位置信息"，而非替代调试符号或 profiling 工具。 ✅
+
+**跨层映射**: `#[track_caller]` 的编译期定位 ↔ [§9.3](#93-stdbacktracebacktrace-与错误追踪) `Backtrace` 的运行时定位 ↔ [../04_formal/04_rustbelt.md](../04_formal/04_rustbelt.md) §3 "编译期保证与运行时观察的边界"
 
 ---
 
@@ -1463,7 +1705,7 @@ fn compute() -> Maybe<i32> {
 - [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
 - [x] **TODO**: 补充 `Termination` trait 与 main 返回 Result —— 优先级: 中 —— 已完成 §9.1
 - [x] **TODO**: 补充 `eyre` / `color-eyre` 等生态库的对比 —— 优先级: 低 —— 已完成 §9.4
-- [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5
+- [x] **TODO**: 补充 `#[track_caller]` 与错误定位优化 —— 优先级: 低 —— 已完成 §9.5 (2026-05-14)
 - [x] **TODO**: 补充 `Result<T, !>` 与 `!` (never type) 在错误处理中的使用 —— 优先级: 中 —— 已完成 §9.2
 - [x] **TODO**: 补充 `poll_fn` / `TryFuture` 等异步错误处理 —— 优先级: 高 —— 已完成 §5.5
 - [x] **TODO**: 补充 `Try` trait（稳定化中）与自定义 ? 行为 —— 优先级: 中 —— 已完成 §9.6

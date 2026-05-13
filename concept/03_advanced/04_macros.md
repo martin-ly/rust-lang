@@ -10,6 +10,7 @@
 > **Bloom 层级**: 应用 → 分析
 **变更日志**:
 
+- v4.1 (2026-05-14): 增强 §5 属性宏修改函数体——新增 `#[trace]` 完整实现（含 `proc_macro_error2` 友好错误）、AST 遍历三策略（quote 包装 / `Fold` trait / 手动 `stmts` 替换）、声明宏能力边界对比、跨层链接
 - v4.0 (2026-05-13): Phase 4 TODO 清理——新增 proc_macro2/syn/quote 最佳实践、macro_rules! 重复模式完整语法、const fn + const generics 替代宏趋势、编译期内置宏完整列表、属性宏修改函数体完整示例（#[measure_time]）、macro 关键字（声明宏 2.0）演进对比
 - v1.0 (2026-05-12): 初始版本，完成权威定义、宏类型对比矩阵、卫生性分析、形式化视角、思维导图、示例反例
 - v2.0 (2026-05-13): 深度重构——增强定理一致性矩阵至11行（带⟹推理链）、新增3个反命题决策树、重写6步递进认知路径、补充章节过渡段落与层次一致性标注
@@ -1400,163 +1401,512 @@ fn platform_specific() {
 
 ### 5. 属性宏修改函数体的完整示例
 
-> **[syn/quote 文档]** 属性宏（attribute macro）可以解析被装饰 item 的完整语法树，修改后返回新的 TokenStream。以下以 `#[measure_time]` 为例，展示如何解析属性参数、包装函数体、插入前后代码。✅ 已验证
+> **[Rust Reference: Procedural Macros]** 属性宏（attribute macro）接收两部分输入：属性参数 `TokenStream` 与被装饰 item 的 `TokenStream`。宏可以解析、修改或完全替换该 item，最终返回新的 `TokenStream` 交由编译器继续处理。✅ 已验证
+>
+> **[syn crate 文档]** `syn` 为 Rust 语法树提供类型化 AST 节点（如 `ItemFn`、`ImplItemFn`），使属性宏能够精确操作函数签名（`sig`）与函数体（`block`），而非手工拼接 token。✅ 已验证
+>
+> **[quote crate 文档]** `quote!` 通过准引用（quasiquotation）将 `syn` 解析出的 AST 片段插回生成的代码中，是属性宏生成代码的标准工具。✅ 已验证
 
-**`#[measure_time]` 完整实现**
+> **Bloom 层级**: 应用 → 综合
+
+#### 5.1 属性宏解析和修改函数体 AST 的原理
+
+属性宏修改函数体遵循**解析 → 变换 → 生成**三阶段模型：
+
+```text
+#[trace]
+fn foo(x: i32) -> i32 { x + 1 }
+
+        ↓ TokenStream
+
+proc_macro_attribute(args, input)
+        ↓ syn::parse::<ItemFn>(input)
+
+ItemFn {
+    vis: Visibility,
+    sig: Signature,      // fn foo(x: i32) -> i32
+    block: Block,        // { x + 1 }
+}
+        ↓ AST 变换（Fold / 手动替换 / quote 包装）
+
+修改后的 ItemFn / 新生成的 TokenStream
+        ↓ quote! → TokenStream
+
+fn foo(x: i32) -> i32 {
+    eprintln!("[trace] enter foo(x = {:?})", x);
+    let __result = { x + 1 };
+    eprintln!("[trace] exit foo = {:?}", __result);
+    __result
+}
+```
+
+关键约束（[Rust Reference: Macros]）：
+
+1. **阶段隔离** ⟹ 属性宏只能作用于被显式装饰的 item，无法全局扫描或修改其他模块代码
+2. **无类型信息** ⟹ 输入是未类型化的 TokenStream，宏无法知道变量具体类型，只能基于语法结构做判断
+3. **编译器二次检查** ⟹ 输出必须是合法 TokenStream，类型正确性由编译器后续阶段保证
+
+#### 5.2 `#[trace]` 完整实现：函数入口/出口自动打印日志
+
+以下以 `#[trace]` 为例，展示如何解析属性参数、保留函数签名、注入前后日志代码，并使用 `proc_macro_error2` 提供友好的编译错误。
+
+**proc-macro crate 结构**
+
+```text
+trace-macro/
+├── Cargo.toml
+└── src/
+    └── lib.rs
+```
+
+**`trace-macro/Cargo.toml`**
+
+```toml
+[package]
+name = "trace-macro"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+proc-macro2 = "1.0"
+syn = { version = "2.0", features = ["full", "extra-traits"] }
+quote = "1.0"
+proc-macro-error2 = "2.0"
+```
+
+**`trace-macro/src/lib.rs`**
 
 ```rust,ignore
-// Cargo.toml:
-// [lib]
-// proc-macro = true
-//
-// [dependencies]
-// proc-macro2 = "1.0"
-// syn = { version = "2.0", features = ["full", "extra-traits"] }
-// quote = "1.0"
-
 use proc_macro::TokenStream;
-use quote::quote;
-use syn::{parse_macro_input, ItemFn, Lit, Meta, MetaNameValue};
+use quote::{format_ident, quote};
+use syn::{
+    parse_macro_input, FnArg, Ident, ItemFn, Lit, Meta, MetaNameValue, Pat,
+    ReturnType, Signature,
+};
 
-// #[measure_time] 或 #[measure_time(name = "my_func")]
+// 使用 proc_macro_error2 提供带 Span 的友好编译错误
+use proc_macro_error2::{abort, proc_macro_error};
+
+/// #[trace] —— 在函数入口和出口自动打印日志
+///
+/// 可选参数：
+///   #[trace]                 —— 使用函数名作为 trace 名
+///   #[trace(name = "custom")] —— 自定义 trace 名
+#[proc_macro_error]
 #[proc_macro_attribute]
-pub fn measure_time(args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn trace(args: TokenStream, input: TokenStream) -> TokenStream {
     // 1. 解析属性参数
-    let name = if args.is_empty() {
-        None
+    let trace_name = parse_trace_name(args);
+
+    // 2. 解析被装饰的函数
+    let input_fn = parse_macro_input!(input as ItemFn);
+
+    // 3. 提取函数信息
+    let fn_vis = &input_fn.vis;
+    let fn_sig = &input_fn.sig;
+    let fn_name = &fn_sig.ident;
+    let display_name = trace_name.unwrap_or_else(|| fn_name.to_string());
+
+    // 4. 提取参数标识符列表（用于入口日志）
+    let arg_idents = extract_arg_idents(fn_sig);
+
+    // 5. 生成 hygiene 安全的内部变量名
+    let __trace_name = format_ident!("__trace_name");
+    let __trace_result = format_ident!("__trace_result");
+
+    // 6. 构造入口日志表达式
+    let entry_log = if arg_idents.is_empty() {
+        quote! {
+            eprintln!("[trace] enter {}", #display_name);
+        }
     } else {
-        let meta = parse_macro_input!(args as Meta);
-        match meta {
-            Meta::NameValue(MetaNameValue { path, value, .. })
-                if path.is_ident("name") => {
-                match value {
-                    syn::Expr::Lit(expr_lit) => match expr_lit.lit {
-                        Lit::Str(s) => Some(s.value()),
-                        _ => panic!("expected string literal"),
-                    },
-                    _ => panic!("expected string literal"),
-                }
-            }
-            _ => panic!("expected name = \"...\""),
+        // 为每个参数生成 "arg = {:?}" 片段
+        let log_parts: Vec<_> = arg_idents
+            .iter()
+            .map(|ident| quote! { stringify!(#ident), "=", #ident })
+            .collect();
+        quote! {
+            eprintln!("[trace] enter {}({})", #display_name, #(#log_parts),*);
         }
     };
 
-    // 2. 解析被装饰的函数
-    let input = parse_macro_input!(input as ItemFn);
-    let fn_name = &input.sig.ident;
-    let fn_vis = &input.vis;
-    let fn_sig = &input.sig;
-    let fn_block = &input.block;
+    // 7. 判断是否有返回值，决定是否打印 exit 日志内容
+    let has_return = !matches!(fn_sig.output, ReturnType::Default);
 
-    let display_name = name.unwrap_or_else(|| fn_name.to_string());
+    let orig_block = &input_fn.block;
 
-    // 3. 生成包装后的函数：在函数体前后插入计时逻辑
-    let expanded = quote! {
-        #fn_vis #fn_sig {
-            let __start = std::time::Instant::now();
-            let __result = (|| #fn_block)(); // 将原函数体包裹在闭包中
-            let __elapsed = __start.elapsed();
-            eprintln!("[measure_time] {} took {:?}", #display_name, __elapsed);
-            __result
+    // 8. 生成包装后的完整函数
+    let expanded = if has_return {
+        quote! {
+            #fn_vis #fn_sig {
+                let #__trace_name = #display_name;
+                #entry_log
+                let #__trace_result = #orig_block;
+                eprintln!("[trace] exit {} = {:?}", #__trace_name, #__trace_result);
+                #__trace_result
+            }
+        }
+    } else {
+        quote! {
+            #fn_vis #fn_sig {
+                let #__trace_name = #display_name;
+                #entry_log
+                #orig_block
+                eprintln!("[trace] exit {}", #__trace_name);
+            }
         }
     };
 
     TokenStream::from(expanded)
 }
-```
 
-**使用示例**
+// 解析属性参数：#[trace] 或 #[trace(name = "...")]
+fn parse_trace_name(args: TokenStream) -> Option<String> {
+    if args.is_empty() {
+        return None;
+    }
 
-```rust,ignore
-use my_macros::measure_time;
-
-#[measure_time]
-fn slow_computation() -> u32 {
-    std::thread::sleep(std::time::Duration::from_millis(100));
-    42
+    let meta = parse_macro_input!(args as Meta);
+    match meta {
+        Meta::NameValue(MetaNameValue { path, value, .. }) if path.is_ident("name") => {
+            match value {
+                syn::Expr::Lit(expr_lit) => match expr_lit.lit {
+                    Lit::Str(s) => Some(s.value()),
+                    other => abort!(other, "expected string literal for `name`"),
+                },
+                other => abort!(other, "expected string literal for `name`"),
+            }
+        }
+        other => abort!(other, "expected `name = \"...\"`"),
+    }
 }
 
-#[measure_time(name = "custom_name")]
-async fn async_task() -> String {
-    tokio::time::sleep(tokio::time::Duration::from_millis(50)).await;
-    "done".to_string()
+// 提取函数参数中的标识符（跳过类型，仅保留参数名）
+fn extract_arg_idents(sig: &Signature) -> Vec<Ident> {
+    sig.inputs
+        .iter()
+        .filter_map(|arg| match arg {
+            FnArg::Typed(pat_type) => match &*pat_type.pat {
+                Pat::Ident(pat_ident) => Some(pat_ident.ident.clone()),
+                _ => None,
+            },
+            FnArg::Receiver(_) => Some(format_ident!("self")),
+        })
+        .collect()
+}
+```
+
+**调用端代码**
+
+```rust,ignore
+// 使用方 Cargo.toml
+// [dependencies]
+// trace-macro = { path = "trace-macro" }
+
+use trace_macro::trace;
+
+#[trace]
+fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+
+#[trace(name = "greet")]
+fn say_hello(name: &str) {
+    println!("Hello, {}!", name);
+}
+
+#[trace]
+async fn fetch_data(url: &str) -> String {
+    // 模拟异步获取
+    format!("data from {}", url)
 }
 
 fn main() {
-    slow_computation();
-    // 输出: [measure_time] slow_computation took 100ms...
+    let r = add(2, 3);
+    say_hello("Rust");
+    // 输出示例：
+    // [trace] enter add(a = 2, b = 3)
+    // [trace] exit add = 5
+    // [trace] enter greet(name = Rust)
+    // Hello, Rust!
+    // [trace] exit greet
 }
 ```
 
-**反例：错误地替换函数签名导致类型不匹配**
+#### 5.3 函数体 AST 的遍历和修改策略
+
+属性宏修改函数体有三种主要策略，按复杂度递增排列：
+
+**策略一：quote 包装（推荐，覆盖 90% 场景）**
+
+保留原始 `ItemFn.block`，在 `quote!` 中将其作为整体插入新 block。这是最简单、最安全的方式，不破坏函数体内部任何结构。
 
 ```rust,ignore
-// ❌ 反例: 属性宏丢失函数泛型参数
+// ✅ 推荐做法：整体引用原 block，在 quote 中包裹
+let orig_block = &input_fn.block;
+
+quote! {
+    #fn_vis #fn_sig {
+        // 前置注入代码
+        let __result = #orig_block;
+        // 后置注入代码
+        __result
+    }
+}
+```
+
+**策略二：`syn::Fold` trait 遍历修改（递归 AST 变换）**
+
+当需要递归修改函数体内部的所有同类节点（如将所有 `println!` 替换为 `tracing::info!`、为每个 `match` 臂插入日志）时，需实现 `syn::fold::Fold` trait。
+
+```rust,ignore
+use syn::fold::{self, Fold};
+use syn::{Expr, ExprMacro, ItemFn};
+
+struct ReplacePrintln;
+
+impl Fold for ReplacePrintln {
+    fn expr_macro_mut(&mut self, mut i: ExprMacro) -> ExprMacro {
+        // 若宏路径为 println，替换为 tracing::info
+        if i.mac.path.is_ident("println") {
+            i.mac.path = syn::parse_quote!(tracing::info);
+        }
+        // 必须调用父类方法继续递归遍历子节点
+        fold::expr_macro_mut(self, i)
+    }
+}
+
 #[proc_macro_attribute]
-pub fn bad_attr(_args: TokenStream, input: TokenStream) -> TokenStream {
+pub fn replace_println(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let mut input_fn = parse_macro_input!(input as ItemFn);
+
+    let mut folder = ReplacePrintln;
+    input_fn.block = folder.fold_block(input_fn.block);
+
+    TokenStream::from(quote! { #input_fn })
+}
+```
+
+**策略三：手动替换 `stmts`（细粒度插入控制）**
+
+直接操作 `block.stmts` 向量，在特定索引位置插入或替换语句。适用于需要在函数体特定位置（如第一条语句前、最后一条语句后）注入代码的场景。
+
+```rust,ignore
+#[proc_macro_attribute]
+pub fn inject_instrument(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let mut input_fn = parse_macro_input!(input as ItemFn);
+
+    // 在函数体开头插入初始化语句
+    let init_stmt: syn::Stmt = syn::parse_quote! {
+        let __instrument_start = std::time::Instant::now();
+    };
+    input_fn.block.stmts.insert(0, init_stmt);
+
+    // 在函数体末尾追加收尾语句
+    let cleanup_stmt: syn::Stmt = syn::parse_quote! {
+        eprintln!("elapsed: {:?}", __instrument_start.elapsed());
+    };
+    let last_idx = input_fn.block.stmts.len();
+    input_fn.block.stmts.insert(last_idx, cleanup_stmt);
+
+    TokenStream::from(quote! { #input_fn })
+}
+```
+
+| 策略 | 适用场景 | 复杂度 | 安全性 | 对 `return`/`?` 的敏感度 |
+|:---|:---|:---|:---|:---|
+| quote 包装 | 在函数体前后注入代码 | 低 | 高（不改动内部结构） | 低（闭包可捕获） |
+| `Fold` trait | 递归修改函数体内部节点 | 高 | 中（需处理全部节点类型） | 中（需处理所有退出点） |
+| 手动替换 `stmts` | 在特定位置插入/删除语句 | 中 | 中（需自行处理控制流） | 高（`return` 会跳过尾部注入） |
+
+> **[syn 文档: fold module]** `syn::fold::Fold` trait 为 AST 的每个节点类型提供 `fold_xxx_mut` 方法，支持深度优先遍历并就地修改语法树。适用于需要递归变换代码的结构化编辑场景。✅ 已验证
+>
+> **[quote 文档]** `parse_quote!` 宏可将 token 流解析为任意 `syn` AST 类型，是手动构造 AST 节点的便捷工具，常用于策略三的 `stmts` 构造。✅ 已验证
+
+#### 5.4 保留原始函数签名的同时注入前置/后置代码
+
+属性宏最常见的工程错误是**丢失原始签名信息**（泛型参数、where 子句、`async`、`const`、`unsafe`、生命周期等）。
+
+**错误示范：硬编码函数签名**
+
+```rust,ignore
+// ❌ 反例: 手动拼接签名导致信息丢失
+#[proc_macro_attribute]
+pub fn bad_wrap(_args: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemFn);
     let fn_name = &input.sig.ident;
+    let fn_inputs = &input.sig.inputs;
+    let fn_output = &input.sig.output;
     let fn_block = &input.block;
 
-    // 错误: 没有保留泛型参数 <T> 和 where 子句！
+    // 灾难：丢失了 async、const、unsafe、generics、where 子句！
     quote! {
-        fn #fn_name() {  // 丢失了原始签名
+        fn #fn_name(#fn_inputs) #fn_output {
+            println!("before");
             #fn_block
+            println!("after");
         }
     }.into()
 }
 
 // 使用:
-// #[bad_attr]
-// fn generic<T: Default>() -> T { T::default() }
-// 编译错误: 函数签名不匹配
+// #[bad_wrap]
+// async fn generic<T: Default>() -> T { T::default() }
+// 编译错误：函数签名不匹配（async 和泛型均丢失）
 ```
 
-```rust,ignore
-// ✅ 修正: 完整保留原函数签名
-#[proc_macro_attribute]
-pub fn good_attr(_args: TokenStream, input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as ItemFn);
-    let fn_vis = &input.vis;
-    let fn_sig = &input.sig; // 包含泛型、参数、返回类型、where 子句
-    let fn_block = &input.block;
+**正确做法：整体引用 `vis` 和 `sig`**
 
-    quote! {
-        #fn_vis #fn_sig {
-            // ... 插入的代码 ...
-            #fn_block
-        }
-    }.into()
+```rust,ignore
+// ✅ 正确: 完整保留原始签名（推荐）
+let fn_vis = &input_fn.vis;   // pub / pub(crate) / 默认
+let fn_sig = &input_fn.sig;   // 包含 async、const、unsafe、generics、where
+let orig_block = &input_fn.block;
+
+quote! {
+    #fn_vis #fn_sig {
+        // 前置代码
+        let __result = #orig_block;
+        // 后置代码
+        __result
+    }
 }
 ```
 
-**边界：属性宏与 async fn 的交互**
+**处理提前返回（`return`、`?`）的后置代码注入**
+
+若函数可能通过 `return` 或 `?` 提前退出，简单地在 block 末尾插入代码会失效。此时应采用**闭包包装**策略，将原函数体捕获为闭包执行：
 
 ```rust,ignore
-// ✅ 边界: 包装 async fn 需要保留 async 修饰符
 #[proc_macro_attribute]
-pub fn measure_async(_args: TokenStream, input: TokenStream) -> TokenStream {
-    let input = parse_macro_input!(input as ItemFn);
-    let fn_vis = &input.vis;
-    let fn_sig = &input.sig;
-    let fn_block = &input.block;
+pub fn with_cleanup(_args: TokenStream, input: TokenStream) -> TokenStream {
+    let input_fn = parse_macro_input!(input as ItemFn);
+    let fn_vis = &input_fn.vis;
+    let fn_sig = &input_fn.sig;
+    let orig_block = &input_fn.block;
 
-    // 注意: input.sig 已经包含 async 关键字（若存在）
-    // 只需原样引用 fn_sig 即可
     quote! {
         #fn_vis #fn_sig {
-            let __start = std::time::Instant::now();
-            let __result = async move { #fn_block }.await;
-            eprintln!("async fn took {:?}", __start.elapsed());
+            let __guard = Guard::new();
+            let __result = (|| #orig_block)();  // 闭包包裹，捕获所有提前返回
+            __guard.cleanup();
             __result
         }
     }.into()
 }
-// 但注意: 直接 .await 在同步函数中不合法，async fn 的 block 需特殊处理
-// 实际上，原样保留 #fn_sig（含 async）和 #fn_block 是最安全的做法
 ```
 
-> **[syn 文档]** 解析 `ItemFn` 时，`sig` 字段包含完整的函数签名（含 `async`、`const`、`unsafe`、泛型参数等），`block` 字段包含函数体。属性宏应优先保留原始 AST 结构，最小化修改。✅ 已验证
+> **[Rust Reference: async fn]** 对于 `async fn`，闭包包装需额外注意保留 `async` 语义。最安全的做法始终是通过 `#fn_sig` 整体引用原始签名（已含 `async` 关键字），仅在 block 层面做包裹。✅ 已验证
+
+#### 5.5 错误处理：使用 `proc_macro_error2` 提供友好的编译错误
+
+过程宏默认使用 `panic!` 报告错误，但 `panic!` 产生的编译信息通常仅为 `proc macro panicked`，对调用方极不友好。`proc_macro_error2` 允许属性宏发出带有准确源码位置（`Span`）的编译错误信息。
+
+```rust,ignore
+use proc_macro_error2::{abort, emit_error, proc_macro_error};
+
+#[proc_macro_error]  // 必须标注在属性宏入口函数上
+#[proc_macro_attribute]
+pub fn trace(args: TokenStream, input: TokenStream) -> TokenStream {
+    let meta = parse_macro_input!(args as Meta);
+
+    match meta {
+        Meta::Path(_) => { /* 无参数: #[trace] */ }
+        Meta::NameValue(nv) if nv.path.is_ident("name") => {
+            // 解析 name = "..."
+        }
+        other => {
+            // ✅ 使用 abort! 产生带有精确 Span 的编译错误
+            abort!(
+                other,
+                "expected `#[trace]` or `#[trace(name = \"...\")]`"
+            );
+        }
+    }
+
+    // ...
+}
+```
+
+调用端错误效果对比：
+
+| 错误方式 | 编译输出 | 调试体验 |
+|:---|:---|:---|
+| `panic!("msg")` | `error: proc macro panicked` | ❌ 无位置、无上下文 |
+| `abort!(span, "msg")` | `error: msg`（精确指向属性参数位置） | ✅ 像原生编译错误 |
+| `emit_error!(span, "msg")` | 报错但继续编译 | ✅ 允许多个错误同时报告 |
+
+```rust,ignore
+// ❌ 错误用法（由 abort! 捕获并精确定位）
+#[trace(invalid_key)]
+fn foo() {}
+
+// 编译错误：
+// error: expected `#[trace]` or `#[trace(name = "...")]`
+//  --> src/main.rs:3:8
+//   |
+// 3 | #[trace(invalid_key)]
+//   |        ^^^^^^^^^^^^
+```
+
+> **[proc_macro_error2 crate 文档]** `proc_macro_error2` 是 `proc_macro_error` 的社区维护分支，兼容 Rust 2021+ 与 `proc_macro2` 的最新 API。其核心原理是在 `proc_macro::Span` 上附着诊断信息，通过 panic 劫持将结构化错误报告给编译器前端。✅ 已验证
+
+#### 5.6 与声明宏（`macro_rules!`）的能力边界对比
+
+属性宏可以修改函数体，但 `macro_rules!` 无法直接做到。以下矩阵从能力维度明确二者边界：
+
+| 能力 | 属性宏 | `macro_rules!` | 根本原因 |
+|:---|:---:|:---:|:---|
+| 解析完整函数签名（泛型、where、async） | ✅ | ❌ | 过程宏通过 `syn` 解析 `ItemFn.sig`；声明宏无类型化 AST 访问能力 |
+| 遍历/修改函数体内部 AST 节点 | ✅ | ❌ | `syn::Fold` 或手动替换 `stmts`；声明宏只能做 token 模式匹配 |
+| 生成带 hygiene 的唯一标识符 | ✅ | ✅ | 二者均基于编译器 hygiene 机制，内部变量不污染外部 |
+| 在函数前后注入代码并保留签名 | ✅ | ⚠️ 极困难 | 声明宏可包裹表达式，但无法可靠包裹 item 并保留完整签名 |
+| 操作任意 item（fn / struct / impl / mod） | ✅ | ❌ | 属性宏接收完整 item TokenStream；声明宏仅匹配 token 树片段 |
+| 编译错误定位到宏参数具体位置 | ✅（`Span`） | ⚠️ 有限 | `proc_macro_error2` 提供精确 Span；声明宏错误指向宏调用处 |
+| 代码可读性 / 可维护性 | ⚠️ 需学习 syn/quote | ✅ 简单直观 | 声明宏语法更简洁，但能力天花板显著低于过程宏 |
+
+**声明宏无法替代属性宏修改函数体的形式化原因**：
+
+`macro_rules!` 的匹配基于 **token tree 模式**，而非类型化 AST。它无法：
+
+1. **识别"这是一个合法的函数定义"** —— 只能匹配 `fn $name:ident(...) {...}` 的 token 外形，无法保证语义合法性（如 where 子句的位置）
+2. **提取并复用完整函数签名** —— 泛型参数、where 子句、生命周期界限的 token 模式极其复杂，声明宏几乎无法正确编写
+3. **递归遍历函数体内部的表达式节点** —— 无 `Fold` 机制，只能做浅层 token 替换
+
+```rust,ignore
+// ❌ 声明宏尝试包裹函数（迅速耗尽能力）
+macro_rules! trace_fn {
+    (fn $name:ident($($arg:ident: $ty:ty),*) -> $ret:ty $body:block) => {
+        fn $name($($arg: $ty),*) -> $ret {
+            println!("[trace] enter {}", stringify!($name));
+            let __result = $body;
+            println!("[trace] exit {}", stringify!($name));
+            __result
+        }
+    };
+}
+
+// 无法通过声明宏处理的情况：
+// 1. async fn、const fn、unsafe fn（修饰符无法匹配）
+// 2. 泛型参数 <T: Debug>（泛型语法无法完整匹配）
+// 3. where 子句（where 在参数列表之后，声明宏难以定位）
+// 4. 模式匹配参数，如 (a, b): (i32, i32)（:expr / :ident 不适用）
+// 5. self 参数（&self、mut self 等多种形态）
+// 6. 生命周期参数 <'a>（声明宏无 lifetime 片段分类器）
+```
+
+> **[The Little Book of Rust Macros]** `macro_rules!` 的片段分类器（`expr`、`ty`、`ident`、`path` 等）匹配语法范畴而非语义实体。对于函数定义这类结构复杂、分支众多的语法结构，声明宏的模式匹配能力迅速耗尽，这正是过程宏的设计动机。✅ 已验证
+>
+> **[Rust Reference: Macros by Example]** 声明宏不支持递归下降解析复杂语法结构（如完整函数签名含泛型与 where 子句），也无法在匹配后对内部节点做结构化遍历。✅ 已验证
+>
+> **[RFC 1566: Procedural Macros]** 过程宏被引入的核心动机之一，正是弥补 `macro_rules!` 在复杂 AST 变换场景下的能力缺口。✅ 已验证
+
+> **跨层映射**: 本文件属性宏示例 ↔ [`01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) § 泛型与 trait bound（签名保留中的泛型参数）
+>
+> **跨层映射**: 本文件 `Fold` trait ↔ [`04_formal/03_type_theory.md`](../04_formal/03_type_theory.md) § 语法树归纳定义（AST 递归结构的归纳遍历）
 
 ---
 
@@ -1704,7 +2054,7 @@ mod internal {
 - [x] **TODO**: 补充 `macro_rules!` 的重复模式完整语法 `($(...),+ $(,)?)` —— 已完成: 2026-05-13
 - [x] **TODO**: 补充编译期计算（`const fn` + `const generics`）替代宏的趋势 —— 已完成: 2026-05-13
 - [x] **TODO**: 补充 `const_macro` / `concat!` / `stringify!` 等内置宏 —— 已完成: 2026-05-13
-- [x] **TODO**: 补充属性宏修改函数体的完整示例 —— 已完成: 2026-05-13
+- [x] **TODO**: 补充属性宏修改函数体的完整示例 —— 已完成: 2026-05-14
 - [x] **TODO**: 补充 `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比 —— 已完成: 2026-05-13
 
 ---

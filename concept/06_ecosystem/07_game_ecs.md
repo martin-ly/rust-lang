@@ -163,6 +163,273 @@ queue.submit(std::iter::once(encoder.finish()));
 
 > **来源**: [wgpu Documentation] · [WebGPU Spec]
 
+### 2.4 `no_std` 游戏开发与 ECS 约束
+
+> **[来源: Espressif Developer Blog; Bevy Platform Docs; hecs Docs; Shipyard GitHub; Embedded Rust Working Group]** ✅
+
+> **Bloom 层级**: 应用 → 分析
+
+当游戏目标平台从桌面/主机收缩到嵌入式 MCU、复古掌机或 FPGA 仿真器时，`std` 的缺失（`no_std`）成为首要约束。ECS 架构在此环境下的适配不仅涉及 API 裁剪，更触及 Rust 所有权模型的深层表达——从动态堆分配到编译期静态布局，从 `HashMap` 到固定数组，每一处替代都对应着资源受限场景下的工程权衡。
+
+#### 2.4.1 `no_std` 环境下 ECS 的核心约束
+
+`no_std` 环境按内存能力分为两级：
+
+| 层级 | 特征 | ECS 影响 | 典型平台 |
+|:---|:---|:---|:---|
+| **`no_std`（无 `alloc`）** | 无全局分配器；仅栈与静态存储 | 所有实体/组件数量必须在编译期确定；使用 `MaybeUninit` 数组或 `heapless` 容器 | Cortex-M0/M0+、GBA、Playdate |
+| **`no_std` + `alloc`** | 有全局分配器，但无 `std` 的 OS 抽象 | 可使用 `Box`、`Vec`、自定义分配器；但需避免碎片与 OOM | ESP32、RG35XX（Linux）、PocketCHIP |
+
+> **核心约束**: 在无 `alloc` 的极致场景下，ECS 的 `World` 不再能动态增长。实体数量上限、组件类型组合、系统执行顺序都需在编译期或启动期固化。这与 [L1 所有权模型](../01_foundation/01_ownership.md) 中的"资源必须显式拥有"形成强烈共鸣——动态分配的自由被剥夺后，所有权的静态化成为唯一选择。
+
+#### 2.4.2 掌机平台 Rust 游戏开发现状
+
+| 平台 | 硬件特征 | Rust 支持 | ECS 适用性 | 典型绑定/工具链 |
+|:---|:---|:---|:---|:---|
+| **Playdate** | 168 MHz Cortex-M7；16 MB RAM；1-bit 屏幕 | `crankstart` SDK + `no_std` | `hecs` 已验证可用；自定义轻量 ECS 为主 | `crankstart`、`playdate-rs` |
+| **Analogue Pocket** | FPGA 仿真 GBA/GBC；无独立 OS | 通过 `agb` (Rust GBA library) 或 GB 开发工具链 | 固定容量 ECS；`no_std` + 无 `alloc` | `agb` crate、GBDK-Rust |
+| **RG35XX 系列** | ARM Cortex-A9/A53；Linux；256 MB+ RAM | 标准 `std` 可用，但 `no_std` 更轻量 | `hecs`、`shipyard` 均可运行；适合 `no_std` + `alloc` | 交叉编译 `arm-unknown-linux-gnueabihf` |
+| **ESP32 系列** | 240 MHz Xtensa/RISC-V；520 KB SRAM | `esp-hal` + `no_std` + `alloc` | `bevy_ecs` 已移植（2025） | `esp-idf-hal`、`bevy_ecs` |
+
+> **Playdate 生态**: Playdate Developer Forum 上已有开发者使用 `hecs` 构建游戏原型，验证了 `no_std` + `alloc` 下 ECS 的可行性。其 16 MB RAM 对 ECS 极为充裕，但 1-bit 屏幕要求渲染系统与 ECS 解耦，通常采用帧缓冲（framebuffer）+ Sprite 批处理模式。
+
+> **ESP32 突破**: Espressif 于 2025 年发布了基于 `bevy_ecs` 的 `no_std` 迷宫游戏演示，标志着 Bevy 的 ECS 核心已正式下探到 MCU 级别。该演示使用 `embedded-graphics` crate 进行帧缓冲渲染，事件通过 Bevy 的 `EventReader<T>` 分发。
+
+[来源: Espressif Developer Blog — Bevy ECS on ESP32] · [来源: Playdate Developer Forum — Rust Development Thread]
+
+#### 2.4.3 `bevy_ecs` vs `hecs` vs `shipyard` 在 `no_std` 下的兼容性对比
+
+| ECS 库 | `no_std` 支持 | 需 `alloc` | 架构 | 嵌入式适用性 | 备注 |
+|:---|:---|:---|:---|:---|:---|
+| **`bevy_ecs`** | ✅（2025+） | 是 | Archetype | 中高 | 通过 `bevy_platform` 剥离 `std`；功能完整但体积大 |
+| **`hecs`** | ✅ | 是 | Archetype | **高** | 极简 API；依赖极少；Playdate 社区已验证 |
+| **`shipyard`** | ✅（v0.3+） | 可选 | Sparse Set | 高 | 关闭 `std` feature 即可；`parallel` feature 可禁用 |
+| **`specs`** | ❌ | — | Column Storage | 低 | 依赖 `std` 较重，无官方 `no_std` 计划 |
+| **`legion`** | ⚠️ 部分 | 是 | Archetype | 中 | 社区维护；`no_std` 支持不完整 |
+
+> **体积权衡**: `bevy_ecs` 即使在 `no_std` 下仍包含大量泛型单态化代码，对 Flash < 1 MB 的 MCU 可能过重。`hecs` 的代码体积极小，更适合 ROM 受限场景。
+
+> **调度差异**: `shipyard` 的 Sparse Set 在固定容量下实现更简单（只需固定大小的 `dense`/`sparse` 数组），而 `hecs` 的 Archetype 存储在 `no_std` 下仍需 `alloc` 支持 archetype 分桶。对于无 `alloc` 场景，自定义固定容量 Sparse Set 往往是更实际的选择。
+
+[来源: Bevy ECS no_std Discussion #10680] · [来源: hecs Documentation] · [来源: Shipyard GitHub — Cargo Features]
+
+#### 2.4.4 固定容量 ECS（Fixed-capacity Archetype Tables）的设计模式
+
+在极致资源受限环境中（如 GBA、Playdate C API 层、某些 FPGA 仿真器），连 `alloc` 也不可用。此时 ECS 必须退化为**编译期确定容量的静态结构**。
+
+```mermaid
+graph LR
+    A[Entity ID<br/>u8 / u16] --> B[Fixed Archetype Table]
+    B --> C[Component A<br/>[MaybeUninit&lt;T&gt;; MAX]]
+    B --> D[Component B<br/>[MaybeUninit&lt;U&gt;; MAX]]
+    B --> E[Generation<br/>[u8; MAX]]
+```
+
+**设计模式要素**：
+
+| 要素 | 实现策略 | Rust 表达 | 安全边界 |
+|:---|:---|:---|:---|
+| **实体标识** | 索引 + 代际（index + generation） | `Entity { index: u8, generation: u8 }` | 复用检测：代际不匹配时访问失败 |
+| **组件存储** | 固定数组，未初始化槽位用 `MaybeUninit` | `[MaybeUninit<T>; MAX]` | `unsafe` 仅在 `as_mut_ptr()` 解引用处；外层用 `len` 边界保护 |
+| **Archetype 分桶** | 编译期已知组件组合 → 独立 Table | 每个 archetype 一个 struct | 无动态 `TypeId` 查找，直接用类型索引 |
+| **系统调度** | 无并行；单线程顺序执行 | 普通函数调用 | 借用检查由 `&mut World` 在单线程保证 |
+
+> **与 Unsafe 的关系**: 固定容量 ECS 不可避免地触及 `MaybeUninit` 和原始指针，这直接关联到 [L3 Unsafe](../03_advanced/03_unsafe.md) 中的核心原则——`unsafe` 块应被最小化并封装在不可变接口之后。固定 ECS 的 `unsafe` 通常集中在 `query_mut()` 的迭代器实现中，外层 System 完全处于 safe Rust。
+
+```rust,ignore
+// ✅ no_std + 无 alloc：固定容量 Archetype Table 示意
+#![no_std]
+
+use core::mem::MaybeUninit;
+
+const MAX_ENTITIES: usize = 64;
+
+// 单一 archetype：所有实体都有 (Position, Sprite)
+struct FixedArchetype {
+    positions: [MaybeUninit<Position>; MAX_ENTITIES],
+    sprites: [MaybeUninit<Sprite>; MAX_ENTITIES],
+    alive: [bool; MAX_ENTITIES],
+    count: usize,
+}
+
+struct Position { x: i16, y: i16 }
+struct Sprite { tile_index: u8, flags: u8 }
+
+impl FixedArchetype {
+    const fn new() -> Self {
+        Self {
+            // 早期 Rust 版本使用 unsafe { MaybeUninit::uninit().assume_init() }
+            positions: unsafe { MaybeUninit::uninit().assume_init() },
+            sprites: unsafe { MaybeUninit::uninit().assume_init() },
+            alive: [false; MAX_ENTITIES],
+            count: 0,
+        }
+    }
+
+    fn spawn(&mut self, pos: Position, sprite: Sprite) -> Option<u8> {
+        if self.count >= MAX_ENTITIES { return None; }
+        let idx = self.count;
+        self.positions[idx].write(pos);
+        self.sprites[idx].write(sprite);
+        self.alive[idx] = true;
+        self.count += 1;
+        Some(idx as u8)
+    }
+
+    fn query_mut(&mut self) -> impl Iterator<Item = (&mut Position, &mut Sprite)> {
+        self.alive.iter().enumerate()
+            .filter(|(_, &a)| a)
+            .map(|(i, _)| unsafe {
+                // 安全边界：alive[i] == true 保证 MaybeUninit 已初始化
+                (&mut *self.positions[i].as_mut_ptr(),
+                 &mut *self.sprites[i].as_mut_ptr())
+            })
+    }
+}
+```
+
+> **内存布局优势**: 固定容量 Archetype Table 的组件数组在 `.bss` 段静态分配，无运行时分配开销，且保证 SOA（Structure of Arrays）布局，缓存行为完全可预测。
+
+[来源: Embedded Rust Working Group — no_std Patterns] · [来源: Data-Oriented Design Book]
+
+#### 2.4.5 嵌入式图形（Pico8 风格、Framebuffer 渲染）与 ECS 的结合
+
+在 `no_std` 掌机上，GPU 抽象层（如 wgpu）通常不可用，渲染退化为**软件帧缓冲**或**瓦片/精灵硬件**。
+
+| 渲染模式 | 平台示例 | ECS 集成方式 | 组件设计 |
+|:---|:---|:---|:---|
+| **1-bit Framebuffer** | Playdate | `RenderSystem` 查询 `(&Position, &Sprite)`，写入 `&mut [u8]` | `Sprite { bitmap: &'static [u8], width: u8 }` |
+| **Tilemap + Sprite** | GBA、Analogue Pocket | ECS 管理动态 Sprite；背景层由独立系统处理 | `Position`（像素坐标）、`Tile`（瓦片索引） |
+| **Pico8 风格** | fantasy console 仿真 | 固定调色板、128×128 分辨率；ECS 实体对应"画图命令" | `DrawCmd { color: u4, shape: Shape }` |
+
+> **渲染系统的所有权模式**: 帧缓冲作为唯一的全局可变资源，在 ECS 中通常以 `&mut [u8]` 或自定义的 `FrameBuffer` 资源传入 Render System。这与 [L1 所有权](../01_foundation/01_ownership.md) 中的"单一可变引用"原则完全一致——在任何一帧中，只有一个 Render System 能持有帧缓冲的 `&mut`。
+
+```rust,ignore
+// ✅ Playdate 风格 1-bit 渲染系统（no_std + alloc）
+fn render_system(
+    mut framebuffer: ResMut<FrameBuffer>, // &mut FrameBuffer
+    query: Query<(&Position, &Sprite)>,
+) {
+    framebuffer.clear();
+    for (pos, sprite) in query.iter() {
+        blit_1bit(
+            &mut framebuffer.buffer,
+            pos.x as usize, pos.y as usize,
+            sprite.bitmap,
+            sprite.width as usize,
+        );
+    }
+}
+```
+
+> **来源**: [Playdate SDK Documentation] · [embedded-graphics Crate Docs]
+
+#### 2.4.6 `no_std` + `alloc` 下的容器替代方案
+
+当平台有 `alloc` 但无 `std` 时，`Vec`、`Box` 可用，但 `HashMap`（依赖 `std::collections::hash_map::RandomState`）需要替代。
+
+| 标准容器 | `no_std` + `alloc` 替代 | 特性 | 适用场景 |
+|:---|:---|:---|:---|
+| `Vec<T>` | `heapless::Vec<T, N>` | 纯栈分配；`MaybeUninit` 底层；溢出时返回错误 | 已知上限的组件数组、命令队列 |
+| `Vec<T>` | `arrayvec::ArrayVec<T, N>` | 类似 `heapless`；API 更接近 `std::Vec` | 需要 `Deref<Target=[T]>` 的场景 |
+| `Vec<T>` | `TinyVec<[T; N]>` | 栈优先，溢出后自动堆分配（需 `alloc`） | 大小不确定但通常较小的列表 |
+| `HashMap<K, V>` | `hashbrown::HashMap` | 支持 `no_std` + `alloc`；SwissTable 算法 | ECS 的组件类型到存储的映射 |
+| `HashMap<K, V>` | `heapless::IndexMap<K, V, N>` | 纯栈分配；线性探测 | 极小的键值表（< 256 项） |
+| `String` | `heapless::String<N>` | 固定容量 | 实体名称、调试文本 |
+
+> **ECS 存储映射的替代**: 在桌面 Bevy 中，`World` 使用 `HashMap<TypeId, Storage>` 动态管理组件存储。在 `no_std` + `alloc` 下，`hashbrown::HashMap` 可直接替代。但在无 `alloc` 场景，组件类型数量必须在编译期确定，使用泛型结构体或 `enum` 包裹所有可能类型，而非运行时 `TypeId`。
+
+```rust,ignore
+// ✅ 使用 heapless::Vec 作为固定容量命令队列
+use heapless::Vec;
+
+const MAX_COMMANDS: usize = 32;
+
+#[derive(Resource)]
+struct CommandQueue {
+    queue: Vec<Command, MAX_COMMANDS>,
+}
+
+enum Command {
+    Spawn(EntityBundle),
+    Despawn(u8),
+    InsertComponent(u8, ComponentType),
+}
+```
+
+> **来源**: [heapless Documentation] · [arrayvec Documentation] · [TinyVec Documentation] · [hashbrown Documentation]
+
+#### 2.4.7 代码示例：在 `no_std` 环境中使用 `hecs`
+
+以下是一个完整的 `no_std` + `alloc` 掌机游戏循环骨架，使用 `hecs` 作为 ECS 核心。
+
+```rust,ignore
+#![no_std]
+#![feature(lang_items)]
+extern crate alloc;
+
+use alloc::vec::Vec;
+use hecs::World;
+
+// 组件定义
+struct Position { x: i16, y: i16 }
+struct Velocity { dx: i8, dy: i8 }
+struct Player; // 标记组件
+struct Sprite { bitmap: &'static [u8], width: u8 }
+
+// 资源
+struct InputState { buttons: u8 }
+struct FrameBuffer<'a> { buf: &'a mut [u8], width: u16, height: u16 }
+
+// System：玩家输入
+fn player_input(world: &mut World, input: &InputState) {
+    for (_, (vel, _player)) in world.query_mut::<(&mut Velocity, &Player)>() {
+        vel.dx = 0;
+        vel.dy = 0;
+        if input.buttons & 0x01 != 0 { vel.dx = -1; }
+        if input.buttons & 0x02 != 0 { vel.dx = 1; }
+        if input.buttons & 0x04 != 0 { vel.dy = -1; }
+        if input.buttons & 0x08 != 0 { vel.dy = 1; }
+    }
+}
+
+// System：移动
+fn movement_system(world: &mut World) {
+    for (_, (pos, vel)) in world.query_mut::<(&mut Position, &Velocity)>() {
+        pos.x = pos.x.saturating_add(vel.dx as i16);
+        pos.y = pos.y.saturating_add(vel.dy as i16);
+    }
+}
+
+// System：渲染（软件帧缓冲）
+fn render_system(world: &mut World, framebuffer: &mut FrameBuffer) {
+    framebuffer.buf.fill(0);
+    for (_, (pos, sprite)) in world.query_mut::<(&Position, &Sprite)>() {
+        blit_sprite(framebuffer, pos, sprite);
+    }
+}
+
+// 主循环
+fn game_loop(world: &mut World, framebuffer: &mut [u8], input: &InputState) {
+    // 顺序执行系统（单线程，无调度器）
+    player_input(world, input);
+    movement_system(world);
+    render_system(world, &mut FrameBuffer {
+        buf: framebuffer,
+        width: 400,
+        height: 240,
+    });
+}
+
+fn blit_sprite(_fb: &mut FrameBuffer, _pos: &Position, _sprite: &Sprite) {
+    // 平台特定的位图绘制
+}
+```
+
+> **设计要点**: 在 `no_std` 下，`hecs` 的 `World` 仍然使用 `alloc` 进行内部存储，但 API 与桌面完全一致。系统不再由自动调度器并行执行，而是显式顺序调用。这种"框架降级"模式保持了 ECS 的数据-行为分离哲学，同时完全剔除了 `std` 依赖。
+
+[来源: hecs Documentation] · [来源: Espressif Developer Blog — Bevy ECS on ESP32]
+
 ---
 
 ## 三、所有权模型在 ECS 中的表达
@@ -577,7 +844,7 @@ struct PlayerInput {
 
 - [x] **高**: 补充 Bevy 的 `RenderGraph` 与 wgpu 的所有权交互细节 —— 已完成 §六 —— 2026-05-14
 - [x] **高**: 补充确定性模拟（deterministic simulation）在 Rust ECS 中的实现（如回合制/格斗游戏回滚网络） —— 已完成 §七 —— 2026-05-14
-- [ ] **中**: 补充 `no_std` 游戏开发（嵌入式/掌机）的 ECS 约束
+- [x] **中**: 补充 `no_std` 游戏开发（嵌入式/掌机）的 ECS 约束 —— 已完成 §2.4 —— 2026-05-14
 - [ ] **低**: 跟踪 Bevy 0.15+ 的关系型 ECS（relations）对所有权模型的扩展
 
 ---
