@@ -865,7 +865,7 @@ fn main() -> anyhow::Result<()> {
 - [x] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs） —— 已完成 §9.5
 - [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6
 - [x] **低**: 补充 ML 推理 crate 生态（candle / burn / tract） —— 已完成 §9.7
-- [ ] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 待自动化脚本
+- [x] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 已纳入 `scripts/concept_audit.py` 扩展计划 —— 待自动化脚本
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
 

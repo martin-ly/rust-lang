@@ -19,8 +19,8 @@ fn test_ownership_type_system_integration() {
 #[test]
 fn test_async_network_integration() {
     // 模拟异步网络操作
-    use std::time::Duration;
     use std::thread;
+    use std::time::Duration;
 
     let start = std::time::Instant::now();
     thread::sleep(Duration::from_millis(10));
@@ -80,13 +80,11 @@ fn test_algorithm_performance_integration() {
 fn test_macro_design_pattern_integration() {
     // 使用宏实现单例模式
     macro_rules! singleton_counter {
-        () => {
-            {
-                use std::sync::{Arc, Mutex};
-                static COUNTER: std::sync::OnceLock<Arc<Mutex<usize>>> = std::sync::OnceLock::new();
-                COUNTER.get_or_init(|| Arc::new(Mutex::new(0)))
-            }
-        };
+        () => {{
+            use std::sync::{Arc, Mutex};
+            static COUNTER: std::sync::OnceLock<Arc<Mutex<usize>>> = std::sync::OnceLock::new();
+            COUNTER.get_or_init(|| Arc::new(Mutex::new(0)))
+        }};
     }
 
     let counter = singleton_counter!();

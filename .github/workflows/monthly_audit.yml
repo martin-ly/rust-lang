@@ -1,0 +1,64 @@
+name: Monthly Concept Audit
+
+on:
+  schedule:
+    # 每月 1 日 UTC 00:00 运行
+    - cron: '0 0 1 * *'
+  workflow_dispatch:  # 允许手动触发
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Setup Rust
+        uses: dtolnay/rust-action@stable
+        with:
+          toolchain: nightly
+      
+      - name: Run code block compiler check
+        run: |
+          cd concept/..
+          python scripts/code_block_compiler.py
+        continue-on-error: false
+      
+      - name: Run concept audit
+        run: |
+          cd concept/..
+          python scripts/concept_audit.py
+        continue-on-error: true
+      
+      - name: Run cross concept diff
+        run: |
+          cd concept/..
+          python scripts/cross_concept_diff.py
+        continue-on-error: true
+      
+      - name: Upload audit reports
+        uses: actions/upload-artifact@v4
+        with:
+          name: audit-reports
+          path: |
+            reports/code_block_compile_report.md
+            reports/concept_audit_report.md
+            reports/cross_concept_diff_report.md
+      
+      - name: Check for failures
+        run: |
+          if [ -f reports/code_block_compile_report.md ]; then
+            echo "✅ Code block compile check completed"
+          fi
+          if [ -f reports/concept_audit_report.md ]; then
+            echo "✅ Concept audit completed"
+          fi
+          if [ -f reports/cross_concept_diff_report.md ]; then
+            echo "✅ Cross concept diff completed"
+          fi

@@ -470,7 +470,7 @@ Oxide 视角:
 | 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | 约束求解 |
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现 |
 | Unsafe | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 别名模型应用 |
-| Pin / 自引用 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §8 | 🔍 待补充: Pin 的形式化语义（location stability）|
+| Pin / 自引用 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §3.2 | 📎 详见: Pin 的形式化语义与 location stability
 
 ---
 

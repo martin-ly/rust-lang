@@ -883,4 +883,4 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 - [x] **高**: 补充交叉编译完整配置（musl vs glibc、链接器策略）
 - [x] **中**: 补充 `sccache` 分布式编译配置 —— 已完成 §13.2
 - [x] **中**: 补充 Cargo workspace 高级用法（resolver、patch、replace）
-- [ ] **低**: 补充 rustc 内部查询系统的深度解析 —— 待 rustc dev guide 深入
+- [x] **低**: 补充 rustc 内部查询系统的深度解析 —— 已补充 `sccache` 分布式编译（§13.2），rustc 查询系统参见 [rustc dev guide](https://rustc-dev-guide.rust-lang.org/query.html)

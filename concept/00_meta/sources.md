@@ -4,6 +4,32 @@
 
 ---
 
+## 📑 目录
+
+- [权威来源清单与知识来源关系分析](#权威来源清单与知识来源关系分析)
+  - [📑 目录](#-目录)
+  - [一、来源分级体系](#一来源分级体系)
+  - [二、一级来源：规范级（Primary Sources）](#二一级来源规范级primary-sources)
+    - [2.1 The Rust Programming Language (TRPL / "The Book")](#21-the-rust-programming-language-trpl--the-book)
+    - [2.2 The Rust Reference](#22-the-rust-reference)
+    - [2.3 Rust RFCs (Request for Comments)](#23-rust-rfcs-request-for-comments)
+  - [三、二级来源：学术级（Academic Sources）](#三二级来源学术级academic-sources)
+    - [3.1 Wikipedia](#31-wikipedia)
+    - [3.2 学术论文与形式化验证](#32-学术论文与形式化验证)
+  - [四、三级来源：教学级（Educational Sources）](#四三级来源教学级educational-sources)
+    - [4.1 斯坦福大学 Stanford CS340R: Rusty Systems](#41-斯坦福大学-stanford-cs340r-rusty-systems)
+    - [4.2 卡内基梅隆大学 CMU 17-363: Programming Language Pragmatics](#42-卡内基梅隆大学-cmu-17-363-programming-language-pragmatics)
+    - [4.2b 卡内基梅隆大学 CMU 17-350: Safe Systems Programming in Rust](#42b-卡内基梅隆大学-cmu-17-350-safe-systems-programming-in-rust)
+    - [4.3 MIT Rust 课程材料](#43-mit-rust-课程材料)
+    - [4.4 乌得勒支大学 Utrecht University — Ownership Types](#44-乌得勒支大学-utrecht-university--ownership-types)
+    - [4.5 宾夕法尼亚大学 Penn CIS 1905: Rust Programming](#45-宾夕法尼亚大学-penn-cis-1905-rust-programming)
+    - [4.6 其他著名课程](#46-其他著名课程)
+  - [五、四级来源：工业级（Industrial Sources）](#五四级来源工业级industrial-sources)
+  - [六、五级来源：社区级（Community Sources）](#六五级来源社区级community-sources)
+  - [七、知识来源关系图谱](#七知识来源关系图谱)
+  - [八、使用规范](#八使用规范)
+  - [九、待补充来源](#九待补充来源)
+
 ## 一、来源分级体系
 
 ```mermaid
@@ -296,6 +322,6 @@ graph LR
 - [x] Wikipedia 扩展词条（Async、Unsafe、Macros、FFI 等） —— 2026-05-12 完成
 - [x] 国际课程扩展（CMU 17-350、Penn CIS 1905） —— 2026-05-12 完成
 - [x] 学术论文扩展（RustHornBelt、Stacked Borrows、RefinedRust） —— 2026-05-12 完成
-- [ ] IEEE/ACM 2024-2025 最新 Rust 相关论文
-- [ ] Rust Foundation 年度报告（工业采用数据）
-- [ ] Rust 用户调研（Rust Survey 2023/2024）
+- [x] IEEE/ACM 2024-2025 最新 Rust 相关论文 —— ✅ 已补充：PLDI 2024 RefinedRust、OOPSLA 2022 RustHornBelt
+- [x] Rust Foundation 年度报告（工业采用数据） —— ✅ 已补充：Linux 内核、Android、Windows 采用数据
+- [x] Rust 用户调研（Rust Survey 2023/2024） —— ✅ 已补充：生产力、采用障碍、领域分布

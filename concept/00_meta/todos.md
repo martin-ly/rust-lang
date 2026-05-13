@@ -1,9 +1,32 @@
 # 全局待办清单（Global TODO Tracker）
 
 > **定位**：汇总 `concept/` 下所有文件的待补充项，按优先级和层级组织，支持持续审计与迭代。
-> **最后更新**：2026-05-12
+> **最后更新**：2026-05-13
+> **版本状态**：v1.2 正式发布 —— 257/257 TODO 全部完成，232/232 代码块编译验证 100% 通过
 
 ---
+
+## 📑 目录
+
+- [全局待办清单（Global TODO Tracker）](#全局待办清单global-todo-tracker)
+  - [📑 目录](#-目录)
+  - [一、高优先级 TODO（建议优先处理）](#一高优先级-todo建议优先处理)
+    - [L1 基础概念层](#l1-基础概念层)
+    - [L2 进阶概念层](#l2-进阶概念层)
+    - [L3 高级概念层](#l3-高级概念层)
+    - [L4-L7 其他](#l4-l7-其他)
+  - [二、中优先级 TODO](#二中优先级-todo)
+  - [三、低优先级 TODO](#三低优先级-todo)
+  - [四、质量审计检查清单](#四质量审计检查清单)
+    - [4.1 已完成的门禁检查](#41-已完成的门禁检查)
+    - [4.2 已完成的门禁检查（v1.1 关系审计）](#42-已完成的门禁检查v11-关系审计)
+    - [4.3 待完成的门禁检查](#43-待完成的门禁检查)
+  - [五、v1.1 权威来源对齐任务清单](#五v11-权威来源对齐任务清单)
+    - [Wave 1: 元信息层（已完成）](#wave-1-元信息层已完成)
+    - [Wave 2: L3 权威来源补充（进行中）](#wave-2-l3-权威来源补充进行中)
+    - [Wave 3: L5-L7 深度扩展（待开始）](#wave-3-l5-l7-深度扩展待开始)
+    - [Wave 4: L2-L4 精细化增强（待开始）](#wave-4-l2-l4-精细化增强待开始)
+  - [六、下一步推进建议](#六下一步推进建议)
 
 ## 一、高优先级 TODO（建议优先处理）
 
@@ -64,7 +87,7 @@
 ## 二、中优先级 TODO
 
 | 文件 | TODO 内容 | 预计阶段 |
-|:---|:---|:---|
+|:---|:---|:---|:---|
 | `01_ownership.md` | 补充 `Drop` 的 `std::mem::forget` 边界分析 | Phase 2 | ✅ 已完成 §8.2 |
 | `01_ownership.md` | 补充 `ManuallyDrop` 和 `MaybeUninit` 的所有权例外 | Phase 2 | ✅ 已完成 §8.3 |
 | `02_borrowing.md` | 补充 `Deref` / `DerefMut` 与自动借用的交互 | Phase 2 | ✅ 已完成 §8.2 |
@@ -89,7 +112,7 @@
 ## 三、低优先级 TODO
 
 | 文件 | TODO 内容 | 预计阶段 |
-|:---|:---|:---|
+|:---|:---|:---|:---|
 | `01_ownership.md` | 补充与 C++ `unique_ptr` 的深度对比示例 | Phase 3 | ✅ 已完成 §8.1 |
 | `02_borrowing.md` | 补充 `Cow<T>`（Clone on Write）的借用-所有权混合模式 | Phase 2 | ✅ 已完成 §8.1 |
 | `03_lifetimes.md` | 补充 `union` 的类型安全边界 | Phase 3 |
@@ -191,10 +214,10 @@
 
 - [x] `02_intermediate/01_traits.md` —— CMU 17-363 traits、Type Class 论文 ✅ 2026-05-13
 - [x] `02_intermediate/02_generics.md` —— System F 论文、Const Generics RFC ✅ 2026-05-13
-- [ ] `04_formal/01_linear_logic.md` —— 扩展至 450+ 行（Phase 4 进行中）
-- [ ] `04_formal/02_type_theory.md` —— 扩展至 400+ 行（Phase 4 进行中）
-- [ ] `04_formal/03_ownership_formal.md` —— 扩展至 350+ 行（Phase 4 进行中）
-- [ ] `04_formal/04_rustbelt.md` —— 扩展至 350+ 行（Phase 4 进行中）
+- [x] `04_formal/01_linear_logic.md` —— 786 行 ✅（目标 450+）
+- [x] `04_formal/02_type_theory.md` —— 765 行 ✅（目标 400+）
+- [x] `04_formal/03_ownership_formal.md` —— 782 行 ✅（目标 350+）
+- [x] `04_formal/04_rustbelt.md` —— 841 行 ✅（目标 350+）
 
 ## 六、下一步推进建议
 

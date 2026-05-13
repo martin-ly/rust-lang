@@ -6,6 +6,21 @@
 
 ---
 
+## 📑 目录
+
+- [L1 基础概念层（Foundation）](#l1-基础概念层foundation)
+  - [📑 目录](#-目录)
+  - [一、本层概念关系图（完整版）](#一本层概念关系图完整版)
+    - [1.1 概念间语义链接](#11-概念间语义链接)
+    - [1.2 学习路径的严格依赖](#12-学习路径的严格依赖)
+  - [二、文件索引与关系](#二文件索引与关系)
+  - [三、课程对齐路径](#三课程对齐路径)
+  - [四、形式化层级定位（理论-模型-实践）](#四形式化层级定位理论-模型-实践)
+  - [五、本层定理一致性概览](#五本层定理一致性概览)
+  - [六、认知路径（从直觉到形式化）](#六认知路径从直觉到形式化)
+  - [七、待创建内容](#七待创建内容)
+  - [八、跨层出口](#八跨层出口)
+
 ## 一、本层概念关系图（完整版）
 
 ```mermaid
@@ -157,9 +172,9 @@ Type System（理解"类型即证明"）
 
 ## 七、待创建内容
 
-- [ ] `05_stack_heap.md` —— Stack vs Heap 内存模型（可与 Ownership 合并或独立）
-- [ ] `06_slice_string.md` —— Slice 与 String 类型详解
-- [ ] `07_pattern_matching.md` —— Pattern Matching 完整分析
+- [x] `05_stack_heap.md` —— Stack vs Heap 内存模型 —— 已融入 `01_ownership.md` §3 和 `03_memory_management.md` §5.9
+- [x] `06_slice_string.md` —— Slice 与 String 类型详解 —— 已融入 `02_borrowing.md` §8.4 和 `03_memory_management.md` §5.9
+- [x] `07_pattern_matching.md` —— Pattern Matching 完整分析 —— 已融入 `04_type_system.md` §11.5（Discriminant）和 `02_borrowing.md`
 
 ---
 

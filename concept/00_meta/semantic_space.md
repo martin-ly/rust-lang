@@ -6,6 +6,59 @@
 
 ---
 
+## 📑 目录
+
+- [Rust 表征空间（Semantic / Representational Space）](#rust-表征空间semantic--representational-space)
+  - [📑 目录](#-目录)
+  - [变更日志](#变更日志)
+  - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
+    - [第 1 步：什么是表征空间？](#第-1-步什么是表征空间)
+    - [第 2 步：Rust 的表征空间为什么是这些算子？](#第-2-步rust-的表征空间为什么是这些算子)
+    - [第 3 步：能表达和不能表达的边界在哪？](#第-3-步能表达和不能表达的边界在哪)
+    - [第 4 步：等价表达怎么选择？](#第-4-步等价表达怎么选择)
+    - [第 5 步：机制组合有什么约束？](#第-5-步机制组合有什么约束)
+    - [第 6 步：表征空间会扩展吗？](#第-6-步表征空间会扩展吗)
+  - [一、表征空间的定义（Definition of Representational Space）](#一表征空间的定义definition-of-representational-space)
+    - [1.1 什么是表征空间？](#11-什么是表征空间)
+    - [1.2 Rust 表征空间的算子](#12-rust-表征空间的算子)
+    - [1.3 算子之间的交互约束](#13-算子之间的交互约束)
+  - [二、语义封闭性（Semantic Closure）](#二语义封闭性semantic-closure)
+    - [2.1 封闭世界假设](#21-封闭世界假设)
+    - [2.2 Unsafe：逃逸舱口而非破坏者](#22-unsafe逃逸舱口而非破坏者)
+    - [2.3 类型系统的图灵完备性](#23-类型系统的图灵完备性)
+    - [2.4 不是 Total 的，但是定义时错误的](#24-不是-total-的但是定义时错误的)
+  - [三、能表达 vs 不能表达的边界（Expressibility Boundary）](#三能表达-vs-不能表达的边界expressibility-boundary)
+    - [3.1 三维分类框架](#31-三维分类框架)
+    - [3.2 能且高效表达（Sweet Spot）](#32-能且高效表达sweet-spot)
+    - [3.3 能但低效/痛苦表达](#33-能但低效痛苦表达)
+    - [3.4 不能表达 / 故意排除](#34-不能表达--故意排除)
+    - [3.5 未来扩展：表征空间的演化](#35-未来扩展表征空间的演化)
+    - [3.5.1 Const Trait 与 Generic Const Items：编译期表达力的扩展](#351-const-trait-与-generic-const-items编译期表达力的扩展)
+    - [3.5.2 Effects System：控制流表征空间的统一](#352-effects-system控制流表征空间的统一)
+  - [四、等价表达的语义保持（Equivalent Expressions \& Semantic Preservation）](#四等价表达的语义保持equivalent-expressions--semantic-preservation)
+    - [4.1 等价表达谱系](#41-等价表达谱系)
+    - [4.2 等价性判定：继承 → Trait + 组合](#42-等价性判定继承--trait--组合)
+    - [4.3 等价性判定：异常 → Result](#43-等价性判定异常--result)
+    - [4.4 等价性判定：虚函数 → enum vs dyn Trait](#44-等价性判定虚函数--enum-vs-dyn-trait)
+    - [4.5 等价性判定：GC → 所有权 + Rc/Arc](#45-等价性判定gc--所有权--rcarc)
+    - [4.6 形式化验证工具的语义保持保证](#46-形式化验证工具的语义保持保证)
+  - [五、机制组合的语义空间（Combinatorial Semantic Space）](#五机制组合的语义空间combinatorial-semantic-space)
+    - [5.1 基础算子的代数表示](#51-基础算子的代数表示)
+    - [5.2 组合爆炸与约束](#52-组合爆炸与约束)
+    - [5.3 组合选择决策树](#53-组合选择决策树)
+  - [六、跨语言表征空间对比](#六跨语言表征空间对比)
+    - [6.1 五维对比矩阵](#61-五维对比矩阵)
+    - [6.2 表征空间的包含关系](#62-表征空间的包含关系)
+    - [6.3 Rust 与依赖类型的边界](#63-rust-与依赖类型的边界)
+    - [6.4 知识体系导航：从元层到实践层](#64-知识体系导航从元层到实践层)
+  - [七、反命题分析（Anti-Propositions）](#七反命题分析anti-propositions)
+    - [7.1 "Rust 可以表达任何程序"](#71-rust-可以表达任何程序)
+    - [7.2 "safe Rust 的封闭性限制了表达力"](#72-safe-rust-的封闭性限制了表达力)
+    - [7.3 "Rust 的等价表达与其他语言完全等价"](#73-rust-的等价表达与其他语言完全等价)
+  - [八、定理一致性矩阵（Assertion Consistency Matrix）](#八定理一致性矩阵assertion-consistency-matrix)
+  - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
+  - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
+
 ## 变更日志
 
 - v1.0 (2026-05-13): 初始版本——表征空间定义、语义封闭性、能/不能表达边界、等价表达谱系、机制组合代数、跨语言对比、认知路径
@@ -1014,5 +1067,5 @@ graph TD
 - [x] **高**: 补充 const trait 和 generic const items 的表征能力扩展分析 — v1.1 §3.5.1
 - [x] **中**: 补充 Rust 与 dependent types（Idris、Agda）的表征空间对比 — v1.1 §6.3
 - [x] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用 — v1.1 §4.6
-- [ ] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出）
+- [x] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出） —— 已纳入 `concept_index.json`（53 文件索引）
 - [x] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新 — v1.1 Phase 4
