@@ -183,8 +183,10 @@ fn demo_field_offset_access() {
     unsafe {
         // 直接获取整个结构体引用
         let pkt_ref: &Packet = base.as_ref_unchecked();
-        println!("  完整包: magic={:08X}, version={}, len={}",
-                 pkt_ref.magic, pkt_ref.version, pkt_ref.payload_len);
+        println!(
+            "  完整包: magic={:08X}, version={}, len={}",
+            pkt_ref.magic, pkt_ref.version, pkt_ref.payload_len
+        );
 
         // 获取 version 字段的引用（通过指针算术）
         let version_ptr: *const u16 = (base as *const u8).add(4) as *const u16;

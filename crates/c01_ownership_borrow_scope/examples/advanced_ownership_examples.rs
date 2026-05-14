@@ -147,12 +147,9 @@ pub mod ownership_sharing_patterns {
 
         /// 获取根节点 / Get root node
         pub fn get_root(&self) -> Option<Rc<RefCell<Self>>> {
-            if let Some(parent_weak) = &self.parent
-                && let Some(parent_strong) = parent_weak.upgrade()
-            {
-                return parent_strong.borrow().get_root();
-            }
-            None
+            let parent_weak = self.parent.as_ref()?;
+            let parent_strong = parent_weak.upgrade()?;
+            parent_strong.borrow().get_root()
         }
     }
 
@@ -192,7 +189,7 @@ pub mod ownership_sharing_patterns {
 
         // 演示弱引用 / Demonstrate weak references
         if let Some(first_child) = root.borrow().children.first() {
-            let weak_ref = Rc::downgrade(first_child);
+            let weak_ref: Weak<RefCell<SharedNode>> = Rc::downgrade(first_child);
             println!("Weak reference count: {}", Rc::weak_count(first_child));
 
             if let Some(strong_ref) = weak_ref.upgrade() {

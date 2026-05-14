@@ -15,7 +15,7 @@
 //! cargo run --example layout_api_demo -p c01_ownership_borrow_scope
 //! ```
 
-use std::alloc::{alloc, dealloc, Layout};
+use std::alloc::{Layout, alloc, dealloc};
 use std::mem;
 
 // ==================== 示例 1: Layout::dangling_ptr ====================
@@ -28,10 +28,13 @@ fn demo_dangling_ptr() {
     println!("--- Layout::dangling_ptr ---");
 
     let layout_i32 = Layout::new::<i32>();
-    let dangling = layout_i32.dangling_ptr().as_ptr();
+    let dangling: *mut u8 = layout_i32.dangling_ptr().as_ptr();
 
     println!("  Layout::new::<i32>().dangling_ptr() = {:p}", dangling);
-    println!("  指针对齐: {}", (dangling as usize).is_multiple_of(mem::align_of::<i32>()));
+    println!(
+        "  指针对齐: {}",
+        (dangling as usize).is_multiple_of(mem::align_of::<i32>())
+    );
 
     // dangling_ptr 返回 NonNull<u8>，保证非空且对齐正确
     assert!(!dangling.is_null());
@@ -39,8 +42,11 @@ fn demo_dangling_ptr() {
 
     // ZST 场景: Vec<T> 在空时使用 dangling ptr 作为起始指针
     let layout_zst = Layout::new::<()>();
-    let zst_dangling = layout_zst.dangling_ptr().as_ptr();
-    println!("  Layout::new::<()>().dangling_ptr() = {:p} (ZST)", zst_dangling);
+    let zst_dangling: *mut u8 = layout_zst.dangling_ptr().as_ptr();
+    println!(
+        "  Layout::new::<()>().dangling_ptr() = {:p} (ZST)",
+        zst_dangling
+    );
 }
 
 // ==================== 示例 2: Layout::repeat ====================
@@ -58,11 +64,19 @@ fn demo_layout_repeat() {
     // Item 大小为 12，但对齐为 8，所以实际占用 16 字节（含尾部填充）
 
     let item_layout = Layout::new::<Item>();
-    println!("  Item 布局: size={}, align={}", item_layout.size(), item_layout.align());
+    println!(
+        "  Item 布局: size={}, align={}",
+        item_layout.size(),
+        item_layout.align()
+    );
 
     // repeat(5): 5 个 Item 的数组布局
     let (array_layout, item_offset) = item_layout.repeat(5).unwrap();
-    println!("  5 个 Item 的数组布局: size={}, align={}", array_layout.size(), array_layout.align());
+    println!(
+        "  5 个 Item 的数组布局: size={}, align={}",
+        array_layout.size(),
+        array_layout.align()
+    );
     println!("  每个 Item 的偏移步长: {} 字节", item_offset);
 
     // 验证: 步长 >= Item 大小，且是对齐的倍数
@@ -86,7 +100,11 @@ fn demo_layout_repeat_packed() {
     }
 
     let header_layout = Layout::new::<Header>();
-    println!("  Header 布局: size={}, align={}", header_layout.size(), header_layout.align());
+    println!(
+        "  Header 布局: size={}, align={}",
+        header_layout.size(),
+        header_layout.align()
+    );
 
     // repeat_packed: 3 个 Header 紧密排列，总大小 = size * 3
     let packed_layout = header_layout.repeat_packed(3).unwrap();
@@ -152,7 +170,12 @@ fn demo_custom_allocator() {
         let ptr = alloc(block_layout);
         assert!(!ptr.is_null());
 
-        println!("  分配块: {:p}, 大小={}, 步长={}", ptr, block_layout.size(), step);
+        println!(
+            "  分配块: {:p}, 大小={}, 步长={}",
+            ptr,
+            block_layout.size(),
+            step
+        );
 
         // 初始化元素
         for i in 0..10 {
@@ -193,7 +216,11 @@ fn demo_ffi_parsing() {
     let point_layout = Layout::new::<RawPoint>();
     let array_layout = point_layout.repeat_packed(3).unwrap();
 
-    println!("  RawPoint: size={}, align={}", mem::size_of::<RawPoint>(), mem::align_of::<RawPoint>());
+    println!(
+        "  RawPoint: size={}, align={}",
+        mem::size_of::<RawPoint>(),
+        mem::align_of::<RawPoint>()
+    );
     println!(
         "  3 个 RawPoint 紧凑数组布局: size={}, align={}",
         array_layout.size(),
