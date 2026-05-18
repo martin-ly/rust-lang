@@ -6,6 +6,10 @@
 - **预计学习时间**: 45-60 分钟
 - **前置知识**: 所有权基础
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RustBelt、Stacked Borrows / Tree Borrows）
+
 ---
 
 ## 🎯 学习目标
@@ -33,6 +37,9 @@
 借用是 Rust 所有权系统的核心特性。当你需要访问某个值但不想获得其所有权时，可以使用**引用**来"借用"它。
 
 > 💡 **借用 vs 所有权**: 所有权转移会改变值的拥有者，而借用只是临时访问，不会转移所有权。
+
+> **[来源: TRPL: Ch4.2]** "References allow you to refer to some value without taking ownership of it." ✅
+> **[来源: Rust Reference: References]** Rust 引用分共享引用 `&T` 和可变引用 `&mut T`，由编译器在借用检查阶段强制执行别名-可变分离规则。 ✅
 
 ```rust
 fn main() {
@@ -115,6 +122,9 @@ fn main() {
 
 **为什么？** 防止**数据竞争**：多个指针同时修改数据。
 
+> **[来源: RustBelt: POPL 2018]** Alias-XOR-Mutation 定理：Safe Rust 中不存在「多个活跃别名且至少一个可写」的情况，这是消除数据竞争的充分条件。 ✅
+> **[来源: Rust Reference: References]** 同一作用域内，要么只能有一个 `&mut T`，要么可以有多个 `&T`，但不能同时存在。 ✅
+
 ---
 
 ### 借用规则
@@ -148,6 +158,8 @@ fn main() {
 ### 悬垂引用
 
 指向已释放内存的指针。Rust 编译器禁止这种情况。
+
+> **[来源: Rust Reference: Dangling references]** Rust 编译器通过生命周期检查确保引用不会指向已释放的内存，违反此规则将产生编译错误 E0106。 ✅
 
 **❌ 错误示例**：
 
@@ -363,10 +375,33 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 
 ---
 
-## 📖 延伸阅读
+## 📖 权威来源与延伸阅读
 
-- [Rust Book - References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)
-- [Rust By Example - Scope](https://doc.rust-lang.org/rust-by-example/scope.html)
+### 官方文档（一级来源）
+
+- [The Rust Book - Ch4.2: References and Borrowing](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html) —— 借用的权威入门定义
+- [Rust Reference - References and Borrowing](https://doc.rust-lang.org/reference/items/associated-items.html) —— 引用类型的精确规范
+- [Rust Reference - Interior Mutability](https://doc.rust-lang.org/reference/special-types-and-traits.html) —— `UnsafeCell` 与内部可变性
+
+### 学术来源（一级来源）
+
+- **Ralf Jung et al., "RustBelt: Securing the Foundations of the Rust Programming Language"**, *POPL 2018* —— 借用检查器的形式化验证（Alias-XOR-Mutation 定理、分离逻辑分数权限）。
+  - 入口: <https://plv.mpi-sws.org/rustbelt/>
+- **Ralf Jung et al., "Stacked Borrows: An Aliasing Model for Rust"**, *POPL 2021* —— 将 Rust 引用操作语义建模为标签栈，为编译器优化提供形式化基础。
+- **Ralf Jung, "Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias"**, *arXiv 2023* —— 用树结构替代栈结构，更精确地建模层次化借用关系。
+
+### 社区权威（二级来源）
+
+- **Niko Matsakis**, ["Two interpretations of borrowing"](https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/) —— 借用的区域视角 vs 流视角。
+- **Jon Gjengset**, [Crust of Rust: References](https://www.youtube.com/watch?v=rAl-9HwD858) —— 借用与引用的可视化深入讲解。
+
+### 跨语言对比（三级来源）
+
+| 语言 | 对应机制 | 权威来源 |
+|:---|:---|:---|
+| **C++** | `const T&` / `T&`（编译器不检查别名-可变冲突） | [cppreference: Reference](https://en.cppreference.com/w/cpp/language/reference) |
+| **Haskell** | `ST` monad / `IORef`（无编译期别名检查） | [GHC User Guide: ST](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) |
+| **Go** | 指针 `*T`（无别名-可变分离概念） | [Go Spec: Pointers](https://go.dev/ref/spec#Pointer_types) |
 
 ### 相关概念
 

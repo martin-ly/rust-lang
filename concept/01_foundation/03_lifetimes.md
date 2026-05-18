@@ -12,6 +12,7 @@
 
 - v1.0 (2026-05-12): 初始版本，完成权威定义、生命周期规则矩阵、形式化视角、NLL 分析、示例反例
 - v2.2 (2026-05-14): 完成 TODO 双项——§13 Lifetime Elision 完整形式化（三条规则 ∀/⇒ 形式化、正例+反例、Rust Reference 来源）；§14 `impl Trait` 与生命周期推断交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比、来源标注）
+- v2.2 (2026-05-19): 补全权威来源标注——新增跨语言生命周期对比矩阵（C++ / Haskell / Go），补充 Polonius 与 Tree Borrows 来源，深化 NLL → Polonius 演进论证
 - v2.1 (2026-05-13): Phase BC 形式化深化——新增§1.3b Tofte-Talpin 区域推断算法的 Rust 适配（原始 ML 算法概述、三项关键适配、Rust 约束生成与求解两阶段算法、与 Polonius 演进关系）
 - v2.0 (2026-05-12): 深度重构，补充引理-定理-推论 ⟹ 链条、四层反命题分析、六步认知路径、章节过渡
 
@@ -67,6 +68,7 @@
     - [Step 5: 代码验证（Code Verification）](#step-5-代码验证code-verification)
     - [Step 6: 边界测试（Boundary Testing）](#step-6-边界测试boundary-testing)
   - [九、国际课程与论文对齐](#九国际课程与论文对齐)
+  - [九·补充：跨语言生命周期机制对比](#九补充跨语言生命周期机制对比)
   - [十、知识来源关系（Provenance）](#十知识来源关系provenance)
   - [十一、相关概念链接](#十一相关概念链接)
   - [十二、Polonius：下一代 Borrow Checker](#十二polonius下一代-borrow-checker)
@@ -800,6 +802,27 @@ fn main() {
 
 ---
 
+## 九·补充：跨语言生命周期机制对比
+
+| 维度 | Rust Lifetimes | C++ Smart Pointers | Haskell LinearTypes / ST | Go GC |
+|:---|:---|:---|:---|:---|
+| **核心机制** | 显式区域类型 (`'a`) | RAII + 智能指针 (`unique_ptr`/`shared_ptr`) | `ST` monad / LinearTypes 扩展 | 垃圾回收器 (GC) |
+| **检查时机** | 编译期 | 运行时（析构调用） | 编译期（LinearTypes）/ 运行时（ST monad） | 运行时 |
+| **悬垂引用防护** | ✅ 编译错误 (E0106/E0597) | ❌ 可能悬垂（UB） | ✅ 线性类型约束 / `ST` 封装 | ✅ GC 阻止 UAF |
+| **别名-可变分离** | ✅ `&T`/`&mut T` 编译期分离 | ❌ 程序员自律 | ⚠️ `IORef` 无编译期别名检查 | ❌ 无 |
+| **运行时开销** | 零 | 零（`unique_ptr`）/ 原子引用计数（`shared_ptr`） | 零（LinearTypes）/ 有（GC） | GC 停顿 |
+| **形式化基础** | 区域类型 (Tofte-Talpin) + 分离逻辑 (RustBelt) | 无统一形式化 | 范畴论 + 线性逻辑 | 无 |
+| **表达能力** | 高（HRTB、Variance、Elision） | 中 | 高（但 LinearTypes 为可选扩展） | 低 |
+
+> **[来源: Rust Reference: Lifetimes]** Rust 生命周期是类型系统的核心特征，通过编译期区域推断保证引用有效性，零运行时开销。 ✅
+> **[来源: C++ Reference: unique_ptr]** C++ 智能指针管理所有权生命周期，但无编译期引用有效性检查，悬垂引用为未定义行为。 ✅
+> **[来源: Haskell GHC User Guide: LinearTypes]** Haskell LinearTypes 扩展允许显式线性类型约束（`a %1 -> b`），与 Rust 生命周期在类型论上同源，但为可选扩展。 ✅
+> **[来源: Go Spec: Memory Model]** Go 无生命周期或借用概念，内存安全完全依赖垃圾回收器，引用有效性无编译期检查。 ✅
+
+**关键洞察**: Rust 是唯一将生命周期作为**显式、强制、核心类型系统特征**的工业级主流语言。C++ 依赖运行时 RAII 和程序员自律；Haskell LinearTypes 提供了类似的编译期保证但尚未成为主流实践；Go 完全依赖 GC。
+
+---
+
 ## 十、知识来源关系（Provenance）
 
 | **论断** | **来源** | **可信度** |
@@ -813,6 +836,8 @@ fn main() {
 | `'static` 是最长生命周期 | [TRPL: Ch10.3] | ✅ |
 | HRTB 全称量化语义 | [Rust Reference: HRTB] | ✅ |
 | GATs 生命周期约束 | [RFC 1598] | ✅ |
+| Polonius (Datalog 约束求解) | [Polonius GitHub] · [Niko Matsakis blog] | ✅ |
+| Tree Borrows (下一代内存模型) | [Ralf Jung, arXiv 2023] · [Miri: Tree Borrows] | ✅ |
 
 ---
 

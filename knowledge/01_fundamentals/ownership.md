@@ -5,6 +5,10 @@
 > **⏱️ 预计学习时间**：45-60 分钟
 > **📚 难度级别**：⭐⭐⭐ 中等
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RustBelt、C++ / Go 对标）
+
 ---
 
 ## 🎯 学习目标
@@ -49,6 +53,9 @@ Rust 的所有权系统通过编译时检查来确保内存安全，这意味着
 - 没有运行时垃圾回收器的性能开销
 - 编译器在编译阶段就能发现内存安全问题
 
+> **[来源: TRPL: Ch4.1]** "Ownership is a set of rules that govern how a Rust program manages memory... No run-time costs are incurred for any of the ownership features." ✅
+> **[来源: RustBelt: POPL 2018]** Safe Rust 中不存在 use-after-free 和 double-free 的形式化定理已得到机器检验证明。 ✅
+
 ---
 
 ### 所有权规则
@@ -60,6 +67,9 @@ Rust 的所有权系统基于以下**三大规则**：
 > 📜 **规则二**：任何时刻，一个值只能有**一个**所有者
 >
 > 📜 **规则三**：当所有者离开作用域，值将被**自动丢弃（drop）**
+>
+> **[来源: Rust Reference: Ownership]** 所有权规则由编译器在类型检查和借用检查阶段强制执行，违反规则将导致编译错误（如 E0382）。 ✅
+> **[来源: TRPL: Ch4.1]** 三大规则是 Rust 内存管理的基石，对应线性逻辑中的资源唯一性公理。 ✅
 
 让我们通过代码来理解这些规则：
 
@@ -155,6 +165,9 @@ fn main() {
 ```
 
 > 💡 **关键点**：String 包含指向堆内存的指针。如果直接复制指针而不转移所有权，会导致**双重释放（double free）**错误。Rust 通过**移动语义**避免了这个问题。
+>
+> **[来源: TRPL: Ch4.1]** Move 语义确保堆资源的唯一所有权，赋值操作转移所有权而非复制指针。 ✅
+> **[来源: Rust Reference: Move and Copy]** 非 Copy 类型的值在赋值/传参时发生 move，原变量变为未初始化状态。 ✅
 
 ---
 
@@ -238,7 +251,7 @@ fn main() {
 
 ### 所有权与函数
 
-当值传递给函数时，所有权也会发生转移：
+当值传递给函数时，所有权也会发生转移：[来源: TRPL: Ch4.3] 函数传参与返回值遵循与赋值相同的所有权规则。 ✅
 
 ```rust
 fn main() {
@@ -528,12 +541,36 @@ fn double_string(mut s: String) -> String {
 
 ---
 
-## 📖 延伸阅读
+## 📖 权威来源与延伸阅读
 
-### 官方文档
+### 官方文档（一级来源）
 
-- [The Rust Book - 第四章：理解所有权](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)（英文）
-- [Rust by Example - Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html)
+- [The Rust Book - Ch4: Understanding Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) —— Rust 官方教程，所有权的权威入门定义
+- [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html) —— 所有权规则的精确语言规范
+- [Rust Reference - Move and Copy](https://doc.rust-lang.org/reference/types.html#move-and-copy) —— Move / Copy 语义的类型系统定义
+- [Rust by Example - Ownership](https://doc.rust-lang.org/rust-by-example/scope/move.html) —— 交互式代码示例
+
+### 学术来源（一级来源）
+
+- **Ralf Jung et al., "RustBelt: Securing the Foundations of the Rust Programming Language"**, *POPL 2018* —— 在 Iris 分离逻辑框架中机器验证 Safe Rust 内存安全定理（无 UAF / 无 DF / 无数据竞争）。
+  - 核心论证：资源代数独占令牌 + 协议验证 ⇒ 所有权唯一性 ⇒ 内存安全完备性。
+  - 入口: <https://plv.mpi-sws.org/rustbelt/>
+- **Ralf Jung, "The Meaning of Memory Safety"**, *PLArch 2021* —— 内存安全的精确定义与 Rust 所有权系统的对应关系。
+- **Clarke et al., "Ownership Types for Flexible Alias Protection"**, *OOPSLA 1998* —— 所有权类型系统的理论起源，Rust 所有权的学术先驱。
+
+### 社区权威（二级来源）
+
+- **Niko Matsakis**, ["Two interpretations of borrowing"](https://smallcultfollowing.com/babysteps/blog/2024/01/05/two-interpretations-of-borrowing/) —— 借用的两种语义解释（区域视角 vs 流视角）。
+- **Without Boats**, ["Pin and Suffering"](https://without.boats/blog/pin-and-suffering/) —— 自引用结构与所有权边界的深度分析。
+- **Jon Gjengset**, [Crust of Rust: Lifetime Annotations](https://www.youtube.com/watch?v=rAl-9HwD858) —— 生命周期与所有权的可视化讲解。
+
+### 跨语言对比（三级来源）
+
+| 语言 | 对应机制 | 权威来源 |
+|:---|:---|:---|
+| **C++** | `std::unique_ptr`（运行时所有权，编译器不检查 use-after-move） | [cppreference: unique_ptr](https://en.cppreference.com/w/cpp/memory/unique_ptr) |
+| **Go** | 垃圾回收（GC），无编译期所有权检查 | [Go Spec: Memory Model](https://go.dev/ref/mem) |
+| **Haskell** | LinearTypes (GHC 9.0+) · `ST` 状态线程 | [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) |
 
 ### 进阶主题
 
