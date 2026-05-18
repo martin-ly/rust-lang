@@ -132,8 +132,14 @@
 
 ---
 
+## 供应链安全状态更新（2026-05-18）
+
+- **cargo-deny**: 升级至 0.19.6，解决 CVSS 4.0 parse error；`advisories ok, bans ok, licenses ok, sources ok`
+- **cargo-audit**: 4 项 allowed 警告（atomic-polyfill, bare-metal, instant, paste），均为上游传递依赖
+- **活跃漏洞**: RUSTSEC-2026-0118/0119 已从 advisory-db 中移除（hickory-proto 0.26.1 已修复 workspace 直接依赖）；仅通过 `libp2p-mdns → hickory-proto 0.25.2` 传递依赖存在，需等待上游更新
+
 ## 建议
 
-1. **CI 集成**: 在 Linux runner 上运行 `cargo miri test` 以验证 c06_async 和 c07_process
+1. **CI 集成**: 在 Linux runner 上运行 `cargo miri test` 以验证 c06_async 和 c07_process 的完整 tokio 测试集
 2. **WASM 目标**: c12_wasm 需在 `wasm32-unknown-unknown` 目标下独立验证
 3. **定期复查**: 每 6 周跟随 Rust release 周期复查新引入的 unsafe 代码

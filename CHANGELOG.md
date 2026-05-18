@@ -83,6 +83,17 @@
 - **rustdoc 零警告**: 修复 20+ `unresolved link` 和 `unclosed HTML tag` 警告（`target_feature`、`embassy_executor::task`、`Result<Option<T>>` 等）
 - **Integration Tests 归档修复**: 将孤儿文件 `tests/cross_module_integration_tests.rs` 迁移至 `crates/integration_tests/`，添加为 workspace 成员，11 项集成测试全部通过
 
+### 🔒 供应链安全深化（2026-05-18 追加）
+
+- **cargo-deny 升级 0.18.4 → 0.19.6**: 解决 CVSS 4.0 parse error（`astral-tokio-tar/RUSTSEC-2026-0066.md`），恢复 cargo-deny 正常工作
+- **deny.toml 全面修复**:
+  - 移除已不在 advisory-db 中的 RUSTSEC-2026-0118/0119 ignore 项
+  - 添加 RUSTSEC-2024-0384 (`instant`) 到 advisory ignore 列表
+  - 添加 `Unicode-3.0`、`CDLA-Permissive-2.0` 到许可证白名单
+  - 移除 `instant` 从 crate ban 列表（glommio 传递依赖，无法直接消除）
+  - 清理已不必要的 skip 配置（bastion 移除后 crossbeam/parking_lot 旧版不再存在）
+- **cargo-deny 状态**: `advisories ok, bans ok, licenses ok, sources ok` ✅
+
 ---
 
 ## [2.0.0] - 2026-05-13 — 知识体系 v1.0 发布
