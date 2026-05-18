@@ -577,12 +577,10 @@ clap_builder = { version = "4.5.61", default-features = false }
 clap_complete = "4.5.67"
 clap_derive = "4.5.61"
 
-# DNS 解析库 - 锁定 0.25.x 以兼容 libp2p 0.54.1
-# 2026-05-14: hickory-resolver 0.26.1 API 变更大（ResolverConfig 预设移除、Lookup::iter 移除、
-#       ProtoErrorKind 移除、TokioConnectionProvider 更名等），c10_networks DNS 模块需大量适配
-#       预计解锁时间: 待 c10_networks DNS 模块适配 hickory-resolver 0.26 API 后
-hickory-proto = "0.25.2"
-hickory-resolver = { version = "0.25.2", features = ["tokio", "system-config"] }
+# DNS 解析库
+# 2026-05-18: 升级至 0.26.1，修复 RUSTSEC-2026-0118/0119
+hickory-proto = "0.26.1"
+hickory-resolver = { version = "0.26.1", features = ["tokio", "system-config"] }
 
 # WebSocket 底层库
 # 2026-03-28: 更新至 0.29.0
