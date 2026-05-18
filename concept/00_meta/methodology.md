@@ -12,13 +12,13 @@
   - [一、内容结构模板（强制）](#一内容结构模板强制)
     - [1.1 各章节内容规范](#11-各章节内容规范)
   - [二、思维表征规范](#二思维表征规范)
-    - [2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix）](#21-概念定义属性关系矩阵concept-attribute-relation-matrix)
-    - [2.2 思维导图（Mind Map）](#22-思维导图mind-map)
-    - [2.3 决策树图（Decision Tree）](#23-决策树图decision-tree)
-    - [2.4 定理推理判断树（Theorem Inference Tree）](#24-定理推理判断树theorem-inference-tree)
-    - [2.5 边界判定树（Boundary Decision Tree）](#25-边界判定树boundary-decision-tree)
+    - [2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） \[来源: 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)\]](#21-概念定义属性关系矩阵concept-attribute-relation-matrix-来源-概念属性矩阵方法论参照知识图谱表示学习--bordes-et-al-translating-embeddings-for-modeling-multi-relational-data-nips-2013-知识表示的三元组结构-实体-关系-实体)
+    - [2.2 思维导图（Mind Map） \[来源: Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)\]](#22-思维导图mind-map-来源-buzan-t--the-mind-map-book-bbc-books-1993-思维导图作为放射性思维的可视化工具-认知科学中的图式理论-schema-theory)
+    - [2.3 决策树图（Decision Tree） \[来源: 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准\]](#23-决策树图decision-tree-来源-决策树方法论参照-quinlan-jr--induction-of-decision-trees-machine-learning-1986-信息增益与熵减作为决策分支的标准)
+    - [2.4 定理推理判断树（Theorem Inference Tree） \[来源: 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示\]](#24-定理推理判断树theorem-inference-tree-来源-定理证明方法论参照-gentzen-的自然演绎-natural-deduction-系统-推理规则的树形结构化表示)
+    - [2.5 边界判定树（Boundary Decision Tree） \[来源: 边界分析方法参照 Torchiano et al. (2018) 软件工程知识库边界分析研究; 反事实推理 (Counterfactual Reasoning) 在程序分析中的应用\]](#25-边界判定树boundary-decision-tree-来源-边界分析方法参照-torchiano-et-al-2018-软件工程知识库边界分析研究-反事实推理-counterfactual-reasoning-在程序分析中的应用)
   - [三、知识结构层级规范](#三知识结构层级规范)
-    - [3.1 理论-模型-实践三层结构](#31-理论-模型-实践三层结构)
+    - [3.1 理论-模型-实践三层结构 \[来源: 知识组织三层模型参照布鲁纳 (Bruner) 的表征理论 — 动作表征 (Enactive) / 图像表征 (Iconic) / 符号表征 (Symbolic); 对应概念文件的 L4 理论 / L2 模型 / L1 实践映射\]](#31-理论-模型-实践三层结构-来源-知识组织三层模型参照布鲁纳-bruner-的表征理论--动作表征-enactive--图像表征-iconic--符号表征-symbolic-对应概念文件的-l4-理论--l2-模型--l1-实践映射)
     - [3.2 层级标注规范](#32-层级标注规范)
   - [四、来源引用规范](#四来源引用规范)
     - [4.1 引用格式](#41-引用格式)
@@ -83,7 +83,7 @@
 
 ## 二、思维表征规范
 
-### 2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix）
+### 2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） [来源: 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)]
 
 用于精确定义概念，格式：
 
@@ -96,7 +96,7 @@
 | 运行时行为 | ... | ... | C: ... | Operational Semantics |
 ```
 
-### 2.2 思维导图（Mind Map）
+### 2.2 思维导图（Mind Map） [来源: Buzan, T. — *The Mind Map Book*. BBC Books, 1993; 思维导图作为放射性思维的可视化工具; 认知科学中的图式理论 (Schema Theory)]
 
 使用 Mermaid `graph TD` 或 `graph LR`，规范：
 
@@ -110,7 +110,7 @@ graph TD
     C --> C2[属性 2]
 ```
 
-### 2.3 决策树图（Decision Tree）
+### 2.3 决策树图（Decision Tree） [来源: 决策树方法论参照 Quinlan, J.R. — *Induction of Decision Trees*. Machine Learning, 1986; 信息增益与熵减作为决策分支的标准]
 
 用于"何时使用""如何判断"：
 
@@ -123,7 +123,7 @@ graph TD
     Q2 -->|否| R2[结论 2]
 ```
 
-### 2.4 定理推理判断树（Theorem Inference Tree）
+### 2.4 定理推理判断树（Theorem Inference Tree） [来源: 定理证明方法论参照 Gentzen 的自然演绎 (Natural Deduction) 系统; 推理规则的树形结构化表示]
 
 用于形式化推导：
 
@@ -143,7 +143,7 @@ graph TD
       Γ ⊢ A ∧ B
 ```
 
-### 2.5 边界判定树（Boundary Decision Tree）
+### 2.5 边界判定树（Boundary Decision Tree） [来源: 边界分析方法参照 Torchiano et al. (2018) 软件工程知识库边界分析研究; 反事实推理 (Counterfactual Reasoning) 在程序分析中的应用]
 
 用于明确概念的边界和反例：
 
@@ -159,7 +159,7 @@ graph TD
 
 ## 三、知识结构层级规范
 
-### 3.1 理论-模型-实践三层结构
+### 3.1 理论-模型-实践三层结构 [来源: 知识组织三层模型参照布鲁纳 (Bruner) 的表征理论 — 动作表征 (Enactive) / 图像表征 (Iconic) / 符号表征 (Symbolic); 对应概念文件的 L4 理论 / L2 模型 / L1 实践映射]
 
 每个概念应明确其在这三层中的位置：
 

@@ -4,6 +4,10 @@
 > **Rust 版本**: 1.82.0+ (Edition 2024 稳定版)
 > **权威来源**: [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（Edition Guide、RFC 2052、Rust Blog、Lang Team Roadmap）
+
 ## 🎯 学习目标
 
 完成本章后，你将能够：
@@ -28,6 +32,10 @@
 **Edition** 是 Rust 的**兼容性边界机制**。与语义版本（SemVer）不同，Edition 允许语言在不破坏现有代码的情况下引入不兼容的语法变更。同一 crate 可以混合使用不同 Edition 的依赖。
 
 > 💡 关键直觉：SemVer 说"这个版本兼容"，Edition 说"这个项目选择这套规则"。
+
+> **[来源: Rust Edition Guide]** "Editions are a mechanism for the Rust project to introduce changes into the language that would otherwise be backwards incompatible." ✅
+> **[来源: RFC 2052 — Epochs]** Edition（原称 Epoch）机制允许编译器根据 `Cargo.toml` 中的 `edition` 字段选择不同的语法分析器前端。 ✅
+> **[来源: Rust Reference: Editions]** 同一编译器二进制可同时支持多个 Edition，混合 Edition 的依赖可链接为同一二进制。 ✅
 
 #### 1.2 操作定义
 

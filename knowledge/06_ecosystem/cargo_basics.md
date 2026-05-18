@@ -6,6 +6,10 @@
 > **📚 难度级别**: ⭐⭐ 初中级
 > **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/)
 
+**变更日志**:
+
+- v2.1 (2026-05-19): 补全权威来源标注（Cargo Book、Rust Reference、SemVer 2.0.0、RFC 2121）
+
 ---
 
 ## 🎯 学习目标
@@ -34,6 +38,9 @@
 #### 1.1 直观定义
 
 **Cargo** 是 Rust 的"一站式"项目管理工具。它整合了其他语言中分散在多个工具中的功能：
+
+> **[来源: The Cargo Book]** "Cargo is Rust's build system and package manager." Cargo 处理构建代码、下载依赖库、构建这些库等任务。 ✅
+> **[来源: Rust Reference: Crates and Source Files]** Rust 项目以 crate 为单位组织，Cargo 是 crate 的标准构建和发布工具。 ✅
 
 | 功能 | 其他语言的等价物 | Cargo 命令 |
 |------|-----------------|-----------|
@@ -495,15 +502,24 @@ tokio = { version = "1.0", features = ["full"] }
 
 ---
 
-## 📖 延伸阅读
+## 📖 权威来源与延伸阅读
 
-- [The Cargo Book](https://doc.rust-lang.org/cargo/)
-- [Cargo.toml 格式规范](https://doc.rust-lang.org/cargo/reference/manifest.html)
-- [Rust 工作空间指南](https://doc.rust-lang.org/cargo/reference/workspaces.html)
+### 官方文档（一级来源）
+
+- [The Cargo Book](https://doc.rust-lang.org/cargo/) —— Cargo 的完整官方文档
+- [Cargo.toml 格式规范](https://doc.rust-lang.org/cargo/reference/manifest.html) —— Manifest 文件精确语义
+- [Rust 工作空间指南](https://doc.rust-lang.org/cargo/reference/workspaces.html) —— Workspace 配置与管理
+- [SemVer Specification 2.0.0](https://semver.org/) —— 语义化版本控制的权威规范
+- [RFC 2121 — Cargo Workspaces](https://rust-lang.github.io/rfcs/2121-cargo-workspace.html) —— Workspace 功能的设计决策
+
+### 社区权威（二级来源）
+
+- [crates.io 文档](https://doc.rust-lang.org/cargo/reference/publishing.html) —— 包发布与注册表机制
+- [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) —— 库设计的最佳实践，与 Cargo 的 feature/版本策略紧密相关
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
 **状态**: ✅ 按 10 模块标准重构完成

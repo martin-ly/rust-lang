@@ -20,11 +20,11 @@
 
 <!-- 层级一致性: L3 理论根基 → L2 概念对比 → L1 工程实践 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 一、权威定义（Definition）
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.1 Wikipedia 权威定义
 
@@ -34,7 +34,7 @@
 
 > **[Wikipedia: Hygienic macro]** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. A hygienic macro system preserves lexical scoping and ensures that binding structure is respected during macro expansion.
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.2 TRPL 官方定义
 
@@ -44,7 +44,7 @@
 >
 > **[Rust Reference: Macros]** Rust 宏在编译期展开，展开后的代码再进行类型检查，因此宏本身不感知类型，但生成代码受类型系统约束。✅ 已验证
 
-> **来源**: [Rust Reference] · [TRPL] · [RFCs]
+> [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.3 形式化定义
 
@@ -67,7 +67,7 @@ Rust 宏 hygiene:
 
 <!-- 层级一致性: L2 概念分类矩阵 — 横向对比四种宏类型，纵向对比多语言元编程机制 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 二、概念属性矩阵（Attribute Matrix）
 
@@ -118,7 +118,7 @@ Rust 宏 hygiene:
 
 <!-- 层级一致性: L3 形式化理论 — 卫生宏的 α-等价保持、模式匹配的语法树正则语义 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 三、形式化理论根基（Formal Foundation）
 
@@ -227,7 +227,7 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
 
 <!-- 层级一致性: L2 全景认知 → L1 工程决策 — 思维导图为导航，决策树为操作手册 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 四、思维导图（Mind Map）
 
@@ -259,7 +259,7 @@ graph TD
 
 ---
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 五、决策/边界判定树（Decision / Boundary Tree）
 
@@ -422,7 +422,7 @@ graph TD
 
 <!-- 层级一致性: L3 定理推导 — 带 ⟹ 推理链的一致性矩阵，将形式化命题与工程约束系统关联 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 六、定理推理链（Theorem Chain）
 
@@ -472,7 +472,7 @@ graph TD
 
 <!-- 层级一致性: L1 工程实践 — 正确示例、反例、边界极限测试的三段式验证 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 七、示例与反例（Examples & Counter-examples）
 
@@ -663,7 +663,7 @@ graph TD
 
 <!-- 层级一致性: L0 认知脚手架 → L1 实践 → L2 概念 → L3 理论 — 六步递进模拟学习者心路历程 -->
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 八、认知路径（Cognitive Path）
 
@@ -939,7 +939,7 @@ macro_rules! assert_impl {
 
 ---
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 补充章节：进阶主题与工程实践
 
@@ -2044,7 +2044,7 @@ mod internal {
 
 ---
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 十、待补充与演进方向（TODOs）
 
@@ -2059,7 +2059,7 @@ mod internal {
 
 ---
 
-> **来源**: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
+> [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 相关概念链接
 

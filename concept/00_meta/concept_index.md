@@ -10,10 +10,10 @@
 
 - [全局概念索引（Concept Index）](#全局概念索引concept-index)
   - [📑 目录](#-目录)
-  - [一、索引使用说明](#一索引使用说明)
-    - [1.1 概念类型标记](#11-概念类型标记)
-    - [1.2 语义链接标记](#12-语义链接标记)
-  - [二、核心概念索引（🔷）](#二核心概念索引)
+  - [一、索引使用说明 \[来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan \& Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论\]](#一索引使用说明-来源-倒排索引方法论参照信息检索标准--manning-raghavan--schütze-introduction-to-information-retrieval-cambridge-2008-语义链接网络参照-knowledge-graph-构建方法论)
+    - [1.1 概念类型标记 \[来源: 概念分类参照语义网络理论 — Collins \& Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承\]](#11-概念类型标记-来源-概念分类参照语义网络理论--collins--quillian-1969-层次语义网络模型-概念的层级组织与属性继承)
+    - [1.2 语义链接标记 \[来源: 语义链接类型参照知识图谱关系本体 — W3C RDF/OWL 标准; 实体间关系的语义标注方法论\]](#12-语义链接标记-来源-语义链接类型参照知识图谱关系本体--w3c-rdfowl-标准-实体间关系的语义标注方法论)
+  - [二、核心概念索引（🔷） \[来源: 概念定义基于 Rust Reference / RFCs / 学术论文; 索引结构参照 Wikipedia Infobox Pattern 的信息浓缩设计\]](#二核心概念索引-来源-概念定义基于-rust-reference--rfcs--学术论文-索引结构参照-wikipedia-infobox-pattern-的信息浓缩设计)
     - [A](#a)
     - [B](#b)
     - [C](#c)
@@ -35,13 +35,13 @@
     - [U](#u)
     - [V](#v)
     - [Z](#z)
-  - [三、交叉概念一致性审计（🔶）](#三交叉概念一致性审计)
-    - [3.1 Pin（出现在 4+ 个文件中）](#31-pin出现在-4-个文件中)
+  - [三、交叉概念一致性审计（🔶） \[来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak \& Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证\]](#三交叉概念一致性审计-来源-交叉一致性检查方法论参照概念图-concept-map-理论--novak--cañas-the-theory-underlying-concept-maps-2008-知识网络的连通性验证)
+    - [3.1 Pin（出现在 4+ 个文件中） \[来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03\_advanced/02\_async.md 等 4+ 文件中的 Pin 定义一致性验证\]](#31-pin出现在-4-个文件中-来源-跨文件概念一致性检查参照-rfc-2349--pin--2018-concept03_advanced02_asyncmd-等-4-文件中的-pin-定义一致性验证)
     - [3.2 Send / Sync（出现在 3+ 个文件中）](#32-send--sync出现在-3-个文件中)
     - [3.3 Unsafe（出现在 3+ 个文件中）](#33-unsafe出现在-3-个文件中)
     - [3.4 生命周期（出现在 4+ 个文件中）](#34-生命周期出现在-4-个文件中)
-  - [四、引用概念速查（🔹）](#四引用概念速查)
-  - [五、按 Bloom 层级排序](#五按-bloom-层级排序)
+  - [四、引用概念速查（🔹） \[来源: 速查表设计参照认知心理学中的组块化 (Chunking) 原则 — Miller (1956); 信息压缩与快速检索\]](#四引用概念速查-来源-速查表设计参照认知心理学中的组块化-chunking-原则--miller-1956-信息压缩与快速检索)
+  - [五、按 Bloom 层级排序 \[来源: Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴\]](#五按-bloom-层级排序-来源-bloom-bs-et-al--taxonomy-of-educational-objectives-the-classification-of-educational-goals-handbook-i-cognitive-domain-longman-1956-revised-2001-认知层级作为知识结构组织的主轴)
     - [记忆（Remember）→ 理解（Understand）](#记忆remember-理解understand)
     - [应用（Apply）→ 分析（Analyze）](#应用apply-分析analyze)
     - [评价（Evaluate）→ 创造（Create）](#评价evaluate-创造create)
@@ -59,9 +59,9 @@
   - [十、语义表达力全景梳理（Phase F）](#十语义表达力全景梳理phase-f)
   - [八、TODO](#八todo)
 
-## 一、索引使用说明
+## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
 
-### 1.1 概念类型标记
+### 1.1 概念类型标记 [来源: 概念分类参照语义网络理论 — Collins & Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承]
 
 | 标记 | 含义 | 示例 |
 |:---|:---|:---|
@@ -69,7 +69,7 @@
 | 🔶 **交叉概念** | 在多个文件中重复出现、需一致性维护的概念 | Pin、Send、unsafe |
 | 🔹 **引用概念** | 在其他文件中被引用但未独立定义的概念 | RAII、Zero-cost Abstraction |
 
-### 1.2 语义链接标记
+### 1.2 语义链接标记 [来源: 语义链接类型参照知识图谱关系本体 — W3C RDF/OWL 标准; 实体间关系的语义标注方法论]
 
 | 链接类型 | 符号 | 含义 |
 |:---|:---|:---|
@@ -81,7 +81,7 @@
 
 ---
 
-## 二、核心概念索引（🔷）
+## 二、核心概念索引（🔷） [来源: 概念定义基于 Rust Reference / RFCs / 学术论文; 索引结构参照 Wikipedia Infobox Pattern 的信息浓缩设计]
 
 ### A
 
@@ -277,11 +277,11 @@
 
 ---
 
-## 三、交叉概念一致性审计（🔶）
+## 三、交叉概念一致性审计（🔶） [来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak & Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证]
 
 以下概念在**多个文件中重复出现**，需要确保定义一致：
 
-### 3.1 Pin（出现在 4+ 个文件中）
+### 3.1 Pin（出现在 4+ 个文件中） [来源: 跨文件概念一致性检查参照 RFC 2349 — Pin / 2018; concept/03_advanced/02_async.md 等 4+ 文件中的 Pin 定义一致性验证]
 
 | 文件 | 定义侧重点 | 一致性检查 |
 |:---|:---|:---|
@@ -320,7 +320,7 @@
 
 ---
 
-## 四、引用概念速查（🔹）
+## 四、引用概念速查（🔹） [来源: 速查表设计参照认知心理学中的组块化 (Chunking) 原则 — Miller (1956); 信息压缩与快速检索]
 
 | 概念 | 首次出现文件 | 相关核心概念 | 简要说明 |
 |:---|:---|:---|:---|
@@ -336,7 +336,7 @@
 
 ---
 
-## 五、按 Bloom 层级排序
+## 五、按 Bloom 层级排序 [来源: Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴]
 
 ### 记忆（Remember）→ 理解（Understand）
 

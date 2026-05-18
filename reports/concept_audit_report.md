@@ -1,6 +1,6 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-19T03:22
+> 生成时间: 2026-05-19T04:51
 > 扫描文件数: 48
 > 版本对齐: Rust 1.95.0 stable
 
@@ -9,20 +9,14 @@
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
 | 扫描文件数 | 48 | — |
-| 跨文件链接 ≥3 | 47/48 | ⚠️ |
+| 跨文件链接 ≥3 | 48/48 | ✅ |
 | 死链接文件 | 0 | ✅ |
 | 命名规范符合 | 34/48 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 47/48 | ✅ |
-| 平均来源标注率 | 14.3% | ⚠️ |
+| 显式 Bloom 标注 | 48/48 | ✅ |
+| 平均来源标注率 | 15.7% | ✅ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 259 | — |
-
-## 跨文件链接不足的文件
-
-| 文件 | 链接数 | 现有链接目标 |
-|:---|:---|:---|
-| concept/00_meta/authority_source_map.md | 0 | 无 |
 
 ## 命名不规范的文件
 
@@ -41,24 +35,13 @@
 - concept/05_comparative/safety_boundaries.md
 - concept/07_future/rust_version_tracking.md
 
-## 缺少 Bloom 层级标注的文件
-
-| 文件 | 检测到的 Bloom 关键词 |
-|:---|:---|
-| concept/00_meta/authority_source_map.md | 创造, 应用, 评价 |
-
 ## 来源标注率偏低的文件 (< 10%)
 
 | 文件 | 标注数 | 估算段落数 | 标注率 |
 |:---|:---|:---|:---|
-| concept/00_meta/audit_checklist.md | 3 | 35 | 3.4% |
-| concept/00_meta/authority_source_map.md | 0 | 12 | 0.0% |
-| concept/00_meta/concept_index.md | 0 | 67 | 0.0% |
-| concept/00_meta/learning_guide.md | 14 | 70 | 9.9% |
-| concept/00_meta/methodology.md | 5 | 47 | 5.0% |
+| concept/00_meta/concept_index.md | 8 | 74 | 4.6% |
 | concept/00_meta/quick_reference.md | 0 | 115 | 0.0% |
 | concept/00_meta/self_assessment.md | 16 | 406 | 2.4% |
-| concept/00_meta/todos.md | 0 | 24 | 0.0% |
 
 ## 方法论说明
 

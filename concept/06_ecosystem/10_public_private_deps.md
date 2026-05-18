@@ -6,7 +6,7 @@
 
 ---
 
-> **来源**: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) · [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+> [来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) · [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 
 ## 📑 目录
 
@@ -58,7 +58,7 @@ use A::foo;
 let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 ```
 
-> **来源**: [RFC 3516 §Motivation](https://github.com/rust-lang/rfcs/pull/3516) — 依赖泄漏导致"升级一个内部实现细节却破坏下游编译"的 SemVer 违规。
+> [来源: [RFC 3516 §Motivation](https://github.com/rust-lang/rfcs/pull/3516) — 依赖泄漏导致"升级一个内部实现细节却破坏下游编译"的 SemVer 违规。
 
 ### 1.2 实际危害
 
@@ -98,7 +98,7 @@ pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 
 - `public = true` 的依赖类型可出现在 `pub` / `pub(crate)` API 中
 - `public = false` 的依赖类型**仅限**私有模块使用
 
-> **来源**: [RFC 3516 §Semantics](https://github.com/rust-lang/rfcs/pull/3516) — 编译器在解析 `use` 语句和类型检查阶段验证公共 API 中是否出现私有依赖的类型。
+> [来源: [RFC 3516 §Semantics](https://github.com/rust-lang/rfcs/pull/3516) — 编译器在解析 `use` 语句和类型检查阶段验证公共 API 中是否出现私有依赖的类型。
 
 ### 2.2 传递性规则
 
@@ -125,7 +125,7 @@ A ──public──► B ──public──► D
 | 移除依赖 | 🔴 **Breaking** | 🟢 **Non-breaking** |
 | 新增依赖 | 🟢 **Non-breaking** | 🟢 **Non-breaking** |
 
-> **来源**: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) — 公共依赖的移除/升级属于 "Major change: altering the shape of types in a public API"。
+> [来源: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) — 公共依赖的移除/升级属于 "Major change: altering the shape of types in a public API"。
 
 ### 3.2 cargo-semver-checks 集成
 

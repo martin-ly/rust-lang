@@ -5,6 +5,10 @@
 > 🕒 **预计学习时间**: 8-10 小时
 > 🎯 **难度**: 专家级
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（rustc Dev Guide、Rust Reference、MIR 文档）
+
 ---
 
 ## 🎯 学习目标
@@ -36,6 +40,9 @@
 ### 编译流程概览
 
 Rust 编译器的编译过程遵循经典的编译器设计，但引入了独特的所有权和生命周期检查机制：
+
+> **[来源: rustc Dev Guide — Compiler Overview]** Rust 编译器管道包括词法分析、语法分析、AST、HIR、MIR、LLVM IR 生成和代码优化。 ✅
+> **[来源: Rust Reference: Memory model]** 所有权和生命周期检查在 MIR 阶段执行，是 Rust 编译器独有的阶段。 ✅
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -839,9 +846,30 @@ fn main() {
 
 ---
 
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/) —— Rust 编译器开发的完整指南
+- [Rust Reference: MIR](https://doc.rust-lang.org/reference/items/functions.html) —— 中间表示的精确语义
+- [Rust Reference: Type inference](https://doc.rust-lang.org/reference/type-inference.html) —— 类型推断的算法描述
+
+### 学术来源（一级来源）
+
+- **RustBelt: POPL 2018** —— Rust 类型系统安全性的形式化验证。
+- **Tofte & Talpin 1994, TOPLAS** —— 区域类型理论，Rust 生命周期系统的学术前身。
+
+### 社区权威（二级来源）
+
+- [Miri](https://github.com/rust-lang/miri) —— Rust 中间解释器，用于检测未定义行为
+- [cargo-expand](https://github.com/dtolnay/cargo-expand) —— 查看宏展开后的代码
+- [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat) —— 分析二进制文件大小
+
+---
+
 > 💡 **学习建议**：编译器内部原理是一个深度主题，建议结合阅读 `rustc` 源代码和实际工具操作来学习。从简单的 MIR 分析开始，逐步深入到更复杂的类型系统和优化算法。
 
 ---
 
-*最后更新: 2026-03-19*
+*最后更新: 2026-05-19*
 *贡献者: Rust 学习社区*

@@ -1,9 +1,12 @@
 # FFI (Foreign Function Interface)
 
-> **📌 简介**: FFI 是 Rust 与外部代码（主要是 C/C++）互操作的桥梁。它涉及 ABI 边界、内存布局对齐、panic 传播控制等复杂问题，是生产环境中 `unsafe` 代码的最主要来源。
+> **📌 简介**: FFI 是 Rust 与外部代码（主要是 C/C++）互操作的桥梁 [来源: Rustonomicon — FFI / 2025; Rust Reference — External blocks / 2025; 核心形式化语义: ABI (Application Binary Interface) 定义函数调用约定、类型布局、命名修饰规则; Itanium C++ ABI / 2024]。它涉及 ABI 边界、内存布局对齐、panic 传播控制等复杂问题，是生产环境中 `unsafe` 代码的最主要来源 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: `unsafe` 块的不变量由程序员手动保证，编译器仅验证 `safe` 抽象层的正确性; The Rust Programming Language — Unsafe Rust / 2024]。
 >
 > **⏱️ 预计学习时间**: 75-100 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
+> **权威来源**: [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html), [Rust Reference — External blocks](https://doc.rust-lang.org/reference/items/external-blocks.html), [The Rust FFI Omnibus](http://jakegoulding.com/rust-ffi-omnibus/), [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/), [Itanium C++ ABI](https://itanium-cxx-abi.github.io/cxx-abi/abi.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 ABI 边界形式化语义来源标注、`repr(C)` 内存布局标准引用、bindgen 自动生成绑定方法论、panic 跨越 FFI 边界的 UB 分析来源 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -811,7 +814,29 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准重构完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) [来源: Rust Team / Rustonomicon 2025]
+- [Rust Reference — External blocks](https://doc.rust-lang.org/reference/items/external-blocks.html) [来源: Rust Reference / 2025]
+- [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/) [来源: Rust FFI Working Group / 2025]
+
+### 学术与标准来源
+
+- Itanium C++ ABI [来源: C++ 调用约定与类型布局的行业标准; `repr(C)` 的布局保证直接映射到 C ABI]
+- System V AMD64 ABI [来源: x86-64 Linux 平台的调用约定标准; 寄存器传参、栈对齐、结构体返回的规范]
+- ISO C11 §6.2.5 — *Types* [来源: C 类型系统与 Rust `libc` crate 的类型映射基础]
+
+### 跨语言来源
+
+- Python — `ctypes`, `cffi` [来源: Python 与 C 互操作的两种模式; 与 Rust FFI 的显式 `unsafe` 边界对比]
+- Go — `cgo` [来源: Go 与 C 互操作的运行时开销分析; 与 Rust 零成本 FFI 的对比]
+- Java — JNI (Java Native Interface), JNA, Panama (JEP 424) [来源: Java 与原生代码互操作的演进; 从 JNI 的手动绑定到 Panama 的自动生成]

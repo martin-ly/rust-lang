@@ -2,7 +2,9 @@
 
 > **版本**: Rust 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
-> **权威来源**: [Rust 官方文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
+> **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
 
@@ -23,7 +25,7 @@
 
 ### 1. array_windows - 滑动窗口迭代
 
-`array_windows` 是 Rust 1.96 引入的新方法，用于在数组/切片上以固定大小的窗口进行迭代。
+`array_windows` 是 Rust 1.96 引入的新方法 [来源: Rust 1.96 Release Notes / 2026; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`]，用于在数组/切片上以固定大小的窗口进行迭代。
 
 #### 1.1 基础用法
 
@@ -298,6 +300,23 @@ fn parse_args(input: &str) -> Vec<String> {
 
 ---
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
-**最后更新**: 2026-03-19
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html) [来源: Rust Standard Library / 2025]
+- [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows) [来源: Rust Standard Library / 2026]
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) [来源: Rust Release Team / 2026]
+- [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/) [来源: Rust Release Team / 2024]
+
+### 学术与形式化来源
+
+- Iterator 模式 — *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) [来源: 迭代器模式的经典定义; Rust 的 `Iterator` trait 是该模式的类型系统实现]
+- Wadler, P. — *Theorems for Free!* (FPCA 1989) [来源: 泛型函数的行为可由类型推导; `Iterator::map`/`filter` 等泛型组合子的参数多态性理论基础]

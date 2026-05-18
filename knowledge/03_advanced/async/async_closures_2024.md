@@ -4,7 +4,7 @@
 
 ## 概述
 
-Async closures 是 Rust 1.85+ 中稳定化的重要特性，允许直接使用 `async || { }` 语法创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
+Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，允许直接使用 `async || { }` 语法创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
 
 ## 语法对比
 
@@ -288,6 +288,23 @@ let process = async |items: Vec<i32>| -> i32 {
 注意：`async |items|` 会自动处理 `move` 语义，`items` 被 move 进闭包。
 
 </details>
+
+---
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.85.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+- [RFC 3668: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html) [来源: Rust Core Team / 2024]
+- [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures) [来源: Rust Reference / 2025]
+- [async_closure.md](async_closure.md) — 完整教学版 [来源: 本知识体系 / 2026]
 
 ---
 

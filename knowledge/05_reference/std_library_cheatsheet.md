@@ -2,6 +2,10 @@
 
 > 本文档为 Rust 标准库常用模块、Trait 和宏的快速参考指南，适合日常开发查阅。
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference）
+
 ---
 
 ## 常用模块速查
@@ -893,5 +897,13 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 ```
 
 ---
+
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [Rust Standard Library 文档](https://doc.rust-lang.org/std/) —— 标准库完整 API 参考
+- [Rust Reference: The std library prelude](https://doc.rust-lang.org/reference/names/preludes.html) —— prelude 模块的精确定义
+- [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) —— 声明宏和过程宏的规范
 
 > **提示**: 本速查表涵盖最常用的标准库 API。更多详情请参阅 [Rust 标准库文档](https://doc.rust-lang.org/std/)。

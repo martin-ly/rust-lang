@@ -5,6 +5,10 @@
 > **Rust 版本**: 1.96.0+
 > **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
 
+**变更日志**:
+
+- v2.1 (2026-05-19): 补全权威来源标注（std::f64::consts 文档、Rust 1.96 Release Notes）
+
 ---
 
 ## 🎯 学习目标
@@ -32,6 +36,9 @@
 #### 1.1 标准库数学常量
 
 Rust 将常用数学常量定义为关联常量（associated constants），挂载在 `f32` 和 `f64` 类型上：
+
+> **[来源: Rust Reference: Associated Items]** 关联常量是 trait 或 impl 块中定义的常量，与类型直接绑定。 ✅
+> **[来源: std::f64::consts 文档]** Rust 标准库提供精确到浮点表示极限的数学常量，编译期求值，零运行时开销。 ✅
 
 ```rust
 // 编译时常量，零运行时开销
@@ -241,13 +248,16 @@ let good = x * f32::consts::PI;
 
 ---
 
-## 🔗 参考资源
+## 📖 权威来源与延伸阅读
 
-- [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html)
-- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
+### 官方文档（一级来源）
+
+- [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html) —— 标准库数学常量完整列表
+- [std::f32::consts](https://doc.rust-lang.org/std/f32/consts/index.html) —— f32 版本数学常量
+- [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) —— 新增常量的发布说明
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.96.0+
 **最后更新**: 2026-05-09

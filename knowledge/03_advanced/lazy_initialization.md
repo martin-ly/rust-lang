@@ -4,6 +4,10 @@
 > **特性**: `LazyCell`, `LazyLock`, `get`, `get_mut`, `force_mut`
 > **权威来源**: [Rust RFC](https://rust-lang.github.io/rfcs/2788-lazy-cell.html), [PLDI 2025 Tree Borrows](https://pldi25.sigplan.org/)
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（RFC 2788、Rust Reference、std::cell 文档）
+
 ## 🎯 学习目标
 
 完成本章后，你将能够：
@@ -32,6 +36,9 @@
 ### 2. LazyCell - 单线程延迟初始化
 
 `LazyCell` 提供单线程环境下的延迟初始化，线程不安全但性能更高。
+
+> **[来源: RFC 2788 — Lazy Cell]** `LazyCell` 和 `LazyLock` 提供无需宏的延迟初始化，取代 `lazy_static!` 和 `once_cell` crate 的部分用例。 ✅
+> **[来源: Rust Reference: Interior Mutability]** `LazyCell` 基于内部可变性模式，通过 `UnsafeCell` 在编译期不可变的位置实现运行时可变。 ✅
 
 #### 2.1 基础用法
 
@@ -835,6 +842,17 @@ fn reload_config() {
 
 ---
 
-**文档版本**: 1.0
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [RFC 2788 — Lazy Cell](https://rust-lang.github.io/rfcs/2788-lazy-cell.html) —— `LazyCell`/`LazyLock` 的设计决策
+- [std::cell::LazyCell 文档](https://doc.rust-lang.org/std/cell/struct.LazyCell.html) —— 单线程延迟初始化的 API
+- [std::sync::LazyLock 文档](https://doc.rust-lang.org/std/sync/struct.LazyLock.html) —— 线程安全延迟初始化的 API
+- [Rust Reference: Interior Mutability](https://doc.rust-lang.org/reference/special-types-and-traits.html) —— 内部可变性模式的精确语义
+
+---
+
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0 (accessors) / 1.80.0 (types)
 **最后更新**: 2026-05-08

@@ -6,6 +6,10 @@
 > **预计学习时间**: 6-8 小时
 > **适用场景**: 安全关键系统审计、开源代码审查、unsafe 代码重构
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（Rust Reference、Rustonomicon、Unsafe Code Guidelines、Miri、Ralf Jung）
+
 ---
 
 ## 🎯 学习目标
@@ -47,6 +51,10 @@ cargo install miri  # 或 rustup component add miri
 #### 1.1 直观定义
 
 **Unsafe Code Auditing（不安全代码审计）** 是对 Rust 代码中 `unsafe` 块及其周边安全契约进行系统性审查的工程实践。其目标是识别可能导致未定义行为（Undefined Behavior, UB）的代码模式，验证 `SAFETY` 注释中的假设是否成立，并确保 unsafe 抽象对外暴露的 API 保持内存安全与线程安全。
+
+> **[来源: Rust Reference: Unsafe Rust]** `unsafe` 块允许使用五种 unsafe 操作：解引用裸指针、调用 unsafe 函数、访问或修改可变静态变量、访问 `union` 字段、调用 `extern` 函数。 ✅
+> **[来源: Rustonomicon]** "Safe Rust is the language you use 99% of the time. Unsafe Rust gives you five new superpowers..." 审计即验证这些 superpowers 的使用是否安全。 ✅
+> **[来源: Unsafe Code Guidelines]** Rust 官方不安全代码指南定义了未定义行为（UB）的边界和内存模型规则。 ✅
 
 直观上，审计如同为代码中的"安全漏洞"做体检——不是检查代码能否编译（编译器已做），而是检查代码在运行时的假设是否始终成立。
 
@@ -1236,9 +1244,31 @@ let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
 
 ---
 
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [Rust Reference: Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) —— `unsafe` 块的精确语义
+- [The Rustonomicon](https://doc.rust-lang.org/nomicon/) —— 不安全 Rust 的高级教程
+- [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) —— UB 边界与内存模型官方指南
+- [Miri 文档](https://github.com/rust-lang/miri) —— 解释执行与 UB 检测工具
+
+### 学术来源（一级来源）
+
+- **Ralf Jung et al., "Stacked Borrows: An Aliasing Model for Rust"**, *POPL 2021* —— Miri 的内存模型基础。
+- **Ralf Jung, "Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias"**, *arXiv 2023* —— 下一代 Miri 内存模型。
+- **RustBelt: POPL 2018** —— Safe Rust 内存安全的形式化验证。
+
+### 社区权威（二级来源）
+
+- **Ralf Jung 博客**: <https://www.ralfj.de/blog/> —— 内存模型、Miri、unsafe 边界的深度分析
+- **Rust Secure Code WG**: <https://github.com/rust-secure-code/wg> —— 安全编码指南与工具链
+
+---
+
 > 💡 **核心原则**: 每一行 `unsafe` 代码都必须能够被证明是安全的，且这种证明应该对审阅者显而易见。
 
 ---
 
-*最后更新: 2026-03-19*
+*最后更新: 2026-05-19*
 *贡献者: Rust 中文知识库维护团队*

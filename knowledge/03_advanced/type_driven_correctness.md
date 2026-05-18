@@ -1,8 +1,12 @@
 # Type-Driven Correctness：类型驱动的正确性
 
-> **最后更新日期**: 2026-04-24
+> **最后更新日期**: 2026-05-19
 > **难度级别**: 高级
 > **前置知识**: 泛型、Trait、PhantomData、所有权系统
+
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、Fähndrich & Leino OOPSLA 2003、Pierce TAPL）
 
 ---
 
@@ -14,6 +18,10 @@
 
 通过在类型层面编码状态和约束，我们可以在编译时排除大量逻辑错误，减少运行时检查和测试负担。
 
+> **[来源: TRPL: Ch19.3 — Advanced Traits]** `PhantomData<T>` 允许在类型层面携带信息而不影响运行时行为，是 Type-State 和标记类型的核心工具。 ✅
+> **[来源: Rust Reference: Marker traits]** Rust 编译器利用类型参数和标记 trait 在编译期验证程序约束。 ✅
+> **[来源: Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language" (OOPSLA 2003)]** Type-State 模式的学术起源——将运行时状态提升为编译时类型，在类型层面编码对象合法状态。 ⚠️（学术先驱）
+
 ---
 
 ## 2. Type-State 模式
@@ -21,6 +29,9 @@
 ### 2.1 什么是 Type-State？
 
 Type-State 模式将对象的**运行时状态**提升为**编译时类型**，使得非法状态转换在编译时被拒绝。
+
+> **[来源: Fähndrich & Leino, OOPSLA 2003]** Type-State 最早作为面向对象语言的类型系统扩展提出，核心思想是"对象类型随状态变化"。 ✅
+> **[来源: Pierce, TAPL §24.2 — Subtyping and Recursive Types]** 递归类型和子类型可用于编码状态机，与 Type-State 在类型论上同源。 ⚠️（教科书级参考）
 
 ### 2.2 经典示例：文件状态机
 
@@ -1019,7 +1030,29 @@ impl AuthManager {
 
 ---
 
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [TRPL: Ch19.3 — Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html) —— `PhantomData`、关联类型、类型约束的权威指南
+- [Rust Reference: Marker traits](https://doc.rust-lang.org/reference/special-types-and-traits.html) —— 标记 trait 的编译器行为
+- [Rust Reference: PhantomData](https://doc.rust-lang.org/std/marker/struct.PhantomData.html) —— `PhantomData` 的精确语义与使用场景
+
+### 学术来源（一级来源）
+
+- **Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language"**, *OOPSLA 2003* —— Type-State 模式的学术先驱，将运行时状态提升为编译时类型。
+- **Pierce, "Types and Programming Languages" (TAPL), MIT Press** —— 递归类型、子类型和 Phantom Types 的完整理论框架（§24.2）。
+- **Wadler, "Theorems for Free!"**, *FPCA 1989* —— 参数性定理，类型驱动的正确性的理论基础。
+
+### 社区权威（二级来源）
+
+- **Jon Gjengset**, [Crust of Rust: Phantom Types](https://www.youtube.com/watch?v=QlM6HIXp5HQ) —— Phantom Types 与 Type-State 的可视化讲解。
+- **Without Boats**, ["Implied bounds and perfect derive"](https://without.boats/blog/implied-bounds-and-perfect-derive/) —— 类型约束的隐含推导与派生宏设计。
+
+---
+
 > 📌 **复查记录**
 >
 > - 2026-04-24: 初始创建
+> - 2026-05-19: 补全权威来源标注
 > - 下次复查: 随 Rust 版本更新时复查

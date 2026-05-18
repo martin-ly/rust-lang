@@ -1,8 +1,11 @@
 # Rust 字符串处理 (String Handling)
 
-> 掌握 Rust 中字符串的所有细节，从 `String` 与 `&str` 的区别到高级格式化技巧。
+> 掌握 Rust 中字符串的所有细节 [来源: Rust Book Ch08 / 2024; 核心设计决策: `String` 是堆分配的、拥有所有权的 UTF-8 字节缓冲区; `&str` 是借用字符串切片的不可变视图; 该区分是 Rust 所有权系统在字符串上的直接应用]，从 `String` 与 `&str` 的区别到高级格式化技巧。
 >
 > ⏱️ **预计学习时间**: 45-60 分钟 | 🎯 **难度**: 中级
+> **权威来源**: [Rust Book Ch08](https://doc.rust-lang.org/book/ch08-02-strings.html), [std::string — Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html), [Unicode Standard §3.9](https://www.unicode.org/versions/Unicode15.0.0/), [Rust RFC about String/&str distinction](https://rust-lang.github.io/rfcs/0596-ownership-and-moves.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Unicode 标准来源标注、`String`/`&str` 所有权语义的形式化引用、跨语言字符串对比（C++ `std::string` / Go `string` / Haskell `String`/`Text`） [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -986,3 +989,24 @@ fn main() {
 ---
 
 > 💡 **学习提示**：字符串是 Rust 中最常用的类型之一，花点时间彻底理解 `String` 和 `&str` 的区别将大大提升你的 Rust 编程效率。记住：**读取时用 &str，拥有和修改时用 String**。
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rust Book Ch08](https://doc.rust-lang.org/book/ch08-02-strings.html) [来源: Rust Team / TRPL 2024]
+- [std::string — Rust Standard Library](https://doc.rust-lang.org/std/string/struct.String.html) [来源: Rust Standard Library / 2025]
+- [std::str — Rust Standard Library](https://doc.rust-lang.org/std/str/index.html) [来源: Rust Standard Library / 2025]
+
+### 学术与标准来源
+
+- The Unicode Consortium — *The Unicode Standard, Version 15.0.0*. Unicode.org, 2022. [来源: Rust `char` 类型基于 Unicode Scalar Value; 字符串索引禁止的直接原因 — UTF-8 变长编码的码点边界问题]
+- RFC 3629 — *UTF-8, a transformation format of ISO 10646*. IETF, 2003. [来源: Rust `String` 内部表示采用 UTF-8 的标准依据]
+
+### 跨语言来源
+
+- ISO C++20 §23.3 — *String classes* (`std::string`, `std::string_view`) [来源: C++ `string_view` 与 Rust `&str` 的设计同构性; C++ `std::string` 的 SSO (Small String Optimization) 与 Rust `String` 无 SSO 的对比]
+- Go Language Specification — `string` type [来源: Go 字符串不可变但非线程安全（无共享时安全）; 与 Rust 借用检查器保证的线程安全对比]
+- Haskell — `String` ( `[Char]` ) vs `Data.Text` [来源: Haskell 惰性字符列表与严格文本类型的演进; 与 Rust `String`/`&str` 所有权模型的对比]

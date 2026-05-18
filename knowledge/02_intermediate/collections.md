@@ -1,10 +1,12 @@
 # 集合类型 (Collections)
 
-> **📌 简介**: Rust 标准库提供了一组精心设计的泛型数据结构，涵盖顺序存储（`Vec`）、键值查找（`HashMap`/`BTreeMap`）、集合运算（`HashSet`/`BTreeSet`）、双端队列（`VecDeque`）和优先队列（`BinaryHeap`）。选择正确的集合类型是 Rust 程序性能优化的第一步。
+> **📌 简介**: Rust 标准库提供了一组精心设计的泛型数据结构 [来源: Rust Standard Library — Collections / 2025; 核心设计决策: 每种集合类型针对特定访问模式优化，算法复杂度在 API 文档中明确标注; C++ 对标: ISO C++20 §23 — Containers library; 算法复杂度分析来源: Cormen et al. — *Introduction to Algorithms* (CLRS, 2022)]，涵盖顺序存储（`Vec`）、键值查找（`HashMap`/`BTreeMap`）、集合运算（`HashSet`/`BTreeSet`）、双端队列（`VecDeque`）和优先队列（`BinaryHeap`）。选择正确的集合类型是 Rust 程序性能优化的第一步。
 >
 > **⏱️ 预计学习时间**: 3-4 小时
 > **📚 难度级别**: ⭐⭐⭐ 中级
-> **权威来源**: [Rust Standard Library - Collections](https://doc.rust-lang.org/std/collections/)
+> **权威来源**: [Rust Standard Library — Collections](https://doc.rust-lang.org/std/collections/), [Rust Book Ch08](https://doc.rust-lang.org/book/ch08-00-common-collections.html), [Algorithm Complexity of Rust Collections](https://doc.rust-lang.org/std/collections/index.html#complexity), [SipHash Paper](https://131002.net/siphash/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增集合类型算法复杂度来源标注、SipHash 哈希函数学术引用、HashMap vs BTreeMap 形式化对比来源 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -776,7 +778,27 @@ fn build_index(users: Vec<User>) -> HashMap<UserKey, Vec<String>> {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准重构完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rust Standard Library — Collections](https://doc.rust-lang.org/std/collections/) [来源: Rust Standard Library / 2025]
+- [Rust Book Ch08](https://doc.rust-lang.org/book/ch08-00-common-collections.html) [来源: Rust Team / TRPL 2024]
+- [Algorithm Complexity of Rust Collections](https://doc.rust-lang.org/std/collections/index.html#complexity) [来源: Rust Standard Library / 2025]
+
+### 学术来源
+
+- Aumasson, J.P. & Bernstein, D.J. — *SipHash: a fast short-input PRF*. Proc. SHARCS 2012. [来源: Rust `HashMap` 默认哈希函数 SipHash-1-3 的密码学基础; 防 HashDoS 攻击的设计选择]
+- Cormen, T.H., et al. — *Introduction to Algorithms* (4th Ed.). MIT Press, 2022. [来源: 算法复杂度分析的标准参考; `Vec` 均摊 O(1) 追加、`BTreeMap` O(log n) 查找的形式化基础]
+
+### 跨语言来源
+
+- ISO C++20 §23 — *Containers library* [来源: `std::vector`/`std::unordered_map`/`std::map` 与 Rust 集合的算法复杂度对比]
+- Go — `map` (哈希表), `slice` (动态数组) [来源: Go 语言规范 — 内建集合类型的语法集成 vs Rust 标准库集合的泛型实现]

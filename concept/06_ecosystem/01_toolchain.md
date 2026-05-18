@@ -82,6 +82,12 @@ graph LR
 | **特性系统** | ✅ Features | ❌ | ❌ | ❌ |
 | **编译期脚本** | ✅ build.rs | ⚠️ postinstall | ❌ | ❌ |
 
+> **[来源: The Cargo Book]** Cargo 使用 TOML 格式的 manifest 文件，支持严格的 SemVer 约束、工作区、特性系统和编译期脚本。 ✅
+> **[来源: npm Docs: package.json]** Node.js 的 `package.json` 使用 JSON 格式，支持语义化版本但依赖解析行为与 Cargo 不同。 ✅
+> **[来源: Go Modules Reference]** Go 模块使用 `go.mod` 和最小版本选择（MVS）算法，锁文件为 `go.sum`。 ✅
+> **[来源: pip Documentation]** Python 的 `requirements.txt` 无内置锁文件机制，依赖版本约束较弱。 ✅
+> **[来源: SemVer Specification]** 语义化版本规范（SemVer 2.0.0）定义了 MAJOR.MINOR.PATCH 的兼容性契约。 ✅
+
 ### 2.3 Clippy Lint 分类矩阵
 
 | **分类** | **作用** | **示例 lint** | **默认级别** |

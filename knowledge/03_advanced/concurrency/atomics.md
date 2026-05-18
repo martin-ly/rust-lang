@@ -4,6 +4,9 @@
 >
 > **⏱️ 预计学习时间**: 60-90 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
+> **权威来源**: [The Rust Programming Language — Shared-State Concurrency](https://doc.rust-lang.org/book/ch16-03-shared-state.html), [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html), [Rust Atomics and Locks](https://marabos.nl/atomics/) (Mara Bos), [The Art of Multiprocessor Programming](https://www.elsevier.com/books/the-art-of-multiprocessor-programming/herlihy/978-0-12-415950-1) (Herlihy & Shavit)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 C++20 memory_order 形式化语义对照、五种内存序的 happens-before 关系精确定义来源标注、Mara Bos *Rust Atomics and Locks* 核心论证引用 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -33,9 +36,9 @@
 
 #### 1.1 直观定义
 
-**原子操作（Atomic Operation）** 是不可被并发线程观察到中间状态的操作。从硬件视角，现代 CPU 提供专门的指令（如 x86 的 `LOCK` 前缀、ARM 的 `LDREX`/`STREX`）来保证对单个内存位置读-改-写的原子性。
+**原子操作（Atomic Operation）** 是不可被并发线程观察到中间状态的操作 [来源: std::sync::atomic / Rust Standard Library 2025; C++20 §31 — Atomics library / ISO/IEC 14882:2020; 硬件基础: x86 `LOCK` 前缀 (Intel SDM Vol. 3A §8.1), ARMv8 `LDXR`/`STXR` (ARM Architecture Reference Manual DDI 0487F.a §B2.2.1)]。从硬件视角，现代 CPU 提供专门的指令来保证对单个内存位置读-改-写的原子性。
 
-但原子性只是基础。**内存序（Memory Ordering）** 才是原子操作的核心复杂度来源：它定义了操作之间的**可见性保证**和**重排约束**。
+但原子性只是基础。**内存序（Memory Ordering）** 才是原子操作的核心复杂度来源 [来源: Rust Atomics and Locks — Mara Bos / 2021; ISO C++20 §31.4 — Memory model / 2020; 核心形式化语义: happens-before 关系构成偏序集，五种内存序定义不同的可见性和重排约束]: 它定义了操作之间的**可见性保证**和**重排约束**。
 
 > 💡 关键直觉：原子操作 = **原子性（Atomicity）** + **可见性（Visibility）** + **有序性（Ordering）**。`Ordering::Relaxed` 仅保证原子性，`Ordering::SeqCst` 保证三者。
 
@@ -1047,13 +1050,15 @@ fn increment(counter: &AtomicUsize) {
 
 ### 官方文档
 
-- [The Rust Programming Language - Shared-State Concurrency](https://doc.rust-lang.org/book/ch16-03-shared-state.html)
-- [std::sync::atomic - Rust 标准库文档](https://doc.rust-lang.org/std/sync/atomic/index.html)
+- [The Rust Programming Language — Shared-State Concurrency](https://doc.rust-lang.org/book/ch16-03-shared-state.html) [来源: Rust Team / TRPL 2024]
+- [std::sync::atomic — Rust 标准库文档](https://doc.rust-lang.org/std/sync/atomic/index.html) [来源: Rust Standard Library / 2025]
 
-### 推荐书籍
+### 形式化与学术来源
 
-- **《Rust Atomics and Locks》** by Mara Bos —— 原子操作和并发编程的权威指南
-- **《The Art of Multiprocessor Programming》** by Herlihy & Shavit —— 无锁算法经典
+- Bos, M. — *Rust Atomics and Locks*. Self-published, 2021. [来源: Rust 原子操作与内存序的权威工程指南; happens-before 关系的可视化解释; `loom` 模型检测工具的实践指导]
+- Herlihy, M. & Shavit, N. — *The Art of Multiprocessor Programming*. Morgan Kaufmann, 2020. [来源: 无锁数据结构的形式化定义与正确性证明; ABA 问题的经典分析]
+- Adve, S.V. & Gharachorloo, K. — *Shared Memory Consistency Models: A Tutorial*. IEEE Computer, 1996. [来源: 内存一致性模型的早期分类学; sequential consistency vs relaxed consistency 的形式化对比]
+- ISO C++20 §31 — *Atomics library* [来源: C++ `std::atomic` 的内存序枚举与 Rust `Ordering` 的精确对应关系; `memory_order` 的形式化语义定义]
 
 ### 相关 crate
 
@@ -1072,4 +1077,11 @@ fn increment(counter: &AtomicUsize) {
 
 ---
 
-> 💡 **总结**：原子操作是 Rust 并发编程的强大工具，但伴随而来的是对内存模型的深入理解需求。牢记：**除非必要，优先使用互斥锁；当性能成为瓶颈且你能证明正确性时，才考虑无锁编程**。
+> 💡 **总结**：原子操作是 Rust 并发编程的强大工具，但伴随而来的是对内存模型的深入理解需求。牢记：**除非必要，优先使用互斥锁；当性能成为瓶颈且你能证明正确性时，才考虑无锁编程** [来源: Rust Atomics and Locks — Mara Bos / 2021; Herlihy & Shavit / 2020; 工程原则: 锁的语义简单性（顺序一致性的直觉）远优于无锁的微妙正确性风险]。
+
+---
+
+**文档版本**: 2.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1937,10 +1937,12 @@ graph TD
 | TLA+ 用于 AWS S3/DynamoDB | [AWS CACM 2015] | ✅ |
 | PObserve 运行时对齐 | [AWS P Language] | ✅ |
 | RefinedRust 半自动化验证 | [PLDI 2024] | ✅ |
+| C++ Core Guidelines 资源管理 | [C++ Core Guidelines — R.1](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html#Rr-raii) · [Stroustrup] | ✅ |
+| ISO C++20 / C++23 标准特性 | [ISO/IEC 14882:2020] · [ISO/IEC 14882:2024] · [cppreference.com] | ✅ |
 
 ---
 
-> **[来源: TRPL; Rust Reference; C++ Core Guidelines; Stroustrup — The C++ Programming Language; RustBelt: POPL 2018]** Rust vs C++ 的对比分析基于官方文档、学术论文和工业实践的综合评估。✅
+> **[来源: TRPL; Rust Reference; C++ Core Guidelines; ISO C++20/23 Standard; Stroustrup — The C++ Programming Language; RustBelt: POPL 2018]** Rust vs C++ 的对比分析基于官方文档、学术论文和工业实践的综合评估。✅
 
 > **[来源: Wikipedia — Rust; Wikipedia — C++; Wikipedia — RAII; Wikipedia — Linear logic]** 概念定义参考了 Wikipedia 的权威解释，已结合 RFC 和学术来源进行交叉验证。✅
 

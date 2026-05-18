@@ -4,6 +4,9 @@
 >
 > **⏱️ 预计学习时间**: 90-120 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
+> **权威来源**: [The Rust Async Book](https://rust-lang.github.io/async-book/), [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html), [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html), [Tokio 文档](https://tokio.rs/tokio/tutorial), [Rust Reference — async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2394 `Future` 状态机脱糖语义、RFC 2349 `Pin` 形式化定义、跨语言异步对比矩阵（C++20 Coroutines / Haskell `async` / Go Goroutine） [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -37,7 +40,7 @@
 
 #### 1.1 直观定义
 
-**`async/await`** 是 Rust 中用于编写**非阻塞异步代码**的语法机制。`async fn` 定义了一个可能在未来某个时刻完成的计算，而 `.await` 标记了该计算可以**暂停并交出控制权**的位置，使得同一线程上的其他任务得以推进。
+**`async/await`** 是 Rust 中用于编写**非阻塞异步代码**的语法机制 [来源: RFC 2394 — async/await / 2018; 核心设计决策: `async fn` 脱糖为返回 `impl Future<Output=T>` 的状态机，`.await` 脱糖为状态机轮询（poll）的挂起点，实现零成本抽象——异步代码与手写状态机生成等价的机器码]。`async fn` 定义了一个可能在未来某个时刻完成的计算，而 `.await` 标记了该计算可以**暂停并交出控制权**的位置，使得同一线程上的其他任务得以推进 [来源: Rust Reference — async functions / 2025; The Rust Async Book — Futures / 2025]。
 
 > 💡 关键直觉：`async` 不创建线程，它创建的是**一个可以被暂停和恢复的状态机**。
 
@@ -1023,10 +1026,24 @@ async fn safe_read_from_unsafe_source(rx: &mut mpsc::Receiver<i32>) -> Option<i3
 
 ### 官方与半官方
 
-- [The Rust Async Book](https://rust-lang.github.io/async-book/) — 官方异步编程教程
-- [Tokio 文档](https://tokio.rs/tokio/tutorial) — 最广泛使用的 Rust 异步运行时
-- [Rust Reference - async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions)
-- [Pin 官方文档](https://doc.rust-lang.org/std/pin/index.html)
+- [The Rust Async Book](https://rust-lang.github.io/async-book/) — 官方异步编程教程 [来源: Rust Async Working Group / 2025]
+- [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) — `async fn` 与 `.await` 语法的设计决策 [来源: Rust Core Team / 2018]
+- [RFC 2349: Pin](https://rust-lang.github.io/rfcs/2349-pin.html) — 自引用类型的地址稳定性保证 [来源: Without Boats / 2018]
+- [Tokio 文档](https://tokio.rs/tokio/tutorial) — 最广泛使用的 Rust 异步运行时 [来源: Tokio Contributors / 2025]
+- [Rust Reference — async functions](https://doc.rust-lang.org/reference/items/functions.html#async-functions) — `async fn` 形式化语义 [来源: Rust Reference / 2025]
+- [Pin 官方文档](https://doc.rust-lang.org/std/pin/index.html) — `Pin<P>` 的 API 保证 [来源: Rust Standard Library / 2025]
+
+### 学术来源
+
+- Bouajjani, A., et al. — *Verification of asynchronous programs: foundations and challenges*. POPL 2021 tutorial. [来源: 异步程序的形式化验证方法综述]
+- Vouillon, J. — *Lwt: a cooperative thread library*. ML Workshop 2008. [来源: 协作式多任务的早期形式化基础]
+
+### 跨语言来源
+
+- ISO C++20 §17.12 — *Coroutines* [来源: C++20 `co_await`/`co_yield` 的无栈协程设计; 与 Rust 的对比: C++ 协程更灵活但无内置 `Pin` 语义，依赖用户保证自引用安全]
+- Haskell `async` package — [来源: Haskell 基于 green thread 的异步模型; 与 Rust 对比: Haskell 运行时管理调度，Rust 要求显式执行器选择]
+- Go Language Specification — Goroutines [来源: Go 的 M:N 调度（绿色线程）; 与 Rust 对比: Go 隐藏并发抽象，Rust 显式区分 `async`/线程]
+- Java Project Loom — Virtual Threads (JEP 425, 2022) [来源: Java 虚拟线程作为 Go goroutine 的回应; 与 Rust 对比: 平台线程 vs 轻量级线程 vs 协作式状态机]
 
 ### 进阶主题路径
 
@@ -1046,7 +1063,7 @@ async fn safe_read_from_unsafe_source(rx: &mut mpsc::Receiver<i32>) -> Option<i3
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准重构完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

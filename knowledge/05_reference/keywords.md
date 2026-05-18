@@ -4,11 +4,17 @@
 > **适用范围**: 所有 Rust 开发者
 > **内容**: 完整的关键字分类参考，包含严格关键字、保留关键字和特殊标识符
 
+**变更日志**:
+
+- v2.1 (2026-05-19): 补全权威来源标注（Rust Reference: Keywords）
+
 ---
 
 ## 严格关键字 (Strict Keywords)
 
 严格关键字不能用作变量名、函数名或任何标识符。Rust 在编译时会拒绝将这些关键字作为标识符使用。
+
+> **[来源: Rust Reference: Keywords]** Rust 关键字分为严格关键字（strict keywords）和保留关键字（reserved keywords），由编译器在词法分析阶段识别。 ✅
 
 ### 控制流关键字
 
@@ -783,6 +789,15 @@ if let Some(ref s) = opt {
 
 ---
 
-**文档版本**: 2.0
+## 📖 权威来源与延伸阅读
+
+### 官方文档（一级来源）
+
+- [Rust Reference: Keywords](https://doc.rust-lang.org/reference/keywords.html) —— 关键字的完整官方列表与分类
+- [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) —— Edition 变更引入的新关键字说明
+
+---
+
+**文档版本**: 2.1
 **对应 Rust 版本**: Edition 2024
 **最后更新**: 2026-05-09

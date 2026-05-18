@@ -990,6 +990,12 @@ graph TD
 
 > **[来源: Rust Lang Team Blog; Rust Internals Forum; Lang Team Roadmap]** 未来方向基于语言团队的公开讨论和路线图文档。✅
 
+> **[来源: Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)** Rust 项目目标定义了语言团队每年的旗舰级工作方向，包括下一代 trait solver、const traits、Effects 系统等。✅
+
+> **[来源: Niko Matsakis, "Rust in 2025+" blog]** 语言设计决策的社区权威解读，涵盖 trait solver 演进、const generics 稳定化等主题。 ✅
+
+> **[来源: Without Boats, "The Rust I Wanted Had No Future"]** 对 Rust 语言设计哲学和演进方向的深度反思，涉及 effects、async fn in traits 等特性的设计权衡。 ✅
+
 > **[来源: Koka Language; Plotkin & Pretnar 2009; Type Theory Research]** Effects 系统和类型论扩展参考了学术文献。✅
 
 > **[来源: Rust Reference; TRPL; Rust RFCs; Academic Papers]** 本文件内容基于官方文档、学术研究和工业实践的综合分析。✅

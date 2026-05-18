@@ -6,6 +6,10 @@
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 > **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
 
+**变更日志**:
+
+- v1.1 (2026-05-19): 补全权威来源标注（Rust Reference、TRPL、Rust Performance Book、std::simd）
+
 ---
 
 ## 🎯 学习目标
@@ -36,6 +40,10 @@
 #### 1.1 零成本抽象 (Zero-Cost Abstraction)
 
 Rust 的高级特性（迭代器、闭包、泛型）在优化后的代码中不产生额外运行时开销。
+
+> **[来源: TRPL: Ch13 — Closures]** 迭代器和闭包在 release 模式下通过内联消除抽象开销。 ✅
+> **[来源: Rust Reference: Inline attribute]** `#[inline]` 提示编译器将函数体插入调用点，减少函数调用开销。 ✅
+> **[来源: The Rust Performance Book]** 零成本抽象不等于自动最优——编译器受限于别名分析、边界检查和 LLVM 优化边界。 ✅
 
 ```rust
 // 迭代器链在 release 模式下完全内联，等价于手写循环
@@ -343,15 +351,22 @@ if likely(normal_condition()) {
 
 ---
 
-## 🔗 参考资源
+## 📖 权威来源与延伸阅读
 
-- [The Rust Performance Book](https://nnethercote.github.io/perf-book/)
-- [std::simd - Portable SIMD](https://doc.rust-lang.org/std/simd/index.html)
-- [cargo-pgo](https://github.com/Kobzol/cargo-pgo)
-- [criterion.rs](https://bheisler.github.io/criterion.rs/book/)
+### 官方文档（一级来源）
+
+- [The Rust Performance Book](https://nnethercote.github.io/perf-book/) —— Rust 性能优化的官方指南
+- [Rust Reference: Inline attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute) —— 内联属性的精确语义
+- [std::simd - Portable SIMD](https://doc.rust-lang.org/std/simd/index.html) —— 可移植 SIMD 的官方文档
+- [The rustc Book — Codegen Options](https://doc.rust-lang.org/rustc/codegen-options/index.html) —— 编译器优化等级与代码生成选项
+
+### 社区权威（二级来源）
+
+- [criterion.rs](https://bheisler.github.io/criterion.rs/book/) —— 科学基准测试框架
+- [cargo-pgo](https://github.com/Kobzol/cargo-pgo) —— Profile-Guided Optimization 工具
 
 ---
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+
 **最后更新**: 2026-05-09
