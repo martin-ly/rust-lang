@@ -469,16 +469,19 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_invariant() {
         invariant_verification::demo_concurrent_transfers().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_termination() {
         termination_proofs::countdown_with_proof(3).await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_deadlock() {
         deadlock_detection::demo_deadlock_scenario().await;
     }

@@ -659,6 +659,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     #[ignore] // demo_advanced_features 耗时较长，默认跳过
     async fn test_advanced_async_features() {
         let features = AdvancedAsyncFeatures190::new();
@@ -667,6 +668,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_resource_pool() {
         let pool = ResourcePool190::new(10);
         
@@ -680,6 +682,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_concurrency_controller() {
         let controller = ConcurrencyController190::new(5);
         
@@ -692,6 +695,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     #[ignore] // 需 start_processing 运行才有 processing_speed，默认跳过
     #[allow(unused_comparisons)] // StreamMetrics 字段为 usize，不做与 0 的比较
     async fn test_async_stream() {
@@ -712,6 +716,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_smart_cache() {
         let cache = SmartAsyncCache190::new(100, Duration::from_secs(60));
         
@@ -726,6 +731,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_batch_processor() {
         let processor = Arc::new(AsyncBatchProcessor190::new(
             5,

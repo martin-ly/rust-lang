@@ -478,7 +478,10 @@ pub mod actix_analysis {
             let result1 = addr.send(Add(10, 20)).await.expect("发送 Add 消息不应失败");
             println!("  返回值: {}", result1);
 
-            let result2 = addr.send(Multiply(5, 6)).await.expect("发送 Multiply 消息不应失败");
+            let result2 = addr
+                .send(Multiply(5, 6))
+                .await
+                .expect("发送 Multiply 消息不应失败");
             println!("  返回值: {}", result2);
 
             // 停止 Actor
@@ -545,7 +548,10 @@ pub mod reactor_pattern {
 
         /// 注册事件处理器
         pub fn register(&self, source: u64, event_type: EventType, handler: Arc<dyn EventHandler>) {
-            let mut handlers = self.handlers.lock().expect("SimpleReactor handlers 锁被 poisoned");
+            let mut handlers = self
+                .handlers
+                .lock()
+                .expect("SimpleReactor handlers 锁被 poisoned");
             handlers.insert((source, event_type), handler);
             println!(
                 "  [Reactor] 注册处理器: source={}, type={:?}",
@@ -555,7 +561,10 @@ pub mod reactor_pattern {
 
         /// 提交事件（模拟）
         pub fn submit_event(&self, event: Event) {
-            let mut queue = self.event_queue.lock().expect("SimpleReactor event_queue 锁被 poisoned");
+            let mut queue = self
+                .event_queue
+                .lock()
+                .expect("SimpleReactor event_queue 锁被 poisoned");
             queue.push(event);
         }
 
@@ -575,7 +584,10 @@ pub mod reactor_pattern {
             for i in 0..iterations {
                 // 模拟事件多路分解器
                 let events = {
-                    let mut queue = self.event_queue.lock().expect("SimpleReactor event_queue 锁被 poisoned");
+                    let mut queue = self
+                        .event_queue
+                        .lock()
+                        .expect("SimpleReactor event_queue 锁被 poisoned");
                     std::mem::take(&mut *queue)
                 };
 
@@ -590,7 +602,10 @@ pub mod reactor_pattern {
                 // 分发事件
                 for event in events {
                     let handler = {
-                        let handlers = self.handlers.lock().expect("SimpleReactor handlers 锁被 poisoned");
+                        let handlers = self
+                            .handlers
+                            .lock()
+                            .expect("SimpleReactor handlers 锁被 poisoned");
                         handlers.get(&(event.source, event.event_type)).cloned()
                     };
 
@@ -938,16 +953,19 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_simple_actor() {
         simple_actor_system::demo().await;
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_reactor() {
         reactor_pattern::demo().await;
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tokio_event_loop() {
         tokio_reactor_analysis::demo_event_loop().await;
     }

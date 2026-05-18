@@ -1,6 +1,7 @@
 use std::time::Duration;
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn exec_strategy_basic_works() {
     let runner = c06_async::utils::ExecStrategyBuilder::new()
         .concurrency(2)

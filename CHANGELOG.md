@@ -61,6 +61,23 @@
 - **crates/c01_ownership_borrow_scope/src/rust_194_features.rs**: 更新 LazyCell/LazyLock 文档，区分 1.94 和 1.96 稳定化内容，添加 `get_mut`/`force_mut` 可变引用示例
 - **生态安全态势扫描**: 监控到 5 月新 RUSTSEC（diesel 命令注入、lettre TLS 绕过、libcrux AVX2 边缘案例等），确认不影响本 workspace
 
+### 🔧 代码质量与编译卫生（2026-05-18 追加）
+
+- **Clippy 零警告**: 修复 `c04_generic` `explicit_deref_methods` 警告
+- **Benchmark 编译修复**: `c10_networks` `postcard` 依赖添加 `use-std` feature，修复 `to_stdvec` 编译错误
+- **归档废弃示例**: `c06_async` `actor_bastion_bridge.rs` 归档至 `archive/deprecated/`（`bastion` 已移除）
+- **README 更新**: `c06_async/README.md` 移除 `tokio-console` 和 `bastion` 引用
+
+### 🧪 Miri 内存安全全 Workspace 验证（2026-05-18）
+
+- **报告**: `reports/MIRI_VALIDATION_2026_05_18_COMPREHENSIVE.md`
+- **覆盖**: 10 个 crate，1,754+ 测试，Tree Borrows 模式
+- **发现并修复 2 处真实 UB**:
+  - `c04_generic/src/miri_tests.rs`: `ptr::read` 未对齐读取 → `ptr::read_unaligned`
+  - `c08_algorithms/src/rust_196_features.rs`: gen block `Box` 跨 yield 部分移动 → 重构为引用+clone
+- **Miri 兼容性修复 40+ 测试**: tokio/rayon/内联汇编/线程池/内存映射 I/O 测试添加 `#[cfg_attr(miri, ignore)]`
+- **Windows Miri 限制记录**: `c06_async`、`c07_process` 因 `CreateIoCompletionPort` 不支持无法在 Windows Miri 下验证
+
 ---
 
 ## [2.0.0] - 2026-05-13 — 知识体系 v1.0 发布

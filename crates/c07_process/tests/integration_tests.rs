@@ -69,6 +69,7 @@ mod async_tests {
     use std::collections::HashMap;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_process_manager_creation() {
         let manager = AsyncProcessManager::new().await;
         let processes = manager.list_all().await;
@@ -76,6 +77,7 @@ mod async_tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_process_spawn_and_kill() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -126,6 +128,7 @@ mod async_tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_process_not_found() {
         let manager = AsyncProcessManager::new().await;
         let invalid_pid = 99999;
@@ -135,6 +138,7 @@ mod async_tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_process_list_all() {
         let manager = AsyncProcessManager::new().await;
         let processes = manager.list_all().await;

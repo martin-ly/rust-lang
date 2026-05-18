@@ -665,6 +665,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_config_manager() {
         let config = AsyncConfigManager::get_config();
         assert_eq!(config.max_connections, 100);
@@ -674,6 +675,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_lazy_value() {
         let lazy = AsyncLazyValue::new(|| 42);
         let value = lazy.get().await;
@@ -681,6 +683,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_math_calculator() {
         let error = AsyncMathCalculator::golden_ratio_approximation(50).await;
         assert!(error < 0.0001);
@@ -690,6 +693,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_numerical_integration() {
         let result = async_numerical_integration(|x| x * x, 0.0, 1.0, 1000).await;
         // ∫₀¹ x² dx = 1/3
@@ -697,6 +701,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_token_stream() {
         let tokens = vec!["10".to_string(), "20".to_string()];
         let mut stream = AsyncTokenStream::new(tokens);
@@ -706,6 +711,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_sliding_window() {
         let data = vec![1.0, 2.0, 3.0, 4.0, 5.0];
         let ma = AsyncSlidingWindowProcessor::moving_average::<3>(&data).await;
@@ -713,6 +719,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_detect_trend_changes() {
         let data = vec![1.0, 2.0, 10.0, 3.0];
         let changes = AsyncSlidingWindowProcessor::detect_trend_changes(&data).await;
@@ -720,6 +727,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_unicode_parser() {
         let text = "Hello";
         let composition = AsyncUnicodeParser::analyze_string(text).await;
@@ -728,6 +736,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_validate_encoding() {
         let chars = vec!['A', '中', '🦀'];
         let results = AsyncUnicodeParser::validate_encoding(&chars).await;
@@ -735,6 +744,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_demonstrate_features() {
         demonstrate_rust_194_async_features().await;
     }
@@ -773,6 +783,7 @@ mod tests {
     ///
     /// 验证多个并发任务同时访问同一个 LazyValue 时的行为
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_lazy_value_concurrent() {
         use std::sync::Arc;
         use tokio::sync::Barrier;
@@ -814,6 +825,7 @@ mod tests {
     ///
     /// 验证长时间计算可以被正确取消
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_math_timeout() {
         use tokio::time::{timeout, Duration};
 
@@ -847,6 +859,7 @@ mod tests {
     ///
     /// 验证空字符串和边界情况的处理
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_unicode_analyzer_empty() {
         // 测试空字符串
         let empty = "";

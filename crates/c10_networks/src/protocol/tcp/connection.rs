@@ -24,8 +24,12 @@ pub struct TcpConnectionConfig {
 impl Default for TcpConnectionConfig {
     fn default() -> Self {
         Self {
-            local_addr: "127.0.0.1:0".parse().expect("hardcoded localhost address should be valid"),
-            remote_addr: "127.0.0.1:8080".parse().expect("hardcoded localhost address should be valid"),
+            local_addr: "127.0.0.1:0"
+                .parse()
+                .expect("hardcoded localhost address should be valid"),
+            remote_addr: "127.0.0.1:8080"
+                .parse()
+                .expect("hardcoded localhost address should be valid"),
             timeout: Duration::from_secs(30),
             keep_alive: true,
             tcp_nodelay: true,
@@ -229,6 +233,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tcp_connection_creation() {
         let config = TcpConnectionConfig::default();
         let connection = TcpConnection::new(1, config);
@@ -240,6 +245,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tcp_congestion_control() {
         let config = TcpConnectionConfig::default();
         let mut connection = TcpConnection::new(1, config);

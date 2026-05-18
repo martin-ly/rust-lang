@@ -619,6 +619,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_task_wrapper() {
         let logger = Arc::new(SimpleAsyncLogger);
         let task_id = "test_task".to_string();

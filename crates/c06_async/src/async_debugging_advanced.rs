@@ -918,6 +918,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_execution_flow_manager() {
         let config = FlowManagerConfig::default();
         let manager = AsyncExecutionFlowManager::new(config);
@@ -936,8 +937,14 @@ mod tests {
             )
             .await;
 
-        manager.complete_step(&flow_id, &step_id).await.expect("完成步骤不应失败");
-        manager.complete_flow(&flow_id).await.expect("完成流程不应失败");
+        manager
+            .complete_step(&flow_id, &step_id)
+            .await
+            .expect("完成步骤不应失败");
+        manager
+            .complete_flow(&flow_id)
+            .await
+            .expect("完成流程不应失败");
 
         let flow = manager.get_flow(&flow_id).await.expect("获取流程不应失败");
         assert_eq!(flow.name, "测试流程");
@@ -945,6 +952,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_debug_decorator() {
         let config = FlowManagerConfig::default();
         let flow_manager = Arc::new(AsyncExecutionFlowManager::new(config));
@@ -963,6 +971,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_metrics_collector() {
         let collector = AsyncMetricsCollector::new();
         collector.start_collection().await;

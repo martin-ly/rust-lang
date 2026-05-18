@@ -1,6 +1,7 @@
 use std::env;
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn dns_lookup_system_smoke() {
     if env::var("C10_SKIP_NETWORK_TESTS").ok().as_deref() == Some("1") {
         eprintln!("skipped: C10_SKIP_NETWORK_TESTS=1");
@@ -20,6 +21,7 @@ async fn dns_lookup_system_smoke() {
 use c10_networks::protocol::dns::{DnsResolver, presets};
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn dns_system_lookup_ips() {
     if std::env::var("C10_DNS_TESTS").ok().as_deref() != Some("1") {
         eprintln!("skip dns tests: set C10_DNS_TESTS=1 to run");
@@ -31,6 +33,7 @@ async fn dns_system_lookup_ips() {
 }
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn dns_doh_txt() {
     if std::env::var("C10_DNS_TESTS").ok().as_deref() != Some("1") {
         eprintln!("skip dns tests: set C10_DNS_TESTS=1 to run");

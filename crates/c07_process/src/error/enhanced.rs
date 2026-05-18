@@ -1145,6 +1145,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_enhanced_error_manager() {
         let config = ErrorManagerConfig {
             max_history_size: 100,
@@ -1175,6 +1176,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_error_recovery() {
         let recovery = ErrorRecovery::new();
 
@@ -1193,6 +1195,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_error_classification() {
         let classifier = ErrorClassifier::new();
 
@@ -1204,6 +1207,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_smart_recovery() {
         let config = ErrorManagerConfig {
             max_history_size: 100,
@@ -1250,6 +1254,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_batch_recovery() {
         let config = ErrorManagerConfig {
             max_history_size: 100,
@@ -1298,6 +1303,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_error_pattern_analysis() {
         let config = ErrorManagerConfig {
             max_history_size: 100,
@@ -1323,6 +1329,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_error_prediction() {
         let config = ErrorManagerConfig {
             max_history_size: 100,

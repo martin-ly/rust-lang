@@ -401,6 +401,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_state_machine() {
         let sm = AsyncStateMachine190::new();
         assert_eq!(sm.get_state().await, AsyncState::Initializing);
@@ -413,6 +414,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_error_handler() {
         let handler = AsyncErrorHandler190::new(3, 1);
         
@@ -432,6 +434,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_concurrency_controller() {
         let controller = AsyncConcurrencyController::new(2);
         

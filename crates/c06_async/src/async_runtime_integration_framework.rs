@@ -700,6 +700,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_runtime_adapter_registration() {
         let config = RuntimeConfig::default();
         let framework = AsyncRuntimeIntegrationFramework::new(config);
@@ -708,6 +709,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_task_execution() {
         let config = RuntimeConfig::default();
         let framework = AsyncRuntimeIntegrationFramework::new(config);
@@ -720,6 +722,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let service = AsyncSyncConversionService::new(2);
         let (async_result, sync_result) = service.hybrid_conversion().await.expect("混合转换不应失败");
@@ -728,6 +731,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let service = AggregationCompositionService::new();
         let component = Box::new(DataProcessingComponent::new("test", 1));

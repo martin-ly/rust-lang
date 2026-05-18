@@ -375,6 +375,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_real_async_resource() {
         let mut resource = AsyncResource190::new("test".to_string());
         resource.create_cleanup_future();
@@ -383,6 +384,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_real_async_iterator() {
         let mut stream = AsyncDataStream190::new(vec![1, 2, 3], 1);
         let mut results = Vec::new();
@@ -395,6 +397,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_polonius_borrow_demo() {
         let demo = PoloniusBorrowDemo::new(2);
         let result = demo.complex_borrow_operation("key".to_string(), "value".to_string()).await.expect("复杂借用操作不应失败");
@@ -402,6 +405,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_next_gen_trait_solver() {
         let solver = NextGenTraitSolver::new();
         let result = solver.optimized_trait_solving("test").await.expect("优化 trait 解决不应失败");
@@ -412,6 +416,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_parallel_frontend_optimizer() {
         let optimizer = ParallelFrontendOptimizer::new();
         let tasks = vec!["task1".to_string(), "task2".to_string()];
@@ -420,6 +425,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_comprehensive_demo() {
         assert!(demonstrate_rust_190_real_features().await.is_ok());
     }

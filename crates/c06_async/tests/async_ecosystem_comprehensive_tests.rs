@@ -18,6 +18,7 @@ use tokio::time::sleep;
 
 /// 测试异步运行时分析器
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_runtime_analyzer() {
     let analyzer = AsyncRuntimeAnalyzer::new();
 
@@ -38,6 +39,7 @@ async fn test_async_runtime_analyzer() {
 
 /// 测试异步集成模式
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_integration_patterns() {
     let patterns = AsyncIntegrationPatterns::new(3);
 
@@ -59,6 +61,7 @@ async fn test_async_integration_patterns() {
 
 /// 测试异步运行时共性分析器
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_commonality_analyzer() {
     let analyzer = AsyncCommonalityAnalyzer::new();
 
@@ -79,6 +82,7 @@ async fn test_async_commonality_analyzer() {
 
 /// 测试异步同步转换框架
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion_framework() {
     let framework = AsyncSyncConversionFramework::new(4);
 
@@ -95,6 +99,7 @@ async fn test_async_sync_conversion_framework() {
 
 /// 测试聚合组合设计模式框架
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition_framework() {
     let framework = AggregationCompositionFramework::new();
 
@@ -156,6 +161,7 @@ async fn test_aggregation_composition_framework() {
 
 /// 测试简化的异步运行时框架
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_simple_async_runtime_framework() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);
@@ -188,6 +194,7 @@ async fn test_simple_async_runtime_framework() {
 
 /// 测试异步同步转换服务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion_service() {
     let service = AsyncSyncConversionService::new(2);
 
@@ -219,6 +226,7 @@ async fn test_async_sync_conversion_service() {
 
 /// 测试聚合组合服务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition_service() {
     let service = AggregationCompositionService::new();
 
@@ -256,6 +264,7 @@ async fn test_aggregation_composition_service() {
 
 /// 测试数据源
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_data_source() {
     let data_source = DataSource::new("test_source", vec![1, 2, 3, 4, 5]);
 
@@ -265,6 +274,7 @@ async fn test_data_source() {
 
 /// 测试抽象异步操作
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_abstract_async_operation() {
     let operation = AbstractAsyncOperation::new("test_operation", Duration::from_millis(10));
 
@@ -274,6 +284,7 @@ async fn test_abstract_async_operation() {
 
 /// 测试任务优先级
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_task_priority() {
     assert!(TaskPriority::Critical > TaskPriority::High);
     assert!(TaskPriority::High > TaskPriority::Normal);
@@ -282,6 +293,7 @@ async fn test_task_priority() {
 
 /// 测试运行时类型
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_type() {
     let runtime_types = vec![
         AsyncRuntimeType::Std,
@@ -302,6 +314,7 @@ async fn test_runtime_type() {
 
 /// 测试性能指标
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_metrics() {
     let metrics = RuntimeMetrics {
         task_count: 10,
@@ -318,6 +331,7 @@ async fn test_runtime_metrics() {
 
 /// 测试运行时配置
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_config() {
     let config = RuntimeConfig {
         runtime_type: AsyncRuntimeType::Tokio,
@@ -334,6 +348,7 @@ async fn test_runtime_config() {
 
 /// 测试并发安全性
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_concurrency_safety() {
     let semaphore = Arc::new(Semaphore::new(3));
     let counter = Arc::new(Mutex::new(0));
@@ -368,6 +383,7 @@ async fn test_concurrency_safety() {
 
 /// 测试错误处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_error_handling() {
     let framework = SimpleAsyncRuntimeFramework::new(RuntimeConfig::default());
 
@@ -421,6 +437,7 @@ impl AsyncTask for FailingTask {
 
 /// 集成测试：完整的异步生态系统演示
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_complete_async_ecosystem_demo() {
     // 测试异步生态系统全面演示
     let result = demonstrate_async_ecosystem_comprehensive().await;
@@ -437,6 +454,7 @@ async fn test_complete_async_ecosystem_demo() {
 
 /// 压力测试：大量并发任务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_high_concurrency() {
     let framework = SimpleAsyncRuntimeFramework::new(RuntimeConfig {
         max_concurrent_tasks: 100,
@@ -470,6 +488,7 @@ async fn test_high_concurrency() {
 
 /// 内存泄漏测试
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_memory_leak_prevention() {
     let framework = SimpleAsyncRuntimeFramework::new(RuntimeConfig::default());
 

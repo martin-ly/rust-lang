@@ -356,6 +356,7 @@ mod tests {
 
     #[allow(dead_code)]
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     #[cfg_attr(miri, ignore)]
     async fn test_async_closures() {
         let features = Rust190Features::new();
@@ -431,6 +432,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_improved_concurrency() {
         let features = Rust190Features::new();
         let result = features.demonstrate_improved_concurrency().await;
@@ -438,6 +440,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_task_demo() {
         let mut task = AsyncTaskDemo::new(1, "测试任务".to_string());
         let result = task.execute().await;

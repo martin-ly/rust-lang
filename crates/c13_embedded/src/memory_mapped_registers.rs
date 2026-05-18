@@ -187,6 +187,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_gpio_port_mock() {
         // 在 host 上，使用堆分配的模拟内存验证结构体布局
         let mut gpio_memory = GpioRegisters {

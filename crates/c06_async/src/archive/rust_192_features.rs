@@ -388,6 +388,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_task_queue_rotate() {
         let mut queue = AsyncTaskQueue::new();
         queue.push(TaskItem {

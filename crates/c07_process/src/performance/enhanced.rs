@@ -958,6 +958,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_enhanced_performance_manager() {
         let config = PerformanceConfig {
             memory_threshold: 0.8,
@@ -1000,6 +1001,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_memory_monitor() {
         let monitor = MemoryMonitor::new();
 
@@ -1012,6 +1014,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_cpu_monitor() {
         let monitor = CpuMonitor::new();
 
@@ -1027,6 +1030,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_io_monitor() {
         let monitor = IoMonitor::new();
 
@@ -1044,6 +1048,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_cache_manager() {
         let manager = CacheManager::new();
 

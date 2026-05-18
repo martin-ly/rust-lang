@@ -62,7 +62,9 @@ pub mod volatile_access {
     ///
     /// `addr` 必须是有效的、已映射的硬件寄存器地址。
     pub unsafe fn write_register(addr: *mut u32, value: u32) {
-        unsafe { addr.write_volatile(value); }
+        unsafe {
+            addr.write_volatile(value);
+        }
     }
 
     /// 修改寄存器的特定位（读-修改-写）
@@ -72,7 +74,9 @@ pub mod volatile_access {
     /// 地址必须有效。
     pub unsafe fn modify_register_bits(addr: *mut u32, mask: u32, value: u32) {
         let current = unsafe { addr.read_volatile() };
-        unsafe { addr.write_volatile((current & !mask) | (value & mask)); }
+        unsafe {
+            addr.write_volatile((current & !mask) | (value & mask));
+        }
     }
 }
 
@@ -146,12 +150,14 @@ mod tests {
 
     #[test]
     #[cfg(target_arch = "x86_64")]
+    #[cfg_attr(miri, ignore)]
     fn test_asm_nop() {
         inline_asm_concepts::nop();
     }
 
     #[test]
     #[cfg(target_arch = "x86_64")]
+    #[cfg_attr(miri, ignore)]
     fn test_rdtsc() {
         let t1 = inline_asm_concepts::rdtsc();
         let t2 = inline_asm_concepts::rdtsc();

@@ -18,6 +18,7 @@ use tokio::time::timeout;
 
 /// 测试 rotate_right 在异步任务队列中的应用
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_rotate() -> Result<()> {
     let mut queue = AsyncTaskQueue::new();
 
@@ -49,6 +50,7 @@ async fn test_async_task_queue_rotate() -> Result<()> {
 
 /// 测试空队列的轮转
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_rotate_empty() {
     let mut queue: AsyncTaskQueue<&str> = AsyncTaskQueue::new();
     // 空队列轮转不应该 panic
@@ -88,6 +90,7 @@ fn test_async_resource_allocator() {
 
 /// 测试异步任务调度器
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler() -> Result<()> {
     let scheduler = AsyncTaskScheduler::new(1);
 
@@ -118,6 +121,7 @@ async fn test_async_task_scheduler() -> Result<()> {
 
 /// 测试异步任务调度器的并发安全性
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler_concurrent() -> Result<()> {
     let scheduler = AsyncTaskScheduler::new(1);
 
@@ -237,6 +241,7 @@ fn test_check_async_task_states() {
 
 /// 测试异步任务队列的基本操作
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_queue_operations() {
     let mut queue = AsyncTaskQueue::new();
 
@@ -260,6 +265,7 @@ async fn test_async_task_queue_operations() {
 
 /// 测试异步任务调度器的超时处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_task_scheduler_timeout() -> Result<()> {
     let scheduler = AsyncTaskScheduler::new(1);
 
@@ -279,6 +285,7 @@ async fn test_async_task_scheduler_timeout() -> Result<()> {
 
 /// 综合测试：完整的异步任务处理流程
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_complete_async_task_workflow() -> Result<()> {
     // 1. 创建资源分配器
     let allocator = AsyncResourceAllocator::new(1000, NonZeroUsize::new(100).unwrap());
@@ -325,6 +332,7 @@ async fn test_complete_async_task_workflow() -> Result<()> {
 
 /// 测试新增的队列操作方法
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_queue_utility_methods() {
     let mut queue: AsyncTaskQueue<String> = AsyncTaskQueue::new();
 
@@ -362,6 +370,7 @@ async fn test_queue_utility_methods() {
 
 /// 测试批量添加任务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_batch_operations() {
     let mut queue: AsyncTaskQueue<u64> = AsyncTaskQueue::new();
 
@@ -383,6 +392,7 @@ async fn test_batch_operations() {
 
 /// 测试调度器的新方法
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_scheduler_utility_methods() -> Result<()> {
     let scheduler = AsyncTaskScheduler::new(1);
 

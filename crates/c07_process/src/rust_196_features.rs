@@ -331,6 +331,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_pinned_async_task() {
         assert_eq!(ProcessRust196Features::pinned_async_task().await, 42);
     }

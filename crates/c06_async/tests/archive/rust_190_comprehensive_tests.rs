@@ -17,6 +17,7 @@ use std::time::Duration;
 
 /// 测试Rust 1.90基础特性
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_rust_190_basic_features() -> Result<()> {
     // 测试异步资源
     let resource = rust_190_features::AsyncResource::new("test_resource".to_string());
@@ -49,6 +50,7 @@ async fn test_rust_190_basic_features() -> Result<()> {
 
 /// 测试异步控制流增强
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_control_flow_enhancements() -> Result<()> {
     // 测试异步状态机
     let state_machine = async_control_flow_190::AsyncStateMachine190::new();
@@ -86,6 +88,7 @@ async fn test_async_control_flow_enhancements() -> Result<()> {
 
 /// 测试性能优化特性
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_performance_optimization_features() -> Result<()> {
     // 测试性能基准
     let benchmark = performance_optimization_190::PerformanceBenchmark::new();
@@ -129,6 +132,7 @@ async fn test_performance_optimization_features() -> Result<()> {
 
 /// 测试综合场景
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_comprehensive_scenarios() -> Result<()> {
     // 场景1：异步Web服务
     let resource = rust_190_features::AsyncResource::new("web_service".to_string());
@@ -160,6 +164,7 @@ async fn test_comprehensive_scenarios() -> Result<()> {
 
 /// 测试错误处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_error_handling() -> Result<()> {
     // 测试异步错误处理
     let error_handler = async_control_flow_190::AsyncErrorHandler190::new(3, 1);
@@ -188,6 +193,7 @@ async fn test_error_handling() -> Result<()> {
 
 /// 测试并发性能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_concurrency_performance() -> Result<()> {
     let benchmark = performance_optimization_190::PerformanceBenchmark::new();
     
@@ -214,6 +220,7 @@ async fn test_concurrency_performance() -> Result<()> {
 
 /// 测试内存安全
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_memory_safety() -> Result<()> {
     // 测试异步资源的内存安全
     let resource = rust_190_features::AsyncResource::new("memory_test".to_string());
@@ -235,6 +242,7 @@ async fn test_memory_safety() -> Result<()> {
 
 /// 测试性能基准
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_performance_benchmark() -> Result<()> {
     let benchmark = performance_optimization_190::PerformanceBenchmark::new();
     
@@ -257,6 +265,7 @@ async fn test_performance_benchmark() -> Result<()> {
 
 /// 测试资源清理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_resource_cleanup() -> Result<()> {
     // 测试异步资源清理
     let resource = rust_190_features::AsyncResource::new("cleanup_test".to_string());
@@ -277,6 +286,7 @@ async fn test_resource_cleanup() -> Result<()> {
 
 /// 测试状态转换
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_state_transitions() -> Result<()> {
     let state_machine = async_control_flow_190::AsyncStateMachine190::new();
     

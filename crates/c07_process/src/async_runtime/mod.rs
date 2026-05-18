@@ -701,6 +701,7 @@ mod tests {
     use std::collections::HashMap;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_write_stdin() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -747,6 +748,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_close_stdin() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -792,6 +794,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_read_stdout() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -840,6 +843,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_read_stderr() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -888,6 +892,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_wait_with_timeout() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -934,6 +939,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_stdio_invalid_pid() {
         let manager = AsyncProcessManager::new().await;
 

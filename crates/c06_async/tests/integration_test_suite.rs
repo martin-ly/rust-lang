@@ -667,30 +667,35 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_integration_test_manager() {
         let manager = IntegrationTestManager::new();
         assert!(manager.start_time.elapsed() >= Duration::ZERO);
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_basic_functionality() {
         let manager = IntegrationTestManager::new();
         manager.test_async_basic_functionality().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_error_handling() {
         let manager = IntegrationTestManager::new();
         manager.test_async_error_handling().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_concurrency_control() {
         let manager = IntegrationTestManager::new();
         manager.test_async_concurrency_control().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_resource_management() {
         let manager = IntegrationTestManager::new();
         manager.test_async_resource_management().await;

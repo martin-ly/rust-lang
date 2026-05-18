@@ -325,6 +325,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_enhanced_async_resource_management() {
         let features = Rust190AsyncFeatures::new();
         let result = features.demo_enhanced_async_resource_management().await;
@@ -332,6 +333,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_enhanced_async_iterators() {
         let features = Rust190AsyncFeatures::new();
         let result = features.demo_enhanced_async_iterators().await;
@@ -339,6 +341,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_enhanced_error_handling() {
         let features = Rust190AsyncFeatures::new();
         let result = features.demo_enhanced_async_error_handling().await;
@@ -346,6 +349,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_performance_optimized_async() {
         let features = Rust190AsyncFeatures::new();
         let result = features.demo_performance_optimized_async().await;
@@ -353,6 +357,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_async_streams() {
         let features = Rust190AsyncFeatures::new();
         let result = features.demo_async_streams().await;
@@ -360,6 +365,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_rust_190_all_features() {
         let features = Rust190AsyncFeatures::new();
         let result = features.run_all_demos().await;
@@ -367,6 +373,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_performance_monitor() {
         let monitor = PerformanceMonitor190::new();
         

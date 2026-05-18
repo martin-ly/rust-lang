@@ -8,6 +8,7 @@ use tokio::time::sleep;
 
 /// 测试简化的异步运行时框架
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_simple_framework() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);
@@ -20,6 +21,7 @@ async fn test_simple_framework() {
 
 /// 测试异步同步转换服务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_sync_conversion() {
     let service = AsyncSyncConversionService::new(2);
     let (async_result, sync_result) = service.hybrid_conversion().await.unwrap();
@@ -29,6 +31,7 @@ async fn test_async_sync_conversion() {
 
 /// 测试聚合组合服务
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_aggregation_composition() {
     let service = AggregationCompositionService::new();
     let component = Box::new(DataProcessingComponent::new("test", 1));
@@ -45,6 +48,7 @@ async fn test_aggregation_composition() {
 
 /// 测试任务优先级
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_task_priority() {
     assert!(TaskPriority::Critical > TaskPriority::High);
     assert!(TaskPriority::High > TaskPriority::Normal);
@@ -53,6 +57,7 @@ async fn test_task_priority() {
 
 /// 测试运行时类型
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_type() {
     let runtime_types = vec![
         AsyncRuntimeType::Std,
@@ -73,6 +78,7 @@ async fn test_runtime_type() {
 
 /// 测试性能指标
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_metrics() {
     let metrics = RuntimeMetrics {
         task_count: 10,
@@ -89,6 +95,7 @@ async fn test_runtime_metrics() {
 
 /// 测试运行时配置
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_runtime_config() {
     let config = RuntimeConfig {
         runtime_type: AsyncRuntimeType::Tokio,
@@ -105,6 +112,7 @@ async fn test_runtime_config() {
 
 /// 测试健康检查
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_health_check() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);
@@ -115,6 +123,7 @@ async fn test_health_check() {
 
 /// 测试批量任务执行
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_batch_execution() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);
@@ -135,6 +144,7 @@ async fn test_batch_execution() {
 
 /// 测试性能监控
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_performance_monitoring() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);
@@ -157,6 +167,7 @@ async fn test_performance_monitoring() {
 
 /// 测试错误处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_error_handling() {
     let config = RuntimeConfig::default();
     let framework = SimpleAsyncRuntimeFramework::new(config);

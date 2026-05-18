@@ -309,6 +309,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_resource() {
         let resource = AsyncResource::new("test".to_string());
         let result = resource.process_data(b"test").await.expect("处理数据不应失败");
@@ -316,6 +317,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_generator() {
         let mut generator = AsyncDataGenerator::new(3, 1);
         let results = generator.collect_all().await;
@@ -323,6 +325,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_borrow_checker_demo() {
         let demo = BorrowCheckerDemo::new(2);
         let result = demo
@@ -333,6 +336,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_trait_solver_demo() {
         let demo = TraitSolverDemo::new();
         let result = demo.trait_solver_performance_test("test").await.expect("Trait 解决性能测试不应失败");
@@ -340,6 +344,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_parallel_frontend_demo() {
         let demo = ParallelFrontendDemo::new();
         let tasks = vec!["task1".to_string(), "task2".to_string()];

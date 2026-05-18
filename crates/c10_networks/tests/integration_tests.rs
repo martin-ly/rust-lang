@@ -3,22 +3,23 @@
 //! 本模块包含了 c10_networks 库的集成测试，
 //! 确保各个模块能够协同工作。
 use bytes::Bytes;
-use c10_networks::{
-    error::{NetworkError, NetworkResult},
-    packet::buffer::BufferConfig,
-    packet::{Packet, PacketBuffer, PacketBuilder, PacketParser, PacketSerializer, PacketType},
-    protocol::{
-        http::{HttpMethod, HttpStatusCode, HttpVersion},
-        tcp::{TcpConnection, TcpConnectionConfig, TcpConnectionPool},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
-    },
-    socket::{TcpConfig, TcpSocket, UdpConfig, UdpSocketWrapper, utils},
+use c10_networks::error::{NetworkError, NetworkResult};
+use c10_networks::packet::buffer::BufferConfig;
+use c10_networks::packet::{
+    Packet, PacketBuffer, PacketBuilder, PacketParser, PacketSerializer, PacketType,
 };
+use c10_networks::protocol::http::{HttpMethod, HttpStatusCode, HttpVersion};
+use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpConnectionPool};
+use c10_networks::protocol::websocket::{
+    WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode,
+};
+use c10_networks::socket::{TcpConfig, TcpSocket, UdpConfig, UdpSocketWrapper, utils};
 use std::time::Duration;
 use tokio::time::timeout;
 
 /// 测试 TCP 套接字的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_tcp_socket_basic() -> NetworkResult<()> {
     // 创建 TCP 套接字配置
     let config = TcpConfig {
@@ -40,6 +41,7 @@ async fn test_tcp_socket_basic() -> NetworkResult<()> {
 
 /// 测试 UDP 套接字的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_udp_socket_basic() -> NetworkResult<()> {
     // 创建 UDP 套接字配置
     let config = UdpConfig {
@@ -59,6 +61,7 @@ async fn test_udp_socket_basic() -> NetworkResult<()> {
 
 /// 测试 HTTP 协议的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_http_protocol_basic() -> NetworkResult<()> {
     // 创建 HTTP 客户端
     // let client = HttpClient::new(); // HttpClient 暂未实现
@@ -100,6 +103,7 @@ async fn test_http_protocol_basic() -> NetworkResult<()> {
 
 /// 测试 WebSocket 协议的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_websocket_protocol_basic() -> NetworkResult<()> {
     // 创建 WebSocket 帧
     let text_frame = WebSocketFrame::text("Hello, WebSocket!");
@@ -132,6 +136,7 @@ async fn test_websocket_protocol_basic() -> NetworkResult<()> {
 
 /// 测试 TCP 连接管理的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_tcp_connection_management() -> NetworkResult<()> {
     // 创建 TCP 连接配置
     let config = TcpConnectionConfig {
@@ -173,6 +178,7 @@ async fn test_tcp_connection_management() -> NetworkResult<()> {
 
 /// 测试 TCP 连接池的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_tcp_connection_pool() -> NetworkResult<()> {
     // 创建连接池
     let pool = TcpConnectionPool::new(10, Duration::from_secs(30));
@@ -203,6 +209,7 @@ async fn test_tcp_connection_pool() -> NetworkResult<()> {
 
 /// 测试数据包处理的基本功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_packet_processing() -> NetworkResult<()> {
     // 创建数据包
     let packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
@@ -228,6 +235,7 @@ async fn test_packet_processing() -> NetworkResult<()> {
 
 /// 测试数据包缓冲区的功能
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_packet_buffer() -> NetworkResult<()> {
     // 创建缓冲区配置
     let config = BufferConfig {
@@ -259,6 +267,7 @@ async fn test_packet_buffer() -> NetworkResult<()> {
 
 /// 测试数据包解析和序列化
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_packet_serialization() -> NetworkResult<()> {
     // 创建数据包
     let original_packet = Packet::new(PacketType::Raw, Bytes::copy_from_slice(b"test data"));
@@ -284,6 +293,7 @@ async fn test_packet_serialization() -> NetworkResult<()> {
 
 /// 测试错误处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_error_handling() -> NetworkResult<()> {
     // 测试不同类型的错误
     let errors = vec![
@@ -318,6 +328,7 @@ async fn test_error_handling() -> NetworkResult<()> {
 
 /// 测试并发处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_concurrent_processing() -> NetworkResult<()> {
     use tokio::task;
 
@@ -360,6 +371,7 @@ async fn test_concurrent_processing() -> NetworkResult<()> {
 
 /// 测试性能基准
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_performance_benchmark() -> NetworkResult<()> {
     use std::time::Instant;
 
@@ -410,6 +422,7 @@ async fn test_performance_benchmark() -> NetworkResult<()> {
 
 /// 测试超时处理
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_timeout_handling() -> NetworkResult<()> {
     // 创建带超时的缓冲区
     let config = BufferConfig {
@@ -437,6 +450,7 @@ async fn test_timeout_handling() -> NetworkResult<()> {
 
 /// 测试内存使用
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_memory_usage() -> NetworkResult<()> {
     // 创建大量数据包
     let mut packets = Vec::new();

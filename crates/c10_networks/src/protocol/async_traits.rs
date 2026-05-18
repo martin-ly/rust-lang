@@ -331,6 +331,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_network_client() -> NetworkResult<()> {
         let client = TestAsyncNetworkClient::new();
 
@@ -347,6 +348,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_trait_composer() -> NetworkResult<()> {
         let composer = AsyncTraitComposer::new(());
 
@@ -363,6 +365,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_trait_optimizer() -> NetworkResult<()> {
         // 简化的测试，只测试一个操作
         let operation = || async { Ok::<i32, NetworkError>(42) };

@@ -1385,6 +1385,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_enhanced_sync_manager() {
         let config = SyncConfig::default();
         let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");
@@ -1406,6 +1407,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_deadlock_detection() {
         let detector = DeadlockDetector::new();
 
@@ -1421,6 +1423,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_adaptive_scheduler() {
         let scheduler = AdaptiveScheduler::new();
 
@@ -1436,6 +1439,7 @@ mod tests {
 
     // 并发压力测试：互斥锁/读写锁/信号量
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn stress_test_mutex_rwlock_semaphore() {
         let config = SyncConfig::default();
         let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");
@@ -1509,6 +1513,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_performance_analysis() {
         let config = SyncConfig::default();
         let manager = EnhancedSyncManager::new(config).await.expect("增强同步管理器创建失败");

@@ -394,6 +394,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_performance_manager() -> NetworkResult<()> {
         let config = PerformanceConfig::default();
         let manager = PerformanceManager::new(config);
@@ -406,6 +407,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_zero_copy_buffer() -> NetworkResult<()> {
         let pool = Arc::new(MemoryPool::new(1024));
         let mut buffer = ZeroCopyBuffer::new(pool, 100)?;
@@ -420,6 +422,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_batch_processor() {
         let mut processor = BatchProcessor::new(5, Duration::from_millis(100));
 
@@ -437,6 +440,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_performance_monitor() {
         let metrics = Arc::new(MetricsCollector::new());
         let monitor = PerformanceMonitor::new(metrics.clone());

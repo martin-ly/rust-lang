@@ -10,6 +10,7 @@ mod async_edge_cases {
     use std::time::Duration;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_write_stdin_to_nonexistent_process() {
         let manager = AsyncProcessManager::new().await;
 
@@ -20,6 +21,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_close_stdin_to_nonexistent_process() {
         let manager = AsyncProcessManager::new().await;
 
@@ -30,6 +32,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_read_stdout_from_nonexistent_process() {
         let manager = AsyncProcessManager::new().await;
 
@@ -40,6 +43,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_read_stderr_from_nonexistent_process() {
         let manager = AsyncProcessManager::new().await;
 
@@ -50,6 +54,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_wait_with_timeout_for_nonexistent_process() {
         let manager = AsyncProcessManager::new().await;
 
@@ -62,6 +67,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_multiple_concurrent_operations() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -111,6 +117,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_empty_stdin_write() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();
@@ -155,6 +162,7 @@ mod async_edge_cases {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_timeout_behavior() {
         let manager = AsyncProcessManager::new().await;
         let mut env = HashMap::new();

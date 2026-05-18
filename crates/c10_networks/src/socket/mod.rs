@@ -83,6 +83,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tcp_socket_creation() {
         let config = TcpConfig {
             address: utils::localhost(0),
@@ -96,6 +97,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_udp_socket_creation() {
         let config = UdpConfig {
             address: utils::localhost(0),
@@ -107,6 +109,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_socket_factory() {
         let tcp_config = TcpConfig::default();
         let udp_config = UdpConfig::default();
@@ -121,6 +124,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_utils() {
         // 测试地址解析
         let addr = utils::parse_address("127.0.0.1:8080").unwrap();

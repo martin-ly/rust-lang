@@ -966,6 +966,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_enhanced_ipc_manager() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
@@ -995,6 +996,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_shared_memory_channel() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
@@ -1017,6 +1019,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_batch_messages() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
@@ -1051,6 +1054,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_zero_copy_shared_memory() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");
@@ -1073,6 +1077,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_performance_monitoring() {
         let config = IpcConfig::default();
         let manager = EnhancedIpcManager::new(config).await.expect("创建增强IPC管理器失败");

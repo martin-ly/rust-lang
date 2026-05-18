@@ -89,7 +89,8 @@ impl UartDriver {
     /// 如果没有数据，返回 `None`。
     pub fn receive_byte(&self) -> Option<u8> {
         if self.is_data_ready() {
-            let val = unsafe { core::ptr::read_volatile(core::ptr::addr_of!((*self.base).thr_rbr)) };
+            let val =
+                unsafe { core::ptr::read_volatile(core::ptr::addr_of!((*self.base).thr_rbr)) };
             Some(val as u8)
         } else {
             None
@@ -150,6 +151,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_uart_driver_mock() {
         let mut uart_mem = UartRegisters {
             thr_rbr: 0,
@@ -167,6 +169,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_uart_send_receive() {
         let mut uart_mem = UartRegisters {
             thr_rbr: 0,

@@ -337,6 +337,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_improved_async_resource_manager() {
         let manager = ImprovedAsyncResourceManager::new(5);
         
@@ -350,6 +351,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_structured_concurrency() {
         // 使用更简单的方法测试并发处理
         let task1 = async { Ok::<i32, anyhow::Error>(1) };
@@ -363,6 +365,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_error_recovery() {
         let recovery = AsyncErrorRecovery::new(
             3,

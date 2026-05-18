@@ -591,6 +591,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_runtime_analyzer() {
         let analyzer = AsyncRuntimeAnalyzer::new();
         assert!(analyzer.get_runtime_analysis("tokio").is_some());
@@ -600,6 +601,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_runtime_comparison() {
         let analyzer = AsyncRuntimeAnalyzer::new();
         let comparison = analyzer.compare_runtimes("tokio", "smol");
@@ -607,6 +609,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_integration_patterns() {
         let patterns = AsyncIntegrationPatterns::new(2);
         assert!(patterns.runtime_adapter_pattern().await.is_ok());
@@ -614,12 +617,14 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_sync_conversion() {
         let patterns = AsyncIntegrationPatterns::new(1);
         assert!(patterns.async_sync_conversion_pattern().await.is_ok());
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_aggregation_composition() {
         let patterns = AsyncIntegrationPatterns::new(1);
         assert!(patterns.aggregation_composition_pattern().await.is_ok());

@@ -669,26 +669,31 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_basic_recursion() {
         basic_async_recursion::verify_equivalence().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_tail_recursion() {
         tail_recursion::verify_all_versions().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_tree_traversal() {
         tree_traversal::verify_equivalence().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_deep_recursion() {
         deep_recursion::test_different_depths().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_mutual_recursion() {
         mutual_recursion::verify_mutual_recursion().await;
     }

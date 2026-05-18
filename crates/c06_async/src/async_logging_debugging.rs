@@ -685,6 +685,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_task_tracker() {
         let config = AsyncLoggingConfig::default();
         let tracker = AsyncTaskTracker::new(config);
@@ -709,6 +710,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_performance_monitor() {
         let monitor = AsyncPerformanceMonitor::new();
 
@@ -727,6 +729,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_local_debugger() {
         let config = AsyncLoggingConfig::default();
         let tracker = Arc::new(AsyncTaskTracker::new(config));

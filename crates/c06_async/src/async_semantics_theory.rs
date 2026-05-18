@@ -607,26 +607,31 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_state_machine() {
         state_machine_example::demo().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_equivalence() {
         sync_async_equivalence::verify_equivalence().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_cps() {
         cps_transformation::demonstrate_equivalence().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_control_flow() {
         control_flow_analysis::demo().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_monad_laws() {
         monad_laws::verify_all().await;
     }

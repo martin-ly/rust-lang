@@ -604,6 +604,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_std_async_examples() {
         let examples = StdAsyncExamples::new();
         assert!(examples.basic_async_function("test").await.is_ok());
@@ -611,6 +612,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_tokio_examples() {
         let examples = TokioExamples::new(3);
         let tasks = vec!["test1".to_string(), "test2".to_string()];
@@ -624,6 +626,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_std_examples() {
         let examples = AsyncStdExamples::new();
         assert!(examples.file_operations_example().await.is_ok());
@@ -631,6 +634,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_smol_examples() {
         let examples = SmolExamples::new();
         assert!(examples.lightweight_task_scheduling().await.is_ok());
@@ -638,6 +642,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_runtime_composition() {
         let examples = RuntimeCompositionExamples::new();
         assert!(

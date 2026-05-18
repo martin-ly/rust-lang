@@ -130,6 +130,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tcp_connection_pool() {
         let pool = TcpConnectionPool::new(10, Duration::from_secs(30));
 
@@ -143,6 +144,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tcp_connection_pool_cleanup() {
         let pool = TcpConnectionPool::new(10, Duration::from_millis(100));
 

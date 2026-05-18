@@ -754,21 +754,25 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_producer_consumer() {
         producer_consumer::golang_style::demo().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_select() {
         select_pattern::golang_style::demo().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_pipeline() {
         pipeline::golang_style::demo().await;
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_fan_in_out() {
         fan_in_out::demo().await;
     }

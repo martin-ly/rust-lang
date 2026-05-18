@@ -231,6 +231,7 @@ mod tests {
 
     // async closure 测试
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_closure_basic() {
         // let closure = async |x: i32| x * 2;
         // assert_eq!(closure.async_call((21,)).await, 42);

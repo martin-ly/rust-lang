@@ -1,6 +1,7 @@
 use std::time::Duration;
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn interval_stream_accumulates() {
     use tokio_stream::StreamExt;
     use tokio_stream::wrappers::IntervalStream;

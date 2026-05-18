@@ -901,8 +901,11 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_enhanced_async_process_manager() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
+        let manager = EnhancedAsyncProcessManager::new(10)
+            .await
+            .expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -949,8 +952,11 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_spawn_with_callback() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
+        let manager = EnhancedAsyncProcessManager::new(10)
+            .await
+            .expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -996,16 +1002,22 @@ mod tests {
             }
         };
 
-        let pid = manager.spawn_with_callback(config, callback).await.expect("带回调启动进程失败");
+        let pid = manager
+            .spawn_with_callback(config, callback)
+            .await
+            .expect("带回调启动进程失败");
         assert!(pid > 0);
 
         let _ = manager.kill(pid, false).await;
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     #[ignore] // 暂时忽略，spawn_with_async_callback 需要重构以支持异步回调
     async fn test_spawn_with_async_callback() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
+        let manager = EnhancedAsyncProcessManager::new(10)
+            .await
+            .expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -1064,8 +1076,11 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_performance_stats() {
-        let manager = EnhancedAsyncProcessManager::new(10).await.expect("创建增强异步进程管理器失败");
+        let manager = EnhancedAsyncProcessManager::new(10)
+            .await
+            .expect("创建增强异步进程管理器失败");
 
         let mut env = HashMap::new();
         if cfg!(windows) {
@@ -1101,7 +1116,10 @@ mod tests {
         let pid = manager.spawn(config).await.expect("启动进程失败");
         assert!(pid > 0);
 
-        let stats = manager.get_performance_stats().await.expect("获取性能统计失败");
+        let stats = manager
+            .get_performance_stats()
+            .await
+            .expect("获取性能统计失败");
         assert!(stats.total_processes > 0);
 
         let _ = manager.kill(pid, false).await;

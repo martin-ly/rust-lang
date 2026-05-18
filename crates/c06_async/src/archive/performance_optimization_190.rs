@@ -465,6 +465,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_performance_benchmark() {
         let benchmark = PerformanceBenchmark::new();
         let duration = benchmark.benchmark("test", 10, || {
@@ -474,6 +475,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_parallel_compilation_demo() {
         let demo = ParallelCompilationDemo::new();
         let data = vec![1, 2, 3, 4, 5];
@@ -482,6 +484,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_trait_solver_performance() {
         let demo = TraitSolverPerformanceDemo::new();
         let result = demo.solve_trait_single("test").await.expect("解决 trait 不应失败");
@@ -489,6 +492,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_borrow_checker_performance() {
         let demo = BorrowCheckerPerformanceDemo::new();
         let result = demo.traditional_borrow(10).await;
@@ -496,6 +500,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_memory_layout_optimization() {
         let demo = MemoryLayoutOptimization::new(100);
         let indices = vec![0, 1, 2, 3, 4];
@@ -505,6 +510,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_zero_cost_abstraction() {
         let demo = ZeroCostAbstractionDemo;
         let data = vec![1, 2, 3, 4, 5];
