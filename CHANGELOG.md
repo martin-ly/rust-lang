@@ -1,6 +1,30 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-05-13
+> **最后更新**: 2026-05-18
+
+---
+
+## [2.1.0] - 2026-05-18 — 全面对齐 2026 Project Goals + 供应链安全强化
+
+### 🔒 供应链安全（Phase 1）
+
+- **`deny.toml`**: 新增 cargo-deny 策略文件，管理漏洞响应、许可证白名单、crate 来源限制
+- **`SECURITY_RESPONSE.md`**: 建立供应链安全响应流程（P0-P4 分级、24h/72h/1w SLA）
+- **依赖修复**:
+  - `bincode` 2.0.1 (unmaintained, RUSTSEC-2025-0141) → `postcard` 1.1.3
+  - `rustls-pemfile` 2.2.0 (unmaintained, RUSTSEC-2025-0134) → `rustls-pki-types::pem::PemObject`
+- **风险登记册**: 登记 15 项活跃 RUSTSEC，分级跟踪至 2026-06-30
+
+### 🎯 2026 Project Goals 对齐（Phase 2）
+
+- **`docs/07_future/rust_project_goals_2026_matrix.md`**: 50 项官方目标 → 项目内容映射矩阵，识别 12 项 🔴 缺失、8 项 🟡 待深化
+- **`concept/07_future/rust_version_tracking.md`**: 更新 1.96 跟踪表，新增 `next_solver`、`adt_const_params`、`cargo_script`、`public_private_deps` 等 6 项跟踪项
+
+### 🔬 前沿深度建设（Phase 3）
+
+- **`concept/02_intermediate/01_traits.md` §12**: 新增 Next-generation Trait Solver 补充章节（coherence 改进、解锁效应、迁移准备）
+- **`crates/c04_generic/src/next_solver_preview.rs`**: Next Solver 预览模块（Implied Bounds、Negative Impls、Coherence、GATs/TAIT 解锁、迁移指南）
+- **`crates/c04_generic/src/const_generics_extended_preview.rs`**: Const Generics 扩展预览模块（`adt_const_params`、`min_generic_const_args`、组合架构模式、稳定化路线图）
 
 ---
 
