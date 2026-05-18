@@ -12,6 +12,8 @@ rustflags = ["-C", "target-cpu=native", "--cfg", "tokio_unstable"]
 # jobs = 16
 
 [env]
+SCCACHE_SERVER_PORT = "15432"
+
 # sccache 配置 - 50GB 缓存大小
 SCCACHE_CACHE_SIZE = "50G"
 # Miri 实验性 Tree Borrows 模型（非默认，需显式启用）

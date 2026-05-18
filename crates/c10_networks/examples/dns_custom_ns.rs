@@ -8,17 +8,18 @@ async fn main() -> anyhow::Result<()> {
         .nth(1)
         .unwrap_or_else(|| "internal.service.local".to_string());
 
-    let mut name_servers = Vec::with_capacity(2);
-    name_servers.push(NameServerConfig::new(
-        IpAddr::V4(Ipv4Addr::new(10, 0, 0, 53)),
-        false,
-        vec![ConnectionConfig::udp()],
-    ));
-    name_servers.push(NameServerConfig::new(
-        IpAddr::V4(Ipv4Addr::new(1, 1, 1, 1)),
-        false,
-        vec![ConnectionConfig::udp()],
-    ));
+    let name_servers = vec![
+        NameServerConfig::new(
+            IpAddr::V4(Ipv4Addr::new(10, 0, 0, 53)),
+            false,
+            vec![ConnectionConfig::udp()],
+        ),
+        NameServerConfig::new(
+            IpAddr::V4(Ipv4Addr::new(1, 1, 1, 1)),
+            false,
+            vec![ConnectionConfig::udp()],
+        ),
+    ];
 
     let cfg = ResolverConfig::from_parts(None, vec![], name_servers);
     let mut opts = ResolverOpts::default();
