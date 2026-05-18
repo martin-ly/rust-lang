@@ -131,6 +131,10 @@ pub mod rust_194_features;
 pub mod rust_195_features;
 pub mod rust_196_features;
 pub mod rust_197_features;
+/// Next-generation Trait Solver 预览模块（nightly 实验性）
+pub mod next_solver_preview;
+/// Const Generics 扩展预览模块（adt_const_params + min_generic_const_args）
+pub mod const_generics_extended_preview;
 
 /// 高级泛型模式和设计模式示例模块 - 展示使用泛型实现的设计模式
 pub mod advanced_patterns;

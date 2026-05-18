@@ -87,7 +87,7 @@ struct Borrowed<'a> {
 
 生命周期可以形式化为**偏序集（poset）**中的元素：
 
-```
+```text
 生命周期集合 L = { 'a, 'b, 'c, 'static, ... }
 关系 ≤（outlives）：'a ≤ 'b 表示 "'a 至少和 'b 一样长"
 
@@ -105,7 +105,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 约束系统：
 
-```
+```text
 参数 x 的生命周期 ≥ 'a
 参数 y 的生命周期 ≥ 'a
 返回值的生命周期 ≤ 'a
@@ -113,7 +113,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 在调用点 `let result = longest(&s1, &s2)`：
 
-```
+```text
 s1 的生命周期 = 's1
 s2 的生命周期 = 's2
 约束: 's1 ≥ 'a, 's2 ≥ 'a, 'result ≤ 'a

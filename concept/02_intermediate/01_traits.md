@@ -106,6 +106,11 @@
       - [Auto Trait 的负向实现](#auto-trait-的负向实现)
       - [与 Coherence 的交互：阻止下游 impl](#与-coherence-的交互阻止下游-impl)
       - [反例：Negative impl 不能与普通 impl 重叠](#反例negative-impl-不能与普通-impl-重叠)
+  - [十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）](#十二补充章节next-generation-trait-solver2026-旗舰稳定化目标)
+    - [12.1 为什么需要新 Solver？](#121-为什么需要新-solver)
+    - [12.2 Next Solver 的核心改进](#122-next-solver-的核心改进)
+    - [12.3 对语言特性的解锁效应](#123-对语言特性的解锁效应)
+    - [12.4 迁移准备](#124-迁移准备)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
@@ -1683,6 +1688,67 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 
 ---
 
+## 十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）
+
+> **[来源: Rust Project Goals 2026; rustc-next-trait-solver  crate]** ✅
+
+### 12.1 为什么需要新 Solver？
+
+Rust 的现有 trait solver（`rustc_trait_selection`）自 1.0 以来已服务十余年，但在复杂泛型场景下积累了大量技术债务：
+
+| 问题类别 | 具体表现 | 影响 |
+|:---|:---|:---|
+| **Coherence 漏洞** | 复杂 where-clause 下的 impl 冲突检测不完整 | 已知的 unsoundness（rust#105782, rust#109815）|
+| **Implied bounds 推导不足** | 某些可从现有约束推导的 bound 要求显式标注 | 代码冗余，GATs/TAIT 稳定化阻塞 |
+| **Negative impls 支持受限** | `impl !Trait for T` 与 coherence 的交互复杂 | specialization 和 trait 层次设计受阻 |
+| **性能退化** | 深度嵌套的 trait bound 求解呈指数级增长 | 编译时间恶化 |
+
+### 12.2 Next Solver 的核心改进
+
+**新实现**: `rustc_next_trait_solver`（已合并入 rustc nightly）
+
+**关键差异**:
+
+```text
+现有 solver:         Next solver:
+─────────────────    ─────────────────
+专用 coherence 检查   统一为 trait 求解问题
+"找不到 impl" ≠ 否定   封闭世界下可推导否定
+pairwise 冲突检测     完整 where-clause 覆盖
+```
+
+### 12.3 对语言特性的解锁效应
+
+Next solver 是多个长期阻塞特性的**前置条件**：
+
+| 特性 | 当前状态 | Next Solver 作用 |
+|:---|:---|:---|
+| **GATs 完善** | 已稳定，部分 bug | 修复复杂 where-clause 和生命周期约束的处理 |
+| **TAIT 完整稳定** | 部分稳定 | 处理更复杂的隐式 bound 推导 |
+| **Specialization** | `min_specialization` 内部使用 | 提供 sound 的 specialization 基础 |
+| **Implied bounds** | 部分支持 | 更精确的自动推导，减少手动标注 |
+| **Negative impls** | nightly | 提供与 coherence 的正确交互语义 |
+| **Lending iterators** | nightly | 与 Polonius 组合，解锁 `LendingIterator` trait |
+
+### 12.4 迁移准备
+
+```bash
+# 测试代码与 next solver 的兼容性
+RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
+```
+
+**对用户的实际影响**:
+
+- 绝大多数代码无需修改
+- 极少数依赖 coherence 漏洞的代码会被正确拒绝
+- 一些 previously-rejected 的合法代码会被正确接受
+
+> **关键洞察**: Next solver 不是"新功能"，而是"基础设施升级"。它不会立即改变你能写的 Rust 代码，但它是 GATs、TAIT、specialization 等特性从 "能用但有 bug" 走向 "稳定且可靠" 的必要条件。这类似于 2024 Edition 的 `unsafe_op_in_unsafe_fn` ——表面上是小改动，实际上是对语言契约的深层强化。
+
+> **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
+
+---
+
 ## 十一、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 已完成 §补充章节 RPITIT —— 2026-05-13
@@ -1690,3 +1756,4 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 - [x] **TODO**: 补充 `#[fundamental]` attribute 与 Orphan Rule 例外（Pin<P>、透明性、non_exhaustive 对比） —— 优先级: 低 —— 已完成 §补充章节 #[fundamental] —— 2026-05-14
 - [x] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 已完成 §5.7
 - [x] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 已完成 §补充章节 Negative Impls —— 2026-05-13
+- [x] **TODO**: 补充 Next-generation trait solver（2026 旗舰稳定化目标、coherence 改进、解锁效应） —— 优先级: 高 —— 已完成 §十二 —— 2026-05-18

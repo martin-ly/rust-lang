@@ -391,6 +391,11 @@ unsafe extern "C" {
 | `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
 | `const_trait_impl` (`~const`) | unstable | D1 计算 | `01_foundation/01_ownership.md` | **高** | 继续演进 |
 | `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 可能稳定 |
+| `next_solver` | nightly，目标 2026 稳定 | D2 类型 / D5 编译期 | `02_intermediate/01_traits.md` §12 · `crates/c04_generic/next_solver_preview.rs` | **高** | 目标稳定 |
+| `adt_const_params` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
+| `min_generic_const_args` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
+| `public_private_deps` | unstable | D6 生态 | `docs/07_future/rust_project_goals_2026_matrix.md` | 中 | 目标稳定 |
+| `cargo_script` | unstable | D6 生态 | `concept/06_ecosystem/01_toolchain.md` | 中 | 目标稳定 |
 
 **已覆盖的 stable 特性（1.95 及之前）**: `inline_const` · `async_fn_in_trait` · `impl_trait_in_assoc_type` · `let_chains` · `type_alias_impl_trait` · `async_closure` · `precise_capturing` · `trait_upcasting`
 
@@ -401,3 +406,4 @@ unsafe extern "C" {
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
 | v1.0 | 2026-05-13 | 初始创建，对齐 Rust 1.95.0 stable，覆盖 1.79–1.95+ 五个形式模型维度 |
+| v1.1 | 2026-05-18 | 补充 Next Solver 至 1.96 跟踪表；补充 `adt_const_params`/`min_generic_const_args`/`public_private_deps`/`cargo_script` 跟踪项 |

@@ -1,109 +1,134 @@
-# ============================================================================
-# cargo-deny 供应链安全配置
-# 对应 Rust 生产级工程实践体系阶段三 —— 供应链安全
-# 参考: Microsoft SDL, AWS Supply Chain Security, Cloudflare Rust 实践
-# ============================================================================
+# cargo-deny 供应链安全策略文件
+# 参考: https://embarkstudios.github.io/cargo-deny/index.html
+# 维护者: rust-lang 知识体系项目组
+# 更新日期: 2026-05-18
+# cargo-deny 版本: 0.18.4
 
-# ----------------------------------------------------------------------------
-# 输出配置
-# ----------------------------------------------------------------------------
+[graph]
+# 不启用 all-features，按默认 feature 检查
+all-features = false
+no-default-features = false
+
 [output]
-# 特性依赖深度，控制输出详细程度
 feature-depth = 1
 
-# ----------------------------------------------------------------------------
-# 安全漏洞通告 (Advisories)
-# ----------------------------------------------------------------------------
+# =============================================================================
+# 1. 漏洞响应策略 ( Advisories )
+# =============================================================================
 [advisories]
-# 使用版本 2 格式
-version = 2
+# 漏洞数据库来源
+#db-path = "$CARGO_HOME/advisory-dbs"
+#db-urls = ["https://github.com/RustSec/advisory-db"]
 
-# 漏洞数据库路径
-db-path = "~/.cargo/advisory-db"
-
-# 漏洞数据库来源（支持多个）
-db-urls = ["https://github.com/rustsec/advisory-db"]
-
-# 发现无人维护 crate 时的行为: all / workspace / transitive / none
-unmaintained = "workspace"
-
-# 发现 yanked crate 时的行为: deny / warn / allow
-yanked = "warn"
-
-# 忽略特定通告（谨慎使用，需记录原因）
+# 已知漏洞的例外处理（带到期日审查注释）
 ignore = [
-    # 示例格式: { id = "RUSTSEC-2024-XXXX", reason = "已评估，不影响当前使用场景" }
+    # --- libp2p 0.54.1 传递依赖漏洞 ---
+    # 根因: libp2p 0.54.1 锁定 hickory-proto 0.24.4 / ring 0.16.20 / rustls-webpki 0.101.7
+    # 计划: 升级 libp2p 至 0.56+ (需同步适配 hickory-resolver 0.26 API)
+    # 到期审查: 2026-06-30
+    # RUSTSEC-2026-0119 同时影响 hickory-proto 0.24.4 (libp2p-mdns 传递) 和 0.25.2 (workspace 直接)
+    # 统一解决路径: 升级 libp2p 0.56+ 并同步升级 workspace hickory-proto 至 0.26.1+
+    { id = "RUSTSEC-2025-0009", reason = "通过 libp2p-tls 0.5.0 传递引入的 ring 0.16.20; 需升级 libp2p 0.56+ 解决" },
+    { id = "RUSTSEC-2025-0010", reason = "通过 libp2p-tls 0.5.0 传递引入的 ring 0.16.20; 需升级 libp2p 0.56+ 解决" },
+    { id = "RUSTSEC-2026-0098", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
+    { id = "RUSTSEC-2026-0099", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
+    { id = "RUSTSEC-2026-0104", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
+
+    # --- hickory-proto 0.25.2 直接依赖漏洞 ---
+    # 根因: workspace 声明 hickory-proto 0.25.2，RUSTSEC-2026-0118 尚无修复版本
+    #       RUSTSEC-2026-0119 需升级至 0.26.1+ (API 变更大，需适配 c10_networks DNS 模块)
+    # 到期审查: 2026-06-15
+    { id = "RUSTSEC-2026-0118", reason = "workspace 直接依赖 hickory-proto 0.25.2; 尚无官方修复版本，计划升级至 0.26.x" },
+    { id = "RUSTSEC-2026-0119", reason = "workspace 直接依赖 hickory-proto 0.25.2; 需升级至 0.26.1+ (API 适配中)" },
+
+    # --- bastion 0.4.5 传递依赖漏洞 ---
+    # 根因: bastion-executor -> lightproc -> crossbeam-utils 0.7.2
+    # 计划: bastion 为可选依赖，评估替换为 actix/axum 原生方案或推动上游修复
+    # 到期审查: 2026-06-30
+    { id = "RUSTSEC-2022-0041", reason = "通过 bastion-executor 0.4.2 -> lightproc 0.3.5 传递引入的 crossbeam-utils 0.7.2; bastion 为可选 feature，计划评估替换" },
+
+    # --- libp2p-swarm / tokio-console 传递引入的 lru 0.12.5 unsoundness ---
+    # 根因: libp2p-swarm 0.45.1 锁定 lru 0.12.5; tokio-console 0.1.14 锁定 ratatui 0.29.0 -> lru 0.12.5
+    # 计划: 升级 libp2p 0.56+ 解决; 关注 tokio-console 上游更新
+    # 到期审查: 2026-06-30
+    { id = "RUSTSEC-2026-0002", reason = "通过 libp2p-swarm 0.45.1 和 tokio-console 0.1.14 -> ratatui 0.29.0 传递引入的 lru 0.12.5; 需升级 libp2p 或 tokio-console" },
 ]
 
-# ----------------------------------------------------------------------------
-# 许可证检查 (Licenses)
-# ----------------------------------------------------------------------------
+# =============================================================================
+# 2. 许可证策略 ( Licenses )
+# =============================================================================
 [licenses]
-# 使用版本 2 格式
-version = 2
-
-# 显式允许的许可证白名单
+# 允许的开源许可证白名单
 allow = [
-    "MIT",                           # MIT 许可证
-    "Apache-2.0",                    # Apache 2.0
-    "BSD-3-Clause",                  # BSD 3-Clause
-    "BSD-2-Clause",                  # BSD 2-Clause
-    "ISC",                           # ISC 许可证
-    "Unicode-DFS-2016",              # Unicode 数据文件和软件许可证
-    "MPL-2.0",                       # Mozilla Public License 2.0
-    "CC0-1.0",                       # Creative Commons Zero
-    "Zlib",                          # zlib 许可证
-    "BSL-1.0",                       # Boost Software License
-    "0BSD",                          # Zero-Clause BSD
-    "OpenSSL",                       # OpenSSL 许可证
-    "WTFPL",                         # Do What The F*ck You Want To Public License
+    "MIT",
+    "Apache-2.0",
+    "Apache-2.0 WITH LLVM-exception",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "ISC",
+    "Unicode-DFS-2016",
+    "Zlib",
+    "MPL-2.0",
+    "CC0-1.0",
+    "BSL-1.0",
+    "OpenSSL",
+    "LGPL-3.0",
 ]
 
-# 许可证识别置信度阈值（0.0 - 1.0）
 confidence-threshold = 0.8
 
-# ----------------------------------------------------------------------------
-# 依赖禁止/限制 (Bans)
-# ----------------------------------------------------------------------------
+# 许可证澄清（cargo-deny 无法自动识别的特殊许可证）
+[[licenses.clarify]]
+crate = "ring"
+expression = "ISC AND OpenSSL"
+license-files = [{ path = "LICENSE", hash = 0xbd0eed23 }]
+
+[licenses.private]
+ignore = false
+registries = []
+
+# =============================================================================
+# 3. 禁止使用的 Crate ( Bans )
+# =============================================================================
 [bans]
-# 允许多个版本的同一个 crate
 multiple-versions = "warn"
-
-# 高亮显示所有重复版本
-highlight = "all"
-
-# 允许通配符依赖（如 "*"）
 wildcards = "allow"
+highlight = "all"
+workspace-default-features = "allow"
+external-default-features = "allow"
 
-# 允许特定 crate 的多个版本（有时不可避免）
-skip = [
-    # 示例: { name = "syn", version = "1.0" }
-]
-
-# 跳过整个依赖树（用于传递依赖）
-skip-tree = [
-    # 示例: { name = "windows-sys", version = "0.48", depth = 3 }
-]
-
-# 显式禁止某些 crate（如发现安全问题的 crate）
+# 明确禁止直接依赖的 crate（存在已知安全问题或有更好的替代）
 deny = [
-    # 示例: { name = "vulnerable-crate", version = "*" }
+    { name = "fxhash",   reason = "unmaintained; 使用 workspace 声明的 ahash 替代" },
+    { name = "instant",  reason = "unmaintained; 使用 std::time::Instant 替代" },
+    { name = "paste",    reason = "unmaintained; 使用 quote 宏或手写替代" },
+    { name = "atty",     reason = "有安全漏洞; 使用 workspace 声明的 is-terminal 替代" },
+    { name = "bincode",  reason = "unmaintained (RUSTSEC-2025-0141); 使用 postcard 替代" },
+    { name = "rustls-pemfile", reason = "unmaintained (RUSTSEC-2025-0134); 使用 rustls-pki-types::pem::PemObject 替代" },
 ]
 
-# ----------------------------------------------------------------------------
-# 来源检查 (Sources)
-# ----------------------------------------------------------------------------
+# 允许特定 crate 的多个版本（当传递依赖冲突不可避免时）
+skip = [
+    { crate = "crossbeam-epoch",  version = "0.8.2", reason = "bastion 生态引入旧版" },
+    { crate = "crossbeam-utils",  version = "0.7.2", reason = "bastion 生态引入旧版" },
+    { crate = "parking_lot",      version = "0.11.2", reason = "bastion 生态引入旧版" },
+    { crate = "parking_lot_core", version = "0.8.6", reason = "bastion 生态引入旧版" },
+    { crate = "fastrand",         version = "1.9.0", reason = "glommio 传递引入旧版" },
+    { crate = "futures-lite",     version = "1.13.0", reason = "glommio 传递引入旧版" },
+    { crate = "redox_syscall",    version = "0.2.16", reason = "parking_lot 0.11 传递引入旧版" },
+    { crate = "windows-sys",      version = "0.52.0", reason = "传递依赖多版本共存" },
+]
+
+# =============================================================================
+# 4. Crate 来源限制 ( Sources )
+# =============================================================================
 [sources]
-# 未知注册表（非 crates.io）
 unknown-registry = "warn"
-
-# 未知 git 来源
 unknown-git = "warn"
-
-# 允许的 git 来源白名单
-allow-git = [
-    # 示例: "https://github.com/trusted-org/trusted-repo"
-]
-
-# 显式允许的外部注册表
 allow-registry = ["https://github.com/rust-lang/crates.io-index"]
+allow-git = []
+
+[sources.allow-org]
+github = []
+gitlab = []
+bitbucket = []

@@ -37,16 +37,10 @@ impl TlsReloader {
 }
 
 fn pemfile_to_certs(pem: &[u8]) -> NetworkResult<Vec<CertificateDer<'static>>> {
-    let mut certs = vec![];
-    let mut rest = pem;
-    while let Some((block, r)) = rustls_pemfile::read_one_from_slice(rest)
-        .map_err(|e| NetworkError::Other(format!("{e:?}")))?
-    {
-        rest = r;
-        if let rustls_pemfile::Item::X509Certificate(der) = block {
-            certs.push(der);
-        }
-    }
+    use rustls::pki_types::pem::PemObject;
+    let certs: Vec<_> = CertificateDer::pem_slice_iter(pem)
+        .collect::<Result<Vec<_>, _>>()
+        .map_err(|e| NetworkError::Other(format!("{e:?}")))?;
     if certs.is_empty() {
         return Err(NetworkError::Other("no certs in pem".into()));
     }
@@ -54,24 +48,7 @@ fn pemfile_to_certs(pem: &[u8]) -> NetworkResult<Vec<CertificateDer<'static>>> {
 }
 
 fn pemfile_to_key(pem: &[u8]) -> NetworkResult<PrivateKeyDer<'static>> {
-    let mut rest = pem;
-    while let Some((block, r)) = rustls_pemfile::read_one_from_slice(rest)
-        .map_err(|e| NetworkError::Other(format!("{e:?}")))?
-    {
-        rest = r;
-        match block {
-            // 转换为 pki_types
-            rustls_pemfile::Item::Pkcs8Key(der) => {
-                return Ok(PrivateKeyDer::from(der));
-            }
-            rustls_pemfile::Item::Pkcs1Key(der) => {
-                return Ok(PrivateKeyDer::from(der));
-            }
-            rustls_pemfile::Item::Sec1Key(der) => {
-                return Ok(PrivateKeyDer::from(der));
-            }
-            _ => {}
-        }
-    }
-    Err(NetworkError::Other("no private key in pem".into()))
+    use rustls::pki_types::pem::PemObject;
+    PrivateKeyDer::from_pem_slice(pem)
+        .map_err(|e| NetworkError::Other(format!("{e:?}")))
 }

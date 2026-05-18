@@ -160,7 +160,7 @@ fn dangle() -> &String {  // 返回引用
 
 **编译器错误**：
 
-```
+```text
 error[E0106]: missing lifetime specifier
 ```
 

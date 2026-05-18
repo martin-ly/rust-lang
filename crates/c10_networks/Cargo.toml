@@ -37,7 +37,7 @@ tokio-tungstenite = { workspace = true }
 tonic-prost = { workspace = true }
 url = { workspace = true }
 rustls = { workspace = true, optional = true }
-rustls-pemfile = { workspace = true, optional = true }
+
 
 # QUIC / HTTP3 支持
 quinn = { version = "0.11", optional = true }
@@ -60,7 +60,7 @@ io-uring = { version = "0.6", optional = true }
 
 [features]
 default = []
-tls = ["rustls", "rustls-pemfile"]
+tls = ["rustls"]
 quic = ["dep:quinn", "dep:rcgen", "tls"]
 # io_uring 仅在 Linux 下有效
 io-uring = ["dep:tokio-uring", "dep:io-uring"]
@@ -83,7 +83,8 @@ protoc-bin-vendored = "3.1.0"
 criterion = { workspace = true }
 anyhow = { workspace = true }
 axum = { workspace = true }
-bincode = { workspace = true }
+postcard = { workspace = true }
+
 aes-gcm = "0.10"
 sha2 = { workspace = true }
 lru = { workspace = true }

@@ -52,13 +52,10 @@ pub mod quic_full {
 
     /// 加载 PEM 格式证书
     pub fn load_certs_from_pem(cert_pem: &[u8]) -> Result<Vec<CertificateDer<'static>>, String> {
-        let mut certs = Vec::new();
-        for cert in rustls_pemfile::certs(&mut &*cert_pem) {
-            match cert {
-                Ok(c) => certs.push(c),
-                Err(e) => return Err(format!("cert parse: {}", e)),
-            }
-        }
+        use rustls::pki_types::pem::PemObject;
+        let certs: Vec<_> = CertificateDer::pem_slice_iter(cert_pem)
+            .collect::<Result<Vec<_>, _>>()
+            .map_err(|e| format!("cert parse: {}", e))?;
         if certs.is_empty() {
             return Err("no certificates found".to_string());
         }
