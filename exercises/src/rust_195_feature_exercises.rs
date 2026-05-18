@@ -93,7 +93,7 @@ impl IfLetGuardsExercises {
         result
     }
 
-    /// ## 练习 03: 扁平化嵌套 Result<Option<T>>
+    /// ## 练习 03: 扁平化嵌套 `Result<Option<T>>`
     ///
     /// 使用 `if let` 守卫从嵌套的 `Result<Option<i32>, &str>` 中提取有效值。
     ///

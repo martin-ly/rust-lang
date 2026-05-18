@@ -54,7 +54,7 @@ pub fn classify_message(msg: Option<String>) -> String {
     }
 }
 
-/// 使用 `if let` guard 处理嵌套的 Result<Option<T>, E>
+/// 使用 `if let` guard 处理嵌套的 `Result<Option<T>, E>`
 ///
 /// 规则：
 /// - `Ok(Some(n))` 且 `n > 0` → `"positive: {n}"`

@@ -145,7 +145,6 @@ fn test_generic_type_system_integration() {
 fn test_complete_workflow_integration() {
     use std::sync::{Arc, Mutex};
     use std::thread;
-    use std::time::Instant;
 
     // 1. 创建共享数据
     let data = Arc::new(Mutex::new(vec![1, 2, 3, 4, 5]));

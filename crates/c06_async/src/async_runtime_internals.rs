@@ -40,7 +40,7 @@ impl ConceptWaker {
         self.awakened.load(Ordering::Acquire)
     }
 
-    /// 获取底层的 Arc<AtomicBool>（用于克隆）
+    /// 获取底层的 `Arc<AtomicBool>`（用于克隆）
     pub fn inner(&self) -> Arc<AtomicBool> {
         Arc::clone(&self.awakened)
     }

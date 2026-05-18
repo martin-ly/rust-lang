@@ -943,6 +943,7 @@ mod tests {
     /// 验证日志分析器能处理大量日志数据而不显著降低性能
     /// 预期行为：在合理时间内完成处理并返回正确结果
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_log_analyzer_large_input() {
         // 生成大量日志条目（10000条）
         let large_entries: Vec<LogEntry> = (0..10000)

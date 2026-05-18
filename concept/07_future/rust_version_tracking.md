@@ -440,10 +440,38 @@ unsafe extern "C" {
 
 ---
 
-## 十、变更日志
+## 十、1.97 Nightly 前瞻跟踪
+
+> **[来源: releases.rs 2026-05-18; rust-lang/rust GitHub]**
+
+**预计稳定日期**: 2026-07-09 (约 52 天后)
+
+**正在进行稳定化评审的 PR**:
+
+| 特性 | PR | 状态 | 形式化意义 |
+|:---|:---|:---|:---|
+| `int_format_into` | #152902 | 94 天 · 需 FCP | 整数格式化写入预分配缓冲区，避免临时字符串分配，嵌入式/高性能场景关键优化 |
+| `-Zinstrument-mcount` | #152544 | 102 天 · 等待作者 | LLVM 函数入口/出口计数插桩，性能分析基础设施 |
+| `refcell_try_map` | #152122 | 102 天 · 等待作者 · 需 FCP | `RefCell::try_map` 允许在 borrow 期间进行条件性映射，函数式状态管理的安全抽象 |
+| `proc_macro_value` | #152092 | 104 天 · 等待评审 · 需 FCP | 过程宏中获取字面量值的稳定 API，编译期元编程能力扩展 |
+| `VecDeque::retain_back` (from `truncate_front`) | #151973 | 118 天 | 双端队列的后端保留/截断操作，与 `retain` 对称的 API 补全 |
+
+**已在本 workspace 验证的 nightly 特性**:
+
+- `gen_blocks` + `yield_expr`: c04_generic、c08_algorithms 已投入教学使用
+- `never_type`: c02_type_system 深度专题
+- `negative_impls` / `auto_traits`: c02_type_system、c04_generic 形式化演示
+- `adt_const_params` / `min_generic_const_args`: c04_generic 扩展预览
+
+**Miri 验证状态**: 12 个 crate 2,212+ 测试通过（Tree Borrows），详见 `reports/MIRI_VALIDATION_2026_05_18_COMPREHENSIVE.md`
+
+---
+
+## 十一、变更日志
 
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
 | v1.0 | 2026-05-13 | 初始创建，对齐 Rust 1.95.0 stable，覆盖 1.79–1.95+ 五个形式模型维度 |
 | v1.1 | 2026-05-18 | 补充 Next Solver 至 1.96 跟踪表；补充 `adt_const_params`/`min_generic_const_args`/`public_private_deps`/`cargo_script` 跟踪项 |
 | v1.2 | 2026-05-18 | 网络对齐更新：1.96 beta 状态（2026-05-28 预计稳定）、cargo-script RFC 3502+3503 已批准、public/private deps RFC 3516 Help Wanted 状态、hickory CVE-2026-42254 记录 |
+| v1.3 | 2026-05-18 | Miri 全 workspace 验证：12 个 crate 2,212+ 测试通过，修复 2 处真实 UB（c04_generic 未对齐读取、c07_process 未初始化内存）、1 处 gen block 逻辑错误（c08_algorithms）

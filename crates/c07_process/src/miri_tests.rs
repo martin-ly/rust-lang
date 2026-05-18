@@ -7,8 +7,8 @@
 //!   cargo miri test miri_tests
 //!   MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test miri_tests
 
-use std::mem::MaybeUninit;
 use std::ffi::{CStr, CString};
+use std::mem::MaybeUninit;
 use std::os::raw::{c_char, c_int};
 
 // ==================== FFI 类型安全 ====================
@@ -20,7 +20,7 @@ use std::os::raw::{c_char, c_int};
 fn test_cstring_safety() {
     let rust_str = "Hello, FFI!";
     let c_string = CString::new(rust_str).unwrap();
-    
+
     unsafe {
         let ptr = c_string.as_ptr();
         let cstr = CStr::from_ptr(ptr);
@@ -66,8 +66,8 @@ fn test_process_info_layout() {
 /// 预期结果: 应该正确初始化所有字段
 #[test]
 fn test_process_info_init() {
-    let mut info: MaybeUninit<ProcessInfo> = MaybeUninit::uninit();
-    
+    let mut info: MaybeUninit<ProcessInfo> = MaybeUninit::zeroed();
+
     unsafe {
         let ptr = info.as_mut_ptr();
         (*ptr).pid = 1234;
@@ -76,7 +76,7 @@ fn test_process_info_init() {
         (*ptr).memory_usage = 1024 * 1024;
         (*ptr).name[0] = b't' as c_char;
         (*ptr).name[1] = 0;
-        
+
         let info = info.assume_init();
         assert_eq!(info.pid, 1234);
     }
@@ -97,14 +97,14 @@ fn test_env_var_safety() {
 /// 测试目的: 验证环境变量修改（跳过 Miri）
 /// 测试场景: 设置和删除环境变量
 /// 预期结果: 应该正确修改环境变量
-/// 
+///
 /// 注意: 此测试在 Miri 下被跳过，因为 set_var/remove_var 在 Miri 下不安全
 #[test]
 #[cfg(not(miri))]
 fn test_env_var_modification() {
     let test_key = "MIRI_TEST_VAR";
     let test_value = "test_value_123";
-    
+
     unsafe {
         std::env::set_var(test_key, test_value);
     }
@@ -126,7 +126,7 @@ impl SigSet {
     fn new() -> Self {
         Self { bits: [0; 16] }
     }
-    
+
     fn add(&mut self, sig: c_int) {
         if sig > 0 && sig <= 1024 {
             let idx = ((sig - 1) / 64) as usize;
@@ -134,7 +134,7 @@ impl SigSet {
             self.bits[idx] |= 1 << bit;
         }
     }
-    
+
     fn contains(&self, sig: c_int) -> bool {
         if sig > 0 && sig <= 1024 {
             let idx = ((sig - 1) / 64) as usize;

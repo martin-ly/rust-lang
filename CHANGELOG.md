@@ -78,6 +78,11 @@
 - **Miri 兼容性修复 40+ 测试**: tokio/rayon/内联汇编/线程池/内存映射 I/O 测试添加 `#[cfg_attr(miri, ignore)]`
 - **Windows Miri 限制记录**: `c06_async`、`c07_process` 因 `CreateIoCompletionPort` 不支持无法在 Windows Miri 下验证
 
+### 📖 文档质量（2026-05-18 追加）
+
+- **rustdoc 零警告**: 修复 20+ `unresolved link` 和 `unclosed HTML tag` 警告（`target_feature`、`embassy_executor::task`、`Result<Option<T>>` 等）
+- **Integration Tests 归档修复**: 将孤儿文件 `tests/cross_module_integration_tests.rs` 迁移至 `crates/integration_tests/`，添加为 workspace 成员，11 项集成测试全部通过
+
 ---
 
 ## [2.0.0] - 2026-05-13 — 知识体系 v1.0 发布

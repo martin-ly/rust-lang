@@ -18,6 +18,7 @@ resolver = "3"
     "crates/c12_wasm",
     "crates/c13_embedded",
     "crates/common",
+    "crates/integration_tests",
     "exercises",
 ]
 
@@ -694,5 +695,3 @@ similar_names = "allow"
 
 # 注: core2 补丁已移除
 # multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
-
-

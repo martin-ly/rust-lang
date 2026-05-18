@@ -398,7 +398,7 @@ impl EmbassyIntegrationChecklist {
 
 /// # Embassy 任务模型
 ///
-/// Embassy 使用 #[embassy_executor::task] 属性定义异步任务：
+/// Embassy 使用 `#[embassy_executor::task]` 属性定义异步任务：
 /// `ignore
 /// #[embassy_executor::task]
 /// async fn blink_led(mut led: Output<'static, PIN>) {
