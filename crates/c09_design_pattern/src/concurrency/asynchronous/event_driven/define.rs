@@ -58,6 +58,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_event_driven01() {
         event_driven().await;
     }

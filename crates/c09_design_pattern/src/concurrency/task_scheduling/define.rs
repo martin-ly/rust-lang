@@ -84,6 +84,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_task_scheduling01() {
         task_scheduling().await;
     }

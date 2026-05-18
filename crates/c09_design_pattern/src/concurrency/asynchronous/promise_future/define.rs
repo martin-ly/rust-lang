@@ -72,6 +72,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_promise_future01() {
         promise_future().await;
     }

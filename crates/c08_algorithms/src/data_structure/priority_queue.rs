@@ -106,6 +106,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_build_heap_async() {
         let rt = tokio::runtime::Runtime::new().expect("创建Tokio运行时失败");
         let pq = rt.block_on(async {

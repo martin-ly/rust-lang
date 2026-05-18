@@ -516,6 +516,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_advanced_thread_pool() {
         let pool = AdvancedThreadPool::new(2);
         pool.start().expect("线程池启动不应失败");

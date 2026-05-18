@@ -390,6 +390,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_async_wrappers() {
         let rt = tokio::runtime::Runtime::new().unwrap();
         let intervals = vec![Interval { start: 1, end: 2 }, Interval { start: 2, end: 3 }];

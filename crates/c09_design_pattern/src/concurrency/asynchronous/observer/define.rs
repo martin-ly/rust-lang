@@ -104,6 +104,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_observer_pattern01() {
         observer_pattern().await;
     }

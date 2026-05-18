@@ -898,6 +898,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_search() {
         let data = vec![1, 3, 5, 7, 9, 11, 13];
         let result = SearchingEngine::linear_search_async(data, 7).await.expect("异步线性搜索失败");

@@ -39,6 +39,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_timeout_ok() {
         let res = run_with_timeout(Duration::from_millis(50), async {
             tokio::time::sleep(Duration::from_millis(10)).await;
@@ -49,6 +50,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_timeout_err() {
         let res = run_with_timeout(Duration::from_millis(10), async {
             tokio::time::sleep(Duration::from_millis(50)).await;
@@ -59,6 +61,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_rate_limiter_concurrency() {
         let limiter = RateLimiter::new(2);
 

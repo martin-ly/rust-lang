@@ -31,6 +31,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_callback01() {
         callback().await;
     }

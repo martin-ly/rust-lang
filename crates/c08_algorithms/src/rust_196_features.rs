@@ -974,18 +974,17 @@ impl<T: Clone> TreeNode<T> {
     }
 
     /// 使用 gen 块实现层序遍历（BFS）
-    pub fn level_order_gen(&self) -> impl Iterator<Item = T> {
-        let root = self.clone();
-        gen {
+    pub fn level_order_gen(&self) -> impl Iterator<Item = T> + '_ {
+        gen move {
             let mut queue = VecDeque::new();
-            queue.push_back(root);
+            queue.push_back(self);
             while let Some(node) = queue.pop_front() {
-                yield node.value;
-                if let Some(left) = node.left {
-                    queue.push_back(*left);
+                yield node.value.clone();
+                if let Some(left) = &node.left {
+                    queue.push_back(left);
                 }
-                if let Some(right) = node.right {
-                    queue.push_back(*right);
+                if let Some(right) = &node.right {
+                    queue.push_back(right);
                 }
             }
         }

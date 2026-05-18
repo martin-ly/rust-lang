@@ -424,6 +424,8 @@ mod tests {
     use futures::stream;
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_closure_algorithms() {
         let data = vec![1, 2, 3, 4, 5];
         let mapper =
@@ -462,6 +464,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_iterator_algorithms() {
         let data = vec![3, 1, 4, 1, 5, 9, 2, 6];
         let stream = stream::iter(data);

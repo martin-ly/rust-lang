@@ -356,6 +356,7 @@ mod tests {
 
     #[allow(dead_code)]
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_closures() {
         let features = Rust190Features::new();
         let result = features.demonstrate_async_closures().await;

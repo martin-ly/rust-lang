@@ -78,6 +78,7 @@ fn test_rust_2025_features() {
 
 /// 测试异步算法的正确性
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_algorithms_correctness() {
     let test_data = vec![64, 34, 25, 12, 22, 11, 90, 5, 77, 30];
     let expected = vec![5, 11, 12, 22, 25, 30, 34, 64, 77, 90];
@@ -112,6 +113,8 @@ fn test_parallel_algorithms_correctness() {
 
 /// 测试异步闭包算法
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
+#[cfg_attr(miri, ignore)]
 async fn test_async_closure_algorithms() {
     let data = vec![1, 2, 3, 4, 5];
     let mapper =
@@ -124,6 +127,7 @@ async fn test_async_closure_algorithms() {
 
 /// 测试异步迭代器算法
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_iterator_algorithms() {
     use futures::stream;
 

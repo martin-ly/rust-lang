@@ -588,6 +588,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_basic_work_stealing() {
         let scheduler = WorkStealingScheduler::new(2);
 
@@ -604,6 +605,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_priority_work_stealing() {
         let scheduler = PriorityWorkStealingScheduler::new(2);
 
@@ -620,6 +622,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_adaptive_work_stealing() {
         let scheduler = AdaptiveWorkStealingScheduler::new(2);
 

@@ -642,6 +642,7 @@ mod tests {
     }
 
     #[tokio::test]
+#[cfg_attr(miri, ignore)]
     async fn test_async_sort() {
         let data = vec![64, 34, 25, 12, 22, 11, 90];
         let result = SortingEngine::sort_async(data, SortingAlgorithm::Merge)

@@ -132,6 +132,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_simple_thread_pool() {
         let pool = SimpleThreadPool::new(2);
         let counter = Arc::new(AtomicCounter::new());

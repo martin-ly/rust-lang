@@ -80,6 +80,7 @@ mod tests {
     use super::*;
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_coroutine01() {
         coroutine().await;
     }

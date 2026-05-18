@@ -587,6 +587,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_async_wraps() {
         let rt = tokio::runtime::Runtime::new().expect("创建Tokio运行时失败");
         let r = rt.block_on(async { kmp_search_async("aaaaa".into(), "aa".into()).await.expect("异步KMP搜索失败") });

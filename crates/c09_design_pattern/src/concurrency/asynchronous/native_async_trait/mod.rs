@@ -36,6 +36,7 @@ pub mod tokio_demo {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_tokio_delay_processor() {
         let p = DelayProcessor;
         let out = p.process("x").await;
