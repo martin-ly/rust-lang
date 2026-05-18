@@ -970,7 +970,7 @@ Java ⊂ Rust（系统编程能力）
 
 > **关键洞察**: Rust 的 `const generics` 是**受限的依赖类型**——它允许值参数化类型，但值必须是编译期常量。这与 C++ 的 `template <int N>` 类似，但比完整依赖类型弱得多。Rust 的设计哲学是"**足够表达系统编程需求，但不追求类型系统的理论完备性**"——这是工业实用主义与学术理想主义之间的刻意平衡。
 
-> **深入阅读**: const generics 的能力边界详见 [`02_generics.md`](../02_intermediate/02_generics.md) §3；类型论基础详见 [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §2。
+> **深入阅读**: const generics 的能力边界详见 [`02_generics.md`](../02_intermediate/02_generics.md) §5.7；类型论基础详见 [`04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) §2。
 
 ### 6.4 知识体系导航：从元层到实践层
 

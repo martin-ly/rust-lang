@@ -501,7 +501,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 > **关键洞察**: HRTB 的**可判定性**来自生命周期量化域的结构性——生命周期是偏序关系上的点，而非任意类型。这使得 Rust 可以在编译期高效求解高阶生命周期约束，而无需面对 System F 的不可判定性噩梦。
 
-> **深入阅读**: 生命周期约束求解详见 [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../02_intermediate/02_generics.md) §3。
+> **深入阅读**: 生命周期约束求解详见 [`03_lifetimes.md`](../01_foundation/03_lifetimes.md) §4；泛型约束系统详见 [`02_generics.md`](../02_intermediate/02_generics.md) §4.1。
 
 ---
 

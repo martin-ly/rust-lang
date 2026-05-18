@@ -154,7 +154,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期参数** | `<'a>` | 引用有效期 | 推断 | 函数/结构体含引用 |
 
-> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 [L1 生命周期](../01_foundation/03_lifetimes.md) §4 和 [L4 所有权形式化](../04_formal/03_ownership_formal.md) §3。
+> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 [L1 生命周期](../01_foundation/03_lifetimes.md) §4 和 [L4 所有权形式化](../04_formal/03_ownership_formal.md) §2.2。
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 

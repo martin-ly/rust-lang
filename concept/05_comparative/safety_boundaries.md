@@ -470,15 +470,15 @@ graph LR
 
 | 边界场景 | 详细分析位置 |
 |:---|:---|
-| 所有权泄漏边界 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §7.5 反命题与边界分析 |
-| 借用规则突破 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) §7.6 反命题与边界分析 |
-| 生命周期陷阱 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) §7.5 反命题与边界分析 |
-| 类型系统绕过 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §7.5 反命题与边界分析 |
-| Rc/RefCell 循环 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) §7.6 反命题与边界分析 |
-| 并发死锁 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §7.6 反命题与边界分析 |
-| Pin 不动性突破 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §7.6 反命题与边界分析 |
-| unsafe 契约失效 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §7.6 反命题与边界分析 |
-| RustBelt 证明边界 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) §5 反命题与边界分析 |
+| 所有权泄漏边界 | [`../01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §7.1 反命题与边界分析 |
+| 借用规则突破 | [`../01_foundation/02_borrowing.md`](../01_foundation/02_borrowing.md) §7.1 反命题与边界分析 |
+| 生命周期陷阱 | [`../01_foundation/03_lifetimes.md`](../01_foundation/03_lifetimes.md) §7.1 反命题与边界分析 |
+| 类型系统绕过 | [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §7.1 反命题与边界分析 |
+| Rc/RefCell 循环 | [`../02_intermediate/03_memory_management.md`](../02_intermediate/03_memory_management.md) §7.1 反命题与边界分析 |
+| 并发死锁 | [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §7.1 反命题与边界分析 |
+| Pin 不动性突破 | [`../03_advanced/02_async.md`](../03_advanced/02_async.md) §7.1 反命题与边界分析 |
+| unsafe 契约失效 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §7.1 反命题与边界分析 |
+| RustBelt 证明边界 | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) §7.1 反命题与边界分析 |
 
 ---
 
@@ -544,7 +544,7 @@ E0502 (借用冲突)
 E0499 (多次可变借用)
   └─→ 边界: 内存安全 · 可变借用唯一性
       └─→ 概念: L1 所有权 → L2 &mut T 语义 → L4 独占权限
-      └─→ 文件: ../01_foundation/01_ownership.md §4
+      └─→ 文件: ../01_foundation/01_ownership.md §3.1
       └─→ 修复: 重构为单一 &mut / 使用 split_mut
 
 E0373 (闭包捕获逃逸)

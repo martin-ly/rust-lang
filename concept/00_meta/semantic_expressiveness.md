@@ -267,7 +267,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 | `const` generics | [](../02_intermediate/02_generics.md) | §5.7 Const Generics |
 | `inline const` | [](../07_future/rust_version_tracking.md) | §2.2 inline const blocks |
 | 常量求值形式化 | [](../04_formal/02_type_theory.md) | §10.1b Const Generics 形式化演进 |
-| `~const Trait` | [](../02_intermediate/01_traits.md) | §8.3 `~const` / `[const]` |
+| `~const Trait` | [](../02_intermediate/01_traits.md) | §4.4 Const Trait / `~const` |
 
 ---
 
@@ -356,12 +356,12 @@ Rust 削减:
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| 参数多态 / System F | [](../04_formal/02_type_theory.md) | §3 System F 映射 |
+| 参数多态 / System F | [](../04_formal/02_type_theory.md) | §2.2 参数多态 |
 | 存在类型 `impl`/`dyn` | [](../02_intermediate/02_generics.md) | §6 存在类型 |
 | GATs | [](../02_intermediate/01_traits.md) | §7 GATs |
 | 生命周期 / 区域类型 | [](../01_foundation/03_lifetimes.md) | 全文 |
 | `const` generics | [](../02_intermediate/02_generics.md) | §5.7 Const Generics |
-| 类型推断 / HM | [](../04_formal/02_type_theory.md) | §3 HM 类型系统 |
+| 类型推断 / HM | [](../04_formal/02_type_theory.md) | §2.3 类型推断 |
 | 类型一致性 / coherence | [](../02_intermediate/01_traits.md) | §6 Orphan Rules |
 
 ---
@@ -657,7 +657,7 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 |:---|:---|:---|
 | `Send`/`Sync` 语义 | [](../03_advanced/01_concurrency.md) | §2 Send/Sync |
 | `Mutex`/`Arc` 形式化 | [](../04_formal/04_rustbelt.md) | §3 CSL |
-| 原子操作 / `Ordering` | [](../03_advanced/01_concurrency.md) | §4 Atomic |
+| 原子操作 / `Ordering` | [](../03_advanced/01_concurrency.md) | §3.2 原子操作 |
 | `rayon` 数据并行 | [](../06_ecosystem/03_core_crates.md) | §4 rayon |
 | `tokio` 异步运行时 | [](../03_advanced/02_async.md) | §3 调度模型 |
 | 并发安全定理 | [](../04_formal/04_rustbelt.md) | §2.1 定理矩阵 T1 |
@@ -745,11 +745,11 @@ Rust 的宏系统分为两层：
 
 | 本维度内容 | 对应 L0-L7 文件 | 对应章节 |
 |:---|:---|:---|
-| 模块与可见性 | [](../01_foundation/04_type_system.md) | §3 模块系统 |
+| 模块与可见性 | [](../01_foundation/04_type_system.md) | §2.1 模块系统 |
 | Trait 与泛型 | [](../02_intermediate/01_traits.md) | 全文 |
 | 宏系统 | [](../03_advanced/04_macros.md) | 全文 |
 | FFI | [](../03_advanced/03_unsafe.md) | §4 FFI |
-| 参数性 | [](../04_formal/02_type_theory.md) | §6 Wadler 定理 |
+| 参数性 | [](../04_formal/02_type_theory.md) | §5.1 参数性 |
 | 零成本抽象 | [](../05_comparative/01_rust_vs_cpp.md) | §8 零成本抽象 |
 
 ---
@@ -846,7 +846,7 @@ RustBelt 证明范围:
 | Miri 检测边界 | [](../03_advanced/03_unsafe.md) | §7.2 Miri |
 | RustBelt 安全定理 | [](../04_formal/04_rustbelt.md) | §2.1 定理矩阵 |
 | 验证工具链 | [](../04_formal/05_verification_toolchain.md) | 全文 |
-| 安全边界对比 | [](../05_comparative/safety_boundaries.md) | §8 定理矩阵 |
+| 安全边界对比 | [](../05_comparative/safety_boundaries.md) | §2.3 定理矩阵 |
 
 ---
 
@@ -961,7 +961,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 | D1 计算表达力 | [](../04_formal/02_type_theory.md) | §10.1b Const Generics 演进 | `==>` 形式化对应依赖类型子集 |
 | D2 类型表达力 | [](../01_foundation/03_lifetimes.md) | 全文 | `==>` 区域类型是类型系统核心 |
 | D2 类型表达力 | [](../02_intermediate/01_traits.md) | §7 GATs | `==>` GATs 扩展类型表达力 |
-| D2 类型表达力 | [](../04_formal/02_type_theory.md) | §3 System F 映射 | `==>` 形式化类型论根基 |
+| D2 类型表达力 | [](../04_formal/02_type_theory.md) | §2.2 参数多态 | `==>` 形式化类型论根基 |
 | D3 控制流表达力 | [](../02_intermediate/04_error_handling.md) | 全文 | `==>` Result/? 是控制流核心 |
 | D3 控制流表达力 | [](../03_advanced/02_async.md) | 全文 | `==>` async 是控制流扩展 |
 | D3 控制流表达力 | [](../03_advanced/02_async.md) | §13 gen blocks | `==>` gen 是控制流对偶 |
