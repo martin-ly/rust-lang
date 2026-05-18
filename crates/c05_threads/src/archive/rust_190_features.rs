@@ -452,6 +452,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_performance_optimizations() {
         PerformanceOptimizations::inline_assembly_optimization();
         PerformanceOptimizations::simd_vectorization();

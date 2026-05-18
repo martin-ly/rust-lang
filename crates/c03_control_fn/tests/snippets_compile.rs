@@ -6,6 +6,7 @@ mod async_control_flow_example {
 }
 
 #[tokio::test]
+#[cfg_attr(miri, ignore)]
 async fn test_async_control_flow_snippet_runs() {
     async_control_flow_example::run().await;
 }
