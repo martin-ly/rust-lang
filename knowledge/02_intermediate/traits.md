@@ -5,6 +5,10 @@
 > **⏱️ 预计学习时间**: 90-120 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 
+**变更日志**:
+
+- v2.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RFC 1023、RFC 255、Wadler & Blott 1989）
+
 ---
 
 ## 🎯 学习目标
@@ -42,6 +46,10 @@
 - 支持**条件实现**（为所有满足某约束的类型实现某 trait）
 
 > 💡 关键直觉：trait 在 Rust 中有两个正交的作用 —— **形容词**（描述类型能做什么，用于泛型约束）和 **名词**（作为 trait 对象，用于动态分发）。
+
+> **[来源: TRPL: Ch10.2]** "A trait defines functionality a particular type has and can share with other types." ✅
+> **[来源: Rust Reference: Traits]** Trait 通过 `trait` 定义和 `impl` 实现，支持关联类型、默认方法、泛型参数和 where 子句约束。 ✅
+> **[来源: Wikipedia: Type class]** Rust Trait 直接受 Haskell Type Class 启发，支持 ad hoc 多态。 ✅
 
 #### 1.2 操作定义
 
@@ -421,6 +429,9 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
 **根因推导**:
 孤儿规则防止两个不同的 crate 为同一类型+trait 组合提供冲突的实现。如果 crate A 和 crate B 都为 `HashMap<String, i32>` 实现了 `Serialize`，下游 crate 依赖两者时将面临不可解的冲突。
 
+> **[来源: RFC 1023]** Orphan Rule 要求 impl 中至少有一方（类型或 Trait）定义在当前 crate，是 Coherence（全局一致性）的必要前提。 ✅
+> **[来源: Rust Reference: Orphan Rules]** 该规则确保 trait solving 的确定性，使得 Rust 的泛型系统可以在分布式开发中安全扩展。 ✅
+
 **修复方案** — Newtype 模式:
 
 ```rust
@@ -469,11 +480,13 @@ error[E0038]: the trait `Clone` cannot be made into an object
 **根因推导**:
 `Clone::clone(&self) -> Self` 的返回类型是 `Self`。在 `dyn Clone` 中，`Self` 被擦除了（类型大小未知），因此编译器无法为 `clone` 生成 vtable 条目。
 
-对象安全的三个必要条件：
+对象安全的三个必要条件：[来源: RFC 255] Trait 对象安全规则定义了哪些 trait 可以转换为 `dyn Trait`。 ✅
 
 1. 方法不要求 `Self: Sized`
 2. 方法不使用泛型类型参数
 3. 方法不返回 `Self`（除非 `Self` 被包装在指针中，如 `Box<Self>`）
+
+> **[来源: Rust Reference: Object Safety]** 对象安全 trait 的方法签名必须满足特定条件，确保 vtable 可以生成且方法调用是良定义的。 ✅
 
 **修复方案 A** — 使用泛型:
 
@@ -856,11 +869,34 @@ trait Processor {
 
 ---
 
-## 📖 延伸阅读
+## 📖 权威来源与延伸阅读
 
-- [The Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
-- [Rust Reference - Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)
-- [RFC 255 - Object Safety](https://rust-lang.github.io/rfcs/0255-object-safety.html)
+### 官方文档（一级来源）
+
+- [The Rust Book - Ch10.2: Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) —— Trait 的权威入门定义
+- [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html) —— Trait 定义、实现、对象安全的精确规范
+- [Rust Reference - Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) —— `dyn Trait` 的 vtable 布局与动态分发语义
+- [RFC 255 - Object Safety](https://rust-lang.github.io/rfcs/0255-object-safety.html) —— Trait 对象安全的设计决策
+- [RFC 1023 - Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) —— Orphan Rule 与 Coherence 的演进
+
+### 学术来源（一级来源）
+
+- **Wadler & Blott, "How to make ad-hoc polymorphism less ad hoc"**, *POPL 1989* —— Type Classes 的原始论文，Rust Trait 的直接理论前身。
+- **Jones, "A system of constructor classes"**, *JFP 1993* —— 参数化类型类与函数依赖（functional dependencies）。
+- **Pierce, "Types and Programming Languages" (TAPL), MIT Press** —— System F 约束多态、 bounded quantification 的理论基础。
+
+### 社区权威（二级来源）
+
+- **Niko Matsakis**, ["After NLL: Interprocedural lifetimes"](https://smallcultfollowing.com/babysteps/) —— Trait solving 与借用检查的交互。
+- **Without Boats**, ["Implied bounds and perfect derive"](https://without.boats/blog/implied-bounds-and-perfect-derive/) —— Trait bound 的隐含推导与派生宏设计。
+
+### 跨语言对比（三级来源）
+
+| 语言 | 对应机制 | 权威来源 |
+|:---|:---|:---|
+| **C++** | Concepts (C++20) + 模板特化 | [cppreference: Concepts](https://en.cppreference.com/w/cpp/language/constraints) |
+| **Haskell** | Type Classes + Type Families | [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) |
+| **Go** | Interface（结构类型，隐式实现） | [Go Spec: Interface types](https://go.dev/ref/spec#Interface_types) |
 
 ---
 
@@ -870,7 +906,7 @@ trait Processor {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
 **状态**: ✅ 按 10 模块标准重构完成

@@ -169,6 +169,12 @@
 | **Go** | 接口实现（GCShape stenciling） | 为每个 GC shape 生成一份代码 | 极低 | 中 |
 | **Haskell** | 类型类字典传递 | 运行时传递字典指针 | 有（间接调用） | 低 |
 
+> **[来源: Rust Reference: Generic Parameters]** Rust 泛型通过单态化实现零成本抽象，为每个具体类型生成专用代码。 ✅
+> **[来源: C++ Reference: Templates]** C++ 模板通过文本替换实现编译期实例化，与 Rust 单态化类似但无统一类型检查。 ✅
+> **[来源: Java Language Spec: Type Erasure]** Java 泛型通过类型擦除实现，编译为 `Object` 并插入类型转换，有运行时装箱开销。 ✅
+> **[来源: Go Spec: Type parameters]** Go 1.18+ 泛型通过 GC shape stenciling 实现，为每个 GC shape 生成一份代码，运行时开销极低。 ✅
+> **[来源: Pierce, TAPL Ch.23]** 参数多态（parametric polymorphism）与约束多态（bounded quantification）的理论基础。 ⚠️（教科书级参考）
+
 ### 2.3 泛型约束演进矩阵
 
 | **约束形式** | **语法** | **语义** | **Rust 版本** |

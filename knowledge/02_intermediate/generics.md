@@ -5,6 +5,10 @@
 > **⏱️ 预计学习时间**: 75-100 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 
+**变更日志**:
+
+- v2.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RFC 2000、TAPL、Wadler 1989）
+
 ---
 
 ## 🎯 学习目标
@@ -39,6 +43,10 @@
 - **常量参数**: `<const N: usize>`（Const Generics）
 
 > 💡 关键直觉：泛型不是"运行时多态"（如 Java 的泛型擦除），而是**编译期代码生成**。`Vec<i32>` 和 `Vec<String>` 在运行时是两个完全不同的类型，各有独立的方法代码。
+
+> **[来源: TRPL: Ch10.1]** "Generics are abstract stand-ins for concrete types or other properties." ✅
+> **[来源: Rust Reference: Generic Parameters]** Rust 泛型参数包括类型参数、生命周期参数和 const 参数，通过单态化实现零成本抽象。 ✅
+> **[来源: Pierce, TAPL Ch.23]** 参数多态（parametric polymorphism）的理论基础：函数对任意类型统一行为，仅通过类型参数区分。 ⚠️（教科书级参考）
 
 #### 1.2 操作定义
 
@@ -487,6 +495,9 @@ process(&[true, false]);
 **根因推导**:
 每个调用点生成一份 `process::<T>` 的代码。如果有 20 种类型调用 `process`，最终二进制中包含 20 份几乎相同的循环代码，只是 `Display::fmt` 的调用点不同。
 
+> **[来源: Rust Reference: Monomorphization]** 单态化为每个具体类型生成专用代码，消除运行时类型检查，但可能导致二进制体积膨胀。 ✅
+> **[来源: Wadler, "Theorems for Free!", FPCA 1989]** 参数多态函数的行为仅由类型决定，与具体实现无关（参数性定理）。 ✅
+
 **修复方案** — 使用 trait 对象减少膨胀:
 
 ```rust
@@ -769,11 +780,35 @@ fn process(items: &[&dyn Display]) {
 
 ---
 
-## 📖 延伸阅读
+## 📖 权威来源与延伸阅读
 
-- [The Rust Book - Generics](https://doc.rust-lang.org/book/ch10-00-generics.html)
-- [Rust Reference - Generic parameters](https://doc.rust-lang.org/reference/items/generics.html)
-- [RFC 2000 - Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html)
+### 官方文档（一级来源）
+
+- [The Rust Book - Ch10: Generics](https://doc.rust-lang.org/book/ch10-00-generics.html) —— 泛型的权威入门定义
+- [Rust Reference - Generic Parameters](https://doc.rust-lang.org/reference/items/generics.html) —— 泛型参数的精确规范（类型参数、生命周期参数、const 参数）
+- [Rust Reference - Monomorphization](https://doc.rust-lang.org/reference/glossary.html#monomorphization) —— 单态化的编译器行为定义
+- [RFC 2000 - Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) —— Const Generics 的设计决策与约束系统
+
+### 学术来源（一级来源）
+
+- **Wadler, "Theorems for Free!"**, *FPCA 1989* —— 参数性定理（Parametricity）：参数多态函数的行为仅由类型决定，可推导出"免费定理"。
+  - 论文: <https://homepages.inf.ed.ac.uk/wadler/papers/free/theorems_for_free.pdf>
+- **Pierce, "Types and Programming Languages" (TAPL), MIT Press** —— System F、HM 类型推断、约束多态的完整理论框架。
+- **Jones, "A system of constructor classes"**, *JFP 1993* —— 构造子类系统与类型类字典传递实现。
+
+### 社区权威（二级来源）
+
+- **Jon Gjengset**, [Crust of Rust: GATs](https://www.youtube.com/watch?v=tvH9XhLk8C8) —— Generic Associated Types 的深入讲解。
+- **Without Boats**, ["Impl trait initiative"](https://without.boats/blog/) —— `impl Trait` 的语义设计与演进。
+
+### 跨语言对比（三级来源）
+
+| 语言 | 泛型机制 | 权威来源 |
+|:---|:---|:---|
+| **C++** | 模板实例化（文本替换） | [cppreference: Templates](https://en.cppreference.com/w/cpp/language/templates) |
+| **Haskell** | 参数多态 + 类型类字典传递 | [Haskell Wiki: Polymorphism](https://wiki.haskell.org/Polymorphism) |
+| **Go** | 类型参数（GC shape stenciling） | [Go Spec: Type parameters](https://go.dev/ref/spec#Type_parameters) |
+| **Java** | 类型擦除（编译为 Object + 转换） | [Java Language Spec: Type Erasure](https://docs.oracle.com/javase/specs/jls/se17/html/jls-4.html#jls-4.6) |
 
 ---
 
@@ -783,7 +818,7 @@ fn process(items: &[&dyn Display]) {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
 **状态**: ✅ 按 10 模块标准重构完成

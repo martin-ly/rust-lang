@@ -180,6 +180,11 @@ Trait 作为逻辑命题:
 | **静态分发** | ✅ 单态化 | ✅ | ✅ 模板实例化 | ❌（虚方法默认） | ✅ 接口表 |
 | **动态分发** | ✅ `dyn Trait` | ❌（通常） | ✅ 虚函数 | ✅ 默认 | ✅ 接口值 |
 
+> **[来源: Wikipedia: Type class]** Type class 支持 ad hoc 多态，Rust Trait 直接受 Haskell Type Class 启发。 ✅
+> **[来源: Rust Reference: Traits]** Rust Trait 通过显式 `impl` 实现，支持关联类型、默认实现和泛型约束。 ✅
+> **[来源: C++ Reference: Concepts]** C++20 Concepts 是模板的约束机制，通过 duck typing 自动匹配，无孤儿规则。 ✅
+> **[来源: Go Spec: Interface types]** Go 接口是结构类型（structural typing），隐式实现，无显式 `implements` 关键字。 ✅
+
 ### 2.3 Orphan Rule 判定矩阵
 
 | **场景** | **类型来源** | **Trait 来源** | **允许 impl?** | **原因** |

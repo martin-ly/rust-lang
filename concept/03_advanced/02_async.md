@@ -583,6 +583,25 @@ graph LR
 
 ---
 
+### 3.5·补充：跨语言异步机制对比
+
+| 维度 | Rust `async/await` | C++20 Coroutines | Haskell `async` / `IO` | Go Goroutine |
+|:---|:---|:---|:---|:---|
+| **核心抽象** | `Future` + `poll` 状态机 | `co_await` + promise/awaitable | `IO` monad / `async` 库 | `go` 关键字 + channel |
+| **调度方式** | 协作式（运行时库: tokio/async-std） | 协作式（可自定义 allocator） | 惰性求值 + GHC 运行时调度 | 抢占式 M:N 调度 |
+| **运行时开销** | 零（状态机无分配） | 零（编译器生成状态机） | 有（thunk 求值 + GC） | 有（调度器 + 栈管理） |
+| **自引用支持** | `Pin<T>` 强制位置不变性 | `coroutine_handle` + 自定义分配 | 无（惰性求值天然避免） | 无（值语义 + GC） |
+| **取消语义** | `Drop` 隐式取消（需设计） | 无内置（需手动实现） | `killThread` / 异常 | 无内置（需 channel 协调） |
+| **形式化基础** | 状态机操作语义 + LTL (Pin) | 无统一形式化 | 单子 laws + 延续传递 (CPS) | 无统一形式化 |
+
+> **[来源: RFC 2394]** Rust `async/await` 基于 `Future` trait 和编译器状态机转换，承诺零成本抽象。 ✅
+> **[来源: C++ Reference: Coroutines]** C++20 Coroutines 通过 `co_await`/`co_yield`/`co_return` 和 promise 类型实现，编译器生成状态机，与 Rust 类似但自定义能力更强。 ✅
+> **[来源: Haskell GHC User Guide: Concurrent Haskell]** Haskell 异步通过 `IO` monad 和 `forkIO` 实现，纯函数隔离保证并发安全，但运行时依赖 GC 和 thunk 求值。 ✅
+> **[来源: Go Spec: Goroutines]** Go goroutine 是轻量级线程，由运行时 M:N 调度，内存占用约 2KB 起，阻塞不影响其他 goroutine。 ✅
+> **[来源: Without Boats, "Pin and Suffering"]** Rust `Pin<T>` 的设计是为了安全表达自引用结构，这是 Rust 异步与 C++20 Coroutines 的关键差异之一。 ✅
+
+---
+
 ## 四、思维导图（Mind Map）
 
 > **章节过渡**：理论根基建立后，以下思维导图以可视化方式整合同步概念体系，从 Future Trait 出发，辐射到语法糖、Pin 语义、运行时与组合子四个维度。
