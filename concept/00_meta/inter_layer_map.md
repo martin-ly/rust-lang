@@ -35,6 +35,7 @@
     - [9.2 新增跨层推理链](#92-新增跨层推理链)
     - [9.3 L5-L7 层次一致性标注](#93-l5-l7-层次一致性标注)
   - [十、TODO](#十todo)
+  - [相关概念文件](#相关概念文件)
 
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
@@ -443,3 +444,11 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 - [x] **低**: 追踪 Rust 语言演进对 L4 形式化模型的影响（如 Tree Borrows vs Stacked Borrows） —— ✅ 已完成，参见 `04_formal/03_ownership_formal.md` §11
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）+ 索引同步
 - [x] **低**: 建立机器可解析的层间关系格式（YAML/JSON 导出） —— 已纳入 `concept_index.json`
+
+---
+
+## 相关概念文件
+
+- [L1 所有权与借用](../01_foundation/01_ownership.md) — 形式化映射起点
+- [L4 所有权形式化](../04_formal/03_ownership_formal.md) — 线性逻辑与分离逻辑
+- [知识体系方法论](./methodology.md) — 语义链接类型定义规范

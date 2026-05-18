@@ -1,33 +1,22 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-18T12:08
-> 扫描文件数: 45
+> 生成时间: 2026-05-18T13:34
+> 扫描文件数: 47
 > 版本对齐: Rust 1.95.0 stable
 
 ## 摘要
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 扫描文件数 | 45 | — |
-| 跨文件链接 ≥3 | 39/45 | ⚠️ |
+| 扫描文件数 | 47 | — |
+| 跨文件链接 ≥3 | 47/47 | ✅ |
 | 死链接文件 | 0 | ✅ |
-| 命名规范符合 | 32/45 | ⚠️ |
+| 命名规范符合 | 34/47 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 45/45 | ✅ |
-| 平均来源标注率 | 14.4% | ⚠️ |
+| 显式 Bloom 标注 | 47/47 | ✅ |
+| 平均来源标注率 | 14.3% | ⚠️ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 259 | — |
-
-## 跨文件链接不足的文件
-
-| 文件 | 链接数 | 现有链接目标 |
-|:---|:---|:---|
-| concept/00_meta/audit_checklist.md | 0 | 无 |
-| concept/00_meta/inter_layer_map.md | 0 | 无 |
-| concept/00_meta/methodology.md | 0 | 无 |
-| concept/00_meta/semantic_expressiveness.md | 0 | 无 |
-| concept/00_meta/sources.md | 0 | 无 |
-| concept/00_meta/todos.md | 0 | 无 |
 
 ## 命名不规范的文件
 
@@ -49,14 +38,13 @@
 
 | 文件 | 标注数 | 估算段落数 | 标注率 |
 |:---|:---|:---|:---|
-| concept/00_meta/audit_checklist.md | 3 | 34 | 3.5% |
+| concept/00_meta/audit_checklist.md | 3 | 35 | 3.4% |
 | concept/00_meta/concept_index.md | 0 | 67 | 0.0% |
 | concept/00_meta/learning_guide.md | 14 | 70 | 9.9% |
-| concept/00_meta/methodology.md | 5 | 46 | 5.0% |
+| concept/00_meta/methodology.md | 5 | 47 | 5.0% |
 | concept/00_meta/quick_reference.md | 0 | 115 | 0.0% |
 | concept/00_meta/self_assessment.md | 16 | 406 | 2.4% |
-| concept/00_meta/todos.md | 0 | 23 | 0.0% |
-| concept/06_ecosystem/01_toolchain.md | 52 | 268 | 9.9% |
+| concept/00_meta/todos.md | 0 | 24 | 0.0% |
 
 ## 方法论说明
 

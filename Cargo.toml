@@ -185,7 +185,7 @@ hyper-rustls = "0.28.1"
 # libp2p: P2P网络协议栈
 # 2026-05-14: 保持 0.54.1，升级至 0.56+ 需同步升级 hickory-resolver 到 0.26，
 #       c10_networks DNS 模块需大量代码适配（ResolverConfig 预设移除、Lookup API 变更等）
-libp2p = { version = "0.54.1", features = ["tokio", "tcp", "noise", "yamux", "gossipsub", "kad", "identify"] }
+libp2p = { version = "0.56.0", features = ["tokio", "tcp", "noise", "yamux", "gossipsub", "kad", "identify"] }
 # hyper-tls: hyper与native-tls的集成，提供TLS支持
 hyper-tls = "0.6.0"
 # hyper-timeout: hyper的超时支持
@@ -694,3 +694,5 @@ similar_names = "allow"
 
 # 注: core2 补丁已移除
 # multihash 0.19.4+ / libp2p-core 已迁移到 no_std_io2，不再需要 core2 补丁
+
+

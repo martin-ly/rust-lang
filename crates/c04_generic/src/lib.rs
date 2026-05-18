@@ -223,6 +223,7 @@ pub mod ecosystem_examples {
         }
 
         #[test]
+        #[cfg_attr(miri, ignore)]
         fn test_parallel_square_sum() {
             let v = (1..=1000).collect::<Vec<_>>();
             let seq: i32 = v.iter().map(|x| x * x).sum();

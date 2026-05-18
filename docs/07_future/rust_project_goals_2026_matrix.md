@@ -40,8 +40,8 @@
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
-| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🔴 20% | `concept/06_ecosystem/01_toolchain.md` | 独立章节缺失；无 `.rs` + frontmatter 示例 |
-| **Stabilize public/private dependencies** | Ed Page | **目标 2026 稳定** | 🔴 **缺失** | — | 完全缺失；RFC 3516 未覆盖 |
+| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` | ✅ 独立章节已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
+| **Stabilize public/private dependencies** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/10_public_private_deps.md` | ✅ 独立章节已创建；RFC 3516 核心机制、SemVer 矩阵、重构路径全覆盖 |
 | **Stabilize Cargo SBOM precursor** | Sergey Davidoff | 推进中 | 🔴 **缺失** | — | 完全缺失 |
 | **build-std** | — | 推进中 | 🟡 部分 | `concept/07_future/rust_version_tracking.md` | 缺少实际操作示例 |
 | **cargo-semver-checks 合并至 cargo** | — | 推进中 | 🔴 **缺失** | — | 完全缺失 |
@@ -84,8 +84,8 @@
             0%    25%    50%    75%   100%
             |──────|──────|──────|──────|
 Next-gen trait solver    ████░░░░░░░░░░░░░░   🔴 缺失
-public/private deps      ████░░░░░░░░░░░░░░   🔴 缺失
-cargo-script             ████░░░░░░░░░░░░░░   🔴 缺失
+public/private deps      ████████████░░░░░░░░   🟡 75%
+cargo-script             ████████████░░░░░░░░   🟡 75%
 Field Projections        ████░░░░░░░░░░░░░░   🔴 缺失
 Immobile types           ████░░░░░░░░░░░░░░   🔴 缺失
 Open Enums               ████░░░░░░░░░░░░░░   🔴 缺失

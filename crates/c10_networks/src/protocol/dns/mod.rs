@@ -1,13 +1,12 @@
 use crate::error::{NetworkError, NetworkResult};
 use hickory_resolver::TokioResolver;
-use hickory_resolver::config::{ResolverConfig, ResolverOpts};
-use hickory_proto::ProtoErrorKind;
-use hickory_resolver::name_server::TokioConnectionProvider;
+use hickory_resolver::config::{CLOUDFLARE, GOOGLE, QUAD9, ResolverConfig, ResolverOpts};
+use hickory_resolver::net::runtime::TokioRuntimeProvider;
 use hickory_resolver::proto::rr::rdata::SRV;
 use std::net::{IpAddr, SocketAddr};
 use std::time::Duration;
 
-/// DNS 解析器封装（基于 Hickory-DNS）
+/// DNS 解析器封装（基于 Hickory-DNS 0.26+）
 #[derive(Clone)]
 pub struct DnsResolver {
     inner: TokioResolver,
@@ -24,7 +23,8 @@ impl DnsResolver {
     pub async fn from_system() -> NetworkResult<Self> {
         let resolver = TokioResolver::builder_tokio()
             .map_err(|e| NetworkError::Other(format!("dns system config: {e}")))?
-            .build();
+            .build()
+            .map_err(|e| NetworkError::Other(format!("dns build: {e}")))?;
         Ok(Self { inner: resolver })
     }
 
@@ -50,9 +50,10 @@ impl DnsResolver {
         } else {
             opts.attempts = 2;
         }
-        let resolver = TokioResolver::builder_with_config(config, TokioConnectionProvider::default())
+        let resolver = TokioResolver::builder_with_config(config, TokioRuntimeProvider::default())
             .with_options(opts)
-            .build();
+            .build()
+            .map_err(|e| NetworkError::Other(format!("dns build: {e}")))?;
         Ok(Self { inner: resolver })
     }
 
@@ -62,58 +63,80 @@ impl DnsResolver {
             .inner
             .lookup_ip(host)
             .await
-            .map_err(|e| Self::map_resolve_err(host, "A/AAAA lookup failed", Some(e)))?;
+            .map_err(|e| Self::map_resolve_err(host, "A/AAAA lookup failed", e))?;
         Ok(lookup.iter().collect())
     }
 
     /// 查询 TXT 记录
     pub async fn lookup_txt(&self, name: &str) -> NetworkResult<Vec<String>> {
-        let txt = self
+        let lookup = self
             .inner
             .txt_lookup(name)
             .await
-            .map_err(|e| Self::map_resolve_err(name, "TXT lookup failed", Some(e)))?;
-        Ok(txt
+            .map_err(|e| Self::map_resolve_err(name, "TXT lookup failed", e))?;
+        Ok(lookup
+            .answers()
             .iter()
-            .flat_map(|r| r.txt_data().iter())
-            .map(|bytes| String::from_utf8_lossy(bytes).to_string())
+            .filter_map(|r| match &r.data {
+                hickory_resolver::proto::rr::RData::TXT(txt) => Some(txt.to_string()),
+                _ => None,
+            })
             .collect())
     }
 
     /// 查询 MX 记录
     pub async fn lookup_mx(&self, name: &str) -> NetworkResult<Vec<(u16, String)>> {
-        let mx = self
+        let lookup = self
             .inner
             .mx_lookup(name)
             .await
-            .map_err(|e| Self::map_resolve_err(name, "MX lookup failed", Some(e)))?;
-        Ok(mx
+            .map_err(|e| Self::map_resolve_err(name, "MX lookup failed", e))?;
+        Ok(lookup
+            .answers()
             .iter()
-            .map(|r| (r.preference(), r.exchange().to_utf8()))
+            .filter_map(|r| match &r.data {
+                hickory_resolver::proto::rr::RData::MX(mx) => {
+                    Some((mx.preference, mx.exchange.to_utf8()))
+                }
+                _ => None,
+            })
             .collect())
     }
 
     /// 查询 SRV 记录
     pub async fn lookup_srv(&self, name: &str) -> NetworkResult<Vec<(SRV, String)>> {
-        let srv = self
+        let lookup = self
             .inner
             .srv_lookup(name)
             .await
-            .map_err(|e| Self::map_resolve_err(name, "SRV lookup failed", Some(e)))?;
-        Ok(srv
+            .map_err(|e| Self::map_resolve_err(name, "SRV lookup failed", e))?;
+        Ok(lookup
+            .answers()
             .iter()
-            .map(|r| (r.clone(), r.target().to_utf8()))
+            .filter_map(|r| match &r.data {
+                hickory_resolver::proto::rr::RData::SRV(srv) => {
+                    Some((srv.clone(), srv.target.to_utf8()))
+                }
+                _ => None,
+            })
             .collect())
     }
 
     /// 逆向解析（PTR）
     pub async fn reverse_lookup(&self, addr: IpAddr) -> NetworkResult<Vec<String>> {
-        let ptr = self
+        let lookup = self
             .inner
             .reverse_lookup(addr)
             .await
             .map_err(|e| NetworkError::Other(format!("dns reverse {addr}: {e}")))?;
-        Ok(ptr.iter().map(|r| r.to_utf8()).collect())
+        Ok(lookup
+            .answers()
+            .iter()
+            .filter_map(|r| match &r.data {
+                hickory_resolver::proto::rr::RData::PTR(ptr) => Some(ptr.to_utf8()),
+                _ => None,
+            })
+            .collect())
     }
 
     /// 将域名解析为可连接的 SocketAddr（带端口）
@@ -132,25 +155,19 @@ impl DnsResolver {
     fn map_resolve_err(
         target: &str,
         ctx: &str,
-        err: Option<hickory_resolver::ResolveError>,
+        err: hickory_resolver::net::NetError,
     ) -> NetworkError {
-        if let Some(e) = err {
-            // Check for specific error conditions using helper methods
-            if e.is_no_records_found() {
-                return NetworkError::Protocol(format!("DNS no records for {target}: {ctx}"));
-            }
-            if e.is_nx_domain() {
-                return NetworkError::Protocol(format!("DNS NXDOMAIN for {target}: {ctx}"));
-            }
-            // Check for timeout in the proto error
-            if let Some(proto) = e.proto()
-                && matches!(proto.kind.as_ref(), ProtoErrorKind::Timeout) {
-                    return NetworkError::Timeout(Duration::from_secs(5));
-                }
-            NetworkError::Other(format!("DNS resolve {target} failed: {ctx}: {e}"))
-        } else {
-            NetworkError::Other(format!("DNS resolve {target} failed: {ctx}"))
+        let err_str = format!("{err}");
+        if err_str.contains("no records") {
+            return NetworkError::Protocol(format!("DNS no records for {target}: {ctx}"));
         }
+        if err_str.contains("NXDOMAIN") || err_str.contains("nx domain") {
+            return NetworkError::Protocol(format!("DNS NXDOMAIN for {target}: {ctx}"));
+        }
+        if err_str.contains("timeout") || err_str.contains("timed out") {
+            return NetworkError::Timeout(Duration::from_secs(5));
+        }
+        NetworkError::Other(format!("DNS resolve {target} failed: {ctx}: {err}"))
     }
 }
 
@@ -160,16 +177,22 @@ pub mod presets {
 
     /// Cloudflare DNS: 1.1.1.1 and 1.0.0.1
     pub fn cloudflare() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::cloudflare(), ResolverOpts::default())
+        (
+            ResolverConfig::udp_and_tcp(&CLOUDFLARE),
+            ResolverOpts::default(),
+        )
     }
 
     /// Google DNS: 8.8.8.8 and 8.8.4.4
     pub fn google() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::google(), ResolverOpts::default())
+        (
+            ResolverConfig::udp_and_tcp(&GOOGLE),
+            ResolverOpts::default(),
+        )
     }
 
     /// Quad9 DNS: 9.9.9.9 and 149.112.112.112
     pub fn quad9() -> (ResolverConfig, ResolverOpts) {
-        (ResolverConfig::quad9(), ResolverOpts::default())
+        (ResolverConfig::udp_and_tcp(&QUAD9), ResolverOpts::default())
     }
 }

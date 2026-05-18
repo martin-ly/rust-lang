@@ -42,7 +42,7 @@ impl ImpliedBoundsExample {
     where
         'a: 'b,
     {
-        *x
+        x
     }
 }
 

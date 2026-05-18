@@ -1,9 +1,9 @@
-# Rust 形式模型演进跟踪（1.79–1.95+）
+# Rust 形式模型演进跟踪（1.79–1.97+）
 
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.0（2026-05-13 创建，对齐 Rust 1.95.0 stable）
+> **状态**: v1.2（2026-05-18 更新，对齐 Rust 1.95.0 stable + 1.96 beta 预览）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -379,23 +379,62 @@ unsafe extern "C" {
 
 ### 9.1 Rust 1.96 特性待跟踪表
 
-> **[来源: Rust nightly 2026-05-10; Rust Reference nightly; RFC tracking issues]** 本表基于 nightly 扫描，标记各特性对 D1-D7 语义维度的影响。待 1.96 stable 发布后更新状态并填充详细分析。
+> **[来源: Rust beta 1.96.0 2026-05-18; releases.rs; Cargo Book nightly; RFC tracking issues]** Rust 1.96.0 预计 2026-05-28 进入 stable，目前处于 beta 阶段。
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
 |:---|:---|:---|:---|:---:|:---|
-| `return_type_notation` (RTN) | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 可能稳定 |
-| `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 可能稳定 |
+| `return_type_notation` (RTN) | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 继续演进 |
+| `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 继续演进 |
 | `generic_const_exprs` | unstable | D1 计算 / D2 类型 | `02_intermediate/02_generics.md` | 中 | 继续演进 |
 | `unsafe_fields` | experimental | D7 安全边界 | `03_advanced/03_unsafe.md` | **高** | 早期实验 |
-| `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/04_type_system.md` | 低 | 可能稳定 |
+| `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/04_type_system.md` | 低 | 继续演进 |
 | `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
 | `const_trait_impl` (`~const`) | unstable | D1 计算 | `01_foundation/01_ownership.md` | **高** | 继续演进 |
-| `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 可能稳定 |
+| `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 继续演进 |
 | `next_solver` | nightly，目标 2026 稳定 | D2 类型 / D5 编译期 | `02_intermediate/01_traits.md` §12 · `crates/c04_generic/next_solver_preview.rs` | **高** | 目标稳定 |
 | `adt_const_params` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
 | `min_generic_const_args` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
-| `public_private_deps` | unstable | D6 生态 | `docs/07_future/rust_project_goals_2026_matrix.md` | 中 | 目标稳定 |
-| `cargo_script` | unstable | D6 生态 | `concept/06_ecosystem/01_toolchain.md` | 中 | 目标稳定 |
+| `public_private_deps` | unstable · RFC 3516 · Help Wanted | D6 生态 | `concept/06_ecosystem/10_public_private_deps.md` | 中 | 目标稳定 |
+| `cargo_script` | unstable · RFC 3502+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
+
+> **1.96 Beta 已知变更**: Cargo 引入垃圾回收机制自动清理旧文件；`-Zscript` frontmatter 语法更新；`-Zwarnings` 新增 `build.warnings` 配置字段；`unstable-editions` 错误提示改进。
+
+### 9.2 Rust 1.96 Beta 稳定化 API 详情
+
+> **[来源: Rust 1.96.0 beta release notes 2026-05-18; doc.rust-lang.org/beta/releases.html]**
+
+**标准库稳定化**:
+
+| API | 类型 | 形式化意义 |
+|:---|:---|:---|
+| `<[T]>::element_offset` | 方法 | 计算元素在切片中的字节偏移，支持指针算术安全抽象 |
+| `LazyCell::get_mut` | 方法 | 无初始化开销的可变访问，单线程懒加载缓存的可变性 |
+| `LazyCell::force_mut` | 方法 | 强制初始化并返回可变引用，支持延迟初始化后的就地修改 |
+| `LazyLock::get_mut` | 方法 | 多线程安全懒加载的可变访问（需 `&mut self`） |
+| `LazyLock::force_mut` | 方法 | 多线程安全懒加载的强制初始化可变访问 |
+| `std::iter::Peekable::next_if_map` | 方法 | 条件 peek + 映射组合，迭代器控制流的函数式抽象 |
+| `std::iter::Peekable::next_if_map_mut` | 方法 | 上述方法的可变版本 |
+| `impl TryFrom<char> for usize` | Trait impl | Unicode 标量值到机器字长的安全转换 |
+| `f32/f64::consts::EULER_GAMMA` | 常量 | 欧拉-马歇罗尼常数，数学常数的编译期可用性 |
+| `f32/f64::consts::GOLDEN_RATIO` | 常量 | 黄金比例常数 |
+| `f32/f64::mul_add` (const) | const fn | 融合乘加运算的常量上下文可用，数值计算编译期优化 |
+| x86 `avx512fp16` intrinsics | unsafe fn | AVX512 FP16 向量指令，AI/ML 推理的底层性能 |
+| AArch64 NEON fp16 intrinsics | unsafe fn | ARM 半精度浮点向量指令，移动端 AI 加速 |
+
+**Cargo 稳定化**:
+
+| 特性 | 意义 |
+|:---|:---|
+| `config include` | 顶级配置支持加载额外配置文件，大型工作空间的配置模块化 |
+| `pubtime` registry 字段 | 记录 crate 版本发布时间，支持基于时间的依赖解析策略 |
+| TOML v1.1 解析 | Cargo.toml 和配置支持 TOML v1.1，但发布清单保持向后兼容 |
+| `CARGO_BIN_EXE_<crate>` runtime | 运行时可用环境变量，支持测试中的二进制路径发现 |
+
+**编译器/平台**:
+
+- LLVM 20 升级
+- `annotate-snippets` 替代 rustc 错误输出引擎
+- 新增 Tier 3 目标: `riscv64im-unknown-none-elf`
 
 **已覆盖的 stable 特性（1.95 及之前）**: `inline_const` · `async_fn_in_trait` · `impl_trait_in_assoc_type` · `let_chains` · `type_alias_impl_trait` · `async_closure` · `precise_capturing` · `trait_upcasting`
 
@@ -407,3 +446,4 @@ unsafe extern "C" {
 |:---|:---|:---|
 | v1.0 | 2026-05-13 | 初始创建，对齐 Rust 1.95.0 stable，覆盖 1.79–1.95+ 五个形式模型维度 |
 | v1.1 | 2026-05-18 | 补充 Next Solver 至 1.96 跟踪表；补充 `adt_const_params`/`min_generic_const_args`/`public_private_deps`/`cargo_script` 跟踪项 |
+| v1.2 | 2026-05-18 | 网络对齐更新：1.96 beta 状态（2026-05-28 预计稳定）、cargo-script RFC 3502+3503 已批准、public/private deps RFC 3516 Help Wanted 状态、hickory CVE-2026-42254 记录 |

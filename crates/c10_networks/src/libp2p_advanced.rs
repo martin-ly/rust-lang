@@ -394,7 +394,7 @@ pub mod relay {
                     src_peer_id, renewed
                 );
             }
-            RelayEvent::ReservationReqDenied { src_peer_id } => {
+            RelayEvent::ReservationReqDenied { src_peer_id, .. } => {
                 println!("Relay: 拒绝来自 {} 的 reservation 请求", src_peer_id);
             }
             RelayEvent::ReservationTimedOut { src_peer_id } => {
@@ -412,6 +412,7 @@ pub mod relay {
             RelayEvent::CircuitReqDenied {
                 src_peer_id,
                 dst_peer_id,
+                ..
             } => {
                 println!(
                     "Relay: 拒绝 circuit 请求 {} -> {}",

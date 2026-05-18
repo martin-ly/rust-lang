@@ -22,36 +22,15 @@ feature-depth = 1
 
 # 已知漏洞的例外处理（带到期日审查注释）
 ignore = [
-    # --- libp2p 0.54.1 传递依赖漏洞 ---
-    # 根因: libp2p 0.54.1 锁定 hickory-proto 0.24.4 / ring 0.16.20 / rustls-webpki 0.101.7
-    # 计划: 升级 libp2p 至 0.56+ (需同步适配 hickory-resolver 0.26 API)
-    # 到期审查: 2026-06-30
-    # RUSTSEC-2026-0119 同时影响 hickory-proto 0.24.4 (libp2p-mdns 传递) 和 0.25.2 (workspace 直接)
-    # 统一解决路径: 升级 libp2p 0.56+ 并同步升级 workspace hickory-proto 至 0.26.1+
-    { id = "RUSTSEC-2025-0009", reason = "通过 libp2p-tls 0.5.0 传递引入的 ring 0.16.20; 需升级 libp2p 0.56+ 解决" },
-    { id = "RUSTSEC-2025-0010", reason = "通过 libp2p-tls 0.5.0 传递引入的 ring 0.16.20; 需升级 libp2p 0.56+ 解决" },
-    { id = "RUSTSEC-2026-0098", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
-    { id = "RUSTSEC-2026-0099", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
-    { id = "RUSTSEC-2026-0104", reason = "通过 libp2p-tls 0.5.0 传递引入的 rustls-webpki 0.101.7; 需升级 libp2p 0.56+ 解决" },
+    # --- libp2p-mdns 传递依赖漏洞 (hickory-proto 0.25.2) ---
+    # 根因: libp2p-mdns 0.48.0 锁定 hickory-proto 0.25.2
+    # 计划: 等待 libp2p-mdns 升级至 hickory-proto 0.26.1+ (上游追踪)
+    # 到期审查: 2026-07-15
+    # 注: workspace 直接依赖已通过 hickory-proto 0.26.1 升级修复 (2026-05-18)
+    { id = "RUSTSEC-2026-0118", reason = "通过 libp2p-mdns 0.48.0 传递引入的 hickory-proto 0.25.2; 需等待 libp2p-mdns 上游升级至 hickory-proto 0.26.1+" },
+    { id = "RUSTSEC-2026-0119", reason = "通过 libp2p-mdns 0.48.0 传递引入的 hickory-proto 0.25.2; 需等待 libp2p-mdns 上游升级至 hickory-proto 0.26.1+" },
 
-    # --- hickory-proto 0.25.2 直接依赖漏洞 ---
-    # 根因: workspace 声明 hickory-proto 0.25.2，RUSTSEC-2026-0118 尚无修复版本
-    #       RUSTSEC-2026-0119 需升级至 0.26.1+ (API 变更大，需适配 c10_networks DNS 模块)
-    # 到期审查: 2026-06-15
-    { id = "RUSTSEC-2026-0118", reason = "workspace 直接依赖 hickory-proto 0.25.2; 尚无官方修复版本，计划升级至 0.26.x" },
-    { id = "RUSTSEC-2026-0119", reason = "workspace 直接依赖 hickory-proto 0.25.2; 需升级至 0.26.1+ (API 适配中)" },
-
-    # --- bastion 0.4.5 传递依赖漏洞 ---
-    # 根因: bastion-executor -> lightproc -> crossbeam-utils 0.7.2
-    # 计划: bastion 为可选依赖，评估替换为 actix/axum 原生方案或推动上游修复
-    # 到期审查: 2026-06-30
-    { id = "RUSTSEC-2022-0041", reason = "通过 bastion-executor 0.4.2 -> lightproc 0.3.5 传递引入的 crossbeam-utils 0.7.2; bastion 为可选 feature，计划评估替换" },
-
-    # --- libp2p-swarm / tokio-console 传递引入的 lru 0.12.5 unsoundness ---
-    # 根因: libp2p-swarm 0.45.1 锁定 lru 0.12.5; tokio-console 0.1.14 锁定 ratatui 0.29.0 -> lru 0.12.5
-    # 计划: 升级 libp2p 0.56+ 解决; 关注 tokio-console 上游更新
-    # 到期审查: 2026-06-30
-    { id = "RUSTSEC-2026-0002", reason = "通过 libp2p-swarm 0.45.1 和 tokio-console 0.1.14 -> ratatui 0.29.0 传递引入的 lru 0.12.5; 需升级 libp2p 或 tokio-console" },
+    # 注: RUSTSEC-2022-0041/2026-0002 已通过移除 bastion/tokio-console 依赖修复 (2026-05-18)
 ]
 
 # =============================================================================

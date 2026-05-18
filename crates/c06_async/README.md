@@ -215,7 +215,7 @@
 ### 🔍 调试与监控
 
 - **结构化日志**: Tracing 框架完整使用
-- **任务监控**: tokio-console 实时监控异步任务
+- **任务监控**: 基于 tracing + metrics 的异步任务监控
 - **性能指标**: Prometheus 指标收集和导出
 - **健康检查**: Liveness/Readiness 检查系统
 - **分布式追踪**: Span 和 Event 的最佳实践
@@ -782,10 +782,9 @@ cargo run --example ultimate_async_theory_practice_2025
   # 浏览 http://127.0.0.1:9897/metrics 获取 Prometheus 指标
   ```
 
-- Actor 桥接（bastion/xtra，可选特性）：
+- Actor 桥接（xtra，可选特性）：
 
   ```bash
-  cargo run --features bastion --example actor_bastion_bridge
   cargo run --features xtra --example actor_xtra_bridge
   ```
 

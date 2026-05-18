@@ -116,20 +116,23 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 
 /// # LazyCell/LazyLock 新方法
 ///
-/// Rust 1.94.0 为 `LazyCell` 和 `LazyLock` 添加了新的访问方法：
-/// - `get()` - 获取值的引用（不触发初始化），返回 `Option<&T>`
-/// - `get_mut()` - 获取值的可变引用（不触发初始化），返回 `Option<&mut T>`
-/// - `force_mut()` - 强制初始化并获取可变引用，返回 `&mut T`
+/// Rust 1.94.0 稳定了 `LazyCell` 和 `LazyLock` 类型本身，1.96.0 进一步稳定了访问方法：
+/// - **`get()`** (1.94 stable) — 获取值的引用（不触发初始化），返回 `Option<&T>`
+/// - **`get_mut()`** (1.96 stable) — 获取值的可变引用（不触发初始化），返回 `Option<&mut T>`
+/// - **`force_mut()`** (1.96 stable) — 强制初始化并获取可变引用，返回 `&mut T`
 ///
 /// ## 使用场景
 /// - **热路径优化**: 使用 `get()` 避免不必要的同步开销
 /// - **条件初始化**: 检查是否已初始化，避免重复工作
 /// - **延迟配置**: 运行时动态加载配置
+/// - **可变缓存**: 使用 `get_mut()` / `force_mut()` 在初始化后修改缓存内容
 ///
 /// ## 性能特性
 /// - `get()`: O(1)，无锁读取
 /// - `get_mut()`: O(1)，无需原子操作
 /// - `force_mut()`: O(1)，仅在首次调用时有初始化开销
+///
+/// > **[来源: Rust 1.96 Release Notes (beta)]** `LazyCell::get_mut`, `LazyCell::force_mut`, `LazyLock::get_mut`, `LazyLock::force_mut` stabilized.
 ///
 /// ## 线程安全
 /// - `LazyCell`: 单线程使用
@@ -142,7 +145,7 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 /// ```
 /// use std::cell::LazyCell;
 ///
-/// let cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
+/// let mut cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
 ///     println!("Initializing...");
 ///     vec![1, 2, 3]
 /// });
@@ -156,6 +159,12 @@ pub fn detect_repeated_pattern<T: PartialEq>(data: &[T], pattern: &[T; 2]) -> Ve
 ///
 /// // 现在 get() 返回 Some
 /// assert!(LazyCell::get(&cell).is_some());
+///
+/// // Rust 1.96: 获取可变引用并修改
+/// if let Some(v) = LazyCell::get_mut(&mut cell) {
+///     v.push(4);
+/// }
+/// assert_eq!(&*cell, &[1, 2, 3, 4]);
 /// ```
 pub type SingleThreadCache<T> = LazyCell<T>;
 

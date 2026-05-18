@@ -799,6 +799,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_afit_example() {
         let rt = tokio::runtime::Runtime::new().unwrap();
         let result = rt.block_on(ImplTraitInAssocType::afit_example());

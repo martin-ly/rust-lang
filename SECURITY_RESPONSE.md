@@ -111,25 +111,14 @@ cargo deny check advisories
 
 ## 三、当前已知风险登记册 (Risk Register)
 
-> 最后更新: 2026-05-18
+> 最后更新: 2026-05-18（Phase 4 完成：hickory 0.26.1 + libp2p 0.56.0 升级）
 
 | RUSTSEC | 等级 | 影响 Crate | 引入路径 | 状态 | 计划修复日期 |
 |:---|:---:|:---|:---|:---:|:---:|
-| RUSTSEC-2026-0118 | P1 | hickory-proto 0.25.2 | workspace 直接声明 | 跟踪中 | 2026-06-15 |
-| RUSTSEC-2026-0119 | P1 | hickory-proto 0.24.4/0.25.2 | workspace 直接 + libp2p 传递 | 跟踪中 | 2026-06-15 |
-| RUSTSEC-2025-0009 | P1 | ring 0.16.20 | libp2p-tls 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2026-0098 | P1 | rustls-webpki 0.101.7 | libp2p-tls 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2026-0099 | P1 | rustls-webpki 0.101.7 | libp2p-tls 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2026-0104 | P1 | rustls-webpki 0.101.7 | libp2p-tls 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2022-0041 | P2 | crossbeam-utils 0.7.2 | bastion-executor 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2026-0002 | P2 | lru 0.12.5 | libp2p-swarm / tokio-console 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2025-0141 | P3 | bincode 2.0.1 | workspace 直接声明 (bench-only) | 计划中 | 2026-05-25 |
-| RUSTSEC-2025-0134 | P3 | rustls-pemfile 2.2.0 | workspace 直接声明 | 计划中 | 2026-05-25 |
+| RUSTSEC-2026-0119 | P1 | hickory-proto 0.25.2 | libp2p-mdns 0.48.0 传递 | 跟踪中 | 2026-07-15 |
 | RUSTSEC-2026-0110 | P3 | bare-metal 0.2.5 | cortex-m 传递 (embedded) | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2025-0057 | P3 | fxhash 0.2.1 | bastion 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2024-0384 | P3 | instant 0.1.13 | bastion/glommio 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2024-0436 | P3 | paste 1.0.15 | tokio-console / netlink 传递 | 跟踪中 | 2026-06-30 |
-| RUSTSEC-2025-0010 | P3 | ring 0.16.20 | libp2p-tls 传递 | 跟踪中 | 2026-06-30 |
+| RUSTSEC-2024-0384 | P3 | instant 0.1.13 | glommio 传递 | 跟踪中 | 2026-06-30 |
+| RUSTSEC-2024-0436 | P3 | paste 1.0.15 | netlink 传递 | 跟踪中 | 2026-06-30 |
 
 ---
 
@@ -137,9 +126,10 @@ cargo deny check advisories
 
 ### libp2p 生态 (c10_networks)
 
-- **当前版本**: 0.54.1（可选依赖，通过 `libp2p` feature 启用）
-- **风险**: 传递引入 ring 0.16.20、rustls-webpki 0.101.7、hickory-proto 0.24.4
-- **计划**: 升级至 0.56+（需同步升级 hickory-resolver 到 0.26+，API 变更大）
+- **当前版本**: 0.56.0（可选依赖，通过 `libp2p` feature 启用）
+- **已修复**: ring 0.16.20 → 0.17.14、rustls-webpki 0.101.7 → 0.103.13（RUSTSEC-2025-0009/0010/2026-0098/0099/0104 已消除）
+- **剩余风险**: libp2p-mdns 0.48.0 仍锁定 hickory-proto 0.25.2（RUSTSEC-2026-0118/0119）
+- **计划**: 等待 libp2p-mdns 上游升级至 hickory-proto 0.26.1+
 - **责任人**: c10_networks 维护者
 
 ### bastion 生态 (c06_async)
@@ -151,9 +141,11 @@ cargo deny check advisories
 
 ### hickory-dns (c10_networks)
 
-- **当前版本**: 0.25.2（workspace 直接声明）
-- **风险**: RUSTSEC-2026-0118（无修复版本）、RUSTSEC-2026-0119
-- **计划**: 升级至 0.26.1+，适配 c10_networks DNS 模块 API 变化
+- **当前版本**: 0.26.1（workspace 直接声明）
+- **已修复**: RUSTSEC-2026-0118、RUSTSEC-2026-0119（workspace 直接依赖已消除）
+- **相关 CVE**: CVE-2026-42254 (hickory-recursor 0.1-0.25.2 跨区缓存投毒, CVSS 4.0) — **不影响本 workspace**（我们未使用 hickory-recursor，且 hickory-proto/resolver 已升级至 0.26.1）
+- **剩余风险**: libp2p-mdns 0.48.0 仍传递引入 hickory-proto 0.25.2
+- **计划**: 等待 libp2p-mdns 上游同步升级
 - **责任人**: c10_networks 维护者
 
 ---

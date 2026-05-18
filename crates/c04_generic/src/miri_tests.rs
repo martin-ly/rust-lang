@@ -25,7 +25,7 @@ where
     assert_eq!(mem::size_of::<T>(), mem::size_of::<U>());
 
     unsafe {
-        let result = ptr::read(&value as *const T as *const U);
+        let result = ptr::read_unaligned(&value as *const T as *const U);
         let _ = value;
         result
     }

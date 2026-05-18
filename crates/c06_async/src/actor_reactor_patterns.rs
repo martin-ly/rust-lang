@@ -120,7 +120,7 @@
 //! │ 通信方式     │ 消息传递                │ 事件通知                 │
 //! │ 状态管理     │ 封装在 Actor 内         │ 分散在各处理器           │
 //! │ 典型应用     │ 业务逻辑、有状态服务    │ 网络服务器、I/O 密集型   │
-//! │ Rust 实现    │ actix, bastion, xtra    │ tokio, async-std, smol   │
+//! │ Rust 实现    │ actix, xtra             │ tokio, async-std, smol   │
 //! └──────────────┴─────────────────────────┴──────────────────────────┘
 //! ```
 use std::sync::Arc;

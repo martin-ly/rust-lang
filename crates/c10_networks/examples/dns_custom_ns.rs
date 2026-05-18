@@ -1,9 +1,6 @@
 use c10_networks::protocol::dns::DnsResolver;
-use hickory_proto::xfer::Protocol;
-use hickory_resolver::config::{
-    NameServerConfig, NameServerConfigGroup, ResolverConfig, ResolverOpts,
-};
-use std::net::{IpAddr, Ipv4Addr, SocketAddr};
+use hickory_resolver::config::{ConnectionConfig, NameServerConfig, ResolverConfig, ResolverOpts};
+use std::net::{IpAddr, Ipv4Addr};
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -11,17 +8,19 @@ async fn main() -> anyhow::Result<()> {
         .nth(1)
         .unwrap_or_else(|| "internal.service.local".to_string());
 
-    let mut group = NameServerConfigGroup::with_capacity(2);
-    group.push(NameServerConfig::new(
-        SocketAddr::new(IpAddr::V4(Ipv4Addr::new(10, 0, 0, 53)), 53),
-        Protocol::Udp,
+    let mut name_servers = Vec::with_capacity(2);
+    name_servers.push(NameServerConfig::new(
+        IpAddr::V4(Ipv4Addr::new(10, 0, 0, 53)),
+        false,
+        vec![ConnectionConfig::udp()],
     ));
-    group.push(NameServerConfig::new(
-        SocketAddr::new(IpAddr::V4(Ipv4Addr::new(1, 1, 1, 1)), 53),
-        Protocol::Udp,
+    name_servers.push(NameServerConfig::new(
+        IpAddr::V4(Ipv4Addr::new(1, 1, 1, 1)),
+        false,
+        vec![ConnectionConfig::udp()],
     ));
 
-    let cfg = ResolverConfig::from_parts(None, vec![], group);
+    let cfg = ResolverConfig::from_parts(None, vec![], name_servers);
     let mut opts = ResolverOpts::default();
     opts.attempts = 2;
     opts.cache_size = 1024;

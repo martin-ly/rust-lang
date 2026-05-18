@@ -132,6 +132,8 @@ graph LR
 
 > **[来源: Miri Book; Jung et al. POPL 2019]** ✅
 
+> **[来源: Cargo Book — Workspaces; RFC 2906]**
+
 ### 3.1 Workspace 高级用法
 
 **[Cargo Book]** A workspace is a collection of one or more packages that share the same `Cargo.lock` and output directory. Workspaces help manage multiple related packages developed in tandem.
@@ -277,6 +279,8 @@ mod sync_impl;
 
 > **关键洞察**: 工作区放大了 feature unification 的影响范围——一个成员启用的 feature 会通过共享依赖传播到整个工作区。设计工作区依赖时，应在 `[workspace.dependencies]` 中关闭 `default-features`，由各个成员按需精确启用，否则易出现"开发 crate-a 时意外获得 crate-b 启用的 feature"的隐性依赖。
 > **来源**: [The Cargo Book — Feature Unification](https://doc.rust-lang.org/cargo/reference/features.html#feature-unification) · [The Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · 可信度: ✅
+
+> **[来源: Cargo Book — Features; The Rust Reference — Conditional Compilation]**
 
 ### 3.2 Features 与条件编译
 
@@ -430,6 +434,8 @@ cargo bloat --no-default-features
 > **关键洞察**: Feature 在 Cargo 中是**累加的集合（additive set）**，不是开关（toggle）。这种设计保证了依赖解析的单调性——增加 feature 不会破坏已编译的代码——但也意味着无法通过 feature 做互斥选择。编译时间与体积的权衡本质上是"代码生成量"与"功能完整性"之间的帕累托前沿。
 > **来源**: [The Cargo Book — Features](https://doc.rust-lang.org/cargo/reference/features.html) · [cargo-bloat](https://github.com/RazrFalcon/cargo-bloat) · [Rust Performance Book — Compile Times](https://nnethercote.github.io/perf-book/compile-times.html) · 可信度: ✅
 
+> **[来源: Cargo Book — Manifest Format; crates.io Docs — Publishing]**
+
 ### 3.3 Cargo.toml 完整字段解析
 
 | **字段** | **层级** | **作用** | **示例** |
@@ -449,6 +455,8 @@ cargo bloat --no-default-features
 | `workspace` | 顶级 | 工作区定义 | `[workspace]` |
 
 > **来源**: [The Cargo Book — Manifest Format](https://doc.rust-lang.org/cargo/reference/manifest.html) · 可信度: ✅
+
+> **[来源: SemVer Spec 2.0.0; Cargo Book — SemVer Compatibility]**
 
 ### 3.4 SemVer 兼容性规则详解
 
@@ -477,6 +485,8 @@ cargo bloat --no-default-features
 
 > **[来源: rustdoc Book; RFC 1574]** ✅
 
+> **[来源: LLVM Target Triple Docs; rustc Target Tier Policy]**
+
 ### 4.1 目标三元组（Target Triple）
 
 **[Wikipedia]** A target triple is a string that uniquely identifies a target platform for compilation, typically in the form `architecture-vendor-operating_system-abi`.
@@ -498,6 +508,8 @@ cargo bloat --no-default-features
 - `thumbv7em-none-eabihf` — ARM Cortex-M4F 嵌入式
 
 > **来源**: [LLVM Target Triple](https://llvm.org/doxygen/classllvm_1_1Triple.html) · [Rust Platform Support](https://doc.rust-lang.org/nightly/rustc/platform-support.html) · 可信度: ✅
+
+> **[来源: rustup Docs — Cross-compilation; musl libc Docs]**
 
 ### 4.2 工具链配置
 
@@ -700,6 +712,8 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 > **关键洞察**: `no_std` 交叉编译的本质是**从"应用程序"降级为"裸机程序"**——失去标准库的同时，也失去了其背后的运行时假设（堆分配、线程、文件系统）。每个降级层级（std → alloc → core）都意味着更多的手动基础设施重建，对应嵌入式开发中"HAL（硬件抽象层）→ PAC（外设访问 crate）→ 寄存器操作"的抽象梯度。
 > **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rust Reference — No_std](https://doc.rust-lang.org/reference/names/preludes.html#the-no_std-attribute) · [cargo-build-std RFC](https://github.com/rust-lang/wg-cargo-std-aware) · 可信度: ✅
 
+> **[来源: rustc Target Specification Docs; LLVM Target Registry]**
+
 ### 4.3 自定义 Target
 
 对于未官方支持的平台，可编写自定义 target spec JSON：
@@ -740,6 +754,8 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 
 > **来源**: [rustfmt GitHub](https://github.com/rust-lang/rustfmt) · 可信度: ✅
 
+> **[来源: rustdoc Book; RFC 1574 — API Documentation]**
+
 ### 5.2 rustdoc
 
 **[The Rustdoc Book]** rustdoc is the documentation tool for Rust. It processes Rust source code and Markdown comments to produce HTML documentation.
@@ -750,6 +766,8 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 - **doctest 选项**: `cargo test --doc`
 
 > **来源**: [The Rustdoc Book](https://doc.rust-lang.org/rustdoc/) · 可信度: ✅
+
+> **[来源: RustSec Advisory DB; cargo-audit Docs]**
 
 ### 5.3 cargo-audit
 
@@ -764,6 +782,8 @@ cargo audit
 - **忽略特定漏洞**: `.cargo/audit.toml` 配置 `ignore = ["RUSTSEC-2023-0001"]`
 
 > **来源**: [RustSec/cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · 可信度: ✅
+
+> **[来源: cargo-deny Book; Embark Studios Blog]**
 
 ### 5.4 cargo-deny
 
@@ -786,6 +806,8 @@ multiple-versions = "warn"
 ```
 
 > **来源**: [cargo-deny Book](https://embarkstudios.github.io/cargo-deny/) · 可信度: ✅
+
+> **[来源: cargo-nextest Docs; nextest Book]**
 
 ### 5.5 cargo-nextest
 
@@ -867,6 +889,8 @@ flowchart LR
 
 > **[来源: GitHub Actions Docs; CI/CD Best Practices]** ✅
 
+> **[来源: rustc Dev Guide — Driver; Query System]**
+
 ### 7.1 rustc_driver
 
 **[rustc Dev Guide]** The `rustc_driver` crate serves as the main entry point to the compiler. It parses command-line arguments, sets up the compilation session, and orchestrates the various compiler queries.
@@ -883,6 +907,8 @@ flowchart LR
 | LLVM 生成 | `codegen_crate` | 生成 LLVM IR |
 
 > **来源**: [rustc Dev Guide — The Rustc Driver and Query System](https://rustc-dev-guide.rust-lang.org/rustc-driver.html) · 可信度: ✅
+
+> **[来源: LLVM Language Reference; rustc Dev Guide — Codegen]**
 
 ### 7.2 LLVM IR
 
