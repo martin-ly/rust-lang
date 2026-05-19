@@ -80,7 +80,10 @@ pub fn batched_parallel_sum(nums: &[u64], batch_size: usize, workers: usize) -> 
     for h in handles {
         h.join().expect("线程应成功完成");
     }
-    partials.iter().map(|m| *m.lock().expect("获取部分结果锁不应失败")).sum()
+    partials
+        .iter()
+        .map(|m| *m.lock().expect("获取部分结果锁不应失败"))
+        .sum()
 }
 
 #[cfg(test)]

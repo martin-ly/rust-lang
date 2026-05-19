@@ -4,7 +4,7 @@
 //! 允许安全地跨线程借用数据，无需 Arc 和 Mutex
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
-use std::sync::{Arc, Condvar, Mutex, mpsc};
+use std::sync::{mpsc, Arc, Condvar, Mutex};
 use std::thread;
 use std::time::Duration;
 
@@ -353,7 +353,9 @@ impl AdvancedScopedPatterns {
 
                     loop {
                         // 尝试从队列中获取工作
-                        let work = if let Some(item) = queue_clone.lock().expect("获取队列锁不应失败").pop() {
+                        let work = if let Some(item) =
+                            queue_clone.lock().expect("获取队列锁不应失败").pop()
+                        {
                             item
                         } else {
                             break; // 队列为空，退出
@@ -368,7 +370,10 @@ impl AdvancedScopedPatterns {
                     }
 
                     // 将本地结果添加到全局结果
-                    results_clone.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results_clone
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                 });
             }
         });
@@ -464,7 +469,10 @@ impl AdvancedScopedPatterns {
             }
         });
 
-        println!("最终计数器值: {}", shared_counter.lock().expect("获取计数器锁不应失败"));
+        println!(
+            "最终计数器值: {}",
+            shared_counter.lock().expect("获取计数器锁不应失败")
+        );
     }
 }
 
@@ -623,7 +631,10 @@ impl DynamicLoadBalancingScopedThreads {
 
                                 if local_results.len() % 3 == 0 {
                                     // 每处理3个任务就提交一次结果
-                                    results.lock().expect("获取结果锁不应失败").extend(local_results.drain(..));
+                                    results
+                                        .lock()
+                                        .expect("获取结果锁不应失败")
+                                        .extend(local_results.drain(..));
                                 }
                             }
                             None => break, // 没有更多任务
@@ -631,7 +642,10 @@ impl DynamicLoadBalancingScopedThreads {
                     }
 
                     // 提交剩余结果
-                    results.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                 });
             }
         });
@@ -695,7 +709,10 @@ impl DynamicLoadBalancingScopedThreads {
                         }
                     }
 
-                    results.lock().expect("获取结果锁不应失败").extend(local_results);
+                    results
+                        .lock()
+                        .expect("获取结果锁不应失败")
+                        .extend(local_results);
                     active.fetch_sub(1, Ordering::Relaxed);
                 });
             }

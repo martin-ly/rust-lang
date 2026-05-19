@@ -42,7 +42,10 @@ pub fn break_cycle_demo() -> String {
 
     // 关联父子
     *child.parent.lock().expect("获取父节点锁不应失败") = Arc::downgrade(&root);
-    root._children.lock().expect("获取子节点锁不应失败").push(Arc::clone(&child));
+    root._children
+        .lock()
+        .expect("获取子节点锁不应失败")
+        .push(Arc::clone(&child));
 
     // 如果 parent 用 Arc<Node> 将形成环而无法回收
     // 使用 Weak 可以在 root 释放后，使 child.parent 升级失败
@@ -92,7 +95,10 @@ pub fn mutex_vs_rwlock(readers: usize, writers: usize, iters: usize) -> (usize, 
     for t in h {
         total += t.join().expect("线程应成功完成");
     }
-    (total, *m.lock().expect("获取互斥锁不应失败") + *r.read().expect("获取读锁不应失败"))
+    (
+        total,
+        *m.lock().expect("获取互斥锁不应失败") + *r.read().expect("获取读锁不应失败"),
+    )
 }
 
 #[cfg(test)]

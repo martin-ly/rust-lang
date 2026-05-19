@@ -41,7 +41,7 @@ fn bench_itertools_pairs(c: &mut Criterion) {
 
 /// 基准测试：serde JSON 序列化/反序列化
 fn bench_serde_roundtrip(c: &mut Criterion) {
-    use c04_generic::ecosystem_examples::{user_from_json, user_to_json, User};
+    use c04_generic::ecosystem_examples::{User, user_from_json, user_to_json};
 
     let user = User {
         id: 42,

@@ -11,19 +11,19 @@ use thiserror::Error;
 pub enum TypeError {
     #[error("type mismatch: expected {expected}, found {found}")]
     TypeMismatch { expected: String, found: String },
-    
+
     #[error("inference failed: {0}")]
     InferenceFailed(String),
-    
+
     #[error("trait bound not satisfied: {0}")]
     TraitBoundNotSatisfied(String),
-    
+
     #[error("conversion error: {0}")]
     Conversion(String),
-    
+
     #[error("null pointer: {0}")]
     NullPointer(String),
-    
+
     #[error("variance error: {0}")]
     Variance(String),
 }
@@ -33,8 +33,7 @@ impl_into_unified_error!(TypeError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C02 crate's result type
@@ -72,7 +71,6 @@ pub fn null_pointer<T: Into<String>>(msg: T) -> TypeError {
 pub fn variance_error<T: Into<String>>(msg: T) -> TypeError {
     TypeError::Variance(msg.into())
 }
-
 
 #[cfg(test)]
 mod tests {

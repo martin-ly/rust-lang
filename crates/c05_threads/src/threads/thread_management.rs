@@ -11,8 +11,7 @@
 
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
-use std::sync::mpsc;
-use std::sync::{Arc, Mutex};
+use std::sync::{mpsc, Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -241,7 +240,8 @@ impl AdvancedThreadPool {
 
                             // 接收任务
                             let task = {
-                                let receiver = task_receiver.lock().expect("获取任务接收器锁不应失败");
+                                let receiver =
+                                    task_receiver.lock().expect("获取任务接收器锁不应失败");
                                 receiver.recv_timeout(Duration::from_millis(100))
                             };
 
@@ -512,7 +512,9 @@ mod tests {
         assert_eq!(manager.get_thread_count(), 1);
         assert!(manager.get_thread_info(thread_id).is_some());
 
-        manager.terminate_thread(thread_id).expect("终止线程不应失败");
+        manager
+            .terminate_thread(thread_id)
+            .expect("终止线程不应失败");
     }
 
     #[test]
@@ -537,7 +539,9 @@ mod tests {
     #[test]
     fn test_thread_communication() {
         let comm_manager = ThreadCommunicationManager::new();
-        let receiver = comm_manager.create_channel("test".to_string()).expect("创建通道不应失败");
+        let receiver = comm_manager
+            .create_channel("test".to_string())
+            .expect("创建通道不应失败");
 
         let message = Message {
             id: 1,
@@ -551,7 +555,9 @@ mod tests {
             .send_message("test".to_string(), message)
             .expect("创建工作线程不应失败");
 
-        let received = receiver.recv_timeout(Duration::from_millis(100)).expect("接收消息不应失败");
+        let received = receiver
+            .recv_timeout(Duration::from_millis(100))
+            .expect("接收消息不应失败");
         assert_eq!(received.content, "test");
     }
 }

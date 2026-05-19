@@ -61,11 +61,7 @@ where
     T: 'a + 'b + Clone + std::fmt::Debug,
 {
     /// 创建新的高级生命周期组合
-    pub fn new(
-        primary_data: &'a T,
-        secondary_data: &'b T,
-        metadata: &'c str,
-    ) -> Self {
+    pub fn new(primary_data: &'a T, secondary_data: &'b T, metadata: &'c str) -> Self {
         Self {
             primary_data,
             secondary_data,
@@ -110,10 +106,7 @@ pub trait AdvancedTypeConstraints {
     type Error: std::error::Error + Send + Sync + 'static;
 
     /// 复杂约束方法
-    fn process_with_constraints<F, R>(
-        &self,
-        processor: F,
-    ) -> Result<R, Self::Error>
+    fn process_with_constraints<F, R>(&self, processor: F) -> Result<R, Self::Error>
     where
         F: FnOnce(Self::Container) -> R,
         R: std::fmt::Display + Send + Sync;
@@ -146,10 +139,7 @@ where
     type Container = Vec<T>;
     type Error = ProcessingError;
 
-    fn process_with_constraints<F, R>(
-        &self,
-        processor: F,
-    ) -> Result<R, Self::Error>
+    fn process_with_constraints<F, R>(&self, processor: F) -> Result<R, Self::Error>
     where
         F: FnOnce(Self::Container) -> R,
         R: std::fmt::Display + Send + Sync,
@@ -306,14 +296,20 @@ where
 
     /// 安全更新元数据
     pub fn update_metadata(&self, key: String, value: String) -> Result<(), String> {
-        let mut metadata = self.metadata.write().map_err(|_| "Failed to acquire write lock")?;
+        let mut metadata = self
+            .metadata
+            .write()
+            .map_err(|_| "Failed to acquire write lock")?;
         metadata.insert(key, value);
         Ok(())
     }
 
     /// 安全读取元数据
     pub fn get_metadata(&self, key: &str) -> Result<Option<String>, String> {
-        let metadata = self.metadata.read().map_err(|_| "Failed to acquire read lock")?;
+        let metadata = self
+            .metadata
+            .read()
+            .map_err(|_| "Failed to acquire read lock")?;
         Ok(metadata.get(key).cloned())
     }
 
@@ -554,18 +550,16 @@ pub fn demonstrate_advanced_features() {
     println!("  组合数据: ({}, {})", p, s);
     println!("  生命周期验证: {}", composition.validate_lifetimes());
 
-    let result = composition.transform_lifetimes(|p, s, m| {
-        format!("Transformed: {} + {} + {}", p, s, m)
-    });
+    let result =
+        composition.transform_lifetimes(|p, s, m| format!("Transformed: {} + {} + {}", p, s, m));
     println!("  转换结果: {}", result);
     println!();
 
     // 2. 复杂类型约束演示
     println!("2. 复杂类型约束演示:");
     let processor = ConstrainedProcessor::new(vec![1, 2, 3, 4, 5]);
-    let result = processor.process_with_constraints(|data| {
-        format!("Processed {} items", data.len())
-    });
+    let result =
+        processor.process_with_constraints(|data| format!("Processed {} items", data.len()));
     println!("  处理结果: {:?}", result);
 
     let converted = processor.convert_with_bounds(42i32);
@@ -574,11 +568,7 @@ pub fn demonstrate_advanced_features() {
 
     // 3. 高级宏系统演示
     println!("3. 高级宏系统演示:");
-    let advanced_struct = AdvancedStruct::new(
-        1,
-        "Test".to_string(),
-        HashMap::new(),
-    );
+    let advanced_struct = AdvancedStruct::new(1, "Test".to_string(), HashMap::new());
     println!("  高级结构体: {:?}", advanced_struct);
 
     let configurable = ConfigurableStruct::new();
@@ -630,7 +620,9 @@ pub fn demonstrate_advanced_features() {
     error_handler.log_error(AdvancedError::Processing(ProcessingError {
         message: "Test processing error".to_string(),
     }));
-    error_handler.log_error(AdvancedError::Concurrent("Test concurrent error".to_string()));
+    error_handler.log_error(AdvancedError::Concurrent(
+        "Test concurrent error".to_string(),
+    ));
 
     let errors = error_handler.get_errors();
     println!("  错误数量: {}", errors.len());

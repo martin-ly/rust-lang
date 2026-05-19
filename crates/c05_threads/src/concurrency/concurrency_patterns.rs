@@ -12,7 +12,7 @@ use std::sync::{
 use std::thread;
 use std::time::Duration;
 // use std::collections::VecDeque;
-use crossbeam_channel::{Receiver, Sender, bounded, unbounded};
+use crossbeam_channel::{bounded, unbounded, Receiver, Sender};
 use parking_lot::{
     //Mutex as ParkingMutex,
     RwLock as ParkingRwLock,

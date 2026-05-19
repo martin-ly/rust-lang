@@ -78,7 +78,10 @@ mod windows_sync {
         pub fn wait_timeout(&self, timeout: Duration) -> bool {
             let mut event = self.event.lock().expect("获取事件锁不应失败");
             while !*event {
-                let result = self.condvar.wait_timeout(event, timeout).expect("条件变量超时等待不应失败");
+                let result = self
+                    .condvar
+                    .wait_timeout(event, timeout)
+                    .expect("条件变量超时等待不应失败");
                 event = result.0;
                 if result.1.timed_out() {
                     return false;

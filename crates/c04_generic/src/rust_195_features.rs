@@ -140,7 +140,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Generics, Traits
 // ============================================================================
@@ -173,9 +172,10 @@ mod real_rust_195_tests {
 
     #[test]
     fn test_apply_async_generic() {
-        let result = futures::executor::block_on(
-            RealRust195Features::apply_async_generic(async |x| x * 2, 21)
-        );
+        let result = futures::executor::block_on(RealRust195Features::apply_async_generic(
+            async |x| x * 2,
+            21,
+        ));
         assert_eq!(result, 42);
     }
 

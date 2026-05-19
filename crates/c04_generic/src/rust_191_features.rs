@@ -52,7 +52,10 @@ pub fn c_variadic_doc_placeholder() -> &'static str {
 
 #[test]
 fn test_c_variadic_placeholder() {
-    assert_eq!(c_variadic_doc_placeholder(), "c_variadic requires nightly Rust; see documentation above");
+    assert_eq!(
+        c_variadic_doc_placeholder(),
+        "c_variadic requires nightly Rust; see documentation above"
+    );
 }
 
 // ============================================================================
@@ -86,5 +89,8 @@ pub fn aarch64_tier1_status() -> &'static str {
 #[cfg(target_arch = "aarch64")]
 #[cfg(target_os = "windows")]
 fn test_aarch64_windows_native() {
-    assert_eq!(aarch64_tier1_status(), "aarch64-pc-windows-msvc is Tier 1 since Rust 1.91.0");
+    assert_eq!(
+        aarch64_tier1_status(),
+        "aarch64-pc-windows-msvc is Tier 1 since Rust 1.91.0"
+    );
 }

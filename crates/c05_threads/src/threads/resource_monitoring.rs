@@ -256,7 +256,10 @@ impl PerformanceProfiler {
     }
 
     pub fn start_profiling(&self, thread_id: usize) {
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         profile_data.insert(
             thread_id,
             ProfileData {
@@ -271,7 +274,10 @@ impl PerformanceProfiler {
     }
 
     pub fn stop_profiling(&self, thread_id: usize) {
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         profile_data.remove(&thread_id);
     }
 
@@ -285,7 +291,10 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             *data
                 .function_calls
@@ -303,7 +312,10 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             *data.memory_allocations.entry(allocation_type).or_insert(0) += size;
         }
@@ -314,7 +326,10 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             data.cache_misses += 1;
         }
@@ -325,19 +340,28 @@ impl PerformanceProfiler {
             return;
         }
 
-        let mut profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let mut profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         if let Some(data) = profile_data.get_mut(&thread_id) {
             data.branch_mispredictions += 1;
         }
     }
 
     pub fn get_profile_data(&self, thread_id: usize) -> Option<ProfileData> {
-        let profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         profile_data.get(&thread_id).cloned()
     }
 
     pub fn generate_profile_report(&self, thread_id: usize) -> Option<ProfileReport> {
-        let profile_data = self.profile_data.lock().expect("获取性能分析数据锁不应失败");
+        let profile_data = self
+            .profile_data
+            .lock()
+            .expect("获取性能分析数据锁不应失败");
         profile_data.get(&thread_id).map(|data| ProfileReport {
             thread_id: data.thread_id,
             total_function_calls: data.function_calls.values().sum(),
@@ -524,7 +548,9 @@ mod tests {
         profiler.record_function_call(1, "test".to_string(), Duration::from_millis(1));
         profiler.record_memory_allocation(1, "heap".to_string(), 1024);
 
-        let report = profiler.generate_profile_report(1).expect("生成性能分析报告应成功");
+        let report = profiler
+            .generate_profile_report(1)
+            .expect("生成性能分析报告应成功");
         assert_eq!(report.total_function_calls, 1);
         assert_eq!(report.total_memory_allocations, 1024);
     }

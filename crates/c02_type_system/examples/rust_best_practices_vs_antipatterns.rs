@@ -184,8 +184,8 @@ mod memory_best_practices {
     /// ✅ 最佳实践：使用 RAII
     pub fn memory_good() {
         let _data = Box::new(42); // 自动释放
-        // ... 某些操作
-        // 即使 panic，析构函数也会被调用
+                                  // ... 某些操作
+                                  // 即使 panic，析构函数也会被调用
     }
 
     /// ## 2. 大数组的栈/堆选择

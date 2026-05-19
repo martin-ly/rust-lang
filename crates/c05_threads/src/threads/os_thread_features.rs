@@ -230,17 +230,26 @@ mod linux_threads {
             thread_id: usize,
             deadline: Duration,
         ) -> Result<(), String> {
-            let mut real_time_threads = self.real_time_threads.lock().expect("获取实时线程锁不应失败");
+            let mut real_time_threads = self
+                .real_time_threads
+                .lock()
+                .expect("获取实时线程锁不应失败");
             real_time_threads.push(thread_id);
 
-            let mut deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
+            let mut deadline_monitor = self
+                .deadline_monitor
+                .lock()
+                .expect("获取截止时间监控锁不应失败");
             deadline_monitor.insert(thread_id, deadline);
 
             Ok(())
         }
 
         pub fn check_deadlines(&self) {
-            let deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
+            let deadline_monitor = self
+                .deadline_monitor
+                .lock()
+                .expect("获取截止时间监控锁不应失败");
             let now = std::time::Instant::now();
 
             for (thread_id, deadline) in deadline_monitor.iter() {
@@ -273,12 +282,18 @@ mod linux_threads {
         where
             F: Fn() + Send + Sync + 'static,
         {
-            let mut handlers = self.signal_handlers.lock().expect("获取信号处理器锁不应失败");
+            let mut handlers = self
+                .signal_handlers
+                .lock()
+                .expect("获取信号处理器锁不应失败");
             handlers.insert(signal, Box::new(handler));
         }
 
         pub fn handle_signal(&self, signal: i32) {
-            let handlers = self.signal_handlers.lock().expect("获取信号处理器锁不应失败");
+            let handlers = self
+                .signal_handlers
+                .lock()
+                .expect("获取信号处理器锁不应失败");
             if let Some(handler) = handlers.get(&signal) {
                 handler();
                 self.signal_count.fetch_add(1, Ordering::Relaxed);

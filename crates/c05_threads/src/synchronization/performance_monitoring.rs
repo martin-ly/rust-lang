@@ -121,7 +121,11 @@ impl PerformanceMetrics {
         let successful = self.successful_operations.load(Ordering::Relaxed);
         let contentions = self.contention_count.load(Ordering::Relaxed);
         if successful == 0 {
-            if contentions > 0 { 1.0 } else { 0.0 }
+            if contentions > 0 {
+                1.0
+            } else {
+                0.0
+            }
         } else {
             (contentions as f64 / successful as f64).min(1.0)
         }

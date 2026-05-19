@@ -12,8 +12,8 @@ use crossbeam_utils::CachePadded;
 use std::cell::UnsafeCell;
 #[allow(unused_imports)]
 use std::sync::{
-    Arc,
     atomic::{AtomicPtr, AtomicUsize, Ordering},
+    Arc,
 };
 use std::thread;
 #[cfg(feature = "custom_ring_buffers")]

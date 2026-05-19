@@ -438,15 +438,24 @@ impl RealTimeScheduler {
         );
 
         // 设置截止时间
-        let mut deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
+        let mut deadline_monitor = self
+            .deadline_monitor
+            .lock()
+            .expect("获取截止时间监控锁不应失败");
         deadline_monitor.insert(thread_id, Instant::now() + deadline);
 
         Ok(())
     }
 
     pub fn check_deadlines(&self) {
-        let deadline_monitor = self.deadline_monitor.lock().expect("获取截止时间监控锁不应失败");
-        let mut missed_deadlines = self.missed_deadlines.lock().expect("获取错过截止时间锁不应失败");
+        let deadline_monitor = self
+            .deadline_monitor
+            .lock()
+            .expect("获取截止时间监控锁不应失败");
+        let mut missed_deadlines = self
+            .missed_deadlines
+            .lock()
+            .expect("获取错过截止时间锁不应失败");
         let now = Instant::now();
 
         for (thread_id, deadline) in deadline_monitor.iter() {
@@ -466,7 +475,10 @@ impl RealTimeScheduler {
     }
 
     pub fn get_missed_deadlines(&self, thread_id: usize) -> usize {
-        let missed_deadlines = self.missed_deadlines.lock().expect("获取错过截止时间锁不应失败");
+        let missed_deadlines = self
+            .missed_deadlines
+            .lock()
+            .expect("获取错过截止时间锁不应失败");
         missed_deadlines.get(&thread_id).copied().unwrap_or(0)
     }
 

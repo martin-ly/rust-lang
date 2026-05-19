@@ -143,7 +143,11 @@ fn test_closure_mut_capture() {
 #[test]
 fn test_recursion_depth() {
     fn factorial(n: u64) -> u64 {
-        if n <= 1 { 1 } else { n * factorial(n - 1) }
+        if n <= 1 {
+            1
+        } else {
+            n * factorial(n - 1)
+        }
     }
 
     assert_eq!(factorial(5), 120);
@@ -313,7 +317,11 @@ fn test_iterator_unsafe() {
 #[test]
 fn test_result_control_flow() {
     fn may_fail(x: i32) -> Result<i32, ()> {
-        if x < 0 { Err(()) } else { Ok(x * 2) }
+        if x < 0 {
+            Err(())
+        } else {
+            Ok(x * 2)
+        }
     }
 
     fn compound(x: i32) -> Result<i32, ()> {

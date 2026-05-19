@@ -120,7 +120,10 @@ pub fn thread_best_practices() {
     }
 
     // 收集结果
-    let results: Vec<String> = handles.into_iter().map(|h| h.join().expect("线程应成功完成")).collect();
+    let results: Vec<String> = handles
+        .into_iter()
+        .map(|h| h.join().expect("线程应成功完成"))
+        .collect();
 
     println!("  创建的线程: {:?}", results);
 
@@ -136,7 +139,11 @@ pub fn thread_error_handling_example() {
     let handle = thread::spawn(|| -> Result<i32, &'static str> {
         // 模拟业务：可能失败
         let ok = true;
-        if ok { Ok(100) } else { Err("业务失败") }
+        if ok {
+            Ok(100)
+        } else {
+            Err("业务失败")
+        }
     });
     match handle.join() {
         Ok(Ok(v)) => println!("  成功: {}", v),

@@ -14,7 +14,11 @@ pub fn fast_multiply(a: i32, b: i32) -> i32 {
 
 #[inline(always)]
 pub fn fast_divide(a: i32, b: i32) -> Option<i32> {
-    if b == 0 { None } else { Some(a / b) }
+    if b == 0 {
+        None
+    } else {
+        Some(a / b)
+    }
 }
 
 /// 内存布局优化示例
@@ -196,7 +200,11 @@ pub fn hot_path_function(x: i32) -> i32 {
 
 #[inline]
 pub fn warm_path_function(x: i32) -> i32 {
-    if x > 0 { x * 2 } else { x / 2 }
+    if x > 0 {
+        x * 2
+    } else {
+        x / 2
+    }
 }
 
 /// 内存管理优化示例

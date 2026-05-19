@@ -233,8 +233,7 @@ impl Actor for CounterActor {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use std::sync::Arc;
-    use std::sync::Mutex;
+    use std::sync::{Arc, Mutex};
 
     #[test]
     fn test_mailbox_send_recv() {

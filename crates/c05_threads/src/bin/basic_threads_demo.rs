@@ -5,7 +5,8 @@
 //! - 线程池使用
 //! - 线程间通信
 //! - 线程同步
-use c05_threads::threads::{creation::*, thread_pool::*};
+use c05_threads::threads::creation::*;
+use c05_threads::threads::thread_pool::*;
 use std::thread;
 
 fn main() {

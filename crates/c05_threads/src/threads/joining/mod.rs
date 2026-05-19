@@ -24,7 +24,10 @@ pub fn join_multiple_and_collect(n: usize) -> i32 {
     for i in 0..n as i32 {
         handles.push(thread::spawn(move || i * i));
     }
-    handles.into_iter().map(|h| h.join().expect("线程应成功完成")).sum()
+    handles
+        .into_iter()
+        .map(|h| h.join().expect("线程应成功完成"))
+        .sum()
 }
 
 /// 使用通道模拟“join 带超时”

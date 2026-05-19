@@ -5,11 +5,19 @@ fn classify(x: i32) -> i32 {
     if x == 0 {
         return 0;
     }
-    if x > 0 { 1 } else { -1 }
+    if x > 0 {
+        1
+    } else {
+        -1
+    }
 }
 
 fn abs_i32(x: i32) -> i32 {
-    if x >= 0 { x } else { -x }
+    if x >= 0 {
+        x
+    } else {
+        -x
+    }
 }
 
 fn sum_iter_chain(v: &[i32]) -> i32 {

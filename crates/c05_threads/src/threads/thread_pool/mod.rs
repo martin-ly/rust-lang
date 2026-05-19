@@ -5,7 +5,7 @@
 //! 2) 可配置线程池
 //! 3) 线程池性能测试
 //! 4) 任务结果返回（补充）
-use std::sync::mpsc::{Receiver, Sender, channel};
+use std::sync::mpsc::{channel, Receiver, Sender};
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::Duration;
@@ -94,19 +94,20 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>) -> Self {
-        let thread = thread::spawn(move || {
-            loop {
-                let message = receiver.lock().expect("ThreadPool receiver 锁被 poisoned").recv();
+        let thread = thread::spawn(move || loop {
+            let message = receiver
+                .lock()
+                .expect("ThreadPool receiver 锁被 poisoned")
+                .recv();
 
-                match message {
-                    Ok(job) => {
-                        println!("  工作线程 {} 执行任务", id);
-                        job();
-                    }
-                    Err(_) => {
-                        println!("  工作线程 {} 关闭", id);
-                        break;
-                    }
+            match message {
+                Ok(job) => {
+                    println!("  工作线程 {} 执行任务", id);
+                    job();
+                }
+                Err(_) => {
+                    println!("  工作线程 {} 关闭", id);
+                    break;
                 }
             }
         });
@@ -272,19 +273,20 @@ impl ConfigurableWorker {
         receiver: Arc<Mutex<Receiver<Box<dyn FnOnce() + Send + 'static>>>>,
         keep_alive_time: Duration,
     ) -> Self {
-        let thread = thread::spawn(move || {
-            loop {
-                let message = receiver.lock().expect("获取接收器锁不应失败").recv_timeout(keep_alive_time);
+        let thread = thread::spawn(move || loop {
+            let message = receiver
+                .lock()
+                .expect("获取接收器锁不应失败")
+                .recv_timeout(keep_alive_time);
 
-                match message {
-                    Ok(job) => {
-                        println!("  可配置工作线程 {} 执行任务", id);
-                        job();
-                    }
-                    Err(_) => {
-                        println!("  可配置工作线程 {} 超时关闭", id);
-                        break;
-                    }
+            match message {
+                Ok(job) => {
+                    println!("  可配置工作线程 {} 执行任务", id);
+                    job();
+                }
+                Err(_) => {
+                    println!("  可配置工作线程 {} 超时关闭", id);
+                    break;
                 }
             }
         });

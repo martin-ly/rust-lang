@@ -85,7 +85,7 @@ struct Point {
 
 impl Add for Point {
     type Output = Point;
-    
+
     fn add(self, other: Point) -> Point {
         Point {
             x: self.x + other.x,
@@ -96,7 +96,7 @@ impl Add for Point {
 
 impl Sub for Point {
     type Output = Point;
-    
+
     fn sub(self, other: Point) -> Point {
         Point {
             x: self.x - other.x,
@@ -107,7 +107,7 @@ impl Sub for Point {
 
 impl Mul<f64> for Point {
     type Output = Point;
-    
+
     fn mul(self, scalar: f64) -> Point {
         Point {
             x: self.x * scalar,
@@ -118,7 +118,7 @@ impl Mul<f64> for Point {
 
 impl Div<f64> for Point {
     type Output = Point;
-    
+
     fn div(self, scalar: f64) -> Point {
         Point {
             x: self.x / scalar,
@@ -145,7 +145,7 @@ where
     fn new(components: Vec<T>) -> Self {
         Vector { components }
     }
-    
+
     fn add(&self, other: &Vector<T>) -> Vector<T> {
         let components: Vec<T> = self.components
             .iter()
@@ -154,7 +154,7 @@ where
             .collect();
         Vector { components }
     }
-    
+
     fn scale(&self, scalar: T) -> Vector<T> {
         let components: Vec<T> = self.components
             .iter()
@@ -188,7 +188,7 @@ where
 fn main() {
     let result1 = calculate(10, 5, '+');
     let result2 = calculate(10.5, 2.0, '*');
-    
+
     println!("10 + 5 = {}", result1);
     println!("10.5 * 2.0 = {}", result2);
 }
@@ -215,31 +215,31 @@ where
         let cols = if rows > 0 { data[0].len() } else { 0 };
         Matrix { data, rows, cols }
     }
-    
+
     fn add(&self, other: &Matrix<T>) -> Matrix<T> {
         let mut result = vec![vec![T::default(); self.cols]; self.rows];
-        
+
         for i in 0..self.rows {
             for j in 0..self.cols {
                 result[i][j] = self.data[i][j].clone() + other.data[i][j].clone();
             }
         }
-        
+
         Matrix::new(result)
     }
-    
+
     fn multiply(&self, other: &Matrix<T>) -> Matrix<T> {
         let mut result = vec![vec![T::default(); other.cols]; self.rows];
-        
+
         for i in 0..self.rows {
             for j in 0..other.cols {
                 for k in 0..self.cols {
-                    result[i][j] = result[i][j].clone() + 
+                    result[i][j] = result[i][j].clone() +
                         self.data[i][k].clone() * other.data[k][j].clone();
                 }
             }
         }
-        
+
         Matrix::new(result)
     }
 }
@@ -261,7 +261,7 @@ struct Velocity(f64);
 
 impl Add for Length {
     type Output = Length;
-    
+
     fn add(self, other: Length) -> Length {
         Length(self.0 + other.0)
     }
@@ -269,7 +269,7 @@ impl Add for Length {
 
 impl Sub for Length {
     type Output = Length;
-    
+
     fn sub(self, other: Length) -> Length {
         Length(self.0 - other.0)
     }
@@ -277,7 +277,7 @@ impl Sub for Length {
 
 impl Div<Time> for Length {
     type Output = Velocity;
-    
+
     fn div(self, time: Time) -> Velocity {
         Velocity(self.0 / time.0)
     }
@@ -285,7 +285,7 @@ impl Div<Time> for Length {
 
 impl Mul<Time> for Velocity {
     type Output = Length;
-    
+
     fn mul(self, time: Time) -> Length {
         Length(self.0 * time.0)
     }
@@ -315,7 +315,7 @@ where
     T: Add<Output = T> + Clone,
 {
     type Output = ConditionalNumber<T>;
-    
+
     fn add(self, other: ConditionalNumber<T>) -> ConditionalNumber<T> {
         ConditionalNumber {
             value: self.value + other.value,
@@ -329,10 +329,10 @@ where
     T: Sub<Output = T> + Clone,
 {
     type Output = Option<ConditionalNumber<T>>;
-    
+
     fn sub(self, other: ConditionalNumber<T>) -> Option<ConditionalNumber<T>> {
         let result = self.value - other.value;
-        
+
         // 如果不允许负数，检查结果
         if !self.allow_negative && result < T::default() {
             None
@@ -367,39 +367,39 @@ where
             history: Vec::new(),
         }
     }
-    
+
     fn add(mut self, other: T) -> Self {
         let result = self.value.clone() + other.clone();
         self.history.push(format!("{} + {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     fn sub(mut self, other: T) -> Self {
         let result = self.value.clone() - other.clone();
         self.history.push(format!("{} - {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     fn mul(mut self, other: T) -> Self {
         let result = self.value.clone() * other.clone();
         self.history.push(format!("{} * {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     fn div(mut self, other: T) -> Self {
         let result = self.value.clone() / other.clone();
         self.history.push(format!("{} / {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     fn result(self) -> T {
         self.value
     }
-    
+
     fn show_history(&self) {
         println!("Calculation history:");
         for (i, step) in self.history.iter().enumerate() {
@@ -429,7 +429,7 @@ Operations traits 为 Rust 提供了统一的数学运算接口。
 通过实现这些特征，可以创建可组合的、类型安全的数学运算代码。
 */
 
-use std::ops::{Add, Sub, Mul, Div, Rem};
+use std::ops::{Add, Div, Mul, Rem, Sub};
 
 // 基本运算特征演示
 #[derive(Debug, Clone, Copy)]
@@ -440,7 +440,7 @@ pub struct Point {
 
 impl Add for Point {
     type Output = Point;
-    
+
     fn add(self, other: Point) -> Point {
         Point {
             x: self.x + other.x,
@@ -451,7 +451,7 @@ impl Add for Point {
 
 impl Sub for Point {
     type Output = Point;
-    
+
     fn sub(self, other: Point) -> Point {
         Point {
             x: self.x - other.x,
@@ -462,7 +462,7 @@ impl Sub for Point {
 
 impl Mul<f64> for Point {
     type Output = Point;
-    
+
     fn mul(self, scalar: f64) -> Point {
         Point {
             x: self.x * scalar,
@@ -473,7 +473,7 @@ impl Mul<f64> for Point {
 
 impl Div<f64> for Point {
     type Output = Point;
-    
+
     fn div(self, scalar: f64) -> Point {
         Point {
             x: self.x / scalar,
@@ -495,18 +495,20 @@ where
     pub fn new(components: Vec<T>) -> Self {
         Vector { components }
     }
-    
+
     pub fn add(&self, other: &Vector<T>) -> Vector<T> {
-        let components: Vec<T> = self.components
+        let components: Vec<T> = self
+            .components
             .iter()
             .zip(other.components.iter())
             .map(|(a, b)| a.clone() + b.clone())
             .collect();
         Vector { components }
     }
-    
+
     pub fn scale(&self, scalar: T) -> Vector<T> {
-        let components: Vec<T> = self.components
+        let components: Vec<T> = self
+            .components
             .iter()
             .map(|c| c.clone() * scalar.clone())
             .collect();
@@ -526,7 +528,7 @@ pub struct Velocity(pub f64);
 
 impl Add for Length {
     type Output = Length;
-    
+
     fn add(self, other: Length) -> Length {
         Length(self.0 + other.0)
     }
@@ -534,7 +536,7 @@ impl Add for Length {
 
 impl Sub for Length {
     type Output = Length;
-    
+
     fn sub(self, other: Length) -> Length {
         Length(self.0 - other.0)
     }
@@ -542,7 +544,7 @@ impl Sub for Length {
 
 impl Div<Time> for Length {
     type Output = Velocity;
-    
+
     fn div(self, time: Time) -> Velocity {
         Velocity(self.0 / time.0)
     }
@@ -550,7 +552,7 @@ impl Div<Time> for Length {
 
 impl Mul<Time> for Velocity {
     type Output = Length;
-    
+
     fn mul(self, time: Time) -> Length {
         Length(self.0 * time.0)
     }
@@ -565,7 +567,12 @@ pub struct Calculator<T> {
 
 impl<T> Calculator<T>
 where
-    T: Add<Output = T> + Sub<Output = T> + Mul<Output = T> + Div<Output = T> + Clone + std::fmt::Display,
+    T: Add<Output = T>
+        + Sub<Output = T>
+        + Mul<Output = T>
+        + Div<Output = T>
+        + Clone
+        + std::fmt::Display,
 {
     pub fn new(value: T) -> Self {
         Calculator {
@@ -573,39 +580,43 @@ where
             history: Vec::new(),
         }
     }
-    
+
     pub fn add(mut self, other: T) -> Self {
         let result = self.value.clone() + other.clone();
-        self.history.push(format!("{} + {} = {}", self.value, other, result));
+        self.history
+            .push(format!("{} + {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     pub fn sub(mut self, other: T) -> Self {
         let result = self.value.clone() - other.clone();
-        self.history.push(format!("{} - {} = {}", self.value, other, result));
+        self.history
+            .push(format!("{} - {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     pub fn mul(mut self, other: T) -> Self {
         let result = self.value.clone() * other.clone();
-        self.history.push(format!("{} * {} = {}", self.value, other, result));
+        self.history
+            .push(format!("{} * {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     pub fn div(mut self, other: T) -> Self {
         let result = self.value.clone() / other.clone();
-        self.history.push(format!("{} / {} = {}", self.value, other, result));
+        self.history
+            .push(format!("{} / {} = {}", self.value, other, result));
         self.value = result;
         self
     }
-    
+
     pub fn result(self) -> T {
         self.value
     }
-    
+
     pub fn show_history(&self) {
         println!("Calculation history:");
         for (i, step) in self.history.iter().enumerate() {
@@ -617,19 +628,19 @@ where
 // 演示函数
 pub fn demonstrate_operations() {
     println!("=== Operations Traits Demonstration ===\n");
-    
+
     // 基本运算
     demonstrate_basic_operations();
-    
+
     // 自定义类型运算
     demonstrate_custom_operations();
-    
+
     // 泛型运算
     demonstrate_generic_operations();
-    
+
     // 物理量计算
     demonstrate_physics_operations();
-    
+
     // 链式计算
     demonstrate_chained_operations();
 }
@@ -637,10 +648,10 @@ pub fn demonstrate_operations() {
 // 基本运算演示
 fn demonstrate_basic_operations() {
     println!("--- Basic Operations ---");
-    
+
     let a = 10;
     let b = 3;
-    
+
     println!("a = {}, b = {}", a, b);
     println!("a + b = {}", a + b);
     println!("a - b = {}", a - b);
@@ -653,18 +664,18 @@ fn demonstrate_basic_operations() {
 // 自定义类型运算演示
 fn demonstrate_custom_operations() {
     println!("--- Custom Type Operations ---");
-    
+
     let p1 = Point { x: 1.0, y: 2.0 };
     let p2 = Point { x: 3.0, y: 4.0 };
-    
+
     println!("Point 1: {:?}", p1);
     println!("Point 2: {:?}", p2);
-    
+
     let sum = p1 + p2;
     let diff = p2 - p1;
     let scaled = p1 * 2.0;
     let divided = p2 / 2.0;
-    
+
     println!("p1 + p2 = {:?}", sum);
     println!("p2 - p1 = {:?}", diff);
     println!("p1 * 2 = {:?}", scaled);
@@ -675,16 +686,16 @@ fn demonstrate_custom_operations() {
 // 泛型运算演示
 fn demonstrate_generic_operations() {
     println!("--- Generic Operations ---");
-    
+
     let v1 = Vector::new(vec![1, 2, 3]);
     let v2 = Vector::new(vec![4, 5, 6]);
-    
+
     println!("Vector 1: {:?}", v1);
     println!("Vector 2: {:?}", v2);
-    
+
     let sum = v1.add(&v2);
     let scaled = v1.scale(2);
-    
+
     println!("v1 + v2 = {:?}", sum);
     println!("v1 * 2 = {:?}", scaled);
     println!();
@@ -693,16 +704,16 @@ fn demonstrate_generic_operations() {
 // 物理量计算演示
 fn demonstrate_physics_operations() {
     println!("--- Physics Operations ---");
-    
+
     let distance = Length(100.0); // 100 meters
-    let time = Time(10.0);        // 10 seconds
-    
+    let time = Time(10.0); // 10 seconds
+
     println!("Distance: {:?}", distance);
     println!("Time: {:?}", time);
-    
+
     let velocity = distance / time;
     println!("Velocity: {:?}", velocity);
-    
+
     let new_distance = velocity * time;
     println!("Calculated distance: {:?}", new_distance);
     println!();
@@ -711,13 +722,9 @@ fn demonstrate_physics_operations() {
 // 链式计算演示
 fn demonstrate_chained_operations() {
     println!("--- Chained Operations ---");
-    
-    let calculator = Calculator::new(10)
-        .add(5)
-        .mul(2)
-        .sub(3)
-        .div(2);
-    
+
+    let calculator = Calculator::new(10).add(5).mul(2).sub(3).div(2);
+
     calculator.show_history();
     println!("Final result: {}", calculator.result());
     println!();
@@ -727,61 +734,57 @@ fn demonstrate_chained_operations() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_point_operations() {
         let p1 = Point { x: 1.0, y: 2.0 };
         let p2 = Point { x: 3.0, y: 4.0 };
-        
+
         let sum = p1 + p2;
         assert_eq!(sum.x, 4.0);
         assert_eq!(sum.y, 6.0);
-        
+
         let diff = p2 - p1;
         assert_eq!(diff.x, 2.0);
         assert_eq!(diff.y, 2.0);
-        
+
         let scaled = p1 * 2.0;
         assert_eq!(scaled.x, 2.0);
         assert_eq!(scaled.y, 4.0);
-        
+
         let divided = p2 / 2.0;
         assert_eq!(divided.x, 1.5);
         assert_eq!(divided.y, 2.0);
     }
-    
+
     #[test]
     fn test_vector_operations() {
         let v1 = Vector::new(vec![1, 2, 3]);
         let v2 = Vector::new(vec![4, 5, 6]);
-        
+
         let sum = v1.add(&v2);
         assert_eq!(sum.components, vec![5, 7, 9]);
-        
+
         let scaled = v1.scale(2);
         assert_eq!(scaled.components, vec![2, 4, 6]);
     }
-    
+
     #[test]
     fn test_physics_operations() {
         let distance = Length(100.0);
         let time = Time(10.0);
-        
+
         let velocity = distance / time;
         assert_eq!(velocity.0, 10.0);
-        
+
         let new_distance = velocity * time;
         assert_eq!(new_distance.0, 100.0);
     }
-    
+
     #[test]
     fn test_calculator_chain() {
-        let calculator = Calculator::new(10)
-            .add(5)
-            .mul(2)
-            .sub(3)
-            .div(2);
-        
+        let calculator = Calculator::new(10).add(5).mul(2).sub(3).div(2);
+
         assert_eq!(calculator.result(), 11);
         assert_eq!(calculator.history.len(), 4);
     }

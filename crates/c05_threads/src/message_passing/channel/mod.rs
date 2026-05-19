@@ -1,12 +1,12 @@
 //! 基础通道：标准库 `std::sync::mpsc`
 //! 用法：
 //! ```
-//! use c05_threads::message_passing::channel::{channel, Sender, Receiver};
+//! use c05_threads::message_passing::channel::{channel, Receiver, Sender};
 //! let (tx, rx): (Sender<i32>, Receiver<i32>) = channel();
 //! tx.send(42).unwrap();
 //! assert_eq!(rx.recv().unwrap(), 42);
 //! ```
-pub use std::sync::mpsc::{Receiver, RecvTimeoutError, Sender, TryRecvError, channel};
+pub use std::sync::mpsc::{channel, Receiver, RecvTimeoutError, Sender, TryRecvError};
 use std::time::Duration;
 
 /// 尝试在超时内接收一条消息，映射 Err->None

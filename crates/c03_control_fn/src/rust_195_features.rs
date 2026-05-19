@@ -489,7 +489,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Control Flow, Functions
 // ============================================================================
@@ -523,15 +522,24 @@ mod real_rust_195_tests {
 
     #[test]
     fn test_parse_with_if_let_guard() {
-        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(10))), 10);
+        assert_eq!(
+            RealRust195Features::parse_with_if_let_guard(Ok(Some(10))),
+            10
+        );
         assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(0))), 0);
-        assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(Some(-5))), -1);
+        assert_eq!(
+            RealRust195Features::parse_with_if_let_guard(Ok(Some(-5))),
+            -1
+        );
         assert_eq!(RealRust195Features::parse_with_if_let_guard(Ok(None)), 0);
         assert_eq!(
             RealRust195Features::parse_with_if_let_guard(Err("empty input")),
             -100
         );
-        assert_eq!(RealRust195Features::parse_with_if_let_guard(Err("other")), -1);
+        assert_eq!(
+            RealRust195Features::parse_with_if_let_guard(Err("other")),
+            -1
+        );
     }
 
     #[test]

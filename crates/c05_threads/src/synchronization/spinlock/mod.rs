@@ -2,11 +2,10 @@
 //! - 基于 `AtomicBool` 的简化自旋锁
 //! - 支持 `try_lock`
 use std::cell::UnsafeCell;
-use std::hint;
 use std::ops::{Deref, DerefMut};
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
-use std::thread;
+use std::sync::Arc;
+use std::{hint, thread};
 
 pub struct SpinLock<T> {
     locked: AtomicBool,

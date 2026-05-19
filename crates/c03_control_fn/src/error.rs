@@ -11,16 +11,16 @@ use thiserror::Error;
 pub enum ControlFlowError {
     #[error("non-exhaustive match: {0}")]
     NonExhaustiveMatch(String),
-    
+
     #[error("stack overflow: {0}")]
     StackOverflow(String),
-    
+
     #[error("interrupted: {0}")]
     Interrupted(String),
-    
+
     #[error("closure capture error: {0}")]
     ClosureCapture(String),
-    
+
     #[error("generator error: {0}")]
     Generator(String),
 }
@@ -30,8 +30,7 @@ impl_into_unified_error!(ControlFlowError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C03 crate's result type
@@ -62,11 +61,10 @@ pub fn generator_error<T: Into<String>>(msg: T) -> ControlFlowError {
     ControlFlowError::Generator(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
-    use std::assert_matches;
     use super::*;
+    use std::assert_matches;
 
     #[test]
     fn test_error_creation() {

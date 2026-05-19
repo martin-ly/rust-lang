@@ -2,11 +2,10 @@
 //!
 //! 涵盖 `AtomicBool`/`AtomicUsize` 基本操作、`Ordering` 含义、
 //! `compare_exchange` 与自旋计数器示例。
-use std::hint;
+use std::sync::atomic::{fence, AtomicBool, AtomicUsize, Ordering};
 use std::sync::Arc;
-use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering, fence};
-use std::thread;
 use std::time::Duration;
+use std::{hint, thread};
 
 /// 展示最常用的原子操作与不同内存序
 pub fn atomic_basics_demo() {

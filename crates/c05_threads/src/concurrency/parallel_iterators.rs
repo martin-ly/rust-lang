@@ -257,7 +257,11 @@ where
 
     if found.load(Ordering::Relaxed) {
         let idx = result_index.load(Ordering::Relaxed);
-        if idx < items.len() { Some(idx) } else { None }
+        if idx < items.len() {
+            Some(idx)
+        } else {
+            None
+        }
     } else {
         None
     }

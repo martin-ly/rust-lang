@@ -119,7 +119,11 @@ fn test_where_clause() {
         let _t2 = t.clone();
         let u2 = u.clone();
 
-        if u == u2 { 1 } else { 0 }
+        if u == u2 {
+            1
+        } else {
+            0
+        }
     }
 
     assert_eq!(some_function(1, 2), 1);

@@ -737,7 +737,11 @@ pub mod functions {
 
     /// 递归计算阶乘
     pub fn factorial(n: u32) -> u32 {
-        if n <= 1 { 1 } else { n * factorial(n - 1) }
+        if n <= 1 {
+            1
+        } else {
+            n * factorial(n - 1)
+        }
     }
 
     /// 泛型恒等函数
@@ -750,7 +754,11 @@ pub mod functions {
     where
         T: PartialOrd,
     {
-        if a > b { a } else { b }
+        if a > b {
+            a
+        } else {
+            b
+        }
     }
 }
 

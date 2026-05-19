@@ -3,7 +3,7 @@
 //! This module provides crate-specific error types and utilities using
 //! the trait-based error design from the common crate.
 
-use common::{impl_into_unified_error, impl_rust_lang_error, ErrorCode};
+use common::{ErrorCode, impl_into_unified_error, impl_rust_lang_error};
 use thiserror::Error;
 
 /// C04 crate-specific error type
@@ -11,16 +11,16 @@ use thiserror::Error;
 pub enum GenericError {
     #[error("type parameter mismatch: {0}")]
     TypeParameterMismatch(String),
-    
+
     #[error("associated type error: {0}")]
     AssociatedType(String),
-    
+
     #[error("constraint conflict: {0}")]
     ConstraintConflict(String),
-    
+
     #[error("GAT error: {0}")]
     GatError(String),
-    
+
     #[error("HRTB error: {0}")]
     HrtbError(String),
 }
@@ -30,8 +30,7 @@ impl_into_unified_error!(GenericError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C04 crate's result type
@@ -62,11 +61,10 @@ pub fn hrtb_error<T: Into<String>>(msg: T) -> GenericError {
     GenericError::HrtbError(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
-    use std::assert_matches;
     use super::*;
+    use std::assert_matches;
 
     #[test]
     fn test_error_creation() {

@@ -719,10 +719,7 @@ mod tests {
             TypeIfLetGuardExamples::parse_type_id(Some("abc")),
             Err("类型标识符必须是数字")
         );
-        assert_eq!(
-            TypeIfLetGuardExamples::parse_type_id(None),
-            Err("输入为空")
-        );
+        assert_eq!(TypeIfLetGuardExamples::parse_type_id(None), Err("输入为空"));
     }
 
     #[test]
@@ -754,7 +751,7 @@ mod tests {
             basic_coercion::Wrapper::from(42),
             basic_coercion::Wrapper::from("test".to_string()),
         );
-        assert_eq!(tuple.0.0, 42);
-        assert_eq!(tuple.1.0, "test");
+        assert_eq!(tuple.0 .0, 42);
+        assert_eq!(tuple.1 .0, "test");
     }
 }

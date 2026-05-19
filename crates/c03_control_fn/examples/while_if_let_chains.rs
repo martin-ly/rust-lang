@@ -1,6 +1,10 @@
 fn parse(input: Option<Result<&str, &'static str>>) -> &'static str {
     if let Some(Ok(s)) = input {
-        if s.is_empty() { "empty" } else { "ok" }
+        if s.is_empty() {
+            "empty"
+        } else {
+            "ok"
+        }
     } else if let Some(Err(_)) = input {
         "err"
     } else {

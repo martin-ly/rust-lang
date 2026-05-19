@@ -3,7 +3,11 @@ fn diverge() -> ! {
 }
 
 fn choose(flag: bool) -> i32 {
-    if flag { 1 } else { diverge() }
+    if flag {
+        1
+    } else {
+        diverge()
+    }
 }
 
 fn main() {

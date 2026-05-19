@@ -2,7 +2,7 @@
 //!
 //! 测试闭包、控制流分支、模式匹配等核心语言特性的性能表现。
 
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 基准测试：函数组合链性能
 /// 验证函数式编程风格在高频调用下的开销
@@ -38,14 +38,20 @@ fn bench_branch_prediction(c: &mut Criterion) {
 
     c.bench_function("branch_predictor_friendly_sorted", |b| {
         b.iter(|| {
-            let count: i32 = sorted_data.iter().map(|&x| branch_predictor_friendly(x)).sum();
+            let count: i32 = sorted_data
+                .iter()
+                .map(|&x| branch_predictor_friendly(x))
+                .sum();
             std::hint::black_box(count);
         });
     });
 
     c.bench_function("branch_predictor_friendly_random", |b| {
         b.iter(|| {
-            let count: i32 = random_data.iter().map(|&x| branch_predictor_friendly(x)).sum();
+            let count: i32 = random_data
+                .iter()
+                .map(|&x| branch_predictor_friendly(x))
+                .sum();
             std::hint::black_box(count);
         });
     });

@@ -639,7 +639,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Type System, Pattern Matching
 // ============================================================================
@@ -653,8 +652,18 @@ impl RealRust195Features {
     /// `if let` guards in match arms (Rust 1.95)
     pub fn classify_with_if_let_guard(input: Option<String>) -> &'static str {
         match input {
-            Some(s) if let Ok(n) = s.parse::<i32>() && n > 0 => "positive number",
-            Some(s) if let Ok(n) = s.parse::<i32>() && n < 0 => "negative number",
+            Some(s)
+                if let Ok(n) = s.parse::<i32>()
+                    && n > 0 =>
+            {
+                "positive number"
+            }
+            Some(s)
+                if let Ok(n) = s.parse::<i32>()
+                    && n < 0 =>
+            {
+                "negative number"
+            }
             Some(s) if s.parse::<i32>().is_ok() => "zero",
             Some(_) => "not a number",
             None => "missing",
@@ -690,7 +699,10 @@ mod real_rust_195_tests {
             RealRust195Features::classify_with_if_let_guard(Some("abc".to_string())),
             "not a number"
         );
-        assert_eq!(RealRust195Features::classify_with_if_let_guard(None), "missing");
+        assert_eq!(
+            RealRust195Features::classify_with_if_let_guard(None),
+            "missing"
+        );
     }
 
     #[test]

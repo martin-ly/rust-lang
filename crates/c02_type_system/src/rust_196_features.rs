@@ -42,7 +42,11 @@ impl BoolToFloatConversionExamples {
 
     /// 条件概率指示函数: P(A) ≈ mean(indicator_A)
     pub fn indicator(probability: f64, condition: bool) -> f64 {
-        if condition { probability } else { f64::from(false) }
+        if condition {
+            probability
+        } else {
+            f64::from(false)
+        }
     }
 
     /// 传感器布尔状态转换为模拟信号强度

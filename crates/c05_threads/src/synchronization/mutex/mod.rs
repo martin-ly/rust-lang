@@ -30,7 +30,10 @@ pub fn basic_mutex_usage() {
         handle.join().expect("SmartMutex 线程执行失败");
     }
 
-    println!("  最终计数器值: {}", *counter.lock().expect("Counter 锁被 poisoned"));
+    println!(
+        "  最终计数器值: {}",
+        *counter.lock().expect("Counter 锁被 poisoned")
+    );
 }
 
 /// 共享复杂数据结构

@@ -6,8 +6,8 @@
 //! - 自适应屏障
 //! - 可重用屏障
 use crossbeam_utils::CachePadded;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
+use std::sync::Arc;
 use std::thread;
 use std::time::{Duration, Instant};
 

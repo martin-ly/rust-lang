@@ -768,12 +768,12 @@ pub mod basic_syntax_features {
 /// 使用示例和测试
 #[cfg(test)]
 mod tests {
-    use super::basic_syntax_features::*;
-    use super::basic_syntax_features::const_generic_inference::*;
-    use super::basic_syntax_features::lifetime_syntax_warnings::*;
-    use super::basic_syntax_features::generic_associated_types::*;
-    use super::basic_syntax_features::type_alias_impl_trait::*;
     use super::basic_syntax_features::advanced_type_composition::*;
+    use super::basic_syntax_features::const_generic_inference::*;
+    use super::basic_syntax_features::generic_associated_types::*;
+    use super::basic_syntax_features::lifetime_syntax_warnings::*;
+    use super::basic_syntax_features::type_alias_impl_trait::*;
+    use super::basic_syntax_features::*;
 
     #[test]
     fn test_const_generic_array() {
@@ -815,7 +815,10 @@ mod tests {
     fn test_string_container() {
         let container = StringContainer::new(vec!["Hello".to_string(), "World".to_string()]);
         assert_eq!(container.get(), Some("Hello"));
-        assert_eq!(container.get_metadata::<i32>(), Some(&"metadata".to_string()));
+        assert_eq!(
+            container.get_metadata::<i32>(),
+            Some(&"metadata".to_string())
+        );
     }
 
     #[test]
@@ -856,68 +859,73 @@ mod tests {
 /// 包括常量泛型推断、生命周期语法警告、GATs、TAIT等。
 pub fn demonstrate_all_rust_189_features() {
     println!("=== Rust 1.89 基础语法特性演示 ===\n");
-    
+
     // 1. 显式推断的常量泛型参数
     println!("1. 显式推断的常量泛型参数:");
-    let arr = basic_syntax_features::const_generic_inference::ConstGenericArray::new([1, 2, 3, 4, 5]);
+    let arr =
+        basic_syntax_features::const_generic_inference::ConstGenericArray::new([1, 2, 3, 4, 5]);
     println!("  创建数组: {:?}", arr);
     println!("  数组长度: {}", arr.len());
     println!("  是否为空: {}", arr.is_empty());
-    
+
     let matrix = basic_syntax_features::const_generic_inference::Matrix::<i32, 3, 3>::new();
     println!("  创建矩阵: {:?}", matrix);
     println!("  矩阵行数: {}", matrix.rows());
     println!("  矩阵列数: {}", matrix.cols());
-    
+
     let vector = basic_syntax_features::const_generic_inference::Vector::<i32, 3>::new();
     println!("  创建向量: {:?}", vector);
     println!("  向量维度: {}", vector.dim());
     println!();
-    
+
     // 2. 不匹配的生命周期语法警告
     println!("2. 不匹配的生命周期语法警告:");
     let scores = [1, 2, 3, 4, 5];
     let iter = basic_syntax_features::lifetime_syntax_warnings::items(&scores);
     println!("  创建迭代器: {:?}", iter);
-    
+
     let data = "Hello";
     let metadata = "World";
-    let composed = basic_syntax_features::lifetime_syntax_warnings::combine_lifetimes(&data, &metadata);
+    let composed =
+        basic_syntax_features::lifetime_syntax_warnings::combine_lifetimes(&data, &metadata);
     println!("  生命周期组合: {:?}", composed);
     println!();
-    
+
     // 3. 增强的泛型关联类型 (GATs)
     println!("3. 增强的泛型关联类型 (GATs):");
-    let container = basic_syntax_features::generic_associated_types::StringContainer::new(
-        vec!["Hello".to_string(), "World".to_string()]
-    );
+    let container = basic_syntax_features::generic_associated_types::StringContainer::new(vec![
+        "Hello".to_string(),
+        "World".to_string(),
+    ]);
     println!("  字符串容器: {:?}", container);
     println!("  获取项: {:?}", container.get());
     println!("  获取元数据: {:?}", container.get_metadata::<i32>());
-    
-    let mut iterator = basic_syntax_features::generic_associated_types::NumberIterator::new(vec![1, 2, 3, 4, 5]);
+
+    let mut iterator =
+        basic_syntax_features::generic_associated_types::NumberIterator::new(vec![1, 2, 3, 4, 5]);
     println!("  数字迭代器: {:?}", iterator);
     println!("  下一个元素: {:?}", iterator.next());
     println!("  元数据: {:?}", iterator.get_metadata());
     println!();
-    
+
     // 4. 类型别名实现特征 (TAIT)
     println!("4. 类型别名实现特征 (TAIT):");
     let processor = basic_syntax_features::type_alias_impl_trait::create_number_processor();
     println!("  数字处理器: {}", processor);
-    
+
     let complex = basic_syntax_features::type_alias_impl_trait::create_complex_type();
     let items: Vec<String> = complex.collect();
     println!("  复杂类型: {:?}", items);
     println!();
-    
+
     // 5. 高级类型组合模式
     println!("5. 高级类型组合模式:");
-    let smart_pointer = basic_syntax_features::advanced_type_composition::SmartPointerComposition::new(42);
+    let smart_pointer =
+        basic_syntax_features::advanced_type_composition::SmartPointerComposition::new(42);
     println!("  智能指针组合: {:?}", smart_pointer);
     println!("  获取值: {}", smart_pointer.get());
     println!();
-    
+
     println!("=== 演示完成 ===");
 }
 

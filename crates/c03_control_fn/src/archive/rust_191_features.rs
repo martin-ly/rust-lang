@@ -36,7 +36,7 @@ pub mod const_control_flow {
     ///
     /// Rust 1.91: 可以在 const 上下文中使用引用
     pub const CONST_VALUE: u32 = 10;
-    pub const CONST_REF: &u32 = &CONST_VALUE;  // ✅ Rust 1.91 新特性
+    pub const CONST_REF: &u32 = &CONST_VALUE; // ✅ Rust 1.91 新特性
     pub const FACTORIAL_10: u32 = const_factorial(*CONST_REF);
 
     /// 编译时配置系统
@@ -72,7 +72,10 @@ pub mod improved_control_flow {
     /// 使用改进的 ControlFlow 进行数据处理
     ///
     /// Rust 1.91 改进了 ControlFlow，提供更好的错误信息
-    pub fn process_with_control_flow<T>(items: &[T], validator: impl Fn(&T) -> bool) -> ControlFlow<String, Vec<&T>>
+    pub fn process_with_control_flow<T>(
+        items: &[T],
+        validator: impl Fn(&T) -> bool,
+    ) -> ControlFlow<String, Vec<&T>>
     where
         T: std::fmt::Display,
     {
@@ -207,7 +210,11 @@ pub mod error_handling {
             match part.parse::<i32>() {
                 Ok(n) => numbers.push(n),
                 Err(_) => {
-                    return ControlFlow::Break(format!("解析失败: 第 {} 个元素 '{}' 不是有效数字", idx + 1, part));
+                    return ControlFlow::Break(format!(
+                        "解析失败: 第 {} 个元素 '{}' 不是有效数字",
+                        idx + 1,
+                        part
+                    ));
                 }
             }
         }
@@ -225,7 +232,11 @@ pub mod error_handling {
         // 第二级：检查范围
         for (idx, &n) in data.iter().enumerate() {
             if !(0..=1000).contains(&n) {
-                return ControlFlow::Break(format!("第 {} 个元素 {} 超出范围 [0, 1000]", idx + 1, n));
+                return ControlFlow::Break(format!(
+                    "第 {} 个元素 {} 超出范围 [0, 1000]",
+                    idx + 1,
+                    n
+                ));
             }
         }
 
@@ -276,8 +287,8 @@ pub mod error_handling {
 
 /// Rust 1.91 控制流综合应用示例
 pub mod comprehensive_examples {
-    use std::io::{BufRead, BufReader, Cursor};
     use std::collections::HashMap;
+    use std::io::{BufRead, BufReader, Cursor};
     use std::ops::ControlFlow;
 
     /// 配置系统：结合 const 上下文和控制流
@@ -290,7 +301,7 @@ pub mod comprehensive_examples {
         pub const MAX_ITERATIONS: usize = 100;
         pub const TIMEOUT_MS: u64 = 1000;
 
-        pub const ITER_REF: &usize = &Self::MAX_ITERATIONS;  // ✅ Rust 1.91
+        pub const ITER_REF: &usize = &Self::MAX_ITERATIONS; // ✅ Rust 1.91
         pub const TOTAL_MS: u64 = *Self::ITER_REF as u64 * Self::TIMEOUT_MS;
     }
 
@@ -459,7 +470,10 @@ pub mod optimized_loops {
 
         for (idx, &value) in data.iter().enumerate() {
             if value > max {
-                return ControlFlow::Break(format!("第 {} 个元素 {} 超出最大值 {}", idx, value, max));
+                return ControlFlow::Break(format!(
+                    "第 {} 个元素 {} 超出最大值 {}",
+                    idx, value, max
+                ));
             }
             result.push(value);
         }
@@ -619,10 +633,7 @@ pub mod closure_optimization {
         let numbers = vec![1, 2, 3, 4, 5];
 
         // Rust 1.91: 闭包捕获更高效
-        numbers
-            .into_iter()
-            .map(|x| x * multiplier)
-            .collect()
+        numbers.into_iter().map(|x| x * multiplier).collect()
     }
 
     /// const 上下文中的闭包
@@ -647,10 +658,7 @@ pub mod closure_optimization {
         T: Clone,
         F: Fn(&T) -> bool,
     {
-        data.iter()
-            .filter(|x| f(*x))
-            .cloned()
-            .collect()
+        data.iter().filter(|x| f(*x)).cloned().collect()
     }
 
     pub fn demonstrate() {
