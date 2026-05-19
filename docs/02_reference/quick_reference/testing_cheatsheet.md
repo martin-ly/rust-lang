@@ -1507,7 +1507,7 @@ fn broken_test() {
 
 - [错误处理速查卡](./error_handling_cheatsheet.md) - 测试中的错误处理
 - [模块系统速查卡](./modules_cheatsheet.md) - 模块测试
-- [宏系统速查卡](./macros_cheatsheet.md) - 测试宏
+- [宏系统速查卡](../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) - 测试宏
 - [Cargo 速查卡](./cargo_cheatsheet.md) - Cargo 测试命令
 
 ---

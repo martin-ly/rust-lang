@@ -186,7 +186,7 @@ cargo bench --workspace
 验证性能优化的效果：
 
 1. 建立 [性能基准](#性能基准测试文件统计)
-2. 实施优化策略（参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)）
+2. 实施优化策略（参考 [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md)）
 3. 重新运行测试，对比结果
 
 ### 场景4: 发布前性能审计
@@ -209,7 +209,7 @@ cargo bench --workspace
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
-| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
 | **外部工具** | [Criterion.rs](https://github.com/bheisler/criterion.rs) |
 | :--- | :--- |

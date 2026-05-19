@@ -170,7 +170,7 @@
 
 ### 7. 宏系统速查卡
 
-**文件**: [macros_cheatsheet.md](./macros_cheatsheet.md)
+**文件**: [macros_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)
 
 **内容**:
 
@@ -353,7 +353,7 @@
 
 ### 18. 设计模式速查卡 ⭐ NEW
 
-**文件**: [design_patterns_cheatsheet.md](./design_patterns_cheatsheet.md)
+**文件**: [design_patterns_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md)
 
 **内容**:
 

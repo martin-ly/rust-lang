@@ -222,7 +222,7 @@
 | 20.2 Advanced Traits | 关联类型、完全限定语法 | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 模式 |
 | 20.3 Advanced Types | 类型别名、never type | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 类型级编程 |
 | 20.4 Advanced Functions and Closures | 函数指针、返回闭包 | [closures_cheatsheet](../02_reference/quick_reference/closures_cheatsheet.md) § 高级 | HRTB |
-| 20.5 Macros | 声明宏、过程宏 | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 宏编写指南 |
+| 20.5 Macros | 声明宏、过程宏 | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 宏编写指南 |
 
 #### 第21章：Final Project
 
@@ -248,7 +248,7 @@
 | 章节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) § 语法 | 快速参考 |
-| **3. Macros** | 宏系统 | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 宏决策树 |
+| **3. Macros** | 宏系统 | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 宏决策树 |
 | **6. Items** | 所有 Item 类型 | 各 crate 源码示例 | 实战示例 |
 | **8. Statements and Expressions** | 语句与表达式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 控制流决策树 |
 | **9. Patterns** | 模式 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 穷尽性分析 |
@@ -276,11 +276,11 @@
 | 10 | **Modules** | 模块系统 | `crates/` 项目结构 |
 | 11 | **Crates** | 库创建 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
 | 12 | **Cargo** | 包管理 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) |
-| 13 | **Attributes** | 属性 | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
+| 13 | **Attributes** | 属性 | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
 | 14 | **Generics** | 泛型 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
 | 15 | **Scoping Rules** | 所有权、借用、生命周期 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 | 16 | **Traits** | Trait 系统 | [type_system](../02_reference/quick_reference/type_system.md) § Traits |
-| 17 | **macro_rules!** | 声明宏 | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
+| 17 | **macro_rules!** | 声明宏 | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
 | 18 | **Error Handling** | 错误处理 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | 19 | **Std Library Types** | 标准库类型 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) |
 | 20 | **Std Misc** | 线程、文件、进程 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
@@ -311,7 +311,7 @@
 | **Send/Sync 形式化证明** | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 官方仅定义 trait，无证明 |
 | **借用检查器内部机制** | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) | 官方无实现细节 |
 | **异步状态机形式化** | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) | 官方无形式化模型 |
-| **宏系统决策树** | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 官方为参考文档 |
+| **宏系统决策树** | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 官方为参考文档 |
 | **错误传播转换树** | [THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) | 官方为教程式讲解 |
 | **版本兼容性深度分析** | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | 官方仅列变更 |
 | **控制流决策树** | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 官方分散在各章 |
@@ -356,7 +356,7 @@
 | **Week 2: 并发基础** | Book Ch 16 + RBE Threads | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | 线程池实现 |
 | **Week 3: 异步编程** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | 异步 Web 服务器 |
 | **Week 4: Trait 系统深度** | Book Ch 10.2 + Reference Traits | [type_system](../02_reference/quick_reference/type_system.md) § 高级 | 复杂 trait 设计 |
-| **Week 5: 宏系统** | Book Ch 20.5 + RBE macro_rules! | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 编写 DSL |
+| **Week 5: 宏系统** | Book Ch 20.5 + RBE macro_rules! | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | 编写 DSL |
 | **Week 6: 设计模式** | Book Ch 18 OOP | [design_patterns](../../crates/c09_design_pattern/docs/README.md) | 实现经典模式 |
 | **Week 7: 性能优化** | Book Ch 13.4 + Reference Types | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § 性能 | 性能调优实践 |
 | **Week 8: Unsafe 基础** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) § 基础 | FFI 绑定 |
@@ -391,7 +391,7 @@
 | **并发** | Book Ch 16 | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) |
 | **异步** | Book Ch 17 | [async_patterns](../02_reference/quick_reference/async_patterns.md) | [async_state_machine](../research_notes/formal_methods/async_state_machine.md) |
 | **错误处理** | Book Ch 9 | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) | - |
-| **宏** | Book Ch 20.5 | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | - |
+| **宏** | Book Ch 20.5 | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) | - |
 | **Unsafe** | Book Ch 20.1 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) | - |
 | **模式匹配** | Book Ch 19 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | - |
 | **集合** | Book Ch 8 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) | - |
@@ -427,7 +427,7 @@
 | 14. Generics | [RBE](https://doc.rust-lang.org/rust-by-example/generics.html) | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) |
 | 15. Scoping Rules | [RBE](https://doc.rust-lang.org/rust-by-example/scope.html) | [ownership_cheatsheet](../02_reference/quick_reference/ownership_cheatsheet.md) |
 | 16. Traits | [RBE](https://doc.rust-lang.org/rust-by-example/trait.html) | [type_system](../02_reference/quick_reference/type_system.md) |
-| 17. macro_rules! | [RBE](https://doc.rust-lang.org/rust-by-example/macros.html) | [macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
+| 17. macro_rules! | [RBE](https://doc.rust-lang.org/rust-by-example/macros.html) | [macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
 | 18. Error Handling | [RBE](https://doc.rust-lang.org/rust-by-example/error.html) | [error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | 20. Std Misc (Threads) | [RBE](https://doc.rust-lang.org/rust-by-example/std_misc/threads.html) | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) |
 | 21. Testing | [RBE](https://doc.rust-lang.org/rust-by-example/testing.html) | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) |
@@ -441,12 +441,12 @@
 | :--- | :--- | :--- |
 | **Book Ch 10** | 10.1-10.3 Traits, Lifetimes | 型变理论、生命周期形式化（[research_notes](../research_notes/README.md)）；转换树 |
 | **Reference** | Types, Ownership, Special Types | 形式化工程系统（[rust-formal-engineering-system](../rust-formal-engineering-system/README.md)）；variance 专项 |
-| **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)） |
+| **Reference** | Macros by Example, Procedural Macros | 宏系统决策树、反例（[macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)） |
 | **Book Ch 17** | 17.1-17.6 Async | 空 Future、持锁跨 await 反例（[async_patterns](../02_reference/quick_reference/async_patterns.md)）；EDGE_CASES |
 | **Book Ch 3** | 3.1-3.5 Types, Control Flow | 控制流（[C03](../../crates/c03_control_fn/docs/README.md)）；模式匹配决策树 |
 | **Book Ch 9** | 9.1-9.3 Error Handling | 错误传播转换树（[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md)）；[error_handling_cheatsheet](../02_reference/quick_reference/error_handling_cheatsheet.md) |
 | **Book Ch 11** | 11.1-11.3 Testing | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md)；#[test] 1.93 严格化（[09_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)） |
-| **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；[macros_cheatsheet](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
+| **Reference** | Attributes, Macros | offset_of! 类型检查（1.93）；[macros_cheatsheet](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md) |
 | **Reference** | Type system, Variance | [variance_theory](../research_notes/type_theory/variance_theory.md)；[PROOF_INDEX](../research_notes/PROOF_INDEX.md) |
 | **releases.rs** | 1.93 Language/Libraries | [09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md)；[07_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) |
 
@@ -585,7 +585,7 @@
 
 | 课程 | 链接 | 主要内容 | 本项目对应 |
 | :--- | :--- | :--- | :--- |
-| **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | [C11 宏](../../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)、[C02 类型系统](../02_reference/quick_reference/type_system.md) |
+| **17-363/17-663: Programming Language Pragmatics** | <https://www.cs.cmu.edu/~aldrich/courses/17-363/> | 编程语言基础、约 4/8 作业用 Rust 实现编译器 | [C11 宏](../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)、[C02 类型系统](../02_reference/quick_reference/type_system.md) |
 | **17-770: WebAssembly** | <https://www.cs.cmu.edu/~wasm/cs17-770/> | WebAssembly 引擎，支持 Rust 实现 | [C12 WASM](../02_reference/quick_reference/wasm_cheatsheet.md) |
 
 ### 其他高校（参考）
@@ -684,7 +684,7 @@
 
 ### 学习资源
 
-- [Rust 1.95+ 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08 (添加 Rust 1.95+ 学习路径)
@@ -719,7 +719,7 @@
 
 #### 相关文档
 
-- [Rust 1.95+ 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 

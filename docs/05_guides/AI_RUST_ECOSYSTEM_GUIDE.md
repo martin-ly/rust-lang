@@ -438,7 +438,7 @@ type Result<T> = std::result::Result<T, AIError>;
 | **前置知识** | [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
 | :--- | :--- |
-| **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **进阶主题** | [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
 | **相关指南** | [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) |
 | :--- | :--- |
@@ -454,7 +454,7 @@ type Result<T> = std::result::Result<T, AIError>;
 - [官方资源映射](../01_learning/OFFICIAL_RESOURCES_MAPPING.md)
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md)
-- [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md)
+- [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md)
 
 ---
 

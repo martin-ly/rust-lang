@@ -1133,7 +1133,7 @@ println!("运行时长: {:?}", stopped.duration());
 1. 使用 [Criterion](#121-基准测试) 建立性能基准
 2. 应用 [内存优化](#21-内存管理) 技巧
 3. 实施 [迭代器优化](#22-迭代器优化)
-4. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 深度优化
+4. 参考 [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) 深度优化
 
 ### 场景4: 团队代码规范
 
@@ -1155,7 +1155,7 @@ println!("运行时长: {:?}", stopped.duration());
 | :--- | :--- |
 | **高级主题** | [C05 线程](../../crates/c05_threads/docs/00_MASTER_INDEX.md) |
 | :--- | :--- |
-| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
 | :--- | :--- |
 | :--- | :--- |
