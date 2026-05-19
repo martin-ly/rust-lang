@@ -30,7 +30,7 @@
 
 - **问题**: `cargo check` 报错 `unknown start of token: \u{feff}`，15 个 `.rs` 文件包含 UTF-8 BOM
 - **修复**: 批量移除 `crates/common/src/lib.rs`、`c02_type_system`、`c07_process`、`c10_networks`、`c11_macro_system`、`c12_wasm`、`c13_embedded` 共 15 个文件中的 BOM
-- **验证**: `cargo check --workspace` 通过，`cargo clippy --workspace` 0 警告
+- **验证**: `cargo check --workspace` 通过，`cargo clippy --workspace` 0 警告，`cargo test --workspace` 通过，`cargo doc --workspace` 0 警告，`cargo deny check` 全项通过（advisories/bans/licenses/sources）
 
 ### 🔍 审计指标（全部通过）
 
