@@ -112,6 +112,10 @@ Cargo.toml 依赖分类:
 
 [dependencies]
 # 白金级 - 可信依赖 (内部审计)
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 platinum-deps = { path = "../platinum" }
 
 # 黄金级 - 广泛使用的社区crate (定期审计)
@@ -412,3 +416,8 @@ quality_gates:
 - POPL 2026 Miri论文
 - IEEE S&P安全会议
 - NASA Formal Methods Symposium
+
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

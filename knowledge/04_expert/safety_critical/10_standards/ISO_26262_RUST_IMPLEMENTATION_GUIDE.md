@@ -1,3 +1,6 @@
+> **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [MISRA C](https://misra.org.uk/), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 ISO 26262 标准来源标注、MISRA C 对标引用 [来源: Authority Source Sprint Batch 8]
 # ISO 26262 Rust实施指南
 
 ## 概述
@@ -611,3 +614,7 @@ mod tool_qualification {
 ---
 
 *本文档应与ISO 26262标准原文配合使用。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

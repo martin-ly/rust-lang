@@ -880,3 +880,13 @@ fn compute_heavy(data: Vec<f64>) -> f64 {
 - 数据科学、快速原型、ML 实验：**Python**
 - 生产系统、性能关键、基础设施：**Rust**
 - 最佳实践：**Python 主导 + Rust 加速关键路径**
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

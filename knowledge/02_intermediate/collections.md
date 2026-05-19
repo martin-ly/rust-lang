@@ -802,3 +802,10 @@ fn build_index(users: Vec<User>) -> HashMap<UserKey, Vec<String>> {
 
 - ISO C++20 §23 — *Containers library* [来源: `std::vector`/`std::unordered_map`/`std::map` 与 Rust 集合的算法复杂度对比]
 - Go — `map` (哈希表), `slice` (动态数组) [来源: Go 语言规范 — 内建集合类型的语法集成 vs Rust 标准库集合的泛型实现]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

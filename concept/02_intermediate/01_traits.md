@@ -311,21 +311,27 @@ impl<P₁...Pn> Trait<T₁...Tm> for Type
 
 #### 定义与语法
 
-Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。标准库中最重要的 Auto trait 是 `Send` 和 `Sync`：
+Auto trait 由 `auto trait` 关键字声明，是编译器自动为类型实现的标记 trait。标准库中最重要的 Auto trait 是 `Send` 和 `Sync`——`Send` 表示类型可安全跨线程转移所有权（值 move 到另一线程无数据竞争），`Sync` 表示类型可安全跨线程共享引用（`&T` 可在多线程间安全读取）：
 
 ```rust,ignore
+// Send: 标记可安全跨线程转移所有权的类型（值 move 到另一线程安全）
 pub unsafe auto trait Send {}
+// Sync: 标记可安全跨线程共享引用的类型（&T 可在多线程间安全共享）
 pub unsafe auto trait Sync {}
 ```
 
+> **形式化定义**: T: Send ⇔ 类型 T 可安全跨线程转移所有权（值 move 到另一线程不会导致数据竞争或内存不安全）。T: Sync ⇔ &T: Send，即 T 的共享引用可安全跨线程共享。
+
 与普通 trait 不同，Auto trait **不含任何关联项（方法、类型、常量）**，仅作为类型的编译期属性标记。`unsafe` 前缀意味着：当开发者通过 `unsafe impl` 手动实现或覆盖时，必须自行承担内存安全与线程安全的正确性责任。
+
+> **Send 核心语义**: `Send` 标记**可以安全跨线程转移所有权**的类型——即值的所有权从一个线程 move 到另一个线程不会导致数据竞争或内存不安全 [来源: Rust Reference — Send and Sync / 2025; Rustonomicon — Send and Sync / 2025; RustBelt — 数据竞争自由定理 / POPL 2018]。`Sync` 标记**可以安全跨线程共享引用**的类型——即 `&T` 可以安全地传递给多个线程同时读取。
 
 #### 自动推导规则
 
 编译器对 Auto trait 的实现遵循**结构化归纳推导**：
 
 ```text
-前提 1: Trait 声明为 unsafe auto trait
+前提 1: Trait 声明为 unsafe auto trait（`unsafe` 表示程序员手动承担正确性证明责任，不是关闭类型检查器）
 前提 2: 复合类型的所有字段都实现了该 Auto Trait
     ↓
 引理: 结构化推导 — 类型的 Auto Trait 属性由其字段属性递归决定

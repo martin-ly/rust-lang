@@ -1,3 +1,7 @@
+> **权威来源**: [The Rust Programming Language — Ch11](https://doc.rust-lang.org/book/ch11-00-testing.html), [cargo test 文档](https://doc.rust-lang.org/cargo/commands/cargo-test.html), [cargo-tarpaulin 文档](https://github.com/xd009642/tarpaulin)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Book、cargo test、cargo-tarpaulin 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+
 # 代码覆盖率测试指南
 
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 代码覆盖率集成。
@@ -199,3 +203,10 @@ A: 这是已知问题。尝试：
 - [cargo-llvm-cov 文档](https://github.com/taiki-e/cargo-llvm-cov)
 - [Codecov Rust 指南](https://docs.codecov.com/docs/rust)
 - [Microsoft 测试覆盖率策略](https://docs.microsoft.com/en-us/azure/devops/pipelines/test/codecoverage-for-pullrequests)
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

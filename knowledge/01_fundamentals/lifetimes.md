@@ -781,4 +781,8 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 > **[来源: Rust Reference: Lifetime elision]** 生命周期省略规则由编译器自动推断，减少显式标注负担。 ✅
 > **[来源: Rust Reference: HRTB]** 高阶 trait bound (`for<'a>`) 允许表达"对于所有生命周期"的量化约束。 ✅
 > **[来源: RFC 1598]** Generic Associated Types (GATs) 扩展了生命周期在关联类型中的表达能力。 ✅
-**状态**: ✅ 按 10 模块标准重构完成
+> **权威来源**: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html), [Rustonomicon — Lifetimes](https://doc.rust-lang.org/nomicon/lifetimes.html), [RFC 1414: Lifetime Elision](https://rust-lang.github.io/rfcs/1414-lifetime-elision.html), [RFC 2094: NLL](https://rust-lang.github.io/rfcs/2094-nll.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、RFC 1414 Lifetime Elision、RFC 2094 NLL、Rustonomicon） [来源: Authority Source Sprint Batch 8]
+
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

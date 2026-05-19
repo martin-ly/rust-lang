@@ -91,7 +91,9 @@
 
 > **[Wikipedia: Pointer aliasing]** In computing, pointer aliasing occurs when two or more pointers refer to the same memory location. The Rust borrow checker enforces *aliasing XOR mutation* — mutable aliasing (one mutable and one or more immutable references to the same data) is prohibited at compile time, eliminating a major class of memory errors including data races and iterator invalidation.
 
-> **[TRPL: Ch19.1]** Unsafe Rust gives you access to five superpowers, including the ability to dereference raw pointers. However, even in unsafe blocks, you must uphold the borrowing rules manually; the compiler cannot enforce them for raw pointers.
+> **[TRPL: Ch19.1]** Unsafe Rust gives you access to five superpowers, including the ability to dereference raw pointers. However, even in unsafe blocks, you must uphold the borrowing rules manually; the compiler cannot enforce them for raw pointers。
+>
+> **unsafe 核心语义**: `unsafe` 不是关闭借用检查器，而是将**证明责任转移给程序员**（proof obligation transfer）——程序员手动承担编译器无法自动验证的不变量 [来源: Rustonomicon — Meet Safe and Unsafe / 2025; RustBelt — unsafe 块的 Iris 形式化 / POPL 2018]
 
 ### 1.3 形式化视角
 

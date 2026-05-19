@@ -1192,3 +1192,10 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 - ISO C++20 §17.6 — *Threads and mutual exclusion* (`std::mutex`, `std::shared_mutex`) [来源: C++ `std::lock_guard`/`std::unique_lock` 与 Rust `MutexGuard` 的 RAII 设计对比; C++ 无 poisoning 机制]
 - Go — `sync.Mutex`, `sync.RWMutex`, `sync.Cond` [来源: Go 的 `defer` 解锁 vs Rust 守卫模式的自动释放; Go 无编译期数据竞争保证]
 - Java — `java.util.concurrent.locks` (JUC) [来源: Java `ReentrantLock` 与 Rust `Mutex` 的可重入性对比; Java 无 `Send`/`Sync` 编译期约束]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

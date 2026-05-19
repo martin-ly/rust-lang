@@ -225,3 +225,13 @@ fn prevent_use_after_free() {
 | 安全/非安全分析 | unsafe Rust 的边界分析 | [../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | 证明索引 | 内存安全相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 | 工具指南 | 内存安全验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -853,6 +853,11 @@ fn reload_config() {
 
 ---
 
+> **权威来源**: [RFC 2788 — Lazy Cell](https://rust-lang.github.io/rfcs/2788-lazy-cell.html), [std::cell::LazyCell](https://doc.rust-lang.org/std/cell/struct.LazyCell.html), [std::sync::LazyLock](https://doc.rust-lang.org/std/sync/struct.LazyLock.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（RFC 2788、Rust Reference、std::cell 文档） [来源: Authority Source Sprint Batch 8]
+
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0 (accessors) / 1.80.0 (types)
-**最后更新**: 2026-05-08
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

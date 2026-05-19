@@ -2,6 +2,9 @@
 
 > **版本**: Rust 1.95.0+
 > **预计时间**: 15-30 分钟
+> **权威来源**: [Rust 官方安装指南](https://www.rust-lang.org/tools/install), [rustup 文档](https://rust-lang.github.io/rustup/), [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 rustup 官方文档来源标注、工具链管理权威引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
 
@@ -178,12 +181,22 @@ rustup default stable  # 切回稳定版
 
 ## 📖 延伸阅读
 
-- [Rust 官方安装指南](https://www.rust-lang.org/tools/install)
-- [rustup 文档](https://rust-lang.github.io/rustup/)
-- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html)
+- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
+- [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
+- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [来源: Rust Team / Cargo Book 2025]
 
 ---
 
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+
-**最后更新**: 2026-03-19
+## 📚 权威来源索引
+
+- [Rust 官方安装指南](https://www.rust-lang.org/tools/install) [来源: Rust Team / 2025]
+- [rustup 文档](https://rust-lang.github.io/rustup/) [来源: Rust Core Team / 2025]
+- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html) [来源: Rust Team / TRPL 2025]
+- [Cargo 配置](https://doc.rust-lang.org/cargo/reference/config.html) [来源: Rust Team / Cargo Book 2025]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

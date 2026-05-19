@@ -798,6 +798,11 @@ if let Some(ref s) = opt {
 
 ---
 
+> **权威来源**: [Rust Reference: Keywords](https://doc.rust-lang.org/reference/keywords.html), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference: Keywords） [来源: Authority Source Sprint Batch 8]
+
 **文档版本**: 2.1
 **对应 Rust 版本**: Edition 2024
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

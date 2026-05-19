@@ -103,6 +103,9 @@ C2 (未覆盖范围) 是负面边界
 >
 > - **L3 Unsafe**: [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证
 > - **L3 并发**: [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §2 "Send/Sync 语义" ↔ T1（无数据竞争）。CSL 是并发安全的逻辑根基，Mutex/Arc 的形式化规约见 §3
+>
+> **Send/Sync 形式化语义**: `T: Send` ⇔ 类型 T 可安全跨线程转移所有权（值 move 无数据竞争）。`T: Sync` ⇔ `&T: Send`，即 T 的共享引用可安全跨线程共享。
+>
 > - **L7 形式化方法**: [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) §4 "验证工具链演进" ↔ §8 工具链映射。从 Miri（动态）到 Kani（模型检测）到 Coq/Iris（定理证明）构成完整光谱
 
 ---

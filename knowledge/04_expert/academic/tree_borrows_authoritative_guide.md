@@ -5,7 +5,10 @@
 > **作者**: Neven Villani, Ralf Jung, et al.
 > **状态**: ✅ **已在 Miri 中可用** (默认即将切换)
 > **Rust 版本**: 1.95.0+
-> **最后更新**: 2026-03-18
+> **最后更新**: 2026-05-19
+> **权威来源**: [Tree Borrows Paper (Villani et al., PLDI 2025)](https://pldi25.sigplan.org/), [Miri Tree Borrows](https://github.com/rust-lang/miri), [Rust Reference — Aliasing Rules](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 PLDI 2025 Distinguished Paper 来源标注、Miri 实现引用、Rust Reference 别名规则来源 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -811,5 +814,5 @@ fn use_abstractions() {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-18
-**状态**: ✅ 权威指南 v1.0
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

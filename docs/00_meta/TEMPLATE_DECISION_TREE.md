@@ -106,3 +106,13 @@ graph TD
 2. **叶子节点必须 actionable**: 不能是"视情况而定"，必须是具体推荐
 3. **标注风险**: 每个推荐必须附带主要风险
 4. **保持平衡**: 树的深度建议不超过 4 层，过深则拆分为多个子决策树
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

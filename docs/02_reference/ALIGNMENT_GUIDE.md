@@ -1,7 +1,14 @@
 # Rust 对齐知识综合指南
 
 > **创建日期**: 2026-02-13
-> **最后更新**: 2026-05-08
+> > **权威来源**: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html), [Rustonomicon — Data Layout](https://doc.rust-lang.org/nomicon/data.html), [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference 类型布局来源标注、Rustonomicon 数据布局引用 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
 > **Rust 版本**: 1.95.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **文档定位**: 全面覆盖 Rust 中「对齐」相关的各类知识

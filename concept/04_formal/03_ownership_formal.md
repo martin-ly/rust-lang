@@ -48,7 +48,7 @@
 
 将所有权建模为**权限（permission）**，借用建模为**分数权限（fractional permission）**：
 
-- 独占所有权 = 权限 `π = 1`，可读可写可转移
+- 独占所有权 = 权限 `π = 1`，可读可写可转移（move/转移所有权：赋值、传参后原变量变为 uninitialized）
 - 共享借用 `&T` = 权限 `0 < π < 1`，多个引用权限之和 `≤ 1`
 - 可变借用 `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
 
@@ -170,9 +170,9 @@ COR 的核心类型判断：
 > **[学术来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; RustBelt: POPL 2018, Jung et al. *RustBelt* §3]** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用。
 
 ```text
-赋值（Move）:
+赋值（Move）/ 传参:
   ⟨let y = x, σ⟩ → ⟨skip, σ[y ↦ σ(x)][x ↦ ⊥]⟩
-  // x 的值移动到 y，x 标记为未初始化 [来源] ✅
+  // x 的值通过 move 转移到 y（赋值或传参后），x 标记为未初始化（uninitialized）[来源] ✅
 ```
 
 **> [L1↔L4: ownership]** L1 中 `let y = x;` 后 `x` 不可再使用，对应 L4 的 `σ[x ↦ ⊥]`。此规则是**仿射弱化（Affine Weakening）**的操作语义实例：原变量被丢弃（weakened），值被重新绑定到新变量。

@@ -2,6 +2,9 @@
 
 > **你的第一个 Rust 程序**
 > **预计时间**: 15 分钟
+> **权威来源**: [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), [Cargo Guide](https://doc.rust-lang.org/cargo/guide/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL 官方教程来源标注、Cargo 项目结构来源引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
 
@@ -216,11 +219,19 @@ fn main() {
 
 ## 📖 延伸阅读
 
-- [Cargo 指南](https://doc.rust-lang.org/cargo/guide/)
-- [Rust 程序结构](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
+- [Cargo 指南](https://doc.rust-lang.org/cargo/guide/) [来源: Rust Team / Cargo Book 2025]
+- [Rust 程序结构](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) [来源: Rust Team / TRPL 2025]
 
 ---
 
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+
-**最后更新**: 2026-03-19
+## 📚 权威来源索引
+
+- [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) [来源: Rust Team / TRPL 2025]
+- [Cargo Guide](https://doc.rust-lang.org/cargo/guide/) [来源: Rust Team / Cargo Book 2025]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

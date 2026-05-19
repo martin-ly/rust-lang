@@ -153,3 +153,13 @@ Rust借用检查器的可判定性:
 1. Kopylov, A.P. (2001). Decidability of Linear Affine Logic. *Information and Computation*, 164(1):173-198.
 2. Lincoln, P., Mitchell, J., Scedrov, A., & Shankar, N. (1992). Decision Problems for Propositional Linear Logic.
 3. Kanovich, M.I. (1994). The Complexity of Horn Fragments of Linear Logic.
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

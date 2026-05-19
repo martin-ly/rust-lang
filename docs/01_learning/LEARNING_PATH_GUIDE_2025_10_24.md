@@ -249,4 +249,11 @@ async fn use_async_fn_trait() {
 
 ---
 
-**状态**: ✅ 已更新
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rust by Example 来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

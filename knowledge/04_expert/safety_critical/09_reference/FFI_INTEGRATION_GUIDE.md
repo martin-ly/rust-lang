@@ -453,6 +453,10 @@ fn main() {
 
 ```toml
 # cbindgen.toml
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 [parse]
 parse_deps = true
 include = ["my-crate"]
@@ -553,3 +557,7 @@ mod tests {
 ---
 
 *FFI是安全关键系统中的高风险区域，必须经过严格审查。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

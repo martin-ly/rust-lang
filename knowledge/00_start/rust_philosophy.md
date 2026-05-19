@@ -2,6 +2,9 @@
 
 > **理解 Rust 为什么是这样设计的**
 > **预计时间**: 30 分钟
+> **权威来源**: [Rust Language FAQ](https://www.rust-lang.org/faq), [Rust Book Ch00](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 设计决策来源标注、零成本抽象学术引用、内存安全形式化语义来源 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
 
@@ -21,7 +24,7 @@
 
 ### 1. 内存安全保证
 
-Rust 最核心的承诺：**无需垃圾回收的内存安全**。
+Rust 最核心的承诺：**无需垃圾回收的内存安全** [来源: Rust Language FAQ / 2025; Rust Book — What is Rust? / 2024; 核心设计决策: 通过所有权系统（ownership + borrowing + lifetimes）在编译期消除数据竞争、悬垂指针和内存泄漏，无需运行时 GC; RustBelt — Jung et al., POPL 2018; 形式化证明: Rust 的类型系统保证内存安全]。
 
 #### 问题：C/C++ 的内存错误
 
@@ -202,5 +205,27 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 ---
 
-**文档版本**: 1.0
-**最后更新**: 2026-03-19
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+- [Rust Language FAQ](https://www.rust-lang.org/faq) [来源: Rust Team / 2025]
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) [来源: Rust Team / TRPL 2024]
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) [来源: Rust Team / Rustonomicon 2025]
+- [RFC 2005: Match ergonomics](https://rust-lang.github.io/rfcs/2005-match-ergonomics.html) [来源: Rust Core Team / 2017]
+
+### 学术来源
+
+- Jung, R., et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018. [来源: Rust 内存安全的形式化证明]
+- Stroustrup, B. — *The C++ Programming Language, 4th Ed.* Addison-Wesley, 2013. [来源: C++ 设计哲学对比; RAII 的起源]
+
+### 跨语言来源
+
+- C++ Core Guidelines [来源: C++ 的安全子集建议; 与 Rust 编译期保证的对比]
+- Go Language Specification [来源: Go 的 GC 与 Rust 无 GC 设计对比]
+- Haskell — Pure functional semantics [来源: Haskell 的类型安全与 Rust 的所有权系统的对比]

@@ -1,3 +1,7 @@
+> **权威来源**: [FDA](https://www.fda.gov/), [IEC 62304](https://www.iec.ch/), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增医疗器械 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # 案例研究04: 医疗设备软件 (IEC 62304)
 
 ## 概述
@@ -585,3 +589,7 @@ mod verification {
 **案例日期**: 2024-2025
 **文档版本**: 1.0
 **联系**: <medical-rust@example.com>
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

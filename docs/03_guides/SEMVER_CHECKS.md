@@ -1,3 +1,7 @@
+> **权威来源**: [SemVer 2.0.0](https://semver.org/lang/zh-CN/), [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks), [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 SemVer 2.0.0、cargo-semver-checks、Rust API Guidelines 来源标注 [来源: Authority Source Sprint Batch 8]
+
 # cargo-semver-checks 集成指南
 
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— API 兼容性保护。
@@ -175,3 +179,10 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 - [cargo-semver-checks 文档](https://github.com/obi1kenobi/cargo-semver-checks)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [SemVer 规范](https://semver.org/lang/zh-CN/)
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

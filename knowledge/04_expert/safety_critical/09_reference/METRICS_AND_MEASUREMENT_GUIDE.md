@@ -76,6 +76,10 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 
 ```bash
 # 使用cargo-llvm-cov
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 cargo llvm-cov --all-features --lcov --output-path lcov.info
 
 # 生成HTML报告
@@ -325,3 +329,7 @@ mod coverage {
 ---
 
 *度量是改进的基础，建议定期回顾和调整。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

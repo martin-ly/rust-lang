@@ -1,9 +1,13 @@
 # Rust 标准库速查表
 
 > 本文档为 Rust 标准库常用模块、Trait 和宏的快速参考指南，适合日常开发查阅。
+> **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference: The std library prelude](https://doc.rust-lang.org/reference/names/preludes.html), [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Standard Library 文档、Rust Reference） [来源: Authority Source Sprint Batch 8]
 
 **变更日志**:
 
+- v1.2 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference、RFCs） [来源: Authority Source Sprint Batch 8]
 - v1.1 (2026-05-19): 补全权威来源标注（Rust Standard Library 文档、Rust Reference）
 
 ---
@@ -907,3 +911,10 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 - [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html) —— 声明宏和过程宏的规范
 
 > **提示**: 本速查表涵盖最常用的标准库 API。更多详情请参阅 [Rust 标准库文档](https://doc.rust-lang.org/std/)。
+
+---
+
+**文档版本**: 1.2
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

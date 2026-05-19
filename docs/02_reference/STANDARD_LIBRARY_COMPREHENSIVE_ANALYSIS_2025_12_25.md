@@ -1,7 +1,15 @@
+> **权威来源**: [Rust Standard Library 文档](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Standard Library 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+
 # Rust 标准库全面分析与论证文档
 
 **创建日期**: 2025-12-25
 **最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ | Edition 2024
+**状态**: ✅ **Rust 1.93.0 更新完成**（历史快照文档）
+
+---
 **Rust 版本**: 1.95.0+ | Edition 2024
 **状态**: ✅ **Rust 1.93.0 更新完成**（历史快照文档）
 
@@ -1334,3 +1342,10 @@ fn main() {
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

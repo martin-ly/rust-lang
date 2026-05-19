@@ -258,6 +258,11 @@ let good = x * f32::consts::PI;
 
 ---
 
+> **权威来源**: [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html), [std::f32::consts](https://doc.rust-lang.org/std/f32/consts/index.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（std::f64::consts 文档、Rust 1.96 Release Notes） [来源: Authority Source Sprint Batch 8]
+
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.96.0+
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

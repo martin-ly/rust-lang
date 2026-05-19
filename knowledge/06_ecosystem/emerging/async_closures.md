@@ -4,6 +4,9 @@
 > **状态**: 🧪 不稳定 (Unstable)
 > **预计稳定**: Rust 1.96+
 > **跟踪 Issue**: [#62290](https://github.com/rust-lang/rust/issues/62290)
+> **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 来源标注、Rust Reference 异步闭包语义引用 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -431,5 +434,5 @@ let f = async || {
 
 ---
 
-**最后更新**: 2026-05-09
-**状态**: 🧪 不稳定特性，需要 nightly
+**最后更新**: 2026-05-19
+**状态**: 🧪 权威来源对齐完成 (Batch 8)

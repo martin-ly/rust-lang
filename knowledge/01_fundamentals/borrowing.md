@@ -6,6 +6,10 @@
 - **预计学习时间**: 45-60 分钟
 - **前置知识**: 所有权基础
 
+> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html), [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html#reference-type), [Rustonomicon — References](https://doc.rust-lang.org/nomicon/references.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RustBelt、Stacked Borrows / Tree Borrows） [来源: Authority Source Sprint Batch 8]
+
 **变更日志**:
 
 - v1.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RustBelt、Stacked Borrows / Tree Borrows）
@@ -424,3 +428,10 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 4. **避免竞争**：借用规则在编译期防止数据竞争
 
 **编译器是你的朋友** — 严格的规则保护你免受内存错误困扰。
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

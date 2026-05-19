@@ -439,3 +439,13 @@ async fn demo() {
 - [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html) （待发布）
 - [RFC: if let guards](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
 - [PinCoerceUnsized Documentation](https://doc.rust-lang.org/std/pin/struct.Pin.html)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

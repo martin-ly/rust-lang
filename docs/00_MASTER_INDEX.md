@@ -292,3 +292,13 @@
 **维护者**: Rust 项目推进团队
 **最后更新**: 2026-02-20
 **状态**: ✅ **100% 完成** - 含完整跨文档映射网络 (555+ 链接、29 概念等价定义、144 定理引用、207+ 双向链接对)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

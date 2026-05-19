@@ -1270,5 +1270,13 @@ let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
 
 ---
 
-*最后更新: 2026-05-19*
+> **权威来源**: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/), [Miri](https://github.com/rust-lang/miri)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、Rustonomicon、Unsafe Code Guidelines、Miri、Ralf Jung） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
 *贡献者: Rust 中文知识库维护团队*

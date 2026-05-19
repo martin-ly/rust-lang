@@ -732,3 +732,13 @@ $$
 5. **Russell, N., van der Aalst, W.M.P., & ter Hofstede, A.H.M.** (2006). "Design of Workflow Patterns." *Handbook of Research on Business Process Modeling*, 1, 1-24.
 
 6. **Recker, J.** (2010). "Opportunities and Constraints: The Current Struggle with BPMN." *Business Process Management Journal*, 16(1), 181-201.
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -379,3 +379,14 @@ jobs:
 ---
 
 > **总结**: Miri 是 Rust `unsafe` 代码的"守门人"。任何包含 `unsafe` 块的 crate 都应该在 CI 中运行 Miri 测试。记住：**Miri 通过不等于没有 Bug，但 Miri 报错一定意味着 UB**。
+
+---
+
+> **权威来源**: [rustc-dev-guide Miri 章节](https://rustc-dev-guide.rust-lang.org/miri.html), [Miri README](https://github.com/rust-lang/miri), [PLDI 2025 Tree Borrows](https://pldi25.sigplan.org/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Miri 官方文档来源标注、PLDI 2025 Tree Borrows 学术引用 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

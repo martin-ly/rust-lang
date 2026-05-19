@@ -4,6 +4,9 @@
 > **Rust 版本**: 1.95.0+
 > **难度**: 中级到高级
 > **预计阅读时间**: 45分钟
+> **权威来源**: [Axum 官方文档](https://docs.rs/axum/latest/axum/), [Tower 文档](https://docs.rs/tower/latest/tower/), [Hyper 文档](https://docs.rs/hyper/latest/hyper/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Axum/Tower/Hyper 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -707,5 +710,5 @@ async fn test_get_user() {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 已完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

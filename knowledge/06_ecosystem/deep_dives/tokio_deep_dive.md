@@ -4,6 +4,9 @@
 > **Rust 版本**: 1.95.0+
 > **难度**: 高级
 > **关键词**: 异步运行时、任务调度、I/O驱动
+> **权威来源**: [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/), [Tokio 教程](https://tokio.rs/tokio/tutorial), [Rust Async Book](https://rust-lang.github.io/async-book/), [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Tokio 运行时架构来源标注、Rust 异步模型学术引用、work-stealing 调度算法来源 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -43,6 +46,10 @@
     - [为什么 Tokio 使用多线程运行时？](#为什么-tokio-使用多线程运行时)
   - [📝 模块 10: 自我检测](#-模块-10-自我检测)
   - [🔗 参考资源](#-参考资源)
+  - [📚 权威来源索引](#-权威来源索引)
+    - [官方来源](#官方来源)
+    - [学术来源](#学术来源)
+    - [跨语言来源](#跨语言来源)
 
 ---
 
@@ -615,7 +622,29 @@ async fn main() {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准增强完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/) [来源: Tokio Contributors / 2025]
+- [Tokio 教程](https://tokio.rs/tokio/tutorial) [来源: Tokio Team / 2025]
+- [Rust Async Book](https://rust-lang.github.io/async-book/) [来源: Rust Async Working Group / 2025]
+- [RFC 2394: async/await](https://rust-lang.github.io/rfcs/2394-async_await.html) [来源: Rust Core Team / 2018]
+
+### 学术来源
+
+- Lauer, H.E. & Needham, R.M. — *On the Duality of Operating System Structures*. ACM SIGOPS, 1979. [来源: 线程 vs 事件驱动（异步）的 duality; Tokio 事件驱动模型的理论基础]
+- Blumofe, R.D. & Leiserson, C.E. — *Scheduling Multithreaded Computations by Work Stealing*. JACM, 1999. [来源: work-stealing 调度算法的经典论文; Tokio 多线程运行时调度策略的理论基础]
+
+### 跨语言来源
+
+- Java — Project Loom Virtual Threads [来源: Java 虚拟线程与 Rust async/await 的对比; OS 线程 vs 绿色线程 vs 协作式状态机]
+- Go — Goroutine + netpoller [来源: Go 的 M:N 调度与事件驱动网络 I/O; 与 Tokio 的对比]
+- Node.js — libuv [来源: Node.js 的事件循环; 与 Tokio 的多线程 work-stealing 调度对比]

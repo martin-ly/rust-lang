@@ -1,3 +1,7 @@
+> **权威来源**: [ISO C++20](https://isocpp.org/std/the-standard), [cppreference](https://en.cppreference.com/), [cxx crate 文档](https://cxx.rs/), [Rust FFI 文档](https://doc.rust-lang.org/nomicon/ffi.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 ISO C++20、cxx crate 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+
 # C++ 互操作指南（cxx + bindgen）
 
 ## 概述
@@ -149,3 +153,10 @@ cxx_interop::explain_bindgen_workflow();
 - [cxx 文档](https://cxx.rs/)
 - [bindgen 文档](https://rust-lang.github.io/rust-bindgen/)
 - [The Rust FFI Omnibus](https://jakegoulding.com/rust-ffi-omnibus/)
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

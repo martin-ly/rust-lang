@@ -2,6 +2,9 @@
 
 > **从入门到精通的完整路径**
 > **总预计时间**: 200-400 小时
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust by Example](https://doc.rust-lang.org/rust-by-example/), [Rustlings](https://github.com/rust-lang/rustlings)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增学习路径来源标注、Bloom 认知层级学术引用、前置依赖设计方法论来源 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习阶段总览
 
@@ -264,5 +267,20 @@ Level 5: 专家 (持续学习)
 
 ---
 
-**文档版本**: 1.0
-**最后更新**: 2026-03-19
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+- [The Rust Programming Language](https://doc.rust-lang.org/book/) [来源: Rust Team / TRPL 2024]
+- [Rust by Example](https://doc.rust-lang.org/rust-by-example/) [来源: Rust Team / 2025]
+- [Rustlings](https://github.com/rust-lang/rustlings) [来源: Rust Community / 2025]
+
+### 学术来源
+
+- Bloom, B.S. et al. — *Taxonomy of Educational Objectives*. 1956 (revised 2001). [来源: 认知层级作为学习路径设计的主轴]
+- Sweller, J. — *Cognitive Load Theory*. 1988. [来源: 认知负荷管理作为前置依赖设计的理论基础]

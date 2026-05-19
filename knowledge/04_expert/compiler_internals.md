@@ -871,5 +871,13 @@ fn main() {
 
 ---
 
-*最后更新: 2026-05-19*
+> **权威来源**: [rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/), [Rust Reference](https://doc.rust-lang.org/reference/), [MIR Documentation](https://rustc-dev-guide.rust-lang.org/mir/index.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（rustc Dev Guide、Rust Reference、MIR 文档） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
 *贡献者: Rust 学习社区*

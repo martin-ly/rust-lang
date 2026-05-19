@@ -804,3 +804,13 @@ void cpp_call_rust() {
 | 生态成熟度 | 非常丰富 | 快速发展 | C++ 更丰富 |
 
 Rust 和 C++ 都是强大的系统编程语言。C++ 提供了更大的灵活性和成熟的生态，而 Rust 提供了更强的安全保证和现代工具链。选择哪种语言取决于项目的具体需求、团队经验和风险承受能力。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

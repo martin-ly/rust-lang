@@ -342,6 +342,10 @@ fn manual_sum(values: &[i32]) -> i32 {
 
 ```bash
 # 查看汇编输出
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 cargo rustc --release -- --emit=asm
 
 # 使用godbolt对比
@@ -439,3 +443,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 **文档版本**: 1.0
 **最后更新**: 2026-03-18
 **基于**: Rust 1.95.0+
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

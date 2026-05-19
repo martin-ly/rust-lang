@@ -1010,3 +1010,10 @@ fn main() {
 - ISO C++20 §23.3 — *String classes* (`std::string`, `std::string_view`) [来源: C++ `string_view` 与 Rust `&str` 的设计同构性; C++ `std::string` 的 SSO (Small String Optimization) 与 Rust `String` 无 SSO 的对比]
 - Go Language Specification — `string` type [来源: Go 字符串不可变但非线程安全（无共享时安全）; 与 Rust 借用检查器保证的线程安全对比]
 - Haskell — `String` ( `[Char]` ) vs `Data.Text` [来源: Haskell 惰性字符列表与严格文本类型的演进; 与 Rust `String`/`&str` 所有权模型的对比]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

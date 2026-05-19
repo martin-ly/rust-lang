@@ -1,3 +1,7 @@
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
+
 # Rust 边界条件与特例示例
 
 > **创建日期**: 2026-02-12
@@ -709,3 +713,10 @@ fn iterator_invalidation() {
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1,3 +1,7 @@
+> **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [AUTOSAR](https://www.autosar.org/), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增汽车 ECU Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # 案例研究3: 汽车ECU Rust应用
 
 ## 概述
@@ -468,3 +472,7 @@ fn critical_calculation(x: u32) -> u32 {
 **案例研究版本**: 1.0
 **最后更新**: 2026-03-18
 **状态**: 概念验证/预研阶段
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

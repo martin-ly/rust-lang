@@ -72,7 +72,7 @@ Unsafe Rust = Safe Rust ∪ { 操作 O | O 需要人工证明安全性 }
 |:---|:---|:---|:---|:---|
 | **裸指针解引用** | `*raw_ptr` | UAF, 悬垂, 类型混淆 | FFI, 数据结构内部 | `Box::from_raw` |
 | **调用 unsafe 函数** | `unsafe_fn()` | 依赖函数契约 | 底层系统调用 | `std::fs::read` |
-| **实现 unsafe trait** | `unsafe impl Trait` | 破坏全局假设 | Send/Sync 标记 | `Arc<T>` |
+| **实现 unsafe trait** | `unsafe impl Trait` | 破坏全局假设 | Send/Sync 标记：`Send` trait 表示值可跨线程转移(move)，`Sync` 表示 `&T` 可跨线程共享引用 | `Arc<T>` |
 | **访问 union 字段** | `union.field` | 类型混淆 | C 互操作 | `std::mem::ManuallyDrop` |
 | **调用 extern 函数** | `extern "C"` | ABI 不匹配, UAF | 系统库调用 | `libc` crate |
 | **修改可变静态变量** | `static mut` | 数据竞争 | 全局状态（避免） | `lazy_static!` |
@@ -367,7 +367,7 @@ graph TD
 
     F --> F1[FFI 边界]
     F --> F2[自定义数据结构]
-    F --> F3[Send/Sync 实现]
+    F --> F3[Send/Sync 实现: Send = 可跨线程转移所有权(move), Sync = 可跨线程共享引用]
     F --> F4[零拷贝解析]
 ```
 

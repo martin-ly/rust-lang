@@ -1305,3 +1305,13 @@ impl<T: Send> ConcurrentPool<T> {
 5. **优先使用标准库**：标准库通常已经提供了安全的抽象
 
 通过这些模式和最佳实践，你可以在保持 Rust 安全保证的同时，获得底层编程的全部能力。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -4,6 +4,9 @@
 > **Rust 版本**: 1.95.0+
 > **难度**: 中级到高级
 > **关键词**: 异步、编译时检查、类型安全
+> **权威来源**: [SQLx 官方文档](https://docs.rs/sqlx/latest/sqlx/), [SQLx GitHub](https://github.com/launchbadge/sqlx)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 SQLx 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -439,5 +442,5 @@ mod tests {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 已完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

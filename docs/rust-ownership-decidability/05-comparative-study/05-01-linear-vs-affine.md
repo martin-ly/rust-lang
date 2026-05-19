@@ -318,3 +318,13 @@ sequent演算对比:
 2. Wadler, P. (1990). Linear Types can Change the World! *Programming Concepts and Methods*.
 3. Baker, H.G. (1995). Use-once Variables and Linear Objects. *ACM Computing Surveys*.
 4. Morrisett, G., et al. (2005). L3: A Linear Language with Locations. *Fundamenta Informaticae*.
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -367,6 +367,11 @@ if likely(normal_condition()) {
 
 ---
 
+> **权威来源**: [The Rust Performance Book](https://nnethercote.github.io/perf-book/), [Rust Reference — Inline attribute](https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute), [std::simd](https://doc.rust-lang.org/std/simd/index.html), [The rustc Book — Codegen Options](https://doc.rust-lang.org/rustc/codegen-options/index.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rust Performance Book、std::simd） [来源: Authority Source Sprint Batch 8]
+
 **文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+
-**最后更新**: 2026-05-09
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

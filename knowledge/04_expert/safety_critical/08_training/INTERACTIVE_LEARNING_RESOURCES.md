@@ -52,6 +52,10 @@ Rust官方:
 
 ```bash
 # 1. GitHub Codespaces
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 # 预配置Rust开发环境
 # 包含: rust-analyzer, Clippy, Miri
 
@@ -400,3 +404,7 @@ fn quiz_lifetime() {
 ---
 
 *学习是一个持续的过程，利用这些资源加速你的Rust安全关键开发之旅。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

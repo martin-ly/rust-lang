@@ -10,7 +10,7 @@
 
 - [Rust 概念速查卡片（Quick Reference）](#rust-概念速查卡片quick-reference)
   - [📑 目录](#-目录)
-  - [一、核心概念速查（按字母序）](#一核心概念速查按字母序)
+  - [一、核心概念速查（按字母序） \[来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致\]](#一核心概念速查按字母序-来源-速查内容基于-rust-reference--trpl--rustonomicon--rfcs-概念定义与-concept-目录核心文件保持一致)
     - [A](#a)
       - [`async` / `await`](#async--await)
       - [`Arc<T>`](#arct)
@@ -18,9 +18,15 @@
       - [`Box<T>`](#boxt)
       - [Borrowing（借用）](#borrowing借用)
       - [Builder Pattern](#builder-pattern)
+    - [C](#c)
+      - [`const` / `const fn`](#const--const-fn)
+      - [`Copy` Trait](#copy-trait)
       - [`crossbeam` / Channel](#crossbeam--channel)
     - [D](#d)
       - [`Drop` Trait](#drop-trait)
+      - [`dyn Trait`](#dyn-trait)
+    - [E](#e)
+      - [`enum`（代数数据类型）](#enum代数数据类型)
       - [Error Handling（`Result<T, E>`）](#error-handlingresultt-e)
     - [F](#f)
       - [`Future` Trait](#future-trait)
@@ -49,21 +55,29 @@
     - [P](#p)
       - [`Pin<P<T>>`](#pinpt)
       - [`PhantomData<T>`](#phantomdatat)
+    - [R](#r)
+      - [`Rc<T>` / `Arc<T>`](#rct--arct)
+      - [`Result<T, E>`](#resultt-e)
     - [S](#s)
       - [`Send` / `Sync`](#send--sync)
       - [`Sized` / `?Sized`](#sized--sized)
       - [`std::mem`](#stdmem)
     - [T](#t)
       - [`Trait`](#trait)
+      - [Typestate Pattern](#typestate-pattern)
     - [U](#u)
       - [`Unsafe Rust`](#unsafe-rust)
     - [V](#v)
       - [`Vec<T>`](#vect)
     - [W](#w)
       - [`Waker`](#waker)
+  - [二、编译错误码速查](#二编译错误码速查)
+  - [三、模式选择决策树（速查版）](#三模式选择决策树速查版)
   - [四、跨语言对照速查](#四跨语言对照速查)
 
-## 一、核心概念速查（按字母序）
+## 一、核心概念速查（按字母序） [来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致]
+
+> **[来源: Rust Standard Library / 2025; Rust Reference / 2025; TRPL / 2024]** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
 
 ### A
 
@@ -118,7 +132,7 @@ let r = &x; let r2 = &mut x; // ❌ E0502
 **定义**: 用方法链逐步构造复杂对象，编译期保证必填字段
 **代码**:
 
-rust,compile_fail
+```rust,compile_fail
 HttpRequestBuilder::new()
     .method("GET")
     .url("/")
@@ -169,7 +183,7 @@ let p2 = p1;  // p1 仍可用（Copy）
 **定义**: 资源释放的钩子，值离开作用域时自动调用
 **代码**:
 
-rust,ignore
+```rust,ignore
 impl Drop for MyType {
     fn drop(&mut self) { println!("Dropping!"); }
 }
@@ -464,7 +478,7 @@ let _ = future.as_mut().poll(cx);
 **定义**: 零大小类型，用于向编译器标记逻辑上的类型关联
 **代码**:
 
-rust,ignore
+```rust,ignore
 struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 // 告诉编译器 MyPtr<T> 拥有 T 的 variance
 
@@ -532,7 +546,7 @@ let val = may_fail()?;  // ? 传播错误
 **定义**: 行为抽象，类似 Java Interface / Haskell Typeclass，但基于组合而非继承
 **代码**:
 
-rust,ignore
+```rust,ignore
 trait Drawable { fn draw(&self); }
 impl Drawable for Circle { fn draw(&self) { ... } }
 
@@ -600,7 +614,7 @@ v.insert(1, 5);      // O(n)
 **定义**: 异步任务的唤醒机制，`Future` 挂起时注册 Waker，事件就绪时调用
 **代码**:
 
-rust,ignore
+```rust,ignore
 fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
     if !self.is_ready() {
         self.waker = Some(cx.waker().clone());  // 注册 Waker

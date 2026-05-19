@@ -1,3 +1,7 @@
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、RustBelt 来源标注 [来源: Authority Source Sprint Batch 8]
+
 # 所有权、借用与生命周期：三位一体的内存安全
 
 > **Rust 版本**: 1.95.0+
@@ -308,3 +312,10 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 - [Rust By Example - Scope and Shadowing](https://doc.rust-lang.org/rust-by-example/scope.html)
 - [The Rustonomicon - Ownership](https://doc.rust-lang.org/nomicon/ownership.html)
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

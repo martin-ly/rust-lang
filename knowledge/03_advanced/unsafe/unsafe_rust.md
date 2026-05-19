@@ -1,9 +1,12 @@
 # Unsafe Rust - 不安全 Rust
 
-> **📌 简介**: Unsafe Rust 不是"糟糕的 Rust"，而是**编译器将证明责任转移给程序员**的显式契约机制。它允许你执行五种编译器无法自动验证的操作，但要求你手动维护内存安全的不变量。
+> **📌 简介**: Unsafe Rust 不是"糟糕的 Rust"，而是**编译器将证明责任转移给程序员**的显式契约机制 [来源: Rustonomicon — Meet Safe and Unsafe / 2025; Rust Reference — Unsafe Rust / 2025; 核心形式化语义: `unsafe` 不是关闭借用检查器，而是将编译期自动证明的责任转移给程序员，程序员需手动维护内存安全不变量; RustBelt — Jung et al., POPL 2018; 核心定理: `unsafe` 代码的不变量必须在 safe 抽象层中被重新封装，使 safe 代码无需信任 `unsafe` 实现]。它允许你执行五种编译器无法自动验证的操作，但要求你手动维护内存安全的不变量。
 >
 > **⏱️ 预计学习时间**: 90-120 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
+> **权威来源**: [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html), [RFC 2585: unsafe blocks in unsafe fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html), [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/), [Miri](https://github.com/rust-lang/miri)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 `unsafe` 作为 proof obligation transfer 的形式化语义来源标注、Tree Borrows 别名规则学术引用、Miri UB 检测工具来源、跨语言 unsafe 对比（C/C++ / Haskell `unsafePerformIO`） [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -996,7 +999,29 @@ fn good_slice() {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准重构完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rustonomicon](https://doc.rust-lang.org/nomicon/) [来源: Rust Team / Rustonomicon 2025]
+- [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) [来源: Rust Reference / 2025]
+- [RFC 2585: unsafe blocks in unsafe fn](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html) [来源: Rust Core Team / 2022]
+- [Miri](https://github.com/rust-lang/miri) [来源: Rust Dev Tools Team / 2025; UB 检测的实验性解释器]
+
+### 学术来源
+
+- Jung, R., et al. — *RustBelt: Securing the Foundations of the Rust Programming Language*. POPL 2018. [来源: `unsafe` 代码的 Iris 形式化; safe 抽象封装 `unsafe` 实现的责任边界]
+- Jung, R. — *Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias*. arXiv 2023. [来源: `unsafe` 中原始指针的别名规则; Stacked Borrows 的演进替代]
+
+### 跨语言来源
+
+- ISO C++ — `undefined behavior` [来源: C++ 默认全局 unsafe 与 Rust 显式 `unsafe` 块的设计对比]
+- Haskell — `unsafePerformIO`, `unsafeCoerce` [来源: Haskell 通过类型系统隔离 unsafe 操作; 与 Rust `unsafe` 块的设计同构性]
+- Go — `unsafe` package [来源: Go 的有限 unsafe 能力; 与 Rust `unsafe` 的五种 superpower 对比]

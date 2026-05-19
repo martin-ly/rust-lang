@@ -1056,3 +1056,14 @@ impl AuthManager {
 > - 2026-04-24: 初始创建
 > - 2026-05-19: 补全权威来源标注
 > - 下次复查: 随 Rust 版本更新时复查
+
+---
+
+> **权威来源**: [TRPL — Ch19.3 Advanced Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html), [Rust Reference — Marker traits](https://doc.rust-lang.org/reference/special-types-and-traits.html), [Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language" (OOPSLA 2003)](https://dl.acm.org/doi/10.1145/949305.949332), [Pierce, "Types and Programming Languages" (TAPL), MIT Press, 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、Fähndrich & Leino OOPSLA 2003、Pierce TAPL） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

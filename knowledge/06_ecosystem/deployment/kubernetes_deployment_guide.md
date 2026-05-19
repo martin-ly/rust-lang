@@ -4,6 +4,9 @@
 > **Kubernetes 版本**: 1.28+
 > **难度**: 高级
 > **预计时间**: 60分钟
+> **权威来源**: [Kubernetes 官方文档](https://kubernetes.io/docs/), [Distroless 镜像](https://github.com/GoogleContainerTools/distroless)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Kubernetes 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -689,5 +692,5 @@ async fn graceful_shutdown() {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-15
-**状态**: ✅ 100% 完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

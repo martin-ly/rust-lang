@@ -821,4 +821,8 @@ fn process(items: &[&dyn Display]) {
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
-**状态**: ✅ 按 10 模块标准重构完成
+> **权威来源**: [Rust Reference — Generic parameters](https://doc.rust-lang.org/reference/items/generics.html), [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [RFC 1598: GATs](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html), [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RFC 2000、TAPL、Wadler 1989） [来源: Authority Source Sprint Batch 8]
+
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

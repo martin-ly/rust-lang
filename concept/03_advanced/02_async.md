@@ -417,6 +417,7 @@ poll : Pin<&mut S_f> × &mut Context → Poll<U>
   - Pin<&mut S_f> 不暴露 &mut S_f → S_f 的 move 语义
   - poll(self: Pin<&mut Self>, ...) 要求调用方通过 Pin 调用
   - 标准库保证: Pin::new_unchecked 是 unsafe 的；Safe API 无法从 Pin 解包出普通 &mut
+    > `unsafe` 不是关闭检查器，而是声明程序员承担正确性证明责任
   - 因此状态机实例一旦被 Pin，其地址在 drop 前不可变
 
 推论:
@@ -493,7 +494,7 @@ Unpin trait 在 LTL 中的解释:
 编译器推导规则:
   struct S { f: T, g: *const U }  -- g 可能指向 f（自引用）
   ⟹ 保守标记 S: !Unpin（即使实际不自引用）
-  ⟹ 用户可 unsafe impl Unpin for S 覆盖，但需手动验证 A1-A3
+  ⟹ 用户可 unsafe impl Unpin for S 覆盖，但需手动验证 A1-A3（`unsafe impl` 将编译期证明责任转移给程序员，非关闭检查器）
 ```
 
 > **来源**: [Rust Reference: Auto trait derivation for !Unpin] · [RFC 2349 §4: Unpin trait semantics]
@@ -516,7 +517,7 @@ async 状态机的 Pin 验证场景:
 反例（违反 A1 的情况）:
     // 错误：手动解 Pin 后 move
     let mut fut = Box::pin(async { ... });
-    let raw: *mut _ = &mut *fut;       // 通过 unsafe 获得裸指针
+    let raw: *mut _ = &mut *fut;       // 通过 unsafe 获得裸指针（unsafe 将证明责任转移给程序员）
     let moved = unsafe { ptr::read(raw) }; // 违反 A3：Pin 后的值被 move
     // 后果：若状态机含自引用，恢复后引用悬垂 → UB
 ```

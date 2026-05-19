@@ -536,6 +536,11 @@ assert_matches!(result, Ok(_));
 
 ---
 
-**文档版本**: 2.0
+> **权威来源**: [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [Rust Blog - Announcing 1.95.0](https://blog.rust-lang.org/releases/latest/), [Platform Support - Tier 2](https://doc.rust-lang.org/rustc/platform-support.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 1.95 官方发布说明来源标注、RFC 引用、平台支持文档来源 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

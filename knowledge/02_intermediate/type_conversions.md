@@ -702,6 +702,10 @@ enum Temperature {
 
 ---
 
+> **权威来源**: [Rust Reference — Type Cast Expressions](https://doc.rust-lang.org/reference/expressions/operator-expr.html#type-cast-expressions), [RFC 2484 — TryFrom/TryInto](https://rust-lang.github.io/rfcs/2484-trait-based-exception-handling.html), [The Rust Programming Language — Ch19](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增类型转换形式化语义来源标注、RFC 2484 TryFrom/TryInto 设计决策引用、跨语言类型转换对比矩阵 [来源: Authority Source Sprint Batch 8]
+
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19

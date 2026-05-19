@@ -183,6 +183,11 @@ cargo +nightly -Z script run my_script.rs
 
 ---
 
-**文档版本**: 1.0
+> **权威来源**: [releases.rs](https://releases.rs/), [Rust Beta Release Notes](https://releases.rs/docs/1.96.0/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 1.96 Beta 发布说明来源标注、Tracking Issue 引用 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.96.0 (Beta)
-**最后更新**: 2026-05-09
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

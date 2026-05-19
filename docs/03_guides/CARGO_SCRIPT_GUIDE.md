@@ -1,3 +1,7 @@
+> **权威来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/), [RFC 3502: cargo-script](https://github.com/rust-lang/rfcs/pull/3502), [Rust 1.79 Release Notes](https://releases.rs/docs/1.79.0/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Cargo Book、RFC 3502 来源标注 [来源: Authority Source Sprint Batch 8]
+
 # Cargo Script 单文件脚本指南
 
 > **最后更新日期**: 2026-04-24
@@ -318,3 +322,10 @@ cargo run --manifest-path script.rs --release
 >
 > - 2026-04-24: 初始创建，基于 Rust 1.96 的 cargo script 稳定功能
 > - 下次复查: 随 Rust 版本更新时复查
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -256,6 +256,7 @@ graph TD
     B3[同时存在可变和不可变引用] -->|编译期| E3[E0502: cannot borrow mutably while borrowed immutably]
     B4[返回局部变量的引用] -->|编译期| E4[E0106: missing lifetime specifier]
     B5[在 unsafe 中破坏所有权规则] -->|运行时| E5[UB: use-after-free / data race]
+    > **unsafe 语义**: `unsafe` 不是关闭借用检查器，而是将编译期证明责任转移给程序员——程序员需手动维护内存安全不变量 [来源: Rustonomicon / 2025]
 ```
 
 > **过渡**: 决策树回答"怎么做"的问题，而定理推理链回答"为什么能这么做"——通过引理、定理、推论的层层演绎，建立所有权系统的形式化保证。

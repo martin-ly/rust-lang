@@ -325,3 +325,13 @@ cargo install cargo-creusot --locked
 6. Gaher, L., et al. (2024). RefinedRust: A Type System for High-Assurance Verification of Rust Programs. *PLDI*.
 7. Lattuada, A., et al. (2024). Aeneas: Rust Verification by Functional Translation. *ICFP*.
 8. Rust Formal Methods Interest Group. (2025). Rust Verification Tools Status. <https://rust-formal-methods.github.io/>
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

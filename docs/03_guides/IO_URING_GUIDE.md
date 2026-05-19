@@ -108,3 +108,14 @@ cargo run -p c10_networks --example io_uring_demo --features io-uring
 - [Lord of the io_uring](https://unixism.net/loti/)
 - [Linux Kernel io_uring 文档](https://kernel.dk/io_uring.pdf)
 - [tokio-uring GitHub](https://github.com/tokio-rs/tokio-uring)
+
+---
+
+> **权威来源**: [Lord of the io_uring](https://unixism.net/loti/), [Linux Kernel io_uring 文档](https://kernel.dk/io_uring.pdf), [tokio-uring](https://github.com/tokio-rs/tokio-uring)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Linux 内核 io_uring 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

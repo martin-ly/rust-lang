@@ -5,6 +5,10 @@
 > **⏱️ 预计学习时间**：45-60 分钟
 > **📚 难度级别**：⭐⭐⭐ 中等
 
+> **权威来源**: [The Rust Programming Language — Ch04](https://doc.rust-lang.org/book/ch04-00-ownership.html), [Rust Reference — Ownership](https://doc.rust-lang.org/reference/ownership.html), [Rustonomicon — Ownership](https://doc.rust-lang.org/nomicon/ownership.html), [RustBelt (Jung et al., POPL 2018)](https://plv.mpi-sws.org/rustbelt/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RustBelt、C++ / Go 对标） [来源: Authority Source Sprint Batch 8]
+
 **变更日志**:
 
 - v1.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RustBelt、C++ / Go 对标）
@@ -593,3 +597,10 @@ fn double_string(mut s: String) -> String {
 > 🎉 **恭喜你！** 你已经掌握了 Rust 所有权系统的核心概念。所有权是 Rust 内存管理的基础，理解它对于编写高效、安全的 Rust 代码至关重要。
 >
 > 下一步建议：学习**借用和引用（Borrowing and References）**，它将帮助你更灵活地处理所有权问题。
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

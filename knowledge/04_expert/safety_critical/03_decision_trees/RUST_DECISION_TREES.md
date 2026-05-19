@@ -1,3 +1,7 @@
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # Rust应用决策树图集
 
 ## 决策树1: 安全关键项目语言选择决策树
@@ -325,3 +329,8 @@
 - [ ] 制定代码审查流程
 - [ ] 建立测试覆盖率目标
 - [ ] 文档化设计决策
+
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1,7 +1,7 @@
 # Rust 学习项目架构文档
 
-> **版本**: Rust 1.96.0  
-> **Edition**: 2024  
+> **版本**: Rust 1.96.0
+> **Edition**: 2024
 > **最后更新**: 2026-04-10
 
 ---
@@ -35,36 +35,36 @@
 graph TB
     subgraph "Rust 学习项目 Workspace"
         direction TB
-        
+
         subgraph "基础层 Tier 1"
             C01["📦 c01_ownership_borrow_scope<br/>所有权与借用"]
             C02["📦 c02_type_system<br/>类型系统"]
             C03["📦 c03_control_fn<br/>控制流与函数"]
         end
-        
+
         subgraph "进阶层 Tier 2"
             C04["📦 c04_generic<br/>泛型与 Trait"]
             C05["📦 c05_threads<br/>线程与并发"]
             C06["📦 c06_async<br/>异步编程"]
         end
-        
+
         subgraph "系统层 Tier 3"
             C07["📦 c07_process<br/>进程管理"]
             C08["📦 c08_algorithms<br/>算法与数据结构"]
         end
-        
+
         subgraph "应用层 Tier 4"
             C09["📦 c09_design_pattern<br/>设计模式"]
             C10["📦 c10_networks<br/>网络编程"]
             C11["📦 c11_macro_system<br/>宏系统"]
             C12["📦 c12_wasm<br/>WebAssembly"]
         end
-        
+
         subgraph "共享层"
             COMMON["📦 common<br/>共享库"]
         end
     end
-    
+
     %% 依赖关系
     C02 --> C01
     C03 --> C02
@@ -78,7 +78,7 @@ graph TB
     C10 --> C07
     C11 --> C04
     C12 --> C06
-    
+
     %% 共享库依赖
     C01 --> COMMON
     C02 --> COMMON
@@ -109,7 +109,7 @@ flowchart LR
         RAYON["🔄 Rayon"]
         CROSSBEAM["📡 Crossbeam"]
     end
-    
+
     subgraph "核心 Crate"
         direction TB
         C01["C01: 所有权"]
@@ -125,7 +125,7 @@ flowchart LR
         C11["C11: 宏系统"]
         C12["C12: WASM"]
     end
-    
+
     %% 外部依赖连接
     C06 --> TOKIO
     C05 --> RAYON
@@ -167,7 +167,7 @@ graph TB
         C01_Lifetime["lifetime/"]
         C01_SmartPtr["smart_pointers/"]
     end
-    
+
     subgraph "C02: 类型系统"
         C02_Lib["lib.rs"]
         C02_Basic["basic_types/"]
@@ -175,7 +175,7 @@ graph TB
         C02_Coll["collections/"]
         C02_Trait["traits/"]
     end
-    
+
     subgraph "C05: 线程并发"
         C05_Lib["lib.rs"]
         C05_Basic["basic_threads/"]
@@ -183,7 +183,7 @@ graph TB
         C05_Lockfree["lock_free/"]
         C05_Parallel["parallel/"]
     end
-    
+
     subgraph "C06: 异步编程"
         C06_Lib["lib.rs"]
         C06_Basic["async_basics/"]
@@ -191,7 +191,7 @@ graph TB
         C06_Stream["streams/"]
         C06_Web["web_frameworks/"]
     end
-    
+
     subgraph "C08: 算法"
         C08_Lib["lib.rs"]
         C08_Sort["sorting/"]
@@ -199,7 +199,7 @@ graph TB
         C08_Tree["tree/"]
         C08_ML["machine_learning/"]
     end
-    
+
     subgraph "C10: 网络"
         C10_Lib["lib.rs"]
         C10_TCP["tcp/"]
@@ -208,33 +208,33 @@ graph TB
         C10_WS["websocket/"]
         C10_GRPC["grpc/"]
     end
-    
+
     %% 模块间依赖
     C01_Lib --> C01_Ownership
     C01_Lib --> C01_Borrow
     C01_Lib --> C01_Lifetime
     C01_Lib --> C01_SmartPtr
-    
+
     C02_Lib --> C02_Basic
     C02_Lib --> C02_Adv
     C02_Lib --> C02_Coll
     C02_Lib --> C02_Trait
-    
+
     C05_Lib --> C05_Basic
     C05_Lib --> C05_Sync
     C05_Lib --> C05_Lockfree
     C05_Lib --> C05_Parallel
-    
+
     C06_Lib --> C06_Basic
     C06_Lib --> C06_Runtime
     C06_Lib --> C06_Stream
     C06_Lib --> C06_Web
-    
+
     C08_Lib --> C08_Sort
     C08_Lib --> C08_Graph
     C08_Lib --> C08_Tree
     C08_Lib --> C08_ML
-    
+
     C10_Lib --> C10_TCP
     C10_Lib --> C10_UDP
     C10_Lib --> C10_HTTP
@@ -255,21 +255,21 @@ flowchart LR
         B["配置"]
         C["测试数据"]
     end
-    
+
     subgraph "处理层"
         D["编译检查"]
         E[" Miri 验证"]
         F["测试执行"]
         G["基准测试"]
     end
-    
+
     subgraph "输出"
         H["二进制/库"]
         I["测试报告"]
         J["覆盖率"]
         K["性能指标"]
     end
-    
+
     A --> D
     B --> D
     D --> E
@@ -290,7 +290,7 @@ sequenceDiagram
     participant Task as 异步任务
     participant IO as I/O 操作
     participant Res as 结果处理
-    
+
     Main->>RT: 初始化运行时
     RT->>Task: 生成任务
     Task->>IO: 发起异步 I/O
@@ -313,6 +313,7 @@ sequenceDiagram
 **决策**: 使用 Cargo Workspace 组织多个学习 crate。
 
 **原因**:
+
 - 允许独立版本控制
 - 支持跨 crate 依赖
 - 统一依赖管理
@@ -325,6 +326,7 @@ sequenceDiagram
 **决策**: 创建独立的 `common` crate 提供共享功能。
 
 **原因**:
+
 - 避免代码重复
 - 统一错误处理
 - 共享测试工具
@@ -337,6 +339,7 @@ sequenceDiagram
 **决策**: 使用 Cargo features 控制高级功能。
 
 **原因**:
+
 - 减少编译时间
 - 可选依赖管理
 - 平台特定支持
@@ -347,20 +350,24 @@ sequenceDiagram
 ## 技术栈
 
 ### 核心运行时
+
 - **Tokio**: 异步运行时 (v1.51+)
 - **Rayon**: 数据并行 (v1.11+)
 - **Crossbeam**: 并发原语 (v0.8+)
 
 ### 序列化
+
 - **Serde**: 通用序列化 (v1.0+)
 - **Serde JSON**: JSON 支持 (v1.0+)
 
 ### 网络
+
 - **Hyper**: HTTP 底层 (v1.9+)
 - **Tonic**: gRPC 框架 (v0.14+)
 - **Tungstenite**: WebSocket (v0.29+)
 
 ### 日志与追踪
+
 - **Tracing**: 结构化日志 (v0.1+)
 - **Prometheus**: 指标收集 (v0.14+)
 
@@ -371,3 +378,14 @@ sequenceDiagram
 - [Cargo Workspace 文档](https://doc.rust-lang.org/cargo/reference/workspaces.html)
 - [Rust 模块系统](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 - [Tokio 运行时](https://tokio.rs/)
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

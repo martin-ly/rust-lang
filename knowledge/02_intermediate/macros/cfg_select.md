@@ -3,12 +3,15 @@
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **Edition**: 2024
 > **模块**: `core::macros`
+> **权威来源**: [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html), [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 cfg_select 编译期条件选择语义来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
 ## 一、概念定义
 
-`cfg_select!` 是 Rust 1.95.0 引入的标准宏，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
+`cfg_select!` 是 Rust 1.95.0 引入的标准宏 [来源: Rust 1.95 Release Notes / 2026; core::macros::cfg_select / Rust Standard Library 2025; 核心设计决策: 编译期根据 `cfg` 条件选择第一个满足条件的表达式，替代嵌套 `cfg!` 或 `#[cfg]` 属性]，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
 
 ### 语法
 
@@ -231,8 +234,15 @@ let x = cfg_select! {
 
 ---
 
-## 六、参考
+## 📚 权威来源索引
 
-- [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
-- [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html)
-- [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038)
+- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [来源: Rust Release Team / 2026]
+- [core::macros::cfg_select](https://doc.rust-lang.org/core/macro.cfg_select.html) [来源: Rust Standard Library / 2025]
+- [rust-lang/rust#131038](https://github.com/rust-lang/rust/pull/131038) [来源: Rust Core Team / 2025]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

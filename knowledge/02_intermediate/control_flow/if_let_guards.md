@@ -3,6 +3,9 @@
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **关联特性**: `let chains`（Rust 1.88.0, Edition 2024）
 > **前置知识**: 模式匹配（match）、if let、match guards
+> **权威来源**: [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html), [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/), [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 if-let-guard RFC 设计决策来源标注、match 守卫形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -30,6 +33,7 @@
   - [⚖️ 模块 9: 设计权衡](#️-模块-9-设计权衡)
     - [为什么 if let guards 不参与穷尽性检查？](#为什么-if-let-guards-不参与穷尽性检查)
   - [📝 模块 10: 自我检测](#-模块-10-自我检测)
+  - [📚 权威来源索引](#-权威来源索引)
   - [八、参考链接](#八参考链接)
 
 ---
@@ -350,6 +354,23 @@ match status {
 ```
 
 </details>
+
+---
+
+---
+
+## 📚 权威来源索引
+
+- [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html) [来源: Rust Reference / 2025]
+- [Rust 1.95 Release Notes](https://releases.rs/docs/1.95.0/) [来源: Rust Release Team / 2026]
+- [RFC 2294: if-let-guard](https://rust-lang.github.io/rfcs/2294-if-let-guard.html) [来源: Rust Core Team / 2022]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 ---
 

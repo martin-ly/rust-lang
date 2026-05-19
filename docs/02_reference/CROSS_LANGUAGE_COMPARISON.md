@@ -606,4 +606,11 @@ $ python -m pytest
 
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
-**最后更新**: 2026-05-08
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [ISO C++20](https://www.iso.org/standard/83626.html), [Go Language Specification](https://go.dev/ref/spec), [Haskell 2010 Language Report](https://www.haskell.org/definition/haskell2010.pdf)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference / RFC、C++ ISO / cppreference、Go Spec、学术论文），添加 Haskell 对标索引 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1,3 +1,7 @@
+> **权威来源**: [CENELEC](https://www.cenelec.eu/), [EN 50128](https://www.cenelec.eu/), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增铁路信号 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # 案例研究05: 铁路信号系统 (EN 50128/50129)
 
 ## 概述
@@ -713,3 +717,7 @@ mod verification {
 **案例日期**: 2023-2026
 **文档版本**: 1.0
 **适用标准**: EN 50128:2011, EN 50129:2018, EN 50657:2019
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

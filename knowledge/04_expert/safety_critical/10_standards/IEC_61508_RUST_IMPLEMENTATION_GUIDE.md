@@ -1,3 +1,6 @@
+> **权威来源**: [IEC 61508](https://www.iec.ch/), [Rust Reference](https://doc.rust-lang.org/reference/), [Ferrocene](https://ferrous-systems.com/ferrocene/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 IEC 61508 标准来源标注、Rust 安全关键应用引用 [来源: Authority Source Sprint Batch 8]
 # IEC 61508 Rust实施指南
 
 ## 概述
@@ -607,3 +610,7 @@ impl SafetyOpcUaServer {
 ---
 
 *本文档应与IEC 61508标准原文配合使用。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

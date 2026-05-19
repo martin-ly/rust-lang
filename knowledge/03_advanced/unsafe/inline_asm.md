@@ -1,10 +1,12 @@
 # 内联汇编 (Inline Assembly)
 
-> **📌 简介**: Rust 的内联汇编 (`asm!` 宏) 允许在 Rust 代码中直接嵌入汇编指令，用于实现编译器无法生成的底层操作、访问特权指令、与硬件直接交互，或优化极致性能的热路径。
+> **📌 简介**: Rust 的内联汇编 (`asm!` 宏) 允许在 Rust 代码中直接嵌入汇编指令 [来源: Rust Reference — Inline Assembly / 2025; RFC 2873 — Inline Assembly / 2020; 核心设计决策: 基于 LLVM 内联汇编基础设施，提供与 C 语言 `asm` 关键字等价的表达能力，但通过 Rust 的类型系统和约束系统保证安全边界]，用于实现编译器无法生成的底层操作、访问特权指令、与硬件直接交互，或优化极致性能的热路径。
 >
 > **⏱️ 预计学习时间**: 2-3 小时
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家
-> **权威来源**: [Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
+> **权威来源**: [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html), [std::arch::asm](https://doc.rust-lang.org/core/arch/macro.asm.html), [LLVM Inline Assembler](https://llvm.org/docs/LangRef.html#inline-assembler-expressions), [RFC 2873: Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-assembly.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2873 设计决策来源标注、LLVM 内联汇编语义引用、x86_64/AArch64/RISC-V 架构官方文档来源 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -339,6 +341,28 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 
 ---
 
-**文档版本**: 1.0
-**对应 Rust 版本**: 1.95.0+
-**最后更新**: 2026-05-09
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rust Reference — Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html) [来源: Rust Reference / 2025]
+- [std::arch::asm](https://doc.rust-lang.org/core/arch/macro.asm.html) [来源: Rust Standard Library / 2025]
+- [RFC 2873: Inline Assembly](https://rust-lang.github.io/rfcs/2873-inline-assembly.html) [来源: Rust Core Team / 2020]
+
+### 架构来源
+
+- Intel 64 and IA-32 Architectures Software Developer's Manual [来源: x86_64 指令集参考]
+- ARM Architecture Reference Manual [来源: AArch64 指令集参考]
+- RISC-V Instruction Set Manual [来源: RISC-V 指令集参考]
+
+### 跨语言来源
+
+- GCC Extended Asm [来源: GNU C 内联汇编; Rust `asm!` 的设计对标]
+- MSVC `__asm` [来源: Microsoft C/C++ 内联汇编; 与 Rust 跨平台设计的对比]

@@ -1,3 +1,7 @@
+> **权威来源**: [Rust Platform Support 文档](https://doc.rust-lang.org/nightly/rustc/platform-support.html), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Platform Support 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
+
 # Rust 平台支持矩阵（截至 Rust 1.95.0）
 
 > **更新日期**: 2026-04-16
@@ -173,3 +177,10 @@ targets = [
 ---
 
 > **维护**: 每次 Rust 新版本发布后更新此矩阵
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

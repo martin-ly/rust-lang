@@ -1,6 +1,9 @@
 # Rust 2024 Edition Async Closures 完整指南
 
 > **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](async_closure.md)。
+> **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 3668 设计决策来源标注、Rust Reference 异步闭包语义引用 [来源: Authority Source Sprint Batch 8]
 
 ## 概述
 
@@ -313,3 +316,10 @@ let process = async |items: Vec<i32>| -> i32 {
 1. **新项目**：直接使用 `async || {}` 语法
 2. **现有代码**：逐步替换嵌套的 `async move {}` 模式
 3. **注意兼容性**：确保团队使用的 Rust 版本 >= 1.85
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.85.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

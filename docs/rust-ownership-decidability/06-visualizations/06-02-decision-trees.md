@@ -361,3 +361,13 @@ E0505(移动后使用)  E0502(冲突借用)    E0597(悬垂引用)
 2. **调试代码**: 追踪编译器如何做出特定决策
 3. **形式化验证**: 理解验证工具的推理过程
 4. **教学**: 逐步解释复杂概念
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

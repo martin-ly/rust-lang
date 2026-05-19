@@ -1,5 +1,9 @@
 # Rust 2024 Edition `let chains` 深度专题
 
+> **权威来源**: [RFC 2497 — if-let-chains](https://rust-lang.github.io/rfcs/2497-if-let-chains.html), [Rust Reference — Let expressions](https://doc.rust-lang.org/reference/statements.html#let-statements), [Rust 2024 Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/let-else.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2497 设计决策来源标注、跨语言对比矩阵（Haskell ViewPatterns / Swift if let / C++17 structured binding） [来源: Authority Source Sprint Batch 8]
+
 ## 概述
 
 `let chains` 是 Rust 2024 Edition 中稳定化的重要特性 [来源: RFC 2497 — if-let-chains / 2022; Rust Reference — Let expressions / 2025; 核心设计决策: 允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，使用短路求值语义，大幅简化嵌套的 `if let` 代码]，允许在 `if` 和 `while` 条件中将 `let` 绑定与普通布尔表达式链式组合，大幅简化嵌套的 `if let` 代码。
@@ -316,3 +320,10 @@ None
 - Haskell — `ViewPatterns` extension [来源: Haskell 通过视图模式实现类似 `if let` 的模式匹配绑定; 与 Rust `let chains` 的链式组合能力对比]
 - Swift — `if let` optional binding [来源: Swift 的 `if let`/`guard let` 语法; 与 Rust `let chains` 的布尔表达式链式组合对比]
 - C++ — `if constexpr` + structured binding (C++17) [来源: C++17 `if` 初始化语句与结构化绑定; 无 `let` 绑定与布尔表达式的链式组合]
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

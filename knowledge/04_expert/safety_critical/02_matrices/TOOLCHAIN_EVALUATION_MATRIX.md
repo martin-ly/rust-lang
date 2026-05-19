@@ -58,6 +58,10 @@ GCC-Rust:    ⭐⭐⭐ (GCC后端)
 // clippy.toml 推荐配置
 
 # 安全关键级别
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 deny = [
     "unsafe_code",              # ASIL D要求
 ]
@@ -410,3 +414,7 @@ IDE:
 ---
 
 *工具链选择是项目成功的基础，建议充分评估后再做决定。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -228,3 +228,13 @@ V2 版本在保持 V1 完整性的基础上，进行了深度扩展：
 
 **文档状态**: ✅ 100%+ 完成 (深度扩展版)
 **维护计划**: 持续更新，跟进 Rust 与形式化验证最新进展
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

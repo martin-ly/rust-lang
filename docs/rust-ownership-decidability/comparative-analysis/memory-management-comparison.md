@@ -915,3 +915,13 @@ public class HybridMemory {
 | 区域管理 | 批量释放 | 临时对象，游戏 | Rust, C++ |
 
 没有"最好"的内存管理方式，只有最适合特定场景的解决方案。现代语言趋势是提供多种选择，让开发者在安全、性能和开发效率之间找到最佳平衡。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

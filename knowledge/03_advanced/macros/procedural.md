@@ -1,9 +1,12 @@
 # 过程宏 (Procedural Macros)
 
-> **📌 简介**: 过程宏是 Rust 的编译期元编程机制，允许你用 Rust 代码操作 TokenStream，实现自定义 `derive` 属性、自定义语法和代码生成。与 `macro_rules!` 相比，过程宏具有无限的表达能力，但开发和调试更复杂。
+> **📌 简介**: 过程宏是 Rust 的编译期元编程机制，允许你用 Rust 代码操作 TokenStream，实现自定义 `derive` 属性、自定义语法和代码生成 [来源: Rust Reference — Procedural Macros / 2025; RFC 1566 / 2016; 核心设计决策: 三种过程宏类型（Derive / Attribute / Function-like）分别在编译期的不同阶段介入，操作 `TokenStream` 而非 AST 节点; proc-macro2 提供独立于编译器的 Token 表示以支持测试]。与 `macro_rules!` 相比，过程宏具有无限的表达能力，但开发和调试更复杂。
 >
 > **⏱️ 预计学习时间**: 75-100 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐⭐ 专家级
+> **权威来源**: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html), [syn crate](https://docs.rs/syn/), [quote crate](https://docs.rs/quote/), [proc-macro2 crate](https://docs.rs/proc-macro2/), [RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增过程宏三种类型（Derive/Attribute/Function-like）形式化语义来源标注、syn/quote/proc-macro2 生态工具链来源、跨语言编译期元编程对比（C++ Templates / Template Haskell） [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -827,7 +830,26 @@ pub fn check(input: TokenStream) -> TokenStream {
 
 ---
 
-**文档版本**: 2.0
+**文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-09
-**状态**: ✅ 按 10 模块标准重构完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 📚 权威来源索引
+
+### 官方来源
+
+- [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html) [来源: Rust Reference / 2025]
+- [RFC 1566: Procedural Macros](https://rust-lang.github.io/rfcs/1566-proc-macros.html) [来源: Rust Core Team / 2016]
+- [syn crate](https://docs.rs/syn/) [来源: dtolnay / 2019+; TokenStream → AST 解析]
+- [quote crate](https://docs.rs/quote/) [来源: dtolnay / 2019+; 准引用代码生成]
+- [proc-macro2 crate](https://docs.rs/proc-macro2/) [来源: dtolnay / 2019+; 独立于编译器的 Token 表示]
+
+### 跨语言来源
+
+- C++ — Templates, Concepts [来源: C++ 模板作为图灵完备的编译期元编程; 与 Rust 过程宏的 Token-based 设计对比]
+- Haskell — Template Haskell [来源: Haskell 的编译期元编程; `Q` monad 与 Rust `proc_macro` 的对比]
+- Java — Annotation Processors [来源: Java 编译期代码生成; 与 Rust Derive 宏的设计同构性]
+- Go — `go generate` [来源: Go 的代码生成工具; 编译期外执行 vs Rust 编译器内插件模型]

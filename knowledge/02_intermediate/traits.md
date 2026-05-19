@@ -5,6 +5,10 @@
 > **⏱️ 预计学习时间**: 90-120 分钟
 > **📚 难度级别**: ⭐⭐⭐⭐ 高级
 
+> **权威来源**: [The Rust Programming Language — Ch10](https://doc.rust-lang.org/book/ch10-00-generics.html), [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html), [RFC 255: Trait Objects](https://rust-lang.github.io/rfcs/0255-object-safety.html), [RFC 1023: Rebalancing Coherence](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html), [Wadler & Blott, "How to Make ad-hoc Polymorphism Less ad-hoc" (POPL 1989)](https://dl.acm.org/doi/10.1145/75277.75283)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RFC 1023、RFC 255、Wadler & Blott 1989） [来源: Authority Source Sprint Batch 8]
+
 **变更日志**:
 
 - v2.1 (2026-05-19): 补全权威来源标注（TRPL、Rust Reference、RFC 1023、RFC 255、Wadler & Blott 1989）
@@ -909,4 +913,4 @@ trait Processor {
 **文档版本**: 2.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
-**状态**: ✅ 按 10 模块标准重构完成
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

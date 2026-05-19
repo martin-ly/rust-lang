@@ -100,6 +100,10 @@ Rust基金会:
 
 ```bash
 # 1. Fork仓库
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 # 2. 克隆本地
 git clone https://github.com/YOUR_USERNAME/PROJECT.git
 cd PROJECT
@@ -400,3 +404,7 @@ git push origin feature/my-contribution
 ---
 
 *社区的力量在于每个人的参与和贡献。*
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -1,3 +1,7 @@
+> **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
+
 # Rust 核心概念 (Core Concepts)
 
 > **Rust 版本**: 1.95.0+
@@ -286,3 +290,10 @@ unsafe {
 - [The Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rustonomicon](https://doc.rust-lang.org/nomicon/)
 - [Rust Reference - Lifetimes](https://doc.rust-lang.org/reference/items/generics.html#lifetime-parameters)
+
+---
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

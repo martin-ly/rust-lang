@@ -140,3 +140,13 @@ fn render<T: Drawable>(item: T) {
 | **PROOF_INDEX.md** | [../research_notes/PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) | 形式化证明索引（87+ 个证明） |
 | **TOOLS_GUIDE.md** | [../research_notes/TOOLS_GUIDE.md](../research_notes/TOOLS_GUIDE.md) | 形式化验证工具（Prusti、Kani、Creusot） |
 | **SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md** | [../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全/非安全边界分析 |
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

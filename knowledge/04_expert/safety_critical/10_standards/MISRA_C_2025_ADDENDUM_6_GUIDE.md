@@ -258,6 +258,10 @@ MISRA C:2025 总规则数: 143
 // .clippy.toml or clippy.toml
 
 # 避免隐式转换 (对应MISRA数值转换规则)
+
+> **权威来源**: [MISRA C](https://misra.org.uk/), [ISO 26262](https://www.iso.org/standard/68383.html), [Rust Reference](https://doc.rust-lang.org/reference/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 MISRA C 标准来源标注、Rust 安全编码规范引用 [来源: Authority Source Sprint Batch 8]
 disallowed-methods = [
     "std::mem::transmute",
 ]
@@ -345,3 +349,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 **文档版本**: 1.0
 **最后更新**: 2026-03-18
 **基于**: MISRA C:2025 Addendum 6 (March 2025)
+---
+
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

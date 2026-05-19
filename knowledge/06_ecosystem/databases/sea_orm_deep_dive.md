@@ -4,6 +4,9 @@
 > **Rust 版本**: 1.95.0+
 > **难度**: 中级
 > **预计阅读时间**: 40分钟
+> **权威来源**: [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/), [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Sea-ORM 官方文档来源标注 [来源: Authority Source Sprint Batch 8]
 
 ---
 
@@ -475,5 +478,5 @@ mod tests {
 ---
 
 **维护者**: Rust 学习项目团队
-**最后更新**: 2026-03-19
-**状态**: ✅ 已完成
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

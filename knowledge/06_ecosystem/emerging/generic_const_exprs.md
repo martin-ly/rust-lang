@@ -573,4 +573,8 @@ where
 **文档版本**: 2.0
 **对应 Rust 版本**: 1.95.0+ (nightly)
 **最后更新**: 2026-05-09
-**状态**: 🧪 按 10 模块标准增强完成
+> **权威来源**: [RFC 2000: Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html), [Tracking Issue #76560](https://github.com/rust-lang/rust/issues/76560), [Const Eval](https://doc.rust-lang.org/nightly/unstable-book/language-features/const-eval.html)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2000 设计决策来源标注、Const Eval 不稳定特性文档引用 [来源: Authority Source Sprint Batch 8]
+
+**状态**: 🧪 权威来源对齐完成 (Batch 8)

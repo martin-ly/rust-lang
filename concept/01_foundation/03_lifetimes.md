@@ -81,8 +81,8 @@
   - [十三、Lifetime Elision 的完整形式化描述](#十三lifetime-elision-的完整形式化描述)
     - [13.1 三条规则的形式化表述](#131-三条规则的形式化表述)
       - [13.1.1 Rule 1：每个输入引用获得独立生命周期](#1311-rule-1每个输入引用获得独立生命周期)
-      - [13.1.2 Rule 2：单输入时输出继承输入生命周期](#1312-rule-2单输入时输出继承输入生命周期)
-      - [13.1.3 Rule 3：`&self` / `&mut self` 优先](#1313-rule-3self--mut-self-优先)
+      - [13.1.2 Rule 2：单输入时输出等于输入生命周期](#1312-rule-2单输入时输出等于输入生命周期)
+      - [13.1.3 Rule 3：方法有 `&self` / `&mut self` 时输出优先](#1313-rule-3方法有-self--mut-self-时输出优先)
     - [13.2 为什么 Elision 是 Sound 的](#132-为什么-elision-是-sound-的)
   - [十四、`impl Trait` 与生命周期推断的交互](#十四impl-trait-与生命周期推断的交互)
     - [14.1 `impl Trait` 返回位置（RPIT）的生命周期捕获](#141-impl-trait-返回位置rpit的生命周期捕获)
@@ -1037,7 +1037,7 @@ fn merge<'a>(a: &'a str, b: &'a str) -> &'a str {
 
 > **[来源: Rust Reference: Lifetime elision §The rules]** Rule 1 的独立分配是后续规则产生歧义的根源——当 $|L_{in}| > 1$ 且返回含引用时，Rule 2 不适用，必须显式标注。✅
 
-#### 13.1.2 Rule 2：单输入时输出继承输入生命周期
+#### 13.1.2 Rule 2：单输入时输出等于输入生命周期
 
 **形式化表述**。
 
@@ -1068,7 +1068,7 @@ fn longest(x: &str, y: &str) -> &str {  // E0106
 
 > **[来源: Rust Reference: Lifetime elision §The rules]** Rule 2 的核心前提是"函数返回值的生命周期必须源自某个输入"——当存在多个候选源时，Elision 放弃推导以避免 unsound 的猜测。✅
 
-#### 13.1.3 Rule 3：`&self` / `&mut self` 优先
+#### 13.1.3 Rule 3：方法有 `&self` / `&mut self` 时输出优先
 
 **形式化表述**。
 
@@ -1118,7 +1118,7 @@ impl<'a> Parser<'a> {
 }
 ```
 
-> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 3 体现了面向对象方法的语义约定：方法返回的引用通常指向对象内部状态，因此其生命周期与对象借用周期一致。✅
+> **[来源: Rust Reference: Lifetime elision §The rules]** Rule 3 体现了面向对象方法的语义约定：方法有 `&self`/`&mut self` 时，返回引用（输出）的生命周期与 self 的生命周期一致。✅
 
 ### 13.2 为什么 Elision 是 Sound 的
 
@@ -1141,10 +1141,10 @@ $$
 
 1. 应用 Rule 1: 为所有输入引用分配 fresh 生命周期参数
 2. 若 S 是方法且 self 为引用类型（&self / &mut self）：
-     应用 Rule 3: 返回引用（若存在）的生命周期 = self 的生命周期
+     应用 Rule 3（方法有 &self 时输出等于 self）: 返回引用（若存在）的生命周期 = self 的生命周期
      （Rule 3 覆盖 Rule 2：方法优先关联 self 生命周期）
    否则若 |L_in| = 1（仅一个输入引用）且返回含引用：
-     应用 Rule 2: 返回引用的生命周期 = 唯一输入引用的生命周期
+     应用 Rule 2（单输入时输出等于输入）: 返回引用的生命周期 = 唯一输入引用的生命周期
    否则：
      保持返回引用的生命周期未解析 → 若存在未解析，报错 E0106
 ```
