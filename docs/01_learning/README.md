@@ -6,7 +6,7 @@
 > **状态**: ✅ 已完成
 > **用途**: 学习规划与官方资源映射；解决「如何规划学习、与官方资源如何映射」
 > **判定目标**: 学习路径可执行、官方资源可追溯
-> **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.1
+> **完整结构**: DOCS_STRUCTURE_OVERVIEW § 2.1
 > **概念说明**: Rust 学习路径提供从入门到精通的系统化学习路线，涵盖语言基础、所有权系统、类型系统、异步编程、Unsafe 等核心主题，并与 The Rust Book、Rust Reference 等官方资源映射对应。
 
 ---

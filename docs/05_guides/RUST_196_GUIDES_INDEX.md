@@ -110,7 +110,7 @@ fn demonstrate_196_features() {
 
 #### 🔄 并发编程
 - [HashMap 新 API](./THREADS_CONCURRENCY_USAGE_GUIDE.md)
-- [if let guards 指南](./CONTROL_FLOW_GUIDE.md)
+- if let guards 指南
 
 #### ⚡ 异步编程
 - [async Fn trait 改进](./ASYNC_PROGRAMMING_USAGE_GUIDE.md)

@@ -166,7 +166,7 @@
 ### 上季度 PDCA 归档
 <!-- 链接到上季度的 PDCA 归档文件 -->
 
-- [PDCA - 上季度](./history/pdca-cycle-YYYY-QN-1.md)
+- PDCA - 上季度
 
 ### 关联文档
 

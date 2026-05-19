@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **目标**: 面向 Rust 语言机制的软件设计形式分析、边界论证与组合工程有效性
-> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../../DOCS_STRUCTURE_OVERVIEW.md) § 2.7 software_design_theory
+> **docs 全结构**: DOCS_STRUCTURE_OVERVIEW § 2.7 software_design_theory
 
 ---
 

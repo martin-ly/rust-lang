@@ -60,7 +60,7 @@
 | 子模块 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |
 | 01 编译器 | [06_toolchain/01_compiler_features.md](../06_toolchain/01_compiler_features.md) |
-| 02 包管理器 | [06_toolchain/02_cargo_workspace_guide.md](../06_toolchain/02_cargo_workspace_guide.md) |
+| 02 包管理器 | [06_toolchain/02_cargo_workspace_guide.md](../archive/deprecated_20260318/02_cargo_workspace_guide.md) |
 | 03 构建工具 | [06_toolchain/](../06_toolchain/README.md) |
 
 ---
@@ -100,6 +100,7 @@
 
 - [形式化工程系统 README](./README.md)
 - [文档中心](../README.md)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -60,7 +60,7 @@
 
 ### docs 全结构梳理 100% 完成（2026-02-15）🆕
 
-- **DOCS_STRUCTURE_OVERVIEW**：新建 [docs/DOCS_STRUCTURE_OVERVIEW.md](../DOCS_STRUCTURE_OVERVIEW.md)，按 00_COMPREHENSIVE_SUMMARY 格式（模块|核心问题|判定目标|核心文档）100% 覆盖 docs
+- **DOCS_STRUCTURE_OVERVIEW**：新建 docs/DOCS_STRUCTURE_OVERVIEW.md，按 00_COMPREHENSIVE_SUMMARY 格式（模块|核心问题|判定目标|核心文档）100% 覆盖 docs
 - **顶层 11 模块**：三大支柱、01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、rust-formal-engineering-system 全部纳入表格
 - **子目录 README 元信息**：01_learning、02_reference、04_thinking、05_guides、06_toolchain、07_project、archive、quick_reference、process_reports、version_reports 补齐用途、判定目标、DOCS_STRUCTURE 链接
 - **research_notes 子模块**：formal_methods、type_theory、software_design_theory、experiments 均增加 DOCS_STRUCTURE 链接

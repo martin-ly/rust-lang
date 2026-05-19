@@ -144,7 +144,7 @@
 
 ## 概念定义-属性关系-解释论证 层次化小节规范（2026-02 新增）
 
-**依据**：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 建议 P0。核心 research_notes 文档宜具备**层次化三块**（可合并到现有结构，不必另起标题）：
+**依据**：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN 建议 P0。核心 research_notes 文档宜具备**层次化三块**（可合并到现有结构，不必另起标题）：
 
 | 层次 | 名称 | 内容要求 | 形式 |
 | :--- | :--- | :--- | :--- |
@@ -160,7 +160,7 @@
 
 ## 矩阵与文档双向链接规范（2026-02 新增）
 
-**依据**：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) 建议 P2。凡有「多维对比矩阵」的领域，宜满足双向链接：
+**依据**：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN 建议 P2。凡有「多维对比矩阵」的领域，宜满足双向链接：
 
 | 位置 | 要求 |
 | :--- | :--- |

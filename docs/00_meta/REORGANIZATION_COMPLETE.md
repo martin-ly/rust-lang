@@ -192,7 +192,7 @@ rust-lang/
 ## 相关文档
 
 - [重组记录](history/2026_reorganization.md) - 详细重组过程
-- [文档索引](../01_docs/00_index.md) - 新文档导航
+- [文档索引](../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md) - 新文档导航
 - [项目README](../README.md) - 项目主入口
 
 ---

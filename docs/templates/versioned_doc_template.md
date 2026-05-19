@@ -12,7 +12,7 @@
 > **Edition**: {{ edition }}
 > **最后验证**: {{ validation_date }}
 > **状态**: {{ status }}
-> **历史版本**: [归档列表](../../VERSION_INDEX.md)
+> **历史版本**: [归档列表](../archive/2026_03_reorganization/VERSION_INDEX.md)
 
 ---
 
@@ -139,7 +139,7 @@ default = []
 
 ### 项目内资源
 
-- [版本化索引](../../VERSION_INDEX.md)
+- [版本化索引](../archive/2026_03_reorganization/VERSION_INDEX.md)
 - 历史版本归档: `../../crates/{{ crate }}/src/archive/`
 - 相关 crate: `crates/{{ related_crate }}/`
 
@@ -227,7 +227,7 @@ mod tests {
 
 ---
 
-*本文档遵循 [Rust 学习项目版本化规范](../../VERSION_INDEX.md)*
+*本文档遵循 [Rust 学习项目版本化规范](../archive/2026_03_reorganization/VERSION_INDEX.md)*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

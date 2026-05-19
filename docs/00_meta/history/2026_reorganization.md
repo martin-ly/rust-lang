@@ -170,8 +170,8 @@ rust-lang/
 
 ## 参考
 
-- [PROJECT_REORGANIZATION_PLAN.md](../../PROJECT_REORGANIZATION_PLAN.md) - 重组计划
-- [COMPLETION_REPORT_FINAL.md](../../06_archive/2026_03_reorganization/COMPLETION_REPORT_FINAL.md) - 完成报告
+- [PROJECT_REORGANIZATION_PLAN.md](PROJECT_REORGANIZATION_PLAN.md) - 重组计划
+- [COMPLETION_REPORT_FINAL.md](../../archive/2026_03_reorganization/COMPLETION_REPORT_FINAL.md) - 完成报告
 
 ---
 

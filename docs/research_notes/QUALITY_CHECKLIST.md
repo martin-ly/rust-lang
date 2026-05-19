@@ -96,7 +96,7 @@
 
 - **子目录扩展**：formal_methods、type_theory、software_design_theory 子文档可增加「分类」「安全边界」「23 模式矩阵」等；与上述五类并存，不替代「Rust 版本」。
 - **格式**：每行一条 `> **key**: value`；key 与冒号间无空格，冒号后一空格。
-- 详见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) F1.1。
+- 详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F1.1。
 
 ---
 
@@ -287,7 +287,7 @@
 
 *适用*：formal_methods、type_theory、software_design_theory 核心文档；
 索引/概览类可放宽。
-依据：[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)。
+依据：RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN。
 **formal_methods 六篇完备性**（六篇×六维自检）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
 
 ---

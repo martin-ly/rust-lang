@@ -34,7 +34,7 @@
 
 | 库名 | 领域 | 关键形式化 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [axum](./axum-formal-analysis.md) | Web框架 | 类型安全路由、提取器模式 | ✅ |
+| [axum](../../archive/deprecated_20260318/axum-formal-analysis.md) | Web框架 | 类型安全路由、提取器模式 | ✅ |
 | [actix-web](./actix-web-formal-analysis.md) | Actor Web框架 | Actor模型、状态管理 | ✅ |
 | [tokio](./tokio-runtime-formal-analysis.md) | 异步运行时 | 任务调度、IO驱动 | ✅ |
 | [tonic](./tonic-formal-analysis.md) | gRPC框架 | 流处理、协议升级 | ✅ |
@@ -46,7 +46,7 @@
 
 | 库名 | 领域 | 关键形式化 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [sea-orm](./sea-orm-formal-analysis.md) | ORM | 类型安全查询、关系映射 | ✅ |
+| [sea-orm](../../archive/deprecated_20260318/sea-orm-formal-analysis.md) | ORM | 类型安全查询、关系映射 | ✅ |
 | [diesel](./diesel-formal-analysis.md) | 编译时SQL ORM | 编译时验证、查询DSL | ✅ |
 | [sqlx](./sqlx-formal-analysis.md) | 查询宏 | 编译时SQL检查、类型映射 | ✅ |
 
@@ -68,7 +68,7 @@
 
 | 库名 | 领域 | 关键形式化 | 状态 |
 | :--- | :--- | :--- | :--- |
-| [async-trait](./async-trait-formal-analysis.md) | 异步trait | 宏转换、Send边界 | ✅ |
+| [async-trait](../../archive/deprecated_20260318/async-trait-formal-analysis.md) | 异步trait | 宏转换、Send边界 | ✅ |
 | [tokio-stream](./tokio-stream-formal-analysis.md) | 流处理 | Stream trait、背压 | ✅ |
 | [pin-project](./pin-project-formal-analysis.md) | 自引用 | Pin投影、Drop安全 | ✅ |
 

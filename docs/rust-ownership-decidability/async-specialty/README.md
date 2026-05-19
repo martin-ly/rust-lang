@@ -293,7 +293,7 @@ async fn blink_task(pin: PB0) {
 ### 初学者
 
 1. [Tokio深度解析](./authoritative/tokio-deep-dive.md) - 理解基础
-2. [最佳实践](./practices/best-practices.md) - 写出高质量代码
+2. [最佳实践](../../archive/deprecated_20260318/best-practices.md) - 写出高质量代码
 
 ### 进阶开发者
 

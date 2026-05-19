@@ -12,10 +12,10 @@
 
 | # | 文档 | 页数 | 核心内容 | 定理数 |
 |:-:|:-----|:----:|:---------|:------:|
-| 1 | [async-comprehensive-analysis.md](./async-comprehensive-analysis.md) | 35 | 语法、转换、运行时、等价性、机制全覆盖 | 35 |
+| 1 | [async-comprehensive-analysis.md](../../../archive/deprecated_20260318/async-comprehensive-analysis.md) | 35 | 语法、转换、运行时、等价性、机制全覆盖 | 35 |
 | 2 | [async-execution-examples.md](./async-execution-examples.md) | 21 | 可运行代码、自定义实现、属性测试 | 15 |
 | 3 | [async-execution-model-formal.md](./async-execution-model-formal.md) | 18 | Future语义、Poll模型、Pin安全、调度 | 20 |
-| 4 | [async-edge-cases-and-patterns.md](./async-edge-cases-and-patterns.md) | 11 | 边界情况、高级模式、测试技巧 | 10 |
+| 4 | [async-edge-cases-and-patterns.md](../../../archive/deprecated_20260318/async-edge-cases-and-patterns.md) | 11 | 边界情况、高级模式、测试技巧 | 10 |
 | 5 | [对比分析](../../comparative-analysis/async-concurrency-comparison.md) | 17 | 与线程/Actor/CSP/Promise对比 | 15 |
 | | **总计** | **102+** | | **95+** |
 
@@ -322,13 +322,13 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 ### 初学者路径
 
-1. [async-comprehensive-analysis.md](./async-comprehensive-analysis.md) - 全面了解
+1. [async-comprehensive-analysis.md](../../../archive/deprecated_20260318/async-comprehensive-analysis.md) - 全面了解
 2. [async-execution-examples.md](./async-execution-examples.md) - 动手实践
 
 ### 进阶路径
 
 1. [async-execution-model-formal.md](./async-execution-model-formal.md) - 深入原理
-2. [async-edge-cases-and-patterns.md](./async-edge-cases-and-patterns.md) - 高级技巧
+2. [async-edge-cases-and-patterns.md](../../../archive/deprecated_20260318/async-edge-cases-and-patterns.md) - 高级技巧
 
 ### 研究者路径
 

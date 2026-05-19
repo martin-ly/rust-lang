@@ -28,7 +28,7 @@
 | [WORKFLOW_CONCEPT_MINDMAP](./formal_methods/WORKFLOW_CONCEPT_MINDMAP.md) | 导图 | 工作流概念族 | 🆕 完整 |
 | [CONCEPT_AXIOM_THEOREM_MATRIX](./formal_methods/CONCEPT_AXIOM_THEOREM_MATRIX.md) | 矩阵 | 五维矩阵 | 🆕 完整 |
 | [VERIFICATION_TOOLS_MATRIX](./formal_methods/VERIFICATION_TOOLS_MATRIX.md) | 矩阵 | 验证工具对比 | 🆕 完整 |
-| [DESIGN_PATTERNS_BOUNDARY_MATRIX](./software_design_theory/01_design_patterns_formal/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) | 矩阵 | 设计模式边界 | 🆕 完整 |
+| [DESIGN_PATTERNS_BOUNDARY_MATRIX](../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
 

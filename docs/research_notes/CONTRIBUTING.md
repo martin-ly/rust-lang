@@ -106,7 +106,7 @@
 - [研究笔记规范](./README.md#-研究笔记规范)
 - [质量标准](#-质量标准)
 - [检查清单](#-检查清单)
-- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)、[MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) § 格式统一检查清单。
+- **格式门禁**：新文档须符合 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § research_notes 元信息统一模板（创建日期、最后更新、**Rust 版本**: 1.93.1+ (Edition 2024)、状态）；不符合时请在 PR 中说明例外理由。详见 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[MAINTENANCE_GUIDE](MAINTENANCE_GUIDE.md) § 格式统一检查清单。
 
 ### 步骤 5: 更新索引
 

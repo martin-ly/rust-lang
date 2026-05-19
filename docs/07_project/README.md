@@ -6,7 +6,7 @@
 > **状态**: ✅ 100% 完成
 > **用途**: 知识结构、版本追踪、文档交叉引用；结构可维护、任务可追踪
 > **判定目标**: 结构可维护、任务可追踪
-> **完整结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md) § 2.6
+> **完整结构**: DOCS_STRUCTURE_OVERVIEW § 2.6
 
 ## 代码示例
 
@@ -88,7 +88,7 @@ impl ProjectDocIndexer {
 
         for doc in docs {
             let line = format!(
-                "| [{}](./{}.md) | {} | {} |\n",
+                "| {} | {} | {} |\n",
                 doc.title, doc.name, doc.description, doc.status
             );
             output.push_str(&line);
@@ -134,8 +134,8 @@ fn main() {
 | 类别 | 文档 | 说明 |
 | :--- | :--- | :--- |
 | **知识结构** | KNOWLEDGE_STRUCTURE_FRAMEWORK.md MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md | 定义知识结构体系 模块知识结构补充指南 |
-| **版本追踪** | [RUST_RELEASE_TRACKING_CHECKLIST.md](../../../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md) (归档) 版本追踪文档 | 新版本发布追踪流程 各模块适配状态 |
-| **文档管理** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) [DOCUMENTATION_THEME_ORGANIZATION_PLAN.md](../archive/process_reports/2026_02/project/DOCUMENTATION_THEME_ORGANIZATION_PLAN.md) (归档) | 文档交叉引用指南 文档主题重组规划 |
+| **版本追踪** | [RUST_RELEASE_TRACKING_CHECKLIST.md](RUST_RELEASE_TRACKING_CHECKLIST.md) (归档) 版本追踪文档 | 新版本发布追踪流程 各模块适配状态 |
+| **文档管理** | [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) DOCUMENTATION_THEME_ORGANIZATION_PLAN.md (归档) | 文档交叉引用指南 文档主题重组规划 |
 | **架构** | [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构设计 |
 | **模板工具** | ONE_PAGE_SUMMARY_TEMPLATE.md | 一页纸总结模板 |
 
@@ -147,8 +147,8 @@ fn main() {
 - [MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md](./MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md) - 模块知识结构
 - [DOCUMENTATION_CROSS_REFERENCE_GUIDE.md](./DOCUMENTATION_CROSS_REFERENCE_GUIDE.md) - 文档交叉引用
 - [PROJECT_ARCHITECTURE_GUIDE.md](./PROJECT_ARCHITECTURE_GUIDE.md) - 项目架构
-- [RUST_RELEASE_TRACKING_CHECKLIST.md](../../../07_project/RUST_RELEASE_TRACKING_CHECKLIST.md) (归档) - 版本追踪
-- [ARCHIVE_COMPLETION_REPORT.md](../ARCHIVE_COMPLETION_REPORT.md) - 归档完成报告
+- [RUST_RELEASE_TRACKING_CHECKLIST.md](RUST_RELEASE_TRACKING_CHECKLIST.md) (归档) - 版本追踪
+- ARCHIVE_COMPLETION_REPORT.md - 归档完成报告
 
 ## 主索引
 

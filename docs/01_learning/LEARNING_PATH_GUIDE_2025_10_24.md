@@ -244,8 +244,8 @@ async fn use_async_fn_trait() {
 
 ## 📚 关键资源
 
-- [QUICK_REFERENCE](./research_notes/QUICK_REFERENCE.md)
-- [crates/c01_ownership_borrow_scope](../crates/c01_ownership_borrow_scope/README.md)
+- [QUICK_REFERENCE](../archive/temp/QUICK_REFERENCE.md)
+- [crates/c01_ownership_borrow_scope](../archive/deprecated_20260318/README.md)
 
 ---
 

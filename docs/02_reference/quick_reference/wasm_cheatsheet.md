@@ -422,7 +422,7 @@ pub fn process_task(task_json: &str) -> String {
 - [类型系统速查卡](./type_system.md) - WASM 类型
 - [错误处理速查卡](./error_handling_cheatsheet.md) - WASM 错误处理
 - [测试速查卡](./testing_cheatsheet.md) - WASM 测试
-- [反模式速查卡](./ANTI_PATTERN_TEMPLATE.md) - WASM 反模式
+- [反模式速查卡](../../archive/deprecated_20260318/ANTI_PATTERN_TEMPLATE.md) - WASM 反模式
 
 ---
 

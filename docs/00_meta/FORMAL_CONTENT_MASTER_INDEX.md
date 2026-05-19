@@ -63,8 +63,8 @@
 | 工具 | 位置 | 状态 |
 |------|------|------|
 | Coq 形式化 | [`rust-ownership-decidability/coq-formalization/`](../rust-ownership-decidability/coq-formalization/) | 11,980+ 行，300+ Qed |
-| Miri | [`research_notes/formal_methods/MIRI_EXECUTION_MODEL.md`](../research_notes/formal_methods/MIRI_EXECUTION_MODEL.md) | 执行模型分析 |
-| Tree Borrows | [`research_notes/formal_methods/tree_borrows_analysis.md`](../research_notes/formal_methods/tree_borrows_analysis.md) | 别名模型 |
+| Miri | `research_notes/formal_methods/MIRI_EXECUTION_MODEL.md` | 执行模型分析 |
+| Tree Borrows | `research_notes/formal_methods/tree_borrows_analysis.md` | 别名模型 |
 
 ### 2.6 案例研究
 

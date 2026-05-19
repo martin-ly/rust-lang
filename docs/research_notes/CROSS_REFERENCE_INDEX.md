@@ -6,7 +6,7 @@
 > **状态**: ✅ 已完成
 > **用途**: 全文档双向链接表、概念跨文档定义映射、定理跨文档引用中心
 > **上位文档**: [00_COMPREHENSIVE_SUMMARY](./00_COMPREHENSIVE_SUMMARY.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
-> **docs 全结构**: [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md)
+> **docs 全结构**: DOCS_STRUCTURE_OVERVIEW
 
 ---
 

@@ -187,8 +187,8 @@ fn main() {
 
 **相关概念**:
 
-- [所有权规则](../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md)
-- [移动语义](../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
+- [所有权规则](../../crates/c01_ownership_borrow_scope/docs/tier_01_foundations/02_主索引导航.md)
+- [移动语义](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
 
 **形式化解释**:
 
@@ -264,8 +264,8 @@ fn main() {
 
 **相关概念**:
 
-- [部分移动](../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
-- [结构体所有权](../crates/c02_type_system/docs/tier_02_guides/02_复合类型指南.md)
+- [部分移动](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
+- [结构体所有权](../../crates/c02_type_system/docs/tier_02_guides/02_复合类型指南.md)
 
 ---
 
@@ -336,8 +336,8 @@ fn process(s: String) -> String {
 
 **相关概念**:
 
-- [可变借用规则](../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
-- [NLL](../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
+- [可变借用规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
+- [NLL](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
 
 **形式化解释**:
 
@@ -411,8 +411,8 @@ fn main() {
 
 **相关概念**:
 
-- [借用规则](../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
-- [读写锁原理](../crates/c05_threads/docs/tier_02_guides/02_同步原语实践.md)
+- [借用规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
+- [读写锁原理](../../crates/c05_threads/docs/tier_02_guides/02_同步原语实践.md)
 
 ---
 
@@ -460,7 +460,7 @@ fn main() {
 }
 ```
 
-**相关概念**: [所有权转移](../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
+**相关概念**: [所有权转移](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
 
 ---
 
@@ -681,8 +681,8 @@ fn main() {
 
 **相关概念**:
 
-- [Trait Bound](../crates/c04_generic/docs/tier_02_guides/02_Trait系统指南.md)
-- [标准库 Trait](../crates/c02_type_system/docs/tier_03_references/01_类型系统规范.md)
+- [Trait Bound](../../crates/c04_generic/docs/tier_02_guides/02_Trait系统指南.md)
+- [标准库 Trait](../../crates/c02_type_system/docs/tier_03_references/01_类型系统规范.md)
 
 ---
 
@@ -796,7 +796,7 @@ fn main() {
 }
 ```
 
-**相关概念**: [类型转换](../crates/c02_type_system/docs/tier_03_references/01_类型转换参考.md)
+**相关概念**: [类型转换](../../crates/c02_type_system/docs/tier_03_references/01_类型转换参考.md)
 
 ---
 
@@ -871,8 +871,8 @@ fn main() {
 
 **相关概念**:
 
-- [生命周期标注](../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md)
-- [生命周期省略规则](../crates/c01_ownership_borrow_scope/docs/tier_03_references/03_生命周期参考.md)
+- [生命周期标注](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md)
+- [生命周期省略规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/03_生命周期参考.md)
 
 ---
 
@@ -969,8 +969,8 @@ fn main() {
 
 **相关概念**:
 
-- [悬垂引用](../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md)
-- [作用域规则](../crates/c01_ownership_borrow_scope/docs/tier_03_references/04_Drop与RAII参考.md)
+- [悬垂引用](../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/03_生命周期实践.md)
+- [作用域规则](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/04_Drop与RAII参考.md)
 
 **形式化解释**:
 
@@ -1109,7 +1109,7 @@ fn main() {
 }
 ```
 
-**相关概念**: [可变性](../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
+**相关概念**: [可变性](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/01_所有权规则参考.md)
 
 ---
 
@@ -1164,8 +1164,8 @@ fn main() {
 
 **相关概念**:
 
-- [模式匹配](../crates/c03_control_fn/docs/tier_02_guides/04_模式匹配指南.md)
-- [穷尽性检查](../crates/c03_control_fn/docs/tier_04_advanced/01_高级模式匹配.md)
+- [模式匹配](../../crates/c03_control_fn/docs/tier_02_guides/04_模式匹配指南.md)
+- [穷尽性检查](../../crates/c03_control_fn/docs/tier_04_advanced/01_高级模式匹配.md)
 
 ---
 
@@ -1803,8 +1803,8 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 **相关概念**:
 
-- [闭包](../crates/c03_control_fn/docs/tier_03_references/04_闭包参考.md)
-- [move 闭包](../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
+- [闭包](../../crates/c03_control_fn/docs/tier_03_references/04_闭包参考.md)
+- [move 闭包](../../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
 
 ---
 
@@ -1844,8 +1844,8 @@ fn main() {
 
 **相关概念**:
 
-- [Send/Sync](../crates/c05_threads/docs/tier_01_foundations/03_术语表.md)
-- [线程安全](../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
+- [Send/Sync](../../crates/c05_threads/docs/tier_01_foundations/03_术语表.md)
+- [线程安全](../../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
 
 ---
 
@@ -1897,8 +1897,8 @@ async fn some_async() {}
 
 **相关概念**:
 
-- [异步借用](../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
-- [Pin](../crates/c06_async/docs/tier_03_references/04_Pin与Unsafe参考.md)
+- [异步借用](../../crates/c06_async/docs/tier_02_guides/04_异步设计模式实践.md)
+- [Pin](../../crates/c06_async/docs/tier_03_references/04_Pin与Unsafe参考.md)
 
 ---
 
@@ -1929,7 +1929,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 }
 ```
 
-**相关概念**: [递归异步](../crates/c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
+**相关概念**: [递归异步](../../crates/c09_design_pattern/docs/ASYNC_RECURSION_ANALYSIS.md)
 
 ---
 

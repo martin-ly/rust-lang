@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **概念说明**: Cargo 是 Rust 的包管理器和构建系统，负责依赖解析、版本管理、特性标志（feature flags）和 workspace 管理。形式化上，包管理涉及依赖图的语义版本约束求解和特性组合的完备性验证。
-> 内容已整合至： [02_cargo_workspace_guide.md](../../../06_toolchain/02_cargo_workspace_guide.md)
+> 内容已整合至： [02_cargo_workspace_guide.md](../../../archive/deprecated_20260318/02_cargo_workspace_guide.md)
 
 [返回主索引](../../00_master_index.md) | [返回工具链索引](../README.md)
 
@@ -238,7 +238,7 @@ utils = { path = "crates/utils" }
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
-| Cargo 工作空间指南 | 完整工作空间配置 | [../../../06_toolchain/02_cargo_workspace_guide.md](../../../06_toolchain/02_cargo_workspace_guide.md) |
+| Cargo 工作空间指南 | 完整工作空间配置 | [../../../06_toolchain/02_cargo_workspace_guide.md](../../../archive/deprecated_20260318/02_cargo_workspace_guide.md) |
 | 研究方法论 | 研究方法指南 | [../../../research_notes/research_methodology.md](../../../research_notes/research_methodology.md) |
 | 最佳实践 | 工程最佳实践 | [../../../research_notes/BEST_PRACTICES.md](../../../research_notes/BEST_PRACTICES.md) |
 | 工具指南 | 验证工具使用 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |

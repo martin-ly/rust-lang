@@ -66,15 +66,15 @@
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
-| [practices/best-practices.md](./practices/best-practices.md) | 15 | 最佳实践 |
+| [practices/best-practices.md](../../archive/deprecated_20260318/best-practices.md) | 15 | 最佳实践 |
 
 ### 形式化分析
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
-| [async-comprehensive-analysis.md](../formal-foundations/proofs/async-comprehensive-analysis.md) | 35 | 全面形式化 |
+| [async-comprehensive-analysis.md](../../archive/deprecated_20260318/async-comprehensive-analysis.md) | 35 | 全面形式化 |
 | [async-execution-examples.md](../formal-foundations/proofs/async-execution-examples.md) | 21 | 代码示例 |
-| [async-edge-cases-and-patterns.md](../formal-foundations/proofs/async-edge-cases-and-patterns.md) | 11 | 边界情况 |
+| [async-edge-cases-and-patterns.md](../../archive/deprecated_20260318/async-edge-cases-and-patterns.md) | 11 | 边界情况 |
 | [async-concurrency-comparison.md](../comparative-analysis/async-concurrency-comparison.md) | 17 | 并发对比 |
 
 **总计**: 235+ 页

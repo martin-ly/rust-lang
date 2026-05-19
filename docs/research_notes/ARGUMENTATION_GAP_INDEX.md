@@ -176,7 +176,7 @@
 | :--- | :--- |
 | [00_COMPREHENSIVE_SUMMARY](00_COMPREHENSIVE_SUMMARY.md) | **完整总结综合**：项目全貌、知识地图、论证脉络总览、各文档职责 |
 | [ARGUMENTATION_CHAIN_AND_FLOW](ARGUMENTATION_CHAIN_AND_FLOW.md) | **论证脉络关系**：论证五步法、概念→定理 DAG、文档依赖、论证思路示例 |
-| [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md) | **批判性分析与改进计划**：概念/属性/论证/矩阵/层次化/思维表征缺口、建议、四阶段可持续推进计划 |
+| RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN | **批判性分析与改进计划**：概念/属性/论证/矩阵/层次化/思维表征缺口、建议、四阶段可持续推进计划 |
 | [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) | **层次化映射总结**：文档树、概念族↔文档↔Def/定理、文档↔思维表征、文档依赖 |
 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈、所有权、借用、生命周期、型变、异步等理由与完整论证 |
 | [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳、概念族谱、全局一致性 |

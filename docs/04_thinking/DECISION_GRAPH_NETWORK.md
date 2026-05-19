@@ -939,7 +939,7 @@ graph TD
 ### 分布式与工作流决策树（formal_methods 独立）
 
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) - 分布式架构选型（Saga/CQRS/熔断器）
-- [WORKFLOW_ENGINE_DECISION_TREE](../research_notes/formal_methods/WORKFLOW_ENGINE_DECISION_TREE.md) - 工作流引擎选型（Temporal/自研/状态机）
+- [WORKFLOW_ENGINE_DECISION_TREE](../archive/deprecated_20260318/WORKFLOW_ENGINE_DECISION_TREE.md) - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档
 

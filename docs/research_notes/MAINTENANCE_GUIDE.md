@@ -136,8 +136,8 @@
 - [ ] 优化导航系统
 - [ ] 生成质量报告
 - [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) 与最新文档一致；
-- [ ] 23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 [RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)）
-- [ ] **格式与内容与 1.93 对齐**：按 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md) 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；
+- [ ] 23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN）
+- [ ] **格式与内容与 1.93 对齐**：按 FORMAT_AND_CONTENT_ALIGNMENT_PLAN 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；
 - [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md) 反例索引更新
 
 ### 年度维护 (每年)
@@ -168,13 +168,13 @@
 
 ### 格式统一检查清单（research_notes 专用）
 
-与 [FORMAT_AND_CONTENT_ALIGNMENT_PLAN](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
+与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
 
 - [ ] **元信息**：每篇含 `创建日期`、`最后更新`、`Rust 版本`: 1.93.1+ (Edition 2024)、`状态`
 - [ ] **目录块**：有目录的文档统一使用「## 📊 目录」；同类文档二级标题风格一致
 - [ ] **文末块**：核心研究笔记（formal_methods、type_theory、23 模式、执行模型、实验）文末含「维护者」「最后更新」「状态」；索引类可仅「最后更新」
 - [ ] **季度复核**：每季度抽查格式统一、内容充分性（五维自检）、与 Rust 1.93 对齐（92 项落点、反例索引）；见下方「季度维护」补充项
-- [ ] **TOC 有效性**：≥3 个二级标题的文档须有 `## 📊 目录` 及有效锚点；按 [TOC_AND_CONTENT_DEEPENING_PLAN](../archive/process_reports/2026_02/TOC_AND_CONTENT_DEEPENING_PLAN.md) 季度抽查
+- [ ] **TOC 有效性**：≥3 个二级标题的文档须有 `## 📊 目录` 及有效锚点；按 TOC_AND_CONTENT_DEEPENING_PLAN 季度抽查
 - [ ] **五维自检复核**：23 模式、执行模型 01–05 抽查实质内容五维自检表完整性；1.93 对应、权威对应行有效
 
 ### 链接质量检查

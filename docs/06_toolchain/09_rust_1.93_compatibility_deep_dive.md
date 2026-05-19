@@ -15,7 +15,7 @@
 - **Clippy 误报**：`panicking_unwrap` 在 Deref 链上误报 → 已修复
 - **wasm32-wasip2**：文件描述符泄漏 → 已修复
 
-详见 [12_rust_1.93.1_vs_1.93.0_comparison](./12_rust_1.93.1_vs_1.93.0_comparison.md)。
+详见 [12_rust_1.93.1_vs_1.93.0_comparison](../archive/2026_05_historical_docs/12_rust_1.93.1_vs_1.93.0_comparison.md)。
 
 ---
 
@@ -255,7 +255,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ## 相关文档
 
-- [Rust 1.93 兼容性注意事项](./06_rust_1.93_compatibility_notes.md)
+- [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md)
 - [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
 - [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/)

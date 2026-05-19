@@ -42,7 +42,7 @@
 | Flyweight | 跨线程用 `Arc` 不用 `Rc`；`T` 需 `Sync` |
 | Mediator | 同事持有 `Arc` 时需 `Send` |
 
-详见 [01_safe_23_catalog](../02_workflow_safe_complete_models/01_safe_23_catalog.md) 实现约束。
+详见 [01_safe_23_catalog](../../../archive/deprecated_20260318/01_safe_23_catalog.md) 实现约束。
 
 ---
 

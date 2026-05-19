@@ -80,13 +80,13 @@
 - 概念→公理→定理→推论 DAG、三大支柱论证衔接
 - 文档间论证关系、论证链条索引、论证思路示例
 
-0c. **[RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md](../archive/process_reports/2026_02/RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md)** - 批判性分析与可持续改进计划 🆕
+0c. **RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN.md** - 批判性分析与可持续改进计划 🆕
 
 - 概念定义/属性关系/解释论证/多维矩阵/层次化/思维表征 缺口与批判性意见
 - 建议（P0–P3）：层次化规范、映射总结、多维矩阵、思维表征-文档结合、文档依赖
 - 四阶段可持续推进任务与计划（规范→矩阵→思维表征→依赖与机制）
 
-0c2. **[FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md](../archive/process_reports/2026_02/FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md)** - 格式统一与内容充分性、Rust 1.93 对齐计划 🆕
+0c2. **FORMAT_AND_CONTENT_ALIGNMENT_PLAN.md** - 格式统一与内容充分性、Rust 1.93 对齐计划 🆕
 
 - 格式不统一（元信息、标题、目录、文末块）意见与建议
 - 内容充分性（概念定义-属性关系-解释论证、五维自检、1.93 显式对齐、反例索引）
@@ -238,7 +238,7 @@
    - 完成度分析
    - 下一步计划
 
-2. **[COMPREHENSIVE_REVIEW_REPORT_2026_02.md](../archive/process_reports/2026_02/COMPREHENSIVE_REVIEW_REPORT_2026_02.md)** - research_notes 与 quick_reference 全面检查报告 🆕
+2. **COMPREHENSIVE_REVIEW_REPORT_2026_02.md** - research_notes 与 quick_reference 全面检查报告 🆕
    - 四大检查维度、权威来源对齐
    - 六阶段分步推进方案（100% 完成）
 
