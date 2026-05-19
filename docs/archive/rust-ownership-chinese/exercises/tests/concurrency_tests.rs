@@ -2,7 +2,8 @@
 //!
 //! 测试Rust并发编程中的所有权管理
 
-use std::sync::{Arc, Mutex, RwLock, atomic::{AtomicUsize, Ordering}};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
 // ============================================
@@ -13,7 +14,7 @@ use std::thread;
 fn test_arc_send_sync() {
     let data = Arc::new(vec![1, 2, 3]);
     let mut handles = vec![];
-    
+
     for i in 0..3 {
         let data = Arc::clone(&data);
         let handle = thread::spawn(move || {
@@ -21,7 +22,7 @@ fn test_arc_send_sync() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
@@ -31,7 +32,7 @@ fn test_arc_send_sync() {
 fn test_mutex_thread_safety() {
     let counter = Arc::new(Mutex::new(0usize));
     let mut handles = vec![];
-    
+
     for _ in 0..100 {
         let counter = Arc::clone(&counter);
         let handle = thread::spawn(move || {
@@ -40,11 +41,11 @@ fn test_mutex_thread_safety() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert_eq!(*counter.lock().unwrap(), 100);
 }
 
@@ -52,7 +53,7 @@ fn test_mutex_thread_safety() {
 fn test_rwlock_multiple_readers() {
     let data = Arc::new(RwLock::new(vec![1, 2, 3]));
     let mut handles = vec![];
-    
+
     // 多个读线程
     for _ in 0..5 {
         let data = Arc::clone(&data);
@@ -61,12 +62,12 @@ fn test_rwlock_multiple_readers() {
             assert_eq!(read_guard.len(), 3);
         }));
     }
-    
+
     // 等待读线程完成后再启动写线程，避免死锁
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     // 写线程单独执行
     let data_write = Arc::clone(&data);
     let write_handle = thread::spawn(move || {
@@ -74,7 +75,7 @@ fn test_rwlock_multiple_readers() {
         write_guard.push(4);
     });
     write_handle.join().unwrap();
-    
+
     assert_eq!(data.read().unwrap().len(), 4);
 }
 
@@ -85,19 +86,19 @@ fn test_rwlock_multiple_readers() {
 #[test]
 fn test_scoped_threads() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     thread::scope(|s| {
         s.spawn(|| {
             let sum: i32 = data.iter().sum();
             assert_eq!(sum, 15);
         });
-        
+
         s.spawn(|| {
             let first = data.first().unwrap();
             assert_eq!(*first, 1);
         });
-    });  // 自动等待所有线程完成
-    
+    }); // 自动等待所有线程完成
+
     // data 仍然有效
     assert_eq!(data.len(), 5);
 }
@@ -109,15 +110,15 @@ fn test_scoped_threads() {
 #[test]
 fn test_channel_ownership() {
     use std::sync::mpsc;
-    
+
     let (tx, rx) = mpsc::channel();
-    
+
     thread::spawn(move || {
         let data = String::from("hello from thread");
         tx.send(data).unwrap();
         // data 的所有权已转移，不能再使用
     });
-    
+
     let received = rx.recv().unwrap();
     assert_eq!(received, "hello from thread");
 }
@@ -125,25 +126,25 @@ fn test_channel_ownership() {
 #[test]
 fn test_multiple_producers() {
     use std::sync::mpsc;
-    
+
     let (tx, rx) = mpsc::channel();
     let mut handles = vec![];
-    
+
     for i in 0..5 {
         let tx = tx.clone();
         handles.push(thread::spawn(move || {
             tx.send(i).unwrap();
         }));
     }
-    
+
     // 关闭原始发送端
     drop(tx);
-    
+
     let mut received = vec![];
     for msg in rx {
         received.push(msg);
     }
-    
+
     received.sort();
     assert_eq!(received, vec![0, 1, 2, 3, 4]);
 }
@@ -156,7 +157,7 @@ fn test_multiple_producers() {
 fn test_atomic_counter() {
     let counter = Arc::new(AtomicUsize::new(0));
     let mut handles = vec![];
-    
+
     for _ in 0..10 {
         let counter = Arc::clone(&counter);
         handles.push(thread::spawn(move || {
@@ -165,11 +166,11 @@ fn test_atomic_counter() {
             }
         }));
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     assert_eq!(counter.load(Ordering::Relaxed), 1000);
 }
 
@@ -181,7 +182,7 @@ fn test_atomic_counter() {
 fn test_lock_ordering() {
     let lock1 = Arc::new(Mutex::new(1));
     let lock2 = Arc::new(Mutex::new(2));
-    
+
     let t1 = {
         let (l1, l2) = (Arc::clone(&lock1), Arc::clone(&lock2));
         thread::spawn(move || {
@@ -190,7 +191,7 @@ fn test_lock_ordering() {
             let _b = l2.lock().unwrap();
         })
     };
-    
+
     let t2 = {
         let (l1, l2) = (Arc::clone(&lock1), Arc::clone(&lock2));
         // 相同顺序获取锁，避免死锁
@@ -200,7 +201,7 @@ fn test_lock_ordering() {
             let _b = l2.lock().unwrap();
         })
     };
-    
+
     t1.join().unwrap();
     t2.join().unwrap();
 }
@@ -212,11 +213,11 @@ fn test_lock_ordering() {
 #[test]
 fn test_fine_grained_locks() {
     use std::sync::Mutex;
-    
+
     let data: Vec<Mutex<i32>> = (0..10).map(|_| Mutex::new(0)).collect();
     let data = Arc::new(data);
     let mut handles = vec![];
-    
+
     for i in 0..10 {
         let data = Arc::clone(&data);
         handles.push(thread::spawn(move || {
@@ -224,13 +225,13 @@ fn test_fine_grained_locks() {
             *guard += i as i32;
         }));
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let sum: i32 = data.iter().map(|m| *m.lock().unwrap()).sum();
-    assert_eq!(sum, 45);  // 0+1+2+...+9
+    assert_eq!(sum, 45); // 0+1+2+...+9
 }
 
 // ============================================
@@ -240,24 +241,24 @@ fn test_fine_grained_locks() {
 #[test]
 fn test_thread_local() {
     use std::cell::Cell;
-    
+
     thread_local! {
         static COUNTER: Cell<u32> = Cell::new(0);
     }
-    
+
     COUNTER.with(|c| c.set(1));
-    
+
     let handle = thread::spawn(|| {
         COUNTER.with(|c| {
-            assert_eq!(c.get(), 0);  // 新线程，初始值
+            assert_eq!(c.get(), 0); // 新线程，初始值
             c.set(2);
         });
     });
-    
+
     handle.join().unwrap();
-    
+
     COUNTER.with(|c| {
-        assert_eq!(c.get(), 1);  // 原线程的值不受影响
+        assert_eq!(c.get(), 1); // 原线程的值不受影响
     });
 }
 
@@ -268,10 +269,10 @@ fn test_thread_local() {
 #[test]
 fn test_barrier() {
     use std::sync::Barrier;
-    
+
     let barrier = Arc::new(Barrier::new(5));
     let mut handles = vec![];
-    
+
     for i in 0..5 {
         let b = Arc::clone(&barrier);
         handles.push(thread::spawn(move || {
@@ -280,7 +281,7 @@ fn test_barrier() {
             println!("Thread {} after barrier", i);
         }));
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }

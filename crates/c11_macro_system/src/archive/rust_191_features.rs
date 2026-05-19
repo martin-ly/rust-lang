@@ -465,8 +465,8 @@ pub fn demonstrate_rust_191_macro_features() {
 ///
 /// Rust 1.91 改进了宏展开缓存，减少重复展开的编译时间
 pub mod macro_expansion_cache {
-    use std::collections::HashMap;
     use std::collections::hash_map::DefaultHasher;
+    use std::collections::HashMap;
     use std::hash::{Hash, Hasher};
 
     /// 宏展开结果
@@ -686,10 +686,8 @@ pub mod improved_macro_errors {
                     macro_name,
                 } => {
                     format!(
-                        "宏 `{}` 的参数数量错误\n\
-                         期望: {} 个参数\n\
-                         实际: {} 个参数\n\
-                         提示: 请检查宏调用处的参数数量",
+                        "宏 `{}` 的参数数量错误\n期望: {} 个参数\n实际: {} 个参数\n提示: \
+                         请检查宏调用处的参数数量",
                         macro_name, expected, found
                     )
                 }
@@ -699,10 +697,8 @@ pub mod improved_macro_errors {
                     position,
                 } => {
                     format!(
-                        "宏参数类型错误（位置 {}）\n\
-                         期望类型: {}\n\
-                         实际类型: {}\n\
-                         提示: 请检查参数类型是否匹配",
+                        "宏参数类型错误（位置 {}）\n期望类型: {}\n实际类型: {}\n提示: \
+                         请检查参数类型是否匹配",
                         position, expected_type, found_type
                     )
                 }
@@ -711,10 +707,8 @@ pub mod improved_macro_errors {
                     max_depth,
                 } => {
                     format!(
-                        "宏递归深度超出限制\n\
-                         当前深度: {}\n\
-                         最大深度: {}\n\
-                         提示: 检查宏定义中是否存在无限递归",
+                        "宏递归深度超出限制\n当前深度: {}\n最大深度: {}\n提示: \
+                         检查宏定义中是否存在无限递归",
                         current_depth, max_depth
                     )
                 }
@@ -724,18 +718,14 @@ pub mod improved_macro_errors {
                     input,
                 } => {
                     format!(
-                        "宏 `{}` 的模式匹配失败\n\
-                         期望模式: `{}`\n\
-                         实际输入: `{}`\n\
-                         提示: 请检查输入是否符合宏定义的模式",
+                        "宏 `{}` 的模式匹配失败\n期望模式: `{}`\n实际输入: `{}`\n提示: \
+                         请检查输入是否符合宏定义的模式",
                         macro_name, pattern, input
                     )
                 }
                 MacroError::ExpansionFailed { macro_name, reason } => {
                     format!(
-                        "宏 `{}` 展开失败\n\
-                         原因: {}\n\
-                         提示: 请检查宏定义和输入是否正确",
+                        "宏 `{}` 展开失败\n原因: {}\n提示: 请检查宏定义和输入是否正确",
                         macro_name, reason
                     )
                 }

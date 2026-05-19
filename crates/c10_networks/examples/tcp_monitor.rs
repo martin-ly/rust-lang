@@ -29,6 +29,7 @@ mod run {
 #[cfg(not(feature = "sniff"))]
 fn main() {
     eprintln!(
-        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff --example tcp_monitor -- \"Ethernet\" 5"
+        "This example requires feature 'sniff'.\nTry: cargo run -p c10_networks --features sniff \
+         --example tcp_monitor -- \"Ethernet\" 5"
     );
 }

@@ -1,4 +1,4 @@
-﻿//! RTIC 框架 —— 实时中断驱动并发 (Real-Time Interrupt-driven Concurrency)
+//! RTIC 框架 —— 实时中断驱动并发 (Real-Time Interrupt-driven Concurrency)
 //!
 //! # 概述
 //!
@@ -563,4 +563,3 @@ mod tests {
         assert!(latency.contains("FreeRTOS"));
     }
 }
-

@@ -246,9 +246,9 @@ impl LLMGenerator {
     /// 模拟文本生成
     fn mock_generate(&self, prompt: &str) -> String {
         format!(
-            "{} This is a simulated response from the language model. \
-             In a real implementation, this would use WASI-NN with Ggml backend \
-             to generate text using models like LLaMA, GPT, or other LLMs.",
+            "{} This is a simulated response from the language model. In a real implementation, \
+             this would use WASI-NN with Ggml backend to generate text using models like LLaMA, \
+             GPT, or other LLMs.",
             prompt
         )
     }

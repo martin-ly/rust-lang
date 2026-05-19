@@ -1,4 +1,4 @@
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
     use core::pin::Pin;
@@ -23,10 +23,10 @@ fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
 }
 
 fn bench_async_event_bus(c: &mut Criterion) {
-    use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
     use c09_design_pattern::concurrency::message_passing::define::async_bus::{
         BackpressureStrategy, EventBusString,
     };
+    use c09_design_pattern::concurrency::message_passing::define::StringEventHandler;
 
     let bus = EventBusString::new(StringEventHandler);
     let events: Vec<String> = (0..1_000).map(|i| format!("ev{}", i)).collect();

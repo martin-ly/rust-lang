@@ -1,1 +1,3 @@
-fn main() { let _ = true.to_f32(); }
+fn main() {
+    let _ = true.to_f32();
+}

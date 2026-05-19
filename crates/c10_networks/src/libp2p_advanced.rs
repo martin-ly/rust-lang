@@ -36,8 +36,8 @@
 /// 每个 libp2p 节点由 `PeerId` 唯一标识，它是节点公钥的哈希。
 /// 支持 Ed25519、Secp256k1、RSA 等多种密钥类型。
 pub mod identity {
-    use libp2p::PeerId;
     use libp2p::identity::Keypair;
+    use libp2p::PeerId;
 
     /// 生成新的节点身份
     pub fn generate_identity() -> (Keypair, PeerId) {
@@ -75,7 +75,7 @@ pub mod identity {
 /// - 拨号远程节点
 /// - 运行协议行为（behaviour）
 pub mod swarm_builder {
-    use libp2p::{Swarm, SwarmBuilder, noise, tcp, yamux};
+    use libp2p::{noise, tcp, yamux, Swarm, SwarmBuilder};
     use std::time::Duration;
 
     /// 构建基础 TCP + Noise + Yamux Swarm

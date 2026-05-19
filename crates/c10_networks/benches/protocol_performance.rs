@@ -5,15 +5,13 @@
 //! 协议性能基准测试
 //!
 //! 这个模块包含了 c10_networks 库各种网络协议的性能基准测试
-use c10_networks::{
-    protocol::{
-        http::{HttpMethod, HttpRequest, HttpStatusCode, HttpVersion},
-        tcp::{TcpConnection, TcpConnectionConfig, TcpState},
-        websocket::{WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode},
-    },
-    socket::{TcpConfig, UdpConfig, utils},
+use c10_networks::protocol::http::{HttpMethod, HttpRequest, HttpStatusCode, HttpVersion};
+use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpState};
+use c10_networks::protocol::websocket::{
+    WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode,
 };
-use criterion::{Criterion, criterion_group, criterion_main};
+use c10_networks::socket::{utils, TcpConfig, UdpConfig};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 use std::time::Duration;
 

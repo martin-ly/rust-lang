@@ -10,8 +10,8 @@
 //! cargo run --example atomic_update_demo -p c05_threads
 //! ```
 
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
+use std::sync::Arc;
 use std::thread;
 
 // ==================== 示例 1: AtomicUsize::update ====================
@@ -82,7 +82,11 @@ fn demo_atomic_bool_update() {
 
     // try_update: 仅在当前为 true 时设为 false
     let result = flag.try_update(Ordering::SeqCst, Ordering::SeqCst, |current| {
-        if current { Some(false) } else { None }
+        if current {
+            Some(false)
+        } else {
+            None
+        }
     });
     println!("  尝试清零: {:?}", result);
     assert!(result.is_ok());

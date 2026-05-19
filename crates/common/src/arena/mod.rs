@@ -243,7 +243,8 @@ mod tests {
 
         assert_eq!(arena.get(_root).unwrap().value, "root");
         assert_eq!(
-            arena.get(arena.get(_root).unwrap().children[0])
+            arena
+                .get(arena.get(_root).unwrap().children[0])
                 .unwrap()
                 .value,
             "child1"

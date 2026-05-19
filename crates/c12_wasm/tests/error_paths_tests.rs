@@ -1,7 +1,6 @@
 //! WASM模块错误路径测试套件 / WASM Module Error Paths Test Suite
-use c12_wasm::basic_examples;
-use c12_wasm::error_examples;
 use c12_wasm::rust_191_features::wasm_std_new_apis;
+use c12_wasm::{basic_examples, error_examples};
 
 /// 测试错误输入情况
 #[test]

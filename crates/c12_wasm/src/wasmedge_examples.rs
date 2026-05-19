@@ -216,7 +216,10 @@ pub mod threading_examples {
 
                     let chunk: Vec<i32> = data[start..end].iter().map(|&x| x * 2).collect();
 
-                    results.lock().expect("parallel process results mutex poisoned").extend(chunk);
+                    results
+                        .lock()
+                        .expect("parallel process results mutex poisoned")
+                        .extend(chunk);
                 })
             })
             .collect();
@@ -248,11 +251,13 @@ pub mod threading_examples {
             let workers = (0..size)
                 .map(|_| {
                     let receiver = Arc::clone(&receiver);
-                    thread::spawn(move || {
-                        loop {
-                            let job: Job = receiver.lock().expect("thread pool receiver mutex poisoned").recv().expect("thread pool channel closed");
-                            job();
-                        }
+                    thread::spawn(move || loop {
+                        let job: Job = receiver
+                            .lock()
+                            .expect("thread pool receiver mutex poisoned")
+                            .recv()
+                            .expect("thread pool channel closed");
+                        job();
                     })
                 })
                 .collect();

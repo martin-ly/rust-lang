@@ -131,8 +131,7 @@ pub fn error_handling_example() {
     println!("\n🛡️ 错误处理示例");
 
     fn process_data(data: &str) -> Result<i32, String> {
-        data.parse::<i32>()
-            .map_err(|e| format!("解析错误: {}", e))
+        data.parse::<i32>().map_err(|e| format!("解析错误: {}", e))
     }
 
     match process_data("42") {
@@ -160,22 +159,24 @@ fn main() {
     println!("\n✅ 所有实际应用场景示例完成！");
 }
 
-
 // Rust 1.94 特性示例
 fn rust_194_features_demo() {
     println!("\n🆕 Rust 1.94 特性演示");
-    
+
     // array_windows
     let data = [1, 2, 3, 4, 5];
     for window in data.array_windows::<2>() {
         println!("  Window: {:?}", window);
     }
-    
+
     // ControlFlow
     use std::ops::ControlFlow;
     let result = [1, 2, 3].iter().try_for_each(|&n| {
-        if n > 2 { ControlFlow::Break(n) }
-        else { ControlFlow::Continue(()) }
+        if n > 2 {
+            ControlFlow::Break(n)
+        } else {
+            ControlFlow::Continue(())
+        }
     });
     println!("  ControlFlow: {:?}", result.break_value());
 }

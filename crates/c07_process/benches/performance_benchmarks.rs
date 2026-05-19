@@ -1,5 +1,5 @@
 use c07_process::prelude::*;
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::collections::HashMap;
 use std::hint::black_box;
 use std::time::Duration;

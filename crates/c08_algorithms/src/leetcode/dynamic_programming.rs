@@ -354,14 +354,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Climbing Stairs".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math, LeetCodeTag::DynamicProgramming],
-            description: "假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 个台阶。你有多少种不同的方法可以爬到楼顶呢？".to_string(),
+            description: "假设你正在爬楼梯。需要 n 阶你才能到达楼顶。每次你可以爬 1 或 2 \
+                          个台阶。你有多少种不同的方法可以爬到楼顶呢？"
+                .to_string(),
             examples: vec![
                 "输入：n = 2\n输出：2".to_string(),
                 "输入：n = 3\n输出：3".to_string(),
             ],
-            constraints: vec![
-                "1 <= n <= 45".to_string(),
-            ],
+            constraints: vec!["1 <= n <= 45".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DP 状态转移性能提升".to_string(),
                 "内存优化：使用滚动数组，O(1) 空间复杂度".to_string(),
@@ -378,13 +378,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "House Robber".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::DynamicProgramming],
-            description: "你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。".to_string(),
-            examples: vec![
-                "输入：nums = [1,2,3,1]\n输出：4".to_string(),
-            ],
-            constraints: vec![
-                "1 <= nums.length <= 100".to_string(),
-            ],
+            description: "你是一个专业的小偷，计划偷窃沿街的房屋。每间房内都藏有一定的现金，\
+                          影响你偷窃的唯一制约因素就是相邻的房屋装有相互连通的防盗系统，\
+                          如果两间相邻的房屋在同一晚上被小偷闯入，系统会自动报警。"
+                .to_string(),
+            examples: vec!["输入：nums = [1,2,3,1]\n输出：4".to_string()],
+            constraints: vec!["1 <= nums.length <= 100".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DP 状态转移性能提升".to_string(),
                 "内存优化：使用滚动数组，O(1) 空间复杂度".to_string(),
@@ -392,7 +391,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             complexity: ComplexityInfo {
                 time_complexity: "O(n)".to_string(),
                 space_complexity: "O(1)".to_string(),
-                explanation: Some("滚动数组 DP，状态转移方程：dp[i] = max(dp[i-1], dp[i-2] + nums[i])".to_string()),
+                explanation: Some(
+                    "滚动数组 DP，状态转移方程：dp[i] = max(dp[i-1], dp[i-2] + nums[i])"
+                        .to_string(),
+                ),
             },
         },
         LeetCodeProblem {
@@ -400,14 +402,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "最长递增子序列".to_string(),
             title_en: "Longest Increasing Subsequence".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch, LeetCodeTag::DynamicProgramming],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::BinarySearch,
+                LeetCodeTag::DynamicProgramming,
+            ],
             description: "给你一个整数数组 nums，找到其中最长严格递增子序列的长度。".to_string(),
-            examples: vec![
-                "输入：nums = [10,9,2,5,3,7,101,18]\n输出：4".to_string(),
-            ],
-            constraints: vec![
-                "1 <= nums.length <= 2500".to_string(),
-            ],
+            examples: vec!["输入：nums = [10,9,2,5,3,7,101,18]\n输出：4".to_string()],
+            constraints: vec!["1 <= nums.length <= 2500".to_string()],
             rust_191_features: vec![
                 "JIT 优化：二分查找优化 DP，O(n log n)".to_string(),
                 "内存优化：使用数组存储递增子序列".to_string(),
@@ -423,14 +425,16 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "零钱兑换".to_string(),
             title_en: "Coin Change".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::DynamicProgramming, LeetCodeTag::BreadthFirstSearch],
-            description: "给你一个整数数组 coins，表示不同面额的硬币；以及一个整数 amount，表示总金额。计算并返回可以凑成总金额所需的最少的硬币个数。".to_string(),
-            examples: vec![
-                "输入：coins = [1,2,5], amount = 11\n输出：3".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::DynamicProgramming,
+                LeetCodeTag::BreadthFirstSearch,
             ],
-            constraints: vec![
-                "1 <= coins.length <= 12".to_string(),
-            ],
+            description: "给你一个整数数组 coins，表示不同面额的硬币；以及一个整数 \
+                          amount，表示总金额。计算并返回可以凑成总金额所需的最少的硬币个数。"
+                .to_string(),
+            examples: vec!["输入：coins = [1,2,5], amount = 11\n输出：3".to_string()],
+            constraints: vec!["1 <= coins.length <= 12".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DP 数组操作性能提升".to_string(),
                 "内存优化：使用数组存储 DP 状态".to_string(),

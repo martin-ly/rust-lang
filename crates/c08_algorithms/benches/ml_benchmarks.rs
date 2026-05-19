@@ -2,11 +2,12 @@ use c08_algorithms::machine_learning::clustering::*;
 use c08_algorithms::machine_learning::neural_network::*;
 use c08_algorithms::machine_learning::regression::*;
 use c08_algorithms::machine_learning::*;
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 
 fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Labels) {
-    use rand::{RngExt, rngs::ThreadRng};
+    use rand::rngs::ThreadRng;
+    use rand::RngExt;
     let mut rng = ThreadRng::default();
 
     let mut data = Vec::with_capacity(n_samples);
@@ -32,7 +33,8 @@ fn generate_synthetic_data(n_samples: usize, n_features: usize) -> (Dataset, Lab
 }
 
 fn generate_regression_data(n_samples: usize, n_features: usize) -> (Dataset, Vec<f64>) {
-    use rand::{RngExt, rngs::ThreadRng};
+    use rand::rngs::ThreadRng;
+    use rand::RngExt;
     let mut rng = ThreadRng::default();
 
     let mut data = Vec::with_capacity(n_samples);

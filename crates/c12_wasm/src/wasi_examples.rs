@@ -1,10 +1,9 @@
 //! # WASI 应用示例
 //!
 //! 本模块展示了如何编写可以在本地操作系统上运行的 WASI 应用程序
-use std::env;
-use std::fs;
 use std::io::{self, Read, Write};
 use std::path::Path;
+use std::{env, fs};
 
 /// 文件操作示例
 pub mod file_operations {
@@ -23,8 +22,7 @@ pub mod file_operations {
     /// wasmedge your_app.wasm read_file.txt
     /// ```
     pub fn read_file(path: &str) -> Result<String, String> {
-        fs::read_to_string(path)
-            .map_err(|e| format!("Error reading file {}: {}", path, e))
+        fs::read_to_string(path).map_err(|e| format!("Error reading file {}: {}", path, e))
     }
 
     /// 写入文件内容
@@ -36,8 +34,7 @@ pub mod file_operations {
     /// # 返回值
     /// 成功返回 Ok(())，失败返回错误信息
     pub fn write_file(path: &str, content: &str) -> Result<(), String> {
-        fs::write(path, content)
-            .map_err(|e| format!("Error writing file {}: {}", path, e))
+        fs::write(path, content).map_err(|e| format!("Error writing file {}: {}", path, e))
     }
 
     /// 复制文件
@@ -62,13 +59,15 @@ pub mod file_operations {
     /// # 返回值
     /// 返回目录中所有文件的名称列表
     pub fn list_directory(dir: &str) -> Result<Vec<String>, String> {
-        let entries = fs::read_dir(dir)
-            .map_err(|e| format!("Error reading directory {}: {}", dir, e))?;
+        let entries =
+            fs::read_dir(dir).map_err(|e| format!("Error reading directory {}: {}", dir, e))?;
 
         let mut files = Vec::new();
         for entry in entries {
             let entry = entry.map_err(|e| format!("Error reading entry: {}", e))?;
-            let name = entry.file_name().into_string()
+            let name = entry
+                .file_name()
+                .into_string()
                 .map_err(|_| "Invalid file name".to_string())?;
             files.push(name);
         }

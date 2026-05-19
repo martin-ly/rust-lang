@@ -2,9 +2,9 @@
 //!
 //! 这个程序展示了如何在 c07_process 项目中使用最新的 Rust 1.92.0 特性
 use c07_process::rust_192_features::{
-    ProcessInfo, ProcessQueue, ProcessResourceAllocator, RoundRobinScheduler,
     calculate_process_pool_size, check_process_states, compare_process_lists,
-    demonstrate_rust_192_process_features,
+    demonstrate_rust_192_process_features, ProcessInfo, ProcessQueue, ProcessResourceAllocator,
+    RoundRobinScheduler,
 };
 use std::num::NonZeroUsize;
 

@@ -443,7 +443,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Binary Search".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch],
-            description: "给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 target，写一个函数搜索 nums 中的 target，如果目标值存在返回下标，否则返回 -1。".to_string(),
+            description: "给定一个 n 个元素有序的（升序）整型数组 nums 和一个目标值 \
+                          target，写一个函数搜索 nums 中的 \
+                          target，如果目标值存在返回下标，否则返回 -1。"
+                .to_string(),
             examples: vec![
                 "输入：nums = [-1,0,3,5,9,12], target = 9\n输出：4".to_string(),
                 "输入：nums = [-1,0,3,5,9,12], target = 2\n输出：-1".to_string(),
@@ -469,10 +472,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Search in Rotated Sorted Array".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch],
-            description: "整数数组 nums 按升序排列，数组中的值 互不相同。在传递给函数之前，nums 在预先未知的某个下标 k 上进行了旋转。给你旋转后的数组 nums 和一个整数 target，如果 nums 中存在这个目标值 target，则返回它的下标，否则返回 -1。".to_string(),
-            examples: vec![
-                "输入：nums = [4,5,6,7,0,1,2], target = 0\n输出：4".to_string(),
-            ],
+            description: "整数数组 nums 按升序排列，数组中的值 互不相同。在传递给函数之前，nums \
+                          在预先未知的某个下标 k 上进行了旋转。给你旋转后的数组 nums 和一个整数 \
+                          target，如果 nums 中存在这个目标值 target，则返回它的下标，否则返回 -1。"
+                .to_string(),
+            examples: vec!["输入：nums = [4,5,6,7,0,1,2], target = 0\n输出：4".to_string()],
             constraints: vec![
                 "1 <= nums.length <= 5000".to_string(),
                 "-10^4 <= nums[i] <= 10^4".to_string(),
@@ -494,10 +498,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Find Peak Element".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch],
-            description: "峰值元素是指其值严格大于左右相邻值的元素。给你一个整数数组 nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，返回任何一个峰值所在位置即可。".to_string(),
-            examples: vec![
-                "输入：nums = [1,2,3,1]\n输出：2".to_string(),
-            ],
+            description: "峰值元素是指其值严格大于左右相邻值的元素。给你一个整数数组 \
+                          nums，找到峰值元素并返回其索引。数组可能包含多个峰值，在这种情况下，\
+                          返回任何一个峰值所在位置即可。"
+                .to_string(),
+            examples: vec!["输入：nums = [1,2,3,1]\n输出：2".to_string()],
             constraints: vec![
                 "1 <= nums.length <= 1000".to_string(),
                 "-2^31 <= nums[i] <= 2^31 - 1".to_string(),

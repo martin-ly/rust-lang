@@ -2,12 +2,10 @@
 //!
 //! 本模块展示了Rust中各种性能优化技术的实践案例，
 //! 包括内存优化、并发优化、编译时优化和运行时性能分析。
-use std::alloc::{Layout, alloc, dealloc};
+use std::alloc::{alloc, dealloc, Layout};
 use std::collections::HashMap;
-use std::sync::{
-    Arc, Mutex,
-    atomic::{AtomicUsize, Ordering},
-};
+use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::{Arc, Mutex};
 use std::thread;
 use std::time::{Duration, Instant};
 
@@ -26,7 +24,8 @@ pub struct MemoryPool {
 
 impl MemoryPool {
     pub fn new(block_size: usize, block_count: usize) -> Self {
-        let layout = Layout::from_size_align(block_size * block_count, 8).expect("内存池布局创建失败");
+        let layout =
+            Layout::from_size_align(block_size * block_count, 8).expect("内存池布局创建失败");
         let memory = unsafe { alloc(layout) };
 
         let mut free_blocks = Vec::with_capacity(block_count);
@@ -215,19 +214,21 @@ struct Worker {
 
 impl Worker {
     fn new(id: usize, receiver: Arc<Mutex<std::sync::mpsc::Receiver<Message>>>) -> Worker {
-        let thread = thread::spawn(move || {
-            loop {
-                let message = receiver.lock().expect("线程池接收器锁被污染").recv().expect("线程池接收器已关闭");
+        let thread = thread::spawn(move || loop {
+            let message = receiver
+                .lock()
+                .expect("线程池接收器锁被污染")
+                .recv()
+                .expect("线程池接收器已关闭");
 
-                match message {
-                    Message::NewJob(job) => {
-                        println!("Worker {} got a job; executing.", id);
-                        job();
-                    }
-                    Message::Terminate => {
-                        println!("Worker {} was told to terminate.", id);
-                        break;
-                    }
+            match message {
+                Message::NewJob(job) => {
+                    println!("Worker {} got a job; executing.", id);
+                    job();
+                }
+                Message::Terminate => {
+                    println!("Worker {} was told to terminate.", id);
+                    break;
                 }
             }
         });
@@ -259,14 +260,18 @@ impl ThreadPool {
         F: FnOnce() + Send + 'static,
     {
         let job = Box::new(f);
-        self.sender.send(Message::NewJob(job)).expect("发送新任务消息失败");
+        self.sender
+            .send(Message::NewJob(job))
+            .expect("发送新任务消息失败");
     }
 }
 
 impl Drop for ThreadPool {
     fn drop(&mut self) {
         for _ in &self.workers {
-            self.sender.send(Message::Terminate).expect("发送终止消息失败");
+            self.sender
+                .send(Message::Terminate)
+                .expect("发送终止消息失败");
         }
 
         for worker in &mut self.workers {
@@ -312,7 +317,10 @@ impl ConcurrentOptimizedProcessor {
         // 等待所有任务完成
         thread::sleep(Duration::from_millis(100));
 
-        Arc::try_unwrap(results_arc).expect("解包Arc失败").into_inner().expect("获取互斥锁内容失败")
+        Arc::try_unwrap(results_arc)
+            .expect("解包Arc失败")
+            .into_inner()
+            .expect("获取互斥锁内容失败")
     }
 
     pub fn get_processed_count(&self) -> usize {

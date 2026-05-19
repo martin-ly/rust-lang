@@ -4,10 +4,9 @@ use crate::types::{IpcConfig, IpcProtocol, Message};
 use serde::{Deserialize, Serialize};
 use std::fs::OpenOptions;
 use std::io::{BufRead, BufReader, Write};
-use std::path::Path;
-use std::path::PathBuf;
-use std::sync::Arc;
+use std::path::{Path, PathBuf};
 use std::sync::atomic::AtomicBool;
+use std::sync::Arc;
 
 /// 命名管道实现
 pub struct NamedPipe {

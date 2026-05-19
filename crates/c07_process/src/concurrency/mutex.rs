@@ -125,7 +125,11 @@ impl ProcessMutex {
 
     /// 获取等待者数量（互斥锁总是0或1）
     pub fn waiter_count(&self) -> usize {
-        if self.is_locked() { 1 } else { 0 }
+        if self.is_locked() {
+            1
+        } else {
+            0
+        }
     }
 }
 

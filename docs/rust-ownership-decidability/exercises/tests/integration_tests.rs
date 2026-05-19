@@ -94,7 +94,7 @@ fn test_lifetime_struct() {
 fn test_first_word() {
     let s = "hello world";
     assert_eq!(lifetime_examples::first_word_elided(s), "hello");
-    
+
     let s = "nowords";
     assert_eq!(lifetime_examples::first_word_elided(s), "nowords");
 }
@@ -209,7 +209,7 @@ fn test_complex_ownership_scenario() {
     // Complex scenario involving multiple ownership concepts
     let data = Arc::new(Mutex::new(vec![]));
     let mut handles = vec![];
-    
+
     for i in 0..5 {
         let data = Arc::clone(&data);
         let handle = thread::spawn(move || {
@@ -218,11 +218,11 @@ fn test_complex_ownership_scenario() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let result = data.lock().unwrap();
     assert_eq!(result.len(), 5);
 }
@@ -231,14 +231,14 @@ fn test_complex_ownership_scenario() {
 fn test_lifetime_with_threads() {
     // Using scoped threads to borrow data
     let data = vec![1, 2, 3, 4, 5];
-    
+
     thread::scope(|s| {
         s.spawn(|| {
             let sum: i32 = data.iter().sum();
             assert_eq!(sum, 15);
         });
     });
-    
+
     // Original data still valid
     assert_eq!(data.len(), 5);
 }

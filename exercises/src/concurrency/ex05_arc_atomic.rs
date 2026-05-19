@@ -46,7 +46,11 @@ pub fn create_atomic_counter(initial: usize) -> Arc<AtomicCounter> {
 }
 
 /// 多线程并发递增
-pub fn atomic_concurrent_increment(counter: &Arc<AtomicCounter>, per_thread: usize, threads: usize) {
+pub fn atomic_concurrent_increment(
+    counter: &Arc<AtomicCounter>,
+    per_thread: usize,
+    threads: usize,
+) {
     let mut handles = Vec::new();
 
     for _ in 0..threads {

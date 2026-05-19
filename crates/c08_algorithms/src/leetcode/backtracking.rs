@@ -523,13 +523,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Permutations".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Backtracking],
-            description: "给定一个不含重复数字的数组 nums，返回其所有可能的全排列。你可以按任意顺序返回答案。".to_string(),
+            description: "给定一个不含重复数字的数组 \
+                          nums，返回其所有可能的全排列。你可以按任意顺序返回答案。"
+                .to_string(),
             examples: vec![
-                "输入：nums = [1,2,3]\n输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]".to_string(),
+                "输入：nums = [1,2,3]\n输出：[[1,2,3],[1,3,2],[2,1,3],[2,3,1],[3,1,2],[3,2,1]]"
+                    .to_string(),
             ],
-            constraints: vec![
-                "1 <= nums.length <= 6".to_string(),
-            ],
+            constraints: vec!["1 <= nums.length <= 6".to_string()],
             rust_191_features: vec![
                 "JIT 优化：回溯递归性能提升 10-15%".to_string(),
                 "内存优化：使用 Vec 高效存储路径，减少克隆".to_string(),
@@ -545,14 +546,20 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "子集".to_string(),
             title_en: "Subsets".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::Backtracking, LeetCodeTag::BitManipulation],
-            description: "给你一个整数数组 nums，数组中的元素互不相同。返回该数组所有可能的子集（幂集）。解集不能包含重复的子集。你可以按任意顺序返回解集。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::Backtracking,
+                LeetCodeTag::BitManipulation,
+            ],
+            description: "给你一个整数数组 nums，数组中的元素互不相同。\
+                          返回该数组所有可能的子集（幂集）。解集不能包含重复的子集。\
+                          你可以按任意顺序返回解集。"
+                .to_string(),
             examples: vec![
-                "输入：nums = [1,2,3]\n输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]".to_string(),
+                "输入：nums = [1,2,3]\n输出：[[],[1],[2],[1,2],[3],[1,3],[2,3],[1,2,3]]"
+                    .to_string(),
             ],
-            constraints: vec![
-                "1 <= nums.length <= 10".to_string(),
-            ],
+            constraints: vec!["1 <= nums.length <= 10".to_string()],
             rust_191_features: vec![
                 "JIT 优化：回溯递归性能提升".to_string(),
                 "内存优化：使用 Vec 存储路径".to_string(),
@@ -568,14 +575,19 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "括号生成".to_string(),
             title_en: "Generate Parentheses".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::String, LeetCodeTag::Backtracking, LeetCodeTag::DynamicProgramming],
-            description: "数字 n 代表生成括号的对数，请你设计一个函数，用于能够生成所有可能的并且有效的括号组合。".to_string(),
+            tags: vec![
+                LeetCodeTag::String,
+                LeetCodeTag::Backtracking,
+                LeetCodeTag::DynamicProgramming,
+            ],
+            description: "数字 n 代表生成括号的对数，请你设计一个函数，\
+                          用于能够生成所有可能的并且有效的括号组合。"
+                .to_string(),
             examples: vec![
-                "输入：n = 3\n输出：[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]".to_string(),
+                "输入：n = 3\n输出：[\"((()))\",\"(()())\",\"(())()\",\"()(())\",\"()()()\"]"
+                    .to_string(),
             ],
-            constraints: vec![
-                "1 <= n <= 8".to_string(),
-            ],
+            constraints: vec!["1 <= n <= 8".to_string()],
             rust_191_features: vec![
                 "JIT 优化：回溯递归性能提升".to_string(),
                 "内存优化：使用 String 和 Vec 高效构建".to_string(),
@@ -591,14 +603,19 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "单词搜索".to_string(),
             title_en: "Word Search".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::Backtracking, LeetCodeTag::Matrix],
-            description: "给定一个 m x n 二维字符网格 board 和一个字符串单词 word。如果 word 存在于网格中，返回 true；否则，返回 false。".to_string(),
-            examples: vec![
-                "输入：board = [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"E\",\"E\"]], word = \"ABCCED\"\n输出：true".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::Backtracking,
+                LeetCodeTag::Matrix,
             ],
-            constraints: vec![
-                "m == board.length".to_string(),
-            ],
+            description: "给定一个 m x n 二维字符网格 board 和一个字符串单词 word。如果 word \
+                          存在于网格中，返回 true；否则，返回 false。"
+                .to_string(),
+            examples: vec!["输入：board = \
+                            [[\"A\",\"B\",\"C\",\"E\"],[\"S\",\"F\",\"C\",\"S\"],[\"A\",\"D\",\"\
+                            E\",\"E\"]], word = \"ABCCED\"\n输出：true"
+                .to_string()],
+            constraints: vec!["m == board.length".to_string()],
             rust_191_features: vec![
                 "JIT 优化：回溯递归性能提升".to_string(),
                 "内存优化：原地标记访问过的节点，O(1) 额外空间".to_string(),

@@ -11,19 +11,19 @@ use thiserror::Error;
 pub enum AlgorithmError {
     #[error("invalid input: {0}")]
     InvalidInput(String),
-    
+
     #[error("not implemented: {0}")]
     NotImplemented(String),
-    
+
     #[error("complexity exceeded: {0}")]
     ComplexityExceeded(String),
-    
+
     #[error("numeric overflow: {0}")]
     NumericOverflow(String),
-    
+
     #[error("convergence failed: {0}")]
     ConvergenceFailed(String),
-    
+
     #[error("data structure error: {0}")]
     DataStructure(String),
 }
@@ -33,8 +33,7 @@ impl_into_unified_error!(AlgorithmError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C08 crate's result type
@@ -70,11 +69,10 @@ pub fn data_structure_error<T: Into<String>>(msg: T) -> AlgorithmError {
     AlgorithmError::DataStructure(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
-    use std::assert_matches;
     use super::*;
+    use std::assert_matches;
 
     #[test]
     fn test_error_creation() {

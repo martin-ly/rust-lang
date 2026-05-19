@@ -38,7 +38,9 @@ impl SlidingWindowAlgorithms {
         [(); N]: Sized,
     {
         // Rust 1.94.0: data.array_windows::<N>().map(|[a, b, c, ...]| ...)
-        data.array_windows::<N>().map(|window| window.iter().sum()).collect()
+        data.array_windows::<N>()
+            .map(|window| window.iter().sum())
+            .collect()
     }
 
     /// 寻找和为目标值的子数组（使用窗口）
@@ -132,7 +134,10 @@ impl SlidingWindowAlgorithms {
         let mut change_points = Vec::new();
 
         // 计算一阶差分
-        let first_diff: Vec<f64> = data.array_windows::<2>().map(|[prev, curr]| curr - prev).collect();
+        let first_diff: Vec<f64> = data
+            .array_windows::<2>()
+            .map(|[prev, curr]| curr - prev)
+            .collect();
 
         // 计算二阶差分并检测变化点
         for (i, [prev, curr]) in first_diff.array_windows::<2>().enumerate() {
@@ -837,12 +842,10 @@ pub fn demonstrate_rust_194_algorithm_features() {
 
 /// 获取 Rust 1.94.0 算法特性信息
 pub fn get_rust_194_algorithm_info() -> String {
-    "Rust 1.94.0 算法特性:\n\
-        - array_windows 在滑动窗口算法中的应用\n\
-        - LazyCell 在算法缓存中的应用 (get, get_mut, force_mut)\n\
-        - 数学常量在数值算法中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n\
-        - Peekable 在算法遍历中的应用 (next_if_map, next_if_map_mut)\n\
-        - char 转换在字符串算法中的应用 (`TryFrom<char>` for usize)"
+    "Rust 1.94.0 算法特性:\n- array_windows 在滑动窗口算法中的应用\n- LazyCell 在算法缓存中的应用 \
+     (get, get_mut, force_mut)\n- 数学常量在数值算法中的应用 (EULER_GAMMA, GOLDEN_RATIO)\n- \
+     Peekable 在算法遍历中的应用 (next_if_map, next_if_map_mut)\n- char 转换在字符串算法中的应用 \
+     (`TryFrom<char>` for usize)"
         .to_string()
 }
 
@@ -936,10 +939,10 @@ mod tests {
         assert_eq!(cache.get(1).expect("获取F(1)失败"), 1);
         assert_eq!(cache.get(5).expect("获取F(5)失败"), 5);
         assert_eq!(cache.get(10).expect("获取F(10)失败"), 55);
-        
+
         // 测试缓存命中（第二次调用应该使用缓存）
         assert_eq!(cache.get(10).expect("获取F(10)失败"), 55);
-        
+
         // 验证缓存中有数据
         assert!(cache.cache.contains_key(&10));
     }
@@ -1026,12 +1029,18 @@ mod tests {
     #[test]
     fn test_control_flow_matrix_search() {
         let matrix = vec![vec![1, 2], vec![3, 4]];
-        assert!(matches!(search_in_matrix(&matrix, 3), ControlFlow::Break((1, 0))));
+        assert!(matches!(
+            search_in_matrix(&matrix, 3),
+            ControlFlow::Break((1, 0))
+        ));
     }
 
     #[test]
     fn test_control_flow_validate() {
-        assert!(matches!(validate_data("valid123"), ControlFlow::Continue(())));
+        assert!(matches!(
+            validate_data("valid123"),
+            ControlFlow::Continue(())
+        ));
         assert!(matches!(validate_data(""), ControlFlow::Break(_)));
     }
 
@@ -1045,51 +1054,51 @@ mod tests {
     // ==================== 边界测试和反例测试 ====================
 
     /// 测试大数缓存
-    /// 
+    ///
     /// 验证斐波那契缓存能处理大数值计算而不溢出或 panic
     /// 预期行为：返回计算结果或使用 wrapping 算术
     #[test]
     fn test_fibonacci_cache_large_n() {
         let mut cache = FibonacciCache::new(100);
-        
+
         // 测试较大值的计算（使用 wrapping_add 防止溢出）
         let result_50 = cache.get(50);
         assert!(result_50.is_some(), "F(50) 应该被成功计算");
-        
+
         // 验证缓存是否生效
         let result_50_cached = cache.get(50);
         assert_eq!(result_50, result_50_cached, "缓存应该返回相同结果");
-        
+
         // 测试会导致 u64 溢出的值（u64::MAX 约为 1.8e19，F(94) 会溢出）
         // 使用 wrapping_add，所以不会 panic，但结果是 wrapping 后的值
         let result_100 = cache.get(100);
         assert!(result_100.is_some(), "F(100) 应该被计算（使用 wrapping）");
-        
+
         // 验证缓存中有多个条目
         assert!(!cache.cache.is_empty(), "缓存应该包含计算过的值");
     }
 
     /// 测试溢出处理
-    /// 
+    ///
     /// 验证斐波那契缓存使用 wrapping 算术正确处理溢出
     /// 预期行为：返回 wrapping 后的结果，不 panic
     #[test]
     fn test_fibonacci_overflow() {
         let mut cache = FibonacciCache::new(100);
-        
+
         // F(93) = 12200160415121876738 < u64::MAX
         // F(94) = 19740274219868223167 > u64::MAX (会溢出)
         let f_93 = cache.get(93).expect("获取F(93)失败");
         let f_94 = cache.get(94).expect("获取F(94)失败");
-        
+
         // 验证 F(93) 是正确的
         assert_eq!(f_93, 12200160415121876738u64, "F(93) 应该是正确的值");
-        
+
         // 由于使用 wrapping_add，F(94) 会是 wrapping 后的值
         // 不是真正的 F(94)，但没有溢出 panic
         let expected_wrapped = f_93.wrapping_add(cache.get(92).expect("获取F(92)失败"));
         assert_eq!(f_94, expected_wrapped, "F(94) 应该是 wrapping 后的值");
-        
+
         // 验证没有 panic，程序继续运行
         let f_100 = cache.get(100).expect("获取F(100)失败");
         // f_100 是 u64，自然 >= 0，此处仅验证成功获取到值
@@ -1097,33 +1106,35 @@ mod tests {
     }
 
     /// 测试空模式搜索
-    /// 
+    ///
     /// 验证滑动窗口算法能正确处理空模式
     /// 预期行为：返回空结果或适当处理，不 panic
     #[test]
     fn test_sliding_window_find_patterns_empty() {
         let data = vec![1, 2, 3, 4, 5];
-        
+
         // 测试空模式的查找
         let empty_pattern: Vec<i32> = vec![];
         let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&empty_pattern, &data);
         assert!(occurrences.is_empty(), "空模式应该返回空结果");
-        
+
         // 测试空数据的查找
         let empty_data: Vec<i32> = vec![];
-        let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&vec![1, 2], &empty_data);
+        let occurrences =
+            SlidingWindowAlgorithms::find_pattern_occurrences(&vec![1, 2], &empty_data);
         assert!(occurrences.is_empty(), "空数据应该返回空结果");
-        
+
         // 测试模式比数据长的情况
         let short_data = vec![1, 2];
         let long_pattern = vec![1, 2, 3, 4, 5];
-        let occurrences = SlidingWindowAlgorithms::find_pattern_occurrences(&long_pattern, &short_data);
+        let occurrences =
+            SlidingWindowAlgorithms::find_pattern_occurrences(&long_pattern, &short_data);
         assert!(occurrences.is_empty(), "模式比数据长应该返回空结果");
-        
+
         // 测试空数据的窗口和
         let empty_sums = SlidingWindowAlgorithms::window_sum::<3>(&empty_data);
         assert!(empty_sums.is_empty(), "空数据的窗口和应该返回空结果");
-        
+
         // 测试不足窗口大小的数据
         let small_data = vec![1, 2];
         let sums = SlidingWindowAlgorithms::window_sum::<3>(&small_data);
@@ -1131,41 +1142,44 @@ mod tests {
     }
 
     /// 测试字符串窗口算法边界
-    /// 
+    ///
     /// 验证字符串窗口算法能正确处理边界情况
     /// 预期行为：正确处理空字符串、窗口大小大于字符串等边界情况
     #[test]
     fn test_string_window_algorithms_edge_cases() {
         let empty_string = "";
-        
+
         // 测试空字符串的子串查找
         let substrings = StringWindowAlgorithms::find_distinct_substrings(empty_string, 3);
         assert!(substrings.is_empty(), "空字符串应该返回空子串列表");
-        
+
         // 测试窗口大小大于字符串长度的情况
         let short_string = "ab";
         let substrings = StringWindowAlgorithms::find_distinct_substrings(short_string, 5);
-        assert!(substrings.is_empty(), "窗口大小大于字符串长度应该返回空结果");
-        
+        assert!(
+            substrings.is_empty(),
+            "窗口大小大于字符串长度应该返回空结果"
+        );
+
         // 测试空字符串的回文查找
         let palindromes = StringWindowAlgorithms::find_palindromic_windows(empty_string, 3);
         assert!(palindromes.is_empty(), "空字符串应该返回空回文列表");
-        
+
         // 测试单个字符字符串
         let single_char = "a";
         let substrings = StringWindowAlgorithms::find_distinct_substrings(single_char, 1);
         assert_eq!(substrings.len(), 1, "单字符字符串应该返回一个子串");
         assert!(substrings.contains(&"a".to_string()), "子串应该包含 'a'");
-        
+
         // 测试字符串过渡分析的空字符串情况
         let transitions = StringWindowAlgorithms::analyze_string_transitions(empty_string, 2);
         assert!(transitions.is_empty(), "空字符串应该返回空过渡列表");
-        
+
         // 测试 Unicode 字符串
         let unicode = "你好世界";
         let substrings = StringWindowAlgorithms::find_distinct_substrings(unicode, 2);
         assert_eq!(substrings.len(), 3, "4个字符的字符串应该有3个长度为2的子串");
-        
+
         // 测试所有字符相同的字符串（回文检测）
         let all_same = "aaaa";
         let palindromes = StringWindowAlgorithms::find_palindromic_windows(all_same, 2);

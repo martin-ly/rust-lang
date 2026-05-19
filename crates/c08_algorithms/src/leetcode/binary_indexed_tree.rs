@@ -154,9 +154,21 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "区域和检索 - 数组可修改".to_string(),
             title_en: "Range Sum Query - Mutable".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::Design, LeetCodeTag::BinaryIndexedTree, LeetCodeTag::SegmentTree],
-            description: "给你一个数组 nums ，请你完成两类查询。其中一类查询要求 更新 数组 nums 下标对应的值。另一类查询要求返回数组 nums 中索引 left 和索引 right 之间（ 包含 ）的nums元素的 和 ，其中 left <= right。".to_string(),
-            examples: vec!["输入：[\"NumArray\", \"sumRange\", \"update\", \"sumRange\"]\n[[[1, 3, 5]], [0, 2], [1, 2], [0, 2]]\n输出：[null, 9, null, 8]".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::Design,
+                LeetCodeTag::BinaryIndexedTree,
+                LeetCodeTag::SegmentTree,
+            ],
+            description: "给你一个数组 nums ，请你完成两类查询。其中一类查询要求 更新 数组 nums \
+                          下标对应的值。另一类查询要求返回数组 nums 中索引 left 和索引 right \
+                          之间（ 包含 ）的nums元素的 和 ，其中 left <= right。"
+                .to_string(),
+            examples: vec![
+                "输入：[\"NumArray\", \"sumRange\", \"update\", \"sumRange\"]\n[[[1, 3, 5]], [0, \
+                 2], [1, 2], [0, 2]]\n输出：[null, 9, null, 8]"
+                    .to_string(),
+            ],
             constraints: vec!["1 <= nums.length <= 3 * 10^4".to_string()],
             rust_191_features: vec!["使用树状数组或线段树，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -170,8 +182,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "计算右侧小于当前元素的个数".to_string(),
             title_en: "Count of Smaller Numbers After Self".to_string(),
             difficulty: "Hard".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch, LeetCodeTag::BinaryIndexedTree, LeetCodeTag::SegmentTree],
-            description: "给你一个整数数组 nums ，按要求返回一个新数组 counts 。数组 counts 有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::BinarySearch,
+                LeetCodeTag::BinaryIndexedTree,
+                LeetCodeTag::SegmentTree,
+            ],
+            description: "给你一个整数数组 nums ，按要求返回一个新数组 counts 。数组 counts \
+                          有该性质： counts[i] 的值是  nums[i] 右侧小于 nums[i] 的元素的数量。"
+                .to_string(),
             examples: vec!["输入：nums = [5,2,6,1]\n输出：[2,1,1,0]".to_string()],
             constraints: vec!["1 <= nums.length <= 10^5".to_string()],
             rust_191_features: vec!["使用树状数组或归并排序，Rust 1.92 性能优化".to_string()],
@@ -186,8 +205,17 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "区间和的个数".to_string(),
             title_en: "Count of Range Sum".to_string(),
             difficulty: "Hard".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch, LeetCodeTag::BinaryIndexedTree, LeetCodeTag::SegmentTree],
-            description: "给你一个整数数组 nums 以及两个整数 lower 和 upper 。求数组中，值位于范围 [lower, upper] （包含 lower 和 upper）之内的 区间和的个数 。区间和 S(i, j) 表示在 nums 中，位置从 i 到 j 的元素之和，包含 i 和 j (i ≤ j)。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::BinarySearch,
+                LeetCodeTag::BinaryIndexedTree,
+                LeetCodeTag::SegmentTree,
+            ],
+            description: "给你一个整数数组 nums 以及两个整数 lower 和 upper \
+                          。求数组中，值位于范围 [lower, upper] （包含 lower 和 upper）之内的 \
+                          区间和的个数 。区间和 S(i, j) 表示在 nums 中，位置从 i 到 j \
+                          的元素之和，包含 i 和 j (i ≤ j)。"
+                .to_string(),
             examples: vec!["输入：nums = [-2,5,-1], lower = -2, upper = 2\n输出：3".to_string()],
             constraints: vec!["1 <= nums.length <= 10^5".to_string()],
             rust_191_features: vec!["使用树状数组或归并排序，Rust 1.92 性能优化".to_string()],

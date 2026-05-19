@@ -275,8 +275,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Rotate Image".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Math, LeetCodeTag::Matrix],
-            description: "给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 度。你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。请不要 使用另一个矩阵来旋转图像。".to_string(),
-            examples: vec!["输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]\n输出：[[7,4,1],[8,5,2],[9,6,3]]".to_string()],
+            description: "给定一个 n × n 的二维矩阵 matrix 表示一个图像。请你将图像顺时针旋转 90 \
+                          度。你必须在 原地 旋转图像，这意味着你需要直接修改输入的二维矩阵。\
+                          请不要 使用另一个矩阵来旋转图像。"
+                .to_string(),
+            examples: vec!["输入：matrix = \
+                            [[1,2,3],[4,5,6],[7,8,9]]\n输出：[[7,4,1],[8,5,2],[9,6,3]]"
+                .to_string()],
             constraints: vec!["n == matrix.length == matrix[i].length".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的 rotate_right API".to_string()],
             complexity: ComplexityInfo {
@@ -291,8 +296,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Spiral Matrix".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Matrix],
-            description: "给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 ，返回矩阵中的所有元素。".to_string(),
-            examples: vec!["输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]\n输出：[1,2,3,6,9,8,7,4,5]".to_string()],
+            description: "给你一个 m 行 n 列的矩阵 matrix ，请按照 顺时针螺旋顺序 \
+                          ，返回矩阵中的所有元素。"
+                .to_string(),
+            examples: vec![
+                "输入：matrix = [[1,2,3],[4,5,6],[7,8,9]]\n输出：[1,2,3,6,9,8,7,4,5]".to_string(),
+            ],
             constraints: vec!["m == matrix.length".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的迭代器优化".to_string()],
             complexity: ComplexityInfo {
@@ -306,9 +315,17 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "矩阵置零".to_string(),
             title_en: "Set Matrix Zeroes".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::HashTable, LeetCodeTag::Matrix],
-            description: "给定一个 m x n 的矩阵，如果一个元素为 0 ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。".to_string(),
-            examples: vec!["输入：matrix = [[1,1,1],[1,0,1],[1,1,1]]\n输出：[[1,0,1],[0,0,0],[1,0,1]]".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::HashTable,
+                LeetCodeTag::Matrix,
+            ],
+            description: "给定一个 m x n 的矩阵，如果一个元素为 0 \
+                          ，则将其所在行和列的所有元素都设为 0 。请使用 原地 算法。"
+                .to_string(),
+            examples: vec!["输入：matrix = \
+                            [[1,1,1],[1,0,1],[1,1,1]]\n输出：[[1,0,1],[0,0,0],[1,0,1]]"
+                .to_string()],
             constraints: vec!["m == matrix.length".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -322,9 +339,21 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "岛屿数量".to_string(),
             title_en: "Number of Islands".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Matrix],
-            description: "给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。".to_string(),
-            examples: vec!["输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Matrix,
+            ],
+            description: "给你一个由 '1'（陆地）和 \
+                          '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。"
+                .to_string(),
+            examples: vec![
+                "输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"\
+                 1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1"
+                    .to_string(),
+            ],
             constraints: vec!["m == grid.length".to_string()],
             rust_191_features: vec!["使用 DFS/BFS，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -338,9 +367,20 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "搜索二维矩阵 II".to_string(),
             title_en: "Search a 2D Matrix II".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::BinarySearch, LeetCodeTag::Matrix],
-            description: "编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target 。该矩阵具有以下特性：每行的元素从左到右升序排列。每列的元素从上到下升序排列。".to_string(),
-            examples: vec!["输入：matrix = [[1,4,7,11],[2,5,8,12],[3,6,9,16],[10,13,14,17]], target = 5\n输出：true".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::BinarySearch,
+                LeetCodeTag::Matrix,
+            ],
+            description: "编写一个高效的算法来搜索 m x n 矩阵 matrix 中的一个目标值 target \
+                          。该矩阵具有以下特性：每行的元素从左到右升序排列。\
+                          每列的元素从上到下升序排列。"
+                .to_string(),
+            examples: vec![
+                "输入：matrix = [[1,4,7,11],[2,5,8,12],[3,6,9,16],[10,13,14,17]], target = \
+                 5\n输出：true"
+                    .to_string(),
+            ],
             constraints: vec!["m == matrix.length".to_string()],
             rust_191_features: vec!["使用二分查找，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {

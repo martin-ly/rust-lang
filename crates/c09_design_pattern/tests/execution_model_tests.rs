@@ -1,4 +1,4 @@
-use c09_design_pattern::{ExecutionModel, get_patterns_by_execution_model};
+use c09_design_pattern::{get_patterns_by_execution_model, ExecutionModel};
 
 #[test]
 fn execution_model_sync_has_items() {

@@ -200,8 +200,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Binary Tree Level Order Traversal".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Tree, LeetCodeTag::BreadthFirstSearch],
-            description: "给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 （即逐层地，从左到右访问所有节点）。".to_string(),
-            examples: vec!["输入：root = [3,9,20,null,null,15,7]\n输出：[[3],[9,20],[15,7]]".to_string()],
+            description: "给你二叉树的根节点 root ，返回其节点值的 层序遍历 。 \
+                          （即逐层地，从左到右访问所有节点）。"
+                .to_string(),
+            examples: vec![
+                "输入：root = [3,9,20,null,null,15,7]\n输出：[[3],[9,20],[15,7]]".to_string(),
+            ],
             constraints: vec!["树中节点的数量在 [0, 2000] 范围内".to_string()],
             rust_191_features: vec!["使用 BFS，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -215,7 +219,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "二叉树的最大深度".to_string(),
             title_en: "Maximum Depth of Binary Tree".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch],
+            tags: vec![
+                LeetCodeTag::Tree,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+            ],
             description: "给定一个二叉树，找出其最大深度。".to_string(),
             examples: vec!["输入：root = [3,9,20,null,null,15,7]\n输出：3".to_string()],
             constraints: vec!["树中节点的数量在 [0, 10^4] 范围内".to_string()],
@@ -231,8 +239,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "二叉树的最小深度".to_string(),
             title_en: "Minimum Depth of Binary Tree".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch],
-            description: "给定一个二叉树，找出其最小深度。最小深度是从根节点到最近叶子节点的最短路径上的节点数量。".to_string(),
+            tags: vec![
+                LeetCodeTag::Tree,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+            ],
+            description: "给定一个二叉树，找出其最小深度。\
+                          最小深度是从根节点到最近叶子节点的最短路径上的节点数量。"
+                .to_string(),
             examples: vec!["输入：root = [3,9,20,null,null,15,7]\n输出：2".to_string()],
             constraints: vec!["树中节点的数量在 [0, 10^5] 范围内".to_string()],
             rust_191_features: vec!["使用 BFS，Rust 1.92 性能优化".to_string()],
@@ -247,9 +261,21 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "岛屿数量".to_string(),
             title_en: "Number of Islands".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Matrix],
-            description: "给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。".to_string(),
-            examples: vec!["输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Matrix,
+            ],
+            description: "给你一个由 '1'（陆地）和 \
+                          '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。"
+                .to_string(),
+            examples: vec![
+                "输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"\
+                 1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1"
+                    .to_string(),
+            ],
             constraints: vec!["m == grid.length".to_string()],
             rust_191_features: vec!["使用 BFS，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -263,9 +289,17 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "单词接龙".to_string(),
             title_en: "Word Ladder".to_string(),
             difficulty: "Hard".to_string(),
-            tags: vec![LeetCodeTag::HashTable, LeetCodeTag::String, LeetCodeTag::BreadthFirstSearch],
-            description: "字典 wordList 中从单词 beginWord 和 endWord 的 转换序列 是一个按下述规格形成的序列 beginWord -> s1 -> s2 -> ... -> sk：".to_string(),
-            examples: vec!["输入：beginWord = \"hit\", endWord = \"cog\", wordList = [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\n输出：5".to_string()],
+            tags: vec![
+                LeetCodeTag::HashTable,
+                LeetCodeTag::String,
+                LeetCodeTag::BreadthFirstSearch,
+            ],
+            description: "字典 wordList 中从单词 beginWord 和 endWord 的 转换序列 \
+                          是一个按下述规格形成的序列 beginWord -> s1 -> s2 -> ... -> sk："
+                .to_string(),
+            examples: vec!["输入：beginWord = \"hit\", endWord = \"cog\", wordList = \
+                            [\"hot\",\"dot\",\"dog\",\"lot\",\"log\",\"cog\"]\n输出：5"
+                .to_string()],
             constraints: vec!["1 <= beginWord.length <= 10".to_string()],
             rust_191_features: vec!["使用 BFS，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {

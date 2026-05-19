@@ -12,19 +12,19 @@ pub enum MacroError {
     /// 解析错误
     #[error("parse error: {0}")]
     ParseError(String),
-    
+
     /// 扩展错误
     #[error("expansion error: {0}")]
     ExpansionError(String),
-    
+
     /// 过程宏错误
     #[error("proc macro error: {0}")]
     ProcMacro(String),
-    
+
     /// 声明宏错误
     #[error("decl macro error: {0}")]
     DeclMacro(String),
-    
+
     /// 卫生性错误
     #[error("hygiene error: {0}")]
     Hygiene(String),
@@ -35,8 +35,7 @@ impl_into_unified_error!(MacroError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C11 crate's result type
@@ -66,7 +65,6 @@ pub fn decl_macro_error<T: Into<String>>(msg: T) -> MacroError {
 pub fn hygiene_error<T: Into<String>>(msg: T) -> MacroError {
     MacroError::Hygiene(msg.into())
 }
-
 
 #[cfg(test)]
 mod tests {

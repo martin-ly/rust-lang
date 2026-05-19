@@ -1,14 +1,14 @@
 //! ARP packet capture using pnet
-//! 
+//!
 //! This module requires the `sniff` and `pcap` features to be enabled.
 
 #![cfg(all(feature = "sniff", feature = "pcap"))]
 
 use crate::error::{NetworkError, NetworkResult};
 use pnet_datalink::{self as datalink, Channel, Config, NetworkInterface};
-use pnet_packet::Packet;
 use pnet_packet::arp::{ArpHardwareTypes, ArpOperations, ArpPacket};
 use pnet_packet::ethernet::{EtherTypes, EthernetPacket};
+use pnet_packet::Packet;
 use std::net::IpAddr;
 use std::time::SystemTime;
 

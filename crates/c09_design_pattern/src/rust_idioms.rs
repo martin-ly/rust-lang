@@ -10,8 +10,8 @@ use std::cell::{Cell, RefCell};
 use std::fmt;
 use std::ops::Deref;
 use std::path::PathBuf;
-use std::sync::Mutex;
 use std::sync::atomic::{AtomicUsize, Ordering};
+use std::sync::Mutex;
 
 // ============================================================================
 // 1. Typestate 模式 —— 将状态机编码进类型系统

@@ -72,9 +72,13 @@ pub mod fallback {
         assert_eq!(a.len(), result.len());
 
         if cfg!(all(target_arch = "x86_64", target_feature = "avx2")) {
-            unsafe { avx2_array_add(a, b, result); }
+            unsafe {
+                avx2_array_add(a, b, result);
+            }
         } else if cfg!(all(target_arch = "x86_64", target_feature = "sse2")) {
-            unsafe { sse2_array_add(a, b, result); }
+            unsafe {
+                sse2_array_add(a, b, result);
+            }
         } else {
             // 纯标量回退
             for i in 0..a.len() {

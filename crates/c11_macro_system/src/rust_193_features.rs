@@ -5,9 +5,7 @@ use std::fmt;
 
 /// 使用 `fmt::from_fn` 创建宏展开追踪格式化器
 pub fn macro_trace_formatter(name: &str, line: u32) -> impl fmt::Display + use<'_> {
-    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| {
-        write!(f, "[macro:{}@L{}]", name, line)
-    })
+    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "[macro:{}@L{}]", name, line))
 }
 
 /// 使用 `fmt::from_fn` 构建条件格式化输出
@@ -25,9 +23,7 @@ pub fn conditional_formatter(show_debug: bool, value: i32) -> impl fmt::Display 
 pub fn structured_log_formatter(level: &str, msg: &str) -> impl fmt::Display {
     let level = level.to_string();
     let msg = msg.to_string();
-    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| {
-        write!(f, "[{}] {}", level.to_uppercase(), msg)
-    })
+    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "[{}] {}", level.to_uppercase(), msg))
 }
 
 #[cfg(test)]

@@ -22,10 +22,7 @@ impl HigherOrderFunctions {
     }
 
     /// 函数组合: (f ∘ g)(x) = f(g(x))
-    pub fn compose<A, B, C>(
-        f: impl Fn(B) -> C,
-        g: impl Fn(A) -> B,
-    ) -> impl Fn(A) -> C {
+    pub fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B) -> impl Fn(A) -> C {
         move |x| f(g(x))
     }
 
@@ -108,9 +105,7 @@ pub struct Combinators;
 impl Combinators {
     /// 链式 Option 处理
     pub fn chain_options(x: Option<i32>) -> Option<i32> {
-        x.map(|n| n * 2)
-            .filter(|&n| n > 10)
-            .or(Some(0))
+        x.map(|n| n * 2).filter(|&n| n > 10).or(Some(0))
     }
 
     /// Result 转换与收集
@@ -136,11 +131,7 @@ mod tests {
     #[test]
     fn test_map_reduce() {
         let numbers = vec![1, 2, 3, 4, 5];
-        let sum = HigherOrderFunctions::map_reduce(
-            &numbers,
-            |&x| x,
-            |a, b| a + b,
-        );
+        let sum = HigherOrderFunctions::map_reduce(&numbers, |&x| x, |a, b| a + b);
         assert_eq!(sum, Some(15));
     }
 
@@ -197,10 +188,7 @@ mod tests {
     #[test]
     fn test_parse_numbers() {
         let strings = vec!["1", "2", "3"];
-        assert_eq!(
-            Combinators::parse_numbers(&strings),
-            Ok(vec![1, 2, 3])
-        );
+        assert_eq!(Combinators::parse_numbers(&strings), Ok(vec![1, 2, 3]));
 
         let bad = vec!["1", "not_a_number", "3"];
         assert!(Combinators::parse_numbers(&bad).is_err());
@@ -212,9 +200,6 @@ mod tests {
             Combinators::validate_and_compute(Some(3), Some(4)),
             Some(12)
         );
-        assert_eq!(
-            Combinators::validate_and_compute(None, Some(4)),
-            None
-        );
+        assert_eq!(Combinators::validate_and_compute(None, Some(4)), None);
     }
 }

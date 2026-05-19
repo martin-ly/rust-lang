@@ -2,7 +2,7 @@
 //!
 //! Rust与外部代码的安全交互
 
-use std::ffi::{CString, CStr, c_char, c_int};
+use std::ffi::{c_char, c_int, CStr, CString};
 use std::os::raw::c_void;
 
 // ============================================
@@ -15,7 +15,7 @@ pub fn rust_to_c_string(s: String) -> Result<CString, String> {
 }
 
 /// C字符串 -> Rust &str
-/// 
+///
 /// # Safety
 /// ptr必须指向有效的C字符串
 pub unsafe fn c_to_rust_str(ptr: *const c_char) -> Option<&'static str> {
@@ -48,7 +48,7 @@ impl SafeContext {
             Some(Self { raw })
         }
     }
-    
+
     pub fn as_ptr(&self) -> *mut ExternalHandle {
         self.raw
     }
@@ -78,13 +78,13 @@ impl Drop for SafeContext {
 // ============================================
 
 /// 将Rust闭包传递给C的trampoline
-/// 
+///
 /// # Safety
 /// user_data必须是有效的Box<FnMut>指针
-pub unsafe extern "C" fn rust_callback_trampoline<F>(
-    user_data: *mut c_void,
-    value: c_int,
-) where F: FnMut(c_int) {
+pub unsafe extern "C" fn rust_callback_trampoline<F>(user_data: *mut c_void, value: c_int)
+where
+    F: FnMut(c_int),
+{
     let closure: &mut F = &mut *(user_data as *mut F);
     closure(value);
 }
@@ -156,7 +156,7 @@ pub fn check_result(code: c_int) -> Result<(), FfiError> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_c_string_roundtrip() {
         let original = "Hello, FFI!".to_string();
@@ -164,7 +164,7 @@ mod tests {
         let roundtrip = unsafe { c_to_rust_str(c_str.as_ptr()) }.unwrap();
         assert_eq!(original, roundtrip);
     }
-    
+
     #[test]
     fn test_error_codes() {
         assert!(check_result(0).is_ok());

@@ -25,15 +25,20 @@ pub fn thread_safe_buffer_init() -> [i32; 4] {
     }
 
     // SAFETY: 每个线程都已经写入对应的 slot
-    unsafe { [buf[0].assume_init_read(), buf[1].assume_init_read(), buf[2].assume_init_read(), buf[3].assume_init_read()] }
+    unsafe {
+        [
+            buf[0].assume_init_read(),
+            buf[1].assume_init_read(),
+            buf[2].assume_init_read(),
+            buf[3].assume_init_read(),
+        ]
+    }
 }
 
 /// 使用 `String::into_raw_parts` 跨线程传递所有权（通过重建）
 pub fn string_cross_thread(s: String) -> String {
     let (ptr, len, cap) = s.into_raw_parts();
     let ptr = ptr as usize;
-
-    
 
     thread::spawn(move || {
         // SAFETY: ptr 来自合法 String，且在同一进程内传递

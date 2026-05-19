@@ -12,7 +12,7 @@ macro_rules! getter_setter {
                 pub fn $field(&self) -> &$type {
                     &self.$field
                 }
-                
+
                 pub fn [<set_ $field>](&mut self, value: $type) {
                     self.$field = value;
                 }
@@ -30,7 +30,7 @@ macro_rules! builder {
                 $field: Option<$type>,
             )*
         }
-        
+
         impl $name {
             pub fn new() -> Self {
                 Self {
@@ -39,14 +39,14 @@ macro_rules! builder {
                     )*
                 }
             }
-            
+
             $(
                 pub fn $field(mut self, value: $type) -> Self {
                     self.$field = Some(value);
                     self
                 }
             )*
-            
+
             pub fn build(self) -> Result<$name, &'static str> {
                 Ok($name {
                     $(
@@ -74,7 +74,7 @@ macro_rules! define_error {
                 $variant,
             )*
         }
-        
+
         impl std::fmt::Display for $name {
             fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
                 match self {
@@ -84,7 +84,7 @@ macro_rules! define_error {
                 }
             }
         }
-        
+
         impl std::error::Error for $name {}
     };
 }
@@ -95,27 +95,27 @@ macro_rules! newtype {
     ($name:ident, $type:ty) => {
         #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
         pub struct $name($type);
-        
+
         impl $name {
             pub fn new(value: $type) -> Self {
                 Self(value)
             }
-            
+
             pub fn get(&self) -> &$type {
                 &self.0
             }
-            
+
             pub fn into_inner(self) -> $type {
                 self.0
             }
         }
-        
+
         impl From<$type> for $name {
             fn from(value: $type) -> Self {
                 Self(value)
             }
         }
-        
+
         impl From<$name> for $type {
             fn from(value: $name) -> $type {
                 value.0
@@ -159,24 +159,24 @@ macro_rules! test_suite {
 mod tests {
     // 测试newtype宏
     newtype!(UserId, u64);
-    
+
     #[test]
     fn test_newtype() {
         let id = UserId::new(42);
         assert_eq!(*id.get(), 42);
     }
-    
+
     // 测试define_error宏
     define_error!(MyError {
         NotFound => "Resource not found",
         Timeout => "Operation timed out",
     });
-    
+
     #[test]
     fn test_error_macro() {
         let err = MyError::NotFound;
         assert_eq!(err.to_string(), "Resource not found");
-        
+
         // 使用 Timeout 变体来避免 dead_code 警告
         let timeout = MyError::Timeout;
         assert_eq!(timeout.to_string(), "Operation timed out");

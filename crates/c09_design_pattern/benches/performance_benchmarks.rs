@@ -10,7 +10,7 @@ use c09_design_pattern::structural::proxy::define::{Proxy, RealSubject, Subject,
 ///
 /// 使用Criterion框架进行设计模式的性能基准测试
 /// 测试各种模式在不同场景下的性能表现
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 use std::sync::Arc;
 

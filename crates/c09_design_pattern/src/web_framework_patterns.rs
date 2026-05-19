@@ -314,7 +314,10 @@ mod tests {
         // 获取用户
         let retrieved_user = controller.get_user(user.id);
         assert!(retrieved_user.is_some());
-        assert_eq!(retrieved_user.expect("获取用户失败").email, "test@example.com");
+        assert_eq!(
+            retrieved_user.expect("获取用户失败").email,
+            "test@example.com"
+        );
 
         // 测试视图
         let html_view = HtmlView;

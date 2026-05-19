@@ -1,8 +1,8 @@
 use crate::error::{IpcError, IpcResult};
 use crate::inter_process_communication::IpcChannel;
 use crate::types::{IpcConfig, Message};
-use std::sync::Arc;
 use std::sync::atomic::AtomicBool;
+use std::sync::Arc;
 
 /// Unix域套接字实现（简化版本）
 pub struct UnixSocket {

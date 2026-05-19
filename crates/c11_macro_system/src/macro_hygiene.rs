@@ -52,12 +52,12 @@ macro_rules! make_wrapper {
         pub struct $name<'a, T: 'a> {
             inner: &'a T,
         }
-        
+
         impl<'a, T> $name<'a, T> {
             pub fn new(inner: &'a T) -> Self {
                 Self { inner }
             }
-            
+
             pub fn get(&self) -> &'a T {
                 self.inner
             }
@@ -73,17 +73,17 @@ mod hygiene_tests {
     fn test_variable_hygiene() {
         hygienic_let!(x = 42);
         assert_eq!(x, 42);
-        
+
         // 再次使用相同的宏不会冲突
         hygienic_let!(x = 100);
         assert_eq!(x, 100);
     }
-    
+
     /// 测试生命周期卫生
     #[test]
     fn test_lifetime_hygiene() {
         make_wrapper!(MyWrapper);
-        
+
         let value = 42;
         let wrapper = MyWrapper::new(&value);
         assert_eq!(*wrapper.get(), 42);
@@ -94,13 +94,13 @@ mod hygiene_tests {
 pub mod best_practices {
     /// 1. 始终使用$crate引用当前crate的项
     pub fn use_crate_path() {}
-    
+
     /// 2. 避免在宏中创建可能冲突的变量名
     pub fn avoid_common_names() {}
-    
+
     /// 3. 使用局部作用域限制变量生命周期
     pub fn use_local_scope() {}
-    
+
     /// 4. 文档化宏创建的所有标识符
     pub fn document_identifiers() {}
 }

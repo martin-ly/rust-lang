@@ -261,8 +261,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "最长连续序列".to_string(),
             title_en: "Longest Consecutive Sequence".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::HashTable, LeetCodeTag::UnionFind],
-            description: "给定一个未排序的整数数组 nums ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::HashTable,
+                LeetCodeTag::UnionFind,
+            ],
+            description: "给定一个未排序的整数数组 nums \
+                          ，找出数字连续的最长序列（不要求序列元素在原数组中连续）的长度。"
+                .to_string(),
             examples: vec!["输入：nums = [100,4,200,1,3,2]\n输出：4".to_string()],
             constraints: vec!["0 <= nums.length <= 10^5".to_string()],
             rust_191_features: vec!["使用并查集或哈希表，Rust 1.92 性能优化".to_string()],
@@ -277,9 +283,21 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "岛屿数量".to_string(),
             title_en: "Number of Islands".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Matrix],
-            description: "给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。".to_string(),
-            examples: vec!["输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Matrix,
+            ],
+            description: "给你一个由 '1'（陆地）和 \
+                          '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。"
+                .to_string(),
+            examples: vec![
+                "输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"\
+                 1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1"
+                    .to_string(),
+            ],
             constraints: vec!["m == grid.length".to_string()],
             rust_191_features: vec!["使用并查集，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -293,8 +311,19 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "省份数量".to_string(),
             title_en: "Number of Provinces".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Graph],
-            description: "有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i 个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 表示二者不直接相连。返回矩阵中 省份 的数量。".to_string(),
+            tags: vec![
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Graph,
+            ],
+            description: "有 n 个城市，其中一些彼此相连，另一些没有相连。如果城市 a 与城市 b \
+                          直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c \
+                          间接相连。省份 是一组直接或间接相连的城市，组内不含其他没有相连的城市。\
+                          给你一个 n x n 的矩阵 isConnected ，其中 isConnected[i][j] = 1 表示第 i \
+                          个城市和第 j 个城市直接相连，而 isConnected[i][j] = 0 \
+                          表示二者不直接相连。返回矩阵中 省份 的数量。"
+                .to_string(),
             examples: vec!["输入：isConnected = [[1,1,0],[1,1,0],[0,0,1]]\n输出：2".to_string()],
             constraints: vec!["1 <= n <= 200".to_string()],
             rust_191_features: vec!["使用并查集，Rust 1.92 性能优化".to_string()],
@@ -309,8 +338,19 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "冗余连接".to_string(),
             title_en: "Redundant Connection".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Graph],
-            description: "树可以看成是一个连通且 无环 的 无向 图。给定往一棵 n 个节点 (节点值 1～n) 的树中添加一条边后的图。添加的边的两个顶点包含在 1 到 n 中间，且这条附加的边不属于树中已存在的边。图的信息记录于长度为 n 的二维数组 edges ，edges[i] = [ai, bi] 表示图中在 ai 和 bi 之间存在一条边。请找出一条可以删去的边，删除后可使得剩余部分是一个有着 n 个节点的树。如果有多个答案，则返回数组 edges 中最后出现的边。".to_string(),
+            tags: vec![
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Graph,
+            ],
+            description: "树可以看成是一个连通且 无环 的 无向 图。给定往一棵 n 个节点 (节点值 \
+                          1～n) 的树中添加一条边后的图。添加的边的两个顶点包含在 1 到 n \
+                          中间，且这条附加的边不属于树中已存在的边。图的信息记录于长度为 n \
+                          的二维数组 edges ，edges[i] = [ai, bi] 表示图中在 ai 和 bi \
+                          之间存在一条边。请找出一条可以删去的边，删除后可使得剩余部分是一个有着 \
+                          n 个节点的树。如果有多个答案，则返回数组 edges 中最后出现的边。"
+                .to_string(),
             examples: vec!["输入：edges = [[1,2],[1,3],[2,3]]\n输出：[2,3]".to_string()],
             constraints: vec!["n == edges.length".to_string()],
             rust_191_features: vec!["使用并查集检测环，Rust 1.92 性能优化".to_string()],
@@ -325,9 +365,33 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "账户合并".to_string(),
             title_en: "Accounts Merge".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::HashTable, LeetCodeTag::String, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind],
-            description: "给定一个列表 accounts，每个元素 accounts[i] 是一个字符串列表，其中第一个元素 accounts[i][0] 是 名称 (name)，其余元素是 emails 表示该账户的邮箱地址。现在，我们想合并这些账户。如果两个账户都有一些共同的邮箱地址，则两个账户必定属于同一个人。请注意，即使两个账户具有相同的名称，它们也可能属于不同的人，因为人们可能具有相同的名称。一个人最初可以拥有任意数量的账户，但其所有账户都具有相同的名称。合并账户后，按以下格式返回账户：每个账户的第一个元素是名称，其余元素是按字符 ASCII 顺序排列的邮箱地址。账户本身可以以任意顺序返回。".to_string(),
-            examples: vec!["输入：accounts = [[\"John\", \"johnsmith@mail.com\", \"john00@mail.com\"], [\"John\", \"johnnybravo@mail.com\"], [\"John\", \"johnsmith@mail.com\", \"john_newyork@mail.com\"], [\"Mary\", \"mary@mail.com\"]]\n输出：[[\"John\", \"john00@mail.com\", \"john_newyork@mail.com\", \"johnsmith@mail.com\"],  [\"John\", \"johnnybravo@mail.com\"], [\"Mary\", \"mary@mail.com\"]]".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::HashTable,
+                LeetCodeTag::String,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+            ],
+            description: "给定一个列表 accounts，每个元素 accounts[i] \
+                          是一个字符串列表，其中第一个元素 accounts[i][0] 是 名称 \
+                          (name)，其余元素是 emails \
+                          表示该账户的邮箱地址。现在，我们想合并这些账户。\
+                          如果两个账户都有一些共同的邮箱地址，则两个账户必定属于同一个人。请注意，\
+                          即使两个账户具有相同的名称，它们也可能属于不同的人，\
+                          因为人们可能具有相同的名称。一个人最初可以拥有任意数量的账户，\
+                          但其所有账户都具有相同的名称。合并账户后，按以下格式返回账户：\
+                          每个账户的第一个元素是名称，其余元素是按字符 ASCII \
+                          顺序排列的邮箱地址。账户本身可以以任意顺序返回。"
+                .to_string(),
+            examples: vec!["输入：accounts = [[\"John\", \"johnsmith@mail.com\", \
+                            \"john00@mail.com\"], [\"John\", \"johnnybravo@mail.com\"], \
+                            [\"John\", \"johnsmith@mail.com\", \"john_newyork@mail.com\"], \
+                            [\"Mary\", \"mary@mail.com\"]]\n输出：[[\"John\", \
+                            \"john00@mail.com\", \"john_newyork@mail.com\", \
+                            \"johnsmith@mail.com\"],  [\"John\", \"johnnybravo@mail.com\"], \
+                            [\"Mary\", \"mary@mail.com\"]]"
+                .to_string()],
             constraints: vec!["1 <= accounts.length <= 1000".to_string()],
             rust_191_features: vec!["使用并查集合并账户，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {

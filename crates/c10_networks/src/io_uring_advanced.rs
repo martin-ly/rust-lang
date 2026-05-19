@@ -1,4 +1,4 @@
-﻿//! io_uring 深度实践 —— Linux 高性能异步 I/O
+//! io_uring 深度实践 —— Linux 高性能异步 I/O
 //!
 //! # 概述
 //!
@@ -35,7 +35,7 @@
 
 #[cfg(all(target_os = "linux", feature = "io-uring"))]
 pub mod linux_impl {
-    use io_uring::{CompletionQueue, IoUring, SubmissionQueue, opcode, types};
+    use io_uring::{opcode, types, CompletionQueue, IoUring, SubmissionQueue};
     use std::os::unix::io::AsRawFd;
 
     // =========================================================================

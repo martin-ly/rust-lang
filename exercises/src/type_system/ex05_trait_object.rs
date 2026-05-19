@@ -58,7 +58,10 @@ pub fn total_area(shapes: &[Box<dyn Shape>]) -> f64 {
 
 /// 返回面积最大的形状名称
 pub fn largest_shape_name(shapes: &[Box<dyn Shape>]) -> Option<&'static str> {
-    shapes.iter().max_by(|a, b| a.area().total_cmp(&b.area())).map(|s| s.name())
+    shapes
+        .iter()
+        .max_by(|a, b| a.area().total_cmp(&b.area()))
+        .map(|s| s.name())
 }
 
 #[cfg(test)]
@@ -73,7 +76,10 @@ mod tests {
 
     #[test]
     fn test_rect_area() {
-        let r = Rect { width: 3.0, height: 4.0 };
+        let r = Rect {
+            width: 3.0,
+            height: 4.0,
+        };
         assert_eq!(r.area(), 12.0);
     }
 
@@ -81,7 +87,10 @@ mod tests {
     fn test_total_area() {
         let shapes: Vec<Box<dyn Shape>> = vec![
             Box::new(Circle { radius: 1.0 }),
-            Box::new(Rect { width: 2.0, height: 3.0 }),
+            Box::new(Rect {
+                width: 2.0,
+                height: 3.0,
+            }),
         ];
         let expected = PI + 6.0;
         assert!((total_area(&shapes) - expected).abs() < 0.0001);
@@ -91,7 +100,10 @@ mod tests {
     fn test_largest_shape() {
         let shapes: Vec<Box<dyn Shape>> = vec![
             Box::new(Circle { radius: 1.0 }),
-            Box::new(Rect { width: 10.0, height: 10.0 }),
+            Box::new(Rect {
+                width: 10.0,
+                height: 10.0,
+            }),
         ];
         assert_eq!(largest_shape_name(&shapes), Some("Rectangle"));
     }

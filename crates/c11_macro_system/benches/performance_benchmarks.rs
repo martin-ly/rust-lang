@@ -1,5 +1,5 @@
 //! 宏系统模块性能基准测试 / Macro System Module Performance Benchmarks
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 
 fn bench_macro_expansion(c: &mut Criterion) {

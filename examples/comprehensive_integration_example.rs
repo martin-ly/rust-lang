@@ -111,22 +111,24 @@ fn demonstrate_network_process_integration() {
     println!("  - 进程数量: {}", process_count);
 }
 
-
 // Rust 1.94 特性示例
 fn rust_194_features_demo() {
     println!("\n🆕 Rust 1.94 特性演示");
-    
+
     // array_windows
     let data = [1, 2, 3, 4, 5];
     for window in data.array_windows::<2>() {
         println!("  Window: {:?}", window);
     }
-    
+
     // ControlFlow
     use std::ops::ControlFlow;
     let result = [1, 2, 3].iter().try_for_each(|&n| {
-        if n > 2 { ControlFlow::Break(n) }
-        else { ControlFlow::Continue(()) }
+        if n > 2 {
+            ControlFlow::Break(n)
+        } else {
+            ControlFlow::Continue(())
+        }
     });
     println!("  ControlFlow: {:?}", result.break_value());
 }

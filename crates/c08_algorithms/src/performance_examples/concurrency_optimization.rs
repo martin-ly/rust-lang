@@ -46,7 +46,8 @@ impl SimpleThreadPool {
         for _ in 0..size {
             let receiver = Arc::clone(&receiver);
             workers.push(thread::spawn(move || {
-                while let Ok(job) = receiver.lock().expect("线程池接收器锁被污染").recv() {
+                while let Ok(job) = receiver.lock().expect("线程池接收器锁被污染").recv()
+                {
                     job();
                 }
             }));

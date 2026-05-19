@@ -173,8 +173,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Implement Stack using Queues".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Stack, LeetCodeTag::Design, LeetCodeTag::Queue],
-            description: "请你仅使用两个队列实现一个后入先出（LIFO）的栈，并支持普通栈的全部四种操作（push、top、pop 和 empty）。".to_string(),
-            examples: vec!["输入：[\"MyStack\", \"push\", \"push\", \"top\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\n输出：[null, null, null, 2, 2, false]".to_string()],
+            description: "请你仅使用两个队列实现一个后入先出（LIFO）的栈，\
+                          并支持普通栈的全部四种操作（push、top、pop 和 empty）。"
+                .to_string(),
+            examples: vec!["输入：[\"MyStack\", \"push\", \"push\", \"top\", \"pop\", \
+                            \"empty\"]\n[[], [1], [2], [], [], []]\n输出：[null, null, null, 2, \
+                            2, false]"
+                .to_string()],
             constraints: vec!["1 <= x <= 9".to_string()],
             rust_191_features: vec!["使用队列，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -189,8 +194,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Implement Queue using Stacks".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Stack, LeetCodeTag::Design, LeetCodeTag::Queue],
-            description: "请你仅使用两个栈实现先入先出队列。队列应当支持一般队列支持的所有操作（push、pop、peek、empty）。".to_string(),
-            examples: vec!["输入：[\"MyQueue\", \"push\", \"push\", \"peek\", \"pop\", \"empty\"]\n[[], [1], [2], [], [], []]\n输出：[null, null, null, 1, 1, false]".to_string()],
+            description: "请你仅使用两个栈实现先入先出队列。\
+                          队列应当支持一般队列支持的所有操作（push、pop、peek、empty）。"
+                .to_string(),
+            examples: vec![
+                "输入：[\"MyQueue\", \"push\", \"push\", \"peek\", \"pop\", \"empty\"]\n[[], [1], \
+                 [2], [], [], []]\n输出：[null, null, null, 1, 1, false]"
+                    .to_string(),
+            ],
             constraints: vec!["1 <= x <= 9".to_string()],
             rust_191_features: vec!["使用双栈，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -204,9 +215,19 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "滑动窗口最大值".to_string(),
             title_en: "Sliding Window Maximum".to_string(),
             difficulty: "Hard".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::Queue, LeetCodeTag::SlidingWindow, LeetCodeTag::MonotonicStack],
-            description: "给你一个整数数组 nums，有一个大小为 k 的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 k 个数字。滑动窗口每次只向右移动一位。返回 滑动窗口中的最大值 。".to_string(),
-            examples: vec!["输入：nums = [1,3,-1,-3,5,3,6,7], k = 3\n输出：[3,3,5,5,6,7]".to_string()],
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::Queue,
+                LeetCodeTag::SlidingWindow,
+                LeetCodeTag::MonotonicStack,
+            ],
+            description: "给你一个整数数组 nums，有一个大小为 k \
+                          的滑动窗口从数组的最左侧移动到数组的最右侧。你只可以看到在滑动窗口内的 \
+                          k 个数字。滑动窗口每次只向右移动一位。返回 滑动窗口中的最大值 。"
+                .to_string(),
+            examples: vec![
+                "输入：nums = [1,3,-1,-3,5,3,6,7], k = 3\n输出：[3,3,5,5,6,7]".to_string(),
+            ],
             constraints: vec!["1 <= nums.length <= 10^5".to_string()],
             rust_191_features: vec!["使用单调队列，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -221,8 +242,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Moving Average from Data Stream".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Design, LeetCodeTag::Queue],
-            description: "给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，计算其所有整数的移动平均值。".to_string(),
-            examples: vec!["输入：[\"MovingAverage\", \"next\", \"next\", \"next\", \"next\"]\n[[3], [1], [10], [3], [5]]\n输出：[null, 1.0, 5.5, 4.66667, 6.0]".to_string()],
+            description: "给定一个整数数据流和一个窗口大小，根据该滑动窗口的大小，\
+                          计算其所有整数的移动平均值。"
+                .to_string(),
+            examples: vec!["输入：[\"MovingAverage\", \"next\", \"next\", \"next\", \
+                            \"next\"]\n[[3], [1], [10], [3], [5]]\n输出：[null, 1.0, 5.5, \
+                            4.66667, 6.0]"
+                .to_string()],
             constraints: vec!["1 <= size <= 1000".to_string()],
             rust_191_features: vec!["使用队列，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {

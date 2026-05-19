@@ -29,8 +29,8 @@
 use std::env;
 use std::io::{Read, Write};
 use std::net::{TcpListener, TcpStream};
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
+use std::sync::Arc;
 use std::time::{SystemTime, UNIX_EPOCH};
 
 /// 应用配置
@@ -115,21 +115,12 @@ impl AppMetrics {
             - self.start_time;
 
         format!(
-            "# HELP http_requests_total Total number of HTTP requests\n\
-             # TYPE http_requests_total counter\n\
-             http_requests_total {}\n\
-             \n\
-             # HELP http_requests_successful Successful HTTP requests\n\
-             # TYPE http_requests_successful counter\n\
-             http_requests_successful {}\n\
-             \n\
-             # HELP http_requests_failed Failed HTTP requests\n\
-             # TYPE http_requests_failed counter\n\
-             http_requests_failed {}\n\
-             \n\
-             # HELP app_uptime_seconds Application uptime in seconds\n\
-             # TYPE app_uptime_seconds gauge\n\
-             app_uptime_seconds {}\n",
+            "# HELP http_requests_total Total number of HTTP requests\n# TYPE http_requests_total \
+             counter\nhttp_requests_total {}\n\n# HELP http_requests_successful Successful HTTP \
+             requests\n# TYPE http_requests_successful counter\nhttp_requests_successful {}\n\n# \
+             HELP http_requests_failed Failed HTTP requests\n# TYPE http_requests_failed \
+             counter\nhttp_requests_failed {}\n\n# HELP app_uptime_seconds Application uptime in \
+             seconds\n# TYPE app_uptime_seconds gauge\napp_uptime_seconds {}\n",
             total, successful, failed, uptime
         )
     }
@@ -174,12 +165,8 @@ impl Response {
 
     fn to_http(&self) -> String {
         format!(
-            "HTTP/1.1 {} {}\r\n\
-             Content-Type: {}\r\n\
-             Content-Length: {}\r\n\
-             Connection: close\r\n\
-             \r\n\
-             {}",
+            "HTTP/1.1 {} {}\r\nContent-Type: {}\r\nContent-Length: {}\r\nConnection: \
+             close\r\n\r\n{}",
             self.status,
             self.status_text,
             self.content_type,

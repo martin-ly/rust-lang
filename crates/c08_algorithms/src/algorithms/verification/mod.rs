@@ -2,17 +2,17 @@
 //!
 //! 本模块提供算法的形式化证明、正确性验证和复杂度分析。
 //! 确保算法的数学正确性和性能保证。
-pub mod formal_proofs;
-pub mod correctness;
 pub mod complexity_analysis;
+pub mod correctness;
+pub mod formal_proofs;
 
 // 重新导出验证相关类型
-pub use formal_proofs::*;
-pub use correctness::*;
 pub use complexity_analysis::*;
+pub use correctness::*;
+pub use formal_proofs::*;
 
+use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
-use serde::{Serialize, Deserialize};
 
 /// 算法验证结果
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -477,7 +477,9 @@ impl AlgorithmVerifier {
             "QuickSort" => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
-                    description: "分区操作的正确性：分区后，基准元素左侧都小于等于基准，右侧都大于基准".to_string(),
+                    description: "分区操作的正确性：分区后，基准元素左侧都小于等于基准，\
+                                  右侧都大于基准"
+                        .to_string(),
                     proof_type: ProofType::Correctness,
                     status: ProofStatus::Completed,
                     dependencies: vec![],
@@ -493,7 +495,8 @@ impl AlgorithmVerifier {
 
                 proof_steps.push(ProofStep {
                     step_number: 3,
-                    description: "终止性：每次递归调用都会减少数组大小，最终达到基本情况".to_string(),
+                    description: "终止性：每次递归调用都会减少数组大小，最终达到基本情况"
+                        .to_string(),
                     proof_type: ProofType::Termination,
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2],
@@ -506,7 +509,7 @@ impl AlgorithmVerifier {
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2, 3],
                 });
-            },
+            }
             "MergeSort" => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
@@ -539,7 +542,7 @@ impl AlgorithmVerifier {
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2, 3],
                 });
-            },
+            }
             _ => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
@@ -551,7 +554,9 @@ impl AlgorithmVerifier {
             }
         }
 
-        let completed = proof_steps.iter().all(|step| matches!(step.status, ProofStatus::Completed));
+        let completed = proof_steps
+            .iter()
+            .all(|step| matches!(step.status, ProofStatus::Completed));
         (completed, proof_steps)
     }
 
@@ -563,7 +568,8 @@ impl AlgorithmVerifier {
             "BinarySearch" => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
-                    description: "搜索空间的不变性：每次迭代后，目标元素（如果存在）仍在搜索范围内".to_string(),
+                    description: "搜索空间的不变性：每次迭代后，目标元素（如果存在）仍在搜索范围内"
+                        .to_string(),
                     proof_type: ProofType::Invariant,
                     status: ProofStatus::Completed,
                     dependencies: vec![],
@@ -571,7 +577,8 @@ impl AlgorithmVerifier {
 
                 proof_steps.push(ProofStep {
                     step_number: 2,
-                    description: "终止性：每次迭代搜索空间减半，最终收敛到单个元素或空集".to_string(),
+                    description: "终止性：每次迭代搜索空间减半，最终收敛到单个元素或空集"
+                        .to_string(),
                     proof_type: ProofType::Termination,
                     status: ProofStatus::Completed,
                     dependencies: vec![1],
@@ -592,7 +599,7 @@ impl AlgorithmVerifier {
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2, 3],
                 });
-            },
+            }
             _ => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
@@ -604,7 +611,9 @@ impl AlgorithmVerifier {
             }
         }
 
-        let completed = proof_steps.iter().all(|step| matches!(step.status, ProofStatus::Completed));
+        let completed = proof_steps
+            .iter()
+            .all(|step| matches!(step.status, ProofStatus::Completed));
         (completed, proof_steps)
     }
 
@@ -645,7 +654,7 @@ impl AlgorithmVerifier {
                     status: ProofStatus::Completed,
                     dependencies: vec![1, 2, 3],
                 });
-            },
+            }
             _ => {
                 proof_steps.push(ProofStep {
                     step_number: 1,
@@ -657,7 +666,9 @@ impl AlgorithmVerifier {
             }
         }
 
-        let completed = proof_steps.iter().all(|step| matches!(step.status, ProofStatus::Completed));
+        let completed = proof_steps
+            .iter()
+            .all(|step| matches!(step.status, ProofStatus::Completed));
         (completed, proof_steps)
     }
 
@@ -808,29 +819,66 @@ impl VerificationReportGenerator {
     pub fn generate_report(result: &AlgorithmVerificationResult) -> String {
         let mut report = String::new();
 
-        report.push_str(&format!("=== 算法验证报告: {} ===\n\n", result.algorithm_name));
+        report.push_str(&format!(
+            "=== 算法验证报告: {} ===\n\n",
+            result.algorithm_name
+        ));
 
         // 验证状态
         report.push_str("## 验证状态\n");
-        report.push_str(&format!("- 正确性验证: {}\n", if result.correctness_verified { "✅ 通过" } else { "❌ 失败" }));
-        report.push_str(&format!("- 复杂度验证: {}\n", if result.complexity_verified { "✅ 通过" } else { "❌ 失败" }));
-        report.push_str(&format!("- 形式化证明: {}\n", if result.formal_proof_completed { "✅ 完成" } else { "❌ 未完成" }));
+        report.push_str(&format!(
+            "- 正确性验证: {}\n",
+            if result.correctness_verified {
+                "✅ 通过"
+            } else {
+                "❌ 失败"
+            }
+        ));
+        report.push_str(&format!(
+            "- 复杂度验证: {}\n",
+            if result.complexity_verified {
+                "✅ 通过"
+            } else {
+                "❌ 失败"
+            }
+        ));
+        report.push_str(&format!(
+            "- 形式化证明: {}\n",
+            if result.formal_proof_completed {
+                "✅ 完成"
+            } else {
+                "❌ 未完成"
+            }
+        ));
         report.push_str(&format!("- 验证时间: {:?}\n\n", result.verification_time));
 
         // 复杂度分析
         report.push_str("## 复杂度分析\n");
-        report.push_str(&format!("- 时间复杂度: {} ~ {}\n",
+        report.push_str(&format!(
+            "- 时间复杂度: {} ~ {}\n",
             result.complexity_analysis.time_complexity.lower_bound,
-            result.complexity_analysis.time_complexity.upper_bound));
+            result.complexity_analysis.time_complexity.upper_bound
+        ));
         if let Some(tight) = &result.complexity_analysis.time_complexity.tight_bound {
             report.push_str(&format!("- 紧界: {}\n", tight));
         }
-        report.push_str(&format!("- 空间复杂度: {} ~ {}\n",
+        report.push_str(&format!(
+            "- 空间复杂度: {} ~ {}\n",
             result.complexity_analysis.space_complexity.lower_bound,
-            result.complexity_analysis.space_complexity.upper_bound));
-        report.push_str(&format!("- 最佳情况: {}\n", result.complexity_analysis.best_case));
-        report.push_str(&format!("- 平均情况: {}\n", result.complexity_analysis.average_case));
-        report.push_str(&format!("- 最坏情况: {}\n", result.complexity_analysis.worst_case));
+            result.complexity_analysis.space_complexity.upper_bound
+        ));
+        report.push_str(&format!(
+            "- 最佳情况: {}\n",
+            result.complexity_analysis.best_case
+        ));
+        report.push_str(&format!(
+            "- 平均情况: {}\n",
+            result.complexity_analysis.average_case
+        ));
+        report.push_str(&format!(
+            "- 最坏情况: {}\n",
+            result.complexity_analysis.worst_case
+        ));
         if let Some(amortized) = &result.complexity_analysis.amortized_analysis {
             report.push_str(&format!("- 摊还分析: {}\n", amortized));
         }
@@ -846,18 +894,32 @@ impl VerificationReportGenerator {
                 ProofStatus::Pending => "⏳",
                 ProofStatus::Skipped => "⏭️",
             };
-            report.push_str(&format!("{} 步骤 {}: {}\n",
-                status_icon, step.step_number, step.description));
+            report.push_str(&format!(
+                "{} 步骤 {}: {}\n",
+                status_icon, step.step_number, step.description
+            ));
         }
         report.push('\n');
 
         // 测试结果
         report.push_str("## 测试结果\n");
-        report.push_str(&format!("- 总测试数: {}\n", result.test_results.total_tests));
-        report.push_str(&format!("- 通过测试: {}\n", result.test_results.passed_tests));
-        report.push_str(&format!("- 失败测试: {}\n", result.test_results.failed_tests));
-        report.push_str(&format!("- 成功率: {:.2}%\n\n",
-            (result.test_results.passed_tests as f64 / result.test_results.total_tests as f64) * 100.0));
+        report.push_str(&format!(
+            "- 总测试数: {}\n",
+            result.test_results.total_tests
+        ));
+        report.push_str(&format!(
+            "- 通过测试: {}\n",
+            result.test_results.passed_tests
+        ));
+        report.push_str(&format!(
+            "- 失败测试: {}\n",
+            result.test_results.failed_tests
+        ));
+        report.push_str(&format!(
+            "- 成功率: {:.2}%\n\n",
+            (result.test_results.passed_tests as f64 / result.test_results.total_tests as f64)
+                * 100.0
+        ));
 
         // 详细测试结果
         for test_case in &result.test_results.test_cases {
@@ -867,8 +929,10 @@ impl VerificationReportGenerator {
                 TestStatus::Skipped => "⏭️",
                 TestStatus::Error => "💥",
             };
-            report.push_str(&format!("{} {}: {:?}\n",
-                status_icon, test_case.name, test_case.execution_time));
+            report.push_str(&format!(
+                "{} {}: {:?}\n",
+                status_icon, test_case.name, test_case.execution_time
+            ));
         }
 
         report

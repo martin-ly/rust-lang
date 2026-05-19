@@ -44,7 +44,7 @@ fn parse_args() -> Args {
                 preset = iter.next();
             }
             "--repeat" if let Some(v) = iter.next() => {
-                    repeat = v.parse().unwrap_or(1);
+                repeat = v.parse().unwrap_or(1);
             }
             _ => {}
         }

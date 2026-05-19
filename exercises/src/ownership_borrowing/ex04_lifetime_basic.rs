@@ -10,7 +10,11 @@
 
 /// 返回两个字符串切片中较长的一个
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
 }
 
 /// 返回以空格分割后的第一个字段

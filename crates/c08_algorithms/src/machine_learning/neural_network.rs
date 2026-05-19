@@ -60,7 +60,8 @@ pub struct Layer {
 impl Layer {
     /// 创建新的层
     pub fn new(input_size: usize, output_size: usize, activation: ActivationFunction) -> Self {
-        use rand::{RngExt, rngs::ThreadRng};
+        use rand::rngs::ThreadRng;
+        use rand::RngExt;
         let mut rng = ThreadRng::default();
 
         // Xavier 初始化
@@ -216,8 +217,12 @@ impl MLP {
             .zip(linear_outputs.last().expect("获取线性输出失败").iter())
             .map(|((&pred, &target), &linear)| {
                 let error = pred - target;
-                let activation_derivative =
-                    self.layers.last().expect("获取最后一层失败").activation.derivative(linear);
+                let activation_derivative = self
+                    .layers
+                    .last()
+                    .expect("获取最后一层失败")
+                    .activation
+                    .derivative(linear);
                 error * activation_derivative
             })
             .collect();

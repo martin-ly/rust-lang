@@ -1,5 +1,5 @@
 //! WebAssembly模块性能基准测试 / WebAssembly Module Performance Benchmarks
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 fn bench_wasm_operations(c: &mut Criterion) {
     c.bench_function("wasm_operations", |b| {

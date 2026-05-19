@@ -133,10 +133,7 @@ pub fn advanced_performance_example() {
 
     // 使用迭代器链式操作
     let start = Instant::now();
-    let sum: i32 = (0..1000)
-        .filter(|&x| x % 2 == 0)
-        .map(|x| x * 2)
-        .sum();
+    let sum: i32 = (0..1000).filter(|&x| x % 2 == 0).map(|x| x * 2).sum();
     let duration = start.elapsed();
     println!("  - 迭代器链式操作耗时: {:?}", duration);
     println!("  - 结果: {}", sum);
@@ -148,17 +145,18 @@ pub fn rust_194_features_example() {
 
     // array_windows 示例
     let data = [1, 2, 3, 4, 5];
-    let sums: Vec<i32> = data.array_windows::<2>()
-        .map(|&[a, b]| a + b)
-        .collect();
+    let sums: Vec<i32> = data.array_windows::<2>().map(|&[a, b]| a + b).collect();
     println!("  - array_windows 结果: {:?}", sums);
 
     // ControlFlow 示例
     use std::ops::ControlFlow;
     let items = vec![1, 2, -3, 4, 5];
     let result = items.iter().try_for_each(|&n| {
-        if n < 0 { ControlFlow::Break(n) }
-        else { ControlFlow::Continue(()) }
+        if n < 0 {
+            ControlFlow::Break(n)
+        } else {
+            ControlFlow::Continue(())
+        }
     });
     println!("  - ControlFlow 结果: {:?}", result.break_value());
 

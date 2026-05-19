@@ -82,7 +82,7 @@ macro_rules! assert_copy {
                 fn check()
                 where
                     Self: Copy;
-                
+
                 fn _ensure_compiles()
                 where
                     Self: Copy,
@@ -90,7 +90,7 @@ macro_rules! assert_copy {
                     Self::check()
                 }
             }
-            
+
             impl CopyCheck for $t {
                 fn check() {}
             }
@@ -101,21 +101,15 @@ macro_rules! assert_copy {
 /// 所有权语义宏
 #[macro_export]
 macro_rules! ownership_semantics {
-    (move $v:ident) => {
-        {
-            let _ = $v; // 消费所有权
-        }
-    };
-    (borrow $v:ident) => {
-        {
-            let _ = &$v; // 借用
-        }
-    };
-    (mut_borrow $v:ident) => {
-        {
-            let _ = &mut $v; // 可变借用
-        }
-    };
+    (move $v:ident) => {{
+        let _ = $v; // 消费所有权
+    }};
+    (borrow $v:ident) => {{
+        let _ = &$v; // 借用
+    }};
+    (mut_borrow $v:ident) => {{
+        let _ = &mut $v; // 可变借用
+    }};
 }
 
 // ============================================
@@ -154,17 +148,17 @@ macro_rules! trace_move {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_owning_vec() {
         let v = owning_vec![1, 2, 3];
         assert_eq!(v, vec![1, 2, 3]);
-        
+
         let s = "hello".to_string();
         let v = owning_vec![s]; // s被移动
         assert_eq!(v[0], "hello");
     }
-    
+
     #[test]
     fn test_defer() {
         use std::cell::Cell;
@@ -176,22 +170,25 @@ mod tests {
         }
         assert_eq!(x.get(), 42);
     }
-    
+
     #[test]
     fn test_lazy_eval() {
         let f = lazy_eval!(42);
         assert_eq!(f(), 42);
     }
-    
+
     #[derive(Clone)]
     struct TestStruct {
         a: i32,
         b: String,
     }
-    
+
     #[test]
     fn test_manual_clone() {
-        let s = TestStruct { a: 1, b: "test".to_string() };
+        let s = TestStruct {
+            a: 1,
+            b: "test".to_string(),
+        };
         let cloned = s.clone();
         assert_eq!(s.a, cloned.a);
     }

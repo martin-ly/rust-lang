@@ -3,10 +3,10 @@
 //! 测试设计模式库的查询、过滤和匹配操作性能。
 
 use c09_design_pattern::{
-    ExecutionModel, PatternCategory, get_all_patterns, get_patterns_by_category,
-    get_patterns_by_execution_model, search_patterns,
+    get_all_patterns, get_patterns_by_category, get_patterns_by_execution_model, search_patterns,
+    ExecutionModel, PatternCategory,
 };
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 基准测试：获取所有设计模式
 fn bench_get_all_patterns(c: &mut Criterion) {

@@ -11,7 +11,7 @@ use std::thread;
 use std::time::Instant;
 
 use super::advanced_concurrency::{
-    HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack, parallel_map, parallel_reduce,
+    parallel_map, parallel_reduce, HighPerformanceThreadPool, LockFreeRingBuffer, LockFreeStack,
 };
 
 // ============================================================================
@@ -244,7 +244,10 @@ fn process_data_standard_threads(data: &[i32], thread_count: usize) -> Vec<i32> 
         handle.join().expect("线程应成功完成");
     }
 
-    Arc::try_unwrap(results).expect("Arc 解包不应失败").into_inner().expect("Mutex 解包不应失败")
+    Arc::try_unwrap(results)
+        .expect("Arc 解包不应失败")
+        .into_inner()
+        .expect("Mutex 解包不应失败")
 }
 
 /// 使用高性能线程池处理数据

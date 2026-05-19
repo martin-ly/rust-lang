@@ -320,10 +320,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Container With Most Water".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::TwoPointers],
-            description: "给定一个长度为 n 的整数数组 height。有 n 条垂线，第 i 条线的两个端点是 (i, 0) 和 (i, height[i])。找出其中的两条线，使得它们与 x 轴共同构成的容器可以容纳最多的水。".to_string(),
-            examples: vec![
-                "输入：height = [1,8,6,2,5,4,8,3,7]\n输出：49".to_string(),
-            ],
+            description: "给定一个长度为 n 的整数数组 height。有 n 条垂线，第 i 条线的两个端点是 \
+                          (i, 0) 和 (i, height[i])。找出其中的两条线，使得它们与 x \
+                          轴共同构成的容器可以容纳最多的水。"
+                .to_string(),
+            examples: vec!["输入：height = [1,8,6,2,5,4,8,3,7]\n输出：49".to_string()],
             constraints: vec![
                 "n == height.length".to_string(),
                 "2 <= n <= 10^5".to_string(),
@@ -345,10 +346,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Trapping Rain Water".to_string(),
             difficulty: "Hard".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::TwoPointers],
-            description: "给定 n 个非负整数表示每个宽度为 1 的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。".to_string(),
-            examples: vec![
-                "输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]\n输出：6".to_string(),
-            ],
+            description: "给定 n 个非负整数表示每个宽度为 1 \
+                          的柱子的高度图，计算按此排列的柱子，下雨之后能接多少雨水。"
+                .to_string(),
+            examples: vec!["输入：height = [0,1,0,2,1,0,1,3,2,1,2,1]\n输出：6".to_string()],
             constraints: vec![
                 "n == height.length".to_string(),
                 "1 <= n <= 2 * 10^4".to_string(),

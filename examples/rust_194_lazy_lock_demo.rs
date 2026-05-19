@@ -1,13 +1,13 @@
 //! Rust 1.94 LazyCell/LazyLock 新方法完整示例
-//! 
+//!
 //! 运行方式: rustc --edition 2024 examples/rust_194_lazy_lock_demo.rs && ./rust_194_lazy_lock_demo
 
 #![allow(dead_code)]
 
 use std::cell::LazyCell;
 use std::sync::{LazyLock, Mutex};
-use std::time::{Duration, Instant};
 use std::thread;
+use std::time::{Duration, Instant};
 
 // =============================================================================
 // 全局配置示例
@@ -26,12 +26,11 @@ impl AppConfig {
     fn load() -> Self {
         println!("  [Config] 正在加载配置...");
         thread::sleep(Duration::from_millis(100)); // 模拟加载延迟
-        
+
         Self {
             database_url: std::env::var("DATABASE_URL")
                 .unwrap_or_else(|_| "postgres://localhost/myapp".to_string()),
-            api_key: std::env::var("API_KEY")
-                .unwrap_or_else(|_| "default-api-key".to_string()),
+            api_key: std::env::var("API_KEY").unwrap_or_else(|_| "default-api-key".to_string()),
             max_connections: std::env::var("MAX_CONNECTIONS")
                 .ok()
                 .and_then(|s| s.parse().ok())
@@ -52,7 +51,7 @@ static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
 // =============================================================================
 
 /// 高性能配置访问
-/// 
+///
 /// Rust 1.94 新增的 get() 方法允许无锁检查初始化状态
 pub fn get_config_fast() -> Option<&'static AppConfig> {
     // 热路径优化: 使用 get() 进行无锁检查
@@ -66,17 +65,17 @@ pub fn get_config() -> &'static AppConfig {
 /// 模拟高频调用场景
 fn hot_path_optimized() {
     println!("\n=== 热路径优化测试 ===");
-    
+
     // 模拟 10000 次调用
     let iterations = 10000;
-    
+
     // 传统方式
     let start = Instant::now();
     for _ in 0..iterations {
         let _ = get_config();
     }
     let time_traditional = start.elapsed();
-    
+
     // 优化方式
     let start = Instant::now();
     for _ in 0..iterations {
@@ -85,11 +84,13 @@ fn hot_path_optimized() {
         }
     }
     let time_optimized = start.elapsed();
-    
+
     println!("传统方式 ({} 次): {:?}", iterations, time_traditional);
     println!("优化方式 ({} 次): {:?}", iterations, time_optimized);
-    println!("加速比: {:.2}x", 
-        time_traditional.as_secs_f64() / time_optimized.as_secs_f64());
+    println!(
+        "加速比: {:.2}x",
+        time_traditional.as_secs_f64() / time_optimized.as_secs_f64()
+    );
 }
 
 // =============================================================================
@@ -124,17 +125,17 @@ impl ConnectionPool {
         for i in 0..max_size {
             connections.push(Connection::new(i));
         }
-        
+
         Self {
             connections: Mutex::new(connections),
             max_size,
         }
     }
-    
+
     fn acquire(&self) -> Option<Connection> {
         self.connections.lock().unwrap().pop()
     }
-    
+
     fn release(&self, conn: Connection) {
         self.connections.lock().unwrap().push(conn);
     }
@@ -162,13 +163,13 @@ pub fn get_connection() -> Option<Connection> {
 
 fn connection_pool_demo() {
     println!("\n=== 连接池示例 ===");
-    
+
     // 获取连接
     if let Some(conn) = get_connection() {
         println!("获取连接: {:?}", conn);
-        
+
         // 使用连接...
-        
+
         // 释放连接
         CONNECTION_POOL.release(conn);
         println!("连接已释放");
@@ -181,27 +182,27 @@ fn connection_pool_demo() {
 
 fn lazy_cell_demo() {
     println!("\n=== LazyCell 示例 ===");
-    
+
     // 创建 LazyCell
     let cell: LazyCell<String> = LazyCell::new(|| {
         println!("  [LazyCell] 初始化");
         "Hello from LazyCell".to_string()
     });
-    
+
     // 使用 get() 检查是否已初始化
     println!("初始状态: {:?}", cell.get());
-    
+
     // 强制初始化
     let value: &String = &cell;
     println!("初始化后: {:?}", cell.get());
     println!("值: {}", value);
-    
+
     // 可变访问 (如果未初始化，会先初始化)
     let mut_cell: LazyCell<Vec<i32>> = LazyCell::new(|| {
         println!("  [LazyCell] 初始化 Vec");
         vec![1, 2, 3]
     });
-    
+
     if let Some(vec) = mut_cell.get_mut() {
         vec.push(4);
         println!("修改后: {:?}", vec);
@@ -230,7 +231,7 @@ static SINGLETON: LazyLock<Singleton> = LazyLock::new(Singleton::new);
 
 fn singleton_demo() {
     println!("\n=== 单例模式示例 ===");
-    
+
     // 多线程访问
     let handles: Vec<_> = (0..5)
         .map(|i| {
@@ -240,7 +241,7 @@ fn singleton_demo() {
             })
         })
         .collect();
-    
+
     for h in handles {
         h.join().unwrap();
     }
@@ -262,11 +263,11 @@ impl Cache {
             data: Mutex::new(HashMap::new()),
         }
     }
-    
+
     fn get(&self, key: &str) -> Option<String> {
         self.data.lock().unwrap().get(key).cloned()
     }
-    
+
     fn set(&self, key: String, value: String) {
         self.data.lock().unwrap().insert(key, value);
     }
@@ -284,12 +285,12 @@ fn expensive_computation(input: &str) -> String {
         println!("  缓存命中: {}", input);
         return cached;
     }
-    
+
     // 执行昂贵计算
     println!("  计算: {}", input);
     thread::sleep(Duration::from_millis(50));
     let result = format!("result_of_{}", input);
-    
+
     // 存入缓存
     CACHE.set(input.to_string(), result.clone());
     result
@@ -297,11 +298,11 @@ fn expensive_computation(input: &str) -> String {
 
 fn cache_demo() {
     println!("\n=== 缓存示例 ===");
-    
+
     let r1 = expensive_computation("hello");
-    let r2 = expensive_computation("hello");  // 应该命中缓存
+    let r2 = expensive_computation("hello"); // 应该命中缓存
     let r3 = expensive_computation("world");
-    
+
     println!("结果: {}, {}, {}", r1, r2, r3);
     assert_eq!(r1, r2);
 }
@@ -312,13 +313,13 @@ fn cache_demo() {
 
 fn math_constants_demo() {
     println!("\n=== 数学常量示例 ===");
-    
+
     // 欧拉-马歇罗尼常数
     println!("欧拉-马歇罗尼常数 (γ): {}", f64::consts::EULER_GAMMA);
-    
+
     // 黄金比例
     println!("黄金比例 (φ): {}", f64::consts::GOLDEN_RATIO);
-    
+
     // 黄金分割搜索示例
     fn golden_section_search<F>(f: F, mut a: f64, mut b: f64, eps: f64) -> f64
     where
@@ -326,12 +327,12 @@ fn math_constants_demo() {
     {
         let phi = f64::consts::GOLDEN_RATIO;
         let resphi = 2.0 - phi;
-        
+
         let mut x1 = a + resphi * (b - a);
         let mut x2 = b - resphi * (b - a);
         let mut f1 = f(x1);
         let mut f2 = f(x2);
-        
+
         while (b - a).abs() > eps {
             if f1 < f2 {
                 b = x2;
@@ -349,7 +350,7 @@ fn math_constants_demo() {
         }
         (a + b) / 2.0
     }
-    
+
     // 测试: 寻找 x^2 的最小值 (应该在 0)
     let min = golden_section_search(|x| x * x, -10.0, 10.0, 1e-10);
     println!("x^2 的最小值点: {} (期望: 0)", min);
@@ -361,31 +362,31 @@ fn math_constants_demo() {
 
 fn main() {
     println!("=== Rust 1.94 LazyCell/LazyLock 新方法演示 ===");
-    
+
     // 1. 基础延迟初始化
     println!("\n1. 基础延迟初始化");
     println!("访问 CONFIG (首次，会触发初始化):");
     let _ = get_config();
     println!("再次访问 (已初始化):");
     let _ = get_config();
-    
+
     // 2. 热路径优化
     hot_path_optimized();
-    
+
     // 3. 连接池
     connection_pool_demo();
-    
+
     // 4. LazyCell
     lazy_cell_demo();
-    
+
     // 5. 单例模式
     singleton_demo();
-    
+
     // 6. 缓存
     cache_demo();
-    
+
     // 7. 数学常量
     math_constants_demo();
-    
+
     println!("\n=== 演示完成 ===");
 }

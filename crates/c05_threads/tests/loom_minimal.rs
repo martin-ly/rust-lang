@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
-    use loom::sync::Arc;
     use loom::sync::atomic::{AtomicUsize, Ordering};
+    use loom::sync::Arc;
     use loom::thread;
 
     #[test]

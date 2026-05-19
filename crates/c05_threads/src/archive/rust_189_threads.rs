@@ -266,7 +266,7 @@ pub fn demo_sync_channel_backpressure() {
 
 pub fn demo_concurrency_error_handling() {
     use anyhow::{Context, Result};
-    use crossbeam_channel::{RecvTimeoutError, bounded};
+    use crossbeam_channel::{bounded, RecvTimeoutError};
     use std::time::Duration;
     use thiserror::Error;
 

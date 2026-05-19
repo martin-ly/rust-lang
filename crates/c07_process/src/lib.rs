@@ -1,5 +1,5 @@
 // [来源: Rust Standard Library / Rust Reference]
-﻿#![allow(clippy::type_complexity)]
+#![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]
 #![allow(clippy::items_after_test_module)]

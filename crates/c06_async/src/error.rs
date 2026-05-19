@@ -12,19 +12,19 @@ use thiserror::Error;
 pub enum AsyncError {
     #[error("cancelled: {0}")]
     Cancelled(String),
-    
+
     #[error("timeout: {0:?}")]
     Timeout(Duration),
-    
+
     #[error("runtime error: {0}")]
     Runtime(String),
-    
+
     #[error("scheduler error: {0}")]
     Scheduler(String),
-    
+
     #[error("stream error: {0}")]
     Stream(String),
-    
+
     #[error("backpressure error: {0}")]
     Backpressure(String),
 }
@@ -34,11 +34,11 @@ impl common::RustLangError for AsyncError {
     fn error_code(&self) -> ErrorCode {
         ErrorCode::Async
     }
-    
+
     fn is_retryable(&self) -> bool {
         matches!(self, AsyncError::Timeout(_) | AsyncError::Backpressure(_))
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         match self {
             AsyncError::Timeout(_) => Some(Duration::from_millis(100)),
@@ -46,7 +46,7 @@ impl common::RustLangError for AsyncError {
             _ => None,
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         if common::RustLangError::is_retryable(self) {
             Some(3)
@@ -60,8 +60,7 @@ impl_into_unified_error!(AsyncError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C06 crate's result type
@@ -97,7 +96,6 @@ pub fn backpressure_error<T: Into<String>>(msg: T) -> AsyncError {
     AsyncError::Backpressure(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -114,8 +112,11 @@ mod tests {
     fn test_retryable_error() {
         let err = timeout(Duration::from_secs(1));
         assert!(RustLangError::is_retryable(&err));
-        assert_eq!(RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
-        
+        assert_eq!(
+            RustLangError::retry_delay(&err),
+            Some(Duration::from_millis(100))
+        );
+
         let err = runtime_error("test");
         assert!(!RustLangError::is_retryable(&err));
     }

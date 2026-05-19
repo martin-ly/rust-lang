@@ -186,7 +186,10 @@ impl CircuitBreaker {
 
         if state == CircuitState::Open {
             // 检查是否可以尝试恢复
-            let last_failure = self.last_failure_time.lock().expect("熔断器失败时间锁被污染");
+            let last_failure = self
+                .last_failure_time
+                .lock()
+                .expect("熔断器失败时间锁被污染");
             if let Some(time) = *last_failure {
                 if time.elapsed() > self.timeout {
                     *self.state.lock().expect("熔断器状态锁被污染") = CircuitState::HalfOpen;
@@ -226,7 +229,10 @@ impl CircuitBreaker {
 
     fn on_failure(&self) {
         self.failures.fetch_add(1, Ordering::Relaxed);
-        *self.last_failure_time.lock().expect("熔断器失败时间锁被污染") = Some(Instant::now());
+        *self
+            .last_failure_time
+            .lock()
+            .expect("熔断器失败时间锁被污染") = Some(Instant::now());
 
         if self.failures.load(Ordering::Relaxed) >= self.failure_threshold {
             *self.state.lock().expect("熔断器状态锁被污染") = CircuitState::Open;
@@ -853,10 +859,14 @@ mod tests {
         let mapper = CommandMapper::new();
         let mut context = GameContext::new();
 
-        mapper.execute_command("w", &mut context).expect("执行w命令失败");
+        mapper
+            .execute_command("w", &mut context)
+            .expect("执行w命令失败");
         assert_eq!(context.player_position, 1);
 
-        mapper.execute_command("attack", &mut context).expect("执行attack命令失败");
+        mapper
+            .execute_command("attack", &mut context)
+            .expect("执行attack命令失败");
         assert_eq!(context.enemy_health, 90);
     }
 

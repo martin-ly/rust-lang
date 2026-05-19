@@ -1,4 +1,4 @@
-﻿//! C 语言互操作 (FFI)
+//! C 语言互操作 (FFI)
 //!
 //! Rust 可以无缝调用 C 代码，也可以被 C 代码调用。
 //! 这在嵌入式中非常重要，因为大量驱动库和硬件抽象层是用 C 编写的。
@@ -102,7 +102,8 @@ pub struct CBindingsConcept;
 impl CBindingsConcept {
     /// 描述 bindgen 工作流程
     pub fn bindgen_workflow() -> &'static str {
-        "1. 准备 C 头文件 -> 2. 运行 bindgen 生成 .rs -> 3. 在 build.rs 中链接 C 库 -> 4. 调用 FFI 函数"
+        "1. 准备 C 头文件 -> 2. 运行 bindgen 生成 .rs -> 3. 在 build.rs 中链接 C 库 -> 4. 调用 FFI \
+         函数"
     }
 }
 
@@ -155,7 +156,6 @@ mod tests {
         assert!(!CBindingsConcept::bindgen_workflow().is_empty());
     }
 }
-
 
 // ==================== Rust 2024 Edition: unsafe extern blocks 安全 FFI ====================
 //
@@ -320,12 +320,9 @@ pub fn demonstrate_embedded_unsafe_extern() {
 
 /// 获取嵌入式 FFI 特性信息
 pub fn get_embedded_ffi_info() -> String {
-    "Rust 2024 Edition 嵌入式 FFI 特性:\n\
-        - unsafe extern \"C\" 声明硬件抽象层接口\n\
-        - 地址白名单验证防止非法寄存器访问\n\
-        - 类型化寄存器封装（GpioRegister 枚举）\n\
-        - 安全包装函数负责前置条件检查\n\
-        - 与 bindgen 生成的 C 头文件绑定无缝集成"
+    "Rust 2024 Edition 嵌入式 FFI 特性:\n- unsafe extern \"C\" 声明硬件抽象层接口\n- \
+     地址白名单验证防止非法寄存器访问\n- 类型化寄存器封装（GpioRegister 枚举）\n- \
+     安全包装函数负责前置条件检查\n- 与 bindgen 生成的 C 头文件绑定无缝集成"
         .to_string()
 }
 

@@ -1,4 +1,4 @@
-﻿//! QEMU 仿真演示
+//! QEMU 仿真演示
 //!
 //! 本示例展示如何在 QEMU 中运行 bare-metal Rust 程序。
 //!
@@ -40,10 +40,16 @@ fn main() {
     println!("本示例需要在 ARM 嵌入式目标上运行。");
     println!();
     println!("编译命令:");
-    println!("  cargo build --example qemu_demo --target thumbv7m-none-eabi --features c13_embedded/embedded");
+    println!(
+        "  cargo build --example qemu_demo --target thumbv7m-none-eabi --features \
+         c13_embedded/embedded"
+    );
     println!();
     println!("QEMU 运行命令:");
-    println!("  qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic -kernel target/thumbv7m-none-eabi/debug/examples/qemu_demo");
+    println!(
+        "  qemu-system-arm -cpu cortex-m3 -machine stm32-f103c8 -nographic -kernel \
+         target/thumbv7m-none-eabi/debug/examples/qemu_demo"
+    );
     println!();
     println!("注意: 实际运行需要正确的链接脚本和启动代码 (cortex-m-rt 自动处理)。");
 }

@@ -135,7 +135,10 @@ mod tests {
             handles.push(handle);
         }
 
-        let results: Vec<String> = handles.into_iter().map(|h| h.join().expect("线程加入失败")).collect();
+        let results: Vec<String> = handles
+            .into_iter()
+            .map(|h| h.join().expect("线程加入失败"))
+            .collect();
 
         // 所有线程应该得到相同的实例
         let first_result = &results[0];

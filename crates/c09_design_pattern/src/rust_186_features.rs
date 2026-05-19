@@ -21,17 +21,29 @@
 /// ## 使用场景
 /// - 抽象层解耦：在运行时根据具体类型降级到更通用的 trait 对象
 /// - 插件系统：将特定插件接口转换为通用接口
-pub trait Animal { fn name(&self) -> &'static str; }
-pub trait Dog: Animal { fn bark(&self); }
+pub trait Animal {
+    fn name(&self) -> &'static str;
+}
+pub trait Dog: Animal {
+    fn bark(&self);
+}
 
-pub fn animal_name(animal: &dyn Animal) -> &'static str { animal.name() }
+pub fn animal_name(animal: &dyn Animal) -> &'static str {
+    animal.name()
+}
 
 #[cfg(test)]
 mod tests {
     use super::*;
     struct MyDog;
-    impl Animal for MyDog { fn name(&self) -> &'static str { "Buddy" } }
-    impl Dog for MyDog { fn bark(&self) {} }
+    impl Animal for MyDog {
+        fn name(&self) -> &'static str {
+            "Buddy"
+        }
+    }
+    impl Dog for MyDog {
+        fn bark(&self) {}
+    }
 
     #[test]
     fn test_trait_upcasting() {

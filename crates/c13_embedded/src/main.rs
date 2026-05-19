@@ -1,4 +1,4 @@
-﻿//! Embedded Demo - 嵌入式演示程序
+//! Embedded Demo - 嵌入式演示程序
 //!
 //! 在 host 目标上运行模拟演示，在 ARM 目标上展示 bare-metal 入口。
 

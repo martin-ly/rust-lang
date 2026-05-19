@@ -311,13 +311,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Single Number".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::BitManipulation],
-            description: "给你一个非空整数数组 nums，除了某个元素只出现一次以外，其余每个元素均出现两次。找出那个只出现了一次的元素。".to_string(),
-            examples: vec![
-                "输入：nums = [2,2,1]\n输出：1".to_string(),
-            ],
-            constraints: vec![
-                "1 <= nums.length <= 3 * 10^4".to_string(),
-            ],
+            description: "给你一个非空整数数组 \
+                          nums，除了某个元素只出现一次以外，其余每个元素均出现两次。\
+                          找出那个只出现了一次的元素。"
+                .to_string(),
+            examples: vec!["输入：nums = [2,2,1]\n输出：1".to_string()],
+            constraints: vec!["1 <= nums.length <= 3 * 10^4".to_string()],
             rust_191_features: vec![
                 "JIT 优化：位运算操作性能提升 15-20%".to_string(),
                 "内存优化：O(1) 空间复杂度".to_string(),
@@ -334,13 +333,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Number of 1 Bits".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::BitManipulation],
-            description: "编写一个函数，输入是一个无符号整数（以二进制串的形式），返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）。".to_string(),
-            examples: vec![
-                "输入：n = 00000000000000000000000000001011\n输出：3".to_string(),
-            ],
-            constraints: vec![
-                "输入必须是长度为 32 的二进制串。".to_string(),
-            ],
+            description: "编写一个函数，输入是一个无符号整数（以二进制串的形式），\
+                          返回其二进制表达式中数字位数为 '1' 的个数（也被称为汉明重量）。"
+                .to_string(),
+            examples: vec!["输入：n = 00000000000000000000000000001011\n输出：3".to_string()],
+            constraints: vec!["输入必须是长度为 32 的二进制串。".to_string()],
             rust_191_features: vec![
                 "JIT 优化：位运算操作性能提升".to_string(),
                 "内存优化：O(1) 空间复杂度".to_string(),
@@ -356,14 +353,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "比特位计数".to_string(),
             title_en: "Counting Bits".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::DynamicProgramming, LeetCodeTag::BitManipulation],
-            description: "给你一个整数 n，对于 0 <= i <= n 中的每个 i，计算其二进制表示中 1 的个数，返回一个长度为 n + 1 的数组 ans 作为答案。".to_string(),
-            examples: vec![
-                "输入：n = 2\n输出：[0,1,1]".to_string(),
+            tags: vec![
+                LeetCodeTag::DynamicProgramming,
+                LeetCodeTag::BitManipulation,
             ],
-            constraints: vec![
-                "0 <= n <= 10^5".to_string(),
-            ],
+            description: "给你一个整数 n，对于 0 <= i <= n 中的每个 i，计算其二进制表示中 1 \
+                          的个数，返回一个长度为 n + 1 的数组 ans 作为答案。"
+                .to_string(),
+            examples: vec!["输入：n = 2\n输出：[0,1,1]".to_string()],
+            constraints: vec!["0 <= n <= 10^5".to_string()],
             rust_191_features: vec![
                 "JIT 优化：动态规划 + 位运算性能提升".to_string(),
                 "内存优化：O(n) 空间复杂度".to_string(),

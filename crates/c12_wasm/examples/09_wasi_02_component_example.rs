@@ -220,11 +220,7 @@ struct TextStats {
 impl TextStats {
     fn format_stats(&self) -> String {
         format!(
-            "Text Statistics:\n\
-             - Characters: {}\n\
-             - Words: {}\n\
-             - Lines: {}\n\
-             - Bytes: {}",
+            "Text Statistics:\n- Characters: {}\n- Words: {}\n- Lines: {}\n- Bytes: {}",
             self.char_count, self.word_count, self.line_count, self.byte_count
         )
     }
@@ -334,9 +330,8 @@ impl Application {
         }
 
         // 创建示例文件
-        let sample_content = "Hello from WASI 0.2 Component Model!\n\
-                             This is a demonstration of file operations.\n\
-                             WebAssembly components are modular and composable.";
+        let sample_content = "Hello from WASI 0.2 Component Model!\nThis is a demonstration of \
+                              file operations.\nWebAssembly components are modular and composable.";
 
         let output_path = format!("{}/{}", self.config.work_dir, self.config.output_file);
         self.file_processor
@@ -410,7 +405,7 @@ fn main() {
             std::process::exit(1);
         }
     };
-    
+
     if let Err(e) = app.run() {
         eprintln!("Application error: {}", e);
         std::process::exit(1);

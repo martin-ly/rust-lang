@@ -374,7 +374,11 @@ pub fn oranges_rotting(grid: Vec<Vec<i32>>) -> i32 {
         }
     }
 
-    if fresh_count > 0 { -1 } else { minutes }
+    if fresh_count > 0 {
+        -1
+    } else {
+        minutes
+    }
 }
 
 /// 130. Surrounded Regions（被围绕的区域）
@@ -458,14 +462,21 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "岛屿数量".to_string(),
             title_en: "Number of Islands".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind],
-            description: "给你一个由 '1'（陆地）和 '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+            ],
+            description: "给你一个由 '1'（陆地）和 \
+                          '0'（水）组成的的二维网格，请你计算网格中岛屿的数量。"
+                .to_string(),
             examples: vec![
-                "输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1".to_string(),
+                "输入：grid = [[\"1\",\"1\",\"1\",\"1\",\"0\"],[\"1\",\"1\",\"0\",\"1\",\"0\"],[\"\
+                 1\",\"1\",\"0\",\"0\",\"0\"],[\"0\",\"0\",\"0\",\"0\",\"0\"]]\n输出：1"
+                    .to_string(),
             ],
-            constraints: vec![
-                "m == grid.length".to_string(),
-            ],
+            constraints: vec!["m == grid.length".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DFS 遍历性能提升 10-15%".to_string(),
                 "内存优化：原地标记访问过的节点".to_string(),
@@ -481,14 +492,18 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "省份数量".to_string(),
             title_en: "Number of Provinces".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::UnionFind, LeetCodeTag::Graph],
-            description: "有 n 个城市，其中一些彼此相连，一些不相连。如果城市 a 与城市 b 直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c 间接相连。省份是一组直接或间接相连的城市，组内不含其他没有相连的城市。".to_string(),
-            examples: vec![
-                "输入：isConnected = [[1,1,0],[1,1,0],[0,0,1]]\n输出：2".to_string(),
+            tags: vec![
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::UnionFind,
+                LeetCodeTag::Graph,
             ],
-            constraints: vec![
-                "1 <= n <= 200".to_string(),
-            ],
+            description: "有 n 个城市，其中一些彼此相连，一些不相连。如果城市 a 与城市 b \
+                          直接相连，且城市 b 与城市 c 直接相连，那么城市 a 与城市 c \
+                          间接相连。省份是一组直接或间接相连的城市，组内不含其他没有相连的城市。"
+                .to_string(),
+            examples: vec!["输入：isConnected = [[1,1,0],[1,1,0],[0,0,1]]\n输出：2".to_string()],
+            constraints: vec!["1 <= n <= 200".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DFS 遍历性能提升".to_string(),
                 "内存优化：使用 HashSet 标记访问过的节点".to_string(),
@@ -504,14 +519,18 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "课程表".to_string(),
             title_en: "Course Schedule".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch, LeetCodeTag::Graph],
-            description: "你这个学期必须选修 numCourses 门课程，记为 0 到 numCourses - 1。在选修某些课程之前需要一些先修课程。先修课程按数组 prerequisites 给出，其中 prerequisites[i] = [ai, bi]，表示如果要学习课程 ai 则必须先学习课程 bi。".to_string(),
-            examples: vec![
-                "输入：numCourses = 2, prerequisites = [[1,0]]\n输出：true".to_string(),
+            tags: vec![
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+                LeetCodeTag::Graph,
             ],
-            constraints: vec![
-                "1 <= numCourses <= 10^5".to_string(),
-            ],
+            description: "你这个学期必须选修 numCourses 门课程，记为 0 到 numCourses - \
+                          1。在选修某些课程之前需要一些先修课程。先修课程按数组 prerequisites \
+                          给出，其中 prerequisites[i] = [ai, bi]，表示如果要学习课程 ai \
+                          则必须先学习课程 bi。"
+                .to_string(),
+            examples: vec!["输入：numCourses = 2, prerequisites = [[1,0]]\n输出：true".to_string()],
+            constraints: vec!["1 <= numCourses <= 10^5".to_string()],
             rust_191_features: vec![
                 "JIT 优化：DFS 拓扑排序性能提升".to_string(),
                 "内存优化：使用邻接表存储图，O(V + E) 空间复杂度".to_string(),

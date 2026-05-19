@@ -11,22 +11,22 @@ use thiserror::Error;
 pub enum WasmError {
     #[error("compilation error: {0}")]
     Compilation(String),
-    
+
     #[error("runtime error: {0}")]
     Runtime(String),
-    
+
     #[error("memory error: {0}")]
     Memory(String),
-    
+
     #[error("import error: {0}")]
     Import(String),
-    
+
     #[error("export error: {0}")]
     Export(String),
-    
+
     #[error("WASI error: {0}")]
     Wasi(String),
-    
+
     #[error("bindgen error: {0}")]
     Bindgen(String),
 }
@@ -36,8 +36,7 @@ impl_into_unified_error!(WasmError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C12 crate's result type
@@ -77,7 +76,6 @@ pub fn wasi_error<T: Into<String>>(msg: T) -> WasmError {
 pub fn bindgen_error<T: Into<String>>(msg: T) -> WasmError {
     WasmError::Bindgen(msg.into())
 }
-
 
 #[cfg(test)]
 mod tests {

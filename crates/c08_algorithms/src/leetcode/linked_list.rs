@@ -307,8 +307,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "两数相加".to_string(),
             title_en: "Add Two Numbers".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::Math, LeetCodeTag::Recursion],
-            description: "给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 的方式存储的，并且每个节点只能存储 一位 数字。".to_string(),
+            tags: vec![
+                LeetCodeTag::LinkedList,
+                LeetCodeTag::Math,
+                LeetCodeTag::Recursion,
+            ],
+            description: "给你两个 非空 的链表，表示两个非负的整数。它们每位数字都是按照 逆序 \
+                          的方式存储的，并且每个节点只能存储 一位 数字。"
+                .to_string(),
             examples: vec!["输入：l1 = [2,4,3], l2 = [5,6,4]\n输出：[7,0,8]".to_string()],
             constraints: vec!["每个链表中的节点数在范围 [1, 100] 内".to_string()],
             rust_191_features: vec!["使用链表操作，Rust 1.92 性能优化".to_string()],
@@ -324,7 +330,8 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Remove Nth Node From End of List".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::TwoPointers],
-            description: "给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。".to_string(),
+            description: "给你一个链表，删除链表的倒数第 n 个结点，并且返回链表的头结点。"
+                .to_string(),
             examples: vec!["输入：head = [1,2,3,4,5], n = 2\n输出：[1,2,3,5]".to_string()],
             constraints: vec!["链表中结点的数目为 sz".to_string()],
             rust_191_features: vec!["使用双指针，Rust 1.92 性能优化".to_string()],
@@ -340,7 +347,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Merge Two Sorted Lists".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::Recursion],
-            description: "将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。".to_string(),
+            description: "将两个升序链表合并为一个新的 升序 \
+                          链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。"
+                .to_string(),
             examples: vec!["输入：l1 = [1,2,4], l2 = [1,3,4]\n输出：[1,1,2,3,4,4]".to_string()],
             constraints: vec!["两个链表的节点数目范围是 [0, 50]".to_string()],
             rust_191_features: vec!["使用递归或迭代，Rust 1.92 性能优化".to_string()],
@@ -356,8 +365,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Merge k Sorted Lists".to_string(),
             difficulty: "Hard".to_string(),
             tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::Heap],
-            description: "给你一个链表数组，每个链表都已经按升序排列。请你将所有链表合并到一个升序链表中，返回合并后的链表。".to_string(),
-            examples: vec!["输入：lists = [[1,4,5],[1,3,4],[2,6]]\n输出：[1,1,2,3,4,4,5,6]".to_string()],
+            description: "给你一个链表数组，每个链表都已经按升序排列。\
+                          请你将所有链表合并到一个升序链表中，返回合并后的链表。"
+                .to_string(),
+            examples: vec![
+                "输入：lists = [[1,4,5],[1,3,4],[2,6]]\n输出：[1,1,2,3,4,4,5,6]".to_string(),
+            ],
             constraints: vec!["k == lists.length".to_string()],
             rust_191_features: vec!["使用分治或堆，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -371,7 +384,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "环形链表".to_string(),
             title_en: "Linked List Cycle".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::HashTable, LeetCodeTag::LinkedList, LeetCodeTag::TwoPointers],
+            tags: vec![
+                LeetCodeTag::HashTable,
+                LeetCodeTag::LinkedList,
+                LeetCodeTag::TwoPointers,
+            ],
             description: "给你一个链表的头节点 head ，判断链表中是否有环。".to_string(),
             examples: vec!["输入：head = [3,2,0,-4], pos = 1\n输出：true".to_string()],
             constraints: vec!["链表中节点的数目范围是 [0, 10^4]".to_string()],
@@ -387,9 +404,17 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "环形链表 II".to_string(),
             title_en: "Linked List Cycle II".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::HashTable, LeetCodeTag::LinkedList, LeetCodeTag::TwoPointers],
-            description: "给定一个链表的头节点  head ，返回链表开始入环的第一个节点。如果链表无环，则返回 null。".to_string(),
-            examples: vec!["输入：head = [3,2,0,-4], pos = 1\n输出：返回索引为 1 的链表节点".to_string()],
+            tags: vec![
+                LeetCodeTag::HashTable,
+                LeetCodeTag::LinkedList,
+                LeetCodeTag::TwoPointers,
+            ],
+            description: "给定一个链表的头节点  head \
+                          ，返回链表开始入环的第一个节点。如果链表无环，则返回 null。"
+                .to_string(),
+            examples: vec![
+                "输入：head = [3,2,0,-4], pos = 1\n输出：返回索引为 1 的链表节点".to_string(),
+            ],
             constraints: vec!["链表中节点的数目范围在范围 [0, 10^4] 内".to_string()],
             rust_191_features: vec!["使用快慢指针，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
@@ -403,8 +428,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "排序链表".to_string(),
             title_en: "Sort List".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::TwoPointers, LeetCodeTag::Sorting],
-            description: "给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。".to_string(),
+            tags: vec![
+                LeetCodeTag::LinkedList,
+                LeetCodeTag::TwoPointers,
+                LeetCodeTag::Sorting,
+            ],
+            description: "给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。"
+                .to_string(),
             examples: vec!["输入：head = [4,2,1,3]\n输出：[1,2,3,4]".to_string()],
             constraints: vec!["链表中节点的数目在范围 [0, 5 * 10^4] 内".to_string()],
             rust_191_features: vec!["使用归并排序，Rust 1.92 性能优化".to_string()],

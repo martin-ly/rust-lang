@@ -23,9 +23,7 @@ pub fn read_first_line_as_int(path: &str) -> Result<i32, String> {
 
 /// 链式计算：先解析字符串，再计算平方根，最后加倍
 pub fn complex_calculation(input: &str) -> Result<f64, &'static str> {
-    let n: f64 = input
-        .parse()
-        .map_err(|_| "无法解析为数字")?;
+    let n: f64 = input.parse().map_err(|_| "无法解析为数字")?;
     if n < 0.0 {
         return Err("不能对负数开方");
     }

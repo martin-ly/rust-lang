@@ -9,7 +9,7 @@ use c10_networks::error::{
     ErrorStats, NetworkError, PerformanceError, ProtocolError, SecurityError,
 };
 use common::RustLangError;
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -330,7 +330,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Ok(_) => black_box(0),
                 Err(e) => {
                     let retryable = RustLangError::is_retryable(&e);
-                    let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                    let delay =
+                        RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
                     let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                     black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
@@ -350,7 +351,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Err(e) => {
                     stats.record_error(&e);
                     let retryable = RustLangError::is_retryable(&e);
-                    let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                    let delay =
+                        RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
                     let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                     black_box(retryable as u64 + delay.as_secs() + max_retries as u64)
                 }
@@ -367,7 +369,8 @@ fn bench_error_handling_performance(c: &mut Criterion) {
                 Ok(_) => black_box(0),
                 Err(e) => {
                     if RustLangError::is_retryable(&e) {
-                        let delay = RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
+                        let delay =
+                            RustLangError::retry_delay(&e).unwrap_or(Duration::from_millis(100));
                         let max_retries = RustLangError::max_retries(&e).unwrap_or(0);
                         black_box(delay.as_secs() + max_retries as u64)
                     } else {
@@ -419,7 +422,8 @@ fn bench_error_handling_concurrency(c: &mut Criterion) {
                 let handle = thread::spawn(move || {
                     let error = NetworkError::Timeout(Duration::from_secs(5));
                     let retryable = RustLangError::is_retryable(&error);
-                    let delay = RustLangError::retry_delay(&error).unwrap_or(Duration::from_millis(100));
+                    let delay =
+                        RustLangError::retry_delay(&error).unwrap_or(Duration::from_millis(100));
                     let max_retries = RustLangError::max_retries(&error).unwrap_or(0);
                     retryable as u64 + delay.as_secs() + max_retries as u64
                 });

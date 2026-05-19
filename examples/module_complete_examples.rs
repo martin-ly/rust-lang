@@ -12,7 +12,7 @@ pub fn ownership_borrow_complete_example() {
     // 所有权转移
     let s1 = String::from("hello");
     let s2 = s1; // s1的所有权转移到s2
-    // println!("{}", s1); // 错误：s1不再有效
+                 // println!("{}", s1); // 错误：s1不再有效
     println!("  - 所有权转移: {}", s2);
 
     // 借用
@@ -42,7 +42,10 @@ pub fn type_system_complete_example() {
     let int_val: i32 = 42;
     let float_val: f64 = 3.14;
     let bool_val: bool = true;
-    println!("  - 基本类型: i32={}, f64={}, bool={}", int_val, float_val, bool_val);
+    println!(
+        "  - 基本类型: i32={}, f64={}, bool={}",
+        int_val, float_val, bool_val
+    );
 
     // 复合类型
     let tuple: (i32, f64, bool) = (42, 3.14, true);
@@ -131,8 +134,10 @@ pub fn generic_programming_complete_example() {
 
     let integer_point = Point { x: 5, y: 10 };
     let float_point = Point { x: 1.0, y: 4.0 };
-    println!("  - 泛型结构体: Point<i32> {{ x: {}, y: {} }}, Point<f64> {{ x: {}, y: {} }}",
-             integer_point.x, integer_point.y, float_point.x, float_point.y);
+    println!(
+        "  - 泛型结构体: Point<i32> {{ x: {}, y: {} }}, Point<f64> {{ x: {}, y: {} }}",
+        integer_point.x, integer_point.y, float_point.x, float_point.y
+    );
 }
 
 /// C05 - 线程与并发完整示例
@@ -318,22 +323,24 @@ fn main() {
     println!("\n✅ 所有模块完整示例完成！");
 }
 
-
 // Rust 1.94 特性示例
 fn rust_194_features_demo() {
     println!("\n🆕 Rust 1.94 特性演示");
-    
+
     // array_windows
     let data = [1, 2, 3, 4, 5];
     for window in data.array_windows::<2>() {
         println!("  Window: {:?}", window);
     }
-    
+
     // ControlFlow
     use std::ops::ControlFlow;
     let result = [1, 2, 3].iter().try_for_each(|&n| {
-        if n > 2 { ControlFlow::Break(n) }
-        else { ControlFlow::Continue(()) }
+        if n > 2 {
+            ControlFlow::Break(n)
+        } else {
+            ControlFlow::Continue(())
+        }
     });
     println!("  ControlFlow: {:?}", result.break_value());
 }

@@ -1,4 +1,4 @@
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 
 // 责任链：用函数链模拟
@@ -28,7 +28,11 @@ fn deco2(f: fn(u64) -> u64) -> impl Fn(u64) -> u64 {
 
 // 代理：条件分派
 fn proxy_call(flag: bool, x: u64) -> u64 {
-    if flag { base(x) } else { x }
+    if flag {
+        base(x)
+    } else {
+        x
+    }
 }
 
 pub fn scenario_benchmarks(c: &mut Criterion) {

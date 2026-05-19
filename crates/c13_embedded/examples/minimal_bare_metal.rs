@@ -1,4 +1,4 @@
-﻿//! 最小 bare-metal 程序
+//! 最小 bare-metal 程序
 //!
 //! 演示一个可在真实嵌入式目标上编译的最小 no_std 程序结构。
 //! 在 host 目标上，使用模拟代码确保 cargo check 通过。

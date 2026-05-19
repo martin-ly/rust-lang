@@ -93,17 +93,11 @@ impl<F: FnMut(i32)> CallbackWrapper<F> {
         unsafe extern "C" fn(*mut std::ffi::c_void, i32),
     ) {
         let boxed = Box::into_raw(Box::new(self));
-        (
-            boxed.cast::<std::ffi::c_void>(),
-            trampoline::<F>,
-        )
+        (boxed.cast::<std::ffi::c_void>(), trampoline::<F>)
     }
 }
 
-unsafe extern "C" fn trampoline<F: FnMut(i32)>(
-    user_data: *mut std::ffi::c_void,
-    result: i32,
-) {
+unsafe extern "C" fn trampoline<F: FnMut(i32)>(user_data: *mut std::ffi::c_void, result: i32) {
     let wrapper = unsafe { &mut *user_data.cast::<CallbackWrapper<F>>() };
     (wrapper.closure)(result);
 }

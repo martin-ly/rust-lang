@@ -1,17 +1,17 @@
-﻿//! 集成测试
+//! 集成测试
 //!
 //! 验证 c13_embedded 各模块在 host 目标下的正确性。
 
-use c13_embedded::{
-    bare_metal_basics::{PanicHandlerConcept, StartupCode},
-    ffi_c_interop::{rust_initialize_sensor, CBindingsConcept, SensorData, SensorStatus},
-    hal_design_patterns::{states, Spi, UartBuilder, ZeroCostAbstraction},
-    interrupt_handling::{CriticalSectionConcept, NvicConcept},
-    memory_mapped_registers::{BitOps, GpioRegisters},
-    no_std_practices::{CoreUsageDemo, FixedRingBuffer, SpinLockConcept},
-    uart_driver::{lsr_flags, UartDriver, UartRegisters},
-    get_library_info,
+use c13_embedded::bare_metal_basics::{PanicHandlerConcept, StartupCode};
+use c13_embedded::ffi_c_interop::{
+    rust_initialize_sensor, CBindingsConcept, SensorData, SensorStatus,
 };
+use c13_embedded::get_library_info;
+use c13_embedded::hal_design_patterns::{states, Spi, UartBuilder, ZeroCostAbstraction};
+use c13_embedded::interrupt_handling::{CriticalSectionConcept, NvicConcept};
+use c13_embedded::memory_mapped_registers::{BitOps, GpioRegisters};
+use c13_embedded::no_std_practices::{CoreUsageDemo, FixedRingBuffer, SpinLockConcept};
+use c13_embedded::uart_driver::{lsr_flags, UartDriver, UartRegisters};
 
 #[test]
 fn test_library_info() {

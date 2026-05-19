@@ -2,7 +2,7 @@
 //!
 //! 展示Rust在并发环境下的所有权管理
 
-use std::sync::{Arc, Mutex, RwLock, mpsc};
+use std::sync::{mpsc, Arc, Mutex, RwLock};
 use std::thread;
 use std::time::Duration;
 
@@ -28,11 +28,11 @@ pub struct MyData {
 pub fn arc_is_send() {
     let data = Arc::new(42);
     let data2 = Arc::clone(&data);
-    
+
     thread::spawn(move || {
         println!("{}", data2);
     });
-    
+
     println!("{}", data);
 }
 
@@ -50,9 +50,9 @@ pub fn shared_mutable_state() {
         counter: 0,
         data: vec![],
     }));
-    
+
     let mut handles = vec![];
-    
+
     for i in 0..5 {
         let state = Arc::clone(&state);
         let handle = thread::spawn(move || {
@@ -62,11 +62,11 @@ pub fn shared_mutable_state() {
         });
         handles.push(handle);
     }
-    
+
     for handle in handles {
         handle.join().unwrap();
     }
-    
+
     let final_state = state.lock().unwrap();
     println!("Counter: {}", final_state.counter);
 }
@@ -74,7 +74,7 @@ pub fn shared_mutable_state() {
 /// 读写锁模式 - 读多写少场景
 pub fn rwlock_pattern() {
     let data = Arc::new(RwLock::new(vec![1, 2, 3, 4, 5]));
-    
+
     let mut readers = vec![];
     for _ in 0..3 {
         let data = Arc::clone(&data);
@@ -83,14 +83,14 @@ pub fn rwlock_pattern() {
             println!("Read: {:?}", *read_guard);
         }));
     }
-    
+
     let data_writer = Arc::clone(&data);
     let writer = thread::spawn(move || {
         let mut write_guard = data_writer.write().unwrap();
         write_guard.push(6);
         println!("Written");
     });
-    
+
     for r in readers {
         r.join().unwrap();
     }
@@ -103,14 +103,14 @@ pub fn rwlock_pattern() {
 
 pub fn message_passing() {
     let (tx, rx) = mpsc::channel();
-    
+
     thread::spawn(move || {
         for i in 0..5 {
             tx.send(format!("Message {}", i)).unwrap();
             thread::sleep(Duration::from_millis(10));
         }
     });
-    
+
     for received in rx {
         println!("Received: {}", received);
     }
@@ -119,7 +119,7 @@ pub fn message_passing() {
 /// 多生产者单消费者
 pub fn mpmc_pattern() {
     let (tx, rx) = mpsc::channel();
-    
+
     for i in 0..3 {
         let tx = tx.clone();
         thread::spawn(move || {
@@ -128,9 +128,9 @@ pub fn mpmc_pattern() {
             }
         });
     }
-    
+
     drop(tx); // 关闭原始发送端
-    
+
     for received in rx {
         println!("Received: {:?}", received);
     }
@@ -142,7 +142,7 @@ pub fn mpmc_pattern() {
 
 pub fn scoped_thread_pattern() {
     let data = vec![1, 2, 3, 4, 5];
-    
+
     thread::scope(|s| {
         s.spawn(|| {
             println!("{:?}", &data);
@@ -170,7 +170,7 @@ impl FineGrainedCache {
         }
         Self { data }
     }
-    
+
     pub fn get(&self, idx: usize) -> Option<std::sync::MutexGuard<String>> {
         self.data.get(idx).map(|m| m.lock().unwrap())
     }
@@ -180,7 +180,7 @@ impl FineGrainedCache {
 pub fn deadlock_avoidance() {
     let lock1 = Arc::new(Mutex::new(1));
     let lock2 = Arc::new(Mutex::new(2));
-    
+
     // 总是按相同顺序获取锁
     let t1 = {
         let (l1, l2) = (Arc::clone(&lock1), Arc::clone(&lock2));
@@ -190,7 +190,7 @@ pub fn deadlock_avoidance() {
             println!("Thread 1 acquired both locks");
         })
     };
-    
+
     let t2 = {
         let (l1, l2) = (Arc::clone(&lock1), Arc::clone(&lock2));
         thread::spawn(move || {
@@ -199,7 +199,7 @@ pub fn deadlock_avoidance() {
             println!("Thread 2 acquired both locks");
         })
     };
-    
+
     t1.join().unwrap();
     t2.join().unwrap();
 }
@@ -211,17 +211,17 @@ pub fn deadlock_avoidance() {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_arc_send() {
         arc_is_send();
     }
-    
+
     #[test]
     fn test_scoped_threads() {
         scoped_thread_pattern();
     }
-    
+
     #[test]
     fn test_deadlock_avoidance() {
         deadlock_avoidance();

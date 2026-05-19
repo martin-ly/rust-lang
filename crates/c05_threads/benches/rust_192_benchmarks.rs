@@ -10,15 +10,15 @@
 //! ```bash
 //! cargo bench --bench rust_192_benchmarks
 //! ```
-use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion, Throughput};
 use std::hint::black_box;
 use std::num::NonZeroUsize;
 use std::sync::Arc;
 use std::thread;
 
 use c05_threads::archive::rust_192_features::{
-    ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator, ThreadSafeUninitBuffer,
-    ThreadSchedulingConfig, ThreadTask, calculate_thread_pool_size,
+    calculate_thread_pool_size, ThreadPoolManager, ThreadPoolTaskQueue, ThreadResourceAllocator,
+    ThreadSafeUninitBuffer, ThreadSchedulingConfig, ThreadTask,
 };
 
 /// 基准测试 rotate_right 在线程池任务队列中的性能

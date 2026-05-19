@@ -1,12 +1,14 @@
 //! 算法性能基准测试
 //!
 //! 本文件包含各种算法的性能基准测试，用于评估2025年最新优化后的性能
-use c08_algorithms::algorithms::{
-    dynamic_programming::DynamicProgrammingAlgorithms, execution_modes::SyncAlgorithm,
-    graph::GraphAlgorithms, number_theory::NumberTheoryAlgorithms, searching::SearchingAlgorithms,
-    sorting::QuickSort, string_algorithms::StringAlgorithms,
-};
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use c08_algorithms::algorithms::dynamic_programming::DynamicProgrammingAlgorithms;
+use c08_algorithms::algorithms::execution_modes::SyncAlgorithm;
+use c08_algorithms::algorithms::graph::GraphAlgorithms;
+use c08_algorithms::algorithms::number_theory::NumberTheoryAlgorithms;
+use c08_algorithms::algorithms::searching::SearchingAlgorithms;
+use c08_algorithms::algorithms::sorting::QuickSort;
+use c08_algorithms::algorithms::string_algorithms::StringAlgorithms;
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 
 /// 排序算法基准测试

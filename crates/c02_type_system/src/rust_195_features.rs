@@ -1,4 +1,4 @@
-﻿//! Rust 1.95.0 类型系统新特性实现模块
+//! Rust 1.95.0 类型系统新特性实现模块
 //!
 //! 本模块展示了 Rust 1.95.0 在类型系统方面的关键增强：
 //! - `core::range` 模块与 `RangeInclusive` / `RangeInclusiveIter` 类型 ⭐

@@ -488,7 +488,7 @@ pub fn create_default_resource_allocator() -> ThreadResourceAllocator {
 pub fn create_default_scheduling_config() -> ThreadSchedulingConfig {
     ThreadSchedulingConfig::new(
         NonZeroUsize::new(2).expect("线程数应非零"), // 最小 2 个线程
-        16,                            // 最大 16 个线程
+        16,                                          // 最大 16 个线程
     )
 }
 

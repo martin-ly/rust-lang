@@ -1,4 +1,4 @@
-﻿//! HAL 设计模式
+//! HAL 设计模式
 //!
 //! 硬件抽象层 (Hardware Abstraction Layer) 是嵌入式 Rust 的核心。
 //! 通过类型系统和所有权，HAL 可以在编译时防止许多常见错误。

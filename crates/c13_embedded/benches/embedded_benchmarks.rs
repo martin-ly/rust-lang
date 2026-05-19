@@ -3,7 +3,7 @@
 //! 测试 bare-metal 编程概念在 host 模拟环境下的性能表现。
 //! 由于真实硬件环境不可用，这些基准测试主要用于验证算法逻辑的正确性和相对性能。
 
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 模拟 MMIO 寄存器访问性能
 /// 对应真实场景：嵌入式系统中频繁的寄存器读写

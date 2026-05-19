@@ -34,6 +34,7 @@ mod run {
 #[cfg(not(feature = "offline"))]
 fn main() {
     eprintln!(
-        "This example requires feature 'offline'.\nTry: cargo run -p c10_networks --features offline --example pcap_offline -- capture.pcap"
+        "This example requires feature 'offline'.\nTry: cargo run -p c10_networks --features \
+         offline --example pcap_offline -- capture.pcap"
     );
 }

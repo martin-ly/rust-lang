@@ -33,7 +33,7 @@ fn test_message_creation() {
 fn test_process_config_creation() {
     let mut env = HashMap::new();
     env.insert("PATH".to_string(), "/usr/bin".to_string());
-    
+
     let config = ProcessConfig {
         program: "echo".to_string(),
         args: vec!["hello".to_string()],
@@ -44,7 +44,7 @@ fn test_process_config_creation() {
         priority: None,
         resource_limits: ResourceLimits::default(),
     };
-    
+
     assert_eq!(config.program, "echo");
     assert_eq!(config.args.len(), 1);
     assert_eq!(config.working_dir, Some("/tmp".to_string()));

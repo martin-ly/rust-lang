@@ -1,5 +1,5 @@
 //! Unified error handling module with trait-based design
-//! 
+//!
 //! This module provides:
 //! - `RustLangError` trait: Core trait for all errors in the system
 //! - `CommonError`: Generic error types that don't depend on specific crates
@@ -22,7 +22,7 @@ pub enum ErrorCode {
     Cancelled = 105,
     Config = 106,
     Other = 107,
-    
+
     // Category-based codes (1000+)
     Ownership = 1000,
     Type = 2000,
@@ -36,7 +36,7 @@ pub enum ErrorCode {
     Network = 10000,
     Macro = 11000,
     Wasm = 12000,
-    
+
     // Custom errors (20000+)
     Custom = 20000,
 }
@@ -45,9 +45,14 @@ impl ErrorCode {
     /// Get the error category based on error code
     pub fn category(&self) -> &'static str {
         match self {
-            ErrorCode::Io | ErrorCode::Parse | ErrorCode::Validation |
-            ErrorCode::NotFound | ErrorCode::Timeout | ErrorCode::Cancelled |
-            ErrorCode::Config | ErrorCode::Other => "common",
+            ErrorCode::Io
+            | ErrorCode::Parse
+            | ErrorCode::Validation
+            | ErrorCode::NotFound
+            | ErrorCode::Timeout
+            | ErrorCode::Cancelled
+            | ErrorCode::Config
+            | ErrorCode::Other => "common",
             ErrorCode::Ownership => "ownership",
             ErrorCode::Type => "type",
             ErrorCode::ControlFlow => "control_flow",
@@ -66,23 +71,23 @@ impl ErrorCode {
 }
 
 /// Core trait for all errors in the rust-lang system
-/// 
+///
 /// This trait provides a unified interface for error handling across all crates,
 /// allowing each crate to define its own error types while maintaining compatibility.
 pub trait RustLangError: std::error::Error + Send + Sync + 'static {
     /// Get the error code for categorization
     fn error_code(&self) -> ErrorCode;
-    
+
     /// Check if this error is retryable
     fn is_retryable(&self) -> bool {
         false
     }
-    
+
     /// Get retry delay if applicable
     fn retry_delay(&self) -> Option<Duration> {
         None
     }
-    
+
     /// Get max retry count if applicable
     fn max_retries(&self) -> Option<u32> {
         None
@@ -90,32 +95,32 @@ pub trait RustLangError: std::error::Error + Send + Sync + 'static {
 }
 
 /// Generic error types that don't depend on specific crates
-/// 
+///
 /// These are common errors that can be used across the entire system
 /// without creating circular dependencies.
 #[derive(Error, Debug, Clone)]
 pub enum CommonError {
     #[error("IO error: {0}")]
     Io(String),
-    
+
     #[error("parse error: {0}")]
     Parse(String),
-    
+
     #[error("validation error: {0}")]
     Validation(String),
-    
+
     #[error("not found: {0}")]
     NotFound(String),
-    
+
     #[error("operation timed out")]
     Timeout,
-    
+
     #[error("operation cancelled")]
     Cancelled,
-    
+
     #[error("config error: {0}")]
     Config(String),
-    
+
     #[error("{0}")]
     Other(String),
 }
@@ -133,11 +138,11 @@ impl RustLangError for CommonError {
             CommonError::Other(_) => ErrorCode::Other,
         }
     }
-    
+
     fn is_retryable(&self) -> bool {
         matches!(self, CommonError::Timeout | CommonError::Io(_))
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         match self {
             CommonError::Timeout => Some(Duration::from_millis(100)),
@@ -145,7 +150,7 @@ impl RustLangError for CommonError {
             _ => None,
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         match self {
             CommonError::Timeout => Some(3),
@@ -174,14 +179,14 @@ impl From<&str> for CommonError {
 }
 
 /// Minimal unified error type for cross-crate error handling
-/// 
+///
 /// This enum provides a way to handle errors from multiple crates
 /// when you need a concrete type rather than a trait object.
 #[derive(Error, Debug, Clone)]
 pub enum UnifiedError {
     #[error("common error: {0}")]
     Common(CommonError),
-    
+
     #[error("custom error: {0}")]
     Custom(String),
 }
@@ -193,21 +198,21 @@ impl RustLangError for UnifiedError {
             UnifiedError::Custom(_) => ErrorCode::Custom,
         }
     }
-    
+
     fn is_retryable(&self) -> bool {
         match self {
             UnifiedError::Common(e) => RustLangError::is_retryable(e),
             UnifiedError::Custom(_) => false,
         }
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         match self {
             UnifiedError::Common(e) => RustLangError::retry_delay(e),
             UnifiedError::Custom(_) => None,
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         match self {
             UnifiedError::Common(e) => RustLangError::max_retries(e),
@@ -267,7 +272,7 @@ where
 }
 
 /// Legacy ErrorRecovery trait - maintained for backward compatibility
-/// 
+///
 /// This trait is implemented for types that implement RustLangError.
 /// For new code, prefer using RustLangError trait directly.
 pub trait ErrorRecovery {
@@ -282,27 +287,27 @@ impl<T: RustLangError> ErrorRecovery for T {
     fn is_retryable(&self) -> bool {
         RustLangError::is_retryable(self)
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         RustLangError::retry_delay(self)
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         RustLangError::max_retries(self)
     }
 }
 
 /// Macro to simplify RustLangError trait implementation
-/// 
+///
 /// # Examples
-/// 
+///
 /// ```rust,ignore
 /// #[derive(Error, Debug)]
 /// pub enum MyError {
 ///     #[error("something failed")]
 ///     Failed,
 /// }
-/// 
+///
 /// impl_rust_lang_error!(MyError, ErrorCode::Custom);
 /// ```
 #[macro_export]
@@ -313,41 +318,47 @@ macro_rules! impl_rust_lang_error {
             fn error_code(&self) -> $crate::error::ErrorCode {
                 $code
             }
-            
+
             fn is_retryable(&self) -> bool {
                 false
             }
         }
     };
-    
+
     // Implementation with custom retryable logic
-    ($type:ty, $code:expr, retryable: $retryable:expr) => {
+    ($type:ty, $code:expr,retryable: $retryable:expr) => {
         impl $crate::error::RustLangError for $type {
             fn error_code(&self) -> $crate::error::ErrorCode {
                 $code
             }
-            
+
             fn is_retryable(&self) -> bool {
                 $retryable
             }
         }
     };
-    
+
     // Full implementation with all options
-    ($type:ty, $code:expr, retryable: $retryable:expr, retry_delay: $delay:expr, max_retries: $retries:expr) => {
+    (
+        $type:ty,
+        $code:expr,retryable:
+        $retryable:expr,retry_delay:
+        $delay:expr,max_retries:
+        $retries:expr
+    ) => {
         impl $crate::error::RustLangError for $type {
             fn error_code(&self) -> $crate::error::ErrorCode {
                 $code
             }
-            
+
             fn is_retryable(&self) -> bool {
                 $retryable
             }
-            
+
             fn retry_delay(&self) -> Option<std::time::Duration> {
                 $delay
             }
-            
+
             fn max_retries(&self) -> Option<u32> {
                 $retries
             }
@@ -368,28 +379,28 @@ macro_rules! impl_into_unified_error {
 }
 
 /// Macro to create a crate-specific error module
-/// 
+///
 /// This macro sets up the standard boilerplate for a crate's error handling.
 #[macro_export]
 macro_rules! define_crate_error {
     (
-        crate_name: $crate_name:ident,
-        error_type: $error_type:ty,
-        error_code: $error_code:expr,
-        result_type: $result_name:ident
+        crate_name:
+        $crate_name:ident,error_type:
+        $error_type:ty,error_code:
+        $error_code:expr,result_type:
+        $result_name:ident
     ) => {
         pub use $crate::{
-            RustLangError, CommonError, UnifiedError, Result,
-            ErrorContext, ErrorRecovery, ErrorCode,
-            impl_rust_lang_error, impl_into_unified_error,
+            impl_into_unified_error, impl_rust_lang_error, CommonError, ErrorCode, ErrorContext,
+            ErrorRecovery, Result, RustLangError, UnifiedError,
         };
-        
+
         /// Crate-specific result type
         pub type $result_name<T> = $crate::Result<T>;
-        
+
         // Implement RustLangError for this crate's error type
         $crate::impl_rust_lang_error!($error_type, $error_code);
-        
+
         // Implement conversion to UnifiedError
         $crate::impl_into_unified_error!($error_type);
     };
@@ -451,7 +462,7 @@ pub use ErrorRecovery as Retryable;
 mod tests {
     use super::*;
     use thiserror::Error;
-    
+
     #[derive(Error, Debug, Clone)]
     enum TestError {
         #[error("test failed")]
@@ -459,16 +470,16 @@ mod tests {
         #[error("test retryable")]
         Retryable,
     }
-    
+
     impl RustLangError for TestError {
         fn error_code(&self) -> ErrorCode {
             ErrorCode::Custom
         }
-        
+
         fn is_retryable(&self) -> bool {
             matches!(self, TestError::Retryable)
         }
-        
+
         fn retry_delay(&self) -> Option<Duration> {
             if RustLangError::is_retryable(self) {
                 Some(Duration::from_millis(100))
@@ -477,53 +488,56 @@ mod tests {
             }
         }
     }
-    
+
     #[test]
     fn test_common_error() {
         let err = CommonError::Io("file not found".to_string());
         assert_eq!(RustLangError::error_code(&err), ErrorCode::Io);
         assert!(RustLangError::is_retryable(&err));
-        
+
         let err = CommonError::Validation("invalid".to_string());
         assert_eq!(RustLangError::error_code(&err), ErrorCode::Validation);
         assert!(!RustLangError::is_retryable(&err));
     }
-    
+
     #[test]
     fn test_unified_error() {
         let err = UnifiedError::Common(CommonError::Timeout);
         assert_eq!(RustLangError::error_code(&err), ErrorCode::Timeout);
         assert!(RustLangError::is_retryable(&err));
     }
-    
+
     #[test]
     fn test_trait_impl() {
         let err = TestError::Failed;
         assert!(!RustLangError::is_retryable(&err));
-        
+
         let err = TestError::Retryable;
         assert!(RustLangError::is_retryable(&err));
-        assert_eq!(RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
+        assert_eq!(
+            RustLangError::retry_delay(&err),
+            Some(Duration::from_millis(100))
+        );
     }
-    
+
     #[test]
     fn test_error_code_category() {
         assert_eq!(ErrorCode::Io.category(), "common");
         assert_eq!(ErrorCode::Network.category(), "network");
         assert_eq!(ErrorCode::Custom.category(), "custom");
     }
-    
+
     #[test]
     fn test_error_recovery_trait() {
         // Test that ErrorRecovery is correctly implemented via blanket impl
         fn check_recovery<T: ErrorRecovery>(e: &T) -> bool {
             ErrorRecovery::is_retryable(e)
         }
-        
+
         let err = CommonError::Timeout;
         assert!(check_recovery(&err));
     }
-    
+
     #[test]
     fn test_macro_impl() {
         #[derive(Error, Debug)]
@@ -531,9 +545,9 @@ mod tests {
             #[error("macro test")]
             Test,
         }
-        
+
         impl_rust_lang_error!(MacroTestError, ErrorCode::Custom);
-        
+
         let err = MacroTestError::Test;
         assert_eq!(RustLangError::error_code(&err), ErrorCode::Custom);
         assert!(!RustLangError::is_retryable(&err));

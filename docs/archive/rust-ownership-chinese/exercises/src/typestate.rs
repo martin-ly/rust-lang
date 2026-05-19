@@ -22,9 +22,12 @@ pub struct Connection<State> {
 
 impl Connection<Uninitialized> {
     pub fn new(url: String) -> Self {
-        Self { url, state: PhantomData }
+        Self {
+            url,
+            state: PhantomData,
+        }
     }
-    
+
     pub fn init(self) -> Result<Connection<Initialized>, String> {
         if self.url.starts_with("http") {
             Ok(Connection {
@@ -51,7 +54,7 @@ impl Connection<Running> {
     pub fn request(&self, path: &str) -> String {
         format!("GET {}{}", self.url, path)
     }
-    
+
     pub fn disconnect(self) -> Connection<Stopped> {
         println!("Disconnected from {}", self.url);
         Connection {
@@ -91,22 +94,22 @@ impl ConfigBuilder<Incomplete> {
             state: PhantomData,
         }
     }
-    
+
     pub fn host(mut self, host: impl Into<String>) -> Self {
         self.host = Some(host.into());
         self
     }
-    
+
     pub fn port(mut self, port: u16) -> Self {
         self.port = Some(port);
         self
     }
-    
+
     pub fn build(self) -> Result<ConfigBuilder<Complete>, String> {
         if self.host.is_none() {
             return Err("Host is required".to_string());
         }
-        
+
         Ok(ConfigBuilder {
             host: self.host,
             port: self.port.or(Some(8080)),
@@ -119,7 +122,7 @@ impl ConfigBuilder<Complete> {
     pub fn host(&self) -> &str {
         self.host.as_ref().unwrap()
     }
-    
+
     pub fn port(&self) -> u16 {
         self.port.unwrap()
     }
@@ -150,7 +153,7 @@ impl FileHandle<Open> {
     pub fn read(&self) -> String {
         format!("Contents of {}", self.name)
     }
-    
+
     pub fn close(self) -> FileHandle<Closed> {
         FileHandle {
             name: self.name,
@@ -186,7 +189,7 @@ impl User<ReadOnly> {
             _perm: PhantomData,
         }
     }
-    
+
     pub fn view(&self, doc: &str) {
         println!("{} is viewing: {}", self.name, doc);
     }
@@ -199,7 +202,7 @@ impl User<ReadWrite> {
             _perm: PhantomData,
         }
     }
-    
+
     pub fn edit(&self, doc: &str) {
         println!("{} is editing: {}", self.name, doc);
     }
@@ -212,7 +215,7 @@ impl User<Admin> {
             _perm: PhantomData,
         }
     }
-    
+
     pub fn delete(&self, doc: &str) {
         println!("{} is deleting: {}", self.name, doc);
     }
@@ -225,7 +228,7 @@ impl User<Admin> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_connection_lifecycle() {
         let conn = Connection::new("https://example.com".to_string());
@@ -236,7 +239,7 @@ mod tests {
         let stopped = running.disconnect();
         let _ = stopped.restart();
     }
-    
+
     #[test]
     fn test_config_builder() {
         let config = ConfigBuilder::new()
@@ -244,11 +247,11 @@ mod tests {
             .port(3000)
             .build()
             .unwrap();
-        
+
         assert_eq!(config.host(), "localhost");
         assert_eq!(config.port(), 3000);
     }
-    
+
     #[test]
     fn test_file_handle() {
         let file = FileHandle::open("test.txt");
@@ -257,15 +260,15 @@ mod tests {
         let closed = file.close();
         closed.cannot_read();
     }
-    
+
     #[test]
     fn test_permission_system() {
         let user = User::<ReadOnly>::new("Alice");
         user.view("document.txt");
-        
+
         let rw_user = User::<ReadWrite>::promote(user);
         rw_user.edit("document.txt");
-        
+
         let admin = User::<Admin>::promote_rw(rw_user);
         admin.delete("document.txt");
     }

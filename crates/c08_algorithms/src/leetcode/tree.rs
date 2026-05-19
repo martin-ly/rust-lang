@@ -487,14 +487,16 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "二叉树的最大深度".to_string(),
             title_en: "Maximum Depth of Binary Tree".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch],
-            description: "给定一个二叉树，找出其最大深度。二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。".to_string(),
-            examples: vec![
-                "输入：root = [3,9,20,null,null,15,7]\n输出：3".to_string(),
+            tags: vec![
+                LeetCodeTag::Tree,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
             ],
-            constraints: vec![
-                "树中节点数量在 [0, 10^4] 范围内".to_string(),
-            ],
+            description: "给定一个二叉树，找出其最大深度。\
+                          二叉树的深度为根节点到最远叶子节点的最长路径上的节点数。"
+                .to_string(),
+            examples: vec!["输入：root = [3,9,20,null,null,15,7]\n输出：3".to_string()],
+            constraints: vec!["树中节点数量在 [0, 10^4] 范围内".to_string()],
             rust_191_features: vec![
                 "JIT 优化：递归遍历性能提升".to_string(),
                 "内存优化：使用递归栈，O(h) 空间复杂度".to_string(),
@@ -510,14 +512,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "相同的树".to_string(),
             title_en: "Same Tree".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch],
-            description: "给你两棵二叉树的根节点 p 和 q，编写一个函数来检验这两棵树是否相同。".to_string(),
-            examples: vec![
-                "输入：p = [1,2,3], q = [1,2,3]\n输出：true".to_string(),
+            tags: vec![
+                LeetCodeTag::Tree,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
             ],
-            constraints: vec![
-                "两棵树上的节点数目都在范围 [0, 100] 内".to_string(),
-            ],
+            description: "给你两棵二叉树的根节点 p 和 q，编写一个函数来检验这两棵树是否相同。"
+                .to_string(),
+            examples: vec!["输入：p = [1,2,3], q = [1,2,3]\n输出：true".to_string()],
+            constraints: vec!["两棵树上的节点数目都在范围 [0, 100] 内".to_string()],
             rust_191_features: vec![
                 "JIT 优化：递归遍历性能提升".to_string(),
                 "内存优化：O(h) 空间复杂度".to_string(),
@@ -533,14 +536,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "对称二叉树".to_string(),
             title_en: "Symmetric Tree".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch, LeetCodeTag::BreadthFirstSearch],
+            tags: vec![
+                LeetCodeTag::Tree,
+                LeetCodeTag::DepthFirstSearch,
+                LeetCodeTag::BreadthFirstSearch,
+            ],
             description: "给你一个二叉树的根节点 root，检查它是否轴对称。".to_string(),
-            examples: vec![
-                "输入：root = [1,2,2,3,4,4,3]\n输出：true".to_string(),
-            ],
-            constraints: vec![
-                "树中节点数目在范围 [1, 1000] 内".to_string(),
-            ],
+            examples: vec!["输入：root = [1,2,2,3,4,4,3]\n输出：true".to_string()],
+            constraints: vec!["树中节点数目在范围 [1, 1000] 内".to_string()],
             rust_191_features: vec![
                 "JIT 优化：递归遍历性能提升".to_string(),
                 "内存优化：O(h) 空间复杂度".to_string(),
@@ -557,13 +560,12 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Diameter of Binary Tree".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Tree, LeetCodeTag::DepthFirstSearch],
-            description: "给你一棵二叉树的根节点，返回该树的直径。二叉树的直径是指树中任意两个节点之间最长路径的长度。这条路径可能穿过也可能不穿过根节点。".to_string(),
-            examples: vec![
-                "输入：root = [1,2,3,4,5]\n输出：3".to_string(),
-            ],
-            constraints: vec![
-                "树中节点数目在范围 [1, 10^4] 内".to_string(),
-            ],
+            description: "给你一棵二叉树的根节点，返回该树的直径。\
+                          二叉树的直径是指树中任意两个节点之间最长路径的长度。\
+                          这条路径可能穿过也可能不穿过根节点。"
+                .to_string(),
+            examples: vec!["输入：root = [1,2,3,4,5]\n输出：3".to_string()],
+            constraints: vec!["树中节点数目在范围 [1, 10^4] 内".to_string()],
             rust_191_features: vec![
                 "JIT 优化：递归遍历性能提升".to_string(),
                 "内存优化：O(h) 空间复杂度".to_string(),

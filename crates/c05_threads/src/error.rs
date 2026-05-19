@@ -12,25 +12,25 @@ use thiserror::Error;
 pub enum ThreadError {
     #[error("creation failed: {0}")]
     CreationFailed(String),
-    
+
     #[error("panicked: {0}")]
     Panicked(String),
-    
+
     #[error("deadlock detected: {0}")]
     Deadlock(String),
-    
+
     #[error("data race: {0}")]
     DataRace(String),
-    
+
     #[error("lock acquisition failed: {0}")]
     LockAcquisition(String),
-    
+
     #[error("send error: {0}")]
     SendError(String),
-    
+
     #[error("receive error: {0}")]
     ReceiveError(String),
-    
+
     #[error("lock-free error: {0}")]
     LockFree(String),
 }
@@ -40,11 +40,14 @@ impl common::RustLangError for ThreadError {
     fn error_code(&self) -> ErrorCode {
         ErrorCode::Thread
     }
-    
+
     fn is_retryable(&self) -> bool {
-        matches!(self, ThreadError::LockAcquisition(_) | ThreadError::SendError(_))
+        matches!(
+            self,
+            ThreadError::LockAcquisition(_) | ThreadError::SendError(_)
+        )
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         if RustLangError::is_retryable(self) {
             Some(Duration::from_millis(10))
@@ -52,7 +55,7 @@ impl common::RustLangError for ThreadError {
             None
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         if RustLangError::is_retryable(self) {
             Some(5)
@@ -66,8 +69,7 @@ impl_into_unified_error!(ThreadError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C05 crate's result type
@@ -113,12 +115,11 @@ pub fn lock_free_error<T: Into<String>>(msg: T) -> ThreadError {
     ThreadError::LockFree(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
-    use std::assert_matches;
     use super::*;
     use common::RustLangError;
+    use std::assert_matches;
 
     #[test]
     fn test_error_creation() {
@@ -131,8 +132,11 @@ mod tests {
     fn test_retryable_error() {
         let err = lock_acquisition_failed("test");
         assert!(common::RustLangError::is_retryable(&err));
-        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(10)));
-        
+        assert_eq!(
+            common::RustLangError::retry_delay(&err),
+            Some(Duration::from_millis(10))
+        );
+
         let err = thread_panicked("test");
         assert!(!common::RustLangError::is_retryable(&err));
     }

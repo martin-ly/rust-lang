@@ -345,7 +345,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Reverse Integer".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Math],
-            description: "给你一个 32 位的有符号整数 x ，返回将 x 中的数字部分反转后的结果。如果反转后整数超过 32 位的有符号整数的范围，就返回 0。".to_string(),
+            description: "给你一个 32 位的有符号整数 x ，返回将 x \
+                          中的数字部分反转后的结果。如果反转后整数超过 32 \
+                          位的有符号整数的范围，就返回 0。"
+                .to_string(),
             examples: vec!["输入：x = 123\n输出：321".to_string()],
             constraints: vec!["-2^31 <= x <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的整数溢出检查".to_string()],
@@ -361,7 +364,8 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Palindrome Number".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math],
-            description: "给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。".to_string(),
+            description: "给你一个整数 x ，如果 x 是一个回文整数，返回 true ；否则，返回 false 。"
+                .to_string(),
             examples: vec!["输入：x = 121\n输出：true".to_string()],
             constraints: vec!["-2^31 <= x <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的整数操作优化".to_string()],
@@ -379,7 +383,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             tags: vec![LeetCodeTag::Math, LeetCodeTag::Recursion],
             description: "实现 pow(x, n) ，即计算 x 的 n 次幂函数（即，x^n）。".to_string(),
             examples: vec!["输入：x = 2.00000, n = 10\n输出：1024.00000".to_string()],
-            constraints: vec!["-100.0 < x < 100.0".to_string(), "-2^31 <= n <= 2^31-1".to_string()],
+            constraints: vec![
+                "-100.0 < x < 100.0".to_string(),
+                "-2^31 <= n <= 2^31-1".to_string(),
+            ],
             rust_191_features: vec!["使用快速幂算法，Rust 1.92 性能优化".to_string()],
             complexity: ComplexityInfo {
                 time_complexity: "O(log(n))".to_string(),
@@ -393,7 +400,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Sqrt(x)".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math, LeetCodeTag::BinarySearch],
-            description: "给你一个非负整数 x ，计算并返回 x 的 算术平方根 。由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。".to_string(),
+            description: "给你一个非负整数 x ，计算并返回 x 的 算术平方根 \
+                          。由于返回类型是整数，结果只保留 整数部分 ，小数部分将被 舍去 。"
+                .to_string(),
             examples: vec!["输入：x = 4\n输出：2".to_string()],
             constraints: vec!["0 <= x <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用二分查找，Rust 1.92 整数操作优化".to_string()],
@@ -441,7 +450,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Power of Two".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math, LeetCodeTag::BitManipulation],
-            description: "给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true ；否则，返回 false 。".to_string(),
+            description: "给你一个整数 n，请你判断该整数是否是 2 的幂次方。如果是，返回 true \
+                          ；否则，返回 false 。"
+                .to_string(),
             examples: vec!["输入：n = 1\n输出：true".to_string()],
             constraints: vec!["-2^31 <= n <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用位操作，Rust 1.92 位操作优化".to_string()],
@@ -457,7 +468,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Power of Three".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math, LeetCodeTag::Recursion],
-            description: "给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true ；否则，返回 false 。".to_string(),
+            description: "给定一个整数，写一个函数来判断它是否是 3 的幂次方。如果是，返回 true \
+                          ；否则，返回 false 。"
+                .to_string(),
             examples: vec!["输入：n = 27\n输出：true".to_string()],
             constraints: vec!["-2^31 <= n <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用循环或递归，Rust 1.92 整数操作优化".to_string()],
@@ -473,7 +486,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Valid Perfect Square".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Math, LeetCodeTag::BinarySearch],
-            description: "给定一个 正整数 num ，编写一个函数，如果 num 是一个完全平方数，则返回 true ，否则返回 false 。".to_string(),
+            description: "给定一个 正整数 num ，编写一个函数，如果 num 是一个完全平方数，则返回 \
+                          true ，否则返回 false 。"
+                .to_string(),
             examples: vec!["输入：num = 16\n输出：true".to_string()],
             constraints: vec!["1 <= num <= 2^31 - 1".to_string()],
             rust_191_features: vec!["使用二分查找，Rust 1.92 整数操作优化".to_string()],
@@ -488,8 +503,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "斐波那契数".to_string(),
             title_en: "Fibonacci Number".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Math, LeetCodeTag::DynamicProgramming, LeetCodeTag::Recursion],
-            description: "斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。".to_string(),
+            tags: vec![
+                LeetCodeTag::Math,
+                LeetCodeTag::DynamicProgramming,
+                LeetCodeTag::Recursion,
+            ],
+            description: "斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 \
+                          和 1 开始，后面的每一项数字都是前面两项数字的和。"
+                .to_string(),
             examples: vec!["输入：n = 2\n输出：1".to_string()],
             constraints: vec!["0 <= n <= 30".to_string()],
             rust_191_features: vec!["使用动态规划或递归，Rust 1.92 性能优化".to_string()],

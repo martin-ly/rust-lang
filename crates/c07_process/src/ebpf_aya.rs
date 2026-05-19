@@ -93,13 +93,9 @@ pub struct XdpFirewallConcept;
 impl XdpFirewallConcept {
     /// XDP 动作类型说明
     pub fn xdp_actions() -> &'static str {
-        "| 动作 | 含义 | 性能 |\n\
-         |------|------|------|\n\
-         | XDP_ABORTED | 程序错误，丢包 | - |\n\
-         | XDP_DROP | 静默丢包 | 最高 |\n\
-         | XDP_PASS | 传递给网络栈 | 默认 |\n\
-         | XDP_TX | 从同一接口发出 | 高 |\n\
-         | XDP_REDIRECT | 重定向到其他接口/CPU | 高 |"
+        "| 动作 | 含义 | 性能 |\n|------|------|------|\n| XDP_ABORTED | 程序错误，丢包 | - |\n| \
+         XDP_DROP | 静默丢包 | 最高 |\n| XDP_PASS | 传递给网络栈 | 默认 |\n| XDP_TX | \
+         从同一接口发出 | 高 |\n| XDP_REDIRECT | 重定向到其他接口/CPU | 高 |"
     }
 }
 
@@ -151,13 +147,10 @@ pub struct TracepointConcept;
 impl TracepointConcept {
     /// 常见 Tracepoint 类别
     pub fn common_tracepoints() -> &'static str {
-        "| 子系统 | Tracepoint | 用途 |\n\
-         |--------|-----------|------|\n\
-         | sched | sched_switch | 进程切换 |\n\
-         | syscalls | sys_enter_openat | 文件打开 |\n\
-         | net | net_dev_queue | 网络包入队 |\n\
-         | block | block_rq_issue | 块设备 I/O |\n\
-         | irq | irq_handler_entry | 中断处理 |"
+        "| 子系统 | Tracepoint | 用途 |\n|--------|-----------|------|\n| sched | sched_switch | \
+         进程切换 |\n| syscalls | sys_enter_openat | 文件打开 |\n| net | net_dev_queue | \
+         网络包入队 |\n| block | block_rq_issue | 块设备 I/O |\n| irq | irq_handler_entry | \
+         中断处理 |"
     }
 }
 
@@ -176,14 +169,10 @@ pub struct BpfMapConcepts;
 impl BpfMapConcepts {
     /// 常用 Map 类型
     pub fn map_types() -> &'static str {
-        "| Map 类型 | 用途 | 内核版本 |\n\
-         |----------|------|----------|\n\
-         | HashMap | 通用键值存储 | 3.19+ |\n\
-         | Array | 固定大小数组 | 3.19+ |\n\
-         | RingBuf | 高性能事件流 | 5.8+ |\n\
-         | PerfEventArray |  per-CPU 事件 | 4.3+ |\n\
-         | LRUHashMap | 带淘汰的 HashMap | 4.10+ |\n\
-         | StackTrace | 栈追踪存储 | 4.6+ |"
+        "| Map 类型 | 用途 | 内核版本 |\n|----------|------|----------|\n| HashMap | 通用键值存储 \
+         | 3.19+ |\n| Array | 固定大小数组 | 3.19+ |\n| RingBuf | 高性能事件流 | 5.8+ |\n| \
+         PerfEventArray |  per-CPU 事件 | 4.3+ |\n| LRUHashMap | 带淘汰的 HashMap | 4.10+ |\n| \
+         StackTrace | 栈追踪存储 | 4.6+ |"
     }
 
     /// 用户态读取 RingBuf 的概念代码
@@ -251,12 +240,10 @@ pub struct EbpfLimitations;
 impl EbpfLimitations {
     /// Verifier 常见拒绝原因
     pub fn verifier_rejections() -> &'static str {
-        "| 原因 | 说明 | 解决 |\n\
-         |------|------|------|\n\
-         | invalid memory access | 访问未验证的指针 | 添加边界检查 |\n\
-         | unreachable instruction | 死代码 | 简化控制流 |\n\
-         | back-edge | 无限循环 | 确保循环有界 |\n\
-         | invalid helper call | 调用不允许的 helper | 检查 helper 白名单 |"
+        "| 原因 | 说明 | 解决 |\n|------|------|------|\n| invalid memory access | \
+         访问未验证的指针 | 添加边界检查 |\n| unreachable instruction | 死代码 | 简化控制流 |\n| \
+         back-edge | 无限循环 | 确保循环有界 |\n| invalid helper call | 调用不允许的 helper | 检查 \
+         helper 白名单 |"
     }
 }
 

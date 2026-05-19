@@ -1,12 +1,12 @@
-use std::sync::{
-    Arc,
-    atomic::{AtomicBool, Ordering},
-};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 use std::thread;
 use std::time::{Duration, Instant};
 
-use c05_threads::message_passing::backpressure_handling as bp;
-use c05_threads::message_passing::{channel, mpsc, stream::ReceiverStream, sync_channel, watch};
+use c05_threads::message_passing::stream::ReceiverStream;
+use c05_threads::message_passing::{
+    backpressure_handling as bp, channel, mpsc, sync_channel, watch,
+};
 
 #[test]
 fn test_channel_helpers_send_all_and_drain() {
@@ -95,7 +95,7 @@ fn test_watch_changed_and_borrow() {
 fn test_watch_try_changed() {
     let (tx, rx) = watch::channel(100i32);
     let mut ver = u64::MAX; // 从未见过，首次 try_changed 返回初始值
-    // 初次可见
+                            // 初次可见
     assert_eq!(rx.try_changed(&mut ver), Some(100));
     // 未变化时返回 None
     assert_eq!(rx.try_changed(&mut ver), None);

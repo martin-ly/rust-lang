@@ -133,8 +133,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Merge Intervals".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::Sorting],
-            description: "以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = [starti, endi] 。请你合并所有重叠的区间，并返回一个不重叠的区间数组，该数组需恰好覆盖输入中的所有区间。".to_string(),
-            examples: vec!["输入：intervals = [[1,3],[2,6],[8,10],[15,18]]\n输出：[[1,6],[8,10],[15,18]]".to_string()],
+            description: "以数组 intervals 表示若干个区间的集合，其中单个区间为 intervals[i] = \
+                          [starti, endi] \
+                          。请你合并所有重叠的区间，并返回一个不重叠的区间数组，\
+                          该数组需恰好覆盖输入中的所有区间。"
+                .to_string(),
+            examples: vec!["输入：intervals = \
+                            [[1,3],[2,6],[8,10],[15,18]]\n输出：[[1,6],[8,10],[15,18]]"
+                .to_string()],
             constraints: vec!["1 <= intervals.length <= 10^4".to_string()],
             rust_191_features: vec!["使用 Rust 1.92 的排序优化".to_string()],
             complexity: ComplexityInfo {
@@ -148,8 +154,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "颜色分类".to_string(),
             title_en: "Sort Colors".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::TwoPointers, LeetCodeTag::Sorting],
-            description: "给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、蓝色顺序排列。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::TwoPointers,
+                LeetCodeTag::Sorting,
+            ],
+            description: "给定一个包含红色、白色和蓝色、共 n 个元素的数组 nums \
+                          ，原地对它们进行排序，使得相同颜色的元素相邻，并按照红色、白色、\
+                          蓝色顺序排列。"
+                .to_string(),
             examples: vec!["输入：nums = [2,0,2,1,1,0]\n输出：[0,0,1,1,2,2]".to_string()],
             constraints: vec!["n == nums.length".to_string()],
             rust_191_features: vec!["使用双指针，Rust 1.92 性能优化".to_string()],
@@ -164,8 +177,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "排序链表".to_string(),
             title_en: "Sort List".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::TwoPointers, LeetCodeTag::Sorting],
-            description: "给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。".to_string(),
+            tags: vec![
+                LeetCodeTag::LinkedList,
+                LeetCodeTag::TwoPointers,
+                LeetCodeTag::Sorting,
+            ],
+            description: "给你链表的头结点 head ，请将其按 升序 排列并返回 排序后的链表 。"
+                .to_string(),
             examples: vec!["输入：head = [4,2,1,3]\n输出：[1,2,3,4]".to_string()],
             constraints: vec!["链表中节点的数目在范围 [0, 5 * 10^4] 内".to_string()],
             rust_191_features: vec!["使用归并排序，Rust 1.92 性能优化".to_string()],
@@ -180,8 +198,15 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "最大数".to_string(),
             title_en: "Largest Number".to_string(),
             difficulty: "Medium".to_string(),
-            tags: vec![LeetCodeTag::Array, LeetCodeTag::String, LeetCodeTag::Sorting, LeetCodeTag::Greedy],
-            description: "给定一组非负整数 nums，重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。".to_string(),
+            tags: vec![
+                LeetCodeTag::Array,
+                LeetCodeTag::String,
+                LeetCodeTag::Sorting,
+                LeetCodeTag::Greedy,
+            ],
+            description: "给定一组非负整数 nums，\
+                          重新排列每个数的顺序（每个数不可拆分）使之组成一个最大的整数。"
+                .to_string(),
             examples: vec!["输入：nums = [10,2]\n输出：\"210\"".to_string()],
             constraints: vec!["1 <= nums.length <= 100".to_string()],
             rust_191_features: vec!["使用自定义排序，Rust 1.92 性能优化".to_string()],
@@ -212,8 +237,13 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "有效的字母异位词".to_string(),
             title_en: "Valid Anagram".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::HashTable, LeetCodeTag::String, LeetCodeTag::Sorting],
-            description: "给定两个字符串 s 和 t，编写一个函数来判断 t 是否是 s 的字母异位词。".to_string(),
+            tags: vec![
+                LeetCodeTag::HashTable,
+                LeetCodeTag::String,
+                LeetCodeTag::Sorting,
+            ],
+            description: "给定两个字符串 s 和 t，编写一个函数来判断 t 是否是 s 的字母异位词。"
+                .to_string(),
             examples: vec!["输入：s = \"anagram\", t = \"nagaram\"\n输出：true".to_string()],
             constraints: vec!["1 <= s.length, t.length <= 5 * 10^4".to_string()],
             rust_191_features: vec!["使用排序或哈希表，Rust 1.92 性能优化".to_string()],

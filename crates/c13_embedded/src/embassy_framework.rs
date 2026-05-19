@@ -37,7 +37,6 @@
 /// 所有 `async` 任务共享一个调用栈，通过 `Waker` 机制在中断事件发生时恢复执行。
 ///
 /// ## 与 Tokio 的差异
-///
 // | 维度 | Tokio (用户态) | Embassy (裸机) |
 // |------|---------------|---------------|
 // | 线程模型 | 多线程线程池 | 单线程 + 中断 |
@@ -202,7 +201,6 @@ async fn spi_transfer_dma(
 // =========================================================================
 
 /// # Embassy-Net — 裸机 TCP/IP 栈
-///
 // Embassy 提供了完整的 `no_std` 网络协议栈：
 // - `embassy-net` — TCP/IP 栈（基于 smoltcp）
 // - `embassy-usb` — USB CDC-ECM/RNDIS 以太网
@@ -284,7 +282,6 @@ async fn web_server(stack: &'static Stack<Device>) {
 // =========================================================================
 
 /// # Embassy Time
-///
 // Embassy 提供了 `no_std` 的时间抽象：
 // - `Timer::after(duration)` — 异步延迟
 // - `Ticker` — 周期性定时器
@@ -340,7 +337,6 @@ Embassy Time vs RTOS Tick:
 // =========================================================================
 
 /// # Embassy vs RTIC
-///
 // 两个框架都用于嵌入式 Rust，但设计哲学不同。
 pub struct EmbassyVsRtic;
 

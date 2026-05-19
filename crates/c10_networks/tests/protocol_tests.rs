@@ -9,7 +9,7 @@ use c10_networks::protocol::tcp::{TcpConnection, TcpConnectionConfig, TcpState};
 use c10_networks::protocol::websocket::{
     WebSocketFrame, WebSocketHandshakeRequest, WebSocketOpcode,
 };
-use c10_networks::socket::{TcpConfig, UdpConfig, utils};
+use c10_networks::socket::{utils, TcpConfig, UdpConfig};
 use std::time::Duration;
 
 /// 测试HTTP协议实现

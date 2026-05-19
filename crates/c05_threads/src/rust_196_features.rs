@@ -521,7 +521,11 @@ pub mod anti_patterns_and_edge_cases {
         /// ⚠️ 边界情况：单线程或零任务的安全处理
         pub fn edge_cases_single_thread(total: usize) -> RangeInclusive<usize> {
             // ⚠️ 边界情况：始终返回安全的包含范围
-            if total == 0 { 0..=0 } else { 0..=total - 1 }
+            if total == 0 {
+                0..=0
+            } else {
+                0..=total - 1
+            }
         }
     }
 

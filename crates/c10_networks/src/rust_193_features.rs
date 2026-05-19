@@ -49,7 +49,10 @@ mod tests {
     #[test]
     fn test_parse_network_header() {
         let header = [0x45, 0x00, 0x00, 0x3c];
-        assert_eq!(parse_network_header(&header), Some(&[0x45, 0x00, 0x00, 0x3c]));
+        assert_eq!(
+            parse_network_header(&header),
+            Some(&[0x45, 0x00, 0x00, 0x3c])
+        );
         assert_eq!(parse_network_header(&[0x45, 0x00]), None);
     }
 }

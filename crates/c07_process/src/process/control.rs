@@ -63,7 +63,10 @@ impl ProcessController {
             children_pids: Vec::new(),
         };
 
-        self.processes.lock().expect("进程控制锁被污染").insert(pid, info);
+        self.processes
+            .lock()
+            .expect("进程控制锁被污染")
+            .insert(pid, info);
 
         Ok(pid)
     }

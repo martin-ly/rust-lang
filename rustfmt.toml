@@ -16,14 +16,11 @@ use_field_init_shorthand = true
 # 使用try简写
 use_try_shorthand = true
 
-# 移除尾随逗号
+# 尾随逗号风格
 trailing_comma = "Vertical"
 
 # 移除尾随分号
 trailing_semicolon = true
-
-# 移除尾随空格
-trailing_whitespace = "Always"
 
 # 格式化字符串
 format_strings = true
@@ -37,23 +34,11 @@ format_macro_matchers = true
 # 格式化宏体
 format_macro_bodies = true
 
-# 格式化属性
+# 不格式化生成的文件
 format_generated_files = false
 
-# 导入排序
+# 导入粒度
 imports_granularity = "Module"
 
 # 导入布局
 imports_layout = "Mixed"
-
-# 导入排序
-imports_sort = "Preserve"
-
-# 使用Unicode字符
-use_unicode = true
-
-# 使用小写十六进制
-use_lower_hex = true
-
-# 使用科学计数法
-use_scientific_notation = true

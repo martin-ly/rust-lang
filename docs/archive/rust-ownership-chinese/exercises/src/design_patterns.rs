@@ -68,11 +68,11 @@ impl Subject {
             observers: RefCell::new(Vec::new()),
         }
     }
-    
+
     pub fn attach(&self, observer: Rc<dyn Observer>) {
         self.observers.borrow_mut().push(observer);
     }
-    
+
     pub fn notify(&self, message: &str) {
         for observer in self.observers.borrow().iter() {
             observer.update(message);
@@ -111,7 +111,7 @@ impl<'a> Sorter<'a> {
     pub fn new(strategy: &'a dyn SortStrategy) -> Self {
         Self { strategy }
     }
-    
+
     pub fn sort(&self, data: &mut [i32]) {
         self.strategy.sort(data);
     }
@@ -180,22 +180,22 @@ impl ComputerBuilder {
             storage: None,
         }
     }
-    
+
     pub fn cpu(mut self, cpu: impl Into<String>) -> Self {
         self.cpu = Some(cpu.into());
         self
     }
-    
+
     pub fn ram(mut self, ram: u32) -> Self {
         self.ram = Some(ram);
         self
     }
-    
+
     pub fn storage(mut self, storage: u32) -> Self {
         self.storage = Some(storage);
         self
     }
-    
+
     pub fn build(self) -> Computer {
         Computer {
             cpu: self.cpu.unwrap_or_else(|| "Intel".to_string()),
@@ -309,12 +309,12 @@ impl Light {
             is_on: RefCell::new(false),
         }
     }
-    
+
     pub fn turn_on(&self) {
         *self.is_on.borrow_mut() = true;
         println!("Light is on");
     }
-    
+
     pub fn turn_off(&self) {
         *self.is_on.borrow_mut() = false;
         println!("Light is off");
@@ -356,11 +356,11 @@ impl<T> TreeNode<T> {
             children: Vec::new(),
         }
     }
-    
+
     pub fn add_child(&mut self, child: TreeNode<T>) {
         self.children.push(child);
     }
-    
+
     pub fn iter_dfs(&self) -> DfsIterator<T> {
         let stack = vec![self];
         DfsIterator { stack }
@@ -373,7 +373,7 @@ pub struct DfsIterator<'a, T> {
 
 impl<'a, T> Iterator for DfsIterator<'a, T> {
     type Item = &'a T;
-    
+
     fn next(&mut self) -> Option<Self::Item> {
         let node = self.stack.pop()?;
         // 将子节点压入栈（逆序以保持顺序）
@@ -404,11 +404,11 @@ impl Post<Draft> {
             state: std::marker::PhantomData,
         }
     }
-    
+
     pub fn add_text(&mut self, text: &str) {
         self.content.push_str(text);
     }
-    
+
     pub fn request_review(self) -> Post<PendingReview> {
         Post {
             content: self.content,
@@ -424,7 +424,7 @@ impl Post<PendingReview> {
             state: std::marker::PhantomData,
         }
     }
-    
+
     pub fn reject(self) -> Post<Draft> {
         Post {
             content: self.content,
@@ -446,20 +446,22 @@ impl Post<Published> {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_visitor() {
         let elements: Vec<Box<dyn Element>> = vec![
             Box::new(ElementA { value: 42 }),
-            Box::new(ElementB { name: "test".to_string() }),
+            Box::new(ElementB {
+                name: "test".to_string(),
+            }),
         ];
-        
+
         let mut visitor = PrintVisitor;
         for elem in &elements {
             elem.accept(&mut visitor);
         }
     }
-    
+
     #[test]
     fn test_strategy() {
         let mut data = vec![3, 1, 4, 1, 5];
@@ -467,41 +469,38 @@ mod tests {
         sorter.sort(&mut data);
         assert_eq!(data, vec![1, 1, 3, 4, 5]);
     }
-    
+
     #[test]
     fn test_decorator() {
         let coffee = MilkDecorator::new(SimpleCoffee);
         assert_eq!(coffee.cost(), 2.5);
         assert!(coffee.description().contains("milk"));
     }
-    
+
     #[test]
     fn test_builder() {
-        let computer = ComputerBuilder::new()
-            .cpu("AMD")
-            .ram(16)
-            .build();
+        let computer = ComputerBuilder::new().cpu("AMD").ram(16).build();
         assert_eq!(computer.ram, 16);
     }
-    
+
     #[test]
     fn test_proxy() {
         let proxy = ProxyImage::new("photo.jpg");
         proxy.display(); // 第一次加载
         proxy.display(); // 使用缓存
     }
-    
+
     #[test]
     fn test_tree_iterator() {
         let mut root = TreeNode::new(1);
         let mut child = TreeNode::new(2);
         child.add_child(TreeNode::new(3));
         root.add_child(child);
-        
+
         let values: Vec<_> = root.iter_dfs().copied().collect();
         assert_eq!(values, vec![1, 2, 3]);
     }
-    
+
     #[test]
     fn test_typestate_post() {
         let post = Post::new();

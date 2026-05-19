@@ -7,7 +7,7 @@ use bytes::Bytes;
 use c10_networks::packet::{Packet, PacketStats, PacketType};
 use c10_networks::performance::cache::Cache;
 use c10_networks::performance::memory_pool::MemoryPool;
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::hint::black_box;
 use std::sync::Arc;
 use std::thread;

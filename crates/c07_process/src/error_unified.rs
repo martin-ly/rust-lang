@@ -12,31 +12,31 @@ use thiserror::Error;
 pub enum ProcessError {
     #[error("creation failed: {0}")]
     CreationFailed(String),
-    
+
     #[error("start failed: {0}")]
     StartFailed(String),
-    
+
     #[error("wait failed: {0}")]
     WaitFailed(String),
-    
+
     #[error("termination failed: {0}")]
     TerminationFailed(String),
-    
+
     #[error("not found: {0}")]
     NotFound(u32),
-    
+
     #[error("permission denied: {0}")]
     PermissionDenied(String),
-    
+
     #[error("already terminated")]
     AlreadyTerminated,
-    
+
     #[error("IPC error: {0}")]
     Ipc(String),
-    
+
     #[error("signal error: {0}")]
     Signal(String),
-    
+
     #[error("{0}")]
     Other(String),
 }
@@ -46,11 +46,11 @@ impl common::RustLangError for ProcessError {
     fn error_code(&self) -> ErrorCode {
         ErrorCode::Process
     }
-    
+
     fn is_retryable(&self) -> bool {
         matches!(self, ProcessError::StartFailed(_) | ProcessError::Ipc(_))
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         if RustLangError::is_retryable(self) {
             Some(Duration::from_millis(200))
@@ -58,7 +58,7 @@ impl common::RustLangError for ProcessError {
             None
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         if RustLangError::is_retryable(self) {
             Some(3)
@@ -71,9 +71,7 @@ impl common::RustLangError for ProcessError {
 impl_into_unified_error!(ProcessError);
 
 /// Re-export common error types for convenience
-pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-};
+pub use common::{CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError};
 
 /// C07 crate's result type (Unified version)
 pub type C07Result<T> = Result<T>;
@@ -82,7 +80,6 @@ pub type C07Result<T> = Result<T>;
 pub fn process_error_from_existing<T: std::fmt::Display>(e: T) -> ProcessError {
     ProcessError::Other(e.to_string())
 }
-
 
 #[cfg(test)]
 mod tests {
@@ -100,8 +97,11 @@ mod tests {
     fn test_retryable_error() {
         let err = ProcessError::StartFailed("test".to_string());
         assert!(common::RustLangError::is_retryable(&err));
-        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(200)));
-        
+        assert_eq!(
+            common::RustLangError::retry_delay(&err),
+            Some(Duration::from_millis(200))
+        );
+
         let err = ProcessError::AlreadyTerminated;
         assert!(!common::RustLangError::is_retryable(&err));
     }

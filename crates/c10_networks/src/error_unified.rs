@@ -12,28 +12,28 @@ use thiserror::Error;
 pub enum NetworkError {
     #[error("connection error: {0}")]
     Connection(String),
-    
+
     #[error("protocol error: {0}")]
     Protocol(String),
-    
+
     #[error("timeout: {0:?}")]
     Timeout(Duration),
-    
+
     #[error("DNS error: {0}")]
     Dns(String),
-    
+
     #[error("TLS error: {0}")]
     Tls(String),
-    
+
     #[error("HTTP error: status={status}, message={message}")]
     Http { status: u16, message: String },
-    
+
     #[error("WebSocket error: {0}")]
     WebSocket(String),
-    
+
     #[error("authentication error: {0}")]
     Authentication(String),
-    
+
     #[error("buffer error: {0}")]
     Buffer(String),
 }
@@ -43,11 +43,11 @@ impl common::RustLangError for NetworkError {
     fn error_code(&self) -> ErrorCode {
         ErrorCode::Network
     }
-    
+
     fn is_retryable(&self) -> bool {
         matches!(self, NetworkError::Timeout(_) | NetworkError::Connection(_))
     }
-    
+
     fn retry_delay(&self) -> Option<Duration> {
         match self {
             NetworkError::Timeout(_) => Some(Duration::from_millis(100)),
@@ -55,7 +55,7 @@ impl common::RustLangError for NetworkError {
             _ => None,
         }
     }
-    
+
     fn max_retries(&self) -> Option<u32> {
         match self {
             NetworkError::Timeout(_) => Some(3),
@@ -69,8 +69,7 @@ impl_into_unified_error!(NetworkError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C10 crate's result type (Unified version)
@@ -124,7 +123,6 @@ pub fn buffer_error<T: Into<String>>(msg: T) -> NetworkError {
     NetworkError::Buffer(msg.into())
 }
 
-
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -140,9 +138,12 @@ mod tests {
     fn test_retryable_error() {
         let err = network_timeout(Duration::from_secs(1));
         assert!(common::RustLangError::is_retryable(&err));
-        assert_eq!(common::RustLangError::retry_delay(&err), Some(Duration::from_millis(100)));
+        assert_eq!(
+            common::RustLangError::retry_delay(&err),
+            Some(Duration::from_millis(100))
+        );
         assert_eq!(common::RustLangError::max_retries(&err), Some(3));
-        
+
         let err = tls_error("test");
         assert!(!common::RustLangError::is_retryable(&err));
     }

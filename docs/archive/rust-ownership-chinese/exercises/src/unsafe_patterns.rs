@@ -9,7 +9,7 @@ use std::ptr::NonNull;
 // ============================================
 
 /// 安全地解引用原始指针
-/// 
+///
 /// # Safety
 /// - ptr必须有效
 /// - ptr必须正确对齐
@@ -22,7 +22,7 @@ pub unsafe fn safe_deref<'a, T>(ptr: *const T) -> &'a T {
 pub unsafe fn pointer_arithmetic() {
     let arr = [1, 2, 3, 4, 5];
     let ptr = arr.as_ptr();
-    
+
     // 偏移必须在分配范围内
     let second = unsafe { ptr.add(1).read() };
     assert_eq!(second, 2);
@@ -43,11 +43,11 @@ impl<T> MyBox<T> {
             ptr: unsafe { NonNull::new_unchecked(ptr) },
         }
     }
-    
+
     pub fn as_ref(&self) -> &T {
         unsafe { self.ptr.as_ref() }
     }
-    
+
     pub fn as_mut(&mut self) -> &mut T {
         unsafe { self.ptr.as_mut() }
     }
@@ -63,7 +63,7 @@ impl<T> Drop for MyBox<T> {
 
 impl<T> std::ops::Deref for MyBox<T> {
     type Target = T;
-    
+
     fn deref(&self) -> &T {
         self.as_ref()
     }
@@ -87,13 +87,15 @@ pub struct MyCell<T> {
 
 impl<T: Copy> MyCell<T> {
     pub fn new(value: T) -> Self {
-        Self { value: UnsafeCell::new(value) }
+        Self {
+            value: UnsafeCell::new(value),
+        }
     }
-    
+
     pub fn get(&self) -> T {
         unsafe { *self.value.get() }
     }
-    
+
     pub fn set(&self, value: T) {
         unsafe { *self.value.get() = value }
     }
@@ -112,7 +114,7 @@ impl MyUnion {
     pub fn as_int(&self) -> i32 {
         unsafe { self.i }
     }
-    
+
     pub fn as_float(&self) -> f32 {
         unsafe { self.f }
     }
@@ -127,7 +129,7 @@ pub fn c_str_to_str(c_str: *const std::ffi::c_char) -> Option<&'static str> {
     if c_str.is_null() {
         return None;
     }
-    
+
     let c_str = unsafe { std::ffi::CStr::from_ptr(c_str) };
     c_str.to_str().ok()
 }
@@ -137,7 +139,7 @@ pub fn c_str_to_str(c_str: *const std::ffi::c_char) -> Option<&'static str> {
 // ============================================
 
 /// transmute的安全封装
-/// 
+///
 /// # Safety
 /// S和T必须具有相同的大小和对齐
 pub unsafe fn safe_transmute<S, T>(src: S) -> T {
@@ -153,7 +155,7 @@ pub unsafe fn safe_transmute<S, T>(src: S) -> T {
 #[cfg(test)]
 mod tests {
     use super::*;
-    
+
     #[test]
     fn test_my_box() {
         let mut b = MyBox::new(42);
@@ -161,7 +163,7 @@ mod tests {
         *b = 100;
         assert_eq!(*b, 100);
     }
-    
+
     #[test]
     fn test_my_cell() {
         let cell = MyCell::new(42);
@@ -169,7 +171,7 @@ mod tests {
         cell.set(100);
         assert_eq!(cell.get(), 100);
     }
-    
+
     #[test]
     fn test_union() {
         let u = MyUnion { i: 1 };

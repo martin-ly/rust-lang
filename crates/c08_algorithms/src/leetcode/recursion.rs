@@ -113,7 +113,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Merge Two Sorted Lists".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::Recursion],
-            description: "将两个升序链表合并为一个新的 升序 链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。".to_string(),
+            description: "将两个升序链表合并为一个新的 升序 \
+                          链表并返回。新链表是通过拼接给定的两个链表的所有节点组成的。"
+                .to_string(),
             examples: vec!["输入：l1 = [1,2,4], l2 = [1,3,4]\n输出：[1,1,2,3,4,4]".to_string()],
             constraints: vec!["两个链表的节点数目范围是 [0, 50]".to_string()],
             rust_191_features: vec!["使用递归，Rust 1.92 性能优化".to_string()],
@@ -129,7 +131,9 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Swap Nodes in Pairs".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::LinkedList, LeetCodeTag::Recursion],
-            description: "给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。".to_string(),
+            description: "给你一个链表，两两交换其中相邻的节点，并返回交换后链表的头节点。\
+                          你必须在不修改节点内部的值的情况下完成本题（即，只能进行节点交换）。"
+                .to_string(),
             examples: vec!["输入：head = [1,2,3,4]\n输出：[2,1,4,3]".to_string()],
             constraints: vec!["链表中节点的数目在范围 [0, 100] 内".to_string()],
             rust_191_features: vec!["使用递归，Rust 1.92 性能优化".to_string()],
@@ -176,8 +180,14 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title: "斐波那契数".to_string(),
             title_en: "Fibonacci Number".to_string(),
             difficulty: "Easy".to_string(),
-            tags: vec![LeetCodeTag::Math, LeetCodeTag::DynamicProgramming, LeetCodeTag::Recursion],
-            description: "斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 和 1 开始，后面的每一项数字都是前面两项数字的和。".to_string(),
+            tags: vec![
+                LeetCodeTag::Math,
+                LeetCodeTag::DynamicProgramming,
+                LeetCodeTag::Recursion,
+            ],
+            description: "斐波那契数 （通常用 F(n) 表示）形成的序列称为 斐波那契数列 。该数列由 0 \
+                          和 1 开始，后面的每一项数字都是前面两项数字的和。"
+                .to_string(),
             examples: vec!["输入：n = 2\n输出：1".to_string()],
             constraints: vec!["0 <= n <= 30".to_string()],
             rust_191_features: vec!["使用递归或动态规划，Rust 1.92 性能优化".to_string()],

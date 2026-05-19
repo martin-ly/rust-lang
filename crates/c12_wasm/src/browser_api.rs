@@ -1,5 +1,5 @@
 //! WASM 浏览器 API 交互示例
-//! 
+//!
 //! 展示如何使用 web-sys 与浏览器 API 交互
 
 use wasm_bindgen::prelude::*;
@@ -34,7 +34,10 @@ pub fn error(msg: &str) {
 /// 获取元素 by ID
 pub fn get_element_by_id(id: &str) -> Option<HtmlElement> {
     let document = document()?;
-    document.get_element_by_id(id)?.dyn_into::<HtmlElement>().ok()
+    document
+        .get_element_by_id(id)?
+        .dyn_into::<HtmlElement>()
+        .ok()
 }
 
 /// 设置元素文本内容
@@ -60,20 +63,20 @@ impl Timer {
             .and_then(|w| w.performance())
             .map(|p| p.now())
             .unwrap_or(0.0);
-        
+
         Self {
             start,
             name: name.to_string(),
         }
     }
-    
+
     /// 结束计时并打印结果
     pub fn end(&self) {
         let end = web_sys::window()
             .and_then(|w| w.performance())
             .map(|p| p.now())
             .unwrap_or(0.0);
-        
+
         let duration = end - self.start;
         log(&format!("[Timer] {}: {:.2}ms", self.name, duration));
     }
@@ -83,12 +86,12 @@ impl Timer {
 pub mod local_storage {
     use super::*;
     use web_sys::Storage;
-    
+
     /// 获取 localStorage
     pub fn get_storage() -> Option<Storage> {
         web_sys::window()?.local_storage().ok()?
     }
-    
+
     /// 设置值
     pub fn set_item(key: &str, value: &str) -> Result<(), JsValue> {
         if let Some(storage) = get_storage() {
@@ -98,13 +101,13 @@ pub mod local_storage {
             Err(JsValue::from_str("localStorage not available"))
         }
     }
-    
+
     /// 获取值
     pub fn get_item(key: &str) -> Option<String> {
         let storage = get_storage()?;
         storage.get_item(key).ok()?
     }
-    
+
     /// 删除值
     pub fn remove_item(key: &str) -> Result<(), JsValue> {
         if let Some(storage) = get_storage() {
@@ -120,7 +123,7 @@ pub mod local_storage {
 mod tests {
     #[allow(unused_imports)]
     use super::*;
-    
+
     #[test]
     fn test_timer_creation() {
         // 注意: 在 Node.js 测试环境中可能没有 window

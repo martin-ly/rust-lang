@@ -473,7 +473,10 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Two Sum".to_string(),
             difficulty: "Easy".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::HashTable],
-            description: "给定一个整数数组 nums 和一个整数目标值 target，请你在该数组中找出和为目标值 target 的那两个整数，并返回它们的数组下标。".to_string(),
+            description: "给定一个整数数组 nums 和一个整数目标值 \
+                          target，请你在该数组中找出和为目标值 target \
+                          的那两个整数，并返回它们的数组下标。"
+                .to_string(),
             examples: vec![
                 "输入：nums = [2,7,11,15], target = 9\n输出：[0,1]".to_string(),
                 "输入：nums = [3,2,4], target = 6\n输出：[1,2]".to_string(),
@@ -499,10 +502,11 @@ pub fn get_all_problems() -> Vec<LeetCodeProblem> {
             title_en: "Maximum Subarray".to_string(),
             difficulty: "Medium".to_string(),
             tags: vec![LeetCodeTag::Array, LeetCodeTag::DynamicProgramming],
-            description: "给你一个整数数组 nums，请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），返回其最大和。".to_string(),
-            examples: vec![
-                "输入：nums = [-2,1,-3,4,-1,2,1,-5,4]\n输出：6".to_string(),
-            ],
+            description: "给你一个整数数组 nums，\
+                          请你找出一个具有最大和的连续子数组（子数组最少包含一个元素），\
+                          返回其最大和。"
+                .to_string(),
+            examples: vec!["输入：nums = [-2,1,-3,4,-1,2,1,-5,4]\n输出：6".to_string()],
             constraints: vec![
                 "1 <= nums.length <= 10^5".to_string(),
                 "-10^4 <= nums[i] <= 10^4".to_string(),

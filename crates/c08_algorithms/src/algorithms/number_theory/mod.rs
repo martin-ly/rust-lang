@@ -9,7 +9,11 @@ pub struct NumberTheoryAlgorithms;
 impl NumberTheoryAlgorithms {
     /// 最大公约数 (GCD)
     pub fn gcd(a: u64, b: u64) -> u64 {
-        if b == 0 { a } else { Self::gcd(b, a % b) }
+        if b == 0 {
+            a
+        } else {
+            Self::gcd(b, a % b)
+        }
     }
 
     /// 最小公倍数 (LCM)

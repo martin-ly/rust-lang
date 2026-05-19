@@ -3,7 +3,7 @@
 //! 测试项目中公共工具函数的性能，包括错误处理、类型操作和工具函数。
 
 use common::CommonError;
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 
 /// 基准测试：错误创建与传播性能
 /// 对应高频错误路径的优化验证

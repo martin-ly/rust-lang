@@ -34,12 +34,19 @@ pub enum LargeId {
 }
 
 impl LargeId {
-    pub fn is_system(self) -> bool { self == LargeId::System }
-    pub fn raw(self) -> u128 { self as u128 }
+    pub fn is_system(self) -> bool {
+        self == LargeId::System
+    }
+    pub fn raw(self) -> u128 {
+        self as u128
+    }
 }
 
 #[test]
 fn test_repr128() {
     assert!(LargeId::System.is_system());
-    assert_eq!(LargeId::User.raw(), 0x0002_0000_0000_0000_0000_0000_0000_0000);
+    assert_eq!(
+        LargeId::User.raw(),
+        0x0002_0000_0000_0000_0000_0000_0000_0000
+    );
 }

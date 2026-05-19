@@ -44,8 +44,14 @@ pub fn animal_name(animal: &dyn Animal) -> &'static str {
 mod tests {
     use super::*;
     struct MyDog;
-    impl Animal for MyDog { fn name(&self) -> &'static str { "Buddy" } }
-    impl Dog for MyDog { fn bark(&self) {} }
+    impl Animal for MyDog {
+        fn name(&self) -> &'static str {
+            "Buddy"
+        }
+    }
+    impl Dog for MyDog {
+        fn bark(&self) {}
+    }
 
     #[test]
     fn test_trait_upcasting() {

@@ -16,18 +16,22 @@ use std::rc::{Rc, Weak};
 #[test]
 fn test_singleton() {
     use std::cell::UnsafeCell;
-    
+
     struct Singleton<T> {
         data: UnsafeCell<Option<T>>,
     }
-    
+
     impl<T> Singleton<T> {
         const fn new() -> Self {
-            Self { data: UnsafeCell::new(None) }
+            Self {
+                data: UnsafeCell::new(None),
+            }
         }
-        
+
         fn get_or_init<F>(&self, f: F) -> &T
-        where F: FnOnce() -> T {
+        where
+            F: FnOnce() -> T,
+        {
             unsafe {
                 if (*self.data.get()).is_none() {
                     *self.data.get() = Some(f());
@@ -36,10 +40,10 @@ fn test_singleton() {
             }
         }
     }
-    
+
     unsafe impl<T: Send> Send for Singleton<T> {}
     unsafe impl<T: Sync> Sync for Singleton<T> {}
-    
+
     static SINGLETON: Singleton<i32> = Singleton::new();
     let val = SINGLETON.get_or_init(|| 42);
     assert_eq!(*val, 42);
@@ -60,13 +64,16 @@ struct Subject {
 
 impl Subject {
     fn new() -> Self {
-        Self { observers: Vec::new(), state: 0 }
+        Self {
+            observers: Vec::new(),
+            state: 0,
+        }
     }
-    
+
     fn attach(&mut self, observer: Weak<dyn Observer>) {
         self.observers.push(observer);
     }
-    
+
     fn notify(&self) {
         for observer in &self.observers {
             if let Some(obs) = observer.upgrade() {
@@ -85,7 +92,7 @@ fn test_observer_pattern() {
     impl Observer for ConcreteObserver {
         fn update(&self, _state: i32) {}
     }
-    
+
     let mut subject = Subject::new();
     let observer = Rc::new(ConcreteObserver);
     subject.attach(Rc::downgrade(&observer) as Weak<dyn Observer>);
@@ -100,7 +107,9 @@ trait SubjectTrait {
 
 struct RealSubject;
 impl SubjectTrait for RealSubject {
-    fn request(&self) -> i32 { 42 }
+    fn request(&self) -> i32 {
+        42
+    }
 }
 
 /// 代理结构
@@ -112,7 +121,7 @@ impl Proxy {
     fn new() -> Self {
         Self { real_subject: None }
     }
-    
+
     fn ensure_initialized(&mut self) {
         if self.real_subject.is_none() {
             self.real_subject = Some(Box::new(RealSubject));
@@ -145,15 +154,22 @@ trait Product {
 
 struct ConcreteProductA;
 impl Product for ConcreteProductA {
-    fn operation(&self) -> String { "ProductA".to_string() }
+    fn operation(&self) -> String {
+        "ProductA".to_string()
+    }
 }
 
 struct ConcreteProductB;
 impl Product for ConcreteProductB {
-    fn operation(&self) -> String { "ProductB".to_string() }
+    fn operation(&self) -> String {
+        "ProductB".to_string()
+    }
 }
 
-enum ProductType { A, B }
+enum ProductType {
+    A,
+    B,
+}
 
 /// 工厂结构
 struct Factory;
@@ -174,7 +190,7 @@ impl Factory {
 fn test_factory_pattern() {
     let product_a = Factory::create(ProductType::A);
     let product_b = Factory::create(ProductType::B);
-    
+
     assert_eq!(product_a.operation(), "ProductA");
     assert_eq!(product_b.operation(), "ProductB");
 }
@@ -189,19 +205,22 @@ struct ProductBuilder {
 
 impl ProductBuilder {
     fn new() -> Self {
-        Self { part_a: None, part_b: None }
+        Self {
+            part_a: None,
+            part_b: None,
+        }
     }
-    
+
     fn part_a(mut self, value: String) -> Self {
         self.part_a = Some(value);
         self
     }
-    
+
     fn part_b(mut self, value: i32) -> Self {
         self.part_b = Some(value);
         self
     }
-    
+
     fn build(self) -> BuiltProduct {
         BuiltProduct {
             part_a: self.part_a.unwrap_or_default(),
@@ -225,7 +244,7 @@ fn test_builder_pattern() {
         .part_a("Test".to_string())
         .part_b(42)
         .build();
-    
+
     assert_eq!(product.part_a, "Test");
     assert_eq!(product.part_b, 42);
 }
@@ -238,7 +257,9 @@ trait Target {
 
 struct Adaptee;
 impl Adaptee {
-    fn specific_request(&self) -> String { "Adaptee".to_string() }
+    fn specific_request(&self) -> String {
+        "Adaptee".to_string()
+    }
 }
 
 /// 适配器结构
@@ -269,7 +290,9 @@ trait Component {
 
 struct ConcreteComponent;
 impl Component for ConcreteComponent {
-    fn operation(&self) -> i32 { 10 }
+    fn operation(&self) -> i32 {
+        10
+    }
 }
 
 /// 装饰器结构

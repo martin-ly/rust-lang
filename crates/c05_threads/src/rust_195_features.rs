@@ -15,8 +15,8 @@
 //! # 参考
 //! - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
 
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, AtomicI32, AtomicPtr, AtomicUsize, Ordering};
+use std::sync::Arc;
 use std::thread;
 
 // ============================================================================
@@ -73,7 +73,11 @@ impl AtomicUpdateExamples {
     /// 展示了 `try_update` 的强大能力：原子性条件更新。
     pub fn try_increment_if_even(counter: &AtomicI32) -> Result<i32, i32> {
         counter.try_update(Ordering::SeqCst, Ordering::SeqCst, |old| {
-            if old % 2 == 0 { Some(old + 1) } else { None }
+            if old % 2 == 0 {
+                Some(old + 1)
+            } else {
+                None
+            }
         })
     }
 
@@ -94,7 +98,11 @@ impl AtomicUpdateExamples {
     /// 仅当当前为 `false` 时设为 `true`（一次性触发）。
     pub fn try_set_flag(flag: &AtomicBool) -> Result<bool, bool> {
         flag.try_update(Ordering::SeqCst, Ordering::SeqCst, |current| {
-            if current { None } else { Some(true) }
+            if current {
+                None
+            } else {
+                Some(true)
+            }
         })
     }
 
@@ -468,7 +476,6 @@ mod tests {
     }
 }
 
-
 // ============================================================================
 // Real Rust 1.95 Features — Concurrency, threads, lock-free
 // ============================================================================
@@ -492,7 +499,10 @@ impl RealRust195Features {
             b: u32,
         }
 
-        let p = Packed { a: 1, b: 0xDEADBEEF };
+        let p = Packed {
+            a: 1,
+            b: 0xDEADBEEF,
+        };
         // SAFETY: &raw const avoids creating an intermediate unaligned reference
         let raw = &raw const p.b;
         // SAFETY: read via raw pointer from a valid local
@@ -518,7 +528,10 @@ mod real_rust_195_tests {
 
     #[test]
     fn test_const_block_align() {
-        assert_eq!(RealRust195Features::const_block_align_demo(), std::mem::align_of::<usize>());
+        assert_eq!(
+            RealRust195Features::const_block_align_demo(),
+            std::mem::align_of::<usize>()
+        );
     }
 
     #[test]

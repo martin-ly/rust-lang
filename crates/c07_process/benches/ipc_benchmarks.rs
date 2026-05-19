@@ -5,7 +5,7 @@
 use c07_process::{
     IpcConfig, IpcManager, IpcProtocol, Message, ProcessConfig, ProcessManager, ResourceLimits,
 };
-use criterion::{Criterion, criterion_group, criterion_main};
+use criterion::{criterion_group, criterion_main, Criterion};
 use std::collections::HashMap;
 use std::time::Duration;
 

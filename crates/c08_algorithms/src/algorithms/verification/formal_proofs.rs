@@ -55,9 +55,9 @@ impl FormalProver {
             proof_steps: vec![
                 ProofStep {
                     step_number: 1,
-                    description:
-                        "分区操作的正确性：分区后，基准元素左侧都小于等于基准，右侧都大于基准"
-                            .to_string(),
+                    description: "分区操作的正确性：分区后，基准元素左侧都小于等于基准，\
+                                  右侧都大于基准"
+                        .to_string(),
                     proof_type: ProofType::Correctness,
                     status: ProofStatus::Completed,
                     dependencies: vec![],

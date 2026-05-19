@@ -1,8 +1,7 @@
 //! # WASI 应用程序示例
 //!
 //! 这是一个完整的 WASI 应用程序示例，展示了如何在本地操作系统上运行 WASM 程序
-use std::env;
-use std::fs;
+use std::{env, fs};
 
 fn main() {
     // 获取命令行参数

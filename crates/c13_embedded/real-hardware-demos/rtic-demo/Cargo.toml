@@ -26,3 +26,7 @@ portable-atomic = { version = "1.6", features = ["critical-section"] }
 debug = 2
 lto = true
 opt-level = 'z'
+
+
+[package.metadata.cargo-machete]
+ignored = ["cortex-m", "cortex-m-rt", "portable-atomic"]

@@ -1,12 +1,10 @@
-use std::sync::{
-    Arc,
-    atomic::{AtomicBool, Ordering},
-};
+use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
 
-use c05_threads::message_passing::backpressure_handling as bp;
-use c05_threads::message_passing::{mpsc, stream::ReceiverStream};
+use c05_threads::message_passing::stream::ReceiverStream;
+use c05_threads::message_passing::{backpressure_handling as bp, mpsc};
 
 fn main() {
     let bp_ch = Arc::new(bp::DroppingBackpressureChannel::new(256, 0.95));

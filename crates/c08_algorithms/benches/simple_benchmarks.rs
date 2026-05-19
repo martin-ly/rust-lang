@@ -1,9 +1,9 @@
 //! 简化的算法性能基准测试
 //!
 //! 本文件包含简化的算法性能基准测试，使用实际存在的函数
-use c08_algorithms::algorithms::SyncAlgorithm;
 use c08_algorithms::algorithms::sorting::sync::{MergeSort, QuickSort};
-use criterion::{BenchmarkId, Criterion, criterion_group, criterion_main};
+use c08_algorithms::algorithms::SyncAlgorithm;
+use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 use std::hint::black_box;
 
 /// 排序算法基准测试

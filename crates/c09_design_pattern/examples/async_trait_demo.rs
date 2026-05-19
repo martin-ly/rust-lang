@@ -20,7 +20,7 @@
 //! └── 使用
 //!     └── 异步调用
 //! ```
-use c09_design_pattern::concurrency::asynchronous::native_async_trait::{EchoProcessor, run_demo};
+use c09_design_pattern::concurrency::asynchronous::native_async_trait::{run_demo, EchoProcessor};
 
 fn block_on<F: core::future::Future>(mut fut: F) -> F::Output {
     use core::pin::Pin;

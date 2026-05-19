@@ -9,7 +9,7 @@ fn ownership_transfer_benchmark(c: &mut Criterion) {
             black_box(cloned);
         });
     });
-    
+
     c.bench_function("vec_borrow", |b| {
         let data: Vec<u8> = (0..1000).map(|x| x as u8).collect();
         b.iter(|| {
@@ -24,17 +24,17 @@ fn box_vs_stack_benchmark(c: &mut Criterion) {
     c.bench_function("large_struct_stack", |b| {
         #[derive(Clone, Copy)]
         struct LargeStruct([u64; 128]);
-        
+
         b.iter(|| {
             let s = LargeStruct([0; 128]);
             black_box(s);
         });
     });
-    
+
     c.bench_function("large_struct_heap", |b| {
         #[derive(Clone, Copy)]
         struct LargeStruct([u64; 128]);
-        
+
         b.iter(|| {
             let s = Box::new(LargeStruct([0; 128]));
             black_box(s);
@@ -46,7 +46,7 @@ fn box_vs_stack_benchmark(c: &mut Criterion) {
 fn rc_vs_arc_benchmark(c: &mut Criterion) {
     use std::rc::Rc;
     use std::sync::Arc;
-    
+
     c.bench_function("rc_clone", |b| {
         let data = Rc::new(vec![0u8; 1000]);
         b.iter(|| {
@@ -54,7 +54,7 @@ fn rc_vs_arc_benchmark(c: &mut Criterion) {
             black_box(cloned);
         });
     });
-    
+
     c.bench_function("arc_clone", |b| {
         let data = Arc::new(vec![0u8; 1000]);
         b.iter(|| {
@@ -67,7 +67,7 @@ fn rc_vs_arc_benchmark(c: &mut Criterion) {
 // 基准测试：迭代器链
 fn iterator_chain_benchmark(c: &mut Criterion) {
     let data: Vec<i32> = (0..10000).collect();
-    
+
     c.bench_function("iterator_chain", |b| {
         b.iter(|| {
             let sum: i32 = data
@@ -79,7 +79,7 @@ fn iterator_chain_benchmark(c: &mut Criterion) {
             black_box(sum);
         });
     });
-    
+
     c.bench_function("manual_loop", |b| {
         b.iter(|| {
             let mut sum = 0;

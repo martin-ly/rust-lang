@@ -546,7 +546,8 @@ mod tests {
         ];
         let labels = vec![0, 0, 1, 1];
 
-        let score = ClusteringMetrics::davies_bouldin_score(&data, &labels).expect("计算Davies-Bouldin指数失败");
+        let score = ClusteringMetrics::davies_bouldin_score(&data, &labels)
+            .expect("计算Davies-Bouldin指数失败");
         assert!(score >= 0.0);
     }
 }

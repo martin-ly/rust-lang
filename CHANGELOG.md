@@ -26,6 +26,12 @@
 - **knowledge/**: 修复 10 个死链接 → 0
   - `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` 中的跨目录链接深度修正
 
+### 🛠️ 编译修复：BOM 字符清理
+
+- **问题**: `cargo check` 报错 `unknown start of token: \u{feff}`，15 个 `.rs` 文件包含 UTF-8 BOM
+- **修复**: 批量移除 `crates/common/src/lib.rs`、`c02_type_system`、`c07_process`、`c10_networks`、`c11_macro_system`、`c12_wasm`、`c13_embedded` 共 15 个文件中的 BOM
+- **验证**: `cargo check --workspace` 通过，`cargo clippy --workspace` 0 警告
+
 ### 🔍 审计指标（全部通过）
 
 - `concept_audit.py`: 0 错误，48/48 跨文件链接，48/48 Bloom 标注，0 TODO，0 死链接

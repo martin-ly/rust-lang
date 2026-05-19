@@ -1,5 +1,4 @@
-use c05_threads::message_passing::priority_channels as full;
-use c05_threads::message_passing::priority_channels_simple as simple;
+use c05_threads::message_passing::{priority_channels as full, priority_channels_simple as simple};
 
 fn demo_simple() {
     let ch = simple::SimplePriorityChannel::new();

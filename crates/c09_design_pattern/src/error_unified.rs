@@ -11,22 +11,22 @@ use thiserror::Error;
 pub enum DesignPatternError {
     #[error("singleton error: {0}")]
     Singleton(String),
-    
+
     #[error("factory error: {0}")]
     Factory(String),
-    
+
     #[error("proxy error: {0}")]
     Proxy(String),
-    
+
     #[error("flyweight error: {0}")]
     Flyweight(String),
-    
+
     #[error("chain error: {0}")]
     Chain(String),
-    
+
     #[error("observer error: {0}")]
     Observer(String),
-    
+
     #[error("concurrency error: {0}")]
     Concurrency(String),
 }
@@ -36,8 +36,7 @@ impl_into_unified_error!(DesignPatternError);
 
 /// Re-export common error types for convenience
 pub use common::{
-    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError,
-    UnifiedError,
+    CommonError, DynamicResult, ErrorContext, ErrorRecovery, Result, RustLangError, UnifiedError,
 };
 
 /// C09 crate's result type (Unified version)
@@ -77,7 +76,6 @@ pub fn observer_error<T: Into<String>>(msg: T) -> DesignPatternError {
 pub fn concurrency_pattern_error<T: Into<String>>(msg: T) -> DesignPatternError {
     DesignPatternError::Concurrency(msg.into())
 }
-
 
 #[cfg(test)]
 mod tests {

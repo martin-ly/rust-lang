@@ -3,7 +3,7 @@
 //! Demonstrates explicit lifetime annotations and elision rules.
 
 /// Example 1: Explicit Lifetime Annotation
-/// 
+///
 /// The returned reference has the same lifetime as the inputs.
 /// ```
 /// use rust_ownership_decidability::lifetime_examples::longest;
@@ -13,11 +13,15 @@
 /// assert_eq!(result, "longer string");
 /// ```
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() { x } else { y }
+    if x.len() > y.len() {
+        x
+    } else {
+        y
+    }
 }
 
 /// Example 2: Struct with Lifetime
-/// 
+///
 /// A struct that holds a reference.
 #[derive(Debug)]
 pub struct ImportantExcerpt<'a> {
@@ -29,7 +33,7 @@ impl<'a> ImportantExcerpt<'a> {
     pub fn part(&self) -> &str {
         self.part
     }
-    
+
     /// Compare with another excerpt
     pub fn compare(&self, other: &'a str) -> &'a str {
         if self.part.len() > other.len() {
@@ -41,7 +45,7 @@ impl<'a> ImportantExcerpt<'a> {
 }
 
 /// Example 3: Lifetime Elision
-/// 
+///
 /// The compiler can infer simple lifetime patterns.
 pub fn first_word_elided(s: &str) -> &str {
     let bytes = s.as_bytes();
@@ -54,21 +58,21 @@ pub fn first_word_elided(s: &str) -> &str {
 }
 
 /// Example 4: Static Lifetime
-/// 
+///
 /// Static lifetime lasts for the entire program duration.
 pub fn get_static_string() -> &'static str {
     "I live forever!"
 }
 
 /// Example 5: Multiple Lifetimes
-/// 
+///
 /// Different references can have different lifetimes.
 pub fn mix_lifetimes<'a, 'b>(x: &'a str, _y: &'b str) -> &'a str {
     x // Only x's lifetime matters for return
 }
 
 /// Example 6: Lifetime Bounds
-/// 
+///
 /// T: 'a means T outlives 'a.
 pub struct Wrapper<'a, T: 'a> {
     data: &'a T,
@@ -78,14 +82,14 @@ impl<'a, T> Wrapper<'a, T> {
     pub fn new(data: &'a T) -> Self {
         Wrapper { data }
     }
-    
+
     pub fn get(&self) -> &T {
         self.data
     }
 }
 
 /// Example 7: Lifetime in Trait
-/// 
+///
 /// Traits can have lifetime parameters too.
 pub trait Parser<'a> {
     fn parse(&self, input: &'a str) -> Option<&'a str>;

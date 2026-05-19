@@ -6,9 +6,7 @@ use std::fmt;
 
 /// 使用 `fmt::from_fn` 创建异步日志格式化器
 pub fn create_async_log_formatter(task_id: u64) -> impl fmt::Display {
-    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| {
-        write!(f, "[async-task-{}]", task_id)
-    })
+    fmt::from_fn(move |f: &mut fmt::Formatter<'_>| write!(f, "[async-task-{}]", task_id))
 }
 
 /// 异步风格的 `VecDeque` 条件消费（模拟异步缓冲区）
@@ -60,9 +58,6 @@ mod tests {
 
     #[test]
     fn test_format_async_results() {
-        assert_eq!(
-            format_async_results(&[10, 20, 30]),
-            "results=[10, 20, 30]"
-        );
+        assert_eq!(format_async_results(&[10, 20, 30]), "results=[10, 20, 30]");
     }
 }

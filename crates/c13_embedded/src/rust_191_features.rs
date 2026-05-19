@@ -47,5 +47,8 @@ pub fn c_variadic_doc_placeholder() -> &'static str {
 
 #[test]
 fn test_c_variadic_placeholder() {
-    assert_eq!(c_variadic_doc_placeholder(), "c_variadic requires nightly Rust; see documentation above");
+    assert_eq!(
+        c_variadic_doc_placeholder(),
+        "c_variadic requires nightly Rust; see documentation above"
+    );
 }

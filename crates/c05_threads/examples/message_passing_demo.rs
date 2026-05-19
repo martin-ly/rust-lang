@@ -1,7 +1,8 @@
 use std::thread;
 use std::time::Duration;
 
-use c05_threads::message_passing::{channel, mpsc, stream::ReceiverStream, sync_channel, watch};
+use c05_threads::message_passing::stream::ReceiverStream;
+use c05_threads::message_passing::{channel, mpsc, sync_channel, watch};
 
 fn demo_std_channel() {
     let (tx, rx) = channel::channel::<i32>();

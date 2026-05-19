@@ -7,8 +7,8 @@
 
 use std::collections::VecDeque;
 use std::future::Future;
-use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
+use std::sync::Arc;
 
 // ============================================================================
 // 1. ConceptWaker — Waker 概念实现
