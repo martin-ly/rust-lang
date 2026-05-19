@@ -1,3 +1,4 @@
+// [来源: Rust Standard Library / Rust Reference]
 /*
 在Rust中，错误处理是一个重要的概念，主要通过两种方式来实现：
 Result和Option类型。

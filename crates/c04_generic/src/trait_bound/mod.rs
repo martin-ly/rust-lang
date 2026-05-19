@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 447]
 pub mod clone;
 pub mod copy;
 pub mod debug;

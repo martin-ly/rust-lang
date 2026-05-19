@@ -1,3 +1,4 @@
+// [来源: Rust Reference / tokio docs]
 //! Actor 与 Reactor 模式深度分析 - Actor and Reactor Patterns Deep Analysis
 //!
 //! # 概述 (Overview)

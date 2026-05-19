@@ -25,7 +25,7 @@
 ## 🚀 相关层
 
 - [04_expert/unsafe_audit.md](../../04_expert/unsafe_audit.md) - Unsafe 代码审计方法论
-- [04_expert/tree_borrows.md](../../04_expert/tree_borrows.md) - 别名模型与内存规则
+- [04_expert/tree_borrows.md](../../04_expert/miri/tree_borrows.md) - 别名模型与内存规则
 
 ---
 

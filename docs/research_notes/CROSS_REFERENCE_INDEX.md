@@ -135,7 +135,7 @@
 
 | software_design_theory 子目录 | 正向链接 → | ← 反向链接来源 |
 | :--- | :--- | :--- |
-| [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) | → [ownership_model](./formal_methods/ownership_model.md) 所有权实现→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用模式→ [software_design_theory/05_boundary_system](./software_design_theory/05_boundary_system/README.md) 安全边界 | ← [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) 实践指南← [04_thinking/MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) 模式导图← [02_reference/quick_reference/design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) 速查 |
+| [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) | → [ownership_model](./formal_methods/ownership_model.md) 所有权实现→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) 借用模式→ [software_design_theory/05_boundary_system](./software_design_theory/05_boundary_system/README.md) 安全边界 | ← [05_guides/DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) 实践指南← [04_thinking/MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) 模式导图← [02_reference/quick_reference/design_patterns_cheatsheet.md](../../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) 速查 |
 | [03_execution_models](./software_design_theory/03_execution_models/README.md) | → [async_state_machine](./formal_methods/async_state_machine.md) 异步形式化→ [send_sync_formalization](./formal_methods/send_sync_formalization.md) 并发安全→ [software_design_theory/06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md) 边界分析 | ← [05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) 异步实践← [05_guides/THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) 并发实践← [02_reference/quick_reference/async_patterns.md](../02_reference/quick_reference/async_patterns.md) 速查 |
 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](./formal_methods/ownership_model.md) CE-T1依赖→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CE-T2依赖→ [type_system_foundations](./type_theory/type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) 模式组合← [03_execution_models](./software_design_theory/03_execution_models/README.md) 执行组合← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) 集成示例 |
 
@@ -148,7 +148,7 @@
 | [async_patterns.md](../02_reference/quick_reference/async_patterns.md) | [ASYNC_PROGRAMMING_USAGE_GUIDE](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) | [async_state_machine](./formal_methods/async_state_machine.md) |
 | [threads_concurrency_cheatsheet.md](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) | [THREADS_CONCURRENCY_USAGE_GUIDE](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) | [send_sync_formalization](./formal_methods/send_sync_formalization.md) |
 | [generics_cheatsheet.md](../02_reference/quick_reference/generics_cheatsheet.md) | [MACRO_SYSTEM_USAGE_GUIDE](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | [trait_system_formalization](./type_theory/trait_system_formalization.md) |
-| [design_patterns_cheatsheet.md](../02_reference/quick_reference/design_patterns_cheatsheet.md) | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) |
+| [design_patterns_cheatsheet.md](../../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) | [DESIGN_PATTERNS_USAGE_GUIDE](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) | [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) |
 
 ---
 
@@ -357,7 +357,7 @@ graph TD
 | **理解所有权机制** | ownership_cheatsheet → ownership_model → borrow_checker_proof → CORE_THEOREMS | [速查](../02_reference/quick_reference/ownership_cheatsheet.md) → [形式化](./formal_methods/ownership_model.md) |
 | **掌握类型系统** | type_system → type_system_foundations → trait_system_formalization → variance_theory | [速查](../02_reference/quick_reference/type_system.md) → [形式化](./type_theory/type_system_foundations.md) |
 | **学习异步编程** | async_patterns → ASYNC_PROGRAMMING_USAGE_GUIDE → async_state_machine → pin_self_referential | [速查](../02_reference/quick_reference/async_patterns.md) → [指南](../05_guides/ASYNC_PROGRAMMING_USAGE_GUIDE.md) → [形式化](./formal_methods/async_state_machine.md) |
-| **设计模式选型** | design_patterns_cheatsheet → DESIGN_PATTERNS_USAGE_GUIDE → 01_design_patterns_formal → 04_compositional_engineering | [速查](../02_reference/quick_reference/design_patterns_cheatsheet.md) → [指南](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) → [理论](./software_design_theory/01_design_patterns_formal/README.md) |
+| **设计模式选型** | design_patterns_cheatsheet → DESIGN_PATTERNS_USAGE_GUIDE → 01_design_patterns_formal → 04_compositional_engineering | [速查](../../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md) → [指南](../05_guides/DESIGN_PATTERNS_USAGE_GUIDE.md) → [理论](./software_design_theory/01_design_patterns_formal/README.md) |
 | **并发安全分析** | threads_concurrency_cheatsheet → THREADS_CONCURRENCY_USAGE_GUIDE → send_sync_formalization → 06_boundary_analysis | [速查](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) → [指南](../05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md) → [形式化](./formal_methods/send_sync_formalization.md) |
 | **查找定理证明** | PROOF_INDEX → 具体文档证明树 → CORE_THEOREMS_FULL_PROOFS | [证明索引](./PROOF_INDEX.md) → [完整证明](./CORE_THEOREMS_FULL_PROOFS.md) |
 | **理解论证脉络** | 00_COMPREHENSIVE_SUMMARY → ARGUMENTATION_CHAIN_AND_FLOW → 具体文档 | [总览](./00_COMPREHENSIVE_SUMMARY.md) → [脉络](./ARGUMENTATION_CHAIN_AND_FLOW.md) |
@@ -450,9 +450,9 @@ graph TD
 
 #### 相关文档
 
-- [Rust 1.94 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md)
-- [Rust 1.94 特性速查](../02_reference/quick_reference/rust_194_features_cheatsheet.md)
-- [性能调优指南](../05_guides/PERFORMANCE_TUNING_GUIDE.md)
+- [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
+- [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
+- [性能调优指南](../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
 
 ---
 

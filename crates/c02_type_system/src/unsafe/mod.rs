@@ -1,3 +1,4 @@
+// [来源: The Rustonomicon / Rust Reference]
 /*
 在Rust中，**unsafe Rust**是指一种允许开发者绕过Rust的安全性检查的代码部分。
 虽然Rust的设计目标是提供内存安全和线程安全，

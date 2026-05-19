@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 1566]
 //! 过程宏（Procedural Macros）
 //!
 //! 过程宏允许在编译期运行Rust代码来操作Token流。

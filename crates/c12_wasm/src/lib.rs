@@ -1,3 +1,4 @@
+// [来源: WebAssembly Spec / wasm-bindgen docs]
 ﻿#![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

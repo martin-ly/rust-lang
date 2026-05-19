@@ -1,3 +1,4 @@
+// [来源: The Embedded Rust Book / Rust Reference]
 #![cfg_attr(target_arch = "arm", no_std)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

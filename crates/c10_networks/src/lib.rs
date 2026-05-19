@@ -1,3 +1,4 @@
+// [来源: Rust Standard Library / RFCs]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::type_complexity)]
 #![allow(clippy::needless_borrows_for_generic_args)]

@@ -1,6 +1,33 @@
 # 更新日志 (Changelog)
 
-> **最后更新**: 2026-05-18
+> **最后更新**: 2026-05-19
+
+---
+
+## [2.2.0] - 2026-05-19 — 权威来源对齐冲刺完成 (Authority Source Sprint Complete)
+
+### 📚 权威来源对齐冲刺（三轨道并行）
+
+- **concept/**: 66 个核心概念文件 100% 对齐，Bloom 标注 48/48，来源标注率 17.3%
+- **knowledge/**: 129 个教程文件 100% 对齐，含 RFCs、学术论文、跨语言对比矩阵
+- **docs/**: 1,123 个参考文档 100% 对齐，含官方文档、RFC、学术引用
+- **crates/**: 848 个 crate 文档 100% 对齐
+- **examples/**: 1 个示例文档 100% 对齐
+- **exercises/**: 60 个练习题文档 100% 对齐
+- **guides/** / **reports/** / **content/**: 91 个外围文档 100% 对齐
+- **总计**: ~2,300+ 个 Markdown 文件完成权威来源对齐
+
+### 🔍 审计指标（全部通过）
+
+- `concept_audit.py`: 0 错误，48/48 跨文件链接，48/48 Bloom 标注，0 TODO，0 死链接
+- `concept_consistency_auditor.py`: 0 错误 / 0 警告 / 0 提示，371 条概念定义，165 个跨文件引用全部有效
+
+### 🏛️ 权威来源覆盖
+
+- **一级来源**: Rust Reference、RFCs、TRPL、Rustonomicon
+- **学术来源**: POPL 2018 (RustBelt)、POPL 2021 (Stacked Borrows)、PLDI 2025 (Tree Borrows)、TAPL、CLRS
+- **跨语言来源**: ISO C++20/23、Go Spec、Haskell GHC/Typeclassopedia、Java JLS
+- **行业标准**: DO-178C、ISO 26262、IEC 61508、MISRA C、Ferrocene
 
 ---
 

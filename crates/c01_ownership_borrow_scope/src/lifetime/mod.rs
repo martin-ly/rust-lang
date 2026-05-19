@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 141]
 //! # Rust 1.89 生命周期系统模块 / Rust 1.89 Lifetime System Module
 //!
 //! 本模块实现了 Rust 1.89 版本的最新生命周期系统特性，包括：

@@ -1,3 +1,4 @@
+// [来源: Treiber 1986 / Rust Atomics and Locks]
 //! 无锁栈实现 (Treiber Stack)
 //!
 //! 使用原子操作实现的无锁后进先出（LIFO）栈结构。

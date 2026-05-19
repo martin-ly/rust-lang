@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 2349]
 #![forbid(unsafe_code)]
 
 //! Pin、自引用结构与高级所有权模式

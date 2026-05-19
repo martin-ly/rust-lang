@@ -1,3 +1,4 @@
+// [来源: The Rustonomicon / Rust Reference]
 //! 内存安全高级演示模块
 //!
 //! 本模块演示了 Rust 1.90 中的各种内存安全高级特性，包括：

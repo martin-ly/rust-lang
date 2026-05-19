@@ -22,6 +22,8 @@ from collections import defaultdict
 from datetime import datetime
 
 CONCEPT_DIR = Path("concept")
+KNOWLEDGE_DIR = Path("knowledge")
+DOCS_DIR = Path("docs")
 REPORT_PATH = "reports/concept_audit_report.md"
 
 # 需要检查的核心概念文件路径模式（排除入口索引和 meta）
@@ -106,6 +108,26 @@ def find_md_files():
     # 排除入口文件
     excluded = {"00.md", "01.md", "02.md", "03.md", "04.md", "05.md", "06.md", "07.md", "README.md"}
     files = [f for f in files if f.name not in excluded]
+    return sorted(set(files))
+
+
+def find_knowledge_md_files():
+    """查找 knowledge 目录 markdown 文件"""
+    files = []
+    for pattern in ["**/*.md"]:
+        files.extend(KNOWLEDGE_DIR.glob(pattern))
+    # 排除 archive 和 .kimi
+    files = [f for f in files if "99_archive" not in str(f) and ".kimi" not in str(f)]
+    return sorted(set(files))
+
+
+def find_docs_md_files():
+    """查找 docs 目录 markdown 文件"""
+    files = []
+    for pattern in ["**/*.md"]:
+        files.extend(DOCS_DIR.glob(pattern))
+    # 排除 archive
+    files = [f for f in files if "archive" not in str(f)]
     return sorted(set(files))
 
 
@@ -284,10 +306,35 @@ def generate_report(results):
         f.write('\n'.join(lines))
 
 
-def main():
-    md_files = find_md_files()
+# 各轨道的审计阈值
+TRACK_THRESHOLDS = {
+    'concept/': {
+        'min_cross_links': 3,
+        'min_source_rate': 0.10,
+        'require_bloom': True,
+        'require_naming': True,
+    },
+    'knowledge/': {
+        'min_cross_links': 1,
+        'min_source_rate': 0.05,
+        'require_bloom': False,
+        'require_naming': False,
+    },
+    'docs/': {
+        'min_cross_links': 1,
+        'min_source_rate': 0.03,
+        'require_bloom': False,
+        'require_naming': False,
+    },
+}
+
+
+def scan_files(md_files, track_name):
+    """扫描一组文件，返回结果字典"""
+    thresholds = TRACK_THRESHOLDS.get(track_name, TRACK_THRESHOLDS['concept/'])
 
     results = {
+        'track': track_name,
         'total_files': len(md_files),
         'cross_links_ok': 0,
         'cross_links_fail': [],
@@ -312,7 +359,7 @@ def main():
 
         # 1. 跨文件链接检查（含死链接）
         link_count, links, dead = check_cross_links(content, file_path)
-        if link_count >= 3:
+        if link_count >= thresholds['min_cross_links']:
             results['cross_links_ok'] += 1
         else:
             results['cross_links_fail'].append({
@@ -341,7 +388,7 @@ def main():
         found_kw, explicit = check_bloom_levels(content, file_path)
         if explicit:
             results['bloom_explicit'] += 1
-        else:
+        elif thresholds['require_bloom']:
             results['bloom_missing'].append({
                 'file': rel_path,
                 'found': sorted(found_kw),
@@ -353,7 +400,7 @@ def main():
         rate = annotations / denominator
         total_source_rate += rate
         source_file_count += 1
-        if rate < 0.10 and para_count > 5:  # 排除极短文件
+        if rate < thresholds['min_source_rate'] and para_count > 5:
             results['source_low'].append({
                 'file': rel_path,
                 'annotations': annotations,
@@ -370,21 +417,24 @@ def main():
         naming_ok, name = check_file_naming(file_path)
         if naming_ok:
             results['naming_ok'] += 1
-        else:
+        elif thresholds['require_naming']:
             results['naming_fail'].append(rel_path)
 
     if source_file_count > 0:
         results['avg_source_rate'] = total_source_rate / source_file_count
 
-    # 生成报告
-    generate_report(results)
+    return results
 
-    # 打印摘要
+
+def print_track_results(results):
+    """打印单个轨道的结果摘要"""
+    thresholds = TRACK_THRESHOLDS.get(results['track'], TRACK_THRESHOLDS['concept/'])
+    min_links = thresholds['min_cross_links']
     print(f"\n{'='*60}")
-    print("概念知识体系自动化审计 v2.0 完成")
+    print(f"轨道: {results['track']}")
     print(f"{'='*60}")
     print(f"扫描文件数: {results['total_files']}")
-    print(f"跨文件链接 ≥3: {results['cross_links_ok']}/{results['total_files']}")
+    print(f"跨文件链接 ≥{min_links}: {results['cross_links_ok']}/{results['total_files']}")
     print(f"死链接文件: {results['dead_link_files']}")
     print(f"命名规范符合: {results['naming_ok']}/{results['total_files']}")
     print(f"代码块问题: {len(results['code_block_issues'])} 个文件")
@@ -392,27 +442,56 @@ def main():
     print(f"平均来源标注率: {results['avg_source_rate']:.1%}")
     print(f"TODO 待完成: {results['todo_summary']['pending']}")
     print(f"TODO 已完成: {results['todo_summary']['done']}")
+
+
+def main():
+    # 扫描三个轨道
+    concept_files = find_md_files()
+    knowledge_files = find_knowledge_md_files()
+    docs_files = find_docs_md_files()
+
+    concept_results = scan_files(concept_files, "concept/")
+    knowledge_results = scan_files(knowledge_files, "knowledge/")
+    docs_results = scan_files(docs_files, "docs/")
+
+    all_results = [concept_results, knowledge_results, docs_results]
+
+    # 生成汇总报告
+    generate_report(concept_results)
+
+    # 打印摘要
+    print(f"\n{'='*60}")
+    print("概念知识体系自动化审计 v2.1 完成")
+    print(f"{'='*60}")
+
+    for r in all_results:
+        print_track_results(r)
+
+    total_files = sum(r['total_files'] for r in all_results)
+    total_dead = sum(r['dead_link_files'] for r in all_results)
+    print(f"\n{'='*60}")
+    print(f"总计扫描文件数: {total_files}")
+    print(f"总计死链接: {total_dead}")
     print(f"报告: {REPORT_PATH}")
 
-    has_issues = (
-        results['cross_links_fail']
-        or results['dead_links']
-        or results['code_block_issues']
-        or results['bloom_missing']
-        or results['source_low']
+    has_issues = any(
+        r['cross_links_fail'] or r['dead_links'] or r['code_block_issues']
+        or r['bloom_missing'] or r['source_low']
+        for r in all_results
     )
     if has_issues:
         print(f"\n⚠️ 发现以下问题:")
-        if results['cross_links_fail']:
-            print(f"  - {len(results['cross_links_fail'])} 个文件跨文件链接不足")
-        if results['dead_links']:
-            print(f"  - {len(results['dead_links'])} 个死链接")
-        if results['code_block_issues']:
-            print(f"  - {len(results['code_block_issues'])} 个文件代码块标记有问题")
-        if results['bloom_missing']:
-            print(f"  - {len(results['bloom_missing'])} 个文件缺少 Bloom 标注")
-        if results['source_low']:
-            print(f"  - {len(results['source_low'])} 个文件来源标注率 < 10%")
+        for r in all_results:
+            if r['cross_links_fail']:
+                print(f"  [{r['track']}] {len(r['cross_links_fail'])} 个文件跨文件链接不足")
+            if r['dead_links']:
+                print(f"  [{r['track']}] {len(r['dead_links'])} 个死链接")
+            if r['code_block_issues']:
+                print(f"  [{r['track']}] {len(r['code_block_issues'])} 个文件代码块标记有问题")
+            if r['bloom_missing']:
+                print(f"  [{r['track']}] {len(r['bloom_missing'])} 个文件缺少 Bloom 标注")
+            if r['source_low']:
+                print(f"  [{r['track']}] {len(r['source_low'])} 个文件来源标注率 < 10%")
         sys.exit(1)
     else:
         print(f"\n✅ 审计通过！")

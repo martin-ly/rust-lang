@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 803]
 /*
 在Rust中，**类型变异（type variance）**
 是指在泛型类型和特征中，类型参数的变化如何影响类型的兼容性。

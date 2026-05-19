@@ -1,3 +1,4 @@
+// [来源: Rust Atomics and Locks / Rust Reference]
 //! 原子操作与内存排序深度专题
 //!
 //! 本模块深入讲解 Rust 中 `std::sync::atomic` 的内存排序语义，

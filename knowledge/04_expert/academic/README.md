@@ -11,7 +11,7 @@
 
 ## 🎯 前置要求
 
-- [03_advanced/type_driven_correctness.md](../type_driven_correctness.md) - 类型驱动正确性
+- [03_advanced/type_driven_correctness.md](../../03_advanced/type_driven_correctness.md) - 类型驱动正确性
 - [04_expert/miri/tree_borrows.md](../miri/tree_borrows.md) - Tree Borrows 基础
 
 ---

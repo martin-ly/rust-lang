@@ -1,3 +1,4 @@
+// [来源: Rust Reference / Unsafe Code Guidelines]
 //! 内存布局保证
 //!
 //! 对照 The Rustonomicon 中关于类型布局、对齐和 size 的章节。

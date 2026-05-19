@@ -417,7 +417,7 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [Rust 1.94 完整发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md) 🆕
 - [Rust 1.93 vs 1.94 对比](../archive/2026_05_historical_docs/17_rust_1.93_vs_1.94_comparison.md) 🆕
 - [Rust 1.94 采用指南](../archive/2026_05_historical_docs/18_rust_1.94_adoption_guide.md) 🆕
-- [Rust 1.95+ 迁移指南](../05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
+- [Rust 1.95+ 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md) 🆕
 - [Rust 1.94 研究笔记](../research_notes/RUST_194_RESEARCH_UPDATE.md) 🆕
 - [Rust 1.94 速查卡](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)（已归档）
 - [Cranelift 后端指南](./CRANELIFT_BACKEND_GUIDE.md) ⭐ (Rust 1.96+)

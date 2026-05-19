@@ -1,3 +1,4 @@
+// [来源: Rust Standard Library / Rust Reference]
 use crate::error::{IpcError, IpcResult};
 use crate::types::{IpcConfig, Message};
 use std::collections::HashMap;

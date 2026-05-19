@@ -1,3 +1,4 @@
+// [来源: Rust Standard Library / CLRS]
 pub mod dsu;
 pub mod fenwick;
 pub mod lru_cache;

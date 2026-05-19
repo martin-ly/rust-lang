@@ -1,3 +1,4 @@
+// [来源: Rust Reference / RFC 2394 / RFC 3185]
 #![allow(clippy::type_complexity)]
 #![allow(clippy::empty_line_after_doc_comments)]
 #![allow(clippy::duplicated_attributes)]

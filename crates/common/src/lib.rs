@@ -1,3 +1,4 @@
+// [来源: Rust Standard Library / Rust Reference]
 ﻿//! # Common - Project Common Utilities Library
 //!
 //! Provides unified error handling mechanism using trait-based design.
