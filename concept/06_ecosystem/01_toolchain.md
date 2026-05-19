@@ -1241,3 +1241,13 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 > **[来源: Clippy Documentation; Rust API Guidelines; Rust Style Guide; rustfmt Docs; rustdoc Book]** Lint 和文档工具的分析参考了官方指南。✅
 
 > **[来源: Miri Book; Jung et al. POPL 2019 — Stacked Borrows; Kani AWS Blog; cargo-audit Docs]** 验证工具分析基于学术文献和工业报告。✅
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

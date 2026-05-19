@@ -990,3 +990,13 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 - [Rust vs C++ 对比](../05_comparative/01_rust_vs_cpp.md) — 四语言对比矩阵详情
 - [L4 形式化验证](../04_formal/04_rustbelt.md) — RustBelt 与 Oxide 语义
 - [知识体系方法论](./methodology.md) — 思维表征规范与决策树模板
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

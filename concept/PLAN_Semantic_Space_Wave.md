@@ -271,3 +271,13 @@ Lifetime('a) × Lifetime('b) where 'a > 'b → ❌ 生命周期不足 E0597
 **推荐路径**：先完成 `semantic_space.md`（核心交付物），再批量增强现有文件的映射标注。
 
 预计工作量：1-2 轮会话（核心文件）+ 1 轮会话（映射标注）。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

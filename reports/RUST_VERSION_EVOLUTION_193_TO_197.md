@@ -183,3 +183,13 @@
 1. 前瞻 Rust 1.98 特性（如 impl Trait in type aliases 稳定化、gen blocks 去 feature gate）
 2. 将 gen blocks 稳定化后的生产级重构（一旦 nightly 移除 feature gate）
 3. 构建跨版本特性对比的交互式文档
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

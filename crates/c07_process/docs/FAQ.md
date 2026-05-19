@@ -281,3 +281,13 @@ async fn run_process(name: &str) -> Result<(), Box<dyn std::error::Error>> {
 - [05_async_process_management](./05_async_process_management.md) - 异步进程管理
 - [06_cross_platform_process_management](./06_cross_platform_process_management.md) - 跨平台实现
 - [主索引](./00_MASTER_INDEX.md) - 返回主索引
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

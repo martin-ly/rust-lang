@@ -52,3 +52,13 @@
 - **速查卡**: [control_flow_functions_cheatsheet](../../../docs/02_reference/quick_reference/control_flow_functions_cheatsheet.md) | [error_handling_cheatsheet](../../../docs/02_reference/quick_reference/error_handling_cheatsheet.md)
 - **RBE 练习**: [Flow Control](https://doc.rust-lang.org/rust-by-example/flow_control.html) · [Option](https://doc.rust-lang.org/rust-by-example/std/option.html) · [Error](https://doc.rust-lang.org/rust-by-example/error.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
 - **Rustlings**: [01_variables](https://github.com/rust-lang/rustlings/tree/main/exercises/01_variables) · [02_functions](https://github.com/rust-lang/rustlings/tree/main/exercises/02_functions) · [03_if](https://github.com/rust-lang/rustlings/tree/main/exercises/03_if) · [12_options](https://github.com/rust-lang/rustlings/tree/main/exercises/12_options) · [13_error_handling](https://github.com/rust-lang/rustlings/tree/main/exercises/13_error_handling) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

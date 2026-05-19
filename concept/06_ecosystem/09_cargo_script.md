@@ -268,3 +268,13 @@ Cargo Script:  File = Crate (单模块，无子模块)
 - [工具链总览](./01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](./03_core_crates.md) — 脚本中常用依赖的选择策略
 - [L2 泛型与 Trait](../02_intermediate/01_traits.md) — 脚本中泛型约束的完整支持
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

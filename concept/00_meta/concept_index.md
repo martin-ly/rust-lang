@@ -524,3 +524,13 @@
 - [x] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查 —— 已完成 `concept_index.json`
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）
 - [x] **低**: 与 `inter_layer_map.md` 的层间映射同步更新 —— ✅ 已完成
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

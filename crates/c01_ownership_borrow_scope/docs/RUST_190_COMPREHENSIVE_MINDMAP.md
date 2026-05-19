@@ -43,6 +43,7 @@
     - [10.1 核心要点回顾](#101-核心要点回顾)
     - [10.2 学习资源推荐](#102-学习资源推荐)
     - [10.3 相关文档](#103-相关文档)
+  - [_本思维导图致力于用 ASCII 艺术和结构化图表帮助您建立 Rust 所有权系统的完整知识体系！_](#本思维导图致力于用-ascii-艺术和结构化图表帮助您建立-rust-所有权系统的完整知识体系)
 
 ---
 
@@ -992,3 +993,13 @@
 ---
 
 _本思维导图致力于用 ASCII 艺术和结构化图表帮助您建立 Rust 所有权系统的完整知识体系！_
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

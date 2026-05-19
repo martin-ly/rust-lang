@@ -2070,3 +2070,13 @@ mod internal {
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |
 | 编译期计算 | [](../03_advanced/03_const_generics.md) | const fn 替代宏的趋势 |
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

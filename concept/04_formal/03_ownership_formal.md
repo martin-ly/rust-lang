@@ -1123,3 +1123,13 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > 当前的形式化工具（RustBelt、Kani、Miri）覆盖了 Rust 安全子集的大部分，但 Polonius 的 loan-based 语义、Tree Borrows 的别名模型、以及 Effects System 的类型效应都还在演进中。形式化不是终点，而是语言设计迭代的基础。
 >
 > 演进方向见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法工具链）与 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

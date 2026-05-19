@@ -47,6 +47,7 @@
     - [9.1 Cargo Features](#91-cargo-features)
   - [📚 延伸阅读](#-延伸阅读)
   - [📝 总结](#-总结)
+  - [**最后更新**: 2025-10-22 | **Tokio 版本**: 1.x](#最后更新-2025-10-22--tokio-版本-1x)
 
 ## 📐 知识结构
 
@@ -625,3 +626,13 @@ tokio = { version = "1", features = [
 
 **文档维护**: C06 Async Team | **质量评分**: 95/100
 **最后更新**: 2025-10-22 | **Tokio 版本**: 1.x
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

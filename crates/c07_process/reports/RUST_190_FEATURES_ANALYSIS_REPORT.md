@@ -288,3 +288,13 @@ macro_rules! process_error {
 c07_process 项目在 Rust 1.90 Edition 2024 特性使用方面表现良好，已经使用了大部分现代 Rust 特性。通过实施建议的更新计划，项目将能够充分利用最新的语言特性，提升性能和开发体验。
 
 建议按照优先级逐步实施更新，确保项目的稳定性和向前兼容性。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

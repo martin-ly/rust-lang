@@ -72,3 +72,13 @@
 ### 互链
 
 - 与 [c11_macro_system](../../c11_macro_system/README.md)：宏元编程、DSL 构建、代码生成与设计模式的协同（见 [PENDING_ITEMS.md](./PENDING_ITEMS.md)）
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

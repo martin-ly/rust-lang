@@ -1229,3 +1229,13 @@ graph TD
 > **[来源: Embassy Book; Rust for Linux; Aya Docs; QUIC RFC 9000; wgpu Docs; egui Docs]** 各方向的深入分析参考了对应领域的权威文档和 RFC。✅
 
 > **[来源: Rust Blockchain Report 2024; Solana Docs; Polkadot Substrate Docs; Near Protocol Docs]** 区块链方向基于公开协议文档和社区报告。✅
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

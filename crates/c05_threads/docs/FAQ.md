@@ -88,3 +88,13 @@
 - **危险性**: 这是在与魔鬼交易。直接使用原子类型意味着你必须手动处理**内存排序**，这是并发编程中最复杂、最微妙、最容易出错的部分。一个错误的 `Ordering` 可能导致在某些硬件上正常工作，但在另一些硬件上出现难以复现的数据竞争。
 
 **准则**: 除非你是在编写像 `Mutex` 本身这样的底层同步原语，或者是性能分析表明一个 `Mutex` 确实是无法接受的瓶颈，否则请始终使用 `Mutex`、`RwLock` 或通道等更高层次的抽象。安全性和正确性远比微小的性能提升更重要。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

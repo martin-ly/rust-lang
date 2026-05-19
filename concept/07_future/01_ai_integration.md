@@ -1043,3 +1043,13 @@ graph TD
 > **[来源: Rust Reference; Rustonomicon; Type System Research; Kani AWS Blog]** Rust × AI 的交集分析参考了类型系统文档和形式化验证工业实践。✅
 
 > **[来源: Deterministic Execution Research; Container Security; Reproducible Builds]** 确定性容器概念基于可复现计算和容器安全的研究。✅
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

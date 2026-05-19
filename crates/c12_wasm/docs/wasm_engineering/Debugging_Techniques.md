@@ -805,3 +805,13 @@ pub fn set_log_level(level: LogLevel) {
 - **[09.1 开发工具链](09.1_Development_Toolchain.md)** - 调试工具详解
 - **[09.2 测试策略](09.2_Testing_Strategies.md)** - 测试与调试配合
 - **[03.5 性能分析](../03_Runtime_Systems/03.5_Performance_Analysis.md)** - 性能调试方法
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

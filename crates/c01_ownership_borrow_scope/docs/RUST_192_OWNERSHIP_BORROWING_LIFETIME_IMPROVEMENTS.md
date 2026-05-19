@@ -48,6 +48,7 @@
       - [2. 利用新特性](#2-利用新特性)
     - [兼容性说明](#兼容性说明)
   - [总结](#总结)
+  - [**状态**: ✅ **完成**（历史记录文档，当前版本为 Rust 1.93.0+）](#状态--完成历史记录文档当前版本为-rust-1930)
 
 ---
 
@@ -361,3 +362,13 @@ Rust 1.92.0 在所有权、借用和生命周期系统方面带来了：
 **最后更新**: 2026-01-26
 **维护者**: Rust 学习项目团队
 **状态**: ✅ **完成**（历史记录文档，当前版本为 Rust 1.93.0+）
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

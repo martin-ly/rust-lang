@@ -53,6 +53,7 @@
   - [12. 常见陷阱与解决方案](#12-常见陷阱与解决方案)
   - [13. 与其他运行时的对比](#13-与其他运行时的对比)
   - [14. 参考资源](#14-参考资源)
+  - [**总结**: Glommio 是一个强大的高性能异步运行时，适合对延迟和吞吐量有极高要求的 Linux 应用。通过遵循本指南的最佳实践，你可以充分发挥 Glommio 的性能优势](#总结-glommio-是一个强大的高性能异步运行时适合对延迟和吞吐量有极高要求的-linux-应用通过遵循本指南的最佳实践你可以充分发挥-glommio-的性能优势)
 
 ---
 
@@ -858,4 +859,14 @@ CMD ["taskset", "-c", "0-3", "/app"]
 
 ---
 
-**总结**: Glommio 是一个强大的高性能异步运行时，适合对延迟和吞吐量有极高要求的 Linux 应用。通过遵循本指南的最佳实践，你可以充分发挥 Glommio 的性能优势。
+**总结**: Glommio 是一个强大的高性能异步运行时，适合对延迟和吞吐量有极高要求的 Linux 应用。通过遵循本指南的最佳实践，你可以充分发挥 Glommio 的性能优势
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

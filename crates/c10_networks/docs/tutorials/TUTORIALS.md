@@ -1384,3 +1384,13 @@ impl FaultTolerantClient {
 ```
 
 这个教程涵盖了 c10_networks 库的主要功能和使用方法，从基础的网络编程到高级的性能优化和安全配置。通过遵循这些最佳实践，您可以构建高效、可靠和安全的网络应用程序。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

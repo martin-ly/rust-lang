@@ -214,3 +214,13 @@ Rust 在 AI/ML 领域的生态持续演进：
 - [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) - 学习清单与自测
 - [ERROR_CODE_MAPPING.md](../docs/02_reference/ERROR_CODE_MAPPING.md) - 错误码→文档映射
 - [RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) - 模块↔习题对应
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

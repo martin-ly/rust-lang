@@ -65,3 +65,13 @@
 - [主索引导航](../tier_01_foundations/02_主索引导航.md) - 完整导航系统
 - [术语表](../tier_01_foundations/03_术语表.md) - 核心术语参考
 - [常见问题](../tier_01_foundations/04_常见问题.md) - FAQ 解答
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

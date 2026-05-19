@@ -1372,3 +1372,13 @@ vec.extend(0..1_000_000);
 - [x] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 已完成 §5.10
 - [x] **TODO**: 补充 `MaybeUninit<T>` 与 `MaybeDangling` 的完整边界分析 —— 优先级: 中 —— 已完成 §补充章节
 - [x] **TODO**: 补充 `Pin<Box<T>>` 与自引用结构的形式化语义 —— 优先级: 低 —— 已完成 §5.5
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

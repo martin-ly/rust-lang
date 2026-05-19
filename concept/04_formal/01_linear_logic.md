@@ -817,3 +817,13 @@ Rust 所有权系统（仿射变体）:
 > 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全，但内存安全不需要完整的线性类型系统。
 >
 > 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

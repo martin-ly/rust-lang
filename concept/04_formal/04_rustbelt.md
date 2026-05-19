@@ -919,3 +919,13 @@ unsafe {
 - [x] **TODO**: 补充 RustHornBelt 对 unsafe 功能正确性验证的扩展说明 —— 已完成 §7.7
 - [x] **TODO**: 补充 §3 CSL 中 `RwLock` 与 `Condvar` 的形式化规约（读锁共享协议的 Iris 建模）—— 已完成 §7.8
 - [x] **TODO**: 补充 `Vec` 重新分配时指针失效的形式化处理（借用与重分配的交互）—— 已完成 §7.9
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

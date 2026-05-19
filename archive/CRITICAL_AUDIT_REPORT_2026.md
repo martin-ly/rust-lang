@@ -423,3 +423,13 @@ status: [current | needs_update | deprecated]
 ---
 
 *本报告基于对项目代码、文档、配置的全面审计，以及 Rust 1.75-1.95 (stable) / 1.97 (nightly) 官方 Release Notes、Tracking Issues 和学术论文的交叉验证。*
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

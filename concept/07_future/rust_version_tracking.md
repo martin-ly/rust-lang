@@ -475,3 +475,13 @@ unsafe extern "C" {
 | v1.1 | 2026-05-18 | 补充 Next Solver 至 1.96 跟踪表；补充 `adt_const_params`/`min_generic_const_args`/`public_private_deps`/`cargo_script` 跟踪项 |
 | v1.2 | 2026-05-18 | 网络对齐更新：1.96 beta 状态（2026-05-28 预计稳定）、cargo-script RFC 3502+3503 已批准、public/private deps RFC 3516 Help Wanted 状态、hickory CVE-2026-42254 记录 |
 | v1.3 | 2026-05-18 | Miri 全 workspace 验证：12 个 crate 2,212+ 测试通过，修复 2 处真实 UB（c04_generic 未对齐读取、c07_process 未初始化内存）、1 处 gen block 逻辑错误（c08_algorithms）
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

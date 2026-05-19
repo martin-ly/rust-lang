@@ -1018,3 +1018,13 @@ graph TD
   - 已补充 §2.3.4 跨 Edition 代码示例（7 组对比）
   - 已补充 §2.4 未来 Edition 方向（2027+）
   - 所有论断附 `[来源: ...]` 标注，含 Bloom 层级标注，与 L1-L4 文件交叉链接
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

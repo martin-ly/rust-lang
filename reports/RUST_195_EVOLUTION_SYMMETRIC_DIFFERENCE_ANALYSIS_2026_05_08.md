@@ -596,3 +596,13 @@ gantt
 ---
 
 > **免责声明**: 本报告中关于 Rust 未来版本（1.96.0+）的预测基于 2026年5月8日可公开获取的 RFC、跟踪 issue、FCP 状态和官方博客信息。实际稳定化时间表可能因技术或流程原因调整。建议每月复核一次。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

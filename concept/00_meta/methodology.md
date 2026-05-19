@@ -404,3 +404,13 @@ fn main() {
 - [概念一致性检查清单](./audit_checklist.md) — 质量门禁与审计标准
 - [语义表达力全景梳理](./semantic_expressiveness.md) — 横向语义维度框架
 - [跨层知识图谱](./inter_layer_map.md) — 层级依赖与反馈机制
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

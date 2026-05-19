@@ -197,3 +197,13 @@ L4 的形式化成果输出到：
 - **L5 对比**: 形式系统 vs 机制工程的哲学论证（原 01.md 的核心论点）
 - **L6 生态**: Clippy lint、Miri 动态检测（形式化理论的工程近似）
 - **L7 前沿**: Kani/Creusot/Verus 工业验证工具、AI 形式化辅助证明
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

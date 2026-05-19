@@ -828,3 +828,13 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > Rust 的类型系统正在向更丰富的方向发展：Effects System 将副作用编码为类型约束、Generic Const Items 允许常量作为类型参数、Type Alias Impl Trait 简化存在类型的表达。这些演进不是偶然——它们都是类型论中已有概念的工程化落地。
 >
 > 演进方向见 [`../07_future/03_evolution.md`](../07_future/03_evolution.md)（语言演进路线图）与 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)（形式化方法的未来）。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -104,3 +104,13 @@ Rust 生态中一个著名的数据并行库。它提供了并行迭代器（`pa
 ### Work-Stealing (工作窃取)
 
 一种高效的并行任务调度算法，被 `Rayon` 使用。当一个工作线程变为空闲时，它会从其他繁忙线程的任务队列中"窃取"任务来执行，以实现负载均衡。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

@@ -662,3 +662,13 @@ block_on(bus.run_with_timeout_like(&events, 3));
   - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准
 
 后续规划：在不破坏稳定 API 的前提下，逐步引入原生 `async fn` in trait、GATs 等更高级特性到并发与异步子模块（视适用性与依赖生态兼容性推进）。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

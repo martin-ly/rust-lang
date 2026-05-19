@@ -50,6 +50,7 @@
     - [监控与调优](#监控与调优)
     - [实战应用](#实战应用)
     - [最佳实践](#最佳实践)
+  - [通过本章的学习，读者可以全面掌握 Rust 进程管理的性能优化技术，并能够构建高性能、可扩展的进程管理系统](#通过本章的学习读者可以全面掌握-rust-进程管理的性能优化技术并能够构建高性能可扩展的进程管理系统)
 
 本章深入探讨 Rust 进程管理的性能优化技术，提供全面的调优指南和实战案例。
 
@@ -2600,4 +2601,14 @@ impl RealTimeProcessingSystem {
 2. **优化策略**：分层优化、渐进式优化、目标导向优化
 3. **监控调优**：实时监控、自动化调优、持续优化
 
-通过本章的学习，读者可以全面掌握 Rust 进程管理的性能优化技术，并能够构建高性能、可扩展的进程管理系统。
+通过本章的学习，读者可以全面掌握 Rust 进程管理的性能优化技术，并能够构建高性能、可扩展的进程管理系统
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

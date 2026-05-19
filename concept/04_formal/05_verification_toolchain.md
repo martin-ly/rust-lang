@@ -316,3 +316,13 @@ flowchart TD
 | Unsafe 边界 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证对象的定义 |
 | 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | L7 演进趋势 |
 | Rust 版本跟踪 | [`../07_future/rust_version_tracking.md`](../07_future/rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

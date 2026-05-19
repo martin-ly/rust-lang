@@ -1768,3 +1768,13 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 - [x] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 已完成 §5.7
 - [x] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 已完成 §补充章节 Negative Impls —— 2026-05-13
 - [x] **TODO**: 补充 Next-generation trait solver（2026 旗舰稳定化目标、coherence 改进、解锁效应） —— 优先级: 高 —— 已完成 §十二 —— 2026-05-18
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

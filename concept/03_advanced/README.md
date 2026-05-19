@@ -216,3 +216,13 @@ Macros
 - **L5 对比**: Rust vs C++（unsafe vs 无约束）、Rust vs Go（async vs goroutine）
 - **L6 生态**: Tokio/Async-std 运行时、unsafe 代码审查规范
 - **L7 前沿**: AI 生成 Rust 代码的 unsafe 边界标注、形式化方法工业化
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

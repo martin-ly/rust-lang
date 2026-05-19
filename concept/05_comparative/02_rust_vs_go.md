@@ -720,3 +720,13 @@ func ParseJSON(input string) string {
 - [x] **TODO**: 补充具体微服务场景的性能对比数据 —— 已完成 §8.1
 - [x] **TODO**: 补充混合使用 Rust+Go 的架构模式 —— 已完成 §8.2
 - [x] **TODO**: 补充 Rust async/await 与 Go goroutine 在 IO 密集型场景的性能基准测试数据 —— 已完成 §8.1
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

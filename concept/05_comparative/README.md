@@ -152,3 +152,13 @@ L5 的综合分析输出到：
 - **L6 生态**: 工程模式选择（Typestate vs OOP）、工具链决策
 - **L7 前沿**: 语言演进方向（Rust 是否需要 GC？async 模型优化？）
 - **实践**: 技术栈选型、团队培训路径设计、迁移策略
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

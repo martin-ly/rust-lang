@@ -37,6 +37,7 @@
     - [选择建议](#选择建议)
     - [性能对比](#性能对比)
     - [最佳实践总结](#最佳实践总结)
+  - [通过合理选择和优化，现代 Rust 进程管理库能够满足从简单脚本到企业级应用的各种需求](#通过合理选择和优化现代-rust-进程管理库能够满足从简单脚本到企业级应用的各种需求)
 
 本章深入解析现代 Rust 进程管理库，包括 Tokio、Async-Std、Duct、Subprocess 等，提供详细的对比分析和实践指南。
 
@@ -1777,4 +1778,14 @@ pub struct ProcessConfig {
 4. **安全考虑**：权限控制、资源限制、沙箱执行
 5. **性能监控**：指标收集、性能分析、优化建议
 
-通过合理选择和优化，现代 Rust 进程管理库能够满足从简单脚本到企业级应用的各种需求。
+通过合理选择和优化，现代 Rust 进程管理库能够满足从简单脚本到企业级应用的各种需求
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

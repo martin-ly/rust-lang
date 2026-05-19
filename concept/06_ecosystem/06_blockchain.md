@@ -551,3 +551,13 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **[来源: Smart Contract Security Research; Reentrancy Attack Analysis; The DAO Post-Mortem]** 合约安全分析基于已公开的安全事件和研究文献。✅
 
 > **[来源: RustBelt: POPL 2018; Linear Logic; Separation Logic]** 形式化映射基于 RustBelt 和分离逻辑的理论框架。✅
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

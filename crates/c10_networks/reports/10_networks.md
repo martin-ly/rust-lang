@@ -1360,3 +1360,13 @@ async fn main() -> anyhow::Result<()> {
 - 单元：Kademlia 路由表操作、GossipSub 去重。
 - 集成：本地 3-5 节点组网，主题一致性。
 - 基准：发布吞吐、查找延迟、路由 hop 数统计。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)

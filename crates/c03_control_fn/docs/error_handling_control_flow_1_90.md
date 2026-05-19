@@ -49,3 +49,13 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
 - 对外 API 使用语义明确的错误类型（可结合 `thiserror`）；
 - 小范围 `try` 块提升表达式可读性；
 - 仅在需要时引入 `anyhow`/`eyre` 等动态错误类型。
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
+
+**文档版本**: 1.1
+**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+**最后更新**: 2026-05-19
+**状态**: ✅ 权威来源对齐完成 (Batch 8)
