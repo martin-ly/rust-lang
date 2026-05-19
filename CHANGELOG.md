@@ -17,6 +17,15 @@
 - **guides/** / **reports/** / **content/**: 91 个外围文档 100% 对齐
 - **总计**: ~2,300+ 个 Markdown 文件完成权威来源对齐
 
+### 🔗 死链接清零（docs/ + knowledge/）
+
+- **docs/**: 修复 981 个死链接 → 0（6,554 个相对链接全部有效）
+  - 归档文件重定向：`RUST_194_MIGRATION_GUIDE.md`、`rust_194_features_cheatsheet.md`、`macros_cheatsheet.md`、`design_patterns_cheatsheet.md` 等迁移至 `docs/archive/`
+  - 路径深度修正：`docs/research_notes/` 深层子目录中的 `PERFORMANCE_TUNING_GUIDE.md` 等链接
+  - 已删除文件处理：`DOCS_STRUCTURE_OVERVIEW.md`、`RESEARCH_NOTES_CRITICAL_ANALYSIS...` 等 6 个已删除文件的链接转为纯文本
+- **knowledge/**: 修复 10 个死链接 → 0
+  - `AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` 中的跨目录链接深度修正
+
 ### 🔍 审计指标（全部通过）
 
 - `concept_audit.py`: 0 错误，48/48 跨文件链接，48/48 Bloom 标注，0 TODO，0 死链接
@@ -170,7 +179,6 @@
 
 ### 🚀 模块深度扩展（13 个 crate）
 
-...
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
