@@ -556,6 +556,7 @@ mod tests {
     }
 
     #[tokio::test]
+    #[cfg_attr(miri, ignore)]
     async fn test_async_initialize_array() {
         let arr = MaybeUninitArrayExamples::async_initialize_array(|i| async move { i * 3 }).await;
         assert_eq!(arr, [0, 3, 6, 9, 12]);

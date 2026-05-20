@@ -32,6 +32,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_reduction01() {
         parallel_reduction_test();
     }

@@ -30,6 +30,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_process01() {
         parallel_process_test();
     }

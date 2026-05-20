@@ -10,8 +10,8 @@
 
 | 工具 | 版本 | 用途 |
 |------|------|------|
-| Rust | 1.96.0+ | 编译器 |
-| Cargo | 1.96.0+ | 构建工具 |
+| Rust | 1.95.0+ | 编译器 |
+| Cargo | 1.95.0+ | 构建工具 |
 | Git | 2.30+ | 版本控制 |
 
 ### 可选工具
@@ -210,6 +210,7 @@ cargo update
 - Rust Book
 - Cargo 文档
 - rust-analyzer 手册
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

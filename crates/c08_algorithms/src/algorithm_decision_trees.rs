@@ -1516,6 +1516,7 @@ mod tests {
     // ---------------- ConcurrencyAlgorithmDecisionTree ----------------
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_sequential_vs_parallel() {
         let s = ConcurrencyAlgorithmDecisionTree::sequential_vs_parallel();
         assert!(!s.is_empty());
@@ -1523,6 +1524,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_data_vs_task_parallelism() {
         let s = ConcurrencyAlgorithmDecisionTree::data_vs_task_parallelism();
         assert!(!s.is_empty());

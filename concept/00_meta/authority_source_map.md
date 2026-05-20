@@ -22,8 +22,8 @@
 
 ## 一、一级来源：Rust 官方与形式化 [来源: 来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验]
 
-| 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 |
-|:---|:---|:---|:---|:---|:---|:---|
+| 概念 | 官方来源 | 学术来源 | 社区权威 | C++ 对标 | Haskell 对标 | Go 对标 | 备注 |
+|:---|:---|:---|:---|:---|:---|:---|:---|
 | **Ownership** | TRPL Ch4 · Reference § Ownership Types | Ralf Jung *"RustBelt: Securing the Foundations of the Rust Programming Language"* (POPL 2018) · Clarke *"Ownership Types for Flexible Alias Protection"* (OOPSLA 1998) | Niko Matsakis blog *"The problem of safe and convenient parallelism"* | `unique_ptr` (cppreference) · RAII | Linear Types (Wadler, ICFP 1990) · Affine Logic | 无（GC 管理） | [来源: 核心形式化论证见 concept/01_foundation/01_ownership.md]
 | **Borrowing** | TRPL Ch4.2 · Reference § References and Borrowing | Ralf Jung *"Stacked Borrows: An Aliasing Model for Rust"* (POPL 2021) | Niko Matsakis *"Two interpretations of borrowing"* | 引用 `&T` / `const T&` 语义 · 悬垂引用规则 | Borrowing in linear/affine type systems (Wadler) | 指针借用（无编译期检查） | [来源: 核心形式化论证见 concept/01_foundation/02_borrowing.md]
 | **Lifetimes** | TRPL Ch10 · Reference § Lifetime Elision · RFC 2094 (NLL) | Ralf Jung *"Tree Borrows: Or, How I Learned to Stop Worrying and Love the Alias"* (arXiv 2023) | Jon Gjengset *"Crust of Rust: Lifetime Annotations"* | 无直接对应（RAII + 智能指针处理） | 显式 region / let-binding scope | 无（GC 决定） |

@@ -79,6 +79,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_pipeline01() {
         parallel_pipeline_test();
     }
@@ -96,6 +97,7 @@ mod pluggable_tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_make_pluggable_iter() {
         let data = [1, 2, 3, 4, 5, 6];
         let stages = [
@@ -113,6 +115,7 @@ mod iter_tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_make_pipeline_iter() {
         let data = [1, 2, 3, 4, 5, 6];
         let out: Vec<i32> = make_pipeline_iter(&data).collect();

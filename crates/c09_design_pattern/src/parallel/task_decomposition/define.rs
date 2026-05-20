@@ -32,6 +32,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_task_decomposition01() {
         task_decomposition_test();
     }

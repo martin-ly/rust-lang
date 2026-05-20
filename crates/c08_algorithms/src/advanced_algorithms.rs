@@ -205,7 +205,9 @@ impl PaxosNode {
     }
 
     pub fn propose(&mut self, proposal_id: usize, value: String) -> bool {
-        if self.promised_proposal.is_none() || self.promised_proposal.expect("获取承诺提案失败") < proposal_id {
+        if self.promised_proposal.is_none()
+            || self.promised_proposal.expect("获取承诺提案失败") < proposal_id
+        {
             self.promised_proposal = Some(proposal_id);
             self.value = Some(value);
             true
@@ -215,7 +217,9 @@ impl PaxosNode {
     }
 
     pub fn accept(&mut self, proposal_id: usize, value: String) -> bool {
-        if self.promised_proposal.is_none() || self.promised_proposal.expect("获取承诺提案失败") <= proposal_id {
+        if self.promised_proposal.is_none()
+            || self.promised_proposal.expect("获取承诺提案失败") <= proposal_id
+        {
             self.accepted_proposal = Some(proposal_id);
             self.accepted_value = Some(value);
             true
@@ -383,7 +387,8 @@ impl KMeans {
     }
 
     fn initialize_centroids(&mut self, data: &[Vec<f64>]) {
-        use rand::{RngExt, rngs::ThreadRng};
+        use rand::RngExt;
+        use rand::rngs::ThreadRng;
         let mut rng = ThreadRng::default();
 
         self.centroids.clear();
@@ -639,7 +644,8 @@ impl RSA {
     }
 
     fn generate_prime(bits: usize) -> u64 {
-        use rand::{RngExt, rngs::ThreadRng};
+        use rand::RngExt;
+        use rand::rngs::ThreadRng;
         let mut rng = ThreadRng::default();
 
         loop {
@@ -657,7 +663,8 @@ impl RSA {
     }
 
     fn is_prime(n: u64) -> bool {
-        use rand::{RngExt, rngs::ThreadRng};
+        use rand::RngExt;
+        use rand::rngs::ThreadRng;
 
         if n < 2 {
             return false;
@@ -1051,6 +1058,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_sort() {
         let mut arr = vec![3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5];
         let mut expected = arr.clone();

@@ -249,11 +249,15 @@ mod tests {
     fn test_linear_and_binary_sync() {
         let data = vec![1, 3, 5, 7, 9];
         assert_eq!(linear_search_sync(&data, &7), Some(3));
-        assert_eq!(binary_search_sync(&data, &7).expect("二分查找失败"), Some(3));
+        assert_eq!(
+            binary_search_sync(&data, &7).expect("二分查找失败"),
+            Some(3)
+        );
         assert_eq!(linear_search_sync(&data, &2), None);
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_search() {
         let data: Vec<_> = (0..10000).collect();
         let idx = parallel_search(&data, &7777).expect("并行搜索失败");

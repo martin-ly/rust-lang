@@ -2,6 +2,8 @@
 name = "integration_tests"
 version = "0.1.0"
 edition = "2024"
+description = "Integration tests for Rust learning workspace"
+rust-version = "1.95.0"
 license = "MIT"
 
 [dependencies]

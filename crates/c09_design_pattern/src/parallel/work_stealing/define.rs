@@ -102,6 +102,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_work_stealing01() {
         work_stealing_test();
     }

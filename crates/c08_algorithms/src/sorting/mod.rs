@@ -368,6 +368,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_sort() {
         let mut a = vec![10, 9, 8, 7, 6, 5, 4, 3, 2, 1];
         sort_parallel(&mut a, SortingAlgo::Quick);

@@ -22,6 +22,12 @@ resolver = "3"
     "exercises",
 ]
 
+exclude = [
+    "crates/c08_algorithms/fuzz",
+    "crates/c13_embedded/real-hardware-demos/embassy-demo",
+    "crates/c13_embedded/real-hardware-demos/rtic-demo",
+]
+
 [workspace.package]
 edition = "2024"
 rust-version = "1.95.0"

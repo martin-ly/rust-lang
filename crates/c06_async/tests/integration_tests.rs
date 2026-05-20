@@ -40,6 +40,7 @@ fn test_future_integration() {
 
 /// 测试异步并发集成
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_async_concurrency_integration() {
     async fn async_task(id: i32) -> i32 {
         id * 2
