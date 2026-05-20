@@ -1,7 +1,7 @@
 # Unsafe Rust 安全证明树
 
-> **模块**: Unsafe Rust / FFI  
-> **用途**: Unsafe 代码安全边界形式化证明  
+> **模块**: Unsafe Rust / FFI
+> **用途**: Unsafe 代码安全边界形式化证明
 > **完备度**: 100%
 
 ---
@@ -41,11 +41,13 @@
 ### 公理 UNSAFE-A1 (裸指针有效性)
 
 **声明**: 对于任何裸指针解引用 `*ptr`，必须满足：
+
 - `ptr` 非空
 - `ptr` 对齐于目标类型
 - `ptr` 指向的内存仍在生命周期内
 
 **形式化**:
+
 ```
 ∀ ptr: *const T.
   valid_deref(ptr) ⇔
@@ -57,10 +59,12 @@
 ### 公理 UNSAFE-A2 (类型转换)
 
 **声明**: `transmute::<A, B>` 合法当且仅当：
+
 - `size_of::<A>() == size_of::<B>()`
 - 目标类型的所有位模式都有效
 
 **形式化**:
+
 ```
 ∀ A, B: Type.
   valid_transmute::<A, B>() ⇔
@@ -74,6 +78,7 @@
 **声明**: 调用外部函数必须满足其前置条件。
 
 **形式化**:
+
 ```
 ∀ f: extern fn(...) -> T, args... .
   safe_call(f, args...) ⇔
@@ -100,6 +105,7 @@ unsafe fn unsafe_deref<T>(ptr: *const T) -> &T {
 ```
 
 **证明义务**:
+
 - `ptr` 非空
 - `ptr` 对齐
 - `ptr` 指向有效内存
@@ -112,19 +118,20 @@ use std::mem::MaybeUninit;
 // 安全模式
 fn safe_maybe_uninit<T>() -> T {
     let mut mu = MaybeUninit::<T>::uninit();
-    
+
     // 1. 初始化
     let ptr = mu.as_mut_ptr();
     unsafe {
         ptr.write(value);  // ✅ 初始化后安全
     }
-    
+
     // 2. 确认初始化后才 assume_init
     unsafe { mu.assume_init() }  // ✅ 已证明初始化
 }
 ```
 
 **证明义务**:
+
 - `assume_init()` 前必须已写入
 
 ### 规则 UNSAFE-R3 (切片操作)
@@ -171,7 +178,7 @@ unsafe fn type_confusion() {
     let x: u32 = 0xFFFFFFFF;
     let y: i32 = std::mem::transmute(x);
     // y = -1, 但可能不是预期行为
-    
+
     // 更危险的情况
     let z: bool = std::mem::transmute(2u8);  // UB!
     // bool 只能是 0 或 1
@@ -188,7 +195,7 @@ static mut COUNTER: i32 = 0;
 unsafe fn race_condition() {
     // 线程 A
     COUNTER += 1;  // 非原子操作
-    
+
     // 线程 B
     COUNTER += 1;  // 数据竞争!
 }
@@ -213,16 +220,16 @@ impl<T> SafeBuffer<T> {
         if idx >= 1024 || !self.initialized[idx] {
             return None;
         }
-        
+
         // 安全: 已检查初始化
         Some(unsafe { &*self.data[idx].as_ptr() })
     }
-    
+
     fn set(&mut self, idx: usize, value: T) {
         if idx >= 1024 {
             return;
         }
-        
+
         self.data[idx].write(value);
         self.initialized[idx] = true;
     }
@@ -232,6 +239,7 @@ impl<T> SafeBuffer<T> {
 **定理**: `get` 在 `initialized[idx] == true` 时总是返回有效引用。
 
 **证明**:
+
 1. `set` 写入 `data[idx]` 并设置 `initialized[idx] = true`
 2. `get` 检查 `initialized[idx]` 为真后才解引用
 3. 因此解引用时内存已初始化
@@ -252,7 +260,7 @@ impl<'a, T> SafeWrapper<'a, T> {
             _marker: PhantomData,
         }
     }
-    
+
     fn get(&self) -> &'a T {
         // 安全: ptr 来自有效引用，生命周期 'a 保证有效性
         unsafe { &*self.ptr }
@@ -263,6 +271,7 @@ impl<'a, T> SafeWrapper<'a, T> {
 **定理**: `get()` 总是返回有效引用。
 
 **证明**:
+
 1. `ptr` 从有效引用 `r` 创建
 2. `_marker` 绑定生命周期 `'a`
 3. 引用 `r` 在 `'a` 期间有效
@@ -282,7 +291,7 @@ impl<T> UniquePtr<T> {
             ptr: Box::into_raw(Box::new(value)),
         }
     }
-    
+
     fn into_inner(self) -> T {
         // 安全: 我们有唯一的所有权
         let value = unsafe { Box::from_raw(self.ptr) };
@@ -302,6 +311,7 @@ impl<T> Drop for UniquePtr<T> {
 **定理**: `UniquePtr` 管理唯一所有权，无双重释放。
 
 **证明**:
+
 1. `new` 创建堆分配，转移到 `ptr`
 2. `into_inner` 转移所有权到返回值
 3. `Drop` 仅在未转移时执行
@@ -338,8 +348,8 @@ impl<T> Drop for UniquePtr<T> {
 
 ---
 
-**维护者**: Rust 学习项目团队  
-**最后更新**: 2026-03-15  
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-03-15
 **状态**: ✅ 100% 完成
 ---
 

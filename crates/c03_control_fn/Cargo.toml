@@ -25,6 +25,7 @@ simd = []
 
 [dev-dependencies]
 criterion = { workspace = true }
+proptest = { workspace = true }
 
 [lib]
 name = "c03_control_fn"
