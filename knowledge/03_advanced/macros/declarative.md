@@ -1,5 +1,7 @@
 # 声明式宏 (Declarative Macros)
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: `macro_rules!` 是 Rust 的声明式宏系统，基于模式匹配和模板替换 [来源: Rust Reference — Macros / 2025; RFC 1584 / 2016; 核心设计决策: 在 AST 层面操作 Token 而非文本替换，保证卫生性（Hygiene）]。它在编译期的抽象语法树（AST）层面操作 Token，而非文本替换，从而保证了**卫生性（Hygiene）**——宏不会意外捕获或污染外部作用域的标识符 [来源: Kohlbecker, E., et al. — *Hygienic Macro Expansion* (LFP 1986); Rust 的 `macro_rules!` 通过隐式 gensym 实现卫生性，与 Scheme 的 `syntax-rules` 同源; The Little Book of Rust Macros / 2025]。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟

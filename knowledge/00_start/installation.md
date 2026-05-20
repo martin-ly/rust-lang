@@ -1,5 +1,7 @@
 # 安装 Rust
 
+> **Bloom 层级**: 理解
+
 > **版本**: Rust 1.95.0+
 > **预计时间**: 15-30 分钟
 > **权威来源**: [Rust 官方安装指南](https://www.rust-lang.org/tools/install), [rustup 文档](https://rust-lang.github.io/rustup/), [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-01-installation.html)

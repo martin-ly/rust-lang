@@ -1,5 +1,7 @@
 # Rust Edition 2024 完整指南
 
+> **Bloom 层级**: 理解
+
 > **版本**: Edition 2024
 > **Rust 版本**: 1.82.0+ (Edition 2024 稳定版)
 > **权威来源**: [Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)

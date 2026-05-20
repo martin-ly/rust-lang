@@ -1,5 +1,7 @@
 # Hello, World
 
+> **Bloom 层级**: 理解
+
 > **你的第一个 Rust 程序**
 > **预计时间**: 15 分钟
 > **权威来源**: [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html), [Cargo Guide](https://doc.rust-lang.org/cargo/guide/)

@@ -1,5 +1,7 @@
 # Coq 形式化验证指南
 
+> **Bloom 层级**: 理解
+
 > **工具**: Coq Proof Assistant
 > **用途**: Rust 语义形式化验证
 > **难度**: 专家级

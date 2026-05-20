@@ -1,5 +1,7 @@
 # 迭代器 (Iterators)
 
+> **Bloom 层级**: 理解
+
 > **版本**: Rust 1.96.0 (`array_windows`) / 1.80.0 (`Peekable::next_if`)
 > **特性**: `array_windows`, `Peekable::next_if`
 > **权威来源**: [Rust 官方文档 — Iterator trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html), [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/), [Rust 1.80 Release Notes](https://releases.rs/docs/1.80.0/)

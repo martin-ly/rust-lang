@@ -1,5 +1,7 @@
 # Rust 设计哲学
 
+> **Bloom 层级**: 理解
+
 > **理解 Rust 为什么是这样设计的**
 > **预计时间**: 30 分钟
 > **权威来源**: [Rust Language FAQ](https://www.rust-lang.org/faq), [Rust Book Ch00](https://doc.rust-lang.org/book/title-page.html), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

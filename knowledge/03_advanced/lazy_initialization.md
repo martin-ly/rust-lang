@@ -1,5 +1,7 @@
 # 延迟初始化 (Lazy Initialization)
 
+> **Bloom 层级**: 理解
+
 > **版本**: Rust 1.96.0+ (accessors), `LazyCell`/`LazyLock` 类型稳定于 1.80
 > **特性**: `LazyCell`, `LazyLock`, `get`, `get_mut`, `force_mut`
 > **权威来源**: [Rust RFC](https://rust-lang.github.io/rfcs/2788-lazy-cell.html), [PLDI 2025 Tree Borrows](https://pldi25.sigplan.org/)

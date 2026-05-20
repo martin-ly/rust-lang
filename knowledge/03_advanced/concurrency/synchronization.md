@@ -1,5 +1,7 @@
 # Rust 同步原语深度解析
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: Rust 的同步原语（`Mutex`、`RwLock`、`Condvar`、`Barrier`）建立在操作系统内核对象之上 [来源: std::sync / Rust Standard Library 2025; POSIX Threads (pthreads) IEEE Std 1003.1-2017; Windows SRW Locks / MSDN]，通过类型系统（`Send`/`Sync`、守卫模式、poisoning）将传统的锁机制与 Rust 的所有权模型结合 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: 守卫模式（Guard Pattern）将锁的持有与释放绑定到类型的生命周期，编译期保证锁的正确释放; Rust Atomics and Locks — Mara Bos / 2021]，在编译期消除数据竞争的同时提供灵活的线程协作能力。
 >
 > **⏱️ 预计学习时间**: 90-120 分钟

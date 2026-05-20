@@ -1,5 +1,7 @@
 # Type-Driven Correctness：类型驱动的正确性
 
+> **Bloom 层级**: 理解
+
 > **最后更新日期**: 2026-05-19
 > **难度级别**: 高级
 > **前置知识**: 泛型、Trait、PhantomData、所有权系统

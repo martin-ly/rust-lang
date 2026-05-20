@@ -1,5 +1,7 @@
 # Rust 2024 Edition Async Closures 完整指南
 
+> **Bloom 层级**: 理解
+
 > **提示**: 本文档为快速参考。如需完整教学（概念定义、反例集、自我检测等），请参阅 [async_closure.md](async_closure.md)。
 > **权威来源**: [RFC 3668 — Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html), [Rust Reference — Async closures](https://doc.rust-lang.org/reference/expressions/closure-expr.html#async-closures), [Rust 1.85 Release Notes](https://releases.rs/docs/1.85.0/)
 >

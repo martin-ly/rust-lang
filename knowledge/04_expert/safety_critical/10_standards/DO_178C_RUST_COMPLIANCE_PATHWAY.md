@@ -1,7 +1,10 @@
 > **权威来源**: [DO-178C / ED-12C](https://www.rtca.org/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 DO-178C 标准来源标注、Ferrocene 认证工具链引用 [来源: Authority Source Sprint Batch 8]
+>
 # DO-178C Rust合规路径
+
+> **Bloom 层级**: 理解
 
 ## 概述
 

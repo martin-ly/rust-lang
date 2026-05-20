@@ -1,5 +1,7 @@
 # Unsafe Rust - 不安全 Rust
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: Unsafe Rust 不是"糟糕的 Rust"，而是**编译器将证明责任转移给程序员**的显式契约机制 [来源: Rustonomicon — Meet Safe and Unsafe / 2025; Rust Reference — Unsafe Rust / 2025; 核心形式化语义: `unsafe` 不是关闭借用检查器，而是将编译期自动证明的责任转移给程序员，程序员需手动维护内存安全不变量; RustBelt — Jung et al., POPL 2018; 核心定理: `unsafe` 代码的不变量必须在 safe 抽象层中被重新封装，使 safe 代码无需信任 `unsafe` 实现]。它允许你执行五种编译器无法自动验证的操作，但要求你手动维护内存安全的不变量。
 >
 > **⏱️ 预计学习时间**: 90-120 分钟

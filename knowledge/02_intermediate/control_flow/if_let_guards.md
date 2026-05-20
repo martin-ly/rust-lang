@@ -1,5 +1,7 @@
 # `if let` Guards on Match Arms（Rust 1.95.0）
 
+> **Bloom 层级**: 理解
+
 > **稳定版本**: Rust 1.95.0 (2026-04-16)
 > **关联特性**: `let chains`（Rust 1.88.0, Edition 2024）
 > **前置知识**: 模式匹配（match）、if let、match guards

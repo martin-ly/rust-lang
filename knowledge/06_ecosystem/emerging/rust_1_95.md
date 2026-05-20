@@ -1,5 +1,7 @@
 # Rust 1.95 新特性
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: Rust 1.95.0 于 2026 年 4 月 16 日发布，是 Rust 2026 年上半年的重要里程碑版本。核心亮点包括 `if let` guards in match、`cfg_select!` 编译时条件宏、PowerPC 内联汇编稳定化、标准库大量新 API（`assert_matches!`、`push_mut`、`update` 等），以及 7 个 Apple 平台晋升 Tier 2。
 >
 > **发布日期**: 2026-04-16

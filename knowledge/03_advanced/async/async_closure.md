@@ -1,5 +1,7 @@
 # Async Closures 异步闭包
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: 异步闭包（`async || {}`）是 Rust 1.85 稳定的核心特性 [来源: RFC 3668 — Async Closures / 2024; 核心设计决策: `async || {}` 脱糖为返回 `impl AsyncFn` 的状态机闭包，捕获语义继承自 `Fn` 三族但 `Future` 状态机引入额外的生命周期约束; Rust Reference — Async closures / 2025]，它将闭包的变量捕获机制与 `Future` 状态机结合，使函数式异步编程（高阶异步函数、流式处理、回调抽象）成为可能。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟

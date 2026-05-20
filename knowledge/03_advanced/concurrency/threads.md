@@ -1,5 +1,7 @@
 # Rust 线程与并发安全模型
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: Rust 的线程模型建立在 OS 线程之上 [来源: std::thread / Rust Standard Library 2025; POSIX Threads (pthreads) / IEEE Std 1003.1-2017]，但通过 `Send` 和 `Sync` 两个 marker trait，在编译期消除了数据竞争 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: Rust 的类型系统 + `Send`/`Sync` 约束保证数据竞争自由（Data Race Freedom）; Rustonomicon — Send and Sync / 2025]。本章深入形式化语义、内存模型与生产实践。
 >
 > **⏱️ 预计学习时间**: 60-90 分钟

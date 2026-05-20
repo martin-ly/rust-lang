@@ -1,5 +1,7 @@
 # Async Closures (异步闭包)
 
+> **Bloom 层级**: 理解
+
 > **特性**: `async_closure`
 > **状态**: 🧪 不稳定 (Unstable)
 > **预计稳定**: Rust 1.96+

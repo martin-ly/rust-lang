@@ -1,5 +1,7 @@
 # Rust 标准库速查表
 
+> **Bloom 层级**: 理解
+
 > 本文档为 Rust 标准库常用模块、Trait 和宏的快速参考指南，适合日常开发查阅。
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference: The std library prelude](https://doc.rust-lang.org/reference/names/preludes.html), [Rust Reference: Macros](https://doc.rust-lang.org/reference/macros.html)
 >

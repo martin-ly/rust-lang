@@ -4,6 +4,8 @@
 >
 # 案例研究1: Ferrocene认证工具链
 
+> **Bloom 层级**: 理解
+
 ## 概述
 
 **项目名称**: Ferrocene

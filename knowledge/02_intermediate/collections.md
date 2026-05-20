@@ -1,5 +1,7 @@
 # 集合类型 (Collections)
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: Rust 标准库提供了一组精心设计的泛型数据结构 [来源: Rust Standard Library — Collections / 2025; 核心设计决策: 每种集合类型针对特定访问模式优化，算法复杂度在 API 文档中明确标注; C++ 对标: ISO C++20 §23 — Containers library; 算法复杂度分析来源: Cormen et al. — *Introduction to Algorithms* (CLRS, 2022)]，涵盖顺序存储（`Vec`）、键值查找（`HashMap`/`BTreeMap`）、集合运算（`HashSet`/`BTreeSet`）、双端队列（`VecDeque`）和优先队列（`BinaryHeap`）。选择正确的集合类型是 Rust 程序性能优化的第一步。
 >
 > **⏱️ 预计学习时间**: 3-4 小时

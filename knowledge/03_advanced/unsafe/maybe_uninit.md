@@ -1,5 +1,7 @@
 # MaybeUninit
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: `MaybeUninit<T>` 是 Rust 中处理未初始化内存的核心原语 [来源: Rustonomicon — Uninitialized Memory / 2025; RFC 1892 — MaybeUninit / 2017; 核心设计决策: `mem::uninitialized()` 因无法正确建模未初始化内存而被弃用，`MaybeUninit<T>` 提供类型安全的未初始化内存抽象; Unsafe Code Guidelines — Validity Invariant / 2025]。它绕过 Rust 的初始化要求，允许在不确定是否已初始化的情况下操作内存，是构建 `Vec`、栈数组、`ArrayVec` 等高性能抽象的基础。
 >
 > **⏱️ 预计学习时间**: 2-3 小时

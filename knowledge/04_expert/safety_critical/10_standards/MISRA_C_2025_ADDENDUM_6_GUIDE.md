@@ -1,5 +1,7 @@
 # MISRA C:2025 Addendum 6 - Rust应用指南
 
+> **Bloom 层级**: 理解
+
 ## 概述
 
 **文档**: MISRA C:2025 Addendum 6

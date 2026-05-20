@@ -1,7 +1,10 @@
 > **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [SAE J3016](https://www.sae.org/standards/content/j3016_202104/), [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增自动驾驶 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # 案例研究06: 自动驾驶感知系统
+
+> **Bloom 层级**: 理解
 
 ## 概述
 

@@ -1,5 +1,7 @@
 # 过程宏 (Procedural Macros)
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: 过程宏是 Rust 的编译期元编程机制，允许你用 Rust 代码操作 TokenStream，实现自定义 `derive` 属性、自定义语法和代码生成 [来源: Rust Reference — Procedural Macros / 2025; RFC 1566 / 2016; 核心设计决策: 三种过程宏类型（Derive / Attribute / Function-like）分别在编译期的不同阶段介入，操作 `TokenStream` 而非 AST 节点; proc-macro2 提供独立于编译器的 Token 表示以支持测试]。与 `macro_rules!` 相比，过程宏具有无限的表达能力，但开发和调试更复杂。
 >
 > **⏱️ 预计学习时间**: 75-100 分钟

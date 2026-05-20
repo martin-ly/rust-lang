@@ -1,7 +1,10 @@
 > **权威来源**: [FAA](https://www.faa.gov/), [EASA](https://www.easa.europa.eu/), [FDA](https://www.fda.gov/), [Rust Reference](https://doc.rust-lang.org/reference/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增监管机构标准来源标注 [来源: Authority Source Sprint Batch 8]
+>
 # 监管环境与认证审批
+
+> **Bloom 层级**: 理解
 
 ## 概述
 

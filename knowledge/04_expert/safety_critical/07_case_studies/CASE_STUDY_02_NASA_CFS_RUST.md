@@ -4,6 +4,8 @@
 >
 # 案例研究2: NASA核心飞行系统(cFS) Rust集成
 
+> **Bloom 层级**: 理解
+
 ## 概述
 
 **项目名称**: Rust in cFS (Rust in core Flight System)

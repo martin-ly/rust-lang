@@ -1,5 +1,7 @@
 # Unsafe Rust
 
+> **Bloom 层级**: 理解
+
 > **Unsafe Rust：原始指针、FFI、内联汇编、MaybeUninit**
 
 ## 📚 内容

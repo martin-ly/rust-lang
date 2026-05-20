@@ -1,5 +1,7 @@
 # FFI (Foreign Function Interface)
 
+> **Bloom 层级**: 理解
+
 > **📌 简介**: FFI 是 Rust 与外部代码（主要是 C/C++）互操作的桥梁 [来源: Rustonomicon — FFI / 2025; Rust Reference — External blocks / 2025; 核心形式化语义: ABI (Application Binary Interface) 定义函数调用约定、类型布局、命名修饰规则; Itanium C++ ABI / 2024]。它涉及 ABI 边界、内存布局对齐、panic 传播控制等复杂问题，是生产环境中 `unsafe` 代码的最主要来源 [来源: RustBelt — Jung et al., POPL 2018; 核心定理: `unsafe` 块的不变量由程序员手动保证，编译器仅验证 `safe` 抽象层的正确性; The Rust Programming Language — Unsafe Rust / 2024]。
 >
 > **⏱️ 预计学习时间**: 75-100 分钟
