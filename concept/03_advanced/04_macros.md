@@ -2070,7 +2070,22 @@ mod internal {
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 宏安全验证 |
 | 语言演进 | [](../07_future/03_evolution.md) | 宏系统演进 |
 | 编译期计算 | [](../03_advanced/03_const_generics.md) | const fn 替代宏的趋势 |
+
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Macro (computer science)** | [Macro (computer science)](https://en.wikipedia.org/wiki/Macro_(computer_science)) | 宏系统 |
+| **Hygienic macro** | [Hygienic macro](https://en.wikipedia.org/wiki/Hygienic_macro) | 卫生宏 |
+| **Abstract syntax tree** | [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) | AST |
+| **Metaprogramming** | [Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) | 元编程 |
+| **Quasi-quotation** | [Quasi-quotation](https://en.wikipedia.org/wiki/Quasi-quotation) | 准引用 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

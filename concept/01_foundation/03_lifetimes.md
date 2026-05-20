@@ -101,6 +101,7 @@
     - [16.5 与 C 语言 union 的 FFI 互操作](#165-与-c-语言-union-的-ffi-互操作)
     - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误)
   - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
 
@@ -1762,7 +1763,22 @@ enum SafeValue {
 - [x] **TODO**: 补充 Lifetime Elision 的三条规则的完整形式化描述（∀, ⇒ 符号、每个规则的正例+反例、Rust Reference 来源）—— 已完成 §13 —— 2026-05-14
 - [x] **TODO**: 补充 `impl Trait` 与生命周期推断的交互（RPIT 捕获、APIT 差异、`+'a` 显式约束、where 对比）—— 已完成 §14 —— 2026-05-14
 - [x] **TODO**: 补充 `union` 的类型安全边界（内存布局、enum 对比、unsafe 必要性、ManuallyDrop、impl 限制、FFI、代码示例）—— 已完成 §16 —— 2026-05-14
+
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Region-based memory management** | [Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | 区域内存管理 |
+| **Escape analysis** | [Escape analysis](https://en.wikipedia.org/wiki/Escape_analysis) | 逃逸分析 |
+| **Scope (computer science)** | [Scope (computer science)](https://en.wikipedia.org/wiki/Scope_(computer_science)) | 作用域 |
+| **Variable shadowing** | [Variable shadowing](https://en.wikipedia.org/wiki/Variable_shadowing) | 变量遮蔽 |
+| **Non-lexical lifetimes** | [Non-lexical lifetimes](https://en.wikipedia.org/wiki/Rust_(programming_language)#Non-lexical_lifetimes) | 非词法生命周期 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

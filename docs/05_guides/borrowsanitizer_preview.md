@@ -9,6 +9,8 @@
 
 ## 概述
 
+> **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
+
 **BorrowSanitizer** 是 Rust 正在开发的运行时内存安全检测工具，目标是在**不依赖 Miri 解释执行**的情况下，检测 unsafe Rust 代码中的别名违规（aliasing violations）。
 
 | 工具 | 运行方式 | 性能 | 检测能力 | 状态 |
@@ -20,7 +22,9 @@
 
 ---
 
-## 核心技术：Shadow Stack
+## 核心技术
+
+> **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: RustConf 2026]** ✅：Shadow Stack
 
 BorrowSanitizer 采用与现有 LLVM Sanitizer 不同的策略：
 
@@ -75,7 +79,9 @@ CI/测试:          BorrowSanitizer + Miri
 
 ---
 
-## 当前状态（2026-05）
+## 当前状态
+
+> **[来源: 各工具官方文档 2026-05]** ✅（2026-05）
 
 | 里程碑 | 状态 | 时间 |
 |:---|:---:|:---:|

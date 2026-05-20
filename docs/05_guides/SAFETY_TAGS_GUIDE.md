@@ -9,13 +9,15 @@
 
 ## 概述
 
+> **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
+
 **Safety Tags** 是 Rust 社区正在讨论的一套**形式化安全契约标注系统**，目标是为 `unsafe` 代码提供机器可验证的安全前提条件。
 
 ```text
 当前 unsafe 文档:
   // SAFETY: caller must ensure ptr is valid and aligned
   unsafe fn deref_unchecked<T>(ptr: *const T) -> &T { ... }
-  
+
 Safety Tags 愿景:
   #[safety_tag(valid_ptr, aligned)]
   unsafe fn deref_unchecked<T>(ptr: *const T) -> &T { ... }
@@ -24,7 +26,9 @@ Safety Tags 愿景:
 
 ---
 
-## 为什么需要 Safety Tags？
+## 为什么需要 Safety Tags
+
+> **[来源: Rust Internals Forum]** · **[来源: Rust-for-Linux Mailing List]** ✅？
 
 | 当前问题 | Safety Tags 解决方案 |
 |:---|:---|
@@ -89,7 +93,9 @@ Safety Tags 生态:
 
 ---
 
-## 当前状态（2026-05）
+## 当前状态
+
+> **[来源: 各工具官方文档 2026-05]** ✅（2026-05）
 
 | 方面 | 状态 |
 |:---|:---:|

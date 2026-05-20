@@ -109,6 +109,7 @@
       - [手动实现的安全契约](#手动实现的安全契约)
       - [Send/Sync 实现检查清单](#sendsync-实现检查清单)
     - [补充章节：国际课程与论文对齐](#补充章节国际课程与论文对齐)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 零、认知路径（Cognitive Path）
 
@@ -2062,6 +2063,23 @@ unsafe impl Send for Bad {}  // ⚠️ Rc 非原子计数 → 跨线程 UB
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
 
+
+---
+
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Concurrency (computer science)** | [Concurrency (computer science)](https://en.wikipedia.org/wiki/Concurrency_(computer_science)) | 并发 |
+| **Parallel computing** | [Parallel computing](https://en.wikipedia.org/wiki/Parallel_computing) | 并行计算 |
+| **Data race** | [Data race](https://en.wikipedia.org/wiki/Race_condition#Data_race) | 数据竞争 |
+| **Lock (computer science)** | [Lock (computer science)](https://en.wikipedia.org/wiki/Lock_(computer_science)) | 锁 |
+| **Compare-and-swap** | [Compare-and-swap](https://en.wikipedia.org/wiki/Compare-and-swap) | CAS 无锁操作 |
+| **Memory ordering** | [Memory ordering](https://en.wikipedia.org/wiki/Memory_ordering) | 内存序 |
+| **Actor model** | [Actor model](https://en.wikipedia.org/wiki/Actor_model) | Actor 模型 |
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]

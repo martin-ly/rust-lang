@@ -28,6 +28,7 @@
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ---
 
@@ -268,7 +269,20 @@ Cargo Script:  File = Crate (单模块，无子模块)
 - [工具链总览](./01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](./03_core_crates.md) — 脚本中常用依赖的选择策略
 - [L2 泛型与 Trait](../02_intermediate/01_traits.md) — 脚本中泛型约束的完整支持
+
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Shebang (Unix)** | [Shebang (Unix)](https://en.wikipedia.org/wiki/Shebang_(Unix)) | Shebang |
+| **Scripting language** | [Scripting language](https://en.wikipedia.org/wiki/Scripting_language) | 脚本语言 |
+| **Package manager** | [Package manager](https://en.wikipedia.org/wiki/Package_manager) | 包管理器 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

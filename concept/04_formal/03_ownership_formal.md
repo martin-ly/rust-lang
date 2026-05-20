@@ -1133,3 +1133,18 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 十二、Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 所有权形式化核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 对应 Rust 概念 |
+|:---|:---|:---|
+| **Ownership (type theory)** | [Substructural type system](https://en.wikipedia.org/wiki/Substructural_type_system) | Ownership、Move semantics |
+| **Region-based memory management** | [Region-based memory management](https://en.wikipedia.org/wiki/Region-based_memory_management) | 生命周期、Borrow checker |
+| **Fractional permission** | [Fractional permissions](https://en.wikipedia.org/wiki/Fractional_permissions) | `&T` / `&mut T` |
+| **Affine type system** | [Affine logic](https://en.wikipedia.org/wiki/Affine_logic) | Copy / Drop traits |
+| **Alias analysis** | [Alias analysis](https://en.wikipedia.org/wiki/Alias_analysis) | Borrow checker、NLL |
+| **Typestate** | [Typestate analysis](https://en.wikipedia.org/wiki/Typestate_analysis) | 编译期状态机（Send/Sync） |

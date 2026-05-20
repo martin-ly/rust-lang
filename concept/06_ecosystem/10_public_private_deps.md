@@ -28,6 +28,7 @@
   - [五、与 L1-L4 的关系映射](#五与-l1-l4-的关系映射)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ---
 
@@ -217,7 +218,20 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
 - [核心 Crate 选型](./03_core_crates.md) — 依赖可见性对 API 设计的影响
 - [L2 泛型与 Trait](../02_intermediate/01_traits.md) — Trait 实现与依赖类型的边界控制
+
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Dependency hell** | [Dependency hell](https://en.wikipedia.org/wiki/Dependency_hell) | 依赖地狱 |
+| **Semantic versioning** | [Semantic versioning](https://en.wikipedia.org/wiki/Semantic_versioning) | 语义版本控制 |
+| **Diamond dependency problem** | [Diamond dependency problem](https://en.wikipedia.org/wiki/Dependency_hell#Diamond_dependency_problem) | 菱形依赖问题 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

@@ -95,6 +95,7 @@
     - [13.2 与 `async` 的对偶关系](#132-与-async-的对偶关系)
     - [13.3 形式化定位](#133-形式化定位)
   - [相关概念链接](#相关概念链接)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 〇、认知路径（Cognitive Path）
 
@@ -2479,6 +2480,21 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 >
 > 对比分析见 [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md)（并发模型对比）。
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Async/await** | [Async/await](https://en.wikipedia.org/wiki/Async/await) | 异步/等待 |
+| **Future (programming)** | [Future (programming)](https://en.wikipedia.org/wiki/Future_(programming)) | Future 模式 |
+| **Coroutine** | [Coroutine](https://en.wikipedia.org/wiki/Coroutine) | 协程 |
+| **Cooperative multitasking** | [Cooperative multitasking](https://en.wikipedia.org/wiki/Cooperative_multitasking) | 协作式多任务 |
+| **Event loop** | [Event loop](https://en.wikipedia.org/wiki/Event_loop) | 事件循环 |
+| **Promise (programming)** | [Promise (programming)](https://en.wikipedia.org/wiki/Promise_(programming)) | Promise |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

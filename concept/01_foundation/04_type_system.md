@@ -91,6 +91,7 @@
       - [11.5.7 边界极限测试：用 unsafe 窥探原始字节](#1157-边界极限测试用-unsafe-窥探原始字节)
     - [11.6 `union` 的类型安全边界](#116-union-的类型安全边界)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
 
@@ -1558,7 +1559,24 @@ unsafe {
 - [x] **TODO**: 补充 Zero-sized types (ZST) 和 PhantomData 的类型论意义 —— 优先级: 中 —— 已完成 §11.2
 - [x] **TODO**: 补充 Discriminant 和内存布局的底层分析 —— 优先级: 低 —— 已完成 §11.5 —— 2026-05-14
 - [x] **TODO**: 补充 `union` 的类型安全边界与使用模式 —— 优先级: 低 —— 已完成 §11.6
+
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Type system** | [Type system](https://en.wikipedia.org/wiki/Type_system) | 类型系统 |
+| **Hindley–Milner type system** | [Hindley–Milner type system](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) | HM 类型推断 |
+| **Algebraic data type** | [Algebraic data type](https://en.wikipedia.org/wiki/Algebraic_data_type) | 代数数据类型 |
+| **Pattern matching** | [Pattern matching](https://en.wikipedia.org/wiki/Pattern_matching) | 模式匹配 |
+| **Trait (computer programming)** | [Trait (computer programming)](https://en.wikipedia.org/wiki/Trait_(computer_programming)) | Trait 系统 |
+| **Structural type system** | [Structural type system](https://en.wikipedia.org/wiki/Structural_type_system) | 结构类型 |
+| **Nominal type system** | [Nominal type system](https://en.wikipedia.org/wiki/Nominal_type_system) | 名义类型 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

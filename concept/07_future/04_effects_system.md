@@ -306,6 +306,18 @@ Q4: 与现有生态的兼容性？
 > **[来源: Haskell GHC; Java Checked Exceptions; Type Theory Research]** 跨语言对比参考了多种语言的效果处理机制和类型论研究。✅
 ---
 
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Effect system** | [Effect system](https://en.wikipedia.org/wiki/Effect_system) | 效果系统 |
+| **Monad (functional programming)** | [Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) | Monad |
+| **Algebraic effect** | [Algebraic effect](https://en.wikipedia.org/wiki/Algebraic_effect) | 代数效果 |
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]

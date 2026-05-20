@@ -723,6 +723,20 @@ func ParseJSON(input string) string {
 
 ---
 
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Rust (programming language)** | [Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language)) | Rust |
+| **Go (programming language)** | [Go (programming language)](https://en.wikipedia.org/wiki/Go_(programming_language)) | Go |
+| **Garbage collection (computer science)** | [Garbage collection (computer science)](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) | 垃圾回收 |
+| **Memory safety** | [Memory safety](https://en.wikipedia.org/wiki/Memory_safety) | 内存安全 |
+| **Interface (computing)** | [Interface (computing)](https://en.wikipedia.org/wiki/Interface_(computing)) | 接口 |
+
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]

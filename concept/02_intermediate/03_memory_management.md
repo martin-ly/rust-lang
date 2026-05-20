@@ -91,6 +91,7 @@
     - [11.5 与 In-place Initialization 的协同](#115-与-in-place-initialization-的协同)
     - [11.6 演进路线与跟踪](#116-演进路线与跟踪)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
 
@@ -1512,6 +1513,22 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 - [x] **TODO**: 补充 Field Projections（Beyond the & 旗舰主题、Pin 投影、in-place initialization） —— 优先级: **高** —— 已完成 §十一 —— 2026-05-21
 
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Memory management** | [Memory management](https://en.wikipedia.org/wiki/Memory_management) | 内存管理 |
+| **Garbage collection (computer science)** | [Garbage collection (computer science)](https://en.wikipedia.org/wiki/Garbage_collection_(computer_science)) | 垃圾回收 |
+| **Stack-based memory allocation** | [Stack-based memory allocation](https://en.wikipedia.org/wiki/Stack-based_memory_allocation) | 栈分配 |
+| **Heap (data structure)** | [Heap (data structure)](https://en.wikipedia.org/wiki/Heap_(data_structure)) | 堆分配 |
+| **Memory safety** | [Memory safety](https://en.wikipedia.org/wiki/Memory_safety) | 内存安全 |
+| **Pointer (computer programming)** | [Pointer (computer programming)](https://en.wikipedia.org/wiki/Pointer_(computer_programming)) | 指针 |
+| **RAII** | [RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization) | 资源获取即初始化 |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

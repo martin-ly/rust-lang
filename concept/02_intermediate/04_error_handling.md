@@ -91,6 +91,7 @@
     - [9.6 `Try` trait 与自定义 `?` 行为（稳定化中）](#96-try-trait-与自定义--行为稳定化中)
   - [十、相关概念链接](#十相关概念链接)
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
 
@@ -1933,6 +1934,20 @@ fn compute() -> Maybe<i32> {
 
 > **[来源: Wikipedia; POPL/PLDI/ECOOP Papers; RustBelt/Iris Project]** 形式化概念参考了权威学术来源和类型论研究。✅
 ---
+
+---
+
+## Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 说明 |
+|:---|:---|:---|
+| **Exception handling** | [Exception handling](https://en.wikipedia.org/wiki/Exception_handling) | 异常处理 |
+| **Result type** | [Result type](https://en.wikipedia.org/wiki/Result_type) | Result 类型 |
+| **Option type** | [Option type](https://en.wikipedia.org/wiki/Option_type) | Option 类型 |
+| **Monad (functional programming)** | [Monad (functional programming)](https://en.wikipedia.org/wiki/Monad_(functional_programming)) | Monad 模式 |
+| **Panic (computing)** | [Panic (computing)](https://en.wikipedia.org/wiki/Panic_(computing)) | Panic |
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
 >

@@ -930,3 +930,18 @@ unsafe {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 十四、Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** RustBelt 与分离逻辑核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 对应 Rust 概念 |
+|:---|:---|:---|
+| **Separation Logic** | [Separation logic](https://en.wikipedia.org/wiki/Separation_logic) | 内存安全验证基础 |
+| **Concurrent Separation Logic** | [Concurrent separation logic](https://en.wikipedia.org/wiki/Concurrent_separation_logic) | Send/Sync 验证 |
+| **Iris (logic)** | [Iris (logic)](https://en.wikipedia.org/wiki/Iris_(logic)) | RustBelt 证明框架 |
+| **Higher-order logic** | [Higher-order logic](https://en.wikipedia.org/wiki/Higher-order_logic) | 高阶幽灵状态 |
+| **Bisimulation** | [Bisimulation](https://en.wikipedia.org/wiki/Bisimulation) | 操作语义等价 |
+| **Modular program verification** | [Modular programming](https://en.wikipedia.org/wiki/Modular_programming) | unsafe 抽象边界验证 |
