@@ -5,6 +5,7 @@
 > **Rust 生态系统的核心工具、框架和新特性**
 
 ## 🎯 本模块学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本模块后，你将能够：
@@ -15,9 +16,11 @@
 - [ ] 了解 Rust 前沿不稳定特性和未来方向
 
 ## 📚 内容
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心工具
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -28,6 +31,7 @@
 | [emerging/rust_1_96_preview.md](emerging/rust_1_96_preview.md) | Rust 1.96 预览 | ⭐⭐⭐ |
 
 ### 深度解析
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -39,6 +43,7 @@
 | [deployment/kubernetes_deployment_guide.md](deployment/kubernetes_deployment_guide.md) | Kubernetes 部署指南 | ⭐⭐⭐⭐ |
 
 ### 前沿特性
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |

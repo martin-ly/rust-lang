@@ -9,6 +9,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL 官方教程来源标注、Cargo 项目结构来源引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
@@ -19,15 +20,18 @@
 - [ ] 使用基本打印宏
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 - 已完成 [安装 Rust](installation.md)
 - 了解基本的命令行操作
 
 ## 🚀 创建项目
+>
 > **[来源: Rust Official Docs]**
 
 ### 使用 Cargo 创建
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -46,6 +50,7 @@ hello_world/
 ```
 
 ## 📄 项目文件详解
+>
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml

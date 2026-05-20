@@ -97,7 +97,7 @@ sccache --show-stats
 - 缓存目录已设置为 `D:\_cache\sccache`
 - 缓存大小限制为 50GB
 
-下一步: 运行完整构建以填充缓存并观察性能提升。
+下一步: 运行完整构建以填充缓存并观察性能提升
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

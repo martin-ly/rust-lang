@@ -12,6 +12,7 @@
 Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — Async Closures / 2024; Rust Reference — Async closures / 2025; Rust 1.85 Release Notes / 2025]，允许直接使用 `async || { }` 语法创建异步闭包。相比传统的 `async move { }` 闭包，新语法更简洁、语义更清晰。
 
 ## 语法对比
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -27,6 +28,7 @@ let fetch = async |url: &str| -> Result<String, Error> {
 ```
 
 ## 核心改进
+>
 > **[来源: Rust Official Docs]**
 
 1. **语法更简洁**：无需嵌套 `async move {}` 在闭包体内
@@ -35,14 +37,17 @@ let fetch = async |url: &str| -> Result<String, Error> {
 4. **与同步闭包对称**：`|| {}` 对应同步，`async || {}` 对应异步
 
 ## Cancellation Safety（取消安全性）
+>
 > **[来源: Rust Official Docs]**
 
 ### 什么是 Cancellation Safety？
+>
 > **[来源: Rust Official Docs]**
 
 当异步任务在 `select!`、`timeout` 或 `race` 场景中被取消（drop）时，必须确保不会留下不一致的状态。
 
 ### 常见非 Cancellation Safe 操作
+>
 > **[来源: Rust Official Docs]**
 
 - `Mutex::lock().await`：取消后可能持有锁但不释放

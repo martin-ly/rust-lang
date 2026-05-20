@@ -13,6 +13,7 @@
 ---
 
 ## 严格关键字 (Strict Keywords)
+>
 > **[来源: Rust Official Docs]**
 
 严格关键字不能用作变量名、函数名或任何标识符。Rust 在编译时会拒绝将这些关键字作为标识符使用。
@@ -20,11 +21,13 @@
 > **[来源: Rust Reference: Keywords]** Rust 关键字分为严格关键字（strict keywords）和保留关键字（reserved keywords），由编译器在词法分析阶段识别。 ✅
 
 ### 控制流关键字
+>
 > **[来源: Rust Official Docs]**
 
 控制流关键字用于管理程序的执行顺序，是编程中最基础的部分。
 
 #### `if` / `else`
+>
 > **[来源: Rust Official Docs]**
 
 条件分支控制。`if` 计算布尔表达式，`else` 处理不满足条件的情况。
@@ -44,6 +47,7 @@ let abs = if x < 0 { -x } else { x };
 ```
 
 #### `match`
+>
 > **[来源: Rust Official Docs]**
 
 模式匹配，类似其他语言的 switch，但更强大。支持穷尽性检查。
@@ -59,6 +63,7 @@ match value {
 ```
 
 #### `loop`
+>
 > **[来源: Rust Official Docs]**
 
 无限循环，必须用 `break` 退出。可以带标签用于多层循环。

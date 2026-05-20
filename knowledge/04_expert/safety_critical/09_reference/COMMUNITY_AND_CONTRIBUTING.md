@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档介绍Rust安全关键系统社区，以及如何参与和贡献。
@@ -10,9 +11,11 @@
 ---
 
 ## 1. 社区生态
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 主要组织
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -48,6 +51,7 @@ Rust基金会:
 ```
 
 ### 1.2 在线社区
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -77,6 +81,7 @@ Rust基金会:
 ---
 
 ## 2. 参与方式
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 代码贡献

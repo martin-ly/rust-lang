@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 - [x] 理解声明式宏的**卫生性**机制：为什么宏内的变量不会与外部冲突
@@ -24,6 +25,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **函数与模块** — Rust 的基础语法结构
@@ -33,12 +35,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+>
 > **[来源: Rust Official Docs]**
 
 **声明式宏（Declarative Macro）** 是通过 `macro_rules!` 定义的代码生成规则。它接受一组 **Token**（Rust 代码的最小单元），按照预定义的模式进行匹配，然后替换为另一组 Token。

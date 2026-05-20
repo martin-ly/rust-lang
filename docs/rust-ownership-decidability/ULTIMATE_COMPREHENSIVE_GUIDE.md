@@ -242,7 +242,7 @@
 | [内部可变性](01-core-concepts/detailed-concepts/interior-mutability.md) | RefCell/Mutex | 1小时 | 借用系统 |
 | [理论到实践桥梁](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论基础 | 2小时 | 基础概念 |
 | [理论到模式桥梁](THEORY_TO_PATTERN_BRIDGE.md) | 设计模式理论 | 2小时 | 基础模式 |
-| [设计模式](11-design-patterns/README.md) | 23 GoF模式 | 8小时 | 基础Rust |
+| [设计模式](11-design-patterns/) | 23 GoF模式 | 8小时 | 基础Rust |
 | [并发模式](12-concurrency-patterns/README.md) | 并发模式 | 10小时 | 所有权基础 |
 | [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) | 高级练习 | 8小时 | 进阶概念 |
 | [案例研究索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) | 案例分析 | 持续 | 进阶知识 |

@@ -14,7 +14,7 @@
 
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
-| **Singleton** | [singleton.md](singleton.md) | 确保全局唯一实例 | 🟡 |
+| **Singleton** | singleton.md (待补充) | 确保全局唯一实例 | 🟡 |
 | **Builder** | [builder.md](builder.md) | 逐步构建复杂对象 | 🟡 |
 | **Factory** | [factory.md](factory.md) | 封装对象创建逻辑 | 🟢 |
 

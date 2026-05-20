@@ -5,6 +5,7 @@
 > **Rust 专家级知识：编译器内部、形式化验证、Unsafe 审计、Tree Borrows**
 
 ## 🎯 本模块学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本模块后，你将能够：
@@ -15,6 +16,7 @@
 - [ ] 使用 Coq 进行 Rust 程序的形式化验证
 
 ## 📚 内容
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -26,6 +28,7 @@
 | [academic/coq_formalization_guide.md](academic/coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
+>
 > **[来源: Rust Official Docs]**
 
 - 编译器内部: 6-8 小时
@@ -35,6 +38,7 @@
 - **总计**: 约 22-30 小时
 
 ## 🎓 前置要求
+>
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/](../03_advanced/) 的全部内容
@@ -42,6 +46,7 @@
 - 形式化验证文档需要离散数学和逻辑基础
 
 ## ✅ 完成检查清单
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 能阅读和理解 rustc 的 MIR 输出

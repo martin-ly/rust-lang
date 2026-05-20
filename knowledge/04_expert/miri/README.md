@@ -5,6 +5,7 @@
 > **Rust 内存安全检查与别名模型**
 
 ## 📚 内容
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -12,12 +13,14 @@
 | [tree_borrows.md](tree_borrows.md) | Tree Borrows 别名模型 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 前置要求
+>
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/unsafe/unsafe_rust.md](../../03_advanced/unsafe/unsafe_rust.md) - Unsafe Rust 基础
 - [04_expert/unsafe_audit.md](../unsafe_audit.md) - Unsafe 代码审计
 
 ## 🚀 相关层
+>
 > **[来源: Rust Official Docs]**
 
 - [04_expert/academic/](../academic/) - 形式化验证与学术深度解析

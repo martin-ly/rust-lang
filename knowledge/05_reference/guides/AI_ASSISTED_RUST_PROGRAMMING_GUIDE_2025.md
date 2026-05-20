@@ -12,9 +12,11 @@
 ---
 
 ## 1. AI 辅助学习路径
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 提示词模板 (Prompt Templates)
+>
 > **[来源: Rust Official Docs]**
 
 **概念解释**:
@@ -39,6 +41,7 @@
 ```
 
 ### 1.2 与本项目结合
+>
 > **[来源: Rust Official Docs]**
 
 - **RAG 检索**: 将 `docs/02_reference/quick_reference/`、`crates/*/docs/` 纳入检索范围
@@ -51,6 +54,7 @@
 ---
 
 ## 2. 常用 AI 工具
+>
 > **[来源: Rust Official Docs]**
 
 | 工具         | 适用场景           | 推荐用法                   |
@@ -62,6 +66,7 @@
 ---
 
 ## 3. 项目文档的 AI 友好性
+>
 > **[来源: Rust Official Docs]**
 
 本项目已具备：

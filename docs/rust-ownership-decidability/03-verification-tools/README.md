@@ -26,8 +26,12 @@
 | 03-01 | [验证概述](03-01-verification-overview.md) | 工具全景 | 综述 |
 | 03-02 | [Creusot深度分析](03-02-creusot-deep-dive.md) | Creusot | 定理证明 |
 | 03-03 | [Miri深度解析](03-03-miri-deep-dive.md) | Miri | 运行时检查 |
-| 03-04 | [Kani指南](03-04-kani-guide.md) | Kani | 模型检测 |
-| 03-05 | [Prusti指南](03-05-prusti-guide.md) | Prusti | 合约验证 |
+| 03-04 | Kani指南
+
+> 📝 待补充 | Kani | 模型检测 |
+| 03-05 | Prusti指南
+
+> 📝 待补充 | Prusti | 合约验证 |
 | 03-06 | [Verus指南](03-06-verus-guide.md) | Verus | 系统代码验证 |
 
 ---

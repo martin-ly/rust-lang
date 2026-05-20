@@ -5,6 +5,7 @@
 > **Rust 并发编程核心：线程、原子操作、同步原语**
 
 ## 📚 内容
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
@@ -14,6 +15,7 @@
 | [synchronization.md](synchronization.md) | 同步原语（Mutex、RwLock、Barrier）| ⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
+>
 > **[来源: Rust Official Docs]**
 
 1. **线程基础** → [threads.md](threads.md)
@@ -21,6 +23,7 @@
 3. **高级同步** → [synchronization.md](synchronization.md)
 
 ## 🚀 相关层
+>
 > **[来源: Rust Official Docs]**
 
 - [03_advanced/async/](../async/) - 异步编程

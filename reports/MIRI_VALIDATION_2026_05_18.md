@@ -31,7 +31,7 @@
 
 ## 结论
 
-c01_ownership_borrow_scope 中所有可在 Windows Miri 下运行的 unsafe 代码均通过 Tree Borrows 验证，无未定义行为。
+c01_ownership_borrow_scope 中所有可在 Windows Miri 下运行的 unsafe 代码均通过 Tree Borrows 验证，无未定义行为
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

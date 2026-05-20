@@ -5,6 +5,7 @@
 > **从这里开始你的 Rust 之旅**
 
 ## 🎯 本模块学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本模块后，你将能够：
@@ -15,6 +16,7 @@
 - [ ] 选择合适的学习路径
 
 ## 📚 学习路径
+>
 > **[来源: Rust Official Docs]**
 
 按顺序学习以下文档：
@@ -25,6 +27,7 @@
 4. [learning_roadmap.md](learning_roadmap.md) - 学习路线图
 
 ## ⏱️ 预计时间
+>
 > **[来源: Rust Official Docs]**
 
 - 安装配置: 15-30 分钟
@@ -33,6 +36,7 @@
 - **总计**: 约 1-1.5 小时
 
 ## 🎓 预备知识
+>
 > **[来源: Rust Official Docs]**
 
 - 基本的命令行操作
@@ -40,6 +44,7 @@
 - 对系统编程有兴趣
 
 ## ✅ 完成检查清单
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 成功运行 `rustc --version`

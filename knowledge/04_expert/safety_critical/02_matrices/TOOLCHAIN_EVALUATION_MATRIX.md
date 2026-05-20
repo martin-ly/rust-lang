@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键开发工具链的全面评估，帮助团队选择合适的工具组合。
@@ -10,9 +11,11 @@
 ---
 
 ## 1. 编译器评估
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 功能对比
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | rustc (稳定) | Ferrocene | AdaCore GNAT Pro | 嵌入式专用 |
@@ -26,6 +29,7 @@
 | **支持** | 社区 | 商业 | 商业 | 混合 |
 
 ### 1.2 性能对比
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -47,6 +51,7 @@ GCC-Rust:    ⭐⭐⭐ (GCC后端)
 ---
 
 ## 2. 静态分析工具评估
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 功能矩阵

@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档梳理Rust安全关键系统相关的学术研究前沿，涵盖类型系统、形式化验证、内存模型等关键领域。
@@ -14,9 +15,11 @@
 ---
 
 ## 1. 内存模型研究
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Stacked Borrows vs Tree Borrows
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -43,6 +46,7 @@ Tree Borrows (2023):
 ```
 
 ### 1.2 学术论文推荐
+>
 > **[来源: Rust Official Docs]**
 
 | 论文 | 作者 | 会议 | 重要性 |
@@ -55,6 +59,7 @@ Tree Borrows (2023):
 ---
 
 ## 2. 形式化验证
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Rust验证工具研究

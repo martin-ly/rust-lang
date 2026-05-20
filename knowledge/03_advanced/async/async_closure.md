@@ -14,6 +14,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章学习后，你将能够：
@@ -27,6 +28,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **闭包与 Fn 三族** — `Fn`/`FnMut`/`FnOnce` 的捕获语义差异（`02_intermediate/traits.md`）
@@ -37,12 +39,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+>
 > **[来源: Rust Official Docs]**
 
 **异步闭包** 是一种特殊的闭包，其函数体是异步的：调用它不会立即执行代码，而是返回一个 `Future`。当这个 `Future` 被 `.await` 时，闭包体内的异步代码才开始执行。

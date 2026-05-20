@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统开发中的关键度量指标定义、测量方法和目标值，支持项目管理和质量评估。
@@ -10,9 +11,11 @@
 ---
 
 ## 1. 代码质量度量
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 代码复杂度
+>
 > **[来源: Rust Official Docs]**
 
 | 度量 | 定义 | ASIL D目标 | 工具 |
@@ -43,6 +46,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 ```
 
 ### 1.2 代码规模
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -67,6 +71,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 ---
 
 ## 2. 测试覆盖率度量
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 覆盖率类型

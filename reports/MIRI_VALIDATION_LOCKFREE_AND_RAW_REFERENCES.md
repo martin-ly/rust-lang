@@ -96,7 +96,7 @@
 | `&raw const` 重构后 UB 检测 | **零违规** |
 | Workspace 普通测试 | **全部通过** |
 
-**结论**: Rust 1.95 的 `&raw const` / `&raw mut` 操作符在本项目的 lock-free 数据结构和 unsafe 教学代码中表现安全。Miri 验证未发现由 `&raw const` 引入的任何新 UB。所有单线程 unsafe 路径均通过 Miri 的 Stacked Borrows / Tree Borrows 模型检验。
+**结论**: Rust 1.95 的 `&raw const` / `&raw mut` 操作符在本项目的 lock-free 数据结构和 unsafe 教学代码中表现安全。Miri 验证未发现由 `&raw const` 引入的任何新 UB。所有单线程 unsafe 路径均通过 Miri 的 Stacked Borrows / Tree Borrows 模型检验
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

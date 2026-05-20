@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统API设计的最佳实践，确保接口的安全性、可用性和可维护性。
@@ -10,9 +11,11 @@
 ---
 
 ## 1. 安全API设计原则
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 类型安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -62,6 +65,7 @@ impl Device<Initialized> {
 ```
 
 ### 1.2 不可变优先
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -101,6 +105,7 @@ let config = Config::new()
 ---
 
 ## 2. 错误处理设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 错误类型设计

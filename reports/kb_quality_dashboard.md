@@ -78,6 +78,7 @@ Enter the new date: (yy-mm-dd)
 | concept\07_future\01_ai_integration.md | L7 | 690 | 7 | 1 | 6 | 1 | 3 | ✅ |
 | concept\07_future\02_formal_methods.md | L7 | 946 | 8 | 1 | 7 | 4 | 3 | ✅ |
 | concept\07_future\03_evolution.md | L7 | 691 | 0 | 1 | 4 | 5 | 3 | ✅ |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章学习后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **所有权与借用** — 值的所有权转移语义（`knowledge/01_fundamentals/ownership.md`）
@@ -36,12 +38,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+>
 > **[来源: Rust Official Docs]**
 
 **线程（Thread）** 是操作系统调度的最小执行单元。Rust 的 `std::thread::spawn` 创建一个新的 OS 线程，该线程与调用者线程并发执行。

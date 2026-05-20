@@ -13,8 +13,8 @@
 | 文件 | 描述 |
 |------|------|
 | [affine-logic-decidability.md](affine-logic-decidability.md) | 仿射逻辑可判定性 |
-| [async-comprehensive-analysis.md](async-comprehensive-analysis.md) | 异步综合分析 |
-| [async-edge-cases-and-patterns.md](async-edge-cases-and-patterns.md) | 异步边缘情况和模式 |
+| async-comprehensive-analysis.md (待补充) | 异步综合分析 |
+| async-edge-cases-and-patterns.md (待补充) | 异步边缘情况和模式 |
 | [async-execution-examples.md](async-execution-examples.md) | 异步执行示例 |
 | [async-execution-model-formal.md](async-execution-model-formal.md) | 异步执行模型形式化 |
 | [ASYNC_ANALYSIS_COMPLETE_INDEX.md](ASYNC_ANALYSIS_COMPLETE_INDEX.md) | 异步分析完整索引 |

@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本案例研究展示如何使用Rust开发符合IEC 62304标准的医疗设备软件，重点关注Class C(最高风险等级)设备的实施经验。
@@ -14,9 +15,11 @@
 ---
 
 ## 项目背景
+>
 > **[来源: Rust Official Docs]**
 
 ### 设备信息
+>
 > **[来源: Rust Official Docs]**
 
 | 属性 | 详情 |
@@ -29,6 +32,7 @@
 | **Rust版本** | 1.81.0 (Ferrocene) |
 
 ### 为什么选择Rust
+>
 > **[来源: Rust Official Docs]**
 
 1. **内存安全**: 消除缓冲区溢出风险
@@ -40,6 +44,7 @@
 ---
 
 ## 架构设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 系统架构

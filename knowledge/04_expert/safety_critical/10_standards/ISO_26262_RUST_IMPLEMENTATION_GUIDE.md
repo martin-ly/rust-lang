@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南提供在ISO 26262汽车功能安全标准框架下使用Rust进行开发的详细实施路径，涵盖ASIL A至ASIL D所有安全完整性等级。
@@ -14,12 +15,15 @@
 ---
 
 ## 目录与对应关系
+>
 > **[来源: Rust Official Docs]**
 
 ### ISO 26262-3: 概念阶段
+>
 > **[来源: Rust Official Docs]**
 
 #### 3.5 危害分析与风险评估(HARA)
+>
 > **[来源: Rust Official Docs]**
 
 **Rust优势映射**:
@@ -80,6 +84,7 @@ pub enum BufferError {
 ```
 
 #### 3.6 功能安全概念
+>
 > **[来源: Rust Official Docs]**
 
 **安全机制Rust实现**:

@@ -13,6 +13,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Coq 形式化验证指南](#coq-形式化验证指南)
@@ -49,6 +50,7 @@
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 Coq 是一个形式化证明管理工具，用于：
@@ -68,9 +70,11 @@ Coq 是一个形式化证明管理工具，用于：
 ---
 
 ## 🏗️ 基础设置
+>
 > **[来源: Rust Official Docs]**
 
 ### 安装
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -88,6 +92,7 @@ opam install coq-stdpp
 ```
 
 ### 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```

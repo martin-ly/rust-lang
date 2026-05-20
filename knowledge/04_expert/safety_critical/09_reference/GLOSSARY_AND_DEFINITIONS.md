@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## A
+>
 > **[来源: Rust Official Docs]**
 
 **AdaCore GNAT Pro for Rust**
@@ -19,6 +20,7 @@ AdaCore公司提供的Rust工具链，集成到GCC生态系统中，支持Ada/Ru
 Rust核心概念，每个值有且仅有一个所有者，所有者离开作用域时值被释放。
 
 ## B
+>
 > **[来源: Rust Official Docs]**
 
 **借用 (Borrowing)**
@@ -31,6 +33,7 @@ Rust编译器组件，在编译时验证借用规则，防止数据竞争和use-
 Rust编译器内部表示，用于代码生成优化。
 
 ## C
+>
 > **[来源: Rust Official Docs]**
 
 **Cargo**
@@ -46,6 +49,7 @@ Rust标准库的子集，可在无操作系统环境（#![no_std]）中使用。
 CubeSat使用的网络协议，有Rust实现版本。
 
 ## D
+>
 > **[来源: Rust Official Docs]**
 
 **DAL (Development Assurance Level)**
@@ -58,6 +62,7 @@ DO-178C标准中的开发保证等级，从DAL A（最高）到DAL E（最低）
 Rust中定义资源释放行为的trait，实现RAII模式。
 
 ## E
+>
 > **[来源: Rust Official Docs]**
 
 **嵌入式Rust (Embedded Rust)**

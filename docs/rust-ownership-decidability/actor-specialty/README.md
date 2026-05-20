@@ -84,7 +84,7 @@
 
 | 文档 | 行数 | 框架 |
 |:---|:---:|:---|
-| [implementations/rust-actor-frameworks.md](implementations/rust-actor-frameworks.md) | 212 | 4大框架对比 |
+| implementations/rust-actor-frameworks.md (待补充) | 212 | 4大框架对比 |
 
 ### 设计模式
 
@@ -175,7 +175,7 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 1. [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) - 技术选型
 2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
 3. [ACTOR_MODEL_DEEP_DIVE.md](ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
-4. [distributed/distributed-actors.md](distributed/distributed-actors.md) - 分布式系统
+4. distributed/distributed-actors.md (待补充) - 分布式系统
 
 ---
 

@@ -238,7 +238,7 @@ cargo bench
 4. ✅ **分析了重复依赖并提供了优化建议**
 5. ✅ **创建了编译时间基准测试脚本**
 
-项目现在拥有完整的 Profile 配置体系，可以根据不同场景选择最合适的编译配置，平衡编译速度和运行性能。
+项目现在拥有完整的 Profile 配置体系，可以根据不同场景选择最合适的编译配置，平衡编译速度和运行性能
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

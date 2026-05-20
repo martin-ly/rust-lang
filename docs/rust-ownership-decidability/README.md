@@ -464,9 +464,9 @@ Async专题:    ████████████████████ 100
 | 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
 | 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
 | 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
-| 形式化理论 | [形式化基础](00-foundations/README.md) / [Coq代码](coq-formalization/README.md) / [定理到编译器](THEOREM_TO_COMPILER_BRIDGE.md) |
-| 设计模式 | [模式指南](11-design-patterns/README.md) (已归档) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
-| 案例研究 | [案例索引](case-studies/README.md) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
+| 形式化理论 | [形式化基础](00-foundations/) / [Coq代码](coq-formalization/) / [定理到编译器](THEOREM_TO_COMPILER_BRIDGE.md) |
+| 设计模式 | [模式指南](11-design-patterns/) (已归档) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
+| 案例研究 | [案例索引](case-studies/) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
 
 ---
 

@@ -11,6 +11,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
@@ -24,6 +25,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **Unsafe Rust** — 原始指针、别名规则、`unsafe` 块（`03_advanced/unsafe/unsafe_rust.md`）
@@ -33,12 +35,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+>
 > **[来源: Rust Official Docs]**
 
 **Tree Borrows (TB)** 是 Rust 的实验性内存模型，用于精确判断 `unsafe` 代码中的引用使用是否构成**未定义行为（Undefined Behavior, UB）**。它是 Miri 解释器的默认内存模型（自 Rust 1.70+），替代了早期的 **Stacked Borrows (SB)**。

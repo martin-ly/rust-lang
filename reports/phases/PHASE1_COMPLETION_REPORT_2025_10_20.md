@@ -27,7 +27,7 @@ Phase 1 目标：完成核心模块基础建设
 
 ## 下一阶段
 
-Phase 2 将专注于高级主题和跨模块整合。
+Phase 2 将专注于高级主题和跨模块整合
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

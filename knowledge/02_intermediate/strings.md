@@ -12,6 +12,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章节后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 基础语法和所有权概念
@@ -34,12 +36,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+>
 > **[来源: Rust Official Docs]**
 
 Rust 字符串生态围绕两种核心类型构建：

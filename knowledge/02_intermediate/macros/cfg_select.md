@@ -16,6 +16,7 @@
 `cfg_select!` 是 Rust 1.95.0 引入的标准宏 [来源: Rust 1.95 Release Notes / 2026; core::macros::cfg_select / Rust Standard Library 2025; 核心设计决策: 编译期根据 `cfg` 条件选择第一个满足条件的表达式，替代嵌套 `cfg!` 或 `#[cfg]` 属性]，用于在**编译期**根据 `cfg` 条件选择第一个满足条件的表达式。它是嵌套 `cfg!` 或 `#[cfg]` 属性的简洁替代方案。
 
 ### 语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -27,6 +28,7 @@ cfg_select! {
 ```
 
 ### 与现有方案对比
+>
 > **[来源: Rust Official Docs]**
 
 | 方案 | 适用层级 | 语法复杂度 | 默认分支 |
@@ -38,9 +40,11 @@ cfg_select! {
 ---
 
 ## 二、基本用法
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 平台特定常量
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -52,6 +56,7 @@ const PAGE_SIZE: usize = cfg_select! {
 ```
 
 ### 2.2 特性标志选择
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

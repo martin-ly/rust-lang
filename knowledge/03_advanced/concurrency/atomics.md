@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章节后，你将能够：
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **线程与并发安全** — `Send`/`Sync`、`thread::spawn`（`03_advanced/concurrency/threads.md`）
@@ -35,9 +37,11 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
@@ -49,6 +53,7 @@
 > 💡 关键直觉：原子操作 = **原子性（Atomicity）** + **可见性（Visibility）** + **有序性（Ordering）**。`Ordering::Relaxed` 仅保证原子性，`Ordering::SeqCst` 保证三者。
 
 #### 1.2 操作定义
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

@@ -15,6 +15,7 @@
 ---
 
 ## 🎯 学习目标
+>
 > **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
@@ -29,6 +30,7 @@
 ---
 
 ## 📋 先决条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **所有权与借用** — 生命周期、引用规则（`01_fundamentals/ownership.md`）
@@ -38,12 +40,15 @@
 ---
 
 ## 🧠 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 #### 1.1 零成本抽象 (Zero-Cost Abstraction)
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的高级特性（迭代器、闭包、泛型）在优化后的代码中不产生额外运行时开销。

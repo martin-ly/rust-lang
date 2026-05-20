@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键项目的完整模板，可直接用于启动新项目。
@@ -10,9 +11,11 @@
 ---
 
 ## 1. 嵌入式项目模板
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -46,6 +49,7 @@ embedded-safety-project/
 ```
 
 ### 1.2 Cargo.toml模板
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -123,6 +127,7 @@ strip = false
 ```
 
 ### 1.3 rust-toolchain.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml

@@ -64,15 +64,15 @@
 |:-----|:-----|:----:|:--------:|:---------|
 | [`02-concurrency-semantics.md`](02-concurrency-semantics.md) | 并发语义 | 🔴 | 3小时 | 线程模型、同步原语、无锁语义、内存模型 |
 | [`03-async-semantics.md`](03-async-semantics.md) | 异步语义 | 🔴 | 4小时 | Future、Poll 模型、Pin、async/await 语义 |
-| [`07-actor-semantics.md`](07-actor-semantics.md) | Actor 语义 | 🔴 | 2小时 | Actor 模型、消息传递、监督树、分布式 Actor |
+| `07-actor-semantics.md` | Actor 语义 | 🔴 | 2小时 | Actor 模型、消息传递、监督树、分布式 Actor |
 
 ### 🔴 高级语义分析
 
 | 文档 | 主题 | 难度 | 阅读时间 | 关键内容 |
 |:-----|:-----|:----:|:--------:|:---------|
 | [`04-control-data-flow.md`](04-control-data-flow.md) | 控制流与数据流 | 🔴 | 3小时 | CFG、数据流分析、活跃性分析、NLL |
-| [`05-runtime-semantics.md`](05-runtime-semantics.md) | 运行时语义 | 🔴 | 3小时 | 内存模型、调度语义、I/O 语义、时间语义 |
-| [`06-distributed-patterns.md`](06-distributed-patterns.md) | 分布式模式 | 🔴 | 6小时 | RPC、CAP、一致性算法、容错模式 |
+| `05-runtime-semantics.md` | 运行时语义 | 🔴 | 3小时 | 内存模型、调度语义、I/O 语义、时间语义 |
+| `06-distributed-patterns.md` | 分布式模式 | 🔴 | 6小时 | RPC、CAP、一致性算法、容错模式 |
 | [`08-workflow-patterns.md`](08-workflow-patterns.md) | 工作流模式 | 🔴 | 2小时 | 工作流状态机、控制流模式、事务模式 |
 
 ---

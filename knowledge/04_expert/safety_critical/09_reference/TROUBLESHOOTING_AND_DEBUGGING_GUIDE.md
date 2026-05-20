@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南提供Rust安全关键系统开发中常见问题的诊断和解决方法，涵盖编译错误、运行时问题、工具链问题和认证相关问题。
@@ -10,12 +11,15 @@
 ---
 
 ## 1. 编译错误故障排除
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 借用检查器错误
+>
 > **[来源: Rust Official Docs]**
 
 #### 错误 E0499: 多次可变借用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -56,6 +60,7 @@ fn process_data_index(data: &mut Vec<u32>) {
 ```
 
 #### 错误 E0597: 悬垂引用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
