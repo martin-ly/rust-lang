@@ -136,6 +136,7 @@ python3 scripts/check_deprecated_markers.py --days 30
 
 - `DOCUMENTATION_DIVISION_OF_LABOR.md` — 文档体系分工协议
 - `DOCS_STRUCTURE_OVERVIEW.md` — 完整结构总览
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

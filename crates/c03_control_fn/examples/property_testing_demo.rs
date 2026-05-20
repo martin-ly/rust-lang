@@ -10,7 +10,6 @@
 //! 运行示例: cargo run --example property_testing_demo -p c03_control_fn
 
 use proptest::prelude::*;
-use std::collections::HashMap;
 
 // ============================================================
 // 1. 基础属性测试：数学定律
@@ -38,18 +37,15 @@ fn reverse_involution<T: Clone + PartialEq>(xs: &[T]) -> bool {
 // 2. 自定义策略：生成有效数据
 // ============================================================
 
-/// 生成非空 ASCII 字符串
-fn ascii_string_strategy() -> impl Strategy<Value = String> {
-    "[a-zA-Z0-9_]{1,20}"
-}
-
 /// 生成有效邮箱地址（简化版）
+#[allow(dead_code)]
 fn email_strategy() -> impl Strategy<Value = String> {
     ("[a-z0-9]{3,10}", "[a-z]{3,8}", "[a-z]{2,4}")
         .prop_map(|(user, domain, tld)| format!("{}@{}.{}", user, domain, tld))
 }
 
 /// 生成有序向量（用于测试排序算法）
+#[allow(dead_code)]
 fn sorted_vec_strategy() -> impl Strategy<Value = Vec<i32>> {
     prop::collection::vec(any::<i32>(), 0..100).prop_map(|mut v| {
         v.sort();
@@ -72,6 +68,7 @@ fn bubble_sort<T: Ord>(arr: &mut [T]) {
     }
 }
 
+#[allow(dead_code)]
 fn parse_u32(s: &str) -> Option<u32> {
     s.parse().ok()
 }
@@ -89,11 +86,13 @@ fn sanitize_username(input: &str) -> String {
 // ============================================================
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 struct BankAccount {
     balance: i64,
     transactions: Vec<String>,
 }
 
+#[allow(dead_code)]
 impl BankAccount {
     fn new() -> Self {
         Self {
@@ -202,11 +201,13 @@ proptest! {
 // ============================================================
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 enum AccountAction {
     Deposit(u64),
     Withdraw(u64),
 }
 
+#[allow(dead_code)]
 fn action_strategy() -> impl Strategy<Value = AccountAction> {
     prop_oneof![
         any::<u64>().prop_map(AccountAction::Deposit),

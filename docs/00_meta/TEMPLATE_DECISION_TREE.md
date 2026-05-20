@@ -106,6 +106,7 @@ graph TD
 2. **叶子节点必须 actionable**: 不能是"视情况而定"，必须是具体推荐
 3. **标注风险**: 每个推荐必须附带主要风险
 4. **保持平衡**: 树的深度建议不超过 4 层，过深则拆分为多个子决策树
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

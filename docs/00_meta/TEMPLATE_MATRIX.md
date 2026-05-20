@@ -98,6 +98,7 @@
 | **默认情况** | 编译期保证 | 无保证 |
 | **使用 unsafe** | 程序员负责 | 程序员负责 |
 | **使用 std only** | 保证 | 依赖实现 |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -44,6 +44,7 @@ struct ApiRequest {
 }
 
 #[derive(Clone, Debug)]
+#[allow(dead_code)]
 struct ApiResponse {
     status: u16,
     body: String,
@@ -192,7 +193,7 @@ async fn demo_buffer() {
 
     let api = ApiService::new("缓冲API", 0, 30);
 
-    let mut service = ServiceBuilder::new()
+    let service = ServiceBuilder::new()
         .buffer(3) // 最多 3 个并发请求
         .service(api);
 

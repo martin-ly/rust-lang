@@ -221,6 +221,7 @@ pub fn conditional(input: TokenStream) -> TokenStream {
         match &token {
             proc_macro2::TokenTree::Punct(p) if p.as_char() == '#' => {
                 // 检查是否是 #[cfg(...)]
+                #[allow(clippy::collapsible_if)]
                 if let Some(proc_macro2::TokenTree::Group(g)) = iter.peek() {
                     if g.delimiter() == proc_macro2::Delimiter::Bracket {
                         let inner = g.stream().to_string();
@@ -235,8 +236,8 @@ pub fn conditional(input: TokenStream) -> TokenStream {
                             continue;
                         }
                     }
+                    current_tokens.extend(std::iter::once(token));
                 }
-                current_tokens.extend(std::iter::once(token));
             }
             proc_macro2::TokenTree::Group(g) if g.delimiter() == proc_macro2::Delimiter::Brace => {
                 if current_cfg.is_some() {
@@ -268,7 +269,7 @@ pub fn conditional(input: TokenStream) -> TokenStream {
         }
     });
 
-    selected.map_or_else(|| TokenStream::new(), TokenStream::from)
+    selected.map_or_else(TokenStream::new, TokenStream::from)
 }
 
 /// 自动实现Clone trait的派生宏

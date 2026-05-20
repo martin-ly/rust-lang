@@ -119,6 +119,7 @@
 - [`DOCUMENTATION_DIVISION_OF_LABOR.md`](./DOCUMENTATION_DIVISION_OF_LABOR.md) — 文档体系分工协议
 - [`rust-ownership-decidability/README.md`](../rust-ownership-decidability/README.md) — 所有权知识库入口
 - [`research_notes/README.md`](../research_notes/README.md) — 研究笔记入口
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

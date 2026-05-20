@@ -71,6 +71,12 @@ impl<T> LoomStack<T> {
     }
 }
 
+impl<T> Default for LoomStack<T> {
+    fn default() -> Self {
+        Self::new()
+    }
+}
+
 unsafe impl<T: Send> Send for LoomStack<T> {}
 unsafe impl<T: Send + Sync> Sync for LoomStack<T> {}
 

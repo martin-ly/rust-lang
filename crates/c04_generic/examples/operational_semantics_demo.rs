@@ -97,7 +97,7 @@ impl State {
 
     fn add_borrow(&mut self, name: &str, mutability: Mutability) -> Result<(), String> {
         match self.lookup(name) {
-            Some(Ownership::Owned(val)) => {
+            Some(Ownership::Owned(_val)) => {
                 self.update(name, Ownership::Borrowed(vec![mutability]))?;
                 Ok(())
             }
@@ -126,6 +126,7 @@ impl State {
         }
     }
 
+    #[allow(dead_code)]
     fn release_borrows(&mut self, name: &str) -> Result<(), String> {
         // 简化：将引用值恢复为 Owned
         // 实际语义中需要精确追踪每个引用的生命周期
@@ -136,6 +137,7 @@ impl State {
         Ok(())
     }
 
+    #[allow(dead_code)]
     fn drop_scope(&mut self) {
         if let Some(frame) = self.stack.pop() {
             for (name, ownership) in frame {

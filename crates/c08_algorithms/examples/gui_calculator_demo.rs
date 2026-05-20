@@ -142,19 +142,19 @@ impl App for CalculatorApp {
                     if ui.add_sized(button_size, egui::Button::new("C")).clicked() {
                         self.clear();
                     }
-                    if ui.add_sized(button_size, egui::Button::new("±")).clicked() {
-                        if let Ok(val) = self.display.parse::<f64>() {
-                            let neg = -val;
-                            self.display = format_result(neg);
-                            self.current_input = neg.to_string();
-                        }
+                    if ui.add_sized(button_size, egui::Button::new("±")).clicked()
+                        && let Ok(val) = self.display.parse::<f64>()
+                    {
+                        let neg = -val;
+                        self.display = format_result(neg);
+                        self.current_input = neg.to_string();
                     }
-                    if ui.add_sized(button_size, egui::Button::new("%")).clicked() {
-                        if let Ok(val) = self.display.parse::<f64>() {
-                            let pct = val / 100.0;
-                            self.display = format_result(pct);
-                            self.current_input = pct.to_string();
-                        }
+                    if ui.add_sized(button_size, egui::Button::new("%")).clicked()
+                        && let Ok(val) = self.display.parse::<f64>()
+                    {
+                        let pct = val / 100.0;
+                        self.display = format_result(pct);
+                        self.current_input = pct.to_string();
                     }
                     if ui.add_sized(button_size, egui::Button::new("÷")).clicked() {
                         self.input_operator('/');
@@ -202,10 +202,10 @@ impl App for CalculatorApp {
                     if ui.add_sized(Vec2::new(134.0, 55.0), egui::Button::new("0")).clicked() {
                         self.input_digit('0');
                     }
-                    if ui.add_sized(button_size, egui::Button::new(".")).clicked() {
-                        if !self.current_input.contains('.') {
-                            self.input_digit('.');
-                        }
+                    if ui.add_sized(button_size, egui::Button::new(".")).clicked()
+                        && !self.current_input.contains('.')
+                    {
+                        self.input_digit('.');
                     }
                     if ui.add_sized(button_size, egui::Button::new("=")).clicked() {
                         self.calculate();

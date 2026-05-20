@@ -41,6 +41,7 @@
 ### 2.1 保留 `rust-ownership-decidability/` 作为独立体系
 
 **理由**:
+
 - 其内容深度和系统性远超 `research_notes/` 的对应部分
 - 600K+ 字的内容迁移成本过高
 - 有独立的完成报告和索引系统
@@ -48,6 +49,7 @@
 ### 2.2 建立双向链接而非物理合并
 
 **操作**:
+
 1. 在 `rust-ownership-decidability/README.md` 中添加 "Related Research Notes" 章节
 2. 在 `research_notes/README.md` 中添加 "Ownership Decidability Deep Dive" 链接
 3. 对重复主题，保留 `rust-ownership-decidability/` 为主要内容源，`research_notes/` 中改为精简概述 + 链接
@@ -106,6 +108,7 @@
 
 - `DOCUMENTATION_DIVISION_OF_LABOR.md` — 文档体系分工协议
 - `DOCUMENTATION_LIFECYCLE.md` — 文档生命周期管理制度
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
