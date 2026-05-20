@@ -27,11 +27,14 @@ num_cpus = { workspace = true }
 tokio-stream = { workspace = true }
 petgraph = { workspace = true, optional = true }
 aho-corasick = { version = "1.0", optional = true }
+candle-core = { workspace = true, optional = true }
+candle-nn = { workspace = true, optional = true }
 
 [features]
 default = []
 with-petgraph = ["petgraph"]
 with-aho = ["aho-corasick"]
+with-candle = ["candle-core", "candle-nn"]
 # portable_simd 需要 nightly 编译器，默认不启用
 portable_simd = []
 
