@@ -1,7 +1,7 @@
 # 声明宏
 
-**主题**: Macros  
-**难度**: Medium  
+**主题**: Macros
+**难度**: Medium
 **练习编号**: ex01_declarative_macro
 
 ---
@@ -34,6 +34,7 @@ cargo test macros::ex01_declarative_macro
 cd exercises
 cargo test macros::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

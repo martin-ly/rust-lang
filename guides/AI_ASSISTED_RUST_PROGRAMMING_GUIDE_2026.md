@@ -214,6 +214,7 @@ Rust 在 AI/ML 领域的生态持续演进：
 - [LEARNING_CHECKLIST.md](../LEARNING_CHECKLIST.md) - 学习清单与自测
 - [ERROR_CODE_MAPPING.md](../docs/02_reference/ERROR_CODE_MAPPING.md) - 错误码→文档映射
 - [RUSTLINGS_MAPPING.md](../exercises/RUSTLINGS_MAPPING.md) - 模块↔习题对应
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

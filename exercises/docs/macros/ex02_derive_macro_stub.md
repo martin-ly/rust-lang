@@ -1,7 +1,7 @@
 # 派生宏框架
 
-**主题**: Macros  
-**难度**: Hard  
+**主题**: Macros
+**难度**: Hard
 **练习编号**: ex02_derive_macro_stub
 
 ---
@@ -34,6 +34,7 @@ cargo test macros::ex02_derive_macro_stub
 cd exercises
 cargo test macros::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

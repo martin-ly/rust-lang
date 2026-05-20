@@ -92,6 +92,7 @@ rustlings watch
 - [OFFICIAL_RESOURCES_MAPPING](../docs/01_learning/OFFICIAL_RESOURCES_MAPPING.md) - 官方资源映射
 - [Rustlings 官方](https://github.com/rust-lang/rustlings)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

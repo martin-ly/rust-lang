@@ -34,6 +34,7 @@ cargo test error_handling::ex02_custom_error
 cd exercises
 cargo test error_handling::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

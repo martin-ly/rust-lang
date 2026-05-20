@@ -1,7 +1,7 @@
 # 修复借用检查错误
 
-**主题**: Ownership Borrowing  
-**难度**: Easy  
+**主题**: Ownership Borrowing
+**难度**: Easy
 **练习编号**: ex01_borrow_checker_fix
 
 ---
@@ -34,6 +34,7 @@ cargo test ownership_borrowing::ex01_borrow_checker_fix
 cd exercises
 cargo test ownership_borrowing::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

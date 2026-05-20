@@ -1,7 +1,7 @@
 # 错误传播
 
-**主题**: Error Handling  
-**难度**: Medium  
+**主题**: Error Handling
+**难度**: Medium
 **练习编号**: ex03_error_propagation
 
 ---
@@ -34,6 +34,7 @@ cargo test error_handling::ex03_error_propagation
 cd exercises
 cargo test error_handling::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -1,7 +1,7 @@
 # 字符串 Slice
 
-**主题**: Ownership Borrowing  
-**难度**: Easy  
+**主题**: Ownership Borrowing
+**难度**: Easy
 **练习编号**: ex02_string_slice
 
 ---
@@ -34,6 +34,7 @@ cargo test ownership_borrowing::ex02_string_slice
 cd exercises
 cargo test ownership_borrowing::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

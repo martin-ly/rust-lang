@@ -1,7 +1,7 @@
 # 基础生命周期标注
 
-**主题**: Ownership Borrowing  
-**难度**: Medium  
+**主题**: Ownership Borrowing
+**难度**: Medium
 **练习编号**: ex04_lifetime_basic
 
 ---
@@ -34,6 +34,7 @@ cargo test ownership_borrowing::ex04_lifetime_basic
 cd exercises
 cargo test ownership_borrowing::
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

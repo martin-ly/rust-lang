@@ -85,7 +85,7 @@
 
 ---
 
-**维护说明**: 本目录为指南入口索引。具体指南内容请查阅 `docs/` 或各 crate 的 `docs/` 子目录。
+**维护说明**: 本目录为指南入口索引。具体指南内容请查阅 `docs/` 或各 crate 的 `docs/` 子目录
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

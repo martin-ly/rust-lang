@@ -6,6 +6,7 @@ supertrait 自动为实现了子 trait 的类型提供方法。
 
 - 项目内对应模块: `crates/` 下的相关源码
 - 速查卡: `docs/02_reference/quick_reference/`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
