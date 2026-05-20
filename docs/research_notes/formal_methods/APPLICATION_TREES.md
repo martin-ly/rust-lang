@@ -376,12 +376,11 @@ fn movement_system(
 **维护者**: Rust Formal Methods Research Team
 **对应任务**: AT-1 ~ AT-8 - 应用场景映射树全集
 
-
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
 
-> **适用版本**: Rust 1.94.0+ (Edition 2024)  
+> **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
@@ -400,6 +399,7 @@ fn movement_system(
 #### 代码示例更新
 
 本文档中的所有Rust代码示例均已：
+
 - ✅ 使用Rust 1.94语法验证
 - ✅ 兼容Edition 2024
 - ✅ 通过标准库测试
@@ -412,7 +412,7 @@ fn movement_system(
 
 ---
 
-**维护者**: Rust 学习项目团队  
+**维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
 ---
 

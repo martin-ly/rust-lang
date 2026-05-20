@@ -17,6 +17,7 @@
 ## 📚 第一阶段: 基础 (2-3 周)
 
 ### C01 所有权系统
+
 - [ ] 阅读 `crates/c01_ownership/README.md`
 - [ ] 完成 `crates/c01_ownership/exercises/01_borrow_checker.md`
 - [ ] 理解所有权三规则
@@ -27,6 +28,7 @@
 **完成日期**: _______
 
 ### C02 类型系统
+
 - [ ] 阅读 `crates/c02_type_system/README.md`
 - [ ] 完成 `crates/c02_type_system/src/exercises/` 练习
 - [ ] 理解基本类型和复合类型
@@ -37,6 +39,7 @@
 **完成日期**: _______
 
 ### C03 控制流
+
 - [ ] 阅读 `crates/c03_control_fn/README.md`
 - [ ] 完成 `crates/c03_control_flow/exercises/` 练习
 - [ ] 掌握 match 表达式
@@ -51,6 +54,7 @@
 ## 📚 第二阶段: 进阶 (3-4 周)
 
 ### C04 泛型编程
+
 - [ ] 阅读 `crates/c04_generic/README.md`
 - [ ] 学习 `crates/c04_generic/src/advanced/` 高级模式
 - [ ] 掌握泛型函数和结构体
@@ -62,6 +66,7 @@
 **完成日期**: _______
 
 ### C05 并发编程
+
 - [ ] 阅读 `crates/c05_threads/README.md`
 - [ ] 掌握线程创建和管理
 - [ ] 理解线程间通信 (mpsc)
@@ -72,6 +77,7 @@
 **完成日期**: _______
 
 ### C06 异步编程
+
 - [ ] 阅读 `crates/c06_async/README.md`
 - [ ] 理解 async/await
 - [ ] 掌握 Future trait
@@ -86,6 +92,7 @@
 ## 📚 第三阶段: 高级 (4-6 周)
 
 ### C07 进程管理
+
 - [ ] 阅读 `crates/c07_process/README.md`
 - [ ] 掌握进程创建
 - [ ] 理解进程间通信
@@ -95,6 +102,7 @@
 **完成日期**: _______
 
 ### C08 算法
+
 - [ ] 阅读 `crates/c08_algorithms/README.md`
 - [ ] 掌握排序算法
 - [ ] 理解搜索算法
@@ -105,6 +113,7 @@
 **完成日期**: _______
 
 ### C09 设计模式
+
 - [ ] 阅读 `crates/c09_design_pattern/README.md`
 - [ ] 掌握创建型模式
 - [ ] 理解结构型模式
@@ -114,6 +123,7 @@
 **完成日期**: _______
 
 ### C10 网络编程
+
 - [ ] 阅读 `crates/c10_networks/README.md`
 - [ ] 掌握 TCP/UDP 编程
 - [ ] 理解 HTTP 协议
@@ -123,6 +133,7 @@
 **完成日期**: _______
 
 ### C11 宏系统
+
 - [ ] 阅读 `crates/c11_macro_system/README.md`
 - [ ] 学习声明宏 (macro_rules!)
 - [ ] 理解过程宏
@@ -132,6 +143,7 @@
 **完成日期**: _______
 
 ### C12 WASM
+
 - [ ] 阅读 `crates/c12_wasm/README.md`
 - [ ] 学习 wasm-bindgen
 - [ ] 理解浏览器 API
@@ -145,6 +157,7 @@
 ## 📚 第四阶段: 生产实践 (持续)
 
 ### Content 目录
+
 - [ ] 阅读 `content/emerging/` - 前沿特性
 - [ ] 学习 `content/ecosystem/` - 生态库
 - [ ] 实践 `content/production/` - 生产部署
@@ -154,6 +167,7 @@
 **完成日期**: _______
 
 ### 综合项目
+
 - [ ] 完成 `examples/comprehensive_web_server.rs`
 - [ ] 完成 `examples/concurrent_data_structures.rs`
 - [ ] 开发个人项目 (建议)
@@ -239,6 +253,7 @@
 > **我，_________________，于 _______ 年 ___ 月 ___ 日完成了 Rust 系统化学习项目的全部内容。**
 >
 > **我已掌握：**
+>
 > - Rust 所有权和内存安全
 > - 类型系统和泛型编程
 > - 并发和异步编程
@@ -249,6 +264,6 @@
 
 ---
 
-**维护者**: Rust 学习项目团队  
-**最后更新**: 2026-03-15  
+**维护者**: Rust 学习项目团队
+**最后更新**: 2026-03-15
 **版本**: 1.0
