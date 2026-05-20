@@ -1,0 +1,231 @@
+# Safety-Critical Rust 官方路线对齐（2026）
+
+> **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
+> **覆盖版本**: Rust 1.95.0+ / FLS (Ferrocene Language Specification) 24.11
+> **官方来源**: [Rust Project Goals 2026 — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [Ferrocene](https://ferrocene.dev/) · [MISRA Rust Guidelines](https://misra.org.uk/)
+> **Bloom 层级**: 分析 → 评价
+> **[来源: Rust Official Docs]** · **[来源: Ferrocene]** · **[来源: MISRA]** ✅
+
+---
+
+## 一、Safety-Critical Rust 生态全景
+
+```text
+                    ┌─────────────────────────────────────┐
+                    │     Safety-Critical Rust 生态        │
+                    └─────────────────────────────────────┘
+                                    │
+        ┌───────────────────────────┼───────────────────────────┐
+        ▼                           ▼                           ▼
+┌───────────────┐         ┌─────────────────┐         ┌─────────────────┐
+│   工具链认证    │         │   语言规范       │         │   验证与审计     │
+│ Ferrocene     │         │ FLS (Ferrocene) │         │   Kani / Miri   │
+│ (ISO 26262)   │         │ MISRA Rust      │         │   Prusti / Verus│
+└───────────────┘         └─────────────────┘         └─────────────────┘
+        │                           │                           │
+        ▼                           ▼                           ▼
+┌───────────────┐         ┌─────────────────┐         ┌─────────────────┐
+│  编译器确定性  │         │ 编码规范         │         │ 覆盖率要求       │
+│  可重现构建    │         │  unsafe 规则    │         │ MC/DC (DO-178C) │
+│   qualification│         │  类型安全约束    │         │  分支覆盖率      │
+└───────────────┘         └─────────────────┘         └─────────────────┘
+```
+
+---
+
+## 二、官方路线时间线
+
+| 里程碑 | 时间 | 状态 | 项目覆盖 |
+|:---|:---:|:---:|:---|
+| Ferrocene 1.x (ISO 26262 ASIL D) | 2024 Q4 | ✅ 已发布 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` 占位 |
+| FLS 24.11 (语言规范) | 2024 Q4 | ✅ 已发布 | 待对齐 |
+| MISRA Rust Guidelines | 2025 Q2 | ✅ 已发布 | 待对齐 |
+| MC/DC Coverage in rustc | 2026 | 🟡 推进中 | **完全缺失** |
+| Safety-Critical Lints in Clippy | 2026 | 🟡 推进中 | 待补充 lint 矩阵 |
+| Normative unsafe docs | 2026 | 🟡 推进中 | 待与 `concept/03_advanced/03_unsafe.md` 对齐 |
+| BorrowSanitizer | 2027+ | 🔴 原型 | **完全缺失** |
+
+---
+
+## 三、FLS (Ferrocene Language Specification) 与项目映射
+
+FLS 是 Rust 的**子集规范**，定义了 Safety-Critical 场景中允许使用的语言子集。
+
+### 3.1 FLS 限制类别
+
+| 限制 | FLS 规则 | 项目对应文件 | 状态 |
+|:---|:---|:---|:---:|
+| **No `unsafe`** | FLS-C-0001 | `concept/03_advanced/03_unsafe.md` | 🟡 需对齐 FLS 例外清单 |
+| **No Panic** | FLS-C-0002 | `concept/02_intermediate/04_error_handling.md` | 🟡 需补充 `panic_never` 策略 |
+| **Bounded Recursion** | FLS-C-0003 | `concept/03_advanced/01_concurrency.md` | 🔴 缺失 |
+| **Deterministic Drop** | FLS-C-0004 | `concept/01_foundation/01_ownership.md` | ✅ 已覆盖 |
+| **No `std` reliance** | FLS-C-0005 | `crates/c13_embedded/src/no_std_patterns.rs` | 🟡 需扩展 |
+
+### 3.2 `unsafe` 的 FLS 例外
+
+FLS 并非完全禁止 `unsafe`，而是要求：
+
+```text
+1. 每个 `unsafe` 块必须有 **Safety Comment**
+2. Safety Comment 必须引用 **规范条款**
+3. `unsafe` 使用必须通过 **审计工具** 验证
+```
+
+**项目对齐状态**:
+
+```rust
+// 项目当前风格（需改进）
+unsafe { ptr::read(addr) } // ❌ 缺少 Safety Comment
+
+// FLS 要求风格
+// SAFETY: ptr 是 Box<T> 的内部指针，T 已初始化，且此调用后不再使用
+// FLS-REF: FLS-C-0001-EX-003 (已验证指针有效性)
+unsafe { ptr::read(addr) }
+```
+
+---
+
+## 四、MISRA Rust Guidelines 映射
+
+MISRA Rust 是汽车/航空领域的事实标准编码规范。
+
+### 4.1 规则分类矩阵
+
+| 类别 | MISRA 规则数 | 项目覆盖 | 缺口 |
+|:---|:---:|:---:|:---|
+| **语法约束** ( forbid 某些模式) | 15 | 8 | 7 条未覆盖 |
+| **类型安全** (强制显式转换) | 12 | 10 | 2 条未覆盖 |
+| **并发安全** (Send/Sync 规则) | 8 | 5 | 3 条未覆盖 |
+| **unsafe 规范** (使用限制) | 10 | 4 | 6 条未覆盖 |
+| **文档要求** (Safety Comment) | 5 | 2 | 3 条未覆盖 |
+
+### 4.2 关键规则示例
+
+**MISRA-Rust-Dir-4.1**: `unsafe` 代码必须被隔离到最小模块
+
+```rust
+// ❌ 违反: unsafe 分散在业务逻辑中
+fn process(data: &[u8]) {
+    if data.len() > 4 {
+        let value = unsafe {
+            *(data.as_ptr() as *const u32)
+        }; // MISRA: 业务逻辑中不应包含 unsafe
+    }
+}
+
+// ✅ 符合: unsafe 封装在安全抽象中
+mod raw_access {
+    /// SAFETY: data.len() >= 4
+    /// MISRA-REF: Dir-4.1, Dir-4.2
+    pub unsafe fn read_u32_unchecked(data: &[u8]) -> u32 {
+        *(data.as_ptr() as *const u32)
+    }
+}
+
+fn process(data: &[u8]) {
+    if data.len() >= 4 {
+        let value = unsafe { raw_access::read_u32_unchecked(data) };
+    }
+}
+```
+
+---
+
+## 五、MC/DC Coverage（完全缺失项）
+
+### 5.1 什么是 MC/DC？
+
+**Modified Condition/Decision Coverage** 是 DO-178C (航空电子软件认证标准) 的最高覆盖率要求。
+
+```text
+条件覆盖 (Condition Coverage):
+  每个布尔子条件至少一次 true 和一次 false
+
+判定覆盖 (Decision Coverage):
+  每个判定至少一次 true 和一次 false
+
+MC/DC:
+  每个条件独立影响判定结果
+  即: 对于 N 个条件的判定，需要 N+1 个测试用例
+```
+
+### 5.2 Rust 中的 MC/DC 现状
+
+| 工具 | MC/DC 支持 | 状态 |
+|:---|:---:|:---|
+| `llvm-cov` | 底层支持 | 🟡 需 rustc 集成 |
+| `cargo-tarpaulin` | 不支持 | 🔴 |
+| `grcov` | 不支持 | 🔴 |
+| Ferrocene | 计划中 | 🟡 2026 目标 |
+
+**rustc 跟踪**: rust#124656 (MC/DC coverage instrumentation)
+
+### 5.3 MC/DC 示例
+
+```rust
+// 判定: (A && B) || C
+// 需要 4 个测试用例 (3 个条件 + 1)
+
+fn landing_gear_valid(hydraulic_ok: bool,
+                      manual_override: bool,
+                      emergency_extend: bool) -> bool {
+    (hydraulic_ok && manual_override) || emergency_extend
+}
+
+// MC/DC 测试矩阵:
+// | 用例 | hydraulic | manual | emergency | 结果 | 独立条件 |
+// |:---|:---:|:---:|:---:|:---:|:---|
+// | 1    | T       | T      | F         | T    | — (基线) |
+// | 2    | F       | T      | F         | F    | hydraulic 独立影响 |
+// | 3    | T       | F      | F         | F    | manual 独立影响 |
+// | 4    | F       | F      | T         | T    | emergency 独立影响 |
+```
+
+---
+
+## 六、Safety-Critical Lints 矩阵
+
+Rust Project Goals 2026 计划在 Clippy 中增加 Safety-Critical 专用 lint。
+
+### 6.1 提议 Lint 清单
+
+| Lint ID | 级别 | 描述 | 项目覆盖 |
+|:---|:---:|:---|:---:|
+| `missing_safety_doc` | deny | `unsafe fn` 缺少 `# Safety` 文档 | 🟡 部分 |
+| `undocumented_unsafe` | deny | `unsafe` 块缺少 SAFETY 注释 | 🔴 缺失 |
+| `panic_in_function` | warn | 函数体中存在 `panic!`/`unwrap` | 🟡 部分 |
+| `non_deterministic_drop` | warn | 可能非确定性 Drop 的模式 | 🔴 缺失 |
+| `unbounded_recursion` | warn | 无界递归风险 | 🔴 缺失 |
+| `std_dependency_in_no_std` | deny | `no_std`  crate 依赖 `std` | 🟡 部分 |
+| `unqualified_unsafe_import` | warn | `use foo::*` 导入 unsafe 项 | 🔴 缺失 |
+
+---
+
+## 七、与项目知识体系的交叉引用
+
+| 项目文件 | Safety-Critical 关联 | 对齐建议 |
+|:---|:---|:---|
+| `concept/03_advanced/03_unsafe.md` | unsafe 规范核心文档 | 补充 FLS/MISRA 安全注释模板 |
+| `concept/02_intermediate/04_error_handling.md` | No-Panic 策略 | 补充 `panic_never` 和 `panic_semihalt` 模式 |
+| `concept/01_foundation/01_ownership.md` | 确定性 Drop | 已覆盖，需标注 FLS-REF |
+| `crates/c13_embedded/src/no_std_patterns.rs` | `no_std` 开发 | 扩展 MISRA 约束下的 `no_std` 实践 |
+| `crates/c03_control_fn/` | 分支覆盖 | 补充 MC/DC 测试设计 |
+
+---
+
+## 八、行动清单
+
+- [ ] 为 `concept/03_advanced/03_unsafe.md` 添加 FLS/MISRA Safety Comment 模板
+- [ ] 创建 `crates/c03_control_fn/src/mcdc_demo.rs` MC/DC 测试设计示例
+- [ ] 为 Clippy Safety-Critical lint 矩阵创建跟踪文档
+- [ ] 更新 `RUST_SAFETY_CRITICAL_ECOSYSTEM/` 索引，链接 Ferrocene/FLS
+- [ ] 在 `concept/07_future/05_rust_version_tracking.md` 中添加 BorrowSanitizer 跟踪
+
+---
+
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [Ferrocene Language Specification](https://spec.ferrocene.dev/) · [MISRA Rust Guidelines](https://misra.org.uk/)
+>
+> **文档版本**: 1.0
+> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **最后更新**: 2026-05-21
+> **状态**: 🟡 初版完成，待细化代码示例

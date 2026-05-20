@@ -539,3 +539,10 @@ tokio = { version = "1.0", features = ["full"] }
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Cargo Book、Rust Reference、SemVer 2.0.0、RFC 2121） [来源: Authority Source Sprint Batch 8]
 
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust Edition 2024 完整指南](edition_2024.md)
+- [06 - 生态系统与工具](README.md)

@@ -893,3 +893,10 @@ fn main() {
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 *贡献者: Rust 学习社区*
+
+---
+
+## 相关概念
+
+- [04 - 专家级主题](README.md)
+- [Unsafe Code Auditing (不安全代码审计)](unsafe_audit.md)

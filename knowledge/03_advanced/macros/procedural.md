@@ -865,3 +865,10 @@ pub fn check(input: TokenStream) -> TokenStream {
 - Haskell — Template Haskell [来源: Haskell 的编译期元编程; `Q` monad 与 Rust `proc_macro` 的对比]
 - Java — Annotation Processors [来源: Java 编译期代码生成; 与 Rust Derive 宏的设计同构性]
 - Go — `go generate` [来源: Go 的代码生成工具; 编译期外执行 vs Rust 编译器内插件模型]
+
+---
+
+## 相关概念
+
+- [声明式宏 (Declarative Macros)](declarative.md)
+- [Macros 宏系统](README.md)

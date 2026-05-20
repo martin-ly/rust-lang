@@ -590,3 +590,10 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust 2026-2030 前瞻性路线图预测](RUST_2026_2030_ROADMAP_FORECAST.md)
+- [Rust安全关键系统 - 可持续推进路线图与计划](SUSTAINABLE_ROADMAP_AND_PLANS.md)

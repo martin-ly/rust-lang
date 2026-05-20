@@ -169,3 +169,10 @@
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [综合语言对比矩阵](COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)
+- [Rust所有权与内存模型矩阵](RUST_OWNERSHIP_MEMORY_MODEL_MATRIX.md)

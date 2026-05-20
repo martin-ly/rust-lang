@@ -828,3 +828,10 @@ fn use_abstractions() {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Coq 形式化验证指南](coq_formalization_guide.md)
+- [Academic 学术研究](README.md)

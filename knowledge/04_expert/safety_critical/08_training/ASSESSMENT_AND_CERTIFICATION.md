@@ -480,3 +480,10 @@ L4续证 (每5年):
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [功能安全认证备考指南](CERTIFICATION_PREP_GUIDE.md)
+- [动手实验练习](HANDS_ON_LAB_EXERCISES.md)

@@ -100,3 +100,10 @@
 ---
 
 > **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+
+---
+
+## 相关概念
+
+- [Rust 生产案例研究](case_studies.md)
+- [Rust 知识库建设完成报告](COMPLETION_REPORT_2026_03_1.94.md)

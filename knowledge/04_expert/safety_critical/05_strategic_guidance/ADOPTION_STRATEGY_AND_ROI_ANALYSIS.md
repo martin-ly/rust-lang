@@ -454,3 +454,10 @@ Rust竞争优势:
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust安全关键系统应用 - 综合意见与建议](COMPREHENSIVE_RECOMMENDATIONS_AND_OPINIONS.md)
+- [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

@@ -391,3 +391,10 @@ match status {
 - [Rust 1.95.0 发布公告](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0/)
 - [releases.rs 1.95.0 文档](https://releases.rs/docs/1.95.0/)
 - [Rust Reference: Match Guards](https://doc.rust-lang.org/reference/expressions/match-expr.html)
+
+---
+
+## 相关概念
+
+- [Rust 2024 Edition `let chains` 深度专题](let_chains.md)
+- [`cfg_select!` 宏（Rust 1.95.0）](../macros/cfg_select.md)

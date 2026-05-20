@@ -346,6 +346,154 @@ pub fn get_never_type_info() -> String {
         .to_string()
 }
 
+// ============================================================================
+// 4. `core::range` 模块补齐 — `Range` / `RangeFrom` / `RangeToInclusive` (1.96 stable)
+// ============================================================================
+
+/// # `core::range` 模块完整类型族
+///
+/// Rust 1.95 稳定了 `RangeInclusive` 和 `RangeInclusiveIter`。
+/// **1.96 补齐了 `core::range` 的其余核心类型**：
+///
+/// | 类型 | 语法 | 含义 | 对应迭代器 |
+/// |:---|:---|:---|:---|
+/// | `Range` | `start..end` | 半开区间 `[start, end)` | `RangeIter` |
+/// | `RangeFrom` | `start..` | 无限区间 `[start, ∞)` | `RangeFromIter` |
+/// | `RangeToInclusive` | `..=end` | 闭区间 `(-∞, end]` | `RangeToInclusiveIter` |
+/// | `RangeInclusive` (1.95) | `start..=end` | 闭区间 `[start, end]` | `RangeInclusiveIter` |
+///
+/// **来源**: [Rust Standard Library: core::range] · [RFC 3550]
+///
+/// ## 设计目标
+///
+/// 1. **模块统一**: 所有 range 类型集中到 `core::range`
+/// 2. **零成本抽象**: `RangeIter` 等是惰性视图，不分配内存
+/// 3. **泛型一致**: 为 future 的 `Range<T>` 泛型化做准备
+///
+/// ## 代码示例
+///
+/// ```rust
+/// use core::range::{Range, RangeFrom, RangeToInclusive};
+/// use core::range::{RangeIter, RangeFromIter, RangeToInclusiveIter};
+///
+/// // Range: 半开区间 [1, 5)
+/// let range = Range { start: 1, end: 5 };
+/// let mut iter: RangeIter<i32> = range.into_iter();
+/// assert_eq!(iter.next(), Some(1));
+/// assert_eq!(iter.next(), Some(2));
+/// // ... 3, 4, None
+///
+/// // RangeFrom: 无限区间 [10, ∞)
+/// let from = RangeFrom { start: 10 };
+/// let mut iter: RangeFromIter<i32> = from.into_iter();
+/// assert_eq!(iter.next(), Some(10));
+/// assert_eq!(iter.next(), Some(11));
+/// // ... 无限递增（需配合 take）
+///
+/// // RangeToInclusive: 闭区间 (-∞, 5]
+/// let to = RangeToInclusive { end: 5 };
+/// // 注意：RangeToInclusive 需要从 0 开始迭代
+/// let mut iter: RangeToInclusiveIter<i32> = to.into_iter();
+/// assert_eq!(iter.next(), Some(0));
+/// assert_eq!(iter.next(), Some(1));
+/// // ... 2, 3, 4, 5, None
+/// ```
+///
+/// ## 与 `std::ops` 的关系
+///
+/// ```text
+/// std::ops::Range<T>        ↔  core::range::Range<T>
+/// std::ops::RangeFrom<T>    ↔  core::range::RangeFrom<T>
+/// std::ops::RangeToInclusive<T> ↔  core::range::RangeToInclusive<T>
+///
+/// 当前状态：两者共存，core::range 是未来方向
+/// 推荐：新代码使用 core::range 以保持一致性
+/// ```
+pub fn core_range_demo() {
+    use core::range::{Range, RangeFrom, RangeToInclusive};
+
+    let r = Range { start: 1, end: 5 };
+    let sum: i32 = r.into_iter().sum();
+    assert_eq!(sum, 1 + 2 + 3 + 4); // 10
+
+    let rf = RangeFrom { start: 10 };
+    let tenth: i32 = rf.into_iter().nth(10).unwrap();
+    assert_eq!(tenth, 20); // 10 + 10
+
+    let rt = RangeToInclusive { last: 4 };
+    // RangeToInclusive 的迭代需要起始点，通常与 0..=end 配合使用
+    let count = (0..=rt.last).count();
+    assert_eq!(count, 5); // 0, 1, 2, 3, 4
+}
+
+// ============================================================================
+// 5. `NonZero` 范围迭代 (1.96 stable)
+// ============================================================================
+
+/// # `NonZero` 整数范围迭代
+///
+/// Rust 1.96 为 `NonZero*` 类型实现了 `Step` trait，允许对非零整数范围进行迭代：
+///
+/// ```rust
+/// use std::num::NonZeroU32;
+/// use std::ops::Range;
+///
+/// let start = NonZeroU32::new(1).unwrap();
+/// let end = NonZeroU32::new(5).unwrap();
+/// let range: Range<NonZeroU32> = start..end;
+///
+/// for nz in range {
+///     println!("NonZero: {}", nz.get()); // 1, 2, 3, 4
+/// }
+/// ```
+///
+/// **应用场景**:
+/// - 数据库 ID 范围扫描（ID 永不为 0）
+/// - 文件描述符遍历（fd >= 1）
+/// - 任何语义上排除 0 的数值范围
+///
+/// **来源**: [Rust Standard Library: NonZero]
+pub fn nonzero_range_demo() {
+    use std::num::NonZeroU32;
+    use std::ops::Range;
+
+    let start = NonZeroU32::new(1).unwrap();
+    let end = NonZeroU32::new(5).unwrap();
+    let range: Range<NonZeroU32> = start..end;
+
+    let values: Vec<u32> = range.map(|nz| nz.get()).collect();
+    assert_eq!(values, vec![1, 2, 3, 4]);
+}
+
+// ============================================================================
+// 6. `assert_matches!` / `debug_assert_matches!` (1.96 stable)
+// ============================================================================
+
+/// # 模式断言宏
+///
+/// `assert_matches!` 允许对表达式进行模式匹配断言，无需展开 `if let`：
+///
+/// ```rust
+/// let result: Result<i32, &str> = Ok(42);
+/// assert_matches!(result, Ok(n) if n > 0);
+///
+/// let option: Option<String> = Some("hello".to_string());
+/// assert_matches!(option, Some(s) if s.len() > 0);
+/// ```
+///
+/// **与 `assert!(matches!(...))` 的区别**:
+/// - 错误信息更友好（显示实际值 vs 模式）
+/// - 支持 guard 条件（`if expr`）
+/// - 支持变量绑定（`Ok(v) => { use v; }`）
+///
+/// **来源**: [Rust Standard Library: assert_matches]
+#[cfg(feature = "nightly")]
+pub fn assert_matches_demo() {
+    // 需要 nightly 或 1.96+
+    let result: Result<i32, &str> = Ok(42);
+    assert_matches!(result, Ok(n) if n > 0);
+}
+
 // ==================== 测试 ====================
 
 #[cfg(test)]

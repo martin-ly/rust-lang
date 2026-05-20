@@ -1148,3 +1148,10 @@ struct MyStruct {
 - ISO C++20 §17.6 — *Threads and mutual exclusion* [来源: `std::thread`/`std::mutex` 与 Rust 线程模型的对比; C++ 无编译期 `Send`/`Sync` 保证，依赖 TSan 运行时检测]
 - Go Language Specification — Goroutines [来源: Go 的 M:N 调度与 CSP 并发模型; 与 Rust OS 线程 + 类型安全约束的对比]
 - Java JEP 425 — Virtual Threads (2022) [来源: Java 虚拟线程作为轻量级并发的演进; 与 Rust scoped threads 的设计动机对比]
+
+---
+
+## 相关概念
+
+- [Rust 原子操作 (Atomic Operations)](atomics.md)
+- [Concurrency 并发编程](README.md)

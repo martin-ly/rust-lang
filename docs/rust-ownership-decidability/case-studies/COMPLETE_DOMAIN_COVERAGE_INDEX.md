@@ -5,6 +5,7 @@
 ---
 
 ## 📊 领域覆盖概览
+>
 > **[来源: Rust Official Docs]**
 
 | 领域 | 文档数 | 主要 Crates | 完成度 |
@@ -29,16 +30,18 @@
 ---
 
 ## 🔗 快速导航
+>
 > **[来源: Rust Official Docs]**
 
 ### 按领域
+>
 > **[来源: Rust Official Docs]**
 
 #### 🌐 Web 开发
 
 - [Web 开发指南](../15-application-domains/web-development.md)
 - [Actix-web 分析](actix-web-formal-analysis.md)
-- [Axum 分析](axum-formal-analysis.md)
+- Axum 分析 (待补充)
 - [Serde 深度分析](serde-formal-analysis-deep.md)
 
 #### 💾 数据库
@@ -46,7 +49,7 @@
 - [数据库系统实现指南](database/README.md) ⭐ 完整指南
 - [Diesel ORM 分析](diesel-formal-analysis.md)
 - [SQLx 分析](sqlx-formal-analysis.md)
-- [SeaORM 分析](sea-orm-formal-analysis.md)
+- SeaORM 分析 (待补充)
 
 #### 🤖 AI/ML
 

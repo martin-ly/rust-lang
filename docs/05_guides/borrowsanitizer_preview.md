@@ -1,0 +1,104 @@
+# BorrowSanitizer 预览
+
+> **层级**: L7 前沿 / L3 高级 Unsafe
+> **前置概念**: [MIRI](../docs/MIRI_GUIDE.md) · [Unsafe Rust](../concept/03_advanced/03_unsafe.md)
+> **Bloom 层级**: 分析
+> **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: RustConf 2026 演讲预告]** ✅
+
+---
+
+## 概述
+
+**BorrowSanitizer** 是 Rust 正在开发的运行时内存安全检测工具，目标是在**不依赖 Miri 解释执行**的情况下，检测 unsafe Rust 代码中的别名违规（aliasing violations）。
+
+| 工具 | 运行方式 | 性能 | 检测能力 | 状态 |
+|:---|:---|:---:|:---|:---:|
+| **Miri** | 解释执行 | 极慢 | 完整 Stacked/Tree Borrows | ✅ 稳定 |
+| **BorrowSanitizer** | 编译插桩 | ~2x 减速 | 运行时别名检查 | 🟡 开发中 |
+| **ThreadSanitizer** | 编译插桩 | ~5–15x 减速 | 数据竞争 | ✅ 稳定 |
+| **AddressSanitizer** | 编译插桩 | ~2x 减速 | 内存错误 | ✅ 稳定 |
+
+---
+
+## 核心技术：Shadow Stack
+
+BorrowSanitizer 采用与现有 LLVM Sanitizer 不同的策略：
+
+```text
+传统 Sanitizer (TSan/ASan):
+  影子内存 (Shadow Memory) 追踪每个字节的状态
+
+BorrowSanitizer:
+  影子栈 (Shadow Stack) 追踪指针的借用关系
+  每个栈帧记录：
+    - 指针值 → 借用类型 (&T / &mut T / *const T / *mut T)
+    - 生命周期范围
+    - 排他性标记
+```
+
+**关键设计决策**：
+
+- 不追踪堆上对象（减少开销）
+- 专注栈上引用和参数传递
+- 与 Miri 互补：Miri 验证逻辑，BorrowSanitizer 验证运行时
+
+---
+
+## 检测能力
+
+| 违规类型 | 示例 | 检测状态 |
+|:---|:---|:---:|
+| `&mut T` + `&mut T` 别名 | `let a = &mut x; let b = &mut x;` | 🟡 计划中 |
+| `&T` + `&mut T` 别名 | `let a = &x; let b = &mut x;` | 🟡 计划中 |
+| 使用已释放的 `&T` | dangling reference | 🟡 计划中 |
+| 通过 `*mut T` 破坏 `&T` | `*ptr = new_val` while `&ref` alive | 🔴 远期 |
+| 跨线程 `&mut T` 共享 | `send(&mut x)` to another thread | 🔴 远期 |
+
+---
+
+## 与 Miri 的互补关系
+
+```text
+开发阶段:          Miri
+                    ↓
+CI/测试:          BorrowSanitizer + Miri
+                    ↓
+生产:             (无工具，依赖语言保证)
+```
+
+| 场景 | 推荐工具 | 原因 |
+|:---|:---|:---|
+| 单元测试 | Miri | 完整、确定性的检查 |
+| 集成测试 | BorrowSanitizer | 可运行实际二进制 |
+| 性能回归测试 | BorrowSanitizer | 运行速度快于 Miri |
+| 形式化验证 | Miri (Tree Borrows) | 最精确的模型 |
+
+---
+
+## 当前状态（2026-05）
+
+| 里程碑 | 状态 | 时间 |
+|:---|:---:|:---:|
+| Shadow Stack 设计 | ✅ 完成 | 2025 Q4 |
+| Retag intrinsics PR | 🟡 准备提交 | 2026 Q2 |
+| RFC 起草 | 🟡 进行中 | 2026 Q2 |
+| RustConf 2026 演讲 | ✅ 已入选 | 2026-09 |
+| Nightly 可用 | 🔴 预计 | 2026 Q4 |
+| 稳定化 | 🔴 远期 | 2027+ |
+
+---
+
+## 参考
+
+- [Rust Project Goals: Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+- [RustConf 2026](https://rustconf.com/)
+- [Miri vs Sanitizers 对比](https://github.com/rust-lang/miri/issues/1360)
+
+---
+
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [RustConf 2026](https://rustconf.com/)
+>
+> **文档版本**: 1.0
+> **对应 Rust 版本**: 1.95.0+ Nightly (未来)
+> **最后更新**: 2026-05-21
+> **状态**: 🟡 预研跟踪

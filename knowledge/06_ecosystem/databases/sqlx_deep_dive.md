@@ -456,3 +456,10 @@ mod tests {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Databases 数据库](README.md)
+- [Sea-ORM 深度解析](sea_orm_deep_dive.md)

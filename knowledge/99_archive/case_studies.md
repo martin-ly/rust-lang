@@ -1224,3 +1224,10 @@ fn example_usage() {
 ---
 
 > **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)
+
+---
+
+## 相关概念
+
+- [Rust 知识库建设完成报告](COMPLETION_REPORT_2026_03_1.94.md)
+- [Rust 编程练习集](exercises.md)

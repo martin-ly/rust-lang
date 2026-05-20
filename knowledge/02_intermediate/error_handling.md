@@ -745,3 +745,10 @@ enum AppError {
 - Go Language Specification — `error` interface (2022) [来源: 显式错误返回 vs 类型约束]
 - Java Language Specification §11 — *Exceptions* (2020) [来源: checked vs unchecked exception 的设计张力]
 - GHC User's Guide — `Control.Monad.Except` [来源: Haskell `Either` monad 作为纯函数式错误处理的参照]
+
+---
+
+## 相关概念
+
+- [集合类型 (Collections)](collections.md)
+- [泛型 (Generics)](generics.md)

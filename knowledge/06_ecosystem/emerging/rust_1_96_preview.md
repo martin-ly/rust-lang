@@ -203,3 +203,10 @@ cargo +nightly -Z script run my_script.rs
 **对应 Rust 版本**: 1.96.0 (Beta)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Async Closures (异步闭包)](async_closures.md)
+- [Generic Const Expressions (泛型常量表达式)](generic_const_exprs.md)

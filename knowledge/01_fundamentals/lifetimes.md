@@ -788,3 +788,10 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、RFC 1414 Lifetime Elision、RFC 2094 NLL、Rustonomicon） [来源: Authority Source Sprint Batch 8]
 
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust 借用与引用 (Borrowing and References)](borrowing.md)
+- [迭代器 (Iterators)](iterators.md)

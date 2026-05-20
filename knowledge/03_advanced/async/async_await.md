@@ -1079,3 +1079,10 @@ async fn safe_read_from_unsafe_source(rx: &mut mpsc::Receiver<i32>) -> Option<i3
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Async Closures 异步闭包](async_closure.md)
+- [Rust 2024 Edition Async Closures 完整指南](async_closures_2024.md)

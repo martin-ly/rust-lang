@@ -84,3 +84,10 @@
 **Option C — 仅做 Phase 1**
 > 仅修复 INDEX.md 重复条目和断裂链接，其余等 1.96 发布后再议。
 > 优点：最小工作量，快速收尾。
+
+---
+
+## 相关概念
+
+- [Hello, World](../00_start/hello_world.md)
+- [安装 Rust](../00_start/installation.md)

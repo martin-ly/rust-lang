@@ -8,6 +8,7 @@
 ---
 
 ## 一、旗舰主题映射（Flagship Themes → 项目内容）
+>
 > **[来源: Rust Official Docs]**
 
 | 旗舰主题 | 官方定义 | 项目覆盖文件 | 覆盖度 | 缺口 |
@@ -16,16 +17,18 @@
 | **Beyond the `&`** | 智能指针应像 `&`/`&mut` 一样自然 | `concept/02_intermediate/03_memory_management.md` | 🔴 30% | Field Projections 完全缺失；reborrow traits 未覆盖；in-place initialization 未覆盖 |
 | **Unblocking dormant traits** | Lending iterators, extern types, scalable vectors, evolvable trait hierarchies | `concept/02_intermediate/01_traits.md` · `concept/02_intermediate/02_generics.md` | 🟡 50% | Next-gen trait solver 完全缺失；Sized hierarchy 未覆盖 |
 | **Constify all the things** | 结构体和关联常量进入泛型参数；编译期类型内省 | `concept/02_intermediate/02_generics.md` · `concept/02_intermediate/01_traits.md` | 🟡 60% | `adt_const_params` 代码示例缺失；`min_generic_const_args` 代码示例缺失；reflection 未覆盖 |
-| **Higher-level Rust** | 单文件脚本带依赖 | `concept/06_ecosystem/01_toolchain.md` | 🔴 20% | cargo-script 独立章节缺失 |
+| **Higher-level Rust** | 单文件脚本带依赖 | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/cargo_script_guide.md` | 🟡 75% | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Secure your supply chain** | 公共 API 依赖控制、破坏性变更检测、SBOM 生成 | `SECURITY_RESPONSE.md` · `deny.toml` | 🟡 50% | cargo-semver-checks 未覆盖；SBOM 生成实践缺失 |
 | **Safety-Critical Rust** | 认证工具链、规范、功能安全证据 | `RUST_SAFETY_CRITICAL_ECOSYSTEM/` · `concept/07_future/02_formal_methods.md` | 🟡 60% | MC/DC coverage 未覆盖；normative unsafe docs 未与官方路线对齐；FLS 发布节奏未覆盖 |
 
 ---
 
 ## 二、2026 稳定化目标详细映射
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 语言与编译器层
+>
 > **[来源: Rust Official Docs]**
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
@@ -43,7 +46,7 @@
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
-| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` | ✅ 独立章节已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
+| **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` · `docs/06_toolchain/cargo_script_guide.md` | ✅ 独立章节 + 指南已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Stabilize public/private dependencies** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/10_public_private_deps.md` | ✅ 独立章节已创建；RFC 3516 核心机制、SemVer 矩阵、重构路径全覆盖 |
 | **Stabilize Cargo SBOM precursor** | Sergey Davidoff | 推进中 | 🔴 **缺失** | — | 完全缺失 |
 | **build-std** | — | 推进中 | 🟡 部分 | `concept/07_future/05_rust_version_tracking.md` | 缺少实际操作示例 |
@@ -88,7 +91,7 @@
             |──────|──────|──────|──────|
 Next-gen trait solver    ████░░░░░░░░░░░░░░   🔴 缺失
 public/private deps      ████████████░░░░░░░░   🟡 75%
-cargo-script             ████████████░░░░░░░░   🟡 75%
+cargo-script             ███████████████░░░░░   🟢 80%
 Field Projections        ████░░░░░░░░░░░░░░   🔴 缺失
 Immobile types           ████░░░░░░░░░░░░░░   🔴 缺失
 Open Enums               ████░░░░░░░░░░░░░░   🔴 缺失
@@ -115,14 +118,9 @@ Rust for Linux           ███████████░░░░░░░ 
    - 创建 `crates/c04_generic/src/next_solver_preview.rs`（nightly）
    - 核心内容：现有 solver 的 coherence 漏洞、next solver 的行为差异、对 GATs/TAIT/specialization 的解锁
 
-2. **public/private dependencies**
-   - 在 `concept/06_ecosystem/01_toolchain.md` 中补充 RFC 3516 章节
-   - 代码示例：`[dependencies]
-foo = { version = "1.0", public = true }`
-
-3. **cargo-script**
-   - 在 `concept/06_ecosystem/01_toolchain.md` 中补充独立章节
-   - 示例：`.rs` 文件 + frontmatter + `cargo +nightly -Zscript`
+2. **Field Projections**
+   - 新建 `concept/02_intermediate/03_memory_management.md` 补充章节
+   - 与 Pin、智能指针、self-referential structs 联动
 
 ### 🟡 P1 — 补充深化（部分覆盖，需升级）
 
@@ -139,11 +137,18 @@ foo = { version = "1.0", public = true }`
 4. **Safety-Critical Rust 官方路线对齐**
    - 创建 `docs/04_research/safety_critical_alignment_2026.md`
 
+5. **io_uring / QUIC / HTTP3 / libp2p 深度**
+   - 现有代码文件已有 200–800 行，需补充概念文档和决策树
+
+6. **Embassy / RTIC / Rust for Linux / eBPF 深度**
+   - 现有代码文件已有 400–500 行，需补充系统文档和形式化分析
+
 ### 🟢 P2 — 跟踪观察（nightly / 长期演进）
 
 1. **Open Enums** — 加入 `concept/07_future/05_rust_version_tracking.md` 待跟踪表
 2. **BorrowSanitizer** — 加入待跟踪表
 3. **cargo-semver-checks / plumbing commands / SBOM** — 加入工具链演进跟踪
+4. **MC/DC Coverage** — 加入 Safety-Critical 跟踪
 
 ---
 

@@ -433,3 +433,10 @@ quality_gates:
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust安全关键系统采用策略与ROI分析](ADOPTION_STRATEGY_AND_ROI_ANALYSIS.md)
+- [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

@@ -818,3 +818,10 @@ if let Some(ref s) = opt {
 **对应 Rust 版本**: Edition 2024
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [数学常量](math_constants.md)
+- [05 - 参考文档](README.md)

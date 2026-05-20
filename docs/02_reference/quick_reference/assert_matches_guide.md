@@ -1,0 +1,180 @@
+# `assert_matches!` / `debug_assert_matches!` 速查指南
+
+> **Rust 版本**: 1.96.0+ Stable
+> **跟踪 Issue**: rust#108099
+> **Bloom 层级**: 应用
+> **[来源: Rust Standard Library]** · **[来源: RFC 未正式发布，社区长期需求]** ✅
+
+---
+
+## 概述
+
+`assert_matches!` 是 Rust 社区期待已久的模式断言宏，终于随 **1.96.0** 稳定。它允许在测试和调试中直接对 `Result`、`Option`、枚举变体进行**模式匹配断言**，无需繁琐的 `if let` 或 `match` 展开。
+
+---
+
+## 语法
+
+```rust
+assert_matches!(expression, pattern);
+assert_matches!(expression, pattern, "自定义错误消息");
+assert_matches!(expression, pattern, "格式化: {}", arg);
+
+debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
+```
+
+---
+
+## 对比：`assert!` vs `assert_matches!`
+
+### 旧方式（1.95 及之前）
+
+```rust
+let result = parse_config("key=value");
+
+// ❌ 错误信息不直观
+assert!(result.is_ok());
+
+// ❌ 需要展开 match 才能验证内部值
+if let Ok(config) = result {
+    assert_eq!(config.key, "key");
+    assert_eq!(config.value, "value");
+} else {
+    panic!("Expected Ok, got {:?}", result);
+}
+```
+
+### 新方式（1.96+）
+
+```rust
+let result = parse_config("key=value");
+
+// ✅ 一行完成模式匹配 + 内部字段验证
+assert_matches!(result, Ok(Config { key: "key", value: "value" }));
+
+// ✅ 带自定义消息
+assert_matches!(
+    result,
+    Ok(Config { key, .. }),
+    "配置键应为 'key'，实际为 {:?}",
+    result
+);
+```
+
+---
+
+## 典型用例
+
+### 1. `Result` 断言
+
+```rust
+#[test]
+fn test_file_open() {
+    let result = File::open("/tmp/test.txt");
+    assert_matches!(result, Ok(file) => {
+        assert!(file.metadata().unwrap().len() > 0);
+    });
+}
+```
+
+### 2. 枚举变体验证
+
+```rust
+enum State {
+    Idle,
+    Processing { id: u64, progress: f32 },
+    Completed(Vec<u8>),
+}
+
+#[test]
+fn test_state_machine() {
+    let state = run_pipeline();
+
+    // 验证特定变体 + 绑定字段
+    assert_matches!(
+        state,
+        State::Processing { id, progress }
+            if id > 0 && progress > 0.0 && progress <= 1.0
+    );
+}
+```
+
+### 3. 嵌套模式
+
+```rust
+#[test]
+fn test_nested_result() {
+    let data: Result<Result<i32, &str>, &str> = Ok(Ok(42));
+
+    assert_matches!(data, Ok(Ok(n)) if n > 0);
+}
+```
+
+### 4. `Option` 断言
+
+```rust
+#[test]
+fn test_cache_hit() {
+    let cache = build_cache();
+    assert_matches!(cache.get("user:123"), Some(entry) if entry.ttl > 0);
+}
+```
+
+---
+
+## `debug_assert_matches!`
+
+仅作用于 **debug 构建**，发布构建完全消除：
+
+```rust
+fn critical_path(data: &Packet) {
+    // 开发时验证，生产零开销
+    debug_assert_matches!(data.header, Header::V2 { checksum: Some(_) });
+
+    // 实际处理逻辑...
+}
+```
+
+---
+
+## 与 `assert!` + `matches!` 的关系
+
+```rust
+// 1.95 的 workaround
+assert!(matches!(result, Ok(_)));
+
+// 1.96 的原生支持（错误信息更友好）
+assert_matches!(result, Ok(_));
+```
+
+| 维度 | `assert!(matches!(...))` | `assert_matches!(...)` |
+|:---|:---|:---|
+| 可读性 | 一般 | 优秀 |
+| 错误信息 | "assertion failed" | "assertion failed: pattern match" + 实际值 |
+| 绑定变量 | 不支持 | 支持（`Ok(v) => { use v; }`） |
+| guard 条件 | 不支持 | 支持（`if expr`） |
+
+---
+
+## 迁移指南
+
+```bash
+# 搜索项目中常见的 assert!(matches!(...)) 模式
+grep -rn "assert!(matches!" crates/ --include="*.rs"
+
+# 替换为 assert_matches!
+# Before:
+assert!(matches!(result, Ok(Config { key: "test", .. })));
+
+// After:
+assert_matches!(result, Ok(Config { key: "test", .. }));
+```
+
+---
+
+> **权威来源**: [Rust Standard Library: assert_matches](https://doc.rust-lang.org/std/macro.assert_matches.html), [Tracking Issue #108099](https://github.com/rust-lang/rust/issues/108099)
+>
+> **文档版本**: 1.0
+> **对应 Rust 版本**: 1.96.0+ (Edition 2024)
+> **最后更新**: 2026-05-21
+> **状态**: ✅ 初版完成

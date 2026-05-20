@@ -420,3 +420,10 @@ fn quiz_lifetime() {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [评估与认证体系](ASSESSMENT_AND_CERTIFICATION.md)
+- [功能安全认证备考指南](CERTIFICATION_PREP_GUIDE.md)

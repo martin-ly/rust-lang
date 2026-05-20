@@ -23,6 +23,9 @@ futures = { workspace = true }
 [dev-dependencies]
 criterion = { workspace = true }
 
+[features]
+nightly = []
+
 [lib]
 name = "c02_type_system"
 path = "src/lib.rs"

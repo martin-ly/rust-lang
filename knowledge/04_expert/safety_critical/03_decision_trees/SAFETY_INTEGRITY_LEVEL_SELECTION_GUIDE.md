@@ -483,3 +483,10 @@ impl AsilDProcessor {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust应用决策树图集](RUST_DECISION_TREES.md)
+- [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

@@ -110,7 +110,7 @@ graph TB
 | [02_type_theory.md](./02_type_theory.md) | 类型论基础 | ADT、HM 推断、子类型、Variance、System F | ✅ v1.0 | L1 Type System, L2 Generics | L6 编译器类型检查 |
 | [03_ownership_formal.md](./03_ownership_formal.md) | 所有权形式化 | COR、区域类型、分数权限、操作语义 | ✅ v1.0 | L1 Ownership + Borrowing + Lifetimes | — |
 | [04_rustbelt.md](./04_rustbelt.md) | RustBelt 与验证 | Iris 分离逻辑、验证工具链、工业应用 | ✅ v1.0 | L3 Concurrency + Unsafe | L7 Creusot/Verus/Kani |
-| [05_verification_toolchain.md](./05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、分层验证策略 | ✅ v1.0 | L3-L6 验证实践 | — |
+| [05_verification_toolchain.md](./05_verification_toolchain.md) | 验证工具链选型 | ROI 分析、决策树、a-mir-formality、分层验证策略 | ✅ v1.2 | L3-L6 验证实践 | L7 a-mir-formality |
 
 ---
 

@@ -332,3 +332,10 @@ fn parse_args(input: &str) -> Vec<String> {
 
 - Iterator 模式 — *Design Patterns: Elements of Reusable Object-Oriented Software* (GoF, 1994) [来源: 迭代器模式的经典定义; Rust 的 `Iterator` trait 是该模式的类型系统实现]
 - Wadler, P. — *Theorems for Free!* (FPCA 1989) [来源: 泛型函数的行为可由类型推导; `Iterator::map`/`filter` 等泛型组合子的参数多态性理论基础]
+
+---
+
+## 相关概念
+
+- [Rust 借用与引用 (Borrowing and References)](borrowing.md)
+- [Rust 生命周期 (Lifetimes)](lifetimes.md)

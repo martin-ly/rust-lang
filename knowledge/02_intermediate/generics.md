@@ -838,3 +838,10 @@ fn process(items: &[&dyn Display]) {
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（TRPL、Rust Reference、RFC 2000、TAPL、Wadler 1989） [来源: Authority Source Sprint Batch 8]
 
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [集合类型 (Collections)](collections.md)
+- [错误处理 (Error Handling)](error_handling.md)

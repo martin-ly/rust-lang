@@ -1,206 +1,117 @@
 # Safety Tags 预研指南
 
-> **状态**: RFC 讨论阶段（2026 年初提交）
-> **目标**: 为 `unsafe` API 提供标准化的安全契约标注机制
-> **最后更新**: 2026-05-08
+> **层级**: L7 前沿 / L3 高级 Unsafe
+> **前置概念**: [Unsafe Rust](../concept/03_advanced/03_unsafe.md) · [Safety-Critical](../docs/04_research/safety_critical_alignment_2026.md)
+> **Bloom 层级**: 评价 → 创造
+> **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: Rust-for-Linux Mailing List]** ✅
 
 ---
 
-## 目录
->
-> **[来源: Rust Official Docs]**
+## 概述
 
-- [Safety Tags 预研指南](#safety-tags-预研指南)
-  - [目录](#目录)
-  - [1. 什么是 Safety Tags？](#1-什么是-safety-tags)
-  - [2. 动机与背景](#2-动机与背景)
-    - [当前问题](#当前问题)
-    - [相关项目](#相关项目)
-  - [3. 设计提案概览](#3-设计提案概览)
-    - [可能的语法方向（基于社区讨论）](#可能的语法方向基于社区讨论)
-    - [验证层次](#验证层次)
-  - [4. 与现有实践的关系](#4-与现有实践的关系)
-    - [Rust 标准库的 Safety 注释规范](#rust-标准库的-safety-注释规范)
-    - [Safety Tags 的演进路径](#safety-tags-的演进路径)
-  - [5. 对本项目的影响](#5-对本项目的影响)
-    - [建议行动](#建议行动)
-  - [参考资源](#参考资源)
+**Safety Tags** 是 Rust 社区正在讨论的一套**形式化安全契约标注系统**，目标是为 `unsafe` 代码提供机器可验证的安全前提条件。
+
+```text
+当前 unsafe 文档:
+  // SAFETY: caller must ensure ptr is valid and aligned
+  unsafe fn deref_unchecked<T>(ptr: *const T) -> &T { ... }
+  
+Safety Tags 愿景:
+  #[safety_tag(valid_ptr, aligned)]
+  unsafe fn deref_unchecked<T>(ptr: *const T) -> &T { ... }
+  // ↑ 机器可验证的契约，可被 Miri/Clippy/Safety-Critical 工具链检查
+```
 
 ---
 
-## 1. 什么是 Safety Tags？
->
-> **[来源: Rust Official Docs]**
+## 为什么需要 Safety Tags？
 
-**Safety Tags** 是 Rust 社区正在讨论的一种机制，用于**标准化 `unsafe` 函数的安全前提条件（safety preconditions）的声明和验证**。
+| 当前问题 | Safety Tags 解决方案 |
+|:---|:---|
+| Safety Comment 是自由文本 | 结构化、机器可解析的契约 |
+| 无法静态验证 | 与 Miri/Clippy 集成，自动检查 |
+| 跨函数边界不传递 | 调用者必须显式满足 tag 条件 |
+| 文档与代码不同步 | Tag 即文档，修改即检查 |
+| Safety-Critical 审计困难 | 自动生成安全证据报告 |
 
-当前 Rust 中的 `unsafe` 函数通常使用文档注释来说明调用者需要保证的安全条件：
+---
+
+## 提议设计（草案阶段）
+
+### Tag 语法设想
 
 ```rust
-/// # Safety
-/// - `ptr` 必须是非 null 且对齐的
-/// - `ptr` 必须指向有效的 `T` 实例
-/// - 调用后 `ptr` 不得再被使用
-pub unsafe fn take_ownership<T>(ptr: *mut T) -> T {
-    // ...
+// 基础 tag：前置条件
+#[safety_tag(pre: valid_ptr(self), aligned(self))]
+unsafe fn as_ref_unchecked(&self) -> &T { ... }
+
+// 效果 tag：后置条件
+#[safety_tag(post: initialized(result))]
+unsafe fn read_unaligned<T>(src: *const T) -> T { ... }
+
+// 不变量 tag：结构体级别
+#[safety_tag(invariant: self.ptr.is_null() || self.len <= isize::MAX)]
+struct RawSlice<T> {
+    ptr: *const T,
+    len: usize,
 }
 ```
 
-Safety Tags 的目标是将这些**非结构化的文档注释**转化为**可机器解析、可验证的标注**。
+### 标准 Tag 库设想
+
+| Tag | 语义 | 适用场景 |
+|:---|:---|:---|
+| `valid_ptr(p)` | `p` 是非空且已分配的指针 | 所有解引用操作 |
+| `aligned(p)` | `p` 满足 `T` 的对齐要求 | 非包装解引用 |
+| `non_overlapping(a, b)` | `a` 和 `b` 的内存范围不重叠 | `copy_nonoverlapping` |
+| `initialized(p)` | `p` 指向已初始化的内存 | `read` / 转型 |
+| `no_alias(p)` | `p` 在生命周期内是唯一的访问路径 | `&mut` 构造 |
+| `valid_utf8(s)` | `s` 是合法的 UTF-8 字节序列 | `str::from_utf8_unchecked` |
 
 ---
 
-## 2. 动机与背景
+## 与现有工具的协同
+
+```text
+Safety Tags 生态:
+┌─────────────────────────────────────────┐
+│  开发者: 编写带 #[safety_tag] 的代码      │
+└─────────────────────────────────────────┘
+           │
+    ┌──────┴──────┬──────────────┐
+    ▼             ▼              ▼
+┌─────────┐  ┌─────────┐   ┌───────────┐
+│ Miri    │  │ Clippy  │   │ Safety    │
+│ 运行时  │  │ 静态检查 │   │ Auditor   │
+│ 验证    │  │ lint    │   │ (报告生成) │
+└─────────┘  └─────────┘   └───────────┘
+```
+
+---
+
+## 当前状态（2026-05）
+
+| 方面 | 状态 |
+|:---|:---:|
+| RFC 草案 | 🔴 尚未提交 |
+| 社区讨论 | 🟡 Rust Internals / Zulip 活跃讨论 |
+| 原型实现 | 🔴 无 |
+| Rust-for-Linux 兴趣 | 🟢 已表达强烈兴趣 |
+| 预计 RFC 时间 | 2026 H2 |
+
+---
+
+## 行动建议
+
+1. **跟踪** [Rust Internals 论坛](https://internals.rust-lang.org/) 的 Safety Tags 讨论
+2. **准备** 在项目中统一 Safety Comment 格式，为迁移做准备
+3. **实验** 使用现有 `#[doc = "SAFETY: ..."]` 规范化为结构化注释
+
+---
+
+> **权威来源**: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Rust-for-Linux Mailing List](https://lore.kernel.org/rust-for-linux/)
 >
-> **[来源: Rust Official Docs]**
-
-### 当前问题
-
-| 问题 | 示例 | 后果 |
-|------|------|------|
-| 文档注释不一致 | 有的写 `# Safety`，有的写 `SAFETY:` | 工具难以统一处理 |
-| 条件表达不精确 | "指针必须有效" — 什么叫"有效"？ | 模糊契约导致 UB |
-| 无法静态检查 | 编译器不验证 safety 注释 | 违反契约只能在运行时发现 |
-| 新人理解困难 | 需要阅读大量文档才能正确使用 unsafe API | 学习曲线陡峭 |
-
-### 相关项目
-
-- **Rust-for-Linux**: 内核编程对 safety 契约有极高要求
-- **Miri**: 已在运行时检测部分 UB，但无法验证 safety 契约
-- **Kani**: 形式化验证工具，可以证明某些 safety 属性
-- **Prusti**: 基于 Viper 的 Rust 验证器
-
----
-
-## 3. 设计提案概览
-
-### 可能的语法方向（基于社区讨论）
-
-```rust
-// 方向 1：属性标注
-#[safety(
-    precondition = "ptr.is_non_null()",
-    precondition = "ptr.is_aligned_for::<T>()",
-    precondition = "ptr.is_valid_for_read()",
-)]
-pub unsafe fn read<T>(ptr: *const T) -> T {
-    // ...
-}
-
-// 方向 2：Doc comment 结构化
-/// # Safety
-/// @safety.ptr: non_null
-/// @safety.ptr: aligned
-/// @safety.ptr: valid_for_read
-pub unsafe fn read<T>(ptr: *const T) -> T {
-    // ...
-}
-
-// 方向 3：类型系统编码（长期愿景）
-pub unsafe fn read<T>(ptr: NonNull<T>) -> T {
-    // NonNull 类型本身编码了 non-null 条件
-}
-```
-
-### 验证层次
-
-```mermaid
-graph TD
-    A[Safety Tags 验证层次] --> B[文档级]
-    A --> C[Lint 级]
-    A --> D[静态分析级]
-    A --> E[形式化验证级]
-
-    B --> B1[统一注释格式]
-    C --> C1[Clippy 检查标签完整性]
-    D --> D1[Miri / Kani 运行时检测]
-    E --> E1[Prusti 数学证明]
-```
-
----
-
-## 4. 与现有实践的关系
-
-### Rust 标准库的 Safety 注释规范
-
-Rust 标准库已建立了相对统一的 `# Safety` 文档格式：
-
-```rust
-/// # Safety
-///
-/// - The pointer must be properly aligned.
-/// - It must be "dereferencable" in the sense defined in [the module documentation].
-/// - The pointer must point to an initialized instance of `T`.
-///
-/// [the module documentation]: pointer#safety
-pub unsafe fn as_ref<'a>(&self) -> Option<&'a T> {
-    // ...
-}
-```
-
-### Safety Tags 的演进路径
-
-```
-当前：非结构化文档注释
-  → 短期：结构化 doc comment（@safety 标签）
-    → 中期：Clippy lint 检查完整性
-      → 长期：属性标注 + 静态验证
-        → 愿景：类型系统编码安全条件
-```
-
----
-
-## 5. 对本项目的影响
-
-### 建议行动
-
-1. **统一现有 unsafe 代码的 safety 注释格式**
-   - 所有 `unsafe fn` 必须包含 `# Safety` 文档块
-   - 使用标准库风格的 bullet list 格式
-
-2. **建立项目级的 safety 注释规范**
-
-   ```markdown
-   ### Safety 注释模板
-
-   ```rust
-   /// # Safety
-   ///
-   /// ## 前提条件
-   /// - 条件 1：...
-   /// - 条件 2：...
-   ///
-   /// ## 违反后果
-   /// - UB 类型 1：...
-   /// - UB 类型 2：...
-   ///
-   /// ## 示例（正确用法）
-   /// ```rust
-   /// // 展示如何安全调用
-   /// ```
-   pub unsafe fn foo(...) { ... }
-   ```
-
-3. **跟踪 Safety Tags RFC 进展**
-   - 监控 rust-lang/rfcs 仓库
-   - 在 Safety Tags 稳定后及时更新项目代码
-
----
-
-## 参考资源
-
-- [Rust Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)
-- [Rust-for-Linux Safety Requirements](https://docs.kernel.org/rust/index.html)
-- [Miri: Undefined Behavior Detection](https://github.com/rust-lang/miri)
-- [Kani: Rust Verifier](https://github.com/model-checking/kani)
-
----
-
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
->
-> **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
-
-**文档版本**: 1.1
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+> **文档版本**: 1.0
+> **对应 Rust 版本**: 1.95.0+ (Edition 2024)
+> **最后更新**: 2026-05-21
+> **状态**: 🟡 预研跟踪

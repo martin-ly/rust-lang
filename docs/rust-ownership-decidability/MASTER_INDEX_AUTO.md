@@ -3,6 +3,7 @@
 > Auto-generated cross-reference index for the Rust Ownership Decidability documentation.
 
 ## Table of Contents
+>
 > **[来源: Rust Official Docs]**
 
 - [Documentation Master Index](#documentation-master-index)
@@ -25,13 +26,16 @@
     - [Async Ecosystem](#async-ecosystem)
   - [Cross-Reference Map](#cross-reference-map)
     - [Files Referenced By](#files-referenced-by)
+  - [*This index was auto-generated. Last updated: 2026-03-06T11:41:17.918595*](#this-index-was-auto-generated-last-updated-2026-03-06t114117918595)
 
 ---
 
 ## Documentation Structure
+>
 > **[来源: Rust Official Docs]**
 
 ### Core Documentation
+>
 > **[来源: Rust Official Docs]**
 
 | Document | Description |
@@ -73,19 +77,19 @@
 
 ### Ownership System
 
-- **Theory**: [ownership-types.md](formal-foundations/models/02-02-ownership-types.md)
+- **Theory**: ownership-types.md (待补充)
 - **Practice**: [ownership-deep-dive.md](01-core-concepts/detailed-concepts/ownership-deep-dive.md)
 - **Examples**: See examples in [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md)
 
 ### Borrowing System
 
-- **Theory**: [borrow-semantics.md](formal-foundations/models/02-03-borrow-semantics.md)
+- **Theory**: borrow-semantics.md (待补充)
 - **Practice**: [borrowing-in-depth.md](01-core-concepts/detailed-concepts/borrowing-in-depth.md)
 - **Coq Proof**: [ReborrowComplete.v](coq-formalization/theories/Advanced/ReborrowComplete.v)
 
 ### Lifetimes
 
-- **Theory**: [lifetime-logic.md](formal-foundations/models/02-04-lifetime-logic.md)
+- **Theory**: lifetime-logic.md (待补充)
 - **Practice**: [lifetimes-mastery.md](01-core-concepts/detailed-concepts/lifetimes-mastery.md)
 - **Coq Proof**: [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v)
 

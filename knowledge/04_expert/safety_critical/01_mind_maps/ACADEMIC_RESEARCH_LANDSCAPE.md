@@ -373,3 +373,10 @@ ERC (欧洲):
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust生态系统思维导图](RUST_ECOSYSTEM_MIND_MAP.md)
+- [综合语言对比矩阵](../02_matrices/COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)

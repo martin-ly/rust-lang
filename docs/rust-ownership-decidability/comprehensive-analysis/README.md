@@ -5,19 +5,22 @@
 ---
 
 ## 📚 完整文档导航
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心分析文档
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 行数 | 核心内容 |
 |:---|:---:|:---|
 | [设计模式深度分析](design-patterns-comprehensive.md) | 401 | 8个模式形式化定义与定理证明 |
-| [架构模型对比](architecture-models-comparison.md) | 383 | 5种架构模型Rust适配度分析 |
+| 架构模型对比 (待补充) | 383 | 5种架构模型Rust适配度分析 |
 | [开源库深度分析](open-source-analysis.md) | 469 | 8个核心库形式化评估 |
 | [完成报告](COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
 
 ### 🗺️ 可视化资源 (4类10+篇)
+>
 > **[来源: Rust Official Docs]**
 
 #### 思维导图 (Mind Maps)
@@ -69,7 +72,7 @@
 |:---|:---|:---|
 | 高级所有权模式 | [extensions/advanced-ownership-patterns.md](extensions/advanced-ownership-patterns.md) | 自引用、递归、类型擦除 |
 | 性能优化 | [extensions/performance-optimization.md](extensions/performance-optimization.md) | 编译器、内存、并发优化 |
-| 研究前沿 | [extensions/research-frontiers.md](extensions/research-frontiers.md) | GATs、验证工具、路线图 |
+| 研究前沿 | extensions/research-frontiers.md (待补充) | GATs、验证工具、路线图 |
 
 ---
 
@@ -134,7 +137,7 @@ Thm EMBASSY-SAFETY-1: Embassy保证嵌入式内存安全
 ### 架构师
 
 ```text
-1. architecture-models-comparison.md → scenario-trees/
+1. architecture-models-comparison.md (待补充) → scenario-trees/
 2. matrices/ → 技术选型
 3. extensions/research-frontiers.md → 前瞻技术
 ```
@@ -185,6 +188,7 @@ Thm EMBASSY-SAFETY-1: Embassy保证嵌入式内存安全
 
      Systematic · Authoritative · Formal · Comprehensive · Complete
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

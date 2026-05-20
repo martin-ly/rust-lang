@@ -706,3 +706,10 @@ async fn graceful_shutdown() {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Deployment 部署](README.md)
+- [Databases 数据库](../databases/README.md)

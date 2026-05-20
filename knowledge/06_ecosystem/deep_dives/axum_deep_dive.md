@@ -724,3 +724,10 @@ async fn test_get_user() {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Deep Dives 深度解析](README.md)
+- [Tokio 运行时深度解析](tokio_deep_dive.md)

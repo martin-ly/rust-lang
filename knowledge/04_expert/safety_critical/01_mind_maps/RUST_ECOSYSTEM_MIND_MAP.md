@@ -147,3 +147,10 @@
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [学术研究全景](ACADEMIC_RESEARCH_LANDSCAPE.md)
+- [综合语言对比矩阵](../02_matrices/COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)

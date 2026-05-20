@@ -83,7 +83,14 @@
       - [`String` 的 UTF-8 不变性与内存布局](#string-的-utf-8-不变性与内存布局)
       - [`HashMap<K, V>` 的 SwissTable 算法](#hashmapk-v-的-swisstable-算法)
     - [5.10 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比](#510-stdallocsystem-vs-jemalloc-vs-mimalloc-对比)
-  - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
+  - [十一、补充章节：Field Projections（Beyond the `&` 旗舰主题）](#十一补充章节field-projectionsbeyond-the--旗舰主题)
+    - [11.1 问题定义：智能指针的"最后一公里"](#111-问题定义智能指针的最后一公里)
+    - [11.2 Pin 投影：当前最成熟的 Field Projection](#112-pin-投影当前最成熟的-field-projection)
+    - [11.3 Field Projections 提案设计](#113-field-projections-提案设计)
+    - [11.4 形式化语义：Projection 作为类型构造子](#114-形式化语义projection-作为类型构造子)
+    - [11.5 与 In-place Initialization 的协同](#115-与-in-place-initialization-的协同)
+    - [11.6 演进路线与跟踪](#116-演进路线与跟踪)
+  - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
 
@@ -1364,7 +1371,137 @@ vec.extend(0..1_000_000);
 
 ---
 
-## 十一、待补充与演进方向（TODOs）
+## 十一、补充章节：Field Projections（Beyond the `&` 旗舰主题）
+
+> **[来源: Rust Project Goals 2026 — Beyond the &]** · **[RFC: Arbitrary Self Types v2]** · **[Pin Projection 形式化语义]** ✅
+
+### 11.1 问题定义：智能指针的"最后一公里"
+
+**Bloom 层级**: 评价 → 创造
+
+当前 Rust 中，通过智能指针访问字段需要**显式解引用**：
+
+```rust
+let rc = Rc::new(Point { x: 1, y: 2 });
+let x = (*rc).x;        // 或 rc.deref().x
+let x = Rc::deref(&rc).x; // 最显式形式
+```
+
+而 `&T` / `&mut T` 可直接投影：`&point.x`。这种**不对称性**是 "Beyond the `&`" 旗舰主题的核心痛点。
+
+### 11.2 Pin 投影：当前最成熟的 Field Projection
+
+`Pin<P<T>>` 已支持字段投影（通过 unsafe `pin_project` 宏或 safe `pin!`）：
+
+```rust
+use std::pin::{pin, Pin};
+
+struct SelfRef {
+    data: String,
+    // 指向 data 内部的引用
+    ptr: *const u8,
+}
+
+impl SelfRef {
+    // Pin 投影：获取 Pin<&mut String> 而不破坏地址不变性
+    fn data_pin(self: Pin<&mut Self>) -> Pin<&mut String> {
+        // 关键：Pin 投影保持 !Unpin 类型的地址稳定性
+        unsafe { self.map_unchecked_mut(|s| &mut s.data) }
+    }
+}
+```
+
+**Pin 投影的形式化保证**：
+
+```text
+给定: Pin<P<T>>, T: !Unpin
+投影: Pin<P<T>>.field → Pin<P<FieldType>>
+保证:
+  1. 地址稳定性传递: addr(P<T>.field) = addr(P<T>) + offset(field)
+  2. 移动禁止传递: T: !Unpin ⟹ FieldType: !Unpin (若字段含自引用)
+  3. Drop 顺序保持: T 的 drop 按字段声明逆序执行
+```
+
+### 11.3 Field Projections 提案设计
+
+**目标**: 允许所有智能指针（`Box<T>`, `Rc<T>`, `Arc<T>`, `Pin<P<T>>`）直接投影字段。
+
+**核心问题**：投影后的类型是什么？
+
+| 容器类型 | 当前访问 | 投影后类型（提案） | 关键约束 |
+|:---|:---|:---|:---|
+| `&T` | `&t.field` | `&FieldType` | ✅ 已支持 |
+| `&mut T` | `&mut t.field` | `&mut FieldType` | ✅ 已支持 |
+| `Box<T>` | `(*bx).field` | `Box<FieldType>` | 需 `Unpin` 或显式 unsafe |
+| `Rc<T>` | `(*rc).field` | `Rc<FieldType>` | 引用计数共享语义 |
+| `Arc<T>` | `(*arc).field` | `Arc<FieldType>` | 线程安全共享语义 |
+| `Pin<P<T>>` | `pin.data_pin()` | `Pin<P<FieldType>>` | 地址稳定性保持 |
+
+**与 Deref 的本质区别**：
+
+```text
+Deref:     SmartPtr<T> → &T        (借用转换)
+Projection: SmartPtr<T> → SmartPtr<Field> (容器保持)
+```
+
+Deref 丢失容器信息（引用计数、Pin 保证），Projection 保持容器语义。
+
+### 11.4 形式化语义：Projection 作为类型构造子
+
+```text
+定义: Proj(P, T, field_i) = P<FieldType_i>
+
+公理 1 (类型保持):
+  P<T>: Deref<Target=T> ⟹ Proj(P, T, field_i): Deref<Target=FieldType_i>
+
+公理 2 (地址关系):
+  addr(Proj(P, T, field_i)) = addr(P<T>) + offset(field_i)
+
+公理 3 (生命周期继承):
+  'a: lifetime(P<T>) ⟹ 'a: lifetime(Proj(P, T, field_i))
+
+公理 4 (Pin 保持):
+  P<T> = Pin<Q<T>> ∧ T: !Unpin ⟹ Proj(P, T, field_i) = Pin<Q<FieldType_i>>
+```
+
+### 11.5 与 In-place Initialization 的协同
+
+Field Projections 是 **in-place initialization**（原地初始化）的前提：
+
+```rust,ignore
+// 愿景：无需先构造完整 T 再包装
+let box_point: Box<Point> = Box::uninit();
+box_point.x.write(1);  // 直接投影并初始化字段
+box_point.y.write(2);  // 无需构造临时 Point { x: 1, y: 2 }
+```
+
+**与 `MaybeUninit<T>` 的关系**：
+
+```text
+Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
+允许: 逐个字段初始化，最后 assume_init()
+禁止: 未初始化字段的读取
+```
+
+### 11.6 演进路线与跟踪
+
+| 里程碑 | 状态 | 预计时间 |
+|:---|:---:|:---:|
+| Pin 投影稳定化 | ✅ 已稳定 | — |
+| `pin!` 宏稳定化 | ✅ 已稳定 (1.95) | — |
+| Arbitrary Self Types v2 | 🟡 推进中 | 2026–2027 |
+| Generic Field Projections | 🔴 设计阶段 | 2027+ |
+| In-place Initialization | 🔴 RFC 阶段 | 2027+ |
+
+**关键跟踪**：
+
+- [Rust Project Goals: Beyond the &](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+- Tracking Issue: Arbitrary Self Types v2
+- WG: Safe Pin Projection (formal verification)
+
+---
+
+## 十二、待补充与演进方向（TODOs）
 
 - [x] **TODO**: 补充自定义 Allocator（`#[global_allocator]`） —— 优先级: 中 —— 已完成 §5.7
 - [x] **TODO**: 补充 `ManuallyDrop<T>` 与 `mem::forget` 的形式化分析 —— 优先级: 中 —— 已完成 §5.8
@@ -1372,6 +1509,8 @@ vec.extend(0..1_000_000);
 - [x] **TODO**: 补充 `std::alloc::System` vs `jemalloc` vs `mimalloc` 对比 —— 优先级: 低 —— 已完成 §5.10
 - [x] **TODO**: 补充 `MaybeUninit<T>` 与 `MaybeDangling` 的完整边界分析 —— 优先级: 中 —— 已完成 §补充章节
 - [x] **TODO**: 补充 `Pin<Box<T>>` 与自引用结构的形式化语义 —— 优先级: 低 —— 已完成 §5.5
+- [x] **TODO**: 补充 Field Projections（Beyond the & 旗舰主题、Pin 投影、in-place initialization） —— 优先级: **高** —— 已完成 §十一 —— 2026-05-21
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

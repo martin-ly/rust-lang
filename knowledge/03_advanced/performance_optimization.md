@@ -387,3 +387,10 @@ if likely(normal_condition()) {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [延迟初始化 (Lazy Initialization)](lazy_initialization.md)
+- [03 - 高级 Rust](README.md)

@@ -590,3 +590,10 @@ where
 > **权威来源对齐变更日志**: 2026-05-19 新增 RFC 2000 设计决策来源标注、Const Eval 不稳定特性文档引用 [来源: Authority Source Sprint Batch 8]
 
 **状态**: 🧪 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Async Closures (异步闭包)](async_closures.md)
+- [Emerging 前沿特性](README.md)

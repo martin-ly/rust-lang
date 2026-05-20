@@ -693,3 +693,10 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust安全保证公理定理推理决策树](RUST_AXIOMATIC_REASONING_TREES.md)
+- [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

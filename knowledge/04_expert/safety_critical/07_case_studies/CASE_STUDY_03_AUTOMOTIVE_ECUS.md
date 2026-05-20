@@ -488,3 +488,10 @@ fn critical_calculation(x: u32) -> u32 {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [案例研究1: Ferrocene认证工具链](CASE_STUDY_01_FERROCENE_CERTIFICATION.md)
+- [案例研究2: NASA核心飞行系统(cFS) Rust集成](CASE_STUDY_02_NASA_CFS_RUST.md)

@@ -402,3 +402,10 @@ IEC 61508:
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [教育与培训路线图](EDUCATION_AND_TRAINING_ROADMAP.md)
+- [Rust 2026-2030 前瞻性路线图预测](RUST_2026_2030_ROADMAP_FORECAST.md)

@@ -861,3 +861,10 @@ fn main() {
 - ISO C++20 §20.11 — *Smart pointers* [来源: `std::unique_ptr`/`shared_ptr`/`weak_ptr` 的 RAII 语义]
 - GHC User's Guide — `Data.STRef`, `Data.IORef` [来源: Haskell 通过 monad 隔离实现可变引用的模式]
 - Go Language Specification — Memory Model [来源: Go 依赖 GC 而非所有权系统管理堆内存]
+
+---
+
+## 相关概念
+
+- [集合类型 (Collections)](collections.md)
+- [错误处理 (Error Handling)](error_handling.md)

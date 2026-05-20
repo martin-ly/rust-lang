@@ -647,3 +647,10 @@ pub enum TestResult {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [IEC 61508 Rust实施指南](IEC_61508_RUST_IMPLEMENTATION_GUIDE.md)
+- [ISO 26262 Rust实施指南](ISO_26262_RUST_IMPLEMENTATION_GUIDE.md)

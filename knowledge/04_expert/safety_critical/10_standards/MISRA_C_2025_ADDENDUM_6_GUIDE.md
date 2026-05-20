@@ -365,3 +365,10 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [DO-178C Rust合规路径](DO_178C_RUST_COMPLIANCE_PATHWAY.md)
+- [IEC 61508 Rust实施指南](IEC_61508_RUST_IMPLEMENTATION_GUIDE.md)

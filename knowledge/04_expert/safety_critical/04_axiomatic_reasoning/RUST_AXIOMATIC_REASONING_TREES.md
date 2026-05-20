@@ -380,3 +380,10 @@
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [形式化验证实战指南](FORMAL_VERIFICATION_PRACTICAL_GUIDE.md)
+- [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

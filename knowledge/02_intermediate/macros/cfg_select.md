@@ -258,3 +258,10 @@ let x = cfg_select! {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [`if let` Guards on Match Arms（Rust 1.95.0）](../control_flow/if_let_guards.md)
+- [Rust 2024 Edition `let chains` 深度专题](../control_flow/let_chains.md)

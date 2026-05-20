@@ -1,7 +1,7 @@
 # Rust 所有权系统可判定性 - 完整知识库
 
 [![Completion](https://img.shields.io/badge/Completion-100%25-brightgreen)](FINAL_100_PERCENT_COMPLETION_REPORT.md)
-[![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](meta-model/RUST_195_COMPREHENSIVE_GUIDE.md)
+[![Rust Version](https://img.shields.io/badge/Rust-1.95-blue)](#)
 [![Documentation](https://img.shields.io/badge/Docs-586%20files%20|%20600K%2B%20words-informational)](FINAL_MASTER_INDEX.md)
 [![Coq](https://img.shields.io/badge/Coq-11%2C980%2B%20lines%20%7C%20300%20Qed-orange)](coq-formalization/README.md)
 [![Status](https://img.shields.io/badge/Status-Network%20Aligned%20100%25-success)](AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
@@ -20,6 +20,7 @@
 ---
 
 ## 🧭 快速导航
+>
 > **[来源: Rust Official Docs]**
 
 > **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
@@ -38,9 +39,11 @@
 ---
 
 ## 📁 目录索引
+>
 > **[来源: Rust Official Docs]**
 
 ### 🟢 01-核心概念 / `01-core-concepts/`
+>
 > **[来源: Rust Official Docs]**
 
 **目的**: Rust所有权系统核心机制详解
@@ -455,7 +458,7 @@ Async专题:    ████████████████████ 100
 |:-----|:-----|
 | [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
 | [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md) | 自动生成的交叉引用索引 |
-| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_VERIFICATION_REPORT.md) | 链接验证报告 |
+| CROSS_REFERENCE_VERIFICATION_REPORT.md (待补充) | 链接验证报告 |
 
 ### 快速链接
 
@@ -503,7 +506,7 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 ### 如何报告问题
 
 1. **文档错误**: 提交Issue，标注文件路径和错误内容
-2. **链接失效**: 参考 [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_VERIFICATION_REPORT.md)
+2. **链接失效**: 参考 CROSS_REFERENCE_VERIFICATION_REPORT.md (待补充)
 3. **内容建议**: 描述建议改进的具体部分
 
 ### 当前限制

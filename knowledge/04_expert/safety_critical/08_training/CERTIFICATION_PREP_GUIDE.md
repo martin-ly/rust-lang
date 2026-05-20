@@ -535,3 +535,10 @@ ISO 26262考试 (3小时):
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [评估与认证体系](ASSESSMENT_AND_CERTIFICATION.md)
+- [动手实验练习](HANDS_ON_LAB_EXERCISES.md)

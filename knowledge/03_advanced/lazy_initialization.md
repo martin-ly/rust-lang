@@ -873,3 +873,10 @@ fn reload_config() {
 **对应 Rust 版本**: 1.96.0 (accessors) / 1.80.0 (types)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [性能优化](performance_optimization.md)
+- [03 - 高级 Rust](README.md)

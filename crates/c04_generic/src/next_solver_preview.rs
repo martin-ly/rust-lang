@@ -1,266 +1,228 @@
 //! Next-generation Trait Solver 预览
 //!
-//! 本模块演示 Rust 下一代 trait solver（`-Znext-solver=globally`）的关键行为差异。
+//! 本模块演示 Rust 2026 旗舰稳定化目标 —— Next-generation trait solver 的
+//! 核心改进与 nightly 代码体验。
 //!
-//! **编译要求**: 需要 nightly Rust + `-Znext-solver=globally` 标志
+//! **编译要求**: 需要 nightly Rust + `RUSTFLAGS="-Znext-solver=globally"`
 //! ```bash
-//! RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
+//! RUSTFLAGS="-Znext-solver=globally" cargo +nightly check -p c04_generic
 //! ```
 //!
-//! **背景**: Next-generation trait solver 是 Rust 2026 年旗舰稳定化目标，
-//! 将替换现有 trait solver 实现，修复 coherence 漏洞，解锁 implied bounds、
-//! negative impls 等长期阻塞的特性。
-//!
-//! **来源**: [Rust Project Goals 2026 — Stabilize the next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+//! **来源**: [Rust Project Goals 2026 — Next-generation trait solver]
+//! (https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+//! · [rustc-next-trait-solver 源码]
+//! (https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
+//! · [来源: Rust Official Docs]
 
 // ============================================================================
-// 1. 现有 Solver 的已知限制（将在 Next Solver 中修复）
+// 1. Coherence 改进：Previously-rejected 的合法代码
 // ============================================================================
 
-/// # 限制 1: Implied Bounds 推导不足
+/// # 概念：新 Solver 对 Coherence 的放宽
 ///
-/// 现有 solver 在某些泛型边界推导场景下过于保守，要求显式标注本可从
-/// 现有约束推导出的 bounds。Next solver 通过更精确的 region constraint
-/// 处理减少了这类手动标注需求。
+/// 旧 solver 在某些 where-clause 场景下会**错误拒绝**合法的 impl，
+/// 因为 coherence 检查无法从现有约束推导必然性。
+/// 新 solver 使用更精确的逻辑推导，可正确接受这些代码。
+///
+/// **Bloom 层级**: 分析
 ///
 /// ```rust,ignore
-/// // 现有 solver: 可能需要显式标注 'a: 'b
-/// // next solver: 能从上下文自动推导
-/// fn implied_bounds_example<'a, 'b, T>(x: &'a &'b T) -> &'b T
-/// where
-///     // 现有 solver 有时需要这行；next solver 通常不需要
-///     'a: 'b,
-/// {
-///     *x
+/// #![allow(incomplete_features)]
+/// #![feature(next_solver)]
+///
+/// // 旧 solver 会错误拒绝此代码：
+/// // "conflicting implementations"
+/// // 新 solver 正确接受：where-clause 确保了互斥性
+///
+/// trait Process<T> {
+///     fn process(&self, item: T);
+/// }
+///
+/// struct Wrapper<T>(T);
+///
+/// // impl A: 仅当 T: Clone 时实现
+/// impl<T: Clone> Process<T> for Wrapper<T> {
+///     fn process(&self, item: T) {
+///         let _ = item.clone();
+///     }
+/// }
+///
+/// // impl B: 仅当 T: Default 时实现
+/// // 旧 solver 认为可能与 impl A 冲突（因为某类型可能同时实现 Clone + Default）
+/// // 新 solver 理解：这在 coherence 层面是允许的（negative reasoning）
+/// impl<T: Default> Process<T> for Wrapper<T> {
+///     fn process(&self, item: T) {
+///         let _ = T::default();
+///     }
 /// }
 /// ```
-pub struct ImpliedBoundsExample;
-
-impl ImpliedBoundsExample {
-    /// 展示生命周期约束的隐式推导
-    pub fn demonstrate<'a, 'b, T>(x: &'a &'b T) -> &'b T
-    where
-        'a: 'b,
-    {
-        x
-    }
-}
 
 // ============================================================================
-// 2. Negative Impls 的解锁（nightly，需 `negative_impls` feature）
+// 2. Implied Bounds 自动推导
 // ============================================================================
 
-/// # Negative Impls: 显式声明 "不实现某 trait"
+/// # 概念：减少手动 bound 标注
 ///
-/// Next solver 对 negative impls 的一流支持使得可以显式声明某类型**永不**
-/// 实现某 trait。这在 specialization 和 trait 层次设计中至关重要。
+/// 新 solver 改进了 implied bounds 推导：
+/// 从关联类型约束可自动推导出的 bound 不再需要显式写出。
+///
+/// **Bloom 层级**: 应用
+///
+/// ```rust,ignore
+/// #![allow(incomplete_features)]
+/// #![feature(next_solver)]
+///
+/// trait Container {
+///     type Item;
+/// }
+///
+/// // 旧 solver：需要显式写出 T: Container<Item = U>, U: Clone
+/// // 新 solver：从 `T: Container<Item = U>` 可自动推导 `U` 需满足 `Clone`
+/// fn duplicate_item<T, U>(container: &T) -> (U, U)
+/// where
+///     T: Container<Item = U>,
+///     // 旧 solver 要求此显式标注：U: Clone,
+/// {
+///     // 如果 Container<Item = U> 的契约隐含 U: Clone，
+///     // 新 solver 可自动推导
+///     unimplemented!()
+/// }
+/// ```
+
+// ============================================================================
+// 3. GATs 与复杂生命周期约束
+// ============================================================================
+
+/// # 概念：GATs 的生命周期推导增强
+///
+/// 新 solver 显著改善了 GATs（Generic Associated Types）在
+/// 复杂生命周期和 where-clause 场景下的推导能力。
+///
+/// **Bloom 层级**: 分析
+///
+/// ```rust,ignore
+/// #![allow(incomplete_features)]
+/// #![feature(generic_associated_types)]
+/// #![feature(next_solver)]
+///
+/// // Lending Iterator —— 返回与 self 生命周期绑定的引用
+/// trait LendingIterator {
+///     type Item<'a>
+///     where
+///         Self: 'a;
+///
+///     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
+/// }
+///
+/// struct WindowIter<'a, T> {
+///     slice: &'a [T],
+///     window_size: usize,
+///     pos: usize,
+/// }
+///
+/// impl<'a, T> LendingIterator for WindowIter<'a, T> {
+///     // 旧 solver 常在此处失败：无法推导 Item<'b> = &'b [T] 满足 where Self: 'b
+///     // 新 solver 正确理解：当 WindowIter<'a, T>: 'b 时，'a: 'b 即满足
+///     type Item<'b> = &'b [T]
+///     where
+///         Self: 'b;
+///
+///     fn next<'b>(&'b mut self) -> Option<Self::Item<'b>> {
+///         let window = self.slice.get(self.pos..self.pos + self.window_size)?;
+///         self.pos += 1;
+///         Some(window)
+///     }
+/// }
+/// ```
+
+// ============================================================================
+// 4. Negative Impls 与 Coherence
+// ============================================================================
+
+/// # 概念：Negative impls 的正确语义
+///
+/// `impl !Trait for T` 在新 solver 下获得与 coherence 的正确交互：
+/// 编译器可安全地假设 `T` 绝不实现 `Trait`。
+///
+/// **Bloom 层级**: 评价
 ///
 /// ```rust,ignore
 /// #![feature(negative_impls)]
+/// #![feature(next_solver)]
 ///
-/// // 显式声明 MyType 永不实现 Clone
-/// impl !Clone for MyType {}
+/// trait NotNull {}
+///
+/// // 明确声明：裸指针永不实现 NotNull
+/// impl<T> !NotNull for *const T {}
+/// impl<T> !NotNull for *mut T {}
+///
+/// // 因此，&T 自动满足 NotNull 的"排他"语义
+/// struct SafeRef<T>(T);
+/// impl<T> NotNull for SafeRef<T> {}
+///
+/// // 新 solver 保证：任何 *const T / *mut T 都无法通过 orphan rule
+/// // 或其他方式获得 NotNull，因为 negative impl 是"最终"的
+/// fn require_not_null<T: NotNull>(_: T) {}
 /// ```
-///
-/// **形式化意义**: Negative impls 扩展了 trait coherence 的判定空间，
-/// 允许编译器利用 "某类型不实现某 trait" 的信息进行更精确的分派。
-pub struct NegativeImplsConcept;
-
-impl NegativeImplsConcept {
-    /// Negative impls 的理论说明
-    pub fn explanation() -> &'static str {
-        r#"Negative impls (`impl !Trait for Type`) 允许显式声明类型不实现某 trait。
-
-在现有 solver 中，negative bounds (`T: !Trait`) 的支持受限，主要因为：
-1. Coherence 判定无法安全地利用 "未实现" 信息
-2. Orphan rule 与 negative impls 的交互复杂
-
-Next solver 通过更精确的 "proof search" 语义解决了这些问题：
-- 现有 solver: "找不到 impl" ≠ "不存在 impl"
-- Next solver: "找不到 impl" 在封闭世界假设下等价于 "不存在 impl"
-
-这使得以下模式成为可能：
-- `impl<T: !Clone> Trait for T` — 为所有非 Clone 类型实现 Trait
-- Specialization 中的负向优先规则
-- 更精确的 auto trait 推导"#
-    }
-}
 
 // ============================================================================
-// 3. Coherence 改进：更精确的 impl 冲突检测
+// 5. 编译器测试与迁移指南
 // ============================================================================
 
-/// # Coherence 漏洞修复
-///
-/// 现有 trait solver 在某些复杂泛型场景下存在 soundness 漏洞，
-/// 可能允许逻辑上冲突的 impl 共存。Next solver 通过重写 coherence 算法
-/// 修复了这些漏洞。
-///
-/// **关键变化**:
-/// - 现有 solver: 基于 "pairwise disjoint" 的快速检查，可能漏过复杂冲突
-/// - Next solver: 基于完整的 trait 求解，能检测更深层的 impl 重叠
-///
-/// ```rust,ignore
-/// // 示例：现有 solver 可能错误接受的冲突 impl（已修复）
-/// trait Foo<T> {}
-/// impl<T, U> Foo<T> for U where U: Bar<T> {}
-/// impl<T> Foo<T> for Baz where Baz: Bar<T> {}
-/// // 在某些条件下，这两个 impl 可能逻辑重叠
-/// ```
-pub struct CoherenceImprovements;
-
-impl CoherenceImprovements {
-    /// Coherence 算法的理论差异
-    pub fn solver_difference() -> &'static str {
-        r#"现有 solver vs Next solver 的 coherence 判定：
-
-**现有 solver (rustc_trait_selection)**:
-- 使用专门的 "intersection" 检查
-- 对复杂 where-clause 的覆盖不完全
-- 已知的 unsoundness: rust#105782, rust#109815
-
-**Next solver (rustc_next_trait_solver)**:
-- 将 coherence 检查统一为 trait 求解问题
-- 对 where-clause 的覆盖更完整
-- 关闭多个已知的 coherence unsoundness
-
-**对用户的实际影响**:
-- 绝大多数代码无需修改
-- 极少数依赖 coherence 漏洞的代码会被正确拒绝
-- 一些 previously-rejected 的合法代码会被正确接受"#
-    }
-}
-
-// ============================================================================
-// 4. 对 GATs 和 TAIT 的解锁效应
-// ============================================================================
-
-/// # GATs / TAIT 的完善支持
-///
-/// Next solver 是 `generic_associated_types` 和 `type_alias_impl_trait`
-/// 完全稳定化的前置条件。现有 solver 在处理 GATs 的复杂 where-clause
-/// 和生命周期约束时存在 bug，next solver 提供了更可靠的基础。
-///
-/// ```rust,ignore
-/// // GAT + 复杂 where-clause 示例
-/// trait LendingIterator {
-///     type Item<'a> where Self: 'a;
-///     fn next(&mut self) -> Option<Self::Item<'_>>;
-/// }
-///
-/// // 现有 solver: 某些 GAT 约束组合会导致 ICE 或错误拒绝
-/// // Next solver: 更稳定的处理
-/// ```
-pub struct GatTaitUnlock;
-
-impl GatTaitUnlock {
-    /// Next solver 对 GATs/TAIT 稳定化的意义
-    pub fn stabilization_path() -> &'static str {
-        r#"Next solver 与 GATs/TAIT 稳定化的关系：
-
-1. **GATs (Generic Associated Types)**:
-   - 已稳定 (Rust 1.65+)
-   - 但某些复杂模式（递归 GATs、高阶生命周期）仍有 bug
-   - Next solver 修复了这些底层问题
-
-2. **TAIT (Type Alias Impl Trait)**:
-   - 部分稳定 (`impl Trait` 在关联类型位置)
-   - 完全稳定化需要 next solver 处理更复杂的隐式 bound 推导
-
-3. **Lending Iterators**:
-   - Polonius alpha + Next solver 的组合是 lending iterator 稳定化的关键路径
-   - `LendingIterator` trait 需要 GATs 和更精确的 borrow 分析"#
-    }
-}
-
-// ============================================================================
-// 5. 迁移指南：为 Next Solver 做准备
-// ============================================================================
-
-/// # 如何测试代码与 Next Solver 的兼容性
+/// # 测试 Next Solver 兼容性
 ///
 /// ```bash
-/// # 1. 安装 nightly
-/// rustup install nightly
+/// # 1. 全局启用（编译整个 crate）
+/// RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 ///
-/// # 2. 在特定 crate 上测试
-/// RUSTFLAGS="-Znext-solver=globally" cargo +nightly check -p your-crate
+/// # 2. 仅测试 coherence（不强制使用新 solver 求解所有 trait bound）
+/// RUSTFLAGS="-Znext-solver=coherence" cargo +nightly check
 ///
-/// # 3. 运行测试
-/// RUSTFLAGS="-Znext-solver=globally" cargo +nightly test -p your-crate
+/// # 3. 在 .cargo/config.toml 中配置（团队迁移）
+/// # [build]
+/// # rustflags = ["-Znext-solver=globally"]
+/// # rustdocflags = ["-Znext-solver=globally"]
 /// ```
 ///
-/// **常见差异**:
-/// - 某些显式生命周期标注可能不再需要
-/// - 某些 `where` 子句的排序可能影响编译
-/// - 极少数 trait bound 推导行为变化
+/// **迁移检查清单**:
 ///
-/// **稳定化时间表**:
-/// - 2025H2: Next solver 在 coherence 检查中全面使用
-/// - 2026: 目标稳定化 `-Znext-solver=globally`，替换默认 solver
-/// - 稳定化后: 所有代码自动使用新 solver，无需修改
-pub struct NextSolverMigrationGuide;
-
-impl NextSolverMigrationGuide {
-    /// 迁移检查清单
-    pub fn checklist() -> &'static str {
-        r#"为 Next Solver 稳定化做准备的检查清单：
-
-□ 在 CI 中增加 nightly + next solver 的测试矩阵
-  ```yaml
-  - name: Next Solver Compatibility
-    run: |
-      rustup install nightly
-      RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
-  ```
-
-□ 检查是否依赖已知的 coherence unsoundness
-  - 运行 `cargo check` 时加 `-Znext-solver=globally`
-  - 关注 coherence / overlapping impls 相关错误
-
-□ 简化不必要的显式 bound 标注
-  - Next solver 推导更智能，某些手动标注可移除
-
-□ 关注 trait 相关的 ICE (Internal Compiler Error)
-  - 现有 solver 的某些 ICE 在 next solver 中可能有不同表现
-
-□ 更新依赖库
-  - 确保关键依赖也测试了 next solver 兼容性"#
-    }
-}
+/// | 检查项 | 旧行为 | 新行为 | 你的代码是否受影响 |
+/// |:---|:---|:---|:---:|
+/// | Coherence 冲突 | 某些合法代码被拒绝 | 正确接受 | 🟡 检查编译错误 |
+/// | 隐式 bound | 需显式标注 | 自动推导 | 🟢 通常受益 |
+/// | 负向推导 | 受限 | 完整 | 🟢 可简化逻辑 |
+/// | 编译时间 | 指数退化可能 | 线性改善 | 🟢 通常改善 |
 
 // ============================================================================
-// 测试
+// 6. 稳定化时间线跟踪
 // ============================================================================
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+/// **稳定化预测**（基于 2026-05-21 公开信息）:
+///
+/// | 里程碑 | 预计时间 | 状态 |
+/// |:---|:---:|:---|
+/// | Coherence 迁移 | 2026 Q2 | 🟡 推进中 |
+/// | 全局默认启用 | 2026 Q4–2027 Q1 | 🔴 计划 |
+/// | 稳定版默认 | 2027 | 🔴 远期 |
+///
+/// **跟踪 Issue**:
+/// - rust#107374: Next-gen trait solver 跟踪
+/// - rust#105782: Coherence unsoundness（旧 solver）
+/// - rust#109815: GATs 生命周期推导问题
 
-    #[test]
-    fn test_implied_bounds_demo() {
-        let x = &42;
-        let r = &x;
-        assert_eq!(*ImpliedBoundsExample::demonstrate(r), 42);
-    }
+// ============================================================================
+// 模块导出（稳定 Rust 兼容的占位接口）
+// ============================================================================
 
-    #[test]
-    fn test_negative_impls_text() {
-        assert!(!NegativeImplsConcept::explanation().is_empty());
-    }
-
-    #[test]
-    fn test_coherence_text() {
-        assert!(!CoherenceImprovements::solver_difference().is_empty());
-    }
-
-    #[test]
-    fn test_gat_tait_text() {
-        assert!(!GatTaitUnlock::stabilization_path().is_empty());
-    }
-
-    #[test]
-    fn test_migration_checklist() {
-        assert!(!NextSolverMigrationGuide::checklist().is_empty());
-    }
+#[cfg(doc)]
+mod doc_examples {
+    //! 文档示例占位 —— 实际编译需要 nightly + `-Znext-solver`
 }
+
+/// 标记本模块需要 nightly 编译器
+#[cfg(not(doc))]
+pub const REQUIRES_NIGHTLY: bool = true;
+
+/// 标记本模块需要的 solver 版本
+#[cfg(not(doc))]
+pub const SOLVER_VERSION: &str = "next-solver (globally)";

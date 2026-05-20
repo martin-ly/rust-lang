@@ -598,3 +598,10 @@ safety-d = ["formal-verification"]
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust安全关键系统 - 检查清单与模板](CHECKLISTS_AND_TEMPLATES.md)
+- [社区参与与贡献指南](COMMUNITY_AND_CONTRIBUTING.md)

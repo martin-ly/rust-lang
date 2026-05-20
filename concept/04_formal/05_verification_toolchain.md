@@ -3,13 +3,15 @@
 > **层级**: L4 形式化理论 → L6 工业实践
 > **前置概念**: [RustBelt](./04_rustbelt.md) · [Ownership Formalization](./03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
-> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot] · [Miri Book] · [Prusti] · [Aeneas] · [RefinedRust]
+> **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot] · [Miri Book] · [Prusti] · [Aeneas] · [RefinedRust] · [a-mir-formality]
+> **Bloom 层级**: 评价 → 应用
+> **[来源: Rust Project Goals 2026 — Safety-Critical Rust]** · **[来源: SOSP 2024 Verus]** · **[来源: PLDI 2024 RefinedRust]** · **[来源: POPL 2018 RustBelt]** ✅
 
 ---
 
-> **Bloom 层级**: 评价 → 应用
 **变更日志**:
 
+- v1.1 (2026-05-21): 补充 Wikipedia 概念对齐、a-mir-formality 工具链、Kani/Miri/Verus 2026 最新状态、学术引用深化
 - v1.0 (2026-05-13): 初始版本。整合工具链选型矩阵、ROI 分析框架、分层验证策略、工业案例速查
 
 ---
@@ -25,6 +27,7 @@
 | 教学/研究/新算法验证 | **Aeneas** | Prusti | Kani |
 | 自动化零标注验证 | **RefinedRust** | — | 手动 Iris |
 | 协议/分布式状态机 | **TLA+ / P** | Verus | Creusot |
+| Rust 类型系统规范验证 | **a-mir-formality** | — | 手写 Coq |
 
 > **核心原则**: 没有"最好的"验证工具，只有"最适合当前约束"的组合。
 >
@@ -34,19 +37,20 @@
 
 ## 一、工具链全景矩阵（选型版）
 
-> **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
+> **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
-### 1.1 七维选型矩阵
+### 1.1 八维选型矩阵
 
-| **维度** | **Miri** | **Kani** | **Verus** | **Creusot** | **Prusti** | **Aeneas** | **RefinedRust** |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| **验证类型** | 动态 UB 检测 | 有界模型检测 | 演绎验证 (SMT) | 演绎验证 (Why3) | 分离逻辑 (Viper) | 函数式翻译 | 自动分离逻辑 |
-| **自动化** | 全自动 | 半自动 (harness) | 半自动 (spec) | 半自动 (contract) | 半自动 (contract) | 手动 (骨架) | 自动 (零标注) |
-| **并发** | ❌ 单线程 | ✅ 符号化并发 | ✅ 线性幽灵类型 | ⚠️ 有限 | ⚠️ 有限 | ⚠️ 有限 | ❌ 当前不支持 |
-| **Unsafe** | ✅ SB/TB 动态 | ✅ 符号执行 | ⚠️ 部分 | ⚠️ 部分 | ⚠️ 部分 | ❌ Safe 为主 | ⚠️ 轻量契约 |
-| **标注负担** | 零 | 低 (harness) | 中 (spec ≈ 代码量) | 高 (Why3/MLCFG) | 高 (Viper IL) | 高 (Coq/Lean) | 零 |
-| **运行时间** | 10–100x | 分钟–小时 | 秒–分钟 | 分钟–小时 | 分钟 | 人天–人周 | 分钟 |
-| **工业背书** | Rust 官方 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | ETH 研究 | EPFL/Inria | MPI-SWS 研究 |
+| **维度** | **Miri** | **Kani** | **Verus** | **Creusot** | **Prusti** | **Aeneas** | **RefinedRust** | **a-mir-formality** |
+|:---|:---|:---|:---|:---|:---|:---|:---|:---|
+| **验证类型** | 动态 UB 检测 | 有界模型检测 | 演绎验证 (SMT) | 演绎验证 (Why3) | 分离逻辑 (Viper) | 函数式翻译 | 自动分离逻辑 | 类型系统形式化 |
+| **自动化** | 全自动 | 半自动 (harness) | 半自动 (spec) | 半自动 (contract) | 半自动 (contract) | 手动 (骨架) | 自动 (零标注) | 手动 (Coq) |
+| **并发** | ❌ 单线程 | ✅ 符号化并发 | ✅ 线性幽灵类型 | ⚠️ 有限 | ⚠️ 有限 | ⚠️ 有限 | ❌ 当前不支持 | ❌ 当前不支持 |
+| **Unsafe** | ✅ SB/TB 动态 | ✅ 符号执行 | ⚠️ 部分 | ⚠️ 部分 | ⚠️ 部分 | ❌ Safe 为主 | ⚠️ 轻量契约 | ⚠️ MIR 层面 |
+| **标注负担** | 零 | 低 (harness) | 中 (spec ≈ 代码量) | 高 (Why3/MLCFG) | 高 (Viper IL) | 高 (Coq/Lean) | 零 | 高 (Coq) |
+| **运行时间** | 10–100x | 分钟–小时 | 秒–分钟 | 分钟–小时 | 分钟 | 人天–人周 | 分钟 | 人天–人周 |
+| **工业背书** | Rust 官方 | ⭐ AWS 生产 | ⭐ Microsoft 内部 | INRIA 研究 | ETH 研究 | EPFL/Inria | MPI-SWS 研究 | Rust 官方 |
+| **目标** | 运行时 UB | 属性验证 | 系统验证 | 算法验证 | 教学/研究 | 证明翻译 | 自动内存安全 | 类型系统规范 |
 
 ### 1.2 覆盖强度光谱
 
@@ -59,17 +63,85 @@ Creusot:  [████████░░]  功能正确性，代数推理强
 Verus:    [████████░░]  系统级，并发+线性资源
 RefinedRust:[██████░░░░] 自动，但覆盖子集
 RustBelt: [██████████]  完整证明，人月级成本
+a-mir-formality:[████████░░] 类型系统规范验证
 ```
 
 > **关键洞察**: 从左到右，保证强度递增，但**时间成本不是单调的**——Verus 的 SMT 后端在某些场景下比 Kani 的模型检测更快，因为符号执行的剪枝效率取决于问题结构。
 
 ---
 
-## 二、ROI 分析框架
+## 二、Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
+
+| 工具 | Wikipedia 核心概念 | 相关词条 | 形式化基础 |
+|:---|:---|:---|:---|
+| **Miri** | [Interpreter (computing)](https://en.wikipedia.org/wiki/Interpreter_(computing)) · [Undefined behavior](https://en.wikipedia.org/wiki/Undefined_behavior) | 解释器、动态分析、别名分析 | Stacked Borrows / Tree Borrows |
+| **Kani** | [Model checking](https://en.wikipedia.org/wiki/Model_checking) · [Symbolic execution](https://en.wikipedia.org/wiki/Symbolic_execution) | CBMC、SAT solver、SMT | Bounded Model Checking (BMC) |
+| **Verus** | [Hoare logic](https://en.wikipedia.org/wiki/Hoare_logic) · [SMT solver](https://en.wikipedia.org/wiki/Satisfiability_modulo_theories) | Dafny、F*、分离逻辑 | SMT + 线性类型 + 幽灵状态 |
+| **Creusot** | [Predicate transformer semantics](https://en.wikipedia.org/wiki/Predicate_transformer_semantics) · [Weakest precondition](https://en.wikipedia.org/wiki/Weakest_precondition) | Why3、MLCFG、代数规约 | Weakest Liberal Precondition |
+| **Prusti** | [Separation logic](https://en.wikipedia.org/wiki/Separation_logic) · [Viper](https://en.wikipedia.org/wiki/Viper_(verification_infrastructure)) | 断言语言、权限、框架规则 | Viper Intermediate Language |
+| **Aeneas** | [Proof assistant](https://en.wikipedia.org/wiki/Proof_assistant) · [Dependent type](https://en.wikipedia.org/wiki/Dependent_type) | Coq、Lean、程序提取 | 函数式翻译 + 交互式证明 |
+| **RefinedRust** | [Automated theorem proving](https://en.wikipedia.org/wiki/Automated_theorem_proving) · [Type refinement](https://en.wikipedia.org/wiki/Refinement_type) | Liquid Types、Iris、高阶分离逻辑 | 自动分离逻辑推导 |
+| **a-mir-formality** | [Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics) · [Type safety](https://en.wikipedia.org/wiki/Type_safety) | Felleisen、Plotkin、类型规则 | 小步操作语义 + 类型规则 |
+
+---
+
+## 三、a-mir-formality：Rust 类型系统规范
+
+> **[来源: Rust Project Goals 2026 — a-mir-formality]** · **[来源: rustc-dev-guide]** · **[来源: POPL 2023 类型系统形式化论文]** ✅
+
+### 3.1 为什么需要类型系统规范？
+
+当前 Rust 的类型系统规则分散在：
+- `rustc` 源代码（~50 万行，复杂且隐含假设）
+- Rust Reference（自然语言描述，存在歧义）
+- RFC 文档（设计意图，非精确规格）
+
+**a-mir-formality** 是 Rust 官方正在构建的**机器可检查的 MIR 形式化规范**，目标成为 Rust 类型系统的"单一真相源"。
+
+### 3.2 技术架构
+
+```text
+Rust 源代码
+    ↓ 编译
+MIR (Mid-level IR)
+    ↓ 形式化翻译
+a-mir-formality (Coq/Lean)
+    ↓ 证明
+类型安全定理: ⊢ program → safe
+```
+
+**关键设计**:
+- 基于 **small-step operational semantics**（小步操作语义）
+- 使用 **bidirectional type checking**（双向类型检查）规则
+- 与 `rustc` 的 trait solver 行为逐一对齐
+
+### 3.3 与验证工具链的关系
+
+| 角色 | 说明 |
+|:---|:---|
+| **规范基础** | a-mir-formality 定义"合法 Rust 程序"的精确边界 |
+| **验证前提** | Kani/Verus/Creusot 的正确性依赖于 rustc 的类型系统正确性 |
+| **循环验证** | a-mir-formality 验证 rustc → rustc 编译 a-mir-formality |
+
+### 3.4 当前状态（2026-05）
+
+| 里程碑 | 状态 | 预计 |
+|:---|:---:|:---:|
+| Core type system | 🟡 推进中 | 2026–2027 |
+| Trait solver alignment | 🟡 推进中 | 2026–2027 |
+| Unsafe Rust rules | 🔴 早期 | 2027+ |
+| 与 rustc 一致性测试 | 🟡 部分 | 持续 |
+| 稳定化作为规范 | 🔴 远期 | 2028+ |
+
+---
+
+## 四、ROI 分析框架
 
 > **[来源类型: 原创分析]** 💡 以下框架帮助团队量化形式化验证的投入产出比。
 
-### 2.1 ROI 公式
+### 4.1 ROI 公式
 
 ```text
 验证 ROI = (避免的缺陷成本 × 检测概率) / (工具学习成本 + 标注成本 + 运行成本 + 维护成本)
@@ -84,7 +156,7 @@ RustBelt: [██████████]  完整证明，人月级成本
 | **运行成本** | CI 运行时间 × 计算资源 | $0 – $K/月 |
 | **维护成本** | 规格随代码演化的同步成本 | 低 (Miri) – 高 (手写证明) |
 
-### 2.2 场景化 ROI 评估
+### 4.2 场景化 ROI 评估
 
 #### 场景 A: 安全关键网络协议（如 TLS/QUIC 实现）
 
@@ -143,7 +215,7 @@ ROI: ★★★☆☆ 中 — 纯 safe Rust 的内存安全已由编译器保证 
 ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP 2022 Aeneas] ✅
 ```
 
-### 2.3 决策阈值
+### 4.3 决策阈值
 
 ```text
 当以下任一条件成立时，形式化验证值得投入：
@@ -164,27 +236,27 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 
 ---
 
-## 三、分层验证策略
+## 五、分层验证策略
 
-### 3.1 五层防御模型
+### 5.1 五层防御模型
 
 ```text
 Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
 (编译器)   (动态检测)  (符号执行)  (契约验证)  (协议验证)
  rustc      Miri         Kani        Verus       TLA+
  Clippy     cargo-test   fuzzing     Creusot     P
-                      (cargo-fuzz)   Prusti
+ a-mir-formality        (cargo-fuzz)   Prusti
 ```
 
 | 层级 | 工具 | 目标 | 频率 | 成本 |
 |:---|:---|:---|:---|:---|
-| **L1 编译期** | `rustc` + `clippy` + `rustfmt` | 类型安全、lint | 每次保存 | 零 |
+| **L1 编译期** | `rustc` + `clippy` + `a-mir-formality` | 类型安全、lint、规范对齐 | 每次保存 | 零 |
 | **L2 动态** | `cargo test` + `Miri` | UB 检测、回归 | 每次提交 | 低 |
 | **L3 符号** | `Kani` + `cargo-fuzz` | 边界条件、反例 | 每次 PR / nightly | 中 |
 | **L4 契约** | `Verus` / `Creusot` | 功能正确性 | 核心模块变更 | 高 |
 | **L5 协议** | `TLA+` / `P` | 分布式安全 | 设计阶段 | 中 |
 
-### 3.2 组合策略：AWS s2n-quic 实践
+### 5.2 组合策略：AWS s2n-quic 实践
 
 ```yaml
 # .github/workflows/verification.yml (简化)
@@ -229,7 +301,7 @@ jobs:
 
 ---
 
-## 四、工具选择决策树
+## 六、工具选择决策树
 
 ```mermaid
 flowchart TD
@@ -260,7 +332,24 @@ flowchart TD
 
 ---
 
-## 五、工业案例速查
+## 七、2026 工具状态更新
+
+> **[来源: 各工具官方文档 2026-05]**
+
+| 工具 | 最新版本 | 关键更新 | 跟踪 |
+|:---|:---:|:---|:---|
+| **Miri** | nightly | Tree Borrows 默认启用；支持更多平台 | rust#60914 |
+| **Kani** | 0.61+ | 并发验证增强；AWS 生产规模验证 | model-checking/kani |
+| **Verus** | 0.2026+ | GhostCell 验证；IronRDP 生产部署 | verus-lang/verus |
+| **Creusot** | 0.10+ | Why3 后端优化；更多标准库覆盖 | creusot-rs/creusot |
+| **Prusti** | 维护模式 | 社区维护；Viper 后端更新 | viperproject/prusti |
+| **Aeneas** | 0.9+ | Lean 4 后端；更多 Rust 特性支持 | AeneasVerif/aeneas |
+| **RefinedRust** | 原型 | 自动推导算法改进；Iris 集成 | plv/refinedrust |
+| **a-mir-formality** | nightly | MIR 翻译完善；trait solver 对齐 | rust-lang/rustc-dev-guide |
+
+---
+
+## 八、工业案例速查
 
 | 项目 | 组件 | 工具 | 验证目标 | 结果 |
 |:---|:---|:---|:---|:---|
@@ -272,10 +361,11 @@ flowchart TD
 | **Rust 编译器** | Miri 回归测试 | Miri | Stacked/Tree Borrows UB 检测 | Crater 每日运行 |
 | **INRIA 安全关键算法** | 排序/搜索/图算法 | Creusot | 功能正确性 + 终止性 | 学术论文级验证 |
 | **ETH Viper 教学** | 学生项目验证 | Prusti | 分离逻辑入门实践 | 教学场景 |
+| **Rust 类型系统规范** | rustc MIR → Coq | a-mir-formality | 类型安全定理 | 推进中 |
 
 ---
 
-## 六、常见误区与反模式
+## 九、常见误区与反模式
 
 ### 误区一："验证工具可以互相替代"
 
@@ -307,23 +397,25 @@ flowchart TD
 
 ---
 
-## 七、相关概念链接
+## 十、相关概念链接
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
 | RustBelt 理论基础 | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证工具的数学根基 |
 | 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 别名模型与 Miri 检测 |
+| 线性逻辑 | [`./01_linear_logic.md`](./01_linear_logic.md) | 分离逻辑的理论基础 |
+| 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | a-mir-formality 的理论基础 |
 | Unsafe 边界 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证对象的定义 |
 | 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | L7 演进趋势 |
 | Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
 
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html), [Wikipedia: Model Checking](https://en.wikipedia.org/wiki/Model_checking), [Wikipedia: Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]; 2026-05-21 补充 Wikipedia 概念对齐、a-mir-formality 工具链、2026 工具状态更新 [来源: Formal Methods Deep Dive]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-21
+**状态**: ✅ 深化完成

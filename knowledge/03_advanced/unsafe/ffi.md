@@ -852,3 +852,10 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 - Python — `ctypes`, `cffi` [来源: Python 与 C 互操作的两种模式; 与 Rust FFI 的显式 `unsafe` 边界对比]
 - Go — `cgo` [来源: Go 与 C 互操作的运行时开销分析; 与 Rust 零成本 FFI 的对比]
 - Java — JNI (Java Native Interface), JNA, Panama (JEP 424) [来源: Java 与原生代码互操作的演进; 从 JNI 的手动绑定到 Panama 的自动生成]
+
+---
+
+## 相关概念
+
+- [内联汇编 (Inline Assembly)](inline_asm.md)
+- [MaybeUninit](maybe_uninit.md)

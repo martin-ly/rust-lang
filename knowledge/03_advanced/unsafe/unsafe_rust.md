@@ -1037,3 +1037,10 @@ fn good_slice() {
 - ISO C++ — `undefined behavior` [来源: C++ 默认全局 unsafe 与 Rust 显式 `unsafe` 块的设计对比]
 - Haskell — `unsafePerformIO`, `unsafeCoerce` [来源: Haskell 通过类型系统隔离 unsafe 操作; 与 Rust `unsafe` 块的设计同构性]
 - Go — `unsafe` package [来源: Go 的有限 unsafe 能力; 与 Rust `unsafe` 的五种 superpower 对比]
+
+---
+
+## 相关概念
+
+- [FFI (Foreign Function Interface)](ffi.md)
+- [内联汇编 (Inline Assembly)](inline_asm.md)

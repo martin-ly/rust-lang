@@ -368,3 +368,10 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 
 - GCC Extended Asm [来源: GNU C 内联汇编; Rust `asm!` 的设计对标]
 - MSVC `__asm` [来源: Microsoft C/C++ 内联汇编; 与 Rust 跨平台设计的对比]
+
+---
+
+## 相关概念
+
+- [FFI (Foreign Function Interface)](ffi.md)
+- [MaybeUninit](maybe_uninit.md)

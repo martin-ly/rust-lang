@@ -5,6 +5,7 @@
 ---
 
 ## 完成情况概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -31,9 +32,11 @@
 ---
 
 ## 完整文档清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 理论基础
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 行数 | 核心内容 |
@@ -55,7 +58,7 @@
 
 | 文档 | 行数 | 内容 |
 |:---|:---:|:---|
-| [implementations/rust-actor-frameworks.md](implementations/rust-actor-frameworks.md) | 212 | 4大框架对比 |
+| implementations/rust-actor-frameworks.md (待补充) | 212 | 4大框架对比 |
 | [patterns/actor-design-patterns.md](patterns/actor-design-patterns.md) | 398 | 15+生产模式 |
 | [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) | 339 | 形式化定义+定理 |
 
@@ -63,7 +66,7 @@
 
 | 文档 | 行数 | 内容 |
 |:---|:---:|:---|
-| [distributed/distributed-actors.md](distributed/distributed-actors.md) | 297 | 分布式Actor基础 |
+| distributed/distributed-actors.md (待补充) | 297 | 分布式Actor基础 |
 | [distributed/distributed-actors-formal.md](distributed/distributed-actors-formal.md) | 413 | CAP、一致性、Saga、CRDT |
 | [case-studies/actix-web-production.md](case-studies/actix-web-production.md) | 349 | 生产环境分析 |
 | [examples/chat-system-example.md](examples/chat-system-example.md) | 500 | 完整实现示例 |
@@ -273,6 +276,7 @@ actor-specialty/
 
      Formal · Rigorous · Comprehensive · Production-Ready
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

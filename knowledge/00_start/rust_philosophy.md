@@ -231,3 +231,10 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 - C++ Core Guidelines [来源: C++ 的安全子集建议; 与 Rust 编译期保证的对比]
 - Go Language Specification [来源: Go 的 GC 与 Rust 无 GC 设计对比]
 - Haskell — Pure functional semantics [来源: Haskell 的类型安全与 Rust 的所有权系统的对比]
+
+---
+
+## 相关概念
+
+- [Hello, World](hello_world.md)
+- [安装 Rust](installation.md)

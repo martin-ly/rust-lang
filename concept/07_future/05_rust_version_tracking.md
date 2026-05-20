@@ -467,6 +467,46 @@ unsafe extern "C" {
 
 ---
 
+## 十二、Rust 1.96.0 Beta 跟踪（2026-05-28 预计稳定）
+
+> **[来源: GitHub rust-lang/rust #156512]** · **[来源: releases.rs]** · **[来源: Inside Rust Blog 2026-05-18]** ✅
+
+**已确定稳定的新特性**:
+
+| 特性 | 类别 | 项目覆盖 | 状态 |
+|:---|:---|:---|:---:|
+| `assert_matches!` / `debug_assert_matches!` | 标准库宏 | `docs/02_reference/quick_reference/assert_matches_guide.md` | ✅ 已创建 |
+| `core::range` 补齐 (`Range`/`RangeFrom`/`RangeToInclusive` + 迭代器) | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已更新 |
+| `NonZero` 整数范围迭代 | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已更新 |
+| `impl From<bool> for {f32, f64}` | 标准库 trait | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已覆盖 |
+| `unused_features` lint (warn-by-default) | 编译器 lint | `docs/06_toolchain/` | 🟡 待补充 |
+| Cargo `frame-pointers` profile 选项 | 工具链 | `docs/06_toolchain/` | 🟡 待补充 |
+
+**Project Goals 月度更新（2026-05-18）**:
+- **流程变更**: Project Goals 从半年制改为年度制（2026 Goals）
+- **cargo-script**: Cargo FCP 已结束，blocker 为 edition policy
+- **BorrowSanitizer**: Shadow Stack 策略，RFC 起草中，RustConf 2026 演讲已入选
+- **Const Generics**: `min_adt_const_params` 接近 RFC 最终规格
+- **Rust for Linux**: 2026 RfL Roadmap 取代原目标
+- **C++/Rust Interop**: Overloading 实验 PR 完成两轮 review
+
+---
+
+## 十一、长期演进跟踪表（P2 优先级）
+
+| 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
+|:---|:---:|:---:|:---:|:---|
+| **Open Enums** | nightly 实验 | 2027+ | 🔴 缺失 | 待创建 `concept/07_future/open_enums_preview.md` |
+| **BorrowSanitizer** | 原型阶段 | 2027+ | 🔴 缺失 | 待创建 `docs/05_guides/borrowsanitizer_preview.md` |
+| **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | 🔴 缺失 | `docs/04_research/safety_critical_alignment_2026.md` §5 |
+| **cargo-semver-checks** | 社区工具，计划合并 cargo | 2026–2027 | 🔴 缺失 | 待加入工具链跟踪 |
+| **Cargo plumbing commands** | 原型 | 2027+ | 🔴 缺失 | 待加入工具链跟踪 |
+| **Safety Tags** | 设计讨论 | 2027+ | 🟡 跟踪 | `docs/05_guides/SAFETY_TAGS_GUIDE.md` |
+| **derive(CoercePointee)** | RFC 前设计 | 2027+ | 🟡 跟踪 | `crates/c04_generic/src/derive_coerce_pointee_tracking.rs` |
+| **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | `docs/06_toolchain/parallel_frontend.md` |
+
+---
+
 ## 十一、变更日志
 
 | 版本 | 日期 | 变更 |

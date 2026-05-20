@@ -430,3 +430,10 @@ IDE:
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [综合语言对比矩阵](COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)
+- [Rust生态系统多维概念矩阵对比](RUST_MULTI_DIMENSIONAL_MATRIX.md)

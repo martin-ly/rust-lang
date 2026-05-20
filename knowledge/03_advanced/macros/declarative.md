@@ -863,3 +863,10 @@ impl Person {
 - C — C Preprocessor (`#define`) [来源: 文本替换宏与 Rust AST 宏的对比; C 宏无卫生性保证，常见意外捕获问题]
 - Scheme — `syntax-rules`, `syntax-case` [来源: 卫生宏的早期语言实现; 与 Rust `macro_rules!` 的设计同源]
 - C++ — Templates [来源: C++ 模板作为图灵完备的编译期元编程; 与 Rust 宏系统的不同设计哲学]
+
+---
+
+## 相关概念
+
+- [过程宏 (Procedural Macros)](procedural.md)
+- [Macros 宏系统](README.md)

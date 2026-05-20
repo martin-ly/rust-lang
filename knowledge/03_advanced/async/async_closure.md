@@ -970,3 +970,10 @@ fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
 - ISO C++20 §7.5.5 — *Lambda expressions* [来源: C++ `auto` lambda 与泛型 lambda 的捕获语义; C++20 无原生 `async` lambda，依赖 `std::async` 或协程]
 - Haskell — 高阶函数与 `async`/`wait` [来源: Haskell 函数作为一等公民的设计; 与 Rust 闭包 trait 系统的对比]
 - Go — 闭包（function literals） [来源: Go 闭包捕获变量引用的语义; Go 无 `async`/`await`，依赖 goroutine 实现并发]
+
+---
+
+## 相关概念
+
+- [async/await 异步编程](async_await.md)
+- [Rust 2024 Edition Async Closures 完整指南](async_closures_2024.md)

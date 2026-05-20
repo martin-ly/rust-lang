@@ -650,3 +650,10 @@ async fn main() {
 - Java — Project Loom Virtual Threads [来源: Java 虚拟线程与 Rust async/await 的对比; OS 线程 vs 绿色线程 vs 协作式状态机]
 - Go — Goroutine + netpoller [来源: Go 的 M:N 调度与事件驱动网络 I/O; 与 Tokio 的对比]
 - Node.js — libuv [来源: Node.js 的事件循环; 与 Tokio 的多线程 work-stealing 调度对比]
+
+---
+
+## 相关概念
+
+- [Axum 深度解析](axum_deep_dive.md)
+- [Deep Dives 深度解析](README.md)

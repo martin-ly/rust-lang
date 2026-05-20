@@ -378,3 +378,10 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 
 - C — `malloc` + 未初始化内存 [来源: C 的未初始化内存是 UB 的主要来源; `MaybeUninit` 提供类型安全的替代]
 - C++ — `std::optional`, placement new [来源: C++ 的可选类型与原地构造; 与 `MaybeUninit::assume_init()` 的设计对比]
+
+---
+
+## 相关概念
+
+- [FFI (Foreign Function Interface)](ffi.md)
+- [内联汇编 (Inline Assembly)](inline_asm.md)

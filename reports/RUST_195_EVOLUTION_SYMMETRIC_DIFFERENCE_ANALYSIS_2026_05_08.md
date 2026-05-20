@@ -512,33 +512,41 @@ gantt
 
 - [x] **R1** 创建对称差分析报告 v2.0
 - [x] **R2** `c08_algorithms/src/rust_195_features.rs`: 补充 `Vec::push_mut`, `Vec::insert_mut`, `VecDeque::push_front_mut`, `push_back_mut`, `insert_mut`, `LinkedList::push_front_mut`, `push_back_mut`
+- [x] **R3** `concept/06_ecosystem/09_cargo_script.md` + `docs/06_toolchain/cargo_script_guide.md`: Cargo Script / Frontmatter 独立章节与深度指南
+- [x] **R4** `concept/06_ecosystem/10_public_private_deps.md`: public/private dependencies 独立章节（RFC 3516）
+- [x] **R5** `docs/rust-ownership-decidability/` 短 README 归档: 23 个纯目录索引文件归档
+- [x] **R6** `docs/rust-ownership-decidability/` 死链接修复: 26 个内部死链接清零
 
 #### 🔴 P0：高优先级
 
 - [ ] **T1** `c06_async/docs/ASYNC_CLOSURES_GUIDE.md`: 撰写 Async Closures 深度指南（概念定义、属性关系、Wikipedia 映射、示例/反例、决策树）
-- [ ] **T2** `c06_async/src/afit_dyn_tracking.rs`: 更新 AFIDT 跟踪状态
+- [ ] **T2** `c06_async/src/afit_dyn_tracking.rs`: 更新 AFIDT 跟踪状态（文件存在，需验证内容完整性）
 - [ ] **T3** 更新 `docs/` 中 12 处 `static mut` 文档示例为 `Atomic*` / `Cell` / `OnceLock`
-- [ ] **T4** `c10_networks/src/io_uring_demo.rs`: 从占位实现升级为完整示例
-- [ ] **T5** `c10_networks/src/http3_quic.rs`: 实现完整 QUIC 客户端/服务器示例
+- [ ] **T4** `concept/02_intermediate/01_traits.md` 补充: Next-generation trait solver 概念章节 + `crates/c04_generic/src/next_solver_preview.rs` nightly 示例
+- [ ] **T5** `concept/02_intermediate/03_memory_management.md` 补充: Field Projections 概念章节
 
 #### 🟡 P1：中优先级
 
-- [ ] **T6** `c13_embedded/src/embassy_framework.rs`: 扩展 Embassy 异步嵌入式框架内容
-- [ ] **T7** `c13_embedded/src/rtic_framework.rs`: 扩展 RTIC 框架内容
-- [ ] **T8** `c07_process/src/rust_for_linux_preview.rs`: 扩展 Rust for Linux 预研模块
-- [ ] **T9** `c07_process/src/ebpf_aya.rs`: 扩展 eBPF + Rust 示例
-- [ ] **T10** `c10_networks/src/libp2p_advanced.rs`: 实现 libp2p 完整示例
-- [ ] **T11** `docs/06_toolchain/cargo_script_guide.md`: 创建 Cargo Script / Frontmatter 指南
-- [ ] **T12** `c02_type_system/src/precise_capturing_guide.rs`: 创建 `use<..>` precise capturing 深度指南
+- [ ] **T6** `c10_networks/src/io_uring_demo.rs`: 验证内容完整性，补充概念文档和决策树
+- [ ] **T7** `c10_networks/src/http3_quic.rs`: 验证内容完整性，补充 QUIC/HTTP3 架构分析
+- [ ] **T8** `c10_networks/src/libp2p_advanced.rs`: 验证内容完整性，补充 libp2p 协议栈分析
+- [ ] **T9** `c13_embedded/src/embassy_framework.rs`: 验证内容完整性，补充形式化分析
+- [ ] **T10** `c13_embedded/src/rtic_framework.rs`: 验证内容完整性，补充实时性分析
+- [ ] **T11** `c07_process/src/rust_for_linux_preview.rs`: 验证内容完整性，补充内核 API 对照表
+- [ ] **T12** `c07_process/src/ebpf_aya.rs`: 验证内容完整性，补充 eBPF 程序类型矩阵
+- [ ] **T13** `crates/c04_generic/src/rust_195_features.rs`: 扩展 `adt_const_params` 和 `min_generic_const_args` 示例
+- [ ] **T14** `c02_type_system/src/precise_capturing_guide.rs`: 创建 `use<..>` precise capturing 深度指南
+- [ ] **T15** `docs/04_research/safety_critical_alignment_2026.md`: Safety-Critical Rust 官方路线对齐文档
 
 #### 🟢 P2：低优先级/长期
 
-- [ ] **T13** `docs/05_guides/SAFETY_TAGS_GUIDE.md`: 创建 Safety Tags 预研指南
-- [ ] **T14** `docs/06_toolchain/parallel_frontend.md`: 创建并行前端编译指南
-- [ ] **T15** `c04_generic/src/derive_coerce_pointee_tracking.rs`: 跟踪 `derive(CoercePointee)` 进展
-- [ ] **T16** 建立 Rust 特性跟踪看板模板
-- [ ] **T17** 完善 `content/scenarios/`：添加非 Web 场景
-- [ ] **T18** 更新 `guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` 至 2026 版本
+- [ ] **T16** `docs/05_guides/SAFETY_TAGS_GUIDE.md`: 创建 Safety Tags 预研指南
+- [ ] **T17** `docs/06_toolchain/parallel_frontend.md`: 创建并行前端编译指南
+- [ ] **T18** `c04_generic/src/derive_coerce_pointee_tracking.rs`: 跟踪 `derive(CoercePointee)` 进展
+- [ ] **T19** `concept/07_future/05_rust_version_tracking.md`: 添加 Open Enums / BorrowSanitizer / MC/DC Coverage 待跟踪表
+- [ ] **T20** 完善 `content/scenarios/`: 添加非 Web 场景
+- [ ] **T21** 更新 `guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md` 至 2026 版本
+- [ ] **T22** `knowledge/` 跨文件链接: 为 100 个实质内容文件补充交叉引用
 
 ---
 

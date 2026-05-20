@@ -288,3 +288,10 @@ impl CfsApp {
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [案例研究1: Ferrocene认证工具链](CASE_STUDY_01_FERROCENE_CERTIFICATION.md)
+- [案例研究3: 汽车ECU Rust应用](CASE_STUDY_03_AUTOMOTIVE_ECUS.md)

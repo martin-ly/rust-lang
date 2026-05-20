@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [🧪 Rust 测试速查卡](#-rust-测试速查卡)
@@ -110,10 +111,12 @@
     - [ControlFlow 在测试验证管道中的应用](#controlflow-在测试验证管道中的应用)
     - [LazyLock 在测试固件中的应用](#lazylock-在测试固件中的应用)
     - [性能提升总结](#性能提升总结)
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
 
 ---
 
 ## 📋 测试类型概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -126,9 +129,11 @@
 ---
 
 ## 🔬 单元测试（Unit Tests）
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本结构
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -144,6 +149,7 @@ mod tests {
 ```
 
 ### 断言宏
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -166,6 +172,7 @@ fn test_assertions() {
 ```
 
 ### 测试失败和 panic
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -185,6 +192,7 @@ fn test_expected_panic() {
 ```
 
 ### 使用 Result 类型
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -199,6 +207,7 @@ fn test_with_result() -> Result<(), String> {
 ```
 
 ### 忽略测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -216,6 +225,7 @@ fn network_test() {
 ```
 
 ### 测试组织
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -251,9 +261,11 @@ mod tests {
 ---
 
 ## 🔗 集成测试（Integration Tests）
+>
 > **[来源: Rust Official Docs]**
 
 ### 目录结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -325,6 +337,7 @@ fn test_api_endpoint() {
 ---
 
 ## 📚 文档测试（Doc Tests）
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本文档测试
@@ -390,6 +403,7 @@ pub fn expensive_operation() -> i32 {
 ---
 
 ## ⚡ 性能测试（Benchmark Tests）
+>
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml 配置
@@ -497,6 +511,7 @@ cargo bench --bench my_benchmark fib_20
 ---
 
 ## 🛠️ 测试工具和库
+>
 > **[来源: Rust Official Docs]**
 
 ### 常用测试库
@@ -670,6 +685,7 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 ---
 
 ## 🎯 测试最佳实践
+>
 > **[来源: Rust Official Docs]**
 
 ### 测试金字塔
@@ -862,6 +878,7 @@ fn test_file_operations() {
 ---
 
 ## 📊 测试覆盖率
+>
 > **[来源: Rust Official Docs]**
 
 ### 使用 cargo-tarpaulin
@@ -904,6 +921,7 @@ exclude_lines = [
 ---
 
 ## 🚀 运行测试
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本命令
@@ -960,6 +978,7 @@ cargo test -- --test-threads=1
 ---
 
 ## 🔍 测试调试
+>
 > **[来源: Rust Official Docs]**
 
 ### 打印调试信息
@@ -1010,6 +1029,7 @@ fn test_with_timeout() {
 ---
 
 ## 📝 测试模式速查
+>
 > **[来源: Rust Official Docs]**
 
 ### 测试 Result 类型
@@ -1087,6 +1107,7 @@ fn test_collections() {
 ---
 
 ## 🎓 常见测试场景
+>
 > **[来源: Rust Official Docs]**
 
 ### 测试错误处理
@@ -1144,6 +1165,7 @@ fn test_trait_impl() {
 ---
 
 ## 🔄 CI/CD 集成
+>
 > **[来源: Rust Official Docs]**
 
 ### GitHub Actions 测试
@@ -1419,14 +1441,42 @@ heaptrack cargo test
 **错误示例**:
 
 ```rust
+// ❌ static mut 在 Rust 2024 Edition 中已被禁止
 static mut ORDER: i32 = 0;
 #[test] fn a() { unsafe { ORDER = 1; } }
 #[test] fn b() { assert_eq!(unsafe { ORDER }, 1); }  // ❌ 测试顺序不保证
 ```
 
-**原因**: 测试并行执行，顺序未定义。
+**原因**: 测试并行执行，顺序未定义；`static mut` 本身在 2024 Edition 已废弃。
 
-**修正**: 避免共享可变状态，或使用单个测试、锁。
+**修正**:
+
+```rust
+// ✅ 方案 1: 使用 Atomic 避免共享可变状态
+use std::sync::atomic::{AtomicI32, Ordering};
+static ORDER: AtomicI32 = AtomicI32::new(0);
+
+#[test] fn a() { ORDER.store(1, Ordering::SeqCst); }
+#[test] fn b() { assert_eq!(ORDER.load(Ordering::SeqCst), 1); } // 仍不推荐：测试间不应有顺序依赖
+```
+
+```rust
+// ✅ 方案 2: 每个测试独立状态（推荐）
+#[test]
+fn test_order_independent() {
+    let order = 1;
+    assert_eq!(order, 1);
+}
+```
+
+```rust
+// ✅ 方案 3: 使用 std::sync::Mutex 封装共享状态
+use std::sync::Mutex;
+static ORDER: Mutex<i32> = Mutex::new(0);
+
+#[test] fn a() { *ORDER.lock().unwrap() = 1; }
+#[test] fn b() { assert_eq!(*ORDER.lock().unwrap(), 1); } // 仍不推荐依赖测试顺序
+```
 
 ---
 

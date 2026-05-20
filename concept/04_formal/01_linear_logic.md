@@ -817,6 +817,24 @@ Rust 所有权系统（仿射变体）:
 > 线性逻辑在不同语言中有不同实现：Rust 用所有权、Haskell 用 LinearTypes 扩展、ATS 用依赖类型 + 线性类型。比较这些实现能揭示 "线性逻辑是必要不充分条件"——线性类型保证内存安全，但内存安全不需要完整的线性类型系统。
 >
 > 对比视角见 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)（类型系统谱系）。
+
+---
+
+## 十四、Wikipedia 概念对齐
+
+> **[来源: Wikipedia]** 线性逻辑核心概念与国际知识库映射。
+
+| 概念 | Wikipedia 词条 | 对应 Rust 概念 |
+|:---|:---|:---|
+| **Linear Logic** | [Linear logic](https://en.wikipedia.org/wiki/Linear_logic) | Ownership（资源不可复制） |
+| **Affine Logic** | [Affine logic](https://en.wikipedia.org/wiki/Affine_logic) | Copy trait（允许 weakening） |
+| **Substructural Type System** | [Substructural type system](https://en.wikipedia.org/wiki/Substructural_type_system) | Rust 类型系统（无 weakening/no contraction） |
+| **Linear Type** | [Linear type](https://en.wikipedia.org/wiki/Linear_type) | Move semantics、unique ownership |
+| **Sequent Calculus** | [Sequent calculus](https://en.wikipedia.org/wiki/Sequent_calculus) | 类型推导的形式化基础 |
+| **Proof Net** | [Proof net](https://en.wikipedia.org/wiki/Proof_net) | 并发程序语义可视化 |
+| **Jean-Yves Girard** | [Jean-Yves Girard](https://en.wikipedia.org/wiki/Jean-Yves_Girard) | 线性逻辑创始人 |
+| **Curry-Howard Correspondence** | [Curry–Howard correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence) | 类型即命题、程序即证明 |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
