@@ -1102,7 +1102,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 
 > **关键洞察**: RustBelt 的 Iris 证明不直接依赖 SB 或 TB，而是建立在更抽象的**来源（provenance）**与**权限**之上。SB/TB 是将这些抽象权限映射到具体内存访问序列的**操作语义模型**。Tree Borrows 成为 Miri 默认意味着：**社区共识的 UB 定义已正式从 Stacked Borrows 的严格栈模型转向 Tree Borrows 的宽松树模型**。这一转变不会影响 RustBelt 的安全性证明，因为任何 TB 接受的程序必然满足 Iris 的权限约束（TB ⟹ Iris 权限模型），且 TB 比 SB 接受更多合法程序（SB ⟹ TB 接受集 ⊆ TB 接受集）。
 
-> **跨层映射更新**: `L3::Miri` 默认模型变更 ↔ [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/rust_version_tracking.md`](../07_future/rust_version_tracking.md) §3 前沿特性跟踪
+> **跨层映射更新**: `L3::Miri` 默认模型变更 ↔ [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §5.6 Tree Borrows 演进 · [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) §3 前沿特性跟踪
 
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.2 "别名模型与 Miri 检测"
 

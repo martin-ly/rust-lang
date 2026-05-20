@@ -1088,7 +1088,7 @@ graph TD
 | 设计模式 | [`./02_patterns.md`](./02_patterns.md) | 工程实践 |
 | AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | 工具链扩展 |
 | 形式化工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具集成 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 质量门禁 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 质量门禁 |
 
 ### 编译验证：Edition 机制与向后兼容性
 

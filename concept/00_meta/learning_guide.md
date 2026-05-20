@@ -231,7 +231,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 | `01_rust_vs_cpp.md` | 2h | L1-L3 全部 | 内存模型、所有权、OOP 替代的本体论差异 | 1. Rust 和 C++ 的内存模型核心差异？2. 为什么 Rust 选择 Trait 而非继承？3. `unsafe` 在两种语言中的语义差异？ |
 | `02_rust_vs_go.md` | 1h | 01_concurrency + 02_async | 并发模型、GC vs 所有权、错误处理 | 1. goroutine 和 async/await 的调度差异？2. Go 的 GC 和 Rust 的所有权在语义上是否等价？3. 两种语言的错误处理哲学差异？ |
 | `03_paradigm_matrix.md` | 1h | L1-L4 | 多范式语言的特征光谱定位 | 1. Rust 在命令式/函数式/OOP 光谱中的位置？2. 零成本抽象在 Rust 中如何具体实现？3. 不同范式对"安全"的定义有何差异？ |
-| `safety_boundaries.md` | 1h | 03_unsafe | 安全边界的形式化定义与工业实践 | 1. safe Rust 的封闭性边界在哪里？2. FFI 边界为什么是最大的安全挑战？3. `unsafe` 代码的审计策略？ |
+| `04_safety_boundaries.md` | 1h | 03_unsafe | 安全边界的形式化定义与工业实践 | 1. safe Rust 的封闭性边界在哪里？2. FFI 边界为什么是最大的安全挑战？3. `unsafe` 代码的审计策略？ |
 
 ### L6 生态层（4 文件）
 

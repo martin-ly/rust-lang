@@ -265,7 +265,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 |:---|:---|:---|
 | `const fn` 语义 | [](../01_foundation/01_ownership.md) | §3 所有权规则 |
 | `const` generics | [](../02_intermediate/02_generics.md) | §5.7 Const Generics |
-| `inline const` | [](../07_future/rust_version_tracking.md) | §2.2 inline const blocks |
+| `inline const` | [](../07_future/05_rust_version_tracking.md) | §2.2 inline const blocks |
 | 常量求值形式化 | [](../04_formal/02_type_theory.md) | §10.1b Const Generics 形式化演进 |
 | `~const Trait` | [](../02_intermediate/01_traits.md) | §4.4 Const Trait / `~const` |
 
@@ -846,7 +846,7 @@ RustBelt 证明范围:
 | Miri 检测边界 | [](../03_advanced/03_unsafe.md) | §7.2 Miri |
 | RustBelt 安全定理 | [](../04_formal/04_rustbelt.md) | §2.1 定理矩阵 |
 | 验证工具链 | [](../04_formal/05_verification_toolchain.md) | 全文 |
-| 安全边界对比 | [](../05_comparative/safety_boundaries.md) | §2.3 定理矩阵 |
+| 安全边界对比 | [](../05_comparative/04_safety_boundaries.md) | §2.3 定理矩阵 |
 
 ---
 
@@ -990,6 +990,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 - [Rust vs C++ 对比](../05_comparative/01_rust_vs_cpp.md) — 四语言对比矩阵详情
 - [L4 形式化验证](../04_formal/04_rustbelt.md) — RustBelt 与 Oxide 语义
 - [知识体系方法论](./methodology.md) — 思维表征规范与决策树模板
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

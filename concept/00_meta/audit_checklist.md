@@ -105,7 +105,7 @@
 | 反例覆盖 Safe 边界 | 检查反例 | 包含 Safe 突破场景（泄漏、panic） | ✅ (L1-L4) |
 | 反例覆盖 Unsafe 边界 | 检查反例 | 包含 unsafe 突破场景（UB） | ✅ (L1-L4) |
 | 有边界极限测试代码 | 检查反例 | 包含可运行的边界测试代码 | ✅ (L1-L4) |
-| 全局边界汇总 | 检查 `safety_boundaries.md` | 覆盖所有安全保证的边界 | ✅ |
+| 全局边界汇总 | 检查 `04_safety_boundaries.md` | 覆盖所有安全保证的边界 | ✅ |
 
 ### 3.2 否定命题分析
 
@@ -257,6 +257,7 @@ python audit.py --report > audit_report.md
 - [知识体系方法论](./methodology.md) — 内容结构与思维表征规范
 - [权威来源清单](./sources.md) — 来源分级与引用规范
 - [跨层知识图谱](./inter_layer_map.md) — L0-L7 层级依赖关系
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

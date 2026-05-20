@@ -761,7 +761,7 @@ graph TD
 | 类型论 | [`./02_type_theory.md`](./02_type_theory.md) | 类型规则 |
 | 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 操作语义 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 工具化 · L7 形式化方法映射 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 验证范围 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 验证范围 |
 
 ---
 
@@ -919,6 +919,7 @@ unsafe {
 - [x] **TODO**: 补充 RustHornBelt 对 unsafe 功能正确性验证的扩展说明 —— 已完成 §7.7
 - [x] **TODO**: 补充 §3 CSL 中 `RwLock` 与 `Condvar` 的形式化规约（读锁共享协议的 Iris 建模）—— 已完成 §7.8
 - [x] **TODO**: 补充 `Vec` 重新分配时指针失效的形式化处理（借用与重分配的交互）—— 已完成 §7.9
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

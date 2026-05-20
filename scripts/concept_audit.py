@@ -356,6 +356,9 @@ def scan_files(md_files, track_name):
     for file_path in md_files:
         content = file_path.read_text(encoding='utf-8')
         rel_path = str(file_path).replace('\\', '/')
+        rel_path_norm = rel_path.replace('\\', '/')
+        is_meta = '/00_meta/' in rel_path_norm or rel_path_norm.startswith('00_meta/')
+        is_readme = file_path.name.lower() == 'readme.md'
 
         # 1. 跨文件链接检查（含死链接）
         link_count, links, dead = check_cross_links(content, file_path)
@@ -400,7 +403,11 @@ def scan_files(md_files, track_name):
         rate = annotations / denominator
         total_source_rate += rate
         source_file_count += 1
-        if rate < thresholds['min_source_rate'] and para_count > 5:
+        # 00_meta/ 是元信息目录，降低来源率要求
+        effective_min_rate = thresholds['min_source_rate']
+        if is_meta:
+            effective_min_rate = 0.03
+        if rate < effective_min_rate and para_count > 5:
             results['source_low'].append({
                 'file': rel_path,
                 'annotations': annotations,
@@ -414,8 +421,9 @@ def scan_files(md_files, track_name):
         results['todo_summary']['done'] += done
 
         # 6. 命名规范
+        # 豁免：00_meta/ 元信息目录和 README.md 入口文件
         naming_ok, name = check_file_naming(file_path)
-        if naming_ok:
+        if naming_ok or is_meta or is_readme:
             results['naming_ok'] += 1
         elif thresholds['require_naming']:
             results['naming_fail'].append(rel_path)

@@ -86,7 +86,7 @@
 | P5-T5 | L1-L4 核心文件补充反命题树 | 16 个文件更新 | ✅ 完成 |
 | P5-T6 | L1-L4 核心文件补充认知路径 | 16 个文件更新 | ✅ 完成 |
 | P5-T7 | L5-L7 文件补充关系映射 | 9 个文件更新 | ✅ 完成 |
-| P5-T8 | 构建安全边界全景 | `05_comparative/safety_boundaries.md` | ✅ 完成 |
+| P5-T8 | 构建安全边界全景 | `05_comparative/04_safety_boundaries.md` | ✅ 完成 |
 | P5-T9 | 更新方法论（关系规范+定理规范+认知路径） | `00_meta/methodology.md` v1.1 | ✅ 完成 |
 | P5-T10 | 建立概念一致性检查清单 | `00_meta/audit_checklist.md` | ✅ 完成 |
 
@@ -183,6 +183,7 @@
 2. Phase 优先级是否需要调整？
 3. 内容深度偏向"工程实用"还是"理论形式化"，或两者并重？
 4. 是否需要中英文双语内容？
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

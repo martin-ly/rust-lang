@@ -877,7 +877,7 @@ fn main() {
 | 工具链 | [`../06_ecosystem/01_toolchain.md`](../06_ecosystem/01_toolchain.md) | CI 集成 |
 | 形式化方法 | [`./02_formal_methods.md`](./02_formal_methods.md) | 协同趋势 |
 | 语言演进 | [`./03_evolution.md`](./03_evolution.md) | AI 驱动演进 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 生成约束 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 生成约束 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | AI 时代对比 |
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）

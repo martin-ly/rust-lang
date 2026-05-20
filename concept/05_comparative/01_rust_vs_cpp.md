@@ -4,7 +4,7 @@
 
 > **层级**: L5 对比分析
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Linear Logic](../04_formal/01_linear_logic.md)
-> **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md) · [Safety Boundaries](./safety_boundaries.md)
+> **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md) · [Safety Boundaries](./04_safety_boundaries.md)
 > **主要来源**: [TRPL] · [Rust Reference] · [Wikipedia: C++] · [Wikipedia: Rust] · [Wikipedia: Linear logic] · [Wikipedia: Type system] · [Wikipedia: Resource acquisition is initialization] · [Wikipedia: Programming language]
 
 ---
@@ -1966,7 +1966,7 @@ graph TD
 | RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | Rust 语义基础 |
 | Rust vs Go | [`./02_rust_vs_go.md`](./02_rust_vs_go.md) | 同层对比 |
 | 范式矩阵 | [`./03_paradigm_matrix.md`](./03_paradigm_matrix.md) | 多语言定位 |
-| 安全边界 | [`./safety_boundaries.md`](./safety_boundaries.md) | 安全保证对比 |
+| 安全边界 | [`./04_safety_boundaries.md`](./04_safety_boundaries.md) | 安全保证对比 |
 | AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | AI 时代形式系统价值 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证工具链 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | Rust/C++ 演进方向 |

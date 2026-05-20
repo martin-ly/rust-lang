@@ -126,6 +126,7 @@
 
 - 原 `01.md`（Rust vs C++ 形式系统模型 vs 机制工程模型）已保留于 `05_comparative/01_rust_vs_cpp.md`，作为**对比分析层**的核心文件。
 - 本 README 不对 `01.md` 的内容做删减，而是通过**结构化重组**和**层级索引**使其融入更大的知识体系中。
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

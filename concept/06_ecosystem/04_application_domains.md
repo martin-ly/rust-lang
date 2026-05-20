@@ -670,7 +670,7 @@ graph TD
 | 设计模式 | [`./02_patterns.md`](./02_patterns.md) | 领域工程模式 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 系统领域对比 |
 | Rust vs Go | [`../05_comparative/02_rust_vs_go.md`](../05_comparative/02_rust_vs_go.md) | Web 后端对比 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 领域安全约束 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 领域安全约束 |
 | AI × Rust | [`../07_future/01_ai_integration.md`](../07_future/01_ai_integration.md) | AI 应用领域 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 安全关键领域验证 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | 领域能力演进 |

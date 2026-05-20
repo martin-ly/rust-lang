@@ -315,7 +315,8 @@ flowchart TD
 | 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 别名模型与 Miri 检测 |
 | Unsafe 边界 | [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) | 验证对象的定义 |
 | 形式化方法工业化 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | L7 演进趋势 |
-| Rust 版本跟踪 | [`../07_future/rust_version_tracking.md`](../07_future/rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
+| Rust 版本跟踪 | [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) | 工具链对新语言特性的支持状态 |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

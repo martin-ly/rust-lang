@@ -43,7 +43,7 @@
 | **Stabilize cargo-script** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/09_cargo_script.md` | ✅ 独立章节已创建；frontmatter 语法、SemVer 影响、工程实践全覆盖 |
 | **Stabilize public/private dependencies** | Ed Page | **目标 2026 稳定** | 🟡 75% | `concept/06_ecosystem/10_public_private_deps.md` | ✅ 独立章节已创建；RFC 3516 核心机制、SemVer 矩阵、重构路径全覆盖 |
 | **Stabilize Cargo SBOM precursor** | Sergey Davidoff | 推进中 | 🔴 **缺失** | — | 完全缺失 |
-| **build-std** | — | 推进中 | 🟡 部分 | `concept/07_future/rust_version_tracking.md` | 缺少实际操作示例 |
+| **build-std** | — | 推进中 | 🟡 部分 | `concept/07_future/05_rust_version_tracking.md` | 缺少实际操作示例 |
 | **cargo-semver-checks 合并至 cargo** | — | 推进中 | 🔴 **缺失** | — | 完全缺失 |
 | **Cargo "plumbing" commands** | — | 原型 | 🔴 **缺失** | — | 完全缺失 |
 
@@ -138,7 +138,7 @@ foo = { version = "1.0", public = true }`
 
 ### 🟢 P2 — 跟踪观察（nightly / 长期演进）
 
-1. **Open Enums** — 加入 `concept/07_future/rust_version_tracking.md` 待跟踪表
+1. **Open Enums** — 加入 `concept/07_future/05_rust_version_tracking.md` 待跟踪表
 2. **BorrowSanitizer** — 加入待跟踪表
 3. **cargo-semver-checks / plumbing commands / SBOM** — 加入工具链演进跟踪
 
@@ -151,6 +151,7 @@ foo = { version = "1.0", public = true }`
 - [Project Goals RFC](https://rust-lang.github.io/rust-project-goals/2026/rfc.html)
 - [Rust Forge — Release Versions](https://forge.rust-lang.org/)
 - [releases.rs](https://releases.rs/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

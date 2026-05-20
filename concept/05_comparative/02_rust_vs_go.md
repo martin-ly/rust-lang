@@ -708,7 +708,7 @@ func ParseJSON(input string) string {
 | 错误处理 | [`../02_intermediate/04_error_handling.md`](../02_intermediate/04_error_handling.md) | Result vs 多返回值 |
 | Rust vs C++ | [`./01_rust_vs_cpp.md`](./01_rust_vs_cpp.md) | 同层对比 |
 | 范式矩阵 | [`./03_paradigm_matrix.md`](./03_paradigm_matrix.md) | 定位参考 |
-| 安全边界 | [`./safety_boundaries.md`](./safety_boundaries.md) | 安全保证对比 |
+| 安全边界 | [`./04_safety_boundaries.md`](./04_safety_boundaries.md) | 安全保证对比 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | 验证能力对比 |
 
 > **推理链**: Rust 的所有权系统 ⟹ 编译期消除数据竞争 ⟹ 零运行时 GC 开销 ⟹ 适合系统编程与高性能服务。
@@ -720,6 +720,7 @@ func ParseJSON(input string) string {
 - [x] **TODO**: 补充具体微服务场景的性能对比数据 —— 已完成 §8.1
 - [x] **TODO**: 补充混合使用 Rust+Go 的架构模式 —— 已完成 §8.2
 - [x] **TODO**: 补充 Rust async/await 与 Go goroutine 在 IO 密集型场景的性能基准测试数据 —— 已完成 §8.1
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

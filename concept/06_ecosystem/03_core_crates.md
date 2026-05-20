@@ -565,7 +565,7 @@ graph TD
 | 工具链 | [`./01_toolchain.md`](./01_toolchain.md) | Cargo/crates.io 支撑 |
 | 设计模式 | [`./02_patterns.md`](./02_patterns.md) | Builder/Typestate 模式 |
 | 应用领域 | [`./04_application_domains.md`](./04_application_domains.md) | crate 的工程落地 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | unsafe crate 审计 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | unsafe crate 审计 |
 | 形式化方法 | [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md) | crate 安全验证 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | async/AFIT 影响生态 |
 

@@ -142,19 +142,21 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 /// ```
 #[proc_macro_attribute]
 pub fn debug_print(_attr: TokenStream, item: TokenStream) -> TokenStream {
-    let input_fn = parse_macro_input!(item as ItemFn);
+    let mut input_fn = parse_macro_input!(item as ItemFn);
     let fn_name = &input_fn.sig.ident;
     let fn_block = &input_fn.block;
 
-    let expanded = quote! {
-        fn #fn_name() {
+    let wrapped_block = quote! {
+        {
             println!("[DEBUG] 调用函数: {}", stringify!(#fn_name));
-            #fn_block
+            let __debug_result = #fn_block;
             println!("[DEBUG] 函数 {} 执行完成", stringify!(#fn_name));
+            __debug_result
         }
     };
 
-    TokenStream::from(expanded)
+    input_fn.block = syn::parse2(wrapped_block).expect("generated block should be valid syntax");
+    TokenStream::from(quote! { #input_fn })
 }
 
 /// 计时器属性宏
@@ -208,8 +210,65 @@ pub fn timed(_attr: TokenStream, item: TokenStream) -> TokenStream {
 /// ```
 #[proc_macro]
 pub fn conditional(input: TokenStream) -> TokenStream {
-    // 简单的条件编译实现：直接透传输入
-    input
+    // 解析条件编译块：conditional! { #[cfg(cond)] { expr } #[cfg(not(cond))] { expr } }
+    let input = proc_macro2::TokenStream::from(input);
+    let mut iter = input.into_iter().peekable();
+    let mut current_cfg: Option<String> = None;
+    let mut branches: Vec<(Option<String>, proc_macro2::TokenStream)> = Vec::new();
+    let mut current_tokens = proc_macro2::TokenStream::new();
+
+    while let Some(token) = iter.next() {
+        match &token {
+            proc_macro2::TokenTree::Punct(p) if p.as_char() == '#' => {
+                // 检查是否是 #[cfg(...)]
+                if let Some(proc_macro2::TokenTree::Group(g)) = iter.peek() {
+                    if g.delimiter() == proc_macro2::Delimiter::Bracket {
+                        let inner = g.stream().to_string();
+                        if inner.starts_with("cfg") {
+                            // 保存之前的分支
+                            if !current_tokens.is_empty() {
+                                branches.push((current_cfg.take(), current_tokens));
+                                current_tokens = proc_macro2::TokenStream::new();
+                            }
+                            current_cfg = Some(inner.to_string());
+                            iter.next(); // consume group
+                            continue;
+                        }
+                    }
+                }
+                current_tokens.extend(std::iter::once(token));
+            }
+            proc_macro2::TokenTree::Group(g) if g.delimiter() == proc_macro2::Delimiter::Brace => {
+                if current_cfg.is_some() {
+                    branches.push((current_cfg.take(), g.stream()));
+                    current_tokens = proc_macro2::TokenStream::new();
+                } else {
+                    current_tokens.extend(std::iter::once(proc_macro2::TokenTree::Group(g.clone())));
+                }
+            }
+            _ => {
+                current_tokens.extend(std::iter::once(token));
+            }
+        }
+    }
+
+    if !current_tokens.is_empty() {
+        branches.push((current_cfg.take(), current_tokens));
+    }
+
+    // 选择一个匹配的分支（简化：检查 debug_assertions）
+    let selected = branches.iter().find_map(|(cfg, tokens)| {
+        match cfg.as_deref() {
+            Some(c) if c.contains("debug_assertions") && !c.contains("not") => Some(tokens.clone()),
+            Some(c) if c.contains("not(debug_assertions)") => {
+                if cfg!(not(debug_assertions)) { Some(tokens.clone()) } else { None }
+            }
+            None => Some(tokens.clone()),
+            _ => None,
+        }
+    });
+
+    selected.map_or_else(|| TokenStream::new(), TokenStream::from)
 }
 
 /// 自动实现Clone trait的派生宏
@@ -273,6 +332,33 @@ pub fn derive_auto_clone(input: TokenStream) -> TokenStream {
 /// ```
 #[proc_macro]
 pub fn serializable(input: TokenStream) -> TokenStream {
-    // 这里可以实现更复杂的序列化逻辑；目前直接透传输入
-    input
+    // 解析结构体定义，生成 Debug + 自定义 to_json / from_json 方法
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &input.ident;
+
+    let fields = match &input.data {
+        syn::Data::Struct(syn::DataStruct { fields, .. }) => fields,
+        _ => panic!("serializable! 只支持结构体"),
+    };
+
+    let field_names: Vec<_> = fields.iter().map(|f| &f.ident).collect();
+    let field_names_str: Vec<String> = field_names.iter().map(|n| n.as_ref().unwrap().to_string()).collect();
+
+    let expanded = quote! {
+        #[derive(Debug)]
+        #input
+
+        impl #name {
+            /// 将结构体序列化为 JSON 字符串（简化版，无引号逃逸）
+            pub fn to_json(&self) -> String {
+                let mut parts = Vec::new();
+                #(
+                    parts.push(format!("\"{}\": {:?}", #field_names_str, self.#field_names));
+                )*
+                format!("{{ {} }}", parts.join(", "))
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
 }

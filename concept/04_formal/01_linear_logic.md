@@ -586,7 +586,7 @@ fn session_demo() {
 | 所有权形式化 | [`./03_ownership_formal.md`](./03_ownership_formal.md) | 线性逻辑的扩展；RustBelt 细节 |
 | RustBelt | [`./04_rustbelt.md`](./04_rustbelt.md) | 验证实现；Iris 分离逻辑 |
 | Rust vs C++ | [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) | 对比映射；所有权语义差异 |
-| 安全边界 | [`../05_comparative/safety_boundaries.md`](../05_comparative/safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
+| 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 边界分析；unsafe 逃逸口 |
 
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
 >

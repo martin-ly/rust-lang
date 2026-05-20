@@ -2463,7 +2463,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 | 并发 | [](../03_advanced/01_concurrency.md) | 并行与并发对比 |
 | Unsafe | [](../03_advanced/03_unsafe.md) | Pin 内部实现 |
 | 形式化方法 | [](../07_future/02_formal_methods.md) | 异步协议验证 |
-| Rust 版本特性演进 | [](../07_future/rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
+| Rust 版本特性演进 | [](../07_future/05_rust_version_tracking.md) | `AsyncFn`、`gen` blocks 等异步语义扩展 |
 | 泛型与类型系统 | [](../02_intermediate/02_generics.md) | `use<..>` precise capturing、GATs |
 | Unsafe 权限分离 | [](../03_advanced/03_unsafe.md) | `unsafe_op_in_unsafe_fn` 的权限模型 |
 

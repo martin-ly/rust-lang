@@ -681,7 +681,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 | 类型论 | [`../04_formal/02_type_theory.md`](../04_formal/02_type_theory.md) | 类型系统谱系 |
 | RustBelt | [`../04_formal/04_rustbelt.md`](../04_formal/04_rustbelt.md) | 验证能力 |
 | 语言演进 | [`../07_future/03_evolution.md`](../07_future/03_evolution.md) | 演进方向 |
-| 安全边界 | [`./safety_boundaries.md`](./safety_boundaries.md) | 能力边界 |
+| 安全边界 | [`./04_safety_boundaries.md`](./04_safety_boundaries.md) | 能力边界 |
 
 ---
 
