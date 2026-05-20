@@ -18,36 +18,8 @@
 //! [来源: Redis rs 官方文档](https://docs.rs/redis)
 
 use anyhow::Result;
-use sea_orm::{
-    entity::prelude::*, query::*, ActiveValue, Database, DatabaseBackend,
-    DatabaseConnection, Schema,
-};
+use sea_orm::{ConnectionTrait, Database, DbBackend, Statement};
 use sqlx::sqlite::SqlitePool;
-
-// ============================================================
-// Sea-ORM Entity 定义
-// ============================================================
-
-mod user_entity {
-    use sea_orm::entity::prelude::*;
-
-    #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
-    #[sea_orm(table_name = "users")]
-    pub struct Model {
-        #[sea_orm(primary_key, auto_increment = true)]
-        pub id: i32,
-        pub username: String,
-        pub email: String,
-        pub created_at: DateTimeUtc,
-    }
-
-    #[derive(Copy, Clone, Debug, EnumIter, DeriveRelation)]
-    pub enum Relation {}
-
-    impl ActiveModelBehavior for ActiveModel {}
-}
-
-use user_entity::Entity as User;
 
 #[tokio::main]
 async fn main() -> Result<()> {
@@ -138,62 +110,62 @@ async fn demo_02_sea_orm_crud() -> Result<()> {
 
     let db = Database::connect("sqlite::memory:").await?;
 
-    // 自动建表（Schema API）
-    let schema = Schema::new(DatabaseBackend::Sqlite);
-    let stmt = schema.create_table_from_entity(User);
-    db.execute(db.get_database_backend().build(&stmt)).await?;
-    println!("✓ 自动创建 users 表 (Sea-ORM Schema)");
+    // 手动建表（使用原始 SQL）
+    db.execute_unprepared(
+        r#"
+        CREATE TABLE users (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            username TEXT NOT NULL,
+            email TEXT NOT NULL
+        )
+        "#,
+    )
+    .await?;
+    println!("✓ 创建 users 表");
 
-    // Create
-    let alice = user_entity::ActiveModel {
-        username: ActiveValue::Set("alice".to_string()),
-        email: ActiveValue::Set("alice@example.com".to_string()),
-        created_at: ActiveValue::Set(chrono::Utc::now()),
-        ..Default::default()
-    };
-    let alice_inserted = User::insert(alice).exec(&db).await?;
-    println!("✓ 插入用户 Alice, id = {}", alice_inserted.last_insert_id);
+    // 插入数据
+    let result = db.execute_unprepared(
+        "INSERT INTO users (username, email) VALUES ('alice', 'alice@example.com')",
+    ).await?;
+    println!("✓ 插入用户 Alice, rows affected = {}", result.rows_affected());
 
-    let bob = user_entity::ActiveModel {
-        username: ActiveValue::Set("bob".to_string()),
-        email: ActiveValue::Set("bob@example.com".to_string()),
-        created_at: ActiveValue::Set(chrono::Utc::now()),
-        ..Default::default()
-    };
-    let bob_inserted = User::insert(bob).exec(&db).await?;
-    println!("✓ 插入用户 Bob, id = {}", bob_inserted.last_insert_id);
+    db.execute_unprepared(
+        "INSERT INTO users (username, email) VALUES ('bob', 'bob@example.com')",
+    ).await?;
+    println!("✓ 插入用户 Bob");
 
-    // Read (Query)
-    let users: Vec<user_entity::Model> = User::find().all(&db).await?;
+    // 查询所有用户
+    let stmt = Statement::from_string(
+        DbBackend::Sqlite,
+        "SELECT id, username, email FROM users".to_string(),
+    );
+    let rows = db.query_all_raw(stmt).await?;
+
     println!("\n所有用户:");
-    for u in &users {
-        println!(
-            "  [#{}] {} <{}> 创建于 {}",
-            u.id,
-            u.username,
-            u.email,
-            u.created_at.format("%Y-%m-%d %H:%M:%S")
-        );
+    for row in &rows {
+        let id: i32 = row.try_get_by_index(0)?;
+        let username: String = row.try_get_by_index(1)?;
+        let email: String = row.try_get_by_index(2)?;
+        println!("  [#{}] {} <{}>", id, username, email);
     }
 
-    // Update
-    let mut alice_model: user_entity::ActiveModel = User::find_by_id(alice_inserted.last_insert_id)
-        .one(&db)
-        .await?
-        .unwrap()
-        .into();
-    alice_model.email = ActiveValue::Set("alice.new@example.com".to_string());
-    alice_model.update(&db).await?;
+    // 更新
+    db.execute_unprepared(
+        "UPDATE users SET email = 'alice.new@example.com' WHERE username = 'alice'",
+    ).await?;
     println!("\n✓ 更新 Alice 的邮箱");
 
-    // Delete
-    User::delete_by_id(bob_inserted.last_insert_id)
-        .exec(&db)
-        .await?;
+    // 删除
+    db.execute_unprepared("DELETE FROM users WHERE username = 'bob'").await?;
     println!("✓ 删除 Bob");
 
-    // 最终查询
-    let remaining = User::find().count(&db).await?;
+    // 最终计数
+    let count_stmt = Statement::from_string(
+        DbBackend::Sqlite,
+        "SELECT COUNT(*) as cnt FROM users".to_string(),
+    );
+    let count_row = db.query_one_raw(count_stmt).await?.unwrap();
+    let remaining: i64 = count_row.try_get_by_index(0)?;
     println!("\n剩余用户数量: {}", remaining);
 
     db.close().await?;
@@ -210,70 +182,59 @@ async fn demo_03_redis_cache() -> Result<()> {
     println!("--------------------------");
 
     match redis::Client::open("redis://127.0.0.1:6379/") {
-        Ok(client) => match client.get_multiplexed_tokio_connection().await {
-            Ok(mut conn) => {
-                println!("✓ 连接到 Redis");
+        Ok(client) => {
+            match client.get_multiplexed_async_connection().await {
+                Ok(mut conn) => {
+                    println!("✓ 连接到 Redis");
 
-                // 基本 KV 操作
-                redis::cmd("SET")
-                    .arg("rust:demo:key")
-                    .arg("hello from rust!")
-                    .query_async::<_, ()>(&mut conn)
-                    .await?;
-                println!("✓ SET rust:demo:key = 'hello from rust!'");
+                    // 基本 KV 操作
+                    let _: () = redis::cmd("SET")
+                        .arg("rust:demo:key")
+                        .arg("hello from rust!")
+                        .query_async(&mut conn)
+                        .await?;
+                    println!("✓ SET rust:demo:key = 'hello from rust!'");
 
-                let value: String = redis::cmd("GET")
-                    .arg("rust:demo:key")
-                    .query_async(&mut conn)
-                    .await?;
-                println!("✓ GET rust:demo:key = '{}'", value);
+                    let value: String = redis::cmd("GET")
+                        .arg("rust:demo:key")
+                        .query_async(&mut conn)
+                        .await?;
+                    println!("✓ GET rust:demo:key = '{}'", value);
 
-                // 哈希表操作（模拟对象缓存）
-                let _: () = redis::cmd("HSET")
-                    .arg("user:1001")
-                    .arg("name")
-                    .arg("Alice")
-                    .arg("role")
-                    .arg("admin")
-                    .query_async(&mut conn)
-                    .await?;
-                println!("✓ HSET user:1001 {{ name: Alice, role: admin }}");
+                    // 哈希表操作（模拟对象缓存）
+                    let _: () = redis::cmd("HSET")
+                        .arg("user:1001")
+                        .arg("name")
+                        .arg("Alice")
+                        .arg("role")
+                        .arg("admin")
+                        .query_async(&mut conn)
+                        .await?;
+                    println!("✓ HSET user:1001 {{ name: Alice, role: admin }}");
 
-                // 设置过期时间 (TTL)
-                let _: () = redis::cmd("EXPIRE")
-                    .arg("rust:demo:key")
-                    .arg(60i32)
-                    .query_async(&mut conn)
-                    .await?;
-                println!("✓ EXPIRE rust:demo:key 60s");
+                    // 设置过期时间 (TTL)
+                    let _: () = redis::cmd("EXPIRE")
+                        .arg("rust:demo:key")
+                        .arg(60i32)
+                        .query_async(&mut conn)
+                        .await?;
+                    println!("✓ EXPIRE rust:demo:key 60s");
 
-                // 缓存模式: 缓存击穿保护 —— 使用 SET NX (只有不存在时才设置)
-                let locked: bool = redis::cmd("SET")
-                    .arg("cache:lock:resource_a")
-                    .arg("1")
-                    .arg("NX")
-                    .arg("EX")
-                    .arg(10i32)
-                    .query_async(&mut conn)
-                    .await
-                    .unwrap_or(false);
-                println!("✓ 分布式锁获取: {}", locked);
-
-                // 清理演示数据
-                let _: () = redis::cmd("DEL")
-                    .arg("rust:demo:key")
-                    .arg("user:1001")
-                    .arg("cache:lock:resource_a")
-                    .query_async(&mut conn)
-                    .await?;
-                println!("✓ 清理演示数据");
+                    // 清理演示数据
+                    let _: () = redis::cmd("DEL")
+                        .arg("rust:demo:key")
+                        .arg("user:1001")
+                        .query_async(&mut conn)
+                        .await?;
+                    println!("✓ 清理演示数据");
+                }
+                Err(e) => {
+                    println!("⚠️  无法连接 Redis 服务器: {}", e);
+                    println!("   提示: 启动本地 Redis 后重新运行本示例");
+                    println!("   docker run -d -p 6379:6379 redis:alpine");
+                }
             }
-            Err(e) => {
-                println!("⚠️  无法连接 Redis 服务器: {}", e);
-                println!("   提示: 启动本地 Redis 后重新运行本示例");
-                println!("   docker run -d -p 6379:6379 redis:alpine");
-            }
-        },
+        }
         Err(e) => {
             println!("⚠️  Redis 客户端初始化失败: {}", e);
         }

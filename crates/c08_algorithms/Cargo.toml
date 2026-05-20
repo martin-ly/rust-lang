@@ -41,6 +41,8 @@ portable_simd = []
 
 [dev-dependencies]
 criterion = { workspace = true }
+candle-core = { workspace = true }
+candle-nn = { workspace = true }
 
 [lib]
 name = "c08_algorithms"
@@ -69,3 +71,7 @@ harness = false
 [[bench]]
 name = "simple_benchmarks"
 harness = false
+
+[[example]]
+name = "ai_ml_ecosystem_demo"
+required-features = ["with-candle"]

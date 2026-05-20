@@ -38,7 +38,7 @@
 | c06_async | ⚠️ | 已修复 tokio runtime 测试 |
 | c07_process | ✅ | 86 passed, 0 failed, 37 ignored |
 | c08_algorithms | ⚠️ | 459 passed, 0 failed, 11 ignored (线程泄漏检测触发，非 UB，可通过 `-Zmiri-ignore-leaks` 运行) |
-| c09_design_pattern | 运行中 | - |
+| c09_design_pattern | ⚠️ | 195 passed, 0 failed, 16 ignored (rayon 线程池泄漏，已知限制) |
 | c10_networks | ✅ | 160 passed, 0 failed, 19 ignored |
 | c12_wasm | ⚠️ | `web-sys` FFI 绑定不支持 Miri |
 
