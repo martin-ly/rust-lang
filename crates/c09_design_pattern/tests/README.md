@@ -4,9 +4,10 @@
 
 运行测试:
 
-`ash
+```bash
 cargo test --package c09_design_pattern
-``n
+```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

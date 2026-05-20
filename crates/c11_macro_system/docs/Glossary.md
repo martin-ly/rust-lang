@@ -48,17 +48,18 @@
     - [`tt` (Token Tree)](#tt-token-tree)
     - [`ty`](#ty)
   - [符号](#符号)
-    - [`$` ](#-dollar)
-    - [`$(...)*` ](#-dollarzero-or-more)
-    - [`$(...)+` ](#-dollarone-or-more)
-    - [`$(...)?` ](#-dollarzero-or-one)
-    - [`$(,)?` ](#-dollaroptional-trailing-comma)
+    - [`$`](#)
+    - [`$(...)*`](#-1)
+    - [`$(...)+`](#-2)
+    - [`$(...)?`](#-3)
+    - [`$(,)?`](#-4)
   - [相关工具](#相关工具)
     - [cargo-expand](#cargo-expand)
     - [rust-analyzer](#rust-analyzer)
     - [trybuild](#trybuild)
   - [片段指定符完整列表](#片段指定符完整列表)
   - [相关文档](#相关文档)
+  - [有术语补充或修正？欢迎贡献](#有术语补充或修正欢迎贡献)
 
 ## A
 
@@ -326,23 +327,23 @@ macro_rules! make_struct {
 
 ## 符号
 
-### `$` 
+### `$`
 
 **变量前缀** - 在宏中标记变量和重复模式。
 
-### `$(...)*` 
+### `$(...)*`
 
 **零个或多个重复** - 匹配零个或多个重复的模式。
 
-### `$(...)+` 
+### `$(...)+`
 
 **一个或多个重复** - 匹配至少一个重复的模式。
 
-### `$(...)?` 
+### `$(...)?`
 
 **零个或一个** - 匹配可选的模式。
 
-### `$(,)?` 
+### `$(,)?`
 
 **可选的尾随逗号** - 允许但不要求尾随逗号。
 
@@ -415,7 +416,7 @@ fn test_proc_macro() {
 **最后更新**: 2025-12-11
 **维护者**: Rust学习社区
 
-有术语补充或修正？欢迎贡献！
+有术语补充或修正？欢迎贡献
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

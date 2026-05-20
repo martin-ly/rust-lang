@@ -64,6 +64,7 @@
     - [长期愿景 (1-2 年)](#长期愿景-1-2-年)
   - [📄 许可证](#-许可证)
   - [🙏 致谢](#-致谢)
+  - [如有问题或建议，请提交 Issue 或 Pull Request](#如有问题或建议请提交-issue-或-pull-request)
 
 ## 🎉 **NEW! 2025-12-11 Rust 1.93.0 异步特性更新**
 
@@ -1065,7 +1066,7 @@ kubectl get pods -n rust-async-190
 **适用版本**: Rust 1.93.0+
 **下一步**: 跟踪 Rust 新版本特性，持续优化和更新
 
-如有问题或建议，请提交 Issue 或 Pull Request！
+如有问题或建议，请提交 Issue 或 Pull Request
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

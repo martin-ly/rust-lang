@@ -39,6 +39,7 @@
   - [📞 项目信息](#-项目信息-1)
   - [🙏 致谢](#-致谢)
   - [📝 签署](#-签署)
+  - [**有效期**: 永久](#有效期-永久)
 
 -**Rust Async Programming Project Completion Certificate**
 

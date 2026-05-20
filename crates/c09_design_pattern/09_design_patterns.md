@@ -1839,6 +1839,7 @@ fn main() {
 - Rust：MSRV 1.90（Edition 2024）。
 - Tokio：1.x（features: full）；Rayon：1.x；Crossbeam：0.8；Serde：1.x；Tracing：0.1。
 - 学术型库（Rumpsteak、Ferrite）用于参考与实验分支，避免引入核心库的强依赖。
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

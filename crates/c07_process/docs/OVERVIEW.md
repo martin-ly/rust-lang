@@ -84,6 +84,7 @@ fn run_echo() -> anyhow::Result<String> {
 - 建议：
   - 为长时任务使用超时/心跳监控；对输出使用有界缓冲避免阻塞
   - 将网络工具与 `c10_networks` 的异步客户端组合，统一指标上报到 `obs`/tracing
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

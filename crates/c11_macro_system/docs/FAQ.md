@@ -36,6 +36,7 @@
     - [20. 如何构建DSL？](#20-如何构建dsl)
   - [获取帮助](#获取帮助)
     - [找不到答案？](#找不到答案)
+  - [有新问题？欢迎提交](#有新问题欢迎提交)
 
 ## 基础问题
 
@@ -445,7 +446,7 @@ let page = html! {
 **最后更新**: 2025-12-11
 **维护者**: Rust学习社区
 
-有新问题？欢迎提交！
+有新问题？欢迎提交
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

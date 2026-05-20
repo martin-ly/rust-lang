@@ -81,6 +81,7 @@
     - [Benchmark（Criterion）](#benchmarkcriterion)
     - [新增示例与基准索引](#新增示例与基准索引)
       - [异步事件总线用法提示](#异步事件总线用法提示)
+  - [后续规划：在不破坏稳定 API 的前提下，逐步引入原生 `async fn` in trait、GATs 等更高级特性到并发与异步子模块（视适用性与依赖生态兼容性推进）](#后续规划在不破坏稳定-api-的前提下逐步引入原生-async-fn-in-traitgats-等更高级特性到并发与异步子模块视适用性与依赖生态兼容性推进)
 
 ## 🎯 最新更新 (2025-12-25) ✨
 
@@ -661,7 +662,7 @@ block_on(bus.run_with_timeout_like(&events, 3));
 - 基准：
   - `benches/async_gats_benches.rs`: 异步事件总线与 GATs 观察者基准
 
-后续规划：在不破坏稳定 API 的前提下，逐步引入原生 `async fn` in trait、GATs 等更高级特性到并发与异步子模块（视适用性与依赖生态兼容性推进）。
+后续规划：在不破坏稳定 API 的前提下，逐步引入原生 `async fn` in trait、GATs 等更高级特性到并发与异步子模块（视适用性与依赖生态兼容性推进）
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -39,6 +39,7 @@
     - [开源贡献](#开源贡献)
   - [联系方式](#联系方式)
   - [许可证](#许可证)
+  - [感谢您的贡献！让我们一起构建更好的 Rust 异步编程生态](#感谢您的贡献让我们一起构建更好的-rust-异步编程生态)
 
 ## 概述
 
@@ -364,7 +365,7 @@ cargo deny check                     # 许可证检查
 
 ---
 
-感谢您的贡献！让我们一起构建更好的 Rust 异步编程生态！
+感谢您的贡献！让我们一起构建更好的 Rust 异步编程生态
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

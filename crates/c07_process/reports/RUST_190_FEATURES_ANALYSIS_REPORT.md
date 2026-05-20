@@ -35,6 +35,7 @@
     - [学习资源](#学习资源)
   - [📈 预期收益](#-预期收益)
   - [🎉 结论](#-结论)
+  - [建议按照优先级逐步实施更新，确保项目的稳定性和向前兼容性](#建议按照优先级逐步实施更新确保项目的稳定性和向前兼容性)
 
 ## 📋 项目概述
 
@@ -287,7 +288,7 @@ macro_rules! process_error {
 
 c07_process 项目在 Rust 1.90 Edition 2024 特性使用方面表现良好，已经使用了大部分现代 Rust 特性。通过实施建议的更新计划，项目将能够充分利用最新的语言特性，提升性能和开发体验。
 
-建议按照优先级逐步实施更新，确保项目的稳定性和向前兼容性。
+建议按照优先级逐步实施更新，确保项目的稳定性和向前兼容性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

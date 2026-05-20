@@ -49,6 +49,7 @@
 - **速查卡**: [design_patterns_cheatsheet](../../../docs/02_reference/quick_reference/design_patterns_cheatsheet.md)
 - **RBE 练习**: [Functional](https://doc.rust-lang.org/rust-by-example/fn.html) · [Structs](https://doc.rust-lang.org/rust-by-example/custom_types/structs.html) · [Enums](https://doc.rust-lang.org/rust-by-example/custom_types/enum.html)
 - **Rustlings**: 无设计模式专题；综合运用 07_structs、08_enums、15_traits
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

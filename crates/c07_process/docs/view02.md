@@ -471,6 +471,7 @@ Rust 进程、通信与同步机制
     ├── 标准库策略：保守，核心功能，依赖生态扩展
     └── 范式：系统编程务实性，需结合 OS 知识
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

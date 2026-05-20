@@ -40,6 +40,7 @@
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
   - [📚 参考资源](#-参考资源)
+  - [**下一步**: 学习 性能与安全优化，提升网络程序质量](#下一步-学习-性能与安全优化提升网络程序质量)
 
 ## 📐 知识结构
 
@@ -832,7 +833,7 @@ async fn main() -> std::io::Result<()> {
 
 ---
 
-**下一步**: 学习 [性能与安全优化](05_性能与安全优化.md)，提升网络程序质量。
+**下一步**: 学习 [性能与安全优化](05_性能与安全优化.md)，提升网络程序质量
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

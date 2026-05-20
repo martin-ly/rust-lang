@@ -50,6 +50,7 @@
     - [学习体验](#学习体验)
   - [🎉 总结](#-总结)
   - [📞 联系方式](#-联系方式)
+  - [感谢您的关注和支持](#感谢您的关注和支持)
 
 ## Comprehensive Async Programming Enhancement Report 2025
 
@@ -772,7 +773,7 @@ let read = rwlock.read().await; // 允许并发读
 - 发起 Pull Request
 - 参与讨论
 
-感谢您的关注和支持！
+感谢您的关注和支持
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

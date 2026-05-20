@@ -43,6 +43,7 @@
     - [本阶段完成的核心工作](#本阶段完成的核心工作)
     - [项目当前状态](#项目当前状态)
     - [下一步建议](#下一步建议)
+  - [**感谢使用本项目！如有问题或建议，请提交 Issue 或 Pull Request。**](#感谢使用本项目如有问题或建议请提交-issue-或-pull-request)
 
 -**Rust Async Programming Project Progress - Phase 2**
 

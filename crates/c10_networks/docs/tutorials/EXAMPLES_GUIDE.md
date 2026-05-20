@@ -69,6 +69,7 @@
     - [性能优化](#性能优化)
     - [安全考虑](#安全考虑)
   - [🔗 相关文档](#-相关文档)
+  - [**注意**: 本指南中的所有示例代码都经过测试，但在生产环境中使用时，请根据具体需求进行适当的修改和优化](#注意-本指南中的所有示例代码都经过测试但在生产环境中使用时请根据具体需求进行适当的修改和优化)
 
 ## 🎯 概述
 
@@ -875,7 +876,7 @@ impl SecureTransport {
 
 ---
 
-**注意**: 本指南中的所有示例代码都经过测试，但在生产环境中使用时，请根据具体需求进行适当的修改和优化。
+**注意**: 本指南中的所有示例代码都经过测试，但在生产环境中使用时，请根据具体需求进行适当的修改和优化
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -47,6 +47,7 @@
     - [📚 文档贡献](#-文档贡献)
     - [🤝 社区参与1](#-社区参与1)
     - [💡 反馈建议](#-反馈建议)
+  - [**反馈渠道**: GitHub Issues / Discussions](#反馈渠道-github-issues--discussions)
 
 ## 🎯 项目愿景
 

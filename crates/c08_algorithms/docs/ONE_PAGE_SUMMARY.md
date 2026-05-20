@@ -52,6 +52,7 @@
 - **速查卡**: [algorithms_cheatsheet](../../../docs/02_reference/quick_reference/algorithms_cheatsheet.md) | [collections_iterators_cheatsheet](../../../docs/02_reference/quick_reference/collections_iterators_cheatsheet.md)
 - **RBE 练习**: [Vectors](https://doc.rust-lang.org/rust-by-example/std/vec.html) · [HashMap](https://doc.rust-lang.org/rust-by-example/std/hash.html) · [Iterator](https://doc.rust-lang.org/rust-by-example/trait/iter.html)
 - **Rustlings**: [05_vecs](https://github.com/rust-lang/rustlings/tree/main/exercises/05_vecs) · [11_hashmaps](https://github.com/rust-lang/rustlings/tree/main/exercises/11_hashmaps) · [18_iterators](https://github.com/rust-lang/rustlings/tree/main/exercises/18_iterators)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

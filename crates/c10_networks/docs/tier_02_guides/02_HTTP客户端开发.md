@@ -48,6 +48,7 @@
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
   - [📚 参考资源](#-参考资源)
+  - [**下一步**: 学习 WebSocket 实时通信，掌握双向通信技术](#下一步-学习-websocket-实时通信掌握双向通信技术)
 
 ## 📐 知识结构
 
@@ -891,7 +892,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**下一步**: 学习 [WebSocket 实时通信](03_WebSocket实时通信.md)，掌握双向通信技术。
+**下一步**: 学习 [WebSocket 实时通信](03_WebSocket实时通信.md)，掌握双向通信技术
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

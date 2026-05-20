@@ -39,6 +39,7 @@
     - [核心要点](#核心要点)
     - [最佳实践](#最佳实践)
   - [📚 参考资源](#-参考资源)
+  - [**下一步**: 学习 TCP/UDP 编程，掌握底层网络协议](#下一步-学习-tcpudp-编程掌握底层网络协议)
 
 ## 📐 知识结构
 
@@ -672,7 +673,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ---
 
-**下一步**: 学习 [TCP/UDP 编程](04_TCP_UDP编程.md)，掌握底层网络协议。
+**下一步**: 学习 [TCP/UDP 编程](04_TCP_UDP编程.md)，掌握底层网络协议
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

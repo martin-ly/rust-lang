@@ -297,6 +297,7 @@ _基于 Rust 1.90 (Edition 2024) 制定；MSRV：1.90_
 - 文档：`cargo doc --no-deps`（CI 可产出 artifact）
 - 覆盖率：使用 `grcov`/`llvm-cov`（示例：`RUSTFLAGS='-Cinstrument-coverage' cargo test` 后导出 html）
 - 基准：`cargo bench` 导出 `criterion` 报表并归档
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -24,6 +24,7 @@
   - [扩展性](#扩展性)
   - [总结](#总结)
   - [未来发展方向](#未来发展方向)
+  - [通过这个项目，我们为Rust异步编程生态系统贡献了重要的工具和解决方案，将有助于提升开发效率和代码质量](#通过这个项目我们为rust异步编程生态系统贡献了重要的工具和解决方案将有助于提升开发效率和代码质量)
 
 ## 项目概述
 
@@ -252,7 +253,7 @@ let result = runtime_manager.spawn_task(
 3. **云原生集成**：支持Kubernetes等云原生环境
 4. **AI辅助调试**：集成AI技术辅助问题诊断
 
-通过这个项目，我们为Rust异步编程生态系统贡献了重要的工具和解决方案，将有助于提升开发效率和代码质量。
+通过这个项目，我们为Rust异步编程生态系统贡献了重要的工具和解决方案，将有助于提升开发效率和代码质量
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

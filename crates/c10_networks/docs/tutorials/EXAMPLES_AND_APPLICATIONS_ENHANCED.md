@@ -27,6 +27,7 @@
     - [1. 异步网络编程](#1-异步网络编程)
       - [1.1 异步任务调度](#11-异步任务调度)
   - [🔗 相关文档](#-相关文档)
+  - [_维护者: C10 Networks 开发团队_](#维护者-c10-networks-开发团队)
 
 [![Rust](https://img.shields.io/badge/rust-1.90+-orange.svg)](https://www.rust-lang.org/)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](../../LICENSE)
