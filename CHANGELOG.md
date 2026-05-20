@@ -110,6 +110,98 @@
 
 ---
 
+## [2.3.0] - 2026-05-20 — Demo 生态补全 + 形式化深化 + 质量审计
+
+### 🛡️ 安全密码学 Demo (Phase 3)
+
+- **`crates/c10_networks/examples/security_cryptography_demo.rs`** (161 行)
+  - `ring`: AES-128-GCM 对称加密/解密、Ed25519 数字签名/验签、SHA-256 哈希
+  - `rustls`: TLS ClientConfig 构建与握手流程
+  - 新增依赖: `ring`, `rustls` in `c10_networks/Cargo.toml`
+
+### 🖥️ GUI 计算器 Demo
+
+- **`crates/c08_algorithms/examples/gui_calculator_demo.rs`** (250 行)
+  - `eframe`/`egui`: 即时模式 GUI，四则运算、历史记录、错误处理
+  - 新增 dev-dep: `eframe` in `c08_algorithms/Cargo.toml`
+
+### 🔐 安全审计报告
+
+- **`reports/SECURITY_AUDIT_2026_05_20.md`**: `cargo audit` 扫描结果
+  - `hickory-proto` 0.25.2: RUSTSEC-2026-0118 (NSEC3 无限循环) + RUSTSEC-2026-0119 (O(n²) CPU 耗尽)
+  - `rsa` 0.9.10: RUSTSEC-2023-0071 (Marvin 时序攻击) — 代码路径不可达
+  - `atomic-polyfill` 1.0.3: RUSTSEC-2023-0089 (unmaintained)
+
+### 🔧 质量加固 (Phase 4)
+
+- **`scripts/concept_audit.py`**: 修复审计脚本
+  - `concept/00_meta/` 目录豁免命名规范检查
+  - `00_meta/` 降低来源标注率阈值至 3%
+- **文件重命名**: `safety_boundaries.md` → `04_safety_boundaries.md`; `rust_version_tracking.md` → `05_rust_version_tracking.md`
+- **全量审计结果**: concept/ 48/48 跨文件链接 ✅, 48/48 Bloom ✅, 48/48 命名规范 ✅, 平均来源率 17.3% ✅, 0 死链接 ✅, 0 TODO ✅
+- **sccache 配置**: 端口 15432 → 4226，添加手动启动说明
+
+### 🧬 Proc-Macro 实战 Demo (Phase 5.1)
+
+- **`crates/c11_macro_system_proc/src/lib.rs`**: 修复 `debug_print` 属性宏保留函数签名；实现 `conditional` 条件编译宏；实现 `serializable` 结构体序列化宏
+- **`crates/c11_macro_system_proc/examples/proc_macro_comprehensive_demo.rs`** (152 行): 6 个宏全覆盖演示
+- **`crates/c11_macro_system/tests/proc_macro_integration_tests.rs`** (140 行): 8 项集成测试 (Builder, AutoClone, debug_print, timed, serializable, conditional)
+
+### ⚡ Lock-free / Unsafe 验证 Demo (Phase 5.2)
+
+- **`crates/c05_threads/examples/lockfree_epoch_stack_demo.rs`** (207 行)
+  - `crossbeam_epoch` EBR (Epoch-Based Reclamation) 无锁栈
+  - `Atomic`, `Owned`, `Guard`, CAS 循环, `defer_unchecked`
+- **`crates/c05_threads/tests/loom_lockfree_tests.rs`** (195 行)
+  - Loom 模型检测: 无 lost items、单 item race、ABA resistance
+- **`crates/c03_control_fn/examples/unsafe_patterns_demo.rs`** (199 行)
+  - `NonNull<T>` 协变侵入式链表
+  - `addr_of_mut!` 未初始化字段地址获取
+  - `ManuallyDrop<T>` 控制 Drop 时机
+  - `unsafe trait` / `unsafe impl` 自定义不安全 trait
+  - `MaybeUninit` 条件初始化数组
+
+### 🔬 Miri 验证附录
+
+- **`reports/MIRI_VALIDATION_2026_05_20_APPENDIX.md`**: 新增代码 Miri 验证结果
+  - c03_control_fn 全通过；c05_threads 299/1/21 (唯一失败为已知 crossbeam_epoch 兼容问题)
+
+### 🌐 生态系统 Demo 补全 (Phase 7)
+
+- **`crates/c09_design_pattern/examples/hecs_ecs_demo.rs`** (200 行)
+  - `hecs` crate: World, Entity, Component, System, Query
+  - 动态组件操作、批量查询、实体生命周期管理
+  - 新增 dev-dep: `hecs` in `c09_design_pattern/Cargo.toml`
+- **`crates/c06_async/examples/tower_middleware_demo.rs`** (170 行)
+  - `tower`: Service trait, ServiceBuilder 链式组合
+  - Timeout, RateLimit, Buffer 中间件
+  - `map_request` / `map_response` + 手动重试逻辑
+  - 新增 dev-dep features: `tower` ["limit", "buffer"] in `c06_async/Cargo.toml`
+
+### 🎲 属性测试 Demo (Phase 8)
+
+- **`crates/c03_control_fn/examples/property_testing_demo.rs`** (230 行)
+  - `proptest`: 加法交换律、乘法分配律、反转对合
+  - 自定义策略: ASCII 字符串、邮箱地址、有序向量
+  - 状态机测试: 银行账户存取一致性验证 (Deposit/Withdraw)
+  - 新增 dev-dep: `proptest` in `c03_control_fn/Cargo.toml`
+
+### 🧮 形式化操作语义解释器 (Phase 9)
+
+- **`crates/c04_generic/examples/operational_semantics_demo.rs`** (377 行)
+  - 极简类 Rust 表达式语言的 AST 与小步操作语义
+  - 运行时状态: 栈帧 + 所有权状态 (Owned / Moved / Borrowed)
+  - Move 语义、不可变/可变借用规则、赋值语义的形式化演示
+  - 预期错误: 使用已 move 变量、&/&mut 冲突、&mut/&mut 冲突
+
+### ✅ 验证状态
+
+- `cargo clippy --workspace --all-targets`: ✅ 通过 (0 errors)
+- `cargo test --workspace`: ✅ 全通过 (0 failures)
+- `cargo miri test -p c03_control_fn`: ✅ 通过
+
+---
+
 ## [2.1.0] - 2026-05-18 — 全面对齐 2026 Project Goals + 供应链安全强化
 
 ### 🔒 供应链安全（Phase 1）
