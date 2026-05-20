@@ -8,12 +8,15 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档包含对 Rust 形式化证明系统的批判性分析和未来工作计划。
 
 ## 主要内容
+> **[来源: Rust Official Docs]**
 
 ### 批判性分析
+> **[来源: Rust Official Docs]**
 
 - 现有形式化方法的局限性
 - 证明覆盖率的缺口分析

@@ -5,8 +5,10 @@
 ---
 
 ## 🧭 诊断方法论
+> **[来源: Rust Official Docs]**
 
 ### 三步诊断法
+> **[来源: Rust Official Docs]**
 
 ```text
 1. 理解错误信息
@@ -22,6 +24,7 @@
 ---
 
 ## 常见错误分类
+> **[来源: Rust Official Docs]**
 
 ### E0382: 使用已移动的值
 

@@ -5,8 +5,10 @@
 ---
 
 ## 📚 完整文档导航
+> **[来源: Rust Official Docs]**
 
 ### 核心分析文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 行数 | 核心内容 |
 |:---|:---:|:---|
@@ -16,6 +18,7 @@
 | [完成报告](COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
 
 ### 🗺️ 可视化资源 (4类10+篇)
+> **[来源: Rust Official Docs]**
 
 #### 思维导图 (Mind Maps)
 

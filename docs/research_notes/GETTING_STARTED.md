@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [快速入门指南](#快速入门指南)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -51,12 +52,14 @@
 ---
 
 ## 🎯 欢迎 {#-欢迎}
+> **[来源: Rust Official Docs]**
 
 欢迎来到 Rust 研究笔记系统！本指南将帮助您快速了解和使用研究笔记系统。
 
 **第一步**：按你的目标选路径 → **[00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)**（单入口、按目标、三大支柱映射）
 
 ### 系统简介
+> **[来源: Rust Official Docs]**
 
 研究笔记系统是一个完整的 Rust 语言研究文档体系，包含：
 
@@ -68,8 +71,10 @@
 ---
 
 ## 📚 第一步：了解系统 {#-第一步了解系统}
+> **[来源: Rust Official Docs]**
 
 ### 1.1 阅读主索引
+> **[来源: Rust Official Docs]**
 
 首先，阅读 [主索引](./README.md) 了解系统结构：
 
@@ -79,6 +84,7 @@
 - 快速导航
 
 ### 1.2 查看系统总结
+> **[来源: Rust Official Docs]**
 
 阅读 [系统总结](./SYSTEM_SUMMARY.md) 了解系统概览：
 
@@ -88,6 +94,7 @@
 - 使用指南
 
 ### 1.3 浏览快速参考
+> **[来源: Rust Official Docs]**
 
 查看 [快速参考](./QUICK_REFERENCE.md) 快速查找感兴趣的主题：
 
@@ -98,8 +105,10 @@
 ---
 
 ## 🔍 第二步：查找研究主题 {#-第二步查找研究主题}
+> **[来源: Rust Official Docs]**
 
 ### 2.1 使用完整索引
+> **[来源: Rust Official Docs]**
 
 查看 [完整索引](./INDEX.md) 浏览所有研究笔记：
 
@@ -109,6 +118,7 @@
 - 统计信息
 
 ### 2.2 查看研究路线图
+> **[来源: Rust Official Docs]**
 
 阅读 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划：
 
@@ -117,6 +127,7 @@
 - 时间规划
 
 ### 2.3 浏览目录索引
+> **[来源: Rust Official Docs]**
 
 查看各目录的 README：
 

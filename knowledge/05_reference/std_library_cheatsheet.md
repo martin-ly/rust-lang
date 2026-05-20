@@ -15,8 +15,10 @@
 ---
 
 ## 常用模块速查
+> **[来源: Rust Official Docs]**
 
 ### std::vec - 动态数组
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut v = Vec::new();
@@ -47,6 +49,7 @@ let v = Vec::with_capacity(10);  // 预分配容量
 ---
 
 ### std::option - 可选值
+> **[来源: Rust Official Docs]**
 
 ```rust
 let x: Option<i32> = Some(5);
@@ -81,6 +84,7 @@ let x: Option<i32> = None.or(Some(3));    // Some(3)
 ---
 
 ### std::result - 错误处理
+> **[来源: Rust Official Docs]**
 
 ```rust
 let x: Result<i32, &str> = Ok(5);
@@ -113,6 +117,7 @@ fn read_file() -> Result<String, io::Error> {
 ---
 
 ### std::collections - 集合类型
+> **[来源: Rust Official Docs]**
 
 #### HashMap<K, V> / BTreeMap<K, V>
 

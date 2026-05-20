@@ -5,8 +5,10 @@
 ---
 
 ## 1. Actor模型历史与定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 历史背景
+> **[来源: Rust Official Docs]**
 
 ```text
 Actor模型发展时间线:
@@ -55,6 +57,7 @@ Actor模型发展时间线:
 ```
 
 ### 1.2 Actor定义
+> **[来源: Rust Official Docs]**
 
 **Hewitt原始定义 (1973)**:
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Derive-More 派生宏形式化分析](#derive-more-派生宏形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 derive_more提供:
 
@@ -36,6 +38,7 @@ derive_more提供:
 ---
 
 ## 2. 派生宏列表
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (支持的Trait)
 

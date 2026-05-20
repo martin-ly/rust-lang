@@ -8,6 +8,8 @@
 ---
 
 ## 文档定位
+>
+> **[来源: Rust Official Docs]**
 
 本指南涵盖「AI 辅助 Rust 开发」与「用 Rust 构建 AI/ML 应用」两类场景，帮助开发者选择合适工具并规划学习路径。
 
@@ -16,6 +18,8 @@
 ---
 
 ## 一、AI 辅助 Rust 开发
+>
+> **[来源: Rust Official Docs]**
 
 使用 AI 工具（Cursor、Copilot、Claude 等）高效学习 Rust 与构建项目。
 
@@ -29,8 +33,12 @@
 ---
 
 ## 二、Rust 构建 AI/ML 应用
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 深度学习框架
+>
+> **[来源: Rust Official Docs]**
 
 | 框架 | 用途 | 特点 | 链接 |
 | :--- | :--- | :--- | :--- |
@@ -39,6 +47,8 @@
 | **tch-rs** | PyTorch 绑定 | Rust 调用 LibTorch | [docs.rs](https://docs.rs/crate/tch) |
 
 ### 2.2 LLM 推理
+>
+> **[来源: Rust Official Docs]**
 
 | 项目 | 用途 | 特点 |
 | :--- | :--- | :--- |
@@ -47,6 +57,8 @@
 | **lm.rs** | 轻量推理 | CPU 优化、SIMD、rayon |
 
 ### 2.3 与 C01–C12 的关联
+>
+> **[来源: Rust Official Docs]**
 
 | 本项目模块 | AI/ML 应用中的关联 |
 | :--- | :--- |
@@ -59,20 +71,28 @@
 ---
 
 ## 三、推荐学习路径
+>
+> **[来源: Rust Official Docs]**
 
 ### 路径 A：AI 辅助学 Rust（先 AI 后 Rust）
+>
+> **[来源: Rust Official Docs]**
 
 1. 使用 [AI_ASSISTED_RUST_PROGRAMMING_GUIDE](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md) 的提示词模板
 2. 结合 [RUSTLINGS_MAPPING](../../exercises/RUSTLINGS_MAPPING.md) 让 AI 推荐习题
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md)
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI）
+>
+> **[来源: Rust Official Docs]**
 
 1. 掌握 C01–C03、C04 泛型
 2. 学习 Candle 或 Burn 入门教程
 3. 实践：用 Candle 加载简单模型做推理
 
 ### 路径 C：AI + Rust 双轨
+>
+> **[来源: Rust Official Docs]**
 
 1. 用 AI 辅助学习 Rust 核心
 2. 用 Rust 实现 AI 推理/训练脚本
@@ -81,6 +101,8 @@
 ---
 
 ## 四、入门示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 Candle 最小示例
 

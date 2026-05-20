@@ -7,12 +7,14 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 创建简单的分布式键值存储系统。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 - [ ] Raft共识算法
 - [ ] 数据分片
@@ -23,6 +25,7 @@
 ---
 
 ## 学习要点
+> **[来源: Rust Official Docs]**
 
 ### Raft算法
 

@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [无锁编程模式深度解析](#无锁编程模式深度解析)
   - [目录](#目录)
@@ -72,10 +73,13 @@
 ---
 
 ## 1. 无锁编程基础理论
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1.1 非阻塞进度保证的形式化定义
+> **[来源: Rust Official Docs]**
 
 在无锁编程中，我们区分三种主要的非阻塞进度保证（Non-blocking Progress Guarantees）：
 
@@ -158,6 +162,7 @@ Wait-Free ⊂ Lock-Free ⊂ Obstruction-Free ⊂ 阻塞算法
 ```
 
 #### 1.1.2 活性性质 (Liveness Properties)
+> **[来源: Rust Official Docs]**
 
 **定义 1.4 (系统活性)**
 
@@ -201,6 +206,7 @@ pub enum FairnessType {
 ```
 
 #### 1.1.3 Rust 中的形式化表达
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 形式化证明框架：进度保证的 Rust 表示
@@ -288,8 +294,10 @@ unsafe impl<T> LockFree for TreiberStack<T> {
 ```
 
 ### 1.2 内存模型前置知识
+> **[来源: Rust Official Docs]**
 
 #### 1.2.1 Release-Acquire 语义的形式化
+> **[来源: Rust Official Docs]**
 
 **定义 1.5 (Release 语义)**
 
@@ -396,6 +404,7 @@ fn relaxed_race_condition() {
 ```
 
 #### 1.2.2 顺序一致性 (Sequential Consistency)
+> **[来源: Rust Official Docs]**
 
 **定义 1.7 (顺序一致性)**
 
@@ -463,6 +472,7 @@ mod sc_tests {
 ```
 
 #### 1.2.3 编译器和硬件重排序
+> **[来源: Rust Official Docs]**
 
 **定理 1.5 (重排序规则)**
 
@@ -524,6 +534,7 @@ fn hardware_fence_explained() {
 ---
 
 ## 2. 原子操作深度解析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 原子类型的所有权语义
 
@@ -4555,3 +4566,7 @@ pub struct PaddedAtomic {
 >
 > 本文档是 `docs/rust-ownership-decidability` 系列的一部分。
 > 建议阅读顺序: 12-02 → 12-04 → 12-04-lock-free-patterns-deep
+
+---
+
+> **权威来源**: Rust Official Docs

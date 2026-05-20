@@ -5,14 +5,17 @@
 ---
 
 ## 目录说明
+> **[来源: Rust Official Docs]**
 
 本目录包含对著名Rust开源库和框架的深度案例分析，从形式化角度分析其设计和实现。
 
 ---
 
 ## 专题案例
+> **[来源: Rust Official Docs]**
 
 ### 综合分析专题
+> **[来源: Rust Official Docs]**
 
 位于 `comprehensive-analysis/case-studies/`
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 预览与特性追踪](#rust-194-预览与特性追踪)
   - [目录](#目录)
@@ -43,6 +44,7 @@
 ---
 
 ## 版本概览
+> **[来源: Rust Official Docs]**
 
 | 项目 | 详情 |
 | :--- | :--- |
@@ -55,8 +57,10 @@
 ---
 
 ## 主要新特性预览
+> **[来源: Rust Official Docs]**
 
 ### 1. `control_flow_ok` 稳定化
+> **[来源: Rust Official Docs]**
 
 **特性**: `ControlFlow::ok()` 方法稳定化
 
@@ -85,6 +89,7 @@ fn process_items(items: &[i32]) -> Option<i32> {
 ---
 
 ### 2. `int_format_into` 稳定化
+> **[来源: Rust Official Docs]**
 
 **特性**: 整数格式化到预分配缓冲区
 
@@ -106,6 +111,7 @@ n.fmt_into(&mut buf)?;  // 避免 String::from(n) 的分配
 ---
 
 ### 3. `RangeToInclusive` 类型
+> **[来源: Rust Official Docs]**
 
 **特性**: `..=end` 范围的新类型 `RangeToInclusive`
 
@@ -123,6 +129,7 @@ match range {
 ---
 
 ### 4. `refcell_try_map` 稳定化
+> **[来源: Rust Official Docs]**
 
 **特性**: `RefCell::try_map` 和 `RefMut::try_map`
 
@@ -142,6 +149,7 @@ let result: Result<Ref<i32>, _> = RefCell::try_map(cell.borrow(), |opt| opt.as_r
 ---
 
 ### 5. `proc_macro_value` 稳定化
+> **[来源: Rust Official Docs]**
 
 **特性**: 过程宏中更丰富的值操作
 
@@ -150,8 +158,10 @@ let result: Result<Ref<i32>, _> = RefCell::try_map(cell.borrow(), |opt| opt.as_r
 ---
 
 ## 标准库更新
+> **[来源: Rust Official Docs]**
 
 ### 新增稳定 API
+> **[来源: Rust Official Docs]**
 
 | API | 描述 | 形式化关联 |
 | :--- | :--- | :--- |
@@ -161,6 +171,7 @@ let result: Result<Ref<i32>, _> = RefCell::try_map(cell.borrow(), |opt| opt.as_r
 | `VecDeque::truncate_front` | 从头部截断 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 
 ### 性能改进
+> **[来源: Rust Official Docs]**
 
 - **排序算法**: 进一步优化 `slice::sort`
 - **HashMap**: 重新哈希策略微调

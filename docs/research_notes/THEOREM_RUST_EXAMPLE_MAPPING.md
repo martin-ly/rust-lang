@@ -7,6 +7,7 @@
 ---
 
 ## 📊 映射总览
+> **[来源: Rust Official Docs]**
 
 | 领域 | 定理数量 | 示例数量 | 映射完成度 |
 |------|----------|----------|------------|
@@ -23,8 +24,10 @@
 ---
 
 ## 🧬 所有权系统定理映射
+> **[来源: Rust Official Docs]**
 
 ### T-OW1: 所有权唯一性定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 任意时刻资源只有一个所有者
@@ -40,6 +43,7 @@ fn theorem_ow1_ownership_uniqueness() {
 ```
 
 ### T-OW2: 移动语义保持性定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 移动后原所有者不可用，新所有者获得完整权限
@@ -56,6 +60,7 @@ fn theorem_ow2_move_semantics() {
 ```
 
 ### T-OW3: 资源释放定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 资源离开作用域时自动释放 (RAII)
@@ -78,8 +83,10 @@ fn theorem_ow3_resource_release() {
 ---
 
 ## 🧬 借用检查定理映射
+> **[来源: Rust Official Docs]**
 
 ### T-BR1: 借用安全性定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 借用期间数据始终有效且符合借用规则
@@ -101,6 +108,7 @@ fn theorem_br1_borrow_safety() {
 ```
 
 ### T-BR2: 可变借用排他性定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 可变借用提供独占访问权
@@ -117,8 +125,10 @@ fn theorem_br2_mutable_exclusivity(data: &mut Vec<i32>) {
 ---
 
 ## 🧬 类型系统定理映射
+> **[来源: Rust Official Docs]**
 
 ### T-TY1: 类型安全定理 (进展性 + 保持性)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 良类型程序不会 stuck，且求值保持类型
@@ -137,6 +147,7 @@ fn theorem_ty1_type_safety() {
 ```
 
 ### T-TY2: 泛型单态化定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定理: 泛型代码在编译期实例化，零运行时开销

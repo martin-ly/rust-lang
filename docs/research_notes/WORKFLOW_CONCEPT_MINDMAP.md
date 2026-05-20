@@ -7,6 +7,7 @@
 ---
 
 ## 概念族谱概览
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -81,8 +82,10 @@ mindmap
 ---
 
 ## 核心概念详解
+> **[来源: Rust Official Docs]**
 
 ### 1. 工作流定义语言
+> **[来源: Rust Official Docs]**
 
 | 标准 | 特点 | 适用场景 |
 |------|------|----------|

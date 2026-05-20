@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def TO1: Timeout
+> **[来源: Rust Official Docs]**
 
 超时是一种**时间限制机制**，当操作在指定时间内未完成时，终止操作并返回错误。
 
@@ -21,6 +23,7 @@ Timeout := (Op, t_max, handler)
 ```
 
 ### Def TO2: 操作结果
+> **[来源: Rust Official Docs]**
 
 ```
 OperationResult<T> :=

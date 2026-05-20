@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [并发性能研究](#并发性能研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -58,6 +59,7 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究旨在深入分析 Rust 并发实现的性能特征，评估不同并发原语和模式的性能表现，包括：
 
@@ -67,12 +69,14 @@
 4. **并发安全开销**：评估并发安全的性能开销
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **Rust 并发原语的性能特征是什么？**
 2. **不同并发模式的性能差异如何？**
 3. **如何优化并发实现的性能？**
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - 建立并发性能基准测试套件
 - 识别并发性能瓶颈
@@ -81,8 +85,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证与实验衔接
+> **[来源: Rust Official Docs]**
 
 **Def CP1（并发实验验证）**：并发性能实验 $E$ 验证 [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) T1、[async_state_machine](../../research_notes/formal_methods/async_state_machine.md) T6.2，当且仅当 $E$ 在观测下无数据竞争。
 
@@ -106,6 +112,7 @@
 **引用**：[experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)。
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **并发性能（Concurrency Performance）**：评估并发程序在多核处理器上的执行效率和资源利用率。
 
@@ -117,6 +124,7 @@
 - **竞争开销（Contention Overhead）**：锁竞争导致的性能损失
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **并发模型**：
 
@@ -128,8 +136,10 @@
 ---
 
 ## 🔬 实验设计 {#-实验设计}
+> **[来源: Rust Official Docs]**
 
 ### 1. 同步原语性能测试
+> **[来源: Rust Official Docs]**
 
 **测试目标**：比较不同同步原语的性能
 
@@ -148,6 +158,7 @@
 - 可扩展性
 
 ### 2. 通道性能测试
+> **[来源: Rust Official Docs]**
 
 **测试目标**：评估不同通道实现的性能
 

@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [案例研究: 高性能Web服务器架构](#案例研究-高性能web服务器架构)
   - [目录](#目录)
@@ -41,8 +42,10 @@
 ---
 
 ## 1. 需求分析
+> **[来源: Rust Official Docs]**
 
 ### 1.1 功能需求
+> **[来源: Rust Official Docs]**
 
 - HTTP/1.1 和 HTTP/2 支持
 - TLS/SSL 加密

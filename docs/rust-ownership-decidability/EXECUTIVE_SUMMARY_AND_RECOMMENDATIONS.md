@@ -7,10 +7,12 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 经过全面的递归审计，项目呈现以下特征：
 
 ### 优势 (Strengths)
+> **[来源: Rust Official Docs]**
 
 1. **形式化深度卓越**: Coq 形式化 (~5,500 行) 是同类项目罕见
 2. **并发内容深入**: 达到专著级深度
@@ -18,6 +20,7 @@
 4. **程序语义完整**: 系统化程度高
 
 ### 劣势 (Weaknesses)
+> **[来源: Rust Official Docs]**
 
 1. **Unsafe Rust 严重不足**: 仅占应有内容的 30%
 2. **底层细节缺失**: Data Layout, Unwinding 等

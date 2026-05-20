@@ -10,8 +10,10 @@
 ---
 
 ## 一、对 formal_methods 的意见与建议
+> **[来源: Rust Official Docs]**
 
 ### 1.1 现状简述
+> **[来源: Rust Official Docs]**
 
 - **已有**：所有权、借用、生命周期、Pin、异步（Future/Poll 状态机）、**Send/Sync** 六篇独立形式化文档；
 - 控制流、通道、Mutex、thread::spawn、裸指针、unsafe 等
@@ -29,6 +31,7 @@
      - **推理证明树**在「机制 ↔ Def/Axiom/定理」层面的统一索引（与 PROOF_INDEX 互补的“按机制查证明”视图）。
 
 ### 1.2 具体建议
+> **[来源: Rust Official Docs]**
 
 | 建议 | 优先级 | 说明 |
 | :--- | :--- | :--- |
@@ -41,8 +44,10 @@
 ---
 
 ## 二、安全的可判定的机制：全面梳理建议
+> **[来源: Rust Official Docs]**
 
 ### 2.1 何为“安全的可判定的机制”
+> **[来源: Rust Official Docs]**
 
 - **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
 - **可判定**：是否满足该机制可由**编译期**算法判定（或由类型系统 + 固定规则在编译期检查），无需运行时或人工证明。
@@ -50,6 +55,7 @@
 示例：所有权、借用、生命周期、Send、Sync、Unpin（及 async 的 Send 边界）、match 穷尽、for/IntoIterator、? 的 Result 类型等，均为**静态可判定**；RefCell 的借用为**运行时**可判定（panic）；死锁、进度则为**不可判定**（需额外方法或规范）。
 
 ### 2.2 建议的“安全可判定机制”清单与形式化对应
+> **[来源: Rust Official Docs]**
 
 下表为**全面梳理**的推荐范围；每项应具备：概念定义、属性关系、解释论证、形式证明引用、反例；并与思维表征四类挂钩。
 
@@ -72,6 +78,7 @@
 **说明**：Send/Sync 已通过阶段 A 独立成篇 [send_sync_formalization](send_sync_formalization.md)，与上表一致。
 
 ### 2.3 与“概念定义–属性关系–解释论证–形式证明”的对应
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：每机制在对应形式化文档中有 Def 或等价形式化描述（Send/Sync 需补）。
 - **属性关系**：如 Send 与 Sync 的等价关系、与 ownership/borrow 的依赖（spawn 依赖 Send；Future 并发依赖 Send+Sync）。
@@ -81,10 +88,12 @@
 ---
 
 ## 三、完备的 Rust 特性全部特征对比
+> **[来源: Rust Official Docs]**
 
 下表在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 92 项基础上，增加**可判定性、安全边界、形式化文档、思维表征**四维，形成「全部特征对比」视图；核心机制（含 Send/Sync/async）单独成块便于与 formal_methods 对照。
 
 ### 3.1 核心安全可判定机制对比（子表）
+> **[来源: Rust Official Docs]**
 
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维导图 | 矩阵 | 决策树 | 证明树 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -100,6 +109,7 @@
 | 通道/Mutex/spawn | 静态（接口） | Safe 并发 | CHAN1/MUTEX1/SPAWN1 | 03_execution | 执行模型矩阵 | 06_boundary | PROOF_INDEX |
 
 ### 3.2 全 92 项特性维度说明（与 RUST_193 一致 + 四维）
+> **[来源: Rust Official Docs]**
 
 - **可判定性**：静态 / 运行时 / 不可判定（或 N/A）。
 - **安全边界**：Safe 核心 / Safe 并发 / Safe 异步 / Unsafe 边界 / 仅规范（无形式化）。
@@ -111,6 +121,7 @@
 ---
 
 ## 四、思维表征与 formal_methods 结合建议
+> **[来源: Rust Official Docs]**
 
 ### 4.1 四类思维表征与文档绑定
 

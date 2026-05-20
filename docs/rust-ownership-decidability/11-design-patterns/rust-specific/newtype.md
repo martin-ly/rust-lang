@@ -7,12 +7,14 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 Newtype 模式使用单字段元组结构体包装现有类型，提供编译时类型区分，零运行时开销。
 
 ---
 
 ## 基础示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基础类型容易混淆
@@ -68,6 +70,7 @@ fn main() {
 ---
 
 ## 为外部类型实现 Trait
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::fmt;

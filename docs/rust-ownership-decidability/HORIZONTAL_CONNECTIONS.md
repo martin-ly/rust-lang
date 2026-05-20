@@ -5,8 +5,10 @@
 ---
 
 ## 一、概念关联网络
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心概念的三角关系
+> **[来源: Rust Official Docs]**
 
 ```text
                     所有权(Ownership)
@@ -50,6 +52,7 @@
 ```
 
 ### 1.2 类型系统与所有权系统的融合
+> **[来源: Rust Official Docs]**
 
 **传统观点**：类型系统和所有权是分开的
 

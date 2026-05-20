@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Criterion.rs 基准测试形式化分析](#criterionrs-基准测试形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Criterion提供:
 
@@ -40,6 +42,7 @@ Criterion提供:
 ---
 
 ## 2. 统计模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 线性回归
 

@@ -5,6 +5,7 @@
 > **更新日期**: 2025年 (兼容Rust 1.94)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Creusot 深度解析：预言变量与Rust验证](#creusot-深度解析预言变量与rust验证)
   - [目录](#目录)
@@ -35,8 +36,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Creusot 概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目背景
+> **[来源: Rust Official Docs]**
 
 Creusot 是由巴黎萨克雷大学 (Université Paris-Saclay) 和 INRIA 开发的一款 Rust 演绎验证工具。
 

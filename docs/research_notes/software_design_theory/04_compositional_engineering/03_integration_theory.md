@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -38,6 +39,7 @@
 ---
 
 ## 形式化定义与定理
+> **[来源: Rust Official Docs]**
 
 **Def 1.1（跨模块边界）**:
 
@@ -71,6 +73,7 @@
 ---
 
 ## 衔接关系图
+> **[来源: Rust Official Docs]**
 
 ```text
 组合软件工程有效性
@@ -103,6 +106,7 @@
 ---
 
 ## 组合与所有权
+> **[来源: Rust Official Docs]**
 
 | 传递方式 | 所有权 | 形式化 |
 | :--- | :--- | :--- |
@@ -116,6 +120,7 @@
 ---
 
 ## 组合与 trait
+> **[来源: Rust Official Docs]**
 
 | 场景 | 衔接 |
 | :--- | :--- |
@@ -126,6 +131,7 @@
 ---
 
 ## 设计模式组合示例
+> **[来源: Rust Official Docs]**
 
 设计模式可组合使用，例如：
 
@@ -139,6 +145,7 @@
 ---
 
 ## 组合代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Builder + Strategy：可配置的排序策略
@@ -167,6 +174,7 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 ---
 
 ## 完整多模式组合链条：Builder + Factory + Repository
+> **[来源: Rust Official Docs]**
 
 **场景**：订单创建（Builder）→ 工厂选择（Factory）→ 持久化（Repository + DTO）。
 
@@ -210,6 +218,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合验证清单
+> **[来源: Rust Official Docs]**
 
 组合多模块/多模式时，确认：
 
@@ -222,6 +231,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 跨模块 Send/Sync 传递
+> **[来源: Rust Official Docs]**
 
 | 场景 | 约束 |
 | :--- | :--- |
@@ -235,6 +245,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合反例
+> **[来源: Rust Official Docs]**
 
 | 反例 | 后果 |
 | :--- | :--- |

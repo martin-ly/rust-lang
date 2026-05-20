@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [alloc-cortex-m嵌入式堆分配器形式化分析](#alloc-cortex-m嵌入式堆分配器形式化分析)
   - [目录](#目录)
@@ -30,6 +31,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 嵌入式系统中使用堆分配的挑战：
 
@@ -41,6 +43,7 @@
 ---
 
 ## 2. 内存池形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 POOL-1 ( 内存池 )
 

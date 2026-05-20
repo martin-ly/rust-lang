@@ -8,6 +8,8 @@
 ---
 
 ## 📊 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 编译器特性与优化](#rust-编译器特性与优化)
   - [📊 目录](#-目录)
@@ -70,6 +72,8 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
 
 ## 🎯 文档说明
+>
+> **[来源: Rust Official Docs]**
 
 本文档涵盖 Rust 编译器 (`rustc`) 的核心特性、优化技术和最新改进，帮助开发者更好地理解和利用编译器功能。
 
@@ -78,8 +82,12 @@
 ---
 
 ## 1. 编译器概览
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 编译流程
+>
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────┐
@@ -140,6 +148,8 @@
 ---
 
 ### 1.2 编译器版本
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 查看编译器版本
@@ -174,8 +184,12 @@ rustc --print target-list
 ---
 
 ## 2. 增量编译 (Rust 1.54+)
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 增量编译原理
+>
+> **[来源: Rust Official Docs]**
 
 **特性**: Rust 1.54 默认重新启用增量编译
 
@@ -189,6 +203,8 @@ rustc --print target-list
 ---
 
 ### 2.2 配置增量编译
+>
+> **[来源: Rust Official Docs]**
 
 **Cargo.toml 配置**:
 
@@ -227,6 +243,8 @@ rm -rf target/release/incremental
 ---
 
 ### 2.3 性能影响
+>
+> **[来源: Rust Official Docs]**
 
 **首次编译**: 无明显差异
 
@@ -244,8 +262,12 @@ rm -rf target/release/incremental
 ---
 
 ## 3. 优化级别
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 基础优化级别
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 [profile.dev]

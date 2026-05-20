@@ -1,8 +1,10 @@
 # 进度报告: Week 1 (2026-03-06)
 
 ## 本周完成工作
+> **[来源: Rust Official Docs]**
 
 ### ✅ 1. Coq 形式化基础 (80%)
+> **[来源: Rust Official Docs]**
 
 创建了完整的 Coq 项目结构：
 
@@ -20,6 +22,7 @@ coq-formalization/
 ```
 
 #### Types.v 完成内容
+> **[来源: Rust Official Docs]**
 
 - [x] 基础类型定义（所有 Rust 基础类型）
 - [x] 可变性类型（Uniq/Shrd）及比较

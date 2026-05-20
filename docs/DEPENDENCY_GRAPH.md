@@ -6,8 +6,10 @@
 ---
 
 ## Crate 依赖图
+> **[来源: Rust Official Docs]**
 
 ### 视觉表示
+> **[来源: Rust Official Docs]**
 
 ```
                     外部依赖
@@ -63,6 +65,7 @@
 ---
 
 ## 依赖矩阵
+> **[来源: Rust Official Docs]**
 
 | Crate | 直接依赖 | 外部依赖 |
 |-------|----------|----------|

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Pin-project形式化分析](#pin-project形式化分析)
   - [目录](#目录)
@@ -39,6 +40,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Pin-project解决的问题：
 
@@ -49,6 +51,7 @@ Pin-project解决的问题：
 ---
 
 ## 2. Pin语义
+> **[来源: Rust Official Docs]**
 
 ### 定义 PIN-1 ( Pin保证 )
 

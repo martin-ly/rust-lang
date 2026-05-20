@@ -12,8 +12,10 @@
 ---
 
 ## Rust 测试生态系统
+> **[来源: Rust Official Docs]**
 
 ### 单元测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 模块内的测试
@@ -74,6 +76,7 @@ fn some_operation() -> Result<i32, String> {
 ```
 
 ### 集成测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 // tests/integration_test.rs

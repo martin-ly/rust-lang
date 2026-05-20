@@ -1,14 +1,17 @@
 # Rust安全关键编码规范
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档定义安全关键Rust项目的编码规范，确保代码安全、可靠、可维护，符合ISO 26262 ASIL D、IEC 61508 SIL 4等标准要求。
 
 ---
 
 ## 1. 安全编码原则
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心原则
+> **[来源: Rust Official Docs]**
 
 ```
 原则1: 利用Rust类型系统
@@ -33,6 +36,7 @@
 ```
 
 ### 1.2 安全等级对应规范
+> **[来源: Rust Official Docs]**
 
 | 等级 | unsafe代码 | 形式化验证 | 覆盖率 | 审查 |
 |------|------------|------------|--------|------|
@@ -45,8 +49,10 @@
 ---
 
 ## 2. 内存安全规范
+> **[来源: Rust Official Docs]**
 
 ### 2.1 所有权与借用
+> **[来源: Rust Official Docs]**
 
 **必须 (MUST)**:
 
@@ -81,6 +87,7 @@ println!("{}", ref1[0]);
 ```
 
 ### 2.2 生命周期管理
+> **[来源: Rust Official Docs]**
 
 **推荐 (SHOULD)**:
 
@@ -112,6 +119,7 @@ struct BadParser {
 ```
 
 ### 2.3 智能指针使用
+> **[来源: Rust Official Docs]**
 
 **必须 (MUST)**:
 
@@ -153,8 +161,10 @@ struct Node {
 ---
 
 ## 3. unsafe代码规范
+> **[来源: Rust Official Docs]**
 
 ### 3.1 使用准则
+> **[来源: Rust Official Docs]**
 
 **ASIL D/SIL 4: 完全禁止unsafe**
 
@@ -176,6 +186,7 @@ pub unsafe fn read_value<T>(ptr: *const T) -> T {
 ```
 
 ### 3.2 必需文档
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 从原始指针读取值

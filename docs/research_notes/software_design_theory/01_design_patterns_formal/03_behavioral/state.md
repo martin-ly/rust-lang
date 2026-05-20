@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [State 形式化分析](#state-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -46,8 +47,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（State 结构）
+> **[来源: Rust Official Docs]**
 
 设 $C$ 为上下文类型，$S$ 为状态类型。State 是一个三元组 $\mathcal{ST} = (C, S, \mathit{transition})$，满足：
 
@@ -62,6 +65,7 @@ $$\mathcal{ST} = \langle C, S, \mathit{transition}: C \times S \rightarrow S' \r
 ---
 
 ### Axiom ST1（状态机全定义公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s'$$
 
@@ -70,6 +74,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 定理 ST-T1（枚举穷尽定理）
+> **[来源: Rust Official Docs]**
 
 枚举 + match 或类型状态（零开销）实现；由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 穷尽匹配保证完备性。
 
@@ -96,6 +101,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 定理 ST-T2（类型状态编译期消除定理）
+> **[来源: Rust Official Docs]**
 
 类型状态模式（泛型相位）在编译期消除非法状态；如 `Locked` 与 `Unlocked` 为不同类型。
 
@@ -125,6 +131,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 推论 ST-C1（纯 Safe State）
+> **[来源: Rust Official Docs]**
 
 State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 
@@ -139,6 +146,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -149,6 +157,7 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 enum State { A, B, C }
@@ -184,8 +193,10 @@ impl Config<Unlocked> {
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+> **[来源: Rust Official Docs]**
 
 ```text
 Axiom ST1 (状态机全定义)

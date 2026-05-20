@@ -9,6 +9,8 @@
 ---
 
 ## 快速示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 异步编程示例
@@ -79,6 +81,8 @@ impl ConfigBuilder {
 ---
 
 ## 文档列表
+>
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 难度 |
 | :--- | :--- | :--- |
@@ -97,8 +101,12 @@ impl ConfigBuilder {
 ---
 
 ## 指南概览
+>
+> **[来源: Rust Official Docs]**
 
 ### 异步编程
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Future trait 基础
@@ -121,6 +129,8 @@ impl Future for Delay {
 ```
 
 ### 线程与并发
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用 Arc + Mutex 共享状态
@@ -144,6 +154,8 @@ fn shared_state() {
 ```
 
 ### Unsafe Rust
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 原始指针操作
@@ -162,6 +174,8 @@ unsafe fn raw_pointer_example() {
 ```
 
 ### 宏系统
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 声明宏
@@ -182,6 +196,8 @@ let v = vec_mac![1, 2, 3];
 ---
 
 ## 形式化方法
+>
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -193,6 +209,8 @@ let v = vec_mac![1, 2, 3];
 ---
 
 ## 主索引
+>
+> **[来源: Rust Official Docs]**
 
 [00_MASTER_INDEX.md](../00_MASTER_INDEX.md)
 
@@ -203,10 +221,14 @@ let v = vec_mac![1, 2, 3];
 ---
 
 ## Rust 1.95+ 指南更新
+>
+> **[来源: Rust Official Docs]**
 
 本目录下的所有指南已完成 Rust 1.95+ 深度语义整合。
 
 ### 整合统计
+>
+> **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 状态 |
 |------|------|------|

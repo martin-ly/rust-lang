@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Futures Crate 形式化分析](#futures-crate-形式化分析)
   - [目录](#目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Futures crate提供:
 
@@ -42,6 +44,7 @@ Futures crate提供:
 ---
 
 ## 2. FutureExt组合子
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (map_ok/map_err)
 

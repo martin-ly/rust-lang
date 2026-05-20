@@ -1,6 +1,7 @@
 # 服务网格语义 (Service Mesh Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [服务网格语义 (Service Mesh Semantics)](#服务网格语义-service-mesh-semantics)
   - [目录](#目录)
@@ -23,6 +24,7 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 服务网格是微服务架构中处理服务间通信的基础设施层。
 本文档深入分析服务网格的架构语义、流量管理机制及其在 Rust 中的实现模式。
@@ -30,8 +32,10 @@
 ---
 
 ## 2. 服务网格架构
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Sidecar 模式
+> **[来源: Rust Official Docs]**
 
 ```
 服务网格架构:
@@ -66,6 +70,7 @@
 ```
 
 ### 2.2 数据平面与控制平面
+> **[来源: Rust Official Docs]**
 
 ```
 服务网格平面分离:
@@ -108,6 +113,7 @@
 ```
 
 ### 2.3 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```
 服务网格形式化语义:
@@ -143,8 +149,10 @@ xDS 配置状态机:
 ---
 
 ## 3. 流量管理
+> **[来源: Rust Official Docs]**
 
 ### 3.1 流量分割与灰度发布
+> **[来源: Rust Official Docs]**
 
 ```
 流量路由形式化:
@@ -175,6 +183,7 @@ A/B 测试:
 ```
 
 ### 3.2 故障注入
+> **[来源: Rust Official Docs]**
 
 ```
 混沌工程形式化:
@@ -201,8 +210,10 @@ A/B 测试:
 ---
 
 ## 4. Rust 实现
+> **[来源: Rust Official Docs]**
 
 ### 4.1 Sidecar 代理核心
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;

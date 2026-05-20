@@ -8,6 +8,7 @@
 ---
 
 ## 📊 快速导航
+> **[来源: Rust Official Docs]**
 
 > 💡 **提示**: 需要更详细的查找功能？请查看 [快速查找工具](./QUICK_FIND.md)！
 > 📐 **分类体系**: 按文档角色、知识层次、主题域查找 → [CLASSIFICATION.md](./CLASSIFICATION.md)
@@ -16,8 +17,10 @@
 ---
 
 ### 按研究领域查找
+> **[来源: Rust Official Docs]**
 
 #### 🔬 形式化方法研究
+> **[来源: Rust Official Docs]**
 
 | 主题  | 文件 | 状态  |
 | :--- | :--- | :--- |
@@ -29,6 +32,7 @@
 | Pin 和自引用类型 | [pin_self_referential.md](./formal_methods/pin_self_referential.md)                | ✅ 100%           |
 
 #### 🔷 类型理论研究
+> **[来源: Rust Official Docs]**
 
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
@@ -41,6 +45,7 @@
 | 型变理论         | [variance_theory.md](./type_theory/variance_theory.md)                         | ✅ 100%               |
 
 #### 🌐 软件设计理论
+> **[来源: Rust Official Docs]**
 
 | 主题  | 文件 | 状态 |
 | :--- | :--- | :--- |
@@ -53,6 +58,7 @@
 | 反模式与边界 | [07_anti_patterns](./software_design_theory/07_anti_patterns.md) | ✅ 13 反例、规避策略 |
 
 #### ⚡ 实验研究
+> **[来源: Rust Official Docs]**
 
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
@@ -63,6 +69,7 @@
 | 宏展开性能     | [macro_expansion_performance.md](./experiments/macro_expansion_performance.md)     | ✅ 100% |
 
 #### 🌐 综合研究
+> **[来源: Rust Official Docs]**
 
 | 主题 | 文件 | 状态 |
 | :--- | :--- | :--- |
@@ -72,8 +79,10 @@
 ---
 
 ## 🎯 按研究目标查找
+> **[来源: Rust Official Docs]**
 
 ### 我想证明某个性质
+> **[来源: Rust Official Docs]**
 
 **形式化证明体系**（2026-02-14）:
 
@@ -89,6 +98,7 @@
 - 引用有效性 → [生命周期形式化](./formal_methods/lifetime_formalization.md)
 
 ### 我想理解类型系统
+> **[来源: Rust Official Docs]**
 
 **类型理论研究**:
 
@@ -98,6 +108,7 @@
 - 型变规则 → [型变理论](./type_theory/variance_theory.md)
 
 ### 我想优化性能
+> **[来源: Rust Official Docs]**
 
 **实验研究**:
 

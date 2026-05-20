@@ -8,12 +8,14 @@
 ---
 
 ## 宗旨
+> **[来源: Rust Official Docs]**
 
 将 Rust 社区惯用模式（Idioms）与软件设计理论、形式化基础衔接，提供**实质内容**：形式化对应、与 GoF 模式关系、典型场景、常见陷阱、代码示例。
 
 ---
 
 ## 层次推进（阅读顺序）
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 先修 |
 | :--- | :--- | :--- |
@@ -24,8 +26,10 @@
 ---
 
 ## 一、RAII（资源获取即初始化）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 定义与形式化
+> **[来源: Rust Official Docs]**
 
 **Def RAII1（RAII 惯用）**：资源生命周期与对象绑定；构造时获取、析构时释放；$\forall r \in \text{Resource},\, \exists x \in \text{Var}: \text{owns}(x, r) \land \text{scope\_end}(x) \rightarrow \text{release}(r)$。
 
@@ -34,6 +38,7 @@
 **定理 RAII-T1**：RAII 实现等价于 ownership 规则 3；`Drop::drop` 在 `scope_end` 时调用；由 [ownership_model](../formal_methods/ownership_model.md) 定理 T3、BOX-T1。
 
 ### 1.2 典型场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |
@@ -43,6 +48,7 @@
 | 内存 | `Box`、`Vec` | 与 ownership 直接对应 |
 
 ### 1.3 完整代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // RAII：文件句柄自动关闭
@@ -69,6 +75,7 @@ let m = Mutex::new(0);
 ```
 
 ### 1.4 常见陷阱
+> **[来源: Rust Official Docs]**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -77,6 +84,7 @@ let m = Mutex::new(0);
 | 忘记 `impl Drop` | 资源泄漏 | 显式 RAII 封装 |
 
 ### 1.5 与设计模式衔接
+> **[来源: Rust Official Docs]**
 
 - **Builder**：`build(self)` 消费后由调用方负责 drop；RAII 保证中间资源正确释放
 - **Factory Method**：产品常为 RAII 类型；工厂返回 `Box<T>` 时 ownership 清晰
@@ -85,8 +93,10 @@ let m = Mutex::new(0);
 ---
 
 ## 二、Newtype 模式
+> **[来源: Rust Official Docs]**
 
 ### 2.1 定义与形式化
+> **[来源: Rust Official Docs]**
 
 **Def NW1（Newtype）**：单字段包装类型，零成本抽象；`struct Newtype(T)`；`repr(transparent)` 保证布局与 `T` 一致。
 
@@ -95,6 +105,7 @@ let m = Mutex::new(0);
 **定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
 
 ### 2.2 典型场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |

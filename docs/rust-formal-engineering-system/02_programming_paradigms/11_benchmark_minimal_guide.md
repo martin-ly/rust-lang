@@ -11,6 +11,7 @@
 ---
 
 ## 形式化链接
+> **[来源: Rust Official Docs]**
 
 | 文档 | 路径 | 内容 |
 | :--- | :--- | :--- |
@@ -23,8 +24,10 @@
 ---
 
 ## 基准测试核心概念
+> **[来源: Rust Official Docs]**
 
 ### 为什么需要基准测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 错误：简单计时容易受干扰
@@ -45,6 +48,7 @@ fn fibonacci(n: u64) -> u64 {
 ```
 
 ### 使用 Criterion 进行可靠基准测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Cargo.toml:
@@ -81,6 +85,7 @@ criterion_main!(benches);
 ```
 
 ### 防止编译器优化（black_box）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::black_box;
@@ -107,6 +112,7 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 ```
 
 ### 参数化基准测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::{BenchmarkId, Criterion};
@@ -134,6 +140,7 @@ fn bench_various_sizes(c: &mut Criterion) {
 ```
 
 ### 比较不同实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::{BenchmarkId, Criterion};
@@ -182,6 +189,7 @@ fn bench_comparison(c: &mut Criterion) {
 ```
 
 ### 异步基准测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::{async_executor::FuturesExecutor, Criterion};
@@ -208,6 +216,7 @@ fn bench_async(c: &mut Criterion) {
 ```
 
 ### 吞吐量测量
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::{Criterion, Throughput};
@@ -234,8 +243,10 @@ fn bench_with_throughput(c: &mut Criterion) {
 ---
 
 ## 基准测试最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 统计显著性
+> **[来源: Rust Official Docs]**
 
 ```rust
 use criterion::{Criterion, SamplingMode};

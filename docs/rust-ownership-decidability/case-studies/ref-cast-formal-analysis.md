@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Ref-Cast 引用转换形式化分析](#ref-cast-引用转换形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ref-cast提供:
 
@@ -36,6 +38,7 @@ ref-cast提供:
 ---
 
 ## 2. RefCast Trait
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (引用转换)
 

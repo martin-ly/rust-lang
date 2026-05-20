@@ -11,6 +11,7 @@
 ---
 
 ## 所有权的核心规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 规则 1：每个值都有一个所有者
@@ -39,6 +40,7 @@ fn rule3() {
 ```
 
 ## 所有权与函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn take_ownership(s: String) {
@@ -69,6 +71,7 @@ fn demo() {
 ```
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

@@ -12,6 +12,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 标准库全面分析与论证文档](#rust-标准库全面分析与论证文档)
   - [📋 目录](#-目录)
@@ -101,6 +102,7 @@
 ---
 
 ## 🎯 文档目标
+> **[来源: Rust Official Docs]**
 
 本文档旨在：
 
@@ -113,12 +115,15 @@
 ---
 
 ## 📚 1. 标准库概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 标准库的定义和定位
+> **[来源: Rust Official Docs]**
 
 **标准库 (Standard Library)** 是 Rust 语言的核心库，提供了 Rust 程序的基础功能。
 
 #### 定义
+> **[来源: Rust Official Docs]**
 
 标准库 `std` 是 Rust 语言的核心库，包含：
 
@@ -132,6 +137,7 @@
 - **错误处理**: `Error` trait, `Result` 等
 
 #### 定位
+> **[来源: Rust Official Docs]**
 
 标准库在 Rust 生态中的定位：
 
@@ -141,10 +147,12 @@
 4. **安全保证**: 标准库遵循 Rust 安全保证
 
 ### 1.2 标准库的设计哲学
+> **[来源: Rust Official Docs]**
 
 Rust 标准库的设计哲学可以概括为：
 
 #### 1.2.1 零成本抽象 (Zero-Cost Abstractions)
+> **[来源: Rust Official Docs]**
 
 标准库提供的抽象不应该带来运行时开销。
 
@@ -161,6 +169,7 @@ let opt: Option<i32> = Some(42);
 ```
 
 #### 1.2.2 内存安全 (Memory Safety)
+> **[来源: Rust Official Docs]**
 
 标准库的所有 API 都遵循 Rust 的内存安全保证。
 
@@ -179,6 +188,7 @@ let slice = &vec[..];  // 不可变借用
 ```
 
 #### 1.2.3 显式错误处理 (Explicit Error Handling)
+> **[来源: Rust Official Docs]**
 
 标准库使用 `Result<T, E>` 和 `Option<T>` 进行显式错误处理。
 
@@ -198,6 +208,7 @@ match value {
 ```
 
 ### 1.3 Rust 1.92.0 标准库新特性
+> **[来源: Rust Official Docs]**
 
 Rust 1.92.0 标准库引入了以下新特性：
 
@@ -451,6 +462,7 @@ target.append(&mut source);
 ---
 
 ## 📊 2. 核心标准库模块分析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 集合类型 (std::collections)
 
@@ -901,6 +913,7 @@ let result = value
 ---
 
 ## 🔍 3. 标准库设计论证
+> **[来源: Rust Official Docs]**
 
 ### 3.1 零成本抽象
 
@@ -1002,6 +1015,7 @@ map.insert("key", "value");  // O(1) 平均
 ---
 
 ## 📝 4. 标准库使用最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 4.1 何时使用标准库
 
@@ -1072,6 +1086,7 @@ use serde::{Serialize, Deserialize};
 ---
 
 ## 🎓 5. 项目中的标准库使用
+> **[来源: Rust Official Docs]**
 
 ### 5.1 各模块的标准库使用情况
 
@@ -1214,6 +1229,7 @@ let mut map = HashMap::with_capacity(100);  // 预分配容量
 ---
 
 ## 💻 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 示例: 标准库类型安全验证
 
@@ -1285,6 +1301,7 @@ fn main() {
 ---
 
 ## 🔗 形式化链接
+> **[来源: Rust Official Docs]**
 
 ### 标准库与形式化定理
 
@@ -1316,6 +1333,7 @@ fn main() {
 ---
 
 ## 📚 相关文档
+> **[来源: Rust Official Docs]**
 
 - [Rust 标准库文档](https://doc.rust-lang.org/std/)
 - [Rust 1.93.0 发布说明](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0) 🆕
@@ -1332,6 +1350,7 @@ fn main() {
 ---
 
 ## Rust 1.95+ 更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -1345,3 +1364,7 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

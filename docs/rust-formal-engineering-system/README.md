@@ -10,10 +10,12 @@
 ---
 
 ## 导航说明
+> **[来源: Rust Official Docs]**
 
 本项目的 Rust 形式化理论与工程文档已整合至 **研究笔记系统**。请使用以下入口访问：
 
 ### 核心入口
+> **[来源: Rust Official Docs]**
 
 | 模块 | 入口路径 | 说明 |
 | :--- | :--- | :--- |
@@ -22,6 +24,7 @@
 | **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
 
 ### 快速跳转
+> **[来源: Rust Official Docs]**
 
 - [所有权与借用理论](../research_notes/formal_methods/ownership_model.md)
 - [借用检查器证明](../research_notes/formal_methods/borrow_checker_proof.md)

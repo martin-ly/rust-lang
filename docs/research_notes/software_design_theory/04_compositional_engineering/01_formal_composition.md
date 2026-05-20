@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [组合的形式化定义](#组合的形式化定义)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 定义
+> **[来源: Rust Official Docs]**
 
 **Def 1.1（模块）**:
 
@@ -67,6 +69,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## 公理
+> **[来源: Rust Official Docs]**
 
 **Axiom CE1**：组合无命名冲突；模块路径唯一（`crate::module::item`）。
 
@@ -77,6 +80,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## 定理与引理（形式化论证）
+> **[来源: Rust Official Docs]**
 
 **定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
@@ -105,6 +109,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## Rust 对应
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 模块结构
@@ -128,6 +133,7 @@ fn main() {
 ---
 
 ## 设计模式组合示例
+> **[来源: Rust Official Docs]**
 
 **Repository + Factory Method**：
 
@@ -172,6 +178,7 @@ impl<S: Service> Service for Logging<S> {
 ---
 
 ## Crate 组合
+> **[来源: Rust Official Docs]**
 
 ```rust
 // crate_a 提供 trait
@@ -198,6 +205,7 @@ fn main() {
 ---
 
 ## 组合反例
+> **[来源: Rust Official Docs]**
 
 | 反例 | 后果 |
 | :--- | :--- |
@@ -208,6 +216,7 @@ fn main() {
 ---
 
 ## 引用
+> **[来源: Rust Official Docs]**
 
 - [type_system_foundations](../../type_theory/type_system_foundations.md)
 - [trait_system_formalization](../../type_theory/trait_system_formalization.md)
@@ -215,11 +224,13 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录概览
+> **[来源: Rust Official Docs]**
 
 ```
 rust-lang/
@@ -23,6 +24,7 @@ rust-lang/
 ---
 
 ## 文档结构 (docs/)
+> **[来源: Rust Official Docs]**
 
 ```
 docs/
@@ -46,6 +48,7 @@ docs/
 ---
 
 ## Crate 结构 (crates/)
+> **[来源: Rust Official Docs]**
 
 ### 核心学习 Crate
 

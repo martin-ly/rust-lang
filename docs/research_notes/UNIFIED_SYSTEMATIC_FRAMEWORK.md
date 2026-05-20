@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 研究笔记：全局统一系统化框架](#rust-研究笔记全局统一系统化框架)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -49,10 +50,12 @@
 ---
 
 ## 🎯 框架宗旨 {#-框架宗旨}
+> **[来源: Rust Official Docs]**
 
 **上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
 ### 核心问题响应
+> **[来源: Rust Official Docs]**
 
 | 用户反馈 | 本框架应对 |
 | :--- | :--- |
@@ -68,6 +71,7 @@
 ---
 
 ## 形式化论证（框架一致性）
+> **[来源: Rust Official Docs]**
 
 **Def USF1（框架覆盖）**：设 $\mathcal{F}$ 为本框架索引的文档集，$\mathcal{F}$ 包含 formal_methods、type_theory、software_design_theory、05_boundary_system、LANGUAGE_SEMANTICS_EXPRESSIVENESS 等。若文档 $d \in \mathcal{F}$ 有 Def、Axiom、Theorem 及与 PROOF_INDEX 的衔接，则称 $d$ **形式化完备**。
 
@@ -82,6 +86,7 @@
 ---
 
 ## 🕸️ 全局思维导图：Rust 形式化知识全景 {#️-全局思维导图rust-形式化知识全景}
+> **[来源: Rust Official Docs]**
 
 ```text
                     Rust 形式化知识全景
@@ -111,6 +116,7 @@
 ```
 
 ### 按论证结构展开的思维导图
+> **[来源: Rust Official Docs]**
 
 ```text
 论证结构全景
@@ -147,8 +153,10 @@
 ---
 
 ## 📐 多维概念对比矩阵总览 {#-多维概念对比矩阵总览}
+> **[来源: Rust Official Docs]**
 
 ### 1. 概念-公理-定理-证明方法-反例 五维矩阵
+> **[来源: Rust Official Docs]**
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例（违反后果） |
 | :--- | :--- | :--- | :--- | :--- |
@@ -165,6 +173,7 @@
 | Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统 | 对象安全违规 |
 
 ### 2. 语义范式 vs 概念族 矩阵
+> **[来源: Rust Official Docs]**
 
 | 语义范式 | 内存安全族 | 类型安全族 | 并发安全族 | 表达能力边界 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -174,6 +183,7 @@
 | 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵
+> **[来源: Rust Official Docs]**
 
 | 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 证明完成度 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -190,6 +200,7 @@
 ---
 
 ## 🌳 公理-定理-证明全链路逻辑推进图 {#-公理-定理-证明全链路逻辑推进图}
+> **[来源: Rust Official Docs]**
 
 ```text
 公理/定义层

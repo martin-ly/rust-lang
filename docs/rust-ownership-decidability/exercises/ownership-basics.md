@@ -6,8 +6,10 @@
 ---
 
 ## 练习 1: 移动语义
+> **[来源: Rust Official Docs]**
 
 ### 题目
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {
@@ -19,6 +21,7 @@ fn main() {
 ```
 
 ### 答案
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {

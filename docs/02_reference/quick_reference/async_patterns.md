@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [⚡ Rust 异步编程速查卡](#-rust-异步编程速查卡)
   - [📋 目录](#-目录)
@@ -82,6 +83,7 @@
 ---
 
 ## 🧠 异步状态机思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -115,6 +117,7 @@ mindmap
 ---
 
 ## 📊 概念定义-属性关系-解释论证
+> **[来源: Rust Official Docs]**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -129,6 +132,7 @@ mindmap
 ---
 
 ## 🔬 异步状态机证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -155,6 +159,7 @@ graph TD
 ```
 
 ### 异步执行决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -176,8 +181,10 @@ graph TD
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ### Future Trait（核心抽象）
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub trait Future {
@@ -194,8 +201,10 @@ pub enum Poll<T> {
 ---
 
 ## 🚀 基本模式
+> **[来源: Rust Official Docs]**
 
 ### 模式 1: async/await 基础
+> **[来源: Rust Official Docs]**
 
 ```rust
 async fn fetch_data() -> String {
@@ -212,6 +221,7 @@ async fn main() {
 ---
 
 ### 模式 2: 并发执行
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::join;
@@ -230,6 +240,7 @@ async fn main() {
 ---
 
 ### 模式 3: 选择第一个完成
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::select;

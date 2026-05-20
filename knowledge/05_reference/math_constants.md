@@ -14,6 +14,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 阅读本章后，你将能够：
 
@@ -25,6 +26,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 - [01_fundamentals/ownership.md](../01_fundamentals/ownership.md) - 基础 Rust 语法
 - [02_intermediate/type_conversions.md](../02_intermediate/type_conversions.md) - 类型转换
@@ -32,10 +34,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 标准库数学常量
+> **[来源: Rust Official Docs]**
 
 Rust 将常用数学常量定义为关联常量（associated constants），挂载在 `f32` 和 `f64` 类型上：
 

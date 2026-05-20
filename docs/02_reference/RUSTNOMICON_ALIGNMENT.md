@@ -3,6 +3,7 @@
 本文件对照 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 的章节，列出本项目已覆盖和未覆盖的内容，并标注对应的 crate 位置。
 
 ## 已覆盖内容
+> **[来源: Rust Official Docs]**
 
 | Rustonomicon 章节 | 项目位置 | 状态 |
 |-------------------|----------|------|
@@ -24,8 +25,10 @@
 | 10.1 Implementing Vec | `c08_algorithms/src/data_structure/` | ✅ |
 
 ## 新增补齐内容
+> **[来源: Rust Official Docs]**
 
 ### c01: 布局保证 (align, size)
+> **[来源: Rust Official Docs]**
 
 - **文件**: `crates/c01_ownership_borrow_scope/src/layout_guarantees.rs`
 - **覆盖**: `size_of`、`align_of`、`offset_of`、`#[repr(C)]`、`#[repr(packed)]`、ZST/DST、padding 计算

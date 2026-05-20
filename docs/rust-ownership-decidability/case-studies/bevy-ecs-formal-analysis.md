@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Bevy ECS 形式化分析](#bevy-ecs-形式化分析)
   - [目录](#目录)
@@ -48,6 +49,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Bevy ECS提供:
 
@@ -59,6 +61,7 @@ Bevy ECS提供:
 ---
 
 ## 2. ECS基础概念
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Entity-Component-System定义
 

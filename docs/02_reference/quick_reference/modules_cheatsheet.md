@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [📦 Rust 模块系统速查卡](#-rust-模块系统速查卡)
   - [📋 目录](#-目录)
@@ -78,6 +79,7 @@
 ---
 
 ## 🎯 模块系统概览
+> **[来源: Rust Official Docs]**
 
 ```text
 模块层次结构：
@@ -95,8 +97,10 @@ Crate (包)
 ---
 
 ## 📝 模块声明
+> **[来源: Rust Official Docs]**
 
 ### 内联模块
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 内联模块定义
@@ -117,6 +121,7 @@ fn main() {
 ```
 
 ### 文件模块
+> **[来源: Rust Official Docs]**
 
 ```rust
 // src/main.rs
@@ -139,6 +144,7 @@ fn private_function() {
 ```
 
 ### 目录模块
+> **[来源: Rust Official Docs]**
 
 ```rust
 // src/main.rs
@@ -168,8 +174,10 @@ pub fn sub_function() {
 ---
 
 ## 🔒 可见性控制
+> **[来源: Rust Official Docs]**
 
 ### pub 关键字
+> **[来源: Rust Official Docs]**
 
 ```rust
 mod my_module {
@@ -185,6 +193,7 @@ mod my_module {
 ```
 
 ### 受限可见性
+> **[来源: Rust Official Docs]**
 
 ```rust
 mod my_module {
@@ -203,6 +212,7 @@ mod my_module {
 ```
 
 ### 结构体可见性
+> **[来源: Rust Official Docs]**
 
 ```rust
 mod my_module {
@@ -226,6 +236,7 @@ mod my_module {
 ---
 
 ## 📥 use 语句
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 

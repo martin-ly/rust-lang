@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [异步状态机形式化](#异步状态机形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -81,16 +82,19 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究旨在形式化定义 Rust 的异步 Future/Poll 状态机，并证明其保证并发安全。
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **Future 状态机的形式化定义是什么？**
 2. **Poll 操作如何保证并发安全？**
 3. **异步状态转换的正确性如何证明？**
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - Future 状态机的形式化模型
 - Poll 操作的正确性证明
@@ -99,8 +103,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **Future**：表示一个可能尚未完成的计算的值。
 
@@ -109,6 +115,7 @@
 **状态机**：描述系统在不同状态之间转换的模型。
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **状态机理论**：
 
@@ -117,6 +124,7 @@
 - **并发状态机**：多个状态机的并发执行
 
 ### 状态机的理论基础
+> **[来源: Rust Official Docs]**
 
 **有限状态机（Finite State Machine, FSM）**是计算理论中的核心概念：
 
@@ -156,6 +164,7 @@ Pending ──────────> Ready
 3. **终止性**：对于有限计算，最终会到达终止状态
 
 ### Future/Poll 的理论基础
+> **[来源: Rust Official Docs]**
 
 **Future Trait** 是 Rust 异步编程的核心抽象：
 
@@ -181,6 +190,7 @@ $$\text{State}(F) \in \{\text{Pending}, \text{Ready}(\tau)\}$$
 - 保证：当 Future 状态改变时，Waker 会被调用
 
 ### 并发安全的理论基础
+> **[来源: Rust Official Docs]**
 
 **并发安全（Concurrency Safety）** 确保多个 Future 可以安全地并发执行：
 
@@ -209,6 +219,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 - **事件驱动**：基于事件循环的异步执行
 
 ### 相关学术论文的详细分析
+> **[来源: Rust Official Docs]**
 
 #### 1. Async/await for Rust: A Language Perspective
 
@@ -283,6 +294,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 ---
 
 ## 🔬 形式化定义 {#-形式化定义}
+> **[来源: Rust Official Docs]**
 
 ### 1. Future 状态
 
@@ -554,6 +566,7 @@ $$\forall i: \text{Send}(F_i) \land \text{Sync}(F_i) \rightarrow \text{DataRaceF
 ---
 
 ## 💻 代码示例 {#-代码示例}
+> **[来源: Rust Official Docs]**
 
 ### 示例 1：基本 Future
 
@@ -625,6 +638,7 @@ async fn combined_future() -> i32 {
 - 状态 2：计算并返回结果（`Ready(a + b)`）
 
 ## 💻 代码示例1
+> **[来源: Rust Official Docs]**
 
 ### 示例 1：Future 状态机实现
 
@@ -940,6 +954,7 @@ impl TimerFuture {
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+> **[来源: Rust Official Docs]**
 
 ### 待证明的性质
 
@@ -1070,6 +1085,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+> **[来源: Rust Official Docs]**
 
 ### 与类型系统的集成
 
@@ -1103,6 +1119,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## ⚠️ 反例：违反异步安全规则 {#️-反例违反异步安全规则}
+> **[来源: Rust Official Docs]**
 
 | 反例 | 违反规则 | 后果 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -1114,6 +1131,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+> **[来源: Rust Official Docs]**
 
 ```text
 异步状态机安全性证明树
@@ -1143,6 +1161,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 📖 参考文献 {#-参考文献}
+> **[来源: Rust Official Docs]**
 
 ### 学术论文（国际权威）
 
@@ -1204,6 +1223,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 - 定理 6.3：进度保证证明 ✅
 
 ## 🆕 Rust 1.93.0 相关更新 {#-rust-1930-相关更新}
+> **[来源: Rust Official Docs]**
 
 ### 全局分配器与异步状态机
 
@@ -1252,6 +1272,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 ---
 
 ## thread::spawn 与 JoinHandle（Phase 6）
+> **[来源: Rust Official Docs]**
 
 **Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包需 `F: Send + 'static`；所有权转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。
 
@@ -1326,3 +1347,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

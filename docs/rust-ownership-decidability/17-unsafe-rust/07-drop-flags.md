@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Drop 检查与析构安全](#drop-检查与析构安全)
   - [目录](#目录)
@@ -31,8 +32,10 @@
 ---
 
 ## 1. Drop Trait 基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Drop
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub trait Drop {

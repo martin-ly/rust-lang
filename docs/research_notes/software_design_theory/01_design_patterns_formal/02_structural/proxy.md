@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Proxy 形式化分析](#proxy-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Proxy 结构）
+> **[来源: Rust Official Docs]**
 
 设 $P$ 为代理类型，$T$ 为目标类型。Proxy 是一个四元组 $\mathcal{PR} = (P, T, \mathit{access}, \mathit{delegate})$，满足：
 
@@ -65,12 +68,14 @@ $$\mathcal{PR} = \langle P, T, \mathit{access}: P \times T, \mathit{delegate}: P
 ---
 
 ### Axiom PR1（接口一致公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall p: P,\, p: \mathrm{impl}\,T \land \mathit{behavior}(p) \equiv_{\mathrm{obs}} \mathit{behavior}(t: T)$$
 
 代理与目标接口一致，可透明替换。
 
 ### Axiom PR2（委托规则公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
@@ -79,6 +84,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 定理 PR-T1（委托安全定理）
+> **[来源: Rust Official Docs]**
 
 委托时借用/所有权规则保证正确性。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
@@ -109,6 +115,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 定理 PR-T2（访问控制定理）
+> **[来源: Rust Official Docs]**
 
 保护代理可在委托前执行权限检查。
 
@@ -134,6 +141,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 推论 PR-C1（纯 Safe Proxy）
+> **[来源: Rust Official Docs]**
 
 Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 
@@ -149,6 +157,7 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -159,6 +168,7 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Subject {
@@ -198,6 +208,7 @@ assert_eq!(p.request(), "real");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Bytes 缓冲区形式化分析](#bytes-缓冲区形式化分析)
   - [目录](#目录)
@@ -48,6 +49,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 `bytes` crate提供了高效的缓冲区管理:
 
@@ -59,6 +61,7 @@
 ---
 
 ## 2. Bytes类型形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 内存模型
 

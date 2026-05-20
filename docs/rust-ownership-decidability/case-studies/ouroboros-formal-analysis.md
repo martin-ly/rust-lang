@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Ouroboros 自引用结构形式化分析](#ouroboros-自引用结构形式化分析)
   - [目录](#目录)
@@ -66,10 +67,12 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Self-Referential Structs）**。它通过过程宏自动生成安全的构建器和访问器，解决了 Rust 所有权系统中长期存在的自引用难题。
 
 ### 核心解决的问题
+> **[来源: Rust Official Docs]**
 
 | 问题 | Ouroboros 解决方案 |
 |------|-------------------|

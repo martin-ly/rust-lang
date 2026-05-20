@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.95 预览特性](#rust-195-预览特性)
   - [📋 目录](#-目录)
@@ -24,6 +25,7 @@
 ---
 
 ## 🎯 版本概览
+> **[来源: Rust Official Docs]**
 
 Rust 1.95 主要聚焦于：
 
@@ -34,6 +36,7 @@ Rust 1.95 主要聚焦于：
 ---
 
 ## 🚀 主要新特性
+> **[来源: Rust Official Docs]**
 
 ### 1. Impl Trait in Associated Type (稳定)
 

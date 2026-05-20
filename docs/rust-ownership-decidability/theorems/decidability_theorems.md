@@ -1,8 +1,10 @@
 # Rust 所有权系统可判定性 - 核心定理
 
 ## 定理 1: Borrow Checking 终止性 (Termination)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 定理陈述
+> **[来源: Rust Official Docs]**
 
 ```text
 Theorem BorrowChecking_Termination:
@@ -14,6 +16,7 @@ Theorem BorrowChecking_Termination:
 **中文**: 对于任何线性化的类型环境 Γ，借用检查算法都会终止。
 
 ### 1.2 关键定义
+> **[来源: Rust Official Docs]**
 
 #### 定义 1.2.1: 类型的秩 (Type Rank)
 

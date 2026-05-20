@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [CXX 安全FFI形式化分析](#cxx-安全ffi形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 CXX提供:
 
@@ -40,6 +42,7 @@ CXX提供:
 ---
 
 ## 2. 桥接模块
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (桥接声明)
 

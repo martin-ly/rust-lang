@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Embedded-Storage存储抽象形式化分析](#embedded-storage存储抽象形式化分析)
   - [目录](#目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 embedded-storage为嵌入式存储设备提供统一trait：
 
@@ -47,6 +49,7 @@ embedded-storage为嵌入式存储设备提供统一trait：
 ---
 
 ## 2. 存储trait形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 STORAGE-1 ( 只读存储 )
 

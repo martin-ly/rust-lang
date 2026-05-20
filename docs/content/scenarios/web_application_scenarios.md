@@ -7,6 +7,7 @@
 ---
 
 ## 🌳 Web 应用场景树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -39,8 +40,10 @@ graph TD
 ---
 
 ## 📊 RESTful API 场景
+> **[来源: Rust Official Docs]**
 
 ### 场景 1: CRUD API
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::{

@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档通过具体案例展示形式化方法在Rust中的应用，从简单数据结构到复杂并发系统，演示完整的形式化验证流程。
 
 ---
 
 ## 案例一：Vec的形式化验证
+> **[来源: Rust Official Docs]**
 
 ### 1.1 规范
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Vec的不变式
@@ -32,6 +35,7 @@ invariant Vec<T> {
 ```
 
 ### 1.2 push操作证明
+> **[来源: Rust Official Docs]**
 
 ```rust
 impl<T> Vec<T> {
@@ -56,6 +60,7 @@ impl<T> Vec<T> {
    - 原有元素不变
 
 ### 1.3 pop操作证明
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[requires(self.len > 0)]
@@ -77,8 +82,10 @@ fn pop(&mut self) -> Option<T> {
 ---
 
 ## 案例二：智能指针验证
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Box<T>
+> **[来源: Rust Official Docs]**
 
 **规范**:
 
@@ -108,6 +115,7 @@ fn drop(&mut self) {
 ```
 
 ### 2.2 Rc<T>
+> **[来源: Rust Official Docs]**
 
 **不变式**:
 
@@ -153,8 +161,10 @@ fn drop(&mut self) {
 ---
 
 ## 案例三：并发数据结构
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Mutex<T>
+> **[来源: Rust Official Docs]**
 
 **规范**:
 
@@ -185,6 +195,7 @@ MutexGuard<T>: Deref, DerefMut
 ```
 
 ### 3.2 无锁队列 (Michael-Scott Queue)
+> **[来源: Rust Official Docs]**
 
 **结构**:
 

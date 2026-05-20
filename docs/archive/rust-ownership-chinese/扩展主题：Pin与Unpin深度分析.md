@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [扩展主题：Pin与Unpin深度分析](#扩展主题pin与unpin深度分析)
   - [目录](#目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 问题背景：自引用结构
+> **[来源: Rust Official Docs]**
 
 ### 经典问题
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 无法直接创建的自引用结构
@@ -71,6 +74,7 @@ fn problem() {
 ```
 
 ### 为什么这是问题？
+> **[来源: Rust Official Docs]**
 
 ```text
 内存布局变化：
@@ -91,8 +95,10 @@ fn problem() {
 ---
 
 ## Pin的形式定义
+> **[来源: Rust Official Docs]**
 
 ### 类型定义
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub struct Pin<P> {
@@ -101,6 +107,7 @@ pub struct Pin<P> {
 ```
 
 ### 核心保证
+> **[来源: Rust Official Docs]**
 
 ```text
 Pin<P<T>> 保证：
@@ -109,6 +116,7 @@ Pin<P<T>> 保证：
 ```
 
 ### 形式化语义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义：pinned(T) ≡ □(¬moved(T))
@@ -117,8 +125,10 @@ Pin<P<T>> 保证：
 ```
 
 ### 创建Pin的方法
+> **[来源: Rust Official Docs]**
 
 #### 方法1: Box::pin
+> **[来源: Rust Official Docs]**
 
 ```rust
 let data: Pin<Box<T>> = Box::pin(T::new());
@@ -127,6 +137,7 @@ let data: Pin<Box<T>> = Box::pin(T::new());
 **保证**：Box在堆上，Pin保证不移动。
 
 #### 方法2: Pin::new_unchecked (unsafe)
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut data = T::new();

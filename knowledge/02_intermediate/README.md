@@ -5,6 +5,7 @@
 > **掌握 Rust 的核心抽象能力**
 
 ## 🎯 本模块学习目标
+> **[来源: Rust Official Docs]**
 
 完成本模块后，你将能够：
 
@@ -15,8 +16,10 @@
 - [ ] 高效使用集合和迭代器
 
 ## 📚 核心主题
+> **[来源: Rust Official Docs]**
 
 ### 类型系统
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -25,6 +28,7 @@
 | [lifetimes.md](../01_fundamentals/lifetimes.md) | 生命周期 | ⭐⭐⭐⭐ |
 
 ### 数据处理
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -33,6 +37,7 @@
 | [error_handling.md](error_handling.md) | 错误处理 | ⭐⭐⭐⭐ |
 
 ### 内存管理
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|

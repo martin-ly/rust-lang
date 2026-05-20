@@ -7,6 +7,7 @@
 ---
 
 ## 📊 项目概览
+> **[来源: Rust Official Docs]**
 
 本项目包含两个版本：
 
@@ -19,8 +20,10 @@
 ---
 
 ## ✅ 中文版完成状态
+> **[来源: Rust Official Docs]**
 
 ### 测试结果
+> **[来源: Rust Official Docs]**
 
 ```text
 单元测试:        30 passed ✅

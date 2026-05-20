@@ -1,12 +1,14 @@
 # IEC 61508 Rust实施指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 IEC 61508是工业领域功能安全的国际标准，涵盖电气/电子/可编程电子系统的安全生命周期。本指南提供使用Rust满足IEC 61508要求的详细实施路径。
 
 ---
 
 ## IEC 61508结构概览
+> **[来源: Rust Official Docs]**
 
 ```
 IEC 61508-x:
@@ -23,10 +25,13 @@ IEC 61508-x:
 ---
 
 ## Part 3: 软件要求详解
+> **[来源: Rust Official Docs]**
 
 ### 7.4.2 软件安全需求规范
+> **[来源: Rust Official Docs]**
 
 #### 安全完整性等级(SIL)映射
+> **[来源: Rust Official Docs]**
 
 | SIL | 风险降低因子 | Rust适用性 | 关键要求 |
 |-----|--------------|------------|----------|
@@ -36,6 +41,7 @@ IEC 61508-x:
 | **SIL 1** | 10-100 | 很高 | 标准Rust |
 
 #### Rust优势在IEC 61508中的体现
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! SIL 3级工业控制器示例
@@ -130,8 +136,10 @@ pub enum SafetyError {
 ```
 
 ### 7.4.3 软件安全验证
+> **[来源: Rust Official Docs]**
 
 #### 验证方法表(Annex B)
+> **[来源: Rust Official Docs]**
 
 | 方法 | SIL 1 | SIL 2 | SIL 3 | SIL 4 | Rust工具 |
 |------|-------|-------|-------|-------|----------|
@@ -191,8 +199,10 @@ mod verification {
 ---
 
 ## Part 6: 软件开发和验证技术
+> **[来源: Rust Official Docs]**
 
 ### Table A.1 - 设计和编码技术
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! IEC 61508-3 Table A.1 Rust实现
@@ -280,6 +290,7 @@ pub enum CommunicationResult<T> {
 ```
 
 ### Table A.2 - 数据导向技术
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! IEC 61508-3 Table A.2 Rust实现

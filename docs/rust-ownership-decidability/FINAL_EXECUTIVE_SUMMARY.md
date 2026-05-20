@@ -8,14 +8,17 @@
 ---
 
 ## 一句话总结
+> **[来源: Rust Official Docs]**
 
 > **成功构建了 Rust 所有权系统的完整、严格、可机械化的形式化理论，包括 5 个核心定理的完整证明和 16 个验证示例，全部在 Coq 中实现。**
 
 ---
 
 ## 核心成果
+> **[来源: Rust Official Docs]**
 
 ### 1. 理论突破
+> **[来源: Rust Official Docs]**
 
 - ✅ **首个** Rust 所有权可判定性的完整 Coq 形式化
 - ✅ **严格证明** Borrow Checking 终止性

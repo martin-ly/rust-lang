@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
   - [📋 目录](#-目录)
@@ -82,8 +83,10 @@
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 类型安全三支柱
+> **[来源: Rust Official Docs]**
 
 ```text
 1. 静态类型检查（编译期）
@@ -94,8 +97,10 @@
 ---
 
 ## 📐 基本类型速查
+> **[来源: Rust Official Docs]**
 
 ### 标量类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 整数
@@ -118,6 +123,7 @@ let h: char = '🦀';    // Unicode 字符
 ---
 
 ### 复合类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 元组
@@ -136,8 +142,10 @@ let s2: String = String::from("world");  // 堆字符串
 ---
 
 ## 🏗️ Trait 系统
+> **[来源: Rust Official Docs]**
 
 ### 定义与实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Summary {
@@ -164,6 +172,7 @@ impl Summary for Article {
 ---
 
 ### Trait 作为参数
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 方式 1: impl Trait
@@ -188,6 +197,7 @@ where
 ---
 
 ### Trait 作为返回值
+> **[来源: Rust Official Docs]**
 
 ```rust
 // impl Trait 语法
@@ -207,6 +217,7 @@ fn returns_trait_object() -> Box<dyn Summary> {
 ---
 
 ## 🔄 类型转换
+> **[来源: Rust Official Docs]**
 
 ### From/Into
 

@@ -1,11 +1,13 @@
 # Precise Capturing (+ use<'lt>) 的生命周期语义
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Precise Capturing（精确捕获）是 Rust 1.94 引入的重要特性，通过 `use<'lt>` 语法允许开发者精确控制哪些生命周期被捕获到不透明类型（`impl Trait`）中。
 这是 Rust 生命周期系统的重大改进，提供了更细粒度的生命周期控制。
 
 ### 1.1 什么是 Precise Capturing
+> **[来源: Rust Official Docs]**
 
 在传统 Rust 中，`impl Trait` 会捕获所有输入生命周期：
 
@@ -22,6 +24,7 @@ fn bar<'a, 'b>(x: &'a i32, y: &'b i32) -> impl Trait + use<'a>;
 ```
 
 ## 2. 语法定义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 精确捕获语法
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rayon并行计算形式化分析](#rayon并行计算形式化分析)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rayon特点：
 
@@ -46,6 +48,7 @@ Rayon特点：
 ---
 
 ## 2. 并行迭代器
+> **[来源: Rust Official Docs]**
 
 ### 定义 PAR-ITER-1 ( ParallelIterator )
 

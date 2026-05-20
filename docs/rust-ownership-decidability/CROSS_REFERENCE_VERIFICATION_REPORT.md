@@ -3,6 +3,7 @@
 **Generated**: 2026-03-06T11:41:17.918883
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 This report documents the cross-reference verification for the rust-ownership-decidability documentation.
 
@@ -17,8 +18,10 @@ This report documents the cross-reference verification for the rust-ownership-de
 
 <!-- markdown-link-check-disable -->
 ## Broken Links
+> **[来源: Rust Official Docs]**
 
 ### List of Broken Links
+> **[来源: Rust Official Docs]**
 
 | Source File | Broken Link | Line | Context |
 |-------------|-------------|------|---------|

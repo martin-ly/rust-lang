@@ -1,12 +1,15 @@
 # Rust 所有权系统元模型 - 判断形式
 
 ## 1. 判断 (Judgments) 概述
+> **[来源: Rust Official Docs]**
 
 判断是形式系统的核心，定义了程序在何种条件下被认为是有效的。本文档定义 Rust 所有权系统的完整判断体系。
 
 ## 2. 语法判断 (Syntactic Judgments)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 类型判断
+> **[来源: Rust Official Docs]**
 
 ```
 Δ; Γ; Θ ⊢ e : τ

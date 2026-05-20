@@ -9,6 +9,7 @@
 ---
 
 ## 📊 对齐概览
+> **[来源: Rust Official Docs]**
 
 ### 对齐统计
 
@@ -20,6 +21,7 @@
 | **总计** | **18** | **240+** | **100%** |
 
 ### 对齐维度覆盖
+> **[来源: Rust Official Docs]**
 
 | 维度 | 覆盖文档数 | 状态 |
 | :--- | :--- | :--- |
@@ -32,8 +34,10 @@
 ---
 
 ## P0: 官方权威对齐
+> **[来源: Rust Official Docs]**
 
 ### The Rust Book 对齐
+> **[来源: Rust Official Docs]**
 
 | 本书章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
@@ -58,6 +62,7 @@
 | 20.0 项目 | cargo_cheatsheet.md | ✅ 一致 | - |
 
 ### Rust Reference 对齐
+> **[来源: Rust Official Docs]**
 
 | 参考章节 | 对应项目文档 | 对齐状态 | 差异说明 |
 | :--- | :--- | :--- | :--- |
@@ -71,6 +76,7 @@
 | Attributes | macros_cheatsheet.md | ✅ 一致 | - |
 
 ### releases.rs 对齐
+> **[来源: Rust Official Docs]**
 
 | 版本 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
@@ -82,8 +88,10 @@
 ---
 
 ## P1: 学术权威对齐
+> **[来源: Rust Official Docs]**
 
 ### RustBelt 对齐
+> **[来源: Rust Official Docs]**
 
 | RustBelt 内容 | 对应项目文档 | 对齐状态 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -94,6 +102,7 @@
 | 并发安全 | send_sync_formalization.md | ✅ 一致 | Send/Sync |
 
 ### 形式化方法对齐
+> **[来源: Rust Official Docs]**
 
 | 形式化内容 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |
@@ -105,8 +114,10 @@
 ---
 
 ## P2: 社区权威对齐
+> **[来源: Rust Official Docs]**
 
 ### Rust Design Patterns 对齐
+> **[来源: Rust Official Docs]**
 
 | 模式 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |

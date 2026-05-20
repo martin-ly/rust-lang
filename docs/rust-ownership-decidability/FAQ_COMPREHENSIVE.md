@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
   - [目录](#目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 基础概念 FAQ
+> **[来源: Rust Official Docs]**
 
 ### Q1: 所有权系统与其他语言的垃圾回收有何不同？
+> **[来源: Rust Official Docs]**
 
 **A**: 核心区别:
 

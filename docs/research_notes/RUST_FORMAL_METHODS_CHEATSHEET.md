@@ -8,8 +8,10 @@
 ---
 
 ## 核心概念速查
+> **[来源: Rust Official Docs]**
 
 ### 所有权规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 1. 每个值有唯一所有者
@@ -26,6 +28,7 @@ let len = calculate_length(&s1);  // 借用s1
 ```
 
 ### 借用规则
+> **[来源: Rust Official Docs]**
 
 | 规则 | 说明 | 代码 |
 | :--- | :--- | :--- |
@@ -36,8 +39,10 @@ let len = calculate_length(&s1);  // 借用s1
 ---
 
 ## 生命周期速查
+> **[来源: Rust Official Docs]**
 
 ### 语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 显式标注
@@ -52,6 +57,7 @@ struct Parser<'a> { input: &'a str }
 ```
 
 ### 省略规则
+> **[来源: Rust Official Docs]**
 
 1. 每个引用参数有自己的生命周期
 2. 单一输入 → 应用到输出
@@ -60,6 +66,7 @@ struct Parser<'a> { input: &'a str }
 ---
 
 ## Send/Sync速查
+> **[来源: Rust Official Docs]**
 
 | 类型 | Send | Sync | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -75,6 +82,7 @@ struct Parser<'a> { input: &'a str }
 ---
 
 ## 核心定理速查
+> **[来源: Rust Official Docs]**
 
 | 定理 | 内容 | 位置 |
 | :--- | :--- | :--- |
@@ -88,6 +96,7 @@ struct Parser<'a> { input: &'a str }
 ---
 
 ## 证明技术速查
+> **[来源: Rust Official Docs]**
 
 | 技术 | 适用场景 | 形式化工具 |
 | :--- | :--- | :--- |
@@ -100,6 +109,7 @@ struct Parser<'a> { input: &'a str }
 ---
 
 ## 验证工具速查
+> **[来源: Rust Official Docs]**
 
 | 工具 | 类型 | 用途 | 命令 |
 | :--- | :--- | :--- | :--- |
@@ -111,6 +121,7 @@ struct Parser<'a> { input: &'a str }
 ---
 
 ## 设计模式速查
+> **[来源: Rust Official Docs]**
 
 ### 创建型
 

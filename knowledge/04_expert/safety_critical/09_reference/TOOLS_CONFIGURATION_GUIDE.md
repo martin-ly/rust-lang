@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 工具链概述
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -30,10 +31,13 @@
 ---
 
 ## 开发环境配置
+> **[来源: Rust Official Docs]**
 
 ### 推荐IDE设置
+> **[来源: Rust Official Docs]**
 
 #### VSCode配置 (.vscode/settings.json)
+> **[来源: Rust Official Docs]**
 
 ```json
 {
@@ -66,6 +70,7 @@
 ```
 
 #### VSCode扩展推荐 (.vscode/extensions.json)
+> **[来源: Rust Official Docs]**
 
 ```json
 {

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Async执行模型深度形式化分析](#async执行模型深度形式化分析)
   - [目录](#目录)
@@ -53,8 +54,10 @@
 ---
 
 ## 1. 核心抽象形式化
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Future Trait 数学语义
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Future {

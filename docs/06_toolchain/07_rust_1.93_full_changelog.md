@@ -8,6 +8,8 @@
 ---
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 完整变更清单](#rust-193-完整变更清单)
   - [目录](#目录)
@@ -52,8 +54,12 @@
 ---
 
 ## 语言特性
+>
+> **[来源: Rust Official Docs]**
 
 ### s390x vector 特性与 is_s390x_feature_detected
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 稳定了多个 s390x `vector` 相关 target features 及 `is_s390x_feature_detected!` 宏。
 
@@ -74,6 +80,8 @@ fn check_vector_support() {
 ---
 
 ### C-style variadic for system ABI
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 稳定了 `system` ABI 的 C 风格可变参数函数声明。
 
@@ -88,6 +96,8 @@ extern "system" {
 ---
 
 ### cfg 谓词使用关键词报错
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 对将某些关键词用作 `cfg` 谓词的情况发出错误。
 
@@ -96,6 +106,8 @@ extern "system" {
 ---
 
 ### asm_cfg（asm! 行上 cfg）
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 稳定了 `asm_cfg`，允许在 `asm!` 的单个语句上使用 `cfg` 属性。
 
@@ -106,6 +118,8 @@ extern "system" {
 ---
 
 ### const-eval 指针字节复制
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 在常量求值期间支持按字节复制指针。
 
@@ -114,6 +128,8 @@ extern "system" {
 ---
 
 ### LUB coercion 修正
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 修正了 LUB（Least Upper Bound）coercion 对函数项类型及不同安全性函数的处理。
 
@@ -122,6 +138,8 @@ extern "system" {
 ---
 
 ### const 含 mutable ref 到 static
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 允许 const 项包含对 static 的可变引用（非常 unsafe，但不总是 UB）。
 
@@ -130,6 +148,8 @@ extern "system" {
 ---
 
 ### const_item_interior_mutations lint（warn-by-default）
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 新增 warn-by-default lint，对会改动内部可变 const 项的调用发出警告。
 
@@ -138,6 +158,8 @@ extern "system" {
 ---
 
 ### function_casts_as_integer lint（warn-by-default）
+>
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93** 新增 warn-by-default lint，对将函数强制转换为整数的操作发出警告。
 

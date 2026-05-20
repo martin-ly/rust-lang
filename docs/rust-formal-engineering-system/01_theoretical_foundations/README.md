@@ -19,8 +19,10 @@
 ---
 
 ## 核心理论概念
+> **[来源: Rust Official Docs]**
 
 ### 所有权系统的数学基础
+> **[来源: Rust Official Docs]**
 
 Rust 的所有权系统可以形式化为资源管理代数：
 
@@ -45,6 +47,7 @@ fn copy_semantics() {
 ```
 
 ### 借用作为能力（Capability）
+> **[来源: Rust Official Docs]**
 
 借用可以建模为对资源访问的能力：
 

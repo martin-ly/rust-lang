@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库 Iterator 形式化分析](#rust标准库-iterator-形式化分析)
   - [目录](#目录)
@@ -60,6 +61,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Iterator是Rust最核心的trait之一，提供:
 
@@ -71,6 +73,7 @@ Iterator是Rust最核心的trait之一，提供:
 ---
 
 ## 2. Iterator trait形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 类型定义
 

@@ -7,37 +7,45 @@
 ---
 
 ## 定理陈述
+> **[来源: Rust Official Docs]**
 
 ### Def VA-1 (协变)
+> **[来源: Rust Official Docs]**
 
 类型构造器 $F$ 是协变的，当且仅当：
 $$A <: B \implies F<A> <: F<B>$$
 
 ### Def VA-2 (逆变)
+> **[来源: Rust Official Docs]**
 
 类型构造器 $F$ 是逆变的，当且仅当：
 $$A <: B \implies F<B> <: F<A>$$
 
 ### Def VA-3 (不变)
+> **[来源: Rust Official Docs]**
 
 类型构造器 $F$ 是不变的，当且仅当：
 $$A <: B \implies \neg(F<A> <: F<B>) \land \neg(F<B> <: F<A>)$$
 
 ### Thm VA-T1 (协变安全)
+> **[来源: Rust Official Docs]**
 
 不可变引用 `&T` 的协变性保证：若 `A <: B`，则 `&A <: &B` 安全。
 
 ### Thm VA-T2 (逆变安全)
+> **[来源: Rust Official Docs]**
 
 函数参数位置的逆变性保证：若 `A <: B`，则 `fn(B) -> R <: fn(A) -> R` 安全。
 
 ### Thm VA-T3 (不变必要)
+> **[来源: Rust Official Docs]**
 
 可变引用 `&mut T` 必须是不变的，否则会导致内存不安全。
 
 ---
 
 ## 证明树可视化
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -110,8 +118,10 @@ graph TD
 ---
 
 ## 形式化证明
+> **[来源: Rust Official Docs]**
 
 ### VA-T1: 协变安全
+> **[来源: Rust Official Docs]**
 
 **陈述**: 不可变引用 `&T` 的协变性是安全的。
 
@@ -137,6 +147,7 @@ let r: &mut i32 = &mut x;
 ```
 
 ### VA-T2: 逆变安全
+> **[来源: Rust Official Docs]**
 
 **陈述**: 函数参数位置的逆变性是安全的。
 

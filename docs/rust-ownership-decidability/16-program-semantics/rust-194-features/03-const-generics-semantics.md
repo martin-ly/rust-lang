@@ -1,6 +1,7 @@
 # Const Generics 的依赖类型语义
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Const Generics（常量泛型）是 Rust 类型系统的强大扩展，它允许常量值作为类型参数。
 这使得类型系统能够表达依赖于编译时常量的类型，如 `[T; N]` 数组类型，其中 `N` 是一个常量整数。
@@ -8,6 +9,7 @@ Const Generics（常量泛型）是 Rust 类型系统的强大扩展，它允许
 从类型理论角度看，Const Generics 引入了**依赖类型（Dependent Types）**的元素，允许类型依赖于值。
 
 ### 1.1 什么是 Const Generics
+> **[来源: Rust Official Docs]**
 
 ```rust
 // N 是一个 const generic 参数
@@ -20,6 +22,7 @@ let arr: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 ```
 
 ## 2. 语法定义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 扩展的类型语法
 

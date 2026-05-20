@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Memento 形式化分析](#memento-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -46,8 +47,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Memento 结构）
+> **[来源: Rust Official Docs]**
 
 设 $M$ 为备忘类型，$O$ 为原发器类型。Memento 是一个三元组 $\mathcal{MO} = (M, O, \mathit{save}, \mathit{restore})$，满足：
 
@@ -62,12 +65,14 @@ $$\mathcal{MO} = \langle M, O, \mathit{save}: O \rightarrow M, \mathit{restore}:
 ---
 
 ### Axiom MO1（状态完整公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{save}(o) = m \implies m\text{ 包含恢复 }o\text{ 所需的全部状态}$$
 
 备忘包含足够状态以恢复；无外部依赖。
 
 ### Axiom MO2（兼容性公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 
@@ -76,6 +81,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 定理 MO-T1（Clone 实现定理）
+> **[来源: Rust Official Docs]**
 
 `Clone` 或 `serde` 序列化可实现；Rust 无私有访问 OOP 风格，表达为近似。
 
@@ -105,6 +111,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 定理 MO-T2（状态一致性定理）
+> **[来源: Rust Official Docs]**
 
 若 $M = \mathit{save}(O)$ 且 $O$ 未变，则 $\mathit{restore}(O, M)$ 使 $O$ 回到 $\mathit{save}$ 时状态。
 
@@ -119,6 +126,7 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 推论 MO-C1（近似表达）
+> **[来源: Rust Official Docs]**
 
 Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Memento}) = \mathrm{Approx}$（无私有封装）。
 
@@ -133,6 +141,7 @@ Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -143,6 +152,7 @@ Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[derive(Clone)]
@@ -181,6 +191,7 @@ assert_eq!(o.state, "A");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

@@ -5,6 +5,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
 本文档将深入介绍 Rust 在 Web 开发领域的应用。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust Web 开发](#rust-web-开发)
   - [目录](#目录)
@@ -38,8 +39,10 @@ Web 开发是 Rust 应用最广泛的领域之一。
 ---
 
 ## Web 开发生态概览
+> **[来源: Rust Official Docs]**
 
 ### Rust Web 生态特点
+> **[来源: Rust Official Docs]**
 
 | 特性 | Rust 实现 | 其他语言对比 |
 |------|-----------|--------------|

@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南为 `docs/research_notes` 项目的长期维护提供标准和流程，确保文档质量和一致性。
 
 ---
 
 ## 维护责任
+> **[来源: Rust Official Docs]**
 
 ### 维护者角色
+> **[来源: Rust Official Docs]**
 
 | 角色 | 职责 | 人员 |
 | :--- | :--- | :--- |
@@ -25,6 +28,7 @@
 | 社区协调 | 反馈收集、问题响应 | 社区经理 |
 
 ### 维护周期
+> **[来源: Rust Official Docs]**
 
 | 任务 | 频率 | 负责人 |
 | :--- | :--- | :--- |
@@ -36,8 +40,10 @@
 ---
 
 ## 文档标准
+> **[来源: Rust Official Docs]**
 
 ### 文件命名规范
+> **[来源: Rust Official Docs]**
 
 ```text
 # 核心形式化文档
@@ -61,6 +67,7 @@ TUTORIAL_<topic>.md
 ```
 
 ### 头部模板
+> **[来源: Rust Official Docs]**
 
 ```markdown
 # 标题
@@ -74,6 +81,7 @@ TUTORIAL_<topic>.md
 ```
 
 ### 内容结构
+> **[来源: Rust Official Docs]**
 
 | 章节 | 必需 | 说明 |
 | :--- | :--- | :--- |
@@ -86,8 +94,10 @@ TUTORIAL_<topic>.md
 ---
 
 ## 更新流程
+> **[来源: Rust Official Docs]**
 
 ### 内容更新步骤
+> **[来源: Rust Official Docs]**
 
 1. **评估变更**
 
@@ -124,6 +134,7 @@ TUTORIAL_<topic>.md
    ```
 
 ### Rust版本更新
+> **[来源: Rust Official Docs]**
 
 当新Rust版本发布时：
 

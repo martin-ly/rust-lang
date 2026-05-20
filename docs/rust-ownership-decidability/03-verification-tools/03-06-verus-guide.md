@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Verus 用户指南](#verus-用户指南)
   - [目录](#目录)
@@ -52,8 +53,10 @@
 ---
 
 ## 1. Verus 简介
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Verus
+> **[来源: Rust Official Docs]**
 
 Verus 是由 VMware Research 开发的 Rust 验证工具，专注于**系统级代码**的功能正确性验证。
 

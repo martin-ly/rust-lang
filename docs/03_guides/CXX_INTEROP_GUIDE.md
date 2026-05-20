@@ -5,6 +5,7 @@
 # C++ 互操作指南（cxx + bindgen）
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 与 C++ 的互操作主要有两条技术路线：
 
@@ -12,8 +13,10 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 2. **cxx**: 安全、双向的 C++/Rust 桥接，编译时检查 ABI 兼容性
 
 ## cxx crate
+> **[来源: Rust Official Docs]**
 
 ### 核心理念
+> **[来源: Rust Official Docs]**
 
 - **共享类型**: `#[cxx::bridge]` 中定义的 struct，双方都能看到完整定义
 - **不透明类型**: C++ 类型对 Rust 不透明，Rust 通过 `UniquePtr<T>` 或 `Pin<&mut T>` 持有

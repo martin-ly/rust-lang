@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Thiserror/Anyhow错误处理形式化分析](#thiserroranyhow错误处理形式化分析)
   - [目录](#目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 错误处理双雄：
 
@@ -42,6 +44,7 @@
 ---
 
 ## 2. Thiserror
+> **[来源: Rust Official Docs]**
 
 ### 定义 ERROR-1 ( 派生宏 )
 

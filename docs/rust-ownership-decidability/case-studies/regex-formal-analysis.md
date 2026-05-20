@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Regex 正则表达式形式化分析](#regex-正则表达式形式化分析)
   - [目录](#目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rust regex crate提供:
 
@@ -43,6 +45,7 @@ Rust regex crate提供:
 ---
 
 ## 2. 编译期检查
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (Regex::new错误处理)
 

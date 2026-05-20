@@ -7,8 +7,10 @@
 ---
 
 ## 定理陈述
+> **[来源: Rust Official Docs]**
 
 ### Thm TY-T1 (类型安全)
+> **[来源: Rust Official Docs]**
 
 对于良型程序 $e$，满足：
 
@@ -22,6 +24,7 @@
 ---
 
 ## 证明树可视化
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -79,8 +82,10 @@ graph TD
 ---
 
 ## 形式化证明
+> **[来源: Rust Official Docs]**
 
 ### 进展性 (Progress)
+> **[来源: Rust Official Docs]**
 
 **定理**: 若 $\Gamma \vdash e : \tau$，则 $e$ 是值或存在 $e'$ 使 $e \to e'$。
 
@@ -110,6 +115,7 @@ graph TD
 - 若是值，则 $e$ 是值 (引用值)
 
 ### 保持性 (Preservation)
+> **[来源: Rust Official Docs]**
 
 **定理**: 若 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
 
@@ -139,8 +145,10 @@ $$
 ---
 
 ## Rust特定考虑
+> **[来源: Rust Official Docs]**
 
 ### 所有权与类型安全
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 所有权转移保持类型
@@ -150,6 +158,7 @@ let s2 = s;                      // s2: String, s 失效
 ```
 
 ### 借用与类型安全
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 借用创建子类型关系
@@ -162,6 +171,7 @@ let r2: &&i32 = &r;      // &'b &'a i32
 ---
 
 ## 与其他定理的关系
+> **[来源: Rust Official Docs]**
 
 ```text
 类型安全 (TY-T1)
@@ -179,6 +189,7 @@ let r2: &&i32 = &r;      // &'b &'a i32
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14

@@ -1,16 +1,20 @@
 # 故障排除与调试指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南提供Rust安全关键系统开发中常见问题的诊断和解决方法，涵盖编译错误、运行时问题、工具链问题和认证相关问题。
 
 ---
 
 ## 1. 编译错误故障排除
+> **[来源: Rust Official Docs]**
 
 ### 1.1 借用检查器错误
+> **[来源: Rust Official Docs]**
 
 #### 错误 E0499: 多次可变借用
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 错误代码
@@ -50,6 +54,7 @@ fn process_data_index(data: &mut Vec<u32>) {
 ```
 
 #### 错误 E0597: 悬垂引用
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 错误代码
@@ -81,6 +86,7 @@ impl<'a> Container<'a> {
 ```
 
 ### 1.2 泛型约束错误
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 错误: 缺少trait约束
@@ -118,6 +124,7 @@ fn find_max_ref<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 1.3 no_std编译错误
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 错误: 在no_std中使用标准库类型
@@ -147,8 +154,10 @@ fn use_static_vec() {
 ---
 
 ## 2. 运行时问题诊断
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Panic分析与恢复
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::panic;
@@ -195,6 +204,7 @@ pub fn safe_execute<T>(operation: impl FnOnce() -> T) -> Option<T> {
 ```
 
 ### 2.2 堆栈溢出检测
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 堆栈使用监控
@@ -238,6 +248,7 @@ pub mod stack_monitor {
 ```
 
 ### 2.3 死锁检测
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Mutex, LockResult};

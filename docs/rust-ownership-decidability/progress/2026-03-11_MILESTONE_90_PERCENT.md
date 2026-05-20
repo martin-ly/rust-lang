@@ -7,10 +7,13 @@
 ---
 
 ## 重大突破
+> **[来源: Rust Official Docs]**
 
 ### 所有核心定理证明完成
+> **[来源: Rust Official Docs]**
 
 #### 1. Termination.v - 100% 完成
+> **[来源: Rust Official Docs]**
 
 - ✅ `linearizable_acyclic` - 完全证明
 - ✅ `borrow_checking_termination` - 完全证明

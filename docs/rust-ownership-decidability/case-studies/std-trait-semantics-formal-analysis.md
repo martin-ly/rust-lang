@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库核心Trait语义形式化分析](#rust标准库核心trait语义形式化分析)
   - [目录](#目录)
@@ -53,6 +54,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 核心trait定义Rust的类型系统行为:
 
@@ -64,6 +66,7 @@
 ---
 
 ## 2. Drop trait
+> **[来源: Rust Official Docs]**
 
 ### 2.1 析构语义
 

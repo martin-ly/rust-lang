@@ -1,6 +1,7 @@
 # 01-02: The Rust Borrowing System - A Formal Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [01-02: The Rust Borrowing System - A Formal Deep Dive](#01-02-the-rust-borrowing-system---a-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -157,6 +158,7 @@
 ---
 
 ## 1. Introduction and Overview
+> **[来源: Rust Official Docs]**
 
 The Rust borrowing system represents one of the most significant innovations in programming language design.
 While ownership establishes the foundation for memory safety without garbage collection,
@@ -164,6 +166,7 @@ borrowing provides the mechanism by which multiple parts of a program can safely
 This chapter provides a comprehensive, formal treatment of Rust's borrowing semantics.
 
 ### 1.1 The Fundamental Insight
+> **[来源: Rust Official Docs]**
 
 The core insight of Rust's borrowing system is that memory safety violations arise from **aliasing combined with mutation**.
 If we can ensure that:

@@ -5,6 +5,7 @@
 > **Rust 形式化验证与学术前沿**
 
 ## 📚 内容
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -12,6 +13,7 @@
 | [coq_formalization_guide.md](coq_formalization_guide.md) | Coq 形式化验证实战 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 前置要求
+> **[来源: Rust Official Docs]**
 
 - [03_advanced/type_driven_correctness.md](../../03_advanced/type_driven_correctness.md) - 类型驱动正确性
 - [04_expert/miri/tree_borrows.md](../miri/tree_borrows.md) - Tree Borrows 基础

@@ -7,12 +7,15 @@
 ---
 
 ## 📌 项目定位
+> **[来源: Rust Official Docs]**
 
 ### 项目名称
+> **[来源: Rust Official Docs]**
 
 **Rust Systematic Learning Project (Rust 系统化学习项目)**
 
 ### 核心目标
+> **[来源: Rust Official Docs]**
 
 为 Rust 学习者提供从入门到精通、从理论到实践的**完整系统化学习路径**。
 

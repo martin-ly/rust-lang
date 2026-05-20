@@ -7,14 +7,17 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 创建一个命令行待办事项管理工具 (Todo CLI)，学习Rust基础编程。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 ### 基本功能
+> **[来源: Rust Official Docs]**
 
 - [ ] 添加待办事项: `todo add "买牛奶"`
 - [ ] 列出待办事项: `todo list`

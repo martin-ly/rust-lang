@@ -6,14 +6,17 @@
 ---
 
 ## 🗺️ 7 条定制化学习路径
+> **[来源: Rust Official Docs]**
 
 ### 路径 1: 零基础入门
+> **[来源: Rust Official Docs]**
 
 ```
 C01 → C02 → C03 → 项目
 ```
 
 ### 路径 2: 有编程经验
+> **[来源: Rust Official Docs]**
 
 ```
 C01 → C04 → C05 → 项目

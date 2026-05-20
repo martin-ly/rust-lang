@@ -7,6 +7,7 @@
 ---
 
 ## 🎯 证明目标
+> **[来源: Rust Official Docs]**
 
 **定理 UNSAFE-SAFETY**: 在 Safe Rust 中，unsafe 代码块不会引入未定义行为(UB)，当且仅当满足以下条件：
 
@@ -18,6 +19,7 @@
 ---
 
 ## 🌲 安全证明树
+> **[来源: Rust Official Docs]**
 
 ```
                     Unsafe 安全
@@ -37,8 +39,10 @@
 ---
 
 ## 📐 公理系统
+> **[来源: Rust Official Docs]**
 
 ### 公理 UNSAFE-A1 (裸指针有效性)
+> **[来源: Rust Official Docs]**
 
 **声明**: 对于任何裸指针解引用 `*ptr`，必须满足：
 
@@ -57,6 +61,7 @@
 ```
 
 ### 公理 UNSAFE-A2 (类型转换)
+> **[来源: Rust Official Docs]**
 
 **声明**: `transmute::<A, B>` 合法当且仅当：
 
@@ -74,6 +79,7 @@
 ```
 
 ### 公理 UNSAFE-A3 (外部函数契约)
+> **[来源: Rust Official Docs]**
 
 **声明**: 调用外部函数必须满足其前置条件。
 
@@ -89,8 +95,10 @@
 ---
 
 ## 🔄 证明规则
+> **[来源: Rust Official Docs]**
 
 ### 规则 UNSAFE-R1 (借用转换)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 安全的借用转换
@@ -111,6 +119,7 @@ unsafe fn unsafe_deref<T>(ptr: *const T) -> &T {
 - `ptr` 指向有效内存
 
 ### 规则 UNSAFE-R2 (MaybeUninit)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -135,6 +144,7 @@ fn safe_maybe_uninit<T>() -> T {
 - `assume_init()` 前必须已写入
 
 ### 规则 UNSAFE-R3 (切片操作)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 安全的切片转换
@@ -153,6 +163,7 @@ unsafe fn slice_from_raw_parts<T>(
 ---
 
 ## 🔍 反例分析
+> **[来源: Rust Official Docs]**
 
 ### 反例 1: 悬垂指针
 

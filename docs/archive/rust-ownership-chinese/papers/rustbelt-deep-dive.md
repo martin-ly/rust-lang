@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RustBelt 深度解读](#rustbelt-深度解读)
   - [目录](#目录)
@@ -48,8 +49,10 @@
 ---
 
 ## 1. 论文概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心问题
+> **[来源: Rust Official Docs]**
 
 **问题陈述**：如何证明Rust的类型系统确实提供了它所承诺的内存安全保证？
 
@@ -61,6 +64,7 @@
 4. **引用计数**：`Rc`、`Arc`的正确性
 
 ### 1.2 主要贡献
+> **[来源: Rust Official Docs]**
 
 1. **λ_Rust**: Rust核心语言的CPS（Continuation-Passing Style）形式化
 2. **分离逻辑语义**: 使用Iris框架定义所有权
@@ -68,6 +72,7 @@
 4. **机器检查证明**: 约19,000行Coq代码，完全形式化验证
 
 ### 1.3 技术路线
+> **[来源: Rust Official Docs]**
 
 ```text
 Rust源代码
@@ -84,8 +89,10 @@ Coq形式化
 ---
 
 ## 2. λ_Rust 核心语言
+> **[来源: Rust Official Docs]**
 
 ### 2.1 语法定义
+> **[来源: Rust Official Docs]**
 
 ```text
 表达式:
@@ -114,6 +121,7 @@ Coq形式化
 ```
 
 ### 2.2 关键设计决策
+> **[来源: Rust Official Docs]**
 
 **CPS风格转换**:
 
@@ -141,6 +149,7 @@ CPS的优势：
 ```
 
 ### 2.3 操作语义
+> **[来源: Rust Official Docs]**
 
 **小步语义示例**：
 
@@ -172,10 +181,12 @@ CPS的优势：
 ---
 
 ## 3. Iris 分离逻辑框架
+> **[来源: Rust Official Docs]**
 
 Iris是一个高阶并发分离逻辑框架，RustBelt基于它构建。
 
 ### 3.1 资源代数（Resource Algebra）
+> **[来源: Rust Official Docs]**
 
 资源代数定义了可组合的资源：
 

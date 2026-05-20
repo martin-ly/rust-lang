@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 观察者模式定义对象间的一对多依赖关系，当一个对象状态改变时，所有依赖它的对象都会收到通知并自动更新。
 
 ---
 
 ## Rust 实现
+> **[来源: Rust Official Docs]**
 
 ### 基础实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::cell::RefCell;

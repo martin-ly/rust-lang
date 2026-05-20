@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [内联汇编](#内联汇编)
   - [目录](#目录)
@@ -36,8 +37,10 @@
 ---
 
 ## 1. 基本语法
+> **[来源: Rust Official Docs]**
 
 ### 1.1 最简单的汇编
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::arch::asm;

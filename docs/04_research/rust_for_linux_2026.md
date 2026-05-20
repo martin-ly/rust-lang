@@ -8,6 +8,8 @@
 ---
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust for Linux：2026 年全景与工程实践](#rust-for-linux2026-年全景与工程实践)
   - [目录](#目录)
@@ -38,6 +40,8 @@
 ---
 
 ## 一、历史里程碑
+>
+> **[来源: Rust Official Docs]**
 
 ```
 2020-06  Linux 5.8: Rust 支持首次以 RFC 形式提出
@@ -59,8 +63,12 @@
 ---
 
 ## 二、Rust 在内核中的定位
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 设计哲学
+>
+> **[来源: Rust Official Docs]**
 
 | 维度 | C 内核代码 | Rust 内核代码 |
 |------|-----------|--------------|
@@ -71,6 +79,8 @@
 | 与 C 互操作 | 原生 | 通过 `unsafe` FFI + bindgen |
 
 ### 2.2 适用场景
+>
+> **[来源: Rust Official Docs]**
 
 ✅ **强烈推荐使用 Rust**：
 
@@ -86,8 +96,12 @@
 ---
 
 ## 三、内核 Rust 开发环境
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 工具链要求
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # Rust 版本：通常需要特定 nightly 或内核绑定的 stable
@@ -109,6 +123,8 @@ make LLVM=1 -j$(nproc)
 - 使用 LLVM 工具链而非 GCC（Rust 后端依赖 LLVM）
 
 ### 3.2 最小示例：内核模块
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // SPDX-License-Identifier: GPL-2.0
@@ -156,8 +172,12 @@ impl Drop for HelloRust {
 ---
 
 ## 四、`kernel` Crate API 概览
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 核心抽象
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use kernel::prelude::*;
@@ -174,6 +194,8 @@ static MY_DATA: Mutex<u32> = Mutex::new(0);
 ```
 
 ### 4.2 内存管理
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use kernel::alloc::vec::Vec;

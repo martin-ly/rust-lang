@@ -11,8 +11,10 @@
 ---
 
 ## 异步编程核心概念
+> **[来源: Rust Official Docs]**
 
 ### Future 与异步执行
+> **[来源: Rust Official Docs]**
 
 Rust 的异步编程基于 Future trait：
 
@@ -49,6 +51,7 @@ impl Future for TimerFuture {
 ```
 
 ### async/await 语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::time::{sleep, Duration};
@@ -101,6 +104,7 @@ async fn race_example() {
 ```
 
 ### 异步状态机
+> **[来源: Rust Official Docs]**
 
 ```rust
 // async fn 被编译为状态机
@@ -153,6 +157,7 @@ fn pin_demo() {
 ```
 
 ### 流（Streams）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use futures::stream::{self, Stream, StreamExt};
@@ -187,6 +192,7 @@ async fn stream_combinators() {
 ```
 
 ### 异步运行时
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Tokio：最常用的异步运行时
@@ -239,6 +245,7 @@ async fn async_channels() {
 ```
 
 ### 取消与超时
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::time::{timeout, Duration};
@@ -290,6 +297,7 @@ fn cancellation_demo() {
 ```
 
 ### 并发控制
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::sync::Semaphore;
@@ -349,6 +357,7 @@ where
 ---
 
 ## 使用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 异步模式 | 关键技术 |
 | :--- | :--- | :--- |
@@ -364,8 +373,10 @@ where
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

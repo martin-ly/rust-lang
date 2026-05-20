@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [📝 Rust 字符串与格式化速查卡](#-rust-字符串与格式化速查卡)
   - [📋 目录](#-目录)
@@ -73,8 +74,10 @@
 ---
 
 ## 🔤 字符串类型
+> **[来源: Rust Official Docs]**
 
 ### String vs &str
+> **[来源: Rust Official Docs]**
 
 ```rust
 // String - 可增长的堆分配字符串（拥有所有权）
@@ -87,6 +90,7 @@ let s4: &str = &s1; // String 自动解引用为 &str
 ```
 
 ### 类型特点
+> **[来源: Rust Official Docs]**
 
 | 类型     | 所有权 | 可变性 | 存储位置 | 大小            |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -95,8 +99,10 @@ let s4: &str = &s1; // String 自动解引用为 &str
 ---
 
 ## 🆕 字符串创建
+> **[来源: Rust Official Docs]**
 
 ### 基本创建
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 从字面量创建
@@ -115,6 +121,7 @@ let mut s6 = String::with_capacity(10);
 ```
 
 ### 从其他类型创建
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 从数字
@@ -132,8 +139,10 @@ let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 ---
 
 ## ✂️ 字符串操作
+> **[来源: Rust Official Docs]**
 
 ### 追加内容
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut s = String::from("hello");
@@ -155,6 +164,7 @@ let s3 = s1 + &s2; // s1 被移动
 ```
 
 ### 删除内容
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut s = String::from("hello, world");
@@ -174,6 +184,7 @@ s.drain(1..3); // 移除索引 1-2
 ```
 
 ### 替换
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s = String::from("hello world");
@@ -257,6 +268,7 @@ let trimmed = s.trim_matches(' ');
 ---
 
 ## 🔄 字符串转换
+> **[来源: Rust Official Docs]**
 
 ### String ↔ &str
 
@@ -328,6 +340,7 @@ let byte_count = s.len();
 ---
 
 ## 🖨️ 格式化输出
+> **[来源: Rust Official Docs]**
 
 ### 基本宏
 
@@ -383,6 +396,7 @@ writeln!(s, "Line 2").unwrap();
 ---
 
 ## 🎨 格式化选项
+> **[来源: Rust Official Docs]**
 
 ### 对齐和填充
 
@@ -489,6 +503,7 @@ println!("{:#?}", vec![1, 2, 3]); // 美化格式
 ---
 
 ## 🎯 常用模式
+> **[来源: Rust Official Docs]**
 
 ### 字符串拼接
 
@@ -587,6 +602,7 @@ print!("\r[{}{}] {:.1}%",
 ---
 
 ## 💡 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 实现 Display trait
 
@@ -755,6 +771,7 @@ println!("{:?}", row.fields);
 ---
 
 ## 🎯 使用场景
+> **[来源: Rust Official Docs]**
 
 ### 场景: 日志格式化系统
 
@@ -837,6 +854,7 @@ println!("{}", entry.format_colored());
 ---
 
 ## 🚫 反例速查
+> **[来源: Rust Official Docs]**
 
 ### 反例 1: 在循环中拼接字符串
 
@@ -967,12 +985,14 @@ fn process_logs(logs: &[LogEntry]) -> String {
 ---
 
 ## 📚 相关文档
+> **[来源: Rust Official Docs]**
 
 - [类型系统模块（String/&str 相关）](../../../crates/c02_type_system/README.md)
 - [算法模块（字符串算法与数据处理）](../../../crates/c08_algorithms/README.md)
 - [WASM 模块（字符串互操作示例）](../../../crates/c12_wasm/README.md)
 
 ## 🧩 相关示例代码
+> **[来源: Rust Official Docs]**
 
 以下示例与字符串/格式化高度相关，可直接运行：
 
@@ -980,6 +1000,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [WASM 字符串操作（C12）](../../../crates/c12_wasm/examples/02_string_operations.rs)（`cargo run -p c12_wasm --example 02_string_operations`）
 
 ## 📚 相关资源
+> **[来源: Rust Official Docs]**
 
 ### 官方文档
 
@@ -1068,3 +1089,7 @@ let gamma = f64::consts::EULER_GAMMA;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

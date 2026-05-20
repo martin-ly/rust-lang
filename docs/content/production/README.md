@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 生产实践指南](#rust-生产实践指南)
   - [📋 目录](#-目录)
@@ -52,6 +53,7 @@
 ---
 
 ## 🎯 目标
+> **[来源: Rust Official Docs]**
 
 本目录致力于提供：
 
@@ -63,8 +65,10 @@
 ---
 
 ## 📊 生产就绪检查清单
+> **[来源: Rust Official Docs]**
 
 ### 功能完整性
+> **[来源: Rust Official Docs]**
 
 - [ ] 所有功能有单元测试覆盖 (>80%)
 - [ ] 集成测试覆盖关键路径
@@ -75,6 +79,7 @@
 - [ ] 优雅关闭机制
 
 ### 可观测性
+> **[来源: Rust Official Docs]**
 
 - [ ] 结构化日志输出
 - [ ] 关键指标暴露 (Prometheus)
@@ -83,6 +88,7 @@
 - [ ] 告警规则配置
 
 ### 安全性
+> **[来源: Rust Official Docs]**
 
 - [ ] 依赖安全审计通过
 - [ ] 密钥管理服务集成
@@ -91,6 +97,7 @@
 - [ ] TLS 配置正确
 
 ### 性能
+> **[来源: Rust Official Docs]**
 
 - [ ] 内存使用分析
 - [ ] CPU 热点优化
@@ -101,10 +108,13 @@
 ---
 
 ## 🐳 部署
+> **[来源: Rust Official Docs]**
 
 ### Docker 优化
+> **[来源: Rust Official Docs]**
 
 #### 多阶段构建
+> **[来源: Rust Official Docs]**
 
 ```dockerfile
 # 构建阶段
@@ -131,6 +141,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 #### 镜像优化技巧
+> **[来源: Rust Official Docs]**
 
 | 技巧 | 效果 | 实施难度 |
 |------|------|----------|

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Backoff/Retry 重试策略形式化分析](#backoffretry-重试策略形式化分析)
   - [目录](#目录)
@@ -27,6 +28,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 backoff提供:
 
@@ -38,6 +40,7 @@ backoff提供:
 ---
 
 ## 2. 指数退避
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (退避公式)
 

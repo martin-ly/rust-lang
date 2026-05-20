@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Async/Await 形式语义补充](#asyncawait-形式语义补充)
   - [目录](#目录)
@@ -34,8 +35,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Future Trait 形式定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Future类型定义
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Future {
@@ -56,6 +59,7 @@ $$
 - $\text{Poll}\langle T \rangle \triangleq \text{Pending} \mid \text{Ready}(T)$
 
 ### 1.2 Poll结果类型
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Poll}\langle T \rangle ::= \text{Pending} \mid \text{Ready}(v: T)
@@ -69,8 +73,10 @@ $$
 ---
 
 ## 2. 异步函数状态机转换
+> **[来源: Rust Official Docs]**
 
 ### 2.1 async fn 到状态机的转换
+> **[来源: Rust Official Docs]**
 
 **转换规则**：
 
@@ -103,6 +109,7 @@ impl Future for FooStateMachine {
 ```
 
 ### 2.2 状态机形式语义
+> **[来源: Rust Official Docs]**
 
 **状态机配置**：$\langle s, \sigma, \kappa \rangle$
 
@@ -125,8 +132,10 @@ $$
 ---
 
 ## 3. 跨Await点借用分析
+> **[来源: Rust Official Docs]**
 
 ### 3.1 问题陈述
+> **[来源: Rust Official Docs]**
 
 **关键问题**：当异步函数挂起（await）时，局部变量的借用是否仍然有效？
 
@@ -142,6 +151,7 @@ async fn example() {
 ```
 
 ### 3.2 生命周期边界规则
+> **[来源: Rust Official Docs]**
 
 **形式化规则**：
 
@@ -157,6 +167,7 @@ $$
 2. 借用本身也被捕获
 
 ### 3.3 状态机捕获分析
+> **[来源: Rust Official Docs]**
 
 **捕获规则**：
 

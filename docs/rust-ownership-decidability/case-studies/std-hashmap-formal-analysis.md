@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库 HashMap 形式化分析](#rust标准库-hashmap-形式化分析)
   - [目录](#目录)
@@ -56,6 +57,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 `HashMap<K, V, S>` 是Rust标准库提供的高性能哈希表实现，采用**罗宾汉哈希(Robin Hood Hashing)**策略优化缓存局部性。
 
@@ -69,6 +71,7 @@
 ---
 
 ## 2. HashMap 的形式化定义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 内存表示
 

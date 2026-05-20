@@ -7,10 +7,13 @@
 ---
 
 ## 一、已完成工作
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心新特性形式化 (100%)
+> **[来源: Rust Official Docs]**
 
 #### ✅ Reborrow Trait (`Reborrow.v`) - 100%
+> **[来源: Rust Official Docs]**
 
 - [x] 定义 `has_reborrow` 关系
 - [x] 表达式 `ERImplicit` 和 `ERExplicit`

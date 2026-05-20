@@ -10,6 +10,7 @@
 ---
 
 ## 一、形式语言总览
+> **[来源: Rust Official Docs]**
 
 本文档采用**标准 PL 形式化风格**（TAPL、RustBelt）：
 
@@ -26,8 +27,10 @@
 ---
 
 ## 二、语法（归纳定义）
+> **[来源: Rust Official Docs]**
 
 ### 2.1 核心表达式（简化）
+> **[来源: Rust Official Docs]**
 
 $$
 \begin{aligned}
@@ -38,12 +41,14 @@ v \mathrel{::=} &\; n \mid \textbf{true} \mid \textbf{false} \mid \lambda x{:}\t
 $$
 
 ### 2.2 所有权状态
+> **[来源: Rust Official Docs]**
 
 $$
 \Omega(x) \in \{\text{Owned}, \text{Moved}, \text{Dropped}\}
 $$
 
 ### 2.3 借用类型
+> **[来源: Rust Official Docs]**
 
 $$
 B \mathrel{::=} \text{Immutable} \mid \text{Mutable}
@@ -52,8 +57,10 @@ $$
 ---
 
 ## 三、判定形式与推理规则
+> **[来源: Rust Official Docs]**
 
 ### 3.1 类型判定
+> **[来源: Rust Official Docs]**
 
 **判定形式**：$\Gamma \vdash e : \tau$（在环境 $\Gamma$ 下，$e$ 具有类型 $\tau$）
 
@@ -72,6 +79,7 @@ $$
 $$
 
 ### 3.2 所有权状态判定
+> **[来源: Rust Official Docs]**
 
 **判定形式**：$(\Gamma, \Omega) \vdash_{\text{own}} \text{ok}$（所有权配置良构）
 
@@ -84,6 +92,7 @@ $$
 $$
 
 ### 3.3 借用判定
+> **[来源: Rust Official Docs]**
 
 **判定形式**：$\Gamma \vdash_{\text{borrow}} b : \text{ok}$（借用 $b$ 满足规则）
 
@@ -102,8 +111,10 @@ $$
 ---
 
 ## 四、操作语义（小步）
+> **[来源: Rust Official Docs]**
 
 ### 4.1 类型系统归约
+> **[来源: Rust Official Docs]**
 
 **归约关系**：$e \to e'$
 

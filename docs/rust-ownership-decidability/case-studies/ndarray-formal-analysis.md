@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [ndarray 多维数组形式化分析](#ndarray-多维数组形式化分析)
   - [目录](#目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ndarray提供:
 
@@ -43,6 +45,7 @@ ndarray提供:
 ---
 
 ## 2. 维度类型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Dimension Trait
 

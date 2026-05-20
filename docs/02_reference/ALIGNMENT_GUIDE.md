@@ -17,6 +17,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -50,6 +51,7 @@
 ---
 
 ## 一、概念分类
+> **[来源: Rust Official Docs]**
 
 Rust 项目中「对齐」一词在不同语境下有不同含义：
 
@@ -62,8 +64,10 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 ---
 
 ## 二、内存对齐（核心）
+> **[来源: Rust Official Docs]**
 
 ### 2.0 为何要对齐（Why Alignment Matters）
+> **[来源: Rust Official Docs]**
 
 **CPU 行为**：现代 CPU 按「对齐边界」加载数据。未对齐访问可能导致：
 
@@ -78,6 +82,7 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 ---
 
 ### 2.1 基本概念
+> **[来源: Rust Official Docs]**
 
 - **对齐**：类型 T 的实例地址必须是 `align_of::<T>()` 的整数倍
 - **自然对齐**：标量类型的对齐通常等于其大小（如 `u64` 对齐 8 字节）
@@ -102,6 +107,7 @@ assert_eq!(size_of::<Example>(), 24);
 ```
 
 ### 2.2 常用 API
+> **[来源: Rust Official Docs]**
 
 | API | 用途 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -111,6 +117,7 @@ assert_eq!(size_of::<Example>(), 24);
 | `Layout::from_size_align` | 构造自定义布局 |
 
 ### 2.3 repr 与对齐（完整谱系）
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 默认 #[repr(Rust)]：编译器可重排字段以优化
@@ -142,6 +149,7 @@ struct CLayoutAligned { x: u64; y: u64; }
 ```
 
 ### 2.4 字段重排序优化
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 大字段后置导致多出填充
@@ -152,6 +160,7 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 ```
 
 ### 2.5 对齐计算（Rust 1.92+）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::num::NonZeroUsize;
@@ -170,6 +179,7 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 ```
 
 ### 2.6 Layout API（自定义分配）
+> **[来源: Rust Official Docs]**
 
 `std::alloc::Layout` 描述内存块的大小与对齐，用于 `alloc`、`GlobalAlloc` 等。
 
@@ -189,6 +199,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 *参考*: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
 
 ### 2.7 平台差异
+> **[来源: Rust Official Docs]**
 
 | 平台 | 未对齐访问 | 缓存行 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

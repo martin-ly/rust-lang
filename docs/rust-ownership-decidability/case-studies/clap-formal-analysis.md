@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Clap命令行解析形式化分析](#clap命令行解析形式化分析)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Clap是Rust标准命令行解析库：
 
@@ -47,6 +49,7 @@ Clap是Rust标准命令行解析库：
 ---
 
 ## 2. 派生宏系统
+> **[来源: Rust Official Docs]**
 
 ### 定义 DERIVE-1 ( 结构体派生 )
 

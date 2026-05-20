@@ -13,6 +13,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -44,6 +45,7 @@
 ---
 
 ## 〇、证明结构规范（A→L→T→C 链）
+> **[来源: Rust Official Docs]**
 
 形式化文档应遵循 **Axiom → Lemma → Theorem → Corollary** 可追溯链：
 
@@ -59,6 +61,7 @@
 ---
 
 ## 一、证明依赖 DAG
+> **[来源: Rust Official Docs]**
 
 ```text
                     [公理层]
@@ -98,18 +101,21 @@
 ---
 
 ## 二、所有权定理 T-OW2（所有权唯一性）
+> **[来源: Rust Official Docs]**
 
 **定理 T-OW2**：对于任何值 $v$，在任意时刻，最多存在一个变量 $x$ 使得 $\Omega(x) = \text{Owned}$ 且 $\Gamma(x) = v$。
 
 **形式化**：$\forall v, t: |\{x \mid \Omega_t(x)=\text{Owned} \land \Gamma_t(x)=v\}| \leq 1$
 
 ### 2.1 辅助引理
+> **[来源: Rust Official Docs]**
 
 **引理 L-OW1（初始唯一性）**：在初始状态 $S_0$，$\forall v: |\{x \mid \Omega_0(x)=\text{Owned} \land \Gamma_0(x)=v\}| \leq 1$。
 
 *证明*：由规则 1（每个值有唯一所有者），初始绑定时每变量至多绑定一值，每值至多绑定一变量。∎
 
 ### 2.2 归纳证明
+> **[来源: Rust Official Docs]**
 
 **归纳谓词** $P(S)$：在状态 $S$ 下，$\forall v: |\{x \mid \Omega(x)=\text{Owned} \land \Gamma(x)=v\}| \leq 1$。
 
@@ -126,6 +132,7 @@
 故 $P(S')$ 成立。由结构归纳，$\forall S: P(S)$。∎
 
 ### 2.3 反例的形式化否定
+> **[来源: Rust Official Docs]**
 
 **反例**：使用已移动值。形式化 $\neg P$：$\exists x, v, t: \Omega_t(x)=\text{Moved} \land \Gamma_t(x)=v \land \text{use}_t(x)$。
 
@@ -134,10 +141,12 @@
 ---
 
 ## 三、借用定理 T-BR1（数据竞争自由）
+> **[来源: Rust Official Docs]**
 
 **定理 T-BR1**：借用检查器保证程序是数据竞争自由的。形式化：$\text{BorrowCheck}(P)=\text{OK} \rightarrow \text{DataRaceFree}(P)$。
 
 ### 3.1 辅助引理
+> **[来源: Rust Official Docs]**
 
 **引理 L-BR1（写操作互斥）**：若满足规则 1（可变借用唯一性），则 $\forall m, t_1, t_2: \text{Write}(t_1,m) \land \text{Write}(t_2,m) \land \text{Concurrent}(t_1,t_2) \rightarrow \text{false}$。
 
@@ -148,6 +157,7 @@
 *证明*：规则 2 保证可变与不可变借用互斥；写⇒可变借用，读⇒不可变借用；并存⇒违反规则 2。∎
 
 ### 3.2 主证明
+> **[来源: Rust Official Docs]**
 
 **数据竞争定义**：$\text{DataRace}(m,t_1,t_2) \leftrightarrow \text{Concurrent}(t_1,t_2) \land \text{Access}(t_1,m) \land \text{Access}(t_2,m) \land (\text{Write}(t_1,m) \lor \text{Write}(t_2,m)) \land \neg\text{Synchronized}(t_1,t_2)$。
 
@@ -162,6 +172,7 @@
 故 $\neg\exists$。∎
 
 ### 3.3 归纳细化（对执行步骤）
+> **[来源: Rust Official Docs]**
 
 **归纳谓词** $Q(e_1;\ldots;e_n)$：执行前缀满足数据竞争自由。
 

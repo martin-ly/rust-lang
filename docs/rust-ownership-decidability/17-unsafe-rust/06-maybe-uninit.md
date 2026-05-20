@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [MaybeUninit 完全指南](#maybeuninit-完全指南)
   - [目录](#目录)
@@ -31,10 +32,12 @@
 ---
 
 ## 1. MaybeUninit 是什么
+> **[来源: Rust Official Docs]**
 
 `MaybeUninit<T>` 是一个**可能已初始化也可能未初始化**的类型。它是 Rust 中处理未初始化内存的唯一安全方式。
 
 ### 1.1 核心特性
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::mem::MaybeUninit;

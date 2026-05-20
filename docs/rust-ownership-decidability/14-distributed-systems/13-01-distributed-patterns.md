@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust分布式系统设计模式](#rust分布式系统设计模式)
   - [目录](#目录)
@@ -39,8 +40,10 @@
 ---
 
 ## 1. 分布式系统概述
+> **[来源: Rust Official Docs]**
 
 ### Rust在分布式系统中的优势
+> **[来源: Rust Official Docs]**
 
 ```text
 1. 零成本抽象：高性能网络服务

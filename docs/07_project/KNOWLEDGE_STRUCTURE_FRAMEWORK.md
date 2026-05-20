@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 知识结构框架文档](#rust-知识结构框架文档)
   - [📋 目录](#-目录)
@@ -80,6 +81,7 @@
 ---
 
 ## 🎯 文档概述
+> **[来源: Rust Official Docs]**
 
 本文档建立 Rust 学习项目的知识结构框架，系统化梳理技术主题的内容和知识结构，包括：
 
@@ -94,8 +96,10 @@
 ---
 
 ## 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 知识结构建模工具
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 知识结构框架的 Rust 实现
@@ -209,6 +213,7 @@ fn main() {
 ```
 
 ### 多维矩阵生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 概念对比矩阵生成
@@ -275,6 +280,7 @@ fn main() {
 ```
 
 ### 思维导图文本生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 生成文本格式思维导图
@@ -336,8 +342,10 @@ fn main() {
 ---
 
 ## 形式化链接
+> **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+> **[来源: Rust Official Docs]**
 
 - **形式化证明**: [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 证明索引与公理编号规范
 - **证明图网**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构
@@ -345,6 +353,7 @@ fn main() {
 - **类型理论**: [type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) - 类型理论基础
 
 ### 实施场景
+> **[来源: Rust Official Docs]**
 
 | 应用场景 | 实施方法 | 输出 |
 | :--- | :--- | :--- |
@@ -355,8 +364,10 @@ fn main() {
 ---
 
 ## 📐 知识结构体系
+> **[来源: Rust Official Docs]**
 
 ### 1. 概念定义层
+> **[来源: Rust Official Docs]**
 
 #### 定义结构模板
 

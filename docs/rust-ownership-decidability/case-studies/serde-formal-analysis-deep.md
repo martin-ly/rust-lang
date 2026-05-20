@@ -1,6 +1,7 @@
 # Serde Serialization Framework: Formal Analysis and Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Serde Serialization Framework: Formal Analysis and Deep Dive](#serde-serialization-framework-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -82,10 +83,12 @@
 ---
 
 ## 1. Introduction
+> **[来源: Rust Official Docs]**
 
 Serde is Rust's most widely used serialization framework, providing a powerful, type-safe, and zero-cost abstraction for converting Rust data structures to and from various data formats. This document provides a comprehensive formal analysis of Serde's architecture, implementation patterns, common pitfalls, and performance characteristics.
 
 ### 1.1 Design Philosophy
+> **[来源: Rust Official Docs]**
 
 Serde follows several core design principles:
 

@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [SQLx 深度解析](#sqlx-深度解析)
   - [📋 目录](#-目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 SQLx 是一个异步纯 Rust SQL 工具包，提供：
 
@@ -42,6 +44,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 - **数据库无关**: 支持 PostgreSQL、MySQL、SQLite
 
 ### 对比其他 ORM
+> **[来源: Rust Official Docs]**
 
 | 特性 | SQLx | Diesel | Sea-ORM |
 |------|------|--------|---------|
@@ -54,6 +57,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 ---
 
 ## 🏗️ 架构设计
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -73,8 +77,10 @@ graph TD
 ---
 
 ## 💡 核心特性
+> **[来源: Rust Official Docs]**
 
 ### 编译时查询检查
+> **[来源: Rust Official Docs]**
 
 ```rust
 use sqlx::query_as;
@@ -108,6 +114,7 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
 - 参数数量匹配
 
 ### 类型安全
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 自动类型推导
@@ -128,6 +135,7 @@ struct UserWithPosts {
 ```
 
 ### 异步原生
+> **[来源: Rust Official Docs]**
 
 ```rust
 use sqlx::postgres::PgPoolOptions;
@@ -151,8 +159,10 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
 ---
 
 ## 🚀 高级用法
+> **[来源: Rust Official Docs]**
 
 ### 连接池
+> **[来源: Rust Official Docs]**
 
 ```rust
 use sqlx::postgres::{PgPool, PgPoolOptions};
@@ -191,6 +201,7 @@ impl Database {
 ```
 
 ### 事务处理
+> **[来源: Rust Official Docs]**
 
 ```rust
 use sqlx::{Postgres, Transaction};

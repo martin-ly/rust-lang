@@ -1,14 +1,17 @@
 # 安全审计指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统的安全审计流程、检查清单和最佳实践，确保系统符合安全要求。
 
 ---
 
 ## 1. 审计框架
+> **[来源: Rust Official Docs]**
 
 ### 1.1 审计类型
+> **[来源: Rust Official Docs]**
 
 ```
 安全审计类型:
@@ -33,6 +36,7 @@
 ```
 
 ### 1.2 审计生命周期
+> **[来源: Rust Official Docs]**
 
 ```
 开发阶段审计:
@@ -51,8 +55,10 @@
 ---
 
 ## 2. 静态代码审计
+> **[来源: Rust Official Docs]**
 
 ### 2.1 审计工具链
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 1. Clippy全面检查
@@ -73,6 +79,7 @@ cargo bloat --release
 ```
 
 ### 2.2 unsafe代码审计
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// unsafe代码审计检查表
@@ -128,8 +135,10 @@ mod audit {
 ---
 
 ## 3. 依赖安全审计
+> **[来源: Rust Official Docs]**
 
 ### 3.1 依赖评估矩阵
+> **[来源: Rust Official Docs]**
 
 | 评估项 | 权重 | 检查方法 |
 |--------|------|----------|
@@ -140,6 +149,7 @@ mod audit {
 | **代码质量** | 10% | 静态分析 |
 
 ### 3.2 依赖审计配置
+> **[来源: Rust Official Docs]**
 
 ```toml
 # deny.toml
@@ -192,6 +202,7 @@ allow-registry = [
 ```
 
 ### 3.3 SBOM生成与验证
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 生成SBOM

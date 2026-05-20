@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def CQ1: CQRS (Command Query Responsibility Segregation)
+> **[来源: Rust Official Docs]**
 
 CQRS 是一种**读写分离架构模式**，将系统的**命令操作**（写）和**查询操作**（读）分离到不同的模型中。
 
@@ -23,6 +25,7 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 ```
 
 ### Def CQ2: 命令与查询的分离
+> **[来源: Rust Official Docs]**
 
 ```
 Command := input → (S_c → S_c') × Events

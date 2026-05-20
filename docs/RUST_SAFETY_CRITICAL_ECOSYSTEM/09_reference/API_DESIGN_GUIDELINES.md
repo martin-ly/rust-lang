@@ -1,14 +1,17 @@
 # API设计指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统API设计的最佳实践，确保接口的安全性、可用性和可维护性。
 
 ---
 
 ## 1. 安全API设计原则
+> **[来源: Rust Official Docs]**
 
 ### 1.1 类型安全
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// ✅ 使用类型系统防止错误
@@ -57,6 +60,7 @@ impl Device<Initialized> {
 ```
 
 ### 1.2 不可变优先
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// ✅ 默认不可变
@@ -95,8 +99,10 @@ let config = Config::new()
 ---
 
 ## 2. 错误处理设计
+> **[来源: Rust Official Docs]**
 
 ### 2.1 错误类型设计
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 结构化错误类型
@@ -156,6 +162,7 @@ impl std::fmt::Display for DeviceError {
 ```
 
 ### 2.2 错误恢复策略
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 可恢复操作
@@ -197,8 +204,10 @@ pub trait Recoverable {
 ---
 
 ## 3. 资源管理
+> **[来源: Rust Official Docs]**
 
 ### 3.1 RAII模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 资源自动管理
@@ -254,6 +263,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 ```
 
 ### 3.2 借用设计
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 智能借用模式
@@ -305,6 +315,7 @@ impl DataStore {
 ---
 
 ## 4. 异步API设计
+> **[来源: Rust Official Docs]**
 
 ### 4.1 安全异步接口
 

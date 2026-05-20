@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tokio运行时形式化分析](#tokio运行时形式化分析)
   - [目录](#目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tokio是Rust异步生态核心运行时：
 
@@ -51,6 +53,7 @@ Tokio是Rust异步生态核心运行时：
 ---
 
 ## 2. 运行时架构
+> **[来源: Rust Official Docs]**
 
 ### 定义 RUNTIME-1 ( 运行时配置 )
 

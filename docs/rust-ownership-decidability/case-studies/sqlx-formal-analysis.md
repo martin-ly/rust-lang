@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [SQLx 异步SQL框架形式化分析](#sqlx-异步sql框架形式化分析)
   - [目录](#目录)
@@ -49,6 +50,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 SQLx是Rust的异步SQL框架，提供:
 
@@ -60,6 +62,7 @@ SQLx是Rust的异步SQL框架，提供:
 ---
 
 ## 2. 编译时SQL验证
+> **[来源: Rust Official Docs]**
 
 ### 2.1 宏扩展过程
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Figment 配置管理库形式化分析](#figment-配置管理库形式化分析)
   - [目录](#目录)
@@ -54,8 +55,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Figment 是什么
+> **[来源: Rust Official Docs]**
 
 Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket Web 框架作者）开发。它提供了一个统一、类型安全且可扩展的配置管理解决方案。
 

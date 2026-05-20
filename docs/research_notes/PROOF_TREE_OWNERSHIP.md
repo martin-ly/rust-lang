@@ -7,6 +7,7 @@
 ---
 
 ## 🌳 定理陈述
+> **[来源: Rust Official Docs]**
 
 ```
 定理 T-OW1 (所有权唯一性):
@@ -16,6 +17,7 @@
 ---
 
 ## 🌿 证明树结构
+> **[来源: Rust Official Docs]**
 
 ```
 T-OW1: 所有权唯一性
@@ -54,6 +56,7 @@ T-OW1: 所有权唯一性
 ---
 
 ## 📋 详细证明
+> **[来源: Rust Official Docs]**
 
 ### 基础情形 (Base Case)
 

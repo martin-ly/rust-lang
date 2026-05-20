@@ -5,6 +5,7 @@
 ---
 
 ## 🗺️ 映射关系概览
+> **[来源: Rust Official Docs]**
 
 ```text
 content/                    crates/                     docs/05_guides/
@@ -24,8 +25,10 @@ representations/ ────────▶  (知识表示)                 ─
 ---
 
 ## 📂 详细映射
+> **[来源: Rust Official Docs]**
 
 ### content/emerging/ → C04 + C11
+> **[来源: Rust Official Docs]**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|

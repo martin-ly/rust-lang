@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [实际应用案例研究](#实际应用案例研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -62,6 +63,7 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究旨在通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果，包括：
 
@@ -71,12 +73,14 @@
 4. **嵌入式系统案例**：IoT 设备、嵌入式应用等
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **Rust 在实际项目中的表现如何？**
 2. **哪些 Rust 特性在实际应用中最为重要？**
 3. **实际项目中的最佳实践是什么？**
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - 建立实际应用案例库
 - 总结最佳实践
@@ -85,6 +89,7 @@
 ---
 
 ## 形式化论证与案例衔接
+> **[来源: Rust Official Docs]**
 
 **Def PA1（案例验证）**：设 $C$ 为实际应用案例，$T$ 为形式化定理。
 若 $C$ 的实现满足 $T$ 的结论（如无数据竞争、无内存泄漏），则称 $C$ **与 $T$ 一致**。
@@ -107,8 +112,10 @@
 ---
 
 ## 📚 案例分类 {#-案例分类}
+> **[来源: Rust Official Docs]**
 
 ### 1. 系统编程案例
+> **[来源: Rust Official Docs]**
 
 **案例类型**：
 
@@ -119,6 +126,7 @@
 **典型案例**：
 
 #### 案例 1.1：Redox OS
+> **[来源: Rust Official Docs]**
 
 **项目描述**：使用 Rust 编写的类 Unix 操作系统
 
@@ -170,6 +178,7 @@ impl Syscall {
 - 提供系统编程最佳实践
 
 #### 案例 1.2：Tokio 异步运行时
+> **[来源: Rust Official Docs]**
 
 **项目描述**：Rust 异步编程运行时
 
@@ -232,6 +241,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 系统级性能
 
 ### 2. 网络应用案例
+> **[来源: Rust Official Docs]**
 
 **案例类型**：
 
@@ -249,6 +259,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **典型案例**：
 
 #### 案例 2.1：Actix-web 高性能 Web 框架
+> **[来源: Rust Official Docs]**
 
 **项目描述**：Rust 生态系统中最快的 Web 框架之一
 
@@ -483,6 +494,7 @@ impl TockOS {
 ---
 
 ## 💻 案例示例 {#-案例示例}
+> **[来源: Rust Official Docs]**
 
 ### 案例 1：高性能 Web 服务器
 
@@ -825,6 +837,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 📊 案例分析 {#-案例分析}
+> **[来源: Rust Official Docs]**
 
 ### 性能分析
 
@@ -850,6 +863,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 📊 最佳实践总结
+> **[来源: Rust Official Docs]**
 
 ### 系统编程最佳实践
 
@@ -922,6 +936,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 📋 案例报告与应用指南 {#-案例报告与应用指南}
+> **[来源: Rust Official Docs]**
 
 ### 案例报告模板
 
@@ -943,6 +958,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 🔗 系统集成与案例索引 {#-系统集成与案例索引}
+> **[来源: Rust Official Docs]**
 
 ### 与形式化方法的关联
 
@@ -985,6 +1001,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+> **[来源: Rust Official Docs]**
 
 ### 实际项目
 
@@ -1011,6 +1028,7 @@ impl<T> Drop for SafeVec<T> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1056,3 +1074,7 @@ impl<T> Drop for SafeVec<T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

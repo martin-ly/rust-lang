@@ -5,6 +5,7 @@
 ---
 
 ## 1. Embassy架构
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -61,8 +62,10 @@
 ---
 
 ## 2. 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 2.1 任务 (Tasks)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use embassy_executor::Spawner;

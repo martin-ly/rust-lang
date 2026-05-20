@@ -9,12 +9,15 @@
 ---
 
 ## 本次重要补充
+> **[来源: Rust Official Docs]**
 
 针对用户提出的关键洞察——"Rust只是针对编译器可以判定的资源管理，但针对运行时才能判定的并没有展开推理论证"，我们进行了全面的补充和完善。
 
 ### 新增核心文档
+> **[来源: Rust Official Docs]**
 
 #### 1. 01-04-runtime-vs-compile-time.md (18.1KB)
+> **[来源: Rust Official Docs]**
 
 **编译时 vs 运行时资源管理：全面论证**:
 

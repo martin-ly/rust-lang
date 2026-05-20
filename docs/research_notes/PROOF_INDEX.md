@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [📚 形式化证明文档索引 {#-形式化证明文档索引}](#-形式化证明文档索引--形式化证明文档索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -69,6 +70,7 @@
 ---
 
 ## 🔢 公理编号规范 (Axiom Numbering Convention) {#-公理编号规范-axiom-numbering-convention}
+> **[来源: Rust Official Docs]**
 
 **用途**: 统一证明树、证明图网中的形式化引用，便于交叉引用与追溯。
 
@@ -88,6 +90,7 @@
 ---
 
 ## 📐 证明深度层次 (Proof Depth) {#-证明深度层次-proof-depth}
+> **[来源: Rust Official Docs]**
 
 **用途**: 区分证明充分性，便于对标国际机器可检查证明。见 [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)。
 
@@ -102,6 +105,7 @@
 ---
 
 ## 🎯 索引说明 {#-索引说明}
+> **[来源: Rust Official Docs]**
 
 本文档索引了所有已完成的形式化证明，帮助研究者快速查找和参考相关证明工作。
 
@@ -121,10 +125,13 @@
 ---
 
 ## 📚 按研究领域分类 {#-按研究领域分类}
+> **[来源: Rust Official Docs]**
 
 ### 所有权与借用
+> **[来源: Rust Official Docs]**
 
 #### 所有权模型形式化
+> **[来源: Rust Official Docs]**
 
 **文档**: [ownership_model.md](./formal_methods/ownership_model.md)
 
@@ -183,6 +190,7 @@
     - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
 
 #### 借用检查器证明
+> **[来源: Rust Official Docs]**
 
 **文档**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
 
@@ -240,8 +248,10 @@
 ---
 
 ### 生命周期
+> **[来源: Rust Official Docs]**
 
 #### 生命周期形式化
+> **[来源: Rust Official Docs]**
 
 **文档**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)（形式化方法视角，含 Axiom LF1–LF2、引理 LF-L1、推论 LF-C1）；[type_theory/lifetime_formalization.md](./type_theory/lifetime_formalization.md)（类型论视角，含 Axiom LT1–LT2、定理 LT-T1/T2、引理 LT-L1、推论 LT-C1/C2）
 
@@ -269,6 +279,7 @@
 ---
 
 ### 类型系统
+> **[来源: Rust Official Docs]**
 
 #### 类型系统基础
 

@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 策略模式定义一系列算法，把它们一个个封装起来，并且使它们可以相互替换。
 
 ---
 
 ## 实现方式
+> **[来源: Rust Official Docs]**
 
 ### Trait 方式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 策略接口

@@ -5,6 +5,7 @@
 ---
 
 ## 一、所有权系统演化时间线
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 timeline
@@ -32,6 +33,7 @@ timeline
 ---
 
 ## 二、概念层次结构图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TB
@@ -74,6 +76,7 @@ graph TB
 ---
 
 ## 三、安全保证层次金字塔
+> **[来源: Rust Official Docs]**
 
 ```text
                     ▲

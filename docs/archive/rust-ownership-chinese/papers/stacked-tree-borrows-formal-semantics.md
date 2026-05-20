@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Stacked Borrows 与 Tree Borrows 完整形式语义](#stacked-borrows-与-tree-borrows-完整形式语义)
   - [目录](#目录)
@@ -43,8 +44,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Stacked Borrows 形式语义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 配置定义
+> **[来源: Rust Official Docs]**
 
 **配置**：$C = \langle M, S, T \rangle$
 
@@ -53,6 +56,7 @@
 - $T \subseteq \text{Tag}$：已使用的标签集合（用于生成新标签）
 
 ### 1.2 标签（Tag）定义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Tag} ::= \text{Untagged} \mid \text{Tagged}(n) \mid \text{Reserved}(n) \mid \text{SharedReadOnly}
@@ -70,6 +74,7 @@ $$
 | `SharedReadOnly` | 共享只读引用 | 只读 |
 
 ### 1.3 栈操作
+> **[来源: Rust Official Docs]**
 
 **栈操作定义**：
 
@@ -82,8 +87,10 @@ top(S):          返回栈顶tag
 ```
 
 ### 1.4 操作语义规则
+> **[来源: Rust Official Docs]**
 
 #### 规则 1：创建唯一引用（retag Unique）
+> **[来源: Rust Official Docs]**
 
 $$
 \frac{\ell \in \text{dom}(M) \quad n = \text{fresh}(T)}{\langle M, S, T \rangle \xrightarrow{\text{retag}(\ell, \text{Unique})} \langle M, S[\ell \mapsto \text{push}(S(\ell), \text{Tagged}(n))], T \cup \{n\} \rangle} \quad \text{[SB-RETAG-UNIQUE]}
@@ -92,18 +99,21 @@ $$
 **条件**：新标签不能已在 $T$ 中。
 
 #### 规则 2：创建共享只读引用（retag SharedReadOnly）
+> **[来源: Rust Official Docs]**
 
 $$
 \frac{\ell \in \text{dom}(M)}{\langle M, S, T \rangle \xrightarrow{\text{retag}(\ell, \text{SR})} \langle M, S[\ell \mapsto \text{push}(S(\ell), \text{SharedReadOnly})], T \rangle} \quad \text{[SB-RETAG-SRO]}
 $$
 
 #### 规则 3：创建两阶段借用（retag TwoPhase）
+> **[来源: Rust Official Docs]**
 
 $$
 \frac{\ell \in \text{dom}(M) \quad n = \text{fresh}(T)}{\langle M, S, T \rangle \xrightarrow{\text{retag}(\ell, \text{TwoPhase})} \langle M, S[\ell \mapsto \text{push}(S(\ell), \text{Reserved}(n))], T \cup \{n\} \rangle} \quad \text{[SB-RETAG-2PHASE]}
 $$
 
 #### 规则 4：使用引用（use tag）- 读操作
+> **[来源: Rust Official Docs]**
 
 $$
 \frac{\text{compatible\_read}(\text{top}(S(\ell)), \text{tag})}{\langle M, S, T \rangle \xrightarrow{\text{read}(\ell, \text{tag})} \langle M, S, T \rangle} \quad \text{[SB-USE-READ]}
@@ -122,6 +132,7 @@ t_{\text{top}} = t_{\text{access}} & \text{if } t_{\text{access}} = \text{Reserv
 $$
 
 #### 规则 5：使用引用（use tag）- 写操作
+> **[来源: Rust Official Docs]**
 
 对于 `Tagged(n)` 标签的写操作：
 

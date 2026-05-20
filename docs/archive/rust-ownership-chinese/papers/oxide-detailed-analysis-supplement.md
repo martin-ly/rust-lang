@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Oxide 形式语义详细补充](#oxide-形式语义详细补充)
   - [目录](#目录)
@@ -45,8 +46,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Oxide 核心语言语法
+> **[来源: Rust Official Docs]**
 
 ### 1.1 完整语法定义
+> **[来源: Rust Official Docs]**
 
 ```text
 ═══════════════════════════════════════════════════════════════════
@@ -153,8 +156,10 @@ $$
 ---
 
 ## 3. 贷款环境（Loan Context）Θ
+> **[来源: Rust Official Docs]**
 
 ### 3.1 贷款记录定义
+> **[来源: Rust Official Docs]**
 
 贷款环境 $\Theta$ 跟踪当前活跃的借用：
 
@@ -169,6 +174,7 @@ $$
 - $\ell$：被借用的内存位置
 
 ### 3.2 贷款操作规则
+> **[来源: Rust Official Docs]**
 
 **贷款创建**：
 
@@ -187,6 +193,7 @@ $$
 $$
 
 ### 3.3 贷款冲突检查
+> **[来源: Rust Official Docs]**
 
 **冲突定义**：
 
@@ -206,8 +213,10 @@ $$
 ---
 
 ## 4. 完整类型判断规则
+> **[来源: Rust Official Docs]**
 
 ### 4.1 规则记号说明
+> **[来源: Rust Official Docs]**
 
 $$
 \Sigma; \Delta; \Gamma; \Theta \vdash e : \tau \dashv \Theta'
@@ -222,12 +231,14 @@ $$
 - $\Theta'$：输出贷款环境
 
 ### 4.2 变量规则
+> **[来源: Rust Official Docs]**
 
 $$
 \frac{x : \tau \in \Gamma}{\Sigma; \Delta; \Gamma; \Theta \vdash x : \tau \dashv \Theta} \quad \text{[T-VAR]}
 $$
 
 ### 4.3 借用规则
+> **[来源: Rust Official Docs]**
 
 **共享借用**：
 

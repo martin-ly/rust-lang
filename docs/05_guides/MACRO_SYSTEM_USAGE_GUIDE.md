@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [宏系统使用指南](#宏系统使用指南)
   - [📋 目录](#-目录)
@@ -63,6 +65,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍 Rust 宏系统的使用，包括声明宏、过程宏、属性宏、派生宏等。
 
@@ -72,8 +76,12 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ### 声明宏
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! vec {
@@ -93,6 +101,8 @@ let v = vec![1, 2, 3];
 ```
 
 ### 过程宏
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use proc_macro::TokenStream;
@@ -107,10 +117,16 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 声明宏
+>
+> **[来源: Rust Official Docs]**
 
 #### 基本语法
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! my_macro {
@@ -122,6 +138,8 @@ macro_rules! my_macro {
 ```
 
 #### 重复模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! repeat {
@@ -138,6 +156,8 @@ macro_rules! repeat {
 ```
 
 #### 条件展开
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! conditional {
@@ -157,6 +177,8 @@ macro_rules! conditional {
 ```
 
 ### 2. 属性宏
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use proc_macro::TokenStream;

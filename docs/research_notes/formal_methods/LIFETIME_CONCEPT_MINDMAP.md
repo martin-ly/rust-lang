@@ -7,6 +7,7 @@
 ---
 
 ## 生命周期概念全景
+> **[来源: Rust Official Docs]**
 
 ```text
                         生命周期概念族
@@ -46,8 +47,10 @@
 ---
 
 ## 一、生命周期参数
+> **[来源: Rust Official Docs]**
 
 ### 1.1 泛型生命周期
+> **[来源: Rust Official Docs]**
 
 ```text
 泛型生命周期

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Arc-Swap 原子交换形式化分析](#arc-swap-原子交换形式化分析)
   - [目录](#目录)
@@ -27,6 +28,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 arc-swap提供:
 
@@ -38,6 +40,7 @@ arc-swap提供:
 ---
 
 ## 2. 读写语义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (读取无锁)
 

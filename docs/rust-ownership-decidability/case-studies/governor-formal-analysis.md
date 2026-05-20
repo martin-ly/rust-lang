@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Governor 限流形式化分析](#governor-限流形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 governor提供:
 
@@ -37,6 +39,7 @@ governor提供:
 ---
 
 ## 2. 限流器类型
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (两种限流器)
 

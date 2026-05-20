@@ -7,14 +7,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南帮助功能安全工程师根据系统风险评估选择适当的安全完整性等级(SIL/ASIL)，并提供Rust实现建议。
 
 ---
 
 ## 1. 风险评估基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 风险公式
+> **[来源: Rust Official Docs]**
 
 ```
 风险 = 严重性(S) × 暴露率(E) × 可控性(C)
@@ -40,6 +43,7 @@
 ```
 
 ### 1.2 ASIL等级确定矩阵
+> **[来源: Rust Official Docs]**
 
 ```
           E1    E2    E3    E4
@@ -60,6 +64,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ---
 
 ## 2. 等级决策树
+> **[来源: Rust Official Docs]**
 
 ### 2.1 汽车系统ASIL选择
 

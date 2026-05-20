@@ -7,14 +7,17 @@
 ---
 
 ## 完成摘要
+> **[来源: Rust Official Docs]**
 
 Phase 2 所有计划任务已完成，共新增/更新 **7 个重要文档**，约 **8 万字** 的深度技术内容。
 
 ---
 
 ## 完成任务清单
+> **[来源: Rust Official Docs]**
 
 ### ✅ 1. 更新 Tree Borrows 完整文档
+> **[来源: Rust Official Docs]**
 
 **文件**: `formal-foundations/models/tree-borrows-comprehensive.md`
 

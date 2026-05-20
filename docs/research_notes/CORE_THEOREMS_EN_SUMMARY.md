@@ -10,12 +10,14 @@
 ---
 
 ## Overview
+> **[来源: Rust Official Docs]**
 
 L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with induction base/step, auxiliary lemmas, and proof dependency DAG.
 
 ---
 
 ## Theorem Summary
+> **[来源: Rust Official Docs]**
 
 | Theorem | Statement | Proof |
 | :--- | :--- | :--- |
@@ -27,6 +29,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 ---
 
 ## Auxiliary Lemmas
+> **[来源: Rust Official Docs]**
 
 | Lemma | Content |
 | :--- | :--- |

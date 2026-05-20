@@ -1,22 +1,27 @@
 # 教育与培训路线图
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供构建Rust安全关键系统开发能力的完整教育和培训路线图，涵盖个人学习路径和企业培训体系。
 
 ---
 
 ## 1. 个人学习路径
+> **[来源: Rust Official Docs]**
 
 ### 阶段1: Rust基础 (4-6周)
+> **[来源: Rust Official Docs]**
 
 #### 学习目标
+> **[来源: Rust Official Docs]**
 
 - 掌握Rust所有权和借用系统
 - 理解类型系统和泛型
 - 能够编写基本Rust程序
 
 #### 学习资源
+> **[来源: Rust Official Docs]**
 
 ```
 必修:
@@ -37,6 +42,7 @@
 ```
 
 #### 评估标准
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 阶段1结业测试示例
@@ -70,14 +76,17 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 阶段2: 嵌入式Rust (6-8周)
+> **[来源: Rust Official Docs]**
 
 #### 学习目标
+> **[来源: Rust Official Docs]**
 
 - 掌握`no_std`开发
 - 理解嵌入式架构
 - 能够开发裸机应用
 
 #### 核心内容
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -135,6 +144,7 @@ fn SysTick() {
 ```
 
 #### 实践项目
+> **[来源: Rust Official Docs]**
 
 - LED闪烁程序
 - UART串口通信
@@ -142,6 +152,7 @@ fn SysTick() {
 - 简单RTOS集成
 
 ### 阶段3: 功能安全基础 (4-6周)
+> **[来源: Rust Official Docs]**
 
 #### 学习目标
 

@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [故障排查指南](#故障排查指南)
   - [📋 目录](#-目录)
@@ -58,6 +60,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档提供常见问题的排查和解决方案，帮助开发者快速定位和解决问题。
 
@@ -67,8 +71,12 @@
 ---
 
 ## 🔧 编译错误
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 所有权错误
+>
+> **[来源: Rust Official Docs]**
 
 **错误信息**:
 
@@ -98,6 +106,8 @@ println!("{}", x);
 ```
 
 ### 2. 生命周期错误
+>
+> **[来源: Rust Official Docs]**
 
 **错误信息**:
 
@@ -129,6 +139,8 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
 ```
 
 ### 3. 类型不匹配
+>
+> **[来源: Rust Official Docs]**
 
 **错误信息**:
 
@@ -153,8 +165,12 @@ let x = "42".parse::<i32>().unwrap();
 ---
 
 ## 🐛 运行时错误
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Panic 错误
+>
+> **[来源: Rust Official Docs]**
 
 **错误信息**:
 
@@ -181,6 +197,8 @@ if let Some(value) = arr.get(10) {
 ```
 
 ### 2. 死锁
+>
+> **[来源: Rust Official Docs]**
 
 **症状**: 程序挂起，无响应
 
@@ -201,6 +219,8 @@ let mutex2 = Arc::new(Mutex::new(0));
 ```
 
 ### 3. 内存泄漏
+>
+> **[来源: Rust Official Docs]**
 
 **症状**: 内存使用持续增长
 
@@ -228,6 +248,8 @@ struct Node {
 ---
 
 ## ⚡ 性能问题
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 编译时间过长
 

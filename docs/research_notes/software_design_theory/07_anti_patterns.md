@@ -8,20 +8,24 @@
 ---
 
 ## 宗旨
+> **[来源: Rust Official Docs]**
 
 将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引的衔接。
 
 ---
 
 ## 一、反模式与安全边界
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 **Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/ownership_model.md)、[borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 规则。
 
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
 ### 1.2 反模式分类
+> **[来源: Rust Official Docs]**
 
 | 分类 | 边界 | 示例 |
 | :--- | :--- | :--- |
@@ -33,6 +37,7 @@
 ---
 
 ## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接）
+> **[来源: Rust Official Docs]**
 
 | 模式 | 反例 | 后果 | 规避 |
 | :--- | :--- | :--- | :--- |
@@ -53,8 +58,10 @@
 ---
 
 ## 三、常见反模式详解（含代码示例）
+> **[来源: Rust Official Docs]**
 
 ### 3.1 所有权反模式
+> **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -87,6 +94,7 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 ```
 
 ### 3.2 借用反模式
+> **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -119,6 +127,7 @@ fn process(data: &Vec<String>) -> Vec<String> {
 ```
 
 ### 3.3 设计模式反模式
+> **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -142,6 +151,7 @@ where
 ```
 
 ### 3.4 并发反模式
+> **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
 | :--- | :--- | :--- |
@@ -152,6 +162,7 @@ where
 ---
 
 ## 四、反模式与三维边界
+> **[来源: Rust Official Docs]**
 
 | 反模式 | 安全边界 | 支持边界 | 表达边界 |
 | :--- | :--- | :--- | :--- |
@@ -169,7 +180,7 @@ where
 | 所有权 | 显式作用域、避免自引用环 | Weak 打破 Rc 环 |
 | 借用 | 先 collect 再修改、缩短借用范围 | `std::mem::take` 转移 |
 | 并发 | 选 Send/Sync 类型、消息传递优先 | channel、Arc\<Mutex> |
-| 设计模式误选 | 按需求查 [03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md) | 模式选取示例 |
+| 设计模式误选 | 按需求查 `03_semantic_boundary_map` | 模式选取示例 |
 | 过度抽象 | 从具体开始，按需泛型 | impl Trait、trait 按需 |
 
 ---
@@ -177,7 +188,7 @@ where
 ## 六、与 05_boundary_system 衔接
 
 - [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)：SBM-L2 反模式边界
-- [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)：反模式误选表
+- `02_workflow 03_semantic_boundary_map`：反模式误选表
 - [01_design_patterns_formal](01_design_patterns_formal/README.md)：各模式反例
 
 ---

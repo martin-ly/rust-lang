@@ -1,6 +1,7 @@
 # 16 里程碑模式 (Milestone)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
   - [📋 目录](#-目录)
@@ -25,10 +26,12 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 里程碑模式允许活动仅在达到特定状态（里程碑）时才能执行。它用于建模需要等待某些前置条件满足的场景。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Milestone}(M, A) = \text{when } M = \text{true}: \text{enable}(A)

@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Kubernetes 部署完整指南](#kubernetes-部署完整指南)
   - [📋 目录](#-目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 本指南涵盖将 Rust 应用部署到 Kubernetes 的完整流程，包括：
 
@@ -52,6 +54,7 @@
 ---
 
 ## 🏗️ 基础架构
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -82,8 +85,10 @@
 ---
 
 ## 🐳 容器化
+> **[来源: Rust Official Docs]**
 
 ### 多阶段构建
+> **[来源: Rust Official Docs]**
 
 ```dockerfile
 # ==========================================
@@ -133,6 +138,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 ### Distroless 镜像
+> **[来源: Rust Official Docs]**
 
 ```dockerfile
 # 更安全的 distroless 变体
@@ -160,8 +166,10 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 ---
 
 ## ☸️ Kubernetes 配置
+> **[来源: Rust Official Docs]**
 
 ### Deployment
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # k8s/deployment.yaml
@@ -291,6 +299,7 @@ spec:
 ```
 
 ### Service
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # k8s/service.yaml
@@ -331,6 +340,7 @@ spec:
 ```
 
 ### ConfigMap
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # k8s/configmap.yaml
@@ -358,6 +368,7 @@ data:
 ```
 
 ### Secret
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # k8s/secret.yaml (加密存储)

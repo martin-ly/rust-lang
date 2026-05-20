@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究进展跟踪](#研究进展跟踪)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -71,6 +72,7 @@
 ---
 
 ## 🎯 跟踪概览 {#-跟踪概览}
+> **[来源: Rust Official Docs]**
 
 本文档用于跟踪所有研究笔记的详细进展，包括已完成的任务、进行中的工作和计划中的任务。
 
@@ -84,14 +86,17 @@
 ---
 
 ## 📚 形式化方法研究进展 {#-形式化方法研究进展}
+> **[来源: Rust Official Docs]**
 
 ### 所有权模型形式化
+> **[来源: Rust Official Docs]**
 
 **文档**: [ownership_model.md](./formal_methods/ownership_model.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成-}
+> **[来源: Rust Official Docs]**
 
 - [x] 研究目标、理论基础、形式化定义、所有权规则、唯一性定理、内存安全证明框架、代码示例（含示例7-10）
 - [x] 与借用检查器的集成、与生命周期的集成、实际应用案例（资源管理、并发、嵌入式/unsafe）
@@ -103,12 +108,14 @@
 ---
 
 ### 借用检查器证明
+> **[来源: Rust Official Docs]**
 
 **文档**: [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--1}
+> **[来源: Rust Official Docs]**
 
 - [x] 研究目标、理论基础、借用规则形式化、数据竞争自由、借用检查算法、正确性证明、代码示例
 - [x] 与所有权系统的集成、与生命周期的集成、实际应用案例（并发、迭代器、闭包）
@@ -119,12 +126,14 @@
 ---
 
 ### 异步状态机形式化
+> **[来源: Rust Official Docs]**
 
 **文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--2}
+> **[来源: Rust Official Docs]**
 
 - [x] 研究目标、理论基础、形式化（Future 状态、Poll、状态转换、async/await、并发安全）、定理 6.1–6.3、代码示例
 - [x] 与类型系统、生命周期的集成，实际应用（Tokio、select、结构化并发），Rust 1.93 更新
@@ -135,12 +144,14 @@
 ---
 
 ### 生命周期形式化
+> **[来源: Rust Official Docs]**
 
 **文档**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--3}
+> **[来源: Rust Official Docs]**
 
 - [x] 研究目标、理论基础、形式化（生命周期语义、约束、推断算法）、引用有效性、代码示例
 - [x] 与所有权、借用检查器的集成，实际应用（结构体/自引用、async/Pin、HRTB）

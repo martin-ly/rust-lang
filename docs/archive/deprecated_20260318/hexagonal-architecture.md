@@ -1,6 +1,7 @@
 # 六边形架构 (Hexagonal Architecture)
 
 ## 核心概念
+> **[来源: Rust Official Docs]**
 
 ```text
       驱动适配器        应用服务层        被驱动适配器
@@ -19,8 +20,10 @@
 ```
 
 ## Rust实现
+> **[来源: Rust Official Docs]**
 
 ### 1. 领域层
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub struct Order {

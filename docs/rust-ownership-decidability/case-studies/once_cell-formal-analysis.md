@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [OnceCell / OnceLock 形式化分析](#oncecell--oncelock-形式化分析)
   - [目录](#目录)
@@ -30,6 +31,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 OnceCell/OnceLock提供:
 
@@ -41,6 +43,7 @@ OnceCell/OnceLock提供:
 ---
 
 ## 2. 状态机语义
+> **[来源: Rust Official Docs]**
 
 ### 定义 2.1 (OnceLock状态)
 

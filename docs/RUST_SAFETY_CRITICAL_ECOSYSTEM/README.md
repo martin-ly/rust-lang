@@ -1,12 +1,14 @@
 # Rust安全关键生态系统文档集
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档集提供Rust在安全关键系统开发领域的全面技术资源，涵盖从理论基础到实际实施的完整知识体系。内容面向功能安全工程师、嵌入式开发者和系统架构师，支持ISO 26262、IEC 61508、DO-178C等标准的合规开发。
 
 ---
 
 ## 文档结构
+> **[来源: Rust Official Docs]**
 
 ```
 RUST_SAFETY_CRITICAL_ECOSYSTEM/
@@ -57,6 +59,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 ---
 
 ## 文档详情
+> **[来源: Rust Official Docs]**
 
 ### 01. 思维导图 (Mind Maps)
 

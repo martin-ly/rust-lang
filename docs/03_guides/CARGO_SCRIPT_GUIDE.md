@@ -11,10 +11,12 @@
 ---
 
 ## 1. 什么是 Cargo Script？
+> **[来源: Rust Official Docs]**
 
 **Cargo Script** 是 Rust 从 1.79 版本开始稳定化的功能，允许在**单个 `.rs` 文件**中编写完整的 Rust 程序，包括外部依赖声明。
 
 ### 1.1 为什么需要它？
+> **[来源: Rust Official Docs]**
 
 在 Cargo Script 之前，运行一个依赖外部 crate 的 Rust 程序需要：
 
@@ -35,6 +37,7 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 1.2 适用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 传统项目 | Cargo Script |
 |------|---------|-------------|
@@ -48,8 +51,10 @@ cargo run --manifest-path my_script.rs
 ---
 
 ## 2. 文件格式规范
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基本结构
+> **[来源: Rust Official Docs]**
 
 ```rust
     #!/usr/bin/env cargo
@@ -66,6 +71,7 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 2.2 格式要求
+> **[来源: Rust Official Docs]**
 
 1. **Shebang (可选但推荐)**
    - 首行: `#!/usr/bin/env cargo`
@@ -82,6 +88,7 @@ cargo run --manifest-path my_script.rs
    - 可以包含 `fn main()`、模块、测试等
 
 ### 2.3 完整清单示例
+> **[来源: Rust Official Docs]**
 
 ```rust
     #!/usr/bin/env cargo
@@ -114,8 +121,10 @@ cargo run --manifest-path my_script.rs
 ---
 
 ## 3. 运行方式
+> **[来源: Rust Official Docs]**
 
 ### 3.1 使用 cargo 直接运行 (推荐)
+> **[来源: Rust Official Docs]**
 
 ```bash
 # Rust 1.79+ 稳定方式
@@ -126,6 +135,7 @@ cargo run --manifest-path script.rs -- --help
 ```
 
 ### 3.2 作为可执行脚本 (Unix)
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 添加执行权限
@@ -136,6 +146,7 @@ chmod +x script.rs
 ```
 
 ### 3.3 使用 Rust 解释器模式
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 某些环境支持

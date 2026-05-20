@@ -5,8 +5,10 @@
 ---
 
 ## 1. 架构模式对比
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Axum - 函数式风格
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::{
@@ -71,6 +73,7 @@ async fn main() {
 ```
 
 ### 1.2 Actix-web - Actor风格
+> **[来源: Rust Official Docs]**
 
 ```rust
 use actix_web::{web, App, HttpServer, HttpResponse, Result};

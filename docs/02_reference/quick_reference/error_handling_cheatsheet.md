@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [⚠️ Rust 错误处理速查卡](#️-rust-错误处理速查卡)
   - [📋 目录](#-目录)
@@ -61,8 +62,10 @@
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ### Result 类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 enum Result<T, E> {
@@ -72,6 +75,7 @@ enum Result<T, E> {
 ```
 
 ### Option 类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 enum Option<T> {
@@ -83,8 +87,10 @@ enum Option<T> {
 ---
 
 ## 📐 基本模式
+> **[来源: Rust Official Docs]**
 
 ### 模式 1: 匹配处理
+> **[来源: Rust Official Docs]**
 
 ```rust
 match result {
@@ -94,6 +100,7 @@ match result {
 ```
 
 ### 模式 2: unwrap 和 expect
+> **[来源: Rust Official Docs]**
 
 ```rust
 // unwrap: 成功返回值，失败 panic
@@ -104,6 +111,7 @@ let value = result.expect("操作失败");
 ```
 
 ### 模式 3: ? 操作符
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn read_file() -> Result<String, io::Error> {
@@ -117,8 +125,10 @@ fn read_file() -> Result<String, io::Error> {
 ---
 
 ## 🔧 常用方法
+> **[来源: Rust Official Docs]**
 
 ### Result 方法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 映射值
@@ -140,6 +150,7 @@ let result = Ok(5)
 ```
 
 ### Option 方法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 映射值

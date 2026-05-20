@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库 String \&str 形式化分析](#rust标准库-string-str-形式化分析)
   - [目录](#目录)
@@ -54,6 +55,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rust的字符串系统是其类型安全的核心展示:
 
@@ -65,6 +67,7 @@ Rust的字符串系统是其类型安全的核心展示:
 ---
 
 ## 2. 字符串类型系统
+> **[来源: Rust Official Docs]**
 
 ### 2.1 String与&str的区别
 

@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [模块知识结构补充指南](#模块知识结构补充指南)
   - [📋 目录](#-目录)
@@ -71,14 +72,17 @@
 ---
 
 ## 🎯 文档概述
+> **[来源: Rust Official Docs]**
 
 本文档提供模块文档知识结构补充的指南和模板，帮助为各模块文档补充完整的概念定义、属性特征、关系连接、解释论证和形式证明。
 
 ---
 
 ## 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 概念定义生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 自动生成概念定义的 Markdown 文档
@@ -167,6 +171,7 @@ fn main() {
 ```
 
 ### 知识结构批量生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 为多个模块批量生成知识结构
@@ -259,6 +264,7 @@ fn main() {
 ```
 
 ### 思维表征模板生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 生成思维导图、矩阵等思维表征模板
@@ -348,8 +354,10 @@ fn main() {
 ---
 
 ## 形式化链接
+> **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+> **[来源: Rust Official Docs]**
 
 - **知识结构框架**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 完整知识结构体系定义
 - **证明图网**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 形式化证明结构模板
@@ -357,6 +365,7 @@ fn main() {
 - **思维导图**: [MIND_MAP_COLLECTION.md](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
 
 ### 实施场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
@@ -367,8 +376,10 @@ fn main() {
 ---
 
 ## 📐 知识结构补充模板
+> **[来源: Rust Official Docs]**
 
 ### 1. 概念定义补充
+> **[来源: Rust Official Docs]**
 
 #### 模板
 

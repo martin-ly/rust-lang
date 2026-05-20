@@ -1,14 +1,17 @@
 # 评估与认证体系
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档定义Rust安全关键系统开发的技能评估和认证体系，帮助个人和组织验证能力水平。
 
 ---
 
 ## 1. 技能评估框架
+> **[来源: Rust Official Docs]**
 
 ### 1.1 能力模型
+> **[来源: Rust Official Docs]**
 
 ```
 技术能力维度:
@@ -43,6 +46,7 @@ Rust语言 (权重30%)
 ```
 
 ### 1.2 等级定义
+> **[来源: Rust Official Docs]**
 
 | 等级 | 经验 | 能力描述 | 项目复杂度 |
 |------|------|----------|------------|
@@ -55,8 +59,10 @@ Rust语言 (权重30%)
 ---
 
 ## 2. 认证体系
+> **[来源: Rust Official Docs]**
 
 ### 2.1 个人认证
+> **[来源: Rust Official Docs]**
 
 ```
 Rust Safety Critical Developer (RSCD)
@@ -91,6 +97,7 @@ Level 4: Expert
 ```
 
 ### 2.2 企业认证
+> **[来源: Rust Official Docs]**
 
 ```
 Rust Safety Critical Organization (RSCO)
@@ -122,8 +129,10 @@ Level 3: Center of Excellence
 ---
 
 ## 3. 考试内容
+> **[来源: Rust Official Docs]**
 
 ### 3.1 L1: Foundation 考试
+> **[来源: Rust Official Docs]**
 
 ```
 笔试 (2小时):
@@ -154,6 +163,7 @@ Level 3: Center of Excellence
 ```
 
 ### 3.2 L2: Practitioner 考试
+> **[来源: Rust Official Docs]**
 
 ```
 理论考试 (3小时):
@@ -182,6 +192,7 @@ Level 3: Center of Excellence
 ```
 
 ### 3.3 L3: Professional 考试
+> **[来源: Rust Official Docs]**
 
 ```
 综合考试 (4小时):

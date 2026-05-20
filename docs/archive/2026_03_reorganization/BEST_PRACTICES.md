@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 最佳实践指南](#rust-最佳实践指南)
   - [目录](#目录)
@@ -29,8 +30,10 @@
 ---
 
 ## 代码风格
+> **[来源: Rust Official Docs]**
 
 ### 命名规范
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 结构体使用 PascalCase

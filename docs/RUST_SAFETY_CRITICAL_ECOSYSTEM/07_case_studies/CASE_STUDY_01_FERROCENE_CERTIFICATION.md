@@ -1,6 +1,7 @@
 # 案例研究1: Ferrocene认证工具链
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 **项目名称**: Ferrocene
 **开发组织**: Ferrous Systems
@@ -11,8 +12,10 @@
 ---
 
 ## 项目背景
+> **[来源: Rust Official Docs]**
 
 ### 问题陈述
+> **[来源: Rust Official Docs]**
 
 Rust编程语言虽然提供了内存安全保证，但在安全关键领域的应用受限于：
 

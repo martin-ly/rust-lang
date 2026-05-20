@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究路线图](#研究路线图)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -55,6 +56,7 @@
 ---
 
 ## 🎯 路线图概览 {#-路线图概览}
+> **[来源: Rust Official Docs]**
 
 本路线图提供了 Rust 研究笔记系统的研究推进计划，分为四个主要阶段：
 
@@ -66,10 +68,12 @@
 ---
 
 ## 📚 阶段一：基础理论研究 {#-阶段一基础理论研究}
+> **[来源: Rust Official Docs]**
 
 **目标**: 建立 Rust 类型系统和内存安全的理论基础
 
 ### 1.1 类型系统基础
+> **[来源: Rust Official Docs]**
 
 - [x] [类型系统基础](./type_theory/type_system_foundations.md) ✅ 100%
   - 类型环境与类型判断
@@ -79,6 +83,7 @@
 **预期成果**: 完整的类型系统形式化定义
 
 ### 1.2 Trait 系统
+> **[来源: Rust Official Docs]**
 
 - [x] [Trait 系统形式化](./type_theory/trait_system_formalization.md) ✅ 100%
   - Trait 的形式化定义
@@ -88,6 +93,7 @@
 **预期成果**: Trait 系统的类型理论模型
 
 ### 1.3 型变理论
+> **[来源: Rust Official Docs]**
 
 - [x] [型变理论](./type_theory/variance_theory.md) ✅ 100%
   - 协变、逆变、不变
@@ -97,6 +103,7 @@
 **预期成果**: 型变规则的完整证明
 
 ### 1.4 类型理论完备性缺口（已完成）
+> **[来源: Rust Official Docs]**
 
 - [x] [完备性缺口](./type_theory/00_completeness_gaps.md) ✅ 阶段 1–7 已补全
   - LUB coercion、Copy 与 specialization（LUB-T1、COP-T1）— type_system_foundations 已补全
@@ -109,10 +116,12 @@
 ---
 
 ## 📚 阶段二：形式化验证 {#-阶段二形式化验证}
+> **[来源: Rust Official Docs]**
 
 **目标**: 对 Rust 核心机制进行形式化建模和证明
 
 ### 2.1 所有权系统
+> **[来源: Rust Official Docs]**
 
 - [x] [所有权模型形式化](./formal_methods/ownership_model.md) ✅ 100%
   - 所有权规则形式化
@@ -122,6 +131,7 @@
 **预期成果**: 所有权系统的形式化证明
 
 ### 2.2 借用检查器
+> **[来源: Rust Official Docs]**
 
 - [x] [借用检查器证明](./formal_methods/borrow_checker_proof.md) ✅ 100%
   - 借用规则形式化
@@ -131,6 +141,7 @@
 **预期成果**: 借用检查器的正确性证明
 
 ### 2.3 异步系统
+> **[来源: Rust Official Docs]**
 
 - [x] [异步状态机形式化](./formal_methods/async_state_machine.md) ✅ 100%
   - Future/Poll 状态机

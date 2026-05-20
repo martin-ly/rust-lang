@@ -5,8 +5,10 @@
 ---
 
 ## 1. 基本语法定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 类型系统
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 TYPES-1: 类型集合
@@ -27,6 +29,7 @@
 ```
 
 ### 1.2 所有权状态
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 OWNERSHIP-STATE-1: 所有权状态

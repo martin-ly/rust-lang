@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🎯 Rust 智能指针速查卡](#-rust-智能指针速查卡)
   - [📋 目录](#-目录)
@@ -79,6 +80,7 @@
 ---
 
 ## 🎯 智能指针概览
+> **[来源: Rust Official Docs]**
 
 ```text
 智能指针类型选择树：
@@ -99,8 +101,10 @@
 ---
 
 ## 📦 `Box<T>` - 堆分配
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 创建
@@ -118,6 +122,7 @@ fn print_value(b: Box<i32>) {
 ```
 
 ### 使用场景
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 1. 递归类型
@@ -142,6 +147,7 @@ fn take_ownership(b: Box<i32>) {
 ```
 
 ### API
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 创建
@@ -160,8 +166,10 @@ let value = *b; // 或 Box::into_inner(b)
 ---
 
 ## 🔗 `Rc<T>` - 引用计数（单线程）
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::rc::Rc;
@@ -180,6 +188,7 @@ println!("count: {}", Rc::strong_count(&a));
 ```
 
 ### 使用场景
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 多重所有权（单线程）
@@ -198,6 +207,7 @@ let child2 = Rc::clone(&node);
 ```
 
 ### API
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::rc::Rc;
@@ -225,6 +235,7 @@ let value = *rc;
 ---
 
 ## 🔗 `Arc<T>` - 原子引用计数（多线程）
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 
@@ -285,6 +296,7 @@ let count = Arc::strong_count(&arc);
 ---
 
 ## 🔓 `RefCell<T>` - 内部可变性（单线程）
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 
@@ -359,6 +371,7 @@ let r3 = cell.borrow_mut();  // OK
 ---
 
 ## 🔒 `Mutex<T>` - 互斥锁（多线程）
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 
@@ -425,6 +438,7 @@ let value = *guard;
 ---
 
 ## 🔓 `RwLock<T>` - 读写锁（多线程）
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 
@@ -500,6 +514,7 @@ let w = rwlock.try_write();          // Result<RwLockWriteGuard<T>, TryLockError
 ---
 
 ## 🔗 `Weak<T>` - 弱引用
+> **[来源: Rust Official Docs]**
 
 ### 基本用法
 
@@ -572,6 +587,7 @@ let weak_count = weak.weak_count();
 ---
 
 ## 🔄 组合模式
+> **[来源: Rust Official Docs]**
 
 ### `Rc<RefCell<T>>` - 单线程内部可变性
 
@@ -657,6 +673,7 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 ---
 
 ## 💡 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 实现链表
 
@@ -958,6 +975,7 @@ println!("{}", data.get_data());
 ---
 
 ## 🎯 使用场景
+> **[来源: Rust Official Docs]**
 
 ### 场景: 图结构实现
 
@@ -1028,6 +1046,7 @@ impl<T> Graph<T> {
 ---
 
 ## 🎯 选择指南
+> **[来源: Rust Official Docs]**
 
 ### 决策树
 
@@ -1068,6 +1087,7 @@ impl<T> Graph<T> {
 ---
 
 ## 🚫 反例速查
+> **[来源: Rust Official Docs]**
 
 ### 反例 1: Rc 用于多线程
 
@@ -1228,6 +1248,7 @@ impl Unmovable {
 ---
 
 ## 📚 相关文档
+> **[来源: Rust Official Docs]**
 
 - [所有权与智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/README.md)
 - [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
@@ -1287,3 +1308,7 @@ impl Unmovable {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

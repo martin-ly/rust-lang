@@ -1,12 +1,15 @@
 # io_uring 高性能 I/O 指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提交队列（Submission Queue, SQ）和完成队列（Completion Queue, CQ）实现用户态与内核态的高效通信。
 
 ## 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 队列对（Queue Pair）
+> **[来源: Rust Official Docs]**
 
 - **SQ (Submission Queue)**: 用户态提交 I/O 请求到内核
 - **CQ (Completion Queue)**: 内核返回 I/O 完成结果到用户态

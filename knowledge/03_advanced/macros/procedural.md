@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 - [x] 区分三种过程宏（Derive / Attribute / Function-like）的适用场景与 API 差异
 - [x] 使用 `syn` 解析 TokenStream 为 AST，`quote!` 生成新 TokenStream
@@ -23,6 +24,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **声明式宏** — `macro_rules!` 的基础（`03_advanced/macros/declarative.md`）
 2. **Trait** — Derive 宏为类型自动实现 trait（`02_intermediate/traits.md`）
@@ -31,10 +33,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **过程宏（Procedural Macro）** 是一种特殊的 Rust 程序，它在编译期运行，接收和输出 **TokenStream**。与 `macro_rules!` 的声明式模式匹配不同，过程宏使用**完整的 Rust 代码**来分析和转换程序结构。
 

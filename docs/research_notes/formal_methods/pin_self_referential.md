@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Pin 和自引用类型形式化](#pin-和自引用类型形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -68,16 +69,19 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究的目的是形式化定义 Rust 的 Pin 类型和自引用类型，并证明其安全性。
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **Pin 类型的形式化**: 如何用数学语言精确描述 Pin 类型？
 2. **自引用类型安全**: 如何证明自引用类型的安全性？
 3. **Pin 保证**: Pin 如何保证内存位置的稳定性？
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - Pin 类型的形式化定义
 - 自引用类型的形式化模型
@@ -86,8 +90,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### Pin 类型
+> **[来源: Rust Official Docs]**
 
 **Pin**: `Pin<P>` 是一个智能指针，保证被指向的值不会被移动。Pin 通过类型系统提供内存位置稳定性的保证。
 
@@ -96,6 +102,7 @@
 **Pin 保证**: 对于非 `Unpin` 类型，Pin 保证被 Pin 的值在内存中的位置不会改变，从而保证自引用类型的安全性。
 
 ### 自引用类型
+> **[来源: Rust Official Docs]**
 
 **自引用类型 (Self-Referential Type)**: 包含指向自身字段引用的类型。
 自引用类型在结构体中包含指向同一结构体其他字段的引用。
@@ -105,12 +112,14 @@
 **解决方案**: 使用 Pin 防止移动，确保自引用类型的内存位置稳定。
 
 ### 移动语义与 Pin
+> **[来源: Rust Official Docs]**
 
 **关系**: Pin 通过类型系统保证，被 Pin 的值不会被移动，从而保证自引用类型的安全性。
 
 **Pin 约束**: Pin 通过类型系统限制了对被 Pin 值的操作，防止可能导致移动的操作。
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **内存位置稳定性 (Memory Location Stability)**: 值在内存中的位置保持不变。Pin 保证非 `Unpin` 类型的值在内存中的位置稳定。
 
@@ -132,6 +141,7 @@ $。
 **Pin 投影 (Pin Projection)**: 从被 Pin 的结构体中获取被 Pin 的字段。Pin 投影需要特殊处理，确保安全性。
 
 ### 堆与栈固定：使用场景区分与设计论证
+> **[来源: Rust Official Docs]**
 
 | 维度 | 栈固定 `Pin::new` | 堆固定 `Box::pin` |
 | :--- | :--- | :--- |
@@ -144,6 +154,7 @@ $。
 **决策树**：$T : \text{Unpin}$ → 栈固定；$T \not: \text{Unpin}$（自引用）→ 堆固定。详见 [DESIGN_MECHANISM_RATIONALE](../DESIGN_MECHANISM_RATIONALE.md#-pin堆栈区分使用场景的完整论证)。
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **线性类型系统 (Linear Type System)**: Pin 可以视为线性类型系统的一种应用，确保值不会被意外移动。
 

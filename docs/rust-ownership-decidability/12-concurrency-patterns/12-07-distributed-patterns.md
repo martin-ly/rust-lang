@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 分布式模式](#rust-分布式模式)
   - [目录](#目录)
@@ -23,8 +24,10 @@
 ---
 
 ## 1. 分布式系统理论
+> **[来源: Rust Official Docs]**
 
 ### 1.1 CAP定理
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// CAP 定理：在分布式系统中，一致性、可用性、分区容错性

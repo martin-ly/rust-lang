@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [证明树可视化完整版](#证明树可视化完整版)
   - [📋 目录](#-目录)
@@ -34,8 +35,10 @@
       - [相关文档](#相关文档)
 
 ## 证明树 1: 所有权唯一性定理 (T1)
+> **[来源: Rust Official Docs]**
 
 ### 定理陈述1
+> **[来源: Rust Official Docs]**
 
 **定理 T1 (所有权唯一性)**:
 
@@ -76,6 +79,7 @@ graph TD
 ```
 
 ### Rust 代码验证
+> **[来源: Rust Official Docs]**
 
 ```rust
 // T1 的 Rust 体现：所有权系统保证
@@ -93,8 +97,10 @@ fn demonstrate_ownership_uniqueness() {
 ---
 
 ## 证明树 2: 借用检查器正确性 (T1-T3)
+> **[来源: Rust Official Docs]**
 
 ### 定理陈述
+> **[来源: Rust Official Docs]**
 
 **定理 T1 (不可变借用安全)**:
 `borrow_immut(x) → ∀t: 在借用期间 x 不可变`
@@ -150,6 +156,7 @@ graph TD
 ```
 
 ### Rust 代码验证2
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn demonstrate_borrow_checker() {
@@ -175,8 +182,10 @@ fn demonstrate_borrow_checker() {
 ---
 
 ## 证明树 3: 类型安全定理
+> **[来源: Rust Official Docs]**
 
 ### 定理陈述3
+> **[来源: Rust Official Docs]**
 
 **类型安全 = 进展性 (Progress) + 保持性 (Preservation)**:
 
@@ -234,8 +243,10 @@ graph TD
 ---
 
 ## 证明树 4: 生命周期推断正确性
+> **[来源: Rust Official Docs]**
 
 ### 定理陈述4
+> **[来源: Rust Official Docs]**
 
 **定理 LF-T1**: 生命周期推断算法输出的约束系统是可行的（若存在解）。
 **定理 LF-T2**: 推断的生命周期是极小的（最精确的）。

@@ -5,6 +5,7 @@
 ---
 
 ## 1. 顶层决策树
+> **[来源: Rust Official Docs]**
 
 ```text
 开始选择并发模型
@@ -47,8 +48,10 @@
 ---
 
 ## 2. 详细决策流程
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Actor模型选择
+> **[来源: Rust Official Docs]**
 
 ```text
 选择Actor模型

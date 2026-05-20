@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [WASM 使用指南](#wasm-使用指南)
   - [📋 目录](#-目录)
@@ -48,6 +50,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍如何使用 Rust 编译到 WebAssembly (WASM)，包括项目设置、编译配置、与 JavaScript 互操作等。
 
@@ -57,8 +61,12 @@ WASM 异步与 Rust 异步模型一致。
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ### 安装工具链
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 wasm-pack
@@ -72,6 +80,8 @@ cargo install wasm-bindgen-cli
 ```
 
 ### 创建 WASM 项目
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 使用 wasm-pack 创建新项目
@@ -85,8 +95,12 @@ cd my-wasm-project
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 基本 WASM 函数
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // src/lib.rs
@@ -104,6 +118,8 @@ pub fn greet(name: &str) -> String {
 ```
 
 ### 2. 与 JavaScript 互操作
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -128,6 +144,8 @@ pub fn log_message(message: &str) {
 ```
 
 ### 3. 处理 JavaScript 对象
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -158,6 +176,8 @@ impl Person {
 ```
 
 ### 4. 异步函数
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -181,6 +201,8 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 ---
 
 ## 🔧 编译配置
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Cargo.toml
 

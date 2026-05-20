@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [实战：实现 `Vec<T>`](#实战实现-vect)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 设计目标
+> **[来源: Rust Official Docs]**
 
 实现一个功能类似 `std::vec::Vec` 的安全动态数组：
 
@@ -45,6 +47,7 @@ pub struct MyVec<T> {
 ---
 
 ## 2. 基本实现
+> **[来源: Rust Official Docs]**
 
 ### 2.1 结构定义与创建
 

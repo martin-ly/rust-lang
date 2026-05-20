@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 思维导图集合](#rust-思维导图集合)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -48,14 +50,20 @@
 ---
 
 ## 🎯 文档概述 {#-文档概述}
+>
+> **[来源: Rust Official Docs]**
 
 本文档收集了 Rust 学习项目的各种思维导图，以可视化的方式展示知识结构和概念关系。
 
 ---
 
 ## 🗺️ 核心概念思维导图 {#️-核心概念思维导图}
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Rust 语言核心思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -113,6 +121,8 @@ mindmap
 ```
 
 ### 2. 所有权系统思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -161,6 +171,8 @@ mindmap
 ```
 
 ### 3. 借用系统思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -220,6 +232,8 @@ mindmap
 ```
 
 ### 4. 生命周期系统思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -263,6 +277,8 @@ mindmap
 ```
 
 ### 5. 泛型系统思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -310,6 +326,8 @@ mindmap
 ```
 
 ### 6. Trait 系统思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -375,6 +393,8 @@ mindmap
 ```
 
 ### 7. 并发编程思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -437,6 +457,8 @@ mindmap
 ```
 
 ### 8. 异步编程思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap

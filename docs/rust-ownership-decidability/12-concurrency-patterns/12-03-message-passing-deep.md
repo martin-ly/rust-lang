@@ -10,6 +10,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Message Passing Patterns: Formal Deep Dive](#message-passing-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -67,6 +68,7 @@
 ---
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 This document provides a comprehensive formal treatment of message passing patterns in Rust, establishing mathematical foundations for understanding how Rust's channel-based concurrency ensures memory safety through ownership transfer. We present:
 
@@ -81,6 +83,7 @@ The core insight is that Rust's ownership system, when combined with channel com
 ---
 
 ## 1. Message Passing Fundamentals
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Channel Semantics
 

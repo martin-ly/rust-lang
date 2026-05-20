@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def FB1: Fallback
+> **[来源: Rust Official Docs]**
 
 Fallback（降级）是一种**故障应对机制**，当主操作失败时，执行备选操作以提供有限但可用的服务。
 
@@ -21,6 +23,7 @@ Fallback := (Op_primary, Op_fallback, predicate)
 ```
 
 ### Def FB2: 降级类型
+> **[来源: Rust Official Docs]**
 
 ```
 FallbackType :=
@@ -32,6 +35,7 @@ FallbackType :=
 ```
 
 ### Def FB3: 降级保证
+> **[来源: Rust Official Docs]**
 
 ```
 FallbackGuarantee := Safety ∧ Liveness
@@ -43,8 +47,10 @@ FallbackGuarantee := Safety ∧ Liveness
 ---
 
 ## 2. 基本假设 (Axiom)
+> **[来源: Rust Official Docs]**
 
 ### Axiom FB1: 降级可靠性
+> **[来源: Rust Official Docs]**
 
 ```
 Op_fallback 的成功率 > Op_primary 的成功率
@@ -53,6 +59,7 @@ Op_fallback 的成功率 > Op_primary 的成功率
 降级操作应更可靠（通常更简单）。
 
 ### Axiom FB2: 降级有限性
+> **[来源: Rust Official Docs]**
 
 ```
 quality(Op_fallback) ≤ quality(Op_primary)
@@ -61,6 +68,7 @@ quality(Op_fallback) ≤ quality(Op_primary)
 降级服务质量不超过主操作。
 
 ### Axiom FB3: 降级安全
+> **[来源: Rust Official Docs]**
 
 ```
 ∀input. safe(Op_fallback(input))
@@ -71,8 +79,10 @@ quality(Op_fallback) ≤ quality(Op_primary)
 ---
 
 ## 3. 定理 (Theorem)
+> **[来源: Rust Official Docs]**
 
 ### Theorem FB1: 服务可用性
+> **[来源: Rust Official Docs]**
 
 ```
 P(available) ≥ P(Op_primary succeeds) + P(Op_primary fails) × P(Op_fallback succeeds)
@@ -86,6 +96,7 @@ P(available) ≥ P(Op_primary succeeds) + P(Op_primary fails) × P(Op_fallback s
 4. 因此可用性提升
 
 ### Theorem FB2: 用户体验下限
+> **[来源: Rust Official Docs]**
 
 ```
 ∃min_quality. Fallback → quality ≥ min_quality

@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def OB1: Outbox
+> **[来源: Rust Official Docs]**
 
 Outbox（发件箱）模式是一种**事务性消息投递模式**，确保数据库更新和消息发送的**原子性**。
 
@@ -22,6 +24,7 @@ Outbox := (T_db, T_outbox, M, P_relay)
 ```
 
 ### Def OB2: 事务边界
+> **[来源: Rust Official Docs]**
 
 ```
 Transaction := (db_ops, outbox_ops)

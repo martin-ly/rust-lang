@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 **Rust安全关键生态系统文档集已完成118%目标！**
 
@@ -15,8 +16,10 @@
 ---
 
 ## 完成统计
+> **[来源: Rust Official Docs]**
 
 ### 最终指标 ✅
+> **[来源: Rust Official Docs]**
 
 | 指标 | 目标 | 实际 | 达成率 |
 |------|------|------|--------|
@@ -30,6 +33,7 @@
 ---
 
 ## 文档结构
+> **[来源: Rust Official Docs]**
 
 ```
 RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
@@ -114,6 +118,7 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 ---
 
 ## 核心成果
+> **[来源: Rust Official Docs]**
 
 ### 1. 新增高价值内容
 

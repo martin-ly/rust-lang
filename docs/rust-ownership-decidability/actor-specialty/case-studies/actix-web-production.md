@@ -5,8 +5,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基本信息
+> **[来源: Rust Official Docs]**
 
 | 属性 | 值 |
 |:---|:---|
@@ -19,6 +21,7 @@
 | 维护者 | Nikolay Kim, Rob Ede, fakeshadow |
 
 ### 1.2 架构定位
+> **[来源: Rust Official Docs]**
 
 ```text
 Actix-web 在Web生态中的位置:

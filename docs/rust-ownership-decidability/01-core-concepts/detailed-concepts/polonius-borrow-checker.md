@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Polonius: 下一代 Rust 借用检查器](#polonius-下一代-rust-借用检查器)
   - [目录](#目录)
@@ -46,8 +47,10 @@
 ---
 
 ## 1. 项目概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Polonius
+> **[来源: Rust Official Docs]**
 
 **Polonius** 是 Rust 下一代借用检查器 (borrow checker) 的代号，以莎士比亚《哈姆雷特》中的角色命名（寓意 "生存还是毁灭" 般的复杂性分析）。
 

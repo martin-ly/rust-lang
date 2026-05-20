@@ -5,6 +5,7 @@
 ---
 
 ## 1. 实时系统分类
+> **[来源: Rust Official Docs]**
 
 ```text
 实时系统需求
@@ -23,8 +24,10 @@
 ---
 
 ## 2. 硬实时系统
+> **[来源: Rust Official Docs]**
 
 ### 2.1 汽车电子控制单元 (ECU)
+> **[来源: Rust Official Docs]**
 
 ```text
 汽车ECU

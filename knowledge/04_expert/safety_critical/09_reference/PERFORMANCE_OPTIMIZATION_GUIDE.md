@@ -7,14 +7,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统的性能优化策略，在保证安全性的前提下实现最优运行时性能。
 
 ---
 
 ## 1. 零成本抽象
+> **[来源: Rust Official Docs]**
 
 ### 1.1 泛型单态化
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 零成本泛型
@@ -29,6 +32,7 @@ pub fn process<T: Processor>(item: T) -> T::Output {
 ```
 
 ### 1.2 迭代器优化
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 迭代器链零成本抽象
@@ -45,6 +49,7 @@ pub fn sum_of_squares(nums: &[i32]) -> i32 {
 ---
 
 ## 2. 内存布局优化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 结构体布局
 

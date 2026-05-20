@@ -1,14 +1,17 @@
 # 形式化验证实战指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 形式化验证使用数学方法证明程序正确性。本指南介绍Rust安全关键系统中形式化验证的实用方法。
 
 ---
 
 ## 验证工具链
+> **[来源: Rust Official Docs]**
 
 ### 工具对比矩阵
+> **[来源: Rust Official Docs]**
 
 | 工具 | 类型 | 自动化 | 适用场景 | 学习曲线 | 性能 |
 |------|------|--------|----------|----------|------|
@@ -21,6 +24,7 @@
 *注：证明一旦完成，运行时无开销
 
 ### 工具选择决策树
+> **[来源: Rust Official Docs]**
 
 ```
 需要验证什么？
@@ -47,8 +51,10 @@
 ---
 
 ## Miri实战
+> **[来源: Rust Official Docs]**
 
 ### 基础用法
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装
@@ -65,6 +71,7 @@ cargo miri run
 ```
 
 ### 环境变量配置
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 严格模式
@@ -78,6 +85,7 @@ export MIRIFLAGS="-Zmiri-data-race-detector"
 ```
 
 ### 实际示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 问题代码：未对齐访问
@@ -113,6 +121,7 @@ fn use_after_free() {
 ```
 
 ### 在CI中集成Miri
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # .github/workflows/miri.yml
@@ -140,8 +149,10 @@ jobs:
 ---
 
 ## Kani模型检查
+> **[来源: Rust Official Docs]**
 
 ### 基础概念
+> **[来源: Rust Official Docs]**
 
 Kani使用有界模型检查(BMC)验证Rust代码属性。它将代码转换为逻辑公式，使用SAT/SMT求解器验证。
 

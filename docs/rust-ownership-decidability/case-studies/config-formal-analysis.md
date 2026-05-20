@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Config 配置管理形式化分析](#config-配置管理形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 config crate提供:
 
@@ -37,6 +39,7 @@ config crate提供:
 ---
 
 ## 2. 配置层次
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (层次优先级)
 

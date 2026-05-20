@@ -1,6 +1,7 @@
 # Rust vs Python：全面对比分析
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust vs Python：全面对比分析](#rust-vs-python全面对比分析)
   - [目录](#目录)
@@ -45,6 +46,7 @@
   - [总结](#总结)
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 和 Python 代表了编程语言设计光谱的两端：
 
@@ -52,6 +54,7 @@ Rust 和 Python 代表了编程语言设计光谱的两端：
 - **Rust**: 编译型、静态类型、性能和安全优先，逐渐在Python生态中作为性能扩展
 
 ### 语言特性对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | Python | Rust |
 |------|--------|------|

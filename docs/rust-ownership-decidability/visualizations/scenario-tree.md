@@ -1,6 +1,7 @@
 # 应用场景决策树
 
 ## 1. Web服务开发
+> **[来源: Rust Official Docs]**
 
 ```text
 Web服务架构
@@ -23,6 +24,7 @@ Web服务架构
 ```
 
 ## 2. 数据处理管道
+> **[来源: Rust Official Docs]**
 
 ```text
 数据处理流程
@@ -44,6 +46,7 @@ Web服务架构
 ```
 
 ## 3. 游戏开发
+> **[来源: Rust Official Docs]**
 
 ```text
 游戏架构模式

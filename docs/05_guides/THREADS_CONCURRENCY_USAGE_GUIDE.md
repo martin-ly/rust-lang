@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [线程与并发使用指南](#线程与并发使用指南)
   - [📋 目录](#-目录)
@@ -64,6 +66,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍如何使用 C05 线程与并发模块的功能，包括线程管理、并发控制、同步原语、无锁数据结构等。
 
@@ -73,8 +77,12 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ### 基本线程创建
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -93,6 +101,8 @@ handle.join().unwrap();
 ```
 
 ### 作用域线程（Rust 1.89+）
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -114,10 +124,16 @@ thread::scope(|s| {
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 线程管理
+>
+> **[来源: Rust Official Docs]**
 
 #### 线程池
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c05_threads::threads::ThreadPool;
@@ -134,6 +150,8 @@ pool.join(); // 等待所有任务完成
 ```
 
 #### 线程属性
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -148,8 +166,12 @@ let handle = builder.spawn(|| {
 ```
 
 ### 2. 消息传递
+>
+> **[来源: Rust Official Docs]**
 
 #### 通道（Channel）
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -337,6 +359,8 @@ thread::spawn(move || {
 ---
 
 ## ⚡ 性能优化
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 减少锁竞争
 
@@ -378,6 +402,8 @@ let queue = WorkStealingQueue::new();
 ---
 
 ## 🛡️ 并发安全代码示例（5+ 模式）
+>
+> **[来源: Rust Official Docs]**
 
 ### 模式 1: 读写锁分离模式
 
@@ -832,6 +858,8 @@ where
 ---
 
 ## ⚠️ 数据竞争案例与解决方案
+>
+> **[来源: Rust Official Docs]**
 
 ### 案例 1: 未同步的共享可变状态
 
@@ -1172,6 +1200,8 @@ fn good_condition_variable() {
 ---
 
 ## 🐛 常见问题
+>
+> **[来源: Rust Official Docs]**
 
 ### 死锁
 
@@ -1210,6 +1240,8 @@ let counter = Arc::new(Mutex::new(0));
 ---
 
 ## 📚 相关文档
+>
+> **[来源: Rust Official Docs]**
 
 - [完整文档](../../crates/c05_threads/README.md)
 - [线程管理指南](../../crates/c05_threads/docs/tier_02_guides/01_线程基础与生命周期.md)
@@ -1218,6 +1250,8 @@ let counter = Arc::new(Mutex::new(0));
 - [Send/Sync 形式化](../research_notes/formal_methods/send_sync_formalization.md) - Send/Sync Trait 形式化定义与安全保证
 
 ## 🆕 Rust 1.95+ 特性
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -1500,3 +1534,7 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

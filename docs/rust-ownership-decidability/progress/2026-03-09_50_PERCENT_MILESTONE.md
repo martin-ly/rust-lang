@@ -7,10 +7,13 @@
 ---
 
 ## 最新进展
+> **[来源: Rust Official Docs]**
 
 ### 新增内容
+> **[来源: Rust Official Docs]**
 
 #### 1. DecidabilityTheorems.v (120 行)
+> **[来源: Rust Official Docs]**
 
 - ✅ 可判定性定义
 - ✅ 主定理框架

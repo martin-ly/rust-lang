@@ -5,6 +5,7 @@
 ---
 
 ## 📚 文档体系结构
+> **[来源: Rust Official Docs]**
 
 ```text
 rust-ownership-decidability/
@@ -33,8 +34,10 @@ rust-ownership-decidability/
 ---
 
 ## 🗺️ 导航地图
+> **[来源: Rust Official Docs]**
 
 ### 按学习目标导航
+> **[来源: Rust Official Docs]**
 
 | 你的目标 | 推荐阅读 |
 |:---------|:---------|

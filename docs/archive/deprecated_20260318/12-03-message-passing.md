@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 消息传递模式](#rust-消息传递模式)
   - [目录](#目录)
@@ -27,8 +28,10 @@
 ---
 
 ## 1. 理论基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 CSP 理论
+> **[来源: Rust Official Docs]**
 
 CSP（Communicating Sequential Processes）由 Tony Hoare 于 1978 年提出，是一种用于描述并发系统交互的形式化语言。
 
@@ -87,6 +90,7 @@ fn csp_example() {
 ```
 
 ### 1.2 Actor 模型
+> **[来源: Rust Official Docs]**
 
 Actor 模型由 Carl Hewitt 于 1973 年提出，每个 Actor 是一个独立的计算单元。
 
@@ -108,6 +112,7 @@ Actor 模型由 Carl Hewitt 于 1973 年提出，每个 Actor 是一个独立的
 | 位置透明 | 本地/远程无差别 | 统一的 Handle |
 
 ### 1.3 消息传递 vs 共享状态
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 共享状态方式
@@ -176,8 +181,10 @@ mod message_passing {
 ---
 
 ## 2. Channel 详解
+> **[来源: Rust Official Docs]**
 
 ### 2.1 mpsc 通道
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -344,6 +351,7 @@ impl<T: Clone + Send + 'static> WorkStealingQueue<T> {
 ```
 
 ### 2.2 mpmc 通道
+> **[来源: Rust Official Docs]**
 
 ```rust
 use crossbeam::channel::{self, Sender, Receiver, Select};
@@ -419,6 +427,7 @@ impl<T> ConsumerGroup<T> {
 ```
 
 ### 2.3 无界与有界通道
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -526,6 +535,7 @@ pub struct SendError<T>(pub T);
 ```
 
 ### 2.4 Select 多路复用
+> **[来源: Rust Official Docs]**
 
 ```rust
 use crossbeam::channel::{self, Select};
@@ -618,6 +628,7 @@ impl<T> PrioritySelect<T> {
 ---
 
 ## 3. Actor 模式实现
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Actor 基础
 

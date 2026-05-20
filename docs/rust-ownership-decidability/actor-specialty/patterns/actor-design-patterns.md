@@ -5,8 +5,10 @@
 ---
 
 ## 1. 基础模式
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Ask vs Tell模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Tell模式 (Fire-and-Forget)
@@ -30,6 +32,7 @@ let result = tokio::time::timeout(
 - **Ask**: 需要结果、需要确认、同步需求场景
 
 ### 1.2 前摄模式 (Proactor Pattern)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Actor主动发送消息给其他Actor

@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -45,12 +46,14 @@
 ---
 
 ## 宗旨
+> **[来源: Rust Official Docs]**
 
 论证 Rust 组合软件工程的有效性：形式化定义组合、建立有效性定理、与 ownership/borrow/trait 衔接。
 
 ---
 
 ## 设计模式组合示例（实质内容）
+> **[来源: Rust Official Docs]**
 
 | 组合 | 实现要点 | 形式化衔接 |
 | :--- | :--- | :--- |
@@ -64,8 +67,10 @@
 ---
 
 ## 组合完整代码示例（层次推进）
+> **[来源: Rust Official Docs]**
 
 ### 示例 1：Builder + Factory Method
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Product { fn name(&self) -> &str; }
@@ -97,6 +102,7 @@ impl ConfigFactory for DefaultFactory {
 ```
 
 ### 示例 2：Repository + Service Layer + DTO（完整链条）
+> **[来源: Rust Official Docs]**
 
 ```rust
 // DTO：跨边界
@@ -126,6 +132,7 @@ impl<R: OrderRepository> OrderService<R> {
 ```
 
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
+> **[来源: Rust Official Docs]**
 
 **Decorator + Strategy 组合有效性推导**：
 
@@ -138,6 +145,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 文档索引
+> **[来源: Rust Official Docs]**
 
 | 文档 | 内容 |
 | :--- | :--- |
@@ -148,6 +156,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
 2. **有效性**：组合后的系统保持内存安全、类型安全、无数据竞争？
@@ -156,6 +165,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 形式化论证汇总
+> **[来源: Rust Official Docs]**
 
 **Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
 
@@ -166,6 +176,7 @@ impl<R: OrderRepository> OrderService<R> {
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
 ### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
+> **[来源: Rust Official Docs]**
 
 ```text
 Def CE1 (组合有效性)     Def 1.1 (模块组合)

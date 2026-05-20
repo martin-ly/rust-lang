@@ -5,6 +5,7 @@
 ---
 
 ## 🎯 如何使用
+> **[来源: Rust Official Docs]**
 
 - [ ] 未开始
 - [~] 进行中
@@ -15,8 +16,10 @@
 ---
 
 ## 📚 第一阶段: 基础 (2-3 周)
+> **[来源: Rust Official Docs]**
 
 ### C01 所有权系统
+> **[来源: Rust Official Docs]**
 
 - [ ] 阅读 `crates/c01_ownership/README.md`
 - [ ] 完成 `crates/c01_ownership/exercises/01_borrow_checker.md`

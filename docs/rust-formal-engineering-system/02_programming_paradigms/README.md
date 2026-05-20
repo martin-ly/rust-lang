@@ -15,6 +15,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 | 子目录 | 内容 |
 | :--- | :--- |
@@ -23,6 +24,7 @@
 | [09_actor_model/](09_actor_model/README.md) | Actor 模型实现 |
 
 ### 文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 说明 |
 | :--- | :--- |
@@ -31,6 +33,7 @@
 ---
 
 ## 编程范式概览
+> **[来源: Rust Official Docs]**
 
 ### 同步编程
 

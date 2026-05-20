@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 安全与非安全全面论证与分析](#rust-安全与非安全全面论证与分析)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -46,6 +47,7 @@
 ---
 
 ## 🎯 文档宗旨 {#-文档宗旨}
+> **[来源: Rust Official Docs]**
 
 本文档针对「安全与非安全缺乏全面论证和分析」的缺口，系统化补全：
 
@@ -58,8 +60,10 @@
 ---
 
 ## 一、安全与非安全定义与边界
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 **定义 1.1（安全 Rust）**
 安全 Rust 指仅使用安全 API（无 `unsafe` 块、无 `unsafe fn` 调用、无 `unsafe trait` 实现）的代码子集。编译器对此子集提供**静态保证**。
@@ -71,6 +75,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 安全边界 = 编译器可静态验证的保证范围。跨越边界即需程序员契约。
 
 ### 1.2 边界图示
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌──────────────────────────────────────────────────────────┐
@@ -96,6 +101,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 ```
 
 ### 1.3 为何需要 unsafe？
+> **[来源: Rust Official Docs]**
 
 | 需求 | 安全子集 | unsafe 用途 |
 | :--- | :--- | :--- |
@@ -110,8 +116,10 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 ---
 
 ## 二、安全保证的形式化论证
+> **[来源: Rust Official Docs]**
 
 ### 2.1 安全保证定理汇总
+> **[来源: Rust Official Docs]**
 
 | 保证 | 机制 | 定理 | 文档 |
 | :--- | :--- | :--- | :--- |
@@ -131,6 +139,7 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 **推论 SU-C1**：Safe 代码不触发 UB 当且仅当未调用违反契约的 unsafe；由 Def 1.1 与各 unsafe 契约。
 
 ### 2.2 安全保证依赖链
+> **[来源: Rust Official Docs]**
 
 ```text
 所有权规则 1–3 ──→ 唯一性 T2 ──→ 内存安全 T3（无悬垂、无双重释放、无泄漏）
@@ -149,8 +158,10 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ---
 
 ## 三、unsafe 契约体系
+> **[来源: Rust Official Docs]**
 
 ### 3.1 契约形式
+> **[来源: Rust Official Docs]**
 
 **Hoare 三元组**：$\{P\}\; \text{unsafe\_op} \;\{Q\}$
 

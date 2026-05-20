@@ -9,6 +9,7 @@
 ---
 
 ## 🎉 完成概况
+> **[来源: Rust Official Docs]**
 
 | 指标 | 数值 |
 |------|------|
@@ -22,6 +23,7 @@
 ---
 
 ## 📁 完整目录结构
+> **[来源: Rust Official Docs]**
 
 ```
 knowledge/
@@ -94,6 +96,7 @@ knowledge/
 ---
 
 ## ✨ Rust 1.94 特性完整覆盖
+> **[来源: Rust Official Docs]**
 
 | 特性 | 文档位置 | 状态 |
 |------|----------|------|
@@ -112,6 +115,7 @@ knowledge/
 ## 📚 文档质量亮点
 
 ### 1. 权威来源引用
+> **[来源: Rust Official Docs]**
 
 - **PLDI 2025 Distinguished Paper**: Miri Tree Borrows 论文引用
 - **RFC 2788**: LazyCell/LazyLock 设计文档
@@ -119,6 +123,7 @@ knowledge/
 - **Rust Book**: 多处引用官方文档
 
 ### 2. 实践导向
+> **[来源: Rust Official Docs]**
 
 - **200+ 可运行代码示例**
 - 最佳实践和反模式对比
@@ -246,3 +251,6 @@ knowledge/
 **知识库已准备就绪，可供学习者使用！**
 
 **访问入口**: [knowledge/INDEX.md](../INDEX.md)
+---
+
+> **权威来源**: [来源: Rust 官方文档](https://doc.rust-lang.org/)

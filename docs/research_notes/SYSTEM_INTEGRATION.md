@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [系统集成指南](#系统集成指南)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,10 +48,12 @@
 ---
 
 ## 🎯 系统概述 {#-系统概述}
+> **[来源: Rust Official Docs]**
 
 研究笔记系统与 Rust 形式化工程系统是两个相互补充的文档体系：
 
 ### 研究笔记系统
+> **[来源: Rust Official Docs]**
 
 - **定位**: 研究导向的文档系统
 - **目标**: 记录和推进 Rust 相关的深入研究
@@ -58,6 +61,7 @@
 - **特点**: 研究笔记、实验报告、方法论指南
 
 ### 形式化工程系统
+> **[来源: Rust Official Docs]**
 
 - **定位**: 理论导向的文档系统
 - **目标**: 提供 Rust 形式化理论的完整体系
@@ -67,8 +71,10 @@
 ---
 
 ## 🔗 系统关系 {#-系统关系}
+> **[来源: Rust Official Docs]**
 
 ### 互补关系
+> **[来源: Rust Official Docs]**
 
 两个系统形成互补关系：
 
@@ -83,6 +89,7 @@
 ```
 
 ### 协同工作
+> **[来源: Rust Official Docs]**
 
 - **研究笔记系统** 提供研究问题和实验验证
 - **形式化工程系统** 提供理论基础和形式化定义
@@ -91,8 +98,10 @@
 ---
 
 ## 📚 内容对应关系 {#-内容对应关系}
+> **[来源: Rust Official Docs]**
 
 ### 类型系统
+> **[来源: Rust Official Docs]**
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
@@ -101,6 +110,7 @@
 | [型变理论](./type_theory/variance_theory.md)                    | [类型系统高级理论](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)                    | 研究笔记提供理论研究，形式化系统提供详细定义     |
 
 ### 形式化方法
+> **[来源: Rust Official Docs]**
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |
@@ -109,6 +119,7 @@
 | [生命周期形式化](./formal_methods/lifetime_formalization.md) | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 
 ### 实验研究
+> **[来源: Rust Official Docs]**
 
 | 研究笔记系统 | 形式化工程系统 | 关系 |
 | :--- | :--- | :--- |

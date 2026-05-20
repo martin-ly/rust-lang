@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [扩展主题：Const泛型与编译期计算](#扩展主题const泛型与编译期计算)
   - [目录](#目录)
@@ -35,8 +36,10 @@
     - [最佳实践](#最佳实践)
 
 ## 1. Const泛型概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是Const泛型
+> **[来源: Rust Official Docs]**
 
 Const泛型允许类型参数化为**编译期常量值**：
 
@@ -51,6 +54,7 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 ```
 
 ### 1.2 与普通泛型的区别
+> **[来源: Rust Official Docs]**
 
 | 特性 | 普通泛型 `<T>` | Const泛型 `<const N: usize>` |
 |------|----------------|------------------------------|
@@ -62,8 +66,10 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 ---
 
 ## 2. Const泛型的所有权语义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 所有权在编译期确定
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct FixedVec<T, const N: usize> {
@@ -91,6 +97,7 @@ impl<T, const N: usize> FixedVec<T, N> {
 ```
 
 ### 2.2 编译期内存布局
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不同N值产生不同类型
@@ -105,8 +112,10 @@ let v2: FixedVec<i32, 16> = FixedVec::new();
 ---
 
 ## 3. Const函数
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Const函数的限制
+> **[来源: Rust Official Docs]**
 
 ```rust
 const fn fibonacci(n: u32) -> u32 {
@@ -128,6 +137,7 @@ const FIB_10: u32 = fibonacci(10); // 编译期计算
 - 不能有不安全的操作（部分）
 
 ### 3.2 Const函数与所有权
+> **[来源: Rust Official Docs]**
 
 ```rust
 const fn create_array<T: Copy, const N: usize>(val: T) -> [T; N] {
@@ -146,6 +156,7 @@ const ARR: [i32; 10] = create_array(42);
 ---
 
 ## 4. 编译期计算能力
+> **[来源: Rust Official Docs]**
 
 ### 4.1 类型级别计算
 

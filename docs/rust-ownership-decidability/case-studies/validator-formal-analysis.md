@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Validator 数据验证形式化分析](#validator-数据验证形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 validator提供:
 
@@ -39,6 +41,7 @@ validator提供:
 ---
 
 ## 2. 派生宏语义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (编译时生成)
 

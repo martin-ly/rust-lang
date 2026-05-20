@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [FFI 与外部代码交互](#ffi-与外部代码交互)
   - [目录](#目录)
@@ -37,8 +38,10 @@
 ---
 
 ## 1. FFI 基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 FFI
+> **[来源: Rust Official Docs]**
 
 FFI (Foreign Function Interface) 允许 Rust 代码与其他语言（主要是 C）交互。
 

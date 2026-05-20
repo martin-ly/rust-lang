@@ -8,6 +8,7 @@
 ---
 
 ## 特性矩阵概览
+> **[来源: Rust Official Docs]**
 
 | 特性 | 1.93 | 1.94 | 1.95 | 形式化文档 | 完成度 |
 | :--- | :---: | :---: | :---: | :--- | :---: |
@@ -32,8 +33,10 @@
 ---
 
 ## 形式化文档更新计划
+> **[来源: Rust Official Docs]**
 
 ### 高优先级更新
+> **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -43,6 +46,7 @@
 | [pin_self_referential](./formal_methods/pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
 ### 中优先级更新
+> **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -53,8 +57,10 @@
 ---
 
 ## 新增形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.94-1 (RangeToInclusive)
+> **[来源: Rust Official Docs]**
 
 **定义**: `RangeToInclusive<T>` 表示从起始到 `end`（含）的范围
 
@@ -72,6 +78,7 @@ RangeToInclusive<T> = { x | x ≤ end }
 ---
 
 ### Def 1.94-2 (ControlFlow::ok)
+> **[来源: Rust Official Docs]**
 
 **定义**: `ControlFlow<B, C>::ok() -> Option<C>` 将 Continue 映射为 Some，Break 映射为 None
 
@@ -87,6 +94,7 @@ ok(Break(_)) = None
 ---
 
 ### Def 1.94-3 (RefCell::try_map)
+> **[来源: Rust Official Docs]**
 
 **定义**: 条件映射 RefCell 内部值，失败时保留原引用
 
@@ -101,6 +109,7 @@ try_map: Ref<T> -> (T -> Option<U>) -> Result<Ref<U>, Ref<T>>
 ---
 
 ### Def 1.95-1 (生成器状态机)
+> **[来源: Rust Official Docs]**
 
 **定义**: 生成器是一个状态机，状态为 `Yielded(Y)` 或 `Complete(R)`
 
@@ -115,8 +124,10 @@ Generator<Yield=Y, Return=R>:
 ---
 
 ## 证明更新清单
+> **[来源: Rust Official Docs]**
 
 ### 定理更新
+> **[来源: Rust Official Docs]**
 
 | 定理 | 更新内容 | 状态 |
 | :--- | :--- | :--- |

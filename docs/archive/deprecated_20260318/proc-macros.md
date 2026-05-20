@@ -4,6 +4,7 @@
 本章节将深入讲解三种类型的过程宏：Derive 宏、属性宏和函数式宏。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [过程宏开发](#过程宏开发)
   - [目录](#目录)
@@ -36,8 +37,10 @@
     - [使用 cargo-expand](#使用-cargo-expand)
 
 ## 基础架构
+> **[来源: Rust Official Docs]**
 
 ### 项目结构
+> **[来源: Rust Official Docs]**
 
 过程宏必须定义在特殊的 crate 类型中：
 
@@ -58,12 +61,14 @@ syn = { version = "2.0", features = ["full"] }
 ```
 
 ### 核心依赖解析
+> **[来源: Rust Official Docs]**
 
 - **proc-macro2**: 提供 `TokenStream` 的包装，支持测试和调试
 - **quote**: 用于生成 TokenStream 的宏
 - **syn**: 解析 Rust 代码为 AST 结构
 
 ### 基本模板
+> **[来源: Rust Official Docs]**
 
 ```rust
 use proc_macro::TokenStream;
@@ -84,8 +89,10 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 ```
 
 ## Derive 宏
+> **[来源: Rust Official Docs]**
 
 ### 基础 Builder 模式 Derive
+> **[来源: Rust Official Docs]**
 
 创建一个为结构体生成 Builder 模式的 Derive 宏：
 
@@ -216,6 +223,7 @@ fn main() {
 ```
 
 ### 高级 Derive 宏：自定义序列化
+> **[来源: Rust Official Docs]**
 
 创建支持多种序列化格式的 Derive 宏：
 
@@ -370,6 +378,7 @@ fn generate_binary_deserialize(fields: &[FieldInfo], struct_name: &syn::Ident) -
 ```
 
 ### 枚举处理
+> **[来源: Rust Official Docs]**
 
 为枚举生成实用方法的 Derive 宏：
 
@@ -438,8 +447,10 @@ pub fn derive_enum_utils(input: TokenStream) -> TokenStream {
 ```
 
 ## 属性宏
+> **[来源: Rust Official Docs]**
 
 ### Web 框架路由宏
+> **[来源: Rust Official Docs]**
 
 创建类似 Actix-web 的路由属性宏：
 

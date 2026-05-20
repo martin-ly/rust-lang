@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [🔗 文档交叉引用指南 {#-文档交叉引用指南}](#-文档交叉引用指南--文档交叉引用指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -73,8 +74,10 @@
 ---
 
 ## 🗺️ 文档网络总览 {#️-文档网络总览}
+> **[来源: Rust Official Docs]**
 
 ### 全文档依赖图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────────────┐
@@ -118,6 +121,7 @@
 ```
 
 ### 文档层次结构
+> **[来源: Rust Official Docs]**
 
 ```text
 docs/
@@ -164,8 +168,10 @@ docs/
 ---
 
 ## 🔄 核心模块交叉引用 {#-核心模块交叉引用}
+> **[来源: Rust Official Docs]**
 
 ### C01 - 所有权与借用
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
@@ -184,6 +190,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
 
 ### C02 - 类型系统
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
@@ -194,6 +201,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **思维表征** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §2 | ←→ [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) ←→ [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §3 |
 
 ### C03 - 控制流与函数
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
@@ -203,6 +211,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [MACRO_SYSTEM_USAGE_GUIDE.md](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | ← [control_flow](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
 
 ### C04 - 泛型编程
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
@@ -212,6 +221,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [ADVANCED_TOPICS_DEEP_DIVE.md](../05_guides/ADVANCED_TOPICS_DEEP_DIVE.md) | ← [trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md) |
 
 ### C05 - 线程与并发
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |
@@ -222,6 +232,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **思维表征** | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) §并发选型 | ←→ [06_boundary_analysis](../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 
 ### C06 - 异步编程
+> **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
 | :--- | :--- | :--- |

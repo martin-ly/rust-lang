@@ -5,6 +5,7 @@
 ---
 
 ## 1. 应用领域总览
+> **[来源: Rust Official Docs]**
 
 ```text
 Actor应用场景
@@ -103,8 +104,10 @@ Actor应用场景
 ---
 
 ## 2. Web服务详细方案
+> **[来源: Rust Official Docs]**
 
 ### 2.1 REST API架构
+> **[来源: Rust Official Docs]**
 
 ```text
 Actix-web + Actor 架构:

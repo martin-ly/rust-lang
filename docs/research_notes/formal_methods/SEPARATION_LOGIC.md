@@ -8,6 +8,7 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 分离逻辑(Separation Logic)是霍尔逻辑的扩展，专门用于推理使用共享可变状态的程序。
 它为Rust的所有权和借用系统提供了形式化基础。
@@ -15,8 +16,10 @@
 ---
 
 ## 一、分离逻辑基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 分离合取 (*)
+> **[来源: Rust Official Docs]**
 
 **语法**: `P * Q` (P和Q分别描述不相交的内存区域)
 
@@ -34,6 +37,7 @@ H₁ ⊨ P    H₂ ⊨ Q    H₁ ⊥ H₂
 ```
 
 ### 1.2 分离蕴含 (-*)
+> **[来源: Rust Official Docs]**
 
 **语法**: `P -* Q` (如果添加满足P的内存，则Q成立)
 
@@ -51,6 +55,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 1.3 空堆断言 (emp)
+> **[来源: Rust Official Docs]**
 
 **含义**: 堆为空
 
@@ -61,6 +66,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 1.4 Points-to断言
+> **[来源: Rust Official Docs]**
 
 **语法**: `l ↦ v` (位置l存储值v)
 
@@ -78,8 +84,10 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ---
 
 ## 二、分离逻辑推理规则
+> **[来源: Rust Official Docs]**
 
 ### 2.1 框架规则 (Frame Rule)
+> **[来源: Rust Official Docs]**
 
 ```
 {P} C {Q}
@@ -106,6 +114,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 2.2 规则合取
+> **[来源: Rust Official Docs]**
 
 ```
 {P₁} C {Q₁}    {P₂} C {Q₂}
@@ -114,6 +123,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 2.3 分配规则
+> **[来源: Rust Official Docs]**
 
 **存在量词分配**:
 
@@ -134,6 +144,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ---
 
 ## 三、在Rust形式化中的应用
+> **[来源: Rust Official Docs]**
 
 ### 3.1 所有权建模
 

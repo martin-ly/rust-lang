@@ -7,8 +7,10 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 ### 主要问题
+> **[来源: Rust Official Docs]**
 
 1. **形式化内容缺失严重**
    - 多数文档以代码示例为主，缺少数学定义
@@ -28,6 +30,7 @@
 ---
 
 ## 详细问题分析
+> **[来源: Rust Official Docs]**
 
 ### 1. 形式化证明文档 (formal-proofs/)
 

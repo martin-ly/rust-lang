@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tokio-Stream形式化分析](#tokio-stream形式化分析)
   - [目录](#目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tokio-Stream特点：
 
@@ -51,6 +53,7 @@ Tokio-Stream特点：
 ---
 
 ## 2. Stream trait
+> **[来源: Rust Official Docs]**
 
 ### 定义 STREAM-1 ( 核心trait )
 

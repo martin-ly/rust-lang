@@ -13,6 +13,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [SQLx 深度解析](#sqlx-深度解析)
   - [📋 目录](#-目录)
@@ -37,6 +39,8 @@
 ---
 
 ## 🎯 概述
+>
+> **[来源: Rust Official Docs]**
 
 SQLx 是一个异步纯 Rust SQL 工具包，提供：
 
@@ -46,6 +50,8 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 - **数据库无关**: 支持 PostgreSQL、MySQL、SQLite
 
 ### 对比其他 ORM
+>
+> **[来源: Rust Official Docs]**
 
 | 特性 | SQLx | Diesel | Sea-ORM |
 |------|------|--------|---------|
@@ -58,6 +64,8 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 ---
 
 ## 🏗️ 架构设计
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -77,6 +85,8 @@ graph TD
 ---
 
 ## 💡 核心特性
+>
+> **[来源: Rust Official Docs]**
 
 ### 编译时查询检查
 

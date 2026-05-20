@@ -7,8 +7,10 @@
 ---
 
 ## 📝 标准版本说明模板
+> **[来源: Rust Official Docs]**
 
 ### 完整版本（用于examples和主要功能文件）
+> **[来源: Rust Official Docs]**
 
 ````rust
 //! # Rust 1.89 特性示例 (历史版本)
@@ -66,6 +68,7 @@
 ---
 
 ### 简化版本（用于测试和工具文件）
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! # Rust 1.89 功能 (历史版本)

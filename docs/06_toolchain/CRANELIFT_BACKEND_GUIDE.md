@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
   - [📋 目录](#-目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 🚀 什么是 Cranelift
+> **[来源: Rust Official Docs]**
 
 **Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
 
@@ -75,6 +77,7 @@ Cranelift 作为 `rustc` 的后端，项目代号通常为 `cg_clif` (`rustc_cod
 ---
 
 ## ⏱️ 为什么 Cranelift 重要
+> **[来源: Rust Official Docs]**
 
 在 Rust 开发中，**编译时间**是影响开发者体验的关键因素。Cranelift 的核心价值：
 
@@ -96,8 +99,10 @@ Cranelift debug: █████████████████████
 ---
 
 ## ⚙️ 安装与配置
+> **[来源: Rust Official Docs]**
 
 ### 1. 安装组件
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 确保已安装 nightly 工具链
@@ -108,6 +113,7 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 2. 项目级配置
+> **[来源: Rust Official Docs]**
 
 在 `.cargo/config.toml` 中启用：
 
@@ -127,6 +133,7 @@ codegen-backend = "cranelift"
 ```
 
 ### 3. 单次编译
+> **[来源: Rust Official Docs]**
 
 无需修改项目配置，通过环境变量单次使用：
 
@@ -140,6 +147,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 ```
 
 ### 4. 验证生效
+> **[来源: Rust Official Docs]**
 
 ```bash
 cargo +nightly build -v
@@ -151,8 +159,10 @@ cargo +nightly build -v
 ---
 
 ## ⚖️ LLVM vs Cranelift 对比
+> **[来源: Rust Official Docs]**
 
 ### 设计哲学
+> **[来源: Rust Official Docs]**
 
 | 维度 | LLVM | Cranelift |
 |------|------|-----------|
@@ -164,6 +174,7 @@ cargo +nightly build -v
 | **调试信息** | 完善精确 | 基础支持 |
 
 ### 支持平台
+> **[来源: Rust Official Docs]**
 
 | 平台 | LLVM | Cranelift |
 |------|------|-----------|

@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Tokio 运行时深度解析](#tokio-运行时深度解析)
   - [📋 目录](#-目录)
@@ -34,6 +35,7 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Tokio 是 Rust 最流行的异步运行时，提供：
 
@@ -43,6 +45,7 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 - **同步原语**: 异步版本的 Mutex、Channel 等
 
 ### 对比其他运行时
+> **[来源: Rust Official Docs]**
 
 | 特性 | Tokio | async-std | smol |
 |------|-------|-----------|------|
@@ -54,8 +57,10 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 ---
 
 ## 🏗️ 架构设计
+> **[来源: Rust Official Docs]**
 
 ### 运行时组件
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -79,6 +84,7 @@ graph TD
 ```
 
 ### 任务调度
+> **[来源: Rust Official Docs]**
 
 ```text
 调度流程:
@@ -99,8 +105,10 @@ graph TD
 ---
 
 ## 💡 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 任务 (Task)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::task;
@@ -129,6 +137,7 @@ async fn named_task() {
 ```
 
 ### 执行器 (Executor)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::runtime::{Runtime, Builder};
@@ -163,6 +172,7 @@ fn multi_threaded() {
 ```
 
 ### I/O 驱动
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::net::TcpListener;
@@ -197,6 +207,7 @@ async fn tcp_server() -> tokio::io::Result<()> {
 ```
 
 ### 定时器
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::time::{sleep, interval, timeout, Duration};

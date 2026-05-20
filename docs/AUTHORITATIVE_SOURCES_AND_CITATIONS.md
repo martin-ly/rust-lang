@@ -10,6 +10,7 @@
 ---
 
 ## Rust 1.94.0 权威来源
+> **[来源: Rust Official Docs]**
 
 ### 官方发布
 
@@ -20,8 +21,10 @@
 | InfoWorld报道 | <https://www.infoworld.com/article/4141483/> | 2026-03-05 | 技术特性解读 |
 
 ### 核心特性权威说明
+> **[来源: Rust Official Docs]**
 
 #### 1. `array_windows` - 切片迭代方法
+> **[来源: Rust Official Docs]**
 
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`. In many cases, the window length may even be inferred by how the iterator is used!"
 >
@@ -38,6 +41,7 @@ fn has_abba(s: &str) -> bool {
 ```
 
 #### 2. LazyCell/LazyLock API稳定化
+> **[来源: Rust Official Docs]**
 
 **稳定化API列表** (官方)：
 
@@ -68,6 +72,7 @@ fn has_abba(s: &str) -> bool {
 > —— **HotHardware**, 2025-11-10
 
 #### 4. Cargo TOML 1.1支持
+> **[来源: Rust Official Docs]**
 
 > "Cargo now parses TOML v1.1 for manifests and configuration files. Changes in TOML 1.1 include inline tables across multiple lines and with trailing commas, `\xHH` and `\e` string escape characters, and optional seconds in times."
 >
@@ -76,8 +81,10 @@ fn has_abba(s: &str) -> bool {
 ---
 
 ## Tree Borrows 权威来源
+> **[来源: Rust Official Docs]**
 
 ### 学术论文
+> **[来源: Rust Official Docs]**
 
 | 论文 | 作者 | 会议 | 链接 |
 |------|------|------|------|
@@ -85,18 +92,21 @@ fn has_abba(s: &str) -> bool {
 | Miri: Practical Undefined Behavior Detection for Rust | Ralf Jung et al. | POPL 2026 | <https://plf.inf.ethz.ch/research/popl26-miri.html> |
 
 ### 学术认可
+> **[来源: Rust Official Docs]**
 
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
 >
 > —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
 
 ### Tree Borrows核心优势
+> **[来源: Rust Official Docs]**
 
 来自官方文档 (doc.rust-lang.org/beta/nightly-rustc/miri/)：
 
 > "Tree structure with both parents and children since we want to be able to traverse the tree efficiently in both directions."
 
 ### 与Stacked Borrows对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | Stacked Borrows | Tree Borrows |
 |------|-----------------|--------------|
@@ -110,6 +120,7 @@ fn has_abba(s: &str) -> bool {
 ---
 
 ## Rust 2024 Edition 权威来源
+> **[来源: Rust Official Docs]**
 
 ### 官方文档
 

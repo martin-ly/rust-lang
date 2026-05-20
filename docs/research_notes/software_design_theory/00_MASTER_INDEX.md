@@ -8,8 +8,10 @@
 ---
 
 ## 一、层次化索引
+> **[来源: Rust Official Docs]**
 
 ### 1.1 理论层次
+> **[来源: Rust Official Docs]**
 
 ```text
 应用与边界层（本体系所在）
@@ -23,6 +25,7 @@
 ```
 
 ### 1.2 依赖关系
+> **[来源: Rust Official Docs]**
 
 本体系依赖以下已有形式化基础：
 
@@ -96,7 +99,7 @@
 | 层次 | 深化入口 | 新增/充实内容 |
 | :--- | :--- | :--- |
 | **L1 基础** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 23 模式均有 Def/定理/典型场景/反例；16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template）；RAII/Newtype/类型状态/Error handling/Cow |
-| **L2 选型** | [03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个场景→模式→代码；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI）；按需求反向查模式表 |
+| **L2 选型** | `03_semantic_boundary_map`、[05_boundary_system](05_boundary_system/README.md) | 5 个场景→模式→代码；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI）；按需求反向查模式表 |
 | **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | **验证工作流与检查清单**；**组合反例详解**；**三层架构完整示例**；**Builder+Factory+Repository、Decorator+Strategy+Observer 链条**；**执行模型 + 设计模式组合 4 例** |
 | **L4 实践** | [07_anti_patterns](07_anti_patterns.md) | 13 反例；5 个场景→反模式→正确写法；常见陷阱与规避 |
 
@@ -126,7 +129,7 @@
 | 行为 | Observer、Command、State |
 | 进阶 | Visitor、Chain、Mediator |
 
-选模式时：需求 → [03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md) 模式选取示例；判安全 → [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)。
+选模式时：需求 → `03_semantic_boundary_map` 模式选取示例；判安全 → [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md)。
 
 ---
 

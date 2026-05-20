@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🔄 Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
   - [📋 目录](#-目录)
@@ -67,8 +68,10 @@
 ---
 
 ## 🎯 条件语句
+> **[来源: Rust Official Docs]**
 
 ### if 表达式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本 if
@@ -101,6 +104,7 @@ let result = if condition {
 ```
 
 ### match 表达式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本 match
@@ -132,6 +136,7 @@ match value {
 ```
 
 ### if let 表达式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本 if let
@@ -153,6 +158,7 @@ if let Some(a) = option1 && let Some(b) = option2 {
 ```
 
 ### let-else 语句 (Rust 1.65+)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本 let-else
@@ -172,8 +178,10 @@ fn process(value: Option<i32>) -> i32 {
 ---
 
 ## 🔁 循环结构
+> **[来源: Rust Official Docs]**
 
 ### loop 循环
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 无限循环
@@ -194,6 +202,7 @@ let result = loop {
 ```
 
 ### while 循环
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本 while
@@ -208,6 +217,7 @@ while let Some(item) = iterator.next() {
 ```
 
 ### for 循环
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 遍历范围
@@ -237,6 +247,7 @@ for (index, value) in vec.iter().enumerate() {
 ```
 
 ### 循环控制
+> **[来源: Rust Official Docs]**
 
 ```rust
 // break 和 continue

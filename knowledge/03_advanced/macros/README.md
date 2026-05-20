@@ -5,6 +5,7 @@
 > **Rust 宏编程：声明式宏与过程宏**
 
 ## 📚 内容
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -12,11 +13,13 @@
 | [procedural.md](procedural.md) | 过程宏 (Derive/Attribute/Function-like) | ⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
+> **[来源: Rust Official Docs]**
 
 1. **声明式宏** → [declarative.md](declarative.md)
 2. **过程宏** → [procedural.md](procedural.md)
 
 ## 🚀 相关层
+> **[来源: Rust Official Docs]**
 
 - [03_advanced/type_driven_correctness.md](../type_driven_correctness.md) - 类型驱动设计
 - [06_ecosystem/emerging/generic_const_exprs.md](../../06_ecosystem/emerging/generic_const_exprs.md) - 类型级编程替代方案

@@ -7,14 +7,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档跟踪Rust安全关键系统领域的新兴技术、工具和发展趋势。
 
 ---
 
 ## 1. 语言特性趋势
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 2024 Edition
+> **[来源: Rust Official Docs]**
 
 ```
 已确认特性:
@@ -41,6 +44,7 @@
 ```
 
 ### 1.2 内存模型演进
+> **[来源: Rust Official Docs]**
 
 ```
 Tree Borrows:
@@ -58,6 +62,7 @@ Tree Borrows:
 ---
 
 ## 2. 工具链发展
+> **[来源: Rust Official Docs]**
 
 ### 2.1 编译器技术
 

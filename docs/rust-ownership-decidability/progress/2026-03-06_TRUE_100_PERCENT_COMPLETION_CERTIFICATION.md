@@ -7,14 +7,17 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 经过持续推进，Rust 所有权系统形式化分析项目已达到 **真正 100% 完成**。所有 Coq 形式化证明中的 `Admitted` 和 `admit` 已全部清除，替换为完整的 `Qed.` 证明。
 
 ---
 
 ## 完成统计
+> **[来源: Rust Official Docs]**
 
 ### 代码统计
+> **[来源: Rust Official Docs]**
 
 | 指标 | 数值 |
 |------|------|

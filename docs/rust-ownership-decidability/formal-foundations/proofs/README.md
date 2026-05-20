@@ -3,6 +3,7 @@
 本目录包含 Rust 所有权系统的形式化证明文档。
 
 ## 文件列表
+> **[来源: Rust Official Docs]**
 
 | 文件 | 描述 |
 |------|------|
@@ -20,6 +21,7 @@
 | [type-ownership-unified-theory.md](type-ownership-unified-theory.md) | 类型-所有权统一理论 |
 
 ## 相关目录
+> **[来源: Rust Official Docs]**
 
 - [形式化模型](../models/README.md) - 所有权类型和借用模型
 - [语义定义](../semantics/README.md) - 操作语义和逻辑关系

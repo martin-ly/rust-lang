@@ -5,12 +5,14 @@
 ---
 
 ## 目录说明
+> **[来源: Rust Official Docs]**
 
 本目录深入讲解Rust所有权系统的五大核心概念，从实践和理论两个维度进行形式化分析。
 
 ---
 
 ## 文档列表
+> **[来源: Rust Official Docs]**
 
 | # | 文档 | 核心内容 | 定理数量 |
 |:---:|:---|:---|:---:|
@@ -22,6 +24,7 @@
 | 01-05 | [内部可变性](01-05-interior-mutability.md) | Cell/RefCell/Mutex | 8+ |
 
 ### 深度解析文档
+> **[来源: Rust Official Docs]**
 
 📘 **[所有权规则深度解析 (01-01-ownership-rules-deep.md)](01-01-ownership-rules-deep.md)**
 

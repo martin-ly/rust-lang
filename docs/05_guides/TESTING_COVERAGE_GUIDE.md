@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
 
 - [测试覆盖率指南](#测试覆盖率指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -55,6 +57,8 @@
 ---
 
 ## 📋 概述 {#-概述}
+>
+> **[来源: Rust Official Docs]**
 
 本文档介绍如何测量和提高 Rust 项目的测试覆盖率，包括工具使用、最佳实践和覆盖率目标。
 
@@ -64,8 +68,12 @@
 ---
 
 ## 🚀 快速开始 {#-快速开始}
+>
+> **[来源: Rust Official Docs]**
 
 ### 安装覆盖率工具
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 cargo-tarpaulin
@@ -76,6 +84,8 @@ cargo install cargo-llvm-cov
 ```
 
 ### 运行覆盖率测试
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 使用 cargo-tarpaulin
@@ -88,8 +98,12 @@ cargo llvm-cov --html
 ---
 
 ## 📊 覆盖率工具 {#-覆盖率工具}
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. cargo-tarpaulin
+>
+> **[来源: Rust Official Docs]**
 
 **特点**:
 
@@ -114,6 +128,8 @@ cargo tarpaulin --fail-under 80
 ```
 
 ### 2. cargo-llvm-cov
+>
+> **[来源: Rust Official Docs]**
 
 **特点**:
 
@@ -140,8 +156,12 @@ cargo llvm-cov --exclude '*/tests/*'
 ---
 
 ## 🎯 覆盖率目标 {#-覆盖率目标}
+>
+> **[来源: Rust Official Docs]**
 
 ### 推荐覆盖率
+>
+> **[来源: Rust Official Docs]**
 
 | 模块类型     | 行覆盖率 | 分支覆盖率 | 函数覆盖率 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -150,6 +170,8 @@ cargo llvm-cov --exclude '*/tests/*'
 | **测试代码** | 70%+     | 60%+       | 80%+       |
 
 ### 当前项目覆盖率
+>
+> **[来源: Rust Official Docs]**
 
 根据最新测试结果：
 

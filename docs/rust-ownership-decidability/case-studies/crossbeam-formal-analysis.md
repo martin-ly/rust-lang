@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Crossbeam 并发原语形式化分析](#crossbeam-并发原语形式化分析)
   - [目录](#目录)
@@ -56,6 +57,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Crossbeam是Rust生态中最重要的并发原语库，提供:
 
@@ -69,6 +71,7 @@ Crossbeam是Rust生态中最重要的并发原语库，提供:
 ---
 
 ## 2. Epoch-Based Reclamation (EBR)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 内存回收问题
 

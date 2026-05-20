@@ -4,6 +4,7 @@
 > **形式化参考**: RustBelt Lifetime Logic, Oxide
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust生命周期：理论与实践](#rust生命周期理论与实践)
   - [目录](#目录)
@@ -38,8 +39,10 @@
   - [参考文献](#参考文献)
 
 ## 1. 生命周期的本质
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是生命周期？
+> **[来源: Rust Official Docs]**
 
 生命周期（Lifetime）是Rust借用检查器的核心概念，它跟踪引用的有效范围。
 

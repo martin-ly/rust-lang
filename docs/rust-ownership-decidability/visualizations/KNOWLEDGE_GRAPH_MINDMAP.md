@@ -5,6 +5,7 @@
 ---
 
 ## 1. 核心概念思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -66,6 +67,7 @@ mindmap
 ---
 
 ## 2. 定理依赖网络图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TB
@@ -126,6 +128,7 @@ graph TB
 ---
 
 ## 3. 学习路径决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD

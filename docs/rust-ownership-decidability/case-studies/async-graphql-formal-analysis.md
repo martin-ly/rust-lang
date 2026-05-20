@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Async-GraphQL 形式化分析](#async-graphql-形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 async-graphql提供:
 
@@ -40,6 +42,7 @@ async-graphql提供:
 ---
 
 ## 2. Schema定义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (派生宏生成)
 

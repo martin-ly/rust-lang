@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Parking\_lot 同步原语形式化分析](#parking_lot-同步原语形式化分析)
   - [目录](#目录)
@@ -59,6 +60,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
 
@@ -70,6 +72,7 @@ parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
 ---
 
 ## 2. Mutex实现形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Word-size Mutex
 

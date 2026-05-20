@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
   - [📋 目录](#-目录)
@@ -34,10 +35,12 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表达式**，超越了简单的整数常量。
 
 ### 为什么需要这个特性？
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 当前限制: 只能使用简单的常量参数
@@ -57,8 +60,10 @@ where
 ---
 
 ## 💡 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 常量表达式泛型
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(generic_const_exprs)]
@@ -97,8 +102,10 @@ let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 ---
 
 ## 📐 语法详解
+> **[来源: Rust Official Docs]**
 
 ### 基础用法
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(generic_const_exprs)]
@@ -127,6 +134,7 @@ where
 ```
 
 ### 复杂表达式
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(generic_const_exprs)]
@@ -152,6 +160,7 @@ let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 ```
 
 ### 类型级计算
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(generic_const_exprs)]
@@ -177,8 +186,10 @@ where
 ---
 
 ## 🚀 实际应用
+> **[来源: Rust Official Docs]**
 
 ### 编译时矩阵运算
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(generic_const_exprs)]

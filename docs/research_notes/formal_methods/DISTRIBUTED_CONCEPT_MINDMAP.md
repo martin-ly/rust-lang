@@ -8,6 +8,7 @@
 ---
 
 ## 全局思维导图
+> **[来源: Rust Official Docs]**
 
 ```text
                           分布式模式概念族
@@ -37,8 +38,10 @@
 ---
 
 ## 详细概念族谱
+> **[来源: Rust Official Docs]**
 
 ### 1. Saga 模式族
+> **[来源: Rust Official Docs]**
 
 ```text
                             Saga模式

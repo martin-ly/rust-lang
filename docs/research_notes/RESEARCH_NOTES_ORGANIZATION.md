@@ -9,6 +9,7 @@
 ---
 
 ## 一、梳理目标
+> **[来源: Rust Official Docs]**
 
 1. **结构透明**：实际目录与文件清单与 README/INDEX 一致
 2. **归档清晰**：已归档项（Aeneas、coq-of-rust、coq_skeleton）入口统一指向 archive
@@ -18,6 +19,7 @@
 ---
 
 ## 二、实际目录结构（当前）
+> **[来源: Rust Official Docs]**
 
 ```text
 research_notes/
@@ -86,6 +88,7 @@ research_notes/
 ---
 
 ## 三、归档约定
+> **[来源: Rust Official Docs]**
 
 以下内容**已归档**，本目录内仅保留重定向或索引说明：
 

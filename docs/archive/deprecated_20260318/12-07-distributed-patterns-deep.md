@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [分布式系统模式深度解析](#分布式系统模式深度解析)
   - [目录](#目录)
@@ -56,12 +57,15 @@
 ---
 
 ## 1. 分布式系统理论基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 CAP 定理形式化
+> **[来源: Rust Official Docs]**
 
 CAP 定理指出，在分布式数据存储系统中，**一致性 (Consistency)**、**可用性 (Availability)**、**分区容错性 (Partition Tolerance)** 这三个属性最多只能同时满足其中两个。
 
 #### 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -84,6 +88,7 @@ CAP 定理指出，在分布式数据存储系统中，**一致性 (Consistency)
 ```
 
 #### Rust 实现：CAP 策略框架
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::Arc;
@@ -303,6 +308,7 @@ pub enum Scenario {
 ```
 
 #### Counter-Example: 错误配置导致的 CAP 冲突
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// ❌ Counter-Example: 违反 CAP 原则的配置
@@ -330,10 +336,12 @@ fn good_cp_config() -> Result<CAPConfig, CAPError> {
 ```
 
 ### 1.2 网络故障模型
+> **[来源: Rust Official Docs]**
 
 分布式系统中的故障比单机系统复杂得多。理解故障模型是设计容错系统的基础。
 
 #### 故障类型分类
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::time::{Duration, Instant};
@@ -478,6 +486,7 @@ impl FailureDetector {
 ```
 
 #### Rust 的 Result 类型在分布式故障处理中的应用
+> **[来源: Rust Official Docs]**
 
 ```rust
 use thiserror::Error;
@@ -553,8 +562,10 @@ where
 ---
 
 ## 2. 共识模式
+> **[来源: Rust Official Docs]**
 
 ### 2.1 两阶段提交 (2PC)
+> **[来源: Rust Official Docs]**
 
 两阶段提交是一种经典的分布式事务协议，确保跨多个节点的操作要么全部成功，要么全部失败。
 
@@ -2901,3 +2912,7 @@ impl KVStore for KVStoreServerImpl {
 *文档版本: 1.0.0*
 *Rust 版本: 1.94*
 *最后更新: 2026-03-06*
+
+---
+
+> **权威来源**: Rust Official Docs

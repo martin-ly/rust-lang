@@ -7,6 +7,7 @@
 ---
 
 ## 概念层次结构
+> **[来源: Rust Official Docs]**
 
 ```text
                             泛型与Trait系统
@@ -25,6 +26,7 @@
 ---
 
 ## Trait类型详解
+> **[来源: Rust Official Docs]**
 
 ```text
 Trait分类
@@ -54,6 +56,7 @@ Trait分类
 ---
 
 ## 泛型约束
+> **[来源: Rust Official Docs]**
 
 ```text
 约束形式

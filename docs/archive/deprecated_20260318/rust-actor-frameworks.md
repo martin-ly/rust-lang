@@ -5,6 +5,7 @@
 ---
 
 ## 1. Rust Actor生态概览
+> **[来源: Rust Official Docs]**
 
 ```text
 Rust Actor框架全景:
@@ -31,8 +32,10 @@ Rust Actor框架全景:
 ---
 
 ## 2. Actix 深度解析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 核心API
+> **[来源: Rust Official Docs]**
 
 ```rust
 use actix::prelude::*;

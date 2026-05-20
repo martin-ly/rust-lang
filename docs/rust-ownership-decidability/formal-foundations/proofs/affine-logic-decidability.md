@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [仿射逻辑可判定性证明](#仿射逻辑可判定性证明)
   - [目录](#目录)
@@ -42,8 +43,10 @@
 ---
 
 ## 1. 背景与动机
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是仿射逻辑
+> **[来源: Rust Official Docs]**
 
 仿射逻辑(Affine Logic)是线性逻辑(Linear Logic)的一个变体，允许**弱化(Weakening)**但不允许**收缩(Contraction)**。这意味着：
 

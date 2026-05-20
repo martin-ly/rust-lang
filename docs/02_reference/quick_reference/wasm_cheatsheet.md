@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [WASM 快速参考卡片](#wasm-快速参考卡片)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -52,8 +53,10 @@
 ---
 
 ## 🚀 快速开始 {#-快速开始}
+> **[来源: Rust Official Docs]**
 
 ### 基本设置
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 wasm-pack
@@ -64,6 +67,7 @@ wasm-pack new my-wasm-project
 ```
 
 ### 基本函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -77,8 +81,10 @@ pub fn add(a: i32, b: i32) -> i32 {
 ---
 
 ## 📋 常用 API {#-常用-api}
+> **[来源: Rust Official Docs]**
 
 ### JavaScript 互操作
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[wasm_bindgen]
@@ -91,6 +97,7 @@ extern "C" {
 ```
 
 ### 处理对象
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[wasm_bindgen]
@@ -109,6 +116,7 @@ impl Person {
 ```
 
 ### 异步函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 use wasm_bindgen_futures::JsFuture;
@@ -124,8 +132,10 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 ---
 
 ## 🔧 编译配置 {#-编译配置}
+> **[来源: Rust Official Docs]**
 
 ### Cargo.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [lib]
@@ -139,6 +149,7 @@ web-sys = { version = "0.3", features = ["Window"] }
 ```
 
 ### 编译命令
+> **[来源: Rust Official Docs]**
 
 ```bash
 # Web 目标

@@ -7,12 +7,14 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 使用Rust创建一个高性能的HTTP Web服务器。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 - [ ] HTTP/1.1协议支持
 - [ ] 路由系统
@@ -24,6 +26,7 @@
 ---
 
 ## 学习要点
+> **[来源: Rust Official Docs]**
 
 ### HTTP解析
 

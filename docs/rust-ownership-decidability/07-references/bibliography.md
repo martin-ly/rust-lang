@@ -1,6 +1,7 @@
 # 参考文献
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [参考文献](#参考文献)
   - [目录](#目录)
@@ -20,8 +21,10 @@
     - [按复杂度](#按复杂度)
 
 ## 核心文献
+> **[来源: Rust Official Docs]**
 
 ### 线性逻辑与类型理论
+> **[来源: Rust Official Docs]**
 
 1. **Girard, J.-Y.** (1987). Linear Logic. *Theoretical Computer Science*, 50:1-102.
    - 线性逻辑的开创性论文

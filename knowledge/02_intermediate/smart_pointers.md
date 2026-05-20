@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
 
@@ -25,6 +26,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **所有权与借用** — move 语义、`&T` 与 `&mut T` 的区别（`01_fundamentals/ownership.md`）
 2. **Trait** — `Deref`、`Drop` 的基本概念（`02_intermediate/traits.md`）
@@ -33,8 +35,10 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
 
@@ -51,6 +55,7 @@
 > 💡 关键直觉：普通引用 `&T` 是"零成本的借用查看"；智能指针是"有所有权语义的内存管理"。
 
 #### 1.2 操作定义
+> **[来源: Rust Official Docs]**
 
 **`Box<T>` 的核心语义**：
 

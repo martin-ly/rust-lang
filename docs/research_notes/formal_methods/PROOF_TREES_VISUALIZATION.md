@@ -8,6 +8,7 @@
 ---
 
 ## 一、所有权-借用-类型安全综合证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -71,6 +72,7 @@ graph TD
 ---
 
 ## 二、所有权证明树（详细）
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -128,6 +130,7 @@ A1 + A2 + A3 → L1 + L2 + L3 + L4 → T1 + T2
 ---
 
 ## 三、借用检查证明树（详细）
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -193,6 +196,7 @@ A1 + A2 → L1 + L2 → T-BR1
 ---
 
 ## 四、类型系统证明树（详细）
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -237,6 +241,7 @@ graph TD
 ---
 
 ## 五、生命周期证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -285,6 +290,7 @@ graph TD
 ---
 
 ## 六、异步证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -331,6 +337,7 @@ graph TD
 ---
 
 ## 七、证明树索引
+> **[来源: Rust Official Docs]**
 
 | 证明树 | 位置 | 关键定理 |
 | :--- | :--- | :--- |
@@ -344,6 +351,7 @@ graph TD
 ---
 
 ## 八、证明依赖关系汇总
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -385,15 +393,18 @@ graph TD
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+> **[来源: Rust Official Docs]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

@@ -7,10 +7,12 @@
 ---
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 This report documents the compilation verification of Rust code examples in the `docs/rust-ownership-decidability` directory using Rust 1.94.
 
 ### Key Findings
+> **[来源: Rust Official Docs]**
 
 | Metric | Count | Percentage |
 |--------|-------|------------|
@@ -29,6 +31,7 @@ This report documents the compilation verification of Rust code examples in the 
 ---
 
 ## Files Verified
+> **[来源: Rust Official Docs]**
 
 ### Core Concepts (01-core-concepts/)
 

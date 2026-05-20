@@ -7,6 +7,7 @@
 ---
 
 ## 📍 核心入口
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 个人知识总导航
@@ -16,8 +17,10 @@ docs/MY_PERSONAL_INDEX.md
 ---
 
 ## 🛠️ 立即可用的工具
+> **[来源: Rust Official Docs]**
 
 ### 1. 全文搜索 🔍
+> **[来源: Rust Official Docs]**
 
 ```bash
 ./tools/knowledge_search.sh "所有权"
@@ -35,6 +38,7 @@ docs/MY_PERSONAL_INDEX.md
 ---
 
 ### 2. 每日回顾 📅
+> **[来源: Rust Official Docs]**
 
 ```bash
 ./tools/daily_review.sh
@@ -51,6 +55,7 @@ docs/MY_PERSONAL_INDEX.md
 ---
 
 ### 3. 概念查找 🎯
+> **[来源: Rust Official Docs]**
 
 ```bash
 ./tools/concept_lookup.sh "lifetime"
@@ -68,8 +73,10 @@ docs/MY_PERSONAL_INDEX.md
 ---
 
 ## 📚 快速参考卡片
+> **[来源: Rust Official Docs]**
 
 ### 常用速查
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 所有权系统
@@ -87,8 +94,10 @@ docs/quick_reference/type_system.md
 ---
 
 ## 📖 深入学习路径
+> **[来源: Rust Official Docs]**
 
 ### 按模块
+> **[来源: Rust Official Docs]**
 
 ```text
 C01 所有权:  crates/c01_ownership_borrow_scope/
@@ -99,6 +108,7 @@ C11 宏系统:  crates/c11_macro_system/
 ```
 
 ### 按场景
+> **[来源: Rust Official Docs]**
 
 参考 `docs/MY_PERSONAL_INDEX.md` 的场景导航：
 
@@ -109,6 +119,7 @@ C11 宏系统:  crates/c11_macro_system/
 ---
 
 ## 📝 研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 创建新笔记
 

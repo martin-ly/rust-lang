@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Deadpool 异步连接池形式化分析](#deadpool-异步连接池形式化分析)
   - [目录](#目录)
@@ -30,6 +31,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Deadpool提供:
 
@@ -41,6 +43,7 @@ Deadpool提供:
 ---
 
 ## 2. 池状态机
+> **[来源: Rust Official Docs]**
 
 ### 定义 2.1 (Pool状态)
 

@@ -7,14 +7,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本检查表提供安全关键Rust开发各阶段的系统化验证清单，确保符合功能安全标准要求。
 
 ---
 
 ## 项目启动检查表
+> **[来源: Rust Official Docs]**
 
 ### 安全计划
+> **[来源: Rust Official Docs]**
 
 - [ ] 定义项目安全范围
 - [ ] 确定适用的ASIL/SIL等级
@@ -28,6 +31,7 @@
 - [ ] 建立变更管理流程
 
 ### 团队准备
+> **[来源: Rust Official Docs]**
 
 - [ ] 团队成员功能安全培训完成
 - [ ] Rust安全关键开发培训完成
@@ -39,6 +43,7 @@
 - [ ] 建立代码审查流程
 
 ### 工具链准备
+> **[来源: Rust Official Docs]**
 
 - [ ] 选择预认证编译器 (Ferrocene/qualified)
 - [ ] 配置Clippy规则集

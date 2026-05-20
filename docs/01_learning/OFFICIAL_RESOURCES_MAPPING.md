@@ -9,6 +9,7 @@
 ---
 
 ## 官方资源入口
+> **[来源: Rust Official Docs]**
 
 | 资源 | URL | 说明 |
 | :--- | :--- | :--- |
@@ -26,6 +27,7 @@
 ---
 
 ## 模块 → 官方章节映射
+> **[来源: Rust Official Docs]**
 
 | 项目模块 | 本项目路径 | The Rust Book | RBE 练习（可点击） | Reference |
 | :--- | :--- | :--- | :--- | :--- |
@@ -44,10 +46,13 @@
 ---
 
 ## 小节级精确映射
+> **[来源: Rust Official Docs]**
 
 ### The Rust Book Ch 1-22 详细映射
+> **[来源: Rust Official Docs]**
 
 #### 第1章：Getting Started
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -56,12 +61,14 @@
 | 1.3 Hello, Cargo! | Cargo 基础、构建运行 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | 补充 Cargo.toml 全字段参考 |
 
 #### 第2章：Programming a Guessing Game
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 完整章节 | 猜数字游戏完整实现 | `examples/guessing_game/` 示例 | 代码解析 + 扩展练习 |
 
 #### 第3章：Common Programming Concepts
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -72,6 +79,7 @@
 | 3.5 Control Flow | if、loop、while、for | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 控制流 | 控制流决策树 |
 
 #### 第4章：Understanding Ownership
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -80,6 +88,7 @@
 | 4.3 The Slice Type | 切片、字符串 slice | `crates/c02_type_system/src/slice_examples.rs` | 切片边界检查分析 |
 
 #### 第5章：Using Structs
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -88,6 +97,7 @@
 | 5.3 Methods | 方法定义、关联函数 | [type_system](../02_reference/quick_reference/type_system.md) § Methods | 方法解析规则 |
 
 #### 第6章：Enums and Pattern Matching
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -96,6 +106,7 @@
 | 6.3 Concise Control Flow with if let and let else | if let、let-else | `crates/c03_control_fn/src/` | 模式匹配决策树 |
 
 #### 第7章：Packages, Crates, and Modules
+> **[来源: Rust Official Docs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|

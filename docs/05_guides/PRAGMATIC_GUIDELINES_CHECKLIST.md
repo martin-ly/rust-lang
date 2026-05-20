@@ -7,6 +7,8 @@
 ---
 
 ## 清单使用说明
+>
+> **[来源: Rust Official Docs]**
 
 在代码审查（Code Review）或自我检查时使用此清单。每条指南标注：
 
@@ -17,8 +19,12 @@
 ---
 
 ## 1. 安全 (Safety)
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Unsafe 代码管理
+>
+> **[来源: Rust Official Docs]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -199,6 +205,7 @@
 - [GOOGLE_RUST_MAPPING.md](../01_learning/GOOGLE_RUST_MAPPING.md) - Google 课程映射
 - [BEST_PRACTICES.md](./BEST_PRACTICES.md) - 生产实践指南
 - [exercises/README.md](../../exercises/README.md) - 练习题入口
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

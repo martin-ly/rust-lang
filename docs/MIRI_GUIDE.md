@@ -3,6 +3,7 @@
 本文档介绍如何在项目中使用 Miri 进行内存安全测试。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Miri 使用指南](#miri-使用指南)
   - [目录](#目录)
@@ -33,6 +34,7 @@
   - [更多资源](#更多资源)
 
 ## 什么是 Miri
+> **[来源: Rust Official Docs]**
 
 Miri (Mid-level Intermediate Representation Interpreter) 是 Rust 的官方解释器，用于检测代码中的**未定义行为 (Undefined Behavior, UB)**。
 
@@ -46,6 +48,7 @@ Miri 可以检测的问题：
 - **类型违规**: 违反 Rust 类型系统的操作
 
 ## 安装 Miri
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 添加 Miri 组件
@@ -56,8 +59,10 @@ cargo miri setup
 ```
 
 ## 运行 Miri 测试
+> **[来源: Rust Official Docs]**
 
 ### 使用脚本运行
+> **[来源: Rust Official Docs]**
 
 ```bash
 # Linux/macOS
@@ -68,6 +73,7 @@ scripts\run-miri.bat
 ```
 
 ### 手动运行
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有 Miri 测试
@@ -84,16 +90,19 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 ```
 
 ## Tree Borrows vs Stacked Borrows
+> **[来源: Rust Official Docs]**
 
 Miri 支持两种别名模型来检查内存访问的有效性：
 
 ### Stacked Borrows (默认)
+> **[来源: Rust Official Docs]**
 
 - 更严格的模型
 - 基于栈的借用跟踪
 - 与某些合法的 unsafe 模式不兼容
 
 ### Tree Borrows (推荐)
+> **[来源: Rust Official Docs]**
 
 - 更灵活的模型
 - 基于树的借用关系
@@ -107,6 +116,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
 ### 关键区别示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut x = 0;
@@ -120,6 +130,7 @@ let z = &mut *y;     // 重新借用
 在 Tree Borrows 中，重新借用创建的是**父子关系**，使用父引用是允许的。而在 Stacked Borrows 中，这会破坏借用栈。
 
 ## 配置 Miri
+> **[来源: Rust Official Docs]**
 
 ### 项目配置
 

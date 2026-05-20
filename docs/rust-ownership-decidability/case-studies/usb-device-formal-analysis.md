@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [USB-Device协议栈形式化分析](#usb-device协议栈形式化分析)
   - [目录](#目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 usb-device为嵌入式USB设备提供：
 
@@ -47,6 +49,7 @@ usb-device为嵌入式USB设备提供：
 ---
 
 ## 2. USB状态机
+> **[来源: Rust Official Docs]**
 
 ### 定义 USB-STATE-1 ( 设备状态 )
 

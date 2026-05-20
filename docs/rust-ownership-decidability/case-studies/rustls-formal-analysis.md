@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rustls TLS实现形式化分析](#rustls-tls实现形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 rustls提供:
 
@@ -39,6 +41,7 @@ rustls提供:
 ---
 
 ## 2. TLS状态机
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (协议状态严格性)
 

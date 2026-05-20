@@ -1,6 +1,7 @@
 # 07 同步合并模式 (Synchronizing Merge)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [07 同步合并模式 (Synchronizing Merge)](#07-同步合并模式-synchronizing-merge)
   - [📋 目录](#-目录)
@@ -23,11 +24,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 同步合并模式等待所有活跃分支完成后才继续执行。
 它与简单合并的区别在于能够正确处理多路选择产生的动态分支数。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{SyncMerge}(P_1, P_2, \ldots, P_n) =

@@ -5,8 +5,10 @@
 ---
 
 ## 1. 类型系统前沿
+> **[来源: Rust Official Docs]**
 
 ### 1.1 泛型关联类型 (GATs)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // GATs已稳定 (Rust 1.65+)
@@ -43,6 +45,7 @@ impl<T> LendingIterator for Windows<T> {
 ```
 
 ### 1.2 特化 (Specialization)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不稳定特性: #![feature(specialization)]
@@ -75,6 +78,7 @@ impl<T> Process for Vec<T> {
 ```
 
 ### 1.3 常量泛型与常量求值
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 常量泛型 (已稳定)
@@ -118,8 +122,10 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
 ---
 
 ## 2. 验证与形式化方法
+> **[来源: Rust Official Docs]**
 
 ### 2.1 新一代验证工具
+> **[来源: Rust Official Docs]**
 
 | 工具 | 状态 | 特点 | 目标 |
 |:---:|:---:|:---|:---|
@@ -130,6 +136,7 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
 | **hax** | 研究 | F*/Coq提取 | 高保证代码 |
 
 ### 2.2 Verus示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Verus: 用于系统验证
@@ -170,6 +177,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 ```
 
 ### 2.3 幽灵类型与证明携带代码
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 幽灵类型标记 (标记类型，运行时无开销)
@@ -204,8 +212,10 @@ impl<T> Verified<T> {
 ---
 
 ## 3. 异步生态系统演进
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Async Traits
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 已稳定: Rust 1.75
@@ -233,6 +243,7 @@ async fn process<R: AsyncRead>(mut reader: R) -> Result<Vec<u8>> {
 ```
 
 ### 3.2 异步迭代器 (Async Iterator)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不稳定: #![feature(async_iterator)]

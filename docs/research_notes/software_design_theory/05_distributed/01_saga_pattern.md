@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def S1: Saga
+> **[来源: Rust Official Docs]**
 
 Saga 是一种**长事务管理模式**，它将一个长事务分解为一系列**本地事务**（Local Transactions），每个本地事务有对应的**补偿操作**（Compensating Transaction）。
 
@@ -22,6 +24,7 @@ Saga := (T, C, ≺, σ)
 ```
 
 ### Def S2: Saga 执行状态
+> **[来源: Rust Official Docs]**
 
 ```text
 State(Saga) :=

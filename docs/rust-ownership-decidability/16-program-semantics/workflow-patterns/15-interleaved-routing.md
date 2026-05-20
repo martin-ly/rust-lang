@@ -1,6 +1,7 @@
 # 15 交错路由模式 (Interleaved Routing)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [15 交错路由模式 (Interleaved Routing)](#15-交错路由模式-interleaved-routing)
   - [📋 目录](#-目录)
@@ -27,11 +28,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 交错路由模式允许多个活动以任意顺序执行，但任意时刻只有一个活动处于活跃状态。
 与真正的并行不同，这是一种串行化的伪并行。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Interleaved}(A_1, A_2, \ldots, A_n) = \text{shuffle}(A_1, A_2, \ldots, A_n)

@@ -6,10 +6,12 @@
 ---
 
 ## 1. 什么是模糊测试（Fuzzing）？
+> **[来源: Rust Official Docs]**
 
 模糊测试是一种自动化的软件测试技术，通过向程序输入大量随机或半随机的数据，来发现崩溃、断言失败、内存错误等异常行为。
 
 ### 为什么 Rust 需要 Fuzzing？
+> **[来源: Rust Official Docs]**
 
 Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍可能出现问题：
 
@@ -25,6 +27,7 @@ Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍
 ---
 
 ## 2. 工具链安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 cargo-fuzz（需要 nightly Rust）

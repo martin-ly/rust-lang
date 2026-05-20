@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Lapin/RDKafka 消息队列形式化分析](#lapinrdkafka-消息队列形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 消息队列客户端:
 
@@ -37,6 +39,7 @@
 ---
 
 ## 2. AMQP语义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (确认模式)
 

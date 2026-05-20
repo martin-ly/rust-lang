@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [async-std 运行时形式化分析](#async-std-运行时形式化分析)
   - [目录](#目录)
@@ -54,6 +55,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 async-std是一个提供标准库风格API的异步运行时:
 
@@ -65,6 +67,7 @@ async-std是一个提供标准库风格API的异步运行时:
 ---
 
 ## 2. 与std API对应关系
+> **[来源: Rust Official Docs]**
 
 ### 2.1 API兼容性形式化
 

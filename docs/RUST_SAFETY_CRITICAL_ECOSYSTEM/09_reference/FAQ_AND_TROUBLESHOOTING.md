@@ -1,6 +1,7 @@
 # Rust安全关键系统 - 常见问题与故障排除
 
 ## 快速导航
+> **[来源: Rust Official Docs]**
 
 - [入门问题](#入门问题)
 - [技术问题](#技术问题)
@@ -12,8 +13,10 @@
 ---
 
 ## 入门问题
+> **[来源: Rust Official Docs]**
 
 ### Q1: 我们现有的C/C++项目可以迁移到Rust吗？
+> **[来源: Rust Official Docs]**
 
 **A:** 可以，推荐渐进式迁移策略：
 
@@ -32,6 +35,7 @@ Phase 4 (24月+): 完全迁移或保持混合架构
 ```
 
 ### Q2: Rust的学习曲线如何？团队需要多长时间才能上手？
+> **[来源: Rust Official Docs]**
 
 **A:** 根据背景不同：
 
@@ -44,6 +48,7 @@ Phase 4 (24月+): 完全迁移或保持混合架构
 建议：投入20%工作时间学习，配合导师指导
 
 ### Q3: 认证工具链（Ferrocene）的成本是多少？
+> **[来源: Rust Official Docs]**
 
 **A:** 成本结构（估算）：
 
@@ -60,8 +65,10 @@ ROI：通常2-3年通过减少bug和加速开发收回成本
 ---
 
 ## 技术问题
+> **[来源: Rust Official Docs]**
 
 ### Q4: Rust能保证100%没有内存安全漏洞吗？
+> **[来源: Rust Official Docs]**
 
 **A:**
 
@@ -86,6 +93,7 @@ unsafe fn unsafe_code(ptr: *mut u8) {
 统计数据：Rust代码的内存安全bug比C/C++少约95%
 
 ### Q5: 如何处理C库集成（FFI）？
+> **[来源: Rust Official Docs]**
 
 **A:** 最佳实践：
 
@@ -135,6 +143,7 @@ impl Drop for SafeWrapper {
 ```
 
 ### Q6: 实时系统中Rust的延迟如何？
+> **[来源: Rust Official Docs]**
 
 **A:** Rust适用于硬实时系统：
 
@@ -150,8 +159,10 @@ impl Drop for SafeWrapper {
 ---
 
 ## 认证问题
+> **[来源: Rust Official Docs]**
 
 ### Q7: 使用Rust能否达到ASIL D？
+> **[来源: Rust Official Docs]**
 
 **A:** 可以，使用认证工具链：
 

@@ -10,6 +10,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 编译器错误码映射文档](#rust-编译器错误码映射文档)
   - [目录](#目录)
@@ -97,6 +98,7 @@
 ---
 
 ## 简介
+> **[来源: Rust Official Docs]**
 
 本文档提供 Rust 编译器错误码的详细映射，帮助开发者：
 
@@ -106,6 +108,7 @@
 - **深入学习**: 链接到相关的概念文档和形式化理论
 
 ### 使用方式
+> **[来源: Rust Official Docs]**
 
 1. 在编译错误信息中找到 `error[EXXXX]` 格式的错误码
 2. 在本文档中搜索该错误码（如 `E0382`）
@@ -115,6 +118,7 @@
 ---
 
 ## 错误码快速索引
+> **[来源: Rust Official Docs]**
 
 | 错误码范围 | 类别 | 常见错误码 |
 |:---|:---|:---|
@@ -132,8 +136,10 @@
 ---
 
 ## 借用检查错误 (E01xx-E05xx)
+> **[来源: Rust Official Docs]**
 
 ### E0382 - 使用已移动的值
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `use of moved value` / `value borrowed here after move`
 
@@ -198,6 +204,7 @@ fn main() {
 ---
 
 ### E0383 - 部分移动
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `partial move` / `borrow of partially moved value`
 
@@ -270,6 +277,7 @@ fn main() {
 ---
 
 ### E0499 - 重复可变借用
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot borrow as mutable more than once at a time`
 
@@ -348,6 +356,7 @@ fn process(s: String) -> String {
 ---
 
 ### E0502 - 可变与不可变借用共存
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot borrow as immutable because it is borrowed as mutable`
 
@@ -417,6 +426,7 @@ fn main() {
 ---
 
 ### E0503 - 使用已移动的值（在借用后）
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot use because it was mutably borrowed` / `value used after move`
 
@@ -465,6 +475,7 @@ fn main() {
 ---
 
 ### E0505 - 在借用时移动
+> **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot move out of because it is borrowed`
 
@@ -626,6 +637,7 @@ fn main() {
 ---
 
 ## 类型系统错误 (E02xx-E03xx)
+> **[来源: Rust Official Docs]**
 
 ### E0277 - Trait 约束不满足
 
@@ -828,6 +840,7 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 ---
 
 ## 生命周期错误 (E05xx-E06xx)
+> **[来源: Rust Official Docs]**
 
 ### E0106 - 需要生命周期标注
 
@@ -1057,6 +1070,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 ---
 
 ## 所有权错误
+> **[来源: Rust Official Docs]**
 
 ### E0381 - 使用未初始化变量
 
@@ -1114,6 +1128,7 @@ fn main() {
 ---
 
 ## 模式匹配错误
+> **[来源: Rust Official Docs]**
 
 ### E0004 - 非穷尽模式匹配
 
@@ -1238,6 +1253,7 @@ fn bar(opt: Option<i32>) {
 ---
 
 ## 宏系统错误
+> **[来源: Rust Official Docs]**
 
 ### E0424 - self 使用错误
 
@@ -1336,6 +1352,7 @@ fn main() {
 ---
 
 ## 模块系统错误
+> **[来源: Rust Official Docs]**
 
 ### E0432 - 未解析的导入
 
@@ -1459,6 +1476,7 @@ pub use internal::secret;  // ✅ 重新导出
 ---
 
 ## 变量与可变性错误
+> **[来源: Rust Official Docs]**
 
 ### E0596 - 无法借用不可变变量为可变
 
@@ -1619,6 +1637,7 @@ fn main() {
 ---
 
 ## Trait 与泛型错误
+> **[来源: Rust Official Docs]**
 
 ### E0201 - 重复的 Trait 实现
 
@@ -1760,6 +1779,7 @@ trait Bar: Foo {}  // ✅ 单向约束
 ---
 
 ## 并发与异步错误
+> **[来源: Rust Official Docs]**
 
 ### E0373 - 闭包生命周期问题
 
@@ -1934,6 +1954,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ---
 
 ## 其他常见错误
+> **[来源: Rust Official Docs]**
 
 ### E0252 - 名称冲突
 
@@ -2405,3 +2426,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

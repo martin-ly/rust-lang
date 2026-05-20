@@ -7,14 +7,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统的部署、运维和长期维护的最佳实践。
 
 ---
 
 ## 1. 部署策略
+> **[来源: Rust Official Docs]**
 
 ### 1.1 部署流程
+> **[来源: Rust Official Docs]**
 
 ```
 预部署检查:
@@ -44,6 +47,7 @@
 ```
 
 ### 1.2 零停机部署
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 双分区OTA更新示例
@@ -102,6 +106,7 @@ impl DualPartitionManager {
 ---
 
 ## 2. 监控和遥测
+> **[来源: Rust Official Docs]**
 
 ### 2.1 运行时监控
 

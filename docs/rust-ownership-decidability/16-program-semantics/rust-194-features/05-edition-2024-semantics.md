@@ -1,11 +1,13 @@
 # Rust 2024 Edition 的新借用规则语义
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rust 2024 Edition 引入了多项重要的借用检查器改进，使得 Rust 的借用规则更加精确和灵活。
 这些变化旨在减少不必要的编译错误，同时保持 Rust 的核心安全保证。
 
 ### 1.1 什么是 Edition
+> **[来源: Rust Official Docs]**
 
 Rust 的 Edition 系统允许语言在不破坏向后兼容的情况下引入重大变化：
 
@@ -16,6 +18,7 @@ edition = "2024"
 ```
 
 ### 1.2 2024 Edition 的主要变化
+> **[来源: Rust Official Docs]**
 
 1. **更精确的借用分析**：更细粒度的借用跟踪
 2. **改进的闭包捕获**：更精确的闭包变量捕获

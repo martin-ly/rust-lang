@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究笔记系统总结](#研究笔记系统总结)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -63,10 +64,12 @@
 ---
 
 ## 🎯 系统概览 {#-系统概览}
+> **[来源: Rust Official Docs]**
 
 Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在记录和推进 Rust 相关的深入研究。
 
 ### 系统目标
+> **[来源: Rust Official Docs]**
 
 1. **理论研究**: 形式化方法和类型理论研究
 2. **实验研究**: 性能分析和优化实验
@@ -74,6 +77,7 @@ Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在
 4. **方法论**: 研究方法和工具指南
 
 ### 系统结构
+> **[来源: Rust Official Docs]**
 
 ```text
 research_notes/
@@ -87,8 +91,10 @@ research_notes/
 ---
 
 ## 📚 文档统计 {#-文档统计}
+> **[来源: Rust Official Docs]**
 
 ### 总体统计
+> **[来源: Rust Official Docs]**
 
 | 类别         | 数量 | 状态             |
 | :--- | :--- | :--- |
@@ -98,6 +104,7 @@ research_notes/
 | **总计**     | 46个 | -                |
 
 ### 核心文档详情
+> **[来源: Rust Official Docs]**
 
 1. **README.md** - 主索引和导航中心
 2. **INDEX.md** - 完整索引
@@ -128,8 +135,10 @@ research_notes/
 27. **CONTENT_ENHANCEMENT.md** - 研究笔记内容完善指南
 
 ### 研究笔记详情
+> **[来源: Rust Official Docs]**
 
 #### 形式化方法研究 (5个)
+> **[来源: Rust Official Docs]**
 
 | 文档 | 链接 | 关键定理 |
 | :--- | :--- | :--- |
@@ -140,6 +149,7 @@ research_notes/
 | pin_self_referential.md | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
 #### 类型理论研究 (5个)
+> **[来源: Rust Official Docs]**
 
 | 文档 | 链接 | 关键定义 |
 | :--- | :--- | :--- |
@@ -150,6 +160,7 @@ research_notes/
 | variance_theory.md | [type_theory/variance_theory.md](./type_theory/variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
 #### 实验研究 (5个)
+> **[来源: Rust Official Docs]**
 
 | 文档 | 链接 | 实验类型 |
 | :--- | :--- | :--- |

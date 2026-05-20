@@ -5,12 +5,14 @@
 ---
 
 ## 目录说明
+> **[来源: Rust Official Docs]**
 
 本目录包含实践练习，与09-exercises类似但可能有不同的组织方式。
 
 ---
 
 ## 与09-exercises的关系
+> **[来源: Rust Official Docs]**
 
 - `09-exercises`: 按难度组织的练习
 - `exercises`: 按主题组织的练习
@@ -18,6 +20,7 @@
 ---
 
 ## 练习列表
+> **[来源: Rust Official Docs]**
 
 | 文件 | 主题 | 难度 |
 |:---|:---|:---:|

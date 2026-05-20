@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust架构设计模式](#rust架构设计模式)
   - [目录](#目录)
@@ -39,8 +40,10 @@
 ---
 
 ## 1. 架构设计原则
+> **[来源: Rust Official Docs]**
 
 ### Rust架构哲学
+> **[来源: Rust Official Docs]**
 
 ```text
 1. 编译时保证 > 运行时检查
@@ -65,6 +68,7 @@
 ```
 
 ### 架构模式选择矩阵
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐架构 | Rust适用性 |
 |------|---------|-----------|
@@ -77,8 +81,10 @@
 ---
 
 ## 2. 分层架构
+> **[来源: Rust Official Docs]**
 
 ### 经典三层架构
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────┐
@@ -94,6 +100,7 @@
 ```
 
 ### Rust实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 // domain/mod.rs - 领域层
@@ -205,8 +212,10 @@ pub struct CreateUserRequest {
 ---
 
 ## 3. 六边形架构/端口适配器
+> **[来源: Rust Official Docs]**
 
 ### 架构图
+> **[来源: Rust Official Docs]**
 
 ```text
               ┌─────────────┐
@@ -231,6 +240,7 @@ pub struct CreateUserRequest {
 ```
 
 ### Rust实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ports.rs - 定义端口（trait）
@@ -357,6 +367,7 @@ async fn main() {
 ---
 
 ## 4. CQRS模式
+> **[来源: Rust Official Docs]**
 
 ### 架构分离
 

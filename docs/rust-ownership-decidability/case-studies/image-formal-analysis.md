@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Image 图像处理形式化分析](#image-图像处理形式化分析)
   - [目录](#目录)
@@ -30,6 +31,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 image crate提供:
 
@@ -41,6 +43,7 @@ image crate提供:
 ---
 
 ## 2. 图像缓冲区
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (缓冲区尺寸)
 

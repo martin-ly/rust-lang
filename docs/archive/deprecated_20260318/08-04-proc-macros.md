@@ -5,6 +5,7 @@
 > **更新**: Rust 1.94 proc_macro_span API 稳定 ⚡
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [过程宏开发深度指南](#过程宏开发深度指南)
   - [目录](#目录)
@@ -55,6 +56,7 @@
 ---
 
 ## 1. 宏系统概述
+> **[来源: Rust Official Docs]**
 
 Rust 的宏系统提供了一种元编程能力，允许在编译时生成代码。Rust 提供两种宏系统：
 
@@ -78,6 +80,7 @@ let v = vec_str!["hello", "world"];
 ```
 
 ### 过程宏类型
+> **[来源: Rust Official Docs]**
 
 | 类型 | 使用方式 | 典型用途 |
 |------|----------|----------|
@@ -88,8 +91,10 @@ let v = vec_str!["hello", "world"];
 ---
 
 ## 2. 声明宏（macro_rules!）
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基础语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! say_hello {
@@ -117,6 +122,7 @@ fn main() {
 ```
 
 ### 2.2 重复模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! vector {
@@ -148,6 +154,7 @@ let v4 = vector![1, 2, 3,];   // 带尾随逗号
 ```
 
 ### 2.3 高级模式匹配
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! complex_match {
@@ -185,6 +192,7 @@ complex_match!(use std::collections::HashMap);
 ```
 
 ### 2.4 递归宏
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! count_tts {
@@ -224,6 +232,7 @@ nested_struct!(Person {
 ```
 
 ### 2.5 卫生性与 hygiene
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! hygienic_macro {
@@ -252,8 +261,10 @@ macro_rules! unhygienic {
 ---
 
 ## 3. 过程宏基础
+> **[来源: Rust Official Docs]**
 
 ### 3.1 项目设置
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml
@@ -1693,3 +1704,7 @@ Rust 的宏系统是强大的元编程工具：
 - [proc-macro-workshop](https://github.com/dtolnay/proc-macro-workshop)
 - [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)
 - [Rust 1.94 Release Notes - Proc Macro](https://blog.rust-lang.org/)
+
+---
+
+> **权威来源**: Rust Official Docs

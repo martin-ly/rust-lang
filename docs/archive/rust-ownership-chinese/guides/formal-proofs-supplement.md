@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [形式化证明补充：借用安全性定理完整证明](#形式化证明补充借用安全性定理完整证明)
   - [目录](#目录)
@@ -40,8 +41,10 @@
 ---
 
 ## 前置定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化记号
+> **[来源: Rust Official Docs]**
 
 ```text
 表达式: e ::= x | v | &e | &mut e | *e | let x = e in e | e; e | ...
@@ -54,6 +57,7 @@
 ```
 
 ### 1.2 小步操作语义（部分规则）
+> **[来源: Rust Official Docs]**
 
 ```text
 [E-Var]
@@ -73,6 +77,7 @@
 ```
 
 ### 1.3 借用关系
+> **[来源: Rust Official Docs]**
 
 ```text
 定义：借用状态 B 是位置到借用类型的偏函数
@@ -86,6 +91,7 @@ B: Loc ⇀ {shared(n) | n > 0} ∪ {exclusive}
 ```
 
 ### 1.4 借用规则（运行时检查）
+> **[来源: Rust Official Docs]**
 
 ```text
 [BORROW-SHARED]
@@ -108,8 +114,10 @@ borrow_ok(failed, B) = false
 ---
 
 ## 借用安全性定理
+> **[来源: Rust Official Docs]**
 
 ### 定理陈述（Borrow Safety Theorem）
+> **[来源: Rust Official Docs]**
 
 ```text
 定理 1 (Borrow Safety):
@@ -128,6 +136,7 @@ borrow_ok(failed, B) = false
 ```
 
 ### 有效性定义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 (Valid Borrow State):
@@ -141,8 +150,10 @@ borrow_ok(failed, B) = false
 ---
 
 ## 证明结构
+> **[来源: Rust Official Docs]**
 
 ### 证明策略
+> **[来源: Rust Official Docs]**
 
 我们将使用**结构归纳法**和**步骤归纳法**：
 

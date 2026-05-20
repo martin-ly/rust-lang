@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [异步编程使用指南](#异步编程使用指南)
   - [📋 目录](#-目录)
@@ -70,6 +72,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍如何使用 C06 异步编程模块的功能，包括 async/await、Future、异步运行时、Reactor 模式、Actor 模式等。
 
@@ -81,8 +85,12 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ### 基本异步函数
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::time::{sleep, Duration};
@@ -100,6 +108,8 @@ async fn main() {
 ```
 
 ### 并发执行
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::time::{sleep, Duration, Instant};
@@ -130,8 +140,12 @@ async fn main() {
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Future Trait
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -159,8 +173,12 @@ async fn main() {
 ```
 
 ### 2. 异步运行时
+>
+> **[来源: Rust Official Docs]**
 
 #### Tokio 运行时
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::runtime::Runtime;
@@ -173,6 +191,8 @@ rt.block_on(async {
 ```
 
 #### 自定义运行时配置
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::runtime::Builder;
@@ -186,6 +206,8 @@ let rt = Builder::new_multi_thread()
 ```
 
 ### 3. 异步 I/O
+>
+> **[来源: Rust Official Docs]**
 
 #### 文件 I/O
 
@@ -347,6 +369,8 @@ assert_eq!(evens, vec![2, 4]);
 ---
 
 ## ⚡ 性能优化
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 使用 select! 宏
 
@@ -406,6 +430,8 @@ while let Some(value) = rx.recv().await {
 ---
 
 ## 🔧 错误处理
+>
+> **[来源: Rust Official Docs]**
 
 ### 异步错误传播
 
@@ -765,6 +791,8 @@ impl Response {
 ---
 
 ## 🏗️ 异步编程模式（5+ 完整示例）
+>
+> **[来源: Rust Official Docs]**
 
 ### 模式 1: 取消与超时处理
 
@@ -1031,6 +1059,8 @@ impl CircuitBreaker {
 ---
 
 ## 🌍 真实应用场景
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景 1: Web 服务器实现
 
@@ -1404,6 +1434,8 @@ use tokio::sync::RwLock;
 ---
 
 ## 🐛 常见问题与解决方案
+>
+> **[来源: Rust Official Docs]**
 
 ### 问题 1: 阻塞运行时
 
@@ -1552,6 +1584,8 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 ---
 
 ## 📚 相关文档
+>
+> **[来源: Rust Official Docs]**
 
 - [完整文档](../../crates/c06_async/README.md)
 - [异步编程指南](../../crates/c06_async/docs/tier_02_guides/01_异步编程快速入门.md)
@@ -1562,6 +1596,8 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 ---
 
 ## 🆕 Rust 1.95+ 特性
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -1678,6 +1714,8 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 ## 🔗 形式化引用
+>
+> **[来源: Rust Official Docs]**
 
 本指南中的概念与以下形式化定理/定义对应：
 
@@ -1707,3 +1745,7 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

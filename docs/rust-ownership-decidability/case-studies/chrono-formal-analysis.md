@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Chrono时间处理形式化分析](#chrono时间处理形式化分析)
   - [目录](#目录)
@@ -39,6 +40,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Chrono特点：
 
@@ -50,6 +52,7 @@ Chrono特点：
 ---
 
 ## 2. 时间点
+> **[来源: Rust Official Docs]**
 
 ### 定义 TIME-1 ( NaiveDateTime )
 

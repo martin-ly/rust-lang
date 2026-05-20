@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [2026年Rust开发生态全面梳理报告](#2026年rust开发生态全面梳理报告)
   - [📋 目录](#-目录)
@@ -76,8 +77,10 @@
 ---
 
 ## 🎯 执行摘要
+> **[来源: Rust Official Docs]**
 
 ### 当前Rust生态概况 (2026年3月)
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -92,6 +95,7 @@
 ```
 
 ### 关键更新领域
+> **[来源: Rust Official Docs]**
 
 | 领域 | 2025年状态 | 2026年状态 | 行动建议 |
 |------|-----------|-----------|----------|
@@ -104,10 +108,13 @@
 ---
 
 ## 📊 2026年Rust工具链现状
+> **[来源: Rust Official Docs]**
 
 ### 核心工具链
+> **[来源: Rust Official Docs]**
 
 #### 1. Rust编译器 (rustc)
+> **[来源: Rust Official Docs]**
 
 ```text
 版本: 1.94.0 (2026-03-02)
@@ -136,6 +143,7 @@ incremental-parallel = true
 ```
 
 #### 2. Cargo包管理器
+> **[来源: Rust Official Docs]**
 
 **新特性** (Cargo 1.94):
 
@@ -168,6 +176,7 @@ include = [
 ```
 
 #### 3. rust-analyzer (2026版)
+> **[来源: Rust Official Docs]**
 
 **增强功能**:
 
@@ -189,8 +198,10 @@ include = [
 ```
 
 ### 开发效率工具
+> **[来源: Rust Official Docs]**
 
 #### 1. Clippy (静态分析)
+> **[来源: Rust Official Docs]**
 
 **2026年最佳实践配置** (`.clippy.toml`或`clippy.toml`):
 

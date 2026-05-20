@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Diesel ORM类型安全形式化分析](#diesel-orm类型安全形式化分析)
   - [目录](#目录)
@@ -58,6 +59,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Diesel是一个类型安全的Rust ORM，它在编译时验证SQL查询的正确性：
 
@@ -87,6 +89,7 @@ dsl::users.filter(dsl::id.eq(1));
 ---
 
 ## 2. 数据库模式的形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 表作为类型
 

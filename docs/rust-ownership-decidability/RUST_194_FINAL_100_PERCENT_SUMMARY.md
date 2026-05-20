@@ -8,6 +8,7 @@
 ---
 
 ## 🎯 完成声明
+> **[来源: Rust Official Docs]**
 
 **rust-ownership-decidability 知识库与 Rust 1.94 的全面 alignment 已达到 100% 完成。**
 
@@ -21,8 +22,10 @@
 ---
 
 ## 📊 完成统计
+> **[来源: Rust Official Docs]**
 
 ### 总体指标
+> **[来源: Rust Official Docs]**
 
 | 指标 | 数值 | 状态 |
 |------|------|------|

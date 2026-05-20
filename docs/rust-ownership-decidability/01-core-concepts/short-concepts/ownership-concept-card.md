@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [所有权概念卡片 - 全面深度解析](#所有权概念卡片---全面深度解析)
   - [目录](#目录)
@@ -22,8 +23,10 @@
   - [5. 参考文献](#5-参考文献)
 
 ## 1. 概念定义 (Concept Definition)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 1.1 (所有权 Ownership)

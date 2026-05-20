@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
   - [📋 目录](#-目录)
@@ -42,10 +43,12 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设计。
 
 ### 核心特性
+> **[来源: Rust Official Docs]**
 
 | 特性 | 说明 |
 |------|------|
@@ -56,6 +59,7 @@ Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设
 | **关系支持** | 完整的一对多、多对多关系 |
 
 ### 适用场景
+> **[来源: Rust Official Docs]**
 
 ```
 Sea-ORM 适用场景:
@@ -69,8 +73,10 @@ Sea-ORM 适用场景:
 ---
 
 ## 🏗️ 架构设计
+> **[来源: Rust Official Docs]**
 
 ### 核心概念
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 实体 (Entity) - 对应数据库表
@@ -92,6 +98,7 @@ pub enum Relation {
 ```
 
 ### 与 Diesel/SQLx 对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | Sea-ORM | Diesel | SQLx |
 |------|---------|--------|------|
@@ -105,8 +112,10 @@ pub enum Relation {
 ---
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 安装配置
+> **[来源: Rust Official Docs]**
 
 ```toml
 [dependencies]
@@ -119,6 +128,7 @@ tokio = { version = "1", features = ["full"] }
 ```
 
 ### CLI 工具
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 Sea-ORM CLI
@@ -133,6 +143,7 @@ sea-orm-cli generate entity \
 ---
 
 ## 📐 实体定义
+> **[来源: Rust Official Docs]**
 
 ### 基本实体
 

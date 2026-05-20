@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [LRU/Cached 缓存形式化分析](#lrucached-缓存形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 缓存库提供:
 
@@ -37,6 +39,7 @@
 ---
 
 ## 2. LRU语义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (最近最少使用)
 

@@ -7,6 +7,7 @@
 ---
 
 ## 概念层次结构
+> **[来源: Rust Official Docs]**
 
 ```text
                             Unsafe Rust
@@ -25,6 +26,7 @@ unsafe trait  unsafe impl  不可变原始指针 可变原始指针 C接口     
 ---
 
 ## unsafe的五种能力
+> **[来源: Rust Official Docs]**
 
 ```text
 unsafe赋予的额外能力
@@ -52,6 +54,7 @@ unsafe赋予的额外能力
 ---
 
 ## 安全抽象原则
+> **[来源: Rust Official Docs]**
 
 ```text
 安全抽象层次

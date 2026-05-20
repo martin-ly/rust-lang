@@ -8,6 +8,7 @@
 ---
 
 ## 1. Cranelift 简介
+> **[来源: Rust Official Docs]**
 
 **Cranelift** 是一个模块化的代码生成器（code generator），最初由 Mozilla 的 Wasmtime 团队开发，用于将 WebAssembly 编译为机器码。与 LLVM 不同，Cranelift 专注于：
 
@@ -16,6 +17,7 @@
 - **轻量级架构**: 更少的内存占用，更短的启动时间
 
 ### 1.1 项目起源
+> **[来源: Rust Official Docs]**
 
 ```text
 时间线:
@@ -29,6 +31,7 @@
 ```
 
 ### 1.2 架构位置
+> **[来源: Rust Official Docs]**
 
 ```text
 Rust 编译流程对比:
@@ -64,8 +67,10 @@ Standard (LLVM backend):           Cranelift backend:
 ---
 
 ## 2. Cranelift 与 LLVM 的对比
+> **[来源: Rust Official Docs]**
 
 ### 2.1 设计哲学差异
+> **[来源: Rust Official Docs]**
 
 | 维度 | LLVM | Cranelift |
 |------|------|-----------|
@@ -78,6 +83,7 @@ Standard (LLVM backend):           Cranelift backend:
 | **调试信息** | 完善 | 基础支持 |
 
 ### 2.2 适用场景矩阵
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐后端 | 理由 |
 |------|---------|------|
@@ -89,6 +95,7 @@ Standard (LLVM backend):           Cranelift backend:
 | WebAssembly | **Cranelift** | 原生 Wasm 支持 |
 
 ### 2.3 性能数据对比
+> **[来源: Rust Official Docs]**
 
 基于社区基准测试 (2025 年数据)：
 
@@ -104,8 +111,10 @@ Standard (LLVM backend):           Cranelift backend:
 ---
 
 ## 3. Rust 中启用 Cranelift 后端
+> **[来源: Rust Official Docs]**
 
 ### 3.1 必要条件
+> **[来源: Rust Official Docs]**
 
 1. **Nightly Rust 工具链**
 2. **安装 Cranelift 编译器后端**
@@ -119,6 +128,7 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 3.2 项目级配置
+> **[来源: Rust Official Docs]**
 
 在 `.cargo/config.toml` 中添加：
 
@@ -138,6 +148,7 @@ codegen-backend = "cranelift"
 ```
 
 ### 3.3 单次编译配置
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 单次使用 Cranelift 构建

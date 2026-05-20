@@ -1,6 +1,7 @@
 # 11 隐式终止模式 (Implicit Termination)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
   - [📋 目录](#-目录)
@@ -28,11 +29,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 隐式终止模式允许工作流在没有显式终止节点的情况下完成。
 当所有活跃路径都自然结束时，工作流被视为完成。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{ImplicitTermination} = \text{when } \nexists \text{ active tokens}: \text{workflow completes}

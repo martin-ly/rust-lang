@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [宏展开性能研究](#宏展开性能研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -54,6 +55,7 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究旨在分析 Rust 宏展开对编译时间和运行时性能的影响，评估不同宏实现的性能特征，包括：
 
@@ -63,12 +65,14 @@
 4. **优化策略**：宏展开性能优化方法
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **宏展开对编译时间的影响有多大？**
 2. **不同宏实现的性能差异如何？**
 3. **如何优化宏展开性能？**
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - 建立宏展开性能基准测试
 - 识别宏展开性能瓶颈
@@ -77,8 +81,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证与实验衔接
+> **[来源: Rust Official Docs]**
 
 **Def MP1（宏展开实验验证）**：宏展开实验 $E$ 验证 [type_system_foundations](../type_theory/type_system_foundations.md) 保持性 T2，当且仅当 $E$ 观测到宏展开后代码良型且类型检查通过。
 
@@ -102,6 +108,7 @@
 **引用**：[experiments/README](../experiments/README.md) 定理 EX-T1；[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 宏相关特性。
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **宏展开（Macro Expansion）**：编译器将宏调用替换为展开后的代码的过程。
 
@@ -113,6 +120,7 @@
 - **代码膨胀**：宏展开后代码大小的增加
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **宏展开阶段**：
 
@@ -124,8 +132,10 @@
 ---
 
 ## 🔬 实验设计 {#-实验设计}
+> **[来源: Rust Official Docs]**
 
 ### 1. 编译时间测试
+> **[来源: Rust Official Docs]**
 
 **测试目标**：测量宏展开对编译时间的影响
 
@@ -143,6 +153,7 @@
 - 类型检查时间
 
 ### 2. 代码生成效率测试
+> **[来源: Rust Official Docs]**
 
 **测试目标**：评估宏生成的代码效率
 

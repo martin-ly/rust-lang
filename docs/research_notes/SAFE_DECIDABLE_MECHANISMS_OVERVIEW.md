@@ -10,6 +10,7 @@
 ---
 
 ## 一、何为“安全的可判定的机制”
+> **[来源: Rust Official Docs]**
 
 - **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
 - **可判定**：是否满足该机制可由**编译期**算法判定（类型系统 + 固定规则），无需运行时或人工证明。
@@ -19,6 +20,7 @@
 ---
 
 ## 二、机制清单与形式化对应总表
+> **[来源: Rust Official Docs]**
 
 | 机制 | 可判定性 | 形式化文档 | Def/定理 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -39,8 +41,10 @@
 ---
 
 ## 三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例）
+> **[来源: Rust Official Docs]**
 
 ### 3.1 所有权
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](formal_methods/ownership_model.md) 规则 1–3、Def 1.1–1.5。
 - **属性关系**：为借用的前提；borrow 规则 5–8 在单所有者下定义。
@@ -49,6 +53,7 @@
 - **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
 ### 3.2 借用
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：&T/&mut T、可变独占、不可变可多；[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 规则 5–8。
 - **属性关系**：依赖所有权；与生命周期协同；跨线程时需 Send/Sync。
@@ -57,6 +62,7 @@
 - **反例**：双重可变借用、悬垂引用。
 
 ### 3.3 生命周期
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：outlives、区域、NLL；[lifetime_formalization](formal_methods/lifetime_formalization.md) Axiom LF1–LF2、Def 1.4。
 - **属性关系**：$\ell \subseteq \text{lft}$；与借用、型变组合。
@@ -65,6 +71,7 @@
 - **反例**：返回局部引用、存储短生命周期引用。
 
 ### 3.4 Send
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：可安全跨线程**转移所有权**；[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SEND1。
 - **属性关系**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$（SYNC-L1）；spawn 闭包需 Send；Future 跨 await 需 Send。
@@ -73,6 +80,7 @@
 - **反例**：Rc 跨线程、非 Send 闭包 spawn。
 
 ### 3.5 Sync
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：可安全跨线程**共享引用** &T；[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SYNC1。
 - **属性关系**：Sync ⇔ &T: Send；多线程共享 &T 时需 T: Sync。
@@ -81,6 +89,7 @@
 - **反例**：Cell 跨线程共享、Rc &T 跨线程。
 
 ### 3.6 Pin/Unpin
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：位置稳定、自引用、!Unpin 堆固定；[pin_self_referential](formal_methods/pin_self_referential.md) Def 1.1–2.2。
 - **属性关系**：Future 自引用依赖 Pin；栈固定需 Unpin、堆固定任意。
@@ -89,6 +98,7 @@
 - **反例**：未 Pin 自引用、栈上 !Unpin。
 
 ### 3.7 Future/async
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：Poll、Ready/Pending、async 状态机；[async_state_machine](formal_methods/async_state_machine.md) Def 4.1–5.2。
 - **属性关系**：依赖 Pin；跨 await 需 Send；并发 poll 需 Send+Sync。
@@ -97,6 +107,7 @@
 - **反例**：非 Send 跨 await、未 Pin 移动 Future。
 
 ### 3.8 类型系统
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：类型规则、进展性、保持性；[type_system_foundations](type_theory/type_system_foundations.md)。
 - **属性关系**：为所有机制的类型检查基础。

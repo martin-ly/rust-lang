@@ -8,6 +8,7 @@
 ---
 
 ## 全局思维导图
+> **[来源: Rust Official Docs]**
 
 ```text
                           工作流概念族
@@ -36,8 +37,10 @@
 ---
 
 ## 详细概念族谱
+> **[来源: Rust Official Docs]**
 
 ### 1. 工作流状态机
+> **[来源: Rust Official Docs]**
 
 ```text
                           工作流状态

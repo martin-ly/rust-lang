@@ -1,6 +1,7 @@
 # Rust 所有权系统可判定性 - 完成综合报告
 
 ## Completion Synthesis Report
+> **[来源: Rust Official Docs]**
 
 > **报告日期**: 2026-03-09
 > **项目状态**: ✅ 100% 完成 (综合梳理版 V2.0)
@@ -12,8 +13,10 @@
 ---
 
 ## 📊 完成度统计
+> **[来源: Rust Official Docs]**
 
 ### 文档完成度
+> **[来源: Rust Official Docs]**
 
 ```
 ████████████████████ 100% 完成

@@ -7,6 +7,7 @@
 ---
 
 ## 🎯 优化摘要
+> **[来源: Rust Official Docs]**
 
 本次优化全面应用了 Rust 1.94 的最新语言特性和标准库最佳实践，大幅提升了代码的现代化程度和性能。
 
@@ -23,10 +24,13 @@
 ---
 
 ## 🔧 详细优化内容
+> **[来源: Rust Official Docs]**
 
 ### 1. array_windows 全面应用
+> **[来源: Rust Official Docs]**
 
 #### 修复前的问题
+> **[来源: Rust Official Docs]**
 
 多个 crate 使用了旧的 `windows()` 方法，而不是 Rust 1.94 新增的 `array_windows()`：
 
@@ -41,6 +45,7 @@ for window in data.windows(3) {
 ```
 
 #### 优化后的代码
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 新代码
@@ -53,6 +58,7 @@ for window in data.array_windows::<3>() {
 ```
 
 #### 应用位置
+> **[来源: Rust Official Docs]**
 
 | Crate | 函数 | 优化内容 |
 |-------|------|----------|
@@ -63,6 +69,7 @@ for window in data.array_windows::<3>() {
 | c06_async | `detect_trend_changes` | `windows(2).enumerate()` → `array_windows::<2>().enumerate()`，解构 `[prev, curr]` |
 
 #### 性能提升
+> **[来源: Rust Official Docs]**
 
 - **编译时边界检查**：数组大小在编译时已知，避免运行时检查
 - **更好的向量化**：编译器可以更好地优化固定大小的数组操作
@@ -71,8 +78,10 @@ for window in data.array_windows::<3>() {
 ---
 
 ### 2. TryFrom 替代 as 转换
+> **[来源: Rust Official Docs]**
 
 #### 修复前的问题
+> **[来源: Rust Official Docs]**
 
 使用 `as` 进行类型转换可能导致溢出或数据丢失：
 
@@ -87,6 +96,7 @@ let code_point = ch as usize;  // 同样问题
 ```
 
 #### 优化后的代码
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 新代码
@@ -99,6 +109,7 @@ let code_point = usize::try_from(ch).unwrap_or(0);
 ```
 
 #### 应用位置
+> **[来源: Rust Official Docs]**
 
 | Crate | 位置 | 修改 |
 |-------|------|------|

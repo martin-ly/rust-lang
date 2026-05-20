@@ -5,8 +5,10 @@
 ---
 
 ## 1. 代码组织
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目结构
+> **[来源: Rust Official Docs]**
 
 ```text
 my-async-project/
@@ -66,6 +68,7 @@ my-async-project/
 ```
 
 ### 1.2 模块组织原则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // src/handlers/mod.rs
@@ -98,6 +101,7 @@ impl<S> FromRequestParts<S> for AuthClaims {
 ```
 
 ### 1.3 错误类型设计
+> **[来源: Rust Official Docs]**
 
 ```rust
 // src/models/error.rs
@@ -159,8 +163,10 @@ impl IntoResponse for AppError {
 ---
 
 ## 2. 错误处理
+> **[来源: Rust Official Docs]**
 
 ### 2.1 使用?操作符
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 好: 简洁的错误传播
@@ -189,6 +195,7 @@ async fn get_user(id: u64) -> Result<User, AppError> {
 ```
 
 ### 2.2 错误上下文
+> **[来源: Rust Official Docs]**
 
 ```rust
 use anyhow::{Context, Result};
@@ -206,6 +213,7 @@ async fn process_file(path: &str) -> Result<Data> {
 ```
 
 ### 2.3 错误恢复
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -250,8 +258,10 @@ let result = with_retry(
 ---
 
 ## 3. 资源管理
+> **[来源: Rust Official Docs]**
 
 ### 3.1 RAII模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 连接池管理
@@ -299,6 +309,7 @@ impl Drop for Transaction {
 ```
 
 ### 3.2 优雅关闭
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::sync::mpsc;

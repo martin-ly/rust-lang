@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Walkdir 目录遍历形式化分析](#walkdir-目录遍历形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 walkdir提供:
 
@@ -37,6 +39,7 @@ walkdir提供:
 ---
 
 ## 2. 遍历顺序
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (内容优先 vs 目录优先)
 

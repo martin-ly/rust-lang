@@ -9,6 +9,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -46,6 +47,7 @@
 ---
 
 ## 完备性声明
+> **[来源: Rust Official Docs]**
 
 **本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
 
@@ -56,6 +58,7 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本目录专注于 Rust 类型系统的理论基础和形式化研究，包括：
 
@@ -67,8 +70,10 @@
 ---
 
 ## 📚 研究主题 {#-研究主题}
+> **[来源: Rust Official Docs]**
 
 ### 1. 类型系统基础
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -81,6 +86,7 @@
 **状态**: ✅ 已完成 (100%)
 
 ### 1b. 类型构造能力
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -94,6 +100,7 @@
 ---
 
 ### 2. Trait 系统形式化
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -108,6 +115,7 @@
 ---
 
 ### 3. 生命周期形式化
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -122,6 +130,7 @@
 ---
 
 ### 4. 高级类型特性
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -136,6 +145,7 @@
 ---
 
 ### 5. 型变理论
+> **[来源: Rust Official Docs]**
 
 **研究问题**:
 
@@ -154,6 +164,7 @@
 ---
 
 ## 形式化论证汇总
+> **[来源: Rust Official Docs]**
 
 **Def TT1（类型理论覆盖）**：设 $\mathcal{T}$ 为类型理论族，$\mathcal{T} = \{\text{type\_system},\, \text{trait},\, \text{lifetime},\, \text{advanced},\, \text{variance}\}$。每 $t \in \mathcal{T}$ 有 Def、Axiom、Theorem 及证明。
 

@@ -5,6 +5,7 @@
 ---
 
 ## Result与Option
+> **[来源: Rust Official Docs]**
 
 | 类型 | 用途 | 方法 |
 | :--- | :--- | :--- |
@@ -14,8 +15,10 @@
 ---
 
 ## 常用方法
+> **[来源: Rust Official Docs]**
 
 ### Option
+> **[来源: Rust Official Docs]**
 
 ```rust
 opt.unwrap()        // 获取值，None时panic

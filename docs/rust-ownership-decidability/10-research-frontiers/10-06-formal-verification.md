@@ -6,8 +6,10 @@
 ---
 
 ## 当前研究热点
+> **[来源: Rust Official Docs]**
 
 ### 1. RustBelt 项目
+> **[来源: Rust Official Docs]**
 
 RustBelt 是首个完整的 Rust 形式化安全证明。
 
@@ -19,6 +21,7 @@ RustBelt 是首个完整的 Rust 形式化安全证明。
 ```
 
 ### 2. Aeneas 项目
+> **[来源: Rust Official Docs]**
 
 将 Rust 翻译到纯函数式语言进行验证。
 

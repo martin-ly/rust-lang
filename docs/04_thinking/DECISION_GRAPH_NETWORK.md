@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 决策图网 / Decision Graph Network](#rust-决策图网--decision-graph-network)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -63,10 +64,12 @@
 ---
 
 ## 🎯 决策图网概述 {#-决策图网概述}
+> **[来源: Rust Official Docs]**
 
 **决策图网 (Decision Graph Network)** 是一种结构化的决策支持工具，通过树状结构和图网络展示不同场景下的技术选择路径。
 
 ### 核心属性
+> **[来源: Rust Official Docs]**
 
 1. **结构化** - 树状结构组织决策路径
 2. **场景化** - 针对不同场景提供决策
@@ -74,6 +77,7 @@
 4. **可扩展** - 支持添加新的决策节点
 
 ### 应用场景
+> **[来源: Rust Official Docs]**
 
 - 快速定位合适的技术方案
 - 避免技术选型错误
@@ -83,6 +87,7 @@
 ---
 
 ## 🚀 核心决策流程 {#-核心决策流程}
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -117,8 +122,10 @@ graph TD
 ---
 
 ## 📦 模块化决策树 {#-模块化决策树}
+> **[来源: Rust Official Docs]**
 
 ### 1. 所有权与借用决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -155,6 +162,7 @@ graph TD
 ```
 
 ### 2. 类型系统决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -179,6 +187,7 @@ graph TD
 ```
 
 ### 3. 控制流决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -208,6 +217,7 @@ graph TD
 ```
 
 ### 4. 异步编程决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -239,6 +249,7 @@ graph TD
 ```
 
 ### 5. Pin 使用场景决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -307,6 +318,7 @@ graph TD
 ---
 
 ## 🔧 技术选型决策树 {#-技术选型决策树}
+> **[来源: Rust Official Docs]**
 
 ### 集合类型选择
 
@@ -509,6 +521,7 @@ graph TD
 ---
 
 ## 🐛 调试决策树 {#-调试决策树}
+> **[来源: Rust Official Docs]**
 
 ### 编译错误调试
 
@@ -641,6 +654,7 @@ graph TD
 ---
 
 ## ⚡ 优化决策树 {#-优化决策树}
+> **[来源: Rust Official Docs]**
 
 ### CPU优化决策树
 
@@ -778,6 +792,7 @@ graph TD
 ---
 
 ## 📚 学习路径决策树 {#-学习路径决策树}
+> **[来源: Rust Official Docs]**
 
 ### 新手学习路径
 
@@ -903,6 +918,7 @@ graph TD
 ---
 
 ## 📊 决策矩阵总结 {#-决策矩阵总结}
+> **[来源: Rust Official Docs]**
 
 ### 快速决策参考
 
@@ -920,6 +936,7 @@ graph TD
 ---
 
 ## 🔗 相关文档 {#-相关文档}
+> **[来源: Rust Official Docs]**
 
 ### 设计机制论证
 
@@ -956,6 +973,7 @@ graph TD
 ---
 
 ## Rust 1.95+ 思维表征更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -985,6 +1003,7 @@ ust
 ---
 
 ## Rust 1.95+ 持续更新更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1030,3 +1049,7 @@ ust
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

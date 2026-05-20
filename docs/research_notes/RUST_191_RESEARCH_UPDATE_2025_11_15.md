@@ -9,14 +9,17 @@
 ---
 
 ## 📋 概述
+> **[来源: Rust Official Docs]**
 
 本文档记录 Rust 1.91.1 版本对研究笔记系统的影响和需要更新的内容。
 
 ---
 
 ## 🎯 Rust 1.91.1 主要改进
+> **[来源: Rust Official Docs]**
 
 ### 1. 异步迭代器改进
+> **[来源: Rust Official Docs]**
 
 **性能提升**: 15-20%
 
@@ -57,6 +60,7 @@ fn process(n: i32) -> impl Future<Output = ()> {
 ---
 
 ### 2. const 上下文增强
+> **[来源: Rust Official Docs]**
 
 **改进内容**: 支持对非静态常量的引用
 
@@ -96,6 +100,7 @@ const fn with_static_ref() -> &'static mut i32 {
 ---
 
 ### 3. JIT 编译器优化
+> **[来源: Rust Official Docs]**
 
 **改进内容**: 对异步代码的性能提升
 
@@ -132,6 +137,7 @@ async fn jit_optimized_async() -> i32 {
 ---
 
 ### 4. 内存分配优化
+> **[来源: Rust Official Docs]**
 
 **改进内容**: 小对象分配性能提升 25-30%
 
@@ -173,8 +179,10 @@ fn small_object_allocation() {
 ---
 
 ## 📝 需要更新的研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 高优先级
+> **[来源: Rust Official Docs]**
 
 1. **异步状态机形式化** (`formal_methods/async_state_machine.md`)
    - 更新异步迭代器性能数据
@@ -189,6 +197,7 @@ fn small_object_allocation() {
    - 分析新的优化策略
 
 ### 中优先级
+> **[来源: Rust Official Docs]**
 
 1. **类型系统基础** (`type_theory/type_system_foundations.md`)
    - 更新 const 上下文相关内容
@@ -201,8 +210,10 @@ fn small_object_allocation() {
 ---
 
 ## 🔄 更新计划
+> **[来源: Rust Official Docs]**
 
 ### 第一阶段（本周）
+> **[来源: Rust Official Docs]**
 
 - [ ] 更新异步相关研究笔记
 - [ ] 更新性能实验数据

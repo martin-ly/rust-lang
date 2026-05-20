@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Async执行模型 - 深度代码示例与证明](#async执行模型---深度代码示例与证明)
   - [目录](#目录)
@@ -27,8 +28,10 @@
     - [6.1 形式化属性测试](#61-形式化属性测试)
 
 ## 1. Future Trait 形式化实现
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基础Future实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;

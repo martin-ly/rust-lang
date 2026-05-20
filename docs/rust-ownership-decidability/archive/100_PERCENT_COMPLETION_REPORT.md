@@ -6,14 +6,17 @@
 ---
 
 ## ✅ 完成摘要
+> **[来源: Rust Official Docs]**
 
 英文版 `docs/rust-ownership-decidability` 已达到 **100% 完成**，包含完整的文档体系和可运行的代码示例。
 
 ---
 
 ## 📊 最终统计
+> **[来源: Rust Official Docs]**
 
 ### 文档统计
+> **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 说明 |
 |------|------|------|

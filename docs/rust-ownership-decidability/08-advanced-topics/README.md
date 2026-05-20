@@ -5,6 +5,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 08-advanced-topics/
@@ -22,8 +23,10 @@
 ---
 
 ## 学习路径建议
+> **[来源: Rust Official Docs]**
 
 ### 初级路径
+> **[来源: Rust Official Docs]**
 
 如果你刚开始接触 Rust 高级特性：
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [工业级 Rust 形式化验证案例](#工业级-rust-形式化验证案例)
   - [目录](#目录)
@@ -37,8 +38,10 @@
 ---
 
 ## 1. Amazon (AWS)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Kani 验证工具
+> **[来源: Rust Official Docs]**
 
 **Kani** 是 AWS 开发的 Rust 模型检测器，基于 CBMC (C Bounded Model Checker)。
 

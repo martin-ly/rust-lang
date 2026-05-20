@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Next-generation Trait Solver 深度研究](#next-generation-trait-solver-深度研究)
   - [目录](#目录)
@@ -42,10 +43,12 @@
 ---
 
 ## 1. 当前架构概览
+> **[来源: Rust Official Docs]**
 
 Rust 当前的 `trait solver`（特征求解器）自 `Rust 1.0` 以来一直是类型系统的核心组件。它负责在编译期判断某个类型是否满足特定的 `trait bound`，并推导关联类型、处理高阶生命周期约束等。
 
 ### 1.1 与 rustc 的集成方式
+> **[来源: Rust Official Docs]**
 
 当前稳定版的 `trait solver` 深度嵌入在 `rustc` 的 `typeck`（类型检查）和 `borrowck`（借用检查）阶段之间：
 
@@ -63,6 +66,7 @@ flowchart LR
 在 `rustc` 内部，类型检查器通过 `ObligationForest`（义务森林）结构将待求解的约束传递给 `trait solver`。每个 `Obligation`（义务）代表一个需要证明的类型命题，例如 `T: Display` 或 `Vec<T>: IntoIterator`。
 
 ### 1.2 基于 SLG 的求解策略
+> **[来源: Rust Official Docs]**
 
 当前 solver 采用 **SLG (Selective Linear Generalized) resolution** 策略，这是一种表格化的逻辑编程求解技术。其核心流程为：
 
@@ -87,10 +91,12 @@ flowchart TD
 ---
 
 ## 2. 新一代 Solver 的核心动机
+> **[来源: Rust Official Docs]**
 
 尽管当前 solver 在过去十年中支撑了 Rust 类型系统的持续扩展，但随着 `GATs`、`RPITIT`、`AFIT` 等特性的稳定化，其架构逐渐暴露出根本性的局限。
 
 ### 2.1 更精确的错误信息
+> **[来源: Rust Official Docs]**
 
 当前 solver 的 `depth-first` 搜索在遇到失败时，往往只能报告最顶层的失败结果，而无法回溯到真正的问题根源。新一代 solver 采用**可回溯的评估树（eval tree）**结构，能够：
 
@@ -99,6 +105,7 @@ flowchart TD
 - 提供与 `GAT` 投影相关的精确诊断
 
 ### 2.2 更好的性能
+> **[来源: Rust Official Docs]**
 
 新一代 solver 引入了**规范化缓存（canonicalized cache）**和**延迟归一化（lazy normalization）**：
 
@@ -109,6 +116,7 @@ flowchart TD
 | 重复求解 | 每次重新计算 | 响应缓存复用 |
 
 ### 2.3 更完整的泛型支持
+> **[来源: Rust Official Docs]**
 
 新一代 solver 原生支持以下场景，而当前 solver 往往报错或行为不一致：
 
@@ -119,8 +127,10 @@ flowchart TD
 ---
 
 ## 3. 与 Chalk 项目的关系
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Chalk 的设计初衷
+> **[来源: Rust Official Docs]**
 
 **Chalk** 是 Rust 编译器团队于 2017-2020 年间开发的实验性 `trait solver`，目标是：
 
@@ -139,6 +149,7 @@ flowchart TD
 ```
 
 ### 3.2 Chalk 的经验与教训
+> **[来源: Rust Official Docs]**
 
 Chalk 项目虽未直接替换 `rustc` 的 solver，但为新一代设计提供了关键经验：
 

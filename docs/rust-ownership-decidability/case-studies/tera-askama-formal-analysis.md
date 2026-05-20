@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tera/Askama 模板引擎形式化分析](#teraaskama-模板引擎形式化分析)
   - [目录](#目录)
@@ -27,6 +28,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 模板引擎对比:
 
@@ -36,6 +38,7 @@
 ---
 
 ## 2. Tera运行时
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (动态模板)
 

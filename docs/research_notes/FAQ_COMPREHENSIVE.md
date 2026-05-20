@@ -7,6 +7,7 @@
 ---
 
 ## 快速导航
+> **[来源: Rust Official Docs]**
 
 - [Rust形式化方法 FAQ 汇总](#rust形式化方法-faq-汇总)
   - [快速导航](#快速导航)
@@ -81,8 +82,10 @@
 ---
 
 ## 一、所有权与借用 (15问)
+> **[来源: Rust Official Docs]**
 
 ### Q1: 什么是所有权？一句话解释
+> **[来源: Rust Official Docs]**
 
 **A**: 每个值在任意时刻有且只有一个所有者（变量），所有者离开作用域时值被自动释放。
 
@@ -91,6 +94,7 @@
 ---
 
 ### Q2: Move和Copy有什么区别？
+> **[来源: Rust Official Docs]**
 
 **A**:
 
@@ -114,6 +118,7 @@ println!("{}", x);              // OK！x仍然有效
 ---
 
 ### Q3: 为什么需要借用？
+> **[来源: Rust Official Docs]**
 
 **A**: 借用允许你临时使用值而不获取所有权，避免频繁转移所有权的麻烦。
 
@@ -133,6 +138,7 @@ fn main() {
 ---
 
 ### Q4: &和&mut为什么不能同时存在？
+> **[来源: Rust Official Docs]**
 
 **A**: 防止数据竞争。如果允许多个读者和一个写者同时存在，读者可能读到正在被修改的数据。
 
@@ -152,6 +158,7 @@ println!("{} {}", r1, r2); // 读者还在用
 ---
 
 ### Q5: 什么是悬垂引用？Rust如何防止？
+> **[来源: Rust Official Docs]**
 
 **A**: 悬垂引用是指引用指向已经被释放的内存。Rust通过生命周期检查在编译时防止。
 
@@ -172,6 +179,7 @@ fn not_dangling() -> String {
 ---
 
 ### Q6: 如何理解"所有权系统防止内存泄漏"？
+> **[来源: Rust Official Docs]**
 
 **A**: 严格来说，所有权系统主要防止**内存不安全**（use-after-free, double-free），而不是内存泄漏。
 
@@ -185,6 +193,7 @@ fn not_dangling() -> String {
 ---
 
 ### Q7: 为什么`Rc`不能跨线程？
+> **[来源: Rust Official Docs]**
 
 **A**: `Rc`使用非原子引用计数（不是线程安全的）。跨线程使用会导致数据竞争（计数更新冲突）。
 
@@ -203,6 +212,7 @@ thread::spawn(move || {
 ---
 
 ### Q8: `RefCell`和`Mutex`有什么区别？
+> **[来源: Rust Official Docs]**
 
 **A**:
 
@@ -225,6 +235,7 @@ let mutex = Mutex::new(5);
 ---
 
 ### Q9: 什么是"内部可变性"模式？
+> **[来源: Rust Official Docs]**
 
 **A**: 允许在不可变引用下修改数据，通过运行时检查保证安全。
 
@@ -363,6 +374,7 @@ assert_eq!(s, "world");
 ---
 
 ## 二、类型系统 (10问)
+> **[来源: Rust Official Docs]**
 
 ### Q16: 什么是类型安全？
 
@@ -551,6 +563,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 ---
 
 ## 三、生命周期 (10问)
+> **[来源: Rust Official Docs]**
 
 ### Q26: 生命周期省略规则是什么？
 
@@ -739,6 +752,7 @@ where
 ---
 
 ## 四、并发与异步 (10问)
+> **[来源: Rust Official Docs]**
 
 ### Q36: Send和Sync有什么区别？
 
@@ -930,6 +944,7 @@ let guard = tokio_mutex.lock().await;
 ---
 
 ## 五、形式化方法 (10问)
+> **[来源: Rust Official Docs]**
 
 ### Q46: 什么是L1/L2/L3证明？
 
@@ -983,6 +998,7 @@ let guard = tokio_mutex.lock().await;
 ---
 
 ## 六、分布式与工作流 (5问)
+> **[来源: Rust Official Docs]**
 
 ### Q51: Saga模式解决什么问题？
 
@@ -1037,6 +1053,7 @@ let saga = Saga::new()
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+
 
@@ -1047,6 +1064,7 @@ let saga = Saga::new()
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1092,3 +1110,7 @@ let saga = Saga::new()
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

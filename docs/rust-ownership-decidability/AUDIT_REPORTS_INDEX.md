@@ -6,8 +6,10 @@
 ---
 
 ## 📊 审计产出文件
+> **[来源: Rust Official Docs]**
 
 ### 核心报告
+> **[来源: Rust Official Docs]**
 
 | 文件 | 描述 | 优先级 |
 |-----|------|-------|
@@ -17,6 +19,7 @@
 | [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
 
 ### 标准与模板
+> **[来源: Rust Official Docs]**
 
 | 文件 | 描述 | 用途 |
 |-----|------|------|

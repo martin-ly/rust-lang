@@ -1,6 +1,7 @@
 # 案例研究2: NASA核心飞行系统(cFS) Rust集成
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 **项目名称**: Rust in cFS (Rust in core Flight System)
 **组织**: NASA Goddard Space Flight Center (GSFC)
@@ -11,8 +12,10 @@
 ---
 
 ## 项目背景
+> **[来源: Rust Official Docs]**
 
 ### 什么是cFS?
+> **[来源: Rust Official Docs]**
 
 NASA核心飞行系统(cFS)是一个平台独立的可重用软件框架，用于：
 

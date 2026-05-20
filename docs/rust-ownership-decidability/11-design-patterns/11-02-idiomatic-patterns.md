@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [惯用Rust模式](#惯用rust模式)
   - [目录](#目录)
@@ -65,8 +66,10 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 什么是惯用Rust
+> **[来源: Rust Official Docs]**
 
 惯用Rust（Idiomatic Rust）是指符合Rust语言哲学和社区实践的编程方式。它不仅仅是"能运行的代码"，而是：
 

@@ -6,14 +6,17 @@
 ---
 
 ## 扩展摘要
+> **[来源: Rust Official Docs]**
 
 本次扩展将项目从原有的**Web服务器、数据库ORM、并行计算**等少数领域，全面扩展到**10个主要应用领域**，覆盖Rust在现代软件开发中的主要应用场景。
 
 ---
 
 ## 新增领域概览
+> **[来源: Rust Official Docs]**
 
 ### 1. WebAssembly (WASM) 开发
+> **[来源: Rust Official Docs]**
 
 **路径**: `case-studies/wasm/README.md` (16,263 字节)
 

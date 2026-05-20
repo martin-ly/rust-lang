@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [WebAssembly (WASM) 开发指南](#webassembly-wasm-开发指南)
   - [目录](#目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 1. WebAssembly概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是WebAssembly
+> **[来源: Rust Official Docs]**
 
 WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代Web浏览器中以接近原生的性能运行。
 

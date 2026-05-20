@@ -7,15 +7,18 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 装饰者模式动态地将责任附加到对象上。在 Rust 中，这通常通过组合和 trait 实现。
 
 ---
 
 ## 实现方式
+> **[来源: Rust Official Docs]**
 
 <!-- markdown-link-check-disable -->
 ### 基础装饰者
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 组件接口

@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RefinedRust 深度解析](#refinedrust-深度解析)
   - [目录](#目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 1. 引言与背景
+> **[来源: Rust Official Docs]**
 
 ### 1.1 研究动机
+> **[来源: Rust Official Docs]**
 
 Rust 的所有权类型系统在编译时静态保证内存安全，使其特别适合安全关键系统。
 近年来，出现了许多自动化演绎验证工具来建立 Rust 代码的功能正确性。

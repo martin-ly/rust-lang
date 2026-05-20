@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Actix-web 框架形式化分析](#actix-web-框架形式化分析)
   - [目录](#目录)
@@ -56,6 +57,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Actix-web是基于Actor模型的Rust Web框架，结合了:
 
@@ -67,6 +69,7 @@ Actix-web是基于Actor模型的Rust Web框架，结合了:
 ---
 
 ## 2. Actor模型形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Actor定义
 

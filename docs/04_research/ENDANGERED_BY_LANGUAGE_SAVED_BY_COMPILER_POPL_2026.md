@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Endangered by Language, Saved by Compiler (POPL 2026) 研究笔记](#endangered-by-language-saved-by-compiler-popl-2026-研究笔记)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 论文信息
+> **[来源: Rust Official Docs]**
 
 **论文标题**: Endangered by Language, Saved by Compiler
 
@@ -55,8 +57,10 @@
 ---
 
 ## 2. 核心论点
+> **[来源: Rust Official Docs]**
 
 ### 2.1 论文核心命题
+> **[来源: Rust Official Docs]**
 
 该论文提出了一个引人注目的反直觉观点：
 
@@ -65,6 +69,7 @@
 这意味着，语言的**形式化语义**与**编译器实际生成的代码**之间存在着重要的安全鸿沟。编译器不仅负责代码生成，更在某种程度上"修补"了语言语义中的安全漏洞。
 
 ### 2.2 具体案例
+> **[来源: Rust Official Docs]**
 
 论文分析了以下几类典型模式：
 
@@ -89,8 +94,10 @@ flowchart TD
 ---
 
 ## 3. 与 Rust 的关系
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Rust 的所有权系统：编译期消除运行时错误
+> **[来源: Rust Official Docs]**
 
 Rust 的设计理念与该论文的观察形成了有趣的**呼应与超越**：
 
@@ -106,6 +113,7 @@ flowchart LR
 ```
 
 ### 3.2 Rust 的编译器"拯救"机制
+> **[来源: Rust Official Docs]**
 
 Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的角色，但更加系统和彻底：
 
@@ -117,6 +125,7 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 | `Drop Check` | 悬垂引用、use-after-move | 析构顺序分析 |
 
 ### 3.3 关键差异
+> **[来源: Rust Official Docs]**
 
 论文中讨论的语言（如 C/C++）依赖的是**优化过程中的偶然保护**，而 Rust 提供的是**语言设计层面的必然保证**：
 
@@ -127,8 +136,10 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 ---
 
 ## 4. 跨语言对比：C/C++ 的教训
+> **[来源: Rust Official Docs]**
 
 ### 4.1 C 语言中的典型案例
+> **[来源: Rust Official Docs]**
 
 在 C 语言中，以下模式理论上是 `UB`，但某些编译器优化实际上"拯救"了它们：
 

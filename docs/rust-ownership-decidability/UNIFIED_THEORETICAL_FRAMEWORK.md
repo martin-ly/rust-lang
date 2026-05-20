@@ -1,6 +1,7 @@
 # Rust 所有权系统统一理论框架
 
 ## Unified Theoretical Framework for Rust Ownership System
+> **[来源: Rust Official Docs]**
 
 > **文档性质**: 形式化理论顶层框架
 > **版本**: 1.0.0
@@ -10,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 所有权系统统一理论框架](#rust-所有权系统统一理论框架)
   - [Unified Theoretical Framework for Rust Ownership System](#unified-theoretical-framework-for-rust-ownership-system)
@@ -83,6 +85,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 研究问题
 

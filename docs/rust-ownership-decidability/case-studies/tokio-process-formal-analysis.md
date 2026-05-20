@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tokio-Process 异步进程形式化分析](#tokio-process-异步进程形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 tokio::process提供:
 
@@ -40,6 +42,7 @@ tokio::process提供:
 ---
 
 ## 2. 进程创建
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (Command构建)
 

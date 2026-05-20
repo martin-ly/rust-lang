@@ -14,6 +14,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 - [x] 理解泛型参数、关联类型、`impl Trait` 三者的语义差异与选择策略
 - [x] 掌握编译器类型推断的基本原理（HM 算法的 Rust 变体）
@@ -24,6 +25,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **Trait 系统** — Trait Bound、关联类型（`02_intermediate/traits.md`）
 2. **生命周期** — 泛型生命周期参数 `'a`（`01_fundamentals/lifetimes.md`）
@@ -33,10 +35,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **泛型（Generics）** 允许你编写**与具体类型无关**的代码，由编译器在编译期根据实际使用类型生成特定实现。Rust 的泛型系统涵盖：
 

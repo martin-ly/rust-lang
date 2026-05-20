@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RTIC实时中断驱动框架形式化分析](#rtic实时中断驱动框架形式化分析)
   - [目录](#目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 RTIC (Real-Time Interrupt-driven Concurrency) 是Rust的实时并发框架：
 
@@ -49,6 +51,7 @@ RTIC (Real-Time Interrupt-driven Concurrency) 是Rust的实时并发框架：
 ---
 
 ## 2. 资源模型形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 RTIC-R1 ( 共享资源 )
 

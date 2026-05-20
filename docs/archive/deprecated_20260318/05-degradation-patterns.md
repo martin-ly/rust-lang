@@ -1,6 +1,7 @@
 # 降级模式语义 (Degradation Pattern Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [降级模式语义 (Degradation Pattern Semantics)](#降级模式语义-degradation-pattern-semantics)
   - [目录](#目录)
@@ -22,6 +23,7 @@
   - [6. 总结](#6-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 优雅降级是分布式系统在高负载或部分故障时保持核心功能可用的关键策略。
 本文档深入分析降级模式的语义基础、实现机制及其在 Rust 中的应用。
@@ -29,8 +31,10 @@
 ---
 
 ## 2. 降级策略分类
+> **[来源: Rust Official Docs]**
 
 ### 2.1 降级类型谱系
+> **[来源: Rust Official Docs]**
 
 ```
 降级策略层次:
@@ -76,6 +80,7 @@
 ```
 
 ### 2.2 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```
 降级形式化语义:
@@ -113,8 +118,10 @@
 ---
 
 ## 3. 数学模型
+> **[来源: Rust Official Docs]**
 
 ### 3.1 负载计算模型
+> **[来源: Rust Official Docs]**
 
 ```
 综合负载指数:
@@ -132,6 +139,7 @@ HealthScore = 1 - Load_norm
 ```
 
 ### 3.2 功能权重模型
+> **[来源: Rust Official Docs]**
 
 ```
 功能重要性评分:
@@ -149,8 +157,10 @@ Resource(feature) = Resource_total × Importance(feature) / Σ Importance(fᵢ)
 ---
 
 ## 4. Rust 实现
+> **[来源: Rust Official Docs]**
 
 ### 4.1 核心降级框架
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;
@@ -460,6 +470,7 @@ pub enum DegradationError {
 ```
 
 ### 4.2 回退机制实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 回退策略 trait

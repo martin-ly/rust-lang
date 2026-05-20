@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Anyhow \& Thiserror 错误处理形式化分析](#anyhow--thiserror-错误处理形式化分析)
   - [目录](#目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 错误处理库对比:
 
@@ -42,6 +44,7 @@
 ---
 
 ## 2. 类型系统分析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Anyhow: 动态错误
 

@@ -1,6 +1,8 @@
 # 工作流设计模式语义分析
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [工作流设计模式语义分析](#工作流设计模式语义分析)
   - [目录](#目录)
@@ -205,8 +207,12 @@
 ---
 
 ## 1. 引言
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 工作流定义与语义
+>
+> **[来源: Rust Official Docs]**
 
 **工作流（Workflow）** 是业务过程的自动化实现，它将一组相关的任务按照预定义的规则组织起来，以完成特定的业务目标。
 从语义角度看，工作流可以形式化定义为：
@@ -1314,6 +1320,7 @@ Rust 的类型安全和零成本抽象特性使其成为实现工作流引擎的
 3. van der Aalst, W.M.P., et al. "Workflow Patterns." Distributed and Parallel Databases, 2003.
 4. Rust Programming Language. "The Rust Programming Language." rust-lang.org.
 5. Fowler, M. "Patterns of Enterprise Application Architecture." Addison-Wesley, 2002.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

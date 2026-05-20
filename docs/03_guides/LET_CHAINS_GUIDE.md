@@ -7,6 +7,7 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`while` 和 `match` 的守卫中连续使用多个 `let` 绑定，彻底消除了嵌套 `if let` 的样板代码。
 
@@ -17,8 +18,10 @@ Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`w
 ---
 
 ## 一、核心语法
+> **[来源: Rust Official Docs]**
 
 ### 1.1 if let chains
+> **[来源: Rust Official Docs]**
 
 在 `if` 条件中串联多个 `let` 绑定：
 

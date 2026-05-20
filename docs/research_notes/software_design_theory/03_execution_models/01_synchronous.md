@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [同步执行模型形式化](#同步执行模型形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 **Def 1.1（同步执行）**:
 
@@ -61,6 +63,7 @@
 ---
 
 ## 操作语义（小步）
+> **[来源: Rust Official Docs]**
 
 ```text
 (λx.e) v     →  e[v/x]     （β 归约）
@@ -73,6 +76,7 @@ Rust 的 MIR 语义更细粒度，但上述为概念性简化。
 ---
 
 ## Rust 对应与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 同步：无 async、无 spawn
@@ -93,6 +97,7 @@ fn compute(n: i32) -> i32 {
 ---
 
 ## 调用栈与求值顺序
+> **[来源: Rust Official Docs]**
 
 ```text
 main()
@@ -109,6 +114,7 @@ main()
 ---
 
 ## 与 async/并发对比
+> **[来源: Rust Official Docs]**
 
 | 模型 | 线程 | 调度 | 数据竞争 |
 | :--- | :--- | :--- | :--- |
@@ -119,6 +125,7 @@ main()
 ---
 
 ## 栈展开与 panic
+> **[来源: Rust Official Docs]**
 
 **Axiom SY3**：panic 时栈展开，按 LIFO 顺序 drop 局部变量；若展开到线程边界则线程终止。
 
@@ -127,6 +134,7 @@ main()
 ---
 
 ## 典型场景（实质内容）
+> **[来源: Rust Official Docs]**
 
 | 场景 | 说明 | 代码示例 |
 | :--- | :--- | :--- |
@@ -137,6 +145,7 @@ main()
 | 单请求处理 | 简单 CLI/工具 | `let result = compute(input); println!("{}", result);` |
 
 ### 与设计模式组合
+> **[来源: Rust Official Docs]**
 
 | 组合 | 说明 |
 | :--- | :--- |
@@ -146,6 +155,7 @@ main()
 | 同步 + State | 状态机；`state.handle(&mut ctx)` |
 
 ### 常见陷阱
+> **[来源: Rust Official Docs]**
 
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
@@ -154,6 +164,7 @@ main()
 | 递归过深 | 栈溢出 | 改为迭代、或 `Box` 堆分配 |
 
 ### 反例
+> **[来源: Rust Official Docs]**
 
 | 反例 | 后果 | 正确做法 |
 | :--- | :--- | :--- |

@@ -8,6 +8,7 @@
 ---
 
 ## 宏系统全景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -70,8 +71,10 @@ mindmap
 ---
 
 ## 声明宏详解
+> **[来源: Rust Official Docs]**
 
 ### 基本结构
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! macro_name {
@@ -81,6 +84,7 @@ macro_rules! macro_name {
 ```
 
 ### 片段类型
+> **[来源: Rust Official Docs]**
 
 | 指示符 | 匹配内容 | 示例 |
 | :--- | :--- | :--- |
@@ -97,6 +101,7 @@ macro_rules! macro_name {
 | `vis` | 可见性 | `pub` |
 
 ### 重复模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! vec {
@@ -118,8 +123,10 @@ vec![1, 2, 3,]
 ---
 
 ## 过程宏详解
+> **[来源: Rust Official Docs]**
 
 ### 三种类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 1. 派生宏
@@ -142,6 +149,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 ```
 
 ### 派生宏示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义
@@ -175,8 +183,10 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 ---
 
 ## 常用内置宏
+> **[来源: Rust Official Docs]**
 
 ### 编译期信息
+> **[来源: Rust Official Docs]**
 
 | 宏 | 返回值 | 用途 |
 | :--- | :--- | :--- |
@@ -186,6 +196,7 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 | `module_path!()` | `&'static str` | 模块路径 |
 
 ### 代码生成
+> **[来源: Rust Official Docs]**
 
 | 宏 | 用途 |
 | :--- | :--- |

@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Sound Borrow-Checking via Symbolic Semantics](#sound-borrow-checking-via-symbolic-semantics)
   - [目录](#目录)
@@ -42,6 +43,7 @@
 ---
 
 ## 摘要
+> **[来源: Rust Official Docs]**
 
 本文档介绍 POPL 2024 论文 "Sound Borrow-Checking for Rust via Symbolic Semantics" 的核心贡献：
 
@@ -55,6 +57,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题背景
 

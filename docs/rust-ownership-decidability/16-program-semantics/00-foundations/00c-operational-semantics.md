@@ -7,6 +7,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 操作语义通过描述程序如何**执行**来定义其含义。
 它是理解 Rust 运行时行为、优化和形式验证的基础。
@@ -14,8 +15,10 @@
 ---
 
 ## 2. 大步语义 (Big-Step / Natural Semantics)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基本思想
+> **[来源: Rust Official Docs]**
 
 大步语义直接描述从初始状态到最终结果的完整求值过程：
 

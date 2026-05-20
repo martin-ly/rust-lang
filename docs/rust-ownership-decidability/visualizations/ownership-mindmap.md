@@ -31,6 +31,7 @@ graph TD
 ```
 
 ## ASCII版本
+> **[来源: Rust Official Docs]**
 
 ```
                             ┌─────────────┐

@@ -7,6 +7,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 Standard Library API Guide](#rust-194-standard-library-api-guide)
   - [Table of Contents](#table-of-contents)
@@ -46,6 +47,7 @@
 ---
 
 ## Introduction
+> **[来源: Rust Official Docs]**
 
 Rust 1.94.0 brings significant enhancements to the standard library, focusing on:
 
@@ -59,10 +61,13 @@ This guide covers each new API with descriptions, code examples, ownership impli
 ---
 
 ## Core Library APIs
+> **[来源: Rust Official Docs]**
 
 ### Slice Methods
+> **[来源: Rust Official Docs]**
 
 #### `[T]::array_windows`
+> **[来源: Rust Official Docs]**
 
 Returns an iterator over all contiguous windows of a fixed size `N`.
 
@@ -115,6 +120,7 @@ fn main() {
 ---
 
 #### `[T]::element_offset`
+> **[来源: Rust Official Docs]**
 
 Calculates the offset of an element relative to the start of a slice.
 
@@ -162,6 +168,7 @@ fn main() {
 ---
 
 ### LazyCell and LazyLock
+> **[来源: Rust Official Docs]**
 
 Rust 1.94 adds three new methods to both `LazyCell` (single-threaded) and `LazyLock` (thread-safe):
 
@@ -170,6 +177,7 @@ Rust 1.94 adds three new methods to both `LazyCell` (single-threaded) and `LazyL
 - `force_mut()` - Force initialization with mutable access
 
 #### `LazyCell::get`, `get_mut`, `force_mut`
+> **[来源: Rust Official Docs]**
 
 **Description:**
 `LazyCell` provides lazy initialization for single-threaded contexts. The new methods allow:
@@ -225,6 +233,7 @@ fn main() {
 ---
 
 #### `LazyLock::get`, `get_mut`, `force_mut`
+> **[来源: Rust Official Docs]**
 
 **Description:**
 `LazyLock` is the thread-safe equivalent of `LazyCell`. The new methods provide:
@@ -293,8 +302,10 @@ fn main() {
 ---
 
 ### Peekable Iterator
+> **[来源: Rust Official Docs]**
 
 #### `Peekable::next_if_map` and `next_if_map_mut`
+> **[来源: Rust Official Docs]**
 
 **Description:**
 These methods combine conditional consumption with mapping. They peek at the next element, apply a mapping function, and:
@@ -991,3 +1002,7 @@ for [a, b, c, d] in slice.array_windows() {
 ---
 
 *Document generated for Rust 1.94.0 - March 2026*
+
+---
+
+> **权威来源**: Rust Official Docs

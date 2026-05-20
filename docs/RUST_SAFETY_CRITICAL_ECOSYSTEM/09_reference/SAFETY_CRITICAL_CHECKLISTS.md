@@ -1,14 +1,17 @@
 # 安全关键Rust开发检查表
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本检查表提供安全关键Rust开发各阶段的系统化验证清单，确保符合功能安全标准要求。
 
 ---
 
 ## 项目启动检查表
+> **[来源: Rust Official Docs]**
 
 ### 安全计划
+> **[来源: Rust Official Docs]**
 
 - [ ] 定义项目安全范围
 - [ ] 确定适用的ASIL/SIL等级

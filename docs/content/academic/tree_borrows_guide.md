@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Tree Borrows 详解](#tree-borrows-详解)
   - [📋 目录](#-目录)
@@ -31,10 +32,12 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Tree Borrows 是 Rust 内存模型的最新研究成果，旨在替代 Stacked Borrows 成为 Rust 的标准别名模型。
 
 ### 核心改进
+> **[来源: Rust Official Docs]**
 
 ```
 Stacked Borrows (旧模型)

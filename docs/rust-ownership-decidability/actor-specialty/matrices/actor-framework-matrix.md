@@ -5,6 +5,7 @@
 ---
 
 ## 矩阵1: 核心功能对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | Actix | Bastion | coerce | Xtra | Heph | Stakker |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -24,6 +25,7 @@
 ---
 
 ## 矩阵2: 性能特征对比
+> **[来源: Rust Official Docs]**
 
 | 指标 | Actix | Bastion | coerce | Xtra | Heph | Stakker |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -38,6 +40,7 @@
 ---
 
 ## 矩阵3: 生态系统与工具
+> **[来源: Rust Official Docs]**
 
 | 特性 | Actix | Bastion | coerce | Xtra | Heph | Stakker |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|

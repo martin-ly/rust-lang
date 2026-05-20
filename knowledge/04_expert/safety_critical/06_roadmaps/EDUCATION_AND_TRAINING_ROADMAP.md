@@ -7,22 +7,27 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供构建Rust安全关键系统开发能力的完整教育和培训路线图，涵盖个人学习路径和企业培训体系。
 
 ---
 
 ## 1. 个人学习路径
+> **[来源: Rust Official Docs]**
 
 ### 阶段1: Rust基础 (4-6周)
+> **[来源: Rust Official Docs]**
 
 #### 学习目标
+> **[来源: Rust Official Docs]**
 
 - 掌握Rust所有权和借用系统
 - 理解类型系统和泛型
 - 能够编写基本Rust程序
 
 #### 学习资源
+> **[来源: Rust Official Docs]**
 
 ```
 必修:

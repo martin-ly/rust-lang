@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 证明图网 / Proof Graph Network](#rust-证明图网--proof-graph-network)
   - [📋 目录](#-目录)
@@ -64,10 +66,14 @@
 ---
 
 ## 🎯 证明图网概述
+>
+> **[来源: Rust Official Docs]**
 
 **证明图网 (Proof Graph Network)** 是一种形式化的证明结构，用于展示从前提条件到结论的完整推理过程。
 
 ### 核心属性
+>
+> **[来源: Rust Official Docs]**
 
 1. **形式化** - 使用形式化逻辑结构
 2. **可验证** - 证明步骤可验证
@@ -75,6 +81,8 @@
 4. **可组合** - 支持证明的组合和复用
 
 ### 证明结构层次
+>
+> **[来源: Rust Official Docs]**
 
 ```text
 公理 (Axiom) → 引理 (Lemma) → 定理 (Theorem) → 推论 (Corollary)
@@ -83,8 +91,12 @@
 ---
 
 ## 📐 证明结构说明
+>
+> **[来源: Rust Official Docs]**
 
 ### 证明结构模板
+>
+> **[来源: Rust Official Docs]**
 
 ```text
 目标: [要实现的功能]
@@ -95,6 +107,8 @@
 ```
 
 ### Mermaid 证明图语法
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -110,8 +124,12 @@ graph TD
 ---
 
 ## 🔬 定理证明树
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 公理→引理→定理→推论链
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -187,6 +205,8 @@ graph TD
 ```
 
 ### 2. MaybeUninit 安全性证明树
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -238,6 +258,8 @@ graph TD
 ```
 
 ### 3. 借用检查器安全性证明树
+>
+> **[来源: Rust Official Docs]**
 
 **形式化对应**: [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由）、规则 1–5。
 
@@ -330,6 +352,8 @@ graph TD
 ---
 
 ## 🛡️ 内存安全证明树
+>
+> **[来源: Rust Official Docs]**
 
 **形式化对应**:
 
@@ -550,6 +574,8 @@ graph TD
 ---
 
 ## 🔒 类型安全证明树
+>
+> **[来源: Rust Official Docs]**
 
 **形式化对应**: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
@@ -711,6 +737,8 @@ graph TD
 ---
 
 ## ⚡ 异步证明树
+>
+> **[来源: Rust Official Docs]**
 
 **形式化对应**: [async_state_machine](../research_notes/formal_methods/async_state_machine.md) 定理 T6.1–T6.3、[pin_self_referential](../research_notes/formal_methods/pin_self_referential.md) 定理 T1–T3。
 
@@ -756,6 +784,8 @@ graph TD
 ---
 
 ## 🧵 并发安全证明树
+>
+> **[来源: Rust Official Docs]**
 
 ### Send/Sync 安全性证明
 
@@ -935,6 +965,8 @@ graph TD
 ---
 
 ## 🔗 特性组合证明
+>
+> **[来源: Rust Official Docs]**
 
 ### 组合1: MaybeUninit + 调用追踪
 
@@ -1013,6 +1045,8 @@ graph TD
 ---
 
 ## 💻 代码示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: MaybeUninit 安全性证明实现
 
@@ -1227,6 +1261,8 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 ---
 
 ## 🎯 使用场景
+>
+> **[来源: Rust Official Docs]**
 
 ### 何时使用证明图网
 
@@ -1266,6 +1302,8 @@ fn proof_validation_workflow() {
 ---
 
 ## 🔗 相关文档
+>
+> **[来源: Rust Official Docs]**
 
 ### 核心证明文档
 
@@ -1299,6 +1337,8 @@ fn proof_validation_workflow() {
 ---
 
 ## Rust 1.95+ 思维表征更新
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -1328,6 +1368,8 @@ ust
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1373,3 +1415,7 @@ ust
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

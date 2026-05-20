@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 生产级项目示例](#rust-生产级项目示例)
   - [目录](#目录)
@@ -27,14 +28,17 @@
 ---
 
 ## 项目概述
+> **[来源: Rust Official Docs]**
 
 ### 目标读者
+> **[来源: Rust Official Docs]**
 
 - 有一定 Rust 基础，希望学习生产级开发实践的开发者
 - 需要将 Rust 应用到实际项目的团队
 - 寻找完整项目参考的架构师和技术负责人
 
 ### 项目特点
+> **[来源: Rust Official Docs]**
 
 | 特性 | 项目 1 (CLI) | 项目 2 (Web) | 项目 3 (Embedded) |
 |------|--------------|--------------|-------------------|
@@ -48,12 +52,15 @@
 ---
 
 ## 项目 1: CLI 工具 - 高性能日志分析器
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目概述
+> **[来源: Rust Official Docs]**
 
 高性能日志分析器是一个命令行工具，用于快速解析和分析大型日志文件。它利用 Rust 的零成本抽象和内存安全特性，能够高效处理 GB 级别的日志数据。
 
 #### 功能特性
+> **[来源: Rust Official Docs]**
 
 - **高性能解析**: 使用内存映射文件，避免不必要的数据拷贝
 - **并发处理**: 利用 Rayon 进行并行处理，充分利用多核 CPU
@@ -62,6 +69,7 @@
 - **实时进度**: 显示处理进度和统计信息
 
 #### 技术栈
+> **[来源: Rust Official Docs]**
 
 - **异步 I/O**: tokio
 - **内存映射**: memmap2
@@ -73,6 +81,7 @@
 - **测试**: criterion (基准测试)
 
 ### 1.2 架构设计
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 flowchart TB
@@ -116,6 +125,7 @@ flowchart TB
 ```
 
 #### 模块职责
+> **[来源: Rust Official Docs]**
 
 | 模块 | 职责 | 关键技术 |
 |------|------|----------|
@@ -126,6 +136,7 @@ flowchart TB
 | `lib.rs` | 公共类型和接口 | - |
 
 ### 1.3 项目结构
+> **[来源: Rust Official Docs]**
 
 ```
 log-analyzer/
@@ -7447,3 +7458,7 @@ openocd -f interface/stlink.cfg -f target/stm32f4x.cfg \
 - 部署和运维指南
 
 这些项目可以作为实际开发的参考模板，根据具体需求进行调整和扩展。
+
+---
+
+> **权威来源**: Rust Official Docs

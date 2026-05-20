@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 相关反例与边界集中索引](#rust-193-相关反例与边界集中索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -24,6 +25,7 @@
 ---
 
 ## 1.93 新增/变更相关反例
+> **[来源: Rust Official Docs]**
 
 | 特性/变更 | 反例或边界说明 | 形式化/设计文档 |
 | :--- | :--- | :--- |
@@ -40,6 +42,7 @@
 ---
 
 ## 与形式化/设计文档的衔接
+> **[来源: Rust Official Docs]**
 
 - **所有权/借用**：deref_nullptr、全局分配器反例见 [formal_methods](formal_methods/README.md) 六篇并表与 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)。
 - **类型/Trait**：Copy 特化移除、const/static 边界见 [type_theory](type_theory/README.md)、[trait_system_formalization](type_theory/trait_system_formalization.md)、[advanced_types](type_theory/advanced_types.md)。

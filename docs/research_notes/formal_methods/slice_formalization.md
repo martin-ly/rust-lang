@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Slice类型形式化](#slice类型形式化)
   - [目录](#目录)
@@ -43,6 +44,7 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Slice (`[T]`) 是Rust中的动态大小类型(DST)，表示连续内存区域的视图。
 Slice本身不是具体类型，必须通过引用(`&[T]`或`&mut [T]`)使用。
@@ -52,8 +54,10 @@ Slice本身不是具体类型，必须通过引用(`&[T]`或`&mut [T]`)使用。
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### 定义 SLICE-1 (Slice类型)
+> **[来源: Rust Official Docs]**
 
 Slice类型`[T]`表示类型`T`的连续元素序列，大小在编译时未知。
 
@@ -67,6 +71,7 @@ $$
 - `size_of::<&[T]>() = 2 * size_of::<usize>()` (胖指针：地址+长度)
 
 ### 定义 SLICE-2 (Slice引用)
+> **[来源: Rust Official Docs]**
 
 Slice引用`&[T]`是胖指针，包含指向首元素的指针和长度。
 
@@ -91,6 +96,7 @@ $$
 ```
 
 ### 定义 SLICE-3 (Slice索引)
+> **[来源: Rust Official Docs]**
 
 Slice索引操作返回对元素的引用。
 
@@ -113,8 +119,10 @@ $$
 ---
 
 ## String切片形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 STR-1 (str类型)
+> **[来源: Rust Official Docs]**
 
 `str`是UTF-8编码字符串的Slice类型，是Rust的字符串切片类型。
 
@@ -129,6 +137,7 @@ $$
 - 不可变
 
 ### 定义 STR-2 (String与str关系)
+> **[来源: Rust Official Docs]**
 
 `String`拥有堆分配的`str`，`&str`借用`String`的内容。
 
@@ -151,6 +160,7 @@ $$
 $$
 
 ### 定理 STR-T1 (UTF-8保证)
+> **[来源: Rust Official Docs]**
 
 所有`str`值在创建时保证为有效UTF-8，否则panic。
 
@@ -167,6 +177,7 @@ $$
 ---
 
 ## 切片生命周期
+> **[来源: Rust Official Docs]**
 
 ### 定义 SLICE-LF-1 (切片生命周期)
 

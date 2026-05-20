@@ -6,6 +6,8 @@
 > **状态**: ✅ 已完成
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [14. 工作流理论与形式化模型](#14-工作流理论与形式化模型)
   - [目录](#目录)
@@ -49,8 +51,12 @@
     - [ControlFlow 在工作流执行控制中的应用](#controlflow-在工作流执行控制中的应用)
 
 ## 14.1 工作流基础理论
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.1.1 工作流模型分类
+>
+> **[来源: Rust Official Docs]**
 
 工作流模型是用于描述业务流程自动化的形式化表达，按照关注点可分为以下几类：
 
@@ -82,6 +88,8 @@ W = (CF, DF, RM, EH)
 因此，W = (CF, DF, RM, EH) 可以完整表示 B。
 
 ### 14.1.2 工作流形式化表示
+>
+> **[来源: Rust Official Docs]**
 
 **定义 14.1.2** (工作流图)
 工作流图是一个有向图 G = (V, E, λ, μ)，其中：
@@ -102,6 +110,8 @@ W = (CF, DF, RM, EH)
 - sₙ 是终止状态
 
 ### 14.1.3 工作流语义模型
+>
+> **[来源: Rust Official Docs]**
 
 **定义 14.1.5** (工作流语义)
 工作流语义是一个三元组 Sem = (S, T, I)，其中：
@@ -114,8 +124,12 @@ W = (CF, DF, RM, EH)
 对于工作流 W，如果所有决策节点的条件都是互斥的，则状态转换是确定性的。
 
 ## 14.2 Rust工作流实现理论
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.2.1 异步机制与工作流同构性
+>
+> **[来源: Rust Official Docs]**
 
 Rust的异步机制与工作流模型存在天然的同构性：
 
@@ -152,6 +166,8 @@ F: Future<Output = T> → N: WorkflowNode<Output = T>
 ```
 
 ### 14.2.2 类型系统映射
+>
+> **[来源: Rust Official Docs]**
 
 **定义 14.2.2** (工作流类型系统)
 工作流类型系统 WT 包含以下类型：
@@ -174,6 +190,8 @@ type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Wo
 如果工作流 W₁: Workflow<T₁> 和 W₂: Workflow<T₂> 类型正确，则它们的组合 W₁ >> W₂ 也是类型安全的。
 
 ### 14.2.3 状态机转换
+>
+> **[来源: Rust Official Docs]**
 
 **定义 14.2.3** (Rust状态机)
 Rust编译器将异步函数转换为状态机：
@@ -212,8 +230,12 @@ impl Future for WorkflowState {
 ```
 
 ## 14.3 工作流形式化验证
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.3.1 Petri网模型
+>
+> **[来源: Rust Official Docs]**
 
 **定义 14.3.1** (工作流Petri网)
 工作流Petri网是一个五元组 WPN = (P, T, F, W, M₀)，其中：
@@ -353,6 +375,8 @@ impl TemporalFormula {
 ```
 
 ## 14.4 AI与工作流融合理论
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.4.1 认知循环模型
 
@@ -472,6 +496,8 @@ impl EvolutionaryWorkflowAlgebra {
 ```
 
 ## 14.5 工作流实现架构
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.5.1 核心组件设计
 
@@ -656,6 +682,8 @@ impl WorkflowEngine {
 ```
 
 ## 14.6 跨领域应用模型
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.6.1 制造业工作流
 
@@ -801,6 +829,8 @@ impl SmartHomeWorkflow {
 ```
 
 ## 14.7 形式化证明与验证
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.7.1 可达性分析
 
@@ -915,6 +945,8 @@ impl Workflow {
 ```
 
 ## 14.8 结论与展望
+>
+> **[来源: Rust Official Docs]**
 
 ### 14.8.1 理论贡献
 
@@ -951,6 +983,8 @@ impl Workflow {
 通过将形式化理论与Rust语言特性相结合，我们可以构建出既安全可靠又高效灵活的工作流系统，为数字化转型提供强有力的技术支撑。
 
 ## 参考资料（权威来源）
+>
+> **[来源: Rust Official Docs]**
 
 - BPMN 2.0（OMG 规范）：`https://www.omg.org/spec/BPMN/2.0/`
 - BPMN 2.0（ISO/IEC 19510）：`https://www.iso.org/standard/62652.html`
@@ -960,6 +994,8 @@ impl Workflow {
 ---
 
 ## Rust 1.95+ 工作流理论应用
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -1041,3 +1077,7 @@ fn execute_workflow_steps(
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [IndexMap/IndexSet 形式化分析](#indexmapindexset-形式化分析)
   - [目录](#目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 IndexMap提供:
 
@@ -42,6 +44,7 @@ IndexMap提供:
 ---
 
 ## 2. 架构设计
+> **[来源: Rust Official Docs]**
 
 ### 2.1 双数据结构
 

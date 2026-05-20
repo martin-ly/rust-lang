@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RustBelt：Iris分离逻辑核心机制详解](#rustbeltiris分离逻辑核心机制详解)
   - [目录](#目录)
@@ -41,8 +42,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Iris 框架概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心设计理念
+> **[来源: Rust Official Docs]**
 
 Iris是一个**高阶并发分离逻辑**框架，RustBelt基于它构建了Rust的形式化验证。
 
@@ -57,6 +60,7 @@ Iris是一个**高阶并发分离逻辑**框架，RustBelt基于它构建了Rust
 | 模态运算符 | 时间/知识推理 | 不变量 |
 
 ### 1.2 断言语言
+> **[来源: Rust Official Docs]**
 
 Iris断言 $P, Q$ 的语法：
 
@@ -78,8 +82,10 @@ $$
 ---
 
 ## 2. 资源代数（Resource Algebra）
+> **[来源: Rust Official Docs]**
 
 ### 2.1 定义
+> **[来源: Rust Official Docs]**
 
 资源代数 $\mathcal{RA} = (M, \cdot, \varepsilon, V)$ 包含：
 
@@ -95,6 +101,7 @@ $$
 3. **有效性**：$a \cdot b \in V \Rightarrow a \in V \land b \in V$
 
 ### 2.2 分数所有权（Fractional Ownership）
+> **[来源: Rust Official Docs]**
 
 用于建模共享借用：
 
@@ -120,6 +127,7 @@ $$
 $$
 
 ### 2.3 独占资源（Exclusive Resource）
+> **[来源: Rust Official Docs]**
 
 用于建模可变借用：
 
@@ -135,8 +143,10 @@ $$
 ---
 
 ## 3. Hoare 三元组与最弱前置条件
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Hoare 三元组
+> **[来源: Rust Official Docs]**
 
 **定义**：
 
@@ -147,6 +157,7 @@ $$
 含义：在预条件 $P$ 下执行表达式 $e$，若终止则返回满足 $Q(v)$ 的值 $v$。
 
 ### 3.2 Iris Hoare 三元组规则
+> **[来源: Rust Official Docs]**
 
 **返回值规则**：
 

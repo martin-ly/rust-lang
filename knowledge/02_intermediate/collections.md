@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
 
@@ -25,6 +26,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **泛型基础** — `Vec<T>` 的 `T` 类型参数（`02_intermediate/generics.md`）
 2. **所有权与借用** — 集合元素的 move 语义（`01_fundamentals/ownership.md`）
@@ -33,10 +35,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **集合（Collection）** 是存储多个同类型元素的容器。Rust 的集合类型通过**泛型**参数化元素类型，通过**所有权系统**管理元素生命周期。
 

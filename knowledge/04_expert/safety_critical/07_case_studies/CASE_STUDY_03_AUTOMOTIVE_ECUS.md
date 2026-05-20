@@ -7,6 +7,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 **行业**: 汽车电子
 **应用**: 电子控制单元(ECU)
@@ -17,8 +18,10 @@
 ---
 
 ## 汽车ECU概述
+> **[来源: Rust Official Docs]**
 
 ### ECU类型
+> **[来源: Rust Official Docs]**
 
 | ECU类型 | 功能 | 安全等级 | 实时性 |
 |---------|------|----------|--------|
@@ -33,8 +36,10 @@
 ---
 
 ## Rust在汽车ECU中的机会
+> **[来源: Rust Official Docs]**
 
 ### 为什么选择Rust？
+> **[来源: Rust Official Docs]**
 
 **现有挑战**:
 

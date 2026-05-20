@@ -3,6 +3,7 @@
 本索引记录所有归档文档的原位置、归档原因和归档日期。
 
 ## 归档目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 docs/archive/
@@ -14,8 +15,10 @@ docs/archive/
 ```
 
 ## 归档清单
+> **[来源: Rust Official Docs]**
 
 ### 1. deprecated_20260318/ (73 文件)
+> **[来源: Rust Official Docs]**
 
 | 原文件 | 归档原因 | 归档日期 |
 |--------|---------|----------|

@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🔷 Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
   - [📋 目录](#-目录)
@@ -65,6 +66,7 @@
 ---
 
 ## 🧠 泛型系统思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -94,6 +96,7 @@ mindmap
 ---
 
 ## 📊 概念定义-属性关系-解释论证
+> **[来源: Rust Official Docs]**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -108,6 +111,7 @@ mindmap
 ---
 
 ## 🔬 泛型系统证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -130,8 +134,10 @@ graph TD
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 泛型函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本泛型函数
@@ -147,6 +153,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 泛型结构体
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Point<T> {
@@ -160,6 +167,7 @@ let float = Point { x: 1.0, y: 4.0 };
 ```
 
 ### 泛型枚举
+> **[来源: Rust Official Docs]**
 
 ```rust
 enum Option<T> {
@@ -176,8 +184,10 @@ enum Result<T, E> {
 ---
 
 ## 📐 Trait 约束
+> **[来源: Rust Official Docs]**
 
 ### 基本约束
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用 where 子句
@@ -191,6 +201,7 @@ where
 ```
 
 ### 常见 Trait 约束
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 可比较

@@ -1,14 +1,20 @@
 # 16-program-semantics 目录扩展总结
 
 ## 扩展概述
+>
+> **[来源: Rust Official Docs]**
 
 本次扩展重点补充了 `distributed-patterns` 目录下缺失的内容，大幅提升了分布式系统语义分析的深度和完整性。
 
 ---
 
 ## 扩展内容统计
+>
+> **[来源: Rust Official Docs]**
 
 ### 新增文件总览
+>
+> **[来源: Rust Official Docs]**
 
 | 子目录 | 文件数 | 总大小 | 状态 |
 |--------|--------|--------|------|

@@ -13,6 +13,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Axum 深度解析](#axum-深度解析)
   - [📋 目录](#-目录)
@@ -40,6 +42,8 @@
 ---
 
 ## 🎯 概述
+>
+> **[来源: Rust Official Docs]**
 
 Axum 是一个基于 Tower 的 Web 框架，专注于：
 
@@ -49,6 +53,8 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 - **高性能**: 零成本抽象
 
 ### 设计理念
+>
+> **[来源: Rust Official Docs]**
 
 ```text
 Axum 设计原则:
@@ -62,8 +68,12 @@ Axum 设计原则:
 ---
 
 ## 🏗️ 架构设计
+>
+> **[来源: Rust Official Docs]**
 
 ### 核心组件
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::{

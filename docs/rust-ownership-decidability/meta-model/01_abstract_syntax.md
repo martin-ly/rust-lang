@@ -1,6 +1,7 @@
 # Rust 所有权系统元模型 - 抽象语法
 
 ## 1. 元元语言说明
+> **[来源: Rust Official Docs]**
 
 本文档使用以下元语言：
 
@@ -13,8 +14,10 @@
 - *斜体* 表示元变量
 
 ## 2. 词法元素
+> **[来源: Rust Official Docs]**
 
 ### 2.1 标识符
+> **[来源: Rust Official Docs]**
 
 ```bnf
 identifier ::= letter (letter | digit | '_')*

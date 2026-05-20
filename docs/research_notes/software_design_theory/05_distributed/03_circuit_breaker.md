@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def CB1: Circuit Breaker
+> **[来源: Rust Official Docs]**
 
 Circuit Breaker（熔断器）是一种**故障快速失败机制**，用于防止故障级联扩散。
 
@@ -22,6 +24,7 @@ CircuitBreaker := (S, T, f_threshold, t_timeout)
 ```
 
 ### Def CB2: 状态转换
+> **[来源: Rust Official Docs]**
 
 ```
 State_Transition :=

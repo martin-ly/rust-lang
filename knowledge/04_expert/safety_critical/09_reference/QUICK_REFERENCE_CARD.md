@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 一页纸速查
+> **[来源: Rust Official Docs]**
 
 ```
 ╔═══════════════════════════════════════════════════════════════════════════════╗
@@ -206,8 +207,10 @@ Version: 1.0
 ---
 
 ## 速查命令
+> **[来源: Rust Official Docs]**
 
 ### 日常开发
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 构建和测试
@@ -234,6 +237,7 @@ cargo doc --no-deps
 ```
 
 ### 依赖管理
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 更新依赖
@@ -251,6 +255,7 @@ cargo audit
 ```
 
 ### 嵌入式
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 添加目标

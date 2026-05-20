@@ -11,6 +11,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 迁移指南](#rust-194-迁移指南)
   - [📋 目录](#-目录)
@@ -51,6 +52,7 @@
 ---
 
 ## 🎯 快速开始
+> **[来源: Rust Official Docs]**
 
 如果你急于升级，只需执行以下命令：
 
@@ -74,8 +76,10 @@ cargo test
 ---
 
 ## 📊 版本变更概览
+> **[来源: Rust Official Docs]**
 
 ### 从 1.93 到 1.94 的主要变更
+> **[来源: Rust Official Docs]**
 
 ```markdown
 ╔══════════════════════════════════════════════════════════════════╗
@@ -101,8 +105,10 @@ cargo test
 ---
 
 ## 🚀 升级步骤
+> **[来源: Rust Official Docs]**
 
 ### 步骤 1: 更新 Rust 工具链
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 更新 stable 工具链
@@ -117,6 +123,7 @@ cargo --version
 ```
 
 ### 步骤 2: 验证当前代码
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 进入项目目录
@@ -133,6 +140,7 @@ cargo check --all-features
 ```
 
 ### 步骤 3: 运行测试
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有测试
@@ -146,8 +154,10 @@ cargo fmt -- --check
 ```
 
 ### 步骤 4: 采用新特性（可选）
+> **[来源: Rust Official Docs]**
 
 #### 采用 ControlFlow 模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 之前：手动实现提前返回
@@ -174,6 +184,7 @@ fn find_negative_controlflow(numbers: &[i32]) -> Option<i32> {
 ---
 
 ## ⚠️ 破坏性变更
+> **[来源: Rust Official Docs]**
 
 ### 已确认的破坏性变更
 

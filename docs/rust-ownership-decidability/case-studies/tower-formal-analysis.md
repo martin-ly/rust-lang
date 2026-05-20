@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tower服务抽象形式化分析](#tower服务抽象形式化分析)
   - [目录](#目录)
@@ -38,6 +39,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tower特点：
 
@@ -49,6 +51,7 @@ Tower特点：
 ---
 
 ## 2. Service trait
+> **[来源: Rust Official Docs]**
 
 ### 定义 SERVICE-1 ( 核心trait )
 

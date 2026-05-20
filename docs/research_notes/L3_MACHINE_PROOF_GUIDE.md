@@ -9,8 +9,10 @@
 ---
 
 ## 一、L3证明概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 证明深度层级
+> **[来源: Rust Official Docs]**
 
 | 层级 | 名称 | 特点 | 机器可检查 | 本体系状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -20,6 +22,7 @@
 | L4 | 自动化生成 | 从代码自动生成证明 | 是 | 未来 |
 
 ### 1.2 L3证明目标
+> **[来源: Rust Official Docs]**
 
 本阶段目标是为以下核心定理建立L3机器可检查证明：
 
@@ -30,8 +33,10 @@
 ---
 
 ## 二、工具链选择
+> **[来源: Rust Official Docs]**
 
 ### 2.1 推荐方案: Coq + Iris
+> **[来源: Rust Official Docs]**
 
 **理由**:
 
@@ -40,6 +45,7 @@
 3. 有丰富的Rust相关证明基础设施
 
 ### 2.2 环境搭建
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 使用OPAM安装Coq
@@ -59,12 +65,15 @@ coqtop --version
 ---
 
 ## 三、T-OW2所有权唯一性L3证明
+> **[来源: Rust Official Docs]**
 
 ### 3.1 定理回顾
+> **[来源: Rust Official Docs]**
 
 **T-OW2 (所有权唯一性)**: 对于任何值v，在任意时刻，最多存在一个变量x使得所有权状态为Owned且绑定值为v。
 
 ### 3.2 Iris中的状态表示
+> **[来源: Rust Official Docs]**
 
 ```coq
 From iris.algebra Require Import base gmap.
@@ -96,6 +105,7 @@ Definition ownership_unique (σ : State) : Prop :=
 ```
 
 ### 3.3 状态转移规则
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 状态转移关系 *)
@@ -130,6 +140,7 @@ Inductive reachable : State -> Prop :=
 ```
 
 ### 3.4 主定理证明骨架
+> **[来源: Rust Official Docs]**
 
 ```coq
 Theorem T_OW2_ownership_uniqueness :

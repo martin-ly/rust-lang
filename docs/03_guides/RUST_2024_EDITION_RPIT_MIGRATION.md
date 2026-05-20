@@ -5,12 +5,15 @@
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 2024 Edition 对 **Return Position Impl Trait (RPIT)** 的生命周期捕获规则进行了重要调整。在 `impl Trait` 返回类型中，生命周期默认捕获行为从**精确捕获**变为**自动捕获所有输入生命周期**。
 
 ## 变化详情
+> **[来源: Rust Official Docs]**
 
 ### Rust 2021 及之前
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn example<'a>(x: &'a str) -> impl Iterator<Item = char> + 'a {

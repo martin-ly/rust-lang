@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Strategy 形式化分析](#strategy-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Strategy 结构）
+> **[来源: Rust Official Docs]**
 
 设 $C$ 为上下文类型，$S$ 为策略类型。Strategy 是一个三元组 $\mathcal{SG} = (C, S, \mathit{execute})$，满足：
 
@@ -63,12 +66,14 @@ $$\mathcal{SG} = \langle C, S, \mathit{execute}: C \rightarrow R \rangle$$
 ---
 
 ### Axiom SR1（接口一致公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathit{interchangeable}(s_1, s_2)$$
 
 策略接口一致；不同策略对相同输入类型产生相同输出类型。
 
 ### Axiom SR2（所有权独立公理）
+> **[来源: Rust Official Docs]**
 
 $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 
@@ -77,6 +82,7 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 ---
 
 ### 定理 SR-T1（trait 多态安全定理）
+> **[来源: Rust Official Docs]**
 
 trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md) 解析正确性。
 
@@ -101,6 +107,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 定理 SR-T2（借用互斥定理）
+> **[来源: Rust Official Docs]**
 
 策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
@@ -127,6 +134,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 推论 SR-C1（纯 Safe Strategy）
+> **[来源: Rust Official Docs]**
 
 Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 
@@ -142,6 +150,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -152,6 +161,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Strategy {
@@ -186,6 +196,7 @@ assert_eq!(ctx.run(), 6);
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

@@ -1,12 +1,15 @@
 # 条件变量的形式化语义
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 条件变量（Condition Variable）是同步原语的重要组成部分，用于线程间的协作，允许线程在某个条件不满足时阻塞等待，直到被其他线程通知。Rust 通过 `std::sync::Condvar` 提供了条件变量的实现。本文档从形式化角度定义条件变量的语义，包括 wait/notify 操作、与互斥锁的交互以及虚假唤醒的处理。
 
 ## 2. 条件变量的基本形式化模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 核心概念定义
+> **[来源: Rust Official Docs]**
 
 ```
 条件变量 Condvar 的形式化结构:

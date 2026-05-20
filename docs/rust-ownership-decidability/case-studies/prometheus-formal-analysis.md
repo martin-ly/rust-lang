@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Prometheus客户端形式化分析](#prometheus客户端形式化分析)
   - [目录](#目录)
@@ -27,6 +28,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Prometheus客户端提供:
 
@@ -38,6 +40,7 @@ Prometheus客户端提供:
 ---
 
 ## 2. 指标类型
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (Counter单调性)
 

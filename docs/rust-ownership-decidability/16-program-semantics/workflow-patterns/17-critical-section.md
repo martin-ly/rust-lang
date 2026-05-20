@@ -1,10 +1,12 @@
 # 17 临界区模式 (Critical Section)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 临界区模式确保两个或多个活动的特定区域互斥执行。这是并发编程中最基本的同步原语之一。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{CriticalSection}(R, CS_1, CS_2, \ldots, CS_n) = \forall i \neq j: \neg(CS_i \text{ active} \land CS_j \text{ active})
@@ -13,6 +15,7 @@ $$
 其中 $R$ 是共享资源，$CS_i$ 是第 $i$ 个活动的临界区代码。
 
 ### 形式化表示
+> **[来源: Rust Official Docs]**
 
 **状态机表示：**
 

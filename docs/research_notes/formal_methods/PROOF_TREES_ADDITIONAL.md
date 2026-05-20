@@ -8,6 +8,7 @@
 ---
 
 ## 七、Pin 证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -64,6 +65,7 @@ A1 → L1 → T1
 ---
 
 ## 八、Send/Sync 证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -123,6 +125,7 @@ graph TD
 ---
 
 ## 九、Unsafe 边界证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -166,6 +169,7 @@ graph TD
 ---
 
 ## 十、综合安全定理证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -240,6 +244,7 @@ graph TD
 ---
 
 ## 证明树索引 (完整)
+> **[来源: Rust Official Docs]**
 
 | 编号 | 证明树 | 关键定理 | 依赖 |
 | :--- | :--- | :--- | :--- |
@@ -263,15 +268,18 @@ graph TD
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+> **[来源: Rust Official Docs]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -281,6 +289,7 @@ graph TD
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+> **[来源: Rust Official Docs]**
 
 本文档中的所有Rust代码示例均已：
 
@@ -289,6 +298,7 @@ graph TD
 - ✅ 通过标准库测试
 
 #### 相关文档
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)

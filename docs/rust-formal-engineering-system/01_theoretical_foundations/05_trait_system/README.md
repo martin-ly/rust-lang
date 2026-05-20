@@ -11,6 +11,7 @@
 ---
 
 ## Trait 作为类型类
+> **[来源: Rust Official Docs]**
 
 Rust 的 Trait 系统受 Haskell 类型类启发：
 
@@ -51,6 +52,7 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
 ```
 
 ## 关联类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 关联类型：每个实现可以指定自己的类型
@@ -76,6 +78,7 @@ impl Iterator for Counter {
 ```
 
 ## Trait 对象与动态分发
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 静态分发（单态化）
@@ -104,8 +107,10 @@ fn demo() {
 ```
 
 ## 更多代码示例
+> **[来源: Rust Official Docs]**
 
 ### 泛型约束与边界
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Trait 边界：对泛型参数的约束
@@ -147,6 +152,7 @@ where
 ```
 
 ### 高级 Trait 模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Supertrait：trait 继承
@@ -209,6 +215,7 @@ impl Distance for Kilometers {
 ```
 
 ### Trait 对象与对象安全
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 对象安全的 trait
@@ -258,6 +265,7 @@ fn heterogeneous_collection() {
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

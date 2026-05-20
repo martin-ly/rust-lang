@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Mediator 形式化分析](#mediator-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Mediator 结构）
+> **[来源: Rust Official Docs]**
 
 设 $M$ 为中介者类型，$C_1, \ldots, C_n$ 为同事类型。Mediator 是一个三元组 $\mathcal{ME} = (M, \{C_i\}, \mathit{mediate})$，满足：
 
@@ -63,12 +66,14 @@ $$\mathcal{ME} = \langle M, \{C_i\}_{i=1}^n, \mathit{mediate}: M \times C_i \tim
 ---
 
 ### Axiom ME1（无直接耦合公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall i \neq j,\, C_i\text{ 不直接引用 }C_j\text{；仅通过 }M\text{ 通信}$$
 
 同事间无直接耦合；仅通过中介通信。
 
 ### Axiom ME2（无循环引用公理）
+> **[来源: Rust Official Docs]**
 
 $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
@@ -77,6 +82,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 ---
 
 ### 定理 ME-T1（循环引用避免定理）
+> **[来源: Rust Official Docs]**
 
 `Rc`/`Weak` 或 `Arc` 管理循环引用时避免自引用；由 [ownership_model](../../../formal_methods/ownership_model.md) 与借用规则。
 
@@ -102,6 +108,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 ---
 
 ### 定理 ME-T2（消息路由安全定理）
+> **[来源: Rust Official Docs]**
 
 channel 或回调消息传递满足借用规则；无数据竞争。
 
@@ -129,6 +136,7 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 ---
 
 ### 推论 ME-C1（纯 Safe Mediator）
+> **[来源: Rust Official Docs]**
 
 Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 
@@ -144,6 +152,7 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -154,6 +163,7 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Mediator {
@@ -181,6 +191,7 @@ m.broadcast("hello");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

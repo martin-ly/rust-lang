@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: Rust Official Docs]**
 
 - [❓ Rust 1.90 升级 FAQ](#-rust-190-升级-faq)
   - [📑 目录](#-目录)
@@ -56,8 +57,10 @@
 ---
 
 ## 1. 升级相关
+> **[来源: Rust Official Docs]**
 
 ### Q1.1: 为什么要升级到 Rust 1.90？
+> **[来源: Rust Official Docs]**
 
 **A**: Rust 1.90 带来了多项重要改进：
 
@@ -85,6 +88,7 @@
 - 与最新工具链兼容
 
 ### Q1.2: 什么时候应该升级？
+> **[来源: Rust Official Docs]**
 
 **A**: 建议在以下情况升级：
 
@@ -105,6 +109,7 @@
 - 使用了大量 nightly 特性的项目
 
 ### Q1.3: 升级需要多长时间？
+> **[来源: Rust Official Docs]**
 
 **A**: 取决于项目规模：
 
@@ -116,12 +121,15 @@
 ---
 
 ## 2. 迁移指南
+> **[来源: Rust Official Docs]**
 
 ### Q2.1: 如何升级到 Rust 1.90？
+> **[来源: Rust Official Docs]**
 
 **A**: 遵循以下步骤：
 
 #### 步骤 1: 更新 Rust 工具链
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 更新 rustup
@@ -133,6 +141,7 @@ rustc --version
 ```
 
 #### 步骤 2: 更新 Cargo.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [package]
@@ -146,6 +155,7 @@ rust-version = "1.90"      # 添加或更新 rust-version
 ```
 
 #### 步骤 3: 处理编译警告
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 检查警告
@@ -156,6 +166,7 @@ cargo clippy --fix
 ```
 
 #### 步骤 4: 运行测试
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有测试

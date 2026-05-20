@@ -1,6 +1,7 @@
 # Separation Logic: A Comprehensive Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Separation Logic: A Comprehensive Deep Dive](#separation-logic-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -125,10 +126,12 @@
 ---
 
 ## 1. Introduction
+> **[来源: Rust Official Docs]**
 
 Separation Logic (SL) is a logical framework for reasoning about programs that manipulate mutable data structures stored in memory. Introduced by John C. Reynolds and Peter W. O'Hearn in the early 2000s, it extends Hoare logic with a separating conjunction operator that enables local reasoning about memory.
 
 ### 1.1 Historical Context
+> **[来源: Rust Official Docs]**
 
 Before Separation Logic, reasoning about pointer programs required global invariants that tracked the entire heap state. This approach was:
 

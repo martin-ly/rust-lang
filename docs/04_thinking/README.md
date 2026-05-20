@@ -12,6 +12,8 @@
 ---
 
 ## 快速开始示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 示例：如何从这些文档中获取决策支持
@@ -42,6 +44,8 @@ fn verify_memory_safety() -> bool {
 ---
 
 ## 文档列表
+>
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 用途 |
 | :--- | :--- | :--- |
@@ -55,6 +59,8 @@ fn verify_memory_safety() -> bool {
 ---
 
 ## 使用场景
+>
+> **[来源: Rust Official Docs]**
 
 ### 何时使用这些文档
 

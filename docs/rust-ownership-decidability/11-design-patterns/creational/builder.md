@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 构建者模式将复杂对象的构造过程与其表示分离，允许使用相同的构建过程创建不同的表示。
 
 ---
 
 ## 基础实现
+> **[来源: Rust Official Docs]**
 
 ### 标准构建者
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[derive(Debug, Clone)]

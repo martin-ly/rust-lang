@@ -7,11 +7,14 @@
 ---
 
 ## 一、目标定义 (什么是 "100% 完成")
+> **[来源: Rust Official Docs]**
 
 ### 1.1 100% 完成标准
+> **[来源: Rust Official Docs]**
 
 ```markdown
 ## 文档完整性
+> **[来源: Rust Official Docs]**
 - [ ] 所有计划模块有实质内容 (L2+ 深度)
 - [ ] 无空目录或仅 README 的目录
 - [ ] 所有代码示例可编译运行

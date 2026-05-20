@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Prototype 形式化分析](#prototype-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Prototype 结构）
+> **[来源: Rust Official Docs]**
 
 设 $T$ 为原型类型。Prototype 是一个二元组 $\mathcal{P} = (T, \mathit{clone})$，满足：
 
@@ -66,12 +69,14 @@ $$\mathcal{P} = \langle T, \mathit{clone}: T \rightarrow T \rangle$$
 ---
 
 ### Axiom P1（独立副本公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall t: T,\, \mathit{clone}(t) = t' \implies \Omega(t') \cap \Omega(t) = \emptyset \land t' \equiv_{\mathrm{obs}} t$$
 
 Clone 不改变原对象，产生独立副本；观察等价但所有权分离。
 
 ### Axiom P2（引用语义公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$$
 
@@ -80,6 +85,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 定理 P-T1（Clone 类型安全定理）
+> **[来源: Rust Official Docs]**
 
 若 $T$ 实现 `Clone`，则 $\mathit{clone}(t)$ 类型为 $T$，所有权独立。
 
@@ -103,6 +109,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 定理 P-T2（借用安全定理）
+> **[来源: Rust Official Docs]**
 
 `&self` 借用，返回值拥有所有权；原对象仍有效。
 
@@ -129,6 +136,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 推论 P-C1（Clone 安全使用）
+> **[来源: Rust Official Docs]**
 
 若 $T : \text{Clone}$，则 $\mathit{clone}(t)$ 产生的副本可安全传递、存储；与原对象生命周期独立。
 
@@ -146,6 +154,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -156,6 +165,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[derive(Clone)]
@@ -188,6 +198,7 @@ let copy = tree.clone();  // 递归 clone
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

@@ -1,14 +1,17 @@
 # 项目模板
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键项目的完整模板，可直接用于启动新项目。
 
 ---
 
 ## 1. 嵌入式项目模板
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目结构
+> **[来源: Rust Official Docs]**
 
 ```
 embedded-safety-project/
@@ -41,6 +44,7 @@ embedded-safety-project/
 ```
 
 ### 1.2 Cargo.toml模板
+> **[来源: Rust Official Docs]**
 
 ```toml
 [package]
@@ -113,6 +117,7 @@ strip = false
 ```
 
 ### 1.3 rust-toolchain.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [toolchain]
@@ -130,6 +135,7 @@ profile = "minimal"
 ```
 
 ### 1.4 .cargo/config.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [build]
@@ -151,6 +157,7 @@ retry = 3
 ```
 
 ### 1.5 main.rs模板
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -207,6 +214,7 @@ fn main() -> ! {
 ```
 
 ### 1.6 lib.rs模板
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -232,6 +240,7 @@ pub type Result<T> = core::result::Result<T, SafetyError>;
 ```
 
 ### 1.7 memory.x
+> **[来源: Rust Official Docs]**
 
 ```ld
 MEMORY
@@ -253,8 +262,10 @@ _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 ---
 
 ## 2. 应用程序模板
+> **[来源: Rust Official Docs]**
 
 ### 2.1 项目结构
+> **[来源: Rust Official Docs]**
 
 ```
 safety-application/

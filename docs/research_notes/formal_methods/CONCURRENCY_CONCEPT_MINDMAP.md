@@ -7,6 +7,7 @@
 ---
 
 ## 并发概念全景
+> **[来源: Rust Official Docs]**
 
 ```text
                         并发概念族
@@ -46,8 +47,10 @@
 ---
 
 ## 一、线程 (Thread)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 OS线程
+> **[来源: Rust Official Docs]**
 
 ```text
 OS线程

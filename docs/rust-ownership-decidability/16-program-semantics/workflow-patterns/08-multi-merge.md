@@ -1,6 +1,7 @@
 # 08 多路合并模式 (Multi-Merge)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
   - [📋 目录](#-目录)
@@ -25,11 +26,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 多路合并模式允许多个分支独立地汇入同一个后续节点，无需同步。
 每个分支完成时都会触发后续活动的执行。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{MultiMerge}(P_1, P_2, \ldots, P_n, Q) = \forall i \in [1,n]: P_i \gg Q_i

@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 1. [什么是 Polonius](#1-什么是-polonius)
 2. [为什么需要 Polonius](#2-为什么需要-polonius)
@@ -21,10 +22,12 @@
 ---
 
 ## 1. 什么是 Polonius
+> **[来源: Rust Official Docs]**
 
 **Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
 
 ### 历史背景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 timeline
@@ -40,6 +43,7 @@ timeline
 ```
 
 ### 核心定位
+> **[来源: Rust Official Docs]**
 
 | 维度 | Lexical Lifetimes | NLL (当前) | Polonius (未来) |
 |------|------------------|-----------|----------------|
@@ -52,8 +56,10 @@ timeline
 ---
 
 ## 2. 为什么需要 Polonius
+> **[来源: Rust Official Docs]**
 
 ### 2.1 NLL 的局限性
+> **[来源: Rust Official Docs]**
 
 当前的 NLL (Non-Lexical Lifetimes) 已经比词法生命周期精确得多，但仍存在**误报 (false positives)**：
 
@@ -73,6 +79,7 @@ fn nll_limitation() {
 ```
 
 ### 2.2 Polonius 的核心改进
+> **[来源: Rust Official Docs]**
 
 Polonius 引入**路径敏感 (path-sensitive)** 分析：
 
@@ -93,8 +100,10 @@ graph TD
 ---
 
 ## 3. 核心原理：基于 Datalog 的生命周期推断
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Datalog 简介
+> **[来源: Rust Official Docs]**
 
 **Datalog** 是一种声明式逻辑编程语言，核心概念：
 
@@ -103,6 +112,7 @@ graph TD
 - **查询 (Queries)**：从事实和规则中推导结论
 
 ### 3.2 Polonius 的 Datalog 建模
+> **[来源: Rust Official Docs]**
 
 Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 
@@ -114,6 +124,7 @@ Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 | `borrow_live_at(L, P)` | 贷款 `L` 在程序点 `P` 仍然存活 |
 
 ### 3.3 关键推导规则
+> **[来源: Rust Official Docs]**
 
 ```prolog
 % 如果贷款在程序点起源，则它在该点存活

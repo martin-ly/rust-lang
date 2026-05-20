@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🔀 Rust 线程与并发速查卡](#-rust-线程与并发速查卡)
   - [📋 目录](#-目录)
@@ -60,6 +61,7 @@
 ---
 
 ## 🧠 并发安全思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -94,6 +96,7 @@ mindmap
 ---
 
 ## 📊 概念定义-属性关系-解释论证
+> **[来源: Rust Official Docs]**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -108,6 +111,7 @@ mindmap
 ---
 
 ## 🔬 并发安全证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -137,8 +141,10 @@ graph TD
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 线程创建
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -152,6 +158,7 @@ handle.join().unwrap();
 ```
 
 ### 作用域线程 (Rust 1.93.0+)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -168,8 +175,10 @@ thread::scope(|s| {
 ---
 
 ## 📐 同步原语
+> **[来源: Rust Official Docs]**
 
 ### Mutex
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::Mutex;
@@ -183,6 +192,7 @@ let m = Mutex::new(5);
 ```
 
 ### RwLock
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::RwLock;
@@ -203,6 +213,7 @@ let lock = RwLock::new(5);
 ```
 
 ### Arc (原子引用计数)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::Arc;

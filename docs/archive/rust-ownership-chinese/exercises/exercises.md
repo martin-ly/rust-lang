@@ -5,8 +5,10 @@
 ---
 
 ## 第一部分：选择题（50道）
+> **[来源: Rust Official Docs]**
 
 ### 基础概念（1-20）
+> **[来源: Rust Official Docs]**
 
 **1. 以下哪个选项正确描述了Rust的所有权规则？**
 
@@ -96,6 +98,7 @@ D. 部署时
 ---
 
 ### 借用与生命周期（21-35）
+> **[来源: Rust Official Docs]**
 
 **21. 以下代码的输出是？**
 
@@ -159,6 +162,7 @@ D. 以上取决于具体实现
 ---
 
 ### 并发与线程安全（36-45）
+> **[来源: Rust Official Docs]**
 
 **36. Rc和Arc的主要区别是？**
 
@@ -202,6 +206,7 @@ D. 不能编译，需要更多生命周期标注
 ---
 
 ### 可判定性理论（46-50）
+> **[来源: Rust Official Docs]**
 
 **46. 根据Halting Problem，以下哪个说法是正确的？**
 
@@ -236,8 +241,10 @@ D. 类型检查是不可判定的
 ---
 
 ## 第二部分：代码分析题（30道）
+> **[来源: Rust Official Docs]**
 
 ### 分析题 1: 基础借用
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {
@@ -292,6 +299,7 @@ let r2 = &mut s; // ❌ 编译错误
 ---
 
 ### 分析题 2: 生命周期标注
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Wrapper<'a> {
@@ -366,6 +374,7 @@ fn get_first_explicit<'a>(&'a self, other: &'a Wrapper<'a>) -> &'a str {
 ---
 
 ### 分析题 3: 并发与所有权
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -428,6 +437,7 @@ fn main() {
 ---
 
 ### 分析题 4: 内部可变性
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::cell::RefCell;
@@ -497,6 +507,7 @@ fn main() {
 ---
 
 ## 第三部分：编程挑战（20道）
+> **[来源: Rust Official Docs]**
 
 ### 挑战 1: 实现自定义智能指针
 

@@ -1,6 +1,7 @@
 # 指称语义 (Denotational Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [指称语义 (Denotational Semantics)](#指称语义-denotational-semantics)
   - [目录](#目录)
@@ -46,6 +47,7 @@
   - [参考文献](#参考文献)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 指称语义（Denotational Semantics）通过将程序映射到数学对象（通常是域论中的元素）来定义程序的含义。
 它回答了"程序表示什么"的问题，而不是"程序如何运行"。
@@ -55,6 +57,7 @@
 ---
 
 ## 2. 指称语义的基本思想
+> **[来源: Rust Official Docs]**
 
 ### 2.1 合成性 (Compositionality)
 

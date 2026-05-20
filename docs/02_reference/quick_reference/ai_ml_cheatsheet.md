@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🤖 Rust AI/ML 速查卡](#-rust-aiml-速查卡)
   - [📋 目录](#-目录)
@@ -49,6 +50,7 @@
 ---
 
 ## 框架选型
+> **[来源: Rust Official Docs]**
 
 | 框架 | 适用场景 | 依赖 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -59,8 +61,10 @@
 ---
 
 ## Burn 快速入门
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 张量基础操作
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml
@@ -95,6 +99,7 @@ fn main() {
 ```
 
 ### 示例 2: 简单神经网络
+> **[来源: Rust Official Docs]**
 
 ```rust
 use burn::{
@@ -131,6 +136,7 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
 ```
 
 ### 示例 3: 模型推理
+> **[来源: Rust Official Docs]**
 
 ```rust
 use burn::tensor::{Tensor, backend::NdArray};
@@ -153,8 +159,10 @@ fn inference<B: burn::tensor::backend::Backend>(
 ---
 
 ## Candle 快速入门
+> **[来源: Rust Official Docs]**
 
 ### 示例 4: 张量操作
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml
@@ -186,6 +194,7 @@ fn main() -> Result<()> {
 ```
 
 ### 示例 5: 加载 Hugging Face 模型
+> **[来源: Rust Official Docs]**
 
 ```rust
 use candle_core::{Device, Result};
@@ -218,8 +227,10 @@ fn load_model(model_id: &str) -> Result<()> {
 ---
 
 ## LLM 推理
+> **[来源: Rust Official Docs]**
 
 ### 示例 6: 使用 llm crate 进行本地推理
+> **[来源: Rust Official Docs]**
 
 ```rust
 use llm::Model;

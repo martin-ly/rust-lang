@@ -6,8 +6,10 @@
 ---
 
 ## 一、语言特性
+> **[来源: Rust Official Docs]**
 
 ### 1. `cfg_select!` 宏
+> **[来源: Rust Official Docs]**
 
 编译期 `cfg` 条件选择，替代 `cfg-if` crate。
 
@@ -36,6 +38,7 @@ let arch_str = cfg_select! {
 ```
 
 ### 2. `if let` guards on match arms
+> **[来源: Rust Official Docs]**
 
 在 `match` arm 守卫中使用 `if let`：
 
@@ -50,12 +53,14 @@ match value {
 ```
 
 ### 3. 路径段关键字重命名导入
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::keyword as kw;  // 重命名关键字路径段
 ```
 
 ### 4. PowerPC/PowerPC64 内联汇编稳定化
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c11_macro_system/examples/ppc_asm_demo.rs`](../../../crates/c11_macro_system/examples/ppc_asm_demo.rs)
 
@@ -69,8 +74,10 @@ unsafe {
 ---
 
 ## 二、标准库新 API
+> **[来源: Rust Official Docs]**
 
 ### `core::range` 模块
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c08_algorithms/examples/core_range_demo.rs`](../../../crates/c08_algorithms/examples/core_range_demo.rs)
 
@@ -89,6 +96,7 @@ for i in range {
 ```
 
 ### 原子操作 — `update` / `try_update`
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c05_threads/examples/atomic_update_demo.rs`](../../../crates/c05_threads/examples/atomic_update_demo.rs)
 
@@ -117,6 +125,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 | `AtomicU8` ~ `AtomicU64` | ✅ | ✅ |
 
 ### 集合 — 获取可变引用的插入操作
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) | [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
 
@@ -141,6 +150,7 @@ head.push_str(" world");
 ```
 
 ### 裸指针 — 不安全转引用
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs)
 
@@ -155,6 +165,7 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
 ### 布局计算 — `Layout` 新 API
+> **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
 

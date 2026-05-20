@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tonic Health/Reflection形式化分析](#tonic-healthreflection形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 gRPC标准扩展:
 
@@ -35,6 +37,7 @@ gRPC标准扩展:
 ---
 
 ## 2. 健康检查协议
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (健康状态机)
 

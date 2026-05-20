@@ -14,6 +14,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.95/1.96 特性速查表](#rust-195196-特性速查表)
   - [目录](#目录)
@@ -41,8 +42,10 @@
 ---
 
 ## if let guards 语法
+> **[来源: Rust Official Docs]**
 
 ### 基本语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 match value {
@@ -52,6 +55,7 @@ match value {
 ```
 
 ### 链式守卫
+> **[来源: Rust Official Docs]**
 
 ```rust
 match event {
@@ -67,6 +71,7 @@ match event {
 ```
 
 ### 对比表
+> **[来源: Rust Official Docs]**
 
 | 场景 | 旧写法 (Rust < 1.95) | 新写法 (Rust 1.95+) |
 |------|---------------------|-------------------|
@@ -75,6 +80,7 @@ match event {
 | 组合条件 | `if let Some(x) = opt && x > 0` 不支持 | `pattern if let Some(x) = opt && x > 0 =>` |
 
 ### 代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ✅ Rust 1.95+ 推荐写法
@@ -104,8 +110,10 @@ match message {
 ---
 
 ## Range 类型对比
+> **[来源: Rust Official Docs]**
 
 ### 类型总览
+> **[来源: Rust Official Docs]**
 
 | 类型 | 语法 | 包含开始 | 包含结束 | 迭代性 |
 |------|------|:--------:|:--------:|:------:|
@@ -117,6 +125,7 @@ match message {
 | `RangeToInclusive` | `..=b` | N/A | ✅ | ❌ |
 
 ### 使用场景速查
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 数组/向量切片
@@ -140,6 +149,7 @@ vec.get(0..=5);                // 获取 0-5
 ```
 
 ### Range 方法
+> **[来源: Rust Official Docs]**
 
 | 方法 | 适用类型 | 说明 |
 |------|----------|------|
@@ -152,6 +162,7 @@ vec.get(0..=5);                // 获取 0-5
 ---
 
 ## 新 Lint 规则
+> **[来源: Rust Official Docs]**
 
 ### Rust 1.96 新增 Lints
 

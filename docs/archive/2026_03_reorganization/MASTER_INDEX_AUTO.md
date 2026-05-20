@@ -3,6 +3,7 @@
 > Auto-generated cross-reference index for the Rust Ownership Decidability documentation.
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Documentation Master Index](#documentation-master-index)
   - [Table of Contents](#table-of-contents)
@@ -28,8 +29,10 @@
 ---
 
 ## Documentation Structure
+> **[来源: Rust Official Docs]**
 
 ### Core Documentation
+> **[来源: Rust Official Docs]**
 
 | Document | Description |
 |----------|-------------|
@@ -39,6 +42,7 @@
 | [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) | Comprehensive analysis |
 
 ### Core Concepts
+> **[来源: Rust Official Docs]**
 
 | Topic | Detailed Guide | Quick Reference |
 |-------|---------------|-----------------|
@@ -47,6 +51,7 @@
 | Lifetimes | [lifetimes-mastery.md](01-core-concepts/detailed-concepts/lifetimes-mastery.md) | [lifetime-concept-card.md](01-core-concepts/short-concepts/lifetime-concept-card.md) |
 
 ### Formal Foundations
+> **[来源: Rust Official Docs]**
 
 | Area | Entry Point |
 |------|-------------|
@@ -56,6 +61,7 @@
 | Coq Formalization | [coq-formalization/](coq-formalization/) |
 
 ### Case Studies
+> **[来源: Rust Official Docs]**
 
 | Category | Index |
 |----------|-------|
@@ -67,26 +73,31 @@
 ---
 
 ## Core Concept Links
+> **[来源: Rust Official Docs]**
 
 ### Ownership System
+> **[来源: Rust Official Docs]**
 
 - **Theory**: [ownership-types.md](formal-foundations/models/ownership-types.md)
 - **Practice**: [ownership-deep-dive.md](01-core-concepts/detailed-concepts/ownership-deep-dive.md)
 - **Examples**: See examples in [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md)
 
 ### Borrowing System
+> **[来源: Rust Official Docs]**
 
 - **Theory**: [borrow-semantics.md](formal-foundations/models/borrow-semantics.md)
 - **Practice**: [borrowing-in-depth.md](01-core-concepts/detailed-concepts/borrowing-in-depth.md)
 - **Coq Proof**: [ReborrowComplete.v](coq-formalization/theories/Advanced/ReborrowComplete.v)
 
 ### Lifetimes
+> **[来源: Rust Official Docs]**
 
 - **Theory**: [lifetime-logic.md](formal-foundations/models/lifetime-logic.md)
 - **Practice**: [lifetimes-mastery.md](01-core-concepts/detailed-concepts/lifetimes-mastery.md)
 - **Coq Proof**: [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v)
 
 ### Type System
+> **[来源: Rust Official Docs]**
 
 - **Theory**: [type-system-formalization.md](formal-foundations/semantics/type-system-formalization.md)
 - **Coq**: [TypeSystem.v](coq-formalization/theories/Typing/TypeSystem.v)

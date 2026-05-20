@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def ES1: Event Sourcing
+> **[来源: Rust Official Docs]**
 
 事件溯源是一种**状态持久化模式**，系统状态不直接存储，而是存储导致状态变更的**事件序列**，状态通过**重放事件**重建。
 
@@ -22,6 +24,7 @@ EventSourcing := (E, S, apply, snapshot)
 ```
 
 ### Def ES2: 事件不变性
+> **[来源: Rust Official Docs]**
 
 ```
 ∀e ∈ E. Immutable(e)

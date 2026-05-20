@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Trait 系统形式化](#trait-系统形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -96,16 +97,19 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究的目的是形式化定义 Rust 的 Trait 系统，并理解其类型理论基础。
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **Trait 的形式化定义**: 如何用类型理论精确描述 Trait？
 2. **Trait 对象语义**: Trait 对象的类型理论解释是什么？
 3. **泛型 Trait**: 泛型 Trait 的类型推导如何工作？
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - Trait 系统的形式化定义
 - Trait 对象的类型理论模型
@@ -114,8 +118,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### Trait 核心概念
+> **[来源: Rust Official Docs]**
 
 1. **Trait 定义**: 定义一组方法签名
 2. **Trait 实现**: 为类型实现 Trait
@@ -123,6 +129,7 @@
 4. **泛型 Trait**: 带类型参数的 Trait
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **Trait 定义 (Trait Definition)**: 定义一组方法签名，描述类型必须实现的行为。Trait 类似于接口，但更强大。
 
@@ -139,6 +146,7 @@
 **默认实现 (Default Implementation)**: Trait 可以为方法提供默认实现，实现者可以选择覆盖。
 
 ### 相关理论
+> **[来源: Rust Official Docs]**
 
 **类型类 (Type Class)**: Haskell 的类型类系统。Rust 的 Trait 系统受到类型类的启发，但有所不同。
 
@@ -151,6 +159,7 @@
 **多态性 (Polymorphism)**: Trait 系统提供了参数多态（通过泛型）和特设多态（通过 Trait 实现）。
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **类型类理论 (Type Class Theory)**: Trait 系统基于类型类理论，但增加了更多特性，如关联类型和生命周期参数。
 
@@ -161,6 +170,7 @@
 **多态类型系统 (Polymorphic Type System)**: Trait 系统提供了强大的多态能力，支持参数多态和特设多态。
 
 ### 类型类的理论基础
+> **[来源: Rust Official Docs]**
 
 **类型类 (Type Class)** 是 Haskell 中的核心概念，用于定义类型必须满足的约束：
 
@@ -181,6 +191,7 @@
 - Rust Trait 对象提供动态分发，Haskell 使用存在类型
 
 ### Trait 对象的理论基础
+> **[来源: Rust Official Docs]**
 
 **存在类型 (Existential Type)** 是类型理论中的核心概念：
 
@@ -294,6 +305,7 @@ $$\tau : T[\tau']$$
 ---
 
 ## 🔬 形式化定义 {#-形式化定义}
+> **[来源: Rust Official Docs]**
 
 ### 1. Trait 定义
 
@@ -518,6 +530,7 @@ GAT 约束 $A[P] : B[P]$ 在 [advanced_types](advanced_types.md) AT-L1 衔接。
 ---
 
 ## ⚠️ 反例：违反 Trait 规则 {#️-反例违反-trait-规则}
+> **[来源: Rust Official Docs]**
 
 | 反例 | 违反规则 | 后果 | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -531,6 +544,7 @@ GAT 约束 $A[P] : B[P]$ 在 [advanced_types](advanced_types.md) AT-L1 衔接。
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+> **[来源: Rust Official Docs]**
 
 ```text
 Trait 系统安全性证明树
@@ -621,6 +635,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+> **[来源: Rust Official Docs]**
 
 ### 待证明的性质
 
@@ -637,6 +652,7 @@ $$\forall \tau, T: (\tau : T \leftrightarrow \text{Resolve}(\tau, T) \neq \text{
 ---
 
 ## 💻 代码示例与实践 {#-代码示例与实践}
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 基本 Trait
 
@@ -1053,6 +1069,7 @@ fn main() {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+> **[来源: Rust Official Docs]**
 
 ### 学术论文
 
@@ -1086,6 +1103,7 @@ fn main() {
 ---
 
 ## 🔄 研究进展 {#-研究进展}
+> **[来源: Rust Official Docs]**
 
 ### 已完成 ✅ {#已完成-}
 
@@ -1113,6 +1131,7 @@ fn main() {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+> **[来源: Rust Official Docs]**
 
 ### 与类型系统的集成
 
@@ -1154,6 +1173,7 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 - ✅ 系统集成与实际应用：已完成（与类型系统、生命周期集成及 Serde/异步/插件案例）
 
 ## 🆕 Rust 1.93.0 相关更新 {#-rust-1930-相关更新}
+> **[来源: Rust Official Docs]**
 
 ### 全局分配器与 Trait 对象
 
@@ -1198,6 +1218,7 @@ $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \righ
 ---
 
 ## 🆕 Rust Book Ch 15.2 对齐: Deref Trait形式化 {#-rust-book-ch-152-对齐-deref-trait形式化}
+> **[来源: Rust Official Docs]**
 
 > **新增日期**: 2026-03-05
 > **对应**: Rust Book Ch 15.2 Treating Smart Pointers Like Regular References
@@ -1455,3 +1476,7 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

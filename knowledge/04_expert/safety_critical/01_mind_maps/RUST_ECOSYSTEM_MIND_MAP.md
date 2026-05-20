@@ -102,8 +102,10 @@
 ---
 
 ## 思维导图说明
+> **[来源: Rust Official Docs]**
 
 ### 核心维度
+> **[来源: Rust Official Docs]**
 
 1. **学术理论基础**: Tree Borrows (PLDI 2025), Miri (POPL 2026)
 2. **工具链与语言**: Rust 1.94/95, core库认证
@@ -112,6 +114,7 @@
 5. **教育体系**: Stanford CS110L, CMU 15-411
 
 ### 核心安全保证
+> **[来源: Rust Official Docs]**
 
 - 所有权系统
 - 借用检查器
@@ -120,6 +123,7 @@
 - 并发安全
 
 ### 应用领域
+> **[来源: Rust Official Docs]**
 
 - 汽车 (ASIL D)
 - 航空航天 (DAL A-D)
@@ -128,6 +132,7 @@
 - 国防军事
 
 ### 认证工具链
+> **[来源: Rust Official Docs]**
 
 - Ferrocene (TÜV SÜD认证)
 - AdaCore GNAT Pro

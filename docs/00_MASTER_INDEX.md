@@ -13,6 +13,7 @@
 ---
 
 ## 按主题快速导航
+> **[来源: Rust Official Docs]**
 
 | 主题 | 入口 | 说明 | 交叉引用 |
 | :--- | :--- | :--- | :--- |
@@ -30,6 +31,7 @@
 ---
 
 ## 按角色导航
+> **[来源: Rust Official Docs]**
 
 | 角色 | 推荐路径 | 关键入口 |
 | :--- | :--- | :--- |
@@ -41,6 +43,7 @@
 ---
 
 ## 01 学习路径与导航
+> **[来源: Rust Official Docs]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -207,7 +210,7 @@
 | [PROJECT_ARCHITECTURE_GUIDE.md](./07_project/PROJECT_ARCHITECTURE_GUIDE.md) | 项目架构指南 | ←→ [crates/](../crates/README.md) ←→ [software_design_theory/04_compositional_engineering](./research_notes/software_design_theory/04_compositional_engineering/README.md) |
 | [RUST_RELEASE_TRACKING_CHECKLIST.md](07_project/RUST_RELEASE_TRACKING_CHECKLIST.md) | 新版本发布后的更新流程 | ←→ [06_toolchain/](./06_toolchain/README.md) ←→ [research_notes/](./research_notes/README.md) |
 | [TASK_INDEX.md](07_project/TASK_INDEX.md) | 未完成任务与计划总索引 | ←→ 所有主要文档 |
-| DOCS_100_PERCENT_PROGRESS.md | 100% 推进进度与验收标准 | ←→ [TASK_ORCHESTRATION_MASTER_PLAN](archive/2026_03_reorganization/TASK_ORCHESTRATION_MASTER_PLAN.md) |
+| DOCS_100_PERCENT_PROGRESS.md | 100% 推进进度与验收标准 | ←→ TASK_ORCHESTRATION_MASTER_PLAN (历史归档文件已迁移) |
 | [MODULE_1.93_ADAPTATION_STATUS.md](07_project/MODULE_1.93_ADAPTATION_STATUS.md) | C01–C12 模块 1.93 适配状态 | ←→ [crates/](../crates/README.md) ←→ [06_toolchain/](./06_toolchain/README.md) |
 | [PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md](07_project/PROJECT_CRITICAL_EVALUATION_REPORT_2026_02.md) | 项目批判性评估报告 | ←→ 所有主要文档 |
 | [INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md](07_project/INTERNATIONAL_BENCHMARK_CRITICAL_EVALUATION_2026_02.md) | 国际化对标与全面批判性评估 | ←→ [formal_methods/](./research_notes/formal_methods/README.md) |

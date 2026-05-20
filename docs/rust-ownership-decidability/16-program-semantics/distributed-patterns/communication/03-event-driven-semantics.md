@@ -1,6 +1,7 @@
 # 事件驱动语义 (Event-Driven Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [事件驱动语义 (Event-Driven Semantics)](#事件驱动语义-event-driven-semantics)
   - [目录](#目录)
@@ -25,6 +26,7 @@
   - [8. 总结](#8-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 事件驱动架构是分布式系统的重要范式，通过异步事件传播实现组件解耦。
 本文档分析事件系统的形式化语义、Rust 实现以及一致性保证。
@@ -32,6 +34,7 @@
 ---
 
 ## 2. 事件驱动基础模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 核心概念
 

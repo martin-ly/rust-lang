@@ -12,8 +12,10 @@
 ---
 
 ## Rust 编译器核心概念
+> **[来源: Rust Official Docs]**
 
 ### 编译流程
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 1. 词法分析：源代码 → Token
@@ -27,6 +29,7 @@
 ```
 
 ### 编译器属性
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 条件编译

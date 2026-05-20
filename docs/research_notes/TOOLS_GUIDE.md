@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究工具使用指南](#研究工具使用指南)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -46,6 +47,7 @@
 ---
 
 ## 🎯 工具分类 {#-工具分类}
+> **[来源: Rust Official Docs]**
 
 研究工具按用途分为以下几类：
 
@@ -58,10 +60,12 @@
 ---
 
 ## 🔬 形式化验证工具 {#-形式化验证工具}
+> **[来源: Rust Official Docs]**
 
 **主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
 
 ### Prusti
+> **[来源: Rust Official Docs]**
 
 **用途**: Rust 程序的形式化验证工具
 
@@ -114,6 +118,7 @@ cargo prusti --file src/lib.rs
 ---
 
 ### Kani
+> **[来源: Rust Official Docs]**
 
 **用途**: Rust 程序的模型检查器
 
@@ -163,6 +168,7 @@ cargo kani --function test_abs
 ---
 
 ### 可选进阶：Coq/Lean
+> **[来源: Rust Official Docs]**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
 本项目已归档 Coq 骨架与 Aeneas 对接计划至 [archive/deprecated/](../archive/deprecated/README.md)。
@@ -172,8 +178,10 @@ cargo kani --function test_abs
 ---
 
 ## ⚡ 性能分析工具 {#-性能分析工具}
+> **[来源: Rust Official Docs]**
 
 ### Criterion.rs
+> **[来源: Rust Official Docs]**
 
 **用途**: 统计驱动的 Rust 基准测试框架
 
@@ -226,6 +234,7 @@ cargo bench
 ---
 
 ### perf
+> **[来源: Rust Official Docs]**
 
 **用途**: Linux 性能分析工具
 
@@ -263,6 +272,7 @@ perf stat ./target/release/my_program
 ---
 
 ### flamegraph
+> **[来源: Rust Official Docs]**
 
 **用途**: 性能火焰图生成工具
 
@@ -295,6 +305,7 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 ---
 
 ## 🔍 内存分析工具 {#-内存分析工具}
+> **[来源: Rust Official Docs]**
 
 ### Miri
 

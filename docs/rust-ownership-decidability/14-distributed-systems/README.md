@@ -5,12 +5,14 @@
 ---
 
 ## 目录说明
+> **[来源: Rust Official Docs]**
 
 本目录介绍使用Rust构建分布式系统的模式和最佳实践。
 
 ---
 
 ## 与actor-specialty的关系
+> **[来源: Rust Official Docs]**
 
 - `actor-specialty`: Actor模型专题
 - `13-distributed-systems`: 分布式系统通用模式
@@ -18,6 +20,7 @@
 ---
 
 ## 关键主题
+> **[来源: Rust Official Docs]**
 
 | 主题 | 描述 |
 |:---|:---|

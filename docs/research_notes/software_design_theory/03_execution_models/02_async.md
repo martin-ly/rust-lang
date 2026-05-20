@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [异步执行模型形式化](#异步执行模型形式化)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 **Def 1.1（Future 类型）**:
 
@@ -71,6 +73,7 @@ $\mathit{async}\, \{ e \}$ 产生 $\mathrm{Future}\langle \tau \rangle$，其中
 ---
 
 ## 操作语义（简化）
+> **[来源: Rust Official Docs]**
 
 ```text
 poll(Pending)     →  Pending
@@ -82,6 +85,7 @@ await Pending     →  suspend（挂起，稍后继续）
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -132,6 +136,7 @@ impl SelfReferential {
 ---
 
 ## 典型场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 说明 |
 | :--- | :--- |
@@ -143,6 +148,7 @@ impl SelfReferential {
 ---
 
 ## 与同步/并发对比
+> **[来源: Rust Official Docs]**
 
 | 模型 | 线程 | 调度 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -153,8 +159,10 @@ impl SelfReferential {
 ---
 
 ## 运行时与任务调度
+> **[来源: Rust Official Docs]**
 
 ### Waker 与 Executor
+> **[来源: Rust Official Docs]**
 
 **Def 1.4（Waker）**:
 
@@ -176,6 +184,7 @@ Future 执行流程（简化）：
 ```
 
 ### 多任务组合
+> **[来源: Rust Official Docs]**
 
 | 组合 | 语义 | 示例 |
 | :--- | :--- | :--- |
@@ -185,6 +194,7 @@ Future 执行流程（简化）：
 | `spawn` | 后台任务，不等待 | `tokio::spawn(async { ... })` |
 
 ### 错误传播与取消
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ? 操作符传播 Result
@@ -203,6 +213,7 @@ handle.abort();  // 显式取消
 ---
 
 ## 运行时选型
+> **[来源: Rust Official Docs]**
 
 | 运行时 | 特点 | 适用 |
 | :--- | :--- | :--- |

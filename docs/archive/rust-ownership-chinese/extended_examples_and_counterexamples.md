@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [扩展实例与反例库](#扩展实例与反例库)
   - [目录](#目录)
@@ -52,10 +53,13 @@
 ---
 
 ## 1. 基础所有权模式
+> **[来源: Rust Official Docs]**
 
 ### 1.1 所有权转移的正例与反例
+> **[来源: Rust Official Docs]**
 
 #### 正例 1.1.1: 正确的所有权转移
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ✓ 正确的所有权转移模式
@@ -86,6 +90,7 @@ main()                    take_ownership()
 ```
 
 #### 反例 1.1.2: 移动后使用
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ✗ 编译错误：移动后使用
@@ -125,8 +130,10 @@ println!("{}", s1);  // ✓ OK
 ```
 
 ### 1.2 Copy vs Move 边界案例
+> **[来源: Rust Official Docs]**
 
 #### 边界案例 1.2.1: 包含非Copy类型的结构体
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[derive(Copy, Clone)]  // ✗ 编译错误
@@ -159,10 +166,13 @@ struct Point {
 ---
 
 ## 2. 生命周期边界案例
+> **[来源: Rust Official Docs]**
 
 ### 2.1 生命周期省略规则边界
+> **[来源: Rust Official Docs]**
 
 #### 边界案例 2.1.1: 省略规则失效
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ✗ 编译错误：生命周期无法推断
@@ -199,6 +209,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 ### 2.2 自引用结构体
+> **[来源: Rust Official Docs]**
 
 #### 边界案例 2.2.1: 移动后悬垂指针
 

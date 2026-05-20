@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [wasm-bindgen形式化分析](#wasm-bindgen形式化分析)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 wasm-bindgen功能：
 
@@ -46,6 +48,7 @@ wasm-bindgen功能：
 ---
 
 ## 2. 类型映射
+> **[来源: Rust Official Docs]**
 
 ### 定义 TYPEMAP-1 ( 基本类型 )
 

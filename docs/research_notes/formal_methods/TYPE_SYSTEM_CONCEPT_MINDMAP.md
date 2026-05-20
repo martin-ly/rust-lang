@@ -7,6 +7,7 @@
 ---
 
 ## 类型系统概念全景
+> **[来源: Rust Official Docs]**
 
 ```text
                         类型系统概念族
@@ -40,8 +41,10 @@
 ---
 
 ## 一、基础类型详解
+> **[来源: Rust Official Docs]**
 
 ### 1.1 标量类型
+> **[来源: Rust Official Docs]**
 
 ```text
 标量类型

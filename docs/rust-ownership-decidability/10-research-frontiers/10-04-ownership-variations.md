@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [所有权变体](#所有权变体)
   - [目录](#目录)
@@ -61,8 +62,10 @@
 ---
 
 ## 1. 区域类型系统（Region-based Typing）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 区域系统基础
+> **[来源: Rust Official Docs]**
 
 区域类型系统（Region-based Typing）是 Rust 生命周期系统的理论基础，由 Tofte 和 Talpin 在 1994 年提出，用于管理堆分配内存的生命周期。
 

@@ -1,6 +1,7 @@
 # 设计模式选择决策树
 
 ## 交互式决策流程
+> **[来源: Rust Official Docs]**
 
 ```text
 开始选择设计模式
@@ -52,8 +53,10 @@
 ---
 
 ## 模式分类决策树
+> **[来源: Rust Official Docs]**
 
 ### 1. 对象创建
+> **[来源: Rust Official Docs]**
 
 ```text
 对象创建需求

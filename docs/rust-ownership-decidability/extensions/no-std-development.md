@@ -5,12 +5,15 @@
 本章节深入探讨 no_std 开发的各个方面。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [No_std 开发](#no_std-开发)
 
 ## No_std 基础
+> **[来源: Rust Official Docs]**
 
 ### 什么是 No_std
+> **[来源: Rust Official Docs]**
 
 `#![no_std]` 属性告诉 Rust 编译器不使用标准库 `std`，而是使用核心库 `core`。
 核心库提供了 Rust 的基本类型和基本 trait，但不包含：

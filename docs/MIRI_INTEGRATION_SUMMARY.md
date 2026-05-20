@@ -1,8 +1,10 @@
 # Miri 集成总结报告
 
 ## 完成的工作
+> **[来源: Rust Official Docs]**
 
 ### 1. Miri 配置
+> **[来源: Rust Official Docs]**
 
 **文件**: `.cargo/config.toml`
 
@@ -27,6 +29,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 ```
 
 ### 2. Miri 测试文件
+> **[来源: Rust Official Docs]**
 
 为以下 crate 创建了 `miri_tests.rs` 文件：
 

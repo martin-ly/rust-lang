@@ -10,6 +10,7 @@
 ---
 
 ## 一、国际权威成果总览
+> **[来源: Rust Official Docs]**
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -26,8 +27,10 @@
 ---
 
 ## 二、逐项对标与差距
+> **[来源: Rust Official Docs]**
 
 ### 2.1 RustBelt
+> **[来源: Rust Official Docs]**
 
 - **论文**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md)
 - **形式化**: λ Rust 模型、分离逻辑、MIR 级语义

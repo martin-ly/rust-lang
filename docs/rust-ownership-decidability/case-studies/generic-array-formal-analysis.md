@@ -11,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Generic-Array 泛型数组形式化分析](#generic-array-泛型数组形式化分析)
   - [目录](#目录)
@@ -77,8 +78,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题背景
+> **[来源: Rust Official Docs]**
 
 在 Rust 1.51 引入 const generics (最小可行版本) 之前，Rust 开发者面临一个核心问题：**无法在泛型代码中使用固定大小的数组**。考虑以下场景：
 

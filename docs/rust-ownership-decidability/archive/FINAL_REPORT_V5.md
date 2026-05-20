@@ -9,12 +9,15 @@
 ---
 
 ## 本次重大补充
+> **[来源: Rust Official Docs]**
 
 针对用户提出的关键反馈——"很多逻辑上的比如rust这些特性针对设计模式并行并发同步异步的设计模式分布式设计模式工作流设计模式等等包括架构设计模式的全面论证"，我们进行了史无前例的全面扩充。
 
 ### 新增四大专题模块
+> **[来源: Rust Official Docs]**
 
 #### 1. 11-design-patterns/ (设计模式专题)
+> **[来源: Rust Official Docs]**
 
 - **11-01-rust-design-patterns.md** - Rust设计模式全面指南
   - 创建型模式：工厂、Builder、单例、原型

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Futures 库形式化分析](#futures-库形式化分析)
   - [目录](#目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 futures crate提供:
 
@@ -44,6 +46,7 @@ futures crate提供:
 ---
 
 ## 2. Future组合子
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Then组合
 

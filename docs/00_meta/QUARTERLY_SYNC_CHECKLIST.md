@@ -10,8 +10,10 @@
 ---
 
 ## 1️⃣ Rust 官方生态更新
+> **[来源: Rust Official Docs]**
 
 ### Rust 官方博客
+> **[来源: Rust Official Docs]**
 
 - [ ] 阅读 [Rust 官方博客](https://blog.rust-lang.org/) 本季度所有文章
 - [ ] 检查新版本发布说明（如有）
@@ -24,6 +26,7 @@
 | | | | | |
 
 ### crates.io 生态更新
+> **[来源: Rust Official Docs]**
 
 - [ ] 运行 `cargo outdated -R` 检查所有根依赖
 - [ ] 检查是否有主版本号更新（semver-major）

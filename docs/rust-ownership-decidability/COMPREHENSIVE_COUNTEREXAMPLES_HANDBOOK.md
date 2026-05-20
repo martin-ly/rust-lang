@@ -2,10 +2,13 @@
 ---
 
 ## Part 2: Deep Dive Counter-Examples
+> **[来源: Rust Official Docs]**
 
 ### Extended Ownership Deep Dive
+> **[来源: Rust Official Docs]**
 
 #### EDO.1 Understanding Move Semantics
+> **[来源: Rust Official Docs]**
 
 The Rust ownership system is built on three core rules:
 

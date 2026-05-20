@@ -6,8 +6,12 @@
 ---
 
 ## 一、历史里程碑：Rust 正式成为 Linux 内核永久组成部分
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 时间线
+>
+> **[来源: Rust Official Docs]**
 
 | 时间 | 事件 |
 |------|------|
@@ -18,6 +22,8 @@
 | 2026 年初 | Rust 正式成为 Linux 内核的**永久一级公民** |
 
 ### 1.2 这意味着什么？
+>
+> **[来源: Rust Official Docs]**
 
 - **不再是"实验"**：Rust 代码与 C 代码在内核中享有同等地位
 - **长期维护承诺**：内核维护者承诺长期支持 Rust 基础设施
@@ -27,8 +33,12 @@
 ---
 
 ## 二、为什么 Linux 需要 Rust？
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 C 语言的内存安全问题
+>
+> **[来源: Rust Official Docs]**
 
 Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-after-free、缓冲区溢出、空指针解引用）。Rust 的所有权模型在编译期消除这些漏洞。
 
@@ -41,6 +51,8 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 | 整数溢出 | 静默回绕（默认） | debug panic / release 显式选择 |
 
 ### 2.2 内核特有的挑战
+>
+> **[来源: Rust Official Docs]**
 
 | 挑战 | Rust 解决方案 |
 |------|---------------|
@@ -53,8 +65,12 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 ---
 
 ## 三、Rust for Linux 架构
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 内核中的 Rust 支持层
+>
+> **[来源: Rust Official Docs]**
 
 ```text
 Linux Kernel
@@ -74,6 +90,8 @@ Linux Kernel
 ```
 
 ### 3.2 `kernel` Crate 核心 API
+>
+> **[来源: Rust Official Docs]**
 
 ```rust,ignore
 // 内核模块声明
@@ -112,6 +130,8 @@ impl kernel::file::Operations for RustFile {
 ```
 
 ### 3.3 与 C 驱动的对比
+>
+> **[来源: Rust Official Docs]**
 
 | 方面 | C 驱动 | Rust 驱动 |
 |------|--------|-----------|
@@ -125,6 +145,8 @@ impl kernel::file::Operations for RustFile {
 ---
 
 ## 四、生产级驱动案例
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 Android Binder IPC
 

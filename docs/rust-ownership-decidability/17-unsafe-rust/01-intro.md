@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Unsafe Rust 概述](#unsafe-rust-概述)
   - [目录](#目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 1. 什么是 Unsafe Rust
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心概念
+> **[来源: Rust Official Docs]**
 
 Unsafe Rust 是 Rust 的一个**超集**，它允许程序员执行编译器无法验证安全的操作。
 这并不意味着 Unsafe Rust 就是"危险的"，而是意味着**安全责任从编译器转移到了程序员**。

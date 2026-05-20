@@ -9,12 +9,14 @@
 ---
 
 ## Overview
+> **[来源: Rust Official Docs]**
 
 A unified formal system covering **ownership + borrow + lifetime + type + trait + async + pin**, with axiom lists, theorem dependency DAG, and mappings to sub-documents.
 
 ---
 
 ## Core Mechanisms and Axiom Layer
+> **[来源: Rust Official Docs]**
 
 | Mechanism | Axioms/Definitions | Sub-document |
 | :--- | :--- | :--- |
@@ -32,6 +34,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Theorem Dependency DAG (Simplified)
+> **[来源: Rust Official Docs]**
 
 ```text
 [ axioms ]

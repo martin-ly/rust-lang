@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 编程语言：构造性语义形式化与表达能力边界](#rust-编程语言构造性语义形式化与表达能力边界)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 🎯 文档宗旨与问题导向 {#-文档宗旨与问题导向}
+> **[来源: Rust Official Docs]**
 
 ### 核心问题（用户反馈）
+> **[来源: Rust Official Docs]**
 
 | 问题类型 | 具体表现 | 本文档的应对 |
 | :--- | :--- | :--- |
@@ -58,6 +61,7 @@
 | **无全局一致性** | 语义与类型系统、所有权、借用等模块的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用 |
 
 ### 设计原则
+> **[来源: Rust Official Docs]**
 
 1. **语义先行**：语法→语义→性质，每层有形式化定义
 2. **边界可证**：表达能力边界有形式化陈述或至少论证思路
@@ -67,6 +71,7 @@
 ---
 
 ## 📐 三种语义形式化范式 {#-三种语义形式化范式}
+> **[来源: Rust Official Docs]**
 
 ```text
                     编程语言语义形式化
@@ -91,8 +96,10 @@
 ---
 
 ## 🔬 操作语义形式化 {#-操作语义形式化}
+> **[来源: Rust Official Docs]**
 
 ### 1. 小步操作语义（Small-Step）
+> **[来源: Rust Official Docs]**
 
 **定义 1.1（归约关系）**
 $\to \subseteq \text{Expr} \times \text{Expr}$：若 $(e, e') \in \to$，则称 $e$ 一步归约到 $e'$，记作 $e \to e'$。
@@ -107,6 +114,7 @@ $\to^*$ 为 $\to$ 的自反传递闭包。
 若 $e \to e'$ 且 $\Omega$ 为所有权状态，则移动/复制/借用操作满足 [ownership_model](formal_methods/ownership_model.md) 规则 1–3。
 
 ### 2. 大步操作语义（Big-Step）
+> **[来源: Rust Official Docs]**
 
 **定义 2.1（求值关系）**
 $e \Downarrow v$ 表示表达式 $e$ 求值为值 $v$。
@@ -116,6 +124,7 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 *证明*：由 [type_system_foundations](type_theory/type_system_foundations.md) 定理 2（保持性）与定理 1（进展性）组合可得。
 
 ### 3. 表达能力边界：操作语义视角
+> **[来源: Rust Official Docs]**
 
 | 可表达 | 不可表达（或需 unsafe） | 边界论证 |
 | :--- | :--- | :--- |
@@ -127,8 +136,10 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 ---
 
 ## 🏛️ 指称语义与构造性语义 {#️-指称语义与构造性语义}
+> **[来源: Rust Official Docs]**
 
 ### 1. 类型即命题（Curry-Howard）
+> **[来源: Rust Official Docs]**
 
 **定义 3.1**
 类型 $\tau$ 对应逻辑命题，良型项 $e : \tau$ 对应该命题的证明。

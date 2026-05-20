@@ -1,6 +1,7 @@
 # Rust Formal Semantics: A Comprehensive Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Rust Formal Semantics: A Comprehensive Deep Dive](#rust-formal-semantics-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -240,10 +241,12 @@
 ---
 
 ## 1. Introduction
+> **[来源: Rust Official Docs]**
 
 Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages. Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector. This document provides a comprehensive formal treatment of Rust's semantics, from core type theory to advanced verification techniques.
 
 ### 1.1 Motivation
+> **[来源: Rust Official Docs]**
 
 Formal semantics serve multiple purposes:
 

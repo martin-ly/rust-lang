@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 操作语义通过定义程序执行的步骤来精确描述程序行为。本文档建立Rust核心语言的操作语义框架，包括小步语义、大步语义和环境语义。
 
 ---
 
 ## 一、小步操作语义 (Small-Step Semantics)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基本概念
+> **[来源: Rust Official Docs]**
 
 **配置**: `⟨e, σ⟩` 其中
 
@@ -27,6 +30,7 @@
 - 表达式e在状态σ下一步归约为e'，新状态σ'
 
 ### 1.2 λ演算的小步语义
+> **[来源: Rust Official Docs]**
 
 **β归约**:
 
@@ -45,6 +49,7 @@
 ```
 
 ### 1.3 存储操作
+> **[来源: Rust Official Docs]**
 
 **分配**:
 
@@ -65,6 +70,7 @@
 ```
 
 ### 1.4 Rust特定规则
+> **[来源: Rust Official Docs]**
 
 **移动**:
 
@@ -87,14 +93,17 @@
 ---
 
 ## 二、大步操作语义 (Big-Step Semantics)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基本概念
+> **[来源: Rust Official Docs]**
 
 **判断**: `⟨e, σ⟩ ⇓ ⟨v, σ'⟩`
 
 - 表达式e在状态σ下求值为v，最终状态σ'
 
 ### 2.2 表达式规则
+> **[来源: Rust Official Docs]**
 
 **值**:
 
@@ -125,6 +134,7 @@
 ```
 
 ### 2.3 递归
+> **[来源: Rust Official Docs]**
 
 **不动点**:
 
@@ -135,6 +145,7 @@
 ---
 
 ## 三、环境语义 (Environmental Semantics)
+> **[来源: Rust Official Docs]**
 
 ### 3.1 环境定义
 

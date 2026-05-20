@@ -3,6 +3,7 @@
 本文档介绍如何在项目中使用和维护 mdbook-quiz 交互式测验系统。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [MDBook Quiz 使用指南](#mdbook-quiz-使用指南)
   - [目录](#目录)
@@ -49,8 +50,10 @@
       - [相关文档](#相关文档)
 
 ## 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 1. 安装依赖
+> **[来源: Rust Official Docs]**
 
 确保已安装 mdbook 和 mdbook-quiz：
 
@@ -60,6 +63,7 @@ cargo install mdbook-quiz
 ```
 
 ### 2. 构建和预览
+> **[来源: Rust Official Docs]**
 
 ```bash
 cd book
@@ -68,12 +72,15 @@ mdbook serve    # 预览（自动刷新）
 ```
 
 ### 3. 访问测验
+> **[来源: Rust Official Docs]**
 
 打开浏览器访问 `http://localhost:3000`，选择对应的测验章节即可开始。
 
 ## 添加新测验
+> **[来源: Rust Official Docs]**
 
 ### 步骤 1：创建测验目录
+> **[来源: Rust Official Docs]**
 
 如果还没有对应主题的目录，先创建：
 
@@ -82,6 +89,7 @@ mkdir -p book/src/quizzes
 ```
 
 ### 步骤 2：创建 TOML 测验文件
+> **[来源: Rust Official Docs]**
 
 在 `book/src/quizzes/` 下创建新的 `.toml` 文件：
 
@@ -90,6 +98,7 @@ touch book/src/quizzes/your_topic.toml
 ```
 
 ### 步骤 3：编写测验内容
+> **[来源: Rust Official Docs]**
 
 参考以下模板：
 
@@ -110,6 +119,7 @@ difficulty = "基础"
 ```
 
 ### 步骤 4：创建 Markdown 入口文件
+> **[来源: Rust Official Docs]**
 
 创建 `book/src/quizzes/your_topic.md`：
 
@@ -122,6 +132,7 @@ difficulty = "基础"
 ```
 
 ### 步骤 5：更新 SUMMARY.md
+> **[来源: Rust Official Docs]**
 
 在 `book/src/SUMMARY.md` 中添加新章节：
 

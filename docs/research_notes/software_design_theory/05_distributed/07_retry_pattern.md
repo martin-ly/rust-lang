@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def RT1: Retry
+> **[来源: Rust Official Docs]**
 
 重试是一种**故障恢复机制**，当操作失败时，按策略重新执行操作。
 
@@ -21,6 +23,7 @@ Retry := (Op, policy, predicate)
 ```
 
 ### Def RT2: 退避策略
+> **[来源: Rust Official Docs]**
 
 ```
 BackoffStrategy :=

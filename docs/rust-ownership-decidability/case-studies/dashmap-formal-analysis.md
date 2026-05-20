@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [DashMap并发HashMap形式化分析](#dashmap并发hashmap形式化分析)
   - [目录](#目录)
@@ -41,6 +42,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 DashMap特点：
 
@@ -52,6 +54,7 @@ DashMap特点：
 ---
 
 ## 2. 分片架构
+> **[来源: Rust Official Docs]**
 
 ### 定义 SHARD-1 ( 分片结构 )
 

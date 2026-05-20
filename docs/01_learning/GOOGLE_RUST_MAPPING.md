@@ -7,6 +7,7 @@
 ---
 
 ## Google 课程模块概览
+> **[来源: Rust Official Docs]**
 
 Google Comprehensive Rust 分为 4 天：
 
@@ -20,8 +21,10 @@ Google Comprehensive Rust 分为 4 天：
 ---
 
 ## Day 1: Rust 基础
+> **[来源: Rust Official Docs]**
 
 ### Google 内容
+> **[来源: Rust Official Docs]**
 
 - Hello World
 - 变量与可变性

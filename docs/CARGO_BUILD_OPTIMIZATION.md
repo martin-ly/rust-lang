@@ -3,8 +3,10 @@
 本文档提供针对大型 Rust 项目（2000+ 依赖）的编译速度优化方案。
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 1. 安装优化工具
+> **[来源: Rust Official Docs]**
 
 **Windows (PowerShell):**
 
@@ -20,6 +22,7 @@ chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
 ### 2. 使用优化脚本编译
+> **[来源: Rust Official Docs]**
 
 ```powershell
 # 快速检查（最快）
@@ -36,10 +39,12 @@ chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
 ## ⚙️ 环境变量配置
+> **[来源: Rust Official Docs]**
 
 将以下内容添加到你的 PowerShell 配置文件 (`$PROFILE`) 或 `.bashrc`/`.zshrc`：
 
 ### Windows (PowerShell)
+> **[来源: Rust Official Docs]**
 
 ```powershell
 # 编译性能优化
@@ -64,6 +69,7 @@ $env:CARGO_PROFILE_RELEASE_CODEGEN_UNITS = "16"
 ```
 
 ### Linux/macOS (Bash/Zsh)
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 编译性能优化
@@ -86,6 +92,7 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 ```
 
 ## 📊 优化效果对比
+> **[来源: Rust Official Docs]**
 
 | 优化项 | 预期效果 | 配置位置 |
 |--------|----------|----------|
@@ -96,8 +103,10 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 | 并行编译 | 充分利用多核CPU | 环境变量 |
 
 ## 🔧 配置文件说明
+> **[来源: Rust Official Docs]**
 
 ### .cargo/config.toml
+> **[来源: Rust Official Docs]**
 
 主要优化配置：
 
@@ -116,6 +125,7 @@ protocol = "sparse"
 ```
 
 ### Cargo.toml Profile 配置
+> **[来源: Rust Official Docs]**
 
 ```toml
 [profile.dev]
@@ -133,6 +143,7 @@ codegen-units = 1024
 ```
 
 ## 🛠️ 推荐工具
+> **[来源: Rust Official Docs]**
 
 | 工具 | 用途 | 安装命令 |
 |------|------|----------|

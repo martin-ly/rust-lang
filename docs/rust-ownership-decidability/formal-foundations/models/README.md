@@ -3,6 +3,7 @@
 本目录包含 Rust 所有权系统的形式化模型文档。
 
 ## 文件列表
+> **[来源: Rust Official Docs]**
 
 | 文件 | 描述 |
 |------|------|
@@ -19,6 +20,7 @@
 | [tree-borrows-comprehensive.md](tree-borrows-comprehensive.md) | Tree Borrows 综合模型 |
 
 ## 相关目录
+> **[来源: Rust Official Docs]**
 
 - [语义定义](../semantics/README.md) - 操作语义和逻辑关系
 - [证明](../proofs/README.md) - 形式化证明和定理

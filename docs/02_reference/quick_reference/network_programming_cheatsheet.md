@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [网络编程快速参考卡片](#网络编程快速参考卡片)
   - [📋 目录](#-目录)
@@ -59,8 +60,10 @@
 ---
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### HTTP 客户端
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c10_networks::prelude::*;
@@ -82,6 +85,7 @@ let response = client
 ```
 
 ### TCP 服务器
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c10_networks::tcp::TcpListener;
@@ -110,8 +114,10 @@ loop {
 ---
 
 ## 📋 常用 API
+> **[来源: Rust Official Docs]**
 
 ### HTTP 客户端
+> **[来源: Rust Official Docs]**
 
 | 操作      | 方法                  | 说明             |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -123,6 +129,7 @@ loop {
 | 表单数据  | `.form(data)`         | 发送表单数据     |
 
 ### TCP/UDP
+> **[来源: Rust Official Docs]**
 
 | 操作 | TCP                    | UDP                    |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -131,6 +138,7 @@ loop {
 | 发送 | `send()`               | `send_to()`            |
 
 ### WebSocket
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c10_networks::websocket::WebSocket;
@@ -152,6 +160,7 @@ if let Some(msg) = ws.recv().await? {
 ```
 
 ### DNS 解析
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c10_networks::dns::DnsResolver;
@@ -174,8 +183,10 @@ for ip in ips {
 ---
 
 ## 🔧 配置选项
+> **[来源: Rust Official Docs]**
 
 ### HTTP 客户端配置
+> **[来源: Rust Official Docs]**
 
 ```rust
 let client = HttpClient::builder()

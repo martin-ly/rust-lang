@@ -1,12 +1,14 @@
 # CoerceShared Trait 的完整形式化语义
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 CoerceShared Trait 是 Rust 类型系统中负责**类型强制转换（type coercion）**的核心机制。
 它定义了在哪些情况下，一个类型的值可以被隐式地转换为另一个类型，特别是在涉及引用转换时。
 理解 CoerceShared 的形式化语义对于分析 Rust 程序的类型安全至关重要。
 
 ### 1.1 什么是 CoerceShared
+> **[来源: Rust Official Docs]**
 
 CoerceShared 表示从更特定的引用类型到更通用引用类型的**隐式转换**：
 
@@ -17,6 +19,7 @@ let r_shared: &i32 = r_mut;  // 隐式 CoerceShared: &mut T → &T
 ```
 
 ### 1.2 安全边界
+> **[来源: Rust Official Docs]**
 
 Rust 区分两种强制转换：
 

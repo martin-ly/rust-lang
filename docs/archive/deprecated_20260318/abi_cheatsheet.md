@@ -5,6 +5,8 @@
 ---
 
 ## 完整 ABI 列表
+>
+> **[来源: Rust Official Docs]**
 
 | ABI | 平台 | 用途 | 典型场景 |
 |-----|------|------|----------|
@@ -24,8 +26,12 @@
 ---
 
 ## 平台特定推荐
+>
+> **[来源: Rust Official Docs]**
 
 ### Windows
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Windows API (自动选择 32/64位)
@@ -46,6 +52,8 @@ extern "win64" {
 ```
 
 ### Linux / macOS
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Unix 系统标准
@@ -60,6 +68,8 @@ extern "sysv64" {
 ```
 
 ### ARM
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ARM 32位
@@ -76,8 +86,12 @@ extern "C" {
 ---
 
 ## ABI 对比
+>
+> **[来源: Rust Official Docs]**
 
 ### x86_64 对比
+>
+> **[来源: Rust Official Docs]**
 
 | 特性 | sysv64 (Linux/macOS) | win64 (Windows) |
 |------|---------------------|-----------------|
@@ -87,6 +101,8 @@ extern "C" {
 | 可变参数 | AL 寄存器计数 | 不适用 |
 
 ### 32位对比
+>
+> **[来源: Rust Official Docs]**
 
 | ABI | 传参方式 | 栈清理 | 使用场景 |
 |-----|----------|--------|----------|
@@ -97,6 +113,8 @@ extern "C" {
 ---
 
 ## 陷阱与注意
+>
+> **[来源: Rust Official Docs]**
 
 | 陷阱 | 说明 |
 |------|------|
@@ -108,12 +126,16 @@ extern "C" {
 ---
 
 ## 🆕 Rust 1.94 在 FFI/ABI 中的深度应用
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ | **实际场景**: C/Rust 互操作
 
 ---
 
 ### LazyLock 在 C 库句柄管理中的应用
+>
+> **[来源: Rust Official Docs]**
 
 **问题**: 传统 `lazy_static!` 在 FFI 中缺乏灵活的访问控制。
 

@@ -7,12 +7,14 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 创建支持SQL子集的嵌入式数据库。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 - [ ] B-Tree索引
 - [ ] SQL解析
@@ -23,6 +25,7 @@
 ---
 
 ## 学习要点
+> **[来源: Rust Official Docs]**
 
 ### B-Tree实现
 

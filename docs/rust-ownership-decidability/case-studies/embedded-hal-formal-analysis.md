@@ -11,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Embedded-HAL 硬件抽象层深度形式化分析](#embedded-hal-硬件抽象层深度形式化分析)
   - [目录](#目录)
@@ -74,8 +75,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 设计目标与定位
+> **[来源: Rust Official Docs]**
 
 embedded-hal 是 Rust 嵌入式生态系统的核心基础设施，它定义了一组 trait（接口），用于抽象各种微控制器上的常见外设功能。
 

@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [RustSEM 操作语义](#rustsem-操作语义)
   - [📋 目录](#-目录)
@@ -50,6 +51,7 @@
 ---
 
 ## 一、概述
+> **[来源: Rust Official Docs]**
 
 RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 本文档提供数学级的语义规范，用于形式化验证和理论研究。
@@ -63,8 +65,10 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 ---
 
 ## 二、语法定义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 抽象语法
+> **[来源: Rust Official Docs]**
 
 ```text
 表达式 e ::=
@@ -97,6 +101,7 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 ```
 
 ### 2.2 程序状态
+> **[来源: Rust Official Docs]**
 
 ```text
 程序状态 S ::= (H, Σ, θ, P)
@@ -110,8 +115,10 @@ P: 权限集         当前有效权限
 ---
 
 ## 三、语义域
+> **[来源: Rust Official Docs]**
 
 ### 3.1 值域
+> **[来源: Rust Official Docs]**
 
 | 域 | 定义 | 说明 |
 |----|------|------|
@@ -120,6 +127,7 @@ P: 权限集         当前有效权限
 | **Perm** | {Own, Read, Write, Drop} | 权限类型 |
 
 ### 3.2 环境域
+> **[来源: Rust Official Docs]**
 
 ```text
 Γ: 类型环境   变量 → 类型
@@ -128,6 +136,7 @@ P: 权限集         当前有效权限
 ```
 
 ### 3.3 求值上下文
+> **[来源: Rust Official Docs]**
 
 ```text
 求值上下文 E ::=
@@ -145,8 +154,10 @@ P: 权限集         当前有效权限
 ---
 
 ## 四、小步操作语义
+> **[来源: Rust Official Docs]**
 
 ### 4.1 基本归约规则
+> **[来源: Rust Official Docs]**
 
 **β归约**:
 

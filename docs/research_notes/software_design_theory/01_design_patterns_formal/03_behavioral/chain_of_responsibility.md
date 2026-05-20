@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Chain of Responsibility 结构）
+> **[来源: Rust Official Docs]**
 
 设 $H$ 为处理器类型，$R$ 为请求类型。Chain 是一个三元组 $\mathcal{CR} = (H, R, \mathit{next})$，满足：
 
@@ -66,12 +69,14 @@ $$\mathcal{CR} = \langle H, R, \mathit{next}: \mathrm{Option}\langle \mathrm{Box
 ---
 
 ### Axiom CR1（链有穷公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall h: H,\, \text{处理器链有穷；无环}$$
 
 链有穷；无环。
 
 ### Axiom CR2（请求传递公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathrm{None} \land \mathit{handle}(\mathit{next}(h), r)$$
 
@@ -80,6 +85,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 定理 CR-T1（链无悬垂定理）
+> **[来源: Rust Official Docs]**
 
 `Option<Box<Handler>>` 链由 [ownership_model](../../../formal_methods/ownership_model.md) 保证无悬垂。
 
@@ -103,6 +109,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 定理 CR-T2（递归处理安全定理）
+> **[来源: Rust Official Docs]**
 
 递归或循环处理时借用规则满足；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
 
@@ -130,6 +137,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 推论 CR-C1（纯 Safe Chain）
+> **[来源: Rust Official Docs]**
 
 Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 
@@ -145,6 +153,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -155,6 +164,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 type Request = String;
@@ -194,6 +204,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

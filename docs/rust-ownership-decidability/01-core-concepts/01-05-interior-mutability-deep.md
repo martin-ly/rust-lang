@@ -1,6 +1,7 @@
 # Interior Mutability Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Interior Mutability Deep Dive](#interior-mutability-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -73,8 +74,10 @@
 ---
 
 ## 1. Interior Mutability Formal Model
+> **[来源: Rust Official Docs]**
 
 ### 1.1 The Problem
+> **[来源: Rust Official Docs]**
 
 Rust's ownership system is built on a fundamental principle known as the **aliasing XOR mutation** rule:
 

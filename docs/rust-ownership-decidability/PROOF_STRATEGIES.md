@@ -5,8 +5,10 @@
 ---
 
 ## 一、通用证明技巧
+> **[来源: Rust Official Docs]**
 
 ### 1.1 结构归纳法（Structural Induction）
+> **[来源: Rust Official Docs]**
 
 **适用场景**：
 
@@ -46,6 +48,7 @@ Qed.
 ```
 
 ### 1.2 良基归纳法（Well-Founded Induction）
+> **[来源: Rust Official Docs]**
 
 **适用场景**：
 

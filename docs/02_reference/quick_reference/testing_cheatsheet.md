@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🧪 Rust 测试速查卡](#-rust-测试速查卡)
   - [📋 目录](#-目录)
@@ -113,6 +114,7 @@
 ---
 
 ## 📋 测试类型概览
+> **[来源: Rust Official Docs]**
 
 ```text
 单元测试    → src/ 文件中的 #[cfg(test)] mod tests
@@ -124,8 +126,10 @@
 ---
 
 ## 🔬 单元测试（Unit Tests）
+> **[来源: Rust Official Docs]**
 
 ### 基本结构
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[cfg(test)]
@@ -140,6 +144,7 @@ mod tests {
 ```
 
 ### 断言宏
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[test]
@@ -161,6 +166,7 @@ fn test_assertions() {
 ```
 
 ### 测试失败和 panic
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[test]
@@ -179,6 +185,7 @@ fn test_expected_panic() {
 ```
 
 ### 使用 Result 类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[test]
@@ -192,6 +199,7 @@ fn test_with_result() -> Result<(), String> {
 ```
 
 ### 忽略测试
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[test]
@@ -208,6 +216,7 @@ fn network_test() {
 ```
 
 ### 测试组织
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[cfg(test)]
@@ -242,8 +251,10 @@ mod tests {
 ---
 
 ## 🔗 集成测试（Integration Tests）
+> **[来源: Rust Official Docs]**
 
 ### 目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 my_project/
@@ -314,6 +325,7 @@ fn test_api_endpoint() {
 ---
 
 ## 📚 文档测试（Doc Tests）
+> **[来源: Rust Official Docs]**
 
 ### 基本文档测试
 
@@ -378,6 +390,7 @@ pub fn expensive_operation() -> i32 {
 ---
 
 ## ⚡ 性能测试（Benchmark Tests）
+> **[来源: Rust Official Docs]**
 
 ### Cargo.toml 配置
 
@@ -484,6 +497,7 @@ cargo bench --bench my_benchmark fib_20
 ---
 
 ## 🛠️ 测试工具和库
+> **[来源: Rust Official Docs]**
 
 ### 常用测试库
 
@@ -656,6 +670,7 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 ---
 
 ## 🎯 测试最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 测试金字塔
 
@@ -847,6 +862,7 @@ fn test_file_operations() {
 ---
 
 ## 📊 测试覆盖率
+> **[来源: Rust Official Docs]**
 
 ### 使用 cargo-tarpaulin
 
@@ -888,6 +904,7 @@ exclude_lines = [
 ---
 
 ## 🚀 运行测试
+> **[来源: Rust Official Docs]**
 
 ### 基本命令
 
@@ -943,6 +960,7 @@ cargo test -- --test-threads=1
 ---
 
 ## 🔍 测试调试
+> **[来源: Rust Official Docs]**
 
 ### 打印调试信息
 
@@ -992,6 +1010,7 @@ fn test_with_timeout() {
 ---
 
 ## 📝 测试模式速查
+> **[来源: Rust Official Docs]**
 
 ### 测试 Result 类型
 
@@ -1068,6 +1087,7 @@ fn test_collections() {
 ---
 
 ## 🎓 常见测试场景
+> **[来源: Rust Official Docs]**
 
 ### 测试错误处理
 
@@ -1124,6 +1144,7 @@ fn test_trait_impl() {
 ---
 
 ## 🔄 CI/CD 集成
+> **[来源: Rust Official Docs]**
 
 ### GitHub Actions 测试
 
@@ -1629,3 +1650,7 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

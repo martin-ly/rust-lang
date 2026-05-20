@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🚀 Rust 快速参考 (Quick Reference)](#-rust-快速参考-quick-reference)
   - [📋 目录](#-目录)
@@ -57,8 +58,10 @@
 ---
 
 ## 基础语法
+> **[来源: Rust Official Docs]**
 
 ### 变量声明
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不可变变量（默认）
@@ -79,6 +82,7 @@ static GLOBAL: i32 = 42;
 ```
 
 ### 数据类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 整数类型
@@ -109,8 +113,10 @@ let arr2 = [3; 5];         // [3, 3, 3, 3, 3]
 ---
 
 ## 所有权与借用
+> **[来源: Rust Official Docs]**
 
 ### 所有权规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 规则1: 每个值都有一个所有者
@@ -127,6 +133,7 @@ let s2 = s1;  // s1 失效（Move）
 ```
 
 ### 借用
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不可变借用
@@ -143,6 +150,7 @@ change(&mut s);  // 可变借用
 ```
 
 ### 生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 函数中的生命周期
@@ -162,8 +170,10 @@ let s: &'static str = "I have a static lifetime.";
 ---
 
 ## 类型系统
+> **[来源: Rust Official Docs]**
 
 ### 泛型
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 泛型函数
@@ -196,6 +206,7 @@ enum Result<T, E> {
 ```
 
 ### Trait
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义 Trait

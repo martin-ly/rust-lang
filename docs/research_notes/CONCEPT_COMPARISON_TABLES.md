@@ -7,8 +7,10 @@
 ---
 
 ## 一、所有权相关对比
+> **[来源: Rust Official Docs]**
 
 ### Move vs Copy
+> **[来源: Rust Official Docs]**
 
 | 特性 | Move | Copy |
 | :--- | :--- | :--- |
@@ -20,6 +22,7 @@
 | **使用场景** | 转移资源所有权 | 简单值复制 |
 
 ### &T vs &mut T
+> **[来源: Rust Official Docs]**
 
 | 特性 | &T (不可变借用) | &mut T (可变借用) |
 | :--- | :--- | :--- |
@@ -31,6 +34,7 @@
 | **类比** | 多人阅读 | 一个人修改 |
 
 ### Box vs Rc vs Arc
+> **[来源: Rust Official Docs]**
 
 | 特性 | Box<T> | Rc<T> | Arc<T> |
 | :--- | :--- | :--- | :--- |
@@ -42,6 +46,7 @@
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
 
 ### Cell vs RefCell vs Mutex vs RwLock
+> **[来源: Rust Official Docs]**
 
 | 特性 | Cell<T> | RefCell<T> | Mutex<T> | RwLock<T> |
 | :--- | :--- | :--- | :--- | :--- |
@@ -56,8 +61,10 @@
 ---
 
 ## 二、类型系统对比
+> **[来源: Rust Official Docs]**
 
 ### impl Trait vs dyn Trait
+> **[来源: Rust Official Docs]**
 
 | 特性 | impl Trait | dyn Trait |
 | :--- | :--- | :--- |
@@ -70,6 +77,7 @@
 | **返回类型** | ✅ 支持 | ⚠️ 需要Box |
 
 ### Sized vs ?Sized
+> **[来源: Rust Official Docs]**
 
 | 特性 | Sized | ?Sized (DST) |
 | :--- | :--- | :--- |
@@ -80,6 +88,7 @@
 | **使用场景** | 通用 | 特化场景 |
 
 ### 型变对比
+> **[来源: Rust Official Docs]**
 
 | 类型构造器 | 型变 | 说明 | 示例 |
 | :--- | :--- | :--- | :--- |
@@ -94,8 +103,10 @@
 ---
 
 ## 三、并发对比
+> **[来源: Rust Official Docs]**
 
 ### Send vs Sync
+> **[来源: Rust Official Docs]**
 
 | 特性 | Send | Sync |
 | :--- | :--- | :--- |

@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章节后，你将能够：
 
@@ -26,6 +27,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **所有权系统** — 移动语义、借用规则、生命周期（`01_fundamentals/ownership.md`）
 2. **生命周期** — 引用的有效范围、变体（variance）（`01_fundamentals/lifetimes.md`）
@@ -36,10 +38,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **Unsafe Rust** 是 Rust 语言的一个**超集**（而非子集）：它在 Safe Rust 的全部能力之上，额外开放了五种操作。使用 `unsafe` 关键字，程序员向编译器声明："我保证这段代码满足 Rust 的内存安全假设，请允许我执行以下操作。"
 

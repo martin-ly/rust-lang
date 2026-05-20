@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rand 随机数生成形式化分析](#rand-随机数生成形式化分析)
   - [目录](#目录)
@@ -43,6 +44,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rand crate提供:
 
@@ -54,6 +56,7 @@ Rand crate提供:
 ---
 
 ## 2. RNG trait层次
+> **[来源: Rust Official Docs]**
 
 ### 2.1 RngCore基础
 

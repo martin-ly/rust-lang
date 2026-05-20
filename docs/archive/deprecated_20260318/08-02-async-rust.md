@@ -5,6 +5,7 @@
 > **更新**: Rust 1.94 原生 async trait 稳定 ⚡
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [异步Rust与所有权深度解析](#异步rust与所有权深度解析)
   - [目录](#目录)
@@ -56,8 +57,10 @@
 ---
 
 ## 1. 异步编程基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 为什么需要异步编程
+> **[来源: Rust Official Docs]**
 
 在传统的同步编程中，当程序执行 I/O 操作（如网络请求、文件读写）时，线程会被阻塞，无法执行其他任务。异步编程允许在等待 I/O 完成时释放线程去处理其他任务，从而显著提高资源利用率。
 
@@ -76,6 +79,7 @@ async fn fetch_data_async() -> String {
 ```
 
 ### 1.2 异步编程的核心概念
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -96,6 +100,7 @@ enum Poll<T> {
 ```
 
 ### 1.3 协作式调度 vs 抢占式调度
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Rust使用协作式调度 - 任务显式让出控制权
@@ -118,8 +123,10 @@ fn threaded_task() {
 ---
 
 ## 2. Future Trait深入理解
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Future的生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -167,6 +174,7 @@ impl Future for Delay {
 ```
 
 ### 2.2 Future的组合与链式调用
+> **[来源: Rust Official Docs]**
 
 ```rust
 use futures::future::{self, FutureExt, TryFutureExt};
@@ -210,6 +218,7 @@ async fn complex_composition(user_id: u64) -> Result<UserProfile, Error> {
 ```
 
 ### 2.3 Future的内存布局
+> **[来源: Rust Official Docs]**
 
 ```rust
 // async函数返回的Future是一个状态机
@@ -268,8 +277,10 @@ impl Future for ExampleFuture {
 ---
 
 ## 3. Pin与自引用类型
+> **[来源: Rust Official Docs]**
 
 ### 3.1 为什么需要Pin
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 问题：自引用结构体在移动时会出问题
@@ -1574,3 +1585,7 @@ async fn process_message(data: &[u8]) -> Result<(), Box<dyn std::error::Error>> 
 - [async-std Documentation](https://docs.rs/async-std/)
 - [futures crate Documentation](https://docs.rs/futures/)
 - [Rust 1.94 Release Notes](https://blog.rust-lang.org/)
+
+---
+
+> **权威来源**: Rust Official Docs

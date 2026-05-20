@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [质量保障 {#-质量保障维度}](#质量保障--质量保障维度)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 🎯 宗旨 {#-宗旨}
+> **[来源: Rust Official Docs]**
 
 本模块提供 Rust 形式化工程系统的质量保障体系，涵盖：
 
@@ -43,6 +45,7 @@
 ---
 
 ## 📐 质量保障维度
+> **[来源: Rust Official Docs]**
 
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
@@ -55,6 +58,7 @@
 ---
 
 ## 📚 核心文档 {#-核心文档}
+> **[来源: Rust Official Docs]**
 
 - [**TESTING_COVERAGE_GUIDE.md**](../../05_guides/TESTING_COVERAGE_GUIDE.md) — 测试策略、覆盖率、MIRI 集成
 - [**PERFORMANCE_TESTING_REPORT.md**](../../05_guides/PERFORMANCE_TESTING_REPORT.md) — 性能基准、报告、回归
@@ -62,6 +66,7 @@
 ---
 
 ## 🔬 形式化验证衔接 {#-形式化验证衔接}
+> **[来源: Rust Official Docs]**
 
 | 验证目标 | 形式化定理 | 工具 |
 | :--- | :--- | :--- |
@@ -73,6 +78,7 @@
 ---
 
 ## ✅ 质量检查清单 {#-质量检查清单}
+> **[来源: Rust Official Docs]**
 
 1. **构建**：`cargo build` 通过
 2. **测试**：`cargo test` 通过
@@ -84,8 +90,10 @@
 ---
 
 ## 代码质量示例
+> **[来源: Rust Official Docs]**
 
 ### 测试最佳实践
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 单元测试
@@ -137,6 +145,7 @@ fuzz_target!(|data: &[u8]| {
 ```
 
 ### MIRI 检测示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 此代码在 MIRI 中会检测到未定义行为
@@ -177,6 +186,7 @@ mod miri_tests {
 ```
 
 ### 基准测试示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用 criterion 进行基准测试
@@ -199,6 +209,7 @@ criterion_main!(benches);
 ```
 
 ### 代码覆盖率示例
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 使用 tarpaulin 生成覆盖率报告

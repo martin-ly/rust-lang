@@ -13,6 +13,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 边界条件与特例示例](#rust-边界条件与特例示例)
   - [目录](#目录)
@@ -84,8 +85,10 @@
 ---
 
 ## 集合边界
+> **[来源: Rust Official Docs]**
 
 ### 空 Vec 与零长度
+> **[来源: Rust Official Docs]**
 
 ```rust
 let empty: Vec<i32> = vec![];
@@ -97,6 +100,7 @@ empty.get(0);   // ✅ 返回 None
 ```
 
 ### 空 HashMap / BTreeMap
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;
@@ -107,6 +111,7 @@ map.insert(1, "a");  // 插入后非空
 ```
 
 ### 空切片
+> **[来源: Rust Official Docs]**
 
 ```rust
 let slice: &[i32] = &[];
@@ -117,8 +122,10 @@ slice.iter().next();  // ✅ 返回 None
 ---
 
 ## 算法特例
+> **[来源: Rust Official Docs]**
 
 ### 空输入的排序与搜索
+> **[来源: Rust Official Docs]**
 
 ```rust
 let empty: Vec<i32> = vec![];
@@ -131,6 +138,7 @@ one.binary_search(&0);  // ✅ Err(0)
 ```
 
 ### 单元素与双元素
+> **[来源: Rust Official Docs]**
 
 ```rust
 let single = vec![42];
@@ -141,8 +149,10 @@ single.chunks(1).count();  // 1
 ---
 
 ## 并发特例
+> **[来源: Rust Official Docs]**
 
 ### 零个线程 / 空任务列表
+> **[来源: Rust Official Docs]**
 
 ```rust
 let handles: Vec<_> = vec![];
@@ -153,6 +163,7 @@ for h in handles {
 ```
 
 ### 通道已关闭
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;

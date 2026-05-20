@@ -7,6 +7,7 @@
 ---
 
 ## ASCII 模板
+> **[来源: Rust Official Docs]**
 
 ```text
                     ┌─────────────────────────────────────┐
@@ -39,6 +40,7 @@
 ---
 
 ## Mermaid 模板
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -68,6 +70,7 @@ graph TD
 ---
 
 ## 使用示例：选择引用类型
+> **[来源: Rust Official Docs]**
 
 ```text
                     ┌─────────────────────────────────────┐

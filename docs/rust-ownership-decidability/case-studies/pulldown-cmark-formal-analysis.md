@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Pulldown-CMark Markdown形式化分析](#pulldown-cmark-markdown形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 pulldown-cmark提供:
 
@@ -37,6 +39,7 @@ pulldown-cmark提供:
 ---
 
 ## 2. 拉取解析
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (惰性解析)
 

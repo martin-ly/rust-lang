@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Serde JSON 形式化分析](#serde-json-形式化分析)
   - [目录](#目录)
@@ -30,6 +31,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 serde_json提供:
 
@@ -41,6 +43,7 @@ serde_json提供:
 ---
 
 ## 2. 序列化不变式
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (类型一致性)
 

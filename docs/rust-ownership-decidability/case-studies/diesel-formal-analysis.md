@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Diesel ORM形式化分析](#diesel-orm形式化分析)
   - [目录](#目录)
@@ -39,6 +40,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Diesel是Rust的编译时SQL检查ORM：
 
@@ -50,6 +52,7 @@ Diesel是Rust的编译时SQL检查ORM：
 ---
 
 ## 2. DSL类型系统
+> **[来源: Rust Official Docs]**
 
 ### 定义 DSL-1 ( 查询DSL )
 

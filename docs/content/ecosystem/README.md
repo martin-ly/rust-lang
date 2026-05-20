@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 生态系统深度解析](#rust-生态系统深度解析)
   - [📋 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 🎯 目标
+> **[来源: Rust Official Docs]**
 
 本目录致力于：
 
@@ -46,6 +48,7 @@
 ---
 
 ## 📊 生态覆盖矩阵
+> **[来源: Rust Official Docs]**
 
 | 领域 | 库 | 深度文档 | 源码分析 | 性能基准 | 生产案例 |
 |------|-----|----------|----------|----------|----------|
@@ -69,8 +72,10 @@
 ---
 
 ## 🌐 Web 框架
+> **[来源: Rust Official Docs]**
 
 ### Axum
+> **[来源: Rust Official Docs]**
 
 **定位**: 模块化、 ergonomic 的 Web 框架，基于 Tower 服务抽象
 
@@ -134,6 +139,7 @@ async fn get_user(
 ---
 
 ### Actix-web
+> **[来源: Rust Official Docs]**
 
 **定位**: 高性能 Web 框架，基于 Actor 模型
 
@@ -183,6 +189,7 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ### Rocket
+> **[来源: Rust Official Docs]**
 
 **定位**: 注重易用性和类型安全的 Web 框架
 
@@ -228,8 +235,10 @@ fn rocket() -> _ {
 ---
 
 ## 🗄️ 数据库
+> **[来源: Rust Official Docs]**
 
 ### SQLx
+> **[来源: Rust Official Docs]**
 
 **定位**: 异步纯 Rust SQL 工具包，支持编译时查询检查
 
@@ -297,6 +306,7 @@ async fn transfer_funds(
 ---
 
 ### Diesel
+> **[来源: Rust Official Docs]**
 
 **定位**: 安全、可扩展的 ORM 和查询构建器
 
@@ -334,6 +344,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 ---
 
 ### Sea-ORM
+> **[来源: Rust Official Docs]**
 
 **定位**: 异步动态的 ORM，面向现代 Rust
 

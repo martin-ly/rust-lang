@@ -7,6 +7,7 @@
 ---
 
 ## 概念族谱概览
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -83,8 +84,10 @@ mindmap
 ---
 
 ## 核心概念详解
+> **[来源: Rust Official Docs]**
 
 ### 1. CAP 定理
+> **[来源: Rust Official Docs]**
 
 **定义**: 分布式系统最多同时满足一致性、可用性、分区容错性中的两项。
 

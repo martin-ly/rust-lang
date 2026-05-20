@@ -5,8 +5,10 @@
 ---
 
 ## 1. 自引用结构
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题与解决方案
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 问题: 自引用结构
@@ -65,6 +67,7 @@ impl SelfReferential {
 ```
 
 ### 1.2 rental / ouroboros crate
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用ouroboros简化自引用

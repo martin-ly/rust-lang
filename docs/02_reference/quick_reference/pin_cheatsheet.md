@@ -6,6 +6,7 @@
 ---
 
 ## 🎯 核心概念
+> **[来源: Rust Official Docs]**
 
 ```text
 Pin<P> 的核心保证:
@@ -27,8 +28,10 @@ Pin<P> 的核心保证:
 ---
 
 ## ⚡ 代码模式
+> **[来源: Rust Official Docs]**
 
 ### 栈固定
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::pin::pin;

@@ -7,8 +7,10 @@
 ---
 
 ## 1. 常量上下文分类
+> **[来源: Rust Official Docs]**
 
 ### Def CONST-CTX1（常量上下文）
+> **[来源: Rust Official Docs]**
 
 以下位置构成**常量上下文** (Const Context)：
 
@@ -27,8 +29,10 @@ $$
 ---
 
 ## 2. const fn 语义
+> **[来源: Rust Official Docs]**
 
 ### Def CONST-FN1（const fn 允许操作）
+> **[来源: Rust Official Docs]**
 
 在 const fn 中允许的操作集合：
 
@@ -63,6 +67,7 @@ const fn allowed_operations(x: i32) -> i32 {
 ```
 
 ### Def CONST-FN2（const fn 禁止操作）
+> **[来源: Rust Official Docs]**
 
 $$
 \text{NonConstOp} ::= \text{I/O} \mid \text{堆分配} \mid \text{可变静态} \mid \text{非 const 调用}
@@ -89,8 +94,10 @@ const fn forbidden_operations() {
 ---
 
 ## 3. MIR 常量求值
+> **[来源: Rust Official Docs]**
 
 ### Def MIR-EVAL1（MIR 常量求值器）
+> **[来源: Rust Official Docs]**
 
 MIR 常量求值是编译期解释器，执行以下步骤：
 
@@ -115,6 +122,7 @@ MIR 常量求值是编译期解释器，执行以下步骤：
 ```
 
 ### Thm EVAL-BOUND1（求值限制定理）
+> **[来源: Rust Official Docs]**
 
 常量求值受以下限制约束：
 
@@ -131,8 +139,10 @@ $$
 ---
 
 ## 4. 常量泛型求值
+> **[来源: Rust Official Docs]**
 
 ### Def CONST-GEN1（常量泛型形式化）
+> **[来源: Rust Official Docs]**
 
 常量泛型参数 $N$ 的类型：
 
@@ -147,6 +157,7 @@ $$
 $$
 
 ### Thm CONST-TY1（常量泛型类型安全）
+> **[来源: Rust Official Docs]**
 
 若 $e$ 在常量上下文中求值为 $v$，则类型 $T[e]$ 良构当且仅当 $v$ 满足 $T$ 的约束：
 

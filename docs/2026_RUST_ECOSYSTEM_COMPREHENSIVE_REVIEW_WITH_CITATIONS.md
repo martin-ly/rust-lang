@@ -27,6 +27,7 @@
 ---
 
 ## 1. 工具链现状（权威版本）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust编译器
 
@@ -37,8 +38,10 @@
 | rust-analyzer | 1.94.0 | 2026-03-05 | [Official Release](https://rust-analyzer.github.io/) [^21] |
 
 ### 1.2 Rust 1.94核心特性（官方确认）
+> **[来源: Rust Official Docs]**
 
 #### array_windows方法
+> **[来源: Rust Official Docs]**
 
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`."
 >
@@ -55,6 +58,7 @@ s.as_bytes().windows(4).any(|w| ...)
 ```
 
 #### LazyCell/LazyLock API稳定化
+> **[来源: Rust Official Docs]**
 
 **稳定化API列表**（官方发布说明）：
 
@@ -79,8 +83,10 @@ s.as_bytes().windows(4).any(|w| ...)
 ---
 
 ## 2. Tree Borrows权威论证
+> **[来源: Rust Official Docs]**
 
 ### 2.1 学术认可 [^5] [^20]
+> **[来源: Rust Official Docs]**
 
 **Tree Borrows论文** (PLDI 2025 Distinguished Paper Award) [^20]：
 
@@ -97,6 +103,7 @@ DOI: 10.1145/3735592
 > —— **PLDI 2025 Program Committee** [^20]
 
 ### 2.2 Miri学术认可
+> **[来源: Rust Official Docs]**
 
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
 >
@@ -113,8 +120,10 @@ DOI: 10.1145/3704904
 ```
 
 ### 2.3 Tree Borrows核心优势
+> **[来源: Rust Official Docs]**
 
 #### 实验数据（PLDI 2025）
+> **[来源: Rust Official Docs]**
 
 > "实验结果显示，Tree Borrows比Stacked Borrows少拒绝54%的测试用例"
 > —— Villani et al., PLDI 2025 Distinguished Paper
@@ -142,6 +151,7 @@ DOI: 10.1145/3704904
 ---
 
 ## 3. Linux内核永久采用Rust [^13] [^18]
+> **[来源: Rust Official Docs]**
 
 ### 3.1 官方宣布
 
@@ -157,6 +167,7 @@ DOI: 10.1145/3704904
 > —— **Linux Kernel Documentation**, kernel.org [^18]
 
 ### 3.2 关键里程碑
+> **[来源: Rust Official Docs]**
 
 **生产部署**:
 

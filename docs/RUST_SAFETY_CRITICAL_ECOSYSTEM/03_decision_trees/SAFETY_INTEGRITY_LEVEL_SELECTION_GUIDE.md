@@ -1,14 +1,17 @@
 # 安全完整性等级选择指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南帮助功能安全工程师根据系统风险评估选择适当的安全完整性等级(SIL/ASIL)，并提供Rust实现建议。
 
 ---
 
 ## 1. 风险评估基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 风险公式
+> **[来源: Rust Official Docs]**
 
 ```
 风险 = 严重性(S) × 暴露率(E) × 可控性(C)
@@ -34,6 +37,7 @@
 ```
 
 ### 1.2 ASIL等级确定矩阵
+> **[来源: Rust Official Docs]**
 
 ```
           E1    E2    E3    E4
@@ -54,8 +58,10 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ---
 
 ## 2. 等级决策树
+> **[来源: Rust Official Docs]**
 
 ### 2.1 汽车系统ASIL选择
+> **[来源: Rust Official Docs]**
 
 ```
 开始
@@ -80,6 +86,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.2 工业系统SIL选择
+> **[来源: Rust Official Docs]**
 
 ```
 开始
@@ -105,6 +112,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.3 航空系统DAL选择
+> **[来源: Rust Official Docs]**
 
 ```
 开始
@@ -128,8 +136,10 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ---
 
 ## 3. 等级分解策略
+> **[来源: Rust Official Docs]**
 
 ### 3.1 ASIL分解
+> **[来源: Rust Official Docs]**
 
 ```
 ASIL D分解选项:
@@ -156,6 +166,7 @@ ASIL D分解选项:
 ```
 
 ### 3.2 SIL分解
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! SIL分解Rust实现示例

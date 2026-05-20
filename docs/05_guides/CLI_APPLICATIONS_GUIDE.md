@@ -8,6 +8,8 @@
 ---
 
 ## 文档定位
+>
+> **[来源: Rust Official Docs]**
 
 本指南为官方 **Command Line Book** 的补充与项目内导航，帮助在开发 Rust 命令行应用时快速定位到本项目的相关模块和示例。
 
@@ -17,6 +19,8 @@
 ---
 
 ## 官方 CLI Book 入口
+>
+> **[来源: Rust Official Docs]**
 
 | 资源 | URL | 说明 |
 | :--- | :--- | :--- |
@@ -26,6 +30,8 @@
 ---
 
 ## 本项目对应模块
+>
+> **[来源: Rust Official Docs]**
 
 | CLI 开发主题 | 官方 CLI Book | 本项目对应 |
 | :--- | :--- | :--- |
@@ -39,8 +45,12 @@
 ---
 
 ## 快速开始示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 最小 CLI 应用
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::env;
@@ -58,6 +68,8 @@ fn main() {
 ```
 
 ### 2. 使用 clap 构建专业 CLI
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 [dependencies]
@@ -110,6 +122,8 @@ fn main() {
 ```
 
 ### 3. 异步 CLI 示例
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 [dependencies]
@@ -143,6 +157,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4. 带进度条的 CLI
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 [dependencies]
@@ -172,6 +188,8 @@ fn main() {
 ```
 
 ### 5. 错误处理最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use thiserror::Error;
@@ -213,6 +231,8 @@ fn main() {
 ---
 
 ## 推荐学习路径
+>
+> **[来源: Rust Official Docs]**
 
 1. **入门**: 通读 [Command Line Book](https://rust-cli.github.io/book/) 快速教程
 2. **巩固**: 学习 C07 进程管理（std::process、std::io）
@@ -222,6 +242,8 @@ fn main() {
 ---
 
 ## 常用 crate 推荐
+>
+> **[来源: Rust Official Docs]**
 
 | 用途 | crate | 说明 |
 | :--- | :--- | :--- |

@@ -7,6 +7,7 @@
 ---
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 Rust 1.94.0, released on March 5, 2026, represents a relatively incremental release in terms of ownership and borrow checking features, with most changes focused on standard library API refinements, particularly around `LazyCell`/`LazyLock` ergonomics and iterator enhancements.
 The release includes significant improvements to slice iteration with `array_windows`, relaxation of `BinaryHeap` trait bounds, and several new lints that help catch ownership-related issues.
@@ -14,8 +15,10 @@ The release includes significant improvements to slice iteration with `array_win
 ---
 
 ## 1. Language Changes Affecting Ownership
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Borrow Checker Improvements
+> **[来源: Rust Official Docs]**
 
 #### Closure Lifetime Fixes (1.94)
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Embedded-Graphics显示库形式化分析](#embedded-graphics显示库形式化分析)
   - [目录](#目录)
@@ -34,6 +35,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 embedded-graphics特点：
 
@@ -45,6 +47,7 @@ embedded-graphics特点：
 ---
 
 ## 2. 绘制原语
+> **[来源: Rust Official Docs]**
 
 ### 定义 PRIMITIVE-1 ( 基本图形 )
 

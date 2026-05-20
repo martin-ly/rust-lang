@@ -1,10 +1,12 @@
 # 18 取消活动模式 (Cancel Activity)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 取消活动模式允许在另一个活动的执行过程中取消一个已启用的活动。这是工作流异常处理的基础机制。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{CancelActivity}(A, C) = \text{when } C \text{ occurs}: \text{abort}(A)
@@ -13,6 +15,7 @@ $$
 其中 $A$ 是被取消的活动，$C$ 是取消条件或取消事件。
 
 ### 形式化表示
+> **[来源: Rust Official Docs]**
 
 **状态机表示：**
 

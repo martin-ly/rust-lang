@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Async Closures (异步闭包)](#async-closures-异步闭包)
   - [📋 目录](#-目录)
@@ -33,8 +34,10 @@
 ---
 
 ## 🎯 问题与动机
+> **[来源: Rust Official Docs]**
 
 ### 当前的问题
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 当前 Rust: 需要嵌套 async move
@@ -52,6 +55,7 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 ```
 
 ### 动机
+> **[来源: Rust Official Docs]**
 
 1. **更清晰的语法**: `async || { }` 比 `|| async move { }` 更直观
 2. **更好的类型推断**: 编译器可以更好地推断返回类型
@@ -60,6 +64,7 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 ---
 
 ## 💡 解决方案
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(async_closure)]
@@ -84,8 +89,10 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 ---
 
 ## 📐 语法详解
+> **[来源: Rust Official Docs]**
 
 ### 基础语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(async_closure)]
@@ -111,6 +118,7 @@ fn main() {
 ```
 
 ### 捕获模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(async_closure)]
@@ -148,6 +156,7 @@ async fn capture_examples() {
 ```
 
 ### 与 async move 对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | `|| async move {}` | `async &#124;&#124; {}` |
 |------|---------------------|-------------------------|
@@ -178,8 +187,10 @@ fn new_way() -> impl async FnOnce() -> i32 {
 ---
 
 ## 🚀 实际应用
+> **[来源: Rust Official Docs]**
 
 ### 回调函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![feature(async_closure)]

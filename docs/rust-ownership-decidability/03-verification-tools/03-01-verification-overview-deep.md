@@ -6,6 +6,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Rust Verification Tools: A Comprehensive Deep Dive](#rust-verification-tools-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -107,8 +108,10 @@
 ---
 
 ## 1. The Verification Landscape
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Tool Categories
+> **[来源: Rust Official Docs]**
 
 The Rust verification ecosystem has matured significantly, offering developers a spectrum of tools ranging from lightweight static analyzers to heavyweight theorem provers. Understanding the taxonomy of these tools is essential for effective verification strategy.
 

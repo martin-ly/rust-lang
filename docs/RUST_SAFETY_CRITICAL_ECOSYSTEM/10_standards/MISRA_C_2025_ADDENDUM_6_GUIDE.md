@@ -1,6 +1,7 @@
 # MISRA C:2025 Addendum 6 - Rust应用指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 **文档**: MISRA C:2025 Addendum 6
 **标题**: Applicability of MISRA C:2025 to the Rust Programming Language
@@ -10,8 +11,10 @@
 ---
 
 ## 核心发现
+> **[来源: Rust Official Docs]**
 
 ### 规则映射统计
+> **[来源: Rust Official Docs]**
 
 ```
 MISRA C:2025 总规则数: 143
@@ -39,8 +42,10 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 详细规则映射
+> **[来源: Rust Official Docs]**
 
 ### 1. 标准C环境 (Rules 1.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust保证 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -54,6 +59,7 @@ MISRA C:2025 总规则数: 143
 - 相比C的隐式UB，这是安全改进
 
 ### 2. 未使用代码 (Rules 2.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust编译器 | 调整后级别 |
 |------|-----------|------------|------------|
@@ -66,6 +72,7 @@ MISRA C:2025 总规则数: 143
 | R2.7 | 无未使用参数 | 编译器警告 | Advisory |
 
 ### 3. 注释 (Rules 3.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust支持 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -75,6 +82,7 @@ MISRA C:2025 总规则数: 143
 **注意**: Rust原生支持嵌套`/* */`注释，这是C不支持的特性
 
 ### 4. 标识符 (Rules 5.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust差异 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -87,6 +95,7 @@ MISRA C:2025 总规则数: 143
 | R5.7 | 标识符区分 | 编译器警告 | Advisory |
 
 ### 5. 类型系统 (Rules 6.x, 7.x)
+> **[来源: Rust Official Docs]**
 
 **这是Rust最强的领域！**
 
@@ -100,6 +109,7 @@ MISRA C:2025 总规则数: 143
 | R7.4 | 字符串常量const | 自动 | Required (自动) |
 
 ### 6. 字面量和常量 (Rules 8.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust特性 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -119,6 +129,7 @@ MISRA C:2025 总规则数: 143
 | R8.14 | 变量声明限制 | let语句 | Required (自动) |
 
 ### 7. 指针和数组 (Rules 11.x, 18.x) - 关键章节
+> **[来源: Rust Official Docs]**
 
 **Rust借用检查器自动保证的关键规则:**
 

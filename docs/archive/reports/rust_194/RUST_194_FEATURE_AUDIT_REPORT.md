@@ -9,10 +9,12 @@
 ---
 
 ## 📋 审计概览
+> **[来源: Rust Official Docs]**
 
 本次审计发现文档中描述的许多 Rust 1.94 特性与实际编译器不符。需要进行全面的文档修正。
 
 ### 审计结果统计
+> **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 状态 |
 |------|------|------|
@@ -23,10 +25,12 @@
 ---
 
 ## ❌ 虚构 API（需要移除）
+> **[来源: Rust Official Docs]**
 
 以下 API 在实际的 Rust 1.94.0 中**不存在**，需要从文档中移除或修正：
 
 ### 1. `ControlFlow::ok()`
+> **[来源: Rust Official Docs]**
 
 **文档描述**: 将 `ControlFlow<B, C>` 转换为 `Option<C>`
 
@@ -43,6 +47,7 @@ let cf: ControlFlow<i32, ()> = ControlFlow::Continue(());
 **替代方案**: 使用现有的 `break_value()` 和 `continue_value()` 方法
 
 ### 2. `int::fmt_into()`
+> **[来源: Rust Official Docs]**
 
 **文档描述**: 高性能整数格式化，直接写入缓冲区
 
@@ -58,6 +63,7 @@ let mut buf = String::new();
 **替代方案**: 继续使用 `write!` 宏或 `to_string()`
 
 ### 3. `RefCell::try_map()`
+> **[来源: Rust Official Docs]**
 
 **文档描述**: 安全的内部可变性映射
 
@@ -74,6 +80,7 @@ let cell = RefCell::new(Some(42));
 **替代方案**: 使用 `Ref::map` 和 `RefMut::map`（已存在）
 
 ### 4. `RangeToInclusive` 作为迭代器
+> **[来源: Rust Official Docs]**
 
 **文档描述**: `..=end` 可以直接迭代
 
@@ -94,6 +101,7 @@ let sum: i32 = range.sum();
 ```
 
 ### 5. `proc_macro::Value`
+> **[来源: Rust Official Docs]**
 
 **文档描述**: 过程宏增强的 Value API
 
@@ -102,8 +110,10 @@ let sum: i32 = range.sum();
 ---
 
 ## ✅ 真实可用的 API 和特性
+> **[来源: Rust Official Docs]**
 
 ### 1. ControlFlow - 已有方法
+> **[来源: Rust Official Docs]**
 
 以下方法**真实存在**且可用：
 
@@ -128,6 +138,7 @@ if let Some(v) = cf.continue_value() {
 ```
 
 ### 2. Cargo Edition 2024 支持
+> **[来源: Rust Official Docs]**
 
 ```bash
 # ✅ 真实可用

@@ -7,6 +7,7 @@
 ---
 
 ## 使用指南
+> **[来源: Rust Official Docs]**
 
 **难度分级**:
 
@@ -18,8 +19,10 @@
 ---
 
 ## 一、所有权与借用 (20题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
+> **[来源: Rust Official Docs]**
 
 **Q1: 什么是所有权？三规则是什么？**
 
@@ -90,6 +93,7 @@ let y = &x;
 ---
 
 ### ⭐⭐ 进阶题
+> **[来源: Rust Official Docs]**
 
 **Q5: 解释`Rc`和`Arc`的区别，为什么`Rc`不是Send？**
 
@@ -164,6 +168,7 @@ println!("{}", r1);
 ---
 
 ### ⭐⭐⭐ 高级题
+> **[来源: Rust Official Docs]**
 
 **Q9: 什么是非词法生命周期(NLL)？它解决了什么问题？**
 
@@ -235,6 +240,7 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ---
 
 ### ⭐⭐⭐⭐ 专家题
+> **[来源: Rust Official Docs]**
 
 **Q13: 如何理解"所有权系统防止内存泄漏"这个说法？**
 
@@ -299,8 +305,10 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 ---
 
 ## 二、类型系统 (15题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
+> **[来源: Rust Official Docs]**
 
 **Q16: 什么是`Sized` trait？**
 
@@ -349,6 +357,7 @@ trait Iterator {
 ---
 
 ### ⭐⭐ 进阶题
+> **[来源: Rust Official Docs]**
 
 **Q19: 什么是型变(Variance)？协变、逆变、不变有什么区别？**
 
@@ -394,6 +403,7 @@ F: for<'a> Fn(&'a str) -> &'a str
 ---
 
 ### ⭐⭐⭐ 高级题
+> **[来源: Rust Official Docs]**
 
 **Q22: 什么是泛型关联类型(GAT)？**
 
@@ -447,6 +457,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 ---
 
 ### ⭐⭐⭐⭐ 专家题
+> **[来源: Rust Official Docs]**
 
 **Q25: 如何实现一个自定义DST？**
 
@@ -471,6 +482,7 @@ let ptr: *const MySlice;  // 包含长度信息
 ---
 
 ## 三、并发与异步 (15题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
 
@@ -669,6 +681,7 @@ impl Runtime {
 ---
 
 ## 四、形式化方法 (10题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐⭐ 进阶题
 
@@ -745,6 +758,7 @@ impl Runtime {
 ---
 
 ## 五、分布式与工作流 (10题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐⭐ 进阶题
 
@@ -818,6 +832,7 @@ impl Runtime {
 ---
 
 ## 六、系统设计题 (5题)
+> **[来源: Rust Official Docs]**
 
 ### ⭐⭐⭐⭐ 专家题
 
@@ -985,6 +1000,7 @@ trait EventStore {
 ---
 
 ## 附录：自我评估
+> **[来源: Rust Official Docs]**
 
 ### 初学者 (答对15-25题)
 
@@ -1019,6 +1035,7 @@ trait EventStore {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1064,3 +1081,7 @@ trait EventStore {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

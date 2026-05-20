@@ -7,6 +7,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 λ演算（Lambda Calculus）由 Alonzo Church 于 1930 年代提出，是计算理论的基础模型。
 它与图灵机等价，但更加简洁，是函数式编程语言（包括 Rust 的闭包和泛型系统）的理论基础。
@@ -14,8 +15,10 @@
 ---
 
 ## 2. 无类型 λ演算 (Untyped Lambda Calculus)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 语法定义
+> **[来源: Rust Official Docs]**
 
 **定义 2.1** (λ项的语法)
 

@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 无锁编程模式](#rust-无锁编程模式)
   - [目录](#目录)
@@ -34,8 +35,10 @@
 ---
 
 ## 1. 内存模型基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Happens-Before 关系
+> **[来源: Rust Official Docs]**
 
 Happens-before 关系是并发程序分析的基础概念：
 

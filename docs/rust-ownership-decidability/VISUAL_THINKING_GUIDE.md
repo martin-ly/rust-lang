@@ -5,8 +5,10 @@
 ---
 
 ## 1. 核心概念视觉化
+> **[来源: Rust Official Docs]**
 
 ### 1.1 所有权的视觉隐喻
+> **[来源: Rust Official Docs]**
 
 ```text
 🏠 房子类比
@@ -40,6 +42,7 @@
 ```
 
 ### 1.2 生命周期的时间线视图
+> **[来源: Rust Official Docs]**
 
 ```text
 时间 →

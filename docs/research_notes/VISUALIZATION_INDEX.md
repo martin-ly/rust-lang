@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [可视化文档索引](#可视化文档索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -45,6 +46,7 @@
 ---
 
 ## 🎯 概述 {#-概述}
+> **[来源: Rust Official Docs]**
 
 本文档索引了所有使用多种思维表征方式（思维导图、概念对比矩阵、决策树等）创建的可视化文档。
 
@@ -58,8 +60,10 @@
 ---
 
 ## 🧠 思维导图 {#-思维导图}
+> **[来源: Rust Official Docs]**
 
 ### 1. 任务关系网络图
+> **[来源: Rust Official Docs]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络)
 
@@ -81,8 +85,10 @@
 ---
 
 ## 📊 概念对比矩阵 {#-概念对比矩阵}
+> **[来源: Rust Official Docs]**
 
 ### 1. 任务类型对比矩阵
+> **[来源: Rust Official Docs]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
@@ -98,6 +104,7 @@
 - 资源分配决策
 
 ### 2. 任务完成策略对比矩阵
+> **[来源: Rust Official Docs]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
@@ -113,6 +120,7 @@
 - 平衡质量和速度
 
 ### 3. 工具选择对比矩阵
+> **[来源: Rust Official Docs]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
 
@@ -130,8 +138,10 @@
 ---
 
 ## 🌳 决策树 {#-决策树}
+> **[来源: Rust Official Docs]**
 
 ### 1. 任务优先级决策树
+> **[来源: Rust Official Docs]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#决策树任务优先级决策)
 
@@ -159,6 +169,7 @@
 ---
 
 ## 📈 进度可视化 {#-进度可视化}
+> **[来源: Rust Official Docs]**
 
 ### 1. 周进度跟踪表
 

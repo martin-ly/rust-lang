@@ -5,8 +5,10 @@
 ---
 
 ## 1. 模式分类体系
+> **[来源: Rust Official Docs]**
 
 ### 1.1 思维导图：Rust设计模式全景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -51,6 +53,7 @@ mindmap
 ---
 
 ## 2. 创建型模式
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Into Trait模式 (所有权转移)
 

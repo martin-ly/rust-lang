@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [借用概念卡片 (Borrowing Concept Card)](#借用概念卡片-borrowing-concept-card)
   - [目录](#目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 1. 概念定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是借用
+> **[来源: Rust Official Docs]**
 
 **借用(Borrowing)** 是Rust中临时获取值的引用而不转移所有权的机制。
 

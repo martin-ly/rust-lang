@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [清洁架构 (Clean Architecture)](#清洁架构-clean-architecture)
   - [目录](#目录)
@@ -23,6 +24,7 @@
   - [对比](#对比)
 
 ## 核心概念
+> **[来源: Rust Official Docs]**
 
 清洁架构（洋葱架构）的核心思想：**依赖关系向内指向领域**。
 
@@ -42,6 +44,7 @@
 ---
 
 ## 原则
+> **[来源: Rust Official Docs]**
 
 ### 1. 依赖规则
 

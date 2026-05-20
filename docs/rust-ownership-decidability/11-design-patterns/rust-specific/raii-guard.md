@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 RAII (Resource Acquisition Is Initialization) Guard 是 Rust 的核心模式，利用所有权和 Drop trait 确保资源在作用域结束时自动释放。
 
 ---
 
 ## 标准库示例
+> **[来源: Rust Official Docs]**
 
 ### MutexGuard
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::Mutex;

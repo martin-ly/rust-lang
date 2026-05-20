@@ -6,6 +6,8 @@
 ---
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [线性逻辑基础](#线性逻辑基础)
   - [目录](#目录)
@@ -43,8 +45,12 @@
 ---
 
 ## 1. 逻辑重心的范式转移
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 从经典逻辑到线性逻辑
+>
+> **[来源: Rust Official Docs]**
 
 经典逻辑（Classical Logic）和直觉主义逻辑（Intuitionistic Logic）基于**真理传递**（truth-transmission）范式：
 
@@ -547,6 +553,7 @@ Rust类型系统近似于:
 3. Kopylov, A.P. (2001). Decidability of Linear Affine Logic. *Information and Computation*, 164(1):173-198.
 4. Wadler, P. (1990). Linear Types can Change the World! In *Programming Concepts and Methods*.
 5. Reynolds, J.C. (2002). Separation Logic: A Logic for Shared Mutable Data Structures. *LICS*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

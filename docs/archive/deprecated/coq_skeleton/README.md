@@ -9,6 +9,7 @@
 ---
 
 ## 文件说明
+> **[来源: Rust Official Docs]**
 
 | 文件 | 对应定理 | 状态 |
 | :--- | :--- | :--- |
@@ -19,6 +20,7 @@
 ---
 
 ## 编译
+> **[来源: Rust Official Docs]**
 
 **前置**: 安装 [Coq](https://coq.inria.fr/README.md)（建议 8.18+）
 
@@ -32,8 +34,10 @@ coqc TYPE_SAFETY.v
 ---
 
 ## 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 所有权唯一性定理 (T-OW2)
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* OWNERSHIP_UNIQUENESS.v - 所有权唯一性定理骨架 *)
@@ -80,6 +84,7 @@ Admitted.
 ```
 
 ### 示例 2: 数据竞争自由定理 (T-BR1)
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* BORROW_DATARACE_FREE.v - 数据竞争自由定理骨架 *)
@@ -144,6 +149,7 @@ Qed.
 ```
 
 ### 示例 3: 类型安全定理 (T-TY3)
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* TYPE_SAFETY.v - 类型安全定理骨架 *)
@@ -280,8 +286,10 @@ Admitted.
 ---
 
 ## 补全路线
+> **[来源: Rust Official Docs]**
 
 ### 步骤 1: 细化 State 定义
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 定义「可达状态」谓词（由初始状态经规则 1-3 转换得到） *)
@@ -307,6 +315,7 @@ Inductive reachable : State -> Prop :=
 ```
 
 ### 步骤 2: 归纳证明
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 对 reachable 归纳；归纳基用 L-OW1；归纳步对移动/复制/作用域结束分类 *)
@@ -329,6 +338,7 @@ Qed.
 ```
 
 ### 步骤 3: 扩展其他定理
+> **[来源: Rust Official Docs]**
 
 1. **T-BR1**: 完成 `BORROW_DATARACE_FREE.v` - 借用规则 → 数据竞争自由
 2. **T-TY3**: 完成 `TYPE_SAFETY.v` - 类型安全（进展 + 保持）
@@ -336,6 +346,7 @@ Qed.
 ---
 
 ## 研究场景
+> **[来源: Rust Official Docs]**
 
 ### 场景 1: 验证 `Vec<T>` 的所有权唯一性
 

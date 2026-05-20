@@ -4,6 +4,7 @@
 本文档深入介绍 Rust 在数据工程领域的应用。
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 数据工程](#rust-数据工程)
   - [目录](#目录)
@@ -35,8 +36,10 @@
 ---
 
 ## 数据工程概述
+> **[来源: Rust Official Docs]**
 
 ### Rust 在数据工程中的优势
+> **[来源: Rust Official Docs]**
 
 | 特性 | Rust 实现 | Python/Pandas 对比 | Java/Spark 对比 |
 |------|-----------|-------------------|-----------------|

@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [设计模式快速参考卡片](#设计模式快速参考卡片)
   - [📋 目录](#-目录)
@@ -54,8 +55,10 @@
 ---
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 单例模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, Mutex, OnceLock};
@@ -76,6 +79,7 @@ impl Singleton {
 ```
 
 ### 工厂模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Product {
@@ -93,8 +97,10 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ---
 
 ## 📋 常用模式
+> **[来源: Rust Official Docs]**
 
 ### 创建型模式
+> **[来源: Rust Official Docs]**
 
 | 模式       | Rust 实现                    | 使用场景       |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -102,6 +108,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 | **建造者** | 链式方法                     | 复杂对象构建   |
 
 ### 结构型模式
+> **[来源: Rust Official Docs]**
 
 | 模式       | Rust 实现                   | 使用场景     |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -109,6 +116,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 | **外观**   | 统一接口                    | 简化复杂系统 |
 
 ### 行为型模式
+> **[来源: Rust Official Docs]**
 
 | 模式       | Rust 实现                | 使用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -118,8 +126,10 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ---
 
 ## 🦀 Rust 特有模式
+> **[来源: Rust Official Docs]**
 
 ### Newtype 模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct UserId(u32);
@@ -131,6 +141,7 @@ fn process_user(id: UserId) {
 ```
 
 ### RAII 模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct FileHandle {

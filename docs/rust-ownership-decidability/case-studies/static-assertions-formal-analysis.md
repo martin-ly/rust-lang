@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Static-Assertions 编译时断言形式化分析](#static-assertions-编译时断言形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 static_assertions提供:
 
@@ -36,6 +38,7 @@ static_assertions提供:
 ---
 
 ## 2. 类型断言
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (类型相等)
 

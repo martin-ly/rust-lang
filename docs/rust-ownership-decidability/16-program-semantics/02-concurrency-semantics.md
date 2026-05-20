@@ -1,6 +1,8 @@
 # Rust 并发执行模型语义
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 并发执行模型语义](#rust-并发执行模型语义)
   - [目录](#目录)
@@ -128,8 +130,12 @@
 ---
 
 ## 1. 引言
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 并发与并行的语义区别
+>
+> **[来源: Rust Official Docs]**
 
 在程序语义层面，**并发（Concurrency）**与**并行（Parallelism）**具有本质区别：
 
@@ -2934,6 +2940,7 @@ $$
 - [Rust Atomics and Locks](https://marabos.nl/atomics/)
 - [Rayon Documentation](https://docs.rs/rayon/)
 - [Crossbeam Documentation](https://docs.rs/crossbeam/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

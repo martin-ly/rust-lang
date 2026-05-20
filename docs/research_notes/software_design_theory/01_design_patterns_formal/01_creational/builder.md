@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Builder 形式化分析](#builder-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -51,8 +52,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Builder 结构）
+> **[来源: Rust Official Docs]**
 
 设 $B$ 为 Builder 类型，$T$ 为目标类型。Builder 是一个四元组 $\mathcal{B} = (B, T, \{\mathit{set}_i\}, \mathit{build})$，满足：
 
@@ -67,12 +70,14 @@ $$\mathcal{B} = \langle B, T, \{\mathit{set}_i: B \times V_i \rightarrow B\}, \m
 ---
 
 ### Axiom B1（必填字段公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{build}(b) = \mathrm{Ok}(t) \implies \forall i \in \mathrm{Required},\, \mathit{field}_i(b) \neq \mathrm{None}$$
 
 `build` 调用时必填字段已设置；否则返回 `Err` 或 panic。
 
 ### Axiom B2（单次构建公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b') \text{ 可调用}$$
 
@@ -81,6 +86,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T1（所有权消费定理）
+> **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md) T2，`build(self)` 消费 $B$ 后 $B$ 无效，无双重使用。
 
@@ -106,6 +112,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T2（类型状态安全定理）
+> **[来源: Rust Official Docs]**
 
 类型状态模式可强制编译期必填：`ConfigBuilder<SetHost>` 与 `ConfigBuilder<SetPort>` 等相位类型，仅当所有相位完成时 `build` 可用。
 
@@ -144,6 +151,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 推论 B-C1（纯 Safe Builder）
+> **[来源: Rust Official Docs]**
 
 Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe`。
 
@@ -159,6 +167,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -169,6 +178,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Config {
@@ -219,6 +229,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

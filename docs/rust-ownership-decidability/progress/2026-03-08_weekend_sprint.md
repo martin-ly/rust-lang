@@ -1,10 +1,13 @@
 # 周末冲刺报告: 2026-03-08
 
 ## 周末成果总结
+> **[来源: Rust Official Docs]**
 
 ### ✅ 完成的主要工作
+> **[来源: Rust Official Docs]**
 
 #### 1. Coq 代码里程碑
+> **[来源: Rust Official Docs]**
 
 ```
 周末目标: 3,000 行

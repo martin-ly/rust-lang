@@ -5,8 +5,10 @@
 ---
 
 ## 一、前 Rust 时代：资源管理的困境
+> **[来源: Rust Official Docs]**
 
 ### 1.1 手动内存管理时代（1970s-1990s）
+> **[来源: Rust Official Docs]**
 
 **C 语言的自由与危险**：
 
@@ -30,6 +32,7 @@ free(p);
 - **Region-based 内存管理**（1990s）：为 Rust 的生命周期系统奠定基础
 
 ### 1.2 垃圾回收的兴起（1990s-2000s）
+> **[来源: Rust Official Docs]**
 
 **Java 的解决方案**：
 

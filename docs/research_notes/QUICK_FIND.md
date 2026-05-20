@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究笔记快速查找](#研究笔记快速查找)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,6 +51,7 @@
 ---
 
 ## 🎯 使用说明 {#-使用说明}
+> **[来源: Rust Official Docs]**
 
 **首次使用？** 建议先看
 [00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md) 按目标选路径。
@@ -66,8 +68,10 @@
 ---
 
 ## 🔍 按关键词查找 {#-按关键词查找}
+> **[来源: Rust Official Docs]**
 
 ### 形式语言与形式证明
+> **[来源: Rust Official Docs]**
 
 | 关键词 | 相关研究笔记 | 状态 |
 | :--- | :--- | :--- |
@@ -77,6 +81,7 @@
 | 操作语义   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
 
 ### 所有权和借用
+> **[来源: Rust Official Docs]**
 
 | 关键词     | 相关研究笔记                                               | 状态    |
 | :--- | :--- | :--- |
@@ -87,6 +92,7 @@
 | 内存安全   | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
 
 ### 类型系统
+> **[来源: Rust Official Docs]**
 
 | 关键词     | 相关研究笔记                                                    | 状态    |
 | :--- | :--- | :--- |
@@ -104,6 +110,7 @@
 | 逆变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
 
 ### 生命周期
+> **[来源: Rust Official Docs]**
 
 | 关键词       | 相关研究笔记                                                 | 状态    |
 | :--- | :--- | :--- |
@@ -113,6 +120,7 @@
 | 区域类型     | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发
+> **[来源: Rust Official Docs]**
 
 | 关键词      | 相关研究笔记                                                | 状态    |
 | :--- | :--- | :--- |
@@ -128,6 +136,7 @@
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化
+> **[来源: Rust Official Docs]**
 
 | 关键词     | 相关研究笔记                                            | 状态    |
 | :--- | :--- | :--- |
@@ -138,6 +147,7 @@
 | 优化       | [编译器优化](./experiments/compiler_optimizations.md)   | ✅ 100% |
 
 ### 宏系统
+> **[来源: Rust Official Docs]**
 
 | 关键词   | 相关研究笔记                                                   | 状态    |
 | :--- | :--- | :--- |
@@ -149,6 +159,7 @@
 ---
 
 ## 📚 按研究领域查找 {#-按研究领域查找}
+> **[来源: Rust Official Docs]**
 
 ### 形式化方法
 

@@ -1,12 +1,15 @@
 # Rust 所有权系统元模型 - 语义域
 
 ## 1. 概述
+> **[来源: Rust Official Docs]**
 
 本文档定义 Rust 所有权系统的语义域（Semantic Domains），为操作语义和类型系统提供数学基础。
 
 ## 2. 基本集合
+> **[来源: Rust Official Docs]**
 
 ### 2.1 内存位置 (Locations)
+> **[来源: Rust Official Docs]**
 
 ```text
 Loc ≜ {ℓ₁, ℓ₂, ℓ₃, ...}      可数无限集合

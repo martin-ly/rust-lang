@@ -8,8 +8,10 @@
 ---
 
 ## 快速导航
+> **[来源: Rust Official Docs]**
 
 ### 核心形式化文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -20,6 +22,7 @@
 | [WORKFLOW_FORMALIZATION.v](./coq_skeleton/WORKFLOW_FORMALIZATION.v) | Coq | 工作流形式化 | 🆕 完整 |
 
 ### 思维表征文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 类型 | 描述 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -31,6 +34,7 @@
 | [DESIGN_PATTERNS_BOUNDARY_MATRIX](../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
@@ -40,6 +44,7 @@
 | [TESTING_STRATEGY_DECISION_TREE](./formal_methods/TESTING_STRATEGY_DECISION_TREE.md) | 测试策略 | 🆕 完整 |
 
 ### 应用树文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
@@ -48,8 +53,10 @@
 ---
 
 ## 文档统计
+> **[来源: Rust Official Docs]**
 
 ### 按类型统计
+> **[来源: Rust Official Docs]**
 
 ```text
 形式化方法文档统计:
@@ -62,6 +69,7 @@
 ```
 
 ### 完成度统计
+> **[来源: Rust Official Docs]**
 
 | 维度 | 目标 | 当前 | 完成度 |
 | :--- | :--- | :--- | :--- |
@@ -75,8 +83,10 @@
 ---
 
 ## 概念覆盖地图
+> **[来源: Rust Official Docs]**
 
 ### 理论基础层
+> **[来源: Rust Official Docs]**
 
 ```text
 理论基础
@@ -104,6 +114,7 @@
 ```
 
 ### 工程应用层
+> **[来源: Rust Official Docs]**
 
 ```text
 工程应用

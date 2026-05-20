@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Socket2 底层网络形式化分析](#socket2-底层网络形式化分析)
   - [目录](#目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Socket2提供:
 
@@ -44,6 +46,7 @@ Socket2提供:
 ---
 
 ## 2. 类型状态机
+> **[来源: Rust Official Docs]**
 
 ### 定义 2.1 (Socket Domain)
 

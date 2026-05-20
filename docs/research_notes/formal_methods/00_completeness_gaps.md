@@ -8,6 +8,7 @@
 ---
 
 ## 宗旨
+> **[来源: Rust Official Docs]**
 
 本文档系统列出 formal_methods 目录下各文档的形式化论证覆盖情况：
 
@@ -18,6 +19,7 @@
 ---
 
 ## 形式化定义（完备性缺口）
+> **[来源: Rust Official Docs]**
 
 **Def FMG1（形式化方法完备性缺口）**：设 $\mathcal{F}$ 为形式化方法文档集。
 若存在 Rust 特性 $C$ 或机制 $M$ 在语言规范中存在，
@@ -37,6 +39,7 @@ $
 ---
 
 ## 1. 内存与所有权族缺口
+> **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -52,6 +55,7 @@ $
 ---
 
 ## 2. 并发与异步族缺口
+> **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -64,6 +68,7 @@ $
 ---
 
 ## 3. FFI 与不安全族缺口
+> **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -76,6 +81,7 @@ $
 ---
 
 ## 4. 控制流与模式匹配族缺口
+> **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -87,6 +93,7 @@ $
 ---
 
 ## 5. Rust 1.93 新增/变更与 formal_methods 衔接缺口
+> **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -98,6 +105,7 @@ $
 ---
 
 ## 6. 缺口汇总与优先级
+> **[来源: Rust Official Docs]**
 
 ```text
 ✅ 全部完成（Phase 1–6）
@@ -109,6 +117,7 @@ $
 ---
 
 ## 7. 与已有文档的衔接
+> **[来源: Rust Official Docs]**
 
 | 文档 | 已覆盖 | 备注 |
 | :--- | :--- | :--- |
@@ -121,6 +130,7 @@ $
 ---
 
 ## 8. 补全路线图
+> **[来源: Rust Official Docs]**
 
 | 阶段 | 目标 | 产出 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -159,6 +169,7 @@ $
 ---
 
 ## 10. 国际对标缺口（与阶段 1 交付物联动）
+> **[来源: Rust Official Docs]**
 
 **详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 

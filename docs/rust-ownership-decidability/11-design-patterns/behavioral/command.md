@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 命令模式将请求封装为对象，从而可用不同的请求、队列或日志来参数化客户端，同时支持可撤销的操作。
 
 ---
 
 ## 实现
+> **[来源: Rust Official Docs]**
 
 ### 基础命令模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 命令 trait

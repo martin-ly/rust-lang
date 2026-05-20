@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Axum Web框架形式化分析](#axum-web框架形式化分析)
   - [目录](#目录)
@@ -39,6 +40,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Axum是Tokio生态的现代Web框架：
 
@@ -51,8 +53,10 @@ Axum是Tokio生态的现代Web框架：
 ---
 
 ## 2. 类型安全路由
+> **[来源: Rust Official Docs]**
 
 ### 定义 ROUTE-1 ( 路由类型 )
+> **[来源: Rust Official Docs]**
 
 ```rust
 Router::new()
@@ -68,6 +72,7 @@ $$
 $$
 
 ### 定义 ROUTE-2 ( 路径参数 )
+> **[来源: Rust Official Docs]**
 
 ```rust
 async fn get_user(Path(id): Path<u64>) -> impl IntoResponse
@@ -78,6 +83,7 @@ $$
 $$
 
 ### 定理 ROUTE-T1 ( 类型安全 )
+> **[来源: Rust Official Docs]**
 
 路径参数在编译时验证可转换性。
 
@@ -90,8 +96,10 @@ $$
 ---
 
 ## 3. 提取器模式
+> **[来源: Rust Official Docs]**
 
 ### 定义 EXTRACTOR-1 ( FromRequest trait )
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait FromRequest<S>: Sized {
@@ -107,6 +115,7 @@ $$
 $$
 
 ### 定义 EXTRACTOR-2 ( 提取器组合 )
+> **[来源: Rust Official Docs]**
 
 ```rust
 async fn handler(
@@ -122,6 +131,7 @@ $$
 $$
 
 ### 定理 EXTRACTOR-T1 ( 独立性 )
+> **[来源: Rust Official Docs]**
 
 提取器之间相互独立，可任意组合。
 
@@ -132,6 +142,7 @@ $$
 ---
 
 ## 4. Tower服务集成
+> **[来源: Rust Official Docs]**
 
 ### 定义 TOWER-1 ( Service trait )
 

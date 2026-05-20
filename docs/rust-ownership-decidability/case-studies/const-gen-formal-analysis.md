@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Const-Gen 编译时生成形式化分析](#const-gen-编译时生成形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 const-generics允许:
 
@@ -36,6 +38,7 @@ const-generics允许:
 ---
 
 ## 2. Const泛型
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (常量参数)
 

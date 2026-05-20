@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust并发架构设计模式](#rust并发架构设计模式)
   - [目录](#目录)
@@ -44,8 +45,10 @@
 ---
 
 ## 1. 并发模型概述
+> **[来源: Rust Official Docs]**
 
 ### Rust并发哲学
+> **[来源: Rust Official Docs]**
 
 ```text
 零成本抽象 +  fearless concurrency

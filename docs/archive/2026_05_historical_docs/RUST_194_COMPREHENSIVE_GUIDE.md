@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 综合应用指南](#rust-194-综合应用指南)
   - [📋 目录](#-目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 特性概览
+> **[来源: Rust Official Docs]**
 
 ### Rust 1.94 核心特性
+> **[来源: Rust Official Docs]**
 
 | 特性 | 模块 | 应用场景 | 学习难度 |
 |------|------|----------|----------|
@@ -61,8 +64,10 @@
 ---
 
 ## array_windows 深度应用
+> **[来源: Rust Official Docs]**
 
 ### 基础用法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 检测递增序列
@@ -72,8 +77,10 @@ let is_increasing = data.array_windows::<2>()
 ```
 
 ### 跨模块应用
+> **[来源: Rust Official Docs]**
 
 #### 在所有权模块中 - 安全地分析数据序列
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c01_ownership_borrow_scope::rust_194_features::count_increasing_triplets;
@@ -84,6 +91,7 @@ let count = count_increasing_triplets(&data);
 ```
 
 #### 在类型系统模块中 - 类型安全的窗口分析
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c02_type_system::rust_194_features::SequenceValidator;
@@ -93,6 +101,7 @@ assert!(SequenceValidator::is_monotonically_increasing(&data));
 ```
 
 #### 在控制流模块中 - 状态机转换检测
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c03_control_fn::rust_194_features::StateMachineParser;
@@ -102,6 +111,7 @@ let transitions = StateMachineParser::detect_transitions(&states);
 ```
 
 ### 最佳实践
+> **[来源: Rust Official Docs]**
 
 1. **选择合适的窗口大小**: 窗口大小是编译时常量，选择适合问题的大小
 2. **结合迭代器方法**: 使用 `filter`, `map`, `fold` 等增强处理能力
@@ -110,6 +120,7 @@ let transitions = StateMachineParser::detect_transitions(&states);
 ---
 
 ## LazyCell/LazyLock 最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 延迟初始化模式
 

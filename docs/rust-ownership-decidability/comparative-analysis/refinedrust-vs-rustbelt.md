@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RefinedRust vs RustBelt: 深入对比分析](#refinedrust-vs-rustbelt-深入对比分析)
   - [目录](#目录)
@@ -38,8 +39,10 @@
 ---
 
 ## 1. 概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目背景
+> **[来源: Rust Official Docs]**
 
 **RustBelt** (POPL 2018):
 

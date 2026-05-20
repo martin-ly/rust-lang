@@ -7,6 +7,7 @@
 ---
 
 ## 所有权概念全景
+> **[来源: Rust Official Docs]**
 
 ```text
                         所有权概念族
@@ -40,8 +41,10 @@
 ---
 
 ## 一、核心概念详解
+> **[来源: Rust Official Docs]**
 
 ### 1.1 所有权 (Ownership)
+> **[来源: Rust Official Docs]**
 
 ```text
 所有权

@@ -5,6 +5,7 @@
 ---
 
 ## 路线图总览
+> **[来源: Rust Official Docs]**
 
 ```text
 Level 0: 完全新手 (0基础)
@@ -33,8 +34,10 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 0 → Level 1: 入门 (4小时)
+> **[来源: Rust Official Docs]**
 
 ### 目标
+> **[来源: Rust Official Docs]**
 
 - 理解所有权三原则
 - 理解借用规则

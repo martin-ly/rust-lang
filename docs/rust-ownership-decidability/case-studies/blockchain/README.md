@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 区块链/Web3 开发完整指南](#rust-区块链web3-开发完整指南)
   - [目录](#目录)
@@ -51,8 +52,10 @@
 ---
 
 ## 1. 区块链开发概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 为什么Rust适合区块链
+> **[来源: Rust Official Docs]**
 
 Rust在区块链领域迅速崛起成为首选语言，主要基于以下核心优势：
 

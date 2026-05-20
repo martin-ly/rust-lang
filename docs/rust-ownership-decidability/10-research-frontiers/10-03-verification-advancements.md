@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [验证技术进展](#验证技术进展)
   - [目录](#目录)
@@ -59,8 +60,10 @@
 ---
 
 ## 1. MIRI 改进与内存模型验证
+> **[来源: Rust Official Docs]**
 
 ### 1.1 MIRI 概述
+> **[来源: Rust Official Docs]**
 
 MIRI（MIR Interpreter）是 Rust 的官方未定义行为检测工具，通过解释执行 Rust 的中间表示（MIR）来检测未定义行为。
 

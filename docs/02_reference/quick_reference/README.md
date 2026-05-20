@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 快速参考指南 {#-rust-快速参考指南}](#rust-快速参考指南--rust-快速参考指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -60,10 +61,12 @@
 ---
 
 ## 🎯 快速参考概述 {#-快速参考概述}
+> **[来源: Rust Official Docs]**
 
 本目录提供 Rust 核心概念的快速参考速查卡，帮助开发者快速查找常用语法、模式和最佳实践。
 
 ### 适用场景
+> **[来源: Rust Official Docs]**
 
 - ✅ **快速查找** - 忘记语法时快速查阅
 - ✅ **代码编写** - 编写代码时的参考
@@ -73,8 +76,10 @@
 ---
 
 ## 📖 速查卡列表 {#-速查卡列表}
+> **[来源: Rust Official Docs]**
 
 ### 1. 类型系统速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [type_system.md](./type_system.md)
 
@@ -92,6 +97,7 @@
 ---
 
 ### 2. 所有权系统速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [ownership_cheatsheet.md](./ownership_cheatsheet.md)
 
@@ -108,6 +114,7 @@
 ---
 
 ### 3. 异步编程速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [async_patterns.md](./async_patterns.md)
 
@@ -124,6 +131,7 @@
 ---
 
 ### 4. 泛型编程速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [generics_cheatsheet.md](./generics_cheatsheet.md)
 
@@ -139,6 +147,7 @@
 ---
 
 ### 5. 错误处理速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [error_handling_cheatsheet.md](./error_handling_cheatsheet.md)
 
@@ -154,6 +163,7 @@
 ---
 
 ### 6. 线程与并发速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [threads_concurrency_cheatsheet.md](./threads_concurrency_cheatsheet.md)
 
@@ -169,6 +179,7 @@
 ---
 
 ### 7. 宏系统速查卡
+> **[来源: Rust Official Docs]**
 
 **文件**: [macros_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/macros_cheatsheet.md)
 

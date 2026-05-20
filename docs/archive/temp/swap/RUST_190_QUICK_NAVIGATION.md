@@ -7,8 +7,10 @@
 ---
 
 ## 🎯 我应该从哪里开始？
+> **[来源: Rust Official Docs]**
 
 ### 🚀 超快速入门（5分钟）
+> **[来源: Rust Official Docs]**
 
 如果您只有5分钟：
 
@@ -19,8 +21,10 @@
 ---
 
 ## 📊 项目核心成果
+> **[来源: Rust Official Docs]**
 
 ### ✅ 我们完成了什么？
+> **[来源: Rust Official Docs]**
 
 | 成果         | 数量     | 说明                   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -31,6 +35,7 @@
 | **项目评分** | 94.5/100 | 高质量交付             |
 
 ### 🎯 项目进度
+> **[来源: Rust Official Docs]**
 
 ```text
 Phase 0: 分析规划     [████████████] 100% ✅
@@ -46,10 +51,13 @@ Phase 5: 质量验证     [░░░░░░░░░░░░]   0% ⏭️
 ---
 
 ## 🔥 Rust 1.90 关键变化
+> **[来源: Rust Official Docs]**
 
 ### ⚡ 你必须知道的3件事
+> **[来源: Rust Official Docs]**
 
 #### 1. 🚀 链接速度提升 2倍
+> **[来源: Rust Official Docs]**
 
 ```toml
 # 在 Linux x86_64 上自动启用 LLD 链接器
@@ -59,6 +67,7 @@ Phase 5: 质量验证     [░░░░░░░░░░░░]   0% ⏭️
 **影响**: 大型项目构建时间显著减少
 
 #### 2. 📦 新的稳定 API
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 带符号减法检查（新增！）
@@ -74,6 +83,7 @@ const fn process() -> f64 {
 ```
 
 #### 3. ⚠️ 新的 Lint 规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 触发警告：mismatched_lifetime_syntaxes
@@ -90,6 +100,7 @@ fn items<'a>(scores: &'a [u8]) -> std::slice::Iter<'a, u8> {
 ---
 
 ## 📚 核心文档（必读前3份）
+> **[来源: Rust Official Docs]**
 
 ### 🥇 #1: FAQ - 你的问题这里有答案
 

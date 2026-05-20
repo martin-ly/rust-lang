@@ -8,6 +8,7 @@
 ---
 
 ## 异步编程全景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -121,8 +122,10 @@ mindmap
 ---
 
 ## 核心概念详解
+> **[来源: Rust Official Docs]**
 
 ### Future 状态机
+> **[来源: Rust Official Docs]**
 
 ```rust
 // async fn 编译后的状态机

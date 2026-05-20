@@ -3,6 +3,7 @@
 > **权威来源**: Alexei P. Kopylov (2001). *Decidability of Linear Affine Logic*. Information and Computation 164:173-198
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [仿射类型系统与可判定性](#仿射类型系统与可判定性)
   - [目录](#目录)
@@ -22,8 +23,10 @@
   - [5. 参考文献](#5-参考文献)
 
 ## 1. 可判定性定理
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心结果
+> **[来源: Rust Official Docs]**
 
 **定理 (Kopylov, 1995/2001)**: 完整的命题仿射逻辑（Full Propositional Affine Logic）是**可判定的**。
 

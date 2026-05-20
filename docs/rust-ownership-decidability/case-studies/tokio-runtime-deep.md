@@ -1,6 +1,7 @@
 # Tokio Runtime: Formal Analysis and Deep Dive
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Tokio Runtime: Formal Analysis and Deep Dive](#tokio-runtime-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -76,10 +77,12 @@
 ---
 
 ## 1. Introduction
+> **[来源: Rust Official Docs]**
 
 Tokio is the preeminent asynchronous runtime for the Rust programming language, providing the essential infrastructure for building high-performance, concurrent applications. This document presents a comprehensive formal analysis of the Tokio runtime, examining its architecture, semantics, safety properties, and common pitfalls through the lens of ownership, types, and formal verification principles.
 
 ### 1.1 What is Tokio?
+> **[来源: Rust Official Docs]**
 
 Tokio is an event-driven, non-blocking I/O platform for writing asynchronous applications in Rust. It consists of:
 

@@ -20,6 +20,7 @@
 ---
 
 ## 🧭 快速导航
+> **[来源: Rust Official Docs]**
 
 > **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
 > **📚 新增文档总索引**: [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md) - 605 个文件的完整索引
@@ -37,8 +38,10 @@
 ---
 
 ## 📁 目录索引
+> **[来源: Rust Official Docs]**
 
 ### 🟢 01-核心概念 / `01-core-concepts/`
+> **[来源: Rust Official Docs]**
 
 **目的**: Rust所有权系统核心机制详解
 

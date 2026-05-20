@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Proptest/QuickCheck 属性测试形式化分析](#proptestquickcheck-属性测试形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 属性测试框架:
 
@@ -37,6 +39,7 @@
 ---
 
 ## 2. 属性定义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (属性即不变式)
 

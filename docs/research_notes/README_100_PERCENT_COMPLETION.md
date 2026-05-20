@@ -9,6 +9,7 @@
 ---
 
 ## 快速导航
+> **[来源: Rust Official Docs]**
 
 | 目标 | 入口文档 |
 | :--- | :--- |
@@ -22,8 +23,10 @@
 ---
 
 ## 项目总览
+> **[来源: Rust Official Docs]**
 
 ### 当前完成度
+> **[来源: Rust Official Docs]**
 
 ```text
                     当前完成度: 75%
@@ -39,6 +42,7 @@
 ```
 
 ### 核心缺口
+> **[来源: Rust Official Docs]**
 
 1. **L3机器可检查证明**: Coq/Iris证明待完成
 2. **软件设计理论深度**: 23模式完整证明、分布式/工作流形式化
@@ -48,8 +52,10 @@
 ---
 
 ## 已创建文档清单
+> **[来源: Rust Official Docs]**
 
 ### 计划文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 状态 |
 | :--- | :--- | :--- |
@@ -59,6 +65,7 @@
 | `README_100_PERCENT_COMPLETION.md` | 本文件，总览与入口 | ✅ |
 
 ### 现有核心文档（需完善）
+> **[来源: Rust Official Docs]**
 
 | 类别 | 文档 | 需完善内容 |
 | :--- | :--- | :--- |
@@ -71,8 +78,10 @@
 ---
 
 ## 实施路线图
+> **[来源: Rust Official Docs]**
 
 ### Phase 1: 基础补全 (Week 1-8)
+> **[来源: Rust Official Docs]**
 
 ```text
 Week 1-2: L3骨架完善
@@ -92,6 +101,7 @@ Week 5-8: 证明结构标准化
 ```
 
 ### Phase 2: 深度证明 (Week 9-16)
+> **[来源: Rust Official Docs]**
 
 ```text
 Week 9-12: L3机器证明
@@ -112,6 +122,7 @@ Week 15-16: 分布式/工作流
 ```
 
 ### Phase 3: 工具对接 (Week 17-24)
+> **[来源: Rust Official Docs]**
 
 ```text
 Week 17-20: Aeneas对接

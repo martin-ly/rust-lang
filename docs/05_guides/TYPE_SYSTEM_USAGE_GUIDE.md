@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [类型系统使用指南](#类型系统使用指南)
   - [📋 目录](#-目录)
@@ -29,6 +31,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南对应 `crates/c02_type_system`，涵盖 Rust 类型系统的核心概念与高级特性，包括基本类型、泛型、Trait、型变、模式匹配以及 Rust 1.95 的 `if let guards` 和 `use<..>` 精确捕获。
 
@@ -38,6 +42,8 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c02_type_system::primitive_types::scalar_types::number::enhanced_integer::SafeInteger;
@@ -58,8 +64,12 @@ fn main() {
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 基本类型系统
+>
+> **[来源: Rust Official Docs]**
 
 `primitive_types/` 模块提供对标量类型和复合类型的深度封装：
 
@@ -88,6 +98,8 @@ fn safe_math() {
 ```
 
 ### 2. 泛型与 Trait
+>
+> **[来源: Rust Official Docs]**
 
 `type_class/` 和 `type_composition/` 模块展示泛型编程与 Trait 系统：
 
@@ -115,6 +127,8 @@ impl<T: std::ops::Add<Output = T> + Copy> Measurable for Point<T> {
 ```
 
 ### 3. 型变 (Variance)
+>
+> **[来源: Rust Official Docs]**
 
 `type_variance/` 模块演示协变、逆变与不变的实际影响：
 
@@ -135,6 +149,8 @@ fn demonstrate_contravariance(f: fn(&'static str)) {
 ```
 
 ### 4. 高级模式匹配
+>
+> **[来源: Rust Official Docs]**
 
 `advanced_pattern_matching/` 模块提供动态模式匹配和优化：
 
@@ -154,6 +170,8 @@ fn advanced_matching() {
 ```
 
 ### 5. 精确捕获 (Precise Capturing)
+>
+> **[来源: Rust Official Docs]**
 
 `precise_capturing_guide/` 模块深度解析 Rust 1.95+ 的 `use<..>` 语法：
 
@@ -170,6 +188,8 @@ fn precise_capturing_example() {
 `use<..>` 精确捕获允许你在 `impl Trait` 返回类型中明确指定哪些生命周期被捕获，解决了隐式捕获导致的过度约束问题。
 
 ### 6. Rust 1.95 类型系统增强
+>
+> **[来源: Rust Official Docs]**
 
 `rust_195_features/` 模块包含：
 
@@ -192,6 +212,8 @@ fn main() {
 ---
 
 ## ⚡ 性能优化
+>
+> **[来源: Rust Official Docs]**
 
 | 技术 | 说明 | 模块 |
 |------|------|------|
@@ -241,6 +263,7 @@ fn robust_operation() -> Result<(), ContextualError> {
 - **学习教程**: [knowledge/02_intermediate/](../../knowledge/02_intermediate/)
 - **形式化理论**: [research_notes/type_theory/](../research_notes/type_theory/)
 - **源码**: [crates/c02_type_system/](../../crates/c02_type_system/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

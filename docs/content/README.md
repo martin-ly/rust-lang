@@ -8,6 +8,7 @@
 ---
 
 ## 📊 内容架构
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -33,6 +34,7 @@ mindmap
 ---
 
 ## 📁 目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 content/
@@ -57,6 +59,7 @@ content/
 ---
 
 ## 📈 内容统计
+> **[来源: Rust Official Docs]**
 
 | 类别 | 文档数 | 代码示例 | 完成度 |
 |------|--------|----------|--------|

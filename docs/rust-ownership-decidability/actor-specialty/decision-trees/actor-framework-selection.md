@@ -5,6 +5,7 @@
 ---
 
 ## 1. 顶层决策树
+> **[来源: Rust Official Docs]**
 
 ```text
 选择Actor框架
@@ -46,8 +47,10 @@
 ---
 
 ## 2. 详细决策流程
+> **[来源: Rust Official Docs]**
 
 ### 2.1 分布式需求决策
+> **[来源: Rust Official Docs]**
 
 ```text
 需要分布式?

@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [🔬 高级主题深度指南](#-高级主题深度指南)
   - [📋 目录](#-目录)
@@ -52,6 +54,8 @@
 ---
 
 ## 概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档深入探讨Rust的高级主题，帮助开发者掌握更深层次的技术和最佳实践。
 
@@ -63,8 +67,12 @@ SEND-T1/SYNC-T1 (并发)。
 ---
 
 ## 1. 高级所有权模式
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 自定义智能指针
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::ops::{Deref, DerefMut};
@@ -99,6 +107,8 @@ impl<T> Deref for Shared<T> {
 ```
 
 ### 1.2 零成本抽象的所有权转移
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 使用move语义实现零成本抽象
@@ -115,8 +125,12 @@ pub fn borrow_value<T>(value: &T) -> &T {
 ---
 
 ## 2. 高级类型系统技巧
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 关联类型与GATs
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 使用关联类型定义Trait
@@ -137,6 +151,8 @@ trait Iterable {
 ```
 
 ### 2.2 类型级编程
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 使用PhantomData进行类型级编程
@@ -162,8 +178,12 @@ impl<T, const N: usize> Array<T, N> {
 ---
 
 ## 3. 高级并发模式
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 无锁编程
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -191,6 +211,8 @@ impl LockFreeCounter {
 ```
 
 ### 3.2 工作窃取算法
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;

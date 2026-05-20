@@ -7,8 +7,10 @@
 ---
 
 ## 1. 卫生性机制概述
+> **[来源: Rust Official Docs]**
 
 ### 什么是宏卫生性？
+> **[来源: Rust Official Docs]**
 
 **卫生性 (Hygiene)** 确保宏生成的标识符不会与宏外部的标识符意外冲突。
 
@@ -31,8 +33,10 @@ let four = using_a!(a / 10);  // ❌ 编译错误！
 ---
 
 ## 2. 语法上下文 (Syntax Context)
+> **[来源: Rust Official Docs]**
 
 ### Def CTX-1（语法上下文定义）
+> **[来源: Rust Official Docs]**
 
 每个标识符携带**语法上下文** (Syntax Context)，用于区分不同作用域的同名标识符：
 
@@ -56,6 +60,7 @@ $$
 ```
 
 ### 上下文层级
+> **[来源: Rust Official Docs]**
 
 | 层级 | 描述 | 示例 |
 |------|------|------|
@@ -67,8 +72,10 @@ $$
 ---
 
 ## 3. 标识符分类
+> **[来源: Rust Official Docs]**
 
 ### Def ID-CLASS（标识符分类）
+> **[来源: Rust Official Docs]**
 
 标识符按用途分为三类：
 
@@ -83,6 +90,7 @@ $$
 | Label | `'label: loop` | 控制流标签 |
 
 ### 绑定标识符的卫生性
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! make_var {
@@ -98,6 +106,7 @@ make_var!(x, 42);
 ```
 
 ### 引用标识符的解析
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! use_var {
@@ -114,8 +123,10 @@ let result = use_var!(5);  // 引用宏调用上下文的 'a'
 ---
 
 ## 4. 卫生性规则形式化
+> **[来源: Rust Official Docs]**
 
 ### Rule HYGIENE-1（绑定隔离规则）
+> **[来源: Rust Official Docs]**
 
 宏内部创建的绑定标识符，只在宏定义上下文可见：
 

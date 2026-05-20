@@ -6,10 +6,12 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本目录包含 GoF 创建型设计模式的形式化分析。
 
 ## 包含模式
+> **[来源: Rust Official Docs]**
 
 - [抽象工厂](abstract_factory.md)
 - [建造者](builder.md)
@@ -18,6 +20,7 @@
 - [单例](singleton.md)
 
 ## 相关链接
+> **[来源: Rust Official Docs]**
 
 - [返回设计模式目录](../README.md)
 - [软件设计理论](../../README.md)

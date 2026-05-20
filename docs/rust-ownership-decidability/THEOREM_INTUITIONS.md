@@ -5,8 +5,10 @@
 ---
 
 ## 一、终止性定理（Termination Theorem）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 定理陈述
+> **[来源: Rust Official Docs]**
 
 ```coq
 Theorem borrow_checking_termination :
@@ -21,6 +23,7 @@ Theorem borrow_checking_termination :
 > 如果类型环境 Γ 满足 Linearizability 条件，那么借用检查算法一定会在有限步（n 步）内终止，并产生一个不动点结果 Γ'。
 
 ### 1.2 直观理解
+> **[来源: Rust Official Docs]**
 
 **类比：整理书架**
 

@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [🦀 所有权系统速查卡](#-所有权系统速查卡)
   - [📋 目录](#-目录)
@@ -69,6 +70,7 @@
 ---
 
 ## 🧠 所有权系统思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -102,6 +104,7 @@ mindmap
 ---
 
 ## 📊 概念定义-属性关系-解释论证
+> **[来源: Rust Official Docs]**
 
 | 层次 | 概念定义 | 属性关系 | 解释论证 |
 | :--- | :--- | :--- | :--- |
@@ -116,6 +119,7 @@ mindmap
 ---
 
 ## 📐 三大规则（核心）
+> **[来源: Rust Official Docs]**
 
 ```text
 1. 每个值有且仅有一个所有者
@@ -124,6 +128,7 @@ mindmap
 ```
 
 ### 所有权转移决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -145,8 +150,10 @@ graph TD
 ---
 
 ## 🎯 常见模式速查
+> **[来源: Rust Official Docs]**
 
 ### 模式 1: 所有权转移（Move）
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s1 = String::from("hello");
@@ -164,6 +171,7 @@ println!("{}", s2);    // ✅ OK
 ---
 
 ### 模式 2: 不可变借用（&T）
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn process(s: &String) {  // 借用，不夺取所有权
@@ -184,6 +192,7 @@ println!("{}", s);  // ✅ s 仍然有效
 ---
 
 ### 模式 3: 可变借用（&mut T）
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn modify(s: &mut String) {
@@ -204,6 +213,7 @@ println!("{}", s);  // "hello world"
 ---
 
 ### 模式 4: Clone（显式复制）
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s1 = String::from("hello");
@@ -216,6 +226,7 @@ println!("{} {}", s1, s2);  // ✅ 都有效
 ---
 
 ### 模式 5: Copy 类型
+> **[来源: Rust Official Docs]**
 
 ```rust
 let x = 5;

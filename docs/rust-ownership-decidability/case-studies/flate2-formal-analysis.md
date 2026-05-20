@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Flate2 压缩形式化分析](#flate2-压缩形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 flate2提供:
 
@@ -39,6 +41,7 @@ flate2提供:
 ---
 
 ## 2. 编码器类型
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (编码器装饰)
 

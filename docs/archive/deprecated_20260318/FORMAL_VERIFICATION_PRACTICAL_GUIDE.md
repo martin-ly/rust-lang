@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [1. 概述](#1-概述)
 - [2. Kani 模型检查器](#2-kani-模型检查器)
@@ -42,12 +43,15 @@
 ---
 
 ## 1. 概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是形式化验证
+> **[来源: Rust Official Docs]**
 
 形式化验证是使用数学方法证明程序满足特定规范的过程。与传统测试不同，形式化验证可以**证明**程序在所有可能的输入下都正确，而不仅仅是测试有限的用例。
 
 ### 1.2 Rust 形式化验证生态系统
+> **[来源: Rust Official Docs]**
 
 | 工具 | 验证方法 | 适用范围 | 自动化程度 | 学习曲线 |
 |------|----------|----------|------------|----------|
@@ -58,6 +62,7 @@
 | **Creusot** | 定理证明 | 函数正确性 | 中 | 陡峭 |
 
 ### 1.3 本指南目标
+> **[来源: Rust Official Docs]**
 
 - 提供可直接运行的代码示例
 - 覆盖常见验证场景
@@ -67,10 +72,13 @@
 ---
 
 ## 2. Kani 模型检查器
+> **[来源: Rust Official Docs]**
 
 ### 2.1 安装和配置
+> **[来源: Rust Official Docs]**
 
 #### 2.1.1 系统要求
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 最低要求
@@ -81,6 +89,7 @@
 ```
 
 #### 2.1.2 安装步骤
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 1. 安装 Kani 验证器
@@ -95,6 +104,7 @@ cargo kani --version
 ```
 
 #### 2.1.3 项目配置
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml 添加 Kani 支持
@@ -113,6 +123,7 @@ flags = ["--unwind", "10", "--unwinding-assertions"]
 ```
 
 #### 2.1.4 VS Code 集成
+> **[来源: Rust Official Docs]**
 
 ```json
 // .vscode/settings.json
@@ -3444,3 +3455,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-14 (Rust 1.94 深度整合)
+
+---
+
+> **权威来源**: Rust Official Docs

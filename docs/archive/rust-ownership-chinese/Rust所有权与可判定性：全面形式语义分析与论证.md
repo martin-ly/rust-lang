@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust所有权与可判定性：全面形式语义分析与论证](#rust所有权与可判定性全面形式语义分析与论证)
   - [📋 目录](#-目录)
@@ -97,6 +98,7 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 本文档从**形式语义学**、**计算理论**和**类型系统理论**三个维度，对Rust所有权系统进行全面、系统、深入的分析与论证。核心贡献包括：
 
@@ -109,10 +111,13 @@
 ---
 
 ## 第一部分：概念定义与形式化基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心概念精确定义
+> **[来源: Rust Official Docs]**
 
 #### 定义 1.1.1：所有权（Ownership）
+> **[来源: Rust Official Docs]**
 
 **直观定义**：所有权是一种资源管理策略，确保每个值在任意时刻有且只有一个所有者。
 
@@ -129,6 +134,7 @@ $\text{Own}(v, \ell, t) = \top$ 当且仅当在时刻 $t$，值 $v$ 存储在位
 3. **生命周期绑定**：$\text{Own}(v, \ell, t) = \top \land t' > t \land \neg\text{Own}(v, \ell, t') \Rightarrow \text{Drop}(v, t')$
 
 #### 定义 1.1.2：借用（Borrowing）
+> **[来源: Rust Official Docs]**
 
 **直观定义**：借用是临时访问值的引用，不改变所有权，但受严格规则约束。
 
@@ -147,6 +153,7 @@ $\text{Borrow}(v, r, t_s, t_e) = \top$ 表示值 $v$ 在时间区间 $[t_s, t_e]
    $$\text{Borrow}(v, r, t_s, t_e) \land \text{perm}(r) = \text{uniq} \Rightarrow \neg\exists r'. \text{Borrow}(v, r', t_s, t_e) \land r' \neq r$$
 
 #### 定义 1.1.3：生命周期（Lifetime）
+> **[来源: Rust Official Docs]**
 
 **直观定义**：生命周期是引用有效的程序执行区间，Rust使用区域（region）来近似表示。
 
@@ -162,6 +169,7 @@ $$'a: 'b \Leftrightarrow 'b \subseteq 'a$$
 即 $'a$ outlives $'b$ 当且仅当 $'a$ 包含的程序点集合是 $'b$ 的超集。
 
 #### 定义 1.1.4：仿射类型（Affine Types）
+> **[来源: Rust Official Docs]**
 
 **直观定义**：仿射类型要求值最多使用一次（可以使用零次或一次）。
 
@@ -175,6 +183,7 @@ $$\text{use}(v, t_1) \land \text{use}(v, t_2) \Rightarrow t_1 = t_2$$
 - `Copy`类型（如`i32`、`bool`）不是仿射的（可多次使用）
 
 #### 定义 1.1.5：可判定性（Decidability）
+> **[来源: Rust Official Docs]**
 
 **形式化定义**（基于计算理论）：
 
@@ -189,6 +198,7 @@ $$M(w) \text{ 停机并拒绝} \Leftrightarrow w \notin L$$
 ---
 
 ### 1.2 形式化符号系统
+> **[来源: Rust Official Docs]**
 
 本文档使用以下形式化符号系统：
 
@@ -209,6 +219,7 @@ $$M(w) \text{ 停机并拒绝} \Leftrightarrow w \notin L$$
 ---
 
 ### 1.3 概念关系拓扑图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────────┐
@@ -1294,3 +1305,7 @@ fn my_sort<T: Ord>(data: &mut [T]) {
 ---
 
 *本文档是Rust所有权系统形式语义分析的全面梳理，结合了理论计算机科学的权威研究成果和实际工程应用的需求。通过多维度思维表征和完整的论证体系，为理解和应用Rust的所有权系统提供了系统的知识框架。*
+
+---
+
+> **权威来源**: Rust Official Docs

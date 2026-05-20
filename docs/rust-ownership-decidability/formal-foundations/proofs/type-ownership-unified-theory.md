@@ -1,6 +1,7 @@
 # 类型-所有权统一理论
 
 ## Type-Ownership Unified Theory
+> **[来源: Rust Official Docs]**
 
 > **文档性质**: 形式化理论核心证明文档
 > **版本**: 1.0.0
@@ -10,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [类型-所有权统一理论](#类型-所有权统一理论)
   - [Type-Ownership Unified Theory](#type-ownership-unified-theory)
@@ -99,6 +101,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题陈述
 

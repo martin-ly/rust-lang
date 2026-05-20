@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Compile-Time Macros 过程宏形式化分析](#compile-time-macros-过程宏形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rust宏系统提供:
 
@@ -36,6 +38,7 @@ Rust宏系统提供:
 ---
 
 ## 2. 过程宏类型
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (三种过程宏)
 

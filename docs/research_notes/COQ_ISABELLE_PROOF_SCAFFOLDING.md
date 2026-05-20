@@ -6,12 +6,15 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供 Coq 和 Isabelle 证明助手的脚手架代码，用于形式化验证 Rust 的核心属性。
 
 ## Coq 脚手架
+> **[来源: Rust Official Docs]**
 
 ### 所有权模型
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 所有权基本概念 *)

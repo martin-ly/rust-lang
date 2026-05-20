@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 数据并行模式](#rust-数据并行模式)
   - [目录](#目录)
@@ -30,8 +31,10 @@
 ---
 
 ## 1. 并行计算理论
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Amdahl定律与Gustafson定律
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// Amdahl 定律：

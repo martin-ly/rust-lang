@@ -9,6 +9,7 @@
 ---
 
 ## 引言
+> **[来源: Rust Official Docs]**
 
 所有权是Rust最独特的特性，它使Rust能够在没有垃圾回收器的情况下保证内存安全。
 本教程将深入讲解所有权系统的工作原理、规则以及如何利用它编写安全的代码。
@@ -16,8 +17,10 @@
 ---
 
 ## 第一部分：为什么需要所有权
+> **[来源: Rust Official Docs]**
 
 ### 内存管理的困境
+> **[来源: Rust Official Docs]**
 
 传统语言面临的三难问题：
 
@@ -38,6 +41,7 @@
 | Rust | 所有权系统 | 零成本抽象 | 学习曲线陡峭 |
 
 ### Rust的解决方案
+> **[来源: Rust Official Docs]**
 
 所有权系统在编译时检查内存安全，无需运行时开销：
 
@@ -64,14 +68,17 @@ fn makes_copy(i: i32) {
 ---
 
 ## 第二部分：所有权规则
+> **[来源: Rust Official Docs]**
 
 ### 三大规则
+> **[来源: Rust Official Docs]**
 
 1. **每个值都有一个所有者**
 2. **同一时间只能有一个所有者**
 3. **当所有者离开作用域，值被丢弃**
 
 ### 作用域与生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 {
@@ -86,6 +93,7 @@ fn makes_copy(i: i32) {
 ```
 
 ### 内存表示
+> **[来源: Rust Official Docs]**
 
 ```
 栈                    堆
@@ -105,8 +113,10 @@ s离开作用域时:
 ---
 
 ## 第三部分：移动语义
+> **[来源: Rust Official Docs]**
 
 ### 什么是移动
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s1 = String::from("hello");
@@ -122,6 +132,7 @@ println!("{}", s2);    // OK
 - 安全: 避免双重释放
 
 ### 浅复制的问题(Copy vs Move)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // C++中的问题(如果只有浅拷贝)

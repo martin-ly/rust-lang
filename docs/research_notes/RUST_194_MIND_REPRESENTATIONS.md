@@ -7,8 +7,10 @@
 ---
 
 ## 🧠 1. 思维导图 (Mind Maps)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 1.94 核心语义思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -118,6 +120,7 @@ mindmap
 ```
 
 ### 1.2 所有权语义思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -167,6 +170,7 @@ mindmap
 ```
 
 ### 1.3 类型系统思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -222,8 +226,10 @@ mindmap
 ---
 
 ## 📊 2. 多维矩阵对比 (Multi-dimensional Matrices)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 所有权语义矩阵
+> **[来源: Rust Official Docs]**
 
 | 特性 | 所有权 | &T 借用 | &mut T 借用 | Copy 语义 | Move 语义 | `Rc<T>` | `Arc<T>` |
 |------|--------|---------|-------------|-----------|-----------|-------|--------|
@@ -236,6 +242,7 @@ mindmap
 | **编译期检查** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 
 ### 2.2 并发原语矩阵
+> **[来源: Rust Official Docs]**
 
 | 原语 | Send | Sync | 阻塞 | 读写分离 | 适用场景 | Rust 1.94 状态 |
 |------|------|------|------|----------|----------|----------------|
@@ -249,6 +256,7 @@ mindmap
 | `LazyLock<T>` | T:Send+Sync | T:Send+Sync | ⚠️ 初始化时 | N/A | 延迟初始化 | ✅ 1.94 增强 |
 
 ### 2.3 错误处理策略矩阵
+> **[来源: Rust Official Docs]**
 
 | 策略 | `Option<T>` | `Result<T,E>` | panic! | ControlFlow | 适用场景 |
 |------|-----------|-------------|--------|-------------|----------|
@@ -260,6 +268,7 @@ mindmap
 | **迭代控制** | ✅ | ✅ | ❌ | ✅ | try_fold |
 
 ### 2.4 Rust 1.94 新特性影响矩阵
+> **[来源: Rust Official Docs]**
 
 | 新特性 | 影响模块 | 内存安全 | 类型安全 | 性能 | 表达力 | 兼容性 |
 |--------|----------|----------|----------|------|--------|--------|
@@ -271,6 +280,7 @@ mindmap
 | Edition 2024 | 全部 | ✅ | ✅ | ✅ | ✅ | ⚠️ 需迁移 |
 
 ### 2.5 语言特性对比矩阵 (vs 其他语言)
+> **[来源: Rust Official Docs]**
 
 | 特性 | Rust 1.94 | C++20 | Go 1.22 | Java 21 | TypeScript 5.3 |
 |------|-----------|-------|---------|---------|----------------|
@@ -287,6 +297,7 @@ mindmap
 ---
 
 ## 🌳 3. 决策树图 (Decision Trees)
+> **[来源: Rust Official Docs]**
 
 ### 3.1 所有权选择决策树
 

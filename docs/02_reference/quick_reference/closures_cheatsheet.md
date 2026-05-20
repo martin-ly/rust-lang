@@ -6,8 +6,10 @@
 ---
 
 ## 闭包基础
+> **[来源: Rust Official Docs]**
 
 ### 定义闭包
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基本闭包
@@ -25,6 +27,7 @@ let greet = |name| {
 ```
 
 ### 捕获环境
+> **[来源: Rust Official Docs]**
 
 ```rust
 let x = 10;
@@ -47,6 +50,7 @@ let closure = move || println!("{}", s);
 ---
 
 ## 闭包 Trait
+> **[来源: Rust Official Docs]**
 
 | Trait | 描述 | 使用场景 |
 |-------|------|----------|
@@ -55,6 +59,7 @@ let closure = move || println!("{}", s);
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 
 ### Trait 使用示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn apply_fn<F>(f: F, x: i32) -> i32
@@ -82,8 +87,10 @@ where
 ---
 
 ## 常见用法
+> **[来源: Rust Official Docs]**
 
 ### 迭代器方法
+> **[来源: Rust Official Docs]**
 
 ```rust
 let nums = vec![1, 2, 3, 4, 5];
@@ -99,6 +106,7 @@ let sum = nums.iter().fold(0, |acc, x| acc + x);
 ```
 
 ### 高阶函数
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn compose<F, G, T>(f: F, g: G) -> impl Fn(T) -> T
@@ -114,6 +122,7 @@ where
 ---
 
 ## 相关文档
+> **[来源: Rust Official Docs]**
 
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md)
 - [迭代器速查卡](./collections_iterators_cheatsheet.md)
@@ -122,12 +131,14 @@ where
 ---
 
 ## Rust 1.95+ 在闭包与函数式编程中的深度应用
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 函数式编程模式
 
 ---
 
 ### ControlFlow 在函数式控制流中的应用
+> **[来源: Rust Official Docs]**
 
 **场景**: 迭代器链中的提前终止，比 `try_fold` 更灵活
 

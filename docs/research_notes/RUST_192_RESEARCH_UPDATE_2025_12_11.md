@@ -9,14 +9,17 @@
 ---
 
 ## 📋 概述
+> **[来源: Rust Official Docs]**
 
 本文档记录 Rust 1.92.0 版本对研究笔记系统的影响和需要更新的内容。
 
 ---
 
 ## 🎯 Rust 1.92.0 主要改进
+> **[来源: Rust Official Docs]**
 
 ### 语言特性改进
+> **[来源: Rust Official Docs]**
 
 1. **`MaybeUninit` 表示和有效性文档化**
    - 正式文档化了 `MaybeUninit` 的内部表示和有效性约束
@@ -57,8 +60,10 @@
 ---
 
 ## 💻 代码示例与研究场景
+> **[来源: Rust Official Docs]**
 
 ### 场景 1：`MaybeUninit` 安全使用模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -92,6 +97,7 @@ fn maybe_uninit_safety_research() {
 ```
 
 ### 场景 2：联合体原始引用访问
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：联合体字段的安全原始引用访问
@@ -125,6 +131,7 @@ fn union_raw_pointer_research() {
 ```
 
 ### 场景 3：自动特征与 Sized 边界
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：分析改进后的自动特征推导
@@ -152,6 +159,7 @@ impl Container for Vec<i32> {
 ```
 
 ### 场景 4：高阶生命周期处理
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：验证高阶生命周期的正确性
@@ -179,6 +187,7 @@ where
 ```
 
 ### 场景 5：关联项多边界
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：关联项的多个边界
@@ -204,6 +213,7 @@ impl MultiBound for MyStruct {
 ---
 
 ## 📊 标准库 API 稳定化
+> **[来源: Rust Official Docs]**
 
 1. **`NonZero<u{N}>::div_ceil`** - 非零整数的向上除法
 2. **`Location::file_as_c_str`** - 获取位置的文件路径作为 C 字符串
@@ -229,6 +239,7 @@ fn api_stabilization_examples() {
 ---
 
 ## 📊 性能优化
+> **[来源: Rust Official Docs]**
 
 1. **迭代器方法特化** - `Iterator::eq` 和 `Iterator::eq_by` 方法为 `TrustedLen` 迭代器特化
 2. **简化的元组扩展** - 简化了 `Extend` trait 对元组的实现

@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [📦 Cargo 速查卡 {#-cargo-速查卡}](#-cargo-速查卡--cargo-速查卡)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -78,8 +79,10 @@
 ---
 
 ## 🆕 项目创建 {#-项目创建}
+> **[来源: Rust Official Docs]**
 
 ### 创建新项目
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 创建二进制项目
@@ -96,6 +99,7 @@ cargo init --lib
 ```
 
 ### 项目结构
+> **[来源: Rust Official Docs]**
 
 ```text
 my_project/
@@ -108,8 +112,10 @@ my_project/
 ---
 
 ## 🔨 构建命令 {#-构建命令}
+> **[来源: Rust Official Docs]**
 
 ### 基本构建
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 开发构建
@@ -126,6 +132,7 @@ cargo clean
 ```
 
 ### 指定目标
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 构建特定包
@@ -146,6 +153,7 @@ cargo build --target wasm32-unknown-unknown
 ```
 
 ### 特性标志
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 启用特定特性
@@ -159,6 +167,7 @@ cargo build --no-default-features
 ```
 
 ### 并行和优化
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 指定并行任务数
@@ -175,8 +184,10 @@ cargo build --verbose
 ---
 
 ## 🧪 测试命令 {#-测试命令}
+> **[来源: Rust Official Docs]**
 
 ### 基本测试
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有测试

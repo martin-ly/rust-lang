@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [一、执行摘要](#一执行摘要)
 - [二、现状全面分析](#二现状全面分析)
@@ -37,8 +38,10 @@
 ---
 
 ## 一、执行摘要
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目背景
+> **[来源: Rust Official Docs]**
 
 本计划针对 `research_notes` 体系进行全面梳理，解决以下核心问题：
 
@@ -49,6 +52,7 @@
 5. **国际对标缺口**: 与 RustBelt、Aeneas 等权威成果的对接不足
 
 ### 1.2 当前完成度评估
+> **[来源: Rust Official Docs]**
 
 | 维度 | 当前状态 | 目标状态 | 缺口 |
 | :--- | :--- | :--- | :--- |
@@ -62,6 +66,7 @@
 | **反例系统** | 65% | 100% | 35% |
 
 ### 1.3 核心结论
+> **[来源: Rust Official Docs]**
 
 - **已完成**: 理论框架、文档结构、L2证明草图、思维表征基础
 - **待完成**: L3机器证明、完整归纳证明、分布式/工作流深度形式化、工具对接
@@ -70,8 +75,10 @@
 ---
 
 ## 二、现状全面分析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 文档体系结构
+> **[来源: Rust Official Docs]**
 
 ```text
 research_notes/
@@ -113,8 +120,10 @@ research_notes/
 ```
 
 ### 2.2 形式化论证覆盖度评估
+> **[来源: Rust Official Docs]**
 
 #### 2.2.1 formal_methods 覆盖度
+> **[来源: Rust Official Docs]**
 
 | 文档 | Def | Axiom | Theorem | Proof | 反例 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -132,6 +141,7 @@ research_notes/
 - ❌ **缺失**: L3机器可检查证明、Coq/Iris实现
 
 #### 2.2.2 type_theory 覆盖度
+> **[来源: Rust Official Docs]**
 
 | 文档 | Def | Axiom | Theorem | Proof | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -148,6 +158,7 @@ research_notes/
 - ❌ **范畴论对应**: 指称语义的范畴论解释未形式化
 
 #### 2.2.3 software_design_theory 覆盖度
+> **[来源: Rust Official Docs]**
 
 | 领域 | 形式化程度 | 缺口 |
 | :--- | :--- | :--- |

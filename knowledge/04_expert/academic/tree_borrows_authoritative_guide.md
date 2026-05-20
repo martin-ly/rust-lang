@@ -15,6 +15,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Tree Borrows 权威指南 / Tree Borrows Authoritative Guide](#tree-borrows-权威指南--tree-borrows-authoritative-guide)
   - [📋 目录](#-目录)
@@ -71,11 +72,13 @@
 ---
 
 ## 🎯 执行摘要
+> **[来源: Rust Official Docs]**
 
 Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked Borrows。
 它已经在 Miri 中可用，并将在未来成为默认模型。
 
 ### 关键改进
+> **[来源: Rust Official Docs]**
 
 | 方面 | Stacked Borrows | Tree Borrows | 影响 |
 |------|-----------------|--------------|------|
@@ -86,6 +89,7 @@ Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked 
 | **形式化** | Coq 验证 | Rocq 验证 | 同等严格的数学保证 |
 
 ### 立即可用的收益
+> **[来源: Rust Official Docs]**
 
 1. **更少的 Miri 误报** - 直觉上正确的代码不再被标记为 UB
 2. **更简单的 Unsafe 代码** - 无需复杂的变通模式
@@ -94,6 +98,7 @@ Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked 
 ---
 
 ## 📊 Stacked vs Tree Borrows 全面对比
+> **[来源: Rust Official Docs]**
 
 ### 核心差异概览
 

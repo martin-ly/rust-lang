@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [43 种完全模型索引](#43-种完全模型索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -54,6 +55,7 @@
 ---
 
 ## 定义
+> **[来源: Rust Official Docs]**
 
 **43 完全模型** = GoF 23 + 扩展模式（企业/分布式/并发等），包含**需 unsafe** 或**需库支持**的实现路径。
 
@@ -67,6 +69,7 @@
 | **企业/分布式扩展** | 20 | 见下表 |
 
 ### 扩展模式（20）
+> **[来源: Rust Official Docs]**
 
 参考 [Fowler EAA](https://martinfowler.com/eaaCatalog/)、Core J2EE 等权威 catalog，20 项构成如下：
 
@@ -94,6 +97,7 @@
 | 20 | Event Sourcing | DDD/CQRS | 业务层 | 纯 Safe |
 
 ### 扩展模式简要说明
+> **[来源: Rust Official Docs]**
 
 | 模式 | 核心意图 | Rust 典型实现 |
 | :--- | :--- | :--- |
@@ -121,8 +125,10 @@
 ---
 
 ## 扩展模式 Rust 代码示例
+> **[来源: Rust Official Docs]**
 
 ### Domain Model
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 领域模型：业务逻辑封装在领域对象内，非贫血
@@ -153,6 +159,7 @@ impl Order {
 ```
 
 ### Unit of Work
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 批量提交、一致性边界
@@ -179,6 +186,7 @@ impl<T> UnitOfWork<T> {
 ```
 
 ### Data Mapper
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ORM 映射层：领域 ↔ 持久化；From/Into 实现双向转换
@@ -196,6 +204,7 @@ impl From<UserEntity> for (u64, String, String) {
 ```
 
 ### Value Object
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[derive(Clone, PartialEq, Eq)]
@@ -217,6 +226,7 @@ impl Money {
 ```
 
 ### Registry (Service Locator)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{OnceLock, Mutex};
@@ -235,6 +245,7 @@ fn register<T: Send + 'static>(service: T) {
 ```
 
 ### Identity Map
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;
@@ -636,7 +647,7 @@ pub fn update_optimistic(
 | Active Record | 对象持 Connection；`save`/`load`；见 ownership 规则 2 | 简单 CRUD；与 DTO 区别：有行为 |
 | Gateway | trait + FFI/HTTP；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) Def EXTERN1 | 外部集成；FFI 时可能 unsafe |
 | MVC | 模块分层；见 [05_boundary_system](../05_boundary_system/README.md) | 与 Front Controller 组合 |
-| Front Controller | `Router`、`match` 路径；见 [03_semantic_boundary_map](03_semantic_boundary_map.md) | 与 MVC 组合 |
+| Front Controller | `Router`、`match` 路径；见 `03_semantic_boundary_map` | 与 MVC 组合 |
 | DTO | 结构体 + serde；无行为；所有权转移 | 与 Remote Facade、Gateway 组合 |
 | Remote Facade | 粗粒度接口；batch 减少 RPC；见 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) CHAN1 | 与 DTO 组合 |
 | Value Object | `Clone`、`PartialEq`；不可变；见 [06_rust_idioms](../06_rust_idioms.md) Def NW1 | 与 Newtype、DTO 衔接 |

@@ -1,6 +1,7 @@
 # 分布式锁语义 (Distributed Lock Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [分布式锁语义 (Distributed Lock Semantics)](#分布式锁语义-distributed-lock-semantics)
   - [目录](#目录)
@@ -24,12 +25,14 @@
   - [8. 总结](#8-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 分布式锁是协调分布式系统中互斥访问共享资源的核心机制。本文档深入分析分布式锁的形式化语义、实现算法和 Rust 实践。
 
 ---
 
 ## 2. 分布式锁基础
+> **[来源: Rust Official Docs]**
 
 ### 2.1 为什么需要分布式锁
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Wgpu/Glium 图形渲染形式化分析](#wgpuglium-图形渲染形式化分析)
   - [目录](#目录)
@@ -28,6 +29,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 GPU渲染库:
 
@@ -37,6 +39,7 @@ GPU渲染库:
 ---
 
 ## 2. 渲染管线
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (管线状态)
 

@@ -11,14 +11,17 @@
 ---
 
 ## 一、Rust 1.95.0 新增 / 变更的平台支持
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Tier 2 with Host Tools（新增）
+> **[来源: Rust Official Docs]**
 
 | 目标三元组 | 说明 | 起始版本 |
 |-----------|------|----------|
 | `powerpc64-unknown-linux-musl` | PowerPC64 (大端) Linux with musl libc | 1.95.0 |
 
 ### 1.2 Tier 2（新增）
+> **[来源: Rust Official Docs]**
 
 | 目标三元组 | 说明 | 起始版本 |
 |-----------|------|----------|

@@ -1,6 +1,7 @@
 # Rust借用系统 - 思维导图
 
 ## Mermaid思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -90,6 +91,7 @@ mindmap
 ---
 
 ## 借用系统核心关系图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -133,6 +135,7 @@ mindmap
 ---
 
 ## 生命周期关系图
+> **[来源: Rust Official Docs]**
 
 ```text
 生命周期层级:

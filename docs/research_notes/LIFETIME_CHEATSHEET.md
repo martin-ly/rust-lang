@@ -5,6 +5,7 @@
 ---
 
 ## 生命周期语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 显式标注
@@ -22,6 +23,7 @@ where
 ---
 
 ## 生命周期省略规则
+> **[来源: Rust Official Docs]**
 
 编译器自动应用以下规则：
 
@@ -47,6 +49,7 @@ where
 ---
 
 ## 结构体生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 持有引用需要生命周期参数
@@ -70,6 +73,7 @@ impl<'a> Parser<'a> {
 ---
 
 ## 'static 生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 字符串字面量是'static
@@ -88,6 +92,7 @@ static GLOBAL: i32 = 42;
 ---
 
 ## 高阶Trait Bound (HRTB)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 对所有生命周期都成立
@@ -106,8 +111,10 @@ call_with_ref(closure);
 ---
 
 ## 常见模式
+> **[来源: Rust Official Docs]**
 
 ### 输入输出相同生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn identity<'a>(x: &'a str) -> &'a str {
@@ -116,6 +123,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 ```
 
 ### 返回与特定输入关联
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn get_name<'a>(person: &'a Person) -> &'a str {
@@ -124,6 +132,7 @@ fn get_name<'a>(person: &'a Person) -> &'a str {
 ```
 
 ### 多个输入，返回其中一个
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
@@ -134,6 +143,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 ---
 
 ## 生命周期错误与修复
+> **[来源: Rust Official Docs]**
 
 | 错误 | 代码 | 修复 |
 | :--- | :--- | :--- |
@@ -144,6 +154,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 ---
 
 ## Trait对象生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 默认'static

@@ -1,6 +1,7 @@
 # 参考文献与外部资源
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [参考文献与外部资源](#参考文献与外部资源)
   - [目录](#目录)
@@ -47,8 +48,10 @@
   - [持续更新](#持续更新)
 
 ## 学术论文
+> **[来源: Rust Official Docs]**
 
 ### RustBelt 系列
+> **[来源: Rust Official Docs]**
 
 - **RustBelt: Securing the Foundations of the Rust Programming Language**
   Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer

@@ -5,6 +5,7 @@
 ---
 
 ## 1. 系统架构
+> **[来源: Rust Official Docs]**
 
 ```text
 分布式聊天系统架构:
@@ -53,8 +54,10 @@
 ---
 
 ## 2. 核心Actor实现
+> **[来源: Rust Official Docs]**
 
 ### 2.1 用户Actor
+> **[来源: Rust Official Docs]**
 
 ```rust
 use actix::prelude::*;

@@ -10,6 +10,7 @@
 ---
 
 ## 1. 覆盖率工具选择
+> **[来源: Rust Official Docs]**
 
 Rust 生态有两个主流的覆盖率工具：
 
@@ -23,8 +24,10 @@ Rust 生态有两个主流的覆盖率工具：
 ---
 
 ## 2. cargo-tarpaulin 使用
+> **[来源: Rust Official Docs]**
 
 ### 安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 通过 cargo 安装

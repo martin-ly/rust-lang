@@ -6,10 +6,12 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本目录包含 GoF 行为型设计模式的形式化分析。
 
 ## 包含模式
+> **[来源: Rust Official Docs]**
 
 - [责任链](chain_of_responsibility.md)
 - [命令](command.md)
@@ -24,6 +26,7 @@
 - [访问者](visitor.md)
 
 ## 相关链接
+> **[来源: Rust Official Docs]**
 
 - [返回设计模式目录](../README.md)
 - [软件设计理论](../../README.md)

@@ -3,6 +3,7 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 **文档**: MISRA C:2025 Addendum 6
 **标题**: Applicability of MISRA C:2025 to the Rust Programming Language
@@ -12,8 +13,10 @@
 ---
 
 ## 核心发现
+> **[来源: Rust Official Docs]**
 
 ### 规则映射统计
+> **[来源: Rust Official Docs]**
 
 ```
 MISRA C:2025 总规则数: 143
@@ -41,8 +44,10 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 详细规则映射
+> **[来源: Rust Official Docs]**
 
 ### 1. 标准C环境 (Rules 1.x)
+> **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust保证 | 调整后级别 |
 |------|-----------|----------|------------|

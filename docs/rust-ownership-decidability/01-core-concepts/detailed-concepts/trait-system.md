@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)
@@ -61,8 +62,10 @@
 ---
 
 ## 1. 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Trait 的形式化模型
+> **[来源: Rust Official Docs]**
 
 **定义 1.1** (Trait): Trait 是定义类型行为的接口，可以包含方法签名、关联类型、关联常量等。
 

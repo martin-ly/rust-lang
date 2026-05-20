@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [分布式设计模式语义分析](#分布式设计模式语义分析)
   - [目录](#目录)
@@ -51,8 +52,10 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 分布式系统的语义挑战
+> **[来源: Rust Official Docs]**
 
 分布式系统引入了一系列单机系统不具备的语义复杂性。从形式化语义的角度，分布式系统可以建模为：
 
@@ -94,6 +97,7 @@ $$
 ```
 
 ### 1.2 Rust 在分布式系统中的优势
+> **[来源: Rust Official Docs]**
 
 Rust 的类型系统和所有权模型为分布式系统开发提供了独特的语义保证：
 
@@ -147,6 +151,7 @@ pub trait NodeState: Clone + Send + Sync + 'static {
 | RAII | 自动资源释放 | 连接/锁自动清理 |
 
 ### 1.3 CAP 定理语义
+> **[来源: Rust Official Docs]**
 
 CAP 定理的形式化语义：
 
@@ -251,8 +256,10 @@ pub enum CAPError {
 ---
 
 ## 2. 分布式通信模式
+> **[来源: Rust Official Docs]**
 
 ### 2.1 远程过程调用 (RPC)
+> **[来源: Rust Official Docs]**
 
 **RPC 语义模型：**
 
@@ -529,6 +536,7 @@ where
 ```
 
 ### 2.2 消息队列模式
+> **[来源: Rust Official Docs]**
 
 **生产者-消费者语义：**
 
@@ -921,6 +929,7 @@ impl<T> RateLimitedProducer<T> {
 ```
 
 ### 2.3 发布-订阅模式
+> **[来源: Rust Official Docs]**
 
 **主题订阅语义：**
 
@@ -1332,8 +1341,10 @@ pub enum OrderValidationResult {
 ---
 
 ## 3. 服务发现模式
+> **[来源: Rust Official Docs]**
 
 ### 3.1 注册中心模式
+> **[来源: Rust Official Docs]**
 
 **服务注册语义：**
 
@@ -11055,3 +11066,7 @@ pub enum RenewalError {
     Unknown,
 }
 ```
+
+---
+
+> **权威来源**: Rust Official Docs

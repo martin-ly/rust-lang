@@ -7,8 +7,10 @@
 ---
 
 ## 声明宏 (macro_rules!)
+> **[来源: Rust Official Docs]**
 
 ### 基本语法
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! say_hello {
@@ -21,6 +23,7 @@ say_hello!();  // 展开: println!("Hello!");
 ```
 
 ### 参数模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! print_value {
@@ -40,6 +43,7 @@ print_value!(1, 2);
 ```
 
 ### 重复模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 macro_rules! vec {
@@ -59,6 +63,7 @@ vec![1, 2, 3,];  // 带结尾逗号
 ```
 
 ### 常见片段类型
+> **[来源: Rust Official Docs]**
 
 | 指示符 | 匹配 | 示例 |
 | :--- | :--- | :--- |
@@ -76,8 +81,10 @@ vec![1, 2, 3,];  // 带结尾逗号
 ---
 
 ## 过程宏
+> **[来源: Rust Official Docs]**
 
 ### 派生宏
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义
@@ -97,6 +104,7 @@ struct MyStruct;
 ```
 
 ### 属性宏
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义
@@ -113,6 +121,7 @@ fn my_func() {}
 ```
 
 ### 函数式宏
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义
@@ -128,8 +137,10 @@ my_macro!(...);
 ---
 
 ## 常见宏示例
+> **[来源: Rust Official Docs]**
 
 ### vec
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 创建Vec

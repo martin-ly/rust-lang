@@ -7,6 +7,8 @@
 ---
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Prusti 用户指南](#prusti-用户指南)
   - [目录](#目录)
@@ -53,8 +55,12 @@
 ---
 
 ## 1. Prusti 简介
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Prusti
+>
+> **[来源: Rust Official Docs]**
 
 Prusti 是一个**静态验证工具**，使用分离逻辑（Separation Logic）和自动定理证明来验证 Rust 代码的功能正确性。
 
@@ -79,6 +85,8 @@ Prusti 工作流程:
 - **Rust 感知**: 深度集成 Rust 所有权系统
 
 ### 1.2 理论基础：分离逻辑
+>
+> **[来源: Rust Official Docs]**
 
 分离逻辑 (Separation Logic) 是 Prusti 的理论基础，专门用于推理堆内存。
 
@@ -101,6 +109,8 @@ $$
 $$
 
 ### 1.3 与 Miri/Kani 的区别
+>
+> **[来源: Rust Official Docs]**
 
 | 工具 | 验证类型 | 自动化 | 适用场景 | 理论基础 |
 |:---|:---|:---|:---|:---|
@@ -116,6 +126,8 @@ $$
 - **Prusti**: 静态分析，验证逻辑合约
 
 ### 1.4 核心能力
+>
+> **[来源: Rust Official Docs]**
 
 - ✅ **前置/后置条件**: `@requires`, `@ensures`
 - ✅ **循环不变式**: `@invariant`, `body_invariant!`
@@ -129,8 +141,12 @@ $$
 ---
 
 ## 2. 安装与配置
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 VS Code 扩展（推荐）
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 Prusti VS Code 扩展
@@ -147,6 +163,8 @@ $$
 - 验证状态指示器
 
 ### 2.2 命令行安装
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 克隆 Prusti 仓库
@@ -162,6 +180,8 @@ export PRUSTI_PATH="$PWD/target/release"
 ```
 
 ### 2.3 Cargo 项目配置
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml
@@ -185,6 +205,8 @@ use prusti_contracts::*;
 ---
 
 ## 3. 形式化基础
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 分离逻辑概述
 

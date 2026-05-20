@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Unsafe Rust 专题指南](#unsafe-rust-专题指南)
   - [📋 目录](#-目录)
@@ -47,6 +49,8 @@
 ---
 
 ## 文档定位
+>
+> **[来源: Rust Official Docs]**
 
 本指南为 **Rustonomicon** 的补充与项目内导航，帮助在系统学习 unsafe Rust 时快速定位到本项目的相关模块和示例。
 
@@ -56,6 +60,8 @@
 ---
 
 ## 🎯 何时使用 Unsafe
+>
+> **[来源: Rust Official Docs]**
 
 Rust 的 `unsafe` 关键字允许你执行以下五种操作：
 
@@ -86,6 +92,8 @@ unsafe impl MyUnsafeTrait for MyType {
 ---
 
 ## 📚 核心 Unsafe 操作
+>
+> **[来源: Rust Official Docs]**
 
 | 操作 | 说明 | 风险 |
 | :--- | :--- | :--- |
@@ -98,8 +106,12 @@ unsafe impl MyUnsafeTrait for MyType {
 ---
 
 ## 💻 完整代码示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 原始指针操作
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -178,6 +190,8 @@ fn raw_pointer_demo() {
 ```
 
 ### 2. 调用外部函数 (FFI)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::os::raw::{c_char, c_int, c_void};
@@ -253,6 +267,8 @@ fn ffi_demo() {
 ```
 
 ### 3. 实现 Send/Sync
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -344,6 +360,8 @@ impl<T> Drop for LockFreeStack<T> {
 ```
 
 ### 4. Union 访问
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// FFI 中常见的联合类型
@@ -390,6 +408,8 @@ fn union_demo() {
 ```
 
 ### 5. 内联汇编
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 需要 Rust 1.90+
@@ -429,6 +449,8 @@ pub fn memory_fence() {
 ```
 
 ### 6. 自定义智能指针
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::ops::{Deref, DerefMut};

@@ -1,6 +1,7 @@
 # 10 任意循环模式 (Arbitrary Cycles)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [10 任意循环模式 (Arbitrary Cycles)](#10-任意循环模式-arbitrary-cycles)
   - [📋 目录](#-目录)
@@ -27,10 +28,12 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 任意循环模式支持非结构化的循环控制流，允许流程图中存在任意形式的循环结构，而不仅限于嵌套良好的循环。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 与结构化循环（while、for）不同，任意循环允许：
 

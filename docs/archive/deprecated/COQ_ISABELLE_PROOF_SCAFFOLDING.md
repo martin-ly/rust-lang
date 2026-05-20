@@ -10,6 +10,7 @@
 ---
 
 ## 一、已创建骨架
+> **[来源: Rust Official Docs]**
 
 | 骨架 | 路径 | 定理 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -20,8 +21,10 @@
 ---
 
 ## 二、定理陈述与 Coq 对应
+> **[来源: Rust Official Docs]**
 
 ### T-OW2 所有权唯一性
+> **[来源: Rust Official Docs]**
 
 **文档陈述**：$\forall v, t: |\{x \mid \Omega_t(x)=\text{Owned} \land \Gamma_t(x)=v\}| \leq 1$
 
@@ -49,6 +52,7 @@ Proof.
 ```
 
 ### T-BR1 数据竞争自由
+> **[来源: Rust Official Docs]**
 
 **文档陈述**：$\text{BorrowCheck}(P)=\text{OK} \rightarrow \text{DataRaceFree}(P)$
 
@@ -83,6 +87,7 @@ Proof.
 ```
 
 ### T-TY3 类型安全
+> **[来源: Rust Official Docs]**
 
 **文档陈述**：$\Gamma \vdash e : \tau \rightarrow \neg\exists e': e \to^* e' \land \text{type\_error}(e')$
 
@@ -138,8 +143,10 @@ Proof.
 ---
 
 ## 三、实施步骤
+> **[来源: Rust Official Docs]**
 
 ### 步骤 1：验证骨架可编译
+> **[来源: Rust Official Docs]**
 
 ```bash
 cd docs/research_notes/coq_skeleton
@@ -149,12 +156,14 @@ coqc TYPE_SAFETY.v
 ```
 
 ### 步骤 2：补全 T-OW2 证明
+> **[来源: Rust Official Docs]**
 
 1. 定义 `reachable : State -> Prop`（从初始状态经规则 1–3 可达）
 2. 将定理改为 `forall S, reachable S -> ownership_unique S`
 3. 对 `reachable` 归纳；归纳基由规则 1；归纳步对移动/复制/drop 分类
 
 ### 步骤 3：补全 T-BR1、T-TY3 骨架
+> **[来源: Rust Official Docs]**
 
 - **T-BR1**：将 `Parameter` 替换为具体定义；实现 L-BR1/L-BR2；见 [CORE_THEOREMS_FULL_PROOFS](../../research_notes/CORE_THEOREMS_FULL_PROOFS.md) §3
 - **T-TY3**：定义 `Expr`、`has_type`、`step`、`type_error`；实现 L-TY1；见 §4
@@ -162,8 +171,10 @@ coqc TYPE_SAFETY.v
 ---
 
 ## 四、研究场景与实施示例
+> **[来源: Rust Official Docs]**
 
 ### 场景 1：所有权唯一性验证（Vec<T>）
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：验证 Vec<T> 的所有权语义

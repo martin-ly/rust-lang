@@ -1,6 +1,7 @@
 # 12 多实例无同步模式 (Multiple Instances Without Synchronization)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [12 多实例无同步模式 (Multiple Instances Without Synchronization)](#12-多实例无同步模式-multiple-instances-without-synchronization)
   - [📋 目录](#-目录)
@@ -26,11 +27,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 多实例无同步模式允许在运行时并行创建多个活动实例，这些实例独立执行且不需要同步汇合。
 实例数量通常在运行时才能确定。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{MIWithoutSync}(A, n) = \parallel_{i=1}^{n} A_i

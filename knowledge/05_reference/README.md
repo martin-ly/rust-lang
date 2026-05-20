@@ -5,6 +5,7 @@
 > **快速查阅和参考资料**
 
 ## 📚 内容
+> **[来源: Rust Official Docs]**
 
 | 文档 | 用途 | 行数 |
 |------|------|------|
@@ -13,12 +14,14 @@
 | [std_library_cheatsheet.md](std_library_cheatsheet.md) | 标准库 API 速查表 | ~900 |
 
 ## 🎯 使用方式
+> **[来源: Rust Official Docs]**
 
 - **快速查找语法**: 查阅 [keywords.md](keywords.md) 确认关键字用法
 - **数值计算**: 查阅 [math_constants.md](math_constants.md) 获取标准库常量
 - **日常开发**: 查阅 [std_library_cheatsheet.md](std_library_cheatsheet.md) 快速定位 API
 
 ## ⏱️ 使用建议
+> **[来源: Rust Official Docs]**
 
 本文档层的特点是**按需查阅**，无需从头到尾阅读：
 
@@ -27,6 +30,7 @@
 3. 忘记标准库方法签名 → 查 std_library_cheatsheet
 
 ## 🚀 相关层
+> **[来源: Rust Official Docs]**
 
 - [04_expert/](../04_expert/) - 深入理解编译器和形式化验证
 - [06_ecosystem/](../06_ecosystem/) - 实际项目和框架使用

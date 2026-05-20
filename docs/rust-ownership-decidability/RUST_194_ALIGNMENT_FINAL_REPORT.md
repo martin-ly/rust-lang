@@ -8,10 +8,12 @@
 ---
 
 ## 📊 执行摘要
+> **[来源: Rust Official Docs]**
 
 本次全面推进对 `rust-ownership-decidability` 知识库进行了全面的 Rust 1.94 alignment，涵盖文档更新、新特性添加、代码验证和形式化证明审查。
 
 ### 完成统计
+> **[来源: Rust Official Docs]**
 
 | 类别 | 状态 | 详情 |
 |------|------|------|
@@ -25,6 +27,7 @@
 ---
 
 ## ✅ 已完成工作
+> **[来源: Rust Official Docs]**
 
 ### 1. 核心概念文档更新 (`01-core-concepts/`)
 

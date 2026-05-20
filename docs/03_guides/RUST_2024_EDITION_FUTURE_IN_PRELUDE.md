@@ -5,12 +5,15 @@
 # Rust 2024 Edition `Future` in Prelude 影响分析
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 2024 Edition 将 `std::future::Future` trait 添加到标准库 prelude 中。这意味着在 Edition 2024 下，`Future` trait 无需显式导入即可直接使用。
 
 ## 变化详情
+> **[来源: Rust Official Docs]**
 
 ### 之前（Rust 2021 及之前）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;

@@ -7,8 +7,10 @@
 ---
 
 ## 重大进展
+> **[来源: Rust Official Docs]**
 
 ### 1. 证明策略库 (ProofTactics.v)
+> **[来源: Rust Official Docs]**
 
 创建了完整的证明策略库：
 
@@ -29,6 +31,7 @@ Ltac auto_eval.         (* 自动求值证明 *)
 ```
 
 ### 2. 填充 Admit 进展
+> **[来源: Rust Official Docs]**
 
 | 文件 | 原 admit 数 | 已填充 | 剩余 |
 |------|------------|--------|------|

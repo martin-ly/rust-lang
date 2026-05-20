@@ -11,8 +11,10 @@
 ---
 
 ## 并发安全的设计模式
+> **[来源: Rust Official Docs]**
 
 ### 无锁数据结构模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -64,6 +66,7 @@ fn lock_free_demo() {
 ```
 
 ### 线程池模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -161,6 +164,7 @@ fn thread_pool_demo() {
 ```
 
 ### 读写锁模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -231,6 +235,7 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
 ```
 
 ### 生产者-消费者模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -300,6 +305,7 @@ fn backpressure_producer_consumer() {
 ```
 
 ### 扇出-扇入模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -349,6 +355,7 @@ fn fan_out_fan_in() {
 ```
 
 ### 信号量模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::Arc;
@@ -405,6 +412,7 @@ async fn weighted_semaphore() {
 ---
 
 ## 使用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 并发模式 | 关键技术 |
 | :--- | :--- | :--- |
@@ -420,8 +428,10 @@ async fn weighted_semaphore() {
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -430,6 +440,7 @@ async fn weighted_semaphore() {
 | 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
 ### 形式化方法
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

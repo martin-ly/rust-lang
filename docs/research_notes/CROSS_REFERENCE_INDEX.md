@@ -11,6 +11,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [🔗 跨文档映射网络 - 核心索引 {#-跨文档映射网络---核心索引}](#-跨文档映射网络---核心索引--跨文档映射网络---核心索引)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 🗺️ 文档网络概览 {#️-文档网络概览}
+> **[来源: Rust Official Docs]**
 
 ### 三大支柱文档网络
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -95,6 +98,7 @@
 ```
 
 ### 文档类型分布
+> **[来源: Rust Official Docs]**
 
 | 类型 | 数量 | 主目录 | 交叉链接数 |
 | :--- | :--- | :--- | :--- |
@@ -109,6 +113,7 @@
 ---
 
 ## 🔄 双向链接表 {#-双向链接表}
+> **[来源: Rust Official Docs]**
 
 ### formal_methods ↔ 其他文档
 
@@ -140,6 +145,7 @@
 | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) | → [ownership_model](./formal_methods/ownership_model.md) CE-T1依赖→ [borrow_checker_proof](./formal_methods/borrow_checker_proof.md) CE-T2依赖→ [type_system_foundations](./type_theory/type_system_foundations.md) CE-T3依赖 | ← [01_design_patterns_formal](./software_design_theory/01_design_patterns_formal/README.md) 模式组合← [03_execution_models](./software_design_theory/03_execution_models/README.md) 执行组合← [05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES](../05_guides/CROSS_MODULE_INTEGRATION_EXAMPLES.md) 集成示例 |
 
 ### 速查卡 ↔ 指南/研究笔记
+> **[来源: Rust Official Docs]**
 
 | 速查卡 | → 链接到指南 | → 链接到研究笔记 |
 | :--- | :--- | :--- |
@@ -153,8 +159,10 @@
 ---
 
 ## 📐 概念跨文档定义映射 {#-概念跨文档定义映射}
+> **[来源: Rust Official Docs]**
 
 ### 核心概念定义分布
+> **[来源: Rust Official Docs]**
 
 | 概念 | 主定义文档 | 引用文档 | 等价定义位置 |
 | :--- | :--- | :--- | :--- |
@@ -170,6 +178,7 @@
 | **组合有效性** | [04_compositional_engineering](./software_design_theory/04_compositional_engineering/README.md) §Def CE1 | ownership_model, borrow_checker_proof, type_system | CE-T1/T2/T3 依赖链 |
 
 ### 概念等价关系
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -210,8 +219,10 @@
 ---
 
 ## 📜 定理跨文档引用网络 {#-定理跨文档引用网络}
+> **[来源: Rust Official Docs]**
 
 ### 定理依赖图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐

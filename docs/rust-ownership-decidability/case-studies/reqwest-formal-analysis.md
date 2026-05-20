@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Reqwest HTTP客户端形式化分析](#reqwest-http客户端形式化分析)
   - [目录](#目录)
@@ -45,6 +46,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Reqwest是Rust最流行的HTTP客户端，提供:
 
@@ -56,6 +58,7 @@ Reqwest是Rust最流行的HTTP客户端，提供:
 ---
 
 ## 2. Client构建器分析
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Builder模式类型安全
 

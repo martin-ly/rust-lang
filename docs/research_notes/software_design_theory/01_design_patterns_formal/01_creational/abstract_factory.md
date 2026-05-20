@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Abstract Factory 形式化分析](#abstract-factory-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Abstract Factory 结构）
+> **[来源: Rust Official Docs]**
 
 设 $\mathcal{F}$ 为抽象工厂族，$T_1, \ldots, T_n$ 为产品类型族。Abstract Factory 是一个多元组 $\mathcal{AF} = (\mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i\}_{i=1}^n)$，满足：
 
@@ -65,12 +68,14 @@ $$\mathcal{AF} = \langle \mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i: \mat
 ---
 
 ### Axiom AF1（产品族一致性公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall f: \mathcal{F},\, \mathit{create}_1(f) : T_1 \land \mathit{create}_2(f) : T_2 \implies \mathit{Compatible}(T_1, T_2)$$
 
 同一工厂创建的产品族类型一致；不同工厂可产生不同实现族。
 
 ### Axiom AF2（所有权转移公理）
+> **[来源: Rust Official Docs]**
 
 $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
@@ -79,6 +84,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 定理 AF-T1（关联类型安全定理）
+> **[来源: Rust Official Docs]**
 
 由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)，trait 解析保证多态工厂调用类型安全。
 
@@ -111,6 +117,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 定理 AF-T2（产品族完整性定理）
+> **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md) T2，同一工厂创建的产品族所有权独立且兼容。
 
@@ -132,6 +139,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 推论 AF-C1（纯 Safe 抽象工厂）
+> **[来源: Rust Official Docs]**
 
 Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 `unsafe`。
 
@@ -147,6 +155,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -157,6 +166,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Button { fn render(&self); }
@@ -192,6 +202,7 @@ impl GuiFactory for WinFactory {
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

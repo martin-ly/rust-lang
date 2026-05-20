@@ -10,8 +10,10 @@
 ---
 
 ## 1️⃣ Rust 新版本发布跟踪
+> **[来源: Rust Official Docs]**
 
 ### 版本信息收集
+> **[来源: Rust Official Docs]**
 
 | 版本类型 | 版本号 | 发布日期 | 项目当前使用 | 状态 |
 |----------|--------|----------|-------------|------|
@@ -21,6 +23,7 @@
 | 当前项目 MSRV | - | - | | |
 
 ### 发布说明审查
+> **[来源: Rust Official Docs]**
 
 - [ ] 阅读 [Rust Release Notes](https://github.com/rust-lang/rust/releases)
 - [ ] 阅读 [Rust 博客](https://blog.rust-lang.org/) 对应版本文章
@@ -36,14 +39,17 @@
 ---
 
 ## 2️⃣ Edition 兼容性检查
+> **[来源: Rust Official Docs]**
 
 ### 当前 Edition 状态
+> **[来源: Rust Official Docs]**
 
 - [ ] 项目当前使用的 Rust Edition: ________
 - [ ] 最新可用的 Rust Edition: ________
 - [ ] 是否有新的 Edition 发布: ⬜ 是 ⬜ 否
 
 ### Edition 迁移评估
+> **[来源: Rust Official Docs]**
 
 如存在新 Edition，评估迁移影响：
 
@@ -58,6 +64,7 @@
 | | | | | |
 
 ### Edition 迁移计划（如适用）
+> **[来源: Rust Official Docs]**
 
 | 阶段 | 任务 | 负责人 | 截止日期 | 状态 |
 |------|------|--------|----------|------|
@@ -71,14 +78,17 @@
 ---
 
 ## 3️⃣ MSRV 更新评估
+> **[来源: Rust Official Docs]**
 
 ### 当前 MSRV 审查
+> **[来源: Rust Official Docs]**
 
 - [ ] 当前声明的 MSRV: ________________
 - [ ] 实际最低测试版本: ________________
 - [ ] CI 中配置的 Rust 版本: ________________
 
 ### MSRV 更新分析
+> **[来源: Rust Official Docs]**
 
 | 评估维度 | 当前状态 | 建议 | 备注 |
 |----------|----------|------|------|
@@ -88,6 +98,7 @@
 | CI 维护成本 | | | |
 
 ### MSRV 更新决策
+> **[来源: Rust Official Docs]**
 
 - [ ] 保持当前 MSRV
 - [ ] 更新 MSRV 至: ________________

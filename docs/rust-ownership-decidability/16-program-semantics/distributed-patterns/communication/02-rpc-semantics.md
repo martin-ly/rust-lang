@@ -1,6 +1,7 @@
 # RPC 语义 (Remote Procedure Call Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RPC 语义 (Remote Procedure Call Semantics)](#rpc-语义-remote-procedure-call-semantics)
   - [目录](#目录)
@@ -25,12 +26,14 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 RPC（远程过程调用）是分布式系统中最基本的通信范式之一，它将网络通信抽象为本地函数调用。本文档深入分析 RPC 的形式化语义、Rust 实现以及可靠性保证。
 
 ---
 
 ## 2. RPC 基本模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 语义抽象
 

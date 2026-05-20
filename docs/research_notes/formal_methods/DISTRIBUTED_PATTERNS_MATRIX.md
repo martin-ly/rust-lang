@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 分布式模式矩阵系统梳理微服务架构中的核心分布式模式，包括一致性、容错、通信和集成模式，为Rust分布式系统设计提供参考。
 
 ---
 
 ## 核心模式对比矩阵
+> **[来源: Rust Official Docs]**
 
 ### 一致性模式
+> **[来源: Rust Official Docs]**
 
 | 模式 | 一致性 | 可用性 | 分区容错 | 复杂度 | 延迟 | Rust实现 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -27,6 +30,7 @@
 | **Outbox** | 最终 | 高 | 高 | 中 | 低 | 事务+消息表 |
 
 ### 容错模式
+> **[来源: Rust Official Docs]**
 
 | 模式 | 故障检测 | 恢复策略 | 状态管理 | 性能影响 | Rust生态 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -38,6 +42,7 @@
 | **Fallback** | 主路径失败 | 降级服务 | 备用策略 | 低 | 模式实现 |
 
 ### 通信模式
+> **[来源: Rust Official Docs]**
 
 | 模式 | 同步性 | 耦合度 | 可靠性 | 扩展性 | Rust实现 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -51,8 +56,10 @@
 ---
 
 ## 模式组合矩阵
+> **[来源: Rust Official Docs]**
 
 ### 场景-模式映射
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐模式组合 | 理由 |
 | :--- | :--- | :--- |
@@ -64,6 +71,7 @@
 | 批处理 | Bulkhead + Retry + Timeout | 资源隔离，可靠性 |
 
 ### CAP权衡矩阵
+> **[来源: Rust Official Docs]**
 
 ```
          ┌─────────────┐
@@ -89,8 +97,10 @@
 ---
 
 ## Rust实现指南
+> **[来源: Rust Official Docs]**
 
 ### Saga模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Saga协调器
@@ -142,6 +152,7 @@ saga.execute().await?;
 ```
 
 ### Circuit Breaker
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicU32, Ordering};

@@ -8,6 +8,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Actor Model in Rust: Formal Deep Dive](#actor-model-in-rust-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -56,8 +57,10 @@
 ---
 
 ## 1. Actor Model Formal Semantics
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Formal Definition
+> **[来源: Rust Official Docs]**
 
 The Actor model, first proposed by Carl Hewitt in 1973, provides a mathematical framework for concurrent computation. We present a modern formalization suitable for Rust's ownership system.
 

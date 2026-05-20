@@ -9,6 +9,7 @@
 ---
 
 ## 引言
+> **[来源: Rust Official Docs]**
 
 Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 本教程将深入讲解Rust的并发模型及其适用场景。
@@ -16,8 +17,10 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 ---
 
 ## 第一部分：并发基础
+> **[来源: Rust Official Docs]**
 
 ### 并发 vs 并行
+> **[来源: Rust Official Docs]**
 
 | 概念 | 定义 | Rust支持 |
 | :--- | :--- | :--- |
@@ -39,6 +42,7 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 ```
 
 ### Send 和 Sync
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Send: 可安全跨线程转移所有权
@@ -60,8 +64,10 @@ pub unsafe auto trait Sync {}
 ---
 
 ## 第二部分：线程模型
+> **[来源: Rust Official Docs]**
 
 ### 创建线程
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -80,6 +86,7 @@ handle.join().unwrap();
 ```
 
 ### 线程间通信
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -99,6 +106,7 @@ println!("Got: {}", received);
 ```
 
 ### 共享状态
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -126,8 +134,10 @@ println!("Result: {}", *counter.lock().unwrap()); // 10
 ---
 
 ## 第三部分：同步原语
+> **[来源: Rust Official Docs]**
 
 ### Mutex vs RwLock
+> **[来源: Rust Official Docs]**
 
 | 原语 | 读并发 | 写并发 | 适用场景 |
 | :--- | :--- | :--- | :--- |
@@ -151,6 +161,7 @@ let r2 = data.read().unwrap();
 ```
 
 ### 原子操作
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};

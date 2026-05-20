@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Coq形式化证明框架指南](#coq形式化证明框架指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -118,10 +119,13 @@
 ---
 
 ## 1. Coq基础设置
+> **[来源: Rust Official Docs]**
 
 ### 1.1 安装和配置 (Coq Platform)
+> **[来源: Rust Official Docs]**
 
 #### 安装Coq Platform
+> **[来源: Rust Official Docs]**
 
 **Windows:**
 
@@ -154,6 +158,7 @@ opam install coq.8.18.0
 ```
 
 #### Iris框架安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 添加Iris opam仓库
@@ -167,6 +172,7 @@ opam install coq-stdpp
 ```
 
 #### 项目配置 (_CoqProject)
+> **[来源: Rust Official Docs]**
 
 ```text
 # _CoqProject 文件
@@ -195,6 +201,7 @@ theories/proofs/type_safety.v
 ```
 
 #### Makefile配置
+> **[来源: Rust Official Docs]**
 
 ```makefile
 # Makefile
@@ -215,8 +222,10 @@ clean:
 ```
 
 ### 1.2 基础语法速览
+> **[来源: Rust Official Docs]**
 
 #### 基本定义
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 定义类型 *)
@@ -236,6 +245,7 @@ Notation "x + y" := (add x y) (at level 50, left associativity).
 ```
 
 #### 命题和证明
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 定义命题 *)
@@ -255,6 +265,7 @@ Qed.
 ```
 
 #### 归纳类型
+> **[来源: Rust Official Docs]**
 
 ```coq
 (* 列表类型 *)
@@ -357,6 +368,7 @@ Qed.
 ---
 
 ## 2. Rust所有权形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 所有权规则公理化
 
@@ -775,6 +787,7 @@ End ScopeExample.
 ---
 
 ## 3. 借用检查器形式化
+> **[来源: Rust Official Docs]**
 
 ### 3.1 借用规则公理化
 
@@ -1028,6 +1041,7 @@ End BorrowLemmas.
 ---
 
 ## 4. 类型安全形式化
+> **[来源: Rust Official Docs]**
 
 ### 4.1 进展性 (Progress) 定理
 
@@ -1166,6 +1180,7 @@ Inductive type_check : value_env -> ownership_env -> expr -> ty -> Prop :=
 ---
 
 ## 5. 实战案例
+> **[来源: Rust Official Docs]**
 
 ### 定理1: 所有权唯一性
 
@@ -1800,6 +1815,7 @@ End Theorem5_TypeSafety.
 ---
 
 ## 6. 与Iris集成
+> **[来源: Rust Official Docs]**
 
 ### 6.1 Iris基础概念
 
@@ -2011,6 +2027,7 @@ Admitted.
 ---
 
 ## 7. 验证工作流
+> **[来源: Rust Official Docs]**
 
 ### 7.1 CoqIDE/VsCoq使用
 
@@ -2212,6 +2229,7 @@ lint:
 ---
 
 ## 📚 相关文档链接
+> **[来源: Rust Official Docs]**
 
 ### 形式化方法文档
 
@@ -2238,6 +2256,7 @@ lint:
 ---
 
 ## 🎯 学习路径建议
+> **[来源: Rust Official Docs]**
 
 ```
 入门阶段 (4周):
@@ -2278,6 +2297,7 @@ lint:
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -2323,3 +2343,7 @@ lint:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
   - [📋 目录](#-目录)
@@ -74,6 +76,8 @@
 ---
 
 ## 🎯 文档概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档提供四种主要的思维表征方式，帮助开发者从不同角度理解和应用 Rust 1.93.1 的特性：
 
@@ -86,8 +90,12 @@
 ---
 
 ## 🗺️ 1. 思维导图 (Mind Map)
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 1.93.0 核心特性思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -150,6 +158,8 @@ mindmap
 ```
 
 ### 1.2 所有权系统完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -185,6 +195,8 @@ mindmap
 ```
 
 ### 1.3 借用系统完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -227,6 +239,8 @@ mindmap
 ```
 
 ### 1.4 生命周期系统完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -262,6 +276,8 @@ mindmap
 ```
 
 ### 1.5 泛型系统完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -305,6 +321,8 @@ mindmap
 ```
 
 ### 1.6 Trait 系统完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -362,6 +380,8 @@ mindmap
 ```
 
 ### 1.7 并发编程完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -412,6 +432,8 @@ mindmap
 ```
 
 ### 1.8 异步编程完整思维导图
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -604,6 +626,8 @@ mindmap
 ---
 
 ## 📊 2. 多维矩阵 (Multidimensional Matrix)
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Rust 1.93.0 特性对比矩阵
 
@@ -668,6 +692,8 @@ mindmap
 ---
 
 ## 🌳 3. 决策树图 (Decision Tree)
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Rust 1.93.0 特性使用决策树
 
@@ -1151,6 +1177,8 @@ flowchart TD
 ---
 
 ## 🔬 4. 证明树图 (Proof Tree)
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 定理证明树结构
 
@@ -1335,6 +1363,8 @@ graph TD
 ---
 
 ## 📈 5. 概念关系网络图 (Concept Relationship Network)
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph LR
@@ -1382,6 +1412,8 @@ graph LR
 ---
 
 ## 🎯 6. 使用指南
+>
+> **[来源: Rust Official Docs]**
 
 ### 6.1 何时使用思维导图
 
@@ -1424,6 +1456,8 @@ graph LR
 ---
 
 ## 💻 代码示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 思维导图生成器
 
@@ -1545,6 +1579,8 @@ impl DecisionEngine {
 ---
 
 ## 📚 7. 参考资源
+>
+> **[来源: Rust Official Docs]**
 
 ### 7.1 官方资源
 
@@ -1576,6 +1612,8 @@ impl DecisionEngine {
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1621,3 +1659,7 @@ impl DecisionEngine {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

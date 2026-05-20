@@ -1,14 +1,17 @@
 # 社区参与与贡献指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档介绍Rust安全关键系统社区，以及如何参与和贡献。
 
 ---
 
 ## 1. 社区生态
+> **[来源: Rust Official Docs]**
 
 ### 1.1 主要组织
+> **[来源: Rust Official Docs]**
 
 ```
 Rust基金会:

@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
 
 - [🔗 跨模块集成示例指南 {#-跨模块集成示例指南}](#-跨模块集成示例指南--跨模块集成示例指南)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -43,6 +45,8 @@
 ---
 
 ## 概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档提供跨模块集成的实际示例，展示如何将不同的Rust模块组合使用，构建完整的应用程序。
 
@@ -51,8 +55,12 @@
 ---
 
 ## 示例1: 所有权与类型系统集成
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景：类型安全的资源管理
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c01_ownership_borrow_scope::*;
@@ -99,8 +107,12 @@ fn test_resource_manager() {
 ---
 
 ## 示例2: 异步与网络编程集成
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景：异步HTTP服务器
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c06_async::*;
@@ -131,8 +143,12 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ## 示例3: 线程与进程管理集成
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景：多线程进程池
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c05_threads::*;
@@ -198,8 +214,12 @@ impl Drop for ThreadPool {
 ---
 
 ## 示例4: 宏系统与设计模式集成
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景：使用宏实现设计模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c11_macro_system::*;
@@ -244,6 +264,8 @@ fn test_singleton() {
 ---
 
 ## 示例5: 算法与性能优化集成
+>
+> **[来源: Rust Official Docs]**
 
 ### 场景：高性能数据处理管道
 

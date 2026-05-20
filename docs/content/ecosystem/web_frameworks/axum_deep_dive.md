@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Axum 深度解析](#axum-深度解析)
   - [📋 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Axum 是一个基于 Tower 的 Web 框架，专注于：
 
@@ -45,6 +47,7 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 - **高性能**: 零成本抽象
 
 ### 设计理念
+> **[来源: Rust Official Docs]**
 
 ```text
 Axum 设计原则:
@@ -58,8 +61,10 @@ Axum 设计原则:
 ---
 
 ## 🏗️ 架构设计
+> **[来源: Rust Official Docs]**
 
 ### 核心组件
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::{
@@ -96,6 +101,7 @@ fn create_router(state: Arc<AppState>) -> Router {
 ```
 
 ### 请求处理流程
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 sequenceDiagram
@@ -120,8 +126,10 @@ sequenceDiagram
 ---
 
 ## 📐 核心概念
+> **[来源: Rust Official Docs]**
 
 ### Handler
+> **[来源: Rust Official Docs]**
 
 Handler 是任何实现 `Handler` trait 的函数。
 
@@ -163,6 +171,7 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
 ```
 
 ### Extractor
+> **[来源: Rust Official Docs]**
 
 Extractors 从请求中提取数据。
 
@@ -249,6 +258,7 @@ async fn protected_route(api_key: ApiKey) -> String {
 ```
 
 ### Response
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::response::{
@@ -309,6 +319,7 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
 ```
 
 ### 中间件
+> **[来源: Rust Official Docs]**
 
 ```rust
 use axum::{

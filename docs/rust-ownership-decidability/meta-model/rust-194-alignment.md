@@ -1,13 +1,16 @@
 # Rust 1.94 所有权形式化对齐
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档描述了 Rust 所有权可判定性形式化框架与 Rust 1.94 版本特性的对齐工作。
 Rust 1.94 引入了多项重要的语言特性，这些特性对所有权和借用系统有直接影响。
 
 ## Rust 1.94 新特性概览
+> **[来源: Rust Official Docs]**
 
 ### 1. Reborrow Trait
+> **[来源: Rust Official Docs]**
 
 **Rust 特性**：允许从可变借用获取不可变借用
 

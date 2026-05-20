@@ -1,6 +1,7 @@
 # Actor 模型语义
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Actor 模型语义](#actor-模型语义)
   - [目录](#目录)
@@ -104,8 +105,10 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Actor 模型理论基础
+> **[来源: Rust Official Docs]**
 
 **Actor 模型**是由 Carl Hewitt 于 1973 年提出的并发计算模型，它将并发计算的基本单元抽象为 **Actor**，每个 Actor 是一个独立的计算实体，具有以下核心特性：
 
@@ -148,6 +151,7 @@ impl<M: Send> ActorRef<M> {
 ```
 
 ### 1.2 Actor 模型在 Rust 中的适用性
+> **[来源: Rust Official Docs]**
 
 Rust 的所有权系统与 Actor 模型具有天然的契合性：
 
@@ -186,6 +190,7 @@ fn ownership_in_actor_semantics() {
 ```
 
 ### 1.3 与所有权系统的结合
+> **[来源: Rust Official Docs]**
 
 **消息所有权语义：**
 
@@ -216,10 +221,13 @@ impl Actor for MyActor {
 ---
 
 ## 2. Actor 基本语义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Actor 定义
+> **[来源: Rust Official Docs]**
 
 #### 2.1.1 Actor 作为计算实体
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Actor} \equiv \langle \text{id}, \sigma, \beta, \mu \rangle
@@ -254,6 +262,7 @@ impl Handler<Increment> for MyActor {
 ```
 
 #### 2.1.2 状态封装语义
+> **[来源: Rust Official Docs]**
 
 ```rust
 use bastion::prelude::*;
@@ -275,6 +284,7 @@ fn counter_behavior(ctx: &mut Context) -> BastionPath {
 ```
 
 #### 2.1.3 行为定义语义
+> **[来源: Rust Official Docs]**
 
 ```rust
 use xtra::prelude::*;
@@ -297,6 +307,7 @@ impl Handler<Greet> for Greeter {
 ```
 
 ### 2.2 Actor 生命周期
+> **[来源: Rust Official Docs]**
 
 #### 2.2.1 创建语义
 

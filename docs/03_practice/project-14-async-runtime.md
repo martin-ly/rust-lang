@@ -7,12 +7,14 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 理解异步原理，创建简化版async运行时。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 - [ ] Future trait实现
 - [ ] 任务调度器
@@ -23,6 +25,7 @@
 ---
 
 ## 学习要点
+> **[来源: Rust Official Docs]**
 
 ### 自定义Future
 

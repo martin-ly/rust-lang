@@ -3,13 +3,16 @@
 本文档介绍如何使用 Docker 和 Docker Compose 构建和运行本项目。
 
 ## 前置要求
+> **[来源: Rust Official Docs]**
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 构建镜像
+> **[来源: Rust Official Docs]**
 
 ```bash
 docker build -t rust-lang .

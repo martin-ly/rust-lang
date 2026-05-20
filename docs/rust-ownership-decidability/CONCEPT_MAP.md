@@ -5,8 +5,10 @@
 ---
 
 ## 一、核心概念的三层映射
+> **[来源: Rust Official Docs]**
 
 ### 1.1 所有权（Ownership）
+> **[来源: Rust Official Docs]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
 |-----------|---------|-----------|
@@ -27,6 +29,7 @@ Definition move_var (Γ : type_env) (x : var) : type_env :=
 ```
 
 ### 1.2 借用（Borrowing）
+> **[来源: Rust Official Docs]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
 |-----------|---------|-----------|

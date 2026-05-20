@@ -1,6 +1,7 @@
 # 服务发现语义 (Service Discovery Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [服务发现语义 (Service Discovery Semantics)](#服务发现语义-service-discovery-semantics)
   - [目录](#目录)
@@ -28,12 +29,14 @@
   - [9. 总结](#9-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 服务发现是分布式系统的核心基础设施，允许动态定位网络服务。本文档分析服务发现的形式化语义、一致性模型和 Rust 实现。
 
 ---
 
 ## 2. 服务发现基础模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 核心概念
 

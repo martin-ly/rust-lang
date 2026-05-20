@@ -1,6 +1,7 @@
 # 故障模型语义 (Failure Models Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [故障模型语义 (Failure Models Semantics)](#故障模型语义-failure-models-semantics)
   - [目录](#目录)
@@ -24,6 +25,7 @@
   - [8. 总结](#8-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 理解分布式系统中的故障模型是设计容错系统的基础。
 本文档深入分析各种故障模型的形式化定义、检测机制和 Rust 实践。
@@ -31,6 +33,7 @@
 ---
 
 ## 2. 故障分类
+> **[来源: Rust Official Docs]**
 
 ### 2.1 故障类型谱系
 

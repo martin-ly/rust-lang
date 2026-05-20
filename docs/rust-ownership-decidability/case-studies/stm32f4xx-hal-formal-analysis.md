@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [STM32F4xx HAL硬件抽象层形式化分析](#stm32f4xx-hal硬件抽象层形式化分析)
   - [目录](#目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 STM32F4xx HAL特点：
 
@@ -44,6 +46,7 @@ STM32F4xx HAL特点：
 ---
 
 ## 2. 时钟树形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 CLOCK-1 ( 时钟源 )
 

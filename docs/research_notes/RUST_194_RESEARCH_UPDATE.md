@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94.0 研究更新报告](#rust-1940-研究更新报告)
   - [📋 目录](#-目录)
@@ -40,10 +41,12 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 本文档记录 Rust 1.94.0 版本对研究笔记系统的影响。
 
 ### 主要更新
+> **[来源: Rust Official Docs]**
 
 1. **ControlFlow API**: 迭代控制流的基础 API
 2. **Edition 2024 完善**: 新语言特性的完整支持
@@ -52,8 +55,10 @@
 ---
 
 ## 📊 特性分析
+> **[来源: Rust Official Docs]**
 
 ### 1. ControlFlow 形式化分析
+> **[来源: Rust Official Docs]**
 
 `ControlFlow<B, C>` 是一个用于提前返回控制流的类型：
 
@@ -95,6 +100,7 @@ fn find_negative(numbers: &[i32]) -> Option<i32> {
 ```
 
 ### 2. Edition 2024 语义变化
+> **[来源: Rust Official Docs]**
 
 Edition 2024 引入了以下语义变化：
 
@@ -108,8 +114,10 @@ Edition 2024 引入了以下语义变化：
 ---
 
 ## 📅 Edition 2024 集成分析
+> **[来源: Rust Official Docs]**
 
 ### 迁移路径
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 创建新项目
@@ -120,6 +128,7 @@ cargo fix --edition
 ```
 
 ### 形式化影响
+> **[来源: Rust Official Docs]**
 
 - **语法层面**: 新增 `gen` 关键字，需要更新词法分析器
 - **类型层面**: `use<..>` 精确捕获影响类型推断
@@ -128,8 +137,10 @@ cargo fix --edition
 ---
 
 ## 🔬 形式化方法影响
+> **[来源: Rust Official Docs]**
 
 ### 类型系统
+> **[来源: Rust Official Docs]**
 
 - ControlFlow 作为 Monad-like 结构的分析
 - Edition 2024 新特性的类型检查

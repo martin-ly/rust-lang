@@ -11,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Typenum 类型级数字形式化分析](#typenum-类型级数字形式化分析)
   - [目录](#目录)
@@ -63,8 +64,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题背景
+> **[来源: Rust Official Docs]**
 
 在Rust支持const generics之前（Rust 1.51之前），开发者无法在泛型参数中使用整数值。这给需要编译期大小确定的场景带来了挑战：
 

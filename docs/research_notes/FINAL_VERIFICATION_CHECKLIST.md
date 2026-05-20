@@ -7,14 +7,17 @@
 ---
 
 ## 验证说明
+> **[来源: Rust Official Docs]**
 
 本清单用于验证 `docs/research_notes` 项目是否达到100%完成标准。
 
 ---
 
 ## 一、文档完整性验证 ✅
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心形式化文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 检查项 | 状态 |
 | :--- | :--- | :--- |

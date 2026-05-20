@@ -5,6 +5,8 @@
 ---
 
 ## 1. 架构模型谱系
+>
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -38,8 +40,12 @@ graph TD
 ---
 
 ## 2. 多维架构对比矩阵
+>
+> **[来源: Rust Official Docs]**
 
 ### 矩阵1：基本特性对比
+>
+> **[来源: Rust Official Docs]**
 
 | 架构模型 | 耦合度 | 内聚性 | 可测试性 | 可部署性 | 可扩展性 | 复杂度 | 适用规模 |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -54,6 +60,8 @@ graph TD
 | **Actor模型** | ⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 大 |
 
 ### 矩阵2：Rust实现适配度
+>
+> **[来源: Rust Official Docs]**
 
 | 架构模型 | 所有权适配 | 生命周期适配 | 并发适配 | 内存安全 | 性能 | 生态支持 |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -66,8 +74,12 @@ graph TD
 ---
 
 ## 3. 分层架构深度分析
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Clean Architecture在Rust中的实现
+>
+> **[来源: Rust Official Docs]**
 
 ```
 Clean Architecture层次 (内层 → 外层):
@@ -96,6 +108,8 @@ Clean Architecture层次 (内层 → 外层):
 ```
 
 ### 3.2 Rust实现示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 内层: 实体 (无外部依赖)
@@ -166,8 +180,12 @@ pub async fn create_user(
 ---
 
 ## 4. 微服务架构分析
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 同步 vs 异步微服务
+>
+> **[来源: Rust Official Docs]**
 
 ```
 同步微服务 (REST/gRPC):
@@ -196,6 +214,8 @@ pub async fn create_user(
 ```
 
 ### 4.2 Rust微服务技术栈
+>
+> **[来源: Rust Official Docs]**
 
 | 组件 | 推荐库 | 理由 |
 |:---|:---|:---|
@@ -209,6 +229,8 @@ pub async fn create_user(
 ---
 
 ## 5. 事件驱动架构
+>
+> **[来源: Rust Official Docs]**
 
 ### 5.1 事件溯源模式
 

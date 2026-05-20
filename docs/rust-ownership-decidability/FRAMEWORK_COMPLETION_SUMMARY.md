@@ -7,16 +7,19 @@
 ---
 
 ## 补充内容概览
+> **[来源: Rust Official Docs]**
 
 针对"缺少整体框架性论证"的问题，已完成以下补充：
 
 ### 1. 框架分析文档
+> **[来源: Rust Official Docs]**
 
 - **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** - 缺失诊断与补充方案
 - **UNIFIED_THEORETICAL_FRAMEWORK.md** - 统一理论框架
 - **THEOREM_DEPENDENCY_GRAPH.md** - 定理依赖网络图
 
 ### 2. 关键证明补充
+> **[来源: Rust Official Docs]**
 
 - **SemanticsEquivalence.v** - 大步/小步语义等价性
 - **TypeOwnershipConnection.v** - 类型与所有权联系

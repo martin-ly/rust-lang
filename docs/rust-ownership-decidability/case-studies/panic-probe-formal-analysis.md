@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Panic-Probe 与嵌入式 Panic 处理形式化分析](#panic-probe-与嵌入式-panic-处理形式化分析)
   - [目录](#目录)
@@ -63,8 +64,10 @@
 ---
 
 ## 1. 项目概览与解决的问题
+> **[来源: Rust Official Docs]**
 
 ### 1.1 嵌入式系统的故障处理挑战
+> **[来源: Rust Official Docs]**
 
 嵌入式系统与传统桌面/服务器环境有本质差异：
 

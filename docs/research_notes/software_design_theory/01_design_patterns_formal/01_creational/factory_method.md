@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Factory Method 形式化分析](#factory-method-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Factory Method 结构）
+> **[来源: Rust Official Docs]**
 
 设 $T$ 为产品类型，$C$ 为创建者类型。Factory Method 是一个三元组 $\mathcal{F} = (C, T, \mathit{factory})$，满足：
 
@@ -66,12 +69,14 @@ $$\mathcal{F} = \langle C, T, \mathit{factory}: C \rightarrow T \rangle$$
 ---
 
 ### Axiom FM1（返回类型一致性公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall c: C,\, \mathit{factory}(c) : T \land \neg(\mathit{factory}(c) = \mathrm{null})$$
 
 工厂方法返回类型与产品类型一致；无空指针或无效值。
 
 ### Axiom FM2（所有权独立公理）
+> **[来源: Rust Official Docs]**
 
 $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{factory}(c)) \neq \emptyset$$
 
@@ -80,6 +85,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T1（类型保持定理）
+> **[来源: Rust Official Docs]**
 
 由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 保持性，$\mathit{factory}(c)$ 良型则求值结果类型为 $T$。
 
@@ -97,6 +103,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T2（所有权安全定理）
+> **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md) T2，返回值所有权转移至调用者；无悬垂。
 
@@ -120,6 +127,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 推论 FM-C1（纯 Safe Factory）
+> **[来源: Rust Official Docs]**
 
 Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 
@@ -135,6 +143,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -145,6 +154,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Product {
@@ -182,6 +192,7 @@ assert_eq!(product.operation(), "Product A");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

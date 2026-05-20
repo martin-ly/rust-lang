@@ -6,8 +6,10 @@
 ---
 
 ## 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 添加依赖
+> **[来源: Rust Official Docs]**
 
 在 Cargo.toml 中添加需要的 crate:
 
@@ -18,6 +20,7 @@ c02_type_system = { path = "../crates/c02_type_system" }
 ```
 
 ### 基本使用
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c01_ownership_borrow_scope::smart_pointers::BoxExample;

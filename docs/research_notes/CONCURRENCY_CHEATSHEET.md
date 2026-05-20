@@ -5,6 +5,7 @@
 ---
 
 ## Send与Sync
+> **[来源: Rust Official Docs]**
 
 ```text
 Send: 可跨线程转移所有权
@@ -20,6 +21,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 ---
 
 ## 同步原语
+> **[来源: Rust Official Docs]**
 
 | 原语 | 用途 | 场景 |
 | :--- | :--- | :--- |
@@ -32,6 +34,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 ---
 
 ## 创建线程
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -57,6 +60,7 @@ thread::Builder::new()
 ---
 
 ## Send/Sync
+> **[来源: Rust Official Docs]**
 
 | 类型 | `Send` | `Sync` | 说明 |
 | :--- | :--- | :--- | :--- |
@@ -71,8 +75,10 @@ thread::Builder::new()
 ---
 
 ## 共享状态
+> **[来源: Rust Official Docs]**
 
 ### Mutex
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -90,6 +96,7 @@ println!("{}", *num);
 ```
 
 ### RwLock
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::RwLock;
@@ -110,8 +117,10 @@ let r2 = data.read().unwrap();
 ---
 
 ## 通道通信
+> **[来源: Rust Official Docs]**
 
 ### mpsc
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc;
@@ -133,6 +142,7 @@ for received in rx {
 ```
 
 ### 多生产者
+> **[来源: Rust Official Docs]**
 
 ```rust
 let (tx, rx) = mpsc::channel();
@@ -153,6 +163,7 @@ for received in rx {
 ---
 
 ## 原子操作
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};

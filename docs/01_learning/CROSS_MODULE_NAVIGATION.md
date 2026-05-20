@@ -5,6 +5,7 @@
 ---
 
 ## 🗺️ 学习路线图
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -75,8 +76,10 @@
 ---
 
 ## 📚 模块详细映射
+> **[来源: Rust Official Docs]**
 
 ### 核心概念 → 源码 → 文档 → 实践
+> **[来源: Rust Official Docs]**
 
 | 核心概念 | crates/ 源码 | docs/ 文档 | content/ 拓展 |
 |----------|--------------|------------|---------------|
@@ -159,12 +162,12 @@ C01 → C04 → C11 → docs/research_notes/
 
 | 资源 | 路径 | 描述 |
 |------|------|------|
-| 主索引 | [00_MASTER_INDEX.md](00_MASTER_INDEX.md) | 完整文档索引 |
-| 学习路径 | [01_learning/LEARNING_PATH_PLANNING.md](01_learning/LEARNING_PATH_PLANNING.md) | 学习规划 |
-| 快速参考 | [02_reference/quick_reference/](02_reference/quick_reference/) | 速查手册 |
-| 实践练习 | [03_practice/](03_practice/) | 动手练习 |
-| 思维表示 | [04_thinking/](04_thinking/) | 思维导图/矩阵 |
-| 实用指南 | [05_guides/BEST_PRACTICES.md](05_guides/BEST_PRACTICES.md) | 最佳实践 |
+| 主索引 | [00_master_index.md](../00_master_index.md) | 完整文档索引 |
+| 学习路径 | [LEARNING_PATH_PLANNING.md](LEARNING_PATH_PLANNING.md) | 学习规划 |
+| 快速参考 | [02_reference/quick_reference/README.md](../02_reference/quick_reference/README.md) | 速查手册 |
+| 实践练习 | [03_practice/README.md](../03_practice/README.md) | 动手练习 |
+| 思维表示 | [04_thinking/README.md](../04_thinking/README.md) | 思维导图/矩阵 |
+| 实用指南 | [05_guides/BEST_PRACTICES.md](../05_guides/BEST_PRACTICES.md) | 最佳实践 |
 | 前沿内容 | [../content/](../content/) | 生产实践/学术 |
 
 ---

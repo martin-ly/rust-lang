@@ -17,6 +17,7 @@
 ---
 
 ## 📋 版本标识
+> **[来源: Rust Official Docs]**
 
 ```yaml
 特性名称: {{ feature_name }}
@@ -29,10 +30,12 @@
 ---
 
 ## 📝 特性概述
+> **[来源: Rust Official Docs]**
 
 {{ feature_description }}
 
 ### 核心优势
+> **[来源: Rust Official Docs]**
 
 - {{ advantage_1 }}
 - {{ advantage_2 }}

@@ -7,6 +7,8 @@
 ---
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 内联汇编完整指南](#rust-内联汇编完整指南)
   - [目录](#目录)
@@ -46,6 +48,8 @@
 ---
 
 ## 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 最简单的内联汇编
@@ -67,8 +71,12 @@ fn main() {
 ---
 
 ## 基础语法
+>
+> **[来源: Rust Official Docs]**
 
 ### asm! 宏基本结构
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 asm!(
@@ -81,6 +89,8 @@ asm!(
 ```
 
 ### global_asm! 全局汇编
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::arch::global_asm;
@@ -100,8 +110,12 @@ extern "C" {
 ---
 
 ## 操作数详解
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 输入操作数 (in)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 let x: u64 = 42;
@@ -114,6 +128,8 @@ unsafe {
 ```
 
 ### 2. 输出操作数 (out)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut y: u64;
@@ -126,6 +142,8 @@ unsafe {
 ```
 
 ### 3. 输入输出操作数 (inout)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut z: u64 = 10;
@@ -139,6 +157,8 @@ unsafe {
 ```
 
 ### 4. 延迟输出 (lateout)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // lateout: 在输入操作数使用完之后再写入
@@ -155,6 +175,8 @@ unsafe {
 ```
 
 ### 5. 内存操作数 (mem)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut arr = [1u64; 4];

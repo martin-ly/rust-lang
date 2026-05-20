@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Insta 快照测试形式化分析](#insta-快照测试形式化分析)
   - [目录](#目录)
@@ -27,6 +28,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Insta提供:
 
@@ -38,6 +40,7 @@ Insta提供:
 ---
 
 ## 2. 快照语义
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (精确匹配)
 

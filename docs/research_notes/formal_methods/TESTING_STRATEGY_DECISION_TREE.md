@@ -5,6 +5,7 @@
 ---
 
 ## 快速决策索引
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -29,8 +30,10 @@
 ---
 
 ## 一、测试类型选择决策树
+> **[来源: Rust Official Docs]**
 
 ### 1.1 单元测试 (Unit Tests)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择单元测试?
@@ -120,6 +123,7 @@ mod tests {
 ---
 
 ### 1.2 集成测试 (Integration Tests)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择集成测试?
@@ -218,6 +222,7 @@ pub async fn setup_test_db() -> Database {
 ---
 
 ### 1.3 文档测试 (Doc Tests)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择文档测试?
@@ -334,6 +339,7 @@ impl Validator {
 ---
 
 ### 1.4 基准测试 (Benchmarks)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择基准测试?
@@ -428,6 +434,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 ---
 
 ### 1.5 模糊测试 (Fuzz Testing)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择模糊测试?
@@ -500,6 +507,7 @@ cargo fuzz run parser crash-abc123
 ---
 
 ### 1.6 属性测试 (Property Testing)
+> **[来源: Rust Official Docs]**
 
 ```text
 何时选择属性测试?
@@ -596,8 +604,10 @@ impl ReferenceStateMachine for MyStateMachine {
 ---
 
 ## 二、测试工具选择矩阵
+> **[来源: Rust Official Docs]**
 
 ### 2.1 工具对比表
+> **[来源: Rust Official Docs]**
 
 | 工具/库 | 用途 | 适用场景 | 学习曲线 | 维护状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -613,6 +623,7 @@ impl ReferenceStateMachine for MyStateMachine {
 | **predicates** | 断言增强 | 复杂条件验证 | ⭐ 低 | 活跃 |
 
 ### 2.2 异步测试：tokio-test
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 基础异步测试
@@ -877,6 +888,7 @@ criterion_main!(benches);
 ---
 
 ## 三、测试策略维度
+> **[来源: Rust Official Docs]**
 
 ### 3.1 测试金字塔
 
@@ -1086,6 +1098,7 @@ criterion_main!(benches);
 ---
 
 ## 四、最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 4.1 测试组织结构
 
@@ -1336,6 +1349,7 @@ mod test_documentation {
 ---
 
 ## 五、决策流程图
+> **[来源: Rust Official Docs]**
 
 ```text
 开始测试规划
@@ -1379,6 +1393,7 @@ mod test_documentation {
 ---
 
 ## 六、快速参考卡片
+> **[来源: Rust Official Docs]**
 
 ### 6.1 常用命令
 
@@ -1426,6 +1441,7 @@ cargo flamegraph
 ---
 
 ## 七、推荐配置模板
+> **[来源: Rust Official Docs]**
 
 ### 7.1 Cargo.toml 测试配置
 
@@ -1503,6 +1519,7 @@ pub mod test_config {
 ---
 
 ## 八、参考资源
+> **[来源: Rust Official Docs]**
 
 - [Rust Testing Guide](https://doc.rust-lang.org/rustc/tests/index.html)
 - [Mockall Documentation](https://docs.rs/mockall)
@@ -1519,6 +1536,7 @@ pub mod test_config {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -1564,3 +1582,7 @@ pub mod test_config {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

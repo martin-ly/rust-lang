@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 学术研究对接](#rust-学术研究对接)
   - [📋 目录](#-目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 🎯 目标
+> **[来源: Rust Official Docs]**
 
 本目录致力于：
 
@@ -51,6 +53,7 @@
 ---
 
 ## 📊 学术研究覆盖矩阵
+> **[来源: Rust Official Docs]**
 
 | 研究领域 | 核心论文 | 工程影响 | 文档完整度 | 工具支持 |
 |----------|----------|----------|------------|----------|
@@ -65,8 +68,10 @@
 ---
 
 ## 🔬 RustBelt 项目
+> **[来源: Rust Official Docs]**
 
 ### 核心贡献
+> **[来源: Rust Official Docs]**
 
 RustBelt 是首个对 Rust 内存安全保证进行形式化证明的研究项目。
 
@@ -86,6 +91,7 @@ RustBelt 论文链:
 ```
 
 ### 所有权形式化
+> **[来源: Rust Official Docs]**
 
 **Iris 分离逻辑表示**:
 
@@ -124,6 +130,7 @@ Definition own_shared (l: loc) (v: val) : iProp :=
 ```
 
 ### 分离逻辑应用
+> **[来源: Rust Official Docs]**
 
 **关键概念**:
 
@@ -148,8 +155,10 @@ fn example() {
 ---
 
 ## 🌳 Tree Borrows
+> **[来源: Rust Official Docs]**
 
 ### 与 Stacked Borrows 对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | Stacked Borrows | Tree Borrows |
 |------|-----------------|--------------|
@@ -178,6 +187,7 @@ fn tree_borrows_allows() {
 ```
 
 ### 实际影响
+> **[来源: Rust Official Docs]**
 
 **对开发者的影响**:
 
@@ -195,6 +205,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ---
 
 ## 🔍 Polonius
+> **[来源: Rust Official Docs]**
 
 ### Datalog 形式化
 

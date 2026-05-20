@@ -7,8 +7,10 @@
 ---
 
 ## Week 1 完成情况
+> **[来源: Rust Official Docs]**
 
 ### 已完成 ✅
+> **[来源: Rust Official Docs]**
 
 | 任务 | 完成度 | 备注 |
 | :--- | :--- | :--- |
@@ -19,6 +21,7 @@
 | P1-W1-T5: move_preserves_uniqueness | 70% | 核心case分析，需辅助引理 |
 
 ### 当前阻碍
+> **[来源: Rust Official Docs]**
 
 `move_preserves_uniqueness` 证明需要额外的辅助引理：
 

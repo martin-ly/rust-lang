@@ -8,10 +8,12 @@
 ---
 
 ## 1. Executive Summary
+> **[来源: Rust Official Docs]**
 
 This report documents the comprehensive deep-dive documentation created for the Rust ownership and concurrency patterns module. The work represents a significant investment in formal methods, practical examples, and educational content.
 
 ### Achievement Highlights
+> **[来源: Rust Official Docs]**
 
 | Metric | Count |
 |--------|-------|
@@ -23,6 +25,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 | Rust 1.94 features covered | **5+** |
 
 ### Documentation Quality
+> **[来源: Rust Official Docs]**
 
 - ✅ Formal semantics with mathematical notation
 - ✅ Complete proofs for all major theorems
@@ -34,8 +37,10 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ## 2. Document Inventory
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Async Patterns Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-05-async-patterns-deep.md`
 
@@ -74,6 +79,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.2 Actor Model Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `actor-specialty/ACTOR_MODEL_DEEP_DIVE.md`
 
@@ -117,6 +123,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.3 Concurrency Architecture Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-01-concurrency-architecture-deep.md`
 
@@ -157,6 +164,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.4 Lock-Free Patterns Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-04-lock-free-patterns-deep.md`
 
@@ -201,6 +209,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.5 Message Passing Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-03-message-passing-deep.md`
 
@@ -241,6 +250,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.6 Data Parallelism Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-06-data-parallelism-deep.md`
 
@@ -280,6 +290,7 @@ This report documents the comprehensive deep-dive documentation created for the 
 ---
 
 ### 2.7 Distributed Patterns Deep Dive
+> **[来源: Rust Official Docs]**
 
 **File**: `12-concurrency-patterns/12-07-distributed-patterns-deep.md`
 

@@ -9,6 +9,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Data Parallelism Patterns: Formal Deep Dive](#data-parallelism-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -86,6 +87,7 @@
 ---
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 This document provides a formal treatment of data parallelism patterns in Rust, focusing on how Rust's ownership system enables safe, efficient parallel data processing. We present:
 
@@ -100,6 +102,7 @@ The core insight is that Rust's ownership system, when combined with parallel it
 ---
 
 ## 1. Data Parallelism Fundamentals
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Definition
 

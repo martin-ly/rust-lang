@@ -1,6 +1,7 @@
 # Rust所有权系统 - 思维导图
 
 ## Mermaid思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -106,6 +107,7 @@ mindmap
 ---
 
 ## 文本思维导图
+> **[来源: Rust Official Docs]**
 
 ```text
                             Rust所有权与可判定性
@@ -123,6 +125,7 @@ mindmap
 ---
 
 ## 核心关系图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐

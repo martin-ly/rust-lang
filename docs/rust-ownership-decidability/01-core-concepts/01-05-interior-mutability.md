@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [内部可变性模式：运行时借用检查详解](#内部可变性模式运行时借用检查详解)
   - [目录](#目录)
@@ -48,8 +49,10 @@
 ---
 
 ## 1. 什么是内部可变性
+> **[来源: Rust Official Docs]**
 
 ### 1.1 核心概念
+> **[来源: Rust Official Docs]**
 
 ```text
 内部可变性 (Interior Mutability):

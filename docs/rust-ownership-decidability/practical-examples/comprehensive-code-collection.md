@@ -5,8 +5,10 @@
 ---
 
 ## 基础所有权示例
+> **[来源: Rust Official Docs]**
 
 ### 移动语义
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {
@@ -18,6 +20,7 @@ fn main() {
 ```
 
 ### 借用模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn borrow_example(data: &Vec<i32>) {

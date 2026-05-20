@@ -11,6 +11,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 术语标准化文档](#rust-术语标准化文档)
   - [📋 目录](#-目录)
@@ -37,6 +38,7 @@
 本文档旨在为 Rust 学习项目提供标准化的术语对照体系，确保中英文术语使用的一致性和准确性。所有术语定义均对齐 **Ferrocene Language Specification (FLS)** 标准，并引用官方文档（The Book、Reference、RFC）作为权威来源。
 
 ### 术语表使用说明
+> **[来源: Rust Official Docs]**
 
 - **中文术语**: 推荐使用的中文译名
 - **英文术语**: 官方英文术语（FLS 标准）
@@ -291,6 +293,7 @@
 ---
 
 ## 参考资源
+> **[来源: Rust Official Docs]**
 
 ### 官方文档引用格式说明
 

@@ -5,6 +5,7 @@
 ---
 
 ## 🎯 1. 学习路径决策树
+> **[来源: Rust Official Docs]**
 
 ```text
 我应该从哪开始学习 Rust？
@@ -61,8 +62,10 @@
 ---
 
 ## 🛠️ 2. 技术选型决策树
+> **[来源: Rust Official Docs]**
 
 ### 2.1 并发模型选择
+> **[来源: Rust Official Docs]**
 
 ```text
 我应该使用哪种并发模型？

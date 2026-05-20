@@ -7,8 +7,10 @@
 ---
 
 ## 完成情况概览
+> **[来源: Rust Official Docs]**
 
 ### 新增自然语言文档（10个）
+> **[来源: Rust Official Docs]**
 
 | 文档 | 大小 | 内容 | 目标 |
 |------|------|------|------|
@@ -28,6 +30,7 @@
 ---
 
 ## 文档内容详解
+> **[来源: Rust Official Docs]**
 
 ### 1. OVERVIEW_AND_INTUITION.md（总览与直观理解）
 

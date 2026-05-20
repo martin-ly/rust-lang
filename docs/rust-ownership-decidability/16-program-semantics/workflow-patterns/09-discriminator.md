@@ -1,6 +1,7 @@
 # 09 鉴别器模式 (Discriminator)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [09 鉴别器模式 (Discriminator)](#09-鉴别器模式-discriminator)
   - [📋 目录](#-目录)
@@ -25,10 +26,12 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 鉴别器模式等待多个并行分支中的第一个完成，然后取消或忽略其他分支的执行结果，继续后续流程。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{Discriminator}(P_1, P_2, \ldots, P_n) = \text{first}(P_1, P_2, \ldots, P_n) \gg \text{cancel}(\text{others})

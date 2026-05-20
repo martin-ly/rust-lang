@@ -4,6 +4,7 @@
 > **扩展工作**: RustHornBelt (2022), Iris Separation Logic
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RustBelt: Rust的形式化基础](#rustbelt-rust的形式化基础)
   - [目录](#目录)
@@ -35,8 +36,10 @@
   - [参考文献](#参考文献)
 
 ## 1. RustBelt概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 项目目标
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐

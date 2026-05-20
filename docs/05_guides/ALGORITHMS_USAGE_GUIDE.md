@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [算法使用指南](#算法使用指南)
   - [📋 目录](#-目录)
@@ -30,6 +32,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南对应 `crates/c08_algorithms`，提供 Rust 中各类算法的完整实现，包括排序、搜索、图算法、动态规划、数据结构、机器学习算法以及 LeetCode 分类题解。所有实现支持同步、并行和异步三种执行模式。
 
@@ -39,6 +43,8 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::algorithms::sorting::sync::{quick_sort, merge_sort};
@@ -60,8 +66,12 @@ fn main() {
 ---
 
 ## 📊 核心功能
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 排序算法
+>
+> **[来源: Rust Official Docs]**
 
 `algorithms/sorting/` 提供多种排序实现，支持同步、并行和分布式执行：
 
@@ -86,6 +96,8 @@ fn parallel_sort_example() {
 ```
 
 ### 2. 搜索算法
+>
+> **[来源: Rust Official Docs]**
 
 `algorithms/searching/` 提供经典搜索算法：
 
@@ -106,6 +118,8 @@ fn searching_examples() {
 ```
 
 ### 3. 图算法
+>
+> **[来源: Rust Official Docs]**
 
 `algorithms/graph/` 和 `graph/` 提供完整图论算法库：
 
@@ -128,6 +142,8 @@ fn graph_example() {
 ```
 
 ### 4. 动态规划
+>
+> **[来源: Rust Official Docs]**
 
 `algorithms/dynamic_programming/` 提供经典 DP 问题实现：
 
@@ -147,6 +163,8 @@ fn dp_examples() {
 ```
 
 ### 5. 数据结构
+>
+> **[来源: Rust Official Docs]**
 
 `data_structure/` 提供高级数据结构实现：
 
@@ -177,6 +195,8 @@ fn data_structure_examples() {
 ```
 
 ### 6. 机器学习算法
+>
+> **[来源: Rust Official Docs]**
 
 `machine_learning/` 提供基础 ML 算法实现：
 
@@ -204,6 +224,8 @@ fn ml_examples() {
 ```
 
 ### 7. LeetCode 分类实现
+>
+> **[来源: Rust Official Docs]**
 
 `leetcode/` 目录按 LeetCode 官方分类组织题解：
 
@@ -286,6 +308,7 @@ fn verified_algorithms() {
 - **算法决策树**: [algorithm_decision_trees.md](../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
 - **性能优化**: [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md)
 - **源码**: [crates/c08_algorithms/](../../crates/c08_algorithms/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

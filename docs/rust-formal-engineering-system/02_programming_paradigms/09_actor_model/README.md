@@ -11,6 +11,7 @@
 ---
 
 ## Actor 模型核心概念
+> **[来源: Rust Official Docs]**
 
 Actor 模型是一种并发计算模型，其中：
 
@@ -19,6 +20,7 @@ Actor 模型是一种并发计算模型，其中：
 - 每个 Actor 有自己的状态，不共享内存
 
 ### 基本 Actor 实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::mpsc::{channel, Sender, Receiver};
@@ -89,6 +91,7 @@ fn demo() {
 ```
 
 ### 异步 Actor
+> **[来源: Rust Official Docs]**
 
 ```rust
 use tokio::sync::mpsc::{channel, Sender, Receiver};
@@ -153,6 +156,7 @@ impl AsyncProcessor {
 ```
 
 ### Actor 监督与容错
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -234,6 +238,7 @@ impl Supervisor {
 ```
 
 ### 路由与负载均衡
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -301,6 +306,7 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
 ```
 
 ### 请求-响应模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;
@@ -386,6 +392,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 使用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | Actor 模式 | 优势 |
 | :--- | :--- | :--- |
@@ -401,8 +408,10 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -410,6 +419,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 
 ### 形式化方法
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -419,6 +429,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 相关 crates
+> **[来源: Rust Official Docs]**
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |

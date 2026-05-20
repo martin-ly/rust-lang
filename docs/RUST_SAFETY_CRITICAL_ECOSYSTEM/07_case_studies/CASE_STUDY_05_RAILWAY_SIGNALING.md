@@ -1,14 +1,17 @@
 # 案例研究05: 铁路信号系统 (EN 50128/50129)
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本案例研究展示Rust在欧洲铁路信号系统中的应用，符合EN 50128(软件安全)和EN 50129(系统安全)标准，达到SIL 4最高安全等级。
 
 ---
 
 ## 项目背景
+> **[来源: Rust Official Docs]**
 
 ### 系统信息
+> **[来源: Rust Official Docs]**
 
 | 属性 | 详情 |
 |------|------|
@@ -21,6 +24,7 @@
 | **验证代码** | 120,000行 |
 
 ### 安全要求
+> **[来源: Rust Official Docs]**
 
 SIL 4系统要求:
 
@@ -32,8 +36,10 @@ SIL 4系统要求:
 ---
 
 ## 系统架构
+> **[来源: Rust Official Docs]**
 
 ### 硬件架构: 2x2取2
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -62,6 +68,7 @@ SIL 4系统要求:
 ```
 
 ### 软件架构
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! SIL 4级联锁系统 - EN 50128/50129
@@ -517,8 +524,10 @@ pub mod types {
 ---
 
 ## 冗余与多样性
+> **[来源: Rust Official Docs]**
 
 ### 多样性实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 通道A和B使用不同算法实现相同功能
@@ -594,8 +603,10 @@ pub enum ComparisonResult {
 ---
 
 ## 验证与确认
+> **[来源: Rust Official Docs]**
 
 ### 形式化验证
+> **[来源: Rust Official Docs]**
 
 ```rust
 #[cfg(kani)]

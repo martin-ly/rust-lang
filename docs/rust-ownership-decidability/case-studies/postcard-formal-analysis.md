@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Postcard 嵌入式序列化形式化分析](#postcard-嵌入式序列化形式化分析)
   - [目录](#目录)
@@ -63,10 +64,12 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 **Postcard** 是一个专为 Rust 设计的紧凑型二进制序列化库，它基于 [Serde](https://serde.rs/) 框架实现，专门为资源受限的嵌入式系统和物联网(IoT)设备优化。
 
 ### 1.1 设计目标
+> **[来源: Rust Official Docs]**
 
 Postcard 的设计遵循以下核心原则：
 

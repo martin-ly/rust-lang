@@ -4,8 +4,10 @@
 > **目标**: 从旧版Rust工具链迁移到最新生态
 
 ## 迁移清单
+> **[来源: Rust Official Docs]**
 
 ### 1. 工具链更新
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 更新Rust到1.96.0
@@ -18,8 +20,10 @@ cargo install cargo-update cargo-tree cargo-outdated
 ```
 
 ### 2. 代码现代化
+> **[来源: Rust Official Docs]**
 
 #### lazy_static → LazyLock
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 旧代码
@@ -34,6 +38,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 ```
 
 #### async-trait → 原生async trait
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 旧代码
@@ -49,6 +54,7 @@ trait Storage {
 ```
 
 #### 生成器 → gen关键字
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 旧代码 (不稳定特性)
@@ -60,8 +66,10 @@ gen fn my_gen() -> i32 { yield 1; }
 ```
 
 ### 3. 配置更新
+> **[来源: Rust Official Docs]**
 
 #### Cargo.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [package]
@@ -78,6 +86,7 @@ redundant_guards = "warn"
 ```
 
 ### 4. CI/CD更新
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # 更新actions版本
@@ -91,8 +100,10 @@ redundant_guards = "warn"
 ---
 
 ## Rust 1.96 迁移章节
+> **[来源: Rust Official Docs]**
 
 ### 概述
+> **[来源: Rust Official Docs]**
 
 Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Range 类型改进和元组 coercion。本章节指导您从 1.94 平滑迁移到 1.96。
 

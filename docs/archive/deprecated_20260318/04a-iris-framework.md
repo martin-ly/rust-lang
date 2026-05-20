@@ -8,11 +8,13 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Iris 是一个用于验证并发高阶程序的框架，基于高阶分离逻辑。
 它是 RustBelt 验证 Rust 代码的基础。
 
 ### 1.1 核心设计目标
+> **[来源: Rust Official Docs]**
 
 | 特性 | 说明 | Rust 相关性 |
 |------|------|-------------|
@@ -24,8 +26,10 @@ Iris 是一个用于验证并发高阶程序的框架，基于高阶分离逻辑
 ---
 
 ## 2. 基础: 分离逻辑回顾
+> **[来源: Rust Official Docs]**
 
 ### 2.1 分离合取 (*)
+> **[来源: Rust Official Docs]**
 
 ```
 P * Q  ≡  P 和 Q 在不相交的堆上成立
@@ -46,6 +50,7 @@ let y = Box::new(2);  // x 和 y 的资源分离
 ```
 
 ### 2.2 分离蕴含 (*-)
+> **[来源: Rust Official Docs]**
 
 ```
 P -* Q  ≡  如果添加满足 P 的资源，则得到 Q
@@ -54,8 +59,10 @@ P -* Q  ≡  如果添加满足 P 的资源，则得到 Q
 ---
 
 ## 3. Iris 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 3.1 资源代数 (Resource Algebra)
+> **[来源: Rust Official Docs]**
 
 **定义 3.1** (资源代数)
 
@@ -74,6 +81,7 @@ shared(n, T) : n 个共享引用
 ```
 
 ### 3.2 命题与资源
+> **[来源: Rust Official Docs]**
 
 Iris 命题包含：
 
@@ -86,6 +94,7 @@ Iris 命题包含：
 | `◇ P` | 可能性 (later modality) | ◇ |
 
 ### 3.3 持续性模态 (□)
+> **[来源: Rust Official Docs]**
 
 **定义 3.2** (持续性)
 
@@ -110,6 +119,7 @@ let y = x;  // 可以使用 x 和 y (□P)
 ```
 
 ### 3.4 Later 模态 (◇)
+> **[来源: Rust Official Docs]**
 
 **定义 3.3** (Later)
 
@@ -122,6 +132,7 @@ let y = x;  // 可以使用 x 和 y (□P)
 ---
 
 ## 4. Hoare 类型 (Hoare Type Theory)
+> **[来源: Rust Official Docs]**
 
 ### 4.1 计算类型
 

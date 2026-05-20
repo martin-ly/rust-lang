@@ -7,6 +7,7 @@
 > **文档规模**: 74 篇核心文档，33,921 行，36 篇按 10 模块标准重构
 
 ## 🎯 快速导航
+> **[来源: Rust Official Docs]**
 
 | 路径 | 内容 | 适合人群 |
 |------|------|----------|
@@ -19,6 +20,7 @@
 | [06_ecosystem/](06_ecosystem/) | 工具链、生态库、最佳实践 | 工程实践 |
 
 ## 📚 学习路径
+> **[来源: Rust Official Docs]**
 
 ```text
 00_start/ → 01_fundamentals/ → 02_intermediate/ → 03_advanced/ → 04_expert/
@@ -27,6 +29,7 @@
 ```
 
 ## 🆕 最新更新 (Rust 1.95.0)
+> **[来源: Rust Official Docs]**
 
 | 特性 | 文档位置 | 状态 |
 |------|---------|------|
@@ -41,6 +44,7 @@
 | `core::range` | [02_intermediate/collections.md](02_intermediate/collections.md) | ✅ 已更新 |
 
 ## 🔮 预览版本跟踪
+> **[来源: Rust Official Docs]**
 
 | 版本 | 预计发布 | 关键特性 | 准备状态 |
 |------|---------|---------|----------|
@@ -48,6 +52,7 @@
 | 1.97.0 | 2026-07 | TBD | ⏳ 等待 |
 
 ## 📖 如何使用
+> **[来源: Rust Official Docs]**
 
 1. **新手**: 从 [00_start/](00_start/) 开始，按顺序学习
 2. **有基础**: 查看 [INDEX.md](INDEX.md) 找到感兴趣的主题

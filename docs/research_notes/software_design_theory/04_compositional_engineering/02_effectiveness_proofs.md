@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [组合软件工程有效性定理与证明](#组合软件工程有效性定理与证明)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 公理与定义
+> **[来源: Rust Official Docs]**
 
 **Def 1.1（模块组合）**:
 
@@ -51,8 +53,10 @@
 ---
 
 ## 定理陈述与证明
+> **[来源: Rust Official Docs]**
 
 ### 定理 CE-T1（组合保持内存安全）
+> **[来源: Rust Official Docs]**
 
 **陈述**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
 
@@ -68,6 +72,7 @@
 ---
 
 ### 定理 CE-T2（组合保持数据竞争自由）
+> **[来源: Rust Official Docs]**
 
 **陈述**：若各模块满足 [borrow_checker_proof](../../formal_methods/borrow_checker_proof.md) 定理 T1（数据竞争自由），且跨线程传递仅 Send 类型、共享仅 Sync 类型，则组合保持数据竞争自由。
 
@@ -81,6 +86,7 @@
 ---
 
 ### 定理 CE-T3（组合保持类型安全）
+> **[来源: Rust Official Docs]**
 
 **陈述**：若各模块良型，且 [type_system_foundations](../../type_theory/type_system_foundations.md) 进展性 T1、保持性 T2、类型安全 T3 成立，则组合程序良型且类型安全。
 
@@ -94,6 +100,7 @@
 ---
 
 ## 引理与推论
+> **[来源: Rust Official Docs]**
 
 **引理 CE-L1（模块无环）**：若 $C = M_1 \oplus \cdots \oplus M_n$ 满足 Def 1.1，则依赖图 $G$ 为 DAG；$M_i \prec^* M_j \land M_j \prec^* M_i \Rightarrow \bot$。
 
@@ -106,6 +113,7 @@
 **推论 CE-C2（组合反例）**：若 $M_n$ 的 `pub` API 泄漏 `unsafe` 或违反借用规则，则 CE-T1 或 CE-T2 不成立；组合后可能 UB。
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -116,6 +124,7 @@
 ---
 
 ## 定理 CE-PAT1（模式组合 CE 保持）
+> **[来源: Rust Official Docs]**
 
 **陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
 
@@ -138,6 +147,7 @@
 ---
 
 ## 代码示例：模块组合
+> **[来源: Rust Official Docs]**
 
 ```rust
 // crate::module_a
@@ -167,6 +177,7 @@ fn main() {
 ---
 
 ## 定理应用示例
+> **[来源: Rust Official Docs]**
 
 | 定理 | 应用场景 |
 | :--- | :--- |

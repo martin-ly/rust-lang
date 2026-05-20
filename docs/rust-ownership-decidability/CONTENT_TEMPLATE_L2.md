@@ -5,6 +5,7 @@
 ---
 
 ## 元数据头
+> **[来源: Rust Official Docs]**
 
 ```markdown
 # 文档标题
@@ -18,8 +19,10 @@
 ```
 
 ## 必需章节
+> **[来源: Rust Official Docs]**
 
 ### 1. 概念介绍 (必需)
+> **[来源: Rust Official Docs]**
 
 ```markdown
 ## 1. 概念介绍

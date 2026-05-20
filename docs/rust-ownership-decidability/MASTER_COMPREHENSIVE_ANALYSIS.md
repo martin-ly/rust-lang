@@ -7,6 +7,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 - [Rust 所有权系统 - 全面结构化分析](#rust-所有权系统---全面结构化分析)
   - [目录结构](#目录结构)
@@ -65,8 +66,10 @@
 ---
 
 ## 第一部分: 知识架构总览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 语言特性全景图
+> **[来源: Rust Official Docs]**
 
 ```text
                             Rust 语言系统

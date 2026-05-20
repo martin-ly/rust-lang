@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tonic gRPC框架形式化分析](#tonic-grpc框架形式化分析)
   - [目录](#目录)
@@ -52,6 +53,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tonic是Rust的gRPC实现，提供:
 
@@ -63,6 +65,7 @@ Tonic是Rust的gRPC实现，提供:
 ---
 
 ## 2. Protocol Buffers类型映射
+> **[来源: Rust Official Docs]**
 
 ### 2.1 类型安全代码生成
 

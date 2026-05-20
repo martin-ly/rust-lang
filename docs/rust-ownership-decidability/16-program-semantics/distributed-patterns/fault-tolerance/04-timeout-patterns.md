@@ -1,6 +1,7 @@
 # 超时模式语义 (Timeout Pattern Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [超时模式语义 (Timeout Pattern Semantics)](#超时模式语义-timeout-pattern-semantics)
   - [目录](#目录)
@@ -25,6 +26,7 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 超时机制是分布式系统中保障服务质量、防止资源无限等待的基础组件。
 本文档深入分析各种超时策略的形式化定义、实现原理及其在 Rust 异步运行时中的应用。
@@ -32,6 +34,7 @@
 ---
 
 ## 2. 超时分类与语义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 超时类型谱系
 

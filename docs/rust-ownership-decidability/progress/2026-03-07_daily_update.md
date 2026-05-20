@@ -1,8 +1,10 @@
 # 每日进度更新: 2026-03-07
 
 ## 今日完成工作
+> **[来源: Rust Official Docs]**
 
 ### ✅ 新增文件
+> **[来源: Rust Official Docs]**
 
 1. **OperationalSemantics.v** (1,081 行)
    - 大步操作语义定义
@@ -18,6 +20,7 @@
 3. **本每日更新**
 
 ### 📊 代码统计更新
+> **[来源: Rust Official Docs]**
 
 ```
 昨日: 1,260 行

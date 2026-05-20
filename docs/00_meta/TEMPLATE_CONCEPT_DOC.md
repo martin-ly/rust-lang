@@ -7,6 +7,7 @@
 ---
 
 ## 检查清单（提交前自检）
+> **[来源: Rust Official Docs]**
 
 - [ ] 模块 1: 概念定义（三层定义完整）
 - [ ] 模块 2: 属性清单（含反例边界）
@@ -22,14 +23,17 @@
 ---
 
 ## 模块 1: 概念定义（Concept Definition）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 直观定义（Intuitive）
+> **[来源: Rust Official Docs]**
 
 用一句话向有前置知识的读者解释：
 
 > **XX** 是 Rust 中用于 YY 的 ZZ 机制，其核心思想是 WW。
 
 ### 1.2 操作定义（Operational）
+> **[来源: Rust Official Docs]**
 
 通过代码行为刻画概念边界。回答："在什么操作下，该概念生效/失效？"
 
@@ -42,6 +46,7 @@ fn boundary() {}
 ```
 
 ### 1.3 形式化直觉（Formal Intuition）
+> **[来源: Rust Official Docs]**
 
 对齐类型理论/内存模型/形式化语义的精确表述。
 
@@ -54,6 +59,7 @@ fn boundary() {}
 ---
 
 ## 模块 2: 属性清单（Property Inventory）
+> **[来源: Rust Official Docs]**
 
 | 属性名 | 类型 | 值域/取值 | 说明 | 反例边界 |
 |--------|------|-----------|------|----------|
@@ -61,6 +67,7 @@ fn boundary() {}
 | 属性 B | 关系属性 | 传递/对称/反对称 | ... | 与 YY 的组合可能破坏 |
 
 ### 关键推论
+> **[来源: Rust Official Docs]**
 
 由上述属性可推导出的重要结论：
 
@@ -70,6 +77,7 @@ fn boundary() {}
 ---
 
 ## 模块 3: 概念依赖图（Concept Dependency Graph）
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -81,12 +89,14 @@ graph TD
 ```
 
 ### 承上（前置知识回溯）
+> **[来源: Rust Official Docs]**
 
 | 前置概念 | 所在文档 | 本章中使用的具体点 |
 |----------|----------|-------------------|
 | 概念 A | `path/to/a.md` | 用于解释 XX 的 YY 属性 |
 
 ### 启下（后续延伸预告）
+> **[来源: Rust Official Docs]**
 
 | 后续概念 | 所在文档 | 掌握本章后方可理解 |
 |----------|----------|-------------------|
@@ -95,6 +105,7 @@ graph TD
 ---
 
 ## 模块 4: 机制解释（Mechanistic Explanation）
+> **[来源: Rust Official Docs]**
 
 ### 4.1 类型系统视角
 

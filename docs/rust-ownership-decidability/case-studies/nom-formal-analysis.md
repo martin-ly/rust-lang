@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Nom 解析器组合子形式化分析](#nom-解析器组合子形式化分析)
   - [目录](#目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 nom提供:
 
@@ -42,6 +44,7 @@ nom提供:
 ---
 
 ## 2. IResult类型
+> **[来源: Rust Official Docs]**
 
 ### 定义 2.1 (IResult)
 

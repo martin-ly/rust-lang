@@ -8,6 +8,8 @@
 ---
 
 ## 📊 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rustdoc 高级功能与文档生成](#rustdoc-高级功能与文档生成)
   - [📊 目录](#-目录)
@@ -73,6 +75,8 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
 
 ## 🎯 文档说明
+>
+> **[来源: Rust Official Docs]**
 
 本文档深入介绍 Rustdoc 的高级功能、文档生成技术、以及最新改进，帮助开发者创建高质量的 API 文档。
 
@@ -81,8 +85,12 @@
 ---
 
 ## 1. Rustdoc 概览
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基础用法
+>
+> **[来源: Rust Official Docs]**
 
 **生成文档**:
 
@@ -103,6 +111,8 @@ cargo doc --document-private-items
 ---
 
 ### 1.2 文档结构
+>
+> **[来源: Rust Official Docs]**
 
 **输出目录**:
 
@@ -122,8 +132,12 @@ target/doc/
 ---
 
 ## 2. 文档注释语法
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基础注释
+>
+> **[来源: Rust Official Docs]**
 
 **外部文档注释** (`///`):
 
@@ -177,6 +191,8 @@ pub fn divide(a: i32, b: i32) -> Result<i32, String> {
 ---
 
 ### 2.2 Markdown 支持
+>
+> **[来源: Rust Official Docs]**
 
 **完整 Markdown 语法**:
 
@@ -213,6 +229,8 @@ pub fn demo() {}
 ---
 
 ### 2.3 代码块
+>
+> **[来源: Rust Official Docs]**
 
 **基础代码块**:
 
@@ -255,8 +273,12 @@ pub fn error_demo() {}
 ---
 
 ## 3. 文档测试 (Doc Tests)
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 基础测试
+>
+> **[来源: Rust Official Docs]**
 
 **自动测试**:
 

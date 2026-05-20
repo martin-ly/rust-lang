@@ -12,6 +12,7 @@
 ---
 
 ## 构建脚本（build.rs）
+> **[来源: Rust Official Docs]**
 
 ```rust
 // build.rs - 自定义构建脚本
@@ -40,6 +41,7 @@ fn main() {
 ```
 
 ### 平台特定构建
+> **[来源: Rust Official Docs]**
 
 ```rust
 // build.rs
@@ -64,6 +66,7 @@ fn main() {
 ```
 
 ### 代码生成构建脚本
+> **[来源: Rust Official Docs]**
 
 ```rust
 // build.rs - 代码生成示例
@@ -90,6 +93,7 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 ```
 
 ### 常用构建工具
+> **[来源: Rust Official Docs]**
 
 ```bash
 # cargo-make：任务运行器
@@ -117,6 +121,7 @@ wasm-pack build --target web
 ```
 
 ### Makefile.toml (cargo-make)
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Makefile.toml
@@ -147,6 +152,7 @@ dependencies = ["format", "lint", "test", "build"]
 ```
 
 ### Justfile 示例
+> **[来源: Rust Official Docs]**
 
 ```makefile
 # Justfile
@@ -185,6 +191,7 @@ release: check
 ```
 
 ### 交叉编译配置
+> **[来源: Rust Official Docs]**
 
 ```toml
 # .cargo/config.toml
@@ -202,6 +209,7 @@ target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
 
 ### 条件编译完整示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 根据构建配置启用不同代码
@@ -236,6 +244,7 @@ mod sync_impl {
 ---
 
 ## 形式化方法
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -245,6 +254,7 @@ mod sync_impl {
 | 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

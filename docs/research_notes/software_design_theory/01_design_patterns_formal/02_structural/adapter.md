@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Adapter 形式化分析](#adapter-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,8 +51,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Adapter 结构）
+> **[来源: Rust Official Docs]**
 
 设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 是一个四元组 $\mathcal{AD} = (A, T, S, \mathit{adapt})$，满足：
 
@@ -66,12 +69,14 @@ $$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm
 ---
 
 ### Axiom AD1（语义保持公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit{inner})$$
 
 适配器不改变被适配对象语义，仅转换接口形式。
 
 ### Axiom AD2（委托借用公理）
+> **[来源: Rust Official Docs]**
 
 $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用规则}$$
 
@@ -80,6 +85,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T1（所有权安全定理）
+> **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
 
@@ -106,6 +112,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T2（借用冲突避免定理）
+> **[来源: Rust Official Docs]**
 
 由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
 
@@ -137,6 +144,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 推论 AD-C1（纯 Safe Adapter）
+> **[来源: Rust Official Docs]**
 
 Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。
 
@@ -152,6 +160,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -162,6 +171,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 被适配者：第三方库接口
@@ -196,6 +206,7 @@ a.log("hello");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

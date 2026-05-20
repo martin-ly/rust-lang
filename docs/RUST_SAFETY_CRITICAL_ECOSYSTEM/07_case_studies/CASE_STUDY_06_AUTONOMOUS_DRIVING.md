@@ -1,14 +1,17 @@
 # 案例研究06: 自动驾驶感知系统
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本案例研究展示Rust在自动驾驶感知系统中的应用，符合ISO 26262 ASIL D要求，处理传感器融合和实时决策。
 
 ---
 
 ## 项目背景
+> **[来源: Rust Official Docs]**
 
 ### 系统信息
+> **[来源: Rust Official Docs]**
 
 | 属性 | 详情 |
 |------|------|
@@ -20,6 +23,7 @@
 | **团队规模** | 35人 (15名Rust开发者) |
 
 ### 为什么选择Rust
+> **[来源: Rust Official Docs]**
 
 1. **确定性性能**: 无GC暂停，满足实时要求
 2. **并发安全**: 多传感器并行处理的安全保障
@@ -30,8 +34,10 @@
 ---
 
 ## 系统架构
+> **[来源: Rust Official Docs]**
 
 ### 感知流水线
+> **[来源: Rust Official Docs]**
 
 ```
 传感器输入
@@ -45,6 +51,7 @@
 ```
 
 ### Rust模块结构
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 自动驾驶感知系统
@@ -193,8 +200,10 @@ pub mod output {
 ---
 
 ## 实时性能优化
+> **[来源: Rust Official Docs]**
 
 ### 流水线并行
+> **[来源: Rust Official Docs]**
 
 ```rust
 use crossbeam::channel;
@@ -256,6 +265,7 @@ impl PerceptionPipeline {
 ```
 
 ### 内存池管理
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 零分配图像处理
@@ -301,6 +311,7 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
 ---
 
 ## 安全设计
+> **[来源: Rust Official Docs]**
 
 ### 冗余与多样性
 

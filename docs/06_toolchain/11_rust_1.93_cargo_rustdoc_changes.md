@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 Cargo 与 Rustdoc 变更详解](#rust-193-cargo-与-rustdoc-变更详解)
   - [目录](#目录)
@@ -28,8 +29,10 @@
 ---
 
 ## Cargo 变更
+> **[来源: Rust Official Docs]**
 
 ### CARGO_CFG_DEBUG_ASSERTIONS
+> **[来源: Rust Official Docs]**
 
 **变更**：Cargo 1.93 在 build scripts 中根据 profile 启用 `CARGO_CFG_DEBUG_ASSERTIONS` 环境变量。
 
@@ -42,6 +45,7 @@
 ---
 
 ### cargo tree --format 长格式
+> **[来源: Rust Official Docs]**
 
 **变更**：`cargo tree` 支持 `--format` 变量的长格式。
 
@@ -57,6 +61,7 @@ cargo tree --format "{p} {l} {r}"
 ---
 
 ### cargo clean --workspace
+> **[来源: Rust Official Docs]**
 
 **变更**：`cargo clean` 新增 `--workspace` 选项，可清理整个 workspace。
 
@@ -72,8 +77,10 @@ cargo clean --workspace
 ---
 
 ## Rustdoc 变更
+> **[来源: Rust Official Docs]**
 
 ### 移除 #![doc(document_private_items)]
+> **[来源: Rust Official Docs]**
 
 **变更**：`#![doc(document_private_items)]` 属性已被移除。
 
@@ -84,6 +91,7 @@ cargo clean --workspace
 ---
 
 ### 宏搜索过滤
+> **[来源: Rust Official Docs]**
 
 **变更**：在 rustdoc 的 "macros" 搜索过滤中，现在包含 attribute 宏和 derive 宏。
 
@@ -94,6 +102,7 @@ cargo clean --workspace
 ---
 
 ### import 搜索过滤
+> **[来源: Rust Official Docs]**
 
 **变更**：在 rustdoc 的 `import` 搜索过滤中，现在包含 extern crates。
 
@@ -104,6 +113,7 @@ cargo clean --workspace
 ---
 
 ### 文档属性校验
+> **[来源: Rust Official Docs]**
 
 **变更**：若 `html_favicon_url`、`html_logo_url`、`html_playground_url`、`issue_tracker_base_url` 或 `html_no_source` 有缺失值、意外值或类型错误，rustdoc 将发出 deny-by-default lint `rustdoc::invalid_doc_attributes`。
 
@@ -120,6 +130,7 @@ cargo clean --workspace
 ---
 
 ## 相关文档
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 完整变更清单](./07_rust_1.93_full_changelog.md)
 - [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md)

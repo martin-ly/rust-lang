@@ -8,6 +8,7 @@
 ---
 
 ## 引言
+> **[来源: Rust Official Docs]**
 
 生命周期是Rust最令初学者困惑的概念之一。
 但其实它的核心思想很简单：**引用不能比它指向的数据活得更长**。
@@ -15,8 +16,10 @@
 ---
 
 ## 第一部分：什么是生命周期？
+> **[来源: Rust Official Docs]**
 
 ### 直观理解
+> **[来源: Rust Official Docs]**
 
 生命周期就是引用的**有效期限**。
 
@@ -29,6 +32,7 @@
 ```
 
 ### 为什么需要生命周期？
+> **[来源: Rust Official Docs]**
 
 防止悬垂引用：
 
@@ -44,8 +48,10 @@ let r;
 ---
 
 ## 第二部分：生命周期语法
+> **[来源: Rust Official Docs]**
 
 ### 显式生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -57,6 +63,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 生命周期省略
+> **[来源: Rust Official Docs]**
 
 大多数情况下，编译器自动推断：
 
@@ -76,8 +83,10 @@ fn first_word(s: &str) -> &str { ... }
 ---
 
 ## 第三部分：生命周期关系
+> **[来源: Rust Official Docs]**
 
 ### 'static 生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s: &'static str = "hello";
@@ -87,6 +96,7 @@ let s: &'static str = "hello";
 ```
 
 ### 子类型关系
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 'static 是 'a 的子类型
@@ -101,6 +111,7 @@ fn take_str<'a>(s: &'a str) {}
 ---
 
 ## 第四部分：结构体中的生命周期
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Person<'a> {

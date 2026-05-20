@@ -3,6 +3,7 @@
 > Auto-generated cross-reference index for the Rust Ownership Decidability documentation.
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Documentation Master Index](#documentation-master-index)
   - [Table of Contents](#table-of-contents)
@@ -28,8 +29,10 @@
 ---
 
 ## Documentation Structure
+> **[来源: Rust Official Docs]**
 
 ### Core Documentation
+> **[来源: Rust Official Docs]**
 
 | Document | Description |
 |----------|-------------|

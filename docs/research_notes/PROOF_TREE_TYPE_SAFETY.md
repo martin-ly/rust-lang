@@ -7,6 +7,7 @@
 ---
 
 ## 🌳 定理陈述
+> **[来源: Rust Official Docs]**
 
 ```
 定理 T-TY1 (类型安全):
@@ -18,6 +19,7 @@
 ---
 
 ## 🌿 证明树结构
+> **[来源: Rust Official Docs]**
 
 ```
 T-TY1: 类型安全 (Progress + Preservation)
@@ -68,6 +70,7 @@ T-TY1: 类型安全 (Progress + Preservation)
 ---
 
 ## 📋 关键引理
+> **[来源: Rust Official Docs]**
 
 ### Lemma 1: 替换保持类型 (Substitution)
 

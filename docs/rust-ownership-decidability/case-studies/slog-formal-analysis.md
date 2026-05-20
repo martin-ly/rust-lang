@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Slog 结构化日志形式化分析](#slog-结构化日志形式化分析)
   - [目录](#目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Slog提供:
 
@@ -43,6 +45,7 @@ Slog提供:
 ---
 
 ## 2. Logger组合子
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Drain特质
 

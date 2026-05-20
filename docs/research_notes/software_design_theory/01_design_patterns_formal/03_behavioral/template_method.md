@@ -12,6 +12,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Template Method 形式化分析](#template-method-形式化分析)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def 1.1（Template Method 结构）
+> **[来源: Rust Official Docs]**
 
 设 $T$ 为模板类型。Template Method 是一个三元组 $\mathcal{TM} = (T, \mathit{template}, \{h_i\})$，满足：
 
@@ -63,12 +66,14 @@ $$\mathcal{TM} = \langle T, \mathit{template}: T \rightarrow R, \{h_i: T \righta
 ---
 
 ### Axiom TM1（骨架不变公理）
+> **[来源: Rust Official Docs]**
 
 $$\forall t: T,\, \mathit{template}(t)\text{ 的调用顺序固定；仅 }h_i\text{ 可定制}$$
 
 骨架不变；钩子可定制。
 
 ### Axiom TM2（钩子可选公理）
+> **[来源: Rust Official Docs]**
 
 $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 
@@ -77,6 +82,7 @@ $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 ---
 
 ### 定理 TM-T1（trait 默认方法定理）
+> **[来源: Rust Official Docs]**
 
 trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)。
 
@@ -106,6 +112,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 定理 TM-T2（骨架不变性定理）
+> **[来源: Rust Official Docs]**
 
 `template` 方法体固定；各 `impl` 仅提供 `step_i`，不修改 `template` 调用顺序。
 
@@ -120,6 +127,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 推论 TM-C1（近似表达）
+> **[来源: Rust Official Docs]**
 
 Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{TemplateMethod}) = \mathrm{Approx}$（无 OOP 继承）。
 
@@ -134,6 +142,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/ex
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
@@ -144,6 +153,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/ex
 ---
 
 ## Rust 实现与代码示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Algorithm {
@@ -176,6 +186,7 @@ assert_eq!(a.template(), "A1A2");
 ---
 
 ## 完整证明
+> **[来源: Rust Official Docs]**
 
 ### 形式化论证链
 

@@ -1,6 +1,7 @@
 # Drop检查深度分析
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Drop检查深度分析](#drop检查深度分析)
   - [目录](#目录)
@@ -32,14 +33,17 @@
   - [参考](#参考)
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Drop检查（Drop Check）是Rust借用检查器的一部分，确保在值被丢弃（drop）时不会发生无效的借用。这是内存安全的关键组件。
 
 ---
 
 ## 1. Drop检查的核心问题
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基本场景
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {
@@ -51,6 +55,7 @@ fn main() {
 ```
 
 ### 1.2 为什么需要Drop检查
+> **[来源: Rust Official Docs]**
 
 如果没有Drop检查，程序可能在drop后继续使用引用：
 
@@ -76,8 +81,10 @@ fn problematic() {
 ---
 
 ## 2. Drop检查规则
+> **[来源: Rust Official Docs]**
 
 ### 2.1 规则：借用必须比拥有者活得长
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 编译器验证：所有借用必须在drop时有效
@@ -103,6 +110,7 @@ fn invalid_case() {
 ```
 
 ### 2.2 泛型类型的Drop检查
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct BoxWithRef<T, 'a> {
@@ -130,8 +138,10 @@ fn test<T>() {
 ---
 
 ## 3. 实际案例分析
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Vec和元素引用
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn vec_borrow() {
@@ -146,6 +156,7 @@ fn vec_borrow() {
 ```
 
 ### 3.2 自定义Drop实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct DatabaseConnection<'a> {

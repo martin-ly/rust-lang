@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [充分表达 vs 非充分表达论证](#充分表达-vs-非充分表达论证)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 定义
+> **[来源: Rust Official Docs]**
 
 | 分类 | 定义 |
 | :--- | :--- |
@@ -49,6 +51,7 @@
 ---
 
 ## 等价/近似/不可表达判定规则
+> **[来源: Rust Official Docs]**
 
 **Def EB-DET1（判定规则）**：给定模式 $P$ 与 Rust 实现 $R$，按下列步骤判定表达分类：
 
@@ -69,8 +72,10 @@
 ---
 
 ## 等价表达的模式
+> **[来源: Rust Official Docs]**
 
 ### 创建型
+> **[来源: Rust Official Docs]**
 
 - **Factory Method**：trait 工厂方法，语义一致
 - **Abstract Factory**：枚举/关联类型产品族，等价
@@ -78,6 +83,7 @@
 - **Prototype**：`Clone` trait 直接对应
 
 ### 结构型
+> **[来源: Rust Official Docs]**
 
 - **Adapter**：包装 + 委托，等价
 - **Bridge**：trait 解耦抽象与实现，等价
@@ -88,6 +94,7 @@
 - **Proxy**：委托、延迟，等价
 
 ### 行为型
+> **[来源: Rust Official Docs]**
 
 - **Chain of Responsibility**：`Option`/链表传递，等价
 - **Command**：闭包即命令对象，等价
@@ -101,6 +108,7 @@
 ---
 
 ## 近似表达的模式
+> **[来源: Rust Official Docs]**
 
 | 模式 | 偏移原因 | Rust 替代 |
 | :--- | :--- | :--- |
@@ -116,6 +124,7 @@
 ---
 
 ## 不可表达或极难表达
+> **[来源: Rust Official Docs]**
 
 - 依赖全局可变 + 隐式共享的经典 OOP 模式
 - 依赖多继承的复杂层次
@@ -126,6 +135,7 @@
 ---
 
 ## 扩展模式（43 完全之 20）表达边界
+> **[来源: Rust Official Docs]**
 
 | 模式 | 表达 | 说明 |
 | :--- | :--- | :--- |
@@ -155,6 +165,7 @@
 ---
 
 ## 分布式模式形式化边界（Event Sourcing、Saga、CQRS）
+> **[来源: Rust Official Docs]**
 
 | 模式 | 表达 | 形式化边界 | Rust 实现要点 |
 | :--- | :--- | :--- | :--- |

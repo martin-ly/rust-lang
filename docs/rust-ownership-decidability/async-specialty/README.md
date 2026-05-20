@@ -7,6 +7,7 @@
 ---
 
 ## 专题概览
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -57,6 +58,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 async-specialty/
@@ -90,6 +92,7 @@ async-specialty/
 ---
 
 ## 核心优势：Why Rust Async?
+> **[来源: Rust Official Docs]**
 
 ### 对比其他语言的async
 

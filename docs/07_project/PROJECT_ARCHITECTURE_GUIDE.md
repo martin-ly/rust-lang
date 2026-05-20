@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [项目架构指南](#项目架构指南)
   - [📋 目录](#-目录)
@@ -60,8 +61,10 @@
 ---
 
 ## 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 项目结构验证脚本
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 验证项目架构一致性
@@ -201,6 +204,7 @@ fn main() {
 ```
 
 ### 模块依赖关系分析器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 分析模块间的依赖关系并生成可视化
@@ -345,6 +349,7 @@ fn main() {
 ```
 
 ### 测试覆盖率报告生成器
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 生成模块测试覆盖率报告
@@ -444,14 +449,17 @@ fn main() {
 ---
 
 ## 形式化链接
+> **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+> **[来源: Rust Official Docs]**
 
 - **形式化方法**: [ownership_model.md](../research_notes/formal_methods/ownership_model.md) - 所有权模型的形式化定义
 - **架构证明**: [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) - 架构决策的形式化证明
 - **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识依赖与模块关系
 
 ### 实施场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 实施步骤 | 参考代码 |
 | :--- | :--- | :--- |
@@ -462,14 +470,17 @@ fn main() {
 ---
 
 ## 📋 概述
+> **[来源: Rust Official Docs]**
 
 本文档介绍 Rust 学习项目的整体架构设计，包括模块组织、依赖关系、设计原则等。
 
 ---
 
 ## 🏗️ 项目结构
+> **[来源: Rust Official Docs]**
 
 ### 整体架构
+> **[来源: Rust Official Docs]**
 
 ```text
 rust-lang/

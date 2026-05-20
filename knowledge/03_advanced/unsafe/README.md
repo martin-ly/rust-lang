@@ -5,6 +5,7 @@
 > **Unsafe Rust：原始指针、FFI、内联汇编、MaybeUninit**
 
 ## 📚 内容
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -14,6 +15,7 @@
 | [inline_asm.md](inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
 
 ## 🎯 学习路径
+> **[来源: Rust Official Docs]**
 
 1. **Unsafe 基础** → [unsafe_rust.md](unsafe_rust.md)
 2. **C 互操作** → [ffi.md](ffi.md)
@@ -21,10 +23,12 @@
 4. **底层优化** → [inline_asm.md](inline_asm.md)
 
 ## ⚠️ 安全提醒
+> **[来源: Rust Official Docs]**
 
 > 所有 unsafe 代码必须经过 Miri 验证和人工审计。每段 `unsafe` 块必须附带 `// SAFETY:` 注释。
 
 ## 🚀 相关层
+> **[来源: Rust Official Docs]**
 
 - [04_expert/unsafe_audit.md](../../04_expert/unsafe_audit.md) - Unsafe 代码审计方法论
 - [04_expert/tree_borrows.md](../../04_expert/miri/tree_borrows.md) - 别名模型与内存规则

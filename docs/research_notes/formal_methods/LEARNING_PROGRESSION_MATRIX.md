@@ -8,12 +8,14 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 学习进阶矩阵为Rust形式化方法的学习者提供系统化的学习路径，从入门到精通的完整进阶路线。
 
 ---
 
 ## 学习阶段总览
+> **[来源: Rust Official Docs]**
 
 ```text
 Level 1          Level 2          Level 3          Level 4          Level 5
@@ -28,14 +30,17 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 ---
 
 ## Level 1: 入门 (2-4周)
+> **[来源: Rust Official Docs]**
 
 ### 目标
+> **[来源: Rust Official Docs]**
 
 - 理解Rust基本语法
 - 能编写简单程序
 - 理解变量、函数、控制流
 
 ### 学习资源
+> **[来源: Rust Official Docs]**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -48,6 +53,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 模式匹配 | 标准文档 | 2天 |
 
 ### 检查清单
+> **[来源: Rust Official Docs]**
 
 ```markdown
 □ 能解释变量绑定与可变性
@@ -61,14 +67,17 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 ---
 
 ## Level 2: 进阶 (4-6周)
+> **[来源: Rust Official Docs]**
 
 ### 目标
+> **[来源: Rust Official Docs]**
 
 - 深入理解所有权系统
 - 掌握借用和引用
 - 理解Copy与Clone的区别
 
 ### 学习资源
+> **[来源: Rust Official Docs]**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -81,6 +90,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 错误处理 | ERROR_HANDLING_DECISION_TREE.md | 2天 |
 
 ### 检查清单
+> **[来源: Rust Official Docs]**
 
 ```markdown
 □ 能解释所有权转移和移动语义
@@ -95,6 +105,7 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 ---
 
 ## Level 3: 熟练 (4-6周)
+> **[来源: Rust Official Docs]**
 
 ### 目标
 

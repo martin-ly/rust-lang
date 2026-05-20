@@ -10,6 +10,7 @@
 ---
 
 ## 一、从这里开始（单入口）
+> **[来源: Rust Official Docs]**
 
 **首次使用？** 按你的目标选一条路径：
 
@@ -33,6 +34,7 @@
 ---
 
 ## 二、按三大支柱组织（核心架构）
+> **[来源: Rust Official Docs]**
 
 本目录围绕 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md) 所述的三大支柱组织，现推荐参考 [AUTHORITATIVE_ALIGNMENT_GUIDE](./AUTHORITATIVE_ALIGNMENT_GUIDE.md)：
 
@@ -60,6 +62,7 @@
 ---
 
 ## 三、目录层级（简化视图）
+> **[来源: Rust Official Docs]**
 
 ```text
 research_notes/

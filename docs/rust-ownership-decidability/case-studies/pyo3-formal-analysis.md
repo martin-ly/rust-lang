@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [PyO3 Python绑定形式化分析](#pyo3-python绑定形式化分析)
   - [目录](#目录)
@@ -38,6 +39,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 PyO3功能：
 
@@ -49,6 +51,7 @@ PyO3功能：
 ---
 
 ## 2. GIL管理
+> **[来源: Rust Official Docs]**
 
 ### 定义 GIL-1 ( GIL抽象 )
 

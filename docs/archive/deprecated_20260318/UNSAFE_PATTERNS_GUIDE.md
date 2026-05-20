@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Unsafe Rust 模式库指南](#unsafe-rust-模式库指南)
   - [📋 目录](#-目录)
@@ -92,6 +93,7 @@
 ---
 
 ## 1. 简介与概述
+> **[来源: Rust Official Docs]**
 
 本指南是 Rust 学习项目的重要组成部分，旨在提供 Unsafe Rust 的**系统化模式库**。与官方的 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 不同，本指南专注于：
 
@@ -101,6 +103,7 @@
 - **错误模式对比** - 正确做法与错误做法的直观对比
 
 ### 目标读者
+> **[来源: Rust Official Docs]**
 
 - 需要实现底层数据结构的系统程序员
 - 编写 FFI 绑定的高级开发者
@@ -108,6 +111,7 @@
 - 需要优化性能关键代码的工程师
 
 ### 前置知识
+> **[来源: Rust Official Docs]**
 
 - 掌握 Rust 所有权和借用规则
 - 理解生命周期系统
@@ -117,8 +121,10 @@
 ---
 
 ## 2. Unsafe Rust 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 2.1 什么是 Unsafe Rust
+> **[来源: Rust Official Docs]**
 
 Rust 的 `unsafe` 关键字提供了突破编译器安全检查的能力。**关键点**：`unsafe` 并不意味着代码一定危险，而是意味着编译器无法自动验证某些安全属性，这些验证责任转移到了程序员身上。
 
@@ -136,6 +142,7 @@ unsafe fn unsafe_code(ptr: *mut i32) {
 ```
 
 ### 2.2 Unsafe 的五种能力
+> **[来源: Rust Official Docs]**
 
 | 能力 | 语法 | 风险等级 | 常见场景 |
 |------|------|----------|----------|
@@ -146,6 +153,7 @@ unsafe fn unsafe_code(ptr: *mut i32) {
 | **使用内联汇编** | `asm!()` | 🔴 高 | 底层硬件操作 |
 
 ### 2.3 安全抽象原则
+> **[来源: Rust Official Docs]**
 
 **核心原则**: 用 safe API 包装 unsafe 实现，确保安全边界。
 
@@ -172,14 +180,17 @@ fn main() {
 ---
 
 ## 3. 原始指针模式
+> **[来源: Rust Official Docs]**
 
 原始指针 (`*const T` 和 `*mut T`) 是 Rust 中最底层的指针类型。它们不参与所有权系统，不进行生命周期检查，提供最大的灵活性但也带来最大的风险。
 
 ### 模式 3.1: 裸指针算术
+> **[来源: Rust Official Docs]**
 
 **场景说明**: 实现高性能的内存缓冲区操作，需要直接控制指针位置。常见于网络协议解析、二进制数据处理和自定义集合实现。
 
 #### 正确做法
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 安全的缓冲区读取器，支持高效的指针算术操作
@@ -3515,3 +3526,7 @@ mod unsafe_tests {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-03-17
 **版本**: 1.0.0
+
+---
+
+> **权威来源**: Rust Official Docs

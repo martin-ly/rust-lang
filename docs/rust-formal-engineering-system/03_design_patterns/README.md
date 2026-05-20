@@ -7,6 +7,7 @@
 > 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/README.md)
 
 ## 知识结构思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -30,6 +31,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+> **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -41,8 +43,10 @@ mindmap
 ---
 
 ## Rust 设计模式概览
+> **[来源: Rust Official Docs]**
 
 ### 类型系统驱动的模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 类型状态模式（Type State Pattern）
@@ -84,6 +88,7 @@ fn type_state_demo() {
 ```
 
 ### 构造器模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 消耗型构造器（Consuming Builder）
@@ -144,6 +149,7 @@ fn builder_demo() -> Result<(), String> {
 ```
 
 ### RAII 模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 资源获取即初始化
@@ -176,6 +182,7 @@ fn raii_demo() {
 ```
 
 ### 策略模式（使用 Trait）
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 策略 trait
@@ -256,6 +263,7 @@ fn strategy_demo() {
 ```
 
 ### 访问者模式
+> **[来源: Rust Official Docs]**
 
 ```rust
 // AST 节点 trait
@@ -333,6 +341,7 @@ fn visitor_demo() {
 ```
 
 ### 新类型模式（Newtype Pattern）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::fmt;
@@ -380,6 +389,7 @@ fn newtype_demo() {
 ---
 
 ## 使用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 设计模式 | 优势 |
 | :--- | :--- | :--- |
@@ -395,6 +405,7 @@ fn newtype_demo() {
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 软件设计理论
 

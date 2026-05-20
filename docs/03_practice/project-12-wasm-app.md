@@ -7,12 +7,14 @@
 ---
 
 ## 项目目标
+> **[来源: Rust Official Docs]**
 
 创建编译到WebAssembly的浏览器应用。
 
 ---
 
 ## 功能需求
+> **[来源: Rust Official Docs]**
 
 - [ ] Rust编译到WASM
 - [ ] JavaScript互操作
@@ -23,6 +25,7 @@
 ---
 
 ## 学习要点
+> **[来源: Rust Official Docs]**
 
 ### WASM绑定
 

@@ -7,8 +7,10 @@
 ---
 
 ## 定理陈述
+> **[来源: Rust Official Docs]**
 
 ### Def SEND1 (Send)
+> **[来源: Rust Official Docs]**
 
 类型 $T$ 实现 `Send` 当且仅当：
 
@@ -16,24 +18,29 @@
 2. $T$ 不包含非 `Send` 的共享状态
 
 ### Def SYNC1 (Sync)
+> **[来源: Rust Official Docs]**
 
 类型 $T$ 实现 `Sync` 当且仅当 `&T` 实现 `Send`。
 
 ### Thm SEND-T1 (Send 安全)
+> **[来源: Rust Official Docs]**
 
 若 $T: \text{Send}$，则 $T$ 可以安全地跨线程转移所有权。
 
 ### Thm SYNC-T1 (Sync 安全)
+> **[来源: Rust Official Docs]**
 
 若 $T: \text{Sync}$，则 $T$ 可以安全地跨线程共享引用。
 
 ### Thm SEND-SYNC-T1 (关系)
+> **[来源: Rust Official Docs]**
 
 $T: \text{Sync} \iff \&T: \text{Send}$
 
 ---
 
 ## 证明树可视化
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -94,8 +101,10 @@ graph TD
 ---
 
 ## 形式化证明
+> **[来源: Rust Official Docs]**
 
 ### SEND-T1: Send 安全
+> **[来源: Rust Official Docs]**
 
 **陈述**: 若 $T: \text{Send}$，则 $T$ 可安全跨线程转移。
 
@@ -122,6 +131,7 @@ graph TD
 - 编译错误: `Rc<i32>` cannot be sent between threads safely
 
 ### SYNC-T1: Sync 安全
+> **[来源: Rust Official Docs]**
 
 **陈述**: 若 $T: \text{Sync}$，则 $T$ 可安全跨线程共享。
 
@@ -143,6 +153,7 @@ graph TD
 - 编译错误: `Cell<i32>` cannot be shared between threads safely
 
 ### SEND-SYNC-T1: 关系定理
+> **[来源: Rust Official Docs]**
 
 **陈述**: $T: \text{Sync} \iff \&T: \text{Send}$
 

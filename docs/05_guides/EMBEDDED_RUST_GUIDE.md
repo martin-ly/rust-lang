@@ -8,6 +8,8 @@
 ---
 
 ## 文档定位
+>
+> **[来源: Rust Official Docs]**
 
 本指南为官方 **Embedded Rust Book** 的入口与项目内导航，帮助在开发嵌入式 Rust 应用时快速定位到本项目的相关模块和官方资源。
 
@@ -17,6 +19,8 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 ---
 
 ## 官方 Embedded 资源入口
+>
+> **[来源: Rust Official Docs]**
 
 | 资源 | URL | 说明 |
 | :--- | :--- | :--- |
@@ -29,6 +33,8 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 ---
 
 ## 本项目对应模块
+>
+> **[来源: Rust Official Docs]**
 
 | 嵌入式主题 | 官方 Embedded Book | 本项目对应 |
 | :--- | :--- | :--- |
@@ -41,8 +47,12 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 ---
 
 ## 快速开始示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 最小 no_std 程序
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -63,6 +73,8 @@ fn panic(_info: &PanicInfo) -> ! {
 ```
 
 ### 2. 嵌入式 HAL 示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -90,6 +102,8 @@ fn main() -> ! {
 ```
 
 ### 3. 中断处理示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -136,6 +150,8 @@ fn TIM2() {
 ```
 
 ### 4. 无锁数据结构
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use core::sync::atomic::{AtomicU32, Ordering};
@@ -152,6 +168,8 @@ fn get_counter() -> u32 {
 ```
 
 ### 5. 内存管理技巧
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -206,6 +224,8 @@ impl StaticPool {
 ```
 
 ### 6. RTIC (Real-Time Interrupt-driven Concurrency)
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 #![no_std]
@@ -253,6 +273,8 @@ mod app {
 ---
 
 ## 推荐学习路径
+>
+> **[来源: Rust Official Docs]**
 
 1. **前置**: 熟练掌握 C01 所有权、C02 类型系统（本项目核心模块）
 2. **入门**: [Discovery Book](https://docs.rust-embedded.org/discovery/)（零嵌入式经验）

@@ -7,8 +7,10 @@
 ---
 
 ## 📊 当前对齐状态
+> **[来源: Rust Official Docs]**
 
 ### 1.94 特性实现检查
+> **[来源: Rust Official Docs]**
 
 | Crate | array_windows | LazyCell/LazyLock | 数学常量 | 状态 |
 |-------|---------------|-------------------|----------|------|
@@ -31,6 +33,7 @@
 ---
 
 ## 🎯 对齐任务清单
+> **[来源: Rust Official Docs]**
 
 ### Phase 1: 补充缺失的1.94特性 (2天)
 

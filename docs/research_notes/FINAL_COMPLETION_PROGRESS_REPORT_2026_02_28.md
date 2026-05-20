@@ -7,8 +7,10 @@
 ---
 
 ## 🎯 本次完成工作
+> **[来源: Rust Official Docs]**
 
 ### Phase 0: 全面审计与清理 ✅
+> **[来源: Rust Official Docs]**
 
 | 任务 | 状态 |
 | :--- | :--- |
@@ -16,6 +18,7 @@
 | 文件系统盘点 | ✅ 217个Markdown文件 |
 
 ### Phase 1-4: 文档扩展 ✅
+> **[来源: Rust Official Docs]**
 
 本次共扩展 **20+** 个关键文档：
 

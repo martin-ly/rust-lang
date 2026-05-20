@@ -10,6 +10,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [research\_notes 层次化梳理与映射总结](#research_notes-层次化梳理与映射总结)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、按三大支柱的文档树
+> **[来源: Rust Official Docs]**
 
 ```text
 research_notes/
@@ -93,6 +95,7 @@ research_notes/
 ---
 
 ## 二、概念族 ↔ 文档 ↔ Def/Axiom/定理 映射表
+> **[来源: Rust Official Docs]**
 
 ### 2.1 支柱 1（公理判定）
 

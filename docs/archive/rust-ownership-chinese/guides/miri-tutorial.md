@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Miri 使用教程：检测Rust未定义行为](#miri-使用教程检测rust未定义行为)
   - [目录](#目录)
@@ -42,8 +43,10 @@
 ---
 
 ## 1. 安装与配置
+> **[来源: Rust Official Docs]**
 
 ### 1.1 安装 Miri
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装 Miri（需要 rustup）
@@ -54,6 +57,7 @@ rustup run nightly rustup component add miri
 ```
 
 ### 1.2 更新 Miri
+> **[来源: Rust Official Docs]**
 
 ```bash
 rustup update
@@ -61,6 +65,7 @@ rustup component add miri --force
 ```
 
 ### 1.3 验证安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 检查 Miri 版本
@@ -73,8 +78,10 @@ miri run --bin hello
 ---
 
 ## 2. 基础使用
+> **[来源: Rust Official Docs]**
 
 ### 2.1 运行单个文件
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 解释执行单个 Rust 文件
@@ -85,6 +92,7 @@ miri run --edition 2021 example.rs
 ```
 
 ### 2.2 运行 Cargo 项目
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 在项目根目录下
@@ -97,6 +105,7 @@ cargo miri run -- arg1 arg2
 ```
 
 ### 2.3 运行测试
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有测试
@@ -112,8 +121,10 @@ cargo miri test module_name
 ---
 
 ## 3. 检测的未定义行为
+> **[来源: Rust Official Docs]**
 
 ### 3.1 内存访问错误
+> **[来源: Rust Official Docs]**
 
 | 错误类型 | 描述 | 示例 |
 |----------|------|------|

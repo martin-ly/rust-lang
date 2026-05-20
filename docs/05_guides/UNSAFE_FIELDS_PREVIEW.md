@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Unsafe Fields 预览指南](#unsafe-fields-预览指南)
   - [📋 目录](#-目录)
@@ -30,6 +32,8 @@
 ---
 
 ## 🔑 什么是 Unsafe Fields
+>
+> **[来源: Rust Official Docs]**
 
 **Unsafe Fields** 是 Rust Project Goal 2026 中提出的一项语言特性，允许在结构体定义中**显式标记哪些字段需要 `unsafe` 访问**。其核心思想是：将 `unsafe` 的粒度从"代码块"细化到"字段级别"，从而让 `unsafe` 的使用更加精确和可审计。
 
@@ -66,8 +70,12 @@ Unsafe Fields 模型:
 ---
 
 ## 💡 动机
+>
+> **[来源: Rust Official Docs]**
 
 ### 问题：当前 `unsafe` 的粒度太粗
+>
+> **[来源: Rust Official Docs]**
 
 在现有 Rust 中，一旦进入 `unsafe` 块，编译器就放弃对所有操作的检查。但一个结构体中通常**只有部分字段**涉及不安全的内存操作：
 
@@ -93,6 +101,8 @@ impl IoBuffer {
 ```
 
 ### Unsafe Fields 的目标
+>
+> **[来源: Rust Official Docs]**
 
 | 目标 | 说明 |
 |------|------|
@@ -104,8 +114,12 @@ impl IoBuffer {
 ---
 
 ## 📝 提议语法
+>
+> **[来源: Rust Official Docs]**
 
 ### 基本语法
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub struct KernelBuffer {
@@ -120,6 +134,8 @@ pub struct KernelBuffer {
 ```
 
 ### 访问规则
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 impl KernelBuffer {
@@ -143,6 +159,8 @@ impl KernelBuffer {
 ```
 
 ### 模式匹配
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn process_buffer(buf: &KernelBuffer) {
@@ -161,6 +179,8 @@ fn process_buffer(buf: &KernelBuffer) {
 ---
 
 ## ⚖️ 与当前 `unsafe` 块的对比
+>
+> **[来源: Rust Official Docs]**
 
 | 方面 | 当前 `unsafe` 块 | Unsafe Fields |
 |------|-----------------|---------------|
@@ -203,6 +223,8 @@ Unsafe Fields 模型:
 ---
 
 ## 🧪 当前状态
+>
+> **[来源: Rust Official Docs]**
 
 截至 2026-05，Unsafe Fields 仍处于**实验性讨论阶段**：
 
@@ -279,6 +301,7 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 >
 > - 2026-05-08: 初始创建，基于 Rust Project Goal 2026 公开讨论
 > - 状态更新: 等待正式 RFC 草案发布
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

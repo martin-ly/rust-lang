@@ -15,6 +15,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 | 子目录 | 内容 |
 | :--- | :--- |
@@ -23,8 +24,10 @@
 ---
 
 ## 研究方向
+> **[来源: Rust Official Docs]**
 
 ### 形式化验证
+> **[来源: Rust Official Docs]**
 
 - **定理证明**: Coq、Isabelle、Lean
 - **模型检测**: Kani、MIRI

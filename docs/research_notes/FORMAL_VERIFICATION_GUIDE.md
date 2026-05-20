@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [形式化工具验证指南](#形式化工具验证指南)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -50,6 +51,7 @@
 ---
 
 ## 🎯 概述 {#-概述}
+> **[来源: Rust Official Docs]**
 
 本指南提供了使用形式化工具（Coq、Isabelle）验证 Rust 形式化定义的完整流程。
 
@@ -58,6 +60,7 @@
 **Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)。
 
 ### 验证目标
+> **[来源: Rust Official Docs]**
 
 1. **所有权模型验证**：验证所有权规则的正确性
 2. **借用检查器验证**：验证借用规则的正确性
@@ -69,6 +72,7 @@
 ---
 
 ## 形式化论证（验证框架）
+> **[来源: Rust Official Docs]**
 
 **Def FV1（形式化验证）**：设 $T$ 为形式化定理（如 ownership T2、borrow T1），$V$ 为 Coq/Isabelle 等工具的验证活动。若 $V$ 生成机器可检查证明，且证明的结论与 $T$ 的陈述一致，则称 $V$ **验证** $T$。
 
@@ -87,8 +91,10 @@
 ---
 
 ## 🛠️ 工具选择 {#️-工具选择}
+> **[来源: Rust Official Docs]**
 
 ### Coq
+> **[来源: Rust Official Docs]**
 
 **优势**：
 
@@ -128,6 +134,7 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 ```
 
 ### Isabelle/HOL
+> **[来源: Rust Official Docs]**
 
 **优势**：
 
@@ -160,8 +167,10 @@ end
 ---
 
 ## 📚 验证准备工作 {#-验证准备工作}
+> **[来源: Rust Official Docs]**
 
 ### 1. 环境准备
+> **[来源: Rust Official Docs]**
 
 **Coq 环境**：
 
@@ -176,6 +185,7 @@ end
 - [ ] 配置开发环境
 
 ### 2. 理论准备
+> **[来源: Rust Official Docs]**
 
 **需要转换的形式化定义**：
 
@@ -187,6 +197,7 @@ end
 - [ ] Pin 与自引用类型的形式化定义（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
 
 ### 3. 验证框架设计
+> **[来源: Rust Official Docs]**
 
 **验证结构**：
 

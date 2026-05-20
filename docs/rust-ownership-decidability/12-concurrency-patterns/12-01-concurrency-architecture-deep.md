@@ -9,6 +9,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Concurrency Architecture: Formal Deep Dive](#concurrency-architecture-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -75,6 +76,7 @@
 ---
 
 ## Executive Summary
+> **[来源: Rust Official Docs]**
 
 This document provides a formal treatment of Rust's concurrency architecture, establishing mathematical foundations for understanding why Rust's concurrency model prevents data races at compile time. We present:
 
@@ -89,6 +91,7 @@ The core insight is that Rust's ownership system, when combined with the `Send` 
 ---
 
 ## 1. Concurrency Models Formal Comparison
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Shared Memory vs Message Passing
 

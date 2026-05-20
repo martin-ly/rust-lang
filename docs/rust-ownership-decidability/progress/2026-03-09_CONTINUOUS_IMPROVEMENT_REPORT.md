@@ -1,14 +1,17 @@
 # 持续推进报告 - 2026-03-09
 
 ## Continuous Improvement Report
+> **[来源: Rust Official Docs]**
 
 > **持续推进阶段** - 扩展学习资源和优化体验
 
 ---
 
 ## 📊 本次推进概览
+> **[来源: Rust Official Docs]**
 
 ### 新增文档统计
+> **[来源: Rust Official Docs]**
 
 | 文档 | 类型 | 目标 | 完成度 |
 |:-----|:-----|:-----|:------:|

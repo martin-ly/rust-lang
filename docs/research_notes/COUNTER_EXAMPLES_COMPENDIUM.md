@@ -7,6 +7,7 @@
 ---
 
 ## 如何使用本文档
+> **[来源: Rust Official Docs]**
 
 ```text
 学习建议:
@@ -21,8 +22,10 @@
 ---
 
 ## 一、所有权反例
+> **[来源: Rust Official Docs]**
 
 ### 反例 1.1: 使用已移动的值
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -81,6 +84,7 @@ Move(x, y, v) 后:
 ---
 
 ### 反例 1.2: 部分移动后的使用
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -138,8 +142,10 @@ let Person { name, age } = p;
 ---
 
 ## 二、借用反例
+> **[来源: Rust Official Docs]**
 
 ### 反例 2.1: 可变借用与不可变借用冲突
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -196,6 +202,7 @@ until r₁ is dropped
 ---
 
 ### 反例 2.2: 多个可变借用
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -243,6 +250,7 @@ let r2 = &mut x;
 ---
 
 ### 反例 2.3: 悬垂引用
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -296,8 +304,10 @@ lifetime(&s) ⊆ lifetime(s)
 ---
 
 ## 三、生命周期反例
+> **[来源: Rust Official Docs]**
 
 ### 反例 3.1: 返回局部变量的引用
+> **[来源: Rust Official Docs]**
 
 **错误代码**:
 
@@ -346,6 +356,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ## 四、Send/Sync反例
+> **[来源: Rust Official Docs]**
 
 ### 反例 4.1: Rc跨线程
 

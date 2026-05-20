@@ -5,6 +5,7 @@
 This chapter provides a comprehensive exploration of Rust's Foreign Function Interface (FFI) patterns, focusing on memory safety, ownership semantics, and practical implementation strategies when interfacing with C, C++, Python, Ruby, Node.js, and other languages.
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [08-03. Rust FFI Patterns Deep Dive](#08-03-rust-ffi-patterns-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -89,8 +90,10 @@ This chapter provides a comprehensive exploration of Rust's Foreign Function Int
 ---
 
 ## 1. FFI Safety Model
+> **[来源: Rust Official Docs]**
 
 ### 1.1 The Unsafe Boundary
+> **[来源: Rust Official Docs]**
 
 When Rust interacts with foreign code, it crosses an **unsafe boundary** where the compiler's guarantees no longer apply. Understanding this boundary is fundamental to writing correct FFI code.
 
@@ -126,6 +129,7 @@ When Rust interacts with foreign code, it crosses an **unsafe boundary** where t
 | Foreign Code | No guarantees, manual everything | Programmer verified |
 
 ### 1.2 Core Invariants
+> **[来源: Rust Official Docs]**
 
 When working across the FFI boundary, the following invariants must be maintained:
 
@@ -201,6 +205,7 @@ double compute_distance(Point p1, Point p2);
 > For any FFI boundary crossing, at least one side must be marked `unsafe`, and the safe side bears the burden of proof for all safety invariants.
 
 ### 1.3 Safety Contract Documentation
+> **[来源: Rust Official Docs]**
 
 Every FFI function should document its safety contract:
 
@@ -234,10 +239,12 @@ pub extern "C" fn data_new() -> *mut Data {
 ---
 
 ## 2. Memory Management Patterns
+> **[来源: Rust Official Docs]**
 
 Memory management across FFI boundaries is one of the most challenging aspects of interoperability. There are three primary patterns, each with distinct trade-offs.
 
 ### 2.1 Pattern 1: Rust Allocates, Rust Frees
+> **[来源: Rust Official Docs]**
 
 In this pattern, Rust maintains full ownership and control over memory. Foreign code receives only opaque pointers.
 
@@ -371,6 +378,7 @@ int main() {
 - Cannot use C's allocator for debugging
 
 ### 2.2 Pattern 2: C Allocates, C Frees
+> **[来源: Rust Official Docs]**
 
 When C needs to manage the lifetime of data, or when integrating with existing C codebases:
 
@@ -501,6 +509,7 @@ pub unsafe extern "C" fn free_c_buffer(buffer: COwnedBuffer) {
 - Requires careful documentation of ownership
 
 ### 2.3 Pattern 3: Shared Ownership
+> **[来源: Rust Official Docs]**
 
 For complex scenarios where both sides need access:
 
@@ -654,6 +663,7 @@ pub unsafe extern "C" fn shared_data_ref_count(handle: *const SharedDataHandle) 
 - More complex mental model
 
 ### 2.4 Pattern 4: Custom Allocator Bridge
+> **[来源: Rust Official Docs]**
 
 For integrating with custom C allocators:
 
@@ -721,6 +731,7 @@ static ALLOCATOR: CAllocatorBridge = CAllocatorBridge;
 ---
 
 ## 3. Type Safety
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Type Mapping Reference
 
@@ -3899,3 +3910,7 @@ With these principles in mind, Rust's FFI capabilities enable seamless integrati
 ---
 
 *This chapter is part of the Rust Ownership and Decidability documentation series.*
+
+---
+
+> **权威来源**: Rust Official Docs

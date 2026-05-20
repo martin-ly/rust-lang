@@ -1,14 +1,17 @@
 # 交互式学习资源
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档收集Rust安全关键系统开发的交互式学习资源，包括在线课程、实验平台、虚拟环境等。
 
 ---
 
 ## 1. 在线学习平台
+> **[来源: Rust Official Docs]**
 
 ### 1.1 官方资源
+> **[来源: Rust Official Docs]**
 
 ```
 Rust官方:

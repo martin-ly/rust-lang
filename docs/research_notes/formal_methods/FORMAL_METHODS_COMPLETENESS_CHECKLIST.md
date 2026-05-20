@@ -10,6 +10,7 @@
 ---
 
 ## 六篇 × 六维 完备性矩阵
+> **[来源: Rust Official Docs]**
 
 每篇需具备：
 **概念定义**（Def/公理）、**属性关系**（与它机制依赖）、**解释论证**（动机、设计理由）、
@@ -28,6 +29,7 @@
 ---
 
 ## 维度说明
+> **[来源: Rust Official Docs]**
 
 - **概念定义**：文档内显式 Def 或等价公理；可追溯至 README 六篇并表。
 - **属性关系**：与其它机制（ownership/borrow/lifetime/async/pin/send_sync）的依赖或等价关系。
@@ -39,6 +41,7 @@
 ---
 
 ## 与安全可判定机制总览的对应
+> **[来源: Rust Official Docs]**
 
 本表与 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) §二、§三 一致：总览按「机制」列出形式化文档与反例，本表按「文档」核对六维是否齐全。二者互为完备性检查。
 

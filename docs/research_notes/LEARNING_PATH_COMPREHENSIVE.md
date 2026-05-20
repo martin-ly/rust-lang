@@ -7,6 +7,7 @@
 ---
 
 ## 学习路径总览
+> **[来源: Rust Official Docs]**
 
 ```text
                         学习路径全景
@@ -25,22 +26,27 @@
 ---
 
 ## 路径一：初学者（2-4周）
+> **[来源: Rust Official Docs]**
 
 ### 目标受众
+> **[来源: Rust Official Docs]**
 
 - 有编程经验，想了解Rust安全机制
 - 准备采用Rust的工程团队
 - 技术决策者
 
 ### 学习目标
+> **[来源: Rust Official Docs]**
 
 - 理解Rust为什么安全（直觉层面）
 - 能够解释所有权、借用、生命周期
 - 避免常见错误
 
 ### 学习路径
+> **[来源: Rust Official Docs]**
 
 #### 第1周：所有权与借用
+> **[来源: Rust Official Docs]**
 
 **Day 1-2: 所有权概念**
 
@@ -61,6 +67,7 @@
 - 检验: 能读懂简单生命周期标注
 
 #### 第2周：类型系统与安全保证
+> **[来源: Rust Official Docs]**
 
 **Day 1-2: 类型安全**
 
@@ -78,12 +85,14 @@
 - 理解: 编译器阻止哪些错误
 
 #### 第3-4周：实践与深化
+> **[来源: Rust Official Docs]**
 
 - 阅读核心库文档
 - 完成[Rustlings](https://github.com/rust-lang/rustlings)练习
 - 阅读[官方Book](https://doc.rust-lang.org/book/)
 
 ### 学习成果检查
+> **[来源: Rust Official Docs]**
 
 - [ ] 能向同事解释所有权系统
 - [ ] 能解决80%的编译器错误
@@ -92,8 +101,10 @@
 ---
 
 ## 路径二：进阶者（4-8周）
+> **[来源: Rust Official Docs]**
 
 ### 目标受众
+> **[来源: Rust Official Docs]**
 
 - Rust核心开发者
 - 想深入理解编译器原理

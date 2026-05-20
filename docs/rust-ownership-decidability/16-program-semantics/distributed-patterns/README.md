@@ -5,6 +5,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 ```text
 distributed-patterns/
@@ -37,6 +38,7 @@ distributed-patterns/
 ---
 
 ## 文档结构
+> **[来源: Rust Official Docs]**
 
 每篇文档包含以下章节：
 
@@ -51,6 +53,7 @@ distributed-patterns/
 ---
 
 ## 核心主题
+> **[来源: Rust Official Docs]**
 
 ### 容错模式 (Fault Tolerance Patterns)
 

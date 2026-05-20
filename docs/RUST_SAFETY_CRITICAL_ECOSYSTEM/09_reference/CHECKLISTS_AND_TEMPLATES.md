@@ -1,50 +1,61 @@
 # Rust安全关键系统 - 检查清单与模板
 
 ## 代码审查检查清单
+> **[来源: Rust Official Docs]**
 
 ### Unsafe代码审查清单
+> **[来源: Rust Official Docs]**
 
 ```markdown
 ## Unsafe代码审查
+> **[来源: Rust Official Docs]**
 
 ### 基本信息
+> **[来源: Rust Official Docs]**
 - [ ] 审查日期: ___________
 - [ ] 审查人: ___________
 - [ ] 作者: ___________
 - [ ] 模块/函数: ___________
 
 ### 安全清单
+> **[来源: Rust Official Docs]**
 
 #### 文档化
+> **[来源: Rust Official Docs]**
 - [ ] 有 `# Safety` 文档注释
 - [ ] 文档说明了前置条件
 - [ ] 文档说明了不变量
 - [ ] 文档说明了调用者责任
 
 #### 范围控制
+> **[来源: Rust Official Docs]**
 - [ ] unsafe块尽可能小
 - [ ] 每个unsafe块有明确目的
 - [ ] 不超过10行（特殊情况需说明）
 
 #### 输入验证
+> **[来源: Rust Official Docs]**
 - [ ] 所有指针参数检查非空
 - [ ] 长度参数验证合理
 - [ ] 索引参数检查边界
 - [ ] 枚举值检查有效
 
 #### 内存安全
+> **[来源: Rust Official Docs]**
 - [ ] 无use-after-free风险
 - [ ] 无双重释放风险
 - [ ] 无缓冲区溢出风险
 - [ ] 指针正确对齐
 
 #### 测试
+> **[来源: Rust Official Docs]**
 - [ ] Miri测试通过
 - [ ] 有单元测试
 - [ ] 边界条件测试
 - [ ] 错误路径测试
 
 #### 替代方案
+> **[来源: Rust Official Docs]**
 - [ ] 考虑了safe Rust替代方案
 - [ ] 文档说明了为何必须使用unsafe
 

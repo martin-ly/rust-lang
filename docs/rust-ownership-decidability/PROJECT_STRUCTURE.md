@@ -9,8 +9,10 @@
 ---
 
 ## 📁 目录结构
+> **[来源: Rust Official Docs]**
 
 ### 核心文档
+> **[来源: Rust Official Docs]**
 
 ```
 📄 README.md                          # 主入口文档
@@ -18,6 +20,7 @@
 ```
 
 ### 1. 基础概念 (01-core-concepts/)
+> **[来源: Rust Official Docs]**
 
 Rust核心所有权概念的学习资源。
 

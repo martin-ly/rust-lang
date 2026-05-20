@@ -11,6 +11,7 @@
 - v1.1 (2026-05-19): 补全权威来源标注（Edition Guide、RFC 2052、Rust Blog、Lang Team Roadmap）
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
 
@@ -20,16 +21,20 @@
 - [ ] 掌握新的保留字和行为变更
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 - 熟悉 Rust 2021 Edition
 - 理解 Cargo 和项目配置
 - 有现有 Rust 项目经验
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **Edition** 是 Rust 的**兼容性边界机制**。与语义版本（SemVer）不同，Edition 允许语言在不破坏现有代码的情况下引入不兼容的语法变更。同一 crate 可以混合使用不同 Edition 的依赖。
 

@@ -8,6 +8,7 @@
 ---
 
 ## 一、综合安全证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TB
@@ -80,6 +81,7 @@ graph TB
 ---
 
 ## 二、所有权证明树（详细）
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph LR
@@ -145,6 +147,7 @@ graph LR
 ---
 
 ## 三、借用检查证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -214,6 +217,7 @@ let r2 = &mut x; // 编译错误! 违反规则6
 ---
 
 ## 四、类型安全证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TB
@@ -281,6 +285,7 @@ graph TB
 ---
 
 ## 五、生命周期证明树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph LR
@@ -324,6 +329,7 @@ graph LR
 ---
 
 ## 六、并发安全证明树 (Send/Sync)
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TB
@@ -361,6 +367,7 @@ graph TB
 ---
 
 ## 七、证明树索引
+> **[来源: Rust Official Docs]**
 
 | 证明树 | 位置 | 关键定理 | Mermaid图表 |
 | :--- | :--- | :--- | :--- |
@@ -374,8 +381,10 @@ graph TB
 ---
 
 ## 八、交互式导航
+> **[来源: Rust Official Docs]**
 
 ### 按主题查找证明
+> **[来源: Rust Official Docs]**
 
 | 主题 | 起始节点 | 相关定理 |
 | :--- | :--- | :--- |
@@ -395,11 +404,13 @@ graph TB
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

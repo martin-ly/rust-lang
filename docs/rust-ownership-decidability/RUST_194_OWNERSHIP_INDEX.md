@@ -10,8 +10,10 @@
 ---
 
 ## 📋 文档分类
+> **[来源: Rust Official Docs]**
 
 ### 核心完成报告 (20+ 文件)
+> **[来源: Rust Official Docs]**
 
 - 100_PERCENT_COMPLETION_REPORT.md
 - COMPLETION_100_PERCENT_SUMMARY.md
@@ -19,6 +21,7 @@
 - RUST_194_*_FINAL.md (10+ 变体)
 
 ### 理论与证明 (15+ 文件)
+> **[来源: Rust Official Docs]**
 
 - UNIFIED_THEORETICAL_FRAMEWORK.md
 - THEOREM_DEPENDENCY_GRAPH.md

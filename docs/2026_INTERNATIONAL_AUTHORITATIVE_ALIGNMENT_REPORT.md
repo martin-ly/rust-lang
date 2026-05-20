@@ -27,6 +27,7 @@
 ---
 
 ## 第一部分：学术权威对齐
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Tree Borrows - PLDI 2025 Distinguished Paper
 
@@ -37,6 +38,7 @@
 **荣誉**: **PLDI 2025 Distinguished Paper Award**
 
 #### 核心发现
+> **[来源: Rust Official Docs]**
 
 > "实验结果显示，Tree Borrows比Stacked Borrows少拒绝54%的测试用例"
 > —— Villani et al., PLDI 2025
@@ -61,6 +63,7 @@
 - 证明了Tree Borrows保留Stacked Borrows的大部分优化
 
 #### 项目对齐状态
+> **[来源: Rust Official Docs]**
 
 ✅ **已对齐** - 项目Miri CI配置已使用`-Zmiri-tree-borrows`
 ✅ **已引用** - `AUTHORITATIVE_SOURCES_AND_CITATIONS.md`已包含完整引用
@@ -77,6 +80,7 @@
 **状态**: 已接收，2026年1月发表
 
 #### 核心贡献
+> **[来源: Rust Official Docs]**
 
 **功能扩展（2023-2026）**:
 
@@ -106,6 +110,7 @@
 ---
 
 ### 1.3 其他关键学术成果
+> **[来源: Rust Official Docs]**
 
 | 年份 | 会议 | 论文 | 作者 | 影响力 |
 |------|------|------|------|--------|
@@ -118,14 +123,17 @@
 ---
 
 ## 第二部分：官方权威对齐
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Rust 2024 Edition - 已稳定发布
+> **[来源: Rust Official Docs]**
 
 **发布日期**: 2025年2月20日（Rust 1.85.0）
 **状态**: **生产就绪**
 **官方文档**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
 #### 主要特性
+> **[来源: Rust Official Docs]**
 
 **语言特性**:
 
@@ -150,6 +158,7 @@
 - ✅ **Box<[T]>的IntoIterator**: 支持boxed slice迭代
 
 #### 项目对齐状态
+> **[来源: Rust Official Docs]**
 
 ✅ **已准备** - `rust-toolchain.toml`已配置Edition 2024支持
 ✅ **已记录** - 迁移指南已包含Edition 2024内容
@@ -158,12 +167,14 @@
 ---
 
 ### 2.2 Rust 1.95.0 - 即将发布
+> **[来源: Rust Official Docs]**
 
 **预计发布**: 2026年4月16日
 **分支日期**: 2026年2月27日
 **来源**: [releases.rs](https://releases.rs/docs/1.95.0/)
 
 #### 预期特性（开发中）
+> **[来源: Rust Official Docs]**
 
 **编译器**:
 

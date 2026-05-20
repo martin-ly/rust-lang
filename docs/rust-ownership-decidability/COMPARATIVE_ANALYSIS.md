@@ -5,8 +5,10 @@
 ---
 
 ## 一、与函数式语言类型的对比
+> **[来源: Rust Official Docs]**
 
 ### 1.1 ML 类型系统
+> **[来源: Rust Official Docs]**
 
 **ML（Meta Language）类型系统特点**：
 
@@ -53,6 +55,7 @@ Rust：
 - 但 Rust 添加了线性/仿射约束
 
 ### 1.2 Haskell 类型系统
+> **[来源: Rust Official Docs]**
 
 **Haskell 的纯洁性**：
 

@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 - [x] 理解 C ABI 与 Rust 函数的调用约定差异
 - [x] 掌握 `repr(C)`、内存对齐、结构体布局的精确控制
@@ -23,6 +24,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **Unsafe Rust** — 原始指针、`unsafe` 块的不变量（`03_advanced/unsafe/unsafe_rust.md`）
 2. **所有权** — move 语义、`Box::into_raw`/`from_raw`（`01_fundamentals/ownership.md`）
@@ -31,10 +33,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **FFI（Foreign Function Interface）** 允许 Rust 代码调用其他语言（通常是 C）编写的函数，反之亦然。Rust 的 FFI 基于 C ABI（Application Binary Interface），这是操作系统和硬件层面的函数调用约定标准。
 

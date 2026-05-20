@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Miri 实战指南：Rust 未定义行为检测工具](#miri-实战指南rust-未定义行为检测工具)
   - [📋 目录](#-目录)
@@ -38,6 +40,8 @@
 ---
 
 ## 🔬 什么是 Miri
+>
+> **[来源: Rust Official Docs]**
 
 **Miri** 是 Rust 的官方解释器，由 Ralf Jung 领导开发，专门用于检测 Rust 代码中的**未定义行为 (Undefined Behavior, UB)**。与 `rustc` 不同，Miri 不直接生成机器码，而是在一个虚拟的 Rust 中间表示 (MIR) 层上逐条解释执行代码。
 
@@ -66,10 +70,14 @@ Miri 的核心价值在于：
 ---
 
 ## ⚙️ 安装与运行
+>
+> **[来源: Rust Official Docs]**
 
 Miri 仅支持 **nightly** 工具链，因为 Miri 需要编译器内部不稳定的 API。
 
 ### 安装 Miri
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 1. 安装 nightly 工具链 (如果尚未安装)
@@ -83,6 +91,8 @@ cargo +nightly miri setup
 ```
 
 ### 基本命令
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 运行所有测试 (Miri 模式下)
@@ -99,6 +109,8 @@ rustc +nightly -Zmiri --edition 2024 file.rs
 ```
 
 ### 常用环境变量
+>
+> **[来源: Rust Official Docs]**
 
 | 环境变量 | 作用 | 示例 |
 |---------|------|------|
@@ -116,8 +128,12 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-tree-borrows" cargo +nightly miri tes
 ---
 
 ## 🐛 Miri 捕获的常见 UB 模式
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Use-after-free (UAF)
+>
+> **[来源: Rust Official Docs]**
 
 Miri 能精确追踪每个内存分配的存活状态，任何对已释放内存的访问都会触发错误。
 
@@ -148,6 +164,8 @@ error: Undefined Behavior: pointer to alloc1402 was dereferenced after this allo
 ```
 
 ### 2. Data Race (数据竞争)
+>
+> **[来源: Rust Official Docs]**
 
 Miri 通过追踪每个内存位置的访问线程和同步关系来检测数据竞争。
 
@@ -181,6 +199,8 @@ error: Undefined Behavior: Data race detected between Read on thread `<unnamed>`
 ```
 
 ### 3. Aliasing Violations (别名违规)
+>
+> **[来源: Rust Official Docs]**
 
 Miri 严格执行 Rust 的别名规则：对于任何内存位置，`&mut T` 必须是唯一的活跃引用。
 
@@ -203,6 +223,8 @@ fn aliasing_violation() {
 ```
 
 ### 4. 其他常见 UB
+>
+> **[来源: Rust Official Docs]**
 
 | UB 类型 | 说明 | Miri 检测能力 |
 |---------|------|--------------|
@@ -464,6 +486,7 @@ CI 策略矩阵:
 > 📌 **复查记录**
 >
 > - 2026-05-08: 初始创建，基于 nightly 2026-05 状态
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

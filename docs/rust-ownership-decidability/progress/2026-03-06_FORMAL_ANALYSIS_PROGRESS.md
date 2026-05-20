@@ -7,8 +7,10 @@
 ---
 
 ## 本次推进完成的工作
+> **[来源: Rust Official Docs]**
 
 ### ✅ 1. 统一理论框架文档
+> **[来源: Rust Official Docs]**
 
 **文件**: `UNIFIED_THEORETICAL_FRAMEWORK.md`
 **规模**: 1,184 行，~37KB
@@ -32,6 +34,7 @@
 ---
 
 ### ✅ 2. 语义等价性证明文档
+> **[来源: Rust Official Docs]**
 
 **文件**: `formal-foundations/semantics/semantics-equivalence-proof.md`
 **规模**: 1,044 行，~33KB

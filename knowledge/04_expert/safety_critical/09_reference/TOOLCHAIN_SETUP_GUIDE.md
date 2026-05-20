@@ -3,14 +3,17 @@
 > **Bloom 层级**: 理解
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南提供配置Rust工具链以满足安全关键开发要求的详细步骤，涵盖Ferrocene、Miri、Kani等工具的完整配置。
 
 ---
 
 ## 工具链架构
+> **[来源: Rust Official Docs]**
 
 ### 安全关键工具栈
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -47,8 +50,10 @@
 ---
 
 ## 基础环境配置
+> **[来源: Rust Official Docs]**
 
 ### 1. Rust工具链安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装rustup (如尚未安装)

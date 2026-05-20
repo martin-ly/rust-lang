@@ -9,6 +9,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [Rust 版本增量更新流程](#rust-版本增量更新流程)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -49,6 +50,7 @@
 ---
 
 ## 增量更新步骤
+> **[来源: Rust Official Docs]**
 
 ### 1. 收集变更
 
@@ -59,6 +61,7 @@
 | 1.3 | 识别语言特性、库、工具链变更 | releases.rs § Language、Library、Compiler |
 
 ### 2. 更新文档
+> **[来源: Rust Official Docs]**
 
 | 步骤 | 文档 | 操作 |
 | :--- | :--- | :--- |
@@ -69,6 +72,7 @@
 | 2.5 | [INDEX](INDEX.md)、[README](README.md) | 更新版本号、链接、统计 |
 
 ### 3. 对齐权威
+> **[来源: Rust Official Docs]**
 
 | 步骤 | 操作 |
 | :--- | :--- |
@@ -77,6 +81,7 @@
 | 3.3 | 更新 formal_methods README 权威来源快速链接 |
 
 ### 4. 兼容性
+> **[来源: Rust Official Docs]**
 
 | 步骤 | 操作 |
 | :--- | :--- |
@@ -86,8 +91,10 @@
 ---
 
 ## 检查清单
+> **[来源: Rust Official Docs]**
 
 ### 版本发布后
+> **[来源: Rust Official Docs]**
 
 - [ ] releases.rs 链接已更新
 - [ ] RUST_XXX 文档新增特性表已补全
@@ -105,8 +112,10 @@
 ---
 
 ## 研究场景与代码示例
+> **[来源: Rust Official Docs]**
 
 ### 场景 1：新语言特性研究
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：分析 Rust 1.93 新增的 LUB coercion 修正
@@ -130,6 +139,7 @@ fn lub_coercion_example() {
 ```
 
 ### 场景 2：性能改进验证
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：验证 Rust 1.93 的性能改进
@@ -158,6 +168,7 @@ fn performance_improvement_example() {
 ```
 
 ### 场景 3：API 稳定化跟踪
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究场景：跟踪新稳定的 API

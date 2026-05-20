@@ -5,6 +5,7 @@
 ---
 
 ## 引言：理论与实践的连接
+> **[来源: Rust Official Docs]**
 
 **核心问题**: 我们的形式化证明（300 Qed）与 rustc 实际编译 Rust 代码有什么关系？
 
@@ -13,8 +14,10 @@
 ---
 
 ## 一、终止性定理 ↔ rustc 借用检查
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定理
+> **[来源: Rust Official Docs]**
 
 ```coq
 Theorem borrow_checking_termination :

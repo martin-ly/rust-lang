@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [OpenTelemetry Rust形式化分析](#opentelemetry-rust形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 OpenTelemetry提供:
 
@@ -40,6 +42,7 @@ OpenTelemetry提供:
 ---
 
 ## 2. TracerProvider架构
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (全局注册)
 

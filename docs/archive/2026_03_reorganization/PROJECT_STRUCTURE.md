@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [📁 项目结构说明 (Project Structure)](#-项目结构说明-project-structure)
   - [📋 目录](#-目录)
@@ -46,11 +47,13 @@
 ---
 
 ## 项目总览
+> **[来源: Rust Official Docs]**
 
 本项目是一个全面的 Rust 学习资源集合，采用 **Cargo Workspace** 组织多个学习模块。
 项目结构经过精心设计，确保清晰的组织和易于导航。
 
 ### 设计原则
+> **[来源: Rust Official Docs]**
 
 - ✅ **清晰分类**: 文档、代码、配置分别组织
 - ✅ **扁平化根目录**: 根目录只保留核心文档
@@ -60,6 +63,7 @@
 ---
 
 ## 目录树概览
+> **[来源: Rust Official Docs]**
 
 ```text
 rust-lang/
@@ -138,10 +142,13 @@ rust-lang/
 ---
 
 ## 核心目录说明
+> **[来源: Rust Official Docs]**
 
 ### 根目录文件
+> **[来源: Rust Official Docs]**
 
 #### 📄 核心文档
+> **[来源: Rust Official Docs]**
 
 | 文件                    | 用途           | 何时查看        |
 | :--- | :--- | :--- || `README.md`             | 项目总览和入口 | 首次了解项目 ⭐ |
@@ -156,6 +163,7 @@ rust-lang/
 | `PROJECT_STRUCTURE.md`  | 项目结构       | 了解目录组织    |
 
 #### 📦 配置文件
+> **[来源: Rust Official Docs]**
 
 | 文件             | 用途          | 说明                 |
 | :--- | :--- | :--- || `Cargo.toml`     | Workspace配置 | Cargo工作空间定义    |
@@ -168,10 +176,12 @@ rust-lang/
 ---
 
 ### crates/ - 学习模块
+> **[来源: Rust Official Docs]**
 
 **核心学习内容**，12 个独立模块，从基础到高级全面覆盖 Rust。
 
 #### 📚 模块列表
+> **[来源: Rust Official Docs]**
 
 | 模块    | 名称           | 难度       | 主题                   |
 | :--- | :--- | :--- | :--- || **C01** | 所有权与借用   | ⭐         | 所有权、借用、生命周期 |
@@ -188,6 +198,7 @@ rust-lang/
 | **C12** | WebAssembly    | ⭐⭐⭐⭐   | WASM、wasm-bindgen     |
 
 #### 🏗️ 模块标准结构
+> **[来源: Rust Official Docs]**
 
 每个模块遵循统一的结构：
 

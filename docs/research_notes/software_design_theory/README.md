@@ -10,6 +10,7 @@
 ---
 
 ## 层次推进（阅读顺序）
+> **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 入口 |
 | :--- | :--- | :--- |
@@ -24,6 +25,7 @@
 ---
 
 ## 体系宗旨
+> **[来源: Rust Official Docs]**
 
 本体系填补以下缺口：
 
@@ -36,6 +38,7 @@
 ---
 
 ## 目录结构
+> **[来源: Rust Official Docs]**
 
 | 目录 | 内容 |
 | :--- | :--- |
@@ -124,7 +127,7 @@
 | 层次 | 入口 | 实质内容 |
 | :--- | :--- | :--- |
 | **L1 入门** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 每模式 Def/定理/代码/典型场景/反例；RAII/Newtype/类型状态完整示例 |
-| **L2 选型** | [02_workflow 03_semantic_boundary_map](02_workflow_safe_complete_models/03_semantic_boundary_map.md)、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI） |
+| **L2 选型** | `02_workflow 03_semantic_boundary_map`、[05_boundary_system](05_boundary_system/README.md) | 5 个模式选取完整示例；三维边界决策树；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI） |
 | **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | Builder+Factory、Repository+Service+DTO 完整代码；**验证工作流、组合反例详解、三层架构示例**；**执行模型 + 设计模式组合 4 例**（批处理、异步、并行、分布式） |
 | **L4 实践** | [07_anti_patterns](07_anti_patterns.md)、[01_safe_23 常见陷阱](02_workflow_safe_complete_models/01_safe_23_catalog.md) | 13 反例索引；5 个场景→反模式→正确写法；23 模式陷阱与规避 |
 

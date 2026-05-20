@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库 Future与Stream 形式化分析](#rust标准库-future与stream-形式化分析)
   - [目录](#目录)
@@ -62,6 +63,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Future和Stream是Rust异步编程的核心抽象:
 
@@ -72,6 +74,7 @@ Future和Stream是Rust异步编程的核心抽象:
 ---
 
 ## 2. Future trait形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 类型定义
 

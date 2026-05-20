@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
   - [📋 目录](#-目录)
@@ -84,8 +85,10 @@
 ---
 
 ## 📊 Vec（动态数组）
+> **[来源: Rust Official Docs]**
 
 ### 创建
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 空 Vec
@@ -101,6 +104,7 @@ let mut vec = Vec::with_capacity(10);
 ```
 
 ### 添加元素
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut vec = vec![1, 2, 3];
@@ -117,6 +121,7 @@ vec.extend_from_slice(&[8, 9]);
 ```
 
 ### 访问元素
+> **[来源: Rust Official Docs]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -134,6 +139,7 @@ let last = vec.last();   // Option<&i32>
 ```
 
 ### 修改元素
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut vec = vec![1, 2, 3];
@@ -148,6 +154,7 @@ if let Some(x) = vec.get_mut(0) {
 ```
 
 ### 删除元素
+> **[来源: Rust Official Docs]**
 
 ```rust
 let mut vec = vec![1, 2, 3, 4, 5];
@@ -166,6 +173,7 @@ vec.clear();
 ```
 
 ### 查询
+> **[来源: Rust Official Docs]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -184,6 +192,7 @@ let cap = vec.capacity();
 ```
 
 ### 切片操作
+> **[来源: Rust Official Docs]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -199,8 +208,10 @@ let (left, right) = vec.split_at(2);
 ---
 
 ## 🗺️ HashMap（哈希映射）
+> **[来源: Rust Official Docs]**
 
 ### 创建
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;
@@ -314,6 +325,7 @@ for value in map.values_mut() {
 ---
 
 ## 🔢 HashSet（哈希集合）
+> **[来源: Rust Official Docs]**
 
 ### 创建
 
@@ -380,6 +392,7 @@ let symmetric_diff: HashSet<_> = set1.symmetric_difference(&set2).collect();
 ---
 
 ## 📚 其他集合
+> **[来源: Rust Official Docs]**
 
 ### VecDeque（双端队列）
 
@@ -448,6 +461,7 @@ while let Some(max) = heap.pop() {
 ---
 
 ## 🔄 迭代器基础
+> **[来源: Rust Official Docs]**
 
 ### 三种迭代方式
 
@@ -486,6 +500,7 @@ while let Some(item) = iter.next() {
 ---
 
 ## 🔧 迭代器适配器
+> **[来源: Rust Official Docs]**
 
 ### 转换适配器
 
@@ -570,6 +585,7 @@ let result: Vec<_> = vec.iter()
 ---
 
 ## 🍽️ 迭代器消费者
+> **[来源: Rust Official Docs]**
 
 ### 收集
 
@@ -663,6 +679,7 @@ let joined: String = vec.iter().map(|x| x.to_string()).collect();
 ---
 
 ## 🎯 常用模式
+> **[来源: Rust Official Docs]**
 
 ### 转换和过滤
 
@@ -832,6 +849,7 @@ let windows = sliding_windows(&vec, 3);
 ---
 
 ## 💡 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 自定义迭代器
 
@@ -998,6 +1016,7 @@ assert_eq!(cache.get(&2), Some(&"b"));
 ---
 
 ## 🎯 使用场景
+> **[来源: Rust Official Docs]**
 
 ### 场景: 数据处理管道
 
@@ -1057,6 +1076,7 @@ fn time_window_aggregation(
 ---
 
 ## 🚫 反例速查
+> **[来源: Rust Official Docs]**
 
 ### 反例 1: 迭代时修改集合
 
@@ -1172,6 +1192,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 ---
 
 ## 📚 相关文档
+> **[来源: Rust Official Docs]**
 
 - [迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [算法与数据结构文档](../../../crates/c08_algorithms/README.md)
@@ -1231,3 +1252,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

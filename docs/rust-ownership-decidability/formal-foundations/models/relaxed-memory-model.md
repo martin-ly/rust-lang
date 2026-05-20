@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust Relaxed Memory 模型形式化](#rust-relaxed-memory-模型形式化)
   - [目录](#目录)
@@ -43,6 +44,7 @@
 ---
 
 ## 摘要
+> **[来源: Rust Official Docs]**
 
 本文档介绍 RustBelt 向 Relaxed Memory 模型的扩展，核心贡献包括：
 
@@ -54,6 +56,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 顺序一致性的局限
 

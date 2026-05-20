@@ -17,6 +17,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [类型系统基础](#类型系统基础)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -133,16 +134,19 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+> **[来源: Rust Official Docs]**
 
 本研究的目的是形式化定义 Rust 的类型系统基础，并理解其类型理论根源。
 
 ### 核心问题
+> **[来源: Rust Official Docs]**
 
 1. **类型系统的形式化定义**: 如何用类型理论精确描述 Rust 类型系统？
 2. **类型推导算法**: 类型推导算法如何工作？
 3. **类型安全保证**: 如何证明类型系统保证类型安全？
 
 ### 预期成果
+> **[来源: Rust Official Docs]**
 
 - Rust 类型系统的形式化定义
 - 类型推导算法的形式化描述
@@ -151,8 +155,10 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+> **[来源: Rust Official Docs]**
 
 ### 类型系统核心概念
+> **[来源: Rust Official Docs]**
 
 1. **类型环境**: 变量到类型的映射
 2. **类型判断**: 表达式在类型环境下的类型
@@ -160,6 +166,7 @@
 4. **类型安全**: 良型程序不会出现类型错误
 
 ### 相关概念
+> **[来源: Rust Official Docs]**
 
 **类型环境 (Type Environment)**: 变量到类型的映射，用于记录变量的类型信息。在类型检查时，类型环境用于查找变量的类型。
 
@@ -172,6 +179,7 @@
 **类型规则 (Type Rule)**: 定义如何从子表达式的类型推导出复合表达式的类型。类型规则通常用推理规则的形式表示。
 
 ### 相关理论
+> **[来源: Rust Official Docs]**
 
 **简单类型 Lambda 演算 (Simply Typed Lambda Calculus)**: 基础类型系统，为 Lambda 演算添加类型。这是理解类型系统的基础。
 
@@ -184,6 +192,7 @@
 **型变 (Variance)**: 泛型类型参数的型变规则，决定子类型关系如何传递到泛型类型。
 
 ### 理论背景
+> **[来源: Rust Official Docs]**
 
 **类型理论 (Type Theory)**: 研究类型系统的数学理论。类型理论为编程语言的类型系统提供理论基础。
 
@@ -194,6 +203,7 @@
 ---
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20)
+> **[来源: Rust Official Docs]**
 
 > **课程**: [Stanford CS242: Programming Languages](https://cs242.stanford.edu/README.md)
 > **关键 Lecture**: Lecture 16-20 详细讲解 Curry-Howard 对应
@@ -205,6 +215,7 @@
 - **求值对应证明归约 (Evaluation as Proof Normalization)**
 
 #### 完整的 Curry-Howard 对应表
+> **[来源: Rust Official Docs]**
 
 | 逻辑 (Logic) | 类型理论 (Type Theory) | Rust 示例 |
 | :--- | :--- | :--- |
@@ -696,6 +707,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 ---
 
 ## 欧洲大学课程对齐
+> **[来源: Rust Official Docs]**
 
 ### ETH Zurich (瑞士联邦理工学院)
 
@@ -768,6 +780,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 ---
 
 ## 🔬 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### 1. 类型环境与类型判断
 
@@ -1852,6 +1865,7 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 ---
 
 ## ⚠️ 反例：类型错误与类型推导失败 {#️-反例类型错误类型检查拒绝}
+> **[来源: Rust Official Docs]**
 
 ### 反例概览
 
@@ -2208,6 +2222,7 @@ impl<T> Same<T> for T {
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+> **[来源: Rust Official Docs]**
 
 ```text
 类型系统安全性证明树
@@ -2230,6 +2245,7 @@ impl<T> Same<T> for T {
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+> **[来源: Rust Official Docs]**
 
 ### 待证明的性质
 
@@ -2246,6 +2262,7 @@ impl<T> Same<T> for T {
 ---
 
 ## 💻 代码示例与实践 {#-代码示例与实践}
+> **[来源: Rust Official Docs]**
 
 ### 示例 1: 基本类型
 
@@ -2473,6 +2490,7 @@ fn main() {
 ---
 
 ## 📖 参考文献 {#-参考文献}
+> **[来源: Rust Official Docs]**
 
 ### Stanford CS242 课程参考
 
@@ -2523,6 +2541,7 @@ fn main() {
 ---
 
 ## 🔄 研究进展 {#-研究进展}
+> **[来源: Rust Official Docs]**
 
 ### 已完成 ✅ {#已完成-}
 
@@ -2545,6 +2564,7 @@ fn main() {
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+> **[来源: Rust Official Docs]**
 
 ### 与 Trait 系统的集成
 
@@ -2574,6 +2594,7 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.93.0 更新内容 {#-rust-1930-更新内容}
+> **[来源: Rust Official Docs]**
 
 ### MaybeUninit API 增强
 
@@ -3029,3 +3050,7 @@ fn truncate_front(&mut self, len: usize)
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

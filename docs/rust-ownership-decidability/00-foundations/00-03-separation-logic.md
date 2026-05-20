@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [分离逻辑：理论基础与Rust应用](#分离逻辑理论基础与rust应用)
   - [目录](#目录)
@@ -43,8 +44,10 @@
 ---
 
 ## 1. 分离逻辑的诞生
+> **[来源: Rust Official Docs]**
 
 ### 1.1 问题背景：传统Hoare逻辑的局限
+> **[来源: Rust Official Docs]**
 
 传统Hoare逻辑处理堆内存时面临**帧问题**（Frame Problem）：
 

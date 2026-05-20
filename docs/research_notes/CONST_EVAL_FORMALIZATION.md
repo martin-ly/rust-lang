@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [常量求值形式化](#常量求值形式化)
   - [📋 目录](#-目录)
@@ -32,20 +33,24 @@
       - [相关文档](#相关文档)
 
 ## 1. 常量求值概述
+> **[来源: Rust Official Docs]**
 
 Rust 的常量求值在编译期执行，允许在类型系统和常量定义中使用计算。
 
 ---
 
 ## 2. 形式化定义
+> **[来源: Rust Official Docs]**
 
 ### Def CE-1: 常量上下文
+> **[来源: Rust Official Docs]**
 
 ```text
 常量上下文 := 静态项 | 常量项 | 枚举判别式 | 数组长度 | 类型别名
 ```
 
 ### Def CE-2: 常量求值器
+> **[来源: Rust Official Docs]**
 
 ```text
 Eval_const: Expr × Env → Value + Error
@@ -58,8 +63,10 @@ Eval_const(e, env) =
 ---
 
 ## 3. 常量函数 (const fn)
+> **[来源: Rust Official Docs]**
 
 ### Def CE-3: const fn 约束
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 允许的 const fn 操作
@@ -82,6 +89,7 @@ const fn allowed() {
 ```
 
 ### Def CE-4: 禁止的 const fn 操作
+> **[来源: Rust Official Docs]**
 
 ```rust
 const fn forbidden() {
@@ -102,8 +110,10 @@ const fn forbidden() {
 ---
 
 ## 4. 定理
+> **[来源: Rust Official Docs]**
 
 ### Thm CE-1: 常量求值终止性
+> **[来源: Rust Official Docs]**
 
 **陈述**: 所有常量求值在有限步内终止或报告错误。
 
@@ -114,6 +124,7 @@ const fn forbidden() {
 - 无无限递归类型
 
 ### Thm CE-2: 常量求值确定性
+> **[来源: Rust Official Docs]**
 
 **陈述**: 给定相同输入，常量求值产生相同结果。
 

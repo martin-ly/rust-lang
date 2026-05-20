@@ -11,6 +11,7 @@
 ---
 
 ## 🎯 版本概览
+> **[来源: Rust Official Docs]**
 
 Rust 1.96 主要聚焦于：
 
@@ -22,8 +23,10 @@ Rust 1.96 主要聚焦于：
 ---
 
 ## 🚀 主要候选特性
+> **[来源: Rust Official Docs]**
 
 ### 1. `VecDeque::truncate_front`
+> **[来源: Rust Official Docs]**
 
 `VecDeque` 新增从前部截断的能力，与现有的 `truncate`（从后部截断）对称：
 
@@ -38,6 +41,7 @@ assert_eq!(deque, [4, 5]);
 > **状态**: FCP 已完成，等待合并
 
 ### 2. `int_format_into` — 高效整数格式化
+> **[来源: Rust Official Docs]**
 
 将整数直接格式化为固定大小的栈缓冲区，避免堆分配：
 
@@ -57,6 +61,7 @@ let s = (-99999999i32).format_into(&mut buf);
 > **状态**: 稳定化 PR #152902 推进中，需 FCP
 
 ### 3. `RefCell::try_map` / `RefMut::try_map`
+> **[来源: Rust Official Docs]**
 
 对 `RefCell` 借用 guard 进行条件投影，失败时保留原始 guard：
 

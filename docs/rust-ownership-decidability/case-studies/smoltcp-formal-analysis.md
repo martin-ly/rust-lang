@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Smoltcp嵌入式TCP/IP栈形式化分析](#smoltcp嵌入式tcpip栈形式化分析)
   - [目录](#目录)
@@ -38,6 +39,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Smoltcp是专为嵌入式系统设计的TCP/IP协议栈：
 
@@ -49,6 +51,7 @@ Smoltcp是专为嵌入式系统设计的TCP/IP协议栈：
 ---
 
 ## 2. 协议栈架构形式化
+> **[来源: Rust Official Docs]**
 
 ### 定义 TCP-STACK-1 ( 协议栈组成 )
 

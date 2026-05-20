@@ -10,6 +10,7 @@
 ---
 
 ## 相关文档
+> **[来源: Rust Official Docs]**
 
 | 文档 | 说明 |
 | :--- | :--- |
@@ -20,6 +21,7 @@
 ---
 
 ## 型变概念全景
+> **[来源: Rust Official Docs]**
 
 ```text
                           型变概念族
@@ -48,8 +50,10 @@
 ---
 
 ## 一、三种型变详解
+> **[来源: Rust Official Docs]**
 
 ### 1.1 协变 (Covariant) +
+> **[来源: Rust Official Docs]**
 
 **定义**: 如果`T`是`U`的子类型，那么`C<T>`是`C<U>`的子类型。
 
@@ -86,6 +90,7 @@ let b2: Box<&'a str> = b1;  // OK
 ---
 
 ### 1.2 逆变 (Contravariant) -
+> **[来源: Rust Official Docs]**
 
 **定义**: 如果`T`是`U`的子类型，那么`C<U>`是`C<T>`的子类型（反向）。
 
@@ -120,6 +125,7 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 ---
 
 ### 1.3 不变 (Invariant) =
+> **[来源: Rust Official Docs]**
 
 **定义**: `C<T>`和`C<U>`无关，除非`T = U`。
 
@@ -153,6 +159,7 @@ let mut r1: &mut &'static str = &mut "hello";
 ---
 
 ## 二、型变表
+> **[来源: Rust Official Docs]**
 
 | 类型构造器 | 对T的型变 | 说明 |
 | :--- | :--- | :--- |
@@ -171,8 +178,10 @@ let mut r1: &mut &'static str = &mut "hello";
 ---
 
 ## 三、型变组合规则
+> **[来源: Rust Official Docs]**
 
 ### 函数指针的型变
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn(T) -> U
@@ -186,6 +195,7 @@ fn(T) -> U
 - 返回位置：函数可以"更具体"的返回，使用方也能接受
 
 ### 结构体的型变
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Wrapper<T>(T);
@@ -198,6 +208,7 @@ struct Contravariant<T>(fn(T));
 ---
 
 ## 四、型变的实际影响
+> **[来源: Rust Official Docs]**
 
 ### 影响1: 生命周期子类型
 

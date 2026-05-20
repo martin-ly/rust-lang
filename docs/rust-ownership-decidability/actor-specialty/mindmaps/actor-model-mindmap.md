@@ -1,6 +1,7 @@
 # Actor模型 - 思维导图
 
 ## Mermaid思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -91,6 +92,7 @@ mindmap
 ---
 
 ## Actor模型核心概念图
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -129,6 +131,7 @@ mindmap
 ---
 
 ## 监督树结构图
+> **[来源: Rust Official Docs]**
 
 ```text
 监督树层次结构:

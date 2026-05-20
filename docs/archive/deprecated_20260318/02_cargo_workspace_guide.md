@@ -8,6 +8,8 @@
 ---
 
 ## 📊 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Cargo 工作空间与依赖管理](#cargo-工作空间与依赖管理)
   - [📊 目录](#-目录)
@@ -64,6 +66,8 @@
   - [🆕 Rust 1.94 更新](#-rust-194-更新)
 
 ## 🎯 文档说明
+>
+> **[来源: Rust Official Docs]**
 
 本文档全面介绍 Cargo 工作空间 (Workspace)、依赖管理、以及 Cargo 的最新增强功能，帮助开发者高效管理多 crate 项目。
 
@@ -72,8 +76,12 @@
 ---
 
 ## 1. Cargo 工作空间概览
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Workspace
+>
+> **[来源: Rust Official Docs]**
 
 **定义**: Workspace 是一个包含多个相关 crate 的项目结构，它们共享：
 
@@ -105,6 +113,8 @@ my-workspace/
 ---
 
 ### 1.2 Workspace 优势
+>
+> **[来源: Rust Official Docs]**
 
 1. **依赖版本统一**: 避免版本冲突
 2. **构建缓存共享**: 加速编译
@@ -115,8 +125,12 @@ my-workspace/
 ---
 
 ## 2. 创建和配置 Workspace
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 基础结构
+>
+> **[来源: Rust Official Docs]**
 
 **创建 Workspace**:
 
@@ -145,6 +159,8 @@ cargo new crate-c
 ---
 
 ### 2.2 Workspace 配置
+>
+> **[来源: Rust Official Docs]**
 
 **完整配置示例**:
 
@@ -181,6 +197,8 @@ documentation = "https://docs.example.com"
 ---
 
 ### 2.3 虚拟工作空间
+>
+> **[来源: Rust Official Docs]**
 
 **场景**: 根目录没有 crate，只用于组织子 crate
 
@@ -196,8 +214,12 @@ resolver = "2"
 ---
 
 ## 3. 依赖管理
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 Workspace 依赖 (Rust 1.64+)
+>
+> **[来源: Rust Official Docs]**
 
 **统一依赖版本**:
 
@@ -1664,3 +1686,7 @@ cargo tree -f "{p} {f}"
 - [Rust 1.93 vs 1.94 对比](./17_rust_1.93_vs_1.94_comparison.md)
 
 **最后更新**: 2026-03-14 (添加 1.94 引用)
+
+---
+
+> **权威来源**: Rust Official Docs

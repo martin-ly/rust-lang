@@ -1,6 +1,7 @@
 # 共识算法语义 (Consensus Algorithms Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [共识算法语义 (Consensus Algorithms Semantics)](#共识算法语义-consensus-algorithms-semantics)
   - [目录](#目录)
@@ -23,12 +24,14 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 共识问题是分布式系统最核心的挑战之一，要求多个节点就某个值达成一致。本文档深入分析 Paxos、Raft 等共识算法的形式化语义和 Rust 实现。
 
 ---
 
 ## 2. 共识问题定义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 形式化定义
 

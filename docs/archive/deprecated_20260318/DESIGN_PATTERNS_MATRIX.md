@@ -7,6 +7,7 @@
 ---
 
 ## 创建型模式 (Creational)
+> **[来源: Rust Official Docs]**
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -17,6 +18,7 @@
 | **Prototype** | ⚠️ 受限 | 中 | `Clone` trait | 需要显式实现Clone |
 
 ### Singleton在Rust
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 现代Rust使用std::sync::OnceLock
@@ -34,6 +36,7 @@ fn get_config() -> &'static Config {
 ---
 
 ## 结构型模式 (Structural)
+> **[来源: Rust Official Docs]**
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -46,6 +49,7 @@ fn get_config() -> &'static Config {
 | **Proxy** | ✅ 直接 | 低 | `Deref` / 智能指针 | 标准库已有 |
 
 ### Composite的Rust实现
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用Rc<RefCell>实现父子关系
@@ -70,6 +74,7 @@ impl Node {
 ---
 
 ## 行为型模式 (Behavioral)
+> **[来源: Rust Official Docs]**
 
 | 模式 | Rust表达 | 难度 | 惯用法 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -86,6 +91,7 @@ impl Node {
 | **Visitor** | ⚠️ 受限 | 高 | 枚举匹配 | 缺少双重分发 |
 
 ### State模式Rust风格
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用枚举+方法，而非继承
@@ -113,8 +119,10 @@ impl Document {
 ---
 
 ## 模式对比总结
+> **[来源: Rust Official Docs]**
 
 ### 表达力评估
+> **[来源: Rust Official Docs]**
 
 | 类别 | 直接表达 | 受限表达 | 总计 |
 | :--- | :--- | :--- | :--- |
@@ -126,6 +134,7 @@ impl Document {
 **78%的设计模式在Rust中可以直接表达**。
 
 ### 受限模式分析
+> **[来源: Rust Official Docs]**
 
 | 模式 | 限制原因 | Rust解决方案 |
 | :--- | :--- | :--- |
@@ -138,8 +147,10 @@ impl Document {
 ---
 
 ## Rust独特优势
+> **[来源: Rust Official Docs]**
 
 ### 1. 枚举+模式匹配替代Visitor
+> **[来源: Rust Official Docs]**
 
 ```rust
 // Rust风格：枚举+match

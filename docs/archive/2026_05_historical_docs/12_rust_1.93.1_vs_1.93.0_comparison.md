@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93.1 vs 1.93.0 补丁版本对比分析](#rust-1931-vs-1930-补丁版本对比分析)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 版本概览
+> **[来源: Rust Official Docs]**
 
 | 项目 | 1.93.0 | 1.93.1 |
 | :--- | :--- | :--- |
@@ -49,8 +51,10 @@
 ---
 
 ## 1.93.1 修复内容
+> **[来源: Rust Official Docs]**
 
 ### 1. 编译器 ICE 修复（关键词恢复）
+> **[来源: Rust Official Docs]**
 
 **问题**：编译器在尝试将关键字恢复为非关键字标识符时触发内部编译器错误（ICE），**尤其影响 rustfmt**。
 
@@ -68,6 +72,7 @@
 ---
 
 ### 2. Clippy 误报修复（panicking_unwrap）
+> **[来源: Rust Official Docs]**
 
 **问题**：`clippy::panicking_unwrap` 在**带隐式解引用的字段访问**场景下产生误报。
 
@@ -94,6 +99,7 @@ fn example(w: Wrapper) {
 ---
 
 ### 3. WASM wasm32-wasip2 文件描述符泄漏修复
+> **[来源: Rust Official Docs]**
 
 **问题**：1.93.0 对 wasm 相关依赖的更新导致 **wasm32-wasip2** 目标上出现**文件描述符泄漏**。
 
@@ -110,8 +116,10 @@ fn example(w: Wrapper) {
 ---
 
 ## 形式化分析
+> **[来源: Rust Official Docs]**
 
 ### 类型系统与语义
+> **[来源: Rust Official Docs]**
 
 | 维度 | 1.93.0→1.93.1 变更 | 形式化文档 |
 | :--- | :--- | :--- |
@@ -124,6 +132,7 @@ fn example(w: Wrapper) {
 **结论**：1.93.1 不改变任何形式化语义，所有定理（T1–T3、CE-T1–T3 等）在 1.93.0 与 1.93.1 下等价。
 
 ### 工具链与验证
+> **[来源: Rust Official Docs]**
 
 | 工具 | 1.93.0 问题 | 1.93.1 修复 |
 | :--- | :--- | :--- |
@@ -135,8 +144,10 @@ fn example(w: Wrapper) {
 ---
 
 ## 迁移建议
+> **[来源: Rust Official Docs]**
 
 ### 升级步骤
+> **[来源: Rust Official Docs]**
 
 ```bash
 rustup update stable

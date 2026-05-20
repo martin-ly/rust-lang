@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RefinedRust: 高保证验证的类型系统](#refinedrust-高保证验证的类型系统)
   - [目录](#目录)
@@ -43,6 +44,7 @@
 ---
 
 ## 摘要
+> **[来源: Rust Official Docs]**
 
 RefinedRust 是一个用于高保证验证 Rust 程序的类型系统，结合了：
 
@@ -55,6 +57,7 @@ RefinedRust 在 Rust 的 MIR（Mid-level Intermediate Representation）上工作
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 动机
 

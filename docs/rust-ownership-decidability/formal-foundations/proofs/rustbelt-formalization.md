@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [RustBelt形式化模型](#rustbelt形式化模型)
   - [目录](#目录)
@@ -54,8 +55,10 @@
 ---
 
 ## 1. 概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是RustBelt
+> **[来源: Rust Official Docs]**
 
 **RustBelt** 是第一个对Rust进行**机器检验**的形式化验证项目，由MPI-SWS的研究人员在2018年POPL会议上发表。
 

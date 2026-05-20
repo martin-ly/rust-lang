@@ -5,8 +5,10 @@
 ---
 
 ## 1. Actor模型基本定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 ACTOR-SYSTEM-1: Actor系统
@@ -22,6 +24,7 @@
 ```
 
 ### 1.2 Actor转换规则
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 ACTOR-TRANSITION:

@@ -3,6 +3,7 @@
 本目录包含 Rust 所有权系统的语义定义文档。
 
 ## 文件列表
+> **[来源: Rust Official Docs]**
 
 | 文件 | 描述 |
 |------|------|
@@ -14,6 +15,7 @@
 | [mechanized-proofs.md](mechanized-proofs.md) | 机械化证明 |
 
 ## 相关目录
+> **[来源: Rust Official Docs]**
 
 - [形式化模型](../models/README.md) - 所有权类型和借用模型
 - [证明](../proofs/README.md) - 形式化证明和定理

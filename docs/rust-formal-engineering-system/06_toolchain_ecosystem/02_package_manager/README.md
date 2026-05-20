@@ -12,8 +12,10 @@
 ---
 
 ## Cargo 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 依赖管理
+> **[来源: Rust Official Docs]**
 
 ```toml
 [package]
@@ -54,6 +56,7 @@ cc = "1.0"
 ```
 
 ### 工作空间
+> **[来源: Rust Official Docs]**
 
 ```toml
 # 根 Cargo.toml

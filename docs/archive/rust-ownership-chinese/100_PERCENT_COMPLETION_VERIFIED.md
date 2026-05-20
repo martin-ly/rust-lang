@@ -7,8 +7,10 @@
 ---
 
 ## 📊 测试验证结果
+> **[来源: Rust Official Docs]**
 
 ### 测试结果摘要
+> **[来源: Rust Official Docs]**
 
 ```text
 测试套件                        通过    失败    总计
@@ -23,6 +25,7 @@
 ```
 
 ### 详细测试列表
+> **[来源: Rust Official Docs]**
 
 #### ✅ 单元测试 (30)
 

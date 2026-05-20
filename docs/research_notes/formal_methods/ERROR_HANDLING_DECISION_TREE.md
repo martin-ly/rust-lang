@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 错误处理决策树](#rust-错误处理决策树)
   - [目录](#目录)
@@ -77,6 +78,7 @@
 ---
 
 ## 决策树总览
+> **[来源: Rust Official Docs]**
 
 ```text
                     ┌─────────────────────────────────────┐
@@ -115,8 +117,10 @@
 ---
 
 ## 决策维度详解
+> **[来源: Rust Official Docs]**
 
 ### 维度 1: 错误类型 - 可恢复 vs 不可恢复
+> **[来源: Rust Official Docs]**
 
 | 特征 | 可恢复错误 | 不可恢复错误 |
 | :--- | :--- | :--- |
@@ -133,6 +137,7 @@
 ---
 
 ### 维度 2: 错误传播范围
+> **[来源: Rust Official Docs]**
 
 ```text
 传播范围决策流程:
@@ -164,6 +169,7 @@
 ```
 
 #### 2.1 本地处理场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐方式 | 示例 |
 | :--- | :--- | :--- |
@@ -172,6 +178,7 @@
 | 可选字段 | `Option` + `if let` | `if let Some(name) = user.nickname { ... }` |
 
 #### 2.2 错误传播场景
+> **[来源: Rust Official Docs]**
 
 | 边界类型 | 传播方式 | 注意事项 |
 | :--- | :--- | :--- |
@@ -185,6 +192,7 @@
 ---
 
 ### 维度 3: 错误处理策略
+> **[来源: Rust Official Docs]**
 
 ```text
 ┌──────────────────────────────────────────────────────────────┐
@@ -203,6 +211,7 @@
 ```
 
 #### 策略选择矩阵
+> **[来源: Rust Official Docs]**
 
 | 错误特征 | 立即处理 | 传播 | 重试 | 降级 | 典型场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -214,6 +223,7 @@
 | 内部 Bug | ❌ | ❌ | ❌ | ❌ | `panic` |
 
 #### 3.1 重试策略决策
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 重试决策树
@@ -242,6 +252,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 ```
 
 #### 3.2 降级策略
+> **[来源: Rust Official Docs]**
 
 | 服务状态 | 降级策略 | 示例 |
 | :--- | :--- | :--- |
@@ -303,6 +314,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 ---
 
 ## 对比分析
+> **[来源: Rust Official Docs]**
 
 ### Result vs Option vs panic
 
@@ -630,6 +642,7 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 ---
 
 ## 最佳实践
+> **[来源: Rust Official Docs]**
 
 ### 1. 错误类型设计模式
 
@@ -1023,6 +1036,7 @@ async fn test_circuit_breaker() {
 ---
 
 ## 反模式警示
+> **[来源: Rust Official Docs]**
 
 ### ❌ 反模式 1: 滥用 `unwrap()`
 
@@ -1245,6 +1259,7 @@ enum LazyError {
 ---
 
 ## 代码示例
+> **[来源: Rust Official Docs]**
 
 ### 完整示例 1: 分层错误处理架构
 
@@ -2283,6 +2298,7 @@ mod examples {
 ---
 
 ## 附录
+> **[来源: Rust Official Docs]**
 
 ### A. 快速决策参考表
 
@@ -2319,6 +2335,7 @@ mod examples {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -2364,3 +2381,7 @@ mod examples {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

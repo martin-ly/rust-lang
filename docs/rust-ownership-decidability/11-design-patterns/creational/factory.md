@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 工厂模式定义一个创建对象的接口，让子类决定实例化哪个类。工厂方法使类的实例化延迟到子类。
 
 ---
 
 ## 基础实现
+> **[来源: Rust Official Docs]**
 
 ### 简单工厂
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub trait Animal {

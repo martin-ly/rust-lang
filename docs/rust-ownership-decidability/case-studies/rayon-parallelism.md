@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rayon并行计算形式化分析](#rayon并行计算形式化分析)
   - [目录](#目录)
@@ -55,6 +56,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Rayon是一个数据并行库，允许将串行迭代器转换为并行迭代器：
 
@@ -75,6 +77,7 @@ let sum: i32 = data.par_iter().map(|x| x * x).sum();
 ---
 
 ## 2. Fork-Join模型形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 计算DAG
 

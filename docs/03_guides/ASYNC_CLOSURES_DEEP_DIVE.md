@@ -7,6 +7,7 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn` trait 家族，这是 Rust 异步编程生态的里程碑式进展。在此之前，Rust 开发者只能使用 `async move || {}` 形式的异步闭包，它们在类型系统和trait边界方面存在诸多限制。
 
@@ -17,8 +18,10 @@ Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn`
 ---
 
 ## 一、历史背景：为什么需要 AsyncFn？
+> **[来源: Rust Official Docs]**
 
 ### 1.1 旧时代的困境
+> **[来源: Rust Official Docs]**
 
 在 Rust 1.95 之前，传递异步逻辑的唯一方式是 `impl Fn() -> impl Future`：
 

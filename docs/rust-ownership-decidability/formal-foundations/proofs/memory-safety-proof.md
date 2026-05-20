@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust内存安全性形式化证明](#rust内存安全性形式化证明)
   - [目录](#目录)
@@ -38,8 +39,10 @@
 ---
 
 ## 1. 形式化设置
+> **[来源: Rust Official Docs]**
 
 ### 1.1 λRust核心语言
+> **[来源: Rust Official Docs]**
 
 **语法定义**:
 

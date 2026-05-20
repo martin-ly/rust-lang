@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [tarpc RPC框架形式化分析](#tarpc-rpc框架形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 tarpc提供:
 
@@ -40,6 +42,7 @@ tarpc提供:
 ---
 
 ## 2. 服务定义
+> **[来源: Rust Official Docs]**
 
 ### 定义 2.1 (Service Trait)
 

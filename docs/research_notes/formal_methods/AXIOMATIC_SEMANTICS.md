@@ -9,6 +9,7 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 公理语义通过逻辑公理和推理规则来描述程序行为，是形式化验证的基础。
 本文档建立Rust语言的公理语义框架，包括霍尔逻辑、最弱前置条件和最强后置条件。
@@ -16,8 +17,10 @@
 ---
 
 ## 一、霍尔逻辑 (Hoare Logic)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 基本概念
+> **[来源: Rust Official Docs]**
 
 **霍尔三元组**: `{P} C {Q}`
 
@@ -28,6 +31,7 @@
 **含义**: 如果P在C执行前成立，且C终止，则Q在C执行后成立。
 
 ### 1.2 推理规则
+> **[来源: Rust Official Docs]**
 
 **空语句**:
 
@@ -70,6 +74,7 @@
 ```
 
 ### 1.3 衍生规则
+> **[来源: Rust Official Docs]**
 
 **强化前置条件**:
 
@@ -106,8 +111,10 @@ P' → P    {P} C {Q}
 ---
 
 ## 二、最弱前置条件 (Weakest Precondition)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 定义
+> **[来源: Rust Official Docs]**
 
 **wp(C, Q)**: 使命令C执行后Q成立的最弱(最一般)条件
 
@@ -119,6 +126,7 @@ P' → P    {P} C {Q}
 ```
 
 ### 2.2 计算规则
+> **[来源: Rust Official Docs]**
 
 **空语句**:
 
@@ -153,6 +161,7 @@ wp(while b do C, Q) = μZ. (¬b → Q) ∧ (b → wp(C, Z))
 ```
 
 ### 2.3 在Rust中的应用
+> **[来源: Rust Official Docs]**
 
 **所有权转移**:
 
@@ -179,8 +188,10 @@ wp(let r = &x, Q) = ∃v. x ↦ v * Q[&x/r]
 ---
 
 ## 三、最强后置条件 (Strongest Postcondition)
+> **[来源: Rust Official Docs]**
 
 ### 3.1 定义
+> **[来源: Rust Official Docs]**
 
 **sp(P, C)**: 从条件P出发，执行C后成立的最强(最具体)条件
 

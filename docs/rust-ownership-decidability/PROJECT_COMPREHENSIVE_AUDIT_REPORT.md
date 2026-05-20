@@ -7,6 +7,7 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 | 指标 | 数值 | 评级 |
 |------|------|------|
@@ -20,8 +21,10 @@
 ---
 
 ## 一、项目结构分析
+> **[来源: Rust Official Docs]**
 
 ### 1.1 目录结构完整性
+> **[来源: Rust Official Docs]**
 
 ```
 docs/rust-ownership-decidability/

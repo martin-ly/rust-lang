@@ -5,6 +5,7 @@
 ---
 
 ## 🎯 所有权三原则
+> **[来源: Rust Official Docs]**
 
 ```rust
 1. 唯一性     // 每个值有且仅有一个所有者
@@ -15,6 +16,7 @@
 ---
 
 ## 🔄 借用规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 不可变借用: 多个 &T 同时存在
@@ -32,6 +34,7 @@ let r = &mut data;  // OK
 ---
 
 ## ⏱️ 生命周期规则
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 编译器自动推断 (省略规则)

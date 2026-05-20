@@ -6,8 +6,10 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已归档
 ## ⚡ 3 步解决所有拼写错误
+> **[来源: Rust Official Docs]**
 
 ### 第 1 步: 安装扩展（如果未安装）
+> **[来源: Rust Official Docs]**
 
 在 VS Code 中：
 
@@ -16,6 +18,7 @@ Ctrl+Shift+X → 搜索 "Code Spell Checker" → 安装
 ```
 
 ### 第 2 步: 重新加载 VS Code
+> **[来源: Rust Official Docs]**
 
 ```text
 Ctrl+Shift+P → 输入 "Reload Window" → 回车

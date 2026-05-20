@@ -12,6 +12,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
   - [目录](#目录)
@@ -42,8 +43,10 @@
 ---
 
 ## 1. 所有权 (Ownership)
+> **[来源: Rust Official Docs]**
 
 ### 概念定义
+> **[来源: Rust Official Docs]**
 
 所有权是 Rust 最核心、最独特的语言特性。每个值在任意时刻有且仅有一个**所有者 (owner)**，当所有者离开作用域时，值被**丢弃 (drop)**。
 
@@ -55,12 +58,14 @@
 ```
 
 ### 所有权规则
+> **[来源: Rust Official Docs]**
 
 1. 每个值有一个所有者
 2. 同一时间只能有一个所有者
 3. 所有者离开作用域，值被丢弃
 
 ### 移动语义 (Move Semantics)
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s1 = String::from("hello");
@@ -69,6 +74,7 @@ let s2 = s1; // s1 的所有权移动到 s2
 ```
 
 ### Copy 类型
+> **[来源: Rust Official Docs]**
 
 实现 `Copy` trait 的类型在赋值时**复制**而非**移动**：
 
@@ -88,8 +94,10 @@ println!("x = {}, y = {}", x, y); // ✅
 ---
 
 ## 2. 借用与引用 (Borrowing & References)
+> **[来源: Rust Official Docs]**
 
 ### 概念定义
+> **[来源: Rust Official Docs]**
 
 **借用 (Borrowing)** 允许在不转移所有权的情况下临时访问数据。
 
@@ -104,6 +112,7 @@ println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 ```
 
 ### 借用规则
+> **[来源: Rust Official Docs]**
 
 1. **任意数量**的不可变引用 (`&T`)
 2. **仅一个**可变引用 (`&mut T`)
@@ -123,6 +132,7 @@ r3.push_str(" world");
 ```
 
 ### 悬垂引用防护
+> **[来源: Rust Official Docs]**
 
 Rust 编译器确保引用永远不会比被引用的数据活得更长：
 
@@ -136,6 +146,7 @@ fn dangle() -> &String { // ❌ 编译错误
 ---
 
 ## 3. 生命周期 (Lifetimes)
+> **[来源: Rust Official Docs]**
 
 ### 概念定义
 

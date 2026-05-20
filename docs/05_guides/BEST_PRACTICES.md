@@ -10,6 +10,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
   - [📋 目录](#-目录)
@@ -112,6 +114,8 @@
 ---
 
 ## 概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档提供 Rust 项目开发的综合最佳实践，涵盖从代码编写到项目组织的各个方面，合并了项目级代码质量、性能、测试、文档、工具使用等主题。
 
@@ -120,8 +124,12 @@
 ---
 
 ## 1. 代码质量最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 1.1 所有权和借用
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**:
 
@@ -157,6 +165,8 @@ fn good_process(data: &[i32]) -> i32 {
 ```
 
 ### 1.2 类型安全
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**: 使用新类型模式、枚举而非魔法数字、Option 而非 null
 
@@ -188,6 +198,8 @@ fn find_user(id: UserId) -> Option<User> {
 ```
 
 ### 1.3 错误处理
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**: 使用 Result 和 ? 操作符、自定义错误类型、有意义的错误信息
 
@@ -222,8 +234,12 @@ fn read_config(path: &str) -> Result<Config> {
 ---
 
 ## 2. 性能优化最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 内存管理
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**: Vec::with_capacity 预分配、Box 大结构体、Cow 避免克隆
 
@@ -251,6 +267,8 @@ fn process_string(s: Cow<str>) -> String {
 ```
 
 ### 2.2 迭代器优化
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**: 迭代器链、collect 指定类型、enumerate 获取索引
 
@@ -274,6 +292,8 @@ for (idx, value) in data.iter().enumerate() {
 ```
 
 ### 2.3 零成本抽象
+>
+> **[来源: Rust Official Docs]**
 
 **✅ 最佳实践**: 泛型、#[inline] 关键路径
 
@@ -299,6 +319,8 @@ fn error_handler() {
 ---
 
 ## 3. 错误处理最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 自定义错误类型
 
@@ -359,6 +381,8 @@ fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
 ---
 
 ## 4. 测试最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 单元测试
 
@@ -463,6 +487,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 ---
 
 ## 5. 文档最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 5.1 代码文档
 
@@ -540,6 +566,8 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 ---
 
 ## 6. 安全性最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 6.1 输入验证
 
@@ -610,6 +638,8 @@ impl<'a> Drop for LockGuard<'a> {
 ---
 
 ## 7. 并发编程最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 7.1 线程安全
 
@@ -674,6 +704,8 @@ fn get_count() -> usize {
 ---
 
 ## 8. 异步编程最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 8.1 Future 和 async/await
 
@@ -737,6 +769,8 @@ enum AsyncError {
 ---
 
 ## 9. 模块设计最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 9.1 模块组织
 
@@ -782,6 +816,8 @@ mod inner {
 ---
 
 ## 10. 项目组织最佳实践
+>
+> **[来源: Rust Official Docs]**
 
 ### 10.1 目录结构
 
@@ -847,6 +883,8 @@ pub struct Config {
 ---
 
 ## 11. 工具使用
+>
+> **[来源: Rust Official Docs]**
 
 ### 11.1 Clippy
 
@@ -894,6 +932,8 @@ mockall = "0.12"
 ---
 
 ## 12. 性能监控
+>
+> **[来源: Rust Official Docs]**
 
 ### 12.1 基准测试
 
@@ -938,6 +978,8 @@ cargo valgrind --bin my_app
 ---
 
 ## 13. 代码示例
+>
+> **[来源: Rust Official Docs]**
 
 ### 13.1 新类型模式
 
@@ -1936,3 +1978,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

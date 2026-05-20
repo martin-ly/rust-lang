@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Notify 文件监控形式化分析](#notify-文件监控形式化分析)
   - [目录](#目录)
@@ -26,6 +27,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 notify提供:
 
@@ -37,6 +39,7 @@ notify提供:
 ---
 
 ## 2. 后端抽象
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (平台后端)
 

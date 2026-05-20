@@ -1,6 +1,7 @@
 # Rust 所有权系统 Coq 形式化
 
 ## 项目结构
+> **[来源: Rust Official Docs]**
 
 ```text
 coq-formalization/
@@ -51,8 +52,10 @@ coq-formalization/
 ```
 
 ## 构建说明
+> **[来源: Rust Official Docs]**
 
 ### 依赖
+> **[来源: Rust Official Docs]**
 
 - Coq 8.17 或更高版本
 - Mathematical Components (MathComp) 可选

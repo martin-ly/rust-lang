@@ -1,14 +1,17 @@
 # 部署与维护指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键系统的部署、运维和长期维护的最佳实践。
 
 ---
 
 ## 1. 部署策略
+> **[来源: Rust Official Docs]**
 
 ### 1.1 部署流程
+> **[来源: Rust Official Docs]**
 
 ```
 预部署检查:
@@ -38,6 +41,7 @@
 ```
 
 ### 1.2 零停机部署
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 双分区OTA更新示例
@@ -96,8 +100,10 @@ impl DualPartitionManager {
 ---
 
 ## 2. 监控和遥测
+> **[来源: Rust Official Docs]**
 
 ### 2.1 运行时监控
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 健康监控系统
@@ -155,6 +161,7 @@ impl HealthMonitor {
 ```
 
 ### 2.2 日志管理
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 结构化日志记录
@@ -217,8 +224,10 @@ impl SecureLogger {
 ---
 
 ## 3. 故障管理
+> **[来源: Rust Official Docs]**
 
 ### 3.1 故障检测
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 故障检测系统
@@ -278,6 +287,7 @@ impl FaultDetectionAlgorithm for DriftDetector {
 ```
 
 ### 3.2 故障响应
+> **[来源: Rust Official Docs]**
 
 ```rust
 //! 故障响应自动化
@@ -329,6 +339,7 @@ impl FaultResponseSystem {
 ---
 
 ## 4. 维护流程
+> **[来源: Rust Official Docs]**
 
 ### 4.1 预防性维护
 

@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
   - [📋 目录](#-目录)
@@ -49,10 +50,12 @@
 ---
 
 ## 🎯 概述
+> **[来源: Rust Official Docs]**
 
 Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表达式**，超越了简单的整数常量。
 
 ### 为什么需要这个特性？
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 当前限制: 只能使用简单的常量参数
@@ -72,8 +75,10 @@ where
 ---
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **Generic Const Expressions** 扩展了 `const generics` 的能力，允许在泛型参数的 `where` 子句中使用**常量表达式**（如 `N * M`、`1 << N`）。
 

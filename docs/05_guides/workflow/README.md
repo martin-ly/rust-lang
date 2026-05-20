@@ -8,15 +8,21 @@
 ---
 
 ## 概述
+>
+> **[来源: Rust Official Docs]**
 
 本目录包含工作流理论与模型的相关文档。
 
 ## 包含内容
+>
+> **[来源: Rust Official Docs]**
 
 - [工作流理论](01_workflow_theory.md) - 工作流理论基础
-- [工作流模型](05_workflow_models.md) - 工作流模型实践
+- `05_workflow_models.md` - 工作流模型实践 (文件已重构)
 
 ## 相关链接
+>
+> **[来源: Rust Official Docs]**
 
 - [返回上级目录](../README.md)
 - [项目文档主页](../../README.md)

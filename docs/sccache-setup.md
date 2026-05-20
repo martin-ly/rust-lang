@@ -3,6 +3,7 @@
 本文档说明如何在项目中配置和使用 sccache 来加速 Rust 编译。
 
 ## 什么是 sccache?
+> **[来源: Rust Official Docs]**
 
 `sccache` 是 Mozilla 开发的编译缓存工具，支持:
 
@@ -11,8 +12,10 @@
 - **CI/CD 集成**: GitHub Actions 原生支持
 
 ## 安装
+> **[来源: Rust Official Docs]**
 
 ### 方式 1: 使用 cargo 安装 (推荐)
+> **[来源: Rust Official Docs]**
 
 ```bash
 cargo install sccache --locked

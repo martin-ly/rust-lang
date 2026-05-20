@@ -8,6 +8,7 @@
 ---
 
 ## 证明技术全景
+> **[来源: Rust Official Docs]**
 
 ```text
                         证明技术概念族
@@ -32,8 +33,10 @@
 ---
 
 ## 一、归纳法家族
+> **[来源: Rust Official Docs]**
 
 ### 1.1 结构归纳法 (Structural Induction)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 对归纳定义的数据类型（如表达式、类型）进行证明
 
@@ -57,6 +60,7 @@ Theorem expr_induction :
 - T-BR1: 对借用生命周期进行归纳
 
 ### 1.2 数学归纳法 (Mathematical Induction)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 自然数性质证明
 
@@ -75,6 +79,7 @@ Theorem nat_induction :
 - 证明迭代次数相关的性质
 
 ### 1.3 良基归纳法 (Well-Founded Induction)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 递归函数终止性证明
 
@@ -87,8 +92,10 @@ Theorem nat_induction :
 ---
 
 ## 二、构造法家族
+> **[来源: Rust Official Docs]**
 
 ### 2.1 存在构造 (Existential Construction)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 证明存在性命题
 
@@ -103,6 +110,7 @@ Qed.
 ```
 
 ### 2.2 Witness构造
+> **[来源: Rust Official Docs]**
 
 **在分离逻辑中的应用**:
 
@@ -117,8 +125,10 @@ Lemma alloc_spec :
 ---
 
 ## 三、反证法家族
+> **[来源: Rust Official Docs]**
 
 ### 3.1 归谬法 (Proof by Contradiction)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 否定性质证明
 
@@ -136,6 +146,7 @@ Qed.
 ```
 
 ### 3.2 对角线法 (Diagonalization)
+> **[来源: Rust Official Docs]**
 
 **适用场景**: 不可判定性证明
 

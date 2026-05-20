@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust CLI 工具开发完整指南](#rust-cli-工具开发完整指南)
   - [目录](#目录)
@@ -100,8 +101,10 @@
 ---
 
 ## 1. CLI 工具概述
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 在 CLI 领域的优势
+> **[来源: Rust Official Docs]**
 
 Rust 已成为构建命令行工具的首选语言之一，这并非偶然。以下是 Rust 在 CLI 开发中的核心优势：
 

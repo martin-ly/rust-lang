@@ -10,6 +10,7 @@
 ---
 
 ## Table of Contents
+> **[来源: Rust Official Docs]**
 
 - [Async Patterns: Formal Semantics and Ownership Analysis](#async-patterns-formal-semantics-and-ownership-analysis)
   - [Table of Contents](#table-of-contents)
@@ -54,8 +55,10 @@
 ---
 
 ## 1. Introduction
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Formal Definition of Async/Await Semantics
+> **[来源: Rust Official Docs]**
 
 Async Rust introduces a computational model based on **cooperative multitasking** with explicit suspend points. Unlike threads which are preemptively scheduled by the OS, async tasks yield control at well-defined await points.
 

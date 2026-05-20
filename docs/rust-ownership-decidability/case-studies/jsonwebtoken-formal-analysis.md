@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [jsonwebtoken JWT形式化分析](#jsonwebtoken-jwt形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 jsonwebtoken提供:
 
@@ -40,6 +42,7 @@ jsonwebtoken提供:
 ---
 
 ## 2. Token结构
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (JWT三段式)
 

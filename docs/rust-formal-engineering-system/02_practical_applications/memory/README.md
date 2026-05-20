@@ -7,6 +7,7 @@
 > 内容已整合至： memory_analysis.md (研究笔记)
 
 ## 知识结构思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -30,6 +31,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+> **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -41,6 +43,7 @@ mindmap
 ---
 
 ## Rust 内存管理模型
+> **[来源: Rust Official Docs]**
 
 ### 所有权驱动的内存管理
 

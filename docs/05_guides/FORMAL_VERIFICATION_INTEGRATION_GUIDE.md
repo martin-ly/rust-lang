@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [形式化验证整合指南](#形式化验证整合指南)
   - [📋 目录](#-目录)
@@ -30,6 +32,8 @@
 ---
 
 ## 🎯 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍如何在 Rust 项目中整合形式化验证工具，确保代码的内存安全、功能正确性和并发安全。
 
@@ -50,10 +54,14 @@
 ---
 
 ## 🧪 Miri - 内存安全验证
+>
+> **[来源: Rust Official Docs]**
 
 Miri 是 Rust 的解释器，可以检测未定义行为（UB）。
 
 ### Tree Borrows 模式
+>
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 使用 Tree Borrows（推荐）
@@ -67,6 +75,8 @@ MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers" cargo miri test
 ```
 
 ### 代码示例
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // tests/miri_tests.rs
@@ -110,6 +120,8 @@ fn test_tree_borrows_self_referential() {
 ```
 
 ### CI/CD 集成
+>
+> **[来源: Rust Official Docs]**
 
 ```yaml
 # .github/workflows/miri.yml
@@ -137,10 +149,14 @@ jobs:
 ---
 
 ## 🔍 Kani - 模型检查
+>
+> **[来源: Rust Official Docs]**
 
 Kani 是 Rust 的模型检查器，用于验证属性。
 
 ### 基础验证
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 使用 Kani 验证属性
@@ -172,6 +188,8 @@ mod verification {
 ```
 
 ### 高级特性
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 验证 Unsafe 代码
@@ -236,10 +254,14 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 ---
 
 ## 📐 Prusti - 契约编程
+>
+> **[来源: Rust Official Docs]**
 
 Prusti 使用分离逻辑验证 Rust 代码。
 
 ### 前置/后置条件
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use prusti_contracts::*;

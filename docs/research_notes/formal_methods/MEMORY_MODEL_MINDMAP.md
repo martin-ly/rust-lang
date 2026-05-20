@@ -8,6 +8,7 @@
 ---
 
 ## 内存模型全景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -143,8 +144,10 @@ mindmap
 ---
 
 ## 内存区域详解
+> **[来源: Rust Official Docs]**
 
 ### 栈 vs 堆
+> **[来源: Rust Official Docs]**
 
 | 特性 | Stack | Heap |
 | :--- | :--- | :--- |
@@ -156,6 +159,7 @@ mindmap
 | 适用 | 小对象、已知大小 | 大对象、动态大小、长生命周期 |
 
 ### 内存布局示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 栈分配
@@ -173,8 +177,10 @@ static GLOBAL: i32 = 42;     // 静态区:4字节
 ---
 
 ## 所有权与内存管理
+> **[来源: Rust Official Docs]**
 
 ### 所有权转移的内存视角
+> **[来源: Rust Official Docs]**
 
 ```rust
 let s1 = String::from("hello");  // 堆分配 "hello"
@@ -187,6 +193,7 @@ let n2 = n1;    // Copy类型，栈值复制
 ```
 
 ### Drop trait与资源释放
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Drop {
@@ -204,6 +211,7 @@ struct Resource {
 ---
 
 ## 借用规则形式化
+> **[来源: Rust Official Docs]**
 
 ```text
 在给定作用域内:
@@ -220,8 +228,10 @@ struct Resource {
 ---
 
 ## 智能指针详解
+> **[来源: Rust Official Docs]**
 
 ### 使用场景决策
+> **[来源: Rust Official Docs]**
 
 | 需求 | 选择 | 原因 |
 | :--- | :--- | :--- |
@@ -233,6 +243,7 @@ struct Resource {
 | 延迟初始化 | `LazyCell<T>` | 首次访问初始化 |
 
 ### 性能对比
+> **[来源: Rust Official Docs]**
 
 | 智能指针 | 分配开销 | 访问开销 | 释放开销 |
 | :--- | :--- | :--- | :--- |

@@ -11,13 +11,16 @@
 ---
 
 ## Deep Dive Documentation (COMPLETED)
+> **[来源: Rust Official Docs]**
 
 ### Async Patterns
+> **[来源: Rust Official Docs]**
 
 - Status: ✅ COMPLETE (3,819 lines, 14 counter-examples, 5 theorems)
 - File: 12-concurrency-patterns/12-05-async-patterns-deep.md
 
 ### Actor Model
+> **[来源: Rust Official Docs]**
 
 - Status: ✅ COMPLETE (1,805 lines, 8 counter-examples, 10 theorems)
 - File: actor-specialty/ACTOR_MODEL_DEEP_DIVE.md

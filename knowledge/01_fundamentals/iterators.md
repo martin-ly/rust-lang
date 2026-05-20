@@ -9,6 +9,7 @@
 > **权威来源对齐变更日志**: 2026-05-19 新增 array_windows 与 next_if 的来源标注、Iterator  trait 形式化语义引用 [来源: Authority Source Sprint Batch 8]
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
 
@@ -18,18 +19,21 @@
 - [ ] 在实际问题中应用这些特性
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 - 基础 Rust 语法
 - 理解切片和数组
 - 了解闭包基础
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 1. array_windows - 滑动窗口迭代
 
 `array_windows` 是 Rust 1.96 引入的新方法 [来源: Rust 1.96 Release Notes / 2026; RFC 关于数组窗口迭代的设计决策; 核心语义: 在数组/切片上以固定大小的窗口进行迭代，返回 `[[T; N]]` 类型的窗口，编译期确定窗口大小 `N`]，用于在数组/切片上以固定大小的窗口进行迭代。
 
 #### 1.1 基础用法
+> **[来源: Rust Official Docs]**
 
 ```rust
 fn main() {
@@ -43,6 +47,7 @@ fn main() {
 ```
 
 #### 1.2 与 `windows` 的对比
+> **[来源: Rust Official Docs]**
 
 | 特性 | `array_windows<N>()` | `windows(n)` |
 |------|---------------------|--------------|

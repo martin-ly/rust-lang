@@ -7,8 +7,10 @@
 ---
 
 ## 1. 概念定义 (Def)
+> **[来源: Rust Official Docs]**
 
 ### Def LT1: 长事务 (Long-Running Transaction, LRT)
+> **[来源: Rust Official Docs]**
 
 长事务是一种**跨越长时间周期的事务**，无法使用传统 ACID 事务的短周期锁定机制。
 
@@ -22,6 +24,7 @@ LRT := (T, P, C, timeout)
 ```
 
 ### Def LT2: 持久化点
+> **[来源: Rust Official Docs]**
 
 ```
 PersistencePoint := (checkpoint_id, state_snapshot, timestamp)
@@ -31,6 +34,7 @@ PersistencePoint := (checkpoint_id, state_snapshot, timestamp)
 ```
 
 ### Def LT3: 事务状态
+> **[来源: Rust Official Docs]**
 
 ```
 LRT_Status :=
@@ -45,8 +49,10 @@ LRT_Status :=
 ---
 
 ## 2. 基本假设 (Axiom)
+> **[来源: Rust Official Docs]**
 
 ### Axiom LT1: 持久化可靠性
+> **[来源: Rust Official Docs]**
 
 ```
 Persisted(p) → RecoverableFrom(p)
@@ -55,6 +61,7 @@ Persisted(p) → RecoverableFrom(p)
 持久化后，可从该点恢复。
 
 ### Axiom LT2: 补偿完备性
+> **[来源: Rust Official Docs]**
 
 ```
 ∀tᵢ ∈ T. ∃cᵢ. comp(cᵢ, tᵢ) = identity
@@ -63,6 +70,7 @@ Persisted(p) → RecoverableFrom(p)
 每个子事务有可补偿操作。
 
 ### Axiom LT3: 超时终止
+> **[来源: Rust Official Docs]**
 
 ```
 elapsed_time > timeout → LRT_Status = Timeout
@@ -73,8 +81,10 @@ elapsed_time > timeout → LRT_Status = Timeout
 ---
 
 ## 3. 定理 (Theorem)
+> **[来源: Rust Official Docs]**
 
 ### Theorem LT1: 故障可恢复性
+> **[来源: Rust Official Docs]**
 
 ```
 ∀failure_point. ∃p ∈ P. p < failure_point ∧ RecoverableFrom(p)
@@ -88,6 +98,7 @@ elapsed_time > timeout → LRT_Status = Timeout
 4. 因此事务可恢复
 
 ### Theorem LT2: 最终一致性
+> **[来源: Rust Official Docs]**
 
 ```
 LRT → ◇(Completed ∨ Compensated)

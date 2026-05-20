@@ -1,6 +1,7 @@
 # Rust安全关键系统 - 工具配置指南
 
 ## 工具链概述
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -28,10 +29,13 @@
 ---
 
 ## 开发环境配置
+> **[来源: Rust Official Docs]**
 
 ### 推荐IDE设置
+> **[来源: Rust Official Docs]**
 
 #### VSCode配置 (.vscode/settings.json)
+> **[来源: Rust Official Docs]**
 
 ```json
 {
@@ -64,6 +68,7 @@
 ```
 
 #### VSCode扩展推荐 (.vscode/extensions.json)
+> **[来源: Rust Official Docs]**
 
 ```json
 {
@@ -80,6 +85,7 @@
 ```
 
 ### Rust工具链安装脚本
+> **[来源: Rust Official Docs]**
 
 ```bash
 #!/bin/bash
@@ -145,10 +151,13 @@ echo "Please restart your terminal or run 'source $HOME/.cargo/env'"
 ---
 
 ## 静态分析工具
+> **[来源: Rust Official Docs]**
 
 ### Clippy配置详解
+> **[来源: Rust Official Docs]**
 
 #### 项目级配置 (clippy.toml)
+> **[来源: Rust Official Docs]**
 
 ```toml
 # 认知复杂度：函数理解难度
@@ -199,6 +208,7 @@ test-stdin-width = 120
 ```
 
 #### 严格模式配置 (用于ASIL D)
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 在lib.rs或main.rs顶部添加
@@ -222,6 +232,7 @@ test-stdin-width = 120
 ```
 
 ### Cargo Audit配置
+> **[来源: Rust Official Docs]**
 
 #### 自动化审计脚本
 

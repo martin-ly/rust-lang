@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 异步并发模式](#rust-异步并发模式)
   - [目录](#目录)
@@ -29,8 +30,10 @@
 ---
 
 ## 1. 异步编程基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Future 与异步状态机
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::future::Future;

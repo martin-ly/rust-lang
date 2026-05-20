@@ -11,6 +11,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Frunk 函数式编程库形式化分析](#frunk-函数式编程库形式化分析)
   - [目录](#目录)
@@ -57,8 +58,10 @@
 ---
 
 ## 1. 项目概览
+> **[来源: Rust Official Docs]**
 
 ### 1.1 背景与动机
+> **[来源: Rust Official Docs]**
 
 Frunk 是一个为 Rust 提供函数式编程范式和类型级编程工具的库。它受到 Haskell、Scala 等函数式语言中常见模式的启发，将这些概念移植到 Rust 的类型系统中。
 

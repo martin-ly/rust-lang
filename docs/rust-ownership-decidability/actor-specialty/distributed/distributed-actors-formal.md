@@ -5,8 +5,10 @@
 ---
 
 ## 1. 分布式Actor基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 DISTRIBUTED-ACTOR-SYSTEM:
@@ -23,6 +25,7 @@
 ```
 
 ### 1.2 消息传递语义
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 MESSAGE-DELIVERY-SEMANTICS:

@@ -7,14 +7,17 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 经过系统性工作，已完成 Rust 所有权系统语义模型的全面梳理，对标了 2018-2025 年间国际顶级会议（POPL、PLDI）和权威机构（MPI-SWS、ETH Zürich、Microsoft Research）的研究成果。
 
 ---
 
 ## 新增文档清单
+> **[来源: Rust Official Docs]**
 
 ### 1. Tree Borrows 全面分析
+> **[来源: Rust Official Docs]**
 
 **文件**: `formal-foundations/models/tree-borrows-comprehensive.md`
 **规模**: 18,000+ 字

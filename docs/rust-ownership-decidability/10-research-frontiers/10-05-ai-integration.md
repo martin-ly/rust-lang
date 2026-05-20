@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [AI 集成](#ai-集成)
   - [目录](#目录)
@@ -63,8 +64,10 @@
 ---
 
 ## 1. 机器学习用于 Rust 代码分析
+> **[来源: Rust Official Docs]**
 
 ### 1.1 代码表示学习
+> **[来源: Rust Official Docs]**
 
 代码表示学习（Code Representation Learning）将代码转换为机器学习模型可以理解的向量表示。
 

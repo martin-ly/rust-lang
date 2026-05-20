@@ -8,8 +8,10 @@
 ---
 
 ## 1. 现状分析
+> **[来源: Rust Official Docs]**
 
 ### 1.1 `rust-ownership-decidability/` 概况
+> **[来源: Rust Official Docs]**
 
 - **规模**: 642 个文件，11MB，600K+ 字
 - **定位**: Rust 所有权系统的形式化语义分析与可判定性研究
@@ -17,6 +19,7 @@
 - **问题**: badge 标注 Rust 1.94，部分内容已过时（08-advanced-topics 中的 1.94 报告等）
 
 ### 1.2 `research_notes/` 概况
+> **[来源: Rust Official Docs]**
 
 - **规模**: 150+ 个文件
 - **定位**: 通用研究笔记（形式化方法、类型理论、软件设计理论）

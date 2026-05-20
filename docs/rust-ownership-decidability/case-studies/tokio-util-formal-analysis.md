@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tokio-Util 实用工具形式化分析](#tokio-util-实用工具形式化分析)
   - [目录](#目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tokio-Util提供:
 
@@ -42,6 +44,7 @@ Tokio-Util提供:
 ---
 
 ## 2. Codec框架
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Encoder特质
 

@@ -11,8 +11,10 @@
 ---
 
 ## 同步编程核心概念
+> **[来源: Rust Official Docs]**
 
 ### 线程与并发
+> **[来源: Rust Official Docs]**
 
 Rust 通过标准库提供 OS 线程支持：
 
@@ -59,6 +61,7 @@ fn channel_communication() {
 ```
 
 ### 共享状态并发
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, Mutex, RwLock};
@@ -126,6 +129,7 @@ fn atomic_demo() {
 ```
 
 ### 线程同步原语
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Barrier, Condvar};
@@ -176,6 +180,7 @@ fn condvar_demo() {
 ```
 
 ### Scoped 线程（无需 'static 生命周期）
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::thread;
@@ -227,6 +232,7 @@ where
 ```
 
 ### 线程局部存储
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::cell::RefCell;
@@ -262,6 +268,7 @@ fn thread_local_demo() {
 ---
 
 ## 使用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 同步原语 | 适用说明 |
 | :--- | :--- | :--- |
@@ -277,8 +284,10 @@ fn thread_local_demo() {
 ---
 
 ## 相关研究笔记
+> **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -287,6 +296,7 @@ fn thread_local_demo() {
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 
 ### 形式化方法
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -294,6 +304,7 @@ fn thread_local_demo() {
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 
 ### 实验分析
+> **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

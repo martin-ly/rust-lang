@@ -8,6 +8,7 @@
 ---
 
 ## 1.93.1 补丁版本说明
+> **[来源: Rust Official Docs]**
 
 **Rust 1.93.1**（2026-02-12）为补丁版本，修复 1.93.0 引入的三处回归，**无语言/库/兼容性变更**：
 
@@ -20,6 +21,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 兼容性深度解析](#rust-193-兼容性深度解析)
   - [1.93.1 补丁版本说明](#1931-补丁版本说明)
@@ -43,6 +45,7 @@
 ---
 
 ## pin_v2 内置属性
+> **[来源: Rust Official Docs]**
 
 **变更**：Rust 1.93 将 `pin_v2` 引入内置属性命名空间。
 
@@ -53,6 +56,7 @@
 ---
 
 ## Emscripten unwinding ABI 变更
+> **[来源: Rust Official Docs]**
 
 **变更**：在 Emscripten 目标上，使用 `panic=unwind` 编译时，unwinding ABI 从 **JS 异常处理 ABI** 改为 **wasm 异常处理 ABI**。
 
@@ -83,6 +87,7 @@ rustc -Z wasm-emscripten-eh=false -Z build-std ...
 ---
 
 ## #[test] 属性严格化
+> **[来源: Rust Official Docs]**
 
 **变更**：`#[test]`  previously 在无意义位置（trait 方法、结构体、类型等）被忽略；Rust 1.93 起将**报错**。
 
@@ -129,6 +134,7 @@ mod tests {
 ---
 
 ## offset_of! 类型检查
+> **[来源: Rust Official Docs]**
 
 **变更**：`offset_of!` 宏中的用户类型现在会进行 **well-formed** 检查。
 
@@ -150,6 +156,7 @@ let off = core::mem::offset_of!(NotWellFormed<dyn Send>, 0);
 ---
 
 ## deref_nullptr deny-by-default
+> **[来源: Rust Official Docs]**
 
 **变更**：`deref_nullptr` lint 从 **warn-by-default** 升级为 **deny-by-default**。
 
@@ -187,6 +194,7 @@ fn legacy_code() { ... }
 ---
 
 ## ... 可变参数 future-incompat
+> **[来源: Rust Official Docs]**
 
 **变更**：在 `extern` 块外使用 `...` 作为函数参数且无模式，将产生 **future-incompatibility** 警告。
 
@@ -215,6 +223,7 @@ extern "system" {
 ---
 
 ## repr(C) enum 判别值警告
+> **[来源: Rust Official Docs]**
 
 **变更**：`repr(C)` 枚举的判别值若超出 `c_int` 或 `c_uint` 范围，将产生 **future-incompatibility** 警告。
 
@@ -237,6 +246,7 @@ enum LargeDiscriminant {
 ---
 
 ## repr(transparent) 忽略 repr(C) 警告
+> **[来源: Rust Official Docs]**
 
 **变更**：在 `repr(transparent)` 中忽略 `repr(C)` 类型将产生 future-incompatibility 警告。
 
@@ -254,6 +264,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 ---
 
 ## 相关文档
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md)
 - [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)

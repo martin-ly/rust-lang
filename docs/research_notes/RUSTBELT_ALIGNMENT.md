@@ -10,6 +10,7 @@
 ---
 
 ## 一、RustBelt 论文结构（附录形式化）
+> **[来源: Rust Official Docs]**
 
 | 章节/主题 | RustBelt 内容 | 本项目对应 | 覆盖度 |
 | :--- | :--- | :--- | :--- |
@@ -30,8 +31,10 @@
 ---
 
 ## 二、逐章对标详情
+> **[来源: Rust Official Docs]**
 
 ### 2.1 所有权与借用（RustBelt 核心）
+> **[来源: Rust Official Docs]**
 
 | RustBelt 概念 | 本项目 | 差距 |
 | :--- | :--- | :--- |

@@ -9,6 +9,7 @@
 ---
 
 ## 🏛️ 理论体系与论证体系结构（顶层入口）
+> **[来源: Rust Official Docs]**
 
 | 文档 | 说明 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -17,6 +18,7 @@
 ---
 
 ## 理论基础 (01_theoretical_foundations)
+> **[来源: Rust Official Docs]**
 
 | 子模块 | 映射目标 | 说明 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -30,6 +32,7 @@
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
 ### 类型系统子路径
+> **[来源: Rust Official Docs]**
 
 | 路径 | 映射目标 |
 | :--- | :--- | :--- | :--- | :--- |

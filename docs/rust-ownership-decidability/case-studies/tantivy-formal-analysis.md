@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tantivy 搜索引擎形式化分析](#tantivy-搜索引擎形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tantivy提供:
 
@@ -40,6 +42,7 @@ Tantivy提供:
 ---
 
 ## 2. 索引架构
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (段不可变)
 

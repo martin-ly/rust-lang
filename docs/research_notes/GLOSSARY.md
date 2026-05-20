@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究笔记术语表](#研究笔记术语表)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -61,8 +62,10 @@
 ---
 
 ## 🔤 术语索引 {#-术语索引}
+> **[来源: Rust Official Docs]**
 
 ### 按字母顺序
+> **[来源: Rust Official Docs]**
 
 - [A](#a)
 - [B](#b)
@@ -81,8 +84,10 @@
 ---
 
 ## 📚 形式化方法术语 {#-形式化方法术语}
+> **[来源: Rust Official Docs]**
 
 ### A {#-类型理论术语av}
+> **[来源: Rust Official Docs]**
 
 **抽象解释 (Abstract Interpretation)**:
 
@@ -97,6 +102,7 @@
 - **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
 
 ### B
+> **[来源: Rust Official Docs]**
 
 **借用检查器 (Borrow Checker)**:
 
@@ -113,6 +119,7 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### L
+> **[来源: Rust Official Docs]**
 
 **生命周期 (Lifetime)**:
 
@@ -127,6 +134,7 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### N
+> **[来源: Rust Official Docs]**
 
 **NLL (Non-Lexical Lifetimes)**:
 
@@ -135,6 +143,7 @@
 - **相关**: [生命周期形式化](./formal_methods/lifetime_formalization.md)
 
 ### O
+> **[来源: Rust Official Docs]**
 
 **所有权 (Ownership)**:
 
@@ -151,6 +160,7 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### P
+> **[来源: Rust Official Docs]**
 
 **Pin (Pin)**:
 
@@ -167,6 +177,7 @@
 ---
 
 ## 🔬 类型理论术语 {#-类型理论术语}
+> **[来源: Rust Official Docs]**
 
 ### M
 

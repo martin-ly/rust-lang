@@ -7,14 +7,17 @@
 ---
 
 ## 欢迎使用
+> **[来源: Rust Official Docs]**
 
 Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档，涵盖所有权、借用、类型系统、并发等核心概念的深入解释和证明。
 
 ---
 
 ## 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 根据目标选择入口
+> **[来源: Rust Official Docs]**
 
 | 你的目标 | 推荐入口 | 预计时间 |
 | :--- | :--- | :--- |

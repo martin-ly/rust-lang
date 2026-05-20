@@ -5,8 +5,10 @@
 ---
 
 ## 设计模式形式化框架
+> **[来源: Rust Official Docs]**
 
 ### 模式定义模板
+> **[来源: Rust Official Docs]**
 
 ```text
 定义 PATTERN-STRUCTURE:
@@ -23,6 +25,7 @@
 ---
 
 ## 1. Ask vs Tell 模式
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
 

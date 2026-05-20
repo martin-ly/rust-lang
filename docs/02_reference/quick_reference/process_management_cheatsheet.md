@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [进程管理快速参考卡片](#进程管理快速参考卡片)
   - [📋 目录](#-目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 基本使用
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c07_process::prelude::*;
@@ -81,8 +84,10 @@ manager.kill(pid)?;
 ---
 
 ## 📋 常用 API
+> **[来源: Rust Official Docs]**
 
 ### 进程管理
+> **[来源: Rust Official Docs]**
 
 | 操作     | 方法            | 说明         |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -92,6 +97,7 @@ manager.kill(pid)?;
 | 列出所有 | `list_all()`    | 获取所有进程 |
 
 ### 异步进程管理
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c07_process::AsyncProcessManager;
@@ -112,6 +118,7 @@ manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 ```
 
 ### IPC 通信
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c07_process::IpcManager;
@@ -129,6 +136,7 @@ let queue = ipc.create_message_queue("my_queue", 100)?;
 ```
 
 ### 同步原语
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c07_process::SyncManager;
@@ -148,8 +156,10 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 ---
 
 ## 🔧 配置选项
+> **[来源: Rust Official Docs]**
 
 ### ProcessConfig
+> **[来源: Rust Official Docs]**
 
 ```rust
 ProcessConfig {
@@ -165,6 +175,7 @@ ProcessConfig {
 ```
 
 ### 跨平台注意事项
+> **[来源: Rust Official Docs]**
 
 **Windows**:
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Bindgen/Cbindgen FFI绑定形式化分析](#bindgencbindgen-ffi绑定形式化分析)
   - [目录](#目录)
@@ -29,6 +30,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 FFI绑定工具:
 
@@ -38,6 +40,7 @@ FFI绑定工具:
 ---
 
 ## 2. Bindgen (C→Rust)
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (类型映射)
 

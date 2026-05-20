@@ -3,6 +3,7 @@
 本项目支持使用 Nix 进行开发环境管理，确保所有开发者使用一致的 Rust 工具链。
 
 ## 前置要求
+> **[来源: Rust Official Docs]**
 
 - 安装 Nix 包管理器: [https://nixos.org/download.html](https://nixos.org/download.html)
 - 启用 Flakes 功能:
@@ -12,8 +13,10 @@
   ```
 
 ## 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 进入开发环境
+> **[来源: Rust Official Docs]**
 
 ```bash
 nix develop

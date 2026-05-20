@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 1.94 深度语义分析](#rust-194-深度语义分析)
   - [📋 目录](#-目录)
@@ -60,8 +61,10 @@
 ---
 
 ## 1. array_windows - 数组窗口迭代的语义革命
+> **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+> **[来源: Rust Official Docs]**
 
 ```rust
 pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
@@ -72,6 +75,7 @@ where
 **语义**: 将动态切片 `&[T]` 转换为固定大小数组 `&[T; N]` 的迭代器。
 
 ### 1.2 与 windows() 的语义对比
+> **[来源: Rust Official Docs]**
 
 | 维度 | `windows(n: usize)` (1.93) | `array_windows<const N: usize>()` (1.94) | 语义影响 |
 |------|---------------------------|----------------------------------------|----------|
@@ -81,6 +85,7 @@ where
 | **迭代器类型** | `Windows<'_, T>` | `ArrayWindows<'_, T, N>` | 泛型约束更精确 |
 
 ### 1.3 类型系统影响
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 1.93 - 动态大小，无法解构
@@ -104,6 +109,7 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 ```
 
 ### 1.4 内存安全保证
+> **[来源: Rust Official Docs]**
 
 **定理**: `array_windows` 保证永远不会越界。
 
@@ -114,8 +120,10 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 3. 模式匹配 `|[a, b, c]|` 编译期验证元素数量
 
 ### 1.5 实际应用模式
+> **[来源: Rust Official Docs]**
 
 #### 模式1: 滑动窗口检测
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 检测ABBA回文模式
@@ -146,6 +154,7 @@ mod tests {
 ```
 
 #### 模式2: 数值微分
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 计算离散微分 (相邻元素差值)
@@ -157,6 +166,7 @@ fn discrete_derivative(data: &[f64]) -> Vec<f64> {
 ```
 
 #### 模式3: 移动平均
+> **[来源: Rust Official Docs]**
 
 ```rust
 /// 计算N点移动平均
@@ -168,6 +178,7 @@ fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
 ```
 
 ### 1.6 性能分析
+> **[来源: Rust Official Docs]**
 
 ```rust
 // benchmarks

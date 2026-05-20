@@ -1,14 +1,17 @@
 # 安全关键Rust工具链配置指南
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本指南提供配置Rust工具链以满足安全关键开发要求的详细步骤，涵盖Ferrocene、Miri、Kani等工具的完整配置。
 
 ---
 
 ## 工具链架构
+> **[来源: Rust Official Docs]**
 
 ### 安全关键工具栈
+> **[来源: Rust Official Docs]**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -45,8 +48,10 @@
 ---
 
 ## 基础环境配置
+> **[来源: Rust Official Docs]**
 
 ### 1. Rust工具链安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装rustup (如尚未安装)
@@ -63,6 +68,7 @@ rustup default 1.81.0
 ```
 
 ### 2. Ferrocene工具链 (预认证)
+> **[来源: Rust Official Docs]**
 
 ```bash
 # Ferrocene需要商业许可，以下为配置示例
@@ -79,6 +85,7 @@ rustc --version  # 应显示Ferrocene版本
 ```
 
 ### 3. 开发工具安装
+> **[来源: Rust Official Docs]**
 
 ```bash
 # 安装Clippy (代码质量)
@@ -103,8 +110,10 @@ rustup component add llvm-tools-preview
 ---
 
 ## 项目配置
+> **[来源: Rust Official Docs]**
 
 ### Cargo.toml模板
+> **[来源: Rust Official Docs]**
 
 ```toml
 [package]
@@ -175,6 +184,7 @@ path = "src/main.rs"
 ```
 
 ### rust-toolchain.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [toolchain]
@@ -196,6 +206,7 @@ profile = "minimal"
 ```
 
 ### .cargo/config.toml
+> **[来源: Rust Official Docs]**
 
 ```toml
 [build]

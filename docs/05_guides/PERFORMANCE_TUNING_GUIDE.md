@@ -8,6 +8,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [性能调优完整指南](#性能调优完整指南)
   - [📋 目录](#-目录)
@@ -65,6 +67,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本文档提供全面的 Rust 性能调优指南，涵盖编译优化、运行时优化、内存管理、并发优化等方面。
 
@@ -74,8 +78,12 @@
 ---
 
 ## 🚀 编译优化
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Release 模式
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml
@@ -91,6 +99,8 @@ strip = true           # 移除符号信息
 ```
 
 ### 2. 特性标志优化
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 # 只启用需要的特性
@@ -106,6 +116,8 @@ no-std = []
 ```
 
 ### 3. 增量编译
+>
+> **[来源: Rust Official Docs]**
 
 ```toml
 [profile.dev]
@@ -119,8 +131,12 @@ opt-level = 2  # 测试时启用优化，加速测试执行
 ---
 
 ## 💾 内存优化
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 预分配容量
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 不好：多次重新分配
@@ -140,6 +156,8 @@ let mut vec = vec![0; 1000];
 ```
 
 ### 2. 使用切片而非 Vec
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ❌ 不好：不必要的分配
@@ -159,6 +177,8 @@ fn process_generic<T: AsRef<[i32]>>(data: T) -> i32 {
 ```
 
 ### 3. 使用 Cow 避免克隆
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::borrow::Cow;
@@ -176,6 +196,8 @@ let owned: Cow<str> = Cow::Owned(String::from("world"));
 ```
 
 ### 4. 使用 Box 减少栈分配
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 大结构体使用 Box

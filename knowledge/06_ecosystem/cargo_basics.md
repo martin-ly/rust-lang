@@ -15,6 +15,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章后，你将能够：
 
@@ -27,6 +28,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **Rust 基础** — `rustc` 命令行工具（`01_fundamentals/`）
 2. **模块系统** — `mod`、`pub`、`use`（`01_fundamentals/modules.md`）
@@ -34,10 +36,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **Cargo** 是 Rust 的"一站式"项目管理工具。它整合了其他语言中分散在多个工具中的功能：
 

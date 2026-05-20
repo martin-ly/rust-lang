@@ -3,19 +3,24 @@
 > **Bloom 层级**: 理解
 
 ## 代码审查检查清单
+> **[来源: Rust Official Docs]**
 
 ### Unsafe代码审查清单
+> **[来源: Rust Official Docs]**
 
 ```markdown
 ## Unsafe代码审查
+> **[来源: Rust Official Docs]**
 
 ### 基本信息
+> **[来源: Rust Official Docs]**
 - [ ] 审查日期: ___________
 - [ ] 审查人: ___________
 - [ ] 作者: ___________
 - [ ] 模块/函数: ___________
 
 ### 安全清单
+> **[来源: Rust Official Docs]**
 
 #### 文档化
 - [ ] 有 `# Safety` 文档注释

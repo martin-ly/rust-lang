@@ -9,6 +9,7 @@
 ---
 
 ## 模板结构
+> **[来源: Rust Official Docs]**
 
 除 [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
 
@@ -21,8 +22,10 @@
 ---
 
 ## 模板应用示例
+> **[来源: Rust Official Docs]**
 
 ### 示例 1：if/else（控制流族）
+> **[来源: Rust Official Docs]**
 
 | 概念 | 形式化引用 | 反例 |
 | :--- | :--- | :--- |

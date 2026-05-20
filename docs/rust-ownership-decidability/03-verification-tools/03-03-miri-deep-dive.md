@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Miri 深度解析](#miri-深度解析)
   - [目录](#目录)
@@ -48,6 +49,7 @@
 ---
 
 ## 1. 引言与概述
+> **[来源: Rust Official Docs]**
 
 Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测程序中的**未定义行为 (Undefined Behavior, UB)**。与编译器不同，Miri 在 Mid-level IR (MIR) 层面解释执行代码，能够精确跟踪内存状态和所有权变化。
 
@@ -74,6 +76,7 @@ Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测
 ---
 
 ## 2. Miri 的工作原理
+> **[来源: Rust Official Docs]**
 
 ### 2.1 解释执行模型
 

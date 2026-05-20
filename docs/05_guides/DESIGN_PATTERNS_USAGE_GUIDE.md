@@ -9,6 +9,8 @@
 ---
 
 ## 📋 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [设计模式使用指南](#设计模式使用指南)
   - [📋 目录](#-目录)
@@ -70,6 +72,8 @@
 ---
 
 ## 📋 概述
+>
+> **[来源: Rust Official Docs]**
 
 本指南介绍如何在 Rust 中使用常见的设计模式，包括 GoF 模式和 Rust 特有的模式。
 
@@ -80,8 +84,12 @@
 ---
 
 ## 🚀 快速开始
+>
+> **[来源: Rust Official Docs]**
 
 ### 单例模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::{Arc, Mutex, OnceLock};
@@ -102,6 +110,8 @@ impl Singleton {
 ```
 
 ### 工厂模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Product {
@@ -138,10 +148,16 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ---
 
 ## 📊 核心模式
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. 创建型模式
+>
+> **[来源: Rust Official Docs]**
 
 #### 建造者模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 struct Config {
@@ -198,8 +214,12 @@ let config = ConfigBuilder::new()
 ```
 
 ### 2. 结构型模式
+>
+> **[来源: Rust Official Docs]**
 
 #### 适配器模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 旧接口
@@ -225,6 +245,8 @@ impl NewInterface for Adapter {
 ```
 
 #### 装饰器模式
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 trait Component {
@@ -332,6 +354,8 @@ impl Subject {
 ---
 
 ## 📐 23种设计模式完整实现
+>
+> **[来源: Rust Official Docs]**
 
 ### 创建型模式 (Creational Patterns)
 
@@ -1999,6 +2023,8 @@ impl ShapeCollection {
 ---
 
 ## 🦀 Rust 特有模式
+>
+> **[来源: Rust Official Docs]**
 
 ### 1. Newtype 模式
 
@@ -2125,6 +2151,8 @@ let req2 = builder.build()?; // 可以重用
 ---
 
 ## 📚 相关文档
+>
+> **[来源: Rust Official Docs]**
 
 - [完整文档](../../crates/c09_design_pattern/README.md)
 - [GoF 模式](../../crates/c09_design_pattern/docs/tier_02_guides/01_创建型模式指南.md)
@@ -2132,6 +2160,8 @@ let req2 = builder.build()?; // 可以重用
 - [设计模式形式化文档](../research_notes/software_design_theory/01_design_patterns_formal/README.md) - 23种设计模式的形式化定义与分析
 
 ## 🆕 Rust 1.95+ 特性在设计模式中的应用
+>
+> **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -2286,3 +2316,7 @@ where
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+> **权威来源**: Rust Official Docs

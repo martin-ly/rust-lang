@@ -8,6 +8,7 @@
 ---
 
 ## 错误处理全景
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -95,8 +96,10 @@ mindmap
 ---
 
 ## Result<T, E> 详解
+> **[来源: Rust Official Docs]**
 
 ### 基本使用
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 定义可能失败的操作
@@ -116,6 +119,7 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 ```
 
 ### 组合方法
+> **[来源: Rust Official Docs]**
 
 | 方法 | 签名 | 用途 |
 | :--- | :--- | :--- |
@@ -129,8 +133,10 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 ---
 
 ## 错误类型设计
+> **[来源: Rust Official Docs]**
 
 ### 使用 thiserror (库开发)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use thiserror::Error;
@@ -152,6 +158,7 @@ pub enum ConfigError {
 ```
 
 ### 使用 anyhow (应用开发)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use anyhow::{Context, Result};
@@ -173,8 +180,10 @@ fn main() -> Result<()> {
 ---
 
 ## panic! 使用指南
+> **[来源: Rust Official Docs]**
 
 ### 适用场景
+> **[来源: Rust Official Docs]**
 
 | 场景 | 示例 | 原因 |
 | :--- | :--- | :--- |
@@ -184,6 +193,7 @@ fn main() -> Result<()> {
 | 快速失败开发 | `todo!()` | 占位实现 |
 
 ### 与 Result 对比
+> **[来源: Rust Official Docs]**
 
 ```rust
 // ✅ 使用Result - 调用者决定如何处理
@@ -204,6 +214,7 @@ fn parse_user_input(s: &str) -> i32 {
 ---
 
 ## 错误转换
+> **[来源: Rust Official Docs]**
 
 ### From trait
 

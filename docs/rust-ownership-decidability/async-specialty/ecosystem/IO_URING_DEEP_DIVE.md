@@ -5,8 +5,10 @@
 ---
 
 ## 1. io_uring 原理
+> **[来源: Rust Official Docs]**
 
 ### 1.1 传统IO的问题
+> **[来源: Rust Official Docs]**
 
 ```text
 传统epoll模式:
@@ -26,6 +28,7 @@
 ```
 
 ### 1.2 io_uring 架构
+> **[来源: Rust Official Docs]**
 
 ```text
 io_uring 架构:

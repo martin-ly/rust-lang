@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [研究资源汇总](#研究资源汇总)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -47,8 +48,10 @@
 ---
 
 ## 📚 学术资源 {#-学术资源}
+> **[来源: Rust Official Docs]**
 
 ### 形式化方法相关论文
+> **[来源: Rust Official Docs]**
 
 1. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, et al.
@@ -68,6 +71,7 @@
    - 链接: [项目主页](https://plv.mpi-sws.org/rustbelt/README.md)
 
 ### 类型理论相关论文
+> **[来源: Rust Official Docs]**
 
 1. **Type Systems for Programming Languages**
    - 作者: Benjamin C. Pierce
@@ -86,6 +90,7 @@
    - 形式化衔接: [00_completeness_gaps](type_theory/00_completeness_gaps.md)、[PROOF_INDEX](PROOF_INDEX.md)
 
 ### 性能优化相关论文
+> **[来源: Rust Official Docs]**
 
 1. **Optimizing Rust Compiler Performance**
    - 作者: Rust Compiler Team
@@ -100,8 +105,10 @@
 ---
 
 ## 📖 官方文档 {#-官方文档}
+> **[来源: Rust Official Docs]**
 
 ### Rust 官方文档
+> **[来源: Rust Official Docs]**
 
 - **The Rust Programming Language (The Book)**
   - 链接: <https://doc.rust-lang.org/book/>
@@ -124,6 +131,7 @@
   - 描述: Rust 版本指南
 
 ### Rust 编译器文档
+> **[来源: Rust Official Docs]**
 
 - **Rust Compiler Development Guide**
   - 链接: <https://rustc-dev-guide.rust-lang.org/>
@@ -134,6 +142,7 @@
   - 描述: Rust 语言设计提案
 
 ### Rust 工具文档
+> **[来源: Rust Official Docs]**
 
 - **Cargo Book**
   - 链接: <https://doc.rust-lang.org/cargo/>
@@ -146,8 +155,10 @@
 ---
 
 ## 🛠️ 工具资源 {#️-工具资源}
+> **[来源: Rust Official Docs]**
 
 ### 形式化验证工具
+> **[来源: Rust Official Docs]**
 
 - **Coq**
   - 链接: <https://coq.inria.fr/>

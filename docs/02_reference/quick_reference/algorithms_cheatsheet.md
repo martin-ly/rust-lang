@@ -9,6 +9,7 @@
 ---
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [算法与数据结构快速参考卡片](#算法与数据结构快速参考卡片)
   - [📋 目录](#-目录)
@@ -69,8 +70,10 @@
 ---
 
 ## 🚀 快速开始
+> **[来源: Rust Official Docs]**
 
 ### 排序算法
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::algorithms::sorting::*;
@@ -91,6 +94,7 @@ println!("Sorted: {:?}", data);
 ```
 
 ### 搜索算法
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::algorithms::searching::*;
@@ -111,8 +115,10 @@ if let Some(index) = linear_search(&data, 7) {
 ---
 
 ## 📋 常用算法
+> **[来源: Rust Official Docs]**
 
 ### 排序算法
+> **[来源: Rust Official Docs]**
 
 | 算法     | 时间复杂度 | 空间复杂度 | 稳定性 | 使用场景   |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -122,6 +128,7 @@ if let Some(index) = linear_search(&data, 7) {
 | 选择排序 | O(n²)      | O(1)       | 不稳定 | 简单场景   |
 
 ### 搜索算法
+> **[来源: Rust Official Docs]**
 
 | 算法     | 时间复杂度   | 空间复杂度 | 前提条件       |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -129,6 +136,7 @@ if let Some(index) = linear_search(&data, 7) {
 | 插值搜索 | O(log log n) | O(1)       | 均匀分布已排序 |
 
 ### 图算法
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::algorithms::graph::*;
@@ -145,6 +153,7 @@ let distances = dijkstra(&graph, start)?;
 ```
 
 ### 动态规划
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::algorithms::dynamic_programming::*;
@@ -162,8 +171,10 @@ let max_value = knapsack_01(weights, values, capacity);
 ---
 
 ## 📊 数据结构
+> **[来源: Rust Official Docs]**
 
 ### 栈和队列
+> **[来源: Rust Official Docs]**
 
 ```rust
 use c08_algorithms::data_structures::*;

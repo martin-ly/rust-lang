@@ -7,10 +7,12 @@
 ---
 
 ## 执行摘要
+> **[来源: Rust Official Docs]**
 
 本次更新对 `rust-ownership-decidability` 文件夹进行了全面的网络权威资源对齐，重点补充了 2024-2025 年顶级会议(PLDI/ICFP/SOSP)的最新研究成果。
 
 ### 更新统计
+> **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 说明 |
 |------|------|------|
@@ -22,6 +24,7 @@
 ---
 
 ## 新增文档
+> **[来源: Rust Official Docs]**
 
 ### 1. 网络资源对齐分析报告
 

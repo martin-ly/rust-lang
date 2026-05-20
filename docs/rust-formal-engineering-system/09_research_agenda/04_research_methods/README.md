@@ -12,8 +12,10 @@
 ---
 
 ## 研究方法概述
+> **[来源: Rust Official Docs]**
 
 ### 形式化方法研究流程
+> **[来源: Rust Official Docs]**
 
 ```text
 问题定义
@@ -32,33 +34,40 @@
 ```
 
 ### 研究笔记结构
+> **[来源: Rust Official Docs]**
 
 ```markdown
 # 研究笔记模板
 
 ## 问题陈述
+> **[来源: Rust Official Docs]**
 - 研究什么问题
 - 为什么重要
 
 ## 形式化定义
+> **[来源: Rust Official Docs]**
 - 数学符号定义
 - 类型/状态定义
 
 ## 定理与证明
+> **[来源: Rust Official Docs]**
 - 定理陈述
 - 证明步骤
 - 证明验证
 
 ## 实现考虑
+> **[来源: Rust Official Docs]**
 - Rust 实现映射
 - 边界条件
 
 ## 开放问题
+> **[来源: Rust Official Docs]**
 - 未解决的疑问
 - 进一步研究方向
 ```
 
 ### 证明验证工具
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 形式化验证工具链
@@ -83,6 +92,7 @@ fn double(x: i32) -> i32 {
 ```
 
 ### 研究方法论示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究问题：验证 Vec<T> 的 push 操作内存安全
@@ -140,6 +150,7 @@ mod verification_tests {
 ```
 
 ### 类型系统研究示例
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 研究问题：验证类型系统的子类型关系

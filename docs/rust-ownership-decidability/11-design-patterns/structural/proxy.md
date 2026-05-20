@@ -7,14 +7,17 @@
 ---
 
 ## 概念
+> **[来源: Rust Official Docs]**
 
 代理模式为其他对象提供一种代理以控制对这个对象的访问。
 
 ---
 
 ## 代理类型
+> **[来源: Rust Official Docs]**
 
 ### 1. 虚拟代理 (延迟加载)
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::sync::OnceLock;

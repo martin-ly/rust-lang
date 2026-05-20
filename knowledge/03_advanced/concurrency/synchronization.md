@@ -13,6 +13,7 @@
 ---
 
 ## 🎯 学习目标
+> **[来源: Rust Official Docs]**
 
 完成本章学习后，你将能够：
 
@@ -25,6 +26,7 @@
 ---
 
 ## 📋 先决条件
+> **[来源: Rust Official Docs]**
 
 1. **线程与并发安全** — `Send`/`Sync`、`thread::spawn`（`03_advanced/concurrency/threads.md`）
 2. **所有权与借用** — `&mut T` 的独占性（`01_fundamentals/borrowing.md`）
@@ -33,10 +35,13 @@
 ---
 
 ## 🧠 核心概念
+> **[来源: Rust Official Docs]**
 
 ### 模块 1: 概念定义
+> **[来源: Rust Official Docs]**
 
 #### 1.1 直观定义
+> **[来源: Rust Official Docs]**
 
 **同步原语（Synchronization Primitives）** 是协调多个线程对共享资源访问的机制。Rust 标准库提供的同步原语基于 OS 内核对象（如 POSIX mutex、Windows CRITICAL_SECTION），但通过类型系统封装为**安全抽象**。
 

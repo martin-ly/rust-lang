@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档系统梳理形式化证明中常用的策略和技术，为Rust形式化方法的证明提供方法论指导。
 
 ---
 
 ## 一、归纳证明策略
+> **[来源: Rust Official Docs]**
 
 ### 1.1 数学归纳法
+> **[来源: Rust Official Docs]**
 
 **原理**:
 
@@ -49,6 +52,7 @@ length(append(x::xs', ys))
 ```
 
 ### 1.2 结构归纳法
+> **[来源: Rust Official Docs]**
 
 **原理**:
 
@@ -87,6 +91,7 @@ fn eval_terminates(e: &Expr) -> bool {
 ```
 
 ### 1.3 良基归纳
+> **[来源: Rust Official Docs]**
 
 **原理**:
 
@@ -122,8 +127,10 @@ fn quicksort<T: Ord>(arr: &mut [T]) {
 ---
 
 ## 二、共归纳证明策略
+> **[来源: Rust Official Docs]**
 
 ### 2.1 共归纳原理
+> **[来源: Rust Official Docs]**
 
 **用于证明**: 最大不动点的性质(如无限行为)
 
@@ -133,6 +140,7 @@ fn quicksort<T: Ord>(arr: &mut [T]) {
 - 共归纳: 证明最大不动点(可能无限)
 
 ### 2.2 双模拟
+> **[来源: Rust Official Docs]**
 
 **定义**: R是双模拟如果
 
@@ -146,8 +154,10 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 ---
 
 ## 三、反证法策略
+> **[来源: Rust Official Docs]**
 
 ### 3.1 基本形式
+> **[来源: Rust Official Docs]**
 
 **原理**:
 
@@ -159,6 +169,7 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 ```
 
 ### 3.2 在Rust证明中的应用
+> **[来源: Rust Official Docs]**
 
 **示例 - 借用唯一性**:
 

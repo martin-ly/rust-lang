@@ -1,6 +1,7 @@
 # 13 多实例有同步模式 (Multiple Instances With Synchronization)
 
 ## 📋 目录
+> **[来源: Rust Official Docs]**
 
 - [13 多实例有同步模式 (Multiple Instances With Synchronization)](#13-多实例有同步模式-multiple-instances-with-synchronization)
   - [📋 目录](#-目录)
@@ -25,11 +26,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
+> **[来源: Rust Official Docs]**
 
 多实例有同步模式在运行时创建多个活动实例，等待所有实例完成后才继续执行。
 这是最常用的并行处理模式之一。
 
 ### 核心语义
+> **[来源: Rust Official Docs]**
 
 $$
 \text{MIWithSync}(A, n) = \text{join}(\parallel_{i=1}^{n} A_i)

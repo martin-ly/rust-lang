@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [类型系统扩展](#类型系统扩展)
   - [目录](#目录)
@@ -60,8 +61,10 @@
 ---
 
 ## 1. 泛型关联类型（GAT）
+> **[来源: Rust Official Docs]**
 
 ### 1.1 GAT 基础
+> **[来源: Rust Official Docs]**
 
 泛型关联类型（Generic Associated Types，GAT）是 Rust 1.65 引入的重要特性，允许关联类型带有自己的泛型参数。这一特性解决了许多之前无法用 Rust 类型系统表达的模式。
 

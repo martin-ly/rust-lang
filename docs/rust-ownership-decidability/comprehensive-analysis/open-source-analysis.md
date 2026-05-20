@@ -5,8 +5,10 @@
 ---
 
 ## 1. 库分类与选择标准
+> **[来源: Rust Official Docs]**
 
 ### 1.1 选择标准
+> **[来源: Rust Official Docs]**
 
 ```text
 库选择标准:
@@ -31,6 +33,7 @@
 ---
 
 ## 2. 嵌入式生态核心库
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Embassy框架分析
 

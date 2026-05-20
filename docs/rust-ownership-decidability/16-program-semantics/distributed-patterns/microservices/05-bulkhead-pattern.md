@@ -1,6 +1,7 @@
 # 舱壁隔离模式语义 (Bulkhead Pattern Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [舱壁隔离模式语义 (Bulkhead Pattern Semantics)](#舱壁隔离模式语义-bulkhead-pattern-semantics)
   - [目录](#目录)
@@ -30,8 +31,10 @@
 ---
 
 ## 2. 隔离模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 舱壁类型
+> **[来源: Rust Official Docs]**
 
 ```
 舱壁隔离类型:

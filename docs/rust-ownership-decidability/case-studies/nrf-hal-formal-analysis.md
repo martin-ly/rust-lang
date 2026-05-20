@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [nRF HAL硬件抽象层形式化分析](#nrf-hal硬件抽象层形式化分析)
   - [目录](#目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 nRF HAL为Nordic nRF52/nRF53/nRF91系列提供：
 
@@ -46,6 +48,7 @@ nRF HAL为Nordic nRF52/nRF53/nRF91系列提供：
 ---
 
 ## 2. 外设所有权模型
+> **[来源: Rust Official Docs]**
 
 ### 定义 PERIPH-1 ( 外设分区 )
 

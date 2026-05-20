@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [生命周期概念卡片 (Lifetime Concept Card)](#生命周期概念卡片-lifetime-concept-card)
   - [目录](#目录)
@@ -49,8 +50,10 @@
 ---
 
 ## 1. 概念定义
+> **[来源: Rust Official Docs]**
 
 ### 1.1 什么是生命周期
+> **[来源: Rust Official Docs]**
 
 **生命周期(Lifetime)** 是引用保持有效的**代码区域**。每个引用都有隐式或显式的生命周期，确保它不会在指向的数据被释放后使用。
 

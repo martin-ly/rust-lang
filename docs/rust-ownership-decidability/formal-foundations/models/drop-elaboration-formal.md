@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust Drop Elaboration 形式化理论](#rust-drop-elaboration-形式化理论)
   - [目录](#目录)
@@ -41,6 +42,7 @@
 ---
 
 ## 摘要
+> **[来源: Rust Official Docs]**
 
 Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时何地插入析构函数调用。本文档基于 ETH Zürich 2024 年的本科毕业论文，提供 Drop Elaboration 的完整形式化理论，包括：
 
@@ -52,6 +54,7 @@ Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 Drop Elaboration 是什么
 

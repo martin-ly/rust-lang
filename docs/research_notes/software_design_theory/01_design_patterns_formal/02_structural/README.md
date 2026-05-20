@@ -6,10 +6,12 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本目录包含 GoF 结构型设计模式的形式化分析。
 
 ## 包含模式
+> **[来源: Rust Official Docs]**
 
 - [适配器](adapter.md)
 - [桥接](bridge.md)
@@ -20,6 +22,7 @@
 - [代理](proxy.md)
 
 ## 相关链接
+> **[来源: Rust Official Docs]**
 
 - [返回设计模式目录](../README.md)
 - [软件设计理论](../../README.md)

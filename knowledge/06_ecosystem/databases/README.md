@@ -5,6 +5,7 @@
 > **Rust 数据库访问：ORM 与查询构建器**
 
 ## 📚 内容
+> **[来源: Rust Official Docs]**
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
@@ -12,6 +13,7 @@
 | [sea_orm_deep_dive.md](sea_orm_deep_dive.md) | SeaORM 异步 ORM | ⭐⭐⭐ |
 
 ## 🎯 选型建议
+> **[来源: Rust Official Docs]**
 
 | 需求 | 推荐 |
 |------|------|
@@ -21,6 +23,7 @@
 | 快速 CRUD 开发 | SeaORM |
 
 ## 🚀 相关层
+> **[来源: Rust Official Docs]**
 
 - [03_advanced/async/async_await.md](../../03_advanced/async/async_await.md) - 异步基础
 - [02_intermediate/error_handling.md](../../02_intermediate/error_handling.md) - 错误处理

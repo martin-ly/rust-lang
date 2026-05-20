@@ -7,10 +7,12 @@
 ---
 
 ## 一、内容标准模板（Concept Document Standard Template）
+> **[来源: Rust Official Docs]**
 
 每篇核心知识文档必须包含以下 10 个模块。缺失任一模块视为"未完成"。
 
 ### 模块 1: 概念定义（Concept Definition）
+> **[来源: Rust Official Docs]**
 
 **要求**：提供三层定义，由浅入深
 
@@ -25,6 +27,7 @@
 - 形式化直觉："Affine Type System 的 Rust 实现：每个值至少有一个 owner，至多有一个 owner，owner 离开作用域时析构"
 
 ### 模块 2: 属性清单（Property Inventory）
+> **[来源: Rust Official Docs]**
 
 **要求**：用表格列出概念的固有属性与关系属性
 
@@ -33,6 +36,7 @@
 | e.g. `Copy` 的传递性 | 关系属性 | bool | 仅当所有字段都实现 Copy | `struct Wrapper(String)` 不实现 Copy |
 
 ### 模块 3: 概念依赖图（Concept Dependency Graph）
+> **[来源: Rust Official Docs]**
 
 **要求**：Mermaid 图，明确承上启下
 
@@ -48,6 +52,7 @@ graph TD
 ```
 
 ### 模块 4: 机制解释（Mechanistic Explanation）
+> **[来源: Rust Official Docs]**
 
 **要求**：从至少 2 个视角解释"为什么这样设计"与"编译器如何实现"
 
@@ -56,6 +61,7 @@ graph TD
 - **运行时视角**：vtable 布局、monomorphization 结果、零成本抽象的物理含义
 
 ### 模块 5: 正例集（Positive Examples）
+> **[来源: Rust Official Docs]**
 
 **要求**：3 个层级，渐进式复杂度
 
@@ -64,6 +70,7 @@ graph TD
 3. **Production-grade**：包含错误处理、边界条件、性能考量
 
 ### 模块 6: 反例集（Counterexamples & Anti-patterns）
+> **[来源: Rust Official Docs]**
 
 **要求**：系统化反例，每例包含
 
@@ -74,6 +81,7 @@ graph TD
 5. **抽象原则**（从该反例提炼出的通用模式）
 
 ### 模块 7: 思维表征套件（Multi-modal Representations）
+> **[来源: Rust Official Docs]**
 
 **要求**：每篇文档至少包含 2 种非纯文本表征
 
@@ -96,6 +104,7 @@ graph TD
 - **跨语言对比**：与 C++/Haskell/Ada/Go 的同质概念对比（如适用）
 
 ### 模块 9: 设计权衡分析（Trade-off Analysis）
+> **[来源: Rust Official Docs]**
 
 **要求**：回答以下问题
 
@@ -104,6 +113,7 @@ graph TD
 3. 什么场景下这个设计是次优的？（承认限制，而非盲目推崇）
 
 ### 模块 10: 自我检测与练习（Self-assessment）
+> **[来源: Rust Official Docs]**
 
 **要求**：
 
@@ -114,6 +124,7 @@ graph TD
 ---
 
 ## 二、双轨并行执行路线图
+> **[来源: Rust Official Docs]**
 
 ### 轨道 A：核心知识体系重构（Track A: Core Knowledge）
 

@@ -8,8 +8,10 @@
 ---
 
 ## 🏆 最终成果
+> **[来源: Rust Official Docs]**
 
 ### 统计数据
+> **[来源: Rust Official Docs]**
 
 ```text
 Coq 形式化代码:    3,000+ 行
@@ -24,6 +26,7 @@ Coq 形式化代码:    3,000+ 行
 ---
 
 ## ✅ 完成的所有工作
+> **[来源: Rust Official Docs]**
 
 ### 1. Coq 形式化 (13 文件, 3,000+ 行)
 

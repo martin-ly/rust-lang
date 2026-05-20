@@ -11,6 +11,7 @@
 ---
 
 ## 🎯 版本概览
+> **[来源: Rust Official Docs]**
 
 Rust 1.95 主要聚焦于：
 
@@ -23,8 +24,10 @@ Rust 1.95 主要聚焦于：
 ---
 
 ## 🚀 主要新特性
+> **[来源: Rust Official Docs]**
 
 ### 1. `if let` Guards in Match Arms
+> **[来源: Rust Official Docs]**
 
 Rust 1.88 稳定了 let chains。1.95 将此能力带入 match 表达式，允许基于模式匹配的条件守卫：
 
@@ -41,6 +44,7 @@ match value {
 > **注意**: 编译器目前不会将 `if let` guards 中的模式纳入 match 穷尽性检查，与常规 `if` guards 行为一致。
 
 ### 2. `cfg_select!` 编译时条件选择宏
+> **[来源: Rust Official Docs]**
 
 `cfg_select!` 提供类似编译期 `match` 的 `cfg` 条件选择能力，可替代流行的 `cfg-if` crate：
 
@@ -69,6 +73,7 @@ let os_str = cfg_select! {
 > **跟踪 Issue**: [rust-lang/rust#136098](https://github.com/rust-lang/rust/issues/136098)
 
 ### 3. `assert_matches!` / `debug_assert_matches!`
+> **[来源: Rust Official Docs]**
 
 模式匹配断言宏，在测试中验证值是否符合预期模式：
 

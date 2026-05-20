@@ -1,6 +1,8 @@
 # 负载均衡语义 (Load Balancing Semantics)
 
 ## 目录
+>
+> **[来源: Rust Official Docs]**
 
 - [负载均衡语义 (Load Balancing Semantics)](#负载均衡语义-load-balancing-semantics)
   - [目录](#目录)
@@ -23,6 +25,8 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+>
+> **[来源: Rust Official Docs]**
 
 负载均衡是分布式系统中分配请求到多个后端实例的核心机制。
 本文档深入分析各种负载均衡算法的数学原理、语义保证及其在 Rust 中的高效实现。
@@ -30,8 +34,12 @@
 ---
 
 ## 2. 负载均衡算法分类
+>
+> **[来源: Rust Official Docs]**
 
 ### 2.1 算法类型谱系
+>
+> **[来源: Rust Official Docs]**
 
 ```
 负载均衡算法分类:
@@ -64,6 +72,8 @@
 ```
 
 ### 2.2 形式化定义
+>
+> **[来源: Rust Official Docs]**
 
 ```
 负载均衡形式化语义:
@@ -90,8 +100,12 @@
 ---
 
 ## 3. 算法数学模型
+>
+> **[来源: Rust Official Docs]**
 
 ### 3.1 轮询算法
+>
+> **[来源: Rust Official Docs]**
 
 ```
 简单轮询:
@@ -115,6 +129,8 @@
 ```
 
 ### 3.2 一致性哈希
+>
+> **[来源: Rust Official Docs]**
 
 ```
 一致性哈希:
@@ -148,6 +164,8 @@
 ```
 
 ### 3.3 最少连接算法
+>
+> **[来源: Rust Official Docs]**
 
 ```
 最少连接:
@@ -171,8 +189,12 @@
 ---
 
 ## 4. Rust 实现
+>
+> **[来源: Rust Official Docs]**
 
 ### 4.1 核心负载均衡器框架
+>
+> **[来源: Rust Official Docs]**
 
 ```rust
 use std::collections::HashMap;

@@ -8,14 +8,17 @@
 ---
 
 ## 概述
+> **[来源: Rust Official Docs]**
 
 本文档建立Rust形式化方法所需的逻辑基础，包括命题逻辑、一阶逻辑、高阶逻辑和模态逻辑，为后续的分离逻辑和类型理论奠定严格的数学基础。
 
 ---
 
 ## 一、命题逻辑 (Propositional Logic)
+> **[来源: Rust Official Docs]**
 
 ### 1.1 语法
+> **[来源: Rust Official Docs]**
 
 ```
 φ, ψ ::= ⊤ | ⊥ | P | ¬φ | φ ∧ ψ | φ ∨ ψ | φ → ψ | φ ↔ ψ
@@ -32,6 +35,7 @@
 | ↔ | 等价 | 双条件 |
 
 ### 1.2 自然演绎系统
+> **[来源: Rust Official Docs]**
 
 **合取引入 (∧I)**:
 
@@ -66,6 +70,7 @@
 ```
 
 ### 1.3 在Rust形式化中的应用
+> **[来源: Rust Official Docs]**
 
 **类型判断作为命题**:
 
@@ -84,8 +89,10 @@
 ---
 
 ## 二、一阶逻辑 (First-Order Logic)
+> **[来源: Rust Official Docs]**
 
 ### 2.1 语法
+> **[来源: Rust Official Docs]**
 
 ```
 项 t ::= x | f(t₁, ..., tₙ)
@@ -93,6 +100,7 @@
 ```
 
 ### 2.2 量词规则
+> **[来源: Rust Official Docs]**
 
 **全称引入 (∀I)**:
 
@@ -127,6 +135,7 @@
 ```
 
 ### 2.3 在Rust形式化中的应用
+> **[来源: Rust Official Docs]**
 
 **所有权唯一性**:
 
@@ -143,8 +152,10 @@
 ---
 
 ## 三、高阶逻辑 (Higher-Order Logic)
+> **[来源: Rust Official Docs]**
 
 ### 3.1 类型化λ演算
+> **[来源: Rust Official Docs]**
 
 **简单类型**:
 

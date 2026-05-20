@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust标准库 Option \& Result 形式化分析](#rust标准库-option--result-形式化分析)
   - [目录](#目录)
@@ -55,6 +56,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 `Option<T>` 和 `Result<T, E>` 是Rust错误处理的核心，将可能的缺失值和错误显式编码在类型系统中。
 
@@ -68,6 +70,7 @@
 ---
 
 ## 2. `Option<T>` 代数结构
+> **[来源: Rust Official Docs]**
 
 ### 2.1 类型定义
 

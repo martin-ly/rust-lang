@@ -1,6 +1,7 @@
 # 重试模式语义 (Retry Pattern Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [重试模式语义 (Retry Pattern Semantics)](#重试模式语义-retry-pattern-semantics)
   - [目录](#目录)
@@ -23,12 +24,14 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 重试模式是分布式系统处理瞬时故障的基础机制。本文档深入分析各种重试策略的数学模型、语义保证及其在 Rust 中的实现。
 
 ---
 
 ## 2. 重试策略分类
+> **[来源: Rust Official Docs]**
 
 ### 2.1 策略类型谱系
 

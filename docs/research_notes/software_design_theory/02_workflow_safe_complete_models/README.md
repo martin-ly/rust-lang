@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+> **[来源: Rust Official Docs]**
 
 - [工作流：23 安全 vs 43 完全模型](#工作流23-安全-vs-43-完全模型)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -33,12 +34,14 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
 
 ## 宗旨
+> **[来源: Rust Official Docs]**
 
 建立「23 种安全设计模型」与「43 种完全模型」的形式边界与语义论证，明确安全子集与扩展目录的构成。
 
 ---
 
 ## 定义
+> **[来源: Rust Official Docs]**
 
 | 概念 | 定义 |
 | :--- | :--- |
@@ -48,17 +51,19 @@
 ---
 
 ## 文档索引
+> **[来源: Rust Official Docs]**
 
 | 文档 | 内容 |
 | :--- | :--- |
-| [01_safe_23_catalog](01_safe_23_catalog.md) | 23 种安全设计模型索引 |
+| `01_safe_23_catalog` | 23 种安全设计模型索引 |
 | [02_complete_43_catalog](02_complete_43_catalog.md) | 43 种完全模型索引 |
-| [03_semantic_boundary_map](03_semantic_boundary_map.md) | 语义边界图 |
+| `03_semantic_boundary_map` | 语义边界图 |
 | [04_expressiveness_boundary](04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
 
 ---
 
 ## 核心关系
+> **[来源: Rust Official Docs]**
 
 - **23 安全 ⊆ 43 完全**：23 为纯 Safe 子集
 - **扩展 20**：企业/分布式模式，绝大部分亦纯 Safe；Gateway 在 FFI 场景可能需 unsafe
@@ -66,15 +71,17 @@
 ---
 
 ## 使用流程
+> **[来源: Rust Official Docs]**
 
-1. **查 23 安全**：模式是否纯 Safe → [01_safe_23_catalog](01_safe_23_catalog.md)
+1. **查 23 安全**：模式是否纯 Safe → `01_safe_23_catalog`
 2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](02_complete_43_catalog.md)
-3. **查语义边界**：选模式 → [03_semantic_boundary_map](03_semantic_boundary_map.md)
+3. **查语义边界**：选模式 → `03_semantic_boundary_map`
 4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](04_expressiveness_boundary.md)
 
 ---
 
 ## 快速参考
+> **[来源: Rust Official Docs]**
 
 | 需求 | 首选文档 |
 | :--- | :--- |
@@ -86,6 +93,7 @@
 ---
 
 ## 层次推进阅读路径
+> **[来源: Rust Official Docs]**
 
 | 层次 | 读者 | 阅读顺序 | 产出 |
 | :--- | :--- | :--- | :--- |
@@ -97,6 +105,7 @@
 ---
 
 ## 23 vs 43 选型指南（实质内容）
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐 | 理由 |
 | :--- | :--- | :--- |
@@ -111,8 +120,10 @@
 ---
 
 ## 场景→模式→代码完整链条（实质内容）
+> **[来源: Rust Official Docs]**
 
 ### 链条 1：Web API 分层
+> **[来源: Rust Official Docs]**
 
 **场景**：REST API 处理订单请求；需校验、持久化、返回 DTO。
 
@@ -148,7 +159,7 @@ impl OrderService {
 
 **模式选取**：Command（封装操作）+ Memento（快照，可选）+ State（编辑状态）。
 
-**代码骨架**：见 [03_semantic_boundary_map](03_semantic_boundary_map.md) 示例 3。
+**代码骨架**：见 `03_semantic_boundary_map` 示例 3。
 
 ---
 

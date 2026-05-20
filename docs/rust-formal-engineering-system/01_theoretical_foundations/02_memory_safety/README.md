@@ -7,6 +7,7 @@
 > 内容已整合至： [borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md)
 
 ## 知识结构思维导图
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -29,6 +30,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+> **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
 | :--- | :--- | :--- |
@@ -40,6 +42,7 @@ mindmap
 ---
 
 ## 内存安全的核心保证
+> **[来源: Rust Official Docs]**
 
 Rust 通过所有权和借用系统在编译时保证内存安全：
 

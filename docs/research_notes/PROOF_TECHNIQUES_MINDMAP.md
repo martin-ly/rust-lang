@@ -7,6 +7,7 @@
 ---
 
 ## 概念族谱概览
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 mindmap
@@ -79,8 +80,10 @@ mindmap
 ---
 
 ## 核心证明技术
+> **[来源: Rust Official Docs]**
 
 ### 1. 归纳法
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 结构归纳示例：证明列表长度

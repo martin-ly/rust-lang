@@ -8,13 +8,16 @@
 ---
 
 ## 1. Rust 当前 Trait Solver 的局限
+> **[来源: Rust Official Docs]**
 
 Rust 的类型系统核心之一是 **trait solver**（特征求解器），负责在编译时判断某个类型是否实现了特定 trait，并解决相关的类型约束。
 当前稳定版使用的 trait solver 是围绕 **SLG (Selective Linear Generalized)  resolution** 构建的，自 Rust 1.0 以来基本架构未变。
 
 ### 1.1 主要技术局限
+> **[来源: Rust Official Docs]**
 
 #### A. 高阶类型推理 (Higher-Ranked Type Inference)
+> **[来源: Rust Official Docs]**
 
 当前 solver 在处理高阶 trait bounds (HRTB) 时经常出现不一致：
 
@@ -27,6 +30,7 @@ where
 ```
 
 #### B. 关联类型归一化 (Associated Type Normalization)
+> **[来源: Rust Official Docs]**
 
 复杂的关联类型投影在某些场景下会导致编译器死循环或错误拒绝：
 
@@ -41,6 +45,7 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 ```
 
 #### C. 隐式自动 trait 推导
+> **[来源: Rust Official Docs]**
 
 当前 `AutoTrait` 分析（如 `Send`/`Sync` 推导）与主 solver 分离，导致：
 
@@ -49,6 +54,7 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 3. 与 GATs (Generic Associated Types) 的交互问题
 
 ### 1.2 对现代 Rust 特性的制约
+> **[来源: Rust Official Docs]**
 
 | 特性 | 当前 Solver 状态 | 影响 |
 |------|---------------|------|
@@ -61,12 +67,15 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 ---
 
 ## 2. Next-gen Solver 的改进方向
+> **[来源: Rust Official Docs]**
 
 ### 2.1 新架构核心设计
+> **[来源: Rust Official Docs]**
 
 Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 2021 年开始重新设计的类型求解引擎，于 **2024 年底在 nightly 编译器中默认启用**。
 
 #### 核心设计原则
+> **[来源: Rust Official Docs]**
 
 1. **基于 Goals 的统一框架**: 所有类型检查问题统一表示为 "证明目标" (goals)
 2. **延迟归一化 (Lazy Normalization)**: 关联类型按需归一化，而非立即展开
@@ -98,8 +107,10 @@ Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 
 ```
 
 ### 2.2 关键技术改进
+> **[来源: Rust Official Docs]**
 
 #### A. 统一的目标语言 (Goal Language)
+> **[来源: Rust Official Docs]**
 
 所有类型系统查询统一为 `Goal`：
 

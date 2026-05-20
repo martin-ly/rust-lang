@@ -1,6 +1,7 @@
 # 分布式消息传递语义 (Message Passing Semantics)
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [分布式消息传递语义 (Message Passing Semantics)](#分布式消息传递语义-message-passing-semantics)
   - [目录](#目录)
@@ -24,6 +25,7 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 消息传递是分布式系统的核心通信范式，Rust 的所有权模型为消息传递提供了独特的安全保障。
 本文档深入分析分布式消息传递的形式化语义，涵盖同步/异步模型、可靠性保证和跨网络语义。
@@ -31,6 +33,7 @@
 ---
 
 ## 2. 消息传递基础模型
+> **[来源: Rust Official Docs]**
 
 ### 2.1 通信模型分类
 

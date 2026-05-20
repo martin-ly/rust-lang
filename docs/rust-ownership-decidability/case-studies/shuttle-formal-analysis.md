@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Shuttle 确定性并发测试形式化分析](#shuttle-确定性并发测试形式化分析)
   - [目录](#目录)
@@ -25,6 +26,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Shuttle提供:
 
@@ -36,6 +38,7 @@ Shuttle提供:
 ---
 
 ## 2. 调度器控制
+> **[来源: Rust Official Docs]**
 
 ### 定理 2.1 (确定性调度)
 

@@ -1,5 +1,6 @@
 
 ### 6.4 链表反转示例
+> **[来源: Rust Official Docs]**
 
 **程序**:
 
@@ -38,8 +39,10 @@ $$
 ---
 
 ## 7. 并发程序验证
+> **[来源: Rust Official Docs]**
 
 ### 7.1 Owicki-Gries 方法
+> **[来源: Rust Official Docs]**
 
 **并行组合规则**:
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tonic gRPC框架形式化分析](#tonic-grpc框架形式化分析)
   - [目录](#目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tonic特点：
 
@@ -48,6 +50,7 @@ Tonic特点：
 ---
 
 ## 2. 服务定义
+> **[来源: Rust Official Docs]**
 
 ### 定义 SERVICE-1 ( proto定义 )
 

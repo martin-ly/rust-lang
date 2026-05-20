@@ -1,6 +1,7 @@
 # Rust 运行时行为语义
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Rust 运行时行为语义](#rust-运行时行为语义)
   - [目录](#目录)
@@ -161,8 +162,10 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 ### 1.1 运行时系统的定义
+> **[来源: Rust Official Docs]**
 
 **运行时系统（Runtime System）** 是编程语言在执行期间所依赖的基础设施。它负责管理程序执行期间的各种资源和服务，包括内存管理、线程调度、异常处理等。
 
@@ -199,6 +202,7 @@ fn runtime_operations() {
 ```
 
 ### 1.2 Rust 运行时特性（最小运行时）
+> **[来源: Rust Official Docs]**
 
 Rust 采用了**最小运行时（Minimal Runtime）** 的设计理念，将尽可能多的工作移到编译时完成。
 
@@ -246,6 +250,7 @@ fn panic(_info: &PanicInfo) -> ! {
 ```
 
 ### 1.3 编译时 vs 运行时保证
+> **[来源: Rust Official Docs]**
 
 Rust 的核心理念是**将成本从运行时转移到编译时**：
 
@@ -311,10 +316,13 @@ fn runtime_behavior() {
 ---
 
 ## 2. 内存模型语义
+> **[来源: Rust Official Docs]**
 
 ### 2.1 栈内存语义
+> **[来源: Rust Official Docs]**
 
 #### 2.1.1 栈帧分配语义
+> **[来源: Rust Official Docs]**
 
 **栈帧（Stack Frame）** 是函数调用时在栈上分配的内存区域，包含局部变量、参数和返回地址。
 
@@ -373,6 +381,7 @@ fn stack_protection() {
 ```
 
 #### 2.1.2 局部变量生命周期
+> **[来源: Rust Official Docs]**
 
 局部变量的生命周期与栈帧绑定：
 
@@ -403,6 +412,7 @@ fn local_variable_lifetime() {
 ```
 
 #### 2.1.3 函数调用栈语义
+> **[来源: Rust Official Docs]**
 
 函数调用遵循**调用约定（Calling Convention）**：
 
@@ -443,6 +453,7 @@ fn bar(c: i32) -> i32 {
 | 调用者保存 | RAX, RCX, RDX, RSI, RDI, R8-R11 |
 
 #### 2.1.4 尾调用优化
+> **[来源: Rust Official Docs]**
 
 **尾调用优化（Tail Call Optimization, TCO）** 将尾递归转换为循环，避免栈溢出。
 
@@ -3061,3 +3072,7 @@ Rust 在运行时语义设计中始终追求性能与安全的平衡：
 6. System V AMD64 ABI Specification
 7. Linux Kernel Documentation - Memory Management
 8. Windows Internals, 7th Edition
+
+---
+
+> **权威来源**: Rust Official Docs

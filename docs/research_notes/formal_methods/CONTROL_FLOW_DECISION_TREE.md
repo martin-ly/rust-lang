@@ -7,6 +7,7 @@
 ---
 
 ## 📊 控制流选择决策树
+> **[来源: Rust Official Docs]**
 
 ```mermaid
 graph TD
@@ -44,8 +45,10 @@ graph TD
 ---
 
 ## 🔀 分支结构决策
+> **[来源: Rust Official Docs]**
 
 ### match vs if-let
+> **[来源: Rust Official Docs]**
 
 | 场景 | 推荐 | 示例 |
 |------|------|------|

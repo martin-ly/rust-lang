@@ -5,8 +5,10 @@
 ---
 
 ## 📋 版本标注分类
+> **[来源: Rust Official Docs]**
 
 ### 1. 已稳定特性 [Stable X.XX]
+> **[来源: Rust Official Docs]**
 
 **定义**: 已在 Rust 稳定版中发布的特性
 
@@ -27,6 +29,7 @@
 ---
 
 ### 2. 开发中特性 [Unstable/Nightly]
+> **[来源: Rust Official Docs]**
 
 **定义**: 正在开发中，仅在 Nightly 版本可用或尚未稳定的特性
 

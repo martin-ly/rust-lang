@@ -5,8 +5,10 @@
 ---
 
 ## 文档列表
+> **[来源: Rust Official Docs]**
 
 ### 基础概念
+> **[来源: Rust Official Docs]**
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
@@ -15,6 +17,7 @@
 | [`03-unsafe-functions.md`](./03-unsafe-functions.md) | Unsafe 函数与 FFI | 🟡 中级 |
 
 ### 核心机制
+> **[来源: Rust Official Docs]**
 
 | 文件 | 主题 | 难度 |
 |------|------|------|

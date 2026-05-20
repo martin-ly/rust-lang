@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+> **[来源: Rust Official Docs]**
 
 - [Tracing 日志框架形式化分析](#tracing-日志框架形式化分析)
   - [目录](#目录)
@@ -57,6 +58,7 @@
 ---
 
 ## 1. 引言
+> **[来源: Rust Official Docs]**
 
 Tracing是Rust的结构化日志和分布式追踪框架:
 
@@ -68,6 +70,7 @@ Tracing是Rust的结构化日志和分布式追踪框架:
 ---
 
 ## 2. Span模型形式化
+> **[来源: Rust Official Docs]**
 
 ### 2.1 Span生命周期
 

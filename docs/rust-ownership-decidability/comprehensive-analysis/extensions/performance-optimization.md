@@ -5,8 +5,10 @@
 ---
 
 ## 1. 编译器优化
+> **[来源: Rust Official Docs]**
 
 ### 1.1 LTO与优化级别
+> **[来源: Rust Official Docs]**
 
 ```toml
 # Cargo.toml 优化配置
@@ -22,6 +24,7 @@ opt-level = 3           # 构建脚本也优化
 ```
 
 ### 1.2 内联控制
+> **[来源: Rust Official Docs]**
 
 ```rust
 // 强制内联

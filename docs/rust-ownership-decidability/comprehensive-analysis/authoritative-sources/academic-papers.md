@@ -5,8 +5,10 @@
 ---
 
 ## 1. 类型理论基础
+> **[来源: Rust Official Docs]**
 
 ### 1.1 线性逻辑 (Linear Logic)
+> **[来源: Rust Official Docs]**
 
 ```yaml
 论文: Linear Logic
@@ -71,6 +73,7 @@ enum Choice<A, B> {
 ---
 
 ### 1.2 仿射类型 (Affine Types)
+> **[来源: Rust Official Docs]**
 
 ```yaml
 论文: Use-once variables and linear objects
