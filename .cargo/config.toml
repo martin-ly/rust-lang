@@ -1,7 +1,7 @@
 [build]
 # 使用sccache加速构建 - 需要安装: cargo install sccache
 # sccache 支持磁盘缓存和远程缓存(S3/Azure/GCS等)
-# rustc-wrapper = "sccache"
+# rustc-wrapper = "sccache"  # 注意: Windows 下需先手动启动 sccache 服务器 (SCCACHE_SERVER_PORT=4226 sccache --start-server)
 # 通用Rustflags优化
 # - Ctarget-cpu=native: 针对本机CPU优化
 # - Cembed-bitcode=no: 禁用bitcode嵌入(加快编译)
