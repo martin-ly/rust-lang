@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Creusot 形式化验证教程](#creusot-形式化验证教程)
@@ -55,14 +56,17 @@
 ---
 
 ## 1. Creusot 简介
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 什么是 Creusot
+>
 > **[来源: Rust Official Docs]**
 
 Creusot 是一个基于 **MLCFG** (ML-like Control Flow Graph) 中间表示的 Rust 形式化验证工具，它将 Rust 代码翻译成 Why3 验证平台的输入，利用自动定理证明器（如 Alt-Ergo、CVC5、Z3）进行验证。
 
 ### 1.2 核心特点
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 说明 |
@@ -73,6 +77,7 @@ Creusot 是一个基于 **MLCFG** (ML-like Control Flow Graph) 中间表示的 R
 | **Rust 原生** | 深度集成 Rust 语义，支持所有权、生命周期 |
 
 ### 1.3 验证流程
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -90,9 +95,11 @@ Why3 理论文件 (.mlw)
 ---
 
 ## 2. 安装与配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 系统要求
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.70+ (建议使用 rustup 安装)
@@ -101,6 +108,7 @@ Why3 理论文件 (.mlw)
 - 自动定理证明器 (Alt-Ergo, CVC5, Z3)
 
 ### 2.2 安装步骤
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -119,6 +127,7 @@ cargo creusot --version
 ```
 
 ### 2.3 项目配置
+>
 > **[来源: Rust Official Docs]**
 
 在 `Cargo.toml` 中添加依赖：
@@ -134,9 +143,11 @@ creusot-contracts = "0.3"
 ---
 
 ## 3. 预言逻辑基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 预言逻辑(Prophecy Logic)是 Creusot 的核心创新，它允许对可变引用进行精确的推理。

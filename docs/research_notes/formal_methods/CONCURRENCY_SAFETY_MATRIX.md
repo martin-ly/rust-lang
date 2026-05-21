@@ -344,3 +344,24 @@ unsafe impl<T: Sync> Sync for Wrapper<T> {}
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: crossbeam Documentation]**
+
+> **[来源: ACM - Concurrent Programming]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

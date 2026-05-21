@@ -13,9 +13,11 @@
 ---
 
 ## 🆕 Rust 1.93.0 验证完成
+>
 > **[来源: Rust Official Docs]**
 
 ### 新增验证内容
+>
 > **[来源: Rust Official Docs]**
 
 1. ✅ **Rust 1.93.0 特性验证** - 验证了 musl 1.2.5、全局分配器 TLS、cfg 在 asm! 行上等新特性
@@ -25,6 +27,7 @@
 ---
 
 ## 📋 执行摘要（Rust 1.92.0，历史记录）
+>
 > **[来源: Rust Official Docs]**
 
 本次验证完成了以下任务：

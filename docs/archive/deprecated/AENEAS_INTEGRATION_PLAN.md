@@ -10,6 +10,7 @@
 ---
 
 ## Aeneas 介绍
+>
 > **[来源: Rust Official Docs]**
 
 - **开发**: EPFL (École Polytechnique Fédérale de Lausanne)
@@ -19,6 +20,7 @@
 ---
 
 ## 一、Aeneas 概述
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 说明 |
@@ -31,9 +33,11 @@
 ---
 
 ## 二、本项目文档 → Aeneas 映射
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 输入要求
+>
 > **[来源: Rust Official Docs]**
 
 | Aeneas 需求 | 本项目对应 | 映射方式 |
@@ -43,6 +47,7 @@
 | 类型注解 | type_system、trait 形式化 | 确保示例满足本项目定理（如 ownership T2、borrow T1） |
 
 ### 2.2 验证目标对应
+>
 > **[来源: Rust Official Docs]**
 
 | 本项目定理 | Aeneas 验证目标 |
@@ -55,9 +60,11 @@
 ---
 
 ## 三、集成步骤
+>
 > **[来源: Rust Official Docs]**
 
 ### 步骤 1：环境搭建（1–2 周）
+>
 > **[来源: Rust Official Docs]**
 
 | 任务 | 说明 |
@@ -67,6 +74,7 @@
 | 运行示例 | 验证工具链可用 |
 
 ### 步骤 2：示例程序选取（1 周）
+>
 > **[来源: Rust Official Docs]**
 
 | 任务 | 说明 |
@@ -88,6 +96,7 @@ fn main() {
 对应定理：T-OW2（所有权唯一性）；验证目标：移动后无双重所有者。
 
 ### 步骤 3：翻译与验证（2–4 周）
+>
 > **[来源: Rust Official Docs]**
 
 | 任务 | 说明 |
@@ -97,6 +106,7 @@ fn main() {
 | 记录映射 | 本项目 Def/定理 ↔ 证明助手命题 |
 
 ### 步骤 4：文档化（持续）
+>
 > **[来源: Rust Official Docs]**
 
 | 任务 | 说明 |
@@ -108,6 +118,7 @@ fn main() {
 ---
 
 ## 四、风险与限制
+>
 > **[来源: Rust Official Docs]**
 
 | 风险 | 缓解 |

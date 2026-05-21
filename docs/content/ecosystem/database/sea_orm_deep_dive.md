@@ -7,42 +7,11 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [📋 目录](#目录)
-- [🎯 概述](#概述)
-  - [核心特性](#核心特性)
-  - [适用场景](#适用场景)
-- [🏗️ 架构设计](#架构设计)
-  - [核心概念](#核心概念)
-  - [与 Diesel/SQLx 对比](#与-dieselsqlx-对比)
-- [🚀 快速开始](#快速开始)
-  - [安装配置](#安装配置)
-  - [CLI 工具](#cli-工具)
-- [📐 实体定义](#实体定义)
-  - [基本实体](#基本实体)
-  - [关系定义](#关系定义)
-  - [复合主键](#复合主键)
-- [💾 CRUD 操作](#crud-操作)
-  - [Create](#create)
-  - [Read](#read)
-  - [Update](#update)
-  - [Delete](#delete)
-- [🔗 关联查询](#关联查询)
-  - [Eager Loading](#eager-loading)
-  - [Lazy Loading](#lazy-loading)
-- [⚡ 性能优化](#性能优化)
-  - [连接池](#连接池)
-  - [查询优化](#查询优化)
-- [🧪 测试策略](#测试策略)
-- [🔗 参考资源](#参考资源)
-
-## 📋 目录
-> **[来源: Rust Official Docs]**
-
 - [Sea-ORM 深度解析](#sea-orm-深度解析)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [核心特性](#核心特性)
     - [适用场景](#适用场景)
@@ -70,15 +39,54 @@
   - [🧪 测试策略](#-测试策略)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: ✅ 已完成](#状态--已完成)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]**
+
+- [Sea-ORM 深度解析](#sea-orm-深度解析)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [🎯 概述](#-概述)
+    - [核心特性](#核心特性)
+    - [适用场景](#适用场景)
+  - [🏗️ 架构设计](#️-架构设计)
+    - [核心概念](#核心概念)
+    - [与 Diesel/SQLx 对比](#与-dieselsqlx-对比)
+  - [🚀 快速开始](#-快速开始)
+    - [安装配置](#安装配置)
+    - [CLI 工具](#cli-工具)
+  - [📐 实体定义](#-实体定义)
+    - [基本实体](#基本实体)
+    - [关系定义](#关系定义)
+    - [复合主键](#复合主键)
+  - [💾 CRUD 操作](#-crud-操作)
+    - [Create](#create)
+    - [Read](#read)
+    - [Update](#update)
+    - [Delete](#delete)
+  - [🔗 关联查询](#-关联查询)
+    - [Eager Loading](#eager-loading)
+    - [Lazy Loading](#lazy-loading)
+  - [⚡ 性能优化](#-性能优化)
+    - [连接池](#连接池)
+    - [查询优化](#查询优化)
+  - [🧪 测试策略](#-测试策略)
+  - [🔗 参考资源](#-参考资源)
+  - [**状态**: ✅ 已完成](#状态--已完成)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设计。
 
 ### 核心特性
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 说明 |
@@ -90,6 +98,7 @@ Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设
 | **关系支持** | 完整的一对多、多对多关系 |
 
 ### 适用场景
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -104,9 +113,11 @@ Sea-ORM 适用场景:
 ---
 
 ## 🏗️ 架构设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -129,6 +140,7 @@ pub enum Relation {
 ```
 
 ### 与 Diesel/SQLx 对比
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Sea-ORM | Diesel | SQLx |
@@ -143,9 +155,11 @@ pub enum Relation {
 ---
 
 ## 🚀 快速开始
+>
 > **[来源: Rust Official Docs]**
 
 ### 安装配置
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -159,6 +173,7 @@ tokio = { version = "1", features = ["full"] }
 ```
 
 ### CLI 工具
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -174,6 +189,7 @@ sea-orm-cli generate entity \
 ---
 
 ## 📐 实体定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本实体
@@ -531,14 +547,33 @@ mod tests {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

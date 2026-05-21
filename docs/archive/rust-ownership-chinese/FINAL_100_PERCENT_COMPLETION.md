@@ -6,11 +6,13 @@
 ---
 
 ## ✅ 完成摘要
+>
 > **[来源: Rust Official Docs]**
 
 经过全面审查和修复，`docs/Rust所有权与可判定性` 已达到 **100% 内容完整性** 和 **100% 代码可运行性**。
 
 ### 本次完成的修复
+>
 > **[来源: Rust Official Docs]**
 
 | 问题 | 修复前 | 修复后 |
@@ -23,9 +25,11 @@
 ---
 
 ## 📊 最终统计
+>
 > **[来源: Rust Official Docs]**
 
 ### 文档统计
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 总大小 |
@@ -40,6 +44,7 @@
 | **总计** | **34个文档** | **> 500KB** |
 
 ### 代码统计
+>
 > **[来源: Rust Official Docs]**
 
 | 指标 | 数值 | 状态 |
@@ -50,6 +55,7 @@
 | 练习题 | 100道 | ✅ |
 
 ### 测试验证结果
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -103,9 +109,11 @@ test result: ok. 30 passed; 0 failed; 0 ignored
 ---
 
 ## 📁 完整文档清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心文档
+>
 > **[来源: Rust Official Docs]**
 
 - ✅ `README.md` (主索引)
@@ -116,6 +124,7 @@ test result: ok. 30 passed; 0 failed; 0 ignored
 - ✅ `术语表.md` (9KB)
 
 ### 学术论文深度解读 (8个)
+>
 > **[来源: Rust Official Docs]**
 
 - ✅ `papers/rustbelt-deep-dive.md` (16KB)
@@ -128,6 +137,7 @@ test result: ok. 30 passed; 0 failed; 0 ignored
 - ✅ `papers/stacked-tree-borrows-formal-semantics.md` (11KB)
 
 ### 工具教程 (6个)
+>
 > **[来源: Rust Official Docs]**
 
 - ✅ `guides/miri-tutorial.md` (9.8KB)
@@ -138,6 +148,7 @@ test result: ok. 30 passed; 0 failed; 0 ignored
 - ✅ `guides/zero-cost-abstraction-proof.md` (12KB)
 
 ### 形式化证明与定义
+>
 > **[来源: Rust Official Docs]**
 
 - ✅ `supplementary_formal_definitions.md` (13KB)

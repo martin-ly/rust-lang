@@ -452,6 +452,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 - [L1 所有权与借用](../01_foundation/01_ownership.md) — 形式化映射起点
 - [L4 所有权形式化](../04_formal/03_ownership_formal.md) — 线性逻辑与分离逻辑
 - [知识体系方法论](./methodology.md) — 语义链接类型定义规范
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

@@ -1,6 +1,7 @@
 # 分布式事务语义 (Distributed Transaction Semantics)
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [分布式事务语义 (Distributed Transaction Semantics)](#分布式事务语义-distributed-transaction-semantics)
@@ -26,6 +27,7 @@
   - [8. 总结](#8-总结)
 
 ## 1. 引言
+>
 > **[来源: Rust Official Docs]**
 
 分布式事务跨越多节点执行操作，需要保证 ACID 特性。
@@ -34,9 +36,11 @@
 ---
 
 ## 2. 分布式事务基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 ACID 在分布式环境中的挑战
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -64,6 +68,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -88,9 +93,11 @@ T = {op₁, op₂, ..., opₙ} 跨越节点 {N₁, N₂, ..., Nₘ}
 ---
 
 ## 3. 两阶段提交 (2PC)
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 2PC 协议流程
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -124,6 +131,7 @@ Phase 2: 提交阶段 (Commit)
 ```
 
 ### 3.2 2PC 状态机
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -139,6 +147,7 @@ Participant 状态:
 ```
 
 ### 3.3 Rust 实现
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -265,6 +274,7 @@ impl TwoPhaseParticipant {
 ```
 
 ### 3.4 2PC 故障恢复
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -327,6 +337,7 @@ impl ParticipantRecovery {
 ---
 
 ## 4. 三阶段提交 (3PC)
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 3PC 改进

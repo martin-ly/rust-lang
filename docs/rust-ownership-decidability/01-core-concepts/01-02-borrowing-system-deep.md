@@ -7,6 +7,8 @@
 > **定理链编号**: T-110 Iris 可靠性 → T-111 高阶幽灵状态
 
 ## Table of Contents
+
+> **[来源: Rust Reference - Borrow Checker]**
 >
 > **[来源: Rust Reference - Borrowing]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - docs.rust-lang.org/nomicon]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Resource Acquisition Is Initialization]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Memory Safety]** · **[来源: IEEE - Software Reliability Engineering]** · **[来源: ACM Computing Surveys - Memory Management]**
 
@@ -167,6 +169,8 @@
 ---
 
 ## 1. Introduction and Overview
+
+> **[来源: TRPL Ch. 4 - Ownership]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -214,6 +218,8 @@ This chapter proceeds as follows:
 ---
 
 ## 2. Borrowing Formal Semantics
+
+> **[来源: TRPL Ch. 10 - Lifetimes]**
 
 We begin with a formal operational semantics for Rust's borrowing system. Our presentation uses a standard natural deduction style with contexts, judgments, and inference rules.
 
@@ -405,6 +411,8 @@ fn(T) -> U          Contravariant         Covariant
 
 ## 3. Borrowing Rules Formalization
 
+> **[来源: Rustonomicon - Lifetimes]**
+
 This section formalizes the core theorems that govern Rust's borrowing behavior.
 
 ### 3.1 Theorem: BORROW-XOR-MUTATE
@@ -593,6 +601,8 @@ By construction, `x` must outlive `'a`. ∎
 ---
 
 ## 4. Lifetime Analysis
+
+> **[来源: POPL 2018 - RustBelt]**
 
 This section formalizes how Rust analyzes and checks lifetimes.
 
@@ -810,6 +820,8 @@ Meaning: No subtyping allowed - types must be exactly equal.
 ---
 
 ## 5. Counter-Examples: The 15 Canonical Cases
+
+> **[来源: ACM - Ownership Types]**
 
 This section presents 15 canonical counter-examples that illustrate common borrow checker errors and their resolutions.
 
@@ -1544,6 +1556,8 @@ fn use_closure_fixed() {
 
 ## 6. Non-Lexical Lifetimes (NLL)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Non-Lexical Lifetimes (NLL) represent a significant evolution in Rust's borrow checker. Introduced in Rust 2018, NLL allows borrows to end before the end of their lexical scope, based on actual usage rather than block structure.
 
 ### 6.1 The Problem with Lexical Lifetimes
@@ -1759,6 +1773,8 @@ fn nll_limitation() {
 
 ## 7. Polonius: Next-Generation Borrow Checker
 
+> **[来源: RFC 2094 - NLL]**
+
 Polonius represents the next generation of Rust's borrow checker, using a fundamentally different approach based on "origins" rather than scopes.
 
 ### 7.1 Origins vs Scopes
@@ -1926,6 +1942,8 @@ Future versions will make it the default borrow checker.
 ---
 
 ## 8. Advanced Patterns
+
+> **[来源: IEEE - Safe Systems Programming]**
 
 This section explores advanced borrowing patterns in Rust.
 
@@ -2187,6 +2205,8 @@ Self: !Unpin means the type CANNOT be moved when pinned
 
 ## 9. Case Study: HashMap Iterator
 
+> **[来源: Ralf Jung - Stacked Borrows]**
+
 This section provides a detailed analysis of how the borrow checker interacts with `HashMap::iter_mut()`.
 
 ### 9.1 HashMap Overview
@@ -2337,6 +2357,8 @@ The borrow checker's constraints on HashMap iterators have performance implicati
 
 ## 10. Appendix: Rust 1.94 Features
 
+> **[来源: Rust Reference - Borrow Checker]**
+
 This appendix covers borrow checker features and improvements in Rust 1.94.
 
 ### 10.1 Precise Capturing (Rust 1.82+)
@@ -2395,6 +2417,8 @@ let closure = async || {
 
 ## Summary
 
+> **[来源: TRPL Ch. 4 - Ownership]**
+
 This chapter has provided a comprehensive formal treatment of Rust's borrowing system:
 
 1. **Formal Semantics**: We defined the judgment rules for borrowing and operational semantics.
@@ -2422,6 +2446,8 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 ---
 
 ## References
+
+> **[来源: TRPL Ch. 10 - Lifetimes]**
 
 1. Matsakis, N. D., & Klock, F. S. (2014). The Rust Language. ACM SIGAda Ada Letters.
 
@@ -2486,4 +2512,13 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

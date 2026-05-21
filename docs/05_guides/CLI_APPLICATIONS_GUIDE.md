@@ -464,3 +464,16 @@ pub fn get_config() -> Option<&'static CliConfig> {
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Command-Line Interface]**
+
+> **[来源: clap.rs Documentation]**
+
+> **[来源: TRPL Ch. 12 - CLI]**
+
+> **[来源: Rust Reference - std::env]**

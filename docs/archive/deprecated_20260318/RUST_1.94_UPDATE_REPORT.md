@@ -7,6 +7,7 @@
 ---
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本报告记录了 `docs/rust-ownership-decidability/08-advanced-topics` 目录下所有文件针对 Rust 1.94 版本的更新内容。
@@ -14,14 +15,17 @@
 ---
 
 ## 文件更新摘要
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. README.md
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: ✅ 已更新
 
 #### 变更内容
+>
 > **[来源: Rust Official Docs]**
 
 - **版本信息更新**: 将 `Rust 版本: 1.75+` 更新为 `Rust 版本: 1.94+`
@@ -29,6 +33,7 @@
 - **新增 Rust 1.94 概览章节**: 添加了完整的 Rust 1.94 新特性概览部分
 
 #### 新增内容
+>
 > **[来源: Rust Official Docs]**
 
 - 常量泛型增强（默认值支持）
@@ -40,11 +45,13 @@
 ---
 
 ### 2. 08-01-const-generics.md
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: ✅ 已更新
 
 #### 变更内容
+>
 > **[来源: Rust Official Docs]**
 
 - **版本标注**: 添加 "Rust 1.94 新增常量泛型默认值支持"
@@ -52,6 +59,7 @@
 - **新增 Rust 1.94 新特性章节**: 第9章详细介绍新功能
 
 #### 新增内容
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -68,6 +76,7 @@ let buf: Buffer<u8, 2048> = Buffer { data: [0; 2048] };
 ```
 
 #### 新增章节
+>
 > **[来源: Rust Official Docs]**
 
 1. **9.1 常量泛型默认值**: 完整介绍新语法和用法
@@ -77,11 +86,13 @@ let buf: Buffer<u8, 2048> = Buffer { data: [0; 2048] };
 ---
 
 ### 3. 08-02-async-rust.md
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: ✅ 已更新
 
 #### 变更内容
+>
 > **[来源: Rust Official Docs]**
 
 - **版本标注**: 添加 "Rust 1.94 原生 async trait 稳定"

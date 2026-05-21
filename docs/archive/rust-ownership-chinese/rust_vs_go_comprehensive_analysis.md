@@ -1,6 +1,7 @@
 # Rust 1.93.1 vs Go 1.26 深度对比分析：所有权、并发与工作流设计模式
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.93.1 vs Go 1.26 深度对比分析：所有权、并发与工作流设计模式](#rust-1931-vs-go-126-深度对比分析所有权并发与工作流设计模式)
@@ -45,6 +46,7 @@
 ---
 
 ## 核心对比概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -73,9 +75,11 @@
 ---
 
 ## 语言特性对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Go 1.26 新特性详解
+>
 > **[来源: Rust Official Docs]**
 
 | 特性类别 | 具体变化 | 影响 |
@@ -91,6 +95,7 @@
 
 <!-- markdown-link-check-disable -->
 ### 2.2 Rust 1.93.1 vs Go 1.26 语言特性矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -125,9 +130,11 @@
 ---
 
 ## 内存管理机制对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 核心机制对比
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -182,6 +189,7 @@
 ```
 
 ### 3.2 内存管理代码对比
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -283,9 +291,11 @@ func sliceSharing() {
 ---
 
 ## 类型系统对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 Trait vs Interface 深度对比
+>
 > **[来源: Rust Official Docs]**
 
 <!-- markdown-link-check-disable -->
@@ -363,6 +373,7 @@ func sliceSharing() {
 <!-- markdown-link-check-enable -->
 
 ### 4.2 泛型对比
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

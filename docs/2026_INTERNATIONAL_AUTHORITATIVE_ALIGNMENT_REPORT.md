@@ -86,6 +86,7 @@
     - [安全来源引用](#安全来源引用)
   - [\[^26\]: The Update Framework (TUF). "crates.io TUF Integration." Rust Foundation. 2026. https://foundation.rust-lang.org/security/](#26-the-update-framework-tuf-cratesio-tuf-integration-rust-foundation-2026-httpsfoundationrust-langorgsecurity)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 
@@ -758,7 +759,6 @@
 
 - [docs 目录](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -776,3 +776,12 @@
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

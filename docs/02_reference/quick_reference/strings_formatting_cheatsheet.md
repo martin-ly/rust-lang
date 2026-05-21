@@ -1189,3 +1189,25 @@ let gamma = f64::consts::EULER_GAMMA;
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - String (computer science)]**
+
+> **[来源: TRPL Ch. 8 - Strings]**
+
+> **[来源: Rust Reference - str]**
+
+> **[来源: Unicode Standard]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Sea-ORM数据库ORM形式化分析](#sea-orm数据库orm形式化分析)
@@ -39,6 +40,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Official Docs]**
 
 Sea-ORM特点：
@@ -52,9 +54,11 @@ Sea-ORM特点：
 ---
 
 ## 2. 实体模型
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 ENTITY-1 ( 实体结构 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -77,6 +81,7 @@ $$
 $$
 
 ### 定义 ENTITY-2 ( 主键约束 )
+>
 > **[来源: Rust Official Docs]**
 
 $$
@@ -84,6 +89,7 @@ $$
 $$
 
 ### 定理 ENTITY-T1 ( 标识唯一性 )
+>
 > **[来源: Rust Official Docs]**
 
 主键唯一标识实体实例。
@@ -95,9 +101,11 @@ $$
 ---
 
 ## 3. 类型安全查询
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 QUERY-1 ( 查询构建器 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -116,6 +124,7 @@ $$
 $$
 
 ### 定义 QUERY-2 ( 类型检查 )
+>
 > **[来源: Rust Official Docs]**
 
 $$
@@ -123,6 +132,7 @@ $$
 $$
 
 ### 定理 QUERY-T1 ( 编译时类型安全 )
+>
 > **[来源: Rust Official Docs]**
 
 查询条件类型在编译时验证。
@@ -134,6 +144,7 @@ $$
 ---
 
 ## 4. 关系映射
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 REL-1 ( 关系类型 )

@@ -7,6 +7,7 @@
 ---
 
 ## 执行摘要
+>
 > **[来源: Rust Official Docs]**
 
 本次全面现代化工作已完成所有目标，项目已全面迁移到Rust 1.94.0 + Edition 2024标准。
@@ -27,9 +28,11 @@
 ---
 
 ## 详细完成报告
+>
 > **[来源: Rust Official Docs]**
 
 ### Phase 1: 过时内容归档 ✅
+>
 > **[来源: Rust Official Docs]**
 
 **归档文件**: `scripts/archive_deprecated_content.py`

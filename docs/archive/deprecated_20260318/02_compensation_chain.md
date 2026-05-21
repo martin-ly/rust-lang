@@ -7,9 +7,11 @@
 ---
 
 ## 1. 概念定义 (Def)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CC1: 补偿链
+>
 > **[来源: Rust Official Docs]**
 
 补偿链是一系列**有序补偿操作**，用于撤销已完成的业务操作。
@@ -24,6 +26,7 @@ CompensationChain := (O, C, ≺, status)
 ```
 
 ### Def CC2: 补偿顺序
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -34,6 +37,7 @@ CompensationOrder := Reverse(ExecutionOrder)
 ```
 
 ### Def CC3: 补偿状态机
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -47,9 +51,11 @@ CompensationState :=
 ---
 
 ## 2. 基本假设 (Axiom)
+>
 > **[来源: Rust Official Docs]**
 
 ### Axiom CC1: 补偿幂等性
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -59,6 +65,7 @@ CompensationState :=
 补偿操作可安全地重复执行。
 
 ### Axiom CC2: 补偿完备性
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -68,6 +75,7 @@ CompensationState :=
 每个操作都有对应的正确补偿。
 
 ### Axiom CC3: 补偿原子性
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -77,9 +85,11 @@ CompensationState :=
 ---
 
 ## 3. 定理 (Theorem)
+>
 > **[来源: Rust Official Docs]**
 
 ### Theorem CC1: 补偿一致性
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -94,6 +104,7 @@ exec(O) = s' ∧ exec(C) = s'' → s'' ≈ s₀
 4. 因此最终状态 ≈ 初始状态
 
 ### Theorem CC2: 部分补偿安全性
+>
 > **[来源: Rust Official Docs]**
 
 ```text

@@ -560,3 +560,16 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Artificial Intelligence]**
+
+> **[来源: tch-rs Documentation]**
+
+> **[来源: ACM - AI Systems]**

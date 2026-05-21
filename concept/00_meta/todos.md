@@ -235,6 +235,7 @@
 - [概念一致性检查清单](./audit_checklist.md) — 审计标准与完成定义
 - [跨层知识图谱](./inter_layer_map.md) — TODO 优先级与层间依赖映射
 - [语义表达力全景梳理](./semantic_expressiveness.md) — 待填补语义维度
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

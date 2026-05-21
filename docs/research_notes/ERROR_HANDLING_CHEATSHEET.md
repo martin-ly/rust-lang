@@ -168,3 +168,16 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Exception Handling]**
+
+> **[来源: TRPL Ch. 9 - Error Handling]**
+
+> **[来源: Rust Reference - Result]**
+
+> **[来源: RFC 2504 - Try Trait]**

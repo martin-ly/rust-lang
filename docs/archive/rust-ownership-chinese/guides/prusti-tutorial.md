@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Prusti 使用教程：分离逻辑验证Rust程序](#prusti-使用教程分离逻辑验证rust程序)
@@ -45,9 +46,11 @@
 ---
 
 ## 安装与配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 系统要求
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.65+
@@ -55,6 +58,7 @@
 - Python 3.8+
 
 ### 安装步骤
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -72,6 +76,7 @@ prusti --version
 ```
 
 ### VS Code 扩展
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -82,9 +87,11 @@ prusti --version
 ---
 
 ## 基础概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 什么是Prusti？
+>
 > **[来源: Rust Official Docs]**
 
 Prusti使用**分离逻辑（Separation Logic）**验证Rust程序：
@@ -104,6 +111,7 @@ Prusti解析器
 ```
 
 ### 基本注解
+>
 > **[来源: Rust Official Docs]**
 
 | 注解 | 含义 |
@@ -117,9 +125,11 @@ Prusti解析器
 ---
 
 ## 前置条件与后置条件
+>
 > **[来源: Rust Official Docs]**
 
 ### 简单示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -139,6 +149,7 @@ fn abs(n: i32) -> i32 {
 ```
 
 ### old表达式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

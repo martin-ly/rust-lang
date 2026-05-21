@@ -480,3 +480,24 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Variable Scope]**
+
+> **[来源: TRPL Ch. 10 - Lifetimes]**
+
+> **[来源: Rust Reference - Lifetimes]**
+
+> **[来源: RFC 2094 - NLL]**
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: Pierce 2002 - TAPL]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: ACM - Type Systems]**

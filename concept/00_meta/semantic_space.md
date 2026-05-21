@@ -1094,6 +1094,7 @@ graph TD
 - [x] **中**: 补充 Miri / Kani 在验证等价表达语义保持中的应用 — v1.1 §4.6
 - [x] **低**: 建立表征空间的机器可解析模型（JSON/YAML 导出） —— 已纳入 `concept_index.json`（53 文件索引）
 - [x] **低**: 与 `concept_index.md` 和 `inter_layer_map.md` 同步更新 — v1.1 Phase 4
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

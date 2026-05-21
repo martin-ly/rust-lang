@@ -125,6 +125,7 @@ cargo check --all  # ✅ 成功
 3. **零成本抽象**: 错误处理在编译期完成，运行时无额外开销
 4. **可扩展性**: 新增 crate 只需实现对应的错误类型变体
 5. **向后兼容**: 保留现有 API，提供平滑迁移路径
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

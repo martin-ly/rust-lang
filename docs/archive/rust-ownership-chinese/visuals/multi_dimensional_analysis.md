@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [多维度思维表征分析](#多维度思维表征分析)
@@ -33,9 +34,11 @@
     - [7.2 适用场景决策表](#72-适用场景决策表)
 
 ## 1. 形式化公理系统
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Rust所有权公理
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -62,6 +65,7 @@
 ```
 
 ### 1.2 借用规则公理
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -90,9 +94,11 @@
 ---
 
 ## 2. 定理与证明树
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 内存安全性定理
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -131,6 +137,7 @@
 ```
 
 ### 2.2 类型安全性定理
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -164,9 +171,11 @@ Preservation (保持定理):
 ---
 
 ## 3. 推理演绎系统
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 类型判断规则
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -194,6 +203,7 @@ Preservation (保持定理):
 ```
 
 ### 3.2 所有权转移推理
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -232,6 +242,7 @@ s1 ∉ dom(Γ')
 ---
 
 ## 4. 多维决策矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 内存管理策略决策矩阵

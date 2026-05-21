@@ -1,10 +1,10 @@
 # Traits（Trait 系统）
+>
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) · [L1 所有权](../01_foundation/01_ownership.md)
 > **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L6 设计模式](../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait
 > **定理链编号**: T-020 特质一致性 → T-021 孤儿规则完备性 → T-022 关联类型规范化
-
 
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md)
@@ -1774,6 +1774,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 - [x] **TODO**: 补充 Specialization（min_specialization）的最新稳定状态追踪 —— 优先级: 中 —— 已完成 §5.7
 - [x] **TODO**: 补充 Negative impls（`impl !Trait for T`）的形式化语义 —— 优先级: 低 —— 已完成 §补充章节 Negative Impls —— 2026-05-13
 - [x] **TODO**: 补充 Next-generation trait solver（2026 旗舰稳定化目标、coherence 改进、解锁效应） —— 优先级: 高 —— 已完成 §十二 —— 2026-05-18
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

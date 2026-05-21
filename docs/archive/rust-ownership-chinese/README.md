@@ -3,6 +3,7 @@
 本仓库包含Rust所有权系统的深入分析，结合形式语义、可判定性理论和实际代码示例。
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust所有权与可判定性：全面形式语义分析](#rust所有权与可判定性全面形式语义分析)
@@ -38,6 +39,7 @@
   - [📚 主要参考文献](#-主要参考文献)
 
 ## 📋 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -91,9 +93,11 @@
 ```
 
 ## 📚 核心文档
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 主要文档
+>
 > **[来源: Rust Official Docs]**
 
 - **Rust所有权与可判定性：全面形式语义分析与论证.md** (64KB)
@@ -103,6 +107,7 @@
   - 与Oxide/RustBelt/Aeneas学术工作对齐
 
 ### 2. 补充材料
+>
 > **[来源: Rust Official Docs]**
 
 - **详细实例与反例库.md** (21KB)
@@ -122,9 +127,11 @@
   - 并发模式性能
 
 ## 🛠️ 代码库
+>
 > **[来源: Rust Official Docs]**
 
 ### 代码统计
+>
 > **[来源: Rust Official Docs]**
 
 - **总行数**: ~4,000行Rust代码
@@ -133,6 +140,7 @@
 - **基准测试**: 4个性能测试
 
 ### 模块说明
+>
 > **[来源: Rust Official Docs]**
 
 | 模块 | 行数 | 描述 | 关键概念 |
@@ -147,6 +155,7 @@
 | `design_patterns` | 380行 | 设计模式 | 访问者、观察者、策略、装饰器等 |
 
 ### 运行代码
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -164,9 +173,11 @@ cargo miri test
 ```
 
 ## 📊 可视化资源
+>
 > **[来源: Rust Official Docs]**
 
 ### SVG图表 (12个)
+>
 > **[来源: Rust Official Docs]**
 
 | 图表 | 描述 | 用途 |

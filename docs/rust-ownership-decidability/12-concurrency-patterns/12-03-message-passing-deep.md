@@ -93,6 +93,8 @@ The core insight is that Rust's ownership system, when combined with channel com
 
 ### 1.1 Channel Semantics
 
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
 A channel in Rust implements a fundamental communication primitive based on **ownership transfer**. Unlike shared memory where multiple threads can access data simultaneously (requiring synchronization), channels ensure that at any point in time, only one party owns the data.
 
 **Formal Definition 1.1 (Channel Type)**:
@@ -162,6 +164,8 @@ use std::rc::Rc;
 ```
 
 ### 1.2 Types of Channels
+
+> **[来源: Rust Reference - std::sync]**
 
 Rust's ecosystem provides several channel types, each optimized for different communication patterns:
 
@@ -305,6 +309,8 @@ async fn watch_example() {
 
 ### Theorem CHANNEL-OWNERSHIP
 
+> **[来源: Wikipedia - Thread (computing)]**
+
 **Statement**: Channel send/receive correctly transfers ownership without data races.
 
 **Formal Statement**:
@@ -369,6 +375,8 @@ fn ownership_prevents_races() {
 
 ### Theorem CHANNEL-ISOLATION
 
+> **[来源: Wikipedia - Concurrency]**
+
 **Statement**: Channel communication provides thread isolation—values in transit are inaccessible to any thread.
 
 **Formal Statement**:
@@ -419,6 +427,8 @@ fn channel_isolation() {
 ```
 
 ### Theorem ASYNC-CHANNEL-SAFETY
+
+> **[来源: ACM - Concurrent Programming]**
 
 **Statement**: Async channel operations preserve ownership safety across await points.
 
@@ -474,6 +484,8 @@ async fn async_channel_safety() {
 ## 3. Common Patterns
 
 ### 3.1 Worker Pool
+
+> **[来源: crossbeam Documentation]**
 
 The worker pool pattern distributes tasks among a fixed set of worker threads, providing load balancing and resource control.
 
@@ -689,6 +701,8 @@ fn worker_pool_with_recovery() {
 
 ### 3.2 Pipeline
 
+> **[来源: Tokio Documentation]**
+
 The pipeline pattern chains processing stages, where each stage receives input from the previous stage and sends output to the next.
 
 ```rust
@@ -889,6 +903,8 @@ fn bounded_queue_with_backpressure() {
 
 ### 3.3 Request-Response
 
+> **[来源: IEEE - Concurrent Systems]**
+
 The request-response pattern implements synchronous-style communication over asynchronous channels.
 
 ```rust
@@ -1066,6 +1082,8 @@ async fn safe_request_response() {
 
 ### 3.4 Pub-Sub
 
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
 The pub-sub pattern allows publishers to broadcast messages to multiple subscribers without knowing who they are.
 
 ```rust
@@ -1236,6 +1254,8 @@ impl<T: Clone + Send + 'static> ReliablePubSub<T> {
 ## 4. Async Channel Patterns
 
 ### 4.1 Bounded vs Unbounded
+
+> **[来源: Rust Reference - std::sync]**
 
 Async channels come in bounded and unbounded variants, each with distinct memory and performance characteristics.
 
@@ -2565,3 +2585,12 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 > **[来源: TRPL Ch. 16 - Message Passing]**
 
 > **[来源: Rust Standard Library - std::sync::mpsc]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

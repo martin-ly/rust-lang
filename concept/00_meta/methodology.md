@@ -404,6 +404,7 @@ fn main() {
 - [概念一致性检查清单](./audit_checklist.md) — 质量门禁与审计标准
 - [语义表达力全景梳理](./semantic_expressiveness.md) — 横向语义维度框架
 - [跨层知识图谱](./inter_layer_map.md) — 层级依赖与反馈机制
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

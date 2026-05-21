@@ -6,11 +6,13 @@
 ---
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本报告记录 Rust 1.90 版本的内容对齐情况。
 
 ## 对齐状态
+>
 > **[来源: Rust Official Docs]**
 
 | 模块 | 状态 | 说明 |
@@ -20,6 +22,7 @@
 | C06 异步 | ✅ | 已对齐 |
 
 ## 相关文档
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.94 更新报告 (../RUST_194_RESEARCH_UPDATE.md)

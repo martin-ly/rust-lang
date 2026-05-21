@@ -465,3 +465,24 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four]**
+
+> **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Iterator Pattern]**
+
+> **[来源: TRPL Ch. 13 - Iterators]**
+
+> **[来源: Rust Reference - Iterator]**
+
+> **[来源: ACM - Iterator Patterns]**

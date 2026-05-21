@@ -7,6 +7,7 @@
 ---
 
 ## 🎯 优化摘要
+>
 > **[来源: Rust Official Docs]**
 
 本次优化全面审核并改进了项目中所有 Rust 1.94 特性的代码实现，修复了设计缺陷，添加了缺失的反例和边界测试。
@@ -21,12 +22,15 @@
 ---
 
 ## 🔴 P0 严重问题修复
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. unwrap() 和 panic! 滥用修复
+>
 > **[来源: Rust Official Docs]**
 
 #### c01_ownership_borrow_scope
+>
 > **[来源: Rust Official Docs]**
 
 | 位置 | 问题 | 修复方式 |
@@ -37,6 +41,7 @@
 | `ZeroCopyString::as_str/into_string` | 不安全假设 UTF-8 | 添加 try_as_str 安全方法 |
 
 #### c03_control_fn
+>
 > **[来源: Rust Official Docs]**
 
 | 位置 | 问题 | 修复方式 |
@@ -47,6 +52,7 @@
 | `is_valid_value` | 总是返回 true | 添加详细文档说明 |
 
 #### c05_threads
+>
 > **[来源: Rust Official Docs]**
 
 | 位置 | 问题 | 修复方式 |
@@ -54,6 +60,7 @@
 | `SingleThreadCache::get/get_mut` | 使用 unwrap | 改为 get_or_insert_with |
 
 #### c11_macro_system (P0 严重)
+>
 > **[来源: Rust Official Docs]**
 
 | 位置 | 问题 | 修复方式 |
@@ -62,6 +69,7 @@
 | `parse_macro_invocation` | 迭代器 unwrap | 改为 next_if 模式 |
 
 #### c12_wasm (P0 严重)
+>
 > **[来源: Rust Official Docs]**
 
 | 位置 | 问题 | 修复方式 |
@@ -70,9 +78,11 @@
 | `read_all_i32_le` | 使用 array_windows 生成重叠窗口 | 改为 chunks_exact(4) |
 
 ### 2. 设计缺陷修复
+>
 > **[来源: Rust Official Docs]**
 
 #### c08_algorithms - FibonacciCache 完全重写
+>
 > **[来源: Rust Official Docs]**
 
 **问题**: 原实现 cache 永不为空但从不存储，每次都重新计算
@@ -109,6 +119,7 @@ impl FibonacciCache {
 ```
 
 #### c12_wasm - read_all_i32_le 修复
+>
 > **[来源: Rust Official Docs]**
 
 **问题**: 使用 `array_windows::<4>()` 生成重叠窗口，导致错误结果

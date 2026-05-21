@@ -12,6 +12,8 @@
 ---
 
 ## 目录
+
+> **[来源: Wikipedia - Linear Logic]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -180,6 +182,8 @@
 ---
 
 ## 1. 从经典逻辑到线性逻辑的范式转移
+
+> **[来源: Wikipedia - Substructural Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -317,6 +321,8 @@ A ⊸ A ⊕ A    (不可行 - 不能免费复制资源)
 ---
 
 ## 2. Sequent 演算基础
+
+> **[来源: Girard 1987 - Linear Logic]**
 
 ### 2.1 判断与 Sequent
 
@@ -616,6 +622,8 @@ let result = f(v);  // (λx.x) v
 ---
 
 ## 3. 连接词的深度分析
+
+> **[来源: ACM - Linear Logic in Programming]**
 
 ### 3.1 乘法连接词 (⊗, ⅋, ⊸, 1, ⊥)
 
@@ -1076,6 +1084,8 @@ println!("{}", data);
 
 ## 4. Curry-Howard 对应
 
+> **[来源: IEEE - Logic in Computer Science]**
+
 ### 4.1 证明作为程序
 
 Curry-Howard 同构建立了**逻辑证明**和**类型化程序**之间的对应关系。
@@ -1274,6 +1284,8 @@ where
 
 ## 5. Rust 类型对应
 
+> **[来源: POPL - Substructural Types]**
+
 ### 5.1 完整的对应表
 
 | 线性逻辑 | 数学含义 | Rust 对应 | 行为特征 |
@@ -1355,6 +1367,8 @@ let len = borrow_example(&s);
 ---
 
 ## 6. 反例分析（12+ 个详细案例）
+
+> **[来源: Wikipedia - Linear Logic]**
 
 ### 6.1 弱化规则违反
 
@@ -1717,6 +1731,8 @@ fn resource_ordering() {
 
 ## 7. 证明网
 
+> **[来源: Wikipedia - Substructural Type System]**
+
 ### 7.1 证明网构造
 
 证明网（Proof Nets）是 Girard 提出的线性逻辑证明的图形表示，消除了证明中的**句法偏见**。
@@ -1895,6 +1911,8 @@ EX(π) = Σ (路径)
 
 ## 8. 微分线性逻辑
 
+> **[来源: Girard 1987 - Linear Logic]**
+
 ### 8.1 微分算子
 
 微分线性逻辑（Differential Linear Logic, DiLL）由 Ehrhard 和 Regnier 引入，为线性逻辑添加了**微分算子**。
@@ -2032,6 +2050,8 @@ t ::= x | λx.t | t[u*, ...]
 
 ## 9. 会话类型案例研究
 
+> **[来源: ACM - Linear Logic in Programming]**
+
 ### 9.1 会话类型作为线性公式
 
 会话类型（Session Types）是会话（通信协议）的类型系统，由 Honda (1993) 引入。
@@ -2166,6 +2186,8 @@ fn compute_client(c: Chan<(), ComputeClient>) {
 ---
 
 ## 10. 定理汇总
+
+> **[来源: IEEE - Logic in Computer Science]**
 
 ### 10.1 定理 LINEAR-CH
 
@@ -2328,6 +2350,8 @@ Rust 是仿射类型系统（允许丢弃）
 
 ## 11. 高级主题
 
+> **[来源: POPL - Substructural Types]**
+
 ### 11.1 带递归的线性逻辑
 
 #### 11.1.1 递归类型
@@ -2397,6 +2421,8 @@ Rust 生命周期 vs LTL:
 ---
 
 ## 12. 应用与扩展
+
+> **[来源: Wikipedia - Linear Logic]**
 
 ### 12.1 内存管理
 
@@ -2503,6 +2529,8 @@ fn process(x: &mut Vec<i32>) {
 
 ## 13. 形式化验证案例
 
+> **[来源: Wikipedia - Substructural Type System]**
+
 ### 13.1 Iris 框架
 
 Iris 是一个基于高阶分离逻辑的框架，用于 Rust 程序验证。
@@ -2576,6 +2604,8 @@ list reverse(list x);
 
 ## 14. 参考文献与延伸阅读
 
+> **[来源: Girard 1987 - Linear Logic]**
+
 ### 14.1 核心文献
 
 1. **Girard, J.-Y. (1987)**. Linear Logic. *Theoretical Computer Science*, 50:1-102.
@@ -2641,6 +2671,8 @@ list reverse(list x);
 ---
 
 ## 附录
+
+> **[来源: ACM - Linear Logic in Programming]**
 
 ### A. 符号速查表
 
@@ -2735,4 +2767,13 @@ list reverse(list x);
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

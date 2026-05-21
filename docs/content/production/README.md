@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 生产实践指南](#rust-生产实践指南)
@@ -49,10 +50,12 @@
     - [优雅降级](#优雅降级)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: 🔄 持续完善中](#状态--持续完善中)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 目标
+>
 > **[来源: Rust Official Docs]**
 
 本目录致力于提供：
@@ -65,9 +68,11 @@
 ---
 
 ## 📊 生产就绪检查清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 功能完整性
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 所有功能有单元测试覆盖 (>80%)
@@ -79,6 +84,7 @@
 - [ ] 优雅关闭机制
 
 ### 可观测性
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 结构化日志输出
@@ -88,6 +94,7 @@
 - [ ] 告警规则配置
 
 ### 安全性
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 依赖安全审计通过
@@ -97,6 +104,7 @@
 - [ ] TLS 配置正确
 
 ### 性能
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 内存使用分析
@@ -108,12 +116,15 @@
 ---
 
 ## 🐳 部署
+>
 > **[来源: Rust Official Docs]**
 
 ### Docker 优化
+>
 > **[来源: Rust Official Docs]**
 
 #### 多阶段构建
+>
 > **[来源: Rust Official Docs]**
 
 ```dockerfile
@@ -141,6 +152,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 #### 镜像优化技巧
+>
 > **[来源: Rust Official Docs]**
 
 | 技巧 | 效果 | 实施难度 |
@@ -648,10 +660,30 @@ impl Service {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
 
 - [Kubernetes 部署指南](./kubernetes_deployment_guide.md)
 - [Content 总览](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

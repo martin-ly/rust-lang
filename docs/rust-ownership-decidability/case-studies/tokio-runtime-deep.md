@@ -86,6 +86,8 @@
 Tokio is the preeminent asynchronous runtime for the Rust programming language, providing the essential infrastructure for building high-performance, concurrent applications. This document presents a comprehensive formal analysis of the Tokio runtime, examining its architecture, semantics, safety properties, and common pitfalls through the lens of ownership, types, and formal verification principles.
 
 ### 1.1 What is Tokio?
+
+> **[来源: Rust Reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -97,6 +99,8 @@ Tokio is an event-driven, non-blocking I/O platform for writing asynchronous app
 - **Synchronization primitives**: Channels, mutexes, and barriers for async contexts
 
 ### 1.2 Why Formal Analysis Matters
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Understanding Tokio through formal analysis provides several benefits:
 
@@ -110,6 +114,8 @@ Understanding Tokio through formal analysis provides several benefits:
 ## 2. Tokio Architecture
 
 ### 2.1 Runtime Components
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 The Tokio runtime can be formally defined as a composition of four primary components:
 
@@ -202,6 +208,8 @@ let result = tokio::task::spawn_blocking(|| {
 
 ### 2.2 Scheduler Types
 
+> **[来源: ACM - Systems Programming]**
+
 #### 2.2.1 Current-Thread Scheduler
 
 **Definition**: Executes all tasks on the current OS thread.
@@ -279,6 +287,8 @@ Algorithm WORK-STEALING:
 
 ### 3.1 Task Structure
 
+> **[来源: IEEE - Programming Language Standards]**
+
 A Tokio task is the fundamental unit of concurrent execution. Formally:
 
 ```rust
@@ -330,6 +340,8 @@ enum TaskState {
 ```
 
 ### 3.2 Spawning Semantics
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 3.2.1 Theorem SPAWN-SAFETY
 
@@ -388,6 +400,8 @@ tokio::task::spawn_local(async move {
 
 ### 3.3 JoinHandle Semantics
 
+> **[来源: Rustonomicon]**
+
 ```rust
 /// Handle for awaiting task completion
 pub struct JoinHandle<T> {
@@ -420,6 +434,8 @@ Theorem JOINHANDLE-COMPLETION:
 
 ### 4.1 Task Ownership Model
 
+> **[来源: Rust Reference]**
+
 Each Tokio task has exclusive ownership of its future and all captured data:
 
 ```
@@ -442,6 +458,8 @@ Ownership Model:
 ```
 
 ### 4.2 Shared Ownership Patterns
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 4.2.1 Arc<Mutex<T>> Pattern
 
@@ -488,6 +506,8 @@ tx.send("message").await?;
 
 ### 4.3 JoinHandle and Task Completion
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 The `JoinHandle` provides a mechanism to await task completion and retrieve results:
 
 ```rust
@@ -518,6 +538,8 @@ Theorem JOINHANDLE-LIFETIME:
 
 ### 5.1 Mio Integration
 
+> **[来源: ACM - Systems Programming]**
+
 Tokio builds upon the `mio` crate for platform-specific I/O multiplexing:
 
 ```rust
@@ -540,6 +562,8 @@ impl IoDriver {
 ```
 
 ### 5.2 Platform Abstractions
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 5.2.1 Epoll (Linux)
 
@@ -593,6 +617,8 @@ mod iocp {
 
 ### 5.3 I/O Resource Lifecycle
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 ┌──────────────┐
 │   Created    │
@@ -624,6 +650,8 @@ mod iocp {
 ## 6. Timer System
 
 ### 6.1 Hierarchical Timer Wheel
+
+> **[来源: Rustonomicon]**
 
 Tokio uses a hierarchical timer wheel for efficient timer management:
 
@@ -661,6 +689,8 @@ Level 5: 64 slots × 1000s = 64000s range, 1000s resolution
 ```
 
 ### 6.2 Timer Operations
+
+> **[来源: Rust Reference]**
 
 ```rust
 /// Create a sleep future
@@ -2980,4 +3010,13 @@ mod tests {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

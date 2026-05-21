@@ -30,7 +30,7 @@ cargo run -p c06_async --example async_basic
 # 等等
 ```
 
-查看 [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md) 了解完整项目结构。
+查看 [PROJECT_STRUCTURE.md](../PROJECT_STRUCTURE.md) 了解完整项目结构
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

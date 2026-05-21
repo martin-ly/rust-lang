@@ -94,6 +94,7 @@ a-mir-formality:[████████░░] 类型系统规范验证
 ### 3.1 为什么需要类型系统规范？
 
 当前 Rust 的类型系统规则分散在：
+
 - `rustc` 源代码（~50 万行，复杂且隐含假设）
 - Rust Reference（自然语言描述，存在歧义）
 - RFC 文档（设计意图，非精确规格）
@@ -113,6 +114,7 @@ a-mir-formality (Coq/Lean)
 ```
 
 **关键设计**:
+
 - 基于 **small-step operational semantics**（小步操作语义）
 - 使用 **bidirectional type checking**（双向类型检查）规则
 - 与 `rustc` 的 trait solver 行为逐一对齐

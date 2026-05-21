@@ -1,6 +1,7 @@
 # Pin 与 Unpin 深度分析
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Pin 与 Unpin 深度分析](#pin-与-unpin-深度分析)
@@ -38,6 +39,7 @@
   - [参考](#参考)
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 `Pin`是Rust标准库中的一个重要类型，用于处理**自引用结构**和**异步Future**。
@@ -46,9 +48,11 @@
 ---
 
 ## 1. 为什么需要Pin？
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 自引用结构的问题
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -77,6 +81,7 @@ fn main() {
 ```
 
 ### 1.2 移动问题
+>
 > **[来源: Rust Official Docs]**
 
 Rust中大多数值可以被**移动**：
@@ -91,9 +96,11 @@ let y = x;  // x被移动到y，内存地址可能改变
 ---
 
 ## 2. Pin的核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Pin的语义
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -110,6 +117,7 @@ pub struct Pin<P> {
 - **如果T: Unpin**，则Pin行为与普通指针相同
 
 ### 2.2 PhantomPinned
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -133,9 +141,11 @@ impl MustNotMove {
 ---
 
 ## 3. Pin API详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 创建Pin
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -165,6 +175,7 @@ let pinned: Pin<&mut String> = unsafe { Pin::new_unchecked(&mut data) };
 ```
 
 ### 3.2 安全操作
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

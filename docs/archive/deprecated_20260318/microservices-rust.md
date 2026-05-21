@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [微服务架构模式 (Rust实现)](#微服务架构模式-rust实现)
@@ -39,9 +40,11 @@
 ---
 
 ## 1. 服务边界设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 领域驱动边界
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -124,6 +127,7 @@ mod order_service {
 ```
 
 ### 1.2 服务契约
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -165,9 +169,11 @@ impl Event for OrderCreated {
 ---
 
 ## 2. 通信模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 同步通信（gRPC）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -218,6 +224,7 @@ impl<T: Clone> GrpcConnectionPool<T> {
 ```
 
 ### 2.2 异步通信（消息队列）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -284,6 +291,7 @@ impl KafkaConsumerGroup {
 ```
 
 ### 2.3 事件总线模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -326,9 +334,11 @@ impl InMemoryEventBus {
 ---
 
 ## 3. 服务发现与负载均衡
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Consul集成
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -378,6 +388,7 @@ impl ConsulRegistry {
 ```
 
 ### 3.2 客户端负载均衡
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

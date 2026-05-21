@@ -45,6 +45,7 @@
     - [6.1 国际权威覆盖度](#61-国际权威覆盖度)
     - [6.2 权威来源分类](#62-权威来源分类)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 
@@ -540,7 +541,6 @@ DOI: 10.1145/3704904
 
 - [docs 目录](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -558,3 +558,12 @@ DOI: 10.1145/3704904
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Async边界情况与高级模式](#async边界情况与高级模式)
@@ -34,9 +35,11 @@
     - [8.2 Mock异步服务](#82-mock异步服务)
 
 ## 1. 递归Async函数
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 问题: 无限类型递归
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -70,6 +73,7 @@ $$
 导致**无限递归类型**!
 
 ### 1.2 解决方案
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -115,9 +119,11 @@ impl Future for FibFuture {
 ---
 
 ## 2. 异步递归数据结构遍历
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 树遍历的async版本
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -165,9 +171,11 @@ async fn async_walk_iterative(root: &Node) -> i32 {
 ---
 
 ## 3. 异步Drop模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 问题: Drop是同步的
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -184,6 +192,7 @@ impl Drop for AsyncResource {
 ```
 
 ### 3.2 解决方案: AsyncDrop模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -229,9 +238,11 @@ impl Drop for AsyncResource {
 ---
 
 ## 4. Select! 并发模式详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 select!宏的完整语义
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

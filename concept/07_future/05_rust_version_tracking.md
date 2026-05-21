@@ -483,6 +483,7 @@ unsafe extern "C" {
 | Cargo `frame-pointers` profile 选项 | 工具链 | `docs/06_toolchain/` | 🟡 待补充 |
 
 **Project Goals 月度更新（2026-05-18）**:
+
 - **流程变更**: Project Goals 从半年制改为年度制（2026 Goals）
 - **cargo-script**: Cargo FCP 已结束，blocker 为 edition policy
 - **BorrowSanitizer**: Shadow Stack 策略，RFC 起草中，RustConf 2026 演讲已入选

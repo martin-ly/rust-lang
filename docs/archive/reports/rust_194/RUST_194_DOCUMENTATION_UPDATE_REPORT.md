@@ -8,11 +8,13 @@
 ---
 
 ## 📋 更新概览
+>
 > **[来源: Rust Official Docs]**
 
 本次更新全面推进了项目文档从 Rust 1.93.1+ 到 Rust 1.94.0+ 的版本升级，确保所有文档与最新 Rust 版本保持同步。
 
 ### 更新统计
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 文件数量 | 状态 |
@@ -28,9 +30,11 @@
 ---
 
 ## ✅ 已更新文档清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 根目录文档
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -39,6 +43,7 @@
 | `MIGRATION_GUIDE_1.91.1_TO_1.92.0.md` | 历史文档，保留原版本 | ✅ |
 
 ### 2. 工具链文档 (`docs/06_toolchain/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -58,6 +63,7 @@
 | `11_rust_1.93_cargo_rustdoc_changes.md` | 版本号 1.94.0+ | ✅ |
 
 ### 3. 新建 Rust 1.94 专属文档
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 大小 | 内容 | 状态 |
@@ -67,6 +73,7 @@
 | `18_rust_1.94_adoption_guide.md` | 12.0 KB | 采用指南 | ✅ |
 
 ### 4. 指南文档 (`docs/05_guides/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -92,6 +99,7 @@
 | `DESIGN_PATTERNS_USAGE_GUIDE.md` | 版本号 1.94.0+ | ✅ |
 
 ### 5. 速查卡 (`docs/02_reference/quick_reference/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -120,6 +128,7 @@
 | `wasm_cheatsheet.md` | 版本号 1.94.0+ | ✅ |
 
 ### 6. 参考文档 (`docs/02_reference/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -132,6 +141,7 @@
 | `STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md` | 版本号 1.94.0+ | ✅ |
 
 ### 7. 研究笔记 (`docs/research_notes/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |
@@ -192,6 +202,7 @@
 | `WRITING_GUIDE.md` | 版本号 1.94.0+ | ✅ |
 
 ### 8. 项目文档 (`docs/07_project/`)
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 状态 |

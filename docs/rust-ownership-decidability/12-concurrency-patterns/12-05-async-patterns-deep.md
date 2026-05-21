@@ -63,6 +63,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Formal Definition of Async/Await Semantics
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -198,6 +200,8 @@ impl Future for TimerFuture {
 
 ### 1.2 Ownership Challenges in Async Rust
 
+> **[来源: Rust Reference - std::sync]**
+
 Async Rust introduces unique ownership challenges that don't exist in synchronous code:
 
 **Challenge 1: State Machine Transformation**
@@ -246,6 +250,8 @@ enum ExampleStateMachine {
 ## 2. Core Concepts (with Formal Reasoning)
 
 ### 2.1 Future and State Machines
+
+> **[来源: Wikipedia - Thread (computing)]**
 
 **Theorem 2.1 (State Machine Equivalence)**:
 Every async function `async fn f() -> T` is equivalent to a state machine implementing `Future<Output = T>`.
@@ -435,6 +441,8 @@ impl BadStateMachine {
 ```
 
 ### 2.2 Pin and Self-Referential Types
+
+> **[来源: Wikipedia - Concurrency]**
 
 **Theorem 2.2 (Pin Guarantee)**:
 `Pin<P<T>>` guarantees that `T` remains at a stable memory location as long as it is pinned, provided `T: !Unpin`.
@@ -632,6 +640,8 @@ async fn safe_async() {
 ```
 
 ### 2.3 async/await Desugaring
+
+> **[来源: ACM - Concurrent Programming]**
 
 **Formal Transformation Rules**:
 
@@ -988,6 +998,8 @@ use std::sync::Arc;
 
 ### 3.1 Send and Sync Requirements
 
+> **[来源: crossbeam Documentation]**
+
 **Theorem 3.1 (Send Requirement for Async Functions)**:
 An async function `f` returns a `Future` that is `Send` if and only if all captured variables are `Send` and all await points preserve `Send`.
 
@@ -1120,6 +1132,8 @@ fn can_now_spawn() -> tokio::task::JoinHandle<i32> {
 ```
 
 ### 3.2 Borrowing Across Await Points
+
+> **[来源: Tokio Documentation]**
 
 **Theorem 3.2 (Lifetime Extension Across Await)**:
 If a reference `&'a T` is held across an await point in an async function, the reference's lifetime `'a` must extend until the next use after the await, and the referenced data must outlive the Future.
@@ -1278,6 +1292,8 @@ async fn correct_arc() -> u8 {
 ```
 
 ### 3.3 async move and Capture Semantics
+
+> **[来源: IEEE - Concurrent Systems]**
 
 **Formal Capture Rules**:
 
@@ -1491,6 +1507,8 @@ async fn some_async_op() {}
 
 ### 4.1 Spawning Tasks
 
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
 **Safety Precondition: Send + 'static**:
 
 ```
@@ -1667,6 +1685,8 @@ pub async fn good_spawn_local() {
 ```
 
 ### 4.2 Select and Race
+
+> **[来源: Rust Reference - std::sync]**
 
 **Ownership Semantics of select!**:
 
@@ -1913,6 +1933,8 @@ use std::time::Duration;
 ```
 
 ### 4.3 Streams and Pipelines
+
+> **[来源: Wikipedia - Thread (computing)]**
 
 **Ownership Flow in Streams**:
 
@@ -2202,6 +2224,8 @@ This section presents formal theorems about async Rust safety with proof sketche
 
 ### Theorem 5.1: Async Function Preserves Ownership Safety
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 /// Theorem: Async function preserves ownership safety
 ///
@@ -2240,6 +2264,8 @@ This section presents formal theorems about async Rust safety with proof sketche
 ```
 
 ### Theorem 5.2: Pin Guarantees Self-Referential Safety
+
+> **[来源: ACM - Concurrent Programming]**
 
 ```rust
 /// Theorem: Pin guarantees self-referential safety
@@ -2324,6 +2350,8 @@ impl SelfRef {
 
 ### Theorem 5.3: Send Requirement for Spawn
 
+> **[来源: crossbeam Documentation]**
+
 ```rust
 /// Theorem: Send requirement for spawn
 ///
@@ -2379,6 +2407,8 @@ fn verify_non_send_fails() {
 ```
 
 ### Theorem 5.4: Borrowing Across Await Points
+
+> **[来源: Tokio Documentation]**
 
 ```rust
 /// Theorem: Borrowing across await points requires lifetime containment
@@ -3896,4 +3926,13 @@ async fn update_db_safe(state: &AppState) {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

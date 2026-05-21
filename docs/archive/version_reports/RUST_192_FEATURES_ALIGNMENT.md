@@ -13,9 +13,11 @@
 ---
 
 ## 🆕 Rust 1.93.0 特性对齐
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心改进对齐
+>
 > **[来源: Rust Official Docs]**
 
 1. **musl 1.2.5 更新** ✅
@@ -42,6 +44,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.92.0 / 1.93.0 特性对齐文档 / Rust Features Alignment](#rust-1920--1930-特性对齐文档--rust-features-alignment)
@@ -88,11 +91,13 @@
 ---
 
 ## 🎯 对齐概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档对齐了网络上最新的 Rust 1.92.0 特性信息，确保项目实现与官方发布说明一致。
 
 ### 对齐来源
+>
 > **[来源: Rust Official Docs]**
 
 1. **官方发布说明**:
@@ -105,9 +110,11 @@
 ---
 
 ## 🔍 1. 网络最新信息对齐
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Never 类型 Lint 严格化
+>
 > **[来源: Rust Official Docs]**
 
 **网络信息**:
@@ -121,6 +128,7 @@
 **对齐状态**: ✅ 完全对齐
 
 ### 1.2 错误报告改进
+>
 > **[来源: Rust Official Docs]**
 
 **网络信息**:
@@ -134,6 +142,7 @@
 **对齐状态**: ✅ 完全对齐
 
 ### 1.3 MaybeUninit 文档化
+>
 > **[来源: Rust Official Docs]**
 
 **网络信息**:
@@ -146,6 +155,7 @@
 **对齐状态**: ✅ 完全对齐
 
 ### 1.4 联合体原始引用
+>
 > **[来源: Rust Official Docs]**
 
 **网络信息**:
@@ -160,6 +170,7 @@
 ---
 
 ## 📊 2. 特性对比表
+>
 > **[来源: Rust Official Docs]**
 
 | 特性                    | 官方说明 | 网络信息 | 项目实现 | 对齐状态 |

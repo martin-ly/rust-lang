@@ -7,6 +7,7 @@
 ---
 
 ## 📊 检查概览
+>
 > **[来源: Rust Official Docs]**
 
 | 检查项目 | 初始状态 | 修复后 | 修复动作 |
@@ -20,9 +21,11 @@
 ---
 
 ## ✅ 已自动修复的问题
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. Cargo.toml 元数据补充 ✅
+>
 > **[来源: Rust Official Docs]**
 
 **修复内容**: 为 8 个 crate 添加了完整的元数据字段

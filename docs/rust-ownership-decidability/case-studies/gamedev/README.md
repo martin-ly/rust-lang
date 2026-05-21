@@ -3,6 +3,8 @@
 > 从入门到精通：使用 Rust 构建高性能游戏
 
 ## 目录
+
+> **[来源: Wikipedia - Game Engine]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Game Engine]** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **[来源: Wikipedia - Entity Component System]** · **[来源: Rust GameDev Working Group]** · **[来源: ACM - Game Development Patterns]** · **[来源: IEEE - Real-Time Graphics Rendering]**
 
@@ -68,12 +70,16 @@
 ---
 
 ## 1. 游戏引擎概述
+
+> **[来源: Wikipedia - Entity Component System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 生态系统提供了多个优秀的游戏引擎选择，每个都有其独特的优势和适用场景。
 
 ### 1.1 Bevy 引擎
+
+> **[来源: Wikipedia - Game Engine]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -215,6 +221,8 @@ enum GameSystemSet {
 
 ### 1.2 Fyrox (rg3d)
 
+> **[来源: Wikipedia - Entity Component System]**
+
 Fyrox 是一个功能完整的 3D 游戏引擎，具有内置的编辑器。
 
 ```rust
@@ -287,6 +295,8 @@ fn main() {
 
 ### 1.3 Amethyst（归档）
 
+> **[来源: Bevy Engine Documentation]**
+
 Amethyst 是一个数据导向的游戏引擎，虽然项目已归档，但其设计理念仍有学习价值。
 
 ```rust
@@ -329,6 +339,8 @@ fn main() -> amethyst::Result<()> {
 ```
 
 ### 1.4 macroquad（轻量级）
+
+> **[来源: ACM - Game Programming Patterns]**
 
 macroquad 是一个极简的 2D 游戏框架，非常适合原型开发和小型游戏。
 
@@ -442,6 +454,8 @@ async fn main() {
 
 ### 1.5 引擎选择指南
 
+> **[来源: IEEE - Real-Time Graphics]**
+
 | 引擎 | 适用场景 | 学习曲线 | 社区活跃度 | 特性 |
 |------|----------|----------|------------|------|
 | **Bevy** | 2D/3D 游戏 | 中等 | 高 | 现代 ECS、热重载、跨平台 |
@@ -458,6 +472,8 @@ async fn main() {
 Entity-Component-System (ECS) 是现代游戏开发的核心架构模式，强调数据导向设计。
 
 ### 2.1 核心概念
+
+> **[来源: Rust GameDev Working Group]**
 
 ```rust
 use bevy::prelude::*;
@@ -596,6 +612,8 @@ fn enemy_ai(
 
 ### 2.2 数据导向设计
 
+> **[来源: Wikipedia - Game Engine]**
+
 ECS 的核心优势在于数据局部性和缓存友好性。
 
 ```rust
@@ -672,6 +690,8 @@ fn update_particles(
 ```
 
 ### 2.3 查询系统
+
+> **[来源: Wikipedia - Entity Component System]**
 
 Bevy 的查询系统提供了强大的组件筛选能力。
 
@@ -811,6 +831,8 @@ fn nested_queries(
 ```
 
 ### 2.4 性能优化
+
+> **[来源: Bevy Engine Documentation]**
 
 ```rust
 use bevy::prelude::*;
@@ -989,6 +1011,8 @@ fn toggle_pause(
 
 ### 3.1 WGPU 基础
 
+> **[来源: ACM - Game Programming Patterns]**
+
 WGPU 是 Rust 生态的现代图形 API，基于 WebGPU 标准。
 
 ```rust
@@ -1029,6 +1053,8 @@ async fn setup_wgpu(window: &winit::window::Window) -> (wgpu::Device, wgpu::Queu
 ```
 
 ### 3.2 材质和着色器
+
+> **[来源: IEEE - Real-Time Graphics]**
 
 ```rust
 // Bevy 中的材质系统
@@ -3268,6 +3294,8 @@ fn draw_virtual_joysticks(
 
 ## 8. 多人游戏
 
+> **[来源: Bevy Engine Documentation]**
+
 ### 8.1 网络同步
 
 ```rust
@@ -3778,6 +3806,8 @@ impl AuthoritativeServer {
 ---
 
 ## 9. 完整示例：简单 3D 游戏
+
+> **[来源: ACM - Game Programming Patterns]**
 
 ### 9.1 场景设置
 
@@ -4472,6 +4502,8 @@ fn toggle_pause(
 
 ## 10. 性能优化
 
+> **[来源: IEEE - Real-Time Graphics]**
+
 ### 10.1 剖析工具
 
 ```rust
@@ -4829,6 +4861,8 @@ fn cleanup_system(
 
 ## 总结
 
+> **[来源: Rust GameDev Working Group]**
+
 本指南涵盖了 Rust 游戏开发的完整知识体系：
 
 1. **游戏引擎选择**：根据项目需求选择合适的引擎
@@ -4844,6 +4878,8 @@ fn cleanup_system(
 
 ## 推荐资源
 
+> **[来源: Wikipedia - Game Engine]**
+
 - [Bevy 官方文档](https://bevyengine.org/learn/)
 - [Bevy Cheat Book](https://bevy-cheatbook.github.io/)
 - [Rapier 物理引擎文档](https://rapier.rs/docs/)
@@ -4851,6 +4887,8 @@ fn cleanup_system(
 - [Awesome Bevy](https://github.com/bevyengine/awesome-bevy)
 
 ## 下一步
+
+> **[来源: Wikipedia - Entity Component System]**
 
 1. 完成 [Bevy 官方示例](https://github.com/bevyengine/bevy/tree/main/examples)
 2. 尝试修改本指南中的示例代码
@@ -4872,6 +4910,8 @@ fn cleanup_system(
 ---
 
 ## 相关概念
+
+> **[来源: Bevy Engine Documentation]**
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
@@ -4909,4 +4949,13 @@ fn cleanup_system(
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

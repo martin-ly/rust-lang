@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust vs C++ 深度对比](#rust-vs-c-深度对比)
@@ -57,6 +58,7 @@
 ---
 
 ## 1. 执行摘要
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -91,9 +93,11 @@
 ---
 
 ## 2. 内存安全机制对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 核心安全保证对比
+>
 > **[来源: Rust Official Docs]**
 
 | 安全问题 | Rust (编译期) | C++ (运行时/工具) | 优势方 |
@@ -108,6 +112,7 @@
 | **整数溢出** | ✅ Debug panic / Release wrap | ❌ 未定义行为 | Rust |
 
 ### 2.2 悬垂指针与使用已释放内存
+>
 > **[来源: Rust Official Docs]**
 
 **C++ 版本 - 运行时问题:**
@@ -161,6 +166,7 @@ error[E0515]: cannot return reference to local variable `msg`
 ```
 
 ### 2.3 缓冲区溢出防护
+>
 > **[来源: Rust Official Docs]**
 
 **C++ 版本 - 潜在溢出:**
@@ -215,6 +221,7 @@ fn main() {
 ```
 
 ### 2.4 空指针/空引用
+>
 > **[来源: Rust Official Docs]**
 
 **C++ 版本:**
@@ -273,9 +280,11 @@ fn main() {
 ---
 
 ## 3. 所有权系统对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 内存管理哲学
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -301,6 +310,7 @@ fn main() {
 ```
 
 ### 3.2 所有权 vs 智能指针
+>
 > **[来源: Rust Official Docs]**
 
 **所有权转移对比:**
@@ -449,6 +459,7 @@ fn no_circular_reference() {
 ```
 
 ### 3.3 RAII 实现对比
+>
 > **[来源: Rust Official Docs]**
 
 **C++ RAII:**

@@ -1,6 +1,7 @@
 # 断路器模式语义 (Circuit Breaker Pattern Semantics)
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [断路器模式语义 (Circuit Breaker Pattern Semantics)](#断路器模式语义-circuit-breaker-pattern-semantics)
@@ -27,6 +28,7 @@
   - [8. 总结](#8-总结)
 
 ## 1. 引言
+>
 > **[来源: Rust Official Docs]**
 
 断路器模式是分布式系统中实现故障隔离的核心机制。
@@ -35,9 +37,11 @@
 ---
 
 ## 2. 断路器状态机
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 三态模型
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -75,6 +79,7 @@
 ```
 
 ### 2.2 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -108,9 +113,11 @@
 ---
 
 ## 3. 数学模型
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 失败率计算
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -128,6 +135,7 @@ failure_rate_t = α × I{request_failed} + (1 - α) × failure_rate_{t-1}
 ```
 
 ### 3.2 恢复时间计算
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -145,6 +153,7 @@ timeout_open = base_timeout × β^n
 ```
 
 ### 3.3 令牌桶限流（半开状态）
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -165,9 +174,11 @@ tokens_{t+1} = min(tokens_t + rate × Δt, capacity)
 ---
 
 ## 4. Rust 实现
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 核心状态机实现
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

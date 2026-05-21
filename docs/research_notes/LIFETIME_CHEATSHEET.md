@@ -587,3 +587,16 @@ let r = &x;  // 编译器自动推断
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Variable Scope]**
+
+> **[来源: TRPL Ch. 10 - Lifetimes]**
+
+> **[来源: Rust Reference - Lifetimes]**
+
+> **[来源: RFC 2094 - NLL]**

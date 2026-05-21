@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Oxide 详细解读：声明式Rust语义](#oxide-详细解读声明式rust语义)
@@ -34,9 +35,11 @@
   - [9. 总结](#9-总结)
 
 ## 1. 论文概述
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心贡献
+>
 > **[来源: Rust Official Docs]**
 
 Oxide提出了**首个接近源代码级别的Rust形式化模型**，将Rust的借用检查器重新表述为**声明式子结构类型系统**。
@@ -50,9 +53,11 @@ Oxide提出了**首个接近源代码级别的Rust形式化模型**，将Rust的
 ---
 
 ## 2. 核心语言定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -78,6 +83,7 @@ e ::= x | n | () | true | false
 ```
 
 ### 2.2 权限（Permissions）
+>
 > **[来源: Rust Official Docs]**
 
 | 权限 | 含义 | 别名规则 |
@@ -100,6 +106,7 @@ let r2 = &uniq x;  // uniq强调别名语义
 ---
 
 ## 3. 来源集（Provenance）
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 概念
@@ -126,9 +133,11 @@ Rust借用检查器使用近似来源集
 ---
 
 ## 4. 类型系统
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 贷款（Loans）
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -140,6 +149,7 @@ Rust借用检查器使用近似来源集
 ```
 
 ### 4.2 所有权安全性
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -152,6 +162,7 @@ Rust借用检查器使用近似来源集
 ```
 
 ### 4.3 类型判断
+>
 > **[来源: Rust Official Docs]**
 
 ```text

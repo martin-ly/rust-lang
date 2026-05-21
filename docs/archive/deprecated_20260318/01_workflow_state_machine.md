@@ -7,9 +7,11 @@
 ---
 
 ## 1. 概念定义 (Def)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def WF1: 工作流状态机
+>
 > **[来源: Rust Official Docs]**
 
 工作流状态机是一种**业务流程建模机制**，通过状态转换描述业务流程的执行。
@@ -25,6 +27,7 @@ Workflow := (S, s₀, F, T, A)
 ```
 
 ### Def WF2: 状态类型
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -40,6 +43,7 @@ StateType :=
 ```
 
 ### Def WF3: 工作流实例
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -52,9 +56,11 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 ---
 
 ## 2. 基本假设 (Axiom)
+>
 > **[来源: Rust Official Docs]**
 
 ### Axiom WF1: 状态互斥性
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -64,6 +70,7 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 任一时刻，实例处于唯一状态。
 
 ### Axiom WF2: 终止可达性
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -73,6 +80,7 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 工作流设计必须保证终止性。
 
 ### Axiom WF3: 转换确定性
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -84,9 +92,11 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 ---
 
 ## 3. 定理 (Theorem)
+>
 > **[来源: Rust Official Docs]**
 
 ### Theorem WF1: 工作流活性
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -101,6 +111,7 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 4. 因此工作流必然终止
 
 ### Theorem WF2: 状态一致性
+>
 > **[来源: Rust Official Docs]**
 
 ```

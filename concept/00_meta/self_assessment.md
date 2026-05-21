@@ -2013,6 +2013,7 @@ pub fn foo() {}
 > - L4 形式化背景见 [`../04_formal/`](../04_formal/)
 > - L5 对比见 [`../05_comparative/`](../05_comparative/)
 > - L6 实践见 [`../06_ecosystem/`](../06_ecosystem/)
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

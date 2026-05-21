@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [分层架构 (Layered Architecture)](#分层架构-layered-architecture)
@@ -22,6 +23,7 @@
     - [清洁架构 (Clean Architecture)](#清洁架构-clean-architecture)
 
 ## 概念
+>
 > **[来源: Rust Official Docs]**
 
 分层架构将系统组织为水平层，每层有明确职责，只与相邻层交互。
@@ -41,6 +43,7 @@
 ---
 
 ## Rust 实现
+>
 > **[来源: Rust Official Docs]**
 
 ### 项目结构

@@ -522,3 +522,24 @@ pub enum ConfigError {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Exception Handling]**
+
+> **[来源: TRPL Ch. 9 - Error Handling]**
+
+> **[来源: Rust Reference - Result]**
+
+> **[来源: RFC 2504 - Try Trait]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

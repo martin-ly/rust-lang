@@ -7,12 +7,15 @@
 ---
 
 ## 🔴 严重问题修复 (Critical)
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 算法错误修复
+>
 > **[来源: Rust Official Docs]**
 
 #### c08_algorithms - `find_anagrams` 函数
+>
 > **[来源: Rust Official Docs]**
 
 **问题严重性**: 🔴 **Critical** - 算法逻辑错误，产生错误结果
@@ -61,9 +64,11 @@ pub fn find_anagrams(words: &[&str]) -> Vec<Vec<String>> {
 ---
 
 ### 2. 无限循环风险修复
+>
 > **[来源: Rust Official Docs]**
 
 #### c09_design_pattern - `golden_section_search` 函数
+>
 > **[来源: Rust Official Docs]**
 
 **问题严重性**: 🔴 **Critical** - 可能导致无限循环
@@ -121,9 +126,11 @@ where
 ---
 
 ## 🟡 高优先级修复 (High)
+>
 > **[来源: Rust Official Docs]**
 
 ### 3. Mutex Poison 风险修复
+>
 > **[来源: Rust Official Docs]**
 
 **问题严重性**: 🟡 **High** - 可能导致 panic
@@ -156,6 +163,7 @@ let config = GLOBAL_CONFIG.lock().expect("GLOBAL_CONFIG mutex poisoned");
 ---
 
 ### 4. 代码重复消除
+>
 > **[来源: Rust Official Docs]**
 
 **问题严重性**: 🟡 **High** - 维护困难，容易出错
@@ -205,12 +213,15 @@ fn hex_char_to_value(c: char) -> Option<u8> {
 ---
 
 ## 🟢 中优先级优化 (Medium)
+>
 > **[来源: Rust Official Docs]**
 
 ### 5. 现代 Rust 特性应用
+>
 > **[来源: Rust Official Docs]**
 
 #### array_windows 全面应用
+>
 > **[来源: Rust Official Docs]**
 
 **优化统计**: 10+ 处代码从 `windows()` 升级到 `array_windows()`

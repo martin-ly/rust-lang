@@ -5,9 +5,11 @@
 ---
 
 ## 1. 分布式Actor基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 分布式系统挑战
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -39,6 +41,7 @@
 ```
 
 ### 1.2 Actor位置透明
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -61,9 +64,11 @@ remote_actor.tell(msg, None);  // 自动序列化和网络传输
 ---
 
 ## 2. 集群架构
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 集群节点发现
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -105,6 +110,7 @@ remote.on_node_event(|event| {
 ```
 
 ### 2.2 集群分片 (Sharding)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -135,6 +141,7 @@ async fn setup_sharding(system: ActorSystem) {
 ```
 
 ### 2.3 集群单例 (Singleton)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -158,9 +165,11 @@ async fn setup_singleton(system: ActorSystem) {
 ---
 
 ## 3. 分布式通信
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 gRPC传输
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -205,6 +214,7 @@ let response = client.get_user(GetUserRequest {
 ```
 
 ### 3.2 消息序列化
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -240,6 +250,7 @@ impl RemoteMessage for UserMessage {
 ---
 
 ## 4. 容错与一致性
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 分布式监督

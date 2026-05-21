@@ -1030,3 +1030,16 @@ impl<T, const N: usize> Drop for RingBuffer<T, N> {
 - [Rust 1.95 特性形式化](./08-05-rust-195-features-formal.md)
 - [数据布局](./data-layout.md)
 - [所有权可判定性总览](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

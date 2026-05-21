@@ -1,6 +1,7 @@
 # Rust 1.93.1 vs Go 1.26 vs C++26 vs C23 深度对比分析
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.93.1 vs Go 1.26 vs C++26 vs C23 深度对比分析](#rust-1931-vs-go-126-vs-c26-vs-c23-深度对比分析)
@@ -46,6 +47,7 @@
 ---
 
 ## 核心对比概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -80,12 +82,15 @@
 ---
 
 ## 语言特性完整对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 各语言最新特性
+>
 > **[来源: Rust Official Docs]**
 
 #### C++26 新特性
+>
 > **[来源: Rust Official Docs]**
 
 | 特性类别 | 具体变化 | 影响 |
@@ -97,6 +102,7 @@
 | **constexpr扩展** | 更多编译期计算 | 零成本抽象 |
 
 #### C23 新特性
+>
 > **[来源: Rust Official Docs]**
 
 | 特性类别 | 具体变化 | 影响 |
@@ -111,6 +117,7 @@
 | **属性语法** | [[nodiscard]]等 | 编译期检查 |
 
 #### Go 1.26 新特性
+>
 > **[来源: Rust Official Docs]**
 
 | 特性类别 | 具体变化 | 影响 |
@@ -122,6 +129,7 @@
 | **堆地址随机化** | 安全增强 | 防护攻击 |
 
 #### Rust 1.93.1 新特性
+>
 > **[来源: Rust Official Docs]**
 
 | 特性类别 | 具体变化 | 影响 |
@@ -133,6 +141,7 @@
 | **Polonius** | 新借用检查器 | 更精确分析 |
 
 ### 2.2 语言特性矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -171,9 +180,11 @@
 ---
 
 ## 内存管理机制深度对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 内存管理对比矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ```text

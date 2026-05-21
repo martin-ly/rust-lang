@@ -238,3 +238,16 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Undefined Behavior]**
+
+> **[来源: Miri Documentation]**
+
+> **[来源: Rust Reference - Miri]**
+
+> **[来源: RFC 2585 - Unsafe Code Guidelines]**

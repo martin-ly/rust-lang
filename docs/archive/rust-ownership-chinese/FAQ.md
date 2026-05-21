@@ -1,6 +1,7 @@
 # Rust所有权与可判定性 - 常见问题
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust所有权与可判定性 - 常见问题](#rust所有权与可判定性---常见问题)
@@ -37,9 +38,11 @@
   - [更多资源](#更多资源)
 
 ## 所有权基础
+>
 > **[来源: Rust Official Docs]**
 
 ### Q1: 为什么Rust需要所有权系统？
+>
 > **[来源: Rust Official Docs]**
 
 **A:** 所有权系统在编译时保证内存安全，无需垃圾回收器。通过静态分析：
@@ -51,6 +54,7 @@
 这对应于形式语义中的**线性逻辑**(Linear Logic)，确保资源恰好使用一次。
 
 ### Q2: `Copy` trait和`Clone` trait的区别？
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Copy | Clone |
@@ -73,6 +77,7 @@ let s2 = s;  // s被移动
 ```
 
 ### Q3: 什么是NLL (Non-Lexical Lifetimes)？
+>
 > **[来源: Rust Official Docs]**
 
 **A:** NLL是借用检查器的改进，允许借用基于实际使用流而非词法作用域结束。
@@ -88,9 +93,11 @@ x = 6;          // ✅ 现在可以修改
 **形式化**：NLL对应于数据流分析中的**活跃变量分析**。
 
 ## 生命周期
+>
 > **[来源: Rust Official Docs]**
 
 ### Q4: `'static`生命周期意味着什么？
+>
 > **[来源: Rust Official Docs]**
 
 **A:** `'static`表示值在整个程序生命周期内有效。常见情况：
@@ -105,6 +112,7 @@ let leaked: &'static mut i32 = Box::leak(Box::new(42));
 ```
 
 ### Q5: 如何理解生命周期省略规则？
+>
 > **[来源: Rust Official Docs]**
 
 **A:** 编译器自动推导三种情况：
@@ -126,6 +134,7 @@ let leaked: &'static mut i32 = Box::leak(Box::new(42));
 3. **其他多输入情况** → 必须显式标注
 
 ### Q6: 为什么需要显式生命周期标注？
+>
 > **[来源: Rust Official Docs]**
 
 **A:** 当编译器无法确定输出生命周期与哪个输入相关时：
@@ -139,9 +148,11 @@ fn longest<'a>(s1: &'a str, s2: &'a str) -> &'a str {  // ✅ OK
 ```
 
 ## 智能指针
+>
 > **[来源: Rust Official Docs]**
 
 ### Q7: `Box<T>` vs `Rc<T>` vs `Arc<T>`？
+>
 > **[来源: Rust Official Docs]**
 
 ```text

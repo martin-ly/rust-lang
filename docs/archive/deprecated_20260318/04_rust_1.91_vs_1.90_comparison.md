@@ -20,6 +20,7 @@
 ---
 
 ## 结论速览
+>
 > **[来源: Rust Official Docs]**
 
 - **Linux 大型二进制**：Rust 1.90 在 `x86_64-unknown-linux-gnu` 上默认改用 **LLD**，可能显著缩短链接时间；遇到问题可按官方说明 opt-out（`-C linker-features=-lld`）。
@@ -30,6 +31,7 @@
 ---
 
 ## 已确认差异一览（对齐权威来源）
+>
 > **[来源: Rust Official Docs]**
 
 | 主题  | Rust 1.90（已确认）| Rust 1.91（已确认）| 为什么重要  |
@@ -42,20 +44,24 @@
 ---
 
 ## Rust 1.90：主要变化（已确认）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1) LLD 成为 Linux `x86_64-unknown-linux-gnu` 默认链接器
+>
 > **[来源: Rust Official Docs]**
 
 - 官方说明：Rust 1.90 release post 中明确说明默认改用 LLD，并给出 opt-out 配置示例。
 - 延伸阅读：官方博客提供专题文章解释背景与基准（含更多数字与 opt-out 细节）。
 
 ### 2) Cargo 原生支持 `cargo publish --workspace`
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.90 release post 说明该功能会按依赖顺序发布，并对“即将发布的工作区集合”进行验证。
 
 ### 3) 平台支持：`x86_64-apple-darwin` 降级
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.90 release post 说明降级原因（CI runner 与生态变化），并引用 RFC PR。
@@ -63,14 +69,17 @@
 ---
 
 ## Rust 1.91：主要变化（已确认）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1) 平台支持：`aarch64-pc-windows-msvc` 升级为 Tier 1
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.91 release post 明确宣布该 target 升级，并给出 PR 证据链。
 
 ### 2) 新增 lint：`dangling_pointers_from_locals`（warn-by-default）
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 1.91 release post 展示了示例与 lint 输出，说明该 lint 旨在提醒“从局部变量返回 raw pointer 可能产生悬垂指针”。
@@ -84,9 +93,11 @@
 ---
 
 ## 迁移与验证建议（面向工作区/CI）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1) 先固定工具链版本与锁文件策略
+>
 > **[来源: Rust Official Docs]**
 
 - 在仓库使用 `rust-toolchain.toml`（或 CI 固定 `rustup toolchain install` 版本）。

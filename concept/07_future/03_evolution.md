@@ -1018,6 +1018,7 @@ graph TD
   - 已补充 §2.3.4 跨 Edition 代码示例（7 组对比）
   - 已补充 §2.4 未来 Edition 方向（2027+）
   - 所有论断附 `[来源: ...]` 标注，含 Bloom 层级标注，与 L1-L4 文件交叉链接
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

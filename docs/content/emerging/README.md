@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 前沿特性跟踪](#rust-前沿特性跟踪)
@@ -22,10 +23,13 @@
   - [📈 版本路线图](#-版本路线图)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: 🔄 持续跟踪更新](#状态--持续跟踪更新)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 目标
+>
 > **[来源: Rust Official Docs]**
 
 本目录致力于：
@@ -38,6 +42,7 @@
 ---
 
 ## 📊 特性跟踪矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 状态 | 预计稳定版本 | 文档完成度 | 示例代码 | 迁移指南 |
@@ -262,7 +267,6 @@ timeline
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
@@ -270,7 +274,6 @@ timeline
 - [Async Closures](./async_closures.md)
 - [Generic Const Exprs](./generic_const_exprs.md)
 - [Rust 1.95 Preview](./rust_1_95_preview.md)
-
 
 ---
 

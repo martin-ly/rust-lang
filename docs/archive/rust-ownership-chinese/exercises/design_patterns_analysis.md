@@ -5,9 +5,11 @@
 ---
 
 ## 创建型模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 单例模式 (Singleton)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -41,6 +43,7 @@ impl Singleton {
 - 无运行时借用检查开销
 
 ### 2. 工厂模式 (Factory)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -74,6 +77,7 @@ impl Factory {
 - trait对象有运行时开销（虚表）
 
 ### 3. 建造者模式 (Builder)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -117,9 +121,11 @@ impl ProductBuilder {
 ---
 
 ## 结构型模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 4. 装饰器模式 (Decorator)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -153,6 +159,7 @@ impl<T: Component> Component for Decorator<T> {
 - 编译期确定类型
 
 ### 5. 代理模式 (Proxy)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -190,9 +197,11 @@ impl Subject for Proxy {
 ---
 
 ## 行为型模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 6. 观察者模式 (Observer)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ⚠️ 运行时检查
@@ -233,6 +242,7 @@ impl Subject {
 - 有运行时开销
 
 ### 7. 策略模式 (Strategy)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定
@@ -270,6 +280,7 @@ impl<'a> Context<'a> {
 - 编译期类型检查
 
 ### 8. 状态模式 (State)
+>
 > **[来源: Rust Official Docs]**
 
 **可判定性**: ✅ 完全可判定（类型状态模式）

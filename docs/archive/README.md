@@ -14,6 +14,7 @@
 ---
 
 ## 📋 归档目录结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -31,6 +32,7 @@ docs/archive/
 ---
 
 ## ⚠️ 归档文档链接说明
+>
 > **[来源: Rust Official Docs]**
 
 归档目录中的历史文档可能包含指向已移动、重命名或删除文件的链接。此类断链为历史遗留，不影响主文档导航。主文档入口见 [DOCS_STRUCTURE_OVERVIEW](../DOCS_STRUCTURE_OVERVIEW.md)。
@@ -38,9 +40,11 @@ docs/archive/
 ---
 
 ## 📁 各目录说明
+>
 > **[来源: Rust Official Docs]**
 
 ### root_completion_reports/ - 根目录完成度与状态报告（2026-01-27）
+>
 > **[来源: Rust Official Docs]**
 
 与**项目主题（Rust 学习资源）**无直接关系的完成度、推进、周报类文件，已统一归档到此目录，便于根目录只保留核心文档与配置。
@@ -59,6 +63,7 @@ docs/archive/
 ---
 
 ### legacy_root_archive/ - 原根目录 archive/（2026-01-27 全面归档）
+>
 > **[来源: Rust Official Docs]**
 
 原位于仓库根目录的 `archive/` 文件夹（含 `reports/2025-12-25/` 等完成度/任务/状态类报告）已整体迁入本目录，根目录不再保留 `archive/`。
@@ -66,6 +71,7 @@ docs/archive/
 ---
 
 ### spell_check/ - 拼写检查相关文件
+>
 > **[来源: Rust Official Docs]**
 
 包含所有拼写检查配置和完成报告：
@@ -76,6 +82,7 @@ docs/archive/
 - `SPELL_CHECK_SETUP_SUMMARY.md` - 拼写检查设置总结
 
 ### status/ - 项目状态报告
+>
 > **[来源: Rust Official Docs]**
 
 包含项目状态和质量报告：
@@ -84,6 +91,7 @@ docs/archive/
 - `PROJECT_QUALITY_REPORT_2025_10_25.md` - 项目质量报告
 
 ### updates/ - 更新报告
+>
 > **[来源: Rust Official Docs]**
 
 包含各种更新和完成报告：
@@ -99,29 +107,35 @@ docs/archive/
 - `DOCUMENTATION_UPDATE_COMPLETE_2025_11_15.md` - 文档更新完成
 
 ### reports/ - 各种总结和报告（2026-03-17 重新组织）
+>
 > **[来源: Rust Official Docs]**
 
 包含文档标准化、修复报告等，按子主题分类：
 
 **核心报告（保留在 docs/ 根目录）**:
+
 - `PROJECT_STATUS.md` - 统一项目状态报告（2026-03-17 新增）
 - `FINAL_COMPLETION_REPORT_2026_03_14.md` - 最新完成报告
 - `DOCS_CRITICAL_EVALUATION_AND_IMPROVEMENT_PLAN.md` - 文档评估与改进计划
 
 **reports/completion/ - 完成报告（9份，2026-03-17 归档）**:
+
 - `100_PERCENT_COMPLETION_FINAL_REPORT.md`
 - `COMPLETION_REPORT_FINAL.md`
 - `FINAL_100_PERCENT_COMPLETION_REPORT.md` 等
 
 **reports/rust_194/ - Rust 1.94 相关报告（4份，2026-03-17 归档）**:
+
 - `RUST_194_COMPLETION_REPORT.md`
 - `RUST_194_DOCUMENTATION_COMPLETION_REPORT.md` 等
 
 **reports/weekly/ - 周报告（2份，2026-03-17 归档）**:
+
 - `WEEK1_COMPLETION_REPORT.md`
 - `WEEK2_COMPLETION_REPORT.md`
 
 **其他历史报告**:
+
 - `CRATES_DOCUMENTATION_CONSOLIDATION_SUMMARY_2025_11_15.md` - Crates 文档整合总结
 - `CRATES_DOCUMENTATION_FINAL_REPORT_2025_11_15.md` - Crates 文档最终报告
 - `CRATES_DOCUMENTATION_REVIEW_2025_11_15.md` - Crates 文档审查报告
@@ -136,6 +150,7 @@ docs/archive/
 - `RUST_REFERENCE_GAP_ANALYSIS_REPORT.md` - 参考差距分析
 
 ### temp/ - 临时文件和个人文件
+>
 > **[来源: Rust Official Docs]**
 
 包含临时文件、个人索引等：
@@ -152,6 +167,7 @@ docs/archive/
 ---
 
 ## 🎯 归档原则
+>
 > **[来源: Rust Official Docs]**
 
 ### 归档的文件类型

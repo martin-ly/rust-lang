@@ -7,6 +7,7 @@
 ---
 
 ## 概念
+>
 > **[来源: Rust Official Docs]**
 
 单例模式确保一个类只有一个实例，并提供一个全局访问点。在 Rust 中，由于所有权系统的存在，单例模式的实现与其他语言有所不同。
@@ -14,9 +15,11 @@
 ---
 
 ## Rust 实现方式
+>
 > **[来源: Rust Official Docs]**
 
 ### 方式一: `std::sync::OnceLock` (推荐)
+>
 > **[来源: Rust Official Docs]**
 
 Rust 1.70+ 标准库提供的线程安全单例：

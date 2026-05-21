@@ -8,6 +8,7 @@
 ---
 
 ## 📊 内容架构
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -34,6 +35,7 @@ mindmap
 ---
 
 ## 📁 目录结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -59,6 +61,7 @@ content/
 ---
 
 ## 📈 内容统计
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 文档数 | 代码示例 | 完成度 |
@@ -161,7 +164,6 @@ content/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

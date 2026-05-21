@@ -1,6 +1,7 @@
 # Rust 1.94/1.95 特性深度解析
 
 ## 执行摘要
+>
 > **[来源: Rust Official Docs]**
 
 本文档深度解析Rust 1.94（2026年3月发布）和1.95（2026年4月预计发布）的核心特性，包括`array_windows`、`LazyLock` API稳定化、AVX-512 FP16 Intrinsics等，以及这些特性在安全关键系统中的应用价值。
@@ -8,12 +9,15 @@
 ---
 
 ## Rust 1.94.0 核心特性详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 array_windows - 恒定长度窗口迭代
+>
 > **[来源: Rust Official Docs]**
 
 #### 特性概述
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -27,6 +31,7 @@ pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
 - 消除运行时开销，提升性能
 
 #### 性能对比
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -59,6 +64,7 @@ fn has_abba_new(s: &str) -> bool {
 | 安全关键适用性 | 中 | 高 | - |
 
 #### 安全关键系统应用
+>
 > **[来源: Rust Official Docs]**
 
 **信号处理**:
@@ -101,9 +107,11 @@ fn parse_frames(buffer: &[u8]) -> impl Iterator<Item = CanFrame> + '_ {
 ---
 
 ### 1.2 LazyCell/LazyLock API 完整稳定化
+>
 > **[来源: Rust Official Docs]**
 
 #### API全景
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -131,6 +139,7 @@ impl<T, F: FnOnce() -> T> LazyLock<T, F> {
 ```
 
 #### 从once_cell迁移指南
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -157,6 +166,7 @@ static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 - 更小的二进制体积（约-5KB）
 
 #### 安全关键系统模式
+>
 > **[来源: Rust Official Docs]**
 
 **硬件配置延迟加载**:
@@ -221,6 +231,7 @@ impl Crc32Table {
 ---
 
 ### 1.3 AVX-512 FP16 Intrinsics
+>
 > **[来源: Rust Official Docs]**
 
 #### 硬件支持矩阵

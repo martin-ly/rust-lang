@@ -7,14 +7,17 @@ Unlike declarative macros (`macro_rules!`), proc macros operate on the Abstract 
 This chapter provides a comprehensive deep dive into proc macro architecture, implementation patterns, common pitfalls, and best practices.
 
 ## 8.4.1 Proc Macro Architecture
+>
 > **[来源: Rust Official Docs]**
 
 ### 8.4.1.1 The Three Types of Proc Macros
+>
 > **[来源: Rust Official Docs]**
 
 Rust provides three distinct types of procedural macros, each serving different use cases:
 
 #### 1. Function-like Proc Macros: `#[proc_macro]`
+>
 > **[来源: Rust Official Docs]**
 
 Function-like macros are invoked with the `!` syntax, similar to declarative macros:
@@ -73,6 +76,7 @@ let users = sql!(SELECT * FROM users WHERE active = true);
 ```
 
 #### 2. Derive Macros: `#[proc_macro_derive]`
+>
 > **[来源: Rust Official Docs]**
 
 Derive macros automatically implement traits for types:
@@ -116,6 +120,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 - Builder patterns
 
 #### 3. Attribute Macros: `#[proc_macro_attribute]`
+>
 > **[来源: Rust Official Docs]**
 
 Attribute macros transform the item they're attached to:
@@ -156,6 +161,7 @@ pub fn my_attribute(args: TokenStream, input: TokenStream) -> TokenStream {
 - Code injection
 
 ### 8.4.1.2 The Compilation Model
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -201,6 +207,7 @@ pub fn my_attribute(args: TokenStream, input: TokenStream) -> TokenStream {
 **Proof Sketch**: The proc macro is loaded as a dynamic library in a separate compiler process. The `proc_macro` crate provides limited APIs that don't expose system resources directly. The compiler controls all I/O operations.
 
 ### 8.4.1.3 Crate Structure
+>
 > **[来源: Rust Official Docs]**
 
 A proc macro crate has specific requirements:
@@ -248,9 +255,11 @@ pub fn attribute_macro(args: TokenStream, input: TokenStream) -> TokenStream {
 ```
 
 ## 8.4.2 Token Analysis
+>
 > **[来源: Rust Official Docs]**
 
 ### 8.4.2.1 Understanding TokenStream
+>
 > **[来源: Rust Official Docs]**
 
 The `TokenStream` is the fundamental data structure for proc macros:
@@ -288,6 +297,7 @@ TokenStream:
 ```
 
 ### 8.4.2.2 Token Manipulation
+>
 > **[来源: Rust Official Docs]**
 
 **Basic Iteration:**
@@ -347,6 +357,7 @@ fn build_stream() -> TokenStream {
 ```
 
 ### 8.4.2.3 Parsing with syn
+>
 > **[来源: Rust Official Docs]**
 
 The `syn` crate provides powerful parsing capabilities:

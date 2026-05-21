@@ -8,6 +8,7 @@
 ---
 
 ## 执行摘要
+>
 > **[来源: Rust Official Docs]**
 
 本次持续推进完成了所有计划的权威内容对齐和差距修复工作。项目现已与Rust 1.94.0和2024 Edition保持完全同步。
@@ -25,9 +26,11 @@
 ---
 
 ## 差距修复完成情况
+>
 > **[来源: Rust Official Docs]**
 
 ### 已修复差距 (5/5)
+>
 > **[来源: Rust Official Docs]**
 
 #### ✅ GAP-SLICE-01: Slice类型形式化

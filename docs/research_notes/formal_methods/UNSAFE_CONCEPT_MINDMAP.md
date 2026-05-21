@@ -207,3 +207,24 @@ unsafe代码的不变式
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Rustonomicon]**
+
+> **[来源: Rust Reference - Unsafe]**
+
+> **[来源: RFC 2585 - Unsafe Guidelines]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

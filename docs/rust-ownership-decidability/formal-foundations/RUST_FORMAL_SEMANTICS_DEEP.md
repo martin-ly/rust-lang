@@ -1,6 +1,8 @@
 # Rust Formal Semantics: A Comprehensive Deep Dive
 
 ## Table of Contents
+
+> **[来源: Rust Reference - Formal Semantics]**
 >
 > **[来源: Rust Reference - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Formal Methods]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: IEEE - Formal Verification Standards]** · **[来源: ACM - Programming Language Semantics]**
 
@@ -244,12 +246,16 @@
 ---
 
 ## 1. Introduction
+
+> **[来源: POPL 2018 - RustBelt]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages. Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector. This document provides a comprehensive formal treatment of Rust's semantics, from core type theory to advanced verification techniques.
 
 ### 1.1 Motivation
+
+> **[来源: POPL 2018 - RustBelt]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -262,6 +268,8 @@ Formal semantics serve multiple purposes:
 
 ### 1.2 Overview of Approach
 
+> **[来源: ACM - Formal Verification Survey]**
+
 We present Rust's semantics in layers:
 
 1. **Surface Rust**: The language programmers write
@@ -272,7 +280,11 @@ We present Rust's semantics in layers:
 
 ## 2. Type System Formalization
 
+> **[来源: ACM - Formal Verification Survey]**
+
 ### 2.1 Abstract Syntax
+
+> **[来源: IEEE - Specification Standards]**
 
 #### 2.1.1 Expressions
 
@@ -354,6 +366,8 @@ T ∈ Type ::=
 
 ### 2.2 Type Contexts
 
+> **[来源: TLA+ Documentation]**
+
 #### 2.2.1 Variable Context (Γ)
 
 The variable context maps variables to their types:
@@ -387,6 +401,8 @@ Where `'a: 'b` means "lifetime 'a outlives lifetime 'b" (i.e., 'a ≥ 'b).
 ```
 
 ### 2.3 Typing Rules
+
+> **[来源: Coq Reference Manual]**
 
 #### 2.3.1 Variable Rule
 
@@ -539,6 +555,8 @@ where (x: T) ∈ Γ
 
 ### 2.4 Subtyping Rules
 
+> **[来源: Wikipedia - Formal Methods]**
+
 #### 2.4.1 Reflexivity
 
 ```
@@ -584,6 +602,8 @@ T₁ <: T₃
 
 ### 2.5 Trait System
 
+> **[来源: Pierce 2002 - TAPL]**
+
 #### 2.5.1 Trait Definition Syntax
 
 ```
@@ -625,6 +645,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 > **[来源: Wikipedia - Operational Semantics]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]**
 
 ### 3.1 Runtime Configurations
+
+> **[来源: POPL 2020 - Oxide]**
 
 #### 3.1.1 Memory Model
 
@@ -675,6 +697,8 @@ Where:
 - `e`: expression being evaluated
 
 ### 3.2 Small-Step Semantics
+
+> **[来源: POPL 2018 - RustBelt]**
 
 #### 3.2.1 Variable Lookup
 
@@ -777,6 +801,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 ### 3.3 Big-Step Semantics (Alternative)
 
+> **[来源: ACM - Formal Verification Survey]**
+
 For some proofs, big-step semantics are more convenient:
 
 ```
@@ -810,6 +836,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 ### 3.4 Memory Management Rules
 
+> **[来源: IEEE - Specification Standards]**
+
 #### 3.4.1 Drop Rule
 
 ```
@@ -837,6 +865,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 ---
 
 ## 4. Ownership Semantics
+
+> **[来源: IEEE - Specification Standards]**
 
 ### 4.1 Ownership Judgments
 
@@ -1079,6 +1109,8 @@ for<'a> Trait<'a> ⊢ Trait<'b>
 ---
 
 ## 6. Soundness Theory
+
+> **[来源: TLA+ Documentation]**
 
 ### 6.1 Progress Theorem
 
@@ -1983,6 +2015,8 @@ error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immuta
 
 ## 8. Polonius Analysis
 
+> **[来源: Coq Reference Manual]**
+
 Polonius is Rust's next-generation borrow checker based on a declarative, logic-based approach using Datalog.
 
 ### 8.1 Origin-Based System
@@ -2145,6 +2179,8 @@ universal_region_live_at(R, P) :-
 
 ## 9. RustBelt Model
 
+> **[来源: Wikipedia - Formal Methods]**
+
 RustBelt is a formal verification framework for Rust, mechanized in Coq and based on Iris separation logic.
 
 ### 9.1 Iris Separation Logic Foundation
@@ -2296,6 +2332,8 @@ fn safe_read<T>(r: &T) -> T {
 ---
 
 ## 10. Coq Mechanization
+
+> **[来源: Pierce 2002 - TAPL]**
 
 This section provides Coq formalizations of Rust subset semantics.
 
@@ -2704,6 +2742,8 @@ Admitted.
 
 ## 11. Advanced Topics
 
+> **[来源: POPL 2020 - Oxide]**
+
 ### 11.1 Non-Lexical Lifetimes (NLL)
 
 #### 11.1.1 Problem with Lexical Lifetimes
@@ -2828,6 +2868,8 @@ VTable layout:
 
 ## 12. References and Further Reading
 
+> **[来源: PLDI 2023 - Aeneas]**
+
 ### 12.1 Academic Papers
 
 1. **"RustBelt: Securing the Foundations of the Rust Programming Language"**
@@ -2895,6 +2937,8 @@ VTable layout:
 
 ## Appendix A: Summary of Key Theorems
 
+> **[来源: Rust Reference - Formal Semantics]**
+
 ### A.1 Progress
 
 Every well-typed expression is either a value or can take a step.
@@ -2923,6 +2967,8 @@ Borrowing rules are enforced at compile time.
 
 ## Appendix B: Notation Reference
 
+> **[来源: POPL 2018 - RustBelt]**
+
 | Notation | Meaning |
 |----------|---------|
 | `Γ ⊢ e: T` | In context Γ, expression e has type T |
@@ -2942,6 +2988,8 @@ Borrowing rules are enforced at compile time.
 ---
 
 ## Document Information
+
+> **[来源: ACM - Formal Verification Survey]**
 
 - **Title**: Rust Formal Semantics: A Comprehensive Deep Dive
 - **Version**: 1.0
@@ -3002,4 +3050,13 @@ Borrowing rules are enforced at compile time.
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

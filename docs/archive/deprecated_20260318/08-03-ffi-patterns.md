@@ -5,6 +5,7 @@
 > **更新**: Rust 1.94 `extern "C-unwind"` ABI 稳定 ⚡
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [FFI模式与C互操作](#ffi模式与c互操作)
@@ -47,9 +48,11 @@
 ---
 
 ## 1. FFI基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 为什么需要FFI
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的 FFI（Foreign Function Interface）允许 Rust 代码与其他语言（主要是 C）进行互操作。这在以下场景中是必需的：
@@ -84,6 +87,7 @@ fn use_c_strlen() {
 ```
 
 ### 1.2 调用约定
+>
 > **[来源: Rust Official Docs]**
 
 Rust 支持多种调用约定：
@@ -110,6 +114,7 @@ extern "system" {
 ```
 
 ### 1.3 链接配置
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -152,9 +157,11 @@ fn main() {
 ---
 
 ## 2. 类型映射与内存布局
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 基本类型映射
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -208,6 +215,7 @@ fn fixed_size_types() {
 ```
 
 ### 2.2 内存布局控制
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -266,6 +274,7 @@ enum CEnum {
 ```
 
 ### 2.3 复杂类型映射
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -324,9 +333,11 @@ impl FlexibleArray {
 ---
 
 ## 3. 所有权与生命周期
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 跨边界的所有权规则
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

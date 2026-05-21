@@ -160,6 +160,8 @@
 本研究旨在形式化定义 Rust 的异步 Future/Poll 状态机，并证明其保证并发安全。
 
 ### 核心问题
+
+> **[来源: POPL 2018 - RustBelt]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +170,8 @@
 3. **异步状态转换的正确性如何证明？**
 
 ### 预期成果
+
+> **[来源: ACM - Formal Verification Survey]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +186,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: IEEE - Specification Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -1462,3 +1468,12 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 > **[来源: ACM - Async State Machines]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

@@ -524,6 +524,7 @@
 - [x] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查 —— 已完成 `concept_index.json`
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）
 - [x] **低**: 与 `inter_layer_map.md` 的层间映射同步更新 —— ✅ 已完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

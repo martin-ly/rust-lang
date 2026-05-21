@@ -924,6 +924,7 @@ fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> 
 | **维护性** | 抽象泄漏时修复成本指数增长 | 抽象层变更导致连锁修改 >5 处 |
 
 **避免方法**：YAGNI（You Aren't Gonna Need It）。当满足以下任一条件时，才考虑引入泛型或 Trait：
+
 1. 同一 crate 内已出现 ≥3 种不同实现；
 2. 性能测试证明单态化带来的内联优化有显著收益；
 3. 该抽象为公共 API，需向外部用户承诺稳定接口。

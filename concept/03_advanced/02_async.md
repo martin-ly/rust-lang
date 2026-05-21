@@ -1,10 +1,10 @@
 # Async/Await（异步编程）
+>
 > **层次定位**: L3 高级概念 / 异步子域
 > **前置依赖**: [L2 泛型](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · [L1 生命周期](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
-
 
 > **层级**: L3 高级概念
 > **层级一致性**: 本文件所有定理与定义均锚定于 L3 抽象层；涉及 L4 形式化公理处已显式标注。前置概念（L1-L2）为推理前提，后置概念（Pin/Streams）为自然延伸。

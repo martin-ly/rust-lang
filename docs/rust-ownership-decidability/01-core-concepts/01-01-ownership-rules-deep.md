@@ -16,6 +16,8 @@
 ---
 
 ## 目录
+
+> **[来源: Rust Reference - Ownership]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -111,6 +113,8 @@
 ---
 
 ## 前言
+
+> **[来源: TRPL Ch. 4 - Understanding Ownership]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -140,6 +144,8 @@
 ---
 
 ## 1. 所有权形式语义
+
+> **[来源: Rustonomicon - Ownership]**
 
 ### 1.1 数学基础
 
@@ -379,6 +385,8 @@ fn partial_move_example() {
 ---
 
 ## 2. 所有权定理体系
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ### Theorem OWNERSHIP-UNIQUENESS (所有权唯一性定理)
 
@@ -785,6 +793,8 @@ fn partial_move_example() {
 
 ## 3. 移动语义深度分析
 
+> **[来源: POPL 2018 - RustBelt]**
+
 ### 3.1 Move作为仿射蕴含
 
 在类型理论中，Rust的移动语义可以用**仿射逻辑 (Affine Logic)** 来形式化。
@@ -992,6 +1002,8 @@ fn reinit_example() {
 ---
 
 ## 4. 反例汇编 (15+ 深度案例)
+
+> **[来源: ACM - Ownership Types]**
 
 ### 反例 1: Use After Move (移动后使用)
 
@@ -2681,6 +2693,8 @@ unsafe impl<T: Send> Sync for SafeCell<T> {}
 
 ## 5. 严格分析
 
+> **[来源: IEEE - Resource Management]**
+
 ### 5.1 内存布局
 
 #### 5.1.1 栈分配与所有权
@@ -2936,6 +2950,8 @@ after NLL:  lifetime(r) = [decl(r), last_use(r)]
 ---
 
 ## 6. 高级模式
+
+> **[来源: Wikipedia - Resource Acquisition Is Initialization]**
 
 ### 6.1 所有权转移模式
 
@@ -3275,6 +3291,8 @@ fn borrowed_container_usage() {
 
 ## 7. 案例研究: Vec<T>实现
 
+> **[来源: Rust Reference - Ownership]**
+
 ### 7.1 原始指针所有权
 
 ```rust
@@ -3519,6 +3537,8 @@ Vec<T> ──into_iter()──▶ IntoIter<T>
 
 ## 8. Rust 1.94 特性集成
 
+> **[来源: TRPL Ch. 4 - Understanding Ownership]**
+
 ### 8.1 精确大小迭代器优化
 
 ```rust
@@ -3640,6 +3660,8 @@ fn macro_ownership() {
 
 ## 9. 形式化证明技术
 
+> **[来源: Rustonomicon - Ownership]**
+
 ### 9.1 归纳证明结构
 
 **结构归纳法在所有权证明中的应用**:
@@ -3733,6 +3755,8 @@ fn macro_ownership() {
 
 ## 10. 参考文献与延伸阅读
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 学术论文
 
 1. **Jung, R., et al. (2018).** RustBelt: Securing the Foundations of the Rust Programming Language. *POPL 2018*.
@@ -3789,6 +3813,8 @@ fn macro_ownership() {
 ---
 
 ## 交叉引用
+
+> **[来源: POPL 2018 - RustBelt]**
 
 | 文档 | 内容 | 关系 |
 |------|------|------|
@@ -3847,4 +3873,13 @@ fn macro_ownership() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

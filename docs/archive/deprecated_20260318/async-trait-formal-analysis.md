@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [async-trait形式化分析](#async-trait形式化分析)
@@ -36,6 +37,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Official Docs]**
 
 async-trait解决的问题：
@@ -46,9 +48,11 @@ async-trait解决的问题：
 ---
 
 ## 2. 问题背景
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 PROBLEM-1 ( 原生限制 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -65,6 +69,7 @@ $$
 $$
 
 ### 定义 PROBLEM-2 ( RPITIT限制 )
+>
 > **[来源: Rust Official Docs]**
 
 Rust 1.75+支持RPITIT但存在限制：
@@ -75,9 +80,11 @@ Rust 1.75+支持RPITIT但存在限制：
 ---
 
 ## 3. 宏转换机制
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 TRANSFORM-1 ( 转换规则 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -99,6 +106,7 @@ $$
 $$
 
 ### 定义 TRANSFORM-2 ( 具体实现转换 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -118,9 +126,11 @@ impl MyTrait for MyStruct {
 ---
 
 ## 4. Send边界问题
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义 SEND-1 ( Send要求 )
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -136,6 +146,7 @@ trait LocalTrait {
 ```
 
 ### 定义 SEND-2 ( Send传播 )
+>
 > **[来源: Rust Official Docs]**
 
 $$

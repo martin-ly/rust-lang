@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [A](#a)
@@ -23,9 +24,11 @@
 ---
 
 ## A
+>
 > **[来源: Rust Official Docs]**
 
 ### API (Application Programming Interface)
+>
 > **[来源: Rust Official Docs]**
 
 **应用程序编程接口**:
@@ -43,9 +46,11 @@
 ---
 
 ## C
+>
 > **[来源: Rust Official Docs]**
 
 ### Cargo Workspace
+>
 > **[来源: Rust Official Docs]**
 
 **Cargo 工作空间**:
@@ -63,6 +68,7 @@
 ---
 
 ### checked_sub_signed()
+>
 > **[来源: Rust Official Docs]**
 
 **带符号减法检查方法**:
@@ -90,6 +96,7 @@ let result = x.checked_sub_signed(y); // Some(15)
 ---
 
 ### const Context
+>
 > **[来源: Rust Official Docs]**
 
 **const 上下文**:
@@ -118,6 +125,7 @@ const RESULT: f64 = example();  // 3.0
 ---
 
 ### Const Generic
+>
 > **[来源: Rust Official Docs]**
 
 **常量泛型**:
@@ -139,9 +147,11 @@ let arr: [i32; 5] = create_array();
 ---
 
 ## E
+>
 > **[来源: Rust Official Docs]**
 
 ### Edition
+>
 > **[来源: Rust Official Docs]**
 
 **版次**:
@@ -167,6 +177,7 @@ edition = "2024"
 ---
 
 ## G
+>
 > **[来源: Rust Official Docs]**
 
 ### GAT (Generic Associated Types)

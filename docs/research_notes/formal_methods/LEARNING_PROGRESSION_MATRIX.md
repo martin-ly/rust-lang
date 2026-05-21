@@ -484,3 +484,16 @@ Level 1 ──> Level 2 ──> Level 3 ──> 证明技术 ──> Coq ──>
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

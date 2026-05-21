@@ -8,6 +8,7 @@
 ---
 
 ## 决策树概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -75,6 +76,7 @@
 ---
 
 ## 引擎对比矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 引擎 | 持久化 | 复杂度 | Rust支持 | 云原生 | 适用场景 |
@@ -88,9 +90,11 @@
 ---
 
 ## Rust实现示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 方案1: 自研工作流引擎 (轻量级)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -217,6 +221,7 @@ impl Activity for ProcessPaymentActivity {
 ```
 
 ### 方案2: 状态机模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -293,6 +298,7 @@ impl OrderWorkflow {
 ```
 
 ### 方案3: Temporal集成
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -353,6 +359,7 @@ async fn reserve_inventory(items: Vec<OrderItem>) -> Result<Reservation, Activit
 ---
 
 ## 选择建议
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 推荐方案 | 理由 |
@@ -372,17 +379,20 @@ async fn reserve_inventory(items: Vec<OrderItem>) -> Result<Reservation, Activit
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 应用场景 | 文档章节 |
@@ -393,6 +403,7 @@ async fn reserve_inventory(items: Vec<OrderItem>) -> Result<Reservation, Activit
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+>
 > **[来源: Rust Official Docs]**
 
 本文档中的所有Rust代码示例均已：

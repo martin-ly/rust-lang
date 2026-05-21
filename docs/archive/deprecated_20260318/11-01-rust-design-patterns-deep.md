@@ -1,6 +1,7 @@
 # Chapter 11: Rust Design Patterns - Deep Dive with Formal Semantics
 
 ## Executive Summary
+>
 > **[来源: Rust Official Docs]**
 
 This chapter provides a comprehensive, formal treatment of design patterns in Rust, bridging classical GoF patterns with Rust's ownership-centric paradigm.
@@ -17,9 +18,11 @@ We establish rigorous semantic foundations for pattern formalization, prove key 
 ---
 
 ## 1. Design Pattern Formalization
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Pattern Structure
+>
 > **[来源: Rust Official Docs]**
 
 We formalize design patterns as quintuples:
@@ -37,6 +40,7 @@ Where:
 - **Examples**: Concrete Rust implementations
 
 #### 1.1.1 Formal Definition
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -54,6 +58,7 @@ trait Pattern {
 ```
 
 #### 1.1.2 Ownership-Aware Pattern Classification
+>
 > **[来源: Rust Official Docs]**
 
 Patterns in Rust must respect ownership rules. We classify patterns by their ownership interaction:
@@ -77,6 +82,7 @@ mod classification {
 ```
 
 ### 1.2 Pattern Correctness Criteria
+>
 > **[来源: Rust Official Docs]**
 
 **Definition 1.1 (Pattern Soundness)**: A pattern P is *sound* if for all valid inputs, its implementation does not violate Rust's ownership rules or trigger undefined behavior.
@@ -88,14 +94,17 @@ mod classification {
 ---
 
 ## 2. Creational Patterns
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Builder Pattern
+>
 > **[来源: Rust Official Docs]**
 
 The Builder pattern separates construction of complex objects from their representation.
 
 #### 2.1.1 Problem
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -107,6 +116,7 @@ PROBLEM BUILDER:
 ```
 
 #### 2.1.2 Solution Structure
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -204,6 +214,7 @@ impl Default for HttpRequestBuilder {
 ```
 
 #### 2.1.3 Theorem BUILDER-COMPLETENESS
+>
 > **[来源: Rust Official Docs]**
 
 **Theorem**: Given a builder B with required fields R and optional fields O, if B.build() is called after all fields in R have been set, the resulting object is complete.

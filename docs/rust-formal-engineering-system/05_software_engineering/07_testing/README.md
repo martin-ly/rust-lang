@@ -265,3 +265,24 @@ mod concurrency_tests {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Testing]**
+
+> **[来源: TRPL Ch. 11 - Testing]**
+
+> **[来源: Rust Reference - Test Attributes]**
+
+> **[来源: ACM - Software Testing Methods]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

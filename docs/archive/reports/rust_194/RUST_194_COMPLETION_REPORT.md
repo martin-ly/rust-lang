@@ -8,11 +8,13 @@
 ---
 
 ## 📋 完成概览
+>
 > **[来源: Rust Official Docs]**
 
 本次工作全面梳理并修正了 Rust 1.94 版本的文档，移除了虚构的 API，保留了真实可用的特性，确保所有文档与实际编译器保持一致。
 
 ### 主要成就
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 数量 | 状态 |
@@ -25,6 +27,7 @@
 ---
 
 ## ✅ 已完成工作清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 特性审计 (`RUST_194_FEATURE_AUDIT_REPORT.md`)

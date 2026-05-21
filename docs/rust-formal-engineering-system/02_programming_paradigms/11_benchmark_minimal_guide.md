@@ -558,3 +558,24 @@ criterion_main!(benches);
 
 - [02_programming_paradigms 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Program Optimization]**
+
+> **[来源: Criterion.rs]**
+
+> **[来源: ACM - Performance Engineering]**
+
+> **[来源: Rust Performance Book]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference]**
+
+> **[来源: TLA+]**
+
+> **[来源: ACM - Formal Verification]**

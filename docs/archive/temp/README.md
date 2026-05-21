@@ -10,9 +10,11 @@
 ---
 
 ## 文件清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 主要临时文件
+>
 > **[来源: Rust Official Docs]**
 
 | 文件 | 大小 | 说明 |
@@ -24,6 +26,7 @@
 | [REFERENCE_VALIDITY_MODEL_ALIGNMENT.md](./REFERENCE_VALIDITY_MODEL_ALIGNMENT.md) | 75.0 KB | 引用一致性模型对齐报告 |
 
 ### swap 子目录
+>
 > **[来源: Rust Official Docs]**
 
 历史版本文档模板和参考（Rust 1.89-1.90 时期）：

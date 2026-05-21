@@ -8,9 +8,11 @@
 ---
 
 ## 📋 问题说明
+>
 > **[来源: Rust Official Docs]**
 
 ### 遇到的警告
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -20,14 +22,17 @@ workspace: E:\_src\rust-lang\Cargo.toml
 ```
 
 ### 问题原因
+>
 > **[来源: Rust Official Docs]**
 
 在 Cargo workspace 环境中，**`[profile.*]` 配置只能在工作区根目录的 `Cargo.toml` 中定义**。如果在子 crate 的 `Cargo.toml` 中定义 profile 配置，这些配置会被 Cargo 忽略，并产生警告。
 
 ## 🔧 解决方案
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 移除子 crate 中的 profile 配置
+>
 > **[来源: Rust Official Docs]**
 
 **错误做法：** 在 `crates/c12_wasm/Cargo.toml` 中定义
@@ -53,11 +58,13 @@ panic = "abort"      # ✅ panic 时立即终止
 ```
 
 ### 2. WASM 特定优化的处理
+>
 > **[来源: Rust Official Docs]**
 
 如果某个 crate（如 c12_wasm）需要特殊的编译选项，有以下几种方案：
 
 #### 方案 A：使用 `.cargo/config.toml`（推荐）
+>
 > **[来源: Rust Official Docs]**
 
 在项目根目录创建 `.cargo/config.toml`：
@@ -78,6 +85,7 @@ cargo build --release --target wasm32-unknown-unknown
 ```
 
 #### 方案 B：使用环境变量
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -86,6 +94,7 @@ RUSTFLAGS="-C opt-level=z" cargo build --release --target wasm32-unknown-unknown
 ```
 
 #### 方案 C：使用自定义 profile（Rust 1.90+）
+>
 > **[来源: Rust Official Docs]**
 
 在根目录 `Cargo.toml` 中：
@@ -103,9 +112,11 @@ cargo build --profile release-wasm --target wasm32-unknown-unknown
 ```
 
 ## 📝 Workspace Profile 配置规则
+>
 > **[来源: Rust Official Docs]**
 
 ### ✅ 允许的配置位置
+>
 > **[来源: Rust Official Docs]**
 
 | 配置项 | 根目录 Cargo.toml | 子 crate Cargo.toml |

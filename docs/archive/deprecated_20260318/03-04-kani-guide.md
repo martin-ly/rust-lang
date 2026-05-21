@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Kani 模型检测指南](#kani-模型检测指南)
@@ -48,6 +49,7 @@
 ---
 
 ## 1. 引言与概述
+>
 > **[来源: Rust Official Docs]**
 
 Kani 是一个 Rust 的**模型检测器 (Model Checker)**，基于 CBMC (C Bounded Model Checker) 构建。它能够穷举程序的所有可能执行路径，验证给定的属性是否在所有情况下都成立。
@@ -76,9 +78,11 @@ Kani 是一个 Rust 的**模型检测器 (Model Checker)**，基于 CBMC (C Boun
 ---
 
 ## 2. Kani 的工作原理
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 符号执行基础
+>
 > **[来源: Rust Official Docs]**
 
 符号执行使用**符号变量**代替具体值进行程序分析：
@@ -106,6 +110,7 @@ Kani 是一个 Rust 的**模型检测器 (Model Checker)**，基于 CBMC (C Boun
 3. **约束求解**: 使用 SMT Solver 检查条件的可满足性
 
 ### 2.2 CBMC 集成
+>
 > **[来源: Rust Official Docs]**
 
 Kani 使用 CBMC 作为后端验证引擎：
@@ -128,6 +133,7 @@ CBMC 的处理流程：
 4. 调用 SMT Solver 验证属性
 
 ### 2.3 有界验证
+>
 > **[来源: Rust Official Docs]**
 
 Kani 采用**有界模型检测 (Bounded Model Checking)**，对循环和递归设置界限：
@@ -154,9 +160,11 @@ cargo kani --unwind auto
 ---
 
 ## 3. 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 符号执行的数学模型
+>
 > **[来源: Rust Official Docs]**
 
 **定义 3.1 (符号状态)**
@@ -182,6 +190,7 @@ $$PC = \bigwedge_{i=1}^{n} c_i$$
 $$\llbracket stmt \rrbracket: (σ, PC) \rightarrow (σ', PC')$$
 
 ### 3.2 路径完备性定理
+>
 > **[来源: Rust Official Docs]**
 
 **定理 3.1 (有界完备性)**
@@ -199,6 +208,7 @@ $$\forall π \in Paths_k(P): \forall s \in States(π): Property(s) = true$$
 $$\exists π: Violates(π) \land Length(π) \leq k \Rightarrow Kani\ reports\ FAILURE$$
 
 ### 3.3 属性验证的形式化
+>
 > **[来源: Rust Official Docs]**
 
 **定义 3.4 (Hoare 三元组)**
@@ -222,6 +232,7 @@ $$\forall σ: P(σ) \Rightarrow Q(\llbracket C \rrbracket(σ))$$
 ---
 
 ## 4. 安装与配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 安装 Kani

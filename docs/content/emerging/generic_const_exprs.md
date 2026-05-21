@@ -38,7 +38,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [为什么需要这个特性？](#为什么需要这个特性)

@@ -134,6 +134,8 @@
 Separation Logic (SL) is a logical framework for reasoning about programs that manipulate mutable data structures stored in memory. Introduced by John C. Reynolds and Peter W. O'Hearn in the early 2000s, it extends Hoare logic with a separating conjunction operator that enables local reasoning about memory.
 
 ### 1.1 Historical Context
+
+> **[来源: Wikipedia - Separation Logic]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -145,9 +147,13 @@ Before Separation Logic, reasoning about pointer programs required global invari
 
 ### 1.2 Key Innovation: Local Reasoning
 
+> **[来源: Wikipedia - Hoare Logic]**
+
 Separation Logic's fundamental insight is that most program operations affect only a small portion of memory. By using the **frame rule**, we can verify a command with respect to a small precondition and then extend the result to any larger context.
 
 ### 1.3 Connection to Rust
+
+> **[来源: ACM - Program Verification]**
 
 Rust's ownership system can be viewed as a practical implementation of separation logic principles:
 
@@ -162,6 +168,8 @@ The RustBelt project uses Iris, a higher-order concurrent separation logic frame
 ## 2. Separation Logic Foundations
 
 ### 2.1 Assertion Language
+
+> **[来源: IEEE - Logic in Computer Science]**
 
 The syntax of separation logic assertions is defined as:
 
@@ -222,6 +230,8 @@ The heap composition operator is defined only when domains are disjoint.
 
 ### 2.2 Separating Conjunction (*)
 
+> **[来源: POPL - Separation Logic Advances]**
+
 The separating conjunction is the defining operator of separation logic. It asserts that P and Q hold for disjoint portions of memory.
 
 #### 2.2.1 Intuition
@@ -273,6 +283,8 @@ So C on h1 union h2 produces h1' union h2 where h1' |= Q.
 Thus the result satisfies Q* R.
 
 ### 2.3 Separating Implication (-*)
+
+> **[来源: Wikipedia - Separation Logic]**
 
 The magic wand P -* Q (read as "P wand Q") asserts that if we add a heap satisfying P to the current heap, we get a heap satisfying Q.
 
@@ -1946,4 +1958,13 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.93 兼容性注意事项](#rust-193-兼容性注意事项)
@@ -40,9 +41,11 @@
 ---
 
 ## 破坏性变更（Breaking Changes）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. deref_nullptr 从 warn 升级为 deny
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：`deref_nullptr` lint 从默认警告升级为默认拒绝。
@@ -67,6 +70,7 @@ if !ptr.is_null() {
 ---
 
 ### 2. #[test] 在无效位置现在报错
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：`#[test]` 属性在无意义的位置（如 trait 方法、结构体上）之前被忽略，现在会报错。
@@ -98,6 +102,7 @@ fn my_test() {
 ---
 
 ### 3. offset_of! 类型 well-formed 检查
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：`offset_of!` 宏中的用户类型现在会检查是否 well-formed。
@@ -109,6 +114,7 @@ fn my_test() {
 ---
 
 ### 4. rustdoc 文档属性校验
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：若 `html_favicon_url`、`html_logo_url`、`html_playground_url`、`issue_tracker_base_url` 或 `html_no_source` 有缺失值、意外值或类型错误，rustdoc 将发出 deny-by-default lint `rustdoc::invalid_doc_attributes`。
@@ -118,9 +124,11 @@ fn my_test() {
 ---
 
 ## 未来不兼容警告（Future-Incompatibility）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. ... 函数参数（可变参数）
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：在 `extern` 块外使用 `...` 作为函数参数且无模式，将产生未来不兼容警告。
@@ -132,6 +140,7 @@ fn my_test() {
 ---
 
 ### 2. repr(C) enum discriminant 超出 c_int/c_uint
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：`repr(C)` 枚举的判别值若超出 `c_int` 或 `c_uint` 范围，将产生未来不兼容警告。
@@ -143,6 +152,7 @@ fn my_test() {
 ---
 
 ### 3. repr(transparent) 忽略 repr(C) 类型
+>
 > **[来源: Rust Official Docs]**
 
 **变更**：在 `repr(transparent)` 中忽略 `repr(C)` 类型将产生未来不兼容警告。
@@ -152,6 +162,7 @@ fn my_test() {
 ---
 
 ## 平台特定变更
+>
 > **[来源: Rust Official Docs]**
 
 ### Emscripten panic=unwind ABI 变更

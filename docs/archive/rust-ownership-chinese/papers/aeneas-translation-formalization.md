@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Aeneas：Rust到函数式翻译的完整形式化](#aeneasrust到函数式翻译的完整形式化)
@@ -41,9 +42,11 @@
   - [参考文献](#参考文献)
 
 ## 1. LLBC 完整语法定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 类型系统
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -83,6 +86,7 @@ p ::=
 ```
 
 ### 1.2 表达式和语句
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -131,6 +135,7 @@ terminator ::=
 ```
 
 ### 1.3 控制流图
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -148,9 +153,11 @@ body ::= Body {
 ---
 
 ## 2. 翻译函数 ⟦·⟧: Rust MIR → LLBC
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 翻译签名
+>
 > **[来源: Rust Official Docs]**
 
 $$
@@ -164,6 +171,7 @@ $$
 - $B$：基本块映射
 
 ### 2.2 类型翻译
+>
 > **[来源: Rust Official Docs]**
 
 **基本类型**：
@@ -193,6 +201,7 @@ $$
 $$
 
 ### 2.3 操作数翻译
+>
 > **[来源: Rust Official Docs]**
 
 $$
@@ -208,6 +217,7 @@ $$
 $$
 
 ### 2.4 路径（Place）翻译
+>
 > **[来源: Rust Official Docs]**
 
 **变量**：
@@ -231,6 +241,7 @@ $$
 $$
 
 ### 2.5 Rvalue翻译
+>
 > **[来源: Rust Official Docs]**
 
 **借用创建**：

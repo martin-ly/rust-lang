@@ -1,14 +1,16 @@
 ﻿# 🚀 拼写检查快速启动指南
 
-
 > **创建日期**: 2026-01-26
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已归档
+>
 ## ⚡ 3 步解决所有拼写错误
+>
 > **[来源: Rust Official Docs]**
 
 ### 第 1 步: 安装扩展（如果未安装）
+>
 > **[来源: Rust Official Docs]**
 
 在 VS Code 中：
@@ -18,6 +20,7 @@ Ctrl+Shift+X → 搜索 "Code Spell Checker" → 安装
 ```
 
 ### 第 2 步: 重新加载 VS Code
+>
 > **[来源: Rust Official Docs]**
 
 ```text

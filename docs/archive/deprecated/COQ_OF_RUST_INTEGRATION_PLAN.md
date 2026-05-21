@@ -10,6 +10,7 @@
 ---
 
 ## 一、coq-of-rust 概述
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 说明 |
@@ -22,9 +23,11 @@
 ---
 
 ## 二、本项目文档 → coq-of-rust 映射
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 输入要求
+>
 > **[来源: Rust Official Docs]**
 
 | coq-of-rust 需求 | 本项目对应 | 映射方式 |

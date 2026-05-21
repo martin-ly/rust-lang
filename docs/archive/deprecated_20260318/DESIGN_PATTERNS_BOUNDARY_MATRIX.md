@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [GoF 23 设计模式在 Rust 中的表达能力边界矩阵](#gof-23-设计模式在-rust-中的表达能力边界矩阵)
@@ -61,6 +62,7 @@
 ---
 
 ## 1. 执行摘要
+>
 > **[来源: Rust Official Docs]**
 
 | 模式类别 | 完全支持 | 需要变通 | 难以实现 | 总计 |
@@ -73,6 +75,7 @@
 ---
 
 ## 2. 评级标准
+>
 > **[来源: Rust Official Docs]**
 
 | 评级 | 含义 | 图标 |
@@ -84,9 +87,11 @@
 ---
 
 ## 3. 创建型模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Singleton（单例模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |
@@ -120,6 +125,7 @@ impl Config {
 ---
 
 ### 3.2 Factory Method（工厂方法模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |
@@ -150,6 +156,7 @@ pub trait Creator {
 ---
 
 ### 3.3 Abstract Factory（抽象工厂模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |
@@ -180,6 +187,7 @@ pub trait GUIFactory {
 ---
 
 ### 3.4 Builder（建造者模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |
@@ -216,6 +224,7 @@ impl HttpRequestBuilder {
 ---
 
 ### 3.5 Prototype（原型模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |
@@ -252,9 +261,11 @@ impl Shape {
 ---
 
 ## 4. 结构型模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 Adapter（适配器模式）
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 分析 |

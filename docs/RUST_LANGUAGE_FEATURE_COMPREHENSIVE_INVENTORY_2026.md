@@ -133,6 +133,7 @@
   - [附录 D：认知完备性检查表](#附录-d认知完备性检查表)
   - [*项目 MSRV: 1.95.0+ (Edition 2024)*](#项目-msrv-1950-edition-2024)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 00. 执行摘要与对称差总览
 >
@@ -2438,7 +2439,6 @@ graph TD
 
 - [docs 目录](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -2462,4 +2462,13 @@ graph TD
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

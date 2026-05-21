@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Async Rust 全面形式化梳理](#async-rust-全面形式化梳理)
@@ -43,9 +44,11 @@
 ---
 
 ## 1. 语法层面完整分析
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 async关键字的所有形式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -79,6 +82,7 @@ $$
 $$
 
 ### 1.2 await表达式的所有形式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -118,6 +122,7 @@ $$
 $$
 
 ### 1.3 边界交互语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -153,9 +158,11 @@ async unsafe fn unsafe_async() { }
 ---
 
 ## 2. 编译转换全流程
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 完整编译管道
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -197,6 +204,7 @@ async unsafe fn unsafe_async() { }
 ```
 
 ### 2.2 async fn到状态机的详细转换
+>
 > **[来源: Rust Official Docs]**
 
 **源代码**:
@@ -295,6 +303,7 @@ impl Future for ExampleFuture {
 ```
 
 ### 2.3 await点的转换规则
+>
 > **[来源: Rust Official Docs]**
 
 **转换规则表**:
@@ -309,6 +318,7 @@ impl Future for ExampleFuture {
 | `for x in iter { f.await }` | 转换为while let循环 | 迭代器状态 |
 
 ### 2.4 生命周期在状态机中的处理
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -343,6 +353,7 @@ $$
 ---
 
 ## 3. 运行时架构全景
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 运行时组件全图

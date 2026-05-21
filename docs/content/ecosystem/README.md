@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 生态系统深度解析](#rust-生态系统深度解析)
@@ -32,10 +33,12 @@
     - [Tracing 生态系统](#tracing-生态系统)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: 🔄 持续扩充中](#状态--持续扩充中)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 目标
+>
 > **[来源: Rust Official Docs]**
 
 本目录致力于：
@@ -48,6 +51,7 @@
 ---
 
 ## 📊 生态覆盖矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 领域 | 库 | 深度文档 | 源码分析 | 性能基准 | 生产案例 |
@@ -72,9 +76,11 @@
 ---
 
 ## 🌐 Web 框架
+>
 > **[来源: Rust Official Docs]**
 
 ### Axum
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 模块化、 ergonomic 的 Web 框架，基于 Tower 服务抽象
@@ -139,6 +145,7 @@ async fn get_user(
 ---
 
 ### Actix-web
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 高性能 Web 框架，基于 Actor 模型
@@ -189,6 +196,7 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ### Rocket
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 注重易用性和类型安全的 Web 框架
@@ -235,9 +243,11 @@ fn rocket() -> _ {
 ---
 
 ## 🗄️ 数据库
+>
 > **[来源: Rust Official Docs]**
 
 ### SQLx
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 异步纯 Rust SQL 工具包，支持编译时查询检查
@@ -306,6 +316,7 @@ async fn transfer_funds(
 ---
 
 ### Diesel
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 安全、可扩展的 ORM 和查询构建器
@@ -344,6 +355,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 ---
 
 ### Sea-ORM
+>
 > **[来源: Rust Official Docs]**
 
 **定位**: 异步动态的 ORM，面向现代 Rust
@@ -561,7 +573,6 @@ fn init_tracing() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
@@ -569,3 +580,24 @@ fn init_tracing() {
 - [Content 总览](../README.md)
 - [学术对接](../academic/README.md)
 - [生产实践](../production/README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

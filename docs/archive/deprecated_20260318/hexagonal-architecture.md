@@ -1,6 +1,7 @@
 # 六边形架构 (Hexagonal Architecture)
 
 ## 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -20,9 +21,11 @@
 ```
 
 ## Rust实现
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 领域层
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

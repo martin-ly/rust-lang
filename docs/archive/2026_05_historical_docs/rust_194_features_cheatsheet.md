@@ -7,6 +7,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.95+ 特性速查卡 / Rust 1.94 Features Cheatsheet](#rust-195-特性速查卡--rust-194-features-cheatsheet)
@@ -41,6 +42,7 @@
 ---
 
 ## 🎯 快速参考
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 语法 | 用途 |
@@ -56,9 +58,11 @@
 ---
 
 ## 1. Array Windows（数组窗口）
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -71,6 +75,7 @@ for window in data.array_windows::<3>() {
 ```
 
 ### 滑动窗口平均值
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -88,6 +93,7 @@ fn sliding_average(data: &[f64], window_size: usize) -> Vec<f64> {
 ```
 
 ### 模式检测（ABBA）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -104,9 +110,11 @@ assert!(!has_abba_pattern("abcd"));
 ---
 
 ## 2. LazyCell & LazyLock 新方法
+>
 > **[来源: Rust Official Docs]**
 
 ### LazyCell（单线程）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -132,6 +140,7 @@ let value: &mut String = LazyCell::force_mut(&cell);
 ```
 
 ### LazyLock（多线程）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -153,9 +162,11 @@ std::thread::spawn(|| {
 ---
 
 ## 3. 数学常量
+>
 > **[来源: Rust Official Docs]**
 
 ### 可用常量
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

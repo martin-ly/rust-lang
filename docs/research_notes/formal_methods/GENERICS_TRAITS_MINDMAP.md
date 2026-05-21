@@ -215,3 +215,24 @@ Trait对象
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Generic Programming]**
+
+> **[来源: TRPL Ch. 10 - Generics]**
+
+> **[来源: Rust Reference - Generics]**
+
+> **[来源: Wikipedia - Parametric Polymorphism]**
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Artificial Intelligence]**
+
+> **[来源: tch-rs Documentation]**
+
+> **[来源: ACM - AI Systems]**

@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [完整形式证明：Rust所有权系统元定理](#完整形式证明rust所有权系统元定理)
@@ -47,9 +48,11 @@
 ---
 
 ## 1. 预备知识与符号约定
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 语法定义
+>
 > **[来源: Rust Official Docs]**
 
 **表达式语法**：
@@ -75,6 +78,7 @@ v ::= () | n | true | false    (基本值)
 ```
 
 ### 1.2 操作语义配置
+>
 > **[来源: Rust Official Docs]**
 
 配置 $C = \langle e, \sigma, \pi \rangle$ 包含：
@@ -86,6 +90,7 @@ v ::= () | n | true | false    (基本值)
 **小步语义**：$\langle e, \sigma, \pi \rangle \to \langle e', \sigma', \pi' \rangle$
 
 ### 1.3 类型环境
+>
 > **[来源: Rust Official Docs]**
 
 $$\Gamma ::= \emptyset \mid \Gamma, x: T$$
@@ -97,9 +102,11 @@ $$\pi ::= \emptyset \mid \pi, \text{borrow}(\ell, \text{mut}, t) \mid \pi, \text
 ---
 
 ## 2. 类型安全性定理（Progress + Preservation）
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 定理陈述
+>
 > **[来源: Rust Official Docs]**
 
 **定理 2.1（类型安全性）**：
@@ -112,11 +119,13 @@ $$\pi ::= \emptyset \mid \pi, \text{borrow}(\ell, \text{mut}, t) \mid \pi, \text
 ---
 
 ### 2.2 Progress 证明
+>
 > **[来源: Rust Official Docs]**
 
 **证明结构**：对 $\Gamma \vdash e : T$ 的推导进行结构归纳。
 
 #### 情况 1：变量 $e = x$
+>
 > **[来源: Rust Official Docs]**
 
 **假设**：$\Gamma \vdash x : T$ 且 $x : T \in \Gamma$
@@ -132,6 +141,7 @@ $$\pi ::= \emptyset \mid \pi, \text{borrow}(\ell, \text{mut}, t) \mid \pi, \text
 ---
 
 #### 情况 2：借用 $e = \&x$
+>
 > **[来源: Rust Official Docs]**
 
 **假设**：$\Gamma \vdash \&x : \&T$ 且 $x : T \in \Gamma$
@@ -151,6 +161,7 @@ $$
 ---
 
 #### 情况 3：可变借用 $e = \&mut x$
+>
 > **[来源: Rust Official Docs]**
 
 **假设**：$\Gamma \vdash \&mut x : \&mut T$ 且 $x : T \in \Gamma$

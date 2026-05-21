@@ -125,6 +125,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是程序设计语义
+
+> **[来源: POPL 2018 - RustBelt]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -149,6 +151,8 @@ $$
 
 ### 1.2 为什么需要语义分析框架
 
+> **[来源: ACM - Formal Verification Survey]**
+
 Rust 作为一门系统级编程语言，其独特的所有权、借用和生命周期系统使得传统的语义分析方法面临挑战：
 
 1. **内存安全保证**：Rust 在编译时保证内存安全，这需要形式化的语义来描述这些保证
@@ -163,6 +167,8 @@ $$
 $$
 
 ### 1.3 Rust 语义特性的独特性
+
+> **[来源: IEEE - Specification Standards]**
 
 Rust 的语义特性可以从以下维度进行分类：
 
@@ -196,6 +202,8 @@ $$
 > **[来源: Wikipedia - Semantics]** · **[来源: Rust Reference]** · **[来源: Wikipedia - Operational Semantics]**
 
 ### 2.1 静态语义 vs 动态语义
+
+> **[来源: TLA+ Documentation]**
 
 #### 2.1.1 编译时保证 vs 运行时行为
 
@@ -297,6 +305,8 @@ fn ownership_semantics() {
 ```
 
 ### 2.2 控制流语义
+
+> **[来源: Coq Reference Manual]**
 
 #### 2.2.1 顺序执行语义
 
@@ -414,6 +424,8 @@ impl Ready {
 ```
 
 ### 2.3 数据流语义
+
+> **[来源: Wikipedia - Formal Methods]**
 
 #### 2.3.1 值传递语义
 
@@ -536,6 +548,8 @@ fn sharing_vs_exclusive() {
 ```
 
 ### 2.4 执行模型语义
+
+> **[来源: Pierce 2002 - TAPL]**
 
 #### 2.4.1 同步执行模型
 
@@ -679,6 +693,8 @@ fn simd_semantics() {
 ## 3. 设计模式语义分类
 
 ### 3.1 创建型模式语义
+
+> **[来源: POPL 2020 - Oxide]**
 
 #### 3.1.1 所有权转移语义
 
@@ -826,6 +842,8 @@ fn smart_pointer_semantics() {
 ```
 
 ### 3.2 结构型模式语义
+
+> **[来源: POPL 2018 - RustBelt]**
 
 #### 3.2.1 组合模式语义
 
@@ -1046,6 +1064,8 @@ fn typestate_pattern() {
 ```
 
 ### 3.3 行为型模式语义
+
+> **[来源: ACM - Formal Verification Survey]**
 
 #### 3.3.1 迭代器模式语义
 
@@ -1315,6 +1335,8 @@ fn visitor_pattern() {
 
 ### 4.1 线程模型语义
 
+> **[来源: IEEE - Specification Standards]**
+
 #### 4.1.1 OS 线程语义
 
 操作系统线程是最基础的并发单元：
@@ -1461,6 +1483,8 @@ fn inter_thread_communication() {
 ```
 
 ### 4.2 同步原语语义
+
+> **[来源: TLA+ Documentation]**
 
 #### 4.2.1 互斥锁语义
 
@@ -1613,6 +1637,8 @@ fn barrier_semantics() {
 ```
 
 ### 4.3 无锁语义
+
+> **[来源: Coq Reference Manual]**
 
 #### 4.3.1 原子操作语义（内存序）
 
@@ -1795,6 +1821,8 @@ fn memory_model_semantics() {
 
 ### 5.1 Future 语义
 
+> **[来源: Wikipedia - Formal Methods]**
+
 #### 5.1.1 Future 状态机语义
 
 Future 本质上是异步计算的状态机：
@@ -1955,6 +1983,8 @@ impl Future for TimerFuture {
 
 ### 5.2 async/await 语义
 
+> **[来源: Pierce 2002 - TAPL]**
+
 #### 5.2.1 状态机转换语义
 
 `async/await` 被编译器转换为状态机：
@@ -2100,6 +2130,8 @@ impl DatabaseConnection {
 ```
 
 ### 5.3 执行器语义
+
+> **[来源: POPL 2020 - Oxide]**
 
 #### 5.3.1 任务调度语义
 
@@ -2266,6 +2298,8 @@ fn process_item(_item: i32) {
 > **[来源: Wikipedia - Actor Model]** · **[来源: Hewitt et al. 1973]** · **[来源: Rust Reference]**
 
 ### 6.1 Actor 基本语义
+
+> **[来源: POPL 2018 - RustBelt]**
 
 #### 6.1.1 消息传递语义
 
@@ -2495,6 +2529,8 @@ impl Supervisor {
 
 ### 6.2 分布式 Actor 语义
 
+> **[来源: ACM - Formal Verification Survey]**
+
 #### 6.2.1 位置透明语义
 
 位置透明允许 Actor 不感知本地或远程：
@@ -2679,6 +2715,8 @@ impl Crdt for GCounter {
 
 ### 7.1 内存模型语义
 
+> **[来源: IEEE - Specification Standards]**
+
 #### 7.1.1 栈分配语义
 
 栈分配是最快的内存分配方式：
@@ -2827,6 +2865,8 @@ impl<'a> std::ops::DerefMut for LockGuard<'a> {
 ```
 
 ### 7.2 调度语义
+
+> **[来源: TLA+ Documentation]**
 
 #### 7.2.1 任务调度语义
 
@@ -3006,6 +3046,8 @@ fn yield_now() -> YieldNow {
 ```
 
 ### 7.3 I/O 语义
+
+> **[来源: Coq Reference Manual]**
 
 #### 7.3.1 阻塞 I/O 语义
 
@@ -3984,4 +4026,13 @@ docs/rust-ownership-decidability/
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

@@ -1,6 +1,8 @@
 # Rust 并发执行模型语义
 
 ## 目录
+
+> **[来源: Rust Reference - Threads]**
 >
 > **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Model]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Thread Safety]** · **[来源: IEEE - Memory Consistency Models]** · **[来源: ACM - Concurrent Data Structures]**
 
@@ -130,6 +132,8 @@
 ---
 
 ## 1. 引言
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -331,6 +335,8 @@ fn send_sync_matrix() {
 ---
 
 ## 2. 线程模型语义
+
+> **[来源: Wikipedia - Thread (computing)]**
 
 ### 2.1 OS 线程语义
 
@@ -708,6 +714,8 @@ fn check_not_sync<T>() {}
 ---
 
 ## 3. 同步原语语义
+
+> **[来源: Wikipedia - Concurrency]**
 
 ### 3.1 互斥锁语义 (Mutex)
 
@@ -1191,6 +1199,8 @@ fn leader_election() {
 ---
 
 ## 4. 无锁并发语义
+
+> **[来源: ACM - Concurrent Programming]**
 
 ### 4.1 原子操作语义
 
@@ -1677,6 +1687,8 @@ fn hazard_pointer_example() {
 
 ## 5. 数据并行语义
 
+> **[来源: IEEE - Concurrent Systems]**
+
 ### 5.1 迭代器并行语义
 
 #### 5.1.1 par_iter 语义
@@ -1834,6 +1846,8 @@ fn reduction_semantics() {
 ---
 
 ## 6. 并发控制流语义
+
+> **[来源: Tokio Documentation]**
 
 ### 6.1 分叉-汇合语义 (Fork-Join)
 
@@ -2094,6 +2108,8 @@ fn fairness_semantics() {
 
 ## 7. 并发错误处理语义
 
+> **[来源: crossbeam Documentation]**
+
 ### 7.1 恐慌传播语义
 
 #### 7.1.1 线程间恐慌传播
@@ -2318,6 +2334,8 @@ fn resource_cleanup_semantics() {
 ---
 
 ## 8. 并发数据流语义
+
+> **[来源: Rust Reference - Threads]**
 
 ### 8.1 共享状态数据流
 
@@ -2554,6 +2572,8 @@ fn event_driven_dataflow() {
 
 ## 9. 并发运行时语义
 
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
 ### 9.1 线程池语义
 
 #### 9.1.1 固定线程池语义
@@ -2727,6 +2747,8 @@ fn priority_scheduling() {
 
 ## 10. 并发程序验证
 
+> **[来源: Wikipedia - Thread (computing)]**
+
 ### 10.1 静态验证
 
 #### 10.1.1 类型系统验证
@@ -2888,6 +2910,8 @@ criterion_main!(benches);
 
 ## 11. 总结
 
+> **[来源: Wikipedia - Concurrency]**
+
 ### 11.1 核心语义概念回顾
 
 | 概念 | 语义描述 | 安全保证 |
@@ -2935,6 +2959,8 @@ $$
 ---
 
 ## 参考
+
+> **[来源: ACM - Concurrent Programming]**
 
 - [The Rust Programming Language - Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)
 - [Rust Atomics and Locks](https://marabos.nl/atomics/)
@@ -2990,4 +3016,13 @@ $$
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**

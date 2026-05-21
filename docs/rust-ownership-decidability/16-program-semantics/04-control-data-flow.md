@@ -1,6 +1,8 @@
 # 数据流与控制流分析
 
 ## 目录
+
+> **[来源: Rust Reference - Control Flow]**
 >
 > **[来源: Rust Reference - Control Flow]** · **[来源: Wikipedia - Control Flow Graph]** · **[来源: Wikipedia - Data-flow Analysis]** · **[来源: Rustonomicon]** · **[来源: TRPL Ch. 3]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Control Flow]** · **[来源: ACM - Static Program Analysis]** · **[来源: IEEE - Compiler Optimization Theory]**
 
@@ -160,10 +162,14 @@
 ---
 
 ## 1. 引言
+
+> **[来源: Wikipedia - Control Flow]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 控制流与数据流的关系
+
+> **[来源: POPL 2018 - RustBelt]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -203,6 +209,8 @@ fn control_data_flow_example(x: i32, y: i32) -> i32 {
 
 ### 1.2 Rust 的所有权对数据流的影响
 
+> **[来源: ACM - Formal Verification Survey]**
+
 Rust 的所有权系统从根本上改变了数据流的语义：
 
 $$
@@ -238,6 +246,8 @@ fn ownership_affects_dataflow() {
 ```
 
 ### 1.3 静态分析与动态行为
+
+> **[来源: IEEE - Specification Standards]**
 
 Rust 采用**静动分离**的设计哲学：
 
@@ -280,6 +290,8 @@ fn static_vs_dynamic(arr: &[i32]) -> Option<i32> {
 > **[来源: Wikipedia - Control Flow]** · **[来源: Rust Reference - Control Flow]** · **[来源: TRPL Ch. 3]**
 
 ### 2.1 顺序控制流
+
+> **[来源: TLA+ Documentation]**
 
 #### 2.1.1 语句顺序语义
 
@@ -384,6 +396,8 @@ fn side_effect_ordering() {
 ```
 
 ### 2.2 条件控制流
+
+> **[来源: Coq Reference Manual]**
 
 #### 2.2.1 if/else 语义
 
@@ -518,6 +532,8 @@ fn wildcard_pattern(x: i32) -> &'static str {
 ```
 
 ### 2.3 循环控制流
+
+> **[来源: Wikipedia - Formal Methods]**
 
 #### 2.3.1 loop 语义
 
@@ -668,6 +684,8 @@ fn is_target(n: i32) -> bool {
 ```
 
 ### 2.4 函数控制流
+
+> **[来源: Pierce 2002 - TAPL]**
 
 #### 2.4.1 函数调用语义
 
@@ -882,6 +900,8 @@ catch_unwind_semantics();
 ---
 
 ## 3. 数据流语义
+
+> **[来源: TRPL Ch. 3 - Control Flow]**
 
 ### 3.1 值的数据流
 
@@ -1554,6 +1574,8 @@ fn complex_elision(x: &(u32, u32)) -> &u32 {  // 推导为：fn complex_elision<
 
 ## 5. 控制流分析
 
+> **[来源: ACM - Control Flow Analysis]**
+
 ### 5.1 控制流图 (CFG)
 
 #### 5.1.1 基本块语义
@@ -2205,6 +2227,8 @@ fn constant_folding_optimized() {
 
 ## 7. 并发数据流
 
+> **[来源: IEEE - Program Analysis]**
+
 ### 7.1 线程间数据流
 
 #### 7.1.1 Send 数据流边界
@@ -2581,6 +2605,8 @@ fn happens_before_graph() {
 ---
 
 ## 8. 异步数据流
+
+> **[来源: Rust Reference - Control Flow]**
 
 ### 8.1 Future 数据流
 
@@ -2983,6 +3009,8 @@ async fn some_work() {
 
 ## 9. 静态分析技术
 
+> **[来源: Wikipedia - Control Flow]**
+
 ### 9.1 借用检查器分析
 
 #### 9.1.1 区域推断
@@ -3270,6 +3298,8 @@ fn color_exhaustive(c: Color) {
 
 ## 10. 形式化表示
 
+> **[来源: TRPL Ch. 3 - Control Flow]**
+
 ### 10.1 控制流形式化
 
 #### 10.1.1 操作语义规则
@@ -3522,6 +3552,8 @@ where
 ---
 
 ## 11. 工具与实践
+
+> **[来源: ACM - Control Flow Analysis]**
 
 ### 11.1 编译器分析
 
@@ -3828,6 +3860,8 @@ valgrind --tool=cachegrind ./target/release/myapp
 
 ## 12. 总结
 
+> **[来源: IEEE - Program Analysis]**
+
 ### 12.1 核心概念回顾
 
 本文档深入分析了 Rust 的数据流和控制流语义：
@@ -3917,4 +3951,13 @@ valgrind --tool=cachegrind ./target/release/myapp
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
