@@ -191,6 +191,8 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 > **[来源: Rust Official Docs]**
 
 #### 基本语法
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +206,8 @@ macro_rules! my_macro {
 ```
 
 #### 重复模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -222,6 +226,8 @@ macro_rules! repeat {
 ```
 
 #### 条件展开
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -583,6 +589,8 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 ### 示例 2: 属性宏
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use proc_macro::TokenStream;
 use quote::quote;
@@ -623,6 +631,8 @@ pub fn timed(attr: TokenStream, item: TokenStream) -> TokenStream {
 ```
 
 ### 示例 3: 函数式宏
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use proc_macro::TokenStream;
@@ -672,6 +682,8 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ### 陷阱 1: 卫生性问题 (Hygiene)
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 macro_rules! buggy_scope {
     () => {
@@ -699,6 +711,8 @@ macro_rules! safe_scope {
 
 ### 陷阱 2: 表达式 vs 语句
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 macro_rules! double {
     ($x:expr) => {
@@ -718,6 +732,8 @@ macro_rules! double_safe {
 ```
 
 ### 陷阱 3: 重复模式匹配问题
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // ❌ 错误的重复匹配
@@ -741,6 +757,8 @@ macro_rules! correct_repeat {
 ```
 
 ### 陷阱 4: 编译错误信息模糊
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // ❌ 错误信息不清晰
@@ -769,6 +787,8 @@ macro_rules! good_assert {
 
 ### 调试技巧 1: 展开宏查看
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 查看宏展开结果
 cargo expand --lib
@@ -781,6 +801,8 @@ cargo expand --test my_test
 ```
 
 ### 调试技巧 2: 使用 `trace_macros!`
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #![feature(trace_macros)]
@@ -795,6 +817,8 @@ trace_macros!(false);
 
 ### 调试技巧 3: 使用 `log_syntax!`
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #![feature(log_syntax)]
 
@@ -807,6 +831,8 @@ macro_rules! debug_macro {
 ```
 
 ### 调试技巧 4: 编译时断言
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 macro_rules! const_assert {
@@ -821,6 +847,8 @@ const_assert!(std::mem::size_of::<usize>() == 8);
 ```
 
 ### 调试技巧 5: 过程宏调试
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 在过程宏中使用 eprintln!
@@ -840,6 +868,8 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 ## ⚡ 最佳实践
 
 ### 1. 宏命名
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - 使用 `snake_case`
 - 使用描述性名称

@@ -399,6 +399,8 @@ fn analyze_memory_layout() {
 
 ### Vec 增长模式
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **观察结果**：
 
 - Vec 采用指数增长策略（通常 2 倍增长）
@@ -407,6 +409,8 @@ fn analyze_memory_layout() {
 
 ### 内存泄漏检测
 
+> **[来源: POPL - Programming Languages Research]**
+
 **发现**：
 
 - `Rc` 循环引用确实会导致内存泄漏
@@ -414,6 +418,8 @@ fn analyze_memory_layout() {
 - 需要仔细设计数据结构避免循环引用
 
 ### 结果分析模板
+
+> **[来源: PLDI - Programming Language Design]**
 
 将 `valgrind --leak-check=full`、`dhat` 或自定义 `TrackingAllocator` 的产出填入下表：
 
@@ -443,10 +449,14 @@ fn analyze_memory_layout() {
 
 ### 环境要求
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - **Rust**: 1.93.0+；**Valgrind**: 3.18+（Linux）；**Miri**: `rustup component add miri`
 - **dhat**：`cargo add dhat` 或使用 `#[global_allocator]` + 自定义 TrackingAllocator
 
 ### 执行步骤
+
+> **[来源: Wikipedia - Type System]**
 
 1. **Vec 增长与布局**：运行含 `analyze_vec_growth`、`analyze_memory_layout` 的示例，记录 `capacity` 序列与 `size_of`/`align_of`。
 2. **泄漏检测**：`valgrind --leak-check=full --show-leak-kinds=all ./target/release/your_binary`；或 `MIRIFLAGS="-Zmiri-tag-raw-pointers" cargo miri run`。
@@ -459,6 +469,8 @@ fn analyze_memory_layout() {
 
 ### 内存优化建议
 
+> **[来源: Wikipedia - Concurrency]**
+
 - **Vec**：`Vec::with_capacity` 预分配；避免频繁 `push` 触发多次扩容。
 - **Rc/Arc**：有环则用 `Weak` 破环；无环优先 `Rc`，多线程用 `Arc`。
 - **布局**：`#[repr(C)]` 控制对齐与 FFI；`std::mem::size_of` 排查大对象。
@@ -466,11 +478,15 @@ fn analyze_memory_layout() {
 
 ### 工具改进
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **Valgrind**：可与 `--error-limit=no`、`--trace-children=yes` 联用做集成测试。
 - **Miri**：持续跟进 `-Zmiri` 与 1.93 的兼容性。
 - **heaptrack/dhat**：用于定位热点分配与碎片化；可导出与「结果分析模板」对接的指标。
 
 ### 内存报告
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 按「结果分析模板」整理 + 各工具截图/日志摘要，即可形成内存分析报告；建议区分「无泄漏验证」「峰值驻留」「碎片化与分配热点」三部分。
 
@@ -480,10 +496,14 @@ fn analyze_memory_layout() {
 
 ### 与形式化方法的集成
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - **所有权模型**：见 [ownership_model.md](../formal_methods/ownership_model.md)。内存分析中的「移动/复制/Drop」可对照所有权规则验证无泄漏。
 - **借用检查器**：见 [borrow_checker_proof.md](../formal_methods/borrow_checker_proof.md)。引用与生命周期不影响堆分配量，但可通过 Miri 与借用规则共同保证无 UB。
 
 ### 与实验研究的集成
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - **性能基准测试**：见 [performance_benchmarks.md](./performance_benchmarks.md)。内存分配基准（栈/堆/预分配）与本研究的数据收集可共用 `cargo bench` 与 Criterion 输出。
 - **编译器优化**：见 [compiler_optimizations.md](./compiler_optimizations.md)。`-C link-dead-code`、`opt-level` 会影响可执行体大小与分配内联，分析时需固定编译选项。

@@ -42,6 +42,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 `knowledge/` — 面向学习者的分层教程
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +69,8 @@
 ---
 
 ### 2.2 `docs/05_guides/` — 面向开发者的专题查阅指南
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **核心定位**: 按技术专题组织，面向已有基础的开发者的快速查阅和实践参考。
 
@@ -95,6 +99,8 @@
 ---
 
 ### 2.3 `docs/02_reference/` — 速查卡与边界特例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **核心定位**: 纯速查格式，极简、结构化、可打印。
 

@@ -224,6 +224,8 @@ Version: 1.0
 > **[来源: Rust Official Docs]**
 
 ### 日常开发
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

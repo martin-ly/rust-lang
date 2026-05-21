@@ -63,6 +63,8 @@ Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时
 
 ### 1.1 Drop Elaboration 是什么
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 在 Rust 中，值在作用域结束时自动调用析构函数（Drop）。例如：
 
 ```rust
@@ -89,6 +91,8 @@ Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时
 
 ### 1.2 为什么需要形式化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Rust 的 Drop 规则涉及复杂的控制流分析：
 
 1. **部分初始化**：结构体可能只有部分字段被初始化
@@ -107,6 +111,8 @@ Rust 的 Drop 规则涉及复杂的控制流分析：
 
 ### 2.1 析构与 Drop
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Drop Trait**：
 
 ```rust
@@ -122,6 +128,8 @@ pub trait Drop {
 - 显式调用 `drop(v)`
 
 ### 2.2 初始化状态
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Rust 中变量有三个初始化状态：
 

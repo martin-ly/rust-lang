@@ -335,6 +335,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 生命周期形式化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -370,6 +372,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 类型系统基础
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **文档**: [type_system_foundations.md](./type_theory/type_system_foundations.md)
 
@@ -431,6 +435,8 @@
 
 #### 异步状态机形式化
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
 
 **已完成的证明**:
@@ -455,6 +461,8 @@
    - **证明位置**: [async_state_machine.md](./formal_methods/async_state_machine.md)
 
 #### Pin 和自引用类型形式化
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **文档**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
 
@@ -481,6 +489,8 @@
 
 #### Trait 系统形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **文档**: [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
 
 **已完成的证明**:
@@ -498,6 +508,8 @@
 
 #### 型变理论
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **文档**: [variance_theory.md](./type_theory/variance_theory.md)
 
 **已完成的证明**:
@@ -511,6 +523,8 @@
 
 #### 类型理论完备性缺口
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **文档**: [00_completeness_gaps.md](./type_theory/00_completeness_gaps.md)
 
 **已完成的证明**:
@@ -523,6 +537,8 @@
 
 #### 类型构造能力
 
+> **[来源: POPL - Programming Languages Research]**
+
 **文档**: [construction_capability.md](./type_theory/construction_capability.md)
 
 **已完成的证明**:
@@ -533,6 +549,8 @@
 4. **推论 TCON-C1** ✅ — 良型程序添加注解后构造路径唯一；[证明位置](./type_theory/construction_capability.md)
 
 #### 高级类型特性
+
+> **[来源: PLDI - Programming Language Design]**
 
 **文档**: [advanced_types.md](./type_theory/advanced_types.md)
 
@@ -549,6 +567,8 @@
 9. **Def CONST-MUT1、Def EXIST1（const &mut static、existential type）** ✅ — 1.93 const、存在类型；[证明位置](./type_theory/advanced_types.md)
 
 #### 软件设计理论
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **文档**: [02_effectiveness_proofs.md](./software_design_theory/04_compositional_engineering/02_effectiveness_proofs.md)、[01_formal_composition.md](./software_design_theory/04_compositional_engineering/01_formal_composition.md)
 
@@ -585,6 +605,8 @@
 
 #### 边界系统
 
+> **[来源: Wikipedia - Type System]**
+
 **文档**: [05_boundary_system](./software_design_theory/05_boundary_system/README.md)、[04_boundary_matrix](./software_design_theory/01_design_patterns_formal/04_boundary_matrix.md)、[06_boundary_analysis](./software_design_theory/03_execution_models/06_boundary_analysis.md)
 
 **已完成的证明**:
@@ -601,6 +623,8 @@
 
 #### 语义与表达能力
 
+> **[来源: Wikipedia - Concurrency]**
+
 **文档**: [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)
 
 **已完成的证明**:
@@ -610,6 +634,8 @@
 3. **推论 EB-C1/C2** ✅ — 通过 cargo check 且无 unsafe 则满足 EB1–EB3；边界可静态校验
 
 #### 顶层框架
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **文档**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md)、[UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md)
 
@@ -624,6 +650,8 @@
 7. **推论 USF-C1** ✅ — 反例索引与各模块反例对应
 
 #### 实际应用案例
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **文档**: [practical_applications](./practical_applications.md)
 

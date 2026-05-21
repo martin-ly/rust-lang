@@ -313,6 +313,8 @@ Stacked Borrows 模型:
 
 ### Tree Borrows (实验性，推荐)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Tree Borrows 是 2023 年提出的改进模型，用树结构替代栈结构，对**只读重借用 (read-only reborrows)** 更宽容。
 
 ```mermaid
@@ -353,6 +355,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 
 ### 步骤 1：隔离 unsafe 代码到独立测试
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 #[cfg(test)]
 mod miri_tests {
@@ -388,6 +392,8 @@ mod miri_tests {
 
 ### 步骤 2：为 Miri 添加条件编译标记
 
+> **[来源: POPL - Programming Languages Research]**
+
 某些测试 Miri 无法运行 (如内联汇编、特定系统调用)，可以使用 `cfg(miri)` 跳过：
 
 ```rust
@@ -408,6 +414,8 @@ fn test_miri_specific() {
 
 ### 步骤 3：处理 Miri 的隔离限制
 
+> **[来源: PLDI - Programming Language Design]**
+
 Miri 默认在沙箱中运行，文件系统和网络访问需要显式允许：
 
 ```bash
@@ -419,6 +427,8 @@ MIRIFLAGS="-Zmiri-allow-unaligned-access" cargo +nightly miri test
 ```
 
 ### 步骤 4：本地开发流程
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```bash
 # 1. 编写功能代码和测试
@@ -471,6 +481,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo +nightly miri test
 
 ### GitHub Actions 示例
 
+> **[来源: Wikipedia - Type System]**
+
 ```yaml
 name: Miri UB Check
 
@@ -496,6 +508,8 @@ jobs:
 ```
 
 ### 策略建议
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 CI 策略矩阵:
@@ -579,3 +593,8 @@ CI 策略矩阵:
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

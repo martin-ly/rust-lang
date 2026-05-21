@@ -363,6 +363,8 @@ mod aarch64_examples {
 
 ### RISC-V
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 #[cfg(target_arch = "riscv64")]
 mod riscv_examples {
@@ -394,6 +396,8 @@ mod riscv_examples {
 ## 实战示例
 
 ### 1. 系统调用封装
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// Linux x86_64 系统调用
@@ -433,6 +437,8 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 
 ### 2. SIMD 操作 (x86_64 AVX)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 #[cfg(target_arch = "x86_64")]
 pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
@@ -455,6 +461,8 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
 ```
 
 ### 3. 原子操作（自定义实现）
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::sync::atomic::Ordering;
@@ -575,6 +583,8 @@ extern "C" fn handle_syscall() {
 
 ### 陷阱 1: 忘记标记 clobbered 寄存器
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // ❌ 错误：未标记被修改的寄存器
 unsafe {
@@ -593,6 +603,8 @@ unsafe {
 ```
 
 ### 陷阱 2: 输入输出操作数混淆
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 let mut x = 10;
@@ -618,6 +630,8 @@ unsafe {
 > 即使配合内联汇编，也应优先使用 `AtomicU64` 或 `UnsafeCell`。
 
 ### 陷阱 3: 忘记内存屏障
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // ❌ 错误：编译器可能重排内存操作

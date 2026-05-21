@@ -124,6 +124,8 @@ Google Comprehensive Rust 分为 4 天：
 
 ### 补充材料
 
+> **[来源: Wikipedia - Concurrency]**
+
 - `docs/02_reference/quick_reference/design_patterns_cheatsheet.md` - 设计模式速查
 - `exercises/src/type_system/ex01_enum_pattern_match.rs` - 练习
 - `exercises/src/type_system/ex02_struct_methods.rs` - 练习
@@ -133,6 +135,8 @@ Google Comprehensive Rust 分为 4 天：
 ## Day 3: 泛型、Trait 与生命周期
 
 ### Google 内容
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - 泛型函数与结构体
 - Trait 定义与实现

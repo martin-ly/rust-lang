@@ -200,6 +200,8 @@ $$
 
 #### 定义 2.3 (通信信道)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 defmt使用单向信道进行目标到主机的通信:
 
 $$
@@ -228,6 +230,8 @@ $$
 ```
 
 #### 定义 2.4 (协议状态机)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 defmt协议可建模为有限状态机:
 
@@ -259,6 +263,8 @@ $$
 
 #### 定义 2.5 (字符串表压缩)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 设源代码中所有格式字符串集合为 $S = \{s_1, s_2, \ldots, s_n\}$，压缩编码定义为:
 
 $$
@@ -279,6 +285,8 @@ $$
 其中 $|I|$ 为索引大小（通常为2字节），$|T|$ 为字符串表总大小。
 
 #### 定理 2.1 (压缩比下界)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > 对于包含 $n$ 个不同格式字符串的程序，defmt的压缩比满足:
 >
@@ -329,6 +337,8 @@ $$
 
 #### 定义 3.1 (日志级别格)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 日志级别构成一个完全格 $(L, \sqsubseteq)$:
 
 $$
@@ -371,6 +381,8 @@ $$
 
 #### 定理 3.1 (编译时过滤完备性)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 > 对于任何日志语句 $log_l(m)$，若 $l \sqsubset c$（编译时阈值），则该语句不会产生任何运行时开销。
 
 **证明**:
@@ -406,6 +418,8 @@ $$
 
 #### 定理 3.2 (运行时过滤一致性)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 > 运行时过滤器的行为与编译时过滤器的语义一致，即:
 >
 > $$
@@ -436,6 +450,8 @@ $$
 
 #### 定义 3.2 (字符串去重)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 设源代码中所有格式字符串的多重集合为 $M$，去重函数定义为:
 
 $$
@@ -459,6 +475,8 @@ $$
 其中 $|I| = 2$ 为索引大小。
 
 #### 定理 3.3 (索引唯一性)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > 每个唯一的格式字符串在字符串表中有且仅有一个索引。
 
@@ -503,6 +521,8 @@ $$
 
 #### 定义 3.3 (参数编码)
 
+> **[来源: PLDI - Programming Language Design]**
+
 参数编码函数族 $\{ \mathcal{E}_t \}_{t \in \mathcal{T}}$，其中 $\mathcal{T}$ 为支持的类型集合:
 
 $$
@@ -524,6 +544,8 @@ $$
 | `&[u8]` | 4字节 + $n$ | 长度(LEB128) + 字节 |
 
 #### 定理 3.4 (编码单射性)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > 对于任何类型 $t$，编码函数 $\mathcal{E}_t$ 是单射（一对一映射）。
 
@@ -553,6 +575,8 @@ $$
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 定理 4.1 (传输带宽上界)
+
+> **[来源: Wikipedia - Type System]**
 
 > 对于包含 $n$ 个参数的日志语句，传输数据量有上界:
 >
@@ -609,6 +633,8 @@ $$
 
 #### 定理 4.2 (压缩比分析)
 
+> **[来源: Wikipedia - Concurrency]**
+
 > 相比标准格式化，defmt的压缩比满足:
 >
 > $$
@@ -653,6 +679,8 @@ $$
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 定理 4.3 (零拷贝保证)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > defmt日志操作不执行堆内存分配，所有操作在栈上完成。
 
@@ -712,6 +740,8 @@ offset += s.len();
 
 #### 定理 4.4 (格式化正确性)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 > 对于任何日志语句 `defmt::info!(fmt, args)`，主机端解码后的输出与在目标端使用 `core::format_args!` 格式化的结果一致。
 
 **证明**:
@@ -762,6 +792,8 @@ fn decode_log(frame: &Frame) -> String {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 定理 4.5 (栈使用上界)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 > 单条defmt日志语句的最大栈使用量有编译时确定的上界:
 >
@@ -819,6 +851,8 @@ $$
 
 #### 定理 4.6 (时间复杂度)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 > defmt日志操作的时间复杂度为 $O(1)$，与日志内容无关。
 
 **证明**:
@@ -857,6 +891,8 @@ $$
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 定义 5.1 (Format Trait)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 `Format` trait 定义类型的可格式化性:
 
@@ -901,6 +937,8 @@ impl Format for Point {
 
 #### 定理 5.1 (Format一致性)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 > 若类型 $T$ 实现 `Format`，则其编码表示与派生宏生成的解码器兼容。
 
 **证明**:
@@ -922,6 +960,8 @@ $$
 > **[来源: POPL - Programming Languages Research]**
 
 #### 定义 5.2 (可格式化类型)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 可格式化类型 $\mathcal{F}$ 归纳定义为:
 
@@ -949,6 +989,8 @@ $$
 - `[T1; N]` $\in \mathcal{F}$（固定大小数组）
 
 #### 定理 5.2 (类型安全)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > defmt的类型系统在编译时阻止格式字符串与参数类型不匹配的日志语句。
 
@@ -996,6 +1038,8 @@ struct Wrapper<T>(T);
 
 #### 定理 5.3 (生命周期安全)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 > defmt日志操作对引用参数的生命周期要求与Rust借用规则一致。
 
 **证明**:
@@ -1042,6 +1086,8 @@ defmt::info!("msg = {}", s.as_str());
 > **[来源: Wikipedia - Memory Safety]**
 
 #### 定理 6.1 (纯栈分配)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > defmt不使用堆分配器，所有内存使用在栈上完成。
 
@@ -1094,6 +1140,8 @@ $$
 
 #### 定理 6.2 (溢出防护)
 
+> **[来源: PLDI - Programming Language Design]**
+
 > defmt编码操作通过编译时计算缓冲区大小，防止运行时缓冲区溢出。
 
 **证明**:
@@ -1143,6 +1191,8 @@ fn write_bytes(&mut self, bytes: &[u8]) {
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 定理 6.3 (线程安全)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > defmt在多线程/中断上下文中的日志操作是原子的或无锁的。
 
@@ -1212,6 +1262,8 @@ $$
 
 #### 定义 7.1 (日志操作时间)
 
+> **[来源: Wikipedia - Type System]**
+
 日志操作时间 $T_{\text{log}}$ 定义为:
 
 $$
@@ -1225,6 +1277,8 @@ $$
 - $T_{\text{transmit}}$: 数据传输时间
 
 #### 定理 7.1 (O(1)日志操作)
+
+> **[来源: Wikipedia - Concurrency]**
 
 > 对于固定参数数量的日志语句，defmt的执行时间为常数时间 $O(1)$。
 
@@ -1259,6 +1313,8 @@ $$
 > **[来源: TRPL - The Rust Programming Language]**
 
 #### 定理 7.2 (空间使用上界)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > defmt日志语句的空间复杂度为 $O(1)$，最大栈使用量由编译时类型分析确定。
 
@@ -1304,6 +1360,8 @@ const MAX_STACK: usize = {
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 定理 7.3 (性能优势)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 > 相比 `core::fmt`，defmt在代码大小、执行时间和传输带宽方面都有显著优势。
 

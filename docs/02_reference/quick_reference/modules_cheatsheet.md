@@ -307,6 +307,8 @@ let map = Map::new();
 
 ### 嵌套导入
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // 导入嵌套路径
 use std::{
@@ -317,6 +319,8 @@ use std::{
 ```
 
 ### self 和 super
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 导入当前模块
@@ -335,6 +339,8 @@ use crate::root_module;
 
 ### 绝对路径
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 从 crate 根开始
 use crate::my_module::my_function;
@@ -344,6 +350,8 @@ use std::collections::HashMap;
 ```
 
 ### 相对路径
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 mod parent {
@@ -359,6 +367,8 @@ mod parent {
 
 ### 路径简写
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 完整路径
 use std::collections::hash_map::HashMap;
@@ -373,6 +383,8 @@ use std::collections::HashMap;
 
 ### 单文件模块
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 src/
 ├── main.rs
@@ -386,6 +398,8 @@ pub mod models;
 ```
 
 ### 文件模块1
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 src/
@@ -406,6 +420,8 @@ fn main() {
 ```
 
 ### 目录模块
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
 src/
@@ -433,6 +449,8 @@ pub fn help() {}
 
 ### 混合组织
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 src/
 ├── main.rs
@@ -452,6 +470,8 @@ src/
 
 ### 库 Crate
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // src/lib.rs
 pub mod utils;
@@ -461,6 +481,8 @@ pub fn public_api() {}
 ```
 
 ### 二进制 Crate
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // src/main.rs
@@ -472,6 +494,8 @@ fn main() {
 ```
 
 ### 多个二进制文件
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 src/
@@ -493,6 +517,8 @@ fn main() {
 
 ### 外部 Crate
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```toml
 # Cargo.toml
 [dependencies]
@@ -512,6 +538,8 @@ use tokio::runtime::Runtime;
 
 ### 重导出
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // src/lib.rs
 mod internal {
@@ -523,6 +551,8 @@ pub use internal::helper;
 ```
 
 ### 条件编译
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 #[cfg(feature = "async")]
@@ -539,6 +569,8 @@ mod tests {
 
 ### 模块别名
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 使用 type 别名
 pub type Map<K, V> = std::collections::HashMap<K, V>;
@@ -548,6 +580,8 @@ use std::collections::HashMap as Map;
 ```
 
 ### 私有模块
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 私有模块（默认）

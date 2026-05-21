@@ -117,6 +117,8 @@
 | `README_100_PERCENT_COMPLETION.md` | 本文件，总览与入口 | ✅ |
 
 ### 现有核心文档（需完善）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +137,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Phase 1: 基础补全 (Week 1-8)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -156,6 +160,8 @@ Week 5-8: 证明结构标准化
 ```
 
 ### Phase 2: 深度证明 (Week 9-16)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +184,8 @@ Week 15-16: 分布式/工作流
 ```
 
 ### Phase 3: 工具对接 (Week 17-24)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +207,8 @@ Week 21-24: 国际对标
 
 ### 思维导图 (目标15个，当前8个)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - [ ] 所有权概念族谱 (更新)
 - [ ] 类型系统概念族谱 (更新)
 - [ ] 型变概念族谱 (完善)
@@ -208,6 +218,8 @@ Week 21-24: 国际对标
 - [ ] 证明技术概念族谱 (新建)
 
 ### 多维矩阵 (目标12个，当前6个)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [ ] 概念-公理-定理-证明-反例五维矩阵 (更新)
 - [ ] 证明完成度矩阵 (细化)

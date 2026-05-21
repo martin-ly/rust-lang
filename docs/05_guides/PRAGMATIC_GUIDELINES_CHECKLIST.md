@@ -80,6 +80,8 @@
 
 ### 1.3 并发安全
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
 | S10 | 共享可变状态必须使用同步原语 | MUST | `crates/c05_threads/src/synchronization/` | `Mutex`/`RwLock` 是否包裹了共享数据？ |

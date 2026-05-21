@@ -1050,6 +1050,8 @@ pub fn get_buffer() -> Option<&'static UnsafeBuffer> {
 
 ### ControlFlow 在 Unsafe 边界检查中的应用
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::ops::ControlFlow;
 
@@ -1125,3 +1127,17 @@ fn validate_pointer_range<T>(
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**

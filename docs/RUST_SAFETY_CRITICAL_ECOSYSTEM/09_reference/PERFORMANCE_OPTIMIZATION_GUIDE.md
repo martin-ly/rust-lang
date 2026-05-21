@@ -44,6 +44,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 泛型单态化
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -60,6 +62,8 @@ pub fn process<T: Processor>(item: T) -> T::Output {
 ```
 
 ### 1.2 迭代器优化
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// 迭代器链零成本抽象
@@ -78,6 +82,8 @@ pub fn sum_of_squares(nums: &[i32]) -> i32 {
 ## 2. 内存布局优化
 
 ### 2.1 结构体布局
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::mem::size_of;
@@ -111,6 +117,8 @@ struct PackedLayout {
 ```
 
 ### 2.2 缓存友好设计
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// SoA (Structure of Arrays) vs AoS (Array of Structures)

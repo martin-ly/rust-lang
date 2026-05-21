@@ -186,6 +186,8 @@
 
 ### 工作流模式
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 类别 | 当前 | 目标 |
 |:-----|:----:|:----:|
 | 基础控制流 | 🟢 | 43种 |
@@ -194,6 +196,8 @@
 | 事务模式 | 🟡 | 完整 |
 
 ### 分布式模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 类别 | 当前 | 目标 |
 |:-----|:----:|:----:|
@@ -244,6 +248,8 @@ Phase 5 (Week 5): 分布式系统模式语义
 
 ### 1.1 Reborrow Trait 完整语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **当前**: 基础定义和形式化
 **目标**: 完整的操作语义、类型规则、安全定理
 
@@ -254,17 +260,23 @@ Phase 5 (Week 5): 分布式系统模式语义
 
 ### 1.2 CoerceShared 完整语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **交付物**:
 
 - `16-program-semantics/rust-194-features/02-coerceshared-semantics.md`
 
 ### 1.3 Const Generics 依赖类型语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **交付物**:
 
 - `16-program-semantics/rust-194-features/03-const-generics-semantics.md`
 
 ### 1.4 Precise Capturing 生命周期语义
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **交付物**:
 

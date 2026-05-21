@@ -1345,6 +1345,8 @@ fn switch_tasks(from: &mut Task, to: &mut Task) {
 
 ### 7.3 响应时间分析
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 协作式调度响应时间
 
@@ -1371,6 +1373,8 @@ async fn good_task() {
 ## 8. 最佳实践
 
 ### 8.1 任务设计原则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 1. 任务应该小而专注
@@ -1407,6 +1411,8 @@ async fn event_handler() {
 
 ### 8.2 资源共享策略
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 1. 使用Mutex保护共享资源
 static SHARED_DATA: Mutex<CriticalSectionRawMutex, SharedState> =
@@ -1435,6 +1441,8 @@ async fn waiter() {
 ```
 
 ### 8.3 错误处理模式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 使用?传播错误

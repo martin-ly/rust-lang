@@ -278,6 +278,8 @@ fn parse_user_input(s: &str) -> i32 {
 
 ### From trait
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 impl From<io::Error> for MyError {
     fn from(err: io::Error) -> Self {
@@ -294,6 +296,8 @@ fn read_file() -> Result<String, MyError> {
 
 ### Try trait (实验性)
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // 统一处理Option和Result
 fn get_or_default<T: Default>(opt: Option<T>) -> T {
@@ -307,6 +311,8 @@ fn get_or_default<T: Default>(opt: Option<T>) -> T {
 
 ### 模式1: 立即处理
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 match result {
     Ok(value) => value,
@@ -319,12 +325,16 @@ match result {
 
 ### 模式2: 传播并添加上下文
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 let data = operation()
     .map_err(|e| Error::with_context(e, "在初始化阶段"))?;
 ```
 
 ### 模式3: 错误恢复
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 let result = primary_op()

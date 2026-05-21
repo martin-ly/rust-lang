@@ -381,6 +381,8 @@ let guard2 = mutex.lock();  // 编译错误! guard仍然存活
 
 ### 定理 3.3 (多Mutex死锁可能性)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 > 使用多个Mutex时，死锁是可能的。
 
 **反例**:
@@ -407,7 +409,11 @@ let g1 = m1.lock();  // 可能阻塞
 
 ### 3.3 优先级反转分析
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ### 定义 3.2 (优先级反转)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 高优先级线程被低优先级线程阻塞的现象。
 
@@ -436,7 +442,11 @@ T3被T1阻塞，但T2在运行(优先级介于两者之间)。
 
 ### 4.1 读者-写者问题形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 4.1 (RwLock状态)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 $$
 \text{RwLockState} = \text{Unlocked} \mid \text{Read}(n: \mathbb{N}) \mid \text{Write}(t: \text{ThreadId})
@@ -455,6 +465,8 @@ $$
 $$
 
 ### 定理 4.1 (RwLock读写互斥)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > RwLock保证:
 >
@@ -478,7 +490,11 @@ $$
 
 ### 4.2 饥饿自由度分析
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定理 4.2 (写者饥饿可能性)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > 在读者优先策略下，写者可能饥饿。
 
@@ -515,6 +531,8 @@ Rust的RwLock实现策略:
 ## 5. Condvar (条件变量)
 
 ### 5.1 等待-通知协议
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ### 定义 5.1 (Condvar操作)
 

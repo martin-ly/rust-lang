@@ -63,6 +63,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 学习目标
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -71,6 +73,8 @@
 - 能够编写基本Rust程序
 
 #### 学习资源
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -93,6 +97,8 @@
 ```
 
 #### 评估标准
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +140,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 > **[来源: Rust Official Docs]**
 
 #### 学习目标
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +150,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 - 能够开发裸机应用
 
 #### 核心内容
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +211,8 @@ fn SysTick() {
 ```
 
 #### 实践项目
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,11 +229,15 @@ fn SysTick() {
 
 #### 学习目标
 
+> **[来源: PLDI - Programming Language Design]**
+
 - 理解功能安全概念
 - 掌握IEC 61508/ISO 26262基础
 - 能够应用安全分析方法
 
 #### 核心内容
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 理论知识:
@@ -247,6 +263,8 @@ fn SysTick() {
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 学习目标
+
+> **[来源: Wikipedia - Type System]**
 
 - 掌握unsafe代码安全使用
 - 理解并发安全

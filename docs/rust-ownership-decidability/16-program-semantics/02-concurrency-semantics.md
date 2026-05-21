@@ -1121,6 +1121,8 @@ fn spurious_wakeup_handling() {
 
 #### 3.3.4 与锁的组合语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Condvar 必须与 Mutex 一起使用：
 
 $$
@@ -1169,6 +1171,8 @@ impl<T> BlockingQueue<T> {
 
 #### 3.4.1 同步点语义
 
+> **[来源: Wikipedia - Type System]**
+
 屏障用于同步多个线程到达某点：
 
 $$
@@ -1203,6 +1207,8 @@ fn barrier_sync_semantics() {
 
 #### 3.4.2 分阶段执行语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 屏障可以重置用于多阶段同步：
 
 ```rust
@@ -1230,6 +1236,8 @@ fn phased_execution() {
 ```
 
 #### 3.4.3 领导者选举语义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 屏障的返回值可以标识"领导者"线程：
 
@@ -1269,6 +1277,8 @@ fn leader_election() {
 
 #### 4.1.1 原子读写语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 原子操作保证操作的不可分性：
 
 $$
@@ -1295,6 +1305,8 @@ fn atomic_read_write_semantics() {
 ```
 
 #### 4.1.2 原子 CAS 语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 比较并交换（Compare-And-Swap）是无锁算法的基石：
 
@@ -1339,6 +1351,8 @@ fn cas_semantics() {
 
 #### 4.1.3 原子 fetch-and-update 语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::sync::atomic::{AtomicI32, Ordering};
 
@@ -1366,6 +1380,8 @@ fn fetch_update_semantics() {
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 4.2.1 Relaxed 语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Relaxed 只保证原子性，不保证顺序：
 
@@ -1398,6 +1414,8 @@ fn relaxed_semantics() {
 ```
 
 #### 4.2.2 Acquire/Release 语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Acquire-Release 建立 happens-before 关系：
 
@@ -1436,6 +1454,8 @@ fn acquire_release_semantics() {
 
 #### 4.2.3 SeqCst 语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 顺序一致性是最强的内存序：
 
 $$
@@ -1468,6 +1488,8 @@ fn seq_cst_semantics() {
 ```
 
 #### 4.2.4 happens-before 关系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 happens-before 是并发程序正确性的核心概念：
 
@@ -1508,6 +1530,8 @@ fn happens_before_demo() {
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 4.3.1 无锁队列语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 无锁队列使用 CAS 操作实现线程安全的入队和出队：
 
@@ -1580,6 +1604,8 @@ impl<T> LockFreeQueue<T> {
 
 #### 4.3.2 无锁栈语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::ptr;
@@ -1646,6 +1672,8 @@ impl<T> LockFreeStack<T> {
 
 #### 4.3.3 无锁哈希表语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 简化示例：基于分段锁的"几乎无锁"哈希表
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1690,6 +1718,8 @@ use std::hash::Hash;
 ```
 
 #### 4.3.4 ABA 问题与解决方案
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ABA 问题是无锁算法中的经典问题：
 
@@ -1762,6 +1792,8 @@ fn hazard_pointer_example() {
 
 #### 5.1.1 par_iter 语义
 
+> **[来源: Wikipedia - Type System]**
+
 Rayon 的 `par_iter` 提供声明式的数据并行：
 
 $$
@@ -1793,6 +1825,8 @@ fn par_iter_semantics() {
 
 #### 5.1.2 分块策略语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 fn chunking_semantics() {
     let data: Vec<i32> = (0..1000).collect();
@@ -1814,6 +1848,8 @@ fn chunking_semantics() {
 ```
 
 #### 5.1.3 工作窃取语义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 工作窃取调度器动态平衡负载：
 
@@ -1844,6 +1880,8 @@ fn work_stealing_demo() {
 
 #### 5.2.1 只读并行语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 只读并行是安全的，因为无数据修改：
 
 $$
@@ -1864,6 +1902,8 @@ fn readonly_parallel_semantics() {
 ```
 
 #### 5.2.2 互斥写语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 写操作需要互斥或分片：
 

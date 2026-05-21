@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 官方资源
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -76,6 +78,8 @@ Rust官方:
 
 ### 1.2 推荐课程
 
+> **[来源: Wikipedia - Type System]**
+
 | 课程 | 提供者 | 难度 | 费用 | 认证 |
 |------|--------|------|------|------|
 | **Rust for Safety Critical Systems** | Ferrous Systems | 中级 | $$$ | 有 |
@@ -88,6 +92,8 @@ Rust官方:
 ## 2. 虚拟实验室
 
 ### 2.1 在线实验环境
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```bash
 # 1. GitHub Codespaces
@@ -104,6 +110,8 @@ docker run -it rust:1.81-slim
 ```
 
 ### 2.2 嵌入式仿真
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 仿真平台:

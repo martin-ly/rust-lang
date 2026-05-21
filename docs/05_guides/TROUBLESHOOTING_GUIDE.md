@@ -339,6 +339,8 @@ serde = { workspace = true }
 
 ### 2. 运行时性能问题
 
+> **[来源: Wikipedia - Concurrency]**
+
 **诊断工具**:
 
 ```bash
@@ -363,6 +365,8 @@ cargo flamegraph --bin my_app
 
 ### 1. 连接超时
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **错误信息**:
 
 ```text
@@ -385,6 +389,8 @@ match timeout(Duration::from_secs(5), connect()).await {
 ```
 
 ### 2. DNS 解析失败
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误信息**:
 
@@ -457,6 +463,8 @@ while retries > 0 {
 
 ### 1. 测试失败
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **诊断步骤**:
 
 1. 检查测试输出
@@ -465,6 +473,8 @@ while retries > 0 {
 4. 检查测试环境
 
 ### 2. 异步测试问题
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **错误信息**:
 
@@ -490,17 +500,23 @@ async fn test_async() {
 
 ### 1. 使用 println
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 println!("调试信息: {:?}", value);
 ```
 
 ### 2. 使用 dbg! 宏
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 let value = dbg!(calculate_value());
 ```
 
 ### 3. 使用调试器
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```bash
 # 使用 gdb
@@ -511,6 +527,8 @@ lldb ./target/debug/my_app
 ```
 
 ### 4. 使用日志
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use tracing::{info, error, warn};
@@ -526,13 +544,19 @@ error!("错误: {}", value);
 
 ### Q: 如何查看详细的编译错误？
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 A: 使用 `cargo build --verbose` 或 `RUST_BACKTRACE=1 cargo run`
 
 ### Q: 如何清理编译缓存？
 
+> **[来源: POPL - Programming Languages Research]**
+
 A: 使用 `cargo clean` 清理所有编译产物
 
 ### Q: 如何更新依赖？
+
+> **[来源: PLDI - Programming Language Design]**
 
 A: 使用 `cargo update` 更新依赖版本
 

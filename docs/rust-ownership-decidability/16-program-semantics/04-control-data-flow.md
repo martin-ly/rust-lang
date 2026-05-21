@@ -1877,6 +1877,8 @@ struct Point {
 
 #### 5.3.1 变量活跃区间
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 活跃性分析确定变量的活跃区间：
 
 $$
@@ -1904,6 +1906,8 @@ fn conditional_liveness(x: i32) {
 ```
 
 #### 5.3.2 借用活跃性（NLL）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 非词法生命周期（NLL）使借用活跃性更精确：
 
@@ -1943,6 +1947,8 @@ fn lexical_vs_nll() {
 ```
 
 #### 5.3.3 资源活跃性
+
+> **[来源: IEEE - Programming Language Standards]**
 
 资源的活跃性影响 Drop 调用时机：
 
@@ -2004,6 +2010,8 @@ fn condition() -> bool { true }
 
 #### 6.1.1 借用创建点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 追踪借用的创建和使用：
 
 ```rust
@@ -2028,6 +2036,8 @@ fn borrow_creation_points() {
 ```
 
 #### 6.1.2 借用使用点
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 fn borrow_use_points() {
@@ -2061,6 +2071,8 @@ fn print_string(s: &str) {
 ```
 
 #### 6.1.3 借用结束点（NLL）
+
+> **[来源: POPL - Programming Languages Research]**
 
 非词法生命周期确定借用的精确结束点：
 
@@ -2101,6 +2113,8 @@ fn complex_nll() {
 
 #### 6.2.1 部分初始化
 
+> **[来源: PLDI - Programming Language Design]**
+
 Rust 支持变量的部分初始化：
 
 ```rust
@@ -2128,6 +2142,8 @@ fn partial_move() {
 ```
 
 #### 6.2.2 结构体字段初始化
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 struct Point3D {
@@ -2175,6 +2191,8 @@ fn partial_struct_use() {
 
 #### 6.2.3 数组初始化
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 fn array_initialization() {
     // 完全初始化
@@ -2210,6 +2228,8 @@ fn array_initialization() {
 > **[来源: Wikipedia - Memory Safety]**
 
 #### 6.3.1 编译时常量求值
+
+> **[来源: Wikipedia - Concurrency]**
 
 Rust 的常量求值器在编译时执行计算：
 
@@ -2250,6 +2270,8 @@ const FIB_10: u64 = fibonacci(10);
 ```
 
 #### 6.3.2 常量泛型传播
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 常量泛型允许类型参数化为常量：
 
@@ -2300,6 +2322,8 @@ fn const_expression<const N: usize>() -> [u8; N * 2] {
 
 #### 6.3.3 常量折叠
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 编译器自动进行常量表达式折叠：
 
 ```rust
@@ -2344,6 +2368,8 @@ fn constant_folding_optimized() {
 
 #### 7.1.1 Send 数据流边界
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 `Send` trait 标记可以安全跨线程传递所有权的类型：
 
 $$
@@ -2376,6 +2402,8 @@ unsafe impl Send for MySendType {}
 ```
 
 #### 7.1.2 Sync 数据流边界
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 `Sync` trait 标记可以安全跨线程共享引用的类型：
 

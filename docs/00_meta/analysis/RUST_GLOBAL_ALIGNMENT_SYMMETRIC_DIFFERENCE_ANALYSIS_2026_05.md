@@ -108,6 +108,8 @@
 
 ### 2.4 Rust 2026 Project Goals 更新（2026-02-23 发布）
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 66 个年度目标中，以下与项目直接相关：
 
 | 目标 | 状态 | 项目对齐 |
@@ -124,6 +126,8 @@
 
 ### 2.5 ACM/IEEE 2026 新论文
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 论文 | 会议 | 项目对齐 |
 |------|------|---------|
 | Miri: Practical UB Detection for Rust | POPL 2026 | 🟡 有引用，无深度使用指南 |
@@ -137,6 +141,8 @@
 
 ### 3.1 2026-04-24 以来已完成的修复
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 修复项 | 日期 | 影响 |
 |--------|------|------|
 | wasm32-wasi → wasm32-wasip1 全量替换 | 2026-05-08 | c12_wasm 55 文件、120+ 处引用 |
@@ -146,6 +152,8 @@
 | `static mut` → `AtomicUsize`/`UnsafeCell` | 2026-05 | c06_async, c13_embedded |
 
 ### 3.2 版本引用分布扫描（docs/ 活跃目录）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 目录 | 1.94 引用 | 1.95 引用 | 1.96 引用 | 评估 |
 |------|----------|----------|----------|------|

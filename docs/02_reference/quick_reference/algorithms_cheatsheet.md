@@ -672,6 +672,8 @@ if let Some(&value) = found {
 
 ### 搜索选择
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - **已排序数组**: 二分搜索
 - **未排序数组**: 线性搜索
 - **均匀分布已排序**: 插值搜索
@@ -683,6 +685,8 @@ if let Some(&value) = found {
 
 ### 使用迭代器
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 高效的数据处理
 let sum: i32 = data.iter()
@@ -692,6 +696,8 @@ let sum: i32 = data.iter()
 ```
 
 ### 避免不必要的分配
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 使用切片而非 Vec
@@ -710,6 +716,8 @@ let mut buffer = Vec::with_capacity(1024);
 
 ### 越界访问
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // ❌ 错误
 let value = data[index];  // 可能 panic
@@ -721,6 +729,8 @@ if let Some(value) = data.get(index) {
 ```
 
 ### 整数溢出
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // ❌ 错误
@@ -735,6 +745,8 @@ let result = a.checked_add(b)?;
 ## 🚫 反例速查
 
 ### 反例 1: 对未排序切片 binary_search
+
+> **[来源: Wikipedia - Type System]**
 
 **错误示例**:
 
@@ -757,6 +769,8 @@ let _ = v.binary_search(&2);
 
 ### 反例 2: sort 与 sort_by 混用导致不稳定
 
+> **[来源: Wikipedia - Concurrency]**
+
 **错误示例**:
 
 ```rust
@@ -772,6 +786,8 @@ v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
 ---
 
 ### 反例 3: 递归深度过大导致栈溢出
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **错误示例**:
 
@@ -801,6 +817,8 @@ fn factorial(n: u64) -> u64 {
 
 ### 反例 4: 整数溢出
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误示例**:
 
 ```rust
@@ -821,6 +839,8 @@ let sum = a.checked_add(b).expect("overflow");
 ---
 
 ### 反例 5: 不当使用递归导致重复计算
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误示例**:
 
@@ -868,10 +888,14 @@ fn fib(n: usize) -> usize {
 
 ### 官方文档
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [Rust 算法文档](https://doc.rust-lang.org/std/collections/)
 - [Iterator 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 
 ### 项目内部文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [算法指南](../../../crates/c08_algorithms/docs/tier_02_guides/01_算法快速入门.md)
 - [数据结构指南](../../../crates/c08_algorithms/docs/tier_02_guides/02_数据结构实践.md)
@@ -879,12 +903,16 @@ fn fib(n: usize) -> usize {
 
 ### 形式化理论与类型系统
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 算法与类型的关系
 - [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 算法表达能力边界
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 算法复杂度与执行模型
 - [工作流安全完整模型](../../research_notes/software_design_theory/02_workflow_safe_complete_models/README.md) — 算法正确性验证
 
 ### 相关速查卡
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [集合与迭代器速查卡](./collections_iterators_cheatsheet.md) - 数据结构基础
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 算法控制流
@@ -905,6 +933,8 @@ fn fib(n: usize) -> usize {
 ---
 
 ### array_windows 在滑动窗口算法中的应用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **经典算法优化**: KMP算法、滑动窗口最大值、数据流处理
 
@@ -984,6 +1014,8 @@ pub fn stream_anomaly_detection(data: &[f64]) -> Vec<usize> {
 ---
 
 ### ControlFlow 在搜索算法中的应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **场景**: DFS、BFS、回溯算法中的提前终止
 

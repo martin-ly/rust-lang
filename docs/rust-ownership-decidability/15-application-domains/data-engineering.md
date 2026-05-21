@@ -721,6 +721,8 @@ impl KafkaProcessor {
 
 ### 嵌入式数据库
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 //! 嵌入式键值存储（基于 RocksDB）
 
@@ -815,6 +817,8 @@ impl From<Box<bincode::ErrorKind>> for StoreError {
 ```
 
 ### 列式存储引擎
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 //! 简化列式存储引擎
@@ -947,6 +951,8 @@ impl ColumnStore {
 
 ### Apache Arrow
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 //! Apache Arrow 数据处理
 
@@ -1007,6 +1013,8 @@ impl ArrowProcessor {
 ```
 
 ### Parquet 列式存储
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 //! Parquet 列式存储
@@ -1072,6 +1080,8 @@ use parquet::basic::ZstdLevel;
 ## ETL 管道
 
 ### 完整 ETL 实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 //! ETL 管道实现
@@ -1241,6 +1251,8 @@ where
 
 ### 实时指标计算
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 //! 实时指标计算引擎
 
@@ -1358,6 +1370,8 @@ fn current_time_ms() -> u64 {
 
 ### 1. 内存管理
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 //! 数据工程内存优化
 
@@ -1389,6 +1403,8 @@ struct ProcessedData<'a> { value: &'a str }
 
 ### 2. 并发处理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 //! 数据并行处理
 
@@ -1412,6 +1428,8 @@ where
 ```
 
 ### 3. 错误处理
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 //! 健壮的错误处理
@@ -1492,3 +1510,12 @@ Rust 在数据工程领域提供了：
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**

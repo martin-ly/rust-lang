@@ -452,6 +452,8 @@ fn newtype_demo() {
 
 ### 结构型模式
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 适配器 | 适配器模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/adapter.md) |
@@ -459,6 +461,8 @@ fn newtype_demo() {
 | 外观 | 外观模式 | [../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md](../../research_notes/software_design_theory/01_design_patterns_formal/02_structural/facade.md) |
 
 ### 行为型模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -496,3 +500,6 @@ fn newtype_demo() {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

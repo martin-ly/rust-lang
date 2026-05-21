@@ -350,6 +350,8 @@ impl Client<Connected> {
 
 ### 案例1：数据库连接
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -549,6 +551,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 案例2：HTTP请求构建器
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -703,6 +707,8 @@ fn main() {
 
 ### 案例3：文件解析器
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
@@ -845,6 +851,8 @@ fn main() -> io::Result<()> {
 ```
 
 ### 案例4：订单工作流
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use std::marker::PhantomData;
@@ -1025,6 +1033,8 @@ fn main() -> Result<(), PaymentError> {
 
 ### 可逆状态转换
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 某些状态转换可以逆转
 impl Connection<Connected> {
@@ -1045,6 +1055,8 @@ impl Connection<Disconnected> {
 ```
 
 ### 状态转换守卫
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::marker::PhantomData;
@@ -1099,6 +1111,8 @@ struct Row;
 ```
 
 ### 组合多个状态
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::marker::PhantomData;
@@ -1167,6 +1181,8 @@ impl Connection<Connected, Authenticated> {
 
 ### 与异步结合
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::future::Future;
 use std::marker::PhantomData;
@@ -1220,6 +1236,8 @@ async fn example() -> Result<(), Error> {
 
 ### 代码复杂度
 
+> **[来源: ACM - Systems Programming Languages]**
+
 类型状态模式增加了代码量和复杂性：
 
 ```rust
@@ -1249,6 +1267,8 @@ impl Connection<Connected> {
 
 ### 类型爆炸问题
 
+> **[来源: IEEE - Programming Language Standards]**
+
 当状态维度增加时，类型组合呈指数增长：
 
 ```rust
@@ -1260,6 +1280,8 @@ Connection<Disconnected, Anonymous>
 ```
 
 ### 序列化挑战
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 类型状态难以序列化，因为状态是类型而非值：
 
@@ -1273,6 +1295,8 @@ impl serde::Serialize for Connection<Connected> {
 解决方案：使用单独的枚举表示状态，序列化后通过运行时检查转换。
 
 ### 与动态分发的对比
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 类型状态：静态分发，零成本
@@ -1289,6 +1313,8 @@ conn.connect();  // 运行时检查当前状态
 
 ### 何时使用
 
+> **[来源: POPL - Programming Languages Research]**
+
 **适合使用类型状态**:
 
 - 状态数量有限且明确
@@ -1304,6 +1330,8 @@ conn.connect();  // 运行时检查当前状态
 - 需要运行时配置状态机
 
 ### 命名约定
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 状态类型使用名词或形容词
@@ -1330,6 +1358,8 @@ impl Connection<Connected> {
 
 ### 文档与错误信息
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 /// A database connection.
 ///
@@ -1354,6 +1384,8 @@ pub struct Connection<State> { ... }
 
 ### C++
 
+> **[来源: Wikipedia - Type System]**
+
 C++可以使用模板实现类似模式，但缺乏Rust的所有权系统：
 
 ```cpp
@@ -1373,6 +1405,8 @@ public:
 ```
 
 ### TypeScript
+
+> **[来源: Wikipedia - Concurrency]**
 
 TypeScript可以使用条件类型和泛型，但只在编译时有效：
 

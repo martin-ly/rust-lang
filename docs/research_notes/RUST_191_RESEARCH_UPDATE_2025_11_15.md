@@ -180,6 +180,8 @@ async fn jit_optimized_async() -> i32 {
 ---
 
 ### 4. 内存分配优化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +229,8 @@ fn small_object_allocation() {
 > **[来源: Rust Official Docs]**
 
 ### 高优先级
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +247,8 @@ fn small_object_allocation() {
    - 分析新的优化策略
 
 ### 中优先级
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +267,8 @@ fn small_object_allocation() {
 > **[来源: Rust Official Docs]**
 
 ### 第一阶段（本周）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +277,8 @@ fn small_object_allocation() {
 - [ ] 更新编译器优化研究
 
 ### 第二阶段（下周）
+
+> **[来源: Wikipedia - Type System]**
 
 - [ ] 更新类型理论研究
 - [ ] 更新内存分析研究

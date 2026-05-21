@@ -204,6 +204,8 @@ impl Semaphore {
 
 ### 3.3 使用 tokio::sync::Semaphore
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use tokio::sync::Semaphore;
 use std::sync::Arc;
@@ -236,6 +238,8 @@ async fn semaphore_example() {
 
 ### 4.1 二进制信号量的形式化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 二进制信号量 BinarySemaphore:
 
@@ -256,6 +260,8 @@ async fn semaphore_example() {
 
 ### 4.2 与互斥锁的比较
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 比较矩阵:
 
@@ -268,6 +274,8 @@ async fn semaphore_example() {
 ```
 
 ### 4.3 Rust 代码示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::sync::Arc;
@@ -334,6 +342,8 @@ fn alternating_example() {
 
 ### 5.1 有界缓冲区的形式化定义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```
 生产者-消费者问题:
 
@@ -353,6 +363,8 @@ fn alternating_example() {
 ```
 
 ### 5.2 操作语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 produce(item):

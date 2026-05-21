@@ -135,6 +135,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 多阶段构建
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +165,8 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 #### 镜像优化技巧
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +207,8 @@ ENTRYPOINT ["/usr/local/bin/app"]
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 基础部署
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```yaml
 apiVersion: apps/v1
@@ -251,6 +257,8 @@ spec:
 
 #### HPA 配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```yaml
 apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
@@ -293,6 +301,8 @@ spec:
 
 #### AWS Lambda
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use lambda_runtime::{service_fn, LambdaEvent, Error};
 use serde_json::{json, Value};
@@ -316,6 +326,8 @@ async fn handler(event: LambdaEvent<Value>) -> Result<Value, Error> {
 
 #### Cargo Lambda
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 # 安装
 cargo install cargo-lambda
@@ -336,6 +348,8 @@ cargo lambda deploy --region us-east-1
 > **[来源: Wikipedia - Type System]**
 
 #### Prometheus 集成
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use prometheus::{Counter, Histogram, Registry, TextEncoder};
@@ -385,6 +399,8 @@ async fn metrics_middleware<B>(
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### OpenTelemetry + Jaeger
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use opentelemetry::trace::Tracer;

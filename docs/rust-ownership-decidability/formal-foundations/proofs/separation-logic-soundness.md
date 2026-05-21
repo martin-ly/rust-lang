@@ -323,11 +323,17 @@ tree(x) ::= x = null ∧ emp
 
 ### 5.1 证明策略
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 使用**结构归纳法**，对命令C的结构进行归纳。
 
 ### 5.2 基本命令的证明
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 5.2.1 空命令 (Skip)
+
+> **[来源: PLDI - Programming Language Design]**
 
 **规则**:
 
@@ -343,6 +349,8 @@ tree(x) ::= x = null ∧ emp
 - 所以 (s, h) ⊨ P ✓
 
 #### 5.2.2 赋值 (Assignment)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **规则**:
 
@@ -368,6 +376,8 @@ tree(x) ::= x = null ∧ emp
 
 #### 5.2.3 内存分配 (Alloc)
 
+> **[来源: Wikipedia - Type System]**
+
 **规则**:
 
 ```
@@ -390,6 +400,8 @@ tree(x) ::= x = null ∧ emp
 所以 (s', h') ⊨ x ↦ v，蕴含 x ↦ _。✓
 
 #### 5.2.4 内存释放 (Free)
+
+> **[来源: Wikipedia - Concurrency]**
 
 **规则**:
 

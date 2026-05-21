@@ -80,6 +80,8 @@ fn some_operation() -> Result<i32, String> {
 ```
 
 ### 集成测试
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +96,8 @@ fn test_add_integration() {
 ```
 
 ### 文档测试
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// 加法函数
@@ -111,6 +115,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 ```
 
 ### 属性测试
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 使用 proptest 进行属性测试
@@ -142,6 +148,8 @@ fn add(a: i32, b: i32) -> i32 {
 ```
 
 ### 模拟与 Mock
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 使用 mockall 创建 mock

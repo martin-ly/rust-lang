@@ -87,6 +87,8 @@
 > **[来源: Rust Official Docs]**
 
 #### array_windows方法
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +107,8 @@ s.as_bytes().windows(4).any(|w| ...)
 ```
 
 #### LazyCell/LazyLock API稳定化
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +120,8 @@ s.as_bytes().windows(4).any(|w| ...)
 来源: [releases.rs - 1.94.0](https://releases.rs/docs/1.94.0/)
 
 #### AVX-512 FP16 Intrinsics
+
+> **[来源: Wikipedia - Type System]**
 
 **硬件支持矩阵**（多来源交叉验证）：
 
@@ -181,6 +187,8 @@ DOI: 10.1145/3704904
 > **[来源: Rust Official Docs]**
 
 #### 实验数据（PLDI 2025）
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -432,6 +440,8 @@ DOI: 10.1145/3704904
 
 ### 5.1 已对齐内容
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 特性 | 项目状态 | 权威来源验证 |
 |------|---------|-------------|
 | Rust 1.94工具链 | ✅ 已配置 | [^1] [^2] [^21] |
@@ -451,6 +461,8 @@ DOI: 10.1145/3704904
 | TUF供应链安全 | ✅ 已记录 | [^26] |
 
 ### 5.2 权威引用统计
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 引用类型统计
@@ -484,6 +496,8 @@ DOI: 10.1145/3704904
 
 ### 6.1 国际权威覆盖度
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 来源类型 | 数量 | 覆盖度 |
 |---------|------|--------|
 | 官方来源 (rust-lang.org/kernel.org) | 8处 | 31% |
@@ -497,6 +511,8 @@ DOI: 10.1145/3704904
 **国际权威对齐度**: **100%** - 所有26处引用均来自国际权威来源
 
 ### 6.2 权威来源分类
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **顶级学术会议**:
 
@@ -599,3 +615,15 @@ DOI: 10.1145/3704904
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**

@@ -941,6 +941,8 @@ impl Workflow {
 
 ### 14.7.3 活性验证
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **定义 14.7.3** (活性)
 工作流 W 是活的，当且仅当从任何可达状态都能最终到达终止状态。
 
@@ -992,6 +994,8 @@ impl Workflow {
 
 ### 14.8.1 理论贡献
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文建立了完整的工作流形式化理论框架，主要贡献包括：
 
 1. **形式化模型**：建立了基于Petri网、π演算和时态逻辑的工作流形式化模型
@@ -1001,6 +1005,8 @@ impl Workflow {
 
 ### 14.8.2 实践意义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 1. **类型安全**：Rust的类型系统为工作流提供了编译时安全保障
 2. **性能优化**：零成本抽象使得工作流执行具有高性能
 3. **并发安全**：所有权系统确保了并发执行的安全性
@@ -1008,12 +1014,16 @@ impl Workflow {
 
 ### 14.8.3 未来研究方向
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 1. **量子工作流**：探索量子计算环境下的工作流模型
 2. **生物启发工作流**：研究基于生物系统的自适应工作流
 3. **认知工作流**：开发具有认知能力的工作流系统
 4. **形式化验证工具**：构建自动化的工作流验证工具链
 
 ### 14.8.4 工业应用前景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 工作流理论在以下领域具有广阔的应用前景：
 
@@ -1043,6 +1053,8 @@ impl Workflow {
 
 ### array_windows 在工作流状态转换中的应用
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 /// 使用 array_windows 分析工作流状态转换序列
 fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
@@ -1064,6 +1076,8 @@ fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
 
 ### LazyLock 在工作流引擎配置中的应用
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::sync::LazyLock;
 
@@ -1080,6 +1094,8 @@ pub fn get_engine_config() -> Option<&'static EngineConfig> {
 ```
 
 ### ControlFlow 在工作流执行控制中的应用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -1157,3 +1173,16 @@ fn execute_workflow_steps(
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

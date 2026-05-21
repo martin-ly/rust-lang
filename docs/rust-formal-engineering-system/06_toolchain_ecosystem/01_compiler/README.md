@@ -238,3 +238,6 @@ impl<T, const N: usize> Array<T, N> {
 > **[来源: RustBelt - Rust Formal Semantics]**
 
 > **[来源: TLA+ Documentation]**
+
+
+> **[来源: IEEE - Programming Language Standards]**

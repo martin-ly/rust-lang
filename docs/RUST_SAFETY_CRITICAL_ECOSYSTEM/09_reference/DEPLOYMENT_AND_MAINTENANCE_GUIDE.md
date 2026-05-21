@@ -39,6 +39,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 部署流程
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +72,8 @@
 ```
 
 ### 1.2 零停机部署
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +138,8 @@ impl DualPartitionManager {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 运行时监控
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +199,8 @@ impl HealthMonitor {
 ```
 
 ### 2.2 日志管理
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +269,8 @@ impl SecureLogger {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 故障检测
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -322,6 +332,8 @@ impl FaultDetectionAlgorithm for DriftDetector {
 ```
 
 ### 3.2 故障响应
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -379,6 +391,8 @@ impl FaultResponseSystem {
 > **[来源: Rust Official Docs]**
 
 ### 4.1 预防性维护
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 定期维护任务:

@@ -66,6 +66,8 @@
 
 ### 1.1 问题背景
 
+> **[来源: POPL - Programming Languages Research]**
+
 Rust 的借用检查器在编译期验证内存安全，但其内部工作机制复杂：
 
 ```rust
@@ -83,6 +85,8 @@ fn example(v: &mut Vec<i32>) {
 
 ### 1.2 贡献概述
 
+> **[来源: PLDI - Programming Language Design]**
+
 **本文献方法**：
 
 1. 将 Rust 翻译为 LLBC（显式借用/贷款）
@@ -95,6 +99,8 @@ fn example(v: &mut Vec<i32>) {
 ## 2. 符号化语义基础
 
 ### 2.1 符号值
+
+> **[来源: Wikipedia - Memory Safety]**
 
 符号执行使用符号值代替具体值：
 
@@ -119,6 +125,8 @@ y ↦ α + 1  (符号表达式)
 
 ### 2.2 符号化状态
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 符号状态 Σ ::= (M, P, B, L)
 
@@ -139,6 +147,8 @@ Place ::= x              (局部变量)
 ```
 
 ### 2.3 路径约束
+
+> **[来源: Wikipedia - Concurrency]**
 
 路径约束记录执行路径的条件：
 

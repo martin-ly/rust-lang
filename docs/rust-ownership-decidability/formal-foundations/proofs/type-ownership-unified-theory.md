@@ -201,6 +201,8 @@
 
 #### 2.1.1 类型判断 has_type
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定义 2.1** (类型判断):
 
 $$
@@ -220,6 +222,8 @@ $$
 $$
 
 #### 2.1.2 类型规则
+
+> **[来源: PLDI - Programming Language Design]**
 
 **变量规则** (T-Var):
 
@@ -241,6 +245,8 @@ $$
 
 #### 2.1.3 类型安全性
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **定义 2.2** (类型安全):
 
 $$
@@ -252,6 +258,8 @@ $$
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 2.2.1 所有权判断 ownership_safe
+
+> **[来源: Wikipedia - Type System]**
 
 **定义 2.3** (所有权安全判断):
 
@@ -268,6 +276,8 @@ $$
 $$
 
 #### 2.2.2 贷款环境 LoanEnv
+
+> **[来源: Wikipedia - Concurrency]**
 
 **定义 2.4** (贷款环境):
 
@@ -289,6 +299,8 @@ $$
 - $\rho$: 借用生命周期
 
 #### 2.2.3 借用检查规则
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **基础规则** (O-Base):
 
@@ -313,6 +325,8 @@ $$
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.3.1 类型系统和所有权检查是分开的
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 问题: rustc 中的分离
@@ -342,6 +356,8 @@ $$
 
 #### 2.3.2 缺少形式化联系
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **缺失的形式化**:
 
 1. **类型正确性 ⟹ 所有权安全**: 没有证明良类型程序必然满足所有权约束
@@ -349,6 +365,8 @@ $$
 3. **生命周期与类型的关系**: 没有证明生命周期是类型的时态维度
 
 #### 2.3.3 需要统一框架
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 需要的统一框架:
@@ -384,6 +402,8 @@ $$
 
 #### 3.1.1 统一判断定义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 3.1** (统一判断):
 
 $$
@@ -410,6 +430,8 @@ $$
 
 #### 3.1.2 统一判断的语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 3.2** (统一判断有效性):
 
 $$
@@ -425,6 +447,8 @@ $$
 $$
 
 #### 3.1.3 简化的统一判断
+
+> **[来源: IEEE - Programming Language Standards]**
 
 对于核心定理，我们使用简化形式：
 
@@ -446,6 +470,8 @@ $$
 
 #### 3.2.1 耦合规则概述
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 耦合规则将类型规则与所有权检查结合：
 
 ```
@@ -459,6 +485,8 @@ $$
 ```
 
 #### 3.2.2 变量规则 (CU-Var)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **规则**:
 
@@ -475,6 +503,8 @@ $$
 $$
 
 #### 3.2.3 借用规则 (CU-Borrow)
+
+> **[来源: POPL - Programming Languages Research]**
 
 **规则**:
 
@@ -508,6 +538,8 @@ $$
 
 #### 3.2.4 赋值规则 (CU-Assign)
 
+> **[来源: PLDI - Programming Language Design]**
+
 **规则**:
 
 $$
@@ -537,6 +569,8 @@ $$
 
 #### 3.2.5 函数调用规则 (CU-Call)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **规则**:
 
 $$
@@ -561,6 +595,8 @@ $$
 
 #### 3.2.6 耦合规则汇总
 
+> **[来源: Wikipedia - Type System]**
+
 | 规则 | 核心类型前提 | 核心所有权前提 |
 |------|-------------|---------------|
 | CU-Var | $\Gamma(x) = \tau$ | $\text{valid\_ownership}(\Theta, x, \text{read})$ |
@@ -577,6 +613,8 @@ $$
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 4.1.1 定理陈述
+
+> **[来源: Wikipedia - Concurrency]**
 
 **定理 4.1** (类型蕴含所有权安全):
 
@@ -595,6 +633,8 @@ Theorem type_implies_ownership_safety :
 ```
 
 #### 4.1.2 所有权安全程序定义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **定义 4.1** (所有权安全程序):
 
@@ -618,6 +658,8 @@ $$
 $$
 
 #### 4.1.3 定理意义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 定理意义:
@@ -650,6 +692,8 @@ $$
 
 #### 4.2.1 定理陈述
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **定理 4.2** (所有权检查即类型约束):
 
 $$
@@ -668,6 +712,8 @@ Theorem ownership_as_typing_constraint :
 
 #### 4.2.2 双向蕴含解释
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **正向** ($\Rightarrow$): 借用检查成功 ⟹ 存在类型
 
 如果借用检查器接受程序，则存在类型环境使得程序良类型。
@@ -677,6 +723,8 @@ Theorem ownership_as_typing_constraint :
 如果程序在某个类型环境下良类型，则借用检查器会接受该程序。
 
 #### 4.2.3 定理的深层含义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 所有权检查作为类型约束:
@@ -708,6 +756,8 @@ Theorem ownership_as_typing_constraint :
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 4.3.1 定理陈述
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定理 4.3** (生命周期作为类型的时态维度):
 

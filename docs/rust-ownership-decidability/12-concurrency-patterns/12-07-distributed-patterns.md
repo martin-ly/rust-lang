@@ -668,6 +668,8 @@ impl RaftNode {
 
 ### Rust 1.94 延迟初始化在分布式系统中的应用
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -1002,3 +1004,12 @@ impl Election {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**

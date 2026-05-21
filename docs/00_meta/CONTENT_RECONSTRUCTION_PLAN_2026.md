@@ -197,7 +197,11 @@ graph TD
 
 ### 轨道 A：核心知识体系重构（Track A: Core Knowledge）
 
+> **[来源: Wikipedia - Concurrency]**
+
 #### Phase A1: P0 急救（第 1-2 周）
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 目标：抢救"下游依赖最多、当前最薄弱"的文档
 
@@ -210,6 +214,8 @@ graph TD
 
 #### Phase A2: 中级层加固（第 3-4 周）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 优先级 | 文档路径 | 当前行数 | 目标行数 | 核心增补内容 | 表征要求 |
 |--------|----------|----------|----------|--------------|----------|
 | P1 | `02_intermediate/traits.md` | 298 | 550+ | 关联类型vs泛型参数、trait对象vtable布局、coherence/orphan规则论证、auto trait、marker trait | 矩阵+推理树 |
@@ -219,6 +225,8 @@ graph TD
 
 #### Phase A3: 高级层补全（第 5-6 周）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 优先级 | 文档路径 | 核心增补内容 | 表征要求 |
 |--------|----------|--------------|----------|
 | P2 | `03_advanced/macros/declarative.md` | 卫生宏、重复模式、与proc_macro关系、debug技巧 | 流程图+反例 |
@@ -227,6 +235,8 @@ graph TD
 | P2 | `03_advanced/concurrency/atomics.md` | 内存序决策树、Release-Acquire语义、SeqCst成本、portable atomic | 决策树+矩阵 |
 
 #### Phase A4: 专家层重构（第 7-8 周）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 优先级 | 文档路径 | 核心增补内容 | 表征要求 |
 |--------|----------|--------------|----------|
@@ -238,7 +248,11 @@ graph TD
 
 ### 轨道 B：safety_critical 持续演进（Track B: Safety Critical）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### Phase B1: 表征范式标准化（与 Track A Phase A1 同步）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 将 safety_critical 现有的"矩阵+决策树+思维导图"方法提炼为 **《知识表征标准规范》**，供 Track A 复用：
 
@@ -248,6 +262,8 @@ graph TD
 
 #### Phase B2: 跨轨关联（第 3-4 周）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 在 safety_critical 文档中建立指向核心知识的**精确反向链接**：
 
 - `SAFETY_CRITICAL_CODING_GUIDELINES.md` → 链接到 `unsafe_rust.md` 的不变量契约
@@ -255,6 +271,8 @@ graph TD
 - `TOOLCHAIN_SETUP_GUIDE.md` → 链接到 `async_await.md` 的运行时选择（如安全关键异步）
 
 #### Phase B3: 标准对齐深化（第 5-8 周）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - 补充 DO-178C / ISO 26262 / IEC 61508 的**具体条款映射到 Rust 语言特性**
 - 增加 **"安全关键 Rust 代码审查清单"** 与核心知识文档的交叉引用
@@ -264,6 +282,8 @@ graph TD
 ## 三、质量控制与验收标准
 
 ### 3.1 自动化检查清单
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 每篇重构文档提交前必须通过：
 
@@ -275,6 +295,8 @@ graph TD
 - [ ] 代码示例可通过 `rustfmt` 且逻辑正确
 
 ### 3.2 人工审阅维度
+
+> **[来源: POPL - Programming Languages Research]**
 
 - **认知负荷**：新读者能否在不查外部资料的情况下理解核心概念？
 - **逻辑连贯**：承上启下是否自然？前文引用是否精确到段落？

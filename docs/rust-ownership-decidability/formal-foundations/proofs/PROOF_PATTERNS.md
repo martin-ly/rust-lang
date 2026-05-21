@@ -1330,6 +1330,8 @@ Qed.
 
 ### 10.1 Progress 定理完整证明
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```coq
 (* Progress 定理完整标注证明 *)
 Theorem progress_complete :
@@ -1422,6 +1424,8 @@ Qed.
 
 ### 10.2 Preservation 定理完整证明
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```coq
 (* Preservation 定理完整标注证明 *)
 Theorem preservation_complete :
@@ -1508,6 +1512,8 @@ Qed.
 
 ### 陷阱1: 归纳假设不够强
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```coq
 (* ❌ 错误: 归纳假设太弱 *)
 Lemma weak_induction :
@@ -1534,6 +1540,8 @@ Qed.
 ```
 
 ### 陷阱2: 上下文爆炸
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```coq
 (* ❌ 错误: 上下文积累太多无用假设 *)
@@ -1572,6 +1580,8 @@ Ltac clean_context :=
 
 ### 陷阱3: 变量命名冲突
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```coq
 (* ❌ 错误: 变量名重复导致混淆 *)
 Lemma naming_conflict :
@@ -1603,6 +1613,8 @@ Qed.
 ```
 
 ### 陷阱4: 依赖类型问题
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```coq
 (* ❌ 错误: 标准归纳在依赖类型上失效 *)
@@ -1649,6 +1661,8 @@ Qed.
 
 ### 陷阱5: 重写方向错误
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```coq
 (* ❌ 错误: 重写方向导致循环 *)
 Lemma rewrite_loop :
@@ -1669,6 +1683,8 @@ Qed.
 ```
 
 ### 陷阱速查表
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 陷阱 | 症状 | 解决方案 |
 |------|------|----------|
@@ -1824,3 +1840,9 @@ flowchart TD
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**

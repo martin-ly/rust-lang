@@ -34,6 +34,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 思维导图：Rust设计模式全景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -85,6 +87,8 @@ mindmap
 
 ### 2.1 Into Trait模式 (所有权转移)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **问题**: 如何优雅地实现类型转换同时转移所有权？
 
 **解决方案**: 使用`Into` trait进行类型转换
@@ -128,6 +132,8 @@ $$
 $$
 
 ### 2.2 Builder模式 (分阶段构造)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **变体1: 消耗型Builder (所有权严格)**:
 

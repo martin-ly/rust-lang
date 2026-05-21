@@ -146,6 +146,8 @@
 **定义**: 由元概念派生，Rust 特有的核心概念集合
 
 #### L2.1: 所有权概念族
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +178,8 @@
 ```
 
 #### L2.2: 类型概念族
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +191,8 @@
 | **型变** | 子类型关系 | L2类型 → L3型变 | variance_theory.md |
 
 #### L2.3: 并发概念族
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -207,6 +213,8 @@
 **定义**: 可直接教学和应用的具体 Rust 概念
 
 #### L3.1: 所有权具体概念
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -218,6 +226,8 @@
 | **遮蔽(shadowing)** | 同名变量覆盖 | L2所有权 → L3遮蔽 | `let x = 5; let x = x + 1;` |
 
 #### L3.2: 借用具体概念
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,6 +239,8 @@
 | **重新借用** | 从借用创建新借用 | L2借用 → L3重新借用 | `let r2 = &*r;` |
 
 #### L3.3: 生命周期具体概念
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 概念 | 定义 | 层间关系 | 示例 |
 | :--- | :--- | :--- | :--- |
@@ -291,6 +303,8 @@ graph TB
 
 #### L5.1: 基础代码模式
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 模式 | 概念来源 | 代码示例 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | **RAII** | L3作用域 + L4Drop检查 | `let file = File::open("x.txt")?;` | 资源管理 |
@@ -299,6 +313,8 @@ graph TB
 | **迭代器** | L3迭代 + L4单态化 | `vec.iter().map(...).collect()` | 数据处理 |
 
 #### L5.2: 高级代码模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 模式 | 概念来源 | 代码示例 | 适用场景 |
 | :--- | :--- | :--- | :--- |

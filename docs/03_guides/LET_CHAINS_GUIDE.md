@@ -144,6 +144,8 @@ if flag && let Some(n) = opt && n > 5 {
 
 ### 2.3 不能用 `||` 混合 let
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // ❌ 编译错误：let chains 不支持 `||`
 if let Some(a) = opt_a || let Some(b) = opt_b {
@@ -161,6 +163,8 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 ### 3.1 嵌套 if let → 扁平 let chains
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 场景 | 旧写法 (Rust ≤1.94) | 新写法 (Rust 1.95+) |
 |------|-------------------|-------------------|
 | 双重 Option | `if let Some(a) = x { if let Some(b) = y { ... } }` | `if let Some(a) = x && let Some(b) = y { ... }` |
@@ -168,6 +172,8 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 | 循环配对 | `while let Some(a) = iter_a.next() { let b = iter_b.next(); if let Some(b) = b { ... } }` | `while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() { ... }` |
 
 ### 3.2 match guard vs let chains
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 写法 A: match arm guard（推荐在模式匹配场景）

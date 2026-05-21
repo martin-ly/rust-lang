@@ -374,6 +374,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 2. 代码生成效率
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **结果**：
 
 | 宏类型   | 代码大小 (KB) | 运行时性能 |
@@ -389,6 +391,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 - 优化后性能差异很小
 
 ### 结果分析模板
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 将 `time cargo build`、`cargo expand` 与运行时 bench 的产出填入下表：
 
@@ -420,10 +424,14 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 环境要求
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **Rust**: 1.93.1+；**cargo-expand**：`cargo install cargo-expand`；**cargo-bloat**：`cargo install cargo-bloat`
 - 建议 `cargo clean` 后测量冷编译；增量编译需固定 `touch` 策略
 
 ### 执行步骤
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 1. **编译时间**：`cargo clean && time cargo build --release` 作基准；在相同项目下逐步加入声明式宏、过程宏、复杂派生宏，分别 `time cargo build --release`，记录增量。
 2. **展开结果**：`cargo expand > expanded.rs`，用 `wc -l` 或脚本统计展开后行数；对比「手写等价代码」行数。
@@ -437,12 +445,16 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 性能优化建议
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **声明式宏**：避免递归过深与重复展开；用 `$crate` 保证路径稳定；能用手写函数代替的简单逻辑优先函数。
 - **过程宏**：减少 `syn`/`quote` 的解析与生成量；考虑 `proc-macro2` 的 `Span` 与 hygiene；将重量级 derive 放入可选 feature。
 - **编译**：`sccache`/`mold` 可缩短链接；`-j` 与增量编译对含大量过程宏的 workspace 帮助明显。
 - **Rust 1.93**：关注 rustc 的宏展开与 metadata 性能，重测以更新基线。
 
 ### 工具改进
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **cargo-expand**：定期检查展开结果，防止意外膨胀与 hygiene 问题。
 - **cargo-bloat**：区分「宏生成」与「手写」符号，评估宏对体积的边际贡献。

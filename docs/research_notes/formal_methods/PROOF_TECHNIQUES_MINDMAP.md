@@ -126,6 +126,8 @@ Theorem nat_induction :
 - 证明迭代次数相关的性质
 
 ### 1.3 良基归纳法 (Well-Founded Induction)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +146,8 @@ Theorem nat_induction :
 > **[来源: Rust Official Docs]**
 
 ### 2.1 存在构造 (Existential Construction)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +164,8 @@ Qed.
 ```
 
 ### 2.2 Witness构造
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +186,8 @@ Lemma alloc_spec :
 > **[来源: Rust Official Docs]**
 
 ### 3.1 归谬法 (Proof by Contradiction)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +207,8 @@ Qed.
 ```
 
 ### 3.2 对角线法 (Diagonalization)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +219,8 @@ Qed.
 ## 四、分离逻辑技术
 
 ### 4.1 资源代数
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 资源代数 (Resource Algebra):

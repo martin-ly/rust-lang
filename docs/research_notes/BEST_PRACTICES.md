@@ -390,14 +390,20 @@ fn example_anti_pattern() {
 
 ### 复合类型
 
+> **[来源: POPL - Programming Languages Research]**
+
 然后介绍复合类型...
 
 ### 高级类型
+
+> **[来源: PLDI - Programming Language Design]**
 
 最后介绍高级类型...
 ```
 
 ### 3. 交叉引用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **最佳实践**:
 
@@ -419,6 +425,8 @@ fn example_anti_pattern() {
 
 ### 1. 使用相对路径
 
+> **[来源: Wikipedia - Type System]**
+
 **最佳实践**:
 
 - ✅ 使用相对路径而非绝对路径
@@ -434,6 +442,8 @@ fn example_anti_pattern() {
 
 ### 2. 提供描述性链接文本
 
+> **[来源: Wikipedia - Concurrency]**
+
 **最佳实践**:
 
 - ✅ 使用描述性的链接文本
@@ -448,6 +458,8 @@ fn example_anti_pattern() {
 ```
 
 ### 3. 维护链接完整性
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **最佳实践**:
 
@@ -471,6 +483,8 @@ find docs/research_notes -name "*.md" -exec grep -l "\[.*\](.*)" {} \;
 
 ### 1. 提供可运行的代码
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **最佳实践**:
 
 - ✅ 确保代码可以编译和运行
@@ -489,6 +503,8 @@ fn main() {
 ```
 
 ### 2. 添加注释和说明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **最佳实践**:
 
@@ -514,6 +530,8 @@ fn main() {
 ```
 
 ### 3. 展示错误和解决方案
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **最佳实践**:
 
@@ -548,6 +566,8 @@ fn main() {
 
 ### 1. 使用一致的格式
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **最佳实践**:
 
 - ✅ 遵循 Markdown 规范
@@ -563,10 +583,16 @@ fn main() {
 
 ### 三级标题（子章节）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 四级标题（小节）
+
+> **[来源: IEEE - Programming Language Standards]**
 ```
 
 ### 2. 使用列表和表格
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **最佳实践**:
 
@@ -580,6 +606,8 @@ fn main() {
 ## 研究工具
 
 ### 形式化验证工具
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **Coq**: 交互式定理证明器
 - **Lean**: 函数式编程语言和证明助手

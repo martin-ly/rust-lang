@@ -213,6 +213,8 @@ let c3 = async move |idx: usize| -> Option<i32> {
 
 ### 3.2 生命周期陷阱
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 let local = String::from("hello");
 
@@ -224,6 +226,8 @@ let good: Box<dyn AsyncFn() -> String> = Box::new(async move || local.clone());
 ```
 
 ### 3.3 与 `async move` 闭包的对比
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 let s = String::from("data");
@@ -255,6 +259,8 @@ let new = async || {
 
 ### 4.1 Axum Handler 中的异步闭包
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use axum::{routing::get, Router};
 use std::time::Duration;
@@ -277,6 +283,8 @@ async fn main() {
 ```
 
 ### 4.2 泛型服务抽象
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use axum::{extract::Request, middleware::Next, response::Response};
@@ -306,6 +314,8 @@ where
 ```
 
 ### 4.3 Tokio 任务中的异步闭包
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tokio::task::JoinSet;

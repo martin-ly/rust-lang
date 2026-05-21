@@ -435,6 +435,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.2 Abstraction Rule
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 Λ; Δ; Γ, x: T₁ ⊢ e: T₂
 ---------------------------  (T-ABS)
@@ -444,6 +446,8 @@ where (x: T) ∈ Γ
 **Explanation**: If `e` has type `T₂` under the assumption that `x` has type `T₁`, then the abstraction `λx:T₁.e` has type `T₁ → T₂`.
 
 #### 2.3.3 Application Rule
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 Σ ⊢ e₁: T₁ → T₂    Σ ⊢ e₂: T₁
@@ -455,6 +459,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.4 Let Binding Rule
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 Σ ⊢ e₁: T₁    Λ; Δ; Γ, x: T₁ ⊢ e₂: T₂
 --------------------------------------  (T-LET)
@@ -464,6 +470,8 @@ where (x: T) ∈ Γ
 **Explanation**: Bind `e₁` to `x` in `e₂`, with `x` having the type of `e₁`.
 
 #### 2.3.5 Immutable Borrow Rule
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 Σ ⊢ e: T    T: Copy
@@ -479,6 +487,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.6 Mutable Borrow Rule
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 Σ ⊢ e: T    access_ok(Σ, e, mut)    no_active_borrows(Σ, e)
 -----------------------------------------------------------  (T-REF-MUT)
@@ -489,6 +499,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.7 Dereference Rule (Immutable)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 Σ ⊢ e: &'a T
 --------------  (T-DEREF-IMM)
@@ -496,6 +508,8 @@ where (x: T) ∈ Γ
 ```
 
 #### 2.3.8 Dereference Rule (Mutable)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 Σ ⊢ e: &'a mut T
@@ -505,6 +519,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.9 Box Construction Rule
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 Σ ⊢ e: T
 ------------------  (T-BOX-NEW)
@@ -513,6 +529,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.10 Tuple Formation Rule
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 Σ ⊢ eᵢ: Tᵢ  for all i ∈ 1..n
 --------------------------------  (T-TUPLE)
@@ -520,6 +538,8 @@ where (x: T) ∈ Γ
 ```
 
 #### 2.3.11 Projection Rules
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 Σ ⊢ e: (T₁, ..., Tₙ)
@@ -533,6 +553,8 @@ where (x: T) ∈ Γ
 
 #### 2.3.12 Sequencing Rule
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 Σ ⊢ e₁: ()    Σ ⊢ e₂: T
 ------------------------  (T-SEQ)
@@ -540,6 +562,8 @@ where (x: T) ∈ Γ
 ```
 
 #### 2.3.13 Conditional Rule
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 Σ ⊢ e₁: bool    Σ ⊢ e₂: T    Σ ⊢ e₃: T
@@ -549,12 +573,16 @@ where (x: T) ∈ Γ
 
 #### 2.3.14 Integer Literal Rule
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 ----------------  (T-INT)
 Σ ⊢ n: i32
 ```
 
 #### 2.3.15 Boolean Literal Rule
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 -------------------  (T-TRUE)
@@ -565,6 +593,8 @@ where (x: T) ∈ Γ
 ```
 
 #### 2.3.16 Unit Rule
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 -------------  (T-UNIT)
@@ -577,12 +607,16 @@ where (x: T) ∈ Γ
 
 #### 2.4.1 Reflexivity
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 --------  (S-REFL)
 T <: T
 ```
 
 #### 2.4.2 Lifetime Subtyping (Outlives)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 'a: 'b ∈ Δ
@@ -594,6 +628,8 @@ T <: T
 
 #### 2.4.3 Mutable Reference Subtyping
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 'a: 'b ∈ Δ    T₁ <: T₂    T₂ <: T₁
 -----------------------------------  (S-MUT-REF)
@@ -604,6 +640,8 @@ T <: T
 
 #### 2.4.4 Function Subtyping (Contravariant in Input)
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 T₁' <: T₁    T₂ <: T₂'
 ------------------------  (S-FUN)
@@ -611,6 +649,8 @@ T₁ → T₂ <: T₁' → T₂'
 ```
 
 #### 2.4.5 Transitivity
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 T₁ <: T₂    T₂ <: T₃
@@ -624,6 +664,8 @@ T₁ <: T₃
 
 #### 2.5.1 Trait Definition Syntax
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 trait Trait<'a, T: Bound> where Self: Sized {
     type Assoc: Bound;
@@ -634,6 +676,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 2.5.2 Trait Bound Rules
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 Σ ⊢ T: Trait
 ---------------------  (T-TRAIT-BOUND)
@@ -642,6 +686,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 2.5.3 Impl Trait Rules
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 Σ ⊢ e: T    T: Trait
 ---------------------  (T-IMPL-TRAIT)
@@ -649,6 +695,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 ```
 
 #### 2.5.4 Dyn Trait Rules
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 Σ ⊢ e: T    T: Trait + 'a
@@ -668,6 +716,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 #### 3.1.1 Memory Model
 
+> **[来源: ACM - Systems Programming Languages]**
+
 The runtime state consists of:
 
 ```
@@ -677,6 +727,8 @@ The runtime state consists of:
 ```
 
 #### 3.1.2 Values
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 v ∈ Value ::=
@@ -691,6 +743,8 @@ v ∈ Value ::=
 
 #### 3.1.3 Runtime Expressions
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 r ∈ RExpr ::=
   | e                         -- source expression
@@ -702,6 +756,8 @@ r ∈ RExpr ::=
 ```
 
 #### 3.1.4 Configuration
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 ⟨σ; ρ; μ; e⟩  -- evaluation configuration
@@ -720,6 +776,8 @@ Where:
 
 #### 3.2.1 Variable Lookup
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 ρ(x) = ℓ    σ(ℓ) = v
 --------------------  (E-VAR)
@@ -727,6 +785,8 @@ Where:
 ```
 
 #### 3.2.2 Beta Reduction
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 ⟨σ; ρ; μ; (λx:T.e) v⟩ → ⟨σ; ρ[x↦ℓ]; μ; e⟩
@@ -736,6 +796,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.3 Application (Left)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 ⟨σ; ρ; μ; e₁⟩ → ⟨σ'; ρ'; μ'; e₁'⟩
 -----------------------------------  (E-APP-1)
@@ -743,6 +805,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 ```
 
 #### 3.2.4 Application (Right)
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 e₁ is value    ⟨σ; ρ; μ; e₂⟩ → ⟨σ'; ρ'; μ'; e₂'⟩
@@ -752,6 +816,8 @@ e₁ is value    ⟨σ; ρ; μ; e₂⟩ → ⟨σ'; ρ'; μ'; e₂'⟩
 
 #### 3.2.5 Let Binding
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 ⟨σ; ρ; μ; let x = v in e⟩ → ⟨σ'; ρ[x↦ℓ]; μ; e⟩
 
@@ -759,6 +825,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 ```
 
 #### 3.2.6 Immutable Borrow Creation
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 ρ(x) = ℓ    μ' = μ ∪ {ℓ ↦ imm(ℓ)}
@@ -768,6 +836,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.7 Mutable Borrow Creation
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 ρ(x) = ℓ    no_borrows(μ, ℓ)    μ' = μ ∪ {ℓ ↦ mut(ℓ)}
 ------------------------------------------------------  (E-BORROW-MUT)
@@ -776,11 +846,15 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.8 Dereference
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 ⟨σ; ρ; μ; *ℓ⟩ → ⟨σ; ρ; μ; σ(ℓ)⟩
 ```
 
 #### 3.2.9 Box Allocation
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ⟨σ; ρ; μ; Box::new(v)⟩ → ⟨σ'; ρ; μ; ℓ⟩
@@ -790,6 +864,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.10 Assignment
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```
 ρ(x) = ℓ    no_borrows(μ, ℓ)
 -----------------------------  (E-ASSIGN)
@@ -798,6 +874,8 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.11 Conditional True
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 -----------------------------------------  (E-IF-TRUE)
 ⟨σ; ρ; μ; if true then e₁ else e₂⟩ → ⟨σ; ρ; μ; e₁⟩
@@ -805,12 +883,16 @@ where ℓ = fresh_loc(σ)    σ' = σ[ℓ↦v]
 
 #### 3.2.12 Conditional False
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 ------------------------------------------  (E-IF-FALSE)
 ⟨σ; ρ; μ; if false then e₁ else e₂⟩ → ⟨σ; ρ; μ; e₂⟩
 ```
 
 #### 3.2.13 Sequencing
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 ---------------------------------------  (E-SEQ)
@@ -830,6 +912,8 @@ For some proofs, big-step semantics are more convenient:
 Meaning: "Expression `e` evaluates to value `v` with final heap `σ'`."
 
 #### 3.3.1 Big-Step Rules
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v
@@ -858,6 +942,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 3.4.1 Drop Rule
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 ρ(x) = ℓ    σ(ℓ) = v
 ------------------------------------------  (E-DROP)
@@ -866,6 +952,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 3.4.2 Ownership Transfer
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 ρ(x) = ℓ    move_ok(μ, ℓ)
 ---------------------------------  (E-MOVE)
@@ -873,6 +961,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 ```
 
 #### 3.4.3 Copy Semantics
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 ρ(x) = ℓ    σ(ℓ) = v    T: Copy
@@ -892,6 +982,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 #### 4.1.1 Ownership Definition
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 owns(Γ, x, T)
 ```
@@ -899,6 +991,8 @@ owns(Γ, x, T)
 Meaning: Variable `x` owns a value of type `T`.
 
 #### 4.1.2 Ownership Rules
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```
 (x: T) ∈ Γ    T: !Copy
@@ -920,6 +1014,8 @@ owns(Γ, x, S)
 
 #### 4.2.1 Borrow Definition
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 borrows(Γ, r, x, T, κ)
 ```
@@ -929,6 +1025,8 @@ Meaning: Reference `r` borrows variable `x` (of type `T`) with kind `κ`.
 Where `κ ∈ {imm, mut}` indicates immutable or mutable borrow.
 
 #### 4.2.2 Immutable Borrow Rules
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 owns(Γ, x, T)    no_mut_borrows(Γ, x)
@@ -941,6 +1039,8 @@ borrows(Γ, &r, x, T, imm)
 ```
 
 #### 4.2.3 Mutable Borrow Rules
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 owns(Γ, x, T)    no_active_borrows(Γ, x)
@@ -958,6 +1058,8 @@ borrows(Γ, &mut r, x, T, mut)
 
 #### 4.3.1 Lifetime Inclusion
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 'a ⊆ 'b
 ```
@@ -965,6 +1067,8 @@ borrows(Γ, &mut r, x, T, mut)
 Meaning: Lifetime `'a` is contained within lifetime `'b` (i.e., `'a` is shorter than `'b`).
 
 #### 4.3.2 Borrow Validity
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 valid(Γ, r, 'a)
@@ -984,6 +1088,8 @@ valid(Γ, r, 'a)
 
 #### 4.4.1 Move Judgment
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 move(Γ, x, Γ')
 ```
@@ -997,6 +1103,8 @@ move(Γ, x, Γ \\ x)
 ```
 
 #### 4.4.2 Partial Move
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 owns(Γ, x.f, T)    T: !Copy
@@ -1012,11 +1120,15 @@ Where `S\\f` indicates that field `f` has been moved out of struct `S`.
 
 #### 4.5.1 Copy Types
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 T: Copy  iff  T ∈ {i32, i64, u32, u64, bool, (), char, &'static T} or T = [U; n] where U: Copy
 ```
 
 #### 4.5.2 Copy Rule
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 T: Copy    (x: T) ∈ Γ

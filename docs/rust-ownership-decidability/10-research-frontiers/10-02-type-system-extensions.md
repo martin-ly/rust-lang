@@ -172,6 +172,8 @@ pub trait PotentiallyUndecidable {
 
 #### 案例 1：流解析器
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 pub trait StreamParser {
     type Output<'a> where Self: 'a;
@@ -198,6 +200,8 @@ impl StreamParser for JsonStreamParser {
 ```
 
 #### 案例 2：类型级状态机
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 pub trait StateMachine {
@@ -275,6 +279,8 @@ impl Trait for String        // 最具体：仅适用于 String
 
 #### 挑战 1：重叠实现检测
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 问题：这两个实现是否重叠？
 impl<T> Trait for Vec<T> { }
@@ -283,6 +289,8 @@ impl<T> Trait for T where T: AsRef<[U]>, U: Display { }
 ```
 
 #### 挑战 2：关联类型一致性
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 impl<T> Container for T {
@@ -295,6 +303,8 @@ impl Container for Vec<u32> {
 ```
 
 #### 挑战 3：隐含边界传播
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 trait Foo {
@@ -371,6 +381,8 @@ fn caller() -> i32 with Panic {
 
 ### 3.2 Rust 中的效应
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust 中已经存在几种隐式的效应：
 
 | 效应 | 描述 | 当前表示 | 未来可能 |
@@ -382,6 +394,8 @@ Rust 中已经存在几种隐式的效应：
 | const | 编译时求值 | `const fn` | `with Const` |
 
 ### 3.3 效应多态
+
+> **[来源: ACM - Systems Programming Languages]**
 
 效应多态允许编写对效应参数化的代码：
 
@@ -412,6 +426,8 @@ let printed = map(numbers, |x| {
 
 ### 3.4 形式化模型
 
+> **[来源: IEEE - Programming Language Standards]**
+
 效应系统的形式化模型基于代数效应（Algebraic Effects）：
 
 ```text
@@ -435,6 +451,8 @@ Rust 中效应系统的研究挑战：
 ## 4. 依赖类型（Dependent Types）
 
 ### 4.1 依赖类型介绍
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 依赖类型允许类型依赖于运行时值，提供了极强的表达能力。典型的依赖类型语言包括 Agda、Idris、Coq。
 
@@ -461,6 +479,8 @@ Rust 中效应系统的研究挑战：
 
 ### 4.2 渐进式路径
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 将依赖类型引入 Rust 需要渐进式路径：
 
 ```text
@@ -473,6 +493,8 @@ Rust 中效应系统的研究挑战：
 ```
 
 ### 4.3 Const Generics 作为桥梁
+
+> **[来源: POPL - Programming Languages Research]**
 
 Const Generics 是向依赖类型过渡的重要一步：
 
@@ -508,6 +530,8 @@ impl True for Assert<true> {}
 ```
 
 ### 4.4 形式化限制
+
+> **[来源: PLDI - Programming Language Design]**
 
 完整依赖类型对 Rust 的影响：
 

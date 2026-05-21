@@ -56,6 +56,8 @@
 3. 有丰富的Rust相关证明基础设施
 
 ### 2.2 环境搭建
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,12 +121,16 @@ coqtop --version
 > **[来源: Rust Official Docs]**
 
 ### 3.1 定理回顾
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
 **T-OW2 (所有权唯一性)**: 对于任何值v，在任意时刻，最多存在一个变量x使得所有权状态为Owned且绑定值为v。
 
 ### 3.2 Iris中的状态表示
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +164,8 @@ Definition ownership_unique (σ : State) : Prop :=
 ```
 
 ### 3.3 状态转移规则
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +202,8 @@ Inductive reachable : State -> Prop :=
 ```
 
 ### 3.4 主定理证明骨架
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,9 +243,13 @@ Admitted.
 
 ### 4.1 定理回顾
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **T-BR1 (数据竞争自由)**: 借用检查器保证程序是数据竞争自由的。
 
 ### 4.2 并发模型形式化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```coq
 From iris.heap_lang Require Import lang.
@@ -263,6 +277,8 @@ Definition data_race_free (accesses : list (nat * Loc * Access)) : Prop :=
 ```
 
 ### 4.3 主定理证明骨架
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```coq
 Theorem T_BR1_borrow_checker_correctness P :

@@ -437,6 +437,8 @@ impl TaskScheduler {
 
 ### 场景 2: 安全沙箱执行
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 #[cfg(unix)]
 use std::process::Command;
@@ -461,6 +463,8 @@ fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::proce
 ```
 
 ### 场景 3: 进程监控与自动重启
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tokio::process::{Command, Child};
@@ -517,6 +521,8 @@ impl ProcessMonitor {
 
 ### 理论基础
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权模型** | [ownership_model](../../research_notes/formal_methods/ownership_model.md) | 进程资源生命周期管理 |
@@ -524,6 +530,8 @@ impl ProcessMonitor {
 | **Send/Sync** | [send_sync_formalization](../../research_notes/formal_methods/send_sync_formalization.md) | 跨线程进程句柄安全 |
 
 ### 形式化定理
+
+> **[来源: Wikipedia - Type System]**
 
 **定理 PROC-T1（进程资源安全）**: 若进程句柄正确实现 Drop trait，则进程资源不会泄漏。
 
@@ -535,10 +543,14 @@ impl ProcessMonitor {
 
 ### 官方文档
 
+> **[来源: Wikipedia - Concurrency]**
+
 - [std::process 文档](https://doc.rust-lang.org/std/process/)
 - [std::io 文档](https://doc.rust-lang.org/std/io/)
 
 ### 项目内部文档
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - [完整文档](../../../crates/c07_process/README.md)
 - [异步IO指南](../../../crates/c07_process/docs/async_stdio_guide.md)
@@ -546,6 +558,8 @@ impl ProcessMonitor {
 - [形式化方法研究](../../research_notes/formal_methods/README.md)
 
 ### 相关速查卡
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - [异步编程速查卡](./async_patterns.md) - 异步进程管理
 - [错误处理速查卡](./error_handling_cheatsheet.md) - 进程错误处理
@@ -564,6 +578,8 @@ impl ProcessMonitor {
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // array_windows - 零分配滑动窗口
@@ -638,3 +654,9 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**

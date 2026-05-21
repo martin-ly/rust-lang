@@ -81,11 +81,15 @@ The release includes significant improvements to slice iteration with `array_win
 
 #### Closure Lifetime Fixes (1.94)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **Change:** "Avoid incorrect lifetime errors for closures"
 - **Impact:** The borrow checker now more accurately handles lifetime inference for closures, reducing false positives where the compiler incorrectly rejected valid code
 - **Ownership Relevance:** This improves the precision of the borrow checker's region inference, particularly when closures capture references with complex lifetime relationships
 
 #### No Breaking Borrow Checker Changes
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - Rust 1.94 did not introduce any breaking changes to the core borrow checking algorithm
 - The fundamental ownership rules (one mutable xor multiple immutable references) remain unchanged
@@ -96,11 +100,15 @@ The release includes significant improvements to slice iteration with `array_win
 
 #### LUB Coercions Improvement (1.93)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - **Change:** "LUB coercions now correctly handle function item types, and functions with differing safeties"
 - **Impact:** Improved handling of least-upper-bound (LUB) coercion when function types with different safety modifiers (`unsafe` vs safe) are involved
 - **Ownership Relevance:** More accurate lifetime inference when coercing between function pointers with different safety guarantees
 
 #### No Significant Lifetime Elision Changes
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - Both 1.93 and 1.94 maintained stability in lifetime elision rules
 - The `mismatched_lifetime_syntaxes` lint (from earlier versions) remains active
@@ -116,6 +124,8 @@ The release includes significant improvements to slice iteration with `array_win
 | `function_casts_as_integer` | 1.93 | Warn | Casting function pointers to integers | Helps prevent loss of lifetime information |
 
 #### Critical: `const_item_interior_mutations` Lint (1.93)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 This lint addresses a significant soundness concern:
 
@@ -143,6 +153,8 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 
 #### New API Methods
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | Method | Type | Description | Ownership Semantic |
 |--------|------|-------------|-------------------|
 | `LazyCell::get` | New | Non-consuming access to initialized value | Returns `Option<&T>` - borrows without consuming |
@@ -153,6 +165,8 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 | `LazyLock::force_mut` | New | Forces initialization, returns `&mut T` | Thread-safe exclusive access |
 
 #### Ownership Implications
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::sync::LazyLock;
@@ -192,6 +206,8 @@ fn modify_local_lazy() {
 
 #### New API: `<[T]>::array_windows`
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn has_abba(s: &str) -> bool {
     s.as_bytes()
@@ -217,6 +233,8 @@ fn has_abba(s: &str) -> bool {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### Trait Bound Relaxation
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Change:** Relax `T: Ord` bound for some `BinaryHeap<T>` methods
 

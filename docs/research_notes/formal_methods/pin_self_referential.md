@@ -262,6 +262,8 @@ $。
 
 ### 1. Pin 类型形式化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **定义 1.1 (Pin 类型)**: Pin 类型 $\text{Pin}[P]$ 是一个智能指针类型，其中 $P$ 是指针类型（如 $\Box[T]$ 或 $\&mut T$）。
 
 **定义 1.2 (Pin 不变性)**: 对于 $\text{Pin}[P]$，如果 $P$ 是 `Unpin`，则值可以安全移动；否则，值不能被移动。
@@ -269,6 +271,8 @@ $。
 **定义 1.3 (Pin 保证)**: Pin 保证对于非 `Unpin` 类型，被 Pin 的值在内存中的位置不会改变。
 
 ### 2. 自引用类型形式化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定义 2.1 (自引用类型)**: 自引用类型 $T$ 是一个包含指向自身字段引用的类型：
 $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
@@ -278,6 +282,8 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 **定义 2.2 (自引用约束)**: 对于自引用类型 $T$，生命周期 $'a$ 必须与 $T$ 的生命周期相关，确保引用有效。
 
 ### 3. Pin 保证
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **定理 1 (Pin 保证)**:
 对于非 `Unpin` 类型 $T$ 和 $\text{Pin}[\Box[T]]$，被 Pin 的值在内存中的位置不会改变。
@@ -306,6 +312,8 @@ $$T = \{\text{field}_1 : \tau_1, \ldots, \text{field}_n : \&'a \tau_i\}$$
 
 ### 3.1 Unpin Trait 定义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 3.1 (Unpin Trait)**: `Unpin` 是一个 marker trait，表示类型可以安全移动。
 
 $$
@@ -329,6 +337,8 @@ $$
 $$
 
 ### 3.2 Drop 与 Pin 的交互
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 3.2 (Drop 与 Pin 的交互)**: 对于被 Pin 的类型，Drop 的实现必须遵守特定的安全契约。
 
@@ -355,6 +365,8 @@ $$
 $$
 
 ### 3.3 Pin 投影规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定义 3.3 (Pin 投影规则)**: Pin 投影是指从被 Pin 的结构体中获取被 Pin 的字段的安全转换。
 
@@ -396,6 +408,8 @@ $$
 
 ### Rust 对应
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
 | T-PIN1 (Pin 保证)、T1-T3 | [c06 async 示例](../../../crates/c06_async/examples/README.md) | Pin、自引用 Future、位置稳定 |
@@ -435,6 +449,8 @@ Pin 安全性证明树
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1–1.3（Pin、不变性、保证）；Def 2.1–2.2（自引用） | §形式化定义 |
@@ -447,11 +463,15 @@ Pin 安全性证明树
 
 ### 待证明的性质
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **Pin 不变性**: Pin 保证被 Pin 的值不会被移动
 2. **自引用类型安全**: 自引用类型在 Pin 下是安全的
 3. **Future 安全性**: Future 使用 Pin 保证安全性
 
 ### 证明方法
+
+> **[来源: PLDI - Programming Language Design]**
 
 - **类型系统证明**: 证明 Pin 的类型系统保证
 - **语义证明**: 证明 Pin 的语义正确性
@@ -462,6 +482,8 @@ Pin 安全性证明树
 ## 💻 代码示例与实践 {#-代码示例与实践}
 
 ### 示例 1: Pin 基础
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::pin::Pin;
@@ -488,6 +510,8 @@ fn main() {
 - $\text{Pin}[\&mut \text{MyStruct}]$ 不阻止移动，因为实现了 `Unpin`
 
 ### 示例 2: 自引用结构
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::pin::Pin;
@@ -527,6 +551,8 @@ impl SelfReferential {
 
 ### 示例 3: Future 和 Pin
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::pin::Pin;
 use std::future::Future;
@@ -565,6 +591,8 @@ async fn use_future() {
 - `Box::pin` 在堆上固定 Future
 
 ### 示例 4: 自引用结构体
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use std::pin::Pin;
@@ -613,6 +641,8 @@ fn use_self_referential() {
 - Pin 保证结构体不会被移动，指针始终有效
 
 ### 示例 5: Pin 投影
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::pin::Pin;

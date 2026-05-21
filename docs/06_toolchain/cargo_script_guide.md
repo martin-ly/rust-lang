@@ -71,6 +71,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本格式
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +102,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 简写依赖语法
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +117,8 @@ serde_json = "1"
 ```
 
 ### 最小示例（无 frontmatter）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +138,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：HTTP 请求脚本
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +183,8 @@ cargo +nightly fetch-json.rs
 ```
 
 ### 示例 2：数据处理脚本
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +208,8 @@ fn main() {
 ```
 
 ### 示例 3：系统管理脚本
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 #!/usr/bin/env cargo

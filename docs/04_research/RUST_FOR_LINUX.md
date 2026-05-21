@@ -41,6 +41,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 时间线
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@
 | 2026 年初 | Rust 正式成为 Linux 内核的**永久一级公民** |
 
 ### 1.2 这意味着什么？
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +72,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 C 语言的内存安全问题
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -82,6 +88,8 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 | 整数溢出 | 静默回绕（默认） | debug panic / release 显式选择 |
 
 ### 2.2 内核特有的挑战
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +108,8 @@ Linux 内核历史上约 **60-70% 的安全漏洞与内存安全相关**（use-a
 > **[来源: Rust Official Docs]**
 
 ### 3.1 内核中的 Rust 支持层
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

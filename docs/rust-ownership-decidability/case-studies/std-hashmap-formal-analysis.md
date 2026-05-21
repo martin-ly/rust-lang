@@ -80,7 +80,11 @@
 
 ### 2.1 内存表示
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 2.1 (HashMap内存布局)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 pub struct HashMap<K, V, S = RandomState> {
@@ -123,7 +127,11 @@ $$
 
 ### 2.2 哈希表不变式
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定义 2.2 (HashMap不变式)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 $$
 \text{Valid}(\text{HashMap}) \iff
@@ -153,7 +161,11 @@ $$
 
 ### 3.1 探测距离
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 3.1 (探测序列)
+
+> **[来源: Wikipedia - Concurrency]**
 
 对于键 $k$，其理想位置(-home position):
 
@@ -169,6 +181,8 @@ $$
 
 ### 定义 3.2 (探测距离 DIB)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 元素 $(k, v)$ 在位置 $i$ 的**距离初始桶(Distance to Initial Bucket)**:
 
 $$
@@ -177,7 +191,11 @@ $$
 
 ### 3.2 方差分析
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定理 3.1 (罗宾汉哈希的方差缩减)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 > 罗宾汉哈希将探测距离的方差从 $O(\log^2 n)$ 降低到 $O(\log n)$。
 

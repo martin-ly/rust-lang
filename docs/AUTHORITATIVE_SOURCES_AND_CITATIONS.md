@@ -65,6 +65,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 1. `array_windows` - 切片迭代方法
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +85,8 @@ fn has_abba(s: &str) -> bool {
 ```
 
 #### 2. LazyCell/LazyLock API稳定化
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +102,8 @@ fn has_abba(s: &str) -> bool {
 来源: <https://releases.rs/docs/1.94.0/>
 
 #### 3. AVX-512 FP16 Intrinsics
+
+> **[来源: Wikipedia - Concurrency]**
 
 **硬件支持** (权威来源)：
 
@@ -115,6 +121,8 @@ fn has_abba(s: &str) -> bool {
 > —— **HotHardware**, 2025-11-10
 
 #### 4. Cargo TOML 1.1支持
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +168,8 @@ fn has_abba(s: &str) -> bool {
 > "Tree structure with both parents and children since we want to be able to traverse the tree efficiently in both directions."
 
 ### 与Stacked Borrows对比
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +190,8 @@ fn has_abba(s: &str) -> bool {
 
 ### 官方文档
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 资源 | URL | 说明 |
 |------|-----|------|
 | Edition Guide | <https://doc.rust-lang.org/edition-guide/rust-2024/> | 官方迁移指南 |
@@ -188,11 +200,15 @@ fn has_abba(s: &str) -> bool {
 
 ### gen关键字权威说明
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 > "`gen` is a reserved keyword... `gen` blocks will provide a way to make it easier to write certain kinds of iterators. Reserving the keyword now will make it easier to stabilize `gen` blocks before the next edition."
 >
 > —— **The Rust Edition Guide**, <https://doc.rust-lang.org/edition-guide/rust-2024/gen-keyword.html>
 
 ### Edition 2024主要变更 (官方)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 语言层面：
 

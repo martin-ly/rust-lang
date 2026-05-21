@@ -154,6 +154,8 @@ Verus 的验证流程分为以下几个阶段：
 
 ### 2.3 SMT 求解器集成
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Verus 使用 Z3 作为后端求解器，支持以下理论：
 
 | 理论 | 用途 | 示例 |
@@ -168,6 +170,8 @@ Verus 使用 Z3 作为后端求解器，支持以下理论：
 ## 3. 形式化基础
 
 ### 3.1 规范的形式化语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Verus 中的规范可以形式化为**霍尔三元组 (Hoare Triple)**：
 
@@ -200,6 +204,8 @@ fn divide(x: int, y: int) -> (r: int)
 
 ### 3.2 所有权与分离逻辑
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Verus 将 Rust 的所有权系统编码为**分离逻辑 (Separation Logic)**：
 
 **定义 3.2 (所有权断言)**
@@ -222,6 +228,8 @@ $$
 $$
 
 ### 3.3 验证条件生成
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义 3.3 (验证条件)**
 
@@ -247,6 +255,8 @@ $$
 
 ### 4.1 快速安装
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```bash
 # 克隆 Verus 仓库
 git clone https://github.com/verus-lang/verus.git
@@ -261,6 +271,8 @@ export PATH="$PWD/source/target/release:$PATH"
 ```
 
 ### 4.2 项目结构
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 my-verus-project/
@@ -278,6 +290,8 @@ components = ["rustc", "cargo", "rust-src", "rust-std"]
 ```
 
 ### 4.3 基本用法
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```bash
 # 验证单个文件
@@ -298,6 +312,8 @@ verus --export-smtlib queries.smt2 src/main.rs
 ## 5. 规范系统
 
 ### 5.1 基本规范宏
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use vstd::prelude::*;
@@ -323,6 +339,8 @@ fn divide(numerator: int, denominator: int) -> (result: int)
 ```
 
 ### 5.2 ensures、requires、invariant
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 verus! {

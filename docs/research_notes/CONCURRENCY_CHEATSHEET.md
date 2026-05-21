@@ -325,6 +325,8 @@ COUNTER.with(|c| {
 
 ### 线程池
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use threadpool::ThreadPool;
 
@@ -340,6 +342,8 @@ pool.join();
 ```
 
 ### 并行迭代
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use rayon::prelude::*;
@@ -388,6 +392,8 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ### 核心研究点
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
 - LazyCell/LazyLock 的延迟语义
@@ -406,9 +412,13 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

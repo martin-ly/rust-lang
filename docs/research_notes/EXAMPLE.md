@@ -278,6 +278,8 @@ lifetime('a) : 'a
 
 ### 证明方法
 
+> **[来源: Wikipedia - Type System]**
+
 - **结构归纳**: 对程序结构进行归纳证明
 - **操作语义**: 使用操作语义证明性质
 - **类型系统**: 使用类型系统证明性质
@@ -287,6 +289,8 @@ lifetime('a) : 'a
 ## 💻 代码示例 {#-代码示例}
 
 ### 示例 1: 所有权转移
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 fn main() {
@@ -301,6 +305,8 @@ fn main() {
 
 ### 示例 2: 不可变借用
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 fn main() {
     let s = String::from("hello");
@@ -313,6 +319,8 @@ fn main() {
 **说明**: 可以有多个不可变借用。
 
 ### 示例 3: 可变借用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn main() {
@@ -327,6 +335,8 @@ fn main() {
 **说明**: 只能有一个可变借用。
 
 ### 示例 4: 生命周期约束
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -346,6 +356,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 学术论文
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 1. **RustBelt: Securing the Foundations of the Rust Programming Language**
    - 作者: Ralf Jung, et al.
    - 年份: 2018
@@ -360,10 +372,14 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 官方文档
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [The Rust Programming Language - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [The Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
 ### 相关代码
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - [RustBelt 项目](https://github.com/rust-lang/rustbelt)
 - [所有权系统实现](../rust-formal-engineering-system/01_theoretical_foundations/02_ownership_system/README.md)

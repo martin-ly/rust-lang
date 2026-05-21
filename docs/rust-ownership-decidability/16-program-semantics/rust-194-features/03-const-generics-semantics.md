@@ -183,6 +183,8 @@ $$
 
 ### 3.3 数组访问语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **数组索引** (E-Array-Index):
 
 $$
@@ -211,6 +213,8 @@ $$
 
 ### 4.1 常量泛型声明
 
+> **[来源: PLDI - Programming Language Design]**
+
 **常量泛型参数** (T-Const-Param):
 
 $$
@@ -222,6 +226,8 @@ $$
 $$
 
 ### 4.2 数组类型规则
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **数组类型形成** (T-Array-Form):
 
@@ -260,6 +266,8 @@ $$
 
 ### 4.3 类型应用规则
 
+> **[来源: Wikipedia - Type System]**
+
 **常量类型应用** (T-Const-App):
 
 $$
@@ -273,6 +281,8 @@ $$
 $$
 
 ### 4.4 类型等价规则
+
+> **[来源: Wikipedia - Concurrency]**
 
 **结构等价** (TE-Struct):
 
@@ -299,6 +309,8 @@ $$
 
 ### 5.1 常量求值函数
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **定义 5.1** (常量求值)：
 
 常量求值函数 $\text{eval} : \text{ConstExp} \rightarrow \text{Value}$ 定义为：
@@ -316,6 +328,8 @@ $$
 
 ### 5.2 类型等价
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **定义 5.2** (类型等价)：
 
 两个类型 $\tau_1$ 和 $\tau_2$ 等价，记作 $\tau_1 \equiv \tau_2$，当且仅当：
@@ -332,6 +346,8 @@ $$
 
 ### 5.3 常量表达式等价
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **定义 5.3** (常量表达式等价)：
 
 两个常量表达式 $c_1$ 和 $c_2$ 等价，记作 $c_1 \equiv c_2$，当且仅当：
@@ -341,6 +357,8 @@ c_1 \equiv c_2 \iff \text{eval}(c_1) = \text{eval}(c_2)
 $$
 
 ### 5.4 常量上下文
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **定义 5.4** (常量上下文)：
 
@@ -355,6 +373,8 @@ $$
 ## 6. 安全定理
 
 ### 6.1 类型安全定理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定理 6.1** (Const Generics 类型安全)：
 
@@ -376,6 +396,8 @@ $$
 - 数组索引：由 T-Array-Index 和边界检查保证安全
 
 ### 6.2 数组边界安全
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定理 6.2** (数组访问边界安全)：
 

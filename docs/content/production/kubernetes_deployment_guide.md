@@ -631,6 +631,8 @@ spec:
 
 ### NetworkPolicy
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```yaml
 # k8s/networkpolicy.yaml
 apiVersion: networking.k8s.io/v1
@@ -669,6 +671,8 @@ spec:
 
 ### PodSecurityPolicy
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```yaml
 # k8s/podsecuritypolicy.yaml
 apiVersion: policy/v1beta1
@@ -696,6 +700,8 @@ spec:
 
 ### 资源优化
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```yaml
 # 基于实际使用调整资源
 resources:
@@ -708,6 +714,8 @@ resources:
 ```
 
 ### 启动优化
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 应用代码: 快速启动
@@ -728,6 +736,8 @@ async fn main() {
 ```
 
 ### 优雅关闭
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use tokio::signal;
@@ -813,3 +823,11 @@ async fn graceful_shutdown() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

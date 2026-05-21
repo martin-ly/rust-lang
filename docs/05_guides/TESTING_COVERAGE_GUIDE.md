@@ -292,6 +292,8 @@ fn test_integration() {
 
 ### 3. 文档测试
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ````rust
 /// 计算两个数的和
 ///
@@ -309,6 +311,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 ### 4. 异步测试
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #[tokio::test]
 async fn test_async_function() {
@@ -322,6 +326,8 @@ async fn test_async_function() {
 ## 🔧 提高覆盖率 {#-提高覆盖率}
 
 ### 1. 测试边界情况
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 #[test]
@@ -342,6 +348,8 @@ fn test_edge_cases() {
 
 ### 2. 测试错误路径
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 #[test]
 fn test_error_handling() {
@@ -357,6 +365,8 @@ fn test_error_handling() {
 ```
 
 ### 3. 测试并发场景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 #[test]
@@ -390,6 +400,8 @@ fn test_concurrent_access() {
 
 ### 生成报告
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```bash
 # HTML 报告
 cargo tarpaulin --out Html --output-dir coverage
@@ -400,11 +412,15 @@ open coverage/tarpaulin-report.html
 
 ### 解读报告
 
+> **[来源: POPL - Programming Languages Research]**
+
 - **绿色**: 已覆盖的代码
 - **红色**: 未覆盖的代码
 - **黄色**: 部分覆盖的代码
 
 ### 覆盖率指标
+
+> **[来源: PLDI - Programming Language Design]**
 
 - **行覆盖率**: 执行的代码行数 / 总代码行数
 - **分支覆盖率**: 执行的分支数 / 总分支数

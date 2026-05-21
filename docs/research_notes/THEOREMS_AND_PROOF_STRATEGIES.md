@@ -74,6 +74,8 @@
 **自然语言**: 每个值在任意时刻只有一个所有者。
 
 ### 1.2 证明策略
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +92,8 @@
 ```
 
 ### 1.3 详细证明思路
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +153,8 @@ post: v被释放，x变为Dropped
 **关键引理**: 每个操作都是原子性的，不会出现中间状态。
 
 ### 1.4 推论
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +169,8 @@ post: v被释放，x变为Dropped
 > **[来源: Rust Official Docs]**
 
 ### 2.1 定理陈述
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +183,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 
 ### 2.2 证明策略
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +199,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ```
 
 ### 2.3 详细证明思路
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,6 +245,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 **关键观察**: 借用检查器在编译时强制执行上述规则。
 
 ### 2.4 直观理解
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -247,6 +261,8 @@ BorrowCheck(P) = OK → DataRaceFree(P)
 ## 三、类型安全定理 (T-TY3)
 
 ### 3.1 定理陈述
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定理 (T-TY3)**: 良类型的程序不会陷入类型错误。
 

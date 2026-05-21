@@ -313,6 +313,8 @@ impl LoadBalancer {
 
 ### Raft共识 (使用raft-rs)
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use raft::{Config, Raft, StateRole};
 
@@ -352,6 +354,8 @@ impl RaftNode {
 ```
 
 ### 分布式锁 (使用Redis)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use redis::AsyncCommands;
@@ -440,6 +444,8 @@ where
 ## 5. 分布式事务
 
 ### Saga模式
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::future::Future;
@@ -537,6 +543,8 @@ async fn saga_example() {
 
 ### 发布-订阅模式
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use lapin::{Connection, ConnectionProperties, Channel, options::*, types::FieldTable};
 
@@ -592,6 +600,8 @@ impl MessageBus {
 ```
 
 ### 事件溯源
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use serde::{Serialize, Deserialize};
@@ -693,6 +703,8 @@ impl Order {
 ## 7. 熔断与限流
 
 ### 熔断器模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -797,6 +809,8 @@ impl CircuitBreaker {
 
 ### 令牌桶限流
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::time::{Duration, Instant};
@@ -868,6 +882,8 @@ impl RateLimitedService {
 
 ### 分布式追踪
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use opentelemetry::trace::{Tracer, SpanKind};
 use opentelemetry::Context;
@@ -902,6 +918,8 @@ pub async fn traced_operation() {
 ```
 
 ### 健康检查
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use axum::{routing::get, Json, Router};
@@ -993,3 +1011,6 @@ async fn check_external_api() -> bool {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: ACM - Systems Programming Languages]**

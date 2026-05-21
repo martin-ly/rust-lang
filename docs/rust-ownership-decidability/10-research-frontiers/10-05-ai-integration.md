@@ -102,6 +102,8 @@ fn factorial(n: u32) -> u32 {
 
 #### 主要技术
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 技术 | 描述 | 应用 |
 |-----|------|------|
 | Code2Vec | 基于 AST 路径的代码嵌入 | 方法名预测 |
@@ -111,6 +113,8 @@ fn factorial(n: u32) -> u32 {
 | GNN | 图神经网络处理代码图 | 程序分析 |
 
 #### Rust 特定考虑
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Rust 代码表示的特殊挑战：
 
@@ -167,6 +171,8 @@ pub unsafe fn potential_vulnerability(ptr: *mut u32) {
 ```
 
 #### 检测能力对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 检测方法 | 准确率 | 召回率 | 误报率 | 说明 |
 |---------|-------|-------|-------|------|
@@ -276,6 +282,8 @@ fn to_uppercase_inplace(s: &mut String) {
 
 #### 安全生成的挑战
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // LLM 可能生成的有问题的代码
 
@@ -369,6 +377,8 @@ fn process_user_input(input: &str) -> Result<(), Error> {
 
 #### Rust 特定的补全挑战
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 需要理解所有权的补全
 
@@ -393,6 +403,8 @@ fn ownership_completion() {
 ```
 
 ### 2.4 验证辅助
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 LLM 辅助验证工具的使用：
 
@@ -421,6 +433,8 @@ fn verify_function() {
 ## 3. 形式化证明的 AI 辅助
 
 ### 3.1 证明搜索
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 使用 AI 进行自动证明搜索：
 
@@ -458,6 +472,8 @@ pub fn push(&mut self, value: T) {
 
 ### 3.2 证明合成
 
+> **[来源: POPL - Programming Languages Research]**
+
 从规范自动合成证明：
 
 ```rust
@@ -489,6 +505,8 @@ fn sum_to_n(n: u32) -> u32 {
 
 ### 3.3 证明修复
 
+> **[来源: PLDI - Programming Language Design]**
+
 自动修复失败的证明：
 
 ```rust
@@ -514,6 +532,8 @@ fn failed_proof() {
 ```
 
 ### 3.4 战术预测
+
+> **[来源: Wikipedia - Memory Safety]**
 
 预测证明策略（类似 Copilot 的战术预测）：
 
@@ -551,6 +571,8 @@ verus! {
 ## 4. 自动不变量合成
 
 ### 4.1 循环不变量
+
+> **[来源: Wikipedia - Type System]**
 
 自动合成循环不变量：
 

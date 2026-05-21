@@ -38,6 +38,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 舱壁类型
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -91,6 +93,8 @@
 
 ### 2.2 形式化定义
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 舱壁模式形式化语义:
 
@@ -137,6 +141,8 @@
 
 ### 3.1 资源分配模型
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 资源池数学模型:
 
@@ -171,6 +177,8 @@
 ```
 
 ### 3.2 容量规划模型
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 最优容量计算:

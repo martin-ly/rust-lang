@@ -472,6 +472,8 @@ async fn process_stream() {
 
 ### 5.1 文档规范
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 /// 安全关键温度传感器驱动
 ///
@@ -516,6 +518,8 @@ pub struct TemperatureSensor {
 
 ### 5.2 示例代码
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 /// examples/temperature_monitor.rs
 
@@ -559,6 +563,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## 6. 版本兼容性
 
 ### 6.1 语义化版本
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 /// 版本兼容性指南

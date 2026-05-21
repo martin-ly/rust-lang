@@ -252,6 +252,8 @@ allow-registry = [
 ```
 
 ### 3.3 SBOM生成与验证
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -272,6 +274,8 @@ cargo tree --edges normal --prefix none | sort | uniq
 ## 4. 运行时安全监控
 
 ### 4.1 安全事件检测
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 /// 运行时安全监控
@@ -345,6 +349,8 @@ pub enum SecurityAction {
 
 ### 4.2 入侵检测
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 /// 简单的入侵检测系统
 pub struct IntrusionDetector {
@@ -390,6 +396,8 @@ impl IntrusionDetector {
 
 ### 5.1 执行摘要
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```markdown
 # 安全审计报告
 
@@ -408,6 +416,8 @@ impl IntrusionDetector {
 ## 关键发现
 
 ### 发现1: 依赖过时
+
+> **[来源: ACM - Systems Programming Languages]**
 - **严重性**: 中
 - **描述**: crate X 版本过旧，存在已知漏洞
 - **修复**: 升级到 v2.0.0

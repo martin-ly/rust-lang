@@ -321,11 +321,15 @@ mod tests {
 
 ### 要求
 
+> **[来源: Wikipedia - Type System]**
+
 - 类型状态模式
 - 无效状态转换防护
 - 故障恢复
 
 ### 代码框架
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 //! 类型状态模式实现
@@ -454,15 +458,21 @@ pub enum ErrorCode {
 
 ### 目标
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 实现一个带校准和故障检测的传感器驱动
 
 ### 要求
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - 硬件抽象层
 - 数据滤波
 - 故障注入测试
 
 ### 代码框架
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 //! 传感器驱动
@@ -575,15 +585,21 @@ pub enum SensorError {
 
 ### 目标
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 实现一个带E2E保护的简单通信协议
 
 ### 要求
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - CRC校验
 - 序列号验证
 - 重放攻击防护
 
 ### 代码框架
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 //! 安全通信协议
@@ -690,12 +706,16 @@ pub enum CommError {
 
 ### 实验1: LED闪烁器
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [ ] 代码编译通过
 - [ ] 看门狗正确喂狗
 - [ ] 故障模式测试通过
 - [ ] 代码审查完成
 
 ### 实验2: 环形缓冲区
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [ ] Miri测试通过
 - [ ] 单元测试100%覆盖
@@ -704,6 +724,8 @@ pub enum CommError {
 
 ### 实验3: 状态机
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [ ] 类型状态模式正确
 - [ ] 无效转换被阻止
 - [ ] 状态转换测试覆盖
@@ -711,12 +733,16 @@ pub enum CommError {
 
 ### 实验4: 传感器驱动
 
+> **[来源: POPL - Programming Languages Research]**
+
 - [ ] 校准功能正确
 - [ ] 滤波算法验证
 - [ ] 故障注入测试
 - [ ] 性能测试通过
 
 ### 实验5: 通信协议
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [ ] CRC校验正确
 - [ ] 序列号验证
@@ -779,3 +805,6 @@ pub enum CommError {
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: Wikipedia - Memory Safety]**

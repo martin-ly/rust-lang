@@ -287,6 +287,8 @@ fn main() {
 
 ### 示例 2: 生命周期推断
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 fn first_word(s: &str) -> &str {
     let bytes = s.as_bytes();
@@ -306,6 +308,8 @@ fn first_word(s: &str) -> &str {
 - 返回值的生命周期与输入相同
 
 ### 示例 3: 生命周期约束
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 struct ImportantExcerpt<'a> {
@@ -332,6 +336,8 @@ impl<'a> ImportantExcerpt<'a> {
 
 ### 示例 4: 生命周期与泛型
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 fn longest_with_an_announcement<'a, T>(
     x: &'a str,
@@ -357,6 +363,8 @@ where
 - 可以使用 `where` 子句添加约束
 
 ### 示例 5: 高阶生命周期
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn apply<'a, F>(f: F, x: &'a str) -> &'a str

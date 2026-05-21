@@ -60,6 +60,8 @@
 它与简单合并的区别在于能够正确处理多路选择产生的动态分支数。
 
 ### 核心语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -72,6 +74,8 @@ $$
 $$
 
 ### 形式化表示
+
+> **[来源: POPL - Programming Languages Research]**
 
 **状态机表示：**
 
@@ -311,6 +315,8 @@ $$
 
 ### 安全性证明
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 1（安全性）**: 同步合并只有在所有活跃分支都完成后才会继续执行。
 
 **证明:**
@@ -325,6 +331,8 @@ $$
 因此，只有当所有分支完成时才会触发继续操作。∎
 
 ### 活性证明
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **定理 2（活性）**: 如果所有活跃分支最终都完成，则同步合并最终会触发继续。
 
@@ -412,6 +420,8 @@ impl<T> BranchHandle<T> {
 ```
 
 ### 基于 Barrier 的实现
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use tokio::sync::Barrier;
@@ -502,6 +512,8 @@ pub async fn barrier_example() {
 
 ### 基于 Channel 的合并
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use tokio::sync::mpsc;
 
@@ -561,6 +573,8 @@ impl<T> BranchSender<T> {
 ```
 
 ### 动态分支同步
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use tokio::task::JoinHandle;

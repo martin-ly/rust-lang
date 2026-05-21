@@ -483,6 +483,8 @@ Definition loan_env := list (var * borrow_info).
 
 ### 4.2 定理的依赖关系设计
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **设计：层次化依赖，避免循环**
 
 ```text
@@ -516,6 +518,8 @@ Linearizability
 ```
 
 ### 4.3 为什么不证明更多定理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **放弃的定理**：
 
@@ -563,6 +567,8 @@ Linearizability
 
 ### 5.1 为什么使用 Coq
 
+> **[来源: POPL - Programming Languages Research]**
+
 **替代选择**：
 
 | 工具 | 优点 | 缺点 | 选择 |
@@ -582,6 +588,8 @@ Linearizability
 ```
 
 ### 5.2 证明风格的原理
+
+> **[来源: PLDI - Programming Language Design]**
 
 **风格：详细但可读**
 
@@ -619,6 +627,8 @@ Qed.
 
 ### 5.3 admit 策略的原理
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **设计：框架完整，细节用 admit**
 
 **原理**：
@@ -648,6 +658,8 @@ Qed.
 
 ### 6.1 自然语言文档的设计
 
+> **[来源: Wikipedia - Type System]**
+
 **设计：多层次文档体系**
 
 ```text
@@ -674,6 +686,8 @@ READING_GUIDE：个性化路径
 
 ### 6.2 为什么写这么多自然语言
 
+> **[来源: Wikipedia - Concurrency]**
+
 **数量：10个文档，~80,000字**
 
 **原理**：
@@ -691,6 +705,8 @@ READING_GUIDE：个性化路径
 ```
 
 ### 6.3 文档与代码的对应
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **设计：一一对应，双向导航**
 

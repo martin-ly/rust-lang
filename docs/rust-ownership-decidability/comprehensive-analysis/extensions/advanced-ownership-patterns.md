@@ -39,6 +39,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题与解决方案
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -99,6 +101,8 @@ impl SelfReferential {
 ```
 
 ### 1.2 rental / ouroboros crate
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -131,6 +135,8 @@ fn use_parser() {
 ## 2. 所有权递归模式
 
 ### 2.1 链表实现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 拥有所有权的链表
@@ -189,6 +195,8 @@ impl<T> Drop for List<T> {
 
 ### 2.2 Rc/Arc共享所有权
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -229,6 +237,8 @@ impl Graph {
 
 ### 3.1 Trait对象
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 类型擦除的集合
 pub struct ObjectPool {
@@ -259,6 +269,8 @@ impl ObjectPool {
 ```
 
 ### 3.2 自定义vtable
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 手动类型擦除 (更可控)
@@ -318,6 +330,8 @@ impl Drop for ErasedHandle {
 ## 4. 编译时所有权检查
 
 ### 4.1 类型状态高级模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 数据库连接状态机

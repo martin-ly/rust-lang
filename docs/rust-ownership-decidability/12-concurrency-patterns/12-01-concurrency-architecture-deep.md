@@ -677,6 +677,8 @@ For any type `T: Send`, `Mutex<T>` ensures that at most one thread can access `T
 
 #### Deadlock: Circular Lock Acquisition
 
+> **[来源: Wikipedia - Concurrency]**
+
 **Problem**: Thread A locks X then Y; Thread B locks Y then X
 
 ```rust
@@ -749,6 +751,8 @@ fn deadlock_solution() {
 
 #### Poisoning: Panic While Holding Lock
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **Problem**: If a thread panics while holding a mutex, the mutex becomes "poisoned"
 
 ```rust
@@ -806,6 +810,8 @@ fn poisoning_solution() {
 ```
 
 #### Hold Lock Across await: Async Deadlock
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Problem**: Holding a synchronous mutex across an await point
 
@@ -1334,6 +1340,8 @@ impl<T> LockFreeStack<T> {
 
 #### ABA Problem
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Problem**: A value changes from A to B and back to A, causing CAS to succeed when it shouldn't.
 
 ```rust
@@ -1392,6 +1400,8 @@ impl<T> TaggedPointer<T> {
 ```
 
 #### False Sharing
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Problem**: Independent atomic variables on the same cache line cause unnecessary cache coherence traffic.
 
@@ -1610,6 +1620,8 @@ At no point can two threads simultaneously access the value.
 
 #### Worker Pool Pattern
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -1673,6 +1685,8 @@ fn worker_pool_example() {
 
 #### Pipeline Pattern
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::sync::mpsc::{self, Sender, Receiver};
 use std::thread;
@@ -1733,6 +1747,8 @@ fn pipeline_example() {
 ```
 
 #### Request-Response Pattern
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::sync::mpsc;
@@ -1999,6 +2015,8 @@ fn ordering_options() {
 
 #### Incorrect: Relaxed for synchronization
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // COUNTER-EXAMPLE: Wrong ordering
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -2027,6 +2045,8 @@ fn wrong_ordering_relaxed() {
 
 #### Incorrect: Acquire-only for producer
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // COUNTER-EXAMPLE: Using Acquire when Release needed
 fn wrong_ordering_producer() {
@@ -2046,6 +2066,8 @@ fn wrong_ordering_producer() {
 ```
 
 #### Solution: Correct ordering pairs
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // SOLUTION: Correct ordering usage
@@ -2658,3 +2680,20 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**

@@ -70,6 +70,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 一、核心形式化文档 (6篇) ✅
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +87,8 @@
 **总计**: 63,000+ 字核心形式化内容
 
 ### 二、类型理论文档 (5篇) ✅
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +103,8 @@
 **总计**: 33,000+ 字类型理论内容
 
 ### 三、软件设计理论 (42篇) ✅
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,10 +119,14 @@
 **总计**: 42篇设计理论文档
 
 ### 四、思维表征 (48个) ✅
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 思维导图 (15个)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +147,8 @@
 - FORMALIZATION_ECOLOGY_MINDMAP.md ✅
 
 #### 决策树 (10个)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

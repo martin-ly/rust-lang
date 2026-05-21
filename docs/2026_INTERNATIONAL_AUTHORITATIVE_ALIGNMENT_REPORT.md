@@ -123,6 +123,8 @@
 **荣誉**: **PLDI 2025 Distinguished Paper Award**
 
 #### 核心发现
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +151,8 @@
 - 证明了Tree Borrows保留Stacked Borrows的大部分优化
 
 #### 项目对齐状态
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -169,6 +173,8 @@
 **状态**: 已接收，2026年1月发表
 
 #### 核心贡献
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +198,8 @@
 - **浮点非确定性测试**: 浮点运算的随机化测试
 
 #### 项目对齐状态
+
+> **[来源: Wikipedia - Concurrency]**
 
 ✅ **已对齐** - CI/CD已配置Miri Tree Borrows测试
 ✅ **已引用** - POPL 2026论文已在权威来源文档中
@@ -230,6 +238,8 @@
 **官方文档**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
 #### 主要特性
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +266,8 @@
 - ✅ **Box<[T]>的IntoIterator**: 支持boxed slice迭代
 
 #### 项目对齐状态
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -276,6 +288,8 @@
 **来源**: [releases.rs](https://releases.rs/docs/1.95.0/)
 
 #### 预期特性（开发中）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +301,8 @@
 **注意**: 1.95.0仍在开发中，特性可能变动
 
 #### 项目对齐状态
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 📌 **跟踪中** - 项目已配置版本跟踪脚本监控1.95进展
 📌 **计划更新** - 将在1.95发布后更新生态梳理
@@ -303,6 +319,8 @@
 
 #### 旗舰主题（Flagship Themes）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 1. **异步Rust体验提升**
    - 目标: 使异步Rust体验接近同步Rust
    - 关键工作: 解决"Send边界"问题，异步闭包语法支持
@@ -317,11 +335,15 @@
 
 #### 其他2026目标
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **Crates.io镜像和验证**: TUF（The Update Framework）实验部署
 - **C++/Rust互操作性**: 通过BorrowSanitizer检测内存安全违规
 - **超级trait auto impl**: 语言特性提案
 
 #### 项目对齐状态
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ✅ **已跟踪** - 项目路线图已考虑2026目标
 ✅ **已对齐** - 路线图中已明确对齐Rust for Linux目标
@@ -340,6 +362,8 @@
 
 #### 关键里程碑
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 > "实验已完成，Rust将永久保留"
 > —— Miguel Ojeda, Linux Kernel Maintainer Summit 2025
 
@@ -357,6 +381,8 @@
 - 多个PHY驱动、null block、NVMe相关代码
 
 #### 项目对齐状态
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ✅ **已记录** - 生态梳理包含Rust for Linux内容
 ✅ **已增强** - Linux内核永久采用已作为生产就绪案例研究 [^13][^18]

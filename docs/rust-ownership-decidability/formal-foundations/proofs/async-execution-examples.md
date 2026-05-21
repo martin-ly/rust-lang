@@ -35,6 +35,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 基础Future实现
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -94,6 +96,8 @@ fn register_waker(flag: &AtomicBool, waker: &Waker) {
 ```
 
 ### 1.2 组合子实现与证明
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::future::Future;
@@ -209,6 +213,8 @@ where
 
 ### 2.1 单线程执行器
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -318,6 +324,8 @@ unsafe fn drop_waker(data: *const ()) {
 
 ### 2.2 工作窃取执行器核心
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use crossbeam::deque::{Worker, Stealer};
@@ -413,6 +421,8 @@ impl WorkStealingExecutor {
 
 ### 3.1 安全的自引用Future
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::pin::Pin;
 use std::future::Future;
@@ -472,6 +482,8 @@ impl Future for SelfReferencingFuture {
 
 ### 3.2 不安全代码边界
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::pin::Pin;
 use std::marker::PhantomPinned;
@@ -529,6 +541,8 @@ impl Future for ManualPinFuture {
 ## 4. 取消安全实现模式
 
 ### 4.1 取消安全Future
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use tokio::sync::mpsc;
@@ -594,6 +608,8 @@ impl Future for SafeResource {
 ```
 
 ### 4.2 不可取消区域
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::future::Future;

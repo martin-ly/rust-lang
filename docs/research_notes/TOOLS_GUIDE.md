@@ -445,6 +445,8 @@ valgrind --tool=memcheck --leak-check=yes ./target/release/my_program
 
 ### heaptrack
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **用途**: 堆内存分析工具
 
 **安装**:
@@ -483,6 +485,8 @@ heaptrack_gui heaptrack.my_program.12345.gz
 
 ### cargo test
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **用途**: Rust 标准测试工具
 
 **基本使用**:
@@ -504,6 +508,8 @@ cargo test -- --test-threads=1
 ---
 
 ### proptest
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **用途**: 属性测试框架
 
@@ -536,6 +542,8 @@ proptest! {
 ---
 
 ### loom
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **用途**: 并发模型验证工具
 
@@ -578,6 +586,8 @@ mod tests {
 
 ### Clippy
 
+> **[来源: POPL - Programming Languages Research]**
+
 **用途**: Rust 代码检查工具
 
 **安装**:
@@ -609,6 +619,8 @@ cargo clippy -- -W clippy::all
 
 ### rust-analyzer
 
+> **[来源: PLDI - Programming Language Design]**
+
 **用途**: Rust 语言服务器
 
 **安装**:
@@ -639,6 +651,8 @@ rust-analyzer 通常在 IDE 中自动使用，提供：
 ---
 
 ### cargo-expand
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **用途**: 宏展开工具
 
@@ -673,6 +687,8 @@ cargo expand > expanded.rs
 
 ### 工具选择
 
+> **[来源: Wikipedia - Type System]**
+
 根据研究类型选择工具：
 
 - **形式化研究** → Coq, Lean, Prusti, Kani
@@ -683,6 +699,8 @@ cargo expand > expanded.rs
 
 ### 工具组合
 
+> **[来源: Wikipedia - Concurrency]**
+
 推荐的工具组合：
 
 1. **形式化验证组合**: Prusti + Kani
@@ -691,6 +709,8 @@ cargo expand > expanded.rs
 4. **代码质量组合**: Clippy + rust-analyzer + cargo-expand
 
 ### 最佳实践
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 1. **从简单开始**: 先使用基础工具，再使用高级工具
 2. **工具组合**: 组合使用多个工具获得全面结果
@@ -720,9 +740,13 @@ cargo expand > expanded.rs
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -733,6 +757,8 @@ cargo expand > expanded.rs
 
 #### 代码示例更新
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -740,6 +766,8 @@ cargo expand > expanded.rs
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)

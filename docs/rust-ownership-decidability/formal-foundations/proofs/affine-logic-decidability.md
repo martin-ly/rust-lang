@@ -50,6 +50,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是仿射逻辑
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -68,6 +70,8 @@
 
 ### 1.2 与Rust的关系
 
+> **[来源: PLDI - Programming Language Design]**
+
 Rust的所有权系统正是基于仿射类型：
 
 ```rust
@@ -84,6 +88,8 @@ println!("{}", y);   // OK
 ## 2. 仿射逻辑基础
 
 ### 2.1 语法定义
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **类型语法**:
 

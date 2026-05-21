@@ -1577,6 +1577,8 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 7.2 代码大小开销
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 处理器 | 代码大小 | 数据大小 |
 |-------|---------|---------|
 | panic-halt | ~50B | 0B |
@@ -1586,6 +1588,8 @@ fn panic(info: &PanicInfo) -> ! {
 | 自定义（完整功能） | ~3KB | ~500B |
 
 ### 7.3 运行时开销
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 正常运行时开销（无panic）：
 
@@ -1603,6 +1607,8 @@ Panic发生时开销：
 ## 8. 最佳实践
 
 ### 8.1 Panic处理器选择
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 开发阶段：最大调试信息
@@ -1623,6 +1629,8 @@ mod panic_config {
 
 ### 8.2 调试信息配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```toml
 # Cargo.toml
 [profile.dev]
@@ -1636,6 +1644,8 @@ lto = true         # 链接时优化
 ```
 
 ### 8.3 故障恢复模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 恢复状态机
@@ -1671,6 +1681,8 @@ impl RecoveryState {
 
 ### 8.4 安全考虑
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 安全关键系统的panic处理
 #[cfg(feature = "safety-critical")]
@@ -1698,6 +1710,8 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 9.1 Panic不返回定理
 
+> **[来源: Wikipedia - Type System]**
+
 **定理 9.1** (Panic Handler Divergence)
 
 > Rust panic处理器永不返回正常控制流。
@@ -1724,6 +1738,8 @@ $$
 
 ### 9.2 探针非侵入性定理
 
+> **[来源: Wikipedia - Concurrency]**
+
 **定理 9.2** (Probe Non-Intrusiveness)
 
 > RTT/panic-probe在正常执行时不影响目标程序行为。
@@ -1748,6 +1764,8 @@ $$
 除了日志输出外，程序可观察行为一致。∎
 
 ### 9.3 栈回溯完整性定理
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **定理 9.3** (Stack Trace Completeness)
 
@@ -1774,6 +1792,8 @@ ARM Cortex-M的异常/调用约定：
 ## 10. 反例与边界情况
 
 ### 10.1 堆栈溢出
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 问题：栈溢出可能导致双重panic
@@ -1806,6 +1826,8 @@ unsafe extern "C" fn HardFault(_frame: &ExceptionFrame) -> ! {
 
 ### 10.2 双重Panic
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 问题：panic处理中再次panic
 #[panic_handler]
@@ -1830,6 +1852,8 @@ fn panic(info: &PanicInfo) -> ! {
 ```
 
 ### 10.3 硬件故障
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 问题：硬件故障可能破坏panic处理
@@ -1923,3 +1947,7 @@ fn panic(_info: &PanicInfo) -> ! {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**

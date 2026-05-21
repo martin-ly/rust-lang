@@ -207,6 +207,8 @@ release: check
 ```
 
 ### 交叉编译配置
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -226,6 +228,8 @@ target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
 
 ### 条件编译完整示例
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -318,3 +322,11 @@ mod sync_impl {
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

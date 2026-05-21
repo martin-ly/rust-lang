@@ -157,6 +157,8 @@ Rust解决方案:
 > **[来源: Rust Official Docs]**
 
 #### 初期投资 (Year 1)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

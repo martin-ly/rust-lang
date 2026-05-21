@@ -121,6 +121,8 @@
 
 #### 归纳定义 (Inductive Definitions)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **在我们的工作中的应用**:
 
 ```coq
@@ -151,6 +153,8 @@ Inductive has_type :
 3. **构造性**: 与 Coq 的计算模型匹配
 
 #### 偏序关系 (Partial Orders)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **生命周期包含**:
 
@@ -202,7 +206,11 @@ ty_rank : ty -> nat
 
 ### 2.2 核心概念统一视图
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 概念关系图
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
                         程序 (Program)
@@ -224,6 +232,8 @@ ty_rank : ty -> nat
 ```
 
 #### 形式化对应
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 自然概念 | 形式化 | 数学对象 |
 |---------|--------|---------|

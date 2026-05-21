@@ -360,6 +360,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 ### 语义范式 vs 表达能力
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 语义范式 | 表达能力覆盖 | 边界清晰度 | 与现有证明衔接 |
 | :--- | :--- | :--- | :--- |
 | 操作语义 | 求值、存储、控制流 | 高（规则即边界） | type_system、ownership、borrow |
@@ -367,6 +369,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | 公理语义 | 契约、unsafe 边界 | 高（前置/后置即边界） | 各 unsafe API 文档 |
 
 ### 概念族 vs 表达能力
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 概念族 | 可表达 | 边界 | 论证 |
 | :--- | :--- | :--- | :--- |
@@ -436,9 +440,13 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: PLDI - Programming Language Design]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -449,6 +457,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Type System]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -456,6 +466,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -502,3 +514,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

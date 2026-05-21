@@ -251,6 +251,8 @@
 
 ### 2.6 形式化证明批判性分析与推进计划（2026-02-14 完成）
 
+> **[来源: Wikipedia - Type System]**
+
 - [x] [FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](./FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md) ✅ 阶段 1–3 100%
   - 阶段 1：国际对标索引、证明深度、全模型入口、层次化导航
   - 阶段 2：核心定理完整证明（CORE_THEOREMS_FULL_PROOFS）、RUSTBELT_ALIGNMENT、EXECUTABLE_SEMANTICS_ROADMAP
@@ -266,6 +268,8 @@
 
 ### 3.1 性能研究
 
+> **[来源: Wikipedia - Concurrency]**
+
 - [x] [性能基准测试](./experiments/performance_benchmarks.md) ✅ 100%
   - 基准测试框架
   - 性能数据收集
@@ -280,6 +284,8 @@
 
 ### 3.2 内存研究
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - [x] [内存分析](./experiments/memory_analysis.md) ✅ 100%
   - 内存使用模式
   - 内存优化策略
@@ -289,6 +295,8 @@
 
 ### 3.3 并发研究
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - [x] [并发性能](./experiments/concurrency_performance.md) ✅ 100%
   - 并发模型对比
   - 同步原语性能
@@ -297,6 +305,8 @@
 **预期成果**: 并发性能优化指南
 
 ### 3.4 宏系统研究
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [x] [宏展开性能](./experiments/macro_expansion_performance.md) ✅ 100%
   - 宏展开时间分析
@@ -313,6 +323,8 @@
 
 ### 4.1 实际应用案例
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [x] [实际应用案例研究](./practical_applications.md) ✅ 100%
   - 系统编程案例
   - 网络应用案例
@@ -322,6 +334,8 @@
 **预期成果**: 实际应用案例库
 
 ### 4.2 研究方法论
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [x] [研究方法论](./research_methodology.md) ✅ 100%
   - 研究方法框架

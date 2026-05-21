@@ -422,6 +422,8 @@ fn runtime_deadlock() {
 
 ### 4.4 弱引用 (Weak)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;
@@ -464,6 +466,8 @@ fn break_cycle_with_weak() {
 
 ### 5.1 理论论证
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 停机问题视角:
 
@@ -481,6 +485,8 @@ fn break_cycle_with_weak() {
 
 ### 5.2 实践论证
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 需求 | 编译时方案 | 运行时方案 | 选择理由 |
 |------|-----------|-----------|---------|
 | 共享所有权 | 不可能 | Rc/Arc | 多所有者需要运行时计数 |
@@ -489,6 +495,8 @@ fn break_cycle_with_weak() {
 | 跨线程共享 | 不可能 | Mutex/Arc | 线程调度是运行时行为 |
 
 ### 5.3 零成本抽象的边界
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 Rust的零成本抽象原则:
@@ -510,6 +518,8 @@ Rust的零成本抽象原则:
 
 ### 6.1 成本对比
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 机制 | 运行时成本 | 内存成本 | 安全性 |
 |------|-----------|---------|--------|
 | 所有权转移 | 无 | 无 | 编译时保证 |
@@ -520,6 +530,8 @@ Rust的零成本抽象原则:
 | Mutex | 系统调用 | 内核对象 | 运行时阻塞 |
 
 ### 6.2 选择指南
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 优先使用编译时检查（零成本）

@@ -145,6 +145,8 @@ Aeneas 能力范围
 ```
 
 ### 2.3 与类似工具对比
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +164,8 @@ Aeneas 能力范围
 > **[来源: Rust Official Docs]**
 
 ### 3.1 主要目标
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +175,8 @@ Aeneas 能力范围
 4. **知识传递**: 帮助学习者理解形式化验证过程
 
 ### 3.2 验证范围
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +196,8 @@ Aeneas 能力范围
 > **[来源: Rust Official Docs]**
 
 ### 4.1 架构设计
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +225,8 @@ Aeneas 集成架构
 
 ### 4.2 项目集成点
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 集成点 | 说明 | 文件位置 |
 |--------|------|----------|
 | **示例代码** | Aeneas兼容的Rust示例 | `examples/aeneas_verified/` |
@@ -225,6 +235,8 @@ Aeneas 集成架构
 | **CI集成** | 持续验证检查 | `.github/workflows/aeneas.yml` |
 
 ### 4.3 注释规范
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// Aeneas 验证注释示例

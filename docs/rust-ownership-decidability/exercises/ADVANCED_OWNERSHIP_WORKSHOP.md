@@ -660,6 +660,8 @@ impl<T> Drop for LockFreeStack<T> {
 
 ### 常见错误分析
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 错误 | 原因 | 解决方案 |
 |:-----|:-----|:---------|
 | `cannot borrow as mutable` | 同时存在多个可变引用 | 重新设计借用模式 |
@@ -721,3 +723,13 @@ impl<T> Drop for LockFreeStack<T> {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**

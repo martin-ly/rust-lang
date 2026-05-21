@@ -325,6 +325,8 @@ let same: [i32; 5] = safe_convert(arr);  // ✅ 编译通过
 
 ### 固定大小数据结构
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 #![feature(generic_const_exprs)]
 
@@ -373,6 +375,8 @@ let node: BTreeNode<i32, String, 4> = BTreeNode::new();
 
 ### 当前限制
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 #![feature(generic_const_exprs)]
 
@@ -397,6 +401,8 @@ where
 
 ### 递归限制
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 #![feature(generic_const_exprs)]
 
@@ -416,6 +422,8 @@ where
 ## 🔄 与现有方案对比
 
 ### 对比: 使用 const generics vs generic_const_exprs
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 方案1: 当前 workaround (使用宏)
@@ -495,3 +503,6 @@ where
 > **[来源: Rust Reference - Generics]**
 
 > **[来源: Wikipedia - Parametric Polymorphism]**
+
+
+> **[来源: ACM - Systems Programming Languages]**

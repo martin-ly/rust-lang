@@ -194,6 +194,8 @@ research_notes/
 
 ### 3.2 按思维表征 → 文档（入口）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 思维表征文档 | 覆盖领域 | 对应 research_notes 入口 |
 | :--- | :--- | :--- |
 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 所有权、类型、并发、异步、C01–C08 | formal_methods、type_theory、COMPREHENSIVE_SYSTEMATIC_OVERVIEW § 按研究领域索引 |
@@ -254,9 +256,13 @@ research_notes/
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

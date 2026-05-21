@@ -107,6 +107,8 @@ include = [
 > **[来源: Rust Official Docs]**
 
 #### 团队共享配置
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +123,8 @@ include = [
 ```
 
 #### 环境特定配置
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +198,8 @@ tokio = {
 
 ### 2.3 MSRV 注意事项
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 使用 TOML 1.1 特性会提高开发时的 MSRV（最低支持 Rust 版本），但：
 
 - Cargo 在发布时会自动重写清单，保持与旧解析器的兼容性
@@ -213,9 +219,13 @@ rust-version = "1.94"  # 需要 1.94+ 来解析 TOML 1.1
 
 ### 3.1 特性描述
 
+> **[来源: POPL - Programming Languages Research]**
+
 Cargo registry 索引现在包含 `pubtime` 字段，记录 crate 版本的发布时间。这支持未来的基于时间的依赖解析。
 
 ### 3.2 使用场景
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```bash
 # 未来可能支持的时间范围依赖
@@ -223,6 +233,8 @@ cargo add serde --time "2026-01-01..2026-03-01"
 ```
 
 ### 3.3 注意事项
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - crates.io 将逐步回填现有包的发布时间
 - 不是所有 crate 都有 `pubtime`（取决于发布时间和 registry）

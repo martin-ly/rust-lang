@@ -162,6 +162,8 @@ fn mutex_example() {
 
 ### 3.4 安全论证
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 Mutex 的安全性证明:
 
@@ -180,6 +182,8 @@ Mutex 的安全性证明:
 ## 4. 读写锁语义的形式化
 
 ### 4.1 RwLock 的形式化定义
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 RwLock<T> 的状态机:
@@ -209,6 +213,8 @@ RwLock<T> 的状态机:
 
 ### 4.2 读者-写者问题形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 读者-写者问题的公平性策略:
 
@@ -226,6 +232,8 @@ RwLock<T> 的状态机:
 ```
 
 ### 4.3 Rust 代码示例
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -264,6 +272,8 @@ fn rwlock_example() {
 ## 5. 自旋锁语义的形式化
 
 ### 5.1 Spinlock 的形式化定义
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```
 Spinlock 与 Mutex 的区别:

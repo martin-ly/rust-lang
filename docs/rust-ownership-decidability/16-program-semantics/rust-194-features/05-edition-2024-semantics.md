@@ -178,6 +178,8 @@ $
 
 ### 4.1 精确借用类型规则
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **字段级借用** (T-Field-Borrow):
 
 $$
@@ -205,6 +207,8 @@ $
 
 ### 4.2 闭包捕获规则
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **最小捕获** (T-Minimal-Capture):
 
 $$
@@ -231,6 +235,8 @@ $
 
 ### 4.3 模式匹配改进
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **精确 ref 绑定** (T-Precise-Ref):
 
 $$
@@ -243,6 +249,8 @@ $$
 $
 
 ### 4.4 借用检查改进
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **非词法生命周期 2024** (T-NLL-2024):
 
@@ -260,6 +268,8 @@ $
 
 ### 5.1 借用区域
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 5.1** (借用区域)：
 
 借用区域 $\mathcal{B}$ 是一个映射，记录每个位置的借用状态：
@@ -269,6 +279,8 @@ $$
 $$
 
 ### 5.2 精确捕获集
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定义 5.2** (精确捕获)：
 
@@ -285,6 +297,8 @@ $$
 $$
 
 ### 5.3 借用冲突检测
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义 5.3** (借用冲突)：
 
@@ -306,6 +320,8 @@ $$
 $$
 
 ### 5.4 生命周期区域
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 5.4** (生命周期区域)：
 

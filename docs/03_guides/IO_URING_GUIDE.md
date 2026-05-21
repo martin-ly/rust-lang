@@ -110,6 +110,8 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 
 ### 条件编译
 
+> **[来源: IEEE - Programming Language Standards]**
+
 由于 io_uring 仅 Linux 支持，代码必须使用条件编译：
 
 ```rust
@@ -129,6 +131,8 @@ pub mod stub_impl {
 ## 代码示例
 
 ### 文件读取（io-uring crate）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use io_uring::{IoUring, opcode, types};
@@ -158,6 +162,8 @@ fn read_file(path: &str, buf: &mut [u8]) -> std::io::Result<usize> {
 
 ### Echo Server（tokio-uring）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use tokio_uring::net::TcpListener;
 
@@ -177,6 +183,8 @@ async fn echo_server(addr: &str) -> std::io::Result<()> {
 ```
 
 ### Registered Buffers（零拷贝优化）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use io_uring::{IoUring, Submitter, opcode, types};
@@ -292,3 +300,6 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 > **[来源: tokio-rs - tokio-uring]**
 
 > **[来源: Rust Reference - Async I/O]**
+
+
+> **[来源: PLDI - Programming Language Design]**

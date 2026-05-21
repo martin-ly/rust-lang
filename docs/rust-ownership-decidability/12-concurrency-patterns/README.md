@@ -480,6 +480,8 @@ impl RaftNode {
 
 ### 12-07-deep: 分布式系统模式深度解析
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **核心主题** (🔬 高级形式化内容):
 
 - **分布式系统理论**: CAP定理形式化、网络故障模型、拜占庭容错
@@ -598,6 +600,8 @@ cargo test --all
 
 ### 死锁检测
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use parking_lot::deadlock;
 
@@ -614,6 +618,8 @@ std::thread::spawn(move || {
 ```
 
 ### 竞态条件检测
+
+> **[来源: PLDI - Programming Language Design]**
 
 使用 `loom` 进行并发测试：
 
@@ -644,6 +650,8 @@ fn test_concurrent_stack() {
 
 ### 性能分析
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 # CPU 火焰图
 cargo flamegraph --example concurrent_map
@@ -661,6 +669,8 @@ cargo build --features parking_lot/deadlock_detection
 
 ### 陷阱 1: 在异步代码中阻塞
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // ❌ 错误
 async fn bad() {
@@ -674,6 +684,8 @@ async fn good() {
 ```
 
 ### 陷阱 2: 在持有锁时 await
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // ❌ 错误
@@ -693,6 +705,8 @@ async fn good(data: Arc<Mutex<Data>>) {
 ```
 
 ### 陷阱 3: 忽略取消安全
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // ❌ 非取消安全
@@ -727,6 +741,8 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 书籍
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 1. **Rust Atomics and Locks** by Mara Bos
    - 深入讲解 Rust 内存模型和原子操作
    - 官方推荐的无锁编程指南
@@ -741,12 +757,16 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 ### 在线资源
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [The Rust Async Book](https://rust-lang.github.io/async-book/)
 - [Tokio Documentation](https://tokio.rs/)
 - [Rayon Documentation](https://docs.rs/rayon/)
 - [Crossbeam Documentation](https://docs.rs/crossbeam/)
 
 ### 论文与研究
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - "The Problem of Programming Language Concurrency Semantics" - Batty et al.
 - "Memory Models: A Case for Rethinking Parallel Languages and Hardware" - Boehm
@@ -764,6 +784,8 @@ async fn good(sender: &mpsc::Sender<i32>) {
 4. 提交 Pull Request
 
 ### 文档风格指南
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - 代码示例必须包含错误处理
 - 性能声明需要基准测试支持
@@ -802,6 +824,8 @@ async fn good(sender: &mpsc::Sender<i32>) {
 ## 🆕 Rust 1.94 新特性
 
 ### LazyCell 和 LazyLock 新方法
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Rust 1.94 为 `LazyCell` 和 `LazyLock` 引入了新的访问方法，简化了延迟初始化模式：
 

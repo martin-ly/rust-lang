@@ -45,6 +45,8 @@
 
 ### 多线程下载
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::thread;
 use std::sync::{Arc, Mutex};

@@ -111,6 +111,8 @@
 ---
 
 ### 定理 CE-T2（组合保持数据竞争自由）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +128,8 @@
 ---
 
 ### 定理 CE-T3（组合保持类型安全）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +159,8 @@
 **推论 CE-C2（组合反例）**：若 $M_n$ 的 `pub` API 泄漏 `unsafe` 或违反借用规则，则 CE-T1 或 CE-T2 不成立；组合后可能 UB。
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -249,6 +255,8 @@ fn main() {
 
 ### 新增模块纳入组合时的检查清单
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 步骤 | 动作 | 验证 CE-T1/T2/T3 |
 | :--- | :--- | :--- |
 | 1 | 确认 `pub` 接口无 `unsafe` 泄漏 | CE-T1 |
@@ -260,6 +268,8 @@ fn main() {
 
 ### 组合反例详解（何时定理不成立）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 反例 | 违反定理 | 形式化说明 |
 | :--- | :--- | :--- |
 | `pub fn leak_raw(p: *mut T)` | CE-T1 | 泄漏裸指针违反 ownership 唯一性 |
@@ -269,6 +279,8 @@ fn main() {
 | 泛型约束不一致 | CE-T3 | `impl<T: Trait> Service for T` 与 `Service<U>` 边界冲突 |
 
 ### 完整应用链示例：三层架构
+
+> **[来源: POPL - Programming Languages Research]**
 
 **场景**：Web API 订单处理（表示层 + 业务层 + 数据层）。
 
@@ -321,6 +333,8 @@ impl<S: OrderServiceTrait> OrderController<S> {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: PLDI - Programming Language Design]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

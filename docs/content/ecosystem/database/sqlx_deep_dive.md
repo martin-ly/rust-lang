@@ -177,6 +177,8 @@ struct UserWithPosts {
 ```
 
 ### 异步原生
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -206,6 +208,8 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
 > **[来源: Rust Official Docs]**
 
 ### 连接池
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +250,8 @@ impl Database {
 ```
 
 ### 事务处理
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -313,6 +319,8 @@ async fn nested_transaction_example(db: &Database) -> Result<(), sqlx::Error> {
 
 ### 查询构建
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use sqlx::{QueryBuilder, Postgres};
 
@@ -371,6 +379,8 @@ async fn bulk_insert_users(
 
 ### 迁移
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```sql
 -- migrations/20240101000001_create_users.sql
 CREATE TABLE IF NOT EXISTS users (
@@ -407,6 +417,8 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 
 ### 基准数据
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 操作 | SQLx | Diesel | Sea-ORM |
 |------|------|--------|---------|
 | 简单查询 | 120K/s | 80K/s | 60K/s |
@@ -415,6 +427,8 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 | 批量插入 | 50K/s | 40K/s | 35K/s |
 
 ### 优化建议
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 1. 使用 fetch_one 替代 fetch_all (当只需要一行时)

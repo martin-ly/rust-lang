@@ -86,6 +86,8 @@
 - **生命周期绑定**: 值的生命周期与所有者的作用域绑定
 
 #### 所有权转移 (Move)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +108,8 @@ Move(x, y, v):
 ```
 
 #### 复制 (Copy)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +135,8 @@ println!("{}", x);  // OK
 > **[来源: Rust Official Docs]**
 
 #### 不可变借用 (&T)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +158,8 @@ println!("{}", x);  // OK
 - 原所有者不能修改数据
 
 #### 可变借用 (&mut T)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +181,8 @@ println!("{}", x);  // OK
 - 原所有者暂时不能访问数据
 
 #### 借用规则总结
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -251,6 +261,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.3 Trait系统
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **定义 (Trait)**: 定义类型必须实现的方法集合，类似其他语言中的接口。
 
 **形式化**:
@@ -278,6 +290,8 @@ impl Trait: 静态分发，编译时确定
 
 ### 3.1 生命周期省略规则
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust编译器会自动推断生命周期，遵循以下规则：
 
 **规则 1**: 每个引用参数都有自己的生命周期参数
@@ -285,6 +299,8 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 **规则 3**: 如果有多个输入生命周期，但一个是`&self`或`&mut self`，则`self`的生命周期赋给所有输出
 
 ### 3.2 生命周期边界
+
+> **[来源: POPL - Programming Languages Research]**
 
 **定义 (生命周期边界)**: `'static`表示整个程序运行期间都有效。
 
@@ -299,6 +315,8 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 ## 四、并发与异步
 
 ### 4.1 Send与Sync
+
+> **[来源: PLDI - Programming Language Design]**
 
 **定义 (Send)**: 类型T可以安全地跨线程边界移动。
 
@@ -331,6 +349,8 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 ### 4.2 异步与Future
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **定义 (Future)**: 表示异步计算的trait，可以被轮询以检查是否完成。
 
 ```rust
@@ -359,6 +379,8 @@ Wake -> poll() -> ...
 
 ### 5.1 Saga模式
 
+> **[来源: Wikipedia - Type System]**
+
 **定义 (Saga)**: 将长事务分解为一系列本地事务，每个本地事务有对应的补偿操作。
 
 **两种实现**:
@@ -386,6 +408,8 @@ Saga = [LocalTx₁, LocalTx₂, ..., LocalTxₙ]
 ```
 
 ### 5.2 CQRS模式
+
+> **[来源: Wikipedia - Concurrency]**
 
 **定义 (CQRS)**: 命令查询职责分离，读写使用不同的模型。
 

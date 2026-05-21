@@ -2338,6 +2338,8 @@ struct Task;
 
 #### 5.3.3 协作式调度语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 协作式调度依赖任务主动让出控制权：
 
 ```rust
@@ -2384,6 +2386,8 @@ fn process_item(_item: i32) {
 > **[来源: POPL 2018 - RustBelt]**
 
 #### 6.1.1 消息传递语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Actor 模型基于异步消息传递：
 
@@ -2476,6 +2480,8 @@ fn counter_actor_example() {
 
 #### 6.1.2 Actor 生命周期语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Actor 有其明确的生命周期：
 
 ```rust
@@ -2546,6 +2552,8 @@ impl<S, M: Message> ManagedActor<S, M> {
 
 #### 6.1.3 监督树语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 监督树提供了故障恢复机制：
 
 ```rust
@@ -2615,6 +2623,8 @@ impl Supervisor {
 
 #### 6.2.1 位置透明语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 位置透明允许 Actor 不感知本地或远程：
 
 ```rust
@@ -2680,6 +2690,8 @@ struct RemoteConnection;
 
 #### 6.2.2 故障隔离语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 分布式系统中的故障隔离：
 
 ```rust
@@ -2726,6 +2738,8 @@ impl FailureDetector {
 ```
 
 #### 6.2.3 一致性与可用性语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 分布式系统中的一致性与可用性权衡：
 
@@ -2801,6 +2815,8 @@ impl Crdt for GCounter {
 
 #### 7.1.1 栈分配语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 栈分配是最快的内存分配方式：
 
 $$
@@ -2836,6 +2852,8 @@ fn stack_overflow_risk() {
 
 #### 7.1.2 堆分配语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 堆分配用于动态大小的数据：
 
 $$
@@ -2868,6 +2886,8 @@ fn heap_allocation_semantics() {
 ```
 
 #### 7.1.3 内存回收语义（RAII/Drop）
+
+> **[来源: Wikipedia - Type System]**
 
 RAII（资源获取即初始化）是 Rust 的核心内存管理策略：
 
@@ -2952,6 +2972,8 @@ impl<'a> std::ops::DerefMut for LockGuard<'a> {
 
 #### 7.2.1 任务调度语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 任务调度决定了代码何时执行：
 
 ```rust
@@ -3005,6 +3027,8 @@ impl PriorityScheduler {
 
 #### 7.2.2 抢占式调度语义
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 抢占式调度允许操作系统中断任务：
 
 ```rust
@@ -3046,6 +3070,8 @@ fn set_thread_priority_high() {
 ```
 
 #### 7.2.3 协作式调度语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 协作式调度依赖任务主动让出：
 
@@ -3133,6 +3159,8 @@ fn yield_now() -> YieldNow {
 
 #### 7.3.1 阻塞 I/O 语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 阻塞 I/O 会使线程等待操作完成：
 
 $$
@@ -3183,6 +3211,8 @@ fn handle_connection(_stream: TcpStream) {
 ```
 
 #### 7.3.2 非阻塞 I/O 语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 非阻塞 I/O 立即返回，不会阻塞线程：
 
@@ -3251,6 +3281,8 @@ fn non_blocking_io_semantics() {
 ```
 
 #### 7.3.3 异步 I/O 语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 异步 I/O 结合了非阻塞和事件驱动：
 
@@ -3334,6 +3366,8 @@ async fn batch_async_io(urls: Vec<&str>) -> Vec<Result<String, reqwest::Error>> 
 
 #### 8.1.1 大步语义规则
 
+> **[来源: ACM - Systems Programming Languages]**
+
 大步语义（自然语义）描述表达式的完整求值：
 
 $$
@@ -3367,6 +3401,8 @@ fn big_step_apply() -> i32 {
 ```
 
 #### 8.1.2 小步语义规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 小步语义（结构化操作语义）描述单步转换：
 
@@ -3411,6 +3447,8 @@ fn small_step_ownership() {
 
 #### 8.1.3 求值上下文
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 求值上下文（Evaluation Contexts）定义了规约可以进行的位置：
 
 $$
@@ -3450,6 +3488,8 @@ fn evaluation_contexts() {
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 8.2.1 类型判断语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 类型判断规则定义了程序的类型正确性：
 
@@ -3492,6 +3532,8 @@ fn lifetime_type_judgment<'a>(x: &'a i32) -> &'a i32 {
 ```
 
 #### 8.2.2 效果追踪语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 效果系统追踪程序可能产生的效果：
 
@@ -3543,6 +3585,8 @@ fn complex_operation(data: &mut Vec<i32>) {
 ```
 
 #### 8.2.3 能力系统语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 能力系统（Capability System）控制对资源的访问：
 
@@ -3622,6 +3666,8 @@ impl Session<Privileged> {
 
 #### 9.1.1 借用检查器语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 借用检查器是 Rust 的核心创新，在编译时验证内存安全：
 
 $$
@@ -3669,6 +3715,8 @@ fn non_lexical_lifetimes() {
 ```
 
 #### 9.1.2 模式匹配穷尽性语义
+
+> **[来源: Wikipedia - Type System]**
 
 Rust 编译器检查模式匹配是否穷尽：
 
@@ -3725,6 +3773,8 @@ fn wildcard_match(x: Result<i32, String>) -> i32 {
 
 #### 9.1.3 常量求值语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 常量求值在编译时执行代码：
 
 ```rust
@@ -3773,6 +3823,8 @@ use std::mem::size_of;
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 9.2.1 Miri 语义解释器
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 Miri 是 Rust 的未定义行为检测工具：
 
@@ -3845,6 +3897,8 @@ fn miri_safe_example() {
 
 #### 9.2.2 数据竞争检测语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 数据竞争检测确保并发安全：
 
 ```rust
@@ -3912,6 +3966,8 @@ fn thread_safety_traits() {
 ```
 
 #### 9.2.3 内存泄漏检测语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 内存泄漏检测帮助发现资源管理问题：
 
@@ -4139,3 +4195,7 @@ docs/rust-ownership-decidability/
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

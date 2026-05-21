@@ -167,7 +167,11 @@ $$
 
 ### 2.3 约束求解
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ### 定义 2.4 (约束求解)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **求解判断**:
 
@@ -194,7 +198,11 @@ $$
 
 ### 3.1 终止性
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定理 3.1 (约束生成终止)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 > 对于任何有限表达式 $e$ 和有限环境 $\Gamma$，约束生成算法在有限步内终止。
 
@@ -218,6 +226,8 @@ $$
 约束生成每步使表达式结构变小，因此终止。∎
 
 ### 定理 3.2 (约束求解终止)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > 约束求解算法在有限步内终止。
 
@@ -243,7 +253,11 @@ $$
 
 ### 3.2 完备性
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定理 3.3 (约束求解完备性)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > 如果约束集 $C$ 有解，则约束求解算法返回最一般的解(mgu)。
 

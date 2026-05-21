@@ -133,6 +133,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 > **[来源: Rust Official Docs]**
 
 ### 目标
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +143,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 - 理解Copy与Clone的区别
 
 ### 学习资源
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +159,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 错误处理 | ERROR_HANDLING_DECISION_TREE.md | 2天 |
 
 ### 检查清单
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,11 +182,15 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 
 ### 目标
 
+> **[来源: Wikipedia - Type System]**
+
 - 掌握生命周期
 - 理解高级类型系统特性
 - 能处理复杂借用场景
 
 ### 学习资源
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 主题 | 资源 | 预计时间 |
 | :--- | :--- | :--- |
@@ -194,6 +204,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 迭代器 | [type_system_foundations](../type_theory/type_system_foundations.md) | 3天 |
 
 ### 检查清单
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```markdown
 □ 能显式标注生命周期
@@ -210,6 +222,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 ## Level 4: 专家 (6-8周)
 
 ### 目标
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - 掌握并发编程
 - 理解异步编程

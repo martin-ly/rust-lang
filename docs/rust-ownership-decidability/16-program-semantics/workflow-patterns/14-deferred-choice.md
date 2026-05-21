@@ -72,6 +72,8 @@
 与排他选择不同，决策不是在设计时静态确定的。
 
 ### 核心语义
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -84,6 +86,8 @@ $$
 其中 $\Box$ 是外部选择算子，等待第一个发生的事件 $E_i$。
 
 ### 外部事件触发
+
+> **[来源: Wikipedia - Concurrency]**
 
 **事件类型：**
 
@@ -158,6 +162,8 @@ $$
 
 ### 基于事件的网关
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **图形表示：**
 
 ```
@@ -195,6 +201,8 @@ $$
 
 ### 状态机形式化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 $$
 \begin{aligned}
 & \text{States} = \{ \\
@@ -216,6 +224,8 @@ $$
 $$
 
 ### 进程代数 (CSP)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```csp
 -- 延迟选择的 CSP 形式化

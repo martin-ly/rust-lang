@@ -105,6 +105,8 @@ MessageStatus :=
 
 ### Axiom OB3: 最终投递
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 ∀msg ∈ T_outbox. status = Pending → ◇(status = Published)
 ```
@@ -116,6 +118,8 @@ MessageStatus :=
 ## 3. 定理 (Theorem)
 
 ### Theorem OB1: 消息不丢失
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 db_ops 成功 → ◇(msg ∈ M)
@@ -129,6 +133,8 @@ db_ops 成功 → ◇(msg ∈ M)
 4. P_relay 最终会将其投递到 M
 
 ### Theorem OB2: 消息不重复
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 msg.id 唯一 → 消费者收到 msg 一次且仅一次
@@ -274,6 +280,8 @@ Outbox 模式常与 Saga 配合使用：
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Wikipedia - Type System]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

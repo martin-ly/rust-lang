@@ -232,6 +232,8 @@ type T3 ────────────────────────
 > **[来源: Rust Official Docs]**
 
 ### 3.1 文档依赖图（论证流向）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -267,6 +269,8 @@ software_design_theory
 ```
 
 ### 3.2 文档引用关系表
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -282,6 +286,8 @@ software_design_theory
 | 06_boundary_analysis | 决策 | 04_expressiveness_boundary、formal_methods | 并发选型论证 |
 
 ### 3.3 论证链条索引（按问题查）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 我想论证… | 入口 | 论证链 |
 | :--- | :--- | :--- |
@@ -301,6 +307,8 @@ software_design_theory
 ## 四、论证思路示例
 
 ### 4.1 示例：为何「所有权唯一性」⇒「数据竞争自由」？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **论证思路**：
 

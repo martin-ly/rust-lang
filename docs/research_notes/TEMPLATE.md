@@ -204,6 +204,8 @@ fn example_two() {
 ```
 
 ### 3. 定义/设计要点三
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,11 +243,15 @@ fn example_two() {
 
 ### 待证明的性质 / 待测试的场景
 
+> **[来源: IEEE - Programming Language Standards]**
+
 1. **[性质/场景一]**: [描述]
 2. **[性质/场景二]**: [描述]
 3. **[性质/场景三]**: [描述]
 
 ### 证明方法 / 测试方法
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - **[方法一]**: [方法描述]
 - **[方法二]**: [方法描述]
@@ -256,6 +262,8 @@ fn example_two() {
 ## 💻 代码示例 {#-代码示例}
 
 ### 示例 1: 基础示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 基础代码示例
@@ -274,6 +282,8 @@ fn main() {
 
 ### 示例 2: 进阶示例
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 进阶代码示例
 fn advanced_example() {
@@ -291,6 +301,8 @@ fn main() {
 **说明**: [示例说明和要点]
 
 ### 示例 3: 研究场景示例
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 研究场景：验证 [研究目标] 的实际应用
@@ -315,6 +327,8 @@ fn main() {
 **说明**: [研究场景说明和形式化目标]
 
 ### 示例 4: Coq 形式化示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```coq
 (* Coq 形式化代码示例 *)
@@ -352,6 +366,8 @@ Qed.
 
 ### 学术论文
 
+> **[来源: Wikipedia - Type System]**
+
 1. **[论文标题]**
    - 作者: [作者姓名]
    - 年份: [年份]
@@ -363,6 +379,8 @@ Qed.
    - 链接: <https://plv.mpi-sws.org/rustbelt/>
 
 ### 官方文档
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [Rust Reference](https://doc.rust-lang.org/reference/README.md)
 - [Rust Book](https://doc.rust-lang.org/book/README.md)

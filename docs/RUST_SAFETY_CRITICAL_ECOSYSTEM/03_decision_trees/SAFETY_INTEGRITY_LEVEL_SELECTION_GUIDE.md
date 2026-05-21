@@ -192,6 +192,8 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 > **[来源: Rust Official Docs]**
 
 ### 3.1 ASIL分解
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +222,8 @@ ASIL D分解选项:
 ```
 
 ### 3.2 SIL分解
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -275,6 +279,8 @@ impl OneOutOfTwo {
 
 ### 4.1 ASIL A实现
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 //! ASIL A级实现要求
 
@@ -305,6 +311,8 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 
 ### 4.2 ASIL B实现
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 //! ASIL B级实现要求
 
@@ -334,6 +342,8 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 ```
 
 ### 4.3 ASIL C实现
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 //! ASIL C级实现要求
@@ -378,6 +388,8 @@ impl ValidatedValue {
 ```
 
 ### 4.4 ASIL D实现
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 //! ASIL D级实现要求

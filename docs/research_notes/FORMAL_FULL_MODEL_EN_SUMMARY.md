@@ -190,3 +190,6 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: Wikipedia - Type System]**

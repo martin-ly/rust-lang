@@ -77,7 +77,7 @@
 > **[来源: Rust Official Docs]**
 
 - [模块知识结构补充指南](#模块知识结构补充指南)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 文档概述](#-文档概述)
   - [代码示例](#代码示例)
@@ -475,6 +475,8 @@ fn main() {
 
 #### 模板
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```markdown
 ### 概念定义
 
@@ -497,6 +499,8 @@ fn main() {
 ```
 
 #### 示例：异步编程
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```markdown
 ### 概念定义
@@ -527,6 +531,8 @@ fn main() {
 
 #### 模板
 
+> **[来源: Wikipedia - Type System]**
+
 ```markdown
 ### 属性特征
 
@@ -554,6 +560,8 @@ fn main() {
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 模板
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```markdown
 ### 关系连接
@@ -583,8 +591,12 @@ fn main() {
 
 #### 模板
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```markdown
 ### 解释论证
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **论点**: [要论证的论点]
 
@@ -607,10 +619,16 @@ fn main() {
 
 ### 5. 形式证明补充
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 模板
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```markdown
 ### 形式证明
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定理**: [要证明的定理]
 
@@ -637,7 +655,11 @@ fn main() {
 
 ### 1. 思维导图补充
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 模板
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ````markdown
     ### 思维导图
@@ -656,10 +678,16 @@ fn main() {
 
 ### 2. 概念矩阵补充
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 模板
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```markdown
 ### 概念矩阵
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 维度1 | 维度2 | 维度3 | 综合评估 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

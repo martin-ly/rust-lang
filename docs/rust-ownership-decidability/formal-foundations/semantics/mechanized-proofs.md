@@ -136,6 +136,8 @@
 
 #### 2.1.1 Curry-Howard 对应
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 命题 = 类型
 证明 = 程序
@@ -153,6 +155,8 @@
 ```
 
 #### 2.1.2 归纳类型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 自然数定义：
@@ -172,6 +176,8 @@ Inductive list (A : Type) : Type :=
 
 #### 2.2.1 证明策略（Coq 风格）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```coq
 (* 基本策略 *)
 intros     (* 引入假设 *)
@@ -189,6 +195,8 @@ lia        (* 线性整数算术 *)
 ```
 
 #### 2.2.2 证明模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```coq
 (* 结构归纳模式 *)
@@ -210,6 +218,8 @@ Qed.
 
 #### 2.3.1 类型类 (Type Classes)
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```coq
 (* 等价关系类型类 *)
 Class Eq (A : Type) : Type := {
@@ -229,6 +239,8 @@ Qed.
 ```
 
 #### 2.3.2 单子 (Monads)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```coq
 (* 单子类型类 *)
@@ -256,6 +268,8 @@ Instance State_Monad (S : Type) : Monad (State S) := {
 
 #### 3.1.1 Gallina 语言
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```coq
 (* 定义 *)
 Definition double (n : nat) : nat := n + n.
@@ -273,6 +287,8 @@ Fixpoint factorial (n : nat) : nat :=
 ```
 
 #### 3.1.2 Ltac 策略语言
+
+> **[来源: Wikipedia - Type System]**
 
 ```coq
 (* 自定义策略 *)
@@ -297,6 +313,8 @@ Proof. crush. Qed.
 
 #### 3.2.1 Iris 基础
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```coq
 (* Iris 命题 *)
 From iris.proofmode Require Import proofmode.
@@ -313,6 +331,8 @@ Notation "P -∗ Q" := (wand P Q) (at level 99).
 ```
 
 #### 3.2.2 Hoare 三元组
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```coq
 (* Hoare 三元组 *)
@@ -339,6 +359,8 @@ Qed.
 
 #### 3.3.1 RustBelt 架构
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 RustBelt/
 ├── theories/
@@ -356,6 +378,8 @@ RustBelt/
 ```
 
 #### 3.3.2 RustBelt 中的 Vec 验证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```coq
 (* Vec 类型定义 *)
@@ -388,6 +412,8 @@ Qed.
 
 #### 3.4.1 从 Coq 提取 OCaml
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```coq
 (* 提取指令 *)
 Require Extraction.
@@ -401,6 +427,8 @@ Extraction "sort.ml" verified_sort.
 ```
 
 #### 3.4.2 提取正确性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```coq
 (* 提取正确性定理 *)
@@ -418,6 +446,8 @@ Theorem extraction_correct : ∀ (f : A → B) (f' : A' → B'),
 > **[来源: POPL - Programming Languages Research]**
 
 #### 4.1.1 Lean 语言
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```lean
 -- 定义
@@ -441,6 +471,8 @@ Theorem extraction_correct : ∀ (f : A → B) (f' : A' → B'),
 
 #### 4.1.2 Lean 策略
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```lean
 -- 策略模式匹配
  theorem length_append {α : Type} (xs ys : List α) :
@@ -458,6 +490,8 @@ Theorem extraction_correct : ∀ (f : A → B) (f' : A' → B'),
 > **[来源: PLDI - Programming Language Design]**
 
 #### 4.2.1 Aeneas 概述
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Aeneas 是一个从安全 Rust 代码生成 Lean 证明的框架。
 

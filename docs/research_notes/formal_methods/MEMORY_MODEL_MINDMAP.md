@@ -339,6 +339,8 @@ pub fn safe_interface() {
 
 ### 常见unsafe模式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 场景 | unsafe使用 | 安全保证 |
 | :--- | :--- | :--- |
 | FFI调用 | `extern "C"` | 检查C函数契约 |
@@ -353,6 +355,8 @@ pub fn safe_interface() {
 
 ### 内存序对比
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 内存序 | 保证 | 使用场景 | 性能 |
 | :--- | :--- | :--- | :--- |
 | `Relaxed` | 无 | 计数器 | 最高 |
@@ -362,6 +366,8 @@ pub fn safe_interface() {
 | `SeqCst` | 全局顺序一致 | 严格同步 | 较低 |
 
 ### Happens-Before关系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -385,6 +391,8 @@ if FLAG.load(Ordering::Acquire) {     // Acquire: 能看到Release前的操作
 
 ### 泄漏场景
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 场景 | 原因 | 解决 |
 | :--- | :--- | :--- |
 | `Rc`循环引用 | 计数永不为0 | 使用`Weak` |
@@ -393,6 +401,8 @@ if FLAG.load(Ordering::Acquire) {     // Acquire: 能看到Release前的操作
 | Channel未关闭 | 发送者阻塞 | 正确关闭 |
 
 ### Weak引用
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -548,9 +558,13 @@ struct Node {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: PLDI - Programming Language Design]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

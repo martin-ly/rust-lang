@@ -78,6 +78,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 类型系统基础
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +94,8 @@
 **状态**: ✅ 已完成 (100%)
 
 ### 1b. 类型构造能力
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

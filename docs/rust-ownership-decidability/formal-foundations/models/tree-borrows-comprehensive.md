@@ -115,6 +115,8 @@ Stacked Borrows (SB) 作为 Rust 的第一个正式别名模型，为理解 Rust
 
 #### 1.1.1 两阶段借用问题
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // Vec::push 的典型调用
 let mut v = vec![1, 2, 3];
@@ -124,6 +126,8 @@ v.push(v.len());  // 同时使用 &mut v (push) 和 &v (len)
 在 SB 中，两阶段借用被当作原始指针处理，这过于宽松——它允许两阶段可变引用与原始指针任意别名，违反了可变引用的唯一性保证。
 
 #### 1.1.2 读-读重排序限制
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 let mut root = 0;
@@ -141,6 +145,8 @@ let a = *x;      // 然后 *x - 导致 UB！
 SB 中，通过 `root` 的读取会使 `x` 失效，这阻止了编译器进行读-读重排序优化。
 
 #### 1.1.3 容器指针算术
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 let arr = [1, 2, 3, 4];
@@ -201,6 +207,8 @@ TB 使用树来跟踪引用的派生关系：
 
 #### 2.2.1 共享引用状态
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 ┌──────────┐    foreign read     ┌──────────┐
 │  Active  │────────────────────▶│  Frozen  │
@@ -217,6 +225,8 @@ TB 使用树来跟踪引用的派生关系：
 ```
 
 #### 2.2.2 可变引用状态
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 ┌──────────┐    local write      ┌──────────┐
@@ -294,6 +304,8 @@ memory ::= Address → (Value, BorrowTree)
 
 #### 3.2.1 创建共享借用
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
               σ(x) = v
 ─────────────────────────────────────────────
@@ -308,6 +320,8 @@ memory ::= Address → (Value, BorrowTree)
 ```
 
 #### 3.2.2 创建可变借用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
               σ(x) = v

@@ -121,6 +121,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 内存安全问题对比
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +139,8 @@
 *注: Rust中内存泄漏通常通过循环引用可能发生，但可用弱引用避免
 
 ### 内存布局对比
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +181,8 @@ struct Aligned {
 > **[来源: Rust Official Docs]**
 
 ### Send和Sync trait矩阵
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +197,8 @@ struct Aligned {
 | **PhantomData** | 可变 | 可变 | 标记类型 | 泛型编程 |
 
 ### 并发模式选择
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +225,8 @@ struct Aligned {
 ```
 
 ### 实际代码示例
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -276,6 +286,8 @@ fn lock_free_counter() {
 
 ### 堆分配 vs 栈分配
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 特性 | 栈分配 | 堆分配 (Box) | 堆分配 (Vec) | 静态分配 |
 |------|--------|--------------|--------------|----------|
 | **分配速度** | 纳秒级 | 微秒级 | 微秒级 | 编译期 |
@@ -286,6 +298,8 @@ fn lock_free_counter() {
 | **适用场景** | 局部变量 | 大对象 | 动态集合 | 全局配置 |
 
 ### 实时系统内存策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #![no_std]

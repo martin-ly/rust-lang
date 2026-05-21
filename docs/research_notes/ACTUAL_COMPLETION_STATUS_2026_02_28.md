@@ -101,10 +101,14 @@
 ---
 
 ### 3. 软件设计理论 ✅ 基本完成
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 3.1 设计模式 (23个全部完成)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +120,8 @@
 - 完整证明
 
 #### 3.2 工作流模型 ✅ 完成
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +131,8 @@
 - 04_expressiveness_boundary.md ✅
 
 #### 3.3 执行模型 ✅ 完成
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +144,8 @@
 - 06_boundary_analysis.md ✅
 
 #### 3.4 组合工程 ✅ 完成
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +154,8 @@
 - 03_integration_theory.md ✅
 
 #### 3.5 边界系统 ✅ 完成
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

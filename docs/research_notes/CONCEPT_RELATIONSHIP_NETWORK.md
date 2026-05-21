@@ -485,6 +485,8 @@ graph TB
 
 ### 所有权概念子图
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```mermaid
 graph TB
     M1[资源管理 L1] ==> C1[所有权 L2]
@@ -514,6 +516,8 @@ graph TB
 
 ### 类型系统概念子图
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```mermaid
 graph LR
     M2[类型安全 L1] ==> C9[泛型 L2]
@@ -536,6 +540,8 @@ graph LR
 ```
 
 ### 并发概念子图
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TB
@@ -566,7 +572,11 @@ graph TB
 
 ### 概念到文档映射
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### L1 元概念 → 文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 概念 | 主要文档 | 类型 | 关联文档 |
 | :--- | :--- | :--- | :--- |
@@ -577,6 +587,8 @@ graph TB
 | M5 抽象能力 | [trait_system_formalization.md](type_theory/trait_system_formalization.md) | 形式化 | type_system_foundations.md |
 
 #### L2 核心概念 → 文档
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 概念 | 主要文档 | 类型 | 关联文档 |
 | :--- | :--- | :--- | :--- |
@@ -589,6 +601,8 @@ graph TB
 | C12 并发 | [send_sync_formalization.md](formal_methods/send_sync_formalization.md) | 形式化 | threads_concurrency_usage_guide.md |
 
 #### L3 具体概念 → 文档
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 概念 | 主要文档 | 类型 | 示例代码 |
 | :--- | :--- | :--- | :--- |
@@ -604,7 +618,11 @@ graph TB
 
 ### 概念间导航路径
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 路径1: 从代码问题到形式化理论
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 代码问题

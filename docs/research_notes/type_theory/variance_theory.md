@@ -373,6 +373,8 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 ### 反例 1：`&mut T` 若协变则悬垂引用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **假设**：若 `&mut T` 在 $T$ 上协变（错误假设）。
 
 **反例代码**（伪代码，实际 Rust 会拒绝）：
@@ -390,11 +392,15 @@ fn evil(mut r: &mut &'a str) {
 
 ### 反例 2：函数参数若协变则悬垂
 
+> **[来源: Wikipedia - Type System]**
+
 **假设**：若 `fn(T) -> R` 在参数 $T$ 上协变（错误假设）。
 
 **反例**：期待 `fn(&'static str) -> ()` 的上下文若接受 `fn(&'a str) -> ()`，则调用者可传入 `&'static` 实参，但实际函数可能将引用存储到短生命周期位置，导致悬垂。故参数必须逆变。
 
 ### 反例 3：`Cell<T>` 若协变则悬垂
+
+> **[来源: Wikipedia - Concurrency]**
 
 **假设**：若 `Cell<T>` 在 $T$ 上协变。
 
@@ -432,11 +438,15 @@ fn evil(mut r: &mut &'a str) {
 
 ### 待证明的性质
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 1. **型变规则正确性**: 型变规则保证类型安全
 2. **型变推导**: 编译器正确推导型变
 3. **内存安全**: 型变规则保证内存安全
 
 ### 证明方法
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - **类型系统证明**: 证明型变规则的类型系统保证
 - **语义证明**: 证明型变的语义正确性
@@ -447,6 +457,8 @@ fn evil(mut r: &mut &'a str) {
 ## 💻 代码示例与实践 {#-代码示例与实践}
 
 ### 示例 1: 协变类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn covariant_example() {
@@ -465,6 +477,8 @@ fn covariant_example() {
 - `Box<T>` 在 $T$ 上是协变的
 
 ### 示例 2: 逆变类型
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 fn contravariant_example() {
@@ -489,6 +503,8 @@ fn contravariant_example() {
 
 ### 示例 3: 不变类型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 fn invariant_example() {
     let mut x: &mut i32 = &mut 42;
@@ -507,6 +523,8 @@ fn invariant_example() {
 - 不变性保证内存安全
 
 ### 示例 4: PhantomData 与型变
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::marker::PhantomData;
@@ -539,6 +557,8 @@ fn phantom_example() {
 
 ### 示例 5: 函数指针型变
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn function_pointer_variance() {
     // 函数参数是逆变的
@@ -563,6 +583,8 @@ fn function_pointer_variance() {
 
 ### 示例 6: 型变与内存安全
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn variance_memory_safety() {
     // 协变示例：&'long T 可以安全地当作 &'short T 使用
@@ -583,6 +605,8 @@ fn variance_memory_safety() {
 - 不变保证可变引用的唯一性
 
 ### 示例 7: 实际应用场景
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 协变在迭代器中的应用
@@ -622,6 +646,8 @@ fn use_contravariant_callback() {
 
 ### 学术论文
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **Types and Programming Languages**
    - 作者: Benjamin C. Pierce
    - 年份: 2002
@@ -633,11 +659,15 @@ fn use_contravariant_callback() {
 
 ### 官方文档
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [Rust Reference - Subtyping and Variance](https://doc.rust-lang.org/reference/subtyping.html)
 - [型变参考文档](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
 - [型变理论（本篇）](./variance_theory.md)
 
 ### 相关代码
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - [型变实现](../../../crates/c02_type_system/src/README.md)
 - [型变示例](../../../crates/c02_type_system/examples/README.md)

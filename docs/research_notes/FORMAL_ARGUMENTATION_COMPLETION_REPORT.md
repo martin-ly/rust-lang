@@ -56,6 +56,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 一、逻辑基础 (2篇) ✅
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -72,6 +74,8 @@
 - 在Rust中的应用
 
 ### 二、程序语义 (2篇) ✅
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 文档 | 大小 | 内容深度 | 特色 |
 | :--- | :--- | :--- | :--- |

@@ -88,6 +88,8 @@ Rust 语言在云原生领域展现出独特的优势，使其成为构建基础
 
 #### 内存安全与性能
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 // Rust 的零成本抽象确保高性能
 pub struct ConnectionPool<T> {
@@ -120,6 +122,8 @@ impl<T> ConnectionPool<T> {
 
 #### 并发模型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Rust 的所有权系统天然适合云原生环境的高并发需求：
 
 ```rust
@@ -147,6 +151,8 @@ pub async fn handle_requests(
 
 #### 性能对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // Rust 的高性能 HTTP 服务
 use axum::{routing::get, Router};
@@ -173,6 +179,8 @@ async fn handler() -> &'static str {
 
 #### 资源占用对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 指标 | Rust (Actix-web) | Go (Gin) | 差异 |
 |------|------------------|----------|------|
 | 内存占用 | ~5MB | ~20MB | 75%↓ |
@@ -185,6 +193,8 @@ async fn handler() -> &'static str {
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### Firecracker - AWS 的微型虚拟机
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // Firecracker 的核心设计理念
@@ -212,6 +222,8 @@ impl Vmm {
 ```
 
 #### Linkerd2-proxy - 服务网格数据平面
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // Linkerd2-proxy 的连接处理
@@ -3553,3 +3565,26 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

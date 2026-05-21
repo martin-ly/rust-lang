@@ -113,6 +113,8 @@ let b = a;  // move
 
 ### Lemma 1: 移动后原所有者不可用
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 Given: owner(r, t₁) = A
        A move r to B
@@ -126,6 +128,8 @@ Proof:
 ```
 
 ### Lemma 2: 借用不转移所有权
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 Given: owner(r, t) = A

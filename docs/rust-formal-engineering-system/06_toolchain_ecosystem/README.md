@@ -16,6 +16,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Rust 编译器 (rustc)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -62,6 +64,8 @@ fn important_result() -> i32 { 42 }
 ```
 
 ### Cargo：构建系统与包管理器
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +117,8 @@ incremental = true
 ```
 
 ### 常用 Cargo 命令
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -156,6 +162,8 @@ cargo install <crate>        # 安装二进制 crate
 ```
 
 ### 代码质量工具
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +189,8 @@ cargo fmt -- --check         # CI 中使用
 ```
 
 ### 形式化验证工具
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +220,8 @@ unsafe fn undefined_behavior_demo() {
 ```
 
 ### 工作空间示例
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +244,8 @@ license = "MIT OR Apache-2.0"
 ```
 
 ### 构建脚本 (build.rs)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 

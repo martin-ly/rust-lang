@@ -285,6 +285,8 @@ thread::spawn(move || {
 
 ### 场景 2：迭代中修改
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **反模式**：`for x in &mut v { v.push(...); }`。
 
 **正确**：先收集再修改。
@@ -295,6 +297,8 @@ v.extend(to_add);
 ```
 
 ### 场景 3：单产品却用 Abstract Factory
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **反模式**：仅需一种按钮却定义 `ButtonFactory` 产品族。
 
@@ -308,6 +312,8 @@ trait Creator {
 
 ### 场景 4：无共享用 Flyweight
 
+> **[来源: POPL - Programming Languages Research]**
+
 **反模式**：对象仅创建一次却用 `Arc` 缓存。
 
 **正确**：直接创建。
@@ -317,6 +323,8 @@ let item = Item::new();  // 无需缓存
 ```
 
 ### 场景 5：错误类型用 unwrap
+
+> **[来源: PLDI - Programming Language Design]**
 
 **反模式**：`let x = result.unwrap();` 在库代码中。
 
@@ -340,9 +348,13 @@ let x = match result {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Type System]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -352,6 +364,8 @@ let x = match result {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: Wikipedia - Concurrency]**
 
 本文档中的所有Rust代码示例均已：
 

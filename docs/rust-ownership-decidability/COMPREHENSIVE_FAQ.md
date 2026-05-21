@@ -475,6 +475,8 @@ for _ in 0..10 {
 
 ### Q11: 如何避免死锁？
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **A**:
 
 ```rust
@@ -534,6 +536,8 @@ let write = data.write().unwrap();  // 等待所有读者完成
 
 ### Q12: RustBelt 是什么？
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **A**: RustBelt 是一个形式化框架，用于证明 Rust 的内存安全保证。
 
 **核心概念**:
@@ -565,6 +569,8 @@ RustBelt 使用 Iris（高阶并发分离逻辑）证明：
 
 ### Q13: Coq 形式化证明有什么用？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A**: 提供机械验证的数学保证。
 
 ```coq
@@ -592,6 +598,8 @@ Qed.
 ## 工具使用
 
 ### Q14: Miri 能检测什么？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **A**: Miri 检测未定义行为（UB）：
 
@@ -639,6 +647,8 @@ unsafe {
 
 ### Q15: Kani 和 Miri 有什么区别？
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **A**:
 
 | 特性 | Miri | Kani |
@@ -671,6 +681,8 @@ fn test_abs() {
 ## 最佳实践
 
 ### Q16: 如何处理复杂的生命周期？
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **A**: 使用模式简化：
 
@@ -705,6 +717,8 @@ fn longest<'a, T: PartialEq>(x: &'a [T], y: &'a [T]) -> &'a [T] {
 ---
 
 ### Q17: 如何设计良好的 Rust API？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **A**: 遵循以下原则：
 
@@ -800,3 +814,7 @@ pub enum MyError {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**

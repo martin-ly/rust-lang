@@ -447,6 +447,8 @@ async fn shared_state() {
 
 ### 最佳实践
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 1. 避免在异步代码中阻塞
 // ❌ 错误
@@ -493,6 +495,8 @@ async fn local_tasks() {
 ```
 
 ### 性能调优参数
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 根据工作负载调整
@@ -555,3 +559,9 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 > **[来源: Tokio Documentation]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

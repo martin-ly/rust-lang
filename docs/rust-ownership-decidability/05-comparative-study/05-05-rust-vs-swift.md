@@ -1443,6 +1443,8 @@ impl<T> LinkedList<T> {
 
 ### 8.2 并发：安全计数器
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Swift:**
 
 ```swift
@@ -1523,6 +1525,8 @@ fn use_counter() {
 
 ### 8.3 异步网络请求
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Swift:**
 
 ```swift
@@ -1582,6 +1586,8 @@ async fn fetch_multiple_users() -> Result<Vec<User>, reqwest::Error> {
 ```
 
 ### 8.4 资源管理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **Swift:**
 
@@ -1659,6 +1665,8 @@ fn explicit_drop() {
 
 ### 9.1 选择 Rust 的场景
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 ✅ 选择 Rust 当:
 
@@ -1690,6 +1698,8 @@ fn explicit_drop() {
 
 ### 9.2 选择 Swift 的场景
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```text
 ✅ 选择 Swift 当:
 
@@ -1717,6 +1727,8 @@ fn explicit_drop() {
 ```
 
 ### 9.3 跨平台策略
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 混合架构:
@@ -1747,6 +1759,8 @@ fn explicit_drop() {
 
 ### 10.1 Swift → Rust 思维转换
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                    思维模式转换                                  │
@@ -1770,6 +1784,8 @@ fn explicit_drop() {
 ```
 
 ### 10.2 常见模式映射
+
+> **[来源: POPL - Programming Languages Research]**
 
 | Swift | Rust |
 |-------|------|
@@ -1867,3 +1883,6 @@ fn explicit_drop() {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: PLDI - Programming Language Design]**

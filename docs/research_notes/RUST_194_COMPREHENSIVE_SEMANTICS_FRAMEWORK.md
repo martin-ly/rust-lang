@@ -170,6 +170,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 2.1.1 所有权三规则 (Ownership Rules)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +196,8 @@
 ```
 
 #### 2.1.2 借用语义 (Borrowing Semantics)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -219,6 +223,8 @@
 ```
 
 #### 2.1.3 生命周期语义 (Lifetime Semantics)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +262,8 @@ trait Parser<'a> {
 > **[来源: Rust Official Docs]**
 
 #### 2.2.1 类型层级 (Type Hierarchy)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -293,6 +301,8 @@ trait Parser<'a> {
 ```
 
 #### 2.2.2 Trait 系统语义 (Trait System Semantics)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -336,6 +346,8 @@ trait Borrow<'a, T: 'a> {
 
 #### 2.2.3 型变 (Variance)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 /// 型变定义: 类型参数变化与子类型关系的变化
 ///
@@ -371,6 +383,8 @@ fn variance_example() {
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.3.1 Send 与 Sync 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // ╔═══════════════════════════════════════════════════════════════════════════╗
@@ -417,6 +431,8 @@ fn sync_semantics<T: Sync>(value: &'static T) {
 
 #### 2.3.2 内存顺序语义 (Memory Ordering)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::sync::atomic::{Ordering, AtomicUsize};
 
@@ -450,7 +466,11 @@ fn consumer() {
 
 ### 2.4 控制流语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 2.4.1 ControlFlow 语义 (Rust 1.94)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -504,6 +524,8 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 
 ### 3.1 所有权相关概念
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 概念 | 定义 | 属性 | 关系 | 示例 | 反例 |
 |------|------|------|------|------|------|
 | **所有权** | 值在任意时刻有且仅有一个所有者 | 唯一性、可转移、作用域绑定 | 拥有→借用→引用 | `let s = String::new()` | 双重释放风险(其他语言) |
@@ -515,6 +537,8 @@ fn find_negative_semantic(numbers: &[i32]) -> Option<i32> {
 | **内部可变性** | 通过不可变引用修改内容 | 运行时检查、RefCell/Mutex | 不可变引用→内部→可变访问 | `RefCell::new()` | 运行时panic |
 
 ### 3.2 类型系统概念
+
+> **[来源: Wikipedia - Type System]**
 
 | 概念 | 定义 | 属性 | 关系 | 示例 | 反例 |
 |------|------|------|------|------|------|

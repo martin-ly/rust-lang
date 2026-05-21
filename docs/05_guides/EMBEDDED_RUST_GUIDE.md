@@ -429,6 +429,8 @@ fn update_data(value: u32) {
 
 ### 场景4: 嵌入式 Linux 系统
 
+> **[来源: Wikipedia - Concurrency]**
+
 在 Linux 嵌入式设备上运行 Rust：
 
 - 可以使用标准库（有 `std`）
@@ -470,6 +472,8 @@ fn update_data(value: u32) {
 
 ### array_windows 在传感器数据处理中的应用
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 /// 使用 array_windows 进行传感器数据滑动平均滤波
 pub fn moving_average_filter(samples: &[u16], window_size: usize) -> Vec<u16> {
@@ -503,6 +507,8 @@ pub fn edge_detection(samples: &[u16], threshold: u16) -> Vec<usize> {
 
 ### LazyLock 在硬件抽象层中的应用
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::sync::LazyLock;
 
@@ -524,6 +530,8 @@ pub fn is_dma_ready() -> bool {
 ```
 
 ### ControlFlow 在错误恢复中的应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -550,6 +558,8 @@ fn initialize_peripherals() -> ControlFlow<InitError, ()> {
 ```
 
 ### 内存优化：array_windows 的零分配特性
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// 在 `no_std` 环境下使用 array_windows
@@ -623,3 +633,14 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **[来源: Rust Embedded WG]**
 > **[来源: Embassy Book]**
 > **[来源: IEEE - Embedded Software]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

@@ -207,9 +207,13 @@
 
 ### 3.1 Rust 1.94 稳定化特性
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 基于 releases.rs 和官方信息，需要整合的特性：
 
 #### 语言特性
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 状态 | 影响模块 | 文档更新 |
 | :--- | :--- | :--- | :--- |
@@ -221,12 +225,16 @@
 
 #### 标准库 API
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | API | 模块 | 文档更新 |
 | :--- | :--- | :--- |
 | `VecDeque::truncate_front` | C08 | 添加算法分析 |
 | `ControlFlow::ok` | C03, C06 | 添加异步示例 |
 
 #### Cargo 特性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 特性 | 文档更新 |
 | :--- | :--- |
@@ -235,6 +243,8 @@
 | `config-include` | 添加 Cargo 配置指南 |
 
 ### 3.2 Rust 1.95 Nightly 实验特性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 特性 | 研究方向 | 文档计划 |
 | :--- | :--- | :--- |

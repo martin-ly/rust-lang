@@ -184,6 +184,8 @@
 | 4.3 The Slice Type | 切片、字符串 slice | `crates/c02_type_system/src/slice_examples.rs` | 切片边界检查分析 |
 
 #### 第5章：Using Structs
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +196,8 @@
 | 5.3 Methods | 方法定义、关联函数 | [type_system](../02_reference/quick_reference/type_system.md) § Methods | 方法解析规则 |
 
 #### 第6章：Enums and Pattern Matching
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +208,8 @@
 | 6.3 Concise Control Flow with if let and let else | if let、let-else | `crates/c03_control_fn/src/` | 模式匹配决策树 |
 
 #### 第7章：Packages, Crates, and Modules
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +223,8 @@
 
 #### 第8章：Common Collections
 
+> **[来源: Wikipedia - Type System]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 8.1 Storing Lists of Values with Vectors | Vec | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § Vec | Vec 内存布局 |
@@ -224,6 +232,8 @@
 | 8.3 Storing Keys with Associated Values in Hash Maps | HashMap | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § HashMap | 哈希算法比较 |
 
 #### 第9章：Error Handling
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -233,6 +243,8 @@
 
 #### 第10章：Generic Types, Traits, and Lifetimes
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 10.1 Generic Data Types | 泛型函数、结构体 | [generics_cheatsheet](../02_reference/quick_reference/generics_cheatsheet.md) | 单态化机制 |
@@ -241,6 +253,8 @@
 
 #### 第11章：Writing Automated Tests
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 11.1 How to Write Tests | 测试函数、assert | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § 单元测试 | 测试覆盖率工具 |
@@ -248,6 +262,8 @@
 | 11.3 Test Organization | 单元/集成测试 | [testing_cheatsheet](../02_reference/quick_reference/testing_cheatsheet.md) § 测试组织 | 测试架构模式 |
 
 #### 第12章：An I/O Project
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -260,6 +276,8 @@
 
 #### 第13章：Functional Language Features
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 13.1 Closures | 闭包、捕获环境 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) | 闭包内存布局 |
@@ -268,6 +286,8 @@
 | 13.4 Performance in Loops vs. Iterators | 性能比较 | [collections_iterators_cheatsheet](../02_reference/quick_reference/collections_iterators_cheatsheet.md) § 性能 | 零成本抽象证明 |
 
 #### 第14章：More about Cargo and Crates.io
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -278,6 +298,8 @@
 | 14.5 Extending Cargo with Custom Commands | 自定义命令 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) § 扩展 | cargo-make 等 |
 
 #### 第15章：Smart Pointers
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -290,6 +312,8 @@
 
 #### 第16章：Fearless Concurrency
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 16.1 Using Threads to Run Code Simultaneously | 线程创建、join | [threads_concurrency_cheatsheet](../02_reference/quick_reference/threads_concurrency_cheatsheet.md) § 线程 | 线程池实现 |
@@ -298,6 +322,8 @@
 | 16.4 Extensible Concurrency with Send and Sync | Send、Sync | [send_sync_formalization](../research_notes/formal_methods/send_sync_formalization.md) | 形式化证明 |
 
 #### 第17章：Asynchronous Programming
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
@@ -310,6 +336,8 @@
 
 #### 第18章：Object Oriented Programming Features
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 18.1 Characteristics of Object-Oriented Languages | OOP 特性对比 | [design_patterns](../../crates/c09_design_pattern/docs/README.md) § OOP | 设计模式映射 |
@@ -318,6 +346,8 @@
 
 #### 第19章：Patterns and Matching
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | 19.1 All the Places Patterns Can Be Used | 模式使用位置 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 模式匹配决策树 |
@@ -325,6 +355,8 @@
 | 19.3 Pattern Syntax | 模式语法大全 | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 模式 | 高级模式技巧 |
 
 #### 第20章：Advanced Features
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 小节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|

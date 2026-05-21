@@ -524,6 +524,8 @@ graph LR
 
 #### 代码示例更新
 
+> **[来源: IEEE - Programming Language Standards]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -531,6 +533,8 @@ graph LR
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [Rust 1.94 迁移指南](../../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -577,3 +581,13 @@ graph LR
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**

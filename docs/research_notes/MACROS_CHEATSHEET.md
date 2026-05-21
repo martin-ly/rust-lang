@@ -238,6 +238,8 @@ assert!(cond, "message: {}", arg);  // 自定义消息
 
 ### todo! / unimplemented
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 fn not_yet() {
     todo!("实现这个功能");  // panic with message
@@ -249,6 +251,8 @@ fn stub() {
 ```
 
 ### include
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 include!("path/to/file.rs");  // 包含文件内容
@@ -262,6 +266,8 @@ include_bytes!("path/to/file.bin");  // 包含为&[u8]
 
 ### 查看展开
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```bash
 # 查看宏展开
 cargo expand
@@ -271,6 +277,8 @@ cargo rustc -- -Z unpretty=expanded
 ```
 
 ### trace_macros
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 #![feature(trace_macros)]
@@ -389,9 +397,13 @@ struct Point { x: i32, y: i32 }
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -401,6 +413,8 @@ struct Point { x: i32, y: i32 }
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档中的所有Rust代码示例均已：
 

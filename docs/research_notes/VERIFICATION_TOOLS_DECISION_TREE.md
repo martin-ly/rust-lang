@@ -113,6 +113,8 @@
 | 死锁检测 | Lockbud | - |
 
 ### 2.2 按经验水平选择
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +131,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 第一层：验证目标
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +165,8 @@
 ```
 
 ### 3.2 第二层：项目约束
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +190,8 @@
 ```
 
 ### 3.3 第三层：团队能力
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +222,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 4.1 场景矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,7 +239,11 @@
 
 ### 4.2 典型决策路径
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 路径 A：学术研究
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 需求分析
@@ -245,6 +259,8 @@
 ```
 
 #### 路径 B：工业应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 需求分析

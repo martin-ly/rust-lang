@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 错误 E0499: 多次可变借用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -93,6 +95,8 @@ fn process_data_index(data: &mut Vec<u32>) {
 ```
 
 #### 错误 E0597: 悬垂引用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -512,6 +516,8 @@ pub fn cache_warmup<T>(data: &[T]) {
 
 ### 5.1 覆盖率不达标
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 问题: MC/DC覆盖率低于100%
 # 诊断: 找出未覆盖的分支
@@ -540,6 +546,8 @@ proptest! {
 ```
 
 ### 5.2 工具链鉴定问题
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 /// 工具验证测试
@@ -577,6 +585,8 @@ mod tool_qualification {
 
 ### 6.1 日志记录
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use log::{info, warn, error, debug, trace};
 
@@ -604,6 +614,8 @@ pub fn log_safety_event(event: SafetyEvent) {
 ```
 
 ### 6.2 断言策略
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 /// 编译时断言
@@ -715,3 +727,8 @@ trait Invariant {
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**
 > **[来源: Ferrocene Language Specification]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**

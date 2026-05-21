@@ -247,6 +247,8 @@ let y = x;  // OK，x 被移动
 
 ### 2.2 Java 的类型系统
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **Java 的类型系统特点**：
 
 ```java
@@ -297,6 +299,8 @@ Rust 内存模型：
 
 ### 3.1 Cyclone：区域类型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Cyclone 语言（2000s）**：
 
 ```cyclone
@@ -330,6 +334,8 @@ Rust：显式 'a + 生命周期省略规则
 ```
 
 ### 3.2 ATS：依赖类型 + 线性类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **ATS 语言**：
 

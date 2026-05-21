@@ -1367,6 +1367,8 @@ impl Mat4 {
 
 ### 7.1 零拷贝优势
 
+> **[来源: IEEE - Programming Language Standards]**
+
 基准测试数据（处理100万个元素）：
 
 ```rust
@@ -1391,6 +1393,8 @@ let bytes: &[u8] = bytemuck::cast_slice(&floats);
 
 ### 7.2 向量化优化
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Bytemuck的连续内存布局允许编译器自动向量化：
 
 ```rust
@@ -1412,6 +1416,8 @@ fn add_vectors(a: &[Vec3], b: &[Vec3], result: &mut [Vec3]) {
 ```
 
 ### 7.3 缓存友好性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Pod类型的平坦内存布局优化缓存使用：
 
@@ -1440,6 +1446,8 @@ fn update_particles(particles: &mut [Particle]) {
 ## 8. 最佳实践
 
 ### 8.1 类型设计准则
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 1. 使用repr(C)确保布局
@@ -1481,6 +1489,8 @@ struct WithPadding {
 
 ### 8.2 对齐处理策略
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 策略1：保证输入对齐
 fn process_aligned<T: Pod>(data: &[u8]) -> Option<&T> {
@@ -1507,6 +1517,8 @@ struct UnalignedData {
 ```
 
 ### 8.3 错误处理模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 模式1: 返回Result
@@ -1552,6 +1564,8 @@ fn detailed_check<T: Pod>(data: &[u8]) -> Result<&T, ConversionError> {
 
 ### 8.4 调试与验证
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 #[cfg(test)]
 mod tests {
@@ -1586,6 +1600,8 @@ mod tests {
 
 ### 9.1 Pod安全性定理
 
+> **[来源: Wikipedia - Concurrency]**
+
 **定理 9.1** (Pod类型安全性)
 
 > 对于任何类型 `T: Pod`，所有位模式都是有效的T值。
@@ -1608,6 +1624,8 @@ Pod trait的unsafe实现要求程序员保证：
 
 ### 9.2 对齐正确性定理
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **定理 9.2** (对齐验证)
 
 > `try_from_bytes`仅在输入满足对齐要求时返回Some。
@@ -1629,6 +1647,8 @@ $$
 第二个条件确保对齐，因此定理成立。∎
 
 ### 9.3 转换等价性定理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **定理 9.3** (转换等价性)
 

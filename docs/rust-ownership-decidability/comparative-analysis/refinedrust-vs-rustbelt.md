@@ -46,6 +46,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 项目背景
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -65,6 +67,8 @@
 
 ### 1.2 核心目标对比
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 维度 | RustBelt | RefinedRust |
 |------|----------|-------------|
 | **主要目标** | 证明内存安全 | 验证功能正确性 |
@@ -78,6 +82,8 @@
 ## 2. 架构对比
 
 ### 2.1 高层架构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **RustBelt 架构**:
 
@@ -150,6 +156,8 @@
 
 ### 2.2 技术栈对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 组件 | RustBelt | RefinedRust | 说明 |
 |------|----------|-------------|------|
 | **证明助理** | Coq | Coq | 相同 |
@@ -164,6 +172,8 @@
 ## 3. 形式化模型对比
 
 ### 3.1 编程语言抽象
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **RustBelt: λRust**
 

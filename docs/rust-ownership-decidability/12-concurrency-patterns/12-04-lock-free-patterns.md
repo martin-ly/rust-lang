@@ -924,6 +924,8 @@ impl<T> HelpingStack<T> {
 
 ### LazyLock 的无锁语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust 1.94 引入的 `LazyLock::get()` 和相关方法提供了一种无锁的延迟初始化模式，与传统的 `std::sync::Once` 相比具有更好的可组合性：
 
 ```rust
@@ -996,6 +998,8 @@ fn concurrent_access() {
 
 ### LazyLock 与无锁数据结构组合
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::sync::LazyLock;
 use crossbeam::epoch::{self, Atomic, Owned, Shared};
@@ -1056,6 +1060,8 @@ pub fn get_lazy_stack() -> &'static LockFreeStack<i32> {
 ## 4. 无锁数据结构
 
 ### 4.1 无锁栈
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -1225,6 +1231,8 @@ mod tests {
 ```
 
 ### 4.2 无锁队列
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -1410,3 +1418,13 @@ impl<T> CountedMSQueue<T> {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

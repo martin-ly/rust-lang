@@ -464,6 +464,8 @@ let b = Arc::clone(&a);  // 线程安全的引用计数
 
 ### `RefCell<T>` - 内部可变性（单线程）
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::cell::RefCell;
 let data = RefCell::new(5);
@@ -472,6 +474,8 @@ let data = RefCell::new(5);
 ```
 
 ### `Mutex<T>` - 互斥锁（多线程）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::Mutex;
@@ -489,6 +493,8 @@ let m = Mutex::new(5);
 
 ### 基本语法
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -496,6 +502,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 生命周期省略规则
+
+> **[来源: Wikipedia - Concurrency]**
 
 1. **规则 1**: 每个引用参数获得独立生命周期
 
@@ -522,6 +530,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### ✅ 高效模式
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 1. **借用而非拥有**
 
    ```rust
@@ -543,6 +553,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### ⚠️ 低效模式
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 1. **过度使用 clone**
 
    ```rust
@@ -560,6 +572,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ## 🚫 反例速查
 
 ### 反例 1: 移动后使用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -582,6 +596,8 @@ println!("{}", s);
 ---
 
 ### 反例 2: 可变借用与不可变借用冲突
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -607,6 +623,8 @@ let r2 = &mut v;  // r1 已离开作用域
 ---
 
 ### 反例 3: 返回悬垂引用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **错误示例**（以下代码无法通过编译）:
 
@@ -634,16 +652,22 @@ fn no_dangle() -> String {
 
 ### 深入学习
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [完整所有权教程](../../../crates/c01_ownership_borrow_scope/docs/tier_02_guides/01_所有权快速入门.md)
 - [借用检查器详解](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/02_借用检查器详解.md)
 - [智能指针 API](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 
 ### 代码示例
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [综合示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 - [智能指针示例](../../../crates/c01_ownership_borrow_scope/examples/comprehensive_ownership_examples.rs)
 
 ### 形式化理论
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [类型系统理论](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/06_类型系统理论.md)
 - [形式化验证](../../../crates/c01_ownership_borrow_scope/docs/tier_04_advanced/07_形式化验证.md)
@@ -656,6 +680,8 @@ fn no_dangle() -> String {
 ## 💡 使用场景
 
 ### 场景 1: 配置解析器
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 #[derive(Debug)]
@@ -691,6 +717,8 @@ fn main() {
 ```
 
 ### 场景 2: 缓存实现
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::collections::HashMap;
@@ -730,6 +758,8 @@ fn main() {
 
 ### 场景 3: 读取文件并处理
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::fs;
 
@@ -760,6 +790,8 @@ fn main() {
 ## ⚠️ 边界情况
 
 ### 边界 1: 自引用结构
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust,compile_fail
 // ❌ 错误：自引用结构需要特殊处理

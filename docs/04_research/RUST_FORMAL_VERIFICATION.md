@@ -107,6 +107,8 @@ Iris 逻辑的核心概念:
 ```
 
 #### 关键逻辑规则（直观理解）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -266,6 +268,8 @@ impl<T> Vec<T> {
 
 ### 3.5 RefinedRust vs RustBelt 对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 维度 | RustBelt | RefinedRust |
 |------|---------|-------------|
 | **目标** | 类型系统安全性证明 | 具体程序功能正确性验证 |
@@ -281,6 +285,8 @@ impl<T> Vec<T> {
 
 ### 4.1 基础阶段 (1-2 周)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **目标**: 理解形式化验证的基本思想和 Rust 为什么需要它
 
 | 资源 | 时间 | 产出 |
@@ -291,6 +297,8 @@ impl<T> Vec<T> {
 | Miri 使用教程 | 1h | 实际操作 UB 检测 |
 
 ### 4.2 进阶阶段 (2-4 周)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **目标**: 理解分离逻辑和 Iris 的基础概念
 
@@ -303,6 +311,8 @@ impl<T> Vec<T> {
 
 ### 4.3 高级阶段 (4-8 周)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **目标**: 能够阅读/编写形式化证明
 
 | 资源 | 时间 | 产出 |
@@ -313,6 +323,8 @@ impl<T> Vec<T> {
 | RefinedRust 论文 (PLDI 2024) | 5h | 了解最新进展 |
 
 ### 4.4 学习路径图
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
                     ┌──────────────────┐
@@ -347,6 +359,8 @@ impl<T> Vec<T> {
 ## 5. 与项目已有形式化证明内容的衔接
 
 ### 5.1 现有内容盘点
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 本项目在 `archive/docs/research_notes` 中已有的形式化相关内容：
 

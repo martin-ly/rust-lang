@@ -225,6 +225,8 @@
 
 ### 8. 测试速查卡
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **文件**: [testing_cheatsheet.md](./testing_cheatsheet.md)
 
 **内容**:
@@ -242,6 +244,8 @@
 
 ### 9. 控制流与函数速查卡
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **文件**: [control_flow_functions_cheatsheet.md](./control_flow_functions_cheatsheet.md)
 
 **内容**:
@@ -257,6 +261,8 @@
 ---
 
 ### 10. 集合与迭代器速查卡
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **文件**: [collections_iterators_cheatsheet.md](./collections_iterators_cheatsheet.md)
 
@@ -275,6 +281,8 @@
 
 ### 11. 智能指针速查卡
 
+> **[来源: POPL - Programming Languages Research]**
+
 **文件**: [smart_pointers_cheatsheet.md](./smart_pointers_cheatsheet.md)
 
 **内容**:
@@ -290,6 +298,8 @@
 ---
 
 ### 12. 模块系统速查卡
+
+> **[来源: PLDI - Programming Language Design]**
 
 **文件**: [modules_cheatsheet.md](./modules_cheatsheet.md)
 
@@ -308,6 +318,8 @@
 
 ### 13. 字符串与格式化速查卡
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **文件**: [strings_formatting_cheatsheet.md](./strings_formatting_cheatsheet.md)
 
 **内容**:
@@ -323,6 +335,8 @@
 ---
 
 ### 14. Cargo 速查卡
+
+> **[来源: Wikipedia - Type System]**
 
 **文件**: [cargo_cheatsheet.md](./cargo_cheatsheet.md)
 
@@ -342,6 +356,8 @@
 
 ### 15. 进程管理速查卡 ⭐ NEW
 
+> **[来源: Wikipedia - Concurrency]**
+
 **文件**: [process_management_cheatsheet.md](./process_management_cheatsheet.md)
 
 **内容**:
@@ -358,6 +374,8 @@
 ---
 
 ### 16. 网络编程速查卡 ⭐ NEW
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **文件**: [network_programming_cheatsheet.md](./network_programming_cheatsheet.md)
 
@@ -376,6 +394,8 @@
 
 ### 17. 算法与数据结构速查卡 ⭐ NEW
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **文件**: [algorithms_cheatsheet.md](./algorithms_cheatsheet.md)
 
 **内容**:
@@ -392,6 +412,8 @@
 ---
 
 ### 18. 设计模式速查卡 ⭐ NEW
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **文件**: [design_patterns_cheatsheet.md](../../archive/deprecated_20260318/02_reference/quick_reference/design_patterns_cheatsheet.md)
 

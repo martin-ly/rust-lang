@@ -66,6 +66,8 @@
 Tree Borrows 是 Rust 内存模型的最新研究成果，旨在替代 Stacked Borrows 成为 Rust 的标准别名模型。
 
 ### 核心改进
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@ Tree Borrows (新模型)
 
 ### 关键区别示例
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // 示例: 通过引用重新借用
 fn example() {
@@ -113,6 +117,8 @@ fn example() {
 ## 🌳 核心概念
 
 ### 树结构
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 Stacked Borrows 视图:

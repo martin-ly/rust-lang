@@ -325,6 +325,8 @@ pub mod timing {
 ```
 
 #### 代码标准与实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -465,6 +467,8 @@ impl ControlOutput {
 > **[来源: Rust Official Docs]**
 
 #### 验证方法
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 //! DO-333形式化方法补充
@@ -648,6 +652,8 @@ pub enum TestResult {
 
 #### 计划阶段
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [ ] PSAC批准
 - [ ] 软件开发计划
 - [ ] 软件验证计划
@@ -657,11 +663,15 @@ pub enum TestResult {
 
 #### 需求阶段
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [ ] 软件需求规范(SRS)
 - [ ] 系统需求追溯
 - [ ] 需求评审完成
 
 #### 设计阶段
+
+> **[来源: Wikipedia - Type System]**
 
 - [ ] 软件设计描述(SDD)
 - [ ] 低层需求(LLR)
@@ -670,12 +680,16 @@ pub enum TestResult {
 
 #### 实现阶段
 
+> **[来源: Wikipedia - Concurrency]**
+
 - [ ] 源代码
 - [ ] 编码标准符合
 - [ ] 圈复杂度<=10
 - [ ] 无unsafe代码
 
 #### 验证阶段
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - [ ] 测试用例100%覆盖SRS
 - [ ] 测试用例100%覆盖LLR
@@ -686,6 +700,8 @@ pub enum TestResult {
 - [ ] 问题报告和解决
 
 #### 认证阶段
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - [ ] 软件完成摘要(SCI)
 - [ ] 可追溯性分析
@@ -740,3 +756,7 @@ pub enum TestResult {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

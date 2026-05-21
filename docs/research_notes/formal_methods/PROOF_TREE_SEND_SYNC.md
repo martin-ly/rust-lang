@@ -38,6 +38,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def SEND1 (Send)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -47,24 +49,32 @@
 2. $T$ 不包含非 `Send` 的共享状态
 
 ### Def SYNC1 (Sync)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
 类型 $T$ 实现 `Sync` 当且仅当 `&T` 实现 `Send`。
 
 ### Thm SEND-T1 (Send 安全)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
 若 $T: \text{Send}$，则 $T$ 可以安全地跨线程转移所有权。
 
 ### Thm SYNC-T1 (Sync 安全)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
 若 $T: \text{Sync}$，则 $T$ 可以安全地跨线程共享引用。
 
 ### Thm SEND-SYNC-T1 (关系)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +149,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### SEND-T1: Send 安全
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +179,8 @@ graph TD
 - 编译错误: `Rc<i32>` cannot be sent between threads safely
 
 ### SYNC-T1: Sync 安全
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

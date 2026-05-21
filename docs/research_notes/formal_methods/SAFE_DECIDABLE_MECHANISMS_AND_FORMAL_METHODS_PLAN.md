@@ -44,6 +44,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 现状简述
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
      - **推理证明树**在「机制 ↔ Def/Axiom/定理」层面的统一索引（与 PROOF_INDEX 互补的“按机制查证明”视图）。
 
 ### 1.2 具体建议
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +85,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 何为“安全的可判定的机制”
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +96,8 @@
 示例：所有权、借用、生命周期、Send、Sync、Unpin（及 async 的 Send 边界）、match 穷尽、for/IntoIterator、? 的 Result 类型等，均为**静态可判定**；RefCell 的借用为**运行时**可判定（panic）；死锁、进度则为**不可判定**（需额外方法或规范）。
 
 ### 2.2 建议的“安全可判定机制”清单与形式化对应
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

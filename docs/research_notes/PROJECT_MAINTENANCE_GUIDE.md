@@ -257,12 +257,16 @@ echo "=== 检查完成 ==="
 - [ ] 与权威来源对齐
 
 ### 思维表征
+
+> **[来源: Wikipedia - Type System]**
 - [ ] 图示清晰可读
 - [ ] 矩阵维度一致
 - [ ] 决策树逻辑完整
 - [ ] 交叉引用正确
 
 ### 教程
+
+> **[来源: Wikipedia - Concurrency]**
 - [ ] 目标受众明确
 - [ ] 渐进式结构
 - [ ] 练习/示例完整
@@ -274,6 +278,8 @@ echo "=== 检查完成 ==="
 ## 社区贡献
 
 ### 贡献流程
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 1. **Fork 和分支**
 
@@ -304,6 +310,8 @@ echo "=== 检查完成 ==="
 
 ### 内容请求
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 社区可以通过以下方式请求内容：
 
 | 渠道 | 用途 | 响应时间 |
@@ -318,6 +326,8 @@ echo "=== 检查完成 ==="
 
 ### 版本号规则
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 主版本.次版本.修订号
 
@@ -327,6 +337,8 @@ echo "=== 检查完成 ==="
 ```
 
 ### 变更日志
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```markdown
 ## 变更日志

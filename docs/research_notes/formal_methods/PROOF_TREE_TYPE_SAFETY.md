@@ -33,6 +33,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Thm TY-T1 (类型安全)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +113,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 进展性 (Progress)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +146,8 @@ graph TD
 - 若是值，则 $e$ 是值 (引用值)
 
 ### 保持性 (Preservation)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

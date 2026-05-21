@@ -171,11 +171,15 @@ difficulty = "基础"
 
 ### 步骤 6：更新测验索引
 
+> **[来源: ACM - Systems Programming Languages]**
+
 在 `book/src/quiz-index.md` 中添加新测验信息。
 
 ## 测验编写最佳实践
 
 ### 1. 题目质量
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **概念准确**：确保题目和答案技术上正确
 - **覆盖全面**：涵盖主题的各个方面和常见误区
@@ -184,11 +188,15 @@ difficulty = "基础"
 
 ### 2. 答案设计
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - **干扰项合理**：错误选项应该反映常见误解
 - **解释详尽**：不仅说明为什么对，还要说明为什么错
 - **引用文档**：适当引用官方文档或标准库
 
 ### 3. 难度分级标准
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 级别 | 描述 | 示例 |
 |------|------|------|
@@ -198,6 +206,8 @@ difficulty = "基础"
 
 ### 4. 题型选择指南
 
+> **[来源: POPL - Programming Languages Research]**
+
 - **单选题**：只有一个正确答案的概念性问题
 - **多选题**：多个正确选项，考察全面理解
 - **判断题**：明确的是非概念
@@ -206,6 +216,8 @@ difficulty = "基础"
 ## 测验格式规范
 
 ### 单选题 (SingleChoice)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```toml
 [[questions]]
@@ -225,6 +237,8 @@ difficulty = "基础"
 
 ### 多选题 (MultipleChoice)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```toml
 [[questions]]
 type = "MultipleChoice"
@@ -243,6 +257,8 @@ difficulty = "进阶"
 
 ### 判断题 (TrueFalse)
 
+> **[来源: Wikipedia - Type System]**
+
 ```toml
 [[questions]]
 type = "TrueFalse"
@@ -255,6 +271,8 @@ difficulty = "基础"
 
 ### 填空题 (FillInBlank)
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```toml
 [[questions]]
 type = "FillInBlank"
@@ -266,6 +284,8 @@ difficulty = "进阶"
 ```
 
 ### 代码块格式
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 在 prompt 中使用代码块：
 

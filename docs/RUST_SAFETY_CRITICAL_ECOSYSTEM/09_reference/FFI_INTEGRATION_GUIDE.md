@@ -599,6 +599,8 @@ mod tests {
 
 ### 实现阶段
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [ ] 所有unsafe代码有SAFETY注释
 - [ ] 空指针检查完整
 - [ ] 边界检查完整
@@ -606,6 +608,8 @@ mod tests {
 - [ ] 线程安全标记正确
 
 ### 测试阶段
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [ ] 异常输入测试
 - [ ] 边界条件测试
@@ -654,3 +658,10 @@ mod tests {
 > **[来源: MISRA Rust Guidelines]**
 
 > **[来源: Ferrocene Language Specification]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

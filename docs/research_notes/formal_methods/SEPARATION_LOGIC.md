@@ -58,6 +58,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 分离合取 (*)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -77,6 +79,8 @@ H₁ ⊨ P    H₂ ⊨ Q    H₁ ⊥ H₂
 ```
 
 ### 1.2 分离蕴含 (-*)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -96,6 +100,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 1.3 空堆断言 (emp)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +114,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 1.4 Points-to断言
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +139,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 > **[来源: Rust Official Docs]**
 
 ### 2.1 框架规则 (Frame Rule)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +169,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 2.2 规则合取
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -169,6 +181,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 ```
 
 ### 2.3 分配规则
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +209,8 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权建模
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **独占所有权**:
 

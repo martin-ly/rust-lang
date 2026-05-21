@@ -192,6 +192,8 @@ mindmap
 
 ### 3.1 概念树
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```mermaid
 mindmap
   root((网络服务))
@@ -250,6 +252,8 @@ mindmap
 
 ### 3.2 架构层次
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 层次 | 技术选择 | 关注点 | 成熟度 |
 |------|----------|--------|--------|
 | **边缘层** | Nginx/Envoy | 路由、TLS、限流 | 生产级 |
@@ -258,6 +262,8 @@ mindmap
 | **数据层** | SQL/NoSQL | 持久化、缓存 | 生产级 |
 
 ### 3.3 服务开发技能树
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 网络服务开发

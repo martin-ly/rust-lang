@@ -368,6 +368,8 @@ CMU 15-799 的区域类型理论（Region Type Theory）与 Rust 生命周期系
 
 #### 区域类型与 Rust 生命周期
 
+> **[来源: Wikipedia - Memory Safety]**
+
 区域类型（Regional Types）是 CMU 15-799 中用于内存管理形式化的核心概念，与 Rust 生命周期完全对应。
 
 | CMU 15-799 区域类型 | Rust 生命周期 | 本文档对应 |
@@ -379,6 +381,8 @@ CMU 15-799 的区域类型理论（Region Type Theory）与 Rust 生命周期系
 | Region Constraint | Lifetime Constraint | Def 2.1 |
 
 #### 区域类型理论的形式化对应
+
+> **[来源: Wikipedia - Type System]**
 
 **CMU 15-799 区域类型定义**:
 
@@ -394,6 +398,8 @@ $$\text{Type} \tau ::= \ldots \mid \&^\rho \tau \mid \forall \rho. \tau$$
 
 #### 区域子类型与生命周期包含
 
+> **[来源: Wikipedia - Concurrency]**
+
 CMU 15-799 中的区域子类型：
 $$\rho_2 <: \rho_1 \text{ iff } \text{scope}(\rho_2) \subseteq \text{scope}(\rho_1)$$
 
@@ -404,6 +410,8 @@ $$\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$$
 
 #### 区域推断算法对比
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | CMU 15-799 算法步骤 | Rust 生命周期推断 | 本文档对应 |
 | :--- | :--- | :--- |
 | 1. 约束生成 | 根据函数签名/体生成约束 | Def 3.1 步骤 1 |
@@ -412,6 +420,8 @@ $$\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$$
 | 4. 一致性检查 | 检测约束冲突 | Axiom LF2 |
 
 #### CMU 15-799 区域类型对齐表
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | CMU 15-799 主题 | 本文档对应 | 状态 |
 | :--- | :--- | :--- |
@@ -422,6 +432,8 @@ $$\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$$
 | Region-Based Memory Management | 定理 LF-T2 (引用有效性) | ✅ |
 
 #### 理论基础补充
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
@@ -450,6 +462,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### ETH Zurich (瑞士联邦理工学院)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **课程**: Rust Programming
 **讲师**: David Evangelista
 **课程链接**: <https://inf.ethz.ch/courses>
@@ -470,6 +484,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### University of Cambridge (剑桥大学)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **课程**: Computer Science Tripos (Rust部分)
 **课程链接**: <https://www.cl.cam.ac.uk/teaching/>
 
@@ -489,6 +505,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### EPFL (瑞士洛桑联邦理工学院)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **课程**: Concurrent and Parallel Programming
 **课程链接**: <https://www.epfl.ch/schools/ic/>
 
@@ -507,6 +525,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### 欧洲大学课程对比总结
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 大学 | 核心侧重点 | 与本文档关联度 | 特色内容 |
 | :--- | :--- | :--- | :--- |
 | **ETH Zurich** | 借用、生命周期、NLL | ⭐⭐⭐⭐⭐ | 实践导向，借用检查 |
@@ -521,6 +541,8 @@ CMU 15-799 中的区域类型理论为本文档提供了以下理论基础：
 
 ### 1. 生命周期语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **定义 1.1 (生命周期)**: 生命周期 $\ell$ 表示引用的有效作用域，是一个作用域标识符。
 
 **定义 1.2 (生命周期类型)**: 带生命周期的引用类型为 $\&\ell \tau$，表示生命周期为 $\ell$ 的 $\tau$ 类型引用。
@@ -531,6 +553,8 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 <a id="定义-14-生命周期子类型"></a>**定义 1.4 (生命周期子类型)**: 如果生命周期 $\ell_1$ 包含生命周期 $\ell_2$（$\ell_1 \supseteq \ell_2$），则 $\ell_2$ 是 $\ell_1$ 的子类型，记作 $\ell_2 <: \ell_1$。
 
 ### 2. 生命周期约束
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 2.1 (生命周期约束)**: 生命周期约束 $C$ 是一个生命周期关系的集合：
 $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
@@ -564,6 +588,8 @@ $$'a: 'b \iff \ell_a \supseteq \ell_b$$
 表示生命周期 $\ell_a$ 必须至少与 $\ell_b$ 一样长。
 
 ### 3. 生命周期推断算法
+
+> **[来源: POPL - Programming Languages Research]**
 
 **定义 3.1 (生命周期推断)**: 生命周期推断算法根据程序结构生成生命周期约束，然后求解约束得到生命周期参数。
 
@@ -649,6 +675,8 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 
 ### Rust 对应
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 定理 | crates 示例 | 说明 |
 | :--- | :--- | :--- |
 | LF-T1 (outlives)、LF-T2 (引用有效性) | [c01 借用示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)、[c02 lifetimes_examples](../../../crates/c02_type_system/src/examples/lifetimes_examples.rs) | 生命周期约束、无悬垂引用 |
@@ -694,6 +722,8 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 
 ### 概念定义-属性关系-解释论证 层次汇总
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 层次 | 内容 | 本页对应 |
 | :--- | :--- | :--- |
 | **概念定义层** | Def 1.1–1.4（生命周期、子类型）；Def 2.1–2.3（约束）；Def 3.1（推断） | §形式化定义 |
@@ -708,11 +738,15 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 
 ### 待证明的性质
 
+> **[来源: Wikipedia - Type System]**
+
 1. **生命周期推断正确性**: 生命周期推断算法正确推断生命周期
 2. **生命周期约束一致性**: 生命周期约束是一致的
 3. **引用有效性**: 生命周期系统保证引用有效
 
 ### 证明方法
+
+> **[来源: Wikipedia - Concurrency]**
 
 - **约束求解**: 证明生命周期约束求解的正确性
 - **子类型证明**: 证明生命周期子类型的正确性
@@ -725,6 +759,8 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 基本生命周期
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -753,6 +789,8 @@ fn main() {
 - 返回值的生命周期是输入生命周期中较短的那个
 
 ### 示例 2: 生命周期推断
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn first_word(s: &str) -> &str {

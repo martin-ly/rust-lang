@@ -278,6 +278,8 @@ $$
 
 ### 3.3 Poll合约规则
 
+> **[来源: Wikipedia - Concurrency]**
+
 **定理 POLL-CONTRACT-1**:
 
 Future的poll实现必须满足：
@@ -303,6 +305,8 @@ Future的poll实现必须满足：
 
 ### 4.1 Pin的形式化语义
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 Pin<P<T>> where P: Deref
 ```
@@ -318,6 +322,8 @@ $$
 $$
 
 ### 4.2 自引用结构安全条件
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #[pin_project]
@@ -346,6 +352,8 @@ $$
 
 ### 4.3 Drop保证与Pin
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 impl<T> Drop for Pin<Box<T>> {
     fn drop(&mut self) {
@@ -370,6 +378,8 @@ $$
 ## 5. 执行器调度算法
 
 ### 5.1 工作窃取调度
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ┌──────────────┐     ┌──────────────┐
@@ -410,6 +420,8 @@ $$
 $$
 
 ### 5.2 多级反馈队列
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 优先级队列结构:

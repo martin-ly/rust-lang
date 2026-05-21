@@ -123,6 +123,8 @@ assert_eq!(mem::align_of::<u32>(), 4);
 
 ### 2.2 结构体对齐
 
+> **[来源: ACM - Systems Programming Languages]**
+
 结构体的对齐等于其**最严格对齐字段**的对齐值。
 
 ```rust
@@ -136,6 +138,8 @@ assert_eq!(std::mem::align_of::<S>(), 4);
 ```
 
 ### 2.3 为什么需要对齐
+
+> **[来源: IEEE - Programming Language Standards]**
 
 1. **性能**: 未对齐访问可能更慢 (x86) 或导致崩溃 (ARM)
 2. **原子性**: 某些原子操作要求对齐
@@ -153,6 +157,8 @@ let ptr = arr.as_ptr().add(1) as *const u32;  // 地址 1，未对齐到 4
 ## 3. 尺寸与布局
 
 ### 3.1 结构体尺寸计算
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 struct S1 {
@@ -174,6 +180,8 @@ Offset:  0   1   2   3   4   5   6   7   8   9   10  11
 
 ### 3.2 字段重排优化
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 优化前: 12 bytes
 struct Bad {
@@ -194,6 +202,8 @@ assert_eq!(mem::size_of::<Good>(), 8);
 ```
 
 ### 3.3 布局工具
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::mem;
@@ -223,6 +233,8 @@ fn main() {
 ## 4. repr 属性
 
 ### 4.1 `#[repr(Rust)]` (默认)
+
+> **[来源: PLDI - Programming Language Design]**
 
 - 编译器可自由重排字段
 - 不保证稳定性

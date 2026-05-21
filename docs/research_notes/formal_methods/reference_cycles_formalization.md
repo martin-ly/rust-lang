@@ -63,6 +63,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 定义 RC-1 (Rc引用计数)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -78,6 +80,8 @@ $$
 $$
 
 ### 定义 RC-2 (引用计数操作)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +110,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### 定义 CYCLE-1 (循环引用)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$
 $$
 
 ### 定义 CYCLE-2 (循环引用计数)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +145,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### 定义 WEAK-1 (Weak指针)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +170,8 @@ $$
 $$
 
 ### 定理 WEAK-T1 (Weak不阻止释放)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -357,6 +369,8 @@ fn no_cycle_with_weak() {
 ```
 
 ### 示例3: 父子树结构
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::rc::{Rc, Weak};

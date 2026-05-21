@@ -52,6 +52,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🎯 核心理解文档
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -63,6 +65,8 @@
 | **READING_GUIDE.md** | 所有人 | 个性化阅读路径 | 30 分钟 |
 
 ### 🔧 技术文档
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -77,6 +81,8 @@
 ## 按主题组织的阅读路径
 
 ### 主题 1：为什么 Rust 安全？（2 小时）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **目标**：理解 Rust 内存安全的理论基础
 
@@ -100,6 +106,8 @@
 ---
 
 ### 主题 2：核心定理理解（3 小时）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **目标**：理解五个核心定理的含义和重要性
 
@@ -127,6 +135,8 @@
 
 ### 主题 3：从 Rust 代码到形式化（2 小时）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **目标**：建立 Rust 代码与数学形式化之间的联系
 
 **阅读顺序**：
@@ -150,6 +160,8 @@
 ---
 
 ### 主题 4：证明技术（3 小时）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **目标**：理解形式化证明的技术细节
 

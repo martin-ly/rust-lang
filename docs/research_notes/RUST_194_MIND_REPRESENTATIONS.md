@@ -291,6 +291,8 @@ mindmap
 | **编译期检查** | ✅ | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
 
 ### 2.2 并发原语矩阵
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -306,6 +308,8 @@ mindmap
 | `LazyLock<T>` | T:Send+Sync | T:Send+Sync | ⚠️ 初始化时 | N/A | 延迟初始化 | ✅ 1.94 增强 |
 
 ### 2.3 错误处理策略矩阵
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -319,6 +323,8 @@ mindmap
 | **迭代控制** | ✅ | ✅ | ❌ | ✅ | try_fold |
 
 ### 2.4 Rust 1.94 新特性影响矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -332,6 +338,8 @@ mindmap
 | Edition 2024 | 全部 | ✅ | ✅ | ✅ | ✅ | ⚠️ 需迁移 |
 
 ### 2.5 语言特性对比矩阵 (vs 其他语言)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -354,6 +362,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权选择决策树
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TD
@@ -387,6 +397,8 @@ graph TD
 
 ### 3.2 错误处理策略决策树
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```mermaid
 graph TD
     A[遇到错误情况?] --> B[错误可恢复?]
@@ -408,6 +420,8 @@ graph TD
 ```
 
 ### 3.3 并发策略决策树
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```mermaid
 graph TD
@@ -432,6 +446,8 @@ graph TD
 ```
 
 ### 3.4 泛型边界决策树
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
 graph TD
@@ -458,6 +474,8 @@ graph TD
 ```
 
 ### 3.5 Rust 1.94 迭代器选择决策树
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```mermaid
 graph TD

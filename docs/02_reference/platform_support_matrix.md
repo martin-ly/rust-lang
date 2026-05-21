@@ -62,6 +62,8 @@
 
 ### 1.3 兼容性变更
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 变更 | 说明 | 影响 |
 |------|------|------|
 | JSON target specs destabilized | stable 通道不再支持 `--target spec.json` | 嵌入式/裸机开发者需使用 nightly `-Z unstable-options` |
@@ -71,6 +73,8 @@
 ## 二、完整平台支持速查表
 
 ### Tier 1（保证可用 + 主机工具 + CI 测试）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 目标 | 操作系统 | 架构 |
 |------|----------|------|
@@ -89,6 +93,8 @@
 
 ### Tier 2 with Host Tools（交叉编译 + 主机工具）
 
+> **[来源: Wikipedia - Type System]**
+
 | 目标 | 说明 |
 |------|------|
 | `aarch64-linux-android` | Android ARM64 |
@@ -101,6 +107,8 @@
 | `riscv64gc-unknown-linux-gnu` | RISC-V 64 Linux |
 
 ### Tier 2（交叉编译，无主机工具保证）
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 目标 | 说明 | 备注 |
 |------|------|------|

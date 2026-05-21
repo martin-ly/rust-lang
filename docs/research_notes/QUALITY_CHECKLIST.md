@@ -156,6 +156,8 @@
 - [ ] 定义/设计完整
 
 ### 证明目标 / 实验目标
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +166,8 @@
 - [ ] 证明/测试方法合理
 
 ### 代码示例
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,12 +177,16 @@
 
 ### 研究进展
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [ ] 研究进展状态准确
 - [ ] 已完成任务明确
 - [ ] 进行中任务清晰
 - [ ] 计划中任务合理
 
 ### 实质内容（研究笔记必选）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](./PROOF_INDEX.md) 衔接
 - [ ] 至少 1 段可运行 Rust 代码（索引/概览类可放宽）
@@ -194,6 +202,8 @@
 
 ### 形式化定义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [ ] 数学符号使用正确
 - [ ] 数学公式格式正确
 - [ ] 定义准确无歧义
@@ -201,11 +211,15 @@
 
 ### 理论证明
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [ ] 证明逻辑正确（如适用）
 - [ ] 证明步骤清晰（如适用）
 - [ ] 证明完整（如适用）
 
 ### 参考文献
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [ ] 参考文献充分
 - [ ] 参考文献格式统一

@@ -49,6 +49,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 基本信息
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -63,6 +65,8 @@
 | 核心团队 | Carl Lerche, Alice Ryhl, Eliza Weisman |
 
 ### 1.2 架构概览
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -109,7 +113,11 @@
 
 ### 2.1 任务调度器
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 数据结构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 任务结构定义
@@ -139,6 +147,8 @@ pub(crate) enum Stage {
 ```
 
 #### 工作窃取队列
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 pub(crate) struct Queue {

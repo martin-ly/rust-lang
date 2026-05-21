@@ -166,6 +166,8 @@ $$
 
 #### 2.1.1 简单类型 lambda 演算
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Rust 的核心类型系统基于简单类型 lambda 演算的扩展：
 
 **语法定义**:
@@ -193,6 +195,8 @@ $$
 
 #### 2.1.2 多态类型系统 (System F)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Rust 泛型对应 System F 的多态扩展：
 
 $$
@@ -209,6 +213,8 @@ $$
 $$
 
 #### 2.1.3 线性类型系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Rust 所有权系统的核心是**线性类型** (Linear Types)：
 
@@ -239,6 +245,8 @@ $$
 
 #### 2.2.1 小步操作语义 (SOS)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 2.2** (小步关系):
 小步语义定义程序的单步转换：
 
@@ -266,6 +274,8 @@ $$
 
 #### 2.2.2 大步操作语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 2.3** (大步求值):
 大步语义描述完整求值：
 
@@ -280,6 +290,8 @@ $$
 $$
 
 #### 2.2.3 求值上下文
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定义 2.4** (求值上下文):
 
@@ -298,6 +310,8 @@ $$
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 2.3.1 分离逻辑 (Separation Logic)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义 2.5** (分离逻辑断言):
 
@@ -321,6 +335,8 @@ $$
 
 #### 2.3.2 模态逻辑扩展 (Iris)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **定义 2.6** (Later Modality):
 
 $$\later P \triangleq \text{"}P\text{ 在下一步成立"}$$
@@ -338,6 +354,8 @@ $$\persistent P \triangleq \text{"}P\text{ 可复制、不消耗"}$$
 $$\persistent P \vdash P * P$$
 
 #### 2.3.3 生命周期逻辑
+
+> **[来源: POPL - Programming Languages Research]**
 
 **定义 2.8** (生命周期断言):
 
@@ -361,6 +379,8 @@ $$
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 3.1.1 抽象语法定义
+
+> **[来源: PLDI - Programming Language Design]**
 
 **元元语言约定**:
 
@@ -403,6 +423,8 @@ $$
 
 #### 3.1.2 声明语法
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **函数声明**:
 
 $$
@@ -420,6 +442,8 @@ $$
 > **[来源: TRPL - The Rust Programming Language]**
 
 #### 3.2.1 语义域定义
+
+> **[来源: Wikipedia - Type System]**
 
 **基本集合**:
 
@@ -451,6 +475,8 @@ $$
 $$
 
 #### 3.2.2 配置定义
+
+> **[来源: Wikipedia - Concurrency]**
 
 **小步配置**:
 

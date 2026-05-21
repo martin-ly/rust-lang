@@ -148,6 +148,8 @@ Mutex<T>
 
 ### 2.2 读写锁 (RwLock)
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```text
 RwLock<T>
 ├── 多读
@@ -161,6 +163,8 @@ RwLock<T>
 ```
 
 ### 2.3 原子操作
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
 原子操作
@@ -187,6 +191,8 @@ RwLock<T>
 
 ### 2.4 其他原语
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 其他原语
 ├── Semaphore
@@ -204,6 +210,8 @@ RwLock<T>
 ## 三、异步 (Async)
 
 ### 3.1 Future
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 Future
@@ -224,6 +232,8 @@ Future
 ```
 
 ### 3.2 async/await
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
 async/await

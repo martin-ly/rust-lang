@@ -79,6 +79,8 @@
 
 #### 学术来源 (顶级会议)
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 来源 | 内容 | 引用 | 状态 |
 |------|------|------|------|
 | **MIT PL Review 2026** | Verus形式化验证、Rustlantis随机测试 | [^1] | ✅ |
@@ -89,6 +91,8 @@
 
 #### 工业标准来源
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 来源 | 内容 | 认证 | 状态 |
 |------|------|------|------|
 | **Ferrocene** | TÜV SÜD认证工具链 | ISO 26262 ASIL D, IEC 61508 SIL 4 | ✅ |
@@ -97,6 +101,8 @@
 | **MISRA C:2025 Addendum 6** | Rust适用性评估 | 官方Addendum | ✅ |
 
 #### 国防航天来源
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 来源 | 应用 | 关键里程碑 | 状态 |
 |------|------|-----------|------|
@@ -123,6 +129,8 @@
 | **TU Berlin** | 嵌入式系统 | 航天应用 | CubeSat协议 | [^26] |
 
 #### 课程整合价值
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +148,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 功能安全标准矩阵
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 

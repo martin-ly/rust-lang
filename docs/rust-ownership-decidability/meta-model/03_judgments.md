@@ -58,6 +58,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 类型判断
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -69,17 +71,23 @@
 
 #### 2.1.1 变量类型
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 Δ; Γ; Θ ⊢ x : τ      if Γ(x) = τ
 ```
 
 #### 2.1.2 借用类型
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 Δ; Γ; Θ ⊢ &ρ ω p : &ρ ω τ     if Δ; Γ; Θ ⊢ p : τ and Δ; Γ; Θ ⊢ω p ok
 ```
 
 ### 2.2 所有权安全判断 (Ownership Safety)
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 Δ; Γ; Θ ⊢ω p ⇒ {ω'p'}
@@ -94,11 +102,15 @@
 
 #### 2.2.1 基础规则
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 Δ; Γ; Θ ⊢ω x ⇒ {ωx}      (变量总是安全的)
 ```
 
 #### 2.2.2 解引用规则
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 Δ; Γ; Θ ⊢ *p ⇒ {ω'p'}

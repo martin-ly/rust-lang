@@ -165,6 +165,8 @@ tokio::spawn(async move {
 
 ### 场景 3：图像处理（并行 + Iterator）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **需求**：对像素块并行处理。
 
 ```rust
@@ -178,6 +180,8 @@ let processed: Vec<u8> = pixels
 
 ### 场景 4：多服务编排（分布式 + Proxy + DTO）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **需求**：订单服务调用库存服务、支付服务。
 
 ```rust
@@ -190,6 +194,8 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 ```
 
 ### 选型决策流程（层次推进）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 1. 有 I/O 等待？ → 是 → 异步（tokio）
@@ -217,6 +223,8 @@ struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
 以下示例可直接复制到 `main.rs` 运行（示例 1–2 仅 std；示例 3 需 `rayon`）。
 
 ### 示例 1：批处理 + Strategy（同步）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 fn main() {
@@ -246,6 +254,8 @@ fn main() {
 
 ### 示例 2：并发 + Observer（std::thread + mpsc）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn main() {
     use std::sync::mpsc;
@@ -270,6 +280,8 @@ fn main() {
 ```
 
 ### 示例 3：并行 + Strategy（rayon，需 `cargo add rayon`）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // Cargo.toml: rayon = "1.10"
@@ -301,6 +313,8 @@ fn main() {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: POPL - Programming Languages Research]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

@@ -31,6 +31,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 `rust-ownership-decidability/` 概况
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 

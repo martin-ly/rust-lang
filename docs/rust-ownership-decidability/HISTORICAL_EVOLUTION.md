@@ -288,6 +288,8 @@ Linearizability = 类型依赖图无环
 
 ### 3.4 Oxide 项目（2019-2021）
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **目标**：创建可执行的 Rust 语义
 
 **论文**：
@@ -325,6 +327,8 @@ Oxide：精确，关注内存模型
 
 ### 4.1 整合与发展
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **目标**：
 
 - 整合现有理论成果
@@ -360,6 +364,8 @@ Oxide：精确，关注内存模型
 
 ### 4.2 历史位置的图示
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 时间线：
 ───────────────────────────────────────────────────────
@@ -388,6 +394,8 @@ Oxide：精确，关注内存模型
 ```
 
 ### 4.3 演化的关键洞察
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **洞察1：从实践到理论**
 
@@ -425,6 +433,8 @@ Featherweight Rust（2022）：简洁，但有限
 
 ### 5.1 所有权（Ownership）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **演化路径**：
 
 ```text
@@ -448,6 +458,8 @@ Rust 所有权（2010-2015）
 - 从"C++ 模式"到"数学基础"
 
 ### 5.2 借用（Borrowing）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **演化路径**：
 
@@ -473,6 +485,8 @@ Rust 借用（2012+）
 
 ### 5.3 生命周期（Lifetime）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **演化路径**：
 
 ```text
@@ -496,6 +510,8 @@ Rust 生命周期（2015+）
 - 从"学术概念"到"工程实践"
 
 ### 5.4 Linearizability
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **演化路径**：
 

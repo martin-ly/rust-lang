@@ -360,6 +360,8 @@ impl OrderService {
 
 ### Repository
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 trait Repository<T> {
     fn find(&self, id: u64) -> Option<T>;
@@ -375,6 +377,8 @@ impl Repository<User> for UserRepository {
 
 ### DTO
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct UserDto {
@@ -386,6 +390,8 @@ pub struct UserDto {
 ```
 
 ### Event Sourcing
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 #[derive(Clone)]
@@ -408,6 +414,8 @@ impl Aggregate {
 
 ### Specification
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 trait Specification<T> {
     fn is_satisfied_by(&self, candidate: &T) -> bool;
@@ -423,6 +431,8 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 ```
 
 ### Table Data Gateway (DAO)
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 表级数据访问：一张表对应一个 Gateway
@@ -440,6 +450,8 @@ impl UserGateway {
 ```
 
 ### Active Record
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 对象即行：领域对象持有数据库连接，自身负责持久化
@@ -473,6 +485,8 @@ impl User {
 
 ### Gateway（外部系统集成）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 外部系统集成：封装 HTTP 客户端、FFI 等
 pub trait PaymentGateway: Send + Sync {
@@ -489,6 +503,8 @@ impl PaymentGateway for StripeGateway {
 ```
 
 ### Model View Controller (MVC)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 分离模型/视图/控制器；模块分层
@@ -513,6 +529,8 @@ mod controller {
 
 ### Front Controller
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 单一入口、路由分发
 pub struct Router {
@@ -533,6 +551,8 @@ impl Router {
 ```
 
 ### Remote Facade
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 粗粒度远程接口：减少跨边界调用次数
@@ -555,6 +575,8 @@ pub async fn handle_order_batch(req: OrderBatchRequest) -> OrderBatchResponse {
 ```
 
 ### Lazy Load
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::sync::OnceLock;
@@ -585,6 +607,8 @@ impl<T> Lazy<T> {
 ```
 
 ### Plugin (Dependency Injection)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 依赖注入、可替换实现

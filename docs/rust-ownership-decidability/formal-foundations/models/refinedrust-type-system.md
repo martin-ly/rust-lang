@@ -66,6 +66,8 @@ RefinedRust 在 Rust 的 MIR（Mid-level Intermediate Representation）上工作
 
 ### 1.1 动机
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 现有 Rust 验证工具的分层：
 
 | 工具 | 保证级别 | 自动化 | 覆盖范围 |
@@ -83,6 +85,8 @@ RefinedRust 在 Rust 的 MIR（Mid-level Intermediate Representation）上工作
 - 支持 unsafe 代码的规范
 
 ### 1.2 RefinedRust 概述
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 RefinedRust 架构：
@@ -105,6 +109,8 @@ MIR (Mid-level IR)
 ## 2. 核心概念
 
 ### 2.1 细化类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **标准类型 vs 细化类型**：
 
@@ -136,6 +142,8 @@ e ::= v | x | e₁ + e₂ | e₁ = e₂ | ...  (* 表达式 *)
 
 ### 2.2 所有权与细化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **所有权传递细化信息**：
 
 ```rust
@@ -158,6 +166,8 @@ fn increase(x: &mut {v: i32 | v > 0}) {
 ```
 
 ### 2.3 生命周期多态
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **生命周期约束**：
 

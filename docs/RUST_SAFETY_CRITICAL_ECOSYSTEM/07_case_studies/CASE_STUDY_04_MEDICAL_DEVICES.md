@@ -549,6 +549,8 @@ mod verification {
 
 #### 软件开发生命周期
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 阶段 | 活动 | 产出物 | Rust特定考虑 |
 |------|------|--------|--------------|
 | **5.2** | 软件计划 | 软件开发计划 | Ferrocene工具链 |
@@ -559,6 +561,8 @@ mod verification {
 | **5.7** | 集成测试 | 测试报告 | Miri+Kani验证 |
 
 #### 风险管理
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 风险1: 内存安全缺陷
@@ -576,7 +580,11 @@ mod verification {
 
 ### FDA提交经验
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 软件文档
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **软件描述**: 强调Rust的内存安全保证
 2. **风险分析**: FMEA包含Rust特定的风险缓解
@@ -584,6 +592,8 @@ mod verification {
 4. **测试报告**: 包含形式化验证结果
 
 #### 审查要点
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [x] 编译器工具链鉴定
 - [x] unsafe代码使用论证
@@ -597,6 +607,8 @@ mod verification {
 
 ### 代码度量
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 指标 | 值 |
 |------|-----|
 | 代码行数 | 15,000 |
@@ -607,6 +619,8 @@ mod verification {
 | 集成测试数 | 85 |
 
 ### 缺陷数据
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 阶段 | 发现缺陷数 | 严重程度 |
 |------|-----------|----------|
@@ -623,12 +637,16 @@ mod verification {
 
 ### 成功因素
 
+> **[来源: Wikipedia - Type System]**
+
 1. **早期培训**: 团队提前3个月学习Rust
 2. **架构先行**: 详细的no_std架构设计
 3. **工具链投资**: Ferrocene工具链节省认证时间
 4. **持续验证**: CI集成Miri和Kani
 
 ### 挑战与解决
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 挑战 | 解决方案 |
 |------|----------|

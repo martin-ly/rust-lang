@@ -147,6 +147,8 @@
 
 ### 1. 内容完整性
 
+> **[来源: POPL - Programming Languages Research]**
+
 - ✅ 所有核心概念都有详细说明
 - ✅ 所有API都有文档注释
 - ✅ 所有示例代码都可以运行

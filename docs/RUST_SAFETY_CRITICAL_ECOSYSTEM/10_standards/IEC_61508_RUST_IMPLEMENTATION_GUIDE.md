@@ -69,6 +69,8 @@ IEC 61508-x:
 > **[来源: Rust Official Docs]**
 
 #### 安全完整性等级(SIL)映射
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@ IEC 61508-x:
 | **SIL 1** | 10-100 | 很高 | 标准Rust |
 
 #### Rust优势在IEC 61508中的体现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +186,8 @@ pub enum SafetyError {
 > **[来源: Rust Official Docs]**
 
 #### 验证方法表(Annex B)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -566,6 +572,8 @@ pub trait ModbusTransport {
 
 ### OPC UA
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 //! SIL 3级OPC UA服务器
 
@@ -626,6 +634,8 @@ impl SafetyOpcUaServer {
 ## 开发检查表
 
 ### SIL 4项目完整检查表
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 需求阶段
 

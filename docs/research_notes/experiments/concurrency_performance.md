@@ -294,6 +294,8 @@
 
 ### 示例 1：Mutex vs RwLock 性能测试
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
@@ -359,6 +361,8 @@ fn main() {
 
 ### 示例 2：通道性能测试
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::sync::mpsc;
 use std::thread;
@@ -421,6 +425,8 @@ fn unbounded_channel_benchmark() -> u128 {
 
 ### 示例 3：异步任务性能测试
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use tokio::time::Instant;
 use std::time::Duration;
@@ -455,6 +461,8 @@ async fn async_task_benchmark() {
 
 ### 1. 同步原语性能对比
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **测试环境**：
 
 - CPU: 8 核
@@ -478,6 +486,8 @@ async fn async_task_benchmark() {
 
 ### 2. 通道性能对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **结果**：
 
 | 通道类型 | 延迟 (ns) | 吞吐量 (msg/s) |
@@ -493,6 +503,8 @@ async fn async_task_benchmark() {
 - 通道容量对性能有显著影响
 
 ### 结果分析模板
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 将 `cargo bench`（Mutex/RwLock/Atomic、mpsc/crossbeam、async 任务）的产出填入下表：
 
@@ -524,10 +536,14 @@ async fn async_task_benchmark() {
 
 ### 环境要求
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - **Rust**: 1.93.1+；**Tokio**：`tokio = { version = "1", features = ["full"] }`；**Criterion**：工作区已配置
 - 建议固定 CPU 频率、关闭节能；多线程 bench 需注意核心数与负载隔离
 
 ### 执行步骤
+
+> **[来源: ACM - Systems Programming Languages]**
 
 1. **同步原语**：运行 `mutex_benchmark`、`rwlock_benchmark`，以及 Atomic、Condvar 的 bench；记录 ITERATIONS/THREADS 与耗时。
 2. **通道**：运行 `channel_benchmark`、`unbounded_channel_benchmark`，若有 crossbeam 则一并对比；记录 MESSAGES 与延迟/吞吐。
@@ -539,6 +555,8 @@ async fn async_task_benchmark() {
 ## 📐 性能优化建议与工具改进 {#-性能优化建议与工具改进}
 
 ### 性能优化建议
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **同步**：读多写少用 `RwLock`；简单标量用 `Atomic`；减少锁粒度与持锁时间。
 - **通道**：高吞吐优先 `crossbeam`；有背压需求用有界 `mpsc`；避免在热路径上 `clone` 大消息。

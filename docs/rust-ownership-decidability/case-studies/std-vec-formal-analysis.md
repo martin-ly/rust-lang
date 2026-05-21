@@ -77,7 +77,11 @@
 
 ### 2.1 内存表示
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 2.1 (Vec内存布局)
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 pub struct Vec<T> {
@@ -118,6 +122,8 @@ $$
 
 ### 2.2 类型状态机
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
           new()
     ∅ ───────────→ Empty
@@ -137,7 +143,11 @@ $$
 
 ### 3.1 创建操作
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 3.1 (Vec::new)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn new() -> Vec<T>

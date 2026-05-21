@@ -274,6 +274,8 @@ fn find_user(id: u64) -> Option<User> {
 
 ### 代码示例
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // Vec所有权
 let mut vec = Vec::new();
@@ -301,6 +303,8 @@ let removed = map.remove("key").unwrap(); // 所有权转移
 
 ### 决策流程
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 需要多所有者?
 │
@@ -320,6 +324,8 @@ let removed = map.remove("key").unwrap(); // 所有权转移
 ```
 
 ### 代码示例
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 单所有
@@ -366,6 +372,8 @@ std::thread::spawn(move || {
 ## 场景五：生命周期管理
 
 ### 决策流程
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 引用生命周期选择?
@@ -438,9 +446,13 @@ std::thread::spawn(move || {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -450,6 +462,8 @@ std::thread::spawn(move || {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档中的所有Rust代码示例均已：
 

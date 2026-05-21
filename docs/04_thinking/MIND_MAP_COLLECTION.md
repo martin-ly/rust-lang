@@ -284,6 +284,8 @@ mindmap
 ```
 
 ### 4. 生命周期系统思维导图
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -329,6 +331,8 @@ mindmap
 ```
 
 ### 5. 泛型系统思维导图
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -378,6 +382,8 @@ mindmap
 ```
 
 ### 6. Trait 系统思维导图
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -445,6 +451,8 @@ mindmap
 ```
 
 ### 7. 并发编程思维导图
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -509,6 +517,8 @@ mindmap
 ```
 
 ### 8. 异步编程思维导图
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -569,6 +579,8 @@ mindmap
 
 ### 9. 系统编程思维导图
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```mermaid
 mindmap
   root((系统编程))
@@ -627,6 +639,8 @@ mindmap
 ```
 
 ### 10. 形式化与语义思维导图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
 mindmap

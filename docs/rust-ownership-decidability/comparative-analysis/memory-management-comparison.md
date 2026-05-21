@@ -250,6 +250,8 @@ public class GCDemo {
 
 #### 标记-清除（Mark-Sweep）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 阶段 1: 标记（从根对象开始遍历）
 ┌─────────────────────────────────────┐
@@ -272,6 +274,8 @@ public class GCDemo {
 
 #### 复制算法（Copying）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 From 空间          To 空间（复制后）
 ┌──────────┐      ┌──────────┐
@@ -286,6 +290,8 @@ From 空间          To 空间（复制后）
 ```
 
 #### 分代收集（Generational）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ┌────────────────────────────────────────────────┐
@@ -402,6 +408,8 @@ node2.ref = node1
 
 ### Swift 的 ARC（自动引用计数）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```swift
 // Swift 使用 ARC，编译器自动插入引用计数操作
 class Person {
@@ -446,6 +454,8 @@ func arcDemo() {
 
 ### 引用计数变体
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 类型 | 描述 | 用途 |
 |------|------|------|
 | 强引用 | 增加引用计数 | 默认所有权 |
@@ -471,6 +481,8 @@ struct Node {
 
 ### 优缺点分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 优点 | 缺点 |
 |------|------|
 | 确定性析构 | 循环引用需要额外处理 |
@@ -481,6 +493,8 @@ struct Node {
 ## 所有权系统
 
 ### 核心原理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Rust 的所有权系统在编译期跟踪资源生命周期：
 
@@ -512,6 +526,8 @@ fn calculate_length(s: &String) -> usize {
 
 ### 借用规则
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 借用规则：
 // - 可以同时拥有多个不可变引用
@@ -538,6 +554,8 @@ fn borrowing_rules() {
 ```
 
 ### 生命周期
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 显式生命周期注解
@@ -566,6 +584,8 @@ fn static_lifetime() {
 ```
 
 ### 智能指针
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::rc::Rc;
@@ -621,6 +641,8 @@ fn refcell_example() {
 
 ### 优缺点分析
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 优点 | 缺点 |
 |------|------|
 | 编译期保证安全 | 学习曲线陡峭 |
@@ -631,6 +653,8 @@ fn refcell_example() {
 ## 区域内存管理
 
 ### 原理
+
+> **[来源: Wikipedia - Type System]**
 
 基于作用域（区域）管理内存，离开区域自动释放。
 

@@ -178,6 +178,8 @@ Rust Formal Methods Research Notes 是一套全面的Rust形式化方法文档�
 
 ### 搜索技巧
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 按主题搜索
 grep -r "生命周期" docs/research_notes --include="*.md"

@@ -78,6 +78,8 @@ fn example(x: &str) -> impl Iterator<Item = char> {
 
 ### 具体示例
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 示例 1：自动捕获简化代码
 
 ```rust

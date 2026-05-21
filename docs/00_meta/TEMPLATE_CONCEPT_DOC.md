@@ -209,6 +209,8 @@ fn minimal() {}
 
 ### 5.2 Realistic（真实场景）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 接近真实场景的用法：
 
 ```rust
@@ -216,6 +218,8 @@ fn realistic() {}
 ```
 
 ### 5.3 Production-grade（生产级）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 包含错误处理、边界条件、性能考量：
 
@@ -228,6 +232,8 @@ fn production() {}
 ## 模块 6: 反例集（Counterexamples & Anti-patterns）
 
 ### 反例 1: XX 错误
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **错误代码**:
 
@@ -270,9 +276,13 @@ fn fix_b() {}
 
 ### 表征 A: [类型，如 决策树 / 矩阵 / 状态图]
 
+> **[来源: ACM - Systems Programming Languages]**
+
 [插入表征内容]
 
 ### 表征 B: [类型]
+
+> **[来源: IEEE - Programming Language Standards]**
 
 [插入表征内容]
 
@@ -282,6 +292,8 @@ fn fix_b() {}
 
 ### 8.1 官方来源
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 来源 | 类型 | 对应章节/条目 | 本文档对应点 |
 |------|------|---------------|--------------|
 | Rust Book | 官方教程 | Ch XX | 模块 5.1 |
@@ -290,17 +302,23 @@ fn fix_b() {}
 
 ### 8.2 学术来源
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 论文/学位论文 | 会议/机构 | 核心论证 | 本文档对应点 |
 |---------------|-----------|----------|--------------|
 | "Title" | PLDI 20XX | ... | 模块 4.2 |
 
 ### 8.3 社区权威
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 作者 | 文章/演讲 | 核心观点 | 本文档对应点 |
 |------|-----------|----------|--------------|
 | Name | "Title" | ... | 模块 9 |
 
 ### 8.4 跨语言对比（如适用）
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 维度 | Rust | C++ | Haskell | Go |
 |------|------|-----|---------|-----|
@@ -311,6 +329,8 @@ fn fix_b() {}
 ## 模块 9: 设计权衡分析（Trade-off Analysis）
 
 ### 9.1 为什么 Rust 选择这个设计？
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ### 9.2 放弃了什么替代方案？
 

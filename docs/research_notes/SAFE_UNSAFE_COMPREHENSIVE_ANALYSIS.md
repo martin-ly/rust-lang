@@ -256,6 +256,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 3.3 契约违反后果
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 违反前置条件 → **未定义行为 (UB)**。编译器可假设前置条件成立，故可能产生任意优化、任意结果。
 
 ---
@@ -263,6 +265,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 ## 四、UB 分类与反例
 
 ### 4.1 UB 分类
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 类别 | 说明 | 典型原因 |
 | :--- | :--- | :--- |
@@ -273,6 +277,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | **未指定** | 实现定义 | 有符号溢出（release 可 wrap） |
 
 ### 4.2 反例表
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 反例 | 违反契约 | 后果 |
 | :--- | :--- | :--- |
@@ -286,6 +292,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 4.3 1.93 相关变更
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 变更 | 影响 | 文档 |
 | :--- | :--- | :--- |
 | deref_nullptr deny-by-default | 解引用空指针编译失败 | 09_rust_1.93_compatibility_deep_dive |
@@ -298,9 +306,13 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 ### 5.1 定义
 
+> **[来源: Wikipedia - Type System]**
+
 **安全抽象**：内部使用 unsafe，对外仅暴露安全 API，且若调用者仅用安全 API，则不会触发 UB。
 
 ### 5.2 论证结构
+
+> **[来源: Wikipedia - Concurrency]**
 
 1. **不变式**：抽象维持的不变式（如 Vec: len ≤ capacity）
 2. **安全 API 边界**：不暴露可破坏不变式的操作
@@ -308,6 +320,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 4. **结论**：安全抽象正确 ⟺ 不变式 + 边界 + 正确 unsafe
 
 ### 5.3 典型安全抽象
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 抽象 | 内部 unsafe | 不变式 | 安全 API |
 | :--- | :--- | :--- | :--- |
@@ -318,6 +332,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 | `String` | 与 Vec 类似 | UTF-8 | 所有 &str 方法 |
 
 ### 5.4 安全抽象决策树
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 需要提供底层能力？

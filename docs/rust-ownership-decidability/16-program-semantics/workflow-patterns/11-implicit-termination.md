@@ -178,6 +178,8 @@ $$
 
 ### 死锁检测
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **死锁四条件（Coffman 条件）：**
 
 1. **互斥**：资源不能被共享
@@ -211,6 +213,8 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 ```
 
 ### 避免策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **银行家算法：**
 
@@ -307,6 +311,8 @@ fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
 
 ### 状态机形式化
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 $$
 \begin{aligned}
 & \text{States} = \{ \\
@@ -325,6 +331,8 @@ $$
 $$
 
 ### 进程代数
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **CSP 形式化：**
 
@@ -382,6 +390,8 @@ Terminated = if deadlock(System) then STOP else RUN
 ## Rust 实现示例
 
 ### 基础实现
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -499,6 +509,8 @@ pub async fn implicit_termination_example() {
 ```
 
 ### 分布式终止检测
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::collections::HashMap;

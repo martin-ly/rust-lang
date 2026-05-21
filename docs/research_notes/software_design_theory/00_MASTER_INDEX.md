@@ -114,11 +114,15 @@
 
 ### 3.2 执行模型扩展
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - 五模型（同步、异步、并发、并行、分布式）✅
 - 可选扩展：Actor（actix）、CSP（channel）、事件溯源（02_complete_43 Event Sourcing）
 - **层次推进**：三阶段已完成；见 [CONTENT_ENHANCEMENT](../CONTENT_ENHANCEMENT.md) 层次推进计划
 
 ### 3.3 工作流模型扩展
+
+> **[来源: Wikipedia - Type System]**
 
 - 23 安全：GoF 23 纯安全子集
 - 43 完全：GoF 23 + 扩展 20（Fowler EAA/DDD，已明确）
@@ -218,6 +222,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Wikipedia - Concurrency]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

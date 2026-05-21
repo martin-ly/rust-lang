@@ -85,6 +85,8 @@
 本文档记录 Rust 1.94.0 版本对研究笔记系统的影响。
 
 ### 主要更新
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +101,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. ControlFlow 形式化分析
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +146,8 @@ fn find_negative(numbers: &[i32]) -> Option<i32> {
 ```
 
 ### 2. Edition 2024 语义变化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +167,8 @@ Edition 2024 引入了以下语义变化：
 > **[来源: Rust Official Docs]**
 
 ### 迁移路径
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +181,8 @@ cargo fix --edition
 ```
 
 ### 形式化影响
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

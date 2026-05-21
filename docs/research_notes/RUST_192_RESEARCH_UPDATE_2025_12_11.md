@@ -356,6 +356,8 @@ fn api_stabilization_examples() {
 
 ### 形式化文档
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | 形式化文档 | 相关定义 |
 | :--- | :--- | :--- |
 | MaybeUninit | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | unsafe 契约矩阵 |
@@ -365,6 +367,8 @@ fn api_stabilization_examples() {
 
 ### 核心定理
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 定理 | 文档 | 说明 |
 | :--- | :--- | :--- |
 | T-OW2 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 所有权唯一性 |
@@ -372,6 +376,8 @@ fn api_stabilization_examples() {
 | T-TY3 | [CORE_THEOREMS_FULL_PROOFS.md](./CORE_THEOREMS_FULL_PROOFS.md) | 类型安全 |
 
 ### Coq 证明骨架
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 定理 | Coq 文件 | 状态 |
 | :--- | :--- | :--- |

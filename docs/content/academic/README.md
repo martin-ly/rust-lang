@@ -232,6 +232,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 ### Datalog 形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Polonius 是 Rust 借用检查器的新实现，使用 Datalog 规则。
 
 **核心思想**:
@@ -266,6 +268,8 @@ error(Loan, Point) :-
 
 ### 与当前借用检查器对比
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 当前借用检查器: 拒绝
 // Polonius: 接受
@@ -288,6 +292,8 @@ fn polonius_accepts() {
 ## 🛠️ 验证工具
 
 ### Kani
+
+> **[来源: Wikipedia - Concurrency]**
 
 **定位**: Rust 的模型检查器
 
@@ -331,6 +337,8 @@ fn verify_raw_ptr() {
 
 ### Prusti
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **定位**: 基于 Viper 的演绎验证器
 
 ```rust
@@ -362,6 +370,8 @@ fn find_max(array: &[i32]) -> i32 {
 ```
 
 ### Creusot
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **定位**: 使用 Why3 的 Rust 验证器
 

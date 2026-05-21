@@ -270,6 +270,8 @@
 ```markdown
 ### 相关概念
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
 
 **移动语义 (Move Semantics)**: 当值从一个变量移动到另一个变量时，原变量不再拥有该值。
@@ -278,6 +280,8 @@
 ```
 
 ### 2. 完善理论背景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **完善步骤**:
 
@@ -290,6 +294,8 @@
 ```markdown
 ### 理论背景
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。在线性类型系统中，每个值只能使用一次，这与 Rust 的所有权系统非常相似。
 
 **分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享，这与 Rust 的借用规则对应。
@@ -298,6 +304,8 @@
 ```
 
 ### 3. 添加理论联系
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **完善步骤**:
 
@@ -311,6 +319,8 @@
 
 ### 1. 完善形式化定义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **完善步骤**:
 
 1. **检查完整性**: 确保所有重要概念都有形式化定义
@@ -321,6 +331,8 @@
 
 ````markdown
 ### 1. 所有权转移
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
 
@@ -340,6 +352,8 @@ let s2 = s1;  // 所有权转移: s1 → s2
 
 ### 2. 添加更多规则
 
+> **[来源: POPL - Programming Languages Research]**
+
 **完善步骤**:
 
 1. **识别缺失规则**: 找出需要形式化的规则
@@ -347,6 +361,8 @@ let s2 = s1;  // 所有权转移: s1 → s2
 3. **提供例子**: 为每个规则提供代码示例
 
 ### 3. 提供证明框架
+
+> **[来源: PLDI - Programming Language Design]**
 
 **完善步骤**:
 

@@ -54,6 +54,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是 Polonius
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -67,6 +69,8 @@
 
 ### 1.2 为什么需要 Polonius
 
+> **[来源: Wikipedia - Memory Safety]**
+
 当前借用检查器 (基于 NLL) 有几个已知的局限性:
 
 | 问题 | 说明 | 影响 |
@@ -77,6 +81,8 @@
 | **分支敏感** | 缺乏流敏感分析 | 误报某些安全代码 |
 
 ### 1.3 与当前借用检查器的区别
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 借用检查器演进:
@@ -106,6 +112,8 @@
 ## 2. 核心改进
 
 ### 2.1 Case 3: 条件返回引用
+
+> **[来源: Wikipedia - Concurrency]**
 
 **问题代码** (当前编译器拒绝):
 
@@ -137,6 +145,8 @@ error[E0502]: cannot borrow `*vec` as mutable because it is also borrowed as imm
 
 ### 2.2 两阶段借用完善
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **当前行为**:
 
 ```rust
@@ -151,6 +161,8 @@ v.push(v.len());  // 魔法：被特殊处理
 - 不需要特殊 case
 
 ### 2.3 Lending Iterators
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Lending Iterator** (借出迭代器) 是一个重要的新抽象:
 

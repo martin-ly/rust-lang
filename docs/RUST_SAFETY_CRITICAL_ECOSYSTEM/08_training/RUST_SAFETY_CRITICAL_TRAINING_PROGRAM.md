@@ -99,6 +99,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 模块1: 所有权系统 (2天)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +128,8 @@
   ```
 
 #### 模块2: 借用与生命周期 (2天)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -156,6 +160,8 @@
   ```
 
 #### 模块3: 类型系统 (1天)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +182,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 模块4: 错误处理 (2天)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +193,8 @@
 - 错误传播策略
 
 #### 模块5: 集合与迭代器 (2天)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +203,8 @@
 - 性能考量
 
 #### 模块6: 测试基础 (1天)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,12 +233,16 @@
 
 #### 模块7: 智能指针 (2天)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - Box, Rc, Arc
 - RefCell, Mutex, RwLock
 - 内部可变性模式
 - 线程安全保证
 
 #### 模块8: 不安全Rust (2天)
+
+> **[来源: POPL - Programming Languages Research]**
 
 - **理论** (4h)
   - unsafe关键字

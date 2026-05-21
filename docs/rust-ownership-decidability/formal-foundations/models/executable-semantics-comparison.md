@@ -85,6 +85,8 @@ Rust 的可执行语义形式化面临独特挑战：
 
 ### 2.1 概述
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **KRust** 由上海科技大学研究人员开发，是首个在 K-Framework 中实现的 Rust 可执行语义。
 
 **核心贡献**：
@@ -94,6 +96,8 @@ Rust 的可执行语义形式化面临独特挑战：
 - 展示了可执行语义的调试和验证潜力
 
 ### 2.2 K-Framework 实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 K-Framework 是一种基于重写逻辑的语义框架：
 

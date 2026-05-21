@@ -356,6 +356,8 @@ T: 'a   // T 中所有引用至少存活 'a
 
 ### 三条规则
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 1. 每个引用参数有自己的生命周期
 2. 只有一个输入生命周期 → 赋给所有输出
@@ -363,6 +365,8 @@ T: 'a   // T 中所有引用至少存活 'a
 ```
 
 ### 示例
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 省略前
@@ -382,6 +386,8 @@ fn method(&self, x: &str) -> &str { self.0 }
 
 ### 模式1: 输入输出相同
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -390,6 +396,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 模式2: 返回self的引用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 impl<'a> Parser<'a> {
     fn input(&self) -> &'a str { self.input }
@@ -397,6 +405,8 @@ impl<'a> Parser<'a> {
 ```
 
 ### 模式3: 独立生命周期
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {

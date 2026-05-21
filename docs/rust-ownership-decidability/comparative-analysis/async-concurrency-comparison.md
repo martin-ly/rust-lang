@@ -189,6 +189,8 @@ $$
 
 ### 3.1 JavaScript Promise
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```javascript
 // Promise链式调用
 fetchUser(id)
@@ -209,6 +211,8 @@ $$
 $$
 
 ### 3.2 Rust Future对比
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // Future组合子
@@ -231,6 +235,8 @@ $$
 
 ### 3.3 关键差异
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 特性 | JavaScript Promise | Rust Future |
 |:-----|:-------------------|:------------|
 | **立即执行** | 创建即执行 | 惰性求值 |
@@ -251,6 +257,8 @@ $$
 ## 4. Actor模型对比
 
 ### 4.1 Erlang/Akka Actor
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```erlang
 % Erlang Actor
@@ -274,6 +282,8 @@ $$
 $$
 
 ### 4.2 Rust Actix对比
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // Rust Actor (actix)
@@ -301,6 +311,8 @@ $$
 
 ### 4.3 Async vs Actor对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 维度 | Async | Actor |
 |:-----|:------|:------|
 | **通信方式** | Future组合 | 消息传递 |
@@ -321,6 +333,8 @@ $$
 ## 5. CSP对比
 
 ### 5.1 Go CSP
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```go
 // Go channels

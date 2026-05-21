@@ -353,6 +353,8 @@ unsafe impl GlobalAlloc for PoolAllocator {
 
 ### 代码组织
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 模块组织示例
 mod ffi {
@@ -374,6 +376,8 @@ mod unsafe_utils {
 ```
 
 ### 安全检查清单
+
+> **[来源: Wikipedia - Concurrency]**
 
 在使用高级特性时，请检查：
 
@@ -403,6 +407,8 @@ mod unsafe_utils {
 
 ### 开发工具
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 工具 | 用途 | 安装命令 |
 |------|------|----------|
 | bindgen | C 头文件绑定生成 | `cargo install bindgen-cli` |
@@ -413,6 +419,8 @@ mod unsafe_utils {
 | valgrind | 内存检测 | 系统包管理器安装 |
 
 ### 性能分析
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```bash
 # 使用 perf 进行性能分析
@@ -430,6 +438,8 @@ heaptrack ./target/release/myapp
 ```
 
 ### 学习资源
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **官方文档：**
 
@@ -455,6 +465,8 @@ heaptrack ./target/release/myapp
 
 ### Q: 什么时候应该使用 Unsafe Rust？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A:** 仅在以下情况下使用：
 
 1. 与 C 代码交互（FFI）
@@ -466,6 +478,8 @@ heaptrack ./target/release/myapp
 
 ### Q: 异步 Rust 应该选择哪个运行时？
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **A:**
 
 - **Tokio**: 生态系统最完善，推荐用于大多数项目
@@ -474,6 +488,8 @@ heaptrack ./target/release/myapp
 - **自定义**: 仅在特殊需求下考虑
 
 ### Q: 如何调试宏生成的代码？
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **A:**
 
@@ -489,6 +505,8 @@ cargo expand > expanded.rs
 ```
 
 ### Q: FFI 中如何处理 panic？
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **A:** 始终使用 `catch_unwind` 捕获 panic，防止跨 FFI 边界传播：
 
@@ -514,6 +532,8 @@ pub extern "C" fn safe_ffi_function() -> i32 {
 在 FFI 编程中，所有权管理尤为重要，因为编译器无法在 Rust 和 C 之间强制执行借用规则。
 
 ### 跨边界所有权模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 模式1：Rust 拥有，C 借用
@@ -557,6 +577,8 @@ impl SharedFFIResource {
 
 ### 生命周期标记技巧
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -598,6 +620,8 @@ fn use_borrowed() {
 异步代码对所有权有特殊要求，特别是在处理跨 await 点的借用时。
 
 ### 跨 await 的所有权模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::Arc;

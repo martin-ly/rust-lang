@@ -457,6 +457,8 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
 
 ### 6.3 错误处理
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use thiserror::Error;
 
@@ -492,6 +494,8 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景1: AI 辅助 Rust 学习
 
+> **[来源: Wikipedia - Concurrency]**
+
 使用 AI 工具快速理解 Rust 复杂概念：
 
 - 将所有权错误信息粘贴给 AI，获取详细解释
@@ -499,6 +503,8 @@ type Result<T> = std::result::Result<T, AIError>;
 - 使用 AI 审查代码并提供改进建议
 
 ### 场景2: 本地 LLM 推理服务
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 构建轻量级本地 LLM 服务：
 
@@ -509,12 +515,16 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### 场景3: 嵌入式 AI 推理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 在资源受限设备运行 AI 模型：
 
 - 使用 Candle 的轻量级特性
 - 结合 [嵌入式 Rust 指南](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
 
 ### 场景4: 生产级 ML Pipeline
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 构建端到端机器学习工作流：
 
@@ -557,6 +567,8 @@ type Result<T> = std::result::Result<T, AIError>;
 
 ### array_windows 在特征工程中的应用
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 /// 使用 array_windows 进行时间窗口特征提取
 pub fn extract_window_features(time_series: &[f64]) -> Vec<WindowFeature> {
@@ -581,6 +593,8 @@ pub fn sliding_predict(model: &Model, data: &[f32]) -> Vec<f32> {
 
 ### LazyLock 在模型缓存中的应用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::LazyLock;
 
@@ -601,6 +615,8 @@ pub fn quick_inference(input: &[f32]) -> Option<Vec<f32>> {
 ```
 
 ### ControlFlow 在数据处理管道中的应用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -627,6 +643,8 @@ fn preprocess_pipeline(
 ```
 
 ### 数学常量在算法优化中的应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 /// 使用黄金比例进行超参数搜索

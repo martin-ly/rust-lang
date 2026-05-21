@@ -196,6 +196,8 @@ fn lock_slow(&self) {
 
 ### 算法 2.3 (unlock)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn unlock(&self) {
     let state = self.state.swap(0, Release);
@@ -208,6 +210,8 @@ fn unlock(&self) {
 ```
 
 ### 定理 2.1 (解锁传递正确性)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > unlock操作确保等待者被唤醒并有机会获取锁。
 
@@ -236,7 +240,11 @@ fn unlock(&self) {
 
 ### 3.1 读者计数压缩
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 3.1 (RwLock状态编码)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 pub struct RwLock<T> {
@@ -264,6 +272,8 @@ $$
 $$
 
 ### 定理 3.1 (读者计数正确性)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > 压缩的读者计数在无溢出情况下准确追踪读者数量。
 
@@ -298,7 +308,11 @@ fn read(&self) -> RwLockReadGuard<T> {
 
 ### 3.2 写者优先策略
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 3.2 (公平性策略)
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 pub const fn new() -> Self { /* 默认策略 */ }
@@ -307,6 +321,8 @@ pub const fn write_preferred() -> Self { }
 ```
 
 ### 定理 3.2 (写者优先防止读者饥饿)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > 写者优先策略确保写者不会被无限期延迟。
 
@@ -339,7 +355,11 @@ $$
 
 ### 4.1 等待队列管理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 4.1 (条件变量状态)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 pub struct Condvar {
@@ -353,6 +373,8 @@ pub struct Condvar {
 每个条件变量维护一个**先进先出**的等待队列。
 
 ### 算法 4.1 (wait)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>> {

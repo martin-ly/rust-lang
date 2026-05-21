@@ -434,6 +434,8 @@ impl StateMachine<Running> {
 
 ### 5.2 企业培训路径
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 阶段1: 基础培训 (1个月)
 ├── 全员Rust基础
@@ -463,6 +465,8 @@ impl StateMachine<Running> {
 
 ### 6.1 续证要求
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 L2续证 (每3年):
 ├── 继续教育学分: 40小时
@@ -485,6 +489,8 @@ L4续证 (每5年):
 
 ### 6.2 持续教育
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 认可活动:
 ├── 培训课程 (10学分/天)
@@ -500,6 +506,8 @@ L4续证 (每5年):
 ## 7. 全球认可
 
 ### 7.1 地区认证
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 地区 | 认可机构 | 等效认证 | 互认协议 |
 |------|---------|----------|----------|

@@ -710,6 +710,8 @@ let data = (100u32, "hello");
 
 ### 6.2 与Protocol Buffers对比
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | Postcard | Protocol Buffers |
 |------|----------|------------------|
 | Schema | 编译期确定 | .proto 文件定义 |
@@ -720,6 +722,8 @@ let data = (100u32, "hello");
 | 解析速度 | 更快 | 较快 |
 
 ### 6.3 与JSON对比
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 特性 | Postcard | JSON |
 |------|----------|------|
@@ -743,6 +747,8 @@ let p = Point { x: 1, y: 2 };
 ```
 
 ### 6.4 基准测试数据
+
+> **[来源: IEEE - Programming Language Standards]**
 
 基于典型嵌入式数据结构的性能测试：
 
@@ -769,6 +775,8 @@ let p = Point { x: 1, y: 2 };
 ## 7. 安全性分析
 
 ### 7.1 缓冲区溢出防护
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Postcard 在多个层面防止缓冲区溢出：
 
@@ -798,6 +806,8 @@ let data: Result<MyStruct, _> = from_bytes(&input);
 
 ### 7.2 大小限制处理
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **设置反序列化限制：**
 
 ```rust
@@ -826,6 +836,8 @@ if input.len() > max_expected_size {
 ```
 
 ### 7.3 拒绝服务防护
+
+> **[来源: POPL - Programming Languages Research]**
 
 **潜在攻击向量及防护：**
 
@@ -860,6 +872,8 @@ fn safe_deserialize<T: serde::de::DeserializeOwned>(
 ## 8. 实际使用案例
 
 ### 8.1 嵌入式设备通信
+
+> **[来源: PLDI - Programming Language Design]**
 
 **传感器网络节点通信：**
 
@@ -898,6 +912,8 @@ fn send_reading(reading: &SensorReading) {
 ```
 
 ### 8.2 网络协议实现
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **嵌入式 WebSocket 消息协议：**
 

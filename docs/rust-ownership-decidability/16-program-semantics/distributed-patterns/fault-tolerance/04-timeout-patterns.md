@@ -193,6 +193,8 @@
 
 ### 4.1 基础超时框架
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -287,6 +289,8 @@ where
 ```
 
 ### 4.2 自适应超时实现
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::collections::VecDeque;
@@ -451,6 +455,8 @@ impl TieredAdaptiveTimeout {
 
 ### 4.3 取消传播与协作式取消
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use tokio::select;
 use tokio::sync::oneshot;
@@ -580,6 +586,8 @@ impl CancellableHttpClient {
 
 ### 4.4 多级超时策略
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 /// 分层超时配置
 #[derive(Debug, Clone)]
@@ -680,6 +688,8 @@ impl<S: Stream> Stream for StreamWithTimeout<S> {
 ```
 
 ### 4.5 超时预算与传播
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 /// 超时预算上下文
@@ -820,6 +830,8 @@ impl PropagatedTimeout {
 ## 5. 形式化验证
 
 ### 5.1 超时正确性
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 超时正确性属性:

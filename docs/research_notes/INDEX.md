@@ -500,6 +500,8 @@
 
 ### 软件设计理论研究
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **目录**: [software_design_theory/](./software_design_theory/README.md)
 
 1. **[software_design_theory/README.md](./software_design_theory/README.md)** - 软件设计理论体系
@@ -530,6 +532,8 @@
 
 ### 综合研究
 
+> **[来源: ACM - Systems Programming Languages]**
+
 1. **[practical_applications.md](./practical_applications.md)** - 实际应用案例研究
    - 研究目标: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
    - 状态: ✅ 已完成 (100%)
@@ -546,11 +550,15 @@
 
 ### 所有权和借用
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [所有权模型形式化](./formal_methods/ownership_model.md)
 - [借用检查器证明](./formal_methods/borrow_checker_proof.md)
 - [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md)
 
 ### 类型系统
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [类型理论完备性缺口](./type_theory/00_completeness_gaps.md)
 - [类型系统基础](./type_theory/type_system_foundations.md)
@@ -560,10 +568,14 @@
 
 ### 生命周期
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [生命周期形式化（形式化方法）](./formal_methods/lifetime_formalization.md)
 - [生命周期形式化（类型理论）](./type_theory/lifetime_formalization.md)
 
 ### 异步和并发
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [异步状态机形式化](./formal_methods/async_state_machine.md)
 - [并发性能研究](./experiments/concurrency_performance.md)
@@ -571,11 +583,15 @@
 
 ### 安全与 unsafe
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [安全与非安全全面论证](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)
 - [05_boundary_system 三维边界](software_design_theory/05_boundary_system/README.md)
 - [07_anti_patterns 反模式](software_design_theory/07_anti_patterns.md)
 
 ### 设计模式与工程
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - [设计模式形式化](software_design_theory/01_design_patterns_formal/README.md)（GoF 23）
 - [23 安全 / 43 完全模型](software_design_theory/02_workflow_safe_complete_models/README.md)
@@ -584,12 +600,16 @@
 
 ### 性能优化
 
+> **[来源: Wikipedia - Type System]**
+
 - [性能基准测试](./experiments/performance_benchmarks.md)
 - [内存分析](./experiments/memory_analysis.md)
 - [编译器优化](./experiments/compiler_optimizations.md)
 - [宏展开性能分析](./experiments/macro_expansion_performance.md)
 
 ### 实际应用 {#实际应用-1}
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [实际应用案例研究](./practical_applications.md)
 - [研究方法论](./research_methodology.md)

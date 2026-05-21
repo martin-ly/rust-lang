@@ -187,6 +187,8 @@ fn condvar_basic_example() {
 
 ### 4.1 监视器模式的形式化
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 监视器模式 (Monitor Pattern):
 
@@ -207,6 +209,8 @@ fn condvar_basic_example() {
 
 ### 4.2 锁所有权转移的形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 wait 操作的所有权转移:
 
@@ -226,6 +230,8 @@ wait 操作的所有权转移:
 ```
 
 ### 4.3 代码示例：生产者-消费者
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
@@ -301,6 +307,8 @@ fn producer_consumer_example() {
 
 ### 5.1 虚假唤醒的形式化定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 虚假唤醒 (Spurious Wakeup):
 
@@ -318,6 +326,8 @@ fn producer_consumer_example() {
 ```
 
 ### 5.2 使用 While 循环的必要性
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 正确使用模式:

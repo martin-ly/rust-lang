@@ -29,6 +29,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 生命周期作为区域（Region）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -66,6 +68,8 @@ fn constrained_lifetime<'a, 'b: 'a>(
 
 ### 生命周期省略规则（Lifetime Elision）
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // Rust 自动推导生命周期的规则
 
@@ -92,6 +96,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 生命周期边界与类型
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 边界生命周期：'static

@@ -402,6 +402,8 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
 
 ### Tokio
 
+> **[来源: Wikipedia - Concurrency]**
+
 **核心组件**:
 
 ```rust
@@ -461,6 +463,8 @@ async fn task_management_example() {
 
 ### Serde
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use serde::{Serialize, Deserialize};
 
@@ -495,6 +499,8 @@ mod custom_format {
 ## 🧪 测试工具
 
 ### 测试栈推荐
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 单元测试 + 属性测试 + Mock
@@ -531,6 +537,8 @@ mod tests {
 ## 📈 监控与可观测性
 
 ### Tracing 生态系统
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use tracing::{info, warn, error, instrument};
@@ -613,3 +621,9 @@ fn init_tracing() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**

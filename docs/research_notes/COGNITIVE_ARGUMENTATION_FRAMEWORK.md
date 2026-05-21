@@ -170,6 +170,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 文档分类矩阵
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +186,8 @@
 | **速查卡** | 快速参考 | 实践者 | Cheat Sheet |
 
 ### 认知负荷管理
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +214,8 @@
 
 ### 平衡策略
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 形式化程度
     │
@@ -227,6 +233,8 @@
 ```
 
 ### 具体实践
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **形式化符号的使用原则**:
 
@@ -262,6 +270,8 @@
 
 ### 评估维度
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 维度 | 指标 | 评估问题 |
 | :--- | :--- | :--- |
 | **准确性** | 形式正确性 | 定义是否精确？定理是否正确？ |
@@ -272,6 +282,8 @@
 | **实用性** | 实践价值 | 对编程是否有指导意义？ |
 
 ### 评估检查清单
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **概念定义**:
 
@@ -300,6 +312,8 @@
 ## 六、与其他形式化工作的区别
 
 ### 本项目 vs 传统形式化验证
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 方面 | 传统形式化验证 | 本项目 |
 | :--- | :--- | :--- |

@@ -125,6 +125,8 @@ Rust 的内存模型是其内存安全保证的核心基础。
 
 #### 2.1.1 内存状态定义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 Memory ::= Location → Value ∪ {⊥, uninit}
 
@@ -144,6 +146,8 @@ Perm ::= Own                        (所有权)
 
 #### 2.1.2 内存操作
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 read : Memory × Location → Value ∪ {error}
 write : Memory × Location × Value → Memory ∪ {error}
@@ -157,6 +161,8 @@ deallocate : Memory × Location → Memory ∪ {error}
 
 #### 2.2.1 有效值定义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 一个值在内存位置 `loc` 处是**有效的**，当且仅当：
 
 ```
@@ -168,6 +174,8 @@ valid(Memory, loc, τ) :=
 ```
 
 #### 2.2.2 类型有效性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 valid_val(v, Int) := v ∈ ℤ
@@ -212,6 +220,8 @@ valid_val(v, Box<τ>) :=
 
 #### 3.1.1 栈帧定义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 StackFrame ::= {
     function: FunctionName,
@@ -224,6 +234,8 @@ State ::= Uninitialized | Initialized | Moved | Borrowed(Permission)
 ```
 
 #### 3.1.2 栈操作语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **函数调用 (Call)**：
 
@@ -251,6 +263,8 @@ exit_stack(S, ret_val):
 
 #### 3.2.1 生命周期规则
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 Γ ⊢ let x: τ = e:
     1. 为 x 分配栈空间 sizeof(τ)
@@ -261,6 +275,8 @@ exit_stack(S, ret_val):
 ```
 
 #### 3.2.2 生命周期结束处理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 end_of_scope(x):
@@ -278,6 +294,8 @@ end_of_scope(x):
 
 #### 3.3.1 panic 语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 panic!(msg):
     1. 标记 panic 状态
@@ -289,6 +307,8 @@ panic!(msg):
 ```
 
 #### 3.3.2 析构顺序
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 逆序析构规则 (LIFO)：
@@ -308,6 +328,8 @@ panic!(msg):
 
 #### 4.1.1 分配语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 allocate_heap(τ):
     Precondition:
@@ -322,6 +344,8 @@ allocate_heap(τ):
 ```
 
 #### 4.1.2 Box<T> 语义
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 Box::new(e):
@@ -346,6 +370,8 @@ Drop(Box):
 
 #### 4.2.1 移动语义形式化
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 move(src) → dst:
     Precondition:
@@ -363,6 +389,8 @@ move(src) → dst:
 ```
 
 #### 4.2.2 复制语义形式化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 copy(src) → dst:
@@ -383,6 +411,8 @@ copy(src) → dst:
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 4.3.1 引用计数形式化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 Rc<T> ::= (ptr: *mut RcBox<T>)

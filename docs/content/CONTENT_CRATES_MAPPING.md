@@ -145,6 +145,8 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/scenarios/ → C09 + C10
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
 | `web_application.md` | C10 网络 | Web 应用架构 |
@@ -164,6 +166,8 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### 项目 1: Web 应用
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **涉及内容**:
 
 - crates: C04 + C06 + C09 + C10
@@ -178,6 +182,8 @@ representations/ ────────▶  (知识表示)                 ─
 5. content - 部署到生产环境
 
 ### 项目 2: 分布式任务队列
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **涉及内容**:
 

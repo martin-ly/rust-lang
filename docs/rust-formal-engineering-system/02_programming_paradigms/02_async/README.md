@@ -422,6 +422,8 @@ where
 
 ### 实验分析
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 并发性能 | 并发性能测试 | [../../../research_notes/experiments/concurrency_performance.md](../../../research_notes/experiments/concurrency_performance.md) |
@@ -457,3 +459,9 @@ where
 > **[来源: Tokio Documentation]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**

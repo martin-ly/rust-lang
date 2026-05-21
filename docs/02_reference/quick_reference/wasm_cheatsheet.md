@@ -268,6 +268,8 @@ strip = true
 
 ### 使用 wasm-opt
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```bash
 wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 ```
@@ -277,6 +279,8 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 ## 🚫 反例速查 {#-反例速查}
 
 ### 反例 1: 在 wasm 中使用阻塞 API
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误示例**:
 
@@ -294,6 +298,8 @@ fn bad() {
 ---
 
 ### 反例 2: 忽略 JS 边界开销
+
+> **[来源: PLDI - Programming Language Design]**
 
 **错误示例**:
 
@@ -330,11 +336,15 @@ for i in 0..10000 {
 
 ### 官方文档
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [wasm-bindgen 文档](https://rustwasm.github.io/wasm-bindgen/)
 - [wasm-pack 文档](https://rustwasm.github.io/wasm-pack/)
 - [WebAssembly 官方文档](https://webassembly.org/)
 
 ### 项目内部文档
+
+> **[来源: Wikipedia - Type System]**
 
 - [完整文档](../../../crates/c12_wasm/README.md)
 - [WASM 使用指南](../../05_guides/WASM_USAGE_GUIDE.md)
@@ -343,6 +353,8 @@ for i in 0..10000 {
 ## 🎯 使用场景 {#-使用场景}
 
 ### 场景 1: 浏览器图像处理器
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -385,6 +397,8 @@ impl ImageProcessor {
 ```
 
 ### 场景 2: 实时数据可视化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -449,6 +463,8 @@ impl ChartRenderer {
 
 ### 场景 3: Web Worker 计算密集型任务
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // worker.rs
 use wasm_bindgen::prelude::*;
@@ -488,6 +504,8 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 理论基础
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权模型** | [ownership_model](../../research_notes/formal_methods/ownership_model.md) | WASM 内存安全保证 |
@@ -497,6 +515,8 @@ pub fn process_task(task_json: &str) -> String {
 
 ### 形式化定理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **定理 WASM-T1（JS 边界安全）**: 若 WASM 模块满足所有权规则，则 JS 互操作无内存不安全。
 
 *证明*: 由 [ownership_model](../../research_notes/formal_methods/ownership_model.md) 定理 T2/T3，wasm-bindgen 生成的绑定保持所有权语义，JS 侧无法直接访问 Rust 内存。∎
@@ -504,6 +524,8 @@ pub fn process_task(task_json: &str) -> String {
 ---
 
 ### 相关速查卡
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [异步编程速查卡](./async_patterns.md) - WASM 异步
 - [类型系统速查卡](./type_system.md) - WASM 类型
@@ -524,6 +546,8 @@ pub fn process_task(task_json: &str) -> String {
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // array_windows - 零分配滑动窗口

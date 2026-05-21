@@ -201,6 +201,8 @@ chmod +x script.rs
 ```
 
 ### 3.3 使用 Rust 解释器模式
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +212,8 @@ rust-script script.rs
 ```
 
 ### 3.4 Windows 环境
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 Windows 不支持 shebang，因此：
 
@@ -228,6 +232,8 @@ cargo run --manifest-path script.rs
 
 ### 4.1 基本依赖
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```cargo
 [dependencies]
 clap = "4"
@@ -235,6 +241,8 @@ rand = "0.8"
 ```
 
 ### 4.2 带特性的依赖
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```cargo
 [dependencies]
@@ -244,12 +252,16 @@ serde = { version = "1", features = ["derive"] }
 
 ### 4.3 路径依赖 (同目录下的本地 crate)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```cargo
 [dependencies]
 my_local_lib = { path = "../my_local_lib" }
 ```
 
 ### 4.4 工作区依赖
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Cargo Script 目前**不支持**直接引用工作区依赖。需要显式声明版本：
 

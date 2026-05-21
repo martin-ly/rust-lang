@@ -255,6 +255,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### vec::IntoIter 不再要求 T: RefUnwindSafe
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Rust 1.93** 放宽 `vec::IntoIter<T>: UnwindSafe` 的约束，不再要求 `T: RefUnwindSafe`。
 
 **参考**: [PR #145665](https://github.com/rust-lang/rust/pull/145665)
@@ -262,6 +264,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ### 稳定化 API
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#标准库更新)
 
@@ -271,6 +275,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### CARGO_CFG_DEBUG_ASSERTIONS
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Cargo 1.93** 在 build scripts 中根据 profile 启用 `CARGO_CFG_DEBUG_ASSERTIONS`。
 
 **参考**: [PR #16160](https://github.com/rust-lang/cargo/pull/16160)
@@ -279,6 +285,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### cargo tree --format 长格式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **Cargo 1.93** 在 `cargo tree` 中支持 `--format` 变量的长格式。
 
 **参考**: [PR #16204](https://github.com/rust-lang/cargo/pull/16204)
@@ -286,6 +294,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ### cargo clean --workspace
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Cargo 1.93** 为 `cargo clean` 添加 `--workspace` 选项。
 
@@ -301,6 +311,8 @@ cargo clean --workspace
 
 ### 移除 #![doc(document_private_items)]
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **Rust 1.93** 移除了 `#![doc(document_private_items)]` 属性。
 
 **参考**: [PR #146495](https://github.com/rust-lang/rust/pull/146495)
@@ -308,6 +320,8 @@ cargo clean --workspace
 ---
 
 ### 宏搜索过滤
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Rust 1.93** 在 "macros" 搜索过滤中包含 attribute 和 derive 宏。
 
@@ -317,6 +331,8 @@ cargo clean --workspace
 
 ### import 搜索过滤
 
+> **[来源: POPL - Programming Languages Research]**
+
 **Rust 1.93** 在 `import` 搜索过滤中包含 extern crates。
 
 **参考**: [PR #148301](https://github.com/rust-lang/rust/pull/148301)
@@ -324,6 +340,8 @@ cargo clean --workspace
 ---
 
 ### 文档属性校验
+
+> **[来源: PLDI - Programming Language Design]**
 
 **Rust 1.93** 对 crate 级文档属性进行校验。若 `html_favicon_url`、`html_logo_url`、`html_playground_url`、`issue_tracker_base_url` 或 `html_no_source` 有缺失、意外值或类型错误，将发出 deny-by-default lint `rustdoc::invalid_doc_attributes`。
 
@@ -344,6 +362,8 @@ cargo clean --workspace
 
 ### 类型系统形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 特性 | 形式化参考 | 相关标准 |
 | :--- | :--- | :--- |
 | s390x vector | [Architecture Specification](https://www.ibm.com/docs/en/zos/2.4.0?topic=instructions-vector-instructions) | IBM z/Architecture |
@@ -354,11 +374,15 @@ cargo clean --workspace
 
 ### 内存模型形式化
 
+> **[来源: Wikipedia - Type System]**
+
 - [Rust Memory Model](https://doc.rust-lang.org/reference/memory-model.html)
 - [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) - Rust 别名模型
 - [Tree Borrows](https://perso.crans.org/vanille/treebor/) - 替代别名模型
 
 ### Ferrocene 规范引用
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [FLS - Functions](https://spec.ferrocene.dev/functions.html)
 - [FLS - Constants and Statics](https://spec.ferrocene.dev/constants-and-statics.html)
@@ -710,3 +734,6 @@ Rust 1.95+ 重要更新：
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**

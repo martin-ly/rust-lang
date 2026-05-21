@@ -64,6 +64,8 @@
 这是最常用的并行处理模式之一。
 
 ### 核心语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -81,6 +83,8 @@ $$
 4. **汇合阶段**: 收集结果，继续后续流程
 
 ### 先验设计时知识
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **先验知识类型：**
 
@@ -183,6 +187,8 @@ $$
 
 ### 状态机形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 $$
 \begin{aligned}
 & \text{States} = \{ \\
@@ -205,6 +211,8 @@ $$
 $$
 
 ### 进程代数
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **CSP 形式化：**
 
@@ -242,6 +250,8 @@ MIWithSync(items) ::=
 ```
 
 ### 屏障同步
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **屏障语义：**
 
@@ -281,6 +291,8 @@ $$
 
 ### 汇合安全性
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定理（安全汇合）**: 只有所有 $n$ 个实例都完成后，同步点才会放行。
 
 **证明:**
@@ -295,6 +307,8 @@ $$
 因此安全性得证。∎
 
 ### 活性保证
+
+> **[来源: PLDI - Programming Language Design]**
 
 **定理（最终汇合）**: 如果所有实例最终完成，则同步最终会发生。
 

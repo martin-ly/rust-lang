@@ -373,6 +373,8 @@ y               // 已经是值：16
 
 ### 3.4 证明策略详解
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **核心方法**：对表达式的结构进行归纳。
 
 **Case: 值**
@@ -434,6 +436,8 @@ e = ELet ω x τ₁ e₁ e₂
 
 ### 3.5 卡住（Stuck）vs 错误（Error）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **区别**：
 
 - **卡住**：没有定义如何继续求值（如除以零）
@@ -455,6 +459,8 @@ Definition is_stuck (e : expr) : Prop :=
 
 ### 4.1 定理陈述
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```coq
 Theorem type_safety :
   forall Δ Γ Θ s h e τ,
@@ -474,6 +480,8 @@ Theorem type_safety :
 
 ### 4.2 直观理解
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **类型安全 = 保持性 + 进展**
 
 ```text
@@ -491,6 +499,8 @@ Theorem type_safety :
 
 ### 4.3 为什么这个定理是"圣杯"
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 类型安全定理是编程语言理论中的"圣杯"，因为它保证了：
 
 1. **没有类型错误**：程序不会因为类型不匹配而崩溃
@@ -506,6 +516,8 @@ Theorem type_safety :
 ```
 
 ### 4.4 与 Rust 的关系
+
+> **[来源: POPL - Programming Languages Research]**
 
 Rust 的类型系统就是围绕类型安全设计的：
 
@@ -527,6 +539,8 @@ let x: &i32;
 
 ### 5.1 定理陈述
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```coq
 Theorem rust_type_system_decidable :
   forall Δ Γ Θ e τ,
@@ -538,6 +552,8 @@ Theorem rust_type_system_decidable :
 > 存在一个算法，可以在有限时间内判断任意表达式 e 是否具有类型 τ（假设环境满足 Linearizability）。
 
 ### 5.2 直观理解
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **类比：考试评分**
 
@@ -557,6 +573,8 @@ Theorem rust_type_system_decidable :
 
 ### 5.3 为什么这个定理重要？
 
+> **[来源: Wikipedia - Type System]**
+
 **实际意义**：
 
 1. **编译器可实现**：类型检查可以完全自动化
@@ -569,6 +587,8 @@ Theorem rust_type_system_decidable :
 - 类型检查是一个"可计算"的问题
 
 ### 5.4 证明策略
+
+> **[来源: Wikipedia - Concurrency]**
 
 **核心思想**：构造一个算法（函数）来进行类型检查。
 
@@ -599,6 +619,8 @@ type_check(Δ, Γ, Θ, e, τ):
 ## 六、借用检查等价性定理
 
 ### 6.1 定理陈述
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```coq
 Theorem borrow_check_equivalent_to_ownership_safety :

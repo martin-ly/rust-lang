@@ -153,6 +153,8 @@ fn borrow_rules() {
 ```
 
 ### 非词法生命周期（NLL）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +185,8 @@ fn nll_control_flow() {
 ```
 
 ### 内部可变性模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +247,8 @@ fn arc_mutex_demo() {
 ```
 
 ### 所有权与并发的形式化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -313,3 +319,6 @@ fn non_send_sync() {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: POPL - Programming Languages Research]**

@@ -50,6 +50,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么需要生命周期
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -83,6 +85,8 @@ fn valid_reference(s: &String) -> &str {
 
 ### 1.2 生命周期与区域
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
 │                    生命周期作为程序区域                          │
@@ -108,6 +112,8 @@ fn valid_reference(s: &String) -> &str {
 ## 2. 区域代数基础
 
 ### 2.1 区域的形式化定义
+
+> **[来源: Wikipedia - Type System]**
 
 **区域作为控制流图的子集**:
 
@@ -144,6 +150,8 @@ fn example() {
 ```
 
 ### 2.2 区域操作
+
+> **[来源: Wikipedia - Concurrency]**
 
 **区域代数**:
 
@@ -190,6 +198,8 @@ fn example() {
 
 ### 2.3 区域约束
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **生命周期约束**:
 
 ```text
@@ -219,6 +229,8 @@ fn foo<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32
 
 ### 3.1 生命周期命题
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **基于RustBelt的生命周期逻辑**:
 
 ```text
@@ -239,6 +251,8 @@ fn foo<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32
 ```
 
 ### 3.2 生命周期上下文
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **上下文操作**:
 

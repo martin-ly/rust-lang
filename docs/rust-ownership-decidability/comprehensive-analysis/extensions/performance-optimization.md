@@ -61,6 +61,8 @@ opt-level = 3           # 构建脚本也优化
 ```
 
 ### 1.2 内联控制
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -91,6 +93,8 @@ fn error_handler() {
 ```
 
 ### 1.3 分支预测提示
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 标准库中的likely/unlikely
@@ -123,6 +127,8 @@ pub fn optimized_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ### 2.1 内存布局优化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 糟糕的内存布局（填充浪费）
 struct BadLayout {
@@ -146,6 +152,8 @@ struct GoodLayout {
 ```
 
 ### 2.2  arena分配器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use bumpalo::Bump;
@@ -188,6 +196,8 @@ impl<T> Arena<T> {
 
 ### 2.3 零拷贝技术
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 使用Cow避免不必要克隆
 use std::borrow::Cow;
@@ -216,6 +226,8 @@ pub fn parse_headers(data: &[u8]) -> Vec<&[u8]> {
 ## 3. 并发性能
 
 ### 3.1 无锁数据结构
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use crossbeam::queue::ArrayQueue;
@@ -271,6 +283,8 @@ impl<T> TreiberStack<T> {
 
 ### 3.2 线程局部存储
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::cell::RefCell;
 use std::collections::HashMap;
@@ -303,6 +317,8 @@ pub fn format_message(msg: &str) -> String {
 ```
 
 ### 3.3 SIMD优化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 使用packed_simd或std::simd (nightly)
@@ -339,6 +355,8 @@ struct AlignedBuffer([f32; 256]);
 ## 4. 异步性能
 
 ### 4.1 减少分配
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::future::Future;

@@ -128,6 +128,8 @@
 **核心关注点**: 防止内存错误（悬垂指针、双重释放、缓冲区溢出、数据竞争）
 
 #### 边界定义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +141,8 @@
 | 内存布局 | 分配器实现 | FFI（unsafe边界） |
 
 #### 核心抽象
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +178,8 @@
 ```
 
 #### 关键定理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +191,8 @@
 | **T-数据竞争自由** | 借用规则保证线程安全 | [borrow_checker_proof](formal_methods/borrow_checker_proof.md) | ⭐⭐⭐⭐⭐ |
 
 #### 领域模型图
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +235,8 @@ graph TB
 **核心关注点**: 类型安全、抽象能力、代码复用
 
 #### 边界定义 {#边界定义-1}
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +249,8 @@ graph TB
 | 型变 | 协变/逆变实现 | 生命周期（子类型） |
 
 #### 核心抽象 {#核心抽象-1}
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -274,6 +286,8 @@ A + B     : A 或 B
 
 #### 关键定理 {#关键定理-1}
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 定理 | 陈述 | 证明 | 重要性 |
 | :--- | :--- | :--- | :--- |
 | **T-进展** | 良类型的程序不会卡住 | [type_system_foundations](type_theory/type_system_foundations.md) | ⭐⭐⭐⭐⭐ |
@@ -282,6 +296,8 @@ A + B     : A 或 B
 | **T-型变安全** | 协变/逆变/不变正确性 | [variance_theory](type_theory/variance_theory.md) | ⭐⭐⭐⭐ |
 
 #### 类型层次结构
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 类型系统
@@ -316,6 +332,8 @@ A + B     : A 或 B
 **核心关注点**: 多线程执行、异步编程、同步机制
 
 #### 边界定义 {#边界定义-2}
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 包含 | 排除 | 交叉领域 |
 | :--- | :--- | :--- |

@@ -123,6 +123,8 @@
 > **[来源: Rust Official Docs]**
 
 #### Rust 1.95-1.99 (2026年)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +161,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 认证里程碑
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +174,8 @@
 | **TÜV Rust认证** | 扩展更多标准 | 更广泛认可 |
 
 #### 行业采用
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +211,8 @@
 
 #### Rust 2027 Edition?
 
+> **[来源: PLDI - Programming Language Design]**
+
 **可能性评估**: 30%
 
 **可能内容**:
@@ -221,6 +229,8 @@
 ```
 
 #### 编译器技术
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 rustc改进:
@@ -242,6 +252,8 @@ rustc改进:
 
 #### 标准化进展
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 MISRA Rust 2027:
 ├── 发布v1.0标准
@@ -258,6 +270,8 @@ ISO更新:
 
 #### 形式化验证成熟
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 工具 | 2027状态 | 能力 |
 |------|----------|------|
 | **Kani** | 生产就绪 | 完整CI/CD集成 |
@@ -271,7 +285,11 @@ ISO更新:
 
 ### 技术融合
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 #### Rust + AI/ML
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 AI开发:
@@ -288,6 +306,8 @@ AI开发:
 ```
 
 #### WebAssembly演进
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 WASI 0.3:

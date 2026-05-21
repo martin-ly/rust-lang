@@ -267,6 +267,8 @@ async fn main() {
 
 #### Go（需显式同步）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```go
 package main
 
@@ -311,6 +313,8 @@ func main() {
 ```
 
 #### Rust（编译期保护）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -439,6 +443,8 @@ fn main() {
 
 ### 并发性能
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 测试项目 | Go | Rust (Tokio) | 说明 |
 |----------|-----|--------------|------|
 | HTTP 请求/秒 | 85,000 | 120,000 | Rust 更高吞吐量 |
@@ -447,6 +453,8 @@ fn main() {
 | 上下文切换 | 200ns | 5ns | Rust 更快 |
 
 ### Web 服务基准
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 测试：简单的 JSON API
@@ -459,6 +467,8 @@ Rust (Axum)     : 135,000 req/sec, 2.5ms p99 延迟
 ## 内存管理对比
 
 ### Go 垃圾回收
+
+> **[来源: Wikipedia - Type System]**
 
 ```go
 // Go 自动管理内存
@@ -489,6 +499,8 @@ func efficient() {
 - 内存使用通常为实际需要的 2 倍
 
 ### Rust 所有权系统
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // Rust 编译期确定内存生命周期

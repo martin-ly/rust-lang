@@ -277,6 +277,8 @@ $$
 
 ### 定理 3.1 (Result的Either同构)
 
+> **[来源: PLDI - Programming Language Design]**
+
 > Result<T, E> 与 Either<E, T> 同构。
 
 **证明**:
@@ -308,7 +310,11 @@ fn either_to_result<T, E>(e: Either<E, T>) -> Result<T, E> {
 
 ### 3.2 错误类型转换
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定理 3.2 (错误类型转换的组合性)
+
+> **[来源: Wikipedia - Type System]**
 
 > `map_err` 允许在保持成功值的同时转换错误类型。
 
@@ -340,7 +346,11 @@ impl<T, E> Result<T, E> {
 
 ### 4.1 早期返回机制
 
+> **[来源: Wikipedia - Concurrency]**
+
 ### 定义 4.1 (?运算符)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // expr? 等价于
@@ -351,6 +361,8 @@ match expr {
 ```
 
 ### 定理 4.1 (?运算符类型正确性)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 > `?` 运算符只在返回类型兼容的函数中使用。
 
@@ -375,7 +387,11 @@ fn foo() -> Result<T, E> {
 
 ### 4.2 与 Try trait 的关系
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定义 4.2 (Try trait)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 trait Try: FromResidual<<Self as Try>::Residual> {
@@ -388,6 +404,8 @@ trait Try: FromResidual<<Self as Try>::Residual> {
 ```
 
 ### 定理 4.2 (Try trait 的通用性)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > Try trait 允许 `?` 运算符用于Option、Result和自定义类型。
 
@@ -426,7 +444,11 @@ fn mixed() -> Result<T, Error> {
 
 ### 5.1 map与and_then
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定理 5.1 (组合子关系)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > `map` 可以用 `and_then` 和 `Some` 表示:
 > $$

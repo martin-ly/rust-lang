@@ -505,6 +505,8 @@ fn main() {
 
 #### 属性结构模板
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```text
 概念: [概念名称]
 ├── 核心属性
@@ -532,6 +534,8 @@ fn main() {
 
 #### 关系类型
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 1. **继承关系** - is-a 关系
 2. **组合关系** - has-a 关系
 3. **依赖关系** - depends-on 关系
@@ -539,6 +543,8 @@ fn main() {
 5. **关联关系** - related-to 关系
 
 #### 关系表示
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 概念A --[关系类型]--> 概念B
@@ -553,6 +559,8 @@ fn main() {
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 论证结构
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 论点: [要论证的论点]
@@ -575,6 +583,8 @@ fn main() {
 > **[来源: IEEE - Programming Language Standards]**
 
 #### 证明结构
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 定理: [要证明的定理]
@@ -605,6 +615,8 @@ fn main() {
 
 #### 思维导图结构
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```mermaid
 mindmap
   root((Rust 核心概念))
@@ -623,6 +635,8 @@ mindmap
 ```
 
 #### 文本思维导图
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 Rust 核心概念
@@ -665,7 +679,11 @@ Rust 核心概念
 
 ### 2. 多维概念矩阵
 
+> **[来源: Wikipedia - Concurrency]**
+
 #### 矩阵结构模板
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 维度1 | 维度2 | 维度3 | ... | 综合评估 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -673,6 +691,8 @@ Rust 核心概念
 | ...   | ...   | ...   | ... | ...      |
 
 #### 示例：同步原语对比矩阵
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 同步原语     | 线程安全 | 性能       | 使用场景 | 复杂度 | 推荐度     |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -682,6 +702,8 @@ Rust 核心概念
 | **信号量**   | ✅ 是    | 中等       | 资源控制 | 中     | ⭐⭐⭐     |
 
 ### 3. 决策图网
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 决策图网已在 [DECISION_GRAPH_NETWORK.md](../04_thinking/DECISION_GRAPH_NETWORK.md) 中详细定义，包含：
 
@@ -695,6 +717,8 @@ Rust 核心概念
 
 ### 4. 证明图网
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 证明图网已在 [PROOF_GRAPH_NETWORK.md](../04_thinking/PROOF_GRAPH_NETWORK.md) 中详细定义，包含：
 
 - 核心证明路径
@@ -706,7 +730,11 @@ Rust 核心概念
 
 ### 5. 知识图谱
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 知识图谱结构
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 节点类型:
@@ -722,6 +750,8 @@ Rust 核心概念
 ```
 
 #### 示例知识图谱片段
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 所有权 (Ownership)

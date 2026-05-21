@@ -59,6 +59,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 基本概念
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -72,6 +74,8 @@
 - 表达式e在状态σ下一步归约为e'，新状态σ'
 
 ### 1.2 λ演算的小步语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +96,8 @@
 ```
 
 ### 1.3 存储操作
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +120,8 @@
 ```
 
 ### 1.4 Rust特定规则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +150,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 基本概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +160,8 @@
 - 表达式e在状态σ下求值为v，最终状态σ'
 
 ### 2.2 表达式规则
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +194,8 @@
 ```
 
 ### 2.3 递归
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,12 +213,16 @@
 
 ### 3.1 环境定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **环境 ρ**: 变量到位置的映射
 **存储 σ**: 位置到值的映射
 
 **配置**: `⟨e, ρ, σ⟩`
 
 ### 3.2 规则
+
+> **[来源: POPL - Programming Languages Research]**
 
 **变量查找**:
 

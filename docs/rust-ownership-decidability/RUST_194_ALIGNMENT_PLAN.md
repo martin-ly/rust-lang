@@ -57,12 +57,16 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 已稳定的特性（基于发展趋势）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 根据 Rust 2025-2026 的发展路线，Rust 1.94 可能包含以下稳定特性：
 
 #### A. 异步特性
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -71,6 +75,8 @@
 - **Future 协作** - 持续改进
 
 #### B. 类型系统特性
+
+> **[来源: Wikipedia - Type System]**
 
 - **Generic Const Expressions (GCE)** - 逐步稳定中
 - **Type Alias Impl Trait (TAIT)** - 逐步稳定中

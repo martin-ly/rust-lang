@@ -41,6 +41,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 汽车领域
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +91,8 @@
 
 ### 1.2 航空领域
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 主要监管机构:
 
@@ -115,6 +119,8 @@
 ```
 
 ### 1.3 工业领域
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 主要监管机构:
@@ -147,6 +153,8 @@
 
 ### 2.1 汽车ISO 26262认证
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 认证流程:
 
@@ -176,6 +184,8 @@ Rust特定考虑:
 ```
 
 ### 2.2 航空DO-178C认证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 认证流程:

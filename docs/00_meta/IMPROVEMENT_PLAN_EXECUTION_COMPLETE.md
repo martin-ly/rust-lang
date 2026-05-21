@@ -156,6 +156,8 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### ✅ S2: 扩充c11_macro_system
 
+> **[来源: POPL - Programming Languages Research]**
+
 **问题**: c11_macro_system 仅 **2 个源码文件**
 
 **解决方案**:
@@ -180,6 +182,8 @@ docs/Rust所有权与可判定性/            (82 files)
 
 ### ✅ S3: 创建scripts/README.md
 
+> **[来源: PLDI - Programming Language Design]**
+
 **解决方案**:
 
 - 创建完整的脚本文档
@@ -197,6 +201,8 @@ docs/Rust所有权与可判定性/            (82 files)
 ## 项目健康度提升
 
 ### 改进前 vs 改进后
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 指标 | 改进前 | 改进后 | 变化 |
 |------|--------|--------|------|
@@ -224,6 +230,8 @@ docs/Rust所有权与可判定性/            (82 files)
 ## 下一步建议
 
 ### 短期（本周）
+
+> **[来源: Wikipedia - Type System]**
 
 - [ ] 运行所有测试验证通过
 - [ ] 更新文档索引

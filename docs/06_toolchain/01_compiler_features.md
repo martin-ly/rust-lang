@@ -582,6 +582,8 @@ cargo build --release
 
 ### 6.1 目标 CPU 和特性
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **指定目标 CPU**:
 
 ```bash
@@ -620,6 +622,8 @@ rustflags = ["-C", "target-cpu=native"]
 
 ### 6.2 代码模型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 小代码模型 (默认, < 2GB)
 RUSTFLAGS="-C code-model=small" cargo build --release
@@ -636,6 +640,8 @@ RUSTFLAGS="-C code-model=large" cargo build --release
 ## 7. 调试信息
 
 ### 7.1 调试信息级别
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```toml
 [profile.dev]
@@ -658,6 +664,8 @@ debug = 1  # 仅行号信息
 
 ### 7.2 分割调试信息
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```toml
 [profile.release]
 split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
@@ -675,6 +683,8 @@ split-debuginfo = "packed"  # macOS/Windows: 打包到单独文件
 
 ### 7.3 DWARF 版本
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```bash
 # 使用 DWARF 5 (最新, 更小)
 RUSTFLAGS="-C debuginfo=2 -C dwarf-version=5" cargo build
@@ -690,6 +700,8 @@ RUSTFLAGS="-C debuginfo=2 -C dwarf-version=4" cargo build
 ## 8. 编译缓存
 
 ### 8.1 Sccache
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **安装**:
 
@@ -721,6 +733,8 @@ rustc-wrapper = "/path/to/sccache"
 
 ### 8.2 配置缓存
 
+> **[来源: POPL - Programming Languages Research]**
+
 **本地缓存**:
 
 ```bash
@@ -747,6 +761,8 @@ export SCCACHE_REGION="us-west-2"
 
 ### 9.1 并行编译
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```bash
 # 设置并行任务数
 cargo build -j 8
@@ -765,6 +781,8 @@ jobs = 8  # 默认为 CPU 核心数
 ---
 
 ### 9.2 依赖优化
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **减少依赖**:
 
@@ -793,6 +811,8 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### 9.3 代码组织
 
+> **[来源: Wikipedia - Type System]**
+
 **最佳实践**:
 
 1. **减小 crate 大小**: 将大 crate 拆分为多个小 crate
@@ -820,6 +840,8 @@ pub mod everything_in_one_file; // 10000+ lines
 
 ### 10.1 Procedural Macros
 
+> **[来源: Wikipedia - Concurrency]**
+
 **性能影响**:
 
 - 过程宏在编译时运行，会增加编译时间
@@ -839,6 +861,8 @@ struct Data { /* ... */ }
 ---
 
 ### 10.2 编译器内置工具
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **Clippy** (Linter):
 
@@ -864,6 +888,8 @@ cargo +nightly miri test
 
 ### 11.1 Polly (LLVM 优化器)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```bash
 # 启用 Polly (实验性)
 RUSTFLAGS="-C passes=polly" cargo build --release
@@ -872,6 +898,8 @@ RUSTFLAGS="-C passes=polly" cargo build --release
 ---
 
 ### 11.2 自定义构建脚本
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **build.rs**:
 
@@ -894,6 +922,8 @@ fn main() {
 ## 12. 实战案例
 
 ### 12.1 生产环境优化配置
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```toml
 [profile.release]

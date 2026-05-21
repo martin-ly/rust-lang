@@ -202,6 +202,8 @@
 | formal_methods 完备性 | [FORMAL_METHODS_COMPLETENESS_CHECKLIST](./formal_methods/FORMAL_METHODS_COMPLETENESS_CHECKLIST.md) | ✅ 六篇×六维自检（概念定义、属性关系、解释论证、形式证明、反例、思维表征四类） |
 
 ### 性能优化
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +216,8 @@
 | 优化       | [编译器优化](./experiments/compiler_optimizations.md)   | ✅ 100% |
 
 ### 宏系统
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +236,8 @@
 
 ### 形式化方法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **研究领域**: 对 Rust 核心机制进行形式化建模和证明
 
 | 研究笔记                                                           | 研究目标                                    | 状态      | 完成度 |
@@ -244,6 +250,8 @@
 | [Pin 和自引用类型形式化](./formal_methods/pin_self_referential.md) | 形式化定义 Pin 类型和自引用类型，证明安全性 | ✅ 已完成 | 100%   |
 
 ### 类型理论
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **研究领域**: Rust 类型系统的理论基础和形式化定义
 
@@ -258,6 +266,8 @@
 
 ### 软件设计理论
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **研究领域**: 设计模式形式化、23/43 模型、执行模型、组合工程
 
 | 研究笔记                                                                    | 研究目标                           | 状态      | 完成度 |
@@ -271,6 +281,8 @@
 | [反模式与边界](./software_design_theory/07_anti_patterns.md)                | 13 反例、反模式分类、规避策略      | ✅ 已完成 | 100%   |
 
 ### 实验研究
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **研究领域**: 通过实验验证理论假设，优化实践
 

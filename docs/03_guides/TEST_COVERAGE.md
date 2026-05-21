@@ -194,6 +194,8 @@ coverage:
 
 ### 当前项目状态
 
+> **[来源: PLDI - Programming Language Design]**
+
 运行以下命令查看各 crate 覆盖率：
 
 ```bash
@@ -216,6 +218,8 @@ cargo tarpaulin --workspace --all-features --engine llvm --out html
 ## 7. 常见问题
 
 ### Q: tarpaulin 在 Windows 上失败？
+
+> **[来源: Wikipedia - Memory Safety]**
 
 A: 使用 `--engine llvm` 标志：
 

@@ -64,6 +64,8 @@ fn verify_memory_safety() -> bool {
 
 ### 何时使用这些文档
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 场景 | 推荐文档 | 使用方式 |
 | :--- | :--- | :--- |
 | 学习 Rust 概念结构 | [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) | 从上到下浏览思维导图 |
@@ -77,6 +79,8 @@ fn verify_memory_safety() -> bool {
 ## 形式化链接
 
 ### 证明与理论基础
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

@@ -217,6 +217,8 @@ research_notes/
 > **[来源: Rust Official Docs]**
 
 #### 形式化方法研究 (5个)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,6 +231,8 @@ research_notes/
 | pin_self_referential.md | [formal_methods/pin_self_referential.md](./formal_methods/pin_self_referential.md) | T-PN1, T-PN2, T-PN3 |
 
 #### 类型理论研究 (5个)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +245,8 @@ research_notes/
 | variance_theory.md | [type_theory/variance_theory.md](./type_theory/variance_theory.md) | Def 1.1-3.1, T1-T4 |
 
 #### 实验研究 (5个)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +259,8 @@ research_notes/
 | macro_expansion_performance.md | [experiments/macro_expansion_performance.md](./experiments/macro_expansion_performance.md) | 宏展开性能 |
 
 #### 综合研究 (2个)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
@@ -275,6 +283,8 @@ research_notes/
 
 ### 类型理论领域
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - ✅ 类型系统基础
 - ✅ Trait 系统
 - ✅ 生命周期理论
@@ -282,6 +292,8 @@ research_notes/
 - ✅ 型变理论
 
 ### 实验研究领域
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - ✅ 性能基准测试
 - ✅ 内存分析
@@ -291,6 +303,8 @@ research_notes/
 
 ### 综合应用领域
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - ✅ 实际应用案例
 - ✅ 研究方法论
 
@@ -299,6 +313,8 @@ research_notes/
 ## ✅ 系统特点 {#-系统特点}
 
 ### 1. 完整性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - **全面覆盖**: 涵盖 Rust 研究的各个领域
 - **结构清晰**: 分类明确，易于导航

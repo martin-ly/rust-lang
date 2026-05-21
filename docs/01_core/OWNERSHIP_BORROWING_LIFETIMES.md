@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 为什么需要所有权？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -57,6 +59,8 @@
 Rust 的解决方案：**编译期所有权检查** —— 零运行时开销的内存安全。
 
 ### 1.2 所有权的三条铁律
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +85,8 @@ fn makes_copy(some_integer: i32) {
 ```
 
 ### 1.3 返回值与所有权转移
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -96,6 +102,8 @@ fn takes_and_gives_back(a_string: String) -> String {
 ```
 
 ### 1.4 引用计数：共享所有权
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +124,8 @@ println!("引用计数: {}", Rc::strong_count(&data)); // 2
 > **[来源: Rust Official Docs]**
 
 ### 2.1 不可变借用
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +142,8 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 ### 2.2 可变借用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

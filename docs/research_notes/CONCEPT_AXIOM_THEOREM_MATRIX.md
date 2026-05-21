@@ -150,6 +150,8 @@
 
 ### 核心研究点
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
 - LazyCell/LazyLock 的延迟语义
@@ -168,9 +170,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

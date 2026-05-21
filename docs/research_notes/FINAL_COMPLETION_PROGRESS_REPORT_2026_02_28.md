@@ -41,6 +41,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Phase 0: 全面审计与清理 ✅
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -50,6 +52,8 @@
 | 文件系统盘点 | ✅ 217个Markdown文件 |
 
 ### Phase 1-4: 文档扩展 ✅
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

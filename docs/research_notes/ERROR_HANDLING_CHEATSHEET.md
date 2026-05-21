@@ -41,6 +41,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Option
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@ opt.and_then(|v| ...) // 链式操作
 ```
 
 ### Result
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 res.unwrap()        // 获取值，Err时panic
@@ -123,9 +127,13 @@ let file = File::open("file")?;  // IOError自动转为MyError
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

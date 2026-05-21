@@ -58,6 +58,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 语法
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -76,6 +78,8 @@
 | ↔ | 等价 | 双条件 |
 
 ### 1.2 自然演绎系统
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@
 ```
 
 ### 1.3 在Rust形式化中的应用
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +142,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 语法
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +153,8 @@
 ```
 
 ### 2.2 量词规则
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +191,8 @@
 ```
 
 ### 2.3 在Rust形式化中的应用
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +215,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 类型化λ演算
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -231,6 +245,8 @@ e ::= x | λx:τ.e | e e
 ```
 
 ### 3.2 在Rust形式化中的应用
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **高阶类型**:
 

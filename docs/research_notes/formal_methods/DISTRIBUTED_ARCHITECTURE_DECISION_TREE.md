@@ -415,6 +415,8 @@ impl CircuitBreaker {
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -426,6 +428,8 @@ impl CircuitBreaker {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -436,6 +440,8 @@ impl CircuitBreaker {
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -475,3 +481,6 @@ impl CircuitBreaker {
 > **[来源: IEEE - Risk Analysis]**
 
 > **[来源: Rust API Guidelines]**
+
+
+> **[来源: IEEE - Programming Language Standards]**

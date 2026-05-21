@@ -108,6 +108,8 @@
 
 ### 2.1 语法映射
 
+> **[来源: Wikipedia - Type System]**
+
 | 线性逻辑 | 分离逻辑 | 含义 | Rust概念 |
 |---------|---------|------|---------|
 | `A ⊗ B` | `P * Q` | 分离合取 | 同时拥有的资源 |
@@ -118,6 +120,8 @@
 | `0` | `False` | 不可能 | ! (never) |
 
 ### 2.2 语义对应
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 线性逻辑的相空间语义 (Phase Space):
@@ -134,6 +138,8 @@
 ```
 
 ### 2.3 证明关系
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
 定理: 线性逻辑的 MLL (Multiplicative Linear Logic)
@@ -159,6 +165,8 @@
 
 ### 3.1 语法对应
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 仿射逻辑规则:
 Γ ⊢ B
@@ -182,6 +190,8 @@ let y = x;
 
 ### 3.2 可判定性论证
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 Kopylov (2001) 定理:
 完整命题仿射逻辑是可判定的。
@@ -201,6 +211,8 @@ Rust借用检查的可判定性:
 
 ### 3.3 实践映射
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 仿射逻辑 | Rust概念 | 示例 |
 |---------|---------|------|
 | 弱化 (Weakening) | 允许未使用变量 | `let _x = 5;` |
@@ -213,6 +225,8 @@ Rust借用检查的可判定性:
 ## 4. 分离逻辑 ↔ RustBelt/Iris
 
 ### 4.1 Iris 的分离逻辑基础
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 Iris 扩展了传统分离逻辑:

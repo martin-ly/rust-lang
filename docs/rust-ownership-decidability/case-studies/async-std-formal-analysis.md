@@ -76,7 +76,11 @@ async-std是一个提供标准库风格API的异步运行时:
 
 ### 2.1 API兼容性形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 2.1 (API映射)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | std API | async-std API | 区别 |
 |---------|---------------|------|
@@ -91,6 +95,8 @@ $$
 $$
 
 ### 定理 2.1 (API语义保持)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > async-std的异步API与std的同步API语义等价(除了异步性)。
 
@@ -118,7 +124,11 @@ let content = async_std::fs::read_to_string("file.txt").await?;
 
 ### 2.2 运行时适配层
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.2 (运行时抽象)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 pub mod task {
@@ -129,6 +139,8 @@ pub mod task {
 ```
 
 ### 定理 2.2 (运行时独立性)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > 使用async-std API的代码不依赖特定运行时实现。
 

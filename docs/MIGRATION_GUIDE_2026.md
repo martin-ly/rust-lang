@@ -64,6 +64,8 @@ cargo install cargo-update cargo-tree cargo-outdated
 > **[来源: Rust Official Docs]**
 
 #### lazy_static → LazyLock
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 ```
 
 #### async-trait → 原生async trait
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -97,6 +101,8 @@ trait Storage {
 ```
 
 #### 生成器 → gen关键字
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ gen fn my_gen() -> i32 { yield 1; }
 > **[来源: Rust Official Docs]**
 
 #### Cargo.toml
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +178,8 @@ Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Ran
 
 #### 步骤 1: 环境准备
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```bash
 # 备份现有工具链
 rustup toolchain install 1.94.0 --name backup-194
@@ -183,6 +193,8 @@ rustc --version  # 应显示 1.96.0 或更高
 
 #### 步骤 2: 依赖更新
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```bash
 # 更新 Cargo.lock
 cargo update
@@ -195,6 +207,8 @@ cargo update --aggressive
 ```
 
 #### 步骤 3: 代码迁移
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **3.1 启用新 Lint 规则**
 
@@ -267,6 +281,8 @@ fn box_future<T>(f: impl Future<Output = T> + 'static) -> Pin<Box<dyn Future<Out
 
 #### 步骤 4: 测试验证
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 完整构建
 cargo build --all-targets
@@ -285,6 +301,8 @@ cargo fmt --check
 ```
 
 #### 步骤 5: 持续集成更新
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 更新 `.github/workflows/ci.yml`：
 

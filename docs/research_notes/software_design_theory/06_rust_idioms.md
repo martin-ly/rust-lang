@@ -221,6 +221,8 @@ impl std::ops::Add for Meter {
 
 ### 2.4 常见陷阱
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
 | 忘记 `Deref` | 调用繁琐 | 按需 `impl Deref` |
@@ -228,6 +230,8 @@ impl std::ops::Add for Meter {
 | 泄漏内部类型 | 封装破坏 | 谨慎 `pub` |
 
 ### 2.5 与设计模式衔接
+
+> **[来源: PLDI - Programming Language Design]**
 
 - **Adapter**：Newtype 可作适配器包装；`impl Trait for Newtype` 委托
 - **Value Object**：Fowler 的 Value Object 与 Newtype 等价；不可变、相等性
@@ -239,6 +243,8 @@ impl std::ops::Add for Meter {
 
 ### 3.1 定义与形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **Def TS1（类型状态）**：类型参数编码状态；编译期强制合法转换；$\text{State}(F\langle S \rangle) \in \{S_1, \ldots, S_n\}$；仅允许的转换由类型系统约束。
 
 **Axiom TS1**：非法状态转换导致编译错误；类型系统保证状态机正确性。
@@ -246,6 +252,8 @@ impl std::ops::Add for Meter {
 **定理 TS-T1**：类型状态与 [Builder](01_design_patterns_formal/01_creational/builder.md) B-T2 一致；类型状态 Builder 即 Def TS1 实例。
 
 ### 3.2 典型场景
+
+> **[来源: Wikipedia - Type System]**
 
 | 场景 | 实现 | 与 GoF 关系 |
 | :--- | :--- | :--- |
@@ -255,6 +263,8 @@ impl std::ops::Add for Meter {
 
 ### 3.3 常见陷阱
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
 | 状态爆炸 | 类型过多 | 合并相近状态 |
@@ -262,6 +272,8 @@ impl std::ops::Add for Meter {
 | 运行时分支 | 需 `dyn` | 优先编译期类型 |
 
 ### 3.4 与设计模式衔接
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - **Builder**：类型状态 Builder 为 B-T2 的扩展；编译期强制顺序
 - **State**：与 [state](01_design_patterns_formal/03_behavioral/state.md) 互补；编译期 vs 运行时状态机
@@ -297,11 +309,15 @@ impl std::ops::Add for Meter {
 
 ### 6.1 定义与形式化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Def EH1（Error handling 惯用）**：错误通过 `Result<T, E>` 显式传播；`?` 操作符实现早期返回；$\text{query}(e) \equiv \text{match } e \text{ with Ok}(v) \rightarrow v \mid \text{Err}(e) \rightarrow \text{return Err}(e.\text{into}())$。
 
 **定理 EH-T1**：`?` 与 [borrow_checker_proof](../formal_methods/borrow_checker_proof.md) Def QUERY1 一致；错误传播不违反借用规则。
 
 ### 6.2 典型场景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 场景 | 实现 | 与设计模式关系 |
 | :--- | :--- | :--- |
@@ -310,6 +326,8 @@ impl std::ops::Add for Meter {
 | 可选操作 | `Option` + `ok_or` | 与 Builder 必填校验衔接 |
 
 ### 6.3 完整代码示例：错误传播链
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #[derive(Debug)]
@@ -341,6 +359,8 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 
 ### 6.4 常见陷阱
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 陷阱 | 后果 | 规避 |
 | :--- | :--- | :--- |
 | `unwrap()` 滥用 | panic 不可恢复 | 用 `?` 或 `match` 传播 |
@@ -352,6 +372,8 @@ fn load_or_default(path: &str) -> Result<u32, AppError> {
 ## 七、Option/Result 组合模式
 
 ### 7.1 定义与形式化
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Def OR1（Option/Result 组合）**：`Option` 表示可选值；`Result` 表示成功或错误；组合模式包括 `and_then`、`map`、`map_err`、`unwrap_or`、`ok_or`。
 

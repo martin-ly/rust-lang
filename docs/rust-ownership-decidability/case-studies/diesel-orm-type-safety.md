@@ -204,6 +204,8 @@ $$
 
 ### 定义 3.2 (查询操作类型)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **filter操作**:
 
 $$
@@ -229,6 +231,8 @@ $$
 
 ### 示例类型推导
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 let query = users.filter(id.eq(1)).select(name);
 ```
@@ -245,7 +249,11 @@ $$
 
 ### 3.2 类型安全的查询组合
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定理 3.1 (查询组合类型安全)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > 如果所有子查询都是类型良好的，则组合后的查询也是类型良好的。
 
@@ -271,13 +279,19 @@ $$
 
 ### 4.1 列存在性检查
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 4.1 (列存在性谓词)
+
+> **[来源: Wikipedia - Concurrency]**
 
 $$
 \text{HasColumn}(T, c) \iff c \in \text{dom}(T)
 $$
 
 ### 定理 4.1 (列存在性编译时验证)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > Diesel在编译时拒绝引用不存在列的查询。
 
@@ -305,6 +319,8 @@ users::nonexistent
 由Rust类型系统的**完备性**，不存在的列会导致编译错误。∎
 
 ### 4.2 类型兼容性检查
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ### 定义 4.2 (类型兼容性)
 

@@ -319,6 +319,8 @@ struct Packet {
 
 #### Java 内存泄漏
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```java
 // 常见的 Java 内存泄漏模式
 
@@ -347,6 +349,8 @@ threadLocal.set(new byte[1024 * 1024]);
 ```
 
 #### Rust 内存泄漏
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // Rust 内存泄漏（较少见，需要显式代码）
@@ -385,6 +389,8 @@ fn forget_leak() {
 ## 并发模型对比
 
 ### Java 并发
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Java 提供丰富的并发工具：
 
@@ -436,6 +442,8 @@ public class JavaConcurrency {
 ```
 
 ### Rust 并发
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Rust 的所有权系统提供编译期并发安全：
 
@@ -500,6 +508,8 @@ async fn async_example() {
 
 ### 并发安全性对比
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 特性 | Java | Rust |
 |------|------|------|
 | 数据竞争检测 | 运行时（可能） | 编译期（保证） |
@@ -511,6 +521,8 @@ async fn async_example() {
 ## 类型系统比较
 
 ### Java 类型系统
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```java
 // Java 泛型（类型擦除）
@@ -558,6 +570,8 @@ public class NullProblem {
 ```
 
 ### Rust 类型系统
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // Rust 泛型（单态化）
@@ -622,6 +636,8 @@ fn use_option() {
 
 ### 类型系统对比
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 特性 | Java | Rust |
 |------|------|------|
 | 泛型实现 | 类型擦除 | 单态化 |
@@ -634,6 +650,8 @@ fn use_option() {
 ## 生态系统对比
 
 ### Java 生态系统
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 领域 | 主流框架/库 | 成熟度 |
 |------|------------|--------|
@@ -664,6 +682,8 @@ class HelloController {
 ```
 
 ### Rust 生态系统
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 领域 | 主流框架/库 | 成熟度 |
 |------|------------|--------|

@@ -81,6 +81,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 用户Actor
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -172,6 +174,8 @@ impl Handler<SendMessage> for UserActor {
 ```
 
 ### 2.2 房间Actor (群聊)
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 pub struct RoomActor {

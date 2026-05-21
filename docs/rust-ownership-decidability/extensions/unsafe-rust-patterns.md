@@ -625,6 +625,8 @@ pub fn memory_fence() {
 
 ### 系统调用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 /// Linux x86_64 系统调用
 #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
@@ -674,6 +676,8 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 
 ### 裸函数
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::arch::naked_asm;
 
@@ -711,6 +715,8 @@ pub unsafe extern "C" fn context_switch(from: *mut *mut u8, to: *mut u8) {
 ## FFI 边界安全
 
 ### C 字符串处理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::ffi::{CStr, CString, OsStr, OsString};
@@ -786,6 +792,8 @@ impl CStringList {
 
 ### 不透明类型处理
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 /// 表示 C 库中的不透明类型
 #[repr(C)]
@@ -849,6 +857,8 @@ unsafe impl Sync for ContextHandle {}
 ## 裸机编程
 
 ### 内存映射 I/O
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use core::ptr::{read_volatile, write_volatile};
@@ -969,6 +979,8 @@ impl Uart16550 {
 
 ### 中断处理
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use core::arch::global_asm;
 
@@ -1049,6 +1061,8 @@ pub unsafe fn set_handler(index: u8, handler: u64) {
 
 ### SIMD 操作
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 #[cfg(target_arch = "x86_64")]
 use std::arch::x86_64::*;
@@ -1128,6 +1142,8 @@ pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 ```
 
 ### 零拷贝解析
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 /// 零拷贝的二进制协议解析
@@ -1222,6 +1238,8 @@ impl PacketHeader {
 ```
 
 ### 内存池实现
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::cell::RefCell;
@@ -1374,3 +1392,10 @@ impl<T: Send> ConcurrentPool<T> {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

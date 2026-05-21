@@ -140,6 +140,8 @@
 - 数据路径验证困难
 
 ### 2.3 工具
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +153,8 @@
 | Kani | Rust | 基于CBMC |
 
 ### 2.4 在Rust中的应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +178,8 @@ fn check_overflow() {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 交互式定理证明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +193,8 @@ fn check_overflow() {
 
 ### 3.2 主流证明助手
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 工具 | 基础逻辑 | 特点 | 生态 |
 | :--- | :--- | :--- | :--- |
 | Coq | 归纳构造演算 | 强大、成熟 | 丰富(MathComp, Iris) |
@@ -195,6 +203,8 @@ fn check_overflow() {
 | Agda | 依赖类型 | 证明即程序 | 类型论研究 |
 
 ### 3.3 自动定理证明
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 工具 | 方法 | 适用 |
 | :--- | :--- | :--- |

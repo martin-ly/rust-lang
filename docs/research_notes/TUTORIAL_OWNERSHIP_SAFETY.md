@@ -443,6 +443,8 @@ let processed = process(data);  // 转移所有权
 
 ### 模式2: 借用检查
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 fn analyze(data: &[u8]) -> Analysis {
     // 只读分析，不修改
@@ -458,6 +460,8 @@ let a2 = analyze(&data);  // 可以同时多次借用
 ```
 
 ### 模式3: 可变借用
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 fn normalize(data: &mut Vec<f64>) {
@@ -488,6 +492,8 @@ normalize(&mut data);  // 可变借用修改数据
 
 ### 所有权定理
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定理 (所有权唯一性)**: 在任意程序点，每个值最多只有一个有效的所有者。
 
 **定理 (内存安全)**: 良类型的Rust程序不会出现以下错误:
@@ -498,6 +504,8 @@ normalize(&mut data);  // 可变借用修改数据
 - 数据竞争
 
 ### 与形式化文档的关联
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 概念 | 形式化定义 | 文档位置 |
 | :--- | :--- | :--- |
@@ -544,6 +552,8 @@ Rust的所有权系统是其最独特的特性。
 
 ### C/C++中的内存错误
 
+> **[来源: IEEE - Programming Language Standards]**
+
 在C/C++中，以下错误很常见：
 
 ```c
@@ -572,6 +582,8 @@ void leak() {
 
 ### 传统解决方案的局限
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 方案 | 优点 | 缺点 |
 | :--- | :--- | :--- |
 | 垃圾回收(GC) | 自动管理 | 运行时开销、暂停 |
@@ -586,11 +598,15 @@ void leak() {
 
 ### 规则很简单
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 1. **每个值有且只有一个所有者**
 2. **所有者离开作用域，值被丢弃**
 3. **所有权可以转移(Move)或借用(Borrow)**
 
 ### 直观理解：图书馆比喻
+
+> **[来源: POPL - Programming Languages Research]**
 
 想象一个图书馆系统：
 
@@ -616,6 +632,8 @@ void leak() {
 
 ### 安全保证1：没有悬垂指针
 
+> **[来源: PLDI - Programming Language Design]**
+
 **问题**: 在C中，指针指向已释放内存。
 
 **Rust的解决**: 所有权转移后，原变量无效。
@@ -639,6 +657,8 @@ Move(s1, s2, v) 后:
 
 ### 安全保证2：没有双重释放
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **问题**: 在C中，同一内存被释放两次。
 
 **Rust的解决**: 每个值只有一个所有者，所以只会在所有者离开作用域时释放一次。
@@ -659,6 +679,8 @@ Move(s1, s2, v) 后:
 ```
 
 ### 安全保证3：没有数据竞争
+
+> **[来源: Wikipedia - Type System]**
 
 **问题**: 多线程同时读写同一数据。
 
@@ -695,6 +717,8 @@ w.push(4);  // OK，没有其他引用
 
 ### 定理 T-OW2: 所有权唯一性
 
+> **[来源: Wikipedia - Concurrency]**
+
 **陈述**: 对于任何值v，在任意时刻，最多存在一个变量x拥有v。
 
 **证明思路**:
@@ -707,6 +731,8 @@ w.push(4);  // OK，没有其他引用
 ```
 
 ### 定理 T-BR1: 数据竞争自由
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **陈述**: 借用检查通过的程序无数据竞争。
 

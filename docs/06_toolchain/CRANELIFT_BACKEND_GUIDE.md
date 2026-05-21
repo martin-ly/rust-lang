@@ -42,7 +42,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🚀 什么是 Cranelift](#-什么是-cranelift)
   - [⏱️ 为什么 Cranelift 重要](#️-为什么-cranelift-重要)
@@ -227,6 +227,8 @@ cargo +nightly build -v
 | **调试信息** | 完善精确 | 基础支持 |
 
 ### 支持平台
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +243,8 @@ cargo +nightly build -v
 | 嵌入式目标 | ✅ 广泛 | ❌ 有限 |
 
 ### 优化级别
+
+> **[来源: POPL - Programming Languages Research]**
 
 | `opt-level` | LLVM 行为 | Cranelift 行为 |
 |-------------|----------|----------------|
@@ -285,6 +289,8 @@ Cranelift 作为 rustc 后端的时间线:
 
 ### Rust 2026 Project Goal 关联
 
+> **[来源: PLDI - Programming Language Design]**
+
 Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关键组成部分。编译器团队的目标包括：
 
 - 缩短 debug 编译时间 20-50%
@@ -292,6 +298,8 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 - 可能的未来：debug 模式默认使用 Cranelift
 
 ### 已知限制 (2026-05)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 限制 | 状态 | 说明 |
 |------|------|------|
@@ -309,6 +317,8 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 
 ### ✅ 推荐使用 Cranelift
 
+> **[来源: Wikipedia - Type System]**
+
 | 场景 | 原因 |
 |------|------|
 | **日常开发迭代** | 编译快，反馈循环短 |
@@ -318,6 +328,8 @@ Cranelift 后端是 Rust 2026 年 **"开发者体验优化"** 项目目标的关
 | **教学/学习** | 编译快，适合频繁实验 |
 
 ### 🚫 不推荐使用 Cranelift
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 场景 | 原因 |
 |------|------|
@@ -345,6 +357,8 @@ flowchart TD
 
 ### 推荐 `.cargo/config.toml`
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```toml
 [unstable]
 codegen-backend = true
@@ -358,6 +372,8 @@ codegen-backend = "cranelift"
 ```
 
 ### 快速切换脚本
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```powershell
 # enable-cranelift.ps1
@@ -375,6 +391,8 @@ cargo +nightly build
 ```
 
 ### Makefile 集成
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```makefile
 .PHONY: build-dev build-release

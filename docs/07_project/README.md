@@ -13,6 +13,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 项目元文档索引生成器
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,11 +133,15 @@ fn main() {
 
 ### 研究笔记关联
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - **综合总览**: [COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md](../research_notes/COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) - 全局一致性、语义归纳、概念族谱
 - **证明系统**: [FORMAL_PROOF_SYSTEM_GUIDE.md](../research_notes/FORMAL_PROOF_SYSTEM_GUIDE.md) - 形式化证明系统指南
 - **权威对齐**: [AUTHORITATIVE_ALIGNMENT_GUIDE.md](../research_notes/AUTHORITATIVE_ALIGNMENT_GUIDE.md) - 权威来源对齐指南
 
 ### 文档分类
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 类别 | 文档 | 说明 |
 | :--- | :--- | :--- |
@@ -172,6 +178,8 @@ fn main() {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+
+> **[来源: PLDI - Programming Language Design]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

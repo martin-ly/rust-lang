@@ -151,6 +151,8 @@
 
 ### 练习验证
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - `exercises/src/type_system/ex01_enum_pattern_match.rs` (Easy)
 - `exercises/src/type_system/ex02_struct_methods.rs` (Easy)
 - `exercises/rustlings_style/ex05_struct_lifetime/` (编译修复)
@@ -163,6 +165,8 @@
 
 ### 映射文件
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
 | 模块系统 | `crates/c02_type_system/src/type_composition/composite/mod.rs` | mod、pub、use |
@@ -171,6 +175,8 @@
 | 可见性 | 所有 crate 的 `src/lib.rs` | pub、pub(crate)、pub(super) 实例 |
 
 ### 练习验证
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - 本项目本身就是一个 13+ crate 的 workspace，是最佳实践范例
 - `exercises/src/lib.rs` 展示了模块组织方式

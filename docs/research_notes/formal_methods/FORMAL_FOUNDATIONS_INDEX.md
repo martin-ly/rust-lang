@@ -121,6 +121,8 @@
 
 ### 入门路径
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 1. 逻辑基础
    └── LOGICAL_FOUNDATIONS.md §1-2 (命题/一阶逻辑)
@@ -136,6 +138,8 @@
 ```
 
 ### 进阶路径
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 1. 分离逻辑
@@ -153,6 +157,8 @@
 ```
 
 ### 专家路径
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 1. Iris框架
@@ -175,6 +181,8 @@
 ## 与Rust形式化的联系
 
 ### 理论 → 实践映射
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 理论概念 | Rust应用 | 文档位置 |
 | :--- | :--- | :--- |

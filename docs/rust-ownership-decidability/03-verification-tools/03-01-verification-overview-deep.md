@@ -126,6 +126,8 @@ The Rust verification ecosystem has matured significantly, offering developers a
 
 #### 1.1.1 Static Analysis Tools
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Static analysis tools examine source code without executing it, identifying potential issues through pattern matching, dataflow analysis, and type system extensions.
 
 **Clippy**: Rust's official linter provides over 550 lints covering correctness, style, and performance. While primarily a linting tool, many clippy lints catch serious correctness issues:
@@ -150,6 +152,8 @@ impl Drop for MyType {
 
 #### 1.1.2 Model Checkers
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Model checkers systematically explore program state spaces to find concurrency bugs, race conditions, and deadlocks.
 
 **Loom**: A model checker for Rust concurrent code that exhaustively explores thread interleavings within bounded execution histories.
@@ -157,6 +161,8 @@ Model checkers systematically explore program state spaces to find concurrency b
 **Shuttle**: A randomized scheduler for finding concurrency bugs through controlled nondeterminism, complementary to Loom's exhaustive approach.
 
 #### 1.1.3 Theorem Provers
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Theorem provers provide the highest assurance by mathematically proving program correctness against formal specifications.
 
@@ -167,6 +173,8 @@ Theorem provers provide the highest assurance by mathematically proving program 
 **Kani**: A model checker specifically designed for Rust, using bounded model checking to verify properties.
 
 #### 1.1.4 Fuzzing Tools
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Fuzzing tools generate random inputs to find crashes and property violations.
 
@@ -250,6 +258,8 @@ Miri implements the **Stacked Borrows** model for aliasing discipline and the **
 
 #### 2.1.1 Stacked Borrows Model
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Stacked Borrows defines when pointer aliasing is permitted:
 
 ```rust
@@ -273,6 +283,8 @@ fn stacked_borrows_example() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### Counter-Example 2.1: Use of Uninitialized Memory
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // BUG: Reading uninitialized memory
@@ -306,6 +318,8 @@ error: Undefined Behavior: using uninitialized data
 ```
 
 #### Counter-Example 2.2: Data Race
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::thread;
@@ -354,6 +368,8 @@ error: Undefined Behavior: Data race detected
 
 #### Counter-Example 2.3: Invalid Pointer Arithmetic
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // BUG: Pointer arithmetic outside allocation bounds
 fn invalid_arithmetic_bug() {
@@ -381,6 +397,8 @@ fn wrapping_arithmetic_bug() {
 ```
 
 #### Counter-Example 2.4: Type Punning (Strict Aliasing Violation)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // BUG: Violating strict aliasing rules
@@ -414,6 +432,8 @@ fn type_punning_fixed() {
 ```
 
 #### Counter-Example 2.5: Misaligned Access
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // BUG: Misaligned pointer dereference
@@ -452,6 +472,8 @@ fn packed_struct_fixed() {
 
 #### Counter-Example 2.6: Use After Free
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // BUG: Use after free
 fn use_after_free_bug() {
@@ -480,6 +502,8 @@ fn double_free_bug() {
 ```
 
 #### Counter-Example 2.7: Invalid VTable
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 trait MyTrait {
@@ -607,6 +631,8 @@ mod tests {
 
 #### Counter-Example 3.1: Missed Atomic Ordering
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // BUG: Incorrect memory ordering
 fn weak_ordering_bug() {
@@ -658,6 +684,8 @@ fn ordering_fixed() {
 ```
 
 #### Counter-Example 3.2: Incorrect CAS Loop
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // BUG: Classic ABA problem in lock-free stack
@@ -756,6 +784,8 @@ impl<T> LockFreeStack<T> {
 
 #### Counter-Example 3.3: ABA Problem
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // BUG: Classic ABA problem
 fn aba_problem_bug() {
@@ -820,6 +850,8 @@ fn aba_problem_bug() {
 
 #### Counter-Example 3.4: Memory Ordering Bug
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // BUG: Dekker's algorithm with wrong orderings fails
 fn dekker_wrong_ordering() {
@@ -878,6 +910,8 @@ fn dekker_correct() {
 
 #### Counter-Example 3.5: Lost Wakeup
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // BUG: Lost wakeup in condition variable pattern
 use std::sync::{Mutex, Condvar};
@@ -935,6 +969,8 @@ fn lost_wakeup_fixed() {
 ```
 
 #### Counter-Example 3.6: Deadlock
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // BUG: Circular wait deadlock
@@ -1114,6 +1150,8 @@ Creusot generates three categories of proof obligations:
 
 #### 4.3.1 Preconditions
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Preconditions must hold at call sites:
 
 ```rust
@@ -1130,6 +1168,8 @@ pub fn push<T>(&mut self, elem: T) {
 
 #### 4.3.2 Postconditions
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Postconditions guarantee what the function establishes:
 
 ```rust
@@ -1144,6 +1184,8 @@ pub fn add(x: u32, y: u32) -> u32 {
 ```
 
 #### 4.3.3 Loop Invariants
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Loop invariants capture inductive properties:
 

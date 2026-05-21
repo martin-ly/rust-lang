@@ -94,6 +94,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 核心概念定义 (17/17)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +155,8 @@
 > **[来源: Rust Official Docs]**
 
 #### L2完整证明 (10/10)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +174,8 @@
 | SYNC-T1 | Sync安全 | send_sync_formalization.md | L2完整 | ✅ |
 
 #### L3机器证明骨架 (5/5)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +202,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 思维导图 (11/15 = 73%)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | # | 导图 | 位置 | 状态 |
 | :--- | :--- | :--- | :--- |

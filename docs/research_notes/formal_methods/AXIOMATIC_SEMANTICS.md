@@ -184,6 +184,8 @@ P' → P    {P} C {Q}
 ```
 
 ### 2.2 计算规则
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +222,8 @@ wp(while b do C, Q) = μZ. (¬b → Q) ∧ (b → wp(C, Z))
 ```
 
 ### 2.3 在Rust中的应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -252,6 +256,8 @@ wp(let r = &x, Q) = ∃v. x ↦ v * Q[&x/r]
 > **[来源: Rust Official Docs]**
 
 ### 3.1 定义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -265,6 +271,8 @@ wp(let r = &x, Q) = ∃v. x ↦ v * Q[&x/r]
 ```
 
 ### 3.2 计算规则
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **空语句**:
 
@@ -286,6 +294,8 @@ sp(P, C₁; C₂) = sp(sp(P, C₁), C₂)
 
 ### 3.3 与最弱前置条件的关系
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **对偶性**:
 
 ```text
@@ -303,6 +313,8 @@ sp(P, C) ⊨ Q    ⟺    P ⊨ wp(C, Q)
 ## 四、Rust特定规则
 
 ### 4.1 所有权规则
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **移动**:
 
@@ -329,6 +341,8 @@ drop(x)
 ```
 
 ### 4.2 借用规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **不可变借用**:
 

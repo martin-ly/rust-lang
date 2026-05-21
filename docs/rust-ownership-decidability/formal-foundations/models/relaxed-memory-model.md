@@ -65,6 +65,8 @@
 
 ### 1.1 顺序一致性的局限
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 原始 RustBelt 假设顺序一致性（Sequential Consistency, SC）：
 
 ```
@@ -94,6 +96,8 @@ fn thread2() {
 
 ### 1.2 Relaxed Memory 的挑战
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **挑战 1: 状态空间爆炸**
 
 - SC: 线性操作序列
@@ -115,6 +119,8 @@ fn thread2() {
 
 ### 2.1 内存排序
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust 提供的内存排序选项：
 
 | Ordering | 同步保证 | 使用场景 |
@@ -126,6 +132,8 @@ Rust 提供的内存排序选项：
 | `SeqCst` | 全局顺序 | 需要全局一致性 |
 
 ### 2.2 happens-before 关系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义**：
 
@@ -153,6 +161,8 @@ A happens-before D
 
 ### 2.3 同步操作
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **Release-Acquire 同步**：
 
 ```rust
@@ -179,6 +189,8 @@ Acquire: 阻止前序加载被重排序到屏障之后
 ## 3. Rust 内存模型
 
 ### 3.1 与 C++ 内存模型的关系
+
+> **[来源: POPL - Programming Languages Research]**
 
 Rust 的内存模型基于 C++11/C11：
 

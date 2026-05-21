@@ -36,6 +36,8 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Educational Technology]** · **[来源: Wikipedia - Spiral Curriculum]** · **[来源: ACM - CS Curriculum Guidelines]** · **[来源: IEEE - Learning Outcome Standards]**
 
 ### 路径 1: 初学者 (4-6 周)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -46,6 +48,8 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
 ```
 
 ### 路径 2: 进阶开发者 (6-8 周)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -57,6 +61,8 @@ C04 (泛型) → C05 (并发) → C06 (异步)
 
 ### 路径 3: 系统程序员 (8-12 周)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
      ↓           ↓            ↓            ↓
@@ -64,6 +70,8 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 ```
 
 ### 路径 4: Rust 1.95/1.96 特性专题 (2-3 周)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 第1周: 核心新特性
@@ -87,6 +95,8 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 ## 🆕 Rust 1.95/1.96 特性学习路径
 
 ### 阶段 1: 快速上手 (第 1-2 天)
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 特性 | 难度 | 学习资源 | 实践目标 |
 |------|------|----------|----------|

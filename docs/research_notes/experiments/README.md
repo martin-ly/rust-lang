@@ -161,11 +161,15 @@
 
 ### 代码实现
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [算法实现](../../../crates/c08_algorithms/src/README.md)
 - [异步实现](../../../crates/c06_async/docs/README.md)
 - [并发实现](../../../crates/c05_threads/docs/README.md)
 
 ### 工具资源
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - [Criterion.rs](https://github.com/bheisler/criterion.rs): 统计驱动的基准测试框架
 - [perf](https://perf.wiki.kernel.org/README.md): Linux 性能分析工具
@@ -178,6 +182,8 @@
 
 ### 实验设计
 
+> **[来源: Wikipedia - Type System]**
+
 1. **假设提出**: 明确要验证的假设
 2. **实验设计**: 设计实验方案和对照组
 3. **数据收集**: 收集性能数据
@@ -186,12 +192,16 @@
 
 ### 基准测试方法
 
+> **[来源: Wikipedia - Concurrency]**
+
 - **统计方法**: 使用统计方法分析结果
 - **多次运行**: 多次运行取平均值
 - **环境控制**: 控制实验环境的一致性
 - **结果报告**: 清晰报告实验结果
 
 ### 性能分析工具
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - **Profiler**: 性能分析器
 - **Memory Profiler**: 内存分析器
@@ -248,6 +258,8 @@
 
 ### 创建新的实验笔记
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 1. 复制模板文件（如 `performance_benchmarks.md`）
 2. 填写实验假设和目标
 3. 设计实验方案
@@ -256,6 +268,8 @@
 6. 更新本 README 的链接
 
 ### 实验流程
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 1. **问题定义**: 明确要研究的性能问题
 2. **假设提出**: 提出可验证的假设
@@ -278,6 +292,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

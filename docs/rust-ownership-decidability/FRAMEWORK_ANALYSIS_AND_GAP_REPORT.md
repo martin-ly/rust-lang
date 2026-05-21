@@ -81,6 +81,8 @@
 
 #### 缺失 1: 统一理论基础框架
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **现状**:
 
 - 定理1 (终止性) 基于类型秩
@@ -107,6 +109,8 @@
 
 #### 缺失 2: 语义层统一
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **现状**:
 
 - 定义了大步语义 (eval)
@@ -127,6 +131,8 @@
 - 与操作语义理论的连接
 
 #### 缺失 3: 类型系统与所有权的关系
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **现状**:
 
@@ -151,6 +157,8 @@ Theorem type_implies_ownership_safety :
 
 #### 缺失 4: Linearizability 与类型系统的联系
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **现状**:
 
 - 定义了 Linearizable
@@ -163,6 +171,8 @@ Theorem type_implies_ownership_safety :
 - 没有讨论非 Linearizable 程序的例子
 
 #### 缺失 5: 从形式化到实际 Rust 的映射
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **现状**:
 

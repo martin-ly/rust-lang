@@ -62,6 +62,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心新特性概览
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,8 +82,12 @@
 
 ### Rust 1.96 内容模板
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```markdown
 ### Rust 1.96 更新
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > **适用版本**: Rust 1.96.0+
 

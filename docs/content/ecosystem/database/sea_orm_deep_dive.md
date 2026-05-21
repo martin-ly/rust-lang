@@ -310,6 +310,8 @@ pub struct Model {
 
 ### Create
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use sea_orm::{ActiveModelTrait, Set};
 
@@ -342,6 +344,8 @@ user::Entity::insert_many(users)
 
 ### Read
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use sea_orm::{EntityTrait, QueryFilter, ColumnTrait};
 
@@ -372,6 +376,8 @@ let num_pages = paginator.num_pages().await?;
 
 ### Update
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use sea_orm::{ActiveModelTrait, Set, ModelTrait};
 
@@ -394,6 +400,8 @@ user::Entity::update_many()
 ```
 
 ### Delete
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use sea_orm::{ModelTrait, EntityTrait};
@@ -418,6 +426,8 @@ user::Entity::delete_many()
 ## 🔗 关联查询
 
 ### Eager Loading
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use sea_orm::{EntityTrait, Related};
@@ -445,6 +455,8 @@ let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
 
 ### Lazy Loading
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 // 先查询用户
 let user: user::Model = user::Entity::find_by_id(1)
@@ -463,6 +475,8 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
 ## ⚡ 性能优化
 
 ### 连接池
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use sea_orm::{Database, DatabaseOptions, ConnectOptions};

@@ -37,6 +37,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def CB1: Circuit Breaker
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -52,6 +54,8 @@ CircuitBreaker := (S, T, f_threshold, t_timeout)
 ```
 
 ### Def CB2: 状态转换
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

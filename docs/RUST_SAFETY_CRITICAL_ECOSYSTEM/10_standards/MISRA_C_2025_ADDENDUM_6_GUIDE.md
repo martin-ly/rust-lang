@@ -50,6 +50,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 规则映射统计
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +85,8 @@ MISRA C:2025 总规则数: 143
 > **[来源: Rust Official Docs]**
 
 ### 1. 标准C环境 (Rules 1.x)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

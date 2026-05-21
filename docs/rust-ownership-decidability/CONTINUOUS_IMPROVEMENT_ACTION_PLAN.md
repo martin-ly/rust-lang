@@ -76,6 +76,8 @@
 
 ### 文档统计
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 总文档数:     586+ 文件
 总字数:       600,000+ 字

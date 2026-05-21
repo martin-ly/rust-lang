@@ -171,6 +171,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成-}
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +196,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--1}
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +220,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--2}
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +244,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--3}
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -259,6 +267,8 @@
 
 #### 已完成 ✅ {#已完成--4}
 
+> **[来源: POPL - Programming Languages Research]**
+
 - [x] 研究目标、理论基础、形式化（Pin 类型、自引用、Pin 保证）、定理 2–3、代码示例
 - [x] 与异步系统、生命周期的集成，实际应用（async/await、Stream/迭代器、与他语言对比）
 
@@ -279,6 +289,8 @@
 
 #### 已完成 ✅ {#已完成--5}
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [x] 研究目标、理论基础、形式化、类型安全证明（进展性、保持性、类型安全、类型推导正确性）、代码示例
 - [x] 与 Trait 系统的集成、与生命周期的集成、实际应用案例（泛型/impl Trait、错误处理、Rust 1.93）
 
@@ -296,6 +308,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--6}
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - [x] 研究目标定义
 - [x] 理论基础整理（包括理论背景和相关概念）
@@ -322,6 +336,8 @@
 
 #### 已完成 ✅ {#已完成--7}
 
+> **[来源: Wikipedia - Type System]**
+
 - [x] 研究目标、理论基础、形式化（生命周期、子类型、推断）、代码示例
 - [x] 与类型系统、借用检查器的集成，实际应用（结构体/HRTB、async/Pin、Trait 对象）；与 formal_methods 生命周期文档互补
 
@@ -339,6 +355,8 @@
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--8}
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [x] 研究目标、理论基础（GATs、const、依赖类型、学术论文）、形式化、代码示例 8 个
 - [x] 类型理论分析、系统集成与实际应用（与类型系统/Trait、迭代器/Stream、序列化/const、他语言对比）
@@ -358,6 +376,8 @@
 
 #### 已完成 ✅ {#已完成--9}
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - [x] 研究目标、理论基础、形式化（协变、逆变、不变、型变规则）、定理 1–4、代码示例
 - [x] 与类型系统的集成，实际应用（闭包/fn、PhantomData/泛型、与他语言对比）
 
@@ -370,11 +390,15 @@
 
 ### 性能基准测试
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **文档**: [performance_benchmarks.md](./experiments/performance_benchmarks.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
 
 #### 已完成 ✅ {#已完成--10}
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [x] 研究目标定义、理论基础、实验设计、测试框架选择
 - [x] 具体实验设计、基准测试实现、数据收集机制、结果分析工具
@@ -388,6 +412,8 @@
 ---
 
 ### 内存分析
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **文档**: [memory_analysis.md](./experiments/memory_analysis.md)
 **状态**: ✅ 已完成

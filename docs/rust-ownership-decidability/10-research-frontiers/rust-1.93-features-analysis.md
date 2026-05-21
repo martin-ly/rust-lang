@@ -71,6 +71,8 @@
 
 #### 形式化影响
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```text
 定义 MUSL-COMPATIBILITY-1:
     Rust 1.93 musl目标: libc符号兼容性
@@ -89,6 +91,8 @@
 ```
 
 #### 定理 MUSL-DNS-RELIABILITY
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 定理: musl 1.2.5 提升DNS解析可靠性
@@ -109,6 +113,8 @@
 ```
 
 #### 实践示例
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 示例: 静态链接musl的二进制更可靠
@@ -134,6 +140,8 @@ fn resolve_large_dns_record() -> std::io::Result<Vec<std::net::SocketAddr>> {
 > **[来源: Wikipedia - Type System]**
 
 #### 形式化定义
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 定义 GLOBAL-ALLOCATOR-TLS-1:

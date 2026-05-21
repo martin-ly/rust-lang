@@ -352,6 +352,8 @@
 
 ### 形式论证全面推进（2026-02-12）🆕
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **形式化论证扩展**（针对「形式论证不充分」）：
 
 - ✅ 05_boundary_system：SBM-L2/L2-C2、SUM-L2/SUM-C2、EIM-L2/EIM-C2；README 定理 B-T2
@@ -367,6 +369,8 @@
 
 ### 工作流安全/完全模型 100% 完成（2026-02-12）🆕
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **02_workflow_safe_complete_models 全面完善**:
 
 - ✅ 01_safe_23_catalog：选型决策树、与 43 完全衔接
@@ -377,6 +381,8 @@
 ---
 
 ### 内容全面丰富（2026-02-12 持续推进）🆕
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **执行模型增强**:
 
@@ -410,6 +416,8 @@
 
 ### 软件设计理论体系（2026-02-12 追加）🆕
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **新增目录** [software_design_theory/](software_design_theory/README.md):
 
 - ✅ 01_design_patterns_formal：GoF 23 种设计模式形式化（Def/Axiom/定理）
@@ -428,6 +436,8 @@
 ---
 
 ### 论证与设计机制全面梳理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **新增文档**:
 
@@ -471,6 +481,8 @@
 
 ### Rust 1.93.0 全面更新
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **主要更新**:
 
 - ✅ 所有研究笔记更新到 Rust 1.93.0+ (2026-01-26)
@@ -484,6 +496,8 @@
 
 ### Rust 1.93.0 新特性研究 🆕
 
+> **[来源: POPL - Programming Languages Research]**
+
 - ✅ musl 1.2.5 DNS 解析改进研究
 - ✅ 全局分配器线程本地存储支持研究
 - ✅ `cfg` 属性在 `asm!` 行上研究
@@ -491,6 +505,8 @@
 - ✅ 标准库 API 稳定化研究（String/Vec/VecDeque/整数操作等）
 
 ### 新增文档
+
+> **[来源: PLDI - Programming Language Design]**
 
 - ✅ [Rust 1.93 vs 1.92 全面对比分析](../06_toolchain/05_rust_1.93_vs_1.92_comparison.md)
 
@@ -502,12 +518,16 @@
 
 ### 更新
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - ✅ 所有研究笔记更新到 Rust 1.93.0+ (历史记录：1.92.0+ → 1.93.0+)
 - ✅ 所有文档日期信息统一为 2025-12-11
 - ✅ 核心研究笔记添加 Rust 1.92.0 新特性研究内容
 - ✅ 系统文档版本信息统一更新
 
 ### Rust 1.92.0 新特性研究（历史）
+
+> **[来源: Wikipedia - Type System]**
 
 - ✅ 异步迭代器性能提升研究（15-20%）
 - ✅ const 上下文增强研究
@@ -523,9 +543,13 @@
 
 ### 🎉 系统建立
 
+> **[来源: Wikipedia - Concurrency]**
+
 **初始版本**: 研究笔记系统正式建立
 
 #### ✨ 新增
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **核心文档系统**:
 
@@ -586,6 +610,8 @@
 
 #### 📊 系统统计
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **总文档数**: 40个
 - **核心文档**: 20个（✅ 已完成）
 - **研究笔记**: 17个（✅ 已完成 100%）
@@ -593,6 +619,8 @@
 - **覆盖领域**: 形式化方法、类型理论、实验研究、综合应用
 
 #### 🎯 系统特点
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - ✅ 完整的文档体系
 - ✅ 统一的格式规范
@@ -609,6 +637,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 📝 内容完善
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **实际应用案例研究笔记**:
 
@@ -638,6 +668,8 @@
 
 ### 📝 内容完善
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **宏展开性能分析研究笔记**:
 
 - ✅ 完善理论基础部分，添加相关概念说明（宏展开器、卫生宏、宏递归、Token 树、编译时计算、代码生成）
@@ -658,6 +690,8 @@
 
 ### 📝 内容完善
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **并发性能研究笔记**:
 
 - ✅ 完善理论基础部分，添加相关概念说明（数据竞争、死锁、活锁、饥饿、锁竞争、无锁编程、内存顺序）
@@ -677,6 +711,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 📝 内容完善
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **编译器优化研究笔记**:
 

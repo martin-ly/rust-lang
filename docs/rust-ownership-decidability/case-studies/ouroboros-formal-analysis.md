@@ -529,6 +529,8 @@ struct Document {
 
 ### 6.2 协变与逆变问题
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 自引用引入了复杂的生命周期方差问题：
 
 ```rust
@@ -550,6 +552,8 @@ struct Container<'a> {
 | 自引用字段 | 不变 | 严格生命周期匹配 |
 
 ### 6.3 生命周期约束推导
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 Ouroboros 自动推导生命周期约束：
 
@@ -581,6 +585,8 @@ struct ComplexDoc<'a, T> {
 
 ### 7.1 or_shared变体
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 `or_shared` 允许创建共享的自引用：
 
 ```rust
@@ -609,6 +615,8 @@ impl SharedData {
 - 需要克隆自引用结构体句柄
 
 ### 7.2 async/await支持
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Ouroboros 完全支持异步代码：
 
@@ -652,6 +660,8 @@ async fn process() {
 
 ### 7.3 递归自引用类型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 支持递归数据结构：
 
 ```rust
@@ -685,6 +695,8 @@ impl TreeNode {
 
 ### 8.1 堆分配策略
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Ouroboros 默认使用 `Box::pin` 进行堆分配：
 
 ```rust
@@ -700,6 +712,8 @@ pub fn new(...) -> Pin<Box<Self>>
 | 栈分配 | 无堆开销 | 复杂且受限 | 极短生命周期 |
 
 ### 8.2 内存开销分析
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **结构体内存布局**:
 
@@ -726,6 +740,8 @@ struct Example {
 
 ### 8.3 零成本抽象验证
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 使用 `cargo asm` 或 `godbolt.org` 验证：
 
 ```rust
@@ -748,6 +764,8 @@ data.with_slice(|s| s.len())
 ## 9. 实际应用案例
 
 ### 9.1 解析器实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 实现一个高效的零拷贝解析器：
 

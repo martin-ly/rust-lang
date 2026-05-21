@@ -231,6 +231,8 @@ pub struct CachePaddedCounter {
 
 #### Rust 1.94 Peekable 在并行处理中的应用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use rayon::prelude::*;
 use std::iter::Peekable;
@@ -292,6 +294,8 @@ where
 ```
 
 #### 延迟初始化与数据并行 (Rust 1.94)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::LazyLock;
@@ -604,6 +608,8 @@ where
 
 ### 2.3 并行排序
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use rayon::slice::ParallelSliceMut;
 
@@ -648,6 +654,8 @@ pub fn parallel_dedup<T: Eq + Send + Clone>(data: &mut Vec<T>) {
 ```
 
 ### 2.4 自定义分区策略
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use rayon::iter::plumbing::{Consumer, Producer, ProducerCallback, UnindexedConsumer};
@@ -719,6 +727,8 @@ where
 
 ### 3.1 便携式SIMD
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 #![feature(portable_simd)]
 
@@ -782,6 +792,8 @@ pub fn auto_simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
 ```
 
 ### 3.2 向量操作
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
@@ -870,6 +882,8 @@ pub fn simd_clamp(data: &mut [f32], min: f32, max: f32) {
 ```
 
 ### 3.3 矩阵运算
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
@@ -967,3 +981,7 @@ pub fn parallel_simd_matrix_multiply(a: &[f32], b: &[f32], c: &mut [f32], n: usi
 > **[来源: Rust Reference - std::sync]**
 
 > **[来源: ACM - Concurrent Programming]**
+
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

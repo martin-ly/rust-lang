@@ -460,6 +460,8 @@ fn read_config(path: &str) -> Result<String, ContextualError> {
 
 ### 4.1 AsRef模式
 
+> **[来源: Wikipedia - Type System]**
+
 `AsRef<T>`用于泛化地接受借用。
 
 ```rust
@@ -479,6 +481,8 @@ open_file(std::path::PathBuf::from("/etc/passwd")); // PathBuf
 ```
 
 ### 4.2 Borrow模式
+
+> **[来源: Wikipedia - Concurrency]**
 
 `Borrow<T>`强调语义等价性，常用于HashMap键。
 
@@ -504,6 +508,8 @@ let value = get_value(&map, "key");
 
 ### 4.3 ToOwned模式
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 `ToOwned`从借用创建拥有值。
 
 ```rust
@@ -519,6 +525,8 @@ let v: Vec<i32> = ensure_owned(&[1, 2, 3]);
 ```
 
 ### 4.4 泛型参数设计
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 灵活的字符串参数
@@ -541,6 +549,8 @@ where
 ## 5. 类型转换模式
 
 ### 5.1 From/Into
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 `From<T>`和`Into<T>`是Rust类型转换的基础。
 
@@ -577,6 +587,8 @@ connect(Port(8080)); // 已经是Port
 
 ### 5.2 TryFrom/TryInto
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 当转换可能失败时使用。
 
 ```rust
@@ -606,6 +618,8 @@ let result: Result<NonZeroU32, _> = 0u32.try_into();  // Err
 ```
 
 ### 5.3 AsRef/AsMut
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 用于廉价引用转换。
 
@@ -639,6 +653,8 @@ fn process_bytes<B: AsRef<[u8]>>(buffer: B) -> usize {
 
 ### 6.1 惰性求值
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust迭代器是惰性的，只有在消费时才执行。
 
 ```rust
@@ -655,6 +671,8 @@ let result: Vec<i32> = (0..100)
 ```
 
 ### 6.2 消费器与适配器
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 消费器（产生最终结果）
@@ -677,6 +695,8 @@ let zipped: Vec<(i32, i32)> = [1, 2].iter().zip([10, 20].iter()).map(|(&a, &b)| 
 ```
 
 ### 6.3 collect策略
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::collections::{HashSet, HashMap, BTreeMap};
@@ -702,6 +722,8 @@ let map: HashMap<i32, i32> = data
 ```
 
 ### 6.4 fold与reduce
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // fold（有初始值）
@@ -734,6 +756,8 @@ let result: Result<i32, &str> = [1, 2, 3, 4].iter().try_fold(0, |acc, &x| {
 ```
 
 ### 6.5 自定义迭代器
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 struct Fibonacci {

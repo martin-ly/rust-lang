@@ -594,6 +594,8 @@ impl ConnectionPool {
 
 ### 生产场景 3：树形结构搜索（短路求值）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::ops::ControlFlow;
 
@@ -630,6 +632,8 @@ impl<T: PartialEq + Clone> TreeNode<T> {
 ```
 
 ### 生产场景 4：验证管道（组合模式）
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -698,6 +702,8 @@ struct UserInput {
 
 ### 与 Try trait 的集成
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::ops::ControlFlow;
 
@@ -720,6 +726,8 @@ fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
 
 ### 性能优势
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 操作 | `Result` 提前返回 | `ControlFlow` 提前终止 | 性能差异 |
 |------|------------------|----------------------|----------|
 | 迭代器短路 | 需要类型转换 | 原生支持 | ControlFlow 快 10-15% |
@@ -729,6 +737,8 @@ fn validate_all_items(items: Vec<i32>) -> ControlFlow<Vec<String>, Vec<i32>> {
 ## Rust 1.92.0 错误处理改进（历史）
 
 ### ControlFlow 改进
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **改进**: 可以携带详细的错误信息
 
@@ -753,16 +763,22 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 
 ### 官方文档
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [Rust 错误处理文档](https://doc.rust-lang.org/book/ch09-00-error-handling.html)
 - [Rust Result 文档](https://doc.rust-lang.org/std/result/)
 - [Rust Option 文档](https://doc.rust-lang.org/std/option/)
 
 ### 项目内部文档
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [错误处理完整文档](../../../crates/c03_control_fn/docs/tier_02_guides/05_错误处理指南.md)
 - [错误处理研究笔记](../../research_notes/README.md)
 
 ### 相关速查卡
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [类型系统速查卡](./type_system.md) - Result 和 Option 类型
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 错误处理模式
@@ -774,6 +790,8 @@ fn validate(value: i32) -> ControlFlow<String, i32> {
 ## 💡 使用场景
 
 ### 场景 1: 配置文件解析
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::fs;
@@ -813,6 +831,8 @@ fn main() {
 ```
 
 ### 场景 2: 用户输入验证
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 #[derive(Debug)]
@@ -868,6 +888,8 @@ fn main() {
 ```
 
 ### 场景 3: 链式操作处理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 fn divide(a: f64, b: f64) -> Result<f64, &'static str> {

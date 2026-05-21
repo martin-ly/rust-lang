@@ -44,6 +44,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 本季度目标
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 <!-- 列出 3-5 个本季度要达成的具体目标 -->
@@ -64,6 +66,8 @@
    - 截止日期: ____-**-**
 
 ### 资源需求
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 <!-- 完成目标需要的人力、时间、工具等资源 -->
@@ -74,6 +78,8 @@
 | | | | |
 
 ### 风险评估
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 <!-- 可能影响目标达成的风险 -->
 
 | 风险项 | 可能性 | 影响度 | 缓解措施 |

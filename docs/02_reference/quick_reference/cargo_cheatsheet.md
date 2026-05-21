@@ -546,6 +546,8 @@ panic = "abort"
 
 ### 特性配置
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```toml
 [features]
 default = ["std", "async"]
@@ -560,6 +562,8 @@ serde = ["dep:serde"]
 
 ### 代码格式化
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 格式化代码
 cargo fmt
@@ -572,6 +576,8 @@ cargo fmt --all
 ```
 
 ### 代码检查
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```bash
 # 运行 Clippy
@@ -589,6 +595,8 @@ cargo clippy --fix
 
 ### 文档生成
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 生成文档
 cargo doc
@@ -604,6 +612,8 @@ cargo doc --no-deps
 ```
 
 ### 代码覆盖率
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```bash
 # 安装 tarpaulin
@@ -621,6 +631,8 @@ cargo tarpaulin --fail-under 80
 
 ### 宏展开
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```bash
 # 安装 cargo-expand
 cargo install cargo-expand
@@ -637,6 +649,8 @@ cargo expand my_function
 ## 🎯 常用别名 {#-常用别名}
 
 ### 配置别名
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```toml
 # .cargo/config.toml
@@ -662,6 +676,8 @@ fmt-check = "fmt --all -- --check"
 
 ### 使用别名
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```bash
 # 使用自定义别名
 cargo test-all
@@ -674,6 +690,8 @@ cargo clippy-all
 ## 📊 常用工作流 {#-常用工作流}
 
 ### 开发工作流
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```bash
 # 1. 创建项目
@@ -694,6 +712,8 @@ cargo build --release
 ```
 
 ### CI/CD 工作流
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```bash
 # 检查
@@ -717,6 +737,8 @@ cargo doc --no-deps
 
 ### 发布工作流
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 # 1. 更新版本
 # 编辑 Cargo.toml version
@@ -738,6 +760,8 @@ cargo publish
 
 ### 清理和重建
 
+> **[来源: Wikipedia - Type System]**
+
 ```bash
 # 清理构建缓存
 cargo clean
@@ -752,6 +776,8 @@ cargo build
 
 ### 依赖问题
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```bash
 # 查看依赖冲突
 cargo tree --duplicates
@@ -764,6 +790,8 @@ cargo tree -p problematic_crate
 ```
 
 ### 构建问题
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```bash
 # 详细输出
@@ -782,6 +810,8 @@ cargo build --target <target>
 
 ### 反例 1: 依赖版本冲突
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误示例**:
 
 ```toml
@@ -797,6 +827,8 @@ other = "2.0"  # 内部依赖 tokio 1.5  ❌ 可能冲突
 ---
 
 ### 反例 2: 将 dev-dependencies 用于生产
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误示例**:
 

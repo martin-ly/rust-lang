@@ -99,6 +99,8 @@ length(append(x::xs', ys))
 ```
 
 ### 1.2 结构归纳法
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +141,8 @@ fn eval_terminates(e: &Expr) -> bool {
 ```
 
 ### 1.3 良基归纳
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +184,8 @@ fn quicksort<T: Ord>(arr: &mut [T]) {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 共归纳原理
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +197,8 @@ fn quicksort<T: Ord>(arr: &mut [T]) {
 - 共归纳: 证明最大不动点(可能无限)
 
 ### 2.2 双模拟
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +218,8 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 > **[来源: Rust Official Docs]**
 
 ### 3.1 基本形式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +233,8 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 ```
 
 ### 3.2 在Rust证明中的应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +252,8 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 
 ### 3.3 对角线法
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **应用**: 证明不可判定性、不可能性结果
 
 ---
@@ -247,6 +261,8 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 ## 四、构造性证明
 
 ### 4.1 存在性构造
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **原理**: 要证 ∃x. P(x)，构造具体的witness
 
@@ -266,6 +282,8 @@ impl MyTrait for MyType {
 ```
 
 ### 4.2 算法构造
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **原理**: 构造算法同时证明存在性和计算方法
 

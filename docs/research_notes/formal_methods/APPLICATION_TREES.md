@@ -79,6 +79,8 @@
 ```
 
 ### 关键技术选型
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 

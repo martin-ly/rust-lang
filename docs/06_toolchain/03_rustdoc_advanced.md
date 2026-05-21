@@ -586,6 +586,8 @@ pub fn function() {}
 
 ### 5.3 文档章节
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **标准章节**:
 
 ````rust
@@ -628,6 +630,8 @@ pub fn documented_function() {}
 
 ### 6.1 生成 JSON
 
+> **[来源: Wikipedia - Type System]**
+
 **命令**:
 
 ```bash
@@ -641,6 +645,8 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 ---
 
 ### 6.2 JSON 格式
+
+> **[来源: Wikipedia - Concurrency]**
 
 **输出示例**:
 
@@ -670,6 +676,8 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 
 ### 6.3 应用场景
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **文档工具**: 构建自定义文档生成器
 - **API 索引**: 生成 API 目录
 - **文档搜索**: 构建高级搜索功能
@@ -680,6 +688,8 @@ rustdoc src/lib.rs -Z unstable-options --output-format json
 ## 7. 主题与定制
 
 ### 7.1 自定义 CSS
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **添加自定义样式**:
 
@@ -710,6 +720,8 @@ rustdoc-args = ["--html-in-header", "header.html"]
 
 ### 7.2 自定义 HTML
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **添加自定义 HTML**:
 
 ```rust
@@ -723,6 +735,8 @@ rustdoc-args = ["--html-in-header", "header.html"]
 ---
 
 ### 7.3 Logo 和 Favicon
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #![doc(html_logo_url = "https://example.com/logo.png")]

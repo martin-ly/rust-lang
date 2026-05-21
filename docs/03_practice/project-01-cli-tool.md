@@ -129,12 +129,16 @@ todo-cli/
 
 ### 步骤 1: 创建项目
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 cargo new todo-cli
 cd todo-cli
 ```
 
 ### 步骤 2: 定义数据结构
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // src/models.rs

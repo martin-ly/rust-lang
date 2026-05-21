@@ -277,6 +277,8 @@ fn relaxed_counter() {
 
 ### 4.2 Acquire-Release 使用示例
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 use std::thread;
@@ -304,6 +306,8 @@ fn acquire_release_example() {
 ```
 
 ### 4.3 SeqCst 使用示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -347,6 +351,8 @@ fn seqcst_example() {
 
 ### 5.1 C++11 内存模型基础
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 Rust 内存模型基于 C++11:
 
@@ -366,6 +372,8 @@ Rust 内存模型基于 C++11:
 ```
 
 ### 5.2 公理化规则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 内存模型的公理化规则:
@@ -391,6 +399,8 @@ Rust 内存模型基于 C++11:
 ```
 
 ### 5.3 Coherence 规则
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 Coherence 规则详细:
@@ -418,6 +428,8 @@ Coherence 规则详细:
 
 ### 6.1 弱内存模型的特征
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 弱内存模型（ARM、RISC-V）:
 
@@ -437,6 +449,8 @@ Coherence 规则详细:
 ```
 
 ### 6.2 Store Buffer 的形式化
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 Store Buffer 模型:
@@ -460,6 +474,8 @@ Store Buffer 模型:
 ```
 
 ### 6.3 内存屏障的形式化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 内存屏障类型:

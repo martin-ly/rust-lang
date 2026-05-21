@@ -92,6 +92,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 1. 基本类型系统
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +124,8 @@ fn safe_math() {
 ```
 
 ### 2. 泛型与 Trait
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 

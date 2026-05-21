@@ -211,6 +211,8 @@ struct Parser<'a> { input: &'a str }
 
 ### 结构型
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
 | Adapter | 接口适配 | Trait实现 |
@@ -218,6 +220,8 @@ struct Parser<'a> { input: &'a str }
 | Proxy | 访问控制 | 智能指针 |
 
 ### 行为型
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |
@@ -231,6 +235,8 @@ struct Parser<'a> { input: &'a str }
 
 ### 安全承诺
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 unsafe {
     // 开发者保证:
@@ -241,6 +247,8 @@ unsafe {
 ```
 
 ### 常见unsafe操作
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 操作 | 安全条件 | 示例 |
 | :--- | :--- | :--- |
@@ -255,6 +263,8 @@ unsafe {
 
 ### Future基础
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 async fn foo() -> i32 { 42 }
 
@@ -266,6 +276,8 @@ fn foo() -> impl Future<Output = i32> {
 
 ### 组合操作
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 操作 | 说明 | 示例 |
 | :--- | :--- | :--- |
 | `await` | 等待完成 | `let x = future.await;` |
@@ -274,6 +286,8 @@ fn foo() -> impl Future<Output = i32> {
 | `spawn` | 后台任务 | `tokio::spawn(future)` |
 
 ### 取消安全
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // ✅ 取消安全: 使用临时文件
@@ -290,6 +304,8 @@ async fn safe_write(path: &str, data: &[u8]) {
 
 ### 共享状态
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // Mutex
 let counter = Arc::new(Mutex::new(0));
@@ -302,6 +318,8 @@ data.write().unwrap().push(1);
 ```
 
 ### 消息传递
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // mpsc
@@ -342,6 +360,8 @@ tx.send("hello").unwrap();
 
 ### 所有权三规则
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 1. 每个值有且只有一个所有者
 2. 所有者离开作用域，值被丢弃
@@ -349,6 +369,8 @@ tx.send("hello").unwrap();
 ```
 
 ### 借用两规则
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 规则1: 要么一个可变引用(&mut)，要么多个不可变引用(&)

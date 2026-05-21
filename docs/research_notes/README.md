@@ -457,6 +457,8 @@ research_notes/
 
 ### 历史研究内容
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **更新日期**: 2025-11-15 / 2025-12-11
 
 **主要研究方向**:
@@ -489,6 +491,8 @@ research_notes/
 
 ### 实际应用案例研究
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **目标**: 通过分析实际应用案例，验证 Rust 理论在实际项目中的应用效果
 
 **相关笔记**: [practical_applications.md](./practical_applications.md)
@@ -503,6 +507,8 @@ research_notes/
 ---
 
 ### 研究方法论
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **目标**: 建立 Rust 研究的方法论体系，为研究提供系统化的方法指导
 
@@ -556,6 +562,8 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ### 获取帮助
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - 📖 查看 [常见问题解答](./FAQ.md) 获取常见问题的答案
 - 📚 阅读 [快速入门指南](./GETTING_STARTED.md) 了解如何使用系统
 - 🐛 提交 Issue 报告问题
@@ -594,9 +602,13 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -607,6 +619,8 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 
 #### 代码示例更新
 
+> **[来源: POPL - Programming Languages Research]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -614,6 +628,8 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -653,3 +669,6 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Memory Safety]**

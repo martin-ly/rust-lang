@@ -215,6 +215,8 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 ```
 
 ### 2.5 对齐计算（Rust 1.92+）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +237,8 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 ```
 
 ### 2.6 Layout API（自定义分配）
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +260,8 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 *参考*: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
 
 ### 2.7 平台差异
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -285,6 +291,8 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 
 ### 4.1 裸指针解引用前提与 UB 情形
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 [Rustonomicon](https://doc.rust-lang.org/nomicon/) 与 [Stacked Borrows](https://plv.mpi-sws.org/rustbelt/stacked-borrows/) 要求：
 
 | 操作 | 未对齐时 | 说明 |
@@ -297,6 +305,8 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 **原则**：凡未显式标注 `_unaligned` 的指针操作，均要求正确对齐。
 
 ### 4.2 未对齐访问
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 当指针可能未按类型对齐时（如从网络包、文件解析的字节流），必须用 `read_unaligned`/`write_unaligned`，否则 `*ptr` 或 `ptr::read` 会 UB。
 
@@ -312,6 +322,8 @@ fn parse_u64_unaligned(bytes: &[u8], offset: usize) -> u64 {
 ```
 
 ### 4.3 transmute 对齐约束
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 `mem::transmute::<A, B>(x)` 的约束（违反任一条为 UB）：
 
@@ -335,6 +347,8 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 
 ### 5.1 伪共享（False Sharing）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 多线程下，同一缓存行被不同核修改会导致缓存失效，性能可下降数倍。典型缓解：每线程数据单独占满缓存行。
 
 ```rust
@@ -347,6 +361,8 @@ struct CacheLinePadded {
 ```
 
 ### 5.2 数据局部性：AoS vs SoA
+
+> **[来源: ACM - Systems Programming Languages]**
 
 与对齐相关：连续访问同类型数据时，缓存行利用率更高。
 

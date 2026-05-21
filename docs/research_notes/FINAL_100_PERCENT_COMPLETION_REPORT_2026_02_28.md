@@ -70,6 +70,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 一、核心形式化文档 (11篇) ✅
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +92,8 @@
 **总计**: 376KB 核心形式化内容
 
 ### 二、软件设计理论 (42篇) ✅
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -103,10 +107,14 @@
 | 其他 | 3 | Rust习惯用法/反模式/综合规划 |
 
 ### 三、思维表征 (48个) ✅
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 思维导图 (15个)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +135,8 @@
 - FORMALIZATION_ECOLOGY_MINDMAP.md ✅
 
 #### 决策树 (10个)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

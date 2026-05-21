@@ -105,11 +105,15 @@
 
 ### 2.6 Crux-MIR
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **形式化**: 比特级精确、密码学模块验证
 - **本项目对应**: 无
 - **差距**: 无比特级模型
 
 ### 2.7 AutoVerus
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - **形式化**: LLM 自动生成 Verus 正确性证明
 - **本项目对应**: 无

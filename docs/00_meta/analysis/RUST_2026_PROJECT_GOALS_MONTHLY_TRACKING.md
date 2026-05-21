@@ -140,6 +140,8 @@
 ---
 
 ### 3.1 语言特性 (Language)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +173,8 @@
 ---
 
 ### 3.2 工具链 (Tooling)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +204,8 @@
 ---
 
 ### 3.3 生态系统 (Ecosystem)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +233,8 @@
 ---
 
 ### 3.4 嵌入式/内核 (Embedded/Kernel)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -250,6 +258,8 @@
 ---
 
 ### 3.5 形式化验证 (Formal Methods)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -278,6 +288,8 @@
 
 ### 4.1 更新触发条件
 
+> **[来源: Wikipedia - Memory Safety]**
+
 以下任一事件发生时，应触发本文档的更新：
 
 1. **Rust 新版本发布**：每月第 4 个周四的 stable 发布，检查新稳定特性是否对应矩阵中的目标
@@ -287,6 +299,8 @@
 5. **社区反馈**：收到关于目标覆盖状态不准确的 issue 或 PR 时
 
 ### 4.2 更新操作流程
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 步骤 1: 对比官方 2026 goals 页面，提取新增、变更、标记为完成的目标

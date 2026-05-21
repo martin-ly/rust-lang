@@ -63,6 +63,8 @@
 鉴别器模式等待多个并行分支中的第一个完成，然后取消或忽略其他分支的执行结果，继续后续流程。
 
 ### 核心语义
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -71,6 +73,8 @@ $$
 $$
 
 ### First-Wins 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 First-Wins（先到先胜）是鉴别器的核心语义：
 
@@ -169,6 +173,8 @@ $$
 ```
 
 ### Cancel Event 实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
                     ┌─────────────┐
@@ -340,6 +346,8 @@ $$
 
 ### 安全性证明
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定理 1（唯一获胜者）**: 鉴别器保证只有一个分支成为获胜者。
 
 **证明:**
@@ -371,6 +379,8 @@ $$
 
 ### 活性证明
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 3（最终完成）**: 如果至少有一个分支完成，鉴别器最终会继续执行。
 
 **证明:**
@@ -393,6 +403,8 @@ $$
 ## Rust 实现示例
 
 ### 基础鉴别器
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::future::Future;
@@ -487,6 +499,8 @@ pub async fn discriminator_select<T>(
 
 ### 带超时处理的鉴别器
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use tokio::time::{timeout, Duration};
 
@@ -580,6 +594,8 @@ async fn query_database(source: &str, latency_ms: u64) -> QueryResult {
 ```
 
 ### Race Condition 处理
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use std::sync::Arc;

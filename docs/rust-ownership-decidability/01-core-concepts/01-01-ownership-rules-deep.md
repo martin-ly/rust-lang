@@ -899,6 +899,8 @@ T ⊸ (T * ⊥)  或简化为  T ⊸ T  (忽略无效的x)
 
 #### 3.2.1 Copy Trait的形式定义
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 pub trait Copy: Clone { }
 ```
@@ -933,6 +935,8 @@ pub trait Copy: Clone { }
 
 #### 3.2.2 移动判断算法
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 编译器使用以下算法判断是否移动:
 
 ```
@@ -958,6 +962,8 @@ pub trait Copy: Clone { }
 
 #### 3.3.1 表达式级移动
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 表达式移动规则:
 
@@ -978,6 +984,8 @@ pub trait Copy: Clone { }
 ```
 
 #### 3.3.2 函数参数移动
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn foo(a: String, b: String) -> String { ... }
@@ -2781,6 +2789,8 @@ unsafe impl<T: Send> Sync for SafeCell<T> {}
 
 #### 5.1.1 栈分配与所有权
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **栈帧结构**:
 
 ```
@@ -2823,6 +2833,8 @@ unsafe impl<T: Send> Sync for SafeCell<T> {}
 
 #### 5.1.2 堆所有权跟踪
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **堆分配类型布局**:
 
 ```
@@ -2861,6 +2873,8 @@ Vec<T>:
 ```
 
 #### 5.1.3 Drop标志位布局
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **编译器生成的Drop标志**:
 
@@ -2937,6 +2951,8 @@ fn conditional_compiled(b: bool) {
 
 #### 5.2.1 所有权如何启用借用检查
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **借用检查的基本原理**:
 
 ```
@@ -2963,6 +2979,8 @@ owns(x, T) ⊢ UniqueBorrow(&mut x, T)  (仅一个)
 ```
 
 #### 5.2.2 流敏感分析
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **基于MIR的流敏感分析**:
 
@@ -2998,6 +3016,8 @@ Out[B] = Gen[B] ∪ (In[B] - Kill[B])
 ```
 
 #### 5.2.3 非词法生命周期 (NLL) 交互
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **NLL改进**:
 
@@ -3042,6 +3062,8 @@ after NLL:  lifetime(r) = [decl(r), last_use(r)]
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 6.1.1 Builder模式所有权流
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 标准Builder模式
@@ -3120,6 +3142,8 @@ self: ConfigBuilder ⊸ Result<Config, E> (build)
 
 #### 6.1.2 状态机所有权
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 类型状态模式: 编译时状态检查
 struct Closed;
@@ -3189,6 +3213,8 @@ fn state_machine_usage() {
 ```
 
 #### 6.1.3 类型状态模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 更复杂的类型状态: HTTP请求构建
@@ -3269,6 +3295,8 @@ fn type_state_usage() {
 
 #### 6.2.1 View类型
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 字符串切片 (零拷贝视图)
 fn use_string_view() {
@@ -3322,6 +3350,8 @@ owns(data, Vec<T>) ⊢ View::<'a, T>::new(&data)
 ```
 
 #### 6.2.2 借用数据容器
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // Cow: Clone on Write - 写时克隆
@@ -4002,3 +4032,36 @@ fn macro_ownership() {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

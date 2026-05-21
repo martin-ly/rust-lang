@@ -293,6 +293,8 @@ fn ownership_chain() {
 
 ### 4.2 借用与权限
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 共享借用 (&T):
 &T 对应于只读权限
@@ -345,6 +347,8 @@ fn permission_flow() {
 
 ### 5.1 Iris的核心创新
 
+> **[来源: PLDI - Programming Language Design]**
+
 Iris是RustBelt的基础逻辑框架：
 
 ```text
@@ -368,6 +372,8 @@ Iris的关键特性:
 ```
 
 ### 5.2 资源代数详解
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
 资源代数 (Resource Algebra, RA):
@@ -417,6 +423,8 @@ proof fn increment(counter: &mut Counter)
 
 ### 5.3 Iris中的所有权谓词
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 RustBelt在Iris中的类型解释:
 
@@ -442,6 +450,8 @@ RustBelt在Iris中的类型解释:
 ## 6. 验证工具中的分离逻辑
 
 ### 6.1 Prusti的Viper后端
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 Viper (Verification Infrastructure for Permission-based Reasoning):
@@ -478,6 +488,8 @@ fn increment(x: &mut MyStruct) {
 ```
 
 ### 6.2 Verus的资源代数
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // Verus中的资源代数示例

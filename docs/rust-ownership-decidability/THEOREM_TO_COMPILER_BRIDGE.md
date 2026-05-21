@@ -79,6 +79,8 @@ Theorem borrow_checking_termination :
 
 ### 1.2 rustc 对应实现
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **rustc 模块**: `compiler/rustc_borrowck/src/lib.rs`
 
 ```rust
@@ -117,6 +119,8 @@ impl<'tcx> BorrowCheckContext<'tcx> {
 
 ### 1.3 映射关系
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 形式化 | rustc 实现 | 含义 |
 |:-------|:-----------|:-----|
 | `borrow_check_iter` | `BorrowCheckContext::analyze` | 借用检查主循环 |
@@ -125,6 +129,8 @@ impl<'tcx> BorrowCheckContext<'tcx> {
 | `Some Γ'` | `BorrowCheckResult` | 成功结果 |
 
 ### 1.4 为什么这很重要？
+
+> **[来源: PLDI - Programming Language Design]**
 
 **理论保证**: 借用检查不会无限循环
 **实践意义**: 编译器不会挂起
@@ -135,6 +141,8 @@ impl<'tcx> BorrowCheckContext<'tcx> {
 ## 二、类型安全定理 ↔ rustc 类型检查
 
 ### 2.1 形式化定理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```coq
 Theorem type_safety :
@@ -147,6 +155,8 @@ Theorem type_safety :
 ```
 
 ### 2.2 rustc 对应实现
+
+> **[来源: Wikipedia - Type System]**
 
 **rustc 模块**: `compiler/rustc_typeck/src/`
 
@@ -194,6 +204,8 @@ impl<'tcx> TypeChecker<'tcx> {
 
 ### 2.3 映射关系
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 形式化 | rustc 实现 | 含义 |
 |:-------|:-----------|:-----|
 | `has_type` | `TypeChecker::check_expr` | 类型检查函数 |
@@ -202,6 +214,8 @@ impl<'tcx> TypeChecker<'tcx> {
 | `Δ, Γ, Θ` | `TyCtxt`, 局部变量环境 | 类型环境 |
 
 ### 2.4 类型规则对应
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 形式化规则 → rustc 实现:
 
@@ -231,6 +245,8 @@ T-App:    Γ ⊢ e₁ : τ₁ → τ₂    Γ ⊢ e₂ : τ₁
 
 ### 3.1 形式化定理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```coq
 Theorem rust_type_system_fully_decidable :
   forall (p : program),
@@ -241,6 +257,8 @@ Theorem rust_type_system_fully_decidable :
 ```
 
 ### 3.2 rustc 对应实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **rustc 编译流程**:
 

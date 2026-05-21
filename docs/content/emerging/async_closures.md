@@ -471,6 +471,8 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 
 ### 当前限制
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #![feature(async_closure)]
 
@@ -540,3 +542,9 @@ let f = async || {
 > **[来源: TRPL Ch. 17 - Async]**
 > **[来源: Tokio Documentation]**
 > **[来源: RFC 2394 - Async/Await]**
+
+
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

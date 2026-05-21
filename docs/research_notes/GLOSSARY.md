@@ -297,6 +297,8 @@
 
 ### S
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **Send**:
 
 - **定义**: 类型可安全跨线程转移所有权
@@ -313,6 +315,8 @@
 
 ### U
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **UB (Undefined Behavior, 未定义行为)**:
 
 - **定义**: 程序违反语言契约时，编译器可做任意假设
@@ -325,6 +329,8 @@
 
 ### A
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **关联类型 (Associated Type)**:
 
 - **定义**: Trait 中定义的占位符类型
@@ -332,6 +338,8 @@
 - **相关**: [Trait 系统形式化](./type_theory/trait_system_formalization.md)
 
 ### C {#c-1}
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **常量泛型 (Const Generics)**:
 
@@ -347,6 +355,8 @@
 
 ### G
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **泛型关联类型 (Generic Associated Types, GATs)**:
 
 - **定义**: 允许在 Trait 中使用泛型参数的关联类型
@@ -354,6 +364,8 @@
 - **相关**: [高级类型特性](./type_theory/advanced_types.md)
 
 ### I
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **逆变 (Contravariance)**:
 
@@ -368,6 +380,8 @@
 - **相关**: [型变理论](./type_theory/variance_theory.md)
 
 ### T
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Trait (Trait)**:
 
@@ -394,6 +408,8 @@
 - **相关**: [类型系统基础](./type_theory/type_system_foundations.md)
 
 ### V {#v-1}
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **型变 (Variance)**:
 

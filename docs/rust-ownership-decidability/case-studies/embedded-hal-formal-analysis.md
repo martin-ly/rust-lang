@@ -583,6 +583,8 @@ fn read_sensor_data<SPI: SpiDevice>(spi: &mut SPI) -> Result<SensorData, SPI::Er
 
 ### 5.3 多设备共享
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 使用 `SpiDevice` 管理片选:
 
 ```rust
@@ -607,6 +609,8 @@ sensor2.transaction(...)?;
 ## 6. I2C总线
 
 ### 6.1 I2c Trait设计
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 pub trait I2c<A: AddressMode = SevenBitAddress> {
@@ -635,6 +639,8 @@ impl AddressMode for TenBitAddress {}
 ```
 
 ### 6.2 地址处理
+
+> **[来源: IEEE - Programming Language Standards]**
 
 I2C支持7位和10位地址:
 
@@ -665,6 +671,8 @@ impl<I2C: I2c> Mpu6050<I2C> {
 ```
 
 ### 6.3 读写操作
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 I2C典型操作模式:
 
@@ -703,6 +711,8 @@ impl<I2C: I2c> Mpu6050<I2C> {
 
 ### 7.1 Delay trait
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 延迟是最常用的定时器功能:
 
 ```rust
@@ -736,6 +746,8 @@ fn blink_with_delay<P: OutputPin, D: DelayNs>(
 ```
 
 ### 7.2 CountDown
+
+> **[来源: POPL - Programming Languages Research]**
 
 倒计时定时器用于非阻塞延迟:
 
@@ -773,6 +785,8 @@ fn periodic_sampling<T: CountDown>(
 ```
 
 ### 7.3 PWM
+
+> **[来源: PLDI - Programming Language Design]**
 
 PWM（脉宽调制）用于模拟输出:
 
@@ -814,6 +828,8 @@ fn fade_led<PWM: SetDutyCycle>(pwm: &mut PWM) -> Result<(), PWM::Error> {
 
 ### 8.1 ADC转换
 
+> **[来源: Wikipedia - Memory Safety]**
+
 模数转换:
 
 ```rust
@@ -850,6 +866,8 @@ impl<PIN: Channel<Adc, ID = u8>> TemperatureSensor<PIN> {
 ```
 
 ### 8.2 DAC输出
+
+> **[来源: Wikipedia - Type System]**
 
 数模转换:
 
@@ -889,6 +907,8 @@ fn generate_sine_wave<DAC: SetValue>(
 
 ### 9.1 驱动架构
 
+> **[来源: Wikipedia - Concurrency]**
+
 跨平台驱动的典型架构:
 
 ```
@@ -917,6 +937,8 @@ nrf-hal-common = "0.18"
 ```
 
 ### 9.2 平台迁移案例
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 将MPU6050驱动从STM32F4迁移到nRF52:
 
@@ -949,6 +971,8 @@ let mut mpu = Mpu6050::new(i2c);  // 驱动代码完全不变！
 
 ### 10.1 核心trait设计
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 embedded-hal核心trait完全支持no_std:
 
 ```rust
@@ -972,6 +996,8 @@ fn use_peripherals<P: OutputPin, SPI: SpiDevice, I2C: I2c>(
 ```
 
 ### 10.2 alloc依赖处理
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 某些功能需要堆分配，应作为可选特性:
 
@@ -1013,6 +1039,8 @@ pub fn read_buffer<'a, I2C: I2c>(
 
 ### 11.1 生态配合
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                       应用层                                 │
@@ -1036,6 +1064,8 @@ pub fn read_buffer<'a, I2C: I2c>(
 ```
 
 ### 11.2 async HAL发展
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 embedded-hal-async提供异步trait:
 

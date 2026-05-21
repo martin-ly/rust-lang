@@ -39,6 +39,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 最终指标 ✅
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

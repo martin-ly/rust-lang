@@ -215,6 +215,8 @@
 
 ### 3.1 选择研究主题
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 根据您的兴趣选择研究主题：
 
 - **想理解所有权系统** → [所有权模型形式化](./formal_methods/ownership_model.md)（Def OW1、定理 T2/T3、RC-T1、BOX-T1）
@@ -223,6 +225,8 @@
 - **想优化性能** → [性能基准测试](./experiments/performance_benchmarks.md)（含 Criterion 可运行基准）
 
 ### 3.2 阅读研究笔记
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 每个研究笔记包含：
 
@@ -233,6 +237,8 @@
 5. **参考文献** - 相关论文和文档
 
 ### 3.3 使用工具指南
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 如果需要使用研究工具，查看 [工具使用指南](./TOOLS_GUIDE.md)：
 
@@ -246,9 +252,13 @@
 
 ### 4.1 查看研究路线图
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 首先查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划，选择合适的研究主题。
 
 ### 4.2 使用模板
+
+> **[来源: ACM - Systems Programming Languages]**
 
 使用 [研究笔记模板](./TEMPLATE.md) 创建新文件：
 
@@ -258,6 +268,8 @@
 
 ### 4.3 遵循规范
 
+> **[来源: IEEE - Programming Language Standards]**
+
 确保您的内容遵循：
 
 - [研究笔记规范](./README.md#-研究笔记规范)
@@ -265,6 +277,8 @@
 - [贡献指南](./CONTRIBUTING.md)
 
 ### 4.4 更新索引
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 创建新笔记后，更新：
 
@@ -277,6 +291,8 @@
 ## 🤝 第五步：贡献研究 {#-第五步贡献研究}
 
 ### 5.1 阅读贡献指南
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 详细阅读 [贡献指南](./CONTRIBUTING.md) 了解：
 

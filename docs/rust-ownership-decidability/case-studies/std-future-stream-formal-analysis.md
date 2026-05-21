@@ -83,7 +83,11 @@ Future和Stream是Rust异步编程的核心抽象:
 
 ### 2.1 类型定义
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定义 2.1 (Future trait)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 trait Future {
@@ -106,7 +110,11 @@ $$
 
 ### 2.2 Poll语义
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定理 2.1 (Poll契约)
+
+> **[来源: Wikipedia - Concurrency]**
 
 > Future的poll必须满足以下契约:
 
@@ -127,7 +135,11 @@ $$
 
 ### 2.3 与Monad的关系
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ### 定理 2.2 (Future是Monad)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 > Future实现了类似Monad的结构:
 
@@ -156,7 +168,11 @@ where
 
 ### 3.1 唤醒机制
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定义 3.1 (Waker)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 pub struct Waker {

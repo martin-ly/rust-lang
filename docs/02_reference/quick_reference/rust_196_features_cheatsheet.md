@@ -48,6 +48,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本语法
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -59,6 +61,8 @@ match value {
 ```
 
 ### 链式守卫
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

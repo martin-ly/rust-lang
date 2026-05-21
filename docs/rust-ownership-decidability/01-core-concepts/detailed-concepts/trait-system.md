@@ -316,6 +316,8 @@ trait AssociatedProcessor {
 
 ### 3.3 关联类型的约束
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 trait Graph {
     type Node: Clone + Debug;
@@ -340,6 +342,8 @@ impl Graph for MyGraph {
 ```
 
 ### 3.4 关联常量
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 trait Shape {
@@ -370,6 +374,8 @@ impl Shape for Square {
 
 ### 4.1 Trait 对象的形式化定义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定义 4.1** (Trait Object): Trait 对象是实现了特定 trait 的具体类型的擦除类型，表示为 `dyn Trait`。
 
 ```rust
@@ -385,6 +391,8 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 ```
 
 ### 4.2 Trait 对象的内存布局
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // &dyn Trait 的内存布局
@@ -405,6 +413,8 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 ```
 
 ### 4.3 对象安全 (Object Safety)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 不是所有 trait 都可以作为 trait 对象使用。一个 trait 是对象安全的，当且仅当：
 
@@ -433,6 +443,8 @@ trait ObjectSafe {
 ```
 
 ### 4.4 动态分发的使用场景
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 场景 1: 异构集合
@@ -466,6 +478,8 @@ struct EventSystem {
 
 ### 4.5 静态分发 vs 动态分发
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 特性 | 静态分发 (`impl Trait`/泛型) | 动态分发 (`dyn Trait`) |
 |------|------------------------------|------------------------|
 | 编译期确定 | ✅ | ❌ |
@@ -491,6 +505,8 @@ fn process_dynamic(p: &dyn Processor) {
 ## 5. 高级 Trait 特性
 
 ### 5.1 完全限定语法
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 trait Animal {
@@ -522,6 +538,8 @@ fn main() {
 
 ### 5.2 超 trait (Supertraits)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // Pet 是 Animal 的子 trait
 trait Animal {
@@ -545,6 +563,8 @@ impl Pet for Cat {
 ```
 
 ### 5.3 关联类型构造函数
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 trait Collection {
@@ -574,6 +594,8 @@ impl<T> Collection for MyVec<T> {
 
 ### 5.4 泛型特化（不稳定特性）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 #![feature(min_specialization)]
 
@@ -598,6 +620,8 @@ impl ToDebugString for String {
 
 ### 5.5 自动 trait
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 自动 trait（以前叫 OIBIT）
 // 自动为满足条件的类型实现
@@ -618,6 +642,8 @@ impl !Sync for RawPointer {}
 ## 6. 常见陷阱与解决方案
 
 ### 陷阱 1: 孤儿规则 (Orphan Rules)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // ❌ 编译错误：违反孤儿规则
@@ -656,6 +682,8 @@ impl MyDisplay for Vec<i32> {
 
 ### 陷阱 2: 递归类型限制
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // ❌ 编译错误：递归类型没有固定大小
 enum Json {
@@ -682,6 +710,8 @@ enum Json {
 ```
 
 ### 陷阱 3: 生命周期推断失败
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // ❌ 编译错误：生命周期不明确

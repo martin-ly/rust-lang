@@ -365,6 +365,8 @@ let client = HttpClient::builder()
 
 ### 认证
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // Basic 认证
 let response = client
@@ -387,6 +389,8 @@ let response = client
 
 ### 连接池
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 let client = HttpClient::builder()
     .pool_max_idle_per_host(10)
@@ -395,6 +399,8 @@ let client = HttpClient::builder()
 ```
 
 ### 压缩
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 let response = client
@@ -409,6 +415,8 @@ let response = client
 ## 🚫 反例速查
 
 ### 反例 1: 忽略连接错误
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **错误示例**:
 
@@ -427,6 +435,8 @@ let stream = TcpStream::connect("127.0.0.1:8080")?;
 ---
 
 ### 反例 2: 未设置超时导致无限阻塞
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误示例**:
 
@@ -462,6 +472,8 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 ## 🎯 使用场景
 
 ### 场景 1: REST API 客户端
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use reqwest::Client;

@@ -64,6 +64,8 @@
 每个分支完成时都会触发后续活动的执行。
 
 ### 核心语义
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@ $$
 其中每个 $Q_i$ 是 $Q$ 的一个独立实例。
 
 ### 触发计数语义
+
+> **[来源: Wikipedia - Type System]**
 
 多路合并的关键特性是**触发计数（Trigger Count）**：
 

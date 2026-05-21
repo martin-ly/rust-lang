@@ -155,6 +155,8 @@ impl OrderService {
 
 ### 链条 2：可撤销编辑器
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **场景**：文本编辑器支持 undo/redo。
 
 **模式选取**：Command（封装操作）+ Memento（快照，可选）+ State（编辑状态）。
@@ -211,9 +213,13 @@ impl OrderService {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

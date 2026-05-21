@@ -51,6 +51,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 完成度概览
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +86,8 @@
 
 ### Phase 0: 审计与清理 ✅
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 任务 | 状态 | 完成日期 |
 | :--- | :--- | :--- |
 | 文件系统盘点 | ✅ | 2026-02-28 |
@@ -91,6 +95,8 @@
 | 交叉引用检查 | ✅ | 2026-02-28 |
 
 ### Phase 1: 核心形式化增强 ✅
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -102,6 +108,8 @@
 
 ### Phase 2: 设计模式扩展 ✅
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
 | 23个GoF模式 | ✅ | 100% |
@@ -109,6 +117,8 @@
 | Rust习惯用法 | ✅ | 100% |
 
 ### Phase 3: 思维表征增强 ✅
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |

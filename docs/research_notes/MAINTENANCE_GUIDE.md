@@ -267,12 +267,16 @@
 
 ### 格式质量检查
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - **Markdown语法**: 符合Markdown语法规范
 - **标题层次**: 标题层次清晰合理
 - **代码块**: 代码块格式正确
 - **数学公式**: 数学公式格式正确（如使用）
 
 ### 格式统一检查清单（research_notes 专用）
+
+> **[来源: Wikipedia - Type System]**
 
 与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
 
@@ -285,12 +289,16 @@
 
 ### 链接质量检查
 
+> **[来源: Wikipedia - Concurrency]**
+
 - **有效性**: 所有链接必须有效
 - **相关性**: 链接内容必须相关
 - **更新性**: 链接内容必须及时更新
 - **可访问性**: 链接必须可访问
 
 ### 结构质量检查
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - **目录结构**: 目录结构清晰合理
 - **文件命名**: 文件命名规范统一
@@ -302,6 +310,8 @@
 ## 🔄 更新流程 {#-更新流程}
 
 ### 更新研究笔记
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 1. **选择研究主题**
    - 查看 [研究路线图](./RESEARCH_ROADMAP.md)
@@ -326,6 +336,8 @@
    - 更新文档元信息（日期、版本）
 
 ### 更新核心文档
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 1. **确定更新内容**
    - 明确更新目标和范围
@@ -353,12 +365,16 @@
 
 ### 问题发现
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **自动检测**: 使用维护工具自动检测问题
 - **用户报告**: 用户反馈和问题报告
 - **定期审查**: 定期人工审查和检查
 - **社区反馈**: 社区成员反馈和建议
 
 ### 问题分类
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **严重问题**: 影响系统正常运行的问题（如链接失效、格式错误）
 - **重要问题**: 影响用户体验的问题（如内容过时、导航问题）

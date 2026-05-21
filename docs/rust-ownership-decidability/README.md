@@ -346,6 +346,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
 ### 🟢 路径 A: 快速入门 (4小时) → 已更新
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 适合: 有编程经验，想快速了解Rust所有权系统
 
 | 步骤 | 内容 | 时间 | 文件 |
@@ -361,6 +363,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 ---
 
 ### 🟡 路径 B: 深入理解 (2周)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 适合: 希望系统掌握Rust，能独立开发复杂项目
 
@@ -382,6 +386,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 ---
 
 ### 🔴 路径 C: 形式化方法 (持续学习)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 适合: 研究人员、形式化方法爱好者、编译器开发者
 
@@ -416,6 +422,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
 ### 并发模式索引
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 模式 | 文件 | 难度 | 特性 |
 |:-----|:-----|:----:|:-----|
 | 线程安全基础 | `12-02-thread-safety-patterns.md` | 🟡 | Send/Sync |
@@ -426,6 +434,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 | Actor模型 | `actor-specialty/ACTOR_MODEL_DEEP_DIVE.md` | 🔴 | 形式化语义 |
 
 ### Actor框架对比
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 框架 | 适用场景 | 学习曲线 | 特性 |
 |:-----|:---------|:--------:|:-----|

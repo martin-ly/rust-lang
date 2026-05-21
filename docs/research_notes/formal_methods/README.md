@@ -189,6 +189,8 @@
 
 ### 7. Actor 模型形式化 ⭐ 新增
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **研究问题**:
 
 - Actor 模型的形式化语义如何定义？
@@ -271,6 +273,8 @@
 
 ### 已完成 ✅ {#已完成-}
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [x] [完备性缺口](./00_completeness_gaps.md) - 缺口声明与路线图
 - [x] [所有权模型形式化](./ownership_model.md) - 100%；含 RC/ARC/CELL/REFCELL/BOX 扩展
 - [x] [借用检查器证明](./borrow_checker_proof.md) - 100%；含 CHAN/MUTEX/RAW 扩展
@@ -284,6 +288,8 @@
 ## 🔗 相关资源 {#-相关资源}
 
 ### 核心文档
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [形式化论证系统梳理指南](../FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、反例索引、公理-定理证明树
 - [形式化工程系统 - 理论基础](../../rust-formal-engineering-system/01_theoretical_foundations/README.md)

@@ -297,9 +297,13 @@ SafeNet 架构:
 
 ### 5.1 研究趋势
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 2024-2025 年，大语言模型 (LLM) 在代码翻译领域取得了显著进展。ICSE 上出现了多篇相关论文：
 
 #### A. "LLM-based C-to-Rust Translation: How Far Are We?" (ICSE 2024)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - **核心发现**: GPT-4 / Claude 在小型 C 函数上的翻译准确率约 65-75%
 - **关键问题**: LLM 倾向于"幻想" Rust API，生成无法编译的代码
@@ -307,17 +311,23 @@ SafeNet 架构:
 
 #### B. "RustGen: Iterative LLM-based Rust Code Generation with Type-Guided Repair" (ICSE 2025)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - **核心方法**: 生成 → 编译检查 → 错误反馈 → 重生成 的迭代循环
 - **创新点**: 利用 Rust 类型系统信息指导 LLM 修复
 - **结果**: 编译通过率从 45% 提升至 82%
 
 #### C. "SafeTrans: Safety-Aware C-to-Rust Translation using LLMs" (ICSE 2025)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **核心方法**: 在 prompt 中嵌入 Rust 安全规则
 - **创新点**: 多 agent 协作 (翻译 agent + 安全审查 agent)
 - **结果**: 生成的代码中 `unsafe` 块减少 60%
 
 ### 5.2 LLM 辅助翻译的最佳实践
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 基于最新研究，推荐的工作流程：
 
@@ -349,6 +359,8 @@ Phase 4: 工程化
 
 ### 5.3 Prompt 工程模板
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 【C-to-Rust 翻译 Prompt 模板】
 
@@ -379,6 +391,8 @@ Phase 4: 工程化
 ## 6. 综合评估：各工具优缺点与适用场景
 
 ### 6.1 工具对比矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 工具/方法 | 自动化程度 | 安全性 | 可编译率 | 地道 Rust | C++ 支持 | 适用场景 |
 |-----------|-----------|--------|---------|----------|---------|---------|

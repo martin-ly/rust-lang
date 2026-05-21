@@ -43,6 +43,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 设计模式论证缺口
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -55,6 +57,8 @@
 | **模式间依赖图未形式化** | 有「相关模式」表，但缺模式依赖 DAG、组合约束的形式化描述 | 大型系统选型时无法系统化排除冲突组合 |
 
 ### 1.2 分布式设计模式论证缺口
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +71,8 @@
 | **分布式模式与执行模型层次关系未论证** | 分布式 vs 并发 vs 异步的边界、组合约束（如「分布式 + 并发」的 Send/Sync 要求）未系统化 | 跨模型组合选型易出错 |
 
 ### 1.3 工作流设计模式论证缺口
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +91,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 设计模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -97,6 +105,8 @@
 | **模式依赖 DAG** | 在 01_design_patterns_formal/README 或 04_boundary_matrix 新增「模式组合约束 DAG」：哪些组合推荐、哪些禁止、原因 |
 
 ### 2.2 分布式设计模式
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -109,6 +119,8 @@
 | **分布式+并发组合定理** | 明确「分布式 RPC 返回 Future + Send」与 CE-T2、async T6 的推导链 |
 
 ### 2.3 工作流设计模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

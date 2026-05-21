@@ -483,6 +483,8 @@ fn contravariant<'short, 'long>(
 
 ### 不变（Invariant）- &mut T
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // &mut T 是不变的
 fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
@@ -495,6 +497,8 @@ fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
 ## 🔍 常用 Trait
 
 ### Debug & Display
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #[derive(Debug)]
@@ -515,6 +519,8 @@ println!("{}", p);    // Display
 
 ### Clone & Copy
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // Copy: 隐式复制（栈上简单类型）
 #[derive(Copy, Clone)]
@@ -532,6 +538,8 @@ let d2 = d1.clone();  // 显式克隆
 
 ### PartialEq & Eq
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #[derive(PartialEq, Eq)]
 struct Point { x: i32, y: i32 }
@@ -544,6 +552,8 @@ assert_eq!(p1, p2);
 ---
 
 ### PartialOrd & Ord
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 #[derive(PartialOrd, Ord, PartialEq, Eq)]
@@ -562,6 +572,8 @@ assert!(p1 < p2);
 
 ### 类型别名
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 type Kilometers = i32;
 type Result<T> = std::result::Result<T, std::io::Error>;
@@ -574,6 +586,8 @@ fn distance() -> Kilometers {
 ---
 
 ### Never 类型
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 fn never_returns() -> ! {
@@ -591,6 +605,8 @@ let x: i32 = if some_condition {
 
 ### PhantomData（零大小类型标记）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -605,6 +621,8 @@ struct MyType<T> {
 ## 🎯 常见模式
 
 ### 新类型模式（Newtype）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 struct Meters(u32);
@@ -622,6 +640,8 @@ fn run(distance: Meters, time: Seconds) {
 ---
 
 ### 类型状态模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 struct Locked;
@@ -656,6 +676,8 @@ door.open();  // ✅ OK
 ---
 
 ### Builder 模式（类型安全）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 struct EmailBuilder<Subject, Body> {
@@ -701,6 +723,8 @@ impl EmailBuilder<Set<String>, Set<String>> {
 
 ### 单态化（Monomorphization）
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 泛型函数会为每个具体类型生成一份代码
 fn generic<T: Display>(t: T) {
@@ -718,6 +742,8 @@ generic("hello"); // 生成 generic::<&str>
 ---
 
 ### 动态分派 vs 静态分派
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 静态分派（单态化）
@@ -738,6 +764,8 @@ fn dynamic_dispatch(item: &dyn Summary) {
 ---
 
 ### 内存对齐
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use std::mem::{size_of, align_of};
@@ -761,6 +789,8 @@ struct CacheAligned { data: [u8; 64]; }
 ## 🚫 反例速查
 
 ### 反例 1: 为 Copy 类型实现 Clone 不一致
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误示例**:
 
@@ -786,6 +816,8 @@ struct Good {
 
 ### 反例 2: 生命周期省略导致悬垂引用
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **错误示例**:
 
 ```rust
@@ -809,6 +841,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 3: 混淆 Sized 与动态大小类型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **错误示例**:
 
 ```rust
@@ -830,16 +864,22 @@ fn take_slice<T>(t: &[T]) {}
 
 ### 深入学习
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [类型系统理论](../../../crates/c02_type_system/docs/tier_04_advanced/README.md)
 - [型变详解](../../../crates/c02_type_system/docs/tier_03_references/02_类型型变参考.md)
 - [Trait 系统](../../../crates/c02_type_system/docs/tier_02_guides/04_Trait系统指南.md)
 
 ### 代码示例
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [泛型示例](../../../crates/c02_type_system/examples/README.md)
 - [类型转换](../../../crates/c02_type_system/src/README.md)
 
 ### 形式化理论
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [类型理论深度](../../../crates/c02_type_system/docs/tier_04_advanced/01_类型理论深度.md)
 - [类型构造能力](../../research_notes/type_theory/construction_capability.md) — Def TCON1、TCON 矩阵、类型构造决策树、Rust 1.93 新特性

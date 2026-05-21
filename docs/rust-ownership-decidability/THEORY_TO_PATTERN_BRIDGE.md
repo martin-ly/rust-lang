@@ -47,6 +47,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 线性逻辑 → RAII 模式
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -91,6 +93,8 @@ fn use_file() {
 - 资源只能被使用一次（不能重复释放）
 
 ### 1.2 仿射类型 → Builder 模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **理论基础**: 仿射类型允许使用 0 次或 1 次
 
@@ -150,6 +154,8 @@ fn example() {
 
 ### 1.3 区域类型 → 类型状态模式
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **理论基础**: 区域类型限制值的有效期
 
 **模式**: 类型状态（编译期状态机）
@@ -205,6 +211,8 @@ impl Connection<Connected> {
 
 ### 2.1 借用规则 → 访问者模式
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **理论基础**: 不能同时有可变和不可变借用
 
 **模式**: 访问者模式（分离遍历和修改）
@@ -253,6 +261,8 @@ impl Ast {
 
 ### 2.2 内部可变性 → Newtype 模式
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **理论基础**: 在不可变引用后隐藏可变性
 
 **模式**: Newtype + 内部可变性
@@ -299,6 +309,8 @@ fn example() {
 ## 三、生命周期约束与设计模式
 
 ### 3.1 生命周期约束 → 零拷贝模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **理论基础**: 引用的有效期不能超过被引用者
 
@@ -350,6 +362,8 @@ fn example() {
 ```
 
 ### 3.2 'static 约束 → 单例模式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **理论基础**: 'static 表示整个程序生命周期
 

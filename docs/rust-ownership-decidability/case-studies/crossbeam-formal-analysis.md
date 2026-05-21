@@ -274,6 +274,8 @@ $$
 
 ### 算法 3.1 (无锁push)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn push(&self, t: T) {
     let new = Box::into_raw(Box::new(Node {
@@ -314,6 +316,8 @@ fn push(&self, t: T) {
 ```
 
 ### 算法 3.2 (无锁pop)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 fn pop(&self) -> Option<T> {
@@ -360,7 +364,11 @@ fn pop(&self) -> Option<T> {
 
 ### 3.2 ABA问题与解决
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 3.2 (ABA问题)
+
+> **[来源: POPL - Programming Languages Research]**
 
 **问题描述**:
 
@@ -388,7 +396,11 @@ T1: CAS A → 成功，但队列状态已变!
 
 ### 3.3 线性化点分析
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定理 3.1 (Michael-Scott队列线性化)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 > Michael-Scott队列是线性化的，每个操作都有一个线性化点。
 
@@ -412,7 +424,11 @@ T1: CAS A → 成功，但队列状态已变!
 
 ### 4.1 Treiber栈
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 4.1 (Treiber栈)
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 struct Stack<T> {

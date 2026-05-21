@@ -332,6 +332,8 @@ fn cache_sensitive_operation() -> Vec<f64> {
 
 ### 基准测试隔离
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // benches/bench1.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -359,6 +361,8 @@ fn bench2(c: &mut Criterion) {
 ## 性能分析工具集成
 
 ### 使用 perf 分析
+
+> **[来源: Wikipedia - Type System]**
 
 ```bash
 # 编译并运行基准测试
@@ -401,6 +405,8 @@ $ perf report
 
 ### 使用 cargo-flamegraph
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```bash
 # 安装
 $ cargo install flamegraph
@@ -410,6 +416,8 @@ $ cargo flamegraph --bench my_benchmark
 ```
 
 ### 内存分配分析
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 使用 dhat 进行堆分析

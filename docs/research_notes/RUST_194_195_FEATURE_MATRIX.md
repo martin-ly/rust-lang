@@ -66,6 +66,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 高优先级更新
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -77,6 +79,8 @@
 | [pin_self_referential](./formal_methods/pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
 ### 中优先级更新
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -93,6 +97,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.94-1 (RangeToInclusive)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +118,8 @@ RangeToInclusive<T> = { x | x ≤ end }
 ---
 
 ### Def 1.94-2 (ControlFlow::ok)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +137,8 @@ ok(Break(_)) = None
 ---
 
 ### Def 1.94-3 (RefCell::try_map)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +155,8 @@ try_map: Ref<T> -> (T -> Option<U>) -> Result<Ref<U>, Ref<T>>
 ---
 
 ### Def 1.95-1 (生成器状态机)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -221,6 +221,8 @@ research_notes/
 > **[来源: Rust Official Docs]**
 
 #### 2.2.1 formal_methods 覆盖度
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +242,8 @@ research_notes/
 - ❌ **缺失**: L3机器可检查证明、Coq/Iris实现
 
 #### 2.2.2 type_theory 覆盖度
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -258,6 +262,8 @@ research_notes/
 - ❌ **范畴论对应**: 指称语义的范畴论解释未形式化
 
 #### 2.2.3 software_design_theory 覆盖度
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -275,6 +281,8 @@ research_notes/
 
 #### 2.3.1 思维导图覆盖
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 领域 | 全局导图 | 概念导图 | 证明导图 | 缺口 |
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权/借用 | ✅ | ✅ | ⚠️ | 证明步骤细化 |
@@ -286,6 +294,8 @@ research_notes/
 
 #### 2.3.2 多维矩阵覆盖
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 矩阵类型 | 状态 | 缺口 |
 | :--- | :--- | :--- |
 | 概念-公理-定理-证明-反例 五维矩阵 | ✅ | 需更新 |
@@ -296,6 +306,8 @@ research_notes/
 | Trait系统特性矩阵 | ⚠️ | 完整覆盖 |
 
 #### 2.3.3 证明树与决策树覆盖
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 类型 | 数量 | 状态 |
 | :--- | :--- | :--- |
@@ -312,6 +324,8 @@ research_notes/
 
 #### 2.4.1 定义层缺口 (D1/D2)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
 | D1-01 | 分布式模式专用概念（Saga、CQRS等） | P0 | ❌ |
@@ -321,6 +335,8 @@ research_notes/
 
 #### 2.4.2 关系层缺口 (R1/R2)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
 | R1-01 | 模式组合有效性推导（CE-T1-T3实例） | P0 | ⚠️ |
@@ -328,6 +344,8 @@ research_notes/
 | R2-01 | 设计模式边界反例系统 | P1 | ⚠️ |
 
 #### 2.4.3 证明层缺口 (P1/P2)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 缺口ID | 描述 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -479,6 +497,8 @@ Phase 4 (持续): 维护与扩展
 
 #### Phase 1: 基础补全阶段 (Week 1-8)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **Week 1-2: 核心定理L3骨架完善**:
 
 | 任务ID | 任务描述 | 交付物 | 工时 |
@@ -505,6 +525,8 @@ Phase 4 (持续): 维护与扩展
 | P1-T10 | 反例系统标准化 | 统一反例格式与索引 | 10h |
 
 #### Phase 2: 深度证明阶段 (Week 9-16)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Week 9-12: L3机器证明实施**:
 

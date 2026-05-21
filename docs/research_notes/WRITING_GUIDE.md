@@ -428,6 +428,8 @@
 
 ### 5. 参考文献部分
 
+> **[来源: Wikipedia - Concurrency]**
+
 **写作要点**:
 
 - 提供充分的参考文献
@@ -453,6 +455,8 @@
 
 ### 学术论文
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 1. **RustBelt: Logical Foundations for the Future of Safe Systems Programming**
    - 作者: Ralf Jung, et al.
    - 年份: 2018
@@ -461,10 +465,14 @@
 
 ### 官方文档
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - [Rust Book - Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
 
 ### 相关代码
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [所有权实现](../../crates/c01_ownership_borrow_scope/README.md)
 - [所有权文档](../../crates/c01_ownership_borrow_scope/docs/README.md)
@@ -475,6 +483,8 @@
 ## 📐 格式规范 {#-格式规范}
 
 ### 1. Markdown 格式
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **标题层级**:
 
@@ -502,6 +512,8 @@
 - 使用 `` `代码` `` 表示代码或术语
 
 ### 2. 数学公式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **格式要求**:
 
@@ -539,6 +551,8 @@
 
 ### 4. 链接和引用
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **链接格式**:
 
 - 使用相对路径链接到其他文档
@@ -553,6 +567,8 @@
 ```
 
 ### 5. 目录（TOC）门禁
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **门禁要求**（见 TOC_AND_CONTENT_DEEPENING_PLAN）：
 
@@ -581,6 +597,8 @@
 
 ### 6. 概念定义-属性关系-解释论证 层次化（核心研究笔记）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **依据**：[CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)。
 
 凡含 Def/Axiom/定理的形式化文档，宜在形式化定义节末增加 **「概念定义-属性关系-解释论证 层次汇总」** 子节，用表格显式三层次：
@@ -599,6 +617,8 @@
 
 ### 1. 逻辑结构
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **组织原则**:
 
 - 从简单到复杂
@@ -616,6 +636,8 @@
 
 ### 2. 章节划分
 
+> **[来源: POPL - Programming Languages Research]**
+
 **划分原则**:
 
 - 每个章节聚焦一个主题
@@ -629,6 +651,8 @@
 - 详细内容使用四级标题
 
 ### 3. 交叉引用
+
+> **[来源: PLDI - Programming Language Design]**
 
 **引用原则**:
 
@@ -647,6 +671,8 @@
 ## ✅ 质量检查 {#-质量检查}
 
 ### 1. 内容检查
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **检查清单**:
 

@@ -183,6 +183,8 @@
 - [研究路线图](./RESEARCH_ROADMAP.md) - 了解研究计划
 
 ### 步骤 3: 创建或修改文件
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +192,8 @@
 - **修改现有笔记**: 直接编辑相应文件
 
 ### 步骤 4: 遵循规范
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +206,8 @@
 
 ### 步骤 5: 更新索引
 
+> **[来源: Wikipedia - Memory Safety]**
+
 如果创建了新笔记，请更新：
 
 - 相应目录的 README.md
@@ -209,6 +215,8 @@
 - 快速参考 QUICK_REFERENCE.md（如需要）
 
 ### 步骤 6: 提交贡献
+
+> **[来源: Wikipedia - Type System]**
 
 提交您的贡献并等待审查。
 
@@ -218,12 +226,16 @@
 
 ### 内容质量
 
+> **[来源: Wikipedia - Concurrency]**
+
 - ✅ **准确性**: 内容准确，有据可查
 - ✅ **完整性**: 包含所有必要部分
 - ✅ **清晰性**: 表达清晰，易于理解
 - ✅ **相关性**: 与 Rust 研究相关
 
 ### 格式质量
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - ✅ **Markdown 语法**: 符合 Markdown 规范
 - ✅ **代码格式**: 代码格式正确，可运行

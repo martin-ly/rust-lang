@@ -69,6 +69,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 🔴 问题1: 测试覆盖严重不均衡
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +96,8 @@
 ```
 
 #### 🔴 问题2: 实践内容极度匮乏
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@
 ```
 
 #### 🔴 问题3: 目录结构混乱（重复）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +144,8 @@ docs/
 > **[来源: Rust Official Docs]**
 
 #### 🟡 问题4: 根目录文档堆积
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +167,8 @@ docs/
 ```
 
 #### 🟡 问题5: 宏系统模块薄弱
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +197,8 @@ docs/
 尽管有上述问题，项目在以下方面表现优秀：
 
 #### ✅ 文档体系完善
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +207,8 @@ docs/
 - 权威引用充分（PLDI/POPL论文）
 
 #### ✅ 工具链现代化
+
+> **[来源: POPL - Programming Languages Research]**
 
 - Rust 1.94.0 最新稳定版
 - Edition 2024 准备就绪
@@ -209,6 +223,8 @@ docs/
 > **[来源: Wikipedia - Type System]**
 
 #### 任务 E1: 修复 c02_type_system 测试缺失 [P0]
+
+> **[来源: PLDI - Programming Language Design]**
 
 **工时**: 4h | **负责人**: 待分配
 

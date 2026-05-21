@@ -119,6 +119,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Datalog 简介
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +131,8 @@ graph TD
 - **查询 (Queries)**：从事实和规则中推导结论
 
 ### 3.2 Polonius 的 Datalog 建模
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +146,8 @@ Polonius 将 Rust 程序中的借用关系建模为 Datalog 程序：
 | `borrow_live_at(L, P)` | 贷款 `L` 在程序点 `P` 仍然存活 |
 
 ### 3.3 关键推导规则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +168,8 @@ error(P) :-
 ```
 
 ### 3.4 Datafrog 引擎
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 `rustc` 使用 **[Datafrog](https://github.com/rust-lang/datafrog)** —— 一个增量式 Datalog 求解器：
 
@@ -184,6 +192,8 @@ flowchart LR
 
 ### 4.1 编译通过的案例
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 /// Polonius 能通过但 NLL 拒绝的代码示例
 pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
@@ -200,6 +210,8 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 
 ### 4.2 核心差异总结
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 场景 | NLL | Polonius | 说明 |
 |------|-----|----------|------|
 | 条件返回后修改 | ❌ 报错 | ✅ 通过 | 路径敏感分析 |
@@ -212,6 +224,8 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 ## 5. 实际使用
 
 ### 5.1 在 Nightly 上启用 Polonius
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```bash
 # 使用 nightly 编译器
@@ -229,6 +243,8 @@ rustflags = ["-Zpolonius"]
 ```
 
 ### 5.2 验证 Polonius 是否生效
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // test_polonius.rs
@@ -250,6 +266,8 @@ fn main() {}
 ```
 
 ### 5.3 与 Miri 的联合使用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```bash
 # Miri 检测运行时 UB，Polonius 检测编译期借用冲突

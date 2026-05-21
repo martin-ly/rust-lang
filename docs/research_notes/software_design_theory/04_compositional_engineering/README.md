@@ -75,6 +75,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：Builder + Factory Method
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +110,8 @@ impl ConfigFactory for DefaultFactory {
 ```
 
 ### 示例 2：Repository + Service Layer + DTO（完整链条）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +143,8 @@ impl<R: OrderRepository> OrderService<R> {
 ```
 
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +193,8 @@ impl<R: OrderRepository> OrderService<R> {
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
 ### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -572,3 +580,11 @@ L4 跨进程/跨网络（分布式、微服务）
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

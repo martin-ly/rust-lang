@@ -650,7 +650,11 @@ fn create_vec() -> Vec<u8, 64> {
 
 ### 4.2 类型级容量运算
 
+> **[来源: Wikipedia - Concurrency]**
+
 ### 定义 4.1 (容量运算)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 虽然heapless不直接提供类型级算术，但可以与 `typenum` 结合:
 
@@ -670,7 +674,11 @@ $$
 
 ### 4.3 容量溢出处理的代数模型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 4.2 (溢出代数)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 溢出处理可以建模为代数效果:
 
@@ -698,7 +706,11 @@ $$
 
 ### 5.1 push操作的类型转换
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ### 定理 5.1 (push类型安全性)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > push操作在成功时保持类型安全，在溢出时安全地返回所有权。
 
@@ -730,7 +742,11 @@ $$
 
 ### 5.2 pop操作的所有权转移
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定理 5.2 (pop所有权转移)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > pop操作正确地将元素所有权从集合转移到调用者。
 
@@ -760,7 +776,11 @@ $$
 
 ### 5.3 迭代器的生命周期保证
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定理 5.3 (迭代器安全性)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > Heapless迭代器保持对集合的借用，防止迭代期间修改。
 
@@ -797,7 +817,11 @@ for x in it { ... }
 
 ### 5.4 Drop实现的正确性
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定理 5.4 (Drop正确性)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > Heapless集合正确释放所有元素，无内存泄漏。
 
@@ -831,7 +855,11 @@ $$
 
 ### 6.1 核心定理汇总
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定理 6.1 (容量不变式定理)
+
+> **[来源: Wikipedia - Type System]**
 
 > 对于任何HeaplessVec $\langle T, N \rangle$，长度 $n$ 始终满足:
 

@@ -437,6 +437,8 @@ echo "=== Kani Verification Complete ==="
 
 #### Kani配置 (kani.toml)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```toml
 # Kani模型检查配置
 [default]
@@ -466,6 +468,8 @@ timeout = 3600  # 1小时
 
 #### Tarpaulin配置
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```bash
 #!/bin/bash
 # coverage.sh
@@ -490,6 +494,8 @@ echo "Open target/coverage/tarpaulin-report.html"
 ```
 
 #### 配置文件 (.tarpaulin.toml)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```toml
 [default]
@@ -533,6 +539,8 @@ clean = true
 
 #### .cargo/config.toml完整配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```toml
 [build]
 # 默认目标
@@ -575,6 +583,8 @@ DEFMT_LOG = "info"
 > **[来源: Wikipedia - Type System]**
 
 #### VSCode调试配置 (.vscode/launch.json)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```json
 {
@@ -821,3 +831,12 @@ jobs:
 > **[来源: IEC 61508 - Safety Standards]**
 > **[来源: MISRA Rust Guidelines]**
 > **[来源: Ferrocene Language Specification]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

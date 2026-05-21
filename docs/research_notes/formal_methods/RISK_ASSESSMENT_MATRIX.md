@@ -118,6 +118,8 @@
 
 #### 1. 依赖库漏洞 (🔴 高)
 
+> **[来源: Wikipedia - Type System]**
+
 **预防措施:**
 
 ```yaml
@@ -149,6 +151,8 @@ jobs:
 - 内部镜像关键依赖
 
 #### 2. 遗留系统集成 (🔴 高)
+
+> **[来源: Wikipedia - Concurrency]**
 
 **缓解策略:**
 
@@ -209,6 +213,8 @@ unsafe impl Send for SafeLegacyWrapper {}
 ## 监控与度量
 
 ### 关键指标
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 指标 | 目标 | 当前 | 监控频率 |
 | :--- | :--- | :--- | :--- |

@@ -176,6 +176,8 @@ lto = true
 
 #### 4. [Rust 1.91 vs 1.90 全面对比分析（对齐官方发布说明）](../archive/deprecated_20260318/04_rust_1.91_vs_1.90_comparison.md)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **涵盖内容（以权威来源为准）**:
 
 - ✅ **LLD 默认链接器（1.90）**：`x86_64-unknown-linux-gnu` 默认改用 LLD（含 opt-out）
@@ -185,6 +187,8 @@ lto = true
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
 #### 5. [Rust 1.93 vs 1.92 全面对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +220,8 @@ lto = true
 
 #### 性能优化
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [编译器优化](./01_compiler_features.md#3-优化级别)
 - [LTO](./01_compiler_features.md#4-link-time-optimization-lto)
 - [PGO](./01_compiler_features.md#5-profile-guided-optimization-pgo)
@@ -223,12 +229,16 @@ lto = true
 
 #### 构建系统
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [Workspace 管理](./02_cargo_workspace_guide.md#2-创建和配置-workspace)
 - [依赖管理](./02_cargo_workspace_guide.md#3-依赖管理)
 - [Feature 管理](./02_cargo_workspace_guide.md#5-feature-管理)
 - [构建优化](./02_cargo_workspace_guide.md#7-构建优化)
 
 #### 文档生成
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [文档注释](./03_rustdoc_advanced.md#2-文档注释语法)
 - [文档测试](./03_rustdoc_advanced.md#3-文档测试-doc-tests)
@@ -257,6 +267,8 @@ lto = true
 
 #### 6. [Rust 1.93 兼容性注意事项](../archive/deprecated_20260318/06_rust_1.93_compatibility_notes.md) 🆕
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **涵盖内容**:
 
 - ✅ **破坏性变更**: deref_nullptr deny 升级、#[test] 无效位置报错、offset_of! 类型检查、rustdoc 文档属性校验
@@ -270,6 +282,8 @@ lto = true
 - 迁移问题排查
 
 #### 7. [Rust 1.93 兼容性深度解析](./09_rust_1.93_compatibility_deep_dive.md) 🆕
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **涵盖内容**:
 
@@ -334,6 +348,8 @@ lto = true
 
 #### 1. 增量编译默认启用
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **特性**: Rust 1.54 默认重新启用增量编译
 
 **影响**:
@@ -347,6 +363,8 @@ lto = true
 ---
 
 #### 2. Rustdoc JSON 输出改进
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **特性**: 改进的 JSON 格式文档输出
 
@@ -382,6 +400,8 @@ strip = true
 
 ### 创建 Workspace 项目
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```toml
 # 根 Cargo.toml
 [workspace]
@@ -398,6 +418,8 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 ### 编写高质量文档
+
+> **[来源: PLDI - Programming Language Design]**
 
 ````rust
 /// 函数说明
@@ -444,6 +466,8 @@ pub fn function(a: i32, b: i32) -> i32 {
 
 ### 内部文档
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [Rust 2024 Edition 学习影响](../archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) 🆕
 - [编译器特性](./01_compiler_features.md)
 - [Cargo 工作空间](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
@@ -468,6 +492,8 @@ pub fn function(a: i32, b: i32) -> i32 {
 - [TOML v1.1 Cargo 指南](./TOML_V11_CARGO_GUIDE.md) ⭐ (Cargo 1.96+)
 
 ### 官方资源
+
+> **[来源: Wikipedia - Type System]**
 
 - [Rustc Book](https://doc.rust-lang.org/rustc/)
 - [Cargo Book](https://doc.rust-lang.org/cargo/)

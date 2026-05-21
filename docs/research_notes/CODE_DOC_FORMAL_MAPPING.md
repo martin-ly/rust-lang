@@ -204,6 +204,8 @@
 | `.await` | 异步等待 | 挂起当前异步任务等待结果 |
 
 ### 1.6 错误处理
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +225,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权系统文档映射
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -234,6 +238,8 @@
 | `fn borrow(s: &String)` | [C01 借用](../02_reference/quick_reference/ownership_cheatsheet.md#引用与借用) | 引用, 借用 |
 
 ### 2.2 生命周期文档映射
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -245,6 +251,8 @@
 
 ### 2.3 泛型与 Trait 文档映射
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
 | `fn foo<T>(x: T)` | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 泛型函数 |
@@ -255,6 +263,8 @@
 
 ### 2.4 并发文档映射
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
 | `thread::spawn(\|_\| { ... })` | [C05 线程](../02_reference/quick_reference/threads_concurrency_cheatsheet.md#创建线程) | spawn, 创建线程 |
@@ -264,6 +274,8 @@
 | `let handle = tokio::spawn(async { ... });` | [C06 任务调度](../02_reference/quick_reference/async_patterns.md#任务调度) | spawn, 异步任务 |
 
 ### 2.5 标准库 API 文档映射
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 代码示例 | 相关文档位置 | 快速查找关键词 |
 | :--- | :--- | :--- |
@@ -279,6 +291,8 @@
 
 ### 3.1 所有权转移的形式化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
 | `let s2 = s1;` | move(s1, s2) -> Omega(s1) = Moved && Omega(s2) = Owned | [定理 2 - 所有权唯一性](./formal_methods/ownership_model.md#定理-2-所有权唯一性) |
@@ -287,6 +301,8 @@
 
 ### 3.2 借用的形式化
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
 | `let r = &s;` | Borrow(r, s, Immutable) -> type(r) = &T && valid(r) subset lifetime(s) | [规则 1 - 借用规则](./formal_methods/borrow_checker_proof.md#规则-1-借用规则) |
@@ -294,6 +310,8 @@
 | `&s[0..5]` | Slice(r, s, i, j) -> r = {s_k | i <= k < j} && valid(r) subset valid(s) | [引理 2 - 切片有效性](./formal_methods/borrow_checker_proof.md#引理-2-切片有效性) |
 
 ### 3.3 生命周期的形式化
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |

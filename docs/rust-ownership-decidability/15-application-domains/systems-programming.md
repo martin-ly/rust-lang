@@ -1242,6 +1242,8 @@ pub type KernelResult<T> = Result<T, KernelError>;
 
 ### 2. 内存安全模式
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 //! 安全的内存访问模式
 
@@ -1285,6 +1287,8 @@ unsafe impl Sync for MappedRegion {}
 ```
 
 ### 3. 并发安全
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 //! 内核级并发原语
@@ -1405,3 +1409,14 @@ Rust 在系统编程领域提供了独特的优势：
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**

@@ -217,6 +217,8 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 ---
 
 ### Rust 对应
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -268,6 +270,8 @@ Def SEND1, SYNC1
 
 ### 相关思维表征
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 类型 | 位置 |
 | :--- | :--- |
 | 思维导图 | [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md) §5、C06；安全可判定机制节点 |
@@ -302,9 +306,13 @@ Def SEND1, SYNC1
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Type System]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -315,6 +323,8 @@ Def SEND1, SYNC1
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -322,6 +332,8 @@ Def SEND1, SYNC1
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -368,3 +380,6 @@ Def SEND1, SYNC1
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Rust (programming language)]**

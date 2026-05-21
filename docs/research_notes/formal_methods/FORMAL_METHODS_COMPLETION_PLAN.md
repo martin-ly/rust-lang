@@ -78,9 +78,13 @@
 
 ### Phase 2: Coq骨架完成 (30小时)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 创建/完成5个Coq证明文件。
 
 ### Phase 3: 矩阵更新 (2小时)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 更新所有进度矩阵的状态标记。
 
@@ -101,6 +105,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

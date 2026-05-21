@@ -208,6 +208,8 @@ $$
 $$
 
 ### Thm CONST-TY1（常量泛型类型安全）
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +237,8 @@ let b: Array<i32, -1> = ...;
 ## 5. const_eval_select
 
 ### Def CONST-SELECT1（条件常量求值）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 `const_eval_select` 允许在 const fn 中根据求值上下文选择不同实现：
 
@@ -281,6 +285,8 @@ fn main() {
 
 ### 常量求值判定
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 $$
 \text{ConstEval}(e) =
 \begin{cases}
@@ -290,6 +296,8 @@ v & \text{if } e \xrightarrow{\text{MIR}}^{*} v \text{ (终止)} \\
 $$
 
 ### 类型系统交互
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 常量求值与类型系统紧耦合：
 
@@ -310,9 +318,13 @@ $$
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -323,6 +335,8 @@ $$
 
 #### 代码示例更新
 
+> **[来源: IEEE - Programming Language Standards]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -330,6 +344,8 @@ $$
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)

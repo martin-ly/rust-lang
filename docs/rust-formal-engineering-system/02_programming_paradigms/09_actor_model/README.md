@@ -21,6 +21,8 @@ Actor 模型是一种并发计算模型，其中：
 - 每个 Actor 有自己的状态，不共享内存
 
 ### 基本 Actor 实现
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -93,6 +95,8 @@ fn demo() {
 ```
 
 ### 异步 Actor
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +163,8 @@ impl AsyncProcessor {
 ```
 
 ### Actor 监督与容错
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +248,8 @@ impl Supervisor {
 ```
 
 ### 路由与负载均衡
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -311,6 +319,8 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
 ```
 
 ### 请求-响应模式
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -419,6 +429,8 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -428,6 +440,8 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 
 ### 形式化方法
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

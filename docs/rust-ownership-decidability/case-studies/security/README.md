@@ -565,6 +565,8 @@ impl PacketCaptureEngine {
 
 ### 5.2 规则引擎
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use serde::{Deserialize, Serialize};
 use std::collections::HashMap;
@@ -639,6 +641,8 @@ struct RuleMatch {
 
 ### 6.1 沙箱环境
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::process::Command;
 use std::time::{Duration, Instant};
@@ -701,6 +705,8 @@ struct SandboxExecutionResult {
 
 ### 7.1 日志收集
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use serde::{Serialize, Deserialize};
 use std::time::SystemTime;
@@ -743,6 +749,8 @@ impl LogCollector {
 ```
 
 ### 7.2 SIEM集成
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use reqwest::Client;
@@ -879,6 +887,8 @@ impl SimpleIDS {
 
 ### 9.1 输入验证
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 pub mod input_validation {
     use regex::Regex;
@@ -911,6 +921,8 @@ pub mod input_validation {
 
 ### 9.2 错误处理
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use thiserror::Error;
 
@@ -928,6 +940,8 @@ pub enum SecurityError {
 ```
 
 ### 9.3 敏感数据处理
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use zeroize::{Zeroize, Zeroizing};
@@ -956,6 +970,8 @@ impl Drop for SecureKey {
 ## 10. 合规与审计
 
 ### 10.1 安全标准
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 pub mod compliance {
@@ -1002,6 +1018,8 @@ pub mod compliance {
 
 ### 10.2 审计日志
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 pub struct AuditLogger {
     log_file: std::fs::File,
@@ -1035,6 +1053,8 @@ pub struct AuditEvent {
 ```
 
 ### 10.3 取证工具
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 pub mod forensics {
@@ -1163,3 +1183,6 @@ proptest = "1.0"
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**

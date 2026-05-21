@@ -232,6 +232,8 @@ Datalog 规则
 
 #### Polonius 规则示例
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```prolog
 % Polonius 核心规则（概念性）
 

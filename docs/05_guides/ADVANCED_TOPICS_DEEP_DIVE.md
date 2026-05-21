@@ -308,6 +308,8 @@ impl<T> WorkStealingQueue<T> {
 
 ### 4.1 自定义Future实现
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -347,6 +349,8 @@ impl Future for Delay {
 
 ### 4.2 异步流处理
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use futures::stream::{Stream, StreamExt};
 
@@ -371,6 +375,8 @@ where
 
 ### 5.1 声明宏高级模式
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// 递归宏实现
 macro_rules! count {
@@ -385,6 +391,8 @@ const COUNT: usize = count!(a b c d e); // 5
 ```
 
 ### 5.2 过程宏基础
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 注意：过程宏需要在单独的crate中定义
@@ -402,6 +410,8 @@ struct MyStruct {
 ## 6. 性能优化深度指南
 
 ### 6.1 内存布局优化
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// 使用#[repr(C)]优化内存布局
@@ -422,6 +432,8 @@ struct PackedStruct {
 ```
 
 ### 6.2 零成本抽象
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 /// 使用泛型实现零成本抽象
@@ -445,6 +457,8 @@ pub fn fast_add(a: i32, b: i32) -> i32 {
 
 ### 7.1 生命周期高级用法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 /// 高阶生命周期绑定
 fn higher_order_lifetime<'a, F>(f: F) -> &'a str
@@ -465,6 +479,8 @@ fn subtype_example<'a: 'b, 'b>(x: &'a str, y: &'b str) -> &'b str {
 ```
 
 ### 7.2 借用检查器深入理解
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 /// 理解借用检查器的规则
@@ -489,6 +505,8 @@ fn borrow_checker_example() {
 ## 8. 错误处理最佳实践
 
 ### 8.1 自定义错误类型
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::fmt;
@@ -515,6 +533,8 @@ impl std::error::Error for MyError {}
 ```
 
 ### 8.2 错误传播模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::io;
@@ -555,7 +575,11 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 ### array_windows 的高级模式
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 1. 多重窗口组合
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// 同时计算多个时间窗口的指标

@@ -102,6 +102,8 @@ fn double(x: i32) -> i32 {
 ```
 
 ### 研究方法论示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +163,8 @@ mod verification_tests {
 ```
 
 ### 类型系统研究示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +190,8 @@ fn verify<'long: 'short>(long: &'long str, short: &'short str) {
 ```
 
 ### 所有权研究示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 研究问题：验证所有权转移的正确性
@@ -229,6 +235,8 @@ fn borrowing_rules() {
 ```
 
 ### 形式化规范写作
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 /// # 规范
@@ -336,3 +344,6 @@ mod property_tests {
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

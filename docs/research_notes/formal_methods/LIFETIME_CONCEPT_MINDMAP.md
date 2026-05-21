@@ -86,6 +86,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 泛型生命周期
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +108,8 @@
 
 ### 1.2 生命周期推断
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 生命周期推断
 ├── '_
@@ -124,6 +128,8 @@
 
 ### 2.1 包含关系
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 包含关系 ('a: 'b)
 ├── 定义
@@ -141,6 +147,8 @@
 
 ### 2.2 子类型关系
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```text
 子类型关系
 ├── 'static <: 'a
@@ -154,6 +162,8 @@
 ```
 
 ### 2.3 类型约束
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
 类型约束

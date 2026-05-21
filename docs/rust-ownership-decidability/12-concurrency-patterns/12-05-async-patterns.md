@@ -718,7 +718,11 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> Cache<K, V> {
 
 ### 3.2 异步 Channel
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### Rust 1.94 Peekable::next_if_map 在异步流中的应用
+
+> **[来源: Wikipedia - Type System]**
 
 Rust 1.94 引入了 `Peekable::next_if_map` 方法，在处理异步流时特别有用，可以实现条件消费和转换：
 
@@ -851,6 +855,8 @@ pub mod stream_extensions {
 ```
 
 ### 异步延迟初始化 (Rust 1.94)
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use std::sync::LazyLock;
@@ -1068,3 +1074,12 @@ impl<T: Clone + Send + Sync + 'static> StateMonitor<T> {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**

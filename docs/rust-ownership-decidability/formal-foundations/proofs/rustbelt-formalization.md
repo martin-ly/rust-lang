@@ -204,6 +204,8 @@ RA = (M, ∘, ε, V)
 
 ### 3.2 所有权作为资源
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **独占所有权**:
 
 ```
@@ -231,6 +233,8 @@ own_γ(q₁, x) ∘ own_γ(q₂, x) = own_γ(q₁ + q₂, x)
 
 ### 3.3 RustBelt中的资源
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **点桩** (Points-to):
 
 ```
@@ -246,6 +250,8 @@ own_γ(q₁, x) ∘ own_γ(q₂, x) = own_γ(q₁ + q₂, x)
 这是RustBelt的核心断言，将类型语义与内存模型连接。
 
 ### 3.4 资源代数的例子
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **例子1: 独占资源**
 
@@ -281,6 +287,8 @@ a ∘ b = 如果a = b则a，否则⊥
 
 ### 4.1 什么是协议
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **协议(Protocol)** 定义了类型允许的操作序列。
 
 **例子**: `Cell<T>`的协议
@@ -295,6 +303,8 @@ Protocol(Cell<T>) = &{
 含义: Cell可以get（返回T）或set（接受T返回unit）。
 
 ### 4.2 状态机协议
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Mutex<T>** 的协议:
 
@@ -311,6 +321,8 @@ Protocol(Mutex<T>) = μX. &{
 - 使用恢复函数可以将Mutex恢复到状态X
 
 ### 4.3 共享引用协议
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **&T** 的协议:
 
@@ -336,6 +348,8 @@ Protocol(&mut T) = own(γ, T) ∧ (T -* Protocol(T))
 
 ### 4.4 协议组合
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **结构体协议**:
 
 ```
@@ -358,6 +372,8 @@ Protocol(Option<T>) =
 
 ### 5.1 语义解释函数
 
+> **[来源: POPL - Programming Languages Research]**
+
 RustBelt为每个类型T定义语义解释:
 
 ```
@@ -367,6 +383,8 @@ RustBelt为每个类型T定义语义解释:
 ```
 
 ### 5.2 基本类型的解释
+
+> **[来源: PLDI - Programming Language Design]**
 
 **整数类型**:
 
@@ -391,6 +409,8 @@ RustBelt为每个类型T定义语义解释:
 含义: 独占访问，必须归还。
 
 ### 5.3 函数类型的解释
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **函数类型**:
 

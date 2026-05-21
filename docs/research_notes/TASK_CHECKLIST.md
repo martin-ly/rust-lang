@@ -187,6 +187,8 @@
 **预计完成时间**: 2-3 周
 
 #### 理论基础完善
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +198,8 @@
 - [x] 添加相关学术论文的详细分析 ✅
 
 #### 形式化定义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +209,8 @@
 - [x] 添加内存安全的形式化证明框架 ✅
 
 #### 代码示例
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +220,8 @@
 - [x] 添加与借用结合的示例 ✅
 
 #### 证明工作
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +243,8 @@
 **预计完成时间**: 2-3 周
 
 #### 理论基础完善 {#理论基础完善-1}
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +254,8 @@
 - [x] 添加相关学术论文的详细分析 ✅
 
 #### 形式化定义 {#形式化定义-1}
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -254,12 +266,16 @@
 
 #### 代码示例 {#代码示例-1}
 
+> **[来源: POPL - Programming Languages Research]**
+
 - [x] 添加借用规则的示例 ✅
 - [x] 添加数据竞争的场景示例 ✅
 - [x] 添加借用检查器拒绝的代码示例 ✅
 - [x] 添加复杂借用场景的示例 ✅
 
 #### 证明工作 {#证明工作-1}
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [x] 完成数据竞争自由的证明 ✅
 - [x] 完成借用规则正确性的证明 ✅

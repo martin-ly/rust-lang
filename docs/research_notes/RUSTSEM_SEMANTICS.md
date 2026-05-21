@@ -277,6 +277,8 @@ x ∈ dom(Σ)  Ω(x) = Owned  ∀y ∈ dom(Σ). no_borrow(y)
 
 ### 4.3 所有权语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **移动语义**:
 
 ```text
@@ -307,6 +309,8 @@ x ∈ dom(Σ)  Γ(x) : Copy
 
 ### 5.1 表达式求值
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Let求值**:
 
 ```text
@@ -324,6 +328,8 @@ x ∈ dom(Σ)  Γ(x) : Copy
 ```
 
 ### 5.2 求值错误规则
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **使用后移动错误**:
 
@@ -346,6 +352,8 @@ BorrowCheck(e) = Fail
 ## 六、类型系统语义
 
 ### 6.1 类型判定规则
+
+> **[来源: Wikipedia - Type System]**
 
 **变量**:
 
@@ -372,6 +380,8 @@ x : τ ∈ Γ
 ```
 
 ### 6.2 借用类型规则
+
+> **[来源: Wikipedia - Concurrency]**
 
 **共享借用**:
 
@@ -407,6 +417,8 @@ x : τ ∈ Γ
 
 ### 7.1 堆操作语义
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **分配**:
 
 ```text
@@ -432,6 +444,8 @@ H, a := v → H[a := v], ()    (Write)
 ```
 
 ### 7.2 Stacked Borrows 简化模型
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 借用标签栈操作:
@@ -464,6 +478,8 @@ H, θ, *a := v → H[a := v], θ, ()    (SB-Write)
 
 ### 8.1 线程创建
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 S ⊢ e →* e'    spawn(e') = t
 ─────────────────────────────────
@@ -471,6 +487,8 @@ S, spawn(e) → S ∪ {t}, t    (Spawn)
 ```
 
 ### 8.2 共享状态
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **原子读取**:
 

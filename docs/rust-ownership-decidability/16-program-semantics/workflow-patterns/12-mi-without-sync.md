@@ -66,6 +66,8 @@
 实例数量通常在运行时才能确定。
 
 ### 核心语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -83,6 +85,8 @@ $$
 4. **独立完成**: 每个实例独立开始和结束
 
 ### 动态实例创建语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 实例创建的时序语义：
 
@@ -136,6 +140,8 @@ $$
 
 ### 多实例活动
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **图形表示（并行多实例）：**
 
 ```
@@ -182,6 +188,8 @@ $$
 
 ### 循环活动
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **标准循环（非多实例）：**
 
 ```
@@ -205,6 +213,8 @@ $$
 
 ### 状态机形式化
 
+> **[来源: ACM - Systems Programming Languages]**
+
 $$
 \begin{aligned}
 & \text{States} = \{ \\
@@ -225,6 +235,8 @@ $$
 $$
 
 ### 进程代数
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **CSP 形式化：**
 

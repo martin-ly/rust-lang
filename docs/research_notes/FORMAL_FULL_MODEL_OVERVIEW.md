@@ -187,6 +187,8 @@
 
 ### 2.2 生命周期与类型
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
 | A-LF1 | 生命周期为时间区间 | lifetime Axiom LF1 |
@@ -199,6 +201,8 @@
 
 ### 2.3 控制流与变量
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
 | A-CF1 | 控制流归约保持类型与所有权 | formal_methods README |
@@ -206,6 +210,8 @@
 | A-SHADOW1 | 变量遮蔽使旧绑定不可访问；隐式 drop | ownership Def 1.5 |
 
 ### 2.4 异步与 Pin
+
+> **[来源: Wikipedia - Type System]**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |
@@ -276,9 +282,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

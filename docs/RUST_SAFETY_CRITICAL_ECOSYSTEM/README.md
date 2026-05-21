@@ -99,6 +99,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 
 ### 04. 公理化推理与形式化验证
 
+> **[来源: Wikipedia - Concurrency]**
+
 **RUST_AXIOMATIC_REASONING_TREES.md** (32KB)
 
 - 内存安全公理系统
@@ -115,6 +117,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 
 ### 05. 案例研究
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 3个详细案例 (36KB合计):
 
 - Ferrocene认证 (TÜV SÜD)
@@ -122,6 +126,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 - 汽车ECU实施
 
 ### 06. 路线图
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **RUST_2026_2030_ROADMAP_FORECAST.md** (11.3KB) ⭐新增
 

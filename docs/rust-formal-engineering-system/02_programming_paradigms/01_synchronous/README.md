@@ -190,6 +190,8 @@ fn condvar_demo() {
 ```
 
 ### Scoped 线程（无需 'static 生命周期）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +245,8 @@ where
 ```
 
 ### 线程局部存储
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -301,6 +305,8 @@ fn thread_local_demo() {
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -311,6 +317,8 @@ fn thread_local_demo() {
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 
 ### 形式化方法
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -320,6 +328,8 @@ fn thread_local_demo() {
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 
 ### 实验分析
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

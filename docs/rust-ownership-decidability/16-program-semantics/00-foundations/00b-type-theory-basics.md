@@ -56,6 +56,8 @@ Rust 的类型系统建立在丰富的类型理论基础之上，理解这些理
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Curry-Howard 同构
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@ Rust 的类型系统建立在丰富的类型理论基础之上，理解这些理
 | ∃x.A | 存在类型 | `impl Trait` |
 
 ### 2.2 Rust 中的对应
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // A → B: 函数类型
@@ -104,6 +108,8 @@ fn absurd() -> ! {
 
 ### 3.1 参数多态 (System F)
 
+> **[来源: Wikipedia - Type System]**
+
 **定义 3.1** (全称类型)
 
 ```
@@ -129,6 +135,8 @@ let s: String = identity(String::from("hello"));
 ```
 
 ### 3.2 Hindley-Milner 类型推断
+
+> **[来源: Wikipedia - Concurrency]**
 
 **定义 3.2** (算法 W)
 
@@ -158,6 +166,8 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 ## 4. 子类型与变型 (Subtyping & Variance)
 
 ### 4.1 子类型关系
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **定义 4.1** (子类型)
 

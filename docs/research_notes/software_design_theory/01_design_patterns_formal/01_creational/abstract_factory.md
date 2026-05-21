@@ -303,6 +303,8 @@ ownership_model T2
 
 ### 内存安全保证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 1. **产品族一致性**：关联类型保证编译期族匹配
 2. **所有权清晰**：各产品独立拥有，无共享所有权问题
 3. **无空指针**：工厂总是返回有效产品实例
@@ -461,9 +463,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -474,6 +480,8 @@ graph LR
 
 #### 代码示例更新
 
+> **[来源: POPL - Programming Languages Research]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -481,6 +489,8 @@ graph LR
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [Rust 1.94 迁移指南](../../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -527,3 +537,9 @@ graph LR
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**

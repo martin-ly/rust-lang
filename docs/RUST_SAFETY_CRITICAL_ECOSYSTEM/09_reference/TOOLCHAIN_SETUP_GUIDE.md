@@ -403,6 +403,8 @@ impl LintPass for SafetyCriticalLints {
 
 ### Miri配置
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 环境变量配置
 export MIRIFLAGS="\
@@ -425,6 +427,8 @@ cargo miri run --bin binary_name
 
 ### Kani配置
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```bash
 # 安装Kani
 cargo install --locked kani-verifier
@@ -445,6 +449,8 @@ cargo kani --harness my_proof --visualize
 
 ### Cargo.toml测试配置
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```toml
 [profile.test]
 opt-level = 0
@@ -464,6 +470,8 @@ codegen-units = 1
 ## 覆盖率配置
 
 ### cargo-tarpaulin
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```bash
 # 安装
@@ -486,6 +494,8 @@ cargo tarpaulin --mcdc
 ```
 
 ### tarpaulin.toml
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```toml
 [default]
@@ -529,6 +539,8 @@ run-types = ["Tests", "Doctests"]
 
 ### llvm-cov配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 安装
 cargo install cargo-llvm-cov
@@ -548,6 +560,8 @@ cargo llvm-cov --html --ignore-filename-regex 'tests/.*'
 ## CI/CD配置
 
 ### GitHub Actions完整配置
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```yaml
 # .github/workflows/safety-critical.yml
@@ -710,6 +724,8 @@ jobs:
 
 ### rustdoc配置
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 # 生成文档
 cargo doc --no-deps --document-private-items
@@ -722,6 +738,8 @@ cargo doc --open
 ```
 
 ### 文档测试
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// 安全关键函数

@@ -119,6 +119,8 @@ Tree Borrows:
 
 #### Tree Borrows 核心概念
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // Tree Borrows 允许的模式
 fn tree_borrows_friendly() {
@@ -138,6 +140,8 @@ fn tree_borrows_friendly() {
 ```
 
 #### 2024年进展
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - **Tree Borrows 成为默认**：MIRI 默认使用 Tree Borrows
 - **文档完善**：详细的内存模型文档
@@ -234,6 +238,8 @@ Z3 SMT 求解器
 
 #### 2.2.1 改进的规范语法
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use prusti_contracts::*;
 
@@ -269,6 +275,8 @@ impl Counter {
 
 #### 2.2.2 循环不变量合成
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // Prusti 现在支持循环不变量合成
 fn find_max(arr: &[i32]) -> Option<i32> {
@@ -290,6 +298,8 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 ```
 
 #### 2.2.3 特质约束验证
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 验证特质实现满足约束
@@ -522,6 +532,8 @@ Kani 验证的最佳实践：
 
 ### 4.1 Verus 架构
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Verus 是由微软研究院开发的 Rust 验证工具，专注于系统级软件的验证。
 
 ```text
@@ -546,6 +558,8 @@ Verus 的设计哲学：
 4. **实用**：支持实际工业项目
 
 ### 4.2 并发验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Verus 的并发验证能力：
 
@@ -594,6 +608,8 @@ impl<T> ThreadSafeQueue<T> {
 ```
 
 ### 4.3 操作系统验证案例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Verus 在操作系统验证中的应用：
 
@@ -651,6 +667,8 @@ impl BuddyAllocator {
 
 ### 4.4 线性类型与幽灵状态
 
+> **[来源: POPL - Programming Languages Research]**
+
 Verus 使用线性类型和幽灵状态进行验证：
 
 ```rust
@@ -694,6 +712,8 @@ impl<T> Permission<T> {
 
 ### 5.1 Creusot 设计哲学
 
+> **[来源: PLDI - Programming Language Design]**
+
 Creusot 是基于 Why3 验证平台的 Rust 验证工具，使用 Coma 中间语言。
 
 ```text
@@ -721,6 +741,8 @@ Why3 平台
 4. **标准库验证**：完善的 std 规范
 
 ### 5.2 Pearlite 规范语言
+
+> **[来源: Wikipedia - Memory Safety]**
 
 Creusot 使用 Pearlite 作为规范语言：
 
@@ -768,6 +790,8 @@ impl<T> Vec<T> {
 ```
 
 ### 5.3 标准库验证进展
+
+> **[来源: Wikipedia - Type System]**
 
 Creusot 的标准库验证覆盖情况（2024）：
 

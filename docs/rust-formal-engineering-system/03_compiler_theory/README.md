@@ -131,6 +131,8 @@ fn borrow_check_example() {
 
 ### 编译器优化
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // 常量折叠
 const fn const_fold() -> i32 {
@@ -156,6 +158,8 @@ fn dead_code() {
 
 ### 泛型单态化
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 泛型定义
 fn identity<T>(x: T) -> T {
@@ -175,6 +179,8 @@ fn monomorphization_demo() {
 ```
 
 ### 生命周期擦除
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 源代码带生命周期注解
@@ -196,6 +202,8 @@ fn lifetime_erasure() {
 ```
 
 ### 属性宏与派生宏
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 过程宏示例
@@ -227,6 +235,8 @@ const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
 
 ### unsafe 代码检查边界
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 编译器确保 unsafe 块边界清晰

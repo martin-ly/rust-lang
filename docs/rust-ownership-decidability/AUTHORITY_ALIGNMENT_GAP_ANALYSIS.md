@@ -56,6 +56,8 @@
 本文档对比分析了 `rust-ownership-decidability` 文件夹内容与网络上最新、最全面的权威学术资源之间的差距，并制定持续推进计划。
 
 ### 核心发现
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -76,7 +78,11 @@
 
 ### 1.1 顶级会议论文 (PLDI/POPL/ICFP/SOSP)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 🔴 高优先级 - 尚未充分覆盖
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 论文 | 会议 | 年份 | 核心贡献 | 当前覆盖度 |
 |------|------|------|----------|------------|

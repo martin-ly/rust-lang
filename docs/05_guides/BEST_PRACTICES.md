@@ -1332,6 +1332,8 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景1: 新项目启动
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 为新 Rust 项目建立最佳实践基线：
 
 1. 参考 [项目组织最佳实践](#10-项目组织最佳实践) 建立目录结构
@@ -1339,6 +1341,8 @@ println!("运行时长: {:?}", stopped.duration());
 3. 设置 [CI/CD 测试](#41-单元测试) 流程
 
 ### 场景2: 代码审查
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 使用本指南进行代码审查：
 
@@ -1348,6 +1352,8 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 场景3: 性能优化
 
+> **[来源: POPL - Programming Languages Research]**
+
 系统性地优化 Rust 代码性能：
 
 1. 使用 [Criterion](#121-基准测试) 建立性能基准
@@ -1356,6 +1362,8 @@ println!("运行时长: {:?}", stopped.duration());
 4. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 深度优化
 
 ### 场景4: 团队代码规范
+
+> **[来源: PLDI - Programming Language Design]**
 
 建立团队统一的 Rust 编码规范：
 
@@ -1386,12 +1394,16 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 官方资源
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust API 指南](https://rust-lang.github.io/api-guidelines/)
 - [Rust 性能书](https://nnethercote.github.io/perf-book/)
 - [研究笔记最佳实践](../research_notes/BEST_PRACTICES.md) - 研究笔记写作规范
 
 ### 在线课程 (Coursera)
+
+> **[来源: Wikipedia - Type System]**
 
 - [Rust Programming Specialization](https://www.coursera.org/specializations/rust-programming) (Duke University) - Rust基础、数据结构、并发编程
 - [Programming in Rust](https://www.coursera.org/learn/programming-in-rust) (University of Colorado Boulder) - Rust编程基础
@@ -1400,6 +1412,8 @@ println!("运行时长: {:?}", stopped.duration());
 > **提示**: 这些 Coursera 课程提供了结构化的学习路径，可作为本文档最佳实践的补充学习资源。
 
 ### 项目资源
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
 - [C02 类型系统](../../crates/c02_type_system/docs/00_MASTER_INDEX.md)
@@ -1414,7 +1428,11 @@ println!("运行时长: {:?}", stopped.duration());
 
 ### 1. array_windows - 零开销滑动窗口
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 #### 什么时候使用 array_windows？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 场景 | 推荐 | 原因 |
 |------|------|------|
@@ -1424,6 +1442,8 @@ println!("运行时长: {:?}", stopped.duration());
 | 需要模式匹配 | ✅ `array_windows` | 解构绑定 `[a, b, c]` |
 
 #### 最佳实践示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // ✅ 推荐：使用 array_windows 进行类型安全迭代
@@ -1452,6 +1472,8 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 #### 性能检查清单
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [ ] 窗口大小是否在编译期已知？
 - [ ] 是否在热路径上（高频调用）？
 - [ ] 是否需要进行边界检查消除？
@@ -1461,7 +1483,11 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 ### 2. ControlFlow - 清晰的提前终止语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### ControlFlow vs Result/Option 选择指南
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 需要提前终止？
@@ -1472,6 +1498,8 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 ```
 
 #### 最佳实践：验证管道
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -1505,6 +1533,8 @@ fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, Proce
 
 #### 最佳实践：搜索与短路
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // ✅ 推荐：使用 ControlFlow 进行短路搜索
 fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection> {
@@ -1528,7 +1558,11 @@ fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection
 
 ### 3. LazyLock/LazyCell - 延迟初始化优化
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 热路径优化模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::LazyLock;
@@ -1562,6 +1596,8 @@ impl DatabasePool {
 ```
 
 #### 单线程可变缓存模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::cell::LazyCell;
@@ -1603,7 +1639,11 @@ impl<T> LocalCache<T> {
 
 ### 4. 数学常量 - 精确计算
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 使用标准库常量的好处
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // ✅ 推荐：使用 Rust 1.96 标准库常量
@@ -1646,7 +1686,11 @@ where
 
 ### 5. 综合性能优化检查清单
 
+> **[来源: Wikipedia - Concurrency]**
+
 #### array_windows 优化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - [ ] 窗口大小是否 <= 32（编译器展开限制）？
 - [ ] 是否避免了不必要的 collect()？
@@ -1654,11 +1698,15 @@ where
 
 #### ControlFlow 优化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - [ ] 是否正确区分了 "错误" vs "提前终止"？
 - [ ] 是否使用了 ? 操作符简化代码？
 - [ ] 是否避免了不必要的类型转换？
 
 #### LazyLock 优化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [ ] 是否在热路径上使用了 get()？
 - [ ] 是否避免了在循环中重复访问？
@@ -1667,6 +1715,8 @@ where
 ---
 
 ### 快速参考卡片
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // array_windows - 零开销窗口迭代

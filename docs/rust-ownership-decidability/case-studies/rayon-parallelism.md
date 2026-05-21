@@ -135,6 +135,8 @@ $$
 
 ### 定义 2.4 (串行语义函数)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 $$
 [\!\![e]\!\!]_{seq} : \text{State} \rightarrow \text{State}
 $$
@@ -158,7 +160,11 @@ $$
 
 ### 3.1 迭代器trait的形式化
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ### 定义 3.1 (迭代器trait)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 trait Iterator {
@@ -181,6 +187,8 @@ $$
 
 ### 定义 3.2 (并行迭代器转换)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn par_iter<I>(iter: I) -> impl ParallelIterator<Item = I::Item>
 where I: IntoIterator,
@@ -196,6 +204,8 @@ $$
 **约束**: $T: \text{Send}$
 
 ### 3.2 并行化正确性
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ### 定理 3.1 (并行迭代正确性)
 

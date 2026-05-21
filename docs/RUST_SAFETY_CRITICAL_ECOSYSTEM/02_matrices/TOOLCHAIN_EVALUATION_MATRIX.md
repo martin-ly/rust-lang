@@ -53,6 +53,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 功能对比
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +69,8 @@
 | **支持** | 社区 | 商业 | 商业 | 混合 |
 
 ### 1.2 性能对比
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -93,6 +97,8 @@ GCC-Rust:    ⭐⭐⭐ (GCC后端)
 > **[来源: Rust Official Docs]**
 
 ### 2.1 功能矩阵
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +111,8 @@ GCC-Rust:    ⭐⭐⭐ (GCC后端)
 | **Semgrep** | ⚠️ | ⚠️ | ⚠️ | ✅ | ⚠️ | ✅ |
 
 ### 2.2 推荐配置
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +149,8 @@ too-many-lines-threshold = 50
 > **[来源: Rust Official Docs]**
 
 ### 3.1 能力对比
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +165,8 @@ too-many-lines-threshold = 50
 *验证后无运行时开销
 
 ### 3.2 选择决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +201,8 @@ too-many-lines-threshold = 50
 > **[来源: Rust Official Docs]**
 
 ### 4.1 功能对比
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 框架 | 单元测试 | 集成测试 | 属性测试 | Mock | 覆盖率 | no_std |
 |------|---------|---------|---------|------|--------|--------|

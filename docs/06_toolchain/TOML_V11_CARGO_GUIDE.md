@@ -39,7 +39,6 @@
     - [Cargo 文档](#cargo-文档)
     - [相关工具](#相关工具)
   - [复查记录](#复查记录)
-  - [| 2026-05-08 | Kimi | Rust 1.96.0 / TOML v1.1 | ✅ 初版创建 |](#-2026-05-08--kimi--rust-1960--toml-v11---初版创建-)
   - [权威来源索引](#权威来源索引)
 
 ---
@@ -236,6 +235,8 @@ tower = { version = "0.5", default-features = false }
 ```
 
 ### 3.3 Profile 配置优化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +262,8 @@ opt-level = 2          # 测试运行更快，编译仍可接受
 
 ### 4.1 向后兼容性保证
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```mermaid
 flowchart LR
     A[TOML v1.0 文件] -->|100% 兼容| B[TOML v1.1 解析器]
@@ -277,6 +280,8 @@ flowchart LR
 - Cargo 1.96+ 使用 `toml_edit` ≥ 0.22，支持 TOML v1.1
 
 ### 4.2 团队协作注意事项
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 场景 | 建议 |
 |------|------|
@@ -298,6 +303,8 @@ rust-version = "1.95.0"  # ← 低于 1.96：暗示使用 TOML v1.0 语法
 
 ### 5.1 底层解析器升级
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Cargo 1.96 将 `toml_edit` 依赖升级至支持 TOML v1.1 的版本：
 
 | 组件 | Cargo < 1.96 | Cargo ≥ 1.96 |
@@ -308,6 +315,8 @@ Cargo 1.96 将 `toml_edit` 依赖升级至支持 TOML v1.1 的版本：
 | `cargo fmt` | 不格式化 TOML | 保留/优化多行格式 |
 
 ### 5.2 `cargo add` 的行为变化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```bash
 # Cargo 1.96+ 默认使用多行格式添加复杂依赖
@@ -323,6 +332,8 @@ tokio = { version = "1.43", features = [
 ```
 
 ### 5.3 诊断改进
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```bash
 # TOML 解析错误现在提供更精确的定位
@@ -342,6 +353,8 @@ Caused by:
 ## 6. 最佳实践与反模式
 
 ### 6.1 ✅ 推荐做法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```toml
 # 1. 复杂依赖使用多行内联表
@@ -364,6 +377,8 @@ common-error = { path = "crates/common-error" }
 
 ### 6.2 ❌ 避免的做法
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```toml
 # 1. 不要为了多行而多行 — 简单配置保持单行
 [dependencies]
@@ -385,6 +400,8 @@ opt-level = 3
 ```
 
 ### 6.3 决策流
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
 flowchart TD

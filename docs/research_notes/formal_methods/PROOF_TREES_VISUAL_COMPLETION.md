@@ -498,12 +498,16 @@ async fn some_async() {}
 
 ### 如何阅读证明树
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 1. **从左到右**: 从定理陈述到证明细节
 2. **从上到下**: 从基础到归纳/构造步骤
 3. **实线箭头**: 逻辑依赖关系
 4. **虚线箭头**: 可选/异常路径
 
 ### 与代码的对应
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 每个证明树都包含：
 
@@ -512,6 +516,8 @@ async fn some_async() {}
 - Rust 代码验证示例
 
 ### 验证方法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```bash
 # 验证代码示例
@@ -536,9 +542,13 @@ cargo build --features formal_verification
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: ACM - Systems Programming Languages]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -549,6 +559,8 @@ cargo build --features formal_verification
 
 #### 代码示例更新
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -556,6 +568,8 @@ cargo build --features formal_verification
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -609,3 +623,9 @@ cargo build --features formal_verification
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

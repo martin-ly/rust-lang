@@ -173,6 +173,8 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 | `AtomicU8` ~ `AtomicU64` | ✅ | ✅ |
 
 ### 集合 — 获取可变引用的插入操作
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +201,8 @@ head.push_str(" world");
 ```
 
 ### 裸指针 — 不安全转引用
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -215,6 +219,8 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
 ### 布局计算 — `Layout` 新 API
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +245,8 @@ let extended = layout.extend_packed(Layout::new::<u8>()).unwrap().0;
 
 ### 提示 — `cold_path`
 
+> **[来源: Wikipedia - Concurrency]**
+
 > 📎 可运行示例: [`crates/c02_type_system/examples/cold_path_demo.rs`](../../../crates/c02_type_system/examples/cold_path_demo.rs)
 
 分支预测标注：
@@ -256,6 +264,8 @@ fn handle_error(e: Option<&str>) {
 
 ### 布尔转换 — `TryFrom<{integer}>`
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 > 📎 可运行示例: [`crates/c02_type_system/examples/bool_try_from_demo.rs`](../../../crates/c02_type_system/examples/bool_try_from_demo.rs)
 
 ```rust
@@ -265,6 +275,8 @@ let err = bool::try_from(2u8); // Err(()) — 仅 0 和 1 有效
 ```
 
 ### `MaybeUninit` 数组互转
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
@@ -279,6 +291,8 @@ let back: [MaybeUninit<i32>; 3] = uninit_arr.into();
 ```
 
 ### `Cell` 数组引用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/maybeuninit_cell_array_demo.rs)
 
@@ -296,6 +310,8 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 
 ### `--remap-path-scope` 稳定化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 控制二进制中路径重映射的范围：
 
 ```bash
@@ -303,6 +319,8 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ```
 
 ### 平台支持提升
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 目标 | 新级别 |
 |------|--------|

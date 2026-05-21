@@ -70,6 +70,8 @@
 | [WORKFLOW_FORMALIZATION.v](./coq_skeleton/WORKFLOW_FORMALIZATION.v) | Coq | 工作流形式化 | 🆕 完整 |
 
 ### 思维表征文档
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +85,8 @@
 | [DESIGN_PATTERNS_BOUNDARY_MATRIX](../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) | 矩阵 | 设计模式边界 | 🆕 完整 |
 
 ### 决策树文档
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +98,8 @@
 | [TESTING_STRATEGY_DECISION_TREE](./formal_methods/TESTING_STRATEGY_DECISION_TREE.md) | 测试策略 | 🆕 完整 |
 
 ### 应用树文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +114,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 按类型统计
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +130,8 @@
 ```
 
 ### 完成度统计
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +151,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 理论基础层
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +182,8 @@
 ```
 
 ### 工程应用层
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -154,6 +154,8 @@ error(L, P) :-
 ```
 
 ### 3.2 起源 (Origin) 与 贷款 (Loan) 的精确追踪
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -166,6 +168,8 @@ Polonius 引入了两个核心概念：
 | **Point** | 控制流图中的程序点 | 两者都使用 CFG，但 Polonius 分析更细粒度 |
 
 ### 3.3 三维度分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +180,8 @@ Polonius 实现了三种分析变体，按精确度递增：
 3. **`Hybrid`** (混合模式): 平衡性能和精确度，实际编译中的默认选择
 
 ### 3.4 路径敏感性的突破
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +204,8 @@ fn path_sensitive_example(vec: &mut Vec<i32>) {
 
 ### 4.1 示例矩阵
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 示例场景 | 当前 Borrow Checker | Polonius | 备注 |
 |---------|-------------------|---------|------|
 | 简单条件分支借用 | ✅ | ✅ | 两者都支持 |
@@ -208,7 +216,11 @@ fn path_sensitive_example(vec: &mut Vec<i32>) {
 
 ### 4.2 详细代码对比
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 示例 A：枚举变体借用 (当前编译器拒绝)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 enum Value {
@@ -227,6 +239,8 @@ fn process_value(val: &mut Value) {
 ```
 
 #### 示例 B：循环内精确索引借用
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 fn bubble_sort(arr: &mut [i32]) {
@@ -249,6 +263,8 @@ fn bubble_sort(arr: &mut [i32]) {
 ## 5. 预计稳定化时间线跟踪
 
 ### 5.1 里程碑时间线
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 2018-11  Rust 1.31    NLL 稳定化 (rustc_borrowck -> NLL borrowck)

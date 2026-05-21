@@ -85,6 +85,8 @@ fn demo() {
 
 ### Copy 与 Clone 语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // Copy 类型：隐式按位复制，原值仍然有效
 fn copy_semantics() {
@@ -132,6 +134,8 @@ fn custom_copy() {
 
 ### Drop 与资源管理
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 // Drop trait：资源清理的自定义行为
 struct DatabaseConnection {
@@ -178,6 +182,8 @@ fn raii_pattern() {
 ```
 
 ### 所有权与闭包
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 闭包捕获所有权的方式
@@ -270,3 +276,7 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

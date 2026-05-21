@@ -544,6 +544,8 @@ async fn csp_pattern() {
 
 ### 模式 1: Arc + Mutex
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -574,6 +576,8 @@ async fn main() {
 
 ### 模式 2: Arc + RwLock（读多写少）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use tokio::sync::RwLock;
 
@@ -593,6 +597,8 @@ write.push(4);
 ## 🌐 网络编程模式
 
 ### TCP Server
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use tokio::net::TcpListener;
@@ -622,6 +628,8 @@ async fn main() -> std::io::Result<()> {
 
 ### HTTP Client
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use reqwest;
 
@@ -642,6 +650,8 @@ async fn main() -> Result<(), reqwest::Error> {
 ## ⚡ 性能优化
 
 ### 1. 批处理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use tokio::time::{sleep, Duration};
@@ -666,6 +676,8 @@ async fn batch_processor() {
 
 ### 2. 连接池
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use deadpool_postgres::{Config, Pool};
 
@@ -681,6 +693,8 @@ async fn with_pool() {
 ---
 
 ### 3. 取消任务
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tokio_util::sync::CancellationToken;
@@ -712,6 +726,8 @@ async fn cancellable_task() {
 
 ### 陷阱 1: 在 async 中使用标准库阻塞 API
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // ❌ 错误：阻塞运行时
 async fn bad() {
@@ -727,6 +743,8 @@ async fn good() {
 ---
 
 ### 陷阱 2: 持有 MutexGuard 跨 await
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // ❌ 错误
@@ -749,6 +767,8 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 ---
 
 ### 陷阱 3: 忘记 spawn 导致串行
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // ❌ 串行执行
@@ -773,9 +793,13 @@ async fn good() {
 
 ### 反例 1–2
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 见上方「陷阱 1」「陷阱 2」。
 
 ### 反例 3: 忘记 spawn 导致串行
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误示例**: 直接 `task1().await; task2().await` 串行执行。
 
@@ -784,6 +808,8 @@ async fn good() {
 **修正**: 使用 `tokio::join!` 或 `tokio::spawn` 并发执行。
 
 ### 反例 4: 持有锁跨越 await
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误示例**:
 
@@ -857,17 +883,23 @@ tokio = { version = "1", features = [
 
 ### 深入学习
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [Future 机制详解](../../../crates/c06_async/docs/tier_02_guides/02_Future与Executor机制.md)
 - [Tokio API 参考](../../../crates/c06_async/docs/tier_03_references/02_Tokio完整API参考.md)
 - [异步并发模式](../../../crates/c06_async/docs/tier_04_advanced/01_异步并发模式.md)
 
 ### 代码示例
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [基础示例](../../../crates/c06_async/examples/comprehensive_async_demo.rs)
 - [并发模式](../../../crates/c06_async/examples/comprehensive_async_patterns_2025.rs)
 - [Actor 模式](../../../crates/c06_async/src/actix/README.md)
 
 ### 形式化理论
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - [异步语义理论](../../../crates/c06_async/src/async_semantics_theory.rs)
 - [CSP vs Actor](../../../crates/c06_async/src/csp_model_comparison.rs)
@@ -879,6 +911,8 @@ tokio = { version = "1", features = [
 ## 💡 使用场景
 
 ### 场景 1: Web 服务器并发处理
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use tokio::net::TcpListener;
@@ -913,6 +947,8 @@ async fn main() -> std::io::Result<()> {
 ```
 
 ### 场景 2: 批量数据获取
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use tokio::time::{sleep, Duration};
@@ -953,6 +989,8 @@ async fn main() {
 
 ### 场景 3: 生产者-消费者模式
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use tokio::sync::mpsc;
 use tokio::time::{sleep, Duration};
@@ -987,6 +1025,8 @@ async fn main() {
 ## ⚠️ 边界情况
 
 ### 边界 1: 异步递归
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::future::Future;

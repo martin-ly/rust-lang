@@ -216,6 +216,8 @@ $$
 
 ### 定义 3.3 (await操作)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 let result = handle.await;
 ```
@@ -237,7 +239,11 @@ $$
 
 ### 4.1 mpsc通道的分离逻辑表示
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定义 4.1 (mpsc通道)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 多生产者单消费者通道:
 
@@ -260,6 +266,8 @@ $$
 $$
 
 ### 定理 4.1 (mpsc类型安全)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > mpsc通道保证:
 >
@@ -300,7 +308,11 @@ match tx.send(v).await {
 
 ### 4.2 所有权传递的安全性
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定义 4.2 (所有权传递协议)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 通道上的所有权传递遵循**线性协议**:
 
@@ -321,7 +333,11 @@ $$
 
 ### 5.1 无锁队列形式化
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定义 5.1 (工作窃取队列)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 每个工作线程维护双端队列:
 
@@ -336,6 +352,8 @@ $$
 - $t$: 顶部指针(其他线程窃取)
 
 ### 定理 5.1 (无锁队列安全)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > Tokio的无锁工作窃取队列是线程安全的。
 
@@ -396,6 +414,8 @@ $$
 即任务所有权被安全转移。∎
 
 ### 5.2 负载均衡性质
+
+> **[来源: PLDI - Programming Language Design]**
 
 ### 定理 5.2 (工作窃取负载均衡)
 

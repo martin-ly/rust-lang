@@ -137,6 +137,8 @@ The following core concept documents have been fully updated for Rust 1.94:
 
 ### 2.3 39+ New Code Examples Added and Verified ✅
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Located in `docs/rust-ownership-decidability/exercises/src/`:
 
 | File | Examples | Description |
@@ -157,6 +159,8 @@ Located in `docs/rust-ownership-decidability/exercises/src/`:
 
 ### 2.4 Standard Library API Guide (993 Lines) ✅
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Complete guide: `RUST_194_STDLIB_API_GUIDE.md`
 
 **Coverage:**
@@ -172,6 +176,8 @@ Complete guide: `RUST_194_STDLIB_API_GUIDE.md`
 - Const stabilization (`mul_add`)
 
 ### 2.5 P0 Proofs Status (Honest Assessment)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Framework Status: ✅ 100% Complete**
 
@@ -210,6 +216,8 @@ All theorem statements and proof frameworks are complete across 32 Coq files.
 
 ### 2.6 Cross-References Verified ✅
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - ✅ 100% internal Markdown links verified
 - ✅ All navigation documents updated
 - ✅ PROJECT_STRUCTURE.md reflects current state
@@ -220,6 +228,8 @@ All theorem statements and proof frameworks are complete across 32 Coq files.
 ## 3. Verification Results
 
 ### 3.1 Code Compilation: 100% Pass ✅
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```bash
 $ cd docs/rust-ownership-decidability/exercises

@@ -166,6 +166,8 @@ Inductive ty : Type :=
 
 ### 2.2 Rust 映射
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 仿射概念 | Rust 代码 | 含义 |
 |:---------|:----------|:-----|
 | 使用 0 次 | `drop(x);` | 显式丢弃资源 |
@@ -174,6 +176,8 @@ Inductive ty : Type :=
 | 修改一次 | `&mut x` | 唯一可变借用 |
 
 ### 2.3 代码示例
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 仿射类型: 最多使用一次
@@ -223,6 +227,8 @@ fn modify_once() {
 
 ### 2.4 形式化对应
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```coq
 (* 借用规则的形式化 *)
 (* &T   : 共享借用 (可以多次) *)
@@ -246,6 +252,8 @@ Definition borrow_valid (mode: borrow_mode) (active: list borrow_mode) : bool :=
 
 ### 3.1 理论概念
 
+> **[来源: Wikipedia - Type System]**
+
 **区域类型 (Region Types)**:
 
 ```
@@ -256,6 +264,8 @@ T^ρ   : 类型 T 在区域 ρ 内有效
 ```
 
 ### 3.2 Rust 映射
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 区域类型 | Rust 代码 | 含义 |
 |:---------|:----------|:-----|

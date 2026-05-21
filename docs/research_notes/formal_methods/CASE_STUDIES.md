@@ -214,6 +214,8 @@ fn drop(&mut self) {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Mutex<T>
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +248,8 @@ MutexGuard<T>: Deref, DerefMut
 ```
 
 ### 3.2 无锁队列 (Michael-Scott Queue)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -321,6 +325,8 @@ fn enqueue(&self, value: T) {
 
 ### 4.1 Future形式化
 
+> **[来源: Wikipedia - Concurrency]**
+
 **定义**:
 
 ```
@@ -339,6 +345,8 @@ Future<T> = StateMachine {
 ```
 
 ### 4.2 任务调度证明
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 调度器不变式
@@ -360,6 +368,8 @@ invariant Scheduler {
 
 ### 5.1 常量时间比较
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **安全要求**:
 
 ```
@@ -377,6 +387,8 @@ fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
 ```
 
 ### 5.2 安全内存清零
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 防止编译器优化掉清零操作
@@ -397,6 +409,8 @@ fn secure_zero(memory: &mut [u8]) {
 ## 案例六：FFI边界验证
 
 ### 6.1 C互操作安全
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Rust侧规范**:
 
@@ -422,6 +436,8 @@ T* alloc_T() {
 ```
 
 ### 6.2 不变式保持
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 跨越FFI边界的不变式

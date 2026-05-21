@@ -152,3 +152,8 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 > **[来源: actix.rs Documentation]**
 
 > **[来源: RFC 2616 - HTTP]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**

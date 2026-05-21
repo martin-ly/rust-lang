@@ -1844,6 +1844,8 @@ async fn main() {
 
 ### 9.1 构建工具
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | Cargo (Rust) | Maven/Gradle (Java) |
 |-----|-------------|---------------------|
 | **配置** | Cargo.toml | pom.xml / build.gradle |
@@ -1855,6 +1857,8 @@ async fn main() {
 
 ### 9.2 框架生态
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 领域 | Java | Rust |
 |-----|------|------|
 | Web | Spring Boot, Quarkus | Axum, Actix-web |
@@ -1865,6 +1869,8 @@ async fn main() {
 | HTTP 客户端 | OkHttp, WebClient | reqwest |
 
 ### 9.3 部署运维
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 方面 | Rust | Java |
 |-----|------|------|
@@ -1894,6 +1900,8 @@ async fn main() {
 ## 11. 迁移指南
 
 ### Java → Rust 思维转换
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐
@@ -1996,3 +2004,6 @@ async fn main() {
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Wikipedia - Memory Safety]**

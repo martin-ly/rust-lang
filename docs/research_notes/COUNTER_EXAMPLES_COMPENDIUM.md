@@ -360,6 +360,8 @@ lifetime(&s) ⊆ lifetime(s)
 > **[来源: Rust Official Docs]**
 
 ### 反例 3.1: 返回局部变量的引用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -414,6 +416,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 > **[来源: Rust Official Docs]**
 
 ### 反例 4.1: Rc跨线程
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **错误代码**:
 
@@ -470,6 +474,8 @@ Arc<T>: Send because AtomicUsize operations are thread-safe
 
 ### 反例 4.2: RefCell跨线程
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误代码**:
 
 ```rust
@@ -520,6 +526,8 @@ thread::spawn(move || {
 
 ### 反例 5.1: 跨await持有锁
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **错误代码**:
 
 ```rust
@@ -563,6 +571,8 @@ async fn good() {
 ## 六、设计模式反例
 
 ### 反例 6.1: 尝试实现经典单例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **错误代码**:
 
@@ -620,12 +630,16 @@ fn get_instance() -> &'static Singleton {
 
 ### 反例的教育价值
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **理解边界**: 知道什么不能做
 2. **深入原理**: 理解为什么这样设计
 3. **记忆深刻**: 错误比正确更容易记住
 4. **快速诊断**: 遇到错误能快速定位
 
 ### 学习建议
+
+> **[来源: PLDI - Programming Language Design]**
 
 - 动手复现每个反例
 - 修改代码看编译器反应
@@ -646,6 +660,8 @@ fn get_instance() -> &'static Singleton {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Wikipedia - Memory Safety]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

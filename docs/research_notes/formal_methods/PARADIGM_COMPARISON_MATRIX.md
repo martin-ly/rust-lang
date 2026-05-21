@@ -187,6 +187,8 @@ let content = read_file("a.txt")
 
 ### 并发范式
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 范式 | 模型 | Rust支持 | 适用场景 |
 | :--- | :--- | :--- | :--- |
 | 共享状态 | 锁、原子 | std::sync | 细粒度控制 |
@@ -200,6 +202,8 @@ let content = read_file("a.txt")
 ## 抽象机制对比
 
 ### 接口抽象
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 语言 | 机制 | 静态/动态 | 性能 | Rust对应 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -224,6 +228,8 @@ fn dynamic_dispatch(item: &dyn Drawable) {
 ```
 
 ### 泛型实现对比
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 语言 | 实现方式 | 代码膨胀 | 特化支持 |
 | :--- | :--- | :--- | :--- |

@@ -127,6 +127,8 @@ fn main() {
 
 ### 练习 1.3: 所有权转移链
 
+> **[来源: PLDI - Programming Language Design]**
+
 **题目**: 追踪以下代码的所有权转移
 
 ```rust
@@ -172,6 +174,8 @@ fn give_back(s: String) -> String {
 
 ### 练习 2.1: 标注生命周期
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **题目**: 为以下函数标注正确的生命周期
 
 ```rust
@@ -193,6 +197,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 </details>
 
 ### 练习 2.2: 结构体生命周期
+
+> **[来源: Wikipedia - Type System]**
 
 **题目**: 为以下结构体添加生命周期标注
 
@@ -240,6 +246,8 @@ impl<'a> Parser<'a> {
 
 ### 练习 2.3: 修复生命周期错误
 
+> **[来源: Wikipedia - Concurrency]**
+
 **题目**: 修复以下生命周期错误
 
 ```rust
@@ -282,6 +290,8 @@ fn make_string() -> &'static str {
 ## 3. 形式化验证练习
 
 ### 练习 3.1: Creusot 规范
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **题目**: 为以下函数编写 Creusot 规范
 
@@ -335,6 +345,8 @@ fn factorial(n: u64) -> u64 {
 </details>
 
 ### 练习 3.2: 分离逻辑推理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **题目**: 使用分离逻辑推导以下程序的断言
 

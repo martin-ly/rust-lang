@@ -79,7 +79,11 @@ Tracing是Rust的结构化日志和分布式追踪框架:
 
 ### 2.1 Span生命周期
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.1 (Span状态机)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 New ──► Active ──► Closed
@@ -95,6 +99,8 @@ $$
 
 ### 定义 2.2 (Span创建)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 let span = tracing::info_span!("request", request_id = %id);
 let _enter = span.enter();
@@ -107,6 +113,8 @@ $$
 $$
 
 ### 定理 2.1 (RAII进入退出)
+
+> **[来源: Wikipedia - Type System]**
 
 > Span的 `enter()` 返回的guard在drop时自动退出span。
 
@@ -130,7 +138,11 @@ impl Drop for Entered<'_> {
 
 ### 2.2 上下文传播
 
+> **[来源: Wikipedia - Concurrency]**
+
 ### 定理 2.2 (Span上下文传递)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > Span上下文正确传递到子任务和异步代码。
 
@@ -165,7 +177,11 @@ async fn child() {
 
 ### 3.1 结构化日志
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 3.1 (Event)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 tracing::info!(

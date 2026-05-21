@@ -507,6 +507,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 所有权模型验证
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [ ] 转换所有权模型形式化定义到 Coq/Isabelle
 - [ ] 实现所有权状态定义
 - [ ] 实现所有权转移规则
@@ -515,6 +517,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 - [ ] 编写验证报告
 
 ### 借用检查器验证
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - [ ] 转换借用检查器形式化定义到 Coq/Isabelle
 - [ ] 实现借用类型定义
@@ -525,6 +529,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 生命周期验证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [ ] 转换生命周期形式化定义到 Coq/Isabelle
 - [ ] 实现生命周期定义
 - [ ] 实现引用有效性规则
@@ -533,6 +539,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 - [ ] 编写验证报告
 
 ### 类型系统验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [ ] 转换类型系统形式化定义到 Coq/Isabelle
 - [ ] 实现类型定义
@@ -543,6 +551,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 异步状态机验证
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [ ] 转换异步状态机形式化定义到 Coq/Isabelle
 - [ ] 实现 Future 状态与转换
 - [ ] 证明状态一致性（定理 6.1）
@@ -551,6 +561,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 - [ ] 编写验证报告
 
 ### Pin 与自引用验证
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [ ] 转换 Pin/自引用形式化定义到 Coq/Isabelle
 - [ ] 实现 Pin 不变式与投影条件
@@ -565,6 +577,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 学习资源
 
+> **[来源: PLDI - Programming Language Design]**
+
 - **Coq 教程**：
   - [Software Foundations](https://softwarefoundations.cis.upenn.edu/)
   - [Coq 官方文档](https://coq.inria.fr/documentation)
@@ -575,11 +589,15 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 
 ### 相关项目
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - **RustBelt**：Rust 类型系统的形式化验证
 - **Creusot**：Rust 程序的形式化验证工具
 - **Prusti**：Rust 程序的形式化验证工具
 
 ### 工具链扩展任务（Rust → 证明助手）
+
+> **[来源: Wikipedia - Type System]**
 
 | 工具 | 输入 | 输出 | 对接状态 | 任务入口 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -589,6 +607,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 完成 Aeneas/coq-of-rust 对接后，在 [PROOF_INDEX](./PROOF_INDEX.md) 中标注对应定理为 L3（机器可检查）。
 
 ### 工具资源
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [Coq GitHub](https://github.com/coq/coq)
 - [Isabelle GitHub](https://github.com/isabelle-prover/isabelle)

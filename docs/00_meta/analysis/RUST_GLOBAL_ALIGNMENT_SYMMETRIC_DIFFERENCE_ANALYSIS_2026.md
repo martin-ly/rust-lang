@@ -167,6 +167,8 @@
 
 #### P0 - 紧急缺失 (6项)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | # | 缺失领域 | 权威来源 | 具体差距 | 建议优先级 |
 |---|----------|----------|----------|------------|
 | 1 | **Rust 2024 Edition 新特性深度专题** | Rust Official 1.85+ | let chains, gen blocks, async closures, RPIT lifetime capture, Never type, unsafe extern blocks | P0 |
@@ -177,6 +179,8 @@
 | 6 | **云原生 Rust 开发 (AWS/Azure SDK)** | AWS, Microsoft Azure | 云服务客户端开发、身份认证链、Builder模式实战 | P0 |
 
 #### P1 - 重要缺失 (12项)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | # | 缺失领域 | 权威来源 | 具体差距 | 建议优先级 |
 |---|----------|----------|----------|------------|
@@ -194,6 +198,8 @@
 | 18 | **Dyn Trait 高级用法** | Rust Official Roadmap | Dyn upcasting、object-safe扩展、自定义接收者 | P1 |
 
 #### P2 - 扩展缺失 (12项)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | # | 缺失领域 | 权威来源 | 具体差距 | 建议优先级 |
 |---|----------|----------|----------|------------|
@@ -221,6 +227,8 @@
 ---
 
 ### 阶段一: 版本迁移与基础夯实 (2026-04 ~ 2026-05, 4周)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

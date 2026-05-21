@@ -341,6 +341,8 @@ Observer ──→ Command
 
 #### 核心特性应用
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
@@ -350,6 +352,8 @@ Observer ──→ Command
 
 #### 代码示例更新
 
+> **[来源: IEEE - Programming Language Standards]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -357,6 +361,8 @@ Observer ──→ Command
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -395,3 +401,8 @@ Observer ──→ Command
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**

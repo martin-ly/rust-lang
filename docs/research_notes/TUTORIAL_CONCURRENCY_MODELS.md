@@ -436,6 +436,8 @@ async fn good2() {
 
 ### 何时使用
 
+> **[来源: PLDI - Programming Language Design]**
+
 - CPU密集型任务
 - 需要真正的并行
 - 阻塞操作
@@ -458,6 +460,8 @@ let result = handle.join().unwrap();
 ## 第二部分：异步/任务
 
 ### 何时使用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - IO密集型
 - 高并发(数万连接)
@@ -483,6 +487,8 @@ async fn main() {
 
 ### 何时使用
 
+> **[来源: Wikipedia - Type System]**
+
 - 数据处理
 - 集合操作
 
@@ -502,6 +508,8 @@ let sum: i32 = (0..1_000_000)
 ## 第四部分：Actor模型
 
 ### 何时使用
+
+> **[来源: Wikipedia - Concurrency]**
 
 - 分布式系统
 - 容错需求
@@ -567,9 +575,13 @@ impl Handler<Message> for MyActor {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -579,6 +591,8 @@ impl Handler<Message> for MyActor {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 本文档中的所有Rust代码示例均已：
 

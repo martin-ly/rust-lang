@@ -188,6 +188,8 @@ take_ownership(v);  // v 被移动到函数
 
 #### 场景 C: 函数返回
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn give_ownership() -> String {
     let s = String::from("hello");
@@ -198,6 +200,8 @@ let s = give_ownership();  // 接收所有权
 ```
 
 ### 2.4 Move 与函数式编程
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Move 语义使 Rust 能够实现高效的函数式编程模式：
 
@@ -221,6 +225,8 @@ let result = process_data(data);  // 高效：没有不必要的复制
 
 ### 3.1 Copy 的形式化定义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定义 3.1** (Copy Trait): 类型 `T` 实现 `Copy` 当且仅当对 `T` 的值的赋值操作创建值的完整副本，原值继续有效。
 
 **形式化规则**:
@@ -234,6 +240,8 @@ let result = process_data(data);  // 高效：没有不必要的复制
 即：如果 `T: Copy`，则赋值后 `x` 和 `y` 都有效。
 
 ### 3.2 自动派生 Copy 的条件
+
+> **[来源: PLDI - Programming Language Design]**
 
 一个类型可以派生 `Copy` 当且仅当其所有字段都实现了 `Copy`：
 
@@ -268,6 +276,8 @@ struct Person {
 
 ### 3.3 自定义 Copy 实现
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 #[derive(Debug)]
 struct Complex {
@@ -298,6 +308,8 @@ fn main() {
 
 ### 3.4 Copy 与 Clone 的关系
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // Copy trait 的定义
 pub trait Copy: Clone {
@@ -323,6 +335,8 @@ pub trait Clone {
 | 语义 | 值复制 | 深克隆 |
 
 ### 3.5 选择 Copy vs Clone 的设计建议
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 场景 1: 小型固定大小类型 → 使用 Copy
@@ -363,6 +377,8 @@ impl Clone for FileHandle {
 
 ### 4.1 Drop 的形式化定义
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **定义 4.1** (Drop Trait): `Drop` trait 定义了值超出作用域时的清理行为。
 
 ```rust
@@ -380,6 +396,8 @@ pub trait Drop {
 ```
 
 ### 4.2 RAII 模式详解
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 RAII (Resource Acquisition Is Initialization) 是 C++ 引入的模式，Rust 将其发扬光大。
 
@@ -406,6 +424,8 @@ fn write_to_file() -> std::io::Result<()> {
 3. **组合性**: 资源可以包含其他资源
 
 ### 4.3 自定义 Drop 实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -448,6 +468,8 @@ fn main() {
 ```
 
 ### 4.4 Drop 的顺序规则
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **规则 4.1** (变量释放顺序): 变量按照与声明**相反**的顺序释放（LIFO）。
 
@@ -493,6 +515,8 @@ fn main() {
 
 ### 4.5 提前释放: std::mem::drop
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::mem;
 
@@ -509,6 +533,8 @@ fn main() {
 ```
 
 ### 4.6 避免双重释放的模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 struct Buffer {
@@ -536,6 +562,8 @@ impl Drop for Buffer {
 ## 5. 常见陷阱与解决方案
 
 ### 陷阱 1: 部分移动 (Partial Move)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 struct Person {

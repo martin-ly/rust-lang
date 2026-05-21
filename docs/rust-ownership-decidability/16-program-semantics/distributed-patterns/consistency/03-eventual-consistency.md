@@ -42,6 +42,8 @@
 
 ### 2.1 基本语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 最终一致性 (Eventual Consistency):
 

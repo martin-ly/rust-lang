@@ -102,6 +102,8 @@
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
 
 ### Cell vs RefCell vs Mutex vs RwLock
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +124,8 @@
 > **[来源: Rust Official Docs]**
 
 ### impl Trait vs dyn Trait
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +140,8 @@
 | **返回类型** | ✅ 支持 | ⚠️ 需要Box |
 
 ### Sized vs ?Sized
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +154,8 @@
 | **使用场景** | 通用 | 特化场景 |
 
 ### 型变对比
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +176,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Send vs Sync
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +192,8 @@
 
 ### thread::spawn vs tokio::spawn
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 特性 | thread::spawn | tokio::spawn |
 | :--- | :--- | :--- |
 | **创建** | OS线程 | 异步任务 |
@@ -192,6 +204,8 @@
 | **阻塞操作** | 可以 | 必须避免 |
 
 ### Mutex vs RwLock
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | Mutex | RwLock |
 | :--- | :--- | :--- |

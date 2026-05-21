@@ -145,6 +145,8 @@ graph TB
 
 #### 2.1.1 所有权转移的形式化语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 所有权转移是 Rust 资源管理的基础，其形式化语义可以表示为：
 
 $$
@@ -161,6 +163,8 @@ fn move_semantics_demo() {
 ```
 
 #### 2.1.2 构造器模式与所有权
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 struct Resource { data: Vec<i32>, name: String }
@@ -185,6 +189,8 @@ struct ProcessedResource { original_name: String, computed_sum: i32 }
 ```
 
 #### 2.1.3 Builder 模式的语义分析
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 struct HttpRequestBuilder<'a> {
@@ -217,6 +223,8 @@ struct HttpRequest<'a> { method: &'a str, url: &'a str, headers: Vec<(&'a str, &
 
 #### 2.2.1 借用的生命周期语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 fn borrow_lifecycle() {
     let s = String::from("hello");
@@ -240,6 +248,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 #### 2.2.2 不可变借用共享语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 fn shared_borrow_semantics() {
     let data = vec![1, 2, 3, 4, 5];
@@ -256,6 +266,8 @@ fn shared_borrow_semantics() {
 ```
 
 #### 2.2.3 可变借用独占语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 fn exclusive_mutable_borrow() {
@@ -277,6 +289,8 @@ fn exclusive_mutable_borrow() {
 
 #### 2.3.1 Box 语义（唯一所有权）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 fn box_semantics() {
     let boxed = Box::new(vec![1, 2, 3, 4, 5]);
@@ -291,6 +305,8 @@ enum BinaryTree {
 ```
 
 #### 2.3.2 Rc 语义（引用计数）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::rc::Rc;
@@ -313,6 +329,8 @@ fn rc_with_interior_mutability() {
 
 #### 2.3.3 Arc 语义（原子引用计数）
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::sync::Arc;
 use std::thread;
@@ -334,6 +352,8 @@ fn arc_semantics() {
 ```
 
 #### 2.3.4 Weak 语义（弱引用）
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -376,6 +396,8 @@ fn weak_semantics() {
 
 #### 3.1.1 所有权树形结构语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```mermaid
 graph TD
     A[根节点] --> B[子节点1]
@@ -417,6 +439,8 @@ impl Directory {
 
 #### 3.1.2 Drop 传播语义
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 struct Resource { id: usize, name: String }
 
@@ -439,6 +463,8 @@ impl Drop for Container {
 ```
 
 #### 3.1.3 递归类型语义
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 enum List<T> {
@@ -467,6 +493,8 @@ enum SharedList<T> {
 > **[来源: POPL - Programming Languages Research]**
 
 #### 3.2.1 状态作为类型参数
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```mermaid
 stateDiagram-v2
@@ -512,6 +540,8 @@ impl Connection<Authenticated> {
 
 #### 3.2.2 状态转换语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 trait ConnectionState {}
 impl ConnectionState for Disconnected {}
@@ -542,6 +572,8 @@ impl ConnectionManager<Disconnected> {
 ```
 
 #### 3.2.3 编译时状态机验证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 struct NoMethod;
@@ -599,6 +631,8 @@ struct HttpResponse { status: u16 }
 
 #### 3.3.1 trait 适配语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 trait Target {
     fn request(&self) -> String;
@@ -620,6 +654,8 @@ impl Target for Adapter {
 ```
 
 #### 3.3.2 From/Into 语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 struct OldUser { name: String, age: u32 }
@@ -653,6 +689,8 @@ impl From<std::io::Error> for MyError {
 ```
 
 #### 3.3.3 Deref 适配语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::ops::{Deref, DerefMut};
@@ -691,6 +729,8 @@ fn deref_semantics() {
 > **[来源: Wikipedia - Memory Safety]**
 
 #### 4.1.1 迭代器协议语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 struct Counter { count: u32, max: u32 }

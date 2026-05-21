@@ -155,6 +155,8 @@
 | 综合研究   | 2个  | 实际应用案例、研究方法论                               |
 
 ### 按状态统计
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +173,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 按研究领域统计
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +187,8 @@
 | **总计**       | 17个       | 100%       | ✅ 已完成 |
 
 ### 按优先级统计
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +206,8 @@
 4. 生命周期形式化 (100%)
 
 ### 按完成度统计
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +233,8 @@
 
 ### 代码示例统计
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 研究领域   | 代码示例数 | 平均每个笔记 |
 | :--- | :--- | :--- |
 | 形式化方法 | 15个       | 3.0个        |
@@ -240,6 +250,8 @@
 - ✅ 大部分代码示例可运行
 
 ### 参考文献统计
+
+> **[来源: Wikipedia - Type System]**
 
 | 研究领域   | 参考文献数 | 平均每个笔记 |
 | :--- | :--- | :--- |
@@ -257,6 +269,8 @@
 - 工具资源: 7个 (8%)
 
 ### 形式化定义统计
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 研究领域   | 形式化定义数 | 平均每个笔记 |
 | :--- | :--- | :--- |

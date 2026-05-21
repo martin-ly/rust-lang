@@ -42,6 +42,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 结构归纳法（Structural Induction）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -83,6 +85,8 @@ Qed.
 ```
 
 ### 1.2 良基归纳法（Well-Founded Induction）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -124,6 +128,8 @@ Qed.
 
 ### 1.3 反证法（Proof by Contradiction）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **适用场景**：
 
 - 证明某事"不可能"发生
@@ -156,6 +162,8 @@ Qed.
 ```
 
 ### 1.4 构造性证明（Constructive Proof）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **适用场景**：
 
@@ -192,6 +200,8 @@ Qed.
 ## 二、特定定理的证明策略
 
 ### 2.1 终止性定理的证明策略
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **核心挑战**：
 
@@ -261,6 +271,8 @@ Qed.
 3. **Linearizability 不足**：确保前提条件足够强
 
 ### 2.2 保持性定理的证明策略
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **核心挑战**：
 

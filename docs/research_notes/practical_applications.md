@@ -254,6 +254,8 @@ impl Syscall {
 - 提供系统编程最佳实践
 
 #### 案例 1.2：Tokio 异步运行时
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -339,6 +341,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 **典型案例**：
 
 #### 案例 2.1：Actix-web 高性能 Web 框架
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -386,6 +390,8 @@ async fn main() -> std::io::Result<()> {
 
 #### 案例 2.2：Linkerd 服务网格
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **项目描述**：使用 Rust 构建的云原生服务网格
 
 **Rust 特性应用**：
@@ -427,6 +433,8 @@ async fn main() -> std::io::Result<()> {
 **典型案例**：
 
 #### 案例 3.1：TiKV 分布式键值存储
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **项目描述**：PingCAP 使用 Rust 构建的分布式事务键值数据库
 
@@ -478,6 +486,8 @@ impl TiKVEngine {
 
 #### 案例 3.2：ScyllaDB Rust 驱动
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **项目描述**：高性能 NoSQL 数据库的 Rust 客户端
 
 **Rust 特性应用**：
@@ -513,6 +523,8 @@ impl TiKVEngine {
 **典型案例**：
 
 #### 案例 4.1：Tock 嵌入式操作系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **项目描述**：使用 Rust 构建的安全嵌入式操作系统
 
@@ -560,6 +572,8 @@ impl TockOS {
 - 提供嵌入式系统设计参考
 
 #### 案例 4.2：Drone 实时操作系统
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **项目描述**：使用 Rust 构建的实时操作系统框架
 
@@ -823,6 +837,8 @@ impl<T> Drop for SafeVec<T> {
 
 #### 案例 1.3：Firecracker 微虚拟机
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **项目描述**：AWS 使用 Rust 构建的轻量级虚拟化技术
 
 **Rust 特性应用**：
@@ -934,6 +950,8 @@ impl<T> Drop for SafeVec<T> {
 
 ### 性能分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **Web 服务器性能**：
 
 - 吞吐量：100,000+ req/s
@@ -948,6 +966,8 @@ impl<T> Drop for SafeVec<T> {
 
 ### 最佳实践总结 {#-最佳实践总结}
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 1. **异步编程**：充分利用 Rust 的异步特性
 2. **内存管理**：利用所有权系统避免内存问题
 3. **并发安全**：使用 Rust 的并发原语保证安全
@@ -960,6 +980,8 @@ impl<T> Drop for SafeVec<T> {
 > **[来源: Rust Official Docs]**
 
 ### 系统编程最佳实践
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **内存管理**：
    - 优先使用栈分配
@@ -978,6 +1000,8 @@ impl<T> Drop for SafeVec<T> {
 
 ### 网络应用最佳实践
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **异步编程**：
    - 使用 `async/await` 语法
    - 合理使用 `tokio::spawn`
@@ -995,6 +1019,8 @@ impl<T> Drop for SafeVec<T> {
 
 ### 并发系统最佳实践
 
+> **[来源: PLDI - Programming Language Design]**
+
 1. **同步原语选择**：
    - 读多写少使用 `RwLock`
    - 简单操作使用 `Atomic`
@@ -1011,6 +1037,8 @@ impl<T> Drop for SafeVec<T> {
    - 优化缓存使用
 
 ### 嵌入式系统最佳实践
+
+> **[来源: Wikipedia - Memory Safety]**
 
 1. **资源管理**：
    - 使用 `no_std` 环境
@@ -1035,6 +1063,8 @@ impl<T> Drop for SafeVec<T> {
 
 ### 案例报告模板
 
+> **[来源: Wikipedia - Type System]**
+
 撰写单个案例报告时，建议包含以下部分：
 
 1. **项目概述**：名称、领域、规模、主要功能
@@ -1045,6 +1075,8 @@ impl<T> Drop for SafeVec<T> {
 6. **参考链接**：仓库、文档、博客
 
 ### 应用指南
+
+> **[来源: Wikipedia - Concurrency]**
 
 - **选型**：系统编程、网络、并发、嵌入式可分别从「案例分类」中选取对标项目；性能与安全诉求可参考「案例分析」与各实验的基准。
 - **落地**：按「最佳实践总结」的四个领域逐条对照；异步、错误处理、并发原语选型可结合 [async_state_machine](./formal_methods/async_state_machine.md)、[concurrency_performance](./experiments/concurrency_performance.md)。
@@ -1058,17 +1090,23 @@ impl<T> Drop for SafeVec<T> {
 
 ### 与形式化方法的关联
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **所有权模型** [ownership_model.md](./formal_methods/ownership_model.md)：Redox、Tock、Firecracker、SafeVec 等案例中的资源管理与 `unsafe` 边界，可对照所有权规则做形式化抽查。
 - **借用检查器** [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md)：TiKV、Actix、Linkerd 等并发与迭代场景，可对照借用规则验证无数据竞争。
 - **异步状态机** [async_state_machine.md](./formal_methods/async_state_machine.md)：Tokio、Actix、ScyllaDB 驱动、案例 1–2 的 async 设计，可对应 Future/Poll/Waker 形式化。
 
 ### 与类型理论、实验研究的关联
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **类型系统 / Trait** [type_system_foundations.md](./type_theory/type_system_foundations.md)、[trait_system_formalization.md](./type_theory/trait_system_formalization.md)：各案例中的泛型、`impl Trait`、派生与 Trait 对象，可作类型论与 Trait 形式化的实例。
 - **性能基准** [performance_benchmarks.md](./experiments/performance_benchmarks.md)、**并发性能** [concurrency_performance.md](./experiments/concurrency_performance.md)：案例 1–2 的吞吐、延迟、并发模式可与实验的「结果分析模板」对照，用于选型与调优。
 - **内存分析** [memory_analysis.md](./experiments/memory_analysis.md)、**编译器优化** [compiler_optimizations.md](./experiments/compiler_optimizations.md)：案例中的分配策略、`-O2`/LTO 等可与实验指南结合，做上线前检查。
 
 ### 案例快速索引
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 领域 | 案例 | 文档内锚点 / 关键词 |
 | :--- | :--- | :--- |

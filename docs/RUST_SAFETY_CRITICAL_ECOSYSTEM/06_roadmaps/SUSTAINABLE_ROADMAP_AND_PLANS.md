@@ -81,6 +81,8 @@
 
 #### 每周任务 (Weekly Cadence)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 星期 | 任务 | 负责人 | 输出 | 时间 |
 |------|------|--------|------|------|
 | **周一** | 安全公告审查 | 安全工程师 | 风险报告 | 1h |
@@ -91,6 +93,8 @@
 
 #### 每月任务 (Monthly Cadence)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 周次 | 任务 | 参与方 | 输出 |
 |------|------|--------|------|
 | **第1周** | 依赖安全审计 | 安全+开发 | 审计报告 |
@@ -99,6 +103,8 @@
 | **第4周** | 月度回顾/规划 | 管理层 | 路线图更新 |
 
 #### 每季度任务 (Quarterly Cadence)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 月份 | 任务 | 里程碑 |
 |------|------|--------|
@@ -112,6 +118,8 @@
 > **[来源: Wikipedia - Rust (programming language)]**
 
 #### 会议跟踪日历
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 2026年学术会议跟踪:

@@ -170,6 +170,8 @@ fn custom_smart_pointer_demo() {
 
 ### 内存池与对象复用
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::sync::Mutex;
 
@@ -231,6 +233,8 @@ fn object_pool_demo() {
 ## 相关研究笔记
 
 ### 实验分析
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

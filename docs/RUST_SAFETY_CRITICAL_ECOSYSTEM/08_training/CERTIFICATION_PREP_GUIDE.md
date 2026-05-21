@@ -108,6 +108,8 @@
 > **[来源: Rust Official Docs]**
 
 #### Part 1: 词汇 (3%)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -128,6 +130,8 @@ Rust特定扩展:
 ```
 
 #### Part 2: 功能安全管理 (10%)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +151,8 @@ Rust考点:
 ```
 
 #### Part 3: 概念阶段 (15%)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -166,6 +172,8 @@ Rust应用:
 ```
 
 #### Part 4: 产品开发: 系统层面 (15%)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +193,8 @@ Rust系统开发:
 ```
 
 #### Part 5: 产品开发: 硬件层面 (10%)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +213,8 @@ Rust相关:
 ```
 
 #### Part 6: 产品开发: 软件层面 (35%)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 **重点章节 (考试权重最高)**
@@ -239,6 +251,8 @@ Rust特定考点 (60%权重):
 
 #### Part 7: 操作与维护 (5%)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 内容:
 ├── 生产发布
@@ -247,6 +261,8 @@ Rust特定考点 (60%权重):
 ```
 
 #### Part 8: 支持过程 (5%)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 支持活动:
@@ -259,6 +275,8 @@ Rust特定考点 (60%权重):
 ```
 
 #### Part 9: ASIL分析 (2%)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 技术:

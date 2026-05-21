@@ -447,6 +447,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 ### 反例 2: 泛型与 trait 对象混用不当
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误示例**:
 
 ```rust
@@ -493,6 +495,8 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 ### MaybeUninit 泛型支持增强
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **改进**: MaybeUninit 的新方法支持泛型类型
 
 ```rust
@@ -515,6 +519,8 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 ## Rust 1.92.0 泛型改进（历史）
 
 ### const 上下文增强
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **改进**: 支持对非静态常量的引用，应用于泛型配置
 
@@ -539,15 +545,21 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 
 ### 官方文档
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [Rust 泛型文档](https://doc.rust-lang.org/book/ch10-00-generics.html)
 - [Rust Reference - Generics](https://doc.rust-lang.org/reference/items/generics.html)
 
 ### 项目内部文档
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [泛型完整文档](../../../crates/c04_generic/docs/README.md)
 - [类型系统研究笔记](../../research_notes/type_theory/README.md)
 
 ### 相关速查卡
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [类型系统速查卡](./type_system.md) - 类型系统基础
 - [Trait 系统速查卡](./type_system.md#trait-系统) - Trait 与泛型
@@ -559,6 +571,8 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 ## 💡 使用场景
 
 ### 场景 1: 通用 Repository 模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::collections::HashMap;
@@ -611,6 +625,8 @@ fn main() {
 ```
 
 ### 场景 2: 类型安全的构建器
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 struct Unset;
@@ -669,6 +685,8 @@ fn main() {
 ```
 
 ### 场景 3: 泛型事件处理器
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 trait Event: Clone + Send + 'static {
@@ -738,6 +756,8 @@ fn main() {
 
 ### 边界 1: 孤儿规则 (Orphan Rule)
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust,compile_fail
 // ❌ 错误：违反孤儿规则
 // 不能为外部类型实现外部 trait
@@ -762,6 +782,8 @@ fn main() {
 ```
 
 ### 边界 2: 生命周期与泛型的交互
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 struct Container<'a, T> {

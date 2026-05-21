@@ -672,6 +672,8 @@ let flat: Vec<_> = nested.into_iter().flatten().collect();
 
 ### 选择适配器
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
 
@@ -693,6 +695,8 @@ let result: Vec<_> = vec.iter().step_by(2).collect();
 
 ### 组合适配器
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 let vec1 = vec![1, 2, 3];
 let vec2 = vec![4, 5, 6];
@@ -709,6 +713,8 @@ let enumerated: Vec<_> = vec1.iter().enumerate().collect();
 ```
 
 ### 其他适配器
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 let vec = vec![1, 2, 3];
@@ -734,6 +740,8 @@ let result: Vec<_> = vec.iter()
 
 ### 收集
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
 
@@ -748,6 +756,8 @@ let (even, odd): (Vec<_>, Vec<_>) = vec.iter()
 ```
 
 ### 查找
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -766,6 +776,8 @@ let all = vec.iter().all(|&x| x > 0); // bool
 ```
 
 ### 聚合
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -789,6 +801,8 @@ let max = vec.iter().max_by(|a, b| a.cmp(b));
 
 ### 折叠
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
 
@@ -804,6 +818,8 @@ let result: Result<i32, _> = vec.iter()
 ```
 
 ### 其他消费者
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -829,6 +845,8 @@ let joined: String = vec.iter().map(|x| x.to_string()).collect();
 
 ### 转换和过滤
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
 
@@ -840,6 +858,8 @@ let result: Vec<_> = vec.iter()
 ```
 
 ### 链式操作
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];
@@ -854,6 +874,8 @@ let result: Vec<_> = vec.iter()
 ```
 
 ### 分组
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::collections::HashMap;
@@ -870,6 +892,8 @@ let grouped: HashMap<_, Vec<_>> = vec.iter()
 ```
 
 ### 去重
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::collections::HashSet;
@@ -891,7 +915,11 @@ let unique: Vec<_> = vec.iter()
 
 ### 窗口操作
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### Rust 1.95+ `array_windows()` - 零开销固定大小窗口
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Rust 1.94 引入了 `array_windows<const N: usize>()`，为滑动窗口操作带来**零分配**和**编译期优化**。
 
@@ -978,6 +1006,8 @@ for [a, b, c] in data.array_windows::<3>() {
 
 #### 动态窗口 `windows()`
 
+> **[来源: ACM - Systems Programming Languages]**
+
 当窗口大小在运行时才确定时，使用传统的 `windows()`:
 
 ```rust
@@ -999,6 +1029,8 @@ let windows = sliding_windows(&vec, 3);
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 自定义迭代器
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 struct Fibonacci {

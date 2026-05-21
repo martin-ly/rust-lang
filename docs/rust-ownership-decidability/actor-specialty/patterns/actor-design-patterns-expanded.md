@@ -98,6 +98,8 @@ Ask模式 (Request-Response):
 
 ### 1.2 定理 ASK-TELL-SAFETY
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 定理 ASK-TELL-SAFETY-1: Ask模式不会导致Actor状态不一致
 
@@ -121,6 +123,8 @@ Ask模式 (Request-Response):
 
 ### 1.3 决策矩阵
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 场景 | Tell | Ask | 理由 |
 |:---|:---:|:---:|:---|
 | 事件通知 | ✅ | ❌ | 不需要响应 |
@@ -135,6 +139,8 @@ Ask模式 (Request-Response):
 ## 2. 监督树模式
 
 ### 2.1 形式化定义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
 定义 SUPERVISION-TREE:
@@ -157,6 +163,8 @@ strategy: N → {OneForOne, OneForAll, RestForOne}
 
 ### 2.2 定理 SUPERVISION-SAFETY
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 定理 SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
@@ -178,6 +186,8 @@ failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
 
 ### 2.3 监督策略矩阵
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 策略 | 使用场景 | 恢复时间 | 影响范围 |
 |:---|:---|:---:|:---|
 | OneForOne | 独立任务 | 快 | 单个Actor |
@@ -189,6 +199,8 @@ failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
 ## 3. Circuit Breaker 模式
 
 ### 3.1 形式化定义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
 定义 CIRCUIT-BREAKER:
@@ -217,6 +229,8 @@ failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
 ```
 
 ### 3.2 定理 CIRCUIT-BREAKER-SAFETY
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 定理 CIRCUIT-BREAKER-PROTECTION: 熔断器保护系统免受过载

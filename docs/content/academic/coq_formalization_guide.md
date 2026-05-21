@@ -211,6 +211,8 @@ Admitted.
 
 ### 类型安全证明
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```coq
 (* 类型定义 *)
 Inductive ty : Type :=

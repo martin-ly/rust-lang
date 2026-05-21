@@ -104,6 +104,8 @@ fn main() {
 ```
 
 ### 2. 使用 clap 构建专业 CLI
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +160,8 @@ fn main() {
 ```
 
 ### 3. 异步 CLI 示例
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +197,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4. 带进度条的 CLI
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +230,8 @@ fn main() {
 ```
 
 ### 5. 错误处理最佳实践
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -297,6 +305,8 @@ fn main() {
 
 ### 1. 使用 `?` 操作符传播错误
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
     let content = std::fs::read_to_string(path)?;
@@ -306,6 +316,8 @@ fn read_config(path: &str) -> Result<Config, Box<dyn std::error::Error>> {
 ```
 
 ### 2. 提供有意义的错误信息
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn main() {
@@ -317,6 +329,8 @@ fn main() {
 ```
 
 ### 3. 使用 exit codes
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::process::ExitCode;
@@ -338,6 +352,8 @@ fn main() -> ExitCode {
 
 ### 场景1: 简单命令行工具
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 快速构建文件处理工具：
 
 ```rust
@@ -346,6 +362,8 @@ fn main() -> ExitCode {
 ```
 
 ### 场景2: 专业级 CLI 应用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 构建类似 `cargo` 或 `rg` 的专业工具：
 

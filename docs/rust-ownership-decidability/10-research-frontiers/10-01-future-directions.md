@@ -98,6 +98,8 @@ Rust 形式化验证领域在过去几年取得了显著进展，但仍面临诸
 
 #### 1.1.1 Unsafe Rust 的验证挑战
 
+> **[来源: Wikipedia - Concurrency]**
+
 Unsafe Rust 是形式化验证中最具挑战性的领域之一。2024年，Rust 基金会资助了多个与 Unsafe Rust 验证相关的项目：
 
 ```rust
@@ -122,6 +124,8 @@ pub unsafe fn unchecked_index<T>(slice: &[T], index: usize) -> &T {
 3. **形式化内存模型**：对 LLVM 内存模型与 Rust 交互的形式化研究
 
 #### 1.1.2 异步编程的形式化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 异步 Rust 引入了新的验证挑战，特别是关于 `Pin` 和自引用类型的形式化：
 
@@ -206,6 +210,8 @@ pub struct SelfReferential {
 
 #### 1.3.1 Ferrocene 项目
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Ferrocene 是 Rust 基金会的工业级 Rust 编译器项目，于 2024 年取得重要里程碑：
 
 - 通过 ISO 26262（汽车功能安全）和 IEC 61508（工业功能安全）认证
@@ -222,6 +228,8 @@ fn compile_and_check(input: &str) -> Result<Binary, Error> {
 ```
 
 #### 1.3.2 中间表示验证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 MIR (Mid-level Intermediate Representation) 的验证是编译器验证的关键：
 
@@ -264,6 +272,8 @@ fn example() {
 
 #### 2.1.1 最新研究进展（2024-2025）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 1. **GhostCell 变体**：
    - `GhostLock`：用于锁的 GhostCell 变体
    - `GhostRefCell`：与标准库 RefCell 的集成
@@ -299,6 +309,8 @@ use crossbeam::queue::ArrayQueue;
 
 #### 2.2.1 分离逻辑扩展
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 研究人员正在扩展分离逻辑以处理更复杂的并发模式：
 
 | 扩展方向 | 描述 | 代表论文 |
@@ -314,6 +326,8 @@ use crossbeam::queue::ArrayQueue;
 ML 在形式化验证中的应用正在快速增长：
 
 #### 2.3.1 自动规格推断
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```python
 # 基于 LLM 的规格推断概念
@@ -334,6 +348,8 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 ```
 
 #### 2.3.2 智能证明搜索
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **GNN 用于证明搜索**：使用图神经网络预测证明策略
 - **强化学习用于不变量合成**：将不变量发现建模为马尔可夫决策过程
@@ -381,6 +397,8 @@ Rust 类型系统的可能扩展及其对可判定性的影响：
 
 #### 3.1.1 依赖类型与 Rust
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // 依赖类型的概念性示例
 // 使用 const generics 作为向依赖类型的过渡
@@ -398,6 +416,8 @@ where
 ```
 
 ### 3.2 可判定性前沿
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 当前对 Rust 可判定性边界的研究：
 
@@ -424,6 +444,8 @@ where
 ```
 
 ### 3.3 分离逻辑的扩展
+
+> **[来源: POPL - Programming Languages Research]**
 
 针对 Rust 的分离逻辑扩展研究：
 

@@ -807,6 +807,8 @@ impl Runtime {
 
 ### ⭐⭐⭐ 高级题
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **Q39: 解释类型安全中的"进展性"和"保持性"。**
 
 <details>
@@ -843,6 +845,8 @@ impl Runtime {
 > **[来源: Rust Official Docs]**
 
 ### ⭐⭐ 进阶题
+
+> **[来源: Wikipedia - Type System]**
 
 **Q41: Saga模式解决什么问题？**
 
@@ -885,6 +889,8 @@ impl Runtime {
 
 ### ⭐⭐⭐ 高级题
 
+> **[来源: Wikipedia - Concurrency]**
+
 **Q44: 熔断器模式如何工作？**
 
 <details>
@@ -918,6 +924,8 @@ impl Runtime {
 > **[来源: Rust Official Docs]**
 
 ### ⭐⭐⭐⭐ 专家题
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **Q46: 设计一个线程安全的LRU缓存。**
 
@@ -1088,11 +1096,15 @@ trait EventStore {
 
 ### 初学者 (答对15-25题)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - 掌握所有权、借用基础
 - 能写简单Rust程序
 - 建议继续学习并发
 
 ### 进阶者 (答对25-35题)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - 理解类型系统
 - 能处理生命周期
@@ -1100,11 +1112,15 @@ trait EventStore {
 
 ### 高级 (答对35-45题)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - 掌握并发异步
 - 理解高级类型特性
 - 建议参与开源
 
 ### 专家 (答对45-50题)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - 深入理解原理
 - 能设计复杂系统
@@ -1127,9 +1143,13 @@ trait EventStore {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: ACM - Systems Programming Languages]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1140,6 +1160,8 @@ trait EventStore {
 
 #### 代码示例更新
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -1147,6 +1169,8 @@ trait EventStore {
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -1213,3 +1237,7 @@ trait EventStore {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**

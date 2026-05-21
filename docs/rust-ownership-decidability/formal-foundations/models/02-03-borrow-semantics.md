@@ -52,6 +52,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 借用的动机
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -87,6 +89,8 @@ fn calculate_length(s: &String) -> usize {
 
 ### 1.2 核心原则
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    借用系统的核心原则                                │
@@ -113,6 +117,8 @@ fn calculate_length(s: &String) -> usize {
 ## 2. 共享借用 &T 的形式化
 
 ### 2.1 语义定义
+
+> **[来源: Wikipedia - Concurrency]**
 
 **基于RustBelt的语义**:
 
@@ -142,6 +148,8 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 ### 2.2 推导规则
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **类型规则**:
 
@@ -173,6 +181,8 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 ### 2.3 共享借用的性质
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **性质1: 可复制性**:
 
@@ -216,6 +226,8 @@ fn transitive_borrow() {
 
 ### 3.1 语义定义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **基于RustBelt的语义**:
 
 ```text
@@ -240,6 +252,8 @@ fn transitive_borrow() {
 
 ### 3.2 推导规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **类型规则**:
 
 ```text
@@ -262,6 +276,8 @@ fn transitive_borrow() {
 **注意**: 可变借用不是Copy类型。
 
 ### 3.3 独占性保证
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **形式化独占性**:
 
@@ -300,6 +316,8 @@ fn exclusivity_demonstration() {
 
 ### 4.1 冲突类型
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 借用冲突的三种类型:
 
@@ -314,6 +332,8 @@ fn exclusivity_demonstration() {
 ```
 
 ### 4.2 形式化检测算法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **借用上下文**:
 

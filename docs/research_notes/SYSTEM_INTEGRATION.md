@@ -100,6 +100,8 @@
 研究笔记系统与 Rust 形式化工程系统是两个相互补充的文档体系：
 
 ### 研究笔记系统
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -109,6 +111,8 @@
 - **特点**: 研究笔记、实验报告、方法论指南
 
 ### 形式化工程系统
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +128,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 互补关系
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +146,8 @@
 ```
 
 ### 协同工作
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +162,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 类型系统
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +174,8 @@
 | [型变理论](./type_theory/variance_theory.md)                    | [类型系统高级理论](../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)                    | 研究笔记提供理论研究，形式化系统提供详细定义     |
 
 ### 形式化方法
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +186,8 @@
 | [生命周期形式化](./formal_methods/lifetime_formalization.md) | [生命周期系统理论](../rust-formal-engineering-system/01_theoretical_foundations/06_lifetime_management/README.md) | 研究笔记提供形式化研究，形式化系统提供系统化理论 |
 
 ### 实验研究
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

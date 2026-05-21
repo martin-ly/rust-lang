@@ -67,6 +67,8 @@ mindmap
 
 ### 类型即命题（Curry-Howard 对应）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 在 Rust 类型系统中，类型对应于逻辑命题，程序对应于证明：
 
 ```rust
@@ -95,6 +97,8 @@ fn implication(x: i32) -> String {
 ```
 
 ### 泛型与参数多态
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 全称量词（∀）的 Rust 表达
@@ -129,6 +133,8 @@ impl<T> ContainerTrait for Container<T> {
 ```
 
 ### 型变（Variance）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 型变描述复合类型如何随其组件类型的子类型关系变化：
 

@@ -253,6 +253,8 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 | `module_path!()` | `&'static str` | 模块路径 |
 
 ### 代码生成
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -271,6 +273,8 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 
 ### 查看展开结果
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```bash
 # 安装 cargo-expand
 cargo install cargo-expand
@@ -283,6 +287,8 @@ cargo expand --lib module::name
 ```
 
 ### 追踪宏展开
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #![feature(trace_macros)]

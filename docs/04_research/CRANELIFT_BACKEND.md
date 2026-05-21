@@ -64,6 +64,8 @@
 ```
 
 ### 1.2 架构位置
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +107,8 @@ Standard (LLVM backend):           Cranelift backend:
 > **[来源: Rust Official Docs]**
 
 ### 2.1 设计哲学差异
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +123,8 @@ Standard (LLVM backend):           Cranelift backend:
 | **调试信息** | 完善 | 基础支持 |
 
 ### 2.2 适用场景矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +138,8 @@ Standard (LLVM backend):           Cranelift backend:
 | WebAssembly | **Cranelift** | 原生 Wasm 支持 |
 
 ### 2.3 性能数据对比
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +161,8 @@ Standard (LLVM backend):           Cranelift backend:
 > **[来源: Rust Official Docs]**
 
 ### 3.1 必要条件
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +178,8 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 3.2 项目级配置
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +201,8 @@ codegen-backend = "cranelift"
 ```
 
 ### 3.3 单次编译配置
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

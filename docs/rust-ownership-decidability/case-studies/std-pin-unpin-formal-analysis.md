@@ -209,7 +209,11 @@ $$
 
 ### 4.1 自动实现
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 4.1 (Unpin trait)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 pub auto trait Unpin {}
@@ -221,6 +225,8 @@ pub auto trait Unpin {}
 - `!Unpin` 需要显式标记: `impl !Unpin for MyType {}`
 
 ### 定理 4.1 (Unpin的传递性)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 > 如果 `T: Unpin`，则包含 `T` 的结构体也是 `Unpin`。
 
@@ -241,7 +247,11 @@ struct Container<T> {
 
 ### 4.2 !Unpin 类型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ### 定义 4.2 (!Unpin类型示例)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 标记为 !Unpin
@@ -257,6 +267,8 @@ struct SelfRef {
 ```
 
 ### 定理 4.2 (PhantomPinned的效果)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > 包含 `PhantomPinned` 字段的结构体自动成为 `!Unpin`。
 

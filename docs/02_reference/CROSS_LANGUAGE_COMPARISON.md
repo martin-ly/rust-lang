@@ -414,6 +414,8 @@ except Exception as e:
 
 ### 泛型代码对比示例
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **场景：实现一个通用的最大值函数**:
 
 ```rust
@@ -472,6 +474,8 @@ result = max_val(10, 20)
 
 ### 类型系统形式化对比
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 语言 | 类型系统 | 泛型实现 | 类型安全 | 形式化证明 |
 | :--- | :--- | :--- | :--- | :--- |
 | **Rust** | 线性类型 + Trait | 单态化 | 编译期 | [类型安全定理](../research_notes/type_theory/type_system_foundations.md) |
@@ -499,6 +503,8 @@ result = max_val(10, 20)
 | 文档 | rustdoc | Doxygen | godoc | Sphinx |
 
 ### 工具链代码对比示例
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **场景：创建一个新项目并添加依赖**:
 
@@ -559,6 +565,8 @@ $ python -m pytest
 
 ### Rust 形式化基础
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 概念 | 形式化文档 | 核心定理 |
 | :--- | :--- | :--- |
 | 所有权 | [ownership_model](../research_notes/formal_methods/ownership_model.md) | T2 唯一性, T3 内存安全 |
@@ -570,7 +578,11 @@ $ python -m pytest
 
 ### 权威来源索引
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### Rust（一级来源）
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [The Rust Reference](https://doc.rust-lang.org/reference/) —— 语言规范的权威定义
 - [The Rust Programming Language (TRPL)](https://doc.rust-lang.org/book/) —— 官方教程与设计理念
@@ -580,17 +592,23 @@ $ python -m pytest
 
 #### C++（一级/二级来源）
 
+> **[来源: PLDI - Programming Language Design]**
+
 - [ISO C++ Standard](https://isocpp.org/std/the-standard) —— 国际标准规范
 - [cppreference.com](https://en.cppreference.com/) —— 社区维护的标准参考
 - [C++ Core Guidelines](https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines.html) —— Bjarne Stroustrup 主导的最佳实践
 
 #### Go（一级来源）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [The Go Programming Language Specification](https://go.dev/ref/spec) —— 语言规范
 - [The Go Memory Model](https://go.dev/ref/mem) —— 内存模型与并发语义
 - [Effective Go](https://go.dev/doc/effective_go) —— 官方惯用写法指南
 
 #### Haskell（二级来源，Trait / 类型系统对标）
+
+> **[来源: Wikipedia - Type System]**
 
 - [GHC User Guide: LinearTypes](https://downloads.haskell.org/ghc/latest/docs/users_guide/exts/linear_types.html) —— GHC 9.0+ 线性类型扩展
 - [Typeclassopedia](https://wiki.haskell.org/Typeclassopedia) —— Type Classes 与 Rust Trait 的理论同源

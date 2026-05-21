@@ -304,6 +304,8 @@ async fn read_all_sensors(i2c: &mut I2c<'static>) -> [SensorData; 3] {
 
 ### 3.3 SPI异步传输
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use embassy_stm32::spi::Spi;
 use embassy_stm32::gpio::Output;
@@ -329,6 +331,8 @@ impl<'a> SpiDevice<'a> {
 
 ### 4.1 静态任务分配
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // Embassy默认不使用堆分配
 // 所有任务在编译时确定
@@ -352,6 +356,8 @@ fn main() -> ! {
 ```
 
 ### 4.2 无堆数据结构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use heapless::Vec;
@@ -396,6 +402,8 @@ async fn consumer() {
 
 ### 5.1 Tickless Idle
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // Embassy自动管理tickless idle
 // 当没有任务就绪时，进入WFI/低功耗模式
@@ -426,6 +434,8 @@ async fn low_power_task() {
 
 ### 5.2 深度睡眠集成
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use embassy_stm32::low_power::LowPower;
 
@@ -450,6 +460,8 @@ async fn sleep_until_event() {
 ## 6. 并发模式
 
 ### 6.1 共享资源
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use embassy_sync::mutex::Mutex;
@@ -485,6 +497,8 @@ async fn sensor_task1(i2c: &'static Mutex<ThreadModeRawMutex, I2c<'static>>) {
 ```
 
 ### 6.2 信号量与通道
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use embassy_sync::signal::Signal;

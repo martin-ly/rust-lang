@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 触发归档的条件
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 4. **标记过时**: 文档顶部已添加过时警告超过 **30 天**
 
 ### 2.2 归档操作步骤
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```bash
 # Step 1: 在文档顶部添加归档标记（创建时即添加）

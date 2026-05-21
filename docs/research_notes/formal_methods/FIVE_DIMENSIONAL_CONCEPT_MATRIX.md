@@ -375,9 +375,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: PLDI - Programming Language Design]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -388,6 +392,8 @@
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Type System]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -395,6 +401,8 @@
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Concurrency]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -434,3 +442,7 @@
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**

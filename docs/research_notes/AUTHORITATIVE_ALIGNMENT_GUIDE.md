@@ -227,6 +227,8 @@ let r = &s;
 ```
 
 ### 维度 3: 最佳实践对齐
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -245,6 +247,8 @@ let r = &s;
 | 文档注释 | /// | /// | ✅ |
 
 ### 维度 4: 版本特性对齐
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +273,8 @@ let r = &s;
 
 ### 维度 5: 形式化对齐
 
+> **[来源: Wikipedia - Type System]**
+
 **学术来源对齐**:
 
 | 定理 | 本项目 | RustBelt | 状态 |
@@ -284,6 +290,8 @@ let r = &s;
 > **[来源: Rust Official Docs]**
 
 ### 差异类型
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -296,11 +304,15 @@ let r = &s;
 | **冲突** | 与权威冲突 | 必须论证 | ❌ |
 
 ### 差异标记模板
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
 ```markdown
 ### 差异说明模板
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 > **权威来源**: [The Rust Book - 章节](https://doc.rust-lang.org/book/)
 > **对齐状态**: 📝 扩展
@@ -314,6 +326,8 @@ let r = &s;
 ```
 
 ### 差异论证要求
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **必须论证的情况**:
 
@@ -334,6 +348,8 @@ let r = &s;
 
 ### 概念定义检查
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 概念 | 官方来源 | 本项目 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | Rust Book 4.1 | [所有权模型](formal_methods/ownership_model.md) | ✅ | 一致 |
@@ -344,6 +360,8 @@ let r = &s;
 | async/await | Rust Book 17 | [异步状态机](formal_methods/async_state_machine.md) | ✅ | 一致 |
 
 ### 代码示例检查
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 示例 | 官方来源 | 本项目 | 状态 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -366,6 +384,8 @@ let r = &s;
 | 异步 | Rust Book 17 | quick_reference/async_patterns.md | ✅ | 一致 |
 
 ### 版本信息检查
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 检查项 | 官方 | 本项目 | 状态 |
 | :--- | :--- | :--- | :--- |

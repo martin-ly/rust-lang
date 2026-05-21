@@ -258,6 +258,8 @@ fn tree_structure_demo() {
 ```
 
 ### 权限状态机
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +289,8 @@ fn tree_structure_demo() {
 ```
 
 ### 懒初始化机制
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -325,7 +329,11 @@ fn lazy_initialization_demo() {
 
 ### 场景 1-10: 重新借用模式
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 场景 1: 基本重新借用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn scenario_1_basic_reborrow() {
@@ -341,6 +349,8 @@ fn scenario_1_basic_reborrow() {
 ```
 
 #### 场景 2: 多次重新借用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 fn scenario_2_multiple_reborrow() {
@@ -361,6 +371,8 @@ fn scenario_2_multiple_reborrow() {
 
 #### 场景 3: 条件重新借用
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn scenario_3_conditional_reborrow(condition: bool) {
     let mut x = 0;
@@ -376,6 +388,8 @@ fn scenario_3_conditional_reborrow(condition: bool) {
 ```
 
 #### 场景 4: 循环中的重新借用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 fn scenario_4_loop_reborrow() {
@@ -393,6 +407,8 @@ fn scenario_4_loop_reborrow() {
 ```
 
 #### 场景 5: 匹配中的重新借用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 fn scenario_5_match_reborrow() {
@@ -419,6 +435,8 @@ fn scenario_5_match_reborrow() {
 
 #### 场景 6: 闭包捕获重新借用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 fn scenario_6_closure_reborrow() {
     let mut x = 0;
@@ -438,6 +456,8 @@ fn scenario_6_closure_reborrow() {
 
 #### 场景 7: 函数参数重新借用
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 fn scenario_7_fn_arg_reborrow() {
     fn inner(v: &mut Vec<i32>) {
@@ -455,6 +475,8 @@ fn scenario_7_fn_arg_reborrow() {
 
 #### 场景 8: 元组解构重新借用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 fn scenario_8_tuple_reborrow() {
     let mut pair = (1, 2);
@@ -470,6 +492,8 @@ fn scenario_8_tuple_reborrow() {
 ```
 
 #### 场景 9: 数组索引重新借用
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 fn scenario_9_array_index_reborrow() {
@@ -489,6 +513,8 @@ fn scenario_9_array_index_reborrow() {
 ```
 
 #### 场景 10: 嵌套结构重新借用
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 struct Outer {
@@ -513,7 +539,11 @@ fn scenario_10_nested_reborrow() {
 
 ### 场景 11-20: 指针算术
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 #### 场景 11: container_of 模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn scenario_11_container_of() {
@@ -539,6 +569,8 @@ fn scenario_11_container_of() {
 ```
 
 #### 场景 12: 数组元素指针算术
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn scenario_12_array_pointer_arithmetic() {

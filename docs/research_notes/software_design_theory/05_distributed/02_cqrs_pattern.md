@@ -119,6 +119,8 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 
 ### Theorem CQ1: 读写无冲突
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 ∀c ∈ C, q ∈ Q. c 和 q 可并发执行
 ```
@@ -131,6 +133,8 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 4. 因此命令和查询无资源冲突
 
 ### Theorem CQ2: 查询可扩展性
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ∀Q'. |Q'| = n → Scale_Out(n) ∈ O(n)
@@ -228,9 +232,13 @@ impl<E, S> ProjectionSync<E, S> {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

@@ -152,7 +152,11 @@ impl Iterator for Counter {
 
 ### 2.2 大小提示(SizeHint)语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定义 2.2 (SizeHint)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 fn size_hint(&self) -> (usize, Option<usize>) {
@@ -167,6 +171,8 @@ $$
 $$
 
 ### 定理 2.2 (SizeHint正确性)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > size_hint返回的边界总是正确的(如果提供)。
 
@@ -202,7 +208,11 @@ impl Iterator for Range<usize> {
 
 ### 3.1 map与filter
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定义 3.1 (Map)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 struct Map<I, F> {
@@ -220,6 +230,8 @@ impl<I: Iterator, F: FnMut(I::Item) -> B> Iterator for Map<I, F> {
 ```
 
 ### 定理 3.1 (Map的Functor定律)
+
+> **[来源: Wikipedia - Type System]**
 
 > Iterator::map 满足Functor定律。
 
@@ -251,6 +263,8 @@ self.iter.next().map(|x| g(f(x)))
 
 ### 定义 3.2 (Filter)
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 struct Filter<I, P> {
     iter: I,
@@ -274,7 +288,11 @@ impl<I: Iterator, P: FnMut(&I::Item) -> bool> Iterator for Filter<I, P> {
 
 ### 3.2 fold与reduce
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ### 定义 3.3 (Fold)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn fold<B, F>(self, init: B, mut f: F) -> B

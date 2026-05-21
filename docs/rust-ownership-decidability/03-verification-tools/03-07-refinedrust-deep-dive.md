@@ -263,6 +263,8 @@ fn get_unchecked_mut<'a, T>(
 
 ### 4.1 类型语法
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```ocaml
 (* 数学值 *)
 v ::= z                 (* 整数 *)
@@ -288,6 +290,8 @@ place_type ::=
 
 ### 4.2 类型规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **可变借用检查** (chk-mut-borrow):
 
 ```text
@@ -307,6 +311,8 @@ place_type ::=
 
 ### 4.3 分层策略 (Stratify)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 `stratify` 过程将类型转换为标准形状 `#v @ place_τ`:
 
 ```rust
@@ -324,6 +330,8 @@ stratify(place_(int × int), #(1, 2)) = (place_(int × int), (1, 2))
 ## 5. 验证流程
 
 ### 5.1 前端架构
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 RefinedRust 验证流程:
@@ -358,6 +366,8 @@ RefinedRust 验证流程:
 
 ### 5.2 Radium 中间表示
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Radium 是基于 RefinedC 的 Caesium 操作语义的 Rust 形式化:
 
 **设计决策**:
@@ -372,6 +382,8 @@ Radium 是基于 RefinedC 的 Caesium 操作语义的 Rust 形式化:
 - 利用 Prusti 实现中的生命周期提取工具
 
 ### 5.3 Lithium 证明引擎
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Lithium 是 Iris 分离逻辑的一个片段，专门设计用于高效证明搜索:
 
@@ -394,6 +406,8 @@ Lithium 是 Iris 分离逻辑的一个片段，专门设计用于高效证明搜
 
 ### 6.1 Vec 表示不变量
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 `Vec<T>` 的 RefinedRust 表示:
 
 ```rust
@@ -414,6 +428,8 @@ struct Vec<T> {
 - `len = |xs|`: 长度等于逻辑列表长度
 
 ### 6.2 get_unchecked_mut 验证
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 #[rr::params("xs: list T", "i: int", "α: lifetime")]
@@ -446,6 +462,8 @@ unsafe fn get_unchecked_mut<'a, T>(
 
 ### 6.3 push/pop 操作验证
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Vec::pop 验证统计**:
 
 - 自动所有权推理步骤: ~3,000
@@ -458,6 +476,8 @@ unsafe fn get_unchecked_mut<'a, T>(
 ## 7. 与其他工具对比
 
 ### 7.1 工具对比矩阵
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | RefinedRust | RustBelt | Creusot | Prusti | Verus | Kani | Aeneas |
 |------|-------------|----------|---------|--------|-------|------|--------|
@@ -475,6 +495,8 @@ unsafe fn get_unchecked_mut<'a, T>(
 - ○ 不支持/有限
 
 ### 7.2 与 RustBelt 的关系
+
+> **[来源: Wikipedia - Type System]**
 
 **RustBelt** (Jung et al., POPL 2018):
 

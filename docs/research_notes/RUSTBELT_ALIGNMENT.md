@@ -56,6 +56,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权与借用（RustBelt 核心）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

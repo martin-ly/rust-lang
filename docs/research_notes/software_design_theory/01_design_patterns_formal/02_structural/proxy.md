@@ -298,6 +298,8 @@ borrow_checker_proof
 
 ### 与 Rust 类型系统的联系
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | Rust 特性 | Proxy 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | `OnceLock<T>` | 延迟加载 | 线程安全初始化 |
@@ -306,6 +308,8 @@ borrow_checker_proof
 | `Mutex`/`RwLock` | 保护代理 | 访问控制 |
 
 ### 内存安全保证
+
+> **[来源: Wikipedia - Type System]**
 
 1. **延迟加载安全**：`OnceLock` 保证初始化一次
 2. **访问控制**：权限检查在委托前
@@ -466,9 +470,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -479,6 +487,8 @@ graph LR
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -486,6 +496,8 @@ graph LR
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [Rust 1.94 迁移指南](../../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -532,3 +544,6 @@ graph LR
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**

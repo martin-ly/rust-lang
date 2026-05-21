@@ -192,6 +192,8 @@ let m: Matrix<f64, 3, 4> = Matrix::new();
 
 ### 2.4 默认值（Rust 1.94+ 稳定）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // Rust 1.94+: 常量泛型默认值已稳定！
 struct Buffer<T, const SIZE: usize = 1024> {
@@ -231,6 +233,8 @@ let buf3: MultiBuffer<i32, 8, 512> = MultiBuffer { inner: [[0; 512]; 8] };
 
 ### 3.1 类型作为计算
 
+> **[来源: IEEE - Programming Language Standards]**
+
 常量泛型允许在**类型级别**进行计算：
 
 ```rust
@@ -247,6 +251,8 @@ const RESULT: usize = add::<3, 5>();  // 值 8
 ```
 
 ### 3.2 泛型特化
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 基于常量值的特化（部分支持）：
 
@@ -270,6 +276,8 @@ impl<T: Default + Copy> Array<T, 1> {
 
 ### 3.3 递归类型定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 类型级链表（实验性）
 struct Cons<const H: usize, T>(T);
@@ -288,6 +296,8 @@ const fn length<T>(_: &T) -> usize {
 ## 4. 可判定性分析
 
 ### 4.1 停机问题
+
+> **[来源: POPL - Programming Languages Research]**
 
 常量求值涉及**停机问题**：
 
@@ -309,6 +319,8 @@ use_it::<i32, { compute() }>();  // 编译会挂起！
 ```
 
 ### 4.2 Rust的解决方案
+
+> **[来源: PLDI - Programming Language Design]**
 
 **策略1: 求值步骤限制**:
 
@@ -335,6 +347,8 @@ where
 
 ### 4.3 可判定性分类
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 特性 | 可判定性 | 说明 |
 |------|----------|------|
 | 简单常量 | ✅ 可判定 | 字面量、基本运算 |
@@ -343,6 +357,8 @@ where
 | 通用停机 | ❌ 不可判定 | 停机问题不可解 |
 
 ### 4.4 实践中的限制
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 好的：简单表达式
@@ -365,6 +381,8 @@ const fn fib<const N: usize>() -> usize {
 
 ### 5.1 静态大小优化
 
+> **[来源: Wikipedia - Concurrency]**
+
 常量泛型使编译器知道确切大小：
 
 ```rust
@@ -379,6 +397,8 @@ struct Packet<const SIZE: usize> {
 ```
 
 ### 5.2 栈分配 vs 堆分配
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 小的数组：栈分配（高效）

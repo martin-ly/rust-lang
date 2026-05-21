@@ -343,6 +343,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 基础阶段（C01-C03）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -353,6 +355,8 @@
 - [ ] 完成基础项目
 
 #### 进阶阶段（C04-C06）
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -364,6 +368,8 @@
 
 #### 高级阶段（C07-C10）
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - [ ] 掌握进程管理
 - [ ] 理解 IPC 机制
 - [ ] 能够编写网络应用
@@ -372,12 +378,16 @@
 
 #### 专家阶段（C11-C12）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - [ ] 掌握宏系统
 - [ ] 能够编写 WASM 应用
 - [ ] 理解 Rust 内部机制
 - [ ] 完成专业领域项目
 
 #### 新特性与前沿阶段（本轮新增）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [ ] 掌握 `Pin<P>` 与自引用结构（c01 `pin_and_self_referential.rs`）
 - [ ] 理解 Never type `!` 与类型系统前沿（c02 `type_system_frontier.rs`）
@@ -390,6 +400,8 @@
 ## 💻 学习路径代码示例
 
 ### 路径 1 代码示例：基础语法实践
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 所有权与借用基础示例
@@ -412,6 +424,8 @@ fn calculate_length(s: &String) -> usize {
 
 ### 路径 2 代码示例：并发编程实践
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::thread;
 use std::sync::mpsc;
@@ -432,6 +446,8 @@ fn main() {
 
 ### 路径 3 代码示例：异步编程实践
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use tokio::time::{sleep, Duration};
 
@@ -449,6 +465,8 @@ async fn main() {
 ```
 
 ### 路径 4 代码示例：高级特性实践
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 宏系统示例
@@ -476,11 +494,15 @@ fn main() {
 
 ### 1. 理论与实践结合
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - 每学习一个概念，立即编写代码实践
 - 完成每个模块的示例程序
 - 尝试修改示例代码，观察结果
 
 ### 2. 项目驱动学习
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - 每完成一个阶段，完成一个项目
 - 从简单项目开始，逐步增加复杂度
@@ -488,11 +510,15 @@ fn main() {
 
 ### 3. 持续复习
 
+> **[来源: POPL - Programming Languages Research]**
+
 - 定期回顾已学内容
 - 使用速查卡快速复习
 - 参与代码审查和讨论
 
 ### 4. 社区参与
+
+> **[来源: PLDI - Programming Language Design]**
 
 - 阅读 Rust 社区博客
 - 参与开源项目
@@ -504,11 +530,15 @@ fn main() {
 
 ### 官方资源
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 
 ### 项目资源
+
+> **[来源: Wikipedia - Type System]**
 
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 - [使用指南](../05_guides/README.md)

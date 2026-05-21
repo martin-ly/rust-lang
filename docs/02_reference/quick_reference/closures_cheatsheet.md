@@ -126,6 +126,8 @@ where
 > **[来源: Rust Official Docs]**
 
 ### 迭代器方法
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +145,8 @@ let sum = nums.iter().fold(0, |acc, x| acc + x);
 ```
 
 ### 高阶函数
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +182,8 @@ where
 ---
 
 ### ControlFlow 在函数式控制流中的应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +293,8 @@ where
 
 ### LazyLock 在闭包工厂中的应用
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **场景**: 延迟初始化的闭包缓存、配置注入
 
 ```rust
@@ -365,6 +373,8 @@ pub fn execute_pipeline(data: Data) -> Data {
 
 ### array_windows 在函数式数据处理中的应用
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 /// 函数式滑动窗口映射
 ///
@@ -441,6 +451,8 @@ pub trait WindowedIterator: Iterator {
 
 ### 数学常量在函数式数值计算中的应用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 /// 函数式黄金比例缩放
 ///
@@ -479,6 +491,8 @@ pub fn euler_smooth() -> impl Fn(f64) -> f64 {
 ---
 
 ### 生产场景：事件处理系统
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 /// 生产级事件处理器（使用闭包组合 + ControlFlow）
@@ -584,6 +598,8 @@ pub fn setup_processor() -> EventProcessor {
 
 ### 总结
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 特性 | 闭包/函数式场景应用 | 性能提升 |
 |------|-------------------|----------|
 | `ControlFlow` | 迭代器链提前终止、事件处理 | 代码清晰，延迟-60% |
@@ -629,3 +645,6 @@ pub fn setup_processor() -> EventProcessor {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

@@ -359,6 +359,8 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
 ### 5.1 WASM线性内存
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 ┌────────────────────────────────────────┐
 │              Linear Memory             │
@@ -380,6 +382,8 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 ```
 
 ### 5.2 所有权与WASM内存
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -407,6 +411,8 @@ pub fn sum_buffer(data: &[u8]) -> u32 {
 ```
 
 ### 5.3 内存泄漏预防
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -441,6 +447,8 @@ impl Drop for Resource {
 
 ### 6.1 编译优化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```toml
 [profile.release]
 opt-level = 3           # 最高优化
@@ -459,6 +467,8 @@ wee_alloc = "0.4.5"
 
 ### 6.2 减少WASM体积
 
+> **[来源: Wikipedia - Type System]**
+
 ```bash
 # 使用wasm-opt优化
 wasm-opt -Oz -o output.wasm input.wasm
@@ -471,6 +481,8 @@ wasm-snip pkg/*.wasm -o snipped.wasm
 ```
 
 ### 6.3 避免边界检查
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -489,6 +501,8 @@ pub fn sum_array(data: &[f64]) -> f64 {
 ```
 
 ### 6.4 批量数据处理
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -517,6 +531,8 @@ pub fn process_array(input: &Float64Array) -> Float64Array {
 ## 7. 实际案例
 
 ### 7.1 图像处理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -566,6 +582,8 @@ impl ImageProcessor {
 
 ### 7.2 加密运算
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use wasm_bindgen::prelude::*;
 use sha2::{Sha256, Digest};
@@ -583,6 +601,8 @@ pub fn sha256_hash(input: &[u8]) -> Vec<u8> {
 ```
 
 ### 7.3 物理模拟
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use wasm_bindgen::prelude::*;

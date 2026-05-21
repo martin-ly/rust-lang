@@ -182,6 +182,8 @@
 ---
 
 ### 5. 战略指导 (05_strategic_guidance/)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +202,8 @@
 ---
 
 ### 6. 路线图 (06_roadmaps/)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -218,10 +222,14 @@
 ---
 
 ### 7. 案例研究 (07_case_studies/)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 案例1: Ferrocene认证 (11 KB)
+
+> **[来源: Wikipedia - Concurrency]**
 
 **文档**: [CASE_STUDY_01_FERROCENE_CERTIFICATION.md](07_case_studies/CASE_STUDY_01_FERROCENE_CERTIFICATION.md)
 
@@ -232,6 +240,8 @@
 
 #### 案例2: NASA cFS集成 (11 KB)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **文档**: [CASE_STUDY_02_NASA_CFS_RUST.md](07_case_studies/CASE_STUDY_02_NASA_CFS_RUST.md)
 
 - NASA核心飞行系统
@@ -240,6 +250,8 @@
 - 技术可行性评估
 
 #### 案例3: 汽车ECU应用 (15 KB)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **文档**: [CASE_STUDY_03_AUTOMOTIVE_ECUS.md](07_case_studies/CASE_STUDY_03_AUTOMOTIVE_ECUS.md)
 
@@ -253,6 +265,8 @@
 ---
 
 ### 8. 培训材料 (08_training/)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **文档**: [RUST_SAFETY_CRITICAL_TRAINING_PROGRAM.md](08_training/RUST_SAFETY_CRITICAL_TRAINING_PROGRAM.md) (10 KB)
 
@@ -271,7 +285,11 @@
 
 ### 9. 参考资料 (09_reference/)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 快速参考卡 (23 KB)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **文档**: [QUICK_REFERENCE_CARD.md](09_reference/QUICK_REFERENCE_CARD.md)
 

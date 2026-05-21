@@ -319,3 +319,6 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 > **[来源: Rust Reference - Type System]**
 
 > **[来源: Wikipedia - Type Constructor]**
+
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**

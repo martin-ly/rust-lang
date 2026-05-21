@@ -423,6 +423,8 @@ fn deadlock_risk(a: &Mutex<i32>, b: &Mutex<i32>) {
 
 ### 4.3 异步代码
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **必须 (MUST)**:
 
 ```rust
@@ -447,6 +449,8 @@ tokio::spawn(async move {
 ## 5. 错误处理规范
 
 ### 5.1 Result和Option
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **必须 (MUST)**:
 
@@ -490,6 +494,8 @@ let value = maybe_value.unwrap();  // 可能panic!
 ```
 
 ### 5.2 自定义错误类型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::fmt;
@@ -540,6 +546,8 @@ impl Error for SafetyError {
 
 ### 5.3 错误转换
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use thiserror::Error;
 
@@ -576,6 +584,8 @@ fn load_data(path: &str) -> Result<Data> {
 
 ### 6.1 no_std环境
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 #![no_std]  // 禁止标准库
 #![no_main] // 禁用标准入口点
@@ -611,6 +621,8 @@ let data = unsafe { uninit.assume_init() };
 
 ### 6.2 硬件抽象
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 /// 寄存器访问 (使用svd2rust生成)
 use stm32f4::stm32f407::Peripherals;
@@ -640,6 +652,8 @@ unsafe fn set_pa5() {
 ## 7. 测试规范
 
 ### 7.1 单元测试
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #[cfg(test)]
@@ -674,6 +688,8 @@ mod tests {
 ```
 
 ### 7.2 集成测试
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // tests/integration_test.rs

@@ -235,6 +235,8 @@
 
 ### 1. 周进度跟踪表
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
 
 **内容**：
@@ -244,6 +246,8 @@
 - 进度趋势分析
 
 ### 2. 任务完成度热力图
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
 
@@ -266,11 +270,15 @@
 
 ### 核心文档
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - 任务编排与执行计划 - 包含所有可视化内容
 - [任务清单](./TASK_CHECKLIST.md) - 详细任务列表
 - [进度跟踪](./PROGRESS_TRACKING.md) - 详细进度跟踪
 
 ### 工具资源
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [Mermaid 文档](https://mermaid.js.org/) - 图表绘制工具
 - [Graphviz 文档](https://graphviz.org/) - 图形可视化工具
@@ -281,6 +289,8 @@
 ## 💻 可视化代码示例
 
 ### 示例 1: Mermaid 思维导图代码
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TB

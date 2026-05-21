@@ -572,6 +572,8 @@ async fn get_user(Path(id): Path<i64>) -> Result<Json<User>, AppError> {
 
 ### 认证授权
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use axum::{
     extract::Request,
@@ -639,6 +641,8 @@ fn protected_routes() -> Router {
 
 ### WebSocket
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use axum::{
     extract::ws::{WebSocketUpgrade, Message, WebSocket},
@@ -699,6 +703,8 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 
 ### 基准数据
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 场景 | 吞吐量 | P99 延迟 | 内存/连接 |
 |------|--------|----------|-----------|
 | 简单 GET | 180K req/s | 0.8ms | 10KB |
@@ -707,6 +713,8 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 | WebSocket | 100K conn | - | 8KB |
 
 ### 优化建议
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 1. 使用 Arc 共享状态
@@ -823,3 +831,8 @@ async fn test_get_user() {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

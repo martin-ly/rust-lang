@@ -295,6 +295,8 @@ cargo build -Zbuild-dir-new-layout
 
 ### 2. Section Timings
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **状态**: `-Zsection-timings`
 
 **用途**: 详细编译阶段计时
@@ -308,6 +310,8 @@ cargo build --timings -Zsection-timings
 ## 形式化研究机会
 
 ### 高优先级研究主题
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 主题 | 描述 | 相关文档 |
 | :--- | :--- | :--- |

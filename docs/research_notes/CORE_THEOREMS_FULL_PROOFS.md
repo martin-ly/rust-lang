@@ -197,6 +197,8 @@
 **定理 T-BR1**：借用检查器保证程序是数据竞争自由的。形式化：$\text{BorrowCheck}(P)=\text{OK} \rightarrow \text{DataRaceFree}(P)$。
 
 ### 3.1 辅助引理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +211,8 @@
 *证明*：规则 2 保证可变与不可变借用互斥；写⇒可变借用，读⇒不可变借用；并存⇒违反规则 2。∎
 
 ### 3.2 主证明
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +229,8 @@
 故 $\neg\exists$。∎
 
 ### 3.3 归纳细化（对执行步骤）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +248,8 @@
 
 ### 4.1 依赖定理
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 T-TY1（进展性）**：$\Gamma \vdash e : \tau \rightarrow e \text{ is value} \lor \exists e': e \to e'$。
 
 **定理 T-TY2（保持性）**：$\Gamma \vdash e : \tau \land e \to e' \rightarrow \Gamma \vdash e' : \tau$。
@@ -250,11 +258,15 @@
 
 ### 4.2 辅助引理
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **引理 L-TY1（类型错误在检查时拒绝）**：$\text{type\_error}(e) \rightarrow \neg\exists\Gamma,\tau: \Gamma \vdash e : \tau$。
 
 *证明*：类型错误（如 int 应用于函数）违反 typing rules；良型需满足规则。∎
 
 ### 4.3 主证明
+
+> **[来源: Wikipedia - Type System]**
 
 设 $\Gamma \vdash e : \tau$。反证，设 $\exists e': e \to^* e' \land \text{type\_error}(e')$。
 

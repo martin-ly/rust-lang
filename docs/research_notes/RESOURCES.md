@@ -252,6 +252,8 @@
 
 ### 性能分析工具
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - **Criterion.rs**
   - 链接: <https://github.com/bheisler/criterion.rs>
   - 描述: Rust 的基准测试框架
@@ -269,6 +271,8 @@
 
 ### 内存分析工具
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **Miri**
   - 链接: <https://github.com/rust-lang/miri>
   - 描述: Rust 的 MIR 解释器
@@ -285,6 +289,8 @@
   - 相关: [工具使用指南 - heaptrack](./TOOLS_GUIDE.md#heaptrack)
 
 ### 代码分析工具
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - **Clippy**
   - 链接: <https://github.com/rust-lang/rust-clippy>
@@ -307,6 +313,8 @@
 
 ### 社区论坛
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **Rust Users Forum**
   - 链接: <https://users.rust-lang.org/>
   - 描述: Rust 用户讨论论坛
@@ -320,6 +328,8 @@
   - 描述: Rust 社区讨论
 
 ### 社区项目
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **Awesome Rust**
   - 链接: <https://github.com/rust-unofficial/awesome-rust>
@@ -335,6 +345,8 @@
 
 ### 在线课程
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **Rustlings**
   - 链接: <https://github.com/rust-lang/rustlings>
   - 描述: Rust 编程练习
@@ -344,6 +356,8 @@
   - 描述: Rust 实践练习
 
 ### 书籍
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **The Rust Programming Language**
   - 作者: Steve Klabnik, Carol Nichols
@@ -364,6 +378,8 @@
 
 ### 官方博客
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - **Rust Blog**
   - 链接: <https://blog.rust-lang.org/>
   - 描述: Rust 官方博客
@@ -373,6 +389,8 @@
   - 描述: Rust 内部开发博客
 
 ### 社区博客
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **This Week in Rust**
   - 链接: <https://this-week-in-rust.org/>
@@ -403,6 +421,8 @@
 ## 🔗 相关资源 {#-相关资源}
 
 ### 核心文档
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [主索引](./README.md) - 完整的研究笔记索引
 - [工具使用指南](./TOOLS_GUIDE.md) - 研究工具详细指南

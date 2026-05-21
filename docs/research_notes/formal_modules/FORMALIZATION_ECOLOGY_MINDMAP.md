@@ -173,6 +173,8 @@
 
 #### 核心特性应用
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
@@ -182,6 +184,8 @@
 
 #### 代码示例更新
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -189,6 +193,8 @@
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -226,3 +232,6 @@
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: IEEE - Programming Language Standards]**

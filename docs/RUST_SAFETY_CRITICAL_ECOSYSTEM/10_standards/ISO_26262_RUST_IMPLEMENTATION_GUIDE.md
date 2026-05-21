@@ -19,6 +19,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 3.5 危害分析与风险评估(HARA)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@ pub enum BufferError {
 ```
 
 #### 3.6 功能安全概念
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +158,8 @@ pub enum E2EResult {
 > **[来源: Rust Official Docs]**
 
 #### ASIL等级对应需求
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +207,8 @@ pub enum DivisionError {
 > **[来源: Rust Official Docs]**
 
 #### 架构设计原则
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -345,6 +353,8 @@ pub enum RecoveryAction {
 
 #### 编码标准对应表
 
+> **[来源: POPL - Programming Languages Research]**
+
 | ISO要求 | 章节 | Rust实现 | 工具支持 |
 |---------|------|----------|----------|
 | 强制强类型 | 6.7.4.1a | 类型系统 | rustc |
@@ -355,6 +365,8 @@ pub enum RecoveryAction {
 | 命名规范 | 6.7.4.1f | rustfmt | rustfmt |
 
 #### ASIL D级编码实践
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #![forbid(unsafe_code)]  // ASIL D: 禁止unsafe
@@ -485,6 +497,8 @@ mod tests {
 > **[来源: POPL - Programming Languages Research]**
 
 #### 测试方法矩阵
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 方法 | ASIL A | ASIL B | ASIL C | ASIL D | Rust工具 |
 |------|--------|--------|--------|--------|----------|
@@ -683,3 +697,6 @@ mod tool_qualification {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Type System]**

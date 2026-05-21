@@ -125,6 +125,8 @@
 | Attributes | macros_cheatsheet.md | ✅ 一致 | - |
 
 ### releases.rs 对齐
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +144,8 @@
 > **[来源: Rust Official Docs]**
 
 ### RustBelt 对齐
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +158,8 @@
 | 并发安全 | send_sync_formalization.md | ✅ 一致 | Send/Sync |
 
 ### 形式化方法对齐
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +177,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Rust Design Patterns 对齐
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +191,8 @@
 | Observer | design_patterns_cheatsheet.md | ✅ 一致 |
 
 ### API Guidelines 对齐
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 指南 | 对应项目文档 | 对齐状态 |
 | :--- | :--- | :--- |

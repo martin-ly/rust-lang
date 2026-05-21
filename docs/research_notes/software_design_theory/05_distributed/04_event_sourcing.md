@@ -37,6 +37,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def ES1: Event Sourcing
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -52,6 +54,8 @@ EventSourcing := (E, S, apply, snapshot)
 ```
 
 ### Def ES2: 事件不变性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +130,8 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 4. 因此给定相同事件序列，总能重建相同状态
 
 ### Theorem ES2: 审计完整性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 ∀t. 历史状态 State(t) 可查询

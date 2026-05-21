@@ -91,6 +91,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 多级队列调度
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -129,6 +131,8 @@ pub struct GlobalQueue {
 ```
 
 ### 2.2 任务窃取算法
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 impl LocalQueue {
@@ -184,6 +188,8 @@ impl LocalQueue {
 | 远程steal | FIFO | 减少竞争，窃取较旧的任务 |
 
 ### 2.3 调度策略
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 /// 工作线程主循环

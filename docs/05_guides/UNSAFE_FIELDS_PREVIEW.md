@@ -166,6 +166,8 @@ pub struct KernelBuffer {
 ```
 
 ### 访问规则
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +193,8 @@ impl KernelBuffer {
 ```
 
 ### 模式匹配
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +273,8 @@ Unsafe Fields 模型:
 
 ### 已知的设计问题
 
+> **[来源: Wikipedia - Memory Safety]**
+
 1. **与 `Drop` 的交互**: `unsafe field` 的析构是否也需要 `unsafe`?
 2. **与 `union` 的关系**: `union` 的字段是否默认 unsafe?
 3. **可见性**: `unsafe field` 的可见性如何与 `pub` / `priv` 交互?
@@ -281,6 +287,8 @@ Unsafe Fields 模型:
 Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 
 ### Linux 内核的需求
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 内核编程的典型场景:

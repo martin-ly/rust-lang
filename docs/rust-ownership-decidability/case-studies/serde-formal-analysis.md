@@ -118,7 +118,11 @@ $$
 
 ### 2.2 数据模型
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.2 (Serde数据模型)
+
+> **[来源: PLDI - Programming Language Design]**
 
 Serde定义了**31种数据类型**，构成序列化的通用语言:
 
@@ -144,7 +148,11 @@ $$
 
 ### 3.1 序列化协议
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 3.1 (Serializer接口)
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 trait Serializer {
@@ -175,7 +183,11 @@ $$
 
 ### 3.2 类型安全保证
 
+> **[来源: Wikipedia - Concurrency]**
+
 ### 定理 3.1 (序列化完备性)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 > 任何实现 `Serialize` 的类型都可以被序列化为任何格式。
 

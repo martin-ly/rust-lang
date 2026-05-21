@@ -107,6 +107,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 第1周：所有权与借用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +131,8 @@
 - 检验: 能读懂简单生命周期标注
 
 #### 第2周：类型系统与安全保证
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +152,8 @@
 - 理解: 编译器阻止哪些错误
 
 #### 第3-4周：实践与深化
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +201,8 @@
 
 #### 第1-2周：形式化基础
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **主题**: 形式化方法入门
 
 - 阅读: [认知论证框架](./COGNITIVE_ARGUMENTATION_FRAMEWORK.md)
@@ -202,6 +210,8 @@
 - 理解: L1/L2/L3的区别
 
 #### 第3-4周：核心定理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **主题**: 所有权与借用的形式化
 

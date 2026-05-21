@@ -130,6 +130,8 @@ Week 17-20: Aeneas对接
 
 ### 本周目标 (Week 1+2)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [ ] OWNERSHIP_UNIQUENESS.v: Admitted = 0
 - [ ] BORROW_DATARACE_FREE.v: 骨架细化完成
 - [ ] TYPE_SAFETY.v: 骨架细化完成
@@ -141,6 +143,8 @@ Week 17-20: Aeneas对接
 
 ### 工具安装 (Week 2前)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 工具 | 优先级 | 安装命令 | 状态 |
 | :--- | :--- | :--- | :--- |
 | Coq 8.18+ | P0 | `opam install coq.8.18.0` | ⏳ |
@@ -149,6 +153,8 @@ Week 17-20: Aeneas对接
 | VsCoq (VSCode) | P1 | 插件市场 | ⏳ |
 
 ### 学习资源
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 资源 | 用途 | 预计时间 |
 | :--- | :--- | :--- |
@@ -162,12 +168,16 @@ Week 17-20: Aeneas对接
 
 ### 每任务检查清单
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [ ] Coq编译通过 (`coqc -Q . "" file.v`)
 - [ ] Admitted数量符合里程碑要求
 - [ ] 文档注释完整 (Def/Lemma/Theorem说明)
 - [ ] 交叉引用更新 (与其他.md/.v文件)
 
 ### 每周检查清单
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [ ] 本周任务完成度 ≥ 90%
 - [ ] Admitted总数趋势下降

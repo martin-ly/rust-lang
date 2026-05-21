@@ -51,6 +51,8 @@
 > **[来源: Rust Official Docs]**
 
 ### ✅ 核心内容 (100%)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -66,6 +68,8 @@
 
 ### ✅ 思维表征 (100%)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 类别 | 计划 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 思维导图 | 15 | 15 | ✅ |
@@ -75,6 +79,8 @@
 | 应用树 | 8 | 8 | ✅ |
 
 ### ✅ 实用资源 (100%)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 类别 | 计划 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -90,6 +96,8 @@
 ## 质量验证
 
 ### 内容完整性验证 ✅
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |

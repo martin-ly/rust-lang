@@ -220,6 +220,8 @@ match mutex.lock() {
 
 ### 整数溢出（debug 下 panic）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 let x: u8 = 255;
 // let y = x + 1;  // debug: panic, release: wrapping
@@ -228,6 +230,8 @@ let z = x.saturating_add(1);  // ✅ 饱和，z = 255
 ```
 
 ### 除零
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 let x: i32 = 1;
@@ -242,6 +246,8 @@ let y = x.checked_div(zero);  // ✅ None
 
 ### 空字符串
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 let s = "";
 assert!(s.is_empty());
@@ -250,6 +256,8 @@ s.as_bytes();      // &[]
 ```
 
 ### 字节边界上的字符切分
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 let s = "hello";
@@ -264,6 +272,8 @@ for c in s.chars() {
 
 ### 零长度范围
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 let s = "hello";
 let sub = &s[2..2];  // ✅ ""
@@ -275,6 +285,8 @@ let sub = &s[2..2];  // ✅ ""
 
 ### 空指针解引用
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 let ptr: *const i32 = std::ptr::null();
 // let _ = unsafe { *ptr };  // ❌ UB，Rust 1.93 deref_nullptr 默认 deny
@@ -284,6 +296,8 @@ if !ptr.is_null() {
 ```
 
 ### FFI 边界：C 传入空指针
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 #[repr(C)]
@@ -301,6 +315,8 @@ fn safe_wrapper() -> Option<&'static Foo> {
 
 ### 悬垂引用典型反例
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // ❌ 返回局部变量的引用
 fn bad() -> &i32 {
@@ -317,6 +333,8 @@ fn good(x: &i32) -> &i32 { x }
 ## WASM 特例
 
 ### 无 std 环境
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #![no_std]

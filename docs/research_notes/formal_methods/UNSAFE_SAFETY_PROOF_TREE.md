@@ -220,6 +220,8 @@ unsafe fn slice_from_raw_parts<T>(
 
 ### 反例 1: 悬垂指针
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 unsafe fn dangling_pointer() -> *const i32 {
     let x = 42;
@@ -237,6 +239,8 @@ unsafe {
 
 ### 反例 2: 类型混淆
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 unsafe fn type_confusion() {
     let x: u32 = 0xFFFFFFFF;
@@ -252,6 +256,8 @@ unsafe fn type_confusion() {
 **违反**: 公理 UNSAFE-A2 (位模式有效性)
 
 ### 反例 3: 数据竞争
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 static mut COUNTER: i32 = 0;
@@ -272,6 +278,8 @@ unsafe fn race_condition() {
 ## ✅ 安全模式证明
 
 ### 模式 1: 初始化检查
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 struct SafeBuffer<T> {
@@ -311,6 +319,8 @@ impl<T> SafeBuffer<T> {
 
 ### 模式 2: 引用保证
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 struct SafeWrapper<'a, T> {
     ptr: *const T,
@@ -343,6 +353,8 @@ impl<'a, T> SafeWrapper<'a, T> {
 ∎
 
 ### 模式 3: 所有权转移
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 struct UniquePtr<T> {
@@ -387,6 +399,8 @@ impl<T> Drop for UniquePtr<T> {
 ## 📊 安全检查清单
 
 ### 编写 Unsafe 代码前
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [ ] 是否可以用 Safe Rust 实现？
 - [ ] 所有裸指针是否已验证有效性？

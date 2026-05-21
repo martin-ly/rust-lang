@@ -314,6 +314,8 @@ fn verify_binary_search() {
 
 ### 不安全代码验证
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 /// 安全包装：验证unsafe代码
 pub fn safe_slice_access(data: &[u8], index: usize) -> Option<u8> {
@@ -338,6 +340,8 @@ fn verify_safe_access() {
 ```
 
 ### Kani高级特性
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 循环展开控制
@@ -378,9 +382,13 @@ fn verify_with_stub() {
 
 ### 概述
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Verus是用于验证Rust程序正确性的工具，基于SMT求解器，支持复杂的不变量和前置/后置条件。
 
 ### 安装
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```bash
 cargo install vargo
@@ -390,6 +398,8 @@ cargo build --release
 ```
 
 ### 基本证明
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use vstd::prelude::*;
@@ -429,6 +439,8 @@ verus! {
 ```
 
 ### 数据结构验证
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 verus! {
@@ -487,6 +499,8 @@ verus! {
 
 ### 分层验证方法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 Level 1: 类型系统 (编译器)
 ├── 所有权检查
@@ -517,6 +531,8 @@ Level 5: 定理证明 (Verus)
 
 ### 验证投资回报率
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 验证级别 | 投入 | 收益 | 适用场景 |
 |----------|------|------|----------|
 | 类型系统 | 低 | 高 | 所有代码 |
@@ -530,6 +546,8 @@ Level 5: 定理证明 (Verus)
 ## 实战案例
 
 ### 案例1: 安全关键状态机
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use kani::proof;

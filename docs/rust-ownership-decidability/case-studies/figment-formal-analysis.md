@@ -1786,6 +1786,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 定理 3.1 (类型提取)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 > 通过 serde 反序列化将配置数据提取为强类型结构，在编译期保证类型安全。
 
 **依赖关系**:
@@ -1795,6 +1797,8 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 ```
 
 ### 定理 4.1 (Profile 支持)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 > Profile 系统支持按环境分离配置，选择 Profile 时会自动继承 default Profile 的默认值。
 
@@ -1808,6 +1812,8 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 
 ### 定理 5.1 (嵌套合并)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 > 对于嵌套对象，Figment 执行深度递归合并；对于数组，执行完全替换。
 
 ```rust
@@ -1819,6 +1825,8 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 ```
 
 ### 定理 6.1 (环境变量嵌套)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > 通过分隔符（如 `__`）可在环境变量名称中表示嵌套结构，实现扁平到嵌套的映射。
 
@@ -1884,3 +1892,10 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

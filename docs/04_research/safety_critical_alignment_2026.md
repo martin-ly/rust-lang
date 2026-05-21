@@ -125,6 +125,8 @@ MISRA Rust 是汽车/航空领域的事实标准编码规范。
 
 ### 4.1 规则分类矩阵
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 类别 | MISRA 规则数 | 项目覆盖 | 缺口 |
 |:---|:---:|:---:|:---|
 | **语法约束** ( forbid 某些模式) | 15 | 8 | 7 条未覆盖 |
@@ -134,6 +136,8 @@ MISRA Rust 是汽车/航空领域的事实标准编码规范。
 | **文档要求** (Safety Comment) | 5 | 2 | 3 条未覆盖 |
 
 ### 4.2 关键规则示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **MISRA-Rust-Dir-4.1**: `unsafe` 代码必须被隔离到最小模块
 

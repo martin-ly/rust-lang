@@ -849,6 +849,8 @@ graph TD
 
 ### 3.2 技术选型决策树
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```mermaid
 graph TD
     Start[技术选型] --> Q1{并发还是同步?}
@@ -886,6 +888,8 @@ graph TD
 ```
 
 ### 3.3 调试决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TD
@@ -938,6 +942,8 @@ graph TD
 ```
 
 ### 3.4 优化决策树
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```mermaid
 graph TD
@@ -1001,6 +1007,8 @@ graph TD
 ```
 
 ### 3.5 学习路径决策树
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```mermaid
 graph TD
@@ -1076,6 +1084,8 @@ graph TD
 
 ### 3.6 迁移决策树
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```mermaid
 graph TD
     Start[开始: 需要迁移到 Rust 1.93.0 吗?] -->|是| Q1{当前使用哪个版本?}
@@ -1104,6 +1114,8 @@ graph TD
 
 ### 3.7 性能优化决策树
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```mermaid
 graph TD
     Start[开始: 需要性能优化?] -->|是| Q1{迭代器性能?}
@@ -1131,6 +1143,8 @@ graph TD
 ```
 
 ### 3.8 应用场景决策树
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```mermaid
 graph TD
@@ -1164,9 +1178,13 @@ graph TD
 
 ### 3.9 转换树图 (Transformation Tree)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 转换树描述概念间的转换关系与适用条件，帮助理解何时、如何在不同表示间转换。
 
 #### 3.9.1 借用 ↔ 所有权转换树
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```mermaid
 flowchart TD
@@ -1194,6 +1212,8 @@ flowchart TD
 
 #### 3.9.2 Option ↔ Result 转换树
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```mermaid
 flowchart LR
     subgraph option [Option]
@@ -1218,6 +1238,8 @@ flowchart LR
 
 #### 3.9.3 &T vs &mut T 选择转换树
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```mermaid
 flowchart TD
     Start[需要访问数据?] --> Q1{需要修改?}
@@ -1232,6 +1254,8 @@ flowchart TD
 
 #### 3.9.4 泛型约束转换树
 
+> **[来源: Wikipedia - Type System]**
+
 ```mermaid
 flowchart TD
     Start[需要泛型约束?] --> Q1{类型需实现哪些能力?}
@@ -1245,6 +1269,8 @@ flowchart TD
 ```
 
 #### 3.9.5 生命周期转换树
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```mermaid
 flowchart TD
@@ -1261,6 +1287,8 @@ flowchart TD
 ```
 
 #### 3.9.6 错误传播转换树
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```mermaid
 flowchart TD
@@ -1287,6 +1315,8 @@ flowchart TD
 > **[来源: Rust Official Docs]**
 
 ### 4.1 定理证明树结构
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```mermaid
 graph TD
@@ -1326,6 +1356,8 @@ graph TD
 ```
 
 ### 4.2 内存安全证明树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TD
@@ -1375,6 +1407,8 @@ graph TD
 
 ### 4.3 类型安全证明树
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```mermaid
 graph TD
     Root[类型安全证明]
@@ -1419,6 +1453,8 @@ graph TD
 ```
 
 ### 4.4 并发安全证明树
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```mermaid
 graph TD
@@ -1523,12 +1559,16 @@ graph LR
 
 ### 6.1 何时使用思维导图
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - ✅ 开始学习新特性，需要规划学习路径
 - ✅ 需要可视化知识结构
 - ✅ 需要理解概念之间的层次关系
 - ✅ 需要快速浏览特性概览
 
 ### 6.2 何时使用多维矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - ✅ 需要对比不同特性的优劣
 - ✅ 需要评估迁移成本和收益

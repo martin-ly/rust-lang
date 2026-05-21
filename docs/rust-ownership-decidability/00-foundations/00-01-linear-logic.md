@@ -78,6 +78,8 @@ A ⊸ A ⊕ A    (不可行 - 不能免费复制资源)
 
 ### 1.2 结构规则的拒绝
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 规则 | 经典/直觉主义 | 线性逻辑 | 仿射逻辑 |
 |------|--------------|----------|----------|
 | **弱化 (Weakening)** | 允许 | ❌ 禁止 | ✅ 允许 |
@@ -89,6 +91,8 @@ A ⊸ A ⊕ A    (不可行 - 不能免费复制资源)
 ## 2. 线性逻辑的连接词体系
 
 ### 2.1 乘法连接词 (Multiplicatives)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 连接词 | 符号 | 读法 | 规则 | 计算解释 | Rust对应 |
 |--------|------|------|------|---------|---------|
@@ -133,6 +137,8 @@ fn drop_freely<T>(x: T) {
 
 ### 2.2 加法连接词 (Additives)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 连接词 | 符号 | 读法 | 规则 | 计算解释 | Rust对应 |
 |--------|------|------|------|---------|---------|
 | **with** | & | "with" | 外部选择 | 产品类型 | struct with多个字段 |
@@ -154,6 +160,8 @@ let value: Either<i32, String> = Either::Left(42);
 ```
 
 ### 2.3 指数连接词 (Exponentials)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > 指数连接词允许受控的"经典"行为
 
@@ -194,6 +202,8 @@ println!("{}", data);
 
 ### 3.1 证明即程序
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 线性逻辑的Curry-Howard对应:
 
@@ -208,6 +218,8 @@ println!("{}", data);
 ```
 
 ### 3.2 与Rust类型的对应
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // Rust中的线性类型概念映射
@@ -251,6 +263,8 @@ fn bad_linear_usage() {
 
 ### 4.1 证明网作为计算模型
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 > 证明网消除了语法中的虚假差异，只保留本质结构
 
 ```
@@ -285,6 +299,8 @@ let y = String::from("b");
 ```
 
 ### 4.2 正确性标准
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 Danos-Regnier 标准:

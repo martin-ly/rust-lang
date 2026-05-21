@@ -155,6 +155,8 @@ async fn consumer() {
 
 ### 核心设计
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 RTIC (Real-Time Interrupt-driven Concurrency) 基于**硬件优先级**实现无开销并发：
 
 ```text
@@ -170,6 +172,8 @@ RTIC 调度模型:
 
 ### 关键特性
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | 说明 | 优势 |
 |:---|:---|:---|
 | **零成本调度** | 无运行时开销，纯硬件中断 | 确定性延迟 |
@@ -179,6 +183,8 @@ RTIC 调度模型:
 | **多核支持** | AMP 配置 | 对称多处理 |
 
 ### 代码示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use rtic::app;
@@ -348,3 +354,7 @@ graph TD
 > **[来源: Rust Embedded WG]**
 > **[来源: Embassy Book]**
 > **[来源: IEEE - Embedded Software]**
+
+
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

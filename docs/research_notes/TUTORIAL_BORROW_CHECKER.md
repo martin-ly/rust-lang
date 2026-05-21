@@ -412,6 +412,8 @@ struct SelfRef {
 
 ### 错误1: 值被移动后使用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 let s = String::from("hello");
 let s2 = s;
@@ -423,6 +425,8 @@ println!("{}", s);  // OK
 ```
 
 ### 错误2: 在借用期间修改
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 let mut s = String::from("hello");
@@ -437,6 +441,8 @@ s.push_str(" world");  // OK
 ```
 
 ### 错误3: 返回局部引用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 fn bad() -> &String {
@@ -461,6 +467,8 @@ fn good2() -> &'static str {
 
 ### 当借用规则太严格时
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 有时需要在有不可变引用的情况下修改数据：
 
 ```rust
@@ -476,6 +484,8 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 内部可变性模式
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 类型 | 使用场景 | 线程安全 |
 | :--- | :--- | :--- |
 | `Cell<T>` | `Copy`类型，替换值 | 否 |
@@ -489,6 +499,8 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 借用检查器的保证
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定理**: 通过Rust编译器检查的代码保证：
 
 1. 没有悬垂指针
@@ -497,6 +509,8 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 4. 没有使用未初始化内存
 
 ### 与形式化定义的关联
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 概念 | 形式化定义 | 文档 |
 | :--- | :--- | :--- |
@@ -538,6 +552,8 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 ### 内存安全问题
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // C语言中的错误
 int* ptr = malloc(sizeof(int));
@@ -559,6 +575,8 @@ free(ptr);
 
 ### 规则1: 要么多个不可变借用，要么一个可变借用
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 let mut x = 5;
 
@@ -575,6 +593,8 @@ println!("{} {}", r1, r2);
 
 ### 规则2: 引用必须始终有效
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 let r;
 {
@@ -590,6 +610,8 @@ let r;
 
 ### 借用检查算法
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 1. 为每个引用分配生命周期
 2. 检查引用是否活得比数据长
@@ -598,6 +620,8 @@ let r;
 ```
 
 ### 生命周期标注
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {

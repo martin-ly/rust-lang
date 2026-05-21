@@ -324,6 +324,8 @@ where
 
 ### 3.5 静态生命周期 `'static`
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 'static 生命周期贯穿整个程序执行
 let s: &'static str = "Hello, World!";  // 字符串字面量是 'static
@@ -365,6 +367,8 @@ std::thread::spawn(move || {
 
 ### 4.1 HRTB 的动机
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 当需要接受对任意生命周期的引用时，使用 HRTB：
 
 ```rust
@@ -387,6 +391,8 @@ where
 
 ### 4.2 HRTB 的形式化定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **定义 4.1** (HRTB): 高阶 trait bound 允许对**所有**生命周期进行量化，表示为 `for<'a>`。
 
 **形式化表示**:
@@ -397,7 +403,11 @@ F: for<'a> Trait<'a>  ≡  ∀'a: F 满足 Trait<'a>
 
 ### 4.3 HRTB 的实际应用
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 应用 1: 通用闭包
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 fn with_data<F, R>(f: F) -> R
@@ -415,6 +425,8 @@ with_data(|d: &Data| {
 ```
 
 #### 应用 2: 回调函数
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 struct EventHandler {

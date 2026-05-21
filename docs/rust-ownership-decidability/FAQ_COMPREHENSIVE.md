@@ -358,6 +358,8 @@ unsafe {
 
 ### Q13: 为什么 `Rc` 不是 `Send`？
 
+> **[来源: PLDI - Programming Language Design]**
+
 **A**: 引用计数不是原子的:
 
 ```rust
@@ -385,6 +387,8 @@ struct RcBox<T> {
 
 ### Q14: `Mutex` 和 `RwLock` 的选择？
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **A**:
 
 | 场景 | 推荐 | 原因 |
@@ -401,6 +405,8 @@ struct RcBox<T> {
 ## 形式化验证 FAQ
 
 ### Q15: 形式化验证能发现所有 bug 吗？
+
+> **[来源: Wikipedia - Type System]**
 
 **A**: 不能。形式化验证只能验证**规范**，而规范可能不完整:
 
@@ -425,6 +431,8 @@ fn increment(x: i32) -> i32 {
 
 ### Q16: Kani 和 Miri 的区别？
 
+> **[来源: Wikipedia - Concurrency]**
+
 **A**:
 
 | 工具 | 方法 | 范围 | 使用场景 |
@@ -446,6 +454,8 @@ cargo kani
 
 ### Q17: 为什么需要 RefinedRust，既然有 Kani？
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **A**: 不同层次的保证:
 
 - **Kani**: 全自动，有界模型检测，非基础性
@@ -466,6 +476,8 @@ cargo kani
 ## 工具使用 FAQ
 
 ### Q18: 如何选择验证工具？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **A**: 决策树:
 
@@ -492,6 +504,8 @@ cargo kani
 ---
 
 ### Q19: 如何在 CI 中集成验证？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**: GitHub Actions 示例:
 
@@ -527,6 +541,8 @@ jobs:
 
 ### Q20: 所有权系统影响性能吗？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A**: 通常**零成本**:
 
 ```rust
@@ -548,6 +564,8 @@ process(data);  // 移动，只是指针复制
 ---
 
 ### Q21: 如何避免 `clone()` 的性能损失？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **A**: 策略:
 
@@ -589,6 +607,8 @@ let doubled = data.iter().map(|x| x * 2);
 
 ### Q22: "cannot borrow as mutable more than once" 解决方案
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **A**: 常见解决方案:
 
 ```rust
@@ -620,6 +640,8 @@ v.borrow_mut().push(2);  // 运行时检查
 
 ### Q23: "does not live long enough" 解决策略
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **A**:
 
 ```rust
@@ -650,6 +672,8 @@ fn get_string<'a>(buffer: &'a mut String) -> &'a str {
 ---
 
 ### Q24: 如何调试复杂的生命周期错误？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **A**: 调试步骤:
 

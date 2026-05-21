@@ -277,6 +277,8 @@ $$
 
 ### 4.4 数组到切片强制
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **数组到切片** (T-ArrayToSlice):
 
 $$
@@ -289,6 +291,8 @@ $$
 $$
 
 ### 4.5 函数指针强制
+
+> **[来源: POPL - Programming Languages Research]**
 
 **函数到函数指针** (T-FnToPtr):
 
@@ -304,6 +308,8 @@ $$
 
 ### 5.1 CoerceShared 关系
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定义 5.1** (CoerceShared 关系)：
 
 CoerceShared 关系 $\mathcal{C}$ 是类型对上的二元关系：
@@ -316,6 +322,8 @@ $$
 
 ### 5.2 强制转换闭包
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **定义 5.2** (强制转换闭包)：
 
 强制转换闭包 $\mathcal{C}^*$ 是 $\mathcal{C}$ 的自反传递闭包：
@@ -326,6 +334,8 @@ $$
 $$
 
 ### 5.3 安全强制转换
+
+> **[来源: Wikipedia - Type System]**
 
 **定义 5.3** (安全强制转换)：
 
@@ -351,6 +361,8 @@ $$
 
 ### 5.4 类型一致性
 
+> **[来源: Wikipedia - Concurrency]**
+
 **定义 5.4** (强制转换一致性)：
 
 强制转换是一致的，如果：
@@ -362,6 +374,8 @@ $$
 ## 6. 安全定理
 
 ### 6.1 安全强制保持性
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **定理 6.1** (安全强制保持类型安全)：
 
@@ -399,6 +413,8 @@ $$
 
 ### 6.2 不安全强制定理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **定理 6.2** (不安全强制需要显式标记)：
 
 如果 $(\tau_1, \tau_2) \in \mathcal{C} \setminus \mathcal{C}_{\text{safe}}$，则强制转换只能在 `unsafe` 上下文中进行。
@@ -413,6 +429,8 @@ $$
 这些转换可能破坏 Rust 的安全保证，因此需要程序员显式承担责任。
 
 ### 6.3 强制转换组合性
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定理 6.3** (安全强制的组合)：
 

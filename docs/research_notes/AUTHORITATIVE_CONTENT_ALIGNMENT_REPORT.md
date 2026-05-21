@@ -81,6 +81,8 @@
 ---
 
 ### Ch 4: 所有权 (核心章节)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +102,8 @@
 
 ### Ch 10-11: 泛型与Trait
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
 | 10.1 Generic Data Types | type_system_foundations.md | ✅ | 系统F形式化 |
@@ -112,6 +116,8 @@
 ---
 
 ### Ch 15: 智能指针
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
@@ -131,6 +137,8 @@
 
 ### Ch 16: 无畏并发
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
 | :--- | :--- | :--- | :--- |
 | 16.1 Threads | C05/threads_concurrency/ | ✅ | 线程模型 |
@@ -143,6 +151,8 @@
 ---
 
 ### Ch 17: 异步编程 (2024 Edition新增)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |
 | :--- | :--- | :--- | :--- |
@@ -164,6 +174,8 @@
 
 ### 类型系统
 
+> **[来源: POPL - Programming Languages Research]**
+
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |
 | Types | type_system_foundations.md | ✅ |
@@ -174,6 +186,8 @@
 | Const Generics | CONST_EVALUATION.md | ✅ |
 
 ### 所有权与借用
+
+> **[来源: PLDI - Programming Language Design]**
 
 | Reference主题 | 本项目文档 | 状态 |
 | :--- | :--- | :--- |

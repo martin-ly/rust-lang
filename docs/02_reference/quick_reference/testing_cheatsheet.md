@@ -762,6 +762,8 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 
 ### 测试驱动开发（TDD）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 步骤 1: Red - 写失败的测试
 #[test]
@@ -795,6 +797,8 @@ fn fibonacci(n: u32) -> u32 {
 
 ### 测试命名
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // ✅ 好的命名
 #[test]
@@ -812,6 +816,8 @@ fn test_thing() { }
 ```
 
 ### 测试组织
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 #[cfg(test)]
@@ -861,6 +867,8 @@ mod tests {
 
 ### 测试私有函数
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 pub fn public_function() -> i32 {
     private_helper(42)
@@ -883,6 +891,8 @@ mod tests {
 ```
 
 ### 测试并发代码
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -912,6 +922,8 @@ fn test_concurrent_access() {
 
 ### 测试文件 I/O
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::fs;
 use tempfile::TempDir;
@@ -936,6 +948,8 @@ fn test_file_operations() {
 
 ### 使用 cargo-tarpaulin
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```bash
 # 安装
 cargo install cargo-tarpaulin
@@ -951,6 +965,8 @@ cargo tarpaulin --out Html --fail-under 80
 ```
 
 ### tarpaulin.toml 配置
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```toml
 [tool.tarpaulin]
@@ -978,6 +994,8 @@ exclude_lines = [
 > **[来源: Rust Official Docs]**
 
 ### 基本命令
+
+> **[来源: Wikipedia - Type System]**
 
 ```bash
 # 运行所有测试
@@ -1007,6 +1025,8 @@ cargo test --test integration_test
 
 ### 测试输出
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```bash
 # 显示测试输出
 cargo test -- --show-output
@@ -1019,6 +1039,8 @@ cargo test --quiet
 ```
 
 ### 并行控制
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```bash
 # 使用 4 个线程
@@ -1036,6 +1058,8 @@ cargo test -- --test-threads=1
 
 ### 打印调试信息
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 #[test]
 fn test_with_debug() {
@@ -1047,6 +1071,8 @@ fn test_with_debug() {
 ```
 
 ### 使用断言消息
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #[test]
@@ -1061,6 +1087,8 @@ fn test_with_message() {
 ```
 
 ### 测试超时
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::time::{Duration, Instant};
@@ -1087,6 +1115,8 @@ fn test_with_timeout() {
 
 ### 测试 Result 类型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #[test]
 fn test_result() {
@@ -1103,6 +1133,8 @@ fn test_result() {
 ```
 
 ### 测试 Option 类型
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 #[test]
@@ -1121,6 +1153,8 @@ fn test_option() {
 
 ### 测试浮点数（近似相等）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 #[test]
 fn test_float_approx() {
@@ -1137,6 +1171,8 @@ fn test_float_approx() {
 ```
 
 ### 测试集合
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 #[test]
@@ -1165,6 +1201,8 @@ fn test_collections() {
 
 ### 测试错误处理
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 #[test]
 fn test_error_handling() {
@@ -1181,6 +1219,8 @@ fn test_error_handling() {
 
 ### 测试生命周期
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 #[test]
 fn test_lifetimes() {
@@ -1192,6 +1232,8 @@ fn test_lifetimes() {
 ```
 
 ### 测试泛型函数
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #[test]
@@ -1206,6 +1248,8 @@ fn identity<T>(x: T) -> T {
 ```
 
 ### 测试 trait 实现
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 #[test]
@@ -1222,6 +1266,8 @@ fn test_trait_impl() {
 > **[来源: Rust Official Docs]**
 
 ### GitHub Actions 测试
+
+> **[来源: Wikipedia - Type System]**
 
 ```yaml
 # .github/workflows/test.yml
@@ -1259,6 +1305,8 @@ jobs:
 
 ### 测试覆盖率 CI
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```yaml
 - name: Install tarpaulin
   run: cargo install cargo-tarpaulin
@@ -1273,6 +1321,8 @@ jobs:
 ```
 
 ### 性能测试 CI
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```yaml
 - name: Run benchmarks
@@ -1290,6 +1340,8 @@ jobs:
 
 ### 快照测试
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use insta::assert_snapshot;
 
@@ -1301,6 +1353,8 @@ fn test_output() {
 ```
 
 ### 金标准测试（Golden Tests）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::fs;

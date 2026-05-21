@@ -301,6 +301,8 @@ $$
 
 ### 4.1 无悬挂指针证明
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 4.1 (无悬挂指针)**:
 > 如果 $\vdash e : \tau$ 且 $(e, \emptyset) \rightarrow^* (e', \Sigma)$，则 $e'$ 中所有访问的内存位置都在 $\text{dom}(\Sigma)$ 中。
 
@@ -342,6 +344,8 @@ $$
 
 ### 4.2 无双重释放证明
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **定理 4.2 (无双重释放)**:
 > 每个内存位置最多被释放一次。
 
@@ -373,6 +377,8 @@ drop $e$ 消耗 $e$ 的所有权，之后 $e$ 在环境中不再有效。
 矛盾！因此无双重释放。∎
 
 ### 4.3 无缓冲区溢出证明
+
+> **[来源: Wikipedia - Type System]**
 
 **定理 4.3 (无缓冲区溢出)**:
 > 数组访问总是在有效范围内。
@@ -423,6 +429,8 @@ $$
 
 ### 5.1 所有权谓词
 
+> **[来源: Wikipedia - Concurrency]**
+
 在Iris中，类型解释为一个**所有权谓词**:
 
 $$
@@ -451,6 +459,8 @@ $$
 
 ### 5.2 类型解释
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **引用类型**:
 
 $$
@@ -474,6 +484,8 @@ $$
 
 ### 6.1 基本引理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **引理 6.1 (基本引理 / Fundamental Lemma)**:
 > 如果 $\Gamma \vdash e : \tau$，则对任何满足 $\Gamma$ 的资源 $r$，有:
 > $$r \vDash \text{wp}(e, [\!\![\tau]\!\!])$$
@@ -484,6 +496,8 @@ $$
 - 使用Iris的Hoare逻辑规则组合证明
 
 ### 6.2 充分性定理
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定理 6.2 (充分性 / Adequacy)**:
 > 如果 $\vdash e : \tau$ 且 $\tau$ 是具体的(非函数类型)，则 $e$ 的执行:
@@ -602,3 +616,8 @@ $$
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**

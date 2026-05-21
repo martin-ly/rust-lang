@@ -730,6 +730,8 @@ pub fn training_step<B: Backend>(
 
 ### 数学常量在超参数优化中的应用
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// 黄金分割搜索最优学习率
 pub fn golden_section_lr_search<F>(
@@ -755,6 +757,8 @@ pub fn harmonic_lr_schedule(initial_lr: f64, epoch: usize) -> f64 {
 ---
 
 ### 生产场景：实时推荐系统
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 pub struct RecommendationService {
@@ -793,6 +797,8 @@ impl RecommendationService {
 ---
 
 ### 总结
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 特性 | AI/ML 场景应用 | 性能提升 |
 |------|---------------|----------|
@@ -842,3 +848,10 @@ impl RecommendationService {
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

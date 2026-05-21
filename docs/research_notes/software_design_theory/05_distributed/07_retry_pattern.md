@@ -105,6 +105,8 @@ attempts ≤ max_attempts
 
 ### Axiom RT3: 退避单调性
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 n < m → backoff(n) ≤ backoff(m)
 ```

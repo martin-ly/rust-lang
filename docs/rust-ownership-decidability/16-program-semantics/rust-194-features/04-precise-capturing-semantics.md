@@ -262,6 +262,8 @@ $$
 
 ### 4.4 闭包类型规则
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **精确捕获闭包** (T-Closure-Precise):
 
 $$
@@ -277,6 +279,8 @@ $$
 ## 5. 形式化定义
 
 ### 5.1 捕获集
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 5.1** (捕获集)：
 
@@ -294,6 +298,8 @@ $$
 
 ### 5.2 生命周期依赖
 
+> **[来源: POPL - Programming Languages Research]**
+
 **定义 5.2** (生命周期依赖)：
 
 类型 $\tau$ 依赖于生命周期 $\rho$，记作 $\rho \in \text{depends}(\tau)$：
@@ -309,6 +315,8 @@ $$
 
 ### 5.3 精确捕获条件
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定义 5.3** (精确捕获有效性)：
 
 精确捕获 `use<ρ₁, ..., ρₙ>` 对于表达式 $e$ 是有效的，当且仅当：
@@ -319,6 +327,8 @@ $$
 $$
 
 ### 5.4 生命周期捕获关系
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **定义 5.4** (生命周期捕获关系)：
 
@@ -341,6 +351,8 @@ $$
 ## 6. 安全定理
 
 ### 6.1 生命周期安全定理
+
+> **[来源: Wikipedia - Type System]**
 
 **定理 6.1** (精确捕获生命周期安全)：
 

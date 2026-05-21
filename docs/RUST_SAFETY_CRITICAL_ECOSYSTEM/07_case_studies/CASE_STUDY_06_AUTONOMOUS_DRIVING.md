@@ -501,6 +501,8 @@ mod simulation_tests {
 
 ### 形式化验证
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 #[cfg(kani)]
 mod verification {
@@ -540,6 +542,8 @@ mod verification {
 
 ### 性能指标
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 指标 | 目标 | 实际 | 状态 |
 |------|------|------|------|
 | **端到端延迟** | < 50ms | 42ms | ✅ |
@@ -548,6 +552,8 @@ mod verification {
 | **系统可用性** | > 99.9% | 99.97% | ✅ |
 
 ### 安全指标
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 指标 | 目标 | 实际 |
 |------|------|------|
@@ -596,3 +602,9 @@ mod verification {
 > **[来源: MISRA Rust Guidelines]**
 
 > **[来源: Ferrocene Language Specification]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**

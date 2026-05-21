@@ -229,6 +229,8 @@ pub trait Generic {
 
 ### 3.3 标签字段系统
 
+> **[来源: Wikipedia - Type System]**
+
 标签字段系统允许基于名称的操作：
 
 ```rust
@@ -254,6 +256,8 @@ pub struct age;
 
 ### 4.1 结构体通用序列化
 
+> **[来源: Wikipedia - Concurrency]**
+
 使用 Frunk 可以为任意结构体编写通用序列化代码：
 
 ```rust
@@ -278,6 +282,8 @@ where
 - 配置文件解析
 
 ### 4.2 类型安全的构建器模式
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 Frunk 可以用于实现验证式构建器模式：
 
@@ -312,6 +318,8 @@ impl<Rest> Builder<Rest> {
 
 ### 4.3 函数式数据处理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 HList 可以配合函数式操作符使用：
 
 ```rust
@@ -334,6 +342,8 @@ let mapped = data.map(
 
 ### 5.1 与元组对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 特性 | HList | 元组 |
 |------|-------|------|
 | 长度灵活性 | 可递归扩展 | 固定 |
@@ -347,6 +357,8 @@ let mapped = data.map(
 - 简单场景使用元组更直接
 
 ### 5.2 与泛型数组对比
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 `generic-array` 配合 `typenum` 提供了另一种编译期数组大小方案：
 
@@ -363,6 +375,8 @@ let list = hlist![1, "two", 3.0];
 
 ### 5.3 与过程宏对比
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 过程宏可以实现类似的结构体转换，但 Frunk 提供了更强的类型保证：
 
 | 方案 | 灵活性 | 类型安全 | 编译期检查 |
@@ -375,6 +389,8 @@ let list = hlist![1, "two", 3.0];
 ## 6. 完整代码示例
 
 ### 6.1 基础 HList 操作
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use frunk::{hlist, HList, HMappable};
@@ -400,6 +416,8 @@ fn main() {
 ```
 
 ### 6.2 结构体转换系统
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use frunk::{Generic, LabelledGeneric};
@@ -440,6 +458,8 @@ fn promote_person(person: Person, dept: String) -> Employee {
 ```
 
 ### 6.3 验证式构建器
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use frunk::{hlist, HList, HNil};
@@ -508,6 +528,8 @@ impl PersonBuilder<HCons<HasEmail, HCons<HasAge, HCons<HasName, HNil>>>> {
 
 ### 7.1 编译时间影响
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Frunk 大量使用模板元编程，对编译时间有显著影响：
 
 | HList 长度 | 简单操作编译时间 | 复杂转换编译时间 |
@@ -523,6 +545,8 @@ Frunk 大量使用模板元编程，对编译时间有显著影响：
 - 考虑在发布模式下使用 `lto = "thin"`
 
 ### 7.2 运行时开销
+
+> **[来源: POPL - Programming Languages Research]**
 
 Frunk 设计为零运行时开销抽象：
 

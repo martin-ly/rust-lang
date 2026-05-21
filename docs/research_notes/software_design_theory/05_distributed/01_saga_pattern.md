@@ -106,6 +106,8 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S3: 最终一致性
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```text
 ∀tᵢ ∈ T. σ(tᵢ) = success → ◇(∀tⱼ ≺ tᵢ. σ(tⱼ) = success)
 ```

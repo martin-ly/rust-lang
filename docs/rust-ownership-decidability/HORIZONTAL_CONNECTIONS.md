@@ -432,6 +432,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 3.3 对称性与对偶性
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **保持性 vs 进展：对偶关系**
 
 ```text
@@ -470,6 +472,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 4.1 静态与动态的联系
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```text
 静态（编译时）                    动态（运行时）
 ─────────────────────────────────────────────────
@@ -488,6 +492,8 @@ Linearizability检查         ↔   资源释放顺序
 ```
 
 ### 4.2 大步与小步的互补
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 大步语义（eval）：
@@ -522,6 +528,8 @@ Linearizability检查         ↔   资源释放顺序
 
 ### 4.3 操作语义与类型系统的呼应
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 操作语义规则                    类型规则
 ─────────────────────────────────────────────────
@@ -542,6 +550,8 @@ E_Assign: 赋值                 T_Assign: 检查可变性
 ## 五、Rust 语言特性的关联
 
 ### 5.1 语言特性的理论基础
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 Rust 语言特性                理论概念
@@ -586,6 +596,8 @@ Rust 生命周期：
 
 ### 5.2 特性组合的涌现性
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **单独看每个特性**：
 
 - 所有权：内存管理
@@ -608,6 +620,8 @@ Rust 生命周期：
 ```
 
 ### 5.3 与 Rust 实际实现的关联
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 理论概念                    Rust 实现
@@ -632,6 +646,8 @@ trait                       类型类 (Type Classes)
 ## 六、跨理论的关联
 
 ### 6.1 与 Featherweight Rust 的关联
+
+> **[来源: POPL - Programming Languages Research]**
 
 **继承**：
 

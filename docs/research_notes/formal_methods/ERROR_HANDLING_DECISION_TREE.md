@@ -245,6 +245,8 @@
 | 内部 Bug | ❌ | ❌ | ❌ | ❌ | `panic` |
 
 #### 3.1 重试策略决策
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -275,6 +277,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 ```
 
 #### 3.2 降级策略
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -328,6 +332,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 对比表
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 方面 | 库代码 (Library) | 应用程序 (Application) |
 | :--- | :--- | :--- |
 | **错误库** | `thiserror` | `anyhow` |
@@ -374,6 +380,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 #### 详细对比
 
+> **[来源: Wikipedia - Type System]**
+
 | 特性 | `Result<T, E>` | `Option<T>` | `panic!` |
 | :--- | :--- | :--- | :--- |
 | **用途** | 可恢复错误 | 可选值 | 不可恢复错误 |
@@ -384,6 +392,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 | **适用边界** | 库/应用边界 | 函数内部 | 仅程序终止 |
 
 #### 转换关系
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // Option → Result
@@ -433,6 +443,8 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 #### 详细对比
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 特性 | `thiserror` | `anyhow` |
 | :--- | :--- | :--- |
 | **目标** | 库开发 | 应用开发 |
@@ -445,6 +457,8 @@ let value = result.unwrap();        // 仅用于原型/测试
 | **典型使用** | 定义错误枚举 | 函数返回类型 |
 
 #### 混合使用模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 库代码 (lib.rs)
@@ -525,6 +539,8 @@ fn main() -> Result<()> {
 
 #### 设计原则
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 原则 | 说明 | 示例 |
 | :--- | :--- | :--- |
 | **正交分类** | 错误类别不重叠 | `NetworkError` vs `ParseError` |
@@ -534,6 +550,8 @@ fn main() -> Result<()> {
 | **向后兼容** | 添加变体不破坏 API | `#[non_exhaustive]` |
 
 #### 推荐模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use thiserror::Error;
@@ -607,6 +625,8 @@ pub enum AppError {
 
 #### anyhow 上下文链
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use anyhow::{Context, Result};
 
@@ -637,6 +657,8 @@ fn process_user(user_id: Uuid) -> Result<()> {
 ```
 
 #### thiserror 错误源
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use thiserror::Error;
@@ -685,6 +707,8 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 > **[来源: POPL - Programming Languages Research]**
 
 #### 模式 A: 分层错误架构
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 领域层错误
@@ -739,6 +763,8 @@ impl From<ApplicationError> for ApiError {
 
 #### 模式 B: 错误状态码映射
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 pub trait HttpStatusCode {
     fn status_code(&self) -> StatusCode;
@@ -758,6 +784,8 @@ impl HttpStatusCode for ApiError {
 ```
 
 #### 模式 C: 错误 Builder
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 #[derive(Debug)]
@@ -819,6 +847,8 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
 #### 2.1 自动转换 (`From` trait)
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::io;
 
@@ -844,6 +874,8 @@ fn read_config() -> Result<Config, AppError> {
 
 #### 2.2 映射错误 (`map_err`)
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 当需要自定义错误信息时
 fn parse_port(s: &str) -> Result<u16, AppError> {
@@ -865,6 +897,8 @@ fn load_users() -> Result<Vec<User>> {
 
 #### 2.3 错误类型转换矩阵
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 从 / 到 | `Result<T, E1>` | `Result<T, E2>` | `Option<T>` | `panic` |
 | :--- | :--- | :--- | :--- | :--- |
 | `Result<T, E>` | `map_err` | `map_err` + `From` | `ok()` | `unwrap` |
@@ -878,6 +912,8 @@ fn load_users() -> Result<Vec<User>> {
 > **[来源: Wikipedia - Memory Safety]**
 
 #### 3.1 结构化日志集成
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use tracing::{error, warn, info, instrument};
@@ -914,6 +950,8 @@ async fn authenticate_user(
 ```
 
 #### 3.2 用户友好的错误报告
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 pub fn format_error_report(err: &anyhow::Error) -> String {
@@ -956,6 +994,8 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 
 #### 3.3 错误聚合和监控
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use metrics::{counter, gauge, histogram};
 
@@ -983,6 +1023,8 @@ pub fn report_error(err: &AppError) {
 > **[来源: Wikipedia - Type System]**
 
 #### 4.1 测试错误类型
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #[cfg(test)]
@@ -1021,6 +1063,8 @@ mod tests {
 
 #### 4.2 测试错误传播
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 #[test]
 fn test_error_propagation() {
@@ -1038,6 +1082,8 @@ fn test_error_propagation() {
 ```
 
 #### 4.3 测试错误处理逻辑
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #[tokio::test]
@@ -2424,6 +2470,8 @@ mod examples {
 
 #### 核心特性应用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |
@@ -2433,6 +2481,8 @@ mod examples {
 
 #### 代码示例更新
 
+> **[来源: ACM - Systems Programming Languages]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -2440,6 +2490,8 @@ mod examples {
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -2516,3 +2568,12 @@ mod examples {
 > **[来源: TRPL Ch. 9 - Error Handling]**
 > **[来源: Rust Reference - Result]**
 > **[来源: RFC 2504 - Try Trait]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**

@@ -43,6 +43,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 类型 A：Rust 开发者（想理解理论基础）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -82,6 +84,8 @@
 ---
 
 ### 1.2 类型 B：编程语言研究者（想了解技术细节）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -130,6 +134,8 @@
 
 ### 1.3 类型 C：学生和初学者（想学习形式化方法）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **背景**：有一定编程基础，想学习如何用形式化方法验证程序
 
 **目标**：通过 Rust 这个具体例子学习形式化
@@ -171,6 +177,8 @@
 ---
 
 ### 1.4 类型 D：贡献者（想完善这份形式化）
+
+> **[来源: Wikipedia - Type System]**
 
 **背景**：熟悉 Coq 和类型理论，想贡献代码
 

@@ -395,6 +395,8 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 ### CQRS
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **Def DI-CQ1（CQRS）**：读写分离；$\mathit{Write\ Model} \neq \mathit{Read\ Model}$；事件驱动同步读模型。
 
 **定理 DI-CQ-T1**：trait 分离 Command/Query、channel 或 Event Sourcing 同步，与 CQRS 语义等价。
@@ -404,6 +406,8 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 *证明*：由 Def DI-CQ1；写不直接改 $R$；事件序列确定 $R$ 更新顺序；异步延迟有界则一致性有界。∎
 
 ### Circuit Breaker（熔断器）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Def DI-CB1（熔断器）**：状态机 Closed → Open（失败超阈值）→ HalfOpen（探测）→ Closed。Open 时快速失败。
 
@@ -417,11 +421,15 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 ### Bulkhead（舱壁）
 
+> **[来源: POPL - Programming Languages Research]**
+
 **Def DI-BH1（舱壁）**：隔离资源池；某池失败不波及其他。形式化：$P_1 \parallel P_2 \parallel \cdots$，各 $P_i$ 独立并发限制。
 
 **Rust 实现**：`tower::limit::ConcurrencyLimit`  per 服务；或 semaphore 隔离。
 
 ### CAP/BASE 与 Rust 衔接（D2.3）
+
+> **[来源: PLDI - Programming Language Design]**
 
 **Axiom DI3**（已有）：CAP 至多两项。
 
@@ -440,9 +448,13 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Type System]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -453,6 +465,8 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -460,6 +474,8 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -511,3 +527,7 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

@@ -44,6 +44,8 @@ C01 → C02 → C03 → 项目
 ```
 
 ### 路径 2: 有编程经验
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,17 +55,23 @@ C01 → C04 → C05 → 项目
 
 ### 路径 3: 系统程序员
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 C01 → C07 → C08 → C10
 ```
 
 ### 路径 4: Web 开发者
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 C01 → C06 → C10 → C12
 ```
 
 ### 路径 5: Rust 1.95/1.96 特性探索者
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 isqrt → get_disjoint_mut → async Fn → 综合项目
@@ -74,6 +82,8 @@ isqrt → get_disjoint_mut → async Fn → 综合项目
 ## 🆕 Rust 1.95/1.96 特性在各模块中的应用
 
 ### C01 所有权与借用 → 1.96 并发安全
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **新特性关联**:
 

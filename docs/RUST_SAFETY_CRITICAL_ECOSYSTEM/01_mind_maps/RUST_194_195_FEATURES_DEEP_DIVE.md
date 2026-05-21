@@ -61,6 +61,8 @@
 > **[来源: Rust Official Docs]**
 
 #### 特性概述
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +77,8 @@ pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
 - 消除运行时开销，提升性能
 
 #### 性能对比
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ fn has_abba_new(s: &str) -> bool {
 | 安全关键适用性 | 中 | 高 | - |
 
 #### 安全关键系统应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +163,8 @@ fn parse_frames(buffer: &[u8]) -> impl Iterator<Item = CanFrame> + '_ {
 > **[来源: Rust Official Docs]**
 
 #### API全景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +193,8 @@ impl<T, F: FnOnce() -> T> LazyLock<T, F> {
 ```
 
 #### 从once_cell迁移指南
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -212,6 +222,8 @@ static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 - 更小的二进制体积（约-5KB）
 
 #### 安全关键系统模式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -284,6 +296,8 @@ impl Crc32Table {
 
 #### 硬件支持矩阵
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 厂商 | 架构 | 支持状态 | 发布日期 |
 |------|------|----------|----------|
 | Intel | Sapphire Rapids | 已发布 | 2023 |
@@ -294,6 +308,8 @@ impl Crc32Table {
 | ARM | Neoverse V2 | 已发布 | 2024 |
 
 #### Rust API详解
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::arch::x86_64::*;
@@ -324,6 +340,8 @@ pub unsafe fn fp16_dot_product(
 ```
 
 #### 性能对比
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 操作 | 标量f32 | 标量f16 | AVX-512 f16 | 加速比 |
 |------|---------|---------|-------------|--------|

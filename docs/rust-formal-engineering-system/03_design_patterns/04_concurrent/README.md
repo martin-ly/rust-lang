@@ -318,6 +318,8 @@ fn backpressure_producer_consumer() {
 ```
 
 ### 扇出-扇入模式
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -369,6 +371,8 @@ fn fan_out_fan_in() {
 ```
 
 ### 信号量模式
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -448,6 +452,8 @@ async fn weighted_semaphore() {
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -458,6 +464,8 @@ async fn weighted_semaphore() {
 | 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
 ### 形式化方法
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -467,6 +475,8 @@ async fn weighted_semaphore() {
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 
 ### 实验分析
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
@@ -512,3 +522,8 @@ async fn weighted_semaphore() {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

@@ -79,7 +79,11 @@
 
 ### 2.1 区域约束系统
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 2.1 (区域/生命周期)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **区域变量**: $\rho, \rho_1, \rho_2, \dots \in \text{Region}$
 
@@ -98,6 +102,8 @@ $$
 
 ### 定义 2.2 (子区域关系)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 $$
 \rho_1 \subseteq \rho_2 \iff \forall \pi \in \rho_1. \pi \in \rho_2
 $$
@@ -106,7 +112,11 @@ $$
 
 ### 2.2 借用路径分析
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.3 (路径)
+
+> **[来源: PLDI - Programming Language Design]**
 
 **路径**表示内存位置的访问方式:
 

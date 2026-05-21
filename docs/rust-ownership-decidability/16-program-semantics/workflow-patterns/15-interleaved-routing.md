@@ -66,6 +66,8 @@
 与真正的并行不同，这是一种串行化的伪并行。
 
 ### 核心语义
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -81,6 +83,8 @@ $$
 
 ### 与并行和顺序的区别
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 模式 | 并发性 | 互斥性 | 顺序约束 |
 |------|--------|--------|----------|
 | 顺序执行 | 无 | N/A | 固定 |
@@ -91,6 +95,8 @@ $$
 ## 偏序约束
 
 ### 偏序关系定义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 交错路由定义了活动间的偏序关系：
 
@@ -113,6 +119,8 @@ $$
 即活动间无顺序约束（可比较性除外）。
 
 ### 交错语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **交错操作符（Interleaving）:**
 
@@ -209,6 +217,8 @@ $$
 
 ### 状态机形式化
 
+> **[来源: PLDI - Programming Language Design]**
+
 $$
 \begin{aligned}
 & \text{States} = \{ \\
@@ -229,6 +239,8 @@ $$
 $$
 
 ### 进程代数
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **CSP 形式化：**
 

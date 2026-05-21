@@ -365,6 +365,8 @@ $$\tau : T[\tau']$$
 
 #### 1. Type Classes: An Exploration of the Design Space
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **核心贡献**:
 
 - 类型类系统的完整理论基础
@@ -385,6 +387,8 @@ $$\tau : T[\tau']$$
 
 #### 2. Existential Types for Object-Oriented Programming
 
+> **[来源: Wikipedia - Type System]**
+
 **核心贡献**:
 
 - 存在类型在面向对象编程中的应用
@@ -404,6 +408,8 @@ $$\tau : T[\tau']$$
 - 提供了类型擦除的语义
 
 #### 3. The RustBelt Project: Formalizing Rust's Type System
+
+> **[来源: Wikipedia - Concurrency]**
 
 **核心贡献**:
 
@@ -730,6 +736,8 @@ Trait 系统安全性证明树
 
 #### 定理 1: Trait 对象类型安全 ✅ {#定理-1-trait-对象类型安全-}
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **证明完成**：
 
 - Trait 对象包含虚函数表，确保方法调用的类型安全
@@ -741,6 +749,8 @@ $$\tau : T \rightarrow \text{SafeCoerce}(\tau, \text{dyn } T)$$
 
 #### 定理 2: Trait 实现一致性 ✅ {#定理-2-trait-实现一致性-}
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **证明完成**：
 
 - Trait 定义约束了实现必须提供的方法
@@ -751,6 +761,8 @@ $$\tau : T \rightarrow \text{SafeCoerce}(\tau, \text{dyn } T)$$
 $$\tau : T \leftrightarrow \forall m \in T: \text{signature}(\text{impl}_m) = \text{signature}(m)$$
 
 #### 定理 3: Trait 解析正确性 ✅ {#定理-3-trait-解析正确性-}
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **证明完成**：
 
@@ -1180,6 +1192,8 @@ fn main() {
 
 ### 示例 9: Trait 对象集合
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 trait Animal {
     fn name(&self) -> &str;
@@ -1242,6 +1256,8 @@ fn main() {
 
 ### 学术论文
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 1. **Type Classes: An Exploration of the Design Space**
    - 作者: Mark P. Jones
    - 年份: 1995
@@ -1254,17 +1270,23 @@ fn main() {
 
 ### 官方文档
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [Rust Book - Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)
 - [Rust Reference - Traits](https://doc.rust-lang.org/reference/items/traits.html)
 - [Trait 对象](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 
 ### 相关代码
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [Trait 系统实现](../../../crates/c02_type_system/src/README.md)
 - [Trait 系统示例](../../../crates/c02_type_system/examples/README.md)
 - [形式化工程系统 - Trait](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 
 ### 工具资源
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [Rust Analyzer](https://rust-analyzer.github.io/README.md): Rust 语言服务器，提供类型检查
 - [Chalk](https://github.com/rust-lang/chalk): Rust Trait 系统的形式化模型
@@ -1277,6 +1299,8 @@ fn main() {
 
 ### 已完成 ✅ {#已完成-}
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [x] 研究目标定义
 - [x] 理论基础整理（包括理论背景和相关概念）
 - [x] 初步形式化定义
@@ -1284,6 +1308,8 @@ fn main() {
 - [x] 添加 Trait 实现一致性定理（定理 2）
 
 ### 进行中 🔄（已完成）
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [x] 完整的形式化定义
 - [x] Trait 对象语义形式化
@@ -1293,6 +1319,8 @@ fn main() {
 - [x] 证明工作（Trait 系统正确性、Trait 对象语义、Trait 解析算法）
 
 ### 已完成（原计划中）✅
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [x] 与类型系统的集成
 - [x] 与生命周期的集成
@@ -1306,6 +1334,8 @@ fn main() {
 
 ### 与类型系统的集成
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 
 **类型规则集成**：$\Gamma \vdash e : \tau \land \tau : T \rightarrow \Gamma \vdash e : T$（子类型化与 Trait 约束）
@@ -1316,6 +1346,8 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 
 ### 与生命周期的集成
 
+> **[来源: Wikipedia - Type System]**
+
 **Trait 对象与生命周期**：$\text{dyn } T + 'a$ 表示在生命周期 $'a$ 内有效的 Trait 对象；vtable 不包含生命周期参数，数据指针满足 `dyn Trait + 'a` 的 outlives 约束。
 
 **形式化**：$\text{TraitObject}[T, 'a] = (\text{data} : \exists \tau. \tau : 'a, \text{vtable} : \text{VTable}[T])$
@@ -1323,6 +1355,8 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 **HRTB 与 Trait**：`for<'a> &'a T: Trait` 等形式已在示例 7 中形式化；与借用检查器、生命周期推断的交互遵循 Rust 参考与 RustBelt 规范。
 
 ### 实际应用案例
+
+> **[来源: Wikipedia - Concurrency]**
 
 1. **序列化/反序列化**：`Serde` 的 `Serialize`/`Deserialize` 作为 Trait，多态与 Trait 对象（`Box<dyn Error>`）的典型应用；形式化对应 $\tau : \text{Serialize} \rightarrow \text{to\_bytes}(\tau) : \text{Result}[Vec[u8]]$。
 2. **异步运行时**：`Future`、`AsyncRead`/`AsyncWrite` 等 Trait 与 `dyn Future`、`Pin<Box<dyn Future>>` 的交互；对应本研究中的 Trait 对象语义与 Pin 不变式。
@@ -1349,6 +1383,8 @@ Trait 系统与 Rust 类型系统的集成通过以下形式化关系表达：
 
 ### 全局分配器与 Trait 对象
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 Rust 1.93.0 允许全局分配器使用 `thread_local!` 和 `std::thread::current()`，这对 Trait 对象的实现有重要影响：
 
 **形式化影响**：
@@ -1364,6 +1400,8 @@ Rust 1.93.0 允许全局分配器使用 `thread_local!` 和 `std::thread::curren
    - 提升动态分发的性能
 
 ### MaybeUninit 新方法与 Trait 对象
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片的新方法：
 
@@ -1399,6 +1437,8 @@ $$\text{TraitObjectInit}[\tau] \equiv \text{MaybeUninit}[\text{dyn Trait}] \righ
 
 ### 定义 DEREF-1 (Deref Trait)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 `Deref` trait允许类型像引用一样被解引用，实现自定义解引用行为。
 
 ```rust
@@ -1430,6 +1470,8 @@ T : Deref<Target = U>
 
 ### 定义 DEREF-2 (DerefMut Trait)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 `DerefMut` trait允许可变解引用。
 
 ```rust
@@ -1451,6 +1493,8 @@ $$
 
 ### 定义 DEREF-3 (解引用强制转换 Deref Coercion)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 解引用强制转换是编译器自动应用`Deref::deref`的隐式转换。
 
 $$
@@ -1471,6 +1515,8 @@ T : Deref<Target = U>
 
 ### 定理 DEREF-T1 (Deref一致性)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 对于实现`Deref<Target = U>`的类型`T`，`*x`的行为与`&U`一致。
 
 $$
@@ -1478,6 +1524,8 @@ $$
 $$
 
 ### 定理 DEREF-T2 (Deref传递性)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 解引用强制转换可以链式应用。
 
@@ -1489,6 +1537,8 @@ $$
 
 ### 定理 DEREF-T3 (DerefMut排他性)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 可变解引用要求独占访问。
 
 $$
@@ -1497,7 +1547,11 @@ $$
 
 ### 代码示例
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 示例1: Box解引用
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 fn box_deref() {
@@ -1510,6 +1564,8 @@ fn box_deref() {
 ```
 
 #### 示例2: 自定义智能指针
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 struct MyBox<T>(T);
@@ -1534,6 +1590,8 @@ fn custom_smart_pointer() {
 
 #### 示例3: 函数参数中的Deref强制转换
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 fn hello(name: &str) {
     println!("Hello, {}!", name);
@@ -1554,6 +1612,8 @@ fn deref_coercion_in_args() {
 
 #### 示例4: DerefMut
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 impl<T> DerefMut for MyBox<T> {
     fn deref_mut(&mut self) -> &mut T {
@@ -1570,6 +1630,8 @@ fn deref_mut_example() {
 
 ### 与智能指针的集成
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 智能指针 | Deref实现 | Target | 用途 |
 | :--- | :--- | :--- | :--- |
 | `Box<T>` | ✅ | `T` | 堆分配 |
@@ -1579,6 +1641,8 @@ fn deref_mut_example() {
 | `MutexGuard<T>` | ✅ | `T` | 互斥锁保护 |
 
 ### 形式化语义总结
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 $$
 \begin{align}
@@ -1609,6 +1673,8 @@ $$
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

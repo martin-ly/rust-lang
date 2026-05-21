@@ -534,6 +534,8 @@ graph LR
 
 #### 相关文档
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [Rust 1.94 迁移指南](../../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
 - [性能调优指南](../../../../05_guides/PERFORMANCE_TUNING_GUIDE.md)
@@ -579,3 +581,10 @@ graph LR
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**

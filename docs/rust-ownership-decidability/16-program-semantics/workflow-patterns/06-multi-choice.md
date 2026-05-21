@@ -119,6 +119,8 @@ $$
 
 #### 2.3.1 状态机表示
 
+> **[来源: POPL - Programming Languages Research]**
+
 $$
 \begin{aligned}
 \text{State} &= \{ \text{Ready}, \text{Evaluating}, \text{Selecting}, \text{Forking}, \\n             &\quad \text{Executing}_k, \text{Joining}, \text{Completed} \} \\
@@ -135,6 +137,8 @@ $$
 
 #### 2.3.2 流程代数表示 (CSP 风格)
 
+> **[来源: PLDI - Programming Language Design]**
+
 $$
 \text{MultiChoice} = \square_{i \in I} [C_i] \rightarrow B_i
 $$
@@ -142,6 +146,8 @@ $$
 其中 $\square$ 是外部选择算子，$[C_i]$ 是守卫条件。
 
 #### 2.3.3 Petri 网表示
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
          ┌──[C1]──→ (B1) ──┐
@@ -189,6 +195,8 @@ Bi: 活动（位置）
 
 ### 3.2 UML 活动图
 
+> **[来源: Wikipedia - Type System]**
+
 在 UML 中，多路选择使用**分叉节点**配合守卫条件：
 
 ```
@@ -200,6 +208,8 @@ Bi: 活动（位置）
 ```
 
 ### 3.3 WfMC 标准
+
+> **[来源: Wikipedia - Concurrency]**
 
 工作流管理联盟 (WfMC) 将多路选择定义为：
 
@@ -216,6 +226,8 @@ Bi: 活动（位置）
 
 ### 4.1 CCS 表示
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **Calculus of Communicing Systems (CCS)**:
 
 $$
@@ -230,6 +242,8 @@ $$
 
 ### 4.2 CSP 表示
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Communicating Sequential Processes (CSP)**:
 
 ```
@@ -242,6 +256,8 @@ Parallel = || i:Activated @ Branch(i)
 ```
 
 ### 4.3 π-演算表示
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **Pi-Calculus**:
 

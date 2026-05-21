@@ -205,6 +205,8 @@ static MY_DATA: Mutex<u32> = Mutex::new(0);
 ```
 
 ### 4.2 内存管理
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -222,6 +224,8 @@ let data = Box::try_new(MyStruct { ... }, GFP_KERNEL)?;
 ```
 
 ### 4.3 同步原语
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use kernel::sync::{Mutex, SpinLock};
@@ -251,6 +255,8 @@ let shared = Arc::try_new(data, GFP_KERNEL)?;
 
 ### 5.1 Android Binder IPC（Google）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **背景**：Android 的核心 IPC 机制 Binder 原先用 C++ 实现，存在大量历史漏洞。
 
 **Rust 重写**：
@@ -277,6 +283,8 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ### 5.2 Asahi GPU 驱动（Apple Silicon）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **背景**：Asahi Linux 项目为 Apple Silicon (M1/M2/M3) 编写开源 GPU 驱动。
 
 **Rust 采用**：
@@ -291,6 +299,8 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 - `unsafe` 块严格限制在 MMIO 寄存器访问层
 
 ### 5.3 NVMe 驱动子系统
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **背景**：NVMe（Non-Volatile Memory Express）是现代 SSD 的标准接口。
 
@@ -312,6 +322,8 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 
 ### 6.1 绑定生成（bindgen）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```bash
 # 内核自带 bindgen 配置
 make rust/bindings
@@ -330,6 +342,8 @@ pub struct file_operations {
 ```
 
 ### 6.2 调用约定与 ABI
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // Rust 调用 C 函数

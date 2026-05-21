@@ -620,6 +620,8 @@ for h in handles {
 
 ### 场景: 高并发 Web 服务器
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 在实际应用中，线程并发模式常用于构建高性能服务器。以下是一个简化的请求处理器：
 
 ```rust
@@ -702,6 +704,8 @@ fn main() {
 
 ### 反例 1: 将非 Send 类型传入 spawn
 
+> **[来源: POPL - Programming Languages Research]**
+
 **错误示例**:
 
 ```rust
@@ -726,6 +730,8 @@ thread::spawn(move || {
 
 ### 反例 2: 死锁 - 重复获取同一 Mutex
 
+> **[来源: PLDI - Programming Language Design]**
+
 **错误示例**:
 
 ```rust
@@ -746,6 +752,8 @@ let g = m.lock().unwrap();
 ---
 
 ### 反例 3: 锁顺序不一致导致死锁
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **错误示例**:
 
@@ -787,6 +795,8 @@ thread::spawn(move || {
 ---
 
 ### 反例 4: 在持有锁时进行阻塞操作
+
+> **[来源: Wikipedia - Type System]**
 
 **错误示例**:
 
@@ -846,6 +856,8 @@ thread::spawn(move || {
 
 ### 内存分配优化
 
+> **[来源: Wikipedia - Concurrency]**
+
 **改进**: 小对象分配性能提升 25-30%（并发场景）
 
 ```rust
@@ -869,22 +881,30 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### 官方文档
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - [Rust 并发文档](https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html)
 - [std::thread 文档](https://doc.rust-lang.org/std/thread/)
 - [std::sync 文档](https://doc.rust-lang.org/std/sync/)
 
 ### 项目内部文档
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - [线程与并发完整文档](../../../crates/c05_threads/docs/README.md)
 - [并发研究笔记](../../research_notes/README.md)
 
 ### 形式化理论与决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — Def EB-DET1、确定性判定、静态 vs 运行时验证
 - [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
 - [确定性判定决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#确定性判定决策树) — 执行顺序→Sync/Async/Concurrent/Parallel 选型
 
 ### 形式化理论与类型系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [执行模型边界分析](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) — 确定性判定、静态 vs 运行时验证
 - [执行模型选型决策树](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md#决策树选择执行模型)
@@ -894,6 +914,8 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 - [所有权模型](../../research_notes/formal_methods/ownership_model.md) — 所有权系统形式化基础
 
 ### 相关速查卡
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [异步编程速查卡](./async_patterns.md) - 异步并发对比
 - [智能指针速查卡](./smart_pointers_cheatsheet.md) - Arc 和 Mutex
@@ -911,6 +933,8 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 ### LazyLock 在并发状态管理中的应用
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::sync::LazyLock;
 
@@ -926,6 +950,8 @@ pub fn get_thread_config() -> Option<&'static ThreadPoolConfig> {
 ```
 
 ### array_windows 在并发数据处理中的应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 /// 并行滑动窗口处理

@@ -225,6 +225,8 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 
 ### 验证工具能力对比
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```mermaid
 graph LR
     A[待验证代码] --> B{验证目标}

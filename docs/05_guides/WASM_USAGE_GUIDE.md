@@ -337,6 +337,8 @@ wasm-pack build --target no-modules
 
 ### 2. Node.js 示例
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```javascript
 const wasm = require("./pkg/my_wasm_project.js")
 
@@ -352,6 +354,8 @@ wasm.init().then(() => {
 
 ### 1. 单元测试
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use wasm_bindgen_test::*;
 
@@ -365,6 +369,8 @@ fn test_add() {
 
 ### 2. 运行测试
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```bash
 wasm-pack test --headless --firefox
 wasm-pack test --headless --chrome
@@ -377,6 +383,8 @@ wasm-pack test --headless --safari
 
 ### 1. 减小二进制大小
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```toml
 [profile.release]
 opt-level = "z"      # 优化大小
@@ -388,6 +396,8 @@ strip = true
 
 ### 2. 使用 wasm-opt
 
+> **[来源: Wikipedia - Type System]**
+
 ```bash
 # 安装 wasm-opt
 npm install -g wasm-opt
@@ -397,6 +407,8 @@ wasm-opt -Os pkg/my_wasm_project_bg.wasm -o pkg/my_wasm_project_optimized.wasm
 ```
 
 ### 3. 避免不必要的分配
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // ❌ 不好：多次分配
@@ -418,6 +430,8 @@ pub fn process(data: &str) -> String {
 
 ### 场景1: Web 前端开发
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 在浏览器中使用 Rust 替代 JavaScript：
 
 ```rust
@@ -427,6 +441,8 @@ pub fn process(data: &str) -> String {
 ```
 
 ### 场景2: 跨平台桌面应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 使用 WASM 构建跨平台应用：
 

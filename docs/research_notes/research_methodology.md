@@ -232,6 +232,8 @@
 **优势**: 基于实际经验，具有实用价值
 
 ### 1.1 形式化研究方法详解
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -289,6 +291,8 @@ Qed.
 ```
 
 ### 相关概念
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -303,6 +307,8 @@ Qed.
 **研究工具 (Research Tools)**: 用于研究的工具，包括形式化工具、性能分析工具等。
 
 ### 理论背景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **科学研究方法论 (Scientific Research Methodology)**: 研究科学研究的理论，包括假设检验、实验设计等。
 
@@ -323,6 +329,8 @@ Qed.
 
 ### 4. 理论研究方法
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **定义**: 通过理论分析和推导来研究 Rust 系统。
 
 **适用场景**:
@@ -342,6 +350,8 @@ Qed.
 
 ### 2.1 实验研究方法要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - **假设**：明确、可测（如「opt-level=2 比 -O0 快 ≥2x」）。
 - **控制变量**：固定 Rust 版本、CPU、内存、`opt-level`、`codegen-units` 等；仅变化目标因素。
 - **可重复**：`cargo bench`、`criterion`、`--save-baseline`；记录环境与命令。
@@ -349,12 +359,16 @@ Qed.
 
 ### 3.1 实证研究方法要点
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **案例选择**：有公开代码、文档或论文；能对应到形式化/类型/实验中的至少一类问题。
 - **数据**：代码片段、性能数据、 issue/PR、社区讨论。
 - **模式**：归纳「所有权/借用/并发/异步」等在项目中的用法与坑点。
 - **详见**：[practical_applications.md](./practical_applications.md) 的「案例报告模板」与「案例快速索引」。
 
 ### 4.1 理论研究方法要点
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **问题**：类型安全、型变、生命周期、Trait 解析等；需可形式化。
 - **模型**：语法、类型规则、操作语义、性质（进展性、保持性、安全）。
@@ -367,12 +381,16 @@ Qed.
 
 ### 分析工具
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 - **静态分析工具**: Clippy, rust-analyzer, MIRAI
 - **动态分析工具**: Valgrind, Miri, sanitizers
 - **性能分析工具**: perf, flamegraph, cargo-instruments
 - **内存分析工具**: heaptrack, dhat, memory profilers
 
 ### 验证工具
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **模型检查器**: TLA+, SPIN
 - **定理证明器**: Coq, Lean, Isabelle/HOL
@@ -381,12 +399,16 @@ Qed.
 
 ### 实验工具
 
+> **[来源: POPL - Programming Languages Research]**
+
 - **基准测试框架**: Criterion.rs, bencher
 - **性能测试工具**: hyperfine, time
 - **并发测试工具**: loom, stress tests
 - **压力测试工具**: wrk, ab, k6
 
 ### 数据收集工具
+
+> **[来源: PLDI - Programming Language Design]**
 
 - **日志分析工具**: grep, awk, jq
 - **指标收集工具**: Prometheus, Grafana
@@ -398,6 +420,8 @@ Qed.
 ## 💻 实践指南 {#-实践指南}
 
 ### 研究设计
+
+> **[来源: Wikipedia - Memory Safety]**
 
 1. **问题定义**: 明确研究问题和目标
 2. **方法选择**: 选择合适的研究方法

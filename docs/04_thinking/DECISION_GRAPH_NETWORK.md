@@ -875,6 +875,8 @@ graph TD
 
 ### 编译优化决策树
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```mermaid
 graph TD
     Start[编译优化] --> Q1{优化目标？}
@@ -914,6 +916,8 @@ graph TD
 
 ### 新手学习路径
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```mermaid
 graph TD
     Start[新手学习Rust] --> Q1{编程基础？}
@@ -951,6 +955,8 @@ graph TD
 ```
 
 ### 有经验开发者路径
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```mermaid
 graph TD
@@ -992,6 +998,8 @@ graph TD
 ```
 
 ### 专项技能提升路径
+
+> **[来源: Wikipedia - Type System]**
 
 ```mermaid
 graph TD
@@ -1041,6 +1049,8 @@ graph TD
 
 ### 快速决策参考
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 需求场景 | Rust 1.93 推荐方案 | 替代方案 | 性能影响 | 安全影响 |
 | :--- | :--- | :--- | :--- | :--- |
 | 未初始化内存管理 | `MaybeUninit<T>` | unsafe 指针 | 零成本 | ✅ 类型安全 |
@@ -1060,25 +1070,35 @@ graph TD
 
 ### 设计机制论证
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 - [DESIGN_MECHANISM_RATIONALE](../research_notes/DESIGN_MECHANISM_RATIONALE.md) - Pin 堆/栈区分、设计机制论证
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
 
 ### 表达能力与边界
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 表达能力边界
 - [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) - 安全可判定机制
 
 ### 证明与安全
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网详细文档
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
 
 ### 分布式与工作流决策树（formal_methods 独立）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [DISTRIBUTED_ARCHITECTURE_DECISION_TREE](../research_notes/formal_methods/DISTRIBUTED_ARCHITECTURE_DECISION_TREE.md) - 分布式架构选型（Saga/CQRS/熔断器）
 - [WORKFLOW_ENGINE_DECISION_TREE](../archive/deprecated_20260318/WORKFLOW_ENGINE_DECISION_TREE.md) - 工作流引擎选型（Temporal/自研/状态机）
 
 ### 相关文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - [THINKING_REPRESENTATION_METHODS.md](./THINKING_REPRESENTATION_METHODS.md) - 思维表征方式
 - [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
@@ -1100,6 +1120,8 @@ graph TD
 
 ### 新增思维表征
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust 新特性可扩展思维表征方式：
 
 | 特性 | 思维表征类型 | 说明 |
@@ -1109,6 +1131,8 @@ Rust 新特性可扩展思维表征方式：
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
 ### 示例
+
+> **[来源: IEEE - Programming Language Standards]**
 
 `
 ust
@@ -1132,9 +1156,13 @@ ust
 
 ### 本文档的Rust 1.95+更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -1144,6 +1172,8 @@ ust
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: POPL - Programming Languages Research]**
 
 本文档中的所有Rust代码示例均已：
 

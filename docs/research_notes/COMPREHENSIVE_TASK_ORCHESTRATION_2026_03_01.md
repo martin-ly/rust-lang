@@ -166,6 +166,8 @@
 | TUTORIAL_OWNERSHIP_SAFETY.md | 8.2KB | 12KB | P1 |
 
 ### E类：可扩展的速查表 (5篇)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +180,8 @@
 | RUST_FORMAL_METHODS_CHEATSHEET.md | 4.5KB | 8KB | P1 |
 
 ### F类：设计模式可扩展 (23篇)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +212,8 @@
 | 行为型 | visitor.md | 9.8KB | 15KB |
 
 ### G类：Coq骨架证明 (L3机器证明)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +230,8 @@
 
 ### Phase 0: 全面审计与清理 (1天)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |
 | P0-T1 | 清理归档占位文件 | 2h | ⏳ |
@@ -232,6 +240,8 @@
 | P0-T4 | 生成真实状态报告 | 2h | ⏳ |
 
 ### Phase 1: Core形式化增强 (3天)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -243,6 +253,8 @@
 | P1-T6 | 更新与Rust 1.93的对应 | 3h | ⏳ |
 
 ### Phase 2: 设计模式扩展 (5天)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 任务ID | 任务描述 | 工时 | 状态 |
 | :--- | :--- | :--- | :--- |

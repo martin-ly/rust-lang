@@ -158,6 +158,8 @@ $$
 
 ### 3.3 存储语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 Reborrow 操作对存储的影响：
 
 $$
@@ -174,6 +176,8 @@ $$
 ## 4. 类型规则
 
 ### 4.1 Reborrow 类型推导规则
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **Reborrow 推导规则** (T-Reborrow):
 
@@ -195,6 +199,8 @@ $$
 
 ### 4.2 生命周期包含关系
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 $$
 \frac{
   \rho_1 \text{ 在作用域内} \quad
@@ -206,6 +212,8 @@ $$
 $$
 
 ### 4.3 借用检查规则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **借用有效性规则** (B-Reborrow):
 
@@ -223,6 +231,8 @@ $$
 
 ### 4.4 多重 Reborrow 规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 $$
 \frac{
   \Gamma \vdash e : \&'\rho_1 \text{ mut } \&'\rho_2 \text{ mut } T \quad
@@ -236,6 +246,8 @@ $$
 ## 5. 形式化定义
 
 ### 5.1 Reborrow 关系的数学定义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定义 5.1** (Reborrow 关系)：
 
@@ -252,6 +264,8 @@ $$
 3. $\forall t \in \rho_2. \text{valid}(r_{\text{mut}}, t)$
 
 ### 5.2 引用有效性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 5.2** (引用有效性)：
 

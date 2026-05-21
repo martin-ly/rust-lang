@@ -135,6 +135,8 @@ const fn allowed() {
 ```
 
 ### Def CE-4: 禁止的 const fn 操作
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +163,8 @@ const fn forbidden() {
 > **[来源: Rust Official Docs]**
 
 ### Thm CE-1: 常量求值终止性
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +177,8 @@ const fn forbidden() {
 - 无无限递归类型
 
 ### Thm CE-2: 常量求值确定性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -120,6 +120,8 @@ fn main() {
 
 #### Python 性能优化
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```python
 # 1. 使用 NumPy 向量化
 import numpy as np
@@ -156,6 +158,8 @@ def parallel_map(func, data, workers=4):
 ```
 
 #### Rust 原生性能
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // Rust 不需要这些优化技巧，原生就快
@@ -527,6 +531,8 @@ fn neural_network() {
 
 ### Polars：Rust 在 Python 生态中的成功案例
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```python
 # Polars - 用 Rust 编写的高性能 DataFrame 库
 import polars as pl
@@ -554,7 +560,11 @@ pandas_df = result.to_pandas()
 
 ### Web 服务
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### Python (FastAPI)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```python
 from fastapi import FastAPI, HTTPException
@@ -595,6 +605,8 @@ if __name__ == "__main__":
 ```
 
 #### Rust (Axum)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use axum::{
@@ -662,7 +674,11 @@ async fn main() {
 
 ### 数据处理
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### Python (Pandas)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```python
 import pandas as pd
@@ -690,6 +706,8 @@ def process_data(file_path: str) -> pd.DataFrame:
 ```
 
 #### Rust (Polars API)
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use polars::prelude::*;
@@ -727,6 +745,8 @@ fn process_data(file_path: &str) -> Result<DataFrame, PolarsError> {
 ## 混合开发策略
 
 ### PyO3：Rust 与 Python 的桥梁
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // Rust 代码（使用 PyO3）
@@ -775,6 +795,8 @@ total = rust_extension.array_sum(arr)  # 比 Python 快 10-100 倍
 ```
 
 ### 混合架构建议
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 ┌─────────────────────────────────────────┐

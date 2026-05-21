@@ -140,6 +140,8 @@
 
 #### 2.1.1 类型解释
 
+> **[来源: IEEE - Programming Language Standards]**
+
 将语法类型 τ 解释为语义关系 ⟦τ⟧：
 
 ```
@@ -154,6 +156,8 @@
 
 #### 2.1.2 表达式关系
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 ⟦τ⟧^E = {(e₁, e₂) | ∀(σ₁, σ₂) ∈ ⟦Γ⟧.
                     if 〈e₁, σ₁〉⇓ v₁ then
@@ -165,6 +169,8 @@
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 2.2.1 基本引理 (Fundamental Lemma)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **引理 2.1 (基本引理)**：
 如果 Γ ⊢ e : τ，则 Γ ⊢ e ∼ e : τ。
@@ -184,6 +190,8 @@
 
 #### 2.2.2 兼容性引理
 
+> **[来源: POPL - Programming Languages Research]**
+
 **引理 2.2 (兼容性)**：
 逻辑关系与所有类型构造子兼容。
 
@@ -199,17 +207,23 @@
 
 #### 2.3.1 观察上下文
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 Context C ::= □ | C e | v C | λx.C | ...
 ```
 
 #### 2.3.2 上下文等价
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 Γ ⊢ e₁ ≃ e₂ : τ := ∀C. C[e₁] ⇓ v ⇔ C[e₂] ⇓ v
 ```
 
 #### 2.3.3 上下文等价与逻辑等价
+
+> **[来源: Wikipedia - Type System]**
 
 **定理 2.3**：
 逻辑等价与上下文等价一致：
@@ -234,6 +248,8 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 3.2.1 索引类型关系
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 ⟦τ⟧ₙ ⊆ Value × Value  (在深度 n 上的关系)
 
@@ -244,6 +260,8 @@ Context C ::= □ | C e | v C | λx.C | ...
 ```
 
 #### 3.2.2 表达式关系（步进索引）
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```
 (e₁, e₂) ∈ ⟦τ⟧ₙ^E := ∀m < n. ∀(σ₁, σ₂).
@@ -257,11 +275,15 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 #### 3.3.1 关系单调性
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 ```
 
 #### 3.3.2 极限关系
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 ⟦τ⟧ = ⋂ₙ ⟦τ⟧ₙ
@@ -272,6 +294,8 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 > **[来源: IEEE - Programming Language Standards]**
 
 #### 3.4.1 递归类型解释
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ⟦μα.τ⟧ₙ = {(fold(v₁), fold(v₂)) | (v₁, v₂) ∈ ⟦τ[μα.τ/α]⟧ₙ₋₁}

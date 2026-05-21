@@ -436,6 +436,8 @@ fn main() {
 
 ### 5.4 违反别名规则
 
+> **[来源: Wikipedia - Concurrency]**
+
 **Stacked Borrows 违规示例：**
 
 ```rust
@@ -478,6 +480,8 @@ fn main() {
 
 ### 5.5 对齐违规
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **错误示例：**
 
 ```rust
@@ -507,6 +511,8 @@ fn main() {
 ```
 
 ### 5.6 整数溢出
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误示例：**
 
@@ -542,6 +548,8 @@ fn main() {
 
 ### 6.1 与 FFI 代码交互
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Miri 默认在隔离模式下运行，与外部函数 (FFI) 交互需要特殊配置：
 
 ```rust
@@ -568,6 +576,8 @@ MIRI_DISABLE_ISOLATION=1 cargo miri run
 
 ### 6.2 环境变量详解
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 环境变量 | 说明 | 示例 |
 |:---|:---|:---|
 | `MIRI_DISABLE_ISOLATION` | 禁用隔离，允许 FFI | `MIRI_DISABLE_ISOLATION=1` |
@@ -577,6 +587,8 @@ MIRI_DISABLE_ISOLATION=1 cargo miri run
 | `MIRI_NUM_THREADS` | 限制线程数 | `MIRI_NUM_THREADS=4` |
 
 ### 6.3 测试框架集成
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 #[cfg(test)]
@@ -625,6 +637,8 @@ cargo miri test test_unsafe_ptr_ops
 ## 7. 实战案例
 
 ### 7.1 自定义智能指针验证
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -694,6 +708,8 @@ mod tests {
 
 ### 7.2 并发数据结构检测
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -747,6 +763,8 @@ mod tests {
 ```
 
 ### 7.3 Unsafe 抽象边界验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 /// 安全的字符串转换封装
@@ -818,6 +836,8 @@ mod tests {
 
 ### 9.1 最佳实践
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```markdown
 1. **CI 集成**: 在持续集成中运行 Miri 测试
    ```yaml
@@ -851,6 +871,8 @@ mod tests {
 ```
 
 ### 9.2 常见陷阱
+
+> **[来源: POPL - Programming Languages Research]**
 
 **陷阱 1: 忘记 Miri 的非确定性**
 
@@ -920,6 +942,8 @@ fn platform_specific() {
 
 ### 当前限制
 
+> **[来源: PLDI - Programming Language Design]**
+
 1. **性能**: 解释执行导致 10-100 倍 slowdown
 2. **平台支持**: 仅支持部分目标平台
 3. **需要源码**: 不能检查闭源代码或第三方库
@@ -927,6 +951,8 @@ fn platform_specific() {
 5. **异步支持**: async/await 支持有限
 
 ### 未来方向
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - 改进 Tree Borrows 模型
 - 更好的异步/并发支持

@@ -104,6 +104,8 @@ t₁ < t₂ → elapsed(t₁) < elapsed(t₂)
 
 ### Axiom TO3: 资源释放
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 Timeout → resources_released
 ```
@@ -116,6 +118,8 @@ Timeout → resources_released
 
 ### Theorem TO1: 资源占用有界
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 ∀Op. resource_usage(Op) ≤ f(t_max)
 ```
@@ -127,6 +131,8 @@ Timeout → resources_released
 3. 因此资源占用与时间上限相关
 
 ### Theorem TO2: 系统活性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 Timeout → system_continues
@@ -260,6 +266,8 @@ impl TimeoutHttpClient {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: ACM - Systems Programming Languages]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

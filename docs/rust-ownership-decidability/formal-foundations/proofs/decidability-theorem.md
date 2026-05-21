@@ -179,6 +179,8 @@ $$
 
 ### 定理 3.1 (Rust类型推断是PSPACE完全)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 > Rust类型推断问题 RUST-TYPE-INFERENCE 是 PSPACE完全的。
 
 **证明结构**:
@@ -204,6 +206,8 @@ $$
 ```
 
 ### 3.2 PSPACE困难性证明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定理 3.2 (PSPACE困难性)**:
 > TQBF $\leq_p$ RUST-TYPE-INFERENCE
@@ -297,6 +301,8 @@ fn check<X, Y>() where
 
 ### 3.3 PSPACE成员性证明
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **定理 3.3 (PSPACE成员性)**:
 > RUST-TYPE-INFERENCE $\in$ PSPACE
 
@@ -373,9 +379,13 @@ $$
 
 ### 4.1 区域约束系统
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust借用检查可形式化为**区域约束满足问题**。
 
 ### 定义 4.1 (区域约束)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **区域变量**: $\rho, \rho_1, \rho_2, \dots \in \text{RegionVar}$
 

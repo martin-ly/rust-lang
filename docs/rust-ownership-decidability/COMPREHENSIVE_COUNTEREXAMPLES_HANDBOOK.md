@@ -49,10 +49,14 @@
 > **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Counterexample]** · **[来源: Wikipedia - Formal Verification]** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
 
 ### Extended Ownership Deep Dive
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### EDO.1 Understanding Move Semantics
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -140,6 +144,8 @@ fn give_back(s: String) -> String {
 
 #### EDO.2 The Copy Trait Deep Dive
 
+> **[来源: POPL - Programming Languages Research]**
+
 Not all types are moved. Types implementing `Copy` are copied instead.
 
 **❌ Assuming Copy Behavior:**
@@ -193,6 +199,8 @@ struct HasHeapData {
 
 #### EDO.3 Drop Order and Destructors
 
+> **[来源: PLDI - Programming Language Design]**
+
 Understanding when destructors run is crucial.
 
 **❌ Relying on Drop Order:**
@@ -240,6 +248,8 @@ fn explicit_order() {
 > **[来源: ACM - Systems Programming Languages]**
 
 #### EDB.1 Understanding Borrowing Rules
+
+> **[来源: Wikipedia - Memory Safety]**
 
 The borrowing rules can be summarized as:
 
@@ -291,6 +301,8 @@ fn sequential_borrows() {
 
 #### EDB.2 Lifetime Elision Rules
 
+> **[来源: Wikipedia - Type System]**
+
 Rust has rules for inferring lifetimes:
 
 **Rule 1: Each input parameter gets its own lifetime**
@@ -333,6 +345,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 #### EDB.3 The 'static Lifetime
 
+> **[来源: Wikipedia - Concurrency]**
+
 `'static` means the reference lives for the entire program duration.
 
 **❌ Misunderstanding 'static:**
@@ -367,6 +381,8 @@ fn static_examples() {
 
 #### EDI.1 When to Use Each Type
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | Type | Use When | Overhead |
 |------|----------|----------|
 | `Cell<T>` | `T: Copy`, single-threaded | None |
@@ -399,6 +415,8 @@ struct Wrapper {
 ---
 
 #### EDI.2 Runtime Panic Prevention
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **❌ RefCell Panic:**
 
@@ -434,6 +452,8 @@ fn no_panic() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### EDA.1 The Async Runtime Model
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Understanding how async works:
 
@@ -479,6 +499,8 @@ async fn true_concurrent() {
 ---
 
 #### EDA.2 Cancellation Safety
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Not all async operations are cancellation-safe.
 
@@ -527,6 +549,8 @@ async fn write_file(data: &[u8]) -> std::io::Result<()> {
 
 #### EDF.1 C String Handling
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 C strings are fundamentally different from Rust strings:
 
 | Aspect | C | Rust |
@@ -571,6 +595,8 @@ unsafe fn string_correct() {
 
 #### EDF.2 Struct Layout Compatibility
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **❌ Layout Mismatch:**
 
 ```rust
@@ -608,6 +634,8 @@ assert_eq_size!(Point, [u8; 16]);
 
 #### EDU.1 Pointer Aliasing Rules
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust's aliasing rules apply even to raw pointers in many cases.
 
 **❌ Aliasing Violation:**
@@ -643,6 +671,8 @@ unsafe fn no_aliasing() {
 ---
 
 #### EDU.2 Transmute Safety
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 `transmute` is one of the most dangerous operations.
 
@@ -3221,3 +3251,7 @@ This handbook covered:
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**

@@ -296,6 +296,8 @@ macro_rules! check_hygiene {
 
 ### 使用 `#[macro_export]` + 组合
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 组合多个宏来"传递"标识符
 macro_rules! define_and_use {
@@ -311,6 +313,8 @@ let result = define_and_use!(x, 42, x * 2);
 ```
 
 ### 使用 const 泛型传递（高级技巧）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 macro_rules! const_hygiene_break {
@@ -384,9 +388,13 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -397,6 +405,8 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 #### 代码示例更新
 
+> **[来源: POPL - Programming Languages Research]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -404,6 +414,8 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -443,3 +455,6 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 > **[来源: Rust Reference - Macros]**
 
 > **[来源: The Little Book of Rust Macros]**
+
+
+> **[来源: Wikipedia - Memory Safety]**

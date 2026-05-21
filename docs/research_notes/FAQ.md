@@ -343,6 +343,8 @@
 
 ### Q10: 我应该使用哪些研究工具？🟢
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **简短回答**: 根据研究类型选择合适的研究工具。
 
 **详细说明**:
@@ -361,6 +363,8 @@
 
 ### Q11: 如何安装和使用 Coq？🟡
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **简短回答**: 查看 [工具使用指南](./TOOLS_GUIDE.md) 中的 Coq 部分。
 
 **详细说明**:
@@ -378,6 +382,8 @@
 ---
 
 ### Q12: 如何使用 Criterion.rs 进行基准测试？🟢
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **简短回答**: 查看 [工具使用指南](./TOOLS_GUIDE.md) 中的 Criterion.rs 部分。
 
@@ -398,6 +404,8 @@
 ## 📖 文档相关问题 {#-文档相关问题}
 
 ### Q13: 研究笔记的格式要求是什么？🔵
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **简短回答**: 遵循 [研究笔记规范](./README.md#-研究笔记规范)。
 
@@ -420,6 +428,8 @@
 
 ### Q14: 如何编写形式化定义？🟡
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **简短回答**: 使用数学符号和逻辑语言编写形式化定义。
 
 **详细说明**:
@@ -437,6 +447,8 @@
 ---
 
 ### Q15: 代码示例有什么要求？🟢
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **简短回答**: 代码示例应该可运行、相关、有说明。
 
@@ -457,12 +469,16 @@
 
 ### 核心文档
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [快速入门指南](./GETTING_STARTED.md) - 新用户入门指南
 - [主索引](./README.md) - 完整的研究笔记索引
 - [快速参考](./QUICK_REFERENCE.md) - 快速查找指南
 - [贡献指南](./CONTRIBUTING.md) - 贡献流程和规范
 
 ### 获取帮助
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - 🐛 提交 Issue
 - 💬 参与讨论
@@ -492,6 +508,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

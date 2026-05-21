@@ -441,6 +441,8 @@ fn main() {
 
 ### 4.1 结构体与所有权
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // ===== 示例 4.1.1: 所有权结构体 =====
 struct User {
@@ -501,6 +503,8 @@ fn main() {
 
 ### 4.2 枚举与所有权
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // ===== 示例 4.2.1: 拥有所有权的枚举 =====
 enum Message {
@@ -547,6 +551,8 @@ fn main() {
 
 ### 5.1 智能指针
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 // ===== 示例 5.1.1: Box<T> =====
 fn main() {
@@ -586,6 +592,8 @@ fn main() {
 ```
 
 ### 5.2 闭包与所有权
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // ===== 示例 5.2.1: 闭包捕获环境 =====
@@ -632,6 +640,8 @@ fn main() {
 
 ### 6.1 所有权错误
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // ===== 反例 6.1.1: 使用已移动的值 =====
 fn main() {
@@ -671,6 +681,8 @@ fn main() {
 
 ### 6.2 借用错误
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // ===== 反例 6.2.1: 同时有 & 和 &mut =====
 fn main() {
@@ -706,6 +718,8 @@ fn main() {
 ```
 
 ### 6.3 生命周期错误
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // ===== 反例 6.3.1: 返回引用不明确 =====

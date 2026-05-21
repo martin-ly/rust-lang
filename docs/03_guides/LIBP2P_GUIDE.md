@@ -196,6 +196,8 @@ match event {
 
 ### Kademlia DHT 内容路由
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use libp2p::kad::{
     Kademlia, KademliaConfig, KademliaEvent, QueryResult, Quorum, Record,

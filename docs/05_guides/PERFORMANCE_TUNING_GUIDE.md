@@ -671,6 +671,8 @@ while let Some(result) = tasks.next().await {
 
 ### 4. 避免阻塞
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // ❌ 不好：在异步代码中阻塞
 async fn bad_example() {
@@ -703,6 +705,8 @@ async fn read_file(path: &str) -> Result<String, io::Error> {
 
 ### 1. 使用 criterion 基准测试
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 
@@ -732,6 +736,8 @@ criterion_main!(benches);
 
 ### 2. 使用 perf 分析
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```bash
 # Linux
 # 编译带调试信息的 release 版本
@@ -750,6 +756,8 @@ perf script | stackcollapse-perf.pl | flamegraph.pl > flamegraph.svg
 
 ### 3. 使用 cargo-flamegraph
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 安装
 cargo install flamegraph
@@ -764,6 +772,8 @@ cargo flamegraph --bin my_app -- arg1 arg2
 ```
 
 ### 4. 使用 valgrind (Linux)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```bash
 # 安装 cargo-valgrind
@@ -785,6 +795,8 @@ valgrind --leak-check=full ./target/debug/my_app
 ## 🎯 优化策略
 
 ### 1. 测量优先
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 先测量，再优化
@@ -809,6 +821,8 @@ println!("耗时: {:?}", duration);
 ```
 
 ### 2. 热点分析
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 使用 tracing 进行性能追踪

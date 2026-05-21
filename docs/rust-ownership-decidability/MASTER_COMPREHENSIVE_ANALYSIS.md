@@ -141,12 +141,16 @@
 
 #### Layer 0: 物理内存层
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```text
 概念: 地址 → 值 → 字节
 示例: 0x7fff_1234 → 0x0000_0005 → [0x05, 0x00, 0x00, 0x00]
 ```
 
 #### Layer 1: 逻辑内存层
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```text
 概念: 变量 → 绑定 → 作用域
@@ -157,6 +161,8 @@
 
 #### Layer 2: 所有权层
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 概念: 所有权 → 转移 → 释放
 关键问题: 谁拥有这个数据？
@@ -165,6 +171,8 @@
 
 #### Layer 3: 借用层
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 概念: 引用 → 权限 → 限制
 不可变引用: &T (只读)
@@ -172,6 +180,8 @@
 ```
 
 #### Layer 4: 类型系统层
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
 概念: 泛型 → Trait → 生命周期
@@ -402,6 +412,8 @@ Rust 的解决方案:
 ```
 
 ### 5.2 生命周期的三种形式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 ┌─────────────────────────────────────────┐

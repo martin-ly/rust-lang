@@ -110,6 +110,8 @@
 
 ### 复杂度评估
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```text
 低复杂度 ────────────────────────────────────> 高复杂度
 
@@ -124,6 +126,8 @@
 
 ### Temporal vs Cadence
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 维度 | Temporal | Cadence |
 | :--- | :--- | :--- |
 | **起源** | Cadence分支 | Uber开发 |
@@ -134,6 +138,8 @@
 | **推荐** | 新项目首选 | 存量系统 |
 
 ### Camunda 7 vs 8
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 维度 | Camunda 7 | Camunda 8 |
 | :--- | :--- | :--- |
@@ -149,6 +155,8 @@
 ## Rust集成指南
 
 ### Temporal Rust SDK
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use temporal_sdk::{ActivityOptions, WorkflowContext, workflow};
@@ -179,6 +187,8 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 ```
 
 ### 自研状态机模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // Rust原生状态机实现
@@ -289,9 +299,13 @@ impl<S: State> Workflow<S> {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Type System]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Concurrency]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

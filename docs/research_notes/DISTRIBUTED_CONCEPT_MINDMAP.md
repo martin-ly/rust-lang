@@ -191,6 +191,8 @@ graph LR
 
 ### 关键库生态系统
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 用途 | 推荐库 | 版本 |
 |------|--------|------|
 | RPC 框架 | tonic | 0.14+ |
@@ -204,6 +206,8 @@ graph LR
 ## 分布式模式实现
 
 ### 1. 熔断器模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::atomic::{AtomicU32, Ordering};
@@ -224,6 +228,8 @@ enum CircuitState {
 ```
 
 ### 2. 限流控制
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};

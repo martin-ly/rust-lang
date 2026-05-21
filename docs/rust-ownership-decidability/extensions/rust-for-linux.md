@@ -667,6 +667,8 @@ cd my-ebpf
 
 ### XDP 程序
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **eBPF 程序 (my-ebpf-ebpf/src/main.rs):**
 
 ```rust
@@ -773,6 +775,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### Kprobe 跟踪
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 #![no_std]
 #![no_main]
@@ -805,6 +809,8 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 ```
 
 ### 使用 eBPF 映射
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #![no_std]
@@ -875,6 +881,8 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 ### TC (流量控制) 程序
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 #![no_std]
 #![no_main]
@@ -930,6 +938,8 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 ### 内核调试
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 查看内核日志
 sudo dmesg | grep -i rust
@@ -949,6 +959,8 @@ modinfo rust_hello.ko
 
 ### 使用 GDB
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```bash
 # 调试内核模块
 # 在 QEMU 中运行内核
@@ -961,6 +973,8 @@ gdb vmlinux
 ```
 
 ### eBPF 调试
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```bash
 # 查看 eBPF 程序
@@ -1020,3 +1034,11 @@ Rust for Linux 为内核开发带来了新的可能性。关键要点：
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

@@ -63,6 +63,8 @@
 里程碑模式允许活动仅在达到特定状态（里程碑）时才能执行。它用于建模需要等待某些前置条件满足的场景。
 
 ### 核心语义
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -82,6 +84,8 @@ $$
 
 ### 状态条件语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 里程碑作为状态条件：
 
 $$
@@ -97,6 +101,8 @@ $$
 ## 时序逻辑形式化
 
 ### LTL 表示
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **线性时序逻辑（LTL）**用于描述里程碑的时序性质：
 
@@ -120,6 +126,8 @@ $$
 $$
 
 ### CTL 表示
+
+> **[来源: Wikipedia - Type System]**
 
 **计算树逻辑（CTL）**用于描述里程碑的分支时序性质：
 

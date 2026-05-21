@@ -51,6 +51,8 @@
 与现有的 `windows` 方法不同，`array_windows` 返回的是 `&[T; N]` 而非 `&[T]`，在编译时确定窗口大小，提供更好的类型安全和性能。
 
 ### 1.1 与 `windows` 的对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 

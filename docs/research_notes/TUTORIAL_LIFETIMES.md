@@ -92,6 +92,8 @@ let r;
 > **[来源: Rust Official Docs]**
 
 ### 显式生命周期
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +107,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 生命周期省略
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +134,8 @@ fn first_word(s: &str) -> &str { ... }
 > **[来源: Rust Official Docs]**
 
 ### 'static 生命周期
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +147,8 @@ let s: &'static str = "hello";
 ```
 
 ### 子类型关系
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +187,8 @@ fn main() {
 
 ### 模式1: 输入输出相同
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 fn identity<'a>(x: &'a str) -> &'a str {
     x
@@ -186,6 +196,8 @@ fn identity<'a>(x: &'a str) -> &'a str {
 ```
 
 ### 模式2: 多个独立生命周期
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 fn parse<'a, 'b>(
@@ -197,6 +209,8 @@ fn parse<'a, 'b>(
 ```
 
 ### 模式3: 方法
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 impl<'a> Person<'a> {

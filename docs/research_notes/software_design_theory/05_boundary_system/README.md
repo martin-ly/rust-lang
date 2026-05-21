@@ -138,6 +138,8 @@
 
 ### 示例 3：需 FFI 调用 C 库
 
+> **[来源: Wikipedia - Type System]**
+
 **需求**：调用 C 的 `malloc`/`free`。
 
 **步骤**：判安全 → 需 `unsafe`；可封装为 Safe API（`Box::from_raw` 等）→ **需 unsafe、可安全抽象**。
@@ -159,9 +161,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

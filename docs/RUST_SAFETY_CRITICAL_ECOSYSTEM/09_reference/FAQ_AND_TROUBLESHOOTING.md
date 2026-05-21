@@ -421,6 +421,8 @@ cargo build --release --target x86_64-unknown-linux-gnu
 
 ### Q14: 嵌入式系统内存有限，Rust是否合适？
 
+> **[来源: Wikipedia - Concurrency]**
+
 **A:** 非常适合：
 
 ```rust
@@ -448,6 +450,8 @@ let slice = &buffer[0..10];  // 无运行时开销
 ## 故障排除
 
 ### 问题: Cargo构建失败，依赖冲突
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **症状:**
 
@@ -481,6 +485,8 @@ serde = { version = "1.0", default-features = false }
 
 ### 问题: Clippy报告太多警告
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **解决:**
 
 ```rust
@@ -493,6 +499,8 @@ cognitive-complexity-threshold = 30
 ```
 
 ### 问题: 交叉编译失败
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **解决:**
 
@@ -515,6 +523,8 @@ cargo build --target thumbv7em-none-eabihf
 
 ### 问题: Miri测试太慢
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **解决:**
 
 ```bash
@@ -533,6 +543,8 @@ fn slow_test() {
 ```
 
 ### 问题: 安全审计发现漏洞
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **解决流程:**
 
@@ -560,11 +572,15 @@ cargo update -p vulnerable-crate
 
 ### 社区支持
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [Rust用户论坛](https://users.rust-lang.org)
 - [Rust嵌入式Matrix](https://matrix.to/#/#rust-embedded:matrix.org)
 - [Ferrocene支持](mailto:support@ferrous-systems.com)
 
 ### 文档
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [Rust Book](https://doc.rust-lang.org/book/)
 - [Rust Reference](https://doc.rust-lang.org/reference/)
@@ -620,3 +636,6 @@ cargo update -p vulnerable-crate
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

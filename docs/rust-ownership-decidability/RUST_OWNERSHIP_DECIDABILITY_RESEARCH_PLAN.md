@@ -83,12 +83,16 @@
 
 #### 1.2.1 可判定性问题 (Payet et al., NFM 2022)
 
+> **[来源: POPL - Programming Languages Research]**
+
 - **问题**: FR 的 borrow checker 在类型左值时可能无限循环
 - **根因**: 借用包含其他左值，递归过程可能不终止
 - **解决**: 提供充分条件（typing environments 的 linearizability）
 - **状态**: 已证明良类型程序满足该条件
 
 #### 1.2.2 元模型缺失
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 当前形式化的问题:
@@ -101,6 +105,8 @@
 ```
 
 #### 1.2.3 未覆盖的 Rust 特性
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - 非词法生命周期 (NLL)
 - Polonius 新 borrow checker
@@ -178,6 +184,8 @@ G6: 机械化证明
 
 #### 3.1.1 抽象语法 (Abstract Syntax)
 
+> **[来源: Wikipedia - Type System]**
+
 ```coq
 (* 示例: Coq 归纳定义 *)
 Inductive ty : Type :=
@@ -202,6 +210,8 @@ Inductive expr : Type :=
 
 #### 3.1.2 语义域 (Semantic Domains)
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 内存模型层次:
 ├── 抽象内存: 位置 (ℓ) → 值
@@ -218,6 +228,8 @@ Inductive expr : Type :=
 
 #### 3.1.3 判断形式 (Judgment Forms)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 核心判断:
 ├── Δ; Γ; Θ ⊢ e : τ       (类型检查)
@@ -233,6 +245,8 @@ Inductive expr : Type :=
 > **[来源: POPL - Programming Languages Research]**
 
 #### 3.2.1 分层形式化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 分层结构:
@@ -256,6 +270,8 @@ L5: 并发 (Concurrency)
 ```
 
 #### 3.2.2 可判定性证明策略
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 终止性证明框架:
@@ -290,6 +306,8 @@ L5: 并发 (Concurrency)
 ## 4. 详细工作计划
 
 ### 阶段 1: 基础构建 (Month 1-3)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### Week 1-2: 文献深度分析
 

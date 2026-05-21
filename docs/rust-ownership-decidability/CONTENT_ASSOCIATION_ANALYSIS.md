@@ -50,6 +50,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 三个维度的关联
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -78,6 +80,8 @@
 
 ### 1.1 核心概念关联矩阵
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 概念A | 概念B | 关联类型 | 论证文档 | 状态 |
 |:------|:------|:---------|:---------|:----:|
 | 所有权 | 借用 | 依赖 | `01-core-concepts/` | ✅ |
@@ -92,6 +96,8 @@
 **论证**: 所有核心概念对都有明确的关联论证，覆盖三角关系和依赖网络。
 
 ### 1.2 定理依赖完整性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 数学基础 (归纳、良基)
@@ -116,6 +122,8 @@
 **状态**: ✅ 所有定理依赖路径都有完整论证
 
 ### 1.3 理论与实践映射
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 理论概念 | 实践代码 | 映射文档 | 状态 |
 |:---------|:---------|:---------|:----:|

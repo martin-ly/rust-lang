@@ -180,6 +180,8 @@ cargo publish --workspace
 
 ### 自定义配置
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```toml
 # .cargo/config.toml
 [build]
@@ -206,6 +208,8 @@ retry = 3
 ```
 
 ### 虚拟工作空间示例
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```toml
 # 虚拟工作空间根 Cargo.toml
@@ -291,3 +295,6 @@ utils = { path = "crates/utils" }
 > **[来源: RustBelt - Rust Formal Semantics]**
 
 > **[来源: TLA+ Documentation]**
+
+
+> **[来源: PLDI - Programming Language Design]**

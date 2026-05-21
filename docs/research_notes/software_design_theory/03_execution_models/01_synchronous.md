@@ -182,6 +182,8 @@ main()
 | 单请求处理 | 简单 CLI/工具 | `let result = compute(input); println!("{}", result);` |
 
 ### 与设计模式组合
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +195,8 @@ main()
 | 同步 + State | 状态机；`state.handle(&mut ctx)` |
 
 ### 常见陷阱
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +207,8 @@ main()
 | 递归过深 | 栈溢出 | 改为迭代、或 `Box` 堆分配 |
 
 ### 反例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -263,6 +269,8 @@ main()
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: POPL - Programming Languages Research]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

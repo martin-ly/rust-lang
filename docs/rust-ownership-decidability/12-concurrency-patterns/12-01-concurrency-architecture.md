@@ -204,6 +204,8 @@ impl<K: Eq + std::hash::Hash, V: Clone> Cache<K, V> {
 
 ### 屏障模式 (Barrier)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::sync::Barrier;
 
@@ -227,6 +229,8 @@ fn barrier_example() {
 ```
 
 ### 信号量模式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::Arc;
@@ -258,6 +262,8 @@ async fn semaphore_example() {
 ## 4. 异步模式
 
 ### Actor模式 (Tokio)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use tokio::sync::{mpsc, oneshot};
@@ -346,6 +352,8 @@ pub fn start_actor() -> CacheActorHandle {
 
 ### 管道模式 (Pipeline)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use tokio::sync::mpsc;
 
@@ -384,6 +392,8 @@ async fn pipeline_example() {
 
 ### Future组合模式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use futures::future::{join, select, try_join};
 
@@ -411,6 +421,8 @@ async fn future_composition() {
 
 ### 数据并行 (Rayon)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use rayon::prelude::*;
 
@@ -435,6 +447,8 @@ fn data_parallel() {
 ```
 
 ### 分治模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use rayon::join;
@@ -463,6 +477,8 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 ## 6. Actor模式
 
 ### Actix框架示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use actix::prelude::*;

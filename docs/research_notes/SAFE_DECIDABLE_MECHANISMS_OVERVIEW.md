@@ -79,6 +79,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +91,8 @@
 - **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
 ### 3.2 借用
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +103,8 @@
 - **反例**：双重可变借用、悬垂引用。
 
 ### 3.3 生命周期
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -109,6 +115,8 @@
 - **反例**：返回局部引用、存储短生命周期引用。
 
 ### 3.4 Send
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +127,8 @@
 - **反例**：Rc 跨线程、非 Send 闭包 spawn。
 
 ### 3.5 Sync
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 

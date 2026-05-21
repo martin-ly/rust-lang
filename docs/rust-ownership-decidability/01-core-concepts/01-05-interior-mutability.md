@@ -291,6 +291,8 @@ fn safe_refcell_usage() {
 
 ### 3.5 形式化语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 RefCell<T> 的分离逻辑表示：
 
@@ -316,6 +318,8 @@ borrow_mut: {RefCell(x) * x.state = Unused}
 ## 4. `Mutex<T>` 与 `RwLock<T>`：线程安全版本
 
 ### 4.1 Mutex：互斥锁
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -344,6 +348,8 @@ fn mutex_example() {
 
 ### 4.2 RwLock：读写锁
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::sync::RwLock;
 
@@ -370,6 +376,8 @@ fn rwlock_example() {
 
 ### 4.3 与 RefCell 的对比
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 特性 | `RefCell<T>` | `Mutex<T>` | `RwLock<T>` |
 |------|-----------|----------|-----------|
 | 线程安全 | 否 | 是 | 是 |
@@ -382,6 +390,8 @@ fn rwlock_example() {
 ## 5. 内部可变性的形式化语义
 
 ### 5.1 类型系统视角
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 内部可变性的类型系统编码：

@@ -237,6 +237,8 @@ flowchart LR
 
 ### 6.1 技术谱系
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```mermaid
 flowchart TD
     A[Iris 分离逻辑框架<br/>2015+] --> B[RustBelt<br/>POPL 2018]
@@ -254,6 +256,8 @@ flowchart TD
 
 ### 6.2 各组件的角色
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 工具/论文 | 角色 | 与本论文的关系 |
 |-----------|------|--------------|
 | `RustBelt` | 证明 Rust 所有权系统内存安全 | 提供了"必然安全"的理论基础 |
@@ -263,6 +267,8 @@ flowchart TD
 | **本论文** | 分析编译器优化的安全效应 | 警示"偶然安全"的局限性 |
 
 ### 6.3 论文在学术脉络中的定位
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本论文填补了形式化验证领域的一个重要空白：
 

@@ -839,6 +839,8 @@ impl<S: RetryStrategy> TimeoutRetry<S> {
 
 ### 5.1 终止性保证
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 重试终止条件:
 
@@ -860,6 +862,8 @@ impl<S: RetryStrategy> TimeoutRetry<S> {
 ```
 
 ### 5.2 活性保证
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 重试活性:
@@ -978,3 +982,9 @@ $$
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**

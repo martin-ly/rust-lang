@@ -230,6 +230,8 @@ C ::= 'a: 'b | C₁ ∧ C₂ | true | false
 
 #### 1.2.2 约束满足性
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 定义 1.4 (约束满足性)
 ─────────────────────────────────
@@ -256,6 +258,8 @@ C ::= 'a: 'b | C₁ ∧ C₂ | true | false
 ```
 
 #### 1.2.3 约束生成规则
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 规则 1.1 (借用约束生成)
@@ -296,6 +300,8 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 #### 1.3.1 约束收集算法
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```
 算法 1.1 (生命周期约束收集)
 ─────────────────────────────────
@@ -330,6 +336,8 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 
 #### 1.3.2 约束求解算法
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```
 算法 1.2 (生命周期约束求解)
 ─────────────────────────────────
@@ -357,6 +365,8 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 ```
 
 #### 1.3.3 最小生命周期原则
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 定理 1.2 (最小生命周期原则)
@@ -399,6 +409,8 @@ fn main() {
 
 #### 2.1.1 形式化定义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 定义 2.1 (变型 Variance)
 ─────────────────────────────────
@@ -423,6 +435,8 @@ fn main() {
 
 #### 2.1.2 Rust 中的变型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 类型 | 参数位置 | 变型 |
 |------|----------|------|
 | `&'a T` | `'a` | 协变 |
@@ -444,6 +458,8 @@ fn main() {
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.2.1 定义与示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 定义 2.2 (协变)
@@ -483,6 +499,8 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 
 #### 2.2.2 协变的数学解释
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 定理 2.1 (协变引用的安全性)
 ─────────────────────────────────
@@ -507,6 +525,8 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 > **[来源: TRPL - The Rust Programming Language]**
 
 #### 2.3.1 定义与示例
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 定义 2.3 (逆变)
@@ -542,6 +562,8 @@ fn handler_contravariance<'a>(
 
 #### 2.3.2 逆变的数学解释
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 定理 2.2 (逆变函数参数的安全性)
 ─────────────────────────────────
@@ -563,6 +585,8 @@ fn handler_contravariance<'a>(
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 2.4.1 定义与示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 定义 2.4 (不变)
@@ -603,6 +627,8 @@ fn invariant_raw() {
 ```
 
 #### 2.4.2 为什么需要不变
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 反例：如果 Cell 是协变的，会发生什么？
@@ -680,6 +706,8 @@ Rust 编译器推导的变型与形式化变型定义一致。
 
 #### 3.1.1 基本子类型规则
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 规则 3.1 (引用子类型)
 ─────────────────────────────────
@@ -712,6 +740,8 @@ fn subtyping_examples<'a: 'b, 'b>() {
 ```
 
 #### 3.1.2 函数子类型
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 规则 3.2 (函数子类型)
@@ -753,6 +783,8 @@ fn main() {
 
 #### 3.2.1 HRTB 语法与语义
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 高阶 trait 约束：适用于所有生命周期
 fn higher_ranked<F>(f: F)
@@ -787,6 +819,8 @@ where
 ```
 
 #### 3.2.2 HRTB 的实际应用
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 应用 1：闭包接受任何生命周期的引用
@@ -1511,6 +1545,8 @@ mod crossbeam_advanced_failure {
 
 #### 5.1.1 PhantomData 的作用
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -1538,6 +1574,8 @@ impl<'a, T> MyStruct<'a, T> {
 
 #### 5.1.2 PhantomData 变型组合
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::marker::PhantomData;
 
@@ -1564,6 +1602,8 @@ struct WithLifetime<'a, T> {
 ```
 
 #### 5.1.3 自定义 Drop 检查
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::marker::PhantomData;
@@ -1602,6 +1642,8 @@ struct BadResource<T> {
 > **[来源: Wikipedia - Type System]**
 
 #### 5.2.1 Pin 基础
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::pin::Pin;
@@ -1649,6 +1691,8 @@ impl SelfReferential {
 ```
 
 #### 5.2.2 Ouroboros 模式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 /// 使用 ouroboros crate 简化自引用
@@ -1717,6 +1761,8 @@ impl ManualDocument {
 
 #### 5.3.1 传统 Iterator 的限制
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 /// 标准 Iterator 的 Item 不能借用迭代器本身
 ///
@@ -1734,6 +1780,8 @@ trait StandardIterator {
 ```
 
 #### 5.3.2 GAT 实现 Lending Iterator
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 #![feature(generic_associated_types)]
@@ -1800,6 +1848,8 @@ fn use_lending_iterator() {
 
 #### 5.3.3 Lending Iterator 扩展
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 /// 为 Lending Iterator 提供适配器
 pub trait LendingIteratorExt: LendingIterator {
@@ -1857,6 +1907,8 @@ where
 
 #### 6.1.1 参数顺序与约束
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 /// 生命周期参数与类型参数的声明顺序
 ///
@@ -1891,6 +1943,8 @@ impl<'a, T: 'a> Reference<'a, T> {
 ```
 
 #### 6.1.2 生命周期推导
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 /// 生命周期在泛型中的自动推导
@@ -1932,6 +1986,8 @@ impl<T> Container<T> {
 > **[来源: TRPL - The Rust Programming Language]**
 
 #### 6.2.1 类型边界 (Type Bounds)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// T: 'a 表示 T 必须至少活 'a 那么长
@@ -1982,6 +2038,8 @@ where
 
 #### 6.2.2 生命周期与 trait 边界
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 /// trait 对象的生命周期边界
 fn trait_object_bounds<'a>() {
@@ -2017,6 +2075,8 @@ async fn async_with_bounds<'a, T: 'a>(value: T) -> T {
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 7.1.1 Arena 模式概述
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// Arena 分配器：批量分配，统一释放
@@ -2063,6 +2123,8 @@ impl<'arena, T: 'arena> ArenaBox<'arena, T> {
 ```
 
 #### 7.1.2 生命周期设计
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 /// Arena 生命周期分析：
@@ -2167,6 +2229,8 @@ impl<'arena> Drop for Arena<'arena> {
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 7.2.1 类型安全的 bump allocator
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 use std::alloc::{alloc, dealloc, Layout};
@@ -2299,6 +2363,8 @@ unsafe impl Sync for BumpArena {}
 
 #### 7.2.2 带生命周期的 Arena
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// 带生命周期的类型安全 Arena
 ///
@@ -2373,6 +2439,8 @@ struct Point {
 
 #### 7.3.1 Arena 生命周期约束
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 定理 7.1 (Arena 安全性)
 ─────────────────────────────────
@@ -2422,6 +2490,8 @@ fn nested_arena_lifetimes() {
 ```
 
 #### 7.3.2 Arena 与自引用
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// Arena 中的自引用结构

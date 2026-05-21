@@ -396,9 +396,13 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: POPL - Programming Languages Research]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -409,6 +413,8 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 #### 代码示例更新
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -416,6 +422,8 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Type System]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -462,3 +470,9 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

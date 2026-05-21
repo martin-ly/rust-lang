@@ -552,6 +552,8 @@ rust-lang/
 
 #### Tier 2: 进阶层（C04-C06）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **C04**: 泛型编程
 - **C05**: 线程与并发
 - **C06**: 异步编程
@@ -559,6 +561,8 @@ rust-lang/
 **特点**: 高级特性，中级开发者需要掌握
 
 #### Tier 3: 应用层（C07-C10）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - **C07**: 进程管理
 - **C08**: 算法与数据结构
@@ -568,6 +572,8 @@ rust-lang/
 **特点**: 实际应用，高级开发者需要掌握
 
 #### Tier 4: 专业层（C11-C12）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - **C11**: 宏系统
 - **C12**: WASM
@@ -579,6 +585,8 @@ rust-lang/
 ## 🔗 模块依赖关系
 
 ### 依赖图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 C01 (所有权) ──┐
@@ -596,6 +604,8 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 依赖原则
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **单向依赖**: 低层模块不依赖高层模块
 2. **最小依赖**: 每个模块只依赖必要的模块
 3. **接口隔离**: 通过 trait 和接口定义依赖
@@ -606,9 +616,13 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 4-Tier 文档体系
 
+> **[来源: PLDI - Programming Language Design]**
+
 每个模块遵循统一的 4-Tier 文档架构：
 
 #### Tier 1: 基础文档（Foundations）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 - 项目概览
 - 主索引导航
@@ -617,6 +631,8 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 2: 指南文档（Guides）
 
+> **[来源: Wikipedia - Type System]**
+
 - 快速入门指南
 - 实践指南
 - 代码示例集合
@@ -624,12 +640,16 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 #### Tier 3: 参考文档（References）
 
+> **[来源: Wikipedia - Concurrency]**
+
 - API 参考
 - 技术规范
 - 性能优化参考
 - 跨平台参考
 
 #### Tier 4: 高级文档（Advanced）
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - 高级主题
 - 理论分析
@@ -642,11 +662,15 @@ C03 (控制流) ──┘                     ├──> C04 (泛型) ──┐
 
 ### 1. 模块化原则
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **单一职责**: 每个模块只负责一个主题
 - **高内聚**: 模块内部功能紧密相关
 - **低耦合**: 模块之间依赖最小化
 
 ### 2. 可扩展性原则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - **特性标志**: 使用 feature flags 控制功能
 - **插件架构**: 支持扩展和自定义

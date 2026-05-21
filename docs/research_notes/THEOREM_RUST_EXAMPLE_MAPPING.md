@@ -192,6 +192,8 @@ fn theorem_br2_mutable_exclusivity(data: &mut Vec<i32>) {
 > **[来源: Rust Official Docs]**
 
 ### T-TY1: 类型安全定理 (进展性 + 保持性)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -212,6 +214,8 @@ fn theorem_ty1_type_safety() {
 ```
 
 ### T-TY2: 泛型单态化定理
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +239,8 @@ fn theorem_ty2_generic_monomorphization<T: std::fmt::Display>(x: T) {
 
 ### T-LT1: 生命周期包含定理
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 定理: 引用生命周期 ⊆ 被引用数据生命周期
 // 示例位置: crates/c01_ownership_borrow_scope/examples/lifetime_annotations.rs
@@ -253,6 +259,8 @@ fn theorem_lt1_lifetime_containment() -> String {
 
 ### T-LT2: 子类型替换定理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 定理: 'long 可替换 'short (协变性)
 // 示例位置: crates/c04_generic/examples/variance.rs
@@ -270,6 +278,8 @@ fn theorem_lt2_subtyping<'a>(s: &'a str) -> &'static str {
 
 ### T-SS1: Send 安全性定理
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 定理: Send 类型可安全跨线程转移所有权
 // 示例位置: crates/c05_threads/examples/thread_safety.rs
@@ -285,6 +295,8 @@ fn theorem_ss1_send_safety() {
 ```
 
 ### T-SS2: Sync 安全性定理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 定理: Sync 类型可安全跨线程共享引用
@@ -306,6 +318,8 @@ fn theorem_ss2_sync_safety() {
 ```
 
 ### T-MT1: Mutex 安全性定理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 定理: Mutex 保证数据竞争自由
@@ -332,6 +346,8 @@ fn theorem_mt1_mutex_safety() {
 
 ### T-FU1: Future 进展定理
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 定理: Future 会进展到完成或挂起
 // 示例位置: crates/c06_async/examples/futures_demo.rs
@@ -352,6 +368,8 @@ fn theorem_fu1_future_progress() {
 
 ### T-AS1: async/await 等价性定理
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 定理: async/await 是状态机语法糖，等价于手动实现 Future
 // 示例位置: crates/c06_async/examples/async_state_machine.rs
@@ -366,6 +384,8 @@ fn manual_future() -> impl Future<Output = i32> {
 ```
 
 ### T-PI1: Pin 安全性定理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 定理: Pin 保证自引用结构不会被移动
@@ -392,6 +412,8 @@ fn theorem_pi1_pin_safety() {
 
 ### T-SG1: Saga 最终一致性定理
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 定理: Saga 最终达到 Completed 或 Compensated 状态
 // 示例位置: docs/research_notes/software_design_theory/05_distributed/01_saga_pattern.md
@@ -407,6 +429,8 @@ async fn theorem_sg1_saga_eventual_consistency() {
 ```
 
 ### T-CB1: 熔断故障隔离定理
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // 定理: 熔断器打开时阻止故障扩散

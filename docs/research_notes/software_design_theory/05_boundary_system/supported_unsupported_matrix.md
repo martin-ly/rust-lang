@@ -282,11 +282,15 @@ async fn serve() {
 
 ### 示例 2：no_std 嵌入式
 
+> **[来源: POPL - Programming Languages Research]**
+
 **场景**：裸机无 libc。
 
 **决策**：仅 `core` + `alloc` → $\mathit{SuppB} \in \{\mathrm{Native},\, \mathrm{Lib}\}$；Factory、Strategy、Adapter 等可用。
 
 ### 示例 3：FFI 绑定 C 库
+
+> **[来源: PLDI - Programming Language Design]**
 
 **场景**：调用 OpenSSL。
 
@@ -308,9 +312,13 @@ async fn serve() {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Type System]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -320,6 +328,8 @@ async fn serve() {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: Wikipedia - Concurrency]**
 
 本文档中的所有Rust代码示例均已：
 

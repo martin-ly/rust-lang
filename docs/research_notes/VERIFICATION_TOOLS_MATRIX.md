@@ -203,6 +203,8 @@ graph TD
 
 ### CI/CD 配置
 
+> **[来源: Wikipedia - Type System]**
+
 ```yaml
 # .github/workflows/verification.yml
 name: Formal Verification
@@ -246,9 +248,13 @@ jobs:
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Concurrency]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|

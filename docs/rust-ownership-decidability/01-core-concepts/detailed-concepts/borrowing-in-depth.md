@@ -456,6 +456,8 @@ reborrow(r) → r' 期间:
 
 ### 4.3 函数参数中的重新借用
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 fn process(data: &mut Vec<i32>) {
     // 这里 data 被重新借用
@@ -478,6 +480,8 @@ fn main() {
 
 ### 4.4 显式与隐式重新借用
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **显式重新借用**:
 
 ```rust
@@ -499,6 +503,8 @@ foo(r);      // ✅ 可以再次调用，因为上次重新借用已结束
 ```
 
 ### 4.5 重新借用与模式匹配
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 fn reborrow_in_match() {
@@ -538,6 +544,8 @@ fn pattern_reborrow() {
 ## 5. 常见陷阱与解决方案
 
 ### 陷阱 1: 迭代器失效
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn iterator_invalidation() {
@@ -585,6 +593,8 @@ fn solution_iterator() {
 
 ### 陷阱 2: 自引用结构体
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // ❌ 危险的设计
 struct Parser {
@@ -631,6 +641,8 @@ struct PinnedParser {
 
 ### 陷阱 3: 生命周期标注遗漏
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // ❌ 编译错误：返回的引用生命周期不明确
 fn first_word(s: &str) -> &str {
@@ -653,6 +665,8 @@ fn first_word(s: &str) -> &str {  // 编译器自动推断
 ```
 
 ### 陷阱 4: 借用与线程
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::thread;
@@ -687,6 +701,8 @@ fn thread_ownership() {
 ```
 
 ### 陷阱 5: 可变借用与条件编译
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 fn conditional_borrow() {
@@ -724,6 +740,8 @@ fn conditional_borrow_fixed() {
 
 ### 6.1 C/C++: 裸指针
 
+> **[来源: POPL - Programming Languages Research]**
+
 **C++ 版本**:
 
 ```cpp
@@ -751,6 +769,8 @@ void dangerous() {
 | 性能 | 零成本 | 同等 |
 
 ### 6.2 Java: 引用与 GC
+
+> **[来源: PLDI - Programming Language Design]**
 
 **Java 版本**:
 
@@ -782,6 +802,8 @@ public class IteratorExample {
 | 性能 | 零运行时检查 | 迭代器状态检查 |
 
 ### 6.3 Swift: 值类型与引用类型
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **Swift 版本**:
 

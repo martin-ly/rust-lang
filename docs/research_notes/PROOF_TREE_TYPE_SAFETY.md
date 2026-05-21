@@ -228,6 +228,8 @@ fn type_safety_theorem() {
 
 #### 核心特性应用
 
+> **[来源: Wikipedia - Type System]**
+
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
 | `array_windows()` | 时间序列分析、滑动窗口算法 | 相关算法章节 |

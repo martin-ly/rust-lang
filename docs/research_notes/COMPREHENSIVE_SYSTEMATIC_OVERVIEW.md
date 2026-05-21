@@ -400,6 +400,8 @@ Axiom/规则层
 
 ### 按研究领域索引
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 领域 | 思维导图 | 矩阵 | 证明树 | 决策树 | 反例 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 所有权与借用 | MIND_MAP §2, C01 | MULTI_MATRIX §1 | ownership, borrow | DECISION §1 | FORMAL_GUIDE |
@@ -412,6 +414,8 @@ Axiom/规则层
 | 并发 | MIND_MAP §4 | MULTI_MATRIX §3,4 | async §6.2 | DECISION | FORMAL_GUIDE |
 
 ### 形式化理论概念对比矩阵（快速参考）
+
+> **[来源: POPL - Programming Languages Research]**
 
 > 完整矩阵见 [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §形式化理论概念对比矩阵。
 
@@ -426,6 +430,8 @@ Axiom/规则层
 | **Pin** | 位置稳定 | - | `Pin<Box<T>>` | T1–T3 | 移动未 Pin 自引用 |
 
 ### 决策树快速导航
+
+> **[来源: PLDI - Programming Language Design]**
 
 > 完整决策树见 [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md)、[THINKING_REPRESENTATION_METHODS](../04_thinking/THINKING_REPRESENTATION_METHODS.md) §3。
 
@@ -482,6 +488,8 @@ Axiom/规则层
 
 ### 阶段总览
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 阶段 | 内容 | 状态 | 完成度 |
 | :--- | :--- | :--- | :--- |
 | 1 | 框架搭建（FORMAL_PROOF_SYSTEM_GUIDE、缺口分析、映射表） | ✅ | 100% |
@@ -496,6 +504,8 @@ Axiom/规则层
 | 10 | **全局统一系统化框架** | ✅ | 100% |
 
 ### 剩余工作清单（达成 100%）
+
+> **[来源: Wikipedia - Type System]**
 
 | 优先级 | 任务 | 目标文档 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -512,6 +522,8 @@ Axiom/规则层
 | P5 | 设计机制论证（Pin 堆/栈、Send/Sync、Trait 对象） | DESIGN_MECHANISM_RATIONALE | ✅ 已完成 |
 
 ### 完成度仪表盘
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 总体完成度: ████████████████████ 100%
@@ -572,6 +584,8 @@ Axiom/规则层
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构

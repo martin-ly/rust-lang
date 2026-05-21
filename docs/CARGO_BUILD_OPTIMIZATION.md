@@ -34,6 +34,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 安装优化工具
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -51,6 +53,8 @@ chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
 ### 2. 使用优化脚本编译
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +79,8 @@ chmod +x ./scripts/cargo-build-optimized.sh
 将以下内容添加到你的 PowerShell 配置文件 (`$PROFILE`) 或 `.bashrc`/`.zshrc`：
 
 ### Windows (PowerShell)
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 

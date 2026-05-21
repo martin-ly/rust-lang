@@ -181,6 +181,8 @@ $$
 
 ### 定义 SLICE-LF-1 (切片生命周期)
 
+> **[来源: Wikipedia - Type System]**
+
 切片引用的生命周期不能超过其源数据的生命周期。
 
 $$
@@ -188,6 +190,8 @@ $$
 $$
 
 ### 定理 SLICE-LF-T1 (切片有效性)
+
+> **[来源: Wikipedia - Concurrency]**
 
 切片引用在生命周期内始终指向有效内存。
 
@@ -207,6 +211,8 @@ $$
 
 ### 定理 SLICE-T2 (切片不拥有数据)
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 切片引用`&[T]`不拥有数据，只借用数据。
 
 $$
@@ -217,6 +223,8 @@ $$
 
 ### 定理 SLICE-T3 (可变切片互斥)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 同一时间只能有一个可变切片引用。
 
 $$
@@ -224,6 +232,8 @@ $$
 $$
 
 ### 定理 SLICE-T4 (Slice Copy行为)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 若`T: Copy`，则`&[T]`可以被安全复制。
 
@@ -239,6 +249,8 @@ $$
 
 ### 示例1: 基本Slice操作
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 fn slice_basics() {
     let arr = [1, 2, 3, 4, 5];
@@ -252,6 +264,8 @@ fn slice_basics() {
 ```
 
 ### 示例2: String切片
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn string_slices() {

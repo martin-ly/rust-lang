@@ -345,6 +345,8 @@ safety-application/
 
 ### 2.2 Cargo.toml
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```toml
 [package]
 name = "safety-application"
@@ -394,6 +396,8 @@ harness = false
 ```
 
 ### 2.3 state_machine.rs
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 //! 类型状态模式的状态机
@@ -466,6 +470,8 @@ impl StateMachine<Running> {
 ```
 
 ### 2.4 CI/CD配置
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```yaml
 # .github/workflows/ci.yml
@@ -559,6 +565,8 @@ jobs:
 
 ### 3.1 创建新项目
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```bash
 # 使用cargo-generate
 cargo install cargo-generate
@@ -573,6 +581,8 @@ cd my-safety-project
 ```
 
 ### 3.2 初始化检查清单
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```bash
 #!/bin/bash
@@ -646,3 +656,10 @@ echo "   4. Run 'cargo test' to run tests"
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**

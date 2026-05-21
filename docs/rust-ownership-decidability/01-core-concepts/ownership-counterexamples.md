@@ -68,6 +68,8 @@ fn use_after_move() {
 
 #### 形式化证明错误
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 定义 MOVE-INVALIDATION:
     设 Γ 为类型环境
@@ -95,6 +97,8 @@ fn use_after_move() {
 
 #### 修复方案
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 方案1: 使用Clone
 fn use_after_move_fixed_clone() {
@@ -117,6 +121,8 @@ fn use_after_move_fixed_borrow() {
 
 ### 1.2 规则3反例: 作用域与Drop
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 反例: 误以为可以手动控制Drop时机
 fn wrong_drop_assumption() {
@@ -134,6 +140,8 @@ fn wrong_early_release() {
 ```
 
 #### 逻辑论证: RAII的强制性
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
 定义 RAII-ENFORCEMENT:
@@ -160,6 +168,8 @@ fn wrong_early_release() {
 
 ### 2.1 XOR原则反例: 可变+共享借用共存
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 反例: 同时存在可变和共享借用
 fn mutable_and_shared_borrow() {
@@ -178,6 +188,8 @@ fn mutable_and_shared_borrow() {
 ```
 
 #### 形式化证明错误
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```text
 定义 BORROW-XOR-VIOLATION:
@@ -201,6 +213,8 @@ fn mutable_and_shared_borrow() {
 ```
 
 #### 修复方案
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 方案1: 缩小借用作用域

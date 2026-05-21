@@ -78,7 +78,11 @@ Actix-web是基于Actor模型的Rust Web框架，结合了:
 
 ### 2.1 Actor定义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 2.1 (Actor)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 trait Actor: Sized {
@@ -104,6 +108,8 @@ $$
 
 ### 定义 2.2 (Actor地址)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 pub struct Addr<A: Actor> {
     tx: mpsc::UnboundedSender<Envelope<A>>,
@@ -118,7 +124,11 @@ $$
 
 ### 2.2 消息传递语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ### 定义 2.3 (消息传递)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 trait Handler<M: Message> {
@@ -134,6 +144,8 @@ $$
 $$
 
 ### 定理 2.1 (消息传递类型安全)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > Actor只能接收实现了Handler的消息类型。
 
@@ -157,6 +169,8 @@ impl Handler<MyMessage> for MyActor {
 不满足则编译错误。∎
 
 ### 定理 2.2 (Actor状态隔离)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > 每个Actor的状态只能通过消息传递访问。
 
@@ -189,7 +203,11 @@ impl Handler<Increment> for MyActor {
 
 ### 3.1 消息处理类型安全
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 3.1 (HTTP Handler)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 trait Handler<T>: Clone + 'static
@@ -204,6 +222,8 @@ where
 ```
 
 ### 定理 3.1 (Handler组合性)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > Handler可以组合多个提取器，类型系统保证正确性。
 

@@ -145,6 +145,8 @@ E[e]                求值上下文：E 是包含洞 e 的上下文
 
 #### 2.1.1 程序配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 Configuration ::= (Expr, Store, Heap, Permission)
 
@@ -156,6 +158,8 @@ Permission ::= Location → Perm (权限状态)
 
 #### 2.1.2 求值状态
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 State ::= Running | Panic(msg) | Terminated(v)
 ```
@@ -165,6 +169,8 @@ State ::= Running | Panic(msg) | Terminated(v)
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 2.2.1 基本表达式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **常量**：
 
@@ -190,6 +196,8 @@ State ::= Running | Panic(msg) | Terminated(v)
 ```
 
 #### 2.2.2 算术运算
+
+> **[来源: Wikipedia - Type System]**
 
 **加法（左参数先求值）**：
 
@@ -221,6 +229,8 @@ n = n₁ + n₂
 
 #### 2.3.1 移动操作
 
+> **[来源: Wikipedia - Concurrency]**
+
 **移动变量**：
 
 ```
@@ -239,6 +249,8 @@ n = n₁ + n₂
 
 #### 2.3.2 复制语义
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **复制值**：
 
 ```
@@ -252,6 +264,8 @@ n = n₁ + n₂
 > **[来源: POPL - Programming Languages Research]**
 
 #### 2.4.1 Let 求值
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Let 绑定（表达式求值）**：
 
@@ -276,6 +290,8 @@ store_at(loc, v)
 > **[来源: PLDI - Programming Language Design]**
 
 #### 2.5.1 函数应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **函数调用（函数表达式求值）**：
 
@@ -304,6 +320,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 
 #### 2.5.2 返回语句
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Return**：
 
 ```
@@ -325,6 +343,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 > **[来源: Wikipedia - Memory Safety]**
 
 #### 2.6.1 条件表达式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **If 条件求值**：
 
@@ -351,6 +371,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 
 #### 2.6.2 循环
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **While 循环**：
 
 ```
@@ -364,6 +386,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 > **[来源: Wikipedia - Type System]**
 
 #### 2.7.1 顺序执行
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **块求值**：
 
@@ -392,6 +416,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 2.8.1 模式匹配求值
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Match 求值**：
 
@@ -432,6 +458,8 @@ match_pattern(p, v) = None
 
 #### 3.1.1 基本求值
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **常量**：
 
 ```
@@ -448,6 +476,8 @@ x ⇓ v
 ```
 
 #### 3.1.2 复合表达式
+
+> **[来源: POPL - Programming Languages Research]**
 
 **加法**：
 

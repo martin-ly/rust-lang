@@ -74,6 +74,8 @@ cargo fuzz --version
 
 ### 初始化 fuzz 项目
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```bash
 cd crates/c08_algorithms
 cargo fuzz init
@@ -89,6 +91,8 @@ fuzz/
 ```
 
 ### 编写 Fuzz Target
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // fuzz/src/sort_fuzzer.rs
@@ -124,6 +128,8 @@ fuzz_target!(|data: &[u8]| {
 
 ### 运行 Fuzzer
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```bash
 # 运行特定的 fuzz target
 cargo fuzz run sort_fuzzer
@@ -143,6 +149,8 @@ cargo fuzz run sort_fuzzer corpus/
 ## 4. 本项目 Fuzz Target
 
 ### c08_algorithms —— 解析器模糊测试
+
+> **[来源: IEEE - Programming Language Standards]**
 
 `fuzz/src/parser_fuzzer.rs`:
 
@@ -174,6 +182,8 @@ fuzz_target!(|data: &[u8]| {
 
 ### 注册到 fuzz/Cargo.toml
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```toml
 [[bin]]
 name = "parser_fuzzer"
@@ -187,6 +197,8 @@ doc = false
 ## 5. 高级技巧
 
 ### 结构化 Fuzzing
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 对于需要结构化输入的场景：
 

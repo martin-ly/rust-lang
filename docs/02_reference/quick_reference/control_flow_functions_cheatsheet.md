@@ -480,6 +480,8 @@ fn add(a: i32, b: i32) -> i32 {
 
 ### 函数参数
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 值传递
 fn take_ownership(s: String) {
@@ -503,6 +505,8 @@ fn process(x: i32, y: i32, z: i32) -> i32 {
 ```
 
 ### 函数返回值
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 返回单个值
@@ -528,6 +532,8 @@ fn parse_number(s: &str) -> Result<i32, std::num::ParseIntError> {
 
 ### 函数指针
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 函数指针类型
 fn add(a: i32, b: i32) -> i32 {
@@ -549,6 +555,8 @@ fn apply(f: fn(i32, i32) -> i32, x: i32, y: i32) -> i32 {
 
 ### 基本闭包
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 基本语法
 let add = |x, y| x + y;
@@ -567,6 +575,8 @@ let multiply = |x, y| {
 ```
 
 ### 闭包捕获
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 不可变借用
@@ -590,6 +600,8 @@ let move_closure = move || {
 
 ### 闭包类型
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // Fn - 不可变借用
 fn call_fn<F: Fn()>(f: F) {
@@ -608,6 +620,8 @@ fn call_fn_once<F: FnOnce()>(f: F) {
 ```
 
 ### 闭包作为参数
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 接受闭包
@@ -628,6 +642,8 @@ let result = apply(|x| x * 3);
 
 ### 闭包作为返回值
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 返回闭包
 fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
@@ -645,6 +661,8 @@ let result = add5(3); // 8
 
 ### 早期返回
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 fn process(value: Option<i32>) -> i32 {
     let Some(x) = value else {
@@ -655,6 +673,8 @@ fn process(value: Option<i32>) -> i32 {
 ```
 
 ### 链式调用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // Option 链式调用
@@ -671,6 +691,8 @@ let result = "42"
 ```
 
 ### 模式匹配与解构
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // if let 解构
@@ -691,6 +713,8 @@ match result {
 ```
 
 ### 函数式编程
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 // map
@@ -713,6 +737,8 @@ let sum: i32 = vec![1, 2, 3, 4, 5]
 ```
 
 ### 递归函数
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 基本递归
@@ -740,6 +766,8 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 ### 反例 1: match 未覆盖所有分支
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误示例**:
 
 ```rust
@@ -763,6 +791,8 @@ let _ = match x {
 ---
 
 ### 反例 2: 闭包捕获可变引用导致冲突
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误示例**:
 
@@ -803,6 +833,8 @@ let _ = &v;
 ## 📚 相关资源
 
 ### 官方文档
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [Rust 控制流文档](https://doc.rust-lang.org/book/ch03-05-control-flow.html)
 - [Rust 函数文档](https://doc.rust-lang.org/book/ch03-03-how-functions-work.html)

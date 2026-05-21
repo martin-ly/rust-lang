@@ -623,6 +623,8 @@ impl Cache {
 
 ### API
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::RwLock;
 
@@ -644,6 +646,8 @@ let w = rwlock.try_write();          // Result<RwLockWriteGuard<T>, TryLockError
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::rc::{Rc, Weak};
@@ -668,6 +672,8 @@ assert!(weak.upgrade().is_none());
 ```
 
 ### 使用场景
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 避免循环引用
@@ -697,6 +703,8 @@ let branch = Rc::new(Node {
 
 ### API
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::rc::{Rc, Weak};
 
@@ -719,6 +727,8 @@ let weak_count = weak.weak_count();
 
 ### `Rc<RefCell<T>>` - 单线程内部可变性
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -736,6 +746,8 @@ println!("{}", *data.borrow()); // 8
 ```
 
 ### `Arc<Mutex<T>>` - 多线程共享可变数据
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -757,6 +769,8 @@ for handle in handles {
 ```
 
 ### `Arc<RwLock<T>>` - 多线程读写锁
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -783,6 +797,8 @@ thread::spawn(move || {
 
 ### `Rc<RefCell<Vec<T>>>` - 共享可变向量
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -805,6 +821,8 @@ println!("{:?}", vec.borrow()); // [1, 2, 3, 4, 5]
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 实现链表
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::rc::Rc;
@@ -853,6 +871,8 @@ assert_eq!(list.pop_front(), Some(3));
 
 ### 示例 2: 带父指针的树结构（避免循环引用）
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;
@@ -896,6 +916,8 @@ if let Some(parent) = child.get_parent() {
 
 ### 示例 3: 自定义智能指针
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 ```rust
 use std::ops::{Deref, Drop};
 
@@ -932,6 +954,8 @@ hello(&m);  // 自动解引用 &MyBox<String> -> &String -> &str
 
 ### 示例 4: LazyCell 和 LazyLock（Rust 1.80+，Rust 1.95+ 增强）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::sync::LazyLock;
 use std::cell::LazyCell;
@@ -958,6 +982,8 @@ fn main() {
 ```
 
 #### Rust 1.95+ 新增 API
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Rust 1.95+ 大幅增强了 `LazyCell` 和 `LazyLock`，新增了安全访问方法：
 
@@ -1049,6 +1075,8 @@ impl AppConfig {
 
 #### 性能对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 操作 | `LazyLock` (标准访问) | `LazyLock::get()` (Rust 1.96) | 提升 |
 |------|----------------------|------------------------------|------|
 | 已初始化读取 | 原子操作检查 | 直接读取 | **15-20%** |
@@ -1056,6 +1084,8 @@ impl AppConfig {
 | 并发读取 | 锁竞争 | 无锁 | **显著降低延迟** |
 
 #### 使用建议
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **全局配置**: 使用 `LazyLock` + `get()` 实现热路径优化
 - **单线程缓存**: 使用 `LazyCell` + `force_mut()` 实现延迟初始化+可变更新

@@ -146,6 +146,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 版本发布后
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +160,8 @@
 
 ### 季度复核
 
+> **[来源: Wikipedia - Concurrency]**
+
 - [ ] 权威来源链接有效
 - [ ] Edition 2024 与 FLS 范围说明仍准确
 - [ ] 92+N 特性总数与 RUST_XXX 一致
@@ -169,6 +173,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 场景 1：新语言特性研究
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +200,8 @@ fn lub_coercion_example() {
 ```
 
 ### 场景 2：性能改进验证
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +232,8 @@ fn performance_improvement_example() {
 ```
 
 ### 场景 3：API 稳定化跟踪
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

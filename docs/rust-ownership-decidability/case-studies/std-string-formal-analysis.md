@@ -76,7 +76,11 @@ Rust的字符串系统是其类型安全的核心展示:
 
 ### 2.1 String与&str的区别
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 2.1 (字符串类型)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 拥有所有权的可变字符串
@@ -102,6 +106,8 @@ $$
 
 ### 定义 2.2 (UTF-8有效性谓词)
 
+> **[来源: PLDI - Programming Language Design]**
+
 $$
 \text{UTF8}(data, len) \iff \forall i \in [0, len). \text{valid\_utf8\_byte}(data[i], \text{context})
 $$
@@ -116,6 +122,8 @@ $$
 | 4 | U+10000 - U+10FFFF | `11110xxx 10xxxxxx 10xxxxxx 10xxxxxx` |
 
 ### 2.2 内存表示形式化
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ### 定理 2.1 (String内存布局)
 

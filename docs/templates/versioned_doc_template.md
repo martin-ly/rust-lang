@@ -92,6 +92,8 @@
 
 ### 基础用法
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 要求: Rust {{ rust_version }}+ | Edition {{ edition }}
 // 文件: crates/{{ crate }}/src/rust_{{ version }}_features.rs
@@ -101,11 +103,15 @@
 
 ### 进阶用法
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 {{ advanced_example }}
 ```
 
 ### 生产级示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 {{ production_example }}
@@ -116,6 +122,8 @@
 ## ⚙️ 配置与选项
 
 ### Cargo.toml 配置
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```toml
 [package]

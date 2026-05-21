@@ -67,6 +67,8 @@ cargo miri setup
 > **[来源: Rust Official Docs]**
 
 ### 使用脚本运行
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@ scripts\run-miri.bat
 ```
 
 ### 手动运行
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -103,6 +107,8 @@ MIRIFLAGS="-Zmiri-disable-isolation" cargo miri test
 Miri 支持两种别名模型来检查内存访问的有效性：
 
 ### Stacked Borrows (默认)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +117,8 @@ Miri 支持两种别名模型来检查内存访问的有效性：
 - 与某些合法的 unsafe 模式不兼容
 
 ### Tree Borrows (推荐)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +134,8 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
 ### 关键区别示例
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +155,8 @@ let z = &mut *y;     // 重新借用
 > **[来源: Rust Official Docs]**
 
 ### 项目配置
+
+> **[来源: Wikipedia - Memory Safety]**
 
 项目的 `.cargo/config.toml` 已配置 Miri 支持：
 

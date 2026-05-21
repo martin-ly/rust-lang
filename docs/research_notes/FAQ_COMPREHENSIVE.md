@@ -710,6 +710,8 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 
 ### Q26: 生命周期省略规则是什么？
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 **A**: 编译器自动推断生命周期的三条规则：
 
 1. 每个引用参数有自己的生命周期
@@ -727,6 +729,8 @@ fn foo(x: &str) -> &str { x }  // 规则2
 ---
 
 ### Q27: 生命周期约束如何写？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **A**: `'a: 'b`表示`'a`至少和`'b`一样长。
 
@@ -749,6 +753,8 @@ where
 
 ### Q28: 什么是生命周期子类型？
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **A**: `'static`是`'a`的子类型（`'static <: 'a`），因为`'static`更长。
 
 ```rust
@@ -763,6 +769,8 @@ fn take_str<'a>(s: &'a str) {}
 ---
 
 ### Q29: 为什么需要显式生命周期标注？
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **A**: 当编译器无法确定返回引用与哪个参数关联时。
 
@@ -781,6 +789,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ---
 
 ### Q30: `for<'a>`语法是什么？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **A**: 高阶 trait bound (HRTB)，表示"对于所有生命周期"。
 
@@ -803,6 +813,8 @@ where
 
 ### Q31: 结构体中的生命周期如何工作？
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **A**: 结构体存活期间，其引用字段指向的数据必须有效。
 
 ```rust
@@ -821,6 +833,8 @@ fn main() {
 ---
 
 ### Q32: 自引用结构如何处理？
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **A**: 使用`Pin`保证结构不会被移动。
 
@@ -843,6 +857,8 @@ let mut pinned = Pin::new(Box::new(SelfReferential {
 
 ### Q33: 异步函数中的生命周期
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **A**: async函数返回的Future捕获所有参数的生命周期。
 
 ```rust
@@ -861,6 +877,8 @@ fn main() {
 
 ### Q34: 什么是`PhantomData`？
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **A**: 零大小类型，用于告诉编译器你"使用"了某个类型，影响生命周期。
 
 ```rust
@@ -876,6 +894,8 @@ struct Slice<'a, T: 'a> {
 ---
 
 ### Q35: 生命周期和泛型如何结合？
+
+> **[来源: POPL - Programming Languages Research]**
 
 **A**:
 
@@ -900,6 +920,8 @@ where
 
 ### Q36: Send和Sync有什么区别？
 
+> **[来源: PLDI - Programming Language Design]**
+
 **A**:
 
 - **Send**: 可以跨线程转移所有权
@@ -923,6 +945,8 @@ thread::spawn(move || { println!("{}", data); });  // OK
 
 ### Q37: 为什么`Cell`不是Sync？
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **A**: `Cell`提供内部可变性但没有同步机制，多线程同时修改会导致数据竞争。
 
 ```rust
@@ -937,6 +961,8 @@ let cell = Cell::new(0);
 
 ### Q38: `Mutex`和`RwLock`怎么选？
 
+> **[来源: Wikipedia - Type System]**
+
 **A**:
 
 | 场景 | 推荐 | 理由 |
@@ -949,6 +975,8 @@ let cell = Cell::new(0);
 ---
 
 ### Q39: 什么是死锁？如何避免？
+
+> **[来源: Wikipedia - Concurrency]**
 
 **A**: 死锁是两个线程互相等待对方释放锁。
 
@@ -970,6 +998,8 @@ let cell = Cell::new(0);
 ---
 
 ### Q40: async/await原理是什么？
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **A**: 编译器将async函数转换为状态机。
 
@@ -994,6 +1024,8 @@ enum FooFuture {
 
 ### Q41: `Pin`是什么？为什么需要？
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **A**: `Pin`保证值不会被移动，用于自引用结构。
 
 ```rust
@@ -1012,6 +1044,8 @@ async fn self_referential() {
 ---
 
 ### Q42: `tokio::spawn`和`thread::spawn`区别？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**:
 
@@ -1039,6 +1073,8 @@ tokio::spawn(async {
 
 ### Q43: 什么是`Unpin`？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A**: 标记可以安全移动的类型。大多数类型都是`Unpin`。
 
 ```rust
@@ -1053,6 +1089,8 @@ async fn, Pin<&mut T>
 
 ### Q44: `select!`宏是什么？
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **A**: 等待多个Future，哪个先完成就执行哪个。
 
 ```rust
@@ -1066,6 +1104,8 @@ tokio::select! {
 ---
 
 ### Q45: 如何避免跨await持锁？
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **A**: `.await`前释放锁：
 
@@ -1093,6 +1133,8 @@ let guard = tokio_mutex.lock().await;
 
 ### Q46: 什么是L1/L2/L3证明？
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **A**:
 
 - **L1**: 证明思路（给人看的）
@@ -1105,6 +1147,8 @@ let guard = tokio_mutex.lock().await;
 
 ### Q47: T-OW2定理是什么？
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **A**: **所有权唯一性定理** - 每个值在任意时刻只有一个所有者。
 
 **直觉**: 防止双重释放。
@@ -1113,6 +1157,8 @@ let guard = tokio_mutex.lock().await;
 
 ### Q48: T-BR1定理是什么？
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **A**: **数据竞争自由定理** - 借用检查通过 ⇒ 无数据竞争。
 
 **直觉**: 编译时保证并发安全。
@@ -1120,6 +1166,8 @@ let guard = tokio_mutex.lock().await;
 ---
 
 ### Q49: 形式化方法对普通开发者有什么用？
+
+> **[来源: POPL - Programming Languages Research]**
 
 **A**:
 

@@ -67,6 +67,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 核心表达式（简化）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@ v \mathrel{::=} &\; n \mid \textbf{true} \mid \textbf{false} \mid \lambda x{:}\t
 $$
 
 ### 2.2 所有权状态
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +91,8 @@ $$
 $$
 
 ### 2.3 借用类型
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +107,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### 3.1 类型判定
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +129,8 @@ $$
 $$
 
 ### 3.2 所有权状态判定
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +145,8 @@ $$
 $$
 
 ### 3.3 借用判定
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +171,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### 4.1 类型系统归约
+
+> **[来源: Wikipedia - Concurrency]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +195,8 @@ $$
 $$
 
 ### 4.2 所有权状态转换
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **转换关系**：$(\Gamma, \Omega) \xrightarrow{op} (\Gamma', \Omega')$
 

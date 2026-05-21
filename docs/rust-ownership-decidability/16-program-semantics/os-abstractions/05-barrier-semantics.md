@@ -178,6 +178,8 @@ fn single_barrier_example() {
 
 ### 3.3 安全论证
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 屏障的安全性证明:
 
@@ -206,6 +208,8 @@ fn single_barrier_example() {
 
 ### 4.1 循环屏障的定义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 CyclicBarrier:
 
@@ -226,6 +230,8 @@ CyclicBarrier:
 ```
 
 ### 4.2 Generation 机制的形式化
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 Generation 机制的作用:
@@ -249,6 +255,8 @@ Generation 机制的作用:
 ```
 
 ### 4.3 Rust 代码实现
+
+> **[来源: Wikipedia - Concurrency]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicBool, Ordering};

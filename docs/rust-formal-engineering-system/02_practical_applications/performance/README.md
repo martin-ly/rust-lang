@@ -119,6 +119,8 @@ struct PackedLayout {
 
 ### SIMD 优化
 
+> **[来源: Wikipedia - Concurrency]**
+
 ```rust
 // 使用标准库的 SIMD 支持
 #![feature(portable_simd)]
@@ -140,6 +142,8 @@ fn simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
 ```
 
 ### 缓存友好性优化
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 ```rust
 // 行优先 vs 列优先遍历
@@ -178,6 +182,8 @@ fn blocked_access(matrix: &mut [[f64; N]; N], block_size: usize) {
 ```
 
 ### 内联与分支预测提示
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 内联小函数

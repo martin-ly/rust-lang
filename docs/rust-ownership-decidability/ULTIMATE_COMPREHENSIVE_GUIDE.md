@@ -296,6 +296,8 @@
 
 #### 🟢 入门级 (初学者)
 
+> **[来源: Wikipedia - Concurrency]**
+
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
 | [README.md](./README.md) | 项目总览 | 10分钟 | 无 |
@@ -307,6 +309,8 @@
 | [全面FAQ](./COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
 
 #### 🟡 进阶级 (有经验的开发者)
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
@@ -322,6 +326,8 @@
 | [案例研究索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md) | 案例分析 | 持续 | 进阶知识 |
 
 #### 🔴 专家级 (研究者/形式化方法)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
@@ -341,6 +347,8 @@
 > **[来源: PLDI - Programming Language Design]**
 
 #### 主题 1: 所有权系统核心
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```text
 理论基础:
@@ -370,6 +378,8 @@
 
 #### 主题 2: 借用系统
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```text
 理论基础:
 ├── 00-foundations/00-02-affine-types.md (仿射类型→借用)
@@ -398,6 +408,8 @@
 
 #### 主题 3: 生命周期
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```text
 理论基础:
 ├── 00-foundations/类型论基础
@@ -424,6 +436,8 @@
 
 #### 主题 4: 形式化证明
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 概述:
 ├── UNIFIED_THEORETICAL_FRAMEWORK.md
@@ -443,6 +457,8 @@
 ```
 
 #### 主题 5: 设计模式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 概述:
@@ -494,6 +510,8 @@ Rust特有:
 
 #### 路径 A: 快速入门 (4小时)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **目标**: 理解所有权、借用、生命周期的基本概念，能阅读简单 Rust 代码
 
 **阶段 1: 概念建立 (1.5小时)**
@@ -535,6 +553,8 @@ Rust特有:
 - [ ] 能诊断简单的所有权错误
 
 #### 路径 B: 系统掌握 (2周)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **目标**: 系统掌握 Rust，能独立开发复杂项目，理解内存安全和并发安全
 

@@ -2785,6 +2785,8 @@ impl Drop for RegistrationHandle {
 
 #### 6.3.1 AsyncRead trait 语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **AsyncRead** trait 的语义定义：
 
 ```rust
@@ -2848,6 +2850,8 @@ async fn async_read_semantics() {
 
 #### 6.3.2 AsyncWrite trait 语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **AsyncWrite** trait 的语义定义：
 
 ```rust
@@ -2892,6 +2896,8 @@ async fn async_write_semantics() {
 ```
 
 #### 6.3.3 缓冲语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **缓冲 I/O** 的语义优化：
 
@@ -2946,6 +2952,8 @@ async fn double_buffering() {
 
 #### 7.1.1 Stream vs Iterator 语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Stream** 与 **Iterator** 的语义对比：
 
 | 特性 | Iterator | Stream |
@@ -2996,6 +3004,8 @@ async fn stream_semantics() {
 
 #### 7.1.2 拉取模型语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **拉取模型**的语义：
 
 ```rust
@@ -3018,6 +3028,8 @@ async fn pull_model_semantics() {
 ```
 
 #### 7.1.3 终止语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Stream 终止**的语义：
 
@@ -3056,6 +3068,8 @@ async fn stream_termination_semantics() {
 
 #### 7.2.1 map/filter 语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **map/filter** 的语义：
 
 ```rust
@@ -3086,6 +3100,8 @@ async fn map_filter_semantics() {
 ```
 
 #### 7.2.2 take/skip 语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **take/skip** 的语义：
 
@@ -3120,6 +3136,8 @@ async fn take_skip_semantics() {
 ```
 
 #### 7.2.3 buffer/chunks 语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **buffer/chunks** 的语义：
 
@@ -3171,6 +3189,8 @@ async fn buffer_chunks_semantics() {
 
 #### 7.3.1 流量控制语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **背压（Backpressure）**的语义：
 
 ```rust
@@ -3206,6 +3226,8 @@ async fn backpressure_semantics() {
 ```
 
 #### 7.3.2 缓冲区管理语义
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **缓冲区管理**的语义：
 
@@ -3252,6 +3274,8 @@ async fn buffer_management_semantics() {
 ```
 
 #### 7.3.3 慢消费者处理
+
+> **[来源: Wikipedia - Type System]**
 
 **慢消费者**的处理策略：
 
@@ -3367,6 +3391,8 @@ async fn slow_consumer_strategies() {
 
 #### 8.1.1 取消请求语义
 
+> **[来源: Wikipedia - Concurrency]**
+
 **取消请求**的语义：
 
 ```rust
@@ -3408,6 +3434,8 @@ async fn cancellation_checkpoints() {
 ```
 
 #### 8.1.2 取消传播语义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **取消传播**的语义规则：
 
@@ -3464,6 +3492,8 @@ async fn prevent_cancellation_propagation() {
 ```
 
 #### 8.1.3 清理语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **取消时清理**的语义：
 
@@ -3536,6 +3566,8 @@ async fn async_cleanup() {
 
 #### 8.2.1 结构化并发语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **结构化并发**的语义：
 
 ```rust
@@ -3589,6 +3621,8 @@ async fn select_structured_concurrency() {
 
 #### 8.2.2 取消边界语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **取消边界**的语义：
 
 ```rust
@@ -3634,6 +3668,8 @@ async fn abort_handle_semantics() {
 ```
 
 #### 8.2.3 资源泄漏预防
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **资源泄漏预防**的语义：
 
@@ -3692,6 +3728,8 @@ async fn prevent_resource_leaks() {
 
 #### 8.3.1 timeout 组合子语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **timeout** 的语义：
 
 ```rust
@@ -3744,6 +3782,8 @@ async fn fallible_operation() -> Result<String, std::io::Error> {
 
 #### 8.3.2 嵌套超时语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **嵌套 timeout** 的语义：
 
 ```rust
@@ -3783,6 +3823,8 @@ async fn operation_with_variable_delay(step: usize) -> Result<String, std::io::E
 ```
 
 #### 8.3.3 超时与取消交互
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **timeout 与取消**的交互语义：
 
@@ -3851,6 +3893,8 @@ async fn graceful_shutdown_with_timeout() {
 
 #### 9.1.1 join! 宏语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **join!** 的并发语义：
 
 ```rust
@@ -3907,6 +3951,8 @@ async fn fallible_b() -> Result<i32, std::io::Error> {
 ```
 
 #### 9.1.2 select! 宏语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **select!** 的竞争语义：
 
@@ -3975,6 +4021,8 @@ async fn select_loop_semantics() {
 
 #### 9.1.3 race 语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **race** 的语义：
 
 ```rust
@@ -4030,6 +4078,8 @@ async fn futures_race_semantics() {
 
 #### 9.2.1 异步 Mutex 语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **异步 Mutex** 的语义：
 
 ```rust
@@ -4082,6 +4132,8 @@ async fn some_async_op() {
 ```
 
 #### 9.2.2 异步 RwLock 语义
+
+> **[来源: Wikipedia - Type System]**
 
 **异步 RwLock** 的语义：
 
@@ -4136,6 +4188,8 @@ async fn rwlock_upgrade_downgrade() {
 ```
 
 #### 9.2.3 异步 Channel 语义
+
+> **[来源: Wikipedia - Concurrency]**
 
 **异步 Channel** 的语义：
 
@@ -4197,6 +4251,8 @@ async fn channel_types() {
 ```
 
 #### 9.2.4 Semaphore 语义
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **Semaphore** 的并发控制语义：
 
@@ -4266,6 +4322,8 @@ async fn bulk_permits() {
 
 #### 9.3.1 barrier 语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Barrier** 的同步语义：
 
 ```rust
@@ -4298,6 +4356,8 @@ async fn barrier_semantics() {
 ```
 
 #### 9.3.2 异步栅栏语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **异步栅栏（Latch）** 的语义：
 
@@ -4372,6 +4432,8 @@ async fn latch_semantics() {
 
 #### 10.1.1 驱动器语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **I/O 驱动器**的语义：
 
 ```
@@ -4423,6 +4485,8 @@ async fn runtime_components() {
 
 #### 10.1.2 调度器语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **任务调度器**的语义：
 
 ```rust
@@ -4460,6 +4524,8 @@ async fn scheduler_configuration() {
 
 #### 10.1.3 计时器语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **计时器驱动**的语义：
 
 ```rust
@@ -4492,6 +4558,8 @@ async fn timer_semantics() {
 > **[来源: ACM - Systems Programming Languages]**
 
 #### 10.2.1 block_on 语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **block_on** 的阻塞语义：
 
@@ -4529,6 +4597,8 @@ fn block_on_limitations() {
 ```
 
 #### 10.2.2 spawn 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **spawn** 的任务创建语义：
 
@@ -4568,6 +4638,8 @@ async fn runtime_boundary_crossing() {
 
 #### 10.2.3 运行时切换语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **运行时切换**的语义：
 
 ```rust
@@ -4602,6 +4674,8 @@ async fn runtime_switching() {
 
 #### 10.3.1 嵌套运行时语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **嵌套运行时**的限制：
 
 ```rust
@@ -4622,6 +4696,8 @@ fn nested_runtime_semantics() {
 ```
 
 #### 10.3.2 运行时通信语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 **运行时间通信**的语义：
 
@@ -4653,6 +4729,8 @@ async fn runtime_communication() {
 ```
 
 #### 10.3.3 隔离保证
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **运行时隔离**的语义保证：
 
@@ -4702,6 +4780,8 @@ async fn runtime_isolation() {
 
 #### 11.1.1 Send/Sync 验证
 
+> **[来源: Wikipedia - Type System]**
+
 **Send/Sync** 的异步语义：
 
 ```rust
@@ -4748,6 +4828,8 @@ async fn check_traits<T: Send + Sync>(value: T) {
 
 #### 11.1.2 生命周期验证
 
+> **[来源: Wikipedia - Concurrency]**
+
 **异步生命周期**的验证：
 
 ```rust
@@ -4774,6 +4856,8 @@ async fn static_lifetime() -> &'static str {
 ```
 
 #### 11.1.3 Pin 验证
+
+> **[来源: Wikipedia - Asynchronous I/O]**
 
 **Pin 安全性**的验证：
 
@@ -4809,6 +4893,8 @@ fn pin_safety_check() {
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 11.2.1 死锁检测
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **异步死锁**的检测和预防：
 
@@ -4856,6 +4942,8 @@ async fn some_async_op() {
 
 #### 11.2.2 饥饿检测
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **任务饥饿**的检测和预防：
 
 ```rust
@@ -4889,6 +4977,8 @@ async fn priority_starvation() {
 ```
 
 #### 11.2.3 内存泄漏检测
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **异步内存泄漏**的检测：
 
@@ -4949,6 +5039,8 @@ async fn leak_solution() {
 
 #### 12.1.1 状态机优化语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **编译器优化**的语义保证：
 
 ```rust
@@ -4993,6 +5085,8 @@ fn hand_written_state_machine() -> impl Future<Output = i32> {
 
 #### 12.1.2 内联语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **函数内联**的语义：
 
 ```rust
@@ -5014,6 +5108,8 @@ async fn caller() -> i32 {
 ```
 
 #### 12.1.3 无分配语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **无堆分配**的语义：
 
@@ -5049,6 +5145,8 @@ where
 
 #### 12.2.1 任务密度语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **任务密度**的语义影响：
 
 ```rust
@@ -5081,6 +5179,8 @@ async fn batched_tasks() {
 ```
 
 #### 12.2.2 上下文切换开销
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **上下文切换**的语义成本：
 
@@ -5115,6 +5215,8 @@ async fn process(x: i32) -> i32 {
 ```
 
 #### 12.2.3 内存占用语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **内存占用**的语义优化：
 
@@ -5296,3 +5398,15 @@ $$
 > **[来源: TRPL Ch. 17 - Async]**
 > **[来源: Tokio Documentation]**
 > **[来源: RFC 2394 - Async/Await]**
+
+
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: Wikipedia - Type System]**
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**

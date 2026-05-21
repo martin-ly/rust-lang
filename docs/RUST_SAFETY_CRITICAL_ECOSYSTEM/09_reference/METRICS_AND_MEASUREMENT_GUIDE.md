@@ -171,6 +171,8 @@ mod coverage {
 
 ### 3.1 缺陷密度
 
+> **[来源: Wikipedia - Asynchronous I/O]**
+
 | 阶段 | 度量 | 目标 | 计算方法 |
 |------|------|------|----------|
 | **开发** | 编译错误/KLOC | < 10 | rustc错误计数 |
@@ -179,6 +181,8 @@ mod coverage {
 | **现场** | 缺陷/KLOC | < 0.1 | 现场报告 |
 
 ### 3.2 缺陷分类
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 严重程度:
@@ -202,6 +206,8 @@ mod coverage {
 
 ### 4.1 开发效率
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 度量 | 定义 | 目标 | 收集方法 |
 |------|------|------|----------|
 | **生产率** | LOC/人月 | 视复杂度 | 代码统计 |
@@ -210,6 +216,8 @@ mod coverage {
 | **评审效率** | 缺陷/评审小时 | > 2 | 评审记录 |
 
 ### 4.2 时间度量
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 周期时间:
@@ -231,6 +239,8 @@ mod coverage {
 ## 5. 安全特定度量
 
 ### 5.1 安全分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 度量 | 定义 | ASIL D要求 | 工具 |
 |------|------|-----------|------|
