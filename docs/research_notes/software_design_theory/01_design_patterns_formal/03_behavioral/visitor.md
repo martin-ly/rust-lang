@@ -246,8 +246,8 @@ impl ExprVisitor<String> for PrettyPrint {
 | 模式 | 关系 |
 | :--- | :--- |
 | [Composite](../02_structural/composite.md) | 遍历 Composite 常用 Visitor |
-| [Interpreter](interpreter.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
-| [Iterator](iterator.md) | 遍历方式不同；Visitor 深度优先，Iterator 可定制 |
+| [Interpreter](./interpreter.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
+| [Iterator](./iterator.md) | 遍历方式不同；Visitor 深度优先，Iterator 可定制 |
 
 ---
 

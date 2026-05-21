@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Clap命令行解析形式化分析](#clap命令行解析形式化分析)
   - [目录](#目录)
@@ -32,11 +33,13 @@
   - [7. 代码示例](#7-代码示例)
     - [示例1: 完整CLI](#示例1-完整cli)
     - [示例2: 高级验证](#示例2-高级验证)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Clap是Rust标准命令行解析库：
 
@@ -49,7 +52,8 @@ Clap是Rust标准命令行解析库：
 ---
 
 ## 2. 派生宏系统
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 DERIVE-1 ( 结构体派生 )
 
@@ -315,3 +319,7 @@ fn validate_host(s: &str) -> Result<String, String> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

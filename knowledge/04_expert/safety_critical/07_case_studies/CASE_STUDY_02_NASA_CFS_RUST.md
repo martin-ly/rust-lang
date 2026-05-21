@@ -293,5 +293,7 @@ impl CfsApp {
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [案例研究1: Ferrocene认证工具链](CASE_STUDY_01_FERROCENE_CERTIFICATION.md)
 - [案例研究3: 汽车ECU Rust应用](CASE_STUDY_03_AUTOMOTIVE_ECUS.md)

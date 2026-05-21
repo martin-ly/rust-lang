@@ -1104,3 +1104,5 @@ fn increment(counter: &AtomicUsize) {
 
 - [Concurrency 并发编程](README.md)
 - [Rust 同步原语深度解析](synchronization.md)
+- [Rust 线程 (Threads)](threads.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

@@ -5,10 +5,10 @@
 ---
 
 ## 一、与函数式语言类型的对比
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 ML 类型系统
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **ML（Meta Language）类型系统特点**：
 
@@ -55,7 +55,7 @@ Rust：
 - 但 Rust 添加了线性/仿射约束
 
 ### 1.2 Haskell 类型系统
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Haskell 的纯洁性**：
 
@@ -608,3 +608,8 @@ Rust 所有权系统
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

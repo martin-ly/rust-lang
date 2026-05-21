@@ -5,7 +5,7 @@
 > **更新日期**: 2025年 (兼容Rust 1.94)
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Creusot 深度解析：预言变量与Rust验证](#creusot-深度解析预言变量与rust验证)
   - [目录](#目录)
@@ -36,10 +36,10 @@
   - [参考文献](#参考文献)
 
 ## 1. Creusot 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 项目背景
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Creusot 是由巴黎萨克雷大学 (Université Paris-Saclay) 和 INRIA 开发的一款 Rust 演绎验证工具。
 
@@ -461,3 +461,8 @@ cargo +nightly install cargo-creusot --locked
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

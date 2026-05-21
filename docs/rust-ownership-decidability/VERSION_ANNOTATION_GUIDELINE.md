@@ -5,10 +5,10 @@
 ---
 
 ## 📋 版本标注分类
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 已稳定特性 [Stable X.XX]
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义**: 已在 Rust 稳定版中发布的特性
 
@@ -29,7 +29,7 @@
 ---
 
 ### 2. 开发中特性 [Unstable/Nightly]
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义**: 正在开发中，仅在 Nightly 版本可用或尚未稳定的特性
 
@@ -179,3 +179,8 @@ python scripts/generate_version_report.py
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

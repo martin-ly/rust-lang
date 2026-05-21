@@ -459,5 +459,7 @@ Rust竞争优势:
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [Rust安全关键系统应用 - 综合意见与建议](COMPREHENSIVE_RECOMMENDATIONS_AND_OPINIONS.md)
 - [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

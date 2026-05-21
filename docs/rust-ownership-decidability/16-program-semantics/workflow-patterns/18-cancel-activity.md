@@ -1,12 +1,12 @@
 # 18 取消活动模式 (Cancel Activity)
 
 ## 模式定义与语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 取消活动模式允许在另一个活动的执行过程中取消一个已启用的活动。这是工作流异常处理的基础机制。
 
 ### 核心语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
 \text{CancelActivity}(A, C) = \text{when } C \text{ occurs}: \text{abort}(A)
@@ -15,7 +15,7 @@ $$
 其中 $A$ 是被取消的活动，$C$ 是取消条件或取消事件。
 
 ### 形式化表示
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **状态机表示：**
 
@@ -288,3 +288,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

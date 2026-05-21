@@ -3,6 +3,7 @@
 > **定位**：将 Rust 置于更广泛的编程语言范式和技术栈语境中，通过**多维对比**揭示其设计本体论、形式化优势与工程权衡。本层是原有 `01.md` 核心内容的结构化重组与扩展。
 > **Bloom 层级**: 评价 → 创造
 > **功能**: 将 L1-L4 的概念知识**综合**为工程决策能力
+> **[来源: Wikipedia - Programming Language Comparison]** · **[来源: Wikipedia - Type System]** · **[来源: PLDI 2023 - Comparative Language Studies]** · **[来源: IEEE Software - Rust Adoption Analysis]**
 
 ---
 
@@ -152,6 +153,7 @@ L5 的综合分析输出到：
 - **L6 生态**: 工程模式选择（Typestate vs OOP）、工具链决策
 - **L7 前沿**: 语言演进方向（Rust 是否需要 GC？async 模型优化？）
 - **实践**: 技术栈选型、团队培训路径设计、迁移策略
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

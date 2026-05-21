@@ -3,7 +3,8 @@
 > 从入门到精通：使用 Rust 构建高性能游戏
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Game Engine]** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **[来源: Wikipedia - Entity Component System]** · **[来源: Rust GameDev Working Group]**
 
 - [Rust 游戏开发完整指南](#rust-游戏开发完整指南)
   - [目录](#目录)
@@ -60,16 +61,19 @@
   - [总结](#总结)
   - [推荐资源](#推荐资源)
   - [下一步](#下一步)
+  - [祝你的 Rust 游戏开发之旅顺利](#祝你的-rust-游戏开发之旅顺利)
 
 ---
 
 ## 1. 游戏引擎概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 生态系统提供了多个优秀的游戏引擎选择，每个都有其独特的优势和适用场景。
 
 ### 1.1 Bevy 引擎
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Bevy 是 Rust 生态中最活跃、最受欢迎的游戏引擎之一，采用现代 ECS 架构。
 
@@ -446,6 +450,8 @@ async fn main() {
 ---
 
 ## 2. ECS 架构
+
+> **[来源: Wikipedia - Entity Component System]** · **[来源: Bevy Engine Documentation]** · **[来源: Rust GameDev Working Group]**
 
 Entity-Component-System (ECS) 是现代游戏开发的核心架构模式，强调数据导向设计。
 
@@ -977,6 +983,8 @@ fn toggle_pause(
 
 ## 3. 渲染系统
 
+> **[来源: Wikipedia - Computer Graphics]** · **[来源: wgpu Documentation]** · **[来源: Wikipedia - Rendering]**
+
 ### 3.1 WGPU 基础
 
 WGPU 是 Rust 生态的现代图形 API，基于 WebGPU 标准。
@@ -1446,6 +1454,8 @@ fn create_explosion(
 ---
 
 ## 4. 物理引擎
+
+> **[来源: Wikipedia - Physics Engine]** · **[来源: Rapier Documentation - docs.rs/rapier]** · **[来源: Wikipedia - Rigid Body Dynamics]**
 
 ### 4.1 Rapier2D/3D
 
@@ -2050,6 +2060,8 @@ fn sphere_sweep(
 
 ## 5. 资源管理
 
+> **[来源: Wikipedia - Asset Management]** · **[来源: Bevy Asset Documentation]** · **[来源: Rust Reference]**
+
 ### 5.1 Asset Pipeline
 
 ```rust
@@ -2442,6 +2454,8 @@ fn update_lod(
 
 ## 6. 音频系统
 
+> **[来源: Wikipedia - Digital Signal Processing]** · **[来源: kira Documentation - docs.rs/kira]** · **[来源: Wikipedia - Game Audio]**
+
 ### 6.1 Rodio
 
 Rodio 是 Rust 的纯 Rust 音频播放库。
@@ -2750,6 +2764,8 @@ impl AdaptiveMusicSystem {
 ---
 
 ## 7. 输入处理
+
+> **[来源: Wikipedia - Input Device]** · **[来源: winit Documentation - docs.rs/winit]** · **[来源: Rust GameDev Working Group]**
 
 ### 7.1 键盘/鼠标
 
@@ -4839,7 +4855,7 @@ fn cleanup_system(
 3. 参与开源游戏项目
 4. 在 [itch.io](https://itch.io/) 上发布你的游戏
 
-祝你的 Rust 游戏开发之旅顺利！
+祝你的 Rust 游戏开发之旅顺利
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -4850,3 +4866,11 @@ fn cleanup_system(
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

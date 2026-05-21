@@ -1,7 +1,8 @@
 # 实践练习与问题
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [实践练习与问题](#实践练习与问题)
   - [目录](#目录)
@@ -31,10 +32,12 @@
 ---
 
 ## 1. 所有权基础练习
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 练习 1.1: 修复借用错误
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **题目**: 修复以下代码中的借用错误
 
@@ -552,6 +555,7 @@ impl<T> LinkedList<T> {
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
 - [RustBelt Paper](https://plv.mpi-sws.org/rustbelt/popl18/)
 - [Creusot Tutorial](https://github.com/creusot-rs/creusot)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -562,3 +566,8 @@ impl<T> LinkedList<T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

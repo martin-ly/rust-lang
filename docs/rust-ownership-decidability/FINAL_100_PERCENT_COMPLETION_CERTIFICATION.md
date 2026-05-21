@@ -1,7 +1,7 @@
 # Rust 所有权系统可判定性 - 最终 100% 完成认证
 
 ## Final 100% Completion Certification
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **认证日期**: 2026-03-09
 > **认证版本**: 3.0 Final
@@ -14,10 +14,10 @@
 ---
 
 ## 🏆 完成认证声明
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心成就
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ╔════════════════════════════════════════════════════════════════════╗
@@ -273,22 +273,22 @@ FAQ:                  17+ 条目      ✅
 
 ### 入门必读
 
-1. [README.md](README.md) - 项目总览
-2. [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
-3. [FINAL_EXECUTIVE_SUMMARY_V2.md](FINAL_EXECUTIVE_SUMMARY_V2.md) - 执行摘要
-4. [INTERACTIVE_LEARNING_GUIDE.md](INTERACTIVE_LEARNING_GUIDE.md) - 交互式学习
+1. [README.md](./README.md) - 项目总览
+2. [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
+3. [FINAL_EXECUTIVE_SUMMARY_V2.md](./FINAL_EXECUTIVE_SUMMARY_V2.md) - 执行摘要
+4. [INTERACTIVE_LEARNING_GUIDE.md](./INTERACTIVE_LEARNING_GUIDE.md) - 交互式学习
 
 ### 理论深入
 
-1. [UNIFIED_THEORETICAL_FRAMEWORK.md](UNIFIED_THEORETICAL_FRAMEWORK.md) - 统一理论框架
-2. [THEOREM_DEPENDENCY_GRAPH.md](THEOREM_DEPENDENCY_GRAPH.md) - 定理依赖网络
+1. [UNIFIED_THEORETICAL_FRAMEWORK.md](./UNIFIED_THEORETICAL_FRAMEWORK.md) - 统一理论框架
+2. [THEOREM_DEPENDENCY_GRAPH.md](./THEOREM_DEPENDENCY_GRAPH.md) - 定理依赖网络
 3. [coq-formalization/README.md](coq-formalization/README.md) - Coq 形式化
 
 ### 实践指南
 
 1. [exercises/ADVANCED_OWNERSHIP_WORKSHOP.md](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) - 高级工作坊
-2. [COMPREHENSIVE_FAQ.md](COMPREHENSIVE_FAQ.md) - 全面 FAQ
-3. [ERROR_DIAGNOSTICS_GUIDE.md](ERROR_DIAGNOSTICS_GUIDE.md) - 错误诊断
+2. [COMPREHENSIVE_FAQ.md](./COMPREHENSIVE_FAQ.md) - 全面 FAQ
+3. [ERROR_DIAGNOSTICS_GUIDE.md](./ERROR_DIAGNOSTICS_GUIDE.md) - 错误诊断
 
 ### 参考资源
 

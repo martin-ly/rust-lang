@@ -5,11 +5,12 @@
 > **适用框架**: Coq + Iris 分离逻辑
 >
 > **参考**: Pierce (2002). TAPL; Chlipala (2013). CPDT
+> **[来源: Pierce 2002 - Types and Programming Languages (TAPL)]** · **[来源: Chlipala 2013 - Certified Programming with Dependent Types (CPDT)]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: Coq Documentation - coq.inria.fr]** · **[来源: Iris Project - iris-project.org]** · **[来源: POPL 2018 - RustBelt]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [证明策略模式库](#证明策略模式库)
   - [目录](#目录)
@@ -46,10 +47,10 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 证明工程化的重要性
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 形式化证明是软件验证的黄金标准，但大型证明项目面临着严峻的工程挑战：
 
@@ -1769,3 +1770,8 @@ flowchart TD
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

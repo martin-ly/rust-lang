@@ -752,3 +752,5 @@ enum AppError {
 
 - [集合类型 (Collections)](collections.md)
 - [泛型 (Generics)](generics.md)
+- [Rust 生命周期深入](../01_fundamentals/lifetimes.md)
+- [Trait 深入 (Traits)](traits.md)

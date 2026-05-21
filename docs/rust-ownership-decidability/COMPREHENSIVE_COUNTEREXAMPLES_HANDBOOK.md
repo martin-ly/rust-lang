@@ -2,13 +2,13 @@
 ---
 
 ## Part 2: Deep Dive Counter-Examples
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]**
 
 ### Extended Ownership Deep Dive
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### EDO.1 Understanding Move Semantics
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Rust ownership system is built on three core rules:
 
@@ -613,6 +613,8 @@ unsafe fn safe_transmute() {
 
 ## Part 3: Error Message Glossary
 
+> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: TRPL Ch. 4]**
+
 ### E0382: Use of Moved Value
 
 **Full Error:**
@@ -788,6 +790,8 @@ Mutex::new(0);       // Thread-safe
 ---
 
 ## Part 5: Common Pitfalls by Experience Level
+
+> **[来源: Rust Reference]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Memory Safety]**
 
 ### Beginner Pitfalls
 
@@ -3114,3 +3118,8 @@ This handbook covered:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

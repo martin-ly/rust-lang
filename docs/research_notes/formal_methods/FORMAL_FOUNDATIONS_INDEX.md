@@ -47,29 +47,29 @@
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [LOGICAL_FOUNDATIONS.md](LOGICAL_FOUNDATIONS.md) | 命题/一阶/高阶/模态逻辑 | ⭐⭐⭐⭐ |
-| [SEPARATION_LOGIC.md](SEPARATION_LOGIC.md) | 分离逻辑、Iris框架 | ⭐⭐⭐⭐⭐ |
+| [LOGICAL_FOUNDATIONS.md](./LOGICAL_FOUNDATIONS.md) | 命题/一阶/高阶/模态逻辑 | ⭐⭐⭐⭐ |
+| [SEPARATION_LOGIC.md](./SEPARATION_LOGIC.md) | 分离逻辑、Iris框架 | ⭐⭐⭐⭐⭐ |
 
 ### 程序语义
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [OPERATIONAL_SEMANTICS.md](OPERATIONAL_SEMANTICS.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
-| [AXIOMATIC_SEMANTICS.md](AXIOMATIC_SEMANTICS.md) | 霍尔逻辑、WP/SP | ⭐⭐⭐⭐⭐ |
+| [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
+| [AXIOMATIC_SEMANTICS.md](./AXIOMATIC_SEMANTICS.md) | 霍尔逻辑、WP/SP | ⭐⭐⭐⭐⭐ |
 
 ### 证明技术
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [PROOF_STRATEGIES.md](PROOF_STRATEGIES.md) | 归纳/共归纳/反证/构造 | ⭐⭐⭐⭐ |
-| [PROOF_TECHNIQUES_MINDMAP.md](PROOF_TECHNIQUES_MINDMAP.md) | 证明技术思维导图 | ⭐⭐⭐ |
+| [PROOF_STRATEGIES.md](./PROOF_STRATEGIES.md) | 归纳/共归纳/反证/构造 | ⭐⭐⭐⭐ |
+| [PROOF_TECHNIQUES_MINDMAP.md](./PROOF_TECHNIQUES_MINDMAP.md) | 证明技术思维导图 | ⭐⭐⭐ |
 
 ### 方法学
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
-| [FORMAL_METHODS_COMPARISON.md](FORMAL_METHODS_COMPARISON.md) | 方法比较、工具选择 | ⭐⭐⭐ |
-| [CASE_STUDIES.md](CASE_STUDIES.md) | 实际案例分析 | ⭐⭐⭐⭐ |
+| [FORMAL_METHODS_COMPARISON.md](./FORMAL_METHODS_COMPARISON.md) | 方法比较、工具选择 | ⭐⭐⭐ |
+| [CASE_STUDIES.md](./CASE_STUDIES.md) | 实际案例分析 | ⭐⭐⭐⭐ |
 
 ---
 

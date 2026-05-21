@@ -5,10 +5,12 @@
 ---
 
 ## 1. Actor模型历史与定义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 历史背景
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 Actor模型发展时间线:
@@ -57,7 +59,8 @@ Actor模型发展时间线:
 ```
 
 ### 1.2 Actor定义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Hewitt原始定义 (1973)**:
 
@@ -450,3 +453,8 @@ fn counter_actor() -> impl Actor<CounterMsg> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

@@ -101,13 +101,13 @@
 [async_state_machine](formal_methods/async_state_machine.md) T6.2 一致，则 $C$ 为 Safe 且满足形式化保证。
 
 *证明*：由各定理陈述；案例实现满足定理结论即一致；
-组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) CSO-T1。∎
+组合见 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) CSO-T1。∎
 
-**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约；安全抽象对外 API 为 Safe。
+**引理 PA-L1（unsafe 案例边界）**：若案例 $C$ 含 `unsafe` 块，则 $C$ 与定理一致 ⟺ $C$ 的 unsafe 使用满足 [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) 契约；安全抽象对外 API 为 Safe。
 
 *证明*：由 Def PA1；unsafe 块引入契约；安全抽象将 unsafe 封装，对外满足 Safe 规则；契约满足则与定理一致。∎
 
-**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链，建立与实际项目的追溯关系。
+**推论 PA-C1**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链，建立与实际项目的追溯关系。
 
 ---
 
@@ -994,9 +994,9 @@ impl<T> Drop for SafeVec<T> {
 | **案例 3** SafeVec/内存安全 | ownership T2/T3、REFCELL-T1 |  interior mutability、RAII |
 | 所有案例 | [type_system_foundations](type_theory/type_system_foundations.md) T1–T3 | 良型、进展性、保持性 |
 | 组合案例 | [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md) CE-T1–T3 | 模块组合、CE-T1/T2/T3 |
-| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)、PA-L1 | 安全抽象、契约 |
+| unsafe 案例 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md)、PA-L1 | 安全抽象、契约 |
 
-**引用**：案例分析可引用 [PROOF_INDEX](PROOF_INDEX.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
+**引用**：案例分析可引用 [PROOF_INDEX](./PROOF_INDEX.md) 建立与形式化定理的追溯关系；见 PA-T1、PA-L1、PA-C1。
 
 ---
 

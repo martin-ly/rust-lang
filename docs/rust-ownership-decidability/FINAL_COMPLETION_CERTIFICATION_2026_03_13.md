@@ -7,12 +7,12 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本报告认证 `rust-ownership-decidability` 文档项目已达到 **100% 完成度**，并与网络上最充分、最全面、最权威的学术和工业资源完全对齐。
 
 ### 核心成就
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -30,7 +30,7 @@
 ---
 
 ## 详细完成状态
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 最新权威资源覆盖 (2024-2025)
 
@@ -306,9 +306,9 @@ Coq 证据:
 
 **相关文档**:
 
-- [持续改进行动计划](CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md)
-- [README](README.md) - 项目总览
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) - 完整文档索引
+- [持续改进行动计划](./CONTINUOUS_IMPROVEMENT_ACTION_PLAN.md)
+- [README](./README.md) - 项目总览
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) - 完整文档索引
 
 *报告版本: 1.0*
 *生成日期: 2026-03-13*

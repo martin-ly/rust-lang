@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Crossbeam 并发原语形式化分析](#crossbeam-并发原语形式化分析)
   - [目录](#目录)
@@ -53,11 +54,13 @@
     - [反例 7.2 (不正确的内存序)](#反例-72-不正确的内存序)
     - [反例 7.3 (ABA问题 - 无epoch)](#反例-73-aba问题---无epoch)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Crossbeam是Rust生态中最重要的并发原语库，提供:
 
@@ -71,7 +74,8 @@ Crossbeam是Rust生态中最重要的并发原语库，提供:
 ---
 
 ## 2. Epoch-Based Reclamation (EBR)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 内存回收问题
 
@@ -650,3 +654,7 @@ self.ptr.store(new, Release);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

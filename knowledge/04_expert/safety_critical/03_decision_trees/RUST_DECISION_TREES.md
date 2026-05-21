@@ -351,5 +351,7 @@
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [安全完整性等级选择指南](SAFETY_INTEGRITY_LEVEL_SELECTION_GUIDE.md)
 - [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

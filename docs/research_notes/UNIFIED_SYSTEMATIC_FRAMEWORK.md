@@ -52,7 +52,7 @@
 ## 🎯 框架宗旨 {#-框架宗旨}
 > **[来源: Rust Official Docs]**
 
-**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
+**上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
 ### 核心问题响应
 > **[来源: Rust Official Docs]**
@@ -65,7 +65,7 @@
 | 无全局一致性 | 全局一致性校验矩阵 + 术语对照 |
 | 语义归纳缺失 | 概念族谱 + 一句话语义归纳 |
 | 思维表征分散 | 思维导图、矩阵、证明树、决策树、反例统一索引 |
-| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| 缺少编程语言构造性语义 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
 | 缺少表达能力边界论证 | 同上 + 本框架 § 表达能力边界决策树 |
 
 ---
@@ -79,7 +79,7 @@
 
 **定理 USF-T1（框架一致性）**：若 $d_1, d_2 \in \mathcal{F}$ 均引用同一概念 $C$，则 $d_1$ 与 $d_2$ 对 $C$ 的形式化定义或引用一致。
 
-*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
+*证明*：由 [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) 全局一致性矩阵；术语、公理编号、定义链已校验。∎
 
 **推论 USF-C1**：反例索引与各模块反例一一对应；违反任一模块定理的代码在反例索引中可查。
 
@@ -180,7 +180,7 @@
 | 操作语义 | 归约保持所有权 | 保持性 T2 | 数据竞争自由 | 规则即边界 |
 | 指称语义 | - | 类型=命题 | - | 构造性限制 |
 | 公理语义 | 分离逻辑 | Hoare | unsafe 契约 | 前置/后置 |
-| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) |
+| 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵
 > **[来源: Rust Official Docs]**
@@ -350,7 +350,7 @@
 | Pin | 非 Unpin 被 Pin 后位置不变，自引用安全 | pin_self_referential |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 | 操作语义 | 程序通过归约/求值执行，保持类型与所有权 | type_system, ownership |
-| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| 指称语义 | 类型=命题，程序=证明，Result/! 对应 ∨/⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
 | 公理语义 | 前置/后置条件刻画 unsafe 契约 | 同上 |
 
 ### 概念族依赖关系
@@ -405,12 +405,12 @@ Pin ──→ 自引用安全
 
 | 特性族 | 矩阵 | 决策树 | 完整链 |
 | :--- | :--- | :--- | :--- |
-| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](RUST_193_FEATURE_MATRIX.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
-| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) 所有权/借用 |
+| **Rust 1.93 全特性** | [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) 五维矩阵 | RUST_193 特性覆盖 | [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) |
+| **内存与所有权** | 五维矩阵 § 所有权/借用 | 表达能力边界决策树 § 内存管理 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) 所有权/借用 |
 | **类型系统** | 五维矩阵 § 类型安全/协变 | 表达能力边界决策树 § 类型多态 | [construction_capability](type_theory/construction_capability.md) |
-| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) Trait/泛型 |
-| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) match/for/? |
-| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) Send/Sync/Future |
+| **Trait 与多态** | 五维矩阵 § Trait 对象 | 思维表征选型 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) Trait/泛型 |
+| **控制流** | - | - | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) match/for/? |
+| **并发与异步** | 五维矩阵 § Future/Pin | 表达能力边界决策树 § 并发/异步 | [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) Send/Sync/Future |
 
 ### 按类型族
 
@@ -443,22 +443,22 @@ Pin ──→ 自引用安全
 ## 📚 文档交叉引用总索引 {#-文档交叉引用总索引}
 
 | 文档 | 用途 |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义形式化、表达能力边界 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](INDEX.md) | 研究笔记完整索引 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **顶层框架**：理论体系、论证体系、安全与非安全 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | 安全与非安全全面论证、契约、UB、安全抽象 |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理总览、语义归纳、概念族谱 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义形式化、表达能力边界 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
+| [INDEX](./INDEX.md) | 研究笔记完整索引 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵 |
 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |
 | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) | 决策树 |
 | [PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) | 证明图网 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论**：设计模式形式化、23/43 模型、执行模型、组合工程 |
-| [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
-| [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md) | 79 项特性精简模板 |
-| [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) | 版本增量更新流程 |
+| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
+| [FEATURE_TEMPLATE](./FEATURE_TEMPLATE.md) | 79 项特性精简模板 |
+| [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) | 版本增量更新流程 |
 
 ---
 

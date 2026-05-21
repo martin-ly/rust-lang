@@ -28,7 +28,7 @@
 
 | 文档 | 说明 |
 | :--- | :--- |
-| [11_benchmark_minimal_guide.md](11_benchmark_minimal_guide.md) | 基准测试最小化指南 |
+| [11_benchmark_minimal_guide.md](./11_benchmark_minimal_guide.md) | 基准测试最小化指南 |
 
 ---
 

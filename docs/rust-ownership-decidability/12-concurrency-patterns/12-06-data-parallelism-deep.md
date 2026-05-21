@@ -5,11 +5,12 @@
 > **Scope**: Data parallelism fundamentals, parallel iterator theorems, safety guarantees, performance optimization
 > **Prerequisites**: Understanding of ownership, `Send`/`Sync` traits, and basic Rayon usage
 > **Estimated Reading Time**: 3-4 hours
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Data Parallelism]** · **[来源: Rayon Documentation - docs.rs/rayon]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Parallel Computing]** · **[来源: Rustonomicon - Concurrency]
 
 ---
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Data Parallelism Patterns: Formal Deep Dive](#data-parallelism-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -87,7 +88,7 @@
 ---
 
 ## Executive Summary
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 This document provides a formal treatment of data parallelism patterns in Rust, focusing on how Rust's ownership system enables safe, efficient parallel data processing. We present:
 
@@ -102,7 +103,7 @@ The core insight is that Rust's ownership system, when combined with parallel it
 ---
 
 ## 1. Data Parallelism Fundamentals
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Definition
 
@@ -1967,10 +1968,10 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 
 ### Related Documentation in This Project
 
-- [Thread Safety Patterns](12-02-thread-safety-patterns.md) - Send/Sync fundamentals
+- [Thread Safety Patterns](./12-02-thread-safety-patterns.md) - Send/Sync fundamentals
 - [Rayon Formal Analysis](../case-studies/rayon-formal-analysis.md) - Case study
-- [Lock-Free Patterns](12-04-lock-free-patterns.md) - Advanced concurrency
-- [Concurrency Architecture Deep Dive](12-01-concurrency-architecture-deep.md) - Memory ordering
+- [Lock-Free Patterns](./12-04-lock-free-patterns.md) - Advanced concurrency
+- [Concurrency Architecture Deep Dive](./12-01-concurrency-architecture-deep.md) - Memory ordering
 
 ---
 

@@ -435,5 +435,7 @@ docs/
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [教育与培训路线图](EDUCATION_AND_TRAINING_ROADMAP.md)
 - [Rust 2026-2030 前瞻性路线图预测](RUST_2026_2030_ROADMAP_FORECAST.md)

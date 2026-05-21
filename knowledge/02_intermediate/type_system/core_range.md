@@ -232,5 +232,7 @@ core::range::RangeInclusive (1.95+):
 
 ## 相关概念
 
-- [`if let` Guards on Match Arms（Rust 1.95.0）](../control_flow/if_let_guards.md)
-- [Rust 2024 Edition `let chains` 深度专题](../control_flow/let_chains.md)
+- [泛型深入 (Generics)](../generics.md)
+- [Rust 迭代器深入](../../01_fundamentals/iterators.md)
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+- [Rust 类型转换 (Type Conversions)](../type_conversions.md)

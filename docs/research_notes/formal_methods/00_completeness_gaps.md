@@ -121,11 +121,11 @@ $
 
 | 文档 | 已覆盖 | 备注 |
 | :--- | :--- | :--- |
-| [ownership_model](ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
-| [borrow_checker_proof](borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
-| [lifetime_formalization](lifetime_formalization.md) | outlives、T2 引用有效性 | 与型变、泛型组合 |
-| [async_state_machine](async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
-| [pin_self_referential](pin_self_referential.md) | Pin T1–T3 | 100% |
+| [ownership_model](./ownership_model.md) | 所有权规则 1–3、T2/T3、Box/Rc/Arc/Cell/RefCell、MaybeUninit、ATOMIC/UNION/TRANSMUTE、DROP/DEREF/REPR/CONST_MUT_STATIC | 100% |
+| [borrow_checker_proof](./borrow_checker_proof.md) | 借用规则、T1、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、EXTERN/CVARIADIC/QUERY | 100% |
+| [lifetime_formalization](./lifetime_formalization.md) | outlives、T2 引用有效性 | 与型变、泛型组合 |
+| [async_state_machine](./async_state_machine.md) | T6.1–T6.3 Future、Send/Sync、SPAWN、1.93 变更 | 100% |
+| [pin_self_referential](./pin_self_referential.md) | Pin T1–T3 | 100% |
 
 ---
 
@@ -143,10 +143,10 @@ $
 
 **状态**：✅ **100% 完成**，无剩余缺口。
 
-**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](send_sync_formalization.md)、
+**后续可持续推进**：✅ 阶段 A–D 已完成：Send/Sync 独立形式化 [send_sync_formalization](./send_sync_formalization.md)、
 安全可判定机制总览 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](../SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)、
 并发+Trait 族四维表、思维表征四类绑定（HIERARCHICAL_MAPPING、六篇并表）。
-详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
+详见 [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。
 
 ---
 

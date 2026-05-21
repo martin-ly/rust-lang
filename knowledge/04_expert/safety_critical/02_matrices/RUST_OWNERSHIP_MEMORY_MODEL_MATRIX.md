@@ -464,5 +464,7 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [综合语言对比矩阵](COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)
 - [Rust生态系统多维概念矩阵对比](RUST_MULTI_DIMENSIONAL_MATRIX.md)

@@ -11,7 +11,7 @@
 
 ## 目录说明
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录介绍适合Rust的架构模式，充分利用所有权系统优势。
 
@@ -19,7 +19,7 @@
 
 ## 文档列表
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 文档 | 模式 | 适用场景 |
 |:---:|:---|:---|:---|
@@ -27,7 +27,7 @@
 | - | [分层架构]
 
 > 📝 待补充 | 分层 | 企业应用 |
-| - | [清洁架构](clean-architecture.md) | 洋葱/清洁 | 复杂业务 |
+| - | [清洁架构](./clean-architecture.md) | 洋葱/清洁 | 复杂业务 |
 | - | [六边形架构]
 
 > 📝 待补充 | 端口适配器 | 领域驱动 |
@@ -37,7 +37,7 @@
 
 ## 模式分类
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 类别 | 模式 |
 |:---|:---|

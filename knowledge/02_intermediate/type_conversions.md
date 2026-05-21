@@ -727,5 +727,9 @@ enum Temperature {
 
 ## 相关概念
 
-- [集合类型 (Collections)](collections.md)
-- [错误处理 (Error Handling)](error_handling.md)
+- [字符串处理](./strings.md)
+
+- [集合类型 (Collections)](./collections.md)
+- [错误处理 (Error Handling)](./error_handling.md)
+- [Trait 深入 (Traits)](./traits.md)
+- [泛型深入 (Generics)](./generics.md)

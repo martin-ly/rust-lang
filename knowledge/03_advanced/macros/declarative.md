@@ -870,3 +870,5 @@ impl Person {
 
 - [过程宏 (Procedural Macros)](procedural.md)
 - [Macros 宏系统](README.md)
+- [Rust 元编程指南](../type_driven_correctness.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

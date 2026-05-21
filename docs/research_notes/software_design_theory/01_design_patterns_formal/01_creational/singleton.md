@@ -283,7 +283,7 @@ Mutex/RwLock (内部可变)
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Abstract Factory](abstract_factory.md) | 工厂常为单例 |
+| [Abstract Factory](./abstract_factory.md) | 工厂常为单例 |
 | [Facade](../02_structural/facade.md) | 外观常为单例 |
 | Registry（43 完全） | 服务定位即单例；[02_complete_43_catalog](../../02_workflow_safe_complete_models/02_complete_43_catalog.md) |
 

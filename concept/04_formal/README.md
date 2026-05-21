@@ -3,6 +3,7 @@
 > **定位**：Rust 概念体系的**数学根基**与形式化验证。本层为 L1-L3 的所有安全保证提供严格的数学证明，是知识体系的"地基"。
 > **Bloom 层级**: 分析 → 评价
 > **核心功能**: 为上层概念提供**可机械验证的**安全性证明
+> **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: Iris Project - iris-project.org]**
 
 ---
 
@@ -197,6 +198,7 @@ L4 的形式化成果输出到：
 - **L5 对比**: 形式系统 vs 机制工程的哲学论证（原 01.md 的核心论点）
 - **L6 生态**: Clippy lint、Miri 动态检测（形式化理论的工程近似）
 - **L7 前沿**: Kani/Creusot/Verus 工业验证工具、AI 形式化辅助证明
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

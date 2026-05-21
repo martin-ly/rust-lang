@@ -257,3 +257,5 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/ (56文件, 691KB)
 
 - [Rust安全关键生态系统文档集 - 主索引](00_RUST_SAFETY_CRITICAL_ECOSYSTEM_MASTER_INDEX.md)
 - [Rust安全关键生态系统文档集](README.md)
+- [Rust 形式化语义](../../03_advanced/type_driven_correctness.md)
+- [Unsafe Rust 指南](../../03_advanced/unsafe/unsafe_rust.md)

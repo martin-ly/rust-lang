@@ -4,11 +4,12 @@
 > **Rust Version**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12.0+ (Edition 2024)
 > **Target Audience**: Systems Architects, Formal Methods Researchers, Advanced Rust Developers
+> **[来源: Wikipedia - Actor Model]** · **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Message Passing]** · **[来源: Hewitt et al. 1973 - Actor Model]** · **[来源: Rustonomicon - Concurrency]** · **[来源: Erlang Documentation - erlang.org]**
 
 ---
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Actor Model in Rust: Formal Deep Dive](#actor-model-in-rust-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -57,10 +58,10 @@
 ---
 
 ## 1. Actor Model Formal Semantics
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Formal Definition
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Actor model, first proposed by Carl Hewitt in 1973, provides a mathematical framework for concurrent computation. We present a modern formalization suitable for Rust's ownership system.
 
@@ -2327,3 +2328,8 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

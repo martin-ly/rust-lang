@@ -845,3 +845,5 @@ fn process(items: &[&dyn Display]) {
 
 - [集合类型 (Collections)](collections.md)
 - [错误处理 (Error Handling)](error_handling.md)
+- [Trait 深入 (Traits)](traits.md)
+- [Rust 生命周期深入](../01_fundamentals/lifetimes.md)

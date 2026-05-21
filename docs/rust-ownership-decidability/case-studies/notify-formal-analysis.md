@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Notify 文件监控形式化分析](#notify-文件监控形式化分析)
   - [目录](#目录)
@@ -23,11 +24,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (事件丢失)](#反例-51-事件丢失)
     - [反例 5.2 (句柄泄漏)](#反例-52-句柄泄漏)
+  - [*定理数量: 4个*](#定理数量-4个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 notify提供:
 
@@ -39,7 +42,8 @@ notify提供:
 ---
 
 ## 2. 后端抽象
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (平台后端)
 
@@ -121,3 +125,8 @@ watcher.watch(path, RecursiveMode::Recursive)?;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

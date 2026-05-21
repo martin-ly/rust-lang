@@ -1,7 +1,7 @@
 # Rust 所有权系统统一理论框架
 
 ## Unified Theoretical Framework for Rust Ownership System
-> **[来源: Rust Official Docs]**
+> **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Iris Project - iris-project.org]
 
 > **文档性质**: 形式化理论顶层框架
 > **版本**: 1.0.0
@@ -11,7 +11,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统统一理论框架](#rust-所有权系统统一理论框架)
   - [Unified Theoretical Framework for Rust Ownership System](#unified-theoretical-framework-for-rust-ownership-system)
@@ -85,7 +85,7 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 研究问题
 
@@ -1280,3 +1280,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

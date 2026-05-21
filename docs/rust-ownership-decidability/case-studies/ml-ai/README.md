@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Machine Learning]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Wikipedia - Deep Learning]** · **[来源: Polars Documentation - docs.pola.rs]**
 
 - [Rust 机器学习与 AI 开发完全指南](#rust-机器学习与-ai-开发完全指南)
   - [目录](#目录)
@@ -60,14 +61,17 @@
     - [常用资源](#常用资源)
     - [性能对比基准](#性能对比基准)
     - [社区与生态](#社区与生态)
+  - [*本文档由AI助手生成，最后更新: 2026年*](#本文档由ai助手生成最后更新-2026年)
 
 ---
 
 ## 1. ML生态系统概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么Rust用于ML
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust在机器学习领域正快速崛起，其核心优势在于独特的内存安全保证与零成本抽象的完美结合：
 
@@ -2521,3 +2525,11 @@ impl BufferPool {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

@@ -5,10 +5,10 @@
 ---
 
 ## 📊 关联修复概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 修复前状态
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 关联类型          总数    已建立   缺失    覆盖率
@@ -22,7 +22,7 @@
 ```
 
 ### 修复后状态
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 关联类型          总数    已建立   缺失    覆盖率
@@ -266,19 +266,19 @@
 
 ### 关联分析
 
-- [CONTENT_ASSOCIATION_ANALYSIS.md](CONTENT_ASSOCIATION_ANALYSIS.md) - 关联完整性分析
-- [HORIZONTAL_CONNECTIONS.md](HORIZONTAL_CONNECTIONS.md) - 横向关联论证
+- [CONTENT_ASSOCIATION_ANALYSIS.md](./CONTENT_ASSOCIATION_ANALYSIS.md) - 关联完整性分析
+- [HORIZONTAL_CONNECTIONS.md](./HORIZONTAL_CONNECTIONS.md) - 横向关联论证
 
 ### 桥梁文档
 
-- [FOUNDATIONS_TO_PRACTICE_BRIDGE.md](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) - 理论到实践
-- [THEOREM_TO_COMPILER_BRIDGE.md](THEOREM_TO_COMPILER_BRIDGE.md) - 定理到编译器
-- [THEORY_TO_PATTERN_BRIDGE.md](THEORY_TO_PATTERN_BRIDGE.md) - 理论到模式
+- [FOUNDATIONS_TO_PRACTICE_BRIDGE.md](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) - 理论到实践
+- [THEOREM_TO_COMPILER_BRIDGE.md](./THEOREM_TO_COMPILER_BRIDGE.md) - 定理到编译器
+- [THEORY_TO_PATTERN_BRIDGE.md](./THEORY_TO_PATTERN_BRIDGE.md) - 理论到模式
 
 ### 核心索引
 
-- [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
-- [FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 完成认证
+- [COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) - 知识梳理
+- [FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) - 完成认证
 
 ---
 

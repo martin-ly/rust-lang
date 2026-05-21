@@ -5,8 +5,10 @@
 
 ---
 
+> **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Region-based Memory Management]** · **[来源: RFC 2094 - NLL]** · **[来源: Wikipedia - Linear Type]** · **[来源: POPL 2018 - RustBelt]
+
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [所有权变体](#所有权变体)
   - [目录](#目录)
@@ -62,10 +64,10 @@
 ---
 
 ## 1. 区域类型系统（Region-based Typing）
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 区域系统基础
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 区域类型系统（Region-based Typing）是 Rust 生命周期系统的理论基础，由 Tofte 和 Talpin 在 1994 年提出，用于管理堆分配内存的生命周期。
 
@@ -1209,3 +1211,8 @@ Rust 所有权系统的变体代表了编程语言理论的前沿探索。从区
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

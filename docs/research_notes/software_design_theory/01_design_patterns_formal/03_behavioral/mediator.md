@@ -255,9 +255,9 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Observer](observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
+| [Observer](./observer.md) | 同为解耦；Mediator 集中路由，Observer 一对多 |
 | [Facade](../02_structural/facade.md) | Facade 简化接口；Mediator 协调多对象 |
-| [Chain of Responsibility](chain_of_responsibility.md) | 链式传递 vs 集中路由 |
+| [Chain of Responsibility](./chain_of_responsibility.md) | 链式传递 vs 集中路由 |
 
 ---
 

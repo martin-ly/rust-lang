@@ -307,9 +307,9 @@ impl LogFacade {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Adapter](adapter.md) | Facade 简化多接口；Adapter 转换单接口 |
+| [Adapter](./adapter.md) | Facade 简化多接口；Adapter 转换单接口 |
 | [Mediator](../03_behavioral/mediator.md) | Facade 协调子系统；Mediator 协调同事 |
-| [Proxy](proxy.md) | Proxy 委托单对象；Facade 聚合多对象 |
+| [Proxy](./proxy.md) | Proxy 委托单对象；Facade 聚合多对象 |
 
 ---
 

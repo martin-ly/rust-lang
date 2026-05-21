@@ -303,7 +303,7 @@ let chain = LogHandler {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Command](command.md) | 链中每节点可封装为 Command |
+| [Command](./command.md) | 链中每节点可封装为 Command |
 | [Decorator](../02_structural/decorator.md) | 链式包装，但 Chain 为委托传递 |
 | [Composite](../02_structural/composite.md) | 树结构 vs 链结构；可组合使用 |
 

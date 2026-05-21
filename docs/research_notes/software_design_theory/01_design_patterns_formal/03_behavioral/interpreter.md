@@ -294,9 +294,9 @@ fn eval_num(e: &QueryExpr, ctx: &std::collections::HashMap<String, i64>) -> Opti
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Visitor](visitor.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
+| [Visitor](./visitor.md) | 同为 AST 处理；Interpreter 求值，Visitor 遍历 |
 | [Composite](../02_structural/composite.md) | AST 即 Composite 结构 |
-| [Strategy](strategy.md) | 不同求值策略可替换 |
+| [Strategy](./strategy.md) | 不同求值策略可替换 |
 
 ---
 

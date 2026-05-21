@@ -7,7 +7,7 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 λ演算（Lambda Calculus）由 Alonzo Church 于 1930 年代提出，是计算理论的基础模型。
 它与图灵机等价，但更加简洁，是函数式编程语言（包括 Rust 的闭包和泛型系统）的理论基础。
@@ -15,10 +15,10 @@
 ---
 
 ## 2. 无类型 λ演算 (Untyped Lambda Calculus)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语法定义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 2.1** (λ项的语法)
 
@@ -364,3 +364,8 @@ let y = x;  // x 被移动，不能再使用
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

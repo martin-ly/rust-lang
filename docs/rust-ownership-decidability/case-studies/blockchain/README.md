@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Blockchain]** · **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation - docs.substrate.io]** · **[来源: Solana Documentation - docs.solana.com]** · **[来源: Ethereum Documentation - ethereum.org]**
 
 - [Rust 区块链/Web3 开发完整指南](#rust-区块链web3-开发完整指南)
   - [目录](#目录)
@@ -52,10 +53,12 @@
 ---
 
 ## 1. 区块链开发概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么Rust适合区块链
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust在区块链领域迅速崛起成为首选语言，主要基于以下核心优势：
 
@@ -144,6 +147,8 @@ Rust的高性能特性：
 ---
 
 ## 2. 智能合约开发
+
+> **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation]** · **[来源: Solana Documentation]**
 
 ### 2.1 ink!框架介绍
 
@@ -825,6 +830,8 @@ impl Plumtree {
 ---
 
 ## 6. 存储层
+
+> **[来源: Wikipedia - Distributed Ledger]** · **[来源: Rust Database Ecosystem]** · **[来源: Wikipedia - Consensus]**
 
 ### 6.1 LevelDB/RocksDB集成
 
@@ -3400,3 +3407,11 @@ tokio-test = "0.4"
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

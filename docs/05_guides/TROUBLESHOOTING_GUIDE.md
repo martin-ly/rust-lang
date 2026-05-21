@@ -501,7 +501,7 @@ A: 使用 `cargo tree` 查看依赖关系
 程序性能不达标的排查：
 
 1. 使用 [perf 或 flamegraph](#2-运行时性能问题) 定位热点
-2. 参考 [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) 优化
+2. 参考 [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) 优化
 3. 检查是否存在 [编译时间过长](#1-编译时间过长) 问题
 
 ### 场景4: 生产环境问题
@@ -523,7 +523,7 @@ A: 使用 `cargo tree` 查看依赖关系
 | :--- | :--- |
 | :--- | :--- |
 | **错误参考** | [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) |
-| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](PERFORMANCE_TUNING_GUIDE.md) |
+| **相关指南** | [PERFORMANCE_TUNING_GUIDE.md](./PERFORMANCE_TUNING_GUIDE.md) |
 | :--- | :--- |
 | :--- | :--- |
 | **外部资源** | [Rust错误索引](https://doc.rust-lang.org/error-index.html) |

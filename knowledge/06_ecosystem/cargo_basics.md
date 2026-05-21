@@ -544,5 +544,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ## 相关概念
 
+- [Rust 标准库速查](../05_reference/std_library_cheatsheet.md)
+
 - [Rust Edition 2024 完整指南](edition_2024.md)
 - [06 - 生态系统与工具](README.md)

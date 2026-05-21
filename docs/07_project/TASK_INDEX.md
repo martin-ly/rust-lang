@@ -1,7 +1,7 @@
 # 任务总索引 - 重定向
 
 > **说明**: 此文档已迁移至归档目录。
-> **当前入口**: [archive/process_reports/2026_02/project/TASK_INDEX.md](TASK_INDEX.md)
+> **当前入口**: [archive/process_reports/2026_02/project/TASK_INDEX.md](./TASK_INDEX.md)
 
 ---
 

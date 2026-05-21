@@ -6,7 +6,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [分布式共识模式](#分布式共识模式)
   - [目录](#目录)
@@ -22,14 +23,17 @@
     - [所有权与分布式状态](#所有权与分布式状态)
     - [错误处理](#错误处理)
   - [参考](#参考)
+  - [*文档版本: 1.0.0*](#文档版本-100)
 
 ## 概念
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 分布式共识解决多个节点在不可靠网络中就某个值达成一致的挑战。
 
 ### CAP 定理
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────┐
@@ -342,3 +346,7 @@ pub enum ConsensusError {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

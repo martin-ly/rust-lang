@@ -378,5 +378,7 @@ ERC (欧洲):
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [Rust生态系统思维导图](RUST_ECOSYSTEM_MIND_MAP.md)
 - [综合语言对比矩阵](../02_matrices/COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)

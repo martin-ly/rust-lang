@@ -594,7 +594,7 @@ fn use_contravariant_callback() {
 ### 组合法则：类型 + 生命周期 + 型变
 
 **定理 VAR-COM-T1（三元组合传递）**：设 $\tau_1 <: \tau_2$（生命周期子类型）、$F$ 为协变类型构造子，则 $F[\tau_1] <: F[\tau_2]$；
-同理逆变、不变由 [variance_theory](variance_theory.md) T1–T4 保证。
+同理逆变、不变由 [variance_theory](./variance_theory.md) T1–T4 保证。
 组合时：$\&'a T$ 中 `'a` 与 `T` 的型变分别由构造子决定；`&'a` 对 `'a` 协变、`&'a T` 对 `T` 协变。
 
 *证明思路*：由 Def 1.1–3.1、定理 T1–T4；`&'a T` 的型变为 `'a` 协变 × `T` 协变；组合时各参数独立应用型变规则。∎

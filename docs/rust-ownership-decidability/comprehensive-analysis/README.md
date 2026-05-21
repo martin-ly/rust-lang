@@ -6,22 +6,22 @@
 
 ## 📚 完整文档导航
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心分析文档
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 行数 | 核心内容 |
 |:---|:---:|:---|
-| [设计模式深度分析](design-patterns-comprehensive.md) | 401 | 8个模式形式化定义与定理证明 |
+| [设计模式深度分析](./design-patterns-comprehensive.md) | 401 | 8个模式形式化定义与定理证明 |
 | 架构模型对比 (待补充) | 383 | 5种架构模型Rust适配度分析 |
-| [开源库深度分析](open-source-analysis.md) | 469 | 8个核心库形式化评估 |
-| [完成报告](COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
+| [开源库深度分析](./open-source-analysis.md) | 469 | 8个核心库形式化评估 |
+| [完成报告](./COMPLETION_REPORT.md) | 276 | 完整统计与学习路径 |
 
 ### 🗺️ 可视化资源 (4类10+篇)
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 思维导图 (Mind Maps)
 

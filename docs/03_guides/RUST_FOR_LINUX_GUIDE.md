@@ -1,7 +1,7 @@
 # Rust for Linux 指南
 
 > **层级**: L7 前沿 / L3 高级系统编程
-> **前置概念**: [Unsafe](../../concept/03_advanced/03_unsafe.md) · [FFI](../../concept/03_advanced/04_ffi.md) · [Build Systems](../../concept/06_ecosystem/01_toolchain.md)
+> **前置概念**: [Unsafe](../../concept/03_advanced/03_unsafe.md) · [FFI](../../concept/03_advanced/03_unsafe.md) · [Build Systems](../../concept/06_ecosystem/01_toolchain.md)
 > **Bloom 层级**: 分析 → 评价
 > **[来源: Rust for Linux Project]** · **[来源: Linux Kernel Documentation]** · **[来源: Rust Reference]** ✅
 

@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Workflow Pattern]** · **[来源: GoF - Design Patterns]** · **[来源: TRPL Ch. 18]** · **[来源: Wikipedia - State Machine]** · **[来源: Rust Reference]
 
 - [工作流设计模式语义分析](#工作流设计模式语义分析)
   - [目录](#目录)
@@ -208,11 +208,11 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 工作流定义与语义
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **工作流（Workflow）** 是业务过程的自动化实现，它将一组相关的任务按照预定义的规则组织起来，以完成特定的业务目标。
 从语义角度看，工作流可以形式化定义为：
@@ -1331,3 +1331,8 @@ Rust 的类型安全和零成本抽象特性使其成为实现工作流引擎的
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

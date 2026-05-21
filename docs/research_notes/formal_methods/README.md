@@ -11,7 +11,7 @@
 ## ✅ 完备性声明 {#-完备性声明}
 > **[来源: Rust Official Docs]**
 
-**本目录形式化论证已 100% 完成**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+**本目录形式化论证已 100% 完成**。详见 [00_completeness_gaps](./00_completeness_gaps.md)：
 
 - **内存与所有权**：Box、Rc/Arc、Cell/RefCell、MaybeUninit、Deref/Drop、repr、const &mut static（Phase 1–6）
 - **并发与异步**：通道、Mutex/RwLock、原子操作、thread::spawn（Phase 2、4、6）
@@ -29,7 +29,7 @@
 
 **与子文档衔接**：
 
-- [borrow_checker_proof](borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
+- [borrow_checker_proof](./borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1、定理 MATCH-T1/FOR-T1/QUERY-T1
 - [type_system_foundations](../../research_notes/type_theory/type_system_foundations.md) 定理 T2（保持性）、T3（类型安全）
 
 ---
@@ -218,12 +218,12 @@
 
 | 概念 | 公理/定义 | 定理 | 证明方法 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
-| **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](ownership_model.md) 使用已移动值、双重释放 |
-| **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](borrow_checker_proof.md) 双重可变借用 |
-| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](lifetime_formalization.md) 返回局部引用、存储短生命周期 |
-| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](async_state_machine.md) 非 Send 跨线程、移动未 Pin |
-| **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](pin_self_referential.md) 移动未 Pin 自引用 |
-| **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
+| **所有权** | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 结构归纳、反证 | [ownership_model](./ownership_model.md) 使用已移动值、双重释放 |
+| **借用** | 规则 5–8 | T1 数据竞争自由, T2 | 规则归纳 | [borrow_checker_proof](./borrow_checker_proof.md) 双重可变借用 |
+| **生命周期** | Axiom LF1–LF2, Def 1.4, $\ell \subseteq \text{lft}$ | LF-T1–T3 引用有效性 | 三步骤、约束求解 | [lifetime_formalization](./lifetime_formalization.md) 返回局部引用、存储短生命周期 |
+| **异步** | Def 4.1–5.2（Future、Poll、Ready/Pending） | T6.1 状态一致, T6.2 并发安全, T6.3 进度 | 归纳+案例分析 | [async_state_machine](./async_state_machine.md) 非 Send 跨线程、移动未 Pin |
+| **Pin** | Def 1.1–2.2（位置稳定、自引用） | T1–T3 Pin 保证/自引用/投影 | 类型系统、位置稳定 | [pin_self_referential](./pin_self_referential.md) 移动未 Pin 自引用 |
+| **Send/Sync** | Def SEND1, SYNC1；SYNC-L1 $T:\text{Sync} \Leftrightarrow \&T:\text{Send}$ | SEND-T1, SYNC-T1, SEND-SYNC-T1 | 与 borrow/async 衔接 | [send_sync_formalization](./send_sync_formalization.md) Rc !Send、Cell !Sync、非 Send spawn |
 | **Actor模型** | Actor := (State, Behavior, Mailbox) | ACTOR-ISOLATION, ACTOR-NO-DATA-RACE, ACTOR-FAULT-ISOLATION | 结构归纳、Actor演算 | [ACTOR_MODEL_DEEP_DIVE](../../rust-ownership-decidability/actor-specialty/ACTOR_MODEL_DEEP_DIVE.md) 循环Ask、共享状态、Actor泄漏 |
 
 *控制流*：A-CF1 见本 README「控制流形式化」；变量 Def 1.4/1.5 见 ownership_model。
@@ -362,7 +362,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 | FLS 章节 | 直接链接 | 本目录对应 |
 | :--- | :--- | :--- |
 | [Ch. 5 Patterns](https://spec.ferrocene.dev/patterns.html) | 5.1 [Refutability](https://spec.ferrocene.dev/patterns.html#refutability)、5.13 [Pattern Matching](https://spec.ferrocene.dev/patterns.html#pattern-matching) | [02_reference/quick_reference/control_flow_functions_cheatsheet.md](../../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
-| [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](ownership_model.md)、[borrow_checker_proof](borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
+| [Ch. 15 Ownership and Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html) | 15.1 [Ownership](https://spec.ferrocene.dev/ownership-and-deconstruction.html#ownership)、15.4 [Borrowing](https://spec.ferrocene.dev/ownership-and-deconstruction.html#borrowing)、15.6–15.9 [Destruction](https://spec.ferrocene.dev/ownership-and-deconstruction.html#destruction) | [ownership_model](./ownership_model.md)、[borrow_checker_proof](./borrow_checker_proof.md) Def OW1、规则 1–8、DROP1 |
 | [Ch. 16 Exceptions and Errors](https://spec.ferrocene.dev/exceptions-and-errors.html) | 16.1 [Panic](https://spec.ferrocene.dev/exceptions-and-errors.html#panic)、16.2 [Abort](https://spec.ferrocene.dev/exceptions-and-errors.html#abort) | [02_reference/quick_reference/error_handling_cheatsheet.md](../../02_reference/quick_reference/error_handling_cheatsheet.md)、[EDGE_CASES_AND_SPECIAL_CASES](../../02_reference/EDGE_CASES_AND_SPECIAL_CASES.md) |
 | [Ch. 17 Concurrency](https://spec.ferrocene.dev/concurrency.html) | 17.1 [Send/Sync](https://spec.ferrocene.dev/concurrency.html#send-and-sync)、17.2 [Atomics](https://spec.ferrocene.dev/concurrency.html#atomics)、17.3 [Async](https://spec.ferrocene.dev/concurrency.html#asynchronous-computation) | CHAN-T1、MUTEX-T1、ATOMIC1、SPAWN-T1 |
 | [Ch. 19 Unsafety](https://spec.ferrocene.dev/unsafety.html) | 完整章节 | UNSAFE1、RAW1、EXTERN1 |
@@ -423,7 +423,7 @@ Rust 官方采纳（2025 年 3 月）的 [Ferrocene FLS](https://spec.ferrocene.
 
 **维护团队**: Rust Formal Methods Research Group
 **最后更新**: 2026-02-12
-**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](00_completeness_gaps.md)。**意见与可持续推进**（Send/Sync 独立形式化、安全可判定机制全面梳理、完备特性对比、思维表征四类绑定）：[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。**完备性检查表**（六篇×六维）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
+**状态**: ✅ **100% 完成**；Phase 1–6 全部补全，见 [00_completeness_gaps](./00_completeness_gaps.md)。**意见与可持续推进**（Send/Sync 独立形式化、安全可判定机制全面梳理、完备特性对比、思维表征四类绑定）：[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](./SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)。**完备性检查表**（六篇×六维）：[FORMAL_METHODS_COMPLETENESS_CHECKLIST](./FORMAL_METHODS_COMPLETENESS_CHECKLIST.md)。
 
 ---
 

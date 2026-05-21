@@ -228,7 +228,7 @@ cargo build --release
 
 完成此项目后，继续:
 
-- [项目 02: 文件处理器](project-02-file-processor.md)
+- [项目 02: 文件处理器](./project-02-file-processor.md)
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

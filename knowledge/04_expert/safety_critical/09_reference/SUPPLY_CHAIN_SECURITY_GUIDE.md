@@ -378,5 +378,7 @@ jobs:
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [API设计指南](API_DESIGN_GUIDELINES.md)
 - [Rust安全关键系统 - 检查清单与模板](CHECKLISTS_AND_TEMPLATES.md)

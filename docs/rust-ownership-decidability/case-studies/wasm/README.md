@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [WebAssembly (WASM) 开发指南](#webassembly-wasm-开发指南)
   - [目录](#目录)
@@ -47,14 +48,17 @@
     - [9.2 在Web应用中使用](#92-在web应用中使用)
     - [9.3 与现有框架集成](#93-与现有框架集成)
   - [总结](#总结)
+  - [适用场景：图像处理、加密、游戏、科学计算等计算密集型任务。](#适用场景图像处理加密游戏科学计算等计算密集型任务)
 
 ---
 
 ## 1. WebAssembly概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是WebAssembly
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代Web浏览器中以接近原生的性能运行。
 
@@ -706,7 +710,7 @@ WebAssembly + Rust 提供了：
 3. **安全性**: 内存安全和沙箱
 4. **互操作性**: 与JS无缝集成
 
-适用场景：图像处理、加密、游戏、科学计算等计算密集型任务。
+适用场景：图像处理、加密、游戏、科学计算等计算密集型任务
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -717,3 +721,11 @@ WebAssembly + Rust 提供了：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

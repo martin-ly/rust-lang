@@ -7,19 +7,19 @@
 ---
 
 ## 补充内容概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 针对"缺少整体框架性论证"的问题，已完成以下补充：
 
 ### 1. 框架分析文档
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md** - 缺失诊断与补充方案
 - **UNIFIED_THEORETICAL_FRAMEWORK.md** - 统一理论框架
 - **THEOREM_DEPENDENCY_GRAPH.md** - 定理依赖网络图
 
 ### 2. 关键证明补充
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **SemanticsEquivalence.v** - 大步/小步语义等价性
 - **TypeOwnershipConnection.v** - 类型与所有权联系
@@ -391,3 +391,8 @@ admit: 明确的清单
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

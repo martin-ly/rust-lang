@@ -50,3 +50,12 @@
 
 
 </details>
+
+
+---
+
+## 相关概念
+
+- [分布式模式](./13-01-distributed-patterns.md)
+- [共识模式](./consensus-patterns.md)
+- [所有权可判定性总览](../README.md)

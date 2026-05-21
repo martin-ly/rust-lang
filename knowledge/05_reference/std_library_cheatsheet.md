@@ -935,5 +935,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str  // 多生命周期
 
 ## 相关概念
 
+- [Rust 标准库速查](./std_library_cheatsheet.md)
+
 - [Rust 关键字参考手册](keywords.md)
 - [数学常量](math_constants.md)

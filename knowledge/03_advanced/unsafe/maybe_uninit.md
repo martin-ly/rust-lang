@@ -385,3 +385,5 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-ignore-leaks" cargo +nightly miri run
 
 - [FFI (Foreign Function Interface)](ffi.md)
 - [内联汇编 (Inline Assembly)](inline_asm.md)
+- [Unsafe Rust 指南](README.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

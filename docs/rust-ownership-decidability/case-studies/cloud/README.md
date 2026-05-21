@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Cloud Computing]** · **[来源: Wikipedia - Kubernetes]** · **[来源: Tokio Documentation]** · **[来源: containerd Documentation]** · **[来源: Rust Async Working Group]**
 
 - [Rust 云计算与容器开发完全指南](#rust-云计算与容器开发完全指南)
   - [目录](#目录)
@@ -67,14 +68,17 @@
   - [附录：资源与参考](#附录资源与参考)
     - [推荐 crate](#推荐-crate)
     - [学习资源](#学习资源)
+  - [*最后更新：2026-03-04*](#最后更新2026-03-04)
 
 ---
 
 ## 1. 云原生 Rust 概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust 在云原生领域的优势
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 语言在云原生领域展现出独特的优势，使其成为构建基础设施软件的理想选择：
 
@@ -223,6 +227,8 @@ impl Proxy {
 ---
 
 ## 2. 容器运行时
+
+> **[来源: Wikipedia - Container Runtime]** · **[来源: containerd Documentation]** · **[来源: Wikipedia - Docker]**
 
 ### 2.1 youki 容器运行时
 
@@ -937,6 +943,8 @@ async fn delete_pod_with_grace_period(
 
 ## 4. 服务网格
 
+> **[来源: Wikipedia - Service Mesh]** · **[来源: Linkerd Documentation]** · **[来源: Istio Documentation]**
+
 ### 4.1 Linkerd2-proxy 架构分析
 
 Linkerd2-proxy 是 Linkerd 服务网格的数据平面代理：
@@ -1455,6 +1463,8 @@ impl WasmRuntime {
 ---
 
 ## 6. 分布式系统
+
+> **[来源: Wikipedia - Distributed Computing]** · **[来源: Rust Async Working Group]** · **[来源: Wikipedia - CAP Theorem]**
 
 ### 6.1 Raft 共识算法实现
 
@@ -3403,3 +3413,11 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

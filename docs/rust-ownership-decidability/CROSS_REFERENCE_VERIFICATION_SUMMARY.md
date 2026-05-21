@@ -7,10 +7,10 @@
 ---
 
 ## Work Completed
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. Link Verification
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Metric | Before | After | Improvement |
 |--------|--------|-------|-------------|
@@ -19,7 +19,7 @@
 | Broken Links | 48 | 10 | **79% fixed** |
 
 ### 2. Files Fixed (14 files)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **06-visualizations/README.md** - Fixed 3 broken document links
 2. **11-design-patterns/README.md** - Removed 2 non-existent file references
@@ -102,9 +102,9 @@ Added to main README.md:
 
 | Index | Purpose |
 |-------|---------|
-| [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | Manual curated index |
-| [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md) | Auto-generated with cross-reference map |
-| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_VERIFICATION_REPORT.md) | Verification details |
+| [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | Manual curated index |
+| [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | Auto-generated with cross-reference map |
+| [CROSS_REFERENCE_VERIFICATION_REPORT.md](./CROSS_REFERENCE_VERIFICATION_REPORT.md) | Verification details |
 
 ---
 

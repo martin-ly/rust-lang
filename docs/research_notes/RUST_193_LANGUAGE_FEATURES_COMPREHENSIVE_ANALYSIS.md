@@ -85,7 +85,7 @@
 ## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
 > **[来源: Rust Official Docs]**
 
-本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](PROOF_INDEX.md)。
+本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](./PROOF_INDEX.md)。
 
 | 特性族 | 特性 | Def | Axiom | Theorem | 文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -158,7 +158,7 @@
 | **基本类型** | 机器字、数值、布尔 | i32、u64、bool、char 等 | [type_system_foundations](type_theory/type_system_foundations.md) | 溢出（debug panic） |
 | **结构体** | 命名字段聚合 | struct、元组结构体、单元结构体 | type_system | - |
 | **枚举** | tagged union、模式匹配 | enum、Option、Result | type_system | - |
-| **Never (!)** | 不可达、发散 | 无构造子、对应 ⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 1.92 Lint 严格化 |
+| **Never (!)** | 不可达、发散 | 无构造子、对应 ⊥ | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 1.92 Lint 严格化 |
 | **Option/Result** | 可选值、错误处理 | 构造性、无 null | LANGUAGE_SEMANTICS | unwrap 空值 |
 | **型变** | 子类型在泛型中的传递 | 协变/逆变/不变 | [variance_theory](type_theory/variance_theory.md) | &mut 协变 |
 | **类型推断** | 减少注解 | 局部推断、约束传播 | type_system | 歧义时报错 |
@@ -305,13 +305,13 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_FEATURE_MATRIX](RUST_193_FEATURE_MATRIX.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
+| [RUST_193_FEATURE_MATRIX](./RUST_193_FEATURE_MATRIX.md) | 按特性族展开的五维矩阵（概念-公理-定理-证明方法-反例） |
 | [releases.rs 1.93.0](https://releases.rs/docs/1.93.0/) | 权威变更清单 |
 | [Ferrocene FLS](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范 |
-| [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
-| [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | 核心机制设计论证（Pin、所有权、借用等） |
-| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
+| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链（Def→示例→论证→证明） |
+| [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) | 核心机制设计论证（Pin、所有权、借用等） |
+| [COMPREHENSIVE_SYSTEMATIC_OVERVIEW](./COMPREHENSIVE_SYSTEMATIC_OVERVIEW.md) | 全面系统化梳理、语义归纳 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | 构造性语义、表达能力边界 |
 | [toolchain/07_rust_1.93_full_changelog](../06_toolchain/07_rust_1.93_full_changelog.md) | Rust 1.93 完整变更清单 |
 | [toolchain/09_rust_1.93_compatibility_deep_dive](../06_toolchain/09_rust_1.93_compatibility_deep_dive.md) | Rust 1.93 兼容性深度解析 |
 | [toolchain/10_rust_1.89_to_1.93_cumulative_features_overview](../archive/2026_05_historical_docs/10_rust_1.89_to_1.93_cumulative_features_overview.md) | 1.89→1.93 累积特性总览 |

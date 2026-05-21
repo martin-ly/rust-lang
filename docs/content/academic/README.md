@@ -460,3 +460,11 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [Coq 形式化指南](./coq_formalization_guide.md)
+- [Tree Borrows 权威指南](./tree_borrows_authoritative_guide.md)

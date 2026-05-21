@@ -5,7 +5,7 @@
 ---
 
 ## 矩阵1: 内存安全机制对比
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 安全机制 | 检查时机 | 性能开销 | 安全保证 | 误报率 | 覆盖范围 |
 |:---|:---:|:---:|:---:|:---:|:---|
@@ -21,7 +21,7 @@
 ---
 
 ## 矩阵2: 并发安全原语对比
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 原语 | 线程安全 | Send | Sync | 阻塞 | 性能 | 使用场景 |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---|
@@ -39,7 +39,7 @@
 ---
 
 ## 矩阵3: Unsafe代码安全性
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 场景 | 风险等级 | 常见错误 | 缓解措施 | 验证工具 |
 |:---:|:---:|:---|:---|:---|
@@ -179,3 +179,8 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

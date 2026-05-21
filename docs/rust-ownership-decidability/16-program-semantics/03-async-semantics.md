@@ -1,7 +1,8 @@
 # Rust 异步执行模型语义深度分析
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rustonomicon - Async]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Future/Promise]** · **[来源: Tokio Documentation - tokio.rs]**
 
 - [Rust 异步执行模型语义深度分析](#rust-异步执行模型语义深度分析)
   - [目录](#目录)
@@ -150,14 +151,17 @@
     - [与其他语言的对比](#与其他语言的对比)
     - [语义选择建议](#语义选择建议)
     - [形式化语义表示](#形式化语义表示)
+  - [*关联文档：00-semantic-framework.md*](#关联文档00-semantic-frameworkmd)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 异步编程语义基础
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **异步编程语义**研究的是程序在异步执行环境下的行为、状态转换和交互规则。
 与同步编程不同，异步编程引入了**挂起（Suspension）**和**恢复（Resumption）**的概念，使得单个执行流能够在等待 I/O 或其他长时间操作时让出控制权。
@@ -229,6 +233,8 @@ fn example() -> impl Future<Output = i32> {
 ---
 
 ## 2. Future 语义基础
+
+> **[来源: Wikipedia - Future/Promise]** · **[来源: Rust Reference - async/await]** · **[来源: Tokio Documentation - tokio.rs]**
 
 ### 2.1 Future 类型语义
 
@@ -1240,6 +1246,8 @@ async fn traverse_tree(node: &TreeNode) -> i32 {
 ---
 
 ## 4. Pin 和自引用语义
+
+> **[来源: Rust Reference - Pin]** · **[来源: Wikipedia - Self-referential Struct]** · **[来源: RFC 2349 - Pin]**
 
 ### 4.1 Pin 类型语义
 
@@ -2273,6 +2281,8 @@ impl FairScheduler {
 ---
 
 ## 6. I/O 驱动语义
+
+> **[来源: Wikipedia - Asynchronous I/O]** · **[来源: mio Documentation - docs.rs/mio]** · **[来源: Wikipedia - Reactor Pattern]**
 
 ### 6.1 异步 I/O 语义
 

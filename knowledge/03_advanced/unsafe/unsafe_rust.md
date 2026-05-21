@@ -1044,3 +1044,5 @@ fn good_slice() {
 
 - [FFI (Foreign Function Interface)](ffi.md)
 - [内联汇编 (Inline Assembly)](inline_asm.md)
+- [MaybeUninit](maybe_uninit.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

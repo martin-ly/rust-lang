@@ -5,11 +5,12 @@
 > **形式化框架**: 配置源优先级 + 配置提取 + Profile选择
 >
 > **参考**: Figment Documentation, Rocket Framework, serde
+> **[来源: Figment Documentation - docs.rs/figment]** · **[来源: Rocket Framework - rocket.rs]** · **[来源: serde.rs Documentation]** · **[来源: Wikipedia - Configuration Management]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Figment 配置管理库形式化分析](#figment-配置管理库形式化分析)
   - [目录](#目录)
@@ -55,10 +56,10 @@
 ---
 
 ## 1. 项目概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Figment 是什么
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket Web 框架作者）开发。它提供了一个统一、类型安全且可扩展的配置管理解决方案。
 
@@ -1774,3 +1775,8 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

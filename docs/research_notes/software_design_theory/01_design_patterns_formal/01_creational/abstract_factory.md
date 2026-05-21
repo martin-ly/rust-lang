@@ -255,9 +255,9 @@ ownership_model T2
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Factory Method](factory_method.md) | 抽象工厂由多个工厂方法组成 |
-| [Builder](builder.md) | 可组合：Builder 由 Factory 创建 |
-| [Singleton](singleton.md) | 工厂可为单例 |
+| [Factory Method](./factory_method.md) | 抽象工厂由多个工厂方法组成 |
+| [Builder](./builder.md) | 可组合：Builder 由 Factory 创建 |
+| [Singleton](./singleton.md) | 工厂可为单例 |
 
 ---
 

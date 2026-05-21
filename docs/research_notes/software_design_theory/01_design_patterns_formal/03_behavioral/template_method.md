@@ -253,9 +253,9 @@ impl DataImport for CsvImport {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Strategy](strategy.md) | 同为算法定制；Template 为骨架，Strategy 为替换 |
+| [Strategy](./strategy.md) | 同为算法定制；Template 为骨架，Strategy 为替换 |
 | [Factory Method](../01_creational/factory_method.md) | 工厂方法可为模板钩子 |
-| [Observer](observer.md) | 钩子可触发观察者 |
+| [Observer](./observer.md) | 钩子可触发观察者 |
 
 ---
 

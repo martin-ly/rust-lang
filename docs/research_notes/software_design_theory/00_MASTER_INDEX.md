@@ -65,8 +65,8 @@
 ### 3.1 设计模式扩展
 
 - GoF 23 模式（当前）✅
-- **Rust Idioms** ✅ [06_rust_idioms](06_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
-- **Anti-patterns** ✅ [07_anti_patterns](07_anti_patterns.md)：13 反例索引、反模式分类、5 个场景→反模式→正确写法、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
+- **Rust Idioms** ✅ [06_rust_idioms](./06_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
+- **Anti-patterns** ✅ [07_anti_patterns](./07_anti_patterns.md)：13 反例索引、反模式分类、5 个场景→反模式→正确写法、与 FORMAL_PROOF_SYSTEM_GUIDE 衔接、三维边界
 - 扩展 20（43 完全）：Repository、DTO、Event Sourcing 等已纳入 02_complete_43_catalog
 
 ### 3.2 执行模型扩展
@@ -98,10 +98,10 @@
 
 | 层次 | 深化入口 | 新增/充实内容 |
 | :--- | :--- | :--- |
-| **L1 基础** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](06_rust_idioms.md) | 23 模式均有 Def/定理/典型场景/反例；16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template）；RAII/Newtype/类型状态/Error handling/Cow |
+| **L1 基础** | [01_design_patterns_formal](01_design_patterns_formal/README.md)、[06_rust_idioms](./06_rust_idioms.md) | 23 模式均有 Def/定理/典型场景/反例；16+ 模式有完整场景示例（Builder/Adapter/Decorator/Composite/Flyweight/Facade/Chain/Mediator/Observer/Strategy/Command/State/Visitor/Interpreter/Template）；RAII/Newtype/类型状态/Error handling/Cow |
 | **L2 选型** | `03_semantic_boundary_map`、[05_boundary_system](05_boundary_system/README.md) | 5 个场景→模式→代码；**场景化 Safe 决策 3 例**（全局配置、跨线程缓存、FFI）；按需求反向查模式表 |
 | **L3 组合** | [04_compositional_engineering](04_compositional_engineering/README.md)、[03_execution_models](03_execution_models/README.md) | **验证工作流与检查清单**；**组合反例详解**；**三层架构完整示例**；**Builder+Factory+Repository、Decorator+Strategy+Observer 链条**；**执行模型 + 设计模式组合 4 例** |
-| **L4 实践** | [07_anti_patterns](07_anti_patterns.md) | 13 反例；5 个场景→反模式→正确写法；常见陷阱与规避 |
+| **L4 实践** | [07_anti_patterns](./07_anti_patterns.md) | 13 反例；5 个场景→反模式→正确写法；常见陷阱与规避 |
 
 ---
 
@@ -142,9 +142,9 @@
 | 同步/异步/并发/分布式 | [03_execution_models/README](03_execution_models/README.md) |
 | 组合工程有效性 | [04_compositional_engineering/README](04_compositional_engineering/README.md) |
 | 边界体系总览 | [05_boundary_system/README](05_boundary_system/README.md) |
-| **Rust 惯用模式** | [06_rust_idioms](06_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
-| **反模式与边界** | [07_anti_patterns](07_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
-| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) — 设计模式、分布式、工作流论证深化 |
+| **Rust 惯用模式** | [06_rust_idioms](./06_rust_idioms.md) — RAII、Newtype、类型状态、与设计模式衔接 |
+| **反模式与边界** | [07_anti_patterns](./07_anti_patterns.md) — 13 反例、反模式分类、规避策略 |
+| **全面论证缺口与推进计划** | [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) — 设计模式、分布式、工作流论证深化 |
 
 ---
 
@@ -165,7 +165,7 @@
 | 第三阶段 | 工作流与执行模型 | 100% 完成（23/43、五执行模型）；**2026-02 增强**：常见陷阱、形式化衔接、模式选取完整示例 |
 | 第四阶段 | 组合工程与证明 | 100% 完成（CE-T1–T3） |
 | 第五阶段 | Rust Idioms 与反模式 | 100% 完成（06、07）；**2026-02 增强**：完整代码示例、规避示例 |
-| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) |
+| **全面论证推进** | 设计模式、分布式模式、工作流模式 | ✅ 100% 完成 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md) |
 
 ---
 

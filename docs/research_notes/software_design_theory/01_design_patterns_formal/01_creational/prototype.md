@@ -250,8 +250,8 @@ ownership_model T2
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Factory Method](factory_method.md) | 工厂可基于 Prototype 克隆 |
-| [Builder](builder.md) | Builder 可基于 Prototype 克隆 |
+| [Factory Method](./factory_method.md) | 工厂可基于 Prototype 克隆 |
+| [Builder](./builder.md) | Builder 可基于 Prototype 克隆 |
 | [Memento](../03_behavioral/memento.md) | Clone 可作 Memento 实现 |
 
 ---

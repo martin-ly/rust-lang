@@ -7,15 +7,18 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 第三阶段为文档集新增了**10个深度形式化分析文档**，进一步扩展了标准库组件和权威开源库的覆盖范围。
 
 ### 新增文档概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 标准库扩展 (3个)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 主题 | 定理数量 | 关键贡献 |
 |------|------|----------|----------|
@@ -419,7 +422,7 @@ Bidirectional: Stream<Request> ◄──► Stream<Response>
 
 ---
 
-*"从理论基础到生态实践，从内存安全到并发保证，这是Rust形式化理论的完整百科全书。"*:
+*"从理论基础到生态实践，从内存安全到并发保证，这是Rust形式化理论的完整百科全书。"*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -430,3 +433,7 @@ Bidirectional: Stream<Request> ◄──► Stream<Response>
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

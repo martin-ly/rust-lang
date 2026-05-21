@@ -39,6 +39,7 @@
   - [📝 模块 10: 自我检测](#-模块-10-自我检测)
   - [📚 权威来源索引](#-权威来源索引)
   - [八、参考链接](#八参考链接)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -398,3 +399,5 @@ match status {
 
 - [Rust 2024 Edition `let chains` 深度专题](let_chains.md)
 - [`cfg_select!` 宏（Rust 1.95.0）](../macros/cfg_select.md)
+- [Rust 字符串处理 (Strings)](../strings.md)
+- [Rust 集合类型 (Collections)](../collections.md)

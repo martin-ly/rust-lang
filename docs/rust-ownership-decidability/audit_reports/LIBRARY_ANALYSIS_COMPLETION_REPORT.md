@@ -7,12 +7,14 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本次扩展为 `rust-ownership-decidability` 文档集新增了**7个深度形式化分析文档**，覆盖Rust标准库核心组件和权威开源库。
 
 ### 新增文档概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 主题 | 定理数量 | 形式化深度 |
 |------|------|----------|------------|
@@ -27,7 +29,8 @@
 ---
 
 ## 标准库核心组件分析
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. `Vec<T>` 动态数组
 
@@ -432,7 +435,7 @@ Request ──► Timeout ──► Compression ──► RateLimit ──► Ha
 
 ---
 
-*"从标准库到生态核心库，从内存安全到并发保证，这是Rust形式化理论的完整图景。"*:
+*"从标准库到生态核心库，从内存安全到并发保证，这是Rust形式化理论的完整图景。"*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -443,3 +446,7 @@ Request ──► Timeout ──► Compression ──► RateLimit ──► Ha
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

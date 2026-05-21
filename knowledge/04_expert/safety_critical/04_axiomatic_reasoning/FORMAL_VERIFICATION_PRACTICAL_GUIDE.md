@@ -698,5 +698,7 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [Rust安全保证公理定理推理决策树](RUST_AXIOMATIC_REASONING_TREES.md)
 - [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)

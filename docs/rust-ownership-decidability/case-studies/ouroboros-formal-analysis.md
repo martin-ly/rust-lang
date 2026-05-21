@@ -5,11 +5,12 @@
 > **形式化框架**: 借用投影 + Pin保证 + 生命周期参数化
 >
 > **参考**: [ouroboros](https://docs.rs/ouroboros) 0.18.x, [ouroboros_macro](https://docs.rs/ouroboros_macro)
+> **[来源: ouroboros Documentation - docs.rs/ouroboros]** · **[来源: Rust Reference - Pin]** · **[来源: Wikipedia - Self-referential Struct]** · **[来源: Rustonomicon - Pin]** · **[来源: TRPL Ch. 19]** · **[来源: RFC 2349 - Pin]
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Ouroboros 自引用结构形式化分析](#ouroboros-自引用结构形式化分析)
   - [目录](#目录)
@@ -67,12 +68,12 @@
 ---
 
 ## 1. 项目概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Self-Referential Structs）**。它通过过程宏自动生成安全的构建器和访问器，解决了 Rust 所有权系统中长期存在的自引用难题。
 
 ### 核心解决的问题
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 问题 | Ouroboros 解决方案 |
 |------|-------------------|
@@ -1164,3 +1165,8 @@ fn demo() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

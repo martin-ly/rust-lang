@@ -5,10 +5,10 @@
 ---
 
 ## 一、核心概念的三层映射
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权（Ownership）
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
 |-----------|---------|-----------|
@@ -29,7 +29,7 @@ Definition move_var (Γ : type_env) (x : var) : type_env :=
 ```
 
 ### 1.2 借用（Borrowing）
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
 |-----------|---------|-----------|
@@ -481,3 +481,8 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

@@ -78,7 +78,7 @@
 
 **Axiom FV1**：形式化验证不能替代定理正确性论证，但可排除证明中的隐含错误；验证通过 ⇒ 证明无语法/逻辑遗漏。
 
-**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](PROOF_INDEX.md) 的手工证明互为补充。
+**定理 FV-T1（验证与定理衔接）**：若 $V$ 验证 $T$，则 $T$ 的证明在验证工具的逻辑框架内成立；与 [PROOF_INDEX](./PROOF_INDEX.md) 的手工证明互为补充。
 
 *证明*：由 Def FV1；机器验证保证证明结构正确；手工证明提供直觉与文档；二者一致则论证完备。∎
 
@@ -86,7 +86,7 @@
 
 *证明*：由 Def FV1 与验证目标；六类对应 ownership_model、borrow_checker_proof、lifetime_formalization、type_system_foundations、async_state_machine、pin_self_referential。∎
 
-**推论 FV-C1**：验证任务清单完成 ⇔ 六类均有机器可检查证明；与 [ARGUMENTATION_GAP_INDEX](ARGUMENTATION_GAP_INDEX.md) 论证缺口追踪衔接。
+**推论 FV-C1**：验证任务清单完成 ⇔ 六类均有机器可检查证明；与 [ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md) 论证缺口追踪衔接。
 
 ---
 

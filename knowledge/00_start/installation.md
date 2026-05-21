@@ -207,5 +207,8 @@ rustup default stable  # 切回稳定版
 
 ## 相关概念
 
+- [Hello World](./hello_world.md)
+
 - [Hello, World](hello_world.md)
 - [Rust 学习路线图](learning_roadmap.md)
+- [Rust 哲学与设计原则](rust_philosophy.md)

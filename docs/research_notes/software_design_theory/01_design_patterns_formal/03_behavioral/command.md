@@ -304,9 +304,9 @@ impl Editor {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Observer](observer.md) | 观察者可接收命令；命令可作为事件 |
-| [Chain of Responsibility](chain_of_responsibility.md) | 链中节点可封装为 Command |
-| [Memento](memento.md) | 撤销需 Memento 保存状态 |
+| [Observer](./observer.md) | 观察者可接收命令；命令可作为事件 |
+| [Chain of Responsibility](./chain_of_responsibility.md) | 链中节点可封装为 Command |
+| [Memento](./memento.md) | 撤销需 Memento 保存状态 |
 
 ---
 

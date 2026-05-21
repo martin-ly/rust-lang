@@ -375,3 +375,5 @@ unsafe { asm!("nop", options(nomem, nostack)); }
 
 - [FFI (Foreign Function Interface)](ffi.md)
 - [MaybeUninit](maybe_uninit.md)
+- [Unsafe Rust 指南](README.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

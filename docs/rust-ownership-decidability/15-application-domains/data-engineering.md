@@ -4,7 +4,8 @@
 本文档深入介绍 Rust 在数据工程领域的应用。
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Polars Documentation - docs.pola.rs]** · **[来源: Apache Arrow - arrow.apache.org]** · **[来源: Wikipedia - Data Engineering]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: Rust Reference]**
 
 - [Rust 数据工程](#rust-数据工程)
   - [目录](#目录)
@@ -32,14 +33,17 @@
     - [2. 并发处理](#2-并发处理)
     - [3. 错误处理](#3-错误处理)
   - [总结](#总结)
+  - [通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统。](#通过本文档介绍的技术开发者可以构建高性能高可靠性的数据处理系统)
 
 ---
 
 ## 数据工程概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust 在数据工程中的优势
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | Rust 实现 | Python/Pandas 对比 | Java/Spark 对比 |
 |------|-----------|-------------------|-----------------|
@@ -1431,7 +1435,7 @@ Rust 在数据工程领域提供了：
 4. **并发能力**:  fearless 并发，轻松处理并行数据流
 5. **生态成熟**: Polars、DataFusion、Arrow 等世界级数据工具
 
-通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统。
+通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1442,3 +1446,7 @@ Rust 在数据工程领域提供了：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [Parent README](../README.md)

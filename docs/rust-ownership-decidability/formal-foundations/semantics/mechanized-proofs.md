@@ -1,7 +1,7 @@
 # Rust 机器化证明形式化理论
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 机器化证明形式化理论](#rust-机器化证明形式化理论)
   - [目录](#目录)
@@ -92,13 +92,13 @@
 ---
 
 ## 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 机器化证明使用计算机辅助证明助手来形式化和验证数学定理及程序性质。
 对于 Rust 而言，机器化证明提供了最高级别的安全保障，确保类型系统、内存模型和并发语义的正确性。
 
 ### 形式化目标
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档概述 Rust 相关的机器化证明：
 
@@ -1112,3 +1112,8 @@ cargo install prusti-contracts
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

@@ -146,10 +146,10 @@
 - [ ] 更新研究优先级
 - [ ] 优化导航系统
 - [ ] 生成质量报告
-- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md) 与最新文档一致；
+- [ ] **层次化与矩阵**：核对 [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md) 与最新文档一致；
 - [ ] 23 模式矩阵、执行模型矩阵、formal_methods 六篇并表与各子文档双向链接完整（见 RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN）
 - [ ] **格式与内容与 1.93 对齐**：按 FORMAT_AND_CONTENT_ALIGNMENT_PLAN 执行季度抽查：元信息/目录/文末块统一；实质内容五维自检抽样；
-- [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md) 反例索引更新
+- [ ] 92 项落点与 [RUST_193_COUNTEREXAMPLES_INDEX](./RUST_193_COUNTEREXAMPLES_INDEX.md) 反例索引更新
 
 ### 年度维护 (每年)
 
@@ -179,7 +179,7 @@
 
 ### 格式统一检查清单（research_notes 专用）
 
-与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
+与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § 元信息统一模板 一致：
 
 - [ ] **元信息**：每篇含 `创建日期`、`最后更新`、`Rust 版本`: 1.93.1+ (Edition 2024)、`状态`
 - [ ] **目录块**：有目录的文档统一使用「## 📊 目录」；同类文档二级标题风格一致
@@ -239,8 +239,8 @@
 2. **执行更新**
    - 更新文档内容
    - 保持格式一致性
-   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)、
-   - 相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范）
+   - 若涉及概念/定理/文档结构变更：视情况更新 [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)、
+   - 相关多维矩阵（23 模式、执行模型、formal_methods 六篇并表）及子文档中的「矩阵行/列」标注（见 [CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) § 矩阵与文档双向链接规范）
    - 更新相关链接
 
 3. **验证更新**
@@ -407,14 +407,14 @@ find docs/research_notes -name "*.md" -exec wc -l {} + | tail -1
 
 ## 📦 Rust 版本增量更新 {#-rust-版本增量更新}
 
-**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md) 执行：
+**每 Rust 新版本发布后**，按 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md) 执行：
 
 1. 收集 releases.rs、Blog 变更
 2. 更新 RUST_XXX、toolchain 文档
 3. 评估 formal_methods、type_theory 缺口
 4. 更新 INDEX、README、CHANGELOG
 
-详见 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md)。
+详见 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)。
 
 ---
 

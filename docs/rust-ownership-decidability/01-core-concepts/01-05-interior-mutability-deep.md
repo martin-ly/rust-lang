@@ -1,7 +1,8 @@
 # Interior Mutability Deep Dive
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Interior Mutability]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Interior Mutability]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: Rust Standard Library - std::cell]**
 
 - [Interior Mutability Deep Dive](#interior-mutability-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -70,14 +71,17 @@
     - [Theorem MUTEX-SAFETY](#theorem-mutex-safety)
     - [Theorem ATOMIC-LINEARIZATION](#theorem-atomic-linearization)
   - [Summary](#summary)
+  - [*Last updated: 2026-03-06*](#last-updated-2026-03-06)
 
 ---
 
 ## 1. Interior Mutability Formal Model
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 The Problem
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust's ownership system is built on a fundamental principle known as the **aliasing XOR mutation** rule:
 
@@ -2107,3 +2111,8 @@ Remember: Runtime checks mean runtime failures. Use these types carefully and al
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

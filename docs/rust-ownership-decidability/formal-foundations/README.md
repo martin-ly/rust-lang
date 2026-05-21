@@ -8,7 +8,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [形式化理论基础](#形式化理论基础)
   - [📋 目录](#-目录)
@@ -30,7 +30,7 @@
 ---
 
 ## 🎯 模块概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本模块提供 Rust 所有权系统的严格形式化理论，包括：
 
@@ -41,7 +41,7 @@
 ---
 
 ## 📁 子模块导航
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### models/ - 形式化模型
 
@@ -200,3 +200,14 @@ formal-foundations/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [Rust 形式语义深度分析](./RUST_FORMAL_SEMANTICS_DEEP.md)
+- [形式化模型](./models/README.md)
+- [证明系统](./proofs/README.md)
+- [语义理论](./semantics/README.md)
+- [所有权可判定性总览](../README.md)

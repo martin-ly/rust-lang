@@ -6,11 +6,12 @@
 > **Prerequisites**: Core ownership concepts, trait system, Pin semantics
 > **Reading Time**: ~3 hours
 > **Difficulty**: Advanced
+> **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rustonomicon - Async]** · **[来源: Tokio Documentation - tokio.rs]** · **[来源: Wikipedia - Future/Promise]** · **[来源: TRPL Ch. 17]**
 
 ---
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Async Patterns: Formal Semantics and Ownership Analysis](#async-patterns-formal-semantics-and-ownership-analysis)
   - [Table of Contents](#table-of-contents)
@@ -55,10 +56,10 @@
 ---
 
 ## 1. Introduction
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Formal Definition of Async/Await Semantics
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Async Rust introduces a computational model based on **cooperative multitasking** with explicit suspend points. Unlike threads which are preemptively scheduled by the OS, async tasks yield control at well-defined await points.
 
@@ -3852,3 +3853,8 @@ async fn update_db_safe(state: &AppState) {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

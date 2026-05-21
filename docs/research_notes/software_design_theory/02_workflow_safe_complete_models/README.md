@@ -56,9 +56,9 @@
 | 文档 | 内容 |
 | :--- | :--- |
 | `01_safe_23_catalog` | 23 种安全设计模型索引 |
-| [02_complete_43_catalog](02_complete_43_catalog.md) | 43 种完全模型索引 |
+| [02_complete_43_catalog](./02_complete_43_catalog.md) | 43 种完全模型索引 |
 | `03_semantic_boundary_map` | 语义边界图 |
-| [04_expressiveness_boundary](04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
+| [04_expressiveness_boundary](./04_expressiveness_boundary.md) | 充分表达 vs 非充分表达论证 |
 
 ---
 
@@ -74,9 +74,9 @@
 > **[来源: Rust Official Docs]**
 
 1. **查 23 安全**：模式是否纯 Safe → `01_safe_23_catalog`
-2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](02_complete_43_catalog.md)
+2. **查 43 完全**：扩展模式（Repository、DTO 等）→ [02_complete_43_catalog](./02_complete_43_catalog.md)
 3. **查语义边界**：选模式 → `03_semantic_boundary_map`
-4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](04_expressiveness_boundary.md)
+4. **查表达边界**：等价 vs 近似 → [04_expressiveness_boundary](./04_expressiveness_boundary.md)
 
 ---
 
@@ -110,12 +110,12 @@
 | 场景 | 推荐 | 理由 |
 | :--- | :--- | :--- |
 | 纯业务逻辑、无持久化 | 23 安全 | GoF 足够；Factory、Strategy、State |
-| 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](02_complete_43_catalog.md) |
+| 需持久化抽象 | 43 完全 → Repository | 见 [02_complete_43_catalog](./02_complete_43_catalog.md) |
 | 需用例编排、事务 | 43 完全 → Service Layer | 见 02_complete_43_catalog |
 | 需跨边界传输 | 43 完全 → DTO | 见 02_complete_43_catalog |
 | 需外部系统集成 | 43 完全 → Gateway | 需 FFI 时可能 unsafe |
 
-**扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](02_complete_43_catalog.md) 扩展模式选型决策树。
+**扩展模式深入**：20 种扩展模式均有 Rust 实现、核心意图、与 23 安全的关系；见 [02_complete_43_catalog](./02_complete_43_catalog.md) 扩展模式选型决策树。
 
 ---
 
@@ -200,7 +200,7 @@ impl OrderService {
 
 **选型流程**：需求 → 选 23/43 模式（如 Repository、Service Layer、Event Sourcing）→ 选执行模型（如分布式）→ 选编排（状态机 / Saga 补偿 / Temporal）。
 
-**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
+**引用**：[03_execution_models](../03_execution_models/README.md)、[04_expressiveness_boundary](./04_expressiveness_boundary.md) 工作流引擎表达力、[COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](../COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
 
 ---
 

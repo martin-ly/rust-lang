@@ -21,8 +21,8 @@
 
 | # | 文档 | 主题 | 复杂度 |
 |:---:|:---|:---|:---:|
-| 04-01 | [类型推断](04-01-type-inference.md) | Hindley-Milner扩展 | P |
-| 04-02 | [借用检查](04-02-borrow-checking.md) | 所有权流分析 | P |
+| 04-01 | [类型推断](./04-01-type-inference.md) | Hindley-Milner扩展 | P |
+| 04-02 | [借用检查](./04-02-borrow-checking.md) | 所有权流分析 | P |
 
 ---
 

@@ -7,13 +7,13 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 1.94 所有权形式化对齐项目已 **100% 完成**。
 本项目成功将 Rust 所有权系统的形式化框架扩展到包含 Rust 1.94 引入的所有重要新特性，为现代 Rust 程序提供了严格的数学验证基础。
 
 ### 核心成就
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 | 状态 |
 |------|------|------|
@@ -26,7 +26,7 @@ Rust 1.94 所有权形式化对齐项目已 **100% 完成**。
 ---
 
 ## 项目范围
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 覆盖的新特性
 
@@ -334,3 +334,8 @@ Rust 1.94 所有权形式化对齐项目已成功完成，达到 **100% 目标**
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

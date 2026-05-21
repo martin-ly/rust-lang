@@ -49,9 +49,9 @@
 ## 完备性声明
 > **[来源: Rust Official Docs]**
 
-**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](00_completeness_gaps.md)：
+**本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](./00_completeness_gaps.md)：
 
-- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](00_completeness_gaps.md)
+- **Rust 1.93 类型系统特性**：LUB coercion、Copy specialization、offset_of!、never_type、type ascription、newtype、deref_nullptr ✅ Def 已补全；const &mut static、existential 等见 [00_completeness_gaps](./00_completeness_gaps.md)
 - **组合法则**：Trait coherence、类型+生命周期+型变、negative impls、impl/dyn 边界、const 求值失败 ✅ 已补全；孤儿规则放宽为倡议未稳定
 - **Trait 特性**：RPITIT、async fn in trait ✅ 已补全（Def RPIT1/ASYNC1、定理 RPIT-T1/ASYNC-T1）；negative impls、fundamental 等为扩展缺口
 
@@ -174,9 +174,9 @@
 
 *证明*：由 type_system T1–T3、trait 对象安全、lifetime T2、variance T1–T4；良型 + 各定理 ⇒ 类型安全。∎
 
-**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
+**定理 TT-T2（缺口 Def 占位）**：$\mathcal{T}$ 对 Rust 1.93 类型系统存在 [00_completeness_gaps](./00_completeness_gaps.md) 所列缺口；**阶段 1–7 已补全 Def 占位**（LUB、Copy、coherence、RPITIT、组合法则、offset_of!、const、孤儿规则等均有 Def）。
 
-*证明*：由 [00_completeness_gaps](00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
+*证明*：由 [00_completeness_gaps](./00_completeness_gaps.md) 定理 CGI-T1；缺口项均有 Def 占位。∎
 
 ---
 
@@ -194,7 +194,7 @@
 
 本索引与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)、[PROOF_INDEX](../PROOF_INDEX.md) 衔接。
 
-**缺口补全**：见 [00_completeness_gaps](00_completeness_gaps.md) § 补全路线图。
+**缺口补全**：见 [00_completeness_gaps](./00_completeness_gaps.md) § 补全路线图。
 
 ---
 
@@ -279,7 +279,7 @@
 
 **维护团队**: Rust Type Theory Research Group
 **最后更新**: 2026-02-14
-**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](00_completeness_gaps.md)
+**状态**: ✅ **核心缺口已补全**；全部缺口 Def 占位；见 [00_completeness_gaps](./00_completeness_gaps.md)
 
 ---
 

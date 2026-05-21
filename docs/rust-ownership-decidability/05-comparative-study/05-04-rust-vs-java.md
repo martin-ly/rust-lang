@@ -3,11 +3,13 @@
 > **对比维度**: 内存安全、类型系统、并发模型、性能特征、运行时特性
 > **目标读者**: 有 Java 背景想了解 Rust 的开发者，技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Java (programming language)]** · **[来源: Rust Reference]** · **[来源: Java Language Specification - docs.oracle.com/javase]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust vs Java: 内存管理、类型系统与并发模型深度对比](#rust-vs-java-内存管理类型系统与并发模型深度对比)
   - [目录](#目录)
@@ -52,11 +54,13 @@
     - [Java → Rust 思维转换](#java--rust-思维转换)
   - [总结](#总结)
   - [参考文献](#参考文献)
+  - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
 
 ---
 
 ## 1. 执行摘要
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -96,7 +100,8 @@
 ---
 
 ## 2. 语言设计哲学对比
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 设计目标
 
@@ -1909,3 +1914,7 @@ async fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

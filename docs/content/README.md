@@ -161,3 +161,14 @@ content/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [学术对接](./academic/README.md)
+- [生态系统](./ecosystem/README.md)
+- [前沿特性](./emerging/README.md)
+- [生产实践](./production/README.md)
+- [Content Crates 映射](./CONTENT_CRATES_MAPPING.md)

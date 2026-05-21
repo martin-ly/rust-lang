@@ -900,3 +900,7 @@ fn main() {
 
 - [04 - 专家级主题](README.md)
 - [Unsafe Code Auditing (不安全代码审计)](unsafe_audit.md)
+- [Rust Reference](https://doc.rust-lang.org/reference/)
+- [Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)
+- [Rust 形式化语义](./academic/coq_formalization_guide.md)
+- [Unsafe Rust 指南](../03_advanced/unsafe/unsafe_rust.md)

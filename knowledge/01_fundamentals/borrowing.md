@@ -454,3 +454,5 @@ fn count_greater_than(data: &[i32], t: i32) -> usize {
 
 - [迭代器 (Iterators)](iterators.md)
 - [Rust 生命周期 (Lifetimes)](lifetimes.md)
+- [Rust 所有权 (Ownership)](ownership.md)
+- [智能指针 (Smart Pointers)](../02_intermediate/smart_pointers.md)

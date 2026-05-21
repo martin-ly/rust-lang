@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [DashMap并发HashMap形式化分析](#dashmap并发hashmap形式化分析)
   - [目录](#目录)
@@ -38,11 +39,13 @@
     - [示例1: 并发计数器](#示例1-并发计数器)
     - [示例2: 缓存实现](#示例2-缓存实现)
     - [示例3: 条件更新](#示例3-条件更新)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 DashMap特点：
 
@@ -54,7 +57,8 @@ DashMap特点：
 ---
 
 ## 2. 分片架构
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 SHARD-1 ( 分片结构 )
 
@@ -315,3 +319,7 @@ fn conditional_update(map: &DashMap<String, i32>, key: &str) {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

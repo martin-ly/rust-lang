@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Arc-Swap 原子交换形式化分析](#arc-swap-原子交换形式化分析)
   - [目录](#目录)
@@ -24,11 +25,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (频繁交换)](#反例-51-频繁交换)
     - [反例 5.2 (递归锁)](#反例-52-递归锁)
+  - [*定理数量: 4个*](#定理数量-4个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 arc-swap提供:
 
@@ -40,7 +43,8 @@ arc-swap提供:
 ---
 
 ## 2. 读写语义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (读取无锁)
 
@@ -140,3 +144,7 @@ config.store(Arc::new(Config::new()));  // 可能死锁/性能问题
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

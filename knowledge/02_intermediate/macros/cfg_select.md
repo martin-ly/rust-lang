@@ -265,3 +265,5 @@ let x = cfg_select! {
 
 - [`if let` Guards on Match Arms（Rust 1.95.0）](../control_flow/if_let_guards.md)
 - [Rust 2024 Edition `let chains` 深度专题](../control_flow/let_chains.md)
+- [声明宏深入 (Declarative Macros)](../../03_advanced/macros/declarative.md)
+- [过程宏深入 (Procedural Macros)](../../03_advanced/macros/procedural.md)

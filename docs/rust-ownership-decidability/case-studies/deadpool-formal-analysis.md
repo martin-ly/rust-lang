@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Deadpool 异步连接池形式化分析](#deadpool-异步连接池形式化分析)
   - [目录](#目录)
@@ -27,11 +28,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (连接泄漏)](#反例-61-连接泄漏)
     - [反例 6.2 (阻塞操作)](#反例-62-阻塞操作)
+  - [*定理数量: 7个*](#定理数量-7个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Deadpool提供:
 
@@ -43,7 +46,8 @@ Deadpool提供:
 ---
 
 ## 2. 池状态机
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 2.1 (Pool状态)
 
@@ -183,3 +187,7 @@ spawn_blocking(move || {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

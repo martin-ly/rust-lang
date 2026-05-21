@@ -29,7 +29,7 @@
 
 | 文件 | 主题 | 难度 |
 |:---|:---|:---:|
-| [ownership-basics.md](ownership-basics.md) | 所有权基础 | 🟢 |
+| [ownership-basics.md](./ownership-basics.md) | 所有权基础 | 🟢 |
 
 ## 练习分类
 

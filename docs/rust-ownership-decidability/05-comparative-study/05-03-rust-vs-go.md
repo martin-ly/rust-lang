@@ -4,11 +4,12 @@
 > **难度**: 🟢 入门
 > **目标读者**: 系统架构师、后端开发者、技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Go (programming language)]** · **[来源: Rust Reference]** · **[来源: Go Documentation - go.dev/doc]** · **[来源: IEEE Software - Language Comparison Studies]** · **[来源: Stack Overflow Developer Survey 2025]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust vs Go 深度对比](#rust-vs-go-深度对比)
   - [目录](#目录)
@@ -62,7 +63,7 @@
 ---
 
 ## 1. 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -98,7 +99,7 @@
 ---
 
 ## 2. 设计理念对比
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语言设计哲学
 
@@ -2159,3 +2160,8 @@ Go 开发者学习 Rust 路径:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

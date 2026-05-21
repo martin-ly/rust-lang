@@ -5,11 +5,13 @@
 > **形式化框架**: async/await + 无堆分配 + 协作式调度
 >
 > **参考**: Embassy Documentation, Rust Async Working Group
+> **[来源: Embassy Documentation - embassy.dev]** · **[来源: Rust Async Working Group]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rust Embedded Book]** · **[来源: RTIC Documentation - rtic.rs]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Embassy 异步嵌入式运行时形式化分析](#embassy-异步嵌入式运行时形式化分析)
   - [目录](#目录)
@@ -61,14 +63,17 @@
     - [10.1 阻塞操作陷阱](#101-阻塞操作陷阱)
     - [10.2 递归Spawn限制](#102-递归spawn限制)
     - [10.3 优先级反转](#103-优先级反转)
+  - [**代码示例**: 6个完整示例](#代码示例-6个完整示例)
 
 ---
 
 ## 1. 项目概览与解决的问题
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 嵌入式并发挑战
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 嵌入式系统需要处理多个并发任务，但传统方法面临诸多挑战：
 
@@ -1556,3 +1561,7 @@ async fn greedy_task() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

@@ -20,7 +20,7 @@
 ## 🚀 快速开始
 > **[来源: Rust Official Docs]**
 
-**新用户**: 从 [00_COMPLETION_REPORT_100_PERCENT.md](00_COMPLETION_REPORT_100_PERCENT.md) 开始，了解全貌。
+**新用户**: 从 [00_COMPLETION_REPORT_100_PERCENT.md](./00_COMPLETION_REPORT_100_PERCENT.md) 开始，了解全貌。
 
 **按角色选择**:
 
@@ -42,7 +42,7 @@
 
 | 文档 | 描述 |
 |------|------|
-| [**00_COMPLETION_REPORT_100_PERCENT.md**](00_COMPLETION_REPORT_100_PERCENT.md) | 🎉 100%完成报告 - 项目总览和成果展示 |
+| [**00_COMPLETION_REPORT_100_PERCENT.md**](./00_COMPLETION_REPORT_100_PERCENT.md) | 🎉 100%完成报告 - 项目总览和成果展示 |
 
 ---
 
@@ -392,7 +392,7 @@
 
 ---
 
-**开始使用**: 建议从 [00_COMPLETION_REPORT_100_PERCENT.md](00_COMPLETION_REPORT_100_PERCENT.md) 开始浏览，建立整体认知框架。
+**开始使用**: 建议从 [00_COMPLETION_REPORT_100_PERCENT.md](./00_COMPLETION_REPORT_100_PERCENT.md) 开始浏览，建立整体认知框架。
 
 **🎉 100% 完成，欢迎使用！**
 ---

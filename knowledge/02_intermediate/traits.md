@@ -933,3 +933,5 @@ trait Processor {
 
 - [集合类型 (Collections)](collections.md)
 - [错误处理 (Error Handling)](error_handling.md)
+- [泛型深入 (Generics)](generics.md)
+- [Rust 生命周期深入](../01_fundamentals/lifetimes.md)

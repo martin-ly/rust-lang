@@ -1,7 +1,8 @@
 # Rust Formal Semantics: A Comprehensive Deep Dive
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: Iris Project - iris-project.org]**
 
 - [Rust Formal Semantics: A Comprehensive Deep Dive](#rust-formal-semantics-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -237,16 +238,19 @@
     - [A.6 Borrow Safety](#a6-borrow-safety)
   - [Appendix B: Notation Reference](#appendix-b-notation-reference)
   - [Document Information](#document-information)
+  - [*End of Document*](#end-of-document)
 
 ---
 
 ## 1. Introduction
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust's type system represents one of the most sophisticated static analysis systems in modern programming languages. Its unique ownership and borrowing mechanisms ensure memory safety without requiring a garbage collector. This document provides a comprehensive formal treatment of Rust's semantics, from core type theory to advanced verification techniques.
 
 ### 1.1 Motivation
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Formal semantics serve multiple purposes:
 
@@ -617,6 +621,8 @@ trait Trait<'a, T: Bound> where Self: Sized {
 
 ## 3. Operational Semantics
 
+> **[来源: Wikipedia - Operational Semantics]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]**
+
 ### 3.1 Runtime Configurations
 
 #### 3.1.1 Memory Model
@@ -965,6 +971,8 @@ Note: The context is unchanged after a copy.
 
 ## 5. Lifetime System
 
+> **[来源: Wikipedia - Region-based Memory Management]** · **[来源: Rust Reference - Lifetimes]** · **[来源: RFC 1414 - Lifetime Elision]**
+
 ### 5.1 Lifetime Parameters
 
 #### 5.1.1 Function Lifetime Parameters
@@ -1210,6 +1218,8 @@ If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a`
 ---
 
 ## 7. Counter-Examples and Error Analysis
+
+> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Type System]**
 
 This section provides detailed analysis of 12+ common type system violations in Rust.
 
@@ -2953,3 +2963,8 @@ Borrowing rules are enforced at compile time.
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

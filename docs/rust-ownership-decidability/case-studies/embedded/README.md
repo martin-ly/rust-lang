@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Embedded Book - docs.rust-embedded.org]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Internet of Things]** · **[来源: Embassy Framework - embassy.dev]** · **[来源: RTIC Documentation - rtic.rs]**
 
 - [Rust 嵌入式/物联网开发完全指南](#rust-嵌入式物联网开发完全指南)
   - [目录](#目录)
@@ -57,14 +58,17 @@
   - [附录](#附录)
     - [常用嵌入式Rust Crate](#常用嵌入式rust-crate)
     - [资源链接](#资源链接)
+  - [*适用Rust版本: 1.75+*](#适用rust版本-175)
 
 ---
 
 ## 一、嵌入式Rust概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 no_std环境
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 嵌入式系统通常没有完整的操作系统支持，因此Rust程序需要在 `no_std` 环境下运行。
 这意味着无法使用标准库(std)，只能使用核心库(core)。
@@ -2758,3 +2762,11 @@ macro_rules! log_error {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [嵌入式 Crates 索引](./EMBEDDED_CRATES_INDEX.md)
+- [案例研究总览](../README.md)

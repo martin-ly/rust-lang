@@ -1,7 +1,7 @@
 # 嵌入式 Rust 指南：Embassy vs RTIC
 
 > **层级**: L6 生态工具 / L3 高级系统编程
-> **前置概念**: [Async](../concept/03_advanced/02_async.md) · [Ownership](../concept/01_foundation/01_ownership.md) · [Unsafe](../concept/03_advanced/03_unsafe.md)
+> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 应用 → 评价
 > **[来源: Embassy Book]** · **[来源: RTIC Book]** · **[来源: Rust Embedded Working Group]** ✅
 

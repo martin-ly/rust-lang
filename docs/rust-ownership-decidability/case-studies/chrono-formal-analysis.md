@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Chrono时间处理形式化分析](#chrono时间处理形式化分析)
   - [目录](#目录)
@@ -36,11 +37,13 @@
     - [示例1: 基础操作](#示例1-基础操作)
     - [示例2: 解析和格式化](#示例2-解析和格式化)
     - [示例3: 日期算术](#示例3-日期算术)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Chrono特点：
 
@@ -52,7 +55,8 @@ Chrono特点：
 ---
 
 ## 2. 时间点
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TIME-1 ( NaiveDateTime )
 
@@ -269,3 +273,7 @@ fn countdown(target: NaiveDate) -> TimeDelta {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

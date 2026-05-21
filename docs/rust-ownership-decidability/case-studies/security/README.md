@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Computer Security]** · **[来源: Wikipedia - Cryptography]** · **[来源: Rust Crypto Working Group]** · **[来源: OpenSSL Documentation]** · **[来源: Rustls Documentation - docs.rs/rustls]
 
 - [Rust网络安全工具开发指南](#rust网络安全工具开发指南)
   - [目录](#目录)
@@ -42,14 +43,17 @@
     - [10.3 取证工具](#103-取证工具)
   - [附录：常用依赖](#附录常用依赖)
   - [总结](#总结)
+  - [*作者：Rust安全工具开发团队*](#作者rust安全工具开发团队)
 
 ---
 
 ## 1. 安全工具概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust在安全领域的优势
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust语言因其独特的内存安全保证和零成本抽象特性，成为开发网络安全工具的理想选择：
 
@@ -1111,3 +1115,11 @@ proptest = "1.0"
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

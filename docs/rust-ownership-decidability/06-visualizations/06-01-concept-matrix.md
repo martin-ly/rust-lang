@@ -3,7 +3,8 @@
 > **目的**: 通过多维矩阵可视化Rust所有权与可判定性的核心概念关系
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [概念多维矩阵对比](#概念多维矩阵对比)
   - [目录](#目录)
@@ -26,10 +27,12 @@
   - [使用说明](#使用说明)
 
 ## 1. 类型系统谱系矩阵
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 子结构类型系统四维对比
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 维度 | 线性类型 (Linear) | 仿射类型 (Affine) | 相关类型 (Relevant) | 有序类型 (Ordered) |
 |------|------------------|------------------|-------------------|-------------------|
@@ -253,6 +256,7 @@
 2. **工具选择**: 根据需求选择合适的验证工具
 3. **教学设计**: 展示概念间的多维关联
 4. **研究分析**: 识别空白区域和未来方向
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -263,3 +267,7 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

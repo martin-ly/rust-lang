@@ -729,5 +729,7 @@ async fn test_get_user() {
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Deep Dives 深度解析](README.md)
 - [Tokio 运行时深度解析](tokio_deep_dive.md)

@@ -336,3 +336,5 @@ None
 
 - [`if let` Guards on Match Arms（Rust 1.95.0）](if_let_guards.md)
 - [`cfg_select!` 宏（Rust 1.95.0）](../macros/cfg_select.md)
+- [Rust 字符串处理 (Strings)](../strings.md)
+- [Rust 集合类型 (Collections)](../collections.md)

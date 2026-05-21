@@ -2,7 +2,8 @@
 # 设计模式语义分析
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: GoF - Design Patterns]** · **[来源: TRPL Ch. 17]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]**
 
 - [设计模式语义分析](#设计模式语义分析)
   - [目录](#目录)
@@ -73,14 +74,17 @@
     - [10.1 核心洞察](#101-核心洞察)
     - [10.2 形式化语义的实践价值](#102-形式化语义的实践价值)
     - [10.3 未来研究方向](#103-未来研究方向)
+  - [\`\`\`](#)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 设计模式的语义视角
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **设计模式（Design Patterns）** 是软件工程中解决常见问题的可复用解决方案。
 从语义角度分析设计模式，意味着我们不仅关注模式的结构和实现，更关注其**形式化语义**、**类型系统行为**和**运行时保证**。
@@ -1366,3 +1370,8 @@ graph TB
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

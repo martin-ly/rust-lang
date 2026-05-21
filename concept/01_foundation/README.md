@@ -3,6 +3,7 @@
 > **定位**：Rust 最核心的基础性概念，是所有进阶内容的**必要前提**。本层内容对齐 TRPL 第 3-10 章、Wikipedia 核心词条、Stanford/CMU 基础课程。
 > **Bloom 层级**: 记忆 → 理解
 > **对应 L4 形式化**: 线性逻辑 ⊗ · 分离逻辑 · 区域类型系统 · 代数类型论
+> **[来源: TRPL Ch. 3–10]** · **[来源: Wikipedia - Ownership (programming)]** · **[来源: Wikipedia - Type System]** · **[来源: Stanford CS242 - Programming Languages]**
 
 ---
 
@@ -185,6 +186,7 @@ Type System（理解"类型即证明"）
 - **L2 进阶**: Trait（类型系统延伸）、泛型（生命周期参数化）、内存管理（所有权进阶）、错误处理（Result 类型）
 - **L4 形式化**: 线性逻辑（所有权数学根基）、区域类型（生命周期形式化）、分离逻辑（借用形式化）
 - **L5 对比**: Rust vs C++（所有权 vs 智能指针）
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

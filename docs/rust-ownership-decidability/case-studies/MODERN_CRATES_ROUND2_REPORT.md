@@ -7,12 +7,14 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 响应"持续推进直到完成"要求，完成第二轮扩展。本次新增 **11个核心库**，覆盖数据库、Web底层、HTTP客户端、错误处理、时间处理等关键领域。
 
 ### 本轮新增库列表
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 序号 | 库名 | 领域 | 核心形式化内容 |
 | :--- | :--- | :--- | :--- |
@@ -30,7 +32,8 @@
 ---
 
 ## 新增定理精选
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 数据库安全
 
@@ -185,3 +188,8 @@ ERR-T1: 零运行时开销
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

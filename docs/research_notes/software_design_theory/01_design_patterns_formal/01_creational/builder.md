@@ -332,9 +332,9 @@ let req = HttpRequestBuilder::new()
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Factory Method](factory_method.md) | Builder 可由 Factory 创建 |
-| [Abstract Factory](abstract_factory.md) | 可组合：Factory 返回 Builder |
-| [Prototype](prototype.md) | 可组合：Builder 基于 Prototype 克隆 |
+| [Factory Method](./factory_method.md) | Builder 可由 Factory 创建 |
+| [Abstract Factory](./abstract_factory.md) | 可组合：Factory 返回 Builder |
+| [Prototype](./prototype.md) | 可组合：Builder 基于 Prototype 克隆 |
 
 ---
 

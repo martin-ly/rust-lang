@@ -1,6 +1,7 @@
 # 线性逻辑深度解析：从证明论到 Rust 所有权
 
 > **权威来源**: Jean-Yves Girard (1987). *Linear Logic*. Theoretical Computer Science 50:1-102
+> **[来源: Girard 1987 - Linear Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Substructural Type System]** · **[来源: Wadler 1990 - Linear Types can Change the World]** · **[来源: Rust Reference - Ownership]**
 > **关联文献**:
 >
 > - Girard, Lafont, Taylor (1989). *Proofs and Types*. Cambridge Tracts in Theoretical Computer Science
@@ -12,7 +13,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [线性逻辑深度解析：从证明论到 Rust 所有权](#线性逻辑深度解析从证明论到-rust-所有权)
   - [目录](#目录)
@@ -173,16 +174,17 @@
     - [A. 符号速查表](#a-符号速查表)
     - [B. 定理索引](#b-定理索引)
     - [C. 连接词性质总结](#c-连接词性质总结)
+  - [*字数: 约 25000 字*](#字数-约-25000-字)
 
 ---
 
 ## 1. 从经典逻辑到线性逻辑的范式转移
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 经典逻辑的资源盲点
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经典逻辑（Classical Logic）基于**真理传递**（truth-transmission）范式，其中逻辑连接词只关心命题的真值，而不关心资源的实际消耗和产生。这种抽象虽然在数学推理中非常强大，但在描述计算过程时存在根本性缺陷。
 
@@ -2694,3 +2696,8 @@ list reverse(list x);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

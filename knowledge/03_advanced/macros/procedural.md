@@ -872,3 +872,5 @@ pub fn check(input: TokenStream) -> TokenStream {
 
 - [声明式宏 (Declarative Macros)](declarative.md)
 - [Macros 宏系统](README.md)
+- [Rust 元编程指南](../type_driven_correctness.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

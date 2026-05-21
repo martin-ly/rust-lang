@@ -1,12 +1,12 @@
 # 17 临界区模式 (Critical Section)
 
 ## 模式定义与语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 临界区模式确保两个或多个活动的特定区域互斥执行。这是并发编程中最基本的同步原语之一。
 
 ### 核心语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
 \text{CriticalSection}(R, CS_1, CS_2, \ldots, CS_n) = \forall i \neq j: \neg(CS_i \text{ active} \land CS_j \text{ active})
@@ -15,7 +15,7 @@ $$
 其中 $R$ 是共享资源，$CS_i$ 是第 $i$ 个活动的临界区代码。
 
 ### 形式化表示
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **状态机表示：**
 
@@ -312,3 +312,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

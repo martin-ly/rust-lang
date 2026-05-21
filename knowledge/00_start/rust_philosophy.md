@@ -238,3 +238,4 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 - [Hello, World](hello_world.md)
 - [安装 Rust](installation.md)
+- [Rust 所有权深入](../01_fundamentals/ownership.md)

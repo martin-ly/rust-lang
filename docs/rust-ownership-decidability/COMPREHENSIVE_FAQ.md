@@ -5,7 +5,7 @@
 ---
 
 ## 📚 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
   - [📚 目录](#-目录)
@@ -39,10 +39,10 @@
 ---
 
 ## 基础知识
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Q1: 为什么 Rust 需要所有权系统？
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **A**: Rust 的所有权系统是为了在编译时保证内存安全，而不需要垃圾回收器。
 
@@ -701,7 +701,7 @@ pub enum MyError {
 
 ## 更多资源
 
-- [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md)
+- [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md)
 - [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md)
 - [案例分析](case-studies/README.md)
 - [形式化理论](formal-foundations/README.md)

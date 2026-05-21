@@ -40,7 +40,7 @@
 | :--- | :--- | :--- |
 | 唯一所有者 | ownership T2、A-OW1、[coq_skeleton](coq_skeleton/README.md) | Coq 骨架已创建，证明待补全 |
 | 移动语义 | ownership 规则 2、A-OW2 | 语言级有，MIR 级无 |
-| 借用互斥 | borrow T1、A-BR2/3 | Coq 骨架待扩展（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](COQ_ISABELLE_PROOF_SCAFFOLDING.md)） |
+| 借用互斥 | borrow T1、A-BR2/3 | Coq 骨架待扩展（见 [COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)） |
 | 生命周期 outlives | lifetime LF-T1–T3 | 无 Iris lifetime 逻辑 |
 
 ### 2.2 类型系统
@@ -49,7 +49,7 @@
 | :--- | :--- | :--- |
 | 进展性 | type_system T1 | L2 完整证明；Coq 骨架待扩展 |
 | 保持性 | type_system T2 | 同上 |
-| 类型安全 | type_system T3 | 同上；见 [CORE_THEOREMS_FULL_PROOFS](CORE_THEOREMS_FULL_PROOFS.md) §4 |
+| 类型安全 | type_system T3 | 同上；见 [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §4 |
 
 ### 2.3 扩展（RustBelt Meets Relaxed Memory, POPL 2020）
 

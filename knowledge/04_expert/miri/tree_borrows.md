@@ -752,3 +752,12 @@ fn mixed_refs(x: &mut i32) {
 > **权威来源对齐变更日志**: 2026-05-19 新增 PLDI 2025 Distinguished Paper 来源标注、Miri 实现引用、Rust Reference 别名规则来源 [来源: Authority Source Sprint Batch 8]
 
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Tree Borrows 权威指南](../academic/tree_borrows_authoritative_guide.md)
+- [Miri 使用指南](README.md)
+- [Unsafe Rust 指南](../../03_advanced/unsafe/unsafe_rust.md)
+- [Rust Reference](https://doc.rust-lang.org/reference/)

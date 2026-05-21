@@ -1,10 +1,10 @@
 # Rust 所有权系统可判定性 - 严格形式化研究计划
 
 ## 1. 研究背景与现状分析
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 现有形式化模型综述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 模型/项目 | 作者/机构 | 核心贡献 | 局限性 |
 |-----------|-----------|----------|--------|
@@ -18,7 +18,7 @@
 | **Verus** | CMU/UT Austin | 线性幽灵类型；模式系统；终止性证明 | 仍在发展中 |
 
 ### 1.2 关键理论问题识别
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 1.2.1 可判定性问题 (Payet et al., NFM 2022)
 
@@ -427,3 +427,8 @@ L5: 并发 (Concurrency)
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

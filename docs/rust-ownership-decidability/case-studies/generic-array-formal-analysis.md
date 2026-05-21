@@ -5,13 +5,14 @@
 > **形式化框架**: typenum + 零成本抽象 + 内存安全
 >
 > **参考**: generic-array 0.14.x, typenum 1.17+, Rust 1.51+ Const Generics
+> **[来源: generic-array Documentation - docs.rs/generic-array]** · **[来源: typenum Documentation - docs.rs/typenum]** · **[来源: Rust Reference - Const Generics]** · **[来源: Wikipedia - Generic Programming]** · **[来源: RFC 2000 - Const Generics]** · **[来源: TRPL Ch. 19]**
 >
 > **分析版本**: 2.0.0 - 完整技术深度分析
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Generic-Array 泛型数组形式化分析](#generic-array-泛型数组形式化分析)
   - [目录](#目录)
@@ -78,10 +79,10 @@
 ---
 
 ## 1. 项目概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在 Rust 1.51 引入 const generics (最小可行版本) 之前，Rust 开发者面临一个核心问题：**无法在泛型代码中使用固定大小的数组**。考虑以下场景：
 
@@ -1521,3 +1522,8 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

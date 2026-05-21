@@ -1,7 +1,7 @@
 # 并行前端编译指南
 
 > **层级**: L6 生态工具
-> **前置概念**: [Cargo](../concept/06_ecosystem/01_toolchain.md) · [Build Systems](../concept/07_future/)
+> **前置概念**: [Cargo](../../concept/06_ecosystem/01_toolchain.md) · [Build Systems](../concept/07_future/)
 > **Bloom 层级**: 应用
 > **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ✅
 

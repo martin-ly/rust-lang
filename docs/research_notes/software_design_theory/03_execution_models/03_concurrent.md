@@ -142,7 +142,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 | 共享缓存 | 多线程读、单写 | `Arc<RwLock<HashMap>>` |
 | 后台任务 | 主线程不阻塞 | `thread::spawn(move \|\| { ... })` |
 | 多路 I/O | 等待多个套接字 | `select!` 或 async |
-| 并行计算 | CPU 密集、多核 | 见 [04_parallel](04_parallel.md) rayon |
+| 并行计算 | CPU 密集、多核 | 见 [04_parallel](./04_parallel.md) rayon |
 | 工作池 | 固定线程处理任务 | `mpsc` + `spawn` 池 |
 
 ### 与设计模式组合

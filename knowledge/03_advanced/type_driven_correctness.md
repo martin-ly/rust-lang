@@ -1086,3 +1086,5 @@ impl AuthManager {
 
 - [延迟初始化 (Lazy Initialization)](lazy_initialization.md)
 - [性能优化](performance_optimization.md)
+- [Rust 泛型深入](../02_intermediate/generics.md)
+- [Rust 集合类型 (Collections)](../02_intermediate/collections.md)

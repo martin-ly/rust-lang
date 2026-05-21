@@ -21,7 +21,7 @@
 
 | 矩阵 | 内容 | 维度数 |
 |:---|:---|:---:|
-| [安全机制对比矩阵](rust-safety-mechanisms-matrix.md) | 编译时vs运行时检查 | 9 |
+| [安全机制对比矩阵](./rust-safety-mechanisms-matrix.md) | 编译时vs运行时检查 | 9 |
 
 ---
 

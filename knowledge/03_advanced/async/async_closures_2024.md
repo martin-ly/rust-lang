@@ -315,6 +315,15 @@ let process = async |items: Vec<i32>| -> i32 {
 
 ---
 
+## 相关概念
+
+- [Async Closures 异步闭包](async_closure.md)
+- [async/await 异步编程](async_await.md)
+- [Rust 并发编程 (Threads)](../concurrency/threads.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)
+
+---
+
 ## 📚 权威来源索引
 
 - [RFC 3668: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html) [来源: Rust Core Team / 2024]

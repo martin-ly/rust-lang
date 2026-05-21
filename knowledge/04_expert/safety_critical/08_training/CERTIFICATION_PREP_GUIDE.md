@@ -540,5 +540,7 @@ ISO 26262考试 (3小时):
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [评估与认证体系](ASSESSMENT_AND_CERTIFICATION.md)
 - [动手实验练习](HANDS_ON_LAB_EXERCISES.md)

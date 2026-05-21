@@ -345,3 +345,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [Rust 2026 项目目标月度跟踪](./RUST_2026_PROJECT_GOALS_MONTHLY_TRACKING.md)

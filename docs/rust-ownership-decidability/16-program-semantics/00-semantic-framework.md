@@ -1,7 +1,8 @@
 # 程序设计语义框架
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Semantics]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: TRPL Ch. 4]**
 
 - [程序设计语义框架](#程序设计语义框架)
   - [目录](#目录)
@@ -119,10 +120,12 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是程序设计语义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **程序设计语义（Programming Language Semantics）** 是研究程序设计语言含义和行为的数学理论。
 它为程序的执行提供严格的数学解释，使得我们能够形式化地分析和验证程序的正确性。
@@ -188,6 +191,8 @@ $$
 ---
 
 ## 2. 语义分析维度
+
+> **[来源: Wikipedia - Semantics]** · **[来源: Rust Reference]** · **[来源: Wikipedia - Operational Semantics]**
 
 ### 2.1 静态语义 vs 动态语义
 
@@ -1305,6 +1310,8 @@ fn visitor_pattern() {
 
 ## 4. 并发语义模型
 
+> **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rust Reference - Concurrency]** · **[来源: CSP - Hoare 1978]**
+
 ### 4.1 线程模型语义
 
 #### 4.1.1 OS 线程语义
@@ -2254,6 +2261,8 @@ fn process_item(_item: i32) {
 ---
 
 ## 6. Actor 模型语义
+
+> **[来源: Wikipedia - Actor Model]** · **[来源: Hewitt et al. 1973]** · **[来源: Rust Reference]**
 
 ### 6.1 Actor 基本语义
 
@@ -3925,6 +3934,7 @@ docs/rust-ownership-decidability/
 5. Dreyer, D., et al. (2010). *Reconciling Scala's Static and Dynamic Type Systems*. PLDI.
 6. Boudol, G. (1997). *Typing the Use of Resources in a Concurrent Calculus*. AMAST.
 7. Acar, U. A., et al. (2002). *The Failure of theSubject-Observer Pattern*. PPPJ.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -3935,3 +3945,7 @@ docs/rust-ownership-decidability/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

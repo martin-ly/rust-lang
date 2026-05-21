@@ -7,7 +7,8 @@
 ---
 
 ## 硬件抽象层 (HAL)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 库 | 文档 | 状态 | 关键概念 |
 | :--- | :--- | :--- | :--- |
@@ -19,7 +20,8 @@
 ---
 
 ## 异步运行时
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 库 | 文档 | 状态 | 关键概念 |
 | :--- | :--- | :--- | :--- |
@@ -29,7 +31,8 @@
 ---
 
 ## 内存管理
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 库 | 文档 | 状态 | 关键概念 |
 | :--- | :--- | :--- | :--- |

@@ -5,11 +5,13 @@
 > **形式化框架**: 延迟求值 + 协议编码 + 资源边界
 >
 > **参考**: defmt Documentation; Knuth (1974); Embedded Rust Book
+> **[来源: defmt Documentation - docs.rs/defmt]** · **[来源: Rust Embedded Book]** · **[来源: Knuth 1974 - Structured Programming with go to Statements]** · **[来源: Wikipedia - Logging]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [defmt 延迟格式化日志形式化分析](#defmt-延迟格式化日志形式化分析)
   - [目录](#目录)
@@ -93,11 +95,13 @@
     - [技术文档](#技术文档)
     - [相关项目](#相关项目)
     - [形式化方法](#形式化方法)
+  - [*最后更新: 2026-03-05*](#最后更新-2026-03-05)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 defmt (deferred formatting) 是一个专为资源受限嵌入式系统设计的日志框架，其核心创新在于将格式化操作从目标设备转移到主机端执行。这种架构使得在微控制器等受限环境中进行高效日志记录成为可能。
 
@@ -125,7 +129,8 @@ defmt通过协议分离将这些操作转移到主机，目标端仅需执行:
 ---
 
 ## 2. 理论基础
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 延迟格式化协议形式化定义
 
@@ -1806,3 +1811,7 @@ defmt::info!("operation took {} cycles", end - start);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

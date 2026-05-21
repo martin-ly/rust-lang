@@ -1,7 +1,8 @@
 # 深入理解 Rust 生命周期系统
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Lifetimes]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Lifetime Elision]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Region-based Memory Management]** · **[来源: POPL 2018 - RustBelt]**
 
 - [深入理解 Rust 生命周期系统](#深入理解-rust-生命周期系统)
   - [目录](#目录)
@@ -98,14 +99,17 @@
     - [9.1 核心概念回顾](#91-核心概念回顾)
     - [9.2 最佳实践](#92-最佳实践)
     - [9.3 常见陷阱](#93-常见陷阱)
+  - [*最后更新: 2024*](#最后更新-2024)
 
 ---
 
 ## 1. 生命周期形式语义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 生命周期作为区域 (Region)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在 Rust 的类型系统中，生命周期被形式化为**区域 (Region)**，表示程序执行过程中的一个代码点集合。
 
@@ -2739,3 +2743,8 @@ Rust 的 for<'a> 是全称量词。
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

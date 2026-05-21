@@ -180,3 +180,8 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
+
+
+---
+
+- [README](./README.md)

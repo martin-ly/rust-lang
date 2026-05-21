@@ -4,11 +4,12 @@
 > **对齐日期**: 2026-05-12
 > **主题**: 编写地道Rust代码的模式与技巧
 > **目标**: 掌握Rust特有的编程范式，写出符合社区习惯的代码
+> **[来源: Rust API Guidelines]** · **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Programming Idiom]** · **[来源: TRPL Ch. 18]** · **[来源: Effective Rust - effective-rust.com]** · **[来源: Rust Reference]
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [惯用Rust模式](#惯用rust模式)
   - [目录](#目录)
@@ -66,10 +67,10 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是惯用Rust
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 惯用Rust（Idiomatic Rust）是指符合Rust语言哲学和社区实践的编程方式。它不仅仅是"能运行的代码"，而是：
 
@@ -1124,3 +1125,8 @@ thread::spawn(move || {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

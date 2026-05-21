@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Diesel ORM形式化分析](#diesel-orm形式化分析)
   - [目录](#目录)
@@ -36,11 +37,13 @@
     - [示例1: CRUD操作](#示例1-crud操作)
     - [示例2: 关联查询](#示例2-关联查询)
     - [示例3: 复杂查询](#示例3-复杂查询)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Diesel是Rust的编译时SQL检查ORM：
 
@@ -52,7 +55,8 @@ Diesel是Rust的编译时SQL检查ORM：
 ---
 
 ## 2. DSL类型系统
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 DSL-1 ( 查询DSL )
 
@@ -304,3 +308,7 @@ struct Status;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

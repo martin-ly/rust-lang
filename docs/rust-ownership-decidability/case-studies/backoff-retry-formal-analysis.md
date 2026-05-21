@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Backoff/Retry 重试策略形式化分析](#backoffretry-重试策略形式化分析)
   - [目录](#目录)
@@ -24,11 +25,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (无退避重试)](#反例-51-无退避重试)
     - [反例 5.2 (幂等性假设)](#反例-52-幂等性假设)
+  - [*定理数量: 4个*](#定理数量-4个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 backoff提供:
 
@@ -40,7 +43,8 @@ backoff提供:
 ---
 
 ## 2. 指数退避
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (退避公式)
 
@@ -143,3 +147,7 @@ retry(backoff, || charge_with_key(key)).await?;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

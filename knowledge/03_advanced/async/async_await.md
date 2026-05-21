@@ -1086,3 +1086,5 @@ async fn safe_read_from_unsafe_source(rx: &mut mpsc::Receiver<i32>) -> Option<i3
 
 - [Async Closures 异步闭包](async_closure.md)
 - [Rust 2024 Edition Async Closures 完整指南](async_closures_2024.md)
+- [Rust 并发编程 (Threads)](../concurrency/threads.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

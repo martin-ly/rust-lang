@@ -602,5 +602,7 @@ debug = true
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [API设计指南](API_DESIGN_GUIDELINES.md)
 - [社区参与与贡献指南](COMMUNITY_AND_CONTRIBUTING.md)

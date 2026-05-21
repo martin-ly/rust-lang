@@ -7,16 +7,19 @@
 > **最后更新**: 2026-03-04
 
 ## 项目概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本项目创建了一套全面、深入的文档体系，系统性地探讨Rust编程语言的所有权系统及其与可判定性理论的深层联系。
 文档整合了国际权威学术资源、形式化验证研究成果及类型理论经典文献。
 
 ## 完成清单
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 理论基础 (00-foundations/)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ **00-01-linear-logic.md** (4,805 bytes)
   - 线性逻辑基础 (Girard 1987)

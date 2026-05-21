@@ -4,7 +4,7 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
 本章节深入探讨原始指针、联合体、内联汇编等高级特性的正确使用方式，以及如何在保持安全性的前提下发挥 Rust 的底层能力。
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference - Unsafe Rust]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Pointer]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - Inline Assembly]** · **[来源: Rust Unsafe Code Guidelines]
 
 - [Unsafe Rust 模式](#unsafe-rust-模式)
   - [目录](#目录)
@@ -35,10 +35,10 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
     - [内存池实现](#内存池实现)
 
 ## Unsafe 基础
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Unsafe 的能力范围
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `unsafe` 关键字允许你执行以下五种操作：
 
@@ -1318,3 +1318,8 @@ impl<T: Send> ConcurrentPool<T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

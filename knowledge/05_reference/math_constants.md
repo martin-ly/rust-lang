@@ -278,3 +278,9 @@ let good = x * f32::consts::PI;
 **对应 Rust 版本**: 1.96.0+
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [Rust 标准库速查](./std_library_cheatsheet.md)

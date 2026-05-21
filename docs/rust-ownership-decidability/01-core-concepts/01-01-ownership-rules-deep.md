@@ -5,11 +5,13 @@
 > **权威来源**: The Rust Programming Language (TRPL), Rust Reference, RustBelt (POPL 2018)
 > **形式化参考**: Jung et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. POPL
 > **状态**: 深度分析文档 | 形式化完备
+> **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Memory Safety]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust所有权系统深度解析：形式语义、定理与反例](#rust所有权系统深度解析形式语义定理与反例)
   - [目录](#目录)
@@ -97,16 +99,19 @@
     - [官方文档](#官方文档)
     - [工具与实现](#工具与实现)
   - [交叉引用](#交叉引用)
+  - [**状态**: ✅ 形式化完备](#状态--形式化完备)
 
 ---
 
 ## 前言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档提供Rust所有权系统的**形式化深度分析**，包含完整的数学语义、严格定理证明以及大量反例分析。所有权系统是Rust内存安全保证的核心，理解其形式基础对于掌握Rust的深层机制至关重要。
 
 ### 本文档目标读者
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - 希望深入理解所有权系统底层机制的Rust开发者
 - 进行Rust形式化验证的研究人员
@@ -3780,9 +3785,9 @@ fn macro_ownership() {
 
 | 文档 | 内容 | 关系 |
 |------|------|------|
-| [01-02-borrowing-system.md](01-02-borrowing-system.md) | 借用系统 | 所有权启用借用 |
-| [01-03-lifetimes.md](01-03-lifetimes.md) | 生命周期 | 所有权与生命周期交互 |
-| [ownership-counterexamples.md](ownership-counterexamples.md) | 所有权反例 | 补充反例 |
+| [01-02-borrowing-system.md](./01-02-borrowing-system.md) | 借用系统 | 所有权启用借用 |
+| [01-03-lifetimes.md](./01-03-lifetimes.md) | 生命周期 | 所有权与生命周期交互 |
+| [ownership-counterexamples.md](./ownership-counterexamples.md) | 所有权反例 | 补充反例 |
 | [detailed-concepts/ownership-deep-dive.md](detailed-concepts/ownership-deep-dive.md) | 所有权深入 | 扩展阅读 |
 | [../formal-foundations/models/02-05-move-analysis.md](../formal-foundations/models/02-05-move-analysis.md) | 移动分析 | 形式化基础 |
 

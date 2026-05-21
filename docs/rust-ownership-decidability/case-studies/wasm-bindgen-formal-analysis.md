@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [wasm-bindgen形式化分析](#wasm-bindgen形式化分析)
   - [目录](#目录)
@@ -32,11 +33,13 @@
     - [示例1: 基础导出](#示例1-基础导出)
     - [示例2: DOM操作](#示例2-dom操作)
     - [示例3: 异步HTTP](#示例3-异步http)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 wasm-bindgen功能：
 
@@ -48,7 +51,8 @@ wasm-bindgen功能：
 ---
 
 ## 2. 类型映射
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TYPEMAP-1 ( 基本类型 )
 
@@ -261,3 +265,7 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

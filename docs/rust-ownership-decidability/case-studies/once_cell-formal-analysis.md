@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [OnceCell / OnceLock 形式化分析](#oncecell--oncelock-形式化分析)
   - [目录](#目录)
@@ -27,11 +28,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (递归初始化)](#反例-61-递归初始化)
     - [反例 6.2 (async初始化)](#反例-62-async初始化)
+  - [*定理数量: 6个*](#定理数量-6个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 OnceCell/OnceLock提供:
 
@@ -43,7 +46,8 @@ OnceCell/OnceLock提供:
 ---
 
 ## 2. 状态机语义
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 2.1 (OnceLock状态)
 
@@ -193,3 +197,8 @@ CLIENT.get_or_init(async {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

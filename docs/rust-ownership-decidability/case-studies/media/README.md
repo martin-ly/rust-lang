@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [音视频处理开发指南](#音视频处理开发指南)
   - [目录](#目录)
@@ -28,14 +29,17 @@
     - [7.1 SIMD加速](#71-simd加速)
     - [7.2 零拷贝处理](#72-零拷贝处理)
   - [总结](#总结)
+  - [适用场景：媒体服务器、实时通信、编解码器、流媒体等](#适用场景媒体服务器实时通信编解码器流媒体等)
 
 ---
 
 ## 1. 音视频处理概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么Rust适合音视频处理
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 优势 | 应用场景 |
 |------|------|----------|
@@ -442,7 +446,7 @@ Rust在音视频处理领域提供了：
 3. **并发**: 安全的并行编解码
 4. **生态**: 丰富的多媒体库
 
-适用场景：媒体服务器、实时通信、编解码器、流媒体等。
+适用场景：媒体服务器、实时通信、编解码器、流媒体等
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -453,3 +457,11 @@ Rust在音视频处理领域提供了：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

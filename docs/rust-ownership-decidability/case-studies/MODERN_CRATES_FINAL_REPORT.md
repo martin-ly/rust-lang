@@ -7,12 +7,12 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 完成三轮扩展，实现了对**39个著名现代Rust开源库**的深度形式化分析。
 
 ### 三轮扩展回顾
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 轮次 | 新增库数 | 重点领域 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -23,7 +23,7 @@
 ---
 
 ## 第三轮新增库 (8个)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 序号 | 库名 | 领域 | 核心形式化内容 |
 | :--- | :--- | :--- | :--- |
@@ -227,3 +227,8 @@ hyper-T2: HTTP/2多路复用
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

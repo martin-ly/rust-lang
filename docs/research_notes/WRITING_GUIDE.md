@@ -405,7 +405,7 @@
 - 使用 `###` 表示三级标题（子章节）
 - 避免跳过层级
 
-**表格格式**（统一规范，见 [PROOF_INDEX](PROOF_INDEX.md) 公理编号规范表）:
+**表格格式**（统一规范，见 [PROOF_INDEX](./PROOF_INDEX.md) 公理编号规范表）:
 
 - 分隔行使用 `| :--- | :--- | :--- |` 格式（左对齐，冒号在左）
 - 列数需与表头一致；N 列则 N 个 `:---`
@@ -481,7 +481,7 @@
 - 凡 **≥3 个二级标题**的文档，须在元信息 blockquote 之后、正文第一个 `##` 之前增加 `## 📊 目录`
 - 目录须包含至少二级（`##`）的锚点链接，尽量到三级（`###`）
 - 锚点格式：标题转小写、空格替换为连字符（如 `## 形式化定义` → `#形式化定义`）
-- 新文档提交前须通过 TOC 门禁；见 [QUALITY_CHECKLIST](QUALITY_CHECKLIST.md) § 目录结构
+- 新文档提交前须通过 TOC 门禁；见 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md) § 目录结构
 
 **示例**:
 
@@ -503,7 +503,7 @@
 
 ### 6. 概念定义-属性关系-解释论证 层次化（核心研究笔记）
 
-**依据**：[CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](QUALITY_CHECKLIST.md)。
+**依据**：[CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) § 概念定义-属性关系-解释论证 层次化小节规范、[QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)。
 
 凡含 Def/Axiom/定理的形式化文档，宜在形式化定义节末增加 **「概念定义-属性关系-解释论证 层次汇总」** 子节，用表格显式三层次：
 

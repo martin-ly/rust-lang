@@ -1,7 +1,7 @@
 # Rust 内存模型语义形式化理论
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 内存模型语义形式化理论](#rust-内存模型语义形式化理论)
   - [目录](#目录)
@@ -88,13 +88,13 @@
 ---
 
 ## 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 的内存模型是其内存安全保证的核心基础。
 不同于传统系统语言（如 C/C++），Rust 在编译期通过所有权系统强制执行严格的内存访问规则，从而避免了空指针解引用、双重释放、数据竞争等内存错误。
 
 ### 形式化目标
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档旨在形式化 Rust 内存模型的以下方面：
 
@@ -947,3 +947,8 @@ L3: z: SharedBorrow(L0)  [invalid: MutBorrow active]
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

@@ -6,11 +6,12 @@
 > **Prerequisites**: Understanding of ownership, Send/Sync traits, async/await basics
 > **Estimated Reading Time**: 3-4 hours
 > **Difficulty**: Advanced
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Message Passing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Actor Model]** · **[来源: CSP - Hoare 1978]**
 
 ---
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Message Passing Patterns: Formal Deep Dive](#message-passing-patterns-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -68,7 +69,7 @@
 ---
 
 ## Executive Summary
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 This document provides a comprehensive formal treatment of message passing patterns in Rust, establishing mathematical foundations for understanding how Rust's channel-based concurrency ensures memory safety through ownership transfer. We present:
 
@@ -83,7 +84,7 @@ The core insight is that Rust's ownership system, when combined with channel com
 ---
 
 ## 1. Message Passing Fundamentals
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Channel Semantics
 

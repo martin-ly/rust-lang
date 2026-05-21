@@ -711,5 +711,7 @@ async fn graceful_shutdown() {
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Deployment 部署](README.md)
 - [Databases 数据库](../databases/README.md)

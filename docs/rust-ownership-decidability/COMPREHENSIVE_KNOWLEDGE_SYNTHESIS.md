@@ -1,7 +1,7 @@
 # Rust 所有权系统可判定性 - 综合知识梳理
 
 ## Comprehensive Knowledge Synthesis
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **版本**: 2.0
 > **日期**: 2026-03-09
@@ -12,10 +12,10 @@
 ---
 
 ## 📊 知识体系全景
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 四层知识结构
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────┐
@@ -494,12 +494,12 @@ README.md (入口)
 
 | 索引文件 | 用途 |
 |:---------|:-----|
-| [README.md](README.md) | 主入口 |
-| [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | 完整主索引 |
-| [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md) | 自动交叉引用 |
-| [CROSS_REFERENCE_VERIFICATION_REPORT.md](CROSS_REFERENCE_VERIFICATION_REPORT.md) | 链接验证 |
-| [THEOREM_DEPENDENCY_GRAPH.md](THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 |
-| [UNIFIED_THEORETICAL_FRAMEWORK.md](UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 |
+| [README.md](./README.md) | 主入口 |
+| [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | 完整主索引 |
+| [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | 自动交叉引用 |
+| [CROSS_REFERENCE_VERIFICATION_REPORT.md](./CROSS_REFERENCE_VERIFICATION_REPORT.md) | 链接验证 |
+| [THEOREM_DEPENDENCY_GRAPH.md](./THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 |
+| [UNIFIED_THEORETICAL_FRAMEWORK.md](./UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 |
 | [case-studies/MODERN_CRATES_INDEX.md](case-studies/MODERN_CRATES_INDEX.md) | 案例索引 |
 
 ---

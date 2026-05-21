@@ -1,7 +1,7 @@
 # RPC 语义 (Remote Procedure Call Semantics)
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [RPC 语义 (Remote Procedure Call Semantics)](#rpc-语义-remote-procedure-call-semantics)
   - [目录](#目录)
@@ -26,14 +26,14 @@
   - [7. 总结](#7-总结)
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 RPC（远程过程调用）是分布式系统中最基本的通信范式之一，它将网络通信抽象为本地函数调用。本文档深入分析 RPC 的形式化语义、Rust 实现以及可靠性保证。
 
 ---
 
 ## 2. RPC 基本模型
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语义抽象
 
@@ -466,3 +466,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

@@ -260,9 +260,9 @@ impl Order {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Strategy](strategy.md) | 策略可替换；State 可转换；实现相似 |
-| [Memento](memento.md) | 保存/恢复状态 |
-| [Observer](observer.md) | 状态转换可通知观察者 |
+| [Strategy](./strategy.md) | 策略可替换；State 可转换；实现相似 |
+| [Memento](./memento.md) | 保存/恢复状态 |
+| [Observer](./observer.md) | 状态转换可通知观察者 |
 
 ---
 

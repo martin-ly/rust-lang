@@ -595,5 +595,7 @@ where
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Async Closures (异步闭包)](async_closures.md)
 - [Emerging 前沿特性](README.md)

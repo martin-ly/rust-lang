@@ -1,23 +1,23 @@
 # 理论基础 (Foundations)
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录包含编程语言理论的核心理论文档，为理解 Rust 的类型系统、所有权模型和并发语义提供数学基础。
 
 ## 文档列表
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 主题 | 大小 | 难度 | 前置知识 |
 |------|------|------|------|----------|
-| [00a-lambda-calculus.md](00a-lambda-calculus.md) | λ演算基础 | 14 KB | 🔴 | 离散数学 |
-| [00b-type-theory-basics.md](00b-type-theory-basics.md) | 类型理论基础 | 19 KB | 🔴 | λ演算 |
-| [00c-operational-semantics.md](00c-operational-semantics.md) | 操作语义 | 14 KB | 🔴 | 类型理论 |
-| [00d-denotational-semantics.md](00d-denotational-semantics.md) | 指称语义 | 12 KB | 🔴 | 操作语义 |
-| [00e-axiomatic-semantics.md](00e-axiomatic-semantics.md) | 公理语义 | 13 KB | 🔴 | 一阶逻辑 |
+| [00a-lambda-calculus.md](./00a-lambda-calculus.md) | λ演算基础 | 14 KB | 🔴 | 离散数学 |
+| [00b-type-theory-basics.md](./00b-type-theory-basics.md) | 类型理论基础 | 19 KB | 🔴 | λ演算 |
+| [00c-operational-semantics.md](./00c-operational-semantics.md) | 操作语义 | 14 KB | 🔴 | 类型理论 |
+| [00d-denotational-semantics.md](./00d-denotational-semantics.md) | 指称语义 | 12 KB | 🔴 | 操作语义 |
+| [00e-axiomatic-semantics.md](./00e-axiomatic-semantics.md) | 公理语义 | 13 KB | 🔴 | 一阶逻辑 |
 
 ## 学习路径
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 路径A: 理论优先
 

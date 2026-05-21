@@ -13,32 +13,32 @@
 
 | 项目 | 描述 | 所需知识 | 预计时间 |
 |------|------|---------|---------|
-| [项目 01: 命令行工具](project-01-cli-tool.md) | Todo CLI工具 | c01-c03 | 2-3h |
-| [项目 02: 文件处理器](project-02-file-processor.md) | 文件搜索/复制/统计 | c01-c03 | 2-3h |
-| [项目 03: 表达式计算器](project-03-calculator.md) | 支持四则运算的计算器 | c01-c04 | 3-4h |
-| [项目 04: 密码生成器](project-04-password-generator.md) | 随机密码生成 | c01-c03 | 1-2h |
-| [项目 05: 文本统计工具](project-05-text-statistics.md) | 类似wc的统计工具 | c01-c03 | 2h |
+| [项目 01: 命令行工具](./project-01-cli-tool.md) | Todo CLI工具 | c01-c03 | 2-3h |
+| [项目 02: 文件处理器](./project-02-file-processor.md) | 文件搜索/复制/统计 | c01-c03 | 2-3h |
+| [项目 03: 表达式计算器](./project-03-calculator.md) | 支持四则运算的计算器 | c01-c04 | 3-4h |
+| [项目 04: 密码生成器](./project-04-password-generator.md) | 随机密码生成 | c01-c03 | 1-2h |
+| [项目 05: 文本统计工具](./project-05-text-statistics.md) | 类似wc的统计工具 | c01-c03 | 2h |
 
 ### 🟡 进阶级（5个）
 > **[来源: Rust Official Docs]**
 
 | 项目 | 描述 | 所需知识 | 预计时间 |
 |------|------|---------|---------|
-| [项目 06: 并发下载器](project-06-concurrent-downloader.md) | 多线程/异步下载 | c05-c06 | 4-6h |
-| [项目 07: 聊天服务器](project-07-chat-server.md) | TCP聊天服务器 | c05-c06, c10 | 5-7h |
-| [项目 08: 内存缓存](project-08-cache-system.md) | 线程安全缓存 | c05 | 4-5h |
-| [项目 09: 日志分析器](project-09-log-parser.md) | 高性能日志处理 | c01-c06 | 4-5h |
-| [项目 10: 数据处理管道](project-10-data-pipeline.md) | 类似Unix管道 | c04-c06 | 5-6h |
+| [项目 06: 并发下载器](./project-06-concurrent-downloader.md) | 多线程/异步下载 | c05-c06 | 4-6h |
+| [项目 07: 聊天服务器](./project-07-chat-server.md) | TCP聊天服务器 | c05-c06, c10 | 5-7h |
+| [项目 08: 内存缓存](./project-08-cache-system.md) | 线程安全缓存 | c05 | 4-5h |
+| [项目 09: 日志分析器](./project-09-log-parser.md) | 高性能日志处理 | c01-c06 | 4-5h |
+| [项目 10: 数据处理管道](./project-10-data-pipeline.md) | 类似Unix管道 | c04-c06 | 5-6h |
 
 ### 🔴 专家级（5个）
 
 | 项目 | 描述 | 所需知识 | 预计时间 |
 |------|------|---------|---------|
-| [项目 11: Web服务器](project-11-web-server.md) | HTTP服务器 | c06, c10 | 8-10h |
-| [项目 12: WASM应用](project-12-wasm-app.md) | 浏览器WASM应用 | c12 | 6-8h |
-| [项目 13: 数据库引擎](project-13-database-engine.md) | 嵌入式数据库 | c01-c08 | 10-12h |
-| [项目 14: 异步运行时](project-14-async-runtime.md) | 简化版async运行时 | c06 | 12-15h |
-| [项目 15: 分布式KV](project-15-distributed-system.md) | 分布式键值存储 | c05-c10 | 15-20h |
+| [项目 11: Web服务器](./project-11-web-server.md) | HTTP服务器 | c06, c10 | 8-10h |
+| [项目 12: WASM应用](./project-12-wasm-app.md) | 浏览器WASM应用 | c12 | 6-8h |
+| [项目 13: 数据库引擎](./project-13-database-engine.md) | 嵌入式数据库 | c01-c08 | 10-12h |
+| [项目 14: 异步运行时](./project-14-async-runtime.md) | 简化版async运行时 | c06 | 12-15h |
+| [项目 15: 分布式KV](./project-15-distributed-system.md) | 分布式键值存储 | c05-c10 | 15-20h |
 
 ---
 

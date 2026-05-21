@@ -5,7 +5,7 @@
 ---
 
 ## 🏆 终极完成声明
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ╔════════════════════════════════════════════════════════════════════════╗
@@ -22,10 +22,10 @@
 ---
 
 ## 📊 终极统计
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 文档规模 (终极版)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 Markdown 文档:        577 个文件    ✅ (+新增 4 个综合性文档)
@@ -272,9 +272,9 @@ Coq 形式化文件:       32 个文件     ✅
 
 **开始使用**:
 
-- [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md) - 从这里开始
-- [QUICK_REFERENCE_CARD.md](QUICK_REFERENCE_CARD.md) - 快速查阅
-- [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md) - 查找文档
+- [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) - 从这里开始
+- [QUICK_REFERENCE_CARD.md](./QUICK_REFERENCE_CARD.md) - 快速查阅
+- [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) - 查找文档
 
 ---
 

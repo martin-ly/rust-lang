@@ -7,12 +7,12 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过全面的递归审计，项目呈现以下特征：
 
 ### 优势 (Strengths)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **形式化深度卓越**: Coq 形式化 (~5,500 行) 是同类项目罕见
 2. **并发内容深入**: 达到专著级深度
@@ -20,7 +20,7 @@
 4. **程序语义完整**: 系统化程度高
 
 ### 劣势 (Weaknesses)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **Unsafe Rust 严重不足**: 仅占应有内容的 30%
 2. **底层细节缺失**: Data Layout, Unwinding 等
@@ -279,3 +279,8 @@ rust-ownership-decidability/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

@@ -1,7 +1,7 @@
 # 12 多实例无同步模式 (Multiple Instances Without Synchronization)
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [12 多实例无同步模式 (Multiple Instances Without Synchronization)](#12-多实例无同步模式-multiple-instances-without-synchronization)
   - [📋 目录](#-目录)
@@ -27,13 +27,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多实例无同步模式允许在运行时并行创建多个活动实例，这些实例独立执行且不需要同步汇合。
 实例数量通常在运行时才能确定。
 
 ### 核心语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
 \text{MIWithoutSync}(A, n) = \parallel_{i=1}^{n} A_i
@@ -628,3 +628,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

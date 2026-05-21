@@ -1,7 +1,8 @@
 # 01-02: The Rust Borrowing System - A Formal Deep Dive
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Borrowing]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - docs.rust-lang.org/nomicon]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Resource Acquisition Is Initialization]** · **[来源: POPL 2018 - RustBelt]**
 
 - [01-02: The Rust Borrowing System - A Formal Deep Dive](#01-02-the-rust-borrowing-system---a-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -154,11 +155,13 @@
     - [10.5 async Closure Improvements](#105-async-closure-improvements)
   - [Summary](#summary)
   - [References](#references)
+  - [*Last Updated: 2026*](#last-updated-2026)
 
 ---
 
 ## 1. Introduction and Overview
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Rust borrowing system represents one of the most significant innovations in programming language design.
 While ownership establishes the foundation for memory safety without garbage collection,
@@ -166,7 +169,8 @@ borrowing provides the mechanism by which multiple parts of a program can safely
 This chapter provides a comprehensive, formal treatment of Rust's borrowing semantics.
 
 ### 1.1 The Fundamental Insight
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The core insight of Rust's borrowing system is that memory safety violations arise from **aliasing combined with mutation**.
 If we can ensure that:
@@ -2437,3 +2441,8 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

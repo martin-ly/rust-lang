@@ -123,7 +123,7 @@
 └── 行为型 → 链式？Chain | 可撤销？Command | 求值？Interpreter | 遍历？Iterator | 协调？Mediator | 快照？Memento | 通知？Observer | 状态？State | 算法？Strategy | 骨架？Template | 按类型？Visitor
 ```
 
-每模式形式化文档见对应链接；选型决策树详见 [03_semantic_boundary_map](03_semantic_boundary_map.md) 按需求反向查模式。
+每模式形式化文档见对应链接；选型决策树详见 [03_semantic_boundary_map](./03_semantic_boundary_map.md) 按需求反向查模式。
 
 ---
 
@@ -177,7 +177,7 @@
 | :--- | :--- | :--- | :--- |
 | **Singleton** | 用 `static mut` 或 `lazy_static` 旧 API | 数据竞争、UB | 1.93 用 `OnceLock`、`LazyLock`；见 [singleton](../01_design_patterns_formal/01_creational/singleton.md) |
 | **Builder** | `build()` 前必填未设 | 运行时 panic | 类型状态 Builder 或 `ok_or(Error::Missing)`；见 [builder](../01_design_patterns_formal/01_creational/builder.md) B-T2 |
-| **Abstract Factory** | 单产品用 Abstract Factory | 过度设计 | 用 Factory Method；见 [03_semantic_boundary_map](03_semantic_boundary_map.md) 反模式误选 |
+| **Abstract Factory** | 单产品用 Abstract Factory | 过度设计 | 用 Factory Method；见 [03_semantic_boundary_map](./03_semantic_boundary_map.md) 反模式误选 |
 | **Prototype** | `Clone` 浅拷贝共享可变 | 隐式耦合 | 深拷贝或显式 `clone` 文档化；见 [prototype](../01_design_patterns_formal/01_creational/prototype.md) |
 | **Factory Method** | 返回 `impl Trait` 时生命周期不足 | 编译错误 | 返回 `Box<dyn Trait>` 或 `Arc<T>`；注意 `'static` 约束 |
 
@@ -215,7 +215,7 @@
 
 ## 与 43 完全模型衔接
 
-扩展 20 种企业/分布式模式见 [02_complete_43_catalog](02_complete_43_catalog.md)；23 安全 ⊆ 43 完全；扩展模式绝大部分亦纯 Safe。
+扩展 20 种企业/分布式模式见 [02_complete_43_catalog](./02_complete_43_catalog.md)；23 安全 ⊆ 43 完全；扩展模式绝大部分亦纯 Safe。
 
 ---
 

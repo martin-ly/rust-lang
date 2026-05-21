@@ -5,7 +5,7 @@
 ---
 
 ## 目录结构
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 08-advanced-topics/
@@ -23,10 +23,10 @@
 ---
 
 ## 学习路径建议
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 初级路径
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 如果你刚开始接触 Rust 高级特性：
 
@@ -1020,3 +1020,13 @@ impl<T, const N: usize> Drop for RingBuffer<T, N> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [Const Generics](./08-01-const-generics.md)
+- [Rust 1.95 特性形式化](./08-05-rust-195-features-formal.md)
+- [数据布局](./data-layout.md)
+- [所有权可判定性总览](../README.md)

@@ -5,7 +5,7 @@
 > **注意**: 以下兼容性评估基于Rust 1.94的验证状态。Rust 1.95的支持状态预计类似，但建议查阅各工具官方文档确认最新兼容性。
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust形式化验证工具全景](#rust形式化验证工具全景)
   - [目录](#目录)
@@ -31,7 +31,7 @@
   - [参考文献](#参考文献)
 
 ## 1. 验证工具谱系图
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -66,7 +66,7 @@
 ```
 
 ## 2. 工具对比矩阵
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 工具 | 机构 | 方法 | 自动化 | 覆盖范围 | Rust 1.95支持 |
 |------|------|------|--------|----------|---------------|
@@ -338,3 +338,8 @@ cargo install cargo-creusot --locked
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

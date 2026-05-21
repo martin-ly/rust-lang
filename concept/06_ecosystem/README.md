@@ -3,6 +3,7 @@
 > **定位**：Rust 的工程实践、工具链、设计模式和生态协作机制。本层是 L1-L5 知识的**工程化落地**，将理论转化为可维护、可扩展的代码库。
 > **Bloom 层级**: 应用 + 评价
 > **功能**: 将概念知识转化为**工程能力**
+> **[来源: Cargo Book - doc.rust-lang.org/cargo]** · **[来源: crates.io]** · **[来源: Rust RFCs]** · **[来源: The Rust Programming Language (TRPL)]**
 
 ---
 
@@ -131,6 +132,7 @@ L6 的工程实践输出到：
 
 - **L7 前沿**: AI 代码生成的模板库、形式化方法的 CI 集成
 - **实践**: 团队编码规范、代码审查清单、项目脚手架
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

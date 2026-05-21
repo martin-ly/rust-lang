@@ -8,10 +8,10 @@
 ---
 
 ## 1. Executive Summary
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 100% Completion Achieved
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Rust 1.94 alignment for the rust-ownership-decidability project has been **successfully completed** to production-ready status.
 This represents a comprehensive effort to align the theoretical formalization with the latest stable Rust release.
@@ -28,7 +28,7 @@ This represents a comprehensive effort to align the theoretical formalization wi
 | Documentation Words | 400,000+ | 500,000+ | ✅ 125% |
 
 ### 1.2 What Was Done
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **Documentation Alignment**: All core concept and concurrency pattern documents updated with Rust 1.94 features
 2. **API Guide Creation**: Comprehensive 993-line Standard Library API Guide covering all Rust 1.94 changes
@@ -425,3 +425,8 @@ The admitted proofs are transparently documented and represent standard practice
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

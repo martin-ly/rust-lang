@@ -632,5 +632,7 @@ impl SafetyOpcUaServer {
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [DO-178C Rust合规路径](DO_178C_RUST_COMPLIANCE_PATHWAY.md)
 - [ISO 26262 Rust实施指南](ISO_26262_RUST_IMPLEMENTATION_GUIDE.md)

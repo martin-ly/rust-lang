@@ -1,7 +1,7 @@
 # 内存管理范式深度对比
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [内存管理范式深度对比](#内存管理范式深度对比)
   - [目录](#目录)
@@ -50,7 +50,7 @@
   - [总结](#总结)
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 内存管理是编程语言设计的核心问题之一。
 不同的内存管理范式代表了在开发效率、运行时性能和安全性之间的不同权衡。
@@ -65,7 +65,7 @@
 | 区域内存管理 | Rust（生命周期）, C++（RAII） | 基于作用域 | 半自动 |
 
 ## 手动内存管理
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 原理
 
@@ -928,3 +928,8 @@ public class HybridMemory {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

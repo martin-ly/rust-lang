@@ -5,10 +5,10 @@
 ---
 
 ## 🧭 诊断方法论
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 三步诊断法
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 1. 理解错误信息
@@ -24,7 +24,7 @@
 ---
 
 ## 常见错误分类
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### E0382: 使用已移动的值
 
@@ -549,8 +549,8 @@ fn get_static() -> &'static str {
 
 ## 更多资源
 
-- [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md)
-- [全面 FAQ](COMPREHENSIVE_FAQ.md)
+- [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md)
+- [全面 FAQ](./COMPREHENSIVE_FAQ.md)
 - [案例分析](case-studies/README.md)
 - [Rust 错误索引](https://doc.rust-lang.org/error_codes/error-index.html)
 

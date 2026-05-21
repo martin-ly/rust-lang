@@ -58,7 +58,7 @@
 
 **定理 IT-T1（跨模块所有权保持）**：若 $M_1$ 调用 $M_2$ 的 `pub fn f(x: T)`，则 $x$ 的所有权从 $M_1$ 转移至 $M_2$；规则与模块内一致。
 
-*证明*：由 [02_effectiveness_proofs](02_effectiveness_proofs.md) CE-T1；模块边界仅为 `pub fn` 调用，值/引用传递语义不变。
+*证明*：由 [02_effectiveness_proofs](./02_effectiveness_proofs.md) CE-T1；模块边界仅为 `pub fn` 调用，值/引用传递语义不变。
 
 **定理 IT-T2（跨模块 Send/Sync 传递）**：若 $M_1$ 的 `pub fn` 返回 `impl Future + Send` 且内部持有 $T$，则 $T: \mathrm{Send}$ 为必要条件。
 

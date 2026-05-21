@@ -56,7 +56,7 @@
 | **Theorem** | T-OW2, T-BR1 | 主要结论 | T-OW2 所有权唯一性 |
 | **Corollary** | C-OW1 | 由 Theorem 直接推论 | 推论 |
 
-**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](PROOF_INDEX.md)。
+**引用规范**：每个 Theorem 应显式列出依赖的 Axiom/Lemma；Lemma 引用 Axiom；Corollary 引用 Theorem。详见 [formal_methods/README](formal_methods/README.md)、[PROOF_INDEX](./PROOF_INDEX.md)。
 
 ---
 

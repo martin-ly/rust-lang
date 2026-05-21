@@ -315,7 +315,7 @@ assert_eq!(tree.size(), 600);
 | 模式 | 关系 |
 | :--- | :--- |
 | [Visitor](../03_behavioral/visitor.md) | 遍历 Composite 常用 Visitor |
-| [Decorator](decorator.md) | 同为组合；Decorator 为链式，Composite 为树 |
+| [Decorator](./decorator.md) | 同为组合；Decorator 为链式，Composite 为树 |
 | [Chain of Responsibility](../03_behavioral/chain_of_responsibility.md) | 链 vs 树；委托传递 |
 
 ---

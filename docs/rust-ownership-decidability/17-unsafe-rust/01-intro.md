@@ -9,7 +9,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Unsafe Rust 概述](#unsafe-rust-概述)
   - [目录](#目录)
@@ -50,10 +50,10 @@
 ---
 
 ## 1. 什么是 Unsafe Rust
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心概念
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Unsafe Rust 是 Rust 的一个**超集**，它允许程序员执行编译器无法验证安全的操作。
 这并不意味着 Unsafe Rust 就是"危险的"，而是意味着**安全责任从编译器转移到了程序员**。
@@ -533,9 +533,9 @@ Miri 可以检测:
 
 ### 相关文档
 
-- [02-raw-pointers.md](02-raw-pointers.md) - 原始指针深度解析
-- [05-uninitialized-memory.md](05-uninitialized-memory.md) - 未初始化内存
-- [06-maybe-uninit.md](06-maybe-uninit.md) - MaybeUninit 详解
+- [02-raw-pointers.md](./02-raw-pointers.md) - 原始指针深度解析
+- [05-uninitialized-memory.md](./05-uninitialized-memory.md) - 未初始化内存
+- [06-maybe-uninit.md](./06-maybe-uninit.md) - MaybeUninit 详解
 
 ---
 

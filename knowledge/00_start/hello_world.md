@@ -240,6 +240,10 @@ fn main() {
 
 - [The Rust Programming Language — Ch1](https://doc.rust-lang.org/book/ch01-00-getting-started.html) [来源: Rust Team / TRPL 2025]
 - [Cargo Guide](https://doc.rust-lang.org/cargo/guide/) [来源: Rust Team / Cargo Book 2025]
+- [Rust 学习路线图](learning_roadmap.md)
+- [安装 Rust](installation.md)
+- [Rust 哲学与设计原则](rust_philosophy.md)
+- [Rust 所有权深入](../01_fundamentals/ownership.md)
 
 ---
 

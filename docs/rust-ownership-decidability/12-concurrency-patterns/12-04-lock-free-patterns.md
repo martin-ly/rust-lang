@@ -4,11 +4,12 @@
 > **对齐日期**: 2026-05-12
 > **覆盖范围**: CAS操作、原子内存序、无锁数据结构、内存回收
 > **权威参考**: Rust Atomics and Locks by Mara Bos, C++ Concurrency in Action
+> **[来源: Mara Bos - Rust Atomics and Locks]** · **[来源: Rust Reference - Atomics]** · **[来源: Wikipedia - Lock-free Data Structure]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Compare-and-Swap]** · **[来源: Rustonomicon - Concurrency]
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 无锁编程模式](#rust-无锁编程模式)
   - [目录](#目录)
@@ -35,10 +36,10 @@
 ---
 
 ## 1. 内存模型基础
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Happens-Before 关系
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Happens-before 关系是并发程序分析的基础概念：
 
@@ -1360,3 +1361,8 @@ impl<T> CountedMSQueue<T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

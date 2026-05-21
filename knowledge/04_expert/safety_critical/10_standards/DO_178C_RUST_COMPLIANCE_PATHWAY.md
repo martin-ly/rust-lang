@@ -652,5 +652,7 @@ pub enum TestResult {
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [IEC 61508 Rust实施指南](IEC_61508_RUST_IMPLEMENTATION_GUIDE.md)
 - [ISO 26262 Rust实施指南](ISO_26262_RUST_IMPLEMENTATION_GUIDE.md)

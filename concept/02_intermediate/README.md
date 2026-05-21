@@ -3,6 +3,7 @@
 > **定位**：在掌握 L1 基础后，理解 Rust 的模块化、泛型、内存管理和错误处理等进阶机制。本层内容对齐 TRPL 第 10-15 章、Microsoft RustTraining 进阶部分。
 > **Bloom 层级**: 理解 → 应用
 > **对应 L4 形式化**: 类型约束求解 · 参数多态 · 子类型 · 存在类型
+> **[来源: TRPL Ch. 10–15]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: Microsoft Rust Training - Advanced Topics]**
 
 ---
 
@@ -227,6 +228,7 @@ Error Handling
 - **L3 高级**: Concurrency（Send/Sync 是 Auto Trait）、Async（Future 是泛型 Trait）、Unsafe（MaybeUninit、UnsafeCell）
 - **L4 形式化**: 类型论（参数多态、约束求解）、子类型与 Variance
 - **L6 生态**: 设计模式（Typestate、Builder 依赖 Trait）
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

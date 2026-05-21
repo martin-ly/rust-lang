@@ -1184,7 +1184,7 @@ Inductive type_check : value_env -> ownership_env -> expr -> ty -> Prop :=
 
 ### 定理1: 所有权唯一性
 
-**对应文档**: [ownership_model.md](ownership_model.md) 定理 6
+**对应文档**: [ownership_model.md](./ownership_model.md) 定理 6
 
 #### Rust代码示例
 
@@ -1263,7 +1263,7 @@ End Theorem1_OwnershipUniqueness.
 
 ### 定理2: 借用互斥性
 
-**对应文档**: [borrow_checker_proof.md](borrow_checker_proof.md) 定理 1
+**对应文档**: [borrow_checker_proof.md](./borrow_checker_proof.md) 定理 1
 
 #### Rust代码示例
 
@@ -1381,7 +1381,7 @@ End Theorem2_BorrowMutex.
 
 ### 定理3: 引用有效性
 
-**对应文档**: [lifetime_formalization.md](lifetime_formalization.md)
+**对应文档**: [lifetime_formalization.md](./lifetime_formalization.md)
 
 #### Rust代码示例
 
@@ -1480,7 +1480,7 @@ End Theorem3_ReferenceValidity.
 
 ### 定理4: Send/Sync安全性
 
-**对应文档**: [send_sync_formalization.md](send_sync_formalization.md)
+**对应文档**: [send_sync_formalization.md](./send_sync_formalization.md)
 
 #### Rust代码示例
 
@@ -1650,7 +1650,7 @@ Send/Sync安全性证明策略:
 
 ### 定理5: 类型安全（进展+保持）
 
-**对应文档**: [FORMAL_FOUNDATIONS_INDEX.md](FORMAL_FOUNDATIONS_INDEX.md)
+**对应文档**: [FORMAL_FOUNDATIONS_INDEX.md](./FORMAL_FOUNDATIONS_INDEX.md)
 
 #### Rust代码示例
 
@@ -2235,14 +2235,14 @@ lint:
 
 | 文档 | 内容 | 与本文件关系 |
 | :--- | :--- | :--- |
-| [COQ_FORMALIZATION_MATRIX.md](COQ_FORMALIZATION_MATRIX.md) | Coq形式化矩阵 | 证明状态追踪 |
-| [FORMAL_FOUNDATIONS_INDEX.md](FORMAL_FOUNDATIONS_INDEX.md) | 形式化基础索引 | 理论学习路径 |
-| [ownership_model.md](ownership_model.md) | 所有权模型形式化 | 定理1对应文档 |
-| [borrow_checker_proof.md](borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
-| [lifetime_formalization.md](lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |
-| [send_sync_formalization.md](send_sync_formalization.md) | Send/Sync形式化 | 定理4对应文档 |
-| [SEPARATION_LOGIC.md](SEPARATION_LOGIC.md) | 分离逻辑 | Iris理论基础 |
-| [OPERATIONAL_SEMANTICS.md](OPERATIONAL_SEMANTICS.md) | 操作语义 | 类型安全基础 |
+| [COQ_FORMALIZATION_MATRIX.md](./COQ_FORMALIZATION_MATRIX.md) | Coq形式化矩阵 | 证明状态追踪 |
+| [FORMAL_FOUNDATIONS_INDEX.md](./FORMAL_FOUNDATIONS_INDEX.md) | 形式化基础索引 | 理论学习路径 |
+| [ownership_model.md](./ownership_model.md) | 所有权模型形式化 | 定理1对应文档 |
+| [borrow_checker_proof.md](./borrow_checker_proof.md) | 借用检查器证明 | 定理2对应文档 |
+| [lifetime_formalization.md](./lifetime_formalization.md) | 生命周期形式化 | 定理3对应文档 |
+| [send_sync_formalization.md](./send_sync_formalization.md) | Send/Sync形式化 | 定理4对应文档 |
+| [SEPARATION_LOGIC.md](./SEPARATION_LOGIC.md) | 分离逻辑 | Iris理论基础 |
+| [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 操作语义 | 类型安全基础 |
 
 ### 外部资源
 

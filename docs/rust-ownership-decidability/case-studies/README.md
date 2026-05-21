@@ -10,17 +10,17 @@
 ---
 
 ## 目录说明
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录包含对著名Rust开源库和框架的深度案例分析，从形式化角度分析其设计和实现。
 
 ---
 
 ## 专题案例
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 综合分析专题
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 位于 `comprehensive-analysis/case-studies/`
 
@@ -78,3 +78,21 @@
 
 
 </details>
+
+
+---
+
+## 相关概念
+
+- [区块链/Web3](./blockchain/README.md)
+- [CLI 工具](./cli/README.md)
+- [云计算](./cloud/README.md)
+- [数据库](./database/README.md)
+- [嵌入式](./embedded/README.md)
+- [游戏开发](./gamedev/README.md)
+- [媒体处理](./media/README.md)
+- [ML/AI](./ml-ai/README.md)
+- [网络安全](./security/README.md)
+- [WebAssembly](./wasm/README.md)
+- [领域覆盖索引](./COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+- [所有权可判定性总览](../README.md)

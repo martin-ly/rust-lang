@@ -1,7 +1,7 @@
 # 综合概念对比矩阵
 
 ## 1. 并发模型对比矩阵
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | OS线程 | async/await | Actor | 数据并行 |
 |:---|:---:|:---:|:---:|:---:|
@@ -17,7 +17,7 @@
 | **调试难度** | 高 | 中 | 中 | 低 |
 
 ## 2. 同步原语对比矩阵
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 原语 | 所有权 | Send | Sync | 阻塞 | 适用场景 |
 |:---|:---:|:---:|:---:|:---:|:---|
@@ -31,7 +31,7 @@
 > *注: 要求T: Send/Sync
 
 ## 3. 智能指针对比矩阵
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指针 | 所有权 | 引用计数 | 线程安全 | 可变性 | 开销 |
 |:---|:---:|:---:|:---:|:---:|:---:|
@@ -156,3 +156,8 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

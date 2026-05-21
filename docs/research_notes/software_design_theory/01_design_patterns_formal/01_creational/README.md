@@ -13,11 +13,11 @@
 ## 包含模式
 > **[来源: Rust Official Docs]**
 
-- [抽象工厂](abstract_factory.md)
-- [建造者](builder.md)
-- [工厂方法](factory_method.md)
-- [原型](prototype.md)
-- [单例](singleton.md)
+- [抽象工厂](./abstract_factory.md)
+- [建造者](./builder.md)
+- [工厂方法](./factory_method.md)
+- [原型](./prototype.md)
+- [单例](./singleton.md)
 
 ## 相关链接
 > **[来源: Rust Official Docs]**

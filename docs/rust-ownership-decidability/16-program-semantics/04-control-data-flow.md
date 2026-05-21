@@ -1,7 +1,8 @@
 # 数据流与控制流分析
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference - Control Flow]** · **[来源: Wikipedia - Control Flow Graph]** · **[来源: Wikipedia - Data-flow Analysis]** · **[来源: Rustonomicon]** · **[来源: TRPL Ch. 3]** · **[来源: POPL 2018 - RustBelt]**
 
 - [数据流与控制流分析](#数据流与控制流分析)
   - [目录](#目录)
@@ -154,14 +155,17 @@
     - [12.2 静态分析要点](#122-静态分析要点)
     - [12.3 实践指导](#123-实践指导)
     - [12.4 延伸阅读](#124-延伸阅读)
+  - [*本文档是 Rust 所有权可判定性研究系列的一部分，与 `00-semantic-framework.md` 保持一致的语义框架。*](#本文档是-rust-所有权可判定性研究系列的一部分与-00-semantic-frameworkmd-保持一致的语义框架)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 控制流与数据流的关系
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在程序分析中，**控制流（Control Flow）** 描述程序执行的顺序，而 **数据流（Data Flow）** 描述数据在程序中的传播和变换。
 两者相互交织，共同决定了程序的行为。
@@ -272,6 +276,8 @@ fn static_vs_dynamic(arr: &[i32]) -> Option<i32> {
 ---
 
 ## 2. 控制流语义
+
+> **[来源: Wikipedia - Control Flow]** · **[来源: Rust Reference - Control Flow]** · **[来源: TRPL Ch. 3]**
 
 ### 2.1 顺序控制流
 
@@ -1182,6 +1188,8 @@ fn trait_resolution_flow() {
 
 ## 4. 所有权数据流
 
+> **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Data-flow Analysis]** · **[来源: POPL 2018 - RustBelt]**
+
 ### 4.1 所有权转移数据流
 
 #### 4.1.1 Move 语义数据流
@@ -1862,6 +1870,8 @@ fn condition() -> bool { true }
 ---
 
 ## 6. 数据流分析
+
+> **[来源: Wikipedia - Data-flow Analysis]** · **[来源: Rust Reference - Borrow Checker]** · **[来源: Rustonomicon]**
 
 ### 6.1 借用检查数据流
 
@@ -3868,3 +3878,7 @@ valgrind --tool=cachegrind ./target/release/myapp
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

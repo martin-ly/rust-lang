@@ -21,10 +21,10 @@
 
 | # | 文档 | 核心内容 |
 |:---:|:---|:---|
-| 00-01 | [线性逻辑](00-01-linear-logic.md) | Girard线性逻辑、资源敏感性 |
-| 00-02 | [仿射类型](00-02-affine-types.md) | 仿射类型系统、使用一次或丢弃 |
-| 00-03 | [分离逻辑](00-03-separation-logic.md) | Reynolds分离逻辑、堆推理 |
-| 00-04 | [理论连接](00-04-theory-connections.md) | 各理论间的关系与映射 |
+| 00-01 | [线性逻辑](./00-01-linear-logic.md) | Girard线性逻辑、资源敏感性 |
+| 00-02 | [仿射类型](./00-02-affine-types.md) | 仿射类型系统、使用一次或丢弃 |
+| 00-03 | [分离逻辑](./00-03-separation-logic.md) | Reynolds分离逻辑、堆推理 |
+| 00-04 | [理论连接](./00-04-theory-connections.md) | 各理论间的关系与映射 |
 
 ---
 

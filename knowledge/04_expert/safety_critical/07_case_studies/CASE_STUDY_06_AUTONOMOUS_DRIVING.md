@@ -522,5 +522,7 @@ mod verification {
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [案例研究1: Ferrocene认证工具链](CASE_STUDY_01_FERROCENE_CERTIFICATION.md)
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](CASE_STUDY_02_NASA_CFS_RUST.md)

@@ -9,15 +9,18 @@
 ---
 
 ## 本次重要补充
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 针对用户提出的关键洞察——"Rust只是针对编译器可以判定的资源管理，但针对运行时才能判定的并没有展开推理论证"，我们进行了全面的补充和完善。
 
 ### 新增核心文档
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 1. 01-04-runtime-vs-compile-time.md (18.1KB)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **编译时 vs 运行时资源管理：全面论证**:
 
@@ -345,7 +348,7 @@ where state ∈ { Unused, Reading(n), Writing }
 **文档版本**: 4.0 Final
 **总字节数**: 290KB (28个文件)
 
-**核心成就**: 完整回应"编译时vs运行时资源管理"的核心洞察，建立了Rust资源管理的全面理论体系！
+**核心成就**: 完整回应"编译时vs运行时资源管理"的核心洞察，建立了Rust资源管理的全面理论体系
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

@@ -461,5 +461,7 @@ mod tests {
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Databases 数据库](README.md)
 - [Sea-ORM 深度解析](sea_orm_deep_dive.md)

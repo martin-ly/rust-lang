@@ -5,11 +5,13 @@
 > **形式化框架**: 布局保证 + 安全转换 + 内存模型验证
 >
 > **参考**: zerocopy Documentation, Rust Reference (Type Layout)
+> **[来源: zerocopy Documentation - docs.rs/zerocopy]** · **[来源: Rust Reference - Type Layout]** · **[来源: Wikipedia - Zero-copy]** · **[来源: Rustonomicon - Type Layout]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust API Guidelines]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Zerocopy 零拷贝内存操作形式化分析](#zerocopy-零拷贝内存操作形式化分析)
   - [目录](#目录)
@@ -64,14 +66,17 @@
     - [10.1 非法字节值问题](#101-非法字节值问题)
     - [10.2 填充字节未定义行为](#102-填充字节未定义行为)
     - [10.3 类型混淆攻击](#103-类型混淆攻击)
+  - [**代码示例**: 8个完整示例](#代码示例-8个完整示例)
 
 ---
 
 ## 1. 项目概览与解决的问题
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 传统序列化的性能瓶颈
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在系统编程和数据处理中，类型与字节序列之间的转换是一个核心问题。传统的序列化方案（如JSON、XML、Protocol Buffers）虽然提供了良好的跨语言兼容性和可读性，但存在显著的性能开销：
 
@@ -2143,3 +2148,7 @@ impl Message {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

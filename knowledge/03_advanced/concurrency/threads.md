@@ -1155,3 +1155,5 @@ struct MyStruct {
 
 - [Rust 原子操作 (Atomic Operations)](atomics.md)
 - [Concurrency 并发编程](README.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)
+- [Rust 异步编程 (Async/Await)](../async/async_await.md)

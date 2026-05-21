@@ -2667,9 +2667,9 @@ fn main() {
 **与类型系统相关**:
 
 - **LUB coercion**：1.93 修正 least upper bound 推断，涉及函数项与安全性；
-类型规则：若 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的 LUB 推断更严格，避免错误 coerce。形式化属 [00_completeness_gaps](00_completeness_gaps.md) 阶段 2。
+类型规则：若 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的 LUB 推断更严格，避免错误 coerce。形式化属 [00_completeness_gaps](./00_completeness_gaps.md) 阶段 2。
 - **Copy 与 specialization**：1.93 移除 Copy 的内部 specialization；`impl Copy for T` 不再依赖生命周期 specialization，类型安全有增强。
-对 `Clone + Copy` 类型的 `clone()` 调用语义不变，但 impl 解析路径变更。见 [00_completeness_gaps](00_completeness_gaps.md)。
+对 `Clone + Copy` 类型的 `clone()` 调用语义不变，但 impl 解析路径变更。见 [00_completeness_gaps](./00_completeness_gaps.md)。
 
 **Def LUB1（LUB 类型推断）**：设 $e_1 : \tau_1$、$e_2 : \tau_2$，则 `if c { e1 } else { e2 }` 的类型为 $\mathrm{LUB}(\tau_1, \tau_2)$；
 1.93 修正函数项、安全性，使 LUB 推断更严格。
@@ -2682,7 +2682,7 @@ fn main() {
 
 **定理 COP-T1**：1.93 后 `Copy` 与 `Clone` 的 impl 解析不再依赖生命周期 specialization；
 类型安全有增强；
-见 [variance_theory](variance_theory.md) 与 [00_completeness_gaps](00_completeness_gaps.md)。
+见 [variance_theory](./variance_theory.md) 与 [00_completeness_gaps](./00_completeness_gaps.md)。
 
 - **全局分配器与 `thread_local`**：1.93 允许 `#[global_allocator]` 实现中使用 `thread_local!` 和 `std::thread::current()`，类型上涉及 `Allocator` trait 与线程局部；
 对类型推导、单态化无新增规则，但对 `alloc` 相关泛型与 `impl` 的选用有影响。

@@ -7,7 +7,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Miri 深度解析](#miri-深度解析)
   - [目录](#目录)
@@ -49,7 +49,7 @@
 ---
 
 ## 1. 引言与概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测程序中的**未定义行为 (Undefined Behavior, UB)**。与编译器不同，Miri 在 Mid-level IR (MIR) 层面解释执行代码，能够精确跟踪内存状态和所有权变化。
 
@@ -76,7 +76,7 @@ Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测
 ---
 
 ## 2. Miri 的工作原理
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 解释执行模型
 
@@ -928,3 +928,8 @@ fn platform_specific() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

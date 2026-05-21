@@ -8,7 +8,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [核心定理集](#核心定理集)
   - [📋 目录](#-目录)
@@ -23,7 +23,7 @@
 ---
 
 ## 🎯 定理集概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本模块收集 Rust 所有权系统的核心形式化定理，提供：
 
@@ -34,11 +34,11 @@
 ---
 
 ## 📁 文档导航
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 主题 | 关键定理 |
 |:-----|:-----|:---------|
-| [`decidability_theorems.md`](decidability_theorems.md) | 可判定性定理 | 借用检查终止性、类型推断可判定性 |
+| [`decidability_theorems.md`](./decidability_theorems.md) | 可判定性定理 | 借用检查终止性、类型推断可判定性 |
 
 ---
 

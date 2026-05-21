@@ -10,15 +10,15 @@
 ## 形式化论证（质量与论证衔接）
 > **[来源: Rust Official Docs]**
 
-**Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](PROOF_INDEX.md) 的衔接，则称 $D$ **质量完备**。
+**Def QC1（质量完备性）**：设 $D$ 为研究笔记文档。若 $D$ 满足本清单全部必需项，且含 Def/Axiom/Theorem 或与 [PROOF_INDEX](./PROOF_INDEX.md) 的衔接，则称 $D$ **质量完备**。
 
 **Axiom QC1**：质量完备性不保证定理正确性，但保证论证可追溯；形式化论证（Def/Axiom/定理）与质量检查互为补充。
 
-**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](PROOF_INDEX.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范一致。
+**定理 QC-T1（质量蕴涵可追溯）**：若 $D$ 质量完备且含形式化论证，则 $D$ 的论断可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 或上游定理；与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证要素规范一致。
 
 *证明*：由 Def QC1；形式化论证含 Def/Axiom/Theorem 或引用；PROOF_INDEX 索引全部证明；可追溯性由引用链保证。∎
 
-**推论 QC-C1**：新研究笔记应满足本清单 + 建立与形式化体系的衔接；见 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 论证结构模板。
+**推论 QC-C1**：新研究笔记应满足本清单 + 建立与形式化体系的衔接；见 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 论证结构模板。
 
 ---
 
@@ -152,13 +152,13 @@
 
 ### 实质内容（研究笔记必选）
 
-- [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](PROOF_INDEX.md) 衔接
+- [ ] 含 Def/Axiom/定理或与 [PROOF_INDEX](./PROOF_INDEX.md) 衔接
 - [ ] 至少 1 段可运行 Rust 代码（索引/概览类可放宽）
 - [ ] 至少 1 个具体场景（非泛泛描述）
 - [ ] 至少 1 个反例或边界说明
 - [ ] 至少 1 处链接至 formal_methods/type_theory
 
-详见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](CONTENT_ENHANCEMENT.md) 实质内容自检表。
+详见 [BEST_PRACTICES](BEST_PRACTICES.md#实质内容不足判断与修复)、[CONTENT_ENHANCEMENT](./CONTENT_ENHANCEMENT.md) 实质内容自检表。
 
 ---
 
@@ -294,7 +294,7 @@
 - [ ] **概念定义层**：本页 Def/Axiom 以表格或列表列出（或已有形式化定义小节）
 - [ ] **属性关系层**：本页定理/推论与公理/引理依赖可追溯（表格或 DAG 片段）
 - [ ] **解释论证层**：关键定理含「陈述→依赖→证明/思路→反例」块或证明思路
-- [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+- [ ] （可选）**相关思维表征**：注明对应思维导图/矩阵/证明树/决策树，见 [HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
 
 *适用*：formal_methods、type_theory、software_design_theory 核心文档；
 索引/概览类可放宽。

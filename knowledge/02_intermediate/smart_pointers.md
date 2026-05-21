@@ -868,3 +868,5 @@ fn main() {
 
 - [集合类型 (Collections)](collections.md)
 - [错误处理 (Error Handling)](error_handling.md)
+- [Rust 所有权深入](../01_fundamentals/ownership.md)
+- [Rust 借用深入](../01_fundamentals/borrowing.md)

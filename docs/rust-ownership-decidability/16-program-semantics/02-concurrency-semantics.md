@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Model]** · **[来源: POPL 2018 - RustBelt]**
 
 - [Rust 并发执行模型语义](#rust-并发执行模型语义)
   - [目录](#目录)
@@ -131,11 +131,11 @@
 
 ## 1. 引言
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 并发与并行的语义区别
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在程序语义层面，**并发（Concurrency）**与**并行（Parallelism）**具有本质区别：
 
@@ -2951,3 +2951,7 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

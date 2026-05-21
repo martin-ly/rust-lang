@@ -6,24 +6,24 @@
 ---
 
 ## 📊 审计产出文件
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心报告
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 | 优先级 |
 |-----|------|-------|
-| [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](PROJECT_COMPREHENSIVE_AUDIT_REPORT.md) | 全面审计报告 | 必读 |
-| [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md) | 完成路线图 | 必读 |
-| [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md) | 执行摘要与建议 | 必读 |
-| [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
+| [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](./PROJECT_COMPREHENSIVE_AUDIT_REPORT.md) | 全面审计报告 | 必读 |
+| [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) | 完成路线图 | 必读 |
+| [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md) | 执行摘要与建议 | 必读 |
+| [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](./AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
 
 ### 标准与模板
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 | 用途 |
 |-----|------|------|
-| [CONTENT_TEMPLATE_L2.md](CONTENT_TEMPLATE_L2.md) | L2 深度文档模板 | 新文档编写 |
+| [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md) | L2 深度文档模板 | 新文档编写 |
 
 ### 本次审计新增内容
 
@@ -75,7 +75,7 @@
 
 ### 第 1 周: 基础准备
 
-1. 阅读 [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
+1. 阅读 [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
 2. 创建 `17-unsafe-rust/` 目录
 3. 设置 CI/CD 基础流程
 
@@ -103,21 +103,21 @@
 
 ### 如果你是项目维护者
 
-1. **首先阅读**: [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
-2. **制定计划**: 参考 [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md)
-3. **质量把控**: 使用 [CONTENT_TEMPLATE_L2.md](CONTENT_TEMPLATE_L2.md)
-4. **跟踪差距**: 参考 [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
+1. **首先阅读**: [EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md](./EXECUTIVE_SUMMARY_AND_RECOMMENDATIONS.md)
+2. **制定计划**: 参考 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md)
+3. **质量把控**: 使用 [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md)
+4. **跟踪差距**: 参考 [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](./AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md)
 
 ### 如果你是内容贡献者
 
-1. **阅读模板**: [CONTENT_TEMPLATE_L2.md](CONTENT_TEMPLATE_L2.md)
-2. **选择任务**: 从 [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md) 选择
+1. **阅读模板**: [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md)
+2. **选择任务**: 从 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) 选择
 3. **遵循标准**: 确保内容达到 L2 深度
 4. **提交审核**: 通过 PR 流程
 
 ### 如果你是读者/用户
 
-1. **了解现状**: 阅读 [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](PROJECT_COMPREHENSIVE_AUDIT_REPORT.md)
+1. **了解现状**: 阅读 [PROJECT_COMPREHENSIVE_AUDIT_REPORT.md](./PROJECT_COMPREHENSIVE_AUDIT_REPORT.md)
 2. **关注进展**: 查看 [progress/](progress/README.md) 目录
 3. **提供反馈**: 提交 Issue 建议改进
 
@@ -153,13 +153,13 @@
 ### 贡献内容
 
 1. Fork 项目
-2. 遵循 [CONTENT_TEMPLATE_L2.md](CONTENT_TEMPLATE_L2.md)
+2. 遵循 [CONTENT_TEMPLATE_L2.md](./CONTENT_TEMPLATE_L2.md)
 3. 提交 PR
 4. 通过审查后合并
 
 ### 优先级任务
 
-查看 [COMPLETION_ROADMAP_2026_Q1.md](COMPLETION_ROADMAP_2026_Q1.md) 中的任务列表，优先选择 🔴 P0 级别任务。
+查看 [COMPLETION_ROADMAP_2026_Q1.md](./COMPLETION_ROADMAP_2026_Q1.md) 中的任务列表，优先选择 🔴 P0 级别任务。
 
 ---
 

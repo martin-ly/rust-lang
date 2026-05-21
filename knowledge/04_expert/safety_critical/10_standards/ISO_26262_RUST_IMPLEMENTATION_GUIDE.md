@@ -636,5 +636,7 @@ mod tool_qualification {
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [DO-178C Rust合规路径](DO_178C_RUST_COMPLIANCE_PATHWAY.md)
 - [IEC 61508 Rust实施指南](IEC_61508_RUST_IMPLEMENTATION_GUIDE.md)

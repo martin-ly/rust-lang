@@ -835,3 +835,5 @@ fn use_abstractions() {
 
 - [Coq 形式化验证指南](coq_formalization_guide.md)
 - [Academic 学术研究](README.md)
+- [Miri Tree Borrows](../miri/tree_borrows.md)
+- [Rust Reference](https://doc.rust-lang.org/reference/)

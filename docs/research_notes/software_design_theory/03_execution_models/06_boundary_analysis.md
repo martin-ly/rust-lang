@@ -65,9 +65,9 @@
 
 **定理 EB-T1（五模型安全边界）**：同步、异步、并发、并行均为纯 Safe；分布式在 FFI 场景需 unsafe，可封装为 Safe。
 
-*证明*：由 [01_synchronous](01_synchronous.md) SY-T2、[02_async](02_async.md) AS-T1、
-[03_concurrent](03_concurrent.md) CC-T1、
-[04_parallel](04_parallel.md) PL-T1、[05_distributed](05_distributed.md) DI-T1；
+*证明*：由 [01_synchronous](./01_synchronous.md) SY-T2、[02_async](./02_async.md) AS-T1、
+[03_concurrent](./03_concurrent.md) CC-T1、
+[04_parallel](./04_parallel.md) PL-T1、[05_distributed](./05_distributed.md) DI-T1；
 各模型形式化文档已给出与 ownership/borrow/type_system 的衔接。
 
 **定理 EB-T2（边界一致性）**：$B_s$、$B_p$、$B_e$ 与 [05_boundary_system](../05_boundary_system/README.md) 三维矩阵一致。

@@ -306,8 +306,8 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 | 模式 | 关系 |
 | :--- | :--- |
 | [Strategy](../03_behavioral/strategy.md) | 装饰器可持有多态策略 |
-| [Adapter](adapter.md) | 同为包装；Decorator 同接口，Adapter 转换接口 |
-| [Composite](composite.md) | Decorator 为链式，Composite 为树 |
+| [Adapter](./adapter.md) | 同为包装；Decorator 同接口，Adapter 转换接口 |
+| [Composite](./composite.md) | Decorator 为链式，Composite 为树 |
 
 ---
 

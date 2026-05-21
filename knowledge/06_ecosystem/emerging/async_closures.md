@@ -448,3 +448,12 @@ let f = async || {
 
 **最后更新**: 2026-05-19
 **状态**: 🧪 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+- [Rust 1.95 新特性](rust_1_95.md)
+- [Cargo 基础](../cargo_basics.md)

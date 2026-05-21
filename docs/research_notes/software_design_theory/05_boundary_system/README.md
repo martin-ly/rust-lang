@@ -25,9 +25,9 @@
 
 设 $D$ 为设计模式或执行模型，$B_s$、$B_p$、$B_e$ 分别为安全、支持、表达边界函数（定义见各矩阵文档）：
 
-- **Def B1**：$B_s(D) \in \{\mathrm{Safe},\, \mathrm{Unsafe},\, \mathrm{Inexpr}\}$（见 [safe_unsafe_matrix](safe_unsafe_matrix.md) Def 1.1）
-- **Def B2**：$B_p(D) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$（见 [supported_unsupported_matrix](supported_unsupported_matrix.md) Def 1.1）
-- **Def B3**：$B_e(D) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$（见 [expressive_inexpressive_matrix](expressive_inexpressive_matrix.md) Def 1.1）
+- **Def B1**：$B_s(D) \in \{\mathrm{Safe},\, \mathrm{Unsafe},\, \mathrm{Inexpr}\}$（见 [safe_unsafe_matrix](./safe_unsafe_matrix.md) Def 1.1）
+- **Def B2**：$B_p(D) \in \{\mathrm{Native},\, \mathrm{Lib},\, \mathrm{FFI}\}$（见 [supported_unsupported_matrix](./supported_unsupported_matrix.md) Def 1.1）
+- **Def B3**：$B_e(D) \in \{\mathrm{Same},\, \mathrm{Approx},\, \mathrm{NoExpr}\}$（见 [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) Def 1.1）
 
 **Axiom B1**：三维边界独立；任一维度可单独判定；组合使用时需同时满足各维约束。
 
@@ -46,9 +46,9 @@
 
 | 文档 | 内容 |
 | :--- | :--- |
-| [safe_unsafe_matrix](safe_unsafe_matrix.md) | 安全 vs 非安全边界矩阵 |
-| [supported_unsupported_matrix](supported_unsupported_matrix.md) | 支持 vs 不支持边界矩阵 |
-| [expressive_inexpressive_matrix](expressive_inexpressive_matrix.md) | 充分表达 vs 非充分表达边界矩阵 |
+| [safe_unsafe_matrix](./safe_unsafe_matrix.md) | 安全 vs 非安全边界矩阵 |
+| [supported_unsupported_matrix](./supported_unsupported_matrix.md) | 支持 vs 不支持边界矩阵 |
+| [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) | 充分表达 vs 非充分表达边界矩阵 |
 
 ---
 
@@ -65,9 +65,9 @@
 > **[来源: Rust Official Docs]**
 
 1. 查模式：在 [04_boundary_matrix](../01_design_patterns_formal/04_boundary_matrix.md) 或对应模式文档
-2. 判安全：用 [safe_unsafe_matrix](safe_unsafe_matrix.md) 决策树
-3. 判支持：用 [supported_unsupported_matrix](supported_unsupported_matrix.md) 判定
-4. 查表达：用 [expressive_inexpressive_matrix](expressive_inexpressive_matrix.md) 了解差异
+2. 判安全：用 [safe_unsafe_matrix](./safe_unsafe_matrix.md) 决策树
+3. 判支持：用 [supported_unsupported_matrix](./supported_unsupported_matrix.md) 判定
+4. 查表达：用 [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) 了解差异
 
 ---
 
@@ -76,9 +76,9 @@
 
 | 问题 | 查文档 |
 | :--- | :--- |
-| 某模式是否纯 Safe？ | [safe_unsafe_matrix](safe_unsafe_matrix.md) |
-| 需哪个 crate？ | [supported_unsupported_matrix](supported_unsupported_matrix.md) |
-| 与 GoF 有无差异？ | [expressive_inexpressive_matrix](expressive_inexpressive_matrix.md) |
+| 某模式是否纯 Safe？ | [safe_unsafe_matrix](./safe_unsafe_matrix.md) |
+| 需哪个 crate？ | [supported_unsupported_matrix](./supported_unsupported_matrix.md) |
+| 与 GoF 有无差异？ | [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) |
 | 从 OOP 迁移？ | expressive_inexpressive_matrix § 从 OOP 迁移建议 |
 
 ---
@@ -105,11 +105,11 @@
 
 **步骤 1**：按需求查模式 → [03_semantic_boundary_map](../../../archive/deprecated_20260318/03_semantic_boundary_map.md) 按需求反向查 → **Abstract Factory**。
 
-**步骤 2**：判安全 → [safe_unsafe_matrix](safe_unsafe_matrix.md) 创建型表 → **纯 Safe**。
+**步骤 2**：判安全 → [safe_unsafe_matrix](./safe_unsafe_matrix.md) 创建型表 → **纯 Safe**。
 
-**步骤 3**：判支持 → [supported_unsupported_matrix](supported_unsupported_matrix.md) → **原生**（trait + 枚举）。
+**步骤 3**：判支持 → [supported_unsupported_matrix](./supported_unsupported_matrix.md) → **原生**（trait + 枚举）。
 
-**步骤 4**：判表达 → [expressive_inexpressive_matrix](expressive_inexpressive_matrix.md) → **等价**。
+**步骤 4**：判表达 → [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) → **等价**。
 
 **结论**：可零依赖、纯 Safe、等价实现。代码见 [03_semantic_boundary_map 示例 1](../02_workflow_safe_complete_models/03_semantic_boundary_map.md#示例-1跨平台-ui-组件族)。
 
@@ -123,7 +123,7 @@
 
 **需求**：应用启动时加载配置，全局访问。
 
-**步骤**：查模式 → Singleton；判安全 → [safe_unsafe_matrix](safe_unsafe_matrix.md) 创建型 → **OnceLock 为纯 Safe**；判支持 → 原生 `std::sync::OnceLock`。
+**步骤**：查模式 → Singleton；判安全 → [safe_unsafe_matrix](./safe_unsafe_matrix.md) 创建型 → **OnceLock 为纯 Safe**；判支持 → 原生 `std::sync::OnceLock`。
 
 **结论**：`OnceLock<Config>`，零 unsafe。
 

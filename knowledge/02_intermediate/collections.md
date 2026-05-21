@@ -828,3 +828,5 @@ fn build_index(users: Vec<User>) -> HashMap<UserKey, Vec<String>> {
 
 - [错误处理 (Error Handling)](error_handling.md)
 - [泛型 (Generics)](generics.md)
+- [迭代器 (Iterators)](../01_fundamentals/iterators.md)
+- [Trait 深入 (Traits)](traits.md)

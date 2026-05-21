@@ -339,3 +339,5 @@ fn parse_args(input: &str) -> Vec<String> {
 
 - [Rust 借用与引用 (Borrowing and References)](borrowing.md)
 - [Rust 生命周期 (Lifetimes)](lifetimes.md)
+- [Rust 所有权深入](ownership.md)
+- [集合类型 (Collections)](../02_intermediate/collections.md)

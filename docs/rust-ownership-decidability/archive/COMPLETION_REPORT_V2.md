@@ -7,12 +7,14 @@
 > **最后更新**: 2026-03-04
 
 ## 新增内容概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在 V1 基础上，我们进行了以下深度扩展：
 
 ### 理论基础深化
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ **分离逻辑专题** (00-03-separation-logic.md): 9,788 bytes
   - Reynolds 的分离逻辑基础
@@ -21,7 +23,8 @@
   - RustBelt 应用
 
 ### 核心概念扩展
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ **生命周期深度解析** (01-03-lifetimes.md): 9,102 bytes
   - NLL 详解

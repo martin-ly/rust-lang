@@ -3,12 +3,12 @@
 欢迎来到 Rust 扩展主题文档集。本文档涵盖了 Rust 编程语言的高级特性和专业应用领域，为已经掌握 Rust 基础的开发者提供深入的技术指导。
 
 ## 文档结构
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档集包含以下六个核心主题：
 
 ### 1. [FFI 互操作性](./ffi-interoperability.md)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 探索 Rust 与外部代码（特别是 C 语言）的交互能力：
 
@@ -20,7 +20,7 @@
 **适用场景**：系统编程、遗留系统集成、性能关键型库开发
 
 ### 2. [过程宏开发](../../archive/deprecated_20260318/proc-macros.md)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 掌握 Rust 元编程的核心技术：
 

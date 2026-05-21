@@ -140,7 +140,7 @@ research_notes/
 | **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/)；当前覆盖 **Rust 2021 + rustc 1.93** | 形式化规范引用 |
 | **本项目** | **Rust 1.94.0+ (Edition 2024)** | 所有 research_notes 元信息与示例默认版本 |
 
-新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 权威来源对齐。
+新文档引用 FLS 或 releases 时可直接引用本小节；详见 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) § 权威来源对齐。
 
 ---
 

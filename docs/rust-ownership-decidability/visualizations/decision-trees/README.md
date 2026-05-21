@@ -21,7 +21,7 @@
 
 | 决策树 | 场景 |
 |:---|:---|
-| [类型选择决策树](type-selection-decision-tree.md) | 智能指针、引用、集合选择 |
+| [类型选择决策树](./type-selection-decision-tree.md) | 智能指针、引用、集合选择 |
 
 ---
 

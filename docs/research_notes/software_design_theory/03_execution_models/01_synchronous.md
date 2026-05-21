@@ -213,7 +213,7 @@ main()
 | 场景 | ✅ | 典型场景、何时选择同步 |
 | 反例 | ✅ | 阻塞 I/O、递归过深 |
 | 衔接 | ✅ | async、并发对比、ownership |
-| 权威对应 | ✅ | [formal_methods](../../formal_methods/README.md)、[06_boundary_analysis](06_boundary_analysis.md) |
+| 权威对应 | ✅ | [formal_methods](../../formal_methods/README.md)、[06_boundary_analysis](./06_boundary_analysis.md) |
 
 ---
 

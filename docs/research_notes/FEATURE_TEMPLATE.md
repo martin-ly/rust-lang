@@ -11,7 +11,7 @@
 ## 模板结构
 > **[来源: Rust Official Docs]**
 
-除 [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
+除 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) 所列 13 项核心特性外，其余特性采用以下**精简模板**：
 
 | 列 | 必填 | 说明 |
 | :--- | :--- | :--- |
@@ -53,15 +53,15 @@
 
 ## 与 RUST_193 的对应
 
-[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
+[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
 
 - **概念** ← 动机 + 设计决策（合并为一句话）
 - **形式化引用** ← 形式化列
 - **反例** ← 反例列
 
-**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md)。
+**核心特性**（13 项）采用完整链，见 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md)。
 
-**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 各表。
+**其余特性**（79 项）采用本精简模板，数据见 [RUST_193](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 各表。
 
 ---
 
@@ -69,8 +69,8 @@
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性完整表格 |
-| [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | 92 项特性完整表格 |
+| [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md) | 13 项核心特性完整链 |
 
 ---
 

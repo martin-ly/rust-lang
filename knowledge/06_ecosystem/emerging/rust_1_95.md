@@ -561,5 +561,7 @@ assert_matches!(result, Ok(_));
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Async Closures (异步闭包)](async_closures.md)
 - [Generic Const Expressions (泛型常量表达式)](generic_const_exprs.md)

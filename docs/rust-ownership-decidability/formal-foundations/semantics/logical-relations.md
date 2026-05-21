@@ -1,7 +1,7 @@
 # Rust 逻辑关系形式化理论
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 逻辑关系形式化理论](#rust-逻辑关系形式化理论)
   - [目录](#目录)
@@ -102,13 +102,13 @@
 ---
 
 ## 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 逻辑关系（Logical Relations）是编程语言理论中用于证明类型系统性质的核心技术。
 它通过将语法类型解释为语义关系，建立起类型与行为之间的深层联系。
 
 ### 形式化目标
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档旨在形式化 Rust 相关逻辑关系理论：
 
@@ -791,3 +791,8 @@ Definition borrow (ℓ: lifetime) (P: iProp) : iProp :=
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

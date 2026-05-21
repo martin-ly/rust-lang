@@ -6,7 +6,7 @@
 
 ## 📊 领域覆盖概览
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 领域 | 文档数 | 主要 Crates | 完成度 |
 |:-----|:------:|:------------|:------:|
@@ -31,38 +31,38 @@
 
 ## 🔗 快速导航
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 按领域
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 🌐 Web 开发
 
 - [Web 开发指南](../15-application-domains/web-development.md)
-- [Actix-web 分析](actix-web-formal-analysis.md)
+- [Actix-web 分析](./actix-web-formal-analysis.md)
 - Axum 分析 (待补充)
-- [Serde 深度分析](serde-formal-analysis-deep.md)
+- [Serde 深度分析](./serde-formal-analysis-deep.md)
 
 #### 💾 数据库
 
 - [数据库系统实现指南](database/README.md) ⭐ 完整指南
-- [Diesel ORM 分析](diesel-formal-analysis.md)
-- [SQLx 分析](sqlx-formal-analysis.md)
+- [Diesel ORM 分析](./diesel-formal-analysis.md)
+- [SQLx 分析](./sqlx-formal-analysis.md)
 - SeaORM 分析 (待补充)
 
 #### 🤖 AI/ML
 
 - [AI/ML 开发指南](ml-ai/README.md)
-- [ndarray 分析](ndarray-formal-analysis.md)
+- [ndarray 分析](./ndarray-formal-analysis.md)
 - Burn 框架 *(待添加)*
 - Candle 框架 *(待添加)*
 
 #### 🎮 游戏开发
 
 - [游戏开发指南](gamedev/README.md)
-- [Bevy ECS 分析](bevy-ecs-formal-analysis.md)
-- [wgpu 分析](wgpu-glium-formal-analysis.md)
+- [Bevy ECS 分析](./bevy-ecs-formal-analysis.md)
+- [wgpu 分析](./wgpu-glium-formal-analysis.md)
 
 #### 🔗 区块链
 
@@ -86,7 +86,7 @@
 #### 🕸️ WASM
 
 - [WASM 开发指南](wasm/README.md)
-- [wasm-bindgen 分析](wasm-bindgen-formal-analysis.md)
+- [wasm-bindgen 分析](./wasm-bindgen-formal-analysis.md)
 
 ---
 
@@ -98,16 +98,16 @@
 |:-----|:-----|:----:|:-----|
 | [数据库系统实现指南](database/README.md) | 数据库 | 1000+ | 完整存储引擎实现 |
 | [音视频处理指南](media/README.md) | 多媒体 | 440+ | 完整播放器架构 |
-| [Tokio 运行时深度分析](tokio-runtime-deep.md) | 异步 | 800+ | 运行时内部机制 |
-| [Serde 深度分析](serde-formal-analysis-deep.md) | 序列化 | 700+ | 宏系统分析 |
+| [Tokio 运行时深度分析](./tokio-runtime-deep.md) | 异步 | 800+ | 运行时内部机制 |
+| [Serde 深度分析](./serde-formal-analysis-deep.md) | 序列化 | 700+ | 宏系统分析 |
 
 ### 标准库分析系列
 
-- [std-vec-formal-analysis.md](std-vec-formal-analysis.md) - Vec 实现分析
-- [std-hashmap-formal-analysis.md](std-hashmap-formal-analysis.md) - HashMap 实现
-- [std-iterator-formal-analysis.md](std-iterator-formal-analysis.md) - 迭代器系统
-- [std-string-formal-analysis.md](std-string-formal-analysis.md) - String 实现
-- [std-sync-primitives-formal-analysis.md](std-sync-primitives-formal-analysis.md) - 同步原语
+- [std-vec-formal-analysis.md](./std-vec-formal-analysis.md) - Vec 实现分析
+- [std-hashmap-formal-analysis.md](./std-hashmap-formal-analysis.md) - HashMap 实现
+- [std-iterator-formal-analysis.md](./std-iterator-formal-analysis.md) - 迭代器系统
+- [std-string-formal-analysis.md](./std-string-formal-analysis.md) - String 实现
+- [std-sync-primitives-formal-analysis.md](./std-sync-primitives-formal-analysis.md) - 同步原语
 
 ---
 
@@ -179,8 +179,8 @@
 
 ## 📚 相关资源
 
-- [现代 Crates 索引](MODERN_CRATES_INDEX.md)
-- [案例研究主 README](README.md)
+- [现代 Crates 索引](./MODERN_CRATES_INDEX.md)
+- [案例研究主 README](./README.md)
 - [形式化基础](../formal-foundations/README.md)
 
 ---

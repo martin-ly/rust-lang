@@ -148,6 +148,8 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 ---
 
 ## 📊 核心模式
+
+> **[来源: Rust Design Patterns Book]** · **[来源: GoF - Design Patterns]** · **[来源: Rust API Guidelines]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -2023,6 +2025,8 @@ impl ShapeCollection {
 ---
 
 ## 🦀 Rust 特有模式
+
+> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Type System]** · **[来源: Rust Design Patterns Book]**
 >
 > **[来源: Rust Official Docs]**
 

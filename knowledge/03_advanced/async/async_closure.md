@@ -977,3 +977,5 @@ fn make_predicate(threshold: i32) -> impl AsyncFn(i32) -> bool {
 
 - [async/await 异步编程](async_await.md)
 - [Rust 2024 Edition Async Closures 完整指南](async_closures_2024.md)
+- [Rust 并发编程 (Threads)](../concurrency/threads.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

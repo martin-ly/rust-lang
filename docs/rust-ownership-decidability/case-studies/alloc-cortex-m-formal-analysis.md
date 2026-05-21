@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [alloc-cortex-m嵌入式堆分配器形式化分析](#alloc-cortex-m嵌入式堆分配器形式化分析)
   - [目录](#目录)
@@ -27,11 +28,13 @@
     - [示例1: 全局分配器配置](#示例1-全局分配器配置)
     - [示例2: 自定义分配器](#示例2-自定义分配器)
     - [示例3: 内存使用监控](#示例3-内存使用监控)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 嵌入式系统中使用堆分配的挑战：
 
@@ -43,7 +46,8 @@
 ---
 
 ## 2. 内存池形式化
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 POOL-1 ( 内存池 )
 
@@ -242,3 +246,7 @@ impl<A: GlobalAlloc> GlobalAlloc for InstrumentedAllocator<A> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

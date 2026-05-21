@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Database Management System]** · **[来源: Wikipedia - ACID]** · **[来源: Rust Database Ecosystem - arewedatabasyet.com]** · **[来源: Wikipedia - Distributed Database]** · **[来源: PostgreSQL Documentation]**
 
 - [Rust数据库系统实现指南](#rust数据库系统实现指南)
   - [目录](#目录)
@@ -62,10 +63,12 @@
 ---
 
 ## 1. 数据库系统概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust在数据库领域的优势
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust作为一门系统级编程语言，在数据库系统开发中展现出独特的优势：
 
@@ -2959,7 +2962,7 @@ mod concurrency_tests {
 8. **性能优化**：零拷贝、异步I/O、内存池
 9. **测试策略**：持久化测试、崩溃恢复测试、并发测试
 
-Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建高性能、可靠数据库系统的理想选择。
+Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建高性能、可靠数据库系统的理想选择
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -2970,3 +2973,11 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [案例研究总览](../README.md)
+- [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)

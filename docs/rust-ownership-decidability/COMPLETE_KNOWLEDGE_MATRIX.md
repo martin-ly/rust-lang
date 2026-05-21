@@ -5,7 +5,7 @@
 ---
 
 ## 矩阵一：概念 × 层次
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 概念 | 形式化层 | 理论层 | 模式层 | 实践层 |
 |:-----|:---------|:-------|:-------|:-------|
@@ -21,7 +21,7 @@
 ---
 
 ## 矩阵二：定理 × 应用
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 定理 | 编译器模块 | 保证的性质 | 用户可见效果 |
 |:-----|:-----------|:-----------|:-------------|
@@ -35,7 +35,7 @@
 ---
 
 ## 矩阵三：错误 × 理论 × 修复
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 错误代码 | 错误信息 | 理论根源 | 理论解释 | 修复模式 |
 |:---------|:---------|:---------|:---------|:---------|
@@ -149,3 +149,8 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

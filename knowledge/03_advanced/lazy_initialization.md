@@ -880,3 +880,5 @@ fn reload_config() {
 
 - [性能优化](performance_optimization.md)
 - [03 - 高级 Rust](README.md)
+- [Rust 并发编程 (Threads)](concurrency/threads.md)
+- [Rust 所有权深入](../01_fundamentals/ownership.md)

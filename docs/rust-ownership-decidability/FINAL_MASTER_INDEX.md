@@ -7,7 +7,7 @@
 ---
 
 ## 📋 文档总览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档库包含 **4个层次** 的内容，从理论到实践，从抽象到具体：
 
@@ -28,27 +28,27 @@
 ---
 
 ## 📚 完整文档清单
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🎯 核心文档 (必读)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 描述 | 阅读时间 | 优先级 |
 |------|------|---------|--------|
-| [README.md](README.md) | 项目总览和导航 | 5分钟 | ⭐⭐⭐ |
-| [FINAL_EXECUTIVE_SUMMARY.md](FINAL_EXECUTIVE_SUMMARY.md) | 执行摘要 | 10分钟 | ⭐⭐⭐ |
-| [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) | 系统化知识结构 | 60分钟 | ⭐⭐⭐ |
-| [VISUAL_THINKING_GUIDE.md](VISUAL_THINKING_GUIDE.md) | 可视化学习 | 40分钟 | ⭐⭐⭐ |
-| [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) | 完整示例集 | 90分钟 | ⭐⭐⭐ |
+| [README.md](./README.md) | 项目总览和导航 | 5分钟 | ⭐⭐⭐ |
+| [FINAL_EXECUTIVE_SUMMARY.md](./FINAL_EXECUTIVE_SUMMARY.md) | 执行摘要 | 10分钟 | ⭐⭐⭐ |
+| [MASTER_COMPREHENSIVE_ANALYSIS.md](./MASTER_COMPREHENSIVE_ANALYSIS.md) | 系统化知识结构 | 60分钟 | ⭐⭐⭐ |
+| [VISUAL_THINKING_GUIDE.md](./VISUAL_THINKING_GUIDE.md) | 可视化学习 | 40分钟 | ⭐⭐⭐ |
+| [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](./COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) | 完整示例集 | 90分钟 | ⭐⭐⭐ |
 
 ### 🔬 形式化理论
 
 | 文档 | 描述 |
 |------|------|
-| [RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md](RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md) | 研究计划 |
+| [RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md](./RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md) | 研究计划 |
 | [theorems/decidability_theorems.md](theorems/decidability_theorems.md) | 核心定理 |
 | [coq-formalization/README.md](coq-formalization/README.md) | Coq 代码入口 |
-| [FINAL_DOCUMENTATION.md](FINAL_DOCUMENTATION.md) | 完整技术文档 |
+| [FINAL_DOCUMENTATION.md](./FINAL_DOCUMENTATION.md) | 完整技术文档 |
 
 ### 🗂️ 元模型
 
@@ -241,13 +241,13 @@ Rust 示例:      ~2,000 行
 
 ### 对于初学者
 
-1. 从 [VISUAL_THINKING_GUIDE.md](VISUAL_THINKING_GUIDE.md) 开始
-2. 阅读 [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) 的示例
+1. 从 [VISUAL_THINKING_GUIDE.md](./VISUAL_THINKING_GUIDE.md) 开始
+2. 阅读 [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](./COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) 的示例
 3. 遇到问题时查阅错误诊断部分
 
 ### 对于进阶学习者
 
-1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
+1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](./MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
 2. 研究 [coq-formalization/README.md](coq-formalization/README.md) 理解严格证明
 3. 分析边界案例和反例
 

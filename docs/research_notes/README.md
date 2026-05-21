@@ -166,7 +166,7 @@ research_notes/
 
 - [按证明深度](PROOF_INDEX.md#-按证明深度导航) — L1 证明思路 / L2 完整证明 / L3 机器可检查
 - [按抽象层次](FORMAL_FULL_MODEL_OVERVIEW.md#四抽象层次对应) — 语言级 / MIR 级 / 内存级
-- [形式化全模型入口](FORMAL_FULL_MODEL_OVERVIEW.md) — 统一形式系统、公理列表、定理依赖 DAG
+- [形式化全模型入口](./FORMAL_FULL_MODEL_OVERVIEW.md) — 统一形式系统、公理列表、定理依赖 DAG
 
 **论证系统指南**: [FORMAL_PROOF_SYSTEM_GUIDE.md](./FORMAL_PROOF_SYSTEM_GUIDE.md) - 论证缺口分析、概念-公理-定理映射、反例与证明树索引
 

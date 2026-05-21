@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.94.0+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 全面梳理 Rust 中「安全且编译期可判定」的机制，每项含概念定义、属性关系、解释论证、形式证明引用、反例；与 [formal_methods](formal_methods/README.md)、[type_theory](type_theory/README.md) 双向链接
-> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](HIERARCHICAL_MAPPING_AND_SUMMARY.md)
+> **上位**: [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md)、[HIERARCHICAL_MAPPING_AND_SUMMARY](./HIERARCHICAL_MAPPING_AND_SUMMARY.md)
 
 ---
 
@@ -48,9 +48,9 @@
 
 - **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](formal_methods/ownership_model.md) 规则 1–3、Def 1.1–1.5。
 - **属性关系**：为借用的前提；borrow 规则 5–8 在单所有者下定义。
-- **解释论证**：无 GC 内存安全；设计理由见 [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md)。
-- **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](PROOF_INDEX.md)。
-- **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+- **解释论证**：无 GC 内存安全；设计理由见 [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md)。
+- **形式证明**：定理 T2 唯一性、T3 内存安全；[PROOF_INDEX](./PROOF_INDEX.md)。
+- **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
 ### 3.2 借用
 > **[来源: Rust Official Docs]**
@@ -58,7 +58,7 @@
 - **概念定义**：&T/&mut T、可变独占、不可变可多；[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 规则 5–8。
 - **属性关系**：依赖所有权；与生命周期协同；跨线程时需 Send/Sync。
 - **解释论证**：数据竞争自由；与 RustBelt/Stacked Borrows 对应。
-- **形式证明**：定理 T1 数据竞争自由；[PROOF_INDEX](PROOF_INDEX.md)。
+- **形式证明**：定理 T1 数据竞争自由；[PROOF_INDEX](./PROOF_INDEX.md)。
 - **反例**：双重可变借用、悬垂引用。
 
 ### 3.3 生命周期
@@ -144,14 +144,14 @@
 | :--- | :--- |
 | 思维导图 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md)；安全可判定机制节点 → 本总览 §二、§三 |
 | 概念多维矩阵 | [formal_methods README §六篇并表](formal_methods/README.md#formal_methods-六篇并表)；[SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) §3.1 |
-| 决策树 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；[DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) § Send/Sync |
-| 推理证明树 | [PROOF_INDEX](PROOF_INDEX.md)；[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) |
+| 决策树 | [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；[DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) § Send/Sync |
+| 推理证明树 | [PROOF_INDEX](./PROOF_INDEX.md)；[PROOF_GRAPH_NETWORK](../04_thinking/PROOF_GRAPH_NETWORK.md) |
 
 ---
 
 ## 六、并发与异步族、Trait 族 四维对比表（完备特性对比子集）
 
-在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
+在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
 
 ### 6.1 并发与异步族
 
@@ -187,8 +187,8 @@
 
 - [formal_methods README](formal_methods/README.md) — 六篇并表、公理-定理索引
 - [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) — 意见与建议、阶段 A–E 计划
-- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性与形式化映射
-- [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) — 反例索引
+- [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性与形式化映射
+- [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) — 反例索引
 
 ---
 

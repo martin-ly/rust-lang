@@ -362,3 +362,10 @@ TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [安全关键系统 README](./README.md)

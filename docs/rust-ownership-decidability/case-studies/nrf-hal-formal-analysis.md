@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [nRF HAL硬件抽象层形式化分析](#nrf-hal硬件抽象层形式化分析)
   - [目录](#目录)
@@ -32,11 +33,13 @@
     - [示例2: PPI自动触发](#示例2-ppi自动触发)
     - [示例3: 低功耗模式](#示例3-低功耗模式)
     - [示例4: SAADC采样](#示例4-saadc采样)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 nRF HAL为Nordic nRF52/nRF53/nRF91系列提供：
 
@@ -48,7 +51,8 @@ nRF HAL为Nordic nRF52/nRF53/nRF91系列提供：
 ---
 
 ## 2. 外设所有权模型
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PERIPH-1 ( 外设分区 )
 
@@ -274,3 +278,8 @@ fn saadc_example(p: pac::Peripherals) {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

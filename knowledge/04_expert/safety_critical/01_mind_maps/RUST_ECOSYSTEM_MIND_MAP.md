@@ -152,5 +152,7 @@
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [学术研究全景](ACADEMIC_RESEARCH_LANDSCAPE.md)
 - [综合语言对比矩阵](../02_matrices/COMPREHENSIVE_LANGUAGE_COMPARISON_MATRIX.md)

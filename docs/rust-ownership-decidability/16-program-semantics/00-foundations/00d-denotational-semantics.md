@@ -1,7 +1,7 @@
 # 指称语义 (Denotational Semantics)
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [指称语义 (Denotational Semantics)](#指称语义-denotational-semantics)
   - [目录](#目录)
@@ -47,7 +47,7 @@
   - [参考文献](#参考文献)
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 指称语义（Denotational Semantics）通过将程序映射到数学对象（通常是域论中的元素）来定义程序的含义。
 它回答了"程序表示什么"的问题，而不是"程序如何运行"。
@@ -57,7 +57,7 @@
 ---
 
 ## 2. 指称语义的基本思想
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 合成性 (Compositionality)
 
@@ -489,3 +489,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

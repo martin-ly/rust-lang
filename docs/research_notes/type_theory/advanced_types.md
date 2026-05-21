@@ -293,7 +293,7 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 ### 定义依赖链（前置概念）
 
-以下定义依赖 [type_system_foundations](type_system_foundations.md) 与 [trait_system_formalization](trait_system_formalization.md) 中的基础概念：
+以下定义依赖 [type_system_foundations](./type_system_foundations.md) 与 [trait_system_formalization](./trait_system_formalization.md) 中的基础概念：
 
 | 前置概念 | 来源 | 在本文档中的使用 |
 | :--- | :--- | :--- |
@@ -334,13 +334,13 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 ### 4. 类型系统扩展
 
-**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
+**Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](./type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
 
 **Axiom AT2**：const 泛型参数必须为编译时常量；运行时常量不能作为类型参数；违反则编译错误。
 
 **定理 AT-T1 (GAT 类型安全)**：若 GAT $A[P]$ 的类型推导正确，则 GAT 的使用是类型安全的。
 
-*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
+*证明*：由 Def 1.1–1.3；GAT 约束 $A[P] : B[P]$ 在类型推导时检查；[type_system_foundations](./type_system_foundations.md) 定理 4、5 保证推导正确性；违反则编译错误。依 Axiom AT1。∎
 
 **定理 AT-T2 (const 泛型类型安全)**：若 const 泛型类型 $T[N]$ 的 const 参数 $N$ 为编译时常量，则类型安全。
 
@@ -356,7 +356,7 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 *证明*：由 Def 3.1–3.2；依赖仅限于编译时常量；类型检查在编译时完成；由 AT-T1、AT-T2 组合。∎
 
-**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](trait_system_formalization.md) 解析正确性。
+**引理 AT-L1 (GAT 与 trait 衔接)**：GAT 约束 $A[P] : B[P]$ 在 `impl` 解析时检查；满足 [trait_system_formalization](./trait_system_formalization.md) 解析正确性。
 
 *证明*：由 Def 1.3；GAT 为 trait 关联类型扩展；impl 解析在类型检查阶段；约束违反则编译错误。∎
 

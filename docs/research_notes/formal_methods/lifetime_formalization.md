@@ -507,7 +507,7 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 
 **定理 LF-T3（推断算法正确性）**: 生命周期推断算法生成的约束系统是一致的，当且仅当程序是良型的。
 
-*证明*：（1）⇒：若程序良型，则 [borrow_checker_proof](borrow_checker_proof.md) 与 [ownership_model](ownership_model.md) 保证引用使用合法；约束生成规则（Def 3.1）生成与程序语义一致的约束；由 Axiom LF2，一致则有解。（2）⇐：若约束系统一致，则存在满足所有约束的 $\Lambda$；约束反映程序语义，故程序良型。∎
+*证明*：（1）⇒：若程序良型，则 [borrow_checker_proof](./borrow_checker_proof.md) 与 [ownership_model](./ownership_model.md) 保证引用使用合法；约束生成规则（Def 3.1）生成与程序语义一致的约束；由 Axiom LF2，一致则有解。（2）⇐：若约束系统一致，则存在满足所有约束的 $\Lambda$；约束反映程序语义，故程序良型。∎
 
 **定义 3.2 (生命周期推断算法形式化)**:
 

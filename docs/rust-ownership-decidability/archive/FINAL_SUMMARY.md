@@ -5,7 +5,8 @@
 > **完成时间**: 2026-03-04
 
 ## 项目成果概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 我们成功创建了一套**研究级别的综合性文档体系**，全面覆盖 Rust 所有权系统与可判定性理论的各个维度。
 
@@ -26,10 +27,12 @@
 ```
 
 ## 文档结构全景
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 00. 理论基础 (3文件 / 18.8KB)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **线性逻辑**: Girard 1987, Curry-Howard 对应
 - **仿射类型**: Kopylov 可判定性定理

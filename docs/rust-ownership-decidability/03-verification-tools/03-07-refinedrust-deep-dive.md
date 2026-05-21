@@ -8,7 +8,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [RefinedRust 深度解析](#refinedrust-深度解析)
   - [目录](#目录)
@@ -46,14 +47,17 @@
     - [9.1 何时使用 RefinedRust](#91-何时使用-refinedrust)
     - [9.2 入门资源](#92-入门资源)
   - [参考文献](#参考文献)
+  - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
 
 ---
 
 ## 1. 引言与背景
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 研究动机
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 的所有权类型系统在编译时静态保证内存安全，使其特别适合安全关键系统。
 近年来，出现了许多自动化演绎验证工具来建立 Rust 代码的功能正确性。
@@ -605,3 +609,7 @@ RefinedRust 原型目前**不支持**:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

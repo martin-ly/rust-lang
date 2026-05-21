@@ -485,5 +485,7 @@ L4续证 (每5年):
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [功能安全认证备考指南](CERTIFICATION_PREP_GUIDE.md)
 - [动手实验练习](HANDS_ON_LAB_EXERCISES.md)

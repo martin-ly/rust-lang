@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference - Interior Mutability]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: TRPL Ch. 15]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion]
 
 - [内部可变性模式](#内部可变性模式)
   - [目录](#目录)
@@ -65,10 +65,10 @@
 ---
 
 ## 1. 形式化定义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 内部可变性的形式化模型
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (内部可变性): 内部可变性是指在拥有不可变引用 (`&T`) 的情况下修改 `T` 内部状态的能力。
 

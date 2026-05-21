@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust类型推断的可判定性与复杂性](#rust类型推断的可判定性与复杂性)
   - [目录](#目录)
@@ -44,11 +45,13 @@
     - [算法 5.3 (Chalk风格Trait求解)](#算法-53-chalk风格trait求解)
   - [6. 复杂度对比](#6-复杂度对比)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 类型推断是静态类型语言的核心功能，它允许编译器自动推导表达式的类型，减少程序员的类型注解负担。
 
@@ -70,7 +73,8 @@
 ---
 
 ## 2. 类型推断问题形式化
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语法定义
 
@@ -515,3 +519,7 @@ solveTrait τ trait args = do
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

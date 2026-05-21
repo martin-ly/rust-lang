@@ -303,7 +303,7 @@ struct GlyphInstance {
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Proxy](proxy.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
+| [Proxy](./proxy.md) | Proxy 可包装 Flyweight 做延迟/缓存 |
 | [Singleton](../01_creational/singleton.md) | 同为共享；Flyweight 按 key 共享，Singleton 全局唯一 |
 | 对象池（扩展） | 共享池；Flyweight 不可变，Pool 可回收 |
 

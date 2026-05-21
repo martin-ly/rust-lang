@@ -266,7 +266,7 @@ Axiom BR2 (委托借用)
 
 | 模式 | 关系 |
 | :--- | :--- |
-| [Adapter](adapter.md) | Bridge 解耦；Adapter 适配已有接口 |
+| [Adapter](./adapter.md) | Bridge 解耦；Adapter 适配已有接口 |
 | [Strategy](../03_behavioral/strategy.md) | 实现可视为策略 |
 | [Abstract Factory](../01_creational/abstract_factory.md) | 工厂可创建抽象+实现组合 |
 

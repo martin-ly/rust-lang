@@ -614,8 +614,8 @@ C6 共享借用 ⊥ C7 可变借用
 
 **参考文档**:
 
-- [CONCEPT_HIERARCHY_FRAMEWORK.md](CONCEPT_HIERARCHY_FRAMEWORK.md) - 层间映射
-- [PROOF_INDEX.md](PROOF_INDEX.md) - 定理索引
+- [CONCEPT_HIERARCHY_FRAMEWORK.md](./CONCEPT_HIERARCHY_FRAMEWORK.md) - 层间映射
+- [PROOF_INDEX.md](./PROOF_INDEX.md) - 定理索引
 
 ---
 
@@ -637,10 +637,10 @@ C6 共享借用 ⊥ C7 可变借用
 
 | 文档 | 关系类型 | 用途 |
 | :--- | :--- | :--- |
-| [CONCEPT_HIERARCHY_FRAMEWORK](CONCEPT_HIERARCHY_FRAMEWORK.md) | 层次关系 | 五层概念体系 |
-| [ARGUMENTATION_CHAIN_AND_FLOW](ARGUMENTATION_CHAIN_AND_FLOW.md) | 论证关系 | 论证脉络关系 |
-| [FORMAL_FULL_MODEL_OVERVIEW](FORMAL_FULL_MODEL_OVERVIEW.md) | 形式化关系 | 统一形式系统 |
-| [PROOF_INDEX](PROOF_INDEX.md) | 证明依赖 | 定理索引 |
+| [CONCEPT_HIERARCHY_FRAMEWORK](./CONCEPT_HIERARCHY_FRAMEWORK.md) | 层次关系 | 五层概念体系 |
+| [ARGUMENTATION_CHAIN_AND_FLOW](./ARGUMENTATION_CHAIN_AND_FLOW.md) | 论证关系 | 论证脉络关系 |
+| [FORMAL_FULL_MODEL_OVERVIEW](./FORMAL_FULL_MODEL_OVERVIEW.md) | 形式化关系 | 统一形式系统 |
+| [PROOF_INDEX](./PROOF_INDEX.md) | 证明依赖 | 定理索引 |
 
 ---
 

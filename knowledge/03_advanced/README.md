@@ -25,9 +25,9 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [async/async_await.md](async/async_await.md) | async/await 基础 | ⭐⭐⭐⭐ |
-| [async/async_closure.md](async/async_closure.md) | Async Closures | ⭐⭐⭐⭐ |
-| [async/async_closures_2024.md](async/async_closures_2024.md) | Async Closures 2024 | ⭐⭐⭐⭐ |
+| [async/async_await.md](./async/async_await.md) | async/await 基础 | ⭐⭐⭐⭐ |
+| [async/async_closure.md](./async/async_closure.md) | Async Closures | ⭐⭐⭐⭐ |
+| [async/async_closures_2024.md](./async/async_closures_2024.md) | Async Closures 2024 | ⭐⭐⭐⭐ |
 
 ### 并发编程
 >
@@ -35,9 +35,9 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [concurrency/threads.md](concurrency/threads.md) | 线程基础 | ⭐⭐⭐ |
-| [concurrency/atomics.md](concurrency/atomics.md) | 原子操作 | ⭐⭐⭐⭐ |
-| [concurrency/synchronization.md](concurrency/synchronization.md) | 同步原语 | ⭐⭐⭐⭐ |
+| [concurrency/threads.md](./concurrency/threads.md) | 线程基础 | ⭐⭐⭐ |
+| [concurrency/atomics.md](./concurrency/atomics.md) | 原子操作 | ⭐⭐⭐⭐ |
+| [concurrency/synchronization.md](./concurrency/synchronization.md) | 同步原语 | ⭐⭐⭐⭐ |
 
 ### Unsafe 与底层
 >
@@ -45,25 +45,25 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [unsafe/unsafe_rust.md](unsafe/unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
-| [unsafe/ffi.md](unsafe/ffi.md) | FFI | ⭐⭐⭐⭐ |
-| [unsafe/maybe_uninit.md](unsafe/maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
-| [unsafe/inline_asm.md](unsafe/inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
+| [unsafe/unsafe_rust.md](./unsafe/unsafe_rust.md) | Unsafe 基础 | ⭐⭐⭐⭐ |
+| [unsafe/ffi.md](./unsafe/ffi.md) | FFI | ⭐⭐⭐⭐ |
+| [unsafe/maybe_uninit.md](./unsafe/maybe_uninit.md) | MaybeUninit | ⭐⭐⭐⭐ |
+| [unsafe/inline_asm.md](./unsafe/inline_asm.md) | 内联汇编 | ⭐⭐⭐⭐⭐ |
 
 ### 类型与元编程
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [lazy_initialization.md](lazy_initialization.md) | 延迟初始化 | ⭐⭐⭐ |
-| [type_driven_correctness.md](type_driven_correctness.md) | 类型驱动正确性 | ⭐⭐⭐⭐⭐ |
-| [macros/declarative.md](macros/declarative.md) | 声明宏 | ⭐⭐⭐⭐ |
-| [macros/procedural.md](macros/procedural.md) | 过程宏 | ⭐⭐⭐⭐ |
+| [lazy_initialization.md](./lazy_initialization.md) | 延迟初始化 | ⭐⭐⭐ |
+| [type_driven_correctness.md](./type_driven_correctness.md) | 类型驱动正确性 | ⭐⭐⭐⭐⭐ |
+| [macros/declarative.md](./macros/declarative.md) | 声明宏 | ⭐⭐⭐⭐ |
+| [macros/procedural.md](./macros/procedural.md) | 过程宏 | ⭐⭐⭐⭐ |
 
 ### 性能
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [performance_optimization.md](performance_optimization.md) | 性能优化 | ⭐⭐⭐⭐ |
+| [performance_optimization.md](./performance_optimization.md) | 性能优化 | ⭐⭐⭐⭐ |
 
 ## ⏱️ 预计时间
 
@@ -100,3 +100,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [并发编程](./concurrency/threads.md)

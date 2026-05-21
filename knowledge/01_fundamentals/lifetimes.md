@@ -795,3 +795,5 @@ fn foo(x: &mut Vec<&'static str>, y: &'static str) {
 
 - [Rust 借用与引用 (Borrowing and References)](borrowing.md)
 - [迭代器 (Iterators)](iterators.md)
+- [Rust 所有权 (Ownership)](ownership.md)
+- [泛型深入 (Generics)](../02_intermediate/generics.md)

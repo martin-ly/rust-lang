@@ -5,7 +5,7 @@
 > **Rust 版本**: 1.93.1+ (Edition 2024)
 > **状态**: ✅ 已完成
 > **用途**: 针对「设计模式、分布式设计模式、工作流设计模式」全面论证不足，输出批判性意见与建议、可持续推进计划
-> **上位文档**: [00_MASTER_INDEX](00_MASTER_INDEX.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
+> **上位文档**: [00_MASTER_INDEX](./00_MASTER_INDEX.md)、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN
 
 ---
 

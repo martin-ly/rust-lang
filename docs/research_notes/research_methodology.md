@@ -88,7 +88,7 @@
 
 **Axiom RM1**：形式化证明保证正确性；实验验证提供经验支持；二者互补，不可相互替代。见 [experiments/README](experiments/README.md) 推论 EX-C1。
 
-**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链。
+**定理 RM-T1（方法衔接）**：若研究 $Q$ 的形式化定理 $T$ 有证明，且实验 $E$ 验证 $T$，则 $Q$ 的结果可追溯至 [PROOF_INDEX](./PROOF_INDEX.md) 与 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 的论证链。
 
 *证明*：由 [experiments/README](experiments/README.md) 定理 EX-T1；实验验证与定理结论一致；形式化证明在 PROOF_INDEX 可查。∎
 

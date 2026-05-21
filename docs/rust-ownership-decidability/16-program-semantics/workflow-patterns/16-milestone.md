@@ -1,7 +1,7 @@
 # 16 里程碑模式 (Milestone)
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
   - [📋 目录](#-目录)
@@ -26,12 +26,12 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 里程碑模式允许活动仅在达到特定状态（里程碑）时才能执行。它用于建模需要等待某些前置条件满足的场景。
 
 ### 核心语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
 \text{Milestone}(M, A) = \text{when } M = \text{true}: \text{enable}(A)
@@ -636,3 +636,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

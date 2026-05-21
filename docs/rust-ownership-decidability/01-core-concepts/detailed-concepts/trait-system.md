@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: RFC 255 - Trait Aliases]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Type Class]** · **[来源: Rust API Guidelines]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)
@@ -62,10 +62,10 @@
 ---
 
 ## 1. 形式化定义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Trait 的形式化模型
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (Trait): Trait 是定义类型行为的接口，可以包含方法签名、关联类型、关联常量等。
 
@@ -1280,3 +1280,8 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

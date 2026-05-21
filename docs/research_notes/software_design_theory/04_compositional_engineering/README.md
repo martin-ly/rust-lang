@@ -61,8 +61,8 @@
 | Decorator + Strategy | 装饰器持 `impl Strategy` | CE-T2（无共享可变） |
 | Observer + Command | channel 传 `Box<dyn Command>` | CE-T2（Send 约束） |
 | Composite + Visitor | `match` 遍历 + `Visitor` trait | CE-T1、CE-T3 |
-| Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](03_integration_theory.md) IT-T1 |
-| Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](03_integration_theory.md) § 完整多模式组合链条 |
+| Repository + Service Layer | 模块依赖、trait 组合 | [03_integration_theory](./03_integration_theory.md) IT-T1 |
+| Builder + Factory + Repository | 订单创建→工厂选择→持久化完整链条 | [03_integration_theory](./03_integration_theory.md) § 完整多模式组合链条 |
 
 ---
 
@@ -149,9 +149,9 @@ impl<R: OrderRepository> OrderService<R> {
 
 | 文档 | 内容 |
 | :--- | :--- |
-| [01_formal_composition](01_formal_composition.md) | 组合的形式化定义 |
-| [02_effectiveness_proofs](02_effectiveness_proofs.md) | 有效性定理与证明 |
-| [03_integration_theory](03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
+| [01_formal_composition](./01_formal_composition.md) | 组合的形式化定义 |
+| [02_effectiveness_proofs](./02_effectiveness_proofs.md) | 有效性定理与证明 |
+| [03_integration_theory](./03_integration_theory.md) | 与 ownership/borrow/trait 的衔接 |
 
 ---
 
@@ -171,7 +171,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **Axiom CE1**：组合无循环依赖；`pub` 边界为模块间唯一接口；跨模块调用保持类型与所有权 semantics。
 
-**定理 CE-T1–T3**：见 [01_formal_composition](01_formal_composition.md)、[02_effectiveness_proofs](02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
+**定理 CE-T1–T3**：见 [01_formal_composition](./01_formal_composition.md)、[02_effectiveness_proofs](./02_effectiveness_proofs.md)；组合保持内存安全、数据竞争自由、类型安全。
 
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
@@ -221,7 +221,7 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 **定理 CE-MAT-T1（构建能力确定性）**：若 $C$ 为 L1 或 L2，则 $C$ 的有效性（CE-T1–T3）可**静态判定**（`cargo check`、clippy）；若 $C$ 为 L3 或 L4，则需额外运行时验证或集成测试。
 
-*证明*：由 [01_formal_composition](01_formal_composition.md) Def 1.3 无环、接口一致；L1/L2 的依赖图与类型在编译时完全可知；L3/L4 涉及 crate 版本、跨进程通信，需集成测试或契约验证。∎
+*证明*：由 [01_formal_composition](./01_formal_composition.md) Def 1.3 无环、接口一致；L1/L2 的依赖图与类型在编译时完全可知；L3/L4 涉及 crate 版本、跨进程通信，需集成测试或契约验证。∎
 
 **推论 CE-MAT-C1**：目标架构 → 依赖图 → 有效性检查（CE-T1–T3）形成**构建能力确定性判定**；L1/L2 可判定为有效或无效；L3/L4 可判定为「需进一步验证」。
 
@@ -421,7 +421,7 @@ L4 跨进程/跨网络（分布式、微服务）
 | CE-T3 | 组合保持类型安全 |
 
 组合时所有权传递、借用规则、Send/Sync 在模块边界不变。
-详见 [02_effectiveness_proofs](02_effectiveness_proofs.md)。
+详见 [02_effectiveness_proofs](./02_effectiveness_proofs.md)。
 
 ---
 

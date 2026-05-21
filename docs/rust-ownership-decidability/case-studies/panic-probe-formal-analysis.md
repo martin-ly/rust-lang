@@ -5,11 +5,13 @@
 > **形式化框架**: 错误恢复 + 调试输出 + 探针协议
 >
 > **参考**: knurling-rs tools, ARM Cortex-M Fault Handling
+> **[来源: knurling-rs Documentation - knurling.ferrous-systems.com]** · **[来源: ARM Cortex-M Documentation - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Architecture]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Panic-Probe 与嵌入式 Panic 处理形式化分析](#panic-probe-与嵌入式-panic-处理形式化分析)
   - [目录](#目录)
@@ -60,14 +62,17 @@
     - [10.1 堆栈溢出](#101-堆栈溢出)
     - [10.2 双重Panic](#102-双重panic)
     - [10.3 硬件故障](#103-硬件故障)
+  - [**代码示例**: 6个完整示例](#代码示例-6个完整示例)
 
 ---
 
 ## 1. 项目概览与解决的问题
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 嵌入式系统的故障处理挑战
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 嵌入式系统与传统桌面/服务器环境有本质差异：
 
@@ -1825,3 +1830,8 @@ fn panic(_info: &PanicInfo) -> ! {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

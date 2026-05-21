@@ -126,7 +126,7 @@
 ## 定理 CE-PAT1（模式组合 CE 保持）
 > **[来源: Rust Official Docs]**
 
-**陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
+**陈述**：设模式 $A$、$B$ 各自满足 CE-T1、CE-T2、CE-T3（作为独立模块）。若组合 $A \circ B$ 的接口满足 [03_integration_theory](./03_integration_theory.md) IT-T1（跨模块所有权保持）、IT-T2（Send/Sync 传递）、IT-L1（生命周期约束），则 $A \circ B$ 保持 CE-T1、CE-T2、CE-T3。
 
 **证明**：
 

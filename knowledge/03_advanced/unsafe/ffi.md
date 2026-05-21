@@ -859,3 +859,5 @@ pub extern "C" fn process_string(s: *mut c_char) -> c_int {
 
 - [内联汇编 (Inline Assembly)](inline_asm.md)
 - [MaybeUninit](maybe_uninit.md)
+- [Unsafe Rust 指南](README.md)
+- [Rust 所有权深入](../../01_fundamentals/ownership.md)

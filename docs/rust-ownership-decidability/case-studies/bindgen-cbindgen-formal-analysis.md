@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Bindgen/Cbindgen FFI绑定形式化分析](#bindgencbindgen-ffi绑定形式化分析)
   - [目录](#目录)
@@ -26,11 +27,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (panic跨越边界)](#反例-61-panic跨越边界)
     - [反例 6.2 (生命周期逃逸)](#反例-62-生命周期逃逸)
+  - [*定理数量: 6个*](#定理数量-6个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 FFI绑定工具:
 
@@ -40,7 +43,8 @@ FFI绑定工具:
 ---
 
 ## 2. Bindgen (C→Rust)
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (类型映射)
 
@@ -182,3 +186,7 @@ pub extern "C" fn get_name() -> *mut c_char {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

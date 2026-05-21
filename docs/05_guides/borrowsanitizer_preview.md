@@ -1,7 +1,7 @@
 # BorrowSanitizer 预览
 
 > **层级**: L7 前沿 / L3 高级 Unsafe
-> **前置概念**: [MIRI](../docs/MIRI_GUIDE.md) · [Unsafe Rust](../concept/03_advanced/03_unsafe.md)
+> **前置概念**: [MIRI](../MIRI_GUIDE.md) · [Unsafe Rust](../../concept/03_advanced/03_unsafe.md)
 > **Bloom 层级**: 分析
 > **[来源: Rust Project Goals 2026 — Safety-Critical]** · **[来源: RustConf 2026 演讲预告]** ✅
 

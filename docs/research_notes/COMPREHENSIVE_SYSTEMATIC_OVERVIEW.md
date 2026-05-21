@@ -63,9 +63,9 @@
 | **无全局一致性** | 跨模块术语、依赖、公理链不一致 | 全局一致性矩阵、交叉引用校验 |
 | **语义归纳缺失** | 概念语义未归纳、总结未结构化 | 概念族谱、语义归纳表 |
 | **思维表征分散** | 思维导图、矩阵、证明树、决策树、反例分散 | 思维表征方式全索引 |
-| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| **缺少构造性语义** | 编程语言表达式的语义形式化、求值/存储/类型 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
 | **缺少表达能力边界** | 何者可表达、何者不可表达、边界论证 | 同上 + 多维能力边界矩阵 |
-| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) |
+| **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 
 ### 设计原则
 > **[来源: Rust Official Docs]**
@@ -106,11 +106,11 @@
 | **1. 概念定义** | 形式化/非形式化定义、定义链、依赖 | [知识结构框架](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md)、各 research_notes |
 | **2. 属性关系** | 公理、引理、定理、推论、属性矩阵 | [概念-公理-定理映射表](#-概念-公理-定理映射表)（FORMAL_PROOF_SYSTEM_GUIDE） |
 | **3. 解释论证** | 推导过程、引用链、论证结构 | [论证要素规范](FORMAL_PROOF_SYSTEM_GUIDE.md#-论证要素规范) |
-| **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | [PROOF_INDEX](PROOF_INDEX.md)、[反例索引](#️-反例索引) |
+| **4. 形式化证明** | 完整证明/证明思路、反例、证明树 | [PROOF_INDEX](./PROOF_INDEX.md)、[反例索引](#️-反例索引) |
 | **5. 思维表征** | 思维导图、矩阵、证明树、决策树、反例 | [思维表征方式全索引](#️-思维表征方式全索引) |
-| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
-| **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) |
-| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) |
+| **6. 构造性语义** | 操作/指称/公理语义、表达能力边界 | [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) |
+| **7. 全局统一框架** | 全景思维导图、多维矩阵、全链路图 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) |
+| **8. 设计机制论证** | 动机、设计决策、堆/栈区分、决策树、反例 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 
 ---
 
@@ -171,7 +171,7 @@ Rust 语义族谱（顶层归纳）
 
 *证明*：由概念族依赖表；所有权、借用、生命周期为上游；型变、异步、Pin 依赖类型与所有权；依赖图无环。∎
 
-**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
+**推论 CSO-C1**：若 $P$ 违反任一族定理，则 $P$ 非 Safe 或非良型；反例见 [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
 *证明*：由 CSO-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
 
@@ -186,7 +186,7 @@ Rust 语义族谱（顶层归纳）
 | 类型安全 | 良型程序不会出现类型错误（进展+保持） | type_system_foundations |
 | 型变 | 协变同向、逆变反向、不变无子类型；违反则悬垂 | variance_theory |
 | 异步状态机 | Future 状态转换合法、Send/Sync 则并发安全、有限则终将 Ready | async_state_machine |
-| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) |
+| Pin | 非 Unpin 被 Pin 后位置不变，自引用安全；堆固定可任意类型，栈固定仅 Unpin | pin_self_referential, [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 | Trait 对象 | vtable 动态分发、对象安全约束、解析正确 | trait_system_formalization |
 
 ---
@@ -458,18 +458,18 @@ Axiom/规则层
 
 | 文档 | 用途 |
 | :--- | :--- |
-| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
+| [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) | **🏛️ 理论体系与论证体系结构**：四层理论架构、五层论证结构、安全与非安全全面论证 |
 | [software_design_theory](software_design_theory/README.md) | **软件设计理论体系**：设计模式形式化、23/43 模型、执行模型、组合工程有效性 |
-| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
-| [UNIFIED_SYSTEMATIC_FRAMEWORK](UNIFIED_SYSTEMATIC_FRAMEWORK.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
-| [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
-| [ARGUMENTATION_GAP_INDEX](ARGUMENTATION_GAP_INDEX.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
-| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
-| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
-| [FORMAL_PROOF_SYSTEM_GUIDE](FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
-| [PROOF_INDEX](PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
-| [INDEX](INDEX.md) | 研究笔记完整索引 |
-| [README](README.md) | 研究笔记主入口 |
+| [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) | **安全与非安全全面论证**：边界、契约、UB 分类、安全抽象 |
+| [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) | **全局统一系统化框架**：全景思维导图、多维矩阵、全链路图、反例总索引 |
+| [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) | **设计机制论证**：Pin 堆/栈区分、所有权、借用、型变等理由与完整论证 |
+| [ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md) | **论证缺口与设计理由综合索引**：缺口追踪、设计理由矩阵、思维表征覆盖 |
+| [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) | **Rust 1.93 语言特性全面分析**：92 项特性全覆盖、设计论证 |
+| [LANGUAGE_SEMANTICS_EXPRESSIVENESS](./LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) | **构造性语义与表达能力边界**：操作/指称/公理语义、表达能力边界论证 |
+| [FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) | 论证缺口、概念-公理-定理映射、反例索引 |
+| [PROOF_INDEX](./PROOF_INDEX.md) | 形式化证明索引、公理编号规范 |
+| [INDEX](./INDEX.md) | 研究笔记完整索引 |
+| [README](./README.md) | 研究笔记主入口 |
 | [KNOWLEDGE_STRUCTURE_FRAMEWORK](../07_project/KNOWLEDGE_STRUCTURE_FRAMEWORK.md) | 知识结构、概念定义、思维表征 |
 | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) | 多维概念矩阵、形式化理论对比 |
 | [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) | 思维导图集合 |

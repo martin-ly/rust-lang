@@ -21,30 +21,30 @@
 
 ## 🧭 快速导航
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-> **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
-> **📚 新增文档总索引**: [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md) - 605 个文件的完整索引
-> **🗺️ 新增学习路线图**: [LEARNING_ROADMAP_DETAILED.md](LEARNING_ROADMAP_DETAILED.md) - 从新手到专家的完整路径
-> **📊 新增知识矩阵**: [COMPLETE_KNOWLEDGE_MATRIX.md](COMPLETE_KNOWLEDGE_MATRIX.md) - 多维度交叉索引
+> **🆕 新增终极综合指南**: [ULTIMATE_COMPREHENSIVE_GUIDE.md](./ULTIMATE_COMPREHENSIVE_GUIDE.md) - **总入口，完整梳理，建议从这里开始**
+> **📚 新增文档总索引**: [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) - 605 个文件的完整索引
+> **🗺️ 新增学习路线图**: [LEARNING_ROADMAP_DETAILED.md](./LEARNING_ROADMAP_DETAILED.md) - 从新手到专家的完整路径
+> **📊 新增知识矩阵**: [COMPLETE_KNOWLEDGE_MATRIX.md](./COMPLETE_KNOWLEDGE_MATRIX.md) - 多维度交叉索引
 
 根据您的背景和目标，选择合适的学习路径：
 
 | 受众 | 入门文档 | 核心文档 | 高级文档 | 综合梳理 |
 |:------:|:----------|:----------|:----------|:---------|
-| **初学者** | [概念卡片](#-基础概念速查) | [核心概念](#01-核心概念) | [练习题](#-练习与实践) | [终极指南](ULTIMATE_COMPREHENSIVE_GUIDE.md) |
-| **进阶** | [详细概念](#01-核心概念) | [设计模式](#11-设计模式) | [案例研究](#-案例研究) | [知识梳理](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
-| **专家** | [形式化基础](#-形式化理论) | [证明与定理](#-coq形式化) | [Coq代码](#-coq形式化) | [理论框架](UNIFIED_THEORETICAL_FRAMEWORK.md) |
+| **初学者** | [概念卡片](#-基础概念速查) | [核心概念](#01-核心概念) | [练习题](#-练习与实践) | [终极指南](./ULTIMATE_COMPREHENSIVE_GUIDE.md) |
+| **进阶** | [详细概念](#01-核心概念) | [设计模式](#11-设计模式) | [案例研究](#-案例研究) | [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md) |
+| **专家** | [形式化基础](#-形式化理论) | [证明与定理](#-coq形式化) | [Coq代码](#-coq形式化) | [理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) |
 
 ---
 
 ## 📁 目录索引
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🟢 01-核心概念 / `01-core-concepts/`
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **目的**: Rust所有权系统核心机制详解
 
@@ -324,7 +324,7 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
 ## 🛤️ 学习路径
 
-> **🆕 推荐**: [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md) - 问题驱动的学习体验
+> **🆕 推荐**: [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) - 问题驱动的学习体验
 
 ### 🟢 路径 A: 快速入门 (4小时) → 已更新
 
@@ -456,19 +456,19 @@ Async专题:    ████████████████████ 100
 
 | 索引 | 说明 |
 |:-----|:-----|
-| [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
-| [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md) | 自动生成的交叉引用索引 |
+| [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | 主索引 - 完整文档导航 |
+| [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md) | 自动生成的交叉引用索引 |
 | CROSS_REFERENCE_VERIFICATION_REPORT.md (待补充) | 链接验证报告 |
 
 ### 快速链接
 
 | 主题 | 入口 |
 |:-----|:-----|
-| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
+| 所有权概念 | [所有权深入](01-core-concepts/detailed-concepts/ownership-deep-dive.md) / [速查卡](01-core-concepts/short-concepts/ownership-concept-card.md) / [理论到实践](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) |
 | 借用系统 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) / [速查卡](01-core-concepts/short-concepts/borrowing-concept-card.md) |
 | 生命周期 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) / [速查卡](01-core-concepts/short-concepts/lifetime-concept-card.md) |
-| 形式化理论 | [形式化基础](00-foundations/) / [Coq代码](coq-formalization/) / [定理到编译器](THEOREM_TO_COMPILER_BRIDGE.md) |
-| 设计模式 | [模式指南](11-design-patterns/) (已归档) / [理论到模式](THEORY_TO_PATTERN_BRIDGE.md) |
+| 形式化理论 | [形式化基础](00-foundations/) / [Coq代码](coq-formalization/) / [定理到编译器](./THEOREM_TO_COMPILER_BRIDGE.md) |
+| 设计模式 | [模式指南](11-design-patterns/) (已归档) / [理论到模式](./THEORY_TO_PATTERN_BRIDGE.md) |
 | 案例研究 | [案例索引](case-studies/) / [现代crate](case-studies/MODERN_CRATES_INDEX.md) |
 
 ---
@@ -550,9 +550,9 @@ cat coq-formalization/theories/Advanced/MetatheoryDecidability.v
 - [x] 清晰的目录结构
 - [x] 所有文件有实质内容
 - [x] P0关键证明100%完成
-- [x] 完整的交叉引用 ([验证报告](CROSS_REFERENCE_VERIFICATION_REPORT.md))
+- [x] 完整的交叉引用 ([验证报告](./CROSS_REFERENCE_VERIFICATION_REPORT.md))
 - [x] 599+ 内部链接已验证
-- [x] 主索引已更新 ([MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md))
+- [x] 主索引已更新 ([MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md))
 
 ---
 

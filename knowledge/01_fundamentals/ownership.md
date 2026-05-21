@@ -623,3 +623,5 @@ fn double_string(mut s: String) -> String {
 
 - [Rust 借用与引用 (Borrowing and References)](borrowing.md)
 - [迭代器 (Iterators)](iterators.md)
+- [Rust 生命周期 (Lifetimes)](lifetimes.md)
+- [智能指针 (Smart Pointers)](../02_intermediate/smart_pointers.md)

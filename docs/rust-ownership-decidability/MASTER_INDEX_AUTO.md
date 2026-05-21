@@ -4,7 +4,7 @@
 
 ## Table of Contents
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Documentation Master Index](#documentation-master-index)
   - [Table of Contents](#table-of-contents)
@@ -32,18 +32,18 @@
 
 ## Documentation Structure
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Core Documentation
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Document | Description |
 |----------|-------------|
-| [README.md](README.md) | Project overview and navigation |
-| [READING_GUIDE.md](READING_GUIDE.md) | How to read this documentation |
-| [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md) | Manual master index |
-| [MASTER_COMPREHENSIVE_ANALYSIS.md](MASTER_COMPREHENSIVE_ANALYSIS.md) | Comprehensive analysis |
+| [README.md](./README.md) | Project overview and navigation |
+| [READING_GUIDE.md](./READING_GUIDE.md) | How to read this documentation |
+| [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md) | Manual master index |
+| [MASTER_COMPREHENSIVE_ANALYSIS.md](./MASTER_COMPREHENSIVE_ANALYSIS.md) | Comprehensive analysis |
 
 ### Core Concepts
 
@@ -79,7 +79,7 @@
 
 - **Theory**: ownership-types.md (待补充)
 - **Practice**: [ownership-deep-dive.md](01-core-concepts/detailed-concepts/ownership-deep-dive.md)
-- **Examples**: See examples in [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md)
+- **Examples**: See examples in [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](./COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md)
 
 ### Borrowing System
 
@@ -106,7 +106,7 @@
 
 | Theorem | Natural Language | Coq Formalization |
 |---------|-----------------|-------------------|
-| Termination | [THEOREM_INTUITIONS.md](THEOREM_INTUITIONS.md) | [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v) |
+| Termination | [THEOREM_INTUITIONS.md](./THEOREM_INTUITIONS.md) | [MetatheoryTermination.v](coq-formalization/theories/Advanced/MetatheoryTermination.v) |
 | Decidability | [decidability_theorems.md](theorems/decidability_theorems.md) | [MetatheoryDecidability.v](coq-formalization/theories/Advanced/MetatheoryDecidability.v) |
 | Type Safety | [memory-safety-proof.md](formal-foundations/proofs/memory-safety-proof.md) | [MetatheoryKeyProofs.v](coq-formalization/theories/Advanced/MetatheoryKeyProofs.v) |
 
@@ -151,128 +151,128 @@ coq-formalization/
 
 **MASTER_INDEX_AUTO.md** (referenced 83 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_INDEX_AUTO.md..."
 - ... and 78 more
 
 **comprehensive-analysis/COMPLETION_REPORT.md** (referenced 27 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/COMPLETION_REPORT.md..."
 - ... and 22 more
 
 **actor-specialty/COMPLETION_REPORT.md** (referenced 20 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/COMPLETION_REPORT.md..."
 - ... and 15 more
 
 **actor-specialty/README.md** (referenced 19 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "actor-specialty/README.md..."
 - ... and 14 more
 
 **async-specialty/COMPLETION_REPORT.md** (referenced 15 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/COMPLETION_REPORT.md..."
 - ... and 10 more
 
 **async-specialty/README.md** (referenced 10 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/README.md..."
 - ... and 5 more
 
 **async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md** (referenced 9 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "async-specialty/ASYNC_ECOSYSTEM_COMPLETE.md..."
 - ... and 4 more
 
 **FINAL_MASTER_INDEX.md** (referenced 8 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "FINAL_MASTER_INDEX.md..."
 - ... and 3 more
 
 **07-references/books-resources.md** (referenced 8 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/books-resources.md..."
 - [07-references/academic-papers.md](07-references/academic-papers.md): "书籍和资源索引..."
 - ... and 3 more
 
 **07-references/academic-papers.md** (referenced 8 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/academic-papers.md..."
 - [07-references/books-resources.md](07-references/books-resources.md): "学术论文分类..."
 - ... and 3 more
 
 **comprehensive-analysis/README.md** (referenced 8 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "comprehensive-analysis/README.md..."
 - ... and 3 more
 
 **07-references/online-courses.md** (referenced 7 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/online-courses.md..."
 - [07-references/academic-papers.md](07-references/academic-papers.md): "在线课程..."
 - [07-references/books-resources.md](07-references/books-resources.md): "在线课程..."
 - ... and 2 more
 
 **formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_INDEX.md** (referenced 7 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "formal-foundations/proofs/ASYNC_ANALYSIS_COMPLETE_..."
 - ... and 2 more
 
 **archive/MASTER_INDEX.md** (referenced 7 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/MASTER_INDEX.md..."
 - ... and 2 more
 
 **comprehensive-analysis/open-source-analysis.md** (referenced 7 times)
@@ -286,8 +286,8 @@ coq-formalization/
 
 **07-references/tools-libraries.md** (referenced 6 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/tools-libraries.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/tools-libraries.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/tools-libraries.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/tools-libraries.md..."
 - [07-references/academic-papers.md](07-references/academic-papers.md): "工具和库索引..."
 - [07-references/books-resources.md](07-references/books-resources.md): "工具和库索引..."
 - [07-references/online-courses.md](07-references/online-courses.md): "工具和库索引..."
@@ -349,10 +349,10 @@ coq-formalization/
 
 **01-core-concepts/detailed-concepts/borrowing-in-depth.md** (referenced 5 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "borrowing-in-depth.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "borrowing-in-depth.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "01-core-concepts/detailed-concepts/borrowing-in-de..."
-- [README.md](README.md): "借用深入..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "borrowing-in-depth.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "borrowing-in-depth.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "01-core-concepts/detailed-concepts/borrowing-in-de..."
+- [README.md](./README.md): "借用深入..."
 - [01-core-concepts/detailed-concepts/ownership-deep-dive.md](01-core-concepts/detailed-concepts/ownership-deep-dive.md): "borrowing-in-depth.md..."
 
 **07-references/bibliography.md** (referenced 5 times)
@@ -413,31 +413,31 @@ coq-formalization/
 
 **README.md** (referenced 4 times)
 
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "README.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "README.md..."
 - [archive/README.md](archive/README.md): "README.md..."
 - [progress/FINAL_100_PERCENT_COMPLETION_REPORT.md](progress/FINAL_100_PERCENT_COMPLETION_REPORT.md): "README..."
 
 **01-core-concepts/detailed-concepts/ownership-deep-dive.md** (referenced 4 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "ownership-deep-dive.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "ownership-deep-dive.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "01-core-concepts/detailed-concepts/ownership-deep-..."
-- [README.md](README.md): "所有权深入..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "ownership-deep-dive.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "ownership-deep-dive.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "01-core-concepts/detailed-concepts/ownership-deep-..."
+- [README.md](./README.md): "所有权深入..."
 
 **01-core-concepts/detailed-concepts/lifetimes-mastery.md** (referenced 4 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "lifetimes-mastery.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "lifetimes-mastery.md..."
-- [README.md](README.md): "生命周期精通..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "lifetimes-mastery.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "lifetimes-mastery.md..."
+- [README.md](./README.md): "生命周期精通..."
 - [01-core-concepts/detailed-concepts/borrowing-in-depth.md](01-core-concepts/detailed-concepts/borrowing-in-depth.md): "lifetimes-mastery.md..."
 
 **07-references/README.md** (referenced 4 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "07-references/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "07-references/README.md..."
 
 **actor-specialty/theory/actor-model-foundation.md** (referenced 4 times)
 
@@ -525,27 +525,27 @@ coq-formalization/
 
 **MASTER_COMPREHENSIVE_ANALYSIS.md** (referenced 3 times)
 
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "MASTER_COMPREHENSIVE_ANALYSIS.md..."
 
 **COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md** (referenced 3 times)
 
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md..."
 
 **coq-formalization/README.md** (referenced 3 times)
 
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "coq-formalization/README.md..."
-- [FINAL_MASTER_INDEX.md](FINAL_MASTER_INDEX.md): "coq-formalization/README.md..."
-- [README.md](README.md): "Coq代码..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "coq-formalization/README.md..."
+- [FINAL_MASTER_INDEX.md](./FINAL_MASTER_INDEX.md): "coq-formalization/README.md..."
+- [README.md](./README.md): "Coq代码..."
 
 **archive/README.md** (referenced 3 times)
 
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/README.md..."
-- [MASTER_INDEX_AUTO.md](MASTER_INDEX_AUTO.md): "archive/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/README.md..."
+- [MASTER_INDEX_AUTO.md](./MASTER_INDEX_AUTO.md): "archive/README.md..."
 
 ---
 

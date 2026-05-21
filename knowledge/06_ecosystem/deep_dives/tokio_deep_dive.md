@@ -655,5 +655,7 @@ async fn main() {
 
 ## 相关概念
 
+- [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
+
 - [Axum 深度解析](axum_deep_dive.md)
 - [Deep Dives 深度解析](README.md)

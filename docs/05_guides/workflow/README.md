@@ -17,7 +17,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-- [工作流理论](01_workflow_theory.md) - 工作流理论基础
+- [工作流理论](./01_workflow_theory.md) - 工作流理论基础
 - `05_workflow_models.md` - 工作流模型实践 (文件已重构)
 
 ## 相关链接

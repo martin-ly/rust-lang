@@ -21,10 +21,10 @@
 
 | 文档 | 主题 | 难度 |
 |------|------|------|
-| [ownership.md](ownership.md) | 所有权系统 | ⭐⭐ |
-| [borrowing.md](borrowing.md) | 借用与引用 | ⭐⭐ |
-| [lifetimes.md](lifetimes.md) | 生命周期 | ⭐⭐⭐ |
-| [iterators.md](iterators.md) | 迭代器 | ⭐⭐ |
+| [ownership.md](./ownership.md) | 所有权系统 | ⭐⭐ |
+| [borrowing.md](./borrowing.md) | 借用与引用 | ⭐⭐ |
+| [lifetimes.md](./lifetimes.md) | 生命周期 | ⭐⭐⭐ |
+| [iterators.md](./iterators.md) | 迭代器 | ⭐⭐ |
 
 ## ⏱️ 预计时间
 >
@@ -70,3 +70,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [所有权深入](./ownership.md)

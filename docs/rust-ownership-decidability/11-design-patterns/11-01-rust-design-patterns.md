@@ -4,11 +4,12 @@
 > **对齐日期**: 2026-05-12
 > **覆盖范围**: 创建型、结构型、行为型设计模式在Rust中的实现
 > **权威参考**: Rust Design Patterns Book, Rust API Guidelines, Effective Rust
+> **[来源: Rust Design Patterns Book - rust-unofficial.github.io]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: GoF - Design Patterns]** · **[来源: TRPL Ch. 17]** · **[来源: Rust Reference - Traits]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust设计模式全面指南](#rust设计模式全面指南)
   - [目录](#目录)
@@ -65,10 +66,10 @@
 ---
 
 ## 1. 设计模式概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust设计模式哲学
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust的设计模式哲学与传统面向对象语言有着显著差异，这源于Rust独特的所有权系统和类型系统：
 
@@ -2651,3 +2652,8 @@ let value = some_option.unwrap_or(default);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

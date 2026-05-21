@@ -48,3 +48,15 @@
 
 
 </details>
+
+
+---
+
+## 相关概念
+
+- [概念矩阵](./concept-matrix.md)
+- [决策树](./decision-tree.md)
+- [知识图谱脑图](./KNOWLEDGE_GRAPH_MINDMAP.md)
+- [决策树目录](./decision-trees/README.md)
+- [矩阵目录](./matrices/README.md)
+- [所有权可判定性总览](../README.md)

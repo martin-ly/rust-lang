@@ -12,32 +12,35 @@
 ---
 
 ## 目录说明
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录介绍用于验证Rust代码正确性和安全性的各种工具，从静态分析到定理证明。
 
 ---
 
 ## 文档列表
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 文档 | 工具/主题 | 验证类型 |
 |:---:|:---|:---|:---|
-| 03-01 | [验证概述](03-01-verification-overview.md) | 工具全景 | 综述 |
-| 03-02 | [Creusot深度分析](03-02-creusot-deep-dive.md) | Creusot | 定理证明 |
-| 03-03 | [Miri深度解析](03-03-miri-deep-dive.md) | Miri | 运行时检查 |
+| 03-01 | [验证概述](./03-01-verification-overview.md) | 工具全景 | 综述 |
+| 03-02 | [Creusot深度分析](./03-02-creusot-deep-dive.md) | Creusot | 定理证明 |
+| 03-03 | [Miri深度解析](./03-03-miri-deep-dive.md) | Miri | 运行时检查 |
 | 03-04 | Kani指南
 
 > 📝 待补充 | Kani | 模型检测 |
 | 03-05 | Prusti指南
 
 > 📝 待补充 | Prusti | 合约验证 |
-| 03-06 | [Verus指南](03-06-verus-guide.md) | Verus | 系统代码验证 |
+| 03-06 | [Verus指南](./03-06-verus-guide.md) | Verus | 系统代码验证 |
 
 ---
 
 ## 工具矩阵
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 工具 | 类型 | 自动化 | 适用场景 |
 |:---:|:---:|:---:|:---|
@@ -73,6 +76,5 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 </details>

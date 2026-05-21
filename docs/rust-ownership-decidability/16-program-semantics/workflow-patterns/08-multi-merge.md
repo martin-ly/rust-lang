@@ -1,7 +1,7 @@
 # 08 多路合并模式 (Multi-Merge)
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
   - [📋 目录](#-目录)
@@ -26,13 +26,13 @@
   - [学术参考](#学术参考)
 
 ## 模式定义与语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多路合并模式允许多个分支独立地汇入同一个后续节点，无需同步。
 每个分支完成时都会触发后续活动的执行。
 
 ### 核心语义
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
 \text{MultiMerge}(P_1, P_2, \ldots, P_n, Q) = \forall i \in [1,n]: P_i \gg Q_i
@@ -611,3 +611,8 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

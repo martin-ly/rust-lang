@@ -440,3 +440,8 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 ---
 
 > **总结**: `AsyncFn` trait 家族将 Rust 的异步编程从"Future 类型体操"提升到了原生闭包抽象层面。在 1.95+ 项目中，优先使用 `async \|x\| {}` 语法和 `impl AsyncFn` 边界，可获得更清晰的类型签名和更好的编译器优化。
+
+
+---
+
+- [Parent README](../README.md)

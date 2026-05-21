@@ -14,9 +14,9 @@
 
 | 模式 | 文件 | 描述 | 难度 |
 |-----|------|------|------|
-| **Adapter** | [adapter.md](adapter.md) | 接口适配 | 🟢 |
-| **Decorator** | [decorator.md](decorator.md) | 动态添加功能 | 🟡 |
-| **Proxy** | [proxy.md](proxy.md) | 访问控制 | 🟡 |
+| **Adapter** | [adapter.md](./adapter.md) | 接口适配 | 🟢 |
+| **Decorator** | [decorator.md](./decorator.md) | 动态添加功能 | 🟡 |
+| **Proxy** | [proxy.md](./proxy.md) | 访问控制 | 🟡 |
 
 ---
 

@@ -6,7 +6,7 @@
 ---
 
 ## 📊 最终统计
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 |
 |------|------|
@@ -21,10 +21,10 @@
 ---
 
 ## 🎯 100% 覆盖领域
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 学术文献 (100%)
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - PLDI 2024/2025
 - POPL 2018/2020
@@ -88,10 +88,10 @@
 
 | 文档 | 说明 |
 |------|------|
-| [README.md](README.md) | 主入口，快速导航 |
-| [FINAL_100_PERCENT_COMPLETION_REPORT.md](FINAL_100_PERCENT_COMPLETION_REPORT.md) | 完整完成报告 |
-| [RESEARCH_TRACKING_SYSTEM.md](RESEARCH_TRACKING_SYSTEM.md) | 持续追踪机制 |
-| [DOCUMENT_INDEX_MASTER.md](DOCUMENT_INDEX_MASTER.md) | 605 文件完整索引 |
+| [README.md](./README.md) | 主入口，快速导航 |
+| [FINAL_100_PERCENT_COMPLETION_REPORT.md](./FINAL_100_PERCENT_COMPLETION_REPORT.md) | 完整完成报告 |
+| [RESEARCH_TRACKING_SYSTEM.md](./RESEARCH_TRACKING_SYSTEM.md) | 持续追踪机制 |
+| [DOCUMENT_INDEX_MASTER.md](./DOCUMENT_INDEX_MASTER.md) | 605 文件完整索引 |
 
 ---
 
@@ -115,7 +115,7 @@
 ---
 
 **维护状态**: 活跃
-**追踪系统**: [RESEARCH_TRACKING_SYSTEM.md](RESEARCH_TRACKING_SYSTEM.md)
+**追踪系统**: [RESEARCH_TRACKING_SYSTEM.md](./RESEARCH_TRACKING_SYSTEM.md)
 **最后更新**: 2026-03-12
 
 ---

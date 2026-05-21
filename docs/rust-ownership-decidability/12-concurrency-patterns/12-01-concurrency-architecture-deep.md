@@ -3,13 +3,14 @@
 > **Rust Version**: 1.95.0+ (Edition 2024)
 > **对齐日期**: 2026-05-12
 > **Scope**: Formal concurrency models, thread safety theorems, memory ordering semantics
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Ordering]** · **[来源: POPL 2018 - RustBelt]**
 > **Prerequisites**: Understanding of ownership, borrowing, and trait system
 > **Estimated Reading Time**: 3-4 hours
 
 ---
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Concurrency Architecture: Formal Deep Dive](#concurrency-architecture-formal-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -76,7 +77,7 @@
 ---
 
 ## Executive Summary
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 This document provides a formal treatment of Rust's concurrency architecture, establishing mathematical foundations for understanding why Rust's concurrency model prevents data races at compile time. We present:
 
@@ -91,7 +92,7 @@ The core insight is that Rust's ownership system, when combined with the `Send` 
 ---
 
 ## 1. Concurrency Models Formal Comparison
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Shared Memory vs Message Passing
 
@@ -2523,3 +2524,8 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

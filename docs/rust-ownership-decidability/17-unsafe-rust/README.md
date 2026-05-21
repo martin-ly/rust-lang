@@ -5,10 +5,10 @@
 ---
 
 ## 文档列表
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 基础概念
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
@@ -17,7 +17,7 @@
 | [`03-unsafe-functions.md`](./03-unsafe-functions.md) | Unsafe 函数与 FFI | 🟡 中级 |
 
 ### 核心机制
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 主题 | 难度 |
 |------|------|------|
@@ -62,17 +62,17 @@
 
 ## 目录
 
-- [1. Unsafe Rust 入门](01-intro.md)
-- [2. 原始指针](02-raw-pointers.md)
-- [3. Unsafe 函数与 FFI](03-unsafe-functions.md)
-- [4. 未初始化内存](05-uninitialized-memory.md)
-- [5. MaybeUninit 类型](06-maybe-uninit.md)
-- [6. 原子操作](09-atomics.md)
-- [7. Drop 检查](07-drop-flags.md)
-- [8. 别名规则](08-aliasing.md)
-- [9. 内联汇编](10-inline-asm.md)
-- [10. FFI 边界](04-extern-ffi.md)
-- [11. 实现 Vec<T>](11-impl-vec.md)
+- [1. Unsafe Rust 入门](./01-intro.md)
+- [2. 原始指针](./02-raw-pointers.md)
+- [3. Unsafe 函数与 FFI](./03-unsafe-functions.md)
+- [4. 未初始化内存](./05-uninitialized-memory.md)
+- [5. MaybeUninit 类型](./06-maybe-uninit.md)
+- [6. 原子操作](./09-atomics.md)
+- [7. Drop 检查](./07-drop-flags.md)
+- [8. 别名规则](./08-aliasing.md)
+- [9. 内联汇编](./10-inline-asm.md)
+- [10. FFI 边界](./04-extern-ffi.md)
+- [11. 实现 Vec<T>](./11-impl-vec.md)
 
 ---
 

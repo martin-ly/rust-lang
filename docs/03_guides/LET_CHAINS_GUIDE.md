@@ -312,3 +312,8 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ---
 
 > **总结**: let chains 将 Rust 的条件绑定从"嵌套金字塔"转变为"扁平流水线」。在 1.95+ 代码中，遇到嵌套 `if let` 时，优先重构为 let chains；遇到 `match` 中的复杂守卫时，考虑使用 `if let` guard。
+
+
+---
+
+- [Parent README](../README.md)

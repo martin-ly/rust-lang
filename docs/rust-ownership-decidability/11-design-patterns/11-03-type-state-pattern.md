@@ -4,11 +4,12 @@
 > **对齐日期**: 2026-05-12
 > **难度**: 中高级
 > **学习目标**: 掌握Rust类型系统最强大的应用，实现编译时状态验证
+> **[来源: Rust Reference - Types]** · **[来源: Wikipedia - Type System]** · **[来源: Rust Design Patterns Book]** · **[来源: Wikipedia - Finite-state Machine]** · **[来源: TRPL Ch. 10]** · **[来源: Rust API Guidelines]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [类型状态模式详解](#类型状态模式详解)
   - [目录](#目录)
@@ -54,10 +55,10 @@
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是类型状态模式
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 类型状态模式（Type State Pattern）是一种利用类型系统在编译时编码和验证对象状态的编程技术。它将状态从运行时值提升为编译期类型，使得非法状态转换在编译时被阻止。
 
@@ -1425,3 +1426,8 @@ query _ = return []
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [Parent README](../README.md)

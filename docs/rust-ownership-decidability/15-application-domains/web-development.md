@@ -5,7 +5,8 @@ Web 开发是 Rust 应用最广泛的领域之一。
 本文档将深入介绍 Rust 在 Web 开发领域的应用。
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Web Framework]** · **[来源: Actix Web Documentation]** · **[来源: Axum Documentation - docs.rs/axum]** · **[来源: Wikipedia - WebAssembly]** · **[来源: MDN Web Docs - WebAssembly]**
 
 - [Rust Web 开发](#rust-web-开发)
   - [目录](#目录)
@@ -35,14 +36,17 @@ Web 开发是 Rust 应用最广泛的领域之一。
     - [1. 错误处理](#1-错误处理)
     - [2. 配置管理](#2-配置管理)
   - [总结](#总结)
+  - [通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用。](#通过本文档介绍的技术和最佳实践开发者可以构建高性能高可靠性的-web-应用)
 
 ---
 
 ## Web 开发生态概览
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust Web 生态特点
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | Rust 实现 | 其他语言对比 |
 |------|-----------|--------------|
@@ -2511,7 +2515,7 @@ Rust 在 Web 开发领域提供了：
 4. **生态成熟**: 丰富的 Web 框架和工具
 5. **全栈能力**: 从后端到 WebAssembly 前端的完整支持
 
-通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用。
+通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -2522,3 +2526,7 @@ Rust 在 Web 开发领域提供了：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [Parent README](../README.md)

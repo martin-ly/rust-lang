@@ -7,12 +7,12 @@
 ---
 
 ## 执行摘要
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 响应"持续推进直到完成"的要求，本次扩展针对 **应用级Rust生态** 进行了深度形式化分析。此前嵌入式库(15个)已完成100%覆盖，本次补充了8个著名的现代应用级库。
 
 ### 新增库列表
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 序号 | 库名 | 领域 | 形式化内容 | 代码示例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -28,7 +28,7 @@
 ---
 
 ## 形式化内容统计
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理与定义
 
@@ -160,3 +160,8 @@ Thm PYO3-T1: 无GIL时不访问Python对象
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

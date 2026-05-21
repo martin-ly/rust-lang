@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Compile-Time Macros 过程宏形式化分析](#compile-time-macros-过程宏形式化分析)
   - [目录](#目录)
@@ -22,11 +23,13 @@
     - [定理 4.1 (编译时执行)](#定理-41-编译时执行)
   - [5. 反例](#5-反例)
     - [反例 5.1 (非卫生标识符)](#反例-51-非卫生标识符)
+  - [*定理数量: 4个*](#定理数量-4个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust宏系统提供:
 
@@ -38,7 +41,8 @@ Rust宏系统提供:
 ---
 
 ## 2. 过程宏类型
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (三种过程宏)
 
@@ -111,3 +115,7 @@ macro_rules! bad {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

@@ -92,7 +92,7 @@
 
 - **FORMAT_AND_CONTENT_ALIGNMENT_PLAN**：F1–F4 全部交付；计划状态更新为 ✅ 100% 完成
 - **F1 格式统一**：QUALITY_CHECKLIST 增加 research_notes 元信息统一模板；全库补全「Rust 版本」行（含 23 模式、执行模型、根目录与子目录）；MAINTENANCE_GUIDE 增加格式统一检查清单与季度复核项
-- **F2.4 / F3**：新建 [RUST_193_COUNTEREXAMPLES_INDEX](RUST_193_COUNTEREXAMPLES_INDEX.md)（1.93 相关反例集中索引）；RUST_193 § 特性→映射表 明确为 92 项→推荐落点文档；00_ORGANIZATION 新增 § 六 权威来源与版本约定
+- **F2.4 / F3**：新建 [RUST_193_COUNTEREXAMPLES_INDEX](./RUST_193_COUNTEREXAMPLES_INDEX.md)（1.93 相关反例集中索引）；RUST_193 § 特性→映射表 明确为 92 项→推荐落点文档；00_ORGANIZATION 新增 § 六 权威来源与版本约定
 - **F4 持续机制**：CONTRIBUTING 增加格式门禁与元信息检查项；MAINTENANCE_GUIDE 季度维护增加「格式+内容+1.93 对齐」复核
 
 ### 充分完整 完备 100% 收尾（2026-02-14）🆕
@@ -107,7 +107,7 @@
 ### formal_methods 可持续推进计划 阶段 A–D 100% 完成（2026-02-14）🆕
 
 - **阶段 A**：新建 [send_sync_formalization](formal_methods/send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
-- **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
+- **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
 - **阶段 C**：并发与异步族、Trait 族四维表（可判定性、安全边界、形式化、思维表征）已入 SAFE_DECIDABLE_MECHANISMS_OVERVIEW §6
 - **阶段 D**：HIERARCHICAL_MAPPING 增加 send_sync_formalization、安全可判定机制总览行；文档↔思维表征表更新；各篇「五篇并表」→「六篇并表」统一
 - **SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN**：阶段 A–D 状态更新为 ✅ 已完成；00_completeness_gaps、INDEX、QUICK_FIND 已更新
@@ -159,10 +159,10 @@
 - **Phase 2 类型构造能力**：新建 [type_theory/construction_capability.md](type_theory/construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
 - **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
 - **Phase 4 组件成熟度**：扩展 [04_compositional_engineering](software_design_theory/04_compositional_engineering/README.md)；Def CE-MAT1（L1–L4 成熟度）、 theorem CE-MAT-T1、构建能力确定性判定树；与 02_workflow、05_boundary_system 衔接
-- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](CORE_FEATURES_FULL_CHAIN.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
+- **Phase 5 核心特性完整链**：新建 [CORE_FEATURES_FULL_CHAIN](./CORE_FEATURES_FULL_CHAIN.md)；13 项核心特性（所有权、借用、生命周期、Pin、Send/Sync、Future、Trait、泛型、match、for、Option/Result、闭包、?）统一 Def→示例→论证→证明链
 - **Phase 6 全局索引增强**：UNIFIED_SYSTEMATIC_FRAMEWORK 新增「按特性族/类型族/执行模型子索引」；设计模式表征与组件构建索引
-- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](FEATURE_TEMPLATE.md)；概念→形式化引用→反例模板；与 RUST_193 对应
-- **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](INCREMENTAL_UPDATE_FLOW.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
+- **Phase 7 92 特性精简模板**：新建 [FEATURE_TEMPLATE](./FEATURE_TEMPLATE.md)；概念→形式化引用→反例模板；与 RUST_193 对应
+- **Phase 8 增量流程**：新建 [INCREMENTAL_UPDATE_FLOW](./INCREMENTAL_UPDATE_FLOW.md)；1.94+ 发布后更新步骤与检查清单；MAINTENANCE_GUIDE 新增版本增量更新节
 - **INDEX**：新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW 条目
 
 ### 持续推进至 100% 收尾（2026-02-12）🆕
@@ -203,7 +203,7 @@
 - **100% 收尾**：INDEX、README、STATISTICS 补充实质内容自检体系；EXAMPLE 示例说明优化；根 README 研究笔记系统补实质内容自检体系；BEST_PRACTICES 状态与日期更新
 - **formal_methods 国际权威对标 100% 完成**：ownership_model 新增 Tree Borrows PLDI 2025；borrow_checker_proof 修正 Tree Borrows 会议年份与链接；README 新增 FLS 精确章节直接链接、权威奖项（ACM SIGPLAN John C. Reynolds、PLDI 2025 Distinguished Paper）、Tree Borrows 源码；00_completeness_gaps、pin_self_referential、lifetime_formalization、async_state_machine 新增 Ferrocene FLS 章节引用
 - **收尾完成**：07_anti_patterns 去除重复「九、引用」章节；README 更新内容补充 formal_methods 国际权威对标、07 收尾
-- **归类与扩展**：新建 [CLASSIFICATION.md](CLASSIFICATION.md) 文档分类体系（按文档角色、知识层次、主题域、扩展路线）；INDEX 增加文档分类体系节、扩展按主题分类（安全与 unsafe、设计模式与工程、版本与特性）；README 修正目录结构（补充 06/07、CLASSIFICATION、去除重复 CONTENT_ENHANCEMENT）；QUICK_REFERENCE 扩展 05/06/07、CLASSIFICATION 链接；ARGUMENTATION_GAP_INDEX 增加分类体系入口
+- **归类与扩展**：新建 [CLASSIFICATION.md](./CLASSIFICATION.md) 文档分类体系（按文档角色、知识层次、主题域、扩展路线）；INDEX 增加文档分类体系节、扩展按主题分类（安全与 unsafe、设计模式与工程、版本与特性）；README 修正目录结构（补充 06/07、CLASSIFICATION、去除重复 CONTENT_ENHANCEMENT）；QUICK_REFERENCE 扩展 05/06/07、CLASSIFICATION 链接；ARGUMENTATION_GAP_INDEX 增加分类体系入口
 - **formal_methods 国际权威对标 100% 完成**：Tree Borrows 更新为 PLDI 2025（Distinguished Paper Award、Rocq 证明、30k crates 54% 更少拒绝）；新增 Ferrocene FLS 章节与本目录对应表（Ch. 15/17/19/21、Appendix C）；ownership_model、borrow_checker_proof、lifetime_formalization、pin_self_referential、async_state_machine 各文档新增国际权威对标脚注
 - **formal_methods 国际权威对标补全**：00_completeness_gaps、README 补充 Tree Borrows (OOPSLA 2024)、Polonius、FLS 官方采纳 2025；ownership_model 补 Safe Systems Programming in Rust (CACM 2021)；borrow_checker_proof 补 Tree Borrows、Polonius、Miri；lifetime_formalization 补 Polonius 规则链接
 - **formal_methods 国际权威对标**：README 新增「国际权威对标」节（RustBelt POPL 2018/2020、Stacked Borrows、Ferrocene FLS、Prusti/Kani 对照表）；ownership_model、borrow_checker_proof、async_state_machine、pin_self_referential、lifetime_formalization 参考文献补全权威论文链接与对应说明；00_completeness_gaps 新增 §9 国际权威对标
@@ -379,8 +379,8 @@
 
 **新增文档**:
 
-- ✅ [DESIGN_MECHANISM_RATIONALE](DESIGN_MECHANISM_RATIONALE.md) - 设计机制论证：Pin 堆/栈区分、Send/Sync、Trait 对象等理由与完整论证
-- ✅ [ARGUMENTATION_GAP_INDEX](ARGUMENTATION_GAP_INDEX.md) - 论证缺口与设计理由综合索引
+- ✅ [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) - 设计机制论证：Pin 堆/栈区分、Send/Sync、Trait 对象等理由与完整论证
+- ✅ [ARGUMENTATION_GAP_INDEX](./ARGUMENTATION_GAP_INDEX.md) - 论证缺口与设计理由综合索引
 
 **设计机制论证补全**:
 
@@ -402,12 +402,12 @@
 
 **理论体系与论证体系结构**（2026-02-12 追加）:
 
-- ✅ [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 顶层框架：四层理论架构、五层论证结构
-- ✅ [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全全面论证、契约、UB、安全抽象
+- ✅ [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 顶层框架：四层理论架构、五层论证结构
+- ✅ [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全全面论证、契约、UB、安全抽象
 
 **Rust 1.93 语言特性全面分析**（2026-02-12 追加）:
 
-- ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) - 92 项语言特性全覆盖
+- ✅ [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) - 92 项语言特性全覆盖
 - ✅ 10 大类别：内存、类型、Trait、控制流、并发、宏、模块、常量、FFI、1.93 新增
 - ✅ DESIGN_MECHANISM_RATIONALE 补全：宏、闭包、模式匹配、Option/Result
 

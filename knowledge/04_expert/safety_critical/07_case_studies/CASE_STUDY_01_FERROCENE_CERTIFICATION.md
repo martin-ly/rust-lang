@@ -299,5 +299,7 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 
 ## 相关概念
 
+- [Rust 安全关键系统生态系统主索引](../README.md)
+
 - [案例研究2: NASA核心飞行系统(cFS) Rust集成](CASE_STUDY_02_NASA_CFS_RUST.md)
 - [案例研究3: 汽车ECU Rust应用](CASE_STUDY_03_AUTOMOTIVE_ECUS.md)

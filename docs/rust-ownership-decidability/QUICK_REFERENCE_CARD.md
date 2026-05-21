@@ -5,7 +5,7 @@
 ---
 
 ## 🎯 所有权三原则
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 1. 唯一性     // 每个值有且仅有一个所有者
@@ -16,7 +16,7 @@
 ---
 
 ## 🔄 借用规则
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 不可变借用: 多个 &T 同时存在
@@ -34,7 +34,7 @@ let r = &mut data;  // OK
 ---
 
 ## ⏱️ 生命周期规则
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 编译器自动推断 (省略规则)
@@ -172,8 +172,8 @@ impl Sync for T where &T: Send { }
 
 ## 🔗 关键链接
 
-- [完整认证](FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
-- [知识梳理](COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
+- [完整认证](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
+- [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
 - [案例索引](case-studies/COMPLETE_DOMAIN_COVERAGE_INDEX.md)
 
 ---

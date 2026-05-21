@@ -3,6 +3,7 @@
 > **定位**：Rust 的高级特性，涉及并发、异步、Unsafe 和元编程。本层是 L1-L2 概念在**复杂场景**中的组合应用与边界突破。
 > **Bloom 层级**: 应用 → 分析 → 评价
 > **对应 L4 形式化**: 并发分离逻辑 · 线性时序逻辑 · 效果系统 · 元类型论
+> **[来源: Rust Reference - Concurrency]** · **[来源: Rustonomicon - docs.rust-lang.org/nomicon]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Metaprogramming]**
 
 ---
 
@@ -216,6 +217,7 @@ Macros
 - **L5 对比**: Rust vs C++（unsafe vs 无约束）、Rust vs Go（async vs goroutine）
 - **L6 生态**: Tokio/Async-std 运行时、unsafe 代码审查规范
 - **L7 前沿**: AI 生成 Rust 代码的 unsafe 边界标注、形式化方法工业化
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

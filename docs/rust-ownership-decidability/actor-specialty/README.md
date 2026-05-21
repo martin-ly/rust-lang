@@ -5,7 +5,7 @@
 ---
 
 ## 专题概览
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -55,14 +55,14 @@
 ---
 
 ## 文档导航
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 深度专题
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 行数 | 核心内容 | 难度 |
 |:---|:---:|:---|:---:|
-| **[ACTOR_MODEL_DEEP_DIVE.md](ACTOR_MODEL_DEEP_DIVE.md)** | 1400+ | **Actor模型深度解析：形式语义、证明、反例** | 🔴 高级 |
+| **[ACTOR_MODEL_DEEP_DIVE.md](./ACTOR_MODEL_DEEP_DIVE.md)** | 1400+ | **Actor模型深度解析：形式语义、证明、反例** | 🔴 高级 |
 
 ### 理论基础
 
@@ -174,7 +174,7 @@ Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
 
 1. [matrices/actor-framework-matrix.md](matrices/actor-framework-matrix.md) - 技术选型
 2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
-3. [ACTOR_MODEL_DEEP_DIVE.md](ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
+3. [ACTOR_MODEL_DEEP_DIVE.md](./ACTOR_MODEL_DEEP_DIVE.md) - 形式化深度分析
 4. distributed/distributed-actors.md (待补充) - 分布式系统
 
 ---

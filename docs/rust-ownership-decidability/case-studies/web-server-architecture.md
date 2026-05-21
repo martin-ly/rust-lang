@@ -5,7 +5,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [案例研究: 高性能Web服务器架构](#案例研究-高性能web服务器架构)
   - [目录](#目录)
@@ -38,14 +39,17 @@
     - [8.2 并发模式](#82-并发模式)
     - [8.3 内存策略](#83-内存策略)
   - [结论](#结论)
+  - [本架构展示了如何将Rust的所有权、借用和生命周期应用于实际的高并发场景。](#本架构展示了如何将rust的所有权借用和生命周期应用于实际的高并发场景)
 
 ---
 
 ## 1. 需求分析
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 功能需求
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - HTTP/1.1 和 HTTP/2 支持
 - TLS/SSL 加密
@@ -615,7 +619,7 @@ Rust的所有权模型使得构建高性能Web服务器既安全又高效：
 - ✅ **可预测**: 无GC暂停，延迟稳定
 - ✅ **可扩展**: 水平扩展到多核
 
-本架构展示了如何将Rust的所有权、借用和生命周期应用于实际的高并发场景。
+本架构展示了如何将Rust的所有权、借用和生命周期应用于实际的高并发场景
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -626,3 +630,7 @@ Rust的所有权模型使得构建高性能Web服务器既安全又高效：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

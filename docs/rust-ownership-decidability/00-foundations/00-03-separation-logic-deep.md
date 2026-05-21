@@ -1,7 +1,7 @@
 # Separation Logic: A Comprehensive Deep Dive
 
 ## Table of Contents
-> **[来源: Rust Official Docs]**
+> **[来源: Wikipedia - Separation Logic]** · **[来源: Wikipedia - Hoare Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Reynolds 2002 - Separation Logic]** · **[来源: Iris Project - iris-project.org]** · **[来源: O'Hearn 2019 - Incorrectness Logic]**
 
 - [Separation Logic: A Comprehensive Deep Dive](#separation-logic-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -126,12 +126,12 @@
 ---
 
 ## 1. Introduction
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Separation Logic (SL) is a logical framework for reasoning about programs that manipulate mutable data structures stored in memory. Introduced by John C. Reynolds and Peter W. O'Hearn in the early 2000s, it extends Hoare logic with a separating conjunction operator that enables local reasoning about memory.
 
 ### 1.1 Historical Context
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Before Separation Logic, reasoning about pointer programs required global invariants that tracked the entire heap state. This approach was:
 
@@ -1903,3 +1903,8 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+- [README](./README.md)

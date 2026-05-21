@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Anyhow \& Thiserror 错误处理形式化分析](#anyhow--thiserror-错误处理形式化分析)
   - [目录](#目录)
@@ -30,11 +31,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (混用错误类型)](#反例-61-混用错误类型)
     - [反例 6.2 (过度使用上下文)](#反例-62-过度使用上下文)
+  - [*定理数量: 6个*](#定理数量-6个)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 错误处理库对比:
 
@@ -44,7 +47,8 @@
 ---
 
 ## 2. 类型系统分析
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Anyhow: 动态错误
 
@@ -241,3 +245,7 @@ fn do_work() -> Result<()> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

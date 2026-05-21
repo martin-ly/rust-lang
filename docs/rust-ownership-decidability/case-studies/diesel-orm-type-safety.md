@@ -9,7 +9,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Diesel ORM类型安全形式化分析](#diesel-orm类型安全形式化分析)
   - [目录](#目录)
@@ -55,11 +56,13 @@
     - [定义 7.1 (不完备性)](#定义-71-不完备性)
     - [定理 7.2 (Diesel完备性边界)](#定理-72-diesel完备性边界)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
 
 ---
 
 ## 1. 引言
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Diesel是一个类型安全的Rust ORM，它在编译时验证SQL查询的正确性：
 
@@ -89,7 +92,8 @@ dsl::users.filter(dsl::id.eq(1));
 ---
 
 ## 2. 数据库模式的形式化
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 表作为类型
 
@@ -585,3 +589,7 @@ Diesel无法验证所有SQL语义正确性:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

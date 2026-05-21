@@ -13,17 +13,17 @@
 ## 包含模式
 > **[来源: Rust Official Docs]**
 
-- [责任链](chain_of_responsibility.md)
-- [命令](command.md)
-- [解释器](interpreter.md)
-- [迭代器](iterator.md)
-- [中介者](mediator.md)
-- [备忘录](memento.md)
-- [观察者](observer.md)
-- [状态](state.md)
-- [策略](strategy.md)
-- [模板方法](template_method.md)
-- [访问者](visitor.md)
+- [责任链](./chain_of_responsibility.md)
+- [命令](./command.md)
+- [解释器](./interpreter.md)
+- [迭代器](./iterator.md)
+- [中介者](./mediator.md)
+- [备忘录](./memento.md)
+- [观察者](./observer.md)
+- [状态](./state.md)
+- [策略](./strategy.md)
+- [模板方法](./template_method.md)
+- [访问者](./visitor.md)
 
 ## 相关链接
 > **[来源: Rust Official Docs]**

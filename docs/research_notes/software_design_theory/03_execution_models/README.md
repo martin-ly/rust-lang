@@ -51,11 +51,11 @@
 
 | 模型 | 定义 | 形式化文档 |
 | :--- | :--- | :--- |
-| 同步 | 顺序执行，单线程 | [01_synchronous](01_synchronous.md) |
-| 异步 | Future、async/await、单线程协作式多任务 | [02_async](02_async.md) |
-| 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](03_concurrent.md) |
-| 并行 | 数据并行、任务并行 | [04_parallel](04_parallel.md) |
-| 分布式 | 跨进程/跨节点、Actor、RPC | [05_distributed](05_distributed.md) |
+| 同步 | 顺序执行，单线程 | [01_synchronous](./01_synchronous.md) |
+| 异步 | Future、async/await、单线程协作式多任务 | [02_async](./02_async.md) |
+| 并发 | 多线程、Send/Sync、消息传递/共享状态 | [03_concurrent](./03_concurrent.md) |
+| 并行 | 数据并行、任务并行 | [04_parallel](./04_parallel.md) |
+| 分布式 | 跨进程/跨节点、Actor、RPC | [05_distributed](./05_distributed.md) |
 
 ---
 
@@ -66,13 +66,13 @@
 
 | 模型 | 确定性 | 数据竞争 | 表达力/典型用途 | 选型条件 | 形式化文档 |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **同步** | 顺序确定 | 单线程无竞争 | 顺序执行、批处理、脚本 | 单线程、无 I/O 等待 | [01_synchronous](01_synchronous.md) |
-| **异步** | 单线程交错确定 | 单线程无竞争 | I/O 多路复用、高并发连接 | 多 I/O、高并发连接 | [02_async](02_async.md) |
-| **并发** | 交错非确定 | Send/Sync 保证无数据竞争 | 多线程、消息传递、共享状态 | 多线程、生产者-消费者 | [03_concurrent](03_concurrent.md) |
-| **并行** | 数据/任务并行 | 无共享或同步 | CPU 密集、批量计算 | CPU 密集、rayon 风格 | [04_parallel](04_parallel.md) |
-| **分布式** | 跨节点、最终一致 | 跨进程无共享内存 | 跨节点通信、Actor、RPC | 跨节点、微服务 | [05_distributed](05_distributed.md) |
+| **同步** | 顺序确定 | 单线程无竞争 | 顺序执行、批处理、脚本 | 单线程、无 I/O 等待 | [01_synchronous](./01_synchronous.md) |
+| **异步** | 单线程交错确定 | 单线程无竞争 | I/O 多路复用、高并发连接 | 多 I/O、高并发连接 | [02_async](./02_async.md) |
+| **并发** | 交错非确定 | Send/Sync 保证无数据竞争 | 多线程、消息传递、共享状态 | 多线程、生产者-消费者 | [03_concurrent](./03_concurrent.md) |
+| **并行** | 数据/任务并行 | 无共享或同步 | CPU 密集、批量计算 | CPU 密集、rayon 风格 | [04_parallel](./04_parallel.md) |
+| **分布式** | 跨节点、最终一致 | 跨进程无共享内存 | 跨节点通信、Actor、RPC | 跨节点、微服务 | [05_distributed](./05_distributed.md) |
 
-**边界与选型决策树**：[06_boundary_analysis](06_boundary_analysis.md) 含并发选型决策树（Actor/channel/async/Mutex）及与本矩阵的衔接。
+**边界与选型决策树**：[06_boundary_analysis](./06_boundary_analysis.md) 含并发选型决策树（Actor/channel/async/Mutex）及与本矩阵的衔接。
 
 **分布式模式扩展**：Event Sourcing、Saga、CQRS、Circuit Breaker、Bulkhead、CAP/BASE 形式化见 [05_distributed § 分布式专用模式形式化](05_distributed.md#分布式专用模式形式化d21-扩展)。
 
@@ -95,7 +95,7 @@
 ## 边界分析
 > **[来源: Rust Official Docs]**
 
-[06_boundary_analysis](06_boundary_analysis.md)：各模型的安全/支持/表达边界。
+[06_boundary_analysis](./06_boundary_analysis.md)：各模型的安全/支持/表达边界。
 
 ---
 
@@ -110,7 +110,7 @@
 | CPU 密集、批量计算 | 并行 | 图像处理、数据分析、rayon |
 | 跨节点通信 | 分布式 | tonic、actix、RPC |
 
-**与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](06_boundary_analysis.md)。
+**与设计模式映射**：同步—全部 23；异步—Observer、Command、State；并发—Singleton、Observer、Mediator；并行—Strategy、Iterator；分布式—Proxy、Gateway、DTO。详见 [06_boundary_analysis](./06_boundary_analysis.md)。
 
 ---
 

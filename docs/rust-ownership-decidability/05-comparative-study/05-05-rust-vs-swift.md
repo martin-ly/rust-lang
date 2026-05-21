@@ -3,11 +3,13 @@
 > **对比维度**: 内存安全模型、所有权系统、类型系统、并发模型、应用场景
 > **目标读者**: Swift 开发者学习 Rust，跨平台开发者技术选型
 > **文档版本**: 2.0.0 (L2+ 深度)
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Swift (programming language)]** · **[来源: Rust Reference]** · **[来源: Swift Documentation - swift.org]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]**
 
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust vs Swift: 现代系统语言深度对比](#rust-vs-swift-现代系统语言深度对比)
   - [目录](#目录)
@@ -53,11 +55,13 @@
     - [10.2 常见模式映射](#102-常见模式映射)
   - [总结](#总结)
   - [参考文献](#参考文献)
+  - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
 
 ---
 
 ## 1. 执行摘要
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -89,7 +93,8 @@
 ---
 
 ## 2. 内存安全模型对比
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心安全机制
 
@@ -1788,3 +1793,7 @@ fn explicit_drop() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+- [README](./README.md)

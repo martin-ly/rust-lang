@@ -5,10 +5,10 @@
 ---
 
 ## 📖 如何使用本指南
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 本文档的定位
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 知识库结构:
@@ -31,7 +31,7 @@
 ```
 
 ### 三种使用方式
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **方式 1: 首次访问** - 按顺序阅读本文档的每个章节，建立全局认知
 
@@ -224,13 +224,13 @@
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
-| [README.md](README.md) | 项目总览 | 10分钟 | 无 |
+| [README.md](./README.md) | 项目总览 | 10分钟 | 无 |
 | [概念卡片/所有权](01-core-concepts/short-concepts/ownership-concept-card.md) | 所有权基础 | 15分钟 | 无 |
 | [概念卡片/借用](01-core-concepts/short-concepts/borrowing-concept-card.md) | 借用基础 | 15分钟 | 无 |
 | [概念卡片/生命周期](01-core-concepts/short-concepts/lifetime-concept-card.md) | 生命周期基础 | 15分钟 | 无 |
-| [交互式学习指南](INTERACTIVE_LEARNING_GUIDE.md) | 问题驱动学习 | 2小时 | 基础概念 |
-| [QUICK_REFERENCE_CARD.md](QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
-| [全面FAQ](COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
+| [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md) | 问题驱动学习 | 2小时 | 基础概念 |
+| [QUICK_REFERENCE_CARD.md](./QUICK_REFERENCE_CARD.md) | 速查卡片 | 20分钟 | 基础概念 |
+| [全面FAQ](./COMPREHENSIVE_FAQ.md) | 常见问题 | 1小时 | 基础概念 |
 
 #### 🟡 进阶级 (有经验的开发者)
 
@@ -240,8 +240,8 @@
 | [借用深入](01-core-concepts/detailed-concepts/borrowing-in-depth.md) | 借用深入 | 1小时 | 基础借用 |
 | [生命周期精通](01-core-concepts/detailed-concepts/lifetimes-mastery.md) | 生命周期深入 | 1.5小时 | 借用系统 |
 | [内部可变性](01-core-concepts/detailed-concepts/interior-mutability.md) | RefCell/Mutex | 1小时 | 借用系统 |
-| [理论到实践桥梁](FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论基础 | 2小时 | 基础概念 |
-| [理论到模式桥梁](THEORY_TO_PATTERN_BRIDGE.md) | 设计模式理论 | 2小时 | 基础模式 |
+| [理论到实践桥梁](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md) | 理论基础 | 2小时 | 基础概念 |
+| [理论到模式桥梁](./THEORY_TO_PATTERN_BRIDGE.md) | 设计模式理论 | 2小时 | 基础模式 |
 | [设计模式](11-design-patterns/) | 23 GoF模式 | 8小时 | 基础Rust |
 | [并发模式](12-concurrency-patterns/README.md) | 并发模式 | 10小时 | 所有权基础 |
 | [高级实践工作坊](exercises/ADVANCED_OWNERSHIP_WORKSHOP.md) | 高级练习 | 8小时 | 进阶概念 |
@@ -251,11 +251,11 @@
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
 |:-----|:-----|:--------:|:---------|
-| [统一理论框架](UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 | 8小时 | 数学基础 |
-| [定理依赖网络](THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 | 3小时 | 形式化基础 |
-| [横向关联论证](HORIZONTAL_CONNECTIONS.md) | 概念关联 | 4小时 | 理论基础 |
-| [内容关联分析](CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 | 3小时 | 全局了解 |
-| [定理到编译器桥梁](THEOREM_TO_COMPILER_BRIDGE.md) | 编译器理论 | 2小时 | 形式化基础 |
+| [统一理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md) | 理论框架 | 8小时 | 数学基础 |
+| [定理依赖网络](./THEOREM_DEPENDENCY_GRAPH.md) | 定理依赖 | 3小时 | 形式化基础 |
+| [横向关联论证](./HORIZONTAL_CONNECTIONS.md) | 概念关联 | 4小时 | 理论基础 |
+| [内容关联分析](./CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 | 3小时 | 全局了解 |
+| [定理到编译器桥梁](./THEOREM_TO_COMPILER_BRIDGE.md) | 编译器理论 | 2小时 | 形式化基础 |
 | [Coq形式化](coq-formalization/README.md) | Coq证明 | 持续 | 形式化方法 |
 | [元模型](meta-model/RUST_194_COMPREHENSIVE_GUIDE.md) | 元模型定义 | 6小时 | 类型论 |
 | [线性逻辑深入](00-foundations/00-01-linear-logic-deep.md) | 线性逻辑 | 4小时 | 逻辑学 |
@@ -825,8 +825,8 @@ Week 7-8: 元理论证明
 **开始学习**:
 
 1. 初学者: [概念卡片](01-core-concepts/short-concepts/ownership-concept-card.md)
-2. 进阶: [理论到实践桥梁](FOUNDATIONS_TO_PRACTICE_BRIDGE.md)
-3. 专家: [统一理论框架](UNIFIED_THEORETICAL_FRAMEWORK.md)
+2. 进阶: [理论到实践桥梁](./FOUNDATIONS_TO_PRACTICE_BRIDGE.md)
+3. 专家: [统一理论框架](./UNIFIED_THEORETICAL_FRAMEWORK.md)
 
 ---
 

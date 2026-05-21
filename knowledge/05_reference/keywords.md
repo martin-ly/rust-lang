@@ -823,5 +823,7 @@ if let Some(ref s) = opt {
 
 ## 相关概念
 
+- [Rust 标准库速查](./std_library_cheatsheet.md)
+
 - [数学常量](math_constants.md)
 - [05 - 参考文档](README.md)
