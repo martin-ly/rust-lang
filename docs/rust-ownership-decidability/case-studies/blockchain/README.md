@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Blockchain]** · **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation - docs.substrate.io]** · **[来源: Solana Documentation - docs.solana.com]** · **[来源: Ethereum Documentation - ethereum.org]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Blockchain]** · **[来源: Wikipedia - Smart Contract]** · **[来源: Substrate Documentation - docs.substrate.io]** · **[来源: Solana Documentation - docs.solana.com]** · **[来源: Ethereum Documentation - ethereum.org]** · **[来源: ACM - Distributed Ledger Technology]** · **[来源: IEEE - Blockchain Security Standards]**
 
 - [Rust 区块链/Web3 开发完整指南](#rust-区块链web3-开发完整指南)
   - [目录](#目录)
@@ -49,6 +49,7 @@
   - [附录：资源推荐](#附录资源推荐)
     - [学习资源](#学习资源)
     - [常用Crates](#常用crates)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -3407,7 +3408,6 @@ tokio-test = "0.4"
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

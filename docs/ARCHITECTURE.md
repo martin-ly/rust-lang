@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
 
 - [项目概述](#项目概述)
 - [架构总览](#架构总览)
@@ -18,12 +19,14 @@
 ---
 
 ## 项目概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
 
 本项目是一个全面的 Rust 语言系统化学习资源，采用 Workspace 架构组织，包含 12 个核心学习 crate 和 1 个共享库 crate。
 
 ### 设计原则
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Rust Project Goals 2026]**
 
 1. **渐进式学习**: 从基础到高级，每个 crate 对应一个学习阶段
 2. **独立可运行**: 每个 crate 都可以独立编译和运行
@@ -392,7 +395,6 @@ sequenceDiagram
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

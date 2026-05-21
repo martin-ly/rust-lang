@@ -2,7 +2,7 @@
 
 ## Table of Contents
 >
-> **[来源: Rust Reference - Interior Mutability]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Interior Mutability]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: Rust Standard Library - std::cell]**
+> **[来源: Rust Reference - Interior Mutability]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Interior Mutability]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion]** · **[来源: ACM - Interior Pointer Analysis]** · **[来源: IEEE - Safe Concurrency Primitives]**
 
 - [Interior Mutability Deep Dive](#interior-mutability-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -2111,7 +2111,6 @@ Remember: Runtime checks mean runtime failures. Use these types carefully and al
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

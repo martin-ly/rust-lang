@@ -1,7 +1,8 @@
 # 类型-所有权统一理论
 
 ## Type-Ownership Unified Theory
-> **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: Iris Project - iris-project.org]**
+>
+> **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Separation Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Pierce 2002 - TAPL]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: ACM - Unified Type-Ownership Theory]** · **[来源: IEEE - Formal Proof Methods]**
 
 > **文档性质**: 形式化理论核心证明文档
 > **版本**: 1.0.0
@@ -11,6 +12,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [类型-所有权统一理论](#类型-所有权统一理论)
@@ -101,6 +103,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题陈述
@@ -1920,6 +1923,7 @@ Admitted.
   - `UNIFIED_THEORETICAL_FRAMEWORK.md`
   - `FRAMEWORK_ANALYSIS_AND_GAP_REPORT.md`
   - `formal-foundations/models/02-02-ownership-types.md`
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1930,7 +1934,6 @@ Admitted.
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

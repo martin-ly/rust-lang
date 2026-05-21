@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Embedded Book - docs.rust-embedded.org]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Internet of Things]** · **[来源: Embassy Framework - embassy.dev]** · **[来源: RTIC Documentation - rtic.rs]**
+> **[来源: Rust Embedded Book - docs.rust-embedded.org]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Internet of Things]** · **[来源: Embassy Framework - embassy.dev]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Real-Time Operating System]** · **[来源: IEEE - Embedded Software Standards]** · **[来源: ACM - Embedded Systems Survey]**
 
 - [Rust 嵌入式/物联网开发完全指南](#rust-嵌入式物联网开发完全指南)
   - [目录](#目录)
@@ -59,6 +59,7 @@
     - [常用嵌入式Rust Crate](#常用嵌入式rust-crate)
     - [资源链接](#资源链接)
   - [*适用Rust版本: 1.75+*](#适用rust版本-175)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -2762,7 +2763,6 @@ macro_rules! log_error {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

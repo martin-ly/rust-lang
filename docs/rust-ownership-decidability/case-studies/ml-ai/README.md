@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Machine Learning]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Wikipedia - Deep Learning]** · **[来源: Polars Documentation - docs.pola.rs]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Machine Learning]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Wikipedia - Deep Learning]** · **[来源: Polars Documentation - docs.pola.rs]** · **[来源: ACM - ML Systems Performance]** · **[来源: IEEE - AI Accelerator Architectures]**
 
 - [Rust 机器学习与 AI 开发完全指南](#rust-机器学习与-ai-开发完全指南)
   - [目录](#目录)
@@ -2525,7 +2525,6 @@ impl BufferPool {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

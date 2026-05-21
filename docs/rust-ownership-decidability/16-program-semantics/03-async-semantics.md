@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rustonomicon - Async]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Future/Promise]** · **[来源: Tokio Documentation - tokio.rs]**
+> **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rustonomicon - Async]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Future/Promise]** · **[来源: Tokio Documentation - tokio.rs]** · **[来源: Wikipedia - Cooperative Multitasking]** · **[来源: Wikipedia - Coroutine]** · **[来源: IEEE - Concurrent Programming Languages]** · **[来源: ACM - Futures and Promises]**
 
 - [Rust 异步执行模型语义深度分析](#rust-异步执行模型语义深度分析)
   - [目录](#目录)

@@ -5,7 +5,7 @@
 > **权威来源**: The Rust Programming Language (TRPL), Rust Reference, RustBelt (POPL 2018)
 > **形式化参考**: Jung et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. POPL
 > **状态**: 深度分析文档 | 形式化完备
-> **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Memory Safety]**
+> **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Jung et al. 2018 - RustBelt Paper]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Memory Safety]** · **[来源: Wikipedia - Linear Type]** · **[来源: Wikipedia - Substructural Type System]** · **[来源: IEEE - Type Safety in Systems Programming]** · **[来源: ACM - Ownership Types Survey]**
 
 ---
 

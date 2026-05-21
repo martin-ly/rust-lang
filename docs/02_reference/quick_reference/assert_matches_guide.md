@@ -3,7 +3,7 @@
 > **Rust 版本**: 1.96.0+ Stable
 > **跟踪 Issue**: rust#108099
 > **Bloom 层级**: 应用
-> **[来源: Rust Standard Library]** · **[来源: RFC 未正式发布，社区长期需求]** ✅
+> **[来源: Rust Standard Library]** · **[来源: RFC 未正式发布，社区长期需求]** · **[来源: Rust Reference - Patterns]** · **[来源: TRPL Ch. 18 - Patterns and Matching]** ✅
 
 ---
 
@@ -180,7 +180,6 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 > **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
-
 
 ---
 

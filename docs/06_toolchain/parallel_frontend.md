@@ -3,7 +3,7 @@
 > **层级**: L6 生态工具
 > **前置概念**: [Cargo](../../concept/06_ecosystem/01_toolchain.md) · [Build Systems](../concept/07_future/)
 > **Bloom 层级**: 应用
-> **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** ✅
+> **[来源: Rust Compiler Team]** · **[来源: rustc_parallel_frontend 跟踪 Issue]** · **[来源: Rust Compiler Development Guide]** · **[来源: Nicholas Nethercote - How to Speed Up the Rust Compiler]** ✅
 
 ---
 

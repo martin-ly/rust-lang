@@ -1,7 +1,8 @@
 # Tokio Runtime: Formal Analysis and Deep Dive
 
 ## Table of Contents
-> **[来源: Tokio Documentation - tokio.rs]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Reactor Pattern]** · **[来源: Rust Standard Library - std::sync]**
+>
+> **[来源: Tokio Documentation - tokio.rs]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: TRPL Ch. 17]** · **[来源: Wikipedia - Reactor Pattern]** · **[来源: Rust Standard Library - std::sync]** · **[来源: Wikipedia - Event Loop]** · **[来源: ACM - Async Runtime Design Patterns]**
 
 - [Tokio Runtime: Formal Analysis and Deep Dive](#tokio-runtime-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -77,11 +78,13 @@
 ---
 
 ## 1. Introduction
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tokio is the preeminent asynchronous runtime for the Rust programming language, providing the essential infrastructure for building high-performance, concurrent applications. This document presents a comprehensive formal analysis of the Tokio runtime, examining its architecture, semantics, safety properties, and common pitfalls through the lens of ownership, types, and formal verification principles.
 
 ### 1.1 What is Tokio?
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tokio is an event-driven, non-blocking I/O platform for writing asynchronous applications in Rust. It consists of:
@@ -2917,7 +2920,6 @@ mod tests {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

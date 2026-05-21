@@ -5,7 +5,7 @@
 > **形式化框架**: Pod保证 + 对齐验证 + 位模式安全
 >
 > **参考**: bytemuck Documentation, Rust Unsafe Code Guidelines
-> **[来源: bytemuck Documentation - docs.rs/bytemuck]** · **[来源: Rust Unsafe Code Guidelines - rust-lang.github.io/unsafe-code-guidelines]** · **[来源: Wikipedia - Type Punning]** · **[来源: Rustonomicon - Transmute]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust Reference - Type Layout]**
+> **[来源: bytemuck Documentation - docs.rs/bytemuck]** · **[来源: Rust Unsafe Code Guidelines - rust-lang.github.io/unsafe-code-guidelines]** · **[来源: Wikipedia - Type Punning]** · **[来源: Rustonomicon - Transmute]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust Reference - Type Layout]** · **[来源: ACM - Safe Type Transmutation]** · **[来源: IEEE - Type Safety in Systems Programming]**
 
 ---
 

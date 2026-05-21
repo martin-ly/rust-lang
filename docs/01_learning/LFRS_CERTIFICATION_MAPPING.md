@@ -3,10 +3,12 @@
 > **创建日期**: 2026-04-24
 > **用途**: 将 LFRS 认证的 10 大考点映射到本项目内容，建立可量化的学习验证体系
 > **认证官网**: <https://www.linuxfoundation.org/certification/linux-foundation-certified-rust-programmer>
+> **[来源: Linux Foundation]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Rust Standard Library]**
 
 ---
 
 ## 考点总览
+>
 > **[来源: Rust Official Docs]**
 
 | 编号 | 考点 | 掌握程度 | 项目覆盖度 |
@@ -25,11 +27,13 @@
 ---
 
 ## 考点 1: 语法、类型与控制流
+>
 > **[来源: Rust Official Docs]**
 
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+>
 > **[来源: Rust Official Docs]**
 
 | 子主题 | 项目文件路径 | 说明 |
@@ -325,6 +329,7 @@
 - [PRAGMATIC_GUIDELINES_CHECKLIST.md](../05_guides/PRAGMATIC_GUIDELINES_CHECKLIST.md) - 代码审查清单
 - [exercises/README.md](../../exercises/README.md) - 练习题总入口
 - [RUSTLINGS_MAPPING.md](../../exercises/RUSTLINGS_MAPPING.md) - Rustlings 习题映射
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

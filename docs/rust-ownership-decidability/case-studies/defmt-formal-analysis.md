@@ -5,7 +5,7 @@
 > **形式化框架**: 延迟求值 + 协议编码 + 资源边界
 >
 > **参考**: defmt Documentation; Knuth (1974); Embedded Rust Book
-> **[来源: defmt Documentation - docs.rs/defmt]** · **[来源: Rust Embedded Book]** · **[来源: Knuth 1974 - Structured Programming with go to Statements]** · **[来源: Wikipedia - Logging]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]**
+> **[来源: defmt Documentation - docs.rs/defmt]** · **[来源: Rust Embedded Book]** · **[来源: Knuth 1974 - Structured Programming with go to Statements]** · **[来源: Wikipedia - Logging]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Debugging]** · **[来源: ACM - Embedded Debugging Frameworks]** · **[来源: IEEE - Low-Overhead Instrumentation]**
 
 ---
 

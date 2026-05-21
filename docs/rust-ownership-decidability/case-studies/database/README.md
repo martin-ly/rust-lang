@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Database Management System]** · **[来源: Wikipedia - ACID]** · **[来源: Rust Database Ecosystem - arewedatabasyet.com]** · **[来源: Wikipedia - Distributed Database]** · **[来源: PostgreSQL Documentation]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Database Management System]** · **[来源: Wikipedia - ACID]** · **[来源: Rust Database Ecosystem - arewedatabasyet.com]** · **[来源: Wikipedia - Distributed Database]** · **[来源: PostgreSQL Documentation]** · **[来源: Wikipedia - SQL]** · **[来源: ACM - Database Systems Survey]** · **[来源: IEEE - Transaction Processing]**
 
 - [Rust数据库系统实现指南](#rust数据库系统实现指南)
   - [目录](#目录)
@@ -59,6 +59,8 @@
     - [10.2 崩溃恢复测试](#102-崩溃恢复测试)
     - [10.3 并发测试](#103-并发测试)
   - [总结](#总结)
+  - [Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建高性能、可靠数据库系统的理想选择](#rust的内存安全零成本抽象和-fearless-并发特性使其成为构建高性能可靠数据库系统的理想选择)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -2973,7 +2975,6 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

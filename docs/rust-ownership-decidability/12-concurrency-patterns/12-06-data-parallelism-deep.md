@@ -5,11 +5,12 @@
 > **Scope**: Data parallelism fundamentals, parallel iterator theorems, safety guarantees, performance optimization
 > **Prerequisites**: Understanding of ownership, `Send`/`Sync` traits, and basic Rayon usage
 > **Estimated Reading Time**: 3-4 hours
-> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Data Parallelism]** · **[来源: Rayon Documentation - docs.rs/rayon]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Parallel Computing]** · **[来源: Rustonomicon - Concurrency]
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Data Parallelism]** · **[来源: Rayon Documentation - docs.rs/rayon]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Parallel Computing]** · **[来源: Rustonomicon - Concurrency] · **[来源: Wikipedia - SIMD]** · **[来源: ACM - Parallel Algorithm Design]** · **[来源: IEEE - High-Performance Parallel Computing]**
 
 ---
 
 ## Table of Contents
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Data Parallelism Patterns: Formal Deep Dive](#data-parallelism-patterns-formal-deep-dive)
@@ -88,6 +89,7 @@
 ---
 
 ## Executive Summary
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 This document provides a formal treatment of data parallelism patterns in Rust, focusing on how Rust's ownership system enables safe, efficient parallel data processing. We present:
@@ -103,6 +105,7 @@ The core insight is that Rust's ownership system, when combined with parallel it
 ---
 
 ## 1. Data Parallelism Fundamentals
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Definition

@@ -100,7 +100,7 @@ python scripts/build_search_index.py
 | L5 | [`01_rust_vs_cpp.md`](concept/05_comparative/01_rust_vs_cpp.md) | RAII语义差异、性能对比 |
 | L5 | [`02_rust_vs_go.md`](concept/05_comparative/02_rust_vs_go.md) | 并发模型、错误处理、GC对比 |
 | L5 | [`03_paradigm_matrix.md`](concept/05_comparative/03_paradigm_matrix.md) | 多语言范式谱系 |
-| L5 | [`safety_boundaries.md`](concept/05_comparative/safety_boundaries.md) | unsafe边界、供应链安全 |
+| L5 | [`04_safety_boundaries.md`](concept/05_comparative/04_safety_boundaries.md) | unsafe边界、供应链安全 |
 | L6 | [`01_toolchain.md`](concept/06_ecosystem/01_toolchain.md) | Cargo、Workspace、Features |
 | L6 | [`02_patterns.md`](concept/06_ecosystem/02_patterns.md) | 类型状态、Builder、Newtype |
 | L6 | [`03_core_crates.md`](concept/06_ecosystem/03_core_crates.md) | serde/tokio/rayon等核心crate |

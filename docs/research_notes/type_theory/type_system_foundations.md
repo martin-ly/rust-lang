@@ -17,7 +17,8 @@
 ---
 
 ## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Lambda Calculus]** · **[来源: ACM - Type Systems for Memory Safety]** · **[来源: IEEE - Advanced Type System Features]**
 
 - [类型系统基础](#类型系统基础)
   - [📊 目录 {#-目录}](#-目录--目录)
@@ -134,11 +135,13 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+>
 > **[来源: Rust Official Docs]**
 
 本研究的目的是形式化定义 Rust 的类型系统基础，并理解其类型理论根源。
 
 ### 核心问题
+>
 > **[来源: Rust Official Docs]**
 
 1. **类型系统的形式化定义**: 如何用类型理论精确描述 Rust 类型系统？
@@ -146,6 +149,7 @@
 3. **类型安全保证**: 如何证明类型系统保证类型安全？
 
 ### 预期成果
+>
 > **[来源: Rust Official Docs]**
 
 - Rust 类型系统的形式化定义
@@ -155,9 +159,11 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+>
 > **[来源: Rust Official Docs]**
 
 ### 类型系统核心概念
+>
 > **[来源: Rust Official Docs]**
 
 1. **类型环境**: 变量到类型的映射
@@ -166,6 +172,7 @@
 4. **类型安全**: 良型程序不会出现类型错误
 
 ### 相关概念
+>
 > **[来源: Rust Official Docs]**
 
 **类型环境 (Type Environment)**: 变量到类型的映射，用于记录变量的类型信息。在类型检查时，类型环境用于查找变量的类型。
@@ -179,6 +186,7 @@
 **类型规则 (Type Rule)**: 定义如何从子表达式的类型推导出复合表达式的类型。类型规则通常用推理规则的形式表示。
 
 ### 相关理论
+>
 > **[来源: Rust Official Docs]**
 
 **简单类型 Lambda 演算 (Simply Typed Lambda Calculus)**: 基础类型系统，为 Lambda 演算添加类型。这是理解类型系统的基础。
@@ -192,6 +200,7 @@
 **型变 (Variance)**: 泛型类型参数的型变规则，决定子类型关系如何传递到泛型类型。
 
 ### 理论背景
+>
 > **[来源: Rust Official Docs]**
 
 **类型理论 (Type Theory)**: 研究类型系统的数学理论。类型理论为编程语言的类型系统提供理论基础。
@@ -203,6 +212,7 @@
 ---
 
 ### Curry-Howard 对应 (Stanford CS242 Lecture 16-20)
+>
 > **[来源: Rust Official Docs]**
 
 > **课程**: [Stanford CS242: Programming Languages](https://cs242.stanford.edu/README.md)
@@ -215,6 +225,7 @@
 - **求值对应证明归约 (Evaluation as Proof Normalization)**
 
 #### 完整的 Curry-Howard 对应表
+>
 > **[来源: Rust Official Docs]**
 
 | 逻辑 (Logic) | 类型理论 (Type Theory) | Rust 示例 |
@@ -707,6 +718,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 ---
 
 ## 欧洲大学课程对齐
+>
 > **[来源: Rust Official Docs]**
 
 ### ETH Zurich (瑞士联邦理工学院)
@@ -780,6 +792,7 @@ $$\text{Type Safety} = \text{Progress} + \text{Preservation}$$
 ---
 
 ## 🔬 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 类型环境与类型判断

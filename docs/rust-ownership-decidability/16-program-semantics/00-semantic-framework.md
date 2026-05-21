@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Semantics]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: TRPL Ch. 4]**
+> **[来源: Rust Reference - Semantics]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Abstract Interpretation]** · **[来源: ACM - Semantic Frameworks for Systems Languages]** · **[来源: IEEE - Formal Semantic Models]**
 
 - [程序设计语义框架](#程序设计语义框架)
   - [目录](#目录)

@@ -5,9 +5,10 @@
 
 ---
 
-> **[来源: Miri Documentation - github.com/rust-lang/miri]** · **[来源: Kani Documentation - github.com/model-checking/kani]** · **[来源: Wikipedia - Model Checking]** · **[来源: Wikipedia - Formal Verification]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]**
+> **[来源: Miri Documentation - github.com/rust-lang/miri]** · **[来源: Kani Documentation - github.com/model-checking/kani]** · **[来源: Wikipedia - Model Checking]** · **[来源: Wikipedia - Formal Verification]** · **[来源: Rust Reference]** · **[来源: POPL 2018 - RustBelt]** · **[来源: ACM - Program Verification Tools Survey]** · **[来源: IEEE - Software Verification Standards]**
 
 ## Table of Contents
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust Verification Tools: A Comprehensive Deep Dive](#rust-verification-tools-a-comprehensive-deep-dive)
@@ -106,13 +107,16 @@
     - [Loom Counter-Examples (6 total)](#loom-counter-examples-6-total)
     - [Creusot Counter-Examples (4 total)](#creusot-counter-examples-4-total)
   - [Theorems Index](#theorems-index)
+  - [*End of Document*](#end-of-document)
 
 ---
 
 ## 1. The Verification Landscape
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Tool Categories
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Rust verification ecosystem has matured significantly, offering developers a spectrum of tools ranging from lightweight static analyzers to heavyweight theorem provers. Understanding the taxonomy of these tools is essential for effective verification strategy.
@@ -1980,7 +1984,6 @@ This document contains **9 theorems** about verification guarantees:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

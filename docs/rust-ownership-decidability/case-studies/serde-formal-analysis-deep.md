@@ -1,7 +1,8 @@
 # Serde Serialization Framework: Formal Analysis and Deep Dive
 
 ## Table of Contents
-> **[来源: serde.rs Documentation]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Serialization]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - JSON]** · **[来源: Rust Standard Library - std::fmt]**
+>
+> **[来源: serde.rs Documentation]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Serialization]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - JSON]** · **[来源: Rust Standard Library - std::fmt]** · **[来源: Wikipedia - Remote Procedure Call]** · **[来源: ACM - Data Serialization Performance]** · **[来源: IEEE - Schema Evolution in Data Formats]**
 
 - [Serde Serialization Framework: Formal Analysis and Deep Dive](#serde-serialization-framework-formal-analysis-and-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -83,11 +84,13 @@
 ---
 
 ## 1. Introduction
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Serde is Rust's most widely used serialization framework, providing a powerful, type-safe, and zero-cost abstraction for converting Rust data structures to and from various data formats. This document provides a comprehensive formal analysis of Serde's architecture, implementation patterns, common pitfalls, and performance characteristics.
 
 ### 1.1 Design Philosophy
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Serde follows several core design principles:
@@ -3353,7 +3356,6 @@ mod benches {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -42,7 +42,7 @@ concept/
 
 ## 维护规范
 
-1. **版本跟踪**: 每 6 周扫描 Rust stable release，更新 `07_future/rust_version_tracking.md`
+1. **版本跟踪**: 每 6 周扫描 Rust stable release，更新 `07_future/05_rust_version_tracking.md`
 2. **来源更新**: 新增内容必须附 `[来源: ...]` 标注
 3. **交叉一致性**: 修改核心概念定义时，检查所有引用该概念的文件
 4. **审计运行**: 重大修改后执行 `python scripts/concept_audit.py`

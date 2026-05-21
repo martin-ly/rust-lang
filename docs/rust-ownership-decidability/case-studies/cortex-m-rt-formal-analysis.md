@@ -5,7 +5,7 @@
 > **形式化框架**: 操作语义 + 分离逻辑 + 状态机模型
 >
 > **参考**: cortex-m-rt Documentation; ARMv7-M Architecture Reference Manual; ARMv8-M Architecture Reference Manual
-> **[来源: cortex-m-rt Documentation - docs.rs/cortex-m-rt]** · **[来源: ARM Architecture Reference Manual - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Cortex-M]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]
+> **[来源: cortex-m-rt Documentation - docs.rs/cortex-m-rt]** · **[来源: ARM Architecture Reference Manual - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Cortex-M]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs] · **[来源: Wikipedia - Real-Time Operating System]** · **[来源: ACM - Embedded Runtime Systems]** · **[来源: IEEE - Real-Time Scheduling]**
 
 ---
 

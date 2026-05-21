@@ -2,7 +2,7 @@
 
 ## Table of Contents
 >
-> **[来源: Rust Reference - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: Iris Project - iris-project.org]**
+> **[来源: Rust Reference - Type System]** · **[来源: Wikipedia - Type Theory]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: POPL 2018 - RustBelt]** · **[来源: PLDI 2023 - Aeneas]** · **[来源: Iris Project - iris-project.org]** · **[来源: Wikipedia - Formal Methods]** · **[来源: Wikipedia - Denotational Semantics]** · **[来源: IEEE - Formal Verification Standards]** · **[来源: ACM - Programming Language Semantics]**
 
 - [Rust Formal Semantics: A Comprehensive Deep Dive](#rust-formal-semantics-a-comprehensive-deep-dive)
   - [Table of Contents](#table-of-contents)
@@ -2963,7 +2963,6 @@ Borrowing rules are enforced at compile time.
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

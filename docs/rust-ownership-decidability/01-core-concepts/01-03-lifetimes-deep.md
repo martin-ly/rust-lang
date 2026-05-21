@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Lifetimes]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Lifetime Elision]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Region-based Memory Management]** · **[来源: POPL 2018 - RustBelt]**
+> **[来源: Rust Reference - Lifetimes]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon - Lifetime Elision]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Region-based Memory Management]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Type Inference]** · **[来源: Wikipedia - Hindley-Milner Type System]** · **[来源: ACM - Region-based Memory Management]** · **[来源: IEEE - Lifetime Analysis in Compilers]**
 
 - [深入理解 Rust 生命周期系统](#深入理解-rust-生命周期系统)
   - [目录](#目录)
@@ -2743,7 +2743,6 @@ Rust 的 for<'a> 是全称量词。
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

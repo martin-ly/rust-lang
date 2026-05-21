@@ -1,7 +1,7 @@
 # 线性逻辑深度解析：从证明论到 Rust 所有权
 
 > **权威来源**: Jean-Yves Girard (1987). *Linear Logic*. Theoretical Computer Science 50:1-102
-> **[来源: Girard 1987 - Linear Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Substructural Type System]** · **[来源: Wadler 1990 - Linear Types can Change the World]** · **[来源: Rust Reference - Ownership]**
+> **[来源: Girard 1987 - Linear Logic]** · **[来源: Wikipedia - Linear Logic]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Substructural Type System]** · **[来源: Wadler 1990 - Linear Types can Change the World]** · **[来源: Rust Reference - Ownership]** · **[来源: Wikipedia - Proof Theory]** · **[来源: Wikipedia - Substructural Logic]** · **[来源: ACM - Linear Logic in Programming]** · **[来源: IEEE - Resource-Sensitive Type Systems]**
 > **关联文献**:
 >
 > - Girard, Lafont, Taylor (1989). *Proofs and Types*. Cambridge Tracts in Theoretical Computer Science
@@ -2696,7 +2696,6 @@ list reverse(list x);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

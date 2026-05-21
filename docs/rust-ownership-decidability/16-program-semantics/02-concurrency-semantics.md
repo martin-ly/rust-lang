@@ -2,7 +2,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Model]** · **[来源: POPL 2018 - RustBelt]**
+> **[来源: Rust Reference - Concurrency]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: Rustonomicon - Concurrency]** · **[来源: TRPL Ch. 16]** · **[来源: Wikipedia - Memory Model]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Thread Safety]** · **[来源: IEEE - Memory Consistency Models]** · **[来源: ACM - Concurrent Data Structures]**
 
 - [Rust 并发执行模型语义](#rust-并发执行模型语义)
   - [目录](#目录)

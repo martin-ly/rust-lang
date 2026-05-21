@@ -4,7 +4,7 @@
 > **覆盖版本**: Rust 1.95.0+ / FLS (Ferrocene Language Specification) 24.11
 > **官方来源**: [Rust Project Goals 2026 — Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [Ferrocene](https://ferrocene.dev/) · [MISRA Rust Guidelines](https://misra.org.uk/)
 > **Bloom 层级**: 分析 → 评价
-> **[来源: Rust Official Docs]** · **[来源: Ferrocene]** · **[来源: MISRA]** ✅
+> **[来源: Rust Official Docs]** · **[来源: Ferrocene]** · **[来源: MISRA]** · **[来源: IEC 61508]** · **[来源: ISO 26262]** · **[来源: DO-178C]** ✅
 
 ---
 
@@ -229,7 +229,6 @@ Rust Project Goals 2026 计划在 Clippy 中增加 Safety-Critical 专用 lint�
 > **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: 🟡 初版完成，待细化代码示例
-
 
 ---
 

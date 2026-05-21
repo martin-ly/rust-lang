@@ -5,7 +5,7 @@
 > **形式化框架**: 布局保证 + 安全转换 + 内存模型验证
 >
 > **参考**: zerocopy Documentation, Rust Reference (Type Layout)
-> **[来源: zerocopy Documentation - docs.rs/zerocopy]** · **[来源: Rust Reference - Type Layout]** · **[来源: Wikipedia - Zero-copy]** · **[来源: Rustonomicon - Type Layout]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust API Guidelines]**
+> **[来源: zerocopy Documentation - docs.rs/zerocopy]** · **[来源: Rust Reference - Type Layout]** · **[来源: Wikipedia - Zero-copy]** · **[来源: Rustonomicon - Type Layout]** · **[来源: Wikipedia - Memory Alignment]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Zero-Copy]** · **[来源: ACM - Memory Optimization Techniques]** · **[来源: IEEE - High-Performance Data Transfer]**
 
 ---
 

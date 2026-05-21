@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Cloud Computing]** · **[来源: Wikipedia - Kubernetes]** · **[来源: Tokio Documentation]** · **[来源: containerd Documentation]** · **[来源: Rust Async Working Group]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Cloud Computing]** · **[来源: Wikipedia - Kubernetes]** · **[来源: Tokio Documentation]** · **[来源: containerd Documentation]** · **[来源: Rust Async Working Group]** · **[来源: Wikipedia - Containerization]** · **[来源: ACM - Cloud Native Application Design]** · **[来源: IEEE - Microservices Architecture Standards]**
 
 - [Rust 云计算与容器开发完全指南](#rust-云计算与容器开发完全指南)
   - [目录](#目录)
@@ -69,6 +69,7 @@
     - [推荐 crate](#推荐-crate)
     - [学习资源](#学习资源)
   - [*最后更新：2026-03-04*](#最后更新2026-03-04)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -3413,7 +3414,6 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

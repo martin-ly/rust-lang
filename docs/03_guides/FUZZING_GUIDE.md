@@ -2,15 +2,18 @@
 
 > 本文档对应 Rust 生产级工程实践体系阶段三 —— 模糊测试。
 > 参考: Google OSS-Fuzz、Cloudflare 模糊测试实践、Rust Fuzzing Book。
+> **[来源: Wikipedia - Fuzzing]** · **[来源: AFL - American Fuzzy Lop]** · **[来源: LLVM libFuzzer]** · **[来源: Rust Fuzzing Book - fuzzingbook.com]**
 
 ---
 
 ## 1. 什么是模糊测试（Fuzzing）？
+>
 > **[来源: Rust Official Docs]**
 
 模糊测试是一种自动化的软件测试技术，通过向程序输入大量随机或半随机的数据，来发现崩溃、断言失败、内存错误等异常行为。
 
 ### 为什么 Rust 需要 Fuzzing？
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍可能出现问题：
@@ -27,6 +30,7 @@ Rust 的所有权系统防止了大部分内存安全问题，但以下场景仍
 ---
 
 ## 2. 工具链安装
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -241,7 +245,6 @@ fuzzing:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

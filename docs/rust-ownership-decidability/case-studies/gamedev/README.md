@@ -4,7 +4,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Game Engine]** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **[来源: Wikipedia - Entity Component System]** · **[来源: Rust GameDev Working Group]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Game Engine]** · **[来源: Bevy Engine Documentation - bevyengine.org]** · **[来源: wgpu Documentation - gfx-rs.github.io]** · **[来源: Wikipedia - Entity Component System]** · **[来源: Rust GameDev Working Group]** · **[来源: ACM - Game Development Patterns]** · **[来源: IEEE - Real-Time Graphics Rendering]**
 
 - [Rust 游戏开发完整指南](#rust-游戏开发完整指南)
   - [目录](#目录)
@@ -4866,7 +4866,6 @@ fn cleanup_system(
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

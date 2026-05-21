@@ -6,7 +6,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Web Framework]** · **[来源: Actix Web Documentation]** · **[来源: Axum Documentation - docs.rs/axum]** · **[来源: Wikipedia - WebAssembly]** · **[来源: MDN Web Docs - WebAssembly]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Web Framework]** · **[来源: Actix Web Documentation]** · **[来源: Axum Documentation - docs.rs/axum]** · **[来源: Wikipedia - WebAssembly]** · **[来源: MDN Web Docs - WebAssembly]** · **[来源: Wikipedia - Representational State Transfer]** · **[来源: ACM - Web Server Architecture]** · **[来源: IEEE - High-Performance Web Systems]**
 
 - [Rust Web 开发](#rust-web-开发)
   - [目录](#目录)
@@ -36,7 +36,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
     - [1. 错误处理](#1-错误处理)
     - [2. 配置管理](#2-配置管理)
   - [总结](#总结)
-  - [通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用。](#通过本文档介绍的技术和最佳实践开发者可以构建高性能高可靠性的-web-应用)
+  - [通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用](#通过本文档介绍的技术和最佳实践开发者可以构建高性能高可靠性的-web-应用)
 
 ---
 

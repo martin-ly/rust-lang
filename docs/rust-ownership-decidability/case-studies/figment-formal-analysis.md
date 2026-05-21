@@ -5,11 +5,12 @@
 > **形式化框架**: 配置源优先级 + 配置提取 + Profile选择
 >
 > **参考**: Figment Documentation, Rocket Framework, serde
-> **[来源: Figment Documentation - docs.rs/figment]** · **[来源: Rocket Framework - rocket.rs]** · **[来源: serde.rs Documentation]** · **[来源: Wikipedia - Configuration Management]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]**
+> **[来源: Figment Documentation - docs.rs/figment]** · **[来源: Rocket Framework - rocket.rs]** · **[来源: serde.rs Documentation]** · **[来源: Wikipedia - Configuration Management]** · **[来源: Rust Reference - Traits]** · **[来源: Rust API Guidelines]** · **[来源: ACM - Configuration DSL Design]** · **[来源: IEEE - Software Configuration Standards]**
 
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Figment 配置管理库形式化分析](#figment-配置管理库形式化分析)
@@ -29,7 +30,7 @@
     - [4.1 多环境配置](#41-多环境配置)
     - [4.2 Profile 选择策略](#42-profile-选择策略)
   - [5. 类型安全提取](#5-类型安全提取)
-    - [5.1 deserialize_into 原理](#51-deserialize_into-原理)
+    - [5.1 deserialize\_into 原理](#51-deserialize_into-原理)
     - [5.2 错误处理](#52-错误处理)
     - [5.3 验证机制](#53-验证机制)
   - [6. 环境变量集成](#6-环境变量集成)
@@ -52,13 +53,21 @@
   - [11. 完整代码示例](#11-完整代码示例)
     - [11.1 复杂配置场景实现](#111-复杂配置场景实现)
   - [定理汇总](#定理汇总)
+    - [定理 2.1 (后进优先)](#定理-21-后进优先)
+    - [定理 3.1 (类型提取)](#定理-31-类型提取)
+    - [定理 4.1 (Profile 支持)](#定理-41-profile-支持)
+    - [定理 5.1 (嵌套合并)](#定理-51-嵌套合并)
+    - [定理 6.1 (环境变量嵌套)](#定理-61-环境变量嵌套)
+  - [*代码示例: 11个完整示例*](#代码示例-11个完整示例)
 
 ---
 
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Figment 是什么
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket Web 框架作者）开发。它提供了一个统一、类型安全且可扩展的配置管理解决方案。
@@ -146,10 +155,10 @@ Provider 是 Figment 的核心抽象，定义配置数据的来源：
 pub trait Provider {
     /// 提供数据的元数据描述
     fn metadata(&self) -> Metadata;
-    
+
     /// 提供配置数据，返回 Dict（嵌套的字符串键值对）
     fn data(&self) -> Result<Map<Profile, Dict>, Error>;
-    
+
     /// 指定此 Provider 提供的 Profile
     fn profile(&self) -> Option<Profile> {
         None
@@ -215,7 +224,7 @@ let figment = Figment::new()
 设 C₁, C₂, ..., Cₙ 为配置源，按加入顺序排列
 
 合并结果 M 满足:
-∀ key ∈ keys(M): 
+∀ key ∈ keys(M):
     M[key] = Cᵢ[key] where i = max{j | key ∈ keys(Cⱼ)}
 ```
 
@@ -439,7 +448,7 @@ struct ServerConfig {
     #[serde(deserialize_with = "validate_port")]
     #[validate(range(min = 1024, max = 65535))]
     port: u16,
-    
+
     #[validate(length(min = 1, max = 100))]
     host: String,
 }
@@ -630,15 +639,15 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
         let config: T = figment.extract()?;
         let figment = Arc::new(RwLock::new(figment));
         let current = Arc::new(RwLock::new(config));
-        
+
         let (tx, rx) = channel();
         let mut watcher = watcher(tx, Duration::from_secs(2))?;
         watcher.watch(config_path, RecursiveMode::NonRecursive)?;
-        
+
         let figment_clone = Arc::clone(&figment);
         let current_clone = Arc::clone(&current);
         let path = config_path.to_string();
-        
+
         std::thread::spawn(move || {
             loop {
                 match rx.recv() {
@@ -647,7 +656,7 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
                         // 重新加载配置
                         let new_figment = Figment::new()
                             .merge(Toml::file(&path));
-                        
+
                         match new_figment.extract::<T>() {
                             Ok(new_config) => {
                                 *figment_clone.write().unwrap() = new_figment;
@@ -661,14 +670,14 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
                 }
             }
         });
-        
+
         Ok(Self {
             figment,
             current,
             _watcher: watcher,
         })
     }
-    
+
     fn get(&self) -> T
     where
         T: Clone,
@@ -703,7 +712,7 @@ impl DatabaseProvider {
             profile: Profile::Default,
         }
     }
-    
+
     fn profile(mut self, profile: impl Into<Profile>) -> Self {
         self.profile = profile.into();
         self
@@ -715,24 +724,24 @@ impl Provider for DatabaseProvider {
         figment::Metadata::named("Database Provider")
             .about("从数据库加载配置")
     }
-    
+
     fn data(&self) -> Result<Map<Profile, Dict>, Error> {
         // 模拟从数据库读取配置
         // 实际应用中使用 sqlx/diesel 等 ORM
         let mut dict = Dict::new();
-        
+
         // 假设从数据库读取了这些配置
-        dict.insert("database_url".to_string(), 
+        dict.insert("database_url".to_string(),
             Value::from(self.connection_string.clone()));
         dict.insert("max_connections".to_string(), Value::from(100));
         dict.insert("timeout_ms".to_string(), Value::from(5000));
-        
+
         let mut map = Map::new();
         map.insert(self.profile.clone(), dict);
-        
+
         Ok(map)
     }
-    
+
     fn profile(&self) -> Option<Profile> {
         Some(self.profile.clone())
     }
@@ -766,34 +775,34 @@ impl RemoteConfigProvider {
             timeout: Duration::from_secs(30),
         }
     }
-    
+
     fn with_api_key(mut self, key: &str) -> Self {
         self.api_key = Some(key.to_string());
         self
     }
-    
+
     async fn fetch_config(&self) -> Result<Dict, Error> {
         let client = reqwest::Client::new();
         let mut request = client.get(&self.url).timeout(self.timeout);
-        
+
         if let Some(key) = &self.api_key {
             request = request.header("Authorization", format!("Bearer {}", key));
         }
-        
+
         let response = request
             .send()
             .await
             .map_err(|e| Error::from(e.to_string()))?;
-        
+
         let json: JsonValue = response
             .json()
             .await
             .map_err(|e| Error::from(e.to_string()))?;
-        
+
         // 将 JSON Value 转换为 Figment Dict
         Self::json_to_dict(json)
     }
-    
+
     fn json_to_dict(value: JsonValue) -> Result<Dict, Error> {
         match value {
             JsonValue::Object(map) => {
@@ -806,10 +815,10 @@ impl RemoteConfigProvider {
             _ => Err(Error::from("Root must be an object")),
         }
     }
-    
+
     fn json_to_value(value: JsonValue) -> Result<figment::value::Value, Error> {
         use figment::value::{Value, Num};
-        
+
         match value {
             JsonValue::Null => Ok(Value::Empty),
             JsonValue::Bool(b) => Ok(Value::Bool(b)),
@@ -843,14 +852,14 @@ impl Provider for RemoteConfigProvider {
         figment::Metadata::named("Remote Config")
             .about(format!("从 {} 获取配置", self.url))
     }
-    
+
     fn data(&self) -> Result<Map<Profile, Dict>, Error> {
         // 注意：这里使用 block_on 将 async 转为 sync
         // 生产环境建议使用 tokio::runtime 或专用线程
         let dict = tokio::runtime::Runtime::new()
             .unwrap()
             .block_on(self.fetch_config())?;
-        
+
         let mut map = Map::new();
         map.insert(Profile::Default, dict);
         Ok(map)
@@ -881,12 +890,12 @@ async fn main() -> Result<(), rocket::Error> {
         .merge(Toml::file("Rocket.toml").nested())
         .merge(Env::prefixed("ROCKET_").global())
         .select(Profile::from_env_or("ROCKET_PROFILE", "default"));
-    
+
     let _rocket = rocket::custom(figment)
         .mount("/", routes![index])
         .launch()
         .await?;
-    
+
     Ok(())
 }
 ```
@@ -963,8 +972,8 @@ struct AppState {
 }
 
 async fn health_check(State(state): State<Arc<AppState>>) -> String {
-    format!("Server running on {}:{}", 
-        state.config.server.host, 
+    format!("Server running on {}:{}",
+        state.config.server.host,
         state.config.server.port
     )
 }
@@ -976,23 +985,23 @@ async fn main() {
         .merge(Serialized::defaults(AppConfig::default()))
         .merge(Toml::file("app.toml"))
         .merge(Env::prefixed("APP_").split("__"));
-    
+
     // 提取配置
     let config: AppConfig = figment
         .extract()
         .expect("Failed to load configuration");
-    
+
     println!("Loaded config: {:?}", config);
-    
+
     let state = Arc::new(AppState { config: config.clone() });
-    
+
     let app = Router::new()
         .route("/health", get(health_check))
         .with_state(state);
-    
+
     let addr = format!("{}:{}", config.server.host, config.server.port);
     let listener = tokio::net::TcpListener::bind(&addr).await.unwrap();
-    
+
     println!("Listening on http://{}", addr);
     axum::serve(listener, app).await.unwrap();
 }
@@ -1015,18 +1024,18 @@ struct AppConfig {
     /// 服务器配置
     #[serde(default)]
     server: ServerConfig,
-    
+
     /// 数据库配置
     database: DatabaseConfig,
-    
+
     /// 缓存配置
     #[serde(default)]
     cache: CacheConfig,
-    
+
     /// 日志配置
     #[serde(default)]
     logging: LogConfig,
-    
+
     /// 功能开关
     #[serde(default)]
     features: FeatureFlags,
@@ -1101,14 +1110,14 @@ impl Provider for SecretsManagerProvider {
                 .secret_id(&self.secret_name)
                 .send()
         ).map_err(|e| Error::from(e.to_string()))?;
-        
+
         let secret_string = secret.secret_string()
             .ok_or_else(|| Error::from("Secret is binary"))?;
-        
+
         // 解析 JSON 并转为 Dict
         let value: serde_json::Value = serde_json::from_str(secret_string)
             .map_err(|e| Error::from(e.to_string()))?;
-        
+
         // ... 转换为 Dict
         todo!()
     }
@@ -1168,7 +1177,7 @@ enum SslMode {
 
 ```rust
 //! 生产级配置管理示例
-//! 
+//!
 //! 演示 Figment 在复杂场景下的完整使用方式
 
 use figment::{Figment, Provider, Error, Profile, Metadata};
@@ -1191,30 +1200,30 @@ pub struct AppConfig {
     /// 应用名称
     #[validate(length(min = 1, max = 100))]
     pub app_name: String,
-    
+
     /// 运行环境
     pub environment: Environment,
-    
+
     /// 服务器配置
     #[validate]
     pub server: ServerConfig,
-    
+
     /// 数据库配置
     #[validate]
     pub database: DatabaseConfig,
-    
+
     /// Redis 缓存配置
     #[serde(default)]
     pub redis: Option<RedisConfig>,
-    
+
     /// 日志配置
     #[serde(default)]
     pub logging: LoggingConfig,
-    
+
     /// 外部服务配置
     #[serde(default)]
     pub external_services: HashMap<String, ServiceConfig>,
-    
+
     /// 功能开关
     #[serde(default)]
     pub features: FeatureFlags,
@@ -1256,23 +1265,23 @@ pub struct ServerConfig {
     /// 监听地址
     #[validate(custom = "validate_host")]
     pub host: String,
-    
+
     /// 监听端口
     #[validate(range(min = 1, max = 65535))]
     pub port: u16,
-    
+
     /// 工作线程数
     #[validate(range(min = 1, max = 1024))]
     pub workers: usize,
-    
+
     /// 请求超时（秒）
     #[validate(range(min = 1, max = 300))]
     pub timeout_secs: u64,
-    
+
     /// 最大请求体大小（MB）
     #[validate(range(min = 1, max = 100))]
     pub max_body_size_mb: usize,
-    
+
     /// TLS 配置
     #[serde(default)]
     pub tls: Option<TlsConfig>,
@@ -1305,19 +1314,19 @@ pub struct DatabaseConfig {
     /// 数据库 URL
     #[validate(url)]
     pub url: String,
-    
+
     /// 连接池大小
     #[validate(range(min = 1, max = 1000))]
     pub pool_size: u32,
-    
+
     /// 连接超时（秒）
     #[validate(range(min = 1, max = 60))]
     pub connect_timeout_secs: u64,
-    
+
     /// 空闲超时（秒）
     #[validate(range(min = 60, max = 3600))]
     pub idle_timeout_secs: u64,
-    
+
     /// 是否启用日志
     #[serde(default)]
     pub logging: bool,
@@ -1342,7 +1351,7 @@ pub struct RedisConfig {
     /// Redis URL
     #[validate(url)]
     pub url: String,
-    
+
     /// 连接池大小
     #[validate(range(min = 1, max = 100))]
     pub pool_size: u32,
@@ -1363,16 +1372,16 @@ impl Default for RedisConfig {
 pub struct LoggingConfig {
     /// 日志级别
     pub level: LogLevel,
-    
+
     /// 输出格式
     pub format: LogFormat,
-    
+
     /// 是否输出到文件
     pub file_output: bool,
-    
+
     /// 日志文件路径
     pub file_path: Option<PathBuf>,
-    
+
     /// 日志轮转配置
     pub rotation: Option<LogRotation>,
 }
@@ -1420,13 +1429,13 @@ pub struct LogRotation {
 pub struct ServiceConfig {
     #[validate(url)]
     pub base_url: String,
-    
+
     #[validate(range(min = 1, max = 60))]
     pub timeout_secs: u64,
-    
+
     #[serde(default)]
     pub retry_count: u32,
-    
+
     pub api_key: Option<String>,
 }
 
@@ -1435,13 +1444,13 @@ pub struct ServiceConfig {
 pub struct FeatureFlags {
     #[serde(default)]
     pub enable_metrics: bool,
-    
+
     #[serde(default)]
     pub enable_caching: bool,
-    
+
     #[serde(default)]
     pub enable_rate_limiting: bool,
-    
+
     #[serde(default)]
     pub beta_features: bool,
 }
@@ -1455,12 +1464,12 @@ fn validate_host(host: &str) -> Result<(), ValidationError> {
     if host.is_empty() {
         return Err(ValidationError::new("host_empty"));
     }
-    
+
     // 简单验证：非空且长度合理
     if host.len() > 253 {
         return Err(ValidationError::new("host_too_long"));
     }
-    
+
     Ok(())
 }
 
@@ -1478,24 +1487,24 @@ impl ConfigLoader {
     /// 4. 命令行参数（如需要）
     pub fn load() -> Result<AppConfig, ConfigError> {
         let figment = Self::build_figment()?;
-        
+
         let config: AppConfig = figment.extract()
             .map_err(|e| ConfigError::ExtractError(e.to_string()))?;
-        
+
         // 运行验证
         config.validate()
             .map_err(|e| ConfigError::ValidationError(e.to_string()))?;
-        
+
         Ok(config)
     }
-    
+
     /// 构建 Figment 实例
     fn build_figment() -> Result<Figment, ConfigError> {
         let mut figment = Figment::new();
-        
+
         // 1. 加载内置默认值
         figment = figment.merge(Serialized::defaults(AppConfig::default()));
-        
+
         // 2. 按优先级尝试加载配置文件
         // 先尝试 TOML
         if std::path::Path::new("config.toml").exists() {
@@ -1509,7 +1518,7 @@ impl ConfigLoader {
         else if std::path::Path::new("config.json").exists() {
             figment = figment.merge(Json::file("config.json"));
         }
-        
+
         // 3. 加载环境变量（优先级最高）
         // 支持嵌套：APP_DATABASE__URL → database.url
         figment = figment.merge(
@@ -1517,21 +1526,21 @@ impl ConfigLoader {
                 .split("__")
                 .map(|key| key.to_lowercase())
         );
-        
+
         // 4. 根据环境选择 Profile
         let profile = Profile::from_env_or("APP_ENV", "development");
         figment = figment.select(profile);
-        
+
         Ok(figment)
     }
-    
+
     /// 从特定路径加载配置
     pub fn load_from(path: impl AsRef<std::path::Path>) -> Result<AppConfig, ConfigError> {
         let path = path.as_ref();
-        
+
         let figment = Figment::new()
             .merge(Serialized::defaults(AppConfig::default()));
-        
+
         let figment = match path.extension().and_then(|s| s.to_str()) {
             Some("toml") => figment.merge(Toml::file(path)),
             Some("yaml") | Some("yml") => figment.merge(Yaml::file(path)),
@@ -1540,13 +1549,13 @@ impl ConfigLoader {
                 path.to_string_lossy().to_string()
             )),
         };
-        
+
         let config: AppConfig = figment.extract()
             .map_err(|e| ConfigError::ExtractError(e.to_string()))?;
-        
+
         config.validate()
             .map_err(|e| ConfigError::ValidationError(e.to_string()))?;
-        
+
         Ok(config)
     }
 }
@@ -1586,17 +1595,17 @@ impl AppConfig {
         format!("{}:{}", self.server.host, self.server.port)
             .parse()
     }
-    
+
     /// 检查是否在开发环境
     pub fn is_dev(&self) -> bool {
         self.environment == Environment::Development
     }
-    
+
     /// 检查是否在生产环境
     pub fn is_prod(&self) -> bool {
         self.environment == Environment::Production
     }
-    
+
     /// 获取日志级别（用于 tracing）
     pub fn tracing_level(&self) -> tracing::Level {
         match self.logging.level {
@@ -1673,25 +1682,25 @@ beta_features = false
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 加载配置
     let config = ConfigLoader::load()?;
-    
+
     println!("应用名称: {}", config.app_name);
     println!("运行环境: {:?}", config.environment);
     println!("服务器地址: {}:{}", config.server.host, config.server.port);
     println!("数据库 URL: {}", config.database.url);
-    
+
     if let Some(redis) = &config.redis {
         println!("Redis URL: {}", redis.url);
     }
-    
+
     // 获取 SocketAddr
     let addr = config.socket_addr()?;
     println!("监听地址: {:?}", addr);
-    
+
     // 检查功能开关
     if config.features.enable_metrics {
         println!("指标收集已启用");
     }
-    
+
     Ok(())
 }
 ```
@@ -1710,11 +1719,12 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 设配置源序列为 C₁, C₂, ..., Cₙ，合并函数为 M(C₁, C₂, ..., Cₙ)
 
 ∀ key ∈ ⋃ keys(Cᵢ):
-    M[key] = Cₖ[key] 
+    M[key] = Cₖ[key]
     where k = max{j | key ∈ keys(Cⱼ) ∧ 1 ≤ j ≤ n}
 ```
 
 **性质**:
+
 - 交换律不成立: M(C₁, C₂) ≠ M(C₂, C₁)
 - 幂等性: M(C, C) = M(C)
 - 结合律: M(M(C₁, C₂), C₃) = M(C₁, M(C₂, C₃))
@@ -1724,6 +1734,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 > 通过 serde 反序列化将配置数据提取为强类型结构，在编译期保证类型安全。
 
 **依赖关系**:
+
 ```
 Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 ```
@@ -1733,6 +1744,7 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 > Profile 系统支持按环境分离配置，选择 Profile 时会自动继承 default Profile 的默认值。
 
 **查找顺序**:
+
 ```
 1. 选定 Profile 的配置值
 2. default Profile 的同名配置值（如果存在）
@@ -1775,7 +1787,6 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

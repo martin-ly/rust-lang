@@ -5,13 +5,14 @@
 > **形式化框架**: 相对指针 + 位置无关存储 + 字节级验证
 >
 > **参考**: rkyv 0.7.x Documentation, rkyv Discord, 官方 Examples
-> **[来源: rkyv Documentation - docs.rs/rkyv]** · **[来源: Wikipedia - Serialization]** · **[来源: Rust Reference - Type Layout]** · **[来源: Wikipedia - Zero-copy]** · **[来源: Rust API Guidelines]** · **[来源: serde.rs Documentation]**
+> **[来源: rkyv Documentation - docs.rs/rkyv]** · **[来源: Wikipedia - Serialization]** · **[来源: Rust Reference - Type Layout]** · **[来源: Wikipedia - Zero-copy]** · **[来源: Rust API Guidelines]** · **[来源: serde.rs Documentation]** · **[来源: Wikipedia - Zero-Copy Serialization]** · **[来源: ACM - Zero-Copy Data Structures]** · **[来源: IEEE - High-Performance Serialization]**
 >
 > **分析版本**: 2.0.0
 
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rkyv 零拷贝序列化形式化分析](#rkyv-零拷贝序列化形式化分析)
@@ -70,9 +71,11 @@
 ---
 
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rkyv 是什么
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Rkyv** 是 Rust 生态系统中最纯粹的零拷贝序列化库。与传统的序列化库（如 serde + bincode/postcard）不同，rkyv 的设计哲学是：**序列化后的数据本身就是可以直接访问的内存结构**，无需解析、无需分配、无需拷贝。
@@ -1669,7 +1672,6 @@ impl RkyvDatabase {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 
