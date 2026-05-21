@@ -655,7 +655,6 @@ let gamma = f64::consts::EULER_GAMMA;
 
 > **[来源: Rustonomicon]**
 
-
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**

@@ -408,7 +408,6 @@ Rust 新特性可扩展思维表征方式：
 
 > **[来源: Rustonomicon]**
 
-
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**
