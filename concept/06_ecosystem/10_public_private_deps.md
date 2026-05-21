@@ -32,6 +32,36 @@
 
 ---
 
+## 〇、依赖可见性控制全景
+
+```mermaid
+graph TD
+    subgraph 泄漏模式["❌ 依赖泄漏模式"]
+        A1[Crate A] -->|依赖| B1[Crate B]
+        A1 -->|pub use B::SomeType| API1[A 的公共 API]
+        C1[Crate C] -->|依赖 A| A1
+        C1 -.->|隐式使用| B1
+    end
+
+    subgraph 隔离模式["✅ 依赖隔离模式"]
+        A2[Crate A] -->|public = true| B2[Crate B]
+        A2 -->|public = false| D2[Crate D]
+        A2 --> API2[A 的公共 API]
+        B2 --> API2
+        D2 -.->|仅限私有模块| A2
+        C2[Crate C] -->|依赖 A| A2
+        C2 -->|可见| B2
+        C2 -.->|不可见| D2
+    end
+
+    style 泄漏模式 fill:#ffebee
+    style 隔离模式 fill:#e8f5e9
+```
+
+> **认知路径**: 此对比图展示依赖泄漏问题的本质。**泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。**隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。这是 Rust 从"默认开放"向"显式契约"演进的关键机制。
+
+---
+
 ## 一、问题背景：依赖泄漏
 
 ### 1.1 什么是依赖泄漏
@@ -143,7 +173,38 @@ cargo semver-checks
 
 ## 四、工程实践
 
-### 4.1 默认策略
+### 4.1 依赖可见性决策流程
+
+```mermaid
+flowchart TD
+    Start([添加新依赖]) --> Q1{类型出现在<br/>公共 API?}
+
+    Q1 -->|是| Q2{是标准类型<br/>还是外部类型?}
+    Q1 -->|否| Private["public = false<br/>✅ 默认安全"]
+
+    Q2 -->|标准类型<br/>String/Vec/Result| Standard["无需标记<br/>标准库自动传递"]
+    Q2 -->|外部 crate 类型| Public["public = true<br/>⚠️ 显式暴露契约"]
+
+    Public --> Q3{未来可能<br/>替换实现?}
+    Q3 -->|是| Newtype["Newtype 封装<br/>消除直接依赖"]
+    Q3 -->|否| KeepPublic["保持 public = true"]
+
+    Newtype --> Private2["public = false<br/>实现细节隐藏"]
+
+    Private --> Done1([完成])
+    Standard --> Done1
+    KeepPublic --> Done1
+    Private2 --> Done1
+
+    style Private fill:#c8e6c9
+    style Private2 fill:#c8e6c9
+    style Public fill:#fff9c4
+    style Newtype fill:#ffe0b2
+```
+
+> **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。
+
+### 4.2 默认策略
 
 ```toml
 [dependencies]

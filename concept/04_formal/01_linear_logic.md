@@ -62,7 +62,37 @@
 
 > 此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应——`!A` 的推导规则（Dereliction: `!A ⊢ A`）解释了为何 Copy 类型在赋值后仍可用：编译器隐式执行了从 `!T` 到 `T` 的推导。
 
-### 2.3 逻辑系统谱系矩阵
+### 2.3 逻辑系统谱系图
+
+```mermaid
+graph TD
+    LOGIC[子结构逻辑谱系] --> CLASSICAL[经典逻辑<br/>weakening + contraction + exchange]
+    LOGIC --> INTUITION[直觉主义逻辑<br/>weakening + contraction + exchange<br/>构造性证明]
+    LOGIC --> AFFINE[仿射逻辑<br/>weakening + exchange<br/>❌ contraction]
+    LOGIC --> LINEAR[线性逻辑<br/>exchange<br/>❌ weakening + contraction]
+    LOGIC --> ORDERED[有序逻辑<br/>❌ weakening + contraction + exchange]
+
+    CLASSICAL --> HASKELL_NOOWN[Haskell<br/>无所有权]
+    INTUITION --> HASKELL2[Haskell<br/>纯函数式]
+    AFFINE --> RUST[**Rust**<br/>核心所有权模型]
+    LINEAR --> STRICT_LINEAR[严格线性类型<br/>实验语言]
+    ORDERED --> STACK_LANG[栈操作语言<br/>Forth 变体]
+
+    CLASSICAL -.->|弱化| INTUITION
+    INTUITION -.->|去掉 contraction| AFFINE
+    AFFINE -.->|去掉 weakening| LINEAR
+    LINEAR -.->|去掉 exchange| ORDERED
+
+    style RUST fill:#c8e6c9
+    style AFFINE fill:#c8e6c9
+    style LINEAR fill:#fff9c4
+    style CLASSICAL fill:#e3f2fd
+    style ORDERED fill:#ffebee
+```
+
+> **认知功能**: 此谱系图将子结构逻辑的**结构规则削减**过程可视化。从经典逻辑到有序逻辑，每向下一步就移除一个结构规则，表达能力递减但资源控制递增。**Rust 位于仿射逻辑节点**——允许 weakening（丢弃资源）但禁止 contraction（复制资源），这恰好对应 `drop` 自动调用和 `move` 语义。颜色的冷暖梯度表达"资源控制严格度"：红色最严格（有序逻辑），绿色最实用（Rust/仿射逻辑）。
+
+### 2.4 逻辑系统谱系矩阵
 
 | **系统** | **weakening** | **contraction** | **exchange** | **编程语言对应** |
 |:---|:---|:---|:---|:---|

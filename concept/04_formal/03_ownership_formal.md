@@ -158,6 +158,47 @@
 
 **> [L1↔L4: unsafe / 逻辑正确性]** L1 的 `unsafe` 块跳出了借用检查器的语法规则；L4 中必须使用更高阶并发分离逻辑（Iris）对 `unsafe` 实现进行**外在（extrinsic）**验证。这是 RustBelt 的核心贡献。
 
+### 所有权状态转换图
+
+```mermaid
+stateDiagram-v2
+    [*] --> Owned: let x = T::new()
+
+    Owned --> Moved: let y = x
+    Moved --> [*]: 原变量失效
+
+    Owned --> SharedBorrow: let r = &x
+    SharedBorrow --> Returned: r 作用域结束
+    Returned --> Owned: 权限归还
+
+    Owned --> MutBorrow: let m = &mut x
+    MutBorrow --> ReturnedMut: m 作用域结束
+    ReturnedMut --> Owned: 独占权限归还
+
+    Owned --> Dropped: drop(x) / 作用域结束
+    Dropped --> [*]: 内存释放
+
+    SharedBorrow --> SharedBorrow2: let r2 = &x
+    SharedBorrow2 --> Returned: 所有共享引用结束
+
+    note right of Owned
+        独占状态: π = 1
+        可读可写可转移
+    end note
+
+    note right of SharedBorrow
+        共享状态: 0 < π < 1
+        多个共享引用权限和 ≤ 1
+    end note
+
+    note right of MutBorrow
+        可变借用: 临时 π = 1
+        原所有者被冻结
+    end note
+```
+
+> **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
+
 ---
 
 ## 一、权威定义（Definition）

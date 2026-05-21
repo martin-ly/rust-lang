@@ -1,10 +1,10 @@
 {
-  "version": "1.4",
-  "generated_at": "2026-05-21T12:51:41.333911",
+  "version": "1.5",
+  "generated_at": "2026-05-21T13:06:30.371990",
   "total_files": 76,
-  "total_lines": 61134,
+  "total_lines": 61610,
   "total_sources": 1235,
-  "mermaid_files": 57,
+  "mermaid_files": 60,
   "files": [
     {
       "path": "00.md",
@@ -281,7 +281,7 @@
     },
     {
       "path": "04_formal/01_linear_logic.md",
-      "lines": 848,
+      "lines": 878,
       "sources": 8,
       "has_bloom": true,
       "has_mermaid": true
@@ -295,14 +295,14 @@
     },
     {
       "path": "04_formal/03_ownership_formal.md",
-      "lines": 1217,
+      "lines": 1258,
       "sources": 7,
       "has_bloom": true,
       "has_mermaid": true
     },
     {
       "path": "04_formal/04_rustbelt.md",
-      "lines": 1002,
+      "lines": 1054,
       "sources": 9,
       "has_bloom": true,
       "has_mermaid": true
@@ -414,10 +414,10 @@
     },
     {
       "path": "06_ecosystem/05_formal_ecosystem_tower.md",
-      "lines": 337,
+      "lines": 379,
       "sources": 3,
       "has_bloom": true,
-      "has_mermaid": false
+      "has_mermaid": true
     },
     {
       "path": "06_ecosystem/05_system_design_principles.md",
@@ -428,7 +428,7 @@
     },
     {
       "path": "06_ecosystem/06_blockchain.md",
-      "lines": 564,
+      "lines": 669,
       "sources": 7,
       "has_bloom": true,
       "has_mermaid": true
@@ -442,10 +442,10 @@
     },
     {
       "path": "06_ecosystem/08_wasi.md",
-      "lines": 267,
+      "lines": 343,
       "sources": 8,
       "has_bloom": true,
-      "has_mermaid": false
+      "has_mermaid": true
     },
     {
       "path": "06_ecosystem/09_cargo_script.md",
@@ -456,10 +456,10 @@
     },
     {
       "path": "06_ecosystem/10_public_private_deps.md",
-      "lines": 244,
+      "lines": 305,
       "sources": 6,
       "has_bloom": true,
-      "has_mermaid": false
+      "has_mermaid": true
     },
     {
       "path": "06_ecosystem/README.md",
@@ -491,7 +491,7 @@
     },
     {
       "path": "07_future/03_evolution.md",
-      "lines": 1032,
+      "lines": 1101,
       "sources": 43,
       "has_bloom": true,
       "has_mermaid": true

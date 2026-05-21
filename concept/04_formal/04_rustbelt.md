@@ -116,6 +116,58 @@ C2 (未覆盖范围) 是负面边界
 
 ---
 
+### 2.4 RustBelt 定理推导链可视化
+
+```mermaid
+graph BT
+    subgraph L1["L1 逻辑层 — 基础设施"]
+        L1A[Iris 高阶分离逻辑<br/>L1-A]
+        L1B[Iris 不变量<br/>L1-B]
+        L1C[并发分离逻辑 CSL<br/>L1-C]
+    end
+
+    subgraph L2["L2 语义层 — Rust 特化"]
+        L2A[协议类型<br/>L2-A]
+        L2B[生命周期逻辑<br/>L2-B]
+        L2C[λRust 操作语义<br/>L2-C]
+    end
+
+    subgraph L3["L3 定理层 — 安全保证"]
+        T1["T1: 无数据竞争<br/>Data-Race Freedom"]
+        T2["T2: 无 use-after-free<br/>Memory Safety"]
+        T3["T3: 语义类型安全<br/>Semantic Type Safety"]
+    end
+
+    subgraph Boundary["边界层 — 形式化极限"]
+        C1["C1: unsafe 人工验证<br/>Extrinsic Verification"]
+        C2["C2: 未覆盖范围<br/>死锁/泄漏/FFI"]
+    end
+
+    L1A --> L1B
+    L1A --> L1C
+    L1A --> L2A
+    L1A --> L2B
+
+    L2A --> T3
+    L2B --> T2
+    L1B --> T1
+    L1C --> T1
+    L2C --> T1
+    L2C --> T2
+    L2C --> T3
+
+    T1 -.->|依赖| C1
+    T2 -.->|依赖| C1
+    T3 -.->|依赖| C1
+
+    style L1 fill:#e3f2fd
+    style L2 fill:#e8f5e9
+    style L3 fill:#fff3e0
+    style Boundary fill:#ffebee
+```
+
+> **认知功能**: 此推导链图将 RustBelt 的**三层定理结构**（L1 逻辑基础设施 → L2 Rust 语义特化 → L3 安全定理）与**边界层**可视化。箭头方向自下而上表示"依赖关系"：L3 定理依赖 L2 语义，L2 语义依赖 L1 逻辑。关键洞察：**L2-C (λRust 语义一致性) 是整个链条的根基假设**——若 MIR→λRust 翻译有误，则所有定理与真实编译器脱节。边界层 C1/C2 用虚线连接，表示它们不是定理的前提，而是定理的**适用范围声明**。
+
 ## 三、Concurrent Separation Logic（并发分离逻辑）
 
 > **[学术来源: O'Hearn 2007 (CSL 原始论文); Jung et al. 2015 (Iris); RustBelt: POPL 2018 §4–§5]** CSL 是分离逻辑向并发领域的自然延伸。Rust 的所有权系统与 CSL 的资源分区思想存在深层同构：`&mut T` 对应独占的分离合取 `l ↦ v`，`&T` 对应持久资源 `□(l ↦ v)`，`Mutex<T>` 对应资源不变量 `I`。

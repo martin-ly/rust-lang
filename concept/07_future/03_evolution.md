@@ -15,6 +15,39 @@
 
 ---
 
+## 〇、Rust 语言演进认知全景
+
+```mermaid
+mindmap
+  root((Rust 语言演进<br/>机制与趋势))
+    演进机制
+      RFC流程[RFC 流程<br/>想法 → 草案 → FCP → 实现 → 稳定]
+      TrainModel[火车模型<br/>Nightly → Beta → Stable<br/>每 6 周发布]
+      Edition机制[Edition 机制<br/>2015 → 2018 → 2021 → 2024<br/>Crate 级语法版本]
+    2015 → 2018
+      路径清晰化[路径清晰化<br/>crate:: 统一根路径]
+      模块系统[模块系统<br/>extern crate 消除]
+      关键字[关键字<br/>async/await/dyn 保留]
+      NLL[NLL<br/>非词法生命周期]
+    2018 → 2021
+      Prelude扩展[Prelude 扩展<br/>TryInto/TryFrom]
+      闭包捕获[闭包捕获<br/>Disjoint capture]
+      Resolver2[Resolver 2<br/>Feature 级依赖解析]
+    2021 → 2024
+      Unsafe显式化[Unsafe 显式化<br/>unsafe_op_in_unsafe_fn]
+      生命周期精确化[生命周期精确化<br/>use&lt;..&gt; precise capturing]
+      环境变量[环境变量<br/>set_var 变为 unsafe]
+    未来方向
+      Const泛型[Const 泛型完善<br/>generic_const_exprs]
+      Specialization[Specialization<br/>重叠 impl 特化]
+      Effects系统[Effects 系统<br/>显式效果追踪]
+      GAT完善[GAT 完善<br/>泛型关联类型]
+```
+
+> **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
+
+---
+
 ## 一、基础定义
 
 > **[来源: Rust Edition Guide; RFC 2052]** ✅
@@ -268,6 +301,42 @@ cargo check -W rust-2024-compatibility
 **关键洞察**：Rust 2024 的核心主题是**显式化 Unsafe 边界**与**生命周期精确控制**。`unsafe extern` 块、`unsafe` 属性、`unsafe_op_in_unsafe_fn` 三重变化共同强化了 Rust 的安全契约——"unsafe 的边界必须肉眼可见"。而 RPIT `use<>` 则填补了 `impl Trait` 在生命周期表达上的长期模糊地带，与 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) 中的泛型约束理论直接相关。
 
 ---
+
+#### 2.3.0 Edition 演进时间线
+
+```mermaid
+timeline
+    title Rust Edition 演进时间线与核心主题
+
+    2015 : 初始 Edition
+         : 所有权/借用/生命周期基础语义
+         : extern crate 必需
+         : 模块系统基于 mod.rs
+
+    2018 : 路径清晰化 Path Clarity
+         : crate:: 绝对路径
+         : dyn Trait 显式标注
+         : async/await 语法预留
+         : NLL 非词法生命周期
+         : 过程宏稳定
+
+    2021 : 精细化所有权
+         : Disjoint capture 闭包
+         : TryInto/TryFrom 进 Prelude
+         : 数组 IntoIterator
+         : Panic 一致性
+         : Resolver 2
+
+    2024 : 显式化 Unsafe 边界
+         : unsafe_op_in_unsafe_fn
+         : unsafe extern blocks
+         : use&lt;..&gt; precise capturing
+         : RPIT lifetime capture 默认变更
+         : static mut 引用禁止
+         : gen 关键字预留
+```
+
+> **认知功能**: 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权精细化）→ 2024（3年，Unsafe 显式化）。每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
 
 #### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
 

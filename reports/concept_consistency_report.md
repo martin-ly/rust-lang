@@ -1,13 +1,19 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-21T12:51:08.104818
+> 生成时间: 2026-05-21T13:06:19.572528
 > 扫描文件数: 58
-> 提取概念定义数: 418
+> 提取概念定义数: 420
 > 跨文件引用数: 165
 
 ## 目录
 
-- [概念一致性审计报告 (Concept Consistency Report)](#)
+1. [执行摘要](#一执行摘要)
+2. [Send / Sync 一致性检查](#二send--sync-一致性检查)
+3. [所有权三规则一致性检查](#三所有权三规则一致性检查)
+4. [生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
+5. [unsafe 语义一致性检查](#五unsafe-语义一致性检查)
+6. [跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
+7. [附录：概念定义统计](#七附录概念定义统计)
 
 ---
 
@@ -49,7 +55,7 @@
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
 | unsafe-UB | 107 | 28 |
-| 所有权-Move语义 | 71 | 25 |
+| 所有权-Move语义 | 73 | 25 |
 | Send+Sync | 44 | 20 |
 | 所有权-作用域绑定 | 31 | 13 |
 | unsafe-契约 | 30 | 12 |
@@ -99,10 +105,10 @@
 | concept\03_advanced\02_async.md | 11 | 9 | 36 |
 | concept\03_advanced\03_unsafe.md | 94 | 2 | 28 |
 | concept\03_advanced\04_macros.md | 0 | 1 | 30 |
-| concept\04_formal\01_linear_logic.md | 10 | 2 | 24 |
+| concept\04_formal\01_linear_logic.md | 10 | 2 | 25 |
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |
-| concept\04_formal\04_rustbelt.md | 4 | 4 | 27 |
+| concept\04_formal\04_rustbelt.md | 4 | 4 | 28 |
 | concept\04_formal\05_verification_toolchain.md | 1 | 1 | 14 |
 | concept\05_comparative\01_rust_vs_cpp.md | 11 | 1 | 41 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
@@ -116,14 +122,14 @@
 | concept\06_ecosystem\04_application_domains.md | 0 | 0 | 35 |
 | concept\06_ecosystem\05_formal_ecosystem_tower.md | 0 | 0 | 4 |
 | concept\06_ecosystem\05_system_design_principles.md | 5 | 0 | 11 |
-| concept\06_ecosystem\06_blockchain.md | 5 | 0 | 17 |
+| concept\06_ecosystem\06_blockchain.md | 5 | 0 | 18 |
 | concept\06_ecosystem\07_game_ecs.md | 1 | 0 | 29 |
-| concept\06_ecosystem\08_wasi.md | 1 | 0 | 7 |
+| concept\06_ecosystem\08_wasi.md | 3 | 0 | 8 |
 | concept\06_ecosystem\09_cargo_script.md | 0 | 0 | 9 |
-| concept\06_ecosystem\10_public_private_deps.md | 1 | 0 | 9 |
+| concept\06_ecosystem\10_public_private_deps.md | 1 | 0 | 10 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
-| concept\07_future\03_evolution.md | 1 | 0 | 30 |
+| concept\07_future\03_evolution.md | 1 | 0 | 31 |
 | concept\07_future\04_effects_system.md | 4 | 3 | 12 |
 | concept\07_future\05_rust_version_tracking.md | 0 | 1 | 20 |
 
