@@ -62,6 +62,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是RustBelt
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@
 - 建立了unsafe代码验证的理论基础
 
 ### 1.2 为什么需要RustBelt
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Rust的核心承诺：
 > "Safe Rust中没有未定义行为"
@@ -89,6 +93,8 @@ Rust的核心承诺：
 **RustBelt答案**: 通过形式化验证，证明safe和unsafe代码之间的契约。
 
 ### 1.3 技术栈
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 Rust程序
@@ -112,6 +118,8 @@ Coq (证明助手)
 
 ### 2.1 Iris简介
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Iris** 是一个用于推理并发和高阶程序的框架，提供：
 
 1. **高阶幽灵状态** - 任意抽象资源的推理
@@ -120,6 +128,8 @@ Coq (证明助手)
 4. **高阶协议** - 类型行为规约
 
 ### 2.2 Iris断言语言
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **基本断言**:
 
@@ -149,6 +159,8 @@ P * Q  表示资源可以分成两部分，
 
 ### 2.3 幽灵状态
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **幽灵变量** - 仅在证明中存在，不影响运行时：
 
 ```
@@ -168,6 +180,8 @@ P * Q  表示资源可以分成两部分，
 ## 3. 资源代数
 
 ### 3.1 资源代数定义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义 3.1** (资源代数):
 

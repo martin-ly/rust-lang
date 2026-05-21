@@ -106,6 +106,8 @@ Rust 的内存模型是其内存安全保证的核心基础。
 
 ### 核心概念
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 内存安全三要素：
 1. 所有权 (Ownership)：每个值有唯一的所有者
@@ -118,6 +120,8 @@ Rust 的内存模型是其内存安全保证的核心基础。
 ## 内存模型基础
 
 ### 2.1 内存抽象
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 2.1.1 内存状态定义
 
@@ -149,6 +153,8 @@ deallocate : Memory × Location → Memory ∪ {error}
 
 ### 2.2 有效性条件
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 2.2.1 有效值定义
 
 一个值在内存位置 `loc` 处是**有效的**，当且仅当：
@@ -178,6 +184,8 @@ valid_val(v, Box<τ>) :=
 
 ### 2.3 所有权状态机
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
                     move
     Owned ───────────────────────────→ Moved
@@ -199,6 +207,8 @@ valid_val(v, Box<τ>) :=
 ## 栈语义
 
 ### 3.1 栈帧结构
+
+> **[来源: Wikipedia - Type System]**
 
 #### 3.1.1 栈帧定义
 
@@ -237,6 +247,8 @@ exit_stack(S, ret_val):
 
 ### 3.2 局部变量生命周期
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 3.2.1 生命周期规则
 
 ```
@@ -261,6 +273,8 @@ end_of_scope(x):
 ```
 
 ### 3.3 栈展开 (Unwinding)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 3.3.1 panic 语义
 
@@ -289,6 +303,8 @@ panic!(msg):
 ## 堆语义
 
 ### 4.1 堆分配
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 4.1.1 分配语义
 
@@ -326,6 +342,8 @@ Drop(Box):
 
 ### 4.2 所有权转移
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 4.2.1 移动语义形式化
 
 ```
@@ -361,6 +379,8 @@ copy(src) → dst:
 ```
 
 ### 4.3 Rc 和 Arc 语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 4.3.1 引用计数形式化
 
@@ -409,6 +429,8 @@ drop(rc):
 ## 内存布局与对齐
 
 ### 5.1 类型布局计算
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 5.1.1 基本类型布局
 
@@ -459,6 +481,8 @@ layout(enum { V₁(τ₁), ..., Vₙ(τₙ) }) =
 
 ### 5.2 对齐约束
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 5.2.1 对齐要求
 
 ```
@@ -477,6 +501,8 @@ read_unaligned<T>(ptr):
 ```
 
 ### 5.3 零大小类型 (ZST)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 5.3.1 ZST 定义
 

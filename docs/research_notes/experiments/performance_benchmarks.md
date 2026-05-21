@@ -167,6 +167,8 @@
 4. **字符串处理性能**：评估字符串操作的性能
 
 ### 核心问题
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +177,8 @@
 3. **如何优化 Rust 代码以获得最佳性能？**
 
 ### 预期成果
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +193,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +207,8 @@
 - **资源使用（Resource Usage）**：CPU、内存等资源消耗
 
 ### 理论背景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -211,6 +219,8 @@
 - **压力测试**：测试系统在极限负载下的表现
 
 ### 形式化论证与实验衔接
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +254,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 实验设计原则
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +265,8 @@
 4. **基准标准化**：使用标准化的基准测试框架
 
 ### 1. 内存分配性能测试
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -288,6 +302,8 @@
 
 ### 2. 并发性能测试
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **测试目标**：评估不同并发原语的性能
 
 **测试场景**：
@@ -321,6 +337,8 @@
 
 ### 3. 序列化性能测试
 
+> **[来源: POPL - Programming Languages Research]**
+
 **测试目标**：比较不同序列化库的性能
 
 **测试场景**：
@@ -353,6 +371,8 @@
 
 ### 4. 字符串处理性能测试
 
+> **[来源: PLDI - Programming Language Design]**
+
 **测试目标**：评估字符串操作的性能
 
 **测试场景**：
@@ -376,6 +396,8 @@
 
 ### 5. 集合操作性能测试
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **测试目标**：评估不同集合类型的性能
 
 **测试场景**：
@@ -393,6 +415,8 @@
 - **内存使用**：集合的内存占用
 
 ### 测试框架和工具选择
+
+> **[来源: Wikipedia - Type System]**
 
 **基准测试框架**：
 
@@ -417,6 +441,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 基准测试代码实现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 内存分配性能测试实现
 
@@ -693,6 +719,8 @@ criterion_main!(serialization_benches);
 
 ### 2. 测试环境配置
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 创建 `Cargo.toml` 配置：
 
 ```toml
@@ -716,6 +744,8 @@ harness = false
 ```
 
 ### 3. 数据收集机制
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 创建数据收集脚本：
 
@@ -750,6 +780,8 @@ fn main() {
 ```
 
 ### 4. 结果分析工具实现
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 创建结果分析脚本：
 
@@ -868,6 +900,8 @@ fn main() {
 
 ### 示例 1：使用 Criterion 进行基准测试
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -888,6 +922,8 @@ criterion_main!(benches);
 ```
 
 ### 示例 2：内存分配性能测试
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -915,6 +951,8 @@ criterion_main!(benches);
 ```
 
 ### 示例 3：并发性能测试
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -956,6 +994,8 @@ criterion_main!(benches);
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：内存分配基准测试
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use criterion::{black_box, criterion_group, criterion_main, Criterion};

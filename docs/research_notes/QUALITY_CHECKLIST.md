@@ -87,6 +87,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 必需元信息
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +100,8 @@
 - [ ] 维护者信息完整
 
 ### research_notes 元信息统一模板
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +126,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 研究目标
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +136,8 @@
 - [ ] 预期成果具体
 
 ### 理论基础
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +146,8 @@
 - [ ] 理论背景说明清楚
 
 ### 形式化定义 / 实验设计
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

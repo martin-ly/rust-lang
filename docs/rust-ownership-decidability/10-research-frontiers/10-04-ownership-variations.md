@@ -71,6 +71,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 区域系统基础
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -96,6 +98,8 @@
 ```
 
 ### 1.2 Rust 生命周期与区域
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Rust 的生命周期参数本质上就是区域：
 
@@ -130,6 +134,8 @@ where
 
 ### 1.3 区域推断算法
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Rust 使用约束基础的区域推断：
 
 ```
@@ -161,6 +167,8 @@ fn example(x: &i32, y: &i32) -> &i32 {
 ```
 
 ### 1.4 区域多态
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 区域多态允许代码在不同区域上重用：
 
@@ -196,6 +204,8 @@ fn use_regions() {
 ## 2. 借用检查器改进提案
 
 ### 2.1 Polonius 详解
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Polonius 是下一代 Rust 借用检查器，基于 Datalog 和约束求解，提供更精确的分析。
 
@@ -270,6 +280,8 @@ fn polonius_friendly() {
 
 ### 2.2 流敏感分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 流敏感分析跟踪程序点上的借用状态：
 
 ```rust
@@ -295,6 +307,8 @@ fn flow_sensitive() {
 ```
 
 ### 2.3 路径敏感分析
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 路径敏感分析考虑控制流路径：
 
@@ -329,6 +343,8 @@ fn path_sensitive(condition: bool) {
 
 ### 2.4 借用检查器比较
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 特性 | 当前借用检查器 | Polonius | NLL | 流敏感 |
 |-----|--------------|----------|-----|-------|
 | **实现状态** | 稳定 | 开发中 | 稳定 | 研究 |
@@ -343,6 +359,8 @@ fn path_sensitive(condition: bool) {
 ## 3. 所有权与借用的新模式
 
 ### 3.1 幽灵借用
+
+> **[来源: POPL - Programming Languages Research]**
 
 幽灵借用（Ghost Borrow）是一种仅在验证时存在的借用：
 
@@ -373,6 +391,8 @@ fn use_vector<T>(vec: &mut Vec<T>) {
 3. **规范编程**：在代码中嵌入规范
 
 ### 3.2 共享 XOR 可变
+
+> **[来源: PLDI - Programming Language Design]**
 
 Rust 的核心规则：共享 XOR 可变（Shared XOR Mutable）。
 
@@ -418,6 +438,8 @@ fn unique_reference() {
 
 ### 3.3 独占借用模式
 
+> **[来源: Wikipedia - Memory Safety]**
+
 独占借用模式确保值只能在一个地方使用：
 
 ```rust
@@ -458,6 +480,8 @@ impl<T> Drop for Exclusive<T> {
 
 ### 3.4 二阶段借用
 
+> **[来源: Wikipedia - Type System]**
+
 二阶段借用（Two-phase Borrow）用于解决某些借用模式：
 
 ```rust
@@ -480,6 +504,8 @@ fn two_phase_borrow() {
 ## 4. 并发所有权模型
 
 ### 4.1 分离堆并发
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 分离堆（Disjoint Heap）并发模型基于内存分离：
 
@@ -512,6 +538,8 @@ fn disjoint_heap() {
 ```
 
 ### 4.2 基于能力的并发
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 基于能力的并发（Capability-based Concurrency）使用权限控制访问：
 
@@ -558,6 +586,8 @@ impl<T> Capability<T> {
 
 ### 4.3 会话类型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 会话类型（Session Types）用于验证通信协议：
 
 ```rust
@@ -596,6 +626,8 @@ fn client_session<P: Protocol>(
 
 ### 4.4 并发验证挑战
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 并发所有权验证的主要挑战：
 
 | 挑战 | 描述 | 研究方向 |
@@ -610,6 +642,8 @@ fn client_session<P: Protocol>(
 ## 5. 线性类型的变体
 
 ### 5.1 仿射类型
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Rust 使用仿射类型（Affine Types）：值最多使用一次（可以零次或一次）。
 

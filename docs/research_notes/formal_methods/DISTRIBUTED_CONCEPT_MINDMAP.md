@@ -64,6 +64,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Saga 模式族
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -97,6 +99,8 @@ Saga 步骤三元组 $(\mathit{id}, \mathit{action}, \mathit{comp})$ 满足：�
 ---
 
 ### 2. CQRS 模式族
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
                             CQRS模式

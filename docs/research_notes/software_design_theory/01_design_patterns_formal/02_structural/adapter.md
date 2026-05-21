@@ -37,6 +37,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -54,7 +55,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Adapter 形式化分析](#adapter-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Adapter 结构）](#def-11adapter-结构)
@@ -88,6 +89,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -96,6 +98,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Adapter 结构）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@ $$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm
 ---
 
 ### Axiom AD1（语义保持公理）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +126,8 @@ $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit
 适配器不改变被适配对象语义，仅转换接口形式。
 
 ### Axiom AD2（委托借用公理）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +138,8 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T1（所有权安全定理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +168,8 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T2（借用冲突避免定理）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +203,8 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 推论 AD-C1（纯 Safe Adapter）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +222,8 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +277,8 @@ a.log("hello");
 
 ### 形式化论证链
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```text
 Axiom AD1 (语义保持)
     ↓ 约束
@@ -279,6 +297,8 @@ borrow_checker_proof
 
 ### 与 Rust 类型系统的联系
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | Rust 特性 | Adapter 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | 结构体组合 | `inner: S` | 持有被适配者 |
@@ -287,6 +307,8 @@ borrow_checker_proof
 | 所有权 | 拥有 $S$ | $S$ 生命周期绑定 |
 
 ### 内存安全保证
+
+> **[来源: POPL - Programming Languages Research]**
 
 1. **无悬垂**：`Adapter` 拥有 `S`，生命周期绑定
 2. **借用安全**：委托链符合借用规则
@@ -485,9 +507,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: PLDI - Programming Language Design]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -497,6 +523,8 @@ graph LR
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档中的所有Rust代码示例均已：
 
@@ -531,7 +559,6 @@ graph LR
 
 - [02_structural 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

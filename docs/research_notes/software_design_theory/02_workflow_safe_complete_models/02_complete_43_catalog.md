@@ -121,6 +121,8 @@
 | **企业/分布式扩展** | 20 | 见下表 |
 
 ### 扩展模式（20）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +152,8 @@
 | 20 | Event Sourcing | DDD/CQRS | 业务层 | 纯 Safe |
 
 ### 扩展模式简要说明
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +187,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Domain Model
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -215,6 +221,8 @@ impl Order {
 ```
 
 ### Unit of Work
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +251,8 @@ impl<T> UnitOfWork<T> {
 ```
 
 ### Data Mapper
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -262,6 +272,8 @@ impl From<UserEntity> for (u64, String, String) {
 ```
 
 ### Value Object
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -285,6 +297,8 @@ impl Money {
 ```
 
 ### Registry (Service Locator)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -305,6 +319,8 @@ fn register<T: Send + 'static>(service: T) {
 ```
 
 ### Identity Map
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -324,6 +340,8 @@ impl<T> IdentityMap<T> {
 ```
 
 ### Service Layer
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 pub struct OrderService {

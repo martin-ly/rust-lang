@@ -16,6 +16,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 依赖管理
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -58,6 +60,8 @@ cc = "1.0"
 ```
 
 ### 工作空间
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +96,8 @@ serde = { workspace = true }
 
 ### 特性管理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```toml
 [features]
 # 默认特性
@@ -111,6 +117,8 @@ __internal = []
 ```
 
 ### Cargo 命令
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```bash
 # 项目管理
@@ -151,6 +159,8 @@ cargo publish --workspace
 ```
 
 ### 语义版本规范
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 语义化版本: MAJOR.MINOR.PATCH

@@ -35,6 +35,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -52,7 +53,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Mediator 形式化分析](#mediator-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Mediator 结构）](#def-11mediator-结构)
@@ -84,6 +85,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -92,6 +94,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Mediator 结构）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ $$\mathcal{ME} = \langle M, \{C_i\}_{i=1}^n, \mathit{mediate}: M \times C_i \tim
 ---
 
 ### Axiom ME1（无直接耦合公理）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$\forall i \neq j,\, C_i\text{ 不直接引用 }C_j\text{；仅通过 }M\text{ 
 同事间无直接耦合；仅通过中介通信。
 
 ### Axiom ME2（无循环引用公理）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +134,8 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 ---
 
 ### 定理 ME-T1（循环引用避免定理）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +163,8 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 ---
 
 ### 定理 ME-T2（消息路由安全定理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +194,8 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 ---
 
 ### 推论 ME-C1（纯 Safe Mediator）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +213,8 @@ Mediator 为纯 Safe；`Vec<Box<dyn Fn>>` 或 channel 路由，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -482,7 +498,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

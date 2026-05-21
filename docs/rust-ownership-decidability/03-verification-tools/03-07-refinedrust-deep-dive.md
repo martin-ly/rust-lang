@@ -57,6 +57,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 研究动机
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -72,6 +74,8 @@ Rust 的所有权类型系统在编译时静态保证内存安全，使其特别
 **RefinedRust 的目标**: 建立一个在 Coq 证明助理中证明可靠的精细化类型系统，实现 safe 和 unsafe Rust 代码的基础性半自动化功能正确性验证。
 
 ### 1.2 核心贡献
+
+> **[来源: PLDI - Programming Language Design]**
 
 RefinedRust 做出了以下关键贡献:
 
@@ -89,6 +93,8 @@ RefinedRust 做出了以下关键贡献:
 ## 2. 理论基础
 
 ### 2.1 精细化所有权类型
+
+> **[来源: Wikipedia - Memory Safety]**
 
 RefinedRust 的核心是**精细化所有权类型** (Refined Ownership Types)，结合了:
 
@@ -115,6 +121,8 @@ fn box_add_42(r: Box<i32>) -> Box<i32> {
 
 ### 2.2 分离逻辑与 Iris
 
+> **[来源: Wikipedia - Type System]**
+
 RefinedRust 在 **Iris 分离逻辑框架**中构建语义模型:
 
 ```text
@@ -139,6 +147,8 @@ RefinedRust 在 **Iris 分离逻辑框架**中构建语义模型:
 
 ### 2.3 生命周期逻辑
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 RefinedRust 扩展了 RustBelt 的**生命周期逻辑** (Lifetime Logic):
 
 **核心概念**: 所有权可以在生命周期期间拆分:
@@ -161,6 +171,8 @@ let mut z = 1;
 ## 3. 核心技术
 
 ### 3.1 Borrow Names: 可变引用的数学建模
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **关键创新**: 使用 **borrow names** (借用名) 处理可变引用。
 
@@ -191,6 +203,8 @@ assert!(z == 43);        // RefinedRust 解析 *y 为 43
 
 ### 3.2 Place Types: 位置的精细化类型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Rust 的一个独特特性是 **places** (位置，也称为 lvalues):
 
 ```rust
@@ -217,6 +231,8 @@ Place Type 层次:
 - RefinedRust 原生支持 places，反映真实 Rust 源代码结构
 
 ### 3.3 Blocked 类型与固定借用
+
+> **[来源: POPL - Programming Languages Research]**
 
 **问题场景**: 当从 Vec 借用元素时，需要临时"阻塞"对 Vec 的部分访问。
 

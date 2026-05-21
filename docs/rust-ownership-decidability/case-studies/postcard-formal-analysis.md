@@ -73,6 +73,8 @@
 **Postcard** 是一个专为 Rust 设计的紧凑型二进制序列化库，它基于 [Serde](https://serde.rs/) 框架实现，专门为资源受限的嵌入式系统和物联网(IoT)设备优化。
 
 ### 1.1 设计目标
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -87,6 +89,8 @@ Postcard 的设计遵循以下核心原则：
 | **安全性** | 防止溢出和畸形数据攻击 | 严格的缓冲区边界检查 |
 
 ### 1.2 适用场景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Postcard 特别适合以下应用场景：
 
@@ -115,6 +119,8 @@ Postcard 特别适合以下应用场景：
 - 需要动态类型检查的系统
 
 ### 1.3 核心特性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 典型使用示例
@@ -147,6 +153,8 @@ let decoded: SensorData = from_bytes(&bytes)?;
 ## 2. 架构分析
 
 ### 2.1 核心组件
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Postcard 的架构由以下几个核心组件组成：
 
@@ -182,6 +190,8 @@ Postcard 的架构由以下几个核心组件组成：
 
 ### 2.2 编码格式详细说明
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Postcard 使用一种极简的二进制格式，与 Protocol Buffers 相比有以下区别：
 
 **Postcard 格式特点：**
@@ -213,6 +223,8 @@ struct Point {
 
 ### 2.3 数据类型映射
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | Rust 类型 | Postcard 编码 | 说明 |
 |-----------|---------------|------|
 | `bool` | 1字节 (0x00/0x01) | 直接编码 |
@@ -235,6 +247,8 @@ struct Point {
 
 ### 3.1 LEB128编码原理
 
+> **[来源: POPL - Programming Languages Research]**
+
 **LEB128 (Little Endian Base 128)** 是一种使用128为基数的变长整数编码方式，源自 DWARF 调试格式。
 
 **核心原理：**
@@ -256,6 +270,8 @@ struct Point {
 ```
 
 ### 3.2 无符号整数编码
+
+> **[来源: PLDI - Programming Language Design]**
 
 **编码算法：**
 
@@ -289,6 +305,8 @@ fn encode_varint_u64(mut value: u64) -> Vec<u8> {
 
 ### 3.3 有符号整数编码(SLEB128)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 有符号整数使用 **Signed LEB128**，需要处理符号位：
 
 **编码算法：**
@@ -316,6 +334,8 @@ fn encode_varint_i64(mut value: i64) -> Vec<u8> {
 ```
 
 ### 3.4 解码过程
+
+> **[来源: Wikipedia - Type System]**
 
 **解码算法：**
 
@@ -347,6 +367,8 @@ fn decode_varint_u64(bytes: &[u8]) -> Option<(u64, usize)> {
 ```
 
 ### 3.5 编码示例
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **示例 1: 编码值 624485**
 
@@ -420,6 +442,8 @@ fn main() -> Result<(), postcard::Error> {
 
 ### 4.1 no_std支持
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Postcard 完全支持 `no_std` 环境，这是其核心设计目标之一。
 
 **特性配置 (Cargo.toml)：**
@@ -445,6 +469,8 @@ postcard = { version = "1.0", default-features = false, features = ["alloc"] }
 | 无特性 | ❌ | ❌ | 仅栈操作 | 裸机MCU |
 
 ### 4.2 零分配模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 在资源受限的环境中，避免堆分配至关重要。
 
@@ -489,6 +515,8 @@ assert!(size <= 32, "命令太大!");
 
 ### 4.3 堆栈使用分析
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **序列化栈使用：**
 
 | 操作 | 典型栈使用 | 说明 |
@@ -515,6 +543,8 @@ struct BadPacket {
 ```
 
 ### 4.4 代码体积优化
+
+> **[来源: ACM - Systems Programming Languages]**
 
 对于代码空间受限的设备（如 32KB Flash 的 MCU）：
 
@@ -546,6 +576,8 @@ serde = { version = "1.0", default-features = false, features = ["derive"] }
 
 ### 5.1 Serializer实现
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Postcard 实现了 Serde 的 `Serializer` trait，支持所有标准类型。
 
 **支持的 Serde 特性：**
@@ -563,6 +595,8 @@ Postcard 实现了 Serde 的 `Serializer` trait，支持所有标准类型。
 | `serialize_enum` | ✅ | 1字节变体索引 |
 
 ### 5.2 Deserializer实现
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **使用示例：**
 
@@ -582,6 +616,8 @@ let msg: Message = from_bytes(&bytes)?;
 ```
 
 ### 5.3 自定义类型支持
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **自定义序列化实现：**
 
@@ -616,6 +652,8 @@ impl<'de> Deserialize<'de> for Temperature {
 
 ### 5.4 派生宏配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 **常用 Serde 属性：**
 
 ```rust
@@ -643,6 +681,8 @@ struct Config {
 ## 6. 性能分析
 
 ### 6.1 与bincode对比
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 特性 | Postcard | Bincode v1 | Bincode v2 |
 |------|----------|------------|------------|

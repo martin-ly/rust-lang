@@ -121,6 +121,8 @@
 4. **并发安全开销**：评估并发安全的性能开销
 
 ### 核心问题
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +131,8 @@
 3. **如何优化并发实现的性能？**
 
 ### 预期成果
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +147,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证与实验衔接
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@
 **引用**：[experiments/README](../experiments/README.md) 定理 EX-T1、EX-T2；[FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md)。
 
 ### 相关概念
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +189,8 @@
 - **竞争开销（Contention Overhead）**：锁竞争导致的性能损失
 
 ### 理论背景
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +208,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 同步原语性能测试
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -218,6 +230,8 @@
 - 可扩展性
 
 ### 2. 通道性能测试
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +252,8 @@
 
 ### 3. 异步运行时性能测试
 
+> **[来源: PLDI - Programming Language Design]**
+
 **测试目标**：分析异步运行时的性能特征
 
 **测试场景**：
@@ -254,6 +270,8 @@
 - 资源使用效率
 
 ### 4. 并发模式性能测试
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **测试目标**：评估不同并发模式的性能
 

@@ -110,6 +110,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 1. 归纳法
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@ mod proofs {
 
 ### 2. 分离逻辑
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 分离逻辑概念在 Rust 中的体现
 // Box::new 创建独占所有权（类似 * 分离合取）
@@ -149,6 +153,8 @@ fn separation_logic_example() {
 ```
 
 ### 3. 双模拟
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 状态机双模拟概念
@@ -176,6 +182,8 @@ struct Action(String);
 
 ### Hoare 三元组
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 {P} C {Q}
 
@@ -201,6 +209,8 @@ fn find_max(slice: &[i32]) -> Option<&i32> {
 ```
 
 ### Iris 框架概念
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 概念 | 描述 | Rust 对应 |
 |------|------|-----------|

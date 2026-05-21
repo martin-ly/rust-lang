@@ -38,6 +38,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 项目结构
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -72,6 +74,8 @@ embedded-safety-project/
 ```
 
 ### 1.2 Cargo.toml模板
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +150,8 @@ strip = false
 ```
 
 ### 1.3 rust-toolchain.toml
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,6 +171,8 @@ profile = "minimal"
 ```
 
 ### 1.4 .cargo/config.toml
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +196,8 @@ retry = 3
 ```
 
 ### 1.5 main.rs模板
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +256,8 @@ fn main() -> ! {
 ```
 
 ### 1.6 lib.rs模板
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -273,6 +285,8 @@ pub type Result<T> = core::result::Result<T, SafetyError>;
 ```
 
 ### 1.7 memory.x
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -300,6 +314,8 @@ _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 > **[来源: Rust Official Docs]**
 
 ### 2.1 项目结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

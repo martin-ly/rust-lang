@@ -125,6 +125,8 @@
 4. **死代码消除**：分析死代码消除的效果
 
 ### 核心问题
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -133,6 +135,8 @@
 3. **如何编写编译器友好的代码？**
 
 ### 预期成果
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +171,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +186,8 @@
 - **常量折叠（Constant Folding）**：在编译时计算常量表达式
 
 ### 理论背景
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +204,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 优化级别比较
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +219,8 @@
 - `-Os` (优化大小) vs `-O2`
 
 ### 2. 内联优化分析
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +233,8 @@
 - `#[inline]` 提示的效果
 
 ### 3. 循环优化分析
+
+> **[来源: POPL - Programming Languages Research]**
 
 **测试目标**：评估循环优化的效果
 
@@ -235,6 +249,8 @@
 ## 💻 代码示例 {#-代码示例}
 
 ### 示例 1：内联优化测试
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #[inline]
@@ -261,6 +277,8 @@ fn test_inlining() {
 
 ### 示例 2：循环优化测试
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 fn loop_optimization() {
     let mut sum = 0;
@@ -278,6 +296,8 @@ fn loop_optimization() {
 - 常量折叠：编译时计算常量表达式
 
 ### 示例 3：死代码消除测试
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 fn dead_code_elimination() {

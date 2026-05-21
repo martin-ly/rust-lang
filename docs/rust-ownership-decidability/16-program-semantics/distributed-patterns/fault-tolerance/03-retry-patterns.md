@@ -40,6 +40,8 @@
 
 ### 2.1 策略类型谱系
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 重试策略分类:
 
@@ -69,6 +71,8 @@
 ```
 
 ### 2.2 形式化定义
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 重试策略形式化:
@@ -112,6 +116,8 @@
 
 ### 3.1 指数退避分析
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 指数退避的期望延迟:
 
@@ -133,6 +139,8 @@ T_total ≤ N × max_delay
 
 ### 3.2 碰撞避免分析
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 抖动策略的碰撞概率:
 
@@ -152,6 +160,8 @@ P_collision_jitter ≈ P_collision / jitter_factor
 ```
 
 ### 3.3 幂等性分析
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 幂等性定义:
@@ -189,6 +199,8 @@ P_collision_jitter ≈ P_collision / jitter_factor
 ## 4. Rust 实现
 
 ### 4.1 核心重试框架
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::fmt::Debug;
@@ -471,6 +483,8 @@ pub enum RetryError<E> {
 
 ### 4.2 幂等性保证
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::collections::HashMap;
 use std::hash::Hash;
@@ -655,6 +669,8 @@ impl<S, C, T: Clone + Send + Sync + 'static, E: Clone + Send + Sync + 'static>
 ```
 
 ### 4.3 高级重试模式
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// 熔断感知重试

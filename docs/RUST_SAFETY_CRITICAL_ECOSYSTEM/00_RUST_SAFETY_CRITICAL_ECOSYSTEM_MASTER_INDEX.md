@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 01. 思维导图 (Mind Maps) - 全局视角
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -66,6 +68,8 @@
 
 ### 02. 多维矩阵 (Matrices) - 对比分析
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 文档 | 内容 | 大小 |
 |------|------|------|
 | `RUST_MULTI_DIMENSIONAL_MATRIX.md` | 8个核心对比矩阵 | ~10KB |
@@ -78,6 +82,8 @@
 
 ### 03. 决策树 (Decision Trees) - 选择指南
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 文档 | 内容 | 大小 |
 |------|------|------|
 | `RUST_DECISION_TREES.md` | 4大决策框架 | ~26KB |
@@ -89,6 +95,8 @@
 
 ### 04. 公理化推理 (Axiomatic Reasoning) - 形式化基础
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 文档 | 内容 | 大小 |
 |------|------|------|
 | `RUST_AXIOMATIC_REASONING_TREES.md` | 内存安全公理系统 | ~32KB |
@@ -99,6 +107,8 @@
 ---
 
 ### 05. 战略指导 (Strategic Guidance) - 高层规划
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 文档 | 内容 | 大小 |
 |------|------|------|

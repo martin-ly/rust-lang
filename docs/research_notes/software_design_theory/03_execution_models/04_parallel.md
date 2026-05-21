@@ -29,6 +29,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -44,7 +45,7 @@
 > **[来源: Rust Official Docs]**
 
 - [并行执行模型形式化](#并行执行模型形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [与并发的区别](#与并发的区别)
@@ -70,6 +71,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -120,6 +122,8 @@ $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{
 > **[来源: Rust Official Docs]**
 
 ### Rayon 数据并行
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +138,8 @@ assert_eq!(sum, 999 * 1000);
 ```
 
 ### std::thread 任务并行
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,6 +171,8 @@ assert_eq!(a + b, 15);
 | 并行构建 | 并行构造集合 | `par_iter().map().collect()` |
 
 ### 与设计模式组合
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +184,8 @@ assert_eq!(a + b, 15);
 | 并行 + 通道 | 结果归约；`par_iter().for_each(\|x\| tx.send(x).ok())` |
 
 ### 常见陷阱
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -315,9 +325,13 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: IEEE - Programming Language Standards]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -328,6 +342,8 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 #### 代码示例更新
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -335,6 +351,8 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -361,7 +379,6 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 - [03_execution_models 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

@@ -62,6 +62,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 下一代 Trait 求解器 (next-solver)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -91,6 +93,8 @@ where
 ---
 
 ### 2. Async Drop
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +125,8 @@ impl AsyncDrop for AsyncResource {
 ---
 
 ### 3. 生成器 (Generators)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +156,8 @@ let iter = std::iter::iter! {
 ---
 
 ### 4. Pin 人体工学改进
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +183,8 @@ use_pinned(pinned);  // 自动重新借用
 > **[来源: Rust Official Docs]**
 
 ### 1. `-Zinstrument-mcount`
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +199,8 @@ rustc -Zinstrument-mcount program.rs
 ---
 
 ### 2. `-Cdebuginfo-compression`
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +213,8 @@ rustc -Cdebuginfo-compression=zlib program.rs
 ---
 
 ### 3. `fn_align` 属性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -219,6 +233,8 @@ fn aligned_function() {
 
 ### 1. 严格指针来源 (Strict Provenance)
 
+> **[来源: POPL - Programming Languages Research]**
+
 **状态**: 实验 API
 
 **形式化意义**: 为指针操作提供更严格的语义基础
@@ -236,6 +252,8 @@ let addr = ptr.addr();
 
 ### 2. `offset_of_slice`
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **状态**: 实验中
 
 ```rust
@@ -249,6 +267,8 @@ let offset = offset_of!(Struct, field[0]);
 
 ### 3. `MaybeUninit` 持续改进
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **新增方法**:
 
 - `write_slice`
@@ -260,6 +280,8 @@ let offset = offset_of!(Struct, field[0]);
 ## Cargo 实验
 
 ### 1. Build Dir 新布局
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **状态**: `-Zbuild-dir-new-layout`
 

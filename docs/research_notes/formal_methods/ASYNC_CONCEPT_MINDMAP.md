@@ -41,6 +41,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 异步编程全景
 >
@@ -162,6 +163,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### Future 状态机
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +195,8 @@ impl Future for MyAsyncFn {
 
 ### 执行流程
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```text
 ┌──────────┐     ┌──────────┐     ┌──────────┐
 │  创建    │────>│  Poll    │────>│ Pending  │
@@ -213,6 +218,8 @@ impl Future for MyAsyncFn {
 
 ### Future Trait 定义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 trait Future {
     type Output;
@@ -226,6 +233,8 @@ enum Poll<T> {
 ```
 
 ### Send边界规则
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 场景 | Future: Send? | 条件 |
 | :--- | :--- | :--- |
@@ -525,7 +534,6 @@ Pin<P<T>>
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

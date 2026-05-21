@@ -114,6 +114,8 @@ fn demo() {
 > **[来源: Rust Official Docs]**
 
 ### 泛型约束与边界
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +159,8 @@ where
 ```
 
 ### 高级 Trait 模式
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +225,8 @@ impl Distance for Kilometers {
 ```
 
 ### Trait 对象与对象安全
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

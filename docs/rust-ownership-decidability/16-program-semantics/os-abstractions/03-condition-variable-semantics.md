@@ -45,6 +45,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念定义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -64,6 +66,8 @@
 ```
 
 ### 2.2 操作的形式化定义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 条件变量操作:
@@ -93,6 +97,8 @@
 
 ### 3.1 Wait 操作的详细语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 wait 操作的三阶段原子性:
 
@@ -119,6 +125,8 @@ happens-before 关系:
 
 ### 3.2 Notify 操作的语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 notify_one 语义:
 
@@ -139,6 +147,8 @@ notify_all 语义:
 ```
 
 ### 3.3 Rust 代码示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::{Arc, Mutex, Condvar};

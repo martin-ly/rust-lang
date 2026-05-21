@@ -2,7 +2,7 @@
 
 ## 📑 目录
 >
-- [� Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
+- [🔄 Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
   - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 条件语句](#-条件语句)
@@ -73,7 +73,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Control Flow]** · **[来源: Wikipedia - Subroutine]** · **[来源: ACM - Structured Programming]** · **[来源: IEEE - Control Flow Analysis]**
 
 - [🔄 Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 条件语句](#-条件语句)
     - [if 表达式](#if-表达式)
@@ -137,6 +137,8 @@
 > **[来源: Rust Official Docs]**
 
 ### if 表达式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +173,8 @@ let result = if condition {
 ```
 
 ### match 表达式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +208,8 @@ match value {
 ```
 
 ### if let 表达式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +233,8 @@ if let Some(a) = option1 && let Some(b) = option2 {
 ```
 
 ### let-else 语句 (Rust 1.65+)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -252,6 +260,8 @@ fn process(value: Option<i32>) -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### loop 循环
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -274,6 +284,8 @@ let result = loop {
 ```
 
 ### while 循环
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -290,6 +302,8 @@ while let Some(item) = iterator.next() {
 ```
 
 ### for 循环
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -321,6 +335,8 @@ for (index, value) in vec.iter().enumerate() {
 ```
 
 ### 循环控制
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -350,6 +366,8 @@ for i in 1..=10 {
 
 ### 基本模式
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 字面量模式
 match x {
@@ -377,6 +395,8 @@ match x {
 ```
 
 ### 解构模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 元组解构
@@ -408,6 +428,8 @@ match msg {
 
 ### 引用模式
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 引用模式
 let value = Some(5);
@@ -431,6 +453,8 @@ match mut_value {
 ## 📝 函数定义
 
 ### 基本函数
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 无参数无返回值

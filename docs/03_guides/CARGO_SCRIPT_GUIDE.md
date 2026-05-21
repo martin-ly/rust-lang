@@ -48,6 +48,8 @@
 **Cargo Script** 是 Rust 从 1.79 版本开始稳定化的功能，允许在**单个 `.rs` 文件**中编写完整的 Rust 程序，包括外部依赖声明。
 
 ### 1.1 为什么需要它？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +72,8 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 1.2 适用场景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +93,8 @@ cargo run --manifest-path my_script.rs
 > **[来源: Rust Official Docs]**
 
 ### 2.1 基本结构
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -107,6 +113,8 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 2.2 格式要求
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +133,8 @@ cargo run --manifest-path my_script.rs
    - 可以包含 `fn main()`、模块、测试等
 
 ### 2.3 完整清单示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +173,8 @@ cargo run --manifest-path my_script.rs
 > **[来源: Rust Official Docs]**
 
 ### 3.1 使用 cargo 直接运行 (推荐)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +187,8 @@ cargo run --manifest-path script.rs -- --help
 ```
 
 ### 3.2 作为可执行脚本 (Unix)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

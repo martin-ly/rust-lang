@@ -47,6 +47,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 代码复杂度
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 
 ### 1.2 代码规模
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 度量指标:
 ├── 物理行数 (LOC)
@@ -104,6 +108,8 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 
 ### 2.1 覆盖率类型
 
+> **[来源: Wikipedia - Type System]**
+
 | 类型 | 定义 | ASIL D | ASIL C | 工具 |
 |------|------|--------|--------|------|
 | **语句覆盖** | 执行语句比例 | 100% | 100% | llvm-cov |
@@ -113,6 +119,8 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 | **行覆盖** | 执行代码行比例 | 100% | 100% | tarpaulin |
 
 ### 2.2 覆盖率测量
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```bash
 # 使用cargo-llvm-cov
@@ -126,6 +134,8 @@ cargo llvm-cov -p my-crate --lcov
 ```
 
 ### 2.3 覆盖率检查表
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #[cfg(test)]

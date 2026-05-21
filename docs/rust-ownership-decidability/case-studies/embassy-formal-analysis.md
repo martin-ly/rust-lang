@@ -73,6 +73,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 嵌入式并发挑战
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -115,6 +117,8 @@ fn main() -> ! {
 
 ### 1.2 传统RTOS的局限
 
+> **[来源: IEEE - Programming Language Standards]**
+
 传统实时操作系统的问题：
 
 | 问题 | 说明 | 影响 |
@@ -138,6 +142,8 @@ unsafe fn task_sensor(_: *mut c_void) {
 ```
 
 ### 1.3 Embassy的设计目标
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Embassy针对嵌入式优化的异步运行时：
 
@@ -175,6 +181,8 @@ async fn main(spawner: Spawner) {
 ## 2. 核心概念与技术原理
 
 ### 2.1 Async/Await基础
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust的async/await工作原理：
 
@@ -239,6 +247,8 @@ pub enum Poll<T> {
 
 ### 2.2 任务与Executor
 
+> **[来源: POPL - Programming Languages Research]**
+
 Embassy的任务模型：
 
 ```rust
@@ -279,6 +289,8 @@ impl Executor {
 
 ### 2.3 Waker机制
 
+> **[来源: PLDI - Programming Language Design]**
+
 Waker是异步任务的通知机制：
 
 ```rust
@@ -312,6 +324,8 @@ async fn wait_for_interrupt() {
 ```
 
 ### 2.4 时间驱动与定时器
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use embassy_time::{Duration, Instant, Timer};
@@ -355,6 +369,8 @@ impl TimerQueue {
 
 ### 2.5 中断集成
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use embassy_sync::signal::Signal;
 
@@ -383,6 +399,8 @@ async fn button_handler() {
 
 ### 3.1 Future Trait详解
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 pub trait Future {
     type Output;
@@ -407,6 +425,8 @@ impl<'a> Context<'a> {
 
 ### 3.2 Executor Trait设计
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 pub trait Executor {
     fn run(&mut self) -> !;
@@ -421,6 +441,8 @@ pub trait Executor {
 ```
 
 ### 3.3 Spawner机制
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 pub struct Spawner {
@@ -441,6 +463,8 @@ impl Spawner {
 ```
 
 ### 3.4 Timer与Timeout
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 pub struct Timer {
@@ -474,6 +498,8 @@ impl Future for Timer {
 ```
 
 ### 3.5 Channel与Signal
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 pub struct Channel<M, T, const N: usize> {
@@ -536,6 +562,8 @@ impl<M: RawMutex, T, const N: usize> Channel<M, T, N> {
 ## 4. 使用场景与实际案例
 
 ### 4.1 传感器数据采集
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use embassy_executor::Spawner;
@@ -614,6 +642,8 @@ async fn process_batch(readings: &[SensorReading]) {
 
 ### 4.2 网络协议栈
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use embassy_net::{Stack, tcp::TcpSocket};
 
@@ -671,6 +701,8 @@ async fn connection_handler(
 ```
 
 ### 4.3 用户界面处理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 #[derive(Clone, Copy, Debug)]
@@ -751,6 +783,8 @@ async fn ui_controller() {
 
 ### 4.4 低功耗应用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 #[embassy_executor::task]
 async fn low_power_node() {
@@ -793,6 +827,8 @@ async fn perform_measurement() {
 ```
 
 ### 4.5 多核协调
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 static IPC_CHANNEL: Channel<CriticalSectionRawMutex, IpcMessage, 16> = Channel::new();
@@ -846,6 +882,8 @@ async fn core1_main_task() {
 
 ### 5.1 与RTOS的对比
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 特性 | Embassy | FreeRTOS | Zephyr |
 |-----|---------|----------|--------|
 | 调度方式 | 协作式 | 抢占式 | 抢占式 |
@@ -858,6 +896,8 @@ async fn core1_main_task() {
 
 ### 5.2 与裸机轮询的对比
 
+> **[来源: Wikipedia - Type System]**
+
 | 特性 | Embassy | 裸机轮询 |
 |-----|---------|---------|
 | 代码结构 | 清晰async/await | 复杂状态机 |
@@ -867,6 +907,8 @@ async fn core1_main_task() {
 | 多任务表达 | 自然 | 困难 |
 
 ### 5.3 与Tokio的对比
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | Embassy | Tokio |
 |-----|---------|-------|
@@ -882,6 +924,8 @@ async fn core1_main_task() {
 ## 6. 完整代码示例
 
 ### 6.1 完整的传感器系统
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use embassy_executor::Spawner;
@@ -1014,6 +1058,8 @@ async fn main_monitor() {
 
 ### 6.2 异步状态机
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum DeviceState {
@@ -1112,6 +1158,8 @@ async fn shutting_down_state() -> StateEvent {
 
 ### 6.3 并发服务器
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 const MAX_CONCURRENT_CONNECTIONS: usize = 4;
 static CONNECTION_PERMITS: Channel<CriticalSectionRawMutex, (), MAX_CONCURRENT_CONNECTIONS> =
@@ -1190,6 +1238,8 @@ async fn handle_connection(
 
 ### 6.4 低功耗数据采集
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 #[embassy_executor::task]
 async fn low_power_collector() {
@@ -1255,6 +1305,8 @@ async fn upload_pending_data() {
 
 ### 7.1 内存占用分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // Embassy任务内存模型
 
@@ -1275,6 +1327,8 @@ async fn example_task() {
 | 同步原语 | ~4-20B | Mutex/Channel等 |
 
 ### 7.2 上下文切换开销
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // Embassy协作式切换

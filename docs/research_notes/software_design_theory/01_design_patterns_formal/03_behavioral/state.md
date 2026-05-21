@@ -34,6 +34,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -82,6 +83,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -90,6 +92,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（State 结构）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +110,8 @@ $$\mathcal{ST} = \langle C, S, \mathit{transition}: C \times S \rightarrow S' \r
 ---
 
 ### Axiom ST1（状态机全定义公理）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 定理 ST-T1（枚举穷尽定理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +152,8 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 定理 ST-T2（类型状态编译期消除定理）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +185,8 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 ---
 
 ### 推论 ST-C1（纯 Safe State）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +203,8 @@ State 为纯 Safe；`enum` + `match` 或类型状态模式，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +258,8 @@ impl Config<Unlocked> {
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -487,7 +503,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

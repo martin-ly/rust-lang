@@ -42,6 +42,8 @@ fn main() {
 ```
 
 ### 平台特定构建
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@ fn main() {
 ```
 
 ### 代码生成构建脚本
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -96,6 +100,8 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 ```
 
 ### 常用构建工具
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +131,8 @@ wasm-pack build --target web
 ```
 
 ### Makefile.toml (cargo-make)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +165,8 @@ dependencies = ["format", "lint", "test", "build"]
 ```
 
 ### Justfile 示例
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

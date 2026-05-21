@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 借用检查器错误
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +126,8 @@ impl<'a> Container<'a> {
 ```
 
 ### 1.2 泛型约束错误
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +167,8 @@ fn find_max_ref<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 1.3 no_std编译错误
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +204,8 @@ fn use_static_vec() {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Panic分析与恢复
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +254,8 @@ pub fn safe_execute<T>(operation: impl FnOnce() -> T) -> Option<T> {
 ```
 
 ### 2.2 堆栈溢出检测
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -291,6 +301,8 @@ pub mod stack_monitor {
 ```
 
 ### 2.3 死锁检测
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -371,6 +383,8 @@ impl DeadlockDetector {
 
 ### 3.1 Miri常见问题
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 问题1: Miri报告"unsupported operation"
 # 原因: 使用了Miri不支持的系统调用
@@ -396,6 +410,8 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ```
 
 ### 3.2 Kani验证失败
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 问题1: 验证超时
@@ -426,6 +442,8 @@ fn verify_panic_case() {
 
 ### 3.3 Clippy配置问题
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```toml
 # clippy.toml
 # 问题: 某些lint在安全关键代码中不适用
@@ -443,6 +461,8 @@ allow = [
 
 ### 4.1 二进制大小优化
 
+> **[来源: Wikipedia - Type System]**
+
 ```toml
 # Cargo.toml
 [profile.release]
@@ -458,6 +478,8 @@ panic-halt = "0.2"
 ```
 
 ### 4.2 实时性能调优
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 /// 禁用运行时检查(仅在充分验证后)

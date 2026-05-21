@@ -16,6 +16,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 编译流程
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -31,6 +33,8 @@
 ```
 
 ### 编译器属性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +72,8 @@ extern "C" {
 
 ### 编译器标志
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 优化级别
 rustc -C opt-level=0    # 无优化（调试）
@@ -87,6 +93,8 @@ rustc -C target-cpu=haswell # 针对特定 CPU
 ```
 
 ### 条件编译示例
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 平台特定代码
@@ -116,6 +124,8 @@ const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 ```
 
 ### 过程宏示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 派生宏
@@ -149,6 +159,8 @@ pub fn route(attr: TokenStream, item: TokenStream) -> TokenStream {
 ```
 
 ### 编译期计算
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // const 函数

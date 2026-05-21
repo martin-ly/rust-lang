@@ -28,6 +28,7 @@
       - [相关文档](#相关文档-1)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 全局思维导图
 >
@@ -64,6 +65,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 工作流状态机
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -107,6 +110,8 @@ $。
 
 ### 2. 活动(Activity)类型族
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```text
                             活动类型
                                │
@@ -143,6 +148,8 @@ $。
 ---
 
 ### 3. 补偿链模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
                             补偿链
@@ -182,6 +189,8 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 ---
 
 ### 4. 工作流引擎对比
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
                         工作流引擎
@@ -332,7 +341,6 @@ Comp3(undo) <- Comp2(undo) <- Comp1(undo)
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

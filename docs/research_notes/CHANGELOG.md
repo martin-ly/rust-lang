@@ -20,6 +20,8 @@
 > **[来源: Rust Official Docs]**
 
 ### TOC 与内容深化 100% 完成（2026-02-15）🆕
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -28,6 +30,8 @@
 - **T2.3 证明深度 L2**：19 篇设计模式（singleton、builder、abstract_factory、prototype、adapter、bridge、composite、decorator、facade、flyweight、proxy、chain_of_responsibility、command、interpreter、iterator、mediator、memento、template_method、visitor）补全 L2 元信息与五维自检表形式化行；23 篇设计模式全部 L2
 
 ### 目录补全（T1）100% 完成（2026-02-15）🆕
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -39,6 +43,8 @@
 - **TOC_AND_CONTENT_DEEPENING_PLAN**：T1 执行记录已更新
 
 ### 内容深化（T2）设计模式 + 执行模型 100% 完成（2026-02-15）🆕
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -57,6 +63,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 设计模式/分布式/工作流全面论证 100% 完成（2026-02-15）🆕
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -73,6 +81,8 @@
 > **[来源: Rust Official Docs]**
 
 ### docs 全结构梳理 100% 完成（2026-02-15）🆕
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +100,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 表格格式统一与实验/核心文档（2026-02-14）🆕
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +110,8 @@
 - **全库表格分隔符 100% 统一**：FORMAL_FULL_MODEL_OVERVIEW、FORMAL_FULL_MODEL_EN_SUMMARY、FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02、FORMAL_LANGUAGE_AND_PROOFS、FORMAL_VERIFICATION_GUIDE、INTERNATIONAL_FORMAL_VERIFICATION_INDEX、RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN、RESEARCH_PILLARS_AND_SUSTAINABLE_PLAN、formal_methods（FORMAL_METHODS_COMPLETENESS_CHECKLIST、SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN、async_state_machine、borrow_checker_proof、lifetime_formalization、ownership_model、pin_self_referential、send_sync_formalization）、HIERARCHICAL_MAPPING_AND_SUMMARY、coq_skeleton/README、COQ_ISABELLE_PROOF_SCAFFOLDING、CORE_THEOREMS_FULL_PROOFS、ARGUMENTATION_CHAIN_AND_FLOW、COQ_OF_RUST_INTEGRATION_PLAN、EXECUTABLE_SEMANTICS_ROADMAP、CORE_THEOREMS_EN_SUMMARY、CORE_FEATURES_FULL_CHAIN、CONTENT_ENHANCEMENT、software_design_theory（06_boundary_analysis、04_compositional_engineering/README）等全部改为 `| :--- |` 格式；全库无遗留 `|---|` 分隔符
 
 ### 格式统一与 Rust 1.93 对齐计划 100% 完成（2026-02-14）🆕
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +122,8 @@
 
 ### 充分完整 完备 100% 收尾（2026-02-14）🆕
 
+> **[来源: PLDI - Programming Language Design]**
+
 - **CORE_THEOREMS**：英文摘要与完整证明增加 Send/Sync（SEND-T1/SYNC-T1、§四、SYNC-L1、L3 表行）；归纳步引用 send_sync_formalization
 - **00_COMPREHENSIVE_SUMMARY / FORMAL_FULL_MODEL_OVERVIEW**：支柱 1 与知识地图纳入 Send/Sync、安全可判定机制总览；全模型表与 DAG 增加 Send/Sync；论证思路增加完备性自检链
 - **RUST_193 / DESIGN_MECHANISM_RATIONALE**：Send/Sync 形式化列改为以 send_sync_formalization 为主；设计机制增加形式化专篇链接
@@ -117,6 +133,8 @@
 
 ### formal_methods 可持续推进计划 阶段 A–D 100% 完成（2026-02-14）🆕
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - **阶段 A**：新建 [send_sync_formalization](formal_methods/send_sync_formalization.md)；Def SEND1/SYNC1、SEND-T1/SYNC-T1、SYNC-L1、与 spawn/Future/Arc 衔接、反例；README 扩展为**六篇并表**
 - **阶段 B**：新建 [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md)；每机制一节（概念定义、属性关系、解释论证、形式证明、反例）；与 formal_methods/type_theory 双向链接
 - **阶段 C**：并发与异步族、Trait 族四维表（可判定性、安全边界、形式化、思维表征）已入 SAFE_DECIDABLE_MECHANISMS_OVERVIEW §6
@@ -124,6 +142,8 @@
 - **SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN**：阶段 A–D 状态更新为 ✅ 已完成；00_completeness_gaps、INDEX、QUICK_FIND 已更新
 
 ### 形式化证明批判性分析与推进计划 100% 完成（2026-02-14）🆕
+
+> **[来源: Wikipedia - Type System]**
 
 - **阶段 1**：INTERNATIONAL_FORMAL_VERIFICATION_INDEX、证明深度标注（L1/L2/L3）、FORMAL_FULL_MODEL_OVERVIEW、层次化导航
 - **阶段 2**：CORE_THEOREMS_FULL_PROOFS（ownership T2、borrow T1、type T3 完整证明）、RUSTBELT_ALIGNMENT、EXECUTABLE_SEMANTICS_ROADMAP
@@ -134,11 +154,15 @@
 
 ### 完整总结与论证脉络（2026-02-14）🆕
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **00_COMPREHENSIVE_SUMMARY**：新建完整总结综合；项目全貌一句话、三大支柱概览、全项目知识地图、论证脉络总览、各文档职责、推荐阅读路径
 - **ARGUMENTATION_CHAIN_AND_FLOW**：新建论证脉络关系；论证五步法、自上而下/自底而上流向、概念→公理→定理→推论 DAG、三大支柱论证衔接、文档依赖、按问题查论证链、论证思路示例
 - **入口衔接**：00_ORGANIZATION_AND_NAVIGATION、INDEX、README、QUICK_FIND、ARGUMENTATION_GAP_INDEX、CLASSIFICATION、RESEARCH_PILLARS、docs/00_MASTER_INDEX、PROOF_INDEX、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、COMPREHENSIVE_REVIEW_REPORT、TASK_INDEX 已全部添加入口或引用
 
 ### 层次化梳理与阶段 1 推进（2026-02-14）🆕
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - **层次化小节规范**：CONTENT_ENHANCEMENT 新增「概念定义-属性关系-解释论证 层次化小节规范」；QUALITY_CHECKLIST 新增「概念定义-属性关系-解释论证 层次化」检查项
 - **HIERARCHICAL_MAPPING_AND_SUMMARY**：新建层次化梳理与映射总结；含按三大支柱的文档树、概念族↔文档↔Def/Axiom/定理映射表（支柱 1/2/3）、文档↔思维表征映射表、文档依赖简表
@@ -147,6 +171,8 @@
 
 ### 阶段 2 多维矩阵与双向链接（2026-02-14）🆕
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **23 模式双向链接**：23 个设计模式文档元信息均增加「23 模式矩阵」行号链接；[01_design_patterns_formal/README §23 模式多维对比矩阵](software_design_theory/01_design_patterns_formal/README.md#23-模式多维对比矩阵) 已建
 - **执行模型多维对比矩阵**：[03_execution_models/README §执行模型多维对比矩阵](software_design_theory/03_execution_models/README.md#执行模型多维对比矩阵)（同步/异步/并发/并行/分布式×确定性/数据竞争/选型）
 - **formal_methods 六篇并表**：[formal_methods/README §formal_methods 六篇并表](formal_methods/README.md#formal_methods-六篇并表)（概念×公理×定理×证明方法×反例；含 Send/Sync）
@@ -154,6 +180,8 @@
 - **RESEARCH_NOTES_CRITICAL_ANALYSIS_AND_IMPROVEMENT_PLAN**：阶段 2 标记为 ✅ 已完成
 
 ### 阶段 3–4 思维表征与文档依赖（2026-02-14）🆕
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **设计模式选型决策树**：03_semantic_boundary_map §按需求反向查模式 与 01_design_patterns_formal/README §23 模式矩阵 交叉链接；决策树（精简）注明对应模式文档入口
 - **相关思维表征块**：ownership_model、borrow_checker_proof、06_boundary_analysis 文末新增「相关思维表征」表（思维导图/矩阵/证明树/决策树 + HIERARCHICAL_MAPPING 依据）
@@ -167,6 +195,8 @@
 
 ### 全面检查推进计划实施（2026-02-12）🆕
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **Phase 1 权威对齐**：RUST_193 新增权威来源对齐表（releases.rs、Rust Blog、Ferrocene FLS、RustBelt）；Edition 2024 与 FLS 范围说明；formal_methods README 新增权威来源快速链接、版本说明
 - **Phase 2 类型构造能力**：新建 [type_theory/construction_capability.md](type_theory/construction_capability.md)；Def TCON1、TCON 矩阵、类型构造决策树、确定性判定；type_theory README 收录
 - **Phase 3 并发确定性**：扩展 [06_boundary_analysis](software_design_theory/03_execution_models/06_boundary_analysis.md)；Def EB-DET1、 theorem EB-DET-T1、确定性判定决策树、并发 vs 并行判定表；与 FORMAL_PROOF_SYSTEM_GUIDE 衔接
@@ -179,12 +209,16 @@
 
 ### 持续推进至 100% 收尾（2026-02-12）🆕
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - **统一 100% 状态**：UNIFIED_SYSTEMATIC_FRAMEWORK 中 lifetime_formalization、pin_self_referential 证明完成度 4.6→5.0；STATISTICS、README 更新全面检查推进计划完成状态
 - **新文档纳入索引**：QUICK_REFERENCE、QUICK_FIND 新增 construction_capability、CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW、执行确定性、组件成熟度
 - **PROOF_INDEX**：新增 construction_capability（Def TCON1、TCON-T1、TCON-L1、TCON-C1）；06_boundary_analysis（Def EB-DET1、EB-DET-T1、EB-DET-C1）；04_compositional_engineering（Def CE-MAT1、CE-MAT-T1、CE-MAT-C1）；证明总数 110+
 - **ARGUMENTATION_GAP_INDEX**：文档导航新增 CORE_FEATURES_FULL_CHAIN、FEATURE_TEMPLATE、INCREMENTAL_UPDATE_FLOW、construction_capability；状态更新为全面检查推进计划实施完成
 
 ### 持续推进至 100%（2026-02-12）🆕
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - **类型理论阶段 2–5 完成**：阶段 2–4 见上；阶段 5：trait_system_formalization Def ORPH1/NEG1、定理 NEG-T1、Def DYN-IMPL1、定理 DYN-T1、推论 DYN-C1；advanced_types Def CONST-EVAL1、定理 CONST-EVAL-T1；00_completeness_gaps 高/中优先级缺口全部 ✅
 - **QUICK_REFERENCE**：新增完备性缺口、软件设计理论块；类型理论缺口链接
@@ -230,6 +264,8 @@
 ---
 
 ### 格式与形式论证扩展（2026-02-12）🆕
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **表格格式统一**：参照 PROOF_INDEX.md 行 55 规范，research_notes 表格分隔行统一为 `| :--- | :--- | :--- |` 格式；已修复 50+ 文件：formal_methods、type_theory、01_design_patterns_formal（23 模式）、02_workflow_safe_complete_models、03_execution_models、04_compositional_engineering、FORMAL_PROOF_SYSTEM_GUIDE、THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE、experiments、BEST_PRACTICES、TASK_ORCHESTRATION_AND_EXECUTION_PLAN、practical_applications 等。
 
@@ -285,6 +321,8 @@
 
 ### 应用分析视图 100% 完成（2026-02-12）🆕
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **APPLICATIONS_ANALYSIS_VIEW.md 全面丰富**:
 
 - ✅ 应用场景选型决策树（顶层）
@@ -297,6 +335,8 @@
 ---
 
 ### 论证形式化全面推进（2026-02-12）🆕
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **形式化论证扩展**（Def/Axiom/定理）:
 

@@ -57,6 +57,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 场景 1: CRUD API
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 

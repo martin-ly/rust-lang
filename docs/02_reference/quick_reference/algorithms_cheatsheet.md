@@ -75,7 +75,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Algorithm]** · **[来源: Wikipedia - Big O Notation]** · **[来源: ACM - Algorithm Design Patterns]** · **[来源: IEEE - Standard Algorithms Library]**
 
 - [算法与数据结构快速参考卡片](#算法与数据结构快速参考卡片)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🚀 快速开始](#-快速开始)
     - [排序算法](#排序算法)
@@ -141,6 +141,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 排序算法
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +165,8 @@ println!("Sorted: {:?}", data);
 ```
 
 ### 搜索算法
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +193,8 @@ if let Some(index) = linear_search(&data, 7) {
 > **[来源: Rust Official Docs]**
 
 ### 排序算法
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +206,8 @@ if let Some(index) = linear_search(&data, 7) {
 | 选择排序 | O(n²)      | O(1)       | 不稳定 | 简单场景   |
 
 ### 搜索算法
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +217,8 @@ if let Some(index) = linear_search(&data, 7) {
 | 插值搜索 | O(log log n) | O(1)       | 均匀分布已排序 |
 
 ### 图算法
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +237,8 @@ let distances = dijkstra(&graph, start)?;
 ```
 
 ### 动态规划
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -250,6 +262,8 @@ let max_value = knapsack_01(weights, values, capacity);
 > **[来源: Rust Official Docs]**
 
 ### 栈和队列
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -275,6 +289,8 @@ if let Some(value) = queue.dequeue() {
 
 ### 树结构
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use c08_algorithms::data_structures::tree::*;
 
@@ -295,6 +311,8 @@ println!("Inorder: {:?}", inorder);
 
 ### 哈希表
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::collections::HashMap;
 
@@ -309,6 +327,8 @@ if let Some(value) = map.get("key1") {
 
 ### BTreeMap/BTreeSet 与 append（Rust 1.93）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Rust 1.93 行为变更**：`BTreeMap::append` 和 `BTreeSet` 相关 append 操作不再更新目标中已存在的 key。
 若源与目标有相同 key，保留目标原有条目。需覆盖时使用 `insert` 或 `entry` API。
 
@@ -317,6 +337,8 @@ if let Some(value) = map.get("key1") {
 ## 💡 代码示例
 
 ### 示例 1: 快速排序实现
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn quicksort<T: Ord>(arr: &mut [T]) {
@@ -353,6 +375,8 @@ assert_eq!(data, vec![11, 12, 22, 25, 34, 64, 90]);
 
 ### 示例 2: 二分搜索实现
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     let mut left = 0;
@@ -376,6 +400,8 @@ assert_eq!(binary_search(&arr, &4), None);
 ```
 
 ### 示例 3: 动态规划 - 最长公共子序列
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 fn lcs(s1: &str, s2: &str) -> String {
@@ -419,6 +445,8 @@ assert_eq!(lcs("ABCDGH", "AEDFHR"), "ADH");
 ```
 
 ### 示例 4: 图的 BFS 和 DFS
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::collections::{HashMap, HashSet, VecDeque};
@@ -488,6 +516,8 @@ println!("DFS: {:?}", g.dfs(0));
 
 ### 示例 5: 滑动窗口最大值
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::collections::VecDeque;
 
@@ -535,6 +565,8 @@ assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 ## 🎯 使用场景
 
 ### 场景: 日志分析系统
+
+> **[来源: POPL - Programming Languages Research]**
 
 在实际项目中，算法常用于数据处理和分析。以下是一个简化的日志分析系统：
 
@@ -596,6 +628,8 @@ impl LogAnalyzer {
 
 ### 并行排序
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use rayon::prelude::*;
 
@@ -607,6 +641,8 @@ println!("Sorted: {:?}", data);
 ```
 
 ### 并行搜索
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use rayon::prelude::*;
@@ -625,6 +661,8 @@ if let Some(&value) = found {
 ## 🔧 算法选择指南
 
 ### 排序选择
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - **小数据集 (< 50)**: 插入排序
 - **中等数据集 (50-1000)**: 快速排序

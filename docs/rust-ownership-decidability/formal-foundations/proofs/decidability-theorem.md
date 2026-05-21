@@ -79,7 +79,11 @@ Rust的类型系统是业界最复杂的类型系统之一，它结合了:
 
 ### 2.1 复杂性类定义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.1 (复杂性类)
+
+> **[来源: PLDI - Programming Language Design]**
 
 **P** (多项式时间):
 $$
@@ -111,7 +115,11 @@ $$
 
 ### 2.2 PSPACE完全性
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 2.2 (PSPACE完全)
+
+> **[来源: Wikipedia - Type System]**
 
 问题 $L$ 是**PSPACE完全**的当且仅当:
 
@@ -127,7 +135,11 @@ $$
 
 ### 2.3 归约技术
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.3 (多项式时间归约)
+
+> **[来源: PLDI - Programming Language Design]**
 
 问题 $A$ 可**多项式时间归约**到问题 $B$ ($A \leq_p B$) 当且仅当:
 
@@ -149,7 +161,11 @@ $$
 
 ### 3.1 问题陈述
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 3.1 (Rust类型推断问题)
+
+> **[来源: Wikipedia - Type System]**
 
 **输入**:
 

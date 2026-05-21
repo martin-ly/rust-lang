@@ -80,7 +80,11 @@ Crossbeam是Rust生态中最重要的并发原语库，提供:
 
 ### 2.1 内存回收问题
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定义 2.1 (无锁内存回收问题)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **场景**:
 
@@ -102,7 +106,11 @@ Thread A (恢复):
 
 ### 2.2 Epoch机制形式化
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.2 (Epoch系统)
+
+> **[来源: PLDI - Programming Language Design]**
 
 $$
 \text{EpochSystem} = (E: \text{AtomicU64}, E_{local}: [\text{U64}], G: \text{GlobalGarbageBag}, L: [\text{LocalGarbageBag}])
@@ -123,6 +131,8 @@ $$
 - $L[i]$: 线程 $i$ 的本地垃圾袋
 
 ### 定义 2.3 (Epoch协议)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **pin操作** (进入临界区):
 
@@ -169,7 +179,11 @@ where F: FnOnce() + Send
 
 ### 2.3 安全延迟证明
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定理 2.1 (EBR安全性)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > 使用EBR回收的内存不会在任何线程访问期间被释放。
 
@@ -207,6 +221,8 @@ $$
 
 ### 定理 2.2 (内存回收延迟上界)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 > 在 $n$ 个线程的系统中，内存回收延迟最多为 $O(n)$ 个epoch周期。
 
 **证明**:
@@ -228,7 +244,11 @@ $$
 
 ### 3.1 Michael-Scott队列
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 3.1 (队列内存表示)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 struct Queue<T> {

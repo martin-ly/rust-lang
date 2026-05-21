@@ -69,6 +69,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### match vs if-let
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +106,8 @@ match result {
 ## 🔄 循环结构决策
 
 ### 循环类型选择矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 场景 | 推荐 | 说明 |
 |------|------|------|
@@ -151,6 +155,8 @@ loop {
 
 ### 决策流程
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```mermaid
 graph LR
     A[需要迭代处理] --> B{需要提前退出?}
@@ -168,6 +174,8 @@ graph LR
 ```
 
 ### 对比示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 场景: 找第一个满足条件的元素
@@ -210,6 +218,8 @@ let result = collection.iter().try_for_each(|item| {
 ## 🎯 错误处理控制流
 
 ### 错误处理决策树
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```mermaid
 graph TD

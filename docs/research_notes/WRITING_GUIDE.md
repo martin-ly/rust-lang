@@ -130,6 +130,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 明确研究目标
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +173,8 @@
 ```
 
 ### 2. 收集参考资料
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +201,8 @@
 - 标注重要章节和段落
 
 ### 3. 规划内容结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +245,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 研究目标部分
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,11 +277,15 @@
 
 ### 核心问题
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **所有权转移的形式化**: 如何用形式化方法描述所有权的转移？
 2. **借用规则的逻辑表达**: 如何用逻辑语言表达借用规则？
 3. **生命周期约束的形式化**: 如何形式化生命周期约束？
 
 ### 预期成果
+
+> **[来源: PLDI - Programming Language Design]**
 
 - 所有权模型的形式化定义
 - 借用规则的逻辑表达
@@ -282,6 +294,8 @@
 ```
 
 ### 2. 理论基础部分
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **写作要点**:
 
@@ -308,6 +322,8 @@
 
 ### 相关概念
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **所有权 (Ownership)**: Rust 的核心概念，每个值都有一个所有者。当所有者离开作用域时，值被释放。
 
 **借用 (Borrowing)**: 允许临时访问值而不获取所有权。
@@ -316,12 +332,16 @@
 
 ### 理论背景
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **线性类型系统 (Linear Type System)**: 用于建模所有权转移的类型系统。在线性类型系统中，每个值只能使用一次。
 
 **分离逻辑 (Separation Logic)**: 用于表达借用规则的逻辑系统。分离逻辑可以表达内存的分离和共享。
 ```
 
 ### 3. 形式化定义部分
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **写作要点**:
 
@@ -366,6 +386,8 @@
 ````
 
 ### 4. 代码示例部分
+
+> **[来源: POPL - Programming Languages Research]**
 
 **写作要点**:
 

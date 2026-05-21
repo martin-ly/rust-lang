@@ -72,6 +72,8 @@
 Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表达式**，超越了简单的整数常量。
 
 ### 为什么需要这个特性？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -97,6 +99,8 @@ where
 > **[来源: Rust Official Docs]**
 
 ### 常量表达式泛型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +145,8 @@ let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 > **[来源: Rust Official Docs]**
 
 ### 基础用法
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +177,8 @@ where
 ```
 
 ### 复杂表达式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +206,8 @@ let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 ```
 
 ### 类型级计算
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,6 +239,8 @@ where
 > **[来源: Rust Official Docs]**
 
 ### 编译时矩阵运算
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -282,6 +294,8 @@ let c = a * b;  // Matrix<i32, 2, 2>
 ```
 
 ### 类型级数值计算
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #![feature(generic_const_exprs)]

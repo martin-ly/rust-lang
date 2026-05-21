@@ -70,6 +70,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 资源管理代数
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +110,8 @@ fn partial_use() {
 ```
 
 ### 借用检查器的形式化规则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

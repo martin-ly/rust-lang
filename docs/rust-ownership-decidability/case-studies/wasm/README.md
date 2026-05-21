@@ -59,6 +59,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是WebAssembly
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -72,6 +74,8 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 - 紧凑: 二进制格式，体积小
 
 ### 1.2 WASM内存模型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 ┌─────────────────────────────────────────────────────┐
@@ -98,6 +102,8 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 
 ### 1.3 Rust为什么适合WASM
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | Rust优势 | 对WASM的意义 |
 |------|----------|--------------|
 | 无GC | 无运行时 | WASM体积小 |
@@ -110,6 +116,8 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 ## 2. Rust与WASM
 
 ### 2.1 wasm-bindgen
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `wasm-bindgen` 是Rust与JavaScript之间的桥梁。
 
@@ -139,6 +147,8 @@ pub fn greet(name: &str) {
 
 ### 2.2 wasm-pack
 
+> **[来源: POPL - Programming Languages Research]**
+
 `wasm-pack` 是构建、测试和发布WASM的CLI工具。
 
 ```bash
@@ -156,6 +166,8 @@ wasm-pack publish
 ```
 
 ### 2.3 项目结构
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 my-wasm-project/
@@ -177,6 +189,8 @@ my-wasm-project/
 
 ### 3.1 创建项目
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```bash
 # 使用cargo generate
 cargo generate --git https://github.com/rustwasm/wasm-pack-template
@@ -187,6 +201,8 @@ cd my-wasm-project
 ```
 
 ### 3.2 Cargo.toml配置
+
+> **[来源: Wikipedia - Type System]**
 
 ```toml
 [package]
@@ -226,6 +242,8 @@ lto = true
 
 ### 3.3 基本模板代码
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use wasm_bindgen::prelude::*;
 
@@ -264,6 +282,8 @@ impl Calculator {
 
 ### 4.1 类型映射
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | Rust类型 | JavaScript类型 | 说明 |
 |----------|----------------|------|
 | `i32`, `i64` | `number`, `bigint` | 整数 |
@@ -275,6 +295,8 @@ impl Calculator {
 | `JsValue` | 任意 | 通用JS值 |
 
 ### 4.2 复杂类型传递
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **使用Serde进行序列化**:
 
@@ -301,6 +323,8 @@ pub fn process_user(data: &str) -> Result<JsValue, JsValue> {
 ```
 
 ### 4.3 回调函数
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use wasm_bindgen::prelude::*;

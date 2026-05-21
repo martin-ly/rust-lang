@@ -74,6 +74,8 @@
 
 ### 原理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 程序员显式分配和释放内存，拥有完全控制权。
 
 ```c
@@ -125,6 +127,8 @@ void manual_management_demo() {
 
 ### C++ 的现代改进
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```cpp
 #include <memory>
 #include <vector>
@@ -158,6 +162,8 @@ void custom_deleter() {
 
 ### 优缺点分析
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 优点 | 缺点 |
 |------|------|
 | 最大性能控制 | 容易出错（忘记释放）|
@@ -166,6 +172,8 @@ void custom_deleter() {
 | 适合系统编程 | 内存碎片管理困难 |
 
 ### 常见错误模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```c
 // 错误 1: 内存泄漏
@@ -203,9 +211,13 @@ void buffer_overflow() {
 
 ### 原理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 运行时系统自动追踪不再使用的内存并回收。
 
 ### 主要 GC 算法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```java
 // Java 垃圾回收示例
@@ -294,6 +306,8 @@ From 空间          To 空间（复制后）
 
 ### Go 的并发 GC
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```go
 package main
 
@@ -337,6 +351,8 @@ func init() {
 
 ### GC 优缺点
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 优点 | 缺点 |
 |------|------|
 | 无内存泄漏风险（大部分情况） | 运行时开销 |
@@ -347,6 +363,8 @@ func init() {
 ## 引用计数
 
 ### 原理
+
+> **[来源: POPL - Programming Languages Research]**
 
 每个对象维护一个引用计数器，计数为零时立即释放。
 

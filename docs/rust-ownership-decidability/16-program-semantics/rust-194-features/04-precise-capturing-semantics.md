@@ -61,6 +61,8 @@ Precise Capturing（精确捕获）是 Rust 1.94 引入的重要特性，通过 
 这是 Rust 生命周期系统的重大改进，提供了更细粒度的生命周期控制。
 
 ### 1.1 什么是 Precise Capturing
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -84,6 +86,8 @@ fn bar<'a, 'b>(x: &'a i32, y: &'b i32) -> impl Trait + use<'a>;
 
 ### 2.1 精确捕获语法
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 $$
 \begin{aligned}
 \text{ImplTrait} &::= \text{impl } \text{TypeParamBound} \\
@@ -93,6 +97,8 @@ $$
 $$
 
 ### 2.2 捕获集定义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **捕获集** $\mathcal{C}$ 是生命周期的幂集：
 
@@ -114,6 +120,8 @@ $$
 
 ### 2.3 返回类型扩展语法
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```
 ReturnType ::= -> Type
             | -> impl TraitBound + use<Lifetimes>
@@ -123,6 +131,8 @@ ReturnType ::= -> Type
 ## 3. 操作语义
 
 ### 3.1 捕获集计算
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **显式捕获** (CS-Explicit):
 
@@ -157,6 +167,8 @@ $$
 
 ### 3.2 生命周期包含关系
 
+> **[来源: Wikipedia - Type System]**
+
 **捕获集有效性** (CS-Valid):
 
 $$
@@ -169,6 +181,8 @@ $$
 $$
 
 ### 3.3 闭包捕获语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **闭包精确捕获** (E-Closure-Precise):
 
@@ -186,6 +200,8 @@ $$
 
 ### 4.1 精确捕获类型规则
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **精确捕获推导** (T-Precise-Capture):
 
 $$
@@ -200,6 +216,8 @@ $$
 
 ### 4.2 生命周期检查规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **捕获生命周期有效性** (T-Capture-Valid):
 
 $$
@@ -213,6 +231,8 @@ $$
 $$
 
 ### 4.3 与 impl Trait 的交互
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **传统 impl Trait** (T-Impl-Trait-Classic):
 

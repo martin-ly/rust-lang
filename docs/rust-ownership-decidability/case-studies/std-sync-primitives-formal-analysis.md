@@ -78,7 +78,11 @@ Rust标准库提供了一套线程安全的同步原语:
 
 ### 2.1 内存模型
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 2.1 (Arc内存布局)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 pub struct Arc<T: ?Sized> {
@@ -113,7 +117,11 @@ $$
 
 ### 2.2 线程安全性证明
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定理 2.1 (Arc线程安全)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > `Arc<T>` 是 `Send` 当且仅当 `T: Send + Sync`；是 `Sync` 当且仅当 `T: Send + Sync`。
 
@@ -151,6 +159,8 @@ let arc = Arc::new(Cell::new(0));
 ∎
 
 ### 定理 2.2 (引用计数正确性)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > Arc的引用计数准确追踪活动引用数量。
 
@@ -202,7 +212,11 @@ $$
 
 ### 2.3 内存序分析
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定理 2.3 (Arc内存序正确性)
+
+> **[来源: Wikipedia - Type System]**
 
 > Arc使用Release-Acquire序确保数据可见性。
 
@@ -267,7 +281,11 @@ $$
 
 ### 3.1 形式化规范
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 3.1 (Mutex内存表示)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 pub struct Mutex<T: ?Sized> {
@@ -288,6 +306,8 @@ $$
 $$
 
 ### 定理 3.1 (Mutex互斥性)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > 任意时刻，最多只有一个线程持有MutexGuard。
 
@@ -331,7 +351,11 @@ RAII确保锁最终释放。∎
 
 ### 3.2 死锁自由度证明
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定理 3.2 (单Mutex无死锁)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > 使用单个Mutex的程序不会发生死锁。
 

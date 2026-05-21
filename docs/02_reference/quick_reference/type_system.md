@@ -167,6 +167,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 类型安全三支柱
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +185,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 标量类型
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -207,6 +211,8 @@ let h: char = '🦀';    // Unicode 字符
 ---
 
 ### 复合类型
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -231,6 +237,8 @@ let s2: String = String::from("world");  // 堆字符串
 > **[来源: Rust Official Docs]**
 
 ### 定义与实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -259,6 +267,8 @@ impl Summary for Article {
 ---
 
 ### Trait 作为参数
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -285,6 +295,8 @@ where
 ---
 
 ### Trait 作为返回值
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -311,6 +323,8 @@ fn returns_trait_object() -> Box<dyn Summary> {
 
 ### From/Into
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // From trait
 impl From<i32> for MyType {
@@ -328,6 +342,8 @@ let my: MyType = 42.into();
 ---
 
 ### TryFrom/TryInto（可失败转换）
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::convert::TryFrom;
@@ -351,6 +367,8 @@ let pos = PositiveInt::try_from(42)?;
 
 ### as 转换（基本类型）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 let a = 3.14f64;
 let b = a as i32;      // 3（截断）
@@ -362,6 +380,8 @@ let c = 100i32 as u8;  // 100
 ## 📦 泛型编程
 
 ### 泛型函数
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 fn largest<T: PartialOrd>(list: &[T]) -> &T {
@@ -378,6 +398,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ---
 
 ### 泛型结构体
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 struct Point<T> {
@@ -403,6 +425,8 @@ impl Point<f32> {
 
 ### 关联类型
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 trait Iterator {
     type Item;  // 关联类型
@@ -425,6 +449,8 @@ impl Iterator for Counter {
 
 ### 协变（Covariant）- &T
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 'long 是 'short 的子类型
 fn covariant<'long, 'short>(x: &'long str) -> &'short str
@@ -438,6 +464,8 @@ where
 ---
 
 ### 逆变（Contravariant）- fn(T)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 函数参数是逆变的

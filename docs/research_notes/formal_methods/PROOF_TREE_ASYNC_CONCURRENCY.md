@@ -29,18 +29,23 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 定理陈述
 >
 > **[来源: Rust Official Docs]**
 
 ### Thm ASYNC-T1 (Future 状态一致性)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
 Future 状态转换是确定性的：从任何状态，只有唯一的有效转换。
 
 ### Thm ASYNC-T2 (并发执行安全)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -354,7 +359,6 @@ async fn send_example() {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

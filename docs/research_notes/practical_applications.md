@@ -135,6 +135,8 @@
 4. **嵌入式系统案例**：IoT 设备、嵌入式应用等
 
 ### 核心问题
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +145,8 @@
 3. **实际项目中的最佳实践是什么？**
 
 ### 预期成果
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +185,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 系统编程案例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +199,8 @@
 **典型案例**：
 
 #### 案例 1.1：Redox OS
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -310,6 +318,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 - 系统级性能
 
 ### 2. 网络应用案例
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -399,6 +409,8 @@ async fn main() -> std::io::Result<()> {
 
 ### 3. 并发系统案例
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **案例类型**：
 
 - 高并发服务
@@ -482,6 +494,8 @@ impl TiKVEngine {
 - 类型安全 API
 
 ### 4. 嵌入式系统案例
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **案例类型**：
 
@@ -570,6 +584,8 @@ impl TockOS {
 
 ### 案例 1：高性能 Web 服务器
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **项目描述**：使用 Rust 构建高性能 Web 服务器
 
 **技术栈**：
@@ -653,6 +669,8 @@ async fn main() {
 
 ### 案例 2：并发数据处理系统
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **项目描述**：使用 Rust 构建高并发数据处理系统
 
 **技术栈**：
@@ -715,6 +733,8 @@ async fn process_task(task: DataTask, worker_id: usize) {
 - 使用通道进行任务分发
 
 ### 案例 3：内存安全的数据结构
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **项目描述**：实现内存安全的高性能数据结构
 

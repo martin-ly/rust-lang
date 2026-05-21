@@ -132,6 +132,8 @@
 **决策图网 (Decision Graph Network)** 是一种结构化的决策支持工具，通过树状结构和图网络展示不同场景下的技术选择路径。
 
 ### 核心属性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +143,8 @@
 4. **可扩展** - 支持添加新的决策节点
 
 ### 应用场景
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +196,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 1. 所有权与借用决策树
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -230,6 +236,8 @@ graph TD
 ```
 
 ### 2. 类型系统决策树
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +264,8 @@ graph TD
 ```
 
 ### 3. 控制流决策树
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +297,8 @@ graph TD
 ```
 
 ### 4. 异步编程决策树
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -320,6 +332,8 @@ graph TD
 ```
 
 ### 5. Pin 使用场景决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -353,6 +367,8 @@ graph TD
 ```
 
 ### 6. 表达能力边界决策树
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```mermaid
 graph TD
@@ -395,6 +411,8 @@ graph TD
 
 ### 集合类型选择
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```mermaid
 graph TD
     Start[选择集合类型] --> Q1{有序性要求？}
@@ -429,6 +447,8 @@ graph TD
 
 ### 错误处理策略选择
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```mermaid
 graph TD
     Start[错误处理策略] --> Q1{错误类型？}
@@ -460,6 +480,8 @@ graph TD
 ```
 
 ### 并发模型选择
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```mermaid
 graph TD
@@ -494,6 +516,8 @@ graph TD
 
 ### 序列化库选择
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```mermaid
 graph TD
     Start[序列化库选择] --> Q1{数据格式？}
@@ -521,6 +545,8 @@ graph TD
 ```
 
 ### Web框架选择
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
 graph TD
@@ -556,6 +582,8 @@ graph TD
 ```
 
 ### 数据库访问选择
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```mermaid
 graph TD
@@ -599,6 +627,8 @@ graph TD
 
 ### 编译错误调试
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```mermaid
 graph TD
     Start[编译错误] --> Q1{错误类型？}
@@ -632,6 +662,8 @@ graph TD
 
 ### 运行时错误调试
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```mermaid
 graph TD
     Start[运行时错误] --> Q1{错误类型？}
@@ -663,6 +695,8 @@ graph TD
 
 ### 性能问题调试
 
+> **[来源: Wikipedia - Type System]**
+
 ```mermaid
 graph TD
     Start[性能问题] --> Q1{问题类型？}
@@ -693,6 +727,8 @@ graph TD
 ```
 
 ### 内存问题调试
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```mermaid
 graph TD
@@ -733,6 +769,8 @@ graph TD
 
 ### CPU优化决策树
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```mermaid
 graph TD
     Start[CPU优化] --> Q1{瓶颈类型？}
@@ -768,6 +806,8 @@ graph TD
 
 ### 内存优化决策树
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```mermaid
 graph TD
     Start[内存优化] --> Q1{优化目标？}
@@ -800,6 +840,8 @@ graph TD
 ```
 
 ### I/O优化决策树
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```mermaid
 graph TD

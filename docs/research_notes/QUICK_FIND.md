@@ -122,6 +122,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式语言与形式证明
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -133,6 +135,8 @@
 | 操作语义   | [形式语言与形式证明](./FORMAL_LANGUAGE_AND_PROOFS.md)      | ✅ 100% |
 
 ### 所有权和借用
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +149,8 @@
 | 内存安全   | [所有权模型形式化](./formal_methods/ownership_model.md)    | ✅ 100% |
 
 ### 类型系统
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +170,8 @@
 | 逆变       | [型变理论](./type_theory/variance_theory.md)                    | ✅ 100% |
 
 ### 生命周期
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +183,8 @@
 | 区域类型     | [生命周期形式化](./type_theory/lifetime_formalization.md)    | ✅ 100% |
 
 ### 异步和并发
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

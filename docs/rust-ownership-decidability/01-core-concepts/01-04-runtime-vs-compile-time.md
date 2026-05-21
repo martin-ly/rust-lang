@@ -55,6 +55,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心洞察
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -73,6 +75,8 @@ Rust的借用检查器(borrow checker)虽然强大，但本质是保守的静态
 ```
 
 ### 1.2 停机问题的阴影
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 理论限制:
@@ -96,6 +100,8 @@ Rust的借用检查器(borrow checker)虽然强大，但本质是保守的静态
 
 ### 2.1 完整谱系图
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 资源管理策略谱系:
 
@@ -113,6 +119,8 @@ Rust的借用检查器(borrow checker)虽然强大，但本质是保守的静态
 ```
 
 ### 2.2 Rust的混合策略
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // Rust使用混合策略：编译时为主，运行时补充
@@ -140,6 +148,8 @@ fn mixed_strategy() {
 
 ### 3.1 所有权与Move
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 编译时完全确定
 fn compile_time_ownership() {
@@ -159,6 +169,8 @@ fn compile_time_ownership() {
 - 不需要知道运行时值
 
 ### 3.2 词法作用域与Drop
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 编译时确定何时调用Drop
@@ -180,6 +192,8 @@ fn lexical_scope() {
 - Drop调用的位置是确定的
 
 ### 3.3 借用检查
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 编译时确定借用合法性
@@ -206,6 +220,8 @@ fn borrow_checking() {
 ## 4. 运行时才能判定的资源管理
 
 ### 4.1 引用计数 (Rc/Arc)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::rc::Rc;
@@ -282,6 +298,8 @@ fn memory_leak_with_rc() {
 
 ### 4.2 运行时借用检查 (RefCell)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::cell::RefCell;
 
@@ -341,6 +359,8 @@ fn runtime_panic() {
 ```
 
 ### 4.3 互斥锁 (Mutex/RwLock)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::sync::{Arc, Mutex};

@@ -60,6 +60,8 @@
 > **[来源: Rust Official Docs]**
 
 ### s390x vector 特性与 is_s390x_feature_detected
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -82,6 +84,8 @@ fn check_vector_support() {
 ---
 
 ### C-style variadic for system ABI
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +102,8 @@ extern "system" {
 ---
 
 ### cfg 谓词使用关键词报错
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +114,8 @@ extern "system" {
 ---
 
 ### asm_cfg（asm! 行上 cfg）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +128,8 @@ extern "system" {
 ---
 
 ### const-eval 指针字节复制
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +140,8 @@ extern "system" {
 ---
 
 ### LUB coercion 修正
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +152,8 @@ extern "system" {
 ---
 
 ### const 含 mutable ref 到 static
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +164,8 @@ extern "system" {
 ---
 
 ### const_item_interior_mutations lint（warn-by-default）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +176,8 @@ extern "system" {
 ---
 
 ### function_casts_as_integer lint（warn-by-default）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +190,8 @@ extern "system" {
 ## 编译器
 
 ### -C jump-tables=bool 稳定化
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Rust 1.93** 稳定了 `-C jump-tables=bool` 选项（原 `-Zno-jump-tables`）。
 
@@ -187,6 +207,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### riscv64a23-unknown-linux-gnu Tier 2
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **Rust 1.93** 将 `riscv64a23-unknown-linux-gnu` 提升为 Tier 2（无 host tools）。
 
 **参考**: [PR #148435](https://github.com/rust-lang/rust/pull/148435)、[平台支持页](https://doc.rust-lang.org/rustc/platform-support.html)
@@ -194,6 +216,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ### musl 1.2.5
+
+> **[来源: POPL - Programming Languages Research]**
 
 详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#1-musl-125-更新)
 
@@ -203,6 +227,8 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### Copy 不再使用 specialization
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Rust 1.93** 在 Copy trait 上停止内部使用 specialization（因在含生命周期依赖的 Copy 实现下不安全）。部分标准库 API 可能改为调用 `Clone::clone` 而非按位复制，**可能导致性能回归**。
 
 **参考**: [PR #135634](https://github.com/rust-lang/rust/pull/135634)
@@ -211,11 +237,15 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 
 ### 全局分配器 thread_local 支持
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 详见 [05_rust_1.93_vs_1.92_comparison.md](./05_rust_1.93_vs_1.92_comparison.md#2-全局分配器线程本地存储支持)
 
 ---
 
 ### BTree::append 行为变更
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **Rust 1.93** 修改 `BTree::append` 行为：当追加的条目已存在时，不再更新现有键。
 

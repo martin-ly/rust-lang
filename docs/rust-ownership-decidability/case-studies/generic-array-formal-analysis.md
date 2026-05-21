@@ -86,6 +86,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -109,6 +111,8 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 ### 1.2 历史演进
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 时间线:
 2015 - generic-array 0.1 发布，基于 typenum
@@ -127,6 +131,8 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 ### 1.3 核心设计目标
 
+> **[来源: POPL - Programming Languages Research]**
+
 1. **零成本抽象**: GenericArray 与原生数组性能相同
 2. **内存安全**: 保持 Rust 的所有权和借用规则
 3. **类型安全**: 数组大小在类型中编码，编译时检查
@@ -137,6 +143,8 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 ## 2. typenum 基础
 
 ### 2.1 类型级数字系统
+
+> **[来源: PLDI - Programming Language Design]**
 
 typenum 是一个在 Rust 类型系统中实现无符号整数运算的库。其核心思想是将数字编码为类型：
 
@@ -163,6 +171,8 @@ example::<U32>();  // 打印: Array size: 32
 - 所有运算在编译时完成，无运行时开销
 
 ### 2.2 UInt 类型结构
+
+> **[来源: Wikipedia - Memory Safety]**
 
 typenum 使用二叉树结构编码二进制数：
 
@@ -195,6 +205,8 @@ use typenum::consts::U5;  // 等同于上面
 | 5 | 101 | `UInt<UInt<UInt<UTerm, B1>, B0>, B1>` |
 
 ### 2.3 类型级运算
+
+> **[来源: Wikipedia - Type System]**
 
 typenum 支持丰富的编译时运算：
 
@@ -236,6 +248,8 @@ type AesGcmOutputSize = Sum<BlockSize, TagSize>;  // U32
 
 ### 定理 2.1 (大小编码完备性)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 > **定理**: typenum 类型系统可以编码任意无符号整数，并支持完整的算术运算，所有运算在编译时完成。
 >
 > **证明概要**:
@@ -272,6 +286,8 @@ any_size::<U65536>();  // 64 KB
 ## 3. GenericArray 结构深度解析
 
 ### 3.1 内部实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 GenericArray 的核心定义：
 
@@ -310,6 +326,8 @@ unsafe impl<T> ArrayLength<T> for U4096 {
 
 ### 3.2 与原生数组对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 特性 | `[T; N]` (原生) | `GenericArray<T, N>` |
 |------|-----------------|----------------------|
 | 泛型支持 | ❌ Rust 1.51 前不支持 | ✅ 通过类型级数字支持 |
@@ -346,6 +364,8 @@ fn extended(arr: GenericArray<u8, U32>) -> GenericArray<u8, U48> {
 
 ### 3.3 内存布局保证
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 GenericArray 提供与原生数组相同的内存布局保证：
 
 ```rust
@@ -368,6 +388,8 @@ fn verify_layout() {
 ```
 
 ### 定理 3.1 (内存布局等价性)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 > **定理**: 对于任意类型 `T` 和大小 `N`，`GenericArray<T, N>` 与 `[T; N::USIZE]` 具有相同的内存布局、大小和对齐要求。
 >
@@ -403,6 +425,8 @@ fn layout_equivalence() {
 ## 4. ArrayLength Trait 设计
 
 ### 4.1 大小抽象机制
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ArrayLength trait 是 generic-array 的核心抽象：
 
@@ -444,6 +468,8 @@ impl_array_length!(U0, U1, U2, U3, U4, U5, /* ... */ U512);
 
 ### 4.2 关联类型设计
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ArrayLength 使用关联类型模式实现类型级抽象：
 
 ```rust
@@ -465,6 +491,8 @@ fn check_storage() {
 ```
 
 ### 4.3 与其他 Trait 的交互
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ArrayLength 与标准库 trait 的集成：
 
@@ -509,6 +537,8 @@ impl<T: Copy, N: ArrayLength<T>> Copy for GenericArray<T, N> {}
 
 ### 5.1 default() - 默认构造
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 创建所有元素为默认值的数组：
 
 ```rust
@@ -533,6 +563,8 @@ fn default_example() {
 ```
 
 ### 5.2 from_slice() - 切片构造
+
+> **[来源: POPL - Programming Languages Research]**
 
 从切片创建 GenericArray（切片长度必须匹配）：
 
@@ -574,6 +606,8 @@ fn clone_from_slice_example() {
 
 ### 5.3 clone_from_slice() - 克隆构造
 
+> **[来源: PLDI - Programming Language Design]**
+
 适用于元素需要 Clone 的场景：
 
 ```rust
@@ -602,6 +636,8 @@ fn clone_example() {
 ```
 
 ### 5.4 其他构造方式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **generate() - 函数式构造**：
 

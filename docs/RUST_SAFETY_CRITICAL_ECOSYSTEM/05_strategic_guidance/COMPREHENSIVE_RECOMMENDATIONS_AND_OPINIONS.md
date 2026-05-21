@@ -50,6 +50,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 技术采纳建议
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +89,8 @@
 ## 二、技术架构建议
 
 ### 2.1 分层安全架构
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐

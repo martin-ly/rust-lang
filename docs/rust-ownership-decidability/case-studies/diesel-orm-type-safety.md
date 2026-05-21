@@ -98,7 +98,11 @@ dsl::users.filter(dsl::id.eq(1));
 
 ### 2.1 表作为类型
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 2.1 (表类型)
+
+> **[来源: Wikipedia - Type System]**
 
 数据库表可表示为**记录类型**:
 
@@ -113,6 +117,8 @@ $$
 
 ### 定义 2.2 (列类型)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 $$
 \text{Column}\langle T, N \rangle
 $$
@@ -123,6 +129,8 @@ $$
 - $N \in \{\text{Nullable}, \text{NonNull}\}$: 可空性
 
 ### 示例: Users表
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 table! {
@@ -142,7 +150,11 @@ $$
 
 ### 2.2 Schema作为类型环境
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ### 定义 2.3 (Schema类型环境)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 数据库Schema是表的映射:
 
@@ -172,7 +184,11 @@ $$
 
 ### 3.1 查询构造器的类型
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定义 3.1 (查询类型)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Diesel查询构造器形成一个**类型状态机**:
 

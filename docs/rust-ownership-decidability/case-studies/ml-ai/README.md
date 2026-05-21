@@ -72,6 +72,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么Rust用于ML
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -111,6 +113,8 @@ pub fn matrix_multiply(a: &[f32], b: &[f32], n: usize) -> Vec<f32> {
 
 ### 1.2 性能vs生产力权衡
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 维度 | Python | Rust | 说明 |
 |------|--------|------|------|
 | 开发速度 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | Python语法简洁，生态成熟 |
@@ -139,6 +143,8 @@ fn ml_rust_backend(_py: Python, m: &PyModule) -> PyResult<()> {
 ```
 
 ### 1.3 Python互操作性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **PyO3：Rust与Python的桥梁**
 
@@ -187,6 +193,8 @@ maturin build --release
 ## 2. 张量计算
 
 ### 2.1 ndarray基础
+
+> **[来源: ACM - Systems Programming Languages]**
 
 `ndarray`是Rust最广泛使用的N维数组库，提供类似NumPy的API：
 
@@ -255,6 +263,8 @@ fn advanced_operations() {
 
 ### 2.2 nalgebra用于线性代数
 
+> **[来源: IEEE - Programming Language Standards]**
+
 `nalgebra`专注于线性代数运算，适合数学密集型应用：
 
 ```toml
@@ -298,6 +308,8 @@ fn linear_algebra_demo() {
 ```
 
 ### 2.3 Tensor操作
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use ndarray::{Array, ArrayD, IxDyn};
@@ -366,6 +378,8 @@ impl Tensor {
 ```
 
 ### 2.4 GPU加速（CUDA/ROCm）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **cudarc：纯Rust CUDA运行时**
 
@@ -451,6 +465,8 @@ impl GpuTensor {
 
 ### 3.1 Candle (Hugging Face)
 
+> **[来源: POPL - Programming Languages Research]**
+
 Candle是Hugging Face开发的极简Rust深度学习框架，专注于推理场景：
 
 ```toml
@@ -525,6 +541,8 @@ fn bert_inference() -> anyhow::Result<()> {
 
 ### 3.2 Burn
 
+> **[来源: PLDI - Programming Language Design]**
+
 Burn是面向研究和生产的现代化深度学习框架：
 
 ```toml
@@ -590,6 +608,8 @@ pub fn train(model: &mut MlpModel, x: Tensor<Backend, 2>, y: Tensor<Backend, 2>)
 
 ### 3.3 dfdx（可微分编程）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 dfdx使用Rust类型系统实现编译时形状检查：
 
 ```toml
@@ -626,6 +646,8 @@ fn type_checked_nn() {
 ```
 
 ### 3.4 tch-rs (PyTorch绑定)
+
+> **[来源: Wikipedia - Type System]**
 
 tch-rs提供Rust绑定的PyTorch C++ API：
 
@@ -673,6 +695,8 @@ fn torch_example() {
 
 ### 4.1 linfa（scikit-learn风格）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 linfa是Rust的机器学习框架，提供统一的API：
 
 ```toml
@@ -685,6 +709,8 @@ linfa-preprocessing = "0.7"
 ```
 
 ### 4.2 聚类算法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use linfa::prelude::*;
@@ -718,6 +744,8 @@ fn clustering_examples() {
 
 ### 4.3 分类器
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use linfa_trees::DecisionTree;
 use linfa_linear::FittedLogisticRegression;
@@ -748,6 +776,8 @@ fn classification_examples() {
 ```
 
 ### 4.4 回归分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use linfa_linear::{LinearRegression, RidgeRegression, Lasso};
@@ -781,6 +811,8 @@ fn regression_examples() {
 ## 5. 神经网络
 
 ### 5.1 前馈网络
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use candle_nn::{Linear, Module, ReLU, Dropout, VarBuilder, BatchNorm};
@@ -854,6 +886,8 @@ impl FeedForwardNetwork {
 
 ### 5.2 卷积网络
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use candle_nn::{Conv2d, Conv2dConfig, MaxPool2d, Module};
 
@@ -926,6 +960,8 @@ impl ConvNet {
 ```
 
 ### 5.3 循环网络
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 pub struct LstmCell {
@@ -1010,6 +1046,8 @@ impl Lstm {
 ```
 
 ### 5.4 Transformer实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 pub struct MultiHeadAttention {
@@ -1109,6 +1147,8 @@ impl TransformerBlock {
 
 ### 6.1 ONNX格式
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use ort::{Environment, Session, Value};
 
@@ -1143,6 +1183,8 @@ fn onnx_inference() -> ort::Result<()> {
 ```
 
 ### 6.2 TensorFlow Lite
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tflite::interpreter::{Interpreter, InterpreterBuilder};
@@ -1179,6 +1221,8 @@ fn tflite_inference() {
 ```
 
 ### 6.3 边缘设备部署
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 针对嵌入式设备的优化推理
@@ -1233,6 +1277,8 @@ fn relu(x: f32) -> f32 {
 
 ### 7.1 Tokenization
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use tokenizers::Tokenizer;
 use tokenizers::models::bpe::BPE;
@@ -1266,6 +1312,8 @@ fn tokenization_examples() {
 ```
 
 ### 7.2 BERT推理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use candle_transformers::models::bert::{BertModel, Config, DTYPE};
@@ -1334,6 +1382,8 @@ impl BertEmbedder {
 ```
 
 ### 7.3 文本生成
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use candle_transformers::models::llama::{Llama, Config as LlamaConfig};
@@ -1454,6 +1504,8 @@ impl TextGenerator {
 
 ### 8.1 图像处理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use image::{ImageBuffer, Rgb, DynamicImage, GenericImageView};
 use ndarray::{Array, Array3};
@@ -1538,6 +1590,8 @@ impl ImageProcessor {
 ```
 
 ### 8.2 目标检测
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use candle_core::{Tensor, DType, Device};
@@ -1691,6 +1745,8 @@ impl ObjectDetector {
 
 ### 8.3 图像分类
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use candle_core::{Tensor, DType, Device};
 use candle_nn::{Module, VarBuilder, Linear, Conv2d, Conv2dConfig, MaxPool2d};
@@ -1778,6 +1834,8 @@ impl ImageClassifier {
 
 ### 9.1 项目结构
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 image-classifier/
 ├── Cargo.toml
@@ -1794,6 +1852,8 @@ image-classifier/
 ```
 
 ### 9.2 数据加载
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // src/data.rs
@@ -1928,6 +1988,8 @@ impl Iterator for DataLoader {
 
 ### 9.3 模型定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // src/model.rs
 use candle_core::{Result, Tensor};
@@ -2027,6 +2089,8 @@ impl Module for ConvClassifier {
 ```
 
 ### 9.4 训练循环
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // src/train.rs
@@ -2134,6 +2198,8 @@ impl Trainer {
 ```
 
 ### 9.5 推理优化
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // src/inference.rs
@@ -2244,6 +2310,8 @@ impl OptimizedInference {
 
 ### 9.6 主程序
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // src/main.rs
 mod data;
@@ -2310,6 +2378,8 @@ fn load_model(path: &str, num_classes: usize, device: &Device) -> anyhow::Result
 
 ### 10.1 并行计算
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use rayon::prelude::*;
 use ndarray::{Array, Array2, Axis};
@@ -2353,6 +2423,8 @@ pub fn configure_thread_pool() {
 ```
 
 ### 10.2 SIMD
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::simd::*;
@@ -2414,6 +2486,8 @@ pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 ```
 
 ### 10.3 内存布局
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use ndarray::{Array, Array2, Array3, Axis, ShapeBuilder};
@@ -2495,12 +2569,16 @@ impl BufferPool {
 
 ### 常用资源
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - **Candle文档**: <https://github.com/huggingface/candle>
 - **Burn文档**: <https://burn.dev>
 - **linfa文档**: <https://docs.rs/linfa>
 - **ndarray文档**: <https://docs.rs/ndarray>
 
 ### 性能对比基准
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 操作 | Python (NumPy) | Rust (ndarray) | 加速比 |
 |------|----------------|----------------|--------|

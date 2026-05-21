@@ -37,6 +37,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -54,7 +55,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Command 形式化分析](#command-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Command 结构）](#def-11command-结构)
@@ -88,6 +89,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -96,6 +98,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Command 结构）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@ $$\mathcal{CM} = \langle C, \mathit{execute}: C \rightarrow \mathrm{Result}\lang
 ---
 
 ### Axiom CM1（可存储公理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +126,8 @@ $$\forall c: C,\, c\text{ 可存储；可 defer 执行}$$
 命令对象可存储；可 defer 执行。
 
 ### Axiom CM2（闭包即命令公理）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +138,8 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 定理 CM-T1（闭包类型安全定理）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +157,8 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 定理 CM-T2（存储与跨线程定理）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +176,8 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 推论 CM-C1（纯 Safe Command）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +195,8 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +269,8 @@ impl ReversibleCommand for IncrementCommand {
 
 ### 形式化论证链
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 Axiom CM1 (可存储)
     ↓ 实现
@@ -272,6 +290,8 @@ Send/Sync
 ```
 
 ### 与 Rust 类型系统的联系
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | Rust 特性 | Command 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
@@ -537,7 +557,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

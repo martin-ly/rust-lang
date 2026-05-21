@@ -54,6 +54,8 @@ Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`w
 > **[来源: Rust Official Docs]**
 
 ### 1.1 if let chains
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -78,6 +80,8 @@ if let Some(a) = opt_a {
 
 ### 1.2 while let chains
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 let mut iter_a = vec![1, 2, 3].into_iter().peekable();
 let mut iter_b = vec![10, 20, 30].into_iter().peekable();
@@ -88,6 +92,8 @@ while let Some(a) = iter_a.next() && let Some(b) = iter_b.next() {
 ```
 
 ### 1.3 if let guards in match
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 fn classify(msg: Option<String>) -> String {
@@ -108,6 +114,8 @@ fn classify(msg: Option<String>) -> String {
 
 ### 2.1 绑定可见性
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 链中后续绑定可以使用前面绑定的变量：
 
 ```rust
@@ -122,6 +130,8 @@ if let Some(entry) = map.get("key") && let Ok(num) = entry.parse::<i32>() {
 ```
 
 ### 2.2 混合使用布尔条件和 let
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 let opt = Some(10);

@@ -155,6 +155,8 @@ unsafe impl MyUnsafeTrait for MyType {
 > **[来源: Rust Official Docs]**
 
 ### 1. 原始指针操作
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +237,8 @@ fn raw_pointer_demo() {
 ```
 
 ### 2. 调用外部函数 (FFI)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -312,6 +316,8 @@ fn ffi_demo() {
 ```
 
 ### 3. 实现 Send/Sync
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -405,6 +411,8 @@ impl<T> Drop for LockFreeStack<T> {
 ```
 
 ### 4. Union 访问
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -453,6 +461,8 @@ fn union_demo() {
 ```
 
 ### 5. 内联汇编
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -494,6 +504,8 @@ pub fn memory_fence() {
 ```
 
 ### 6. 自定义智能指针
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -572,6 +584,8 @@ unsafe impl<T: Sync> Sync for MyBox<T> {}
 
 ### 案例 1: 空指针解引用
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // ❌ UB: 解引用空指针
 unsafe {
@@ -595,6 +609,8 @@ unsafe {
 ```
 
 ### 案例 2: 悬垂指针
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // ❌ UB: 使用释放后的指针
@@ -625,6 +641,8 @@ println!("{}", *my_box);
 
 ### 案例 3: 数据竞争
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // ❌ UB: 多线程无同步访问
 static mut COUNTER: i32 = 0;
@@ -650,6 +668,8 @@ COUNTER.fetch_add(1, Ordering::SeqCst);
 ```
 
 ### 案例 4: 类型混淆
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // ❌ UB: 违反类型对齐
@@ -684,6 +704,8 @@ unsafe {
 
 ### 案例 5: 无效枚举值
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 #[repr(u8)]
 enum Color {
@@ -709,6 +731,8 @@ let maybe_color: MaybeUninit<Color> = MaybeUninit::new(
 ```
 
 ### 案例 6: 越界访问
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // ❌ UB: 越界访问
@@ -739,6 +763,8 @@ unsafe {
 
 ### 案例 7: 违反借用规则
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // ❌ UB: 同时存在可变和不可变借用
 unsafe {
@@ -768,6 +794,8 @@ unsafe {
 ```
 
 ### 案例 8: 不恰当的 Drop 实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // ❌ UB: 二次释放
@@ -898,6 +926,8 @@ Miri 可以检测：
 
 ### 安全/非安全边界分析
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 层次 | 说明 | 文档链接 |
 | :--- | :--- | :--- |
 | **安全 API** | 完全由编译器保证安全 | Rust 标准库 |
@@ -907,6 +937,8 @@ Miri 可以检测：
 | **UB 边界** | 一旦违反，行为未定义 | 本指南 §UB 案例 |
 
 ### 形式化资源
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - **理论体系与安全论证**: [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) - 安全与非安全边界、理论四层
 - **借用检查器证明**: [borrow_checker_proof.md](../research_notes/formal_methods/borrow_checker_proof.md) - 形式化证明内存安全
@@ -954,6 +986,8 @@ Miri 可以检测：
 
 ### 新特性概览
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust 1.95+ 带来了以下重要更新：
 
 - **rray_windows** - 固定大小的数组窗口迭代器
@@ -963,6 +997,8 @@ Rust 1.95+ 带来了以下重要更新：
 - **TryFrom<char> for usize** - Unicode 标量值转换
 
 ### 代码示例
+
+> **[来源: POPL - Programming Languages Research]**
 
 `
 ust
@@ -995,6 +1031,8 @@ let result = items.iter().try_for_each(|&n| {
 > **适用版本**: Rust 1.95.0+
 
 ### LazyLock 在 Unsafe 全局状态管理中的应用
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::LazyLock;

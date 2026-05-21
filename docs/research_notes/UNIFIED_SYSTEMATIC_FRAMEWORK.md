@@ -103,6 +103,8 @@
 **上位文档**：[THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](./THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) —— 理论体系四层架构、论证体系五层结构、安全与非安全全面论证（顶层框架）。
 
 ### 核心问题响应
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +169,8 @@
 ```
 
 ### 按论证结构展开的思维导图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +213,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 概念-公理-定理-证明方法-反例 五维矩阵
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +233,8 @@
 | Trait 对象 | vtable, 存在类型 | T1–T3 | 类型系统 | 对象安全违规 |
 
 ### 2. 语义范式 vs 概念族 矩阵
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +246,8 @@
 | 设计机制 | Pin 堆/栈、Send/Sync、Trait 对象 | 动机→决策→论证→反例 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 
 ### 3. 证明完成度 vs 论证缺口 矩阵
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -296,6 +306,8 @@
 
 ### 证明依赖 DAG（简化）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```text
                     [Axiom/规则]
                           │
@@ -323,6 +335,8 @@
 
 ### 1. 论证缺口决策树
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```text
 发现论证缺口？
 ├── 定义缺失 (D1) → 给出形式化定义
@@ -334,6 +348,8 @@
 ```
 
 ### 2. 表达能力边界决策树
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 需要表达 X？

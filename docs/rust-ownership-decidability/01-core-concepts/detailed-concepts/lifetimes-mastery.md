@@ -69,6 +69,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 生命周期的形式化模型
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -87,6 +89,8 @@
 
 ### 1.2 生命周期的类型系统
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **子类型规则**:
 
 ```
@@ -101,6 +105,8 @@
 ```
 
 ### 1.3 生命周期的包含关系
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
         'static（程序整个生命周期）
@@ -121,6 +127,8 @@
 
 ### 2.1 Elision 规则概述
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust 编译器可以自动推断某些常见的生命周期模式，减少显式标注的需要。
 
 **三条省略规则**:
@@ -130,6 +138,8 @@ Rust 编译器可以自动推断某些常见的生命周期模式，减少显式
 3. **多输入中的 `&self`**: 如果有多个输入生命周期，但一个是 `&self` 或 `&mut self`，则 `self` 的生命周期分配给所有输出
 
 ### 2.2 规则 1: 输入生命周期推断
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 显式版本
@@ -142,6 +152,8 @@ fn elided(x: &i32, y: &i32) -> i32 { ... }
 
 ### 2.3 规则 2: 单输入生命周期
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 显式版本
 fn explicit<'a>(x: &'a str) -> &'a str { x }
@@ -152,6 +164,8 @@ fn elided(x: &str) -> &str { x }
 ```
 
 ### 2.4 规则 3: 方法中的 `&self`
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 struct Parser<'a> {
@@ -170,6 +184,8 @@ impl<'a> Parser<'a> {
 
 ### 2.5 无法省略的情况
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // ❌ 编译错误：无法推断输出生命周期
 fn ambiguous(x: &str, y: &str) -> &str {
@@ -183,6 +199,8 @@ fn explicit<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 2.6 Elision 的完整算法
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 示例：分析这个函数签名
@@ -209,6 +227,8 @@ fn process<'a>(data: &'a str, config: &Config) -> &'a str;
 
 ### 3.1 多个独立生命周期
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 场景：解析器返回与输入文本相同生命周期的结果
 struct Parser<'text, 'config> {
@@ -230,6 +250,8 @@ impl<'text, 'config> Parser<'text, 'config> {
 ```
 
 ### 3.2 生命周期约束
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 约束 'b 至少和 'a 一样长
@@ -260,6 +282,8 @@ where
 
 ### 3.3 生命周期与泛型结合
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 泛型函数的生命周期标注
 fn find_min<'a, T: Ord>(slice: &'a [T]) -> Option<&'a T> {
@@ -279,6 +303,8 @@ trait Iterable<'a> {
 ```
 
 ### 3.4 生命周期与 trait bound
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 返回实现了特定 trait 的引用

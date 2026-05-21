@@ -66,6 +66,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是常量泛型
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -82,6 +84,8 @@ let arr: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 ```
 
 ### 1.2 为什么需要常量泛型
+
+> **[来源: POPL - Programming Languages Research]**
 
 **问题：固定大小数组的类型化**:
 
@@ -102,6 +106,8 @@ struct Array<T, const N: usize>([T; N]);
 
 ### 1.3 与泛型的关系
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 特性 | `类型泛型<T>` | `常量泛型<const N>` |
 |------|-------------|-------------------|
 | 参数化 | 类型 | 常量值 |
@@ -114,6 +120,8 @@ struct Array<T, const N: usize>([T; N]);
 ## 2. 基础语法
 
 ### 2.1 声明常量泛型
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **支持的常量类型**:
 
@@ -141,6 +149,8 @@ type Vector3 = Point<3>;
 
 ### 2.2 函数中的常量泛型
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 泛型函数
 fn create_array<T: Default, const N: usize>() -> [T; N] {
@@ -156,6 +166,8 @@ let zeros: [i32; 5] = create_array::<i32, 5>();
 ```
 
 ### 2.3 多个常量泛型参数
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 struct Matrix<T, const ROWS: usize, const COLS: usize> {

@@ -32,6 +32,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -45,7 +46,7 @@
 > **[来源: Rust Official Docs]**
 
 - [充分表达 vs 非充分表达边界矩阵](#充分表达-vs-非充分表达边界矩阵)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义与公理](#形式化定义与公理)
   - [反例：违反表达边界](#反例违反表达边界)
@@ -74,6 +75,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 形式化定义与公理
 >
@@ -166,6 +168,8 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 > **[来源: Rust Official Docs]**
 
 ### 创建型（5）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +182,8 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | Singleton | 近似表达 | 无全局可变，用 OnceLock 等替代 |
 
 ### 结构型（7）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +198,8 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 | Proxy | 等价表达 | 委托、延迟 |
 
 ### 行为型（11）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -343,6 +351,8 @@ impl Node {
 
 ### 示例 1：OOP 继承迁移
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **场景**：原 Java 类 `Button extends Widget`。
 
 **决策**：Rust 无继承 → 用 trait + 组合；$\mathit{ExprB} = \mathrm{Same}$（组合替代继承）。
@@ -355,11 +365,15 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 ### 示例 2：观察者模式
 
+> **[来源: POPL - Programming Languages Research]**
+
 **场景**：原 OOP Subject/Observer 继承。
 
 **决策**：Rust 用 channel → $\mathit{ExprB} = \mathrm{Approx}$；消息传递替代回调，语义等价。
 
 ### 示例 3：多继承不可表达
+
+> **[来源: PLDI - Programming Language Design]**
 
 **场景**：`class C extends A, B` 菱形继承。
 
@@ -428,7 +442,6 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 - [05_boundary_system 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

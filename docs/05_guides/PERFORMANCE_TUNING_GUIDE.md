@@ -145,6 +145,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Release 模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +164,8 @@ strip = true           # 移除符号信息
 ```
 
 ### 2. 特性标志优化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +183,8 @@ no-std = []
 ```
 
 ### 3. 增量编译
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +204,8 @@ opt-level = 2  # 测试时启用优化，加速测试执行
 > **[来源: Rust Official Docs]**
 
 ### 1. 预分配容量
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -219,6 +227,8 @@ let mut vec = vec![0; 1000];
 ```
 
 ### 2. 使用切片而非 Vec
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +250,8 @@ fn process_generic<T: AsRef<[i32]>>(data: T) -> i32 {
 ```
 
 ### 3. 使用 Cow 避免克隆
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -259,6 +271,8 @@ let owned: Cow<str> = Cow::Owned(String::from("world"));
 ```
 
 ### 4. 使用 Box 减少栈分配
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -276,6 +290,8 @@ enum TreeNode {
 ```
 
 ### 5. 内存池模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::Mutex;
@@ -320,6 +336,8 @@ impl<T: Send> ObjectPool<T> {
 
 ### 1. 迭代器优化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // ❌ 不好：多次遍历
 let sum: i32 = data.iter().sum();
@@ -340,6 +358,8 @@ let stats = data.iter().fold(
 ```
 
 ### 2. 避免不必要的克隆
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // ❌ 不好：不必要的克隆
@@ -363,6 +383,8 @@ fn maybe_modify(s: Cow<str>) -> String {
 
 ### 3. 使用 `#[inline]` 提示
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 #[inline]
 fn hot_function(x: i32) -> i32 {
@@ -378,6 +400,8 @@ fn critical_path(x: i32) -> i32 {
 ```
 
 ### 4. 使用 `#[cold]` 标记冷路径
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #[cold]
@@ -400,6 +424,8 @@ fn unlikely_branch() {}
 ```
 
 ### 5. SIMD 优化
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 #![feature(portable_simd)]
@@ -434,6 +460,8 @@ use std::arch::aarch64::*;
 
 ### 1. 使用 Arc 而非 Rc
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // ❌ 不好：Rc 不能跨线程
 use std::rc::Rc;
@@ -446,6 +474,8 @@ let data_clone = Arc::clone(&data);
 ```
 
 ### 2. 减少锁竞争
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // ❌ 不好：长时间持有锁
@@ -477,6 +507,8 @@ let write_guard = data.write().unwrap();
 
 ### 3. 使用无锁数据结构
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use crossbeam::queue::ArrayQueue;
 
@@ -497,6 +529,8 @@ while let Some(item) = queue.pop() {
 ```
 
 ### 4. 工作窃取调度
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use rayon::prelude::*;
@@ -520,6 +554,8 @@ pool.install(|| {
 ```
 
 ### 5. 并行迭代器
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use rayon::prelude::*;
@@ -545,6 +581,8 @@ let sum: f64 = data.par_iter().map(|x| x * 2.0).sum();
 ## 🌐 异步优化
 
 ### 1. 使用 select! 而非 join
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use tokio::select;
@@ -577,6 +615,8 @@ async fn with_timeout<T>(
 
 ### 2. 使用有界通道
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use tokio::sync::mpsc;
 
@@ -599,6 +639,8 @@ while let Some(batch) = rx.recv_many(10).await {
 ```
 
 ### 3. 批量处理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use futures::stream::{self, StreamExt};

@@ -50,6 +50,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 移动语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -99,6 +101,8 @@ fn move_through(s: String) -> String {
 
 ### 1.2 Copy trait
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // ===== 示例 1.2.1: 基本类型的 Copy =====
 fn main() {
@@ -142,6 +146,8 @@ fn main() {
 ```
 
 ### 1.3 Drop trait
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // ===== 示例 1.3.1: 自动 Drop =====
@@ -189,6 +195,8 @@ fn take_ownership(c: CustomDrop) {
 
 ### 2.1 不可变借用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // ===== 示例 2.1.1: 基本不可变借用 =====
 fn main() {
@@ -223,6 +231,8 @@ fn main() {
 ```
 
 ### 2.2 可变借用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // ===== 示例 2.2.1: 基本可变借用 =====
@@ -272,6 +282,8 @@ fn main() {
 
 ### 2.3 混合借用规则
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // ===== 示例 2.3.1: 不能同时有 & 和 &mut =====
 fn main() {
@@ -312,6 +324,8 @@ fn main() {
 ## 3. 生命周期示例
 
 ### 3.1 显式生命周期
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // ===== 示例 3.1.1: 显式标注 =====
@@ -364,6 +378,8 @@ fn main() {
 
 ### 3.2 生命周期省略
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // ===== 示例 3.2.1: 规则 1 - 输入生命周期 =====
 fn foo(x: &i32) {  // 省略: fn foo<'a>(x: &'a i32)
@@ -390,6 +406,8 @@ impl MyStruct {
 ```
 
 ### 3.3 'static 生命周期
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // ===== 示例 3.3.1: 字符串字面量 =====

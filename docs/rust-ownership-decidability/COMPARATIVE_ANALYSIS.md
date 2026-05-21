@@ -37,14 +37,17 @@
     - [8.1 Rust 的理论地位](#81-rust-的理论地位)
     - [8.2 比较分析的价值](#82-比较分析的价值)
     - [8.3 理论的未来](#83-理论的未来)
-  - [**下一篇**：阅读 `DESIGN_RATIONALE.md` 了解设计决策背后的原理。](#下一篇阅读-design_rationalemd-了解设计决策背后的原理)
+  - [**下一篇**：阅读 `DESIGN_RATIONALE.md` 了解设计决策背后的原理](#下一篇阅读-design_rationalemd-了解设计决策背后的原理)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、与函数式语言类型的对比
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 ML 类型系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -93,6 +96,8 @@ Rust：
 - 但 Rust 添加了线性/仿射约束
 
 ### 1.2 Haskell 类型系统
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -137,6 +142,8 @@ Rust：
 - 但 Rust 用所有权替代了 Monad 进行副作用控制
 
 ### 1.3 线性类型语言（Linear Types）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **线性逻辑与编程**：
 
@@ -189,6 +196,8 @@ let z = x;  // 再复制，x 仍然有效
 ## 二、与命令式语言的对比
 
 ### 2.1 C/C++ 的类型系统
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **C++ 的类型系统特点**：
 
@@ -658,7 +667,6 @@ Rust 所有权系统
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

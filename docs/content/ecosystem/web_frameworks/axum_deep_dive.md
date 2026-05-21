@@ -81,6 +81,8 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 - **高性能**: 零成本抽象
 
 ### 设计理念
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +102,8 @@ Axum 设计原则:
 > **[来源: Rust Official Docs]**
 
 ### 核心组件
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@ fn create_router(state: Arc<AppState>) -> Router {
 ```
 
 ### 请求处理流程
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@ sequenceDiagram
 > **[来源: Rust Official Docs]**
 
 ### Handler
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -211,6 +219,8 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
 ```
 
 ### Extractor
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -299,6 +309,8 @@ async fn protected_route(api_key: ApiKey) -> String {
 ```
 
 ### Response
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -361,6 +373,8 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
 ```
 
 ### 中间件
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -433,6 +447,8 @@ fn create_app() -> Router {
 
 ### 状态管理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use axum::{
     extract::State,
@@ -480,6 +496,8 @@ fn create_router() -> Router {
 ```
 
 ### 错误处理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use axum::{

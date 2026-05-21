@@ -63,6 +63,8 @@ representations/ ────────▶  (知识表示)                 ─
 > **[来源: Rust Official Docs]**
 
 ### content/emerging/ → C04 + C11
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +86,8 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/ecosystem/ → C05 + C06 + C10
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
 | `web_frameworks/axum_deep_dive.md` | C10 网络 | Web 框架深入 |
@@ -103,6 +107,8 @@ representations/ ────────▶  (知识表示)                 ─
 
 ### content/production/ → C07 + C12
 
+> **[来源: POPL - Programming Languages Research]**
+
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|
 | `kubernetes_deployment_guide.md` | C12 WASM | 容器化部署 |
@@ -119,6 +125,8 @@ representations/ ────────▶  (知识表示)                 ─
 ---
 
 ### content/academic/ → C01 + C04
+
+> **[来源: PLDI - Programming Language Design]**
 
 | Content 文档 | 关联 Crate | 说明 |
 |--------------|------------|------|

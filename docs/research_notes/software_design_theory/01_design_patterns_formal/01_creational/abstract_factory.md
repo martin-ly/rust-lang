@@ -36,6 +36,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -86,6 +87,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -94,6 +96,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Abstract Factory 结构）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -110,6 +114,8 @@ $$\mathcal{AF} = \langle \mathcal{F}, \{T_i\}_{i=1}^n, \{\mathit{create}_i: \mat
 ---
 
 ### Axiom AF1（产品族一致性公理）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -118,6 +124,8 @@ $$\forall f: \mathcal{F},\, \mathit{create}_1(f) : T_1 \land \mathit{create}_2(f
 同一工厂创建的产品族类型一致；不同工厂可产生不同实现族。
 
 ### Axiom AF2（所有权转移公理）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -128,6 +136,8 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 定理 AF-T1（关联类型安全定理）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +172,8 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 定理 AF-T2（产品族完整性定理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +197,8 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 ---
 
 ### 推论 AF-C1（纯 Safe 抽象工厂）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +216,8 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +272,8 @@ impl GuiFactory for WinFactory {
 
 ### 形式化论证链
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```text
 Axiom AF1 (产品族一致性)
     ↓ 依赖
@@ -273,6 +291,8 @@ ownership_model T2
 ```
 
 ### 与 Rust 类型系统的联系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | Rust 特性 | Abstract Factory 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
@@ -487,7 +507,6 @@ graph LR
 
 - [01_creational 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

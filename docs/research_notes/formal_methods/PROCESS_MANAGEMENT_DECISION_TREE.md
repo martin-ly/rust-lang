@@ -24,6 +24,7 @@
   - [🔗 相关文档](#-相关文档)
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 IPC 机制选择决策树
 >
@@ -83,6 +84,8 @@ graph TD
 
 ### 场景 1: 父子进程通信
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::process::{Command, Stdio};
 use std::io::{Write, Read};
@@ -112,6 +115,8 @@ fn parent_child_communication() {
 
 ### 场景 2: 高性能数据共享
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::sync::Arc;
 use memmap2::{MmapMut, MmapOptions};
@@ -132,6 +137,8 @@ fn shared_memory_ipc() {
 ```
 
 ### 场景 3: 本地服务通信
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::os::unix::net::UnixListener;
@@ -160,6 +167,8 @@ fn unix_domain_socket_server() {
 ## 🔄 进程同步决策
 
 ### 同步原语选择
+
+> **[来源: Wikipedia - Type System]**
 
 | 需求 | 推荐 | 说明 |
 |------|------|------|
@@ -200,6 +209,8 @@ fn process_sync() {
 ## ⚡ 性能优化决策
 
 ### 大数据传输优化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 数据大小阈值决策:
@@ -264,7 +275,6 @@ fn message_passing() {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

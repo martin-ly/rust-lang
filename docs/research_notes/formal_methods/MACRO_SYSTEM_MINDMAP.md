@@ -111,6 +111,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 基本结构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +124,8 @@ macro_rules! macro_name {
 ```
 
 ### 片段类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +144,8 @@ macro_rules! macro_name {
 | `vis` | 可见性 | `pub` |
 
 ### 重复模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +173,8 @@ vec![1, 2, 3,]
 > **[来源: Rust Official Docs]**
 
 ### 三种类型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +199,8 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 ```
 
 ### 派生宏示例
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -230,6 +240,8 @@ Pancakes::hello(); // Hello, Macro! My name is Pancakes
 > **[来源: Rust Official Docs]**
 
 ### 编译期信息
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

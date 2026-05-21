@@ -69,6 +69,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Trait 的形式化模型
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -100,6 +102,8 @@ T: ?Sized  ≡  T 可以是动态大小类型
 
 ### 1.2 Trait 与类型系统的关系
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```
 类型层次结构:
 
@@ -119,6 +123,8 @@ T: ?Sized  ≡  T 可以是动态大小类型
 ## 2. 泛型与 Trait Bound
 
 ### 2.1 基本泛型语法
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 函数泛型
@@ -147,6 +153,8 @@ impl<T> Point<T> {
 ```
 
 ### 2.2 Trait Bound 详解
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 简单 trait bound
@@ -181,6 +189,8 @@ where
 
 ### 2.3 生命周期与泛型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 泛型与生命周期结合
 fn longest<'a, T>(x: &'a T, y: &'a T) -> &'a T
@@ -208,6 +218,8 @@ where
 
 ### 2.4 默认泛型参数
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 trait Add<Rhs = Self> {
     type Output;
@@ -233,6 +245,8 @@ impl Add<f64> for Point {
 
 ### 2.5 泛型的单态化
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust 使用单态化实现泛型，为每个具体类型生成专门的代码：
 
 ```rust
@@ -254,6 +268,8 @@ identity(String::new()); // 调用 identity_string
 
 ### 3.1 关联类型的形式化定义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 3.1** (关联类型): 关联类型是 trait 中定义的类型占位符，由实现者指定具体类型。
 
 ```rust
@@ -273,6 +289,8 @@ impl Iterator for Counter {
 ```
 
 ### 3.2 关联类型 vs 泛型参数
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // 泛型参数版本

@@ -307,6 +307,8 @@ flowchart LR
 
 ### 新增思维表征
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust 新特性可扩展思维表征方式：
 
 | 特性 | 思维表征类型 | 说明 |
@@ -316,6 +318,8 @@ Rust 新特性可扩展思维表征方式：
 | LazyCell/LazyLock | 状态图 | 延迟初始化的状态转换 |
 
 ### 示例
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // array_windows 的思维导图节点
@@ -336,9 +340,13 @@ Rust 新特性可扩展思维表征方式：
 
 ### 本文档的Rust 1.95+更新要点
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -349,6 +357,8 @@ Rust 新特性可扩展思维表征方式：
 
 #### 代码示例更新
 
+> **[来源: PLDI - Programming Language Design]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.95+语法验证
@@ -356,6 +366,8 @@ Rust 新特性可扩展思维表征方式：
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查（已归档）](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)

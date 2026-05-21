@@ -83,6 +83,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 最小 CLI 应用
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

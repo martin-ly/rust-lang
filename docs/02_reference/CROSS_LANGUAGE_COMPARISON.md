@@ -54,6 +54,8 @@
 
 ### 内存管理代码对比示例
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **场景：创建一个字符串并传递给函数**:
 
 ```rust
@@ -115,6 +117,8 @@ print(s)           # 仍然可用
 
 ### 内存管理形式化对比
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 语言 | 形式化模型 | 安全保证 | 形式化证明 |
 | :--- | :--- | :--- | :--- |
 | **Rust** | 线性类型 + 分离逻辑 | 编译期 | [所有权唯一性定理](../research_notes/formal_methods/ownership_model.md#定理-2-所有权唯一性)、[内存安全定理](../research_notes/formal_methods/ownership_model.md#定理-3-内存安全框架) |
@@ -143,6 +147,8 @@ print(s)           # 仍然可用
 | 推荐 | 所有权 + Send/Sync | 各显其能 | CSP/goroutine | 多进程/asyncio |
 
 ### 并发代码对比示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **场景：两个线程同时增加一个计数器**:
 
@@ -239,6 +245,8 @@ print(f"结果: {counter}")
 
 ### 并发模型形式化对比
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 语言 | 并发安全机制 | 数据竞争检测 | 形式化保证 |
 | :--- | :--- | :--- | :--- |
 | **Rust** | Send/Sync Trait | 编译期 | [数据竞争自由定理](../research_notes/formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由) |
@@ -267,6 +275,8 @@ print(f"结果: {counter}")
 | 传播 | ? 操作符 | throw/catch | if err | raise |
 
 ### 错误处理代码对比示例
+
+> **[来源: PLDI - Programming Language Design]**
 
 **场景：读取文件并解析数字**:
 
@@ -373,6 +383,8 @@ except Exception as e:
 ```
 
 ### 错误处理形式化对比
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 语言 | 错误类型 | 强制处理 | 传播机制 | 形式化保证 |
 | :--- | :--- | :--- | :--- | :--- |

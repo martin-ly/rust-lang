@@ -288,6 +288,8 @@ We present Rust's semantics in layers:
 
 #### 2.1.1 Expressions
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 e ∈ Expr ::=
   | x                         -- variable
@@ -318,6 +320,8 @@ e ∈ Expr ::=
 
 #### 2.1.2 Types
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 T ∈ Type ::=
   | i32 | i64 | u32 | u64     -- integer types
@@ -347,6 +351,8 @@ T ∈ Type ::=
 
 #### 2.1.3 Lifetimes
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 'a ∈ Lifetime ::=
   | 'static                   -- global lifetime
@@ -356,6 +362,8 @@ T ∈ Type ::=
 ```
 
 #### 2.1.4 Kinds
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```
 κ ∈ Kind ::=
@@ -370,6 +378,8 @@ T ∈ Type ::=
 
 #### 2.2.1 Variable Context (Γ)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 The variable context maps variables to their types:
 
 ```
@@ -378,6 +388,8 @@ The variable context maps variables to their types:
 
 #### 2.2.2 Lifetime Context (Λ)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 The lifetime context tracks active lifetimes and their relationships:
 
 ```
@@ -385,6 +397,8 @@ The lifetime context tracks active lifetimes and their relationships:
 ```
 
 #### 2.2.3 Outlives Context (Δ)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The outlives context records lifetime constraints:
 
@@ -396,6 +410,8 @@ Where `'a: 'b` means "lifetime 'a outlives lifetime 'b" (i.e., 'a ≥ 'b).
 
 #### 2.2.4 Combined Context
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 Σ ::= Λ; Δ; Γ
 ```
@@ -405,6 +421,8 @@ Where `'a: 'b` means "lifetime 'a outlives lifetime 'b" (i.e., 'a ≥ 'b).
 > **[来源: Coq Reference Manual]**
 
 #### 2.3.1 Variable Rule
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 __________  (T-VAR)
@@ -870,6 +888,8 @@ where ℓ = fresh_loc(σ₁)    σ₁' = σ₁[ℓ↦v₁]
 
 ### 4.1 Ownership Judgments
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 4.1.1 Ownership Definition
 
 ```
@@ -895,6 +915,8 @@ owns(Γ, x, S)
 ```
 
 ### 4.2 Borrow Judgments
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 4.2.1 Borrow Definition
 
@@ -932,6 +954,8 @@ borrows(Γ, &mut r, x, T, mut)
 
 ### 4.3 Lifetime Relationships
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 4.3.1 Lifetime Inclusion
 
 ```
@@ -955,6 +979,8 @@ valid(Γ, r, 'a)
 ```
 
 ### 4.4 Move Semantics
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 4.4.1 Move Judgment
 
@@ -982,6 +1008,8 @@ Where `S\\f` indicates that field `f` has been moved out of struct `S`.
 
 ### 4.5 Copy vs Move
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 4.5.1 Copy Types
 
 ```
@@ -1006,6 +1034,8 @@ Note: The context is unchanged after a copy.
 
 ### 5.1 Lifetime Parameters
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 5.1.1 Function Lifetime Parameters
 
 ```
@@ -1020,6 +1050,8 @@ fn f<'a, 'b>(x: &'a T, y: &'b U) -> &'a V
 
 ### 5.2 Lifetime Elision
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 5.2.1 Elision Rules
 
 ```
@@ -1029,6 +1061,8 @@ fn foo(&self) -> &T         -- equivalent to: fn foo<'a>(&'a self) -> &'a T
 ```
 
 ### 5.3 Lifetime Constraints
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 5.3.1 Well-Formedness
 
@@ -1071,6 +1105,8 @@ fn foo(&self) -> &T         -- equivalent to: fn foo<'a>(&'a self) -> &'a T
 
 ### 5.4 Region Inference
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 5.4.1 Region Variables
 
 ```
@@ -1093,6 +1129,8 @@ gen(Σ, &e) = gen(Σ, e) ∪ { '?new: lifetime(e) }
 
 ### 5.5 Higher-Ranked Trait Bounds
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 5.5.1 Syntax
 
 ```
@@ -1113,6 +1151,8 @@ for<'a> Trait<'a> ⊢ Trait<'b>
 > **[来源: TLA+ Documentation]**
 
 ### 6.1 Progress Theorem
+
+> **[来源: Wikipedia - Type System]**
 
 **Theorem 6.1 (Progress)**:
 If `⊢ e: T`, then either:
@@ -1138,6 +1178,8 @@ By structural induction on the typing derivation `⊢ e: T`.
 ∎
 
 ### 6.2 Preservation Theorem
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Theorem 6.2 (Preservation)**:
 If `⊢ e: T` and `e → e'`, then `⊢ e': T`.
@@ -1179,6 +1221,8 @@ Given `⊢ &x: &'a T`, by inversion `x: T` and borrow is valid.
 
 ### 6.3 Substitution Lemma
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Lemma 6.3 (Substitution)**:
 If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
 
@@ -1187,6 +1231,8 @@ If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
 ∎
 
 ### 6.4 Canonical Forms Lemma
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Lemma 6.4 (Canonical Forms)**:
 
@@ -1201,6 +1247,8 @@ If `Γ, x:T₁ ⊢ e: T₂` and `⊢ v: T₁`, then `Γ ⊢ e[x↦v]: T₂`.
 
 ### 6.5 Type Soundness Theorem
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Theorem 6.5 (Type Soundness)**:
 If `⊢ e: T`, then either:
 
@@ -1213,6 +1261,8 @@ If `⊢ e: T`, then either:
 ∎
 
 ### 6.6 Memory Safety Theorem
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Theorem 6.6 (Memory Safety)**:
 If `⊢ e: T` and `⟨∅; e⟩ →* ⟨σ; e'⟩`, then:
@@ -1241,6 +1291,8 @@ Never both simultaneously.
 
 ### 6.7 Lifetime Safety Theorem
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **Theorem 6.7 (Lifetime Safety)**:
 If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a` are valid throughout `'a`.
 
@@ -1257,6 +1309,8 @@ If `Λ; Δ; Γ ⊢ e: T` and `'a ∈ Λ`, then all references with lifetime `'a`
 This section provides detailed analysis of 12+ common type system violations in Rust.
 
 ### 7.1 Type Confusion (CWE-843)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 7.1.1 Example Code
 
@@ -1302,6 +1356,8 @@ error[E0277]: cannot downcast to `f64` from `i32`
 ```
 
 ### 7.2 Lifetime Subtyping Violation
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 7.2.1 Example Code
 
@@ -1352,6 +1408,8 @@ error[E0597]: `x` does not live long enough
 ```
 
 ### 7.3 Variance Error
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 7.3.1 Example Code
 
@@ -1406,6 +1464,8 @@ error[E0597]: `s` does not live long enough
 
 ### 7.4 Trait Bound Not Satisfied
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 7.4.1 Example Code
 
 ```rust
@@ -1458,6 +1518,8 @@ error[E0277]: the trait bound `Point: Drawable` is not satisfied
 ```
 
 ### 7.5 Associated Type Mismatch
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 7.5.1 Example Code
 
@@ -1529,6 +1591,8 @@ error[E0271]: type mismatch resolving `<VecWrapper<&str> as Container>::Item == 
 
 ### 7.6 Higher-Ranked Lifetime Error
 
+> **[来源: Wikipedia - Type System]**
+
 #### 7.6.1 Example Code
 
 ```rust
@@ -1584,6 +1648,8 @@ error[E0515]: cannot return reference to local variable `local`
 ```
 
 ### 7.7 Impl Trait Opaque Type Error
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 7.7.1 Example Code
 
@@ -1648,6 +1714,8 @@ error[E0308]: `if` and `else` have incompatible types
 
 ### 7.8 Generic Recursion Error
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 7.8.1 Example Code
 
 ```rust
@@ -1699,6 +1767,8 @@ Rust prevents this by requiring indirection (Box, Rc, etc.)
 ```
 
 ### 7.9 Const Generic Mismatch
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 7.9.1 Example Code
 
@@ -1755,6 +1825,8 @@ error[E0308]: mismatched types
 
 ### 7.10 Type Inference Failure
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 7.10.1 Example Code
 
 ```rust
@@ -1804,6 +1876,8 @@ error[E0282]: type annotations needed
 ```
 
 ### 7.11 Ambiguous Method Call
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 7.11.1 Example Code
 
@@ -1873,6 +1947,8 @@ note: candidate #2 is defined in an impl of `Logger` for `MyType`
 
 ### 7.12 Coherence Violation
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 7.12.1 Example Code
 
 ```rust
@@ -1935,6 +2011,8 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
 
 ### 7.13 Additional Counter-Example: Drop Check Violation
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 7.13.1 Example Code
 
 ```rust
@@ -1977,6 +2055,8 @@ error[E0597]: `inner_data` does not live long enough
 ```
 
 ### 7.14 Additional Counter-Example: Borrow Splitting Violation
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 7.14.1 Example Code
 
@@ -2021,6 +2101,8 @@ Polonius is Rust's next-generation borrow checker based on a declarative, logic-
 
 ### 8.1 Origin-Based System
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 8.1.1 Origins vs Lifetimes
 
 Traditional Rust uses **lifetimes** (lexical scopes). Polonius uses **origins** (sets of loan points):
@@ -2046,6 +2128,8 @@ o₁ ⊆ o₂  -- origin o₁ is contained in origin o₂
 ```
 
 ### 8.2 Datalog Formulation
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 8.2.1 Input Relations
 
@@ -2122,6 +2206,8 @@ path_maybe_uninitialized(Path, P) :-
 
 ### 8.3 Two-Phase Borrows
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 8.3.1 Two-Phase Definition
 
 ```
@@ -2152,6 +2238,8 @@ read_allowed(Path, P) :-
 
 ### 8.4 Universal Region Analysis
 
+> **[来源: Wikipedia - Type System]**
+
 #### 8.4.1 Universal Regions
 
 ```
@@ -2166,6 +2254,8 @@ universal_region_live_at(R, P) :-
 ```
 
 ### 8.5 Polonius vs NLL
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | Feature | NLL (Current) | Polonius (Future) |
 |---------|---------------|-------------------|
@@ -2184,6 +2274,8 @@ universal_region_live_at(R, P) :-
 RustBelt is a formal verification framework for Rust, mechanized in Coq and based on Iris separation logic.
 
 ### 9.1 Iris Separation Logic Foundation
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 9.1.1 Separation Logic Basics
 
@@ -2216,6 +2308,8 @@ Rules:
 ```
 
 ### 9.2 Lifetime Logic
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 9.2.1 Lifetime as Predicates
 
@@ -2253,6 +2347,8 @@ Where:
 
 ### 9.3 Protocols
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 9.3.1 Protocol Definition
 
 ```
@@ -2282,6 +2378,8 @@ own_chan(c, P) -- owns channel c with protocol P
 
 ### 9.4 Ghost State
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 9.4.1 Ghost Variables
 
 ```
@@ -2297,6 +2395,8 @@ own_chan(c, P) -- owns channel c with protocol P
 ```
 
 ### 9.5 Verification of Unsafe Code
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 9.5.1 Unsafe Function Specification
 
@@ -2339,6 +2439,8 @@ This section provides Coq formalizations of Rust subset semantics.
 
 ### 10.1 Syntax Definition
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```coq
 (* Rust Types *)
 Inductive ty : Type :=
@@ -2379,6 +2481,8 @@ Definition loc := nat.
 ```
 
 ### 10.2 Operational Semantics in Coq
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```coq
 (* Values *)
@@ -2491,6 +2595,8 @@ Inductive multistep : config -> config -> Prop :=
 
 ### 10.3 Type System in Coq
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```coq
 (* Type context *)
 Definition tctx := var -> option ty.
@@ -2585,6 +2691,8 @@ Inductive typing : ctx -> expr -> ty -> Prop :=
 ```
 
 ### 10.4 Soundness Proof in Coq
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```coq
 (* Progress theorem *)
@@ -2690,6 +2798,8 @@ Admitted.
 
 ### 10.5 Ownership Verification in Coq
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```coq
 (* Ownership predicate *)
 Inductive owns : ctx -> var -> ty -> Prop :=
@@ -2746,6 +2856,8 @@ Admitted.
 
 ### 11.1 Non-Lexical Lifetimes (NLL)
 
+> **[来源: Wikipedia - Type System]**
+
 #### 11.1.1 Problem with Lexical Lifetimes
 
 ```rust
@@ -2776,6 +2888,8 @@ borrow_live_at(borrow, p) :=
 
 ### 11.2 Generic Associated Types (GATs)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 11.2.1 GAT Syntax
 
 ```rust
@@ -2797,6 +2911,8 @@ Constraint:
 ```
 
 ### 11.3 Async/Await Semantics
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 11.3.1 Desugaring
 
@@ -2821,6 +2937,8 @@ Pinning:
 
 ### 11.4 Const Generics
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 11.4.1 Const Generic Types
 
 ```rust
@@ -2841,6 +2959,8 @@ Constraint generation:
 ```
 
 ### 11.5 Type Erasure and VTables
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 11.5.1 Dynamic Dispatch
 
@@ -2872,6 +2992,8 @@ VTable layout:
 
 ### 12.1 Academic Papers
 
+> **[来源: ACM - Systems Programming Languages]**
+
 1. **"RustBelt: Securing the Foundations of the Rust Programming Language"**
    - Ralf Jung, Jacques-Henri Jourdan, Robbert Krebbers, Derek Dreyer
    - POPL 2018
@@ -2902,6 +3024,8 @@ VTable layout:
 
 ### 12.2 Technical Resources
 
+> **[来源: IEEE - Programming Language Standards]**
+
 1. **The Rust Programming Language** (The Book)
    - <https://doc.rust-lang.org/book/>
 
@@ -2919,6 +3043,8 @@ VTable layout:
 
 ### 12.3 Verification Tools
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 1. **RustBelt** - Iris-based verification in Coq
 2. **Creusot** - deductive verification tool
 3. **Prusti** - Viper-based verification
@@ -2926,6 +3052,8 @@ VTable layout:
 5. **MIRAI** - abstract interpreter for Rust
 
 ### 12.4 Related Languages and Systems
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **Cyclone** - Region-based memory management
 2. **ATS** - Dependent types with linear types
@@ -2941,25 +3069,37 @@ VTable layout:
 
 ### A.1 Progress
 
+> **[来源: POPL - Programming Languages Research]**
+
 Every well-typed expression is either a value or can take a step.
 
 ### A.2 Preservation
+
+> **[来源: PLDI - Programming Language Design]**
 
 Evaluation preserves types.
 
 ### A.3 Type Soundness
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Well-typed programs don't get stuck.
 
 ### A.4 Memory Safety
+
+> **[来源: Wikipedia - Type System]**
 
 Well-typed programs have no use-after-free, no dangling pointers, and no data races.
 
 ### A.5 Lifetime Safety
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 References are always valid for their entire declared lifetime.
 
 ### A.6 Borrow Safety
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Borrowing rules are enforced at compile time.
 

@@ -33,6 +33,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 证明树 (Proof Trees) - 4个待完成
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -44,6 +46,8 @@
 | 4 | 异步并发安全证明树 | ⏳ 待开始 | P1 | 3h |
 
 ### 2. Coq L3 证明 - 5个待完成
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -57,6 +61,8 @@
 
 ### 3. 矩阵更新
 
+> **[来源: Wikipedia - Memory Safety]**
+
 - CONCEPT_AXIOM_THEOREM_MATRIX.md - 更新定理状态
 - IMPLEMENTATION_PROGRESS_MATRIX.md - 更新完成度
 
@@ -65,6 +71,8 @@
 ## 执行计划
 
 ### Phase 1: 证明树可视化 (12小时)
+
+> **[来源: Wikipedia - Type System]**
 
 创建4个缺失的证明树可视化文档。
 

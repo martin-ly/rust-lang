@@ -63,12 +63,16 @@ Cargo 1.94 带来了多项重要改进，包括配置文件包含、TOML 1.1 支
 > **[来源: Rust Official Docs]**
 
 ### 1.1 特性描述
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
 Cargo 现在在配置文件（`.cargo/config.toml`）中支持 `include` 键，允许加载额外的配置文件，从而更好地跨项目和环境组织、共享和管理 Cargo 配置。
 
 ### 1.2 基本用法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +85,8 @@ include = [
 ```
 
 ### 1.3 高级用法（带可选标记）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +101,8 @@ include = [
 如果设置了 `optional = true`，当文件不存在时不会报错。
 
 ### 1.4 实际应用场景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +135,8 @@ include = [
 ```
 
 ### 1.5 配置合并规则
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +151,8 @@ include = [
 > **[来源: Rust Official Docs]**
 
 ### 2.1 支持的特性
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +167,8 @@ Cargo 1.94 现在解析 TOML v1.1，包含以下新特性：
 | 可选秒 | 时间中的秒可选 | `12:30` |
 
 ### 2.2 多行内联表示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```toml
 [dependencies]

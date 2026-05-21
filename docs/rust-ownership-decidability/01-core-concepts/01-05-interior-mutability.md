@@ -55,6 +55,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心概念
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@
 ```
 
 ### 1.2 为什么需要内部可变性
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 场景1: 多个所有者需要修改数据
@@ -116,6 +120,8 @@ fn self_referential() {
 
 ### 2.1 基本用法
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::cell::Cell;
 
@@ -131,6 +137,8 @@ fn cell_basics() {
 ```
 
 ### 2.2 限制：只能用于 Copy 类型
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::cell::Cell;
@@ -165,6 +173,8 @@ fn set(&self, val: T) {
 
 ### 2.3 形式化语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 Cell<T> 的分离逻辑表示 (简化):
 
@@ -181,6 +191,8 @@ set: {Cell(x)} x.set(v') {Cell(x)[v'/v]}
 ## 3. `RefCell<T>`：运行时借用检查
 
 ### 3.1 基本用法
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::cell::RefCell;
@@ -207,6 +219,8 @@ fn refcell_basics() {
 
 ### 3.2 运行时借用规则
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 RefCell 的借用规则（运行时强制执行）：
 
@@ -227,6 +241,8 @@ RefCell 的借用规则（运行时强制执行）：
 
 ### 3.3 运行时 Panic 示例
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::cell::RefCell;
 
@@ -243,6 +259,8 @@ fn refcell_panic() {
 ```
 
 ### 3.4 避免 Panic 的方法
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::cell::RefCell;

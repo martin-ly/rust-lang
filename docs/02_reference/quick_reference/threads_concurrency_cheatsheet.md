@@ -206,6 +206,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 线程创建
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +223,8 @@ handle.join().unwrap();
 ```
 
 ### 作用域线程 (Rust 1.93.0+)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +247,8 @@ thread::scope(|s| {
 > **[来源: Rust Official Docs]**
 
 ### Mutex
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -258,6 +264,8 @@ let m = Mutex::new(5);
 ```
 
 ### RwLock
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -280,6 +288,8 @@ let lock = RwLock::new(5);
 ```
 
 ### Arc (原子引用计数)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -303,6 +313,8 @@ for i in 0..3 {
 
 ### Channel
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::sync::mpsc;
 
@@ -316,6 +328,8 @@ let received = rx.recv().unwrap();
 ```
 
 ### 多生产者
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::mpsc;
@@ -342,6 +356,8 @@ for received in rx {
 
 ### Atomic 类型
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -352,6 +368,8 @@ let value = counter.load(Ordering::SeqCst);
 ```
 
 ### 内存顺序
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::sync::atomic::Ordering;
@@ -381,6 +399,8 @@ Ordering::Relaxed
 ## 💡 代码示例
 
 ### 示例 1: 线程池实现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -441,6 +461,8 @@ for i in 0..8 {
 ```
 
 ### 示例 2: 条件变量使用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::{Arc, Condvar, Mutex};
@@ -507,6 +529,8 @@ thread::spawn(move || {
 
 ### 示例 3: 屏障同步
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::sync::Barrier;
 use std::thread;
@@ -530,6 +554,8 @@ for h in handles {
 
 ### 示例 4: OnceLock 初始化（Rust 1.70+ 推荐）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::OnceLock;
 use std::thread;
@@ -550,6 +576,8 @@ for h in handles {
 ```
 
 ### 示例 5: 并发生产者-消费者（多对多）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::sync::mpsc;

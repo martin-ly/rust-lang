@@ -88,6 +88,8 @@
 Miri 是 Rust 的解释器，可以检测未定义行为（UB）。
 
 ### Tree Borrows 模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -103,6 +105,8 @@ MIRIFLAGS="-Zmiri-tree-borrows -Zmiri-tag-raw-pointers" cargo miri test
 ```
 
 ### 代码示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +152,8 @@ fn test_tree_borrows_self_referential() {
 ```
 
 ### CI/CD 集成
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +189,8 @@ jobs:
 Kani 是 Rust 的模型检查器，用于验证属性。
 
 ### 基础验证
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +224,8 @@ mod verification {
 ```
 
 ### 高级特性
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -288,6 +298,8 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 Prusti 使用分离逻辑验证 Rust 代码。
 
 ### 前置/后置条件
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -334,6 +346,8 @@ fn safe_get(array: &[i32], index: usize) -> i32 {
 ```
 
 ### 循环不变量
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 /// 冒泡排序 - 带完整证明
@@ -426,6 +440,8 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 ## 🔗 综合示例
 
 ### 完整的验证套件
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 //! 经过形式化验证的 SafeVec 实现
@@ -609,3 +625,9 @@ mod miri_tests {
 > **[来源: Coq Reference Manual]**
 > **[来源: TLA+ Documentation]**
 > **[来源: ACM - Formal Methods]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

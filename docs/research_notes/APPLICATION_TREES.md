@@ -97,6 +97,8 @@
 
 ### 2.1 概念树
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```mermaid
 mindmap
   root((系统编程))
@@ -146,6 +148,8 @@ mindmap
 
 ### 2.2 技能路径
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 层级 | 主题 | 核心概念 | 实践项目 |
 |------|------|----------|----------|
 | **入门** | 基础语法 | 所有权、借用、生命周期 | CLI工具 |
@@ -154,6 +158,8 @@ mindmap
 | **专家** | 内核开发 | 裸机、驱动、调度器 | 微型OS |
 
 ### 2.3 核心技术栈
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 系统编程栈

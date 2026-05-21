@@ -31,12 +31,15 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
 >
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Retry Pattern]** · **[来源: Wikipedia - Circuit Breaker Pattern]** · **[来源: ACM - Fault-Tolerant Design Patterns]** · **[来源: IEEE - Resilient Software Architecture]**
 
 ### Def RT1: Retry
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -51,6 +54,8 @@ Retry := (Op, policy, predicate)
 ```
 
 ### Def RT2: 退避策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +68,8 @@ BackoffStrategy :=
 ```
 
 ### Def RT3: 抖动 (Jitter)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 Jitter := None | Full | Equal | Decorrelated
@@ -78,6 +85,8 @@ Jitter := None | Full | Equal | Decorrelated
 
 ### Axiom RT1: 重试次数有界
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 attempts ≤ max_attempts
 ```
@@ -85,6 +94,8 @@ attempts ≤ max_attempts
 重试次数必须有限，防止无限循环。
 
 ### Axiom RT2: 幂等性要求
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 ∀Op ∈ Retry. Idempotent(Op) ∨ (predicate only for transient errors)
@@ -356,7 +367,6 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

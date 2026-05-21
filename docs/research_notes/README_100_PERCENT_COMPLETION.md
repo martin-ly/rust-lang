@@ -68,6 +68,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 当前完成度
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +87,8 @@
 ```
 
 ### 核心缺口
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +104,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 计划文档
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

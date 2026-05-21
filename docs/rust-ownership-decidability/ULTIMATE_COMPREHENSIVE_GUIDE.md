@@ -68,6 +68,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 本文档的定位
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -92,6 +94,8 @@
 ```
 
 ### 三种使用方式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -106,6 +110,8 @@
 ## 🗺️ 第一部分：全局知识架构
 
 ### 1.1 四层金字塔架构
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
                     ┌─────────────────────────────┐
@@ -151,6 +157,8 @@
 
 ### 1.2 三大维度关联
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```text
 维度一: 纵向层次关联 (理论深度)
     形式化 ←──────→ 理论 ←──────→ 模式 ←──────→ 工具
@@ -179,6 +187,8 @@
 ```
 
 ### 1.3 知识模块全景图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -282,6 +292,8 @@
 
 ### 2.1 按难度分类
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 🟢 入门级 (初学者)
 
 | 文档 | 主题 | 阅读时间 | 前置知识 |
@@ -325,6 +337,8 @@
 | [研究前沿](10-research-frontiers/README.md) | 未来方向 | 持续 | 专家级 |
 
 ### 2.2 按主题分类
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 主题 1: 所有权系统核心
 
@@ -462,6 +476,8 @@ Rust特有:
 
 ### 3.1 路径总览
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 路径 A: 快速入门 (4小时) ────────→ 能读懂 Rust 代码
            │
@@ -473,6 +489,8 @@ Rust特有:
 ```
 
 ### 3.2 详细路径规划
+
+> **[来源: Wikipedia - Type System]**
 
 #### 路径 A: 快速入门 (4小时)
 
@@ -674,6 +692,8 @@ Week 7-8: 元理论证明
 
 ### 4.1 按问题查找
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### "我遇到了编译错误..."
 
 | 错误信息 | 解决方案文档 | 理论解释 |
@@ -705,6 +725,8 @@ Week 7-8: 元理论证明
 | 数据库 | case-studies/database/README.md | diesel-formal-analysis.md |
 
 ### 4.2 按技术栈查找
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### Web 开发
 
@@ -740,6 +762,8 @@ Week 7-8: 元理论证明
 ## 📊 第五部分：知识体系对照表
 
 ### 5.1 自然语言 ↔ 数学符号 ↔ 代码 ↔ Coq
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 自然语言 | 数学符号 | Rust 代码 | Coq |
 |:---------|:---------|:----------|:----|

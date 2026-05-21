@@ -54,6 +54,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 核心原则
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@
 ```
 
 ### 1.2 安全等级对应规范
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +102,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权与借用
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +140,8 @@ println!("{}", ref1[0]);
 ```
 
 ### 2.2 生命周期管理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +175,8 @@ struct BadParser {
 ```
 
 ### 2.3 智能指针使用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +224,8 @@ struct Node {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 使用准则
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -237,6 +249,8 @@ pub unsafe fn read_value<T>(ptr: *const T) -> T {
 ```
 
 ### 3.2 必需文档
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -278,6 +292,8 @@ where
 ```
 
 ### 3.3 常见模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **安全包装器模式**:
 
@@ -324,6 +340,8 @@ impl<T> SafeSlice<T> {
 
 ### 4.1 线程安全类型
 
+> **[来源: PLDI - Programming Language Design]**
+
 **必须 (MUST)**:
 
 ```rust
@@ -363,6 +381,8 @@ thread::spawn(move || {
 ```
 
 ### 4.2 同步原语
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **推荐 (SHOULD)**:
 

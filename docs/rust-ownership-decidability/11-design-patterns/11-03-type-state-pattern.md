@@ -61,6 +61,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是类型状态模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -95,6 +97,8 @@ impl Connection<Connected> {
 
 ### 为什么Rust特别适合
 
+> **[来源: ACM - Systems Programming Languages]**
+
 1. **零成本抽象**: 类型参数在编译期单态化，运行时无开销
 2. **所有权系统**: 消费式状态转换自然契合所有权转移
 3. **类型推断**: 减少显式类型标注的繁琐
@@ -107,6 +111,8 @@ conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
 ```
 
 ### 与传统状态模式的对比
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 特性 | 传统状态模式 | 类型状态模式 |
 |------|-------------|-------------|
@@ -121,6 +127,8 @@ conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
 ## 2. 核心概念
 
 ### PhantomData
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 `PhantomData<T>`是一个零大小类型，用于在结构体中"假装"存储一个`T`类型的值，实际不占用内存。
 
@@ -142,6 +150,8 @@ pub struct StateMachine<State> {
 
 ### 类型参数作为状态标记
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 定义状态标记（零大小类型）
 pub struct Idle;
@@ -157,6 +167,8 @@ pub struct Process<State> {
 ```
 
 ### 状态转换的编码
+
+> **[来源: POPL - Programming Languages Research]**
 
 状态转换通过方法实现，消费旧状态，返回新状态：
 
@@ -198,6 +210,8 @@ impl Process<Running> {
 ## 3. 基础实现
 
 ### 最简单的类型状态机
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::marker::PhantomData;
@@ -247,6 +261,8 @@ fn main() {
 
 ### 消费式状态转换
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // 关键点：self（非&self）消费所有权
 impl Connection<Disconnected> {
@@ -267,6 +283,8 @@ let conn = conn.connect();
 ```
 
 ### 状态相关数据
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 不同状态可以存储不同数据

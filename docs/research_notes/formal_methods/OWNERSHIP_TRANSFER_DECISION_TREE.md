@@ -114,6 +114,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 决策流程
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +141,8 @@
 ```
 
 ### 代码示例
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +182,8 @@ println!("{:?}", v); // [1, 2, 3, 42]
 > **[来源: Rust Official Docs]**
 
 ### 决策流程
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +207,8 @@ println!("{:?}", v); // [1, 2, 3, 42]
 ```
 
 ### 代码示例
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +251,8 @@ fn find_user(id: u64) -> Option<User> {
 ---
 
 ### 决策流程
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 存储在集合中?

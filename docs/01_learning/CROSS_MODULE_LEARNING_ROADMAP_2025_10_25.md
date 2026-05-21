@@ -34,6 +34,8 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Learning Path]** · **[来源: Wikipedia - Curriculum Design]** · **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
 
 ### 路径 1: 零基础入门
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

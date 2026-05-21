@@ -49,6 +49,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -82,6 +83,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 定义与形式化
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +95,8 @@
 **定理 RAII-T1**：RAII 实现等价于 ownership 规则 3；`Drop::drop` 在 `scope_end` 时调用；由 [ownership_model](../formal_methods/ownership_model.md) 定理 T3、BOX-T1。
 
 ### 1.2 典型场景
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -103,6 +108,8 @@
 | 内存 | `Box`、`Vec` | 与 ownership 直接对应 |
 
 ### 1.3 完整代码示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +138,8 @@ let m = Mutex::new(0);
 ```
 
 ### 1.4 常见陷阱
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +150,8 @@ let m = Mutex::new(0);
 | 忘记 `impl Drop` | 资源泄漏 | 显式 RAII 封装 |
 
 ### 1.5 与设计模式衔接
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +166,8 @@ let m = Mutex::new(0);
 > **[来源: Rust Official Docs]**
 
 ### 2.1 定义与形式化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,6 +178,8 @@ let m = Mutex::new(0);
 **定理 NW-T1**：Newtype 满足 [ownership_model](../formal_methods/ownership_model.md) 规则 1–3；`T` 的 ownership 语义直接传递；由 Def 1.3 无环、接口一致。
 
 ### 2.2 典型场景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +190,8 @@ let m = Mutex::new(0);
 | 品牌类型 | `struct Branded<T>` | 类型安全 |
 
 ### 2.3 完整代码示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 #[derive(Clone, PartialEq, Eq)]
@@ -522,7 +539,6 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

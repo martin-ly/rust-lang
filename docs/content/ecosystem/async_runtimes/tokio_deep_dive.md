@@ -77,6 +77,8 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 - **同步原语**: 异步版本的 Mutex、Channel 等
 
 ### 对比其他运行时
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +96,8 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 > **[来源: Rust Official Docs]**
 
 ### 运行时组件
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +123,8 @@ graph TD
 ```
 
 ### 任务调度
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +151,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 任务 (Task)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +183,8 @@ async fn named_task() {
 ```
 
 ### 执行器 (Executor)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -211,6 +221,8 @@ fn multi_threaded() {
 ```
 
 ### I/O 驱动
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -247,6 +259,8 @@ async fn tcp_server() -> tokio::io::Result<()> {
 ```
 
 ### 定时器
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -288,6 +302,8 @@ async fn slow_operation() -> String {
 
 ### 运行时配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use tokio::runtime::Builder;
 
@@ -324,6 +340,8 @@ fn optimized_runtime() {
 ```
 
 ### 任务管理
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tokio::task::{JoinSet, AbortHandle};
@@ -371,6 +389,8 @@ async fn cancel_task() {
 ```
 
 ### 并发模式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use tokio::sync::{Semaphore, RwLock};

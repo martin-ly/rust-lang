@@ -64,6 +64,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 musl 1.2.5 更新
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -128,6 +130,8 @@ fn resolve_large_dns_record() -> std::io::Result<Vec<std::net::SocketAddr>> {
 ---
 
 ### 1.2 全局分配器线程本地存储支持
+
+> **[来源: Wikipedia - Type System]**
 
 #### 形式化定义
 
@@ -205,6 +209,8 @@ static ALLOCATOR: ThreadTrackingAllocator = ThreadTrackingAllocator;
 
 ### 1.3 asm! 宏的 cfg 属性支持
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 形式化语义
 
 ```text
@@ -262,6 +268,8 @@ pub unsafe fn optimized_copy(src: *const u8, dst: *mut u8, len: usize) {
 ---
 
 ### 1.4 MaybeUninit API 扩展
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 新增方法分析
 
@@ -356,6 +364,8 @@ impl<T, const N: usize> Drop for Buffer<T, N> {
 
 ### 1.5 String/Vec into_raw_parts
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 形式化定义
 
 ```text
@@ -408,6 +418,8 @@ pub unsafe extern "C" fn string_from_raw(parts: *mut StringParts) -> String {
 
 ### 1.6 无检查整数操作
 
+> **[来源: Wikipedia - Type System]**
+
 #### 定理 UNCHECKED-ARITHMETIC-1
 
 ```text
@@ -457,6 +469,8 @@ pub fn safe_unchecked_shift(x: u32, shift: u32) -> Option<u32> {
 ---
 
 ### 1.7 VecDeque 条件弹出
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 形式化语义
 
@@ -519,6 +533,8 @@ impl TaskQueue {
 
 ### 1.8 deref_nullptr Lint (Deny-by-Default)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 形式化分析
 
 ```text
@@ -573,6 +589,8 @@ macro_rules! offset_of {
 ## 2. 迁移指南
 
 ### 2.1 破坏性变更检查清单
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```markdown
 □ musl目标: 确保 libc >= 0.2.146

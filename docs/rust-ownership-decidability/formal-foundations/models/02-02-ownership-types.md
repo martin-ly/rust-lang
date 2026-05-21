@@ -51,6 +51,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 资源管理问题
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -81,6 +83,8 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 ```
 
 ### 1.2 类型系统的演变
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 类型系统谱系:
@@ -117,6 +121,8 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 2.1 线性逻辑基础
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **线性逻辑**由Jean-Yves Girard于1987年提出，核心思想是：
 
 > **命题消耗其假设**：使用一个假设后，它就消失了。
@@ -141,6 +147,8 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 
 ### 2.2 线性类型的语法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 线性类型语法:
 
@@ -160,6 +168,8 @@ readFile(f)  // ← 运行时错误: 已关闭的文件
 ```
 
 ### 2.3 线性类型的推导规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **核心推导规则**:
 
@@ -221,6 +231,8 @@ Promotion (!):
 
 ### 2.4 线性类型的语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **Categorical语义** (幺半范畴):
 
 ```text
@@ -254,6 +266,8 @@ Promotion (!):
 ## 3. 仿射类型系统
 
 ### 3.1 从线性到仿射
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **仿射逻辑**是线性逻辑的扩展，允许**弱化规则**但不允许**收缩规则**。
 

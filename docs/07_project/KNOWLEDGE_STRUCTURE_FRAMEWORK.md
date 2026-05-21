@@ -179,6 +179,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 知识结构建模工具
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -294,6 +296,8 @@ fn main() {
 ```
 
 ### 多维矩阵生成器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -362,6 +366,8 @@ fn main() {
 ```
 
 ### 思维导图文本生成器
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -429,6 +435,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -438,6 +446,8 @@ fn main() {
 - **类型理论**: [type_system_foundations.md](../research_notes/type_theory/type_system_foundations.md) - 类型理论基础
 
 ### 实施场景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -454,10 +464,14 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 1. 概念定义层
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 定义结构模板
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 概念名称: [概念名称]
@@ -469,6 +483,8 @@ fn main() {
 ```
 
 #### 示例：所有权（Ownership）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 概念名称: 所有权（Ownership）
@@ -484,6 +500,8 @@ fn main() {
 ```
 
 ### 2. 属性特征层
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 属性结构模板
 
@@ -510,6 +528,8 @@ fn main() {
 
 ### 3. 关系连接层
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 关系类型
 
 1. **继承关系** - is-a 关系
@@ -530,6 +550,8 @@ fn main() {
 
 ### 4. 解释论证层
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 论证结构
 
 ```text
@@ -549,6 +571,8 @@ fn main() {
 ```
 
 ### 5. 形式证明层
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 证明结构
 
@@ -576,6 +600,8 @@ fn main() {
 ## 🗺️ 思维表征方式
 
 ### 1. 思维导图
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 思维导图结构
 

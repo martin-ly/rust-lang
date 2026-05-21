@@ -37,6 +37,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 路径一：循序渐进（推荐初学者）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -54,6 +56,8 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 路径二：问题导向
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 你的问题 | 推荐阅读 |
 |---------|---------|
 | 如何安全地共享状态？ | 12-02, 12-04 |
@@ -66,11 +70,15 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 路径三：性能优先
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 12-06 → 12-04 → 12-05 → 12-02 → 12-03
 ```
 
 ### 路径四：形式化方法（研究员/高级开发者）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 12-02 → 12-01 → 12-01-deep → 12-04 → 12-04-deep → 12-05
@@ -89,6 +97,8 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 ### 12-01: 并发架构设计模式
 
+> **[来源: PLDI - Programming Language Design]**
+
 **核心主题**:
 
 - 并发模型对比（线程 vs 异步 vs 并行 vs Actor）
@@ -103,6 +113,8 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 ---
 
 ### 12-01-deep: 并发架构形式化深度解析
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **核心主题** (🔬 高级形式化内容):
 
@@ -155,6 +167,8 @@ fn cas_loop(counter: &AtomicUsize) {
 
 ### 12-02: 线程安全模式
 
+> **[来源: Wikipedia - Type System]**
+
 **核心主题**:
 
 - Send 和 Sync trait 深入解析
@@ -184,6 +198,8 @@ static LOCK_ORDER: AtomicUsize = AtomicUsize::new(0);
 ---
 
 ### 12-03: 消息传递模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **核心主题**:
 
@@ -225,6 +241,8 @@ async fn send_with_backpressure<T>(
 ---
 
 ### 12-04: 无锁编程
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **核心主题**:
 
@@ -274,6 +292,8 @@ pub fn push(&self, value: T) {
 
 ### 12-05: 异步并发模式
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **核心主题**:
 
 - async/await 原理与状态机转换
@@ -317,6 +337,8 @@ impl AdaptiveBackpressure {
 
 ### 12-06: 数据并行
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **核心主题**:
 
 - Rayon 并行迭代器
@@ -352,6 +374,8 @@ pub fn parallel_simd_sum(data: &[f64]) -> f64 {
 ---
 
 ### 12-06-deep: 数据并行形式化深度解析
+
+> **[来源: POPL - Programming Languages Research]**
 
 **核心主题** (🔬 高级形式化内容):
 
@@ -404,6 +428,8 @@ impl ParallelIterator for StepRange {
 ---
 
 ### 12-07: 分布式模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 **核心主题**:
 

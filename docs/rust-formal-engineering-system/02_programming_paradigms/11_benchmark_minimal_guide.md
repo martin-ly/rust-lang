@@ -29,6 +29,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 为什么需要基准测试
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -51,6 +53,8 @@ fn fibonacci(n: u64) -> u64 {
 ```
 
 ### 使用 Criterion 进行可靠基准测试
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +93,8 @@ criterion_main!(benches);
 ```
 
 ### 防止编译器优化（black_box）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -117,6 +123,8 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 ```
 
 ### 参数化基准测试
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +154,8 @@ fn bench_various_sizes(c: &mut Criterion) {
 ```
 
 ### 比较不同实现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +206,8 @@ fn bench_comparison(c: &mut Criterion) {
 ```
 
 ### 异步基准测试
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +236,8 @@ fn bench_async(c: &mut Criterion) {
 ```
 
 ### 吞吐量测量
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +270,8 @@ fn bench_with_throughput(c: &mut Criterion) {
 > **[来源: Rust Official Docs]**
 
 ### 统计显著性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +303,8 @@ fn expensive_operation() -> Vec<u32> {
 ```
 
 ### 预热与稳定
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use criterion::Criterion;

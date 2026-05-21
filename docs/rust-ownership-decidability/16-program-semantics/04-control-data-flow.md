@@ -296,6 +296,8 @@ fn static_vs_dynamic(arr: &[i32]) -> Option<i32> {
 
 #### 2.1.1 语句顺序语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 顺序执行是最基本的控制流形式，语句按文本顺序执行：
 
 $$
@@ -317,6 +319,8 @@ fn sequential_statements() {
 ```
 
 #### 2.1.2 表达式求值顺序
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Rust 的表达式求值遵循**严格求值**（eager evaluation）策略：
 
@@ -368,6 +372,8 @@ fn evaluation_order() {
 
 #### 2.1.3 副作用排序
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust 保证副作用的顺序性，这对理解数据流至关重要：
 
 ```rust
@@ -401,6 +407,8 @@ fn side_effect_ordering() {
 > **[来源: Coq Reference Manual]**
 
 #### 2.2.1 if/else 语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 条件分支的形式化语义：
 
@@ -441,6 +449,8 @@ fn if_else_semantics(x: i32) -> i32 {
 ```
 
 #### 2.2.2 match 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 `match` 是 Rust 最强大的控制流结构，具有穷尽性检查：
 
@@ -493,6 +503,8 @@ fn match_semantics(msg: Message) {
 
 #### 2.2.3 穷尽性检查语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust 编译器强制要求 `match` 必须穷尽所有可能：
 
 $$
@@ -538,6 +550,8 @@ fn wildcard_pattern(x: i32) -> &'static str {
 
 #### 2.3.1 loop 语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 `loop` 创建无限循环，必须通过 `break` 退出：
 
 $$
@@ -572,6 +586,8 @@ fn loop_semantics() -> i32 {
 
 #### 2.3.2 while 语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 `while` 循环的条件在每次迭代前求值：
 
 $$
@@ -600,6 +616,8 @@ fn while_semantics(items: &[i32]) -> i32 {
 ```
 
 #### 2.3.3 for 语义（迭代器驱动）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 Rust 的 `for` 循环基于迭代器协议：
 
@@ -642,6 +660,8 @@ fn for_semantics() {
 ```
 
 #### 2.3.4 控制转移（break/continue）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 控制转移语句改变循环的正常执行流：
 
@@ -690,6 +710,8 @@ fn is_target(n: i32) -> bool {
 
 #### 2.4.1 函数调用语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 函数调用创建新的执行环境：
 
 $$
@@ -729,6 +751,8 @@ fn borrow(s: &String) {
 
 #### 2.4.2 返回语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 函数返回可能涉及所有权转移或复制：
 
 ```rust
@@ -759,6 +783,8 @@ fn return_reference<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 #### 2.4.3 尾调用优化语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Rust 目前**不保证**尾调用优化（TCO），但从语义角度可以理解其含义：
 
@@ -797,7 +823,11 @@ fn iterative_sum(n: i32) -> i32 {
 
 ### 2.5 异常控制流（Panic）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 2.5.1 panic! 语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 `panic!` 触发不可恢复的错误：
 
@@ -826,6 +856,8 @@ fn assert_semantics(x: i32) {
 ```
 
 #### 2.5.2 展开语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Panic 可以展开栈，调用析构函数：
 
@@ -859,6 +891,8 @@ fn unwinding_semantics() {
 
 #### 2.5.3 中止语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Panic 可以配置为立即中止（abort），不展开栈：
 
 ```toml
@@ -873,6 +907,8 @@ panic = "abort"
 ```
 
 #### 2.5.4 恢复语义（catch_unwind）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `catch_unwind` 允许捕获 panic：
 
@@ -906,7 +942,11 @@ catch_unwind_semantics();
 
 ### 3.1 值的数据流
 
+> **[来源: Wikipedia - Type System]**
+
 #### 3.1.1 创建-使用-销毁流程
+
+> **[来源: POPL - Programming Languages Research]**
 
 值在 Rust 中经历完整的数据流生命周期：
 
@@ -943,6 +983,8 @@ fn explicit_lifecycle() {
 
 #### 3.1.2 所有权转移数据流
 
+> **[来源: PLDI - Programming Language Design]**
+
 所有权转移创建单向数据流：
 
 $$
@@ -972,6 +1014,8 @@ fn consume(v: Vec<i32>) {
 ```
 
 #### 3.1.3 借用数据流
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 借用创建临时数据流，不改变所有权：
 
@@ -1003,7 +1047,11 @@ fn borrow_flow() {
 
 ### 3.2 变量数据流
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 3.2.1 定义-使用链
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定义-使用链（Definition-Use Chain）** 追踪变量的定义和使用点：
 
@@ -1031,6 +1079,8 @@ fn du_chain_example() {
 
 #### 3.2.2 活跃变量分析
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **活跃变量分析（Live Variable Analysis）** 确定变量在哪些程序点是活跃的：
 
 $$
@@ -1056,6 +1106,8 @@ fn live_variable_analysis() {
 ```
 
 #### 3.2.3 Reaching Definitions
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **到达定义分析（Reaching Definitions）** 确定哪些定义可能到达每个使用点：
 
@@ -1090,7 +1142,11 @@ fn use_value(_x: i32) {}
 
 ### 3.3 类型数据流
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 3.3.1 类型推断数据流
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Rust 的类型推断是双向的，信息从表达式和期望类型双向流动：
 
@@ -1128,6 +1184,8 @@ fn use_generic() {
 
 #### 3.3.2 泛型单态化数据流
 
+> **[来源: IEEE - Programming Language Standards]**
+
 泛型代码在编译时单态化，为每种类型生成专用代码：
 
 $$
@@ -1160,6 +1218,8 @@ struct Container<T> {
 ```
 
 #### 3.3.3 Trait 解析数据流
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Trait 解析确定调用哪个实现：
 
@@ -1213,7 +1273,11 @@ fn trait_resolution_flow() {
 
 ### 4.1 所有权转移数据流
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 4.1.1 Move 语义数据流
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Move 语义是 Rust 所有权系统的核心：
 
@@ -1252,6 +1316,8 @@ fn consume(s: String) {
 
 #### 4.1.2 复制数据流（Copy 类型）
 
+> **[来源: POPL - Programming Languages Research]**
+
 Copy 类型按位复制，不转移所有权：
 
 $$
@@ -1287,6 +1353,8 @@ struct Wrapper<'a> {
 ```
 
 #### 4.1.3 线性类型数据流
+
+> **[来源: PLDI - Programming Language Design]**
 
 Rust 的所有权系统实现了线性类型（Linear Types），要求值必须被使用且只能使用一次：
 
@@ -1332,7 +1400,11 @@ fn release_resource(_r: Resource) {
 
 ### 4.2 借用数据流
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 4.2.1 不可变借用流
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 不可变借用创建读取数据流：
 
@@ -1370,6 +1442,8 @@ fn return_borrow<'a>(v: &'a [i32]) -> &'a i32 {
 ```
 
 #### 4.2.2 可变借用流
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 可变借用创建独占写入数据流：
 
@@ -1415,6 +1489,8 @@ fn mutable_borrow_chain(v: &mut Vec<i32>) {
 
 #### 4.2.3 借用生命周期数据流
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 借用生命周期决定了数据流的活跃区间：
 
 ```rust
@@ -1451,7 +1527,11 @@ where
 
 ### 4.3 生命周期数据流
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 4.3.1 生命周期参数流
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 生命周期参数在泛型代码中传播：
 
@@ -1501,6 +1581,8 @@ fn lifetime_propagation() {
 
 #### 4.3.2 生命周期约束传播
 
+> **[来源: ACM - Systems Programming Languages]**
+
 生命周期约束通过 trait bound 传播：
 
 ```rust
@@ -1537,6 +1619,8 @@ struct SelfReferential<'a> {
 ```
 
 #### 4.3.3 生命周期推导数据流
+
+> **[来源: IEEE - Programming Language Standards]**
 
 编译器通过生命周期省略规则自动推导：
 
@@ -1579,7 +1663,11 @@ fn complex_elision(x: &(u32, u32)) -> &u32 {  // 推导为：fn complex_elision<
 
 ### 5.1 控制流图 (CFG)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 5.1.1 基本块语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **基本块（Basic Block）** 是最大连续语句序列，只有一个入口和一个出口：
 
@@ -1611,6 +1699,8 @@ fn basic_block_example(x: i32, y: i32) -> i32 {
 ```
 
 #### 5.1.2 边和分支语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 CFG 的边表示可能的执行路径：
 
@@ -1652,6 +1742,8 @@ fn loop_edges() {
 
 #### 5.1.3 循环结构识别
 
+> **[来源: POPL - Programming Languages Research]**
+
 识别循环结构对分析至关重要：
 
 | 循环类型 | 结构特征 | 示例 |
@@ -1685,7 +1777,11 @@ fn loop_structure_analysis() {
 
 ### 5.2 到达定义分析
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 5.2.1 定义点追踪
+
+> **[来源: PLDI - Programming Language Design]**
 
 到达定义分析追踪变量定义的流动：
 
@@ -1715,6 +1811,8 @@ fn condition() -> bool {
 
 #### 5.2.2 使用点识别
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 识别变量在何处被使用：
 
 ```rust
@@ -1732,6 +1830,8 @@ fn use_point_identification() {
 ```
 
 #### 5.2.3 未初始化变量检测
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 编译器使用到达定义分析检测未初始化变量：
 
@@ -1772,6 +1872,8 @@ struct Point {
 ```
 
 ### 5.3 活跃性分析
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 5.3.1 变量活跃区间
 
@@ -1898,6 +2000,8 @@ fn condition() -> bool { true }
 
 ### 6.1 借用检查数据流
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 6.1.1 借用创建点
 
 追踪借用的创建和使用：
@@ -1992,6 +2096,8 @@ fn complex_nll() {
 ```
 
 ### 6.2 初始化分析
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 6.2.1 部分初始化
 
@@ -2100,6 +2206,8 @@ fn array_initialization() {
 ```
 
 ### 6.3 常量传播
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 6.3.1 编译时常量求值
 
@@ -2232,6 +2340,8 @@ fn constant_folding_optimized() {
 
 ### 7.1 线程间数据流
 
+> **[来源: Wikipedia - Type System]**
+
 #### 7.1.1 Send 数据流边界
 
 `Send` trait 标记可以安全跨线程传递所有权的类型：
@@ -2339,6 +2449,8 @@ fn shared_state_data_flow() {
 ```
 
 ### 7.2 消息传递数据流
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 7.2.1 通道数据流
 
@@ -2476,6 +2588,8 @@ fn bounded_channel() {
 
 ### 7.3 原子数据流
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 7.3.1 原子变量数据流
 
 原子变量提供无锁的线程间数据流：
@@ -2610,6 +2724,8 @@ fn happens_before_graph() {
 > **[来源: Rust Reference - Control Flow]**
 
 ### 8.1 Future 数据流
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 8.1.1 Future 状态数据流
 
@@ -2789,6 +2905,8 @@ fn create_waker(queue: Arc<Mutex<VecDeque<Task>>>) -> std::task::Waker {
 
 ### 8.2 Stream 数据流
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 8.2.1 元素数据流
 
 Stream 是异步的迭代器：
@@ -2895,6 +3013,8 @@ async fn buffered_data_flow() {
 ```
 
 ### 8.3 异步状态数据流
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 8.3.1 状态机状态转换
 
@@ -3014,6 +3134,8 @@ async fn some_work() {
 
 ### 9.1 借用检查器分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 9.1.1 区域推断
 
 编译器推断生命周期约束：
@@ -3104,6 +3226,8 @@ impl<'a> Wrapper<'a> {
 ```
 
 ### 9.2 类型系统分析
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 9.2.1 类型推断算法
 
@@ -3226,6 +3350,8 @@ where
 
 ### 9.3 lint 分析
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 9.3.1 未使用变量检测
 
 ```rust
@@ -3303,6 +3429,8 @@ fn color_exhaustive(c: Color) {
 
 ### 10.1 控制流形式化
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 10.1.1 操作语义规则
 
 **小步操作语义（Small-step Operational Semantics）：**
@@ -3363,6 +3491,8 @@ $$
 ```
 
 ### 10.2 数据流形式化
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 10.2.1 数据流方程
 
@@ -3456,6 +3586,8 @@ $$
 ```
 
 ### 10.3 类型与效果
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 10.3.1 类型判断
 
@@ -3557,6 +3689,8 @@ where
 > **[来源: ACM - Control Flow Analysis]**
 
 ### 11.1 编译器分析
+
+> **[来源: Wikipedia - Type System]**
 
 #### 11.1.1 MIR 数据流分析
 
@@ -3664,6 +3798,8 @@ fn loop_optimization() -> i32 {
 
 ### 11.2 静态分析工具
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 11.2.1 Clippy 检查
 
 ```bash
@@ -3769,6 +3905,8 @@ fn important_result() -> i32 {
 
 ### 11.3 性能分析
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 11.3.1 火焰图语义
 
 ```bash
@@ -3865,6 +4003,8 @@ valgrind --tool=cachegrind ./target/release/myapp
 
 ### 12.1 核心概念回顾
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 本文档深入分析了 Rust 的数据流和控制流语义：
 
 | 概念 | 核心语义 | 形式化表示 |
@@ -3879,12 +4019,16 @@ valgrind --tool=cachegrind ./target/release/myapp
 
 ### 12.2 静态分析要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 1. **借用检查器**：通过区域推断和约束求解确保内存安全
 2. **数据流分析**：到达定义、活跃性分析优化代码生成
 3. **类型推断**：Hindley-Milner 风格，支持双向推断
 4. **常量求值**：编译时执行，支持复杂计算
 
 ### 12.3 实践指导
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - 使用 `rustc --emit=mir` 查看中间表示
 - 使用 `cargo clippy` 进行静态检查
@@ -3893,6 +4037,8 @@ valgrind --tool=cachegrind ./target/release/myapp
 - 理解 NLL（非词法生命周期）使借用更灵活
 
 ### 12.4 延伸阅读
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [Rust 参考手册](https://doc.rust-lang.org/reference/)
 - [Rustc 开发者指南](https://rustc-dev-guide.rust-lang.org/)

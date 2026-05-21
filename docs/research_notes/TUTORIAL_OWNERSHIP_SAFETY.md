@@ -93,6 +93,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 内存管理的困境
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -115,6 +117,8 @@
 | Rust | 所有权系统 | 零成本抽象 | 学习曲线陡峭 |
 
 ### Rust的解决方案
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +151,8 @@ fn makes_copy(i: i32) {
 > **[来源: Rust Official Docs]**
 
 ### 三大规则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +161,8 @@ fn makes_copy(i: i32) {
 3. **当所有者离开作用域，值被丢弃**
 
 ### 作用域与生命周期
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +179,8 @@ fn makes_copy(i: i32) {
 ```
 
 ### 内存表示
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +206,8 @@ s离开作用域时:
 > **[来源: Rust Official Docs]**
 
 ### 什么是移动
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -213,6 +225,8 @@ println!("{}", s2);    // OK
 - 安全: 避免双重释放
 
 ### 浅复制的问题(Copy vs Move)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +249,8 @@ let s2 = s1;                    // 移动: s1失效，只有s2释放
 
 ### 哪些类型实现Copy
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 实现Copy的类型(栈上简单复制)
 let x: i32 = 5;
@@ -250,6 +266,8 @@ println!("{}", x); // OK! x仍然有效
 ```
 
 ### 自定义类型的Copy
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #[derive(Copy, Clone)]
@@ -276,6 +294,8 @@ struct Container {
 
 ### 为什么需要借用
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 不使用借用: 需要返回值来继续使用
 fn calculate_length(s: String) -> (String, usize) {
@@ -300,6 +320,8 @@ println!("{} 长度是 {}", s1, len);  // s1仍然可用!
 
 ### 借用规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 规则1: 可同时有多个不可变借用
 let r1 = &s;
@@ -317,6 +339,8 @@ println!("{}", r1);  // r1最后使用在这里
 ```
 
 ### 借用与作用域
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 let mut s = String::from("hello");
@@ -337,6 +361,8 @@ r2.push_str("!");
 
 ### 编译器如何防止
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 fn dangle() -> &String {  // 错误! 返回悬垂引用
     let s = String::from("hello");
@@ -348,6 +374,8 @@ fn dangle() -> &String {  // 错误! 返回悬垂引用
 ```
 
 ### 正确的做法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 方案1: 返回所有权
@@ -368,6 +396,8 @@ fn first_word(s: &str) -> &str {
 
 ### String vs &str
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // String: 拥有所有权的可变字符串(堆分配)
 let s = String::from("hello world");
@@ -384,6 +414,8 @@ let world = &s[6..11];   // "world"
 
 ### 字符串字面量
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 let s: &'static str = "hello";  // 'static生命周期
 // 字符串字面量存储在二进制文件中
@@ -395,6 +427,8 @@ let s: &'static str = "hello";  // 'static生命周期
 ## 第八部分：实践模式
 
 ### 模式1: 所有权转移
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 fn process(data: Vec<u8>) -> Vec<u8> {

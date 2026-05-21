@@ -123,6 +123,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 项目背景
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +137,8 @@
 5. **国际对标缺口**: 与 RustBelt、Aeneas 等权威成果的对接不足
 
 ### 1.2 当前完成度评估
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +154,8 @@
 | **反例系统** | 65% | 100% | 35% |
 
 ### 1.3 核心结论
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +170,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 文档体系结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -207,6 +215,8 @@ research_notes/
 ```
 
 ### 2.2 形式化论证覆盖度评估
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +271,8 @@ research_notes/
 
 ### 2.3 思维表征覆盖度评估
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 2.3.1 思维导图覆盖
 
 | 领域 | 全局导图 | 概念导图 | 证明导图 | 缺口 |
@@ -296,6 +308,8 @@ research_notes/
 
 ### 2.4 论证缺口详细识别
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 2.4.1 定义层缺口 (D1/D2)
 
 | 缺口ID | 描述 | 优先级 | 状态 |
@@ -327,6 +341,8 @@ research_notes/
 
 ### 3.1 RustBelt 对标
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **RustBelt** (MPI-SWS, POPL 2018) 是基于 Iris 分离逻辑的 Coq 框架，提供 Rust 核心类型的机器可检查安全性证明。
 
 | 特性 | RustBelt | 本研究笔记 | 缺口 |
@@ -347,6 +363,8 @@ research_notes/
 
 ### 3.2 Aeneas 对标
 
+> **[来源: Wikipedia - Type System]**
+
 **Aeneas** (Inria, ICFP 2022) 将 Rust 翻译成 Lean/Coq/F*，通过函数式翻译简化验证。
 
 | 特性 | Aeneas | 本研究笔记 | 缺口 |
@@ -366,6 +384,8 @@ research_notes/
 
 ### 3.3 其他验证工具对标
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 工具 | 机构 | 方法 | 与本体系关系 |
 | :--- | :--- | :--- | :--- |
 | **Kani** | AWS | Model Checking | 可验证 unsafe 代码 |
@@ -379,6 +399,8 @@ research_notes/
 ## 四、缺口分类与优先级
 
 ### 4.1 缺口四维分类体系
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -406,6 +428,8 @@ research_notes/
 
 ### 4.2 优先级矩阵
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 缺口 | 影响范围 | 难度 | 优先级 | 预计工时 |
 | :--- | :--- | :--- | :--- | :--- |
 | L3机器证明 (T-OW2) | 核心定理 | 高 | P0 | 80h |
@@ -424,6 +448,8 @@ research_notes/
 ## 五、100%完成路线图
 
 ### 5.1 阶段规划总览
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 Phase 1 (月1-2): 基础补全阶段
@@ -448,6 +474,8 @@ Phase 4 (持续): 维护与扩展
 ```
 
 ### 5.2 详细任务分解
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### Phase 1: 基础补全阶段 (Week 1-8)
 
@@ -527,6 +555,8 @@ Phase 4 (持续): 维护与扩展
 ## 六、思维表征完善计划
 
 ### 6.1 思维导图体系
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 6.1.1 全局思维导图
 

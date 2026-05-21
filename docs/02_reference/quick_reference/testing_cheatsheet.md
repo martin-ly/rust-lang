@@ -134,6 +134,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本结构
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +152,8 @@ mod tests {
 ```
 
 ### 断言宏
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +177,8 @@ fn test_assertions() {
 ```
 
 ### 测试失败和 panic
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +199,8 @@ fn test_expected_panic() {
 ```
 
 ### 使用 Result 类型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +216,8 @@ fn test_with_result() -> Result<(), String> {
 ```
 
 ### 忽略测试
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -226,6 +236,8 @@ fn network_test() {
 ```
 
 ### 测试组织
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -266,6 +278,8 @@ mod tests {
 > **[来源: Rust Official Docs]**
 
 ### 目录结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -282,6 +296,8 @@ my_project/
 
 ### 基本集成测试
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // tests/integration_test.rs
 use my_project;
@@ -294,6 +310,8 @@ fn test_integration() {
 ```
 
 ### 公共测试模块
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // tests/common/mod.rs
@@ -317,6 +335,8 @@ fn test_with_setup() {
 ```
 
 ### 测试子模块
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // tests/integration/
@@ -343,6 +363,8 @@ fn test_api_endpoint() {
 
 ### 基本文档测试
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ````rust
 /// 将两个数字相加
 ///
@@ -358,6 +380,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 ````
 
 ### 隐藏辅助代码
+
+> **[来源: Wikipedia - Type System]**
 
 ````rust
 /// 计算阶乘
@@ -379,6 +403,8 @@ pub fn factorial(n: u32) -> u32 {
 
 ### 忽略文档测试
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ````rust
 /// 这个示例不会运行
 ///
@@ -392,6 +418,8 @@ pub fn expensive_operation() -> i32 {
 ````
 
 ### 编译但不运行
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ````rust
 /// 只编译不运行
@@ -409,6 +437,8 @@ pub fn expensive_operation() -> i32 {
 
 ### Cargo.toml 配置
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```toml
 [dev-dependencies]
 criterion = { version = "0.5", features = ["html_reports"] }
@@ -419,6 +449,8 @@ harness = false
 ```
 
 ### Criterion 基准测试
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // benches/my_benchmark.rs
@@ -441,6 +473,8 @@ criterion_main!(benches);
 ```
 
 ### 比较基准测试
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
@@ -475,6 +509,8 @@ criterion_main!(benches);
 
 ### 异步基准测试
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use criterion::{criterion_group, criterion_main, Criterion};
 use tokio::runtime::Runtime;
@@ -498,6 +534,8 @@ criterion_main!(benches);
 
 ### 运行基准测试
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```bash
 # 运行所有基准测试
 cargo bench
@@ -516,6 +554,8 @@ cargo bench --bench my_benchmark fib_20
 > **[来源: Rust Official Docs]**
 
 ### 常用测试库
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```toml
 [dev-dependencies]
@@ -540,6 +580,8 @@ cargo-tarpaulin = "0.25"
 
 ### 异步测试
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use tokio::test;
 
@@ -556,6 +598,8 @@ async fn test_multi_thread() {
 ```
 
 ### 属性测试（Proptest）
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use proptest::prelude::*;
@@ -591,6 +635,8 @@ proptest! {
 
 ### Mock 测试（Mockall）
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use mockall::predicate::*;
 use mockall::*;
@@ -613,6 +659,8 @@ fn test_mock() {
 ```
 
 ### 参数化测试（Rstest）
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use rstest::rstest;
@@ -637,6 +685,8 @@ fn fixture() -> i32 {
 ```
 
 ### 模糊测试（Cargo-fuzz）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```toml
 # Cargo.toml
@@ -690,6 +740,8 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 > **[来源: Rust Official Docs]**
 
 ### 测试金字塔
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```text
         /\

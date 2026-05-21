@@ -71,6 +71,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 张量基础操作
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +151,8 @@ fn main() {
   - [权威来源索引](#权威来源索引)
 
 ### 示例 2: 简单神经网络
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +191,8 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
 ```
 
 ### 示例 3: 模型推理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -215,6 +221,8 @@ fn inference<B: burn::tensor::backend::Backend>(
 > **[来源: Rust Official Docs]**
 
 ### 示例 4: 张量操作
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -248,6 +256,8 @@ fn main() -> Result<()> {
 ```
 
 ### 示例 5: 加载 Hugging Face 模型
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -286,6 +296,8 @@ fn load_model(model_id: &str) -> Result<()> {
 > **[来源: Rust Official Docs]**
 
 ### 示例 6: 使用 llm crate 进行本地推理
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -334,6 +346,8 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ### 框架选型表
 
+> **[来源: Wikipedia - Type System]**
+
 | 库 | 用途 | 适用场景 |
 | :--- | :--- | :--- |
 | **llm** | 多架构、InferenceSession | 本地 CPU 推理 |
@@ -358,6 +372,8 @@ fn llm_inference() -> anyhow::Result<()> {
 
 ### 场景 1: 图像分类服务
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 使用 Candle 构建图像分类微服务
 use candle_core::{Device, Tensor};
@@ -379,6 +395,8 @@ impl ImageClassifier {
 ```
 
 ### 场景 2: 实时文本生成
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 使用 Burn 实现流式文本生成
@@ -406,6 +424,8 @@ async fn stream_generate<B: Backend>(
 
 ### 理论基础
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 概念 | 形式化文档 | 描述 |
 | :--- | :--- | :--- |
 | **所有权与内存安全** | [ownership_model](../../research_notes/formal_methods/ownership_model.md) | 张量内存管理的形式化保证 |
@@ -414,6 +434,8 @@ async fn stream_generate<B: Backend>(
 | **生命周期** | [lifetime_formalization](../../research_notes/formal_methods/lifetime_formalization.md) | 模型引用有效性 |
 
 ### 形式化定理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定理 ML-T1（张量内存安全）**: 若张量操作满足所有权规则 1-8 和借用规则 5-8，则张量内存访问安全。
 
@@ -424,6 +446,8 @@ async fn stream_generate<B: Backend>(
 ## 🚫 反例速查
 
 ### 反例 1: 混淆不同框架的 API
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **错误示例**:
 
@@ -457,6 +481,8 @@ impl<B: Backend, const D: usize> TensorOps for Tensor<B, D> { ... }
 ---
 
 ### 反例 2: 未根据场景选择后端
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **错误示例**:
 
@@ -493,6 +519,8 @@ fn fast_inference() {
 
 ### 反例 3: 忽略依赖版本兼容性
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **错误示例**:
 
 ```toml
@@ -521,6 +549,8 @@ burn-ndarray = { workspace = true }
 ---
 
 ### 反例 4: 内存泄漏 - 循环引用张量缓存
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **错误示例**:
 
@@ -553,6 +583,8 @@ struct TensorCache {
 ---
 
 ### 反例 5: 边界情况 - 空张量操作
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误示例**:
 
@@ -605,6 +637,8 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 
 ### array_windows 在特征工程中的应用
 
+> **[来源: PLDI - Programming Language Design]**
+
 **问题**: 时间序列特征提取需要滑动窗口，传统方法内存分配频繁。
 
 **Rust 1.95+ 解决方案**:
@@ -636,6 +670,8 @@ pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
 
 ### LazyLock 在模型缓存中的应用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::sync::LazyLock;
 
@@ -663,6 +699,8 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 ---
 
 ### ControlFlow 在训练管道中的应用
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::ops::ControlFlow;

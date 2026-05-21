@@ -29,6 +29,8 @@
 **Polonius** 是 Rust 编译器 `rustc` 的下一代 borrow checker（借用检查器）核心算法。它得名于莎士比亚《哈姆雷特》中的角色波洛涅斯（Polonius），象征其对程序中"借用关系"的精细洞察。
 
 ### 历史背景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -46,6 +48,8 @@ timeline
 ```
 
 ### 核心定位
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -64,6 +68,8 @@ timeline
 > **[来源: Rust Official Docs]**
 
 ### 2.1 NLL 的局限性
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +91,8 @@ fn nll_limitation() {
 ```
 
 ### 2.2 Polonius 的核心改进
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

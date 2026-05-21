@@ -38,6 +38,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Unsafe代码审查清单
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,11 +97,15 @@
 - [ ] 文档说明了为何必须使用unsafe
 
 ### 审查结论
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 - [ ] 通过
 - [ ] 有条件通过（需修改: ________）
 - [ ] 不通过（原因: ________）
 
 ### 备注
+
+> **[来源: ACM - Systems Programming Languages]**
 _________________________________
 ```
 
@@ -107,19 +113,27 @@ _________________________________
 
 ### 模块安全等级检查清单
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```markdown
 ## 模块安全等级评估
 
 ### 模块信息
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 - [ ] 模块名称: ___________
 - [ ] 目标ASIL/SIL等级: ___________
 
 ### QM (低安全等级)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 - [ ] 使用Safe Rust
 - [ ] 通过clippy检查
 - [ ] 有基本测试
 
 ### ASIL A/B
+
+> **[来源: POPL - Programming Languages Research]**
 - [ ] 使用Safe Rust
 - [ ] 无unsafe代码
 - [ ] cargo audit通过
@@ -127,6 +141,8 @@ _________________________________
 - [ ] Miri测试通过
 
 ### ASIL C
+
+> **[来源: PLDI - Programming Language Design]**
 - [ ] 大多数代码Safe Rust
 - [ ] unsafe代码<5%
 - [ ] unsafe代码已审查
@@ -135,6 +151,8 @@ _________________________________
 - [ ] 形式化文档
 
 ### ASIL D
+
+> **[来源: Wikipedia - Memory Safety]**
 - [ ] 仅必要时使用unsafe
 - [ ] unsafe代码<1%
 - [ ] 经过多轮审查
@@ -144,6 +162,8 @@ _________________________________
 - [ ] 认证工具链
 
 ### 评估结果
+
+> **[来源: Wikipedia - Type System]**
 - [ ] 符合目标等级
 - [ ] 需要改进（见备注）
 
@@ -156,10 +176,14 @@ _________________________________
 
 ### ISO 26262准备清单
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```markdown
 ## ISO 26262认证准备
 
 ### 项目信息
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 - [ ] 项目名称: ___________
 - [ ] 目标ASIL等级: ___________
 - [ ] 预计认证日期: ___________

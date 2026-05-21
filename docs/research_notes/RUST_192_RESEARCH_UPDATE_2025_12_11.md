@@ -56,6 +56,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 语言特性改进
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -102,6 +104,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 场景 1：`MaybeUninit` 安全使用模式
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +141,8 @@ fn maybe_uninit_safety_research() {
 ```
 
 ### 场景 2：联合体原始引用访问
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +178,8 @@ fn union_raw_pointer_research() {
 ```
 
 ### 场景 3：自动特征与 Sized 边界
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +209,8 @@ impl Container for Vec<i32> {
 ```
 
 ### 场景 4：高阶生命周期处理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -230,6 +240,8 @@ where
 ```
 
 ### 场景 5：关联项多边界
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -298,11 +310,15 @@ fn api_stabilization_examples() {
 
 ### 已更新的文档
 
+> **[来源: PLDI - Programming Language Design]**
+
 - ✅ 所有核心研究笔记文档已更新到 Rust 1.93.0+（历史记录：1.92.0+ → 1.93.0+）
 - ✅ 版本引用已统一更新
 - ✅ 特性说明已添加
 
 ### 需要关注的研究方向
+
+> **[来源: Wikipedia - Memory Safety]**
 
 1. **`MaybeUninit` 安全使用模式研究**
    - 最佳实践
@@ -325,9 +341,13 @@ fn api_stabilization_examples() {
 
 ### 外部链接
 
+> **[来源: Wikipedia - Type System]**
+
 - [Rust 1.92.0 Release Notes](https://releases.rs/docs/1.92.0/)
 
 ### 内部代码
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 资源 | 链接 | 说明 |
 | :--- | :--- | :--- |

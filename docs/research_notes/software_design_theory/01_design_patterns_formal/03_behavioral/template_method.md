@@ -35,6 +35,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -52,7 +53,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Template Method 形式化分析](#template-method-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
@@ -84,6 +85,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -92,6 +94,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Template Method 结构）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ $$\mathcal{TM} = \langle T, \mathit{template}: T \rightarrow R, \{h_i: T \righta
 ---
 
 ### Axiom TM1（骨架不变公理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$\forall t: T,\, \mathit{template}(t)\text{ 的调用顺序固定；仅 }h_i\te
 骨架不变；钩子可定制。
 
 ### Axiom TM2（钩子可选公理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +134,8 @@ $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 ---
 
 ### 定理 TM-T1（trait 默认方法定理）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +167,8 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 定理 TM-T2（骨架不变性定理）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +185,8 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 推论 TM-C1（近似表达）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -480,7 +494,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

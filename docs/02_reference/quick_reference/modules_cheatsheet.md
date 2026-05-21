@@ -105,6 +105,8 @@ Crate (包)
 > **[来源: Rust Official Docs]**
 
 ### 内联模块
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +129,8 @@ fn main() {
 ```
 
 ### 文件模块
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +155,8 @@ fn private_function() {
 ```
 
 ### 目录模块
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +192,8 @@ pub fn sub_function() {
 > **[来源: Rust Official Docs]**
 
 ### pub 关键字
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +211,8 @@ mod my_module {
 ```
 
 ### 受限可见性
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +233,8 @@ mod my_module {
 ```
 
 ### 结构体可见性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +265,8 @@ mod my_module {
 
 ### 基本用法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 导入模块
 use std::collections::HashMap;
@@ -262,6 +276,8 @@ let map = HashMap::new();
 ```
 
 ### 导入项
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 导入函数
@@ -279,6 +295,8 @@ use std::collections::*;
 ```
 
 ### 重命名
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 使用 as 重命名

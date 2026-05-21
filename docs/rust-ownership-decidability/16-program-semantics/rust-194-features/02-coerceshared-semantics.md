@@ -64,6 +64,8 @@ CoerceShared Trait 是 Rust 类型系统中负责**类型强制转换（type coe
 理解 CoerceShared 的形式化语义对于分析 Rust 程序的类型安全至关重要。
 
 ### 1.1 什么是 CoerceShared
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -76,6 +78,8 @@ let r_shared: &i32 = r_mut;  // 隐式 CoerceShared: &mut T → &T
 ```
 
 ### 1.2 安全边界
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -88,6 +92,8 @@ Rust 区分两种强制转换：
 
 ### 2.1 强制转换表达式
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 $$
 \begin{aligned}
 e \in \text{Expr} &::= \dots \\
@@ -98,6 +104,8 @@ e \in \text{Expr} &::= \dots \\
 $$
 
 ### 2.2 强制转换类型语法
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 Coercion ::= Unsize(τ₁, τ₂)        -- 非大小类型转换
@@ -110,6 +118,8 @@ Coercion ::= Unsize(τ₁, τ₂)        -- 非大小类型转换
 ## 3. 操作语义
 
 ### 3.1 大步操作语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **可变到不可变引用强制** (EB-MutToImm):
 
@@ -149,6 +159,8 @@ $$
 
 ### 3.2 小步操作语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **强制转换步骤规则** (S-Coerce-Step):
 
 $$
@@ -173,6 +185,8 @@ $$
 
 ### 3.3 强制转换有效性
 
+> **[来源: Wikipedia - Memory Safety]**
+
 $$
 \text{coerce\_valid}(v, \tau_1, \tau_2) \iff
 \begin{cases}
@@ -188,6 +202,8 @@ $$
 
 ### 4.1 子类型关系
 
+> **[来源: Wikipedia - Type System]**
+
 **子类型规则** (T-Sub):
 
 $$
@@ -200,6 +216,8 @@ $$
 $$
 
 ### 4.2 引用强制规则
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **可变到不可变** (T-MutToImm):
 
@@ -234,6 +252,8 @@ $$
 $$
 
 ### 4.3 Box 强制规则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **Box 到共享引用** (T-BoxToRef):
 

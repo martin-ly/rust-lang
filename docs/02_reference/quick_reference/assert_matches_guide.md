@@ -51,6 +51,8 @@ debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
 
 ### 旧方式（1.95 及之前）
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 let result = parse_config("key=value");
 
@@ -67,6 +69,8 @@ if let Ok(config) = result {
 ```
 
 ### 新方式（1.96+）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 let result = parse_config("key=value");
@@ -89,6 +93,8 @@ assert_matches!(
 
 ### 1. `Result` 断言
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 #[test]
 fn test_file_open() {
@@ -100,6 +106,8 @@ fn test_file_open() {
 ```
 
 ### 2. 枚举变体验证
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 enum State {

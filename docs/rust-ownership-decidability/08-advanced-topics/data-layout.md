@@ -58,6 +58,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是 Data Layout
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -79,6 +81,8 @@ struct Example {
 ```
 
 ### 1.2 基本类型的布局
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 类型 | 大小 | 对齐 | 说明 |
 |-----|------|------|------|
@@ -105,6 +109,8 @@ assert_eq!(mem::align_of::<u32>(), 4);
 ## 2. 对齐 (Alignment)
 
 ### 2.1 对齐规则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 类型的对齐值必须是**2的幂**，表示该类型的实例必须存储在地址为该值的倍数的内存位置。
 

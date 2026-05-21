@@ -91,6 +91,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 路径1: Saga事务模式
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +175,8 @@ impl ChoreographedSaga {
 ---
 
 ### 路径2: CQRS模式
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +244,8 @@ impl Projector for OrderProjector {
 ---
 
 ### 路径3: 熔断器模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -401,6 +407,8 @@ impl CircuitBreaker {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

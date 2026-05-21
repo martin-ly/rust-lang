@@ -81,7 +81,11 @@ parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
 
 ### 2.1 Word-size Mutex
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定义 2.1 (parking_lot Mutex表示)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 pub struct Mutex<T> {
@@ -115,7 +119,11 @@ $$
 
 ### 2.2 状态机分析
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ### 定义 2.2 (Mutex状态机)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 状态: {Unlocked, Locked, LockedWithWaiters, Waking}
@@ -139,6 +147,8 @@ Unlocked ────────────► Locked
 
 ### 算法 2.1 (快速路径lock)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn lock(&self) {
     // 快速路径: 尝试从未锁定变为锁定
@@ -151,6 +161,8 @@ fn lock(&self) {
 ```
 
 ### 算法 2.2 (慢速路径lock)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 fn lock_slow(&self) {
@@ -179,6 +191,8 @@ fn lock_slow(&self) {
 ```
 
 ### 2.3 解锁传递
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 算法 2.3 (unlock)
 

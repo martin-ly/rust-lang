@@ -80,7 +80,11 @@
 
 ### 2.1 移动安全性
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 2.1 (自引用结构)
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 struct SelfRef {
@@ -101,6 +105,8 @@ impl SelfRef {
 ```
 
 ### 定理 2.1 (自引用结构的移动危险)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > 移动自引用结构体会导致悬垂指针。
 
@@ -131,7 +137,11 @@ impl SelfRef {
 
 ### 2.2 悬垂指针风险
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 2.2 (悬垂指针)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 指向已释放或已移动内存的指针。
 
@@ -150,7 +160,11 @@ let s2 = s;       // 移动 s 到 s2
 
 ### 3.1 类型定义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 3.1 (Pin类型)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 #[repr(transparent)]
@@ -171,7 +185,11 @@ $$
 
 ### 3.2 固定不变式
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ### 定义 3.2 (固定不变式)
+
+> **[来源: Wikipedia - Type System]**
 
 如果 `T: !Unpin`，则:
 

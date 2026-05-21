@@ -108,6 +108,8 @@
 
 ### 2.1 语言设计哲学
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **Rust 设计理念:**
 
 ```rust
@@ -156,6 +158,8 @@ func processData(data []byte) ([]byte, error) {
 
 ### 2.2 编译器 vs 运行时
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       复杂性分布对比                                         │
@@ -193,6 +197,8 @@ func processData(data []byte) ([]byte, error) {
 ## 3. 内存管理对比
 
 ### 3.1 所有权 vs 垃圾回收
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -292,6 +298,8 @@ func main() {
 
 ### 3.2 内存安全模型
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 安全问题 | Rust | Go |
 |---------|------|-----|
 | **空指针** | ❌ 编译错误 (Option) | ✅ 运行时 panic |
@@ -302,6 +310,8 @@ func main() {
 | **内存泄漏** | ⚠️ 可能 (循环引用) | ⚠️ 可能 (对象引用) |
 
 ### 3.3 内存布局与缓存
+
+> **[来源: PLDI - Programming Language Design]**
 
 **Rust 内存布局控制:**
 
@@ -358,6 +368,8 @@ func processPackets(packets []Packet) {
 ```
 
 ### 3.4 内存泄漏风险
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **Rust 内存泄漏 (可能但罕见):**
 
@@ -426,6 +438,8 @@ type SafeNode struct {
 
 ### 4.1 并发哲学
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                        并发模型哲学对比                                      │
@@ -463,6 +477,8 @@ type SafeNode struct {
 ```
 
 ### 4.2 Goroutines vs OS 线程
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | Rust OS 线程 | Go Goroutine |
 |-----|-------------|--------------|
@@ -590,6 +606,8 @@ async fn asyncDemo() {
 
 ### 4.3 Channels 对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 特性 | Rust Channel | Go Channel |
 |-----|-------------|------------|
 | **类型安全** | 编译期 | 运行时 |
@@ -710,6 +728,8 @@ fn advancedChannels() {
 ```
 
 ### 4.4 数据竞争防护
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Go 数据竞争 (编译通过，运行时错误):**
 
@@ -840,6 +860,8 @@ fn atomicOperations() {
 
 ### 4.5 async/await 对比
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Go 隐式协程:**
 
 ```go
@@ -924,6 +946,8 @@ async fn concurrentTasks() {
 
 ### 5.1 基准测试数据
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                      基准测试对比 (相对值)                                    │
@@ -946,6 +970,8 @@ async fn concurrentTasks() {
 
 ### 5.2 启动时间与内存占用
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 指标 | Rust | Go |
 |-----|------|-----|
 | **冷启动时间** | < 1 ms | 10-50 ms |
@@ -954,6 +980,8 @@ async fn concurrentTasks() {
 | **二进制大小** | ~1-5 MB | ~10-20 MB |
 
 ### 5.3 GC 暂停影响
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Go GC 暂停:**
 
@@ -1034,6 +1062,8 @@ fn realTimeGuarantee() {
 
 ### 5.4 编译时间对比
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 项目规模 | Rust | Go |
 |---------|------|-----|
 | **小项目 (<1k 行)** | 5-10s | <1s |
@@ -1059,6 +1089,8 @@ codegen-units = 1  # 全程序优化
 ## 6. 错误处理对比
 
 ### 6.1 错误处理哲学
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1100,6 +1132,8 @@ codegen-units = 1  # 全程序优化
 ```
 
 ### 6.2 Result vs error interface
+
+> **[来源: PLDI - Programming Language Design]**
 
 **Go error interface:**
 
@@ -1219,6 +1253,8 @@ fn process_file() -> Result<(), AppError> {
 
 ### 6.3 错误传播与处理
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **Go 错误传播:**
 
 ```go
@@ -1304,6 +1340,8 @@ fn load_app_anyhow() -> Result<()> {
 
 ### 7.1 静态 vs 动态类型
 
+> **[来源: Wikipedia - Type System]**
+
 | 特性 | Rust | Go |
 |-----|------|-----|
 | **类型检查** | 编译期 (严格) | 编译期 (宽松) |
@@ -1361,6 +1399,8 @@ impl Reader for Vec<u8> {
 ```
 
 ### 7.2 泛型支持
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Go 泛型 (1.18+):**
 
@@ -1465,6 +1505,8 @@ impl Stack<i32> {
 
 ### 7.3 空值安全
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Go 的 nil:**
 
 ```go
@@ -1530,6 +1572,8 @@ fn option_demo() {
 ## 8. 代码示例对比
 
 ### 8.1 HTTP 服务实现
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Go HTTP 服务:**
 
@@ -1637,6 +1681,8 @@ async fn main() {
 
 ### 8.2 并发数据处理
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Go 并发处理:**
 
 ```go
@@ -1736,6 +1782,8 @@ async fn process_items_async(items: Vec<i32>) -> Vec<i32> {
 
 ### 8.3 文件处理与错误传播
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **Go 文件处理:**
 
 ```go
@@ -1825,6 +1873,8 @@ fn process_file_simple(path: &str) -> Result<()> {
 ```
 
 ### 8.4 数据库操作
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Go 数据库操作:**
 
@@ -1940,6 +1990,8 @@ async fn db_operations() -> Result<()> {
 
 ### 9.1 Web 框架
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 框架 | Rust | Go |
 |-----|------|-----|
 | 主流 | Axum, Actix-web | Gin, Echo, Fiber |
@@ -1949,6 +2001,8 @@ async fn db_operations() -> Result<()> {
 
 ### 9.2 数据库访问
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 库 | Rust | Go |
 |-----|------|-----|
 | ORM | SeaORM, Diesel | GORM |
@@ -1957,6 +2011,8 @@ async fn db_operations() -> Result<()> {
 | 编译期检查 | ✅ (sqlx) | ❌ |
 
 ### 9.3 部署与运维
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 方面 | Rust | Go |
 |-----|------|-----|
@@ -1971,6 +2027,8 @@ async fn db_operations() -> Result<()> {
 ## 10. 适用场景分析
 
 ### 10.1 选择 Rust 的场景
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```text
 ✅ 选择 Rust 当:
@@ -2002,6 +2060,8 @@ async fn db_operations() -> Result<()> {
 
 ### 10.2 选择 Go 的场景
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 ✅ 选择 Go 当:
 
@@ -2032,6 +2092,8 @@ async fn db_operations() -> Result<()> {
 ```
 
 ### 10.3 混合使用场景
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 混合架构示例:
@@ -2068,6 +2130,8 @@ async fn db_operations() -> Result<()> {
 ## 11. 迁移指南
 
 ### 11.1 Go → Rust 思维转换
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────┐

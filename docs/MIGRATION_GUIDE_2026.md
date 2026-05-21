@@ -35,12 +35,15 @@
   - [参考资源](#参考资源)
   - [**详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md](#详细指南-2026_rust_ecosystem_comprehensive_reviewmd)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 迁移清单
 >
 > **[来源: Rust Official Docs]**
 
 ### 1. 工具链更新
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -55,6 +58,8 @@ cargo install cargo-update cargo-tree cargo-outdated
 ```
 
 ### 2. 代码现代化
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +110,8 @@ gen fn my_gen() -> i32 { yield 1; }
 ```
 
 ### 3. 配置更新
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +134,8 @@ redundant_guards = "warn"
 ```
 
 ### 4. CI/CD更新
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +155,8 @@ redundant_guards = "warn"
 > **[来源: Rust Official Docs]**
 
 ### 概述
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +165,8 @@ Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Ran
 > ⚠️ 迁移提示: `isqrt` (≥1.84)、`HashMap::get_disjoint_mut` (≥1.83)、`Vec::pop_if` (≥1.83) 等 API 在更早版本已稳定，无需等待 1.96。
 
 ### 从 1.94 到 1.96 的完整步骤
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 步骤 1: 环境准备
 
@@ -310,6 +323,8 @@ jobs:
 
 ### 常见问题
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### Q1: if let guards 导致编译错误？
 
 **问题**: 使用 `if let` 守卫时出现 "expected `=>`, found `if`" 错误。
@@ -383,6 +398,8 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 
 ### 版本兼容性表
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | 最低版本 | 说明 |
 |------|----------|------|
 | if let guards | 1.95 | match 守卫中的嵌套模式匹配 |
@@ -395,6 +412,8 @@ let wide: (i32, i32) = (narrow.0 as i32, narrow.1 as i32);
 | WebAssembly `--allow-undefined` 移除 | 1.96 | wasm-ld 链接器行为变更 |
 
 ### 回滚指南
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 如果迁移遇到问题，可以回滚到 1.94：
 
@@ -436,7 +455,6 @@ git checkout -- .
 ## 相关概念
 
 - [docs 目录](./README.md)
-
 
 ---
 

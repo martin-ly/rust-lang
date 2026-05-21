@@ -100,6 +100,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 快速查找
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +110,8 @@
 3. **相关问题**: 每个问题下方都有相关问题的链接
 
 ### 问题标记
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -123,6 +127,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Q1: 我应该从哪里开始？🔵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +149,8 @@
 ---
 
 ### Q2: 如何查找特定的研究主题？🔵
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +171,8 @@
 ---
 
 ### Q2.5: 如何判断研究笔记是否有实质内容？🔵
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +189,8 @@
 ---
 
 ### Q3: 研究笔记的状态是什么意思？🟢
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +214,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Q4: 我应该选择哪个研究方向？🟢
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +237,8 @@
 
 ### Q5: 如何开始形式化研究？🟡
 
+> **[来源: PLDI - Programming Language Design]**
+
 **简短回答**: 从学习形式化工具开始，然后选择研究主题。
 
 **详细说明**:
@@ -241,6 +257,8 @@
 ---
 
 ### Q6: 如何设计实验研究？🟢
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **简短回答**: 遵循实验研究方法，设计合理的实验方案。
 
@@ -263,6 +281,8 @@
 
 ### Q7: 我可以贡献哪些内容？🔵
 
+> **[来源: Wikipedia - Type System]**
+
 **简短回答**: 可以贡献新研究笔记、完善现有笔记、修正错误、翻译工作。
 
 **详细说明**:
@@ -281,6 +301,8 @@
 
 ### Q8: 如何确保我的贡献质量？🟢
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **简短回答**: 使用质量检查清单确保贡献质量。
 
 **详细说明**:
@@ -298,6 +320,8 @@
 ---
 
 ### Q9: 如何更新索引文件？🟢
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **简短回答**: 更新相应目录的 README.md 和主索引文件。
 

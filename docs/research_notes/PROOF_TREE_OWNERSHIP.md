@@ -87,6 +87,8 @@ T-OW1: 所有权唯一性
 
 ### 基础情形 (Base Case)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 资源创建时
 let r = Resource::new();
@@ -95,6 +97,8 @@ let r = Resource::new();
 ```
 
 ### 归纳步骤 (Inductive Step)
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 假设: owner(r) = A

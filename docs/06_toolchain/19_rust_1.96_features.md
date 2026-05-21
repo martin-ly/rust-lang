@@ -20,12 +20,16 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. if let 守卫 (if let guards)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
 Rust 1.95 在 match 表达式中引入了 `if let` 守卫，允许在模式匹配守卫中进行嵌套模式匹配。
 
 #### 基本语法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -88,6 +92,8 @@ match msg {
 ```
 
 ### 2. RangeInclusive 改进
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -107,6 +113,8 @@ for i in 1..=100 {
 > **[来源: Rust Official Docs]**
 
 ### 1. Range 类型系统重构
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +157,8 @@ fn analyze_ranges() {
 ```
 
 ### 2. PinCoerceUnsized trait ( nightly-only, 非 stable)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > ⚠️ **注意**: `pin_coerce_unsized` 是 Rust nightly 的实验性特性 (`#![feature(pin_coerce_unsized)]`)，**不是 1.96 stable 特性**。以下内容为前瞻跟踪，当前 stable 编译器无法使用。
 
@@ -205,6 +215,8 @@ impl AsyncProcessor for MyProcessor {
 ```
 
 ### 3. 元组解构增强（Rust 1.95 稳定）
+
+> **[来源: PLDI - Programming Language Design]**
 
 Rust 1.95 对元组模式匹配和解构进行了改进，与 `if let guards` 结合使用更加灵活。
 

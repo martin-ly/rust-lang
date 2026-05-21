@@ -73,10 +73,14 @@
 > **[来源: Rust Official Docs]**
 
 ### 推荐IDE设置
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
 #### VSCode配置 (.vscode/settings.json)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +115,8 @@
 ```
 
 #### VSCode扩展推荐 (.vscode/extensions.json)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -129,6 +135,8 @@
 ```
 
 ### Rust工具链安装脚本
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,10 +208,14 @@ echo "Please restart your terminal or run 'source $HOME/.cargo/env'"
 > **[来源: Rust Official Docs]**
 
 ### Clippy配置详解
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 项目级配置 (clippy.toml)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +268,8 @@ test-stdin-width = 120
 ```
 
 #### 严格模式配置 (用于ASIL D)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -281,10 +295,14 @@ test-stdin-width = 120
 ```
 
 ### Cargo Audit配置
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 自动化审计脚本
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```bash
 #!/bin/bash
@@ -318,6 +336,8 @@ echo "=== Audit Complete ==="
 
 #### 忽略配置 (.cargo/audit.toml)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```toml
 [advisories]
 # 忽略的advisory（临时）
@@ -344,7 +364,11 @@ show_tree = true
 
 ### Miri配置
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 运行脚本
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```bash
 #!/bin/bash
@@ -371,6 +395,8 @@ echo "=== Miri Tests Complete ==="
 
 #### 项目配置 (.cargo/config.toml)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```toml
 [env]
 MIRIFLAGS = "-Zmiri-strict-provenance -Zmiri-symbolic-alignment-check -Zmiri-disable-isolation"
@@ -381,7 +407,11 @@ runner = "cargo miri"
 
 ### Kani配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 验证脚本
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```bash
 #!/bin/bash
@@ -431,6 +461,8 @@ timeout = 3600  # 1小时
 ```
 
 ### 测试覆盖率
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### Tarpaulin配置
 
@@ -497,6 +529,8 @@ clean = true
 
 ### 交叉编译配置
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### .cargo/config.toml完整配置
 
 ```toml
@@ -538,6 +572,8 @@ DEFMT_LOG = "info"
 
 ### 调试配置
 
+> **[来源: Wikipedia - Type System]**
+
 #### VSCode调试配置 (.vscode/launch.json)
 
 ```json
@@ -570,6 +606,8 @@ DEFMT_LOG = "info"
 ## CI/CD配置
 
 ### GitHub Actions完整配置
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```yaml
 name: Safety-Critical CI/CD

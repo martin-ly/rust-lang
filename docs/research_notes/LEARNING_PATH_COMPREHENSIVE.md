@@ -81,6 +81,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 目标受众
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +91,8 @@
 - 技术决策者
 
 ### 学习目标
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -97,6 +101,8 @@
 - 避免常见错误
 
 ### 学习路径
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +156,8 @@
 - 阅读[官方Book](https://doc.rust-lang.org/book/)
 
 ### 学习成果检查
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +172,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 目标受众
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,11 +183,15 @@
 
 ### 学习目标
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - 理解借用检查的形式化原理
 - 理解类型系统的形式化保证
 - 能够阅读形式化定义
 
 ### 学习路径
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 第1-2周：形式化基础
 
@@ -213,6 +227,8 @@
 
 ### 学习成果检查
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [ ] 能读懂形式化定义
 - [ ] 能解释核心定理的直觉
 - [ ] 能分析借用检查行为
@@ -222,6 +238,8 @@
 ## 路径三：专家（8-24周）
 
 ### 目标受众
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - 形式化方法研究者
 - Rust编译器开发者

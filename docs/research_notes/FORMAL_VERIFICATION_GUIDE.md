@@ -110,6 +110,8 @@
 **Coq 证明骨架**：所有权唯一性（T-OW2）的 Coq 定理骨架已创建，见 [coq_skeleton/OWNERSHIP_UNIQUENESS.v](./coq_skeleton/OWNERSHIP_UNIQUENESS.v)、[COQ_ISABELLE_PROOF_SCAFFOLDING](./COQ_ISABELLE_PROOF_SCAFFOLDING.md)。
 
 ### 验证目标
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +149,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Coq
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +192,8 @@ Definition move_rule (s: OwnershipState) : OwnershipState :=
 ```
 
 ### Isabelle/HOL
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -226,6 +232,8 @@ end
 > **[来源: Rust Official Docs]**
 
 ### 1. 环境准备
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +250,8 @@ end
 - [ ] 配置开发环境
 
 ### 2. 理论准备
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -255,6 +265,8 @@ end
 - [ ] Pin 与自引用类型的形式化定义（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
 
 ### 3. 验证框架设计
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -276,6 +288,8 @@ formal_verification/
 ## 🔬 验证实施步骤 {#-验证实施步骤}
 
 ### 步骤 1: 所有权模型验证
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **目标**：验证所有权规则的正确性
 
@@ -316,6 +330,8 @@ Qed.
 - [ ] 内存安全保证
 
 ### 步骤 2: 借用检查器验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **目标**：验证借用规则的正确性
 
@@ -360,6 +376,8 @@ Qed.
 
 ### 步骤 3: 生命周期验证
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **目标**：验证生命周期规则的正确性
 
 **Coq 实现框架**：
@@ -391,6 +409,8 @@ Qed.
 - [ ] 生命周期约束
 
 ### 步骤 4: 类型系统验证
+
+> **[来源: POPL - Programming Languages Research]**
 
 **目标**：验证类型系统的正确性
 
@@ -428,6 +448,8 @@ Admitted.
 
 ### 步骤 5: 异步状态机验证
 
+> **[来源: Wikipedia - Type System]**
+
 **目标**：验证 Future 状态一致性、并发安全与进度保证（参见 [async_state_machine.md](./formal_methods/async_state_machine.md)）
 
 **Coq 实现框架**：
@@ -459,6 +481,8 @@ Definition ValidTransition (s s' : FutureState) : Prop :=
 - [ ] 进度保证（定理 6.3）
 
 ### 步骤 6: Pin 与自引用验证
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **目标**：验证 Pin 保证、自引用类型安全与 Pin 投影安全（参见 [pin_self_referential.md](./formal_methods/pin_self_referential.md)）
 

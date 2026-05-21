@@ -60,6 +60,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题识别矩阵
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -72,6 +74,8 @@
 | **应用层** | 孤立示例 | 从理论到实际代码的映射链 | 理论与实践脱节 |
 
 ### 1.2 关键缺失详细分析
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -177,6 +181,8 @@ Theorem type_implies_ownership_safety :
 
 ### 2.1 结构性意见
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 意见 1: 建立统一的元理论框架
 
 **建议**: 创建 "Unified Metatheory Framework" 文档
@@ -226,6 +232,8 @@ Rust AST
 
 ### 2.2 技术性意见
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 意见 5: 证明工程化
 
 **问题**: 证明分散，难以复用
@@ -261,6 +269,8 @@ Rust AST
 ## 第三部分: 可持续推进计划
 
 ### 3.1 短期计划 (1-2周) - 框架补充
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 任务 1: 创建统一理论框架 (Priority: Critical)
 
@@ -336,6 +346,8 @@ Theorem ownership_as_typing_constraint :
 
 ### 3.2 中期计划 (3-4周) - 深度扩展
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 任务 4: 证明工程化 (Priority: Medium)
 
 **目标**: 系统化证明方法
@@ -399,6 +411,8 @@ Theorem ownership_as_typing_constraint :
 **预计工作量**: 1周
 
 ### 3.3 长期计划 (1-3个月) - 研究前沿
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 任务 7: 异步 Rust 形式化 (Priority: Low)
 

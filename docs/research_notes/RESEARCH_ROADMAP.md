@@ -129,6 +129,8 @@
 **目标**: 建立 Rust 类型系统和内存安全的理论基础
 
 ### 1.1 类型系统基础
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +142,8 @@
 **预期成果**: 完整的类型系统形式化定义
 
 ### 1.2 Trait 系统
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +155,8 @@
 **预期成果**: Trait 系统的类型理论模型
 
 ### 1.3 型变理论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +168,8 @@
 **预期成果**: 型变规则的完整证明
 
 ### 1.4 类型理论完备性缺口（已完成）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +190,8 @@
 **目标**: 对 Rust 核心机制进行形式化建模和证明
 
 ### 2.1 所有权系统
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +203,8 @@
 **预期成果**: 所有权系统的形式化证明
 
 ### 2.2 借用检查器
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +216,8 @@
 **预期成果**: 借用检查器的正确性证明
 
 ### 2.3 异步系统
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +230,8 @@
 
 ### 2.4 生命周期系统
 
+> **[来源: Wikipedia - Type System]**
+
 - [x] [生命周期形式化](./formal_methods/lifetime_formalization.md) ✅ 100%
   - 生命周期语义
   - 生命周期推断算法
@@ -224,6 +240,8 @@
 **预期成果**: 生命周期系统的形式化定义
 
 ### 2.5 形式化方法完备性缺口
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - [x] [formal_methods 完备性缺口](./formal_methods/00_completeness_gaps.md) ✅ 100%
   - Phase 1–6 全部补全（RC/ARC/CELL/REFCELL/BOX、CHAN/MUTEX/RAW、UNSAFE、MATCH/FOR、MAYBEUNINIT/ATOMIC/UNION/TRANSMUTE、EXTERN/CVARIADIC/QUERY、DROP/DEREF/REPR/CONST_MUT_STATIC、SPAWN）

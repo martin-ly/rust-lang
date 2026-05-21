@@ -172,6 +172,8 @@ call_with_ref(closure);
 > **[来源: Rust Official Docs]**
 
 ### 输入输出相同生命周期
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +184,8 @@ fn identity<'a>(x: &'a str) -> &'a str {
 ```
 
 ### 返回与特定输入关联
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +196,8 @@ fn get_name<'a>(person: &'a Person) -> &'a str {
 ```
 
 ### 多个输入，返回其中一个
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -327,12 +333,16 @@ impl SelfReferential {
 
 ### 生命周期关系
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 'a: 'b  // 'a 至少和 'b 一样长（'a 包含 'b）
 T: 'a   // T 中所有引用至少存活 'a
 ```
 
 ### 常见生命周期
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 标注 | 含义 | 示例 |
 | :--- | :--- | :--- |

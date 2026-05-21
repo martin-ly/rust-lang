@@ -60,6 +60,8 @@
 
 ### Generic Const Expressions (generic_const_exprs)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **描述**: 允许在泛型参数中使用更复杂的常量表达式
 
 ```rust
@@ -103,6 +105,8 @@ where
 
 ### Async Closures
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **描述**: 原生支持异步闭包，无需 `async move` 包裹
 
 ```rust
@@ -144,6 +148,8 @@ async fn new_way() {
 ---
 
 ### Impl Trait in Associated Type
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **描述**: 在关联类型中使用 `impl Trait`
 
@@ -190,6 +196,8 @@ impl AsyncIterator for Counter {
 ---
 
 ### Type Alias Impl Trait (TAIT)
+
+> **[来源: POPL - Programming Languages Research]**
 
 **描述**: 在类型别名中使用 `impl Trait`
 

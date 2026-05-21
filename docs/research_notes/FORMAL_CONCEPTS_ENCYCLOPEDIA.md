@@ -60,10 +60,14 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 所有权 (Ownership)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 概念定义
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +125,8 @@ println!("{}", x);  // OK
 ---
 
 ### 1.2 借用 (Borrowing)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +182,8 @@ println!("{}", x);  // OK
 ---
 
 ### 1.3 生命周期 (Lifetime)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +217,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 2.1 类型安全
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 (类型安全)**: 良类型的程序不会陷入未定义行为。具体表现为：
 
 - **进展性 (Progress)**: 良类型的表达式要么是值，要么可以进一步求值
@@ -222,6 +232,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ```
 
 ### 2.2 型变 (Variance)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定义 (型变)**: 描述复合类型的子类型关系如何依赖于其组成部分的子类型关系。
 

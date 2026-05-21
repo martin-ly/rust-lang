@@ -47,6 +47,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 文件统计
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -60,6 +62,8 @@
 | **总计** | **~217** | **~1.5MB** | **~6.9KB** |
 
 ### 内容质量评估
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -88,6 +92,8 @@
 > **[来源: Rust Official Docs]**
 
 ### A类：归档占位文件 (6个) - 需清理或补充
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +107,8 @@
 | coq_skeleton/README.md | 0.46KB | 基础 | 扩展为完整指南 |
 
 ### B类：可扩展的矩阵/决策树 (12个)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +128,8 @@
 | VERIFICATION_TOOLS_MATRIX.md | 2.3KB | 5KB | P2 |
 
 ### C类：可扩展的思维导图 (15个)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +152,8 @@
 | DISTRIBUTED_CONCEPT_MINDMAP.md | 8.3KB | 10KB | P2 |
 
 ### D类：可扩展的教程 (5篇)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

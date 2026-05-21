@@ -55,6 +55,8 @@ libp2p 协议栈
 
 ### Multiaddr —— 统一的地址格式
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 libp2p 使用 **multiaddr** 统一描述网络地址：
 
 ```text
@@ -65,6 +67,8 @@ libp2p 使用 **multiaddr** 统一描述网络地址：
 
 ### PeerId —— 去中心化身份
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 PeerId = multihash(public_key)
 ```
@@ -72,6 +76,8 @@ PeerId = multihash(public_key)
 每个 libp2p 节点通过加密密钥对标识，无需中心化注册。
 
 ### 核心协议
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 协议 | 功能 | Rust crate |
 |:---|:---|:---|
@@ -106,6 +112,8 @@ PeerId = multihash(public_key)
 
 ### 基础节点（rust-libp2p）
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use libp2p::{
     identity, PeerId, Swarm, Transport,
@@ -138,6 +146,8 @@ fn create_node() -> Result<Swarm<Ping>, Box<dyn std::error::Error>> {
 ```
 
 ### GossipSub 发布/订阅
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use libp2p::gossipsub::{

@@ -39,6 +39,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权模型
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -58,6 +60,8 @@ Inductive transfer_ownership (v: variable) (o: Ownership) : Prop :=
 
 ### 借用规则
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```coq
 (* 借用有效性 *)
 Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
@@ -74,6 +78,8 @@ Inductive valid_borrow (r: reference) (ctx: context) : Prop :=
 ## Isabelle 脚手架
 
 ### 类型系统
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```isabelle
 theory Rust_Type_System
@@ -97,6 +103,8 @@ end
 ## 证明策略
 
 ### 所有权证明策略
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```coq
 Ltac prove_ownership :=

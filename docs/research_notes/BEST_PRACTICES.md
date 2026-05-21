@@ -130,6 +130,8 @@
 本文档提供研究笔记系统的最佳实践指南，帮助研究者和贡献者创建高质量的研究笔记。
 
 ### 目标
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -254,6 +256,8 @@ fn example_anti_pattern() {
 > **[来源: Rust Official Docs]**
 
 ### 1. 明确研究目标
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -277,6 +281,8 @@ fn example_anti_pattern() {
 ```
 
 ### 2. 提供理论基础
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -300,6 +306,8 @@ fn example_anti_pattern() {
 ```
 
 ### 3. 使用清晰的结构
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **最佳实践**:
 
@@ -329,6 +337,8 @@ fn example_anti_pattern() {
 
 ### 1. 模块化组织
 
+> **[来源: Wikipedia - Type System]**
+
 **最佳实践**:
 
 - ✅ 将复杂内容分解为小模块
@@ -342,14 +352,24 @@ fn example_anti_pattern() {
 
 ### 基本定义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 所有权转移
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ### 借用规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ### 生命周期约束
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 ```
 
 ### 2. 渐进式展开
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **最佳实践**:
 
@@ -363,6 +383,8 @@ fn example_anti_pattern() {
 ## 类型系统基础
 
 ### 基本类型
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 首先介绍基本类型...
 

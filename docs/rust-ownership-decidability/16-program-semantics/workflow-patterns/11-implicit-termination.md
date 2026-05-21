@@ -70,6 +70,8 @@
 当所有活跃路径都自然结束时，工作流被视为完成。
 
 ### 核心语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -93,6 +95,8 @@ $$
 
 ### 与显式终止的区别
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 特性 | 显式终止 | 隐式终止 |
 |------|----------|----------|
 | 终止点 | 明确定义 | 自然结束 |
@@ -104,6 +108,8 @@ $$
 ## 终止检测算法
 
 ### Dijkstra-Scholten 算法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Dijkstra-Scholten 算法是一种经典的分布式终止检测算法：
 
@@ -142,6 +148,8 @@ $$
 $$
 
 ### 分布式终止检测
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Chandy-Misra-Haas 算法：**
 

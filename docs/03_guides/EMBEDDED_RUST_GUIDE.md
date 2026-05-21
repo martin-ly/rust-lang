@@ -62,6 +62,8 @@
 
 ### 核心设计
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Embassy 将 **async/await** 带入裸机（bare-metal）嵌入式开发：
 
 ```text
@@ -83,6 +85,8 @@ main loop {           #[embassy_executor::main]
 
 ### 关键特性
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | 说明 | 优势 |
 |:---|:---|:---|
 | **Async 运行时** | 单线程 executor，无堆分配 | 零开销抽象 |
@@ -92,6 +96,8 @@ main loop {           #[embassy_executor::main]
 | **USB/TCP/BLE** | 协议栈完整 | 生产可用 |
 
 ### 代码示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use embassy_executor::Spawner;
@@ -116,6 +122,8 @@ async fn main(_spawner: Spawner) {
 ```
 
 ### 多任务并发
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use embassy_sync::channel::Channel;

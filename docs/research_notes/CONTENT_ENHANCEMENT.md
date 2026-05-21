@@ -63,6 +63,8 @@
 针对「不充分、无实质内容」缺口，采用**分层推进**策略：
 
 ### 层次定义
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -74,6 +76,8 @@
 | **L4 扩展** | 实战案例 + 变体 | 实际项目片段、实现变体、边界 | 变体表格、与 43 完全衔接 |
 
 ### 推进优先级（三阶段已完成 ✅） {#推进优先级三阶段已完成-}
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +99,8 @@
 ```
 
 ### 实质内容检查清单（完成度）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -107,6 +113,8 @@
 | **衔接** | ✅ | ✅ | ✅ | ✅ | ✅ |
 
 ### 实质内容自检表（逐文档核对）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -248,6 +256,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 补充相关概念
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **完善步骤**:
 

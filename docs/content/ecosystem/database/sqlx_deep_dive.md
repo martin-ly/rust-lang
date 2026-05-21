@@ -75,6 +75,8 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 - **数据库无关**: 支持 PostgreSQL、MySQL、SQLite
 
 ### 对比其他 ORM
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +116,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 编译时查询检查
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +153,8 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
 - 参数数量匹配
 
 ### 类型安全
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

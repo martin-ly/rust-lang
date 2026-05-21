@@ -55,6 +55,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Q1: 我们现有的C/C++项目可以迁移到Rust吗？
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +77,8 @@ Phase 4 (24月+): 完全迁移或保持混合架构
 ```
 
 ### Q2: Rust的学习曲线如何？团队需要多长时间才能上手？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -89,6 +93,8 @@ Phase 4 (24月+): 完全迁移或保持混合架构
 建议：投入20%工作时间学习，配合导师指导
 
 ### Q3: 认证工具链（Ferrocene）的成本是多少？
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +117,8 @@ ROI：通常2-3年通过减少bug和加速开发收回成本
 > **[来源: Rust Official Docs]**
 
 ### Q4: Rust能保证100%没有内存安全漏洞吗？
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +145,8 @@ unsafe fn unsafe_code(ptr: *mut u8) {
 统计数据：Rust代码的内存安全bug比C/C++少约95%
 
 ### Q5: 如何处理C库集成（FFI）？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +198,8 @@ impl Drop for SafeWrapper {
 ```
 
 ### Q6: 实时系统中Rust的延迟如何？
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +221,8 @@ impl Drop for SafeWrapper {
 > **[来源: Rust Official Docs]**
 
 ### Q7: 使用Rust能否达到ASIL D？
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,6 +247,8 @@ ASIL D要求:
 
 ### Q8: DO-178C认证中Rust的地位如何？
 
+> **[来源: PLDI - Programming Language Design]**
+
 **A:** 正在发展：
 
 - **当前状态**: AdaCore GNAT Pro for Rust开发中
@@ -245,6 +261,8 @@ ASIL D要求:
 预计2026-2027年有完整解决方案
 
 ### Q9: 认证证据包需要包含什么？
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **A:** 标准证据包内容：
 
@@ -282,6 +300,8 @@ evidence_package/
 
 ### Q10: 标准Rust编译器和Ferrocene有什么区别？
 
+> **[来源: Wikipedia - Type System]**
+
 **A:**
 
 | 特性 | rustc (标准) | Ferrocene |
@@ -296,6 +316,8 @@ evidence_package/
 建议：开发用rustc，发布用Ferrocene
 
 ### Q11: Miri报告UB但我看不出问题在哪里？
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **A:** 常见原因和解决：
 
@@ -327,6 +349,8 @@ unsafe {
 ```
 
 ### Q12: Kani证明超时怎么办？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **A:** 优化策略：
 
@@ -370,6 +394,8 @@ fn verify_with_loop() {
 ## 性能问题
 
 ### Q13: Rust二进制比C大，怎么优化？
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **A:** 优化策略：
 

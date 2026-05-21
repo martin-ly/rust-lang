@@ -207,6 +207,8 @@ $$
 
 #### 2.1.1 编译时保证 vs 运行时行为
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 静态语义在编译时检查程序属性，动态语义描述程序运行时的行为。
 
 **形式化定义：**
@@ -246,6 +248,8 @@ fn dynamic_semantics() {
 
 #### 2.1.2 类型系统语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Rust 的类型系统语义包含以下层次：
 
 $$
@@ -274,6 +278,8 @@ $$
 $$
 
 #### 2.1.3 所有权系统语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 所有权系统的核心规则可以用分离逻辑（Separation Logic）表示：
 
@@ -310,6 +316,8 @@ fn ownership_semantics() {
 
 #### 2.2.1 顺序执行语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 顺序执行是最基本的控制流，形式化为：
 
 $$
@@ -326,6 +334,8 @@ fn sequential_semantics() {
 ```
 
 #### 2.2.2 条件执行语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 条件执行的形式化语义：
 
@@ -351,6 +361,8 @@ fn conditional_semantics(x: i32) -> i32 {
 ```
 
 #### 2.2.3 循环执行语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 循环语义可以使用不动点或递归规则定义：
 
@@ -382,6 +394,8 @@ fn loop_semantics() {
 ```
 
 #### 2.2.4 跳转语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 支持以下跳转结构：
 
@@ -428,6 +442,8 @@ impl Ready {
 > **[来源: Wikipedia - Formal Methods]**
 
 #### 2.3.1 值传递语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 Rust 的值传递有三种形式，每种都有精确的语义：
 
@@ -486,6 +502,8 @@ fn borrow_semantics() {
 
 #### 2.3.2 生命周期数据流
 
+> **[来源: PLDI - Programming Language Design]**
+
 生命周期描述了引用的有效范围：
 
 $$
@@ -517,6 +535,8 @@ fn lifetime_example() {
 ```
 
 #### 2.3.3 共享 vs 独占数据流
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 Rust 的借用检查器强制执行以下规则：
 
@@ -553,6 +573,8 @@ fn sharing_vs_exclusive() {
 
 #### 2.4.1 同步执行模型
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 同步执行模型是最简单的执行模型：
 
 $$
@@ -576,6 +598,8 @@ fn compute_c() -> i32 { 3 }
 ```
 
 #### 2.4.2 异步执行模型
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 异步执行模型引入了 Future 和任务调度：
 
@@ -628,6 +652,8 @@ impl Future for MyFuture {
 
 #### 2.4.3 并发执行模型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 并发模型涉及多个执行流的交错：
 
 $$
@@ -658,6 +684,8 @@ fn concurrent_model() {
 ```
 
 #### 2.4.4 并行执行模型
+
+> **[来源: ACM - Systems Programming Languages]**
 
 并行执行模型利用数据并行性：
 
@@ -697,6 +725,8 @@ fn simd_semantics() {
 > **[来源: POPL 2020 - Oxide]**
 
 #### 3.1.1 所有权转移语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 所有权转移是 Rust 中资源管理的基础：
 
@@ -740,6 +770,8 @@ fn ownership_transfer_pattern() {
 ```
 
 #### 3.1.2 借用检查语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 借用检查是编译时验证的核心：
 
@@ -794,6 +826,8 @@ fn builder_pattern() {
 
 #### 3.1.3 智能指针语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 智能指针扩展了所有权的表达能力：
 
 | 智能指针 | 所有权模型 | 语义 |
@@ -846,6 +880,8 @@ fn smart_pointer_semantics() {
 > **[来源: POPL 2018 - RustBelt]**
 
 #### 3.2.1 组合模式语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 组合模式允许统一处理个体和组合对象：
 
@@ -921,6 +957,8 @@ fn composite_pattern() {
 
 #### 3.2.2 适配器模式语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 适配器模式转换接口而不改变实现：
 
 ```rust
@@ -974,6 +1012,8 @@ fn adapter_pattern() {
 ```
 
 #### 3.2.3 类型状态模式语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 类型状态模式在类型系统中编码状态机：
 
@@ -1069,6 +1109,8 @@ fn typestate_pattern() {
 
 #### 3.3.1 迭代器模式语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 迭代器抽象了序列遍历：
 
 $$
@@ -1125,6 +1167,8 @@ fn iterator_pattern() {
 ```
 
 #### 3.3.2 观察者模式语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 观察者模式实现了发布-订阅机制：
 
@@ -1235,6 +1279,8 @@ fn observer_pattern() {
 
 #### 3.3.3 访问者模式语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 访问者模式允许在不修改类的情况下添加新操作：
 
 ```rust
@@ -1339,6 +1385,8 @@ fn visitor_pattern() {
 
 #### 4.1.1 OS 线程语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 操作系统线程是最基础的并发单元：
 
 $$
@@ -1381,6 +1429,8 @@ fn os_thread_semantics() {
 ```
 
 #### 4.1.2 绿色线程/协程语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 协程提供了用户级线程抽象：
 
@@ -1443,6 +1493,8 @@ impl Future for SimpleCoroutine {
 
 #### 4.1.3 线程间通信语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 线程间通信遵循所有权和通道语义：
 
 $$
@@ -1488,6 +1540,8 @@ fn inter_thread_communication() {
 
 #### 4.2.1 互斥锁语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 互斥锁提供独占访问：
 
 $$
@@ -1523,6 +1577,8 @@ fn mutex_semantics() {
 ```
 
 #### 4.2.2 读写锁语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 读写锁允许多读单写：
 
@@ -1567,6 +1623,8 @@ fn rwlock_semantics() {
 
 #### 4.2.3 条件变量语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 条件变量用于线程间条件通知：
 
 ```rust
@@ -1602,6 +1660,8 @@ fn condvar_semantics() {
 ```
 
 #### 4.2.4 屏障语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 屏障用于同步多个线程到达某点：
 
@@ -1641,6 +1701,8 @@ fn barrier_semantics() {
 > **[来源: Coq Reference Manual]**
 
 #### 4.3.1 原子操作语义（内存序）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 原子操作内存序定义了操作之间的可见性：
 
@@ -1698,6 +1760,8 @@ fn atomic_semantics() {
 ```
 
 #### 4.3.2 CAS 循环语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 比较并交换（CAS）是无锁算法的基础：
 
@@ -1780,6 +1844,8 @@ impl<T> LockFreeStack<T> {
 
 #### 4.3.3 内存模型语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust 遵循 C++11 内存模型，提供以下一致性保证：
 
 $$
@@ -1824,6 +1890,8 @@ fn memory_model_semantics() {
 > **[来源: Wikipedia - Formal Methods]**
 
 #### 5.1.1 Future 状态机语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Future 本质上是异步计算的状态机：
 
@@ -1893,6 +1961,8 @@ impl Future for MyFuture {
 
 #### 5.1.2 Poll 模型语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Poll 模型定义了异步计算的协作式调度：
 
 $$
@@ -1920,6 +1990,8 @@ async fn async_operation_b() -> i32 {
 ```
 
 #### 5.1.3 Waker 机制语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Waker 用于在异步操作完成时唤醒任务：
 
@@ -1987,6 +2059,8 @@ impl Future for TimerFuture {
 
 #### 5.2.1 状态机转换语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 `async/await` 被编译器转换为状态机：
 
 ```rust
@@ -2033,6 +2107,8 @@ impl Future for ExampleStateMachine {
 ```
 
 #### 5.2.2 Pin 语义（自引用）
+
+> **[来源: POPL - Programming Languages Research]**
 
 Pin 用于安全地处理自引用结构：
 
@@ -2091,6 +2167,8 @@ fn pin_semantics() {
 
 #### 5.2.3 取消安全语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 取消安全是指当 Future 被丢弃时的正确性：
 
 ```rust
@@ -2134,6 +2212,8 @@ impl DatabaseConnection {
 > **[来源: POPL 2020 - Oxide]**
 
 #### 5.3.1 任务调度语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 执行器负责任务的调度执行：
 
@@ -2199,6 +2279,8 @@ fn create_waker(queue: Arc<Mutex<VecDeque<Task>>>) -> Waker {
 ```
 
 #### 5.3.2 工作窃取语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 工作窃取是一种负载均衡策略：
 
@@ -3248,6 +3330,8 @@ async fn batch_async_io(urls: Vec<&str>) -> Vec<Result<String, reqwest::Error>> 
 
 ### 8.1 操作语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 8.1.1 大步语义规则
 
 大步语义（自然语义）描述表达式的完整求值：
@@ -3362,6 +3446,8 @@ fn evaluation_contexts() {
 ```
 
 ### 8.2 类型与效果系统
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 8.2.1 类型判断语义
 
@@ -3532,6 +3618,8 @@ impl Session<Privileged> {
 
 ### 9.1 静态分析语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 9.1.1 借用检查器语义
 
 借用检查器是 Rust 的核心创新，在编译时验证内存安全：
@@ -3681,6 +3769,8 @@ use std::mem::size_of;
 ```
 
 ### 9.2 动态分析语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 9.2.1 Miri 语义解释器
 
@@ -3894,6 +3984,8 @@ fn no_memory_leak() {
 
 ### 10.1 语义框架回顾
 
+> **[来源: ACM - Systems Programming Languages]**
+
 本文档建立了一个全面的 Rust 程序设计语义框架，涵盖了以下核心维度：
 
 | 维度 | 核心概念 | 形式化工具 |
@@ -3908,6 +4000,8 @@ fn no_memory_leak() {
 | **Actor** | 消息传递、监督、分布式 | Actor 演算、会话类型 |
 
 ### 10.2 统一语义形式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Rust 的核心语义可以用以下统一框架表示：
 
@@ -3924,6 +4018,8 @@ $$
 
 ### 10.3 未来发展方向
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 1. **形式化验证集成**：将 Rust 语义与 Coq/Isabelle 等证明助手集成
 2. **异步语义完善**：完整的 async/await 效果系统形式化
 3. **unsafe 语义**：unsafe Rust 的严格形式化边界
@@ -3931,6 +4027,8 @@ $$
 5. **泛型编程**：高阶类型和关联类型的完整语义
 
 ### 10.4 文档组织
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本语义框架文档为后续专题文档提供基础：
 

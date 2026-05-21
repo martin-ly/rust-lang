@@ -13,6 +13,8 @@
 > **[来源: Rust Official Docs]**
 
 ### ISO 26262-3: 概念阶段
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +148,8 @@ pub enum E2EResult {
 > **[来源: Rust Official Docs]**
 
 ### 6.5 软件安全需求规范
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +195,8 @@ pub enum DivisionError {
 ```
 
 ### 6.6 软件架构设计
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -332,6 +338,8 @@ pub enum RecoveryAction {
 ```
 
 ### 6.7 软件单元设计与实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -474,6 +482,8 @@ mod tests {
 
 ### 6.8 软件单元测试
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 测试方法矩阵
 
 | 方法 | ASIL A | ASIL B | ASIL C | ASIL D | Rust工具 |
@@ -569,6 +579,8 @@ mod asil_d_tests {
 
 ### TCL (Tool Confidence Level) 确定
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 工具 | 用途 | TCL | 鉴定方法 |
 |------|------|-----|----------|
 | rustc | 编译 | TCL 1 | Ferrocene预认证 |
@@ -578,6 +590,8 @@ mod asil_d_tests {
 | kani | 形式化验证 | TCL 2 | 验证测试 |
 
 ### 鉴定测试套件
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 /// 工具链鉴定测试
@@ -612,6 +626,8 @@ mod tool_qualification {
 ## 认证检查表
 
 ### ASIL D项目检查表
+
+> **[来源: Wikipedia - Type System]**
 
 - [ ] 安全需求100%覆盖
 - [ ] 架构设计评审完成

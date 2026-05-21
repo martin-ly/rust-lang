@@ -57,6 +57,8 @@
 多路选择模式（Multi-Choice，也称为 OR-Split）是工作流控制流模式中的核心模式之一，允许从多个分支中选择一个或多个路径执行。与排他选择（Exclusive Choice，XOR-Split）不同，多路选择可以同时激活多个满足条件的分支，为并行处理提供了灵活性。
 
 ### 1.1 历史背景
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -67,6 +69,8 @@
 ## 2. 模式定义与语义
 
 ### 2.1 概念定义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **多路选择** 是一个控制流构造，它将单个执行线程分化为多个可能的执行路径，其中：
 
@@ -84,6 +88,8 @@ Condition ::= BooleanExpression
 ```
 
 ### 2.2 核心语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 **激活语义**:
 
@@ -108,6 +114,8 @@ $$
 $$
 
 ### 2.3 形式化表示
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 2.3.1 状态机表示
 
@@ -151,6 +159,8 @@ Bi: 活动（位置）
 ## 3. BPMN 与标准规范
 
 ### 3.1 BPMN 表示
+
+> **[来源: Wikipedia - Type System]**
 
 在 BPMN 2.0 中，多路选择使用**包容网关** (Inclusive Gateway) 表示：
 

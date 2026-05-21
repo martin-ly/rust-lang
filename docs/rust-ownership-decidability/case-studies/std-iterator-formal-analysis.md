@@ -82,7 +82,11 @@ Iterator是Rust最核心的trait之一，提供:
 
 ### 2.1 类型定义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 2.1 (Iterator trait)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 pub trait Iterator {
@@ -106,6 +110,8 @@ $$
 $$
 
 ### 定理 2.1 (Iterator作为状态机)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > 每个迭代器实现都是状态机，next()驱动状态转换。
 

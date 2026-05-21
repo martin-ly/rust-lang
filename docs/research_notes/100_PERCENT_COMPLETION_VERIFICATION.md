@@ -51,6 +51,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 验证结论
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 - ✅ **工具对接准备就绪**
 
 ### 关键指标
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +88,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 形式化定义验证 ✅
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@
 ---
 
 ### 2. 公理系统验证 ✅
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +147,8 @@
 ---
 
 ### 3. 定理证明验证 ✅
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +190,8 @@
 ---
 
 ### 4. 思维表征验证 ✅
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +258,8 @@
 
 ### 5. 工具对接验证 ✅
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 工具 | 状态 | 对接文档 | 计划 |
 | :--- | :--- | :--- | :--- |
 | Coq | ✅ 就绪 | 5个.v文件 | Phase 2 L3证明 |
@@ -260,6 +274,8 @@
 ## 质量评估
 
 ### 五维度标准评估
+
+> **[来源: Wikipedia - Type System]**
 
 | 维度 | 权重 | 得分 | 加权分 |
 | :--- | :--- | :--- | :--- |

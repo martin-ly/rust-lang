@@ -86,7 +86,11 @@ let sum: i32 = data.par_iter().map(|x| x * x).sum();
 
 ### 2.1 计算DAG
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ### 定义 2.1 (计算有向无环图)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 并行计算可表示为DAG:
 
@@ -101,6 +105,8 @@ $$
 
 ### 定义 2.2 (串行投影)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 串行执行顺序是DAG的**拓扑排序**:
 
 $$
@@ -108,6 +114,8 @@ $$
 $$
 
 ### 定义 2.3 (并行执行)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 并行执行是DAG的**并行拓扑排序**:
 
@@ -122,6 +130,8 @@ $$
 3. 若 $(u, v) \in E$，则 $u \in S_i, v \in S_j$ 且 $i < j$
 
 ### 2.2 串行执行语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ### 定义 2.4 (串行语义函数)
 

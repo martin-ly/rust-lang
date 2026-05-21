@@ -78,6 +78,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 逻辑基础
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -88,6 +90,8 @@
 
 ### 程序语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
 | [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 小步/大步/环境语义 | ⭐⭐⭐⭐ |
@@ -95,12 +99,16 @@
 
 ### 证明技术
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |
 | [PROOF_STRATEGIES.md](./PROOF_STRATEGIES.md) | 归纳/共归纳/反证/构造 | ⭐⭐⭐⭐ |
 | [PROOF_TECHNIQUES_MINDMAP.md](./PROOF_TECHNIQUES_MINDMAP.md) | 证明技术思维导图 | ⭐⭐⭐ |
 
 ### 方法学
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 文档 | 内容 | 难度 |
 | :--- | :--- | :--- |

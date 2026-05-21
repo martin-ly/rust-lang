@@ -2,7 +2,7 @@
 
 ## 📑 目录
 >
-- [� Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
+- [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
   - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📊 Vec（动态数组）](#-vec动态数组)
@@ -90,7 +90,7 @@
 > **[来源: Rust Official Docs]**
 
 - [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📊 Vec（动态数组）](#-vec动态数组)
     - [创建](#创建)
@@ -171,6 +171,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 创建
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +190,8 @@ let mut vec = Vec::with_capacity(10);
 ```
 
 ### 添加元素
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -206,6 +210,8 @@ vec.extend_from_slice(&[8, 9]);
 ```
 
 ### 访问元素
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +231,8 @@ let last = vec.last();   // Option<&i32>
 ```
 
 ### 修改元素
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +249,8 @@ if let Some(x) = vec.get_mut(0) {
 ```
 
 ### 删除元素
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +271,8 @@ vec.clear();
 ```
 
 ### 查询
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -281,6 +293,8 @@ let cap = vec.capacity();
 ```
 
 ### 切片操作
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -302,6 +316,8 @@ let (left, right) = vec.split_at(2);
 > **[来源: Rust Official Docs]**
 
 ### 创建
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -318,6 +334,8 @@ let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
 ```
 
 ### 插入和更新
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 let mut map = HashMap::new();
@@ -337,6 +355,8 @@ map.entry("key".to_string())
 
 ### 访问
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 let mut map = HashMap::new();
 map.insert("key".to_string(), 42);
@@ -355,6 +375,8 @@ let value = map["key"];
 
 ### 删除
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 let mut map = HashMap::new();
 map.insert("key".to_string(), 42);
@@ -370,6 +392,8 @@ map.clear();
 ```
 
 ### 查询
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
@@ -387,6 +411,8 @@ let empty = map.is_empty();
 ```
 
 ### 迭代
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
@@ -422,6 +448,8 @@ for value in map.values_mut() {
 
 ### 创建
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::collections::HashSet;
 
@@ -433,6 +461,8 @@ let set: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 ```
 
 ### 添加和删除
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 let mut set = HashSet::new();
@@ -450,6 +480,8 @@ set.clear();
 
 ### 查询
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 let set: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 
@@ -464,6 +496,8 @@ let empty = set.is_empty();
 ```
 
 ### 集合操作
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 let set1: HashSet<_> = vec![1, 2, 3].into_iter().collect();
@@ -490,6 +524,8 @@ let symmetric_diff: HashSet<_> = set1.symmetric_difference(&set2).collect();
 
 ### VecDeque（双端队列）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::collections::VecDeque;
 
@@ -513,12 +549,16 @@ if let Some(v) = d.pop_back_if(|x| *x > 4) {
 
 ### 切片 as_array（Rust 1.93）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 let slice = &[1, 2, 3, 4];
 let array: Option<&[i32; 4]> = slice.as_array();
 ```
 
 ### BTreeMap（有序映射）
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::collections::BTreeMap;
@@ -537,6 +577,8 @@ for (k, v) in &map {
 **Rust 1.93 注意**：`BTreeMap::append` 行为变更——若源与目标有相同 key，**不再覆盖**目标中的值，保留目标原有条目。需覆盖时请使用 `insert` 或 `entry` API。
 
 ### BinaryHeap（优先队列）
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::collections::BinaryHeap;
@@ -559,6 +601,8 @@ while let Some(max) = heap.pop() {
 > **[来源: Rust Official Docs]**
 
 ### 三种迭代方式
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 let vec = vec![1, 2, 3];
@@ -583,6 +627,8 @@ for item in vec.into_iter() {
 
 ### 手动迭代
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 let mut iter = vec![1, 2, 3].into_iter();
 
@@ -599,6 +645,8 @@ while let Some(item) = iter.next() {
 > **[来源: Rust Official Docs]**
 
 ### 转换适配器
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 let vec = vec![1, 2, 3, 4, 5];

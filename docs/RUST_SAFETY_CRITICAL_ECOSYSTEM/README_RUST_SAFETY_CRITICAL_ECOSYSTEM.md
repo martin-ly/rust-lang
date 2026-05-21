@@ -85,6 +85,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 🏆 核心完成报告
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@
 ---
 
 ### 1. 思维导图 (01_mind_maps/)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +118,8 @@
 ---
 
 ### 2. 多维矩阵 (02_matrices/)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +141,8 @@
 ---
 
 ### 3. 决策树 (03_decision_trees/)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +160,8 @@
 ---
 
 ### 4. 公理推理 (04_axiomatic_reasoning/)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

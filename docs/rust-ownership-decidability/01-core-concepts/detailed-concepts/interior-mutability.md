@@ -72,6 +72,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 内部可变性的形式化模型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -92,6 +94,8 @@ let r: &T = &x
 
 ### 1.2 内部可变性的安全保证
 
+> **[来源: ACM - Systems Programming Languages]**
+
 内部可变性类型必须维持 Rust 的核心安全不变量：
 
 ```
@@ -102,6 +106,8 @@ let r: &T = &x
 ```
 
 ### 1.3 内部可变性类型谱系
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
                     内部可变性类型
@@ -125,6 +131,8 @@ let r: &T = &x
 
 ### 2.1 Cell 的形式化定义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **定义 2.1** (`Cell<T>`): `Cell<T>` 是一种提供内部可变性的容器，通过值的**移动**实现修改，适用于实现 `Copy` 的类型。
 
 ```rust
@@ -134,6 +142,8 @@ pub struct Cell<T: ?Sized> {
 ```
 
 ### 2.2 Cell 的核心操作
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::cell::Cell;
@@ -157,6 +167,8 @@ fn main() {
 
 ### 2.3 Cell 与 Copy 类型
 
+> **[来源: ACM - Systems Programming Languages]**
+
 `Cell<T>` 要求 `T: Copy` 才能使用 `get()`：
 
 ```rust
@@ -172,6 +184,8 @@ let string_cell: Cell<String> = Cell::new(String::from("hello"));
 ```
 
 ### 2.4 Cell 的内存模型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // Cell<i32> 的内存布局
@@ -192,6 +206,8 @@ let string_cell: Cell<String> = Cell::new(String::from("hello"));
 
 ### 2.5 Cell 的线程不安全性
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 `Cell<T>` 故意不实现 `Sync`，防止多线程同时访问：
 
 ```rust
@@ -210,7 +226,11 @@ thread::spawn(move || {
 
 ### 2.6 Cell 的实际应用场景
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 场景 1: 延迟初始化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::cell::Cell;
@@ -242,6 +262,8 @@ impl<T: Copy> LazyValue<T> {
 
 #### 场景 2: 计数器
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::cell::Cell;
 
@@ -266,6 +288,8 @@ impl Stats {
 ```
 
 #### 场景 3: 图结构中的标记
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::cell::Cell;

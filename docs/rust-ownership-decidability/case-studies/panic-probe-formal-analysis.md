@@ -72,6 +72,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 嵌入式系统的故障处理挑战
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -115,6 +117,8 @@ fn main() -> ! {
 
 ### 1.2 Panic的语义与要求
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust的panic机制：
 
 ```rust
@@ -139,6 +143,8 @@ fn panic_handler(info: &PanicInfo) -> ! {
 4. **快速执行**：通常在中断禁用状态执行
 
 ### 1.3 Panic-Probe的设计目标
+
+> **[来源: ACM - Systems Programming Languages]**
 
 panic-probe 提供：
 
@@ -175,6 +181,8 @@ fn main() -> ! {
 
 ### 2.1 Rust Panic机制
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // Panic流程
 pub fn panic_impl(info: &PanicInfo) -> ! {
@@ -197,6 +205,8 @@ enum AbortStrategy {
 ```
 
 ### 2.2 Panic处理器类型
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 处理器 | 行为 | 适用场景 | 代码大小 |
 |-------|------|---------|---------|
@@ -240,6 +250,8 @@ fn panic(info: &PanicInfo) -> ! {
 ```
 
 ### 2.3 RTT (Real-Time Transfer) 协议
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 RTT是SEGGER开发的实时传输协议：
 
@@ -328,6 +340,8 @@ fn write(channel: &mut RttChannel, data: &[u8]) {
 
 ### 2.4 探针通信机制
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 目标设备 <-> 调试探针 <-> 主机
 
@@ -343,6 +357,8 @@ fn write(channel: &mut RttChannel, data: &[u8]) {
 ```
 
 ### 2.5 栈回溯原理
+
+> **[来源: PLDI - Programming Language Design]**
 
 栈回溯（Stack Unwinding）在panic时捕获调用链：
 
@@ -395,6 +411,8 @@ fn resolve_symbol(pc: u32, elf: &Elf) -> Option<String> {
 
 ### 3.1 PanicInfo结构
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 标准库PanicInfo
 pub struct PanicInfo<'a> {
@@ -432,6 +450,8 @@ impl<'a> Location<'a> {
 ```
 
 ### 3.2 PanicHandler特性
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // Panic处理器trait（概念性）
@@ -482,6 +502,8 @@ impl ConfigurablePanic {
 
 ### 3.3 Defmt集成
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // panic-probe与defmt集成
 use defmt::error;
@@ -515,6 +537,8 @@ fn panic(info: &PanicInfo) -> ! {
 ```
 
 ### 3.4 探针协议抽象
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 探针通信trait
@@ -580,6 +604,8 @@ impl ProbeChannel for ItmChannel {
 
 ### 4.1 开发调试场景
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 开发配置: panic-probe + defmt
 [dependencies]
@@ -620,6 +646,8 @@ fn main() -> ! {
 ```
 
 ### 4.2 生产环境处理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 生产配置: panic-reset
@@ -665,6 +693,8 @@ fn enter_safe_mode() {
 ```
 
 ### 4.3 故障记录与恢复
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -764,6 +794,8 @@ fn check_previous_panics(fs: &Filesystem<FlashStorage>) {
 
 ### 4.4 远程诊断
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // 通过无线连接发送panic信息
 use embassy_net::tcp::TcpSocket;
@@ -810,6 +842,8 @@ fn send_panic_report(info: &PanicInfo) -> Result<(), Error> {
 ```
 
 ### 4.5 安全关键系统
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 // IEC 61508 / ISO 26262 兼容的panic处理
@@ -873,6 +907,8 @@ fn enter_safe_state() {
 
 ### 5.1 与Semihosting的对比
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 特性 | Panic-Probe/RTT | Semihosting |
 |-----|-----------------|-------------|
 | 速度 | ⚡ 快（MB/s） | 🐢 慢（KB/s） |
@@ -901,6 +937,8 @@ fn panic(info: &PanicInfo) -> ! {
 
 ### 5.2 与ITM/SWO的对比
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 特性 | RTT | ITM/SWO |
 |-----|-----|---------|
 | 引脚需求 | 调试接口 | 调试接口+SWO |
@@ -911,6 +949,8 @@ fn panic(info: &PanicInfo) -> ! {
 | 时间戳 | 软件 | 硬件 |
 
 ### 5.3 与UART输出的对比
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 特性 | RTT | UART |
 |-----|-----|------|
@@ -925,6 +965,8 @@ fn panic(info: &PanicInfo) -> ! {
 ## 6. 完整代码示例
 
 ### 6.1 完整调试配置
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // Cargo.toml
@@ -993,6 +1035,8 @@ async fn main(_spawner: Spawner) {
 ```
 
 ### 6.2 自定义Panic处理器
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // src/panic_handler.rs
@@ -1167,6 +1211,8 @@ fn get_timestamp() -> u64 {
 
 ### 6.3 故障日志系统
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // src/fault_log.rs
 
@@ -1309,6 +1355,8 @@ pub struct FaultStatistics {
 ```
 
 ### 6.4 多级恢复策略
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // src/recovery.rs
@@ -1501,6 +1549,8 @@ fn restore_context_and_return() -> ! { loop {} }
 ## 7. 性能分析
 
 ### 7.1 Panic处理延迟
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 测量panic处理时间

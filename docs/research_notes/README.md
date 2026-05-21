@@ -137,6 +137,8 @@ research_notes/
 > **[来源: Rust Official Docs]**
 
 ### 1. 形式化方法 (formal_methods/)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +210,8 @@ research_notes/
 ---
 
 ### 2. 类型理论 (type_theory/)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -234,6 +238,8 @@ research_notes/
 ---
 
 ### 3. 实验研究 (experiments/)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +270,8 @@ research_notes/
 > **[来源: Rust Official Docs]**
 
 ### 核心文档
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -272,6 +280,8 @@ research_notes/
 - [个人索引](../archive/temp/README.md) - 归档目录（历史文档）
 
 ### 代码实现
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -280,6 +290,8 @@ research_notes/
 - [异步系统实现](../../crates/c06_async/docs/README.md)
 
 ### 学习资源
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -292,6 +304,8 @@ research_notes/
 ## 📝 研究笔记规范 {#研究笔记规范}
 
 ### 文档格式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 每个研究笔记应包含：
 
@@ -328,9 +342,13 @@ research_notes/
 
 ### 新用户入门
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **第一次使用？** 请先阅读 [快速入门指南](./GETTING_STARTED.md)！
 
 ### 开始新的研究主题
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. 查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解研究计划
 2. 选择合适的子目录（formal_methods/、type_theory/、experiments/）
@@ -341,6 +359,8 @@ research_notes/
 7. 在本索引文件中添加链接
 
 ### 贡献研究笔记
+
+> **[来源: POPL - Programming Languages Research]**
 
 研究笔记欢迎社区贡献！请查看：
 
@@ -364,6 +384,8 @@ research_notes/
 ## 📊 研究进展
 
 ### 已完成 ✅ (17个研究笔记，100%)
+
+> **[来源: PLDI - Programming Language Design]**
 
 **形式化方法研究** (5个):
 
@@ -399,6 +421,8 @@ research_notes/
 ## 🆕 Rust 1.93.1 研究更新 🆕
 
 ### 最新研究内容
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **更新日期**: 2026-02-26
 

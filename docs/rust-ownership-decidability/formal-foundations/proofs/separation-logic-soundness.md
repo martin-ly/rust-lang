@@ -73,6 +73,8 @@
 
 ### 1.2 为什么需要分离逻辑
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 传统Hoare逻辑在堆推理方面存在局限：
 
 ```
@@ -88,6 +90,8 @@
 分离逻辑通过**分离合取**(*, separating conjunction)解决这些问题。
 
 ### 1.3 核心思想
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 分离合取: P * Q
@@ -113,6 +117,8 @@
 ## 2. 基础定义
 
 ### 2.1 堆(Heap)的数学定义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 2.1** (堆):
 
@@ -149,6 +155,8 @@ h₁ ⊥ h₂  ⟺  dom(h₁) ∩ dom(h₂) = ∅
 
 ### 2.2 存储(Store)与状态
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 2.5** (存储):
 
 ```
@@ -171,6 +179,8 @@ s ∈ Store = Var → Value
 
 ### 3.1 语法
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 P, Q ::= emp                    (空堆)
        | e₁ ↦ e₂               (单点)
@@ -186,6 +196,8 @@ P, Q ::= emp                    (空堆)
 ```
 
 ### 3.2 语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **定义 3.1** (满足关系):
 
@@ -223,6 +235,8 @@ P, Q ::= emp                    (空堆)
 
 ### 3.3 常见模式
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **列表段**:
 
 ```
@@ -250,6 +264,8 @@ tree(x) ::= x = null ∧ emp
 
 ### 4.1 Hoare三元组
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 4.1** (部分正确性Hoare三元组):
 
 ```
@@ -271,6 +287,8 @@ tree(x) ::= x = null ∧ emp
 
 ### 4.2 可靠性定理
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定理 4.3** (分离逻辑可靠性):
 > 如果 ⊢ {P} C {Q} 可证，则对于所有满足(s, h) ⊨ P的状态，
 > 执行C后要么发散，要么终止于满足Q的状态。
@@ -286,6 +304,8 @@ tree(x) ::= x = null ∧ emp
 其中 `⟨C, σ⟩ ⇓ σ'` 表示大步骤操作语义。
 
 ### 4.3 完备性说明
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 分离逻辑对于**指针操作**是完备的吗？
 

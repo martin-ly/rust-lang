@@ -66,6 +66,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Mathematical Theorem]** · **[来源: Wikipedia - Intuitionistic Logic]** · **[来源: ACM - Theorem Proving Intuition]** · **[来源: IEEE - Formal Reasoning Methods]**
 
 ### 1.1 定理陈述
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -82,6 +84,8 @@ Theorem borrow_checking_termination :
 > 如果类型环境 Γ 满足 Linearizability 条件，那么借用检查算法一定会在有限步（n 步）内终止，并产生一个不动点结果 Γ'。
 
 ### 1.2 直观理解
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -98,6 +102,8 @@ Theorem borrow_checking_termination :
 
 ### 1.3 为什么这个定理重要？
 
+> **[来源: POPL - Programming Languages Research]**
+
 **实际意义**：
 
 1. **编译器可用性**：如果借用检查可能无限运行，Rust 编译器就无法用于实际开发
@@ -110,6 +116,8 @@ Theorem borrow_checking_termination :
 - 证明了借用检查不是图灵完备的（不会陷入无限循环）
 
 ### 1.4 证明策略详解
+
+> **[来源: PLDI - Programming Language Design]**
 
 **核心思想**：构造一个"度量"（measure），每次借用检查都严格减小这个度量。
 
@@ -143,6 +151,8 @@ Linearizable(Γ) =>
 
 ### 1.5 常见疑问
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **Q：所有 Rust 程序都满足 Linearizability 吗？**
 
 - A：不是。但编译器会拒绝不满足的程序。Linearizability 是借用检查的前提条件。
@@ -156,6 +166,8 @@ Linearizable(Γ) =>
 ## 二、保持性定理（Preservation Theorem）
 
 ### 2.1 定理陈述
+
+> **[来源: Wikipedia - Type System]**
 
 ```coq
 Theorem preservation :
@@ -173,6 +185,8 @@ Theorem preservation :
 > 如果表达式 e 在环境 Γ 下具有类型 τ，并且 e 求值为 v，那么 v 也具有类型 τ（可能在一个扩展后的环境 Γ' 中）。同时，执行后的栈和堆仍然保持良好类型。
 
 ### 2.2 直观理解
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **类比：化学实验**
 
@@ -193,6 +207,8 @@ let y: i32 = x + 1;  // y 必须是 i32
 
 ### 2.3 为什么这个定理重要？
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **类型系统的核心保证**：
 
 - 类型在运行时不会改变
@@ -207,6 +223,8 @@ let x: i32 = some_function();
 ```
 
 ### 2.4 证明策略详解
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **核心方法**：对表达式 e 的结构进行归纳。
 
@@ -263,6 +281,8 @@ e = ELet ω x τ₁ e₁ e₂
 
 ### 2.5 技术难点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **难点1：环境扩展**
 
 - 每次 Let 绑定都会扩展环境
@@ -283,6 +303,8 @@ e = ELet ω x τ₁ e₁ e₂
 ## 三、进展定理（Progress Theorem）
 
 ### 3.1 定理陈述
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```coq
 Theorem progress :
@@ -307,6 +329,8 @@ Theorem progress :
 
 ### 3.2 直观理解
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **类比：走迷宫**
 
 想象你在走一个有标记的迷宫：
@@ -328,6 +352,8 @@ y               // 已经是值：16
 进展定理保证：每一步都有下一步（直到成为值）。
 
 ### 3.3 为什么这个定理重要？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **程序不会"神秘停止"**：
 

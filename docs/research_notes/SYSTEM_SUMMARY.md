@@ -132,6 +132,8 @@
 Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在记录和推进 Rust 相关的深入研究。
 
 ### 系统目标
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +143,8 @@ Rust 研究笔记系统是一个完整的 Rust 语言研究文档体系，旨在
 4. **方法论**: 研究方法和工具指南
 
 ### 系统结构
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +164,8 @@ research_notes/
 > **[来源: Rust Official Docs]**
 
 ### 总体统计
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +177,8 @@ research_notes/
 | **总计**     | 46个 | -                |
 
 ### 核心文档详情
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -203,6 +211,8 @@ research_notes/
 27. **CONTENT_ENHANCEMENT.md** - 研究笔记内容完善指南
 
 ### 研究笔记详情
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -254,6 +264,8 @@ research_notes/
 ## 🔬 研究主题覆盖 {#-研究主题覆盖}
 
 ### 形式化方法领域
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - ✅ 所有权系统
 - ✅ 借用检查器

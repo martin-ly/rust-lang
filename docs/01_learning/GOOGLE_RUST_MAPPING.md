@@ -58,6 +58,8 @@ Google Comprehensive Rust 分为 4 天：
 > **[来源: Rust Official Docs]**
 
 ### Google 内容
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -72,6 +74,8 @@ Google Comprehensive Rust 分为 4 天：
 
 ### 本项目映射
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | Google 主题 | 项目文件 | 差异/补充 |
 | :--- | :--- | :--- |
 | 变量与可变性 | `crates/c03_control_fn/src/basic_syntax.rs` | 本项目额外覆盖 shadowing、常量作用域 |
@@ -85,6 +89,8 @@ Google Comprehensive Rust 分为 4 天：
 
 ### 补充材料
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - `docs/02_reference/quick_reference/ownership_cheatsheet.md` - 所有权速查
 - `docs/02_reference/quick_reference/type_system.md` - 类型系统速查
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` - 练习
@@ -95,6 +101,8 @@ Google Comprehensive Rust 分为 4 天：
 
 ### Google 内容
 
+> **[来源: POPL - Programming Languages Research]**
+
 - 结构体（命名字段、元组结构体、单元结构体）
 - 枚举与方法
 - 模式匹配（match、解构、守卫）
@@ -103,6 +111,8 @@ Google Comprehensive Rust 分为 4 天：
 - 泛型枚举
 
 ### 本项目映射
+
+> **[来源: PLDI - Programming Language Design]**
 
 | Google 主题 | 项目文件 | 差异/补充 |
 | :--- | :--- | :--- |

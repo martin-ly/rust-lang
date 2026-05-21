@@ -89,6 +89,8 @@
 
 ### 3.1 按领域一句话
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 领域 | 一句话总结 | 入口 |
 | :--- | :--- | :--- |
 | **所有权** | 唯一所有者、移动转移、作用域释放；T2 唯一性、T3 内存安全 | ownership_model |
@@ -191,6 +193,8 @@
 
 ### 核心研究点
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
 - LazyCell/LazyLock 的延迟语义
@@ -208,6 +212,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

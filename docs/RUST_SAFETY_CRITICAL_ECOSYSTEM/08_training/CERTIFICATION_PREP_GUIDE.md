@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 认证路径图
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@
 ```
 
 ### 认证对比
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +102,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 考试范围
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -263,6 +269,8 @@ Rust特定考点 (60%权重):
 ```
 
 ### 备考建议
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 学习资源
 

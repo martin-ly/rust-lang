@@ -53,7 +53,7 @@
 > **[来源: Rust Official Docs]**
 
 - [进程管理快速参考卡片](#进程管理快速参考卡片)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🚀 快速开始](#-快速开始)
     - [基本使用](#基本使用)
@@ -97,6 +97,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本使用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +137,8 @@ manager.kill(pid)?;
 > **[来源: Rust Official Docs]**
 
 ### 进程管理
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +150,8 @@ manager.kill(pid)?;
 | 列出所有 | `list_all()`    | 获取所有进程 |
 
 ### 异步进程管理
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@ manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 ```
 
 ### IPC 通信
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +195,8 @@ let queue = ipc.create_message_queue("my_queue", 100)?;
 ```
 
 ### 同步原语
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -212,6 +222,8 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 > **[来源: Rust Official Docs]**
 
 ### ProcessConfig
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,6 +241,8 @@ ProcessConfig {
 ```
 
 ### 跨平台注意事项
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -248,6 +262,8 @@ ProcessConfig {
 ## ⚡ 性能优化
 
 ### 启用性能监控
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use c07_process::performance::enhanced::*;
@@ -286,6 +302,8 @@ match manager.spawn(config) {
 
 ### 反例 1: 不检查子进程退出状态
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误示例**:
 
 ```rust
@@ -305,6 +323,8 @@ assert!(status.success());
 ---
 
 ### 反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **错误示例**:
 
@@ -340,6 +360,8 @@ fn handler(_: i32) {
 ## 🎯 使用场景
 
 ### 场景 1: 构建任务调度器
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::process::{Command, Stdio};

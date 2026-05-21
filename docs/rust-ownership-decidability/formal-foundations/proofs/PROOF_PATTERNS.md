@@ -54,6 +54,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 证明工程化的重要性
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -81,6 +83,8 @@
 
 ### 1.2 为什么需要证明模式库
 
+> **[来源: PLDI - Programming Language Design]**
+
 证明模式库提供：
 
 | 价值 | 说明 |
@@ -93,6 +97,8 @@
 
 ### 1.3 文档组织结构
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档按以下结构组织：
 
 1. **核心证明模式** (第2-7节): 归纳、反演、矛盾、构造、重写等
@@ -104,6 +110,8 @@
 ## 2. 归纳法模式
 
 ### 2.1 结构归纳法
+
+> **[来源: Wikipedia - Type System]**
 
 **适用场景**: 对表达式/类型/值等归纳定义的结构进行归纳
 
@@ -217,6 +225,8 @@ Qed.
 
 ### 2.2 良基归纳法
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **适用场景**: 终止性证明、需要度量递减的递归证明
 
 **基本模式**:
@@ -305,6 +315,8 @@ Qed.
 ```
 
 ### 2.3 推导归纳法
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **适用场景**: 对类型判断/求值判断等推导关系进行归纳
 
@@ -1135,6 +1147,8 @@ Qed.
 
 ### 8.1 常用组合 Tactics
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```coq
 (* 基本反演 tactic *)
 Ltac inv H := inversion H; clear H; subst.
@@ -1163,6 +1177,8 @@ Ltac std_proof :=
 ```
 
 ### 8.2 证明自动化 Tactics
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```coq
 (* 类型检查自动化 *)

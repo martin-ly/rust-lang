@@ -31,6 +31,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 CAP定理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -115,6 +117,8 @@ pub enum ConfigError {
 ```
 
 ### 1.2 一致性模型
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::collections::HashMap;
@@ -314,6 +318,8 @@ pub enum CausalOrder {
 
 ### 1.3 故障模型
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 /// 分布式系统故障模型
 
@@ -434,6 +440,8 @@ impl BFTConfig {
 ## 2. 共识算法
 
 ### 2.1 Raft协议
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::collections::{HashMap, HashSet};
@@ -655,6 +663,8 @@ impl RaftNode {
 ```
 
 ### 2.2 领导者选举
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ### Rust 1.94 延迟初始化在分布式系统中的应用
 

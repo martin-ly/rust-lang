@@ -97,6 +97,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 任务 (Tasks)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -157,6 +159,8 @@ async fn main(spawner: Spawner) {
 
 ### 2.2 时间管理
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use embassy_time::{Duration, Instant, Timer};
 
@@ -193,6 +197,8 @@ async fn with_timeout<T>(
 
 ### 2.3 中断处理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use embassy_stm32::exti::ExtiInput;
 use embassy_stm32::gpio::Pull;
@@ -228,6 +234,8 @@ spawner.spawn(button_task(button)).unwrap();
 
 ### 3.1 UART with DMA
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use embassy_stm32::usart::{Uart, Config};
 use embassy_stm32::dma::NoDma;
@@ -261,6 +269,8 @@ let uart = Uart::new(
 ```
 
 ### 3.2 I2C异步传输
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use embassy_stm32::i2c::I2c;

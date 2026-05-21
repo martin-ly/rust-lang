@@ -79,6 +79,8 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 > **[来源: Rust Official Docs]**
 
 ### Def CE-1: 常量上下文
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +89,8 @@ Rust 的常量求值在编译期执行，允许在类型系统和常量定义中
 ```
 
 ### Def CE-2: 常量求值器
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +109,8 @@ Eval_const(e, env) =
 > **[来源: Rust Official Docs]**
 
 ### Def CE-3: const fn 约束
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

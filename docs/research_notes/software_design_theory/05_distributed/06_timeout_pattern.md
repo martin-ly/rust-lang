@@ -38,6 +38,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def TO1: Timeout
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -52,6 +54,8 @@ Timeout := (Op, t_max, handler)
 ```
 
 ### Def TO2: 操作结果
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +67,8 @@ OperationResult<T> :=
 ```
 
 ### Def TO3: 超时类型
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```
 TimeoutType :=
@@ -78,6 +84,8 @@ TimeoutType :=
 
 ### Axiom TO1: 超时确定性
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 t_execution > t_max → result = Timeout
 ```
@@ -85,6 +93,8 @@ t_execution > t_max → result = Timeout
 执行时间超过限制必然触发超时。
 
 ### Axiom TO2: 时钟单调性
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 t₁ < t₂ → elapsed(t₁) < elapsed(t₂)

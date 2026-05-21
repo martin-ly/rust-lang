@@ -128,6 +128,8 @@
 > **[来源: Rust Official Docs]**
 
 ### L1: 元概念节点
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +142,8 @@
 | M5 | 抽象能力 | 代码复用和接口定义 | {抽象度: 高, 跨语言: 是} |
 
 ### L2: 核心概念族节点
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +165,8 @@
 | C14 | 同步原语 | 并发族 | 线程间同步机制 | {核心: 是, 独特: 否} |
 
 ### L3: 具体概念节点
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +192,8 @@
 | S18 | Send/Sync | C12 | 线程安全标记 | {具体度: 高} |
 
 ### L4: 实现机制节点
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +216,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 等价关系 ≡ {#等价关系-}
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +233,8 @@
 **形式化**: A ≡ B ⟺ ∀x: x ∈ A ⟺ x ∈ B
 
 ### 蕴含关系 ⇒ {#蕴含关系-}
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +256,8 @@
 **形式化**: A ⇒ B ⟺ A → B (逻辑蕴含)
 
 ### 互斥关系 ⊥ {#互斥关系-}
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +275,8 @@
 **形式化**: A ⊥ B ⟺ ¬(A ∧ B) (逻辑互斥)
 
 ### 组合关系 ∘ {#组合关系-}
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **定义**: 概念A和概念B组合形成概念C。
 
@@ -280,6 +296,8 @@
 **形式化**: A ∘ B = C ⟺ C = f(A, B) (组合函数)
 
 ### 层次关系 ⊂ {#层次关系-}
+
+> **[来源: Wikipedia - Type System]**
 
 **定义**: 概念A是概念B的子集或特例。
 
@@ -306,6 +324,8 @@
 
 ### L1-L2 关联矩阵
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | L1 \ L2 | C1 | C2 | C3 | C4 | C5 | C6 | C7 | C8 | C9 | C10 | C11 | C12 | C13 | C14 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **M1 资源管理** | 1 | 1 | 1 | 1 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -320,6 +340,8 @@
 - 0 = 无直接关联
 
 ### L2-L3 关联矩阵
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | L2 \ L3 | S1 | S2 | S3 | S4 | S5 | S6 | S7 | S8 | S9 | S10 | S11 | S12 | S13 | S14 | S15 | S16 | S17 | S18 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -339,6 +361,8 @@
 | **C14 同步原语** | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 | 0 |
 
 ### L3-L4 关联矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | L3 \ L4 | I1 | I2 | I3 | I4 | I5 | I6 | I7 | I8 | I9 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -366,6 +390,8 @@
 ## 知识图谱
 
 ### 全局概念图谱
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```mermaid
 graph TB

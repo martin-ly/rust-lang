@@ -58,7 +58,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Rust 领域分析框架](#rust-领域分析框架)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 概述 {#-概述}](#-概述--概述)
   - [五大核心领域](#五大核心领域)
@@ -120,6 +120,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 领域 1: 内存安全
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +219,8 @@ graph TB
 ---
 
 ### 领域 2: 类型系统
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -307,6 +311,8 @@ A + B     : A 或 B
 
 ### 领域 3: 并发与并行
 
+> **[来源: PLDI - Programming Language Design]**
+
 **核心关注点**: 多线程执行、异步编程、同步机制
 
 #### 边界定义 {#边界定义-2}
@@ -369,6 +375,8 @@ Rust 映射:
 
 ### 领域 4: 软件设计
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **核心关注点**: 架构模式、设计模式、代码组织
 
 #### 边界定义 {#边界定义-3}
@@ -426,6 +434,8 @@ Rust特有:
 ---
 
 ### 领域 5: 工具链
+
+> **[来源: Wikipedia - Type System]**
 
 **核心关注点**: 编译、构建、测试、代码质量
 
@@ -500,6 +510,8 @@ Rust特有:
 
 ### 领域交叉矩阵
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 领域 A | 领域 B | 交叉概念 | 交叉文档 |
 | :--- | :--- | :--- | :--- |
 | 内存安全 | 类型系统 | 所有权类型 | ownership_model.md |
@@ -509,6 +521,8 @@ Rust特有:
 | 软件设计 | 工具链 | 模块化 | MODULE_KNOWLEDGE_STRUCTURE_GUIDE.md |
 
 ### 领域依赖图
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TB
@@ -543,6 +557,8 @@ graph TB
 
 ### 抽象层次对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 领域 | L1 元概念 | L2 核心抽象 | L3 具体实现 | L4 代码实践 |
 | :--- | :--- | :--- | :--- | :--- |
 | **内存安全** | 资源管理 | 所有权系统 | 借用规则 | RAII模式 |
@@ -575,6 +591,8 @@ graph TB
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

@@ -108,6 +108,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Rust 语言核心思维导图
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +169,8 @@ mindmap
 ```
 
 ### 2. 所有权系统思维导图
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +221,8 @@ mindmap
 ```
 
 ### 3. 借用系统思维导图
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

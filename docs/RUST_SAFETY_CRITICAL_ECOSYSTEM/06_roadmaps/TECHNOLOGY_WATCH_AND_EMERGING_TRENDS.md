@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 2024 Edition
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +77,8 @@
 
 ### 1.2 内存模型演进
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 Tree Borrows:
 ├── 当前状态: Miri默认
@@ -93,6 +97,8 @@ Tree Borrows:
 ## 2. 工具链发展
 
 ### 2.1 编译器技术
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 rustc改进:
@@ -118,6 +124,8 @@ rustc改进:
 ```
 
 ### 2.2 验证工具
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 Kani发展:
@@ -147,6 +155,8 @@ Verus发展:
 ## 3. 硬件发展
 
 ### 3.1 目标平台
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 RISC-V:

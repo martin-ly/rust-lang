@@ -76,6 +76,8 @@ Rust 1.94 对齐是将 Rust 所有权系统的形式化框架扩展到包含 Rus
 
 ### 为什么重要？
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **理论完整性**：覆盖现代 Rust 的所有权特性
 - **教学价值**：帮助理解新特性的所有权语义
 - **验证能力**：可以验证使用新特性的真实程序
@@ -86,6 +88,8 @@ Rust 1.94 对齐是将 Rust 所有权系统的形式化框架扩展到包含 Rus
 ## 新特性概览
 
 ### 八大新特性
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 特性 | 状态 | 核心概念 | 影响 |
 |------|------|----------|------|
@@ -103,6 +107,8 @@ Rust 1.94 对齐是将 Rust 所有权系统的形式化框架扩展到包含 Rus
 ## 深入每个特性
 
 ### 1. Reborrow Trait
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 直观理解
 
@@ -144,6 +150,8 @@ Theorem reborrow_preserves_ownership_safety :
 
 ### 2. CoerceShared Trait
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 2.1 直观理解
 
 CoerceShared 允许在不同共享类型之间安全转换：
@@ -176,6 +184,8 @@ Inductive has_coerce_shared : ty -> coerce_target -> Prop :=
 ---
 
 ### 3. Const Generics
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 3.1 直观理解
 

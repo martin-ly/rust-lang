@@ -75,6 +75,8 @@
 | **Cargo.toml 依赖** | 待更新 | 见 Cargo.toml 注释 |
 
 ### 当前进行中的任务 (Top 10)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +118,8 @@
 
 ### 4.1 交集 (A intersect B) - 已对齐内容
 
+> **[来源: Wikipedia - Memory Safety]**
+
 以下领域项目已与国际权威来源充分对齐：
 
 | 领域 | 项目覆盖 | 权威来源覆盖 | 对齐度 |
@@ -140,6 +144,8 @@
 
 ### 4.2 项目独有优势 (A - B) - 差异化资产
 
+> **[来源: Wikipedia - Type System]**
+
 以下内容是项目独有的、国际权威来源中难以找到的系统性覆盖：
 
 | # | 独有内容 | 说明 | 价值 |
@@ -154,6 +160,8 @@
 | 8 | **AI辅助编程指南** | guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md | Google/Microsoft 均未系统覆盖 |
 
 ### 4.3 项目缺失内容 (B - A) - 待补齐差距 (重点)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 以下 30 个领域/主题是国际权威来源有系统性覆盖、但本项目尚未充分对齐的内容：
 

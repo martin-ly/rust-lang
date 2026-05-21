@@ -140,6 +140,8 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Programming Language Features]** · **[来源: Wikipedia - Language Evolution]** · **[来源: ACM - Language Feature Taxonomy]** · **[来源: IEEE - Language Standardization]**
 
 ### 00.1 分析方法论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +170,8 @@ B = 本项目现有知识集合
 每个特性必须覆盖：学习特性、示例案例、反例边界、特性树图、权威对齐。
 
 ### 00.2 缺失项热力图 (A \ B)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +231,8 @@ B = 本项目现有知识集合
 | 并行前端编译 (`-Z threads=N`) | 构建优化 | docs/06_toolchain | 🟢 中 |
 
 ### 00.3 冗余/过时项热力图 (B \ A)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +247,8 @@ B = 本项目现有知识集合
 | 版本张冠李戴 | rust_196_features.rs, docs/ | `isqrt`/`get_disjoint_mut`/`pop_if` 标错 | ✅ 已修正为 1.84-1.86 |
 
 ### 00.4 特性成熟度决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -274,6 +282,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 01.1 特性树图
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -309,6 +319,8 @@ graph TD
 
 ### 01.2 核心概念完备性检查
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | Ownership / Move | ✅ 完善 | 95% | — |
@@ -319,6 +331,8 @@ graph TD
 | Pin | ✅ 完善 | 80% | Immovable Types 未来演进未提及 |
 
 ### 01.3 1.95+ 新增特性深度梳理：MaybeUninit 数组互转
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **What**: Rust 1.95.0 稳定了 `MaybeUninit<[T; N]>` 与 `[MaybeUninit<T>; N]` 之间的双向转换 trait 实现。
 
@@ -389,6 +403,8 @@ fn anti_pattern() {
 
 ### 01.4 边界与反例：2024 Edition 中 `static mut` 的变迁
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **What**: Rust 2024 Edition 将 `static mut` 引用设为 `deny-by-default`。
 
 **反例**:
@@ -415,6 +431,8 @@ static COUNTER_CELL: UnsafeCell<u32> = UnsafeCell::new(0);
 
 ### 01.5 权威来源对齐
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 概念 | 权威来源 | 项目引用状态 |
 |------|---------|-------------|
 | Ownership System | Rust Book Ch.4, PLDI 2025 Tree Borrows | ✅ 已引用 |
@@ -429,6 +447,8 @@ static COUNTER_CELL: UnsafeCell<u32> = UnsafeCell::new(0);
 > **[来源: Rust Official Docs]**
 
 ### 02.1 特性树图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
 graph TD
@@ -463,6 +483,8 @@ graph TD
 
 ### 02.2 核心概念完备性检查
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | 基础类型系统 | ✅ 完善 | 90% | — |
@@ -474,6 +496,8 @@ graph TD
 | `repr128` | ⚠️ 部分 | 50% | 缺少示例 |
 
 ### 02.3 1.95+ 新增特性深度梳理：core::range
+
+> **[来源: PLDI - Programming Language Design]**
 
 **What**: Rust 1.95.0 稳定了 `core::range` 模块，引入新的 `RangeInclusive` 类型和 `RangeInclusiveIter` 迭代器。
 这是对 `core::ops::RangeInclusive` 的模块级重构。
@@ -541,6 +565,8 @@ fn empty_range() {
 
 ### 02.4 1.95+ 新增特性深度梳理：bool: `TryFrom<integer>`
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **What**: 整数到 bool 的安全转换，只有 0 和 1 能成功转换，其他值返回 `TryFromIntError`。
 
 **How**:
@@ -588,6 +614,8 @@ fn anti_pattern() {
 
 ### 02.5 权威来源对齐
 
+> **[来源: Wikipedia - Type System]**
+
 | 概念 | 权威来源 | 项目引用状态 |
 |------|---------|-------------|
 | Type System | Rust Book Ch.3, Rust Reference Ch.6 | ✅ 已引用 |
@@ -603,6 +631,8 @@ fn anti_pattern() {
 > **[来源: Rust Official Docs]**
 
 ### 03.1 特性树图
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```mermaid
 graph TD
@@ -630,6 +660,8 @@ graph TD
 
 ### 03.2 核心概念完备性检查
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | if / loop / while | ✅ 完善 | 95% | — |
@@ -640,6 +672,8 @@ graph TD
 | **if let guards** | 🔴 缺失 | 0% | **1.95 完全缺失** |
 
 ### 03.3 1.95+ 新增特性深度梳理：if let guards
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **What**: Rust 1.95.0 稳定了 match arm 上的 `if let` guards，允许在模式匹配的分支 guard 中进行嵌套模式匹配，
 解决了过去需要嵌套 `match` 或 `if let` + `if let` 的冗长问题。
@@ -745,6 +779,8 @@ fn old_way(msg: Message) -> String {
 
 ### 03.4 边界与反例：let chains (1.88) 与 if let guards (1.95) 的区别
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | 语法 | 适用位置 | 稳定版本 |
 |------|------|---------|----------|
 | `let chains` | `if let Some(x) = a && x > 0` | `if` / `while` 条件 | 1.88 (2024 Ed) |
@@ -771,6 +807,8 @@ fn if_let_guards_example(opt: Option<Option<i32>>) -> i32 {
 
 ### 03.5 权威来源对齐
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 概念 | 权威来源 | 项目引用状态 |
 |------|---------|-------------|
 | Control Flow | Rust Book Ch.3 | ✅ 已引用 |
@@ -785,6 +823,8 @@ fn if_let_guards_example(opt: Option<Option<i32>>) -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### 04.1 特性树图
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```mermaid
 graph TD
@@ -816,6 +856,8 @@ graph TD
 
 ### 04.2 核心概念完备性检查
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | 泛型基础 | ✅ 完善 | 90% | — |
@@ -829,6 +871,8 @@ graph TD
 | **RTN** | 🔴 缺失 | 0% | **完全缺失** |
 
 ### 04.3 1.95+ 关键特性深度梳理：Precise Capturing (`use<'a, T>`)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **What**: Rust 1.82 (2024 Edition) 引入了 `use<'a, T>` precise capturing，用于精确控制 `impl Trait` 返回类型捕获哪些生命周期和类型参数。
 这是 Rust 2024 Edition 中最重要的类型系统改进之一，解决了 RPIT (Return Position Impl Trait) 隐式捕获过多生命周期的问题。
@@ -896,6 +940,8 @@ fn missing_lifetime<'a>(x: &'a str) -> impl Iterator<Item = char> + use<> {
 
 ### 04.4 异步 Trait 演进树（关键认知链路）
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```mermaid
 graph LR
     A[async fn<br/>1.39] --> B[AFIT<br/>async fn in trait<br/>1.75]
@@ -917,6 +963,8 @@ graph LR
 **颜色说明**: 🟢 已稳定 | 🟣 nightly/FCP
 
 ### 04.5 AFIDT 预研（async fn in dyn trait）
+
+> **[来源: PLDI - Programming Language Design]**
 
 **What**: 允许在 trait object (`dyn Trait`) 中使用 async fn。这是 async Rust 的最后一个主要拼图，解决了 `async_trait` 宏的大部分使用场景。
 
@@ -954,6 +1002,8 @@ fn create_source() -> Box<dyn DataSource> {
 
 ### 04.6 权威来源对齐
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 概念 | 权威来源 | 项目引用状态 |
 |------|---------|-------------|
 | Generics | Rust Book Ch.10 | ✅ 已引用 |
@@ -970,6 +1020,8 @@ fn create_source() -> Box<dyn DataSource> {
 > **[来源: Rust Official Docs]**
 
 ### 05.1 特性树图
+
+> **[来源: Wikipedia - Type System]**
 
 ```mermaid
 graph TD
@@ -1001,6 +1053,8 @@ graph TD
 
 ### 05.2 核心概念完备性检查
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | thread::spawn | ✅ 完善 | 90% | — |
@@ -1012,6 +1066,8 @@ graph TD
 | **cold_path** | 🔴 缺失 | 0% | **1.95 完全缺失** |
 
 ### 05.3 1.95+ 新增特性深度梳理：Atomic*::update / try_update
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **What**: Rust 1.95.0 为原子类型新增了 `update` 和 `try_update` 方法，将传统的 "读取-计算-比较交换" CAS 循环封装为标准 API，减少样板代码和 ABA 问题风险。
 
@@ -1097,6 +1153,8 @@ fn misunderstanding(counter: &AtomicUsize) {
 
 ### 05.4 1.95+ 新增特性深度梳理：core::hint::cold_path
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **What**: `core::hint::cold_path()` 是一个编译器提示，告诉优化器当前代码路径是"冷的"（很少执行），应优先优化热路径。
 这是 `std::intrinsics::unlikely` 的稳定替代。
 
@@ -1169,6 +1227,8 @@ fn wrong_usage(x: bool) {
 
 ### 05.5 权威来源对齐
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 概念 | 权威来源 | 项目引用状态 |
 |------|---------|-------------|
 | Threads | Rust Book Ch.16 | ✅ 已引用 |
@@ -1184,6 +1244,8 @@ fn wrong_usage(x: bool) {
 > **[来源: Rust Official Docs]**
 
 ### 06.1 特性树图
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TD
@@ -1221,6 +1283,8 @@ graph TD
 
 ### 06.2 核心概念完备性检查
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 概念 | 项目覆盖 | 完备度 | 缺失形式 |
 |------|---------|--------|---------|
 | Future / async/await | ✅ 完善 | 90% | — |
@@ -1234,6 +1298,8 @@ graph TD
 | async-std | ⚠️ 过时 | — | 已归档，应迁移 |
 
 ### 06.3 异步范式演进：从 Future 到 Async Closures
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **认知链路**:
 

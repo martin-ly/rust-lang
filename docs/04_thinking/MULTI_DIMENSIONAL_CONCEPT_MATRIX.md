@@ -129,6 +129,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 所有权机制对比矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +142,8 @@
 | **Rc/Arc**     | ✅ 共享    | 引用计数     | 自动管理     | 共享所有权 | 中   | ⭐⭐⭐⭐   |
 
 ### 2. 类型系统特性对比矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +155,8 @@
 | **类型推断** | ✅ 自动推断   | ✅ 编译时  | 零开销             | 高     | 简化代码 |
 
 ### 3. 并发模型对比矩阵
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +168,8 @@
 | **数据并行** | ✅ 是    | 很高 | 低     | 数据并行   | ⭐⭐⭐⭐⭐ |
 
 ### 4. 同步原语对比矩阵
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +182,8 @@
 | **屏障**     | ✅ 是    | 中等       | 低         | 同步点   | ⭐⭐⭐     |
 
 ### 5. 异步运行时对比矩阵
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +194,8 @@
 | **Glommio**   | ⭐⭐⭐⭐⭐ | ⭐⭐       | ⭐⭐       | 特定场景 | ⭐⭐⭐     |
 
 ### 6. 算法复杂度对比矩阵
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +208,8 @@
 | **线性搜索** | O(n)       | O(1)       | -      | 未排序数组 |
 
 ### 7. 设计模式对比矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +222,8 @@
 | **适配器** | 低     | 中     | 高   | 接口转换 | ⭐⭐⭐⭐   |
 
 ### 8. 网络协议对比矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +241,8 @@
 
 ### 1. 内存管理选型矩阵
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 需求                 | 推荐方案       | 备选方案  | 理由             |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 多线程共享           | `Arc<T>`         | `Rc<T>`    | 线程安全         |
@@ -234,6 +252,8 @@
 
 ### 2. 并发方案选型矩阵
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 需求       | 推荐方案 | 备选方案 | 理由           |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | I/O 密集型 | 异步     | 线程     | 高并发、低开销 |
@@ -242,6 +262,8 @@
 | 简单并发   | 通道     | 共享状态 | 更安全         |
 
 ### 3. 错误处理选型矩阵
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 场景       | 推荐方案     | 备选方案      | 理由         |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |

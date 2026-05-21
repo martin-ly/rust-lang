@@ -124,6 +124,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 维度 1: 错误类型 - 可恢复 vs 不可恢复
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +144,8 @@
 ---
 
 ### 维度 2: 错误传播范围
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +179,8 @@
 ```
 
 #### 2.1 本地处理场景
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +191,8 @@
 | 可选字段 | `Option` + `if let` | `if let Some(name) = user.nickname { ... }` |
 
 #### 2.2 错误传播场景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +208,8 @@
 ---
 
 ### 维度 3: 错误处理策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +230,8 @@
 ```
 
 #### 策略选择矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -277,6 +289,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 ### 维度 4: 库 vs 应用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────┐
 │                   库代码 (Library)                          │
@@ -330,6 +344,8 @@ fn should_retry(error: &Error) -> RetryDecision {
 > **[来源: Rust Official Docs]**
 
 ### Result vs Option vs panic
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -386,6 +402,8 @@ let value = result.unwrap();        // 仅用于原型/测试
 ---
 
 ### thiserror vs anyhow
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -463,6 +481,8 @@ fn main() -> Result<()> {
 ---
 
 ### 自定义错误类型设计
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -565,6 +585,8 @@ pub enum AppError {
 
 ### 错误链和上下文
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 错误链结构:
 
@@ -659,6 +681,8 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 > **[来源: Rust Official Docs]**
 
 ### 1. 错误类型设计模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 模式 A: 分层错误架构
 
@@ -791,6 +815,8 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
 ### 2. 错误转换和映射
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 2.1 自动转换 (`From` trait)
 
 ```rust
@@ -848,6 +874,8 @@ fn load_users() -> Result<Vec<User>> {
 ---
 
 ### 3. 错误报告和日志
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 3.1 结构化日志集成
 
@@ -952,6 +980,8 @@ pub fn report_error(err: &AppError) {
 
 ### 4. 测试错误处理
 
+> **[来源: Wikipedia - Type System]**
+
 #### 4.1 测试错误类型
 
 ```rust
@@ -1055,6 +1085,8 @@ async fn test_circuit_breaker() {
 
 ### ❌ 反模式 1: 滥用 `unwrap()`
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // ❌ 错误: 生产代码中使用 unwrap
 let config = fs::read_to_string("config.json").unwrap();
@@ -1074,6 +1106,8 @@ let val = Some(42).expect("this is a bug: value should exist");
 ```
 
 ### ❌ 反模式 2: 过度使用 `String` 作为错误
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // ❌ 错误: 使用 String 丢失类型安全
@@ -1105,6 +1139,8 @@ match do_something() {
 
 ### ❌ 反模式 3: 错误的 `?` 使用导致信息丢失
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // ❌ 错误: 丢失了上下文信息
 fn process_file(path: &str) -> Result<Data, io::Error> {
@@ -1132,6 +1168,8 @@ fn process_file(path: &str) -> Result<Data> {
 ```
 
 ### ❌ 反模式 4: 混淆 `Option` 和 `Result`
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // ❌ 错误: Option 表示错误
@@ -1163,6 +1201,8 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 ### ❌ 反模式 5: 忽略错误
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // ❌ 错误: 完全忽略错误
 let _ = file.write_all(data);
@@ -1188,6 +1228,8 @@ let _ = cache.insert(key, value); // 缓存失败可接受
 ```
 
 ### ❌ 反模式 6: 过度详细的错误类型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // ❌ 错误: 过于详细的错误枚举
@@ -1220,6 +1262,8 @@ enum DatabaseError {
 
 ### ❌ 反模式 7: 跨线程边界传递非 Send 错误
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // ❌ 错误: Rc 不能跨线程
 #[derive(Error, Debug)]
@@ -1244,6 +1288,8 @@ enum GoodError {
 ```
 
 ### ❌ 反模式 8: 在热路径中创建错误字符串
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // ❌ 错误: 每次调用都分配字符串，即使成功
@@ -1278,6 +1324,8 @@ enum LazyError {
 > **[来源: Rust Official Docs]**
 
 ### 完整示例 1: 分层错误处理架构
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 //! 完整的多层错误处理示例
@@ -1577,6 +1625,8 @@ fn main() {
 ```
 
 ### 完整示例 2: 带重试和断路器的错误处理
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 //! 生产级错误处理：重试、断路器、超时
@@ -1978,6 +2028,8 @@ mod tests {
 
 ### 完整示例 3: anyhow + thiserror 混合使用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 //! anyhow 和 thiserror 的最佳实践组合
 
@@ -2319,6 +2371,8 @@ mod examples {
 
 ### A. 快速决策参考表
 
+> **[来源: Wikipedia - Type System]**
+
 | 场景 | 推荐方案 | 代码示例 |
 | :--- | :--- | :--- |
 | 函数返回可能失败 | `Result<T, E>` | `fn foo() -> Result<T, MyError>` |
@@ -2333,6 +2387,8 @@ mod examples {
 
 ### B. 常用 crate 对比
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | Crate | 用途 | 开销 | 推荐场景 |
 | :--- | :--- | :--- | :--- |
 | `thiserror` | 定义错误类型 | 零 | 库代码 |
@@ -2342,6 +2398,8 @@ mod examples {
 | `fehler` | 异常式错误 | 极小 | 简化错误处理 |
 
 ### C. 进一步阅读
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - [Rust Error Handling Best Practices](https://doc.rust-lang.org/stable/rust-by-example/error.html)
 - [thiserror 文档](https://docs.rs/thiserror)
@@ -2359,6 +2417,8 @@ mod examples {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

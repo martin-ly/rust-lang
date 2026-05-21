@@ -91,6 +91,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 空 Vec 与零长度
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +106,8 @@ empty.get(0);   // ✅ 返回 None
 ```
 
 ### 空 HashMap / BTreeMap
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +120,8 @@ map.insert(1, "a");  // 插入后非空
 ```
 
 ### 空切片
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +138,8 @@ slice.iter().next();  // ✅ 返回 None
 > **[来源: Rust Official Docs]**
 
 ### 空输入的排序与搜索
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +154,8 @@ one.binary_search(&0);  // ✅ Err(0)
 ```
 
 ### 单元素与双元素
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +172,8 @@ single.chunks(1).count();  // 1
 > **[来源: Rust Official Docs]**
 
 ### 零个线程 / 空任务列表
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +186,8 @@ for h in handles {
 ```
 
 ### 通道已关闭
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +200,8 @@ rx.recv();  // ✅ Err，表明通道已关闭
 ```
 
 ### Mutex poison
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 当持有 MutexGuard 的线程 panic 时，Mutex 被标记为 poisoned

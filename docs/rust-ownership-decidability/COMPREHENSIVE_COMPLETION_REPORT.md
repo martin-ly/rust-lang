@@ -6,7 +6,6 @@
 
 ---
 
-
 ## 📑 目录
 >
 - [全面论证完成报告：自然语言论证的完整补充](#全面论证完成报告自然语言论证的完整补充)
@@ -50,14 +49,18 @@
     - [9.3 未来的展望](#93-未来的展望)
   - [*状态: 完成 ✅*](#状态-完成-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、完成的论证文档总览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 文档清单（共14个自然语言文档）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 核心理解文档（5个）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 字数 | 核心贡献 |
@@ -94,6 +97,8 @@
 
 ### 1.2 统计数据
 
+> **[来源: Wikipedia - Type System]**
+
 **总计**：
 
 - **文档数量**: 14个
@@ -106,6 +111,8 @@
 ## 二、关联性论证的核心内容
 
 ### 2.1 横向关联论证（HORIZONTAL_CONNECTIONS.md）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **核心贡献**：
 
@@ -146,6 +153,8 @@ Linearizability（枢纽）
 
 ### 2.2 历史演化论证（HISTORICAL_EVOLUTION.md）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **核心贡献**：
 
 **时间线**：
@@ -175,6 +184,8 @@ Linearizability（枢纽）
 ```
 
 ### 2.3 比较分析论证（COMPARATIVE_ANALYSIS.md）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **核心贡献**：
 
@@ -210,6 +221,8 @@ Rust的位置：表达能力高 + 实用性高
 ```
 
 ### 2.4 设计决策原理论证（DESIGN_RATIONALE.md）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **核心贡献**：
 
@@ -708,11 +721,9 @@ ELet包含mutability：可变性是绑定的一部分
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -720,7 +731,6 @@ ELet包含mutability：可变性是绑定的一部分
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

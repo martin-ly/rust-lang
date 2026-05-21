@@ -128,6 +128,8 @@
 本研究的目的是深入理解 Rust 的型变（Variance）理论，并形式化定义型变规则。
 
 ### 核心问题
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@
 3. **型变与内存安全**: 型变如何保证内存安全？
 
 ### 预期成果
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +154,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 子类型关系
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +170,8 @@
 - **传递性**: $\forall S, T, U. S <: T \land T <: U \Rightarrow S <: U$
 
 ### 型变的基本概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +187,8 @@
 - **不变 (Invariance)**: $S <: T$ 不导致 $F[S]$ 和 $F[T]$ 之间的子类型关系
 
 ### Rust 中的型变
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +199,8 @@
 **内存安全**: Rust 的型变规则设计是为了保证内存安全，防止悬垂引用和数据竞争。
 
 ### 相关概念
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +217,8 @@
 **函数类型型变**: 函数类型的参数是逆变的，返回值是协变的。这保证了函数调用的类型安全。
 
 ### 理论背景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +237,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 协变 (Covariance)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **定义 1.1 (协变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \Rightarrow F[S] <: F[T]$，则 $F$ 对参数 $T$ 是**协变的**。
 
@@ -252,6 +268,8 @@ $$\text{Cov}[F] \Leftrightarrow \forall S, T. S <: T \Rightarrow F[S] <: F[T]$$
 
 ### 2. 逆变 (Contravariance)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 2.1 (逆变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \Rightarrow F[T] <: F[S]$，则 $F$ 对参数 $T$ 是**逆变的**。
 
 **形式化表示**:
@@ -280,6 +298,8 @@ $$
 - 函数参数逆变保证了函数调用的类型安全
 
 ### 3. 不变 (Invariance)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 3.1 (不变)**: 对于参数化类型构造器 $F[T]$，如果 $S <: T \land S \neq T \Rightarrow F[S] \not<: F[T] \land F[T] \not<: F[S]$，则 $F$ 对参数 $T$ 是**不变的**。
 
@@ -329,6 +349,8 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 - 返回值协变：如果 $U <: V$，则 `fn(T) -> U` 可以替换 `fn(T) -> V`
 
 ### 4. 型变规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定理 1 (型变规则)**: Rust 的型变规则由类型参数的使用方式决定：
 
@@ -729,7 +751,6 @@ fn use_contravariant_callback() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

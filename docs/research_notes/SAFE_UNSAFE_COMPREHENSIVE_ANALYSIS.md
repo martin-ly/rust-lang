@@ -109,6 +109,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +124,8 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 安全边界 = 编译器可静态验证的保证范围。跨越边界即需程序员契约。
 
 ### 1.2 边界图示
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +153,8 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 ```
 
 ### 1.3 为何需要 unsafe？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -169,6 +175,8 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 > **[来源: Rust Official Docs]**
 
 ### 2.1 安全保证定理汇总
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +198,8 @@ unsafe Rust 指包含 `unsafe` 块、调用 `unsafe fn` 或实现 `unsafe trait`
 **推论 SU-C1**：Safe 代码不触发 UB 当且仅当未调用违反契约的 unsafe；由 Def 1.1 与各 unsafe 契约。
 
 ### 2.2 安全保证依赖链
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +224,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 > **[来源: Rust Official Docs]**
 
 ### 3.1 契约形式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +235,8 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 - $Q$：后置条件（编译器信任）
 
 ### 3.2 典型 unsafe 操作契约表
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 操作 | 前置 P | 后置 Q | 说明 |
 | :--- | :--- | :--- | :--- |

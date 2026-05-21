@@ -33,6 +33,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -47,6 +48,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 技术风险
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -62,6 +65,8 @@
 
 ### 生态风险
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
 | :--- | :--- | :--- | :--- | :--- |
 | 关键依赖弃用 | 低 | 高 | 🟡 中 | 多备选方案,  vendors |
@@ -71,6 +76,8 @@
 | 社区支持减弱 | 低 | 中 | 🟢 低 | 开源贡献, 文档 |
 
 ### 项目风险
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 风险项 | 概率 | 影响 | 风险等级 | 缓解措施 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -106,6 +113,8 @@
 ## 风险应对策略
 
 ### 高风险项应对
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 1. 依赖库漏洞 (🔴 高)
 
@@ -292,7 +301,6 @@ cargo clippy -- -W clippy::undocumented_unsafe_blocks
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

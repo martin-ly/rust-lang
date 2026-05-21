@@ -64,6 +64,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 论文核心命题
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -74,6 +76,8 @@
 这意味着，语言的**形式化语义**与**编译器实际生成的代码**之间存在着重要的安全鸿沟。编译器不仅负责代码生成，更在某种程度上"修补"了语言语义中的安全漏洞。
 
 ### 2.2 具体案例
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +108,8 @@ flowchart TD
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Rust 的所有权系统：编译期消除运行时错误
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +127,8 @@ flowchart LR
 ```
 
 ### 3.2 Rust 的编译器"拯救"机制
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +142,8 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 | `Drop Check` | 悬垂引用、use-after-move | 析构顺序分析 |
 
 ### 3.3 关键差异
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +160,8 @@ Rust 编译器 (`rustc`) 的以下组件扮演了论文中"saved by compiler"的
 > **[来源: Rust Official Docs]**
 
 ### 4.1 C 语言中的典型案例
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +182,8 @@ free(p);
 - 微小的代码改动可能破坏优化的前提条件
 
 ### 4.2 C++ 的 `std::unique_ptr`
+
+> **[来源: Wikipedia - Type System]**
 
 C++11 引入的 `std::unique_ptr` 是一个中间案例：
 
@@ -196,6 +210,8 @@ flowchart LR
 
 ### 5.1 对安全关键系统开发的启示
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 该论文对安全关键系统（Safety-Critical Systems）开发有重要指导意义：
 
 | 领域 | 传统方法 | 基于 Rust 的改进 |
@@ -206,6 +222,8 @@ flowchart LR
 | 操作系统内核 | 内核模式隔离 | `Rust for Linux` 减少 `unsafe` |
 
 ### 5.2 从"偶然安全"到"必然安全"
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 论文的核心警示在于：
 

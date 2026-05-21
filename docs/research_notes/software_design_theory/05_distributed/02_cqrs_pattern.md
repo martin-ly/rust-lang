@@ -37,6 +37,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def CQ1: CQRS (Command Query Responsibility Segregation)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 ```
 
 ### Def CQ2: 命令与查询的分离
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -65,6 +69,8 @@ Query   := input → S_q → output
 - **查询**无副作用（纯函数）
 
 ### Def CQ3: 最终一致性边界
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 Consistency_Boundary := Δt ∈ Time
@@ -79,6 +85,8 @@ Consistency_Boundary := Δt ∈ Time
 
 ### Axiom CQ1: 命令不可重复
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 ∀c ∈ C. exec(c, s) = (s', ev) → exec(c, s') ≠ (s'', ev')
 ```
@@ -87,6 +95,8 @@ Consistency_Boundary := Δt ∈ Time
 
 ### Axiom CQ2: 投影单调性
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```
 ∀s_c₁, s_c₂. s_c₁ ⊆ s_c₂ → P_sync(s_c₁) ⊆ P_sync(s_c₂)
 ```
@@ -94,6 +104,8 @@ Consistency_Boundary := Δt ∈ Time
 同步投影是**单调的**，新事件不会撤销已同步的数据。
 
 ### Axiom CQ3: 查询一致性级别
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}

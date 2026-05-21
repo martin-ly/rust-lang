@@ -55,6 +55,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 array_windows - 恒定长度窗口迭代
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +151,8 @@ fn parse_frames(buffer: &[u8]) -> impl Iterator<Item = CanFrame> + '_ {
 ---
 
 ### 1.2 LazyCell/LazyLock API 完整稳定化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -273,6 +277,8 @@ impl Crc32Table {
 ---
 
 ### 1.3 AVX-512 FP16 Intrinsics
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -336,6 +342,8 @@ pub unsafe fn fp16_dot_product(
 
 ### 1.4 其他稳定化API
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### CStr字节操作
 
 ```rust
@@ -383,6 +391,8 @@ fn next_deadline(base: Duration) -> Duration {
 ## Rust 1.95.0 预览特性
 
 ### 2.1 Impl Trait in Associated Type (ITIAT)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 问题背景
 

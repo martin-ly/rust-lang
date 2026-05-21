@@ -58,6 +58,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 RustBelt
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,12 +70,16 @@
 
 ### 2.2 RustBelt Meets Relaxed Memory (POPL 2020)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - **论文**: [RustBelt Meets Relaxed Memory](https://plv.mpi-sws.org/rustbelt/rbrlx/README.md)
 - **形式化**: 松弛内存、Arc 数据竞争、synchronized ghost state
 - **本项目对应**: `formal_methods` Phase 4（MaybeUninit、原子操作）— 仅 Def 级
 - **差距**: 无松弛内存模型；无 Arc 形式化；无 ghost state 构造
 
 ### 2.3 RustSEM (K-Framework, 2024)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - **论文**: [Formally understanding Rust's ownership and borrowing system at the memory level](https://link.springer.com/article/10.1007/s10703-024-00460-3) (FMSD)
 - **形式化**: 内存级 OBS、可执行操作语义、700+ 测试
@@ -82,12 +88,16 @@
 
 ### 2.4 Aeneas
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - **形式化**: Safe Rust 翻译到 Coq、F*、HOL4、Lean
 - **本项目对应**: [AENEAS_INTEGRATION_PLAN](./AENEAS_INTEGRATION_PLAN.md)（对接方案已制定）
 - **差距**: 无证明助手翻译；无多后端验证
 - **对接状态**: 📋 计划中 — 示例选取、环境搭建、翻译验证待实施
 
 ### 2.5 coq-of-rust
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - **形式化**: THIR → Rocq，显式借用与 effect 序列
 - **本项目对应**: 无

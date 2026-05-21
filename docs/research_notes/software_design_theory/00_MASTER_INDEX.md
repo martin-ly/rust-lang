@@ -28,6 +28,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -41,6 +42,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 理论层次
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -56,6 +59,8 @@
 ```
 
 ### 1.2 依赖关系
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -78,6 +83,8 @@
 
 ### 2.1 三维边界
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 维度 | 内容 | 文档 |
 | :--- | :--- | :--- |
 | **安全 vs 非安全** | 纯 Safe / 需 unsafe / 无法表达 | [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) |
@@ -85,6 +92,8 @@
 | **充分 vs 非充分表达** | 等价表达 / 近似表达 / 不可表达 | [expressive_inexpressive_matrix](05_boundary_system/expressive_inexpressive_matrix.md) |
 
 ### 2.2 边界原则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 - **安全边界**：每个模式/模型标注「纯 Safe / 需 unsafe / 无法表达」
 - **支持边界**：在 Rust 1.93+ 下的「原生支持 / 库支持 / 需 FFI」
@@ -95,6 +104,8 @@
 ## 三、扩展化路线
 
 ### 3.1 设计模式扩展
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - GoF 23 模式（当前）✅
 - **Rust Idioms** ✅ [06_rust_idioms](./06_rust_idioms.md)：RAII、Newtype、类型状态、Error/Option/Cow、Builder 变体；含 Def/Axiom/定理、完整代码示例、典型场景、常见陷阱、与 GoF 衔接
@@ -254,7 +265,6 @@
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

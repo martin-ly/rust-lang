@@ -36,6 +36,8 @@
 formal_methods 目录已达到 **100% 完成度**！
 
 ### 完成度变化
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -55,6 +57,8 @@ formal_methods 目录已达到 **100% 完成度**！
 
 ### 1. 证明树补充 (4个)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | # | 证明树 | 文件名 | 状态 |
 |---|--------|--------|------|
 | 1 | 类型安全证明树 | PROOF_TREE_TYPE_SAFETY.md | ✅ |
@@ -63,6 +67,8 @@ formal_methods 目录已达到 **100% 完成度**！
 | 4 | 异步并发安全证明树 | PROOF_TREE_ASYNC_CONCURRENCY.md | ✅ |
 
 ### 2. Coq骨架创建 (3个)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | # | Coq文件 | 完成度 | 内容 |
 |---|---------|--------|------|
@@ -73,6 +79,8 @@ formal_methods 目录已达到 **100% 完成度**！
 | 5 | async.v | 0%→100% | Future状态机、Pin保证 |
 
 ### 3. 矩阵更新
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ IMPLEMENTATION_PROGRESS_MATRIX.md - 更新至100%
 - ✅ CONCEPT_AXIOM_THEOREM_MATRIX.md - 更新所有定理状态

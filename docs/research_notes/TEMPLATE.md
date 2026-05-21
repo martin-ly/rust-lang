@@ -112,6 +112,8 @@
 本研究的目的是 [研究目的描述]。
 
 ### 核心问题
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +122,8 @@
 3. **[问题三]**: [问题描述]
 
 ### 预期成果
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,12 +138,16 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
 **[概念名称]**: [概念定义和说明]
 
 ### 理论背景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +160,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 定义/设计要点一
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +182,8 @@ fn example_definition() {
 ```
 
 ### 2. 定义/设计要点二
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

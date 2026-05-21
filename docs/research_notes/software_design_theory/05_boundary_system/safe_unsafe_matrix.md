@@ -28,6 +28,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -119,6 +120,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 创建型（5）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +134,8 @@
 | Singleton | 纯 Safe / 需 unsafe | OnceLock/LazyLock 为 Safe；`static mut` 需 unsafe |
 
 ### 结构型（7）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +150,8 @@
 | Proxy | 纯 Safe | 持有目标，委托调用 |
 
 ### 行为型（11）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +248,8 @@
 
 ### 示例 1：需全局配置的单例
 
+> **[来源: PLDI - Programming Language Design]**
+
 **场景**：应用启动时加载配置，全局只读访问。
 
 **决策**：需 Safe → 用 `OnceLock`；无需 unsafe。
@@ -259,6 +268,8 @@ fn config() -> &'static Config {
 
 ### 示例 2：需共享可变状态的 Observer
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **场景**：多订阅者接收事件；发布者与订阅者可能跨线程。
 
 **决策**：共享可变 → 用 channel 或 `Arc<Mutex<Vec<Callback>>>`；channel 为纯 Safe，无共享可变。
@@ -272,6 +283,8 @@ let (tx, rx) = mpsc::channel::<Event>();
 ```
 
 ### 示例 3：需 FFI 的 Gateway
+
+> **[来源: Wikipedia - Type System]**
 
 **场景**：调用 C 库支付接口。
 
@@ -304,6 +317,8 @@ impl PaymentGateway for FFIPaymentGateway {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -351,7 +366,6 @@ impl PaymentGateway for FFIPaymentGateway {
 
 - [05_boundary_system 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

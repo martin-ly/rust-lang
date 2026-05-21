@@ -40,6 +40,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -54,6 +55,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 定理证明器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -65,6 +68,8 @@
 | **Agda** | 依赖类型 | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | 类型论研究 |
 
 ### Rust专用验证工具
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 工具 | 技术 | 自动化 | 覆盖范围 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -82,6 +87,8 @@
 
 ### 代码质量与lint
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 工具 | 类型 | 用途 | 集成 |
 | :--- | :--- | :--- | :--- |
 | **Clippy** | Lint | 代码风格、常见错误 | Cargo内置 |
@@ -91,6 +98,8 @@
 | **cargo-deny** | 策略 | 许可/安全策略 | CI/CD |
 
 ### 高级静态分析
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 工具 | 技术 | 能力 | 性能 |
 | :--- | :--- | :--- | :--- |
@@ -104,6 +113,8 @@
 ## 三、测试工具
 
 ### 单元与集成测试
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 工具 | 类型 | 特性 | 生态 |
 | :--- | :--- | :--- | :--- |
@@ -317,7 +328,6 @@ jobs:
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

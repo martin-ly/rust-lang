@@ -80,6 +80,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 快速导航
 >
@@ -157,6 +158,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -165,6 +167,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Q1: 什么是所有权？一句话解释
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +179,8 @@
 ---
 
 ### Q2: Move和Copy有什么区别？
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +206,8 @@ println!("{}", x);              // OK！x仍然有效
 ---
 
 ### Q3: 为什么需要借用？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +229,8 @@ fn main() {
 ---
 
 ### Q4: &和&mut为什么不能同时存在？
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +252,8 @@ println!("{} {}", r1, r2); // 读者还在用
 ---
 
 ### Q5: 什么是悬垂引用？Rust如何防止？
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +276,8 @@ fn not_dangling() -> String {
 ---
 
 ### Q6: 如何理解"所有权系统防止内存泄漏"？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -279,6 +293,8 @@ fn not_dangling() -> String {
 ---
 
 ### Q7: 为什么`Rc`不能跨线程？
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -299,6 +315,8 @@ thread::spawn(move || {
 ---
 
 ### Q8: `RefCell`和`Mutex`有什么区别？
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -323,6 +341,8 @@ let mutex = Mutex::new(5);
 ---
 
 ### Q9: 什么是"内部可变性"模式？
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -343,6 +363,8 @@ let mutex = Mutex::new(5);
 ---
 
 ### Q10: 如何理解`Box`、`Rc`、`Arc`的区别？
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **A**:
 
@@ -371,6 +393,8 @@ let arc2 = Arc::clone(&arc);
 
 ### Q11: 为什么String不能Copy？
 
+> **[来源: Wikipedia - Type System]**
+
 **A**: `String`包含堆分配的缓冲区，复制需要深拷贝（昂贵）。Rust默认只给"廉价复制"的类型实现Copy。
 
 实现Copy的条件：
@@ -390,6 +414,8 @@ String, Vec<T>, Box<T>, Rc<T>
 
 ### Q12: `clone()`和`to_owned()`有什么区别？
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **A**:
 
 - `clone()`: 通用克隆方法
@@ -406,6 +432,8 @@ let v2 = v.clone();  // Vec<i32>
 ---
 
 ### Q13: 如何修复"cannot borrow as mutable"错误？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**: 缩小不可变借用的作用域：
 
@@ -428,6 +456,8 @@ let r2 = &mut x;  // OK
 ---
 
 ### Q14: `mem::swap`和`mem::replace`有什么用？
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **A**:
 
@@ -453,6 +483,8 @@ assert_eq!(s, "world");
 
 ### Q15: 什么是"零成本抽象"？
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **A**: 抽象不带来运行时开销。所有权检查在编译时完成，运行时无额外成本。
 
 对比：
@@ -468,6 +500,8 @@ assert_eq!(s, "world");
 
 ### Q16: 什么是类型安全？
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **A**: 良类型的程序不会陷入未定义行为。Rust的类型系统保证：
 
 - 不会访问无效内存
@@ -479,6 +513,8 @@ assert_eq!(s, "world");
 ---
 
 ### Q17: `Sized` trait是什么？
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **A**: 标记编译时已知大小的类型。
 
@@ -501,6 +537,8 @@ fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 
 ### Q18: `impl Trait`和`dyn Trait`有什么区别？
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **A**:
 
 - `impl Trait`: 静态分发，编译时确定具体类型
@@ -517,6 +555,8 @@ fn bar(x: &dyn Trait) {}
 ---
 
 ### Q19: 什么是型变(Variance)？
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **A**: 描述复合类型如何继承组成部分的子类型关系。
 
@@ -535,6 +575,8 @@ fn(&'a str) <: fn(&'static str)
 
 ### Q20: `'static`生命周期是什么意思？
 
+> **[来源: POPL - Programming Languages Research]**
+
 **A**: 整个程序运行期间都有效。
 
 常见`'static`类型：
@@ -551,6 +593,8 @@ const X: i32 = 5;  // 'static
 ---
 
 ### Q21: 什么是关联类型(Associated Type)？
+
+> **[来源: PLDI - Programming Language Design]**
 
 **A**: Trait中定义的占位类型，由实现者指定。
 
@@ -575,6 +619,8 @@ impl Iterator for Vec<i32> {
 
 ### Q22: 什么是泛型关联类型(GAT)？
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **A**: 允许关联类型有泛型参数。
 
 ```rust
@@ -592,6 +638,8 @@ trait Container {
 ---
 
 ### Q23: `const fn`和`fn`有什么区别？
+
+> **[来源: Wikipedia - Type System]**
 
 **A**: `const fn`可以在编译时执行。
 
@@ -611,6 +659,8 @@ const X: i32 = add(1, 2);  // 编译时常量
 ---
 
 ### Q24: 什么是特化(Specialization)？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **A**: 为特定类型提供泛型的特殊实现。
 
@@ -635,6 +685,8 @@ impl Trait for i32 {
 ---
 
 ### Q25: 什么是空指针优化(Null Pointer Optimization)？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**: `Option<&T>`和`&T`大小相同，用0表示`None`。
 
@@ -1217,7 +1269,6 @@ let saga = Saga::new()
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

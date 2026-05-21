@@ -42,6 +42,8 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Unsafe 的能力范围
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -66,6 +68,8 @@ unsafe {
 
 ### Unsafe 函数契约
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 每个 unsafe 函数都应该有明确的安全契约：
 
 ```rust
@@ -81,6 +85,8 @@ pub unsafe fn dangerous_operation<T>(ptr: *mut T) -> T {
 ```
 
 ### 安全的抽象包装
+
+> **[来源: ACM - Systems Programming Languages]**
 
 将 unsafe 代码包装在 safe API 中：
 
@@ -159,6 +165,8 @@ unsafe impl<T: Sync> Sync for SafeBuffer<T> {}
 ## 原始指针操作
 
 ### 指针算术和内存操作
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::ptr;
@@ -248,6 +256,8 @@ impl<T> Drop for RawVec<T> {
 
 ### 类型转换和指针转换
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 /// 安全的类型转换工具
 pub struct Transmuter;
@@ -292,6 +302,8 @@ impl Transmuter {
 ```
 
 ### 指针别名和内存屏障
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::sync::atomic::{fence, Ordering};
@@ -370,6 +382,8 @@ unsafe impl<T: Send> Sync for SpscQueue<T> {}
 ## Union 类型
 
 ### 基础 Union 用法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::mem::{size_of, transmute};
@@ -477,6 +491,8 @@ impl TaggedValue {
 
 ### MaybeUninit 模式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::mem::MaybeUninit;
 
@@ -553,6 +569,8 @@ impl<T, const N: usize> Drop for ArrayVec<T, N> {
 ## 内联汇编
 
 ### 基础汇编语法
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::arch::asm;

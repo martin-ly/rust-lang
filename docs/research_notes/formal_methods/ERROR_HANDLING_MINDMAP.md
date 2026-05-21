@@ -138,6 +138,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 基本使用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +161,8 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 ```
 
 ### 组合方法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +182,8 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 > **[来源: Rust Official Docs]**
 
 ### 使用 thiserror (库开发)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +207,8 @@ pub enum ConfigError {
 ```
 
 ### 使用 anyhow (应用开发)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -228,6 +236,8 @@ fn main() -> Result<()> {
 > **[来源: Rust Official Docs]**
 
 ### 适用场景
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +249,8 @@ fn main() -> Result<()> {
 | 快速失败开发 | `todo!()` | 占位实现 |
 
 ### 与 Result 对比
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

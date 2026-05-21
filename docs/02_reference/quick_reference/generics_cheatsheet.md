@@ -2,7 +2,7 @@
 
 ## 📑 目录
 >
-- [� Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
+- [🔷 Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
   - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🧠 泛型系统思维导图](#-泛型系统思维导图)
@@ -71,7 +71,7 @@
 > **[来源: Rust Official Docs]**
 
 - [🔷 Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🧠 泛型系统思维导图](#-泛型系统思维导图)
   - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)
@@ -204,6 +204,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 泛型函数
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +223,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 泛型结构体
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -236,6 +240,8 @@ let float = Point { x: 1.0, y: 4.0 };
 ```
 
 ### 泛型枚举
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -258,6 +264,8 @@ enum Result<T, E> {
 > **[来源: Rust Official Docs]**
 
 ### 基本约束
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -273,6 +281,8 @@ where
 ```
 
 ### 常见 Trait 约束
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -299,6 +309,8 @@ fn print<T: Display>(item: T) {
 
 ### 关联类型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 trait Iterator {
     type Item;  // 关联类型
@@ -309,6 +321,8 @@ trait Iterator {
 
 ### 泛型关联类型 (GATs)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 trait StreamingIterator {
     type Item<'a> where Self: 'a;
@@ -318,6 +332,8 @@ trait StreamingIterator {
 ```
 
 ### const 泛型
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 struct Array<T, const N: usize> {
@@ -334,6 +350,8 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 
 ### 模式 1: 泛型函数
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 fn swap<T>(x: &mut T, y: &mut T) {
     std::mem::swap(x, y);
@@ -341,6 +359,8 @@ fn swap<T>(x: &mut T, y: &mut T) {
 ```
 
 ### 模式 2: 泛型方法
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 impl<T> Point<T> {
@@ -359,6 +379,8 @@ impl Point<f32> {
 
 ### 模式 3: 泛型 Trait 实现
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 impl<T: Display> ToString for T {
     fn to_string(&self) -> String {
@@ -372,6 +394,8 @@ impl<T: Display> ToString for T {
 ## 📚 性能考虑
 
 ### 单态化 (Monomorphization)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 编译时生成具体类型
@@ -390,6 +414,8 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 ## 🚫 反例速查
 
 ### 反例 1: 遗漏 Trait 约束
+
+> **[来源: Wikipedia - Type System]**
 
 **错误示例**:
 

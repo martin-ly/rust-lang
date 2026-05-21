@@ -93,6 +93,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 第1周: 语法与语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +170,8 @@
   - 错误处理模式
 
 ### 第2周: 基础应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +202,8 @@
 - 代码覆盖率
 
 ### Level 1 评估
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +216,8 @@
 ## Level 2: 系统编程 (2周)
 
 ### 第3周: 底层编程
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 模块7: 智能指针 (2天)
 
@@ -261,6 +269,8 @@
 
 ### 第4周: 嵌入式Rust
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 模块10: 无标准库编程 (2天)
 
 - #![no_std]
@@ -284,6 +294,8 @@
 
 ### Level 2 评估
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **项目**: 嵌入式传感器驱动
 - **代码审查**: unsafe代码审查
 - **性能分析**: 内存和CPU使用
@@ -293,6 +305,8 @@
 ## Level 3: 安全关键 (2周)
 
 ### 第5周: 功能安全基础
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 模块13: 功能安全标准 (3天)
 

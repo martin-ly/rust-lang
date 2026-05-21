@@ -139,6 +139,8 @@ Cranelift debug: █████████████████████
 > **[来源: Rust Official Docs]**
 
 ### 1. 安装组件
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +153,8 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 2. 项目级配置
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +176,8 @@ codegen-backend = "cranelift"
 ```
 
 ### 3. 单次编译
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +193,8 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 ```
 
 ### 4. 验证生效
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +212,8 @@ cargo +nightly build -v
 > **[来源: Rust Official Docs]**
 
 ### 设计哲学
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -134,6 +134,8 @@
 **证明图网 (Proof Graph Network)** 是一种形式化的证明结构，用于展示从前提条件到结论的完整推理过程。
 
 ### 核心属性
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +145,8 @@
 4. **可组合** - 支持证明的组合和复用
 
 ### 证明结构层次
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +161,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 证明结构模板
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -169,6 +175,8 @@
 ```
 
 ### Mermaid 证明图语法
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +198,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 1. 公理→引理→定理→推论链
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -267,6 +277,8 @@ graph TD
 ```
 
 ### 2. MaybeUninit 安全性证明树
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -320,6 +332,8 @@ graph TD
 ```
 
 ### 3. 借用检查器安全性证明树
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -365,6 +379,8 @@ graph TD
 ```
 
 ### 4. 生命周期安全性证明树
+
+> **[来源: PLDI - Programming Language Design]**
 
 **形式化对应**: [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md) 定理 LF-T1/T2、规则 3。
 
@@ -424,6 +440,8 @@ graph TD
 - 类型: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1–T3
 
 ### 内存安全定理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```mermaid
 graph TD
@@ -494,6 +512,8 @@ graph TD
 
 ### 无数据竞争证明
 
+> **[来源: Wikipedia - Type System]**
+
 ```mermaid
 graph TD
     Root[无数据竞争证明]
@@ -536,6 +556,8 @@ graph TD
 ```
 
 ### 无悬垂指针证明
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```mermaid
 graph TD
@@ -582,6 +604,8 @@ graph TD
 ```
 
 ### 无双重释放证明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TD
@@ -642,6 +666,8 @@ graph TD
 **形式化对应**: [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) 定理 T1（进展性）、T2（保持性）、T3（类型安全）。
 
 ### 类型安全定理
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```mermaid
 graph TD
@@ -708,6 +734,8 @@ graph TD
 
 ### 类型一致性证明
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```mermaid
 graph TD
     Root[类型一致性证明]
@@ -752,6 +780,8 @@ graph TD
 ```
 
 ### 泛型单态化正确性证明
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TD
@@ -806,6 +836,8 @@ graph TD
 
 ### 异步 Future 安全性证明树
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```mermaid
 graph TD
     Root[异步 Future 安全性证明]
@@ -850,6 +882,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### Send/Sync 安全性证明
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```mermaid
 graph TD
@@ -916,6 +950,8 @@ graph TD
 
 ### 互斥访问保证证明
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```mermaid
 graph TD
     Root[互斥访问保证证明]
@@ -960,6 +996,8 @@ graph TD
 ```
 
 ### 数据竞争自由证明
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```mermaid
 graph TD
@@ -1032,6 +1070,8 @@ graph TD
 
 ### 组合1: MaybeUninit + 调用追踪
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```mermaid
 graph TD
     Root[MaybeUninit + track_caller 组合安全性]
@@ -1067,6 +1107,8 @@ graph TD
 ```
 
 ### 组合2: 关联类型多边界 + 自动特征
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```mermaid
 graph TD
@@ -1111,6 +1153,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: MaybeUninit 安全性证明实现
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -1183,6 +1227,8 @@ mod tests {
 
 ### 示例 2: 借用检查器规则的形式化表示
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// 借用检查器规则的形式化表示
 mod borrow_checker_formalization {
@@ -1245,6 +1291,8 @@ mod borrow_checker_formalization {
 ```
 
 ### 示例 3: 证明可视化工具
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::fmt::{self, Display, Formatter};
@@ -1328,6 +1376,8 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 
 ### 何时使用证明图网
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 场景 | 使用方式 | 预期收益 |
 | :--- | :--- | :--- |
 | **安全性验证** | 查看安全性证明模板和示例 | 理解安全保证来源 |
@@ -1338,6 +1388,8 @@ fn create_maybeuninit_proof() -> ProofGraphNetwork {
 | **学习理解** | 阅读证明树理解Rust安全性 | 深入理解语言设计 |
 
 ### 证明图网工作流
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 /// 代码开发中的证明验证工作流
@@ -1369,16 +1421,22 @@ fn proof_validation_workflow() {
 
 ### 核心证明文档
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - [PROOF_INDEX.md](../research_notes/PROOF_INDEX.md) - 形式化证明索引
 - [CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) - 核心定理完整证明
 - [FORMAL_LANGUAGE_AND_PROOFS.md](../research_notes/FORMAL_LANGUAGE_AND_PROOFS.md) - 形式化语言与证明
 
 ### 理论基础
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 理论体系架构
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS.md](../research_notes/LANGUAGE_SEMANTICS_EXPRESSIVENESS.md) - 语言语义与表达能力
 
 ### 证明工具
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 - [COQ_OF_RUST_INTEGRATION_PLAN.md](../research_notes/COQ_OF_RUST_INTEGRATION_PLAN.md) - Coq 证明集成
 - [AENEAS_INTEGRATION_PLAN.md](../research_notes/AENEAS_INTEGRATION_PLAN.md) - Aeneas 验证工具

@@ -81,6 +81,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Axum
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +148,8 @@ async fn get_user(
 ---
 
 ### Actix-web
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +201,8 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ### Rocket
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -248,6 +254,8 @@ fn rocket() -> _ {
 > **[来源: Rust Official Docs]**
 
 ### SQLx
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -317,6 +325,8 @@ async fn transfer_funds(
 ---
 
 ### Diesel
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -356,6 +366,8 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 ---
 
 ### Sea-ORM
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

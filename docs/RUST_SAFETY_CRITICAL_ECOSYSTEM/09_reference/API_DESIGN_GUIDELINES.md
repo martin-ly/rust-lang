@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 类型安全
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@ impl Device<Initialized> {
 ```
 
 ### 1.2 不可变优先
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +143,8 @@ let config = Config::new()
 > **[来源: Rust Official Docs]**
 
 ### 2.1 错误类型设计
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +206,8 @@ impl std::fmt::Display for DeviceError {
 ```
 
 ### 2.2 错误恢复策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -247,6 +255,8 @@ pub trait Recoverable {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 RAII模式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -304,6 +314,8 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 ```
 
 ### 3.2 借用设计
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -362,6 +374,8 @@ impl DataStore {
 
 ### 4.1 安全异步接口
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -412,6 +426,8 @@ impl<F> Drop for CancelSafe<F> {
 ```
 
 ### 4.2 流式API
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use futures::stream::Stream;

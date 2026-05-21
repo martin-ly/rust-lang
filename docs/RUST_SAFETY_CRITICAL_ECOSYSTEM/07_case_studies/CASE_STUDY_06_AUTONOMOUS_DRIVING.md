@@ -40,6 +40,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 系统信息
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@
 | **团队规模** | 35人 (15名Rust开发者) |
 
 ### 为什么选择Rust
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -69,6 +73,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 感知流水线
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +90,8 @@
 ```
 
 ### Rust模块结构
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +246,8 @@ pub mod output {
 > **[来源: Rust Official Docs]**
 
 ### 流水线并行
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -301,6 +311,8 @@ impl PerceptionPipeline {
 ```
 
 ### 内存池管理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -353,6 +365,8 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
 
 ### 冗余与多样性
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 /// 2oo3投票机制
 pub struct Voter3<T> {
@@ -403,6 +417,8 @@ impl DiverseDetector {
 
 ### 故障检测
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 /// 运行时监控
 pub struct SafetyMonitor {
@@ -440,6 +456,8 @@ impl SafetyMonitor {
 ## 验证与确认
 
 ### 仿真测试
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// 基于仿真的测试

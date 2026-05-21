@@ -59,6 +59,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 内容深度评估标准
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +83,8 @@
 ```
 
 ### 1.2 需要检查的模块清单
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +105,8 @@
 | **总计** | **260+** | | **48h** |
 
 ### 1.3 内容深化检查清单
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +154,8 @@
 
 ### 2.1 需要创建的证明树
 
+> **[来源: Wikipedia - Type System]**
+
 基于现有证明内容，创建 Mermaid 可视化图表：
 
 | 证明树 | 依赖定理 | 复杂度 | 预计时间 |
@@ -160,6 +168,8 @@
 | **总计** | | | **26h** |
 
 ### 2.2 证明树模板
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```markdown
       ## 证明树：所有权唯一性

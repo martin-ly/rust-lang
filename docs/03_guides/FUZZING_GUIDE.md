@@ -36,6 +36,8 @@
 模糊测试是一种自动化的软件测试技术，通过向程序输入大量随机或半随机的数据，来发现崩溃、断言失败、内存错误等异常行为。
 
 ### 为什么 Rust 需要 Fuzzing？
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

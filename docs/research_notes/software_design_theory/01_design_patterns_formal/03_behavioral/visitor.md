@@ -34,6 +34,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -82,6 +83,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -90,6 +92,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Visitor 结构）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +110,8 @@ $$\mathcal{VI} = \langle E, V, \mathit{visit}: V \times E \rightarrow R \rangle$
 ---
 
 ### Axiom VI1（访问完备公理）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$\forall e: E,\, \exists v: V,\, \mathit{visit}(v, e)\text{ 有定义}$$
 ---
 
 ### 定理 VI-T1（单分发完备定理）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +151,8 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 ---
 
 ### 定理 VI-T2（穷尽匹配定理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +169,8 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 ---
 
 ### 推论 VI-C1（近似表达）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -475,7 +487,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

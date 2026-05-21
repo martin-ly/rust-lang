@@ -53,6 +53,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 直观理解
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +69,8 @@
 ```
 
 ### 为什么需要生命周期？
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 

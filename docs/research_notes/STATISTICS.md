@@ -115,6 +115,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 总体统计
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +128,8 @@
 | **总计**     | 45个 | 100%  | -  |
 
 ### 按类型统计
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

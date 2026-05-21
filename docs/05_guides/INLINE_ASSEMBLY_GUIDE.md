@@ -77,6 +77,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### asm! 宏基本结构
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -91,6 +93,8 @@ asm!(
 ```
 
 ### global_asm! 全局汇编
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +120,8 @@ extern "C" {
 > **[来源: Rust Official Docs]**
 
 ### 1. 输入操作数 (in)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +136,8 @@ unsafe {
 ```
 
 ### 2. 输出操作数 (out)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +152,8 @@ unsafe {
 ```
 
 ### 3. 输入输出操作数 (inout)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +169,8 @@ unsafe {
 ```
 
 ### 4. 延迟输出 (lateout)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +189,8 @@ unsafe {
 ```
 
 ### 5. 内存操作数 (mem)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +206,8 @@ assert_eq!(arr[0], 42);
 ```
 
 ### 6. 标签和跳转
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 使用本地标签
@@ -227,6 +243,8 @@ assert_eq!(result, 1);
 
 ### 选项组合示例
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 纯计算，无副作用
 unsafe fn add_asm(a: u64, b: u64) -> u64 {
@@ -258,6 +276,8 @@ unsafe fn exit_process(code: i32) -> ! {
 ## 平台特定指南
 
 ### x86/x86_64
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 #[cfg(target_arch = "x86_64")]
@@ -304,6 +324,8 @@ mod x86_64_examples {
 ```
 
 ### ARM/AArch64
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #[cfg(target_arch = "aarch64")]

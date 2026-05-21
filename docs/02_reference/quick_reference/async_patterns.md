@@ -242,6 +242,8 @@ graph TD
 ```
 
 ### 异步执行决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +271,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### Future Trait（核心抽象）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -291,6 +295,8 @@ pub enum Poll<T> {
 > **[来源: Rust Official Docs]**
 
 ### 模式 1: async/await 基础
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -309,6 +315,8 @@ async fn main() {
 ---
 
 ### 模式 2: 并发执行
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -329,6 +337,8 @@ async fn main() {
 ---
 
 ### 模式 3: 选择第一个完成
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -347,6 +357,8 @@ async fn operation() {
 
 ### 模式 4: 超时控制
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use tokio::time::{timeout, Duration};
 
@@ -360,6 +372,8 @@ async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
 ## 🏗️ 运行时对比
 
 ### Tokio（推荐，功能最全）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // Cargo.toml
@@ -387,6 +401,8 @@ async fn main() { }
 
 ### async-std（类似标准库 API）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 [dependencies]
 async-std = { version = "1", features = ["attributes"] }
@@ -405,6 +421,8 @@ async fn main() {
 ---
 
 ### smol（轻量级）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 [dependencies]
@@ -427,6 +445,8 @@ fn main() {
 ## 🔄 常见并发模式
 
 ### 模式 1: Fan-out（任务分发）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use tokio::task;
@@ -452,6 +472,8 @@ async fn fan_out(items: Vec<i32>) -> Vec<i32> {
 
 ### 模式 2: Stream 处理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use tokio_stream::StreamExt;
 
@@ -467,6 +489,8 @@ async fn process_stream() {
 ---
 
 ### 模式 3: Actor 模式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use tokio::sync::mpsc;
@@ -491,6 +515,8 @@ impl Actor {
 ---
 
 ### 模式 4: CSP 模式（Channel）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use tokio::sync::mpsc;

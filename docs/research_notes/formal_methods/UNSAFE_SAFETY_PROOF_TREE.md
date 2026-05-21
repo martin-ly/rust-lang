@@ -34,6 +34,7 @@
   - [🔗 相关文档](#-相关文档)
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎯 证明目标
 >
@@ -74,6 +75,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 公理 UNSAFE-A1 (裸指针有效性)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +97,8 @@
 ```
 
 ### 公理 UNSAFE-A2 (类型转换)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +118,8 @@
 ```
 
 ### 公理 UNSAFE-A3 (外部函数契约)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +141,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 规则 UNSAFE-R1 (借用转换)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -156,6 +165,8 @@ unsafe fn unsafe_deref<T>(ptr: *const T) -> &T {
 - `ptr` 指向有效内存
 
 ### 规则 UNSAFE-R2 (MaybeUninit)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +193,8 @@ fn safe_maybe_uninit<T>() -> T {
 - `assume_init()` 前必须已写入
 
 ### 规则 UNSAFE-R3 (切片操作)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -419,7 +432,6 @@ impl<T> Drop for UniquePtr<T> {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

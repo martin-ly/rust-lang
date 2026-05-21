@@ -91,6 +91,8 @@ HTTP              HTTP              HTTP
 
 ### QUIC 客户端（quinn）
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use quinn::{ClientConfig, Endpoint};
 use rustls::pki_types::ServerName;
@@ -129,6 +131,8 @@ async fn quic_client(
 ```
 
 ### QUIC 服务器（quinn）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use quinn::{ServerConfig, Endpoint};
@@ -171,6 +175,8 @@ async fn handle_connection(connection: quinn::Connection) {
 ```
 
 ### HTTP/3 客户端（h3 + quinn）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use h3_quinn::quinn;

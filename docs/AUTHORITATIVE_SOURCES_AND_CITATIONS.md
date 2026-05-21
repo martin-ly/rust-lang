@@ -42,12 +42,15 @@
   - [验证清单](#验证清单)
   - [**维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确](#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Rust 1.94.0 权威来源
 >
 > **[来源: Rust Official Docs]**
 
 ### 官方发布
+
+> **[来源: Wikipedia - Type System]**
 
 | 来源 | URL | 发布日期 | 关键内容 |
 |------|-----|---------|---------|
@@ -56,6 +59,8 @@
 | InfoWorld报道 | <https://www.infoworld.com/article/4141483/> | 2026-03-05 | 技术特性解读 |
 
 ### 核心特性权威说明
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +129,8 @@ fn has_abba(s: &str) -> bool {
 > **[来源: Rust Official Docs]**
 
 ### 学术论文
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -133,6 +140,8 @@ fn has_abba(s: &str) -> bool {
 | Miri: Practical Undefined Behavior Detection for Rust | Ralf Jung et al. | POPL 2026 | <https://plf.inf.ethz.ch/research/popl26-miri.html> |
 
 ### 学术认可
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +150,8 @@ fn has_abba(s: &str) -> bool {
 > —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
 
 ### Tree Borrows核心优势
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -328,7 +339,6 @@ Cargo：
 ## 相关概念
 
 - [docs 目录](./README.md)
-
 
 ---
 

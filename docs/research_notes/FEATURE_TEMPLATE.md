@@ -49,6 +49,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：if/else（控制流族）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -58,17 +60,23 @@
 
 ### 示例 2：声明宏（宏族）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 概念 | 形式化引用 | 反例 |
 | :--- | :--- | :--- |
 | 代码生成、DSL；macro_rules!、卫生宏 | - | 意外捕获、宏展开错误 |
 
 ### 示例 3：mod（模块族）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 概念 | 形式化引用 | 反例 |
 | :--- | :--- | :--- |
 | 代码组织；mod、文件即模块 | [01_formal_composition](software_design_theory/04_compositional_engineering/01_formal_composition.md) Def 1.2 依赖 | 循环依赖编译失败 |
 
 ### 示例 4：const（常量族）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 概念 | 形式化引用 | 反例 |
 | :--- | :--- | :--- |

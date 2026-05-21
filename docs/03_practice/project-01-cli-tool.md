@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本功能
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -56,6 +58,8 @@
 
 ### 扩展功能
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [ ] 设置优先级
 - [ ] 截止日期提醒
 - [ ] 分类标签
@@ -66,6 +70,8 @@
 
 ### 1. 所有权和借用
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 学习如何管理字符串所有权
 fn add_todo(todos: &mut Vec<String>, item: String) {
@@ -74,6 +80,8 @@ fn add_todo(todos: &mut Vec<String>, item: String) {
 ```
 
 ### 2. 错误处理
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 学习 Result 类型
@@ -84,6 +92,8 @@ fn load_todos() -> Result<Vec<String>, std::io::Error> {
 ```
 
 ### 3. 文件IO
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 学习文件读写

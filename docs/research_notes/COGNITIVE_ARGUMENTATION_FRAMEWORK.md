@@ -47,6 +47,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 三层论证体系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +72,8 @@
 ```
 
 ### 本项目定位
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +91,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 原则1: 渐进式披露
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +128,8 @@
 ```
 
 ### 原则2: 多模态表征
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +145,8 @@
 | **反例** | 边界理解 | 编译错误示例 |
 
 ### 原则3: 脚手架理论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 

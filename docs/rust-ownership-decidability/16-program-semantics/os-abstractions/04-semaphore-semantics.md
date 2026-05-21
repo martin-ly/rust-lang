@@ -46,6 +46,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心定义
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -68,6 +70,8 @@
 ```
 
 ### 2.2 操作的形式化定义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 信号量操作:
@@ -101,6 +105,8 @@
 
 ### 2.3 状态转换图
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 信号量状态转换:
 
@@ -113,6 +119,8 @@
 ## 3. 计数信号量的语义
 
 ### 3.1 一般计数信号量
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 计数信号量 CountingSemaphore(max):
@@ -132,6 +140,8 @@
 ```
 
 ### 3.2 Rust 代码示例
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::Arc;

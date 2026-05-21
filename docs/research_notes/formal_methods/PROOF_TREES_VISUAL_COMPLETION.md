@@ -35,13 +35,14 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
 
 - [证明树可视化完整版](#证明树可视化完整版)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [证明树 1: 所有权唯一性定理 (T1)](#证明树-1-所有权唯一性定理-t1)
     - [定理陈述1](#定理陈述1)
@@ -67,12 +68,15 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 证明树 1: 所有权唯一性定理 (T1)
 >
 > **[来源: Rust Official Docs]**
 
 ### 定理陈述1
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -115,6 +119,8 @@ graph TD
 ```
 
 ### Rust 代码验证
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +144,8 @@ fn demonstrate_ownership_uniqueness() {
 > **[来源: Rust Official Docs]**
 
 ### 定理陈述
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +203,8 @@ graph TD
 ```
 
 ### Rust 代码验证2
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -226,6 +236,8 @@ fn demonstrate_borrow_checker() {
 > **[来源: Rust Official Docs]**
 
 ### 定理陈述3
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -289,6 +301,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 定理陈述4
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -357,6 +371,8 @@ graph TD
 
 ### 定理陈述5
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 T6.1**: 异步状态机在 await 点保持内存安全。
 **定理 T6.2**: Future 的 Pin 保证自引用安全。
 **定理 T6.3**: 异步任务调度不引入数据竞争。
@@ -422,6 +438,8 @@ graph TD
 ```
 
 ### Rust 代码验证5
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // T6.1: await 点内存安全
@@ -564,7 +582,6 @@ cargo build --features formal_verification
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

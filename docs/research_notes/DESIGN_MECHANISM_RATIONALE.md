@@ -91,6 +91,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心问题响应
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -102,6 +104,8 @@
 | **无系统梳理** | 设计机制论证矩阵总览 |
 
 ### 论证结构
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +124,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 问题动机：为何需要 Pin？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +141,8 @@
 ---
 
 ### 2. 设计决策：为何区分堆与栈？
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +170,8 @@
 ---
 
 ### 3. 形式化论证：堆/栈固定语义
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

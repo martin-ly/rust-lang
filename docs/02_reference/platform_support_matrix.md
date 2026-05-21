@@ -36,6 +36,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Tier 2 with Host Tools（新增）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -44,6 +46,8 @@
 | `powerpc64-unknown-linux-musl` | PowerPC64 (大端) Linux with musl libc | 1.95.0 |
 
 ### 1.2 Tier 2（新增）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

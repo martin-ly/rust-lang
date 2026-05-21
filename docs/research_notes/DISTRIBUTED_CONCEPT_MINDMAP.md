@@ -114,6 +114,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 1. CAP 定理
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@ struct DistributedSystem {
 
 ### 2. 共识算法对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 算法 | 容错类型 | 性能 | 复杂度 | Rust 实现 |
 |------|----------|------|--------|-----------|
 | Paxos | 崩溃容错 | 中 | 高 | - |
@@ -143,6 +147,8 @@ struct DistributedSystem {
 | PBFT | 拜占庭容错 | 低 | 高 | - |
 
 ### 3. 数据分区策略
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 一致性哈希
@@ -166,6 +172,8 @@ impl ConsistentHash {
 ## Rust 分布式系统工具链
 
 ### 异步运行时对比
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph LR

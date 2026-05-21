@@ -71,6 +71,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 代码表示学习
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -136,6 +138,8 @@ fn trait_bounds<T: Display + Clone>(x: T) -> String {
 
 ### 1.2 漏洞检测
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 机器学习在 Rust 漏洞检测中的应用：
 
 ```rust
@@ -173,6 +177,8 @@ pub unsafe fn potential_vulnerability(ptr: *mut u32) {
 
 ### 1.3 性能预测
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 使用 ML 预测 Rust 代码的性能特征：
 
 ```rust
@@ -198,6 +204,8 @@ fn process_data(data: Vec<u32>) -> Vec<u32> {
 ```
 
 ### 1.4 所有权模式学习
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 学习 Rust 代码中的所有权使用模式：
 
@@ -235,6 +243,8 @@ fn analyze_ownership_pattern(code: &str) -> Vec<OwnershipPattern> {
 ## 2. 基于 LLM 的代码生成与验证
 
 ### 2.1 安全代码生成
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 使用 LLM 生成内存安全的 Rust 代码：
 
@@ -290,6 +300,8 @@ unsafe fn bad_unsafe(ptr: *mut i32) -> i32 {
 
 ### 2.2 规范推断
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 使用 LLM 从代码中推断规范：
 
 ```rust
@@ -328,6 +340,8 @@ pub fn binary_search(/* ... */) -> Option<usize> {
 ```
 
 ### 2.3 代码补全与建议
+
+> **[来源: ACM - Systems Programming Languages]**
 
 LLM 辅助的 Rust 代码补全：
 

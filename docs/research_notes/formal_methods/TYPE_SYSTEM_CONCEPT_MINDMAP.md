@@ -40,6 +40,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 类型系统概念全景
 >
@@ -81,6 +82,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 标量类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +122,8 @@
 
 ### 1.2 字面量表示
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 类型 | 字面量示例 |
 | :--- | :--- |
 | 十进制 | `98_222` |
@@ -135,6 +140,8 @@
 
 ### 2.1 struct
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 struct
 ├── 命名字段结构体
@@ -148,6 +155,8 @@ struct
 ```
 
 ### 2.2 enum
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
 enum
@@ -494,7 +503,6 @@ Sized trait
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

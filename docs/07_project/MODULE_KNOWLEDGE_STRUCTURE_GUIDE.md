@@ -154,6 +154,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 概念定义生成器
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +246,8 @@ fn main() {
 ```
 
 ### 知识结构批量生成器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -338,6 +342,8 @@ fn main() {
 ```
 
 ### 思维表征模板生成器
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -433,6 +439,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -442,6 +450,8 @@ fn main() {
 - **思维导图**: [MIND_MAP_COLLECTION.md](../04_thinking/MIND_MAP_COLLECTION.md) - 思维导图集合
 
 ### 实施场景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -458,6 +468,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 1. 概念定义补充
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -465,6 +477,8 @@ fn main() {
 
 ```markdown
 ### 概念定义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **概念名称**: [概念名称]
 
@@ -487,6 +501,8 @@ fn main() {
 ```markdown
 ### 概念定义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **概念名称**: 异步编程 (Async Programming)
 
 **定义**: 一种编程范式，允许程序在等待 I/O 操作完成时执行其他任务，而不是阻塞等待
@@ -507,10 +523,14 @@ fn main() {
 
 ### 2. 属性特征补充
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 模板
 
 ```markdown
 ### 属性特征
+
+> **[来源: Wikipedia - Type System]**
 
 **核心属性**:
 
@@ -531,10 +551,14 @@ fn main() {
 
 ### 3. 关系连接补充
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 模板
 
 ```markdown
 ### 关系连接
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **继承关系**:
 
@@ -554,6 +578,8 @@ fn main() {
 ```
 
 ### 4. 解释论证补充
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 模板
 

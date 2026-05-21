@@ -126,6 +126,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 按字母顺序
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +152,8 @@
 > **[来源: Rust Official Docs]**
 
 ### A {#-类型理论术语av}
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -166,6 +170,8 @@
 - **相关**: [异步状态机形式化](./formal_methods/async_state_machine.md)
 
 ### B
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +190,8 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### L
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +208,8 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### N
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +220,8 @@
 - **相关**: [生命周期形式化](./formal_methods/lifetime_formalization.md)
 
 ### O
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -228,6 +240,8 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### P
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -251,6 +265,8 @@
 
 ### M
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **MIR (Mid-level IR)**:
 
 - **定义**: Rust 编译器的中间表示，介于 HIR 与 LLVM IR 之间
@@ -264,6 +280,8 @@
 - **相关**: [所有权模型形式化](./formal_methods/ownership_model.md)
 
 ### C
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Copy (复制)**:
 

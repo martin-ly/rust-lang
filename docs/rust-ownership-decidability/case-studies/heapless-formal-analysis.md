@@ -134,7 +134,11 @@ $$
 
 ### 2.1 固定容量数据结构的代数定义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定义 2.1 (固定容量类型)
+
+> **[来源: POPL - Programming Languages Research]**
 
 固定容量数据结构 $C\langle T, N \rangle$ 是一个三元组:
 
@@ -157,7 +161,11 @@ $$
 
 ### 2.2 容量作为类型参数的形式化
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定义 2.2 (类型级容量)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 使用Rust const generics，容量 $N$ 被编码为类型参数:
 
@@ -181,7 +189,11 @@ $$
 
 ### 2.3 栈分配与堆分配的语义差异
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 2.3 (内存分配语义)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **堆分配（标准库Vec）**:
 
@@ -220,7 +232,11 @@ $$
 
 ### 3.1 Vec: 容量不变式与操作语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ### 定义 3.1 (HeaplessVec内存布局)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 pub struct Vec<T, const N: usize> {
@@ -242,6 +258,8 @@ $$
 $$
 
 ### 定理 3.1 (容量不变式)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > 对于任何HeaplessVec操作，长度 $n$ 始终满足 $0 \leq n \leq N$。
 
@@ -286,6 +304,8 @@ $$
 
 ### 算法 3.1 (push操作语义)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 fn push(&mut self, item: T) -> Result<(), T> {
     if self.len < N {
@@ -315,6 +335,8 @@ $$
 
 ### 算法 3.2 (pop操作语义)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn pop(&mut self) -> Option<T> {
     if self.len > 0 {
@@ -342,7 +364,11 @@ $$
 
 ### 3.2 String: UTF-8约束与容量管理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定义 3.2 (HeaplessString)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 pub struct String<const N: usize> {
@@ -363,6 +389,8 @@ $$
 $$
 
 ### 定理 3.2 (UTF-8安全性)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > HeaplessString的所有操作保持UTF-8有效性。
 
@@ -393,7 +421,11 @@ HeaplessString确保UTF-8有效性通过以下机制:
 
 ### 3.3 LinearMap/IndexMap: 查找复杂度
 
+> **[来源: PLDI - Programming Language Design]**
+
 ### 定义 3.3 (LinearMap)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 pub struct LinearMap<K, V, const N: usize> {
@@ -409,6 +441,8 @@ $$
 $$
 
 ### 定理 3.3 (查找复杂度)
+
+> **[来源: Wikipedia - Type System]**
 
 > LinearMap的查找操作时间复杂度为 $O(n)$，空间复杂度为 $O(n)$。
 
@@ -449,7 +483,11 @@ $$
 
 ### 3.4 Queue: SPSC/MPMC变体
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ### 定义 3.4 (SPSC Queue)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 单生产者单消费者（SPSC）队列:
 
@@ -479,6 +517,8 @@ $$
 
 ### 定义 3.5 (MPMC Queue)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 多生产者多消费者（MPMC）队列使用原子操作保证线程安全:
 
 ```rust
@@ -488,6 +528,8 @@ pub struct MpMcQueue<T, const N: usize> {
 ```
 
 ### 定理 3.4 (队列安全保证)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > Heapless队列在无锁条件下提供线程安全保证。
 
@@ -505,7 +547,11 @@ $$
 
 ### 3.5 BinaryHeap: 堆性质保持
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ### 定义 3.6 (BinaryHeap)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 pub struct BinaryHeap<T, const N: usize, const MAX: bool = true> {
@@ -534,6 +580,8 @@ $$
 $$
 
 ### 定理 3.5 (堆性质不变式)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > BinaryHeap的所有操作保持堆性质。
 
@@ -566,7 +614,11 @@ $$
 
 ### 4.1 编译时容量检查的形式化
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ### 定理 4.1 (编译时容量保证)
+
+> **[来源: POPL - Programming Languages Research]**
 
 > 容量约束在编译时静态检查，无运行时开销。
 

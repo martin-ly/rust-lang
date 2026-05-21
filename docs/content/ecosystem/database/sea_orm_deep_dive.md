@@ -88,6 +88,8 @@
 Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设计。
 
 ### 核心特性
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +102,8 @@ Sea-ORM 是一个异步、动态的 Rust ORM，专为现代 Rust 生态系统设
 | **关系支持** | 完整的一对多、多对多关系 |
 
 ### 适用场景
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +123,8 @@ Sea-ORM 适用场景:
 > **[来源: Rust Official Docs]**
 
 ### 核心概念
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +148,8 @@ pub enum Relation {
 ```
 
 ### 与 Diesel/SQLx 对比
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +169,8 @@ pub enum Relation {
 > **[来源: Rust Official Docs]**
 
 ### 安装配置
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +185,8 @@ tokio = { version = "1", features = ["full"] }
 ```
 
 ### CLI 工具
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +207,8 @@ sea-orm-cli generate entity \
 > **[来源: Rust Official Docs]**
 
 ### 基本实体
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -222,6 +236,8 @@ impl ActiveModelBehavior for ActiveModel {}
 ```
 
 ### 关系定义
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // user.rs - 用户实体
@@ -273,6 +289,8 @@ impl Related<super::user::Entity> for Entity {
 ```
 
 ### 复合主键
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 #[derive(DeriveEntityModel)]

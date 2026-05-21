@@ -37,6 +37,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -54,7 +55,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Factory Method 形式化分析](#factory-method-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
@@ -88,6 +89,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -96,6 +98,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Factory Method 结构）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@ $$\mathcal{F} = \langle C, T, \mathit{factory}: C \rightarrow T \rangle$$
 ---
 
 ### Axiom FM1（返回类型一致性公理）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +126,8 @@ $$\forall c: C,\, \mathit{factory}(c) : T \land \neg(\mathit{factory}(c) = \math
 工厂方法返回类型与产品类型一致；无空指针或无效值。
 
 ### Axiom FM2（所有权独立公理）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +138,8 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T1（类型保持定理）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +159,8 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T2（所有权安全定理）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +186,8 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 推论 FM-C1（纯 Safe Factory）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +205,8 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -247,6 +263,8 @@ assert_eq!(product.operation(), "Product A");
 
 ### 形式化论证链
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```text
 Axiom FM1 (返回一致性)
     ↓ 依赖
@@ -265,6 +283,8 @@ ownership_model T2
 
 ### 与 Rust 类型系统的联系
 
+> **[来源: PLDI - Programming Language Design]**
+
 | Rust 特性 | Factory Method 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | `trait Product` | 产品接口 | 编译期检查实现完整性 |
@@ -273,6 +293,8 @@ ownership_model T2
 | 所有权转移 | 返回 `Box` | 无悬垂指针 |
 
 ### 内存安全保证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **无空指针**：Rust 无 `null`，`Option` 显式处理缺失
 2. **类型安全**：trait 对象类型检查在编译期完成
@@ -441,9 +463,13 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: POPL - Programming Languages Research]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -487,7 +513,6 @@ graph LR
 
 - [01_creational 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

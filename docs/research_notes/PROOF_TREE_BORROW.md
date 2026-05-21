@@ -85,6 +85,8 @@ T-BR1: 借用安全性
 
 ### Lemma 1: 读取不修改
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```
 Goal: 不可变借用期间数据不被修改
 
@@ -98,6 +100,8 @@ Proof:
 
 ### Lemma 2: 独占访问
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 Goal: 可变借用提供独占访问
 
@@ -110,6 +114,8 @@ Proof:
 ```
 
 ### Lemma 3: 悬垂引用预防
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 Goal: 引用永远不会悬垂
@@ -193,6 +199,8 @@ BorrowCheck(程序 P):
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

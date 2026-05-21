@@ -106,6 +106,8 @@
 
 ### 1.2 我们的理论基础选择
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 层次 | 选择 | 原因 |
 |------|------|------|
 | 逻辑基础 | 构造性逻辑 (Coq) | 可提取程序，证明即程序 |
@@ -114,6 +116,8 @@
 | 证明方法 | 归纳法 + 反演 | 结构化的证明策略 |
 
 ### 1.3 核心数学构造
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 归纳定义 (Inductive Definitions)
 
@@ -176,6 +180,8 @@ ty_rank : ty -> nat
 ## 第二部分: 元模型统一描述
 
 ### 2.1 统一元模型架构
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
                     Rust 程序

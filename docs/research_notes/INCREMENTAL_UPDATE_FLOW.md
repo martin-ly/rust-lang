@@ -94,6 +94,8 @@
 
 ### 1. 收集变更
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 步骤 | 操作 | 来源 |
 | :--- | :--- | :--- |
 | 1.1 | 获取新版本发布说明 | [blog.rust-lang.org](https://blog.rust-lang.org/README.md) |
@@ -101,6 +103,8 @@
 | 1.3 | 识别语言特性、库、工具链变更 | releases.rs § Language、Library、Compiler |
 
 ### 2. 更新文档
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +117,8 @@
 | 2.5 | [INDEX](./INDEX.md)、[README](./README.md) | 更新版本号、链接、统计 |
 
 ### 3. 对齐权威
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -123,6 +129,8 @@
 | 3.3 | 更新 formal_methods README 权威来源快速链接 |
 
 ### 4. 兼容性
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

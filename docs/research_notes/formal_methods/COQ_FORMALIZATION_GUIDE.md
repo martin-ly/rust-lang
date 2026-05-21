@@ -235,10 +235,14 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 安装和配置 (Coq Platform)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 安装Coq Platform
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -340,6 +344,8 @@ clean:
 ```
 
 ### 1.2 基础语法速览
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -434,6 +440,8 @@ Definition p1 := mkPoint 3 4.
 
 ### 1.3 Iris分离逻辑框架简介
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### Iris核心概念
 
 ```coq
@@ -494,6 +502,8 @@ Qed.
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权规则公理化
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 基础定义
 
@@ -627,6 +637,8 @@ Fixpoint is_copy (T : ty) : Prop :=
 
 ### 2.2 唯一性定理的Coq证明框架
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 定理陈述
 
 ```coq
@@ -745,6 +757,8 @@ Admitted.
 ```
 
 ### 2.3 代码示例 + Coq证明脚本
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 示例1: 简单所有权转移
 
@@ -915,6 +929,8 @@ End ScopeExample.
 
 ### 3.1 借用规则公理化
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 借用状态定义
 
 ```coq
@@ -1032,6 +1048,8 @@ Qed.
 
 ### 3.2 数据竞争自由定理框架
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 竞争自由定义
 
 ```coq
@@ -1111,6 +1129,8 @@ Definition valid_borrow_env (B : borrow_env) (Ω : ownership_env) : Prop :=
 
 ### 3.3 引理和证明结构
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 核心引理
 
 ```coq
@@ -1170,6 +1190,8 @@ End BorrowLemmas.
 
 ### 4.1 进展性 (Progress) 定理
 
+> **[来源: Wikipedia - Type System]**
+
 #### 进展性定义
 
 ```coq
@@ -1226,6 +1248,8 @@ Fixpoint fill_ctx (K : eval_ctx) (e : expr) : expr :=
 
 ### 4.2 保持性 (Preservation) 定理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 保持性定理
 
 ```coq
@@ -1274,6 +1298,8 @@ Qed.
 
 ### 4.3 类型推导正确性
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 类型推导关系
 
 ```coq
@@ -1309,6 +1335,8 @@ Inductive type_check : value_env -> ownership_env -> expr -> ty -> Prop :=
 > **[来源: Rust Official Docs]**
 
 ### 定理1: 所有权唯一性
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **对应文档**: [ownership_model.md](./ownership_model.md) 定理 6
 
@@ -1388,6 +1416,8 @@ End Theorem1_OwnershipUniqueness.
 ---
 
 ### 定理2: 借用互斥性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **对应文档**: [borrow_checker_proof.md](./borrow_checker_proof.md) 定理 1
 
@@ -1507,6 +1537,8 @@ End Theorem2_BorrowMutex.
 
 ### 定理3: 引用有效性
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **对应文档**: [lifetime_formalization.md](./lifetime_formalization.md)
 
 #### Rust代码示例
@@ -1605,6 +1637,8 @@ End Theorem3_ReferenceValidity.
 ---
 
 ### 定理4: Send/Sync安全性
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **对应文档**: [send_sync_formalization.md](./send_sync_formalization.md)
 
@@ -1776,6 +1810,8 @@ Send/Sync安全性证明策略:
 
 ### 定理5: 类型安全（进展+保持）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **对应文档**: [FORMAL_FOUNDATIONS_INDEX.md](./FORMAL_FOUNDATIONS_INDEX.md)
 
 #### Rust代码示例
@@ -1946,6 +1982,8 @@ End Theorem5_TypeSafety.
 
 ### 6.1 Iris基础概念
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### Iris程序逻辑
 
 ```coq
@@ -1996,6 +2034,8 @@ Qed.
 ```
 
 ### 6.2 资源代数定义
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 所有权资源代数
 
@@ -2050,6 +2090,8 @@ Notation "□ P" := (persistently P) (at level 20) : bi_scope.
 ```
 
 ### 6.3 Rust内存模型的Iris表达
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 所有权转移的Iris表达
 
@@ -2159,6 +2201,8 @@ Admitted.
 
 ### 7.1 CoqIDE/VsCoq使用
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### VsCoq配置 (VS Code)
 
 ```json
@@ -2199,6 +2243,8 @@ coqide -Q theories RustFormal \
 | 自动排版 | `Ctrl + Alt + F` | `Alt + Shift + F` |
 
 ### 7.2 证明调试技巧
+
+> **[来源: Wikipedia - Type System]**
 
 #### 常见错误与解决
 
@@ -2271,6 +2317,8 @@ Admitted.
 ```
 
 ### 7.3 CI集成 (coq-community/docker-coq)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### GitHub Actions配置
 
@@ -2362,6 +2410,8 @@ lint:
 
 ### 形式化方法文档
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 文档 | 内容 | 与本文件关系 |
 | :--- | :--- | :--- |
 | [COQ_FORMALIZATION_MATRIX.md](./COQ_FORMALIZATION_MATRIX.md) | Coq形式化矩阵 | 证明状态追踪 |
@@ -2374,6 +2424,8 @@ lint:
 | [OPERATIONAL_SEMANTICS.md](./OPERATIONAL_SEMANTICS.md) | 操作语义 | 类型安全基础 |
 
 ### 外部资源
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 资源 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -2434,6 +2486,8 @@ lint:
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

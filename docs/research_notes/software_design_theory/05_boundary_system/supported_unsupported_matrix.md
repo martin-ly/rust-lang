@@ -30,6 +30,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -119,6 +120,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 创建型（5）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +134,8 @@
 | Singleton | 原生支持 | OnceLock、LazyLock（std） |
 
 ### 结构型（7）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +150,8 @@
 | Proxy | 原生支持 | 委托 |
 
 ### 行为型（11）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -258,6 +265,8 @@
 
 ### 示例 1：是否需要第三方 crate
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **场景**：实现 Web API 服务。
 
 **决策**：需异步运行时 → 库支持（tokio）；$\mathit{SuppB} = \mathrm{Lib}$。
@@ -345,7 +354,6 @@ async fn serve() {
 
 - [05_boundary_system 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

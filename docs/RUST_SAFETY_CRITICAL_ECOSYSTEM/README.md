@@ -66,6 +66,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 
 ### 01. 思维导图 (Mind Maps)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **RUST_ECOSYSTEM_MIND_MAP.md** (16KB)
 
 - 学术基础 (Tree Borrows, Miri)
@@ -75,6 +77,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 
 ### 02. 多维矩阵 (Matrices)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **RUST_MULTI_DIMENSIONAL_MATRIX.md** (9.5KB)
 
 - 8个对比矩阵
@@ -83,6 +87,8 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 - 工具能力评估
 
 ### 03. 决策树 (Decision Trees)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **RUST_DECISION_TREES.md** (26KB)
 

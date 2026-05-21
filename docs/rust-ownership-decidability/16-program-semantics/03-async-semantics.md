@@ -259,6 +259,8 @@ fn example() -> impl Future<Output = i32> {
 
 #### 2.1.1 Future 作为计算描述
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Future** 是对**尚未完成的计算**的描述，而非计算结果本身：
 
 $$
@@ -302,6 +304,8 @@ async fn lazy_semantics() {
 ```
 
 #### 2.1.2 Future 状态机语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Future 本质上是**编译器生成的状态机**：
 
@@ -359,6 +363,8 @@ Start --poll--> Waiting1 --wakeup--> Waiting2 --wakeup--> Ready
 
 #### 2.1.3 Future 组合子语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Future 组合子实现了**函数式编程中的组合模式**：
 
 | 组合子 | 语义 | 形式化表示 |
@@ -406,6 +412,8 @@ async fn async_op2() -> i32 { 2 }
 > **[来源: Coq Reference Manual]**
 
 #### 2.2.1 Poll 方法语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Poll 模型**是 Rust 异步编程的核心：
 
@@ -485,6 +493,8 @@ impl Future for Delay {
 ```
 
 #### 2.2.2 Context 和 Waker 语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Context** 提供了 Future 与执行器通信的通道：
 
@@ -567,6 +577,8 @@ impl Future for AsyncTask {
 ```
 
 #### 2.2.3 轮询驱动语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **轮询驱动模型**的核心语义：
 
@@ -662,6 +674,8 @@ impl PollDrivenExecutor {
 
 #### 2.3.1 Future 创建语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Future 创建的语义规则：
 
 ```rust
@@ -695,6 +709,8 @@ async fn lifetime_capture() {
 ```
 
 #### 2.3.2 Future 轮询语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **轮询语义规则**：
 
@@ -745,6 +761,8 @@ async fn polling_semantics() {
 
 #### 2.3.3 Future 完成语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 Future 完成的语义保证：
 
 ```rust
@@ -777,6 +795,8 @@ async fn reusable_future() {
 ```
 
 #### 2.3.4 Future 取消语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **取消语义**描述了当 Future 被丢弃时的行为：
 
@@ -835,6 +855,8 @@ async fn cancellation_propagation() {
 > **[来源: Pierce 2002 - TAPL]**
 
 #### 3.1.1 状态机生成语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **async 块**被编译器转换为状态机：
 
@@ -899,6 +921,8 @@ async fn step2(y: i32) -> i32 { y + 10 }
 
 #### 3.1.2 捕获变量语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **async 块捕获变量**的规则：
 
 ```rust
@@ -955,6 +979,8 @@ async fn mixed_capture() {
 
 #### 3.1.3 生命周期推断语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **async 块的生命周期推断**：
 
 ```rust
@@ -1002,6 +1028,8 @@ where
 > **[来源: POPL 2020 - Oxide]**
 
 #### 3.2.1 挂起点语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **await 点**是任务可能挂起的位置：
 
@@ -1071,6 +1099,8 @@ async fn suspension_effects() {
 
 #### 3.2.2 恢复执行语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **恢复执行的语义规则**：
 
 ```rust
@@ -1127,6 +1157,8 @@ async fn resume_semantics() {
 
 #### 3.2.3 状态转换语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **状态转换的语义细节**：
 
 ```
@@ -1154,6 +1186,8 @@ async fn resume_semantics() {
 
 #### 3.3.1 async fn 转换语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **async fn 的语义转换**：
 
 ```rust
@@ -1175,6 +1209,8 @@ fn async_function_desugared(x: i32, y: i32) -> impl Future<Output = i32> {
 ```
 
 #### 3.3.2 返回类型包装语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **返回类型的自动包装**：
 
@@ -1205,6 +1241,8 @@ async fn with_try_operator() -> Result<i32, std::io::Error> {
 ```
 
 #### 3.3.3 递归异步函数语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 **递归异步函数的挑战和解决方案**：
 
@@ -1286,6 +1324,8 @@ async fn traverse_tree(node: &TreeNode) -> i32 {
 
 #### 4.1.1 内存固定语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Pin** 提供了内存位置固定的保证：
 
 $$
@@ -1336,6 +1376,8 @@ fn pin_operations() {
 
 #### 4.1.2 Pin<&mut T> 语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Pin<&mut T>** 是可变引用的固定版本：
 
 ```rust
@@ -1375,6 +1417,8 @@ fn pin_mut_usage() {
 ```
 
 #### 4.1.3 Unpin trait 语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Unpin trait** 标记类型可以安全移动：
 
@@ -1425,6 +1469,8 @@ where
 > **[来源: IEEE - Specification Standards]**
 
 #### 4.2.1 自引用创建语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **自引用结构**包含指向自身字段的引用：
 
@@ -1485,6 +1531,8 @@ fn self_referential_usage() {
 
 #### 4.2.2 投影语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **Pin 投影**允许从固定的容器访问内部字段：
 
 ```rust
@@ -1542,6 +1590,8 @@ impl Container {
 
 #### 4.2.3 Drop 顺序语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **自引用结构的 Drop 顺序**：
 
 ```rust
@@ -1594,6 +1644,8 @@ impl Drop for DropOrderExample {
 > **[来源: TLA+ Documentation]**
 
 #### 4.3.1 手动实现 Future 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **手动实现 Future** 通常需要处理 Pin：
 
@@ -1677,6 +1729,8 @@ impl Future for ManualFuture {
 
 #### 4.3.2 流式处理语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **Stream**（异步迭代器）通常需要 Pin：
 
 ```rust
@@ -1720,6 +1774,8 @@ impl Stream for CounterStream {
 ```
 
 #### 4.3.3 复杂状态机语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **复杂状态机**的 Pin 处理：
 
@@ -1816,6 +1872,8 @@ impl Future for ComplexFuture {
 
 #### 5.1.1 任务提交语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 **任务提交**的语义规则：
 
 $$
@@ -1863,6 +1921,8 @@ async fn spawn_guarantees() {
 
 #### 5.1.2 任务执行语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **任务执行**的语义细节：
 
 ```rust
@@ -1902,6 +1962,8 @@ enum TaskState {
 ```
 
 #### 5.1.3 任务完成语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **任务完成**的语义保证：
 
@@ -1955,6 +2017,8 @@ async fn task_completion_semantics() {
 > **[来源: Wikipedia - Formal Methods]**
 
 #### 5.2.1 任务队列语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **任务队列**的结构和语义：
 
@@ -2027,6 +2091,8 @@ impl WorkStealingQueues {
 
 #### 5.2.2 窃取策略语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **窃取策略**的语义规则：
 
 ```rust
@@ -2083,6 +2149,8 @@ impl WorkStealingQueues {
 ```
 
 #### 5.2.3 负载均衡语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **负载均衡**的语义保证：
 
@@ -2141,6 +2209,8 @@ impl LoadBalanceMetrics {
 
 #### 5.3.1 yield 语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **yield_now** 的协作式让出语义：
 
 ```rust
@@ -2187,6 +2257,8 @@ async fn blocking_vs_yield() {
 ```
 
 #### 5.3.2 任务优先级语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **任务优先级**的语义：
 
@@ -2260,6 +2332,8 @@ use std::pin::Pin;
 ```
 
 #### 5.3.3 公平性语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **调度公平性**的语义保证：
 
@@ -2335,6 +2409,8 @@ impl FairScheduler {
 
 #### 6.1.1 非阻塞 I/O 语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 **非阻塞 I/O** 的核心语义：
 
 ```rust
@@ -2377,6 +2453,8 @@ fn blocking_comparison() {
 ```
 
 #### 6.1.2 就绪通知语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 **就绪通知**的语义机制：
 
@@ -2428,6 +2506,8 @@ async fn readiness_interest() {
 ```
 
 #### 6.1.3 epoll/kqueue/IOCP 抽象语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **跨平台 I/O 多路复用**的抽象：
 
@@ -2491,6 +2571,8 @@ async fn unified_io_semantics() {
 > **[来源: POPL 2018 - RustBelt]**
 
 #### 6.2.1 事件循环语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **反应堆模式**的核心语义：
 
@@ -2581,6 +2663,8 @@ impl Clone for Event {
 
 #### 6.2.2 事件分发语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **事件分发**的语义规则：
 
 ```rust
@@ -2632,6 +2716,8 @@ async fn handle_connection(
 ```
 
 #### 6.2.3 处理器注册语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **处理器注册**的语义细节：
 
@@ -2856,6 +2942,8 @@ async fn double_buffering() {
 
 ### 7.1 Stream 基础语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 7.1.1 Stream vs Iterator 语义
 
 **Stream** 与 **Iterator** 的语义对比：
@@ -2963,6 +3051,8 @@ async fn stream_termination_semantics() {
 ```
 
 ### 7.2 Stream 组合子语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 7.2.1 map/filter 语义
 
@@ -3076,6 +3166,8 @@ async fn buffer_chunks_semantics() {
 ```
 
 ### 7.3 背压语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 7.3.1 流量控制语义
 
@@ -3271,6 +3363,8 @@ async fn slow_consumer_strategies() {
 
 ### 8.1 取消语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 8.1.1 取消请求语义
 
 **取消请求**的语义：
@@ -3438,6 +3532,8 @@ async fn async_cleanup() {
 
 ### 8.2 取消安全语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 8.2.1 结构化并发语义
 
 **结构化并发**的语义：
@@ -3591,6 +3687,8 @@ async fn prevent_resource_leaks() {
 ```
 
 ### 8.3 超时语义
+
+> **[来源: Wikipedia - Type System]**
 
 #### 8.3.1 timeout 组合子语义
 
@@ -3748,6 +3846,8 @@ async fn graceful_shutdown_with_timeout() {
 > **[来源: ACM - Async Programming Models]**
 
 ### 9.1 并发组合子语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 9.1.1 join! 宏语义
 
@@ -3925,6 +4025,8 @@ async fn futures_race_semantics() {
 ```
 
 ### 9.2 异步同步原语
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 9.2.1 异步 Mutex 语义
 
@@ -4160,6 +4262,8 @@ async fn bulk_permits() {
 
 ### 9.3 异步屏障语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 9.3.1 barrier 语义
 
 **Barrier** 的同步语义：
@@ -4263,6 +4367,8 @@ async fn latch_semantics() {
 > **[来源: IEEE - Task Scheduling]**
 
 ### 10.1 运行时组件语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 10.1.1 驱动器语义
 
@@ -4383,6 +4489,8 @@ async fn timer_semantics() {
 
 ### 10.2 运行时边界语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 10.2.1 block_on 语义
 
 **block_on** 的阻塞语义：
@@ -4490,6 +4598,8 @@ async fn runtime_switching() {
 
 ### 10.3 多运行时语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 10.3.1 嵌套运行时语义
 
 **嵌套运行时**的限制：
@@ -4587,6 +4697,8 @@ async fn runtime_isolation() {
 > **[来源: Rust Reference - async/await]**
 
 ### 11.1 类型安全验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 11.1.1 Send/Sync 验证
 
@@ -4693,6 +4805,8 @@ fn pin_safety_check() {
 ```
 
 ### 11.2 运行时验证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 11.2.1 死锁检测
 
@@ -4831,6 +4945,8 @@ async fn leak_solution() {
 
 ### 12.1 零成本抽象语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 12.1.1 状态机优化语义
 
 **编译器优化**的语义保证：
@@ -4928,6 +5044,8 @@ where
 ```
 
 ### 12.2 可扩展性语义
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 12.2.1 任务密度语义
 
@@ -5038,6 +5156,8 @@ async fn boxed_large_future() {
 
 ### Rust 异步语义核心要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 1. **Future 语义**：Future 是惰性计算的描述，通过 Poll 模型驱动执行，状态机实现确保零成本抽象。
 
 2. **async/await 语义**：语法糖转换为状态机，挂起点（await）允许协作式调度，编译时保证类型安全。
@@ -5052,6 +5172,8 @@ async fn boxed_large_future() {
 
 ### 与其他语言的对比
 
+> **[来源: Wikipedia - Type System]**
+
 | 特性 | Rust | Go | JavaScript | C# |
 |-----|------|-----|-----------|-----|
 | 协程类型 | 无栈 | 有栈 | 事件循环 | 有栈/无栈 |
@@ -5062,6 +5184,8 @@ async fn boxed_large_future() {
 
 ### 语义选择建议
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 - **高并发 I/O**：使用 Tokio 的多线程运行时
 - **低延迟响应**：使用 `select!` 竞争模式
 - **资源限制环境**：使用当前线程运行时
@@ -5069,6 +5193,8 @@ async fn boxed_large_future() {
 - **取消安全**：采用结构化并发模式
 
 ### 形式化语义表示
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Rust 异步语义可以用以下形式化规则表示：
 

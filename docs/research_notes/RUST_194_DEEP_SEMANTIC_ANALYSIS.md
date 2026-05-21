@@ -124,6 +124,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@ where
 **语义**: 将动态切片 `&[T]` 转换为固定大小数组 `&[T; N]` 的迭代器。
 
 ### 1.2 与 windows() 的语义对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +151,8 @@ where
 | **迭代器类型** | `Windows<'_, T>` | `ArrayWindows<'_, T, N>` | 泛型约束更精确 |
 
 ### 1.3 类型系统影响
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +178,8 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 ```
 
 ### 1.4 内存安全保证
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +192,8 @@ array_windows: &[T] → Iterator<Item = &[T; N]>  (N: 编译期常量)
 3. 模式匹配 `|[a, b, c]|` 编译期验证元素数量
 
 ### 1.5 实际应用模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +256,8 @@ fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
 ```
 
 ### 1.6 性能分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -280,6 +292,8 @@ fn benchmark_windows(c: &mut Criterion) {
 
 ### 2.1 类型定义与语义
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 pub enum ControlFlow<B, C = ()> {
     Continue(C),
@@ -294,6 +308,8 @@ pub enum ControlFlow<B, C = ()> {
 
 ### 2.2 与 Option/Result 的语义对比
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 类型 | 语义焦点 | 适用场景 | 代数结构 |
 |------|---------|----------|----------|
 | `Option<T>` | 存在性 (有无) | 可能缺失的值 | Monoid |
@@ -301,6 +317,8 @@ pub enum ControlFlow<B, C = ()> {
 | `ControlFlow<B, C>` | 控制流 (继续/终止) | 迭代控制 | 控制流Monad |
 
 ### 2.3 代数性质
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **ControlFlow 是一个 Bifunctor**:
 

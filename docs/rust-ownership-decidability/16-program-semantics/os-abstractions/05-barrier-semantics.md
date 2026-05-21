@@ -45,6 +45,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念定义
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -67,6 +69,8 @@
 ```
 
 ### 2.2 屏障操作的形式化定义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 屏障操作:
@@ -94,6 +98,8 @@
 
 ### 2.3 状态转换图
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 屏障状态转换:
 
@@ -115,6 +121,8 @@
 
 ### 3.1 单次屏障的语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 单次屏障 SingleBarrier:
 
@@ -132,6 +140,8 @@
 ```
 
 ### 3.2 Rust 代码示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::sync::{Arc, Barrier};

@@ -80,6 +80,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 论证五步法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +96,8 @@
 ```
 
 ### 1.2 论证流向（双向）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +145,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 概念→公理→定理→推论 DAG
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +187,8 @@ ownership T3            borrow T2                 type T2
 ```
 
 ### 2.2 三大支柱论证衔接
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +208,8 @@ type T3 ────────────────────────
 ```
 
 ### 2.3 域间定理推导链（显式）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

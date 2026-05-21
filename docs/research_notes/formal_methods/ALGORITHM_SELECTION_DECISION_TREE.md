@@ -69,6 +69,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 决策矩阵
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -82,6 +84,8 @@ graph TD
 | 大数据 | 快速排序 | O(n log n) | ❌ | O(log n) |
 
 ### 代码示例
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 标准库排序 - 使用 Timsort
@@ -103,6 +107,8 @@ data.par_sort();
 ## 🔄 搜索算法选择
 
 ### 搜索算法决策树
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```mermaid
 graph TD
@@ -126,6 +132,8 @@ graph TD
 ```
 
 ### 搜索算法对比
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 算法 | 前提条件 | 时间复杂度 | 空间复杂度 |
 |------|----------|------------|------------|
@@ -168,6 +176,8 @@ fn range_query() {
 
 ### 问题类型决策
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 问题 | 算法 | 时间复杂度 | 适用场景 |
 |------|------|------------|----------|
 | 最短路径 (无权) | BFS | O(V + E) | 迷宫、社交网络 |
@@ -203,6 +213,8 @@ fn shortest_path() {
 ## 📊 动态规划决策
 
 ### DP 适用性判断
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TD

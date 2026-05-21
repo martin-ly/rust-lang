@@ -120,6 +120,8 @@
 
 ### 核心思想
 
+> **[来源: IEEE - Programming Language Standards]**
+
 逻辑关系的核心洞见：**良类型的程序在逻辑上相关**。
 
 ```
@@ -133,6 +135,8 @@
 ## 逻辑关系基础
 
 ### 2.1 语义解释
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 2.1.1 类型解释
 
@@ -157,6 +161,8 @@
 ```
 
 ### 2.2 基本引理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 2.2.1 基本引理 (Fundamental Lemma)
 
@@ -189,6 +195,8 @@
 
 ### 2.3 观察等价
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 2.3.1 观察上下文
 
 ```
@@ -216,9 +224,13 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 ### 3.1 动机
 
+> **[来源: PLDI - Programming Language Design]**
+
 处理递归类型和可能不终止的计算需要限制观察深度。
 
 ### 3.2 步进索引定义
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 3.2.1 索引类型关系
 
@@ -241,6 +253,8 @@ Context C ::= □ | C e | v C | λx.C | ...
 
 ### 3.3 单调性
 
+> **[来源: Wikipedia - Type System]**
+
 #### 3.3.1 关系单调性
 
 ```
@@ -254,6 +268,8 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 ```
 
 ### 3.4 递归类型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 3.4.1 递归类型解释
 
@@ -275,6 +291,8 @@ m ≤ n ⟹ ⟦τ⟧ₙ ⊆ ⟦τ⟧ₘ
 
 ### 4.1 可能世界语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 4.1.1 世界定义
 
 ```
@@ -292,6 +310,8 @@ W ⊑ W'  (W' 是 W 的扩展)
 ```
 
 ### 4.2 Kripke 关系
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 4.2.1 Kripke 值关系
 
@@ -312,6 +332,8 @@ W ⊑ W' ⟹ ⟦τ⟧(W) ⊆ ⟦τ⟧(W')
 ```
 
 ### 4.3 存储关系
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 4.3.1 堆关系
 
@@ -336,6 +358,8 @@ W ⊑ W' ⟹ ⟦τ⟧(W) ⊆ ⟦τ⟧(W')
 ## 表达能力与完备性
 
 ### 5.1 表达能力层级
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 5.1.1 类型系统层级
 

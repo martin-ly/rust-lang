@@ -66,6 +66,8 @@
 | **Drop** | 资源释放 | `drop(x)` | 自动调用 |
 
 ### 所有权状态转移
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +100,8 @@
 | `Mutex<T>` | 线程互斥 | 内部可变 | `Mutex<T>` | 线程安全修改 |
 
 ### 借用规则矩阵
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +128,8 @@
 | **约束** | `'a: 'b` | outlives关系 | `'a: 'b` (a至少和b一样长) |
 
 ### 生命周期关系图
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +161,8 @@
 | **类型别名** | 同义词 | `type MyInt = i32;` | 无新类型 |
 
 ### 型变矩阵 (Variance)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +194,8 @@
 | **Arc** | 原子计数 | 共享所有权 | `Arc<T>: Send/Sync` 如果 `T: Send/Sync` |
 
 ### Send/Sync 推导矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +215,8 @@
 
 ### 所有权 × 借用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 所有权状态 | 可变借用 | 不可变借用 | 释放 |
 | :--- | :--- | :--- | :--- |
 | Owned | ❌(已拥有) | ❌ | ✅ |
@@ -214,6 +226,8 @@
 
 ### 生命周期 × 类型系统
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 类型 | 默认生命周期 | 显式约束 |
 | :--- | :--- | :--- |
 | `&T` | 推断 | `'a` |
@@ -222,6 +236,8 @@
 | `dyn Trait + 'a` | 对象生命期 | `+ 'static` |
 
 ### 并发 × 所有权
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 场景 | 所有权策略 | 同步机制 |
 | :--- | :--- | :--- |

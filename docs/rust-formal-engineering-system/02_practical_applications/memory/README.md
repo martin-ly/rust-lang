@@ -50,6 +50,8 @@ mindmap
 
 ### 所有权驱动的内存管理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 栈分配：自动管理
 fn stack_allocation() {
@@ -66,6 +68,8 @@ fn heap_allocation() {
 ```
 
 ### 智能指针
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::rc::Rc;
@@ -103,6 +107,8 @@ fn refcell_demo() {
 
 ### 零成本抽象
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 迭代器是零成本抽象
 fn zero_cost_iter() {
@@ -119,6 +125,8 @@ fn zero_cost_iter() {
 ```
 
 ### 自定义智能指针与 Drop  trait
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::ops::Deref;

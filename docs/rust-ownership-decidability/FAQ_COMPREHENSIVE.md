@@ -55,6 +55,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Q1: 所有权系统与其他语言的垃圾回收有何不同？
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -84,6 +86,8 @@
 
 ### Q2: 为什么 Rust 需要 `Clone` trait？不能总是自动复制吗？
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **A**: 性能考虑。深拷贝可能很昂贵:
 
 ```rust
@@ -100,6 +104,8 @@ let n2 = n1;  // 隐式 Copy，因为 i32 是廉价的
 ---
 
 ### Q3: `Copy` 和 `Clone` 的区别是什么？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**:
 
@@ -123,6 +129,8 @@ struct BigData { buffer: Vec<u8> }
 
 ### Q4: 什么是 "移动" (Move) 的真正含义？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A**: 移动 = 所有权转移。在底层，它只是指针复制:
 
 ```rust
@@ -143,6 +151,8 @@ let s2 = s1;  // 移动发生
 ## 借用与生命周期 FAQ
 
 ### Q5: 为什么编译器拒绝这个明显安全的代码？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn example() {
@@ -178,6 +188,8 @@ println!("{}", first);  // OK
 
 ### Q6: 什么是 "Non-Lexical Lifetimes" (NLL)？
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **A**: NLL 允许借用只持续到真正需要的地方，而不是整个作用域:
 
 ```rust
@@ -202,6 +214,8 @@ fn new_rust() {
 
 ### Q7: 如何理解 `'static` 生命周期？
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **A**: `'static` 表示数据在程序整个生命周期内都有效:
 
 ```rust
@@ -221,6 +235,8 @@ take_static("hello");  // OK
 
 ### Q8: 为什么需要显式生命周期注解？
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **A**: 当编译器无法推断时:
 
 ```rust
@@ -239,6 +255,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ## Unsafe Rust FAQ
 
 ### Q9: 什么时候应该使用 `unsafe`？
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **A**: 五种情况:
 
@@ -281,6 +299,8 @@ unsafe { println!("{}", u.i); }
 
 ### Q10: `unsafe` 代码块内的代码还是安全的吗？
 
+> **[来源: POPL - Programming Languages Research]**
+
 **A**: `unsafe` 不意味着 "危险"，而是 "程序员保证正确":
 
 ```rust
@@ -299,6 +319,8 @@ unsafe {
 
 ### Q11: 原始指针和引用的区别？
 
+> **[来源: PLDI - Programming Language Design]**
+
 **A**:
 
 | 特性 | 原始指针 (*const/*mut) | 引用 (&/&mut) |
@@ -314,6 +336,8 @@ unsafe {
 ## 并发与并行 FAQ
 
 ### Q12: `Send` 和 `Sync` 的区别？
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **A**:
 

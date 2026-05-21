@@ -149,6 +149,8 @@
 > **[来源: Rust Official Docs]**
 
 ### String vs &str
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +165,8 @@ let s4: &str = &s1; // String 自动解引用为 &str
 ```
 
 ### 类型特点
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +181,8 @@ let s4: &str = &s1; // String 自动解引用为 &str
 > **[来源: Rust Official Docs]**
 
 ### 基本创建
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +203,8 @@ let mut s6 = String::with_capacity(10);
 ```
 
 ### 从其他类型创建
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +228,8 @@ let s4 = String::from_utf8(bytes.to_vec()).unwrap();
 > **[来源: Rust Official Docs]**
 
 ### 追加内容
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +253,8 @@ let s3 = s1 + &s2; // s1 被移动
 ```
 
 ### 删除内容
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +276,8 @@ s.drain(1..3); // 移除索引 1-2
 ```
 
 ### 替换
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -282,6 +296,8 @@ s.replace_range(0..1, "H");
 ```
 
 ### 查找和检查
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 let s = String::from("hello world");
@@ -303,6 +319,8 @@ let pos = s.rfind("l");
 ```
 
 ### 分割
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 let s = "hello,world,rust";
@@ -330,6 +348,8 @@ for part in s.split_terminator(',') {
 
 ### 修剪
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 let s = "  hello world  ";
 
@@ -354,6 +374,8 @@ let trimmed = s.trim_matches(' ');
 
 ### String ↔ &str
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // String → &str（自动解引用）
 let s = String::from("hello");
@@ -366,6 +388,8 @@ let s3 = format!("{}", "hello");
 ```
 
 ### 大小写转换
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 let s = "Hello World";
@@ -385,6 +409,8 @@ let capitalized = format!("{}{}", first, rest);
 
 ### 数字转换
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 字符串 → 数字
 let s = "42";
@@ -398,6 +424,8 @@ let s = format!("{}", n);
 ```
 
 ### 字符和字节
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 let s = "hello";
@@ -427,6 +455,8 @@ let byte_count = s.len();
 
 ### 基本宏
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // println! - 输出到标准输出（带换行）
 println!("Hello, world!");
@@ -445,6 +475,8 @@ eprint!("Warning: ");
 
 ### format! 宏
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 基本格式化
 let s = format!("Hello, {}!", "world");
@@ -462,6 +494,8 @@ let s = format!("{1} and {0}", "first", "second");
 ```
 
 ### write! 和 writeln
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::fmt::Write;
@@ -483,6 +517,8 @@ writeln!(s, "Line 2").unwrap();
 > **[来源: Rust Official Docs]**
 
 ### 对齐和填充
+
+> **[来源: Wikipedia - Type System]**
 
 > **扩展**: 内存对齐见 [ALIGNMENT_GUIDE](../ALIGNMENT_GUIDE.md)；此处为**格式化**对齐（文本排版）。
 

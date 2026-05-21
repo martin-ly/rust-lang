@@ -47,6 +47,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 风险公式
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -74,6 +76,8 @@
 ```
 
 ### 1.2 ASIL等级确定矩阵
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +104,8 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 > **[来源: Rust Official Docs]**
 
 ### 2.1 汽车系统ASIL选择
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +132,8 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.2 工业系统SIL选择
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +161,8 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.3 航空系统DAL选择
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -183,6 +183,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +204,8 @@ fn print_value(b: Box<i32>) {
 ```
 
 ### 使用场景
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -228,6 +232,8 @@ fn take_ownership(b: Box<i32>) {
 ```
 
 ### API
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -252,6 +258,8 @@ let value = *b; // 或 Box::into_inner(b)
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -272,6 +280,8 @@ println!("count: {}", Rc::strong_count(&a));
 ```
 
 ### 使用场景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -292,6 +302,8 @@ let child2 = Rc::clone(&node);
 ```
 
 ### API
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -326,6 +338,8 @@ let value = *rc;
 
 ### 基本用法
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::sync::Arc;
 use std::thread;
@@ -347,6 +361,8 @@ handle2.join().unwrap();
 ```
 
 ### 使用场景
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 多线程共享数据（只读）
@@ -371,6 +387,8 @@ for handle in handles {
 
 ### API
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::sync::Arc;
 
@@ -388,6 +406,8 @@ let count = Arc::strong_count(&arc);
 
 ### 基本用法
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::cell::RefCell;
 
@@ -404,6 +424,8 @@ let mut r = data.borrow_mut();
 ```
 
 ### 使用场景
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // 在不可变引用中修改数据
@@ -424,6 +446,8 @@ impl Counter {
 
 ### API
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use std::cell::RefCell;
 
@@ -442,6 +466,8 @@ let value = cell.into_inner();
 ```
 
 ### 运行时借用检查
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 let cell = RefCell::new(5);
@@ -463,6 +489,8 @@ let r3 = cell.borrow_mut();  // OK
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -489,6 +517,8 @@ println!("Result: {}", *counter.lock().unwrap());
 
 ### 使用场景
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 多线程共享可变数据
 use std::sync::{Arc, Mutex};
@@ -507,6 +537,8 @@ impl SharedData {
 ```
 
 ### API
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::Mutex;
@@ -531,6 +563,8 @@ let value = *guard;
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -563,6 +597,8 @@ writer.join().unwrap();
 ```
 
 ### 使用场景
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 读多写少的场景

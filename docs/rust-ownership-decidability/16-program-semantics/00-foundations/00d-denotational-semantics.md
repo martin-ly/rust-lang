@@ -66,6 +66,8 @@
 
 ### 2.1 合成性 (Compositionality)
 
+> **[来源: Wikipedia - Type System]**
+
 指称语义的核心原则是**合成性**：复合表达式的意义由其组成部分的意义合成。
 
 ```
@@ -94,6 +96,8 @@ $$
 
 ### 2.2 语义函数
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **语法域** (Syntactic Domain): 程序文本的集合
 
 **语义域** (Semantic Domain): 数学对象的集合
@@ -113,6 +117,8 @@ $$
 ## 3. 简单表达式的指称语义
 
 ### 3.1 算术表达式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **语法**:
 
@@ -139,6 +145,8 @@ $$
 
 ### 3.2 带环境的表达式
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **环境** $\rho$: 变量到值的映射。
 
 **语义域**:
@@ -162,6 +170,8 @@ $$
 ## 4. 域论基础 (Domain Theory)
 
 ### 4.1 偏序集 (Partially Ordered Sets)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定义**: 偏序集 $(D, \sqsubseteq)$ 由集合 $D$ 和偏序关系 $\sqsubseteq$ 组成。
 

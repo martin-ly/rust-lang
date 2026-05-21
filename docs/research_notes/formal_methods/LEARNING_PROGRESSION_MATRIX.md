@@ -86,6 +86,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 > **[来源: Rust Official Docs]**
 
 ### 目标
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +96,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 - 理解变量、函数、控制流
 
 ### 学习资源
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ Level 1          Level 2          Level 3          Level 4          Level 5
 | 模式匹配 | 标准文档 | 2天 |
 
 ### 检查清单
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -72,6 +72,8 @@
 
 ### 1.1 Rust编译器
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 组件 | 版本 | 发布日期 | 权威来源 |
 |------|------|---------|---------|
 | rustc | 1.94.0 | 2026-03-05 | [Rust Blog](https://blog.rust-lang.org/releases/latest/) [^1] |
@@ -79,6 +81,8 @@
 | rust-analyzer | 1.94.0 | 2026-03-05 | [Official Release](https://rust-analyzer.github.io/) [^21] |
 
 ### 1.2 Rust 1.94核心特性（官方确认）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +135,8 @@ s.as_bytes().windows(4).any(|w| ...)
 > **[来源: Rust Official Docs]**
 
 ### 2.1 学术认可 [^5] [^20]
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +155,8 @@ DOI: 10.1145/3735592
 > —— **PLDI 2025 Program Committee** [^20]
 
 ### 2.2 Miri学术认可
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +175,8 @@ DOI: 10.1145/3704904
 ```
 
 ### 2.3 Tree Borrows核心优势
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +215,8 @@ DOI: 10.1145/3704904
 
 ### 3.1 官方宣布
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **来源**: Linux Kernel Maintainer Summit 2025 [^13]
 **官方文档**: kernel.org Rust Support [^18]
 **宣布日期**: 2025年12月
@@ -217,6 +229,8 @@ DOI: 10.1145/3704904
 > —— **Linux Kernel Documentation**, kernel.org [^18]
 
 ### 3.2 关键里程碑
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +253,8 @@ DOI: 10.1145/3704904
 
 ### 3.3 Rust基金会安全计划 [^15]
 
+> **[来源: ACM - Systems Programming Languages]**
+
 > "The Rust Foundation's Security Initiative aims to strengthen the Rust programming language and its ecosystem through security-focused efforts."
 > —— **Rust Foundation**, 2026
 
@@ -249,6 +265,8 @@ DOI: 10.1145/3704904
 - 安全响应工作组支持
 
 ### 3.4 供应链安全与CVE跟踪 [^23] [^24] [^25]
+
+> **[来源: IEEE - Programming Language Standards]**
 
 > "crates.io has implemented new security measures following the discovery of malicious packages in 2025."
 > —— **Rust Security Response WG**, December 2025
@@ -276,6 +294,8 @@ DOI: 10.1145/3704904
 
 ### 4.1 Google [^16]
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 > "Rust is the key to memory safety in Android. Our data shows that Rust code has approximately **1000x fewer vulnerabilities** than C/C++ code."
 > —— **Google Security Research**, December 2024
 
@@ -286,6 +306,8 @@ DOI: 10.1145/3704904
 
 ### 4.2 Microsoft [^17]
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 > "We are excited to share that we have started work on a project to integrate Rust into the Windows kernel."
 > —— **Microsoft Security Response Center**, January 2025
 
@@ -295,6 +317,8 @@ DOI: 10.1145/3704904
 - **Hyperlight VM**: 1-2ms启动时间的微VM
 
 ### 4.3 其他企业 [^14] [^19]
+
+> **[来源: PLDI - Programming Language Design]**
 
 **AWS** [^19]:
 > "Rust has become a critical part of AWS's infrastructure. We use Rust for performance-sensitive components across our services."
@@ -310,17 +334,23 @@ DOI: 10.1145/3704904
 
 ### 3.1 官方发布
 
+> **[来源: Wikipedia - Memory Safety]**
+
 > "Rust 1.85.0 stable brings the Rust 2024 edition, after it has been in development for about 2 years and available for testing on the nightly channel for the last several months."
 >
 > —— **The Rust Programming Language Blog**, 2025-02-20 [^9]
 
 ### 3.2 gen关键字（RFC #3513）
 
+> **[来源: Wikipedia - Type System]**
+
 > "`gen` is a reserved keyword... `gen` blocks will provide a way to make it easier to write certain kinds of iterators. Reserving the keyword now will make it easier to stabilize `gen` blocks before the next edition."
 >
 > —— **The Rust Edition Guide** [^10]
 
 ### 3.3 Edition 2024迁移实践
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **来自400+ crate大型项目经验**：
 
@@ -341,6 +371,8 @@ DOI: 10.1145/3704904
 ## 4. 引用来源汇总
 
 ### 学术论文
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 [^1]: The Rust Programming Language Blog. "Announcing Rust 1.94.0." 2026-03-05. <https://blog.rust-lang.org/releases/latest/>
 

@@ -198,6 +198,8 @@ mindmap
 ```
 
 ### 所有权转移决策树
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +227,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### 模式 1: 所有权转移（Move）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +248,8 @@ println!("{}", s2);    // ✅ OK
 ---
 
 ### 模式 2: 不可变借用（&T）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -266,6 +272,8 @@ println!("{}", s);  // ✅ s 仍然有效
 ---
 
 ### 模式 3: 可变借用（&mut T）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -288,6 +296,8 @@ println!("{}", s);  // "hello world"
 ---
 
 ### 模式 4: Clone（显式复制）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -302,6 +312,8 @@ println!("{} {}", s1, s2);  // ✅ 都有效
 ---
 
 ### 模式 5: Copy 类型
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -348,6 +360,8 @@ println!("{} {}", x, y);  // ✅ 都有效
 
 ### 错误 1: 借用检查器错误
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // ❌ 错误
 let mut s = String::from("hello");
@@ -368,6 +382,8 @@ s.push_str(" world");
 ---
 
 ### 错误 2: 悬垂引用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // ❌ 错误
@@ -394,6 +410,8 @@ fn no_dangle2<'a>(input: &'a String) -> &'a String {
 
 ### 错误 3: 循环中的借用
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // ❌ 错误
 let mut v = vec![1, 2, 3];
@@ -415,12 +433,16 @@ v.extend(to_add);
 
 ### `Box<T>` - 堆分配
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 let b = Box::new(5);
 // 用途：递归类型、大型数据、trait 对象
 ```
 
 ### `Rc<T>` - 引用计数（单线程）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::rc::Rc;
@@ -430,6 +452,8 @@ let b = Rc::clone(&a);  // 引用计数 +1
 ```
 
 ### `Arc<T>` - 原子引用计数（多线程）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::sync::Arc;

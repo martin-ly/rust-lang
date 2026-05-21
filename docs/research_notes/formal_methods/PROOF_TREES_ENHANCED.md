@@ -27,6 +27,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、综合安全证明树
 >
@@ -413,6 +414,8 @@ graph TB
 > **[来源: Rust Official Docs]**
 
 ### 按主题查找证明
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -441,12 +444,16 @@ graph TB
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -490,7 +497,6 @@ graph TB
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

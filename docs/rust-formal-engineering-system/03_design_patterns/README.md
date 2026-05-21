@@ -49,6 +49,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 类型系统驱动的模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +94,8 @@ fn type_state_demo() {
 ```
 
 ### 构造器模式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +158,8 @@ fn builder_demo() -> Result<(), String> {
 ```
 
 ### RAII 模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +194,8 @@ fn raii_demo() {
 ```
 
 ### 策略模式（使用 Trait）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -270,6 +278,8 @@ fn strategy_demo() {
 ```
 
 ### 访问者模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -349,6 +359,8 @@ fn visitor_demo() {
 ```
 
 ### 新类型模式（Newtype Pattern）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -420,6 +432,8 @@ fn newtype_demo() {
 
 ### 软件设计理论
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |
 | 设计模式形式化 | 设计模式理论 | [../../research_notes/software_design_theory/01_design_patterns_formal/README.md](../../research_notes/software_design_theory/01_design_patterns_formal/README.md) |
@@ -427,6 +441,8 @@ fn newtype_demo() {
 | 反模式 | 常见陷阱 | [../../research_notes/software_design_theory/07_anti_patterns.md](../../research_notes/software_design_theory/07_anti_patterns.md) |
 
 ### 创建型模式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

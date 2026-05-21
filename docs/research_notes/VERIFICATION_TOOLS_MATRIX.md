@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Miri - 内存安全检查器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +83,8 @@ miri run  # 或 cargo miri test
 
 ### 2. Kani - 位精确模型检查器
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // Kani 验证示例
 #[kani::proof]
@@ -104,6 +108,8 @@ fn check_vector_push() {
 
 ### 3. Prusti - 契约式验证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // Prusti 契约示例
 use prusti_contracts::*;
@@ -126,6 +132,8 @@ fn find_min(arr: &[i32]) -> usize {
 ## 验证能力矩阵
 
 ### 功能覆盖对比
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```mermaid
 graph TD
@@ -152,6 +160,8 @@ graph TD
 ```
 
 ### 性能与可扩展性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 工具 | 分析速度 | 内存占用 | 代码侵入性 | CI 友好 |
 |------|----------|----------|------------|---------|

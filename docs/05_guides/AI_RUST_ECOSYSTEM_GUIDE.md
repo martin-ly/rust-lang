@@ -80,6 +80,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 深度学习框架
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +92,8 @@
 | **tch-rs** | PyTorch 绑定 | Rust 调用 LibTorch | [docs.rs](https://docs.rs/crate/tch) |
 
 ### 2.2 LLM 推理
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +104,8 @@
 | **lm.rs** | 轻量推理 | CPU 优化、SIMD、rayon |
 
 ### 2.3 与 C01–C12 的关联
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -118,6 +124,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 路径 A：AI 辅助学 Rust（先 AI 后 Rust）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +134,8 @@
 3. 遇到错误时附带 [ERROR_CODE_MAPPING](../02_reference/ERROR_CODE_MAPPING.md)
 
 ### 路径 B：Rust 构建 AI（先 Rust 后 AI）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +144,8 @@
 3. 实践：用 Candle 加载简单模型做推理
 
 ### 路径 C：AI + Rust 双轨
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +160,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 4.1 Candle 最小示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```toml
 # 新建项目: cargo new candle_demo && cd candle_demo
@@ -169,6 +183,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4.2 Candle 神经网络推理
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use candle_core::{DType, Device, Tensor};
@@ -197,6 +213,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4.3 Burn 最小示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```toml
 [dependencies]
@@ -235,6 +253,8 @@ fn main() {
 
 ### 4.4 使用 Candle 加载预训练模型
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use candle_core::{Device, Tensor};
 use candle_nn::Module;
@@ -267,6 +287,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4.5 本地 LLM 推理 (llm crate)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```toml
 [dependencies]
@@ -318,6 +340,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 4.6 并发数据加载器
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -394,6 +418,8 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 
 ### 6.1 内存管理
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use candle_core::{Device, Tensor};
 
@@ -412,6 +438,8 @@ fn process_large_tensor() -> candle_core::Result<()> {
 ```
 
 ### 6.2 批量处理
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {

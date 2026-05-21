@@ -51,6 +51,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust并发哲学
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -64,6 +66,8 @@
 
 ### 并发模型对比
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 模型 | 代表库 | 适用场景 | 特点 |
 |------|--------|---------|------|
 | 线程 | std::thread | CPU密集型 | 系统线程 |
@@ -76,6 +80,8 @@
 ## 2. 线程基础模式
 
 ### 线程池模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::sync::{mpsc, Arc, Mutex};
@@ -144,6 +150,8 @@ impl Worker {
 
 ### Scoped线程 (Rust 1.63+)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::thread;
 
@@ -171,6 +179,8 @@ fn scoped_threads() {
 ## 3. 同步模式
 
 ### 读写锁模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::RwLock;

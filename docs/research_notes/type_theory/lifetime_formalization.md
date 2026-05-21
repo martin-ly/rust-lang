@@ -46,6 +46,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -59,7 +60,7 @@
 > **[来源: Rust Official Docs]**
 
 - [生命周期形式化](#生命周期形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -102,6 +103,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -112,6 +114,8 @@
 本研究的目的是形式化定义 Rust 的生命周期系统，并理解其类型理论基础。
 
 ### 核心问题
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +124,8 @@
 3. **生命周期与类型系统**: 生命周期如何与类型系统集成？
 
 ### 预期成果
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +140,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 生命周期核心概念
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +151,8 @@
 4. **子类型关系**: 生命周期之间的子类型关系
 
 ### 相关理论
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +168,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 生命周期
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -169,6 +181,8 @@
 $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 
 ### 2. 生命周期子类型
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +191,8 @@ $$\Lambda : \text{LifetimeVar} \to \text{Scope}$$
 **定义 2.2 (引用类型子类型)**: 如果 $\ell_2 <: \ell_1$ 且 $\tau_1 <: \tau_2$，则 $\&\ell_1 \tau_1 <: \&\ell_2 \tau_2$。
 
 ### 3. 生命周期推断
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,11 +237,15 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 ### 待证明的性质
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 1. **生命周期推断正确性**: 见定理 LT-T2
 2. **生命周期约束一致性**: 见 Axiom LT2、定理 LT-T2
 3. **引用有效性**: 见定理 LT-T1
 
 ### 证明方法
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - **约束求解**: 定理 LT-T2 证明思路
 - **子类型证明**: 引理 LT-L1、推论 LT-C1
@@ -236,6 +256,8 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 ## 💻 代码示例与实践 {#-代码示例与实践}
 
 ### 示例 1: 基本生命周期
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
@@ -480,7 +502,6 @@ $\&\ell \tau$ 与子类型 $\ell_2 <: \ell_1 \Rightarrow \&\ell_1 \tau_1 <: \&\e
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

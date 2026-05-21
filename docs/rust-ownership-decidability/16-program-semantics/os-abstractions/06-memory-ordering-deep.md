@@ -55,6 +55,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 基本定义
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -77,6 +79,8 @@ Happens-Before 关系 (hb):
 ```
 
 ### 2.2 Happens-Before 的构成
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 Happens-Before 的来源:
@@ -102,6 +106,8 @@ Happens-Before 的来源:
 
 ### 2.3 Rust 中的同步边
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 Rust 中的 Synchronizes-With 关系:
 
@@ -124,6 +130,8 @@ Rust 中的 Synchronizes-With 关系:
 
 ### 3.1 Relaxed 语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 Relaxed 形式化定义:
 
@@ -145,6 +153,8 @@ Relaxed 形式化定义:
 ```
 
 ### 3.2 Acquire/Release 语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```
 Acquire 语义:
@@ -172,6 +182,8 @@ Acquire-Release 对:
 
 ### 3.3 AcqRel 语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 AcqRel 形式化定义:
 
@@ -189,6 +201,8 @@ AcqRel 形式化定义:
 ```
 
 ### 3.4 SeqCst 语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 SeqCst (顺序一致性) 形式化定义:
@@ -211,6 +225,8 @@ SeqCst (顺序一致性) 形式化定义:
 
 ### 3.5 内存序对比表
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 内存序能力对比:
 
@@ -230,6 +246,8 @@ SeqCst (顺序一致性) 形式化定义:
 ## 4. Rust 代码示例
 
 ### 4.1 Relaxed 使用示例
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};

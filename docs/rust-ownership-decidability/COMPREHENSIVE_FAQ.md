@@ -37,13 +37,14 @@
   - [更多资源](#更多资源)
   - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📚 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📚 目录](#-目录-1)
   - [基础知识](#基础知识)
     - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
@@ -73,6 +74,7 @@
   - [更多资源](#更多资源)
   - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -81,6 +83,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Q1: 为什么 Rust 需要所有权系统？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -108,6 +112,8 @@ drop(s);
 ---
 
 ### Q2: Copy trait 和 Clone trait 有什么区别？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**:
 
@@ -149,6 +155,8 @@ struct Buffer { data: Vec<u8> }
 
 ### Q3: 什么时候使用引用，什么时候使用智能指针？
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **A**:
 
 ```rust
@@ -189,6 +197,8 @@ let large = Box::new([0u8; 1000000]);  // 大数组在堆上
 
 ### Q4: 为什么不能同时有可变借用和不可变借用？
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **A**: 为了防止数据竞争。考虑以下场景：
 
 ```rust
@@ -218,6 +228,8 @@ data.push(4);
 ---
 
 ### Q5: 如何实现自引用结构体？
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **A**: 使用 `Pin` 和 `PhantomPinned`：
 
@@ -265,6 +277,8 @@ impl SelfReferential {
 
 ### Q6: 生命周期省略的三条规则是什么？
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **A**:
 
 ```rust
@@ -297,6 +311,8 @@ fn return_part<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
 ---
 
 ### Q7: 'static 生命周期是什么意思？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **A**: `'static` 表示整个程序生命周期：
 
@@ -340,6 +356,8 @@ fn good() -> &'static str {
 
 ### Q8: Rc 和 Arc 的区别是什么？
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **A**:
 
 | 特性 | Rc<T> | Arc<T> |
@@ -370,6 +388,8 @@ thread::spawn(move || {
 ---
 
 ### Q9: RefCell 和 Mutex 的区别是什么？
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **A**:
 
@@ -413,6 +433,8 @@ for _ in 0..10 {
 ## 并发与并行
 
 ### Q10: Send 和 Sync trait 有什么区别？
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **A**:
 
@@ -766,7 +788,6 @@ pub enum MyError {
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

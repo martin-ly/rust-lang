@@ -49,12 +49,16 @@
 > **[来源: Rust Official Docs]**
 
 ### 目标
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
 创建一个带故障检测的LED闪烁器
 
 ### 要求
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +67,8 @@
 - 添加故障安全模式
 
 ### 代码框架
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +156,8 @@ struct Watchdog;
 ```
 
 ### 验证点
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,12 +172,16 @@ struct Watchdog;
 > **[来源: Rust Official Docs]**
 
 ### 目标
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
 实现一个线程安全的无锁环形缓冲区
 
 ### 要求
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +190,8 @@ struct Watchdog;
 - 完全测试覆盖
 
 ### 代码框架
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -300,6 +314,8 @@ mod tests {
 > **[来源: Rust Official Docs]**
 
 ### 目标
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 实现一个带安全监控的状态机
 

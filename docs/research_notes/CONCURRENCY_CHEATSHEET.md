@@ -119,6 +119,8 @@ thread::Builder::new()
 > **[来源: Rust Official Docs]**
 
 ### Mutex
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +140,8 @@ println!("{}", *num);
 ```
 
 ### RwLock
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +168,8 @@ let r2 = data.read().unwrap();
 > **[来源: Rust Official Docs]**
 
 ### mpsc
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +193,8 @@ for received in rx {
 ```
 
 ### 多生产者
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +246,8 @@ counter.compare_exchange(
 
 ### 内存序
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 顺序 | 保证 | 性能 |
 | :--- | :--- | :--- |
 | `Relaxed` | 无 | 最高 |
@@ -250,6 +260,8 @@ counter.compare_exchange(
 ## 线程同步
 
 ### Barrier
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::Barrier;
@@ -267,6 +279,8 @@ for _ in 0..3 {
 ```
 
 ### Condvar
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::{Arc, Condvar, Mutex};

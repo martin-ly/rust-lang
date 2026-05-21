@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Move vs Copy
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +72,8 @@
 | **使用场景** | 转移资源所有权 | 简单值复制 |
 
 ### &T vs &mut T
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +87,8 @@
 | **类比** | 多人阅读 | 一个人修改 |
 
 ### Box vs Rc vs Arc
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

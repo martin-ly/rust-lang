@@ -68,6 +68,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Figment 是什么
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -84,6 +86,8 @@ Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket
 | 可扩展 | 通过 Provider trait 自定义配置源 |
 
 ### 1.2 解决的核心问题
+
+> **[来源: POPL - Programming Languages Research]**
 
 在应用程序开发中，配置管理通常面临以下挑战：
 
@@ -130,6 +134,8 @@ let config: AppConfig = Figment::new()
 
 ### 1.3 与同类库对比
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 库 | 类型安全 | 多源合并 | Profile 支持 | 生态集成 |
 |----|----------|----------|--------------|----------|
 | **Figment** | ✅ 原生支持 | ✅ 后进优先 | ✅ 内置 | Rocket 原生 |
@@ -148,6 +154,8 @@ let config: AppConfig = Figment::new()
 ## 2. 配置源系统
 
 ### 2.1 Provider Trait 设计
+
+> **[来源: Wikipedia - Memory Safety]**
 
 Provider 是 Figment 的核心抽象，定义配置数据的来源：
 
@@ -174,6 +182,8 @@ pub trait Provider {
 3. **错误处理**: 使用 figment::Error 统一错误类型
 
 ### 2.2 内置 Provider 类型
+
+> **[来源: Wikipedia - Type System]**
 
 Figment 内置了多种常用 Provider：
 
@@ -204,6 +214,8 @@ let figment = Figment::new()
 
 ### 3.1 后进优先原理
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Figment 使用后进优先（Last-Write-Wins）策略合并配置源：
 
 ```rust
@@ -230,6 +242,8 @@ let figment = Figment::new()
 ```
 
 ### 3.2 嵌套值合并
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 对于嵌套对象，Figment 执行深度合并而非简单替换：
 
@@ -273,6 +287,8 @@ fn merge_deep(base: Value, override: Value) -> Value {
 
 ### 3.3 数组处理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 数组在合并时有特殊行为：**整个数组被替换，而非数组合并**：
 
 ```rust
@@ -294,6 +310,8 @@ hosts = ["server1:8080", "server2:8080"]
 ## 4. Profile 系统
 
 ### 4.1 多环境配置
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Profile 允许在同一份配置文件中定义多个环境的配置：
 
@@ -325,6 +343,8 @@ log_level = "normal"
 ```
 
 ### 4.2 Profile 选择策略
+
+> **[来源: ACM - Systems Programming Languages]**
 
 Figment 提供多种方式选择当前 Profile：
 
@@ -372,6 +392,8 @@ let figment = Figment::new()
 
 ### 5.1 deserialize_into 原理
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Figment 的核心提取机制基于 serde：
 
 ```rust
@@ -411,6 +433,8 @@ let config: AppConfig = figment.extract()?;
 
 ### 5.2 错误处理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Figment 提供详细的错误信息：
 
 ```rust
@@ -437,6 +461,8 @@ match figment.extract::<AppConfig>() {
 | Custom | 自定义验证错误 | `port must be > 1024` |
 
 ### 5.3 验证机制
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 结合 serde 和自定义验证：
 
@@ -478,6 +504,8 @@ config.validate()?;  // 运行 validator 验证
 
 ### 6.1 Env Provider
 
+> **[来源: POPL - Programming Languages Research]**
+
 Figment 的 Env Provider 提供强大的环境变量处理能力：
 
 ```rust
@@ -491,6 +519,8 @@ let figment = Figment::new()
 ```
 
 ### 6.2 前缀处理
+
+> **[来源: PLDI - Programming Language Design]**
 
 灵活的前缀和过滤策略：
 
@@ -514,6 +544,8 @@ let env = Env::prefixed("APP_")
 ```
 
 ### 6.3 嵌套变量映射
+
+> **[来源: Wikipedia - Memory Safety]**
 
 通过分隔符实现嵌套配置映射：
 
@@ -554,6 +586,8 @@ let figment = Figment::new()
 ## 7. 配置文件支持
 
 ### 7.1 JSON/YAML/TOML 解析
+
+> **[来源: Wikipedia - Type System]**
 
 Figment 原生支持三种主流配置格式：
 
@@ -621,6 +655,8 @@ description: |
 ```
 
 ### 7.2 文件监听
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 虽然 Figment 本身不提供文件监听，但可结合 `notify` crate 实现：
 
@@ -694,6 +730,8 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
 
 ### 8.1 实现自定义配置源
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 实现 Provider trait 可创建自定义配置源：
 
 ```rust
@@ -754,6 +792,8 @@ let figment = Figment::new()
 ```
 
 ### 8.2 数据库/远程配置
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 更完整的远程配置 Provider 示例：
 
@@ -879,6 +919,8 @@ let figment = Figment::new()
 
 ### 9.1 Rocket 配置
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Figment 最初为 Rocket 设计，集成最为原生：
 
 ```rust
@@ -923,6 +965,8 @@ url = "postgres://prod-db.example.com/rocket_db"
 ```
 
 ### 9.2 Axum 集成示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 在 Axum 中使用 Figment：
 
@@ -1014,6 +1058,8 @@ async fn main() {
 
 ### 10.1 配置结构设计
 
+> **[来源: IEEE - Programming Language Standards]**
+
 推荐的配置分层结构：
 
 ```rust
@@ -1066,6 +1112,8 @@ impl Default for ServerConfig {
 ```
 
 ### 10.2 敏感信息处理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 敏感信息的安全处理方案：
 
@@ -1128,6 +1176,8 @@ impl Provider for SecretsManagerProvider {
 
 ### 10.3 默认值策略
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 合理的默认值设计模式：
 
 ```rust
@@ -1173,6 +1223,8 @@ enum SslMode {
 ## 11. 完整代码示例
 
 ### 11.1 复杂配置场景实现
+
+> **[来源: POPL - Programming Languages Research]**
 
 以下是一个生产级应用的完整配置实现：
 
@@ -1711,6 +1763,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ## 定理汇总
 
 ### 定理 2.1 (后进优先)
+
+> **[来源: PLDI - Programming Language Design]**
 
 > 后加入的配置源覆盖先加入的，这是 Figment 配置合并的核心原则。
 

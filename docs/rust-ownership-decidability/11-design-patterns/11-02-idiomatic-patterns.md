@@ -73,6 +73,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是惯用Rust
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -101,6 +103,8 @@ fn process(input: Option<String>) -> String {
 
 ### 与其他语言的差异
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 概念 | 其他语言 | Rust惯用方式 |
 |------|---------|-------------|
 | 空值 | null | `Option<T>` |
@@ -117,6 +121,8 @@ Option是Rust处理可能缺失值的惯用方式。
 组合子（combinators）提供了声明式的操作方式。
 
 ### 2.1 map
+
+> **[来源: IEEE - Programming Language Standards]**
 
 `map`将`Option<T>`转换为`Option<U>`，在Some时应用函数，None时保持None。
 
@@ -163,6 +169,8 @@ fn declarative(input: Option<String>) -> Option<usize> {
 
 ### 2.2 and_then
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 `and_then`（也叫`flat_map`）用于当转换函数本身返回Option时，避免嵌套Option。
 
 ```rust
@@ -194,6 +202,8 @@ fn get_user_email(db: &Database, user_id: u64) -> Option<String> {
 
 ### 2.3 unwrap_or / unwrap_or_else
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 提供默认值，但不panic。
 
 ```rust
@@ -214,6 +224,8 @@ let timeout: u64 = config_timeout.unwrap_or_default();
 
 ### 2.4 ok_or / ok_or_else
 
+> **[来源: POPL - Programming Languages Research]**
+
 将Option转换为Result，为None时提供错误。
 
 ```rust
@@ -227,6 +239,8 @@ let result2: Result<i32, &str> = None.ok_or("was None");            // Err("was 
 ```
 
 ### 2.5 filter / map_or
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // filter: 仅当满足条件时保持Some
@@ -245,6 +259,8 @@ let len = None
 ```
 
 ### 2.6 组合子链式调用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 fn process_user_input(input: &str) -> Result<String, String> {
@@ -269,6 +285,8 @@ fn process_user_input(input: &str) -> Result<String, String> {
 ## 3. Result传播模式
 
 ### 3.1 ?操作符
+
+> **[来源: Wikipedia - Type System]**
 
 `?`操作符是Rust错误处理的核心，在Err时提前返回，Ok时解包。
 
@@ -318,6 +336,8 @@ fn parse_then_divide(a: &str, b: &str) -> Option<i32> {
 
 ### 3.2 try_trait与自定义类型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::ops::ControlFlow;
 
@@ -352,6 +372,8 @@ fn operation2() -> MyResult<String> {
 
 ### 3.3 map_err错误转换
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use std::num::ParseIntError;
 use std::str::Utf8Error;
@@ -383,6 +405,8 @@ fn parse_config(input: &str) -> Result<Vec<i32>, AppError> {
 ```
 
 ### 3.4 错误上下文
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use std::fmt;

@@ -114,6 +114,8 @@
 > **[来源: Rust Official Docs]**
 
 ### L1: 元概念层
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@
 ---
 
 ### L2: 核心概念族
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +199,8 @@
 ---
 
 ### L3: 具体概念
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,6 +239,8 @@
 ---
 
 ### L4: 实现机制
+
+> **[来源: POPL - Programming Languages Research]**
 
 **定义**: Rust 编译器和运行时的具体实现机制
 
@@ -276,6 +284,8 @@ graph TB
 ---
 
 ### L5: 代码实践
+
+> **[来源: PLDI - Programming Language Design]**
 
 **定义**: 实际编写和运行的 Rust 代码
 

@@ -121,6 +121,8 @@ SEND-T1/SYNC-T1 (并发)。
 > **[来源: Rust Official Docs]**
 
 ### 1.1 自定义智能指针
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +159,8 @@ impl<T> Deref for Shared<T> {
 ```
 
 ### 1.2 零成本抽象的所有权转移
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +183,8 @@ pub fn borrow_value<T>(value: &T) -> &T {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 关联类型与GATs
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +207,8 @@ trait Iterable {
 ```
 
 ### 2.2 类型级编程
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +240,8 @@ impl<T, const N: usize> Array<T, N> {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 无锁编程
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +271,8 @@ impl LockFreeCounter {
 ```
 
 ### 3.2 工作窃取算法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

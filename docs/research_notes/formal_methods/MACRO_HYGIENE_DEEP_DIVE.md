@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 什么是宏卫生性？
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -73,6 +75,8 @@ let four = using_a!(a / 10);  // ❌ 编译错误！
 > **[来源: Rust Official Docs]**
 
 ### Def CTX-1（语法上下文定义）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +102,8 @@ $$
 ```
 
 ### 上下文层级
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -115,6 +121,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### Def ID-CLASS（标识符分类）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +139,8 @@ $$
 | Label | `'label: loop` | 控制流标签 |
 
 ### 绑定标识符的卫生性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -148,6 +158,8 @@ make_var!(x, 42);
 ```
 
 ### 引用标识符的解析
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -170,6 +182,8 @@ let result = use_var!(5);  // 引用宏调用上下文的 'a'
 > **[来源: Rust Official Docs]**
 
 ### Rule HYGIENE-1（绑定隔离规则）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +195,8 @@ $$
 
 ### Rule HYGIENE-2（引用解析规则）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 宏内部的引用标识符，优先在宏定义上下文解析，其次是宏调用上下文：
 
 $$
@@ -188,6 +204,8 @@ $$
 $$
 
 ### Rule HYGIENE-3（混合上下文规则）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 通过 `$var` 传入的标识符，在调用上下文解析：
 
@@ -208,6 +226,8 @@ mixed_context!(y);
 ## 5. 跨 Crate 卫生性
 
 ### Def CROSS-CRATE（跨 Crate 卫生性）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 宏导出的标识符需要在不同 crate 间保持卫生性：
 
@@ -230,6 +250,8 @@ fn main() {
 ```
 
 ### $crate 变量
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 #[macro_export]

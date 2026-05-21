@@ -59,6 +59,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 理论概念
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@ A ⊸ B   (线性蕴含): 使用 A 产生 B
 
 ### 1.2 Rust 映射
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 线性逻辑 | Rust 代码 | 含义 |
 |:---------|:----------|:-----|
 | `A ⊗ B` | `let (a, b) = pair;` | 必须同时使用两个值 |
@@ -82,6 +86,8 @@ A ⊸ B   (线性蕴含): 使用 A 产生 B
 | 资源 | `Box<T>`, `String` | 堆分配资源 |
 
 ### 1.3 代码示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 线性逻辑: 资源必须被使用
@@ -121,6 +127,8 @@ fn move_example() {
 
 ### 1.4 形式化对应
 
+> **[来源: Wikipedia - Type System]**
+
 ```coq
 (* 线性逻辑 → Coq → Rust *)
 (* A ⊗ B        (x, y)      let (a, b) = pair *)
@@ -137,6 +145,8 @@ Inductive ty : Type :=
 ## 二、仿射类型 → 借用系统
 
 ### 2.1 理论概念
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **仿射类型 (Affine Types)**:
 

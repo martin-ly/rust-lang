@@ -212,6 +212,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 工作流定义与语义
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -265,6 +267,8 @@ pub enum WorkflowResult<S> {
 
 ### 1.2 工作流与业务过程
 
+> **[来源: PLDI - Programming Language Design]**
+
 **业务过程（Business Process）** 是一组为实现特定业务目标而协同工作的活动集合。工作流是业务过程的技术实现形式。
 
 | 概念 | 业务过程视角 | 工作流视角 | 技术语义 |
@@ -307,6 +311,8 @@ pub enum ActivityType {
 ```
 
 ### 1.3 Rust 实现工作流的优势
+
+> **[来源: Wikipedia - Memory Safety]**
 
 Rust 的类型系统和所有权模型为工作流实现提供了独特的优势：
 

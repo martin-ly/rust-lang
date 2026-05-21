@@ -103,6 +103,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心问题（用户反馈）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -118,6 +120,8 @@
 | **设计机制缺乏理由** | 如 Pin 堆/栈区分、 ownership 为何移动语义等无充分论证 | [DESIGN_MECHANISM_RATIONALE](./DESIGN_MECHANISM_RATIONALE.md) |
 
 ### 设计原则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +175,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 语义归纳表：Rust 核心概念族
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +210,8 @@ Rust 语义族谱（顶层归纳）
 ```
 
 ### 2. 概念族之间的依赖关系
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -231,6 +239,8 @@ Rust 语义族谱（顶层归纳）
 *证明*：由 CSO-T1 逆否；违反 ⇒ 不满足全部定理 ⇒ 非 Safe 或非良型。∎
 
 ### 3. 语义归纳：核心命题一句话总结
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -252,6 +262,8 @@ Rust 语义族谱（顶层归纳）
 > **[来源: Rust Official Docs]**
 
 ### 1. 跨模块术语一致性
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -267,6 +279,8 @@ Rust 语义族谱（顶层归纳）
 
 ### 2. 公理编号全局一致性
 
+> **[来源: Wikipedia - Type System]**
+
 | 前缀 | 含义 | 示例 | 使用范围 |
 | :--- | :--- | :--- | :--- |
 | **A** | Axiom | A1: 未初始化内存不具合法值 | PROOF_INDEX、FORMAL_PROOF_SYSTEM_GUIDE |
@@ -276,6 +290,8 @@ Rust 语义族谱（顶层归纳）
 | **Def** | Definition | Def 1.1: 协变形式化 | 型变、Pin、异步 |
 
 ### 3. 证明依赖链一致性
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 全局证明依赖图（简化）
@@ -313,6 +329,8 @@ Axiom/规则层
 
 ### 缺口类型定义（沿用 FORMAL_PROOF_SYSTEM_GUIDE）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 类型 | 含义 | 目标 |
 | :--- | :--- | :--- |
 | **D1** | 定义缺失 | 给出形式化定义 |
@@ -323,6 +341,8 @@ Axiom/规则层
 | **P2** | 证明无结构（未标公理链） | 标注 A→L→T→C |
 
 ### 各模块缺口详细追踪
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 模块 | D1 | D2 | R1 | R2 | P1 | P2 | 综合 | 备注 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -338,6 +358,8 @@ Axiom/规则层
 | type_theory/lifetime | ✅ | ✅ | ✅ | ✅ | ⚠️ | ⚠️ | 较好 | 与 formal_methods 交叉 |
 
 ### 证明完成度评分（1–5）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 定理 | 完整证明 | 证明思路 | 反例 | 证明树 | 公理链标注 | 综合 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -360,6 +382,8 @@ Axiom/规则层
 ## 🗺️ 思维表征方式全索引 {#️-思维表征方式全索引}
 
 ### 按表征类型索引
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 类型 | 文档 | 用途 | 覆盖范围 |
 | :--- | :--- | :--- | :--- |

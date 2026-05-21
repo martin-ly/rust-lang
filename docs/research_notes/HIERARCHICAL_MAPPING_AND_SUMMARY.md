@@ -131,6 +131,8 @@ research_notes/
 
 ### 2.1 支柱 1（公理判定）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
 | 所有权 | [ownership_model](formal_methods/ownership_model.md) | 规则 1–3, Def 1.1–1.5 | T2 唯一性, T3 内存安全 | 变量绑定/遮蔽 Def 1.4/1.5 |
@@ -146,6 +148,8 @@ research_notes/
 
 ### 2.2 支柱 2（语言表达力）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
 | 设计模式 23 | [01_design_patterns_formal](software_design_theory/01_design_patterns_formal/README.md) | 各模式 Def, Axiom | 各模式 B-T1、AF-T1 等 | 见 00_MASTER_INDEX |
@@ -155,6 +159,8 @@ research_notes/
 | 边界系统 | [05_boundary_system](software_design_theory/05_boundary_system/README.md) | Def 1.1–1.2, B1–B3 | SBM-T1/T2, SUM-T1/T2, EIM-T1/T2 | |
 
 ### 2.3 支柱 3（组件组合）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 概念族 | 主文档 | Def/Axiom | 定理/推论 | 备注 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -167,6 +173,8 @@ research_notes/
 以下为 research_notes 文档与思维表征（思维导图、多维矩阵、证明树、决策树）的对应关系；思维表征主文档位于 [04_thinking](../04_thinking/README.md)。
 
 ### 3.1 按文档 → 思维表征
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | research_notes 文档 | 思维导图 | 多维矩阵 | 证明树 | 决策树 |
 | :--- | :--- | :--- | :--- | :--- |

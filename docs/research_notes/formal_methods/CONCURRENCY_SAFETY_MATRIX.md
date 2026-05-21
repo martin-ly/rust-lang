@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基础规则
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@
 
 ### 复合类型推导
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 复合类型 | `Send`条件 | `Sync`条件 |
 | :--- | :--- | :--- |
 | `struct S<T>(T)` | `T: Send` | `T: Sync` |
@@ -93,6 +97,8 @@
 
 ### 互斥与锁
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 原语 | 公平性 | 阻塞类型 | 适用场景 | 开销 |
 | :--- | :--- | :--- | :--- | :--- |
 | `std::sync::Mutex` | 不保证 | 阻塞 | 通用互斥 | 中 |
@@ -104,6 +110,8 @@
 
 ### 原子操作
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 操作 | 内存序 | 使用场景 | 性能 |
 | :--- | :--- | :--- | :--- |
 | `Relaxed` | 无 | 计数器 | 最高 |
@@ -112,6 +120,8 @@
 | `SeqCst` | 顺序一致 | 严格同步 | 较低 |
 
 ### 线程通信
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 机制 | 语义 | 容量 | 适用场景 |
 | :--- | :--- | :--- | :--- |

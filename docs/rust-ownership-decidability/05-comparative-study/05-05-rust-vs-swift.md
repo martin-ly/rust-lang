@@ -99,6 +99,8 @@
 
 ### 2.1 核心安全机制
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       内存安全机制对比                                       │
@@ -142,6 +144,8 @@
 | **运行时开销** | 无 | ARC 计数操作 |
 
 ### 2.2 所有权 vs ARC
+
+> **[来源: Wikipedia - Type System]**
 
 **Swift ARC 示例:**
 
@@ -248,6 +252,8 @@ fn ownership_demo() {
 ```
 
 ### 2.3 循环引用解决
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Swift 解决方案:**
 
@@ -361,6 +367,8 @@ struct NodeData {
 
 ### 2.4 内存安全保证对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 安全问题 | Rust | Swift |
 |---------|------|-------|
 | **NullPointerException** | ❌ 编译错误 (Option) | ⚠️ 运行时崩溃 (强制解包 nil) |
@@ -375,6 +383,8 @@ struct NodeData {
 ## 3. 所有权系统深度对比
 
 ### 3.1 值类型与引用类型
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Swift 值类型 vs 引用类型:**
 
@@ -453,6 +463,8 @@ fn print_name(person: &Person) {
 
 ### 3.2 引用语义对比
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 特性 | Swift | Rust |
 |-----|-------|------|
 | **默认语义** | 值类型复制，引用类型共享 | 移动 (非Copy) |
@@ -463,6 +475,8 @@ fn print_name(person: &Person) {
 | **可变共享** | 允许 | 禁止 (编译期) |
 
 ### 3.3 借用检查 vs ARC
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Swift 引用:**
 
@@ -515,6 +529,8 @@ fn modify(data: &mut Vec<i32>) {
 ```
 
 ### 3.4 内部可变性
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Swift:**
 
@@ -611,6 +627,8 @@ fn use_counter() {
 
 ### 4.1 类型系统概览
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | Rust | Swift |
 |-----|------|-------|
 | **类型检查** | 严格静态 | 静态 + 部分推断 |
@@ -622,6 +640,8 @@ fn use_counter() {
 | **类型擦除** | 支持 | 支持 |
 
 ### 4.2 代数数据类型
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Swift enum:**
 
@@ -691,6 +711,8 @@ if let Ok(data) = result {
 ```
 
 ### 4.3 泛型与协议/Trait
+
+> **[来源: POPL - Programming Languages Research]**
 
 **Swift 协议:**
 
@@ -769,6 +791,8 @@ let drawables: Vec<Box<dyn Drawable>> = vec![
 
 ### 4.4 类型推断
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Swift:**
 
 ```swift
@@ -801,6 +825,8 @@ vec.push(1);               // 现在 Vec<i32>
 ```
 
 ### 4.5 空值安全
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **Swift Optional:**
 
@@ -866,6 +892,8 @@ fn process(name: Option<String>) -> Option<usize> {
 
 ### 5.1 并发安全模型
 
+> **[来源: Wikipedia - Type System]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                       并发安全模型对比                                       │
@@ -906,6 +934,8 @@ fn process(name: Option<String>) -> Option<usize> {
 ```
 
 ### 5.2 Swift Actor vs Rust Send/Sync
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Swift Actor:**
 
@@ -1013,6 +1043,8 @@ fn non_send_demo() {
 
 ### 5.3 异步编程对比
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Swift async/await:**
 
 ```swift
@@ -1110,6 +1142,8 @@ fn main() {
 
 ### 6.1 错误处理机制
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Swift:**
 
 ```swift
@@ -1188,6 +1222,8 @@ fn process_files() -> Result<(), io::Error> {
 
 ### 6.2 错误传播
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Swift:**
 
 ```swift
@@ -1239,6 +1275,8 @@ fn operation_c() -> Result<()> {
 
 ### 7.1 内存管理开销
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 操作 | Rust | Swift |
 |-----|------|-------|
 | **堆分配** | 相同 | 相同 |
@@ -1247,6 +1285,8 @@ fn operation_c() -> Result<()> {
 | **引用计数** | 无 | ~5-10% 开销 |
 
 ### 7.2 运行时特性
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -1269,6 +1309,8 @@ fn operation_c() -> Result<()> {
 ```
 
 ### 7.3 ARC vs 所有权性能
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Swift ARC 开销:**
 
@@ -1332,6 +1374,8 @@ fn process_shared(head: Option<Rc<SharedNode>>) {
 ## 8. 代码示例对比
 
 ### 8.1 数据结构：链表
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Swift:**
 

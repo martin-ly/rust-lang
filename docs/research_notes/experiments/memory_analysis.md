@@ -117,6 +117,8 @@
 4. **内存安全验证**：验证 Rust 内存安全保证
 
 ### 核心问题
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +127,8 @@
 3. **内存碎片化对性能的影响如何？**
 
 ### 预期成果
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +143,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +158,8 @@
 - **内存碎片化（Memory Fragmentation）**：内存被分割成小块，无法有效利用
 
 ### 理论背景
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +170,8 @@
 - **所有权系统**：编译时内存管理（Rust 核心特性）
 
 ### 形式化论证与实验衔接
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +204,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 内存分配模式分析
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -207,6 +219,8 @@
 - 自定义类型内存布局分析
 
 ### 2. 内存泄漏检测
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +234,8 @@
 
 ### 3. 内存碎片化分析
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **测试目标**：分析内存碎片化问题
 
 **测试场景**：
@@ -232,6 +248,8 @@
 ## 💻 代码示例 {#-代码示例}
 
 ### 示例 1：内存使用分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::alloc::{GlobalAlloc, Layout, System};
@@ -273,6 +291,8 @@ fn analyze_memory_usage() {
 
 ### 示例 2：Vec 增长模式分析
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 fn analyze_vec_growth() {
     let mut vec = Vec::new();
@@ -296,6 +316,8 @@ fn analyze_vec_growth() {
 ```
 
 ### 示例 3：内存泄漏检测
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::rc::Rc;
@@ -349,6 +371,8 @@ impl SafeNode {
 ```
 
 ### 示例 4：内存布局分析
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::mem;

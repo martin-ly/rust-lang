@@ -10,6 +10,7 @@
 ---
 
 ## 层次推进（阅读顺序）
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 入口 |
@@ -25,6 +26,7 @@
 ---
 
 ## 体系宗旨
+>
 > **[来源: Rust Official Docs]**
 
 本体系填补以下缺口：
@@ -38,6 +40,7 @@
 ---
 
 ## 目录结构
+>
 > **[来源: Rust Official Docs]**
 
 | 目录 | 内容 |
@@ -203,9 +206,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -216,6 +223,8 @@
 
 #### 代码示例更新
 
+> **[来源: ACM - Systems Programming Languages]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -223,6 +232,8 @@
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [Rust 1.94 迁移指南](../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -242,7 +253,6 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

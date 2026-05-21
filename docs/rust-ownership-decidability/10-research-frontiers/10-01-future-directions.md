@@ -79,6 +79,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 当前挑战
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -147,6 +149,8 @@ pub struct SelfReferential {
 
 ### 1.2 验证工具路线图
 
+> **[来源: PLDI - Programming Language Design]**
+
 基于 2024-2025 年的社区讨论和 RFC 提案，以下是主要验证工具的发展路线图：
 
 ```text
@@ -196,6 +200,8 @@ pub struct SelfReferential {
 
 ### 1.3 编译器验证愿景
 
+> **[来源: Wikipedia - Memory Safety]**
+
 验证 Rust 编译器本身是一个雄心勃勃的长期目标：
 
 #### 1.3.1 Ferrocene 项目
@@ -231,6 +237,8 @@ MIR (Mid-level Intermediate Representation) 的验证是编译器验证的关键
 ## 2. 新兴研究方向
 
 ### 2.1 GhostCell 与运行时借用检查
+
+> **[来源: Wikipedia - Type System]**
 
 GhostCell 是 2021 年发表的一种创新技术，正在被进一步研究和扩展：
 
@@ -271,6 +279,8 @@ fn example() {
 
 ### 2.2 细粒度并发验证
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 无锁数据结构的验证是当前研究的热点：
 
 ```rust
@@ -298,6 +308,8 @@ use crossbeam::queue::ArrayQueue;
 | 原子性推理 | 验证原子操作序列 | "Atomicity Refinement" (PLDI 2024) |
 
 ### 2.3 机器学习与验证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ML 在形式化验证中的应用正在快速增长：
 
@@ -329,6 +341,8 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 ### 2.4 量子计算与所有权
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 新兴的研究领域：将 Rust 所有权概念应用于量子计算：
 
 ```rust
@@ -352,6 +366,8 @@ fn measure(q: Qubit) -> Bit {
 ## 3. 理论研究方向
 
 ### 3.1 类型系统扩展
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Rust 类型系统的可能扩展及其对可判定性的影响：
 

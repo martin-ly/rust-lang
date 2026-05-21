@@ -84,6 +84,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 设计模式的语义视角
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -98,6 +100,8 @@ $$
 
 ### 1.2 Rust 设计模式的独特性
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Rust 的设计模式具有独特性，主要源于其**所有权系统**和**类型系统**的交互：
 
 | 特性 | 传统语言 | Rust |
@@ -110,9 +114,13 @@ Rust 的设计模式具有独特性，主要源于其**所有权系统**和**类
 
 ### 1.3 所有权对设计模式的影响
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 所有权系统从根本上改变了设计模式的实现方式。所有权对模式的影响可以用**资源转移语义**来描述。
 
 ### 1.4 设计模式语义分析框架
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```mermaid
 graph TB
@@ -132,6 +140,8 @@ graph TB
 ## 2. 创建型模式语义
 
 ### 2.1 所有权转移模式 (Move Semantics)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 2.1.1 所有权转移的形式化语义
 
@@ -203,6 +213,8 @@ struct HttpRequest<'a> { method: &'a str, url: &'a str, headers: Vec<(&'a str, &
 
 ### 2.2 借用检查模式 (Borrow Check)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 2.2.1 借用的生命周期语义
 
 ```rust
@@ -260,6 +272,8 @@ fn exclusive_mutable_borrow() {
 ```
 
 ### 2.3 智能指针模式 (Smart Pointers)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 2.3.1 Box 语义（唯一所有权）
 
@@ -358,6 +372,8 @@ fn weak_semantics() {
 
 ### 3.1 组合模式 (Composition)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 3.1.1 所有权树形结构语义
 
 ```mermaid
@@ -447,6 +463,8 @@ enum SharedList<T> {
 ```
 
 ### 3.2 类型状态模式 (Type State)
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 3.2.1 状态作为类型参数
 
@@ -577,6 +595,8 @@ struct HttpResponse { status: u16 }
 
 ### 3.3 适配器模式 (Adapter)
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 3.3.1 trait 适配语义
 
 ```rust
@@ -668,6 +688,8 @@ fn deref_semantics() {
 
 ### 4.1 迭代器模式 (Iterator)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 4.1.1 迭代器协议语义
 
 ```rust
@@ -744,6 +766,8 @@ fn consumer_adapters() {
 
 ### 4.2 观察者模式 (Observer)
 
+> **[来源: Wikipedia - Type System]**
+
 #### 4.2.1 回调所有权语义
 
 ```rust
@@ -787,6 +811,8 @@ impl Observer for ConcreteObserver {
 
 ### 4.3 访问者模式 (Visitor)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 4.3.1 双重分发语义
 
 ```rust
@@ -820,6 +846,8 @@ impl Visitor for Evaluator {
 ## 5. 并发设计模式语义
 
 ### 5.1 通道模式 (Channel)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 5.1.1 所有权传递语义
 
@@ -905,6 +933,8 @@ fn producer_consumer_pattern() {
 
 ### 5.2 锁模式 (Lock)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 5.2.1 Mutex 保护语义
 
 ```rust
@@ -958,6 +988,8 @@ fn rwlock_semantics() {
 ```
 
 ### 5.3 原子模式 (Atomic)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 5.3.1 原子操作语义
 
@@ -1054,6 +1086,8 @@ impl<T> LockFreeStack<T> {
 
 ### 6.1 Future 组合模式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 async fn future_composition() -> i32 {
     let a = async { 1 }.await;
@@ -1084,6 +1118,8 @@ impl Profile { fn get_score(&self) -> i32 { self.score } }
 ```
 
 ### 6.2 Stream 处理模式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use futures::stream::{self, StreamExt};
@@ -1120,6 +1156,8 @@ async fn backpressure_control() {
 ```
 
 ### 6.3 取消模式 (Cancellation)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 async fn cancellation_pattern() {

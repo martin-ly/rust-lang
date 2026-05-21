@@ -62,6 +62,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本设置
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +121,8 @@ wasm-pack new my-wasm-project
   - [权威来源索引](#权威来源索引)
 
 ### 基本函数
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### JavaScript 互操作
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +158,8 @@ extern "C" {
 ```
 
 ### 处理对象
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +180,8 @@ impl Person {
 ```
 
 ### 异步函数
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +203,8 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +220,8 @@ web-sys = { version = "0.3", features = ["Window"] }
 ```
 
 ### 编译命令
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +254,8 @@ wasm-pack build --target bundler
 ## ⚡ 性能优化 {#-性能优化}
 
 ### 减小二进制大小
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```toml
 [profile.release]

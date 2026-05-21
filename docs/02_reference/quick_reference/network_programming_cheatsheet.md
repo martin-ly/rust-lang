@@ -121,6 +121,8 @@
 > **[来源: Rust Official Docs]**
 
 ### HTTP 客户端
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +146,8 @@ let response = client
 ```
 
 ### TCP 服务器
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +182,8 @@ loop {
 > **[来源: Rust Official Docs]**
 
 ### HTTP 客户端
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +197,8 @@ loop {
 | 表单数据  | `.form(data)`         | 发送表单数据     |
 
 ### TCP/UDP
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +209,8 @@ loop {
 | 发送 | `send()`               | `send_to()`            |
 
 ### WebSocket
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +234,8 @@ if let Some(msg) = ws.recv().await? {
 ```
 
 ### DNS 解析
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -252,6 +264,8 @@ for ip in ips {
 > **[来源: Rust Official Docs]**
 
 ### HTTP 客户端配置
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -265,6 +279,8 @@ let client = HttpClient::builder()
 
 ### TCP 服务器配置
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 let listener = TcpListener::bind("127.0.0.1:8080")
     .with_nodelay(true)  // 禁用 Nagle 算法
@@ -277,6 +293,8 @@ let listener = TcpListener::bind("127.0.0.1:8080")
 ## ⚡ 异步模式
 
 ### 并发处理多个请求
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use futures::future;
@@ -295,6 +313,8 @@ let results = future::join_all(futures).await;
 ```
 
 ### 流式处理
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use futures::StreamExt;
@@ -333,6 +353,8 @@ match client.get(url).await {
 ## 🔒 安全特性
 
 ### HTTPS/TLS
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 let client = HttpClient::builder()

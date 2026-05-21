@@ -66,6 +66,8 @@
 > **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +140,8 @@ let y = &x;
 ---
 
 ### ⭐⭐ 进阶题
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +218,8 @@ println!("{}", r1);
 ---
 
 ### ⭐⭐⭐ 高级题
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -287,6 +293,8 @@ let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ---
 
 ### ⭐⭐⭐⭐ 专家题
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -357,6 +365,8 @@ drop: `if count.fetch_sub(1, Release) == 1 { 释放 }`
 > **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -407,6 +417,8 @@ trait Iterator {
 ---
 
 ### ⭐⭐ 进阶题
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -454,6 +466,8 @@ F: for<'a> Fn(&'a str) -> &'a str
 ---
 
 ### ⭐⭐⭐ 高级题
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -509,6 +523,8 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 ---
 
 ### ⭐⭐⭐⭐ 专家题
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -539,6 +555,8 @@ let ptr: *const MySlice;  // 包含长度信息
 > **[来源: Rust Official Docs]**
 
 ### ⭐ 基础题
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **Q26: Send和Sync有什么区别？**
 
@@ -584,6 +602,8 @@ let ptr: *const MySlice;  // 包含长度信息
 ---
 
 ### ⭐⭐ 进阶题
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Q29: 什么是死锁？如何避免？**
 
@@ -641,6 +661,8 @@ enum FooFuture {
 ---
 
 ### ⭐⭐⭐ 高级题
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Q32: 什么是`Unpin`？**
 
@@ -702,6 +724,8 @@ tokio::select! {
 
 ### ⭐⭐⭐⭐ 专家题
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **Q35: 实现一个简单的异步运行时。**
 
 <details>
@@ -739,6 +763,8 @@ impl Runtime {
 > **[来源: Rust Official Docs]**
 
 ### ⭐⭐ 进阶题
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Q36: 什么是L1/L2/L3证明？**
 

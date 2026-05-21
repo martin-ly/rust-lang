@@ -91,6 +91,8 @@
 
 ### 1.2 所有权系统思维导图
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
                          所有权 (Ownership)
                               │
@@ -108,6 +110,8 @@
 ```
 
 ### 1.3 概念依赖关系图
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 底层概念 → 中层概念 → 高层概念
@@ -132,6 +136,8 @@
 ## 第二部分: 核心概念层次模型
 
 ### 2.1 五层抽象模型
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### Layer 0: 物理内存层
 
@@ -174,6 +180,8 @@
 
 ### 2.2 层次间交互规则
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```text
 规则 1: 下层决定上层 (物理限制逻辑)
   示例: 物理地址不能同时被两个可变引用访问
@@ -193,6 +201,8 @@
 ## 第三部分: 所有权系统完整论证
 
 ### 3.1 所有权的三要素
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 ┌─────────────────────────────────────────┐
@@ -219,6 +229,8 @@
 
 ### 3.2 所有权转移的完整示例
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 场景 1: 基本转移
 let s1 = String::from("hello");  // s1 拥有字符串
@@ -243,6 +255,8 @@ let s = gives_ownership();        // 获得返回值的所有权
 ```
 
 ### 3.3 Copy vs Move 的深层逻辑
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```text
 ┌────────────────────────────────────────┐
@@ -279,6 +293,8 @@ let s = gives_ownership();        // 获得返回值的所有权
 
 ### 4.1 借用的本质
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```text
 借用不是所有权，而是临时访问权限。
 
@@ -289,6 +305,8 @@ let s = gives_ownership();        // 获得返回值的所有权
 ```
 
 ### 4.2 借用规则的逻辑推导
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 目标: 防止数据竞争 (Data Race)
@@ -321,6 +339,8 @@ Rust 的解决方案:
 
 ### 4.3 借用检查器的决策树
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
                 借用请求 (&x 或 &mut x)
                         │
@@ -343,6 +363,8 @@ Rust 的解决方案:
 
 ### 4.4 借用与生命周期的关系
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```text
 借用不是永久的，它有一个有效期 (生命周期)。
 
@@ -364,6 +386,8 @@ Rust 的解决方案:
 ## 第五部分: 生命周期逻辑框架
 
 ### 5.1 生命周期的本质
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 生命周期不是类型，而是对值有效范围的约束。

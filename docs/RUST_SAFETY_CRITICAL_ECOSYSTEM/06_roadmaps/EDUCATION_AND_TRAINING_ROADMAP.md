@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 阶段1: Rust基础 (4-6周)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +128,8 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 ```
 
 ### 阶段2: 嵌入式Rust (6-8周)
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -206,6 +210,8 @@ fn SysTick() {
 - 简单RTOS集成
 
 ### 阶段3: 功能安全基础 (4-6周)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -237,6 +243,8 @@ fn SysTick() {
 ```
 
 ### 阶段4: 高级Rust安全 (6-8周)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 学习目标
 
@@ -348,6 +356,8 @@ impl ThreadSafeStateMachine {
 
 ### 阶段5: 形式化验证 (4-6周)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 学习目标
 
 - 掌握Miri、Kani使用
@@ -410,6 +420,8 @@ mod verification {
 ## 2. 企业培训体系
 
 ### 培训矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 角色 | 阶段1 | 阶段2 | 阶段3 | 阶段4 | 阶段5 |
 |------|-------|-------|-------|-------|-------|

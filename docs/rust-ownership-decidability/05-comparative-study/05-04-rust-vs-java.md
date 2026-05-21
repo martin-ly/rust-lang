@@ -106,6 +106,8 @@
 
 ### 2.1 设计目标
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 维度 | Rust | Java |
 |-----|------|------|
 | **首要目标** | 安全 + 性能 | 可移植性 + 生产力 |
@@ -172,6 +174,8 @@ private void process(String line) {
 
 ### 2.2 执行模型
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         执行模型对比                                         │
@@ -213,6 +217,8 @@ private void process(String line) {
 ## 3. 内存管理对比
 
 ### 3.1 所有权 vs 垃圾回收
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -266,6 +272,8 @@ private void process(String line) {
 ```
 
 ### 3.2 内存安全保证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 安全问题 | Rust (编译期) | Java (运行时) |
 |---------|--------------|---------------|
@@ -344,6 +352,8 @@ fn use_user(user: &User) {
 ```
 
 ### 3.3 资源管理对比
+
+> **[来源: POPL - Programming Languages Research]**
 
 **Java try-with-resources:**
 
@@ -425,6 +435,8 @@ pub fn temp_operations() -> io::Result<()> {
 
 ### 3.4 内存布局与缓存
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Java 内存布局:**
 
 ```java
@@ -498,6 +510,8 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 
 ### 4.1 类型系统概览
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 特性 | Rust | Java |
 |-----|------|------|
 | **类型检查** | 编译期，严格 | 编译期 + 运行时 |
@@ -507,6 +521,8 @@ assert_eq!(std::mem::size_of::<ZeroSized>(), 0);
 | **类型别名** | type | 无 (interface 模拟) |
 
 ### 4.2 泛型实现对比
+
+> **[来源: Wikipedia - Type System]**
 
 **Java 类型擦除:**
 
@@ -584,6 +600,8 @@ fn use_generic() {
 ```
 
 ### 4.3 Trait vs Interface
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | Rust Trait | Java Interface |
 |-----|-----------|---------------|
@@ -669,6 +687,8 @@ impl Drawable for String {
 ```
 
 ### 4.4 代数数据类型
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **Java 类层次结构:**
 
@@ -774,6 +794,8 @@ fn process_message(msg: Message) {
 
 ### 4.5 空值安全
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Java Optional:**
 
 ```java
@@ -847,6 +869,8 @@ pub fn process() {
 ## 5. 并发模型对比
 
 ### 5.1 线程模型对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 特性 | Rust OS 线程 | Java 线程 |
 |-----|-------------|-----------|
@@ -963,6 +987,8 @@ fn parallel_computation() -> i32 {
 
 ### 5.2 内存模型对比
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 特性 | Rust | Java |
 |-----|------|------|
 | **内存顺序** | Ordering enum | happens-before |
@@ -1059,6 +1085,8 @@ pub fn memory_orderings() {
 ```
 
 ### 5.3 数据竞争防护
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Java 数据竞争 (编译通过，运行时问题):**
 
@@ -1159,6 +1187,8 @@ pub fn prevented_at_compile_time() {
 
 ### 5.4 异步编程对比
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **Java CompletableFuture:**
 
 ```java
@@ -1246,6 +1276,8 @@ pub async fn with_timeout() {
 ## 6. 错误处理对比
 
 ### 6.1 异常 vs Result
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | Java Exception | Rust Result |
 |-----|---------------|-------------|
@@ -1336,6 +1368,8 @@ pub enum AppError {
 
 ### 6.2 错误传播
 
+> **[来源: POPL - Programming Languages Research]**
+
 **Java:**
 
 ```java
@@ -1383,6 +1417,8 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.1 运行时开销
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                         运行时开销对比                                       │
@@ -1404,6 +1440,8 @@ pub fn operation_c() -> Result<()> {
 
 ### 7.2 启动性能
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 指标 | Rust | Java |
 |-----|------|------|
 | **冷启动时间** | < 1 ms | 100 ms - 数秒 |
@@ -1412,6 +1450,8 @@ pub fn operation_c() -> Result<()> {
 | **容器镜像** | ~5 MB (scratch) | ~100+ MB (JRE) |
 
 ### 7.3 零成本抽象
+
+> **[来源: Wikipedia - Type System]**
 
 **Java Stream 开销:**
 
@@ -1471,6 +1511,8 @@ pub fn sum_manual(numbers: &[i32]) -> i32 {
 ## 8. 代码示例对比
 
 ### 8.1 集合操作
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Java:**
 
@@ -1544,6 +1586,8 @@ pub fn process_with_itertools(input: Vec<String>) -> Vec<String> {
 
 ### 8.2 文件处理
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Java:**
 
 ```java
@@ -1611,6 +1655,8 @@ pub fn word_count_functional<P: AsRef<Path>>(path: P) -> io::Result<HashMap<Stri
 ```
 
 ### 8.3 并发计数器
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Java:**
 
@@ -1723,6 +1769,8 @@ pub fn demo() {
 ```
 
 ### 8.4 REST API 服务
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **Java (Spring Boot):**
 

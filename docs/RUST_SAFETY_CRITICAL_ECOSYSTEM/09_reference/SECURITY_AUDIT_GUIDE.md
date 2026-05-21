@@ -41,6 +41,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 审计类型
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +69,8 @@
 ```
 
 ### 1.2 审计生命周期
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -91,6 +95,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 审计工具链
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +119,8 @@ cargo bloat --release
 ```
 
 ### 2.2 unsafe代码审计
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +182,8 @@ mod audit {
 > **[来源: Rust Official Docs]**
 
 ### 3.1 依赖评估矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +196,8 @@ mod audit {
 | **代码质量** | 10% | 静态分析 |
 
 ### 3.2 依赖审计配置
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

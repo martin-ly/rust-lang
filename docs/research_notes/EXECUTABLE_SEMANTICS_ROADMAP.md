@@ -51,6 +51,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 K-Framework
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 
 ### 2.2 PLT Redex
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 项目 | 说明 |
 | :--- | :--- |
 | **Racket 生态** | 小步语义、类型系统、测试 |
@@ -71,6 +75,8 @@
 | **优先级** | 中 |
 
 ### 2.3 自研最小子集
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 项目 | 说明 |
 | :--- | :--- |
@@ -84,6 +90,8 @@
 ## 三、分阶段路线图
 
 ### 阶段 1：调研（1–2 个月）
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 任务 | 交付物 |
 | :--- | :--- |

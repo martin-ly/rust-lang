@@ -61,6 +61,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Future Trait 数学语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -84,6 +86,8 @@ $$
 - $Poll<T>$ : $Ready(T) \mid Pending$
 
 ### 1.2 Poll代数类型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 enum Poll<T> {
@@ -117,6 +121,8 @@ $$
 
 ### 1.3 Context结构形式化
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 struct Context<'a> {
     waker: &'a Waker,
@@ -140,6 +146,8 @@ $$
 
 ### 2.1 状态机类型定义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 每个async函数编译为状态机：
 
 ```rust
@@ -160,6 +168,8 @@ $$
 其中 $Locals_i$ 是在第i个await点捕获的局部变量。
 
 ### 2.2 状态转换函数
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 ┌─────────────┐     poll()      ┌─────────────┐
@@ -191,6 +201,8 @@ $$
 
 ### 2.3 状态机正确性条件
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定义 WELLFORMED-1**:
 
 状态机是良构的当且仅当：
@@ -206,6 +218,8 @@ $$
 ## 3. Poll模型深度分析
 
 ### 3.1 协作式调度语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 执行器主循环
@@ -238,6 +252,8 @@ $$
 $$
 
 ### 3.2 背压传播机制
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 Producer ──→ Channel ──→ Consumer

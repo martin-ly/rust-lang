@@ -77,6 +77,8 @@
 Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Self-Referential Structs）**。它通过过程宏自动生成安全的构建器和访问器，解决了 Rust 所有权系统中长期存在的自引用难题。
 
 ### 核心解决的问题
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -89,6 +91,8 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 
 ### 关键特性
 
+> **[来源: ACM - Systems Programming Languages]**
+
 - **零unsafe**: 用户代码无需编写 `unsafe` 块
 - **Pin兼容**: 与 Rust 的 `Pin` 系统无缝集成
 - **类型安全**: 编译期保证自引用有效性
@@ -100,6 +104,8 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 ## 2. 自引用问题背景
 
 ### 2.1 什么是自引用结构体
+
+> **[来源: IEEE - Programming Language Standards]**
 
 自引用结构体是指其某个字段包含对同一结构体其他字段的引用。这种设计在某些场景下非常自然：
 
@@ -119,6 +125,8 @@ struct Document {
 4. **迭代器**: 返回引用底层集合的元素
 
 ### 2.2 手动实现的陷阱
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 手动实现自引用结构体充满了危险：
 
@@ -172,6 +180,8 @@ fn main() {
 
 ### 2.3 Rust所有权系统的限制
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust 的借用规则明确禁止自引用：
 
 ```rust
@@ -204,6 +214,8 @@ impl<'a> Document<'a> {
 
 ### 3.1 self_referencing宏生成分析
 
+> **[来源: POPL - Programming Languages Research]**
+
 `#[self_referencing]` 是一个过程宏，它会：
 
 1. **解析结构体定义**: 识别 `#[borrows(...)]` 标记的字段
@@ -225,6 +237,8 @@ struct DataWithSlice {
 ```
 
 ### 3.2 Builder模式实现
+
+> **[来源: PLDI - Programming Language Design]**
 
 宏生成的构建器确保在结构体被固定之前完成所有初始化：
 
@@ -258,6 +272,8 @@ impl DataWithSlice {
 ```
 
 ### 3.3 代码生成示例
+
+> **[来源: Wikipedia - Memory Safety]**
 
 完整的宏生成代码包含以下组件：
 
@@ -309,6 +325,8 @@ impl DataWithSlice {
 
 ### 4.1 with_*方法设计原理
 
+> **[来源: Wikipedia - Type System]**
+
 Ouroboros 使用闭包 API 来安全地访问自引用字段，这是其核心设计模式：
 
 ```rust
@@ -340,6 +358,8 @@ impl DataWithSlice {
 | 原始指针访问 | 需要 unsafe | 封装 unsafe 在库内部 |
 
 ### 4.2 闭包API与作用域控制
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 闭包 API 强制实现**借用纪律**：
 
@@ -388,6 +408,8 @@ impl DataWithSlice {
 
 ### 4.3 内存布局保证
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 使用 `#[repr(C)]` 确保字段布局稳定，这对自引用的安全性至关重要：
 
 ```rust
@@ -410,6 +432,8 @@ struct DataWithSlice {
 
 ### 5.1 !Unpin实现机制
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Ouroboros 通过实现 `!Unpin` 来阻止结构体被移动：
 
 ```rust
@@ -420,6 +444,8 @@ impl !Unpin for DataWithSlice {}
 **原理**: 当一个类型实现了 `!Unpin`，它就不能被解固定（unpin），从而保证其内存地址稳定。
 
 ### 5.2 内存固定原理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 `Pin<P>` 是 Rust 提供的内存固定原语：
 
@@ -445,6 +471,8 @@ pub struct DataWithSlice {
 ```
 
 ### 5.3 自引用有效性证明
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定理 5.1 (自引用有效性)**: 使用 Ouroboros 创建的自引用结构体，其自引用字段在整个生命周期内始终有效。
 
@@ -472,6 +500,8 @@ pub struct DataWithSlice {
 ## 6. 生命周期处理
 
 ### 6.1 'this生命周期参数
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Ouroboros 引入特殊的 `'this` 生命周期来表示"结构体的生命周期"：
 

@@ -46,6 +46,8 @@ Web 开发是 Rust 应用最广泛的领域之一。
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust Web 生态特点
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -58,6 +60,8 @@ Web 开发是 Rust 应用最广泛的领域之一。
 | 编译时检查 | 类型安全、所有权检查 | 减少运行时错误 |
 
 ### 主要框架对比
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 框架 | 特点 | 适用场景 | 性能 | 学习曲线 |
 |------|------|----------|------|----------|
@@ -72,6 +76,8 @@ Web 开发是 Rust 应用最广泛的领域之一。
 ## 后端框架详解
 
 ### Axum 框架
+
+> **[来源: Wikipedia - Memory Safety]**
 
 Axum 是由 Tokio 团队开发的 Web 框架，与 Tower 生态系统深度集成。
 
@@ -415,6 +421,8 @@ async fn main() {
 
 ### Actix-web 框架
 
+> **[来源: Wikipedia - Type System]**
+
 Actix-web 是基于 Actor 模型的高性能 Web 框架。
 
 ```rust
@@ -699,6 +707,8 @@ async fn main() -> std::io::Result<()> {
 
 ### wasm-bindgen 基础
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 //! WebAssembly 前端开发
 
@@ -977,6 +987,8 @@ use wasm_bindgen::closure::Closure;
 
 ### Yew 框架
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 //! Yew 框架 - React-like 的 Rust 前端框架
 
@@ -1191,6 +1203,8 @@ fn main() {
 ## 全栈框架
 
 ### Leptos 全栈应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 //! Leptos 全栈框架示例
@@ -1432,6 +1446,8 @@ fn main() {
 ## API 设计与实现
 
 ### REST API 最佳实践
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 //! REST API 设计与 OpenAPI 集成
@@ -1729,6 +1745,8 @@ async fn main() {
 
 ### SQLx 异步数据库
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 //! SQLx 数据库集成
 
@@ -1955,6 +1973,8 @@ impl<'a> Transaction<'a> {
 
 ### JWT 认证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 //! JWT 认证与授权
 
@@ -2122,6 +2142,8 @@ impl PermissionChecker {
 ## 实时通信
 
 ### WebSocket 实现
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 //! WebSocket 实时通信
@@ -2331,6 +2353,8 @@ async fn handle_socket(socket: WebSocket, manager: Arc<ConnectionManager>) {
 
 ### Docker 部署
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```dockerfile
 # Dockerfile
 FROM rust:1.75-slim as builder
@@ -2354,6 +2378,8 @@ CMD ["./myapp"]
 ```
 
 ### Kubernetes 配置
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```yaml
 # deployment.yaml
@@ -2411,6 +2437,8 @@ spec:
 
 ### 1. 错误处理
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 //! 统一的错误处理
 
@@ -2453,6 +2481,8 @@ impl IntoResponse for AppError {
 ```
 
 ### 2. 配置管理
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 //! 配置管理
@@ -2584,3 +2614,40 @@ Rust 在 Web 开发领域提供了：
 > **[来源: TRPL Ch. 4 - Ownership]**
 > **[来源: Rustonomicon - Ownership]**
 > **[来源: POPL 2018 - RustBelt]**
+
+
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**

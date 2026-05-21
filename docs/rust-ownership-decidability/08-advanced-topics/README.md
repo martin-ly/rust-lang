@@ -28,6 +28,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 初级路径
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -40,6 +42,8 @@
 
 ### 进阶路径
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 如果你需要与外部系统交互或开发库：
 
 1. **08-03-ffi-patterns.md** - 学习如何安全地与 C 代码交互
@@ -47,6 +51,8 @@
 3. **08-05-unsafe-patterns.md** - 深入理解 Unsafe Rust 的安全边界
 
 ### 专家路径
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 如果你正在优化性能或开发系统级代码：
 
@@ -59,6 +65,8 @@
 ## 各主题概述
 
 ### 08-01 Const Generics（常量泛型）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 常量泛型允许你在类型参数中使用常量值，实现编译时多态。
 
@@ -96,6 +104,8 @@ struct Buffer<T, const SIZE: usize = 1024> {
 
 ### 08-02 Async Rust（异步Rust）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 深度解析 Rust 的异步编程模型，包括 Future trait、Pin、异步运行时和流处理。
 
 **核心概念：**
@@ -131,6 +141,8 @@ async fn fetch_data(url: &str) -> Result<Data, Error> {
 ---
 
 ### 08-03 FFI Patterns（FFI模式）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 学习如何安全地与 C 代码和其他语言交互，包括内存布局、ABI 兼容性和绑定生成。
 
@@ -170,6 +182,8 @@ pub extern "C-unwind" fn my_library_init() -> *mut MyContext {
 
 ### 08-04 Proc Macros（过程宏）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 全面掌握 Rust 的宏系统，包括声明宏（macro_rules!）和三种过程宏。
 
 **核心概念：**
@@ -205,6 +219,8 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 ### 05 Unsafe Patterns（Unsafe模式）
 
+> **[来源: POPL - Programming Languages Research]**
+
 深入理解 Unsafe Rust，学习如何在不安全代码中维护安全不变量。
 
 **核心概念：**
@@ -238,6 +254,8 @@ pub unsafe fn slice_from_raw_parts<'a, T>(
 
 ### 08-06 Zero-Cost Abstractions（零成本抽象）
 
+> **[来源: PLDI - Programming Language Design]**
+
 学习 Rust 如何实现零成本抽象，以及如何利用这些特性编写高效代码。
 
 **核心概念：**
@@ -268,6 +286,8 @@ let sum: i32 = (0..1000)
 ---
 
 ### 08-07 Custom Allocators（自定义分配器）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 学习 Rust 的分配器 API，以及如何为特定场景实现自定义内存分配器。
 

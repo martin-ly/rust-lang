@@ -57,6 +57,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 手动内存管理时代（1970s-1990s）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -82,6 +84,8 @@ free(p);
 - **Region-based 内存管理**（1990s）：为 Rust 的生命周期系统奠定基础
 
 ### 1.2 垃圾回收的兴起（1990s-2000s）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -108,6 +112,8 @@ Object obj = new Object();
 
 ### 1.3 线性逻辑的引入（1980s-1990s）
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **Girard 的线性逻辑（1987）**：
 
 ```text
@@ -130,6 +136,8 @@ A & B    : 选择使用 A 或 B
 
 ### 2.1 Rust 的早期设计（2006-2010）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **Graydon Hoare 的初始设计**：
 
 - 目标：系统级编程 + 内存安全 + 零成本抽象
@@ -150,6 +158,8 @@ A & B    : 选择使用 A 或 B
 ```
 
 ### 2.2 所有权系统的演化（2010-2015）
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **设计的迭代**：
 
@@ -178,6 +188,8 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 2.3 形式化的早期尝试（2012-2015）
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **需求出现**：
 
 - Rust 社区需要理解借用检查器的原理
@@ -196,6 +208,8 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 
 ### 3.1 Patina 项目（2015）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **目标**：为 Rust 的子集创建形式化语义
 
 **贡献**：
@@ -209,6 +223,8 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 - 没有证明安全定理
 
 ### 3.2 RustBelt 项目（2015-2018）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **里程碑论文**：
 > "RustBelt: Securing the Foundations of the Rust Programming Language"
@@ -237,6 +253,8 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }
 - 但过于复杂，不适合教学
 
 ### 3.3 Featherweight Rust（2019-2022）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **动机**：
 

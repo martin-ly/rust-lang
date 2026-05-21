@@ -70,6 +70,8 @@
 本目录提供 Rust 核心概念的快速参考速查卡，帮助开发者快速查找常用语法、模式和最佳实践。
 
 ### 适用场景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +87,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 类型系统速查卡
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +108,8 @@
 ---
 
 ### 2. 所有权系统速查卡
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +128,8 @@
 ---
 
 ### 3. 异步编程速查卡
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -140,6 +148,8 @@
 ---
 
 ### 4. 泛型编程速查卡
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +167,8 @@
 ---
 
 ### 5. 错误处理速查卡
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +186,8 @@
 ---
 
 ### 6. 线程与并发速查卡
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +205,8 @@
 ---
 
 ### 7. 宏系统速查卡
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -112,11 +112,15 @@ mindmap
 
 ### Level 1: 基础层
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - 所有权 (Ownership)
 - 借用 (Borrowing)
 - 生命周期 (Lifetime)
 
 ### Level 2: 机制层
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - 移动语义 (Move)
 - Copy/Clone
@@ -124,11 +128,15 @@ mindmap
 
 ### Level 3: 抽象层
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - 智能指针 (Box, Rc, Arc)
 - 内部可变性 (Cell, RefCell)
 - 线程安全 (Send, Sync)
 
 ### Level 4: 高级层
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - Pin/Unpin
 - 自引用结构

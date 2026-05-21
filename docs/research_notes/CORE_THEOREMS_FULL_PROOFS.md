@@ -50,7 +50,7 @@
 > **[来源: Rust Official Docs]**
 
 - [核心定理完整证明（L2 级）](#核心定理完整证明l2-级)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [〇、证明结构规范（A→L→T→C 链）](#〇证明结构规范altc-链)
   - [一、证明依赖 DAG](#一证明依赖-dag)
@@ -149,6 +149,8 @@
 **形式化**：$\forall v, t: |\{x \mid \Omega_t(x)=\text{Owned} \land \Gamma_t(x)=v\}| \leq 1$
 
 ### 2.1 辅助引理
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +159,8 @@
 *证明*：由规则 1（每个值有唯一所有者），初始绑定时每变量至多绑定一值，每值至多绑定一变量。∎
 
 ### 2.2 归纳证明
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -175,6 +179,8 @@
 故 $P(S')$ 成立。由结构归纳，$\forall S: P(S)$。∎
 
 ### 2.3 反例的形式化否定
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

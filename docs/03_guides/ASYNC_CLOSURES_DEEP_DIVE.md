@@ -58,6 +58,8 @@ Rust 1.95.0 稳定了**异步闭包（Async Closures）** 和对应的 `AsyncFn`
 > **[来源: Rust Official Docs]**
 
 ### 1.1 旧时代的困境
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -82,6 +84,8 @@ where
 
 ### 1.2 异步闭包的诞生
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust 1.95 引入了原生异步闭包语法：
 
 ```rust
@@ -100,6 +104,8 @@ let closure = async |x: i32| -> i32 {
 ## 二、AsyncFn Trait 家族
 
 ### 2.1 三层 trait 体系
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | Trait | 调用次数 | 捕获语义 | 对应同步 trait |
 |-------|---------|---------|--------------|
@@ -140,6 +146,8 @@ where
 
 ### 2.2 自动实现规则
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 所有 async fn 自动实现 AsyncFn
 async fn plain_async(x: i32) -> i32 { x + 1 }
@@ -152,6 +160,8 @@ let c3 = async |x: i32| -> String { s }; // impl AsyncFnOnce (消耗 s)
 ```
 
 ### 2.3 关键区别：AsyncFn vs Fn + Future
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // 旧方式: Fn() -> impl Future
@@ -179,6 +189,8 @@ fn new_closure() -> impl AsyncFn(i32) -> i32 {
 ## 三、捕获语义深度解析
 
 ### 3.1 捕获模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 异步闭包的捕获规则与同步闭包一致，但捕获的是**生成 Future 所需的状态**，而非 Future 本身：
 

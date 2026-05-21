@@ -35,13 +35,14 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 目录 {#-目录}
 >
 > **[来源: Rust Official Docs]**
 
 - [Send/Sync 形式化](#sendsync-形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -64,6 +65,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -74,6 +76,8 @@
 对 Rust 的 **Send** 与 **Sync** 做独立形式化：给出概念定义、属性关系、解释论证与形式证明，并与其他形式化文档（ownership、borrow、async、pin）衔接。
 
 ### 核心问题
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -82,6 +86,8 @@
 3. **与并发原语衔接**：thread::spawn、Future、Arc、通道、Mutex 如何依赖 Send/Sync？
 
 ### 预期成果
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +203,8 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -340,7 +348,6 @@ Def SEND1, SYNC1
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

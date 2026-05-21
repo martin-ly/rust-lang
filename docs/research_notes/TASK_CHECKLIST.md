@@ -177,6 +177,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权模型形式化
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +225,8 @@
 ---
 
 ### 借用检查器证明
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -266,6 +270,8 @@
 
 ### 生命周期形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **文档**: [lifetime_formalization.md](./formal_methods/lifetime_formalization.md)
 **优先级**: 🔴 高
 **预计完成时间**: 2-3 周
@@ -301,6 +307,8 @@
 ---
 
 ### 类型系统基础
+
+> **[来源: Wikipedia - Type System]**
 
 **文档**: [type_system_foundations.md](./type_theory/type_system_foundations.md)
 **优先级**: 🔴 高
@@ -340,6 +348,8 @@
 
 ### 异步状态机形式化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
 **优先级**: 🟡 中
 **预计完成时间**: 3-4 周
@@ -376,6 +386,8 @@
 
 ### Trait 系统形式化
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **文档**: [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
 **优先级**: 🟡 中
 **预计完成时间**: 3-4 周
@@ -411,6 +423,8 @@
 ---
 
 ### 性能基准测试
+
+> **[来源: POPL - Programming Languages Research]**
 
 **文档**: [performance_benchmarks.md](./experiments/performance_benchmarks.md)
 **优先级**: 🟡 中

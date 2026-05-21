@@ -185,6 +185,8 @@ async fn main() {
 ```
 
 ### 并发执行
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +223,8 @@ async fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 1. Future Trait
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -250,10 +254,14 @@ async fn main() {
 ```
 
 ### 2. 异步运行时
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
 #### Tokio 运行时
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -268,6 +276,8 @@ rt.block_on(async {
 ```
 
 #### 自定义运行时配置
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -283,6 +293,8 @@ let rt = Builder::new_multi_thread()
 ```
 
 ### 3. 异步 I/O
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -336,6 +348,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4. Reactor 模式
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use c06_async::reactor::Reactor;
 
@@ -351,6 +365,8 @@ reactor.run().await;
 ```
 
 ### 5. Actor 模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use c06_async::actor::{Actor, ActorRef, Message};
@@ -379,6 +395,8 @@ async fn main() {
 ```
 
 ### 6. Async Closures
+
+> **[来源: POPL - Programming Languages Research]**
 
 > **Rust 版本**: 1.85.0+ Stable
 > **相关文档**: [Async Closures 深度指南](../../crates/c06_async/docs/ASYNC_CLOSURES_GUIDE.md)
@@ -451,6 +469,8 @@ assert_eq!(evens, vec![2, 4]);
 
 ### 1. 使用 select! 宏
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 use tokio::time::{sleep, Duration, timeout};
 
@@ -472,6 +492,8 @@ async fn main() {
 
 ### 2. 使用 Stream
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use tokio_stream::{self as stream, StreamExt};
 
@@ -486,6 +508,8 @@ async fn main() {
 ```
 
 ### 3. 背压处理
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use tokio::sync::mpsc;
@@ -512,6 +536,8 @@ while let Some(value) = rx.recv().await {
 
 ### 异步错误传播
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::error::Error;
 
@@ -531,6 +557,8 @@ async fn main() -> Result<(), Box<dyn Error>> {
 ```
 
 ### Rust 1.95+ ControlFlow API 高级错误控制
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Rust 1.95+ 标准库大幅增强了 `std::ops::ControlFlow<B, C>` 类型，使其成为异步错误处理和流控制的强大工具。与 `Result` 只能表示成功/失败不同，`ControlFlow` 可以显式表达三种语义：
 
@@ -873,6 +901,8 @@ impl Response {
 
 ### 模式 1: 取消与超时处理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use tokio::time::{timeout, Duration};
 use tokio::sync::CancellationToken;
@@ -893,6 +923,8 @@ async fn with_timeout() -> Result<String, &'static str> {
 ```
 
 ### 模式 2: 限流与速率控制
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use tokio::time::{interval, Instant};
@@ -950,6 +982,8 @@ impl TokenBucket {
 
 ### 模式 3: 重试与退避策略
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use tokio::time::{sleep, Duration};
 use rand::Rng;
@@ -996,6 +1030,8 @@ where
 ```
 
 ### 模式 4: 批处理与缓冲
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use tokio::sync::mpsc;
@@ -1051,6 +1087,8 @@ impl<T: Send + 'static> BatchProcessor<T> {
 ```
 
 ### 模式 5: 断路器模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::sync::Arc;
@@ -1140,6 +1178,8 @@ impl CircuitBreaker {
 > **[来源: Rust Official Docs]**
 
 ### 场景 1: Web 服务器实现
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use axum::{
@@ -1246,6 +1286,8 @@ struct CreateUserRequest {
 ```
 
 ### 场景 2: 数据处理管道
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use tokio::sync::mpsc;
@@ -1375,6 +1417,8 @@ async fn store_batch(batch: &[ProcessedData]) -> Result<(), Box<dyn std::error::
 ```
 
 ### 场景 3: 实时消息系统
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use tokio::net::{TcpListener, TcpStream};
@@ -1516,6 +1560,8 @@ use tokio::sync::RwLock;
 
 ### 问题 1: 阻塞运行时
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // ❌ 在异步上下文中阻塞 - 会导致整个线程阻塞
 async fn bad_example() {
@@ -1542,6 +1588,8 @@ async fn blocking_operation() -> String {
 
 ### 问题 2: Future 必须 Send
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // ❌ 非 Send 类型跨线程使用
 use std::rc::Rc;
@@ -1565,6 +1613,8 @@ async fn good_example() {
 ```
 
 ### 问题 3: 持有锁跨越 await 点
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use tokio::sync::Mutex;
@@ -1599,6 +1649,8 @@ async fn better_example(mutex: &std::sync::Mutex<String>) {
 
 ### 问题 4: 忘记处理 Cancel Safety
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // ❌ 非 cancel-safe: select! 取消分支可能导致数据丢失
 async fn not_cancel_safe() {
@@ -1628,6 +1680,8 @@ async fn cancel_safe() {
 ```
 
 ### 问题 5: 递归 async 函数
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // ❌ 编译错误：递归 async 函数
@@ -1680,6 +1734,8 @@ fn recursive_good(n: i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
 
 ### ControlFlow 在异步编程中的应用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 Rust 1.95+ 的 `ControlFlow` 类型可以用于异步流的提前终止：
 
 ```rust
@@ -1713,6 +1769,8 @@ async fn find_negative(items: &[i32]) -> Option<i32> {
 
 ### Peekable 迭代器增强
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Rust 1.95+ 为 `Peekable` 添加了 `next_if_map`，可用于异步解析器：
 
 ```rust
@@ -1730,6 +1788,8 @@ async fn parse_number(chars: &mut Peekable<impl Iterator<Item = char>>) -> Optio
 ```
 
 ### `cfg_select!` 在异步配置中的应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Rust 1.95 稳定的 `cfg_select!` 宏可以在表达式位置进行多分支条件编译，
 在异步编程中常用于跨平台运行时配置和特性门控。

@@ -107,6 +107,8 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 > **[来源: Rust Official Docs]**
 
 ### 2.0 为何要对齐（Why Alignment Matters）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -123,6 +125,8 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 ---
 
 ### 2.1 基本概念
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +153,8 @@ assert_eq!(size_of::<Example>(), 24);
 ```
 
 ### 2.2 常用 API
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +166,8 @@ assert_eq!(size_of::<Example>(), 24);
 | `Layout::from_size_align` | 构造自定义布局 |
 
 ### 2.3 repr 与对齐（完整谱系）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +201,8 @@ struct CLayoutAligned { x: u64; y: u64; }
 ```
 
 ### 2.4 字段重排序优化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

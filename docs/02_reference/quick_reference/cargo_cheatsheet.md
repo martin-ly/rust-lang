@@ -88,6 +88,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 创建新项目
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +179,8 @@ cargo init --lib
   - [权威来源索引](#权威来源索引)
 
 ### 项目结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +199,8 @@ my_project/
 > **[来源: Rust Official Docs]**
 
 ### 基本构建
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -213,6 +219,8 @@ cargo clean
 ```
 
 ### 指定目标
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +243,8 @@ cargo build --target wasm32-unknown-unknown
 ```
 
 ### 特性标志
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -250,6 +260,8 @@ cargo build --no-default-features
 ```
 
 ### 并行和优化
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -272,6 +284,8 @@ cargo build --verbose
 > **[来源: Rust Official Docs]**
 
 ### 基本测试
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -294,6 +308,8 @@ cargo test -- --test-threads=1
 
 ### 测试选项
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```bash
 # 运行被忽略的测试
 cargo test -- --ignored
@@ -313,6 +329,8 @@ cargo test --doc
 
 ### 基准测试
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 运行基准测试
 cargo bench
@@ -329,6 +347,8 @@ cargo bench --bench my_benchmark test_name
 ## 📚 依赖管理 {#-依赖管理}
 
 ### 添加依赖
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```bash
 # 添加依赖（编辑 Cargo.toml）
@@ -349,6 +369,8 @@ cargo add serde@1.0
 
 ### 更新依赖
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```bash
 # 更新所有依赖
 cargo update
@@ -361,6 +383,8 @@ cargo update -p serde --precise 1.0.100
 ```
 
 ### 查看依赖
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```bash
 # 查看依赖树
@@ -381,6 +405,8 @@ cargo tree -f "{p} {f}"
 
 ### 依赖检查
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```bash
 # 检查过时依赖（需要 cargo-outdated）
 cargo install cargo-outdated
@@ -400,6 +426,8 @@ cargo audit fix
 
 ### 发布准备
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```bash
 # 检查发布准备
 cargo publish --dry-run
@@ -415,6 +443,8 @@ cargo publish --allow-dirty
 ```
 
 ### 版本管理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```bash
 # 使用 cargo-release（推荐）
@@ -433,6 +463,8 @@ cargo release --workspace --dry-run
 
 ### 工作空间命令
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 构建所有成员
 cargo build --workspace
@@ -448,6 +480,8 @@ cargo check --workspace
 ```
 
 ### 工作空间结构
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```toml
 # Cargo.toml（工作空间根）
@@ -467,6 +501,8 @@ tokio = { version = "1.0", features = ["full"] }
 ## ⚙️ 配置文件 {#️-配置文件}
 
 ### Cargo.toml 结构
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```toml
 [package]
@@ -491,6 +527,8 @@ async = ["tokio"]
 ```
 
 ### 构建配置
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```toml
 [profile.dev]

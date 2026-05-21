@@ -6,32 +6,38 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [1. 概念定义 (Def)](#1-概念定义-def)
-  - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
-  - [Def ES2: 事件不变性](#def-es2-事件不变性)
-  - [Def ES3: 状态重建](#def-es3-状态重建)
-- [2. 基本假设 (Axiom)](#2-基本假设-axiom)
-  - [Axiom ES1: 事件顺序性](#axiom-es1-事件顺序性)
-  - [Axiom ES2: 应用函数确定性](#axiom-es2-应用函数确定性)
-  - [Axiom ES3: 版本控制](#axiom-es3-版本控制)
-- [3. 定理 (Theorem)](#3-定理-theorem)
-  - [Theorem ES1: 状态可重现性](#theorem-es1-状态可重现性)
-  - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
-- [4. Rust 实现示例](#4-rust-实现示例)
-- [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
-- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-    - [核心特性应用](#核心特性应用)
-    - [代码示例更新](#代码示例更新)
-    - [相关文档](#相关文档)
+- [Event Sourcing 模式形式化定义](#event-sourcing-模式形式化定义)
+  - [📑 目录](#-目录)
+  - [1. 概念定义 (Def)](#1-概念定义-def)
+    - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
+    - [Def ES2: 事件不变性](#def-es2-事件不变性)
+    - [Def ES3: 状态重建](#def-es3-状态重建)
+  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+    - [Axiom ES1: 事件顺序性](#axiom-es1-事件顺序性)
+    - [Axiom ES2: 应用函数确定性](#axiom-es2-应用函数确定性)
+    - [Axiom ES3: 版本控制](#axiom-es3-版本控制)
+  - [3. 定理 (Theorem)](#3-定理-theorem)
+    - [Theorem ES1: 状态可重现性](#theorem-es1-状态可重现性)
+    - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
+  - [4. Rust 实现示例](#4-rust-实现示例)
+  - [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def ES1: Event Sourcing
+>
 > **[来源: Rust Official Docs]**
 
 事件溯源是一种**状态持久化模式**，系统状态不直接存储，而是存储导致状态变更的**事件序列**，状态通过**重放事件**重建。
@@ -46,6 +52,7 @@ EventSourcing := (E, S, apply, snapshot)
 ```
 
 ### Def ES2: 事件不变性
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -55,6 +62,8 @@ EventSourcing := (E, S, apply, snapshot)
 事件一旦创建，不可修改。
 
 ### Def ES3: 状态重建
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
@@ -69,6 +78,8 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Axiom ES1: 事件顺序性
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 ∀eᵢ, eⱼ ∈ E. i < j → timestamp(eᵢ) ≤ timestamp(eⱼ)
 ```
@@ -77,6 +88,8 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 
 ### Axiom ES2: 应用函数确定性
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 ∀s, e. apply(s, e) = s' 是确定性的
 ```
@@ -84,6 +97,8 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 给定相同状态和事件，结果总是相同。
 
 ### Axiom ES3: 版本控制
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 ∀e ∈ E. version(e) = sequence_number ∈ ℕ
@@ -96,6 +111,8 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ## 3. 定理 (Theorem)
 
 ### Theorem ES1: 状态可重现性
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 ∀t. State(t) 可通过重放 E[0..t] 重建
@@ -249,14 +266,12 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

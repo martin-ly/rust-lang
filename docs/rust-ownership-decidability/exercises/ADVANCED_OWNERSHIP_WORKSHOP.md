@@ -46,6 +46,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 练习 1: 自引用结构体实现 (60分钟)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -178,6 +180,8 @@ impl Document {
 
 ### 练习 2: 自定义智能指针 (90分钟)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **目标**: 实现一个引用计数智能指针 `MyRc<T>`，支持弱引用。
 
 ```rust
@@ -307,6 +311,8 @@ mod tests {
 
 ### 练习 3: 类型状态模式 (45分钟)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **目标**: 使用类型状态模式实现一个 TCP 连接状态机。
 
 ```rust
@@ -395,6 +401,8 @@ mod tests {
 ---
 
 ### 练习 4: 生命周期高级技巧 (60分钟)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **目标**: 实现一个可以迭代并修改的容器。
 
@@ -493,6 +501,8 @@ mod tests {
 
 ### 练习 5: 复杂生命周期场景 (90分钟)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **目标**: 实现一个带有回调的解析器，处理复杂生命周期。
 
 ```rust
@@ -582,6 +592,8 @@ mod tests {
 
 ### 挑战 1: 实现 Send 和 Sync (60分钟)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 为练习 2 中的 `MyRc<T>` 正确实现 `Send` 和 `Sync` trait。
 
 ```rust
@@ -594,6 +606,8 @@ unsafe impl<T: Send + Sync> Sync for MyRc<T> {}
 ```
 
 ### 挑战 2: 无锁数据结构 (120分钟)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 实现一个简单的无锁栈 `LockFreeStack<T>`。
 

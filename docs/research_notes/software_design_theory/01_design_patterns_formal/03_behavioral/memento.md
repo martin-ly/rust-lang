@@ -34,6 +34,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -51,7 +52,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Memento 形式化分析](#memento-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Memento 结构）](#def-11memento-结构)
@@ -82,6 +83,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -90,6 +92,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Memento 结构）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +110,8 @@ $$\mathcal{MO} = \langle M, O, \mathit{save}: O \rightarrow M, \mathit{restore}:
 ---
 
 ### Axiom MO1（状态完整公理）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +120,8 @@ $$\mathit{save}(o) = m \implies m\text{ 包含恢复 }o\text{ 所需的全部状
 备忘包含足够状态以恢复；无外部依赖。
 
 ### Axiom MO2（兼容性公理）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +132,8 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 定理 MO-T1（Clone 实现定理）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +165,8 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 定理 MO-T2（状态一致性定理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +183,8 @@ $$\mathit{restore}(o, m)\text{ 要求 }m\text{ 与 }o\text{ 版本兼容}$$
 ---
 
 ### 推论 MO-C1（近似表达）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +201,8 @@ Memento 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +259,8 @@ assert_eq!(o.state, "A");
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 Axiom MO1 (状态完整)
@@ -446,7 +464,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

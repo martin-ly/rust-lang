@@ -284,6 +284,8 @@
 
 ### 相关思维表征
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 类型 | 位置 |
 | :--- | :--- |
 | 多维矩阵 | [UNIFIED_SYSTEMATIC_FRAMEWORK](./UNIFIED_SYSTEMATIC_FRAMEWORK.md) 概念-公理-定理-证明方法-反例矩阵；[formal_methods/README §六篇并表](formal_methods/README.md#formal_methods-六篇并表) |
@@ -317,9 +319,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: IEEE - Programming Language Standards]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -330,6 +336,8 @@
 
 #### 代码示例更新
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -337,6 +345,8 @@
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)

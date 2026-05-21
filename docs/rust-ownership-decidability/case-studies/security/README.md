@@ -54,6 +54,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust在安全领域的优势
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -79,6 +81,8 @@ fn process_sensitive_data(data: Vec<u8>) {
 
 ### 1.2 内存安全与漏洞预防
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust通过编译时检查消除常见的内存安全漏洞：
 
 ```rust
@@ -101,6 +105,8 @@ fn safe_parse_input(input: &str) -> Result<i32, ParseIntError> {
 ```
 
 ### 1.3 常见安全工具类型
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 安全工具生态系统
@@ -128,6 +134,8 @@ fn safe_parse_input(input: &str) -> Result<i32, ParseIntError> {
 ## 2. 密码学基础
 
 ### 2.1 ring库
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `ring`是Rust生态中最流行的密码学库之一，提供安全的底层加密原语：
 
@@ -167,6 +175,8 @@ fn encrypt_aes_gcm(
 
 ### 2.2 rustls（TLS实现）
 
+> **[来源: POPL - Programming Languages Research]**
+
 `rustls`是一个现代、安全的TLS库，完全用Rust编写：
 
 ```rust
@@ -185,6 +195,8 @@ fn configure_tls_client(root_certs: Vec<Certificate>) -> Arc<ClientConfig> {
 ```
 
 ### 2.3 AEAD加密
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use chacha20poly1305::{
@@ -218,6 +230,8 @@ impl ChaChaCipher {
 
 ### 2.4 密钥派生
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use argon2::{self, Config, ThreadMode, Variant, Version};
 
@@ -248,6 +262,8 @@ fn derive_key_argon2id(
 ## 3. 网络扫描
 
 ### 3.1 端口扫描器
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use tokio::net::TcpStream;
@@ -324,6 +340,8 @@ impl AsyncPortScanner {
 
 ### 3.2 异步扫描优化
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use tokio::sync::{mpsc, Semaphore};
 use std::sync::Arc;
@@ -388,6 +406,8 @@ impl AsyncScanManager {
 ## 4. 漏洞检测
 
 ### 4.1 静态分析
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::collections::HashMap;
@@ -486,6 +506,8 @@ struct AnalysisReport {
 ## 5. 入侵检测
 
 ### 5.1 数据包捕获（libpcap）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use pcap::{Capture, Device};

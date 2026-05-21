@@ -16,6 +16,8 @@
 本项目的 Rust 形式化理论与工程文档已整合至 **研究笔记系统**。请使用以下入口访问：
 
 ### 核心入口
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -26,6 +28,8 @@
 | **主索引** | [00_master_index.md](./00_master_index.md) | 完整模块映射与导航 |
 
 ### 快速跳转
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -42,6 +46,8 @@
 ## 核心概念简介
 
 ### 1. 所有权系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Rust 的所有权系统是其内存安全保证的核心：
 

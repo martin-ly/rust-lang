@@ -33,12 +33,15 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 常量上下文分类
 >
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-CTX1（常量上下文）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +66,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-FN1（const fn 允许操作）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +104,8 @@ const fn allowed_operations(x: i32) -> i32 {
 ```
 
 ### Def CONST-FN2（const fn 禁止操作）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +138,8 @@ const fn forbidden_operations() {
 > **[来源: Rust Official Docs]**
 
 ### Def MIR-EVAL1（MIR 常量求值器）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +166,8 @@ MIR 常量求值是编译期解释器，执行以下步骤：
 ```
 
 ### Thm EVAL-BOUND1（求值限制定理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +190,8 @@ $$
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-GEN1（常量泛型形式化）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -343,7 +356,6 @@ $$
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

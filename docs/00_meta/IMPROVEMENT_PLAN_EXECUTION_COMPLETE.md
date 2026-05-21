@@ -59,6 +59,8 @@
 > **[来源: Rust Official Docs]**
 
 ### ✅ E1: 修复c02_type_system测试缺失
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +87,8 @@
 
 ### ✅ E2: 扩充docs/03_practice/实践内容
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **问题**: docs/03_practice/ 仅 **2 个文件**（理论:实践 = 154:1）
 
 **解决方案**:
@@ -107,6 +111,8 @@
 
 ### ✅ E3: 解决目录重复问题
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **问题**: 两个所有权目录并存
 
 ```
@@ -128,6 +134,8 @@ docs/Rust所有权与可判定性/            (82 files)
 ---
 
 ### ✅ S1: 归档根目录冗余报告
+
+> **[来源: POPL - Programming Languages Research]**
 
 **状态**: 根目录已清理
 

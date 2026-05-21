@@ -43,6 +43,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust 在数据工程中的优势
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -55,6 +57,8 @@
 | 零拷贝 | 天然支持 | 不支持 | 部分支持 |
 
 ### 生态概览
+
+> **[来源: Wikipedia - Type System]**
 
 | 类别 | 主要 Crate | 用途 |
 |------|-----------|------|
@@ -69,6 +73,8 @@
 ## 数据处理框架
 
 ### Polars 高性能 DataFrame
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 //! Polars 数据处理完整示例
@@ -315,6 +321,8 @@ pub fn benchmark() {
 
 ### DataFusion 查询引擎
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 //! DataFusion 分布式查询引擎
 
@@ -429,6 +437,8 @@ async fn main() -> Result<(), DataFusionError> {
 ## 流处理
 
 ### Tokio 流处理管道
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 //! 实时流处理管道
@@ -621,6 +631,8 @@ impl<T: Send + 'static> BackpressureProcessor<T> {
 ```
 
 ### Fluvio/Kafka 集成
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 //! Kafka 流处理集成

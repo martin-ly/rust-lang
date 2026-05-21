@@ -137,6 +137,8 @@ Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked 
 它已经在 Miri 中可用，并将在未来成为默认模型。
 
 ### 关键改进
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +151,8 @@ Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked 
 | **形式化** | Coq 验证 | Rocq 验证 | 同等严格的数学保证 |
 
 ### 立即可用的收益
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +167,8 @@ Tree Borrows 是 Rust 的**下一代内存别名模型**，旨在替代 Stacked 
 > **[来源: Rust Official Docs]**
 
 ### 核心差异概览
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +203,8 @@ Tree Borrows 模型:
 ```
 
 ### 详细行为对比表
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +228,8 @@ Tree Borrows 模型:
 > **[来源: Rust Official Docs]**
 
 ### 树结构 vs 栈结构
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

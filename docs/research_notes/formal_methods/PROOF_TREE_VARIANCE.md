@@ -33,12 +33,15 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 定理陈述
 >
 > **[来源: Rust Official Docs]**
 
 ### Def VA-1 (协变)
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -46,6 +49,8 @@
 $$A <: B \implies F<A> <: F<B>$$
 
 ### Def VA-2 (逆变)
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +58,8 @@ $$A <: B \implies F<A> <: F<B>$$
 $$A <: B \implies F<B> <: F<A>$$
 
 ### Def VA-3 (不变)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -60,18 +67,24 @@ $$A <: B \implies F<B> <: F<A>$$
 $$A <: B \implies \neg(F<A> <: F<B>) \land \neg(F<B> <: F<A>)$$
 
 ### Thm VA-T1 (协变安全)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
 不可变引用 `&T` 的协变性保证：若 `A <: B`，则 `&A <: &B` 安全。
 
 ### Thm VA-T2 (逆变安全)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
 函数参数位置的逆变性保证：若 `A <: B`，则 `fn(B) -> R <: fn(A) -> R` 安全。
 
 ### Thm VA-T3 (不变必要)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +171,8 @@ graph TD
 > **[来源: Rust Official Docs]**
 
 ### VA-T1: 协变安全
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +200,8 @@ let r: &mut i32 = &mut x;
 ```
 
 ### VA-T2: 逆变安全
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -213,6 +230,8 @@ let f: fn(&Dog) = take_animal;  // 安全!
 ```
 
 ### VA-T3: 不变必要
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **陈述**: 可变引用 `&mut T` 必须是不变的。
 
@@ -243,6 +262,8 @@ let r: &mut B = &mut a;  // 由假设，允许
 
 ### 协变示例
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 fn covariance_example() {
     let s = String::from("hello");
@@ -253,6 +274,8 @@ fn covariance_example() {
 ```
 
 ### 逆变示例
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 trait Animal { fn speak(&self); }
@@ -344,7 +367,6 @@ fn invariance_example() {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

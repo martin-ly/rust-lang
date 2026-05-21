@@ -69,6 +69,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权规则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +89,8 @@ let len = calculate_length(&s1);  // 借用s1
 ```
 
 ### 借用规则
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -103,6 +107,8 @@ let len = calculate_length(&s1);  // 借用s1
 > **[来源: Rust Official Docs]**
 
 ### 语法
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +125,8 @@ struct Parser<'a> { input: &'a str }
 ```
 
 ### 省略规则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +200,8 @@ struct Parser<'a> { input: &'a str }
 > **[来源: Rust Official Docs]**
 
 ### 创建型
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 模式 | 用途 | Rust特色 |
 | :--- | :--- | :--- |

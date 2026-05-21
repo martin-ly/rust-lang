@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Stacked Borrows vs Tree Borrows
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -73,6 +75,8 @@ Tree Borrows (2023):
 
 ### 1.2 学术论文推荐
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 论文 | 作者 | 会议 | 重要性 |
 |------|------|------|--------|
 | **Tree Borrows** | Villani | PLDI 2025 | ⭐⭐⭐⭐⭐ |
@@ -85,6 +89,8 @@ Tree Borrows (2023):
 ## 2. 形式化验证
 
 ### 2.1 Rust验证工具研究
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 Prusti (ETH Zurich):
@@ -125,6 +131,8 @@ Aeneas (Inria):
 
 ### 2.2 关键研究成果
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// RustBelt: 验证Rust标准库
 ///
@@ -156,6 +164,8 @@ Aeneas (Inria):
 ## 3. 类型系统研究
 
 ### 3.1 高级类型特性
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 研究主题:

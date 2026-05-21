@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 内存安全
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -66,6 +68,8 @@
 
 ### 1.2 类型安全
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 类型系统强度排名 (1-10):
 
@@ -84,6 +88,8 @@
 ## 2. 性能对比矩阵
 
 ### 2.1 运行时性能
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 指标 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|

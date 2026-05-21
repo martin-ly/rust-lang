@@ -111,6 +111,8 @@
 
 ### 2.1 已有组合法则（形式化程度）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 | 法则 | 形式化程度 | 文档 |
 | :--- | :--- | :--- |
 | 型变传递 | ✅ 有 Def、Theorem | variance_theory T1–T4 |
@@ -119,6 +121,8 @@
 | Trait 约束传播 | ⚠️ 有描述 | trait_system_formalization |
 
 ### 2.2 组合法则缺口
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 | 组合法则 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
@@ -244,6 +248,8 @@
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

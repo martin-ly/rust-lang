@@ -56,6 +56,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 工具对比矩阵
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +72,8 @@
 *注：证明一旦完成，运行时无开销
 
 ### 工具选择决策树
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -102,6 +106,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基础用法
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +126,8 @@ cargo miri run
 ```
 
 ### 环境变量配置
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +143,8 @@ export MIRIFLAGS="-Zmiri-data-race-detector"
 ```
 
 ### 实际示例
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +182,8 @@ fn use_after_free() {
 ```
 
 ### 在CI中集成Miri
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,12 +217,16 @@ jobs:
 > **[来源: Rust Official Docs]**
 
 ### 基础概念
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
 Kani使用有界模型检查(BMC)验证Rust代码属性。它将代码转换为逻辑公式，使用SAT/SMT求解器验证。
 
 ### 安装与配置
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```bash
 # 安装
@@ -222,6 +238,8 @@ kani --version
 ```
 
 ### 基本证明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 简单函数验证
@@ -248,6 +266,8 @@ fn verify_add() {
 ```
 
 ### 复杂验证示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// 二分查找验证

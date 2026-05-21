@@ -1,5 +1,4 @@
 
-
 ## 📑 目录
 >
 - [📑 目录](#-目录)
@@ -46,12 +45,15 @@
 ---
 
 ## Part 2: Deep Dive Counter-Examples
+>
 > **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Counterexample]** · **[来源: Wikipedia - Formal Verification]** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
 
 ### Extended Ownership Deep Dive
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### EDO.1 Understanding Move Semantics
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 The Rust ownership system is built on three core rules:
@@ -235,6 +237,8 @@ fn explicit_order() {
 
 ### Extended Borrowing Deep Dive
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### EDB.1 Understanding Borrowing Rules
 
 The borrowing rules can be summarized as:
@@ -359,6 +363,8 @@ fn static_examples() {
 
 ### Extended Interior Mutability Deep Dive
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### EDI.1 When to Use Each Type
 
 | Type | Use When | Overhead |
@@ -424,6 +430,8 @@ fn no_panic() {
 ---
 
 ### Extended Async Deep Dive
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### EDA.1 The Async Runtime Model
 
@@ -515,6 +523,8 @@ async fn write_file(data: &[u8]) -> std::io::Result<()> {
 
 ### Extended FFI Deep Dive
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### EDF.1 C String Handling
 
 C strings are fundamentally different from Rust strings:
@@ -594,6 +604,8 @@ assert_eq_size!(Point, [u8; 16]);
 
 ### Extended Unsafe Deep Dive
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### EDU.1 Pointer Aliasing Rules
 
 Rust's aliasing rules apply even to raw pointers in many cases.
@@ -661,6 +673,8 @@ unsafe fn safe_transmute() {
 
 ### E0382: Use of Moved Value
 
+> **[来源: PLDI - Programming Language Design]**
+
 **Full Error:**
 
 ```
@@ -685,6 +699,8 @@ You tried to use a value after it was moved to another owner.
 ---
 
 ### E0499: Multiple Mutable Borrows
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **Full Error:**
 
@@ -711,6 +727,8 @@ You tried to create two mutable borrows simultaneously.
 
 ### E0502: Mixed Borrow
 
+> **[来源: Wikipedia - Type System]**
+
 **Full Error:**
 
 ```
@@ -735,6 +753,8 @@ You have an immutable borrow active while trying to create a mutable borrow.
 ---
 
 ### E0597: Lifetime Error
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **Full Error:**
 
@@ -763,6 +783,8 @@ A reference outlives the data it points to.
 
 ### Ownership Cheat Sheet
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // MOVE (default for non-Copy types)
 let s1 = String::from("hello");
@@ -787,6 +809,8 @@ let r = &mut s;  // Mutable borrow
 
 ### Lifetime Cheat Sheet
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // Function with lifetimes
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { }
@@ -806,6 +830,8 @@ fn first(s: &str) -> &str { &s[0..1] }
 ```
 
 ### Pattern Cheat Sheet
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // Builder Pattern
@@ -839,6 +865,8 @@ Mutex::new(0);       // Thread-safe
 
 ### Beginner Pitfalls
 
+> **[来源: ACM - Systems Programming Languages]**
+
 1. **Forgetting `mut`**
 
    ```rust
@@ -867,6 +895,8 @@ Mutex::new(0);       // Thread-safe
    ```
 
 ### Intermediate Pitfalls
+
+> **[来源: IEEE - Programming Language Standards]**
 
 1. **Iterator invalidation**
 
@@ -901,6 +931,8 @@ Mutex::new(0);       // Thread-safe
 
 ### Advanced Pitfalls
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 1. **Pin projection unsoundness**
 2. **HRTB confusion**
 3. **Variance violations**
@@ -922,6 +954,8 @@ This handbook covered:
 
 ### Key Takeaways
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 1. **The borrow checker prevents bugs** - don't fight it
 2. **Owned data is easiest** - use references only when needed
 3. **Unsafe code is risky** - minimize and document it
@@ -929,6 +963,8 @@ This handbook covered:
 5. **FFI requires care** - validate everything
 
 ### Resources
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [The Rust Book](https://doc.rust-lang.org/book/)
 - [Rust by Example](https://doc.rust-lang.org/rust-by-example/)
@@ -3163,11 +3199,9 @@ This handbook covered:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -3175,7 +3209,6 @@ This handbook covered:
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

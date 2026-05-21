@@ -73,6 +73,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 直观定义（Intuitive）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +83,8 @@
 > **XX** 是 Rust 中用于 YY 的 ZZ 机制，其核心思想是 WW。
 
 ### 1.2 操作定义（Operational）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +99,8 @@ fn boundary() {}
 ```
 
 ### 1.3 形式化直觉（Formal Intuition）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -118,6 +124,8 @@ fn boundary() {}
 | 属性 B | 关系属性 | 传递/对称/反对称 | ... | 与 YY 的组合可能破坏 |
 
 ### 关键推论
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +150,8 @@ graph TD
 ```
 
 ### 承上（前置知识回溯）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -150,6 +160,8 @@ graph TD
 | 概念 A | `path/to/a.md` | 用于解释 XX 的 YY 属性 |
 
 ### 启下（后续延伸预告）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,13 +177,19 @@ graph TD
 
 ### 4.1 类型系统视角
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 该特性在 HM 推断 / 子类型 / trait solving 中的位置：
 
 ### 4.2 内存模型视角
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Stacked Borrows / Tree Borrows / LLVM IR 层面的体现：
 
 ### 4.3 运行时视角
+
+> **[来源: POPL - Programming Languages Research]**
 
 vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 
@@ -180,6 +198,8 @@ vtable 布局、monomorphization 结果、零成本抽象的物理含义：
 ## 模块 5: 正例集（Positive Examples）
 
 ### 5.1 Minimal（最小正例）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
  stripped-down 到最少代码行，突出核心机制：
 

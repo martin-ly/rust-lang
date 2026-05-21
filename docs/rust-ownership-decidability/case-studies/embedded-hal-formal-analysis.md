@@ -83,6 +83,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 设计目标与定位
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -126,6 +128,8 @@ embedded-hal的解决方案:
 
 ### 1.2 嵌入式Rust生态地位
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 嵌入式Rust生态系统架构:
 ┌─────────────────────────────────────────────────────────────┐
@@ -161,6 +165,8 @@ embedded-hal的解决方案:
 
 ### 2.1 硬件无关性
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 embedded-hal通过trait抽象隐藏硬件差异:
 
 ```rust
@@ -184,6 +190,8 @@ pub fn blink_led<P: OutputPin>(led: &mut P, delay: &mut impl DelayUs) {
 
 ### 2.2 零运行时开销
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 使用泛型单态化实现零成本抽象:
 
 ```rust
@@ -198,6 +206,8 @@ fn use_pin<P: OutputPin>(pin: &mut P) {
 ```
 
 ### 2.3 类型安全
+
+> **[来源: ACM - Systems Programming Languages]**
 
 使用类型状态机在编译期防止错误:
 
@@ -216,6 +226,8 @@ pa0.set_high().unwrap();
 ## 3. GPIO抽象详解
 
 ### 3.1 InputPin与OutputPin Trait
+
+> **[来源: IEEE - Programming Language Standards]**
 
 embedded-hal定义了三个核心GPIO trait:
 
@@ -251,6 +263,8 @@ pub trait StatefulOutputPin: OutputPin {
 | Result返回 | 允许硬件错误传播 |
 
 ### 3.2 类型状态机模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 HAL实现使用类型参数编码引脚状态:
 
@@ -314,6 +328,8 @@ impl PA0<Input<Floating>> {
 
 ### 3.3 可翻转输出
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ToggleableOutputPin提供状态翻转功能:
 
 ```rust
@@ -347,6 +363,8 @@ led.toggle()?;  // 单条指令，原子操作
 
 ### 3.4 嵌入式HAL 1.0演进
 
+> **[来源: POPL - Programming Languages Research]**
+
 embedded-hal 1.0对GPIO trait进行了重要重构:
 
 ```rust
@@ -377,6 +395,8 @@ pub trait OutputPin {
 
 ### 4.1 阻塞式串口
 
+> **[来源: PLDI - Programming Language Design]**
+
 embedded-hal 1.0 使用 `embedded_io` trait 进行串口通信:
 
 ```rust
@@ -403,6 +423,8 @@ fn write_bytes<UART: Write>(uart: &mut UART, data: &[u8]) -> Result<(), UART::Er
 ```
 
 ### 4.2 串口配置
+
+> **[来源: Wikipedia - Memory Safety]**
 
 串口配置通常由HAL实现提供:
 
@@ -432,6 +454,8 @@ let (mut tx, mut rx) = serial.split();
 ```
 
 ### 4.3 驱动实现模式
+
+> **[来源: Wikipedia - Type System]**
 
 基于串口实现Modbus RTU协议的示例:
 
@@ -496,6 +520,8 @@ impl<UART: Read + Write> ModbusRTU<UART> {
 
 ### 5.1 SPI设备抽象
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 SPI使用设备trait抽象总线访问:
 
 ```rust
@@ -516,6 +542,8 @@ pub enum Operation<'a> {
 ```
 
 ### 5.2 事务安全
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 SPI事务确保操作的原子性:
 

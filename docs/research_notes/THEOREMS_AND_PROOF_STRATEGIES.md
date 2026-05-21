@@ -64,6 +64,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 定理陈述
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -45,6 +45,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 能力模型
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -81,6 +83,8 @@ Rust语言 (权重30%)
 ```
 
 ### 1.2 等级定义
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +103,8 @@ Rust语言 (权重30%)
 > **[来源: Rust Official Docs]**
 
 ### 2.1 个人认证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +141,8 @@ Level 4: Expert
 ```
 
 ### 2.2 企业认证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +180,8 @@ Level 3: Center of Excellence
 > **[来源: Rust Official Docs]**
 
 ### 3.1 L1: Foundation 考试
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +214,8 @@ Level 3: Center of Excellence
 ```
 
 ### 3.2 L2: Practitioner 考试
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -234,6 +246,8 @@ Level 3: Center of Excellence
 ```
 
 ### 3.3 L3: Professional 考试
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -270,6 +284,8 @@ Level 3: Center of Excellence
 
 ### 4.1 L1样题
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 问题1: 修复编译错误
 fn main() {
@@ -300,6 +316,8 @@ fn process(data: &[u8]) -> Vec<u8> {
 ```
 
 ### 4.2 L2样题
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 问题1: 实现线程安全计数器
@@ -359,6 +377,8 @@ impl StateMachine<Running> {
 
 ### 4.3 L3样题
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```
 架构设计题:
 
@@ -389,6 +409,8 @@ impl StateMachine<Running> {
 ## 5. 学习路径
 
 ### 5.1 自学路径
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 0-6个月 (L1准备):

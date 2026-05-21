@@ -11,6 +11,7 @@
 ---
 
 ## Actor 模型核心概念
+>
 > **[来源: Rust Official Docs]**
 
 Actor 模型是一种并发计算模型，其中：
@@ -20,6 +21,7 @@ Actor 模型是一种并发计算模型，其中：
 - 每个 Actor 有自己的状态，不共享内存
 
 ### 基本 Actor 实现
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -91,6 +93,7 @@ fn demo() {
 ```
 
 ### 异步 Actor
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -156,6 +159,7 @@ impl AsyncProcessor {
 ```
 
 ### Actor 监督与容错
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -238,6 +242,7 @@ impl Supervisor {
 ```
 
 ### 路由与负载均衡
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -306,6 +311,7 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
 ```
 
 ### 请求-响应模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -392,6 +398,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | Actor 模式 | 优势 |
@@ -408,9 +415,11 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -419,6 +428,7 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 | 组合工程 | 组件组合理论 | [../../../research_notes/software_design_theory/04_compositional_engineering/README.md](../../../research_notes/software_design_theory/04_compositional_engineering/README.md) |
 
 ### 形式化方法
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -429,12 +439,14 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 ---
 
 ## 相关 crates
+>
 > **[来源: Rust Official Docs]**
 
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
 | c05_threads | 线程并发实现 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
 | c06_async | 异步并发实现 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -445,7 +457,6 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 
@@ -466,3 +477,5 @@ impl<M: Send + 'static, R: Send + 'static> ActorClient<M, R> {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

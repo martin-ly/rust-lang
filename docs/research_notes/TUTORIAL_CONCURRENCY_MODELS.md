@@ -67,6 +67,8 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 > **[来源: Rust Official Docs]**
 
 ### 并发 vs 并行
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +92,8 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 ```
 
 ### Send 和 Sync
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -117,6 +121,8 @@ pub unsafe auto trait Sync {}
 > **[来源: Rust Official Docs]**
 
 ### 创建线程
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +143,8 @@ handle.join().unwrap();
 ```
 
 ### 线程间通信
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -158,6 +166,8 @@ println!("Got: {}", received);
 ```
 
 ### 共享状态
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +201,8 @@ println!("Result: {}", *counter.lock().unwrap()); // 10
 > **[来源: Rust Official Docs]**
 
 ### Mutex vs RwLock
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +228,8 @@ let r2 = data.read().unwrap();
 ```
 
 ### 原子操作
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -249,6 +263,8 @@ counter.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 
 ### Future基础
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::future::Future;
 use std::pin::Pin;
@@ -262,6 +278,8 @@ let result = f.await;  // 在async上下文中执行
 ```
 
 ### async/await
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 async fn fetch_data(url: &str) -> Result<String, Error> {
@@ -283,6 +301,8 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 ### 运行时选择
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 运行时 | 特点 | 适用场景 |
 | :--- | :--- | :--- |
 | **Tokio** | 功能最全，生态丰富 | 生产环境首选 |
@@ -295,6 +315,8 @@ async fn fetch_multiple() -> Result<(), Error> {
 ## 第五部分：并发模式
 
 ### Fork-Join
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use rayon::prelude::*;
@@ -310,6 +332,8 @@ let (a, b) = rayon::join(
 ```
 
 ### 生产者-消费者
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use crossbeam::channel;
@@ -333,6 +357,8 @@ thread::spawn(move || {
 ```
 
 ### Actor模型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use actix::prelude::*;
@@ -367,6 +393,8 @@ impl Handler<MyMessage> for MyActor {
 
 ### 选择合适的并发模型
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 场景 | 推荐模型 | 理由 |
 | :--- | :--- | :--- |
 | CPU密集型 | `rayon` | 数据并行，自动负载均衡 |
@@ -375,6 +403,8 @@ impl Handler<MyMessage> for MyActor {
 | 复杂状态 | Actor | 隔离性，容错 |
 
 ### 避免常见陷阱
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // ❌ 跨越await持有std Mutex

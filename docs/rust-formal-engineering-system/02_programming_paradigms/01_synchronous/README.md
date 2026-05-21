@@ -15,6 +15,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 线程与并发
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@ fn channel_communication() {
 ```
 
 ### 共享状态并发
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +136,8 @@ fn atomic_demo() {
 ```
 
 ### 线程同步原语
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

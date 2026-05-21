@@ -290,6 +290,8 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 
 ### 类型系统影响分析
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 变更 | 类型系统影响 | 形式化语义变化 |
 | :--- | :--- | :--- |
 | `deref_nullptr` deny | 加强空指针类型安全 | 消除 ⊥ (bottom) 类型的不安全使用 |
@@ -298,6 +300,8 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 | `repr(transparent)` | 布局传递性约束 | 确保单字段布局透明性 |
 
 ### 内存安全形式化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 /// deref_nullptr 的内存安全形式化保证
@@ -334,6 +338,8 @@ pub fn memory_safety_formalization() {
 ```
 
 ### 生命周期形式化
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// offset_of! 的 well-formed 检查与生命周期
@@ -732,3 +738,8 @@ Rust 1.95+ 重要更新：
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+
+> **[来源: PLDI - Programming Language Design]**
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

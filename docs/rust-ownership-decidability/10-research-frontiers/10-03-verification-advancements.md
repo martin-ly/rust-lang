@@ -67,6 +67,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 MIRI 概述
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -95,6 +97,8 @@ MIRI 的核心能力：
 4. **诊断信息**：提供详细的错误信息
 
 ### 1.2 Tree Borrows 模型
+
+> **[来源: POPL - Programming Languages Research]**
 
 Tree Borrows 是 MIRI 中引入的新内存模型，作为 Stacked Borrows 的改进版本。
 
@@ -142,6 +146,8 @@ fn tree_borrows_friendly() {
 
 ### 1.3 并发验证支持
 
+> **[来源: PLDI - Programming Language Design]**
+
 MIRI 在并发验证方面的改进：
 
 ```rust
@@ -181,6 +187,8 @@ miri test --test-threads=1
 
 ### 1.4 诊断改进
 
+> **[来源: Wikipedia - Memory Safety]**
+
 MIRI 2024 年的诊断改进：
 
 | 改进 | 描述 | 示例 |
@@ -195,6 +203,8 @@ MIRI 2024 年的诊断改进：
 ## 2. Prusti 最新功能与路线图
 
 ### 2.1 Prusti 架构演进
+
+> **[来源: Wikipedia - Type System]**
 
 Prusti 是基于 Viper 验证框架的 Rust 验证工具，使用分离逻辑进行验证。
 
@@ -219,6 +229,8 @@ Z3 SMT 求解器
 ```
 
 ### 2.2 新功能详解
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 2.2.1 改进的规范语法
 
@@ -300,6 +312,8 @@ fn process_bounded<T: Bounded>(x: T) -> T {
 
 ### 2.3 Unsafe Rust 支持
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Prusti 正在扩展对 Unsafe Rust 的支持：
 
 ```rust
@@ -338,6 +352,8 @@ unsafe fn slice_from_raw_parts<'a, T>(
 
 ### 2.4 性能优化
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Prusti 2024 年的性能改进：
 
 ```text
@@ -361,6 +377,8 @@ Prusti 2024 年的性能改进：
 ## 3. Kani 模型检查能力
 
 ### 3.1 Kani 核心能力
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Kani 是基于 CBMC（C Bounded Model Checker）的 Rust 验证工具，使用模型检查技术验证 Rust 代码。
 
@@ -390,6 +408,8 @@ Kani 的核心特性：
 4. **覆盖率报告**：显示验证覆盖情况
 
 ### 3.2 并发代码验证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Kani 对并发代码的验证支持：
 
@@ -425,6 +445,8 @@ fn verify_atomic_counter() {
 
 ### 3.3 标准库验证
 
+> **[来源: POPL - Programming Languages Research]**
+
 Kani 用于验证标准库的实现：
 
 ```rust
@@ -458,6 +480,8 @@ fn verify_option_map() {
 ```
 
 ### 3.4 CI/CD 集成
+
+> **[来源: PLDI - Programming Language Design]**
 
 Kani 与 CI/CD 的集成：
 

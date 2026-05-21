@@ -34,6 +34,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 定义闭包
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@ let greet = |name| {
 ```
 
 ### 捕获环境
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +91,8 @@ let closure = move || println!("{}", s);
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 
 ### Trait 使用示例
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

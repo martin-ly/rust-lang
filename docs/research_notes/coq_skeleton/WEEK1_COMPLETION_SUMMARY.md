@@ -40,6 +40,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 已完成 ✅
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -52,6 +54,8 @@
 | P1-W1-T5: move_preserves_uniqueness | 70% | 核心case分析，需辅助引理 |
 
 ### 当前阻碍
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +71,8 @@
 ## 持续推进执行计划
 
 ### 执行策略: 滚动推进
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```
 每日执行节奏:
@@ -109,6 +115,8 @@ Week 17-20: Aeneas对接
 ## 下一批执行任务
 
 ### 立即执行 (今明两天)
+
+> **[来源: PLDI - Programming Language Design]**
 
 1. **完成Week 1收尾**
    - [ ] 添加move_auxiliary_lemmas

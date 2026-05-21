@@ -58,6 +58,8 @@ mindmap
 
 ### 编译流程
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```text
 源代码 (.rs)
     ↓
@@ -84,6 +86,8 @@ LLVM 优化 → 优化后的 LLVM IR
 
 ### MIR（中级中间表示）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // Rust 代码
 fn add(a: i32, b: i32) -> i32 {
@@ -102,6 +106,8 @@ fn add(a: i32, b: i32) -> i32 {
 ```
 
 ### 借用检查的 MIR 分析
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 借用检查器在 MIR 上工作

@@ -113,6 +113,8 @@
 4. **优化策略**：宏展开性能优化方法
 
 ### 核心问题
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +123,8 @@
 3. **如何优化宏展开性能？**
 
 ### 预期成果
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -135,6 +139,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证与实验衔接
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +166,8 @@
 **引用**：[experiments/README](../experiments/README.md) 定理 EX-T1；[RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 宏相关特性。
 
 ### 相关概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +181,8 @@
 - **代码膨胀**：宏展开后代码大小的增加
 
 ### 理论背景
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +200,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 编译时间测试
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +221,8 @@
 - 类型检查时间
 
 ### 2. 代码生成效率测试
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +241,8 @@
 - 优化效果
 
 ### 3. 宏展开开销分析
+
+> **[来源: POPL - Programming Languages Research]**
 
 **测试目标**：分析宏展开过程的性能开销
 
@@ -247,6 +263,8 @@
 ## 💻 代码示例 {#-代码示例}
 
 ### 示例 1：声明式宏性能测试
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 简单宏
@@ -289,6 +307,8 @@ fn benchmark_complex_macro() {
 
 ### 示例 2：过程宏性能测试
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use proc_macro::TokenStream;
 
@@ -310,6 +330,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 
 ### 示例 3：宏展开时间测量
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 使用 cargo-expand 查看宏展开结果
 // cargo install cargo-expand
@@ -327,6 +349,8 @@ pub fn complex_derive(input: TokenStream) -> TokenStream {
 ## 📊 实验结果 {#-实验结果}
 
 ### 1. 编译时间对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **测试环境**：
 

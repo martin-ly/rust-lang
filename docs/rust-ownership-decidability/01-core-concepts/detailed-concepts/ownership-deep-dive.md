@@ -66,6 +66,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权的形式化模型
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -93,6 +95,8 @@
 
 ### 1.2 类型状态的转换图
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
           ┌─────────────┐
           │  初始化状态  │
@@ -117,6 +121,8 @@
 
 ### 2.1 Move 的本质
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 Move 语义是 Rust 所有权系统的核心。表面上看，Move 类似于 C++ 的转移语义，但实际上有更严格的保证。
 
 **定义 2.1** (Move): Move 是将值的所有权从一个变量转移到另一个变量的操作，转移后原变量变为未初始化状态。
@@ -132,6 +138,8 @@ fn main() {
 ```
 
 ### 2.2 Move 的底层实现
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Move 在 LLVM IR 层面的实现是**按位复制**（bitwise copy），然后使原变量失效：
 
@@ -153,7 +161,11 @@ let b = a;
 
 ### 2.3 Move 的三种触发场景
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 场景 A: 赋值
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 let x = vec![1, 2, 3];
@@ -161,6 +173,8 @@ let y = x;  // x 被移动到 y
 ```
 
 #### 场景 B: 函数传参
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 fn take_ownership(v: Vec<i32>) {

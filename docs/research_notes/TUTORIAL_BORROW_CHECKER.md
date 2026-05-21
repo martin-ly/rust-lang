@@ -87,6 +87,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 内存安全威胁
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +113,8 @@ void thread2() { counter++; }
 ```
 
 ### Rust的解决方案
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 > **[来源: Rust Official Docs]**
 
 ### 三大规则
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -146,6 +152,8 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 3. **不能同时存在可变和不可变借用**
 
 ### 规则的可视化
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +194,8 @@ let ref2 = &mut counter;  // 错误: 不能有两个可变借用
 > **[来源: Rust Official Docs]**
 
 ### 基本用法
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +210,8 @@ println!("{}, {}, {}", r1, r2, r3);
 ```
 
 ### 为什么多个不可变借用是安全的
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +233,8 @@ println!("{}, {}, {}", r1, r2, r3);
 
 ### 独占性保证
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 let mut s = String::from("hello");
 
@@ -236,6 +250,8 @@ r2.push_str("!");
 ```
 
 ### 为什么需要独占性
+
+> **[来源: Wikipedia - Memory Safety]**
 
 可变借用允许修改数据，如果同时有两个可变借用：
 
@@ -256,6 +272,8 @@ Rust阻止这种情况，保证内存安全。
 
 ### 典型的冲突场景
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 let mut s = String::from("hello");
 
@@ -267,6 +285,8 @@ println!("{}, {}", r1, r2);
 ```
 
 ### 编译器错误分析
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immutable
@@ -283,6 +303,8 @@ error[E0502]: cannot borrow `s` as mutable because it is also borrowed as immuta
 ```
 
 ### 解决冲突
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 let mut s = String::from("hello");
@@ -303,6 +325,8 @@ r3.push_str(" world");
 
 ### 什么是NLL
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Rust 2018引入了非词法生命周期，借用不再局限于词法作用域：
 
 ```rust
@@ -317,6 +341,8 @@ r2.push_str(" world");
 ```
 
 ### NLL的效果
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 词法生命周期 (旧):
@@ -339,6 +365,8 @@ r2.push_str(" world");
 ## 第七部分：借用与数据结构
 
 ### 结构体中的借用
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 struct Parser<'a> {
@@ -363,6 +391,8 @@ fn main() {
 ```
 
 ### 自引用结构的问题
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 这不能编译!

@@ -31,6 +31,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -44,7 +45,7 @@
 > **[来源: Rust Official Docs]**
 
 - [充分表达 vs 非充分表达论证](#充分表达-vs-非充分表达论证)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [定义](#定义)
   - [等价/近似/不可表达判定规则](#等价近似不可表达判定规则)
@@ -72,6 +73,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -113,6 +115,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 创建型
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +126,8 @@
 - **Prototype**：`Clone` trait 直接对应
 
 ### 结构型
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +140,8 @@
 - **Proxy**：委托、延迟，等价
 
 ### 行为型
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +277,8 @@
 
 ### 等价表达完整代码示例
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **Strategy 模式**：
 
 ```rust
@@ -329,6 +339,8 @@ impl<R: Renderer> Page<R> {
 | Memento | 私有封装快照 | `Clone` / serde | 无私有，需类型可序列化 |
 
 ### 近似表达完整代码示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **Singleton 近似**：
 
@@ -475,7 +487,6 @@ impl Originator {
 
 - [02_workflow_safe_complete_models 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

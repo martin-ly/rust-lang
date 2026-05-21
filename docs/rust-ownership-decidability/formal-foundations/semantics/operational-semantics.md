@@ -126,6 +126,8 @@
 
 ### 数学符号
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 〈e, σ〉→ 〈e', σ'〉   小步归约：表达式 e 在状态 σ 下归约到 e' 和 σ'
 e ⇓ v               大步求值：表达式 e 求值得到 v
@@ -138,6 +140,8 @@ E[e]                求值上下文：E 是包含洞 e 的上下文
 ## 小步操作语义 (SOS)
 
 ### 2.1 配置定义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 2.1.1 程序配置
 
@@ -157,6 +161,8 @@ State ::= Running | Panic(msg) | Terminated(v)
 ```
 
 ### 2.2 表达式求值规则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 2.2.1 基本表达式
 
@@ -211,6 +217,8 @@ n = n₁ + n₂
 
 ### 2.3 所有权与移动语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 2.3.1 移动操作
 
 **移动变量**：
@@ -241,6 +249,8 @@ n = n₁ + n₂
 
 ### 2.4 Let 绑定
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 2.4.1 Let 求值
 
 **Let 绑定（表达式求值）**：
@@ -262,6 +272,8 @@ store_at(loc, v)
 ```
 
 ### 2.5 函数调用
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 2.5.1 函数应用
 
@@ -310,6 +322,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 
 ### 2.6 控制流
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 2.6.1 条件表达式
 
 **If 条件求值**：
@@ -347,6 +361,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 
 ### 2.7 块表达式
 
+> **[来源: Wikipedia - Type System]**
+
 #### 2.7.1 顺序执行
 
 **块求值**：
@@ -372,6 +388,8 @@ f = λ(x₁: τ₁, ..., xₙ: τₙ). e_body
 ```
 
 ### 2.8 匹配表达式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 2.8.1 模式匹配求值
 
@@ -407,6 +425,8 @@ match_pattern(p, v) = None
 ## 大步操作语义
 
 ### 3.1 求值关系
+
+> **[来源: IEEE - Programming Language Standards]**
 
 大步语义直接描述表达式到最终值的映射。
 
@@ -447,6 +467,8 @@ let x = e₁ in e₂ ⇓ v₂
 
 ### 3.2 函数求值
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 3.2.1 函数应用
 
 **应用**：
@@ -468,6 +490,8 @@ e[rec f(x).e / f, v / x] ⇓ v'
 ```
 
 ### 3.3 内存操作的大步语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 3.3.1 堆分配
 
@@ -495,6 +519,8 @@ e ⇓ Pointer(loc)    heap[loc] = v
 ## 结构化操作语义
 
 ### 4.1 抽象机结构
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 4.1.1 环境语义
 

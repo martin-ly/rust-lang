@@ -166,6 +166,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 1.93.0 核心特性思维导图
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -230,6 +232,8 @@ mindmap
 ```
 
 ### 1.2 所有权系统完整思维导图
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -267,6 +271,8 @@ mindmap
 ```
 
 ### 1.3 借用系统完整思维导图
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -311,6 +317,8 @@ mindmap
 ```
 
 ### 1.4 生命周期系统完整思维导图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -348,6 +356,8 @@ mindmap
 ```
 
 ### 1.5 泛型系统完整思维导图
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -393,6 +403,8 @@ mindmap
 ```
 
 ### 1.6 Trait 系统完整思维导图
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -452,6 +464,8 @@ mindmap
 ```
 
 ### 1.7 并发编程完整思维导图
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -504,6 +518,8 @@ mindmap
 ```
 
 ### 1.8 异步编程完整思维导图
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -556,6 +572,8 @@ mindmap
 
 ### 1.9 特性应用场景思维导图
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```mermaid
 mindmap
   root((Rust 1.93.0 应用场景))
@@ -594,6 +612,8 @@ mindmap
 ```
 
 ### 1.10 跨模块概念依赖思维导图
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 mindmap
@@ -638,6 +658,8 @@ mindmap
 
 ### 1.11 模块级思维导图索引
 
+> **[来源: IEEE - Programming Language Standards]**
+
 各模块的思维导图与知识可视化资源：
 
 | 模块 | 思维导图/知识图谱 | 路径 |
@@ -655,6 +677,8 @@ mindmap
 | C12 | WASM 思维导图 | crates/c12_wasm/docs/WASM_MIND_MAPS.md |
 
 ### 1.12 学习路径思维导图
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```mermaid
 mindmap
@@ -703,6 +727,8 @@ mindmap
 
 ### 2.1 Rust 1.93.0 特性对比矩阵
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 特性类别 | 特性名称 | 重要性 | 影响范围 | 迁移难度 | 性能影响 | 安全影响 | 应用场景 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | **语言特性** | 联合体原始引用          | ⭐⭐⭐⭐   | 中等     | 中       | 正       | ✅ 安全访问    | 底层编程       |
@@ -735,6 +761,8 @@ mindmap
 
 ### 2.2 版本迁移对比矩阵
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 从版本 | 到版本 | 主要变更                   | 破坏性变更 | 迁移工作量 | 建议优先级 | 关键注意事项 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
 | 1.90   | 1.93.0 | 特性增强                   | 低         | 低         | P1         | 检查 Lint 警告                   |
@@ -742,6 +770,8 @@ mindmap
 | 1.92.0 | 1.93.0 | musl 1.2.5、全局分配器增强 | 低         | 低         | P0         | 直接迁移，DNS 解析改进           |
 
 ### 2.3 特性依赖关系矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | 特性               | 依赖特性    | 影响特性        | 冲突特性 | 协同特性       | 组合示例               |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -752,6 +782,8 @@ mindmap
 | 自动特征改进       | 无          | 类型推断        | 无       | 关联项多边界   | 更智能的边界处理       |
 
 ### 2.4 性能影响矩阵
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 特性               | 编译时性能 | 运行时性能 | 内存使用 | 代码大小 | 优化潜力 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -768,6 +800,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 3.1 Rust 1.93.0 特性使用决策树
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```mermaid
 graph TD

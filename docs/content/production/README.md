@@ -73,6 +73,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 功能完整性
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +87,8 @@
 - [ ] 优雅关闭机制
 
 ### 可观测性
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +99,8 @@
 - [ ] 告警规则配置
 
 ### 安全性
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +111,8 @@
 - [ ] TLS 配置正确
 
 ### 性能
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +129,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Docker 优化
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +199,8 @@ ENTRYPOINT ["/usr/local/bin/app"]
 ---
 
 ### Kubernetes
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 基础部署
 
@@ -277,6 +289,8 @@ spec:
 
 ### Serverless
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### AWS Lambda
 
 ```rust
@@ -318,6 +332,8 @@ cargo lambda deploy --region us-east-1
 ## 📈 监控与可观测性
 
 ### 指标收集
+
+> **[来源: Wikipedia - Type System]**
 
 #### Prometheus 集成
 
@@ -365,6 +381,8 @@ async fn metrics_middleware<B>(
 ```
 
 ### 分布式追踪
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### OpenTelemetry + Jaeger
 

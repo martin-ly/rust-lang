@@ -43,6 +43,8 @@
 
 ### 2.1 超时类型谱系
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 超时类型层次:
 
@@ -72,6 +74,8 @@
 ```
 
 ### 2.2 形式化定义
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 超时形式化语义:
@@ -114,6 +118,8 @@
 
 ### 3.1 基于 EWMA 的自适应超时
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 自适应超时公式:
 
@@ -135,6 +141,8 @@
 ```
 
 ### 3.2 百分位自适应超时
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 基于百分位的超时:
@@ -159,6 +167,8 @@
 ```
 
 ### 3.3 协同自适应超时
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 系统级协同超时:

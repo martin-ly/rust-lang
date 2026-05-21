@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 设备信息
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -59,6 +61,8 @@
 | **Rust版本** | 1.81.0 (Ferrocene) |
 
 ### 为什么选择Rust
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +79,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 系统架构
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -102,6 +108,8 @@
 ```
 
 ### Rust模块结构
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -453,6 +461,8 @@ impl PidController {
 > **[来源: Rust Official Docs]**
 
 ### 测试层次
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -476,6 +486,8 @@ Level 3: 系统测试
 ```
 
 ### 测试覆盖率要求
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -487,6 +499,8 @@ Level 3: 系统测试
 | 传感器驱动 | 100% | 100% | 100% |
 
 ### 形式化验证
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -530,6 +544,8 @@ mod verification {
 ## 认证经验
 
 ### IEC 62304符合性
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 软件开发生命周期
 

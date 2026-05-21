@@ -68,6 +68,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 GAT 基础
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -108,6 +110,8 @@ GAT 的核心价值在于：
 
 ### 1.2 形式化语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 GAT 的形式化语义正在积极研究中。以下是基于 System F_ω 的扩展模型：
 
 ```text
@@ -132,6 +136,8 @@ GAT 的类型规则（概念性）
 - **约束传播**：where 子句的传递和处理
 
 ### 1.3 可判定性分析
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 GAT 对类型系统可判定性的影响是研究的重点：
 
@@ -161,6 +167,8 @@ pub trait PotentiallyUndecidable {
 ```
 
 ### 1.4 实际应用案例
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 案例 1：流解析器
 
@@ -210,6 +218,8 @@ pub trait StateMachine {
 
 ### 2.1 特殊化概述
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 特殊化允许为更具体的类型实现提供覆盖更一般实现的机制。这是一个长期讨论的语言特性，RFC 1210 定义了其基础设计。
 
 ```rust
@@ -237,6 +247,8 @@ impl<T: Clone> Trait for T {
 
 ### 2.2 一致性规则
 
+> **[来源: ACM - Systems Programming Languages]**
+
 特殊化的核心挑战是确保类型系统的一致性——即一个类型不会匹配多个不兼容的实现。
 
 ```text
@@ -256,6 +268,8 @@ impl Trait for String        // 最具体：仅适用于 String
 3. **不相交性**：如果不是偏序关系，则必须是互斥的
 
 ### 2.3 形式化挑战
+
+> **[来源: IEEE - Programming Language Standards]**
 
 特殊化引入了多个形式化挑战：
 
@@ -298,6 +312,8 @@ impl Foo for String {
 
 ### 2.4 语义一致性
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 特殊化的语义一致性要求程序的行为与使用的具体实现无关：
 
 ```rust
@@ -325,6 +341,8 @@ impl Trait for String {
 ## 3. 效应系统（Effect Systems）
 
 ### 3.1 效应系统基础
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 效应系统（Effect Systems）是一种类型系统扩展，用于跟踪和约束程序可能产生的副作用。这在函数式编程语言（如 Koka、Eff）中已有成熟应用。
 

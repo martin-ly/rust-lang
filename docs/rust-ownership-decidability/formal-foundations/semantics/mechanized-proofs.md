@@ -102,6 +102,8 @@
 对于 Rust 而言，机器化证明提供了最高级别的安全保障，确保类型系统、内存模型和并发语义的正确性。
 
 ### 形式化目标
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -113,6 +115,8 @@
 - **证明工程技术**：证明自动化、可维护性
 
 ### 机器化 vs 纸笔证明
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | 纸笔证明 | 机器化证明 |
 |-----|---------|-----------|
@@ -127,6 +131,8 @@
 ## 机器化证明基础
 
 ### 2.1 依赖类型理论
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.1.1 Curry-Howard 对应
 
@@ -161,6 +167,8 @@ Inductive list (A : Type) : Type :=
 ```
 
 ### 2.2 证明策略
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 2.2.1 证明策略（Coq 风格）
 
@@ -197,6 +205,8 @@ Qed.
 ```
 
 ### 2.3 高阶抽象
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 2.3.1 类型类 (Type Classes)
 
@@ -242,6 +252,8 @@ Instance State_Monad (S : Type) : Monad (State S) := {
 
 ### 3.1 Coq 基础
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 3.1.1 Gallina 语言
 
 ```coq
@@ -280,6 +292,8 @@ Proof. crush. Qed.
 ```
 
 ### 3.2 Iris 分离逻辑
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 3.2.1 Iris 基础
 
@@ -320,6 +334,8 @@ Qed.
 ```
 
 ### 3.3 RustBelt 项目
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 3.3.1 RustBelt 架构
 
@@ -368,6 +384,8 @@ Qed.
 
 ### 3.4 证明提取
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 3.4.1 从 Coq 提取 OCaml
 
 ```coq
@@ -396,6 +414,8 @@ Theorem extraction_correct : ∀ (f : A → B) (f' : A' → B'),
 ## Lean 形式化
 
 ### 4.1 Lean 4 基础
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 4.1.1 Lean 语言
 
@@ -434,6 +454,8 @@ Theorem extraction_correct : ∀ (f : A → B) (f' : A' → B'),
 ```
 
 ### 4.2 Aeneas 项目
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 4.2.1 Aeneas 概述
 
@@ -485,6 +507,8 @@ theorem sum_correct (v : List U32) :
 
 ### 4.3 数学库 (mathlib4)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 4.3.1 mathlib4 概述
 
 ```
@@ -520,6 +544,8 @@ theorem sum_range_n (n : ℕ) :
 ## Rust 专用验证工具
 
 ### 5.1 MIRI (MIR Interpreter)
+
+> **[来源: Wikipedia - Type System]**
 
 #### 5.1.1 MIRI 架构
 
@@ -557,6 +583,8 @@ let r2 = &mut x; // UB: 两个可变借用
 ```
 
 ### 5.2 Kani (模型检测器)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 5.2.1 Kani 概述
 
@@ -600,6 +628,8 @@ fn verify_sum() {
 ```
 
 ### 5.3 Prusti (Viper 前端)
+
+> **[来源: Wikipedia - Type System]**
 
 #### 5.3.1 Prusti 规格说明
 

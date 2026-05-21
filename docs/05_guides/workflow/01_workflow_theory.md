@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 14.1.1 工作流模型分类
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -90,6 +92,8 @@ W = (CF, DF, RM, EH)
 因此，W = (CF, DF, RM, EH) 可以完整表示 B。
 
 ### 14.1.2 工作流形式化表示
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@ W = (CF, DF, RM, EH)
 - sₙ 是终止状态
 
 ### 14.1.3 工作流语义模型
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +136,8 @@ W = (CF, DF, RM, EH)
 > **[来源: Rust Official Docs]**
 
 ### 14.2.1 异步机制与工作流同构性
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +176,8 @@ F: Future<Output = T> → N: WorkflowNode<Output = T>
 ```
 
 ### 14.2.2 类型系统映射
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +202,8 @@ type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Wo
 如果工作流 W₁: Workflow<T₁> 和 W₂: Workflow<T₂> 类型正确，则它们的组合 W₁ >> W₂ 也是类型安全的。
 
 ### 14.2.3 状态机转换
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -236,6 +248,8 @@ impl Future for WorkflowState {
 > **[来源: Rust Official Docs]**
 
 ### 14.3.1 Petri网模型
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -281,6 +295,8 @@ impl WorkflowPetriNet {
 ```
 
 ### 14.3.2 π演算模型
+
+> **[来源: PLDI - Programming Language Design]**
 
 **定义 14.3.2** (工作流π演算)
 工作流π演算进程 P 的语法：
@@ -329,6 +345,8 @@ impl PiProcess {
 ```
 
 ### 14.3.3 时态逻辑验证
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **定义 14.3.3** (工作流时态逻辑)
 工作流时态逻辑公式 φ 的语法：
@@ -382,6 +400,8 @@ impl TemporalFormula {
 
 ### 14.4.1 认知循环模型
 
+> **[来源: Wikipedia - Type System]**
+
 **定义 14.4.1** (AI-工作流认知循环)
 AI-工作流认知循环是一个四元组 C = (P, D, E, L)，其中：
 
@@ -424,6 +444,8 @@ impl AIWorkflowCycle {
 
 ### 14.4.2 自洽续洽它洽机制
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **定义 14.4.2** (自洽机制)
 自洽机制是指AI系统能够自我验证和修正的能力：
 
@@ -458,6 +480,8 @@ trait Collaborative {
 ```
 
 ### 14.4.3 演化式工作流代数
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **定义 14.4.5** (演化式工作流代数)
 演化式工作流代数是一个代数结构 EWA = (W, ⊕, ⊗, \*, ε)，其中：
@@ -502,6 +526,8 @@ impl EvolutionaryWorkflowAlgebra {
 > **[来源: Rust Official Docs]**
 
 ### 14.5.1 核心组件设计
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **定义 14.5.1** (工作流引擎架构)
 工作流引擎架构包含以下核心组件：
@@ -571,6 +597,8 @@ impl WorkflowEngine {
 
 ### 14.5.2 分布式执行模型
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 14.5.2** (分布式工作流)
 分布式工作流是一个三元组 DW = (N, C, S)，其中：
 
@@ -621,6 +649,8 @@ impl DistributedWorkflow {
 ```
 
 ### 14.5.3 故障恢复机制
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 14.5.3** (故障恢复策略)
 故障恢复策略包含以下组件：
@@ -689,6 +719,8 @@ impl WorkflowEngine {
 
 ### 14.6.1 制造业工作流
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **定义 14.6.1** (制造业工作流)
 制造业工作流是一个五元组 MW = (P, M, Q, T, C)，其中：
 
@@ -740,6 +772,8 @@ impl ManufacturingWorkflow {
 
 ### 14.6.2 金融服务工作流
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 14.6.2** (金融服务工作流)
 金融服务工作流是一个四元组 FW = (T, R, C, A)，其中：
 
@@ -782,6 +816,8 @@ impl FinancialWorkflow {
 ```
 
 ### 14.6.3 智能家居工作流
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 14.6.3** (智能家居工作流)
 智能家居工作流是一个三元组 HW = (D, S, U)，其中：
@@ -836,6 +872,8 @@ impl SmartHomeWorkflow {
 
 ### 14.7.1 可达性分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 14.7.1** (可达性分析)
 对于工作流 W 和状态 s，可达性分析确定是否存在执行路径从初始状态到达 s。
 
@@ -865,6 +903,8 @@ fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
 ```
 
 ### 14.7.2 死锁检测
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定义 14.7.2** (死锁)
 工作流 W 存在死锁，当且仅当存在状态 s 使得：

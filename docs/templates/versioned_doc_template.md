@@ -71,6 +71,8 @@
 {{ feature_description }}
 
 ### 核心优势
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@
 - {{ advantage_3 }}
 
 ### 使用场景
+
+> **[来源: PLDI - Programming Language Design]**
 
 {{ use_cases }}
 

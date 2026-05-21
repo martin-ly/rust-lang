@@ -31,6 +31,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -52,6 +53,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -60,6 +63,8 @@
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
 ### 1.2 反模式分类
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -99,6 +104,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权反模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -133,6 +140,8 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 ```
 
 ### 3.2 借用反模式
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +176,8 @@ fn process(data: &Vec<String>) -> Vec<String> {
 ```
 
 ### 3.3 设计模式反模式
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +203,8 @@ where
 ```
 
 ### 3.4 并发反模式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -247,6 +260,8 @@ where
 ## 八、完整规避示例（场景→反模式→正确写法）
 
 ### 场景 1：需要共享可变
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **反模式**：`Rc<RefCell<T>>` 跨线程。
 
@@ -371,7 +386,6 @@ let x = match result {
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

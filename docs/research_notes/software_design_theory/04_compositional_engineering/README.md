@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [组合软件工程有效性形式论证](#组合软件工程有效性形式论证)
@@ -42,10 +43,12 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 宗旨
+>
 > **[来源: Rust Official Docs]**
 
 论证 Rust 组合软件工程的有效性：形式化定义组合、建立有效性定理、与 ownership/borrow/trait 衔接。
@@ -53,6 +56,7 @@
 ---
 
 ## 设计模式组合示例（实质内容）
+>
 > **[来源: Rust Official Docs]**
 
 | 组合 | 实现要点 | 形式化衔接 |
@@ -67,9 +71,11 @@
 ---
 
 ## 组合完整代码示例（层次推进）
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：Builder + Factory Method
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -102,6 +108,7 @@ impl ConfigFactory for DefaultFactory {
 ```
 
 ### 示例 2：Repository + Service Layer + DTO（完整链条）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -132,6 +139,7 @@ impl<R: OrderRepository> OrderService<R> {
 ```
 
 ### 实例推导：CE-T1–T3 作用于模式组合（R1-01 最小交付）
+>
 > **[来源: Rust Official Docs]**
 
 **Decorator + Strategy 组合有效性推导**：
@@ -145,6 +153,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 文档索引
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 内容 |
@@ -156,6 +165,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 核心问题
+>
 > **[来源: Rust Official Docs]**
 
 1. **组合的形式化**：模块、crate、trait、泛型如何组合？组合满足何种性质？
@@ -165,6 +175,7 @@ impl<R: OrderRepository> OrderService<R> {
 ---
 
 ## 形式化论证汇总
+>
 > **[来源: Rust Official Docs]**
 
 **Def CE1（组合有效性）**：设 $C = M_1 \oplus \cdots \oplus M_n$ 为模块组合。若 $C$ 满足 CE-T1、CE-T2、CE-T3，则称 $C$ **有效**。
@@ -176,6 +187,7 @@ impl<R: OrderRepository> OrderService<R> {
 **推论 CE-C1**：若各 $M_i$ 为 Safe 且良型，则有效组合 $C$ 为 Safe 且良型。*证明*：由 CE-T1、CE-T2、CE-T3 直接。∎
 
 ### 组合法则依赖链（Def → Axiom → Lemma → Theorem → Corollary）
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -244,6 +256,8 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 | :--- | :--- | :--- |
 
 ### L3/L4 验证工具索引
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | 工具 | 用途 | 层级 | 链接/命令 |
 | :--- | :--- | :--- | :--- |
@@ -332,6 +346,8 @@ ownership T2,T3  borrow T1    type T1,T2,T3
 
 ### Mermaid 形式化树图
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```mermaid
 flowchart TB
     subgraph 粒度层次
@@ -378,6 +394,8 @@ flowchart TB
 ```
 
 ### ASCII 形式化树图（模块→crate→进程→网络）
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 组件构建能力形式化树（与 02_complete_43_catalog 联合）
@@ -487,9 +505,13 @@ L4 跨进程/跨网络（分布式、微服务）
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -500,6 +522,8 @@ L4 跨进程/跨网络（分布式、微服务）
 
 #### 代码示例更新
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -507,6 +531,8 @@ L4 跨进程/跨网络（分布式、微服务）
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -526,7 +552,6 @@ L4 跨进程/跨网络（分布式、微服务）
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

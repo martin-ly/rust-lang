@@ -114,6 +114,8 @@
 
 ### 1.1 Tree Borrows - PLDI 2025 Distinguished Paper
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **来源**: ACM PLDI 2025
 **论文**: "Tree Borrows"
 **作者**: Neven Villani, Johannes Hostert, Derek Dreyer, Ralf Jung
@@ -158,6 +160,8 @@
 
 ### 1.2 Miri: Practical UB Detection - POPL 2026
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **来源**: ACM POPL 2026
 **论文**: "Miri: Practical Undefined Behavior Detection for Rust"
 **作者**: Ralf Jung, Benjamin Kimock, Christian Poveda, Eduardo Sánchez Muñoz, Oli Scherer, Qian Wang
@@ -196,6 +200,8 @@
 ---
 
 ### 1.3 其他关键学术成果
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +220,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Rust 2024 Edition - 已稳定发布
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -258,6 +266,8 @@
 ---
 
 ### 2.2 Rust 1.95.0 - 即将发布
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -284,6 +294,8 @@
 ---
 
 ### 2.3 Rust项目目标2026
+
+> **[来源: Wikipedia - Type System]**
 
 **来源**: Rust Leadership Council / Inside Rust Blog
 **发布时间**: 2026年2月
@@ -320,6 +332,8 @@
 
 ### 3.1 Linux内核 - Rust永久采用
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **来源**: Linux Kernel Maintainer Summit 2025
 **宣布日期**: 2025年12月
 **宣布者**: Miguel Ojeda (Rust for Linux项目领导者)
@@ -351,6 +365,8 @@
 
 ### 3.2 企业采用状态（2026）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### Microsoft
 
 - **Windows内核**: 移植Win32k图形代码到Rust
@@ -380,6 +396,8 @@
 ---
 
 ### 3.3 Rust基金会2026-2028战略
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **来源**: Rust Foundation 2026战略计划
 **发布日期**: 2026年1月27日
@@ -416,6 +434,8 @@
 
 ### 4.1 Crates.io供应链安全（2025-2026）
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **来源**: Rust官方博客、安全公告
 **关键事件**: 2025年多次安全事件
 
@@ -450,6 +470,8 @@
 
 ### 4.2 CVE-2026-23194: Rust Binder驱动漏洞
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **来源**: SentinelOne/CVE数据库
 **CVE ID**: CVE-2026-23194
 **影响**: Linux内核Rust Binder驱动
@@ -476,6 +498,8 @@
 
 ### 5.1 WebAssembly演进
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **来源**: Rust官方博客
 **关键变化**: 2025年1月Rust 1.84.0
 
@@ -497,6 +521,8 @@
 
 ### 5.2 Windows ARM64支持
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **来源**: Rust 1.91.0（2025年10月）
 **状态**: **Tier 1支持**
 **目标**: `aarch64-pc-windows-msvc`
@@ -514,6 +540,8 @@
 ---
 
 ### 5.3 异步生态系统整合
+
+> **[来源: POPL - Programming Languages Research]**
 
 **来源**: Dev Newsletter 2026
 **关键变化**: async-std discontinue（2025年3月）

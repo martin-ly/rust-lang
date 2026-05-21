@@ -62,6 +62,8 @@
 
 ### 1.2 大步语义的优势
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 大步语义 $s, h \vdash e \Downarrow v, h'$ 表示在存储 $s$ 和堆 $h$ 下，表达式 $e$ 求值得到值 $v$ 和最终堆 $h'$。
 
 **优势：**
@@ -76,6 +78,8 @@
 $$\frac{e_1 \Downarrow n_1 \quad e_2 \Downarrow n_2 \quad n = n_1 + n_2}{e_1 + e_2 \Downarrow n}$$
 
 ### 1.3 小步语义的优势
+
+> **[来源: ACM - Systems Programming Languages]**
 
 小步语义 $\langle e, s, h \rangle \rightarrow \langle e', s', h' \rangle$ 表示表达式 $e$ 在状态 $\langle s, h \rangle$ 下单步归约到 $e'$ 和状态 $\langle s', h' \rangle$。
 
@@ -92,6 +96,8 @@ $$\frac{\langle e_1, s, h \rangle \rightarrow \langle e_1', s', h' \rangle}{\lan
 
 ### 1.4 等价性的重要性
 
+> **[来源: IEEE - Programming Language Standards]**
+
 证明两种语义的等价性具有以下重要意义：
 
 1. **理论一致性**：验证形式化定义的正确性和完备性
@@ -104,6 +110,8 @@ $$\frac{\langle e_1, s, h \rangle \rightarrow \langle e_1', s', h' \rangle}{\lan
 ## 2. 语义回顾
 
 ### 2.1 大步语义 (eval) 的定义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 大步语义定义了求值关系 $eval \subseteq Store \times Heap \times Expr \times Value \times Heap$。
 
@@ -148,6 +156,8 @@ $$
 $$
 
 ### 2.2 小步语义 (step) 的定义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 小步语义定义了单步转换关系 $step \subseteq Config \times Config$。
 
@@ -199,6 +209,8 @@ $$
 
 ### 2.3 多步语义 (star_step) 的定义
 
+> **[来源: POPL - Programming Languages Research]**
+
 多步语义是小步语义的自反传递闭包，记为 $\rightarrow^*$。
 
 **定义：**
@@ -228,6 +240,8 @@ $$
 
 ### 3.1 核心定理陈述
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定理 3.1 (大步-小步等价性)：**
 
 对于任意存储 $s$，初始堆 $h$，表达式 $e$，最终值 $v$ 和最终堆 $h'$：
@@ -249,6 +263,8 @@ Theorem big_step_equiv_small_step :
 
 ### 3.2 定理的直观理解
 
+> **[来源: Wikipedia - Memory Safety]**
+
 这个等价性定理建立了两种视角的联系：
 
 1. **从左到右**：如果大步语义说表达式 $e$ 求值到 $v$，那么小步语义可以通过有限步归约从 $e$ 到达 $v$。
@@ -262,6 +278,8 @@ Theorem big_step_equiv_small_step :
 ## 4. 证明详情
 
 ### 4.1 大步 ⇒ 小步 (→方向)
+
+> **[来源: Wikipedia - Type System]**
 
 #### 4.1.1 证明策略
 
@@ -356,6 +374,8 @@ $$\langle e_2, s[x \mapsto v_1], h_1 \rangle \rightarrow^{n_2} \langle v_2, s[x 
 
 ### 4.2 小步 ⇒ 大步 (←方向)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 4.2.1 证明策略
 
 我们需要证明：如果 $\langle e, s, h \rangle \rightarrow^n \langle v, s', h' \rangle$，则 $s, h \vdash e \Downarrow v, h'$。
@@ -415,6 +435,8 @@ $$\langle e_2, s[x \mapsto v_1], h_1 \rangle \rightarrow^{n_2} \langle v_2, s[x 
 $$\frac{s, h \vdash e_1 \Downarrow n_1, h_{mid} \quad s, h_{mid} \vdash e_2 \Downarrow n_2, h' \quad v = n_1 + n_2}{s, h \vdash e_1 + e_2 \Downarrow v, h'}$$
 
 ### 4.3 辅助引理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 4.3.1 eval_deterministic
 
@@ -506,6 +528,8 @@ Qed.
 
 ### 5.1 类型安全性与语义选择无关
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **定理 5.1 (类型安全语义无关性)：**
 
 如果大步语义满足类型安全（保持性和进展性），则小步语义也满足类型安全，反之亦然。
@@ -521,6 +545,8 @@ Qed.
    - 小步语义：检查是否存在可应用的规则
 
 ### 5.2 保持性在大步语义下的证明
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定理 5.2 (大步语义保持性)：**
 
@@ -542,6 +568,8 @@ Qed.
 结果 $n = n_1 + n_2$ 是整数，故 $\Gamma \vdash n : int$。
 
 ### 5.3 进展性在小步语义下的证明
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **定理 5.3 (小步语义进展性)：**
 

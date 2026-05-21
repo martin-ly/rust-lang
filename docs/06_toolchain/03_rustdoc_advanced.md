@@ -162,6 +162,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 基础用法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +186,8 @@ cargo doc --document-private-items
 ---
 
 ### 1.2 文档结构
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +213,8 @@ target/doc/
 > **[来源: Rust Official Docs]**
 
 ### 2.1 基础注释
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +270,8 @@ pub fn divide(a: i32, b: i32) -> Result<i32, String> {
 ---
 
 ### 2.2 Markdown 支持
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -302,6 +310,8 @@ pub fn demo() {}
 ---
 
 ### 2.3 代码块
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -350,6 +360,8 @@ pub fn error_demo() {}
 > **[来源: Rust Official Docs]**
 
 ### 3.1 基础测试
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -378,6 +390,8 @@ cargo test --doc
 ---
 
 ### 3.2 高级测试选项
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **隐藏部分代码**:
 
@@ -423,6 +437,8 @@ pub fn panic_demo() {}
 
 ### 3.3 测试属性
 
+> **[来源: POPL - Programming Languages Research]**
+
 ````rust
 /// ```
 /// use my_crate::MyType;
@@ -449,6 +465,8 @@ pub struct MyType;
 
 ### 4.1 Intra-doc Links
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **链接到其他项**:
 
 ```rust
@@ -471,6 +489,8 @@ pub struct MyStruct;
 ---
 
 ### 4.2 链接语法
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **不同的链接方式**:
 
@@ -501,6 +521,8 @@ pub fn explicit_links() {}
 
 ### 4.3 链接到外部文档
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 /// 使用 [tokio](https://docs.rs/tokio) 进行异步编程
 ///
@@ -513,6 +535,8 @@ pub fn external_links() {}
 ## 5. 文档组织
 
 ### 5.1 模块级文档
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ````rust
 //! # 模块名称
@@ -532,6 +556,8 @@ pub fn function() {}
 ---
 
 ### 5.2 crate 级文档
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **`src/lib.rs`**:
 

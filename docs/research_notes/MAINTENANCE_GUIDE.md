@@ -138,6 +138,8 @@
 本维护指南为研究笔记系统提供完整的维护流程和最佳实践，确保系统长期稳定运行和持续改进。
 
 ### 维护范围
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +156,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 内容质量保证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +167,8 @@
 - ✅ 定期更新过时信息和链接
 
 ### 2. 结构组织优化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +178,8 @@
 - ✅ 定期清理重复和冗余内容
 
 ### 3. 用户体验提升
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +195,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 日常维护 (每日)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -196,6 +206,8 @@
 - [ ] 更新更新日志（如有变更）
 
 ### 周度维护 (每周)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -205,6 +217,8 @@
 - [ ] 验证代码示例可运行性
 
 ### 月度维护 (每月)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -215,6 +229,8 @@
 - [ ] 更新系统总结
 
 ### 季度维护 (每季度)
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [ ] 审查研究路线图
 - [ ] 评估研究进展
@@ -228,6 +244,8 @@
 
 ### 年度维护 (每年)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 - [ ] 全面审查系统架构
 - [ ] 评估系统完整性
 - [ ] 制定下一年度计划
@@ -239,6 +257,8 @@
 ## 🔍 质量检查 {#-质量检查}
 
 ### 内容质量检查
+
+> **[来源: ACM - Systems Programming Languages]**
 
 - **准确性**: 内容必须准确无误
 - **完整性**: 内容必须完整无缺

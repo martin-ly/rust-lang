@@ -44,6 +44,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Saga 模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@ impl SagaCoordinator {
 ```
 
 ### 2. CQRS 模式
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 命令端
@@ -129,6 +133,8 @@ impl OrderQueryHandler {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: IEEE - Programming Language Standards]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

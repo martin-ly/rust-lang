@@ -161,6 +161,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权模型形式化
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -182,6 +184,8 @@
 ---
 
 ### 借用检查器证明
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +206,8 @@
 ---
 
 ### 异步状态机形式化
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -222,6 +228,8 @@
 ---
 
 ### 生命周期形式化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +251,8 @@
 
 ### Pin 和自引用类型形式化
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **文档**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
@@ -261,6 +271,8 @@
 
 ### 类型系统基础
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **文档**: [type_system_foundations.md](./type_theory/type_system_foundations.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
@@ -276,6 +288,8 @@
 ---
 
 ### Trait 系统形式化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **文档**: [trait_system_formalization.md](./type_theory/trait_system_formalization.md)
 **状态**: ✅ 已完成
@@ -300,6 +314,8 @@
 
 ### 生命周期形式化（类型理论）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **文档**: [lifetime_formalization.md](./type_theory/lifetime_formalization.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
@@ -316,6 +332,8 @@
 
 ### 高级类型特性
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **文档**: [advanced_types.md](./type_theory/advanced_types.md)
 **状态**: ✅ 已完成
 **最后更新**: 2026-01-26
@@ -331,6 +349,8 @@
 ---
 
 ### 型变理论
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **文档**: [variance_theory.md](./type_theory/variance_theory.md)
 **状态**: ✅ 已完成

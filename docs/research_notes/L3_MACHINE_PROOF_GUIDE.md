@@ -13,6 +13,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 证明深度层级
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -24,6 +26,8 @@
 | L4 | 自动化生成 | 从代码自动生成证明 | 是 | 未来 |
 
 ### 1.2 L3证明目标
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -40,6 +44,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 推荐方案: Coq + Iris
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

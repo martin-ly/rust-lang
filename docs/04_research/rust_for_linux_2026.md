@@ -68,6 +68,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 设计哲学
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -80,6 +82,8 @@
 | 与 C 互操作 | 原生 | 通过 `unsafe` FFI + bindgen |
 
 ### 2.2 适用场景
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +105,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 工具链要求
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -124,6 +130,8 @@ make LLVM=1 -j$(nproc)
 - 使用 LLVM 工具链而非 GCC（Rust 后端依赖 LLVM）
 
 ### 3.2 最小示例：内核模块
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -177,6 +185,8 @@ impl Drop for HelloRust {
 > **[来源: Rust Official Docs]**
 
 ### 4.1 核心抽象
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

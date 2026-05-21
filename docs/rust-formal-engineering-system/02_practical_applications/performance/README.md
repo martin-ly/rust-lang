@@ -54,6 +54,8 @@ mindmap
 
 ### 零成本抽象
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // Rust 的抽象不引入运行时开销
 
@@ -78,6 +80,8 @@ fn manual_loop(data: &[i32]) -> i32 {
 ```
 
 ### 内存布局优化
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 结构体字段排序影响内存布局

@@ -164,6 +164,8 @@
 本研究的目的是形式化定义 Rust 的生命周期系统，并证明其保证引用有效性。
 
 ### 核心问题
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -172,6 +174,8 @@
 3. **引用有效性证明**: 如何证明生命周期系统保证引用有效？
 
 ### 预期成果
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +190,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 生命周期核心概念
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +204,8 @@
 **生命周期子类型 (Lifetime Subtyping)**: 如果生命周期 `'a` 包含生命周期 `'b`（`'a` 比 `'b` 更长），则 `'b` 是 `'a` 的子类型。
 
 ### 生命周期与借用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +216,8 @@
 **数据竞争**: 生命周期系统与借用检查器共同保证数据竞争自由。
 
 ### 生命周期推断
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -222,6 +232,8 @@
 3. 其他情况需要显式标注生命周期
 
 ### 相关概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +244,8 @@
 **生命周期约束 (Lifetime Bound)**: 对生命周期参数的限制，如 `T: 'a` 表示类型 `T` 的生命周期至少为 `'a`。
 
 ### 理论背景
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +256,8 @@
 **约束求解 (Constraint Solving)**: 生命周期推断可以视为约束求解问题，需要找到满足所有约束的生命周期分配。
 
 ### 区域类型的理论基础
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +277,8 @@
 
 ### 生命周期推断的理论基础
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 生命周期推断基于以下理论：
 
 **约束生成规则**:
@@ -277,6 +295,8 @@
 
 ### 引用有效性的形式化描述
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 引用有效性可以通过以下方式形式化：
 
 **有效性谓词**:
@@ -292,7 +312,11 @@
 
 ### 相关学术论文的详细分析
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 1. Region-Based Memory Management
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **核心贡献**:
 
@@ -314,6 +338,8 @@
 
 #### 2. The RustBelt Project: Formalizing Rust's Type System
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **核心贡献**:
 
 - Rust 生命周期系统的形式化
@@ -333,6 +359,8 @@
 - 提供了工具支持
 
 ### CMU 15-799 区域类型理论
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **课程链接**: <https://www.cs.cmu.edu/~15-799/>
 

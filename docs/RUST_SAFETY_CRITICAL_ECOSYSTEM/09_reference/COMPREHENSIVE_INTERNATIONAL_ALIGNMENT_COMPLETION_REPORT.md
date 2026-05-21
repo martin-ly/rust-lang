@@ -75,6 +75,8 @@
 
 ### 1.1 网络权威内容对齐
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 学术来源 (顶级会议)
 
 | 来源 | 内容 | 引用 | 状态 |
@@ -106,6 +108,8 @@
 ---
 
 ### 1.2 国际著名大学课程对齐
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +134,8 @@
 ---
 
 ### 1.3 工业化/国防/工控标准对齐
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -190,6 +196,8 @@ MISRA C:2025 → Rust 规则映射统计:
 > **[来源: Rust Official Docs]**
 
 ### 2.1 思维导图 (Mind Map)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +218,8 @@ MISRA C:2025 → Rust 规则映射统计:
 ```
 
 ### 2.2 多维概念矩阵 (Multi-dimensional Matrix)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

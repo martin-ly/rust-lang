@@ -54,6 +54,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Unsafe 代码管理
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -66,6 +68,8 @@
 | S05 | 使用 Miri 验证 unsafe 代码 | SHOULD | `docs/03_guides/MIRI_GUIDE.md` | 关键 unsafe 代码是否通过 Miri？ |
 
 ### 1.2 输入验证
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |

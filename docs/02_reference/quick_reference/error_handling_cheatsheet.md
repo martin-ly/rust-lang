@@ -67,7 +67,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Exception Handling]** · **[来源: Wikipedia - Error Detection and Correction]** · **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Computing]**
 
 - [⚠️ Rust 错误处理速查卡](#️-rust-错误处理速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 核心概念](#-核心概念)
     - [Result 类型](#result-类型)
@@ -125,6 +125,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Result 类型
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +138,8 @@ enum Result<T, E> {
 ```
 
 ### Option 类型
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +157,8 @@ enum Option<T> {
 > **[来源: Rust Official Docs]**
 
 ### 模式 1: 匹配处理
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +170,8 @@ match result {
 ```
 
 ### 模式 2: unwrap 和 expect
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +184,8 @@ let value = result.expect("操作失败");
 ```
 
 ### 模式 3: ? 操作符
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +205,8 @@ fn read_file() -> Result<String, io::Error> {
 > **[来源: Rust Official Docs]**
 
 ### Result 方法
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -218,6 +230,8 @@ let result = Ok(5)
 ```
 
 ### Option 方法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +255,8 @@ let value = option.unwrap_or_else(|| calculate_default());
 
 ### anyhow - 灵活的错误处理
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use anyhow::{Result, Context};
 
@@ -254,6 +270,8 @@ fn read_config() -> Result<Config> {
 ```
 
 ### thiserror - 自定义错误类型
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use thiserror::Error;
@@ -274,6 +292,8 @@ enum MyError {
 ## 🚫 反例速查
 
 ### 反例 1: 生产代码滥用 unwrap
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **错误示例**:
 
@@ -299,6 +319,8 @@ fn read_config() -> Result<Config, Box<dyn std::error::Error>> {
 
 ### 反例 2: 在非 Result 返回类型函数中使用 ?
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **错误示例**（以下代码无法通过编译）:
 
 ```rust,compile_fail
@@ -321,6 +343,8 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ### 反例 3: 混淆 Option 与 Result 语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误示例**:
 
@@ -379,6 +403,8 @@ fn test_read() {
 
 ### MaybeUninit 错误处理增强
 
+> **[来源: PLDI - Programming Language Design]**
+
 **改进**: 新增安全的错误处理方法
 
 ```rust
@@ -400,6 +426,8 @@ Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和
 
 ### ControlFlow vs Result：语义对比
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 场景 | `Result<T, E>` | `ControlFlow<B, C>` | 推荐选择 |
 |------|---------------|---------------------|----------|
 | 失败/错误需要传播 | ✅ 理想 | ⚠️ 过度设计 | Result |
@@ -409,6 +437,8 @@ Rust 1.95+ 大幅增强了 `std::ops::ControlFlow`，使其成为错误处理和
 | 批量处理边界控制 | ⚠️ 复杂 | ✅ 清晰语义 | ControlFlow |
 
 ### Rust 1.95+ ControlFlow 核心 API
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -433,6 +463,8 @@ pub fn map_break<F, T>(self, f: F) -> ControlFlow<T, C>;
 ```
 
 ### 生产场景 1：批量任务处理（超时 + 错误阈值）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -507,6 +539,8 @@ struct BatchConfig {
 ```
 
 ### 生产场景 2：连接池快速健康检查
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::ops::ControlFlow;

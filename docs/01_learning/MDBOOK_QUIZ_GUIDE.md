@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 安装依赖
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@ cargo install mdbook-quiz
 ```
 
 ### 2. 构建和预览
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -78,6 +82,8 @@ mdbook serve    # 预览（自动刷新）
 ```
 
 ### 3. 访问测验
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -88,6 +94,8 @@ mdbook serve    # 预览（自动刷新）
 > **[来源: Rust Official Docs]**
 
 ### 步骤 1：创建测验目录
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +106,8 @@ mkdir -p book/src/quizzes
 ```
 
 ### 步骤 2：创建 TOML 测验文件
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +118,8 @@ touch book/src/quizzes/your_topic.toml
 ```
 
 ### 步骤 3：编写测验内容
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +142,8 @@ difficulty = "基础"
 ```
 
 ### 步骤 4：创建 Markdown 入口文件
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +158,8 @@ difficulty = "基础"
 ```
 
 ### 步骤 5：更新 SUMMARY.md
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

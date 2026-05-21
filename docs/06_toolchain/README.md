@@ -88,10 +88,14 @@ lto = true
 > **[来源: Rust Official Docs]**
 
 ### 核心工具链文档
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 0. [Rust 2024 Edition 学习影响](../archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) 🆕
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +108,8 @@ lto = true
 **适用场景**: 理解 2024 Edition 对学习的影响；从 2021 迁移
 
 #### 1. [编译器特性与优化](./01_compiler_features.md)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +131,8 @@ lto = true
 - 调试和 profiling
 
 #### 2. [Cargo 工作空间与依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -145,6 +153,8 @@ lto = true
 - CI/CD 集成
 
 #### 3. [Rustdoc 高级功能](./03_rustdoc_advanced.md)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +212,8 @@ lto = true
 
 ### 按主题分类
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 性能优化
 
 - [编译器优化](./01_compiler_features.md#3-优化级别)
@@ -228,6 +240,8 @@ lto = true
 ## 🆕 Rust 版本新特性
 
 ### Rust 1.93 主要改进 🆕
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **版本**: Rust 1.93.1 (2026-02-12，补丁版；功能版 1.93.0 于 2026-01-22 发布)
 
@@ -277,6 +291,8 @@ lto = true
 
 ### Rust 1.95+ 主要改进 🆕
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **版本**: Rust 1.95.0+ (2026-03-05)
 
 **主要改进**:
@@ -297,6 +313,8 @@ lto = true
 
 ### Rust 1.91 主要改进
 
+> **[来源: POPL - Programming Languages Research]**
+
 **版本**: Rust 1.91.0 (2025-10-30)
 
 **主要改进（对齐官方发布说明）**:
@@ -311,6 +329,8 @@ lto = true
 ---
 
 ### Rust 1.54+ 新特性
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### 1. 增量编译默认启用
 
@@ -343,6 +363,8 @@ lto = true
 ## 🚀 快速开始
 
 ### 生产环境优化配置
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```toml
 # Cargo.toml

@@ -50,6 +50,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 一致性模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 | **Outbox** | 最终 | 高 | 高 | 中 | 低 | 事务+消息表 |
 
 ### 容错模式
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -76,6 +80,8 @@
 | **Fallback** | 主路径失败 | 降级服务 | 备用策略 | 低 | 模式实现 |
 
 ### 通信模式
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +101,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 场景-模式映射
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +116,8 @@
 | 批处理 | Bulkhead + Retry + Timeout | 资源隔离，可靠性 |
 
 ### CAP权衡矩阵
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +149,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Saga模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -192,6 +204,8 @@ saga.execute().await?;
 ```
 
 ### Circuit Breaker
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

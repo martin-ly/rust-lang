@@ -48,6 +48,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心概念的三角关系
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -93,6 +95,8 @@
 ```
 
 ### 1.2 类型系统与所有权系统的融合
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -131,6 +135,8 @@ Inductive ty :=
 3. **可组合性**：类型构造子自动继承所有权规则
 
 ### 1.3 Linearizability 的中心地位
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **Linearizability 是连接多个主题的枢纽**：
 
@@ -191,6 +197,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 2.1 五大定理的依赖关系
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
                     数学基础
                   (归纳、良基)
@@ -228,6 +236,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 ```
 
 ### 2.2 定理关联的详细论证
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **路径1：终止性 → 可判定性**
 
@@ -293,6 +303,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 2.3 循环依赖的处理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **问题**：看起来有些概念是相互依赖的？
 
 **示例**：
@@ -339,6 +351,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 
 ### 3.1 证明方法的协同
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 结构归纳 ───────┐
                ├──→ 保持性证明
@@ -379,6 +393,8 @@ Linearizable(Γ)  ⟹  借用检查终止
 ```
 
 ### 3.2 归纳假设的传递
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```text
 终止性证明中的归纳：

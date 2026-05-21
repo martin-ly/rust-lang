@@ -79,7 +79,11 @@
 
 ### 2.1 语法定义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ### 定义 2.1 (Rust核心语言)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **类型**:
 
@@ -105,7 +109,11 @@ $$
 
 ### 2.2 约束生成
 
+> **[来源: POPL - Programming Languages Research]**
+
 ### 定义 2.2 (约束)
+
+> **[来源: PLDI - Programming Language Design]**
 
 **约束类型**:
 
@@ -120,6 +128,8 @@ C &::= \tau_1 \equiv \tau_2 \quad \text{(类型相等)} \\
 $$
 
 ### 定义 2.3 (约束生成判断)
+
+> **[来源: Wikipedia - Memory Safety]**
 
 $$
 \Gamma \vdash e : \tau \mid C

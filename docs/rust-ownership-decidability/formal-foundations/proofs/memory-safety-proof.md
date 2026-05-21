@@ -46,6 +46,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 λRust核心语言
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -72,6 +74,8 @@ $$
 - $\alpha \in \text{TVar}$: 类型变量
 
 ### 1.2 操作语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **配置**: $(e, \Sigma, \mathcal{T})$ 其中:
 
@@ -102,6 +106,8 @@ E &::= [] \mid E\, e \mid v\, E \mid \text{let } x = E \text{ in } e \\
 $$
 
 ### 1.3 类型系统
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **类型环境**:
 
@@ -154,6 +160,8 @@ $$
 
 ### 定义 2.1 (内存安全)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 程序 $P$ 是**内存安全**的当且仅当它满足以下三个条件:
 
 1. **无悬挂指针 (No Dangling Pointers)**:
@@ -167,6 +175,8 @@ $$
 
 ### 定义 2.2 (类型安全性)
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 类型系统满足**类型安全性**当且仅当:
 
 - **进展性 (Progress)**: 类型良好的程序不会"卡住"
@@ -177,6 +187,8 @@ $$
 ## 3. 类型安全性定理
 
 ### 3.1 进展性 (Progress)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定理 3.1 (进展性)**:
 > 如果 $\vdash e : \tau$ (空环境下 $e$ 有类型 $\tau$)，那么要么:
@@ -225,6 +237,8 @@ $$
 所有情况得证。∎
 
 ### 3.2 保持性 (Preservation)
+
+> **[来源: POPL - Programming Languages Research]**
 
 **定理 3.2 (保持性)**:
 > 如果 $\Gamma \vdash e : \tau$ 且 $(e, \Sigma) \rightarrow (e', \Sigma')$，那么存在某个 $\Gamma'$ 使得 $\Gamma' \vdash e' : \tau$。

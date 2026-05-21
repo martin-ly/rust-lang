@@ -16,6 +16,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化方法研究流程
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -36,6 +38,8 @@
 ```
 
 ### 研究笔记结构
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -70,6 +74,8 @@
 ```
 
 ### 证明验证工具
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

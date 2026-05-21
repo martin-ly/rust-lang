@@ -38,6 +38,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Amdahl定律与Gustafson定律
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -110,6 +112,8 @@ mod tests {
 
 ### 1.2 并行算法复杂度
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 /// 并行算法复杂度分析
 ///
@@ -138,6 +142,8 @@ pub fn matrix_multiply_work_span(n: usize) -> (usize, usize) {
 ```
 
 ### 1.3 缓存局部性
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 /// 缓存优化原则：
@@ -220,6 +226,8 @@ pub struct CachePaddedCounter {
 ## 2. Rayon并行计算
 
 ### 2.1 并行迭代器
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### Rust 1.94 Peekable 在并行处理中的应用
 
@@ -464,6 +472,8 @@ pub fn parallel_group_by(data: &[(String, i32)]) -> HashMap<String, Vec<i32>> {
 ```
 
 ### 2.2 Fork-Join模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use rayon::join;

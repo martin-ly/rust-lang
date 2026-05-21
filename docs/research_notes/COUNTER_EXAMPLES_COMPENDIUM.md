@@ -61,6 +61,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 反例 1.1: 使用已移动的值
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +123,8 @@ Move(x, y, v) 后:
 ---
 
 ### 反例 1.2: 部分移动后的使用
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +188,8 @@ let Person { name, age } = p;
 > **[来源: Rust Official Docs]**
 
 ### 反例 2.1: 可变借用与不可变借用冲突
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -242,6 +248,8 @@ until r₁ is dropped
 ---
 
 ### 反例 2.2: 多个可变借用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -291,6 +299,8 @@ let r2 = &mut x;
 ---
 
 ### 反例 2.3: 悬垂引用
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 

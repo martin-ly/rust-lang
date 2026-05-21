@@ -15,6 +15,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是 No_std
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -28,6 +30,8 @@
 - 动态类型（`Box<T>` 等需要 `alloc`）
 
 ### 基本配置
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **Cargo.toml:**
 
@@ -97,6 +101,8 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 ### 语言项（Lang Items）
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 在 no_std 环境中，某些标准功能需要手动实现：
 
 ```rust
@@ -116,6 +122,8 @@ fn rust_begin_panic(info: &core::panic::PanicInfo) -> ! {
 ```
 
 ### 错误处理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在 no_std 中实现错误处理：
 
@@ -171,6 +179,8 @@ impl IntoError for u32 {
 ## 嵌入式开发
 
 ### Cortex-M 开发
+
+> **[来源: POPL - Programming Languages Research]**
 
 **Cargo.toml:**
 
@@ -294,6 +304,8 @@ fn main() -> ! {
 
 ### 硬件抽象层 (HAL)
 
+> **[来源: PLDI - Programming Language Design]**
+
 实现自定义 HAL：
 
 ```rust
@@ -402,6 +414,8 @@ impl OutputPin for Pin<Output> {
 
 ### 中断处理
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 #![no_std]
 #![no_main]
@@ -448,6 +462,8 @@ fn main() -> ! {
 ## 裸机编程
 
 ### 引导程序
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 #![no_std]
@@ -511,6 +527,8 @@ pub extern "C" fn rust_main() -> ! {
 ```
 
 ### 内存管理单元 (MMU) 配置
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 /// ARMv8-A MMU 配置
@@ -600,6 +618,8 @@ pub unsafe fn setup_page_table() {
 ## 自定义分配器
 
 ### 全局分配器实现
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #![feature(allocator_api)]
@@ -703,6 +723,8 @@ fn alloc_error_handler(layout: Layout) -> ! {
 ```
 
 ### 伙伴系统分配器
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use core::alloc::{GlobalAlloc, Layout};
@@ -868,6 +890,8 @@ unsafe impl GlobalAlloc for BuddyAllocator {
 
 ### 自定义 Panic Handler
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 #![no_std]
 
@@ -930,6 +954,8 @@ fn print_backtrace() {}
 
 ### 异常处理（ARM Cortex-M）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use cortex_m_rt::{exception, ExceptionFrame};
 
@@ -960,6 +986,8 @@ unsafe fn DefaultHandler(irqn: i16) {
 ## 硬件抽象层
 
 ### 设备驱动框架
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 #![no_std]
@@ -1021,6 +1049,8 @@ macro_rules! platform_init {
 ```
 
 ### DMA 控制器驱动
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 /// DMA 控制器

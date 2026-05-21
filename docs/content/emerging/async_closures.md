@@ -68,6 +68,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 当前的问题
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -87,6 +89,8 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 ```
 
 ### 动机
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +131,8 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### 基础语法
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +160,8 @@ fn main() {
 ```
 
 ### 捕获模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +201,8 @@ async fn capture_examples() {
 ```
 
 ### 与 async move 对比
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -229,6 +239,8 @@ fn new_way() -> impl async FnOnce() -> i32 {
 > **[来源: Rust Official Docs]**
 
 ### 回调函数
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -286,6 +298,8 @@ async fn example() {
 
 ### 事件处理器
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 #![feature(async_closure)]
 
@@ -327,6 +341,8 @@ async fn websocket_server() {
 ```
 
 ### 中间件链
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #![feature(async_closure)]
@@ -426,6 +442,8 @@ async fn middleware_example() {
 ## 🔍 实现细节
 
 ### AsyncFn Trait
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 简化表示

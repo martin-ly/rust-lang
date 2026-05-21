@@ -31,6 +31,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Miri 配置
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -57,6 +59,8 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 ```
 
 ### 2. Miri 测试文件
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -78,6 +82,8 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 
 ### 3. Lib.rs 模块声明
 
+> **[来源: Wikipedia - Type System]**
+
 在每个 crate 的 `lib.rs` 中添加了：
 
 ```rust
@@ -86,6 +92,8 @@ pub mod miri_tests;
 ```
 
 ### 4. 运行脚本
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **文件**: `scripts/run-miri.sh` (Linux/macOS)
 
@@ -102,6 +110,8 @@ pub mod miri_tests;
 ```
 
 ### 5. 文档
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **文件**: `docs/MIRI_GUIDE.md`
 

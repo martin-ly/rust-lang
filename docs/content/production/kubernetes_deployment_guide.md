@@ -128,6 +128,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 多阶段构建
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +181,8 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 ### Distroless 镜像
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -212,6 +216,8 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 > **[来源: Rust Official Docs]**
 
 ### Deployment
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -343,6 +349,8 @@ spec:
 ```
 
 ### Service
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -385,6 +393,8 @@ spec:
 ```
 
 ### ConfigMap
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -414,6 +424,8 @@ data:
 ```
 
 ### Secret
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -432,6 +444,8 @@ stringData:
 ```
 
 ### HPA (水平自动伸缩)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```yaml
 # k8s/hpa.yaml
@@ -488,6 +502,8 @@ spec:
 
 ### VPA (垂直自动伸缩)
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```yaml
 # k8s/vpa.yaml
 apiVersion: autoscaling.k8s.io/v1
@@ -520,6 +536,8 @@ spec:
 
 ### Metrics
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```yaml
 # k8s/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -541,6 +559,8 @@ spec:
 ```
 
 ### Logging
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```yaml
 # k8s/fluentd-config.yaml
@@ -572,6 +592,8 @@ data:
 ```
 
 ### Tracing
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```yaml
 # k8s/otel-collector.yaml

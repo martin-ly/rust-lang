@@ -76,7 +76,7 @@
 > **[来源: Rust Official Docs]**
 
 - [学习路径规划文档](#学习路径规划文档)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🎯 学习路径分类](#-学习路径分类)
@@ -152,6 +152,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 路径 1: 完全新手（0 基础）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -184,6 +186,8 @@
 ---
 
 ### 路径 2: 有编程经验（其他语言）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -230,6 +234,8 @@
 ---
 
 ### 路径 3: 中级开发者（有 Rust 基础）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -282,6 +288,8 @@
 ---
 
 ### 路径 4: 高级开发者（专家级）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -329,6 +337,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 进度检查清单
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

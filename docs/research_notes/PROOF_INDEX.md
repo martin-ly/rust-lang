@@ -200,10 +200,14 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权与借用
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 所有权模型形式化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +268,8 @@
     - **证明位置**: [ownership_model.md](./formal_methods/ownership_model.md)
 
 #### 借用检查器证明
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -323,6 +329,8 @@
 ---
 
 ### 生命周期
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -356,6 +364,8 @@
 ---
 
 ### 类型系统
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -417,6 +427,8 @@
 
 ### 异步状态机与 Pin
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 异步状态机形式化
 
 **文档**: [async_state_machine.md](./formal_methods/async_state_machine.md)
@@ -464,6 +476,8 @@
    - **证明位置**: [pin_self_referential.md](./formal_methods/pin_self_referential.md)
 
 ### 类型理论扩展
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### Trait 系统形式化
 
@@ -717,6 +731,8 @@
 ## 🔬 按证明类型分类 {#-按证明类型分类}
 
 ### 唯一性证明
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - ✅ **所有权唯一性** `L2` ([ownership_model.md](./formal_methods/ownership_model.md#定理-2-所有权唯一性)、[CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) §2)
   - 方法：结构归纳法

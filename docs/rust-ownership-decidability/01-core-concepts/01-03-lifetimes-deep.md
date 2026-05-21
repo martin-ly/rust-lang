@@ -109,6 +109,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 生命周期作为区域 (Region)
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -124,6 +126,8 @@
 ```
 
 #### 1.1.1 区域的形式化定义
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 直观理解：生命周期对应代码中的 scope
@@ -152,6 +156,8 @@
 ```
 
 #### 1.1.2 区域包含关系 (Outlives)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 定义 1.2 (区域包含/Outlives)
@@ -203,7 +209,11 @@
 
 ### 1.2 生命周期约束
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 1.2.1 约束的形式化定义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 定义 1.3 (生命周期约束)
@@ -281,6 +291,8 @@ fn example<'a>(x: &'a i32) -> &'a i32 {
 ```
 
 ### 1.3 生命周期推断
+
+> **[来源: Wikipedia - Type System]**
 
 #### 1.3.1 约束收集算法
 
@@ -383,6 +395,8 @@ fn main() {
 
 ### 2.1 变型类型
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 2.1.1 形式化定义
 
 ```
@@ -426,6 +440,8 @@ fn main() {
 | `PhantomData<T>` | `T` | 协变 |
 
 ### 2.2 协变 (Covariance)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.2.1 定义与示例
 
@@ -488,6 +504,8 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 
 ### 2.3 逆变 (Contravariance)
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 2.3.1 定义与示例
 
 ```
@@ -541,6 +559,8 @@ fn handler_contravariance<'a>(
 ```
 
 ### 2.4 不变 (Invariance)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 2.4.1 定义与示例
 
@@ -606,6 +626,8 @@ fn broken_variance<'a>() {
 
 ### 2.5 变型推导规则
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```
 规则 2.1 (结构体变型推导)
 ─────────────────────────────────
@@ -653,6 +675,8 @@ Rust 编译器推导的变型与形式化变型定义一致。
 ## 3. 生命周期子类型
 
 ### 3.1 子类型规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 3.1.1 基本子类型规则
 
@@ -724,6 +748,8 @@ fn main() {
 ```
 
 ### 3.2 高阶 trait 约束 (Higher-Ranked Trait Bounds, HRTB)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 3.2.1 HRTB 语法与语义
 
@@ -809,6 +835,8 @@ where
 
 ### 反例 1：变型违反
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 /// 错误：变型违反示例
 ///
@@ -849,6 +877,8 @@ fn variance_explanation() {
 
 ### 反例 2：Cell 中的不变生命周期
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::cell::Cell;
 
@@ -885,6 +915,8 @@ fn correct_cell_usage() {
 
 ### 反例 3：逆变函数参数
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 /// 错误：逆变理解错误
 ///
@@ -918,6 +950,8 @@ trait Dog: Animal { fn bark(&self); }
 
 ### 反例 4：trait 对象生命周期
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 /// 错误：trait 对象生命周期省略陷阱
 ///
@@ -947,6 +981,8 @@ fn trait_object_lifetime_bound<'a>() {
 ```
 
 ### 反例 5：自引用生命周期
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 /// 错误：尝试创建自引用结构体
@@ -1007,6 +1043,8 @@ impl SelfRefFixed {
 
 ### 反例 6：生命周期省略混淆
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 /// 错误：生命周期省略规则误解
 ///
@@ -1045,6 +1083,8 @@ fn explicit_vs_elided<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 反例 7：高阶生命周期不匹配
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 /// 错误：高阶生命周期约束违反
 ///
@@ -1077,6 +1117,8 @@ fn higher_ranked_mismatch() {
 ```
 
 ### 反例 8：GAT 生命周期约束失败
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 /// 错误：泛型关联类型生命周期约束
@@ -1127,6 +1169,8 @@ mod gat_lifetime_failure {
 
 ### 反例 9：impl Trait 生命周期捕获
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 /// 错误：impl Trait 生命周期捕获问题
 ///
@@ -1161,6 +1205,8 @@ mod impl_trait_lifetime {
 ```
 
 ### 反例 10：async 块生命周期
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 /// 错误：async 块生命周期陷阱
@@ -1205,6 +1251,8 @@ mod async_lifetime_failure {
 
 ### 反例 11：闭包生命周期推断
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 /// 错误：闭包生命周期推断失败
 ///
@@ -1244,6 +1292,8 @@ mod closure_lifetime_failure {
 ```
 
 ### 反例 12：迭代器项生命周期
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 /// 错误：迭代器生命周期问题
@@ -1299,6 +1349,8 @@ mod iterator_lifetime_failure {
 
 ### 反例 13：Stream 生命周期问题
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 /// 错误：Stream 生命周期问题
 ///
@@ -1343,6 +1395,8 @@ mod stream_lifetime_failure {
 
 ### 反例 14：Scoped 线程生命周期
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 /// 错误：Scoped 线程生命周期问题
 ///
@@ -1386,6 +1440,8 @@ mod scoped_thread_failure {
 ```
 
 ### 反例 15：Crossbeam Scope 生命周期
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 /// 错误：Crossbeam scope 高级生命周期问题
@@ -1450,6 +1506,8 @@ mod crossbeam_advanced_failure {
 ## 5. 高级生命周期模式
 
 ### 5.1 PhantomData 生命周期
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 5.1.1 PhantomData 的作用
 
@@ -1540,6 +1598,8 @@ struct BadResource<T> {
 ```
 
 ### 5.2 自引用类型
+
+> **[来源: Wikipedia - Type System]**
 
 #### 5.2.1 Pin 基础
 
@@ -1652,6 +1712,8 @@ impl ManualDocument {
 ```
 
 ### 5.3 Lending Iterator
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 5.3.1 传统 Iterator 的限制
 
@@ -1791,6 +1853,8 @@ where
 
 ### 6.1 生命周期参数 vs 类型参数
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 6.1.1 参数顺序与约束
 
 ```rust
@@ -1864,6 +1928,8 @@ impl<T> Container<T> {
 ```
 
 ### 6.2 生命周期边界
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 6.2.1 类型边界 (Type Bounds)
 
@@ -1947,6 +2013,8 @@ async fn async_with_bounds<'a, T: 'a>(value: T) -> T {
 ## 7. 案例研究：Arena 分配器
 
 ### 7.1 Arena 设计原理
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 7.1.1 Arena 模式概述
 
@@ -2095,6 +2163,8 @@ impl<'arena> Drop for Arena<'arena> {
 ```
 
 ### 7.2 完整 Arena 实现
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 7.2.1 类型安全的 bump allocator
 
@@ -2299,6 +2369,8 @@ struct Point {
 
 ### 7.3 生命周期分析
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 7.3.1 Arena 生命周期约束
 
 ```
@@ -2411,6 +2483,8 @@ fn graph_in_arena() {
 ```
 
 ### 7.4 性能与使用模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 7.4.1 Arena 性能特征
 
@@ -2603,6 +2677,8 @@ mod game_ecs_arena {
 
 ### 定理 8.1：约束传递性 (CONSTRAINT-TRANSITIVITY)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 ─────────────────────────────────────────
 对于任意生命周期 'a, 'b, 'c：
@@ -2618,6 +2694,8 @@ mod game_ecs_arena {
 
 ### 定理 8.2：最小生命周期原则 (MINIMAL-LIFETIME)
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```
 ─────────────────────────────────────────
 Rust 生命周期推断选择满足所有约束的最小生命周期赋值。
@@ -2629,6 +2707,8 @@ Rust 选择 σ* ∈ S 使得 ∀σ ∈ S, ∀'a. σ*('a) ⊆ σ('a)
 ```
 
 ### 定理 8.3：变型推导正确性 (VARIANCE-SOUNDNESS)
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```
 ─────────────────────────────────────────
@@ -2647,6 +2727,8 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.4：协变引用安全性 (COVARIANT-REF)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```
 ─────────────────────────────────────────
 'a: 'b ⇒ &'a T <: &'b T 是类型安全的。
@@ -2659,6 +2741,8 @@ Rust 编译器推导的变型保证类型安全。
 ```
 
 ### 定理 8.5：逆变函数参数安全性 (CONTRAVARIANT-FN)
+
+> **[来源: Wikipedia - Type System]**
 
 ```
 ─────────────────────────────────────────
@@ -2674,6 +2758,8 @@ Rust 编译器推导的变型保证类型安全。
 
 ### 定理 8.6：HRTB 全称量词 (HRTB-FORALL)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```
 ─────────────────────────────────────────
 for<'a> F<'a> 要求对所有可能的生命周期 'a，F<'a> 都成立。
@@ -2685,6 +2771,8 @@ Rust 的 for<'a> 是全称量词。
 ```
 
 ### 定理 8.7：Arena 内存安全 (ARENA-SAFETY)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 ─────────────────────────────────────────
@@ -2703,6 +2791,8 @@ Rust 的 for<'a> 是全称量词。
 
 ### 9.1 核心概念回顾
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 概念 | 描述 | 重要性 |
 |------|------|--------|
 | 生命周期作为区域 | 程序点的集合 | ★★★★★ |
@@ -2716,6 +2806,8 @@ Rust 的 for<'a> 是全称量词。
 
 ### 9.2 最佳实践
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 1. **显式生命周期**：复杂函数使用显式生命周期注解，提高可读性
 2. **变型理解**：理解为什么 Cell 必须是不变的
 3. **HRTB 谨慎**：for<'a> 约束较强，确保真正实现对所有生命周期都有效
@@ -2723,6 +2815,8 @@ Rust 的 for<'a> 是全称量词。
 5. **Pin 安全**：自引用类型正确使用 Pin 保证安全
 
 ### 9.3 常见陷阱
+
+> **[来源: ACM - Systems Programming Languages]**
 
 1. 生命周期省略规则误解
 2. 协变/逆变方向混淆

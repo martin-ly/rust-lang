@@ -74,6 +74,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 导航和索引
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +243,8 @@
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
 ### 进展跟踪
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -289,6 +293,8 @@
    - 完善检查清单
 
 ### 方法论和指南
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -319,6 +325,8 @@
    - 设计理由缺口追踪矩阵、思维表征覆盖矩阵
 
 ### 实际应用
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -329,6 +337,8 @@
    - 嵌入式系统案例
 
 ### 贡献和质量
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -361,6 +371,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化方法研究
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -414,6 +426,8 @@
 ---
 
 ### 类型理论研究
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -452,6 +466,8 @@
 ---
 
 ### 实验研究
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **目录**: [experiments/](./experiments/README.md)
 

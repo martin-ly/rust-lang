@@ -49,6 +49,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本语法
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@ say_hello!();  // 展开: println!("Hello!");
 ```
 
 ### 参数模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +88,8 @@ print_value!(1, 2);
 ```
 
 ### 重复模式
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -105,6 +111,8 @@ vec![1, 2, 3,];  // 带结尾逗号
 ```
 
 ### 常见片段类型
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -128,6 +136,8 @@ vec![1, 2, 3,];  // 带结尾逗号
 > **[来源: Rust Official Docs]**
 
 ### 派生宏
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +159,8 @@ struct MyStruct;
 ```
 
 ### 属性宏
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +179,8 @@ fn my_func() {}
 ```
 
 ### 函数式宏
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +202,8 @@ my_macro!(...);
 > **[来源: Rust Official Docs]**
 
 ### vec
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +215,8 @@ let v = vec![0; 5];  // [0, 0, 0, 0, 0]
 
 ### println! / format
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 println!("Hello");
 println!("{}", value);
@@ -208,6 +226,8 @@ println!("{:>8}", text);   // 右对齐，宽度8
 ```
 
 ### assert
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 assert!(condition);

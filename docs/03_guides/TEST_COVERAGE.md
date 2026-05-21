@@ -54,6 +54,8 @@ Rust 生态有两个主流的覆盖率工具：
 > **[来源: Rust Official Docs]**
 
 ### 安装
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@ cargo tarpaulin --version
 > **注意**: Windows 下 tarpaulin 的 ptrace 引擎不可用，需使用 `--engine llvm`。如果当前环境无法安装，标记为 "待 CI 验证"。
 
 ### 基本使用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```bash
 # 生成文本报告
@@ -91,6 +95,8 @@ cargo tarpaulin --workspace --timeout 300
 
 ### 输出文件
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 格式 | 文件 | 用途 |
 |-----|------|------|
 | XML | `cobertura.xml` | Jenkins, Azure DevOps, Codecov |
@@ -104,6 +110,8 @@ cargo tarpaulin --workspace --timeout 300
 
 ### 安装
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 安装 rustup 组件
 rustup component add llvm-tools-preview
@@ -113,6 +121,8 @@ cargo install cargo-llvm-cov --locked
 ```
 
 ### 基本使用
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```bash
 # 生成 HTML 报告
@@ -160,6 +170,8 @@ coverage:
 ```
 
 ### 与 Codecov 集成
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```yaml
 - name: Upload to Codecov

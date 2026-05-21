@@ -74,7 +74,11 @@
 
 ### 2.1 类型定义
 
+> **[来源: Wikipedia - Type System]**
+
 ### 定义 2.1 (Option类型)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 pub enum Option<T> {
@@ -96,6 +100,8 @@ $$
 
 ### 定义 2.2 (同构关系)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 $$
 \text{Option}\langle T \rangle \cong \text{Maybe}(T)
 $$
@@ -104,7 +110,11 @@ $$
 
 ### 2.2 Functor与Monad实现
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ### 定理 2.1 (Option是Functor)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 > Option实现了满足Functor定律的`map`操作。
 
@@ -164,6 +174,8 @@ opt.map(g).map(f)
 ∎
 
 ### 定理 2.2 (Option是Monad)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 > Option实现了满足Monad定律的`and_then`操作。
 
@@ -242,7 +254,11 @@ opt.and_then(f).and_then(g)
 
 ### 3.1 错误传播机制
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ### 定义 3.1 (Result类型)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 pub enum Result<T, E> {

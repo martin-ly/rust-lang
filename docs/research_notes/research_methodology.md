@@ -124,6 +124,8 @@
 本研究旨在建立 Rust 研究的方法论体系，为 Rust 相关研究提供系统化的方法指导。
 
 ### 核心问题
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +134,8 @@
 3. **质量保证**: 如何保证研究的质量和可靠性？
 
 ### 预期成果
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +166,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 形式化研究方法
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -185,6 +191,8 @@
 **优势**: 严格的数学证明，保证正确性
 
 ### 2. 实验研究方法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +216,8 @@
 **优势**: 客观的数据支持，可重复验证
 
 ### 3. 实证研究方法
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

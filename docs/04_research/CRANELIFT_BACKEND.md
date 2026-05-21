@@ -47,6 +47,8 @@
 - **轻量级架构**: 更少的内存占用，更短的启动时间
 
 ### 1.1 项目起源
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

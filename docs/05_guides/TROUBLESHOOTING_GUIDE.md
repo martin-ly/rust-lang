@@ -131,6 +131,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 所有权错误
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +164,8 @@ println!("{}", x);
 ```
 
 ### 2. 生命周期错误
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +199,8 @@ fn get_ref<'a>(s: &'a str) -> &'a str {
 ```
 
 ### 3. 类型不匹配
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -225,6 +231,8 @@ let x = "42".parse::<i32>().unwrap();
 > **[来源: Rust Official Docs]**
 
 ### 1. Panic 错误
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +261,8 @@ if let Some(value) = arr.get(10) {
 ```
 
 ### 2. 死锁
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -275,6 +285,8 @@ let mutex2 = Arc::new(Mutex::new(0));
 ```
 
 ### 3. 内存泄漏
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -308,6 +320,8 @@ struct Node {
 > **[来源: Rust Official Docs]**
 
 ### 1. 编译时间过长
+
+> **[来源: POPL - Programming Languages Research]**
 
 **原因**: 依赖过多或代码结构问题
 

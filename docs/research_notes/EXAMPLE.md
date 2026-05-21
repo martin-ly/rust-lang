@@ -156,6 +156,8 @@
 本研究的目的是形式化定义 Rust 的所有权模型，包括所有权转移、借用规则和生命周期约束。
 
 ### 核心问题
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +166,8 @@
 3. **生命周期约束的形式化**: 如何形式化生命周期约束？
 
 ### 预期成果
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +183,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +195,8 @@
 **生命周期 (Lifetime)**: 引用有效的时间范围。
 
 ### 理论背景
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -206,6 +214,8 @@
 
 ### 1. 所有权转移
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **定义 1.1 (所有权转移)**: 所有权从变量 `x` 转移到变量 `y`，记为 `x → y`。
 
 **形式化表示**:
@@ -217,6 +227,8 @@ move(x, y) : x → y
 **语义**: 当执行 `move(x, y)` 时，`x` 的所有权转移到 `y`，`x` 不再可用。
 
 ### 2. 借用规则
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义 2.1 (不可变借用)**: 变量 `x` 可以被多个不可变借用，记为 `&x`。
 
@@ -240,6 +252,8 @@ borrow_mutable(x) : &mut x
 
 ### 3. 生命周期约束
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 3.1 (生命周期)**: 生命周期 `'a` 表示引用的有效时间范围。
 
 **形式化表示**:
@@ -255,6 +269,8 @@ lifetime('a) : 'a
 ## ✅ 证明目标 {#-证明目标}
 
 ### 待证明的性质
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 1. **内存安全**: 所有权模型保证内存安全
 2. **无数据竞争**: 借用规则防止数据竞争

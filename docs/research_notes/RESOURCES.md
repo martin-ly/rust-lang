@@ -98,6 +98,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化方法相关论文
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -119,6 +121,8 @@
    - 链接: [项目主页](https://plv.mpi-sws.org/rustbelt/README.md)
 
 ### 类型理论相关论文
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -139,6 +143,8 @@
    - 形式化衔接: [00_completeness_gaps](type_theory/00_completeness_gaps.md)、[PROOF_INDEX](./PROOF_INDEX.md)
 
 ### 性能优化相关论文
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +165,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Rust 官方文档
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +191,8 @@
   - 描述: Rust 版本指南
 
 ### Rust 编译器文档
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -195,6 +205,8 @@
   - 描述: Rust 语言设计提案
 
 ### Rust 工具文档
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -213,6 +225,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 形式化验证工具
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

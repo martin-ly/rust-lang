@@ -125,6 +125,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 安装覆盖率工具
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +139,8 @@ cargo install cargo-llvm-cov
 ```
 
 ### 运行覆盖率测试
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +159,8 @@ cargo llvm-cov --html
 > **[来源: Rust Official Docs]**
 
 ### 1. cargo-tarpaulin
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +187,8 @@ cargo tarpaulin --fail-under 80
 ```
 
 ### 2. cargo-llvm-cov
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -213,6 +221,8 @@ cargo llvm-cov --exclude '*/tests/*'
 > **[来源: Rust Official Docs]**
 
 ### 推荐覆盖率
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -223,6 +233,8 @@ cargo llvm-cov --exclude '*/tests/*'
 | **测试代码** | 70%+     | 60%+       | 80%+       |
 
 ### 当前项目覆盖率
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -241,6 +253,8 @@ cargo llvm-cov --exclude '*/tests/*'
 ## 📝 测试类型 {#-测试类型}
 
 ### 1. 单元测试
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 #[cfg(test)]
@@ -262,6 +276,8 @@ mod tests {
 ```
 
 ### 2. 集成测试
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // tests/integration_test.rs

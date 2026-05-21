@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 维护者角色
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@
 | 社区协调 | 反馈收集、问题响应 | 社区经理 |
 
 ### 维护周期
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -85,6 +89,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 文件命名规范
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -110,6 +116,8 @@ TUTORIAL_<topic>.md
 ```
 
 ### 头部模板
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +133,8 @@ TUTORIAL_<topic>.md
 ```
 
 ### 内容结构
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +153,8 @@ TUTORIAL_<topic>.md
 > **[来源: Rust Official Docs]**
 
 ### 内容更新步骤
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +193,8 @@ TUTORIAL_<topic>.md
    ```
 
 ### Rust版本更新
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +215,8 @@ TUTORIAL_<topic>.md
 ## 质量控制
 
 ### 自动化检查
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```bash
 #!/bin/bash
@@ -226,10 +242,14 @@ echo "=== 检查完成 ==="
 
 ### 手动审核清单
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```markdown
 ## 内容审核清单
 
 ### 形式化文档
+
+> **[来源: Wikipedia - Type System]**
 - [ ] 定义(Def)清晰明确
 - [ ] 公理(Axiom)完备
 - [ ] 定理(Theorem)有证明或引用

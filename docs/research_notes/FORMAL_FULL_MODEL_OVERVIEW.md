@@ -74,6 +74,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 核心机制与公理层
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +94,8 @@
 | **变量** | Def 1.4 绑定、Def 1.5 遮蔽 | [ownership_model](./formal_methods/ownership_model.md) |
 
 ### 1.2 定理依赖 DAG（简化）
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```text
                     [公理层]
@@ -122,6 +126,8 @@
 
 ### 1.3 域间定理推导链（显式）
 
+> **[来源: Wikipedia - Type System]**
+
 | 推导链 | 依赖 | 结论 |
 | :--- | :--- | :--- |
 | ownership T2 → borrow T1 | 所有权唯一性 ⇒ 借用互斥 | 数据竞争自由 |
@@ -131,6 +137,8 @@
 | send_sync SEND-T1/SYNC-T1 → async T6.2、SPAWN-T1 | 跨线程转移/共享安全 ⇒ 并发安全 | 与 borrow T1 一致、spawn/Future 数据竞争自由 |
 
 ### 1.4 公理→组合定理 DAG（支柱 1+3 衔接）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 [支柱 1 公理层]
@@ -164,6 +172,8 @@
 ## 二、公理列表（统一编号）
 
 ### 2.1 内存与所有权
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 编号 | 内容 | 来源 |
 | :--- | :--- | :--- |

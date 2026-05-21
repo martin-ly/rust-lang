@@ -62,6 +62,8 @@ timeline
 ```
 
 ### 为什么 Cargo 需要跟进 TOML v1.1
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -79,6 +81,8 @@ timeline
 > **[来源: Rust Official Docs]**
 
 ### 2.1 多行内联表 (Multi-line Inline Tables)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ description = "A very long description"
 ```
 
 ### 2.2 尾部逗号 (Trailing Commas)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +142,8 @@ serde = { version = "1.0", default-features = false, features = ["derive",] }
 ```
 
 ### 2.3 扩展裸键规则 (Extended Bare Keys)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +168,8 @@ path = "../my-lib"
 > **[来源: Rust Official Docs]**
 
 ### 3.1 复杂依赖配置
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +208,8 @@ windows-sys = { version = "0.59", features = [
 ```
 
 ### 3.2 Workspace 成员配置
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

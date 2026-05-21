@@ -40,6 +40,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 系统信息
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -54,6 +56,8 @@
 | **验证代码** | 120,000行 |
 
 ### 安全要求
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -71,6 +75,8 @@ SIL 4系统要求:
 > **[来源: Rust Official Docs]**
 
 ### 硬件架构: 2x2取2
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +107,8 @@ SIL 4系统要求:
 ```
 
 ### 软件架构
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -562,6 +570,8 @@ pub mod types {
 > **[来源: Rust Official Docs]**
 
 ### 多样性实现
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

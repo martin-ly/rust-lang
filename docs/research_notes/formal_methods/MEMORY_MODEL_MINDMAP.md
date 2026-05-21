@@ -188,6 +188,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 栈 vs 堆
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -201,6 +203,8 @@ mindmap
 | 适用 | 小对象、已知大小 | 大对象、动态大小、长生命周期 |
 
 ### 内存布局示例
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +228,8 @@ static GLOBAL: i32 = 42;     // 静态区:4字节
 > **[来源: Rust Official Docs]**
 
 ### 所有权转移的内存视角
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +244,8 @@ let n2 = n1;    // Copy类型，栈值复制
 ```
 
 ### Drop trait与资源释放
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -279,6 +287,8 @@ struct Resource {
 > **[来源: Rust Official Docs]**
 
 ### 使用场景决策
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -292,6 +302,8 @@ struct Resource {
 | 延迟初始化 | `LazyCell<T>` | 首次访问初始化 |
 
 ### 性能对比
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -308,6 +320,8 @@ struct Resource {
 ## Unsafe内存操作
 
 ### 安全抽象边界
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 安全封装unsafe内部实现

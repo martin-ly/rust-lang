@@ -44,6 +44,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 证明技术全景
 >
@@ -76,6 +77,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 结构归纳法 (Structural Induction)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -101,6 +104,8 @@ Theorem expr_induction :
 - T-BR1: 对借用生命周期进行归纳
 
 ### 1.2 数学归纳法 (Mathematical Induction)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -429,7 +434,6 @@ Lemma substitution :
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

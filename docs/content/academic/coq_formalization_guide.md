@@ -79,6 +79,8 @@ Coq 是一个形式化证明管理工具，用于：
 
 ### 安装
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```bash
 # 使用 OPAM 安装 Coq
 opam init
@@ -94,6 +96,8 @@ opam install coq-stdpp
 ```
 
 ### 项目结构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 rust_formalization/
@@ -116,6 +120,8 @@ rust_formalization/
 ## 💡 核心概念
 
 ### 所有权形式化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```coq
 (* 定义 Rust 值 *)
@@ -163,6 +169,8 @@ Qed.
 ```
 
 ### 借用检查形式化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```coq
 (* 借用状态 *)

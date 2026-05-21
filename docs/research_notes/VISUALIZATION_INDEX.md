@@ -107,6 +107,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 任务关系网络图
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -134,6 +136,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 任务类型对比矩阵
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -151,6 +155,8 @@
 - 资源分配决策
 
 ### 2. 任务完成策略对比矩阵
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@
 - 平衡质量和速度
 
 ### 3. 工具选择对比矩阵
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +199,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 任务优先级决策树
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

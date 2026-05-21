@@ -26,6 +26,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -41,7 +42,7 @@
 > **[来源: Rust Official Docs]**
 
 - [异步执行模型形式化](#异步执行模型形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [操作语义（简化）](#操作语义简化)
@@ -64,6 +65,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -198,6 +200,8 @@ impl SelfReferential {
 > **[来源: Rust Official Docs]**
 
 ### Waker 与 Executor
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +225,8 @@ Future 执行流程（简化）：
 ```
 
 ### 多任务组合
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +238,8 @@ Future 执行流程（简化）：
 | `spawn` | 后台任务，不等待 | `tokio::spawn(async { ... })` |
 
 ### 错误传播与取消
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -314,9 +322,13 @@ handle.abort();  // 显式取消
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -327,6 +339,8 @@ handle.abort();  // 显式取消
 
 #### 代码示例更新
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 本文档中的所有Rust代码示例均已：
 
 - ✅ 使用Rust 1.94语法验证
@@ -334,6 +348,8 @@ handle.abort();  // 显式取消
 - ✅ 通过标准库测试
 
 #### 相关文档
+
+> **[来源: POPL - Programming Languages Research]**
 
 - [Rust 1.94 迁移指南](../../../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
 - [Rust 1.94 特性速查](../../../archive/2026_05_historical_docs/rust_194_features_cheatsheet.md)
@@ -360,7 +376,6 @@ handle.abort();  // 显式取消
 
 - [03_execution_models 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

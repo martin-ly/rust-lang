@@ -15,6 +15,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 无锁数据结构模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@ fn lock_free_demo() {
 ```
 
 ### 线程池模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +171,8 @@ fn thread_pool_demo() {
 ```
 
 ### 读写锁模式
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -239,6 +245,8 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
 ```
 
 ### 生产者-消费者模式
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

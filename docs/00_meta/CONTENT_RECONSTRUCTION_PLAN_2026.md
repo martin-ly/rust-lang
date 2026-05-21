@@ -51,6 +51,8 @@
 每篇核心知识文档必须包含以下 10 个模块。缺失任一模块视为"未完成"。
 
 ### 模块 1: 概念定义（Concept Definition）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +69,8 @@
 - 形式化直觉："Affine Type System 的 Rust 实现：每个值至少有一个 owner，至多有一个 owner，owner 离开作用域时析构"
 
 ### 模块 2: 属性清单（Property Inventory）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -77,6 +81,8 @@
 | e.g. `Copy` 的传递性 | 关系属性 | bool | 仅当所有字段都实现 Copy | `struct Wrapper(String)` 不实现 Copy |
 
 ### 模块 3: 概念依赖图（Concept Dependency Graph）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -94,6 +100,8 @@ graph TD
 ```
 
 ### 模块 4: 机制解释（Mechanistic Explanation）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -104,6 +112,8 @@ graph TD
 - **运行时视角**：vtable 布局、monomorphization 结果、零成本抽象的物理含义
 
 ### 模块 5: 正例集（Positive Examples）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +124,8 @@ graph TD
 3. **Production-grade**：包含错误处理、边界条件、性能考量
 
 ### 模块 6: 反例集（Counterexamples & Anti-patterns）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +138,8 @@ graph TD
 5. **抽象原则**（从该反例提炼出的通用模式）
 
 ### 模块 7: 思维表征套件（Multi-modal Representations）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -142,6 +156,8 @@ graph TD
 
 ### 模块 8: 国际化对齐（International Alignment）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **要求**：每篇文档建立"权威来源映射"
 
 - **官方来源**：Rust Book 章节、Reference 条目、RFC 编号
@@ -150,6 +166,8 @@ graph TD
 - **跨语言对比**：与 C++/Haskell/Ada/Go 的同质概念对比（如适用）
 
 ### 模块 9: 设计权衡分析（Trade-off Analysis）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +178,8 @@ graph TD
 3. 什么场景下这个设计是次优的？（承认限制，而非盲目推崇）
 
 ### 模块 10: 自我检测与练习（Self-assessment）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 

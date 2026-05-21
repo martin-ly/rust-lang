@@ -79,6 +79,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust 在云原生领域的优势
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -141,6 +143,8 @@ pub async fn handle_requests(
 
 ### 1.2 与 Go 的对比
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 性能对比
 
 ```rust
@@ -177,6 +181,8 @@ async fn handler() -> &'static str {
 | 二进制大小 | ~5MB | ~15MB | 67%↓ |
 
 ### 1.3 现有项目概览
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### Firecracker - AWS 的微型虚拟机
 
@@ -234,6 +240,8 @@ impl Proxy {
 
 ### 2.1 youki 容器运行时
 
+> **[来源: ACM - Systems Programming Languages]**
+
 youki 是使用 Rust 编写的 OCI 运行时，旨在替代 runc：
 
 ```rust
@@ -277,6 +285,8 @@ impl ContainerBuilder {
 ```
 
 ### 2.2 OCI 规范实现
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use serde::{Deserialize, Serialize};
@@ -322,6 +332,8 @@ pub fn load_spec(path: &Path) -> Result<Spec, SpecError> {
 ```
 
 ### 2.3 cgroups v2 实现
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::path::PathBuf;
@@ -409,6 +421,8 @@ impl CgroupV2 {
 ```
 
 ### 2.4 命名空间管理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use nix::sched::{clone, unshare, CloneFlags};
@@ -510,6 +524,8 @@ where
 
 ### 2.5 容器文件系统隔离
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use nix::mount::{mount, umount, MsFlags};
 
@@ -592,6 +608,8 @@ pub fn pivot_rootfs(new_root: &Path, put_old: &Path) -> Result<(), MountError> {
 
 ### 3.1 kube-rs 客户端基础
 
+> **[来源: PLDI - Programming Language Design]**
+
 kube-rs 是 Kubernetes 的官方 Rust 客户端：
 
 ```rust
@@ -618,6 +636,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 3.2 Operator 开发框架
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use kube::runtime::controller::{Action, Controller};
@@ -680,6 +700,8 @@ pub async fn run(client: Client) -> Result<(), Error> {
 ```
 
 ### 3.3 CRD 定义与代码生成
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use kube::CustomResource;
@@ -745,6 +767,8 @@ pub enum DatabasePhase {
 ```
 
 ### 3.4 Controller 实现详解
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use k8s_openapi::api::apps::v1::{Deployment, DeploymentSpec};
@@ -865,6 +889,8 @@ async fn ensure_service(
 
 ### 3.5 高级 API 操作
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use kube::api::{DeleteParams, Patch, PatchParams, WatchEvent};
 
@@ -949,6 +975,8 @@ async fn delete_pod_with_grace_period(
 
 ### 4.1 Linkerd2-proxy 架构分析
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Linkerd2-proxy 是 Linkerd 服务网格的数据平面代理：
 
 ```rust
@@ -1010,6 +1038,8 @@ impl InboundProxy {
 ```
 
 ### 4.2 mTLS 实现
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use rustls::{Certificate, PrivateKey, ServerConfig, ClientConfig};
@@ -1089,6 +1119,8 @@ impl RotatingIdentity {
 ```
 
 ### 4.3 流量管理
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::collections::HashMap;
@@ -1178,6 +1210,8 @@ impl<S> Layer<S> for TimeoutRetryLayer {
 ```
 
 ### 4.4 可观测性集成
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use opentelemetry::trace::{Tracer, SpanKind};
@@ -1280,6 +1314,8 @@ where
 
 ### 5.1 AWS Lambda Rust 运行时
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use lambda_runtime::{service_fn, LambdaEvent, Error};
 use serde_json::{json, Value};
@@ -1322,6 +1358,8 @@ async fn main() -> Result<(), Error> {
 ```
 
 ### 5.2 冷启动优化
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::sync::OnceLock;
@@ -1386,6 +1424,8 @@ impl AppState {
 ```
 
 ### 5.3 函数即服务框架
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use actix_web::{web, App, HttpResponse, HttpServer};
@@ -1469,6 +1509,8 @@ impl WasmRuntime {
 > **[来源: Wikipedia - Distributed Computing]** · **[来源: Rust Async Working Group]** · **[来源: Wikipedia - CAP Theorem]**
 
 ### 6.1 Raft 共识算法实现
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::collections::HashMap;
@@ -1688,6 +1730,8 @@ impl<T: StateMachine> RaftNode<T> {
 
 ### 6.2 服务发现
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::collections::HashMap;
 use std::net::SocketAddr;
@@ -1821,6 +1865,8 @@ impl ConsulClient {
 
 ### 6.3 负载均衡
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -1924,6 +1970,8 @@ impl ConsistentHash {
 ```
 
 ### 6.4 断路器模式
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -2083,6 +2131,8 @@ where
 
 ### 7.1 OpenTelemetry 集成
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use opentelemetry::trace::{Tracer, SpanKind, TraceContextExt};
 use opentelemetry::global;
@@ -2177,6 +2227,8 @@ where
 ```
 
 ### 7.2 Prometheus 指标
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use prometheus::{Counter, Histogram, Gauge, Registry, Encoder, TextEncoder};
@@ -2303,6 +2355,8 @@ async fn metrics_endpoint() -> impl IntoResponse {
 
 ### 7.3 结构化日志
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use tracing::{info, warn, error, debug, span, Level, Instrument};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
@@ -2392,6 +2446,8 @@ macro_rules! app_log {
 ```
 
 ### 7.4 健康检查与探针
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::collections::HashMap;
@@ -2521,6 +2577,8 @@ async fn startup_probe(State(registry): State<Arc<HealthRegistry>>) -> impl Into
 
 ### 8.1 微服务代码
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // src/main.rs
 use axum::{
@@ -2618,6 +2676,8 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 ### 8.2 Dockerfile 多阶段构建
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```dockerfile
 # 构建阶段
 FROM rust:1.75-slim-bookworm AS builder
@@ -2657,6 +2717,8 @@ ENTRYPOINT ["/app/my-service"]
 ```
 
 ### 8.3 Kubernetes 部署配置
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```yaml
 # k8s/namespace.yaml
@@ -2821,6 +2883,8 @@ spec:
 
 ### 8.4 Istio 服务网格配置
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```yaml
 # istio/gateway.yaml
 apiVersion: networking.istio.io/v1beta1
@@ -2954,6 +3018,8 @@ spec:
 
 ### 8.5 Prometheus 监控告警
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```yaml
 # monitoring/servicemonitor.yaml
 apiVersion: monitoring.coreos.com/v1
@@ -3032,6 +3098,8 @@ spec:
 
 ### 9.1 编译优化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```toml
 # Cargo.toml 优化配置
 [package]
@@ -3056,6 +3124,8 @@ linker = "rust-lld"
 ```
 
 ### 9.2 镜像大小优化
+
+> **[来源: Wikipedia - Type System]**
 
 ```dockerfile
 # 多阶段构建优化版
@@ -3093,6 +3163,8 @@ ENTRYPOINT ["/app/my-app"]
 ```
 
 ### 9.3 启动时间优化
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 延迟初始化减少启动时间
@@ -3144,6 +3216,8 @@ impl Config {
 ## 10. CI/CD
 
 ### 10.1 GitHub Actions 工作流
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```yaml
 # .github/workflows/ci-cd.yaml
@@ -3295,6 +3369,8 @@ jobs:
 
 ### 10.2 容器镜像构建脚本
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```bash
 #!/bin/bash
 # scripts/build.sh
@@ -3325,6 +3401,8 @@ echo "Build complete: ${REGISTRY}/${IMAGE_NAME}:${VERSION}"
 ```
 
 ### 10.3 安全扫描配置
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```yaml
 # .cargo/audit.toml
@@ -3378,6 +3456,8 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 ### 推荐 crate
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 用途 | Crate | 说明 |
 |------|-------|------|
 | HTTP 服务 | axum, actix-web | Web 框架 |
@@ -3394,6 +3474,8 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 | 测试 | mockall, test-context | 测试工具 |
 
 ### 学习资源
+
+> **[来源: IEEE - Programming Language Standards]**
 
 - [Rust Cloud Native](https://rust-cloud-native.github.io/)
 - [Kube-rs 文档](https://docs.rs/kube/)

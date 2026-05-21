@@ -37,6 +37,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def S1: Saga
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -52,6 +54,8 @@ Saga := (T, C, ≺, σ)
 ```
 
 ### Def S2: Saga 执行状态
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -64,6 +68,8 @@ State(Saga) :=
 ```
 
 ### Def S3: 补偿正确性
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 补偿操作 cᵢ 对于事务 tᵢ 是**正确的**，当且仅当：
 
@@ -80,6 +86,8 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 
 ### Axiom S1: 补偿幂等性
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 ∀c ∈ C. exec(c, s) = s' → exec(c, s') = s'
 ```
@@ -87,6 +95,8 @@ Correct(cᵢ, tᵢ) := ∀s. exec(tᵢ, s) = s' ∧ exec(cᵢ, s') = s''
 补偿操作必须是**幂等的**，可多次执行而不改变结果。
 
 ### Axiom S2: 偏序无环性
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 ¬∃t₁, t₂, ..., tₙ ∈ T. t₁ ≺ t₂ ≺ ... ≺ tₙ ≺ t₁

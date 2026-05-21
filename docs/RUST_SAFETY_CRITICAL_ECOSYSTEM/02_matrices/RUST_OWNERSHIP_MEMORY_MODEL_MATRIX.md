@@ -37,6 +37,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 所有权三原则
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 ```
 
 ### 借用规则矩阵
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -75,6 +79,8 @@
 | **函数参数** | ✅ 任意数量 | ✅ 一个 | ✅ 一个 | API设计 |
 
 ### 生命周期关系图
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

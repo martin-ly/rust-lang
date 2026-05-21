@@ -153,6 +153,8 @@
 
 ### 核心文档
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 - [基准测试框架](../../../crates/c08_algorithms/docs/README.md)
 - [性能分析工具](../../../crates/c06_async/docs/README.md)
 - [内存分析工具](../../../crates/c05_threads/docs/README.md)

@@ -35,6 +35,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -84,6 +85,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -92,6 +94,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Strategy 结构）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +112,8 @@ $$\mathcal{SG} = \langle C, S, \mathit{execute}: C \rightarrow R \rangle$$
 ---
 
 ### Axiom SR1（接口一致公理）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@ $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathi
 策略接口一致；不同策略对相同输入类型产生相同输出类型。
 
 ### Axiom SR2（所有权独立公理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -126,6 +134,8 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 ---
 
 ### 定理 SR-T1（trait 多态安全定理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +162,8 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 定理 SR-T2（借用互斥定理）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +192,8 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 推论 SR-C1（纯 Safe Strategy）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +211,8 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -249,6 +265,8 @@ assert_eq!(ctx.run(), 6);
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
 Axiom SR1 (接口一致)
@@ -446,6 +464,8 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
@@ -492,7 +512,6 @@ graph LR
 
 - [03_behavioral 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

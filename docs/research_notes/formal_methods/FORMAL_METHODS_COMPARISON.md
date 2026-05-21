@@ -62,6 +62,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 按方法分类
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +86,8 @@
 ```
 
 ### 1.2 按自动化程度分类
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +104,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 原理
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -116,6 +122,8 @@
 - 有界: SAT求解器检查有限展开
 
 ### 2.2 优势与局限
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 

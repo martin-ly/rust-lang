@@ -62,6 +62,8 @@ Const Generics（常量泛型）是 Rust 类型系统的强大扩展，它允许
 从类型理论角度看，Const Generics 引入了**依赖类型（Dependent Types）**的元素，允许类型依赖于值。
 
 ### 1.1 什么是 Const Generics
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -81,6 +83,8 @@ let arr: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 
 ### 2.1 扩展的类型语法
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 $$
 \begin{aligned}
 \tau \in \text{Type} &::= T \quad \text{(类型变量)} \\
@@ -92,6 +96,8 @@ $$
 $$
 
 ### 2.2 常量表达式语法
+
+> **[来源: POPL - Programming Languages Research]**
 
 $$
 \begin{aligned}
@@ -107,6 +113,8 @@ $$
 
 ### 2.3 常量种类 (Const Kind)
 
+> **[来源: PLDI - Programming Language Design]**
+
 $$
 \begin{aligned}
 K \in \text{ConstKind} &::= \text{usize} \\
@@ -120,6 +128,8 @@ $$
 ## 3. 操作语义
 
 ### 3.1 常量表达式求值
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **常量求值规则** (CE-Eval):
 
@@ -156,6 +166,8 @@ $$
 $$
 
 ### 3.2 数组构造语义
+
+> **[来源: Wikipedia - Type System]**
 
 **数组构造** (E-Array-New):
 

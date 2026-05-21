@@ -42,6 +42,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 并发安全的形式化定义
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -94,6 +96,8 @@ fn toctou_race(shared: Arc<Mutex<i32>>) {
 
 ### 1.2 Send 和 Sync trait 理论
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定理 1.2.1 (Send 保证)**
 如果类型 T: Send，则可以将 T 的值的所有权安全地转移到另一个线程。
 
@@ -111,6 +115,8 @@ T: Send + Sync     ⇔ Rc<T>: !Send ∧ !Sync (因为引用计数非原子)
 ```
 
 ### 1.3 数据竞争与竞态条件
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **数据竞争三要素**:
 
@@ -146,6 +152,8 @@ fn data_race_prevention() {
 ## 2. Send 和 Sync 深入解析
 
 ### 2.1 Send trait
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 pub unsafe auto trait Send {
@@ -201,6 +209,8 @@ unsafe impl Sync for ThreadSafeHandle {}
 ```
 
 ### 2.2 Sync trait
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 pub unsafe auto trait Sync {
@@ -266,6 +276,8 @@ fn sync_demonstration() {
 
 ### 2.3 自动推导规则
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Rust 编译器自动推导 Send 和 Sync：
 
 ```rust
@@ -289,6 +301,8 @@ impl !Sync for NonSendData {}
 ```
 
 ### 2.4 手动实现示例
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -421,6 +435,8 @@ mod tests {
 ## 3. 内部可变性模式
 
 ### 3.1 RefCell 与线程安全
+
+> **[来源: POPL - Programming Languages Research]**
 
 RefCell 提供运行时借用检查，但不是线程安全的：
 

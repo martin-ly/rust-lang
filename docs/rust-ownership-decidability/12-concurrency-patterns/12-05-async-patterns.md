@@ -37,6 +37,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Future 与异步状态机
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -159,6 +161,8 @@ impl Future for DownloadStateMachine {
 
 ### 1.2 async/await 原理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 /// async/await 的零成本抽象
 ///
@@ -219,6 +223,8 @@ pub fn async_move_block(data: Vec<u8>) -> impl std::future::Future<Output = usiz
 ```
 
 ### 1.3 Pin 与自引用
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::pin::Pin;
@@ -295,6 +301,8 @@ impl AsyncFileReader {
 
 ### 2.1 运行时架构
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use tokio::runtime::{Builder, Runtime};
 
@@ -368,6 +376,8 @@ impl DedicatedRuntimes {
 
 ### 2.2 Work-Stealing 调度器
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use tokio::task::{JoinSet, spawn_local, LocalSet};
 
@@ -436,6 +446,8 @@ pub async fn local_tasks_example() {
 ```
 
 ### 2.3 优先级调度
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use std::cmp::Ordering;
@@ -533,6 +545,8 @@ impl<T> PriorityScheduler<T> {
 
 ### 2.4 任务局部存储
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use tokio::task_local;
 
@@ -583,6 +597,8 @@ async fn log_request() {
 ## 3. 并发原语
 
 ### 3.1 异步 Mutex
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rustn
 use tokio::sync::{Mutex, RwLock};

@@ -110,6 +110,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 新研究笔记
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -121,6 +123,8 @@
 - 实际应用案例
 
 ### 2. 完善现有笔记
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +136,8 @@
 - 更新参考文献
 
 ### 3. 修正错误
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +149,8 @@
 - 格式错误
 
 ### 4. 翻译工作
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,12 +163,16 @@
 > **[来源: Rust Official Docs]**
 
 ### 步骤 1: 选择贡献类型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
 根据您的兴趣和能力选择合适的贡献类型。
 
 ### 步骤 2: 查看现有内容
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -110,6 +110,8 @@
 **第一步**：按你的目标选路径 → **[00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)**（单入口、按目标、三大支柱映射）
 
 ### 系统简介
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +129,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 阅读主索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@
 - 快速导航
 
 ### 1.2 查看系统总结
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +155,8 @@
 - 使用指南
 
 ### 1.3 浏览快速参考
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,6 +173,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 使用完整索引
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +186,8 @@
 - 统计信息
 
 ### 2.2 查看研究路线图
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +198,8 @@
 - 时间规划
 
 ### 2.3 浏览目录索引
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

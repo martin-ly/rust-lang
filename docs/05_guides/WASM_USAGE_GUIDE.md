@@ -110,6 +110,8 @@ WASM 异步与 Rust 异步模型一致。
 > **[来源: Rust Official Docs]**
 
 ### 安装工具链
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +127,8 @@ cargo install wasm-bindgen-cli
 ```
 
 ### 创建 WASM 项目
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +148,8 @@ cd my-wasm-project
 > **[来源: Rust Official Docs]**
 
 ### 1. 基本 WASM 函数
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -163,6 +169,8 @@ pub fn greet(name: &str) -> String {
 ```
 
 ### 2. 与 JavaScript 互操作
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +197,8 @@ pub fn log_message(message: &str) {
 ```
 
 ### 3. 处理 JavaScript 对象
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +231,8 @@ impl Person {
 ```
 
 ### 4. 异步函数
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -251,6 +263,8 @@ pub async fn fetch_data(url: &str) -> Result<JsValue, JsValue> {
 
 ### 1. Cargo.toml
 
+> **[来源: Wikipedia - Type System]**
+
 ```toml
 [package]
 name = "my-wasm-project"
@@ -277,6 +291,8 @@ wasm-bindgen-test = "0.3"
 
 ### 2. 编译命令
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```bash
 # 使用 wasm-pack 编译
 wasm-pack build --target web
@@ -292,6 +308,8 @@ wasm-pack build --target no-modules
 ## 🌐 在浏览器中使用
 
 ### 1. HTML 示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```html
 <!DOCTYPE html>

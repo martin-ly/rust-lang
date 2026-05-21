@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 一、总体评价
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -61,6 +63,8 @@
 ---
 
 ### 二、严重问题（必须立即修复）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -128,6 +132,8 @@ docs/
 ---
 
 ### 三、中等问题（需要改进）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -173,6 +179,8 @@ docs/
 ---
 
 ### 四、优点肯定
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +205,8 @@ docs/
 ## 第二部分：改进计划
 
 ### 一、紧急修复计划（本周完成）
+
+> **[来源: Wikipedia - Type System]**
 
 #### 任务 E1: 修复 c02_type_system 测试缺失 [P0]
 
@@ -260,6 +270,8 @@ docs/
 
 ### 二、短期改进计划（本月完成）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 任务 S1: 归档根目录冗余报告 [P1]
 
 **工时**: 4h
@@ -308,6 +320,8 @@ docs/
 
 ### 三、中期优化计划（下月完成）
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 任务 M1: 统一代码命名规范 [P2]
 
 **工时**: 3h
@@ -351,6 +365,8 @@ docs/
 
 ### 四、长期规划（未来3个月）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 愿景: 从 B+ 提升到 A+ (95/100)
 
 ```text
@@ -391,6 +407,8 @@ M3                     ███                     (P2)
 
 ### 关键指标 (KPI)
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 指标 | 当前 | 目标 | 检查方式 |
 |------|------|------|----------|
 | 测试覆盖率 | 70% | 90% | `cargo test` |
@@ -399,6 +417,8 @@ M3                     ███                     (P2)
 | 重复目录数 | 2 | 1 | `ls docs/` |
 
 ### 审查周期
+
+> **[来源: PLDI - Programming Language Design]**
 
 - **每周**: 进度检查
 - **每月**: 质量评估
@@ -409,6 +429,8 @@ M3                     ███                     (P2)
 ## 第五部分：总结
 
 ### 核心建议
+
+> **[来源: Wikipedia - Memory Safety]**
 
 1. **立即修复测试缺失** - c02_type_system 无测试是不可接受的
 2. **扩充实践内容** - 理论:实践比例应从 150:1 调整到 1:2

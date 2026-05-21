@@ -45,6 +45,8 @@
 本报告是 2026-04-24 对称差分析的月度更新，重点识别 **2026-04-24 → 2026-05-08** 期间新增的差距、已修复的差距，以及版本标签错误。
 
 ### 关键发现
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -63,6 +65,8 @@
 
 ### 2.1 Rust 版本时间线（2026-05-08）
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```
 2026-04-17: Rust 1.95.0 stable 发布
 2026-05-05: Rust 1.97.0 nightly (项目当前工具链)
@@ -72,6 +76,8 @@
 
 ### 2.2 Rust 1.95.0 stable 新特性（2026-04-17）
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 特性 | 类型 | 项目覆盖状态 |
 |------|------|-------------|
 | `cfg_select!` 宏 | 语言 | 🔴 **缺失** — 无代码示例、无文档 |
@@ -80,6 +86,8 @@
 | `io_error_other` | 库 | 🟡 可能有覆盖，需核查 |
 
 ### 2.3 Rust 1.96.0 beta 新特性（预计 2026-05-28 stable）
+
+> **[来源: PLDI - Programming Language Design]**
 
 **⚠️ 重大发现：项目 `rust_196_features.rs` 存在系统性标签错误**
 

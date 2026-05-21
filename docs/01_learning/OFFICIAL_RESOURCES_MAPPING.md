@@ -130,10 +130,14 @@
 > **[来源: Rust Official Docs]**
 
 ### The Rust Book Ch 1-22 详细映射
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
 #### 第1章：Getting Started
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +148,8 @@
 | 1.3 Hello, Cargo! | Cargo 基础、构建运行 | [cargo_cheatsheet](../02_reference/quick_reference/cargo_cheatsheet.md) | 补充 Cargo.toml 全字段参考 |
 
 #### 第2章：Programming a Guessing Game
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +158,8 @@
 | 完整章节 | 猜数字游戏完整实现 | `examples/guessing_game/` 示例 | 代码解析 + 扩展练习 |
 
 #### 第3章：Common Programming Concepts
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -164,6 +172,8 @@
 | 3.5 Control Flow | if、loop、while、for | [control_flow_functions_cheatsheet](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) § 控制流 | 控制流决策树 |
 
 #### 第4章：Understanding Ownership
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -345,6 +355,8 @@
 
 ### Rust Reference 主要章节映射
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 章节 | 官方内容 | 本项目映射 | 补充说明 |
 |------|---------|-----------|---------|
 | **2. Lexical Structure** | 词法结构 | [QUICK_REFERENCE](../research_notes/QUICK_REFERENCE.md) § 语法 | 快速参考 |
@@ -361,6 +373,8 @@
 ---
 
 ### Rust by Example 24 主题映射
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 主题 | 官方内容 | 本项目映射 |
 |---|------|---------|-----------|
@@ -395,6 +409,8 @@
 
 ### 官方覆盖但本项目缺失的内容
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 官方资源 | 缺失内容 | 优先级 | 计划补充 |
 |---------|---------|--------|---------|
 | **Book Ch 21** | Web Server 完整实现 | 中 | `examples/web_server/` |
@@ -404,6 +420,8 @@
 | **Rustonomicon** | Unsafe 高级模式 | 中 | [UNSAFE_RUST_GUIDE](../05_guides/UNSAFE_RUST_GUIDE.md) |
 
 ### 本项目补充的官方未覆盖内容
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 补充内容 | 位置 | 说明 |
 |---------|------|------|

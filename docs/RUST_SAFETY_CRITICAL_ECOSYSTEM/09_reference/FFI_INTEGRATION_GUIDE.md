@@ -40,6 +40,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 风险矩阵
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -58,6 +60,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 安全包装器模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +163,8 @@ pub enum FfiError {
 ```
 
 ### 2. 类型转换安全
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -228,6 +234,8 @@ pub enum FfiError {
 ```
 
 ### 3. 回调安全
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -315,6 +323,8 @@ pub enum EventType {
 > **[来源: Rust Official Docs]**
 
 ### 1. 内存管理
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -386,6 +396,8 @@ impl<T> Drop for CVec<T> {
 ```
 
 ### 2. 并发FFI
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -462,6 +474,8 @@ impl Drop for NativeContextWrapper {
 
 ### bindgen配置
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // build.rs
 use std::env;
@@ -500,6 +514,8 @@ fn main() {
 
 ### cbindgen配置
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```toml
 # cbindgen.toml
 [parse]
@@ -523,6 +539,8 @@ rename_types = "PascalCase"
 ## 验证与测试
 
 ### FFI测试模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 #[cfg(test)]
@@ -570,6 +588,8 @@ mod tests {
 ## 最佳实践检查表
 
 ### 设计阶段
+
+> **[来源: PLDI - Programming Language Design]**
 
 - [ ] 最小化FFI边界
 - [ ] 定义清晰的类型映射

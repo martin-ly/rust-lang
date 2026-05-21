@@ -52,6 +52,8 @@
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
 ### 类型系统子路径
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,3 +156,6 @@
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**

@@ -57,6 +57,8 @@
 > **[来源: Rust Official Docs]**
 
 ### ECU类型
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -76,6 +78,8 @@
 
 ### 为什么选择Rust？
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **现有挑战**:
 
 - C/C++代码量大，内存安全问题
@@ -91,6 +95,8 @@
 - 安全性和性能并重
 
 ### 适用场景分析
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```
 高适用性 (立即采用):
@@ -117,6 +123,8 @@
 ## 技术架构
 
 ### ECU软件架构
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```
 ┌─────────────────────────────────────────────────────────────────────┐
@@ -162,6 +170,8 @@
 ## 关键技术方案
 
 ### 1. AUTOSAR集成
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **挑战**: AUTOSAR是汽车软件标准，需要与Rust集成
 

@@ -66,6 +66,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 核心形式化文档 ✅ 基本完成
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +85,8 @@
 ---
 
 ### 2. 类型理论文档 ✅ 基本完成
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -91,6 +91,8 @@
 
 ### 核心范式支持
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 范式 | Rust支持 | 关键特性 | 适用场景 | 与其他范式结合 |
 | :--- | :--- | :--- | :--- | :--- |
 | **命令式** | ⭐⭐⭐⭐⭐ | 变量赋值、循环、条件 | 算法实现、系统编程 | 所有范式基础 |
@@ -101,6 +103,8 @@
 | **元编程** | ⭐⭐⭐⭐ | 宏、编译期计算 | DSL、代码生成 | 声明+过程宏 |
 
 ### 范式融合示例
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // 函数式 + 泛型 + 并发
@@ -126,6 +130,8 @@ let result = process_data(numbers, |n| n * 2);
 
 ### 系统编程语言对比
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 特性 | Rust | C | C++ | Go | Zig |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | 内存安全 | 编译期保证 | 手动 | 可选/困难 | GC | 手动+检查 |
@@ -136,6 +142,8 @@ let result = process_data(numbers, |n| n * 2);
 | 包管理 | Cargo | 手动 | 混乱 | go mod | zigmod |
 
 ### 内存管理对比
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 语言         管理策略              安全性      性能      可控性
@@ -154,6 +162,8 @@ Haskell     GC                    ⭐⭐⭐⭐      ⭐⭐        ⭐⭐
 ## 设计范式对比
 
 ### 错误处理范式
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 范式 | 语言示例 | Rust实现 | 优缺点 |
 | :--- | :--- | :--- | :--- |

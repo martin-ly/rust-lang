@@ -95,6 +95,8 @@
 
 ### ✅ 已完成的文档系统 {#-已完成的文档系统}
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 1. **基础文档**: 100%完成
    - 所有12个核心模块的基础文档完成
    - 主索引、FAQ、术语表全部完成
@@ -125,6 +127,8 @@
 ## 剩余文档工作
 
 ### 已完成的后续工作（原剩余 2%）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 1. **速查卡「相关文档 + 相关示例代码」** ✅
    - [x] **20/20 速查卡**已统一添加「📚 相关文档 + 🧩 相关示例代码」块（含 AI/ML、testing、cargo、modules、strings_formatting 等，2026-02-13）

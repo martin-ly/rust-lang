@@ -43,6 +43,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Happens-Before 关系
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -89,6 +91,8 @@ fn happens_before_example() {
 
 ### 1.2 Sequentially Consistent
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 /// 顺序一致性是最强的内存序
 /// 所有线程以相同的顺序看到所有操作
@@ -119,6 +123,8 @@ fn sequential_consistency_example() {
 ```
 
 ### 1.3 内存序详解
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::atomic::Ordering;
@@ -211,6 +217,8 @@ fn seq_cst_example() {
 
 ### 2.1 原子类型
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::atomic::{
     AtomicUsize, AtomicU64, AtomicU32, AtomicU16, AtomicU8,
@@ -247,6 +255,8 @@ pub fn platform_capabilities() {
 ```
 
 ### 2.2 加载与存储
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
@@ -325,6 +335,8 @@ impl<T> Drop for AtomicBox<T> {
 ```
 
 ### 2.3 读-修改-写操作
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicI64, Ordering};
@@ -446,6 +458,8 @@ impl AtomicFlags {
 
 ### 2.4 比较并交换 CAS
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
 use std::ptr::null_mut;
@@ -562,6 +576,8 @@ impl<T: Copy + Into<usize> + From<usize>> AtomicUpdate<T> {
 
 ### 3.1 基本 CAS 循环
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, AtomicPtr, Ordering};
 use std::ptr::null_mut;
@@ -668,6 +684,8 @@ impl AtomicAccumulator {
 ```
 
 ### 3.2 ABA 问题与解决
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -810,6 +828,8 @@ impl<T> ABAFreeStack<T> {
 ```
 
 ### 3.3 帮助机制
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 /// 帮助机制（Helping）用于无锁数据结构

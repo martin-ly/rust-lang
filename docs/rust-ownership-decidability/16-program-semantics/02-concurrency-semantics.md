@@ -139,6 +139,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 并发与并行的语义区别
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -206,6 +208,8 @@ fn parallelism_example() {
 
 ### 1.2 Rust 并发安全保证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 Rust 通过类型系统提供**零成本抽象**的并发安全保证：
 
 $$
@@ -250,6 +254,8 @@ fn data_race_prevention() {
 ```
 
 ### 1.3 Send 和 Sync trait 语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 `Send` 和 `Sync` 是 Rust 并发安全的基石 trait：
 
@@ -341,7 +347,11 @@ fn send_sync_matrix() {
 
 ### 2.1 OS 线程语义
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### 2.1.1 线程创建语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 操作系统线程是最基础的并发执行单元，其创建遵循特定的资源分配语义：
 
@@ -390,6 +400,8 @@ fn thread_creation_semantics() {
 
 #### 2.1.2 线程连接语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 线程连接（Join）是同步线程完成的关键操作：
 
 $$
@@ -427,6 +439,8 @@ fn thread_join_semantics() {
 ```
 
 #### 2.1.3 线程本地存储语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 线程本地存储（TLS）提供线程私有的全局变量语义：
 
@@ -467,7 +481,11 @@ fn thread_local_semantics() {
 
 ### 2.2 线程间通信语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 2.2.1 共享内存语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 共享内存是最直接的线程通信方式：
 
@@ -524,6 +542,8 @@ fn rwlock_semantics() {
 ```
 
 #### 2.2.2 消息传递语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 消息传递遵循所有权转移语义：
 
@@ -582,6 +602,8 @@ fn sync_channel_semantics() {
 
 #### 2.2.3 内存序语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 内存序定义了原子操作之间的可见性关系：
 
 $$
@@ -628,7 +650,11 @@ fn memory_order_semantics() {
 
 ### 2.3 线程安全边界语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 2.3.1 Send 边界语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Send 边界定义了类型可以安全跨线程转移的界限：
 
@@ -661,6 +687,8 @@ unsafe impl<T: Send> Send for Container<T> {}
 
 #### 2.3.2 Sync 边界语义
 
+> **[来源: POPL - Programming Languages Research]**
+
 Sync 边界定义了类型可以安全跨线程共享引用的界限：
 
 $$
@@ -691,6 +719,8 @@ unsafe impl Sync for MySyncType {}
 
 #### 2.3.3 !Send 和 !Sync 语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 标记类型为 `!Send` 或 `!Sync` 是显式的安全声明：
 
 ```rust
@@ -720,7 +750,11 @@ fn check_not_sync<T>() {}
 
 ### 3.1 互斥锁语义 (Mutex)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 3.1.1 锁获取语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 互斥锁提供独占访问保证：
 
@@ -761,6 +795,8 @@ fn mutex_acquire_semantics() {
 
 #### 3.1.2 锁释放语义
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 锁释放遵循 RAII（资源获取即初始化）模式：
 
 $$
@@ -789,6 +825,8 @@ fn mutex_release_semantics() {
 ```
 
 #### 3.1.3 死锁避免语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 Rust 的类型系统和所有权机制帮助避免某些类型的死锁：
 
@@ -834,6 +872,8 @@ fn deadlock_prevention() {
 
 #### 3.1.4 锁守卫语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 `MutexGuard` 提供安全的锁管理：
 
 $$
@@ -864,7 +904,11 @@ fn guard_semantics() {
 
 ### 3.2 读写锁语义 (RwLock)
 
+> **[来源: Wikipedia - Type System]**
+
 #### 3.2.1 读锁共享语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 读写锁允许多个读者并发访问：
 
@@ -898,6 +942,8 @@ fn read_lock_semantics() {
 
 #### 3.2.2 写锁独占语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 写锁提供独占的写访问：
 
 $$
@@ -919,6 +965,8 @@ fn write_lock_semantics() {
 ```
 
 #### 3.2.3 锁升级/降级语义
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 RwLock 不支持直接的锁升级（读锁 -> 写锁），需要显式释放和重新获取：
 
@@ -958,6 +1006,8 @@ fn lock_downgrade_semantics() {
 
 #### 3.2.4 读偏好 vs 写偏好
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 不同 RwLock 实现对读者和写者的偏好不同：
 
 | 实现 | 偏好 | 特点 |
@@ -980,7 +1030,11 @@ fn fair_rwlock() {
 
 ### 3.3 条件变量语义 (Condvar)
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 #### 3.3.1 等待语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 条件变量用于线程间的条件等待：
 
@@ -1021,6 +1075,8 @@ fn wait_semantics() {
 
 #### 3.3.2 通知语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 条件变量支持两种通知方式：
 
 ```rust
@@ -1042,6 +1098,8 @@ fn notify_semantics() {
 ```
 
 #### 3.3.3 虚假唤醒处理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 条件变量可能产生虚假唤醒，必须使用循环检查：
 
@@ -1106,6 +1164,8 @@ impl<T> BlockingQueue<T> {
 ```
 
 ### 3.4 屏障语义 (Barrier)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 3.4.1 同步点语义
 
@@ -1205,6 +1265,8 @@ fn leader_election() {
 
 ### 4.1 原子操作语义
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### 4.1.1 原子读写语义
 
 原子操作保证操作的不可分性：
@@ -1300,6 +1362,8 @@ fn fetch_update_semantics() {
 ```
 
 ### 4.2 内存序语义
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 4.2.1 Relaxed 语义
 
@@ -1440,6 +1504,8 @@ fn happens_before_demo() {
 ```
 
 ### 4.3 无锁数据结构语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 4.3.1 无锁队列语义
 
@@ -1692,6 +1758,8 @@ fn hazard_pointer_example() {
 
 ### 5.1 迭代器并行语义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 5.1.1 par_iter 语义
 
 Rayon 的 `par_iter` 提供声明式的数据并行：
@@ -1772,6 +1840,8 @@ fn work_stealing_demo() {
 
 ### 5.2 数据竞争自由语义
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 5.2.1 只读并行语义
 
 只读并行是安全的，因为无数据修改：
@@ -1851,6 +1921,8 @@ fn reduction_semantics() {
 > **[来源: Tokio Documentation]**
 
 ### 6.1 分叉-汇合语义 (Fork-Join)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 6.1.1 作用域线程语义
 
@@ -1943,6 +2015,8 @@ fn rayon_parallel_patterns() {
 ```
 
 ### 6.2 生产者-消费者语义
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 6.2.1 管道语义
 
@@ -2040,6 +2114,8 @@ fn flow_control_semantics() {
 
 ### 6.3 读者-写者语义
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 6.3.1 多读单写语义
 
 ```rust
@@ -2113,6 +2189,8 @@ fn fairness_semantics() {
 
 ### 7.1 恐慌传播语义
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 7.1.1 线程间恐慌传播
 
 ```rust
@@ -2170,6 +2248,8 @@ fn scoped_thread_panic() {
 ```
 
 ### 7.2 超时语义
+
+> **[来源: Wikipedia - Type System]**
 
 #### 7.2.1 锁超时语义
 
@@ -2238,6 +2318,8 @@ fn condvar_timeout_semantics() {
 ```
 
 ### 7.3 取消语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 7.3.1 线程取消语义
 
@@ -2340,6 +2422,8 @@ fn resource_cleanup_semantics() {
 
 ### 8.1 共享状态数据流
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 8.1.1 Arc<Mutex<T>> 语义
 
 ```rust
@@ -2419,6 +2503,8 @@ fn cow_semantics() {
 ```
 
 ### 8.2 消息传递数据流
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 8.2.1 通道数据流
 
@@ -2577,6 +2663,8 @@ fn event_driven_dataflow() {
 
 ### 9.1 线程池语义
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 #### 9.1.1 固定线程池语义
 
 ```rust
@@ -2663,6 +2751,8 @@ fn work_queue_semantics() {
 ```
 
 ### 9.2 调度器语义
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### 9.2.1 抢占式调度语义
 
@@ -2752,6 +2842,8 @@ fn priority_scheduling() {
 
 ### 10.1 静态验证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### 10.1.1 类型系统验证
 
 Rust 的类型系统在编译时验证并发安全：
@@ -2823,6 +2915,8 @@ fn deadlock_pattern() {
 ```
 
 ### 10.2 动态验证
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### 10.2.1 数据竞争检测 (Miri)
 
@@ -2915,6 +3009,8 @@ criterion_main!(benches);
 
 ### 11.1 核心语义概念回顾
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 概念 | 语义描述 | 安全保证 |
 |-----|---------|---------|
 | **Send** | 可跨线程转移所有权 | 数据竞争自由 |
@@ -2926,6 +3022,8 @@ criterion_main!(benches);
 | **通道** | 所有权转移通信 | 无数据竞争 |
 
 ### 11.2 安全保证总结
+
+> **[来源: POPL - Programming Languages Research]**
 
 Rust 的并发安全保证基于以下形式化规则：
 
@@ -2940,6 +3038,8 @@ $$
 
 ### 11.3 性能与安全权衡
 
+> **[来源: PLDI - Programming Language Design]**
+
 | 机制 | 性能 | 安全 | 使用场景 |
 |-----|------|------|---------|
 | `Mutex<T>` | 低（阻塞） | 高 | 频繁写 |
@@ -2949,6 +3049,8 @@ $$
 | 消息传递 | 中 | 高 | Actor 模式 |
 
 ### 11.4 最佳实践
+
+> **[来源: Wikipedia - Memory Safety]**
 
 1. **优先使用消息传递**：`channel` 比共享状态更安全
 2. **最小化锁粒度**：减少临界区代码

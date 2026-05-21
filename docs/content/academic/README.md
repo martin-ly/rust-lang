@@ -77,6 +77,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心贡献
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +100,8 @@ RustBelt 论文链:
 ```
 
 ### 所有权形式化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@ Definition own_shared (l: loc) (v: val) : iProp :=
 ```
 
 ### 分离逻辑应用
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@ fn example() {
 > **[来源: Rust Official Docs]**
 
 ### 与 Stacked Borrows 对比
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +206,8 @@ fn tree_borrows_allows() {
 ```
 
 ### 实际影响
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

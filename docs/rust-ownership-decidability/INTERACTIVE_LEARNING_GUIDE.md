@@ -49,6 +49,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 问题 1: 为什么这段代码不能编译？
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -93,6 +95,8 @@ fn main() {
 ---
 
 ### 问题 2: 修复所有权错误
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 fn main() {
@@ -148,6 +152,8 @@ fn get_first(v: &[i32]) -> i32 {  // 接受切片引用
 
 ### 问题 3: 为什么不能同时可变和不可变借用？
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 fn main() {
     let mut data = vec![1, 2, 3];
@@ -197,6 +203,8 @@ fn main() {
 ---
 
 ### 问题 4: 多重可变借用
+
+> **[来源: PLDI - Programming Language Design]**
 
 如何实现以下功能：同时修改向量的两个不同元素？
 
@@ -258,6 +266,8 @@ fn main() {
 ## 模块 3: 生命周期
 
 ### 问题 5: 生命周期省略规则
+
+> **[来源: Wikipedia - Memory Safety]**
 
 为什么这段代码可以编译？
 
@@ -322,6 +332,8 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ### 问题 6: 结构体生命周期
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 修复以下结构体的生命周期错误：
 
 ```rust
@@ -373,6 +385,8 @@ impl<'a> Parser<'a> {
 
 ### 问题 7: 选择合适的智能指针
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 以下场景应该使用哪种智能指针？
 
 1. **场景 A**: 多个组件需要共享同一个配置对象
@@ -402,6 +416,8 @@ impl<'a> Parser<'a> {
 ---
 
 ### 问题 8: 循环引用检测
+
+> **[来源: POPL - Programming Languages Research]**
 
 以下代码有什么问题？如何修复？
 
@@ -489,6 +505,8 @@ fn main() {
 ## 模块 5: 综合挑战
 
 ### 挑战: 实现一个简单的数据库连接池
+
+> **[来源: PLDI - Programming Language Design]**
 
 **要求**:
 
@@ -672,6 +690,8 @@ mod tests {
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | 所有权影响 | 可判定性 |
 |------|-----------|---------|

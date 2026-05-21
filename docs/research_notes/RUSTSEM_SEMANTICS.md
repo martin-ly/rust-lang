@@ -118,6 +118,8 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 > **[来源: Rust Official Docs]**
 
 ### 2.1 抽象语法
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +154,8 @@ RustSEM (Rust Semantic Model) 定义 Rust 语言的完整操作语义。
 ```
 
 ### 2.2 程序状态
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -171,6 +175,8 @@ P: 权限集         当前有效权限
 > **[来源: Rust Official Docs]**
 
 ### 3.1 值域
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +187,8 @@ P: 权限集         当前有效权限
 | **Perm** | {Own, Read, Write, Drop} | 权限类型 |
 
 ### 3.2 环境域
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -191,6 +199,8 @@ P: 权限集         当前有效权限
 ```
 
 ### 3.3 求值上下文
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -214,6 +224,8 @@ P: 权限集         当前有效权限
 > **[来源: Rust Official Docs]**
 
 ### 4.1 基本归约规则
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -236,6 +248,8 @@ v; e → e    (Seq)
 ```
 
 ### 4.2 借用语义
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **共享借用创建**:
 

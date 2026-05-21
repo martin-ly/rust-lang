@@ -15,6 +15,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Future 与异步执行
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -53,6 +55,8 @@ impl Future for TimerFuture {
 ```
 
 ### async/await 语法
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -107,6 +111,8 @@ async fn race_example() {
 ```
 
 ### 异步状态机
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +167,8 @@ fn pin_demo() {
 ```
 
 ### 流（Streams）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +205,8 @@ async fn stream_combinators() {
 ```
 
 ### 异步运行时
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -251,6 +261,8 @@ async fn async_channels() {
 ```
 
 ### 取消与超时
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -304,6 +316,8 @@ fn cancellation_demo() {
 ```
 
 ### 并发控制
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -386,6 +400,8 @@ where
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -395,6 +411,8 @@ where
 | 并发执行模型 | 并发模型理论 | [../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md](../../../research_notes/software_design_theory/03_execution_models/03_concurrent.md) |
 
 ### 形式化方法
+
+> **[来源: Wikipedia - Type System]**
 
 | 文档 | 描述 | 路径 |
 | :--- | :--- | :--- |

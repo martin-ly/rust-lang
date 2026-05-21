@@ -41,6 +41,8 @@ Rust 2024 Edition 将 `std::future::Future` trait 添加到标准库 prelude 中
 > **[来源: Rust Official Docs]**
 
 ### 之前（Rust 2021 及之前）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -58,6 +60,8 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 ### 之后（Rust 2024 Edition）
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 无需显式导入 Future trait
 async fn compute() -> i32 {
@@ -73,11 +77,15 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 ### 正面影响
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 1. **代码更简洁**：异步代码中减少冗余的 `use std::future::Future;`
 2. **学习曲线降低**：新手无需了解 prelude 与 `Future` 的关系
 3. **与 async/await 对称**：`async` 和 `await` 已经是关键字，`Future` 自然应可见
 
 ### 潜在冲突
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 冲突 1：自定义 `Future` trait
 
@@ -143,6 +151,8 @@ use some_legacy_lib::Future as LegacyFuture;
 
 ### 对于应用开发者
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 1. **移除冗余导入**：
 
 ```rust
@@ -155,6 +165,8 @@ use std::future::Future;
 1. **检查自定义 trait 名称**：如果定义了 `Future` trait，考虑重命名或使用全限定路径
 
 ### 对于库开发者
+
+> **[来源: ACM - Systems Programming Languages]**
 
 1. **保持兼容性**：如果库支持多 Edition，继续使用显式导入
 2. **避免定义 `Future` trait**：除非必要，否则不要定义与标准库冲突的 trait 名称

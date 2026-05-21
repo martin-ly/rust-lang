@@ -100,6 +100,8 @@ Unsafe Fields 模型:
 > **[来源: Rust Official Docs]**
 
 ### 问题：当前 `unsafe` 的粒度太粗
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -127,6 +129,8 @@ impl IoBuffer {
 ```
 
 ### Unsafe Fields 的目标
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -144,6 +148,8 @@ impl IoBuffer {
 > **[来源: Rust Official Docs]**
 
 ### 基本语法
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

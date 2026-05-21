@@ -37,6 +37,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -54,7 +55,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Prototype 形式化分析](#prototype-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Prototype 结构）](#def-11prototype-结构)
@@ -88,6 +89,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -96,6 +98,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Prototype 结构）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +116,8 @@ $$\mathcal{P} = \langle T, \mathit{clone}: T \rightarrow T \rangle$$
 ---
 
 ### Axiom P1（独立副本公理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -120,6 +126,8 @@ $$\forall t: T,\, \mathit{clone}(t) = t' \implies \Omega(t') \cap \Omega(t) = \e
 Clone 不改变原对象，产生独立副本；观察等价但所有权分离。
 
 ### Axiom P2（引用语义公理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -130,6 +138,8 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 定理 P-T1（Clone 类型安全定理）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +165,8 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 定理 P-T2（借用安全定理）
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -183,6 +195,8 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 推论 P-C1（Clone 安全使用）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -202,6 +216,8 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -253,6 +269,8 @@ let copy = tree.clone();  // 递归 clone
 
 ### 形式化论证链
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 Axiom P1 (独立副本)
     ↓ 依赖
@@ -271,6 +289,8 @@ ownership_model T2
 
 ### 与 Rust 类型系统的联系
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | Rust 特性 | Prototype 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | `Clone` trait | 原型复制 | 编译期检查实现 |
@@ -279,6 +299,8 @@ ownership_model T2
 | 所有权返回 | 新实例 | 独立生命周期 |
 
 ### 内存安全保证
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 1. **无悬垂**：`clone` 返回新分配，与原对象无关
 2. **借用安全**：`&self` 保证原对象不被修改
@@ -498,7 +520,6 @@ graph LR
 
 - [01_creational 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

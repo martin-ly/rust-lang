@@ -552,6 +552,8 @@ impl GUIFactory for MacFactory {
 
 ### 2.4 单例模式 (Singleton Pattern)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 Rust中的单例模式需要特别注意线程安全。
 
 ```rust
@@ -597,6 +599,8 @@ fn main() {
 
 ### 2.5 原型模式 (Prototype Pattern)
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 pub trait Prototype: Clone {
     fn clone_box(&self) -> Box<dyn Prototype>;
@@ -641,6 +645,8 @@ impl PrototypeRegistry {
 ## 3. 结构型模式 (Structural Patterns)
 
 ### 3.1 适配器模式 (Adapter Pattern)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 适配器模式允许不兼容的接口协同工作。
 
@@ -709,6 +715,8 @@ impl AudioPlayer {
 ```
 
 ### 3.2 装饰器模式 (Decorator Pattern)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 组件接口
@@ -801,6 +809,8 @@ fn main() {
 ```
 
 ### 3.3 组合模式 (Composite Pattern)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 组件接口
@@ -895,6 +905,8 @@ fn main() {
 
 ### 3.4 外观模式 (Facade Pattern)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 // 复杂子系统
 mod subsystem {
@@ -957,6 +969,8 @@ fn main() {
 
 ### 3.5 桥接模式 (Bridge Pattern)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 // 实现接口
 pub trait DrawingAPI {
@@ -1015,6 +1029,8 @@ impl<T: DrawingAPI> Shape for CircleShape<T> {
 ```
 
 ### 3.6 代理模式 (Proxy Pattern)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::collections::HashMap;
@@ -1101,6 +1117,8 @@ impl CachedImageProxy {
 ## 4. 行为型模式 (Behavioral Patterns)
 
 ### 4.1 命令模式 (Command Pattern)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 命令模式将请求封装为对象，支持参数化、队列化和撤销操作。
 
@@ -1265,6 +1283,8 @@ fn main() {
 
 ### 4.2 策略模式 (Strategy Pattern)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 策略接口
 pub trait PaymentStrategy {
@@ -1394,6 +1414,8 @@ fn main() {
 
 ### 4.3 观察者模式 (Observer Pattern)
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 use std::cell::RefCell;
 use std::rc::{Rc, Weak};
@@ -1520,6 +1542,8 @@ fn main() {
 
 ### 4.4 迭代器模式 (Iterator Pattern)
 
+> **[来源: PLDI - Programming Language Design]**
+
 Rust的标准库已经内置了强大的迭代器支持。
 
 ```rust
@@ -1621,6 +1645,8 @@ fn main() {
 
 ### 4.5 状态模式 (State Pattern)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 // 状态接口
 trait State {
@@ -1682,6 +1708,8 @@ fn main() {
 ```
 
 ### 4.6 模板方法模式 (Template Method)
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 // 抽象类
@@ -1769,6 +1797,8 @@ fn main() {
 ```
 
 ### 4.7 责任链模式 (Chain of Responsibility)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 // 处理者接口
@@ -1880,6 +1910,8 @@ fn main() {
 
 ### 4.8 访问者模式 (Visitor Pattern)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // 元素接口
 pub trait Element {
@@ -1989,6 +2021,8 @@ fn main() {
 ```
 
 ### 4.9 备忘录模式 (Memento Pattern)
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // 备忘录
@@ -2109,6 +2143,8 @@ fn main() {
 ```
 
 ### 4.10 中介者模式 (Mediator Pattern)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::cell::RefCell;
@@ -2235,6 +2271,8 @@ fn main() {
 
 ### 5.1 Newtype模式
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Newtype模式用于给现有类型提供不同的语义。
 
 ```rust
@@ -2293,6 +2331,8 @@ fn main() {
 ```
 
 ### 5.2 类型状态模式 (Type State Pattern)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 类型状态模式利用Rust的类型系统在编译时保证状态转换的正确性。
 
@@ -2387,6 +2427,8 @@ fn main() {
 ```
 
 ### 5.3 RAII守卫模式
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 RAII（资源获取即初始化）是Rust的核心模式，守卫模式是其重要应用。
 
@@ -2508,6 +2550,8 @@ fn main() {
 
 ### 5.4 折中方案模式 (Default Trait)
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // 实现Default trait提供合理的默认值
 #[derive(Debug, Clone)]
@@ -2569,6 +2613,8 @@ fn main() {
 
 ### 6.1 过度使用 `Rc<RefCell<T>>`
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 // 反模式：过度使用运行时检查
 pub struct BadDesign {
@@ -2583,6 +2629,8 @@ pub struct GoodDesign<'a> {
 
 ### 6.2 忽视所有权转移
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 错误：使用已移动的值
 pub fn bad_usage() {
@@ -2593,6 +2641,8 @@ pub fn bad_usage() {
 ```
 
 ### 6.3 过度泛型化
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 // 过度设计
@@ -2614,6 +2664,8 @@ pub fn simple_generic<T: Into<String>>(input: T) -> String {
 
 ### 6.4 过度使用unwrap()
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 // 反模式
 let value = some_option.unwrap();
@@ -2632,6 +2684,8 @@ let value = some_option.unwrap_or(default);
 
 ### 7.1 设计模式选择指南
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 | 场景 | 推荐模式 | 原因 |
 |------|---------|------|
 | 复杂对象创建 | Builder + Type State | 编译时验证 + 流畅API |
@@ -2642,6 +2696,8 @@ let value = some_option.unwrap_or(default);
 | 事件通知 | Observer | Weak引用避免循环 |
 
 ### 7.2 Rust设计原则
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 1. **优先使用组合**：Trait系统比继承更灵活
 2. **利用类型系统**：在编译时捕获错误

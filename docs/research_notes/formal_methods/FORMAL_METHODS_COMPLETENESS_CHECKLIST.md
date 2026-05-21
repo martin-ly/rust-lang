@@ -87,9 +87,13 @@
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 特性 | 应用场景 | 文档章节 |
 |------|---------|----------|
@@ -99,6 +103,8 @@
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 本文档中的所有Rust代码示例均已：
 

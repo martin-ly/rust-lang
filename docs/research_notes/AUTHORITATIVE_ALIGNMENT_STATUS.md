@@ -50,6 +50,8 @@
 
 ### 对齐统计
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 来源级别 | 来源数量 | 对齐文档数 | 对齐率 |
 | :--- | :--- | :--- | :--- |
 | **P0 官方权威** | 7 | 120+ | 100% |
@@ -58,6 +60,8 @@
 | **总计** | **18** | **240+** | **100%** |
 
 ### 对齐维度覆盖
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -76,6 +80,8 @@
 > **[来源: Rust Official Docs]**
 
 ### The Rust Book 对齐
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -102,6 +108,8 @@
 | 20.0 项目 | cargo_cheatsheet.md | ✅ 一致 | - |
 
 ### Rust Reference 对齐
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 

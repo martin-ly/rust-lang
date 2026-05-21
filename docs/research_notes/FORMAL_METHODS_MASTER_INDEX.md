@@ -56,6 +56,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心形式化文档
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 

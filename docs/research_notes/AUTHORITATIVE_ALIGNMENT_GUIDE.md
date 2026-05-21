@@ -108,6 +108,8 @@
 
 ### P0: 官方权威
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **来源**: Rust 官方团队维护的文档
 
 | 来源 | URL | 类型 | 更新频率 | 对齐要求 |
@@ -130,6 +132,8 @@
 
 ### P1: 学术权威
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **来源**: 学术研究和形式化验证
 
 | 来源 | 机构 | 类型 | 重要性 |
@@ -149,6 +153,8 @@
 ```
 
 ### P2: 社区权威
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **来源**: 社区维护的高质量资源
 
@@ -176,6 +182,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 维度 1: 概念定义对齐
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -194,6 +202,8 @@
 | 生命周期 | 引用有效性范围 | 引用有效性范围 | ✅ 一致 |
 
 ### 维度 2: 代码示例对齐
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -74,6 +74,8 @@
 > **[来源: Rust Official Docs]**
 
 ### T-OW1: 所有权唯一性定理
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -91,6 +93,8 @@ fn theorem_ow1_ownership_uniqueness() {
 ```
 
 ### T-OW2: 移动语义保持性定理
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -109,6 +113,8 @@ fn theorem_ow2_move_semantics() {
 ```
 
 ### T-OW3: 资源释放定理
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -137,6 +143,8 @@ fn theorem_ow3_resource_release() {
 > **[来源: Rust Official Docs]**
 
 ### T-BR1: 借用安全性定理
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +168,8 @@ fn theorem_br1_borrow_safety() {
 ```
 
 ### T-BR2: 可变借用排他性定理
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 

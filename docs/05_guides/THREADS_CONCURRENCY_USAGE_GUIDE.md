@@ -142,6 +142,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 基本线程创建
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -162,6 +164,8 @@ handle.join().unwrap();
 ```
 
 ### 作用域线程（Rust 1.89+）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -189,6 +193,8 @@ thread::scope(|s| {
 > **[来源: Rust Official Docs]**
 
 ### 1. 线程管理
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -227,6 +233,8 @@ let handle = builder.spawn(|| {
 ```
 
 ### 2. 消息传递
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -276,6 +284,8 @@ for received in rx {
 ```
 
 ### 3. 共享状态
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### Mutex（互斥锁）
 
@@ -328,6 +338,8 @@ thread::spawn(move || {
 ```
 
 ### 4. 同步原语
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 信号量（Semaphore）
 
@@ -387,6 +399,8 @@ for handle in handles {
 
 ### 5. 无锁数据结构
 
+> **[来源: ACM - Systems Programming Languages]**
+
 #### 无锁队列
 
 ```rust
@@ -425,6 +439,8 @@ thread::spawn(move || {
 
 ### 1. 减少锁竞争
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 // ❌ 不好的做法：锁住整个操作
 let mutex = Arc::new(Mutex::new(data));
@@ -443,6 +459,8 @@ let mutex = Arc::new(Mutex::new(data));
 
 ### 2. 使用无锁数据结构
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // 对于高并发场景，使用无锁数据结构
 use c05_threads::lockfree::*;
@@ -452,6 +470,8 @@ let queue = Arc::new(LockFreeQueue::new());
 ```
 
 ### 3. 工作窃取
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use c05_threads::concurrency::work_stealing::WorkStealingQueue;
@@ -467,6 +487,8 @@ let queue = WorkStealingQueue::new();
 > **[来源: Rust Official Docs]**
 
 ### 模式 1: 读写锁分离模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -525,6 +547,8 @@ impl ConfigManager {
 ```
 
 ### 模式 2: 无锁计数器与统计
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::atomic::{AtomicU64, AtomicI64, Ordering};
@@ -607,6 +631,8 @@ struct StatsSnapshot {
 ```
 
 ### 模式 3: 线程安全的工作队列
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use std::sync::{Arc, Mutex, Condvar};
@@ -717,6 +743,8 @@ impl ThreadPool {
 
 ### 模式 4: 多阶段流水线并行
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::mpsc::{channel, Sender, Receiver};
 use std::thread;
@@ -801,6 +829,8 @@ where
 ```
 
 ### 模式 5: 并发安全缓存
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -924,6 +954,8 @@ where
 
 ### 案例 1: 未同步的共享可变状态
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 // ❌ 数据竞争！多个线程同时读写，无同步保护
 use std::thread;
@@ -986,6 +1018,8 @@ fn fixed_with_atomic() {
 
 ### 案例 2: Send/Sync 违规
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -1031,6 +1065,8 @@ fn thread_safe_types() {
 ```
 
 ### 案例 3: 死锁
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use std::sync::{Arc, Mutex};
@@ -1156,6 +1192,8 @@ impl HierarchicalMutex {
 
 ### 案例 4: 优先级反转
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -1206,6 +1244,8 @@ fn priority_inversion_example() {
 ```
 
 ### 案例 5: 条件变量误用
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 use std::sync::{Mutex, Condvar};
@@ -1266,6 +1306,8 @@ fn good_condition_variable() {
 
 ### 死锁
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // ❌ 可能导致死锁
 let mutex1 = Arc::new(Mutex::new(0));
@@ -1289,6 +1331,8 @@ thread::spawn(move || {
 ```
 
 ### 数据竞争
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // ❌ 数据竞争

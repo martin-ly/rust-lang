@@ -99,6 +99,8 @@ T-TY1: 类型安全 (Progress + Preservation)
 
 ### Lemma 1: 替换保持类型 (Substitution)
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```
 Given:
   Γ, x: T₁ ⊢ e : T₂
@@ -122,6 +124,8 @@ Proof (结构归纳):
 ```
 
 ### Lemma 2: 模式匹配保持类型
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 Given:
@@ -217,6 +221,8 @@ fn type_safety_theorem() {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 

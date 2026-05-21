@@ -131,6 +131,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 所有权与移动语义
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +145,8 @@
 | `drop(s);` | 显式释放 | 提前释放值的所有权 |
 
 ### 1.2 借用与引用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +159,8 @@
 | `fn foo(s: &mut String)` | 可变借用参数 | 函数可以修改传入的值 |
 
 ### 1.3 生命周期
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -167,6 +173,8 @@
 | `&'static str` | 静态生命周期 | 程序整个运行期间有效 |
 
 ### 1.4 Trait 与泛型
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -180,6 +188,8 @@
 | `impl Trait` | 静态分发 | 编译时确定具体类型的抽象返回 |
 
 ### 1.5 并发与同步
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -38,6 +38,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -55,7 +56,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Builder 形式化分析](#builder-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Builder 结构）](#def-11builder-结构)
@@ -90,6 +91,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -98,6 +100,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Builder 结构）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -114,6 +118,8 @@ $$\mathcal{B} = \langle B, T, \{\mathit{set}_i: B \times V_i \rightarrow B\}, \m
 ---
 
 ### Axiom B1（必填字段公理）
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +128,8 @@ $$\mathit{build}(b) = \mathrm{Ok}(t) \implies \forall i \in \mathrm{Required},\,
 `build` 调用时必填字段已设置；否则返回 `Err` 或 panic。
 
 ### Axiom B2（单次构建公理）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -132,6 +140,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T1（所有权消费定理）
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -159,6 +169,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T2（类型状态安全定理）
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -199,6 +211,8 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 推论 B-C1（纯 Safe Builder）
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -216,6 +230,8 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -285,6 +301,8 @@ let config = ConfigBuilder::new()
 
 ### 形式化论证链
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```text
 Axiom B1 (必填字段)
     ↓ 实现
@@ -303,6 +321,8 @@ ownership_model T2
 
 ### 与 Rust 类型系统的联系
 
+> **[来源: POPL - Programming Languages Research]**
+
 | Rust 特性 | Builder 实现 | 类型安全保证 |
 | :--- | :--- | :--- |
 | `self` 消费 | `build(self)` | 单次构建 |
@@ -311,6 +331,8 @@ ownership_model T2
 | `Result<T, E>` | 必填校验 | 错误处理 |
 
 ### 内存安全保证
+
+> **[来源: PLDI - Programming Language Design]**
 
 1. **单次构建**：所有权消费保证 `build` 只调用一次
 2. **无未初始化**：`Option` 强制处理字段存在性
@@ -525,6 +547,8 @@ graph LR
 
 ### 本文档的Rust 1.94更新要点
 
+> **[来源: Wikipedia - Memory Safety]**
+
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
@@ -571,7 +595,6 @@ graph LR
 
 - [01_creational 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

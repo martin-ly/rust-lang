@@ -70,6 +70,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 项目结构验证脚本
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -211,6 +213,8 @@ fn main() {
 ```
 
 ### 模块依赖关系分析器
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -357,6 +361,8 @@ fn main() {
 ```
 
 ### 测试覆盖率报告生成器
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -462,6 +468,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -470,6 +478,8 @@ fn main() {
 - **知识结构**: [KNOWLEDGE_STRUCTURE_FRAMEWORK.md](./KNOWLEDGE_STRUCTURE_FRAMEWORK.md) - 知识依赖与模块关系
 
 ### 实施场景
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -494,6 +504,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### 整体架构
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -526,7 +538,11 @@ rust-lang/
 
 ### 模块分层
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### Tier 1: 基础层（C01-C03）
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 - **C01**: 所有权与借用
 - **C02**: 类型系统

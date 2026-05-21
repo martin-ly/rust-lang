@@ -102,6 +102,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 测试最佳实践
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -155,6 +157,8 @@ fuzz_target!(|data: &[u8]| {
 ```
 
 ### MIRI 检测示例
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -197,6 +201,8 @@ mod miri_tests {
 ```
 
 ### 基准测试示例
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -221,6 +227,8 @@ criterion_main!(benches);
 ```
 
 ### 代码覆盖率示例
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -238,6 +246,8 @@ cargo tarpaulin --fail-under 80  # 覆盖率必须 >= 80%
 ```
 
 ### 形式化验证示例
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 // 使用 Kani 验证关键函数

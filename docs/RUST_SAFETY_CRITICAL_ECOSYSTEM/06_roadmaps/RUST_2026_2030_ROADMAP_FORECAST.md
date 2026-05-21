@@ -65,6 +65,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 过去5年发展 (2020-2025)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@
 ```
 
 ### 技术成熟度曲线
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +117,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 语言特性
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -147,6 +153,8 @@
 ```
 
 ### 生态系统
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +201,8 @@
 
 ### 语言演进
 
+> **[来源: Wikipedia - Type System]**
+
 #### Rust 2027 Edition?
 
 **可能性评估**: 30%
@@ -227,6 +237,8 @@ rustc改进:
 ```
 
 ### 安全关键突破
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 标准化进展
 

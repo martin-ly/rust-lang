@@ -102,6 +102,8 @@
 
 ### 2.1 回调风格示例
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```javascript
 // JavaScript回调地狱
 fetchUser(userId, function(user) {
@@ -130,6 +132,8 @@ $$
 
 ### 2.2 Async/Await对比
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 // Rust async/await
 async fn process_user(user_id: u64) -> Result<Invoice, Error> {
@@ -155,6 +159,8 @@ $$
 4. 编译时类型检查
 
 ### 2.3 CPS转换等价性
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
 Callback形式:

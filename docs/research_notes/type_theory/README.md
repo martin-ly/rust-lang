@@ -9,6 +9,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [🔬 类型理论研究 {#-类型理论研究}](#-类型理论研究--类型理论研究)
@@ -43,10 +44,12 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 完备性声明
+>
 > **[来源: Rust Official Docs]**
 
 **本目录核心缺口已补全，全部缺口均有 Def 占位**。详见 [00_completeness_gaps](./00_completeness_gaps.md)：
@@ -58,6 +61,7 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+>
 > **[来源: Rust Official Docs]**
 
 本目录专注于 Rust 类型系统的理论基础和形式化研究，包括：
@@ -70,9 +74,11 @@
 ---
 
 ## 📚 研究主题 {#-研究主题}
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 类型系统基础
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -86,6 +92,7 @@
 **状态**: ✅ 已完成 (100%)
 
 ### 1b. 类型构造能力
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -100,6 +107,7 @@
 ---
 
 ### 2. Trait 系统形式化
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -115,6 +123,7 @@
 ---
 
 ### 3. 生命周期形式化
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -130,6 +139,7 @@
 ---
 
 ### 4. 高级类型特性
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -145,6 +155,7 @@
 ---
 
 ### 5. 型变理论
+>
 > **[来源: Rust Official Docs]**
 
 **研究问题**:
@@ -164,6 +175,7 @@
 ---
 
 ## 形式化论证汇总
+>
 > **[来源: Rust Official Docs]**
 
 **Def TT1（类型理论覆盖）**：设 $\mathcal{T}$ 为类型理论族，$\mathcal{T} = \{\text{type\_system},\, \text{trait},\, \text{lifetime},\, \text{advanced},\, \text{variance}\}$。每 $t \in \mathcal{T}$ 有 Def、Axiom、Theorem 及证明。
@@ -202,6 +214,8 @@
 
 ### 已完成 ✅ {#已完成-}
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [x] [类型系统基础](./type_system_foundations.md) - 100%
 - [x] [类型构造能力](./construction_capability.md) - Def TCON1、矩阵、决策树
 - [x] [Trait 系统形式化](./trait_system_formalization.md) - 100%
@@ -215,16 +229,22 @@
 
 ### 核心文档
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 - [形式化工程系统 - 类型系统](../../rust-formal-engineering-system/01_theoretical_foundations/01_type_system/README.md)
 - [类型系统文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统速查卡](../../02_reference/quick_reference/type_system.md)
 
 ### 代码实现
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 - [类型系统实现](../../../crates/c02_type_system/src/README.md)
 - [类型系统示例](../../../crates/c02_type_system/examples/README.md)
 
 ### 学术资源
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 - [CORE_THEOREMS_FULL_PROOFS](../CORE_THEOREMS_FULL_PROOFS.md) — 类型安全 T-TY3 完整证明（L2）；[coq_skeleton](../coq_skeleton/README.md) — Coq 证明骨架
 - **Types and Programming Languages** (Benjamin C. Pierce)
@@ -236,6 +256,8 @@
 ## 📖 研究方法 {#-研究方法}
 
 ### 类型理论工具
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 - **Coq**: 类型理论证明助手
 - **Agda**: 依赖类型编程语言
@@ -329,7 +351,6 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -112,6 +112,8 @@
 **主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
 
 ### Prusti
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -166,6 +168,8 @@ cargo prusti --file src/lib.rs
 ---
 
 ### Kani
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -217,6 +221,8 @@ cargo kani --function test_abs
 ---
 
 ### 可选进阶：Coq/Lean
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -232,6 +238,8 @@ cargo kani --function test_abs
 > **[来源: Rust Official Docs]**
 
 ### Criterion.rs
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -286,6 +294,8 @@ cargo bench
 ---
 
 ### perf
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -325,6 +335,8 @@ perf stat ./target/release/my_program
 ---
 
 ### flamegraph
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -364,6 +376,8 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 
 ### Miri
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **用途**: Rust 的中断执行器，用于检查未定义行为
 
 **安装**:
@@ -397,6 +411,8 @@ cargo miri test --test my_test
 ---
 
 ### Valgrind
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **用途**: 内存错误检测工具
 

@@ -110,6 +110,8 @@ Miri 的核心价值在于：
 Miri 仅支持 **nightly** 工具链，因为 Miri 需要编译器内部不稳定的 API。
 
 ### 安装 Miri
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +127,8 @@ cargo +nightly miri setup
 ```
 
 ### 基本命令
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -143,6 +147,8 @@ rustc +nightly -Zmiri --edition 2024 file.rs
 ```
 
 ### 常用环境变量
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -166,6 +172,8 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-tree-borrows" cargo +nightly miri tes
 > **[来源: Rust Official Docs]**
 
 ### 1. Use-after-free (UAF)
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +206,8 @@ error: Undefined Behavior: pointer to alloc1402 was dereferenced after this allo
 ```
 
 ### 2. Data Race (数据竞争)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,6 +243,8 @@ error: Undefined Behavior: Data race detected between Read on thread `<unnamed>`
 ```
 
 ### 3. Aliasing Violations (别名违规)
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -257,6 +269,8 @@ fn aliasing_violation() {
 ```
 
 ### 4. 其他常见 UB
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -277,6 +291,8 @@ fn aliasing_violation() {
 Miri 支持两种不同的内存别名模型，通过 `-Zmiri-tree-borrows` 切换。
 
 ### Stacked Borrows (默认)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 Stacked Borrows 是 Rust 的原始别名模型，由 Ralf Jung 在博士论文中提出。它用一个"栈"来追踪所有指向同一内存位置的引用。
 

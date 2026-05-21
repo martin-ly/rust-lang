@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 主要组织
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -83,6 +85,8 @@ Rust基金会:
 
 ### 1.2 在线社区
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```
 论坛和讨论:
 ├── Rust Users Forum
@@ -112,6 +116,8 @@ Rust基金会:
 ## 2. 参与方式
 
 ### 2.1 代码贡献
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```
 贡献领域:

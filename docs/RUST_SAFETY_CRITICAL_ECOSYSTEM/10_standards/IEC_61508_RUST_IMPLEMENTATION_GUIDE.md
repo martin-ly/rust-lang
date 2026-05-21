@@ -63,6 +63,8 @@ IEC 61508-x:
 > **[来源: Rust Official Docs]**
 
 ### 7.4.2 软件安全需求规范
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -174,6 +176,8 @@ pub enum SafetyError {
 ```
 
 ### 7.4.3 软件安全验证
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -243,6 +247,8 @@ mod verification {
 > **[来源: Rust Official Docs]**
 
 ### Table A.1 - 设计和编码技术
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -332,6 +338,8 @@ pub enum CommunicationResult<T> {
 ```
 
 ### Table A.2 - 数据导向技术
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -403,6 +411,8 @@ fn enter_safe_state() {
 
 ### 系统性能力(SCL)评估
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```
 系统能力等级评估矩阵:
 
@@ -416,6 +426,8 @@ Rust适用性: SCL 2-3
 ```
 
 ### 硬件容错要求
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 //! IEC 61508-2 硬件容错架构Rust实现
@@ -483,6 +495,8 @@ impl Voter {
 ## 工业协议集成
 
 ### Modbus RTU/TCP
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 //! SIL 2级Modbus实现

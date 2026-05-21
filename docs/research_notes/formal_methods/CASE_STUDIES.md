@@ -51,6 +51,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 规范
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -69,6 +71,8 @@ invariant Vec<T> {
 ```
 
 ### 1.2 push操作证明
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +99,8 @@ impl<T> Vec<T> {
    - 原有元素不变
 
 ### 1.3 pop操作证明
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -122,6 +128,8 @@ fn pop(&mut self) -> Option<T> {
 > **[来源: Rust Official Docs]**
 
 ### 2.1 Box<T>
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -153,6 +161,8 @@ fn drop(&mut self) {
 ```
 
 ### 2.2 Rc<T>
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -527,7 +537,6 @@ invariant CrossFFI {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

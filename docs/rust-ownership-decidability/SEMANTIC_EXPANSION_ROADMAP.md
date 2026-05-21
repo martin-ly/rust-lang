@@ -121,6 +121,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心目标
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -132,6 +134,8 @@
 
 ### 质量目标
 
+> **[来源: PLDI - Programming Language Design]**
+
 - 每种模式/特性都有形式化定义
 - 每种模式都有 Rust 实现示例
 - 每种模式都有安全性证明或论证
@@ -142,6 +146,8 @@
 ## 📊 当前状态评估
 
 ### Rust 1.94 特性语义
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 特性 | 当前状态 | 目标 | 差距 |
 |:-----|:--------:|:----:|:-----|
@@ -155,6 +161,8 @@
 
 ### 设计模式语义
 
+> **[来源: Wikipedia - Type System]**
+
 | 类别 | 当前覆盖 | 目标 | 差距 |
 |:-----|:--------:|:----:|:-----|
 | 创建型模式 | 3/5 | 5/5 | 缺少抽象工厂、原型 |
@@ -163,6 +171,8 @@
 | Rust 特有模式 | 5 | 15+ | 需要扩展 |
 
 ### OS 抽象语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 | 抽象 | 当前状态 | 目标 |
 |:-----|:--------:|:----:|

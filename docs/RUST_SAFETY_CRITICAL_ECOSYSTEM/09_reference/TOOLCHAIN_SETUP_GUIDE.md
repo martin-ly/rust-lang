@@ -53,6 +53,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 安全关键工具栈
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. Rust工具链安装
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -113,6 +117,8 @@ rustup default 1.81.0
 ```
 
 ### 2. Ferrocene工具链 (预认证)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +137,8 @@ rustc --version  # 应显示Ferrocene版本
 ```
 
 ### 3. 开发工具安装
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +169,8 @@ rustup component add llvm-tools-preview
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml模板
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -233,6 +243,8 @@ path = "src/main.rs"
 ```
 
 ### rust-toolchain.toml
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -256,6 +268,8 @@ profile = "minimal"
 ```
 
 ### .cargo/config.toml
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -300,6 +314,8 @@ crates-io = { index = "https://github.com/rust-lang/crates.io-index" }
 
 ### clippy.toml
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```toml
 # 安全关键特定配置
 
@@ -341,6 +357,8 @@ struct-field-name-threshold = 5
 ```
 
 ### 自定义Lint规则
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```rust
 // src/lints.rs

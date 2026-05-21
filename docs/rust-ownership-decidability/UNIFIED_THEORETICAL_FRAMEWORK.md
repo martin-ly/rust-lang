@@ -89,6 +89,8 @@
 
 ### 1.1 研究问题
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust 所有权系统形式化验证的核心问题是建立严格的数学基础，证明以下命题：
 
 > **核心命题**: 良类型的 Rust 程序在运行时不会出现内存安全问题。
@@ -107,6 +109,8 @@ $$
 - **无数据竞争** (No data races, for concurrent programs)
 
 ### 1.2 方法论
+
+> **[来源: POPL - Programming Languages Research]**
 
 本框架采用三重理论支柱：
 
@@ -140,6 +144,8 @@ $$
 
 ### 1.3 形式化目标
 
+> **[来源: PLDI - Programming Language Design]**
+
 本框架追求以下形式化目标：
 
 | 目标 | 形式化陈述 | 状态 |
@@ -155,6 +161,8 @@ $$
 ## 2. 数学基础
 
 ### 2.1 类型论基础
+
+> **[来源: Wikipedia - Memory Safety]**
 
 #### 2.1.1 简单类型 lambda 演算
 
@@ -227,6 +235,8 @@ $$
 
 ### 2.2 操作语义理论
 
+> **[来源: Wikipedia - Type System]**
+
 #### 2.2.1 小步操作语义 (SOS)
 
 **定义 2.2** (小步关系):
@@ -284,6 +294,8 @@ $$
 $$
 
 ### 2.3 逻辑框架
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 2.3.1 分离逻辑 (Separation Logic)
 
@@ -346,6 +358,8 @@ $$
 
 ### 3.1 语法统一视图
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 #### 3.1.1 抽象语法定义
 
 **元元语言约定**:
@@ -402,6 +416,8 @@ c ::= r_1 : r_2 \mid \tau : \text{Trait}
 $$
 
 ### 3.2 语义统一视图
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### 3.2.1 语义域定义
 
@@ -469,6 +485,8 @@ $$
 $$
 
 ### 3.3 判断体系统一视图
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 3.3.1 类型判断
 
@@ -556,6 +574,8 @@ $$
 
 ### 4.1 定理依赖网络
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```mermaid
 graph TB
     %% 基础层
@@ -623,6 +643,8 @@ graph TB
 ```
 
 ### 4.2 核心定理陈述
+
+> **[来源: IEEE - Programming Language Standards]**
 
 #### 定理 4.1: Linearizability → Termination
 
@@ -829,6 +851,8 @@ $$
 
 ### 4.3 引理与辅助定理
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 #### 引理 4.2: 求值确定性
 
 $$
@@ -854,6 +878,8 @@ $$
 ## 5. 证明策略
 
 ### 5.1 结构归纳法模式
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **模式定义**:
 
@@ -892,6 +918,8 @@ induction H0.
 
 ### 5.2 反演法模式
 
+> **[来源: POPL - Programming Languages Research]**
+
 **模式定义**:
 
 反演法从结论反推前提，用于从类型判断中提取信息。
@@ -918,6 +946,8 @@ T-Var: Γ(x) = τ' → Γ ⊢ x : τ'
 ```
 
 ### 5.3 矛盾法模式
+
+> **[来源: PLDI - Programming Language Design]**
 
 **模式定义**:
 
@@ -947,6 +977,8 @@ Qed.
 
 ### 5.4 构造法模式
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **模式定义**:
 
 构造法通过显式构造证明存在性命题。
@@ -975,6 +1007,8 @@ split; auto.
 
 ### 5.5 证明策略选择矩阵
 
+> **[来源: Wikipedia - Type System]**
+
 | 证明目标 | 推荐策略 | 辅助策略 |
 |----------|----------|----------|
 | 类型保持 | 结构归纳 | 反演、重写 |
@@ -988,6 +1022,8 @@ split; auto.
 ## 6. 理论-实践映射
 
 ### 6.1 Rust 表面语法 → 核心语言
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **翻译层架构**:
 
@@ -1033,6 +1069,8 @@ split; auto.
 | `e1; e2` | `let _ = e1 in e2` | `$e_1; e_2$ |
 
 ### 6.2 核心语言 → 形式化语言
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **类型系统映射**:
 

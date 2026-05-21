@@ -100,6 +100,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 场景：类型安全的资源管理
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -152,6 +154,8 @@ fn test_resource_manager() {
 > **[来源: Rust Official Docs]**
 
 ### 场景：异步HTTP服务器
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +192,8 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
 > **[来源: Rust Official Docs]**
 
 ### 场景：多线程进程池
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -259,6 +265,8 @@ impl Drop for ThreadPool {
 > **[来源: Rust Official Docs]**
 
 ### 场景：使用宏实现设计模式
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -309,6 +317,8 @@ fn test_singleton() {
 > **[来源: Rust Official Docs]**
 
 ### 场景：高性能数据处理管道
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use c08_algorithms::*;

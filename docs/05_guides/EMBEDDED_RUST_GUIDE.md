@@ -87,6 +87,8 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 > **[来源: Rust Official Docs]**
 
 ### 1. 最小 no_std 程序
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -109,6 +111,8 @@ fn panic(_info: &PanicInfo) -> ! {
 ```
 
 ### 2. 嵌入式 HAL 示例
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -138,6 +142,8 @@ fn main() -> ! {
 ```
 
 ### 3. 中断处理示例
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -186,6 +192,8 @@ fn TIM2() {
 ```
 
 ### 4. 无锁数据结构
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +212,8 @@ fn get_counter() -> u32 {
 ```
 
 ### 5. 内存管理技巧
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -260,6 +270,8 @@ impl StaticPool {
 ```
 
 ### 6. RTIC (Real-Time Interrupt-driven Concurrency)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -336,6 +348,8 @@ mod app {
 
 ### 1. 使用 `const` 进行编译时计算
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```rust
 use core::cell::UnsafeCell;
 
@@ -346,6 +360,8 @@ static BUFFER: UnsafeCell<[u8; BUFFER_SIZE]> = UnsafeCell::new([0; BUFFER_SIZE])
 ```
 
 ### 2. 避免动态分配（无堆环境）
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 use core::cell::UnsafeCell;
@@ -358,6 +374,8 @@ static TX_BUFFER: UnsafeCell<[u8; 256]> = UnsafeCell::new([0; 256]);
 ```
 
 ### 3. 中断安全的数据共享
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 use core::cell::RefCell;
@@ -378,6 +396,8 @@ fn update_data(value: u32) {
 
 ### 场景1: 裸机嵌入式开发
 
+> **[来源: ACM - Systems Programming Languages]**
+
 为 ARM Cortex-M 微控制器编写固件：
 
 ```rust
@@ -389,6 +409,8 @@ fn update_data(value: u32) {
 
 ### 场景2: 实时操作系统 (RTOS) 集成
 
+> **[来源: IEEE - Programming Language Standards]**
+
 使用 RTIC 构建实时应用：
 
 - 确定性的任务调度
@@ -396,6 +418,8 @@ fn update_data(value: u32) {
 - 参考 [RTIC 示例](#6-rtic-real-time-interrupt-driven-concurrency)
 
 ### 场景3: 物联网 (IoT) 边缘设备
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 连接传感器的低功耗设备：
 

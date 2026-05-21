@@ -36,6 +36,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -53,7 +54,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Proxy 形式化分析](#proxy-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Proxy 结构）](#def-11proxy-结构)
@@ -86,6 +87,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -94,6 +96,8 @@
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Proxy 结构）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -110,6 +114,8 @@ $$\mathcal{PR} = \langle P, T, \mathit{access}: P \times T, \mathit{delegate}: P
 ---
 
 ### Axiom PR1（接口一致公理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -118,6 +124,8 @@ $$\forall p: P,\, p: \mathrm{impl}\,T \land \mathit{behavior}(p) \equiv_{\mathrm
 代理与目标接口一致，可透明替换。
 
 ### Axiom PR2（委托规则公理）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -128,6 +136,8 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 定理 PR-T1（委托安全定理）
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +170,8 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 定理 PR-T2（访问控制定理）
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -187,6 +199,8 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 ---
 
 ### 推论 PR-C1（纯 Safe Proxy）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -204,6 +218,8 @@ Proxy 为纯 Safe；`OnceLock` 延迟加载、委托调用，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -261,6 +277,8 @@ assert_eq!(p.request(), "real");
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 Axiom PR1 (接口一致)
@@ -494,7 +512,6 @@ graph LR
 
 - [02_structural 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

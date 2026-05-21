@@ -92,6 +92,8 @@
 
 ### ✅ 核心内容 (100%)
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 类别 | 数量 | 说明 |
 | :--- | :--- | :--- |
 | 所有权系统 | 11篇 | 完整形式化、证明、示例 |
@@ -103,6 +105,8 @@
 
 ### ✅ 项目管理 (100%)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 | 文档 | 用途 |
 | :--- | :--- |
 | PROJECT_MAINTENANCE_GUIDE.md | 维护标准 |
@@ -112,6 +116,8 @@
 | FINAL_VERIFICATION_CHECKLIST.md | 验证清单 |
 
 ### ✅ 完成认证 (100%)
+
+> **[来源: IEEE - Programming Language Standards]**
 
 | 文档 | 用途 |
 | :--- | :--- |

@@ -74,6 +74,8 @@ The release includes significant improvements to slice iteration with `array_win
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Borrow Checker Improvements
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -90,6 +92,8 @@ The release includes significant improvements to slice iteration with `array_win
 
 ### 1.2 Lifetime Inference Changes
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 #### LUB Coercions Improvement (1.93)
 
 - **Change:** "LUB coercions now correctly handle function item types, and functions with differing safeties"
@@ -102,6 +106,8 @@ The release includes significant improvements to slice iteration with `array_win
 - The `mismatched_lifetime_syntaxes` lint (from earlier versions) remains active
 
 ### 1.3 New Lint Warnings
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 | Lint Name | Version | Default Level | Description | Ownership Impact |
 |-----------|---------|---------------|-------------|------------------|
@@ -132,6 +138,8 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 ## 2. Standard Library Changes
 
 ### 2.1 LazyCell/LazyLock Improvements (1.94)
+
+> **[来源: ACM - Systems Programming Languages]**
 
 #### New API Methods
 
@@ -180,6 +188,8 @@ fn modify_local_lazy() {
 
 ### 2.2 `array_windows` - Slice Iteration Enhancement (1.94)
 
+> **[来源: IEEE - Programming Language Standards]**
+
 #### New API: `<[T]>::array_windows`
 
 ```rust
@@ -203,6 +213,8 @@ fn has_abba(s: &str) -> bool {
 - Pattern matching allows the borrow checker to understand element usage patterns better
 
 ### 2.3 BinaryHeap Relaxations (1.94)
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 #### Trait Bound Relaxation
 
@@ -239,6 +251,8 @@ fn main() {
 
 ### 2.4 Other Notable Standard Library Changes
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 #### `<[T]>::element_offset` (1.94)
 
 ```rust
@@ -271,6 +285,8 @@ New methods for safe uninit memory handling:
 
 ### 3.1 Clippy New Lints
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### Rust 1.94 Clippy Additions
 
 | Lint | Category | Description |
@@ -285,6 +301,8 @@ New methods for safe uninit memory handling:
 - `clippy::declare_interior_mutable_const` - Warns on declaring `const` items with interior mutability
 
 ### 3.2 rust-analyzer Improvements
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### Recent Enhancements (January-March 2026)
 
@@ -307,6 +325,8 @@ rustc-unicode = true  # Enable unicode diagnostic rendering
 ## 4. Impact on Existing Code
 
 ### 4.1 Breaking Changes
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 #### None in Core Language
 

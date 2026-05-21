@@ -46,6 +46,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Rust 1.94 核心语义思维导图
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -157,6 +159,8 @@ mindmap
 ```
 
 ### 1.2 所有权语义思维导图
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -208,6 +212,8 @@ mindmap
 ```
 
 ### 1.3 类型系统思维导图
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -269,6 +275,8 @@ mindmap
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权语义矩阵
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 

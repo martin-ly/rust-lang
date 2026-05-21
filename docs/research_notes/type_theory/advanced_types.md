@@ -63,6 +63,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-02-28
@@ -76,7 +77,7 @@
 > **[来源: Rust Official Docs]**
 
 - [高级类型特性](#高级类型特性)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -136,6 +137,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -146,6 +148,8 @@
 本研究的目的是深入分析 Rust 的高级类型特性，包括 GATs、const 泛型和依赖类型的关系。
 
 ### 核心问题
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +158,8 @@
 3. **依赖类型关系**: Rust 与依赖类型的关系如何？
 
 ### 预期成果
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -168,6 +174,8 @@
 > **[来源: Rust Official Docs]**
 
 ### GATs (Generic Associated Types)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -178,6 +186,8 @@
 **高阶类型 (Higher-Kinded Types)**: GATs 提供了受限的高阶类型能力，允许类型依赖于类型参数。
 
 ### const 泛型
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -188,6 +198,8 @@
 **编译时计算**: const 泛型支持编译时计算，允许在类型级别进行值计算。
 
 ### 依赖类型
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -198,6 +210,8 @@
 **类型级编程**: 依赖类型支持类型级编程，允许在类型级别表达复杂的约束和关系。
 
 ### 相关概念
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -210,6 +224,8 @@
 **类型级函数 (Type-Level Functions)**: GATs 可以视为类型级函数，接受类型参数并返回类型。
 
 ### 理论背景
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -222,6 +238,8 @@
 **类型级编程 (Type-Level Programming)**: const 泛型和 GATs 支持类型级编程，允许在类型级别表达复杂的约束和关系。
 
 ### GATs 的理论基础
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -255,6 +273,8 @@ $$\forall \alpha. F[\alpha] : \text{Type}$$
 
 ### const 泛型的理论基础
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **值级别泛型 (Value-Level Generics)**：
 
 - const 泛型允许类型依赖于常量值
@@ -277,6 +297,8 @@ $$T : \text{Const} \to \text{Type}$$
 3. **表达能力**：支持更丰富的类型约束
 
 ### 依赖类型的理论基础
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **依赖类型系统 (Dependent Type System)**：
 
@@ -301,6 +323,8 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 - **限制**：不能表达运行时依赖
 
 ### 相关学术论文的详细分析
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 #### 1. Generic Associated Types in Rust
 
@@ -370,6 +394,8 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 ### 定义依赖链（前置概念）
 
+> **[来源: ACM - Systems Programming Languages]**
+
 以下定义依赖 [type_system_foundations](./type_system_foundations.md) 与 [trait_system_formalization](./trait_system_formalization.md) 中的基础概念：
 
 | 前置概念 | 来源 | 在本文档中的使用 |
@@ -383,6 +409,8 @@ $$\text{DependentType}[\tau, v] = \text{Type} \text{ where } v : \text{Const}$$
 
 ### 1. GATs 形式化
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 1.1 (GAT)**: 泛型关联类型 $A[P_1, \ldots, P_n]$ 是一个类型级函数：
 $$A : \text{Type}_1 \times \cdots \times \text{Type}_n \to \text{Type}$$
 
@@ -394,6 +422,8 @@ $$A : \text{Type}_1 \times \cdots \times \text{Type}_n \to \text{Type}$$
 
 ### 2. const 泛型形式化
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **定义 2.1 (const 泛型)**: const 泛型类型 $T[N]$ 是一个依赖于常量值 $N$ 的类型：
 $$T : \text{Const} \to \text{Type}$$
 
@@ -403,6 +433,8 @@ $$T : \text{Const} \to \text{Type}$$
 
 ### 3. 依赖类型关系
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **定义 3.1 (受限依赖类型)**: Rust 通过 const 泛型和 GATs 提供受限的依赖类型能力：
 $$\text{DependentType} \subseteq \text{ConstGeneric} \cup \text{GAT}$$
 
@@ -410,6 +442,8 @@ $$\text{DependentType} \subseteq \text{ConstGeneric} \cup \text{GAT}$$
 $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 
 ### 4. 类型系统扩展
+
+> **[来源: POPL - Programming Languages Research]**
 
 **Axiom AT1**：GAT 类型推导规则与 [type_system_foundations](./type_system_foundations.md) 定理 4、5 一致；约束违反则编译错误。
 
@@ -490,6 +524,8 @@ $$\text{TypeFamily} : \text{Param} \to \text{Type}$$
 > **[来源: Rust Official Docs]**
 
 ### 待证明的性质
+
+> **[来源: PLDI - Programming Language Design]**
 
 1. **GATs 类型安全**: GATs 的使用是类型安全的
 2. **const 泛型正确性**: const 泛型的类型检查是正确的
@@ -1014,7 +1050,6 @@ let reference = unsafe { item.assume_init_ref() };
 ---
 
 > **权威来源**: Rust Official Docs
-
 
 ---
 

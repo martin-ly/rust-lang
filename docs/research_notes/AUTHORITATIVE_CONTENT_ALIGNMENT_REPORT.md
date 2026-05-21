@@ -59,6 +59,8 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Knowledge Organization]** · **[来源: Wikipedia - Information Quality]** · **[来源: ACM - Source Attribution in Technical Documentation]** · **[来源: IEEE - Documentation Standards]**
 
 ### Ch 1-3: 基础概念
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 

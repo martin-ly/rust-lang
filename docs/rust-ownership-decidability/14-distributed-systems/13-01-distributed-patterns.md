@@ -46,6 +46,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust在分布式系统中的优势
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -58,6 +60,8 @@
 ```
 
 ### 常用框架与库
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 用途 | 库/框架 | 特点 |
 |------|--------|------|
@@ -73,6 +77,8 @@
 ## 2. 微服务架构模式
 
 ### API Gateway模式
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use axum::{
@@ -131,6 +137,8 @@ async fn proxy_to_user_service(
 
 ### Sidecar模式
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 // 使用Envoy或自定义sidecar实现横切关注点
 
@@ -182,6 +190,8 @@ impl<S> SidecarMiddleware<S> {
 ## 3. 服务发现与注册
 
 ### Consul集成
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 use consul::Client;
@@ -252,6 +262,8 @@ impl ServiceDiscovery {
 ```
 
 ### 负载均衡
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};

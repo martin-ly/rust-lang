@@ -38,6 +38,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. `cfg_select!` 宏
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -68,6 +70,8 @@ let arch_str = cfg_select! {
 ```
 
 ### 2. `if let` guards on match arms
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -84,6 +88,8 @@ match value {
 ```
 
 ### 3. 路径段关键字重命名导入
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -92,6 +98,8 @@ use std::keyword as kw;  // 重命名关键字路径段
 ```
 
 ### 4. PowerPC/PowerPC64 内联汇编稳定化
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -111,6 +119,8 @@ unsafe {
 > **[来源: Rust Official Docs]**
 
 ### `core::range` 模块
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -131,6 +141,8 @@ for i in range {
 ```
 
 ### 原子操作 — `update` / `try_update`
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

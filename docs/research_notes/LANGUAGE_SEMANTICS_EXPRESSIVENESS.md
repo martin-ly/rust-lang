@@ -97,6 +97,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心问题（用户反馈）
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -108,6 +110,8 @@
 | **无全局一致性** | 语义与类型系统、所有权、借用等模块的衔接 | 与 PROOF_INDEX、COMPREHENSIVE_OVERVIEW 交叉引用 |
 
 ### 设计原则
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +153,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 小步操作语义（Small-Step）
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -165,6 +171,8 @@ $\to^*$ 为 $\to$ 的自反传递闭包。
 若 $e \to e'$ 且 $\Omega$ 为所有权状态，则移动/复制/借用操作满足 [ownership_model](formal_methods/ownership_model.md) 规则 1–3。
 
 ### 2. 大步操作语义（Big-Step）
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -176,6 +184,8 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 *证明*：由 [type_system_foundations](type_theory/type_system_foundations.md) 定理 2（保持性）与定理 1（进展性）组合可得。
 
 ### 3. 表达能力边界：操作语义视角
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -193,6 +203,8 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 > **[来源: Rust Official Docs]**
 
 ### 1. 类型即命题（Curry-Howard）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -209,6 +221,8 @@ $\Gamma \vdash e : \tau \land e \Downarrow v \Rightarrow \Gamma \vdash v : \tau$
 
 ### 2. 构造性语义：何者可构造
 
+> **[来源: PLDI - Programming Language Design]**
+
 **定义 3.2（构造性）**
 若类型 $T$ 有非空值集合，则 $T$ 可构造。若某性质 $P$ 有证明项，则 $P$ 构造性成立。
 
@@ -219,6 +233,8 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 `!` (never type) 对应逻辑中的 $\bot$：无构造子，用于表示不可达。
 
 ### 3. 表达能力边界：指称语义视角
+
+> **[来源: Wikipedia - Memory Safety]**
 
 | 可表达 | 不可表达 | 边界论证 |
 | :--- | :--- | :--- |
@@ -232,6 +248,8 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 ## 📜 公理语义与前/后条件 {#-公理语义与前后条件}
 
 ### 1. Hoare 逻辑与 Rust
+
+> **[来源: Wikipedia - Type System]**
 
 **定义 4.1（Hoare 三元组）**
 $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后满足后置条件 $Q$。
@@ -248,10 +266,14 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 ### 2. 分离逻辑与所有权
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **引理 4.1**
 所有权可对应分离逻辑中的 $\mapsto$：$x \mapsto v$ 表示 $x$ 拥有 $v$。借用规则 5–8 对应分离逻辑的帧规则与资源分割。
 
 ### 3. 表达能力边界：公理语义视角
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 可表达 | 不可表达 | 边界论证 |
 | :--- | :--- | :--- |
@@ -265,6 +287,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 
 ### 1. 多维表达能力边界矩阵
 
+> **[来源: IEEE - Programming Language Standards]**
+
 | 维度 | 可表达 | 边界 | 不可表达 | 论证依据 |
 | :--- | :--- | :--- | :--- | :--- |
 | **内存** | 所有权、借用、RAII | 无 GC、无手动 malloc/free | 跨线程共享无同步 | [ownership_model](formal_methods/ownership_model.md) T2, T3 |
@@ -277,6 +301,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 | **型变** | 协变、逆变、不变 | 违反则悬垂 | 任意型变 | [variance_theory](type_theory/variance_theory.md) T1–T4 |
 
 ### 2. 表达能力边界：决策树
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 表达能力边界决策树
@@ -300,6 +326,8 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ```
 
 ### 3. 边界定理汇总
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **公理 EB0**：表达能力边界由类型系统、所有权、借用、生命周期、型变、异步、Pin 等机制共同定义；违反则编译错误或 UB。
 

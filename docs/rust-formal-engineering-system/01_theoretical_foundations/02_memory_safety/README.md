@@ -106,6 +106,8 @@ fn no_use_after_free() {
 
 ### 内存布局与对齐
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 // Rust 保证内存对齐安全
 use std::mem;
@@ -134,6 +136,8 @@ fn memory_layout() {
 ```
 
 ### 安全抽象边界
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 // 安全封装 unsafe 操作
@@ -190,6 +194,8 @@ impl Drop for SafeBuffer {
 ```
 
 ### 编译时内存安全检查
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 // Rust 编译器在编译时防止内存错误

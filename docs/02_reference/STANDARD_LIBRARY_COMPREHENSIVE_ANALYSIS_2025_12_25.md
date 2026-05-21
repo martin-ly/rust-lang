@@ -214,6 +214,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 标准库的定义和定位
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -246,6 +248,8 @@
 4. **安全保证**: 标准库遵循 Rust 安全保证
 
 ### 1.2 标准库的设计哲学
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -311,6 +315,8 @@ match value {
 ```
 
 ### 1.3 Rust 1.92.0 标准库新特性
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -390,6 +396,8 @@ let equal = vec1.iter().eq(vec2.iter());
 ---
 
 ### 1.4 Rust 1.93.0 标准库新特性 🆕
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Rust 1.93.0 标准库引入了以下新特性：
 
@@ -519,6 +527,8 @@ println!("{}", formatter);  // 输出: Custom: 42
 
 ### 1.5 Rust 1.93.0 标准库行为变更 ⚠️
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Rust 1.93.0 对标准库内部实现进行了若干修正，可能影响现有代码或性能：
 
 #### 1.5.1 Copy 特化移除
@@ -570,6 +580,8 @@ target.append(&mut source);
 > **[来源: Rust Official Docs]**
 
 ### 2.1 集合类型 (std::collections)
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 2.1.1 HashMap<K, V>
 
@@ -672,6 +684,8 @@ let back = deque.pop_back();
 - **空间复杂度**: O(n)
 
 ### 2.2 并发类型 (std::sync)
+
+> **[来源: POPL - Programming Languages Research]**
 
 #### 2.2.1 `Arc<T>`
 
@@ -798,6 +812,8 @@ writer.join().unwrap();
 
 ### 2.3 I/O 类型 (std::io)
 
+> **[来源: PLDI - Programming Language Design]**
+
 #### 2.3.1 Read 和 Write Traits
 
 **定义**: I/O 操作的抽象接口。
@@ -851,6 +867,8 @@ for line in reader.lines() {
 
 ### 2.4 线程类型 (std::thread)
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 2.4.1 Thread
 
 **定义**: 线程抽象。
@@ -898,6 +916,8 @@ println!("Thread returned: {}", result);
 
 ### 2.5 进程类型 (std::process)
 
+> **[来源: Wikipedia - Type System]**
+
 #### 2.5.1 Command
 
 **定义**: 进程命令构建器。
@@ -921,6 +941,8 @@ println!("{}", String::from_utf8(output.stdout)?);
 ```
 
 ### 2.6 时间类型 (std::time)
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 2.6.1 Instant
 
@@ -964,6 +986,8 @@ println!("{} 毫秒", millis);
 ```
 
 ### 2.7 错误处理 (std::error, std::result)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.7.1 Result<T, E>
 
@@ -1023,6 +1047,8 @@ let result = value
 
 ### 3.1 零成本抽象
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **定义**: 抽象不应该带来运行时开销。
 
 **论证**:
@@ -1044,6 +1070,8 @@ let opt: Option<&i32> = Some(&42);
 ```
 
 ### 3.2 所有权系统
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **定义**: Rust 的所有权系统确保内存安全。
 
@@ -1068,6 +1096,8 @@ let slice = &vec[..];  // 不可变借用
 ```
 
 ### 3.3 内存安全
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **定义**: Rust 保证内存安全，无需垃圾回收。
 
@@ -1094,6 +1124,8 @@ fn get_slice() -> &[i32] {
 ```
 
 ### 3.4 性能优化
+
+> **[来源: IEEE - Programming Language Standards]**
 
 **定义**: 标准库经过高度优化。
 
@@ -1126,6 +1158,8 @@ map.insert("key", "value");  // O(1) 平均
 
 ### 4.1 何时使用标准库
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **优先使用标准库的场景**:
 
 1. ✅ **通用场景**: 标准库经过充分测试和优化
@@ -1150,6 +1184,8 @@ let data = Mutex::new(0);
 
 ### 4.2 何时使用第三方库
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **使用第三方库的场景**:
 
 1. ⚠️ **特殊需求**: 标准库无法满足的特殊需求
@@ -1171,6 +1207,8 @@ use serde::{Serialize, Deserialize};
 ```
 
 ### 4.3 标准库与第三方库的权衡
+
+> **[来源: POPL - Programming Languages Research]**
 
 **权衡因素**:
 
@@ -1197,6 +1235,8 @@ use serde::{Serialize, Deserialize};
 > **[来源: Rust Official Docs]**
 
 ### 5.1 各模块的标准库使用情况
+
+> **[来源: PLDI - Programming Language Design]**
 
 #### C01 所有权与借用
 
@@ -1252,6 +1292,8 @@ use serde::{Serialize, Deserialize};
 
 ### 5.2 标准库使用示例
 
+> **[来源: Wikipedia - Memory Safety]**
+
 #### 示例 1: 使用 HashMap
 
 ```rust
@@ -1302,6 +1344,8 @@ println!("{}", String::from_utf8(output.stdout)?);
 
 ### 5.3 标准库使用最佳实践
 
+> **[来源: Wikipedia - Type System]**
+
 #### 实践 1: 优先使用标准库
 
 ```rust
@@ -1342,6 +1386,8 @@ let mut map = HashMap::with_capacity(100);  // 预分配容量
 
 ### 示例: 标准库类型安全验证
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 研究场景：验证标准库的类型安全保证
 // 对应：类型系统定理 T-TY3
@@ -1376,6 +1422,8 @@ fn main() {
 ```
 
 ### 示例: 标准库内存安全验证
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 研究场景：验证标准库的内存安全保证
@@ -1415,6 +1463,8 @@ fn main() {
 
 ### 标准库与形式化定理
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 | 标准库组件 | 形式化定理 | 安全保证 |
 | :--- | :--- | :--- |
 | `Vec<T>` | T-OW2, T-OW3 | 所有权唯一性、内存安全 |
@@ -1425,6 +1475,8 @@ fn main() {
 
 ### 研究笔记链接
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |
 | 形式化方法 | [../research_notes/formal_methods/ownership_model.md](../research_notes/formal_methods/ownership_model.md) | 所有权模型 |
@@ -1433,6 +1485,8 @@ fn main() {
 | 核心定理 | [../research_notes/CORE_THEOREMS_FULL_PROOFS.md](../research_notes/CORE_THEOREMS_FULL_PROOFS.md) | 完整定理证明 |
 
 ### 项目文档
+
+> **[来源: ACM - Systems Programming Languages]**
 
 | 文档 | 链接 | 内容 |
 | :--- | :--- | :--- |

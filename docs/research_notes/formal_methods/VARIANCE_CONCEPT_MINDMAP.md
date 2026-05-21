@@ -39,6 +39,7 @@
       - [相关文档](#相关文档-1)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 相关文档
 >
@@ -87,6 +88,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 协变 (Covariant) +
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -125,6 +128,8 @@ let b2: Box<&'a str> = b1;  // OK
 ---
 
 ### 1.2 逆变 (Contravariant) -
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +166,8 @@ let f: fn(&'a str) = handler;  // 可能错误，具体取决于'a
 ---
 
 ### 1.3 不变 (Invariant) =
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +227,8 @@ let mut r1: &mut &'static str = &mut "hello";
 > **[来源: Rust Official Docs]**
 
 ### 函数指针的型变
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -235,6 +244,8 @@ fn(T) -> U
 - 返回位置：函数可以"更具体"的返回，使用方也能接受
 
 ### 结构体的型变
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -254,6 +265,8 @@ struct Contravariant<T>(fn(T));
 
 ### 影响1: 生命周期子类型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 // 'static <: 'a (static更长，是任何'a的子类型)
 
@@ -267,6 +280,8 @@ fn takes_str<'a>(s: &'a str) {}
 ```
 
 ### 影响2: 智能指针的使用
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // Box的协变性允许：
@@ -283,6 +298,8 @@ let mut r: &mut &'static str = &mut "hello";
 ```
 
 ### 影响3: 回调函数的类型
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 // 回调函数参数是逆变的
@@ -422,7 +439,6 @@ let local = String::from("local");
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

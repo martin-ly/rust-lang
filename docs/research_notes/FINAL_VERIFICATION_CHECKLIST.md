@@ -52,6 +52,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 核心形式化文档
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -73,6 +75,8 @@
 
 ### 1.2 设计模式文档
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 | 分类 | 数量 | 检查项 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 创建型 | 5 | 每个模式有Def、定理、示例 | ✅ |
@@ -87,6 +91,8 @@
 
 ### 1.3 思维表征
 
+> **[来源: POPL - Programming Languages Research]**
+
 | 类型 | 目标 | 实际 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 思维导图 | 15 | 15 | ✅ |
@@ -98,6 +104,8 @@
 **结果**: 55/55 通过 ✅
 
 ### 1.4 实用资源
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 资源 | 检查项 | 状态 |
 | :--- | :--- | :--- |
@@ -115,6 +123,8 @@
 
 ### 2.1 形式化完整性
 
+> **[来源: Wikipedia - Memory Safety]**
+
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |
 | 定义(Def) | 每个核心概念有Def | 100+ Def | ✅ |
@@ -126,6 +136,8 @@
 **结果**: 5/5 通过 ✅
 
 ### 2.2 Rust衔接
+
+> **[来源: Wikipedia - Type System]**
 
 | 检查项 | 要求 | 结果 | 状态 |
 | :--- | :--- | :--- | :--- |

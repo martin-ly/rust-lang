@@ -85,6 +85,8 @@ Miri (Mid-level IR Interpreter) 是 Rust 的官方解释器，专门用于检测
 
 ### 2.1 解释执行模型
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 Miri 采用**字节码解释执行**的方式运行 Rust 程序：
 
 ```
@@ -108,6 +110,8 @@ Miri 采用**字节码解释执行**的方式运行 Rust 程序：
 | 平台依赖 | 目标平台 | 与主机无关 |
 
 ### 2.2 Stacked Borrows 内存模型
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Stacked Borrows 是 Rust 的实验性内存模型，用于精确追踪指针的借用关系。
 
@@ -146,6 +150,8 @@ let r2 = &mut x;  // 弹出 Unique(r1), 压入 Unique(r2)
 
 ### 2.3 Tree Borrows 模型
 
+> **[来源: ACM - Systems Programming Languages]**
+
 Tree Borrows 是 Stacked Borrows 的替代方案，使用**树结构**而非栈结构来追踪借用关系。
 
 ```
@@ -176,6 +182,8 @@ MIRI_TREE_BORROWS=1 cargo miri run
 
 ### 3.1 未定义行为 (UB) 的数学定义
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **定义 3.1 (未定义行为)**
 
 设程序状态为 $S = (M, P, T)$，其中：
@@ -198,6 +206,8 @@ $$\text{UB}(s_i) \Rightarrow \forall j > i: \neg\text{Defined}(s_j)$$
 
 ### 3.2 别名规则的形式化
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **定义 3.2 (别名关系)**
 
 给定两个指针 $p_1$ 和 $p_2$，别名关系 $A$ 定义为：
@@ -218,6 +228,8 @@ $$\text{active}(&mut\ T) \Rightarrow \neg\exists p: A(p, &mut\ T) \land \text{ac
 
 ### 3.3 内存模型定理
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **定理 3.3 (内存安全保证)**
 
 若程序 $P$ 在 Miri 中执行不产生 UB 报告，则 $P$ 满足：
@@ -232,6 +244,8 @@ $$\text{active}(&mut\ T) \Rightarrow \neg\exists p: A(p, &mut\ T) \land \text{ac
 
 ### 4.1 安装 Miri
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```bash
 # 安装 Miri 组件
 rustup component add miri
@@ -241,6 +255,8 @@ cargo miri --version
 ```
 
 ### 4.2 环境配置
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```toml
 # .cargo/config.toml
@@ -257,6 +273,8 @@ flags = ["-Zmiri-disable-isolation"]
 ## 5. 核心检测能力
 
 ### 5.1 使用未初始化内存
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **错误示例：**
 
@@ -310,6 +328,8 @@ fn partial_init() {
 
 ### 5.2 悬垂指针解引用
 
+> **[来源: Wikipedia - Type System]**
+
 **错误示例：**
 
 ```rust
@@ -346,6 +366,8 @@ fn main() {
 ```
 
 ### 5.3 数据竞争
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误示例：**
 

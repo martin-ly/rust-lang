@@ -36,6 +36,8 @@
 > **[来源: Rust Official Docs]**
 
 ### CARGO_CFG_DEBUG_ASSERTIONS
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -50,6 +52,8 @@
 ---
 
 ### cargo tree --format 长格式
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -67,6 +71,8 @@ cargo tree --format "{p} {l} {r}"
 ---
 
 ### cargo clean --workspace
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -88,6 +94,8 @@ cargo clean --workspace
 > **[来源: Rust Official Docs]**
 
 ### 移除 #![doc(document_private_items)]
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -100,6 +108,8 @@ cargo clean --workspace
 ---
 
 ### 宏搜索过滤
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -112,6 +122,8 @@ cargo clean --workspace
 ---
 
 ### import 搜索过滤
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 

@@ -78,6 +78,8 @@
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -91,6 +93,8 @@
 
 ### 练习验证
 
+> **[来源: IEEE - Programming Language Standards]**
+
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` (Easy)
 - `exercises/src/type_system/ex01_enum_pattern_match.rs` (Easy)
 - `exercises/rustlings_style/ex10_match_exhaustive/` (编译修复)
@@ -103,6 +107,8 @@
 
 ### 映射文件
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |
 | 所有权规则 | `crates/c01_ownership_borrow_scope/src/ownership/` | 三大所有权规则详解 |
@@ -113,6 +119,8 @@
 | 内部可变性 | `crates/c01_ownership_borrow_scope/src/internal_mut/` | Cell、RefCell、UnsafeCell |
 
 ### 练习验证
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - `exercises/src/ownership_borrowing/ex01_borrow_checker_fix.rs` (Easy)
 - `exercises/src/ownership_borrowing/ex02_string_slice.rs` (Easy)
@@ -130,6 +138,8 @@
 **掌握程度**: ✅ 完整
 
 ### 映射文件
+
+> **[来源: POPL - Programming Languages Research]**
 
 | 子主题 | 项目文件路径 | 说明 |
 | :--- | :--- | :--- |

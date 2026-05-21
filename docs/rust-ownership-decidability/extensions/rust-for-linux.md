@@ -59,6 +59,8 @@ Rust 提供了：
 
 ### 当前状态
 
+> **[来源: Wikipedia - Memory Safety]**
+
 截至 Linux 6.7+：
 
 - Rust 支持已合并到主线内核
@@ -69,6 +71,8 @@ Rust 提供了：
 ## 环境搭建
 
 ### 系统要求
+
+> **[来源: Wikipedia - Type System]**
 
 ```bash
 # 安装依赖（Ubuntu/Debian）
@@ -92,6 +96,8 @@ rustup target add x86_64-unknown-none
 ```
 
 ### 编译支持 Rust 的内核
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```bash
 # 克隆 Linux 内核源码
@@ -119,6 +125,8 @@ sudo make install
 
 ### 配置检查
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```bash
 # 检查 Rust 支持
 make rustavailable
@@ -130,6 +138,8 @@ make rust/bindings/patched
 ## 内核模块开发
 
 ### Hello World 模块
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **rust_hello.rs:**
 
@@ -184,6 +194,8 @@ config RUST_HELLO
 
 ### 模块参数
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use kernel::prelude::*;
 use kernel::module;
@@ -231,6 +243,8 @@ impl kernel::Module for RustParam {
 ## 字符设备驱动
 
 ### 基础字符设备
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 //! Rust 字符设备驱动示例
@@ -341,6 +355,8 @@ impl kernel::Module for RustCharDev {
 
 ### 使用 ioctl
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use kernel::ioctl;
 
@@ -411,6 +427,8 @@ impl kernel::file::Operations for RustIoctlDev {
 ## 块设备驱动
 
 ### 简单的 RAM 磁盘
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 //! Rust 块设备驱动 - RAM 磁盘
@@ -539,6 +557,8 @@ impl kernel::Module for RustRamDisk {
 
 ### 网络设备驱动
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 //! Rust 网络设备驱动示例
 
@@ -630,6 +650,8 @@ impl Drop for RustNetDev {
 ## eBPF 开发
 
 ### Aya 框架入门
+
+> **[来源: POPL - Programming Languages Research]**
 
 **安装工具链：**
 

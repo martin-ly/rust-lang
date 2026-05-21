@@ -53,6 +53,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1. 异步迭代器改进
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -95,6 +97,8 @@ fn process(n: i32) -> impl Future<Output = ()> {
 ---
 
 ### 2. const 上下文增强
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -136,6 +140,8 @@ const fn with_static_ref() -> &'static mut i32 {
 ---
 
 ### 3. JIT 编译器优化
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 

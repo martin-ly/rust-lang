@@ -77,6 +77,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 所有权 (Ownership)
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -98,6 +100,8 @@
 - 书的位置始终明确，不会丢失或重复
 
 ### 1.2 借用 (Borrowing)
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 借用
@@ -127,6 +131,8 @@ Rule 2: 引用必须始终有效
 
 ### 1.3 生命周期 (Lifetime)
 
+> **[来源: ACM - Systems Programming Languages]**
+
 ```text
 生命周期
 ├── 'static
@@ -148,6 +154,8 @@ Rule 2: 引用必须始终有效
 ## 二、派生概念
 
 ### 2.1 Move语义
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 Move语义
@@ -173,6 +181,8 @@ Move语义
 | 性能 | O(1) | 视大小 |
 
 ### 2.2 Drop trait
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```text
 Drop trait

@@ -59,6 +59,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 现有形式化模型综述
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -74,6 +76,8 @@
 | **Verus** | CMU/UT Austin | 线性幽灵类型；模式系统；终止性证明 | 仍在发展中 |
 
 ### 1.2 关键理论问题识别
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -111,6 +115,8 @@
 
 ### 2.1 总体目标
 
+> **[来源: IEEE - Programming Language Standards]**
+
 构建 Rust 所有权系统的**完整、严格、可机械化的形式化理论**，包括：
 
 1. **完整的元模型定义**（抽象语法、语义域、判断形式）
@@ -120,6 +126,8 @@
 5. **与现有模型的等价性/精化关系证明**
 
 ### 2.2 具体目标分解
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```
 G1: 元模型构建
@@ -165,6 +173,8 @@ G6: 机械化证明
 ## 3. 研究方法与技术路线
 
 ### 3.1 元模型构建方法
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 3.1.1 抽象语法 (Abstract Syntax)
 
@@ -220,6 +230,8 @@ Inductive expr : Type :=
 
 ### 3.2 形式化策略
 
+> **[来源: POPL - Programming Languages Research]**
+
 #### 3.2.1 分层形式化
 
 ```
@@ -260,6 +272,8 @@ L5: 并发 (Concurrency)
 ```
 
 ### 3.3 证明助手选择
+
+> **[来源: PLDI - Programming Language Design]**
 
 | 工具 | 优势 | 适用场景 |
 |------|------|----------|

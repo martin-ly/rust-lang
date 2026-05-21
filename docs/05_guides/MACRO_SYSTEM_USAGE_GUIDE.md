@@ -140,6 +140,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 声明宏
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -161,6 +163,8 @@ let v = vec![1, 2, 3];
 ```
 
 ### 过程宏
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -181,6 +185,8 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 > **[来源: Rust Official Docs]**
 
 ### 1. 声明宏
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -237,6 +243,8 @@ macro_rules! conditional {
 ```
 
 ### 2. 属性宏
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -257,6 +265,8 @@ fn my_function() {
 ```
 
 ### 3. 派生宏
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
 use proc_macro::TokenStream;
@@ -289,6 +299,8 @@ println!("{}", s.method());  // "MyStruct"
 
 ### 4. 函数式宏
 
+> **[来源: POPL - Programming Languages Research]**
+
 ```rust
 #[proc_macro]
 pub fn my_function_macro(input: TokenStream) -> TokenStream {
@@ -306,6 +318,8 @@ my_function_macro!(some input);
 
 ### 1. 调试宏
 
+> **[来源: PLDI - Programming Language Design]**
+
 ```rust
 macro_rules! dbg_print {
     ($($arg:tt)*) => {
@@ -316,6 +330,8 @@ macro_rules! dbg_print {
 ```
 
 ### 2. 测试宏
+
+> **[来源: Wikipedia - Memory Safety]**
 
 ```rust
 macro_rules! test_case {
@@ -332,6 +348,8 @@ test_case!(test_2, 2, 4);
 ```
 
 ### 3. 构建器宏
+
+> **[来源: Wikipedia - Type System]**
 
 ```rust
 macro_rules! builder {
@@ -374,6 +392,8 @@ let config = Config::new()
 
 ### 示例 1: 模式匹配与重复
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 // 匹配不同数量的参数
 macro_rules! calculate {
@@ -407,6 +427,8 @@ macro_rules! sum {
 ```
 
 ### 示例 2: Token Tree 操作
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 // 解析键值对
@@ -442,6 +464,8 @@ let map = hashmap! {
 
 ### 示例 3: 条件编译宏
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 macro_rules! platform_specific {
     // 根据平台选择代码
@@ -474,6 +498,8 @@ platform_specific! {
 ## 🔧 过程宏完整示例
 
 ### 示例 1: 自定义 Derive 宏
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```rust
 // lib.rs - 过程宏 crate

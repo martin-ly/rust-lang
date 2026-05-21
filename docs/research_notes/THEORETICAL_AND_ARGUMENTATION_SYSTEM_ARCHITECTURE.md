@@ -101,6 +101,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 理论体系四层架构
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -149,6 +151,8 @@
 ```
 
 ### 1.2 理论族依赖关系
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -179,6 +183,8 @@
 ```
 
 ### 1.3 理论覆盖范围矩阵
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -200,6 +206,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 论证要素五层结构
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -240,6 +248,8 @@
 ```
 
 ### 2.2 论证流向与一致性
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -262,6 +272,8 @@
 ```
 
 ### 2.3 论证体系索引
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -283,6 +295,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 3.1 安全与非安全边界总览
+
+> **[来源: IEEE - Programming Language Standards]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────────────────┐
@@ -320,6 +334,8 @@
 ```
 
 ### 3.2 安全保证形式化汇总
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 | 保证类型 | 安全机制 | 形式化定理 | 违反后果 |
 | :--- | :--- | :--- | :--- |

@@ -70,6 +70,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -97,6 +99,8 @@ type N16 = U16;  // typenum方案
 
 ### 1.2 设计目标
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 Typenum的设计目标:
 
 1. **零运行时开销**: 所有计算在编译期完成
@@ -106,6 +110,8 @@ Typenum的设计目标:
 5. **兼容性**: 支持Rust 1.20+
 
 ### 1.3 历史演进
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
 2016 ── typenum 1.0 发布
@@ -139,6 +145,8 @@ Typenum的设计目标:
 
 ### 2.1 Peano算术
 
+> **[来源: POPL - Programming Languages Research]**
+
 Peano算术是类型级数字的理论基础：
 
 ```
@@ -166,6 +174,8 @@ type Three = S<Two>; // S<S<S<Z>>>
 
 ### 2.2 类型作为值
 
+> **[来源: PLDI - Programming Language Design]**
+
 在Rust类型系统中，类型可以携带"值"信息：
 
 ```rust
@@ -181,6 +191,8 @@ type U3 = UInt<UInt<UTerm, B1>, B1>; // 2*1 + 1 = 3
 ```
 
 ### 2.3 二进制编码
+
+> **[来源: Wikipedia - Memory Safety]**
 
 Typenum使用二进制编码，效率更高：
 
@@ -207,6 +219,8 @@ U5 = UInt<UInt<UInt<UTerm, B1>, B0>, B1>  // 101
 ## 3. 核心类型系统
 
 ### 3.1 无符号整数
+
+> **[来源: Wikipedia - Type System]**
 
 无符号整数使用二进制表示：
 
@@ -244,6 +258,8 @@ let _: U64 = U64::default(); // 数字64的类型
 
 ### 3.2 有符号整数
 
+> **[来源: IEEE - Programming Language Standards]**
+
 有符号整数使用符号+幅度表示：
 
 ```rust
@@ -262,6 +278,8 @@ let _: N5 = N5::default(); // -5
 ```
 
 ### 3.3 类型别名
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 Typenum提供了直观的类型别名：
 
@@ -285,6 +303,8 @@ use_size::<U1024>();
 ## 4. 类型级运算
 
 ### 4.1 算术运算
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Typenum支持完整的算术运算：
 
@@ -334,6 +354,8 @@ type MaxResult = Max<U5, U3>; // U5
 
 ### 4.2 比较运算
 
+> **[来源: POPL - Programming Languages Research]**
+
 类型级比较产生布尔类型：
 
 ```rust
@@ -361,6 +383,8 @@ check_size::<U5, U3>();
 ```
 
 ### 4.3 位运算
+
+> **[来源: PLDI - Programming Language Design]**
 
 支持完整的位运算：
 

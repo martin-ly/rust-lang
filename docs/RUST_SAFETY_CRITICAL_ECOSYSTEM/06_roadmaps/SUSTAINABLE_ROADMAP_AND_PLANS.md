@@ -74,6 +74,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 持续集成更新计划
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -106,6 +108,8 @@
 | **Q4** | 年度审计准备 | 审计证据包 |
 
 ### 2.2 学术跟踪计划
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 #### 会议跟踪日历
 
@@ -145,6 +149,8 @@ Q4:
 | **Rust基金会** | 每周 | 安全公告 | 安全工程师 |
 
 ### 2.3 生态建设参与计划
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 开源贡献路线图
 
@@ -192,6 +198,8 @@ Level 4: 领导者 (24个月+)
 ## 三、内容梳理计划
 
 ### 3.1 文档体系结构
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```
 docs/

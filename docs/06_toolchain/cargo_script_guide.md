@@ -41,6 +41,8 @@
 **Cargo Script** 是 Rust 的一项新能力，允许你编写**单文件 Rust 脚本**，直接在文件中声明依赖，无需创建完整的 Cargo 项目。
 
 ### 核心特性
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -50,6 +52,8 @@
 - **无需 Cargo.toml**: 依赖直接在 `.rs` 文件中声明
 
 ### 为什么重要？
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 

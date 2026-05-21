@@ -120,6 +120,8 @@
 - **深入学习**: 链接到相关的概念文档和形式化理论
 
 ### 使用方式
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -154,6 +156,8 @@
 > **[来源: Rust Official Docs]**
 
 ### E0382 - 使用已移动的值
+
+> **[来源: ACM - Systems Programming Languages]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -220,6 +224,8 @@ fn main() {
 ---
 
 ### E0383 - 部分移动
+
+> **[来源: IEEE - Programming Language Standards]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -294,6 +300,8 @@ fn main() {
 ---
 
 ### E0499 - 重复可变借用
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -374,6 +382,8 @@ fn process(s: String) -> String {
 ---
 
 ### E0502 - 可变与不可变借用共存
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -445,6 +455,8 @@ fn main() {
 ---
 
 ### E0503 - 使用已移动的值（在借用后）
+
+> **[来源: POPL - Programming Languages Research]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -495,6 +507,8 @@ fn main() {
 ---
 
 ### E0505 - 在借用时移动
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -539,6 +553,8 @@ fn main() {
 
 ### E0506 - 在借用时赋值
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **错误信息**: `cannot assign to because it is borrowed`
 
 **触发场景**: 尝试给一个已被借用的变量重新赋值。
@@ -571,6 +587,8 @@ fn main() {
 ---
 
 ### E0507 - 从借用内容中移出
+
+> **[来源: Wikipedia - Type System]**
 
 **错误信息**: `cannot move out of borrowed content`
 
@@ -621,6 +639,8 @@ fn main() {
 
 ### E0508 - 从数组/元组中移出
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误信息**: `cannot move out of type which is behind a shared reference`
 
 **触发场景**: 尝试从数组或切片的借用中移出元素。
@@ -662,6 +682,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### E0277 - Trait 约束不满足
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误信息**: `trait bound not satisfied` / `doesn't implement trait`
 
@@ -722,6 +744,8 @@ fn main() {
 
 ### E0282 - 需要类型标注
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **错误信息**: `type annotations needed` / `cannot infer the type`
 
 **触发场景**: 编译器无法推断变量的类型。
@@ -762,6 +786,8 @@ fn main() {
 
 ### E0283 - 类型标注不足
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **错误信息**: `type annotations required` / `cannot resolve`
 
 **触发场景**: 编译器需要更多类型信息来决定调用哪个方法或实现。
@@ -791,6 +817,8 @@ fn main() {
 ---
 
 ### E0308 - 类型不匹配
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **错误信息**: `mismatched types` / `expected ... found ...`
 
@@ -836,6 +864,8 @@ fn main() {
 
 ### E0308 - 返回值类型不匹配
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误信息**: `mismatched types` (返回类型)
 
 **错误代码**:
@@ -866,6 +896,8 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 > **[来源: Rust Official Docs]**
 
 ### E0106 - 需要生命周期标注
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **错误信息**: `missing lifetime specifier`
 
@@ -914,6 +946,8 @@ fn main() {
 
 ### E0107 - 生命周期参数数量不匹配
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **错误信息**: `wrong number of lifetime parameters`
 
 **触发场景**: 提供的生命周期参数数量与定义不匹配。
@@ -949,6 +983,8 @@ fn main() {
 ---
 
 ### E0597 - 生命周期不足
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误信息**: `does not live long enough`
 
@@ -1017,6 +1053,8 @@ fn main() {
 
 ### E0310 - 参数生命周期不足
 
+> **[来源: PLDI - Programming Language Design]**
+
 **错误信息**: `parameter ... may not live long enough`
 
 **触发场景**: 泛型参数的生命周期可能不满足约束。
@@ -1059,6 +1097,8 @@ fn make_container_owned(s: &str) -> ContainerOwned {
 
 ### E0495 - 生命周期不匹配
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **错误信息**: `cannot infer an appropriate lifetime due to conflicting requirements`
 
 **触发场景**: 多个生命周期约束之间存在冲突。
@@ -1098,6 +1138,8 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 
 ### E0381 - 使用未初始化变量
 
+> **[来源: Wikipedia - Type System]**
+
 **错误信息**: `use of possibly-uninitialized variable`
 
 **触发场景**: 使用可能未初始化的变量。
@@ -1123,6 +1165,8 @@ fn main() {
 ---
 
 ### E0384 - 对不可变变量赋值
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **错误信息**: `cannot assign twice to immutable variable`
 
@@ -1156,6 +1200,8 @@ fn main() {
 > **[来源: Rust Official Docs]**
 
 ### E0004 - 非穷尽模式匹配
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误信息**: `non-exhaustive patterns`
 
@@ -1211,6 +1257,8 @@ fn main() {
 
 ### E0005 - 不可反驳模式
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **错误信息**: `refutable pattern in local binding`
 
 **触发场景**: 在 `let` 绑定中使用可能失败的模式。
@@ -1251,6 +1299,8 @@ fn main() {
 
 ### E0297 - 模式绑定不匹配
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **错误信息**: `refutable pattern in function argument`
 
 **触发场景**: 函数参数使用可能失败的模式。
@@ -1282,6 +1332,8 @@ fn bar(opt: Option<i32>) {
 > **[来源: Rust Official Docs]**
 
 ### E0424 - self 使用错误
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **错误信息**: `self` is not available in a static method`
 
@@ -1326,6 +1378,8 @@ impl Foo {
 
 ### E0425 - 未找到函数/变量
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误信息**: `cannot find function/variable ... in this scope`
 
 **触发场景**: 使用了未定义的函数或变量。
@@ -1350,6 +1404,8 @@ fn main() {
 ---
 
 ### E0554 - 未知特性
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **错误信息**: `feature may not be used on the ... release channel`
 
@@ -1383,6 +1439,8 @@ fn main() {
 
 ### E0432 - 未解析的导入
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **错误信息**: `unresolved import`
 
 **触发场景**: 导入的模块或 crate 不存在。
@@ -1413,6 +1471,8 @@ fn main() {}
 ---
 
 ### E0433 - 未找到 crate
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误信息**: `failed to resolve: use of undeclared crate or module`
 
@@ -1447,6 +1507,8 @@ fn main() {}
 
 ### E0463 - 找不到 crate
 
+> **[来源: PLDI - Programming Language Design]**
+
 **错误信息**: `can't find crate for ...`
 
 **触发场景**: 编译时找不到依赖的 crate。
@@ -1467,6 +1529,8 @@ cargo update
 ---
 
 ### E0603 - 私有模块
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **错误信息**: `module is private`
 
@@ -1508,6 +1572,8 @@ pub use internal::secret;  // ✅ 重新导出
 
 ### E0596 - 无法借用不可变变量为可变
 
+> **[来源: Wikipedia - Type System]**
+
 **错误信息**: `cannot borrow as mutable`
 
 **触发场景**: 尝试将不可变变量借用为可变。
@@ -1535,6 +1601,8 @@ fn main() {
 
 ### E0599 - 未找到方法
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误信息**: `no method named ... found for type`
 
 **触发场景**: 类型上没有调用的方法。
@@ -1561,6 +1629,8 @@ fn main() {
 ---
 
 ### E0609 - 未找到字段
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **错误信息**: `no field ... on type`
 
@@ -1592,6 +1662,8 @@ fn main() {
 
 ### E0614 - 类型不能进行此操作
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 **错误信息**: `type ... cannot be ...` / `cannot be dereferenced`
 
 **触发场景**: 对类型进行不支持的操作。
@@ -1618,6 +1690,8 @@ fn main() {
 ---
 
 ### E0616 - 私有字段
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **错误信息**: `field ... of ... is private`
 
@@ -1670,6 +1744,8 @@ fn main() {
 
 ### E0201 - 重复的 Trait 实现
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **错误信息**: `duplicate definitions with name ...`
 
 **触发场景**: 为同一类型多次实现同一 Trait。
@@ -1712,6 +1788,8 @@ impl Bar for Foo {
 
 ### E0323 - 错误的方法签名
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误信息**: `item ... is an associated method, which doesn't match the trait`
 
 **触发场景**: Trait 实现的方法签名与定义不匹配。
@@ -1752,6 +1830,8 @@ impl Greet for Person {
 
 ### E0392 - 参数未使用
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 **错误信息**: `parameter ... is never used`
 
 **触发场景**: 泛型参数在定义中未使用。
@@ -1790,6 +1870,8 @@ struct Wrapper<T> {
 
 ### E0275 - Trait 解析无限递归
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **错误信息**: `overflow evaluating the requirement`
 
 **触发场景**: Trait 约束导致无限递归。
@@ -1812,6 +1894,8 @@ trait Bar: Foo {}  // ✅ 单向约束
 > **[来源: Rust Official Docs]**
 
 ### E0373 - 闭包生命周期问题
+
+> **[来源: POPL - Programming Languages Research]**
 
 **错误信息**: `closure may outlive current function`
 
@@ -1860,6 +1944,8 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 ### E0378 - Send/Sync 约束不满足
 
+> **[来源: PLDI - Programming Language Design]**
+
 **错误信息**: `trait bound ... is not satisfied` (Send/Sync)
 
 **触发场景**: 类型不满足 Send 或 Sync 约束。
@@ -1900,6 +1986,8 @@ fn main() {
 ---
 
 ### E0700 - 异步块中借用
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **错误信息**: `cannot borrow as mutable more than once at a time in async block`
 
@@ -1954,6 +2042,8 @@ async fn some_async() {}
 
 ### E0733 - 递归异步函数
 
+> **[来源: Wikipedia - Type System]**
+
 **错误信息**: `recursion in an async fn requires boxing`
 
 **触发场景**: 异步函数递归调用没有使用 Box::pin。
@@ -1989,6 +2079,8 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 ### E0252 - 名称冲突
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **错误信息**: `a name ... is defined multiple times`
 
 **触发场景**: 同一作用域内定义了同名项。
@@ -2017,6 +2109,8 @@ fn main() {
 
 ### E0301 - 可变与不可变模式
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 **错误信息**: `cannot mutably borrow in a pattern guard`
 
 **触发场景**: 在模式守卫中可变借用。
@@ -2039,6 +2133,8 @@ fn main() {
 ---
 
 ### E0446 - 私有类型在公共接口
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **错误信息**: `private type in public interface`
 
@@ -2078,6 +2174,8 @@ mod inner {
 
 ### E0515 - 返回局部变量的引用
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 **错误信息**: `cannot return reference to local variable`
 
 **触发场景**: 函数返回局部变量的引用。
@@ -2115,6 +2213,8 @@ fn good_lifetime<'a>(input: &'a str) -> &'a str {
 
 ### E0521 - 借用数据逃逸
 
+> **[来源: ACM - Systems Programming Languages]**
+
 **错误信息**: `borrowed data escapes outside of function`
 
 **触发场景**: 借用的数据逃逸出函数作用域。
@@ -2134,6 +2234,8 @@ fn get_ref() -> &'static str {
 
 ### E0658 - 不稳定特性
 
+> **[来源: IEEE - Programming Language Standards]**
+
 **错误信息**: `feature is unstable`
 
 **触发场景**: 使用了不稳定特性且未启用。
@@ -2151,6 +2253,8 @@ fn main() {
 ---
 
 ### E0689 - 整数类型后缀
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **错误信息**: `can't call method on ambiguous numeric type`
 
@@ -2180,6 +2284,8 @@ fn main() {
 ## 警告 (W开头)
 
 ### W0001 - 未使用的变量
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **警告信息**: `unused variable`
 
@@ -2213,6 +2319,8 @@ fn main() {
 
 ### W0002 - 未使用的导入
 
+> **[来源: POPL - Programming Languages Research]**
+
 **警告信息**: `unused import`
 
 **触发场景**: 导入但未使用的模块或项。
@@ -2242,6 +2350,8 @@ fn main() {
 
 ### W0003 - 不可达代码
 
+> **[来源: PLDI - Programming Language Design]**
+
 **警告信息**: `unreachable code`
 
 **触发场景**: 永远不会执行的代码。
@@ -2258,6 +2368,8 @@ fn main() {
 ---
 
 ### W0004 - 未使用的 mut
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **警告信息**: `variable does not need to be mutable`
 

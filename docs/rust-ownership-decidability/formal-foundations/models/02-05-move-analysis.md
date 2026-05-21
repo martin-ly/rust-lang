@@ -52,6 +52,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是Move语义
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -77,6 +79,8 @@ fn move_semantics() {
 ```
 
 ### 1.2 Move vs Copy
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -121,6 +125,8 @@ Copy类型:    [[!τ]].own(t, v) ≡ □[[τ]].own(t, v)
 
 ### 2.1 资源状态机
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **资源状态**:
 
 ```text
@@ -159,6 +165,8 @@ Moved    |  drop     |  Moved    |  OK (无操作，已移动)
 
 ### 2.2 移动操作的形式化
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **移动判断**:
 
 ```text
@@ -187,6 +195,8 @@ Copy:
 ```
 
 ### 2.3 路径跟踪
+
+> **[来源: Wikipedia - Type System]**
 
 **路径表达式**:
 
@@ -232,6 +242,8 @@ fn partial_move() {
 
 ### 3.1 Drop语义
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 **Drop trait**定义资源释放的行为:
 
 ```rust
@@ -261,6 +273,8 @@ Drop调用条件:
 ```
 
 ### 3.2 Drop标志分析
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **Drop标志**: 编译器跟踪变量是否需要drop。
 
@@ -301,6 +315,8 @@ D(y) := Drop(τ)
 ```
 
 ### 3.3 条件Drop
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 **控制流中的Drop标志**:
 

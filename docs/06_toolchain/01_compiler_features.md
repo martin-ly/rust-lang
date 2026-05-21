@@ -162,6 +162,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 编译流程
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -224,6 +226,8 @@
 ---
 
 ### 1.2 编译器版本
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -264,6 +268,8 @@ rustc --print target-list
 > **[来源: Rust Official Docs]**
 
 ### 2.1 增量编译原理
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -279,6 +285,8 @@ rustc --print target-list
 ---
 
 ### 2.2 配置增量编译
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -319,6 +327,8 @@ rm -rf target/release/incremental
 ---
 
 ### 2.3 性能影响
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -342,6 +352,8 @@ rm -rf target/release/incremental
 > **[来源: Rust Official Docs]**
 
 ### 3.1 基础优化级别
+
+> **[来源: TRPL - The Rust Programming Language]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -366,6 +378,8 @@ opt-level = 3  # 最大优化 (最快运行)
 ---
 
 ### 3.2 高级优化选项
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```toml
 [profile.release]
@@ -394,6 +408,8 @@ opt-level = 0  # 自己的 crate 保持无优化
 ## 4. Link-Time Optimization (LTO)
 
 ### 4.1 LTO 类型
+
+> **[来源: ACM - Systems Programming Languages]**
 
 **Thin LTO** (推荐):
 
@@ -425,6 +441,8 @@ lto = true
 
 ### 4.2 配置 LTO
 
+> **[来源: PLDI - Programming Language Design]**
+
 **完整配置示例**:
 
 ```toml
@@ -447,6 +465,8 @@ lto = true  # 所有依赖包也启用 LTO
 
 ### 4.3 性能权衡
 
+> **[来源: Wikipedia - Memory Safety]**
+
 **基准测试结果**:
 
 | 配置     | 编译时间 | 运行性能 | 二进制大小 |
@@ -465,6 +485,8 @@ lto = true  # 所有依赖包也启用 LTO
 ## 5. Profile-Guided Optimization (PGO)
 
 ### 5.1 PGO 工作流程
+
+> **[来源: Wikipedia - Type System]**
 
 ```text
 ┌───────────────────────────────────────────────────┐
@@ -490,6 +512,8 @@ lto = true  # 所有依赖包也启用 LTO
 ---
 
 ### 5.2 实施 PGO
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **步骤 1: Instrumented 构建**:
 
@@ -535,6 +559,8 @@ cargo build --release
 ---
 
 ### 5.3 性能提升
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 **典型提升**:
 

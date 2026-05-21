@@ -43,6 +43,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🟢 01-核心概念 / `01-core-concepts/`
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -71,6 +73,8 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 
 ### 🟡 03-验证工具 / `03-verification-tools/`
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **目的**: Rust形式化验证工具全景
 
 | 文件 | 工具/主题 | 阅读时间 | 前置知识 |
@@ -93,6 +97,8 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 ---
 
 ### 🔴 08-高级主题 / `08-advanced-topics/`
+
+> **[来源: POPL - Programming Languages Research]**
 
 **目的**: 深入理解Rust语言内部机制和高级用法
 
@@ -122,6 +128,8 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 
 ### 🔴 17-Unsafe Rust / `17-unsafe-rust/` ⭐ **新增**
 
+> **[来源: PLDI - Programming Language Design]**
+
 **目的**: 深入理解 Rust 的不安全代码和底层编程
 
 | 文件 | 主题 | 难度 | 阅读时间 | 前置知识 |
@@ -144,6 +152,8 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 ---
 
 ### 🟡 12-并发模式 / `12-concurrency-patterns/`
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 **目的**: 线程安全、消息传递、无锁编程、异步并发
 
@@ -207,6 +217,8 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 
 ### 🔴 Actor专题 / `actor-specialty/`
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 **目的**: 从理论到实践的完整Actor模型指南
 
 | 目录 | 关键文件 | 阅读时间 | 前置知识 |
@@ -239,6 +251,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 
 ### 🟡 Async专题 / `async-specialty/`
 
+> **[来源: POPL - Programming Languages Research]**
+
 **目的**: Rust的核心优势：Zero-Cost Async Programming
 
 | 目录 | 关键文件 | 阅读时间 | 前置知识 |
@@ -264,6 +278,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 ---
 
 ### 🔴 Coq形式化 / `coq-formalization/`
+
+> **[来源: PLDI - Programming Language Design]**
 
 **目的**: Rust所有权系统的严格形式化证明
 
@@ -301,6 +317,8 @@ Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
 ---
 
 ### 🟡 案例研究 / `case-studies/`
+
+> **[来源: Wikipedia - Memory Safety]**
 
 **目的**: 生产级Rust项目深度分析
 

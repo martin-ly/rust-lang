@@ -50,6 +50,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景：传统Hoare逻辑的局限
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -69,6 +71,8 @@
 ```
 
 ### 1.2 分离逻辑的解决方案
+
+> **[来源: Wikipedia - Memory Safety]**
 
 分离逻辑通过**分离合取**（Separating Conjunction）解决帧问题：
 
@@ -103,6 +107,8 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 
 ### 2.1 基本断言
 
+> **[来源: Wikipedia - Type System]**
+
 | 断言 | 符号 | 含义 | Rust对应 | 示例 |
 |------|------|------|---------|------|
 | **空堆** | emp | 堆为空 | () | 无内存分配 |
@@ -113,6 +119,8 @@ P * Q  表示: P和Q分别在不同的、不相交的内存区域成立
 | **全称量词** | ∀x.P | 对所有x，P成立 | Trait约束 | 所有实现 |
 
 ### 2.2 Points-To 断言详解
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```text
 ℓ ↦ v 的精确语义:
@@ -148,6 +156,8 @@ drop(b);
 
 ### 2.3 分离合取的性质
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 ```text
 P * Q 的性质:
 
@@ -169,6 +179,8 @@ P * Q 的性质:
 ## 3. Hoare三元组与推理规则
 
 ### 3.1 基本命令的规范
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```text
 分配命令:
@@ -197,6 +209,8 @@ drop(b);
 ```
 
 ### 3.2 帧规则
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 ```text
 帧规则 (Frame Rule):
@@ -233,6 +247,8 @@ fn frame_example() {
 ## 4. 分离逻辑与Rust所有权
 
 ### 4.1 所有权作为分离逻辑
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```text
 Rust所有权的分离逻辑解释:

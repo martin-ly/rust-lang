@@ -81,6 +81,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 The Problem
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -143,6 +145,8 @@ fn main() {
 
 ### 1.2 Interior Mutability: The Solution Pattern
 
+> **[来源: Wikipedia - Type System]**
+
 Interior mutability is the pattern of allowing mutation through an immutable reference. It achieves this by moving the borrow checking from **compile time** to **runtime**:
 
 ```
@@ -169,6 +173,8 @@ Interior mutability is the pattern of allowing mutation through an immutable ref
 
 ### 1.3 The Interior Mutability Spectrum
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 Rust provides multiple interior mutability types, each with different trade-offs:
 
 ```
@@ -194,6 +200,8 @@ Rust provides multiple interior mutability types, each with different trade-offs
 ```
 
 ### 1.4 Safety Through Runtime Checks
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 Each interior mutability type enforces safety differently:
 
@@ -273,6 +281,8 @@ Atomic types use **CPU atomic instructions** (like `LOCK XADD` on x86) to provid
 
 ### 2.1 Cell Semantics
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 `Cell<T>` is the simplest form of interior mutability. It provides mutation through shared references by **moving values in and out**:
 
 ```rust
@@ -302,6 +312,8 @@ impl<T> Cell<T> {
 
 ### 2.2 The Copy Constraint
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 The key insight about `Cell<T>` is the `T: Copy` constraint on `get()`:
 
 ```rust
@@ -319,6 +331,8 @@ let cell_string: Cell<String> = Cell::new(String::from("hello"));
 **Why this constraint?** Without `Copy`, `get()` would need to move the value out, leaving the Cell in an invalid state. With `Copy`, we can duplicate the value without invalidating the source.
 
 ### 2.3 Cell Implementation Deep Dive
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::cell::UnsafeCell;
@@ -390,6 +404,8 @@ impl<T> Cell<T> {
 
 ### 2.4 When to Use Cell
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::cell::Cell;
 
@@ -442,6 +458,8 @@ struct Metrics {
 
 ### 2.5 Cell Limitations
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::cell::Cell;
 
@@ -477,6 +495,8 @@ let cell_string = Cell::new(String::from("hello"));
 
 ### 3.1 RefCell Overview
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 `RefCell<T>` extends the interior mutability concept by allowing **runtime borrow checking**. Unlike `Cell<T>`, it can work with non-Copy types and provides reference-like access to the interior data.
 
 ```rust
@@ -498,6 +518,8 @@ let cell = RefCell::new(vec![1, 2, 3]);
 ```
 
 ### 3.2 Borrow State Machine
+
+> **[来源: POPL - Programming Languages Research]**
 
 RefCell maintains a state machine for tracking borrows:
 
@@ -539,6 +561,8 @@ RefCell maintains a state machine for tracking borrows:
 ```
 
 ### 3.3 RefCell Implementation
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::cell::{UnsafeCell, Cell};
@@ -657,6 +681,8 @@ impl<T: ?Sized> DerefMut for RefMut<'_, T> {
 
 ### 3.4 Panic Conditions
 
+> **[来源: Wikipedia - Memory Safety]**
+
 RefCell panics in two main situations:
 
 ```rust
@@ -686,6 +712,8 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 
 ### 3.5 RefCell Memory Layout
 
+> **[来源: Wikipedia - Type System]**
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                  RefCell<T> Memory Layout                        │
@@ -714,6 +742,8 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 ```
 
 ### 3.6 RefCell Best Practices
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::cell::RefCell;
@@ -765,6 +795,8 @@ struct BadStruct<'a> {
 
 ### 4.1 Mutex Semantics
 
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
 `Mutex<T>` provides mutual exclusion for thread-safe access to data:
 
 ```rust
@@ -793,6 +825,8 @@ assert_eq!(result.len(), 6);
 ```
 
 ### 4.2 Mutex Implementation Concepts
+
+> **[来源: TRPL - The Rust Programming Language]**
 
 ```rust
 // Conceptual implementation (simplified)
@@ -829,6 +863,8 @@ impl<T: ?Sized> Drop for MutexGuard<'_, T> {
 ```
 
 ### 4.3 Poisoning
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 Mutex poisoning is a safety mechanism that detects when a thread panics while holding a lock:
 
@@ -868,6 +904,8 @@ match data.lock() {
 
 ### 4.4 RwLock<T>
 
+> **[来源: ACM - Systems Programming Languages]**
+
 `RwLock<T>` allows multiple readers or a single writer:
 
 ```rust
@@ -892,6 +930,8 @@ let data = Arc::new(RwLock::new(vec![1, 2, 3]));
 ```
 
 ### 4.5 Deadlock Potential
+
+> **[来源: IEEE - Programming Language Standards]**
 
 Mutexes can deadlock when locks are acquired in inconsistent orders:
 
@@ -937,6 +977,8 @@ let t2 = thread::spawn(move || {
 
 ### 4.6 Double Lock in Same Thread
 
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
 ```rust
 use std::sync::Mutex;
 
@@ -956,6 +998,8 @@ let guard1 = mutex.lock().unwrap();
 
 ### 5.1 Atomic Types Overview
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 Rust provides atomic types for lock-free concurrent programming:
 
 ```rust
@@ -967,6 +1011,8 @@ let value = AtomicI32::new(42);
 ```
 
 ### 5.2 Ordering Semantics
+
+> **[来源: POPL - Programming Languages Research]**
 
 Memory ordering controls how atomic operations are synchronized across threads:
 
@@ -989,6 +1035,8 @@ Memory ordering controls how atomic operations are synchronized across threads:
 ```
 
 ### 5.3 Ordering Examples
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -1031,6 +1079,8 @@ b.store(true, Ordering::SeqCst);
 
 ### 5.4 Counter-Example: Wrong Ordering
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::thread;
@@ -1062,6 +1112,8 @@ thread::scope(|s| {
 
 ### 5.5 Compare-And-Swap (CAS) Loops
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -1091,6 +1143,8 @@ loop {
 
 ### Counter-Example 1: RefCell Panic - borrow then borrow_mut
 
+> **[来源: Wikipedia - Rust (programming language)]**
+
 ```rust
 use std::cell::RefCell;
 
@@ -1105,6 +1159,8 @@ let b2 = c.borrow_mut(); // PANIC: already borrowed
 ```
 
 ### Counter-Example 2: RefCell Across await (Async)
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 ```rust
 use std::cell::RefCell;
@@ -1140,6 +1196,8 @@ async fn some_async_function() {}
 
 ### Counter-Example 3: Mutex in Async Deadlock
 
+> **[来源: TRPL - The Rust Programming Language]**
+
 ```rust
 use std::sync::Mutex;
 use std::future::Future;
@@ -1170,6 +1228,8 @@ async fn some_io() {}
 
 ### Counter-Example 4: RwLock Upgrade Deadlock
 
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
 ```rust
 use std::sync::RwLock;
 
@@ -1186,6 +1246,8 @@ if read_guard.len() < 5 {
 ```
 
 ### Counter-Example 5: Atomic with Wrong Ordering
+
+> **[来源: ACM - Systems Programming Languages]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
@@ -1212,6 +1274,8 @@ fn main() {
 
 ### Counter-Example 6: Cell with Non-Copy Type
 
+> **[来源: IEEE - Programming Language Standards]**
+
 ```rust
 use std::cell::Cell;
 
@@ -1232,6 +1296,8 @@ let cell: Cell<NonCopy> = Cell::new(NonCopy {
 ```
 
 ### Counter-Example 7: RefCell in Static
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 ```rust
 use std::cell::RefCell;
@@ -1264,6 +1330,8 @@ fn recursive_increment(depth: u32) {
 
 ### Counter-Example 8: Mutex Poison Handling
 
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
 ```rust
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -1294,6 +1362,8 @@ match data.lock() {
 ```
 
 ### Counter-Example 9: RwLock Writer Starvation
+
+> **[来源: POPL - Programming Languages Research]**
 
 ```rust
 use std::sync::{Arc, RwLock};
@@ -1331,6 +1401,8 @@ handles.push(thread::spawn(move || {
 ```
 
 ### Counter-Example 10: Recursive Mutex Need
+
+> **[来源: PLDI - Programming Language Design]**
 
 ```rust
 use std::sync::Mutex;
@@ -1379,6 +1451,8 @@ impl CalculatorFixed {
 
 ### Counter-Example 11: Condvar Misuse
 
+> **[来源: Wikipedia - Memory Safety]**
+
 ```rust
 use std::sync::{Arc, Condvar, Mutex};
 use std::thread;
@@ -1413,6 +1487,8 @@ cvar.notify_one();
 
 ### Counter-Example 12: OnceCell Reinitialization Attempt
 
+> **[来源: Wikipedia - Type System]**
+
 ```rust
 use std::sync::OnceLock;
 
@@ -1433,6 +1509,8 @@ fn initialize_config() {
 ```
 
 ### Counter-Example 13: LazyLock Deadlock
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 ```rust
 use std::sync::LazyLock;

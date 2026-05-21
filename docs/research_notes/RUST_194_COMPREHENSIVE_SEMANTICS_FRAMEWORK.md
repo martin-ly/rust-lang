@@ -120,6 +120,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 1.1 权威源对齐状态
+
+> **[来源: PLDI - Programming Language Design]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -141,6 +143,8 @@
 ```
 
 ### 1.2 Rust 1.94 语义演进摘要
+
+> **[来源: Wikipedia - Memory Safety]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -160,6 +164,8 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 所有权系统语义
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -244,6 +250,8 @@ trait Parser<'a> {
 ```
 
 ### 2.2 类型系统语义
+
+> **[来源: Wikipedia - Rust (programming language)]**
 >
 > **[来源: Rust Official Docs]**
 
@@ -359,6 +367,8 @@ fn variance_example() {
 ```
 
 ### 2.3 并发模型语义
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
 #### 2.3.1 Send 与 Sync 语义
 

@@ -36,6 +36,8 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 练习 1.1: 修复借用错误
+
+> **[来源: Wikipedia - Type System]**
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
@@ -67,6 +69,8 @@ fn main() {
 </details>
 
 ### 练习 1.2: 实现自定义智能指针
+
+> **[来源: Wikipedia - Rust (programming language)]**
 
 **题目**: 实现一个简单的智能指针 MyBox，包含 Deref 和 Drop
 
