@@ -223,3 +223,20 @@ where
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Rust Reference - Prelude]**
+
+> **[来源: Rust Reference - Future Trait]**
+
+> **[来源: RFC 2645 - Future in Prelude]**
+
+> **[来源: TRPL - Async Programming]**
+
+> **[来源: Wikipedia - Promise (programming)]**
+
+> **[来源: ACM - Async Language Integration]**

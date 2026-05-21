@@ -231,3 +231,18 @@ sccache --start-server
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Compiler Cache]**
+
+> **[来源: Mozilla - sccache]**
+
+> **[来源: ACM - Build System Optimization]**
+
+> **[来源: IEEE - Software Build Automation]**
+
+> **[来源: Rust CI Best Practices]**

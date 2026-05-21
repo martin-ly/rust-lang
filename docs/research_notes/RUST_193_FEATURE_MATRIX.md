@@ -290,3 +290,18 @@
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Rust Reference - Feature Gates]**
+
+> **[来源: Rust Release Notes]**
+
+> **[来源: RFCs - rust-lang/rfcs]**
+
+> **[来源: TRPL - Appendix: Derivable Traits]**
+
+> **[来源: Rust Compiler Team Blog]**

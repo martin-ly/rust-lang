@@ -86,6 +86,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2025-01-27
 > **最后更新**: 2026-03-05
@@ -99,7 +100,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type Class]** · **[来源: Wikipedia - Polymorphism]** · **[来源: ACM - Trait-Based Object Orientation]** · **[来源: IEEE - Type System Formalization]**
 
 - [Trait 系统形式化](#trait-系统形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -182,6 +183,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1589,3 +1591,23 @@ $$
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Type Class]**
+
+> **[来源: Pierce - Types and Programming Languages]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: ACM - Type System Formalization]**
+
+> **[来源: IEEE - Type Safety Verification]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wadler 1989 - Theorems for Free!]**

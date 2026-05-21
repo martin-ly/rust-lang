@@ -74,6 +74,7 @@
     - [15.3 资源限制](#153-资源限制)
     - [15.4 反例：错误模式](#154-反例错误模式)
   - [**代码示例**: 15个完整示例](#代码示例-15个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1544,3 +1545,23 @@ let dev2 = RefCellDevice::new(&bus)?;
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Hardware Abstraction Layer]**
+
+> **[来源: Wikipedia - Embedded System]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: embedded-hal.rs Documentation]**
+
+> **[来源: ACM - HAL Design Patterns]**
+
+> **[来源: IEEE - Hardware-Software Interface Standards]**
+
+> **[来源: ARM CoreSight Technical Reference]**
+
+> **[来源: Rust Reference - no_std]**

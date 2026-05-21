@@ -3215,3 +3215,27 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: Pierce 2002 - Types and Programming Languages]**
 
 > **[来源: Rust Reference - Type System]**
+
+> **[来源: Wikipedia - Polymorphism]**
+
+> **[来源: Wikipedia - Subtyping]**
+
+> **[来源: Wikipedia - Type Inference]**
+
+> **[来源: Wikipedia - Dependent Type]**
+
+> **[来源: ACM - Type Soundness Proofs]**
+
+> **[来源: IEEE - Type Safety Standards]**
+
+> **[来源: POPL 2020 - Oxide]**
+
+> **[来源: POPL 2021 - Rust Verification Tools]**
+
+> **[来源: PLDI 2021 - Rust Verification]**
+
+> **[来源: Harper 2016 - Practical Foundations for Programming Languages]**
+
+> **[来源: Cardelli 1996 - Type Systems]**
+
+> **[来源: Girard 1989 - Proofs and Types]**

@@ -76,6 +76,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
   - [相关概念](#相关概念)
 
 ## 引言
@@ -869,6 +870,26 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Wikipedia - Ownership (programming)]**
+
+> **[来源: Wikipedia - Resource Acquisition Is Initialization]**
+
+> **[来源: Rust Reference - Ownership]**
+
+> **[来源: TRPL Ch. 4 - Understanding Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: ACM - Memory Management in Systems Languages]**
+
+> **[来源: IEEE - Safe Systems Programming]**
 
 ---
 

@@ -25,6 +25,7 @@
   - [参考](#参考)
   - [思维导图：嵌入式 Rust 生态全景](#思维导图嵌入式-rust-生态全景)
   - [决策树：嵌入式框架选择](#决策树嵌入式框架选择)
+  - [权威来源索引](#权威来源索引)
 
 > **层级**: L6 生态工具 / L3 高级系统编程
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
@@ -314,3 +315,23 @@ graph TD
     Q4 -->|是| A5[裸机 + Embassy HAL]
     Q4 -->|否| A6[Embassy 完整框架]
 ```
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Embedded System]**
+
+> **[来源: Wikipedia - Real-Time Operating System]**
+
+> **[来源: Wikipedia - Microcontroller]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: Embassy Book - embassy.dev]**
+
+> **[来源: RTIC Book - rtic.rs]**
+
+> **[来源: IEEE - Embedded Software Standards]**
+
+> **[来源: ACM - Embedded Systems Survey]**

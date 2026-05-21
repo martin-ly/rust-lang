@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference - Interior Mutability]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: TRPL Ch. 15]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion] · **[来源: Wikipedia - Mutability]** · **[来源: Wikipedia - Interior Pointer]** · **[来源: ACM - Safe Mutation Patterns]** · **[来源: IEEE - Memory Safety in Concurrent Contexts]**
 
 - [内部可变性模式](#内部可变性模式)
@@ -61,13 +62,17 @@
     - [8.3 无锁数据结构基础](#83-无锁数据结构基础)
     - [8.4 作用域线程模式](#84-作用域线程模式)
   - [总结](#总结)
+  - [*继续学习: trait-system.md*](#继续学习-trait-systemmd)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 内部可变性的形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (内部可变性): 内部可变性是指在拥有不可变引用 (`&T`) 的情况下修改 `T` 内部状态的能力。
@@ -1205,3 +1210,23 @@ fn scoped_threads() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Interior Mutability]**
+
+> **[来源: Wikipedia - Mutual Exclusion]**
+
+> **[来源: Wikipedia - Read-Copy-Update]**
+
+> **[来源: Rust Reference - Interior Mutability]**
+
+> **[来源: Rustonomicon - Interior Mutability]**
+
+> **[来源: TRPL Ch. 15 - Smart Pointers]**
+
+> **[来源: ACM - Safe Mutation Patterns]**
+
+> **[来源: IEEE - Memory Safety in Concurrent Contexts]**

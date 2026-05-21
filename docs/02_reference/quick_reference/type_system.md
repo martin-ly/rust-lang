@@ -2,7 +2,7 @@
 
 ## 📑 目录
 >
-- [� Rust 类型系统速查卡](#-rust-类型系统速查卡)
+- [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
   - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 核心概念](#-核心概念)
@@ -73,6 +73,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **快速参考** | [完整文档](../../../crates/c02_type_system/docs/README.md) | [代码示例](../../../crates/c02_type_system/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -87,7 +88,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Advanced Type System Features]** · **[来源: IEEE - Type Safety Verification]**
 
 - [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 核心概念](#-核心概念)
     - [类型安全三支柱](#类型安全三支柱)
@@ -157,6 +158,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1216,3 +1218,23 @@ Rust 1.95+ 重要更新：
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Hindley-Milner Type System]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: TRPL Ch. 3 - Common Programming Concepts]**
+
+> **[来源: ACM - Advanced Type System Features]**
+
+> **[来源: IEEE - Type Safety Verification]**
+
+> **[来源: Pierce 2002 - Types and Programming Languages]**

@@ -56,6 +56,7 @@
   - [总结](#总结)
   - [参考文献](#参考文献)
   - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1797,3 +1798,23 @@ fn explicit_drop() {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Swift (programming language)]**
+
+> **[来源: Wikipedia - Automatic Reference Counting]**
+
+> **[来源: Apple Swift Documentation]**
+
+> **[来源: IEEE - Language Interoperability]**
+
+> **[来源: ACM - Modern Systems Language Design]**
+
+> **[来源: Swift.org - Evolution Proposals]**
+
+> **[来源: Rust Reference - Unsafe Rust]**
+
+> **[来源: TRPL - Ownership]**

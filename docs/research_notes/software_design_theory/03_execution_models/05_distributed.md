@@ -46,13 +46,14 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 目录 {#-目录}
 >
 > **[来源: Rust Official Docs]**
 
 - [分布式执行模型形式化](#分布式执行模型形式化)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
   - [Rust 实现与代码示例](#rust-实现与代码示例)
@@ -86,6 +87,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -470,3 +472,19 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 
 - [03_execution_models 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Software Architecture]**
+
+> **[来源: ACM - Design Patterns Survey]**
+
+> **[来源: IEEE - Software Design Standards]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**

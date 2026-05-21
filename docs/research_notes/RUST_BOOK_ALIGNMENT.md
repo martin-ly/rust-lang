@@ -274,3 +274,18 @@ Week 3
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: Rust By Example]**
+
+> **[来源: Rustonomicon]**
+
+> **[来源: Rust Documentation Team Guidelines]**

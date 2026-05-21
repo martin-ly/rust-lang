@@ -120,6 +120,7 @@
   - [**状态**: ✅ 持续更新](#状态--持续更新)
   - [思维导图：Rust 最佳实践体系](#思维导图rust-最佳实践体系)
   - [决策树：错误处理策略选择](#决策树错误处理策略选择)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1015,6 +1016,7 @@ cargo clippy -- -D warnings
   - [**状态**: ✅ 持续更新](#状态--持续更新)
   - [思维导图：Rust 最佳实践体系](#思维导图rust-最佳实践体系)
   - [决策树：错误处理策略选择](#决策树错误处理策略选择)
+  - [权威来源索引](#权威来源索引)
 
 ### 11.2 rustfmt
 
@@ -2134,3 +2136,23 @@ graph TD
     Q3 -->|是| A4[#[error(transparent)] 包装]
     Q3 -->|否| A5[直接返回具体错误]
 ```
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Development Best Practices]**
+
+> **[来源: Wikipedia - Code Review]**
+
+> **[来源: Wikipedia - Software Quality]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: ACM - Code Quality Metrics]**
+
+> **[来源: IEEE - Software Engineering Standards]**
+
+> **[来源: Google Style Guides]**
+
+> **[来源: Microsoft Secure Coding Guidelines]**

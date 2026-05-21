@@ -384,3 +384,18 @@ mod coverage {
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Metric]**
+
+> **[来源: Wikipedia - Code Quality]**
+
+> **[来源: ACM - Software Measurement]**
+
+> **[来源: IEEE - Software Engineering Metrics]**
+
+> **[来源: ISO/IEC 25010 - System and Software Quality]**

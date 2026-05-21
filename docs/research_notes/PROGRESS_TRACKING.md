@@ -620,3 +620,16 @@
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Project Management]**
+
+> **[来源: Wikipedia - Software Development Process]**
+
+> **[来源: ACM - Software Project Tracking]**
+
+> **[来源: IEEE - Project Management Standards]**

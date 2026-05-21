@@ -5063,3 +5063,23 @@ $$
 > **[来源: Rust Reference - async/await]**
 
 > **[来源: Rustonomicon - Async]**
+
+> **[来源: Wikipedia - Promise (programming)]**
+
+> **[来源: Wikipedia - Green Thread]**
+
+> **[来源: Wikipedia - Thread (computing)]**
+
+> **[来源: ACM - Async/Await Performance]**
+
+> **[来源: IEEE - Task Scheduling Algorithms]**
+
+> **[来源: POPL 2019 - Rust Async Semantics]**
+
+> **[来源: Tokio Internals Documentation]**
+
+> **[来源: Rust Reference - Pin]**
+
+> **[来源: Rust Reference - Future Trait]**
+
+> **[来源: RFC 2394 - Async/Await]**

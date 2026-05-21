@@ -34,6 +34,7 @@
   - [🆕 Rust 1.94 更新](#-rust-194-更新)
   - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 >
@@ -343,3 +344,15 @@ Week 13-14: 工具实践
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Wikipedia - Mathematical Proof]**
+
+> **[来源: ACM - Formal Verification Tools Survey]**
+
+> **[来源: IEEE - Software Verification Standards]**

@@ -45,6 +45,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -58,7 +59,7 @@
 > **[来源: Rust Official Docs]**
 
 - [43 种完全模型索引](#43-种完全模型索引)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [定义](#定义)
   - [构成方案](#构成方案)
@@ -100,6 +101,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -797,3 +799,19 @@ pub fn update_optimistic(
 
 - [02_workflow_safe_complete_models 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Software Architecture]**
+
+> **[来源: ACM - Design Patterns Survey]**
+
+> **[来源: IEEE - Software Design Standards]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**

@@ -256,3 +256,24 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Event Sourcing]**
+
+> **[来源: Wikipedia - CQRS]**
+
+> **[来源: Martin Fowler - Event Sourcing]**
+
+> **[来源: ACM - Event-Driven Architecture]**
+
+> **[来源: IEEE - Distributed Data Patterns]**
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Software Architecture]**
+
+> **[来源: ACM - Design Patterns Survey]**

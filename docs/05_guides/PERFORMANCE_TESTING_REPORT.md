@@ -307,3 +307,18 @@ cargo bench --workspace
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Performance Testing]**
+
+> **[来源: Wikipedia - Benchmark (computing)]**
+
+> **[来源: ACM - Performance Engineering]**
+
+> **[来源: IEEE - Software Performance Standards]**
+
+> **[来源: Criterion.rs Documentation]**

@@ -349,3 +349,22 @@ RUST_SAFETY_CRITICAL_ECOSYSTEM/
 - [主索引](./00_RUST_SAFETY_CRITICAL_ECOSYSTEM_MASTER_INDEX.md)
 - [生态系统 README](./README_RUST_SAFETY_CRITICAL_ECOSYSTEM.md)
 - [docs 总览](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming Languages]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**

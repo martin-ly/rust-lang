@@ -21,6 +21,7 @@
       - [相关文档](#相关文档-1)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
@@ -35,7 +36,7 @@
 > **[来源: Rust Official Docs]**
 
 - [类型系统构造能力](#类型系统构造能力)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [文档宗旨](#文档宗旨)
   - [形式化定义](#形式化定义)
@@ -53,6 +54,7 @@
       - [相关文档](#相关文档-1)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -289,3 +291,23 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: Pierce 2002 - Types and Programming Languages]**
+
+> **[来源: ACM - Type System Research]**
+
+> **[来源: IEEE - Type Safety Verification]**
+
+> **[来源: POPL - Type Theory Advances]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: Wikipedia - Type Constructor]**

@@ -22,6 +22,7 @@
   - [参考](#参考)
   - [思维导图：Rust for Linux 全景](#思维导图rust-for-linux-全景)
   - [决策树：内核模块开发路径](#决策树内核模块开发路径)
+  - [权威来源索引](#权威来源索引)
 
 > **层级**: L7 前沿 / L3 高级系统编程
 > **前置概念**: [Unsafe](../../concept/03_advanced/03_unsafe.md) · [FFI](../../concept/03_advanced/03_unsafe.md) · [Build Systems](../../concept/06_ecosystem/01_toolchain.md)
@@ -271,3 +272,23 @@ graph TD
     Q3 -->|是| A4[手动优化 FFI 边界]
     Q3 -->|否| A5[标准 FFI 模式即可]
 ```
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Linux Kernel]**
+
+> **[来源: Wikipedia - Kernel Module]**
+
+> **[来源: LWN.net - Rust in Linux]**
+
+> **[来源: Google - Rust in the Linux Kernel]**
+
+> **[来源: Linux Kernel Documentation]**
+
+> **[来源: Rust for Linux Project]**
+
+> **[来源: IEEE - Operating System Security]**
+
+> **[来源: ACM - Safe Kernel Development]**

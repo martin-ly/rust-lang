@@ -43,6 +43,7 @@
     - [社区](#社区)
     - [学术](#学术)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、战略层面建议
 >
@@ -483,3 +484,23 @@ quality_gates:
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Safety-Critical System]**
+
+> **[来源: Wikipedia - Risk Management]**
+
+> **[来源: Ferrocene Language Specification]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: ISO 26262 - Road Vehicle Functional Safety]**
+
+> **[来源: IEC 61508 - Functional Safety of E/E/PE Systems]**
+
+> **[来源: ACM - Safety Framework Design]**
+
+> **[来源: IEEE - System Safety Engineering]**

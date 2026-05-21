@@ -34,6 +34,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎯 本次完成工作
 >
@@ -244,3 +245,15 @@
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Project Management]**
+
+> **[来源: Wikipedia - Quality Assurance]**
+
+> **[来源: ACM - Software Quality Metrics]**
+
+> **[来源: IEEE - Project Completion Standards]**

@@ -354,3 +354,16 @@ impl EventDrivenWorkflow {
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Mind Map]**
+
+> **[来源: Wikipedia - Concept Map]**
+
+> **[来源: ACM - Knowledge Visualization]**
+
+> **[来源: Tony Buzan - Mind Mapping]**

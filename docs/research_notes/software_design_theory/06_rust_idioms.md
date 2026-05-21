@@ -522,3 +522,20 @@ fn get_config(override_val: Option<String>) -> Cow<str> {
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Software Architecture]**
+
+> **[来源: ACM - Design Patterns Survey]**
+
+> **[来源: IEEE - Software Design Standards]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**

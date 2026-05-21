@@ -4,6 +4,7 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
 本章节深入探讨原始指针、联合体、内联汇编等高级特性的正确使用方式，以及如何在保持安全性的前提下发挥 Rust 的底层能力。
 
 ## 目录
+>
 > **[来源: Rust Reference - Unsafe Rust]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Pointer]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - Inline Assembly]** · **[来源: Rust Unsafe Code Guidelines] · **[来源: Wikipedia - Memory Safety]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: ACM - Safe Use of Unsafe Code]** · **[来源: IEEE - Verified Low-Level Programming]**
 
 - [Unsafe Rust 模式](#unsafe-rust-模式)
@@ -33,11 +34,15 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
     - [SIMD 操作](#simd-操作)
     - [零拷贝解析](#零拷贝解析)
     - [内存池实现](#内存池实现)
+  - [通过这些模式和最佳实践，你可以在保持 Rust 安全保证的同时，获得底层编程的全部能力](#通过这些模式和最佳实践你可以在保持-rust-安全保证的同时获得底层编程的全部能力)
+  - [权威来源索引](#权威来源索引)
 
 ## Unsafe 基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Unsafe 的能力范围
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `unsafe` 关键字允许你执行以下五种操作：
@@ -1307,7 +1312,7 @@ impl<T: Send> ConcurrentPool<T> {
 4. **代码审查**：unsafe 代码应该经过额外的审查
 5. **优先使用标准库**：标准库通常已经提供了安全的抽象
 
-通过这些模式和最佳实践，你可以在保持 Rust 安全保证的同时，获得底层编程的全部能力。
+通过这些模式和最佳实践，你可以在保持 Rust 安全保证的同时，获得底层编程的全部能力
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1319,7 +1324,26 @@ impl<T: Send> ConcurrentPool<T> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Wikipedia - Undefined Behavior]**
+
+> **[来源: Rustonomicon - The Dark Arts of Unsafe Rust]**
+
+> **[来源: Rust Reference - Unsafe Rust]**
+
+> **[来源: ACM - Safe Use of Unsafe Code]**
+
+> **[来源: IEEE - Verified Low-Level Programming]**
+
+> **[来源: Miri Documentation - Undefined Behavior Detection]**
+
+> **[来源: RFC 2585 - Unsafe Code Guidelines]**

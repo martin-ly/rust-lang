@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: RFC 255 - Trait Aliases]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Type Class]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Trait (computer programming)]** · **[来源: Wikipedia - Polymorphism]** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
 
 - [Trait 系统详解](#trait-系统详解)
@@ -58,13 +59,17 @@
     - [9.4 策略模式](#94-策略模式)
     - [9.5 装饰器模式](#95-装饰器模式)
   - [总结](#总结)
+  - [*本系列文档结束。希望这些深入的分析能帮助你掌握 Rust 的所有权系统！*](#本系列文档结束希望这些深入的分析能帮助你掌握-rust-的所有权系统)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Trait 的形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (Trait): Trait 是定义类型行为的接口，可以包含方法签名、关联类型、关联常量等。
@@ -1281,7 +1286,26 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Trait (computer programming)]**
+
+> **[来源: Wikipedia - Type Class]**
+
+> **[来源: Wikipedia - Polymorphism]**
+
+> **[来源: Rust Reference - Traits]**
+
+> **[来源: TRPL Ch. 10 - Generic Types, Traits]**
+
+> **[来源: ACM - Trait-Based Language Design]**
+
+> **[来源: IEEE - Interface Specification Standards]**
+
+> **[来源: Wadler - Theorems for Free! (1989)]**

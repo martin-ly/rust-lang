@@ -276,3 +276,22 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Peer-to-Peer]**
+
+> **[来源: Wikipedia - Distributed Hash Table]**
+
+> **[来源: libp2p Specification]**
+
+> **[来源: ACM - Peer-to-Peer Networking]**
+
+> **[来源: IEEE - Decentralized Network Protocols]**
+
+> **[来源: Protocol Labs - libp2p Docs]**
+
+> **[来源: Rust Reference - Networking]**

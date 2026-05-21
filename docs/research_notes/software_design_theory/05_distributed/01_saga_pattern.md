@@ -30,6 +30,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Def)
 >
@@ -248,3 +249,17 @@ impl<S, E> SagaExecutor<S, E> {
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Saga Pattern]**
+
+> **[来源: Wikipedia - Long-Running Transaction]**
+
+> **[来源: Hector Garcia-Molina - Sagas (1987)]**
+
+> **[来源: IEEE - Distributed Transaction Patterns]**
+
+> **[来源: ACM - Compensation-Based Transactions]**

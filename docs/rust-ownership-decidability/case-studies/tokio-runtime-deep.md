@@ -74,6 +74,8 @@
     - [10.3 Related Crates](#103-related-crates)
   - [Appendix A: Theorem Summary](#appendix-a-theorem-summary)
   - [Appendix B: Glossary](#appendix-b-glossary)
+  - [*Last Updated: 2026-03-06*](#last-updated-2026-03-06)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2925,7 +2927,6 @@ mod tests {
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -2949,3 +2950,23 @@ mod tests {
 > **[来源: Rust Reference - async/await]**
 
 > **[来源: TRPL Ch. 17 - Async and Await]**
+
+> **[来源: Wikipedia - Thread Pool]**
+
+> **[来源: Wikipedia - Load Balancing]**
+
+> **[来源: Wikipedia - Lock-Free Data Structures]**
+
+> **[来源: ACM - Work-Stealing Scheduling]**
+
+> **[来源: IEEE - Performance of Async Runtimes]**
+
+> **[来源: Tokio Blog - Scheduling Internals]**
+
+> **[来源: Mio Documentation - mio.rs]**
+
+> **[来源: RFC 2592 - Futures API]**
+
+> **[来源: Rust Reference - std::task]**
+
+> **[来源: Rust Standard Library - std::pin]**

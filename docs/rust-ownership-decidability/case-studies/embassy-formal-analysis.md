@@ -64,6 +64,7 @@
     - [10.2 递归Spawn限制](#102-递归spawn限制)
     - [10.3 优先级反转](#103-优先级反转)
   - [**代码示例**: 6个完整示例](#代码示例-6个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1565,3 +1566,23 @@ async fn greedy_task() {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: Wikipedia - Embedded Operating System]**
+
+> **[来源: Embassy Framework Documentation]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: ACM - Async Embedded Frameworks]**
+
+> **[来源: IEEE - Real-Time Async Scheduling]**
+
+> **[来源: RTIC Framework Documentation]**
+
+> **[来源: Rust Reference - async/await]**

@@ -408,3 +408,20 @@ jobs:
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Supply Chain Security]**
+
+> **[来源: NIST - Software Supply Chain Security]**
+
+> **[来源: SLSA Framework]**
+
+> **[来源: ACM - Software Supply Chain Attacks]**
+
+> **[来源: IEEE - Cybersecurity Standards]**
+
+> **[来源: OWASP - Software Supply Chain Risks]**

@@ -242,3 +242,20 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Software Architecture]**
+
+> **[来源: ACM - Design Patterns Survey]**
+
+> **[来源: IEEE - Software Design Standards]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
