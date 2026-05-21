@@ -4,6 +4,7 @@
 > **形式化参考**: RustBelt Lifetime Logic, Oxide
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust生命周期：理论与实践](#rust生命周期理论与实践)
@@ -37,11 +38,14 @@
     - [9.1 在验证工具中的编码](#91-在验证工具中的编码)
     - [9.2 RustBelt 的生命周期逻辑](#92-rustbelt-的生命周期逻辑)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 生命周期的本质
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是生命周期？
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 生命周期（Lifetime）是Rust借用检查器的核心概念，它跟踪引用的有效范围。
@@ -430,6 +434,7 @@ RustBelt 的生命周期逻辑:
 1. Tofte, M., & Talpin, J.-P. (1994). Implementation of the Typed Call-by-Value λ-Calculus using a Stack of Regions. *POPL*.
 2. Rust RFC 2094: Non-Lexical Lifetimes.
 3. Vytiniotis, D., Peyton Jones, S., & Schrijvers, T. (2010). Let should not be generalized. *TLDI*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -441,11 +446,9 @@ RustBelt 的生命周期逻辑:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -7,6 +7,7 @@
 > 内容已整合至： compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../06_toolchain_ecosystem/01_compiler/README.md)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Compiler Construction]** · **[来源: Wikipedia - Formal Grammar]** · **[来源: ACM - Compiler Design Principles]** · **[来源: IEEE - Language Implementation Standards]**
 
 ```mermaid
@@ -39,6 +40,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -51,6 +53,7 @@ mindmap
 ---
 
 ## Rust 编译器架构
+>
 > **[来源: Rust Official Docs]**
 
 ### 编译流程
@@ -306,6 +309,7 @@ unsafe fn very_dangerous() {
 | :--- | :--- | :--- |
 | c11_advanced | 高级特性实现 | crates/c11_advanced/ (crate) |
 | c12_macros | 宏系统实现 | crates/c12_macros/ (crate) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -316,7 +320,6 @@ unsafe fn very_dangerous() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

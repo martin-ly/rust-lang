@@ -1,6 +1,7 @@
 # 共识算法语义 (Consensus Algorithms Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [共识算法语义 (Consensus Algorithms Semantics)](#共识算法语义-consensus-algorithms-semantics)
@@ -22,8 +23,11 @@
   - [6. 形式化验证](#6-形式化验证)
     - [6.1 TLA+ 规格](#61-tla-规格)
   - [7. 总结](#7-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 共识问题是分布式系统最核心的挑战之一，要求多个节点就某个值达成一致。本文档深入分析 Paxos、Raft 等共识算法的形式化语义和 Rust 实现。
@@ -31,6 +35,7 @@
 ---
 
 ## 2. 共识问题定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 形式化定义
@@ -515,11 +520,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

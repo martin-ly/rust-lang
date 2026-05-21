@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [原始指针深度解析](#原始指针深度解析)
@@ -40,13 +41,17 @@
     - [7.2 安全使用检查清单](#72-安全使用检查清单)
   - [8. 实战: 实现自定义迭代器](#8-实战-实现自定义迭代器)
   - [参考](#参考)
+  - [*最后更新: 2026-03-07*](#最后更新-2026-03-07)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 原始指针基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 原始指针 (`*const T` 和 `*mut T`) 是 Rust 中最底层的指针类型，它们：
@@ -500,11 +505,9 @@ for x in iter {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -23,6 +23,7 @@
     - [类型 3: 概念正交性矩阵](#类型-3-概念正交性矩阵)
   - [进阶：条件矩阵（Conditional Matrix）](#进阶条件矩阵conditional-matrix)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 基础模板
 >
@@ -142,7 +143,6 @@
 - [概念文档模板](./TEMPLATE_CONCEPT_DOC.md)
 - [决策树模板](./TEMPLATE_DECISION_TREE.md)
 - [docs 总览](../README.md)
-
 
 ---
 

@@ -11,6 +11,7 @@
 ---
 
 ## Trait 作为类型类
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的 Trait 系统受 Haskell 类型类启发：
@@ -52,6 +53,7 @@ fn process<T: Drawable + Clone + Send>(item: &T) {
 ```
 
 ## 关联类型
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -78,6 +80,7 @@ impl Iterator for Counter {
 ```
 
 ## Trait 对象与动态分发
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -107,9 +110,11 @@ fn demo() {
 ```
 
 ## 更多代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 泛型约束与边界
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -152,6 +157,7 @@ where
 ```
 
 ### 高级 Trait 模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -215,6 +221,7 @@ impl Distance for Kilometers {
 ```
 
 ### Trait 对象与对象安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -265,6 +272,7 @@ fn heterogeneous_collection() {
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -274,6 +282,7 @@ fn heterogeneous_collection() {
 | 型变理论 | 型变与子类型关系 | [../../../research_notes/type_theory/variance_theory.md](../../../research_notes/type_theory/variance_theory.md) |
 | 证明索引 | Trait 相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 | 工具指南 | Trait 验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -284,7 +293,6 @@ fn heterogeneous_collection() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

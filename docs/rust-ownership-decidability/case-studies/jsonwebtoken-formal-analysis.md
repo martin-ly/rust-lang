@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [jsonwebtoken JWT形式化分析](#jsonwebtoken-jwt形式化分析)
@@ -26,10 +27,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (密钥混淆)](#反例-61-密钥混淆)
     - [反例 6.2 (忽略验证)](#反例-62-忽略验证)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 jsonwebtoken提供:
@@ -42,6 +46,7 @@ jsonwebtoken提供:
 ---
 
 ## 2. Token结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (JWT三段式)
@@ -166,11 +171,9 @@ validation.validate_nbf = false;
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

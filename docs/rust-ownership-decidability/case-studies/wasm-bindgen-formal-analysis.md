@@ -34,6 +34,7 @@
     - [示例2: DOM操作](#示例2-dom操作)
     - [示例3: 异步HTTP](#示例3-异步http)
   - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -269,7 +270,6 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 ---
 
 - [README](./README.md)
-
 
 ---
 

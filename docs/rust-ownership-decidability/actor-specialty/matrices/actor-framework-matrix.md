@@ -20,6 +20,7 @@
   - [性能基准参考](#性能基准参考)
   - [**覆盖框架**: Actix, Bastion, coerce, Xtra, Heph, Stakker](#覆盖框架-actix-bastion-coerce-xtra-heph-stakker)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 矩阵1: 核心功能对比
 >
@@ -201,7 +202,6 @@
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

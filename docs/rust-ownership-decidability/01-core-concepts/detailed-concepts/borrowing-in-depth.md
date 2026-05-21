@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Borrowing (computer science)]** · **[来源: Wikipedia - Alias Analysis]** · **[来源: ACM - Borrow Checker Algorithms]** · **[来源: IEEE - Static Analysis for Memory Safety]**
 
 - [借用深入分析](#借用深入分析)
@@ -52,13 +53,17 @@
     - [8.4 泛型与借用](#84-泛型与借用)
     - [8.5 闭包与借用](#85-闭包与借用)
   - [总结](#总结)
+  - [*继续学习: lifetimes-mastery.md*](#继续学习-lifetimes-masterymd)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 借用的形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (借用): 借用是临时获取对值的引用的操作，不转移所有权。借用分为两类：
@@ -1058,7 +1063,6 @@ fn closure_borrowing() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

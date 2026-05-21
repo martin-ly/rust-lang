@@ -124,6 +124,7 @@
     - [Core Theorems](#core-theorems)
   - [Appendix D: Counter-Examples Index](#appendix-d-counter-examples-index)
   - [*Line Count: ~1700+ lines*](#line-count-1700-lines)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1923,7 +1924,6 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 ---
 
 - [README](./README.md)
-
 
 ---
 

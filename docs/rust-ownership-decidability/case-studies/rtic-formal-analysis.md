@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [RTIC实时中断驱动框架形式化分析](#rtic实时中断驱动框架形式化分析)
@@ -34,10 +35,13 @@
     - [示例3: 中断驱动任务](#示例3-中断驱动任务)
     - [示例4: 资源锁](#示例4-资源锁)
   - [RTIC vs Embassy对比](#rtic-vs-embassy对比)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 RTIC (Real-Time Interrupt-driven Concurrency) 是Rust的实时并发框架：
@@ -51,6 +55,7 @@ RTIC (Real-Time Interrupt-driven Concurrency) 是Rust的实时并发框架：
 ---
 
 ## 2. 资源模型形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 RTIC-R1 ( 共享资源 )
@@ -383,11 +388,9 @@ mod app {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

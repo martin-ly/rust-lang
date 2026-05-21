@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [生命周期逻辑：区域代数与包含关系](#生命周期逻辑区域代数与包含关系)
@@ -40,13 +41,16 @@
   - [9. 参考文献](#9-参考文献)
   - [附录: 生命周期符号参考](#附录-生命周期符号参考)
   - [生命周期规则总结](#生命周期规则总结)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言：生命周期作为区域
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 为什么需要生命周期
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **问题：悬挂引用**:
@@ -638,6 +642,7 @@ NLL检查算法:
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -649,11 +654,9 @@ NLL检查算法:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

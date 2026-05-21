@@ -1,6 +1,7 @@
 # 分布式消息传递语义 (Message Passing Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [分布式消息传递语义 (Message Passing Semantics)](#分布式消息传递语义-message-passing-semantics)
@@ -23,8 +24,11 @@
     - [5.2 线性类型与通道](#52-线性类型与通道)
   - [6. 与其他模式的关联](#6-与其他模式的关联)
   - [7. 总结](#7-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 消息传递是分布式系统的核心通信范式，Rust 的所有权模型为消息传递提供了独特的安全保障。
@@ -33,6 +37,7 @@
 ---
 
 ## 2. 消息传递基础模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 通信模型分类
@@ -367,11 +372,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

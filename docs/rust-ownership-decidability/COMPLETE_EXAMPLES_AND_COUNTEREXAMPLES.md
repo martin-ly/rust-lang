@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 完整示例与反例集](#rust-所有权系统---完整示例与反例集)
@@ -39,13 +40,17 @@
     - [8.1 错误诊断流程图](#81-错误诊断流程图)
     - [8.2 错误信息速查表](#82-错误信息速查表)
   - [总结](#总结)
+  - [**建议**: 通过实践这些示例来加深理解](#建议-通过实践这些示例来加深理解)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 基础所有权示例
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 移动语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -897,7 +902,7 @@ fn main() {
 - ✅ 边界案例研究
 - ✅ 错误诊断流程
 
-**建议**: 通过实践这些示例来加深理解。
+**建议**: 通过实践这些示例来加深理解
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -909,11 +914,9 @@ fn main() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

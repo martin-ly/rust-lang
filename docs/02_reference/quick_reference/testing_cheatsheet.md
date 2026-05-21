@@ -112,6 +112,7 @@
     - [LazyLock 在测试固件中的应用](#lazylock-在测试固件中的应用)
     - [性能提升总结](#性能提升总结)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1704,7 +1705,6 @@ pub fn get_test_db() -> Option<&'static TestDatabase> {
 ---
 
 > **权威来源**: Rust Official Docs
-
 
 ---
 

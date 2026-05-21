@@ -5,6 +5,7 @@
 > **更新日期**: 2025年 (兼容Rust 1.94)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Creusot 深度解析：预言变量与Rust验证](#creusot-深度解析预言变量与rust验证)
@@ -34,11 +35,14 @@
     - [7.2 Rust 1.94 兼容性说明](#72-rust-194-兼容性说明)
     - [7.3 未来方向](#73-未来方向)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. Creusot 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 项目背景
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Creusot 是由巴黎萨克雷大学 (Université Paris-Saclay) 和 INRIA 开发的一款 Rust 演绎验证工具。
@@ -451,6 +455,7 @@ cargo +nightly install cargo-creusot --locked
 3. Filliâtre, J.-C., & Paskevich, A. (2013). Why3 — Where Programs Meet Provers. *ESOP*.
 4. Rust Formal Methods Interest Group. (2025). Rust Verification Tools Status. <https://rust-formal-methods.github.io/>
 5. Creusot GitHub Repository. <https://github.com/creusot-rs/creusot>
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -462,11 +467,9 @@ cargo +nightly install cargo-creusot --locked
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

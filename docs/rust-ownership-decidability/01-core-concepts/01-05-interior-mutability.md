@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [内部可变性模式：运行时借用检查详解](#内部可变性模式运行时借用检查详解)
@@ -45,13 +46,16 @@
     - [9.1 案例：实现 Rc 的简化版](#91-案例实现-rc-的简化版)
     - [9.2 案例：记忆化（Memoization）](#92-案例记忆化memoization)
   - [总结](#总结)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 什么是内部可变性
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -686,6 +690,7 @@ fn fibonacci_memoized() {
 - 编译时检查为主，运行时检查补充
 - 内部可变性提供灵活性，但有成本
 - 理解适用场景，避免不必要的运行时开销
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -697,11 +702,9 @@ fn fibonacci_memoized() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

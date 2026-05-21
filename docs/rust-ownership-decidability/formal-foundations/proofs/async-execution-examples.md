@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Async执行模型 - 深度代码示例与证明](#async执行模型---深度代码示例与证明)
@@ -26,11 +27,15 @@
     - [5.2 公平调度实现](#52-公平调度实现)
   - [6. 性能与正确性测试](#6-性能与正确性测试)
     - [6.1 形式化属性测试](#61-形式化属性测试)
+  - [**状态**: ✅ 深度实现与验证完成](#状态--深度实现与验证完成)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. Future Trait 形式化实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 基础Future实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -818,11 +823,9 @@ mod tests {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

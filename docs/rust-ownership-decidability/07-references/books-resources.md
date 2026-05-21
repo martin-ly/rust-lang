@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [书籍和教程资源](#书籍和教程资源)
@@ -46,13 +47,17 @@
     - [路径二：类型系统研究者](#路径二类型系统研究者)
     - [路径三：形式化验证工程师](#路径三形式化验证工程师)
   - [🔗 相关资源](#-相关资源)
+  - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## Rust 语言书籍
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 入门与进阶
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
@@ -427,7 +432,6 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Dependent Type]** · **[来源: ACM - Const Generic Programming]** · **[来源: IEEE - Parameterized Type Systems]**
 
 - [常量泛型与类型级计算](#常量泛型与类型级计算)
@@ -55,13 +56,17 @@
     - [10.2 即将支持的功能](#102-即将支持的功能)
     - [10.3 使用建议](#103-使用建议)
   - [总结](#总结)
+  - [尽管不如依赖类型强大，常量泛型在系统编程中提供了恰到好处的类型级抽象能力。](#尽管不如依赖类型强大常量泛型在系统编程中提供了恰到好处的类型级抽象能力)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是常量泛型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **常量泛型(Const Generics)** 允许类型由**常量值**参数化，而不仅仅是其他类型或生命周期。
@@ -875,7 +880,7 @@ trait Container {
 4. **可判定性**: 受限但实用
 5. **Rust 1.94+**: 默认值支持，使用更灵活
 
-尽管不如依赖类型强大，常量泛型在系统编程中提供了恰到好处的类型级抽象能力。
+尽管不如依赖类型强大，常量泛型在系统编程中提供了恰到好处的类型级抽象能力
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -887,11 +892,9 @@ trait Container {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

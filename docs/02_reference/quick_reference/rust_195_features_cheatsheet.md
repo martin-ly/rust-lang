@@ -5,35 +5,40 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [一、语言特性](#一语言特性)
-  - [1. cfg_select! 宏](#1-cfg_select-宏)
-  - [2. if let guards on match arms](#2-if-let-guards-on-match-arms)
-  - [3. 路径段关键字重命名导入](#3-路径段关键字重命名导入)
-  - [4. PowerPC/PowerPC64 内联汇编稳定化](#4-powerpcpowerpc64-内联汇编稳定化)
-- [二、标准库新 API](#二标准库新-api)
-  - [core::range 模块](#corerange-模块)
-  - [原子操作 — update / try_update](#原子操作-update-try_update)
-  - [集合 — 获取可变引用的插入操作](#集合-获取可变引用的插入操作)
-  - [裸指针 — 不安全转引用](#裸指针-不安全转引用)
-  - [布局计算 — Layout 新 API](#布局计算-layout-新-api)
-  - [提示 — cold_path](#提示-cold_path)
-  - [布尔转换 — TryFrom<>](#布尔转换-tryfrom)
-  - [MaybeUninit 数组互转](#maybeuninit-数组互转)
-  - [Cell 数组引用](#cell-数组引用)
-- [三、编译器与平台](#三编译器与平台)
-  - [--remap-path-scope 稳定化](#remap-path-scope-稳定化)
-  - [平台支持提升](#平台支持提升)
-  - [重要兼容性变更](#重要兼容性变更)
-- [四、Const 上下文新稳定 API](#四const-上下文新稳定-api)
-- [五、与 Rust 2024 Edition 的关联](#五与-rust-2024-edition-的关联)
+- [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
+  - [📑 目录](#-目录)
+  - [一、语言特性](#一语言特性)
+    - [1. `cfg_select!` 宏](#1-cfg_select-宏)
+    - [2. `if let` guards on match arms](#2-if-let-guards-on-match-arms)
+    - [3. 路径段关键字重命名导入](#3-路径段关键字重命名导入)
+    - [4. PowerPC/PowerPC64 内联汇编稳定化](#4-powerpcpowerpc64-内联汇编稳定化)
+  - [二、标准库新 API](#二标准库新-api)
+    - [`core::range` 模块](#corerange-模块)
+    - [原子操作 — `update` / `try_update`](#原子操作--update--try_update)
+    - [集合 — 获取可变引用的插入操作](#集合--获取可变引用的插入操作)
+    - [裸指针 — 不安全转引用](#裸指针--不安全转引用)
+    - [布局计算 — `Layout` 新 API](#布局计算--layout-新-api)
+    - [提示 — `cold_path`](#提示--cold_path)
+    - [布尔转换 — `TryFrom<{integer}>`](#布尔转换--tryfrominteger)
+    - [`MaybeUninit` 数组互转](#maybeuninit-数组互转)
+    - [`Cell` 数组引用](#cell-数组引用)
+  - [三、编译器与平台](#三编译器与平台)
+    - [`--remap-path-scope` 稳定化](#--remap-path-scope-稳定化)
+    - [平台支持提升](#平台支持提升)
+    - [重要兼容性变更](#重要兼容性变更)
+  - [四、Const 上下文新稳定 API](#四const-上下文新稳定-api)
+  - [五、与 Rust 2024 Edition 的关联](#五与-rust-2024-edition-的关联)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、语言特性
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. `cfg_select!` 宏
+>
 > **[来源: Rust Official Docs]**
 
 编译期 `cfg` 条件选择，替代 `cfg-if` crate。
@@ -63,6 +68,7 @@ let arch_str = cfg_select! {
 ```
 
 ### 2. `if let` guards on match arms
+>
 > **[来源: Rust Official Docs]**
 
 在 `match` arm 守卫中使用 `if let`：
@@ -78,6 +84,7 @@ match value {
 ```
 
 ### 3. 路径段关键字重命名导入
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -85,6 +92,7 @@ use std::keyword as kw;  // 重命名关键字路径段
 ```
 
 ### 4. PowerPC/PowerPC64 内联汇编稳定化
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c11_macro_system/examples/ppc_asm_demo.rs`](../../../crates/c11_macro_system/examples/ppc_asm_demo.rs)
@@ -99,9 +107,11 @@ unsafe {
 ---
 
 ## 二、标准库新 API
+>
 > **[来源: Rust Official Docs]**
 
 ### `core::range` 模块
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c08_algorithms/examples/core_range_demo.rs`](../../../crates/c08_algorithms/examples/core_range_demo.rs)
@@ -121,6 +131,7 @@ for i in range {
 ```
 
 ### 原子操作 — `update` / `try_update`
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c05_threads/examples/atomic_update_demo.rs`](../../../crates/c05_threads/examples/atomic_update_demo.rs)
@@ -150,6 +161,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 | `AtomicU8` ~ `AtomicU64` | ✅ | ✅ |
 
 ### 集合 — 获取可变引用的插入操作
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) | [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
@@ -175,6 +187,7 @@ head.push_str(" world");
 ```
 
 ### 裸指针 — 不安全转引用
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/raw_ptr_ref_demo.rs)
@@ -190,6 +203,7 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
 ### 布局计算 — `Layout` 新 API
+>
 > **[来源: Rust Official Docs]**
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
@@ -340,14 +354,12 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

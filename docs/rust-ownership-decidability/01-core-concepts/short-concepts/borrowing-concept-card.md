@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [借用概念卡片 (Borrowing Concept Card)](#借用概念卡片-borrowing-concept-card)
@@ -47,13 +48,17 @@
     - [9.2 Java/C# 引用](#92-javac-引用)
     - [9.3 函数式语言](#93-函数式语言)
   - [总结](#总结)
+  - [掌握借用是掌握Rust的关键。](#掌握借用是掌握rust的关键)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 概念定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是借用
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **借用(Borrowing)** 是Rust中临时获取值的引用而不转移所有权的机制。
@@ -594,7 +599,7 @@ fn sum_iter(values: impl Iterator<Item = i32>) -> i32 {
 3. **高效**: 零成本抽象，编译为原始指针
 4. **表达**: 支持复杂数据结构和安全并发
 
-掌握借用是掌握Rust的关键。
+掌握借用是掌握Rust的关键
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -606,11 +611,9 @@ fn sum_iter(values: impl Iterator<Item = i32>) -> i32 {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

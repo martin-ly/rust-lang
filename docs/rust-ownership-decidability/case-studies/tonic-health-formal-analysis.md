@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Tonic Health/Reflection形式化分析](#tonic-healthreflection形式化分析)
@@ -23,10 +24,13 @@
     - [定理 4.1 (敏感信息)](#定理-41-敏感信息)
   - [5. 反例](#5-反例)
     - [反例 5.1 (健康检查竞争)](#反例-51-健康检查竞争)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 gRPC标准扩展:
@@ -37,6 +41,7 @@ gRPC标准扩展:
 ---
 
 ## 2. 健康检查协议
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (健康状态机)
@@ -146,11 +151,9 @@ fn set_not_serving(&self) {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

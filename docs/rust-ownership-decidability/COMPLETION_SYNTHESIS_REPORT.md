@@ -32,6 +32,7 @@
     - [核心成果](#核心成果)
     - [推荐使用流程](#推荐使用流程)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Completion Synthesis Report
 >
@@ -341,7 +342,6 @@ Rust 1.94 特性:   6 个          ✅
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

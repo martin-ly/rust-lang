@@ -31,13 +31,14 @@
   - [7. 形式化证明义务](#7-形式化证明义务)
   - [参考文献](#参考文献)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 1.95 特性形式化分析](#rust-195-特性形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [1. 概述](#1-概述)
   - [2. if let guards 的形式化语义](#2-if-let-guards-的形式化语义)
@@ -56,6 +57,7 @@
   - [7. 形式化证明义务](#7-形式化证明义务)
   - [参考文献](#参考文献)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -329,7 +331,6 @@ $$
 
 - [08-advanced-topics 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

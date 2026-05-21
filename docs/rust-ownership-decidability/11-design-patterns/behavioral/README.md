@@ -10,6 +10,7 @@
 ---
 
 ## 模式列表
+>
 > **[来源: Rust Official Docs]**
 
 | 模式 | 文件 | 描述 | 难度 |
@@ -21,6 +22,7 @@
 ---
 
 ## 选择指南
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -36,11 +38,13 @@
 ---
 
 ## Rust 特殊考虑
+>
 > **[来源: Rust Official Docs]**
 
 - **所有权**: Observer 使用 Weak 引用避免循环
 - **闭包**: 可用作轻量级 Command
 - **泛型**: Strategy 的零成本抽象
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -52,9 +56,7 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 

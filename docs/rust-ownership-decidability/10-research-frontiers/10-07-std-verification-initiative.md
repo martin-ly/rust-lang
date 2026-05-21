@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 标准库验证计划 (2024-2025)](#rust-标准库验证计划-2024-2025)
@@ -38,13 +39,17 @@
     - [相关工具](#相关工具)
     - [相关项目](#相关项目)
     - [讨论渠道](#讨论渠道)
+  - [**维护者**: Rust 标准库验证团队](#维护者-rust-标准库验证团队)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 项目概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 背景与动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
@@ -378,11 +383,9 @@ impl<T> Vec<T> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

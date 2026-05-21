@@ -3,6 +3,7 @@
 > **目的**: 通过决策树可视化Rust所有权检查、类型推断和验证过程中的推理路径
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [推理论证与决策树图](#推理论证与决策树图)
@@ -21,11 +22,14 @@
   - [6. 错误诊断决策树](#6-错误诊断决策树)
     - [6.1 借用检查错误分类](#61-借用检查错误分类)
   - [使用说明](#使用说明)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 借用检查决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 借用冲突检测决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -364,6 +368,7 @@ E0505(移动后使用)  E0502(冲突借用)    E0597(悬垂引用)
 2. **调试代码**: 追踪编译器如何做出特定决策
 3. **形式化验证**: 理解验证工具的推理过程
 4. **教学**: 逐步解释复杂概念
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -375,11 +380,9 @@ E0505(移动后使用)  E0502(冲突借用)    E0597(悬垂引用)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

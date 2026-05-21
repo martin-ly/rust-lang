@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [所有权系统 - 反例与逻辑论证](#所有权系统---反例与逻辑论证)
@@ -35,11 +36,15 @@
     - [5.1 "Clone是免费的"](#51-clone是免费的)
     - [5.2 "RefCell可以替代所有借用"](#52-refcell可以替代所有借用)
   - [6. 反例总结表](#6-反例总结表)
+  - [**对齐版本**: Rust 1.95.0+ (Edition 2024) | 对齐日期: 2026-05-12](#对齐版本-rust-1950-edition-2024--对齐日期-2026-05-12)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 所有权规则反例
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 规则2反例: Move后使用
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -517,11 +522,9 @@ fn prefer_compile_time() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

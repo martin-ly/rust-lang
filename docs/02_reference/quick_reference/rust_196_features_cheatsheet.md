@@ -14,6 +14,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.95/1.96 特性速查表](#rust-195196-特性速查表)
@@ -38,13 +39,16 @@
     - [元组 Coercion 示例](#元组-coercion-示例)
   - [迁移检查清单](#迁移检查清单)
   - [相关链接](#相关链接)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## if let guards 语法
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -55,6 +59,7 @@ match value {
 ```
 
 ### 链式守卫
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -71,6 +76,7 @@ match event {
 ```
 
 ### 对比表
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 旧写法 (Rust < 1.95) | 新写法 (Rust 1.95+) |
@@ -80,6 +86,7 @@ match event {
 | 组合条件 | `if let Some(x) = opt && x > 0` 不支持 | `pattern if let Some(x) = opt && x > 0 =>` |
 
 ### 代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -110,9 +117,11 @@ match message {
 ---
 
 ## Range 类型对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 类型总览
+>
 > **[来源: Rust Official Docs]**
 
 | 类型 | 语法 | 包含开始 | 包含结束 | 迭代性 |
@@ -125,6 +134,7 @@ match message {
 | `RangeToInclusive` | `..=b` | N/A | ✅ | ❌ |
 
 ### 使用场景速查
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -149,6 +159,7 @@ vec.get(0..=5);                // 获取 0-5
 ```
 
 ### Range 方法
+>
 > **[来源: Rust Official Docs]**
 
 | 方法 | 适用类型 | 说明 |
@@ -162,6 +173,7 @@ vec.get(0..=5);                // 获取 0-5
 ---
 
 ## 新 Lint 规则
+>
 > **[来源: Rust Official Docs]**
 
 ### Rust 1.96 新增 Lints
@@ -316,6 +328,7 @@ let wide: (i64, i64) = widen(narrow);
 - [官方 Release Notes](https://blog.rust-lang.org/)
 - [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
 - [Cargo Book - Lints](https://doc.rust-lang.org/cargo/reference/manifest.html#the-lints-section)
+
 ---
 
 > **权威来源**: [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
@@ -327,11 +340,9 @@ let wide: (i64, i64) = widen(narrow);
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

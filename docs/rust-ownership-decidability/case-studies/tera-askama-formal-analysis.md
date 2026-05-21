@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Tera/Askama 模板引擎形式化分析](#teraaskama-模板引擎形式化分析)
@@ -24,10 +25,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (XSS注入)](#反例-51-xss注入)
     - [反例 5.2 (模板注入)](#反例-52-模板注入)
+  - [*定理数量: 5个*](#定理数量-5个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 模板引擎对比:
@@ -38,6 +42,7 @@
 ---
 
 ## 2. Tera运行时
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (动态模板)
@@ -153,11 +158,9 @@ tera.render_str(&user_input, &context)?;  // SSTI风险!
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

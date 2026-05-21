@@ -12,9 +12,11 @@
 ---
 
 ## Cargo 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 依赖管理
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -56,6 +58,7 @@ cc = "1.0"
 ```
 
 ### 工作空间
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -260,7 +263,6 @@ utils = { path = "crates/utils" }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

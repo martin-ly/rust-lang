@@ -12,6 +12,7 @@
 ---
 
 ## 构建脚本（build.rs）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -41,6 +42,7 @@ fn main() {
 ```
 
 ### 平台特定构建
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -66,6 +68,7 @@ fn main() {
 ```
 
 ### 代码生成构建脚本
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -93,6 +96,7 @@ pub const FEATURES: &[&str] = &["std", "alloc"];
 ```
 
 ### 常用构建工具
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -121,6 +125,7 @@ wasm-pack build --target web
 ```
 
 ### Makefile.toml (cargo-make)
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -152,6 +157,7 @@ dependencies = ["format", "lint", "test", "build"]
 ```
 
 ### Justfile 示例
+>
 > **[来源: Rust Official Docs]**
 
 ```makefile
@@ -191,6 +197,7 @@ release: check
 ```
 
 ### 交叉编译配置
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -209,6 +216,7 @@ target = "x86_64-unknown-linux-musl"  # 静态链接
 ```
 
 ### 条件编译完整示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -244,6 +252,7 @@ mod sync_impl {
 ---
 
 ## 形式化方法
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -254,6 +263,7 @@ mod sync_impl {
 | 证明索引 | 形式化证明集合 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -278,7 +288,6 @@ mod sync_impl {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

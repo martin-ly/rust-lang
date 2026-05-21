@@ -41,6 +41,7 @@
     - [Miri堆溢出](#miri堆溢出)
   - [**基于**: Kani 0.40, Miri latest, Verus 0.1](#基于-kani-040-miri-latest-verus-01)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -757,7 +758,6 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

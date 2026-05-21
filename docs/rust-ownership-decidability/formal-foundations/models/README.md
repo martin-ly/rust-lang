@@ -8,6 +8,7 @@
 本目录包含 Rust 所有权系统的形式化模型文档。
 
 ## 文件列表
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 |
@@ -25,10 +26,12 @@
 | [tree-borrows-comprehensive.md](./tree-borrows-comprehensive.md) | Tree Borrows 综合模型 |
 
 ## 相关目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [语义定义](../semantics/README.md) - 操作语义和逻辑关系
 - [证明](../proofs/README.md) - 形式化证明和定理
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -39,6 +42,5 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 </details>

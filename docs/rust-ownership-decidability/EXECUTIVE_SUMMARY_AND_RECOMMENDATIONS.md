@@ -47,6 +47,7 @@
   - [结论](#结论)
   - [*下次审查: 2026-03-14*](#下次审查-2026-03-14)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 >
@@ -335,7 +336,6 @@ rust-ownership-decidability/
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

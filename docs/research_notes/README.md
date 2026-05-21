@@ -9,6 +9,7 @@
 ---
 
 ## 🚀 从这里开始
+>
 > **[来源: Rust Official Docs]**
 
 **首次使用？** 按目标选一条路径 → **[00_ORGANIZATION_AND_NAVIGATION](./00_ORGANIZATION_AND_NAVIGATION.md)**
@@ -31,6 +32,7 @@
 ---
 
 ## 📊 目录结构
+>
 > **[来源: Rust Official Docs]**
 
 **详细梳理**（实际文件清单、归档约定、formal_methods 概览）：见 **[RESEARCH_NOTES_ORGANIZATION.md](./RESEARCH_NOTES_ORGANIZATION.md)**。
@@ -117,6 +119,7 @@ research_notes/
 ---
 
 ## 🎯 研究目标
+>
 > **[来源: Rust Official Docs]**
 
 本目录旨在记录和推进 Rust 语言相关的深入研究，包括：
@@ -130,9 +133,11 @@ research_notes/
 ---
 
 ## 📚 研究方向
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 形式化方法 (formal_methods/)
+>
 > **[来源: Rust Official Docs]**
 
 **目标**: 对 Rust 核心机制进行形式化建模和证明
@@ -203,6 +208,7 @@ research_notes/
 ---
 
 ### 2. 类型理论 (type_theory/)
+>
 > **[来源: Rust Official Docs]**
 
 **目标**: 深入理解 Rust 类型系统的理论基础
@@ -228,6 +234,7 @@ research_notes/
 ---
 
 ### 3. 实验研究 (experiments/)
+>
 > **[来源: Rust Official Docs]**
 
 **目标**: 通过实验验证理论假设，优化实践
@@ -253,9 +260,11 @@ research_notes/
 ---
 
 ## 🔗 相关资源
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心文档
+>
 > **[来源: Rust Official Docs]**
 
 - [形式化工程系统](../rust-formal-engineering-system/README.md)
@@ -263,6 +272,7 @@ research_notes/
 - [个人索引](../archive/temp/README.md) - 归档目录（历史文档）
 
 ### 代码实现
+>
 > **[来源: Rust Official Docs]**
 
 - [所有权与借用实现](../../crates/c01_ownership_borrow_scope/docs/README.md)
@@ -270,6 +280,7 @@ research_notes/
 - [异步系统实现](../../crates/c06_async/docs/README.md)
 
 ### 学习资源
+>
 > **[来源: Rust Official Docs]**
 
 - [类型系统速查卡](../02_reference/quick_reference/type_system.md)
@@ -598,7 +609,6 @@ find docs/research_notes -name "*.md" -exec grep -l "主题" {} \;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

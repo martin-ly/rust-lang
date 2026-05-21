@@ -33,6 +33,7 @@
   - [Conclusion](#conclusion)
   - [*Completed: 2026-03-06*](#completed-2026-03-06)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Work Completed
 >
@@ -232,7 +233,6 @@ The documentation now provides a well-connected, easily navigable knowledge base
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

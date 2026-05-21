@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Smoltcp嵌入式TCP/IP栈形式化分析](#smoltcp嵌入式tcpip栈形式化分析)
@@ -35,10 +36,13 @@
     - [示例2: UDP通信](#示例2-udp通信)
     - [示例3: DHCP客户端](#示例3-dhcp客户端)
     - [示例4: 多协议支持](#示例4-多协议支持)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Smoltcp是专为嵌入式系统设计的TCP/IP协议栈：
@@ -51,6 +55,7 @@ Smoltcp是专为嵌入式系统设计的TCP/IP协议栈：
 ---
 
 ## 2. 协议栈架构形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TCP-STACK-1 ( 协议栈组成 )
@@ -432,11 +437,9 @@ fn multi_protocol() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -7,6 +7,7 @@
 ---
 
 ## 项目目标
+>
 > **[来源: Rust Official Docs]**
 
 创建一个文件处理工具，支持文件搜索、复制、统计等功能。
@@ -14,6 +15,7 @@
 ---
 
 ## 功能需求
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 搜索文件: `filetool search .txt`
@@ -24,6 +26,7 @@
 ---
 
 ## 学习要点
+>
 > **[来源: Rust Official Docs]**
 
 ### 文件系统操作
@@ -71,11 +74,9 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -22,6 +22,7 @@
     - [如何选择图表](#如何选择图表)
   - [*这些图表使用 Mermaid 语法，可在支持 Mermaid 的 Markdown 查看器中渲染*](#这些图表使用-mermaid-语法可在支持-mermaid-的-markdown-查看器中渲染)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 核心概念思维导图
 >
@@ -546,7 +547,6 @@ graph TB
 
 - [visualizations 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

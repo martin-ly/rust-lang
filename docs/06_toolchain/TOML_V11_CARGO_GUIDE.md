@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Cargo 与 TOML v1.1 新特性指南](#cargo-与-toml-v11-新特性指南)
@@ -38,10 +39,13 @@
     - [Cargo 文档](#cargo-文档)
     - [相关工具](#相关工具)
   - [复查记录](#复查记录)
+  - [| 2026-05-08 | Kimi | Rust 1.96.0 / TOML v1.1 | ✅ 初版创建 |](#-2026-05-08--kimi--rust-1960--toml-v11---初版创建-)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. TOML 版本演进
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -58,6 +62,7 @@ timeline
 ```
 
 ### 为什么 Cargo 需要跟进 TOML v1.1
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | TOML v1.0 | TOML v1.1 | 对 Cargo 的影响 |
@@ -70,9 +75,11 @@ timeline
 ---
 
 ## 2. TOML v1.1 核心新特性
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 多行内联表 (Multi-line Inline Tables)
+>
 > **[来源: Rust Official Docs]**
 
 **TOML v1.0 — 只能单行**：
@@ -101,6 +108,7 @@ description = "A very long description"
 ```
 
 ### 2.2 尾部逗号 (Trailing Commas)
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -128,6 +136,7 @@ serde = { version = "1.0", default-features = false, features = ["derive",] }
 ```
 
 ### 2.3 扩展裸键规则 (Extended Bare Keys)
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -147,9 +156,11 @@ path = "../my-lib"
 ---
 
 ## 3. 在 Cargo.toml 中的实际应用
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 复杂依赖配置
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -187,6 +198,7 @@ windows-sys = { version = "0.59", features = [
 ```
 
 ### 3.2 Workspace 成员配置
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -212,6 +224,7 @@ tower = { version = "0.5", default-features = false }
 ```
 
 ### 3.3 Profile 配置优化
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -401,6 +414,7 @@ flowchart TD
 | 日期 | 复查人 | 版本 | 状态 |
 |------|-------|------|------|
 | 2026-05-08 | Kimi | Rust 1.96.0 / TOML v1.1 | ✅ 初版创建 |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -412,11 +426,9 @@ flowchart TD
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

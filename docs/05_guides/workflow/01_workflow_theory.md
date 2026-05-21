@@ -49,6 +49,8 @@
     - [array\_windows 在工作流状态转换中的应用](#array_windows-在工作流状态转换中的应用)
     - [LazyLock 在工作流引擎配置中的应用](#lazylock-在工作流引擎配置中的应用)
     - [ControlFlow 在工作流执行控制中的应用](#controlflow-在工作流执行控制中的应用)
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - [权威来源索引](#权威来源索引)
 
 ## 14.1 工作流基础理论
 >
@@ -1082,11 +1084,9 @@ fn execute_workflow_steps(
 
 > **权威来源**: Rust Official Docs
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

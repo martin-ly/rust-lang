@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [工业级 Rust 形式化验证案例](#工业级-rust-形式化验证案例)
@@ -34,13 +35,17 @@
     - [Meta 资源](#meta-资源)
     - [Microsoft 资源](#microsoft-资源)
     - [其他](#其他)
+  - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. Amazon (AWS)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Kani 验证工具
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **Kani** 是 AWS 开发的 Rust 模型检测器，基于 CBMC (C Bounded Model Checker)。
@@ -447,11 +452,9 @@ Microsoft 在 Azure 基础设施中使用 Rust 和形式化验证:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

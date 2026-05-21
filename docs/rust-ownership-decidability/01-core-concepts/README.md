@@ -10,6 +10,7 @@
 ---
 
 ## 目录说明
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录深入讲解Rust所有权系统的五大核心概念，从实践和理论两个维度进行形式化分析。
@@ -17,6 +18,7 @@
 ---
 
 ## 文档列表
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 文档 | 核心内容 | 定理数量 |
@@ -29,6 +31,7 @@
 | 01-05 | [内部可变性](./01-05-interior-mutability.md) | Cell/RefCell/Mutex | 8+ |
 
 ### 深度解析文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 📘 **[所有权规则深度解析 (01-01-ownership-rules-deep.md)](./01-01-ownership-rules-deep.md)**
@@ -71,9 +74,7 @@ Thm LIFETIME-SUBSET: 引用生命周期 ⊆ 被引用值生命周期
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 

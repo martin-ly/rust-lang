@@ -15,6 +15,7 @@
 ---
 
 ## 目录结构
+>
 > **[来源: Rust Official Docs]**
 
 | 子目录 | 内容 |
@@ -24,6 +25,7 @@
 | [09_actor_model/](09_actor_model/README.md) | Actor 模型实现 |
 
 ### 文档
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 说明 |
@@ -33,6 +35,7 @@
 ---
 
 ## 编程范式概览
+>
 > **[来源: Rust Official Docs]**
 
 ### 同步编程
@@ -111,7 +114,6 @@ fn concurrent_example() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

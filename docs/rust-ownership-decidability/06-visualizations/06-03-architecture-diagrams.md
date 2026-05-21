@@ -3,6 +3,7 @@
 > **目的**: 通过层次化架构图展示Rust所有权系统、编译器和验证工具的系统结构
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [架构设计树图](#架构设计树图)
@@ -21,11 +22,14 @@
     - [4.2 分离逻辑架构](#42-分离逻辑架构)
   - [5. 研究前沿架构](#5-研究前沿架构)
   - [使用说明](#使用说明)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. Rust所有权系统架构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权层次结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -463,6 +467,7 @@ Rust形式化验证研究前沿
 2. **开发指导**: 理解编译器和验证工具的内部组织
 3. **研究定位**: 识别各组件在整体中的位置和关系
 4. **教学设计**: 层次化地呈现复杂系统
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -474,11 +479,9 @@ Rust形式化验证研究前沿
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

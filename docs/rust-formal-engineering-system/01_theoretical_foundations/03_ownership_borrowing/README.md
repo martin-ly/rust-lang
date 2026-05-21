@@ -11,6 +11,7 @@
 - [生命周期形式化](../../../research_notes/formal_methods/lifetime_formalization.md)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -37,6 +38,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -50,6 +52,7 @@ mindmap
 ---
 
 ## 形式化链接
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 路径 | 内容 |
@@ -63,9 +66,11 @@ mindmap
 ---
 
 ## 所有权系统的形式化理解
+>
 > **[来源: Rust Official Docs]**
 
 ### 资源管理代数
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的所有权系统可以形式化为线性逻辑的资源管理：
@@ -103,6 +108,7 @@ fn partial_use() {
 ```
 
 ### 借用检查器的形式化规则
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -143,6 +149,7 @@ fn borrow_rules() {
 ```
 
 ### 非词法生命周期（NLL）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -172,6 +179,7 @@ fn nll_control_flow() {
 ```
 
 ### 内部可变性模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -231,6 +239,7 @@ fn arc_mutex_demo() {
 ```
 
 ### 所有权与并发的形式化
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -277,6 +286,7 @@ fn non_send_sync() {
     // 必须使用 Arc 代替
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -287,7 +297,6 @@ fn non_send_sync() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

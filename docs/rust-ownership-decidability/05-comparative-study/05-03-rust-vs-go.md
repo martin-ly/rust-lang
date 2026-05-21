@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust vs Go 深度对比](#rust-vs-go-深度对比)
@@ -59,10 +60,13 @@
     - [11.2 学习路径建议](#112-学习路径建议)
   - [总结](#总结)
   - [参考文献](#参考文献)
+  - [*维护者: Rust Comparative Study Team*](#维护者-rust-comparative-study-team)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -99,6 +103,7 @@
 ---
 
 ## 2. 设计理念对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语言设计哲学
@@ -1404,6 +1409,7 @@ func (s *Stack[T]) Pop() (T, bool) {
     s.items = s.items[:len(s.items)-1]
     return item, true
 }
+
 ```
 
 **Rust 泛型:**
@@ -2161,11 +2167,9 @@ Go 开发者学习 Rust 路径:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

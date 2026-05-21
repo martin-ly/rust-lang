@@ -17,6 +17,7 @@
   - [参考实现](#参考实现)
   - [完整参考实现位于: `examples/log-parser/`](#完整参考实现位于-exampleslog-parser)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 项目目标
 >
@@ -85,7 +86,6 @@ fn process_log_file(path: &str) -> std::io::Result<()> {
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

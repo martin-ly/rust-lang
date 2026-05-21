@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust Relaxed Memory 模型形式化](#rust-relaxed-memory-模型形式化)
@@ -40,10 +41,13 @@
     - [7.1 安全性定理](#71-安全性定理)
     - [7.2 优化正确性](#72-优化正确性)
   - [参考文献](#参考文献)
+  - [*状态: 完成*](#状态-完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档介绍 RustBelt 向 Relaxed Memory 模型的扩展，核心贡献包括：
@@ -56,6 +60,7 @@
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 顺序一致性的局限
@@ -530,11 +535,9 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

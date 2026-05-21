@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Async执行模型 - 并发范式对比分析](#async执行模型---并发范式对比分析)
@@ -45,10 +46,13 @@
   - [10. 结论](#10-结论)
     - [核心洞见](#核心洞见)
     - [形式化优势总结](#形式化优势总结)
+  - [**状态**: ✅ 深度对比分析完成](#状态--深度对比分析完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 并发模型谱系
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -93,6 +97,7 @@
 ---
 
 ## 2. 回调地狱 vs Async/Await
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 回调风格示例
@@ -637,11 +642,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Ownership Type]** · **[来源: Wikipedia - Linear Logic]** · **[来源: ACM - Ownership-Based Memory Management]** · **[来源: IEEE - Type-Based Memory Safety]**
 
 - [所有权深度解析](#所有权深度解析)
@@ -55,13 +56,17 @@
     - [8.2 静态分析工具](#82-静态分析工具)
     - [8.3 所有权的未来：Polonius](#83-所有权的未来polonius)
   - [总结](#总结)
+  - [*继续学习: borrowing-in-depth.md*](#继续学习-borrowing-in-depthmd)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权的形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在 Rust 的类型系统中，所有权可以通过以下形式化规则描述：
@@ -1025,7 +1030,6 @@ fn polonius_example() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

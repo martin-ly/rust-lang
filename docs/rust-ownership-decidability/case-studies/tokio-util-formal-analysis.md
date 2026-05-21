@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Tokio-Util 实用工具形式化分析](#tokio-util-实用工具形式化分析)
@@ -28,10 +29,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (Decoder状态丢失)](#反例-51-decoder状态丢失)
     - [反例 5.2 (Codec线程安全)](#反例-52-codec线程安全)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tokio-Util提供:
@@ -44,6 +48,7 @@ Tokio-Util提供:
 ---
 
 ## 2. Codec框架
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Encoder特质
@@ -208,11 +213,9 @@ spawn(async move {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Ref-Cast 引用转换形式化分析](#ref-cast-引用转换形式化分析)
@@ -22,10 +23,13 @@
     - [定理 4.1 (repr(transparent))](#定理-41-reprtransparent)
   - [5. 反例](#5-反例)
     - [反例 5.1 (非透明类型)](#反例-51-非透明类型)
+  - [*定理数量: 4个*](#定理数量-4个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ref-cast提供:
@@ -38,6 +42,7 @@ ref-cast提供:
 ---
 
 ## 2. RefCast Trait
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (引用转换)
@@ -120,11 +125,9 @@ struct Wrapper(String);  // 编译错误!
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

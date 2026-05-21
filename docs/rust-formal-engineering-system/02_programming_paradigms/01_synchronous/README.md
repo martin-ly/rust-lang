@@ -11,9 +11,11 @@
 ---
 
 ## 同步编程核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 线程与并发
+>
 > **[来源: Rust Official Docs]**
 
 Rust 通过标准库提供 OS 线程支持：
@@ -61,6 +63,7 @@ fn channel_communication() {
 ```
 
 ### 共享状态并发
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -129,6 +132,7 @@ fn atomic_demo() {
 ```
 
 ### 线程同步原语
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -180,6 +184,7 @@ fn condvar_demo() {
 ```
 
 ### Scoped 线程（无需 'static 生命周期）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -232,6 +237,7 @@ where
 ```
 
 ### 线程局部存储
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -268,6 +274,7 @@ fn thread_local_demo() {
 ---
 
 ## 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 同步原语 | 适用说明 |
@@ -284,9 +291,11 @@ fn thread_local_demo() {
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -296,6 +305,7 @@ fn thread_local_demo() {
 | 并行执行模型 | 并行模型理论 | [../../../research_notes/software_design_theory/03_execution_models/04_parallel.md](../../../research_notes/software_design_theory/03_execution_models/04_parallel.md) |
 
 ### 形式化方法
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -304,6 +314,7 @@ fn thread_local_demo() {
 | 所有权模型 | 所有权与并发 | [../../../research_notes/formal_methods/ownership_model.md](../../../research_notes/formal_methods/ownership_model.md) |
 
 ### 实验分析
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -318,6 +329,7 @@ fn thread_local_demo() {
 | :--- | :--- | :--- |
 | c05_threads | 线程并发实现 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
 | c09_design_pattern | 并发设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/README.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -328,7 +340,6 @@ fn thread_local_demo() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

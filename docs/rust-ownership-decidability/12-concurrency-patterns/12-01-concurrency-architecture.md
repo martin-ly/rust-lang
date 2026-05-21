@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust并发架构设计模式](#rust并发架构设计模式)
@@ -41,13 +42,16 @@
     - [选择合适的并发模型](#选择合适的并发模型)
     - [避免常见陷阱](#避免常见陷阱)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 并发模型概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Rust并发哲学
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -756,6 +760,7 @@ async fn good_mutex() {
 3. Rayon Documentation: <https://docs.rs/rayon/>
 4. Actix Documentation: <https://actix.rs/>
 5. Rust Atomics and Locks: <https://marabos.nl/atomics/>
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -767,11 +772,9 @@ async fn good_mutex() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

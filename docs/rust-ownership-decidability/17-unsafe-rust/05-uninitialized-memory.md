@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [未初始化内存处理](#未初始化内存处理)
@@ -34,13 +35,17 @@
     - [6.2 错误：忘记析构](#62-错误忘记析构)
     - [6.3 正确检查清单](#63-正确检查清单)
   - [参考](#参考)
+  - [*最后更新: 2026-03-07*](#最后更新-2026-03-07)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 什么是未初始化内存
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 未初始化内存是指**已分配但未写入值**的内存。在 Rust 中，读取未初始化内存是**立即 UB**。
@@ -363,11 +368,9 @@ unsafe {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

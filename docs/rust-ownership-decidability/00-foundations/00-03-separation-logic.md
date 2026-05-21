@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [分离逻辑：理论基础与Rust应用](#分离逻辑理论基础与rust应用)
@@ -40,13 +41,16 @@
     - [9.1 分数权限](#91-分数权限)
     - [9.2 幽灵状态](#92-幽灵状态)
   - [10. 参考文献](#10-参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 分离逻辑的诞生
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景：传统Hoare逻辑的局限
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 传统Hoare逻辑处理堆内存时面临**帧问题**（Frame Problem）：
@@ -677,6 +681,7 @@ fn ghost_example(x: u64) -> u64 {
 3. Jung, R., et al. (2018). Iris from the Ground Up: A Modular Foundation for Higher-Order Concurrent Separation Logic. *JFP*.
 4. Boyland, J. (2003). Checking Interference with Fractional Permissions. *SAS*.
 5. Smans, J., Jacobs, B., & Piessens, F. (2012). Implicit Dynamic Frames: Combining Dynamic Frames and Separation Logic. *ECOOP*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -688,11 +693,9 @@ fn ghost_example(x: u64) -> u64 {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -1,12 +1,14 @@
 # Rust 所有权系统：比较分析总览
 
 ## 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档集提供了 Rust 所有权系统与其他主流编程语言在内存管理、性能、并发模型等方面的深度比较分析。
 通过这些比较，读者可以深入理解 Rust 所有权模型的独特优势、权衡取舍以及适用场景。
 
 ## 比较分析文件索引
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 主题 | 核心对比维度 |
@@ -18,6 +20,7 @@
 | [memory-management-comparison.md](./memory-management-comparison.md) | 内存管理范式 | 所有权、GC、引用计数、手动管理 |
 
 ## 为什么进行这些比较？
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 技术选型的需求
@@ -175,7 +178,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 ---
 
-**开始阅读**: 建议从您最熟悉的语言的比较文档开始，然后逐步扩展到其他文档。
+**开始阅读**: 建议从您最熟悉的语言的比较文档开始，然后逐步扩展到其他文档
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -186,7 +189,6 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

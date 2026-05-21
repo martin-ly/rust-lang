@@ -55,6 +55,7 @@
   - [8. 与Hyper/Tokio对比](#8-与hypertokio对比)
   - [参考文献](#参考文献)
   - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -610,7 +611,6 @@ async fn handler(body: web::Json<Data>) -> impl Responder {
 ---
 
 - [README](./README.md)
-
 
 ---
 

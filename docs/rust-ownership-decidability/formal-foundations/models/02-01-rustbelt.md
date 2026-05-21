@@ -4,6 +4,7 @@
 > **扩展工作**: RustHornBelt (2022), Iris Separation Logic
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [RustBelt: Rust的形式化基础](#rustbelt-rust的形式化基础)
@@ -34,11 +35,14 @@
     - [8.1 RustHornBelt](#81-rusthornbelt)
     - [8.2 Aeneas](#82-aeneas)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. RustBelt概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 项目目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -374,6 +378,7 @@ RustHornBelt = RustBelt + RustHorn
 2. Jung, R., et al. (2017). Iris: Monoids and Invariants as an Orthogonal Basis for Concurrent Reasoning. *POPL*.
 3. Krebbers, R., et al. (2017). MoSeL: A General, Extensible Modal Framework for Interactive Proofs in Separation Logic. *ICFP*.
 4. Matsushita, Y., et al. (2022). RustHornBelt: A Semantic Foundation for Functional Verification of Rust Programs with Unsafe Code. *PLDI*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -385,11 +390,9 @@ RustHornBelt = RustBelt + RustHorn
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

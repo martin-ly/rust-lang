@@ -11,6 +11,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [所有权、借用与生命周期：三位一体的内存安全](#所有权借用与生命周期三位一体的内存安全)
@@ -38,11 +39,14 @@
     - [所有权作为资源管理合约](#所有权作为资源管理合约)
     - [借用检查器的工作流程](#借用检查器的工作流程)
   - [6. 进阶阅读](#6-进阶阅读)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 所有权：内存管理的根本创新
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 为什么需要所有权？
+>
 > **[来源: Rust Official Docs]**
 
 传统语言面临两难选择：
@@ -53,6 +57,7 @@
 Rust 的解决方案：**编译期所有权检查** —— 零运行时开销的内存安全。
 
 ### 1.2 所有权的三条铁律
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -76,6 +81,7 @@ fn makes_copy(some_integer: i32) {
 ```
 
 ### 1.3 返回值与所有权转移
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -90,6 +96,7 @@ fn takes_and_gives_back(a_string: String) -> String {
 ```
 
 ### 1.4 引用计数：共享所有权
+>
 > **[来源: Rust Official Docs]**
 
 当需要多个所有者时，使用 `Rc<T>`（单线程）或 `Arc<T>`（多线程）：
@@ -105,9 +112,11 @@ println!("引用计数: {}", Rc::strong_count(&data)); // 2
 ---
 
 ## 2. 借用：不转移所有权的访问
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 不可变借用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -123,6 +132,7 @@ fn calculate_length(s: &String) -> usize {
 ```
 
 ### 2.2 可变借用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -138,6 +148,7 @@ fn change(some_string: &mut String) {
 ```
 
 ### 2.3 借用规则：数据竞争的死结
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -153,6 +164,7 @@ println!("{}, {}, 和 {}", r1, r2, r3);
 **为什么？** 如果读者（r1, r2）和写者（r3）同时存在，读者可能读到半写入的状态，导致数据竞争。
 
 ### 2.4 非词法生命周期 (NLL)
+>
 > **[来源: Rust Official Docs]**
 
 Rust 2018+ 引入了 NLL，借用的结束不再是作用域末尾，而是**最后一次使用**：
@@ -331,11 +343,9 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

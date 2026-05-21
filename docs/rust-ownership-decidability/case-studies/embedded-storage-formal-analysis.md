@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Embedded-Storage存储抽象形式化分析](#embedded-storage存储抽象形式化分析)
@@ -33,10 +34,13 @@
     - [示例1: Flash驱动实现](#示例1-flash驱动实现)
     - [示例2: 文件系统抽象](#示例2-文件系统抽象)
     - [示例3: 配置存储](#示例3-配置存储)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 embedded-storage为嵌入式存储设备提供统一trait：
@@ -49,6 +53,7 @@ embedded-storage为嵌入式存储设备提供统一trait：
 ---
 
 ## 2. 存储trait形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 STORAGE-1 ( 只读存储 )
@@ -374,11 +379,9 @@ impl<F: NorFlash> ConfigStorage<F> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

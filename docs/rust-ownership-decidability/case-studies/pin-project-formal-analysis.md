@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Pin-project形式化分析](#pin-project形式化分析)
@@ -36,10 +37,13 @@
     - [示例2: 异步组合器](#示例2-异步组合器)
     - [示例3: 流适配器](#示例3-流适配器)
     - [示例4: PinnedDrop](#示例4-pinneddrop)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Pin-project解决的问题：
@@ -51,6 +55,7 @@ Pin-project解决的问题：
 ---
 
 ## 2. Pin语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 PIN-1 ( Pin保证 )
@@ -383,11 +388,9 @@ impl PinnedDrop for Buffer {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

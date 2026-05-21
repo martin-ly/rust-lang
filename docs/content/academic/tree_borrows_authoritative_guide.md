@@ -72,7 +72,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Tree Borrows 权威指南 / Tree Borrows Authoritative Guide](#tree-borrows-权威指南--tree-borrows-authoritative-guide)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🎯 执行摘要](#-执行摘要)
     - [关键改进](#关键改进)

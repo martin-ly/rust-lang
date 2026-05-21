@@ -38,6 +38,7 @@
     - [VS Code settings.json](#vs-code-settingsjson)
   - [*定期更新此文档以反映工具链的最新发展。*](#定期更新此文档以反映工具链的最新发展)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -882,7 +883,6 @@ cargo update --workspace --locked --dry-run
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

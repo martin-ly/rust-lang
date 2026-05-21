@@ -11,9 +11,11 @@
 ---
 
 ## 并发安全的设计模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 无锁数据结构模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -66,6 +68,7 @@ fn lock_free_demo() {
 ```
 
 ### 线程池模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -164,6 +167,7 @@ fn thread_pool_demo() {
 ```
 
 ### 读写锁模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -235,6 +239,7 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
 ```
 
 ### 生产者-消费者模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -305,6 +310,7 @@ fn backpressure_producer_consumer() {
 ```
 
 ### 扇出-扇入模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -355,6 +361,7 @@ fn fan_out_fan_in() {
 ```
 
 ### 信号量模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -412,6 +419,7 @@ async fn weighted_semaphore() {
 ---
 
 ## 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 并发模式 | 关键技术 |
@@ -428,9 +436,11 @@ async fn weighted_semaphore() {
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -440,6 +450,7 @@ async fn weighted_semaphore() {
 | 边界矩阵 | 并发安全边界 | [../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md](../../../research_notes/software_design_theory/01_design_patterns_formal/04_boundary_matrix.md) |
 
 ### 形式化方法
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -462,6 +473,7 @@ async fn weighted_semaphore() {
 | c09_design_pattern | 并发设计模式实现 | [../../../../crates/c09_design_pattern/docs/](../../../../crates/c09_design_pattern/docs/README.md) |
 | c05_threads | 线程并发 | [../../../../crates/c05_threads/](../../../../crates/c05_threads/README.md) |
 | c06_async | 异步并发 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -472,7 +484,6 @@ async fn weighted_semaphore() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

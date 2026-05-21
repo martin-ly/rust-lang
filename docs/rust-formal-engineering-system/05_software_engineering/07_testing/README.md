@@ -12,9 +12,11 @@
 ---
 
 ## Rust 测试生态系统
+>
 > **[来源: Rust Official Docs]**
 
 ### 单元测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -76,6 +78,7 @@ fn some_operation() -> Result<i32, String> {
 ```
 
 ### 集成测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -265,7 +268,6 @@ mod concurrency_tests {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

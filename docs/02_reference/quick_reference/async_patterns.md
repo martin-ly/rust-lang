@@ -88,7 +88,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Future/Promise]** · **[来源: ACM - Async Programming Patterns]** · **[来源: IEEE - Concurrent Language Constructs]**
 
 - [⚡ Rust 异步编程速查卡](#-rust-异步编程速查卡)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [🧠 异步状态机思维导图](#-异步状态机思维导图)
   - [📊 概念定义-属性关系-解释论证](#-概念定义-属性关系-解释论证)

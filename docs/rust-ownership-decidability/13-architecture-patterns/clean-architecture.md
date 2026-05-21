@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [清洁架构 (Clean Architecture)](#清洁架构-clean-architecture)
@@ -22,8 +23,11 @@
   - [错误处理](#错误处理)
   - [测试](#测试)
   - [对比](#对比)
+  - [*文档版本: 1.0.0*](#文档版本-100)
+  - [权威来源索引](#权威来源索引)
 
 ## 核心概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 清洁架构（洋葱架构）的核心思想：**依赖关系向内指向领域**。
@@ -44,6 +48,7 @@
 ---
 
 ## 原则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 依赖规则
@@ -293,11 +298,9 @@ fn test_create_order_use_case() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

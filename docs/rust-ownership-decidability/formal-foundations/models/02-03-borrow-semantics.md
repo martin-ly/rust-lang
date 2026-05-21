@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [借用语义的形式化：共享借用与可变借用](#借用语义的形式化共享借用与可变借用)
@@ -42,13 +43,16 @@
     - [并发访问](#并发访问)
   - [10. 参考文献](#10-参考文献)
   - [附录: 借用规则总结](#附录-借用规则总结)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 借用系统概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 借用的动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **所有权系统的问题**：Move语义过于严格，导致频繁的所有权转移。
@@ -630,6 +634,7 @@ fn concurrent_reads() {
 │                                                                 │
 └─────────────────────────────────────────────────────────────────┘
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -641,11 +646,9 @@ fn concurrent_reads() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

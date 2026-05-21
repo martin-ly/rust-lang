@@ -9,9 +9,11 @@
 > **完整结构**: DOCS_STRUCTURE_OVERVIEW § 2.6
 
 ## 代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 项目元文档索引生成器
+>
 > **[来源: Rust Official Docs]**
 
 <!-- 注意：以下代码块中的占位符是 Rust format! 宏的格式字符串，不是 Markdown 链接 -->
@@ -124,6 +126,7 @@ fn main() {
 ---
 
 ## 形式化链接
+>
 > **[来源: Rust Official Docs]**
 
 ### 研究笔记关联
@@ -209,7 +212,6 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

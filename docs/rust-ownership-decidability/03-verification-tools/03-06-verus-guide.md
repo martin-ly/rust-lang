@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Verus 用户指南](#verus-用户指南)
@@ -49,13 +50,17 @@
     - [当前限制](#当前限制)
     - [未来发展方向](#未来发展方向)
   - [参考](#参考)
+  - [*文档版本: 2.0.0* | *Verus 版本: 0.1.x* | *最后更新: 2026-03*](#文档版本-200--verus-版本-01x--最后更新-2026-03)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. Verus 简介
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是 Verus
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Verus 是由 VMware Research 开发的 Rust 验证工具，专注于**系统级代码**的功能正确性验证。
@@ -924,11 +929,9 @@ proof fn good_recursion(n: nat) -> nat
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

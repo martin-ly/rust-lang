@@ -12,6 +12,7 @@
 - [生命周期形式化](../../../research_notes/formal_methods/lifetime_formalization.md)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -36,6 +37,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -47,6 +49,7 @@ mindmap
 ---
 
 ## 形式化链接
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 路径 | 内容 |
@@ -210,6 +213,7 @@ fn type_safety() {
     }
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -220,7 +224,6 @@ fn type_safety() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

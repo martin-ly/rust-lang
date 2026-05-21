@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [惯用Rust模式](#惯用rust模式)
@@ -63,13 +64,16 @@
     - [迭代器检查清单](#迭代器检查清单)
     - [性能检查清单](#性能检查清单)
   - [参考资源](#参考资源)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是惯用Rust
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 惯用Rust（Idiomatic Rust）是指符合Rust语言哲学和社区实践的编程方式。它不仅仅是"能运行的代码"，而是：
@@ -1115,6 +1119,7 @@ thread::spawn(move || {
 - [Rust By Example - 错误处理](https://doc.rust-lang.org/rust-by-example/error.html)
 - [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)
 - [This Week in Rust - 惯用Rust](https://this-week-in-rust.org/)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1126,11 +1131,9 @@ thread::spawn(move || {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

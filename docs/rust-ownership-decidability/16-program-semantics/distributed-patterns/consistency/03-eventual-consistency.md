@@ -1,6 +1,7 @@
 # 最终一致性语义 (Eventual Consistency Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [最终一致性语义 (Eventual Consistency Semantics)](#最终一致性语义-eventual-consistency-semantics)
@@ -23,8 +24,11 @@
   - [7. 形式化保证](#7-形式化保证)
     - [7.1 最终一致性属性](#71-最终一致性属性)
   - [8. 总结](#8-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 最终一致性是分布式系统中最广泛采用的一致性模型，在保证高可用性的同时，允许短暂的不一致状态。
@@ -33,6 +37,7 @@
 ---
 
 ## 2. 最终一致性定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 基本语义
@@ -604,11 +609,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

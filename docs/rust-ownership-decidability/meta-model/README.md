@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统元模型](#rust-所有权系统元模型)
@@ -25,10 +26,13 @@
     - [推荐阅读顺序](#推荐阅读顺序)
     - [前置知识](#前置知识)
     - [关联阅读](#关联阅读)
+  - [**状态**: ✅ 完成](#状态--完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 元模型概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 元模型（Meta-Model）是 Rust 所有权系统的数学基础，提供：
@@ -41,6 +45,7 @@
 ---
 
 ## 📁 文档导航
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心文档
@@ -162,7 +167,6 @@ Stack ≜ Frame*                    调用栈
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

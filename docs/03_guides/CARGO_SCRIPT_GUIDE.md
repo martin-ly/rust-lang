@@ -10,45 +10,45 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [1. 什么是 Cargo Script？](#1-什么是-cargo-script)
-  - [1.1 为什么需要它？](#11-为什么需要它)
-  - [1.2 适用场景](#12-适用场景)
-- [2. 文件格式规范](#2-文件格式规范)
-  - [2.1 基本结构](#21-基本结构)
-  - [2.2 格式要求](#22-格式要求)
-  - [2.3 完整清单示例](#23-完整清单示例)
-- [3. 运行方式](#3-运行方式)
-  - [3.1 使用 cargo 直接运行 (推荐)](#31-使用-cargo-直接运行-推荐)
-  - [3.2 作为可执行脚本 (Unix)](#32-作为可执行脚本-unix)
-  - [3.3 使用 Rust 解释器模式](#33-使用-rust-解释器模式)
-  - [3.4 Windows 环境](#34-windows-环境)
-- [4. 依赖管理](#4-依赖管理)
-  - [4.1 基本依赖](#41-基本依赖)
-  - [4.2 带特性的依赖](#42-带特性的依赖)
-  - [4.3 路径依赖 (同目录下的本地 crate)](#43-路径依赖-同目录下的本地-crate)
-  - [4.4 工作区依赖](#44-工作区依赖)
-- [5. 实际示例](#5-实际示例)
-  - [示例 1: JSON 数据处理](#示例-1-json-数据处理)
-  - [示例 2: HTTP 请求](#示例-2-http-请求)
-  - [示例 3: 本项目的演示文件](#示例-3-本项目的演示文件)
-- [6. 注意事项与限制](#6-注意事项与限制)
-  - [6.1 当前限制](#61-当前限制)
-  - [6.2 缓存](#62-缓存)
-  - [6.3 性能提示](#63-性能提示)
-- [7. 调试与测试](#7-调试与测试)
-  - [7.1 运行测试](#71-运行测试)
+- [Cargo Script 单文件脚本指南](#cargo-script-单文件脚本指南)
+  - [📑 目录](#-目录)
+  - [1. 什么是 Cargo Script？](#1-什么是-cargo-script)
+    - [1.1 为什么需要它？](#11-为什么需要它)
+    - [1.2 适用场景](#12-适用场景)
+  - [2. 文件格式规范](#2-文件格式规范)
+    - [2.1 基本结构](#21-基本结构)
+    - [2.2 格式要求](#22-格式要求)
+    - [2.3 完整清单示例](#23-完整清单示例)
+  - [3. 运行方式](#3-运行方式)
+    - [3.1 使用 cargo 直接运行 (推荐)](#31-使用-cargo-直接运行-推荐)
+    - [3.2 作为可执行脚本 (Unix)](#32-作为可执行脚本-unix)
+    - [3.3 使用 Rust 解释器模式](#33-使用-rust-解释器模式)
+    - [3.4 Windows 环境](#34-windows-环境)
+  - [4. 依赖管理](#4-依赖管理)
+    - [4.1 基本依赖](#41-基本依赖)
+    - [4.2 带特性的依赖](#42-带特性的依赖)
+    - [4.3 路径依赖 (同目录下的本地 crate)](#43-路径依赖-同目录下的本地-crate)
+    - [4.4 工作区依赖](#44-工作区依赖)
+  - [5. 实际示例](#5-实际示例)
+    - [示例 1: JSON 数据处理](#示例-1-json-数据处理)
+- [\[derive(Debug, Serialize, Deserialize)\]](#derivedebug-serialize-deserialize)
+- [Unix/Linux](#unixlinux)
+- [Windows](#windows)
   - [7.2 调试输出](#72-调试输出)
-- [8. 参考文献](#8-参考文献)
+  - [8. 参考文献](#8-参考文献)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 什么是 Cargo Script？
+>
 > **[来源: Rust Official Docs]**
 
 **Cargo Script** 是 Rust 从 1.79 版本开始稳定化的功能，允许在**单个 `.rs` 文件**中编写完整的 Rust 程序，包括外部依赖声明。
 
 ### 1.1 为什么需要它？
+>
 > **[来源: Rust Official Docs]**
 
 在 Cargo Script 之前，运行一个依赖外部 crate 的 Rust 程序需要：
@@ -70,6 +70,7 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 1.2 适用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 传统项目 | Cargo Script |
@@ -84,9 +85,11 @@ cargo run --manifest-path my_script.rs
 ---
 
 ## 2. 文件格式规范
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 基本结构
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -104,6 +107,7 @@ cargo run --manifest-path my_script.rs
 ```
 
 ### 2.2 格式要求
+>
 > **[来源: Rust Official Docs]**
 
 1. **Shebang (可选但推荐)**
@@ -121,6 +125,7 @@ cargo run --manifest-path my_script.rs
    - 可以包含 `fn main()`、模块、测试等
 
 ### 2.3 完整清单示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -154,9 +159,11 @@ cargo run --manifest-path my_script.rs
 ---
 
 ## 3. 运行方式
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 使用 cargo 直接运行 (推荐)
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -168,6 +175,7 @@ cargo run --manifest-path script.rs -- --help
 ```
 
 ### 3.2 作为可执行脚本 (Unix)
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -179,6 +187,7 @@ chmod +x script.rs
 ```
 
 ### 3.3 使用 Rust 解释器模式
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -374,18 +383,15 @@ cargo run --manifest-path script.rs --release
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

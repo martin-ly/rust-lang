@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
@@ -44,13 +45,17 @@
     - [Q23: "does not live long enough" 解决策略](#q23-does-not-live-long-enough-解决策略)
     - [Q24: 如何调试复杂的生命周期错误？](#q24-如何调试复杂的生命周期错误)
   - [更多资源](#更多资源)
+  - [**维护者**: Rust 所有权可判定性研究项目](#维护者-rust-所有权可判定性研究项目)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 基础概念 FAQ
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Q1: 所有权系统与其他语言的垃圾回收有何不同？
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **A**: 核心区别:
@@ -674,11 +679,9 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str { ... }
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

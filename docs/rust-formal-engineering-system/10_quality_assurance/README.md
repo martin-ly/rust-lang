@@ -10,6 +10,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [质量保障 {#-质量保障维度}](#质量保障--质量保障维度)
@@ -29,10 +30,13 @@
   - [形式化方法](#形式化方法)
   - [知识结构思维导图](#知识结构思维导图)
   - [与核心文档的关联](#与核心文档的关联)
+  - [返回主索引](#返回主索引)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 宗旨 {#-宗旨}
+>
 > **[来源: Rust Official Docs]**
 
 本模块提供 Rust 形式化工程系统的质量保障体系，涵盖：
@@ -45,6 +49,7 @@
 ---
 
 ## 📐 质量保障维度
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 内容 | 文档 |
@@ -58,6 +63,7 @@
 ---
 
 ## 📚 核心文档 {#-核心文档}
+>
 > **[来源: Rust Official Docs]**
 
 - [**TESTING_COVERAGE_GUIDE.md**](../../05_guides/TESTING_COVERAGE_GUIDE.md) — 测试策略、覆盖率、MIRI 集成
@@ -66,6 +72,7 @@
 ---
 
 ## 🔬 形式化验证衔接 {#-形式化验证衔接}
+>
 > **[来源: Rust Official Docs]**
 
 | 验证目标 | 形式化定理 | 工具 |
@@ -78,6 +85,7 @@
 ---
 
 ## ✅ 质量检查清单 {#-质量检查清单}
+>
 > **[来源: Rust Official Docs]**
 
 1. **构建**：`cargo build` 通过
@@ -90,9 +98,11 @@
 ---
 
 ## 代码质量示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 测试最佳实践
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -145,6 +155,7 @@ fuzz_target!(|data: &[u8]| {
 ```
 
 ### MIRI 检测示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -186,6 +197,7 @@ mod miri_tests {
 ```
 
 ### 基准测试示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -209,6 +221,7 @@ criterion_main!(benches);
 ```
 
 ### 代码覆盖率示例
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -345,7 +358,6 @@ mindmap
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

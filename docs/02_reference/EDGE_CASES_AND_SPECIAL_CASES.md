@@ -13,6 +13,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 边界条件与特例示例](#rust-边界条件与特例示例)
@@ -81,13 +82,16 @@
     - [速查卡](#速查卡)
     - [形式化文档](#形式化文档)
   - [Rust 1.95+ 更新](#rust-195-更新)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 集合边界
+>
 > **[来源: Rust Official Docs]**
 
 ### 空 Vec 与零长度
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -100,6 +104,7 @@ empty.get(0);   // ✅ 返回 None
 ```
 
 ### 空 HashMap / BTreeMap
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -111,6 +116,7 @@ map.insert(1, "a");  // 插入后非空
 ```
 
 ### 空切片
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -122,9 +128,11 @@ slice.iter().next();  // ✅ 返回 None
 ---
 
 ## 算法特例
+>
 > **[来源: Rust Official Docs]**
 
 ### 空输入的排序与搜索
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -138,6 +146,7 @@ one.binary_search(&0);  // ✅ Err(0)
 ```
 
 ### 单元素与双元素
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -149,9 +158,11 @@ single.chunks(1).count();  // 1
 ---
 
 ## 并发特例
+>
 > **[来源: Rust Official Docs]**
 
 ### 零个线程 / 空任务列表
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -163,6 +174,7 @@ for h in handles {
 ```
 
 ### 通道已关闭
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -731,7 +743,6 @@ fn iterator_invalidation() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

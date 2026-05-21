@@ -1,6 +1,7 @@
 # ISO 26262 Rust实施指南
 
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南提供在ISO 26262汽车功能安全标准框架下使用Rust进行开发的详细实施路径，涵盖ASIL A至ASIL D所有安全完整性等级。
@@ -8,12 +9,15 @@
 ---
 
 ## 目录与对应关系
+>
 > **[来源: Rust Official Docs]**
 
 ### ISO 26262-3: 概念阶段
+>
 > **[来源: Rust Official Docs]**
 
 #### 3.5 危害分析与风险评估(HARA)
+>
 > **[来源: Rust Official Docs]**
 
 **Rust优势映射**:
@@ -74,6 +78,7 @@ pub enum BufferError {
 ```
 
 #### 3.6 功能安全概念
+>
 > **[来源: Rust Official Docs]**
 
 **安全机制Rust实现**:
@@ -137,12 +142,15 @@ pub enum E2EResult {
 ---
 
 ## ISO 26262-6: 软件级产品开发
+>
 > **[来源: Rust Official Docs]**
 
 ### 6.5 软件安全需求规范
+>
 > **[来源: Rust Official Docs]**
 
 #### ASIL等级对应需求
+>
 > **[来源: Rust Official Docs]**
 
 **ASIL D软件安全需求模板**:
@@ -183,9 +191,11 @@ pub enum DivisionError {
 ```
 
 ### 6.6 软件架构设计
+>
 > **[来源: Rust Official Docs]**
 
 #### 架构设计原则
+>
 > **[来源: Rust Official Docs]**
 
 **1. 模块化与封装**:
@@ -322,6 +332,7 @@ pub enum RecoveryAction {
 ```
 
 ### 6.7 软件单元设计与实现
+>
 > **[来源: Rust Official Docs]**
 
 #### 编码标准对应表
@@ -633,11 +644,9 @@ mod tool_qualification {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

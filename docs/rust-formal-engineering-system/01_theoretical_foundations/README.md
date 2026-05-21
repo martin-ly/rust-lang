@@ -19,9 +19,11 @@
 ---
 
 ## 核心理论概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 所有权系统的数学基础
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的所有权系统可以形式化为资源管理代数：
@@ -47,6 +49,7 @@ fn copy_semantics() {
 ```
 
 ### 借用作为能力（Capability）
+>
 > **[来源: Rust Official Docs]**
 
 借用可以建模为对资源访问的能力：
@@ -145,6 +148,7 @@ mindmap
 | 形式化证明索引 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 | 验证工具指南 | [../../research_notes/TOOLS_GUIDE.md](../../research_notes/TOOLS_GUIDE.md) |
 | 安全/非安全分析 | [../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -155,7 +159,6 @@ mindmap
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

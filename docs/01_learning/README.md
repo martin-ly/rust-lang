@@ -12,6 +12,7 @@
 ---
 
 ## 快速开始示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -54,6 +55,7 @@ fn handle_message(msg: Message) {
 ---
 
 ## 文档列表
+>
 > **[来源: Rust Official Docs]**
 
 - [LEARNING_PATH_PLANNING.md](./LEARNING_PATH_PLANNING.md) - 学习路径规划（四类路径、进度检查清单）
@@ -62,6 +64,7 @@ fn handle_message(msg: Message) {
 ---
 
 ## 学习路径概览
+>
 > **[来源: Rust Official Docs]**
 
 | 阶段 | 主题 | 核心内容 | 预计时间 |
@@ -81,6 +84,7 @@ fn handle_message(msg: Message) {
 ---
 
 ## 研究者路径
+>
 > **[来源: Rust Official Docs]**
 
 形式化理论与证明体系：
@@ -107,12 +111,15 @@ fn ownership_theorem() {
 ---
 
 ## 在线学习资源
+>
 > **[来源: Rust Official Docs]**
 
 ### Coursera
+>
 > **[来源: Rust Official Docs]**
 
 #### Rust Programming Specialization (Duke University)
+>
 > **[来源: Rust Official Docs]**
 
 - **链接**: <https://www.coursera.org/specializations/rust-programming>
@@ -129,6 +136,7 @@ fn ownership_theorem() {
   | Concurrency | 05_guides/THREADS_CONCURRENCY_USAGE_GUIDE.md |
 
 #### Programming in Rust (University of Colorado Boulder)
+>
 > **[来源: Rust Official Docs]**
 
 - **链接**: <https://www.coursera.org/learn/programming-in-rust>
@@ -138,9 +146,11 @@ fn ownership_theorem() {
 ---
 
 ## 相关资源
+>
 > **[来源: Rust Official Docs]**
 
 ### 官方资源
+>
 > **[来源: Rust Official Docs]**
 
 | 资源 | 链接 | 描述 |
@@ -151,6 +161,7 @@ fn ownership_theorem() {
 | Rustlings | <https://github.com/rust-lang/rustlings> | 练习题 |
 
 ### 项目资源
+>
 > **[来源: Rust Official Docs]**
 
 | 资源 | 路径 | 描述 |
@@ -254,7 +265,6 @@ fn ownership_theorem() {
 **维护者**: Rust 学习项目团队
 **最后更新**: 2026-05-19 (Rust 1.95+ 持续更新)
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

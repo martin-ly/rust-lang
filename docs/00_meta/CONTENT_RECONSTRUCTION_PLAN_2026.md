@@ -6,46 +6,52 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)
-  - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
-  - [模块 2: 属性清单（Property Inventory）](#模块-2-属性清单property-inventory)
-  - [模块 3: 概念依赖图（Concept Dependency Graph）](#模块-3-概念依赖图concept-dependency-graph)
-  - [模块 4: 机制解释（Mechanistic Explanation）](#模块-4-机制解释mechanistic-explanation)
-  - [模块 5: 正例集（Positive Examples）](#模块-5-正例集positive-examples)
-  - [模块 6: 反例集（Counterexamples & Anti-patterns）](#模块-6-反例集counterexamples-anti-patterns)
-  - [模块 7: 思维表征套件（Multi-modal Representations）](#模块-7-思维表征套件multi-modal-representations)
-  - [模块 8: 国际化对齐（International Alignment）](#模块-8-国际化对齐international-alignment)
-  - [模块 9: 设计权衡分析（Trade-off Analysis）](#模块-9-设计权衡分析trade-off-analysis)
-  - [模块 10: 自我检测与练习（Self-assessment）](#模块-10-自我检测与练习self-assessment)
-- [二、双轨并行执行路线图](#二双轨并行执行路线图)
-  - [轨道 A：核心知识体系重构（Track A: Core Knowledge）](#轨道-a核心知识体系重构track-a-core-knowledge)
-    - [Phase A1: P0 急救（第 1-2 周）](#phase-a1-p0-急救第-1-2-周)
-    - [Phase A2: 中级层加固（第 3-4 周）](#phase-a2-中级层加固第-3-4-周)
-    - [Phase A3: 高级层补全（第 5-6 周）](#phase-a3-高级层补全第-5-6-周)
-    - [Phase A4: 专家层重构（第 7-8 周）](#phase-a4-专家层重构第-7-8-周)
-  - [轨道 B：safety_critical 持续演进（Track B: Safety Critical）](#轨道-bsafety_critical-持续演进track-b-safety-critical)
-    - [Phase B1: 表征范式标准化（与 Track A Phase A1 同步）](#phase-b1-表征范式标准化与-track-a-phase-a1-同步)
-    - [Phase B2: 跨轨关联（第 3-4 周）](#phase-b2-跨轨关联第-3-4-周)
-    - [Phase B3: 标准对齐深化（第 5-8 周）](#phase-b3-标准对齐深化第-5-8-周)
-- [三、质量控制与验收标准](#三质量控制与验收标准)
-  - [3.1 自动化检查清单](#31-自动化检查清单)
-  - [3.2 人工审阅维度](#32-人工审阅维度)
-- [四、第一批交付计划（P0 急救包）](#四第一批交付计划p0-急救包)
-  - [交付 1: async_await.md 重构](#交付-1-async_awaitmd-重构)
-  - [交付 2: threads.md 重构](#交付-2-threadsmd-重构)
-  - [交付 3: unsafe_rust.md 重构](#交付-3-unsafe_rustmd-重构)
-- [五、风险与应对](#五风险与应对)
-- [六、立即行动项（Next Steps）](#六立即行动项next-steps)
+- [Rust 知识体系内容重构总体规划](#rust-知识体系内容重构总体规划)
+  - [📑 目录](#-目录)
+  - [一、内容标准模板（Concept Document Standard Template）](#一内容标准模板concept-document-standard-template)
+    - [模块 1: 概念定义（Concept Definition）](#模块-1-概念定义concept-definition)
+    - [模块 2: 属性清单（Property Inventory）](#模块-2-属性清单property-inventory)
+    - [模块 3: 概念依赖图（Concept Dependency Graph）](#模块-3-概念依赖图concept-dependency-graph)
+    - [模块 4: 机制解释（Mechanistic Explanation）](#模块-4-机制解释mechanistic-explanation)
+    - [模块 5: 正例集（Positive Examples）](#模块-5-正例集positive-examples)
+    - [模块 6: 反例集（Counterexamples \& Anti-patterns）](#模块-6-反例集counterexamples--anti-patterns)
+    - [模块 7: 思维表征套件（Multi-modal Representations）](#模块-7-思维表征套件multi-modal-representations)
+    - [模块 8: 国际化对齐（International Alignment）](#模块-8-国际化对齐international-alignment)
+    - [模块 9: 设计权衡分析（Trade-off Analysis）](#模块-9-设计权衡分析trade-off-analysis)
+    - [模块 10: 自我检测与练习（Self-assessment）](#模块-10-自我检测与练习self-assessment)
+  - [二、双轨并行执行路线图](#二双轨并行执行路线图)
+    - [轨道 A：核心知识体系重构（Track A: Core Knowledge）](#轨道-a核心知识体系重构track-a-core-knowledge)
+      - [Phase A1: P0 急救（第 1-2 周）](#phase-a1-p0-急救第-1-2-周)
+      - [Phase A2: 中级层加固（第 3-4 周）](#phase-a2-中级层加固第-3-4-周)
+      - [Phase A3: 高级层补全（第 5-6 周）](#phase-a3-高级层补全第-5-6-周)
+      - [Phase A4: 专家层重构（第 7-8 周）](#phase-a4-专家层重构第-7-8-周)
+    - [轨道 B：safety\_critical 持续演进（Track B: Safety Critical）](#轨道-bsafety_critical-持续演进track-b-safety-critical)
+      - [Phase B1: 表征范式标准化（与 Track A Phase A1 同步）](#phase-b1-表征范式标准化与-track-a-phase-a1-同步)
+      - [Phase B2: 跨轨关联（第 3-4 周）](#phase-b2-跨轨关联第-3-4-周)
+      - [Phase B3: 标准对齐深化（第 5-8 周）](#phase-b3-标准对齐深化第-5-8-周)
+  - [三、质量控制与验收标准](#三质量控制与验收标准)
+    - [3.1 自动化检查清单](#31-自动化检查清单)
+    - [3.2 人工审阅维度](#32-人工审阅维度)
+  - [四、第一批交付计划（P0 急救包）](#四第一批交付计划p0-急救包)
+    - [交付 1: `async_await.md` 重构](#交付-1-async_awaitmd-重构)
+    - [交付 2: `threads.md` 重构](#交付-2-threadsmd-重构)
+    - [交付 3: `unsafe_rust.md` 重构](#交付-3-unsafe_rustmd-重构)
+  - [五、风险与应对](#五风险与应对)
+  - [六、立即行动项（Next Steps）](#六立即行动项next-steps)
+  - [**状态**: 待确认](#状态-待确认)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、内容标准模板（Concept Document Standard Template）
+>
 > **[来源: Rust Official Docs]**
 
 每篇核心知识文档必须包含以下 10 个模块。缺失任一模块视为"未完成"。
 
 ### 模块 1: 概念定义（Concept Definition）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：提供三层定义，由浅入深
@@ -61,6 +67,7 @@
 - 形式化直觉："Affine Type System 的 Rust 实现：每个值至少有一个 owner，至多有一个 owner，owner 离开作用域时析构"
 
 ### 模块 2: 属性清单（Property Inventory）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：用表格列出概念的固有属性与关系属性
@@ -70,6 +77,7 @@
 | e.g. `Copy` 的传递性 | 关系属性 | bool | 仅当所有字段都实现 Copy | `struct Wrapper(String)` 不实现 Copy |
 
 ### 模块 3: 概念依赖图（Concept Dependency Graph）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：Mermaid 图，明确承上启下
@@ -86,6 +94,7 @@ graph TD
 ```
 
 ### 模块 4: 机制解释（Mechanistic Explanation）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：从至少 2 个视角解释"为什么这样设计"与"编译器如何实现"
@@ -95,6 +104,7 @@ graph TD
 - **运行时视角**：vtable 布局、monomorphization 结果、零成本抽象的物理含义
 
 ### 模块 5: 正例集（Positive Examples）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：3 个层级，渐进式复杂度
@@ -104,6 +114,7 @@ graph TD
 3. **Production-grade**：包含错误处理、边界条件、性能考量
 
 ### 模块 6: 反例集（Counterexamples & Anti-patterns）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：系统化反例，每例包含
@@ -115,6 +126,7 @@ graph TD
 5. **抽象原则**（从该反例提炼出的通用模式）
 
 ### 模块 7: 思维表征套件（Multi-modal Representations）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：每篇文档至少包含 2 种非纯文本表征
@@ -138,6 +150,7 @@ graph TD
 - **跨语言对比**：与 C++/Haskell/Ada/Go 的同质概念对比（如适用）
 
 ### 模块 9: 设计权衡分析（Trade-off Analysis）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：回答以下问题
@@ -147,6 +160,7 @@ graph TD
 3. 什么场景下这个设计是次优的？（承认限制，而非盲目推崇）
 
 ### 模块 10: 自我检测与练习（Self-assessment）
+>
 > **[来源: Rust Official Docs]**
 
 **要求**：
@@ -158,6 +172,7 @@ graph TD
 ---
 
 ## 二、双轨并行执行路线图
+>
 > **[来源: Rust Official Docs]**
 
 ### 轨道 A：核心知识体系重构（Track A: Core Knowledge）
@@ -380,18 +395,15 @@ graph TD
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

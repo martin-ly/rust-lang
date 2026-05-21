@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [研究笔记完整索引](#研究笔记完整索引)
@@ -49,10 +50,13 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 📐 文档分类体系 {#-文档分类体系}
+>
 > **[来源: Rust Official Docs]**
 
 **多维度分类**：见 [CLASSIFICATION.md](./CLASSIFICATION.md) — 按文档角色、知识层次、主题域、扩展路线。
@@ -66,9 +70,11 @@
 ---
 
 ## 📚 核心文档索引 {#-核心文档索引}
+>
 > **[来源: Rust Official Docs]**
 
 ### 导航和索引
+>
 > **[来源: Rust Official Docs]**
 
 1. **[00_ORGANIZATION_AND_NAVIGATION.md](./00_ORGANIZATION_AND_NAVIGATION.md)** - 组织架构与导航（按目标、按支柱、层级结构；首次使用必读）
@@ -235,6 +241,7 @@
 - 1.94+ 发布后：对比、更新 RUST_XXX、补新特性；检查清单
 
 ### 进展跟踪
+>
 > **[来源: Rust Official Docs]**
 
 1. **[PROGRESS_TRACKING.md](./PROGRESS_TRACKING.md)** - 研究进展跟踪
@@ -282,6 +289,7 @@
    - 完善检查清单
 
 ### 方法论和指南
+>
 > **[来源: Rust Official Docs]**
 
 1. **[research_methodology.md](./research_methodology.md)** - 研究方法论
@@ -311,6 +319,7 @@
    - 设计理由缺口追踪矩阵、思维表征覆盖矩阵
 
 ### 实际应用
+>
 > **[来源: Rust Official Docs]**
 
 1. **[practical_applications.md](./practical_applications.md)** - 实际应用案例研究
@@ -320,6 +329,7 @@
    - 嵌入式系统案例
 
 ### 贡献和质量
+>
 > **[来源: Rust Official Docs]**
 
 1. **[TEMPLATE.md](./TEMPLATE.md)** - 研究笔记模板
@@ -347,9 +357,11 @@
 ---
 
 ## 🔬 研究笔记索引 {#-研究笔记索引}
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化方法研究
+>
 > **[来源: Rust Official Docs]**
 
 **目录**: [formal_methods/](./formal_methods/README.md)
@@ -402,6 +414,7 @@
 ---
 
 ### 类型理论研究
+>
 > **[来源: Rust Official Docs]**
 
 **目录**: [type_theory/](./type_theory/README.md)
@@ -693,7 +706,6 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

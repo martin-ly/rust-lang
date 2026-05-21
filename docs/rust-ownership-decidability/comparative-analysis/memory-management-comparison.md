@@ -1,6 +1,7 @@
 # 内存管理范式深度对比
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [内存管理范式深度对比](#内存管理范式深度对比)
@@ -48,8 +49,11 @@
     - [场景推荐表](#场景推荐表)
     - [未来趋势](#未来趋势)
   - [总结](#总结)
+  - [没有"最好"的内存管理方式，只有最适合特定场景的解决方案。现代语言趋势是提供多种选择，让开发者在安全、性能和开发效率之间找到最佳平衡。](#没有最好的内存管理方式只有最适合特定场景的解决方案现代语言趋势是提供多种选择让开发者在安全性能和开发效率之间找到最佳平衡)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 内存管理是编程语言设计的核心问题之一。
@@ -65,6 +69,7 @@
 | 区域内存管理 | Rust（生命周期）, C++（RAII） | 基于作用域 | 半自动 |
 
 ## 手动内存管理
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 原理
@@ -917,7 +922,7 @@ public class HybridMemory {
 | 所有权 | 编译期验证 | 系统编程，安全 + 性能 | Rust |
 | 区域管理 | 批量释放 | 临时对象，游戏 | Rust, C++ |
 
-没有"最好"的内存管理方式，只有最适合特定场景的解决方案。现代语言趋势是提供多种选择，让开发者在安全、性能和开发效率之间找到最佳平衡。
+没有"最好"的内存管理方式，只有最适合特定场景的解决方案。现代语言趋势是提供多种选择，让开发者在安全、性能和开发效率之间找到最佳平衡
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -929,11 +934,9 @@ public class HybridMemory {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

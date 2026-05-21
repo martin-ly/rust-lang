@@ -10,6 +10,7 @@
 ---
 
 ## 模式列表
+>
 > **[来源: Rust Official Docs]**
 
 | 模式 | 文件 | 描述 | 难度 |
@@ -21,6 +22,7 @@
 ---
 
 ## 选择指南
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -36,11 +38,13 @@
 ---
 
 ## Rust 特殊考虑
+>
 > **[来源: Rust Official Docs]**
 
 - **所有权系统**: 影响单例的可变性设计
 - **Type State**: Rust 独特的编译时验证构建者模式
 - **零成本抽象**: 泛型工厂避免动态分派开销
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -52,9 +56,7 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 

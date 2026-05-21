@@ -7,6 +7,7 @@
 > 内容已整合至： performance_benchmarks.md (研究笔记)、PERFORMANCE_TUNING_GUIDE.md (指南)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Performance Engineering]** · **[来源: Wikipedia - Software Optimization]** · **[来源: ACM - Performance Measurement Methodology]** · **[来源: IEEE - Software Performance Standards]**
 
 ```mermaid
@@ -35,6 +36,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -47,6 +49,7 @@ mindmap
 ---
 
 ## 性能优化核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 零成本抽象
@@ -313,6 +316,7 @@ criterion_main!(benches);
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
 | c11_advanced | 高级特性实现 | crates/c11_advanced/ (crate) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -323,7 +327,6 @@ criterion_main!(benches);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

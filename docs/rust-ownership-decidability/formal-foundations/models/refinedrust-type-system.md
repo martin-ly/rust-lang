@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [RefinedRust: 高保证验证的类型系统](#refinedrust-高保证验证的类型系统)
@@ -40,10 +41,13 @@
     - [7.1 安全抽象](#71-安全抽象)
     - [7.2 数据结构](#72-数据结构)
   - [参考文献](#参考文献)
+  - [*状态: 完成*](#状态-完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 RefinedRust 是一个用于高保证验证 Rust 程序的类型系统，结合了：
@@ -57,6 +61,7 @@ RefinedRust 在 Rust 的 MIR（Mid-level Intermediate Representation）上工作
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 动机
@@ -568,11 +573,9 @@ struct List<T> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -25,6 +25,7 @@
   - [与 `assert!` + `matches!` 的关系](#与-assert--matches-的关系)
   - [迁移指南](#迁移指南)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 
@@ -210,7 +211,6 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

@@ -1,6 +1,7 @@
 # 指称语义 (Denotational Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [指称语义 (Denotational Semantics)](#指称语义-denotational-semantics)
@@ -45,8 +46,11 @@
     - [11.3 微分指称语义](#113-微分指称语义)
   - [12. 总结](#12-总结)
   - [参考文献](#参考文献)
+  - [**后续学习**: 公理语义、分离逻辑](#后续学习-公理语义分离逻辑)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 指称语义（Denotational Semantics）通过将程序映射到数学对象（通常是域论中的元素）来定义程序的含义。
@@ -57,6 +61,7 @@
 ---
 
 ## 2. 指称语义的基本思想
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 合成性 (Compositionality)
@@ -490,11 +495,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

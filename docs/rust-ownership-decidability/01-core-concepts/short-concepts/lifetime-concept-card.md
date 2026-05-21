@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [生命周期概念卡片 (Lifetime Concept Card)](#生命周期概念卡片-lifetime-concept-card)
@@ -46,13 +47,17 @@
     - [8.3 文档说明生命周期](#83-文档说明生命周期)
     - [8.4 避免过度约束](#84-避免过度约束)
   - [总结](#总结)
+  - [掌握生命周期是写出高效、安全Rust代码的关键](#掌握生命周期是写出高效安全rust代码的关键)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 概念定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是生命周期
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **生命周期(Lifetime)** 是引用保持有效的**代码区域**。每个引用都有隐式或显式的生命周期，确保它不会在指向的数据被释放后使用。
@@ -595,7 +600,7 @@ fn flexible<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 3. **表达**: 支持复杂数据结构
 4. **灵活**: NLL减少不必要的约束
 
-掌握生命周期是写出高效、安全Rust代码的关键。
+掌握生命周期是写出高效、安全Rust代码的关键
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -607,11 +612,9 @@ fn flexible<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

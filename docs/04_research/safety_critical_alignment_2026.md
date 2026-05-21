@@ -28,6 +28,7 @@
   - [八、行动清单](#八行动清单)
   - [思维导图：Safety-Critical Rust 生态](#思维导图safety-critical-rust-生态)
   - [决策树：安全关键项目合规路径](#决策树安全关键项目合规路径)
+  - [权威来源索引](#权威来源索引)
 
 > **文档定位**: 对齐 Rust 官方 Safety-Critical 路线与项目知识体系
 > **覆盖版本**: Rust 1.95.0+ / FLS (Ferrocene Language Specification) 24.11
@@ -299,7 +300,6 @@ graph TD
     Q2 -->|D| A5[完整形式化验证]
     Q2 -->|A-C| A6[模型检查 + 测试覆盖]
 ```
-
 
 ---
 

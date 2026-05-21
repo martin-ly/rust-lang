@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [理论模型间的全面联系与论证](#理论模型间的全面联系与论证)
@@ -43,10 +44,12 @@
     - [10.1 理论问题](#101-理论问题)
     - [10.2 实践问题](#102-实践问题)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 理论谱系总览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -100,6 +103,7 @@
 ---
 
 ## 2. 线性逻辑 ↔ 分离逻辑
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语法映射
@@ -523,6 +527,7 @@ A:
 3. Kopylov, A.P. (2001). Decidability of Linear Affine Logic. *Inf. Comput.*
 4. Jung, R., et al. (2018). RustBelt. *POPL*.
 5. O'Hearn, P.W. (2007). Resources, Concurrency, and Local Reasoning. *TCS*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -534,11 +539,9 @@ A:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

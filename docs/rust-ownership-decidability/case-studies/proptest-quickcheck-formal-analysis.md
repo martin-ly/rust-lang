@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Proptest/QuickCheck 属性测试形式化分析](#proptestquickcheck-属性测试形式化分析)
@@ -25,10 +26,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (不够通用)](#反例-61-不够通用)
     - [反例 6.2 (忽略前提)](#反例-62-忽略前提)
+  - [*定理数量: 5个*](#定理数量-5个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 属性测试框架:
@@ -39,6 +43,7 @@
 ---
 
 ## 2. 属性定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (属性即不变式)
@@ -169,11 +174,9 @@ fn prop_div(a: i32, b: i32) -> TestResult {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

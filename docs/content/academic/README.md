@@ -39,6 +39,7 @@
     - [在线课程](#在线课程)
   - [**状态**: 🔄 持续整合学术前沿](#状态--持续整合学术前沿)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -479,7 +480,6 @@ fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
 
 - [Coq 形式化指南](./coq_formalization_guide.md)
 - [Tree Borrows 权威指南](./tree_borrows_authoritative_guide.md)
-
 
 ---
 

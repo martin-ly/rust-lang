@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Regex 正则表达式形式化分析](#regex-正则表达式形式化分析)
@@ -29,10 +30,13 @@
   - [6. 反例](#6-反例)
     - [反例 6.1 (捕获组滥用)](#反例-61-捕获组滥用)
     - [反例 6.2 (贪婪匹配)](#反例-62-贪婪匹配)
+  - [*定理数量: 6个*](#定理数量-6个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust regex crate提供:
@@ -45,6 +49,7 @@ Rust regex crate提供:
 ---
 
 ## 2. 编译期检查
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (Regex::new错误处理)
@@ -175,11 +180,9 @@ let re = Regex::new(r".*?foo").unwrap();
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

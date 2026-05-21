@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Cargo Script / Frontmatter 指南](#cargo-script--frontmatter-指南)
@@ -29,15 +30,18 @@
     - [场景 3：CI/CD 流水线](#场景-3cicd-流水线)
   - [6. 限制与注意事项](#6-限制与注意事项)
   - [参考资源](#参考资源)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 什么是 Cargo Script？
+>
 > **[来源: Rust Official Docs]**
 
 **Cargo Script** 是 Rust 的一项新能力，允许你编写**单文件 Rust 脚本**，直接在文件中声明依赖，无需创建完整的 Cargo 项目。
 
 ### 核心特性
+>
 > **[来源: Rust Official Docs]**
 
 - **单文件可执行**: `foo.rs` 直接运行
@@ -46,6 +50,7 @@
 - **无需 Cargo.toml**: 依赖直接在 `.rs` 文件中声明
 
 ### 为什么重要？
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 传统方式 | Cargo Script |
@@ -58,9 +63,11 @@
 ---
 
 ## 2. Frontmatter 语法
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本格式
+>
 > **[来源: Rust Official Docs]**
 
 Frontmatter 位于文件顶部，使用 `---` 分隔符包裹 TOML 配置：
@@ -89,6 +96,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 简写依赖语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -101,6 +109,7 @@ serde_json = "1"
 ```
 
 ### 最小示例（无 frontmatter）
+>
 > **[来源: Rust Official Docs]**
 
 对于无依赖的脚本，甚至可以省略 frontmatter：
@@ -115,9 +124,11 @@ fn main() {
 ---
 
 ## 3. 完整示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：HTTP 请求脚本
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -160,6 +171,7 @@ cargo +nightly fetch-json.rs
 ```
 
 ### 示例 2：数据处理脚本
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -291,6 +303,7 @@ fn main() {
 - [Frontmatter Stabilization PR](https://github.com/rust-lang/rust/pull/148605)
 - [Cargo Script RFC](https://github.com/rust-lang/rfcs/pull/3502)
 - [Rust Project Goals 2026: Higher-level Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -302,11 +315,9 @@ fn main() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -13,6 +13,7 @@
 ---
 
 ## 快速开始
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -58,6 +59,7 @@ lto = true
 ---
 
 ## 🔬 形式化理论
+>
 > **[来源: Rust Official Docs]**
 
 深入学习工具链生态系统的形式化理论基础：
@@ -72,6 +74,7 @@ lto = true
 ---
 
 ## 🎯 文档说明
+>
 > **[来源: Rust Official Docs]**
 
 本目录包含 Rust 工具链的高级文档，涵盖编译器特性、构建系统、文档生成等核心工具的深入使用指南。
@@ -81,12 +84,15 @@ lto = true
 ---
 
 ## 📋 文档目录
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心工具链文档
+>
 > **[来源: Rust Official Docs]**
 
 #### 0. [Rust 2024 Edition 学习影响](../archive/deprecated_20260318/00_rust_2024_edition_learning_impact.md) 🆕
+>
 > **[来源: Rust Official Docs]**
 
 **涵盖内容**:
@@ -98,6 +104,7 @@ lto = true
 **适用场景**: 理解 2024 Edition 对学习的影响；从 2021 迁移
 
 #### 1. [编译器特性与优化](./01_compiler_features.md)
+>
 > **[来源: Rust Official Docs]**
 
 **涵盖内容**:
@@ -118,6 +125,7 @@ lto = true
 - 调试和 profiling
 
 #### 2. [Cargo 工作空间与依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md)
+>
 > **[来源: Rust Official Docs]**
 
 **涵盖内容**:
@@ -137,6 +145,7 @@ lto = true
 - CI/CD 集成
 
 #### 3. [Rustdoc 高级功能](./03_rustdoc_advanced.md)
+>
 > **[来源: Rust Official Docs]**
 
 **涵盖内容**:
@@ -166,6 +175,7 @@ lto = true
 - ✅ **验证建议**：工作区 `check/test/doc-test` 的最小验证命令集
 
 #### 5. [Rust 1.93 vs 1.92 全面对比分析](./05_rust_1.93_vs_1.92_comparison.md) 🆕
+>
 > **[来源: Rust Official Docs]**
 
 **涵盖内容**:
@@ -187,6 +197,7 @@ lto = true
 ---
 
 ## 🔍 快速导航
+>
 > **[来源: Rust Official Docs]**
 
 ### 按主题分类
@@ -647,7 +658,6 @@ let gamma = f64::consts::EULER_GAMMA;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

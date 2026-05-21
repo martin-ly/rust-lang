@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Pointer Aliasing]** · **[来源: Wikipedia - Memory Model]** · **[来源: ACM - Alias Analysis Methods]** · **[来源: IEEE - Memory Model Formalization]**
 
 - [Tree Borrows: Rust 别名模型的全面分析](#tree-borrows-rust-别名模型的全面分析)
@@ -80,10 +81,13 @@
     - [10.2 工具链支持](#102-工具链支持)
   - [11. 参考文献更新](#11-参考文献更新)
     - [2024-2025 新增资源](#2024-2025-新增资源)
+  - [*状态: 已更新 (PLDI 2025 最新研究)*](#状态-已更新-pldi-2025-最新研究)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tree Borrows 是 Rust 编程语言的一种新别名模型，旨在克服其前身 Stacked Borrows 的多个局限性。
@@ -99,6 +103,7 @@ Tree Borrows 是 Rust 编程语言的一种新别名模型，旨在克服其前�
 ---
 
 ## 1. 引言与动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Stacked Borrows 的局限性
@@ -846,11 +851,9 @@ let r2 = unsafe { &mut *ptr }; // UB
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

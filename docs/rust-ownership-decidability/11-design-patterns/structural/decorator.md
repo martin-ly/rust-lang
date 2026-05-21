@@ -16,6 +16,7 @@
   - [实战: HTTP 中间件链](#实战-http-中间件链)
   - [形式化定义](#形式化定义)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概念
 >
@@ -257,7 +258,6 @@ Decorator<C: Component> = Component + AddedBehavior
 ## 相关概念
 
 - [structural 目录](./README.md)
-
 
 ---
 

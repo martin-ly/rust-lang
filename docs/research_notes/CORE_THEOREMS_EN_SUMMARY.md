@@ -2,17 +2,21 @@
 
 ## 📑 目录
 >
-- [Overview](#overview)
-- [Theorem Summary](#theorem-summary)
-- [Auxiliary Lemmas](#auxiliary-lemmas)
-- [L3 Machine-Checkable Scaffolding](#l3-machine-checkable-scaffolding)
-- [Formal Language and Proofs](#formal-language-and-proofs)
-- [Related Documents](#related-documents)
-- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
-  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
-    - [核心特性应用](#核心特性应用)
-    - [代码示例更新](#代码示例更新)
-    - [相关文档](#相关文档)
+- [Core Theorems — English Summary](#core-theorems--english-summary)
+  - [📑 目录](#-目录)
+  - [Overview](#overview)
+  - [Theorem Summary](#theorem-summary)
+  - [Auxiliary Lemmas](#auxiliary-lemmas)
+  - [L3 Machine-Checkable Scaffolding](#l3-machine-checkable-scaffolding)
+  - [Formal Language and Proofs](#formal-language-and-proofs)
+  - [Related Documents](#related-documents)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
@@ -133,7 +137,6 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

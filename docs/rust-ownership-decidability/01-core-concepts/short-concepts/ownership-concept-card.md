@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [所有权概念卡片 - 全面深度解析](#所有权概念卡片---全面深度解析)
@@ -21,11 +22,14 @@
     - [反例](#反例)
   - [4. 场景决策树](#4-场景决策树)
   - [5. 参考文献](#5-参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 概念定义 (Concept Definition)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -114,6 +118,7 @@ println!("{}", s1);  // 错误: 使用了已移动的值
 1. Rust官方文档: The Rust Programming Language
 2. Jung et al. (2018). RustBelt. POPL.
 3. Pierce, B.C. (2002). TAPL. MIT Press.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -125,11 +130,9 @@ println!("{}", s1);  // 错误: 使用了已移动的值
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

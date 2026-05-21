@@ -36,6 +36,7 @@ graph TD
   - [📑 目录](#-目录)
   - [ASCII版本](#ascii版本)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## ASCII版本
 >
@@ -88,7 +89,6 @@ graph TD
 
 - [visualizations 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

@@ -51,6 +51,7 @@
   - [🔗 参考资源](#-参考资源)
   - [**状态**: 🔄 持续完善中](#状态--持续完善中)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -666,7 +667,6 @@ impl Service {
 
 - [Kubernetes 部署指南](./kubernetes_deployment_guide.md)
 - [Content 总览](../README.md)
-
 
 ---
 

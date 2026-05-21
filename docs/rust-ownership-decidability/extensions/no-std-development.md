@@ -5,14 +5,17 @@
 本章节深入探讨 no_std 开发的各个方面。
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Bare-Metal Programming]** · **[来源: Wikipedia - Embedded System]** · **[来源: ACM - Resource-Constrained Computing]** · **[来源: IEEE - Embedded Software Standards]**
 
 - [No_std 开发](#no_std-开发)
 
 ## No_std 基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是 No_std
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `#![no_std]` 属性告诉 Rust 编译器不使用标准库 `std`，而是使用核心库 `core`。
@@ -1096,6 +1099,7 @@ pub enum DmaError {
 3. **全面的测试**：使用 QEMU 和硬件在环测试
 4. **清晰的文档**：记录所有安全契约和假设
 5. **工具链熟练使用**：掌握 OpenOCD、GDB 和硬件调试器
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1107,11 +1111,9 @@ pub enum DmaError {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

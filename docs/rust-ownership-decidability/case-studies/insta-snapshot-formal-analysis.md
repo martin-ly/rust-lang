@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Insta 快照测试形式化分析](#insta-快照测试形式化分析)
@@ -24,10 +25,13 @@
   - [5. 反例](#5-反例)
     - [反例 5.1 (非确定性输出)](#反例-51-非确定性输出)
     - [反例 5.2 (大快照文件)](#反例-52-大快照文件)
+  - [*定理数量: 5个*](#定理数量-5个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Insta提供:
@@ -40,6 +44,7 @@ Insta提供:
 ---
 
 ## 2. 快照语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (精确匹配)
@@ -146,11 +151,9 @@ insta::assert_snapshot!(huge_json);  // 难以审查
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

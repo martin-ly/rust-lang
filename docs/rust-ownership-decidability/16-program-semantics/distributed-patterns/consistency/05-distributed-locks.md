@@ -1,6 +1,7 @@
 # 分布式锁语义 (Distributed Lock Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [分布式锁语义 (Distributed Lock Semantics)](#分布式锁语义-distributed-lock-semantics)
@@ -23,8 +24,11 @@
   - [7. 最佳实践](#7-最佳实践)
     - [7.1 锁使用准则](#71-锁使用准则)
   - [8. 总结](#8-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 分布式锁是协调分布式系统中互斥访问共享资源的核心机制。本文档深入分析分布式锁的形式化语义、实现算法和 Rust 实践。
@@ -32,6 +36,7 @@
 ---
 
 ## 2. 分布式锁基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 为什么需要分布式锁
@@ -650,11 +655,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

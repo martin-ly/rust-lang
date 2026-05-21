@@ -1,6 +1,7 @@
 # 舱壁隔离模式语义 (Bulkhead Pattern Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [舱壁隔离模式语义 (Bulkhead Pattern Semantics)](#舱壁隔离模式语义-bulkhead-pattern-semantics)
@@ -22,6 +23,8 @@
     - [5.2 性能保证](#52-性能保证)
   - [6. 最佳实践](#6-最佳实践)
   - [7. 总结](#7-总结)
+  - [其中 $\\lambda$ 是到达率，$C$ 是容量，$E\[S\]$ 是平均服务时间，$\\rho = \\lambda E\[S\] / C$](#其中-lambda-是到达率c-是容量es-是平均服务时间rho--lambda-es--c)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
 
@@ -31,9 +34,11 @@
 ---
 
 ## 2. 隔离模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 舱壁类型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -753,11 +758,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

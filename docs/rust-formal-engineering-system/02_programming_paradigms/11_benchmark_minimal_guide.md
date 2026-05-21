@@ -378,8 +378,8 @@ $ perf report
     - [实验分析](#实验分析)
     - [工具链](#工具链)
   - [相关 crates](#相关-crates)
-  - [| divan | 快速基准测试 | crates.io |](#-divan--快速基准测试--cratesio-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ### 使用 cargo-flamegraph
 
@@ -558,7 +558,6 @@ criterion_main!(benches);
 
 - [02_programming_paradigms 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

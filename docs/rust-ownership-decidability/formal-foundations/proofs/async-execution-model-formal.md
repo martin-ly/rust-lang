@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Async执行模型深度形式化分析](#async执行模型深度形式化分析)
@@ -50,13 +51,17 @@
     - [定理 ASYNC-SAFETY-1 ( 内存安全 )](#定理-async-safety-1--内存安全-)
     - [定理 ASYNC-COMPLETENESS-1 ( 执行完备性 )](#定理-async-completeness-1--执行完备性-)
     - [定理 PIN-SOUNDNESS-1 ( Pin正确性 )](#定理-pin-soundness-1--pin正确性-)
+  - [**状态**: ✅ 深度形式化完成](#状态--深度形式化完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 核心抽象形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Future Trait 数学语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -787,11 +792,9 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

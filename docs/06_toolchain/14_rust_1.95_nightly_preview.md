@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.95 Nightly 预览与实验特性](#rust-195-nightly-预览与实验特性)
@@ -38,10 +39,13 @@
     - [生产使用建议](#生产使用建议)
   - [相关文档](#相关文档)
   - [Rust 1.95+ 更新](#rust-195-更新)
+  - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 版本概览
+>
 > **[来源: Rust Official Docs]**
 
 | 项目 | 详情 |
@@ -54,9 +58,11 @@
 ---
 
 ## 实验性语言特性
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 下一代 Trait 求解器 (next-solver)
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: 积极开发中
@@ -85,6 +91,7 @@ where
 ---
 
 ### 2. Async Drop
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: 实验实现中
@@ -114,6 +121,7 @@ impl AsyncDrop for AsyncResource {
 ---
 
 ### 3. 生成器 (Generators)
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: 迭代器生成器实验
@@ -142,6 +150,7 @@ let iter = std::iter::iter! {
 ---
 
 ### 4. Pin 人体工学改进
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: 实验中
@@ -162,9 +171,11 @@ use_pinned(pinned);  // 自动重新借用
 ---
 
 ## 编译器实验
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. `-Zinstrument-mcount`
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: 函数调用计数插桩
@@ -178,6 +189,7 @@ rustc -Zinstrument-mcount program.rs
 ---
 
 ### 2. `-Cdebuginfo-compression`
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: 调试信息压缩
@@ -189,6 +201,7 @@ rustc -Cdebuginfo-compression=zlib program.rs
 ---
 
 ### 3. `fn_align` 属性
+>
 > **[来源: Rust Official Docs]**
 
 **状态**: 接近稳定
@@ -364,7 +377,6 @@ cargo build --timings -Zsection-timings
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

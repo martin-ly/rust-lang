@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [仿射逻辑可判定性证明](#仿射逻辑可判定性证明)
@@ -39,13 +40,17 @@
     - [8.2 关键数据结构](#82-关键数据结构)
   - [9. 参考文献](#9-参考文献)
   - [总结](#总结)
+  - [仿射逻辑为Rust的所有权系统提供了坚实的数学基础，确保了内存安全的同时保持了表达力和实用性。](#仿射逻辑为rust的所有权系统提供了坚实的数学基础确保了内存安全的同时保持了表达力和实用性)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 背景与动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 什么是仿射逻辑
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 仿射逻辑(Affine Logic)是线性逻辑(Linear Logic)的一个变体，允许**弱化(Weakening)**但不允许**收缩(Contraction)**。这意味着：
@@ -558,7 +563,7 @@ struct TypeEnv {
 3. ✅ **实际应用**: Rust 基于此理论，通过工程优化实现实用类型推断
 4. ✅ **复杂度权衡**: 理论PSPACE-hard，但实践中接近线性
 
-仿射逻辑为Rust的所有权系统提供了坚实的数学基础，确保了内存安全的同时保持了表达力和实用性。
+仿射逻辑为Rust的所有权系统提供了坚实的数学基础，确保了内存安全的同时保持了表达力和实用性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -570,11 +575,9 @@ struct TypeEnv {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

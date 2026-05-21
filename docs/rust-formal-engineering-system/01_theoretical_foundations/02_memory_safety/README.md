@@ -7,6 +7,7 @@
 > 内容已整合至： [borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -30,6 +31,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -42,6 +44,7 @@ mindmap
 ---
 
 ## 内存安全的核心保证
+>
 > **[来源: Rust Official Docs]**
 
 Rust 通过所有权和借用系统在编译时保证内存安全：
@@ -228,6 +231,7 @@ fn prevent_use_after_free() {
 | 安全/非安全分析 | unsafe Rust 的边界分析 | [../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](../../../research_notes/SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 | 证明索引 | 内存安全相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 | 工具指南 | 内存安全验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -238,7 +242,6 @@ fn prevent_use_after_free() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

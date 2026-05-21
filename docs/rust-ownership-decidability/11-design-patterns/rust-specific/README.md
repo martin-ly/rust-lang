@@ -10,6 +10,7 @@
 ---
 
 ## 模式列表
+>
 > **[来源: Rust Official Docs]**
 
 | 模式 | 文件 | 描述 | 难度 |
@@ -21,11 +22,13 @@
 ---
 
 ## 核心 Rust 特性
+>
 > **[来源: Rust Official Docs]**
 
 - **所有权**: 确保资源管理正确性
 - **生命周期**: 编译时引用验证
 - **零成本抽象**: 模式无运行时开销
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -36,6 +39,5 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 </details>

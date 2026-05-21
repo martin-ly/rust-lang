@@ -44,6 +44,8 @@
     - [LazyLock 在汇编优化缓存中的应用](#lazylock-在汇编优化缓存中的应用)
     - [ControlFlow 在汇编错误处理中的应用](#controlflow-在汇编错误处理中的应用)
     - [数学常量在 SIMD 优化中的应用](#数学常量在-simd-优化中的应用)
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -759,11 +761,9 @@ pub fn aligned_buffer_size(min_size: usize) -> usize {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

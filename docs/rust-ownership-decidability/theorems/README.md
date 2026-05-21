@@ -8,6 +8,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [核心定理集](#核心定理集)
@@ -19,10 +20,13 @@
     - [安全性定理](#安全性定理)
     - [正确性定理](#正确性定理)
   - [🔗 与其他模块的关联](#-与其他模块的关联)
+  - [**状态**: ✅ 完成](#状态--完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 🎯 定理集概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本模块收集 Rust 所有权系统的核心形式化定理，提供：
@@ -34,6 +38,7 @@
 ---
 
 ## 📁 文档导航
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 主题 | 关键定理 |
@@ -99,7 +104,6 @@ theorems/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

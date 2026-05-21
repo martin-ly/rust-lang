@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust所有权三大规则](#rust所有权三大规则)
@@ -39,13 +40,16 @@
     - [8.3 模式：函数式更新](#83-模式函数式更新)
   - [9. 与形式化验证的接口](#9-与形式化验证的接口)
   - [10. 参考文献](#10-参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 核心规则体系
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 三大规则概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -381,6 +385,7 @@ RustBelt中的所有权的语义模型:
 1. Klabnik, S., & Nichols, C. (2018). *The Rust Programming Language*. No Starch Press.
 2. Jung, R., et al. (2018). RustBelt: Securing the Foundations of the Rust Programming Language. *POPL*.
 3. Weiss, A., Patterson, D., & Ahmed, A. (2020). Oxide: The Essence of Rust. *arXiv:1903.00982*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -392,11 +397,9 @@ RustBelt中的所有权的语义模型:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

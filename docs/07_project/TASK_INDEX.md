@@ -5,7 +5,7 @@
 
 ---
 
-请访问上述链接查看完整的未完成任务与计划总索引。
+请访问上述链接查看完整的未完成任务与计划总索引
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)

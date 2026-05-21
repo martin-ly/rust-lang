@@ -10,6 +10,7 @@
 ---
 
 ## 目录说明
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本目录包含对著名Rust开源库和框架的深度案例分析，从形式化角度分析其设计和实现。
@@ -17,9 +18,11 @@
 ---
 
 ## 专题案例
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 综合分析专题
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 位于 `comprehensive-analysis/case-studies/`
@@ -76,9 +79,7 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 
@@ -96,7 +97,6 @@
 - [WebAssembly](./wasm/README.md)
 - [领域覆盖索引](./COMPLETE_DOMAIN_COVERAGE_INDEX.md)
 - [所有权可判定性总览](../README.md)
-
 
 ---
 

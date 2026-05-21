@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Region-Based Memory Management]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Lifetime Analysis Algorithms]** · **[来源: IEEE - Static Lifetime Verification]**
 
 - [生命周期精通](#生命周期精通)
@@ -58,13 +59,17 @@
     - [8.3 回调注册系统](#83-回调注册系统)
     - [8.4 数据库连接池](#84-数据库连接池)
   - [总结](#总结)
+  - [*继续学习: interior-mutability.md*](#继续学习-interior-mutabilitymd)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 生命周期的形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 1.1** (生命周期): 生命周期 `'a` 是程序执行期间的一个连续时间段，表示值或引用的有效范围。
@@ -944,7 +949,6 @@ impl<'env> Drop for Connection<'env> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

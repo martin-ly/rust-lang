@@ -10,6 +10,7 @@
 ---
 
 ## 目录说明
+>
 > **[来源: Rust Official Docs]**
 
 本目录包含Rust所有权系统的各种可视化图表。
@@ -17,6 +18,7 @@
 ---
 
 ## 与06-visualizations的关系
+>
 > **[来源: Rust Official Docs]**
 
 - `06-visualizations`: 核心技术可视化
@@ -25,6 +27,7 @@
 ---
 
 ## 图表类型
+>
 > **[来源: Rust Official Docs]**
 
 - 概念图
@@ -46,9 +49,7 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 
@@ -60,7 +61,6 @@
 - [决策树目录](./decision-trees/README.md)
 - [矩阵目录](./matrices/README.md)
 - [所有权可判定性总览](../README.md)
-
 
 ---
 

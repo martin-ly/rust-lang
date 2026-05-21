@@ -5,6 +5,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [概念多维矩阵对比](#概念多维矩阵对比)
@@ -34,13 +35,17 @@
     - [8.1 操作复杂度](#81-操作复杂度)
     - [8.2 内存布局对比](#82-内存布局对比)
   - [总结](#总结)
+  - [通过合理选择类型和模式，可以在安全性和性能之间取得最佳平衡。](#通过合理选择类型和模式可以在安全性和性能之间取得最佳平衡)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 所有权系统对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 内存管理范式对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | Rust所有权 | C++ RAII | Java GC | Go GC | Swift ARC |
@@ -266,7 +271,7 @@ Send only:    &mut T, Rc<T>
 3. **性能特征**: 可预测且接近底层性能
 4. **形式化验证**: 有坚实的理论基础
 
-通过合理选择类型和模式，可以在安全性和性能之间取得最佳平衡。
+通过合理选择类型和模式，可以在安全性和性能之间取得最佳平衡
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -278,11 +283,9 @@ Send only:    &mut T, Rc<T>
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

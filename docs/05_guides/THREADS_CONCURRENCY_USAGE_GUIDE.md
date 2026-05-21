@@ -63,13 +63,14 @@
       - [性能对比：array\_windows vs 动态 windows](#性能对比array_windows-vs-动态-windows)
   - [**状态**: ✅ 完整实现](#状态--完整实现)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Thread (computing)]** · **[来源: Wikipedia -Concurrency Pattern]** · **[来源: ACM - Concurrent Programming Best Practices]** · **[来源: IEEE - Parallel Execution Standards]**
 
 - [线程与并发使用指南](#线程与并发使用指南)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🚀 快速开始](#-快速开始)
@@ -121,6 +122,7 @@
       - [性能对比：array\_windows vs 动态 windows](#性能对比array_windows-vs-动态-windows)
   - [**状态**: ✅ 完整实现](#状态--完整实现)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1604,7 +1606,6 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

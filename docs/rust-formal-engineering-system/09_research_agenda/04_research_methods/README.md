@@ -12,9 +12,11 @@
 ---
 
 ## 研究方法概述
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化方法研究流程
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -34,6 +36,7 @@
 ```
 
 ### 研究笔记结构
+>
 > **[来源: Rust Official Docs]**
 
 ```markdown
@@ -67,6 +70,7 @@
 ```
 
 ### 证明验证工具
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -92,6 +96,7 @@ fn double(x: i32) -> i32 {
 ```
 
 ### 研究方法论示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -150,6 +155,7 @@ mod verification_tests {
 ```
 
 ### 类型系统研究示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -312,7 +318,6 @@ mod property_tests {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

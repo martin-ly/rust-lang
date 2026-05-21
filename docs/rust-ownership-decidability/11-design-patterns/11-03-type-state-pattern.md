@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [类型状态模式详解](#类型状态模式详解)
@@ -51,13 +52,16 @@
   - [9. 总结](#9-总结)
     - [学习检查清单](#学习检查清单)
     - [进一步阅读](#进一步阅读)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 什么是类型状态模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 类型状态模式（Type State Pattern）是一种利用类型系统在编译时编码和验证对象状态的编程技术。它将状态从运行时值提升为编译期类型，使得非法状态转换在编译时被阻止。
@@ -1416,6 +1420,7 @@ query _ = return []
 - [Rust Design Patterns - Type State](https://rust-unofficial.github.io/patterns/patterns/behavioural/type-state.html)
 - [PhantomData documentation](https://doc.rust-lang.org/std/marker/struct.PhantomData.html)
 - [Rust By Example - Generics](https://doc.rust-lang.org/rust-by-example/generics.html)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -1427,11 +1432,9 @@ query _ = return []
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
-
 
 ---
 

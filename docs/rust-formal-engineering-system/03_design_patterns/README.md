@@ -7,6 +7,7 @@
 > 内容已整合至： [c09_design_pattern/](../../../crates/c09_design_pattern/README.md)
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -31,6 +32,7 @@ mindmap
 ```
 
 ## 与核心文档的关联
+>
 > **[来源: Rust Official Docs]**
 
 | 本文档 | 核心文档 | 关系 |
@@ -43,9 +45,11 @@ mindmap
 ---
 
 ## Rust 设计模式概览
+>
 > **[来源: Rust Official Docs]**
 
 ### 类型系统驱动的模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -88,6 +92,7 @@ fn type_state_demo() {
 ```
 
 ### 构造器模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -149,6 +154,7 @@ fn builder_demo() -> Result<(), String> {
 ```
 
 ### RAII 模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -182,6 +188,7 @@ fn raii_demo() {
 ```
 
 ### 策略模式（使用 Trait）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -263,6 +270,7 @@ fn strategy_demo() {
 ```
 
 ### 访问者模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -341,6 +349,7 @@ fn visitor_demo() {
 ```
 
 ### 新类型模式（Newtype Pattern）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -389,6 +398,7 @@ fn newtype_demo() {
 ---
 
 ## 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 设计模式 | 优势 |
@@ -405,6 +415,7 @@ fn newtype_demo() {
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
@@ -446,6 +457,7 @@ fn newtype_demo() {
 | crate | 描述 | 路径 |
 | :--- | :--- | :--- |
 | c09_design_pattern | 设计模式实现集合 | [../../../crates/c09_design_pattern/](../../../crates/c09_design_pattern/README.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -456,7 +468,6 @@ fn newtype_demo() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

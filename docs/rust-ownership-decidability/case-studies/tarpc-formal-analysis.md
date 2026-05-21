@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [tarpc RPC框架形式化分析](#tarpc-rpc框架形式化分析)
@@ -26,10 +27,13 @@
     - [定理 5.1 (Channel背压)](#定理-51-channel背压)
   - [6. 反例](#6-反例)
     - [反例 6.1 (忘记处理Cancel)](#反例-61-忘记处理cancel)
+  - [*定理数量: 7个*](#定理数量-7个)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 tarpc提供:
@@ -42,6 +46,7 @@ tarpc提供:
 ---
 
 ## 2. 服务定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 2.1 (Service Trait)
@@ -163,11 +168,9 @@ async fn long_operation(&self) -> Result<()> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

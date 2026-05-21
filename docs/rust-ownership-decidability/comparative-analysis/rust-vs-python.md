@@ -1,6 +1,7 @@
 # Rust vs Python：全面对比分析
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Python (programming language)]** · **[来源: Wikipedia - Dynamic Typing]** · **[来源: ACM - Static vs Dynamic Typing]** · **[来源: IEEE - Language Performance Comparison]**
 
 - [Rust vs Python：全面对比分析](#rust-vs-python全面对比分析)
@@ -44,8 +45,10 @@
     - [选择 Rust 的场景](#选择-rust-的场景)
     - [性能关键 Python 库的 Rust 实现](#性能关键-python-库的-rust-实现)
   - [总结](#总结)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 和 Python 代表了编程语言设计光谱的两端：
@@ -54,6 +57,7 @@ Rust 和 Python 代表了编程语言设计光谱的两端：
 - **Rust**: 编译型、静态类型、性能和安全优先，逐渐在Python生态中作为性能扩展
 
 ### 语言特性对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | Python | Rust |
@@ -883,6 +887,7 @@ fn compute_heavy(data: Vec<f64>) -> f64 {
 - 数据科学、快速原型、ML 实验：**Python**
 - 生产系统、性能关键、基础设施：**Rust**
 - 最佳实践：**Python 主导 + Rust 加速关键路径**
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -894,11 +899,9 @@ fn compute_heavy(data: Vec<f64>) -> f64 {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

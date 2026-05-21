@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust借用系统深度分析](#rust借用系统深度分析)
@@ -44,13 +45,16 @@
     - [10.3 并发读取](#103-并发读取)
   - [11. 与其他理论的联系](#11-与其他理论的联系)
   - [12. 参考文献](#12-参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 借用系统的核心原则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 借用的动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 所有权系统的一个问题：严格的Move语义导致频繁的所有权转移。
@@ -501,6 +505,7 @@ fn concurrent_reads() {
 1. Weiss, A., Patterson, D., & Ahmed, A. (2020). Oxide: The Essence of Rust. *arXiv:1903.00982*.
 2. Jung, R., et al. (2017). RustBelt: Securing the Foundations of the Rust Programming Language. *POPL*.
 3. Rust RFC 2094: Non-Lexical Lifetimes.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -512,11 +517,9 @@ fn concurrent_reads() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

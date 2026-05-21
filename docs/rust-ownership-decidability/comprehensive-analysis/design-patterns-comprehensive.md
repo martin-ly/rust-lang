@@ -27,6 +27,7 @@
   - [8. 模式与所有权的关系](#8-模式与所有权的关系)
   - [**对齐来源**: Rust Book, Rust API Guidelines, crate文档](#对齐来源-rust-book-rust-api-guidelines-crate文档)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 模式分类体系
 >
@@ -563,7 +564,6 @@ Pin<Box<Self>>保证:
 
 - [comprehensive-analysis 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

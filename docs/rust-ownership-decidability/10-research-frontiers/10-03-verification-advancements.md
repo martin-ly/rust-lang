@@ -6,6 +6,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [验证技术进展](#验证技术进展)
@@ -56,13 +57,17 @@
     - [9.2 挑战与机遇](#92-挑战与机遇)
     - [9.3 建议](#93-建议)
   - [参考文献](#参考文献)
+  - [*本文档是 Rust 所有权与可判定性研究系列第十章的一部分。*](#本文档是-rust-所有权与可判定性研究系列第十章的一部分)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. MIRI 改进与内存模型验证
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 MIRI 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 MIRI（MIR Interpreter）是 Rust 的官方未定义行为检测工具，通过解释执行 Rust 的中间表示（MIR）来检测未定义行为。
@@ -1073,11 +1078,9 @@ Rust 验证技术正在快速发展，为构建可靠的 Rust 软件提供了强
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

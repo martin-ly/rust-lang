@@ -5,9 +5,11 @@
 ---
 
 ## 章节导航
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### [10-01. 未来方向](./10-01-future-directions.md)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 全面概述 Rust 所有权研究的前沿领域，包括：
@@ -24,6 +26,7 @@
 ---
 
 ### [10-02. 类型系统扩展](./10-02-type-system-extensions.md)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 深入探讨 Rust 类型系统可能的扩展方向：
@@ -414,6 +417,7 @@ pub mod safe_math {
 > - 订阅验证工具的更新通知
 > - 参与社区讨论和贡献
 > - 实践所学知识，应用到实际项目中
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -424,7 +428,6 @@ pub mod safe_math {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

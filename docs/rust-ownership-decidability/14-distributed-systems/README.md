@@ -10,6 +10,7 @@
 ---
 
 ## 目录说明
+>
 > **[来源: Rust Official Docs]**
 
 本目录介绍使用Rust构建分布式系统的模式和最佳实践。
@@ -17,6 +18,7 @@
 ---
 
 ## 与actor-specialty的关系
+>
 > **[来源: Rust Official Docs]**
 
 - `actor-specialty`: Actor模型专题
@@ -25,6 +27,7 @@
 ---
 
 ## 关键主题
+>
 > **[来源: Rust Official Docs]**
 
 | 主题 | 描述 |
@@ -48,9 +51,7 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 </details>
-
 
 ---
 
@@ -59,7 +60,6 @@
 - [分布式模式](./13-01-distributed-patterns.md)
 - [共识模式](./consensus-patterns.md)
 - [所有权可判定性总览](../README.md)
-
 
 ---
 

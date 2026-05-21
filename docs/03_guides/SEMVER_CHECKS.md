@@ -11,23 +11,27 @@
 
 ## 📑 目录
 >
-- [1. 什么是 cargo-semver-checks？](#1-什么是-cargo-semver-checks)
-  - [为什么需要它？](#为什么需要它)
-  - [检测范围](#检测范围)
-- [2. 安装](#2-安装)
-- [3. 基本使用](#3-基本使用)
-  - [检查当前工作目录的 crate](#检查当前工作目录的-crate)
-  - [检查 workspace 中的特定 crate](#检查-workspace-中的特定-crate)
-  - [与 baseline 版本比较](#与-baseline-版本比较)
-  - [本地开发工作流](#本地开发工作流)
-- [4. CI 集成](#4-ci-集成)
-  - [CI 策略](#ci-策略)
-- [5. 处理误报和例外](#5-处理误报和例外)
-  - [场景 1: 新增字段但已使用 #[non_exhaustive]](#场景-1-新增字段但已使用-non_exhaustive)
-  - [场景 2: 有意进行 breaking change（MAJOR 版本升级）](#场景-2-有意进行-breaking-changemajor-版本升级)
-  - [场景 3: 内部 API 被误判](#场景-3-内部-api-被误判)
-- [6. 最佳实践](#6-最佳实践)
-- [7. 参考资源](#7-参考资源)
+- [cargo-semver-checks 集成指南](#cargo-semver-checks-集成指南)
+  - [📑 目录](#-目录)
+  - [1. 什么是 cargo-semver-checks？](#1-什么是-cargo-semver-checks)
+    - [为什么需要它？](#为什么需要它)
+    - [检测范围](#检测范围)
+  - [2. 安装](#2-安装)
+  - [3. 基本使用](#3-基本使用)
+    - [检查当前工作目录的 crate](#检查当前工作目录的-crate)
+    - [检查 workspace 中的特定 crate](#检查-workspace-中的特定-crate)
+    - [与 baseline 版本比较](#与-baseline-版本比较)
+    - [本地开发工作流](#本地开发工作流)
+  - [4. CI 集成](#4-ci-集成)
+    - [CI 策略](#ci-策略)
+  - [5. 处理误报和例外](#5-处理误报和例外)
+    - [场景 1: 新增字段但已使用 `#[non_exhaustive]`](#场景-1-新增字段但已使用-non_exhaustive)
+    - [场景 2: 有意进行 breaking change（MAJOR 版本升级）](#场景-2-有意进行-breaking-changemajor-版本升级)
+    - [场景 3: 内部 API 被误判](#场景-3-内部-api-被误判)
+  - [6. 最佳实践](#6-最佳实践)
+  - [7. 参考资源](#7-参考资源)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 什么是 cargo-semver-checks？
 >
@@ -222,7 +226,6 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

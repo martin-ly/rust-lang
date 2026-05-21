@@ -12,9 +12,11 @@
 ---
 
 ## 工具链核心组件
+>
 > **[来源: Rust Official Docs]**
 
 ### Rust 编译器 (rustc)
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -60,6 +62,7 @@ fn important_result() -> i32 { 42 }
 ```
 
 ### Cargo：构建系统与包管理器
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -110,6 +113,7 @@ incremental = true
 ```
 
 ### 常用 Cargo 命令
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -152,6 +156,7 @@ cargo install <crate>        # 安装二进制 crate
 ```
 
 ### 代码质量工具
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -176,6 +181,7 @@ cargo fmt -- --check         # CI 中使用
 ```
 
 ### 形式化验证工具
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -204,6 +210,7 @@ unsafe fn undefined_behavior_demo() {
 ```
 
 ### 工作空间示例
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -225,6 +232,7 @@ license = "MIT OR Apache-2.0"
 ```
 
 ### 构建脚本 (build.rs)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -256,6 +264,7 @@ fn main() {
 ---
 
 ## 形式化方法
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -268,6 +277,7 @@ fn main() {
 | 证明索引 | 形式化证明集合 | [../../research_notes/PROOF_INDEX.md](../../research_notes/PROOF_INDEX.md) |
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -286,6 +296,7 @@ fn main() {
 ---
 
 ## 知识结构思维导图
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -333,7 +344,6 @@ mindmap
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

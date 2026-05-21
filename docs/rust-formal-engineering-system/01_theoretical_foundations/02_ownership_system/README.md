@@ -11,6 +11,7 @@
 ---
 
 ## 所有权的核心规则
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -40,6 +41,7 @@ fn rule3() {
 ```
 
 ## 所有权与函数
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -71,6 +73,7 @@ fn demo() {
 ```
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -236,6 +239,7 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 | 借用检查器 | 借用检查的形式化证明 | [../../../research_notes/formal_methods/borrow_checker_proof.md](../../../research_notes/formal_methods/borrow_checker_proof.md) |
 | 证明索引 | 所有权相关证明 | [../../../research_notes/PROOF_INDEX.md](../../../research_notes/PROOF_INDEX.md) |
 | 工具指南 | 形式化验证工具 | [../../../research_notes/TOOLS_GUIDE.md](../../../research_notes/TOOLS_GUIDE.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -246,7 +250,6 @@ fn call_fn_once<F: FnOnce()>(f: F) { f(); }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -6,21 +6,26 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [📊 总体概览](#总体概览)
-- [📦 Crates 完成度](#crates-完成度)
-- [📚 Content 完成度](#content-完成度)
-  - [详细清单](#详细清单)
-    - [emerging/](#emerging)
-    - [ecosystem/](#ecosystem)
-    - [production/](#production)
-    - [academic/](#academic)
-- [📝 Docs 完成度](#docs-完成度)
-- [⚠️ 已知问题](#已知问题)
+- [项目完成度矩阵](#项目完成度矩阵)
+  - [📑 目录](#-目录)
+  - [📊 总体概览](#-总体概览)
+  - [📦 Crates 完成度](#-crates-完成度)
+  - [📚 Content 完成度](#-content-完成度)
+    - [详细清单](#详细清单)
+      - [emerging/](#emerging)
+      - [ecosystem/](#ecosystem)
+      - [production/](#production)
+      - [academic/](#academic)
+  - [📝 Docs 完成度](#-docs-完成度)
+  - [⚠️ 已知问题](#️-已知问题)
+  - [**更新流程**: 每轮扩展后由执行代理同步更新](#更新流程-每轮扩展后由执行代理同步更新)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📊 总体概览
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | 已完成 | 总计 | 完成度 |
@@ -34,6 +39,7 @@
 ---
 
 ## 📦 Crates 完成度
+>
 > **[来源: Rust Official Docs]**
 
 | Crate | 核心模块 | 扩展模块 | 测试 | 文档 | 状态 |
@@ -59,6 +65,7 @@
 ---
 
 ## 📚 Content 完成度
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 文档数 | 目标 | 完成度 |
@@ -149,11 +156,9 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
@@ -161,7 +166,6 @@
 
 - [07_project 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

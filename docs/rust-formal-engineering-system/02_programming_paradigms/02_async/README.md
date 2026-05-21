@@ -11,9 +11,11 @@
 ---
 
 ## 异步编程核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### Future 与异步执行
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的异步编程基于 Future trait：
@@ -51,6 +53,7 @@ impl Future for TimerFuture {
 ```
 
 ### async/await 语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -104,6 +107,7 @@ async fn race_example() {
 ```
 
 ### 异步状态机
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -157,6 +161,7 @@ fn pin_demo() {
 ```
 
 ### 流（Streams）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -192,6 +197,7 @@ async fn stream_combinators() {
 ```
 
 ### 异步运行时
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -245,6 +251,7 @@ async fn async_channels() {
 ```
 
 ### 取消与超时
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -297,6 +304,7 @@ fn cancellation_demo() {
 ```
 
 ### 并发控制
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -357,6 +365,7 @@ where
 ---
 
 ## 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 异步模式 | 关键技术 |
@@ -373,9 +382,11 @@ where
 ---
 
 ## 相关研究笔记
+>
 > **[来源: Rust Official Docs]**
 
 ### 软件设计理论
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 描述 | 路径 |
@@ -405,6 +416,7 @@ where
 | :--- | :--- | :--- |
 | c06_async | 异步并发实现 | [../../../../crates/c06_async/](../../../../crates/c06_async/README.md) |
 | c09_design_pattern | 异步设计模式 | [../../../../crates/c09_design_pattern/](../../../../crates/c09_design_pattern/README.md) |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -415,7 +427,6 @@ where
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

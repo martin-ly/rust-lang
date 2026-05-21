@@ -11,6 +11,7 @@
 ---
 
 ## 形式化链接
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 路径 | 内容 |
@@ -24,9 +25,11 @@
 ---
 
 ## 生命周期的形式化模型
+>
 > **[来源: Rust Official Docs]**
 
 ### 生命周期作为区域（Region）
+>
 > **[来源: Rust Official Docs]**
 
 生命周期可以形式化为程序执行中的时间区域：
@@ -202,6 +205,7 @@ fn invariance(x: &mut &'static str) {
     // 不能传入 &mut &'short str
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -212,7 +216,6 @@ fn invariance(x: &mut &'static str) {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

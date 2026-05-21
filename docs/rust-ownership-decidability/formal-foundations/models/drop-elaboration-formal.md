@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust Drop Elaboration 形式化理论](#rust-drop-elaboration-形式化理论)
@@ -38,10 +39,13 @@
     - [6.3 循环与 Drop](#63-循环与-drop)
   - [7. 与编译器的对比](#7-与编译器的对比)
   - [参考文献](#参考文献)
+  - [*状态: 完成*](#状态-完成)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时何地插入析构函数调用。本文档基于 ETH Zürich 2024 年的本科毕业论文，提供 Drop Elaboration 的完整形式化理论，包括：
@@ -54,6 +58,7 @@ Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Drop Elaboration 是什么
@@ -603,11 +608,9 @@ loop {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

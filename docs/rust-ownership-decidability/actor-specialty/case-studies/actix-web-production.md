@@ -31,6 +31,7 @@
   - [8. 与其他框架对比](#8-与其他框架对比)
   - [**Actix-web版本**: 4.x](#actix-web版本-4x)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 项目概览
 >
@@ -488,7 +489,6 @@ async fn handler() -> Result<HttpResponse, AppError> {
 ## 相关概念
 
 - [上级目录](../README.md)
-
 
 ---
 

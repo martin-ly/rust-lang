@@ -134,14 +134,12 @@ make clean
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
 
 - [所有权可判定性总览](../README.md)
 - [形式化基础](../formal-foundations/README.md)
-
 
 ---
 

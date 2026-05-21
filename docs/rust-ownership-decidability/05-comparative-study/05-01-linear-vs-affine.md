@@ -4,6 +4,7 @@
 > **编程语言**: Rust (仿射), Clean (线性), Alms (线性)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [线性类型 vs 仿射类型 深度对比](#线性类型-vs-仿射类型-深度对比)
@@ -29,8 +30,10 @@
     - [7.2 证明论对比](#72-证明论对比)
   - [8. 总结](#8-总结)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 核心区别概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -66,6 +69,7 @@
 ```
 
 ## 2. 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 线性类型系统
@@ -321,6 +325,7 @@ sequent演算对比:
 2. Wadler, P. (1990). Linear Types can Change the World! *Programming Concepts and Methods*.
 3. Baker, H.G. (1995). Use-once Variables and Linear Objects. *ACM Computing Surveys*.
 4. Morrisett, G., et al. (2005). L3: A Linear Language with Locations. *Fundamenta Informaticae*.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -332,11 +337,9 @@ sequent演算对比:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
