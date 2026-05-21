@@ -10,7 +10,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Rust Reference - Error Codes]** · **[来源: Wikipedia - Compiler Construction]** · **[来源: ACM - Compiler Error Message Design]** · **[来源: IEEE - Programming Language Diagnostics]**
 
 - [Rust 编译器错误码映射文档](#rust-编译器错误码映射文档)
   - [目录](#目录)

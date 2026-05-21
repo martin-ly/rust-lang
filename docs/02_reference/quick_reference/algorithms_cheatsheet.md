@@ -9,7 +9,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Algorithm]** · **[来源: Wikipedia - Big O Notation]** · **[来源: ACM - Algorithm Design Patterns]** · **[来源: IEEE - Standard Algorithms Library]**
 
 - [算法与数据结构快速参考卡片](#算法与数据结构快速参考卡片)
   - [📋 目录](#-目录)

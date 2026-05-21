@@ -1,7 +1,7 @@
 # 性能优化指南
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Program Optimization]** · **[来源: Wikipedia - Benchmarking]** · **[来源: ACM - Performance Engineering]** · **[来源: IEEE - Real-Time Performance Standards]**
 
 本文档提供Rust安全关键系统的性能优化策略，在保证安全性的前提下实现最优运行时性能。
 

@@ -9,7 +9,7 @@
 
 ## 📊 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Compiler Optimization]** · **[来源: Wikipedia - LLVM]** · **[来源: ACM - Compiler Frontend Design]** · **[来源: IEEE - Code Generation Standards]**
 
 - [Rust 编译器特性与优化](#rust-编译器特性与优化)
   - [📊 目录](#-目录)

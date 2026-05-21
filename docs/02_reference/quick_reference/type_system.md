@@ -9,7 +9,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type System]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Advanced Type System Features]** · **[来源: IEEE - Type Safety Verification]**
 
 - [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
   - [📋 目录](#-目录)

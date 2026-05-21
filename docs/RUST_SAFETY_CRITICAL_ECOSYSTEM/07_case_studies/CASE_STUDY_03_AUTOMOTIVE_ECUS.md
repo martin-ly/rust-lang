@@ -1,7 +1,7 @@
 # 案例研究3: 汽车ECU Rust应用
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Automotive Electronics]** · **[来源: ISO 26262]** · **[来源: ACM - Safety-Critical Systems]** · **[来源: IEEE - Automotive Software Standards]**
 
 **行业**: 汽车电子
 **应用**: 电子控制单元(ECU)

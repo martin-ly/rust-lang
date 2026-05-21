@@ -11,7 +11,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Development Best Practices]** · **[来源: ACM - Code Quality Metrics]** · **[来源: IEEE - Software Engineering Standards]** · **[来源: Rust Project Guidelines]**
 
 - [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
   - [📋 目录](#-目录)

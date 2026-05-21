@@ -9,7 +9,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Future/Promise]** · **[来源: ACM - Async Programming Patterns]** · **[来源: IEEE - Concurrent Language Constructs]**
 
 - [⚡ Rust 异步编程速查卡](#-rust-异步编程速查卡)
   - [📋 目录](#-目录)

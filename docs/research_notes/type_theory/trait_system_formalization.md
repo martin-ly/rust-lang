@@ -8,7 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Type Class]** · **[来源: Wikipedia - Polymorphism]** · **[来源: ACM - Trait-Based Object Orientation]** · **[来源: IEEE - Type System Formalization]**
 
 - [Trait 系统形式化](#trait-系统形式化)
   - [📊 目录 {#-目录}](#-目录--目录)

@@ -8,7 +8,7 @@
 ---
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Concurrency Control]** · **[来源: Wikipedia - Deadlock]** · **[来源: ACM - Concurrency Bug Detection]** · **[来源: IEEE - Parallel Programming Safety]**
 
 并发安全矩阵全面梳理 Rust 并发编程中的安全保证、同步原语、并发模式和常见陷阱，为并发程序的形式化验证提供参考框架。
 

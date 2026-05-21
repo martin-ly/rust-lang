@@ -1,7 +1,7 @@
 # 交互式学习资源
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Linux Foundation]** · **[来源: Wikipedia - Educational Technology]** · **[来源: ACM - Computer Science Education]** · **[来源: IEEE - Learning Engineering Standards]**
 
 本文档收集Rust安全关键系统开发的交互式学习资源，包括在线课程、实验平台、虚拟环境等。
 

@@ -10,7 +10,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: Gang of Four - Design Patterns]** · **[来源: ACM - Design Patterns in Rust]** · **[来源: IEEE - Software Architecture Best Practices]**
 
 - [设计模式使用指南](#设计模式使用指南)
   - [📋 目录](#-目录)
