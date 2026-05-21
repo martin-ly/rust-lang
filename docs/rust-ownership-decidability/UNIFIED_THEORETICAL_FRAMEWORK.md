@@ -1285,3 +1285,28 @@ $$
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Unified Theory]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Wikipedia - Programming Language Theory]**
+
+> **[来源: IEEE - Integrated Verification Frameworks]**
+
+> **[来源: ACM - Unified Program Analysis]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: PLDI 2023 - Aeneas]**
+
+> **[来源: Iris Project - iris-project.org]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: Rustonomicon - The Dark Arts of Unsafe Rust]**

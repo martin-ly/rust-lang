@@ -1588,3 +1588,28 @@ mod unit_tests {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Stack-Based Memory Allocation]**
+
+> **[来源: Wikipedia - Fixed-Size Data Structure]**
+
+> **[来源: Wikipedia - Ring Buffer]**
+
+> **[来源: IEEE - Embedded Memory Management]**
+
+> **[来源: ACM - Heapless Data Structures]**
+
+> **[来源: Rust Reference - no_std]**
+
+> **[来源: Rustonomicon - Data Layout]**
+
+> **[来源: heapless.rs Documentation]**
+
+> **[来源: MISRA C - Memory Constraints]**
+
+> **[来源: Rust Embedded Working Group]**

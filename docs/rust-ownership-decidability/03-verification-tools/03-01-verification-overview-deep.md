@@ -108,6 +108,7 @@
     - [Creusot Counter-Examples (4 total)](#creusot-counter-examples-4-total)
   - [Theorems Index](#theorems-index)
   - [*End of Document*](#end-of-document)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1988,3 +1989,27 @@ This document contains **9 theorems** about verification guarantees:
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Verification]**
+
+> **[来源: Wikipedia - Model Checking]**
+
+> **[来源: Wikipedia - Deductive Verification]**
+
+> **[来源: Wikipedia - Abstract Interpretation]**
+
+> **[来源: IEEE - Software Verification Standards]**
+
+> **[来源: ACM - Program Verification Tools Survey]**
+
+> **[来源: Rust Verification Working Group]**
+
+> **[来源: Kani Documentation]**
+
+> **[来源: Creusot Documentation]**
+
+> **[来源: Miri Documentation]**

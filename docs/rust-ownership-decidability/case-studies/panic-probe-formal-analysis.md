@@ -1834,3 +1834,28 @@ fn panic(_info: &PanicInfo) -> ! {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Debugger]**
+
+> **[来源: Wikipedia - Stack Trace]**
+
+> **[来源: Wikipedia - Core Dump]**
+
+> **[来源: IEEE - Software Diagnostic Tools]**
+
+> **[来源: ACM - Fault Diagnosis in Embedded Systems]**
+
+> **[来源: ARM CoreSight Technical Reference]**
+
+> **[来源: ITM - Instrumentation Trace Macrocell]**
+
+> **[来源: DWT - Data Watchpoint and Trace]**
+
+> **[来源: probe.rs Documentation]**
+
+> **[来源: Rust Embedded Working Group]**

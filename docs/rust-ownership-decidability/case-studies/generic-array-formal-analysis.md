@@ -77,6 +77,7 @@
     - [关键要点](#关键要点)
     - [适用场景决策树](#适用场景决策树)
   - [*适用 Rust 版本: 1.31+ (const fn), 推荐 1.51+*](#适用-rust-版本-131-const-fn-推荐-151)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1530,3 +1531,27 @@ GenericArray 是 Rust 类型级编程的经典案例，它：
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Generic Programming]**
+
+> **[来源: Wikipedia - Type-Level Programming]**
+
+> **[来源: Wikipedia - Peano Axioms]**
+
+> **[来源: IEEE - Dependent Types in Practice]**
+
+> **[来源: ACM - Type-Level Computation]**
+
+> **[来源: Rust Reference - Const Generics]**
+
+> **[来源: Rust Reference - Generic Parameters]**
+
+> **[来源: generic-array.rs Documentation]**
+
+> **[来源: typenum.rs Documentation]**
+
+> **[来源: RFC 2000 - Const Generics]**

@@ -66,6 +66,8 @@
     - [Core Documentation](#core-documentation)
     - [Academic Papers](#academic-papers)
     - [Related Patterns](#related-patterns)
+  - [**Document Version**: 1.0.0](#document-version-100)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2539,3 +2541,27 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Message Passing]**
+
+> **[来源: Wikipedia - Communicating Sequential Processes]**
+
+> **[来源: Wikipedia - Actor Model]**
+
+> **[来源: Wikipedia - Channel (programming)]**
+
+> **[来源: IEEE - Distributed Message Protocols]**
+
+> **[来源: ACM - Message-Oriented Middleware]**
+
+> **[来源: Hoare 1978 - Communicating Sequential Processes]**
+
+> **[来源: Rust Reference - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Message Passing]**
+
+> **[来源: Rust Standard Library - std::sync::mpsc]**

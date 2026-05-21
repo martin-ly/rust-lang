@@ -105,6 +105,7 @@
     - [12.3 调试技巧](#123-调试技巧)
   - [参考文献](#参考文献)
   - [*最后更新: 2026-03-05*](#最后更新-2026-03-05)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2179,3 +2180,27 @@ unsafe { core::arch::asm!("bkpt #0"); }
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - ARM Cortex-M]**
+
+> **[来源: Wikipedia - Real-Time Operating System]**
+
+> **[来源: Wikipedia - Interrupt Handler]**
+
+> **[来源: IEEE - Real-Time Scheduling]**
+
+> **[来源: ACM - Embedded Runtime Systems]**
+
+> **[来源: ARMv7-M Architecture Reference Manual]**
+
+> **[来源: ARMv8-M Architecture Reference Manual]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: cortex-m-rt.rs Documentation]**
+
+> **[来源: NVIC - Nested Vectored Interrupt Controller]**

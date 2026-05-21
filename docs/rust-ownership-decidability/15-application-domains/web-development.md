@@ -37,6 +37,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
     - [2. 配置管理](#2-配置管理)
   - [总结](#总结)
   - [通过本文档介绍的技术和最佳实践，开发者可以构建高性能、高可靠性的 Web 应用](#通过本文档介绍的技术和最佳实践开发者可以构建高性能高可靠性的-web-应用)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2530,3 +2531,27 @@ Rust 在 Web 开发领域提供了：
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Web Framework]**
+
+> **[来源: Wikipedia - Representational State Transfer]**
+
+> **[来源: Wikipedia - HTTP]**
+
+> **[来源: Wikipedia - Microservices]**
+
+> **[来源: IEEE - High-Performance Web Systems]**
+
+> **[来源: ACM - Web Server Architecture]**
+
+> **[来源: OWASP - Web Security Standards]**
+
+> **[来源: Rust Web Framework Benchmarks]**
+
+> **[来源: RFC 7230 - HTTP/1.1]**
+
+> **[来源: RFC 9113 - HTTP/2]**

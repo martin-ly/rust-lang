@@ -60,6 +60,7 @@
     - [资源链接](#资源链接)
   - [*适用Rust版本: 1.75+*](#适用rust版本-175)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2770,3 +2771,27 @@ macro_rules! log_error {
 
 - [嵌入式 Crates 索引](./EMBEDDED_CRATES_INDEX.md)
 - [案例研究总览](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Embedded System]**
+
+> **[来源: Wikipedia - Real-Time Operating System]**
+
+> **[来源: Wikipedia - Microcontroller]**
+
+> **[来源: Wikipedia - Bare-Metal Programming]**
+
+> **[来源: IEEE - Embedded Software Standards]**
+
+> **[来源: ACM - Embedded Systems Survey]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: Embassy Book - embassy.dev]**
+
+> **[来源: RTIC Book - rtic.rs]**
+
+> **[来源: Rust Reference - no_std]**

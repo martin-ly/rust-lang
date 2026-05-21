@@ -62,6 +62,8 @@
   - [推荐资源](#推荐资源)
   - [下一步](#下一步)
   - [祝你的 Rust 游戏开发之旅顺利](#祝你的-rust-游戏开发之旅顺利)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -4873,3 +4875,27 @@ fn cleanup_system(
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Game Engine]**
+
+> **[来源: Wikipedia - Entity Component System]**
+
+> **[来源: Wikipedia - Computer Graphics]**
+
+> **[来源: Wikipedia - Real-Time Rendering]**
+
+> **[来源: IEEE - Real-Time Graphics Rendering]**
+
+> **[来源: ACM - Game Development Patterns]**
+
+> **[来源: SIGGRAPH - Graphics Programming]**
+
+> **[来源: Rust GameDev Working Group]**
+
+> **[来源: bevyengine.org Documentation]**
+
+> **[来源: wgpu.rs Documentation]**

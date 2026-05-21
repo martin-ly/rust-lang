@@ -175,6 +175,7 @@
     - [B. 定理索引](#b-定理索引)
     - [C. 连接词性质总结](#c-连接词性质总结)
   - [*字数: 约 25000 字*](#字数-约-25000-字)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2700,3 +2701,27 @@ list reverse(list x);
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Linear Logic]**
+
+> **[来源: Wikipedia - Substructural Logic]**
+
+> **[来源: Wikipedia - Proof Theory]**
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: IEEE - Resource-Sensitive Type Systems]**
+
+> **[来源: ACM - Linear Logic in Programming]**
+
+> **[来源: Girard 1987 - Linear Logic]**
+
+> **[来源: Wadler 1990 - Linear Types can Change the World]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Kopylov 2001 - Decidability of Linear Affine Logic]**

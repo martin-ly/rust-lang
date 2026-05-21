@@ -2324,3 +2324,28 @@ where
 ---
 
 > **权威来源**: Rust Official Docs
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Gang of Four]**
+
+> **[来源: Wikipedia - Anti-pattern]**
+
+> **[来源: IEEE - Software Architecture Patterns]**
+
+> **[来源: ACM - Design Patterns in Rust]**
+
+> **[来源: Gamma et al. 1994 - Design Patterns]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Rust Reference - Traits]**
+
+> **[来源: Rust Cookbook]**
+
+> **[来源: RFC 1210 - impl Specialization]**

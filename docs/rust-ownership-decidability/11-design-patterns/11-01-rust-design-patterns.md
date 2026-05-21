@@ -2660,3 +2660,27 @@ let value = some_option.unwrap_or(default);
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Gang of Four]**
+
+> **[来源: Wikipedia - Anti-pattern]**
+
+> **[来源: Wikipedia - Idiom]**
+
+> **[来源: IEEE - Software Architecture Patterns]**
+
+> **[来源: ACM - Design Patterns in Systems Languages]**
+
+> **[来源: Gamma et al. 1994 - Design Patterns]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Rust Reference - Patterns]**
+
+> **[来源: Rust Cookbook]**

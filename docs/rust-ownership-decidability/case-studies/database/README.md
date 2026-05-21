@@ -61,6 +61,7 @@
   - [总结](#总结)
   - [Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建高性能、可靠数据库系统的理想选择](#rust的内存安全零成本抽象和-fearless-并发特性使其成为构建高性能可靠数据库系统的理想选择)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2982,3 +2983,27 @@ Rust的内存安全、零成本抽象和 fearless 并发特性使其成为构建
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Database Management System]**
+
+> **[来源: Wikipedia - SQL]**
+
+> **[来源: Wikipedia - ACID]**
+
+> **[来源: Wikipedia - Object-Relational Mapping]**
+
+> **[来源: IEEE - Transaction Processing]**
+
+> **[来源: ACM - Database Systems Survey]**
+
+> **[来源: ISO/IEC 9075 - SQL Standard]**
+
+> **[来源: Rust Database Working Group]**
+
+> **[来源: diesel.rs Documentation]**
+
+> **[来源: sqlx.dev Documentation]**

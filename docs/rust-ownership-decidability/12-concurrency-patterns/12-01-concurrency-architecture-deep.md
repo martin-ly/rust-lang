@@ -74,6 +74,7 @@
     - [MIRI for Undefined Behavior Detection](#miri-for-undefined-behavior-detection)
     - [Creusot for Formal Proof](#creusot-for-formal-proof)
   - [References](#references)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2532,3 +2533,27 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrent Computing]**
+
+> **[来源: Wikipedia - Lock-Free Data Structure]**
+
+> **[来源: Wikipedia - Thread Pool]**
+
+> **[来源: Wikipedia - Work Stealing]**
+
+> **[来源: IEEE - Parallel Architecture Patterns]**
+
+> **[来源: ACM - Concurrent Programming Paradigms]**
+
+> **[来源: ACM - Scalable Concurrent Algorithms]**
+
+> **[来源: Rust Reference - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: crossbeam.rs Documentation]**

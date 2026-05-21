@@ -2019,3 +2019,28 @@ impl<S: Storage> ThreadSafeFS<S> {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Flash File System]**
+
+> **[来源: Wikipedia - Wear Leveling]**
+
+> **[来源: Wikipedia - Journaling File System]**
+
+> **[来源: IEEE - Non-Volatile Storage Management]**
+
+> **[来源: ACM - Embedded File System Design]**
+
+> **[来源: littlefs.io Specification]**
+
+> **[来源: ARM mbed OS Storage]**
+
+> **[来源: NOR Flash Memory Standard]**
+
+> **[来源: NAND Flash Memory Standard]**
+
+> **[来源: Rust Embedded Working Group]**

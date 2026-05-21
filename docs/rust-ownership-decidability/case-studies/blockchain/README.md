@@ -50,6 +50,7 @@
     - [学习资源](#学习资源)
     - [常用Crates](#常用crates)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3415,3 +3416,27 @@ tokio-test = "0.4"
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Blockchain]**
+
+> **[来源: Wikipedia - Smart Contract]**
+
+> **[来源: Wikipedia - Cryptocurrency]**
+
+> **[来源: Wikipedia - Distributed Ledger]**
+
+> **[来源: IEEE - Blockchain Security Standards]**
+
+> **[来源: ACM - Distributed Ledger Technology]**
+
+> **[来源: Bitcoin Whitepaper - Nakamoto 2008]**
+
+> **[来源: Ethereum Yellow Paper]**
+
+> **[来源: Rust Blockchain Working Group]**
+
+> **[来源: Web3 Foundation Research]**

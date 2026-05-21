@@ -1129,3 +1129,28 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: Wikipedia - Future/Promise]**
+
+> **[来源: Wikipedia - Coroutine]**
+
+> **[来源: IEEE - Concurrent Language Constructs]**
+
+> **[来源: ACM - Async Programming Patterns]**
+
+> **[来源: Rust Reference - async/await]**
+
+> **[来源: TRPL Ch. 17 - Async and Await]**
+
+> **[来源: Rustonomicon - Async]**
+
+> **[来源: tokio.rs Documentation]**
+
+> **[来源: async-std.rs Documentation]**

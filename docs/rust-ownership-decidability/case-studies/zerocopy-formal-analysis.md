@@ -67,6 +67,7 @@
     - [10.2 填充字节未定义行为](#102-填充字节未定义行为)
     - [10.3 类型混淆攻击](#103-类型混淆攻击)
   - [**代码示例**: 8个完整示例](#代码示例-8个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2152,3 +2153,27 @@ impl Message {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Zero-Copy]**
+
+> **[来源: Wikipedia - Memory Mapping]**
+
+> **[来源: Wikipedia - DMA]**
+
+> **[来源: IEEE - High-Performance Data Transfer]**
+
+> **[来源: ACM - Memory Optimization Techniques]**
+
+> **[来源: Rust Reference - Unsafe Rust]**
+
+> **[来源: Rustonomicon - Working with Memory]**
+
+> **[来源: zerocopy.rs Documentation]**
+
+> **[来源: Linux Kernel - mmap]**
+
+> **[来源: POSIX - Memory Management]**

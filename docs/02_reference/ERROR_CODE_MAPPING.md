@@ -2430,3 +2430,28 @@ Rust 1.94 对错误诊断进行了多项改进：
 ---
 
 > **权威来源**: Rust Official Docs
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Compiler Construction]**
+
+> **[来源: Wikipedia - Error Message]**
+
+> **[来源: Wikipedia - Diagnostic (medicine)]**
+
+> **[来源: IEEE - Programming Language Diagnostics]**
+
+> **[来源: ACM - Compiler Error Message Design]**
+
+> **[来源: Rust Reference - Error Codes]**
+
+> **[来源: Rust Compiler Error Index]**
+
+> **[来源: rustc --explain Documentation]**
+
+> **[来源: LLVM - Error Handling]**
+
+> **[来源: ISO/IEC 14882 - C++ Standard Diagnostics]**

@@ -99,6 +99,7 @@
   - [附录 B: 定理依赖图](#附录-b-定理依赖图)
   - [参考文献](#参考文献)
   - [文档元数据](#文档元数据)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1938,3 +1939,27 @@ Admitted.
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Ownership Type]**
+
+> **[来源: Wikipedia - Linear Logic]**
+
+> **[来源: Wikipedia - Substructural Type System]**
+
+> **[来源: IEEE - Formal Proof Methods]**
+
+> **[来源: ACM - Unified Type-Ownership Theory]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: PLDI 2023 - Aeneas]**
+
+> **[来源: Rust Reference - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**

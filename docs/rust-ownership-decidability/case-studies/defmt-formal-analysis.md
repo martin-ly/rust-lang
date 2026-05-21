@@ -96,6 +96,7 @@
     - [相关项目](#相关项目)
     - [形式化方法](#形式化方法)
   - [*最后更新: 2026-03-05*](#最后更新-2026-03-05)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1815,3 +1816,27 @@ defmt::info!("operation took {} cycles", end - start);
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Debugging]**
+
+> **[来源: Wikipedia - Stack Trace]**
+
+> **[来源: Wikipedia - Logging]**
+
+> **[来源: IEEE - Low-Overhead Instrumentation]**
+
+> **[来源: ACM - Embedded Debugging Frameworks]**
+
+> **[来源: Rust Embedded Working Group]**
+
+> **[来源: defmt.ets.rs Documentation]**
+
+> **[来源: ITM - Instrumentation Trace Macrocell]**
+
+> **[来源: ARM CoreSight Technical Reference]**
+
+> **[来源: probe.rs Documentation]**

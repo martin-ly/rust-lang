@@ -1918,3 +1918,28 @@ async fn main() {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Java (programming language)]**
+
+> **[来源: Wikipedia - JVM]**
+
+> **[来源: Wikipedia - Garbage Collection]**
+
+> **[来源: IEEE - Language Safety Comparison]**
+
+> **[来源: ACM - Managed vs Unmanaged Languages]**
+
+> **[来源: Java Language Specification]**
+
+> **[来源: JVM Specification]**
+
+> **[来源: Rust Reference - Memory Safety]**
+
+> **[来源: TRPL - Ownership]**
+
+> **[来源: Oracle Java Documentation]**

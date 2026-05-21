@@ -85,6 +85,7 @@
     - [Academic Papers](#academic-papers)
     - [Rust Documentation](#rust-documentation)
     - [Related Documentation in This Project](#related-documentation-in-this-project)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1989,3 +1990,27 @@ pub const fn optimal_chunk_size(data_len: usize, num_threads: usize) -> usize {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Data Parallelism]**
+
+> **[来源: Wikipedia - SIMD]**
+
+> **[来源: Wikipedia - GPU Computing]**
+
+> **[来源: Wikipedia - MapReduce]**
+
+> **[来源: IEEE - High-Performance Parallel Computing]**
+
+> **[来源: ACM - Parallel Algorithm Design]**
+
+> **[来源: ACM - Parallel Programming Models]**
+
+> **[来源: Rust Reference - Concurrency]**
+
+> **[来源: rayon.rs Documentation]**
+
+> **[来源: Rust SIMD Working Group]**

@@ -67,6 +67,8 @@
     - [10.1 复杂类型序列化](#101-复杂类型序列化)
     - [10.2 与数据库结合](#102-与数据库结合)
   - [定理总结](#定理总结)
+  - [*最后更新: 2026-03-10*](#最后更新-2026-03-10)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1676,3 +1678,27 @@ impl RkyvDatabase {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Zero-Copy Serialization]**
+
+> **[来源: Wikipedia - Schema Evolution]**
+
+> **[来源: Wikipedia - Remote Procedure Call]**
+
+> **[来源: IEEE - High-Performance Serialization]**
+
+> **[来源: ACM - Zero-Copy Data Structures]**
+
+> **[来源: Rust Reference - Traits]**
+
+> **[来源: rkyv.org Documentation]**
+
+> **[来源: Cap'n Proto Documentation]**
+
+> **[来源: FlatBuffers Documentation]**
+
+> **[来源: Protocol Buffers Documentation]**

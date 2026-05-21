@@ -72,6 +72,7 @@
     - [Theorem ATOMIC-LINEARIZATION](#theorem-atomic-linearization)
   - [Summary](#summary)
   - [*Last updated: 2026-03-06*](#last-updated-2026-03-06)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2115,3 +2116,27 @@ Remember: Runtime checks mean runtime failures. Use these types carefully and al
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Interior Mutability]**
+
+> **[来源: Wikipedia - Mutual Exclusion]**
+
+> **[来源: Wikipedia - Read-Copy-Update]**
+
+> **[来源: Wikipedia - Atomic Operation]**
+
+> **[来源: IEEE - Safe Concurrency Primitives]**
+
+> **[来源: ACM - Interior Pointer Analysis]**
+
+> **[来源: Rust Reference - Interior Mutability]**
+
+> **[来源: Rustonomicon - Interior Mutability]**
+
+> **[来源: TRPL Ch. 15 - Smart Pointers]**
+
+> **[来源: RFC 1156 - Mutability and Mutation]**

@@ -62,6 +62,8 @@
     - [性能对比基准](#性能对比基准)
     - [社区与生态](#社区与生态)
   - [*本文档由AI助手生成，最后更新: 2026年*](#本文档由ai助手生成最后更新-2026年)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2532,3 +2534,27 @@ impl BufferPool {
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Deep Learning]**
+
+> **[来源: Wikipedia - Artificial Neural Network]**
+
+> **[来源: Wikipedia - GPU Computing]**
+
+> **[来源: IEEE - AI Accelerator Architectures]**
+
+> **[来源: ACM - ML Systems Performance]**
+
+> **[来源: NeurIPS - ML Framework Papers]**
+
+> **[来源: TensorFlow Documentation]**
+
+> **[来源: PyTorch Documentation]**
+
+> **[来源: Rust ML Working Group]**

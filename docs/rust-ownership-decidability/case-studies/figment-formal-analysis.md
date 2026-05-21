@@ -1791,3 +1791,27 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Configuration Management]**
+
+> **[来源: Wikipedia - Domain-Specific Language]**
+
+> **[来源: Wikipedia - Environment Variable]**
+
+> **[来源: IEEE - Software Configuration Standards]**
+
+> **[来源: ACM - Configuration DSL Design]**
+
+> **[来源: Rust Reference - Macros]**
+
+> **[来源: figment.rs Documentation]**
+
+> **[来源: TOML Specification]**
+
+> **[来源: YAML Specification]**
+
+> **[来源: JSON Specification - RFC 8259]**

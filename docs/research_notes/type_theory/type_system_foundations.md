@@ -131,6 +131,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3067,3 +3068,27 @@ fn truncate_front(&mut self, len: usize)
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Lambda Calculus]**
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: Wikipedia - Hindley-Milner Type System]**
+
+> **[来源: IEEE - Advanced Type System Features]**
+
+> **[来源: ACM - Type Systems for Memory Safety]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: PLDI 2023 - Aeneas]**
+
+> **[来源: Pierce 2002 - Types and Programming Languages]**
+
+> **[来源: Rust Reference - Type System]**

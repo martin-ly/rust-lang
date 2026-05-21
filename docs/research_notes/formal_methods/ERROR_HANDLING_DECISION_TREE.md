@@ -75,6 +75,7 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2402,3 +2403,27 @@ mod examples {
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Exception Handling]**
+
+> **[来源: Wikipedia - Error Detection and Correction]**
+
+> **[来源: Wikipedia - Fault Tolerance]**
+
+> **[来源: Wikipedia - Recovery Block]**
+
+> **[来源: IEEE - Fault-Tolerant Software Design]**
+
+> **[来源: ACM - Error Handling Patterns]**
+
+> **[来源: Rust Reference - Error Handling]**
+
+> **[来源: TRPL Ch. 9 - Error Handling]**
+
+> **[来源: RFC 0243 - Trait-based Exception Handling]**
+
+> **[来源: anyhow.rs Documentation]**

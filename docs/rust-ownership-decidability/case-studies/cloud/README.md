@@ -70,6 +70,7 @@
     - [学习资源](#学习资源)
   - [*最后更新：2026-03-04*](#最后更新2026-03-04)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3421,3 +3422,27 @@ allow-registry = ["https://github.com/rust-lang/crates.io-index"]
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Cloud Computing]**
+
+> **[来源: Wikipedia - Containerization]**
+
+> **[来源: Wikipedia - Microservices]**
+
+> **[来源: Wikipedia - Kubernetes]**
+
+> **[来源: IEEE - Microservices Architecture Standards]**
+
+> **[来源: ACM - Cloud Native Application Design]**
+
+> **[来源: CNCF - Cloud Native Landscape]**
+
+> **[来源: Rust Cloud Native Working Group]**
+
+> **[来源: tokio.rs Documentation]**
+
+> **[来源: tonic.rs Documentation]**

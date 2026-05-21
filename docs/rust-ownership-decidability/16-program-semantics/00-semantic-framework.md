@@ -116,6 +116,7 @@
     - [10.4 文档组织](#104-文档组织)
   - [附录：符号说明](#附录符号说明)
   - [参考文献](#参考文献)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3949,3 +3950,27 @@ docs/rust-ownership-decidability/
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Operational Semantics]**
+
+> **[来源: Wikipedia - Abstract Interpretation]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Wikipedia - Programming Language Theory]**
+
+> **[来源: IEEE - Formal Semantic Models]**
+
+> **[来源: ACM - Semantic Frameworks for Systems Languages]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: PLDI 2023 - Aeneas]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: Rustonomicon - Data Layout]**

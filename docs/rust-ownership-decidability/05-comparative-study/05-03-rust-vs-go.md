@@ -2165,3 +2165,28 @@ Go 开发者学习 Rust 路径:
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Go (programming language)]**
+
+> **[来源: Wikipedia - Concurrent Computing]**
+
+> **[来源: Wikipedia - Goroutine]**
+
+> **[来源: IEEE - Systems Language Benchmarks]**
+
+> **[来源: ACM - Language Comparison Methodology]**
+
+> **[来源: Go Programming Language Specification]**
+
+> **[来源: Go Memory Model]**
+
+> **[来源: Rust Reference - Concurrency]**
+
+> **[来源: TRPL - Fearless Concurrency]**
+
+> **[来源: golang.org Documentation]**

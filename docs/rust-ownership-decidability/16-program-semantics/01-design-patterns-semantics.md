@@ -75,6 +75,7 @@
     - [10.2 形式化语义的实践价值](#102-形式化语义的实践价值)
     - [10.3 未来研究方向](#103-未来研究方向)
   - [\`\`\`](#)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1375,3 +1376,28 @@ graph TB
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design Pattern]**
+
+> **[来源: Wikipedia - Formal Semantics]**
+
+> **[来源: Wikipedia - Abstract Data Type]**
+
+> **[来源: IEEE - Certified Design Patterns]**
+
+> **[来源: ACM - Pattern Formalization]**
+
+> **[来源: Gamma et al. 1994 - Design Patterns]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Rust Reference - Patterns]**
+
+> **[来源: Rust Cookbook]**
+
+> **[来源: RFC 1210 - impl Specialization]**

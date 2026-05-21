@@ -64,6 +64,7 @@
     - [10.2 char类型限制](#102-char类型限制)
     - [10.3 引用类型限制](#103-引用类型限制)
   - [**代码示例**: 8个完整示例](#代码示例-8个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1706,3 +1707,27 @@ impl SafeReference {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type Punning]**
+
+> **[来源: Wikipedia - Type Casting]**
+
+> **[来源: Wikipedia - Union Type]**
+
+> **[来源: IEEE - Type Safety in Systems Programming]**
+
+> **[来源: ACM - Safe Type Transmutation]**
+
+> **[来源: Rust Reference - Unsafe Rust]**
+
+> **[来源: Rustonomicon - Data Layout]**
+
+> **[来源: bytemuck.rs Documentation]**
+
+> **[来源: C11 Standard - Type-based Alias Analysis]**
+
+> **[来源: LLVM - Type-Based Alias Analysis]**

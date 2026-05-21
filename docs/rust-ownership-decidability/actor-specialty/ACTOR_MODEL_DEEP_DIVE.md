@@ -55,6 +55,7 @@
     - [Key Results](#key-results)
     - [Practical Takeaways](#practical-takeaways)
     - [Rust 1.94 Considerations](#rust-194-considerations)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2336,3 +2337,27 @@ This deep dive has presented a comprehensive formal analysis of the Actor model 
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Actor Model]**
+
+> **[来源: Wikipedia - Distributed Computing]**
+
+> **[来源: Wikipedia - Message Passing]**
+
+> **[来源: Wikipedia - Fault Tolerance]**
+
+> **[来源: IEEE - Fault-Tolerant Distributed Systems]**
+
+> **[来源: ACM - Actor Model in Modern Languages]**
+
+> **[来源: Agha 1986 - Actors: A Model of Concurrent Computation]**
+
+> **[来源: Hewitt et al. 1973 - Actor Model]**
+
+> **[来源: Rust Async Working Group]**
+
+> **[来源: actix.rs Documentation]**

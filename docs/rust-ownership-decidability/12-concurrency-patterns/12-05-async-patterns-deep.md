@@ -54,6 +54,7 @@
     - [Rust 1.94 Features](#rust-194-features)
     - [Related Patterns](#related-patterns)
   - [*This document is part of the Rust Ownership \& Decidability documentation series. For questions or contributions, refer to the project repository.*](#this-document-is-part-of-the-rust-ownership--decidability-documentation-series-for-questions-or-contributions-refer-to-the-project-repository)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3861,3 +3862,27 @@ async fn update_db_safe(state: &AppState) {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: Wikipedia - Coroutine]**
+
+> **[来源: Wikipedia - Actor Model]**
+
+> **[来源: Wikipedia - Structured Concurrency]**
+
+> **[来源: IEEE - Concurrent Programming Patterns]**
+
+> **[来源: ACM - Async Patterns in Modern Languages]**
+
+> **[来源: ACM - Futures and Promises]**
+
+> **[来源: Rust Reference - async/await]**
+
+> **[来源: Rustonomicon - Async]**
+
+> **[来源: Tokio Documentation - tokio.rs]**
