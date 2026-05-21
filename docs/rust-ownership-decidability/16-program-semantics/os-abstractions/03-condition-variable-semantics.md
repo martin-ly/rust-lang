@@ -1,14 +1,50 @@
 # 条件变量的形式化语义
 
+## 📑 目录
+>
+- [条件变量的形式化语义](#条件变量的形式化语义)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 条件变量的基本形式化模型](#2-条件变量的基本形式化模型)
+    - [2.1 核心概念定义](#21-核心概念定义)
+    - [2.2 操作的形式化定义](#22-操作的形式化定义)
+  - [3. Wait/Notify 的精确语义](#3-waitnotify-的精确语义)
+    - [3.1 Wait 操作的详细语义](#31-wait-操作的详细语义)
+    - [3.2 Notify 操作的语义](#32-notify-操作的语义)
+    - [3.3 Rust 代码示例](#33-rust-代码示例)
+  - [4. 与互斥锁的交互语义](#4-与互斥锁的交互语义)
+    - [4.1 监视器模式的形式化](#41-监视器模式的形式化)
+    - [4.2 锁所有权转移的形式化](#42-锁所有权转移的形式化)
+    - [4.3 代码示例：生产者-消费者](#43-代码示例生产者-消费者)
+  - [5. 虚假唤醒的处理](#5-虚假唤醒的处理)
+    - [5.1 虚假唤醒的形式化定义](#51-虚假唤醒的形式化定义)
+    - [5.2 使用 While 循环的必要性](#52-使用-while-循环的必要性)
+    - [5.3 安全论证](#53-安全论证)
+  - [6. 超时等待的语义](#6-超时等待的语义)
+    - [6.1 WaitTimeout 的形式化定义](#61-waittimeout-的形式化定义)
+    - [6.2 Rust 代码示例](#62-rust-代码示例)
+  - [7. 多条件变量的协调](#7-多条件变量的协调)
+    - [7.1 多 Condvar 共享一个 Mutex](#71-多-condvar-共享一个-mutex)
+    - [7.2 形式化分析](#72-形式化分析)
+  - [8. 综合安全论证](#8-综合安全论证)
+    - [8.1 条件变量的正确性定理](#81-条件变量的正确性定理)
+    - [8.2 不变式总结](#82-不变式总结)
+  - [9. 总结](#9-总结)
+  - [这些形式化定义确保了 Rust 程序在使用条件变量进行线程协作时的正确性和安全性。](#这些形式化定义确保了-rust-程序在使用条件变量进行线程协作时的正确性和安全性)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 条件变量（Condition Variable）是同步原语的重要组成部分，用于线程间的协作，允许线程在某个条件不满足时阻塞等待，直到被其他线程通知。Rust 通过 `std::sync::Condvar` 提供了条件变量的实现。本文档从形式化角度定义条件变量的语义，包括 wait/notify 操作、与互斥锁的交互以及虚假唤醒的处理。
 
 ## 2. 条件变量的基本形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -533,7 +569,7 @@ I5 (互斥保证):
 5. **超时等待**：定义了超时语义和处理方式
 6. **多 Condvar**：展示了多个条件变量协调使用的模式
 
-这些形式化定义确保了 Rust 程序在使用条件变量进行线程协作时的正确性和安全性。
+这些形式化定义确保了 Rust 程序在使用条件变量进行线程协作时的正确性和安全性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -545,7 +581,12 @@ I5 (互斥保证):
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

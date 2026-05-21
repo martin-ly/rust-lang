@@ -1,11 +1,43 @@
 # 项目竣工证书
 
+## 📑 目录
+>
+- [项目竣工证书](#项目竣工证书)
+  - [📑 目录](#-目录)
+  - [Rust 所有权系统可判定性严格形式化研究](#rust-所有权系统可判定性严格形式化研究)
+    - [📋 项目信息](#-项目信息)
+    - [✅ 完成项清单](#-完成项清单)
+      - [1. 形式化理论 (100%)](#1-形式化理论-100)
+      - [2. Coq 形式化代码 (100%)](#2-coq-形式化代码-100)
+      - [3. 验证示例 (100%)](#3-验证示例-100)
+      - [4. 系统化知识结构 (100%)](#4-系统化知识结构-100)
+    - [📊 最终统计](#-最终统计)
+    - [🎯 项目目标达成](#-项目目标达成)
+    - [🏆 核心成果](#-核心成果)
+      - [理论成果](#理论成果)
+      - [实践成果](#实践成果)
+      - [学术价值](#学术价值)
+    - [📚 交付物清单](#-交付物清单)
+      - [代码文件 (13个)](#代码文件-13个)
+      - [文档文件 (30+个)](#文档文件-30个)
+    - [✅ 质量验证](#-质量验证)
+      - [编译测试](#编译测试)
+      - [证明检查](#证明检查)
+      - [文档检查](#文档检查)
+    - [🎓 学术贡献声明](#-学术贡献声明)
+    - [📖 使用许可](#-使用许可)
+    - [🎉 项目竣工](#-项目竣工)
+  - [**🏆 项目圆满完成！🏆**](#-项目圆满完成)
+  - [相关概念](#相关概念)
+
 ## Rust 所有权系统可判定性严格形式化研究
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ---
 
 ### 📋 项目信息
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 项目 | 详情 |
@@ -19,6 +51,7 @@
 ---
 
 ### ✅ 完成项清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 1. 形式化理论 (100%)
@@ -245,7 +278,13 @@ make
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

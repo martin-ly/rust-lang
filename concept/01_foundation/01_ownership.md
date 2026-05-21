@@ -1,4 +1,10 @@
 # Ownership（所有权）
+>
+> **层次定位**: L1 基础概念 / 所有权子域
+> **前置依赖**: 无（L1 入口概念）
+> **后置延伸**: [L2 泛型](../02_intermediate/02_generics.md) · [L4 所有权形式化](../04_formal/03_ownership_formal.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
+> **跨层映射**: L1→L4 形式化嵌入 | L1→L3 工程扩展
+> **定理链编号**: T-001 所有权唯一性 → T-002 移动语义完备性 → T-003 Drop 安全性
 
 > **层级**: L1 基础概念
 > **前置概念**: [Stack vs Heap](../01_foundation/04_type_system.md) · [Scope and Drop](../01_foundation/04_type_system.md)
@@ -915,6 +921,7 @@ pub unsafe extern "C" fn borrow_to_c(s: *const u8, len: usize) {
 - [x] **TODO**: 补充跨线程所有权转移（`Send` trait）的形式化视角 —— 优先级: 高 —— 已完成 v1.1
 - [x] **TODO**: 添加与 C++ `unique_ptr` 的深度对比示例 —— 优先级: 低 —— 已完成 §8.1
 - [x] **TODO**: 补充所有权与 FFI / unsafe 边界的交互 —— 优先级: 高 —— 已完成 v1.1
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)

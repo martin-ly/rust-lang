@@ -6,7 +6,19 @@
 
 ---
 
+## 📑 目录
+>
+- [Decorator Pattern in Rust](#decorator-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [实现方式](#实现方式)
+    - [基础装饰者](#基础装饰者)
+  - [实战: HTTP 中间件链](#实战-http-中间件链)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 装饰者模式动态地将责任附加到对象上。在 Rust 中，这通常通过组合和 trait 实现。
@@ -14,10 +26,12 @@
 ---
 
 ## 实现方式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 <!-- markdown-link-check-disable -->
 ### 基础装饰者
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -222,6 +236,7 @@ Decorator<C: Component> = Component + AddedBehavior
 不变量:
   装饰顺序影响最终行为
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -233,7 +248,12 @@ Decorator<C: Component> = Component + AddedBehavior
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [structural 目录](./README.md)

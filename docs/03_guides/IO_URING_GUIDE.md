@@ -7,6 +7,26 @@
 
 ---
 
+
+## 📑 目录
+>
+- [概述](#概述)
+- [核心概念](#核心概念)
+  - [队列对（Queue Pair）](#队列对queue-pair)
+  - [优势](#优势)
+- [决策树：何时使用 io_uring？](#决策树何时使用-io_uring)
+- [Rust 生态](#rust-生态)
+  - [主要 crate](#主要-crate)
+  - [条件编译](#条件编译)
+- [代码示例](#代码示例)
+  - [文件读取（io-uring crate）](#文件读取io-uring-crate)
+  - [Echo Server（tokio-uring）](#echo-servertokio-uring)
+  - [Registered Buffers（零拷贝优化）](#registered-buffers零拷贝优化)
+- [性能对比](#性能对比)
+- [限制与注意事项](#限制与注意事项)
+- [编译与运行](#编译与运行)
+- [参考](#参考)
+
 ## 概述
 
 io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提交队列（Submission Queue, SQ）和完成队列（Completion Queue, CQ）实现用户态与内核态的高效通信。
@@ -239,3 +259,10 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 深化完成
+
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

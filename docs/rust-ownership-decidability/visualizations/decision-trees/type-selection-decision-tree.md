@@ -4,7 +4,24 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust类型选择决策树](#rust类型选择决策树)
+  - [📑 目录](#-目录)
+  - [1. 智能指针选择决策树](#1-智能指针选择决策树)
+  - [2. 内部可变性选择决策树](#2-内部可变性选择决策树)
+  - [3. 引用类型选择决策树](#3-引用类型选择决策树)
+  - [4. 集合类型选择决策树](#4-集合类型选择决策树)
+  - [5. 错误处理选择决策树](#5-错误处理选择决策树)
+  - [6. 并发模型选择决策树](#6-并发模型选择决策树)
+  - [7. 生命周期标注决策树](#7-生命周期标注决策树)
+  - [8. 何时使用unsafe决策树](#8-何时使用unsafe决策树)
+  - [快速参考表](#快速参考表)
+  - [**对齐版本**: Rust 1.93.1](#对齐版本-rust-1931)
+  - [相关概念](#相关概念)
+
 ## 1. 智能指针选择决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -35,6 +52,7 @@
 ---
 
 ## 2. 内部可变性选择决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -71,6 +89,7 @@
 ---
 
 ## 3. 引用类型选择决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -308,7 +327,13 @@ unsafe使用原则:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [decision-trees 目录](./README.md)
+- [上级目录](../README.md)

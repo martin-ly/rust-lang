@@ -4,10 +4,54 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 文档总索引](#rust-所有权系统---文档总索引)
+  - [📑 目录](#-目录)
+  - [索引结构](#索引结构)
+    - [一级索引 (顶层文档 - 必读)](#一级索引-顶层文档---必读)
+    - [二级索引 (综合文档)](#二级索引-综合文档)
+    - [三级索引 (桥梁文档 - 关键创新)](#三级索引-桥梁文档---关键创新)
+  - [按模块索引](#按模块索引)
+    - [00-foundations/ (理论基础 - 13 文件)](#00-foundations-理论基础---13-文件)
+    - [01-core-concepts/ (核心概念 - 11 文件)](#01-core-concepts-核心概念---11-文件)
+      - [01-core-concepts/short-concepts/ (概念卡片 - 3 文件)](#01-core-conceptsshort-concepts-概念卡片---3-文件)
+      - [01-core-concepts/detailed-concepts/ (详细概念 - 5 文件)](#01-core-conceptsdetailed-concepts-详细概念---5-文件)
+    - [coq-formalization/ (Coq 形式化 - 32 文件)](#coq-formalization-coq-形式化---32-文件)
+      - [theories/Syntax/ (语法)](#theoriessyntax-语法)
+      - [theories/Semantics/ (语义)](#theoriessemantics-语义)
+      - [theories/Typing/ (类型)](#theoriestyping-类型)
+      - [theories/Metatheory/ (元理论)](#theoriesmetatheory-元理论)
+      - [theories/Decidability/ (可判定性)](#theoriesdecidability-可判定性)
+      - [theories/Advanced/ (Rust 1.94)](#theoriesadvanced-rust-194)
+    - [case-studies/ (案例研究 - 137 文件)](#case-studies-案例研究---137-文件)
+      - [主要案例分析](#主要案例分析)
+      - [领域分类](#领域分类)
+    - [11-design-patterns/ (设计模式 - 15+ 文件)](#11-design-patterns-设计模式---15-文件)
+      - [creational/ (创建型)](#creational-创建型)
+      - [structural/ (结构型)](#structural-结构型)
+      - [behavioral/ (行为型)](#behavioral-行为型)
+      - [rust-specific/ (Rust 特有)](#rust-specific-rust-特有)
+    - [12-concurrency-patterns/ (并发模式 - 14 文件)](#12-concurrency-patterns-并发模式---14-文件)
+    - [学习资源](#学习资源)
+      - [exercises/ (练习 - 10+ 文件)](#exercises-练习---10-文件)
+      - [主要学习文档](#主要学习文档)
+    - [形式化理论](#形式化理论)
+      - [formal-foundations/](#formal-foundations)
+  - [快速导航](#快速导航)
+    - [按难度导航](#按难度导航)
+    - [按主题导航](#按主题导航)
+  - [文档统计](#文档统计)
+  - [更新日志](#更新日志)
+  - [**总文档数**: 605](#总文档数-605)
+  - [相关概念](#相关概念)
+
 ## 索引结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 一级索引 (顶层文档 - 必读)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 作用 | 必读性 |
@@ -18,6 +62,7 @@
 | [FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md) | 完成认证 | ⭐⭐⭐ |
 
 ### 二级索引 (综合文档)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 作用 |
@@ -335,3 +380,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

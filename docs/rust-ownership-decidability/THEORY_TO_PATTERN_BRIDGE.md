@@ -4,7 +4,36 @@
 
 ---
 
+## 📑 目录
+>
+- [理论到设计模式桥梁文档](#理论到设计模式桥梁文档)
+  - [📑 目录](#-目录)
+  - [引言：为什么需要理论指导模式？](#引言为什么需要理论指导模式)
+  - [一、所有权约束与设计模式](#一所有权约束与设计模式)
+    - [1.1 线性逻辑 → RAII 模式](#11-线性逻辑--raii-模式)
+    - [1.2 仿射类型 → Builder 模式](#12-仿射类型--builder-模式)
+    - [1.3 区域类型 → 类型状态模式](#13-区域类型--类型状态模式)
+  - [二、借用约束与设计模式](#二借用约束与设计模式)
+    - [2.1 借用规则 → 访问者模式](#21-借用规则--访问者模式)
+    - [2.2 内部可变性 → Newtype 模式](#22-内部可变性--newtype-模式)
+  - [三、生命周期约束与设计模式](#三生命周期约束与设计模式)
+    - [3.1 生命周期约束 → 零拷贝模式](#31-生命周期约束--零拷贝模式)
+    - [3.2 'static 约束 → 单例模式](#32-static-约束--单例模式)
+  - [四、Send/Sync 约束与并发模式](#四sendsync-约束与并发模式)
+    - [4.1 Send 约束 → 线程池模式](#41-send-约束--线程池模式)
+    - [4.2 Sync 约束 → 读写锁模式](#42-sync-约束--读写锁模式)
+  - [五、模式选择决策树](#五模式选择决策树)
+  - [六、模式组合](#六模式组合)
+    - [6.1 RAII + 类型状态](#61-raii--类型状态)
+    - [6.2 Builder + 内部可变性](#62-builder--内部可变性)
+  - [七、总结](#七总结)
+    - [7.1 映射总览](#71-映射总览)
+    - [7.2 设计建议](#72-设计建议)
+  - [*本文档建立了从形式化理论到设计模式的完整桥梁*](#本文档建立了从形式化理论到设计模式的完整桥梁)
+  - [相关概念](#相关概念)
+
 ## 引言：为什么需要理论指导模式？
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **问题**: 面对设计问题时，如何选择正确的模式？
@@ -14,9 +43,11 @@
 ---
 
 ## 一、所有权约束与设计模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 线性逻辑 → RAII 模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **理论基础**: 线性逻辑要求资源恰好使用一次
@@ -546,7 +577,13 @@ impl SharedConfigBuilder {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

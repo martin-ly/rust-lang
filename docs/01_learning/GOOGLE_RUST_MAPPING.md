@@ -6,7 +6,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Google 课程模块概览](#google-课程模块概览)
+- [Day 1: Rust 基础](#day-1-rust-基础)
+  - [Google 内容](#google-内容)
+  - [本项目映射](#本项目映射)
+  - [补充材料](#补充材料)
+- [Day 2: 复合类型与模式匹配](#day-2-复合类型与模式匹配)
+  - [Google 内容](#google-内容)
+  - [本项目映射](#本项目映射)
+  - [补充材料](#补充材料)
+- [Day 3: 泛型、Trait 与生命周期](#day-3-泛型trait-与生命周期)
+  - [Google 内容](#google-内容)
+  - [本项目映射](#本项目映射)
+  - [差异说明](#差异说明)
+  - [补充材料](#补充材料)
+- [Day 4: 深入主题](#day-4-深入主题)
+  - [Google 内容](#google-内容)
+  - [本项目映射](#本项目映射)
+  - [本项目超出的内容](#本项目超出的内容)
+  - [补充材料](#补充材料)
+- [Google 课程有但本项目缺少的内容](#google-课程有但本项目缺少的内容)
+- [综合对比总结](#综合对比总结)
+- [推荐学习路径](#推荐学习路径)
+  - [如果已完成 Google 课程](#如果已完成-google-课程)
+  - [如果用本项目替代 Google 课程](#如果用本项目替代-google-课程)
+- [相关文档](#相关文档)
+
 ## Google 课程模块概览
+>
 > **[来源: Rust Official Docs]**
 
 Google Comprehensive Rust 分为 4 天：
@@ -21,9 +50,11 @@ Google Comprehensive Rust 分为 4 天：
 ---
 
 ## Day 1: Rust 基础
+>
 > **[来源: Rust Official Docs]**
 
 ### Google 内容
+>
 > **[来源: Rust Official Docs]**
 
 - Hello World
@@ -227,6 +258,7 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 - [LFRS_CERTIFICATION_MAPPING.md](./LFRS_CERTIFICATION_MAPPING.md) - LFRS 认证映射
 - [PRAGMATIC_GUIDELINES_CHECKLIST.md](../05_guides/PRAGMATIC_GUIDELINES_CHECKLIST.md) - 代码审查清单
 - [exercises/README.md](../../exercises/README.md) - 练习题总入口
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -237,3 +269,10 @@ Google 课程 Day 4 相对简洁，本项目在以下方面有显著扩展：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [01_learning 目录](./README.md)
+- [上级目录](../README.md)

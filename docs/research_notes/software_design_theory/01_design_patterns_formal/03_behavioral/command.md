@@ -1,20 +1,9 @@
 ﻿# Command 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 行为型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 14 行（Command）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Command 形式化分析](#command-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Command 结构）](#def-11command-结构)
@@ -47,13 +36,67 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 行为型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 14 行（Command）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Command 形式化分析](#command-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Command 结构）](#def-11command-结构)
+    - [Axiom CM1（可存储公理）](#axiom-cm1可存储公理)
+    - [Axiom CM2（闭包即命令公理）](#axiom-cm2闭包即命令公理)
+    - [定理 CM-T1（闭包类型安全定理）](#定理-cm-t1闭包类型安全定理)
+    - [定理 CM-T2（存储与跨线程定理）](#定理-cm-t2存储与跨线程定理)
+    - [推论 CM-C1（纯 Safe Command）](#推论-cm-c1纯-safe-command)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
+  - [典型场景](#典型场景)
+  - [完整场景示例：可撤销文本编辑器](#完整场景示例可撤销文本编辑器)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：命令副作用不可逆](#反例命令副作用不可逆)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Command 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $C$ 为命令类型。Command 是一个三元组 $\mathcal{CM} = (C, \mathit{execute}, \mathit{undo})$，满足：
@@ -69,6 +112,7 @@ $$\mathcal{CM} = \langle C, \mathit{execute}: C \rightarrow \mathrm{Result}\lang
 ---
 
 ### Axiom CM1（可存储公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall c: C,\, c\text{ 可存储；可 defer 执行}$$
@@ -76,6 +120,7 @@ $$\forall c: C,\, c\text{ 可存储；可 defer 执行}$$
 命令对象可存储；可 defer 执行。
 
 ### Axiom CM2（闭包即命令公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；捕获环境为参数}$$
@@ -85,6 +130,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 定理 CM-T1（闭包类型安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 闭包 `Fn() -> R` 或 `FnOnce() -> R` 即命令；由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 类型安全。
@@ -101,6 +147,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 定理 CM-T2（存储与跨线程定理）
+>
 > **[来源: Rust Official Docs]**
 
 `Box<dyn Fn()>` 可存储、可跨边界传递；满足 Send 则可跨线程。
@@ -117,6 +164,7 @@ $$\text{闭包 }\mathit{Fn}() \text{ 或 } \mathit{FnOnce}() \text{ 即命令；
 ---
 
 ### 推论 CM-C1（纯 Safe Command）
+>
 > **[来源: Rust Official Docs]**
 
 Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
@@ -133,6 +181,7 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -144,6 +193,7 @@ Command 为纯 Safe；闭包或 trait 封装操作，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -198,6 +248,7 @@ impl ReversibleCommand for IncrementCommand {
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -479,3 +530,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [03_behavioral 目录](./README.md)
+- [上级目录](../README.md)

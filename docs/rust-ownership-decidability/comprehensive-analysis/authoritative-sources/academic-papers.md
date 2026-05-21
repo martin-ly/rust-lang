@@ -4,10 +4,39 @@
 
 ---
 
+## 📑 目录
+>
+- [学术论文权威来源对齐](#学术论文权威来源对齐)
+  - [📑 目录](#-目录)
+  - [1. 类型理论基础](#1-类型理论基础)
+    - [1.1 线性逻辑 (Linear Logic)](#11-线性逻辑-linear-logic)
+    - [1.2 仿射类型 (Affine Types)](#12-仿射类型-affine-types)
+  - [2. 所有权与借用](#2-所有权与借用)
+    - [2.1 区域类型系统 (Region-Based Memory Management)](#21-区域类型系统-region-based-memory-management)
+    - [2.2 所有权类型系统](#22-所有权类型系统)
+  - [3. 分离逻辑 (Separation Logic)](#3-分离逻辑-separation-logic)
+    - [3.1 基础分离逻辑](#31-基础分离逻辑)
+    - [3.2 并发分离逻辑](#32-并发分离逻辑)
+  - [4. Rust专用研究](#4-rust专用研究)
+    - [4.1 RustBelt](#41-rustbelt)
+    - [4.2 Stacked Borrows / Tree Borrows](#42-stacked-borrows--tree-borrows)
+    - [4.3 Rust中的模式类型](#43-rust中的模式类型)
+  - [5. 验证工具论文](#5-验证工具论文)
+    - [5.1 Creusot](#51-creusot)
+    - [5.2 Prusti](#52-prusti)
+  - [6. 并发理论](#6-并发理论)
+    - [6.1 Relaxed Memory Models](#61-relaxed-memory-models)
+  - [7. 论文引用图谱](#7-论文引用图谱)
+  - [8. 对齐摘要](#8-对齐摘要)
+  - [**覆盖论文**: 15+ 篇核心文献](#覆盖论文-15-篇核心文献)
+  - [相关概念](#相关概念)
+
 ## 1. 类型理论基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 线性逻辑 (Linear Logic)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```yaml
@@ -73,6 +102,7 @@ enum Choice<A, B> {
 ---
 
 ### 1.2 仿射类型 (Affine Types)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```yaml
@@ -582,7 +612,12 @@ Rust内存模型基于:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

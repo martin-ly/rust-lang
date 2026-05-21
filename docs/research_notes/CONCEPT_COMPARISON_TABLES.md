@@ -6,10 +6,57 @@
 
 ---
 
+## 📑 目录
+>
+- [概念对比表汇编](#概念对比表汇编)
+  - [📑 目录](#-目录)
+  - [一、所有权相关对比](#一所有权相关对比)
+    - [Move vs Copy](#move-vs-copy)
+    - [\&T vs \&mut T](#t-vs-mut-t)
+    - [Box vs Rc vs Arc](#box-vs-rc-vs-arc)
+    - [Cell vs RefCell vs Mutex vs RwLock](#cell-vs-refcell-vs-mutex-vs-rwlock)
+  - [二、类型系统对比](#二类型系统对比)
+    - [impl Trait vs dyn Trait](#impl-trait-vs-dyn-trait)
+    - [Sized vs ?Sized](#sized-vs-sized)
+    - [型变对比](#型变对比)
+  - [三、并发对比](#三并发对比)
+    - [Send vs Sync](#send-vs-sync)
+    - [thread::spawn vs tokio::spawn](#threadspawn-vs-tokiospawn)
+    - [Mutex vs RwLock](#mutex-vs-rwlock)
+  - [四、异步对比](#四异步对比)
+    - [async fn vs 普通fn](#async-fn-vs-普通fn)
+    - [Future vs Task](#future-vs-task)
+    - [Pin\<\&mut T\> vs \&mut T](#pinmut-t-vs-mut-t)
+  - [五、分布式模式对比](#五分布式模式对比)
+    - [Saga vs 2PC](#saga-vs-2pc)
+    - [编排式 vs 编制式 Saga](#编排式-vs-编制式-saga)
+    - [CQRS vs CRUD](#cqrs-vs-crud)
+  - [六、工作流对比](#六工作流对比)
+    - [编排 vs 编制](#编排-vs-编制)
+    - [向后补偿 vs 向前补偿](#向后补偿-vs-向前补偿)
+  - [七、证明层级对比](#七证明层级对比)
+    - [L1 vs L2 vs L3](#l1-vs-l2-vs-l3)
+  - [八、快速决策表](#八快速决策表)
+    - [选择何种智能指针？](#选择何种智能指针)
+    - [选择何种锁？](#选择何种锁)
+    - [选择何种并发模型？](#选择何种并发模型)
+    - [选择何种事务模式？](#选择何种事务模式)
+  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+    - [核心研究点](#核心研究点)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 一、所有权相关对比
+>
 > **[来源: Rust Official Docs]**
 
 ### Move vs Copy
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Move | Copy |
@@ -22,6 +69,7 @@
 | **使用场景** | 转移资源所有权 | 简单值复制 |
 
 ### &T vs &mut T
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | &T (不可变借用) | &mut T (可变借用) |
@@ -34,6 +82,7 @@
 | **类比** | 多人阅读 | 一个人修改 |
 
 ### Box vs Rc vs Arc
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Box<T> | Rc<T> | Arc<T> |
@@ -46,6 +95,7 @@
 | **使用场景** | 堆分配唯一值 | 单线程共享 | 多线程共享 |
 
 ### Cell vs RefCell vs Mutex vs RwLock
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Cell<T> | RefCell<T> | Mutex<T> | RwLock<T> |
@@ -61,9 +111,11 @@
 ---
 
 ## 二、类型系统对比
+>
 > **[来源: Rust Official Docs]**
 
 ### impl Trait vs dyn Trait
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | impl Trait | dyn Trait |
@@ -77,6 +129,7 @@
 | **返回类型** | ✅ 支持 | ⚠️ 需要Box |
 
 ### Sized vs ?Sized
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Sized | ?Sized (DST) |
@@ -88,6 +141,7 @@
 | **使用场景** | 通用 | 特化场景 |
 
 ### 型变对比
+>
 > **[来源: Rust Official Docs]**
 
 | 类型构造器 | 型变 | 说明 | 示例 |
@@ -103,9 +157,11 @@
 ---
 
 ## 三、并发对比
+>
 > **[来源: Rust Official Docs]**
 
 ### Send vs Sync
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Send | Sync |
@@ -378,3 +434,10 @@ CPU密集型？
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

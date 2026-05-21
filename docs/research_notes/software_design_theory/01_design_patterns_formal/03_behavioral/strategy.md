@@ -1,20 +1,9 @@
 ﻿# Strategy 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 行为型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 21 行（Strategy）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Strategy 形式化分析](#strategy-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Strategy 结构）](#def-11strategy-结构)
@@ -44,13 +33,66 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 行为型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 21 行（Strategy）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Strategy 形式化分析](#strategy-形式化分析)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Strategy 结构）](#def-11strategy-结构)
+    - [Axiom SR1（接口一致公理）](#axiom-sr1接口一致公理)
+    - [Axiom SR2（所有权独立公理）](#axiom-sr2所有权独立公理)
+    - [定理 SR-T1（trait 多态安全定理）](#定理-sr-t1trait-多态安全定理)
+    - [定理 SR-T2（借用互斥定理）](#定理-sr-t2借用互斥定理)
+    - [推论 SR-C1（纯 Safe Strategy）](#推论-sr-c1纯-safe-strategy)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+  - [典型场景](#典型场景)
+  - [完整场景示例：压缩格式策略](#完整场景示例压缩格式策略)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：策略持有共享可变状态](#反例策略持有共享可变状态)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Strategy 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $C$ 为上下文类型，$S$ 为策略类型。Strategy 是一个三元组 $\mathcal{SG} = (C, S, \mathit{execute})$，满足：
@@ -66,6 +108,7 @@ $$\mathcal{SG} = \langle C, S, \mathit{execute}: C \rightarrow R \rangle$$
 ---
 
 ### Axiom SR1（接口一致公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathit{interchangeable}(s_1, s_2)$$
@@ -73,6 +116,7 @@ $$\forall s_1, s_2: S,\, s_1: \mathcal{T} \land s_2: \mathcal{T} \implies \mathi
 策略接口一致；不同策略对相同输入类型产生相同输出类型。
 
 ### Axiom SR2（所有权独立公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
@@ -82,6 +126,7 @@ $$\Omega(S) \cap \Omega(C) = \emptyset \text{ 或 } C \text{ 拥有 } S$$
 ---
 
 ### 定理 SR-T1（trait 多态安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md) 解析正确性。
@@ -107,6 +152,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 定理 SR-T2（借用互斥定理）
+>
 > **[来源: Rust Official Docs]**
 
 策略调用时借用规则：`&self` 不可变调用策略；`&mut self` 可变时仍满足互斥。由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
@@ -134,6 +180,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 ---
 
 ### 推论 SR-C1（纯 Safe Strategy）
+>
 > **[来源: Rust Official Docs]**
 
 Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
@@ -150,6 +197,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -161,6 +209,7 @@ Strategy 为纯 Safe；trait 多态策略，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -196,6 +245,7 @@ assert_eq!(ctx.run(), 6);
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -435,3 +485,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [03_behavioral 目录](./README.md)
+- [上级目录](../README.md)

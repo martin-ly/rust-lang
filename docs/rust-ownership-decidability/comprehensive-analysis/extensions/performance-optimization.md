@@ -4,10 +4,44 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust性能优化深度指南](#rust性能优化深度指南)
+  - [📑 目录](#-目录)
+  - [1. 编译器优化](#1-编译器优化)
+    - [1.1 LTO与优化级别](#11-lto与优化级别)
+    - [1.2 内联控制](#12-内联控制)
+    - [1.3 分支预测提示](#13-分支预测提示)
+  - [2. 内存优化](#2-内存优化)
+    - [2.1 内存布局优化](#21-内存布局优化)
+    - [2.2  arena分配器](#22--arena分配器)
+    - [2.3 零拷贝技术](#23-零拷贝技术)
+  - [3. 并发性能](#3-并发性能)
+    - [3.1 无锁数据结构](#31-无锁数据结构)
+    - [3.2 线程局部存储](#32-线程局部存储)
+    - [3.3 SIMD优化](#33-simd优化)
+  - [4. 异步性能](#4-异步性能)
+    - [4.1 减少分配](#41-减少分配)
+    - [4.2 优化Waker使用](#42-优化waker使用)
+  - [5. I/O优化](#5-io优化)
+    - [5.1 缓冲策略](#51-缓冲策略)
+    - [5.2 io\_uring (Linux)](#52-io_uring-linux)
+  - [6. 算法优化](#6-算法优化)
+    - [6.1 缓存友好算法](#61-缓存友好算法)
+    - [6.2 哈希表优化](#62-哈希表优化)
+  - [7. 测量与分析](#7-测量与分析)
+    - [7.1 Criterion基准测试](#71-criterion基准测试)
+    - [7.2 性能分析工具](#72-性能分析工具)
+    - [7.3 运行时性能监控](#73-运行时性能监控)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 编译器优化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 LTO与优化级别
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```toml
@@ -24,6 +58,7 @@ opt-level = 3           # 构建脚本也优化
 ```
 
 ### 1.2 内联控制
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -664,7 +699,12 @@ fn process() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

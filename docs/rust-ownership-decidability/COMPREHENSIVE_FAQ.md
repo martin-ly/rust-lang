@@ -4,11 +4,11 @@
 
 ---
 
-## 📚 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
-  - [📚 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📚 目录](#-目录-1)
   - [基础知识](#基础知识)
     - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
     - [Q2: Copy trait 和 Clone trait 有什么区别？](#q2-copy-trait-和-clone-trait-有什么区别)
@@ -35,13 +35,53 @@
     - [Q16: 如何处理复杂的生命周期？](#q16-如何处理复杂的生命周期)
     - [Q17: 如何设计良好的 Rust API？](#q17-如何设计良好的-rust-api)
   - [更多资源](#更多资源)
+  - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
+  - [相关概念](#相关概念)
+
+## 📚 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [Rust 所有权系统 - 全面 FAQ](#rust-所有权系统---全面-faq)
+  - [� 目录](#-目录)
+  - [📚 目录](#-目录-1)
+  - [基础知识](#基础知识)
+    - [Q1: 为什么 Rust 需要所有权系统？](#q1-为什么-rust-需要所有权系统)
+    - [Q2: Copy trait 和 Clone trait 有什么区别？](#q2-copy-trait-和-clone-trait-有什么区别)
+    - [Q3: 什么时候使用引用，什么时候使用智能指针？](#q3-什么时候使用引用什么时候使用智能指针)
+  - [借用规则](#借用规则)
+    - [Q4: 为什么不能同时有可变借用和不可变借用？](#q4-为什么不能同时有可变借用和不可变借用)
+    - [Q5: 如何实现自引用结构体？](#q5-如何实现自引用结构体)
+  - [生命周期](#生命周期)
+    - [Q6: 生命周期省略的三条规则是什么？](#q6-生命周期省略的三条规则是什么)
+    - [Q7: 'static 生命周期是什么意思？](#q7-static-生命周期是什么意思)
+  - [智能指针](#智能指针)
+    - [Q8: Rc 和 Arc 的区别是什么？](#q8-rc-和-arc-的区别是什么)
+    - [Q9: RefCell 和 Mutex 的区别是什么？](#q9-refcell-和-mutex-的区别是什么)
+  - [并发与并行](#并发与并行)
+    - [Q10: Send 和 Sync trait 有什么区别？](#q10-send-和-sync-trait-有什么区别)
+    - [Q11: 如何避免死锁？](#q11-如何避免死锁)
+  - [形式化方法](#形式化方法)
+    - [Q12: RustBelt 是什么？](#q12-rustbelt-是什么)
+    - [Q13: Coq 形式化证明有什么用？](#q13-coq-形式化证明有什么用)
+  - [工具使用](#工具使用)
+    - [Q14: Miri 能检测什么？](#q14-miri-能检测什么)
+    - [Q15: Kani 和 Miri 有什么区别？](#q15-kani-和-miri-有什么区别)
+  - [最佳实践](#最佳实践)
+    - [Q16: 如何处理复杂的生命周期？](#q16-如何处理复杂的生命周期)
+    - [Q17: 如何设计良好的 Rust API？](#q17-如何设计良好的-rust-api)
+  - [更多资源](#更多资源)
+  - [*FAQ 持续更新中，如有问题请提交 Issue*](#faq-持续更新中如有问题请提交-issue)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 基础知识
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Q1: 为什么 Rust 需要所有权系统？
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **A**: Rust 的所有权系统是为了在编译时保证内存安全，而不需要垃圾回收器。
@@ -719,3 +759,10 @@ pub enum MyError {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

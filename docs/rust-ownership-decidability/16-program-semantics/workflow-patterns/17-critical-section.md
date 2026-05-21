@@ -1,11 +1,26 @@
 # 17 临界区模式 (Critical Section)
 
+## 📑 目录
+>
+- [17 临界区模式 (Critical Section)](#17-临界区模式-critical-section)
+  - [📑 目录](#-目录)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [形式化表示](#形式化表示)
+  - [Rust 实现示例](#rust-实现示例)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [相关概念](#相关概念)
+
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 临界区模式确保两个或多个活动的特定区域互斥执行。这是并发编程中最基本的同步原语之一。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -15,6 +30,7 @@ $$
 其中 $R$ 是共享资源，$CS_i$ 是第 $i$ 个活动的临界区代码。
 
 ### 形式化表示
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **状态机表示：**
@@ -302,6 +318,7 @@ $$
 - 优先使用高级抽象（如 channel）
 - 考虑使用读写锁提高并发度
 - 使用作用域模式确保锁释放
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -313,7 +330,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

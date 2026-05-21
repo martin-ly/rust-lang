@@ -1,5 +1,36 @@
 ﻿# 安全可判定机制总览
 
+## 📑 目录
+>
+- [安全可判定机制总览](#安全可判定机制总览)
+  - [📑 目录](#-目录)
+  - [一、何为“安全的可判定的机制”](#一何为安全的可判定的机制)
+  - [二、机制清单与形式化对应总表](#二机制清单与形式化对应总表)
+  - [三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例）](#三各机制分节概念定义属性关系解释论证形式证明反例)
+    - [3.1 所有权](#31-所有权)
+    - [3.2 借用](#32-借用)
+    - [3.3 生命周期](#33-生命周期)
+    - [3.4 Send](#34-send)
+    - [3.5 Sync](#35-sync)
+    - [3.6 Pin/Unpin](#36-pinunpin)
+    - [3.7 Future/async](#37-futureasync)
+    - [3.8 类型系统](#38-类型系统)
+    - [3.9 match / for / ?](#39-match--for--)
+    - [3.10 通道 / Mutex / thread::spawn](#310-通道--mutex--threadspawn)
+    - [3.11 RefCell 借用（运行时可判定）](#311-refcell-借用运行时可判定)
+  - [四、思维表征入口](#四思维表征入口)
+  - [六、并发与异步族、Trait 族 四维对比表（完备特性对比子集）](#六并发与异步族trait-族-四维对比表完备特性对比子集)
+    - [6.1 并发与异步族](#61-并发与异步族)
+    - [6.2 Trait 与多态族](#62-trait-与多态族)
+  - [七、相关文档](#七相关文档)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -10,6 +41,7 @@
 ---
 
 ## 一、何为“安全的可判定的机制”
+>
 > **[来源: Rust Official Docs]**
 
 - **安全**：在 Safe Rust 下，违反机制会导致编译错误或类型系统拒绝，从而避免内存安全/数据竞争等 UB。
@@ -20,6 +52,7 @@
 ---
 
 ## 二、机制清单与形式化对应总表
+>
 > **[来源: Rust Official Docs]**
 
 | 机制 | 可判定性 | 形式化文档 | Def/定理 | 反例 |
@@ -41,9 +74,11 @@
 ---
 
 ## 三、各机制分节（概念定义·属性关系·解释论证·形式证明·反例）
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：唯一所有者、移动语义、Copy/Clone 区分；形式化见 [ownership_model](formal_methods/ownership_model.md) 规则 1–3、Def 1.1–1.5。
@@ -53,6 +88,7 @@
 - **反例**：使用已移动值、双重释放；[FORMAL_PROOF_SYSTEM_GUIDE](./FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引。
 
 ### 3.2 借用
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：&T/&mut T、可变独占、不可变可多；[borrow_checker_proof](formal_methods/borrow_checker_proof.md) 规则 5–8。
@@ -62,6 +98,7 @@
 - **反例**：双重可变借用、悬垂引用。
 
 ### 3.3 生命周期
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：outlives、区域、NLL；[lifetime_formalization](formal_methods/lifetime_formalization.md) Axiom LF1–LF2、Def 1.4。
@@ -71,6 +108,7 @@
 - **反例**：返回局部引用、存储短生命周期引用。
 
 ### 3.4 Send
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：可安全跨线程**转移所有权**；[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SEND1。
@@ -80,6 +118,7 @@
 - **反例**：Rc 跨线程、非 Send 闭包 spawn。
 
 ### 3.5 Sync
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：可安全跨线程**共享引用** &T；[send_sync_formalization](formal_methods/send_sync_formalization.md) Def SYNC1。
@@ -89,6 +128,7 @@
 - **反例**：Cell 跨线程共享、Rc &T 跨线程。
 
 ### 3.6 Pin/Unpin
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：位置稳定、自引用、!Unpin 堆固定；[pin_self_referential](formal_methods/pin_self_referential.md) Def 1.1–2.2。
@@ -98,6 +138,7 @@
 - **反例**：未 Pin 自引用、栈上 !Unpin。
 
 ### 3.7 Future/async
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：Poll、Ready/Pending、async 状态机；[async_state_machine](formal_methods/async_state_machine.md) Def 4.1–5.2。
@@ -107,6 +148,7 @@
 - **反例**：非 Send 跨 await、未 Pin 移动 Future。
 
 ### 3.8 类型系统
+>
 > **[来源: Rust Official Docs]**
 
 - **概念定义**：类型规则、进展性、保持性；[type_system_foundations](type_theory/type_system_foundations.md)。
@@ -243,3 +285,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

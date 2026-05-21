@@ -7,7 +7,29 @@
 
 ---
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🎯 概述](#概述)
+  - [对比其他 ORM](#对比其他-orm)
+- [🏗️ 架构设计](#架构设计)
+- [💡 核心特性](#核心特性)
+  - [编译时查询检查](#编译时查询检查)
+  - [类型安全](#类型安全)
+  - [异步原生](#异步原生)
+- [🚀 高级用法](#高级用法)
+  - [连接池](#连接池)
+  - [事务处理](#事务处理)
+  - [查询构建](#查询构建)
+  - [迁移](#迁移)
+- [📊 性能优化](#性能优化)
+  - [基准数据](#基准数据)
+  - [优化建议](#优化建议)
+- [🧪 测试](#测试)
+- [🔗 参考资源](#参考资源)
+
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [SQLx 深度解析](#sqlx-深度解析)
@@ -34,6 +56,7 @@
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 SQLx 是一个异步纯 Rust SQL 工具包，提供：
@@ -44,6 +67,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 - **数据库无关**: 支持 PostgreSQL、MySQL、SQLite
 
 ### 对比其他 ORM
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | SQLx | Diesel | Sea-ORM |
@@ -57,6 +81,7 @@ SQLx 是一个异步纯 Rust SQL 工具包，提供：
 ---
 
 ## 🏗️ 架构设计
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -77,9 +102,11 @@ graph TD
 ---
 
 ## 💡 核心特性
+>
 > **[来源: Rust Official Docs]**
 
 ### 编译时查询检查
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -114,6 +141,7 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
 - 参数数量匹配
 
 ### 类型安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -135,6 +163,7 @@ struct UserWithPosts {
 ```
 
 ### 异步原生
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -159,9 +188,11 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
 ---
 
 ## 🚀 高级用法
+>
 > **[来源: Rust Official Docs]**
 
 ### 连接池
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -201,6 +232,7 @@ impl Database {
 ```
 
 ### 事务处理
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -464,7 +496,12 @@ mod tests {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

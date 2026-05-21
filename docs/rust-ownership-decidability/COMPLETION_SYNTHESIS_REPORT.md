@@ -1,6 +1,40 @@
 # Rust 所有权系统可判定性 - 完成综合报告
 
+## 📑 目录
+>
+- [Rust 所有权系统可判定性 - 完成综合报告](#rust-所有权系统可判定性---完成综合报告)
+  - [📑 目录](#-目录)
+  - [Completion Synthesis Report](#completion-synthesis-report)
+  - [📊 完成度统计](#-完成度统计)
+    - [文档完成度](#文档完成度)
+    - [Coq 证明完成度](#coq-证明完成度)
+    - [模块完成度](#模块完成度)
+  - [🎯 综合梳理成果](#-综合梳理成果)
+    - [新增/优化文档](#新增优化文档)
+    - [知识体系优化](#知识体系优化)
+  - [🔬 形式化证明成果](#-形式化证明成果)
+    - [核心定理 (全部完成)](#核心定理-全部完成)
+    - [Rust 1.94 特性形式化](#rust-194-特性形式化)
+  - [📚 案例研究覆盖](#-案例研究覆盖)
+    - [按领域统计](#按领域统计)
+  - [✅ 质量保证验证](#-质量保证验证)
+    - [内容完整性](#内容完整性)
+    - [形式化完整性](#形式化完整性)
+    - [引用完整性](#引用完整性)
+  - [🎓 学习路径总结](#-学习路径总结)
+    - [快速导航](#快速导航)
+    - [问题诊断](#问题诊断)
+  - [📈 项目演进总结](#-项目演进总结)
+    - [版本里程碑](#版本里程碑)
+    - [V2.0 特性](#v20-特性)
+  - [🎉 最终总结](#-最终总结)
+    - [项目价值](#项目价值)
+    - [核心成果](#核心成果)
+    - [推荐使用流程](#推荐使用流程)
+  - [相关概念](#相关概念)
+
 ## Completion Synthesis Report
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **报告日期**: 2026-03-09
@@ -13,9 +47,11 @@
 ---
 
 ## 📊 完成度统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 文档完成度
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -283,6 +319,7 @@ Rust 1.94 特性:   6 个          ✅
 - 最后更新: 2026-03-09
 - Rust 版本: 1.94
 - 维护者: Rust-Ownership-Decidability Team
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -294,7 +331,13 @@ Rust 1.94 特性:   6 个          ✅
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

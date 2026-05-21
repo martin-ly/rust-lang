@@ -7,6 +7,33 @@
 
 ---
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🔬 什么是 Miri](#什么是-miri)
+- [⚙️ 安装与运行](#安装与运行)
+  - [安装 Miri](#安装-miri)
+  - [基本命令](#基本命令)
+  - [常用环境变量](#常用环境变量)
+- [🐛 Miri 捕获的常见 UB 模式](#miri-捕获的常见-ub-模式)
+  - [1. Use-after-free (UAF)](#1-use-after-free-uaf)
+  - [2. Data Race (数据竞争)](#2-data-race-数据竞争)
+  - [3. Aliasing Violations (别名违规)](#3-aliasing-violations-别名违规)
+  - [4. 其他常见 UB](#4-其他常见-ub)
+- [🌲 Tree Borrows vs Stacked Borrows](#tree-borrows-vs-stacked-borrows)
+  - [Stacked Borrows (默认)](#stacked-borrows-默认)
+  - [Tree Borrows (实验性，推荐)](#tree-borrows-实验性推荐)
+- [✍️ 编写 Miri 友好测试的实战流程](#编写-miri-友好测试的实战流程)
+  - [步骤 1：隔离 unsafe 代码到独立测试](#步骤-1隔离-unsafe-代码到独立测试)
+  - [步骤 2：为 Miri 添加条件编译标记](#步骤-2为-miri-添加条件编译标记)
+  - [步骤 3：处理 Miri 的隔离限制](#步骤-3处理-miri-的隔离限制)
+  - [步骤 4：本地开发流程](#步骤-4本地开发流程)
+- [⚠️ Miri 的局限性](#miri-的局限性)
+- [🔧 CI 集成](#ci-集成)
+  - [GitHub Actions 示例](#github-actions-示例)
+  - [策略建议](#策略建议)
+- [📖 参考文献](#参考文献)
+
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
@@ -498,7 +525,13 @@ CI 策略矩阵:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [05_guides 目录](./README.md)
+- [上级目录](../README.md)

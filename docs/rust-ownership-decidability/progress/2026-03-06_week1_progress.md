@@ -1,9 +1,37 @@
 # 进度报告: Week 1 (2026-03-06)
 
+## 📑 目录
+>
+- [进度报告: Week 1 (2026-03-06)](#进度报告-week-1-2026-03-06)
+  - [📑 目录](#-目录)
+  - [本周完成工作](#本周完成工作)
+    - [✅ 1. Coq 形式化基础 (80%)](#-1-coq-形式化基础-80)
+      - [Types.v 完成内容](#typesv-完成内容)
+      - [Expressions.v 完成内容](#expressionsv-完成内容)
+      - [Termination.v 完成内容](#terminationv-完成内容)
+    - [✅ 2. 元模型文档完善 (100%)](#-2-元模型文档完善-100)
+    - [✅ 3. 核心定理草拟 (100%)](#-3-核心定理草拟-100)
+  - [进度统计](#进度统计)
+  - [关键技术成果](#关键技术成果)
+    - [1. Linearizability 的 Coq 定义](#1-linearizability-的-coq-定义)
+    - [2. 类型秩的定义](#2-类型秩的定义)
+    - [3. 终止性度量](#3-终止性度量)
+  - [遇到的问题和解决方案](#遇到的问题和解决方案)
+  - [下周计划 (Week 2)](#下周计划-week-2)
+    - [高优先级](#高优先级)
+    - [中优先级](#中优先级)
+  - [度量指标](#度量指标)
+  - [风险评估更新](#风险评估更新)
+  - [下周里程碑](#下周里程碑)
+  - [**当前阶段**: Phase 1 (基础构建) - Week 1 of 12](#当前阶段-phase-1-基础构建---week-1-of-12)
+  - [相关概念](#相关概念)
+
 ## 本周完成工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 1. Coq 形式化基础 (80%)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 创建了完整的 Coq 项目结构：
@@ -22,6 +50,7 @@ coq-formalization/
 ```
 
 #### Types.v 完成内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [x] 基础类型定义（所有 Rust 基础类型）
@@ -209,7 +238,13 @@ Definition te_measure (Γ : type_env) : nat :=
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

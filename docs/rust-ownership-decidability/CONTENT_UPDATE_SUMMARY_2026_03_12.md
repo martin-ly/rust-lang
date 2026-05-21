@@ -6,12 +6,44 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权可判定性内容更新报告](#rust-所有权可判定性内容更新报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [更新统计](#更新统计)
+  - [新增文档](#新增文档)
+    - [1. 网络资源对齐分析报告](#1-网络资源对齐分析报告)
+    - [2. RefinedRust 深度解析](#2-refinedrust-深度解析)
+    - [3. Gillian-Rust 介绍](#3-gillian-rust-介绍)
+    - [4. Rust 标准库验证计划](#4-rust-标准库验证计划)
+  - [更新文档](#更新文档)
+    - [5. 学术参考文献更新](#5-学术参考文献更新)
+    - [6. 验证工具概览更新](#6-验证工具概览更新)
+  - [研究覆盖更新](#研究覆盖更新)
+    - [顶级会议论文覆盖](#顶级会议论文覆盖)
+    - [工具状态更新](#工具状态更新)
+  - [持续推进计划](#持续推进计划)
+    - [Phase 1: 已完成 ✅](#phase-1-已完成-)
+    - [Phase 2: 建议执行 (未来 2-4 周)](#phase-2-建议执行-未来-2-4-周)
+    - [Phase 3: 长期维护 (持续)](#phase-3-长期维护-持续)
+  - [内容质量评估](#内容质量评估)
+    - [新增内容质量](#新增内容质量)
+    - [与网络资源对齐度](#与网络资源对齐度)
+  - [参考资源](#参考资源)
+    - [主要引用来源](#主要引用来源)
+  - [结论](#结论)
+  - [**最后更新**: 2026-03-12](#最后更新-2026-03-12)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本次更新对 `rust-ownership-decidability` 文件夹进行了全面的网络权威资源对齐，重点补充了 2024-2025 年顶级会议(PLDI/ICFP/SOSP)的最新研究成果。
 
 ### 更新统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 类别 | 数量 | 说明 |
@@ -24,6 +56,7 @@
 ---
 
 ## 新增文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 网络资源对齐分析报告
@@ -252,7 +285,13 @@ RefinedRust 突破:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

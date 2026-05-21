@@ -1,4 +1,10 @@
 # Concurrency（并发模型）
+>
+> **层次定位**: L3 高级概念 / 并发子域
+> **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L2 Trait](../02_intermediate/01_traits.md)
+> **后置延伸**: [L4 RustBelt](../04_formal/04_rustbelt.md) · [L6 Tokio 生态](../06_ecosystem/03_core_crates.md) · [L7 AI 并发](../07_future/01_ai_integration.md)
+> **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 并发模式 → 工程实现
+> **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由 → T-042 死锁不可判定但可检测
 
 > **层级**: L3 高级概念
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Traits](../02_intermediate/01_traits.md) · [Smart Pointers](../02_intermediate/03_memory_management.md)

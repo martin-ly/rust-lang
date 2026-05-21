@@ -5,10 +5,35 @@
 
 ---
 
+## 📑 目录
+>
+- [闭包速查卡 (Closures Cheatsheet)](#闭包速查卡-closures-cheatsheet)
+  - [📑 目录](#-目录)
+  - [闭包基础](#闭包基础)
+    - [定义闭包](#定义闭包)
+    - [捕获环境](#捕获环境)
+  - [闭包 Trait](#闭包-trait)
+    - [Trait 使用示例](#trait-使用示例)
+  - [常见用法](#常见用法)
+    - [迭代器方法](#迭代器方法)
+    - [高阶函数](#高阶函数)
+  - [相关文档](#相关文档)
+  - [Rust 1.95+ 在闭包与函数式编程中的深度应用](#rust-195-在闭包与函数式编程中的深度应用)
+    - [ControlFlow 在函数式控制流中的应用](#controlflow-在函数式控制流中的应用)
+    - [LazyLock 在闭包工厂中的应用](#lazylock-在闭包工厂中的应用)
+    - [array\_windows 在函数式数据处理中的应用](#array_windows-在函数式数据处理中的应用)
+    - [数学常量在函数式数值计算中的应用](#数学常量在函数式数值计算中的应用)
+    - [生产场景：事件处理系统](#生产场景事件处理系统)
+    - [总结](#总结)
+  - [**最后更新**: 2026-05-08 (闭包场景深度整合)](#最后更新-2026-05-08-闭包场景深度整合)
+  - [相关概念](#相关概念)
+
 ## 闭包基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 定义闭包
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -27,6 +52,7 @@ let greet = |name| {
 ```
 
 ### 捕获环境
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -50,6 +76,7 @@ let closure = move || println!("{}", s);
 ---
 
 ## 闭包 Trait
+>
 > **[来源: Rust Official Docs]**
 
 | Trait | 描述 | 使用场景 |
@@ -59,6 +86,7 @@ let closure = move || println!("{}", s);
 | `FnOnce` | 移动捕获 | 只能调用一次 |
 
 ### Trait 使用示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -87,9 +115,11 @@ where
 ---
 
 ## 常见用法
+>
 > **[来源: Rust Official Docs]**
 
 ### 迭代器方法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -106,6 +136,7 @@ let sum = nums.iter().fold(0, |acc, x| acc + x);
 ```
 
 ### 高阶函数
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -122,6 +153,7 @@ where
 ---
 
 ## 相关文档
+>
 > **[来源: Rust Official Docs]**
 
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md)
@@ -131,6 +163,7 @@ where
 ---
 
 ## Rust 1.95+ 在闭包与函数式编程中的深度应用
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 函数式编程模式
@@ -138,6 +171,7 @@ where
 ---
 
 ### ControlFlow 在函数式控制流中的应用
+>
 > **[来源: Rust Official Docs]**
 
 **场景**: 迭代器链中的提前终止，比 `try_fold` 更灵活
@@ -561,3 +595,10 @@ pub fn setup_processor() -> EventProcessor {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [quick_reference 目录](./README.md)
+- [上级目录](../README.md)

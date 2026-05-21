@@ -1,4 +1,10 @@
 # Borrowing（借用）
+> **层次定位**: L1 基础概念 / 借用子域
+> **前置依赖**: [L1 所有权](./01_ownership.md)
+> **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
+> **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用 → Send/Sync
+> **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含 → T-012 悬垂引用不可达
+
 
 > **层级**: L1 基础概念
 > **前置概念**: [Ownership](./01_ownership.md)

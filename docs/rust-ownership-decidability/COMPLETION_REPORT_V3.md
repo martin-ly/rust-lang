@@ -4,7 +4,37 @@
 
 ---
 
+## 📑 目录
+>
+- [项目完成报告 v3.0](#项目完成报告-v30)
+  - [📑 目录](#-目录)
+  - [完成状态概览](#完成状态概览)
+  - [本次推进新增内容](#本次推进新增内容)
+    - [1. Rust 1.93.1 特性分析](#1-rust-1931-特性分析)
+    - [2. 可视化资源新增](#2-可视化资源新增)
+      - [思维导图](#思维导图)
+      - [对比矩阵](#对比矩阵)
+      - [决策树](#决策树)
+    - [3. 反例与逻辑论证](#3-反例与逻辑论证)
+    - [4. 目录结构完善](#4-目录结构完善)
+      - [新增目录README](#新增目录readme)
+  - [形式化论证统计](#形式化论证统计)
+    - [定理与证明](#定理与证明)
+    - [思维表征统计](#思维表征统计)
+  - [版本对齐确认](#版本对齐确认)
+  - [质量指标](#质量指标)
+    - [内容完整性](#内容完整性)
+    - [文档结构](#文档结构)
+  - [学习路径推荐](#学习路径推荐)
+    - [初学者 (所有权基础)](#初学者-所有权基础)
+    - [进阶开发者 (形式化理解)](#进阶开发者-形式化理解)
+    - [架构师 (系统设计)](#架构师-系统设计)
+  - [后续维护建议](#后续维护建议)
+  - [项目统计](#项目统计)
+  - [相关概念](#相关概念)
+
 ## 完成状态概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -33,9 +63,11 @@
 ---
 
 ## 本次推进新增内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. Rust 1.93.1 特性分析
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 路径 | 内容 |
@@ -298,6 +330,7 @@
 
      Formal · Rigorous · Comprehensive · Version-Aligned · Complete
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -309,7 +342,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

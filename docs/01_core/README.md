@@ -1,4 +1,10 @@
 > **权威来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **层次定位**: L1-L2 基础-进阶 / 核心概念总览
+> **前置依赖**: 无（入门入口）
+> **后置延伸**: [docs 指南](../03_guides/) · [docs 参考](../02_reference/) · [concept L1-L2](../../concept/)
+> **跨层映射**: docs→concept 工程映射 | L1-L2 概念索引
+> **定理链编号**: T-001 → T-010 → T-020 → T-030
+
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 TRPL、Rust Reference、Rustonomicon 来源标注 [来源: Authority Source Sprint Batch 8]
 
@@ -12,6 +18,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 核心概念 (Core Concepts)](#rust-核心概念-core-concepts)
@@ -39,13 +46,16 @@
   - [6. 与 Wikipedia 概念对齐](#6-与-wikipedia-概念对齐)
   - [学习路径](#学习路径)
   - [相关链接](#相关链接)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 1. 所有权 (Ownership)
+>
 > **[来源: Rust Official Docs]**
 
 ### 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 所有权是 Rust 最核心、最独特的语言特性。每个值在任意时刻有且仅有一个**所有者 (owner)**，当所有者离开作用域时，值被**丢弃 (drop)**。
@@ -58,6 +68,7 @@
 ```
 
 ### 所有权规则
+>
 > **[来源: Rust Official Docs]**
 
 1. 每个值有一个所有者
@@ -65,6 +76,7 @@
 3. 所有者离开作用域，值被丢弃
 
 ### 移动语义 (Move Semantics)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -74,6 +86,7 @@ let s2 = s1; // s1 的所有权移动到 s2
 ```
 
 ### Copy 类型
+>
 > **[来源: Rust Official Docs]**
 
 实现 `Copy` trait 的类型在赋值时**复制**而非**移动**：
@@ -94,9 +107,11 @@ println!("x = {}, y = {}", x, y); // ✅
 ---
 
 ## 2. 借用与引用 (Borrowing & References)
+>
 > **[来源: Rust Official Docs]**
 
 ### 概念定义
+>
 > **[来源: Rust Official Docs]**
 
 **借用 (Borrowing)** 允许在不转移所有权的情况下临时访问数据。
@@ -112,6 +127,7 @@ println!("'{}' 的长度是 {}", s1, len); // ✅ s1 仍然有效
 ```
 
 ### 借用规则
+>
 > **[来源: Rust Official Docs]**
 
 1. **任意数量**的不可变引用 (`&T`)
@@ -132,6 +148,7 @@ r3.push_str(" world");
 ```
 
 ### 悬垂引用防护
+>
 > **[来源: Rust Official Docs]**
 
 Rust 编译器确保引用永远不会比被引用的数据活得更长：
@@ -146,6 +163,7 @@ fn dangle() -> &String { // ❌ 编译错误
 ---
 
 ## 3. 生命周期 (Lifetimes)
+>
 > **[来源: Rust Official Docs]**
 
 ### 概念定义
@@ -308,7 +326,6 @@ unsafe {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

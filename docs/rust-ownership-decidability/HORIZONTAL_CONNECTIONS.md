@@ -4,10 +4,51 @@
 
 ---
 
+## 📑 目录
+>
+- [横向关联论证：主题间的深层联系](#横向关联论证主题间的深层联系)
+  - [📑 目录](#-目录)
+  - [一、概念关联网络](#一概念关联网络)
+    - [1.1 核心概念的三角关系](#11-核心概念的三角关系)
+    - [1.2 类型系统与所有权系统的融合](#12-类型系统与所有权系统的融合)
+    - [1.3 Linearizability 的中心地位](#13-linearizability-的中心地位)
+  - [二、定理关联网络](#二定理关联网络)
+    - [2.1 五大定理的依赖关系](#21-五大定理的依赖关系)
+    - [2.2 定理关联的详细论证](#22-定理关联的详细论证)
+    - [2.3 循环依赖的处理](#23-循环依赖的处理)
+  - [三、证明技术的关联](#三证明技术的关联)
+    - [3.1 证明方法的协同](#31-证明方法的协同)
+    - [3.2 归纳假设的传递](#32-归纳假设的传递)
+    - [3.3 对称性与对偶性](#33-对称性与对偶性)
+  - [四、语义层面的关联](#四语义层面的关联)
+    - [4.1 静态与动态的联系](#41-静态与动态的联系)
+    - [4.2 大步与小步的互补](#42-大步与小步的互补)
+    - [4.3 操作语义与类型系统的呼应](#43-操作语义与类型系统的呼应)
+  - [五、Rust 语言特性的关联](#五rust-语言特性的关联)
+    - [5.1 语言特性的理论基础](#51-语言特性的理论基础)
+    - [5.2 特性组合的涌现性](#52-特性组合的涌现性)
+    - [5.3 与 Rust 实际实现的关联](#53-与-rust-实际实现的关联)
+  - [六、跨理论的关联](#六跨理论的关联)
+    - [6.1 与 Featherweight Rust 的关联](#61-与-featherweight-rust-的关联)
+    - [6.2 与 Oxide 的关联](#62-与-oxide-的关联)
+    - [6.3 与 RustBelt 的关联](#63-与-rustbelt-的关联)
+  - [七、应用层面的关联](#七应用层面的关联)
+    - [7.1 对 Rust 编程的指导](#71-对-rust-编程的指导)
+    - [7.2 对编译器开发的指导](#72-对编译器开发的指导)
+    - [7.3 对形式化验证的指导](#73-对形式化验证的指导)
+  - [八、总结：关联网络的价值](#八总结关联网络的价值)
+    - [8.1 为什么关联性重要？](#81-为什么关联性重要)
+    - [8.2 关联网络的三个层次](#82-关联网络的三个层次)
+    - [8.3 完整图景](#83-完整图景)
+  - [**下一篇**：阅读 `HISTORICAL_EVOLUTION.md` 了解理论的历史演化。](#下一篇阅读-historical_evolutionmd-了解理论的历史演化)
+  - [相关概念](#相关概念)
+
 ## 一、概念关联网络
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心概念的三角关系
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -52,6 +93,7 @@
 ```
 
 ### 1.2 类型系统与所有权系统的融合
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **传统观点**：类型系统和所有权是分开的
@@ -725,7 +767,7 @@ RustBelt：精确但复杂，覆盖 unsafe
 
 ---
 
-**下一篇**：阅读 `HISTORICAL_EVOLUTION.md` 了解理论的历史演化。
+**下一篇**：阅读 `HISTORICAL_EVOLUTION.md` 了解理论的历史演化
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -737,7 +779,13 @@ RustBelt：精确但复杂，覆盖 unsafe
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

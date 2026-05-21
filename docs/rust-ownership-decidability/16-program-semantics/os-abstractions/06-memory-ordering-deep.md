@@ -1,6 +1,48 @@
 # 内存序的深度语义分析
 
+## 📑 目录
+>
+- [内存序的深度语义分析](#内存序的深度语义分析)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. Happens-Before 关系的形式化](#2-happens-before-关系的形式化)
+    - [2.1 基本定义](#21-基本定义)
+    - [2.2 Happens-Before 的构成](#22-happens-before-的构成)
+    - [2.3 Rust 中的同步边](#23-rust-中的同步边)
+  - [3. 五种内存序的精确语义](#3-五种内存序的精确语义)
+    - [3.1 Relaxed 语义](#31-relaxed-语义)
+    - [3.2 Acquire/Release 语义](#32-acquirerelease-语义)
+    - [3.3 AcqRel 语义](#33-acqrel-语义)
+    - [3.4 SeqCst 语义](#34-seqcst-语义)
+    - [3.5 内存序对比表](#35-内存序对比表)
+  - [4. Rust 代码示例](#4-rust-代码示例)
+    - [4.1 Relaxed 使用示例](#41-relaxed-使用示例)
+    - [4.2 Acquire-Release 使用示例](#42-acquire-release-使用示例)
+    - [4.3 SeqCst 使用示例](#43-seqcst-使用示例)
+  - [5. 内存模型的公理化](#5-内存模型的公理化)
+    - [5.1 C++11 内存模型基础](#51-c11-内存模型基础)
+    - [5.2 公理化规则](#52-公理化规则)
+    - [5.3 Coherence 规则](#53-coherence-规则)
+  - [6. 弱内存行为的形式化](#6-弱内存行为的形式化)
+    - [6.1 弱内存模型的特征](#61-弱内存模型的特征)
+    - [6.2 Store Buffer 的形式化](#62-store-buffer-的形式化)
+    - [6.3 内存屏障的形式化](#63-内存屏障的形式化)
+  - [7. 常见模式的内存序选择](#7-常见模式的内存序选择)
+    - [7.1 计数器](#71-计数器)
+    - [7.2 标志位与数据传递](#72-标志位与数据传递)
+    - [7.3 无锁队列](#73-无锁队列)
+  - [8. 常见陷阱与最佳实践](#8-常见陷阱与最佳实践)
+    - [8.1 常见错误](#81-常见错误)
+    - [8.2 最佳实践](#82-最佳实践)
+  - [9. 综合安全论证](#9-综合安全论证)
+    - [9.1 内存序正确性定理](#91-内存序正确性定理)
+    - [9.2 不变式总结](#92-不变式总结)
+  - [10. 总结](#10-总结)
+  - [这些形式化定义确保了 Rust 并发程序在使用原子操作时的正确性和可移植性。](#这些形式化定义确保了-rust-并发程序在使用原子操作时的正确性和可移植性)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 内存序（Memory Ordering）定义了原子操作之间的可见性和执行顺序保证。
@@ -8,9 +50,11 @@
 本文档深入分析 Rust 中五种内存序的形式化语义。
 
 ## 2. Happens-Before 关系的形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 基本定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -705,7 +749,7 @@ I5 (无数据竞争):
 5. **常见模式**：计数器、标志位、无锁队列
 6. **最佳实践**：避免常见陷阱，选择合适的内存序
 
-这些形式化定义确保了 Rust 并发程序在使用原子操作时的正确性和可移植性。
+这些形式化定义确保了 Rust 并发程序在使用原子操作时的正确性和可移植性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -717,7 +761,12 @@ I5 (无数据竞争):
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

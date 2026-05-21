@@ -8,7 +8,27 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust Formal Full Model — English Summary](#rust-formal-full-model--english-summary)
+  - [📑 目录](#-目录)
+  - [Overview](#overview)
+  - [Core Mechanisms and Axiom Layer](#core-mechanisms-and-axiom-layer)
+  - [Theorem Dependency DAG (Simplified)](#theorem-dependency-dag-simplified)
+  - [Axiom → Composition Theorem DAG (Pillars 1+3)](#axiom--composition-theorem-dag-pillars-13)
+  - [Key Axioms (Unified Numbering)](#key-axioms-unified-numbering)
+  - [Formal Language and Proofs](#formal-language-and-proofs)
+  - [Related Documents](#related-documents)
+  - [🆕 Rust 1.94 更新](#-rust-194-更新)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+
 ## Overview
+>
 > **[来源: Rust Official Docs]**
 
 A unified formal system covering **ownership + borrow + lifetime + type + trait + async + pin**, with axiom lists, theorem dependency DAG, and mappings to sub-documents.
@@ -16,6 +36,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Core Mechanisms and Axiom Layer
+>
 > **[来源: Rust Official Docs]**
 
 | Mechanism | Axioms/Definitions | Sub-document |
@@ -34,6 +55,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Theorem Dependency DAG (Simplified)
+>
 > **[来源: Rust Official Docs]**
 
 ```text

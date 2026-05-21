@@ -1,9 +1,34 @@
 # 进度报告: 2026-03-05 初始设置完成
 
+## 📑 目录
+>
+- [进度报告: 2026-03-05 初始设置完成](#进度报告-2026-03-05-初始设置完成)
+  - [📑 目录](#-目录)
+  - [今日完成工作](#今日完成工作)
+    - [1. 文献调研与总结 ✅](#1-文献调研与总结-)
+    - [2. 研究计划制定 ✅](#2-研究计划制定-)
+    - [3. 元模型初步定义 ✅](#3-元模型初步定义-)
+    - [4. 核心定理草拟 ✅](#4-核心定理草拟-)
+    - [5. 项目结构搭建 ✅](#5-项目结构搭建-)
+  - [关键发现](#关键发现)
+    - [1. 可判定性问题的现状](#1-可判定性问题的现状)
+    - [2. 元模型缺失的领域](#2-元模型缺失的领域)
+    - [3. 证明助手选择](#3-证明助手选择)
+  - [下一步行动计划](#下一步行动计划)
+    - [Week 1-2: 深度文献分析](#week-1-2-深度文献分析)
+    - [Week 3-4: 元模型精化](#week-3-4-元模型精化)
+    - [关键问题待解决](#关键问题待解决)
+  - [风险跟踪](#风险跟踪)
+  - [度量指标](#度量指标)
+  - [**下次报告**: 2026-03-12](#下次报告-2026-03-12)
+  - [相关概念](#相关概念)
+
 ## 今日完成工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 文献调研与总结 ✅
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 完成了对 Rust 所有权系统形式化的全面调研，识别出以下关键工作：
@@ -17,6 +42,7 @@
 | Prusti/Creusot/Verus | 已调研 | 验证工具 |
 
 ### 2. 研究计划制定 ✅
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 创建了详细的 12 个月研究计划，包括：
@@ -176,7 +202,13 @@ docs/rust-ownership-decidability/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

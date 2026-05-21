@@ -5,10 +5,45 @@
 
 ---
 
+## 📑 目录
+>
+- [全面审计报告索引](#全面审计报告索引)
+  - [📑 目录](#-目录)
+  - [📊 审计产出文件](#-审计产出文件)
+    - [核心报告](#核心报告)
+    - [标准与模板](#标准与模板)
+    - [本次审计新增内容](#本次审计新增内容)
+  - [🎯 核心发现摘要](#-核心发现摘要)
+    - [当前完成度](#当前完成度)
+    - [关键差距 (按优先级)](#关键差距-按优先级)
+      - [🔴 P0 (立即处理)](#-p0-立即处理)
+      - [🟡 P1 (短期处理)](#-p1-短期处理)
+      - [🟢 P2 (中期处理)](#-p2-中期处理)
+  - [📅 建议执行顺序](#-建议执行顺序)
+    - [第 1 周: 基础准备](#第-1-周-基础准备)
+    - [第 2-4 周: 关键内容填补](#第-2-4-周-关键内容填补)
+    - [第 5-8 周: 内容扩展](#第-5-8-周-内容扩展)
+    - [第 9-16 周: 对齐优化](#第-9-16-周-对齐优化)
+  - [📋 使用指南](#-使用指南)
+    - [如果你是项目维护者](#如果你是项目维护者)
+    - [如果你是内容贡献者](#如果你是内容贡献者)
+    - [如果你是读者/用户](#如果你是读者用户)
+  - [📈 成功指标](#-成功指标)
+    - [16 周后预期状态](#16-周后预期状态)
+  - [🤝 参与方式](#-参与方式)
+    - [报告问题](#报告问题)
+    - [贡献内容](#贡献内容)
+    - [优先级任务](#优先级任务)
+  - [📝 版本历史](#-版本历史)
+  - [*最后更新: 2026-03-07*](#最后更新-2026-03-07)
+  - [相关概念](#相关概念)
+
 ## 📊 审计产出文件
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心报告
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 | 优先级 |
@@ -19,6 +54,7 @@
 | [AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md](./AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md) | 权威资源差距分析 | 必读 |
 
 ### 标准与模板
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 描述 | 用途 |
@@ -183,3 +219,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,11 +1,26 @@
 # 18 取消活动模式 (Cancel Activity)
 
+## 📑 目录
+>
+- [18 取消活动模式 (Cancel Activity)](#18-取消活动模式-cancel-activity)
+  - [📑 目录](#-目录)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [形式化表示](#形式化表示)
+  - [Rust 实现示例](#rust-实现示例)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [相关概念](#相关概念)
+
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 取消活动模式允许在另一个活动的执行过程中取消一个已启用的活动。这是工作流异常处理的基础机制。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -15,6 +30,7 @@ $$
 其中 $A$ 是被取消的活动，$C$ 是取消条件或取消事件。
 
 ### 形式化表示
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **状态机表示：**
@@ -289,7 +305,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

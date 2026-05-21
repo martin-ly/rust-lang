@@ -7,11 +7,11 @@
 
 ---
 
-## 📋 目录
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Axum 深度解析](#axum-深度解析)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [设计理念](#设计理念)
   - [🏗️ 架构设计](#️-架构设计)
@@ -33,10 +33,42 @@
   - [🧪 测试](#-测试)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: ✅ 已完成](#状态--已完成)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]**
+
+- [Axum 深度解析](#axum-深度解析)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [🎯 概述](#-概述)
+    - [设计理念](#设计理念)
+  - [🏗️ 架构设计](#️-架构设计)
+    - [核心组件](#核心组件)
+    - [请求处理流程](#请求处理流程)
+  - [📐 核心概念](#-核心概念)
+    - [Handler](#handler)
+    - [Extractor](#extractor)
+    - [Response](#response)
+    - [中间件](#中间件)
+  - [🚀 高级用法](#-高级用法)
+    - [状态管理](#状态管理)
+    - [错误处理](#错误处理)
+    - [认证授权](#认证授权)
+    - [WebSocket](#websocket)
+  - [⚡ 性能优化](#-性能优化)
+    - [基准数据](#基准数据)
+    - [优化建议](#优化建议)
+  - [🧪 测试](#-测试)
+  - [🔗 参考资源](#-参考资源)
+  - [**状态**: ✅ 已完成](#状态--已完成)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 Axum 是一个基于 Tower 的 Web 框架，专注于：
@@ -47,6 +79,7 @@ Axum 是一个基于 Tower 的 Web 框架，专注于：
 - **高性能**: 零成本抽象
 
 ### 设计理念
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -61,9 +94,11 @@ Axum 设计原则:
 ---
 
 ## 🏗️ 架构设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心组件
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -101,6 +136,7 @@ fn create_router(state: Arc<AppState>) -> Router {
 ```
 
 ### 请求处理流程
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -126,9 +162,11 @@ sequenceDiagram
 ---
 
 ## 📐 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### Handler
+>
 > **[来源: Rust Official Docs]**
 
 Handler 是任何实现 `Handler` trait 的函数。
@@ -171,6 +209,7 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
 ```
 
 ### Extractor
+>
 > **[来源: Rust Official Docs]**
 
 Extractors 从请求中提取数据。
@@ -258,6 +297,7 @@ async fn protected_route(api_key: ApiKey) -> String {
 ```
 
 ### Response
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -319,6 +359,7 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
 ```
 
 ### 中间件
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -732,7 +773,12 @@ async fn test_get_user() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

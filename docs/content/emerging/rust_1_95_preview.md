@@ -6,7 +6,21 @@
 
 ---
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🎯 版本概览](#版本概览)
+- [🚀 主要新特性](#主要新特性)
+  - [1. Impl Trait in Associated Type (稳定)](#1-impl-trait-in-associated-type-稳定)
+  - [2. 新的 API 稳定化](#2-新的-api-稳定化)
+  - [3. 编译器性能改进](#3-编译器性能改进)
+- [📊 与 1.94 对比](#与-194-对比)
+- [🔄 迁移指南](#迁移指南)
+  - [从手动 Future 类型到 impl Trait](#从手动-future-类型到-impl-trait)
+- [🔗 参考资源](#参考资源)
+
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust 1.95 预览特性](#rust-195-预览特性)
@@ -25,6 +39,7 @@
 ---
 
 ## 🎯 版本概览
+>
 > **[来源: Rust Official Docs]**
 
 Rust 1.95 主要聚焦于：
@@ -36,6 +51,7 @@ Rust 1.95 主要聚焦于：
 ---
 
 ## 🚀 主要新特性
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. Impl Trait in Associated Type (稳定)
@@ -172,7 +188,13 @@ impl MyAsyncTrait for MyStruct {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [emerging 目录](./README.md)
+- [上级目录](../README.md)

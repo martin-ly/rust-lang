@@ -1,6 +1,43 @@
 # 持续推进报告 - 2026-03-09
 
+## 📑 目录
+>
+- [持续推进报告 - 2026-03-09](#持续推进报告---2026-03-09)
+  - [📑 目录](#-目录)
+  - [Continuous Improvement Report](#continuous-improvement-report)
+  - [📊 本次推进概览](#-本次推进概览)
+    - [新增文档统计](#新增文档统计)
+    - [新增内容统计](#新增内容统计)
+  - [🎯 推进内容详情](#-推进内容详情)
+    - [1. 高级实践工作坊 (`exercises/ADVANCED_OWNERSHIP_WORKSHOP.md`)](#1-高级实践工作坊-exercisesadvanced_ownership_workshopmd)
+    - [2. 交互式学习指南 (`INTERACTIVE_LEARNING_GUIDE.md`)](#2-交互式学习指南-interactive_learning_guidemd)
+    - [3. 知识图谱思维导图 (`visualizations/KNOWLEDGE_GRAPH_MINDMAP.md`)](#3-知识图谱思维导图-visualizationsknowledge_graph_mindmapmd)
+    - [4. 全面 FAQ (`COMPREHENSIVE_FAQ.md`)](#4-全面-faq-comprehensive_faqmd)
+    - [5. 错误诊断完全指南 (`ERROR_DIAGNOSTICS_GUIDE.md`)](#5-错误诊断完全指南-error_diagnostics_guidemd)
+  - [📈 项目整体统计更新](#-项目整体统计更新)
+    - [文档统计](#文档统计)
+    - [内容深度统计](#内容深度统计)
+    - [学习资源统计](#学习资源统计)
+  - [🛤️ 学习路径优化](#️-学习路径优化)
+    - [快速入门路径 (4小时) → 更新](#快速入门路径-4小时--更新)
+    - [系统掌握路径 (2周) → 更新](#系统掌握路径-2周--更新)
+  - [✅ 质量保证](#-质量保证)
+    - [内容检查](#内容检查)
+    - [学习体验](#学习体验)
+  - [🎯 下一步计划](#-下一步计划)
+    - [短期目标 (未来 1-2 周)](#短期目标-未来-1-2-周)
+    - [中期目标 (未来 1 个月)](#中期目标-未来-1-个月)
+    - [长期目标 (未来 3 个月)](#长期目标-未来-3-个月)
+  - [📊 推进成果总结](#-推进成果总结)
+    - [核心价值提升](#核心价值提升)
+    - [独特价值](#独特价值)
+  - [📞 反馈与贡献](#-反馈与贡献)
+    - [如何反馈](#如何反馈)
+    - [联系方式](#联系方式)
+  - [相关概念](#相关概念)
+
 ## Continuous Improvement Report
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **持续推进阶段** - 扩展学习资源和优化体验
@@ -8,9 +45,11 @@
 ---
 
 ## 📊 本次推进概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 新增文档统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 类型 | 目标 | 完成度 |
@@ -334,6 +373,7 @@
 - 状态: ✅ 持续推进完成
 - 新增文档: 5
 - 新增内容: ~15,000 行
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -345,7 +385,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

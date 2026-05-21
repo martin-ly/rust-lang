@@ -6,10 +6,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Phase 1 完成报告](#phase-1-完成报告)
+  - [📑 目录](#-目录)
+  - [完成情况](#完成情况)
+    - [✅ 核心定理文件全部创建](#-核心定理文件全部创建)
+    - [📊 代码统计更新](#-代码统计更新)
+    - [🎯 完成的定理](#-完成的定理)
+      - [1. 终止性 (Termination)](#1-终止性-termination)
+      - [2. 类型保持 (Preservation)](#2-类型保持-preservation)
+      - [3. 进展 (Progress)](#3-进展-progress)
+      - [4. 示例验证 (10个)](#4-示例验证-10个)
+  - [核心定理总结](#核心定理总结)
+    - [定理 1: Borrow Checking 终止性](#定理-1-borrow-checking-终止性)
+    - [定理 2: 类型保持 (Preservation)](#定理-2-类型保持-preservation)
+    - [定理 3: 进展 (Progress)](#定理-3-进展-progress)
+    - [定理 4: 类型安全](#定理-4-类型安全)
+  - [文件结构更新](#文件结构更新)
+  - [Phase 1 目标达成](#phase-1-目标达成)
+  - [下一步 (Phase 2)](#下一步-phase-2)
+    - [Week 3-4 目标](#week-3-4-目标)
+  - [**准备进入**: Phase 2 (可判定性证明深化)](#准备进入-phase-2-可判定性证明深化)
+  - [相关概念](#相关概念)
+
 ## 完成情况
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 核心定理文件全部创建
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 行数 | 状态 | 内容 |
@@ -20,6 +46,7 @@
 | `NestedBorrow.v` | 0 → 290 | ✅ 创建 | 5个新示例 |
 
 ### 📊 代码统计更新
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -157,7 +184,13 @@ coq-formalization/theories/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

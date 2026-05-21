@@ -8,25 +8,10 @@
 
 ---
 
-## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
-
-| 来源 | 链接 | 用途 |
-| :--- | :--- | :--- |
-| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 语言特性权威公告 |
-| **Rust 1.93.1 补丁** | [blog.rust-lang.org/2026/02/12/Rust-1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/) | ICE/Clippy/WASM 回归修复 |
-| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/) | 完整变更清单 |
-| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范（Rust 2021 Edition） |
-| **RustBelt / Stacked Borrows / Tree Borrows** | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/) | 所有权/借用形式化 |
-
-**版本说明**：Ferrocene FLS 当前覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024** 与 **Rust 1.93.1**（补丁版，修复 ICE/Clippy/WASM 回归）；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
-
----
-
-## 📋 目录<a id="目录"></a> {#-目录}
-> **[来源: Rust Official Docs]**
-
-<!-- markdownlint-disable MD051 -->
+## 📑 目录
+>
 - [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
+  - [📑 目录](#-目录)
   - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
   - [📋 目录 {#-目录}](#-目录--目录)
   - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
@@ -48,11 +33,59 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+## 📚 权威来源对齐<a id="权威来源对齐"></a> {#-权威来源对齐}
+
+| 来源 | 链接 | 用途 |
+| :--- | :--- | :--- |
+| **Rust 1.93 发布说明** | [blog.rust-lang.org/2026/01/22/Rust-1.93.0](https://blog.rust-lang.org/2026/01/22/Rust-1.93.0/) | 语言特性权威公告 |
+| **Rust 1.93.1 补丁** | [blog.rust-lang.org/2026/02/12/Rust-1.93.1](https://blog.rust-lang.org/2026/02/12/Rust-1.93.1/) | ICE/Clippy/WASM 回归修复 |
+| **releases.rs 1.93.0** | [releases.rs/docs/1.93.0](https://releases.rs/docs/1.93.0/) | 完整变更清单 |
+| **Ferrocene FLS** | [spec.ferrocene.dev](https://spec.ferrocene.dev/) | Rust 1.93 形式化规范（Rust 2021 Edition） |
+| **RustBelt / Stacked Borrows / Tree Borrows** | [plv.mpi-sws.org/rustbelt](https://plv.mpi-sws.org/rustbelt/) | 所有权/借用形式化 |
+
+**版本说明**：Ferrocene FLS 当前覆盖 **Rust 2021 Edition** 与 rustc 1.93.0。本项目文档使用 **Edition 2024** 与 **Rust 1.93.1**（补丁版，修复 ICE/Clippy/WASM 回归）；Edition 2024 新增语法与语义尚未纳入 FLS 正式章节，形式化引用以 FLS 当前覆盖范围为准。
+
+---
+
+## 📋 目录<a id="目录"></a> {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+<!-- markdownlint-disable MD051 -->
+- [Rust 1.93 语言特性全面分析：设计论证与形式化](#rust-193-语言特性全面分析设计论证与形式化)
+  - [� 目录](#-目录)
+  - [📚 权威来源对齐 {#-权威来源对齐}](#-权威来源对齐--权威来源对齐)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [🎯 文档宗旨 {#-文档宗旨}](#-文档宗旨--文档宗旨)
+  - [📐 特性覆盖矩阵总览 {#-特性覆盖矩阵总览}](#-特性覆盖矩阵总览--特性覆盖矩阵总览)
+  - [特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）](#特性defaxiomtheorem-映射表兼-92-项推荐落点文档)
+  - [1. 内存与所有权族](#1-内存与所有权族)
+  - [2. 类型系统族](#2-类型系统族)
+  - [3. Trait 与多态族](#3-trait-与多态族)
+  - [4. 控制流与模式匹配族](#4-控制流与模式匹配族)
+  - [5. 并发与异步族](#5-并发与异步族)
+  - [6. 宏与元编程族](#6-宏与元编程族)
+  - [7. 模块与可见性族](#7-模块与可见性族)
+  - [8. 常量与编译期族](#8-常量与编译期族)
+  - [9. FFI 与不安全族](#9-ffi-与不安全族)
+  - [10. Rust 1.93 新增/变更特性](#10-rust-193-新增变更特性)
+  - [📚 相关文档 {#-相关文档}](#-相关文档--相关文档)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 <!-- markdownlint-enable MD051 -->
 
 ---
 
 ## 🎯 文档宗旨<a id="文档宗旨"></a> {#-文档宗旨}
+>
 > **[来源: Rust Official Docs]**
 
 本文档针对「论证未全面分析 Rust 1.93 所有语言特性」的缺口，系统化补全：
@@ -64,6 +97,7 @@
 ---
 
 ## 📐 特性覆盖矩阵总览<a id="特性覆盖矩阵总览"></a> {#-特性覆盖矩阵总览}
+>
 > **[来源: Rust Official Docs]**
 
 | 类别 | 特性数 | 已论证 | 形式化文档 | 完成度 |
@@ -83,6 +117,7 @@
 ---
 
 ## 特性→Def/Axiom/Theorem 映射表（兼 92 项→推荐落点文档）
+>
 > **[来源: Rust Official Docs]**
 
 本表将 92 项特性与形式化文档中的 Def、Axiom、Theorem 建立一一对应，**最后一列「文档」即该特性的推荐落点文档**；与 FORMAT_AND_CONTENT_ALIGNMENT_PLAN F3.1 对齐。详见 [PROOF_INDEX](./PROOF_INDEX.md)。
@@ -131,6 +166,7 @@
 ---
 
 ## 1. 内存与所有权族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -151,6 +187,7 @@
 ---
 
 ## 2. 类型系统族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -174,6 +211,7 @@
 ---
 
 ## 3. Trait 与多态族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -192,6 +230,7 @@
 ---
 
 ## 4. 控制流与模式匹配族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -208,6 +247,7 @@
 ---
 
 ## 5. 并发与异步族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -224,6 +264,7 @@
 ---
 
 ## 6. 宏与元编程族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -237,6 +278,7 @@
 ---
 
 ## 7. 模块与可见性族
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 动机 | 设计决策 | 形式化 | 反例 |
@@ -370,3 +412,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

@@ -6,10 +6,40 @@
 
 ---
 
+## 📑 目录
+>
+- [Cross-Reference Verification Summary](#cross-reference-verification-summary)
+  - [📑 目录](#-目录)
+  - [Work Completed](#work-completed)
+    - [1. Link Verification](#1-link-verification)
+    - [2. Files Fixed (14 files)](#2-files-fixed-14-files)
+    - [3. Generated Files (3 files)](#3-generated-files-3-files)
+  - [Types of Fixes Applied](#types-of-fixes-applied)
+    - [Category 1: Non-existent Files (12 fixes)](#category-1-non-existent-files-12-fixes)
+    - [Category 2: Wrong Paths (18 fixes)](#category-2-wrong-paths-18-fixes)
+    - [Category 3: Directory Links (8 fixes)](#category-3-directory-links-8-fixes)
+  - [Remaining Issues](#remaining-issues)
+    - [10 Broken Links (Auto-generated file only)](#10-broken-links-auto-generated-file-only)
+  - [Navigation Improvements](#navigation-improvements)
+    - [New Quick Reference Section in README](#new-quick-reference-section-in-readme)
+    - [Master Indices Available](#master-indices-available)
+  - [Recommendations for Future Maintenance](#recommendations-for-future-maintenance)
+    - [Regular Maintenance](#regular-maintenance)
+    - [Best Practices](#best-practices)
+  - [Statistics](#statistics)
+    - [Documentation Scale](#documentation-scale)
+    - [File Distribution](#file-distribution)
+  - [Verification Tool](#verification-tool)
+  - [Conclusion](#conclusion)
+  - [*Completed: 2026-03-06*](#completed-2026-03-06)
+  - [相关概念](#相关概念)
+
 ## Work Completed
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. Link Verification
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Metric | Before | After | Improvement |
@@ -19,6 +49,7 @@
 | Broken Links | 48 | 10 | **79% fixed** |
 
 ### 2. Files Fixed (14 files)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **06-visualizations/README.md** - Fixed 3 broken document links
@@ -194,3 +225,10 @@ The documentation now provides a well-connected, easily navigable knowledge base
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -6,7 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [λ演算基础 (Lambda Calculus Foundations)](#λ演算基础-lambda-calculus-foundations)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 无类型 λ演算 (Untyped Lambda Calculus)](#2-无类型-λ演算-untyped-lambda-calculus)
+    - [2.1 语法定义](#21-语法定义)
+    - [2.2 变量与绑定](#22-变量与绑定)
+    - [2.3 α-等价 (Alpha Equivalence)](#23-α-等价-alpha-equivalence)
+    - [2.4 β-归约 (Beta Reduction)](#24-β-归约-beta-reduction)
+    - [2.5 求值策略](#25-求值策略)
+  - [3. 简单类型 λ演算 (Simply Typed Lambda Calculus)](#3-简单类型-λ演算-simply-typed-lambda-calculus)
+    - [3.1 类型语法](#31-类型语法)
+    - [3.2 类型规则](#32-类型规则)
+    - [3.3 Curry-Howard 对应](#33-curry-howard-对应)
+  - [4. 归约与范式](#4-归约与范式)
+    - [4.1 归约关系](#41-归约关系)
+    - [4.2 Church-Rosser 定理](#42-church-rosser-定理)
+    - [4.3 范式](#43-范式)
+  - [5. 与 Rust 的深层联系](#5-与-rust-的深层联系)
+    - [5.1 闭包即 λ抽象](#51-闭包即-λ抽象)
+    - [5.2 泛型即多态](#52-泛型即多态)
+    - [5.3 所有权即线性类型](#53-所有权即线性类型)
+  - [6. 形式化总结](#6-形式化总结)
+    - [6.1 核心概念速查](#61-核心概念速查)
+    - [6.2 推荐阅读](#62-推荐阅读)
+  - [**最后更新**: 2026-03-08](#最后更新-2026-03-08)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 λ演算（Lambda Calculus）由 Alonzo Church 于 1930 年代提出，是计算理论的基础模型。
@@ -15,9 +45,11 @@
 ---
 
 ## 2. 无类型 λ演算 (Untyped Lambda Calculus)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 语法定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义 2.1** (λ项的语法)
@@ -365,7 +397,13 @@ let y = x;  // x 被移动，不能再使用
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [00-foundations 目录](./README.md)
+- [上级目录](../README.md)

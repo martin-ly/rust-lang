@@ -6,13 +6,62 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 所有权形式化对齐 - 100% 完成报告](#rust-194-所有权形式化对齐---100-完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [核心成就](#核心成就)
+  - [项目范围](#项目范围)
+    - [覆盖的新特性](#覆盖的新特性)
+  - [交付物](#交付物)
+    - [形式化代码 (11 个 Coq 文件)](#形式化代码-11-个-coq-文件)
+    - [文档 (4 个 Markdown 文件)](#文档-4-个-markdown-文件)
+  - [核心定理](#核心定理)
+    - [类型安全 (Type Safety)](#类型安全-type-safety)
+    - [向后兼容 (Backward Compatibility)](#向后兼容-backward-compatibility)
+    - [特性交互安全](#特性交互安全)
+  - [元理论完整性](#元理论完整性)
+    - [进展性 (Progress)](#进展性-progress)
+    - [保持性 (Preservation)](#保持性-preservation)
+    - [终止性 (Termination)](#终止性-termination)
+    - [可判定性 (Decidability)](#可判定性-decidability)
+  - [验证示例](#验证示例)
+    - [20+ 个验证示例](#20-个验证示例)
+  - [质量保证](#质量保证)
+    - [代码质量](#代码质量)
+    - [理论质量](#理论质量)
+    - [文档质量](#文档质量)
+  - [技术创新](#技术创新)
+    - [1. 统一框架](#1-统一框架)
+    - [2. 模块化设计](#2-模块化设计)
+    - [3. 渐进式形式化](#3-渐进式形式化)
+  - [与 Rust 1.94 的对应](#与-rust-194-的对应)
+    - [语法对应](#语法对应)
+    - [类型对应](#类型对应)
+  - [使用指南](#使用指南)
+    - [查看形式化代码](#查看形式化代码)
+    - [阅读文档](#阅读文档)
+    - [理解特定特性](#理解特定特性)
+  - [局限性和未来工作](#局限性和未来工作)
+    - [当前局限](#当前局限)
+    - [未来方向](#未来方向)
+  - [结论](#结论)
+    - [主要成就](#主要成就)
+    - [项目影响](#项目影响)
+  - [致谢](#致谢)
+  - [*"构建 Rust 所有权系统的完整、严格、可机械化的形式化理论"* ✅](#构建-rust-所有权系统的完整严格可机械化的形式化理论-)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 1.94 所有权形式化对齐项目已 **100% 完成**。
 本项目成功将 Rust 所有权系统的形式化框架扩展到包含 Rust 1.94 引入的所有重要新特性，为现代 Rust 程序提供了严格的数学验证基础。
 
 ### 核心成就
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 | 状态 |
@@ -26,6 +75,7 @@ Rust 1.94 所有权形式化对齐项目已 **100% 完成**。
 ---
 
 ## 项目范围
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 覆盖的新特性
@@ -335,7 +385,13 @@ Rust 1.94 所有权形式化对齐项目已成功完成，达到 **100% 目标**
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

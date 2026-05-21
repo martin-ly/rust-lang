@@ -16,10 +16,10 @@
 
 ---
 
-## 📋 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
+  - [📑 目录](#-目录)
   - [📋 目录 {#-目录}](#-目录--目录)
   - [一、概念分类](#一概念分类)
   - [二、内存对齐（核心）](#二内存对齐核心)
@@ -47,10 +47,47 @@
     - [代码示例](#代码示例)
     - [研究笔记](#研究笔记)
   - [Rust 1.95+ 更新](#rust-195-更新)
+  - [相关概念](#相关概念)
+
+## 📋 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
+  - [� 目录](#-目录)
+  - [📋 目录 {#-目录}](#-目录--目录)
+  - [一、概念分类](#一概念分类)
+  - [二、内存对齐（核心）](#二内存对齐核心)
+    - [2.0 为何要对齐（Why Alignment Matters）](#20-为何要对齐why-alignment-matters)
+    - [2.1 基本概念](#21-基本概念)
+    - [2.2 常用 API](#22-常用-api)
+    - [2.3 repr 与对齐（完整谱系）](#23-repr-与对齐完整谱系)
+    - [2.4 字段重排序优化](#24-字段重排序优化)
+    - [2.5 对齐计算（Rust 1.92+）](#25-对齐计算rust-192)
+    - [2.6 Layout API（自定义分配）](#26-layout-api自定义分配)
+    - [2.7 平台差异](#27-平台差异)
+  - [三、格式化对齐](#三格式化对齐)
+  - [四、unsafe 与对齐](#四unsafe-与对齐)
+    - [4.1 裸指针解引用前提与 UB 情形](#41-裸指针解引用前提与-ub-情形)
+    - [4.2 未对齐访问](#42-未对齐访问)
+    - [4.3 transmute 对齐约束](#43-transmute-对齐约束)
+  - [五、缓存行对齐与并发](#五缓存行对齐与并发)
+    - [5.1 伪共享（False Sharing）](#51-伪共享false-sharing)
+    - [5.2 数据局部性：AoS vs SoA](#52-数据局部性aos-vs-soa)
+    - [5.3 工具验证与量化数据](#53-工具验证与量化数据)
+  - [六、权威来源（非技术对齐）](#六权威来源非技术对齐)
+  - [七、对齐选型决策树](#七对齐选型决策树)
+  - [八、相关文档与示例](#八相关文档与示例)
+    - [项目内文档](#项目内文档)
+    - [代码示例](#代码示例)
+    - [研究笔记](#研究笔记)
+  - [Rust 1.95+ 更新](#rust-195-更新)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 一、概念分类
+>
 > **[来源: Rust Official Docs]**
 
 Rust 项目中「对齐」一词在不同语境下有不同含义：
@@ -64,9 +101,11 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 ---
 
 ## 二、内存对齐（核心）
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.0 为何要对齐（Why Alignment Matters）
+>
 > **[来源: Rust Official Docs]**
 
 **CPU 行为**：现代 CPU 按「对齐边界」加载数据。未对齐访问可能导致：
@@ -82,6 +121,7 @@ Rust 项目中「对齐」一词在不同语境下有不同含义：
 ---
 
 ### 2.1 基本概念
+>
 > **[来源: Rust Official Docs]**
 
 - **对齐**：类型 T 的实例地址必须是 `align_of::<T>()` 的整数倍
@@ -107,6 +147,7 @@ assert_eq!(size_of::<Example>(), 24);
 ```
 
 ### 2.2 常用 API
+>
 > **[来源: Rust Official Docs]**
 
 | API | 用途 |
@@ -117,6 +158,7 @@ assert_eq!(size_of::<Example>(), 24);
 | `Layout::from_size_align` | 构造自定义布局 |
 
 ### 2.3 repr 与对齐（完整谱系）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -149,6 +191,7 @@ struct CLayoutAligned { x: u64; y: u64; }
 ```
 
 ### 2.4 字段重排序优化
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -160,6 +203,7 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 ```
 
 ### 2.5 对齐计算（Rust 1.92+）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -179,6 +223,7 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 ```
 
 ### 2.6 Layout API（自定义分配）
+>
 > **[来源: Rust Official Docs]**
 
 `std::alloc::Layout` 描述内存块的大小与对齐，用于 `alloc`、`GlobalAlloc` 等。
@@ -199,6 +244,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 *参考*: [std::alloc::Layout](https://doc.rust-lang.org/std/alloc/struct.Layout.html)
 
 ### 2.7 平台差异
+>
 > **[来源: Rust Official Docs]**
 
 | 平台 | 未对齐访问 | 缓存行 | 备注 |
@@ -384,3 +430,10 @@ struct CacheLinePadded {
 详见 [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 
 **最后更新**: 2026-05-08
+
+---
+
+## 相关概念
+
+- [02_reference 目录](./README.md)
+- [上级目录](../README.md)

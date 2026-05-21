@@ -4,15 +4,43 @@
 
 # Rust 2024 Edition `Future` in Prelude 影响分析
 
+## 📑 目录
+>
+- [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [变化详情](#变化详情)
+    - [之前（Rust 2021 及之前）](#之前rust-2021-及之前)
+    - [之后（Rust 2024 Edition）](#之后rust-2024-edition)
+  - [影响分析](#影响分析)
+    - [正面影响](#正面影响)
+    - [潜在冲突](#潜在冲突)
+      - [冲突 1：自定义 `Future` trait](#冲突-1自定义-future-trait)
+      - [冲突 2：第三方库中的 `Future` 类型](#冲突-2第三方库中的-future-类型)
+      - [冲突 3：宏展开中的名称冲突](#冲突-3宏展开中的名称冲突)
+  - [迁移建议](#迁移建议)
+    - [对于应用开发者](#对于应用开发者)
+    - [对于库开发者](#对于库开发者)
+    - [迁移检查清单](#迁移检查清单)
+  - [技术细节](#技术细节)
+    - [Prelude 包含的内容](#prelude-包含的内容)
+    - [与 `async/await` 的关系](#与-asyncawait-的关系)
+  - [版本兼容性](#版本兼容性)
+  - [参考资源](#参考资源)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 Rust 2024 Edition 将 `std::future::Future` trait 添加到标准库 prelude 中。这意味着在 Edition 2024 下，`Future` trait 无需显式导入即可直接使用。
 
 ## 变化详情
+>
 > **[来源: Rust Official Docs]**
 
 ### 之前（Rust 2021 及之前）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -186,7 +214,12 @@ where
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

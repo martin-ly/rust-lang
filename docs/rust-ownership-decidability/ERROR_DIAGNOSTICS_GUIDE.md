@@ -4,10 +4,46 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 错误诊断完全指南](#rust-所有权系统---错误诊断完全指南)
+  - [📑 目录](#-目录)
+  - [🧭 诊断方法论](#-诊断方法论)
+    - [三步诊断法](#三步诊断法)
+  - [常见错误分类](#常见错误分类)
+    - [E0382: 使用已移动的值](#e0382-使用已移动的值)
+    - [E0499: 多重可变借用](#e0499-多重可变借用)
+    - [E0502: 可变与不可变借用冲突](#e0502-可变与不可变借用冲突)
+    - [E0597: 引用生命周期不够长](#e0597-引用生命周期不够长)
+  - [生命周期相关错误](#生命周期相关错误)
+    - [E0621: 显式生命周期要求](#e0621-显式生命周期要求)
+    - [E0106: 缺少生命周期说明符](#e0106-缺少生命周期说明符)
+  - [智能指针相关错误](#智能指针相关错误)
+    - [E0500: 闭包同时需要可变和不可变借用](#e0500-闭包同时需要可变和不可变借用)
+    - [E0716: 临时值生命周期太短](#e0716-临时值生命周期太短)
+  - [并发相关错误](#并发相关错误)
+    - [E0277: 类型未实现 Send](#e0277-类型未实现-send)
+    - [E0596: 无法通过共享引用修改](#e0596-无法通过共享引用修改)
+  - [诊断工具](#诊断工具)
+    - [使用 rustc 详细输出](#使用-rustc-详细输出)
+    - [使用 Clippy](#使用-clippy)
+    - [使用 rust-analyzer](#使用-rust-analyzer)
+  - [错误快速参考表](#错误快速参考表)
+  - [预防性编程](#预防性编程)
+    - [所有权友好的 API 设计](#所有权友好的-api-设计)
+  - [练习](#练习)
+    - [练习 1: 诊断并修复](#练习-1-诊断并修复)
+    - [练习 2: 诊断并修复](#练习-2-诊断并修复)
+  - [更多资源](#更多资源)
+  - [*本指南持续更新，欢迎贡献*](#本指南持续更新欢迎贡献)
+  - [相关概念](#相关概念)
+
 ## 🧭 诊断方法论
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 三步诊断法
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -24,6 +60,7 @@
 ---
 
 ## 常见错误分类
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### E0382: 使用已移动的值
@@ -567,3 +604,10 @@ fn get_static() -> &'static str {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -373,8 +373,9 @@ pub fn get_never_type_info() -> String {
 /// ## 代码示例
 ///
 /// ```rust
-/// use core::range::{Range, RangeFrom, RangeToInclusive};
-/// use core::range::{RangeIter, RangeFromIter, RangeToInclusiveIter};
+/// use core::range::{
+///     Range, RangeFrom, RangeFromIter, RangeIter, RangeToInclusive, RangeToInclusiveIter,
+/// };
 ///
 /// // Range: 半开区间 [1, 5)
 /// let range = Range { start: 1, end: 5 };

@@ -6,6 +6,27 @@
 
 ---
 
+## 📑 目录
+>
+- [1. 概念定义 (Def)](#1-概念定义-def)
+  - [Def OB1: Outbox](#def-ob1-outbox)
+  - [Def OB2: 事务边界](#def-ob2-事务边界)
+  - [Def OB3: 消息状态](#def-ob3-消息状态)
+- [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+  - [Axiom OB1: 事务原子性](#axiom-ob1-事务原子性)
+  - [Axiom OB2: 中继幂等性](#axiom-ob2-中继幂等性)
+  - [Axiom OB3: 最终投递](#axiom-ob3-最终投递)
+- [3. 定理 (Theorem)](#3-定理-theorem)
+  - [Theorem OB1: 消息不丢失](#theorem-ob1-消息不丢失)
+  - [Theorem OB2: 消息不重复](#theorem-ob2-消息不重复)
+- [4. Rust 实现示例](#4-rust-实现示例)
+- [5. 与 Saga 模式的关系](#5-与-saga-模式的关系)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 ## 1. 概念定义 (Def)
 >
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Outbox Pattern]** · **[来源: Wikipedia - Event Sourcing]** · **[来源: ACM - Distributed Transaction Patterns]** · **[来源: IEEE - Message Delivery Guarantees]**
@@ -278,3 +299,10 @@ Outbox 模式常与 Saga 配合使用：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [05_distributed 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,6 +1,19 @@
 # Actor模型 - 思维导图
 
+## 📑 目录
+>
+- [Actor模型 - 思维导图](#actor模型---思维导图)
+  - [📑 目录](#-目录)
+  - [Mermaid思维导图](#mermaid思维导图)
+  - [Actor模型核心概念图](#actor模型核心概念图)
+  - [监督树结构图](#监督树结构图)
+  - [Actor与其他模型关系](#actor与其他模型关系)
+  - [分布式Actor架构](#分布式actor架构)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## Mermaid思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -92,6 +105,7 @@ mindmap
 ---
 
 ## Actor模型核心概念图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -131,6 +145,7 @@ mindmap
 ---
 
 ## 监督树结构图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -241,7 +256,12 @@ mindmap
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

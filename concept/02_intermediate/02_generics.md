@@ -1,4 +1,10 @@
 # Generics（泛型系统）
+>
+> **层次定位**: L2 进阶概念 / 泛型子域
+> **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) · [L2 Trait](./01_traits.md)
+> **后置延伸**: [L3 Async](../03_advanced/02_async.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L7 效果系统](../07_future/04_effects_system.md)
+> **跨层映射**: L2→L4 参数多态 ↔ System F | L2→L7 泛型效果 → Effect System
+> **定理链编号**: T-030 参数多态保持 → T-031 单态化正确性 → T-032 约束满足可判定
 
 > **层级**: L2 进阶概念
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Traits](./01_traits.md)

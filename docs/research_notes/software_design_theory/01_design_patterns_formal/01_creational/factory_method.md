@@ -1,20 +1,9 @@
 ﻿# Factory Method 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 创建型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 1 行（Factory Method）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Factory Method 形式化分析](#factory-method-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
@@ -47,13 +36,67 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 创建型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 1 行（Factory Method）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Factory Method 形式化分析](#factory-method-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Factory Method 结构）](#def-11factory-method-结构)
+    - [Axiom FM1（返回类型一致性公理）](#axiom-fm1返回类型一致性公理)
+    - [Axiom FM2（所有权独立公理）](#axiom-fm2所有权独立公理)
+    - [定理 FM-T1（类型保持定理）](#定理-fm-t1类型保持定理)
+    - [定理 FM-T2（所有权安全定理）](#定理-fm-t2所有权安全定理)
+    - [推论 FM-C1（纯 Safe Factory）](#推论-fm-c1纯-safe-factory)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
+  - [典型场景](#典型场景)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：工厂返回空或无效](#反例工厂返回空或无效)
+  - [与理论衔接](#与理论衔接)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Factory Method 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $T$ 为产品类型，$C$ 为创建者类型。Factory Method 是一个三元组 $\mathcal{F} = (C, T, \mathit{factory})$，满足：
@@ -69,6 +112,7 @@ $$\mathcal{F} = \langle C, T, \mathit{factory}: C \rightarrow T \rangle$$
 ---
 
 ### Axiom FM1（返回类型一致性公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall c: C,\, \mathit{factory}(c) : T \land \neg(\mathit{factory}(c) = \mathrm{null})$$
@@ -76,6 +120,7 @@ $$\forall c: C,\, \mathit{factory}(c) : T \land \neg(\mathit{factory}(c) = \math
 工厂方法返回类型与产品类型一致；无空指针或无效值。
 
 ### Axiom FM2（所有权独立公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{factory}(c)) \neq \emptyset$$
@@ -85,6 +130,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T1（类型保持定理）
+>
 > **[来源: Rust Official Docs]**
 
 由 [type_system_foundations](../../../type_theory/type_system_foundations.md) 保持性，$\mathit{factory}(c)$ 良型则求值结果类型为 $T$。
@@ -103,6 +149,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 定理 FM-T2（所有权安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md) T2，返回值所有权转移至调用者；无悬垂。
@@ -127,6 +174,7 @@ $$\Omega(\mathit{factory}(c)) \cap \Omega(c) = \emptyset \land \Omega(\mathit{fa
 ---
 
 ### 推论 FM-C1（纯 Safe Factory）
+>
 > **[来源: Rust Official Docs]**
 
 Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
@@ -143,6 +191,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -154,6 +203,7 @@ Factory Method 为纯 Safe；仅用 trait、impl、`Box`，无 unsafe。
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -192,6 +242,7 @@ assert_eq!(product.operation(), "Product A");
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -429,3 +480,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [01_creational 目录](./README.md)
+- [上级目录](../README.md)

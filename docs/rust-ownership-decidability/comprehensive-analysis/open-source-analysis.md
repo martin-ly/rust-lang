@@ -4,10 +4,41 @@
 
 ---
 
+## 📑 目录
+>
+- [著名开源库深度分析论证](#著名开源库深度分析论证)
+  - [📑 目录](#-目录)
+  - [1. 库分类与选择标准](#1-库分类与选择标准)
+    - [1.1 选择标准](#11-选择标准)
+  - [2. 嵌入式生态核心库](#2-嵌入式生态核心库)
+    - [2.1 Embassy框架分析](#21-embassy框架分析)
+    - [2.2 RTIC分析](#22-rtic分析)
+  - [3. 异步运行时核心库](#3-异步运行时核心库)
+    - [3.1 Tokio分析](#31-tokio分析)
+    - [3.2 io\_uring生态分析](#32-io_uring生态分析)
+  - [4. Web框架核心库](#4-web框架核心库)
+    - [4.1 Axum分析](#41-axum分析)
+    - [4.2 Actix-web分析](#42-actix-web分析)
+  - [5. Actor框架核心库](#5-actor框架核心库)
+    - [5.1 Actix分析](#51-actix分析)
+    - [5.2 Bastion分析](#52-bastion分析)
+  - [6. 数据库客户端库](#6-数据库客户端库)
+    - [6.1 sqlx分析](#61-sqlx分析)
+  - [7. 库选择决策矩阵](#7-库选择决策矩阵)
+    - [7.1 应用场景匹配](#71-应用场景匹配)
+    - [7.2 成熟度评估](#72-成熟度评估)
+  - [8. 形式化质量评估](#8-形式化质量评估)
+    - [8.1 安全性评分](#81-安全性评分)
+    - [8.2 性能评分](#82-性能评分)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 库分类与选择标准
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 选择标准
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -33,6 +64,7 @@
 ---
 
 ## 2. 嵌入式生态核心库
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Embassy框架分析
@@ -606,7 +638,13 @@ let users = sqlx::query_as::<_, User>(
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [comprehensive-analysis 目录](./README.md)
+- [上级目录](../README.md)

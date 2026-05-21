@@ -1,20 +1,9 @@
 ﻿# Adapter 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 结构型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 6 行（Adapter）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Adapter 形式化分析](#adapter-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Adapter 结构）](#def-11adapter-结构)
@@ -47,13 +36,67 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 结构型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 6 行（Adapter）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Adapter 形式化分析](#adapter-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Adapter 结构）](#def-11adapter-结构)
+    - [Axiom AD1（语义保持公理）](#axiom-ad1语义保持公理)
+    - [Axiom AD2（委托借用公理）](#axiom-ad2委托借用公理)
+    - [定理 AD-T1（所有权安全定理）](#定理-ad-t1所有权安全定理)
+    - [定理 AD-T2（借用冲突避免定理）](#定理-ad-t2借用冲突避免定理)
+    - [推论 AD-C1（纯 Safe Adapter）](#推论-ad-c1纯-safe-adapter)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
+  - [典型场景](#典型场景)
+  - [完整场景示例：第三方 HTTP 客户端适配](#完整场景示例第三方-http-客户端适配)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：适配器修改被适配者语义](#反例适配器修改被适配者语义)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Adapter 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $A$ 为适配器类型，$T$ 为目标接口类型，$S$ 为被适配类型。Adapter 是一个四元组 $\mathcal{AD} = (A, T, S, \mathit{adapt})$，满足：
@@ -69,6 +112,7 @@ $$\mathcal{AD} = \langle A, T, S, \mathit{adapt}: A \times S \rightarrow \mathrm
 ---
 
 ### Axiom AD1（语义保持公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit{inner})$$
@@ -76,6 +120,7 @@ $$\forall a: A,\, \mathit{op}_T(a) \equiv_{\mathrm{sem}} \mathit{op}_S(a.\mathit
 适配器不改变被适配对象语义，仅转换接口形式。
 
 ### Axiom AD2（委托借用公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用规则}$$
@@ -85,6 +130,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T1（所有权安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md)，$A$ 拥有 $S$，委托调用时 `&self.inner` 借用有效，无悬垂。
@@ -112,6 +158,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 定理 AD-T2（借用冲突避免定理）
+>
 > **[来源: Rust Official Docs]**
 
 由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)，委托链上无双重可变借用。
@@ -144,6 +191,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 ---
 
 ### 推论 AD-C1（纯 Safe Adapter）
+>
 > **[来源: Rust Official Docs]**
 
 Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsafe`。
@@ -160,6 +208,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -171,6 +220,7 @@ Adapter 为纯 Safe；仅用结构体包装、委托、`impl Trait`，无 `unsaf
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -206,6 +256,7 @@ a.log("hello");
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -473,3 +524,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [02_structural 目录](./README.md)
+- [上级目录](../README.md)

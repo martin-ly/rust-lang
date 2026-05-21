@@ -1,4 +1,30 @@
 # 嵌入式 Rust 指南：Embassy vs RTIC
+>
+> **层次定位**: L3-L6 高级-生态 / 嵌入式应用域
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md) · [docs 核心概念](../01_core/README.md)
+> **后置延伸**: [docs Rust for Linux](./RUST_FOR_LINUX_GUIDE.md) · [knowledge Unsafe](../../knowledge/03_advanced/unsafe/README.md)
+> **跨层映射**: L3→L6 工程映射 | 理论→实践
+> **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
+
+## 📑 目录
+
+- [嵌入式 Rust 指南：Embassy vs RTIC](#嵌入式-rust-指南embassy-vs-rtic)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [Embassy：异步嵌入式](#embassy异步嵌入式)
+    - [核心设计](#核心设计)
+    - [关键特性](#关键特性)
+    - [代码示例](#代码示例)
+    - [多任务并发](#多任务并发)
+  - [RTIC：实时中断驱动并发](#rtic实时中断驱动并发)
+    - [核心设计](#核心设计-1)
+    - [关键特性](#关键特性-1)
+    - [代码示例](#代码示例-1)
+  - [Embassy vs RTIC 对比](#embassy-vs-rtic-对比)
+  - [决策树](#决策树)
+  - [参考](#参考)
+  - [思维导图：嵌入式 Rust 生态全景](#思维导图嵌入式-rust-生态全景)
+  - [决策树：嵌入式框架选择](#决策树嵌入式框架选择)
 
 > **层级**: L6 生态工具 / L3 高级系统编程
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
@@ -249,3 +275,42 @@ mod app {
 > **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
+
+---
+
+## 思维导图：嵌入式 Rust 生态全景
+
+```mermaid
+graph TD
+    E[嵌入式 Rust] --> F[框架选择]
+    E --> H[HAL 抽象]
+    E --> R[运行时模型]
+    E --> D[调试与烧录]
+    F --> F1[Embassy - async]
+    F --> F2[RTIC - 中断驱动]
+    F --> F3[裸机 + HAL]
+    H --> H1[embedded-hal]
+    H --> H2[芯片特定 HAL]
+    R --> R1[no_std]
+    R --> R2[alloc / 无 alloc]
+    D --> D1[probe-rs]
+    D --> D2[defmt]
+    D --> D3[OpenOCD]
+```
+
+---
+
+## 决策树：嵌入式框架选择
+
+```mermaid
+graph TD
+    Q1[实时性要求高?] -->|是| Q2[是否需要 async?]
+    Q1 -->|否| A1[Embassy - async 优先]
+    Q2 -->|是| Q3[调度复杂度?]
+    Q2 -->|否| A2[RTIC - 中断驱动]
+    Q3 -->|简单| A3[RTIC + 手动中断]
+    Q3 -->|复杂| A4[裸机 + 自定义调度]
+    A1 --> Q4[是否需要裸机优化?]
+    Q4 -->|是| A5[裸机 + Embassy HAL]
+    Q4 -->|否| A6[Embassy 完整框架]
+```

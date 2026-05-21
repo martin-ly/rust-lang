@@ -4,6 +4,29 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust Async 生态系统全景图](#rust-async-生态系统全景图)
+  - [📑 目录](#-目录)
+  - [生态系统总览](#生态系统总览)
+  - [1. 嵌入式生态 (Embedded)](#1-嵌入式生态-embedded)
+    - [1.1 Embassy生态详解](#11-embassy生态详解)
+    - [1.2 RTIC实时框架](#12-rtic实时框架)
+  - [2. io\_uring 生态 (Linux高性能)](#2-io_uring-生态-linux高性能)
+    - [2.1 tokio-uring](#21-tokio-uring)
+    - [2.2 glommio (线程本地io\_uring)](#22-glommio-线程本地io_uring)
+    - [2.3 monoio (纯io\_uring)](#23-monoio-纯io_uring)
+    - [2.4 io\_uring生态对比](#24-io_uring生态对比)
+  - [3. 特色开源库](#3-特色开源库)
+    - [3.1 Quinn (QUIC协议)](#31-quinn-quic协议)
+    - [3.2 sqlx (编译时检查SQL)](#32-sqlx-编译时检查sql)
+    - [3.3 lapin (AMQP/RabbitMQ)](#33-lapin-amqprabbitmq)
+  - [4. 生态选择指南](#4-生态选择指南)
+    - [4.1 决策树](#41-决策树)
+    - [4.2 场景匹配表](#42-场景匹配表)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 生态系统总览
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -305,3 +328,9 @@ async fn amqp_consumer() -> Result<(), lapin::Error> {
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

@@ -7,16 +7,53 @@
 
 ---
 
+## 📑 目录
+>
+- [Next-gen Trait Solver 跟踪报告](#next-gen-trait-solver-跟踪报告)
+  - [📑 目录](#-目录)
+  - [1. Rust 当前 Trait Solver 的局限](#1-rust-当前-trait-solver-的局限)
+    - [1.1 主要技术局限](#11-主要技术局限)
+      - [A. 高阶类型推理 (Higher-Ranked Type Inference)](#a-高阶类型推理-higher-ranked-type-inference)
+      - [B. 关联类型归一化 (Associated Type Normalization)](#b-关联类型归一化-associated-type-normalization)
+      - [C. 隐式自动 trait 推导](#c-隐式自动-trait-推导)
+    - [1.2 对现代 Rust 特性的制约](#12-对现代-rust-特性的制约)
+  - [2. Next-gen Solver 的改进方向](#2-next-gen-solver-的改进方向)
+    - [2.1 新架构核心设计](#21-新架构核心设计)
+      - [核心设计原则](#核心设计原则)
+    - [2.2 关键技术改进](#22-关键技术改进)
+      - [A. 统一的目标语言 (Goal Language)](#a-统一的目标语言-goal-language)
+      - [B. 延迟归一化 (Lazy Normalization)](#b-延迟归一化-lazy-normalization)
+      - [C. 改进的 Coherence / Specialization 支持](#c-改进的-coherence--specialization-支持)
+  - [3. Chalk vs New Solver 的架构对比](#3-chalk-vs-new-solver-的架构对比)
+    - [3.1 Chalk 项目回顾](#31-chalk-项目回顾)
+    - [3.2 Chalk 的局限性](#32-chalk-的局限性)
+    - [3.3 Next-gen Solver 与 Chalk 的对比](#33-next-gen-solver-与-chalk-的对比)
+    - [3.4 架构演进关系](#34-架构演进关系)
+  - [4. 对现代 Rust 特性的影响](#4-对现代-rust-特性的影响)
+    - [4.1 GATs (Generic Associated Types)](#41-gats-generic-associated-types)
+    - [4.2 RPITIT (Return Position Impl Trait In Traits)](#42-rpitit-return-position-impl-trait-in-traits)
+    - [4.3 AFIT (Async Fn In Traits)](#43-afit-async-fn-in-traits)
+    - [4.4 Specialization (特化)](#44-specialization-特化)
+  - [5. 启用 Next-gen Solver](#5-启用-next-gen-solver)
+    - [5.1 Nightly 编译器 (已默认启用)](#51-nightly-编译器-已默认启用)
+    - [5.2 对项目的影响评估](#52-对项目的影响评估)
+  - [6. 时间线跟踪](#6-时间线跟踪)
+  - [7. 参考文献](#7-参考文献)
+  - [相关概念](#相关概念)
+
 ## 1. Rust 当前 Trait Solver 的局限
+>
 > **[来源: Rust Official Docs]**
 
 Rust 的类型系统核心之一是 **trait solver**（特征求解器），负责在编译时判断某个类型是否实现了特定 trait，并解决相关的类型约束。
 当前稳定版使用的 trait solver 是围绕 **SLG (Selective Linear Generalized)  resolution** 构建的，自 Rust 1.0 以来基本架构未变。
 
 ### 1.1 主要技术局限
+>
 > **[来源: Rust Official Docs]**
 
 #### A. 高阶类型推理 (Higher-Ranked Type Inference)
+>
 > **[来源: Rust Official Docs]**
 
 当前 solver 在处理高阶 trait bounds (HRTB) 时经常出现不一致：
@@ -30,6 +67,7 @@ where
 ```
 
 #### B. 关联类型归一化 (Associated Type Normalization)
+>
 > **[来源: Rust Official Docs]**
 
 复杂的关联类型投影在某些场景下会导致编译器死循环或错误拒绝：
@@ -45,6 +83,7 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 ```
 
 #### C. 隐式自动 trait 推导
+>
 > **[来源: Rust Official Docs]**
 
 当前 `AutoTrait` 分析（如 `Send`/`Sync` 推导）与主 solver 分离，导致：
@@ -54,6 +93,7 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 3. 与 GATs (Generic Associated Types) 的交互问题
 
 ### 1.2 对现代 Rust 特性的制约
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 当前 Solver 状态 | 影响 |
@@ -67,14 +107,17 @@ type DeepItem<T: Iterable> = <<T as Iterable>::Iter as Iterator>::Item;
 ---
 
 ## 2. Next-gen Solver 的改进方向
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 新架构核心设计
+>
 > **[来源: Rust Official Docs]**
 
 Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 2021 年开始重新设计的类型求解引擎，于 **2024 年底在 nightly 编译器中默认启用**。
 
 #### 核心设计原则
+>
 > **[来源: Rust Official Docs]**
 
 1. **基于 Goals 的统一框架**: 所有类型检查问题统一表示为 "证明目标" (goals)
@@ -107,9 +150,11 @@ Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 
 ```
 
 ### 2.2 关键技术改进
+>
 > **[来源: Rust Official Docs]**
 
 #### A. 统一的目标语言 (Goal Language)
+>
 > **[来源: Rust Official Docs]**
 
 所有类型系统查询统一为 `Goal`：
@@ -388,6 +433,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 >
 > - 2026-04-24: 初始创建，基于 nightly 2026-04 状态 (新 solver 已默认启用)
 > - 下次复查: 2026-07-24 (跟踪稳定化 RFC 进展)
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -399,7 +445,12 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

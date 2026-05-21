@@ -1,14 +1,63 @@
 # Rust 所有权系统元模型 - 判断形式
 
+## 📑 目录
+>
+- [Rust 所有权系统元模型 - 判断形式](#rust-所有权系统元模型---判断形式)
+  - [📑 目录](#-目录)
+  - [1. 判断 (Judgments) 概述](#1-判断-judgments-概述)
+  - [2. 语法判断 (Syntactic Judgments)](#2-语法判断-syntactic-judgments)
+    - [2.1 类型判断](#21-类型判断)
+      - [2.1.1 变量类型](#211-变量类型)
+      - [2.1.2 借用类型](#212-借用类型)
+    - [2.2 所有权安全判断 (Ownership Safety)](#22-所有权安全判断-ownership-safety)
+      - [2.2.1 基础规则](#221-基础规则)
+      - [2.2.2 解引用规则](#222-解引用规则)
+    - [2.3 子类型判断](#23-子类型判断)
+      - [2.3.1 引用子类型](#231-引用子类型)
+      - [2.3.2 可变引用子类型（不变）](#232-可变引用子类型不变)
+    - [2.4 良构性判断](#24-良构性判断)
+      - [2.4.1 类型良构](#241-类型良构)
+      - [2.4.2 区域良构](#242-区域良构)
+      - [2.4.3 环境良构](#243-环境良构)
+  - [3. 语义判断 (Semantic Judgments)](#3-语义判断-semantic-judgments)
+    - [3.1 大步求值 (Big-Step Evaluation)](#31-大步求值-big-step-evaluation)
+    - [3.2 单步求值 (Small-Step Evaluation)](#32-单步求值-small-step-evaluation)
+    - [3.3 位置求值 (Place Evaluation)](#33-位置求值-place-evaluation)
+    - [3.4 模式匹配](#34-模式匹配)
+  - [4. 元理论判断 (Metatheoretic Judgments)](#4-元理论判断-metatheoretic-judgments)
+    - [4.1 类型保持 (Preservation)](#41-类型保持-preservation)
+    - [4.2 进展 (Progress)](#42-进展-progress)
+    - [4.3 类型安全 (Type Safety)](#43-类型安全-type-safety)
+    - [4.4 终止性 (Termination)](#44-终止性-termination)
+      - [4.4.1 Linearizability](#441-linearizability)
+  - [5. 辅助判断](#5-辅助判断)
+    - [5.1 自由变量](#51-自由变量)
+    - [5.2 变量捕获](#52-变量捕获)
+    - [5.3 生命周期包含](#53-生命周期包含)
+    - [5.4 贷款冲突检查](#54-贷款冲突检查)
+    - [5.5 借用检查](#55-借用检查)
+  - [6. 判断之间的关系](#6-判断之间的关系)
+  - [7. 判断的推理规则示例](#7-判断的推理规则示例)
+    - [7.1 借用规则 (完整版)](#71-借用规则-完整版)
+    - [7.2 所有权安全核心规则](#72-所有权安全核心规则)
+    - [7.3 序列规则](#73-序列规则)
+    - [7.4 赋值规则](#74-赋值规则)
+  - [8. 判断的 Coq 形式化草图](#8-判断的-coq-形式化草图)
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 判断 (Judgments) 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 判断是形式系统的核心，定义了程序在何种条件下被认为是有效的。本文档定义 Rust 所有权系统的完整判断体系。
 
 ## 2. 语法判断 (Syntactic Judgments)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 类型判断
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -406,7 +455,13 @@ Inductive eval :
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [meta-model 目录](./README.md)
+- [上级目录](../README.md)

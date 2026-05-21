@@ -6,6 +6,31 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust所有权与可判定性文档 - 内容质量审计报告](#rust所有权与可判定性文档---内容质量审计报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [主要问题](#主要问题)
+  - [详细问题分析](#详细问题分析)
+    - [1. 形式化证明文档 (formal-proofs/)](#1-形式化证明文档-formal-proofs)
+    - [2. 理论基础文档 (00-foundations/)](#2-理论基础文档-00-foundations)
+    - [3. 形式模型文档 (02-formal-models/)](#3-形式模型文档-02-formal-models)
+    - [4. 可判定性分析 (04-decidability-analysis/)](#4-可判定性分析-04-decidability-analysis)
+    - [5. 案例研究 (case-studies/)](#5-案例研究-case-studies)
+  - [改进优先级矩阵](#改进优先级矩阵)
+  - [必须解决的核心问题](#必须解决的核心问题)
+    - [1. 添加完整的形式化语义](#1-添加完整的形式化语义)
+    - [2. 可判定性理论深度内容](#2-可判定性理论深度内容)
+    - [3. 机器检验证明](#3-机器检验证明)
+  - [建议的文档重写计划](#建议的文档重写计划)
+    - [Phase 1: 核心形式化基础 (优先级: P0)](#phase-1-核心形式化基础-优先级-p0)
+    - [Phase 2: 可判定性深度分析 (优先级: P1)](#phase-2-可判定性深度分析-优先级-p1)
+    - [Phase 3: 案例研究形式化 (优先级: P2)](#phase-3-案例研究形式化-优先级-p2)
+  - [成功标准](#成功标准)
+  - [*下一步: 开始Phase 1重写工作*](#下一步-开始phase-1重写工作)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -225,3 +250,10 @@
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [audit_reports 目录](./README.md)
+- [上级目录](../README.md)

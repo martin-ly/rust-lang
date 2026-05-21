@@ -6,10 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [75% 里程碑报告](#75-里程碑报告)
+  - [📑 目录](#-目录)
+  - [重大进展](#重大进展)
+    - [1. 证明策略库 (ProofTactics.v)](#1-证明策略库-prooftacticsv)
+    - [2. 填充 Admit 进展](#2-填充-admit-进展)
+    - [3. 代码统计更新](#3-代码统计更新)
+  - [完成的证明](#完成的证明)
+    - [Termination.v](#terminationv)
+    - [Preservation.v](#preservationv)
+    - [Progress.v](#progressv)
+  - [文件结构最终版](#文件结构最终版)
+  - [质量提升](#质量提升)
+    - [证明自动化](#证明自动化)
+    - [文档完善](#文档完善)
+    - [测试覆盖](#测试覆盖)
+  - [剩余工作 (25%)](#剩余工作-25)
+    - [高优先级 (15%)](#高优先级-15)
+    - [中优先级 (7%)](#中优先级-7)
+    - [低优先级 (3%)](#低优先级-3)
+  - [持续承诺](#持续承诺)
+  - [**下次目标**: 90%](#下次目标-90)
+  - [相关概念](#相关概念)
+
 ## 重大进展
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 证明策略库 (ProofTactics.v)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 创建了完整的证明策略库：
@@ -31,6 +58,7 @@ Ltac auto_eval.         (* 自动求值证明 *)
 ```
 
 ### 2. 填充 Admit 进展
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 原 admit 数 | 已填充 | 剩余 |
@@ -198,7 +226,13 @@ coq-formalization/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

@@ -4,7 +4,48 @@
 
 ---
 
+## 📑 目录
+>
+- [快速决策索引](#快速决策索引)
+- [一、测试类型选择决策树](#一测试类型选择决策树)
+  - [1.1 单元测试 (Unit Tests)](#11-单元测试-unit-tests)
+  - [1.2 集成测试 (Integration Tests)](#12-集成测试-integration-tests)
+  - [1.3 文档测试 (Doc Tests)](#13-文档测试-doc-tests)
+  - [1.4 基准测试 (Benchmarks)](#14-基准测试-benchmarks)
+  - [1.5 模糊测试 (Fuzz Testing)](#15-模糊测试-fuzz-testing)
+  - [1.6 属性测试 (Property Testing)](#16-属性测试-property-testing)
+- [二、测试工具选择矩阵](#二测试工具选择矩阵)
+  - [2.1 工具对比表](#21-工具对比表)
+  - [2.2 异步测试：tokio-test](#22-异步测试tokio-test)
+  - [2.3 模拟对象：mockall](#23-模拟对象mockall)
+  - [2.4 快照测试：insta](#24-快照测试insta)
+  - [2.5 基准测试：Criterion](#25-基准测试criterion)
+- [三、测试策略维度](#三测试策略维度)
+  - [3.1 测试金字塔](#31-测试金字塔)
+  - [3.2 覆盖率目标](#32-覆盖率目标)
+  - [3.3 CI 集成策略](#33-ci-集成策略)
+  - [3.4 性能回归防护](#34-性能回归防护)
+- [四、最佳实践](#四最佳实践)
+  - [4.1 测试组织结构](#41-测试组织结构)
+  - [4.2 测试数据管理](#42-测试数据管理)
+  - [4.3 异步测试模式](#43-异步测试模式)
+  - [4.4 测试文档化](#44-测试文档化)
+- [五、决策流程图](#五决策流程图)
+- [六、快速参考卡片](#六快速参考卡片)
+  - [6.1 常用命令](#61-常用命令)
+  - [6.2 常用属性](#62-常用属性)
+- [七、推荐配置模板](#七推荐配置模板)
+  - [7.1 Cargo.toml 测试配置](#71-cargotoml-测试配置)
+  - [7.2 测试环境配置](#72-测试环境配置)
+- [八、参考资源](#八参考资源)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 ## 快速决策索引
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -30,9 +71,11 @@
 ---
 
 ## 一、测试类型选择决策树
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 单元测试 (Unit Tests)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -123,6 +166,7 @@ mod tests {
 ---
 
 ### 1.2 集成测试 (Integration Tests)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -222,6 +266,7 @@ pub async fn setup_test_db() -> Database {
 ---
 
 ### 1.3 文档测试 (Doc Tests)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -339,6 +384,7 @@ impl Validator {
 ---
 
 ### 1.4 基准测试 (Benchmarks)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -434,6 +480,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 ---
 
 ### 1.5 模糊测试 (Fuzz Testing)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -507,6 +554,7 @@ cargo fuzz run parser crash-abc123
 ---
 
 ### 1.6 属性测试 (Property Testing)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -604,9 +652,11 @@ impl ReferenceStateMachine for MyStateMachine {
 ---
 
 ## 二、测试工具选择矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 工具对比表
+>
 > **[来源: Rust Official Docs]**
 
 | 工具/库 | 用途 | 适用场景 | 学习曲线 | 维护状态 |
@@ -623,6 +673,7 @@ impl ReferenceStateMachine for MyStateMachine {
 | **predicates** | 断言增强 | 复杂条件验证 | ⭐ 低 | 活跃 |
 
 ### 2.2 异步测试：tokio-test
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -888,6 +939,7 @@ criterion_main!(benches);
 ---
 
 ## 三、测试策略维度
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 测试金字塔
@@ -1098,6 +1150,7 @@ criterion_main!(benches);
 ---
 
 ## 四、最佳实践
+>
 > **[来源: Rust Official Docs]**
 
 ### 4.1 测试组织结构
@@ -1349,6 +1402,7 @@ mod test_documentation {
 ---
 
 ## 五、决策流程图
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -1393,6 +1447,7 @@ mod test_documentation {
 ---
 
 ## 六、快速参考卡片
+>
 > **[来源: Rust Official Docs]**
 
 ### 6.1 常用命令
@@ -1441,6 +1496,7 @@ cargo flamegraph
 ---
 
 ## 七、推荐配置模板
+>
 > **[来源: Rust Official Docs]**
 
 ### 7.1 Cargo.toml 测试配置
@@ -1519,6 +1575,7 @@ pub mod test_config {
 ---
 
 ## 八、参考资源
+>
 > **[来源: Rust Official Docs]**
 
 - [Rust Testing Guide](https://doc.rust-lang.org/rustc/tests/index.html)
@@ -1536,6 +1593,7 @@ pub mod test_config {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -1586,3 +1644,10 @@ pub mod test_config {
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

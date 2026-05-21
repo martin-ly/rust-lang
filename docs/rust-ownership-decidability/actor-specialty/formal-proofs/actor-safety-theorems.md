@@ -4,10 +4,42 @@
 
 ---
 
+## 📑 目录
+>
+- [Actor模型安全性定理与证明](#actor模型安全性定理与证明)
+  - [📑 目录](#-目录)
+  - [1. Actor模型基本定义](#1-actor模型基本定义)
+    - [1.1 形式化定义](#11-形式化定义)
+    - [1.2 Actor转换规则](#12-actor转换规则)
+  - [2. 核心安全定理](#2-核心安全定理)
+    - [定理1: Actor无数据竞争](#定理1-actor无数据竞争)
+    - [定理2: Actor无显式锁](#定理2-actor无显式锁)
+    - [定理3: Actor局部一致性](#定理3-actor局部一致性)
+  - [3. 容错定理](#3-容错定理)
+    - [定理4: 监督树故障隔离](#定理4-监督树故障隔离)
+    - [定理5: 最终一致性](#定理5-最终一致性)
+  - [4. 与CSP和共享内存的关系](#4-与csp和共享内存的关系)
+    - [定理6: Actor包含CSP](#定理6-actor包含csp)
+    - [定理7: Actor优于共享内存](#定理7-actor优于共享内存)
+  - [5. Rust Actor实现安全](#5-rust-actor实现安全)
+    - [定理8: Rust + Actor 内存安全](#定理8-rust--actor-内存安全)
+    - [定理9: 消息类型安全](#定理9-消息类型安全)
+  - [6. 分布式Actor定理](#6-分布式actor定理)
+    - [定理10: 位置透明性](#定理10-位置透明性)
+    - [定理11: 分片一致性](#定理11-分片一致性)
+  - [7. 实际推论](#7-实际推论)
+    - [推论1: Web服务安全](#推论1-web服务安全)
+    - [推论2: 游戏服务器安全](#推论2-游戏服务器安全)
+    - [推论3: 金融系统安全](#推论3-金融系统安全)
+  - [**定理数量**: 11个核心定理 + 3个推论](#定理数量-11个核心定理--3个推论)
+  - [相关概念](#相关概念)
+
 ## 1. Actor模型基本定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -24,6 +56,7 @@
 ```
 
 ### 1.2 Actor转换规则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -449,7 +482,12 @@ Saga协调器:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

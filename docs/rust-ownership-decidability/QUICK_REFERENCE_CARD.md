@@ -4,7 +4,32 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 快速参考卡片](#rust-所有权系统---快速参考卡片)
+  - [📑 目录](#-目录)
+  - [🎯 所有权三原则](#-所有权三原则)
+  - [🔄 借用规则](#-借用规则)
+  - [⏱️ 生命周期规则](#️-生命周期规则)
+  - [🧠 智能指针速查](#-智能指针速查)
+  - [🎨 常见模式](#-常见模式)
+    - [RAII 模式](#raii-模式)
+    - [类型状态模式](#类型状态模式)
+    - [内部可变性](#内部可变性)
+  - [⚡ 并发 Send/Sync](#-并发-sendsync)
+  - [🔧 错误快速修复](#-错误快速修复)
+  - [📊 验证工具](#-验证工具)
+  - [📚 快速导航](#-快速导航)
+  - [🎓 学习路径](#-学习路径)
+  - [🔗 关键链接](#-关键链接)
+  - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
+    - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
+    - [形式化更新](#形式化更新)
+  - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 🎯 所有权三原则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -16,6 +41,7 @@
 ---
 
 ## 🔄 借用规则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -34,6 +60,7 @@ let r = &mut data;  // OK
 ---
 
 ## ⏱️ 生命周期规则
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -211,3 +238,10 @@ impl Sync for T where &T: Send { }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -6,10 +6,49 @@
 
 ---
 
+## 📑 目录
+>
+- [宏速查卡](#宏速查卡)
+  - [📑 目录](#-目录)
+  - [声明宏 (macro\_rules!)](#声明宏-macro_rules)
+    - [基本语法](#基本语法)
+    - [参数模式](#参数模式)
+    - [重复模式](#重复模式)
+    - [常见片段类型](#常见片段类型)
+  - [过程宏](#过程宏)
+    - [派生宏](#派生宏)
+    - [属性宏](#属性宏)
+    - [函数式宏](#函数式宏)
+  - [常见宏示例](#常见宏示例)
+    - [vec](#vec)
+    - [println! / format](#println--format)
+    - [assert](#assert)
+    - [todo! / unimplemented](#todo--unimplemented)
+    - [include](#include)
+  - [宏调试技巧](#宏调试技巧)
+    - [查看展开](#查看展开)
+    - [trace\_macros](#trace_macros)
+  - [宏卫生性 (Hygiene)](#宏卫生性-hygiene)
+  - [递归宏](#递归宏)
+  - [条件编译宏](#条件编译宏)
+  - [编译器内置宏](#编译器内置宏)
+  - [常用宏](#常用宏)
+  - [派生宏](#派生宏-1)
+  - [属性宏](#属性宏-1)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 声明宏 (macro_rules!)
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -23,6 +62,7 @@ say_hello!();  // 展开: println!("Hello!");
 ```
 
 ### 参数模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -43,6 +83,7 @@ print_value!(1, 2);
 ```
 
 ### 重复模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -63,6 +104,7 @@ vec![1, 2, 3,];  // 带结尾逗号
 ```
 
 ### 常见片段类型
+>
 > **[来源: Rust Official Docs]**
 
 | 指示符 | 匹配 | 示例 |
@@ -81,9 +123,11 @@ vec![1, 2, 3,];  // 带结尾逗号
 ---
 
 ## 过程宏
+>
 > **[来源: Rust Official Docs]**
 
 ### 派生宏
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -104,6 +148,7 @@ struct MyStruct;
 ```
 
 ### 属性宏
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -121,6 +166,7 @@ fn my_func() {}
 ```
 
 ### 函数式宏
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -137,9 +183,11 @@ my_macro!(...);
 ---
 
 ## 常见宏示例
+>
 > **[来源: Rust Official Docs]**
 
 ### vec
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -359,3 +407,10 @@ struct Point { x: i32, y: i32 }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

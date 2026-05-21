@@ -6,12 +6,56 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权可判定性 - 网络权威资源对齐分析报告](#rust-所有权可判定性---网络权威资源对齐分析报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [核心发现](#核心发现)
+  - [1. 最新权威资源识别 (2024-2025)](#1-最新权威资源识别-2024-2025)
+    - [1.1 顶级会议论文 (PLDI/POPL/ICFP/SOSP)](#11-顶级会议论文-pldipoplicfpsosp)
+      - [🔴 高优先级 - 尚未充分覆盖](#-高优先级---尚未充分覆盖)
+      - [🔶 中优先级 - 需要更新](#-中优先级---需要更新)
+    - [1.2 研究机构和项目动态](#12-研究机构和项目动态)
+  - [2. 详细差距分析](#2-详细差距分析)
+    - [2.1 RefinedRust - 重大差距 ⚠️](#21-refinedrust---重大差距-️)
+    - [2.2 Aeneas - 中等差距 🔶](#22-aeneas---中等差距-)
+    - [2.3 Gillian-Rust - 完全缺失 🔴](#23-gillian-rust---完全缺失-)
+    - [2.4 Tree Borrows - 部分覆盖 🔶](#24-tree-borrows---部分覆盖-)
+    - [2.5 Rust 标准库验证计划 - 完全缺失 🔴](#25-rust-标准库验证计划---完全缺失-)
+  - [3. 持续推进计划](#3-持续推进计划)
+    - [Phase 1: 紧急补充 (1-2 周)](#phase-1-紧急补充-1-2-周)
+      - [3.1 创建 RefinedRust 深度文档](#31-创建-refinedrust-深度文档)
+      - [3.2 更新验证工具对比矩阵](#32-更新验证工具对比矩阵)
+    - [Phase 2: 重要更新 (2-4 周)](#phase-2-重要更新-2-4-周)
+      - [3.3 补充 Gillian-Rust 内容](#33-补充-gillian-rust-内容)
+      - [3.4 更新 Tree Borrows 文档](#34-更新-tree-borrows-文档)
+      - [3.5 创建 Rust 标准库验证专题](#35-创建-rust-标准库验证专题)
+    - [Phase 3: 持续维护 (长期)](#phase-3-持续维护-长期)
+      - [3.6 学术文献追踪机制](#36-学术文献追踪机制)
+      - [3.7 工具版本同步](#37-工具版本同步)
+  - [4. 内容质量评估](#4-内容质量评估)
+    - [4.1 当前优势 ✅](#41-当前优势-)
+    - [4.2 需要改进 🔶](#42-需要改进-)
+    - [4.3 缺失内容 🔴](#43-缺失内容-)
+  - [5. 推荐行动项](#5-推荐行动项)
+    - [立即执行 (本周)](#立即执行-本周)
+    - [短期执行 (本月)](#短期执行-本月)
+    - [长期维护 (持续)](#长期维护-持续)
+  - [6. 参考资源](#6-参考资源)
+    - [必读论文](#必读论文)
+    - [跟踪资源](#跟踪资源)
+  - [**最后更新**: 2026-03-12](#最后更新-2026-03-12)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档对比分析了 `rust-ownership-decidability` 文件夹内容与网络上最新、最全面的权威学术资源之间的差距，并制定持续推进计划。
 
 ### 核心发现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 维度 | 当前状态 | 最新网络资源 | 差距评估 |
@@ -26,6 +70,7 @@
 ---
 
 ## 1. 最新权威资源识别 (2024-2025)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 顶级会议论文 (PLDI/POPL/ICFP/SOSP)
@@ -351,7 +396,13 @@ Meta
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

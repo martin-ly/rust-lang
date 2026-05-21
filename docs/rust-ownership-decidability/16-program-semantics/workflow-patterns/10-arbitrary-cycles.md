@@ -1,10 +1,10 @@
 # 10 任意循环模式 (Arbitrary Cycles)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [10 任意循环模式 (Arbitrary Cycles)](#10-任意循环模式-arbitrary-cycles)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [与结构化循环的区别](#与结构化循环的区别)
@@ -26,13 +26,46 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [10 任意循环模式 (Arbitrary Cycles)](#10-任意循环模式-arbitrary-cycles)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [与结构化循环的区别](#与结构化循环的区别)
+  - [固定点理论](#固定点理论)
+    - [Kleene 固定点定理](#kleene-固定点定理)
+    - [最小固定点语义](#最小固定点语义)
+  - [递归语义](#递归语义)
+    - [μ-演算表示](#μ-演算表示)
+  - [状态机形式化](#状态机形式化)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+  - [正确性证明](#正确性证明)
+    - [终止性证明](#终止性证明)
+    - [安全性证明](#安全性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [基于状态机的实现](#基于状态机的实现)
+    - [带循环检测的实现](#带循环检测的实现)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 任意循环模式支持非结构化的循环控制流，允许流程图中存在任意形式的循环结构，而不仅限于嵌套良好的循环。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 与结构化循环（while、for）不同，任意循环允许：
@@ -714,6 +747,7 @@ $$
 5. **Clarke, E.M., Grumberg, O., & Peled, D.A.** (1999). *Model Checking*. MIT Press.
 
 6. **Apt, K.R., & Olderog, E.R.** (2019). *Fifty Years of Hoare's Logic*. Formal Aspects of Computing, 31, 751-807.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -725,7 +759,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

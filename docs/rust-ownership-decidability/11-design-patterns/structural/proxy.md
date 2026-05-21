@@ -6,7 +6,20 @@
 
 ---
 
+## 📑 目录
+>
+- [Proxy Pattern in Rust](#proxy-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [代理类型](#代理类型)
+    - [1. 虚拟代理 (延迟加载)](#1-虚拟代理-延迟加载)
+    - [2. 保护代理 (访问控制)](#2-保护代理-访问控制)
+    - [3. 智能引用 (引用计数)](#3-智能引用-引用计数)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 代理模式为其他对象提供一种代理以控制对这个对象的访问。
@@ -14,9 +27,11 @@
 ---
 
 ## 代理类型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 虚拟代理 (延迟加载)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -194,6 +209,7 @@ Proxy<T> ≈ T (在接口上)
   - Protection: 访问控制 predicate
   - Smart: 附加行为 (计数、日志等)
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -205,7 +221,12 @@ Proxy<T> ≈ T (在接口上)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [structural 目录](./README.md)

@@ -1,10 +1,10 @@
 # 16 里程碑模式 (Milestone)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [状态条件语义](#状态条件语义)
@@ -24,13 +24,44 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [16 里程碑模式 (Milestone)](#16-里程碑模式-milestone)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [状态条件语义](#状态条件语义)
+  - [时序逻辑形式化](#时序逻辑形式化)
+    - [LTL 表示](#ltl-表示)
+    - [CTL 表示](#ctl-表示)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+  - [状态机语义](#状态机语义)
+  - [正确性证明](#正确性证明)
+    - [安全性证明](#安全性证明)
+    - [活性证明](#活性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [组合里程碑](#组合里程碑)
+    - [带超时的里程碑](#带超时的里程碑)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 里程碑模式允许活动仅在达到特定状态（里程碑）时才能执行。它用于建模需要等待某些前置条件满足的场景。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -626,6 +657,7 @@ $$
 4. **van der Aalst, W.M.P.** (1998). "The Application of Petri Nets to Workflow Management." *Journal of Circuits, Systems and Computers*, 8(1), 21-66.
 
 5. **Russell, N., ter Hofstede, A.H.M., van der Aalst, W.M.P., & Mulyar, N.** (2006). "Workflow Control-Flow Patterns: A Revised View." *BPM Center Report* BPM-06-22.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -637,7 +669,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

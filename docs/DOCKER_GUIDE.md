@@ -2,16 +2,39 @@
 
 本文档介绍如何使用 Docker 和 Docker Compose 构建和运行本项目。
 
+## 📑 目录
+>
+- [前置要求](#前置要求)
+- [快速开始](#快速开始)
+  - [构建镜像](#构建镜像)
+  - [运行容器](#运行容器)
+  - [使用 Docker Compose](#使用-docker-compose)
+- [多阶段构建](#多阶段构建)
+- [Docker Compose 配置](#docker-compose-配置)
+  - [生产环境](#生产环境)
+  - [开发环境（热重载）](#开发环境热重载)
+- [卷挂载](#卷挂载)
+- [环境变量](#环境变量)
+- [常用命令](#常用命令)
+- [故障排除](#故障排除)
+  - [权限问题](#权限问题)
+  - [编译缓慢](#编译缓慢)
+  - [端口冲突](#端口冲突)
+- [参考](#参考)
+
 ## 前置要求
+>
 > **[来源: Rust Official Docs]**
 
 - [Docker](https://docs.docker.com/get-docker/)
 - [Docker Compose](https://docs.docker.com/compose/install/)
 
 ## 快速开始
+>
 > **[来源: Rust Official Docs]**
 
 ### 构建镜像
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -125,7 +148,12 @@ sudo chown -R $(id -u):$(id -g) .
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [docs 目录](./README.md)

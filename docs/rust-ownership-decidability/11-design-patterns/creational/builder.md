@@ -6,7 +6,25 @@
 
 ---
 
+## 📑 目录
+>
+- [Builder Pattern in Rust](#builder-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [基础实现](#基础实现)
+    - [标准构建者](#标准构建者)
+  - [高级实现](#高级实现)
+    - [Type State 模式 (编译时验证)](#type-state-模式-编译时验证)
+  - [形式化定义](#形式化定义)
+    - [构建过程的类型理论](#构建过程的类型理论)
+    - [不变量](#不变量)
+  - [实战: 数据库连接配置](#实战-数据库连接配置)
+  - [对比分析](#对比分析)
+  - [推荐 crates](#推荐-crates)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 构建者模式将复杂对象的构造过程与其表示分离，允许使用相同的构建过程创建不同的表示。
@@ -14,9 +32,11 @@
 ---
 
 ## 基础实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 标准构建者
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -273,6 +293,7 @@ pub enum ConfigError {
 - **derive_builder**: `#[derive(Builder)]`
 - **typed-builder**: Type State 自动生成
 - **bon**: 现代 Builder 宏
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -284,7 +305,12 @@ pub enum ConfigError {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [creational 目录](./README.md)

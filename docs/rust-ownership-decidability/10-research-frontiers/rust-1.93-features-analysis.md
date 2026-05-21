@@ -4,7 +4,49 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.93.0 特性深度分析](#rust-1930-特性深度分析)
+  - [📑 目录](#-目录)
+  - [版本概览](#版本概览)
+  - [1. 关键特性分析](#1-关键特性分析)
+    - [1.1 musl 1.2.5 更新](#11-musl-125-更新)
+      - [形式化影响](#形式化影响)
+      - [定理 MUSL-DNS-RELIABILITY](#定理-musl-dns-reliability)
+      - [实践示例](#实践示例)
+    - [1.2 全局分配器线程本地存储支持](#12-全局分配器线程本地存储支持)
+      - [形式化定义](#形式化定义)
+      - [定理 ALLOCATOR-TLS-SAFETY](#定理-allocator-tls-safety)
+      - [实践示例](#实践示例-1)
+    - [1.3 asm! 宏的 cfg 属性支持](#13-asm-宏的-cfg-属性支持)
+      - [形式化语义](#形式化语义)
+      - [实践示例](#实践示例-2)
+    - [1.4 MaybeUninit API 扩展](#14-maybeuninit-api-扩展)
+      - [新增方法分析](#新增方法分析)
+      - [定理 MAYBEUNINIT-SAFETY](#定理-maybeuninit-safety)
+      - [实践示例](#实践示例-3)
+    - [1.5 String/Vec into\_raw\_parts](#15-stringvec-into_raw_parts)
+      - [形式化定义](#形式化定义-1)
+      - [实践示例](#实践示例-4)
+    - [1.6 无检查整数操作](#16-无检查整数操作)
+      - [定理 UNCHECKED-ARITHMETIC-1](#定理-unchecked-arithmetic-1)
+      - [实践示例](#实践示例-5)
+    - [1.7 VecDeque 条件弹出](#17-vecdeque-条件弹出)
+      - [形式化语义](#形式化语义-1)
+      - [实践示例](#实践示例-6)
+    - [1.8 deref\_nullptr Lint (Deny-by-Default)](#18-deref_nullptr-lint-deny-by-default)
+      - [形式化分析](#形式化分析)
+      - [实践示例](#实践示例-7)
+  - [2. 迁移指南](#2-迁移指南)
+    - [2.1 破坏性变更检查清单](#21-破坏性变更检查清单)
+    - [2.2 BTreeMap::append 行为变更](#22-btreemapappend-行为变更)
+  - [3. 性能影响分析](#3-性能影响分析)
+  - [4. 安全强化总结](#4-安全强化总结)
+  - [**对齐版本**: Rust 1.93.1](#对齐版本-rust-1931)
+  - [相关概念](#相关概念)
+
 ## 版本概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 属性 | 值 |
@@ -17,9 +59,11 @@
 ---
 
 ## 1. 关键特性分析
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 musl 1.2.5 更新
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 形式化影响
@@ -599,7 +643,13 @@ Rust 1.93 安全改进:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [10-research-frontiers 目录](./README.md)
+- [上级目录](../README.md)

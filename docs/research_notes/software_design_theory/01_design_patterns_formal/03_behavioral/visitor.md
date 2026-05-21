@@ -1,20 +1,9 @@
 ﻿# Visitor 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 行为型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 23 行（Visitor）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Visitor 形式化分析](#visitor-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Visitor 结构）](#def-11visitor-结构)
@@ -43,13 +32,65 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 行为型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 23 行（Visitor）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Visitor 形式化分析](#visitor-形式化分析)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Visitor 结构）](#def-11visitor-结构)
+    - [Axiom VI1（访问完备公理）](#axiom-vi1访问完备公理)
+    - [定理 VI-T1（单分发完备定理）](#定理-vi-t1单分发完备定理)
+    - [定理 VI-T2（穷尽匹配定理）](#定理-vi-t2穷尽匹配定理)
+    - [推论 VI-C1（近似表达）](#推论-vi-c1近似表达)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+  - [完整场景示例：AST 美化打印](#完整场景示例ast-美化打印)
+  - [典型场景](#典型场景)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：新增变体遗漏访问](#反例新增变体遗漏访问)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Visitor 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $E$ 为元素类型（AST/节点），$V$ 为访问者类型。Visitor 是一个三元组 $\mathcal{VI} = (E, V, \mathit{visit})$，满足：
@@ -65,6 +106,7 @@ $$\mathcal{VI} = \langle E, V, \mathit{visit}: V \times E \rightarrow R \rangle$
 ---
 
 ### Axiom VI1（访问完备公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall e: E,\, \exists v: V,\, \mathit{visit}(v, e)\text{ 有定义}$$
@@ -74,6 +116,7 @@ $$\forall e: E,\, \exists v: V,\, \mathit{visit}(v, e)\text{ 有定义}$$
 ---
 
 ### 定理 VI-T1（单分发完备定理）
+>
 > **[来源: Rust Official Docs]**
 
 Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达为近似。
@@ -100,6 +143,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 ---
 
 ### 定理 VI-T2（穷尽匹配定理）
+>
 > **[来源: Rust Official Docs]**
 
 `match e { ... }` 必须覆盖 $E$ 所有变体；新增变体需新增分支，否则编译错误。
@@ -115,6 +159,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 ---
 
 ### 推论 VI-C1（近似表达）
+>
 > **[来源: Rust Official Docs]**
 
 Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{Visitor}) = \mathrm{Approx}$。
@@ -130,6 +175,7 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -141,6 +187,7 @@ Visitor 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -175,9 +222,11 @@ impl Visitor for PrintVisitor {
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -419,3 +468,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [03_behavioral 目录](./README.md)
+- [上级目录](../README.md)

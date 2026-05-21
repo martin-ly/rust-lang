@@ -1,4 +1,19 @@
 # Macros 宏系统
+>
+> **层次定位**: L3 高级概念 / 宏子域索引
+> **前置依赖**: [knowledge Trait](../../02_intermediate/traits.md) · [knowledge 泛型](../../02_intermediate/generics.md)
+> **后置延伸**: [knowledge 编译器内部](../../04_expert/compiler_internals.md) · [concept L3 宏](../../../concept/03_advanced/04_macros.md)
+> **跨层映射**: knowledge→concept 直觉映射 | L3 元编程
+> **定理链编号**: T-070 宏卫生性 → T-071 展开正确性
+
+## 📑 目录
+
+- [Macros 宏系统](#macros-宏系统)
+  - [📑 目录](#-目录)
+  - [📚 内容](#-内容)
+  - [🎯 学习路径](#-学习路径)
+  - [🚀 相关层](#-相关层)
+  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
 
 > **Bloom 层级**: 理解
 

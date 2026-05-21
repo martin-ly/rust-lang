@@ -6,12 +6,41 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权可判定性项目 - 最终推进报告](#rust-所有权可判定性项目---最终推进报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [关键成果](#关键成果)
+  - [新增内容详细清单](#新增内容详细清单)
+    - [新建 17-unsafe-rust/ 目录 (9 篇文档)](#新建-17-unsafe-rust-目录-9-篇文档)
+    - [扩展其他模块 (11 篇文档)](#扩展其他模块-11-篇文档)
+  - [质量评估](#质量评估)
+    - [内容深度分布](#内容深度分布)
+    - [权威对齐](#权威对齐)
+  - [与 100% 的差距](#与-100-的差距)
+    - [剩余工作估算](#剩余工作估算)
+    - [达到 100% 的路径](#达到-100-的路径)
+  - [产出文档索引](#产出文档索引)
+    - [审计报告](#审计报告)
+    - [路线图与计划](#路线图与计划)
+    - [推进报告](#推进报告)
+  - [建议](#建议)
+    - [立即行动](#立即行动)
+    - [短期目标](#短期目标)
+    - [中期目标](#中期目标)
+  - [结论](#结论)
+  - [*当前完成度: 77%*](#当前完成度-77)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过**3 个批次**的持续内容创建，项目从 **70%** 提升到 **77%**，新增了 **20 个文档**，总计约 **123 KB** 内容。
 
 ### 关键成果
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 模块 | 之前 | 之后 | 提升 |
@@ -27,6 +56,7 @@
 ---
 
 ## 新增内容详细清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 新建 17-unsafe-rust/ 目录 (9 篇文档)
@@ -184,7 +214,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

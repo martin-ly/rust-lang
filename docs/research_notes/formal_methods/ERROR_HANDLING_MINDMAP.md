@@ -7,7 +7,45 @@
 
 ---
 
+## 📑 目录
+>
+- [错误处理概念思维导图](#错误处理概念思维导图)
+  - [📑 目录](#-目录)
+  - [错误处理全景](#错误处理全景)
+  - [Result\<T, E\> 详解](#resultt-e-详解)
+    - [基本使用](#基本使用)
+    - [组合方法](#组合方法)
+  - [错误类型设计](#错误类型设计)
+    - [使用 thiserror (库开发)](#使用-thiserror-库开发)
+    - [使用 anyhow (应用开发)](#使用-anyhow-应用开发)
+  - [panic! 使用指南](#panic-使用指南)
+    - [适用场景](#适用场景)
+    - [与 Result 对比](#与-result-对比)
+  - [错误转换](#错误转换)
+    - [From trait](#from-trait)
+    - [Try trait (实验性)](#try-trait-实验性)
+  - [错误处理模式](#错误处理模式)
+    - [模式1: 立即处理](#模式1-立即处理)
+    - [模式2: 传播并添加上下文](#模式2-传播并添加上下文)
+    - [模式3: 错误恢复](#模式3-错误恢复)
+    - [模式4: 聚合错误](#模式4-聚合错误)
+  - [性能考虑](#性能考虑)
+  - [错误处理层次](#错误处理层次)
+  - [Result类型详解](#result类型详解)
+  - [Option类型](#option类型)
+  - [错误类型设计](#错误类型设计-1)
+  - [?操作符机制](#操作符机制)
+  - [最佳实践](#最佳实践)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 错误处理全景
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -96,9 +134,11 @@ mindmap
 ---
 
 ## Result<T, E> 详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本使用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -119,6 +159,7 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 ```
 
 ### 组合方法
+>
 > **[来源: Rust Official Docs]**
 
 | 方法 | 签名 | 用途 |
@@ -133,9 +174,11 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 ---
 
 ## 错误类型设计
+>
 > **[来源: Rust Official Docs]**
 
 ### 使用 thiserror (库开发)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -158,6 +201,7 @@ pub enum ConfigError {
 ```
 
 ### 使用 anyhow (应用开发)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -180,9 +224,11 @@ fn main() -> Result<()> {
 ---
 
 ## panic! 使用指南
+>
 > **[来源: Rust Official Docs]**
 
 ### 适用场景
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 示例 | 原因 |
@@ -193,6 +239,7 @@ fn main() -> Result<()> {
 | 快速失败开发 | `todo!()` | 占位实现 |
 
 ### 与 Result 对比
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -214,6 +261,7 @@ fn parse_user_input(s: &str) -> i32 {
 ---
 
 ## 错误转换
+>
 > **[来源: Rust Official Docs]**
 
 ### From trait
@@ -458,3 +506,10 @@ Option<T>
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

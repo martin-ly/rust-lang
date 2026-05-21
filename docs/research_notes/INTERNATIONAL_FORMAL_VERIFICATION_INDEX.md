@@ -1,5 +1,30 @@
 ﻿# 国际 Rust 形式化验证成果对标索引
 
+## 📑 目录
+>
+- [国际 Rust 形式化验证成果对标索引](#国际-rust-形式化验证成果对标索引)
+  - [📑 目录](#-目录)
+  - [一、国际权威成果总览](#一国际权威成果总览)
+  - [二、逐项对标与差距](#二逐项对标与差距)
+    - [2.1 RustBelt](#21-rustbelt)
+    - [2.2 RustBelt Meets Relaxed Memory (POPL 2020)](#22-rustbelt-meets-relaxed-memory-popl-2020)
+    - [2.3 RustSEM (K-Framework, 2024)](#23-rustsem-k-framework-2024)
+    - [2.4 Aeneas](#24-aeneas)
+    - [2.5 coq-of-rust](#25-coq-of-rust)
+    - [2.6 Crux-MIR](#26-crux-mir)
+    - [2.7 AutoVerus](#27-autoverus)
+    - [2.8 Tree Borrows (PLDI 2025)](#28-tree-borrows-pldi-2025)
+  - [三、POPL/PLDI/ICFP 论文对齐](#三poplpldiicfp-论文对齐)
+  - [四、与本项目 PROOF\_INDEX 的映射](#四与本项目-proof_index-的映射)
+  - [五、季度更新记录](#五季度更新记录)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -10,6 +35,7 @@
 ---
 
 ## 一、国际权威成果总览
+>
 > **[来源: Rust Official Docs]**
 
 | 成果 | 机构/作者 | 年份 | 形式化范围 | 证明助手/工具 | 与本项目对应 |
@@ -27,9 +53,11 @@
 ---
 
 ## 二、逐项对标与差距
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 RustBelt
+>
 > **[来源: Rust Official Docs]**
 
 - **论文**: [RustBelt: Logical Foundations for the Future of Safe Systems Programming](https://plv.mpi-sws.org/rustbelt/README.md)
@@ -171,3 +199,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

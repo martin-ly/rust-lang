@@ -1,19 +1,16 @@
 # 设计模式使用指南
-
-**模块**: C09 Design Patterns
-**创建日期**: 2025-12-11
-**最后更新**: 2026-05-08
-**Rust 版本**: 1.95.0+ (Edition 2024)
-**状态**: ✅ 已完成
-
----
-
-## 📋 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: Gang of Four - Design Patterns]** · **[来源: ACM - Design Patterns in Rust]** · **[来源: IEEE - Software Architecture Best Practices]**
+> **层次定位**: L2-L6 进阶-生态 / 设计模式应用
+> **前置依赖**: [concept L2 Trait](../../concept/02_intermediate/01_traits.md) · [docs 最佳实践](./BEST_PRACTICES.md)
+> **后置延伸**: [docs 异步编程](./ASYNC_PROGRAMMING_USAGE_GUIDE.md) · [concept L6 设计模式](../../concept/06_ecosystem/02_patterns.md)
+> **跨层映射**: L2→L6 抽象映射 | Trait→模式
+> **定理链编号**: T-020 特质一致性 → 模式可组合性
+
+## 📑 目录
 
 - [设计模式使用指南](#设计模式使用指南)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🚀 快速开始](#-快速开始)
     - [单例模式](#单例模式)
@@ -68,6 +65,84 @@
     - [3. LazyLock 在单例模式中的应用](#3-lazylock-在单例模式中的应用)
     - [4. 数学常量在算法模式中的应用](#4-数学常量在算法模式中的应用)
     - [特性对比总结](#特性对比总结)
+  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
+  - [权威来源索引](#权威来源索引)
+  - [思维导图：Rust 设计模式体系](#思维导图rust-设计模式体系)
+  - [决策树：设计模式选择](#决策树设计模式选择)
+
+**模块**: C09 Design Patterns
+**创建日期**: 2025-12-11
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ (Edition 2024)
+**状态**: ✅ 已完成
+
+---
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Design Pattern]** · **[来源: Gang of Four - Design Patterns]** · **[来源: ACM - Design Patterns in Rust]** · **[来源: IEEE - Software Architecture Best Practices]**
+
+- [设计模式使用指南](#设计模式使用指南)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [📋 概述](#-概述)
+  - [🚀 快速开始](#-快速开始)
+    - [单例模式](#单例模式)
+    - [工厂模式](#工厂模式)
+  - [📊 核心模式](#-核心模式)
+    - [1. 创建型模式](#1-创建型模式)
+      - [建造者模式](#建造者模式)
+    - [2. 结构型模式](#2-结构型模式)
+      - [适配器模式](#适配器模式)
+      - [装饰器模式](#装饰器模式)
+    - [3. 行为型模式](#3-行为型模式)
+      - [策略模式](#策略模式)
+      - [观察者模式](#观察者模式)
+  - [📐 23种设计模式完整实现](#-23种设计模式完整实现)
+    - [创建型模式 (Creational Patterns)](#创建型模式-creational-patterns)
+      - [1. 单例模式 (Singleton)](#1-单例模式-singleton)
+      - [2. 工厂方法 (Factory Method)](#2-工厂方法-factory-method)
+      - [3. 抽象工厂 (Abstract Factory)](#3-抽象工厂-abstract-factory)
+      - [4. 建造者模式 (Builder)](#4-建造者模式-builder)
+      - [5. 原型模式 (Prototype)](#5-原型模式-prototype)
+    - [结构型模式 (Structural Patterns)](#结构型模式-structural-patterns)
+      - [6. 适配器模式 (Adapter)](#6-适配器模式-adapter)
+      - [7. 桥接模式 (Bridge)](#7-桥接模式-bridge)
+      - [8. 组合模式 (Composite)](#8-组合模式-composite)
+      - [9. 装饰器模式 (Decorator)](#9-装饰器模式-decorator)
+      - [10. 外观模式 (Facade)](#10-外观模式-facade)
+      - [11. 享元模式 (Flyweight)](#11-享元模式-flyweight)
+      - [12. 代理模式 (Proxy)](#12-代理模式-proxy)
+    - [行为型模式 (Behavioral Patterns)](#行为型模式-behavioral-patterns)
+      - [13. 责任链模式 (Chain of Responsibility)](#13-责任链模式-chain-of-responsibility)
+      - [14. 命令模式 (Command)](#14-命令模式-command)
+      - [15. 解释器模式 (Interpreter)](#15-解释器模式-interpreter)
+      - [16. 迭代器模式 (Iterator)](#16-迭代器模式-iterator)
+      - [17. 中介者模式 (Mediator)](#17-中介者模式-mediator)
+      - [18. 备忘录模式 (Memento)](#18-备忘录模式-memento)
+      - [19. 观察者模式 (Observer)](#19-观察者模式-observer)
+      - [20. 状态模式 (State)](#20-状态模式-state)
+      - [21. 策略模式 (Strategy)](#21-策略模式-strategy)
+      - [22. 模板方法模式 (Template Method)](#22-模板方法模式-template-method)
+      - [23. 访问者模式 (Visitor)](#23-访问者模式-visitor)
+  - [🦀 Rust 特有模式](#-rust-特有模式)
+    - [1. Newtype 模式](#1-newtype-模式)
+    - [2. RAII 模式](#2-raii-模式)
+    - [3. 类型状态模式 (Type State)](#3-类型状态模式-type-state)
+    - [4. Builder 模式（消耗型 vs 非消耗型）](#4-builder-模式消耗型-vs-非消耗型)
+  - [📚 相关文档](#-相关文档)
+  - [🆕 Rust 1.95+ 特性在设计模式中的应用](#-rust-195-特性在设计模式中的应用)
+    - [1. rray\_windows() 在滑动窗口模式中的应用](#1-rray_windows-在滑动窗口模式中的应用)
+      - [传统实现 vs Rust 1.95+ 实现](#传统实现-vs-rust-195-实现)
+      - [生产示例：股票价格趋势检测](#生产示例股票价格趋势检测)
+    - [2. ControlFlow 在责任链模式中的应用](#2-controlflow-在责任链模式中的应用)
+    - [3. LazyLock 在单例模式中的应用](#3-lazylock-在单例模式中的应用)
+    - [4. 数学常量在算法模式中的应用](#4-数学常量在算法模式中的应用)
+    - [特性对比总结](#特性对比总结)
+  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
+  - [权威来源索引](#权威来源索引)
+  - [思维导图：Rust 设计模式体系](#思维导图rust-设计模式体系)
+  - [决策树：设计模式选择](#决策树设计模式选择)
 
 ---
 
@@ -2325,7 +2400,6 @@ where
 
 > **权威来源**: Rust Official Docs
 
-
 ---
 
 ## 权威来源索引
@@ -2349,3 +2423,42 @@ where
 > **[来源: Rust Cookbook]**
 
 > **[来源: RFC 1210 - impl Specialization]**
+
+---
+
+## 思维导图：Rust 设计模式体系
+
+```mermaid
+graph TD
+    D[设计模式] --> C[创建型]
+    D --> S[结构型]
+    D --> B[行为型]
+    D --> I[惯用法]
+    C --> C1[Builder]
+    C --> C2[RAII]
+    C --> C3[Type State]
+    S --> S1[Newtype]
+    S --> S2[Deref]
+    S --> S3[Visitor]
+    B --> B1[Strategy]
+    B --> B2[Observer]
+    B --> B3[Command]
+    I --> I1[Into/From]
+    I --> I2[Drop 保证]
+```
+
+---
+
+## 决策树：设计模式选择
+
+```mermaid
+graph TD
+    Q1[需要构造复杂对象?] -->|是| A1[Builder 模式]
+    Q1 -->|否| Q2[需要运行时多态?]
+    Q2 -->|是| A2[Trait Object / dyn]
+    Q2 -->|否| Q3[需要状态转换安全?]
+    Q3 -->|是| A3[Type State 模式]
+    Q3 -->|否| Q4[需要包装类型?]
+    Q4 -->|是| A4[Newtype 模式]
+    Q4 -->|否| A5[函数组合即可]
+```

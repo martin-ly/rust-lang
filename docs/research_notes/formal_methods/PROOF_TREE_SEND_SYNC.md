@@ -6,10 +6,39 @@
 
 ---
 
+## 📑 目录
+>
+- [证明树：Send/Sync 安全](#证明树sendsync-安全)
+  - [📑 目录](#-目录)
+  - [定理陈述](#定理陈述)
+    - [Def SEND1 (Send)](#def-send1-send)
+    - [Def SYNC1 (Sync)](#def-sync1-sync)
+    - [Thm SEND-T1 (Send 安全)](#thm-send-t1-send-安全)
+    - [Thm SYNC-T1 (Sync 安全)](#thm-sync-t1-sync-安全)
+    - [Thm SEND-SYNC-T1 (关系)](#thm-send-sync-t1-关系)
+  - [证明树可视化](#证明树可视化)
+  - [形式化证明](#形式化证明)
+    - [SEND-T1: Send 安全](#send-t1-send-安全)
+    - [SYNC-T1: Sync 安全](#sync-t1-sync-安全)
+    - [SEND-SYNC-T1: 关系定理](#send-sync-t1-关系定理)
+  - [Rust 代码验证](#rust-代码验证)
+    - [Send 示例](#send-示例)
+    - [Sync 示例](#sync-示例)
+  - [与其他定理的关系](#与其他定理的关系)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 定理陈述
+>
 > **[来源: Rust Official Docs]**
 
 ### Def SEND1 (Send)
+>
 > **[来源: Rust Official Docs]**
 
 类型 $T$ 实现 `Send` 当且仅当：
@@ -18,21 +47,25 @@
 2. $T$ 不包含非 `Send` 的共享状态
 
 ### Def SYNC1 (Sync)
+>
 > **[来源: Rust Official Docs]**
 
 类型 $T$ 实现 `Sync` 当且仅当 `&T` 实现 `Send`。
 
 ### Thm SEND-T1 (Send 安全)
+>
 > **[来源: Rust Official Docs]**
 
 若 $T: \text{Send}$，则 $T$ 可以安全地跨线程转移所有权。
 
 ### Thm SYNC-T1 (Sync 安全)
+>
 > **[来源: Rust Official Docs]**
 
 若 $T: \text{Sync}$，则 $T$ 可以安全地跨线程共享引用。
 
 ### Thm SEND-SYNC-T1 (关系)
+>
 > **[来源: Rust Official Docs]**
 
 $T: \text{Sync} \iff \&T: \text{Send}$
@@ -40,6 +73,7 @@ $T: \text{Sync} \iff \&T: \text{Send}$
 ---
 
 ## 证明树可视化
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -101,9 +135,11 @@ graph TD
 ---
 
 ## 形式化证明
+>
 > **[来源: Rust Official Docs]**
 
 ### SEND-T1: Send 安全
+>
 > **[来源: Rust Official Docs]**
 
 **陈述**: 若 $T: \text{Send}$，则 $T$ 可安全跨线程转移。
@@ -131,6 +167,7 @@ graph TD
 - 编译错误: `Rc<i32>` cannot be sent between threads safely
 
 ### SYNC-T1: Sync 安全
+>
 > **[来源: Rust Official Docs]**
 
 **陈述**: 若 $T: \text{Sync}$，则 $T$ 可安全跨线程共享。
@@ -153,6 +190,7 @@ graph TD
 - 编译错误: `Cell<i32>` cannot be shared between threads safely
 
 ### SEND-SYNC-T1: 关系定理
+>
 > **[来源: Rust Official Docs]**
 
 **陈述**: $T: \text{Sync} \iff \&T: \text{Send}$
@@ -308,3 +346,10 @@ Send/Sync 安全 (SEND-T1, SYNC-T1)
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

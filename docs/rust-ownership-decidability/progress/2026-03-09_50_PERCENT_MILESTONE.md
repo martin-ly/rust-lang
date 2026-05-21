@@ -6,13 +6,42 @@
 
 ---
 
+## 📑 目录
+>
+- [50% 里程碑报告](#50-里程碑报告)
+  - [📑 目录](#-目录)
+  - [最新进展](#最新进展)
+    - [新增内容](#新增内容)
+      - [1. DecidabilityTheorems.v (120 行)](#1-decidabilitytheoremsv-120-行)
+      - [2. ComplexPatterns.v (280 行)](#2-complexpatternsv-280-行)
+    - [当前统计](#当前统计)
+  - [完成度更新](#完成度更新)
+    - [Phase 1: 基础构建](#phase-1-基础构建)
+    - [Phase 2: 可判定性深化](#phase-2-可判定性深化)
+    - [Phase 3-4: 扩展和发布](#phase-3-4-扩展和发布)
+  - [关键技术成果](#关键技术成果)
+    - [1. 完整的可判定性定理](#1-完整的可判定性定理)
+    - [2. 复杂度分析](#2-复杂度分析)
+    - [3. 16个验证示例](#3-16个验证示例)
+  - [质量保证](#质量保证)
+    - [代码统计](#代码统计)
+    - [完整性检查](#完整性检查)
+  - [下一步计划](#下一步计划)
+    - [目标: 60%](#目标-60)
+  - [持续承诺](#持续承诺)
+  - [**下次目标**: 60%](#下次目标-60)
+  - [相关概念](#相关概念)
+
 ## 最新进展
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 新增内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 1. DecidabilityTheorems.v (120 行)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ 可判定性定义
@@ -155,7 +184,13 @@ Theorem rust_ownership_system_fully_decidable :
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

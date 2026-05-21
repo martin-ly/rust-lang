@@ -5,10 +5,25 @@
 
 ---
 
+## 📑 目录
+>
+- [形式化验证前沿](#形式化验证前沿)
+  - [📑 目录](#-目录)
+  - [当前研究热点](#当前研究热点)
+    - [1. RustBelt 项目](#1-rustbelt-项目)
+    - [2. Aeneas 项目](#2-aeneas-项目)
+    - [3. Kani / CBMC](#3-kani--cbmc)
+  - [开放问题](#开放问题)
+  - [相关工具](#相关工具)
+  - [*文档版本: 1.0.0*](#文档版本-100)
+  - [相关概念](#相关概念)
+
 ## 当前研究热点
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. RustBelt 项目
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 RustBelt 是首个完整的 Rust 形式化安全证明。
@@ -21,6 +36,7 @@ RustBelt 是首个完整的 Rust 形式化安全证明。
 ```
 
 ### 2. Aeneas 项目
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 将 Rust 翻译到纯函数式语言进行验证。
@@ -77,7 +93,13 @@ cargo kani --function my_function
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [10-research-frontiers 目录](./README.md)
+- [上级目录](../README.md)

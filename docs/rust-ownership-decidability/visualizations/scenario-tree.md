@@ -1,6 +1,18 @@
 # 应用场景决策树
 
+## 📑 目录
+>
+- [应用场景决策树](#应用场景决策树)
+  - [📑 目录](#-目录)
+  - [1. Web服务开发](#1-web服务开发)
+  - [2. 数据处理管道](#2-数据处理管道)
+  - [3. 游戏开发](#3-游戏开发)
+  - [4. 嵌入式/IoT](#4-嵌入式iot)
+  - [5. CLI工具开发](#5-cli工具开发)
+  - [相关概念](#相关概念)
+
 ## 1. Web服务开发
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -24,6 +36,7 @@ Web服务架构
 ```
 
 ## 2. 数据处理管道
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -46,6 +59,7 @@ Web服务架构
 ```
 
 ## 3. 游戏开发
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -114,6 +128,7 @@ CLI工具设计
 │   └─ 丰富 ─► anyhow + thiserror
 │
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -125,7 +140,13 @@ CLI工具设计
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [visualizations 目录](./README.md)
+- [上级目录](../README.md)

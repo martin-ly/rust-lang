@@ -1,9 +1,35 @@
 # 每日进度更新: 2026-03-07
 
+## 📑 目录
+>
+- [每日进度更新: 2026-03-07](#每日进度更新-2026-03-07)
+  - [📑 目录](#-目录)
+  - [今日完成工作](#今日完成工作)
+    - [✅ 新增文件](#-新增文件)
+    - [📊 代码统计更新](#-代码统计更新)
+  - [核心成果](#核心成果)
+    - [1. 完整的操作语义](#1-完整的操作语义)
+    - [2. 内存安全框架](#2-内存安全框架)
+    - [3. 求值上下文](#3-求值上下文)
+  - [遇到的挑战](#遇到的挑战)
+    - [挑战 1: 位置求值与堆更新的交互](#挑战-1-位置求值与堆更新的交互)
+    - [挑战 2: 值的双重表示](#挑战-2-值的双重表示)
+    - [挑战 3: 新鲜位置的生成](#挑战-3-新鲜位置的生成)
+  - [明日计划 (2026-03-08)](#明日计划-2026-03-08)
+    - [高优先级](#高优先级)
+    - [预期代码增量](#预期代码增量)
+  - [学习笔记](#学习笔记)
+    - [今日技术洞察](#今日技术洞察)
+  - [质量检查](#质量检查)
+  - [**代码总行数**: 2,341 行 Coq + 2,250 行文档](#代码总行数-2341-行-coq--2250-行文档)
+  - [相关概念](#相关概念)
+
 ## 今日完成工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 新增文件
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **OperationalSemantics.v** (1,081 行)
@@ -20,6 +46,7 @@
 3. **本每日更新**
 
 ### 📊 代码统计更新
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -155,7 +182,13 @@ Coq 编译检查:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

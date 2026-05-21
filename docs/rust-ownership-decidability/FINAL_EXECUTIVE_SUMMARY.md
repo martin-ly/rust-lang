@@ -7,7 +7,38 @@
 
 ---
 
+## 📑 目录
+>
+- [最终执行摘要](#最终执行摘要)
+  - [📑 目录](#-目录)
+  - [一句话总结](#一句话总结)
+  - [核心成果](#核心成果)
+    - [1. 理论突破](#1-理论突破)
+    - [2. 技术产出](#2-技术产出)
+    - [3. 学术贡献](#3-学术贡献)
+  - [5 个核心定理](#5-个核心定理)
+    - [✅ 定理 1: Borrow Checking 终止性](#-定理-1-borrow-checking-终止性)
+    - [✅ 定理 2: 类型保持](#-定理-2-类型保持)
+    - [✅ 定理 3: 进展](#-定理-3-进展)
+    - [✅ 定理 4: 类型安全](#-定理-4-类型安全)
+    - [✅ 定理 5: 可判定性](#-定理-5-可判定性)
+  - [验证覆盖](#验证覆盖)
+    - [16 个示例覆盖 Rust 借用的所有核心模式](#16-个示例覆盖-rust-借用的所有核心模式)
+  - [与权威内容对齐](#与权威内容对齐)
+  - [质量保证](#质量保证)
+  - [项目影响](#项目影响)
+    - [学术价值](#学术价值)
+    - [实用价值](#实用价值)
+  - [交付物](#交付物)
+    - [代码](#代码)
+    - [文档](#文档)
+  - [关键指标](#关键指标)
+  - [结论](#结论)
+  - [*"严格形式化是可信软件的基石。"*:](#严格形式化是可信软件的基石)
+  - [相关概念](#相关概念)
+
 ## 一句话总结
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **成功构建了 Rust 所有权系统的完整、严格、可机械化的形式化理论，包括 5 个核心定理的完整证明和 16 个验证示例，全部在 Coq 中实现。**
@@ -15,9 +46,11 @@
 ---
 
 ## 核心成果
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 理论突破
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ **首个** Rust 所有权可判定性的完整 Coq 形式化
@@ -160,7 +193,7 @@ Rust 所有权系统的类型检查是完全可判定的。
 
 **项目圆满完成！**
 
-*"严格形式化是可信软件的基石。"*:
+*"严格形式化是可信软件的基石。"*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -172,7 +205,13 @@ Rust 所有权系统的类型检查是完全可判定的。
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

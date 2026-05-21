@@ -6,7 +6,29 @@
 
 ---
 
+## 📑 目录
+>
+- [进度跟踪 - 最终版](#进度跟踪---最终版)
+  - [📑 目录](#-目录)
+  - [最终状态](#最终状态)
+  - [完成清单](#完成清单)
+    - [✅ Coq 形式化 (100%)](#-coq-形式化-100)
+    - [✅ 核心定理 (5/5)](#-核心定理-55)
+    - [✅ 验证示例 (16/16)](#-验证示例-1616)
+    - [✅ 文档 (100%)](#-文档-100)
+  - [质量指标](#质量指标)
+    - [代码质量: ✅](#代码质量-)
+    - [理论严谨性: ✅](#理论严谨性-)
+    - [可用性: ✅](#可用性-)
+  - [里程碑历史](#里程碑历史)
+  - [最终统计](#最终统计)
+  - [项目状态](#项目状态)
+    - [✅ 圆满完成](#-圆满完成)
+  - [*项目圆满完成！*](#项目圆满完成)
+  - [相关概念](#相关概念)
+
 ## 最终状态
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -21,9 +43,11 @@ Phase 4 (验证发布):         100% ✅ █████████████
 ---
 
 ## 完成清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ Coq 形式化 (100%)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [x] Types.v (329 行)
@@ -162,7 +186,13 @@ Coq 代码:        ~2,500 行
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

@@ -4,7 +4,27 @@
 
 ---
 
+## 📑 目录
+>
+- [并发模型选择决策树](#并发模型选择决策树)
+  - [📑 目录](#-目录)
+  - [1. 顶层决策树](#1-顶层决策树)
+  - [2. 详细决策流程](#2-详细决策流程)
+    - [2.1 Actor模型选择](#21-actor模型选择)
+    - [2.2 Async运行时选择](#22-async运行时选择)
+    - [2.3 共享状态选择](#23-共享状态选择)
+    - [2.4 同步原语选择](#24-同步原语选择)
+  - [3. 场景匹配表](#3-场景匹配表)
+  - [4. 性能对比决策](#4-性能对比决策)
+  - [5. 安全性优先决策](#5-安全性优先决策)
+  - [6. 快速决策检查表](#6-快速决策检查表)
+    - [6.1 检查清单](#61-检查清单)
+    - [6.2 常见错误避免](#62-常见错误避免)
+  - [**适用版本**: Rust 1.75+](#适用版本-rust-175)
+  - [相关概念](#相关概念)
+
 ## 1. 顶层决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -48,9 +68,11 @@
 ---
 
 ## 2. 详细决策流程
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Actor模型选择
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -264,7 +286,12 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

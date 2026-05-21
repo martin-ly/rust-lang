@@ -1,5 +1,28 @@
 # 16-program-semantics 目录扩展总结
 
+## 📑 目录
+>
+- [16-program-semantics 目录扩展总结](#16-program-semantics-目录扩展总结)
+  - [📑 目录](#-目录)
+  - [扩展概述](#扩展概述)
+  - [扩展内容统计](#扩展内容统计)
+    - [新增文件总览](#新增文件总览)
+    - [详细文件列表](#详细文件列表)
+      - [Communication (通信模式)](#communication-通信模式)
+      - [Consistency (一致性)](#consistency-一致性)
+      - [Fault-Tolerance (容错模式)](#fault-tolerance-容错模式)
+      - [Microservices (微服务)](#microservices-微服务)
+  - [内容特点](#内容特点)
+    - [形式化定义](#形式化定义)
+    - [Rust 实现](#rust-实现)
+    - [架构图示](#架构图示)
+  - [与其他模块的关联](#与其他模块的关联)
+  - [质量保证](#质量保证)
+  - [扩展后目录结构](#扩展后目录结构)
+  - [总字数统计](#总字数统计)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
+  - [相关概念](#相关概念)
+
 ## 扩展概述
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -162,7 +185,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [16-program-semantics 目录](./README.md)
+- [上级目录](../README.md)

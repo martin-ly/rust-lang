@@ -6,7 +6,19 @@
 
 ---
 
+## 📑 目录
+>
+- [Strategy Pattern in Rust](#strategy-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [实现方式](#实现方式)
+    - [Trait 方式](#trait-方式)
+  - [零成本抽象: 泛型实现](#零成本抽象-泛型实现)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 策略模式定义一系列算法，把它们一个个封装起来，并且使它们可以相互替换。
@@ -14,9 +26,11 @@
 ---
 
 ## 实现方式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Trait 方式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -196,6 +210,7 @@ Context 与 Strategy 解耦:
 替换性:
   ∀s1, s2: Strategy: Context(s1) ⟺ Context(s2)
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -207,7 +222,12 @@ Context 与 Strategy 解耦:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [behavioral 目录](./README.md)

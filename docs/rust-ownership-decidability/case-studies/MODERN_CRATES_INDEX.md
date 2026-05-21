@@ -6,7 +6,26 @@
 
 ---
 
+## 📑 目录
+>
+- [现代Rust库形式化分析索引](#现代rust库形式化分析索引)
+  - [📑 目录](#-目录)
+  - [嵌入式库 (15个) ✅ 100%](#嵌入式库-15个--100)
+  - [应用级库 (24个) ✅ 100% 核心覆盖](#应用级库-24个--100-核心覆盖)
+    - [Web/网络 (7个)](#web网络-7个)
+    - [数据库 (3个)](#数据库-3个)
+    - [序列化/CLI (2个)](#序列化cli-2个)
+    - [错误处理/日志 (2个)](#错误处理日志-2个)
+    - [异步基础设施 (3个)](#异步基础设施-3个)
+    - [并发原语 (4个)](#并发原语-4个)
+    - [FFI/工具 (3个)](#ffi工具-3个)
+  - [覆盖统计](#覆盖统计)
+  - [形式化内容总计](#形式化内容总计)
+  - [**状态**: ✅ 100% 核心库覆盖完成](#状态--100-核心库覆盖完成)
+  - [相关概念](#相关概念)
+
 ## 嵌入式库 (15个) ✅ 100%
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 库名 | 领域 | 关键形式化 | 状态 |
@@ -30,9 +49,11 @@
 ---
 
 ## 应用级库 (24个) ✅ 100% 核心覆盖
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Web/网络 (7个)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 库名 | 领域 | 关键形式化 | 状态 |
@@ -139,3 +160,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [case-studies 目录](./README.md)
+- [上级目录](../README.md)

@@ -7,6 +7,25 @@
 
 ---
 
+## 📑 目录
+>
+- [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches--debug_assert_matches-速查指南)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [语法](#语法)
+  - [对比：`assert!` vs `assert_matches!`](#对比assert-vs-assert_matches)
+    - [旧方式（1.95 及之前）](#旧方式195-及之前)
+    - [新方式（1.96+）](#新方式196)
+  - [典型用例](#典型用例)
+    - [1. `Result` 断言](#1-result-断言)
+    - [2. 枚举变体验证](#2-枚举变体验证)
+    - [3. 嵌套模式](#3-嵌套模式)
+    - [4. `Option` 断言](#4-option-断言)
+  - [`debug_assert_matches!`](#debug_assert_matches)
+  - [与 `assert!` + `matches!` 的关系](#与-assert--matches-的关系)
+  - [迁移指南](#迁移指南)
+  - [相关概念](#相关概念)
+
 ## 概述
 
 > **[来源: Rust Standard Library]** · **[来源: Rust Project Goals 2026]** ✅
@@ -184,3 +203,10 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [quick_reference 目录](./README.md)
+- [上级目录](../README.md)

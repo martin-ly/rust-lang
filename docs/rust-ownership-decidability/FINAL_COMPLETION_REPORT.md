@@ -6,10 +6,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统形式化 - 最终完成报告](#rust-所有权系统形式化---最终完成报告)
+  - [📑 目录](#-目录)
+  - [完成概览](#完成概览)
+    - [代码统计](#代码统计)
+    - [核心定理完成状态](#核心定理完成状态)
+  - [新增内容](#新增内容)
+    - [1. 统一框架文档](#1-统一框架文档)
+    - [2. 关键证明补充](#2-关键证明补充)
+    - [3. 完成的证明](#3-完成的证明)
+  - [框架层次结构](#框架层次结构)
+  - [关键成果](#关键成果)
+    - [1. 类型-所有权联系证明](#1-类型-所有权联系证明)
+    - [2. 借用检查等价性](#2-借用检查等价性)
+    - [3. 内存安全定理](#3-内存安全定理)
+  - [剩余工作（技术债务）](#剩余工作技术债务)
+    - [剩余的 admit（约 55 处）](#剩余的-admit约-55-处)
+  - [与文献的对应](#与文献的对应)
+  - [可继续扩展的方向](#可继续扩展的方向)
+  - [总结](#总结)
+  - [*报告生成时间: 2026-03-11*:](#报告生成时间-2026-03-11)
+  - [相关概念](#相关概念)
+
 ## 完成概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 代码统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 类别 | 文件数 | 代码行数 | 状态 |
@@ -23,6 +49,7 @@
 | **总计** | **14** | **~3,000** | **✅ 完成** |
 
 ### 核心定理完成状态
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 定理 | 文件 | 状态 |
@@ -181,7 +208,7 @@ Theorem rust_type_system_guarantees_memory_safety :
 
 ---
 
-*报告生成时间: 2026-03-11*:
+*报告生成时间: 2026-03-11*
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -193,7 +220,13 @@ Theorem rust_type_system_guarantees_memory_safety :
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

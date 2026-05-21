@@ -6,7 +6,21 @@
 
 ---
 
+## 📑 目录
+>
+- [Factory Pattern in Rust](#factory-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [基础实现](#基础实现)
+    - [简单工厂](#简单工厂)
+    - [工厂方法](#工厂方法)
+  - [抽象工厂](#抽象工厂)
+  - [形式化定义](#形式化定义)
+  - [使用泛型的零成本抽象](#使用泛型的零成本抽象)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 工厂模式定义一个创建对象的接口，让子类决定实例化哪个类。工厂方法使类的实例化延迟到子类。
@@ -14,9 +28,11 @@
 ---
 
 ## 基础实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 简单工厂
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -236,6 +252,7 @@ where
     factory.create()
 }
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -247,7 +264,12 @@ where
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [creational 目录](./README.md)

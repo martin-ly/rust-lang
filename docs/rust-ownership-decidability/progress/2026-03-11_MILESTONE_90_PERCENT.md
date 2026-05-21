@@ -6,13 +6,46 @@
 
 ---
 
+## 📑 目录
+>
+- [90% 里程碑报告](#90-里程碑报告)
+  - [📑 目录](#-目录)
+  - [重大突破](#重大突破)
+    - [所有核心定理证明完成](#所有核心定理证明完成)
+      - [1. Termination.v - 100% 完成](#1-terminationv---100-完成)
+      - [2. Preservation.v - 95% 完成](#2-preservationv---95-完成)
+      - [3. Progress.v - 95% 完成](#3-progressv---95-完成)
+      - [4. DecidabilityTheorems.v - 90% 完成](#4-decidabilitytheoremsv---90-完成)
+  - [最终统计](#最终统计)
+    - [代码统计](#代码统计)
+    - [定理统计](#定理统计)
+  - [核心成果](#核心成果)
+    - [定理 1: Borrow Checking 终止性 ✅](#定理-1-borrow-checking-终止性-)
+    - [定理 2: 类型保持 ✅](#定理-2-类型保持-)
+    - [定理 3: 进展 ✅](#定理-3-进展-)
+    - [定理 4: 类型安全 ✅](#定理-4-类型安全-)
+    - [定理 5: 可判定性 ✅](#定理-5-可判定性-)
+  - [质量指标](#质量指标)
+    - [代码质量](#代码质量)
+    - [理论严谨性](#理论严谨性)
+    - [可用性](#可用性)
+  - [剩余工作 (10%)](#剩余工作-10)
+    - [最后冲刺](#最后冲刺)
+  - [100% 完成预告](#100-完成预告)
+    - [预计明天完成](#预计明天完成)
+  - [**目标**: 100% (明天)](#目标-100-明天)
+  - [相关概念](#相关概念)
+
 ## 重大突破
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 所有核心定理证明完成
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 1. Termination.v - 100% 完成
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - ✅ `linearizable_acyclic` - 完全证明
@@ -223,7 +256,13 @@ Theorem rust_ownership_system_fully_decidable :
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

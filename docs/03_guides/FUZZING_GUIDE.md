@@ -6,6 +6,28 @@
 
 ---
 
+## 📑 目录
+>
+- [cargo-fuzz 模糊测试入门指南](#cargo-fuzz-模糊测试入门指南)
+  - [📑 目录](#-目录)
+  - [1. 什么是模糊测试（Fuzzing）？](#1-什么是模糊测试fuzzing)
+    - [为什么 Rust 需要 Fuzzing？](#为什么-rust-需要-fuzzing)
+  - [2. 工具链安装](#2-工具链安装)
+  - [3. 快速开始](#3-快速开始)
+    - [初始化 fuzz 项目](#初始化-fuzz-项目)
+    - [编写 Fuzz Target](#编写-fuzz-target)
+    - [运行 Fuzzer](#运行-fuzzer)
+  - [4. 本项目 Fuzz Target](#4-本项目-fuzz-target)
+    - [c08\_algorithms —— 解析器模糊测试](#c08_algorithms--解析器模糊测试)
+    - [注册到 fuzz/Cargo.toml](#注册到-fuzzcargotoml)
+  - [5. 高级技巧](#5-高级技巧)
+    - [结构化 Fuzzing](#结构化-fuzzing)
+    - [与 Miri 结合](#与-miri-结合)
+    - [覆盖率引导](#覆盖率引导)
+  - [6. CI 集成](#6-ci-集成)
+  - [7. 参考资源](#7-参考资源)
+  - [相关概念](#相关概念)
+
 ## 1. 什么是模糊测试（Fuzzing）？
 >
 > **[来源: Rust Official Docs]**
@@ -249,3 +271,9 @@ fuzzing:
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

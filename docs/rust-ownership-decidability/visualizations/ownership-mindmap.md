@@ -30,7 +30,15 @@ graph TD
     E --> E3[Send/Sync检查]
 ```
 
+## 📑 目录
+>
+- [所有权系统思维导图](#所有权系统思维导图)
+  - [📑 目录](#-目录)
+  - [ASCII版本](#ascii版本)
+  - [相关概念](#相关概念)
+
 ## ASCII版本
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -58,6 +66,7 @@ graph TD
                            │• &mut T可变 │
                            └─────────────┘
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -69,7 +78,13 @@ graph TD
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [visualizations 目录](./README.md)
+- [上级目录](../README.md)

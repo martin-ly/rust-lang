@@ -10,16 +10,52 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 形式化 - 技术债务跟踪 (准确版)](#rust-194-形式化---技术债务跟踪-准确版)
+  - [📑 目录](#-目录)
+  - [Deep Dive Documentation (COMPLETED)](#deep-dive-documentation-completed)
+    - [Async Patterns](#async-patterns)
+    - [Actor Model](#actor-model)
+    - [Concurrency Architecture](#concurrency-architecture)
+    - [Lock-Free Patterns](#lock-free-patterns)
+    - [Message Passing](#message-passing)
+    - [Data Parallelism](#data-parallelism)
+    - [Distributed Patterns](#distributed-patterns)
+  - [P0 证明 100% 完成 (关键/关键优先级)](#p0-证明-100-完成-关键关键优先级)
+    - [已完成的 P0 关键证明](#已完成的-p0-关键证明)
+      - [1. MetatheoryDecidability.v (5/5) ✅](#1-metatheorydecidabilityv-55-)
+      - [2. MetatheoryTermination.v (5/5) ✅](#2-metatheoryterminationv-55-)
+      - [3. PreciseCapturingComplete.v (4/4) ✅](#3-precisecapturingcompletev-44-)
+      - [4. AsyncBasicsComplete.v (5/5) ✅](#4-asyncbasicscompletev-55-)
+      - [5. 其他 Complete 文件](#5-其他-complete-文件)
+  - [非P0证明状态](#非p0证明状态)
+  - [📊 准确统计](#-准确统计)
+    - [证明完成度](#证明完成度)
+    - [代码总计](#代码总计)
+  - [✅ 质量保证](#-质量保证)
+    - [已验证](#已验证)
+  - [Honesty and Accuracy Statement](#honesty-and-accuracy-statement)
+  - [📝 完成记录](#-完成记录)
+    - [2026-03-12: P0 证明 100% 完成](#2026-03-12-p0-证明-100-完成)
+    - [2026-03-12: Deep Dive 文档完成](#2026-03-12-deep-dive-文档完成)
+  - [结论](#结论)
+  - [**状态: P0 证明 100% 完成，非P0证明部分完成**](#状态-p0-证明-100-完成非p0证明部分完成)
+  - [相关概念](#相关概念)
+
 ## Deep Dive Documentation (COMPLETED)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Async Patterns
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - Status: ✅ COMPLETE (3,819 lines, 14 counter-examples, 5 theorems)
 - File: 12-concurrency-patterns/12-05-async-patterns-deep.md
 
 ### Actor Model
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - Status: ✅ COMPLETE (1,805 lines, 8 counter-examples, 10 theorems)
@@ -228,7 +264,13 @@ Known limitations:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

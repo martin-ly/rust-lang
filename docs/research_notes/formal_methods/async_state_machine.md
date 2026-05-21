@@ -9,10 +9,82 @@
 
 ---
 
+## 📑 目录
+>
+- [异步状态机形式化](#异步状态机形式化)
+  - [📑 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+    - [核心问题](#核心问题)
+    - [预期成果](#预期成果)
+  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+    - [相关概念](#相关概念)
+    - [理论背景](#理论背景)
+    - [状态机的理论基础](#状态机的理论基础)
+    - [Future/Poll 的理论基础](#futurepoll-的理论基础)
+    - [并发安全的理论基础](#并发安全的理论基础)
+    - [相关学术论文的详细分析](#相关学术论文的详细分析)
+      - [1. Async/await for Rust: A Language Perspective](#1-asyncawait-for-rust-a-language-perspective)
+      - [2. Formal Verification of Async Rust Programs](#2-formal-verification-of-async-rust-programs)
+      - [3. The RustBelt Project: Formalizing Rust's Type System](#3-the-rustbelt-project-formalizing-rusts-type-system)
+  - [权威来源对齐](#权威来源对齐)
+  - [🔬 形式化定义 {#-形式化定义}](#-形式化定义--形式化定义)
+    - [1. Future 状态](#1-future-状态)
+    - [2. Poll 操作](#2-poll-操作)
+    - [3. 状态转换](#3-状态转换)
+    - [4. async/await 语义形式化](#4-asyncawait-语义形式化)
+    - [5. Future/Poll/Waker/Context 形式化定义](#5-futurepollwakercontext-形式化定义)
+    - [6. 并发安全的形式化证明框架](#6-并发安全的形式化证明框架)
+  - [💻 代码示例 {#-代码示例}](#-代码示例--代码示例)
+    - [示例 1：基本 Future](#示例-1基本-future)
+    - [示例 2：异步函数](#示例-2异步函数)
+    - [示例 3：组合 Future](#示例-3组合-future)
+  - [💻 代码示例1](#-代码示例1)
+    - [示例 1：Future 状态机实现](#示例-1future-状态机实现)
+    - [示例 2：异步状态转换](#示例-2异步状态转换)
+    - [示例 3：并发安全保证](#示例-3并发安全保证)
+    - [示例 4：async/await 状态机转换](#示例-4asyncawait-状态机转换)
+    - [示例 5：并发场景 - 多个 Future 并发执行](#示例-5并发场景---多个-future-并发执行)
+    - [示例 6：状态转换 - Waker 使用](#示例-6状态转换---waker-使用)
+  - [✅ 证明目标 {#-证明目标}](#-证明目标--证明目标)
+    - [待证明的性质](#待证明的性质)
+    - [证明方法](#证明方法)
+    - [证明工作](#证明工作)
+      - [定理 6.1 (状态一致性)](#定理-61-状态一致性)
+      - [定理 6.2 (并发安全)](#定理-62-并发安全)
+      - [定理 6.3 (进度保证)](#定理-63-进度保证)
+  - [🔗 系统集成与实际应用 {#-系统集成与实际应用}](#-系统集成与实际应用--系统集成与实际应用)
+    - [与类型系统的集成](#与类型系统的集成)
+    - [与生命周期的集成](#与生命周期的集成)
+    - [实际应用案例](#实际应用案例)
+    - [Rust 对应](#rust-对应)
+  - [⚠️ 反例：违反异步安全规则 {#️-反例违反异步安全规则}](#️-反例违反异步安全规则-️-反例违反异步安全规则)
+  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+    - [学术论文（国际权威）](#学术论文国际权威)
+    - [官方文档](#官方文档)
+    - [相关代码](#相关代码)
+    - [工具资源](#工具资源)
+  - [🆕 Rust 1.93.0 相关更新 {#-rust-1930-相关更新}](#-rust-1930-相关更新--rust-1930-相关更新)
+    - [全局分配器与异步状态机](#全局分配器与异步状态机)
+    - [asm! 块中的 cfg 属性](#asm-块中的-cfg-属性)
+    - [状态机代码生成改进（2025年目标）](#状态机代码生成改进2025年目标)
+  - [thread::spawn 与 JoinHandle（Phase 6）](#threadspawn-与-joinhandlephase-6)
+    - [相关思维表征](#相关思维表征)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [异步状态机形式化](#异步状态机形式化)
+  - [� 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -82,11 +154,13 @@
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+>
 > **[来源: Rust Official Docs]**
 
 本研究旨在形式化定义 Rust 的异步 Future/Poll 状态机，并证明其保证并发安全。
 
 ### 核心问题
+>
 > **[来源: Rust Official Docs]**
 
 1. **Future 状态机的形式化定义是什么？**
@@ -94,6 +168,7 @@
 3. **异步状态转换的正确性如何证明？**
 
 ### 预期成果
+>
 > **[来源: Rust Official Docs]**
 
 - Future 状态机的形式化模型
@@ -103,9 +178,11 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+>
 > **[来源: Rust Official Docs]**
 
 ### 相关概念
+>
 > **[来源: Rust Official Docs]**
 
 **Future**：表示一个可能尚未完成的计算的值。
@@ -115,6 +192,7 @@
 **状态机**：描述系统在不同状态之间转换的模型。
 
 ### 理论背景
+>
 > **[来源: Rust Official Docs]**
 
 **状态机理论**：
@@ -124,6 +202,7 @@
 - **并发状态机**：多个状态机的并发执行
 
 ### 状态机的理论基础
+>
 > **[来源: Rust Official Docs]**
 
 **有限状态机（Finite State Machine, FSM）**是计算理论中的核心概念：
@@ -164,6 +243,7 @@ Pending ──────────> Ready
 3. **终止性**：对于有限计算，最终会到达终止状态
 
 ### Future/Poll 的理论基础
+>
 > **[来源: Rust Official Docs]**
 
 **Future Trait** 是 Rust 异步编程的核心抽象：
@@ -190,6 +270,7 @@ $$\text{State}(F) \in \{\text{Pending}, \text{Ready}(\tau)\}$$
 - 保证：当 Future 状态改变时，Waker 会被调用
 
 ### 并发安全的理论基础
+>
 > **[来源: Rust Official Docs]**
 
 **并发安全（Concurrency Safety）** 确保多个 Future 可以安全地并发执行：
@@ -219,6 +300,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 - **事件驱动**：基于事件循环的异步执行
 
 ### 相关学术论文的详细分析
+>
 > **[来源: Rust Official Docs]**
 
 #### 1. Async/await for Rust: A Language Perspective
@@ -294,6 +376,7 @@ $$\text{Sync}(\tau) \leftrightarrow \forall t: \text{SafeShare}(\& \tau, t)$$
 ---
 
 ## 🔬 形式化定义 {#-形式化定义}
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. Future 状态
@@ -566,6 +649,7 @@ $$\forall i: \text{Send}(F_i) \land \text{Sync}(F_i) \rightarrow \text{DataRaceF
 ---
 
 ## 💻 代码示例 {#-代码示例}
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：基本 Future
@@ -638,6 +722,7 @@ async fn combined_future() -> i32 {
 - 状态 2：计算并返回结果（`Ready(a + b)`）
 
 ## 💻 代码示例1
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1：Future 状态机实现
@@ -954,6 +1039,7 @@ impl TimerFuture {
 ---
 
 ## ✅ 证明目标 {#-证明目标}
+>
 > **[来源: Rust Official Docs]**
 
 ### 待证明的性质
@@ -1085,6 +1171,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 🔗 系统集成与实际应用 {#-系统集成与实际应用}
+>
 > **[来源: Rust Official Docs]**
 
 ### 与类型系统的集成
@@ -1119,6 +1206,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## ⚠️ 反例：违反异步安全规则 {#️-反例违反异步安全规则}
+>
 > **[来源: Rust Official Docs]**
 
 | 反例 | 违反规则 | 后果 | 说明 |
@@ -1131,6 +1219,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -1161,6 +1250,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 ---
 
 ## 📖 参考文献 {#-参考文献}
+>
 > **[来源: Rust Official Docs]**
 
 ### 学术论文（国际权威）
@@ -1223,6 +1313,7 @@ $$\forall F: \text{Finite}(F) \rightarrow \exists n: \text{AfterPoll}(F, n) \lan
 - 定理 6.3：进度保证证明 ✅
 
 ## 🆕 Rust 1.93.0 相关更新 {#-rust-1930-相关更新}
+>
 > **[来源: Rust Official Docs]**
 
 ### 全局分配器与异步状态机
@@ -1272,6 +1363,7 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 ---
 
 ## thread::spawn 与 JoinHandle（Phase 6）
+>
 > **[来源: Rust Official Docs]**
 
 **Def SPAWN1（thread::spawn）**：`thread::spawn(|| body)` 创建新线程；闭包需 `F: Send + 'static`；所有权转移至新线程；`JoinHandle<T>` 持有所得权，`join()` 阻塞直到线程完成并返回 `Result<T>`。

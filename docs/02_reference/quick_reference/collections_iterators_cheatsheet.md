@@ -1,5 +1,77 @@
 ﻿# 📦 Rust 集合与迭代器速查卡
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [📊 Vec（动态数组）](#vec动态数组)
+  - [创建](#创建)
+  - [添加元素](#添加元素)
+  - [访问元素](#访问元素)
+  - [修改元素](#修改元素)
+  - [删除元素](#删除元素)
+  - [查询](#查询)
+  - [切片操作](#切片操作)
+- [🗺️ HashMap（哈希映射）](#hashmap哈希映射)
+  - [创建](#创建)
+  - [插入和更新](#插入和更新)
+  - [访问](#访问)
+  - [删除](#删除)
+  - [查询](#查询)
+  - [迭代](#迭代)
+- [🔢 HashSet（哈希集合）](#hashset哈希集合)
+  - [创建](#创建)
+  - [添加和删除](#添加和删除)
+  - [查询](#查询)
+  - [集合操作](#集合操作)
+- [📚 其他集合](#其他集合)
+  - [VecDeque（双端队列）](#vecdeque双端队列)
+  - [切片 as_array（Rust 1.93）](#切片-as_arrayrust-193)
+  - [BTreeMap（有序映射）](#btreemap有序映射)
+  - [BinaryHeap（优先队列）](#binaryheap优先队列)
+- [🔄 迭代器基础](#迭代器基础)
+  - [三种迭代方式](#三种迭代方式)
+  - [手动迭代](#手动迭代)
+- [🔧 迭代器适配器](#迭代器适配器)
+  - [转换适配器](#转换适配器)
+  - [选择适配器](#选择适配器)
+  - [组合适配器](#组合适配器)
+  - [其他适配器](#其他适配器)
+- [🍽️ 迭代器消费者](#迭代器消费者)
+  - [收集](#收集)
+  - [查找](#查找)
+  - [聚合](#聚合)
+  - [折叠](#折叠)
+  - [其他消费者](#其他消费者)
+- [🎯 常用模式](#常用模式)
+  - [转换和过滤](#转换和过滤)
+  - [链式操作](#链式操作)
+  - [分组](#分组)
+  - [去重](#去重)
+  - [窗口操作](#窗口操作)
+    - [Rust 1.95+ array_windows() - 零开销固定大小窗口](#rust-195-array_windows---零开销固定大小窗口)
+    - [动态窗口 windows()](#动态窗口-windows)
+- [💡 代码示例](#代码示例)
+  - [示例 1: 自定义迭代器](#示例-1-自定义迭代器)
+  - [示例 2: 实现 IntoIterator](#示例-2-实现-intoiterator)
+  - [示例 3: 迭代器适配器链](#示例-3-迭代器适配器链)
+  - [示例 4: 使用 Entry API 高效更新 HashMap](#示例-4-使用-entry-api-高效更新-hashmap)
+  - [示例 5: LRU Cache 实现](#示例-5-lru-cache-实现)
+- [🎯 使用场景](#使用场景)
+  - [场景: 数据处理管道](#场景-数据处理管道)
+- [🚫 反例速查](#反例速查)
+  - [反例 1: 迭代时修改集合](#反例-1-迭代时修改集合)
+  - [反例 2: 索引越界](#反例-2-索引越界)
+  - [反例 3: 在迭代时修改集合（安全版本）](#反例-3-在迭代时修改集合安全版本)
+  - [反例 4: 错误使用 drain](#反例-4-错误使用-drain)
+  - [反例 5: HashMap 遍历顺序依赖](#反例-5-hashmap-遍历顺序依赖)
+- [📚 相关文档](#相关文档)
+- [🧩 相关示例代码](#相关示例代码)
+- [📚 相关资源](#相关资源)
+  - [官方文档](#官方文档)
+  - [项目内部文档](#项目内部文档)
+  - [形式化理论与类型系统](#形式化理论与类型系统)
+  - [相关速查卡](#相关速查卡)
+
 > **快速参考** | [完整文档](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
@@ -9,6 +81,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
@@ -85,9 +158,11 @@
 ---
 
 ## 📊 Vec（动态数组）
+>
 > **[来源: Rust Official Docs]**
 
 ### 创建
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -104,6 +179,7 @@ let mut vec = Vec::with_capacity(10);
 ```
 
 ### 添加元素
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -121,6 +197,7 @@ vec.extend_from_slice(&[8, 9]);
 ```
 
 ### 访问元素
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -139,6 +216,7 @@ let last = vec.last();   // Option<&i32>
 ```
 
 ### 修改元素
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -154,6 +232,7 @@ if let Some(x) = vec.get_mut(0) {
 ```
 
 ### 删除元素
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -173,6 +252,7 @@ vec.clear();
 ```
 
 ### 查询
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -192,6 +272,7 @@ let cap = vec.capacity();
 ```
 
 ### 切片操作
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -208,9 +289,11 @@ let (left, right) = vec.split_at(2);
 ---
 
 ## 🗺️ HashMap（哈希映射）
+>
 > **[来源: Rust Official Docs]**
 
 ### 创建
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -325,6 +408,7 @@ for value in map.values_mut() {
 ---
 
 ## 🔢 HashSet（哈希集合）
+>
 > **[来源: Rust Official Docs]**
 
 ### 创建
@@ -392,6 +476,7 @@ let symmetric_diff: HashSet<_> = set1.symmetric_difference(&set2).collect();
 ---
 
 ## 📚 其他集合
+>
 > **[来源: Rust Official Docs]**
 
 ### VecDeque（双端队列）
@@ -461,6 +546,7 @@ while let Some(max) = heap.pop() {
 ---
 
 ## 🔄 迭代器基础
+>
 > **[来源: Rust Official Docs]**
 
 ### 三种迭代方式
@@ -500,6 +586,7 @@ while let Some(item) = iter.next() {
 ---
 
 ## 🔧 迭代器适配器
+>
 > **[来源: Rust Official Docs]**
 
 ### 转换适配器
@@ -585,6 +672,7 @@ let result: Vec<_> = vec.iter()
 ---
 
 ## 🍽️ 迭代器消费者
+>
 > **[来源: Rust Official Docs]**
 
 ### 收集
@@ -679,6 +767,7 @@ let joined: String = vec.iter().map(|x| x.to_string()).collect();
 ---
 
 ## 🎯 常用模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 转换和过滤
@@ -849,6 +938,7 @@ let windows = sliding_windows(&vec, 3);
 ---
 
 ## 💡 代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 自定义迭代器
@@ -1016,6 +1106,7 @@ assert_eq!(cache.get(&2), Some(&"b"));
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: Rust Official Docs]**
 
 ### 场景: 数据处理管道
@@ -1076,6 +1167,7 @@ fn time_window_aggregation(
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: Rust Official Docs]**
 
 ### 反例 1: 迭代时修改集合
@@ -1192,6 +1284,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 ---
 
 ## 📚 相关文档
+>
 > **[来源: Rust Official Docs]**
 
 - [迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
@@ -1256,3 +1349,10 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 相关概念
+
+- [quick_reference 目录](./README.md)
+- [上级目录](../README.md)

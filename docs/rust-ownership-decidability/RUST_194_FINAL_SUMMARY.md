@@ -6,7 +6,38 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 对齐 - 最终完成总结](#rust-194-对齐---最终完成总结)
+  - [📑 目录](#-目录)
+  - [🎉 完成声明](#-完成声明)
+  - [📊 最终统计](#-最终统计)
+    - [代码交付](#代码交付)
+    - [文档交付](#文档交付)
+    - [特性覆盖](#特性覆盖)
+  - [📁 交付物清单](#-交付物清单)
+    - [Coq 形式化文件 (11 个)](#coq-形式化文件-11-个)
+    - [文档文件 (5 个)](#文档文件-5-个)
+  - [🏆 核心成就](#-核心成就)
+    - [1. 完整的形式化覆盖](#1-完整的形式化覆盖)
+    - [2. 完整的元理论](#2-完整的元理论)
+    - [3. 丰富的文档](#3-丰富的文档)
+  - [🎯 质量指标](#-质量指标)
+  - [🔬 技术亮点](#-技术亮点)
+    - [统一框架](#统一框架)
+    - [模块化设计](#模块化设计)
+    - [渐进式形式化](#渐进式形式化)
+  - [📖 使用指南](#-使用指南)
+    - [快速开始](#快速开始)
+    - [深入特定特性](#深入特定特性)
+  - [🔮 未来方向](#-未来方向)
+  - [🙏 致谢](#-致谢)
+  - [✅ 最终检查清单](#-最终检查清单)
+  - [*Rust 1.94 所有权形式化对齐项目圆满结束！* 🎊](#rust-194-所有权形式化对齐项目圆满结束-)
+  - [相关概念](#相关概念)
+
 ## 🎉 完成声明
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust 1.94 所有权形式化对齐工作已 **100% 完成**！
@@ -14,9 +45,11 @@ Rust 1.94 所有权形式化对齐工作已 **100% 完成**！
 ---
 
 ## 📊 最终统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 代码交付
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 |
@@ -205,7 +238,13 @@ docs/rust-ownership-decidability/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

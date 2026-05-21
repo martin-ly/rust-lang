@@ -4,10 +4,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust设计模式综合论证](#rust设计模式综合论证)
+  - [📑 目录](#-目录)
+  - [1. 模式分类体系](#1-模式分类体系)
+    - [1.1 思维导图：Rust设计模式全景](#11-思维导图rust设计模式全景)
+  - [2. 创建型模式](#2-创建型模式)
+    - [2.1 Into Trait模式 (所有权转移)](#21-into-trait模式-所有权转移)
+    - [2.2 Builder模式 (分阶段构造)](#22-builder模式-分阶段构造)
+  - [3. 结构型模式](#3-结构型模式)
+    - [3.1 Newtype模式 (零成本抽象)](#31-newtype模式-零成本抽象)
+    - [3.2 Deref多态模式](#32-deref多态模式)
+  - [4. 行为型模式](#4-行为型模式)
+    - [4.1 类型状态模式 (编译时状态机)](#41-类型状态模式-编译时状态机)
+  - [5. 并发模式](#5-并发模式)
+    - [5.1 `Arc<Mutex<T>>`模式 (共享可变状态)](#51-arcmutext模式-共享可变状态)
+    - [5.2 Channel模式 (消息传递)](#52-channel模式-消息传递)
+  - [6. Unsafe模式](#6-unsafe模式)
+    - [6.1 自引用结构模式](#61-自引用结构模式)
+  - [7. 模式选择决策树](#7-模式选择决策树)
+  - [8. 模式与所有权的关系](#8-模式与所有权的关系)
+  - [**对齐来源**: Rust Book, Rust API Guidelines, crate文档](#对齐来源-rust-book-rust-api-guidelines-crate文档)
+  - [相关概念](#相关概念)
+
 ## 1. 模式分类体系
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 思维导图：Rust设计模式全景
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -53,6 +79,7 @@ mindmap
 ---
 
 ## 2. 创建型模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Into Trait模式 (所有权转移)
@@ -526,7 +553,13 @@ Pin<Box<Self>>保证:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [comprehensive-analysis 目录](./README.md)
+- [上级目录](../README.md)

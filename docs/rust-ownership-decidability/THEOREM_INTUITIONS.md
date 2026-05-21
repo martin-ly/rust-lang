@@ -4,10 +4,69 @@
 
 ---
 
+## 📑 目录
+>
+- [定理的直观理解与解释](#定理的直观理解与解释)
+  - [📑 目录](#-目录)
+  - [一、终止性定理（Termination Theorem）](#一终止性定理termination-theorem)
+    - [1.1 定理陈述](#11-定理陈述)
+    - [1.2 直观理解](#12-直观理解)
+    - [1.3 为什么这个定理重要？](#13-为什么这个定理重要)
+    - [1.4 证明策略详解](#14-证明策略详解)
+    - [1.5 常见疑问](#15-常见疑问)
+  - [二、保持性定理（Preservation Theorem）](#二保持性定理preservation-theorem)
+    - [2.1 定理陈述](#21-定理陈述)
+    - [2.2 直观理解](#22-直观理解)
+    - [2.3 为什么这个定理重要？](#23-为什么这个定理重要)
+    - [2.4 证明策略详解](#24-证明策略详解)
+    - [2.5 技术难点](#25-技术难点)
+  - [三、进展定理（Progress Theorem）](#三进展定理progress-theorem)
+    - [3.1 定理陈述](#31-定理陈述)
+    - [3.2 直观理解](#32-直观理解)
+    - [3.3 为什么这个定理重要？](#33-为什么这个定理重要)
+    - [3.4 证明策略详解](#34-证明策略详解)
+    - [3.5 卡住（Stuck）vs 错误（Error）](#35-卡住stuckvs-错误error)
+  - [四、类型安全定理（Type Safety）](#四类型安全定理type-safety)
+    - [4.1 定理陈述](#41-定理陈述)
+    - [4.2 直观理解](#42-直观理解)
+    - [4.3 为什么这个定理是"圣杯"](#43-为什么这个定理是圣杯)
+    - [4.4 与 Rust 的关系](#44-与-rust-的关系)
+  - [五、可判定性定理（Decidability）](#五可判定性定理decidability)
+    - [5.1 定理陈述](#51-定理陈述)
+    - [5.2 直观理解](#52-直观理解)
+    - [5.3 为什么这个定理重要？](#53-为什么这个定理重要)
+    - [5.4 证明策略](#54-证明策略)
+  - [六、借用检查等价性定理](#六借用检查等价性定理)
+    - [6.1 定理陈述](#61-定理陈述)
+    - [6.2 直观理解](#62-直观理解)
+    - [6.3 双向证明的解释](#63-双向证明的解释)
+    - [6.4 为什么这个定理重要？](#64-为什么这个定理重要)
+  - [七、内存安全定理](#七内存安全定理)
+    - [7.1 定理陈述](#71-定理陈述)
+    - [7.2 内存安全的定义](#72-内存安全的定义)
+    - [7.3 直观理解](#73-直观理解)
+    - [7.4 定理的重要性](#74-定理的重要性)
+  - [八、语义等价性定理](#八语义等价性定理)
+    - [8.1 定理陈述](#81-定理陈述)
+    - [8.2 直观理解](#82-直观理解)
+    - [8.3 为什么需要两种语义？](#83-为什么需要两种语义)
+    - [8.4 证明的挑战](#84-证明的挑战)
+  - [九、定理间的逻辑关系](#九定理间的逻辑关系)
+    - [9.1 依赖图](#91-依赖图)
+    - [9.2 证明顺序](#92-证明顺序)
+  - [十、总结](#十总结)
+  - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
+    - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
+    - [形式化更新](#形式化更新)
+  - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 一、终止性定理（Termination Theorem）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Mathematical Theorem]** · **[来源: Wikipedia - Intuitionistic Logic]** · **[来源: ACM - Theorem Proving Intuition]** · **[来源: IEEE - Formal Reasoning Methods]**
 
 ### 1.1 定理陈述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```coq
@@ -23,6 +82,7 @@ Theorem borrow_checking_termination :
 > 如果类型环境 Γ 满足 Linearizability 条件，那么借用检查算法一定会在有限步（n 步）内终止，并产生一个不动点结果 Γ'。
 
 ### 1.2 直观理解
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **类比：整理书架**
@@ -820,7 +880,13 @@ Lineariz. ───┘
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

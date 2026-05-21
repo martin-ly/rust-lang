@@ -6,13 +6,51 @@
 
 ---
 
+## 📑 目录
+>
+- [array\_windows 语义分析 \[Stable 1.94\]](#array_windows-语义分析-stable-194)
+  - [📑 目录](#-目录)
+  - [1. 概述](#1-概述)
+    - [1.1 与 `windows` 的对比](#11-与-windows-的对比)
+  - [2. 语法定义](#2-语法定义)
+    - [2.1 方法签名](#21-方法签名)
+    - [2.2 形式化定义](#22-形式化定义)
+  - [3. 语义分析](#3-语义分析)
+    - [3.1 类型安全](#31-类型安全)
+    - [3.2 生命周期语义](#32-生命周期语义)
+    - [3.3 所有权与借用](#33-所有权与借用)
+  - [4. 形式化语义](#4-形式化语义)
+    - [4.1 操作语义](#41-操作语义)
+    - [4.2 类型规则](#42-类型规则)
+  - [5. 使用模式](#5-使用模式)
+    - [5.1 滑动窗口计算](#51-滑动窗口计算)
+    - [5.2 模式匹配](#52-模式匹配)
+    - [5.3 与其他迭代器方法组合](#53-与其他迭代器方法组合)
+  - [6. 性能特征](#6-性能特征)
+    - [6.1 与 `windows` 的性能对比](#61-与-windows-的性能对比)
+    - [6.2 零成本抽象](#62-零成本抽象)
+  - [7. 安全保证](#7-安全保证)
+    - [7.1 内存安全](#71-内存安全)
+    - [7.2 类型安全](#72-类型安全)
+  - [8. 实际应用案例](#8-实际应用案例)
+    - [8.1 信号处理](#81-信号处理)
+    - [8.2 文本分析](#82-文本分析)
+    - [8.3 时间序列分析](#83-时间序列分析)
+  - [9. 与所有权系统的关系](#9-与所有权系统的关系)
+    - [9.1 借用检查器交互](#91-借用检查器交互)
+    - [9.2 生命周期推断](#92-生命周期推断)
+  - [10. 总结](#10-总结)
+  - [相关概念](#相关概念)
+
 ## 1. 概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `array_windows` 是 Rust 1.94 引入的切片迭代方法，返回固定大小的数组窗口迭代器。
 与现有的 `windows` 方法不同，`array_windows` 返回的是 `&[T; N]` 而非 `&[T]`，在编译时确定窗口大小，提供更好的类型安全和性能。
 
 ### 1.1 与 `windows` 的对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -34,6 +72,7 @@ for window in slice.array_windows() {
 ---
 
 ## 2. 语法定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 方法签名
@@ -418,6 +457,7 @@ fn explicit_lifetimes<'a>(data: &'a [i32]) -> impl Iterator<Item = i32> + 'a {
 - [Rust 1.94 Release Notes](https://blog.rust-lang.org/2026/03/06/Rust-1.94.0.html)
 - [Slice::array_windows API 文档](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
 - [Tracking Issue #75027](https://github.com/rust-lang/rust/issues/75027)
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -429,7 +469,12 @@ fn explicit_lifetimes<'a>(data: &'a [i32]) -> impl Iterator<Item = i32> + 'a {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

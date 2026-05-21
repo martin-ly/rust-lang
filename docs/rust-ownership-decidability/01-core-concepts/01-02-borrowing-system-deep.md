@@ -1,4 +1,10 @@
 # 01-02: The Rust Borrowing System - A Formal Deep Dive
+>
+> **层次定位**: L4 形式化 / 借用系统深度分析
+> **前置依赖**: [ROD 所有权规则](./01-01-ownership-rules-deep.md) · [concept L4 线性逻辑](../../../concept/04_formal/01_linear_logic.md)
+> **后置延伸**: [ROD 异步语义](../16-program-semantics/03-async-semantics.md) · [ROD 并发语义](../16-program-semantics/02-concurrency-semantics.md)
+> **跨层映射**: L4 线性逻辑 !A ↔ 可变借用规则 | ROD 深度展开
+> **定理链编号**: T-110 Iris 可靠性 → T-111 高阶幽灵状态
 
 ## Table of Contents
 >
@@ -156,6 +162,7 @@
   - [Summary](#summary)
   - [References](#references)
   - [*Last Updated: 2026*](#last-updated-2026)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2445,7 +2452,6 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 ---
 
 - [README](./README.md)
-
 
 ---
 

@@ -1,10 +1,10 @@
 # 11 隐式终止模式 (Implicit Termination)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [与显式终止的区别](#与显式终止的区别)
@@ -27,14 +27,48 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [与显式终止的区别](#与显式终止的区别)
+  - [终止检测算法](#终止检测算法)
+    - [Dijkstra-Scholten 算法](#dijkstra-scholten-算法)
+    - [分布式终止检测](#分布式终止检测)
+  - [死锁分析](#死锁分析)
+    - [死锁检测](#死锁检测)
+    - [避免策略](#避免策略)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+  - [形式化语义](#形式化语义)
+    - [状态机形式化](#状态机形式化)
+    - [进程代数](#进程代数)
+  - [正确性证明](#正确性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [分布式终止检测](#分布式终止检测-1)
+    - [死锁检测实现](#死锁检测实现)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 隐式终止模式允许工作流在没有显式终止节点的情况下完成。
 当所有活跃路径都自然结束时，工作流被视为完成。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -733,6 +767,7 @@ $$
 5. **Francez, N.** (1980). "Distributed Termination." *ACM Transactions on Programming Languages and Systems*, 2(1), 42-55.
 
 6. **Mattern, F.** (1987). "Algorithms for Distributed Termination Detection." *Distributed Computing*, 2(3), 161-175.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -744,7 +779,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

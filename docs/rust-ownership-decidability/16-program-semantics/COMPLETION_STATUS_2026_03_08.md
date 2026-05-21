@@ -5,6 +5,22 @@
 
 ---
 
+## 📑 目录
+>
+- [16-program-semantics 完成状态报告](#16-program-semantics-完成状态报告)
+  - [📑 目录](#-目录)
+  - [现状总览](#现状总览)
+  - [本次推进成果](#本次推进成果)
+    - [1. 理论基础补齐 ✅](#1-理论基础补齐-)
+  - [剩余缺口 (按优先级)](#剩余缺口-按优先级)
+    - [🔴 P0 - 形式验证 (完全缺失)](#-p0---形式验证-完全缺失)
+    - [🟡 P1 - 并发理论扩展](#-p1---并发理论扩展)
+    - [🟡 P2 - OS Abstractions 深化](#-p2---os-abstractions-深化)
+  - [达到 100% 所需工作](#达到-100-所需工作)
+  - [建议](#建议)
+  - [**日期**: 2026-03-08](#日期-2026-03-08)
+  - [相关概念](#相关概念)
+
 ## 现状总览
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -103,7 +119,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [16-program-semantics 目录](./README.md)
+- [上级目录](../README.md)

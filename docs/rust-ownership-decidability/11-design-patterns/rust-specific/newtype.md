@@ -6,7 +6,18 @@
 
 ---
 
+## 📑 目录
+>
+- [Newtype Pattern in Rust](#newtype-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [基础示例](#基础示例)
+  - [为外部类型实现 Trait](#为外部类型实现-trait)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Newtype 模式使用单字段元组结构体包装现有类型，提供编译时类型区分，零运行时开销。
@@ -14,6 +25,7 @@ Newtype 模式使用单字段元组结构体包装现有类型，提供编译时
 ---
 
 ## 基础示例
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -70,6 +82,7 @@ fn main() {
 ---
 
 ## 为外部类型实现 Trait
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -113,6 +126,7 @@ Newtype<T>(T)
   2. 类型不同: Newtype<T> ≠ T (编译期)
   3. 零成本: sizeof(Newtype<T>) = sizeof(T)
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -124,7 +138,12 @@ Newtype<T>(T)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-specific 目录](./README.md)

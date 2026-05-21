@@ -7,11 +7,11 @@
 
 ---
 
-## 📋 目录
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [VerusBelt (PLDI 2026) 研究笔记](#verusbelt-pldi-2026-研究笔记)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [🔍 背景：Verus 验证框架](#-背景verus-验证框架)
   - [📄 VerusBelt 论文概述](#-verusbelt-论文概述)
   - [🧠 核心贡献](#-核心贡献)
@@ -27,10 +27,36 @@
     - [3. 分布式系统协议](#3-分布式系统协议)
     - [4. 行业标准](#4-行业标准)
   - [📖 引用信息](#-引用信息)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]**
+
+- [VerusBelt (PLDI 2026) 研究笔记](#verusbelt-pldi-2026-研究笔记)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [🔍 背景：Verus 验证框架](#-背景verus-验证框架)
+  - [📄 VerusBelt 论文概述](#-verusbelt-论文概述)
+  - [🧠 核心贡献](#-核心贡献)
+    - [1. 类型系统扩展的形式化](#1-类型系统扩展的形式化)
+    - [2. 层叠语义 (Layered Semantics)](#2-层叠语义-layered-semantics)
+    - [3. 擦除定理 (Erasure Theorem)](#3-擦除定理-erasure-theorem)
+  - [⚖️ 与相关工作的对比](#️-与相关工作的对比)
+    - [VerusBelt vs RefinedRust](#verusbelt-vs-refinedrust)
+    - [VerusBelt vs RustBelt](#verusbelt-vs-rustbelt)
+  - [🔧 对安全关键 Rust 的实践意义](#-对安全关键-rust-的实践意义)
+    - [1. 操作系统内核验证](#1-操作系统内核验证)
+    - [2. 密码学实现验证](#2-密码学实现验证)
+    - [3. 分布式系统协议](#3-分布式系统协议)
+    - [4. 行业标准](#4-行业标准)
+  - [📖 引用信息](#-引用信息)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🔍 背景：Verus 验证框架
+>
 > **[来源: Rust Official Docs]**
 
 **Verus** 是由 **Microsoft Research** 开发的 Rust 程序验证框架，允许开发者用 Rust 本身编写规范（`spec` 函数）和证明（`proof` 代码），从而验证 Rust 程序的正确性。
@@ -65,6 +91,7 @@ Verus 的三种函数模式：
 ---
 
 ## 📄 VerusBelt 论文概述
+>
 > **[来源: Rust Official Docs]**
 
 **论文标题**: VerusBelt: A Semantic Foundation for Proof-Oriented Extensions to Rust
@@ -83,11 +110,13 @@ Verus 的三种函数模式：
 ---
 
 ## 🧠 核心贡献
+>
 > **[来源: Rust Official Docs]**
 
 VerusBelt 的主要技术贡献：
 
 ### 1. 类型系统扩展的形式化
+>
 > **[来源: Rust Official Docs]**
 
 为 Verus 的以下扩展提供形式化类型规则：
@@ -100,6 +129,7 @@ VerusBelt 的主要技术贡献：
 | `spec` 函数 | 规范定义 | 形式化 spec 的纯函数语义 |
 
 ### 2. 层叠语义 (Layered Semantics)
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -121,6 +151,7 @@ VerusBelt 语义层次:
 ```
 
 ### 3. 擦除定理 (Erasure Theorem)
+>
 > **[来源: Rust Official Docs]**
 
 证明：所有 `spec` 和 `proof` 代码在编译后可以被安全擦除，不影响 `exec` 代码的运行时行为。这是 Verus "零开销抽象" 的形式化保证。
@@ -128,9 +159,11 @@ VerusBelt 语义层次:
 ---
 
 ## ⚖️ 与相关工作的对比
+>
 > **[来源: Rust Official Docs]**
 
 ### VerusBelt vs RefinedRust
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | VerusBelt / Verus | RefinedRust |
@@ -144,6 +177,7 @@ VerusBelt 语义层次:
 | **工业应用** | Microsoft 内部项目 | 学术研究为主 |
 
 ### VerusBelt vs RustBelt
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | RustBelt | VerusBelt |
@@ -170,6 +204,7 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 ---
 
 ## 🔧 对安全关键 Rust 的实践意义
+>
 > **[来源: Rust Official Docs]**
 
 VerusBelt 的研究成果对以下领域有直接影响：
@@ -238,6 +273,7 @@ Design and Implementation (PLDI 2026).
 > - 2026-05-08: 初始创建，论文预计于 PLDI 2026 正式发表
 > - PLDI 2026 会议日期: 2026 年 6 月 (预计)
 > - DOI 待会议正式出版后更新
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -249,7 +285,12 @@ Design and Implementation (PLDI 2026).
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

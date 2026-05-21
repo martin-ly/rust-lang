@@ -6,7 +6,19 @@
 
 ---
 
+## 📑 目录
+>
+- [Observer Pattern in Rust](#observer-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [Rust 实现](#rust-实现)
+    - [基础实现](#基础实现)
+    - [类型安全的事件系统](#类型安全的事件系统)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 观察者模式定义对象间的一对多依赖关系，当一个对象状态改变时，所有依赖它的对象都会收到通知并自动更新。
@@ -14,9 +26,11 @@
 ---
 
 ## Rust 实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 基础实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -198,6 +212,7 @@ Rust 特殊性:
   - 使用 Weak 引用避免循环引用
   - 需要 RefCell 实现内部可变性
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -209,7 +224,12 @@ Rust 特殊性:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [behavioral 目录](./README.md)

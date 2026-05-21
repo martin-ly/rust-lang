@@ -4,7 +4,51 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 详细学习路线图](#rust-所有权系统---详细学习路线图)
+  - [📑 目录](#-目录)
+  - [路线图总览](#路线图总览)
+  - [Level 0 → Level 1: 入门 (4小时)](#level-0--level-1-入门-4小时)
+    - [目标](#目标)
+    - [学习清单](#学习清单)
+    - [验证标准](#验证标准)
+  - [Level 1 → Level 2: 初级 (1周)](#level-1--level-2-初级-1周)
+    - [目标](#目标-1)
+    - [Week 1 学习计划](#week-1-学习计划)
+    - [验证标准](#验证标准-1)
+  - [Level 2 → Level 3: 中级 (2周)](#level-2--level-3-中级-2周)
+    - [目标](#目标-2)
+    - [Week 2-3 学习计划](#week-2-3-学习计划)
+    - [验证标准](#验证标准-2)
+  - [Level 3 → Level 4: 高级 (1月)](#level-3--level-4-高级-1月)
+    - [目标](#目标-3)
+    - [Month 1 学习计划](#month-1-学习计划)
+    - [验证标准](#验证标准-3)
+  - [Level 4 → Level 5: 专家 (持续)](#level-4--level-5-专家-持续)
+    - [目标](#目标-4)
+    - [持续学习计划](#持续学习计划)
+    - [验证标准](#验证标准-4)
+  - [快速参考: 按目标选择路径](#快速参考-按目标选择路径)
+    - ["我想快速上手"](#我想快速上手)
+    - ["我想成为专业开发者"](#我想成为专业开发者)
+    - ["我想做形式化研究"](#我想做形式化研究)
+    - ["我来自其他语言"](#我来自其他语言)
+  - [学习检查点](#学习检查点)
+    - [每级检查清单](#每级检查清单)
+  - [常见陷阱与解决](#常见陷阱与解决)
+    - [陷阱 1: 只看不练](#陷阱-1-只看不练)
+    - [陷阱 2: 跳过基础](#陷阱-2-跳过基础)
+    - [陷阱 3: 孤立学习](#陷阱-3-孤立学习)
+    - [陷阱 4: 死记硬背](#陷阱-4-死记硬背)
+  - [资源推荐](#资源推荐)
+    - [必备文档](#必备文档)
+    - [按级别推荐](#按级别推荐)
+  - [*跟随这个路线图，从新手到专家*](#跟随这个路线图从新手到专家)
+  - [相关概念](#相关概念)
+
 ## 路线图总览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -34,9 +78,11 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 0 → Level 1: 入门 (4小时)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - 理解所有权三原则
@@ -390,7 +436,13 @@ Level 5: 能形式化证明 (专家)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

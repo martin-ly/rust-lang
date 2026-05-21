@@ -7,10 +7,30 @@
 
 ---
 
+## 📑 目录
+>
+- [rust-ownership-decidability 与 research\_notes 整合计划](#rust-ownership-decidability-与-research_notes-整合计划)
+  - [📑 目录](#-目录)
+  - [1. 现状分析](#1-现状分析)
+    - [1.1 `rust-ownership-decidability/` 概况](#11-rust-ownership-decidability-概况)
+    - [1.2 `research_notes/` 概况](#12-research_notes-概况)
+    - [1.3 重复与交叉](#13-重复与交叉)
+  - [2. 整合策略](#2-整合策略)
+    - [2.1 保留 `rust-ownership-decidability/` 作为独立体系](#21-保留-rust-ownership-decidability-作为独立体系)
+    - [2.2 建立双向链接而非物理合并](#22-建立双向链接而非物理合并)
+    - [2.3 版本号对齐](#23-版本号对齐)
+    - [2.4 清理过时内容](#24-清理过时内容)
+  - [3. 执行步骤](#3-执行步骤)
+  - [4. 统一索引结构（建议）](#4-统一索引结构建议)
+  - [5. 相关文档](#5-相关文档)
+  - [相关概念](#相关概念)
+
 ## 1. 现状分析
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 `rust-ownership-decidability/` 概况
+>
 > **[来源: Rust Official Docs]**
 
 - **规模**: 642 个文件，11MB，600K+ 字
@@ -19,6 +39,7 @@
 - **问题**: badge 标注 Rust 1.94，部分内容已过时（08-advanced-topics 中的 1.94 报告等）
 
 ### 1.2 `research_notes/` 概况
+>
 > **[来源: Rust Official Docs]**
 
 - **规模**: 150+ 个文件
@@ -123,7 +144,12 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

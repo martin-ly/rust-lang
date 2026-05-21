@@ -1,9 +1,37 @@
 # Miri 集成总结报告
 
+## 📑 目录
+>
+- [Miri 集成总结报告](#miri-集成总结报告)
+  - [📑 目录](#-目录)
+  - [完成的工作](#完成的工作)
+    - [1. Miri 配置](#1-miri-配置)
+    - [2. Miri 测试文件](#2-miri-测试文件)
+    - [3. Lib.rs 模块声明](#3-librs-模块声明)
+    - [4. 运行脚本](#4-运行脚本)
+    - [5. 文档](#5-文档)
+  - [Tree Borrows vs Stacked Borrows](#tree-borrows-vs-stacked-borrows)
+    - [Stacked Borrows](#stacked-borrows)
+    - [Tree Borrows (推荐)](#tree-borrows-推荐)
+    - [关键区别示例](#关键区别示例)
+  - [如何使用](#如何使用)
+    - [运行所有 Miri 测试](#运行所有-miri-测试)
+    - [运行特定 crate 的测试](#运行特定-crate-的测试)
+    - [使用特定 Miri 选项](#使用特定-miri-选项)
+  - [测试结构](#测试结构)
+  - [注意事项](#注意事项)
+  - [后续建议](#后续建议)
+  - [文件清单](#文件清单)
+    - [修改的文件](#修改的文件)
+    - [新建的文件](#新建的文件)
+  - [相关概念](#相关概念)
+
 ## 完成的工作
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. Miri 配置
+>
 > **[来源: Rust Official Docs]**
 
 **文件**: `.cargo/config.toml`
@@ -29,6 +57,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 ```
 
 ### 2. Miri 测试文件
+>
 > **[来源: Rust Official Docs]**
 
 为以下 crate 创建了 `miri_tests.rs` 文件：
@@ -200,7 +229,12 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [docs 目录](./README.md)

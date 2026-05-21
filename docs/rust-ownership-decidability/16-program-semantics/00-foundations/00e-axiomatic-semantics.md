@@ -1,5 +1,31 @@
 
+## 📑 目录
+>
+- [📑 目录](#-目录)
+  - [6.4 链表反转示例](#64-链表反转示例)
+- [7. 并发程序验证](#7-并发程序验证)
+  - [7.1 Owicki-Gries 方法](#71-owicki-gries-方法)
+  - [7.2 资源不变量](#72-资源不变量)
+  - [7.3 Rely-Guarantee 推理](#73-rely-guarantee-推理)
+- [8. 在 Rust 中的应用](#8-在-rust-中的应用)
+  - [8.1 Rust 的前置/后置条件](#81-rust-的前置后置条件)
+  - [8.2 所有权作为分离逻辑](#82-所有权作为分离逻辑)
+  - [8.3 Prusti 验证工具](#83-prusti-验证工具)
+  - [8.4 不安全代码契约](#84-不安全代码契约)
+- [9. 霍尔逻辑的扩展](#9-霍尔逻辑的扩展)
+  - [9.1 完全正确性 (Total Correctness)](#91-完全正确性-total-correctness)
+  - [9.2 过程/函数](#92-过程函数)
+  - [9.3 异常/错误](#93-异常错误)
+- [10. 工具与实践](#10-工具与实践)
+  - [10.1 验证工具链](#101-验证工具链)
+  - [10.2 验证流程](#102-验证流程)
+- [11. 总结](#11-总结)
+- [参考文献](#参考文献)
+- [**后续学习**: 分离逻辑、程序验证](#后续学习-分离逻辑程序验证)
+- [相关概念](#相关概念)
+
 ### 6.4 链表反转示例
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **程序**:
@@ -39,9 +65,11 @@ $$
 ---
 
 ## 7. 并发程序验证
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 7.1 Owicki-Gries 方法
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **并行组合规则**:
@@ -251,7 +279,13 @@ fn may_fail() -> Result<i32, Error> { ... }
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [00-foundations 目录](./README.md)
+- [上级目录](../README.md)

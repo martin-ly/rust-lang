@@ -6,10 +6,40 @@
 
 ---
 
+## 📑 目录
+>
+- [常量求值规则形式化](#常量求值规则形式化)
+  - [📑 目录](#-目录)
+  - [1. 常量上下文分类](#1-常量上下文分类)
+    - [Def CONST-CTX1（常量上下文）](#def-const-ctx1常量上下文)
+  - [2. const fn 语义](#2-const-fn-语义)
+    - [Def CONST-FN1（const fn 允许操作）](#def-const-fn1const-fn-允许操作)
+    - [Def CONST-FN2（const fn 禁止操作）](#def-const-fn2const-fn-禁止操作)
+  - [3. MIR 常量求值](#3-mir-常量求值)
+    - [Def MIR-EVAL1（MIR 常量求值器）](#def-mir-eval1mir-常量求值器)
+    - [Thm EVAL-BOUND1（求值限制定理）](#thm-eval-bound1求值限制定理)
+  - [4. 常量泛型求值](#4-常量泛型求值)
+    - [Def CONST-GEN1（常量泛型形式化）](#def-const-gen1常量泛型形式化)
+    - [Thm CONST-TY1（常量泛型类型安全）](#thm-const-ty1常量泛型类型安全)
+  - [5. const\_eval\_select](#5-const_eval_select)
+    - [Def CONST-SELECT1（条件常量求值）](#def-const-select1条件常量求值)
+  - [6. 形式化总结](#6-形式化总结)
+    - [常量求值判定](#常量求值判定)
+    - [类型系统交互](#类型系统交互)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 1. 常量上下文分类
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-CTX1（常量上下文）
+>
 > **[来源: Rust Official Docs]**
 
 以下位置构成**常量上下文** (Const Context)：
@@ -29,9 +59,11 @@ $$
 ---
 
 ## 2. const fn 语义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-FN1（const fn 允许操作）
+>
 > **[来源: Rust Official Docs]**
 
 在 const fn 中允许的操作集合：
@@ -67,6 +99,7 @@ const fn allowed_operations(x: i32) -> i32 {
 ```
 
 ### Def CONST-FN2（const fn 禁止操作）
+>
 > **[来源: Rust Official Docs]**
 
 $$
@@ -94,9 +127,11 @@ const fn forbidden_operations() {
 ---
 
 ## 3. MIR 常量求值
+>
 > **[来源: Rust Official Docs]**
 
 ### Def MIR-EVAL1（MIR 常量求值器）
+>
 > **[来源: Rust Official Docs]**
 
 MIR 常量求值是编译期解释器，执行以下步骤：
@@ -122,6 +157,7 @@ MIR 常量求值是编译期解释器，执行以下步骤：
 ```
 
 ### Thm EVAL-BOUND1（求值限制定理）
+>
 > **[来源: Rust Official Docs]**
 
 常量求值受以下限制约束：
@@ -139,9 +175,11 @@ $$
 ---
 
 ## 4. 常量泛型求值
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CONST-GEN1（常量泛型形式化）
+>
 > **[来源: Rust Official Docs]**
 
 常量泛型参数 $N$ 的类型：
@@ -157,6 +195,7 @@ $$
 $$
 
 ### Thm CONST-TY1（常量泛型类型安全）
+>
 > **[来源: Rust Official Docs]**
 
 若 $e$ 在常量上下文中求值为 $v$，则类型 $T[e]$ 良构当且仅当 $v$ 满足 $T$ 的约束：
@@ -297,3 +336,10 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [type_theory 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,5 +1,65 @@
 ﻿# 🔗 文档交叉引用指南 {#-文档交叉引用指南}
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🗺️ 文档网络总览](#文档网络总览)
+  - [全文档依赖图](#全文档依赖图)
+  - [文档层次结构](#文档层次结构)
+- [🔄 核心模块交叉引用](#核心模块交叉引用)
+  - [C01 - 所有权与借用](#c01---所有权与借用)
+  - [C02 - 类型系统](#c02---类型系统)
+  - [C03 - 控制流与函数](#c03---控制流与函数)
+  - [C04 - 泛型编程](#c04---泛型编程)
+  - [C05 - 线程与并发](#c05---线程与并发)
+  - [C06 - 异步编程](#c06---异步编程)
+  - [C07 - 进程管理](#c07---进程管理)
+  - [C08 - 算法与数据结构](#c08---算法与数据结构)
+  - [C09 - 设计模式](#c09---设计模式)
+  - [C10 - 网络编程](#c10---网络编程)
+  - [C11 - 宏系统](#c11---宏系统)
+  - [C12 - WASM](#c12---wasm)
+- [📚 研究笔记交叉引用](#研究笔记交叉引用)
+  - [形式化方法研究](#形式化方法研究)
+  - [类型理论研究](#类型理论研究)
+  - [软件设计理论](#软件设计理论)
+  - [三大支柱交叉映射](#三大支柱交叉映射)
+- [📖 速查卡交叉引用](#速查卡交叉引用)
+  - [速查卡 ↔ 指南映射](#速查卡-指南映射)
+  - [速查卡 ↔ 研究笔记映射](#速查卡-研究笔记映射)
+- [🧭 导航指南](#导航指南)
+  - [按角色导航](#按角色导航)
+    - [初学者路径](#初学者路径)
+    - [开发者路径](#开发者路径)
+    - [研究者路径](#研究者路径)
+    - [维护者路径](#维护者路径)
+  - [按主题导航](#按主题导航)
+    - [内存安全主题](#内存安全主题)
+    - [并发编程主题](#并发编程主题)
+    - [类型系统主题](#类型系统主题)
+    - [设计模式主题](#设计模式主题)
+  - [快速查找路径](#快速查找路径)
+- [🌐 文档依赖图](#文档依赖图)
+  - [层次依赖](#层次依赖)
+  - [横向关联](#横向关联)
+- [✅ 双向链接验证](#双向链接验证)
+  - [验证清单](#验证清单)
+  - [链接完整性检查](#链接完整性检查)
+- [最佳实践](#最佳实践)
+  - [1. 使用相对路径](#1-使用相对路径)
+  - [2. 提供描述性链接文本](#2-提供描述性链接文本)
+  - [3. 维护链接完整性](#3-维护链接完整性)
+  - [4. 添加交叉引用到速查卡](#4-添加交叉引用到速查卡)
+  - [5. 添加交叉引用到指南](#5-添加交叉引用到指南)
+- [📚 相关资源](#相关资源)
+  - [核心交叉引用文档](#核心交叉引用文档)
+  - [快速入口](#快速入口)
+- [Rust 1.95+ 持续更新更新](#rust-195-持续更新更新)
+  - [本文档的Rust 1.95+更新要点](#本文档的rust-195更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 > **创建日期**: 2026-02-15
 > **最后更新**: 2026-05-08
 > **Rust 版本**: 1.95.0+ (Edition 2024)
@@ -10,6 +70,7 @@
 ---
 
 ## 📋 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [🔗 文档交叉引用指南 {#-文档交叉引用指南}](#-文档交叉引用指南--文档交叉引用指南)
@@ -74,9 +135,11 @@
 ---
 
 ## 🗺️ 文档网络总览 {#️-文档网络总览}
+>
 > **[来源: Rust Official Docs]**
 
 ### 全文档依赖图
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -121,6 +184,7 @@
 ```
 
 ### 文档层次结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -168,9 +232,11 @@ docs/
 ---
 
 ## 🔄 核心模块交叉引用 {#-核心模块交叉引用}
+>
 > **[来源: Rust Official Docs]**
 
 ### C01 - 所有权与借用
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -190,6 +256,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 ```
 
 ### C02 - 类型系统
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -201,6 +268,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **思维表征** | [MULTI_DIMENSIONAL_CONCEPT_MATRIX](../04_thinking/MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) §2 | ←→ [type_system_foundations](../research_notes/type_theory/type_system_foundations.md) ←→ [MIND_MAP_COLLECTION](../04_thinking/MIND_MAP_COLLECTION.md) §3 |
 
 ### C03 - 控制流与函数
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -211,6 +279,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [MACRO_SYSTEM_USAGE_GUIDE.md](../05_guides/MACRO_SYSTEM_USAGE_GUIDE.md) | ← [control_flow](../02_reference/quick_reference/control_flow_functions_cheatsheet.md) |
 
 ### C04 - 泛型编程
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -221,6 +290,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **指南** | [ADVANCED_TOPICS_DEEP_DIVE.md](../05_guides/ADVANCED_TOPICS_DEEP_DIVE.md) | ← [trait_system_formalization](../research_notes/type_theory/trait_system_formalization.md) |
 
 ### C05 - 线程与并发
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -232,6 +302,7 @@ UNSAFE_RUST_GUIDE ← SAFE_UNSAFE_ANALYSIS ← CORE_THEOREMS ← PROOF_INDEX
 | **思维表征** | [DECISION_GRAPH_NETWORK](../04_thinking/DECISION_GRAPH_NETWORK.md) §并发选型 | ←→ [06_boundary_analysis](../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) |
 
 ### C06 - 异步编程
+>
 > **[来源: Rust Official Docs]**
 
 | 文档类型 | 文档路径 | 交叉引用链接 |
@@ -846,3 +917,10 @@ struct LinkValidator {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [07_project 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,4 +1,16 @@
 # Concurrency 并发编程
+>
+> **层次定位**: L3 高级概念 / 并发子域索引
+> **前置依赖**: [knowledge 泛型](../../02_intermediate/generics.md) · [knowledge Trait](../../02_intermediate/traits.md)
+> **后置延伸**: [knowledge Async](../async/README.md) · [concept L3 并发](../../../concept/03_advanced/01_concurrency.md)
+> **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
+> **定理链编号**: T-040 Send 类型安全 → T-041 Sync 数据竞争自由
+
+## 📑 目录
+
+- [📚 内容](#内容)
+- [🎯 学习路径](#学习路径)
+- [🚀 相关层](#相关层)
 
 > **Bloom 层级**: 理解
 

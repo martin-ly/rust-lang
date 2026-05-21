@@ -4,7 +4,25 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 完整知识矩阵](#rust-所有权系统---完整知识矩阵)
+  - [📑 目录](#-目录)
+  - [矩阵一：概念 × 层次](#矩阵一概念--层次)
+  - [矩阵二：定理 × 应用](#矩阵二定理--应用)
+  - [矩阵三：错误 × 理论 × 修复](#矩阵三错误--理论--修复)
+  - [矩阵四：模式 × 理论约束 × 使用场景](#矩阵四模式--理论约束--使用场景)
+  - [矩阵五：工具 × 验证能力 × 复杂度](#矩阵五工具--验证能力--复杂度)
+  - [矩阵六：学习阶段 × 能力 × 验证标准](#矩阵六学习阶段--能力--验证标准)
+  - [矩阵七：应用领域 × 关键概念 × 典型案例](#矩阵七应用领域--关键概念--典型案例)
+  - [矩阵八：Rust 版本 × 特性 × 形式化状态](#矩阵八rust-版本--特性--形式化状态)
+  - [使用说明](#使用说明)
+    - [如何使用这些矩阵](#如何使用这些矩阵)
+  - [*这些矩阵提供了知识的多维度视图，帮助建立完整的知识网络*](#这些矩阵提供了知识的多维度视图帮助建立完整的知识网络)
+  - [相关概念](#相关概念)
+
 ## 矩阵一：概念 × 层次
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 概念 | 形式化层 | 理论层 | 模式层 | 实践层 |
@@ -21,6 +39,7 @@
 ---
 
 ## 矩阵二：定理 × 应用
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 定理 | 编译器模块 | 保证的性质 | 用户可见效果 |
@@ -35,6 +54,7 @@
 ---
 
 ## 矩阵三：错误 × 理论 × 修复
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 错误代码 | 错误信息 | 理论根源 | 理论解释 | 修复模式 |
@@ -150,7 +170,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

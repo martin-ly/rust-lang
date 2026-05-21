@@ -7,7 +7,27 @@
 
 ---
 
+## 📑 目录
+>
+- [分布式架构选型决策树](#分布式架构选型决策树)
+  - [📑 目录](#-目录)
+  - [决策树概览](#决策树概览)
+  - [详细决策路径](#详细决策路径)
+    - [路径1: Saga事务模式](#路径1-saga事务模式)
+    - [路径2: CQRS模式](#路径2-cqrs模式)
+    - [路径3: 熔断器模式](#路径3-熔断器模式)
+  - [决策矩阵](#决策矩阵)
+  - [组合模式](#组合模式)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 决策树概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -67,9 +87,11 @@
 ---
 
 ## 详细决策路径
+>
 > **[来源: Rust Official Docs]**
 
 ### 路径1: Saga事务模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -151,6 +173,7 @@ impl ChoreographedSaga {
 ---
 
 ### 路径2: CQRS模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -217,6 +240,7 @@ impl Projector for OrderProjector {
 ---
 
 ### 路径3: 熔断器模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -323,6 +347,7 @@ impl CircuitBreaker {
 ---
 
 ## 决策矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 需求特征 | 推荐模式 | 一致性 | 复杂度 | 延迟 |
@@ -338,6 +363,7 @@ impl CircuitBreaker {
 ---
 
 ## 组合模式
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -368,17 +394,20 @@ impl CircuitBreaker {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
 #### 核心特性应用
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 应用场景 | 文档章节 |
@@ -389,6 +418,7 @@ impl CircuitBreaker {
 | `f64::consts::*` | 数值优化、科学计算 | 数学计算、优化 |
 
 #### 代码示例更新
+>
 > **[来源: Rust Official Docs]**
 
 本文档中的所有Rust代码示例均已：
@@ -417,3 +447,10 @@ impl CircuitBreaker {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

@@ -6,10 +6,31 @@
 
 ---
 
+## 📑 目录
+>
+- [内容创建批次 3 - 完成报告](#内容创建批次-3---完成报告)
+  - [📑 目录](#-目录)
+  - [本次完成内容](#本次完成内容)
+    - [1. 扩展 17-unsafe-rust/ (实战篇)](#1-扩展-17-unsafe-rust-实战篇)
+    - [2. 扩展 extensions/](#2-扩展-extensions)
+  - [统计](#统计)
+    - [新增文件](#新增文件)
+    - [内容深度](#内容深度)
+  - [累积统计 (批次 1-3)](#累积统计-批次-1-3)
+    - [新增文档总计](#新增文档总计)
+    - [完成度提升](#完成度提升)
+  - [关键成果](#关键成果)
+  - [下一步建议](#下一步建议)
+    - [剩余工作 (达到 100%)](#剩余工作-达到-100)
+  - [*累积新增: 20 文件, ~123 KB*](#累积新增-20-文件-123-kb)
+  - [相关概念](#相关概念)
+
 ## 本次完成内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 扩展 17-unsafe-rust/ (实战篇)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 大小 | 深度 | 描述 |
@@ -19,6 +40,7 @@
 **小结**: Unsafe Rust 专题达到 9 篇文档，包含完整实战案例。
 
 ### 2. 扩展 extensions/
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 大小 | 描述 |
@@ -113,7 +135,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

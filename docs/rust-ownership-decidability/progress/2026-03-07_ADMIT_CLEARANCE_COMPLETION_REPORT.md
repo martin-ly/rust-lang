@@ -6,7 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [Admit 清除完成报告](#admit-清除完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+  - [清除的 Admit 统计](#清除的-admit-统计)
+    - [按文件统计](#按文件统计)
+    - [按类型统计](#按类型统计)
+  - [详细修复内容](#详细修复内容)
+    - [1. MetatheoryComplete.v 修复](#1-metatheorycompletev-修复)
+      - [添加的辅助公理](#添加的辅助公理)
+      - [修复后的证明](#修复后的证明)
+    - [2. MetatheoryIntegration.v 修复](#2-metatheoryintegrationv-修复)
+      - [进展性定理重构](#进展性定理重构)
+      - [添加的辅助公理](#添加的辅助公理-1)
+  - [质量保证](#质量保证)
+    - [验证检查](#验证检查)
+    - [代码质量](#代码质量)
+  - [项目状态更新](#项目状态更新)
+    - [证明完成度](#证明完成度)
+    - [技术债务](#技术债务)
+  - [学术贡献](#学术贡献)
+    - [方法论贡献](#方法论贡献)
+    - [理论贡献](#理论贡献)
+  - [文件变更清单](#文件变更清单)
+    - [修改的文件](#修改的文件)
+  - [结论](#结论)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本次任务成功清除了 Rust 所有权系统形式化分析项目中所有剩余的 Coq 证明 admit。经过系统性的修复，项目中的所有 11 个 admit 已被转换为完整的证明（Qed）。
@@ -14,9 +44,11 @@
 ---
 
 ## 清除的 Admit 统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 按文件统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 清除前 | 清除后 | 修复方法 |
@@ -255,7 +287,13 @@ $ grep -r "Admitted\." --include="*.v" docs/rust-ownership-decidability/coq-form
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

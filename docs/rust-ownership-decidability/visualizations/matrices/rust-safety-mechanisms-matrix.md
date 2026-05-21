@@ -4,7 +4,24 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust安全机制对比矩阵](#rust安全机制对比矩阵)
+  - [📑 目录](#-目录)
+  - [矩阵1: 安全检查时机对比](#矩阵1-安全检查时机对比)
+  - [矩阵2: 编译时 vs 运行时检查对比](#矩阵2-编译时-vs-运行时检查对比)
+  - [矩阵3: 内存安全保证对比](#矩阵3-内存安全保证对比)
+  - [矩阵4: 并发安全原语对比](#矩阵4-并发安全原语对比)
+  - [矩阵5: 错误处理机制对比](#矩阵5-错误处理机制对比)
+  - [矩阵6: 指针类型对比](#矩阵6-指针类型对比)
+  - [快速决策表](#快速决策表)
+    - [何时使用编译时检查？](#何时使用编译时检查)
+    - [何时使用运行时检查？](#何时使用运行时检查)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 矩阵1: 安全检查时机对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 安全机制 | 检查时机 | 运行时开销 | 失败模式 | 保证强度 | 适用场景 |
@@ -22,6 +39,7 @@
 ---
 
 ## 矩阵2: 编译时 vs 运行时检查对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | 编译时检查 | 运行时检查 |
@@ -37,6 +55,7 @@
 ---
 
 ## 矩阵3: 内存安全保证对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 语言/系统 | 内存安全 | 数据竞争自由 | 空指针安全 | 缓冲区溢出 | 使用未初始化内存 |
@@ -122,7 +141,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [matrices 目录](./README.md)
+- [上级目录](../README.md)

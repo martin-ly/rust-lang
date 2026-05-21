@@ -6,10 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [Circuit Breaker 模式形式化定义](#circuit-breaker-模式形式化定义)
+  - [📑 目录](#-目录)
+  - [1. 概念定义 (Def)](#1-概念定义-def)
+    - [Def CB1: Circuit Breaker](#def-cb1-circuit-breaker)
+    - [Def CB2: 状态转换](#def-cb2-状态转换)
+    - [Def CB3: 故障计数器](#def-cb3-故障计数器)
+  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+    - [Axiom CB1: 状态互斥](#axiom-cb1-状态互斥)
+    - [Axiom CB2: 故障阈值正性](#axiom-cb2-故障阈值正性)
+    - [Axiom CB3: 超时单调性](#axiom-cb3-超时单调性)
+  - [3. 定理 (Theorem)](#3-定理-theorem)
+    - [Theorem CB1: 故障隔离](#theorem-cb1-故障隔离)
+    - [Theorem CB2: 自恢复](#theorem-cb2-自恢复)
+  - [4. Rust 实现示例](#4-rust-实现示例)
+  - [5. 配置建议](#5-配置建议)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 1. 概念定义 (Def)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CB1: Circuit Breaker
+>
 > **[来源: Rust Official Docs]**
 
 Circuit Breaker（熔断器）是一种**故障快速失败机制**，用于防止故障级联扩散。
@@ -24,6 +51,7 @@ CircuitBreaker := (S, T, f_threshold, t_timeout)
 ```
 
 ### Def CB2: 状态转换
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -244,3 +272,10 @@ impl CircuitBreaker {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [05_distributed 目录](./README.md)
+- [上级目录](../README.md)

@@ -7,6 +7,23 @@
 
 ---
 
+## 📑 目录
+>
+- [QUIC / HTTP/3 指南](#quic--http3-指南)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [QUIC 核心特性](#quic-核心特性)
+  - [Rust 生态](#rust-生态)
+  - [决策树](#决策树)
+  - [代码示例](#代码示例)
+    - [QUIC 客户端（quinn）](#quic-客户端quinn)
+    - [QUIC 服务器（quinn）](#quic-服务器quinn)
+    - [HTTP/3 客户端（h3 + quinn）](#http3-客户端h3--quinn)
+  - [与 HTTP/2 的对比](#与-http2-的对比)
+  - [限制](#限制)
+  - [参考](#参考)
+  - [相关概念](#相关概念)
+
 ## 概述
 
 **QUIC** (Quick UDP Internet Connections) 是 Google 提出、IETF 标准化的传输层协议，基于 UDP 构建，旨在替代 TCP + TLS + HTTP/2 的组合。
@@ -233,3 +250,9 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 > **最后更新**: 2026-05-21
 > **状态**: ✅ 初版完成
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

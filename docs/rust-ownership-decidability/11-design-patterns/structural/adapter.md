@@ -6,7 +6,20 @@
 
 ---
 
+## 📑 目录
+>
+- [Adapter Pattern in Rust](#adapter-pattern-in-rust)
+  - [📑 目录](#-目录)
+  - [概念](#概念)
+  - [实现方式](#实现方式)
+    - [Trait 适配](#trait-适配)
+    - [泛型适配器 (零成本)](#泛型适配器-零成本)
+  - [实战: 日志库适配](#实战-日志库适配)
+  - [形式化定义](#形式化定义)
+  - [相关概念](#相关概念)
+
 ## 概念
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 适配器模式将一个类的接口转换成客户希望的另外一个接口，使得原本由于接口不兼容而不能一起工作的那些类可以一起工作。
@@ -14,9 +27,11 @@
 ---
 
 ## 实现方式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Trait 适配
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -205,6 +220,7 @@ Adapter: Source → Target
 满足:
   ∀s: Source, ∃a: Adapter: a.request() = convert(s.specific_request())
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -216,7 +232,12 @@ Adapter: Source → Target
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [structural 目录](./README.md)

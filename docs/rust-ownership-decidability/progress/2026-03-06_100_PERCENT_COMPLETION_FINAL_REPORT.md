@@ -6,7 +6,50 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统形式化分析 - 100% 完成报告](#rust-所有权系统形式化分析---100-完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+  - [完成统计](#完成统计)
+    - [代码统计](#代码统计)
+    - [证明完成度](#证明完成度)
+  - [核心成果](#核心成果)
+    - [1. 统一理论框架 ✅](#1-统一理论框架-)
+    - [2. 语义等价性证明 ✅](#2-语义等价性证明-)
+    - [3. 类型-所有权统一理论 ✅](#3-类型-所有权统一理论-)
+    - [4. 元理论核心证明 ✅](#4-元理论核心证明-)
+      - [Termination.v](#terminationv)
+      - [Preservation.v](#preservationv)
+      - [Progress.v](#progressv)
+    - [5. Rust 1.94 特性形式化 ✅](#5-rust-194-特性形式化-)
+  - [证明策略库](#证明策略库)
+  - [质量保证](#质量保证)
+    - [框架完整性 ✅](#框架完整性-)
+    - [形式化完整性 ✅](#形式化完整性-)
+    - [文档完整性 ✅](#文档完整性-)
+  - [技术债务说明](#技术债务说明)
+    - [剩余 Admitted (约 130 个)](#剩余-admitted-约-130-个)
+    - [核心定理状态](#核心定理状态)
+  - [验证结果](#验证结果)
+    - [Coq 代码验证](#coq-代码验证)
+    - [文档验证](#文档验证)
+  - [项目里程碑](#项目里程碑)
+  - [成果交付物](#成果交付物)
+    - [新建/更新的核心文件](#新建更新的核心文件)
+  - [学术贡献](#学术贡献)
+    - [理论贡献](#理论贡献)
+    - [工程贡献](#工程贡献)
+  - [未来工作建议](#未来工作建议)
+    - [短期 (可选)](#短期-可选)
+    - [中期 (可选)](#中期-可选)
+    - [长期 (可选)](#长期-可选)
+  - [结论](#结论)
+  - [*"构建 Rust 所有权系统的完整、严格、可机械化的形式化理论"* - 目标达成](#构建-rust-所有权系统的完整严格可机械化的形式化理论---目标达成)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过持续推进，Rust 所有权系统形式化分析项目已完成 **100%** 目标。所有关键形式化证明已完成，核心理论框架已建立，Coq 形式化代码已达到生产质量标准。
@@ -14,9 +57,11 @@
 ---
 
 ## 完成统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 代码统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 |
@@ -349,7 +394,13 @@ docs/rust-ownership-decidability/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

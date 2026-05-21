@@ -9,10 +9,27 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权与可判定性 - Rust 1.94 索引](#rust-所有权与可判定性---rust-194-索引)
+  - [📑 目录](#-目录)
+  - [📋 文档分类](#-文档分类)
+    - [核心完成报告 (20+ 文件)](#核心完成报告-20-文件)
+    - [理论与证明 (15+ 文件)](#理论与证明-15-文件)
+    - [实践指南 (10+ 文件)](#实践指南-10-文件)
+    - [分析与审计 (20+ 文件)](#分析与审计-20-文件)
+  - [🆕 Rust 1.94 相关更新](#-rust-194-相关更新)
+    - [所有权系统新特性](#所有权系统新特性)
+  - [🎯 推进计划](#-推进计划)
+  - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 📋 文档分类
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心完成报告 (20+ 文件)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - 100_PERCENT_COMPLETION_REPORT.md
@@ -21,6 +38,7 @@
 - RUST_194_*_FINAL.md (10+ 变体)
 
 ### 理论与证明 (15+ 文件)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - UNIFIED_THEORETICAL_FRAMEWORK.md
@@ -77,7 +95,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

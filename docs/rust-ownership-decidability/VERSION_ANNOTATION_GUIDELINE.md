@@ -4,10 +4,34 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权形式化文档 - 版本标注规范](#rust-所有权形式化文档---版本标注规范)
+  - [📑 目录](#-目录)
+  - [📋 版本标注分类](#-版本标注分类)
+    - [1. 已稳定特性 \[Stable X.XX\]](#1-已稳定特性-stable-xxx)
+    - [2. 开发中特性 \[Unstable/Nightly\]](#2-开发中特性-unstablenightly)
+    - [3. 理论模型 \[Theoretical\]](#3-理论模型-theoretical)
+  - [🏷️ 文件头标注模板](#️-文件头标注模板)
+    - [模板 A: 真实特性](#模板-a-真实特性)
+    - [模板 B: 理论模型](#模板-b-理论模型)
+  - [📊 版本对照表](#-版本对照表)
+  - [✅ 审核检查清单](#-审核检查清单)
+    - [新建文档必须检查](#新建文档必须检查)
+    - [现有文档审核](#现有文档审核)
+  - [🔧 自动化检查](#-自动化检查)
+    - [检查脚本使用](#检查脚本使用)
+  - [📅 维护责任](#-维护责任)
+  - [📝 变更记录](#-变更记录)
+  - [**维护者**: Rust-Ownership-Decidability Team](#维护者-rust-ownership-decidability-team)
+  - [相关概念](#相关概念)
+
 ## 📋 版本标注分类
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 已稳定特性 [Stable X.XX]
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义**: 已在 Rust 稳定版中发布的特性
@@ -29,6 +53,7 @@
 ---
 
 ### 2. 开发中特性 [Unstable/Nightly]
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定义**: 正在开发中，仅在 Nightly 版本可用或尚未稳定的特性
@@ -180,7 +205,13 @@ python scripts/generate_version_report.py
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,20 +1,9 @@
 ﻿# Template Method 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 行为型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 22 行（Template Method）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Template Method 形式化分析](#template-method-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
@@ -44,13 +33,66 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 行为型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 22 行（Template Method）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Template Method 形式化分析](#template-method-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Template Method 结构）](#def-11template-method-结构)
+    - [Axiom TM1（骨架不变公理）](#axiom-tm1骨架不变公理)
+    - [Axiom TM2（钩子可选公理）](#axiom-tm2钩子可选公理)
+    - [定理 TM-T1（trait 默认方法定理）](#定理-tm-t1trait-默认方法定理)
+    - [定理 TM-T2（骨架不变性定理）](#定理-tm-t2骨架不变性定理)
+    - [推论 TM-C1（近似表达）](#推论-tm-c1近似表达)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+  - [典型场景](#典型场景)
+  - [完整场景示例：数据导入流水线](#完整场景示例数据导入流水线)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：覆盖 template 破坏骨架](#反例覆盖-template-破坏骨架)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Template Method 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $T$ 为模板类型。Template Method 是一个三元组 $\mathcal{TM} = (T, \mathit{template}, \{h_i\})$，满足：
@@ -66,6 +108,7 @@ $$\mathcal{TM} = \langle T, \mathit{template}: T \rightarrow R, \{h_i: T \righta
 ---
 
 ### Axiom TM1（骨架不变公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall t: T,\, \mathit{template}(t)\text{ 的调用顺序固定；仅 }h_i\text{ 可定制}$$
@@ -73,6 +116,7 @@ $$\forall t: T,\, \mathit{template}(t)\text{ 的调用顺序固定；仅 }h_i\te
 骨架不变；钩子可定制。
 
 ### Axiom TM2（钩子可选公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
@@ -82,6 +126,7 @@ $$h_i\text{ 可有无默认实现；}\mathit{impl}\text{ 可选择性覆盖}$$
 ---
 
 ### 定理 TM-T1（trait 默认方法定理）
+>
 > **[来源: Rust Official Docs]**
 
 trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 [trait_system_formalization](../../../type_theory/trait_system_formalization.md)。
@@ -112,6 +157,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 定理 TM-T2（骨架不变性定理）
+>
 > **[来源: Rust Official Docs]**
 
 `template` 方法体固定；各 `impl` 仅提供 `step_i`，不修改 `template` 调用顺序。
@@ -127,6 +173,7 @@ trait 默认方法：`fn template(&self) { self.hook1(); self.hook2(); }`；由 
 ---
 
 ### 推论 TM-C1（近似表达）
+>
 > **[来源: Rust Official Docs]**
 
 Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/expressive_inexpressive_matrix.md) 表一致；$\mathit{ExprB}(\mathrm{TemplateMethod}) = \mathrm{Approx}$（无 OOP 继承）。
@@ -142,6 +189,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/ex
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -153,6 +201,7 @@ Template Method 与 [expressive_inexpressive_matrix](../../05_boundary_system/ex
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -186,6 +235,7 @@ assert_eq!(a.template(), "A1A2");
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -423,3 +473,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [03_behavioral 目录](./README.md)
+- [上级目录](../README.md)

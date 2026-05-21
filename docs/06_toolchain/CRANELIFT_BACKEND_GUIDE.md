@@ -7,7 +7,34 @@
 
 ---
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🚀 什么是 Cranelift](#什么是-cranelift)
+- [⏱️ 为什么 Cranelift 重要](#为什么-cranelift-重要)
+- [⚙️ 安装与配置](#安装与配置)
+  - [1. 安装组件](#1-安装组件)
+  - [2. 项目级配置](#2-项目级配置)
+  - [3. 单次编译](#3-单次编译)
+  - [4. 验证生效](#4-验证生效)
+- [⚖️ LLVM vs Cranelift 对比](#llvm-vs-cranelift-对比)
+  - [设计哲学](#设计哲学)
+  - [支持平台](#支持平台)
+  - [优化级别](#优化级别)
+- [📊 当前状态](#当前状态)
+  - [Rust 2026 Project Goal 关联](#rust-2026-project-goal-关联)
+  - [已知限制 (2026-05)](#已知限制-2026-05)
+- [✅ 何时使用 vs 🚫 何时不使用](#何时使用-vs-何时不使用)
+  - [✅ 推荐使用 Cranelift](#推荐使用-cranelift)
+  - [🚫 不推荐使用 Cranelift](#不推荐使用-cranelift)
+- [🔧 实战配置模板](#实战配置模板)
+  - [推荐 .cargo/config.toml](#推荐-cargoconfigtoml)
+  - [快速切换脚本](#快速切换脚本)
+  - [Makefile 集成](#makefile-集成)
+- [📖 参考文献](#参考文献)
+
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Cranelift 后端实用指南](#cranelift-后端实用指南)
@@ -38,6 +65,7 @@
 ---
 
 ## 🚀 什么是 Cranelift
+>
 > **[来源: Rust Official Docs]**
 
 **Cranelift** 是 Rust 编译器的替代代码生成后端（`codegen backend`），最初由 Mozilla 的 Wasmtime 团队开发。与 Rust 默认使用的 LLVM 后端不同，Cranelift 专注于**快速编译**而非极致的运行时性能优化。
@@ -77,6 +105,7 @@ Cranelift 作为 `rustc` 的后端，项目代号通常为 `cg_clif` (`rustc_cod
 ---
 
 ## ⏱️ 为什么 Cranelift 重要
+>
 > **[来源: Rust Official Docs]**
 
 在 Rust 开发中，**编译时间**是影响开发者体验的关键因素。Cranelift 的核心价值：
@@ -99,9 +128,11 @@ Cranelift debug: █████████████████████
 ---
 
 ## ⚙️ 安装与配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 安装组件
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -113,6 +144,7 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 2. 项目级配置
+>
 > **[来源: Rust Official Docs]**
 
 在 `.cargo/config.toml` 中启用：
@@ -133,6 +165,7 @@ codegen-backend = "cranelift"
 ```
 
 ### 3. 单次编译
+>
 > **[来源: Rust Official Docs]**
 
 无需修改项目配置，通过环境变量单次使用：
@@ -147,6 +180,7 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build
 ```
 
 ### 4. 验证生效
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -159,9 +193,11 @@ cargo +nightly build -v
 ---
 
 ## ⚖️ LLVM vs Cranelift 对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 设计哲学
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | LLVM | Cranelift |
@@ -174,6 +210,7 @@ cargo +nightly build -v
 | **调试信息** | 完善精确 | 基础支持 |
 
 ### 支持平台
+>
 > **[来源: Rust Official Docs]**
 
 | 平台 | LLVM | Cranelift |
@@ -358,6 +395,7 @@ test-dev:
 > 📌 **复查记录**
 >
 > - 2026-05-08: 初始创建，基于 nightly 2026-05 状态
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -369,7 +407,13 @@ test-dev:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [06_toolchain 目录](./README.md)
+- [上级目录](../README.md)

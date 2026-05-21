@@ -7,7 +7,31 @@
 
 ---
 
+## 📑 目录
+>
+- [特性矩阵概览](#特性矩阵概览)
+- [形式化文档更新计划](#形式化文档更新计划)
+  - [高优先级更新](#高优先级更新)
+  - [中优先级更新](#中优先级更新)
+- [新增形式化定义](#新增形式化定义)
+  - [Def 1.94-1 (RangeToInclusive)](#def-194-1-rangetoinclusive)
+  - [Def 1.94-2 (ControlFlow::ok)](#def-194-2-controlflowok)
+  - [Def 1.94-3 (RefCell::try_map)](#def-194-3-refcelltry_map)
+  - [Def 1.95-1 (生成器状态机)](#def-195-1-生成器状态机)
+- [证明更新清单](#证明更新清单)
+  - [定理更新](#定理更新)
+- [网络资源对齐](#网络资源对齐)
+  - [官方资源](#官方资源)
+  - [学术资源](#学术资源)
+- [持续追踪指标](#持续追踪指标)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 ## 特性矩阵概览
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | 1.93 | 1.94 | 1.95 | 形式化文档 | 完成度 |
@@ -33,9 +57,11 @@
 ---
 
 ## 形式化文档更新计划
+>
 > **[来源: Rust Official Docs]**
 
 ### 高优先级更新
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
@@ -46,6 +72,7 @@
 | [pin_self_referential](./formal_methods/pin_self_referential.md) | 更新重新借用规则 | 4h | ⏳ |
 
 ### 中优先级更新
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 更新内容 | 预计工时 | 状态 |
@@ -57,9 +84,11 @@
 ---
 
 ## 新增形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.94-1 (RangeToInclusive)
+>
 > **[来源: Rust Official Docs]**
 
 **定义**: `RangeToInclusive<T>` 表示从起始到 `end`（含）的范围
@@ -78,6 +107,7 @@ RangeToInclusive<T> = { x | x ≤ end }
 ---
 
 ### Def 1.94-2 (ControlFlow::ok)
+>
 > **[来源: Rust Official Docs]**
 
 **定义**: `ControlFlow<B, C>::ok() -> Option<C>` 将 Continue 映射为 Some，Break 映射为 None
@@ -94,6 +124,7 @@ ok(Break(_)) = None
 ---
 
 ### Def 1.94-3 (RefCell::try_map)
+>
 > **[来源: Rust Official Docs]**
 
 **定义**: 条件映射 RefCell 内部值，失败时保留原引用
@@ -109,6 +140,7 @@ try_map: Ref<T> -> (T -> Option<U>) -> Result<Ref<U>, Ref<T>>
 ---
 
 ### Def 1.95-1 (生成器状态机)
+>
 > **[来源: Rust Official Docs]**
 
 **定义**: 生成器是一个状态机，状态为 `Yielded(Y)` 或 `Complete(R)`
@@ -124,9 +156,11 @@ Generator<Yield=Y, Return=R>:
 ---
 
 ## 证明更新清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 定理更新
+>
 > **[来源: Rust Official Docs]**
 
 | 定理 | 更新内容 | 状态 |
@@ -236,3 +270,10 @@ Generator<Yield=Y, Return=R>:
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

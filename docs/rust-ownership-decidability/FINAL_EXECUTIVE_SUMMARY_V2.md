@@ -1,6 +1,48 @@
 # Rust 所有权系统可判定性 - 最终执行摘要 (V2)
 
+## 📑 目录
+>
+- [Rust 所有权系统可判定性 - 最终执行摘要 (V2)](#rust-所有权系统可判定性---最终执行摘要-v2)
+  - [📑 目录](#-目录)
+  - [Final Executive Summary - Comprehensive Edition](#final-executive-summary---comprehensive-edition)
+  - [🎯 核心成就](#-核心成就)
+    - [1. 理论完整性](#1-理论完整性)
+    - [2. 文档覆盖度](#2-文档覆盖度)
+    - [3. 知识层次结构](#3-知识层次结构)
+  - [📚 核心知识资产](#-核心知识资产)
+    - [五大核心理论文档](#五大核心理论文档)
+    - [三大入门路径](#三大入门路径)
+  - [🔬 形式化证明资产](#-形式化证明资产)
+    - [核心定理 (全部完成)](#核心定理-全部完成)
+    - [Rust 1.94 特性形式化](#rust-194-特性形式化)
+  - [📊 案例研究矩阵](#-案例研究矩阵)
+    - [生产级 Crate 分析 (137 个文件)](#生产级-crate-分析-137-个文件)
+  - [🛠️ 验证工具链](#️-验证工具链)
+  - [🎓 学习资源统计](#-学习资源统计)
+    - [文档深度分布](#文档深度分布)
+    - [内容类型分布](#内容类型分布)
+  - [🔗 关键索引导航](#-关键索引导航)
+    - [主入口点](#主入口点)
+    - [理论导航](#理论导航)
+    - [实践导航](#实践导航)
+  - [✅ 质量保证清单](#-质量保证清单)
+    - [内容质量](#内容质量)
+    - [形式化质量](#形式化质量)
+    - [引用质量](#引用质量)
+  - [🚀 快速开始指南](#-快速开始指南)
+    - [5 分钟了解项目](#5-分钟了解项目)
+    - [30 分钟建立框架](#30-分钟建立框架)
+    - [深入形式化证明](#深入形式化证明)
+  - [📈 项目演进](#-项目演进)
+    - [版本历史](#版本历史)
+    - [当前版本特性 (V2.0)](#当前版本特性-v20)
+  - [🎉 总结](#-总结)
+    - [项目价值](#项目价值)
+    - [使用建议](#使用建议)
+  - [相关概念](#相关概念)
+
 ## Final Executive Summary - Comprehensive Edition
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > **项目状态**: ✅ 100% 完成 (综合梳理版)
@@ -13,9 +55,11 @@
 ---
 
 ## 🎯 核心成就
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 理论完整性
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -369,6 +413,7 @@ cat docs/rust-ownership-decidability/coq-formalization/theories/Advanced/Metathe
 - 最后更新: 2026-03-09
 - 维护者: Rust-Ownership-Decidability Team
 - 状态: ✅ 100% 完成
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -380,7 +425,13 @@ cat docs/rust-ownership-decidability/coq-formalization/theories/Advanced/Metathe
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

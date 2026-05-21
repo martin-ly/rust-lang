@@ -6,7 +6,44 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 主索引 (Master Index)](#rust-所有权系统---主索引-master-index)
+  - [📑 目录](#-目录)
+  - [📋 文档总览](#-文档总览)
+  - [📚 完整文档清单](#-完整文档清单)
+    - [🎯 核心文档 (必读)](#-核心文档-必读)
+    - [🔬 形式化理论](#-形式化理论)
+    - [🗂️ 元模型](#️-元模型)
+    - [📊 进度报告](#-进度报告)
+  - [🎓 学习路径](#-学习路径)
+    - [路径 1: 快速理解 (2小时)](#路径-1-快速理解-2小时)
+    - [路径 2: 系统学习 (4小时)](#路径-2-系统学习-4小时)
+    - [路径 3: 深入研究 (8小时)](#路径-3-深入研究-8小时)
+  - [🏗️ 知识结构](#️-知识结构)
+    - [核心概念地图](#核心概念地图)
+    - [形式化对应](#形式化对应)
+  - [📊 统计信息](#-统计信息)
+    - [代码统计](#代码统计)
+    - [内容统计](#内容统计)
+    - [完成度](#完成度)
+  - [🔍 快速查找](#-快速查找)
+    - [按主题查找](#按主题查找)
+    - [按问题查找](#按问题查找)
+  - [🎯 核心要点](#-核心要点)
+    - [1. 所有权三原则](#1-所有权三原则)
+    - [2. 借用三规则](#2-借用三规则)
+    - [3. 5个核心定理](#3-5个核心定理)
+  - [📞 使用建议](#-使用建议)
+    - [对于初学者](#对于初学者)
+    - [对于进阶学习者](#对于进阶学习者)
+    - [对于研究者](#对于研究者)
+  - [🎉 项目完成](#-项目完成)
+  - [**🎉 知识库完整，欢迎使用！🎉**:](#-知识库完整欢迎使用)
+  - [相关概念](#相关概念)
+
 ## 📋 文档总览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档库包含 **4个层次** 的内容，从理论到实践，从抽象到具体：
@@ -28,9 +65,11 @@
 ---
 
 ## 📚 完整文档清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 🎯 核心文档 (必读)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文档 | 描述 | 阅读时间 | 优先级 |
@@ -276,7 +315,7 @@ Rust 示例:      ~2,000 行
 
 *"系统化知识 + 严格证明 + 丰富示例 = 深入理解"*:
 
-**🎉 知识库完整，欢迎使用！🎉**:
+**🎉 知识库完整，欢迎使用！🎉**
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -287,3 +326,10 @@ Rust 示例:      ~2,000 行
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

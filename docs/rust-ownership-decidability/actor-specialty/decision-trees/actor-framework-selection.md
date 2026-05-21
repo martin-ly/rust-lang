@@ -4,7 +4,31 @@
 
 ---
 
+## 📑 目录
+>
+- [Actor框架选择决策树](#actor框架选择决策树)
+  - [📑 目录](#-目录)
+  - [1. 顶层决策树](#1-顶层决策树)
+  - [2. 详细决策流程](#2-详细决策流程)
+    - [2.1 分布式需求决策](#21-分布式需求决策)
+    - [2.2 容错需求决策](#22-容错需求决策)
+    - [2.3 Web集成决策](#23-web集成决策)
+    - [2.4 性能优先决策](#24-性能优先决策)
+  - [3. 场景匹配决策](#3-场景匹配决策)
+    - [3.1 应用场景树](#31-应用场景树)
+  - [4. 技术约束决策](#4-技术约束决策)
+    - [4.1 团队经验](#41-团队经验)
+    - [4.2 运维要求](#42-运维要求)
+  - [5. 决策检查清单](#5-决策检查清单)
+    - [5.1 需求澄清问题](#51-需求澄清问题)
+    - [5.2 技术选型速查表](#52-技术选型速查表)
+  - [6. 迁移决策](#6-迁移决策)
+    - [6.1 从其他语言迁移](#61-从其他语言迁移)
+  - [**覆盖框架**: Actix, Bastion, coerce, Xtra, Heph, Stakker](#覆盖框架-actix-bastion-coerce-xtra-heph-stakker)
+  - [相关概念](#相关概念)
+
 ## 1. 顶层决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -47,9 +71,11 @@
 ---
 
 ## 2. 详细决策流程
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 分布式需求决策
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -299,7 +325,12 @@ Web集成
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

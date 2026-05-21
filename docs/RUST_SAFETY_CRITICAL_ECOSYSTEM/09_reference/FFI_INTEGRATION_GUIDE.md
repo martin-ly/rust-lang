@@ -1,6 +1,33 @@
 # FFI集成指南 - 安全关键系统
 
+## 📑 目录
+>
+- [FFI集成指南 - 安全关键系统](#ffi集成指南---安全关键系统)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [FFI安全风险](#ffi安全风险)
+    - [风险矩阵](#风险矩阵)
+  - [基础FFI模式](#基础ffi模式)
+    - [1. 安全包装器模式](#1-安全包装器模式)
+    - [2. 类型转换安全](#2-类型转换安全)
+    - [3. 回调安全](#3-回调安全)
+  - [安全关键FFI模式](#安全关键ffi模式)
+    - [1. 内存管理](#1-内存管理)
+    - [2. 并发FFI](#2-并发ffi)
+  - [自动生成工具](#自动生成工具)
+    - [bindgen配置](#bindgen配置)
+    - [cbindgen配置](#cbindgen配置)
+  - [验证与测试](#验证与测试)
+    - [FFI测试模式](#ffi测试模式)
+  - [最佳实践检查表](#最佳实践检查表)
+    - [设计阶段](#设计阶段)
+    - [实现阶段](#实现阶段)
+    - [测试阶段](#测试阶段)
+  - [*FFI是安全关键系统中的高风险区域，必须经过严格审查。*](#ffi是安全关键系统中的高风险区域必须经过严格审查)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南提供在安全关键系统中安全地使用Rust FFI(外部函数接口)与C/C++代码集成的最佳实践，确保跨语言边界的安全性。
@@ -8,9 +35,11 @@
 ---
 
 ## FFI安全风险
+>
 > **[来源: Rust Official Docs]**
 
 ### 风险矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 风险 | 严重性 | 可能性 | 缓解复杂度 | Rust防护 |
@@ -24,9 +53,11 @@
 ---
 
 ## 基础FFI模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 安全包装器模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -127,6 +158,7 @@ pub enum FfiError {
 ```
 
 ### 2. 类型转换安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -195,6 +227,7 @@ pub enum FfiError {
 ```
 
 ### 3. 回调安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -277,9 +310,11 @@ pub enum EventType {
 ---
 
 ## 安全关键FFI模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 内存管理
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -350,6 +385,7 @@ impl<T> Drop for CVec<T> {
 ```
 
 ### 2. 并发FFI
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -420,6 +456,7 @@ impl Drop for NativeContextWrapper {
 ---
 
 ## 自动生成工具
+>
 > **[来源: Rust Official Docs]**
 
 ### bindgen配置
@@ -575,7 +612,12 @@ mod tests {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

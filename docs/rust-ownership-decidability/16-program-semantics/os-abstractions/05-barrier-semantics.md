@@ -1,14 +1,50 @@
 # 屏障的形式化语义
 
+## 📑 目录
+>
+- [屏障的形式化语义](#屏障的形式化语义)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 屏障的基本形式化模型](#2-屏障的基本形式化模型)
+    - [2.1 核心概念定义](#21-核心概念定义)
+    - [2.2 屏障操作的形式化定义](#22-屏障操作的形式化定义)
+    - [2.3 状态转换图](#23-状态转换图)
+  - [3. 同步屏障的形式化语义](#3-同步屏障的形式化语义)
+    - [3.1 单次屏障的语义](#31-单次屏障的语义)
+    - [3.2 Rust 代码示例](#32-rust-代码示例)
+    - [3.3 安全论证](#33-安全论证)
+  - [4. CyclicBarrier 的形式化语义](#4-cyclicbarrier-的形式化语义)
+    - [4.1 循环屏障的定义](#41-循环屏障的定义)
+    - [4.2 Generation 机制的形式化](#42-generation-机制的形式化)
+    - [4.3 Rust 代码实现](#43-rust-代码实现)
+  - [5. 栅栏模式的应用](#5-栅栏模式的应用)
+    - [5.1 并行分阶段计算](#51-并行分阶段计算)
+    - [5.2 并行排序示例](#52-并行排序示例)
+  - [6. 屏障与 Happens-Before 关系](#6-屏障与-happens-before-关系)
+    - [6.1 同步语义的形式化](#61-同步语义的形式化)
+    - [6.2 内存序分析](#62-内存序分析)
+  - [7. 屏障的高级模式](#7-屏障的高级模式)
+    - [7.1 可中断屏障](#71-可中断屏障)
+    - [7.2 带动作的屏障](#72-带动作的屏障)
+  - [8. 综合安全论证](#8-综合安全论证)
+    - [8.1 屏障的正确性定理](#81-屏障的正确性定理)
+    - [8.2 不变式总结](#82-不变式总结)
+  - [9. 总结](#9-总结)
+  - [这些形式化定义确保了 Rust 程序在使用屏障进行线程同步时的正确性和安全性。](#这些形式化定义确保了-rust-程序在使用屏障进行线程同步时的正确性和安全性)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 屏障（Barrier）是一种同步原语，用于协调多个线程在程序中的特定点汇合。所有到达屏障的线程都必须等待，直到所有参与线程都到达后，才能继续执行。这种"汇合-然后-继续"的模式在并行算法中非常常见。本文档从形式化角度定义屏障的语义。
 
 ## 2. 屏障的基本形式化模型
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 核心概念定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -641,7 +677,7 @@ I5 (循环屏障一致性):
 5. **Happens-Before**：屏障建立的同步语义
 6. **高级模式**：可中断屏障和带动作的屏障
 
-这些形式化定义确保了 Rust 程序在使用屏障进行线程同步时的正确性和安全性。
+这些形式化定义确保了 Rust 程序在使用屏障进行线程同步时的正确性和安全性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -653,7 +689,12 @@ I5 (循环屏障一致性):
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

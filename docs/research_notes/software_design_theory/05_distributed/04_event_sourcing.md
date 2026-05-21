@@ -6,6 +6,28 @@
 
 ---
 
+
+## 📑 目录
+>
+- [1. 概念定义 (Def)](#1-概念定义-def)
+  - [Def ES1: Event Sourcing](#def-es1-event-sourcing)
+  - [Def ES2: 事件不变性](#def-es2-事件不变性)
+  - [Def ES3: 状态重建](#def-es3-状态重建)
+- [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+  - [Axiom ES1: 事件顺序性](#axiom-es1-事件顺序性)
+  - [Axiom ES2: 应用函数确定性](#axiom-es2-应用函数确定性)
+  - [Axiom ES3: 版本控制](#axiom-es3-版本控制)
+- [3. 定理 (Theorem)](#3-定理-theorem)
+  - [Theorem ES1: 状态可重现性](#theorem-es1-状态可重现性)
+  - [Theorem ES2: 审计完整性](#theorem-es2-审计完整性)
+- [4. Rust 实现示例](#4-rust-实现示例)
+- [5. 与 CQRS 的关系](#5-与-cqrs-的关系)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 ## 1. 概念定义 (Def)
 > **[来源: Rust Official Docs]**
 
@@ -226,3 +248,11 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 相关概念
+
+- [05_distributed 目录](./README.md)
+- [上级目录](../README.md)

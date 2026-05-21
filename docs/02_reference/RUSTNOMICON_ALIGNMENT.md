@@ -2,7 +2,21 @@
 
 本文件对照 [The Rustonomicon](https://doc.rust-lang.org/nomicon/) 的章节，列出本项目已覆盖和未覆盖的内容，并标注对应的 crate 位置。
 
+## 📑 目录
+>
+- [The Rustonomicon 内容对齐](#the-rustonomicon-内容对齐)
+  - [📑 目录](#-目录)
+  - [已覆盖内容](#已覆盖内容)
+  - [新增补齐内容](#新增补齐内容)
+    - [c01: 布局保证 (align, size)](#c01-布局保证-align-size)
+    - [c12: FFI 高级用法](#c12-ffi-高级用法)
+    - [c13: 裸指针、volatile、内联汇编](#c13-裸指针volatile内联汇编)
+  - [待补充内容](#待补充内容)
+  - [参考资源](#参考资源)
+  - [相关概念](#相关概念)
+
 ## 已覆盖内容
+>
 > **[来源: Rust Official Docs]**
 
 | Rustonomicon 章节 | 项目位置 | 状态 |
@@ -25,9 +39,11 @@
 | 10.1 Implementing Vec | `c08_algorithms/src/data_structure/` | ✅ |
 
 ## 新增补齐内容
+>
 > **[来源: Rust Official Docs]**
 
 ### c01: 布局保证 (align, size)
+>
 > **[来源: Rust Official Docs]**
 
 - **文件**: `crates/c01_ownership_borrow_scope/src/layout_guarantees.rs`
@@ -71,7 +87,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [02_reference 目录](./README.md)
+- [上级目录](../README.md)

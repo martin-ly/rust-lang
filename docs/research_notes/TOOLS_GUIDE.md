@@ -7,10 +7,10 @@
 
 ---
 
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [研究工具使用指南](#研究工具使用指南)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
   - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
@@ -43,10 +43,54 @@
       - [核心特性应用](#核心特性应用)
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [研究工具使用指南](#研究工具使用指南)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 工具分类 {#-工具分类}](#-工具分类--工具分类)
+  - [🔬 形式化验证工具 {#-形式化验证工具}](#-形式化验证工具--形式化验证工具)
+    - [Prusti](#prusti)
+    - [Kani](#kani)
+    - [可选进阶：Coq/Lean](#可选进阶coqlean)
+  - [⚡ 性能分析工具 {#-性能分析工具}](#-性能分析工具--性能分析工具)
+    - [Criterion.rs](#criterionrs)
+    - [perf](#perf)
+    - [flamegraph](#flamegraph)
+  - [🔍 内存分析工具 {#-内存分析工具}](#-内存分析工具--内存分析工具)
+    - [Miri](#miri)
+    - [Valgrind](#valgrind)
+    - [heaptrack](#heaptrack)
+  - [🧪 测试工具 {#-测试工具}](#-测试工具--测试工具)
+    - [cargo test](#cargo-test)
+    - [proptest](#proptest)
+    - [loom](#loom)
+  - [📚 代码分析工具 {#-代码分析工具}](#-代码分析工具--代码分析工具)
+    - [Clippy](#clippy)
+    - [rust-analyzer](#rust-analyzer)
+    - [cargo-expand](#cargo-expand)
+  - [💡 使用建议 {#-使用建议}](#-使用建议--使用建议)
+    - [工具选择](#工具选择)
+    - [工具组合](#工具组合)
+    - [最佳实践](#最佳实践)
+  - [🔗 相关资源 {#-相关资源}](#-相关资源--相关资源)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 工具分类 {#-工具分类}
+>
 > **[来源: Rust Official Docs]**
 
 研究工具按用途分为以下几类：
@@ -60,11 +104,13 @@
 ---
 
 ## 🔬 形式化验证工具 {#-形式化验证工具}
+>
 > **[来源: Rust Official Docs]**
 
 **主推路径**：Prusti、Kani（Rust 原生验证，无需学习专业形式化语言）。Coq/Lean 为可选进阶研究，见 [archive/deprecated/](../archive/deprecated/README.md)。
 
 ### Prusti
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: Rust 程序的形式化验证工具
@@ -118,6 +164,7 @@ cargo prusti --file src/lib.rs
 ---
 
 ### Kani
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: Rust 程序的模型检查器
@@ -168,6 +215,7 @@ cargo kani --function test_abs
 ---
 
 ### 可选进阶：Coq/Lean
+>
 > **[来源: Rust Official Docs]**
 
 **说明**：Coq、Lean 为专业形式化证明语言，需额外学习成本。
@@ -178,9 +226,11 @@ cargo kani --function test_abs
 ---
 
 ## ⚡ 性能分析工具 {#-性能分析工具}
+>
 > **[来源: Rust Official Docs]**
 
 ### Criterion.rs
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: 统计驱动的 Rust 基准测试框架
@@ -234,6 +284,7 @@ cargo bench
 ---
 
 ### perf
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: Linux 性能分析工具
@@ -272,6 +323,7 @@ perf stat ./target/release/my_program
 ---
 
 ### flamegraph
+>
 > **[来源: Rust Official Docs]**
 
 **用途**: 性能火焰图生成工具
@@ -305,6 +357,7 @@ cargo flamegraph -o flamegraph.svg --bin my_program
 ---
 
 ## 🔍 内存分析工具 {#-内存分析工具}
+>
 > **[来源: Rust Official Docs]**
 
 ### Miri
@@ -688,3 +741,10 @@ cargo expand > expanded.rs
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

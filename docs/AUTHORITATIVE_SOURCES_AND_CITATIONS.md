@@ -9,6 +9,37 @@
 
 ---
 
+
+## 📑 目录
+>
+- [Rust 1.94.0 权威来源](#rust-1940-权威来源)
+  - [官方发布](#官方发布)
+  - [核心特性权威说明](#核心特性权威说明)
+    - [1. array_windows - 切片迭代方法](#1-array_windows---切片迭代方法)
+    - [2. LazyCell/LazyLock API稳定化](#2-lazycelllazylock-api稳定化)
+    - [3. AVX-512 FP16 Intrinsics](#3-avx-512-fp16-intrinsics)
+    - [4. Cargo TOML 1.1支持](#4-cargo-toml-11支持)
+- [Tree Borrows 权威来源](#tree-borrows-权威来源)
+  - [学术论文](#学术论文)
+  - [学术认可](#学术认可)
+  - [Tree Borrows核心优势](#tree-borrows核心优势)
+  - [与Stacked Borrows对比](#与stacked-borrows对比)
+- [Rust 2024 Edition 权威来源](#rust-2024-edition-权威来源)
+  - [官方文档](#官方文档)
+  - [gen关键字权威说明](#gen关键字权威说明)
+  - [Edition 2024主要变更 (官方)](#edition-2024主要变更-官方)
+- [Miri 权威来源](#miri-权威来源)
+  - [功能扩展 (2023-2026)](#功能扩展-2023-2026)
+  - [并发与性能改进](#并发与性能改进)
+  - [核心论文引用](#核心论文引用)
+- [大型项目迁移案例](#大型项目迁移案例)
+  - [Rust 2024 Edition迁移实践](#rust-2024-edition迁移实践)
+- [引用格式规范](#引用格式规范)
+  - [学术论文引用](#学术论文引用)
+  - [官方文档引用](#官方文档引用)
+  - [博客文章引用](#博客文章引用)
+- [验证清单](#验证清单)
+
 ## Rust 1.94.0 权威来源
 > **[来源: Rust Official Docs]**
 
@@ -278,3 +309,10 @@ Cargo：
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 相关概念
+
+- [docs 目录](./README.md)

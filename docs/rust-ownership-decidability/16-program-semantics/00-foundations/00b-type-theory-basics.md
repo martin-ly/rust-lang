@@ -6,7 +6,43 @@
 
 ---
 
+## 📑 目录
+>
+- [类型理论基础 (Type Theory Foundations)](#类型理论基础-type-theory-foundations)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 类型作为命题 (Types as Propositions)](#2-类型作为命题-types-as-propositions)
+    - [2.1 Curry-Howard 同构](#21-curry-howard-同构)
+    - [2.2 Rust 中的对应](#22-rust-中的对应)
+  - [3. 多态性 (Polymorphism)](#3-多态性-polymorphism)
+    - [3.1 参数多态 (System F)](#31-参数多态-system-f)
+    - [3.2 Hindley-Milner 类型推断](#32-hindley-milner-类型推断)
+  - [4. 子类型与变型 (Subtyping \& Variance)](#4-子类型与变型-subtyping--variance)
+    - [4.1 子类型关系](#41-子类型关系)
+    - [4.2 变型 (Variance)](#42-变型-variance)
+    - [4.3 生命周期子类型](#43-生命周期子类型)
+  - [5. 递归类型 (Recursive Types)](#5-递归类型-recursive-types)
+    - [5.1 μ-类型](#51-μ-类型)
+    - [5.2 Rust 中的递归类型](#52-rust-中的递归类型)
+  - [6. 线性类型与所有权](#6-线性类型与所有权)
+    - [6.1 线性逻辑](#61-线性逻辑)
+    - [6.2 仿射类型](#62-仿射类型)
+    - [6.3 分离合取 (Separating Conjunction)](#63-分离合取-separating-conjunction)
+  - [7. 高阶类型 (Higher-Kinded Types)](#7-高阶类型-higher-kinded-types)
+    - [7.1 Kind 系统](#71-kind-系统)
+    - [7.2 Rust 的限制与 workaround](#72-rust-的限制与-workaround)
+  - [8. 类型安全定理](#8-类型安全定理)
+    - [8.1 进展性 (Progress)](#81-进展性-progress)
+    - [8.2 保持性 (Preservation)](#82-保持性-preservation)
+    - [8.3 Rust 的类型安全](#83-rust-的类型安全)
+  - [9. 总结](#9-总结)
+    - [9.1 核心概念速查](#91-核心概念速查)
+    - [9.2 延伸阅读](#92-延伸阅读)
+  - [**最后更新**: 2026-03-08](#最后更新-2026-03-08)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 类型理论是编程语言语义的核心支柱。
@@ -15,9 +51,11 @@ Rust 的类型系统建立在丰富的类型理论基础之上，理解这些理
 ---
 
 ## 2. 类型作为命题 (Types as Propositions)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Curry-Howard 同构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **定理 2.1** (Curry-Howard 同构)
@@ -396,7 +434,13 @@ fn unsafe_attempt() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [00-foundations 目录](./README.md)
+- [上级目录](../README.md)

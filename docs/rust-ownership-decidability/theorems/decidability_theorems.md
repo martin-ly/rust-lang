@@ -1,9 +1,39 @@
 # Rust 所有权系统可判定性 - 核心定理
 
+## 📑 目录
+>
+- [Rust 所有权系统可判定性 - 核心定理](#rust-所有权系统可判定性---核心定理)
+  - [📑 目录](#-目录)
+  - [定理 1: Borrow Checking 终止性 (Termination)](#定理-1-borrow-checking-终止性-termination)
+    - [1.1 定理陈述](#11-定理陈述)
+    - [1.2 关键定义](#12-关键定义)
+      - [定义 1.2.1: 类型的秩 (Type Rank)](#定义-121-类型的秩-type-rank)
+      - [定义 1.2.2: 类型中的自由变量](#定义-122-类型中的自由变量)
+      - [定义 1.2.3: 类型环境的线性化 (Linearizability)](#定义-123-类型环境的线性化-linearizability)
+      - [定义 1.2.4: 环境度量 (Environment Measure)](#定义-124-环境度量-environment-measure)
+    - [1.3 证明草图](#13-证明草图)
+    - [1.4 形式化证明结构 (Coq)](#14-形式化证明结构-coq)
+  - [定理 2: 类型保持 (Preservation)](#定理-2-类型保持-preservation)
+    - [2.1 定理陈述](#21-定理陈述)
+    - [2.2 证明结构](#22-证明结构)
+  - [定理 3: 进展 (Progress)](#定理-3-进展-progress)
+    - [3.1 定理陈述](#31-定理陈述)
+  - [定理 4: 类型安全 (Type Safety)](#定理-4-类型安全-type-safety)
+    - [4.1 定理陈述](#41-定理陈述)
+  - [定理 5: 所有权安全保证内存安全](#定理-5-所有权安全保证内存安全)
+    - [5.1 定理陈述](#51-定理陈述)
+  - [定理 6: 可判定性 (Decidability)](#定理-6-可判定性-decidability)
+    - [6.1 定理陈述](#61-定理陈述)
+  - [定理间的依赖关系](#定理间的依赖关系)
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 定理 1: Borrow Checking 终止性 (Termination)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 定理陈述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -16,6 +46,7 @@ Theorem BorrowChecking_Termination:
 **中文**: 对于任何线性化的类型环境 Γ，借用检查算法都会终止。
 
 ### 1.2 关键定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### 定义 1.2.1: 类型的秩 (Type Rank)
@@ -373,7 +404,13 @@ Theorem Decidability:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [theorems 目录](./README.md)
+- [上级目录](../README.md)

@@ -1,10 +1,10 @@
 # 14 延迟选择模式 (Deferred Choice)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [14 延迟选择模式 (Deferred Choice)](#14-延迟选择模式-deferred-choice)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [外部事件触发](#外部事件触发)
@@ -28,14 +28,49 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [14 延迟选择模式 (Deferred Choice)](#14-延迟选择模式-deferred-choice)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [外部事件触发](#外部事件触发)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+    - [基于事件的网关](#基于事件的网关)
+  - [形式化语义](#形式化语义)
+    - [状态机形式化](#状态机形式化)
+    - [进程代数 (CSP)](#进程代数-csp)
+  - [Race Condition 分析](#race-condition-分析)
+    - [竞态条件检测](#竞态条件检测)
+    - [冲突解决策略](#冲突解决策略)
+  - [超时处理](#超时处理)
+  - [正确性证明](#正确性证明)
+    - [互斥性证明](#互斥性证明)
+    - [活性证明](#活性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [外部事件处理](#外部事件处理)
+    - [超时处理实现](#超时处理实现)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 延迟选择模式将分支决策推迟到运行时，基于外部事件或信号来决定执行路径。
 与排他选择不同，决策不是在设计时静态确定的。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 延迟选择等待多个可能的事件，第一个发生的事件决定执行路径：
@@ -667,6 +702,7 @@ $$
 5. **Winskel, G.** (1993). *The Formal Semantics of Programming Languages*. MIT Press.
 
 6. **Russell, N., ter Hofstede, A.H.M., Edmond, D., & van der Aalst, W.M.P.** (2005). "Workflow Data Patterns: Identification, Representation and Tool Support." *Conceptual Modeling – ER 2005*, 353-368.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -678,7 +714,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

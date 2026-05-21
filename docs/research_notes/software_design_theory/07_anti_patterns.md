@@ -1,5 +1,37 @@
 ﻿# 反模式与边界
 
+## 📑 目录
+>
+- [反模式与边界](#反模式与边界)
+  - [📑 目录](#-目录)
+  - [宗旨](#宗旨)
+  - [一、反模式与安全边界](#一反模式与安全边界)
+    - [1.1 形式化定义](#11-形式化定义)
+    - [1.2 反模式分类](#12-反模式分类)
+  - [二、13 反例索引（与 FORMAL\_PROOF\_SYSTEM\_GUIDE 衔接）](#二13-反例索引与-formal_proof_system_guide-衔接)
+  - [三、常见反模式详解（含代码示例）](#三常见反模式详解含代码示例)
+    - [3.1 所有权反模式](#31-所有权反模式)
+    - [3.2 借用反模式](#32-借用反模式)
+    - [3.3 设计模式反模式](#33-设计模式反模式)
+    - [3.4 并发反模式](#34-并发反模式)
+  - [四、反模式与三维边界](#四反模式与三维边界)
+  - [五、反模式规避策略（实质指南）](#五反模式规避策略实质指南)
+  - [六、与 05\_boundary\_system 衔接](#六与-05_boundary_system-衔接)
+  - [七、引用](#七引用)
+  - [八、完整规避示例（场景→反模式→正确写法）](#八完整规避示例场景反模式正确写法)
+    - [场景 1：需要共享可变](#场景-1需要共享可变)
+    - [场景 2：迭代中修改](#场景-2迭代中修改)
+    - [场景 3：单产品却用 Abstract Factory](#场景-3单产品却用-abstract-factory)
+    - [场景 4：无共享用 Flyweight](#场景-4无共享用-flyweight)
+    - [场景 5：错误类型用 unwrap](#场景-5错误类型用-unwrap)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -8,6 +40,7 @@
 ---
 
 ## 宗旨
+>
 > **[来源: Rust Official Docs]**
 
 将设计模式反例、反模式与形式化边界衔接，提供**实质内容**：形式化对应、与安全边界关系、规避策略、与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 反例索引的衔接。
@@ -15,9 +48,11 @@
 ---
 
 ## 一、反模式与安全边界
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 **Def AP1（反模式）**：违反设计模式不变式或 Rust 安全规则的实现；$\mathit{SafeB}(P) = \mathrm{Inexpr}$ 或违反 [ownership_model](../formal_methods/ownership_model.md)、[borrow_checker_proof](../formal_methods/borrow_checker_proof.md) 规则。
@@ -25,6 +60,7 @@
 **Axiom AP1**：反模式导致 UB、数据竞争、或逻辑错误；与 [safe_unsafe_matrix](05_boundary_system/safe_unsafe_matrix.md) SBM-T2、SBM-L2 衔接。
 
 ### 1.2 反模式分类
+>
 > **[来源: Rust Official Docs]**
 
 | 分类 | 边界 | 示例 |
@@ -37,6 +73,7 @@
 ---
 
 ## 二、13 反例索引（与 [FORMAL_PROOF_SYSTEM_GUIDE](../FORMAL_PROOF_SYSTEM_GUIDE.md) 衔接）
+>
 > **[来源: Rust Official Docs]**
 
 | 模式 | 反例 | 后果 | 规避 |
@@ -58,9 +95,11 @@
 ---
 
 ## 三、常见反模式详解（含代码示例）
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 所有权反模式
+>
 > **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
@@ -94,6 +133,7 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 ```
 
 ### 3.2 借用反模式
+>
 > **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
@@ -127,6 +167,7 @@ fn process(data: &Vec<String>) -> Vec<String> {
 ```
 
 ### 3.3 设计模式反模式
+>
 > **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
@@ -151,6 +192,7 @@ where
 ```
 
 ### 3.4 并发反模式
+>
 > **[来源: Rust Official Docs]**
 
 | 反模式 | 形式化 | 规避 |
@@ -162,6 +204,7 @@ where
 ---
 
 ## 四、反模式与三维边界
+>
 > **[来源: Rust Official Docs]**
 
 | 反模式 | 安全边界 | 支持边界 | 表达边界 |
@@ -321,3 +364,10 @@ let x = match result {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [software_design_theory 目录](./README.md)
+- [上级目录](../README.md)

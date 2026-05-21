@@ -1,6 +1,27 @@
 # 综合概念对比矩阵
 
+## 📑 目录
+>
+- [综合概念对比矩阵](#综合概念对比矩阵)
+  - [📑 目录](#-目录)
+  - [1. 并发模型对比矩阵](#1-并发模型对比矩阵)
+  - [2. 同步原语对比矩阵](#2-同步原语对比矩阵)
+  - [3. 智能指针对比矩阵](#3-智能指针对比矩阵)
+  - [4. 运行时选择矩阵](#4-运行时选择矩阵)
+  - [5. Web框架对比矩阵](#5-web框架对比矩阵)
+  - [6. 形式化验证工具对比矩阵](#6-形式化验证工具对比矩阵)
+  - [7. 内存管理策略对比矩阵](#7-内存管理策略对比矩阵)
+  - [8. 设计模式适用性矩阵](#8-设计模式适用性矩阵)
+  - [9. 错误处理策略对比矩阵](#9-错误处理策略对比矩阵)
+  - [10. 代码组织模式对比矩阵](#10-代码组织模式对比矩阵)
+  - [使用指南](#使用指南)
+    - [如何选择正确的工具/模式？](#如何选择正确的工具模式)
+    - [常见决策路径](#常见决策路径)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 并发模型对比矩阵
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 特性 | OS线程 | async/await | Actor | 数据并行 |
@@ -17,6 +38,7 @@
 | **调试难度** | 高 | 中 | 中 | 低 |
 
 ## 2. 同步原语对比矩阵
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 原语 | 所有权 | Send | Sync | 阻塞 | 适用场景 |
@@ -31,6 +53,7 @@
 > *注: 要求T: Send/Sync
 
 ## 3. 智能指针对比矩阵
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指针 | 所有权 | 引用计数 | 线程安全 | 可变性 | 开销 |
@@ -157,7 +180,12 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

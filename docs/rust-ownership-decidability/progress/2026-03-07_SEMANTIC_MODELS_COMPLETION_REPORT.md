@@ -6,7 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [语义模型全面梳理完成报告](#语义模型全面梳理完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+  - [新增文档清单](#新增文档清单)
+    - [1. Tree Borrows 全面分析](#1-tree-borrows-全面分析)
+    - [2. 可执行语义对比分析](#2-可执行语义对比分析)
+    - [3. Drop Elaboration 形式化](#3-drop-elaboration-形式化)
+    - [4. 符号借用检查](#4-符号借用检查)
+    - [5. RefinedRust 类型系统](#5-refinedrust-类型系统)
+    - [6. Relaxed Memory 模型](#6-relaxed-memory-模型)
+  - [国际权威资料覆盖统计](#国际权威资料覆盖统计)
+    - [顶级会议论文](#顶级会议论文)
+    - [权威机构](#权威机构)
+  - [语义模型覆盖矩阵](#语义模型覆盖矩阵)
+  - [形式化方法覆盖](#形式化方法覆盖)
+  - [质量保证](#质量保证)
+    - [文档质量标准](#文档质量标准)
+    - [交叉引用完整性](#交叉引用完整性)
+  - [新增内容统计](#新增内容统计)
+  - [学习路径建议](#学习路径建议)
+    - [路径 A: 别名模型专家](#路径-a-别名模型专家)
+    - [路径 B: 形式化验证工程师](#路径-b-形式化验证工程师)
+    - [路径 C: 编译器开发者](#路径-c-编译器开发者)
+  - [未来工作建议](#未来工作建议)
+  - [结论](#结论)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过系统性工作，已完成 Rust 所有权系统语义模型的全面梳理，对标了 2018-2025 年间国际顶级会议（POPL、PLDI）和权威机构（MPI-SWS、ETH Zürich、Microsoft Research）的研究成果。
@@ -14,9 +44,11 @@
 ---
 
 ## 新增文档清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. Tree Borrows 全面分析
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **文件**: `formal-foundations/models/tree-borrows-comprehensive.md`
@@ -281,7 +313,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

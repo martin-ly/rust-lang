@@ -6,10 +6,46 @@
 
 ---
 
+## 📑 目录
+>
+- [宏卫生性 (Macro Hygiene) 深度解析](#宏卫生性-macro-hygiene-深度解析)
+  - [📑 目录](#-目录)
+  - [1. 卫生性机制概述](#1-卫生性机制概述)
+    - [什么是宏卫生性？](#什么是宏卫生性)
+  - [2. 语法上下文 (Syntax Context)](#2-语法上下文-syntax-context)
+    - [Def CTX-1（语法上下文定义）](#def-ctx-1语法上下文定义)
+    - [上下文层级](#上下文层级)
+  - [3. 标识符分类](#3-标识符分类)
+    - [Def ID-CLASS（标识符分类）](#def-id-class标识符分类)
+    - [绑定标识符的卫生性](#绑定标识符的卫生性)
+    - [引用标识符的解析](#引用标识符的解析)
+  - [4. 卫生性规则形式化](#4-卫生性规则形式化)
+    - [Rule HYGIENE-1（绑定隔离规则）](#rule-hygiene-1绑定隔离规则)
+    - [Rule HYGIENE-2（引用解析规则）](#rule-hygiene-2引用解析规则)
+    - [Rule HYGIENE-3（混合上下文规则）](#rule-hygiene-3混合上下文规则)
+  - [5. 跨 Crate 卫生性](#5-跨-crate-卫生性)
+    - [Def CROSS-CRATE（跨 Crate 卫生性）](#def-cross-crate跨-crate-卫生性)
+    - [$crate 变量](#crate-变量)
+  - [6. 非卫生性操作](#6-非卫生性操作)
+  - [7. 实战：打破卫生性（谨慎使用）](#7-实战打破卫生性谨慎使用)
+    - [使用 `#[macro_export]` + 组合](#使用-macro_export--组合)
+    - [使用 const 泛型传递（高级技巧）](#使用-const-泛型传递高级技巧)
+  - [8. 过程宏的卫生性](#8-过程宏的卫生性)
+  - [9. 总结](#9-总结)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 1. 卫生性机制概述
+>
 > **[来源: Rust Official Docs]**
 
 ### 什么是宏卫生性？
+>
 > **[来源: Rust Official Docs]**
 
 **卫生性 (Hygiene)** 确保宏生成的标识符不会与宏外部的标识符意外冲突。
@@ -33,9 +69,11 @@ let four = using_a!(a / 10);  // ❌ 编译错误！
 ---
 
 ## 2. 语法上下文 (Syntax Context)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CTX-1（语法上下文定义）
+>
 > **[来源: Rust Official Docs]**
 
 每个标识符携带**语法上下文** (Syntax Context)，用于区分不同作用域的同名标识符：
@@ -60,6 +98,7 @@ $$
 ```
 
 ### 上下文层级
+>
 > **[来源: Rust Official Docs]**
 
 | 层级 | 描述 | 示例 |
@@ -72,9 +111,11 @@ $$
 ---
 
 ## 3. 标识符分类
+>
 > **[来源: Rust Official Docs]**
 
 ### Def ID-CLASS（标识符分类）
+>
 > **[来源: Rust Official Docs]**
 
 标识符按用途分为三类：
@@ -90,6 +131,7 @@ $$
 | Label | `'label: loop` | 控制流标签 |
 
 ### 绑定标识符的卫生性
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -106,6 +148,7 @@ make_var!(x, 42);
 ```
 
 ### 引用标识符的解析
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -123,9 +166,11 @@ let result = use_var!(5);  // 引用宏调用上下文的 'a'
 ---
 
 ## 4. 卫生性规则形式化
+>
 > **[来源: Rust Official Docs]**
 
 ### Rule HYGIENE-1（绑定隔离规则）
+>
 > **[来源: Rust Official Docs]**
 
 宏内部创建的绑定标识符，只在宏定义上下文可见：
@@ -356,3 +401,10 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

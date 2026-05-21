@@ -1,5 +1,22 @@
 ﻿# 组合的形式化定义
 
+## 📑 目录
+>
+- [📊 目录](#目录)
+- [定义](#定义)
+- [公理](#公理)
+- [定理与引理（形式化论证）](#定理与引理形式化论证)
+- [Rust 对应](#rust-对应)
+- [设计模式组合示例](#设计模式组合示例)
+- [Crate 组合](#crate-组合)
+- [组合反例](#组合反例)
+- [引用](#引用)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 > **创建日期**: 2026-02-12
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -8,6 +25,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [组合的形式化定义](#组合的形式化定义)
@@ -30,6 +48,7 @@
 ---
 
 ## 定义
+>
 > **[来源: Rust Official Docs]**
 
 **Def 1.1（模块）**:
@@ -69,6 +88,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## 公理
+>
 > **[来源: Rust Official Docs]**
 
 **Axiom CE1**：组合无命名冲突；模块路径唯一（`crate::module::item`）。
@@ -80,6 +100,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## 定理与引理（形式化论证）
+>
 > **[来源: Rust Official Docs]**
 
 **定理 CE-T1（组合保持内存安全）**：若各模块 $M_i$ 满足 [ownership_model](../../formal_methods/ownership_model.md) 定理 T2、T3（所有权唯一性、内存安全），则组合 $C = M_1 \oplus \cdots \oplus M_n$ 满足内存安全。
@@ -109,6 +130,7 @@ $M_1$ 依赖 $M_2$（记 $M_1 \prec M_2$）当且仅当 $M_1$ 引用 $M_2$ 的 `
 ---
 
 ## Rust 对应
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -133,6 +155,7 @@ fn main() {
 ---
 
 ## 设计模式组合示例
+>
 > **[来源: Rust Official Docs]**
 
 **Repository + Factory Method**：
@@ -178,6 +201,7 @@ impl<S: Service> Service for Logging<S> {
 ---
 
 ## Crate 组合
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -205,6 +229,7 @@ fn main() {
 ---
 
 ## 组合反例
+>
 > **[来源: Rust Official Docs]**
 
 | 反例 | 后果 |
@@ -216,6 +241,7 @@ fn main() {
 ---
 
 ## 引用
+>
 > **[来源: Rust Official Docs]**
 
 - [type_system_foundations](../../type_theory/type_system_foundations.md)
@@ -224,12 +250,14 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: Rust Official Docs]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -271,3 +299,10 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [04_compositional_engineering 目录](./README.md)
+- [上级目录](../README.md)

@@ -6,10 +6,26 @@
 
 ---
 
+## 📑 目录
+>
+- [Batch 4 完成报告](#batch-4-完成报告)
+  - [📑 目录](#-目录)
+  - [创建内容](#创建内容)
+    - [17-unsafe-rust/ 模块](#17-unsafe-rust-模块)
+    - [更新文件](#更新文件)
+  - [模块状态](#模块状态)
+  - [本轮产出统计](#本轮产出统计)
+  - [关键里程碑](#关键里程碑)
+  - [剩余任务](#剩余任务)
+  - [**整体完成度**: ~78%](#整体完成度-78)
+  - [相关概念](#相关概念)
+
 ## 创建内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 17-unsafe-rust/ 模块
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 主题 | 行数 | 深度 |
@@ -19,6 +35,7 @@
 | `08-aliasing.md` | 别名规则与优化 | ~150 | L2 |
 
 ### 更新文件
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 变更 |
@@ -83,7 +100,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

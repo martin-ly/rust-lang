@@ -4,7 +4,21 @@
 
 # C++ 互操作指南（cxx + bindgen）
 
+## 📑 目录
+>
+- [概述](#概述)
+- [cxx crate](#cxx-crate)
+  - [核心理念](#核心理念)
+  - [工作流程](#工作流程)
+  - [build.rs](#buildrs)
+- [bindgen](#bindgen)
+  - [工作流程](#工作流程)
+- [cxx vs bindgen 对比](#cxx-vs-bindgen-对比)
+- [项目中的使用](#项目中的使用)
+- [参考](#参考)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 Rust 与 C++ 的互操作主要有两条技术路线：
@@ -13,9 +27,11 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 2. **cxx**: 安全、双向的 C++/Rust 桥接，编译时检查 ABI 兼容性
 
 ## cxx crate
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心理念
+>
 > **[来源: Rust Official Docs]**
 
 - **共享类型**: `#[cxx::bridge]` 中定义的 struct，双方都能看到完整定义
@@ -164,7 +180,12 @@ cxx_interop::explain_bindgen_workflow();
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

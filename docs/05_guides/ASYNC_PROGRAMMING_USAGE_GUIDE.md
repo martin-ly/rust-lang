@@ -1,19 +1,16 @@
 # 异步编程使用指南
-
-**模块**: C06 Async
-**创建日期**: 2025-12-11
-**最后更新**: 2026-05-08
-**Rust 版本**: 1.95.0+ (Edition 2024)
-**状态**: ✅ 已完成
-
----
-
-## 📋 目录
 >
-> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Event-Driven Programming]** · **[来源: ACM - Async Programming Models]** · **[来源: IEEE - Concurrent Programming Patterns]**
+> **层次定位**: L3-L6 高级-生态 / 异步工程实践
+> **前置依赖**: [concept L3 Async](../../concept/03_advanced/02_async.md) · [docs 设计模式](./DESIGN_PATTERNS_USAGE_GUIDE.md)
+> **后置延伸**: [docs 嵌入式](../03_guides/EMBEDDED_RUST_GUIDE.md) · [knowledge Async](../../knowledge/03_advanced/async/README.md)
+> **跨层映射**: L3→L6 运行时映射 | 语义→实现
+> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → Tokio 调度正确性
+
+## 📑 目录
 
 - [异步编程使用指南](#异步编程使用指南)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🚀 快速开始](#-快速开始)
     - [基本异步函数](#基本异步函数)
@@ -69,6 +66,81 @@
       - [特性门控的异步模块加载](#特性门控的异步模块加载)
   - [🔗 形式化引用](#-形式化引用)
   - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
+  - [思维导图：异步编程全景](#思维导图异步编程全景)
+  - [决策树：运行时选择](#决策树运行时选择)
+
+**模块**: C06 Async
+**创建日期**: 2025-12-11
+**最后更新**: 2026-05-08
+**Rust 版本**: 1.95.0+ (Edition 2024)
+**状态**: ✅ 已完成
+
+---
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Event-Driven Programming]** · **[来源: ACM - Async Programming Models]** · **[来源: IEEE - Concurrent Programming Patterns]**
+
+- [异步编程使用指南](#异步编程使用指南)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [📋 概述](#-概述)
+  - [🚀 快速开始](#-快速开始)
+    - [基本异步函数](#基本异步函数)
+    - [并发执行](#并发执行)
+  - [📊 核心功能](#-核心功能)
+    - [1. Future Trait](#1-future-trait)
+    - [2. 异步运行时](#2-异步运行时)
+      - [Tokio 运行时](#tokio-运行时)
+      - [自定义运行时配置](#自定义运行时配置)
+    - [3. 异步 I/O](#3-异步-io)
+      - [文件 I/O](#文件-io)
+      - [网络 I/O](#网络-io)
+    - [4. Reactor 模式](#4-reactor-模式)
+    - [5. Actor 模式](#5-actor-模式)
+    - [6. Async Closures](#6-async-closures)
+      - [基础语法](#基础语法)
+      - [与旧范式对比](#与旧范式对比)
+      - [在异步编程中的应用](#在异步编程中的应用)
+  - [⚡ 性能优化](#-性能优化)
+    - [1. 使用 select! 宏](#1-使用-select-宏)
+    - [2. 使用 Stream](#2-使用-stream)
+    - [3. 背压处理](#3-背压处理)
+  - [🔧 错误处理](#-错误处理)
+    - [异步错误传播](#异步错误传播)
+    - [Rust 1.95+ ControlFlow API 高级错误控制](#rust-195-controlflow-api-高级错误控制)
+      - [为什么使用 ControlFlow？](#为什么使用-controlflow)
+      - [异步流控制：批量任务处理](#异步流控制批量任务处理)
+      - [递归遍历与短路求值](#递归遍历与短路求值)
+      - [ControlFlow 与 Try  trait 集成](#controlflow-与-try--trait-集成)
+      - [组合模式：ControlFlow 管道](#组合模式controlflow-管道)
+  - [🏗️ 异步编程模式（5+ 完整示例）](#️-异步编程模式5-完整示例)
+    - [模式 1: 取消与超时处理](#模式-1-取消与超时处理)
+    - [模式 2: 限流与速率控制](#模式-2-限流与速率控制)
+    - [模式 3: 重试与退避策略](#模式-3-重试与退避策略)
+    - [模式 4: 批处理与缓冲](#模式-4-批处理与缓冲)
+    - [模式 5: 断路器模式](#模式-5-断路器模式)
+  - [🌍 真实应用场景](#-真实应用场景)
+    - [场景 1: Web 服务器实现](#场景-1-web-服务器实现)
+    - [场景 2: 数据处理管道](#场景-2-数据处理管道)
+    - [场景 3: 实时消息系统](#场景-3-实时消息系统)
+  - [🐛 常见问题与解决方案](#-常见问题与解决方案)
+    - [问题 1: 阻塞运行时](#问题-1-阻塞运行时)
+    - [问题 2: Future 必须 Send](#问题-2-future-必须-send)
+    - [问题 3: 持有锁跨越 await 点](#问题-3-持有锁跨越-await-点)
+    - [问题 4: 忘记处理 Cancel Safety](#问题-4-忘记处理-cancel-safety)
+    - [问题 5: 递归 async 函数](#问题-5-递归-async-函数)
+  - [📚 相关文档](#-相关文档)
+  - [🆕 Rust 1.95+ 特性](#-rust-195-特性)
+    - [ControlFlow 在异步编程中的应用](#controlflow-在异步编程中的应用)
+    - [Peekable 迭代器增强](#peekable-迭代器增强)
+    - [`cfg_select!` 在异步配置中的应用](#cfg_select-在异步配置中的应用)
+      - [跨平台异步运行时配置](#跨平台异步运行时配置)
+      - [特性门控的异步模块加载](#特性门控的异步模块加载)
+  - [🔗 形式化引用](#-形式化引用)
+  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
+  - [思维导图：异步编程全景](#思维导图异步编程全景)
+  - [决策树：运行时选择](#决策树运行时选择)
 
 ---
 
@@ -1750,3 +1822,40 @@ async fn fetch_data(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 > **权威来源**: Rust Official Docs
+
+---
+
+## 思维导图：异步编程全景
+
+```mermaid
+graph TD
+    A[异步编程] --> F[Future 与 Task]
+    A --> R[运行时选择]
+    A --> P[Pin 与 状态机]
+    A --> E[执行器模型]
+    F --> F1[async fn]
+    F --> F2[.await]
+    F --> F3[Spawn]
+    R --> R1[Tokio]
+    R --> R2[async-std]
+    R --> R3[ Embassy]
+    P --> P1[Pin<&mut Self>]
+    P --> P2[Unpin]
+    E --> E1[Work Stealing]
+    E --> E2[Reactor + Executor]
+```
+
+---
+
+## 决策树：运行时选择
+
+```mermaid
+graph TD
+    Q1[目标平台?] -->|嵌入式| A1[Embassy - no_std]
+    Q1 -->|服务器| Q2[是否需要 WASM?]
+    Q1 -->|WASM| A2[wasm-bindgen-futures]
+    Q2 -->|是| A3[Tokio with wasm feature]
+    Q2 -->|否| Q3[生态系统依赖?]
+    Q3 -->|Tokio 生态| A4[Tokio]
+    Q3 -->|独立| A5[async-std 或 smol]
+```

@@ -6,10 +6,38 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统形式化 - 持续推进完成报告](#rust-所有权系统形式化---持续推进完成报告)
+  - [📑 目录](#-目录)
+  - [本次推进完成的工作](#本次推进完成的工作)
+    - [1. 完成的文件](#1-完成的文件)
+    - [2. 核心定理证明状态](#2-核心定理证明状态)
+    - [3. 关键完成成果](#3-关键完成成果)
+      - [3.1 可判定性定理（完整证明）](#31-可判定性定理完整证明)
+      - [3.2 终止性定理（完整证明）](#32-终止性定理完整证明)
+      - [3.3 类型-所有权联系（完整证明）](#33-类型-所有权联系完整证明)
+  - [代码统计](#代码统计)
+    - [当前状态](#当前状态)
+    - [admit 分布](#admit-分布)
+  - [框架完整性评估](#框架完整性评估)
+    - [已完成的框架层次](#已完成的框架层次)
+  - [与 100% 完成的差距](#与-100-完成的差距)
+    - [剩余的 ~65 处 admit](#剩余的-65-处-admit)
+    - [这些 admit 的性质](#这些-admit-的性质)
+  - [成果总结](#成果总结)
+    - [已达到 100% 的组件](#已达到-100-的组件)
+    - [框架完整性：100%](#框架完整性100)
+  - [结论](#结论)
+  - [*总体完成度: 92% (核心框架 100%)*](#总体完成度-92-核心框架-100)
+  - [相关概念](#相关概念)
+
 ## 本次推进完成的工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 完成的文件
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 状态 | admit 减少 |
@@ -25,6 +53,7 @@
 | ComplexPatterns.v | ✅ 完成 | 6 → 4 |
 
 ### 2. 核心定理证明状态
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 定理 | 状态 | 说明 |
@@ -232,7 +261,13 @@ Termination.v: 1  (技术引理)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

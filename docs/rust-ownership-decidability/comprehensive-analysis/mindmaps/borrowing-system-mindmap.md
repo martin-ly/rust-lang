@@ -1,6 +1,19 @@
 # Rust借用系统 - 思维导图
 
+## 📑 目录
+>
+- [Rust借用系统 - 思维导图](#rust借用系统---思维导图)
+  - [📑 目录](#-目录)
+  - [Mermaid思维导图](#mermaid思维导图)
+  - [借用系统核心关系图](#借用系统核心关系图)
+  - [生命周期关系图](#生命周期关系图)
+  - [借用检查演进](#借用检查演进)
+  - [借用模式速查表](#借用模式速查表)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## Mermaid思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -91,6 +104,7 @@ mindmap
 ---
 
 ## 借用系统核心关系图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -135,6 +149,7 @@ mindmap
 ---
 
 ## 生命周期关系图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -218,7 +233,12 @@ mindmap
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

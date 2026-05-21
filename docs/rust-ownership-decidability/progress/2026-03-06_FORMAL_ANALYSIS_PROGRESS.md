@@ -6,10 +6,40 @@
 
 ---
 
+## 📑 目录
+>
+- [形式化模型分析与论证推进报告](#形式化模型分析与论证推进报告)
+  - [📑 目录](#-目录)
+  - [本次推进完成的工作](#本次推进完成的工作)
+    - [✅ 1. 统一理论框架文档](#-1-统一理论框架文档)
+    - [✅ 2. 语义等价性证明文档](#-2-语义等价性证明文档)
+    - [✅ 3. 类型-所有权统一理论文档](#-3-类型-所有权统一理论文档)
+    - [✅ 4. 定理依赖图更新](#-4-定理依赖图更新)
+    - [✅ 5. 证明策略库文档](#-5-证明策略库文档)
+  - [本次推进统计](#本次推进统计)
+  - [剩余未完成工作](#剩余未完成工作)
+    - [Coq 形式化层（代码级）](#coq-形式化层代码级)
+      - [高优先级](#高优先级)
+      - [中优先级](#中优先级)
+      - [低优先级](#低优先级)
+    - [估计剩余工作量](#估计剩余工作量)
+  - [质量保证](#质量保证)
+    - [文档完整性检查 ✅](#文档完整性检查-)
+    - [形式化完整性检查 ⚠️](#形式化完整性检查-️)
+  - [下一步行动建议](#下一步行动建议)
+    - [短期（1-2周）](#短期1-2周)
+    - [中期（3-4周）](#中期3-4周)
+    - [长期（1-2月）](#长期1-2月)
+  - [结论](#结论)
+  - [*推进负责人: Rust-Ownership-Decidability Team*](#推进负责人-rust-ownership-decidability-team)
+  - [相关概念](#相关概念)
+
 ## 本次推进完成的工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 1. 统一理论框架文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **文件**: `UNIFIED_THEORETICAL_FRAMEWORK.md`
@@ -34,6 +64,7 @@
 ---
 
 ### ✅ 2. 语义等价性证明文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **文件**: `formal-foundations/semantics/semantics-equivalence-proof.md`
@@ -240,7 +271,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

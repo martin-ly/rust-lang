@@ -1,16 +1,9 @@
 ﻿# 与 ownership/borrow/trait 的衔接
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义与定理](#形式化定义与定理)
   - [衔接关系图](#衔接关系图)
@@ -35,10 +28,51 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [与 ownership/borrow/trait 的衔接](#与-ownershipborrowtrait-的衔接)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义与定理](#形式化定义与定理)
+  - [衔接关系图](#衔接关系图)
+  - [组合与所有权](#组合与所有权)
+  - [组合与 trait](#组合与-trait)
+  - [设计模式组合示例](#设计模式组合示例)
+  - [组合代码示例](#组合代码示例)
+  - [完整多模式组合链条：Builder + Factory + Repository](#完整多模式组合链条builder--factory--repository)
+  - [组合验证清单](#组合验证清单)
+  - [跨模块 Send/Sync 传递](#跨模块-sendsync-传递)
+  - [组合反例](#组合反例)
+  - [多层次组合链条（实质内容）](#多层次组合链条实质内容)
+    - [链条 1：Builder + Factory + Repository](#链条-1builder--factory--repository)
+    - [链条 2：Decorator + Strategy + Observer（完整实现）](#链条-2decorator--strategy--observer完整实现)
+    - [链条 3：Composite + Visitor + Iterator（完整实现）](#链条-3composite--visitor--iterator完整实现)
+    - [链条 4：Chain of Responsibility + Command + Observer](#链条-4chain-of-responsibility--command--observer)
+  - [跨模块边界最佳实践](#跨模块边界最佳实践)
+  - [引用](#引用)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义与定理
+>
 > **[来源: Rust Official Docs]**
 
 **Def 1.1（跨模块边界）**:
@@ -73,6 +107,7 @@
 ---
 
 ## 衔接关系图
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -106,6 +141,7 @@
 ---
 
 ## 组合与所有权
+>
 > **[来源: Rust Official Docs]**
 
 | 传递方式 | 所有权 | 形式化 |
@@ -120,6 +156,7 @@
 ---
 
 ## 组合与 trait
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 衔接 |
@@ -131,6 +168,7 @@
 ---
 
 ## 设计模式组合示例
+>
 > **[来源: Rust Official Docs]**
 
 设计模式可组合使用，例如：
@@ -145,6 +183,7 @@
 ---
 
 ## 组合代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -174,6 +213,7 @@ fn visit<V: Visitor>(v: &mut V, node: &Node) {
 ---
 
 ## 完整多模式组合链条：Builder + Factory + Repository
+>
 > **[来源: Rust Official Docs]**
 
 **场景**：订单创建（Builder）→ 工厂选择（Factory）→ 持久化（Repository + DTO）。
@@ -218,6 +258,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合验证清单
+>
 > **[来源: Rust Official Docs]**
 
 组合多模块/多模式时，确认：
@@ -231,6 +272,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 跨模块 Send/Sync 传递
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 约束 |
@@ -245,6 +287,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 ---
 
 ## 组合反例
+>
 > **[来源: Rust Official Docs]**
 
 | 反例 | 后果 |
@@ -479,3 +522,10 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [04_compositional_engineering 目录](./README.md)
+- [上级目录](../README.md)

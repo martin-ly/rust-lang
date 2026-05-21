@@ -1,5 +1,19 @@
 ﻿# Core Theorems — English Summary
 
+## 📑 目录
+>
+- [Overview](#overview)
+- [Theorem Summary](#theorem-summary)
+- [Auxiliary Lemmas](#auxiliary-lemmas)
+- [L3 Machine-Checkable Scaffolding](#l3-machine-checkable-scaffolding)
+- [Formal Language and Proofs](#formal-language-and-proofs)
+- [Related Documents](#related-documents)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 > **创建日期**: 2026-02-14
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.93.1+ (Edition 2024)
@@ -10,6 +24,7 @@
 ---
 
 ## Overview
+>
 > **[来源: Rust Official Docs]**
 
 L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with induction base/step, auxiliary lemmas, and proof dependency DAG.
@@ -17,6 +32,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 ---
 
 ## Theorem Summary
+>
 > **[来源: Rust Official Docs]**
 
 | Theorem | Statement | Proof |
@@ -29,6 +45,7 @@ L2-level full proofs for **ownership T2**, **borrow T1**, and **type T3**, with 
 ---
 
 ## Auxiliary Lemmas
+>
 > **[来源: Rust Official Docs]**
 
 | Lemma | Content |

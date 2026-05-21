@@ -7,6 +7,42 @@
 
 ---
 
+## 📑 目录
+>
+- [执行摘要](#执行摘要)
+- [1. 工具链现状（权威版本）](#1-工具链现状权威版本)
+  - [1.1 Rust编译器](#11-rust编译器)
+  - [1.2 Rust 1.94核心特性（官方确认）](#12-rust-194核心特性官方确认)
+    - [array_windows方法](#array_windows方法)
+    - [LazyCell/LazyLock API稳定化](#lazycelllazylock-api稳定化)
+    - [AVX-512 FP16 Intrinsics](#avx-512-fp16-intrinsics)
+- [2. Tree Borrows权威论证](#2-tree-borrows权威论证)
+  - [2.1 学术认可 [^5] [^20]](#21-学术认可-5-20)
+  - [2.2 Miri学术认可](#22-miri学术认可)
+  - [2.3 Tree Borrows核心优势](#23-tree-borrows核心优势)
+    - [实验数据（PLDI 2025）](#实验数据pldi-2025)
+- [3. Linux内核永久采用Rust [^13] [^18]](#3-linux内核永久采用rust-13-18)
+  - [3.1 官方宣布](#31-官方宣布)
+  - [3.2 关键里程碑](#32-关键里程碑)
+  - [3.3 Rust基金会安全计划 [^15]](#33-rust基金会安全计划-15)
+  - [3.4 供应链安全与CVE跟踪 [^23] [^24] [^25]](#34-供应链安全与cve跟踪-23-24-25)
+- [4. 企业采用案例](#4-企业采用案例)
+  - [4.1 Google [^16]](#41-google-16)
+  - [4.2 Microsoft [^17]](#42-microsoft-17)
+  - [4.3 其他企业 [^14] [^19]](#43-其他企业-14-19)
+- [5. Edition 2024权威指南](#5-edition-2024权威指南)
+  - [3.1 官方发布](#31-官方发布)
+  - [3.2 gen关键字（RFC #3513）](#32-gen关键字rfc-3513)
+  - [3.3 Edition 2024迁移实践](#33-edition-2024迁移实践)
+- [4. 引用来源汇总](#4-引用来源汇总)
+  - [学术论文](#学术论文)
+- [5. 项目对齐状态](#5-项目对齐状态)
+  - [5.1 已对齐内容](#51-已对齐内容)
+  - [5.2 权威引用统计](#52-权威引用统计)
+- [6. 结论](#6-结论)
+  - [6.1 国际权威覆盖度](#61-国际权威覆盖度)
+  - [6.2 权威来源分类](#62-权威来源分类)
+
 ## 执行摘要
 
 本文档基于权威来源对2026年3月Rust生态进行全面梳理，所有关键断言均提供可追溯的引用来源。
@@ -27,6 +63,7 @@
 ---
 
 ## 1. 工具链现状（权威版本）
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Rust编译器
@@ -38,9 +75,11 @@
 | rust-analyzer | 1.94.0 | 2026-03-05 | [Official Release](https://rust-analyzer.github.io/) [^21] |
 
 ### 1.2 Rust 1.94核心特性（官方确认）
+>
 > **[来源: Rust Official Docs]**
 
 #### array_windows方法
+>
 > **[来源: Rust Official Docs]**
 
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`."
@@ -58,6 +97,7 @@ s.as_bytes().windows(4).any(|w| ...)
 ```
 
 #### LazyCell/LazyLock API稳定化
+>
 > **[来源: Rust Official Docs]**
 
 **稳定化API列表**（官方发布说明）：
@@ -83,9 +123,11 @@ s.as_bytes().windows(4).any(|w| ...)
 ---
 
 ## 2. Tree Borrows权威论证
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 学术认可 [^5] [^20]
+>
 > **[来源: Rust Official Docs]**
 
 **Tree Borrows论文** (PLDI 2025 Distinguished Paper Award) [^20]：
@@ -103,6 +145,7 @@ DOI: 10.1145/3735592
 > —— **PLDI 2025 Program Committee** [^20]
 
 ### 2.2 Miri学术认可
+>
 > **[来源: Rust Official Docs]**
 
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
@@ -120,9 +163,11 @@ DOI: 10.1145/3704904
 ```
 
 ### 2.3 Tree Borrows核心优势
+>
 > **[来源: Rust Official Docs]**
 
 #### 实验数据（PLDI 2025）
+>
 > **[来源: Rust Official Docs]**
 
 > "实验结果显示，Tree Borrows比Stacked Borrows少拒绝54%的测试用例"
@@ -151,6 +196,7 @@ DOI: 10.1145/3704904
 ---
 
 ## 3. Linux内核永久采用Rust [^13] [^18]
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 官方宣布
@@ -167,6 +213,7 @@ DOI: 10.1145/3704904
 > —— **Linux Kernel Documentation**, kernel.org [^18]
 
 ### 3.2 关键里程碑
+>
 > **[来源: Rust Official Docs]**
 
 **生产部署**:
@@ -480,7 +527,12 @@ DOI: 10.1145/3704904
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [docs 目录](./README.md)

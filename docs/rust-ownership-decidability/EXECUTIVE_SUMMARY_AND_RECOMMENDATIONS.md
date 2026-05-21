@@ -6,12 +6,56 @@
 
 ---
 
+## 📑 目录
+>
+- [执行摘要与建议](#执行摘要与建议)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [优势 (Strengths)](#优势-strengths)
+    - [劣势 (Weaknesses)](#劣势-weaknesses)
+    - [机会 (Opportunities)](#机会-opportunities)
+    - [威胁 (Threats)](#威胁-threats)
+  - [核心发现](#核心发现)
+    - [1. 内容深度分布不均](#1-内容深度分布不均)
+    - [2. 权威资源对齐差距](#2-权威资源对齐差距)
+    - [3. 可执行性检查](#3-可执行性检查)
+  - [建议](#建议)
+    - [短期建议 (1-4 周)](#短期建议-1-4-周)
+      - [1. 立即创建 Unsafe Rust 专题 (最高优先级)](#1-立即创建-unsafe-rust-专题-最高优先级)
+      - [2. 建立质量保证流程](#2-建立质量保证流程)
+      - [3. 修复现有问题](#3-修复现有问题)
+    - [中期建议 (1-3 个月)](#中期建议-1-3-个月)
+      - [1. 扩展验证工具文档](#1-扩展验证工具文档)
+      - [2. 添加对比研究](#2-添加对比研究)
+      - [3. 深化设计模式](#3-深化设计模式)
+    - [长期建议 (3-6 个月)](#长期建议-3-6-个月)
+      - [1. 权威资源对齐计划](#1-权威资源对齐计划)
+      - [2. 建立可持续维护机制](#2-建立可持续维护机制)
+  - [可持续计划](#可持续计划)
+    - [内容创建流程](#内容创建流程)
+    - [质量标准](#质量标准)
+    - [版本管理](#版本管理)
+    - [社区参与](#社区参与)
+  - [预期成果](#预期成果)
+    - [完成 100% 后的项目状态](#完成-100-后的项目状态)
+    - [预期影响](#预期影响)
+  - [风险与缓解](#风险与缓解)
+  - [下一步行动](#下一步行动)
+    - [本周行动项](#本周行动项)
+    - [本月里程碑](#本月里程碑)
+    - [季度目标](#季度目标)
+  - [结论](#结论)
+  - [*下次审查: 2026-03-14*](#下次审查-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过全面的递归审计，项目呈现以下特征：
 
 ### 优势 (Strengths)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **形式化深度卓越**: Coq 形式化 (~5,500 行) 是同类项目罕见
@@ -20,6 +64,7 @@
 4. **程序语义完整**: 系统化程度高
 
 ### 劣势 (Weaknesses)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **Unsafe Rust 严重不足**: 仅占应有内容的 30%
@@ -280,7 +325,13 @@ rust-ownership-decidability/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

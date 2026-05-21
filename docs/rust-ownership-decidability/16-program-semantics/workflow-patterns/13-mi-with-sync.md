@@ -1,10 +1,10 @@
 # 13 多实例有同步模式 (Multiple Instances With Synchronization)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [13 多实例有同步模式 (Multiple Instances With Synchronization)](#13-多实例有同步模式-multiple-instances-with-synchronization)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [先验设计时知识](#先验设计时知识)
@@ -24,14 +24,45 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [13 多实例有同步模式 (Multiple Instances With Synchronization)](#13-多实例有同步模式-multiple-instances-with-synchronization)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [先验设计时知识](#先验设计时知识)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+  - [形式化语义](#形式化语义)
+    - [状态机形式化](#状态机形式化)
+    - [进程代数](#进程代数)
+    - [屏障同步](#屏障同步)
+  - [正确性证明](#正确性证明)
+    - [汇合安全性](#汇合安全性)
+    - [活性保证](#活性保证)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [进度报告实现](#进度报告实现)
+    - [容错实现](#容错实现)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多实例有同步模式在运行时创建多个活动实例，等待所有实例完成后才继续执行。
 这是最常用的并行处理模式之一。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -653,6 +684,7 @@ $$
 4. **Reichert, M., & Dadam, P.** (1998). "ADEPTflex - Supporting Dynamic Changes of Workflows Without Losing Control." *Journal of Intelligent Information Systems*, 10(2), 93-129.
 
 5. **Sadiq, W., & Orlowska, M.E.** (2000). "Analyzing Process Models Using Graph Reduction Techniques." *Information Systems*, 25(2), 117-134.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -664,7 +696,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

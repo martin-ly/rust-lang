@@ -1,4 +1,10 @@
 # Rust 编译器错误码映射文档
+>
+> **层次定位**: L1-L3 基础-高级 / 编译器诊断参考
+> **前置依赖**: [docs 核心概念](../01_core/README.md) · [concept L1 所有权](../../concept/01_foundation/01_ownership.md)
+> **后置延伸**: [docs 性能调优](../05_guides/PERFORMANCE_TUNING_GUIDE.md) · [concept L3 Unsafe](../../concept/03_advanced/03_unsafe.md)
+> **跨层映射**: docs→concept 诊断映射 | L1-L3 错误→概念
+> **定理链编号**: E0502 ↔ T-010 | E0597 ↔ T-011
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
@@ -10,6 +16,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Official Docs]** · **[来源: Rust Reference - Error Codes]** · **[来源: Wikipedia - Compiler Construction]** · **[来源: ACM - Compiler Error Message Design]** · **[来源: IEEE - Programming Language Diagnostics]**
 
 - [Rust 编译器错误码映射文档](#rust-编译器错误码映射文档)
@@ -94,10 +101,15 @@
     - [形式化理论](#形式化理论)
   - [故障排查建议](#故障排查建议)
   - [Rust 1.95+ 更新说明](#rust-195-更新说明)
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
+  - [权威来源索引](#权威来源索引)
+  - [思维导图：Rust 错误码体系](#思维导图rust-错误码体系)
+  - [决策树：编译错误诊断流程](#决策树编译错误诊断流程)
 
 ---
 
 ## 简介
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供 Rust 编译器错误码的详细映射，帮助开发者：
@@ -108,6 +120,7 @@
 - **深入学习**: 链接到相关的概念文档和形式化理论
 
 ### 使用方式
+>
 > **[来源: Rust Official Docs]**
 
 1. 在编译错误信息中找到 `error[EXXXX]` 格式的错误码
@@ -118,6 +131,7 @@
 ---
 
 ## 错误码快速索引
+>
 > **[来源: Rust Official Docs]**
 
 | 错误码范围 | 类别 | 常见错误码 |
@@ -136,9 +150,11 @@
 ---
 
 ## 借用检查错误 (E01xx-E05xx)
+>
 > **[来源: Rust Official Docs]**
 
 ### E0382 - 使用已移动的值
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `use of moved value` / `value borrowed here after move`
@@ -204,6 +220,7 @@ fn main() {
 ---
 
 ### E0383 - 部分移动
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `partial move` / `borrow of partially moved value`
@@ -277,6 +294,7 @@ fn main() {
 ---
 
 ### E0499 - 重复可变借用
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot borrow as mutable more than once at a time`
@@ -356,6 +374,7 @@ fn process(s: String) -> String {
 ---
 
 ### E0502 - 可变与不可变借用共存
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot borrow as immutable because it is borrowed as mutable`
@@ -426,6 +445,7 @@ fn main() {
 ---
 
 ### E0503 - 使用已移动的值（在借用后）
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot use because it was mutably borrowed` / `value used after move`
@@ -475,6 +495,7 @@ fn main() {
 ---
 
 ### E0505 - 在借用时移动
+>
 > **[来源: Rust Official Docs]**
 
 **错误信息**: `cannot move out of because it is borrowed`
@@ -637,6 +658,7 @@ fn main() {
 ---
 
 ## 类型系统错误 (E02xx-E03xx)
+>
 > **[来源: Rust Official Docs]**
 
 ### E0277 - Trait 约束不满足
@@ -840,6 +862,7 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 ---
 
 ## 生命周期错误 (E05xx-E06xx)
+>
 > **[来源: Rust Official Docs]**
 
 ### E0106 - 需要生命周期标注
@@ -1070,6 +1093,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 ---
 
 ## 所有权错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0381 - 使用未初始化变量
@@ -1128,6 +1152,7 @@ fn main() {
 ---
 
 ## 模式匹配错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0004 - 非穷尽模式匹配
@@ -1253,6 +1278,7 @@ fn bar(opt: Option<i32>) {
 ---
 
 ## 宏系统错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0424 - self 使用错误
@@ -1352,6 +1378,7 @@ fn main() {
 ---
 
 ## 模块系统错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0432 - 未解析的导入
@@ -1476,6 +1503,7 @@ pub use internal::secret;  // ✅ 重新导出
 ---
 
 ## 变量与可变性错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0596 - 无法借用不可变变量为可变
@@ -1637,6 +1665,7 @@ fn main() {
 ---
 
 ## Trait 与泛型错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0201 - 重复的 Trait 实现
@@ -1779,6 +1808,7 @@ trait Bar: Foo {}  // ✅ 单向约束
 ---
 
 ## 并发与异步错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0373 - 闭包生命周期问题
@@ -1954,6 +1984,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 ---
 
 ## 其他常见错误
+>
 > **[来源: Rust Official Docs]**
 
 ### E0252 - 名称冲突
@@ -2431,7 +2462,6 @@ Rust 1.94 对错误诊断进行了多项改进：
 
 > **权威来源**: Rust Official Docs
 
-
 ---
 
 ## 权威来源索引
@@ -2455,3 +2485,39 @@ Rust 1.94 对错误诊断进行了多项改进：
 > **[来源: LLVM - Error Handling]**
 
 > **[来源: ISO/IEC 14882 - C++ Standard Diagnostics]**
+
+---
+
+## 思维导图：Rust 错误码体系
+
+```mermaid
+graph TD
+    E[错误码] --> O[所有权类 E03xx/E05xx]
+    E --> T[类型类 E02xx/E06xx]
+    E --> L[生命周期类 E07xx]
+    E --> G[泛型类 E02xx]
+    O --> O1[E0502 已借用]
+    O --> O2[E0503 已移动]
+    T --> T1[E0308 类型不匹配]
+    T --> T2[E0277 Trait 未实现]
+    L --> L1[E0106 缺失生命周期]
+    L --> L2[E0499 可变借用冲突]
+    G --> G1[E0282 类型推断失败]
+    G --> G2[E0207 泛型约束不满足]
+```
+
+---
+
+## 决策树：编译错误诊断流程
+
+```mermaid
+graph TD
+    Q1[错误码以 E05 开头?] -->|是| Q2[是否涉及 &mut?]
+    Q1 -->|否| Q3[错误码以 E02/E03 开头?]
+    Q2 -->|是| A1[检查借用规则冲突]
+    Q2 -->|否| A2[检查所有权转移]
+    Q3 -->|是| A3[检查类型匹配与 Trait 实现]
+    Q3 -->|否| Q4[错误码以 E07 开头?]
+    Q4 -->|是| A4[检查生命周期标注]
+    Q4 -->|否| A5[查看 rustc --explain 输出]
+```

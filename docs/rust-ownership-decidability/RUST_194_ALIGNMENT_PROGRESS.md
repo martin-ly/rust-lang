@@ -6,13 +6,62 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 对齐进展报告](#rust-194-对齐进展报告)
+  - [📑 目录](#-目录)
+  - [一、已完成工作](#一已完成工作)
+    - [1.1 核心新特性形式化 (100%)](#11-核心新特性形式化-100)
+      - [✅ Reborrow Trait (`Reborrow.v`) - 100%](#-reborrow-trait-reborrowv---100)
+      - [✅ CoerceShared Trait (`CoerceShared.v`) - 100%](#-coerceshared-trait-coercesharedv---100)
+      - [✅ Const Generics (`ConstGenerics.v`) - 100%](#-const-generics-constgenericsv---100)
+      - [✅ Precise Capturing (`PreciseCapturing.v`) - 100%](#-precise-capturing-precisecapturingv---100)
+    - [1.2 扩展特性形式化 (100%)](#12-扩展特性形式化-100)
+      - [✅ 2024 Edition (`Edition2024.v`) - 100%](#-2024-edition-edition2024v---100)
+      - [✅ Associated Type Bounds (`AssociatedTypeBounds.v`) - 100%](#-associated-type-bounds-associatedtypeboundsv---100)
+      - [✅ New Lints (`NewLints.v`) - 100%](#-new-lints-newlintsv---100)
+      - [✅ Async Basics (`AsyncBasics.v`) - 100%](#-async-basics-asyncbasicsv---100)
+    - [1.3 元理论集成 (100%)](#13-元理论集成-100)
+      - [✅ MetatheoryIntegration.v - 100%](#-metatheoryintegrationv---100)
+      - [✅ MetatheoryComplete.v - 100%](#-metatheorycompletev---100)
+      - [✅ Rust194Complete.v - 100%](#-rust194completev---100)
+    - [1.4 文档 (100%)](#14-文档-100)
+      - [✅ 形式化文档](#-形式化文档)
+      - [✅ 代码注释](#-代码注释)
+  - [二、技术统计](#二技术统计)
+    - [代码统计](#代码统计)
+    - [文档统计](#文档统计)
+    - [定理统计](#定理统计)
+  - [三、核心定理清单](#三核心定理清单)
+    - [类型安全定理](#类型安全定理)
+    - [兼容性定理](#兼容性定理)
+    - [交互安全定理](#交互安全定理)
+  - [四、验证示例](#四验证示例)
+    - [已验证示例 (20+)](#已验证示例-20)
+  - [五、文件组织结构](#五文件组织结构)
+  - [六、质量保证](#六质量保证)
+    - [代码质量](#代码质量)
+    - [理论质量](#理论质量)
+    - [文档质量](#文档质量)
+  - [七、成就总结](#七成就总结)
+    - [理论贡献](#理论贡献)
+    - [技术创新](#技术创新)
+  - [八、结论](#八结论)
+    - [主要成果](#主要成果)
+    - [意义](#意义)
+  - [*完成标记: ✅*](#完成标记-)
+  - [相关概念](#相关概念)
+
 ## 一、已完成工作
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 核心新特性形式化 (100%)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 #### ✅ Reborrow Trait (`Reborrow.v`) - 100%
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [x] 定义 `has_reborrow` 关系
@@ -310,7 +359,13 @@ Rust 1.94 所有权形式化对齐工作已 **100% 完成**。
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

@@ -5,7 +5,27 @@
 
 ---
 
+## 📑 目录
+>
+- [✅ Rust 所有权可判定性 - 100% 完成摘要](#-rust-所有权可判定性---100-完成摘要)
+  - [📑 目录](#-目录)
+  - [📊 最终统计](#-最终统计)
+  - [🎯 100% 覆盖领域](#-100-覆盖领域)
+    - [✅ 学术文献 (100%)](#-学术文献-100)
+    - [✅ 验证工具 (100%)](#-验证工具-100)
+    - [✅ 工业应用 (100%)](#-工业应用-100)
+    - [✅ 前沿研究 (100%)](#-前沿研究-100)
+  - [🆕 最新更新内容](#-最新更新内容)
+    - [Phase 1 (已完成)](#phase-1-已完成)
+    - [Phase 2 (已完成)](#phase-2-已完成)
+    - [Phase 3 (已完成)](#phase-3-已完成)
+  - [📚 关键文档导航](#-关键文档导航)
+  - [🔗 网络资源对齐](#-网络资源对齐)
+  - [🚀 使用建议](#-使用建议)
+  - [相关概念](#相关概念)
+
 ## 📊 最终统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 |
@@ -21,9 +41,11 @@
 ---
 
 ## 🎯 100% 覆盖领域
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### ✅ 学术文献 (100%)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - PLDI 2024/2025
@@ -131,3 +153,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

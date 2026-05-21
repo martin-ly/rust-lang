@@ -6,10 +6,33 @@
 
 ---
 
+## 📑 目录
+>
+- [1. 概念定义 (Def)](#1-概念定义-def)
+  - [Def CQ1: CQRS (Command Query Responsibility Segregation)](#def-cq1-cqrs-command-query-responsibility-segregation)
+  - [Def CQ2: 命令与查询的分离](#def-cq2-命令与查询的分离)
+  - [Def CQ3: 最终一致性边界](#def-cq3-最终一致性边界)
+- [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+  - [Axiom CQ1: 命令不可重复](#axiom-cq1-命令不可重复)
+  - [Axiom CQ2: 投影单调性](#axiom-cq2-投影单调性)
+  - [Axiom CQ3: 查询一致性级别](#axiom-cq3-查询一致性级别)
+- [3. 定理 (Theorem)](#3-定理-theorem)
+  - [Theorem CQ1: 读写无冲突](#theorem-cq1-读写无冲突)
+  - [Theorem CQ2: 查询可扩展性](#theorem-cq2-查询可扩展性)
+- [4. Rust 实现示例](#4-rust-实现示例)
+- [5. 与其他模式的关系](#5-与其他模式的关系)
+- [🆕 Rust 1.94 深度整合更新](#rust-194-深度整合更新)
+  - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+    - [核心特性应用](#核心特性应用)
+    - [代码示例更新](#代码示例更新)
+    - [相关文档](#相关文档)
+
 ## 1. 概念定义 (Def)
+>
 > **[来源: Rust Official Docs]**
 
 ### Def CQ1: CQRS (Command Query Responsibility Segregation)
+>
 > **[来源: Rust Official Docs]**
 
 CQRS 是一种**读写分离架构模式**，将系统的**命令操作**（写）和**查询操作**（读）分离到不同的模型中。
@@ -25,6 +48,7 @@ CQRS_System := (C, Q, S_c, S_q, P_sync)
 ```
 
 ### Def CQ2: 命令与查询的分离
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -226,3 +250,10 @@ impl<E, S> ProjectionSync<E, S> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [05_distributed 目录](./README.md)
+- [上级目录](../README.md)

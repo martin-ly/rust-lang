@@ -1,10 +1,10 @@
 # 15 交错路由模式 (Interleaved Routing)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [15 交错路由模式 (Interleaved Routing)](#15-交错路由模式-interleaved-routing)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [与并行和顺序的区别](#与并行和顺序的区别)
@@ -26,14 +26,47 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [15 交错路由模式 (Interleaved Routing)](#15-交错路由模式-interleaved-routing)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [与并行和顺序的区别](#与并行和顺序的区别)
+  - [偏序约束](#偏序约束)
+    - [偏序关系定义](#偏序关系定义)
+    - [交错语义](#交错语义)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+  - [形式化语义](#形式化语义)
+    - [状态机形式化](#状态机形式化)
+    - [进程代数](#进程代数)
+  - [正确性证明](#正确性证明)
+    - [互斥性证明](#互斥性证明)
+    - [活性证明](#活性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [顺序执行器](#顺序执行器)
+    - [优先级交错](#优先级交错)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 交错路由模式允许多个活动以任意顺序执行，但任意时刻只有一个活动处于活跃状态。
 与真正的并行不同，这是一种串行化的伪并行。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -606,6 +639,7 @@ $$
 5. **Reisig, W.** (1985). *Petri Nets: An Introduction*. Springer.
 
 6. **Best, E., & Devillers, R.** (1987). "Sequential and Concurrent Behaviour in Petri Net Theory." *Theoretical Computer Science*, 55(1), 87-136.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -617,7 +651,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

@@ -1,6 +1,46 @@
 # 安全关键Rust工具链配置指南
 
+## 📑 目录
+>
+- [安全关键Rust工具链配置指南](#安全关键rust工具链配置指南)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [工具链架构](#工具链架构)
+    - [安全关键工具栈](#安全关键工具栈)
+  - [基础环境配置](#基础环境配置)
+    - [1. Rust工具链安装](#1-rust工具链安装)
+    - [2. Ferrocene工具链 (预认证)](#2-ferrocene工具链-预认证)
+    - [3. 开发工具安装](#3-开发工具安装)
+  - [项目配置](#项目配置)
+    - [Cargo.toml模板](#cargotoml模板)
+    - [rust-toolchain.toml](#rust-toolchaintoml)
+    - [.cargo/config.toml](#cargoconfigtoml)
+  - [Clippy配置](#clippy配置)
+    - [clippy.toml](#clippytoml)
+    - [自定义Lint规则](#自定义lint规则)
+  - [测试配置](#测试配置)
+    - [Miri配置](#miri配置)
+    - [Kani配置](#kani配置)
+    - [Cargo.toml测试配置](#cargotoml测试配置)
+  - [覆盖率配置](#覆盖率配置)
+    - [cargo-tarpaulin](#cargo-tarpaulin)
+    - [tarpaulin.toml](#tarpaulintoml)
+    - [llvm-cov配置](#llvm-cov配置)
+  - [CI/CD配置](#cicd配置)
+    - [GitHub Actions完整配置](#github-actions完整配置)
+  - [文档生成](#文档生成)
+    - [rustdoc配置](#rustdoc配置)
+    - [文档测试](#文档测试)
+  - [依赖管理](#依赖管理)
+    - [cargo-deny配置](#cargo-deny配置)
+    - [Cargo.lock管理](#cargolock管理)
+  - [IDE配置](#ide配置)
+    - [VS Code settings.json](#vs-code-settingsjson)
+  - [*定期更新此文档以反映工具链的最新发展。*](#定期更新此文档以反映工具链的最新发展)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南提供配置Rust工具链以满足安全关键开发要求的详细步骤，涵盖Ferrocene、Miri、Kani等工具的完整配置。
@@ -8,9 +48,11 @@
 ---
 
 ## 工具链架构
+>
 > **[来源: Rust Official Docs]**
 
 ### 安全关键工具栈
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -48,9 +90,11 @@
 ---
 
 ## 基础环境配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. Rust工具链安装
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -68,6 +112,7 @@ rustup default 1.81.0
 ```
 
 ### 2. Ferrocene工具链 (预认证)
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -85,6 +130,7 @@ rustc --version  # 应显示Ferrocene版本
 ```
 
 ### 3. 开发工具安装
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -110,9 +156,11 @@ rustup component add llvm-tools-preview
 ---
 
 ## 项目配置
+>
 > **[来源: Rust Official Docs]**
 
 ### Cargo.toml模板
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -184,6 +232,7 @@ path = "src/main.rs"
 ```
 
 ### rust-toolchain.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -206,6 +255,7 @@ profile = "minimal"
 ```
 
 ### .cargo/config.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -823,7 +873,12 @@ cargo update --workspace --locked --dry-run
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

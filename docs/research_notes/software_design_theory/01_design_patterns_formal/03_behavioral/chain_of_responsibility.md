@@ -1,20 +1,9 @@
 ﻿# Chain of Responsibility 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 行为型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 13 行（Chain of Responsibility）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Chain of Responsibility 结构）](#def-11chain-of-responsibility-结构)
@@ -47,13 +36,67 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 行为型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 13 行（Chain of Responsibility）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Chain of Responsibility 形式化分析](#chain-of-responsibility-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Chain of Responsibility 结构）](#def-11chain-of-responsibility-结构)
+    - [Axiom CR1（链有穷公理）](#axiom-cr1链有穷公理)
+    - [Axiom CR2（请求传递公理）](#axiom-cr2请求传递公理)
+    - [定理 CR-T1（链无悬垂定理）](#定理-cr-t1链无悬垂定理)
+    - [定理 CR-T2（递归处理安全定理）](#定理-cr-t2递归处理安全定理)
+    - [推论 CR-C1（纯 Safe Chain）](#推论-cr-c1纯-safe-chain)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
+  - [典型场景](#典型场景)
+  - [完整场景示例：HTTP 中间件链](#完整场景示例http-中间件链)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例：链中形成环](#反例链中形成环)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Chain of Responsibility 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $H$ 为处理器类型，$R$ 为请求类型。Chain 是一个三元组 $\mathcal{CR} = (H, R, \mathit{next})$，满足：
@@ -69,6 +112,7 @@ $$\mathcal{CR} = \langle H, R, \mathit{next}: \mathrm{Option}\langle \mathrm{Box
 ---
 
 ### Axiom CR1（链有穷公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\forall h: H,\, \text{处理器链有穷；无环}$$
@@ -76,6 +120,7 @@ $$\forall h: H,\, \text{处理器链有穷；无环}$$
 链有穷；无环。
 
 ### Axiom CR2（请求传递公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathrm{None} \land \mathit{handle}(\mathit{next}(h), r)$$
@@ -85,6 +130,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 定理 CR-T1（链无悬垂定理）
+>
 > **[来源: Rust Official Docs]**
 
 `Option<Box<Handler>>` 链由 [ownership_model](../../../formal_methods/ownership_model.md) 保证无悬垂。
@@ -109,6 +155,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 定理 CR-T2（递归处理安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 递归或循环处理时借用规则满足；由 [borrow_checker_proof](../../../formal_methods/borrow_checker_proof.md)。
@@ -137,6 +184,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 ---
 
 ### 推论 CR-C1（纯 Safe Chain）
+>
 > **[来源: Rust Official Docs]**
 
 Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
@@ -153,6 +201,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -164,6 +213,7 @@ Chain 为纯 Safe；`Option<Box<Handler>>` 链式委托，无 `unsafe`。
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -204,6 +254,7 @@ h1.handle(&"B".into());  // 委托至 h2
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -473,3 +524,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [03_behavioral 目录](./README.md)
+- [上级目录](../README.md)

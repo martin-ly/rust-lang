@@ -1,4 +1,20 @@
 # Unsafe Rust
+>
+> **层次定位**: L3 高级概念 / Unsafe 子域索引
+> **前置依赖**: [knowledge 所有权](../../01_fundamentals/ownership.md) · [knowledge 借用](../../01_fundamentals/borrowing.md)
+> **后置延伸**: [knowledge 专家层](../../04_expert/) · [concept L3 Unsafe](../../../concept/03_advanced/03_unsafe.md)
+> **跨层映射**: knowledge→concept 直觉映射 | L3 底层控制
+> **定理链编号**: T-060 unsafe 块 ↔ safe 抽象层可靠性
+
+## 📑 目录
+
+- [Unsafe Rust](#unsafe-rust)
+  - [📑 目录](#-目录)
+  - [📚 内容](#-内容)
+  - [🎯 学习路径](#-学习路径)
+  - [⚠️ 安全提醒](#️-安全提醒)
+  - [🚀 相关层](#-相关层)
+  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
 
 > **Bloom 层级**: 理解
 

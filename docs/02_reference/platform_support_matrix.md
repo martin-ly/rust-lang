@@ -10,10 +10,29 @@
 
 ---
 
+## 📑 目录
+>
+- [一、Rust 1.95.0 新增 / 变更的平台支持](#一rust-1950-新增-变更的平台支持)
+  - [1.1 Tier 2 with Host Tools（新增）](#11-tier-2-with-host-tools新增)
+  - [1.2 Tier 2（新增）](#12-tier-2新增)
+  - [1.3 兼容性变更](#13-兼容性变更)
+- [二、完整平台支持速查表](#二完整平台支持速查表)
+  - [Tier 1（保证可用 + 主机工具 + CI 测试）](#tier-1保证可用-主机工具-ci-测试)
+  - [Tier 2 with Host Tools（交叉编译 + 主机工具）](#tier-2-with-host-tools交叉编译-主机工具)
+  - [Tier 2（交叉编译，无主机工具保证）](#tier-2交叉编译无主机工具保证)
+  - [Tier 3（社区维护，无官方保证）](#tier-3社区维护无官方保证)
+- [三、嵌入式 / 裸机开发注意事项](#三嵌入式-裸机开发注意事项)
+  - [3.1 JSON Target Specs 变更（1.95.0）](#31-json-target-specs-变更1950)
+  - [3.2 Apple 嵌入式平台开发](#32-apple-嵌入式平台开发)
+  - [3.3 PowerPC64 musl 支持](#33-powerpc64-musl-支持)
+- [四、本项目支持的目标](#四本项目支持的目标)
+
 ## 一、Rust 1.95.0 新增 / 变更的平台支持
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 Tier 2 with Host Tools（新增）
+>
 > **[来源: Rust Official Docs]**
 
 | 目标三元组 | 说明 | 起始版本 |
@@ -21,6 +40,7 @@
 | `powerpc64-unknown-linux-musl` | PowerPC64 (大端) Linux with musl libc | 1.95.0 |
 
 ### 1.2 Tier 2（新增）
+>
 > **[来源: Rust Official Docs]**
 
 | 目标三元组 | 说明 | 起始版本 |
@@ -188,7 +208,13 @@ targets = [
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [02_reference 目录](./README.md)
+- [上级目录](../README.md)

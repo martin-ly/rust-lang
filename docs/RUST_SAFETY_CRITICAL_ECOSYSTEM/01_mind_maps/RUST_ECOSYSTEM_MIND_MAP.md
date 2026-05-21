@@ -95,10 +95,23 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust生态系统思维导图](#rust生态系统思维导图)
+  - [📑 目录](#-目录)
+  - [思维导图说明](#思维导图说明)
+    - [核心维度](#核心维度)
+    - [核心安全保证](#核心安全保证)
+    - [应用领域](#应用领域)
+    - [认证工具链](#认证工具链)
+  - [相关概念](#相关概念)
+
 ## 思维导图说明
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心维度
+>
 > **[来源: Rust Official Docs]**
 
 1. **学术理论基础**: Tree Borrows (PLDI 2025), Miri (POPL 2026)
@@ -108,6 +121,7 @@
 5. **教育体系**: Stanford CS110L, CMU 15-411
 
 ### 核心安全保证
+>
 > **[来源: Rust Official Docs]**
 
 - 所有权系统
@@ -129,6 +143,7 @@
 - Ferrocene (TÜV SÜD认证)
 - AdaCore GNAT Pro
 - High Assurance Rust
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -140,7 +155,12 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

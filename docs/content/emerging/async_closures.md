@@ -7,7 +7,29 @@
 
 ---
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🎯 问题与动机](#问题与动机)
+  - [当前的问题](#当前的问题)
+  - [动机](#动机)
+- [💡 解决方案](#解决方案)
+- [📐 语法详解](#语法详解)
+  - [基础语法](#基础语法)
+  - [捕获模式](#捕获模式)
+  - [与 async move 对比](#与-async-move-对比)
+- [🚀 实际应用](#实际应用)
+  - [回调函数](#回调函数)
+  - [事件处理器](#事件处理器)
+  - [中间件链](#中间件链)
+- [🔍 实现细节](#实现细节)
+  - [AsyncFn Trait](#asyncfn-trait)
+- [⚠️ 注意事项](#注意事项)
+  - [当前限制](#当前限制)
+- [🔗 参考资源](#参考资源)
+
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [Async Closures (异步闭包)](#async-closures-异步闭包)
@@ -34,9 +56,11 @@
 ---
 
 ## 🎯 问题与动机
+>
 > **[来源: Rust Official Docs]**
 
 ### 当前的问题
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -55,6 +79,7 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 ```
 
 ### 动机
+>
 > **[来源: Rust Official Docs]**
 
 1. **更清晰的语法**: `async || { }` 比 `|| async move { }` 更直观
@@ -64,6 +89,7 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 ---
 
 ## 💡 解决方案
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -89,9 +115,11 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 ---
 
 ## 📐 语法详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 基础语法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -118,6 +146,7 @@ fn main() {
 ```
 
 ### 捕获模式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -156,6 +185,7 @@ async fn capture_examples() {
 ```
 
 ### 与 async move 对比
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | `|| async move {}` | `async &#124;&#124; {}` |
@@ -187,9 +217,11 @@ fn new_way() -> impl async FnOnce() -> i32 {
 ---
 
 ## 🚀 实际应用
+>
 > **[来源: Rust Official Docs]**
 
 ### 回调函数
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -455,7 +487,13 @@ let f = async || {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [emerging 目录](./README.md)
+- [上级目录](../README.md)

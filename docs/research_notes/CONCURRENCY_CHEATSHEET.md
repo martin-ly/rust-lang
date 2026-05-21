@@ -4,7 +4,43 @@
 
 ---
 
+## 📑 目录
+>
+- [并发速查卡](#并发速查卡)
+  - [📑 目录](#-目录)
+  - [Send与Sync](#send与sync)
+  - [同步原语](#同步原语)
+  - [创建线程](#创建线程)
+  - [Send/Sync](#sendsync)
+  - [共享状态](#共享状态)
+    - [Mutex](#mutex)
+    - [RwLock](#rwlock)
+  - [通道通信](#通道通信)
+    - [mpsc](#mpsc)
+    - [多生产者](#多生产者)
+  - [原子操作](#原子操作)
+    - [内存序](#内存序)
+  - [线程同步](#线程同步)
+    - [Barrier](#barrier)
+    - [Condvar](#condvar)
+  - [线程局部存储](#线程局部存储)
+  - [常见模式](#常见模式)
+    - [线程池](#线程池)
+    - [并行迭代](#并行迭代)
+  - [死锁预防](#死锁预防)
+  - [性能检查清单](#性能检查清单)
+  - [🆕 Rust 1.94 研究更新](#-rust-194-研究更新)
+    - [核心研究点](#核心研究点)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## Send与Sync
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -21,6 +57,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 ---
 
 ## 同步原语
+>
 > **[来源: Rust Official Docs]**
 
 | 原语 | 用途 | 场景 |
@@ -34,6 +71,7 @@ T: Send + Sync      T: Send + !Sync    !Send + !Sync
 ---
 
 ## 创建线程
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -60,6 +98,7 @@ thread::Builder::new()
 ---
 
 ## Send/Sync
+>
 > **[来源: Rust Official Docs]**
 
 | 类型 | `Send` | `Sync` | 说明 |
@@ -75,9 +114,11 @@ thread::Builder::new()
 ---
 
 ## 共享状态
+>
 > **[来源: Rust Official Docs]**
 
 ### Mutex
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -96,6 +137,7 @@ println!("{}", *num);
 ```
 
 ### RwLock
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -117,9 +159,11 @@ let r2 = data.read().unwrap();
 ---
 
 ## 通道通信
+>
 > **[来源: Rust Official Docs]**
 
 ### mpsc
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -142,6 +186,7 @@ for received in rx {
 ```
 
 ### 多生产者
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -163,6 +208,7 @@ for received in rx {
 ---
 
 ## 原子操作
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -384,3 +430,10 @@ vec.par_iter_mut().for_each(|x| *x *= 2);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [research_notes 目录](./README.md)
+- [上级目录](../README.md)

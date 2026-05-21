@@ -4,10 +4,48 @@
 
 ---
 
+## 📑 目录
+>
+- [概念映射：从 Rust 代码到形式化理论](#概念映射从-rust-代码到形式化理论)
+  - [📑 目录](#-目录)
+  - [一、核心概念的三层映射](#一核心概念的三层映射)
+    - [1.1 所有权（Ownership）](#11-所有权ownership)
+    - [1.2 借用（Borrowing）](#12-借用borrowing)
+    - [1.3 生命周期（Lifetime）](#13-生命周期lifetime)
+  - [二、类型系统的映射](#二类型系统的映射)
+    - [2.1 基础类型](#21-基础类型)
+    - [2.2 复合类型](#22-复合类型)
+    - [2.3 用户定义类型](#23-用户定义类型)
+  - [三、表达式映射](#三表达式映射)
+    - [3.1 变量和值](#31-变量和值)
+    - [3.2 借用和解引用](#32-借用和解引用)
+    - [3.3 控制流](#33-控制流)
+  - [四、判断的映射](#四判断的映射)
+    - [4.1 类型判断](#41-类型判断)
+    - [4.2 语义判断](#42-语义判断)
+    - [4.3 安全性判断](#43-安全性判断)
+  - [五、从 Rust 程序到形式化证明](#五从-rust-程序到形式化证明)
+    - [5.1 完整示例](#51-完整示例)
+    - [5.2 定理应用](#52-定理应用)
+  - [六、概念层次图](#六概念层次图)
+    - [6.1 从具体到抽象](#61-从具体到抽象)
+    - [6.2 形式化层次](#62-形式化层次)
+  - [七、常见模式和对应](#七常见模式和对应)
+    - [7.1 所有权转移模式](#71-所有权转移模式)
+    - [7.2 借用模式](#72-借用模式)
+    - [7.3 生命周期模式](#73-生命周期模式)
+  - [八、从形式化回到 Rust](#八从形式化回到-rust)
+    - [8.1 形式化结果的解释](#81-形式化结果的解释)
+    - [8.2 形式化对 Rust 编程的指导](#82-形式化对-rust-编程的指导)
+  - [九、总结](#九总结)
+  - [相关概念](#相关概念)
+
 ## 一、核心概念的三层映射
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权（Ownership）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
@@ -29,6 +67,7 @@ Definition move_var (Γ : type_env) (x : var) : type_env :=
 ```
 
 ### 1.2 借用（Borrowing）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Rust 代码 | 直觉概念 | 形式化定义 |
@@ -482,7 +521,13 @@ fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

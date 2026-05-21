@@ -11,6 +11,7 @@
 ---
 
 ## 形式化链接
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 路径 | 内容 |
@@ -24,9 +25,11 @@
 ---
 
 ## 基准测试核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 为什么需要基准测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -48,6 +51,7 @@ fn fibonacci(n: u64) -> u64 {
 ```
 
 ### 使用 Criterion 进行可靠基准测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -85,6 +89,7 @@ criterion_main!(benches);
 ```
 
 ### 防止编译器优化（black_box）
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -112,6 +117,7 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 ```
 
 ### 参数化基准测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -140,6 +146,7 @@ fn bench_various_sizes(c: &mut Criterion) {
 ```
 
 ### 比较不同实现
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -189,6 +196,7 @@ fn bench_comparison(c: &mut Criterion) {
 ```
 
 ### 异步基准测试
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -216,6 +224,7 @@ fn bench_async(c: &mut Criterion) {
 ```
 
 ### 吞吐量测量
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -243,9 +252,11 @@ fn bench_with_throughput(c: &mut Criterion) {
 ---
 
 ## 基准测试最佳实践
+>
 > **[来源: Rust Official Docs]**
 
 ### 统计显著性
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -339,6 +350,36 @@ $ cargo bench -- --profile-time 10
 $ perf record -g target/release/deps/my_benchmark-xxx --bench
 $ perf report
 ```
+
+## 📑 目录
+>
+- [基准测试最小指南](#基准测试最小指南)
+  - [形式化链接](#形式化链接)
+  - [基准测试核心概念](#基准测试核心概念)
+    - [为什么需要基准测试](#为什么需要基准测试)
+    - [使用 Criterion 进行可靠基准测试](#使用-criterion-进行可靠基准测试)
+    - [防止编译器优化（black\_box）](#防止编译器优化black_box)
+    - [参数化基准测试](#参数化基准测试)
+    - [比较不同实现](#比较不同实现)
+    - [异步基准测试](#异步基准测试)
+    - [吞吐量测量](#吞吐量测量)
+  - [基准测试最佳实践](#基准测试最佳实践)
+    - [统计显著性](#统计显著性)
+    - [预热与稳定](#预热与稳定)
+    - [基准测试隔离](#基准测试隔离)
+  - [性能分析工具集成](#性能分析工具集成)
+    - [使用 perf 分析](#使用-perf-分析)
+  - [📑 目录](#-目录)
+    - [使用 cargo-flamegraph](#使用-cargo-flamegraph)
+    - [内存分配分析](#内存分配分析)
+  - [常见陷阱与避免方法](#常见陷阱与避免方法)
+  - [快速开始模板](#快速开始模板)
+  - [相关研究笔记](#相关研究笔记)
+    - [实验分析](#实验分析)
+    - [工具链](#工具链)
+  - [相关 crates](#相关-crates)
+  - [| divan | 快速基准测试 | crates.io |](#-divan--快速基准测试--cratesio-)
+  - [相关概念](#相关概念)
 
 ### 使用 cargo-flamegraph
 
@@ -499,6 +540,7 @@ criterion_main!(benches);
 | criterion | 统计基准测试框架 | crates.io |
 | iai | 指令计数基准测试 | crates.io |
 | divan | 快速基准测试 | crates.io |
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -509,3 +551,10 @@ criterion_main!(benches);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [02_programming_paradigms 目录](./README.md)
+- [上级目录](../README.md)

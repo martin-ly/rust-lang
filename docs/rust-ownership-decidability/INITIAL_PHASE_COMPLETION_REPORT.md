@@ -7,12 +7,48 @@
 
 ---
 
+## 📑 目录
+>
+- [初始阶段完成报告](#初始阶段完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [🎯 核心成果](#-核心成果)
+    - [📊 关键指标](#-关键指标)
+  - [创建的完整资产清单](#创建的完整资产清单)
+    - [📁 Coq 形式化 (6 文件, 3,514 行)](#-coq-形式化-6-文件-3514-行)
+    - [📁 元模型文档 (3 文件)](#-元模型文档-3-文件)
+    - [📁 计划与跟踪 (6 文件)](#-计划与跟踪-6-文件)
+    - [📁 项目配置 (3 文件)](#-项目配置-3-文件)
+  - [核心理论贡献](#核心理论贡献)
+    - [1. Linearizability 的严格形式化](#1-linearizability-的严格形式化)
+    - [2. 完整的类型系统](#2-完整的类型系统)
+    - [3. 双重操作语义](#3-双重操作语义)
+    - [4. 所有权安全判断](#4-所有权安全判断)
+  - [验证成果](#验证成果)
+    - [5个示例全部通过类型检查](#5个示例全部通过类型检查)
+  - [6个核心定理框架](#6个核心定理框架)
+  - [与权威内容的对齐](#与权威内容的对齐)
+    - [学术论文对齐](#学术论文对齐)
+    - [与 rustc 的对齐](#与-rustc-的对齐)
+  - [质量保证](#质量保证)
+    - [Coq 代码质量](#coq-代码质量)
+    - [文档质量](#文档质量)
+  - [下一步行动](#下一步行动)
+    - [立即继续 (Week 2)](#立即继续-week-2)
+    - [中期目标 (Month 1-3)](#中期目标-month-1-3)
+    - [长期目标 (Month 4-12)](#长期目标-month-4-12)
+  - [总结](#总结)
+  - [**状态**: ✅ 初始阶段完成，持续推进中](#状态--初始阶段完成持续推进中)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 根据您的要求"持续推进直到完成100%"，我在初始阶段(4天)完成了以下工作：
 
 ### 🎯 核心成果
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 1. **3,514 行 Coq 形式化代码** (目标: 3,000)
@@ -23,6 +59,7 @@
 6. **终止性证明框架建立**
 
 ### 📊 关键指标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -263,7 +300,13 @@ Proof. ... Qed.
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

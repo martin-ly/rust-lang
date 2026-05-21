@@ -4,10 +4,47 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 可视化思维指南](#rust-所有权系统---可视化思维指南)
+  - [📑 目录](#-目录)
+  - [1. 核心概念视觉化](#1-核心概念视觉化)
+    - [1.1 所有权的视觉隐喻](#11-所有权的视觉隐喻)
+    - [1.2 生命周期的时间线视图](#12-生命周期的时间线视图)
+    - [1.3 借用规则的 Venn 图](#13-借用规则的-venn-图)
+  - [2. 决策流程图](#2-决策流程图)
+    - [2.1 是否需要所有权转移？](#21-是否需要所有权转移)
+    - [2.2 选择引用类型](#22-选择引用类型)
+    - [2.3 生命周期标注决策](#23-生命周期标注决策)
+  - [3. 层次结构图](#3-层次结构图)
+    - [3.1 Rust 抽象层次塔](#31-rust-抽象层次塔)
+    - [3.2 类型系统层次](#32-类型系统层次)
+  - [4. 状态转换图](#4-状态转换图)
+    - [4.1 变量的生命周期状态](#41-变量的生命周期状态)
+    - [4.2 引用的状态机](#42-引用的状态机)
+  - [5. 对比矩阵](#5-对比矩阵)
+    - [5.1 所有权 vs 借用 vs 引用](#51-所有权-vs-借用-vs-引用)
+    - [5.2 Copy vs Clone vs Move](#52-copy-vs-clone-vs-move)
+    - [5.3 生命周期标注场景](#53-生命周期标注场景)
+  - [6. 实例图解](#6-实例图解)
+    - [6.1 向量操作的内存布局](#61-向量操作的内存布局)
+    - [6.2 借用检查器的工作原理](#62-借用检查器的工作原理)
+  - [7. 学习路径图](#7-学习路径图)
+    - [7.1 从初学者到专家的进阶](#71-从初学者到专家的进阶)
+    - [7.2 常见错误的诊断流程](#72-常见错误的诊断流程)
+  - [8. 快速参考卡](#8-快速参考卡)
+    - [8.1 所有权规则速查](#81-所有权规则速查)
+    - [8.2 类型选择决策卡](#82-类型选择决策卡)
+  - [总结](#总结)
+  - [**建议**: 将这些可视化与代码实践结合，加深理解。](#建议-将这些可视化与代码实践结合加深理解)
+  - [相关概念](#相关概念)
+
 ## 1. 核心概念视觉化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 所有权的视觉隐喻
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -42,6 +79,7 @@
 ```
 
 ### 1.2 生命周期的时间线视图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -518,7 +556,7 @@ Dropped:
 5. **对比矩阵** - 快速参考
 6. **实例图解** - 具体场景理解
 
-**建议**: 将这些可视化与代码实践结合，加深理解。
+**建议**: 将这些可视化与代码实践结合，加深理解
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -530,7 +568,13 @@ Dropped:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

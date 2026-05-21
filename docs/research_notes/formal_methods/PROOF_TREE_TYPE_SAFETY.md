@@ -6,10 +6,34 @@
 
 ---
 
+## 📑 目录
+>
+- [证明树：类型安全定理](#证明树类型安全定理)
+  - [📑 目录](#-目录)
+  - [定理陈述](#定理陈述)
+    - [Thm TY-T1 (类型安全)](#thm-ty-t1-类型安全)
+  - [证明树可视化](#证明树可视化)
+  - [形式化证明](#形式化证明)
+    - [进展性 (Progress)](#进展性-progress)
+    - [保持性 (Preservation)](#保持性-preservation)
+  - [Rust特定考虑](#rust特定考虑)
+    - [所有权与类型安全](#所有权与类型安全)
+    - [借用与类型安全](#借用与类型安全)
+  - [与其他定理的关系](#与其他定理的关系)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 定理陈述
+>
 > **[来源: Rust Official Docs]**
 
 ### Thm TY-T1 (类型安全)
+>
 > **[来源: Rust Official Docs]**
 
 对于良型程序 $e$，满足：
@@ -24,6 +48,7 @@
 ---
 
 ## 证明树可视化
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -82,9 +107,11 @@ graph TD
 ---
 
 ## 形式化证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 进展性 (Progress)
+>
 > **[来源: Rust Official Docs]**
 
 **定理**: 若 $\Gamma \vdash e : \tau$，则 $e$ 是值或存在 $e'$ 使 $e \to e'$。
@@ -115,6 +142,7 @@ graph TD
 - 若是值，则 $e$ 是值 (引用值)
 
 ### 保持性 (Preservation)
+>
 > **[来源: Rust Official Docs]**
 
 **定理**: 若 $\Gamma \vdash e : \tau$ 且 $e \to e'$，则 $\Gamma \vdash e' : \tau$。
@@ -145,9 +173,11 @@ $$
 ---
 
 ## Rust特定考虑
+>
 > **[来源: Rust Official Docs]**
 
 ### 所有权与类型安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -158,6 +188,7 @@ let s2 = s;                      // s2: String, s 失效
 ```
 
 ### 借用与类型安全
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -171,6 +202,7 @@ let r2: &&i32 = &r;      // &'b &'a i32
 ---
 
 ## 与其他定理的关系
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -189,6 +221,7 @@ let r2: &&i32 = &r;      // &'b &'a i32
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: Rust Official Docs]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
@@ -235,3 +268,10 @@ let r2: &&i32 = &r;      // &'b &'a i32
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

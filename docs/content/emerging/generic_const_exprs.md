@@ -7,11 +7,11 @@
 
 ---
 
-## 📋 目录
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
     - [为什么需要这个特性？](#为什么需要这个特性)
   - [💡 核心概念](#-核心概念)
@@ -31,15 +31,46 @@
     - [对比: 使用 const generics vs generic\_const\_exprs](#对比-使用-const-generics-vs-generic_const_exprs)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]**
+
+- [Generic Const Expressions (泛型常量表达式)](#generic-const-expressions-泛型常量表达式)
+  - [� 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [🎯 概述](#-概述)
+    - [为什么需要这个特性？](#为什么需要这个特性)
+  - [💡 核心概念](#-核心概念)
+    - [常量表达式泛型](#常量表达式泛型)
+  - [📐 语法详解](#-语法详解)
+    - [基础用法](#基础用法)
+    - [复杂表达式](#复杂表达式)
+    - [类型级计算](#类型级计算)
+  - [🚀 实际应用](#-实际应用)
+    - [编译时矩阵运算](#编译时矩阵运算)
+    - [类型级数值计算](#类型级数值计算)
+    - [固定大小数据结构](#固定大小数据结构)
+  - [⚠️ 限制与注意事项](#️-限制与注意事项)
+    - [当前限制](#当前限制)
+    - [递归限制](#递归限制)
+  - [🔄 与现有方案对比](#-与现有方案对比)
+    - [对比: 使用 const generics vs generic\_const\_exprs](#对比-使用-const-generics-vs-generic_const_exprs)
+  - [🔗 参考资源](#-参考资源)
+  - [**状态**: 🧪 不稳定特性，需要 nightly](#状态--不稳定特性需要-nightly)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表达式**，超越了简单的整数常量。
 
 ### 为什么需要这个特性？
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -60,9 +91,11 @@ where
 ---
 
 ## 💡 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### 常量表达式泛型
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -102,9 +135,11 @@ let mat: Matrix<i32, 3, 4> = Matrix::new([0; 12]);  // 3 * 4 = 12
 ---
 
 ## 📐 语法详解
+>
 > **[来源: Rust Official Docs]**
 
 ### 基础用法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -134,6 +169,7 @@ where
 ```
 
 ### 复杂表达式
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -160,6 +196,7 @@ let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 ```
 
 ### 类型级计算
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -186,9 +223,11 @@ where
 ---
 
 ## 🚀 实际应用
+>
 > **[来源: Rust Official Docs]**
 
 ### 编译时矩阵运算
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -418,7 +457,13 @@ where
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [emerging 目录](./README.md)
+- [上级目录](../README.md)

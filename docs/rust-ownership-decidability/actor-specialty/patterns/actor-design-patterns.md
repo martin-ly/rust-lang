@@ -4,10 +4,34 @@
 
 ---
 
+## 📑 目录
+>
+- [Actor设计模式](#actor设计模式)
+  - [📑 目录](#-目录)
+  - [1. 基础模式](#1-基础模式)
+    - [1.1 Ask vs Tell模式](#11-ask-vs-tell模式)
+    - [1.2 前摄模式 (Proactor Pattern)](#12-前摄模式-proactor-pattern)
+  - [2. 监督模式](#2-监督模式)
+    - [2.1 监督者模式](#21-监督者模式)
+    - [2.2 Circuit Breaker模式](#22-circuit-breaker模式)
+  - [3. 路由模式](#3-路由模式)
+    - [3.1 负载均衡路由](#31-负载均衡路由)
+    - [3.2 一致性哈希路由](#32-一致性哈希路由)
+  - [4. 状态管理模式](#4-状态管理模式)
+    - [4.1 有限状态机 (FSM)](#41-有限状态机-fsm)
+    - [4.2 Event Sourcing](#42-event-sourcing)
+  - [5. 通信模式](#5-通信模式)
+    - [5.1 Pub-Sub模式](#51-pub-sub模式)
+    - [5.2 请求管道](#52-请求管道)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 基础模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Ask vs Tell模式
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -32,6 +56,7 @@ let result = tokio::time::timeout(
 - **Ask**: 需要结果、需要确认、同步需求场景
 
 ### 1.2 前摄模式 (Proactor Pattern)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -410,7 +435,12 @@ let stage_a = PipelineStage::new(processor_a, Some(stage_b));
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

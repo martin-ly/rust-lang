@@ -4,10 +4,44 @@
 
 ---
 
+## 📑 目录
+>
+- [分布式Actor形式化分析](#分布式actor形式化分析)
+  - [📑 目录](#-目录)
+  - [1. 分布式Actor基础](#1-分布式actor基础)
+    - [1.1 形式化定义](#11-形式化定义)
+    - [1.2 消息传递语义](#12-消息传递语义)
+  - [2. CAP定理与Actor](#2-cap定理与actor)
+    - [2.1 CAP定理形式化](#21-cap定理形式化)
+    - [2.2 Actor系统CAP选择](#22-actor系统cap选择)
+    - [2.3 定理 ACTOR-CAP-TRADE-OFF](#23-定理-actor-cap-trade-off)
+  - [3. 一致性模型](#3-一致性模型)
+    - [3.1 一致性谱系](#31-一致性谱系)
+    - [3.2 因果一致性](#32-因果一致性)
+    - [3.3 Vector Clocks实现](#33-vector-clocks实现)
+  - [4. 分布式协议](#4-分布式协议)
+    - [4.1 Gossip协议](#41-gossip协议)
+    - [4.2 Raft共识](#42-raft共识)
+    - [4.3 CRDTs (无冲突复制数据类型)](#43-crdts-无冲突复制数据类型)
+  - [5. Saga分布式事务](#5-saga分布式事务)
+    - [5.1 Saga形式化](#51-saga形式化)
+    - [5.2 Saga与2PC对比](#52-saga与2pc对比)
+    - [5.3 Saga协调器Actor](#53-saga协调器actor)
+  - [6. 网络分区处理](#6-网络分区处理)
+    - [6.1 分区检测](#61-分区检测)
+    - [6.2 分区恢复策略](#62-分区恢复策略)
+  - [7. coerce框架分布式特性](#7-coerce框架分布式特性)
+    - [7.1 集群架构](#71-集群架构)
+    - [7.2 分片配置](#72-分片配置)
+  - [**覆盖**: CAP定理、一致性模型、分布式协议、Saga、CRDT](#覆盖-cap定理一致性模型分布式协议sagacrdt)
+  - [相关概念](#相关概念)
+
 ## 1. 分布式Actor基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -25,6 +59,7 @@
 ```
 
 ### 1.2 消息传递语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -517,7 +552,12 @@ async fn handle_user_command(cmd: UserCmd, cluster: &Cluster) {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

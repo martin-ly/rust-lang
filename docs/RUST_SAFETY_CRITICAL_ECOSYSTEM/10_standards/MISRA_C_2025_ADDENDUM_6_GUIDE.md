@@ -1,6 +1,40 @@
 # MISRA C:2025 Addendum 6 - Rust应用指南
 
+## 📑 目录
+>
+- [MISRA C:2025 Addendum 6 - Rust应用指南](#misra-c2025-addendum-6---rust应用指南)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [核心发现](#核心发现)
+    - [规则映射统计](#规则映射统计)
+  - [详细规则映射](#详细规则映射)
+    - [1. 标准C环境 (Rules 1.x)](#1-标准c环境-rules-1x)
+    - [2. 未使用代码 (Rules 2.x)](#2-未使用代码-rules-2x)
+    - [3. 注释 (Rules 3.x)](#3-注释-rules-3x)
+    - [4. 标识符 (Rules 5.x)](#4-标识符-rules-5x)
+    - [5. 类型系统 (Rules 6.x, 7.x)](#5-类型系统-rules-6x-7x)
+    - [6. 字面量和常量 (Rules 8.x)](#6-字面量和常量-rules-8x)
+    - [7. 指针和数组 (Rules 11.x, 18.x) - 关键章节](#7-指针和数组-rules-11x-18x---关键章节)
+    - [8. 内存管理 (Rules 21.x, 22.x) - Rust强项](#8-内存管理-rules-21x-22x---rust强项)
+  - [Rust特定优势](#rust特定优势)
+    - [编译器自动保证的类别](#编译器自动保证的类别)
+  - [实施建议](#实施建议)
+    - [对于新项目](#对于新项目)
+    - [对于C到Rust迁移](#对于c到rust迁移)
+  - [工具配置](#工具配置)
+    - [Clippy配置 (MISRA风格)](#clippy配置-misra风格)
+    - [编译器标志](#编译器标志)
+  - [认证文档模板](#认证文档模板)
+    - [Rust MISRA合规声明](#rust-misra合规声明)
+  - [未来展望](#未来展望)
+    - [MISRA Rust标准](#misra-rust标准)
+    - [参与机会](#参与机会)
+  - [参考资源](#参考资源)
+  - [**基于**: MISRA C:2025 Addendum 6 (March 2025)](#基于-misra-c2025-addendum-6-march-2025)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 **文档**: MISRA C:2025 Addendum 6
@@ -11,9 +45,11 @@
 ---
 
 ## 核心发现
+>
 > **[来源: Rust Official Docs]**
 
 ### 规则映射统计
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -42,9 +78,11 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 详细规则映射
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 标准C环境 (Rules 1.x)
+>
 > **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust保证 | 调整后级别 |
@@ -59,6 +97,7 @@ MISRA C:2025 总规则数: 143
 - 相比C的隐式UB，这是安全改进
 
 ### 2. 未使用代码 (Rules 2.x)
+>
 > **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust编译器 | 调整后级别 |
@@ -72,6 +111,7 @@ MISRA C:2025 总规则数: 143
 | R2.7 | 无未使用参数 | 编译器警告 | Advisory |
 
 ### 3. 注释 (Rules 3.x)
+>
 > **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust支持 | 调整后级别 |
@@ -82,6 +122,7 @@ MISRA C:2025 总规则数: 143
 **注意**: Rust原生支持嵌套`/* */`注释，这是C不支持的特性
 
 ### 4. 标识符 (Rules 5.x)
+>
 > **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust差异 | 调整后级别 |
@@ -95,6 +136,7 @@ MISRA C:2025 总规则数: 143
 | R5.7 | 标识符区分 | 编译器警告 | Advisory |
 
 ### 5. 类型系统 (Rules 6.x, 7.x)
+>
 > **[来源: Rust Official Docs]**
 
 **这是Rust最强的领域！**
@@ -109,6 +151,7 @@ MISRA C:2025 总规则数: 143
 | R7.4 | 字符串常量const | 自动 | Required (自动) |
 
 ### 6. 字面量和常量 (Rules 8.x)
+>
 > **[来源: Rust Official Docs]**
 
 | 规则 | MISRA要求 | Rust特性 | 调整后级别 |
@@ -129,6 +172,7 @@ MISRA C:2025 总规则数: 143
 | R8.14 | 变量声明限制 | let语句 | Required (自动) |
 
 ### 7. 指针和数组 (Rules 11.x, 18.x) - 关键章节
+>
 > **[来源: Rust Official Docs]**
 
 **Rust借用检查器自动保证的关键规则:**
@@ -367,7 +411,12 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

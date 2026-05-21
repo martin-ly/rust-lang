@@ -4,10 +4,41 @@
 
 ---
 
+## 📑 目录
+>
+- [高级所有权模式](#高级所有权模式)
+  - [📑 目录](#-目录)
+  - [1. 自引用结构](#1-自引用结构)
+    - [1.1 问题与解决方案](#11-问题与解决方案)
+    - [1.2 rental / ouroboros crate](#12-rental--ouroboros-crate)
+  - [2. 所有权递归模式](#2-所有权递归模式)
+    - [2.1 链表实现](#21-链表实现)
+    - [2.2 Rc/Arc共享所有权](#22-rcarc共享所有权)
+  - [3. 类型擦除与所有权](#3-类型擦除与所有权)
+    - [3.1 Trait对象](#31-trait对象)
+    - [3.2 自定义vtable](#32-自定义vtable)
+  - [4. 编译时所有权检查](#4-编译时所有权检查)
+    - [4.1 类型状态高级模式](#41-类型状态高级模式)
+  - [5. 零拷贝模式](#5-零拷贝模式)
+    - [5.1 视图与切片](#51-视图与切片)
+    - [5.2 IoSlice](#52-ioslice)
+  - [6. 所有权与异步](#6-所有权与异步)
+    - [6.1 Pin的深入理解](#61-pin的深入理解)
+    - [6.2 Stream模式](#62-stream模式)
+  - [7. 内存布局优化](#7-内存布局优化)
+    - [7.1 内存对齐](#71-内存对齐)
+    - [7.2 SoA vs AoS](#72-soa-vs-aos)
+  - [8. 所有权与FFI](#8-所有权与ffi)
+    - [8.1 安全封装](#81-安全封装)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 自引用结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题与解决方案
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -67,6 +98,7 @@ impl SelfReferential {
 ```
 
 ### 1.2 rental / ouroboros crate
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -692,7 +724,12 @@ impl Drop for SecureContext {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

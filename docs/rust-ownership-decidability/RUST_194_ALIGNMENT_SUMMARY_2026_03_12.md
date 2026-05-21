@@ -7,12 +7,54 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 Alignment - 全面推进完成总结](#rust-194-alignment---全面推进完成总结)
+  - [📑 目录](#-目录)
+  - [🎯 任务完成概览](#-任务完成概览)
+    - [完成统计](#完成统计)
+  - [✅ 具体完成内容](#-具体完成内容)
+    - [1. 核心概念文档 (`01-core-concepts/`)](#1-核心概念文档-01-core-concepts)
+    - [2. 验证工具文档 (`03-verification-tools/`)](#2-验证工具文档-03-verification-tools)
+    - [3. 高级主题文档 (`08-advanced-topics/`)](#3-高级主题文档-08-advanced-topics)
+    - [4. 并发模式文档 (`12-concurrency-patterns/`)](#4-并发模式文档-12-concurrency-patterns)
+    - [5. 新建标准库API指南](#5-新建标准库api指南)
+      - [核心API](#核心api)
+      - [SIMD](#simd)
+      - [Cargo](#cargo)
+    - [6. 形式化证明审查与修正](#6-形式化证明审查与修正)
+      - [虚构特性 (已标记)](#虚构特性-已标记)
+      - [证明完成度 (已修正)](#证明完成度-已修正)
+  - [📊 文档对齐状态](#-文档对齐状态)
+  - [🔍 关键发现](#-关键发现)
+    - [真实Rust 1.94特性 (已文档化)](#真实rust-194特性-已文档化)
+    - [虚构特性 (已标记)](#虚构特性-已标记-1)
+    - [证明状态 (已透明化)](#证明状态-已透明化)
+  - [📁 新增/更新文件清单](#-新增更新文件清单)
+    - [新建文件](#新建文件)
+    - [主要更新文件](#主要更新文件)
+  - [🎯 质量检查](#-质量检查)
+    - [代码验证](#代码验证)
+    - [内容准确性](#内容准确性)
+    - [文档完整性](#文档完整性)
+  - [🚀 建议后续工作](#-建议后续工作)
+    - [高优先级](#高优先级)
+    - [中优先级](#中优先级)
+  - [📝 结论](#-结论)
+    - [成就](#成就)
+    - [局限](#局限)
+    - [总体评价](#总体评价)
+  - [**状态**: ✅ 完成](#状态--完成)
+  - [相关概念](#相关概念)
+
 ## 🎯 任务完成概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本次全面推进对 `rust-ownership-decidability` 知识库完成了全面的 Rust 1.94 alignment 工作。
 
 ### 完成统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 模块 | 文件数 | 状态 | 主要工作 |
@@ -27,6 +69,7 @@
 ---
 
 ## ✅ 具体完成内容
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 核心概念文档 (`01-core-concepts/`)
@@ -290,7 +333,13 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

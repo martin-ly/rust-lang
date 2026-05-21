@@ -4,10 +4,40 @@
 
 ---
 
+## 📑 目录
+>
+- [Actix-web 生产环境案例分析](#actix-web-生产环境案例分析)
+  - [📑 目录](#-目录)
+  - [1. 项目概览](#1-项目概览)
+    - [1.1 基本信息](#11-基本信息)
+    - [1.2 架构定位](#12-架构定位)
+  - [2. Actor架构实现](#2-actor架构实现)
+    - [2.1 连接管理Actor](#21-连接管理actor)
+    - [2.2 服务器Actor架构](#22-服务器actor架构)
+  - [3. 性能特征分析](#3-性能特征分析)
+    - [3.1 基准测试数据](#31-基准测试数据)
+    - [3.2 与其他框架对比](#32-与其他框架对比)
+  - [4. 路由与处理器](#4-路由与处理器)
+    - [4.1 Actor-based路由](#41-actor-based路由)
+    - [4.2 WebSocket Actor](#42-websocket-actor)
+  - [5. 中间件系统](#5-中间件系统)
+    - [5.1 Actor-based中间件](#51-actor-based中间件)
+  - [6. 生产环境最佳实践](#6-生产环境最佳实践)
+    - [6.1 配置优化](#61-配置优化)
+    - [6.2 错误处理](#62-错误处理)
+  - [7. 形式化安全分析](#7-形式化安全分析)
+    - [7.1 内存安全保证](#71-内存安全保证)
+    - [7.2 并发安全保证](#72-并发安全保证)
+  - [8. 与其他框架对比](#8-与其他框架对比)
+  - [**Actix-web版本**: 4.x](#actix-web版本-4x)
+  - [相关概念](#相关概念)
+
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 基本信息
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 属性 | 值 |
@@ -21,6 +51,7 @@
 | 维护者 | Nikolay Kim, Rob Ede, fakeshadow |
 
 ### 1.2 架构定位
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -448,7 +479,12 @@ async fn handler() -> Result<HttpResponse, AppError> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

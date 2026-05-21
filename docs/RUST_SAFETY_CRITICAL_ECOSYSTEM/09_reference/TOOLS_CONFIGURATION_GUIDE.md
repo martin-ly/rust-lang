@@ -1,6 +1,45 @@
 # Rust安全关键系统 - 工具配置指南
 
+## 📑 目录
+>
+- [Rust安全关键系统 - 工具配置指南](#rust安全关键系统---工具配置指南)
+  - [📑 目录](#-目录)
+  - [工具链概述](#工具链概述)
+  - [开发环境配置](#开发环境配置)
+    - [推荐IDE设置](#推荐ide设置)
+      - [VSCode配置 (.vscode/settings.json)](#vscode配置-vscodesettingsjson)
+      - [VSCode扩展推荐 (.vscode/extensions.json)](#vscode扩展推荐-vscodeextensionsjson)
+    - [Rust工具链安装脚本](#rust工具链安装脚本)
+  - [静态分析工具](#静态分析工具)
+    - [Clippy配置详解](#clippy配置详解)
+      - [项目级配置 (clippy.toml)](#项目级配置-clippytoml)
+      - [严格模式配置 (用于ASIL D)](#严格模式配置-用于asil-d)
+    - [Cargo Audit配置](#cargo-audit配置)
+      - [自动化审计脚本](#自动化审计脚本)
+      - [忽略配置 (.cargo/audit.toml)](#忽略配置-cargoaudittoml)
+  - [测试工具配置](#测试工具配置)
+    - [Miri配置](#miri配置)
+      - [运行脚本](#运行脚本)
+      - [项目配置 (.cargo/config.toml)](#项目配置-cargoconfigtoml)
+    - [Kani配置](#kani配置)
+      - [验证脚本](#验证脚本)
+      - [Kani配置 (kani.toml)](#kani配置-kanitoml)
+    - [测试覆盖率](#测试覆盖率)
+      - [Tarpaulin配置](#tarpaulin配置)
+      - [配置文件 (.tarpaulin.toml)](#配置文件-tarpaulintoml)
+  - [嵌入式开发工具](#嵌入式开发工具)
+    - [交叉编译配置](#交叉编译配置)
+      - [.cargo/config.toml完整配置](#cargoconfigtoml完整配置)
+    - [调试配置](#调试配置)
+      - [VSCode调试配置 (.vscode/launch.json)](#vscode调试配置-vscodelaunchjson)
+  - [CI/CD配置](#cicd配置)
+    - [GitHub Actions完整配置](#github-actions完整配置)
+  - [工具速查表](#工具速查表)
+  - [**维护者**: Rust安全关键系统工作组](#维护者-rust安全关键系统工作组)
+  - [相关概念](#相关概念)
+
 ## 工具链概述
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -29,12 +68,15 @@
 ---
 
 ## 开发环境配置
+>
 > **[来源: Rust Official Docs]**
 
 ### 推荐IDE设置
+>
 > **[来源: Rust Official Docs]**
 
 #### VSCode配置 (.vscode/settings.json)
+>
 > **[来源: Rust Official Docs]**
 
 ```json
@@ -68,6 +110,7 @@
 ```
 
 #### VSCode扩展推荐 (.vscode/extensions.json)
+>
 > **[来源: Rust Official Docs]**
 
 ```json
@@ -85,6 +128,7 @@
 ```
 
 ### Rust工具链安装脚本
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -151,12 +195,15 @@ echo "Please restart your terminal or run 'source $HOME/.cargo/env'"
 ---
 
 ## 静态分析工具
+>
 > **[来源: Rust Official Docs]**
 
 ### Clippy配置详解
+>
 > **[来源: Rust Official Docs]**
 
 #### 项目级配置 (clippy.toml)
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -208,6 +255,7 @@ test-stdin-width = 120
 ```
 
 #### 严格模式配置 (用于ASIL D)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -232,6 +280,7 @@ test-stdin-width = 120
 ```
 
 ### Cargo Audit配置
+>
 > **[来源: Rust Official Docs]**
 
 #### 自动化审计脚本
@@ -701,7 +750,12 @@ jobs:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

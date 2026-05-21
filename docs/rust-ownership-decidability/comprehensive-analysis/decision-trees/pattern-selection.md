@@ -1,6 +1,22 @@
 # 设计模式选择决策树
 
+## 📑 目录
+>
+- [设计模式选择决策树](#设计模式选择决策树)
+  - [📑 目录](#-目录)
+  - [交互式决策流程](#交互式决策流程)
+  - [模式分类决策树](#模式分类决策树)
+    - [1. 对象创建](#1-对象创建)
+    - [2. 并发模式](#2-并发模式)
+    - [3. 错误处理模式](#3-错误处理模式)
+  - [快速选择表](#快速选择表)
+  - [模式组合建议](#模式组合建议)
+    - [常见组合](#常见组合)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 交互式决策流程
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -53,9 +69,11 @@
 ---
 
 ## 模式分类决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 对象创建
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -192,7 +210,12 @@ select! {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

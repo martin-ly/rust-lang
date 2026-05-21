@@ -6,6 +6,32 @@
 
 ---
 
+## 📑 目录
+>
+- [重试模式形式化定义](#重试模式形式化定义)
+  - [📑 目录](#-目录)
+  - [1. 概念定义 (Def)](#1-概念定义-def)
+    - [Def RT1: Retry](#def-rt1-retry)
+    - [Def RT2: 退避策略](#def-rt2-退避策略)
+    - [Def RT3: 抖动 (Jitter)](#def-rt3-抖动-jitter)
+  - [2. 基本假设 (Axiom)](#2-基本假设-axiom)
+    - [Axiom RT1: 重试次数有界](#axiom-rt1-重试次数有界)
+    - [Axiom RT2: 幂等性要求](#axiom-rt2-幂等性要求)
+    - [Axiom RT3: 退避单调性](#axiom-rt3-退避单调性)
+  - [3. 定理 (Theorem)](#3-定理-theorem)
+    - [Theorem RT1: 成功率提升](#theorem-rt1-成功率提升)
+    - [Theorem RT2: 负载控制](#theorem-rt2-负载控制)
+  - [4. Rust 实现示例](#4-rust-实现示例)
+  - [5. 重试策略选择](#5-重试策略选择)
+  - [6. 可重试错误分类](#6-可重试错误分类)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 1. 概念定义 (Def)
 >
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Retry Pattern]** · **[来源: Wikipedia - Circuit Breaker Pattern]** · **[来源: ACM - Fault-Tolerant Design Patterns]** · **[来源: IEEE - Resilient Software Architecture]**
@@ -323,3 +349,10 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [05_distributed 目录](./README.md)
+- [上级目录](../README.md)

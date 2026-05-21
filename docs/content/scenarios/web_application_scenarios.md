@@ -6,7 +6,15 @@
 
 ---
 
+## 📑 目录
+>
+- [🌳 Web 应用场景树](#web-应用场景树)
+- [📊 RESTful API 场景](#restful-api-场景)
+  - [场景 1: CRUD API](#场景-1-crud-api)
+- [🔗 相关文档](#相关文档)
+
 ## 🌳 Web 应用场景树
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -40,9 +48,11 @@ graph TD
 ---
 
 ## 📊 RESTful API 场景
+>
 > **[来源: Rust Official Docs]**
 
 ### 场景 1: CRUD API
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -117,3 +127,9 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

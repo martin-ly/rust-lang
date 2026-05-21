@@ -4,7 +4,36 @@
 
 ---
 
+## 📑 目录
+>
+- [🗺️ 映射关系概览](#映射关系概览)
+- [📂 详细映射](#详细映射)
+  - [content/emerging/ → C04 + C11](#contentemerging-c04-c11)
+  - [content/ecosystem/ → C05 + C06 + C10](#contentecosystem-c05-c06-c10)
+  - [content/production/ → C07 + C12](#contentproduction-c07-c12)
+  - [content/academic/ → C01 + C04](#contentacademic-c01-c04)
+  - [content/scenarios/ → C09 + C10](#contentscenarios-c09-c10)
+- [🔗 实战项目映射](#实战项目映射)
+  - [项目 1: Web 应用](#项目-1-web-应用)
+  - [项目 2: 分布式任务队列](#项目-2-分布式任务队列)
+  - [项目 3: WebAssembly 应用](#项目-3-webassembly-应用)
+- [📚 推荐阅读顺序](#推荐阅读顺序)
+  - [基础阶段 (Week 1-3)](#基础阶段-week-1-3)
+  - [进阶阶段 (Week 4-7)](#进阶阶段-week-4-7)
+  - [实战阶段 (Week 8-12)](#实战阶段-week-8-12)
+  - [生产阶段 (Week 13+)](#生产阶段-week-13)
+  - [深入研究 (持续)](#深入研究-持续)
+- [🎯 学习检查点](#学习检查点)
+  - [检查点 1: 基础掌握](#检查点-1-基础掌握)
+  - [检查点 2: 进阶技能](#检查点-2-进阶技能)
+  - [检查点 3: 实战能力](#检查点-3-实战能力)
+  - [检查点 4: 生产就绪](#检查点-4-生产就绪)
+- [🔍 快速查找](#快速查找)
+  - [按主题查找](#按主题查找)
+  - [按难度查找](#按难度查找)
+
 ## 🗺️ 映射关系概览
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -25,9 +54,11 @@ representations/ ────────▶  (知识表示)                 ─
 ---
 
 ## 📂 详细映射
+>
 > **[来源: Rust Official Docs]**
 
 ### content/emerging/ → C04 + C11
+>
 > **[来源: Rust Official Docs]**
 
 | Content 文档 | 关联 Crate | 说明 |
@@ -260,7 +291,13 @@ representations/ ────────▶  (知识表示)                 ─
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [content 目录](./README.md)
+- [上级目录](../README.md)

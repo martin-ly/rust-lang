@@ -6,7 +6,51 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统形式化分析 - 真正 100% 完成认证](#rust-所有权系统形式化分析---真正-100-完成认证)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+  - [完成统计](#完成统计)
+    - [代码统计](#代码统计)
+    - [证明完成度](#证明完成度)
+  - [完成里程碑](#完成里程碑)
+  - [清除的 Admitted 详情](#清除的-admitted-详情)
+    - [第一阶段清除 (主要定理)](#第一阶段清除-主要定理)
+    - [第二阶段清除 (语义层)](#第二阶段清除-语义层)
+    - [第三阶段清除 (Rust 1.94 特性)](#第三阶段清除-rust-194-特性)
+    - [第四阶段清除 (示例)](#第四阶段清除-示例)
+    - [第五阶段清除 (最终清理)](#第五阶段清除-最终清理)
+  - [核心成果清单](#核心成果清单)
+    - [1. 统一理论框架 ✅](#1-统一理论框架-)
+    - [2. 语义等价性证明 ✅](#2-语义等价性证明-)
+    - [3. 类型-所有权统一理论 ✅](#3-类型-所有权统一理论-)
+    - [4. 证明策略库 ✅](#4-证明策略库-)
+    - [5. 元理论核心证明 (全部 Qed) ✅](#5-元理论核心证明-全部-qed-)
+      - [Termination.v](#terminationv)
+      - [Preservation.v](#preservationv)
+      - [Progress.v](#progressv)
+      - [SemanticsEquivalence.v](#semanticsequivalencev)
+    - [6. Rust 1.94 特性形式化 (全部 Qed) ✅](#6-rust-194-特性形式化-全部-qed-)
+  - [质量保证检查清单](#质量保证检查清单)
+    - [形式化完整性 ✅](#形式化完整性-)
+    - [代码质量 ✅](#代码质量-)
+    - [文档完整性 ✅](#文档完整性-)
+  - [技术债务状态](#技术债务状态)
+  - [学术贡献总结](#学术贡献总结)
+    - [理论贡献](#理论贡献)
+    - [工程贡献](#工程贡献)
+  - [验证结果](#验证结果)
+    - [Coq 代码验证 ✅](#coq-代码验证-)
+    - [文档验证 ✅](#文档验证-)
+  - [项目交付物](#项目交付物)
+    - [核心文档 (新建/更新)](#核心文档-新建更新)
+  - [结论](#结论)
+  - [*"构建 Rust 所有权系统的完整、严格、可机械化的形式化理论"* - **目标达成 ✅**](#构建-rust-所有权系统的完整严格可机械化的形式化理论---目标达成-)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 经过持续推进，Rust 所有权系统形式化分析项目已达到 **真正 100% 完成**。所有 Coq 形式化证明中的 `Admitted` 和 `admit` 已全部清除，替换为完整的 `Qed.` 证明。
@@ -14,9 +58,11 @@
 ---
 
 ## 完成统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 代码统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 指标 | 数值 |
@@ -303,7 +349,13 @@ docs/rust-ownership-decidability/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

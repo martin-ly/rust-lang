@@ -1,10 +1,10 @@
 # 09 鉴别器模式 (Discriminator)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [09 鉴别器模式 (Discriminator)](#09-鉴别器模式-discriminator)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [First-Wins 语义](#first-wins-语义)
@@ -24,13 +24,44 @@
   - [应用场景](#应用场景)
     - [实现要点](#实现要点)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [09 鉴别器模式 (Discriminator)](#09-鉴别器模式-discriminator)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [First-Wins 语义](#first-wins-语义)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+    - [Cancel Event 实现](#cancel-event-实现)
+  - [进程代数形式化](#进程代数形式化)
+  - [超时语义](#超时语义)
+  - [状态机语义](#状态机语义)
+  - [正确性证明](#正确性证明)
+    - [安全性证明](#安全性证明)
+    - [活性证明](#活性证明)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础鉴别器](#基础鉴别器)
+    - [带超时处理的鉴别器](#带超时处理的鉴别器)
+    - [Race Condition 处理](#race-condition-处理)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [实现要点](#实现要点)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 鉴别器模式等待多个并行分支中的第一个完成，然后取消或忽略其他分支的执行结果，继续后续流程。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -735,6 +766,7 @@ $$
 5. **Russell, N., van der Aalst, W.M.P., & ter Hofstede, A.H.M.** (2006). "Design of Workflow Patterns." *Handbook of Research on Business Process Modeling*, 1, 1-24.
 
 6. **Recker, J.** (2010). "Opportunities and Constraints: The Current Struggle with BPMN." *Business Process Management Journal*, 16(1), 181-201.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -746,7 +778,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

@@ -1,16 +1,9 @@
 ﻿# 43 种完全模型索引
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [43 种完全模型索引](#43-种完全模型索引)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [定义](#定义)
   - [构成方案](#构成方案)
@@ -51,10 +44,67 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [43 种完全模型索引](#43-种完全模型索引)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [定义](#定义)
+  - [构成方案](#构成方案)
+    - [扩展模式（20）](#扩展模式20)
+    - [扩展模式简要说明](#扩展模式简要说明)
+  - [扩展模式 Rust 代码示例](#扩展模式-rust-代码示例)
+    - [Domain Model](#domain-model)
+    - [Unit of Work](#unit-of-work)
+    - [Data Mapper](#data-mapper)
+    - [Value Object](#value-object)
+    - [Registry (Service Locator)](#registry-service-locator)
+    - [Identity Map](#identity-map)
+    - [Service Layer](#service-layer)
+    - [Repository](#repository)
+    - [DTO](#dto)
+    - [Event Sourcing](#event-sourcing)
+    - [Specification](#specification)
+    - [Table Data Gateway (DAO)](#table-data-gateway-dao)
+    - [Active Record](#active-record)
+    - [Gateway（外部系统集成）](#gateway外部系统集成)
+    - [Model View Controller (MVC)](#model-view-controller-mvc)
+    - [Front Controller](#front-controller)
+    - [Remote Facade](#remote-facade)
+    - [Lazy Load](#lazy-load)
+    - [Plugin (Dependency Injection)](#plugin-dependency-injection)
+    - [Optimistic Offline Lock](#optimistic-offline-lock)
+  - [安全边界](#安全边界)
+  - [与 23 安全的关系](#与-23-安全的关系)
+  - [与 23 安全的分层关系](#与-23-安全的分层关系)
+  - [扩展模式选型](#扩展模式选型)
+  - [扩展模式选型决策树](#扩展模式选型决策树)
+  - [扩展模式形式化对应（深入）](#扩展模式形式化对应深入)
+  - [扩展模式典型场景（实质内容）](#扩展模式典型场景实质内容)
+  - [权威来源](#权威来源)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 定义
+>
 > **[来源: Rust Official Docs]**
 
 **43 完全模型** = GoF 23 + 扩展模式（企业/分布式/并发等），包含**需 unsafe** 或**需库支持**的实现路径。
@@ -69,6 +119,7 @@
 | **企业/分布式扩展** | 20 | 见下表 |
 
 ### 扩展模式（20）
+>
 > **[来源: Rust Official Docs]**
 
 参考 [Fowler EAA](https://martinfowler.com/eaaCatalog/)、Core J2EE 等权威 catalog，20 项构成如下：
@@ -97,6 +148,7 @@
 | 20 | Event Sourcing | DDD/CQRS | 业务层 | 纯 Safe |
 
 ### 扩展模式简要说明
+>
 > **[来源: Rust Official Docs]**
 
 | 模式 | 核心意图 | Rust 典型实现 |
@@ -125,9 +177,11 @@
 ---
 
 ## 扩展模式 Rust 代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ### Domain Model
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -159,6 +213,7 @@ impl Order {
 ```
 
 ### Unit of Work
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -186,6 +241,7 @@ impl<T> UnitOfWork<T> {
 ```
 
 ### Data Mapper
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -204,6 +260,7 @@ impl From<UserEntity> for (u64, String, String) {
 ```
 
 ### Value Object
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -226,6 +283,7 @@ impl Money {
 ```
 
 ### Registry (Service Locator)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -245,6 +303,7 @@ fn register<T: Send + 'static>(service: T) {
 ```
 
 ### Identity Map
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -731,3 +790,10 @@ pub fn update_optimistic(
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [02_workflow_safe_complete_models 目录](./README.md)
+- [上级目录](../README.md)

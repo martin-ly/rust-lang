@@ -7,12 +7,42 @@
 
 ---
 
+## 📑 目录
+>
+- [最终完成报告 (40% 里程碑)](#最终完成报告-40-里程碑)
+  - [📑 目录](#-目录)
+  - [🎉 完成总结](#-完成总结)
+    - [核心成果](#核心成果)
+  - [📁 交付物清单](#-交付物清单)
+    - [Coq 形式化 (9 文件, 2,353 行)](#coq-形式化-9-文件-2353-行)
+    - [文档 (10+ 文件, 2,000+ 行)](#文档-10-文件-2000-行)
+  - [🏆 核心定理](#-核心定理)
+    - [1. Borrow Checking 终止性 (完成)](#1-borrow-checking-终止性-完成)
+    - [2. 类型保持 (框架完成)](#2-类型保持-框架完成)
+    - [3. 进展 (框架完成)](#3-进展-框架完成)
+    - [4. 类型安全 (组合定理)](#4-类型安全-组合定理)
+  - [✅ 验证的借用模式 (10个)](#-验证的借用模式-10个)
+  - [📊 与权威内容的对齐](#-与权威内容的对齐)
+  - [🎯 质量保证](#-质量保证)
+    - [代码质量](#代码质量)
+    - [理论严谨性](#理论严谨性)
+  - [🚀 持续推进计划](#-持续推进计划)
+    - [Phase 2: 可判定性深化 (目标: 55%)](#phase-2-可判定性深化-目标-55)
+    - [Phase 3: 扩展完善 (目标: 75%)](#phase-3-扩展完善-目标-75)
+    - [Phase 4: 验证发布 (目标: 100%)](#phase-4-验证发布-目标-100)
+  - [📈 进度曲线](#-进度曲线)
+  - [🎊 庆祝里程碑](#-庆祝里程碑)
+  - [**状态**: 🚀 持续推进中](#状态--持续推进中)
+  - [相关概念](#相关概念)
+
 ## 🎉 完成总结
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 根据您的要求"**持续推进直到完成100%**"，我已成功完成初始阶段并持续推进，达到了 **40% 完成度**。
 
 ### 核心成果
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -26,6 +56,7 @@
 ---
 
 ## 📁 交付物清单
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Coq 形式化 (9 文件, 2,353 行)
@@ -205,7 +236,13 @@ Week 5-12:          90% → 100% (计划)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [progress 目录](./README.md)
+- [上级目录](../README.md)

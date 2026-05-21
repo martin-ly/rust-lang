@@ -6,10 +6,47 @@
 
 ---
 
+## 📑 目录
+>
+- [Async Rust 全面形式化分析 - 完整索引](#async-rust-全面形式化分析---完整索引)
+  - [📑 目录](#-目录)
+  - [📚 文档索引](#-文档索引)
+    - [核心文档](#核心文档)
+  - [🎯 覆盖主题全景](#-覆盖主题全景)
+    - [1. 语法层面 (Syntax)](#1-语法层面-syntax)
+    - [2. 编译转换 (Compilation)](#2-编译转换-compilation)
+    - [3. 运行时架构 (Runtime)](#3-运行时架构-runtime)
+    - [4. 等价性证明 (Equivalence)](#4-等价性证明-equivalence)
+    - [5. 机制详解 (Mechanisms)](#5-机制详解-mechanisms)
+    - [6. 执行流程 (Execution Flow)](#6-执行流程-execution-flow)
+    - [7. 特性与对比 (Features \& Comparison)](#7-特性与对比-features--comparison)
+    - [8. 边界情况 (Edge Cases)](#8-边界情况-edge-cases)
+  - [🧮 定理汇总](#-定理汇总)
+    - [内存安全 (5个)](#内存安全-5个)
+    - [执行正确性 (5个)](#执行正确性-5个)
+    - [调度算法 (5个)](#调度算法-5个)
+    - [等价性 (5个)](#等价性-5个)
+    - [并发模型 (5个)](#并发模型-5个)
+    - [取消安全 (3个)](#取消安全-3个)
+  - [📊 代码实现清单](#-代码实现清单)
+    - [核心抽象实现](#核心抽象实现)
+    - [执行器实现](#执行器实现)
+    - [同步原语](#同步原语)
+    - [IO与Reactor](#io与reactor)
+  - [🎓 学习路径](#-学习路径)
+    - [初学者路径](#初学者路径)
+    - [进阶路径](#进阶路径)
+    - [研究者路径](#研究者路径)
+  - [🔑 核心洞见总结](#-核心洞见总结)
+  - [📈 统计信息](#-统计信息)
+  - [相关概念](#相关概念)
+
 ## 📚 文档索引
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | # | 文档 | 页数 | 核心内容 | 定理数 |
@@ -24,6 +61,7 @@
 ---
 
 ## 🎯 覆盖主题全景
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 语法层面 (Syntax)
@@ -372,6 +410,7 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 机制详解:     10+ 个
 并发模型对比: 5+ 个
 ```
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -382,3 +421,10 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [proofs 目录](./README.md)
+- [上级目录](../README.md)

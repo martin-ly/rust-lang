@@ -4,7 +4,27 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权系统 - 知识图谱思维导图](#rust-所有权系统---知识图谱思维导图)
+  - [📑 目录](#-目录)
+  - [1. 核心概念思维导图](#1-核心概念思维导图)
+  - [2. 定理依赖网络图](#2-定理依赖网络图)
+  - [3. 学习路径决策树](#3-学习路径决策树)
+  - [4. 并发模式选择矩阵](#4-并发模式选择矩阵)
+  - [5. 所有权转换状态机](#5-所有权转换状态机)
+  - [6. 验证工具选择决策树](#6-验证工具选择决策树)
+  - [7. 模块依赖图](#7-模块依赖图)
+  - [8. Rust 1.94 特性映射](#8-rust-194-特性映射)
+  - [9. 案例研究分类图](#9-案例研究分类图)
+  - [10. 完整知识图谱](#10-完整知识图谱)
+  - [使用指南](#使用指南)
+    - [如何选择图表](#如何选择图表)
+  - [*这些图表使用 Mermaid 语法，可在支持 Mermaid 的 Markdown 查看器中渲染*](#这些图表使用-mermaid-语法可在支持-mermaid-的-markdown-查看器中渲染)
+  - [相关概念](#相关概念)
+
 ## 1. 核心概念思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -67,6 +87,7 @@ mindmap
 ---
 
 ## 2. 定理依赖网络图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -128,6 +149,7 @@ graph TB
 ---
 
 ## 3. 学习路径决策树
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -514,7 +536,13 @@ graph TB
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [visualizations 目录](./README.md)
+- [上级目录](../README.md)

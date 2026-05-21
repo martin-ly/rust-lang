@@ -4,6 +4,31 @@
 
 ---
 
+## 📑 目录
+>
+- [io\_uring 深度解析 - Linux异步IO的未来](#io_uring-深度解析---linux异步io的未来)
+  - [📑 目录](#-目录)
+  - [1. io\_uring 原理](#1-io_uring-原理)
+    - [1.1 传统IO的问题](#11-传统io的问题)
+    - [1.2 io\_uring 架构](#12-io_uring-架构)
+    - [1.3 核心数据结构](#13-核心数据结构)
+  - [2. 原生io\_uring使用](#2-原生io_uring使用)
+    - [2.1 基本API](#21-基本api)
+    - [2.2 文件IO示例](#22-文件io示例)
+    - [2.3 网络IO示例](#23-网络io示例)
+  - [3. 高级特性](#3-高级特性)
+    - [3.1 轮询模式 (SQPOLL)](#31-轮询模式-sqpoll)
+    - [3.2 注册缓冲区 (Registered Buffers)](#32-注册缓冲区-registered-buffers)
+    - [3.3 IO链路与超时](#33-io链路与超时)
+  - [4. 性能对比](#4-性能对比)
+    - [4.1 基准测试结果](#41-基准测试结果)
+    - [4.2 内核版本要求](#42-内核版本要求)
+  - [5. Rust io\_uring库](#5-rust-io_uring库)
+    - [5.1 io-uring (底层绑定)](#51-io-uring-底层绑定)
+    - [5.2 生态对比](#52-生态对比)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. io_uring 原理
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -604,3 +629,9 @@ fn main() -> std::io::Result<()> {
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

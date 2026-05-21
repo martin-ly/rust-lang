@@ -7,7 +7,46 @@
 
 ---
 
+## 📑 目录
+>
+- [证明技术概念族谱](#证明技术概念族谱)
+  - [📑 目录](#-目录)
+  - [证明技术全景](#证明技术全景)
+  - [一、归纳法家族](#一归纳法家族)
+    - [1.1 结构归纳法 (Structural Induction)](#11-结构归纳法-structural-induction)
+    - [1.2 数学归纳法 (Mathematical Induction)](#12-数学归纳法-mathematical-induction)
+    - [1.3 良基归纳法 (Well-Founded Induction)](#13-良基归纳法-well-founded-induction)
+  - [二、构造法家族](#二构造法家族)
+    - [2.1 存在构造 (Existential Construction)](#21-存在构造-existential-construction)
+    - [2.2 Witness构造](#22-witness构造)
+  - [三、反证法家族](#三反证法家族)
+    - [3.1 归谬法 (Proof by Contradiction)](#31-归谬法-proof-by-contradiction)
+    - [3.2 对角线法 (Diagonalization)](#32-对角线法-diagonalization)
+  - [四、分离逻辑技术](#四分离逻辑技术)
+    - [4.1 资源代数](#41-资源代数)
+    - [4.2 模态断言](#42-模态断言)
+    - [4.3 框架规则 (Frame Rule)](#43-框架规则-frame-rule)
+  - [五、类型系统证明技术](#五类型系统证明技术)
+    - [5.1 进展性 (Progress)](#51-进展性-progress)
+    - [5.2 保持性 (Preservation)](#52-保持性-preservation)
+    - [5.3 替换引理 (Substitution Lemma)](#53-替换引理-substitution-lemma)
+  - [六、Rust特有证明技术](#六rust特有证明技术)
+    - [6.1 所有权唯一性证明](#61-所有权唯一性证明)
+    - [6.2 借用检查正确性证明](#62-借用检查正确性证明)
+    - [6.3 Send/Sync安全性证明](#63-sendsync安全性证明)
+  - [七、证明技术选择决策树](#七证明技术选择决策树)
+  - [八、与核心定理的对应](#八与核心定理的对应)
+  - [九、学习路径](#九学习路径)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 证明技术全景
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -33,9 +72,11 @@
 ---
 
 ## 一、归纳法家族
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 结构归纳法 (Structural Induction)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 对归纳定义的数据类型（如表达式、类型）进行证明
@@ -60,6 +101,7 @@ Theorem expr_induction :
 - T-BR1: 对借用生命周期进行归纳
 
 ### 1.2 数学归纳法 (Mathematical Induction)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 自然数性质证明
@@ -79,6 +121,7 @@ Theorem nat_induction :
 - 证明迭代次数相关的性质
 
 ### 1.3 良基归纳法 (Well-Founded Induction)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 递归函数终止性证明
@@ -92,9 +135,11 @@ Theorem nat_induction :
 ---
 
 ## 二、构造法家族
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 存在构造 (Existential Construction)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 证明存在性命题
@@ -110,6 +155,7 @@ Qed.
 ```
 
 ### 2.2 Witness构造
+>
 > **[来源: Rust Official Docs]**
 
 **在分离逻辑中的应用**:
@@ -125,9 +171,11 @@ Lemma alloc_spec :
 ---
 
 ## 三、反证法家族
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 归谬法 (Proof by Contradiction)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 否定性质证明
@@ -146,6 +194,7 @@ Qed.
 ```
 
 ### 3.2 对角线法 (Diagonalization)
+>
 > **[来源: Rust Official Docs]**
 
 **适用场景**: 不可判定性证明
@@ -373,3 +422,10 @@ Lemma substitution :
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

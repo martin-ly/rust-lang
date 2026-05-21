@@ -1,4 +1,10 @@
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
+>
+> **层次定位**: L4 形式化理论 / RustBelt 子域
+> **前置依赖**: [L4 所有权形式化](./03_ownership_formal.md) · [L4 类型论](./02_type_theory.md) · [L4 线性逻辑](./01_linear_logic.md)
+> **后置延伸**: [L7 形式化方法](../07_future/02_formal_methods.md) · [L6 验证工具](../06_ecosystem/01_toolchain.md)
+> **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
+> **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统 soundness
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Linear Logic](./01_linear_logic.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md)
@@ -607,6 +613,54 @@ jobs:
 > **来源**: [AWS Kani CI Integration Blog] · [Miri CI Documentation] · [Verus CI Examples] · [Creusot Tutorial: CI Setup]
 
 ---
+
+## 📑 目录
+
+- [RustBelt \& Verification Toolchain（RustBelt 与验证工具链）](#rustbelt--verification-toolchainrustbelt-与验证工具链)
+  - [一、权威定义（Definition）](#一权威定义definition)
+    - [1.1 Wikipedia 权威定义](#11-wikipedia-权威定义)
+    - [1.2 RustBelt 与 Iris 核心定义](#12-rustbelt-与-iris-核心定义)
+  - [二、定理一致性矩阵（Theorem Consistency Matrix）](#二定理一致性矩阵theorem-consistency-matrix)
+    - [2.1 矩阵总览（11 行）](#21-矩阵总览11-行)
+    - [2.2 ⟹ 推理链](#22--推理链)
+    - [2.3 层次一致性标注（L1–L3 及扩展映射）](#23-层次一致性标注l1l3-及扩展映射)
+  - [三、Concurrent Separation Logic（并发分离逻辑）](#三concurrent-separation-logic并发分离逻辑)
+    - [3.1 CSL = 分离逻辑 + 资源不变量](#31-csl--分离逻辑--资源不变量)
+    - [3.2 关键概念](#32-关键概念)
+    - [3.3 `Mutex<T>` 的形式化](#33-mutext-的形式化)
+    - [3.3b Kani 验证：Mutex 无数据竞争规格](#33b-kani-验证mutex-无数据竞争规格)
+    - [3.4 `Arc<T>` 的形式化](#34-arct-的形式化)
+    - [3.5 CSL 规范代码示例](#35-csl-规范代码示例)
+  - [四、反命题决策树（Antithesis Decision Trees）](#四反命题决策树antithesis-decision-trees)
+    - [4.1 命题一："RustBelt 证明了 Rust 完全安全"](#41-命题一rustbelt-证明了-rust-完全安全)
+    - [4.2 命题二："形式化验证可以替代测试"](#42-命题二形式化验证可以替代测试)
+    - [4.3 命题三："Iris 逻辑适用于所有语言"](#43-命题三iris-逻辑适用于所有语言)
+  - [五、认知路径（Cognitive Path）](#五认知路径cognitive-path)
+  - [六、RustBelt 验证的标准库原语](#六rustbelt-验证的标准库原语)
+    - [6.1 已验证 / 待验证矩阵](#61-已验证--待验证矩阵)
+    - [6.2 验证难度分析](#62-验证难度分析)
+  - [七、验证工具链快速对比](#七验证工具链快速对比)
+  - [七之一、验证工具代码示例与 CI/CD 集成](#七之一验证工具代码示例与-cicd-集成)
+    - [7.1 Prusti：`#[requires]` / `#[ensures]` 示例](#71-prustirequires--ensures-示例)
+    - [7.2 Kani：`#[kani::proof]` 与并发验证](#72-kanikaniproof-与并发验证)
+    - [7.3 Verus：`proof fn` 与所有权推理](#73-verusproof-fn-与所有权推理)
+    - [7.4 Creusot：分离逻辑契约与预言（Prophecy）](#74-creusot分离逻辑契约与预言prophecy)
+    - [7.5 CI/CD 集成方案](#75-cicd-集成方案)
+  - [📑 目录](#-目录)
+  - [八、形式化验证工具链映射](#八形式化验证工具链映射)
+    - [8.1 工具链全景矩阵](#81-工具链全景矩阵)
+    - [8.2 验证方法光谱图](#82-验证方法光谱图)
+    - [8.3 工业选型决策路径](#83-工业选型决策路径)
+  - [九、思维导图](#九思维导图)
+  - [十、国际课程与论文对齐](#十国际课程与论文对齐)
+  - [十一、知识来源关系](#十一知识来源关系)
+  - [十二、相关概念链接](#十二相关概念链接)
+    - [7.6 RefinedRust：自动化分离逻辑推导](#76-refinedrust自动化分离逻辑推导)
+    - [7.7 RustHornBelt：Horn 子句验证与 CHC 求解](#77-rusthornbelthorn-子句验证与-chc-求解)
+    - [7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模](#78-csl-中-rwlock-与-condvar-的-iris-建模)
+    - [7.9 `Vec` 重新分配：借用与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
+  - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos)
+  - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
 
 ## 八、形式化验证工具链映射
 

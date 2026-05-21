@@ -1,20 +1,9 @@
 ﻿# Builder 形式化分析
 
-> **创建日期**: 2026-02-12
-> **最后更新**: 2026-02-28
-> **Rust 版本**: 1.93.1+ (Edition 2024)
-> **状态**: ✅ 已完成
-> **分类**: 创建型
-> **安全边界**: 纯 Safe
-> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 3 行（Builder）
-> **证明深度**: L3（完整证明）
-
----
-
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Builder 形式化分析](#builder-形式化分析)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Builder 结构）](#def-11builder-结构)
@@ -48,13 +37,68 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+> **创建日期**: 2026-02-12
+> **最后更新**: 2026-02-28
+> **Rust 版本**: 1.93.1+ (Edition 2024)
+> **状态**: ✅ 已完成
+> **分类**: 创建型
+> **安全边界**: 纯 Safe
+> **23 模式矩阵**: [README §23 模式多维对比矩阵](../README.md#23-模式多维对比矩阵) 第 3 行（Builder）
+> **证明深度**: L3（完整证明）
+
+---
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Builder 形式化分析](#builder-形式化分析)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [形式化定义](#形式化定义)
+    - [Def 1.1（Builder 结构）](#def-11builder-结构)
+    - [Axiom B1（必填字段公理）](#axiom-b1必填字段公理)
+    - [Axiom B2（单次构建公理）](#axiom-b2单次构建公理)
+    - [定理 B-T1（所有权消费定理）](#定理-b-t1所有权消费定理)
+    - [定理 B-T2（类型状态安全定理）](#定理-b-t2类型状态安全定理)
+    - [推论 B-C1（纯 Safe Builder）](#推论-b-c1纯-safe-builder)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+  - [Rust 实现与代码示例](#rust-实现与代码示例)
+  - [完整证明](#完整证明)
+    - [形式化论证链](#形式化论证链)
+    - [与 Rust 类型系统的联系](#与-rust-类型系统的联系)
+    - [内存安全保证](#内存安全保证)
+  - [典型场景](#典型场景)
+  - [完整场景示例：HTTP 请求构建器](#完整场景示例http-请求构建器)
+  - [相关模式](#相关模式)
+  - [实现变体](#实现变体)
+  - [反例](#反例)
+  - [错误处理](#错误处理)
+  - [选型决策树](#选型决策树)
+  - [与 GoF 对比](#与-gof-对比)
+  - [边界](#边界)
+  - [与 Rust 1.93 的对应](#与-rust-193-的对应)
+  - [思维导图](#思维导图)
+  - [与其他模式的关系图](#与其他模式的关系图)
+  - [实质内容五维自检](#实质内容五维自检)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 形式化定义
+>
 > **[来源: Rust Official Docs]**
 
 ### Def 1.1（Builder 结构）
+>
 > **[来源: Rust Official Docs]**
 
 设 $B$ 为 Builder 类型，$T$ 为目标类型。Builder 是一个四元组 $\mathcal{B} = (B, T, \{\mathit{set}_i\}, \mathit{build})$，满足：
@@ -70,6 +114,7 @@ $$\mathcal{B} = \langle B, T, \{\mathit{set}_i: B \times V_i \rightarrow B\}, \m
 ---
 
 ### Axiom B1（必填字段公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\mathit{build}(b) = \mathrm{Ok}(t) \implies \forall i \in \mathrm{Required},\, \mathit{field}_i(b) \neq \mathrm{None}$$
@@ -77,6 +122,7 @@ $$\mathit{build}(b) = \mathrm{Ok}(t) \implies \forall i \in \mathrm{Required},\,
 `build` 调用时必填字段已设置；否则返回 `Err` 或 panic。
 
 ### Axiom B2（单次构建公理）
+>
 > **[来源: Rust Official Docs]**
 
 $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b') \text{ 可调用}$$
@@ -86,6 +132,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T1（所有权消费定理）
+>
 > **[来源: Rust Official Docs]**
 
 由 [ownership_model](../../../formal_methods/ownership_model.md) T2，`build(self)` 消费 $B$ 后 $B$ 无效，无双重使用。
@@ -112,6 +159,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 定理 B-T2（类型状态安全定理）
+>
 > **[来源: Rust Official Docs]**
 
 类型状态模式可强制编译期必填：`ConfigBuilder<SetHost>` 与 `ConfigBuilder<SetPort>` 等相位类型，仅当所有相位完成时 `build` 可用。
@@ -151,6 +199,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 ---
 
 ### 推论 B-C1（纯 Safe Builder）
+>
 > **[来源: Rust Official Docs]**
 
 Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe`。
@@ -167,6 +216,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -178,6 +228,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 ---
 
 ## Rust 实现与代码示例
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -229,6 +280,7 @@ let config = ConfigBuilder::new()
 ---
 
 ## 完整证明
+>
 > **[来源: Rust Official Docs]**
 
 ### 形式化论证链
@@ -512,3 +564,10 @@ graph LR
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [01_creational 目录](./README.md)
+- [上级目录](../README.md)

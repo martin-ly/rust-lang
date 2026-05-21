@@ -5,7 +5,45 @@
 
 ---
 
+## 📑 目录
+>
+- [定理依赖网络图](#定理依赖网络图)
+  - [📑 目录](#-目录)
+  - [1. 整体依赖图 (文本表示)](#1-整体依赖图-文本表示)
+  - [2. 关键路径分析](#2-关键路径分析)
+    - [路径 A: 终止性证明路径](#路径-a-终止性证明路径)
+    - [路径 B: 类型安全证明路径](#路径-b-类型安全证明路径)
+    - [路径 C: 可判定性证明路径](#路径-c-可判定性证明路径)
+  - [3. 定理详细说明](#3-定理详细说明)
+    - [定理 1: Borrow Checking 终止性](#定理-1-borrow-checking-终止性)
+    - [定理 2: 类型保持 (Preservation)](#定理-2-类型保持-preservation)
+    - [定理 3: 进展 (Progress)](#定理-3-进展-progress)
+    - [定理 4: 类型安全](#定理-4-类型安全)
+    - [定理 5: 可判定性](#定理-5-可判定性)
+  - [4. 引理依赖网络](#4-引理依赖网络)
+    - [核心引理分类](#核心引理分类)
+    - [引理依赖示例](#引理依赖示例)
+  - [5. 证明义务清单](#5-证明义务清单)
+    - [高优先级 (关键路径)](#高优先级-关键路径)
+    - [中优先级 (连接引理)](#中优先级-连接引理)
+    - [低优先级 (扩展引理)](#低优先级-扩展引理)
+  - [6. 可视化建议](#6-可视化建议)
+    - [图形化表示 (Mermaid)](#图形化表示-mermaid)
+  - [7. 证明策略对应](#7-证明策略对应)
+    - [按定理的证明方法](#按定理的证明方法)
+    - [证明模式分布](#证明模式分布)
+  - [8. 质量保证检查](#8-质量保证检查)
+    - [依赖完整性](#依赖完整性)
+    - [证明完整性](#证明完整性)
+  - [总结](#总结)
+  - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
+    - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
+    - [形式化更新](#形式化更新)
+  - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 1. 整体依赖图 (文本表示)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -96,9 +134,11 @@
 ---
 
 ## 2. 关键路径分析
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 路径 A: 终止性证明路径
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -503,7 +543,13 @@ graph TB
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

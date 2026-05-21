@@ -1,6 +1,18 @@
 # Rust所有权系统 - 思维导图
 
+## 📑 目录
+>
+- [Rust所有权系统 - 思维导图](#rust所有权系统---思维导图)
+  - [📑 目录](#-目录)
+  - [Mermaid思维导图](#mermaid思维导图)
+  - [文本思维导图](#文本思维导图)
+  - [核心关系图](#核心关系图)
+  - [概念依赖关系](#概念依赖关系)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## Mermaid思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -107,6 +119,7 @@ mindmap
 ---
 
 ## 文本思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -125,6 +138,7 @@ mindmap
 ---
 
 ## 核心关系图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -203,7 +217,12 @@ mindmap
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

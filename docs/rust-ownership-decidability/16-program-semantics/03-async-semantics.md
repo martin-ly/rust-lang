@@ -1,4 +1,10 @@
 # Rust 异步执行模型语义深度分析
+>
+> **层次定位**: L4 形式化 / 异步语义深度分析
+> **前置依赖**: [ROD 借用系统](../01-core-concepts/01-02-borrowing-system-deep.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)
+> **后置延伸**: [ROD 形式语义](../formal-foundations/RUST_FORMAL_SEMANTICS_DEEP.md) · [ROD 验证工具](../03-verification-tools/)
+> **跨层映射**: L4 continuation monad ↔ async/await | ROD 语义展开
+> **定理链编号**: T-120 Future 安全性 → T-121 Waker 正确性 → T-122 执行器公平性
 
 ## 目录
 >
@@ -152,6 +158,7 @@
     - [语义选择建议](#语义选择建议)
     - [形式化语义表示](#形式化语义表示)
   - [*关联文档：00-semantic-framework.md*](#关联文档00-semantic-frameworkmd)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -5032,7 +5039,6 @@ $$
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

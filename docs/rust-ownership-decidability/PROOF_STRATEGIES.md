@@ -4,10 +4,45 @@
 
 ---
 
+## 📑 目录
+>
+- [证明策略详解](#证明策略详解)
+  - [📑 目录](#-目录)
+  - [一、通用证明技巧](#一通用证明技巧)
+    - [1.1 结构归纳法（Structural Induction）](#11-结构归纳法structural-induction)
+    - [1.2 良基归纳法（Well-Founded Induction）](#12-良基归纳法well-founded-induction)
+    - [1.3 反证法（Proof by Contradiction）](#13-反证法proof-by-contradiction)
+    - [1.4 构造性证明（Constructive Proof）](#14-构造性证明constructive-proof)
+  - [二、特定定理的证明策略](#二特定定理的证明策略)
+    - [2.1 终止性定理的证明策略](#21-终止性定理的证明策略)
+    - [2.2 保持性定理的证明策略](#22-保持性定理的证明策略)
+    - [2.3 进展定理的证明策略](#23-进展定理的证明策略)
+    - [2.4 可判定性定理的证明策略](#24-可判定性定理的证明策略)
+  - [三、完成 admit 的实用指南](#三完成-admit-的实用指南)
+    - [3.1 常见 admit 模式](#31-常见-admit-模式)
+    - [3.2 完成 admit 的步骤](#32-完成-admit-的步骤)
+    - [3.3 具体 admit 完成示例](#33-具体-admit-完成示例)
+  - [四、高级技巧](#四高级技巧)
+    - [4.1 使用 Ltac 自动化](#41-使用-ltac-自动化)
+    - [4.2 处理复杂的 induction](#42-处理复杂的-induction)
+    - [4.3 使用 ssreflect](#43-使用-ssreflect)
+  - [五、常见错误和解决方案](#五常见错误和解决方案)
+    - [5.1 错误：Induction 过早](#51-错误induction-过早)
+    - [5.2 错误：Hypothesis 太具体](#52-错误hypothesis-太具体)
+    - [5.3 错误：忘记 inversion](#53-错误忘记-inversion)
+  - [六、总结](#六总结)
+  - [🆕 Rust 1.94 所有权系统更新](#-rust-194-所有权系统更新)
+    - [新特性对所有权系统的影响](#新特性对所有权系统的影响)
+    - [形式化更新](#形式化更新)
+  - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
+  - [相关概念](#相关概念)
+
 ## 一、通用证明技巧
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 结构归纳法（Structural Induction）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **适用场景**：
@@ -48,6 +83,7 @@ Qed.
 ```
 
 ### 1.2 良基归纳法（Well-Founded Induction）
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 **适用场景**：
@@ -741,7 +777,13 @@ inversion H; subst; clear H.
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

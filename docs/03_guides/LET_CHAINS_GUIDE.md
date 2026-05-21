@@ -1,12 +1,43 @@
 # Let Chains 全面指南
 
-> **Bloom 层级**: L2 (Comprehension) — L3 (Application)  
-> **对应 Rust 版本**: 1.95.0+ stable  
+> **Bloom 层级**: L2 (Comprehension) — L3 (Application)
+> **对应 Rust 版本**: 1.95.0+ stable
 > **最后更新**: 2026-05-20
 
 ---
 
+## 📑 目录
+>
+- [Let Chains 全面指南](#let-chains-全面指南)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [一、核心语法](#一核心语法)
+    - [1.1 if let chains](#11-if-let-chains)
+    - [1.2 while let chains](#12-while-let-chains)
+    - [1.3 if let guards in match](#13-if-let-guards-in-match)
+  - [二、语法规则与限制](#二语法规则与限制)
+    - [2.1 绑定可见性](#21-绑定可见性)
+    - [2.2 混合使用布尔条件和 let](#22-混合使用布尔条件和-let)
+    - [2.3 不能用 `||` 混合 let](#23-不能用--混合-let)
+  - [三、与旧模式对比](#三与旧模式对比)
+    - [3.1 嵌套 if let → 扁平 let chains](#31-嵌套-if-let--扁平-let-chains)
+    - [3.2 match guard vs let chains](#32-match-guard-vs-let-chains)
+  - [四、实战模式](#四实战模式)
+    - [4.1 配置解析](#41-配置解析)
+    - [4.2 异步条件等待](#42-异步条件等待)
+    - [4.3 错误累积报告](#43-错误累积报告)
+  - [五、常见陷阱](#五常见陷阱)
+    - [5.1 陷阱 1：`||` 的误解](#51-陷阱-1-的误解)
+    - [5.2 陷阱 2：所有权与借用冲突](#52-陷阱-2所有权与借用冲突)
+    - [5.3 陷阱 3：变量遮蔽的意外](#53-陷阱-3变量遮蔽的意外)
+    - [5.4 陷阱 4：与早期返回混用](#54-陷阱-4与早期返回混用)
+  - [六、版本兼容](#六版本兼容)
+  - [七、快速参考卡](#七快速参考卡)
+  - [八、延伸阅读](#八延伸阅读)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`while` 和 `match` 的守卫中连续使用多个 `let` 绑定，彻底消除了嵌套 `if let` 的样板代码。
@@ -18,9 +49,11 @@ Rust 1.95.0 稳定了 **let chains** 和 **if let guards**，允许在 `if`、`w
 ---
 
 ## 一、核心语法
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 if let chains
+>
 > **[来源: Rust Official Docs]**
 
 在 `if` 条件中串联多个 `let` 绑定：
@@ -141,6 +174,7 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
 ```
 
 两者语义等价，选择取决于代码结构：
+
 - **match guard**：需要对多个不同模式做不同处理
 - **let chains**：只需二值分支（满足/不满足）
 
@@ -313,7 +347,12 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 
 > **总结**: let chains 将 Rust 的条件绑定从"嵌套金字塔"转变为"扁平流水线」。在 1.95+ 代码中，遇到嵌套 `if let` 时，优先重构为 let chains；遇到 `match` 中的复杂守卫时，考虑使用 `if let` guard。
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

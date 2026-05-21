@@ -6,7 +6,37 @@
 
 ---
 
+## 📑 目录
+>
+- [Unsafe Rust 安全证明树](#unsafe-rust-安全证明树)
+  - [📑 目录](#-目录)
+  - [🎯 证明目标](#-证明目标)
+  - [🌲 安全证明树](#-安全证明树)
+  - [📐 公理系统](#-公理系统)
+    - [公理 UNSAFE-A1 (裸指针有效性)](#公理-unsafe-a1-裸指针有效性)
+    - [公理 UNSAFE-A2 (类型转换)](#公理-unsafe-a2-类型转换)
+    - [公理 UNSAFE-A3 (外部函数契约)](#公理-unsafe-a3-外部函数契约)
+  - [🔄 证明规则](#-证明规则)
+    - [规则 UNSAFE-R1 (借用转换)](#规则-unsafe-r1-借用转换)
+    - [规则 UNSAFE-R2 (MaybeUninit)](#规则-unsafe-r2-maybeuninit)
+    - [规则 UNSAFE-R3 (切片操作)](#规则-unsafe-r3-切片操作)
+  - [🔍 反例分析](#-反例分析)
+    - [反例 1: 悬垂指针](#反例-1-悬垂指针)
+    - [反例 2: 类型混淆](#反例-2-类型混淆)
+    - [反例 3: 数据竞争](#反例-3-数据竞争)
+  - [✅ 安全模式证明](#-安全模式证明)
+    - [模式 1: 初始化检查](#模式-1-初始化检查)
+    - [模式 2: 引用保证](#模式-2-引用保证)
+    - [模式 3: 所有权转移](#模式-3-所有权转移)
+  - [📊 安全检查清单](#-安全检查清单)
+    - [编写 Unsafe 代码前](#编写-unsafe-代码前)
+    - [代码审查清单](#代码审查清单)
+  - [🔗 相关文档](#-相关文档)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
+  - [相关概念](#相关概念)
+
 ## 🎯 证明目标
+>
 > **[来源: Rust Official Docs]**
 
 **定理 UNSAFE-SAFETY**: 在 Safe Rust 中，unsafe 代码块不会引入未定义行为(UB)，当且仅当满足以下条件：
@@ -19,6 +49,7 @@
 ---
 
 ## 🌲 安全证明树
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -39,9 +70,11 @@
 ---
 
 ## 📐 公理系统
+>
 > **[来源: Rust Official Docs]**
 
 ### 公理 UNSAFE-A1 (裸指针有效性)
+>
 > **[来源: Rust Official Docs]**
 
 **声明**: 对于任何裸指针解引用 `*ptr`，必须满足：
@@ -61,6 +94,7 @@
 ```
 
 ### 公理 UNSAFE-A2 (类型转换)
+>
 > **[来源: Rust Official Docs]**
 
 **声明**: `transmute::<A, B>` 合法当且仅当：
@@ -79,6 +113,7 @@
 ```
 
 ### 公理 UNSAFE-A3 (外部函数契约)
+>
 > **[来源: Rust Official Docs]**
 
 **声明**: 调用外部函数必须满足其前置条件。
@@ -95,9 +130,11 @@
 ---
 
 ## 🔄 证明规则
+>
 > **[来源: Rust Official Docs]**
 
 ### 规则 UNSAFE-R1 (借用转换)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -119,6 +156,7 @@ unsafe fn unsafe_deref<T>(ptr: *const T) -> &T {
 - `ptr` 指向有效内存
 
 ### 规则 UNSAFE-R2 (MaybeUninit)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -144,6 +182,7 @@ fn safe_maybe_uninit<T>() -> T {
 - `assume_init()` 前必须已写入
 
 ### 规则 UNSAFE-R3 (切片操作)
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -163,6 +202,7 @@ unsafe fn slice_from_raw_parts<T>(
 ---
 
 ## 🔍 反例分析
+>
 > **[来源: Rust Official Docs]**
 
 ### 反例 1: 悬垂指针
@@ -372,3 +412,10 @@ impl<T> Drop for UniquePtr<T> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

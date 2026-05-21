@@ -7,11 +7,11 @@
 
 ---
 
-## 📋 目录
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Kubernetes 部署完整指南](#kubernetes-部署完整指南)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [🎯 概述](#-概述)
   - [🏗️ 基础架构](#️-基础架构)
   - [🐳 容器化](#-容器化)
@@ -37,10 +37,46 @@
     - [优雅关闭](#优雅关闭)
   - [🔗 参考资源](#-参考资源)
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Official Docs]**
+
+- [Kubernetes 部署完整指南](#kubernetes-部署完整指南)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [🎯 概述](#-概述)
+  - [🏗️ 基础架构](#️-基础架构)
+  - [🐳 容器化](#-容器化)
+    - [多阶段构建](#多阶段构建)
+    - [Distroless 镜像](#distroless-镜像)
+  - [☸️ Kubernetes 配置](#️-kubernetes-配置)
+    - [Deployment](#deployment)
+    - [Service](#service)
+    - [ConfigMap](#configmap)
+    - [Secret](#secret)
+    - [HPA (水平自动伸缩)](#hpa-水平自动伸缩)
+    - [VPA (垂直自动伸缩)](#vpa-垂直自动伸缩)
+  - [📈 可观测性](#-可观测性)
+    - [Metrics](#metrics)
+    - [Logging](#logging)
+    - [Tracing](#tracing)
+  - [🛡️ 安全性](#️-安全性)
+    - [NetworkPolicy](#networkpolicy)
+    - [PodSecurityPolicy](#podsecuritypolicy)
+  - [⚡ 性能优化](#-性能优化)
+    - [资源优化](#资源优化)
+    - [启动优化](#启动优化)
+    - [优雅关闭](#优雅关闭)
+  - [🔗 参考资源](#-参考资源)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 概述
+>
 > **[来源: Rust Official Docs]**
 
 本指南涵盖将 Rust 应用部署到 Kubernetes 的完整流程，包括：
@@ -54,6 +90,7 @@
 ---
 
 ## 🏗️ 基础架构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -85,9 +122,11 @@
 ---
 
 ## 🐳 容器化
+>
 > **[来源: Rust Official Docs]**
 
 ### 多阶段构建
+>
 > **[来源: Rust Official Docs]**
 
 ```dockerfile
@@ -138,6 +177,7 @@ ENTRYPOINT ["/app/myapp"]
 ```
 
 ### Distroless 镜像
+>
 > **[来源: Rust Official Docs]**
 
 ```dockerfile
@@ -166,9 +206,11 @@ docker run --rm -v /var/run/docker.sock:/var/run/docker.sock \
 ---
 
 ## ☸️ Kubernetes 配置
+>
 > **[来源: Rust Official Docs]**
 
 ### Deployment
+>
 > **[来源: Rust Official Docs]**
 
 ```yaml
@@ -299,6 +341,7 @@ spec:
 ```
 
 ### Service
+>
 > **[来源: Rust Official Docs]**
 
 ```yaml
@@ -340,6 +383,7 @@ spec:
 ```
 
 ### ConfigMap
+>
 > **[来源: Rust Official Docs]**
 
 ```yaml
@@ -368,6 +412,7 @@ data:
 ```
 
 ### Secret
+>
 > **[来源: Rust Official Docs]**
 
 ```yaml
@@ -714,7 +759,13 @@ async fn graceful_shutdown() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [production 目录](./README.md)
+- [上级目录](../README.md)

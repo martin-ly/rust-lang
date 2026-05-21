@@ -9,10 +9,10 @@
 
 ---
 
-## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
-
+## 📑 目录
+>
 - [Send/Sync 形式化](#sendsync-形式化)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)
@@ -34,15 +34,47 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
+## 📊 目录 {#-目录}
+>
+> **[来源: Rust Official Docs]**
+
+- [Send/Sync 形式化](#sendsync-形式化)
+  - [� 目录](#-目录)
+  - [📊 目录 {#-目录}](#-目录--目录)
+  - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
+    - [核心问题](#核心问题)
+    - [预期成果](#预期成果)
+  - [📚 理论基础 {#-理论基础}](#-理论基础--理论基础)
+  - [权威来源对齐](#权威来源对齐)
+  - [🔬 形式化定义 {#-形式化定义} {#defs-send1send-sync1sendsync-形式化}](#-形式化定义--形式化定义-defs-send1send-sync1sendsync-形式化)
+  - [定理与引理](#定理与引理)
+    - [概念定义-属性关系-解释论证 层次汇总](#概念定义-属性关系-解释论证-层次汇总)
+    - [Rust 对应](#rust-对应)
+  - [⚠️ 反例 {#️-反例}](#️-反例-️-反例)
+  - [🌳 公理-定理证明树 {#-公理-定理证明树}](#-公理-定理证明树--公理-定理证明树)
+  - [🔗 与 spawn/Future/Arc 衔接 {#-与-spawnfuturearc-衔接}](#-与-spawnfuturearc-衔接--与-spawnfuturearc-衔接)
+    - [相关思维表征](#相关思维表征)
+  - [📖 参考文献 {#-参考文献}](#-参考文献--参考文献)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
 
 ---
 
 ## 🎯 研究目标 {#-研究目标}
+>
 > **[来源: Rust Official Docs]**
 
 对 Rust 的 **Send** 与 **Sync** 做独立形式化：给出概念定义、属性关系、解释论证与形式证明，并与其他形式化文档（ownership、borrow、async、pin）衔接。
 
 ### 核心问题
+>
 > **[来源: Rust Official Docs]**
 
 1. **Send/Sync 的形式化定义**：如何用数学语言精确描述「可安全跨线程转移」与「可安全跨线程共享引用」？
@@ -50,6 +82,7 @@
 3. **与并发原语衔接**：thread::spawn、Future、Arc、通道、Mutex 如何依赖 Send/Sync？
 
 ### 预期成果
+>
 > **[来源: Rust Official Docs]**
 
 - Send/Sync 的 Def 与定理（SEND1、SYNC1、SEND-T1、SYNC-T1、SYNC-L1）
@@ -61,6 +94,7 @@
 ---
 
 ## 📚 理论基础 {#-理论基础}
+>
 > **[来源: Rust Official Docs]**
 
 - **Send**：类型可以**安全地跨线程转移所有权**。若值从线程 $t_1$ 转移到 $t_2$，则 $t_1$ 不再访问该值，且 $t_2$ 的访问满足单线程内存与借用规则。
@@ -83,6 +117,7 @@
 ---
 
 ## 🔬 形式化定义 {#-形式化定义} {#defs-send1send-sync1sendsync-形式化}
+>
 > **[来源: Rust Official Docs]**
 
 **Def SEND1（Send）**：类型 $\tau$ 满足 **Send** 当且仅当：将 $\tau$ 的值从线程 $t_1$ 转移到线程 $t_2$ 后，$t_1$ 不再持有或访问该值，且 $t_2$ 上的使用满足单线程内存安全与 [borrow_checker_proof](./borrow_checker_proof.md) 借用规则。形式化谓词：
@@ -142,6 +177,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 ---
 
 ## 定理与引理
+>
 > **[来源: Rust Official Docs]**
 
 **引理 SYNC-L1（Sync 与 Send 等价）**：$T : \text{Sync} \Leftrightarrow \&T : \text{Send}$。
@@ -161,6 +197,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 *证明*：SPAWN1 要求闭包 `Send + 'static`；由 SEND-T1，捕获的 $T$ 转移至新线程后原线程不再访问，故满足数据竞争自由。∎
 
 ### 概念定义-属性关系-解释论证 层次汇总
+>
 > **[来源: Rust Official Docs]**
 
 | 层次 | 内容 | 本页对应 |
@@ -172,6 +209,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 ---
 
 ### Rust 对应
+>
 > **[来源: Rust Official Docs]**
 
 | 定理 | crates 示例 | 说明 |
@@ -183,6 +221,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 ---
 
 ## ⚠️ 反例 {#️-反例}
+>
 > **[来源: Rust Official Docs]**
 
 | 反例 | 违反 | 结果 | 形式化对应 |
@@ -196,6 +235,7 @@ $$\text{Sync}(\tau) \leftrightarrow \text{Send}(\& \tau)$$
 ---
 
 ## 🌳 公理-定理证明树 {#-公理-定理证明树}
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -293,3 +333,10 @@ Def SEND1, SYNC1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

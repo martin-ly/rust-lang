@@ -7,6 +7,36 @@
 
 ---
 
+## 📑 目录
+>
+- [工作流引擎能力矩阵](#工作流引擎能力矩阵)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [引擎能力对比矩阵](#引擎能力对比矩阵)
+    - [核心功能](#核心功能)
+    - [技术特性](#技术特性)
+    - [Rust支持](#rust支持)
+  - [选型决策矩阵](#选型决策矩阵)
+    - [按场景推荐](#按场景推荐)
+    - [复杂度评估](#复杂度评估)
+  - [深度对比](#深度对比)
+    - [Temporal vs Cadence](#temporal-vs-cadence)
+    - [Camunda 7 vs 8](#camunda-7-vs-8)
+  - [Rust集成指南](#rust集成指南)
+    - [Temporal Rust SDK](#temporal-rust-sdk)
+    - [自研状态机模式](#自研状态机模式)
+  - [设计模式映射](#设计模式映射)
+  - [风险评估矩阵](#风险评估矩阵)
+  - [与Rust形式化方法关联](#与rust形式化方法关联)
+  - [推荐学习路径](#推荐学习路径)
+  - [🆕 Rust 1.94 深度整合更新](#-rust-194-深度整合更新)
+    - [本文档的Rust 1.94更新要点](#本文档的rust-194更新要点)
+      - [核心特性应用](#核心特性应用)
+      - [代码示例更新](#代码示例更新)
+      - [相关文档](#相关文档)
+  - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [相关概念](#相关概念)
+
 ## 概述
 >
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Workflow Engine]** · **[来源: Wikipedia - Business Process Management]** · **[来源: ACM - Workflow System Design]** · **[来源: IEEE - Process Automation Standards]**
@@ -289,3 +319,10 @@ impl<S: State> Workflow<S> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

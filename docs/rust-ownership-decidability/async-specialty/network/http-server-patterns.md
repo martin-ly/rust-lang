@@ -4,10 +4,32 @@
 
 ---
 
+## 📑 目录
+>
+- [HTTP服务器模式](#http服务器模式)
+  - [📑 目录](#-目录)
+  - [1. 架构模式对比](#1-架构模式对比)
+    - [1.1 Axum - 函数式风格](#11-axum---函数式风格)
+    - [1.2 Actix-web - Actor风格](#12-actix-web---actor风格)
+  - [2. 中间件链模式](#2-中间件链模式)
+    - [2.1 认证中间件](#21-认证中间件)
+    - [2.2 限流中间件](#22-限流中间件)
+  - [3. 错误处理模式](#3-错误处理模式)
+    - [3.1 统一错误响应](#31-统一错误响应)
+    - [3.2 请求验证](#32-请求验证)
+  - [4. 流式响应](#4-流式响应)
+    - [4.1 SSE (Server-Sent Events)](#41-sse-server-sent-events)
+    - [4.2 文件流式下载](#42-文件流式下载)
+  - [5. 优雅关闭](#5-优雅关闭)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 架构模式对比
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Axum - 函数式风格
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -73,6 +95,7 @@ async fn main() {
 ```
 
 ### 1.2 Actix-web - Actor风格
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -463,7 +486,12 @@ async fn shutdown_signal() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

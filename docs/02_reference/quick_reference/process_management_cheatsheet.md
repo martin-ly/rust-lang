@@ -1,5 +1,40 @@
 ﻿# 进程管理快速参考卡片
 
+## 📑 目录
+>
+- [📋 目录](#目录)
+- [🚀 快速开始](#快速开始)
+  - [基本使用](#基本使用)
+- [📋 常用 API](#常用-api)
+  - [进程管理](#进程管理)
+  - [异步进程管理](#异步进程管理)
+  - [IPC 通信](#ipc-通信)
+  - [同步原语](#同步原语)
+- [🔧 配置选项](#配置选项)
+  - [ProcessConfig](#processconfig)
+  - [跨平台注意事项](#跨平台注意事项)
+- [⚡ 性能优化](#性能优化)
+  - [启用性能监控](#启用性能监控)
+- [🐛 错误处理](#错误处理)
+- [🚫 反例速查](#反例速查)
+  - [反例 1: 不检查子进程退出状态](#反例-1-不检查子进程退出状态)
+  - [反例 2: 在 Unix 信号处理中调用非 async-signal-safe 函数](#反例-2-在-unix-信号处理中调用非-async-signal-safe-函数)
+- [📚 相关文档](#相关文档)
+- [🧩 相关示例代码](#相关示例代码)
+- [🎯 使用场景](#使用场景)
+  - [场景 1: 构建任务调度器](#场景-1-构建任务调度器)
+  - [场景 2: 安全沙箱执行](#场景-2-安全沙箱执行)
+  - [场景 3: 进程监控与自动重启](#场景-3-进程监控与自动重启)
+- [📐 形式化方法链接](#形式化方法链接)
+  - [理论基础](#理论基础)
+  - [形式化定理](#形式化定理)
+- [📚 相关资源](#相关资源)
+  - [官方文档](#官方文档)
+  - [项目内部文档](#项目内部文档)
+  - [相关速查卡](#相关速查卡)
+- [🆕 Rust 1.95+ 特性整合](#rust-195-特性整合)
+  - [核心特性速查](#核心特性速查)
+
 > **快速参考** | [完整文档](../../../crates/c07_process/docs/README.md) | [代码示例](../../../crates/c07_process/examples/README.md)
 > **创建日期**: 2026-01-27
 > **最后更新**: 2026-05-08
@@ -9,6 +44,7 @@
 ---
 
 ## 📋 目录
+>
 > **[来源: Rust Official Docs]**
 
 - [进程管理快速参考卡片](#进程管理快速参考卡片)
@@ -48,9 +84,11 @@
 ---
 
 ## 🚀 快速开始
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本使用
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -84,9 +122,11 @@ manager.kill(pid)?;
 ---
 
 ## 📋 常用 API
+>
 > **[来源: Rust Official Docs]**
 
 ### 进程管理
+>
 > **[来源: Rust Official Docs]**
 
 | 操作     | 方法            | 说明         |
@@ -97,6 +137,7 @@ manager.kill(pid)?;
 | 列出所有 | `list_all()`    | 获取所有进程 |
 
 ### 异步进程管理
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -118,6 +159,7 @@ manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 ```
 
 ### IPC 通信
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -136,6 +178,7 @@ let queue = ipc.create_message_queue("my_queue", 100)?;
 ```
 
 ### 同步原语
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -156,9 +199,11 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 ---
 
 ## 🔧 配置选项
+>
 > **[来源: Rust Official Docs]**
 
 ### ProcessConfig
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -175,6 +220,7 @@ ProcessConfig {
 ```
 
 ### 跨平台注意事项
+>
 > **[来源: Rust Official Docs]**
 
 **Windows**:
@@ -534,3 +580,10 @@ let gamma = f64::consts::EULER_GAMMA;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [quick_reference 目录](./README.md)
+- [上级目录](../README.md)

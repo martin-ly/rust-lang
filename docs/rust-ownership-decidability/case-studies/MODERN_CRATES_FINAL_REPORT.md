@@ -6,12 +6,39 @@
 
 ---
 
+## 📑 目录
+>
+- [现代Rust库形式化分析 - 最终完成报告](#现代rust库形式化分析---最终完成报告)
+  - [📑 目录](#-目录)
+  - [执行摘要](#执行摘要)
+    - [三轮扩展回顾](#三轮扩展回顾)
+  - [第三轮新增库 (8个)](#第三轮新增库-8个)
+  - [最终统计](#最终统计)
+    - [库覆盖](#库覆盖)
+    - [形式化内容](#形式化内容)
+    - [现代特性覆盖](#现代特性覆盖)
+  - [关键安全定理汇总](#关键安全定理汇总)
+    - [内存安全](#内存安全)
+    - [并发安全](#并发安全)
+    - [类型安全](#类型安全)
+    - [异步安全](#异步安全)
+  - [形式化方法贡献](#形式化方法贡献)
+    - [创新点](#创新点)
+    - [方法论](#方法论)
+  - [100%完成标准](#100完成标准)
+  - [后续维护建议](#后续维护建议)
+  - [致谢](#致谢)
+  - [**里程碑**: 39个著名现代Rust库形式化分析完成](#里程碑-39个著名现代rust库形式化分析完成)
+  - [相关概念](#相关概念)
+
 ## 执行摘要
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 完成三轮扩展，实现了对**39个著名现代Rust开源库**的深度形式化分析。
 
 ### 三轮扩展回顾
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 轮次 | 新增库数 | 重点领域 | 状态 |
@@ -23,6 +50,7 @@
 ---
 
 ## 第三轮新增库 (8个)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 序号 | 库名 | 领域 | 核心形式化内容 |
@@ -228,7 +256,13 @@ hyper-T2: HTTP/2多路复用
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [case-studies 目录](./README.md)
+- [上级目录](../README.md)

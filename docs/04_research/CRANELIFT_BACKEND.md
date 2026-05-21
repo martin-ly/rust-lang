@@ -7,7 +7,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Cranelift 后端编译加速跟踪报告](#cranelift-后端编译加速跟踪报告)
+  - [📑 目录](#-目录)
+  - [1. Cranelift 简介](#1-cranelift-简介)
+    - [1.1 项目起源](#11-项目起源)
+    - [1.2 架构位置](#12-架构位置)
+  - [2. Cranelift 与 LLVM 的对比](#2-cranelift-与-llvm-的对比)
+    - [2.1 设计哲学差异](#21-设计哲学差异)
+    - [2.2 适用场景矩阵](#22-适用场景矩阵)
+    - [2.3 性能数据对比](#23-性能数据对比)
+  - [3. Rust 中启用 Cranelift 后端](#3-rust-中启用-cranelift-后端)
+    - [3.1 必要条件](#31-必要条件)
+    - [3.2 项目级配置](#32-项目级配置)
+    - [3.3 单次编译配置](#33-单次编译配置)
+    - [3.4 验证是否生效](#34-验证是否生效)
+  - [4. 已知限制与注意事项](#4-已知限制与注意事项)
+    - [4.1 当前限制 (2026-04)](#41-当前限制-2026-04)
+    - [4.2 与本项目的集成建议](#42-与本项目的集成建议)
+  - [5. 配置模板](#5-配置模板)
+    - [5.1 推荐的 `.cargo/config.toml` 配置](#51-推荐的-cargoconfigtoml-配置)
+    - [5.2 快速切换脚本](#52-快速切换脚本)
+  - [6. 跟踪状态](#6-跟踪状态)
+    - [6.1 关键 Issue 与 PR](#61-关键-issue-与-pr)
+    - [6.2 预计稳定化时间](#62-预计稳定化时间)
+  - [7. 参考文献](#7-参考文献)
+  - [相关概念](#相关概念)
+
 ## 1. Cranelift 简介
+>
 > **[来源: Rust Official Docs]**
 
 **Cranelift** 是一个模块化的代码生成器（code generator），最初由 Mozilla 的 Wasmtime 团队开发，用于将 WebAssembly 编译为机器码。与 LLVM 不同，Cranelift 专注于：
@@ -17,6 +46,7 @@
 - **轻量级架构**: 更少的内存占用，更短的启动时间
 
 ### 1.1 项目起源
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -31,6 +61,7 @@
 ```
 
 ### 1.2 架构位置
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -67,9 +98,11 @@ Standard (LLVM backend):           Cranelift backend:
 ---
 
 ## 2. Cranelift 与 LLVM 的对比
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 设计哲学差异
+>
 > **[来源: Rust Official Docs]**
 
 | 维度 | LLVM | Cranelift |
@@ -83,6 +116,7 @@ Standard (LLVM backend):           Cranelift backend:
 | **调试信息** | 完善 | 基础支持 |
 
 ### 2.2 适用场景矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 推荐后端 | 理由 |
@@ -95,6 +129,7 @@ Standard (LLVM backend):           Cranelift backend:
 | WebAssembly | **Cranelift** | 原生 Wasm 支持 |
 
 ### 2.3 性能数据对比
+>
 > **[来源: Rust Official Docs]**
 
 基于社区基准测试 (2025 年数据)：
@@ -111,9 +146,11 @@ Standard (LLVM backend):           Cranelift backend:
 ---
 
 ## 3. Rust 中启用 Cranelift 后端
+>
 > **[来源: Rust Official Docs]**
 
 ### 3.1 必要条件
+>
 > **[来源: Rust Official Docs]**
 
 1. **Nightly Rust 工具链**
@@ -128,6 +165,7 @@ rustup component add rustc-codegen-cranelift-preview --toolchain nightly
 ```
 
 ### 3.2 项目级配置
+>
 > **[来源: Rust Official Docs]**
 
 在 `.cargo/config.toml` 中添加：
@@ -148,6 +186,7 @@ codegen-backend = "cranelift"
 ```
 
 ### 3.3 单次编译配置
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -272,6 +311,7 @@ cargo +nightly build
 >
 > - 2026-04-24: 初始创建，基于 Rust 1.96 + nightly 2026-04 状态
 > - 下次复查: 2026-07-24 (跟踪 codegen-backend 稳定化进展)
+>
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -283,7 +323,12 @@ cargo +nightly build
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

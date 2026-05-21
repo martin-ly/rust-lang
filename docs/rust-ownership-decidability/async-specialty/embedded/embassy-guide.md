@@ -4,6 +4,31 @@
 
 ---
 
+## 📑 目录
+>
+- [1. Embassy架构](#1-embassy架构)
+- [2. 核心概念](#2-核心概念)
+  - [2.1 任务 (Tasks)](#21-任务-tasks)
+  - [2.2 时间管理](#22-时间管理)
+  - [2.3 中断处理](#23-中断处理)
+- [3. 异步外设使用](#3-异步外设使用)
+  - [3.1 UART with DMA](#31-uart-with-dma)
+  - [3.2 I2C异步传输](#32-i2c异步传输)
+  - [3.3 SPI异步传输](#33-spi异步传输)
+- [4. 无堆设计 (Heapless)](#4-无堆设计-heapless)
+  - [4.1 静态任务分配](#41-静态任务分配)
+  - [4.2 无堆数据结构](#42-无堆数据结构)
+- [5. 电源管理](#5-电源管理)
+  - [5.1 Tickless Idle](#51-tickless-idle)
+  - [5.2 深度睡眠集成](#52-深度睡眠集成)
+- [6. 并发模式](#6-并发模式)
+  - [6.1 共享资源](#61-共享资源)
+  - [6.2 信号量与通道](#62-信号量与通道)
+- [7. USB设备开发](#7-usb设备开发)
+- [8. 调试技巧](#8-调试技巧)
+  - [8.1 defmt日志](#81-defmt日志)
+  - [8.2 堆栈分析](#82-堆栈分析)
+
 ## 1. Embassy架构
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
@@ -601,3 +626,9 @@ async fn stack_heavy_task() {
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

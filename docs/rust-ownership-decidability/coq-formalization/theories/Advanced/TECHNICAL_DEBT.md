@@ -10,10 +10,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 1.94 形式化 - 技术债务跟踪](#rust-194-形式化---技术债务跟踪)
+  - [📑 目录](#-目录)
+  - [📊 完成度统计](#-完成度统计)
+    - [证明状态概览](#证明状态概览)
+    - [本次清除的 Admit (11 个)](#本次清除的-admit-11-个)
+  - [完成的证明详情](#完成的证明详情)
+    - [MetatheoryComplete.v (6 个 admit 已清除)](#metatheorycompletev-6-个-admit-已清除)
+      - [1. eval\_rust\_194\_trans (3 个 admit)](#1-eval_rust_194_trans-3-个-admit)
+      - [2. preservation\_rust\_194\_step (3 个 admit)](#2-preservation_rust_194_step-3-个-admit)
+    - [MetatheoryIntegration.v (5 个 admit 已清除)](#metatheoryintegrationv-5-个-admit-已清除)
+      - [1. progress\_rust\_194 (2 个 admit)](#1-progress_rust_194-2-个-admit)
+      - [2. decidability\_rust\_194 (1 个 admit)](#2-decidability_rust_194-1-个-admit)
+      - [3. valid\_captures\_correct (2 个 admit)](#3-valid_captures_correct-2-个-admit)
+  - [代码质量](#代码质量)
+    - [新增公理清单](#新增公理清单)
+    - [验证结果](#验证结果)
+  - [质量保证](#质量保证)
+  - [Honesty and Accuracy Statement](#honesty-and-accuracy-statement)
+  - [结论](#结论)
+  - [**状态: ✅ 100% 完成**](#状态--100-完成)
+  - [相关概念](#相关概念)
+
 ## 📊 完成度统计
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 证明状态概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 优先级 | 总数 | 已完成 | 状态 |
@@ -24,6 +50,7 @@
 | **总计** | **82** | **82** | **100% ✅** |
 
 ### 本次清除的 Admit (11 个)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 文件 | 原 admit 数量 | 修复方法 |
@@ -155,7 +182,6 @@ formalization projects.
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

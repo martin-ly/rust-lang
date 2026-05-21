@@ -1,5 +1,22 @@
 ﻿# Rust 形式化工程系统 - 主索引
 
+## 📑 目录
+>
+- [Rust 形式化工程系统 - 主索引](#rust-形式化工程系统---主索引)
+  - [📑 目录](#-目录)
+  - [🏛️ 理论体系与论证体系结构（顶层入口）](#️-理论体系与论证体系结构顶层入口)
+  - [理论基础 (01\_theoretical\_foundations)](#理论基础-01_theoretical_foundations)
+    - [类型系统子路径](#类型系统子路径)
+  - [编程范式 (02\_programming\_paradigms)](#编程范式-02_programming_paradigms)
+  - [设计模式 (03\_design\_patterns)](#设计模式-03_design_patterns)
+  - [工具链生态 (06\_toolchain\_ecosystem)](#工具链生态-06_toolchain_ecosystem)
+  - [软件工程 (05\_software\_engineering)](#软件工程-05_software_engineering)
+  - [研究议程 (09\_research\_agenda)](#研究议程-09_research_agenda)
+  - [质量保障 (10\_quality\_assurance)](#质量保障-10_quality_assurance)
+  - [证明与公理→定理链](#证明与公理定理链)
+  - [返回](#返回)
+  - [相关概念](#相关概念)
+
 > **创建日期**: 2026-02-20
 > **最后更新**: 2026-02-28
 > **Rust 版本**: 1.94.0+ (Edition 2024)
@@ -9,6 +26,7 @@
 ---
 
 ## 🏛️ 理论体系与论证体系结构（顶层入口）
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 说明 |
@@ -18,6 +36,7 @@
 ---
 
 ## 理论基础 (01_theoretical_foundations)
+>
 > **[来源: Rust Official Docs]**
 
 | 子模块 | 映射目标 | 说明 |
@@ -32,6 +51,7 @@
 | **10 数学基础** | [research_notes/type_theory/](../research_notes/type_theory/README.md) | 类型理论与数学基础 |
 
 ### 类型系统子路径
+>
 > **[来源: Rust Official Docs]**
 
 | 路径 | 映射目标 |
@@ -114,3 +134,10 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [rust-formal-engineering-system 目录](./README.md)
+- [上级目录](../README.md)

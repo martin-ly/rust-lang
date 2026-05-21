@@ -4,7 +4,23 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust所有权系统 - 综合思维导图](#rust所有权系统---综合思维导图)
+  - [📑 目录](#-目录)
+  - [Mermaid思维导图](#mermaid思维导图)
+  - [所有权系统架构图](#所有权系统架构图)
+  - [所有权转移流程图](#所有权转移流程图)
+  - [借用关系图](#借用关系图)
+  - [生命周期关系图](#生命周期关系图)
+  - [智能指针决策树](#智能指针决策树)
+  - [内部可变性选择矩阵](#内部可变性选择矩阵)
+  - [Send/Sync推导图](#sendsync推导图)
+  - [**对齐版本**: Rust 1.93.1](#对齐版本-rust-1931)
+  - [相关概念](#相关概念)
+
 ## Mermaid思维导图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```mermaid
@@ -149,6 +165,7 @@ mindmap
 ---
 
 ## 所有权系统架构图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -188,6 +205,7 @@ mindmap
 ---
 
 ## 所有权转移流程图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -380,7 +398,13 @@ Send和Sync推导:
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [visualizations 目录](./README.md)
+- [上级目录](../README.md)

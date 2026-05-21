@@ -4,10 +4,41 @@
 
 ---
 
+## 📑 目录
+>
+- [Embassy嵌入式框架深度案例分析](#embassy嵌入式框架深度案例分析)
+  - [📑 目录](#-目录)
+  - [1. 项目概览](#1-项目概览)
+    - [1.1 基本信息](#11-基本信息)
+    - [1.2 设计目标](#12-设计目标)
+  - [2. 架构深度分析](#2-架构深度分析)
+    - [2.1 整体架构](#21-整体架构)
+    - [2.2 任务调度器实现](#22-任务调度器实现)
+    - [2.3 定时器实现](#23-定时器实现)
+  - [3. 硬件抽象层 (HAL) 分析](#3-硬件抽象层-hal-分析)
+    - [3.1 类型状态模式](#31-类型状态模式)
+    - [3.2 异步外设访问](#32-异步外设访问)
+  - [4. 形式化安全性分析](#4-形式化安全性分析)
+    - [4.1 内存安全保证](#41-内存安全保证)
+    - [4.2 实时性分析](#42-实时性分析)
+    - [4.3 并发安全](#43-并发安全)
+  - [5. 性能特征](#5-性能特征)
+    - [5.1 内存占用](#51-内存占用)
+    - [5.2 能效特性](#52-能效特性)
+  - [6. 与理论对齐](#6-与理论对齐)
+  - [7. 结论](#7-结论)
+    - [7.1 创新点](#71-创新点)
+    - [7.2 适用场景](#72-适用场景)
+    - [7.3 形式化评估](#73-形式化评估)
+  - [**Embassy版本**: 0.5+](#embassy版本-05)
+  - [相关概念](#相关概念)
+
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 基本信息
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | 属性 | 值 |
@@ -21,6 +52,7 @@
 | 支持平台 | STM32, nRF, RP2040, ESP32, WASM |
 
 ### 1.2 设计目标
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -545,7 +577,12 @@ impl Executor {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

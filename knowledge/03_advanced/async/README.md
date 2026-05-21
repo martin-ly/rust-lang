@@ -1,4 +1,19 @@
 # Async 异步编程
+>
+> **层次定位**: L3 高级概念 / 异步子域索引
+> **前置依赖**: [knowledge 泛型](../../02_intermediate/generics.md) · [knowledge Trait](../../02_intermediate/traits.md)
+> **后置延伸**: [knowledge Unsafe](../unsafe/README.md) · [concept L3 Async](../../../concept/03_advanced/02_async.md)
+> **跨层映射**: knowledge→concept 直觉映射 | L3 系统编程
+> **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性
+
+## 📑 目录
+
+- [Async 异步编程](#async-异步编程)
+  - [📑 目录](#-目录)
+  - [📚 内容](#-内容)
+  - [🎯 学习路径](#-学习路径)
+  - [🚀 相关层](#-相关层)
+  - [**最后更新**: 2026-05-09](#最后更新-2026-05-09)
 
 > **Bloom 层级**: 理解
 

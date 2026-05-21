@@ -4,7 +4,29 @@
 
 ---
 
+## 📑 目录
+>
+- [实战示例：分布式聊天系统](#实战示例分布式聊天系统)
+  - [📑 目录](#-目录)
+  - [1. 系统架构](#1-系统架构)
+  - [2. 核心Actor实现](#2-核心actor实现)
+    - [2.1 用户Actor](#21-用户actor)
+    - [2.2 房间Actor (群聊)](#22-房间actor-群聊)
+    - [2.3 会话Actor (WebSocket连接)](#23-会话actor-websocket连接)
+  - [3. 系统集成](#3-系统集成)
+    - [3.1 Actor系统启动](#31-actor系统启动)
+    - [3.2 消息格式](#32-消息格式)
+  - [4. 扩展功能](#4-扩展功能)
+    - [4.1 消息持久化](#41-消息持久化)
+    - [4.2 消息推送](#42-消息推送)
+  - [5. 性能优化](#5-性能优化)
+    - [5.1 水平扩展](#51-水平扩展)
+    - [5.2 连接优化](#52-连接优化)
+  - [**更新日期**: 2026-03-05](#更新日期-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 系统架构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -54,9 +76,11 @@
 ---
 
 ## 2. 核心Actor实现
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 用户Actor
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -609,7 +633,12 @@ impl ChatSystem {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

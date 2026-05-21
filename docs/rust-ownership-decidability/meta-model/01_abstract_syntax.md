@@ -1,6 +1,39 @@
 # Rust 所有权系统元模型 - 抽象语法
 
+## 📑 目录
+>
+- [Rust 所有权系统元模型 - 抽象语法](#rust-所有权系统元模型---抽象语法)
+  - [📑 目录](#-目录)
+  - [1. 元元语言说明](#1-元元语言说明)
+  - [2. 词法元素](#2-词法元素)
+    - [2.1 标识符](#21-标识符)
+    - [2.2 关键字](#22-关键字)
+  - [3. 类型语法](#3-类型语法)
+    - [3.1 基础类型](#31-基础类型)
+    - [3.2 区域 (Lifetime/Region)](#32-区域-lifetimeregion)
+  - [4. 表达式语法](#4-表达式语法)
+    - [4.1 核心表达式](#41-核心表达式)
+    - [4.2 位置表达式 (Place Expressions)](#42-位置表达式-place-expressions)
+    - [4.3 值](#43-值)
+  - [5. 声明语法](#5-声明语法)
+    - [5.1 函数](#51-函数)
+    - [5.2 结构体](#52-结构体)
+    - [5.3 枚举](#53-枚举)
+    - [5.4 Trait](#54-trait)
+  - [6. 程序](#6-程序)
+  - [7. 语法范畴总结](#7-语法范畴总结)
+  - [8. 语法 sugar](#8-语法-sugar)
+    - [8.1 可变性简化](#81-可变性简化)
+    - [8.2 生命周期省略](#82-生命周期省略)
+  - [9. 示例程序](#9-示例程序)
+    - [9.1 简单借用](#91-简单借用)
+    - [9.2 可变借用](#92-可变借用)
+    - [9.3 函数定义](#93-函数定义)
+  - [**最后更新**: 2026-03-05](#最后更新-2026-03-05)
+  - [相关概念](#相关概念)
+
 ## 1. 元元语言说明
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本文档使用以下元语言：
@@ -14,9 +47,11 @@
 - *斜体* 表示元变量
 
 ## 2. 词法元素
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 标识符
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```bnf
@@ -255,7 +290,13 @@ fn swap<'a>(x: &'a mut i32, y: &'a mut i32) {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [meta-model 目录](./README.md)
+- [上级目录](../README.md)

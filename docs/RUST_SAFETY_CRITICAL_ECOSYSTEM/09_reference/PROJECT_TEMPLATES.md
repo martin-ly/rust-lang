@@ -1,6 +1,31 @@
 # 项目模板
 
+## 📑 目录
+>
+- [项目模板](#项目模板)
+  - [📑 目录](#-目录)
+  - [概述](#概述)
+  - [1. 嵌入式项目模板](#1-嵌入式项目模板)
+    - [1.1 项目结构](#11-项目结构)
+    - [1.2 Cargo.toml模板](#12-cargotoml模板)
+    - [1.3 rust-toolchain.toml](#13-rust-toolchaintoml)
+    - [1.4 .cargo/config.toml](#14-cargoconfigtoml)
+    - [1.5 main.rs模板](#15-mainrs模板)
+    - [1.6 lib.rs模板](#16-librs模板)
+    - [1.7 memory.x](#17-memoryx)
+  - [2. 应用程序模板](#2-应用程序模板)
+    - [2.1 项目结构](#21-项目结构)
+    - [2.2 Cargo.toml](#22-cargotoml)
+    - [2.3 state\_machine.rs](#23-state_machiners)
+    - [2.4 CI/CD配置](#24-cicd配置)
+  - [3. 快速启动命令](#3-快速启动命令)
+    - [3.1 创建新项目](#31-创建新项目)
+    - [3.2 初始化检查清单](#32-初始化检查清单)
+  - [*使用这些模板快速启动您的安全关键Rust项目。*](#使用这些模板快速启动您的安全关键rust项目)
+  - [相关概念](#相关概念)
+
 ## 概述
+>
 > **[来源: Rust Official Docs]**
 
 本文档提供Rust安全关键项目的完整模板，可直接用于启动新项目。
@@ -8,9 +33,11 @@
 ---
 
 ## 1. 嵌入式项目模板
+>
 > **[来源: Rust Official Docs]**
 
 ### 1.1 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -44,6 +71,7 @@ embedded-safety-project/
 ```
 
 ### 1.2 Cargo.toml模板
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -117,6 +145,7 @@ strip = false
 ```
 
 ### 1.3 rust-toolchain.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -135,6 +164,7 @@ profile = "minimal"
 ```
 
 ### 1.4 .cargo/config.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -157,6 +187,7 @@ retry = 3
 ```
 
 ### 1.5 main.rs模板
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -214,6 +245,7 @@ fn main() -> ! {
 ```
 
 ### 1.6 lib.rs模板
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -240,6 +272,7 @@ pub type Result<T> = core::result::Result<T, SafetyError>;
 ```
 
 ### 1.7 memory.x
+>
 > **[来源: Rust Official Docs]**
 
 ```ld
@@ -262,9 +295,11 @@ _stack_top = ORIGIN(RAM) + LENGTH(RAM);
 ---
 
 ## 2. 应用程序模板
+>
 > **[来源: Rust Official Docs]**
 
 ### 2.1 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -567,7 +602,6 @@ echo "   4. Run 'cargo test' to run tests"
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

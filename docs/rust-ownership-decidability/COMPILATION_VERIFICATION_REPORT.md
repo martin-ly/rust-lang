@@ -6,12 +6,46 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust Code Compilation Verification Report](#rust-code-compilation-verification-report)
+  - [📑 目录](#-目录)
+  - [Executive Summary](#executive-summary)
+    - [Key Findings](#key-findings)
+  - [Files Verified](#files-verified)
+    - [Core Concepts (01-core-concepts/)](#core-concepts-01-core-concepts)
+    - [Advanced Topics (08-advanced-topics/)](#advanced-topics-08-advanced-topics)
+    - [Concurrency Patterns (12-concurrency-patterns/)](#concurrency-patterns-12-concurrency-patterns)
+    - [Exercise Files (exercises/src/)](#exercise-files-exercisessrc)
+  - [Categorization of Failures](#categorization-of-failures)
+    - [Category 1: External Crate Dependencies (Expected)](#category-1-external-crate-dependencies-expected)
+    - [Category 2: Missing main() Function (Fixable)](#category-2-missing-main-function-fixable)
+    - [Category 3: Non-Code Content in Code Blocks (False Positives)](#category-3-non-code-content-in-code-blocks-false-positives)
+    - [Category 4: Intentionally Broken Code (Counterexamples)](#category-4-intentionally-broken-code-counterexamples)
+    - [Category 5: Incomplete/Illustrative Snippets](#category-5-incompleteillustrative-snippets)
+  - [Rust 1.94 Specific Features Verified](#rust-194-specific-features-verified)
+    - [✅ Verified Working](#-verified-working)
+    - [Note on 1.94 APIs](#note-on-194-apis)
+  - [Recommendations](#recommendations)
+    - [For Documentation Maintainers](#for-documentation-maintainers)
+    - [For Readers](#for-readers)
+  - [Conclusion](#conclusion)
+    - [Summary](#summary)
+    - [Verdict](#verdict)
+  - [Appendix: Full Results](#appendix-full-results)
+    - [Passed Checks](#passed-checks)
+    - [Detailed Error Analysis](#detailed-error-analysis)
+  - [*Rust Version: 1.94.0*](#rust-version-1940)
+  - [相关概念](#相关概念)
+
 ## Executive Summary
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 This report documents the compilation verification of Rust code examples in the `docs/rust-ownership-decidability` directory using Rust 1.94.
 
 ### Key Findings
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 | Metric | Count | Percentage |
@@ -31,6 +65,7 @@ This report documents the compilation verification of Rust code examples in the 
 ---
 
 ## Files Verified
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Core Concepts (01-core-concepts/)
@@ -253,7 +288,13 @@ See `verification_results.json` for complete error messages for all 109 failed c
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)

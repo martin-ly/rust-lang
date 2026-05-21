@@ -1,10 +1,10 @@
 # 08 多路合并模式 (Multi-Merge)
 
-## 📋 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
-
+## 📑 目录
+>
 - [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
-  - [📋 目录](#-目录)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
     - [触发计数语义](#触发计数语义)
@@ -24,14 +24,45 @@
   - [应用场景](#应用场景)
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
+
+## 📋 目录
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+- [08 多路合并模式 (Multi-Merge)](#08-多路合并模式-multi-merge)
+  - [📑 目录](#-目录)
+  - [📋 目录](#-目录-1)
+  - [模式定义与语义](#模式定义与语义)
+    - [核心语义](#核心语义)
+    - [触发计数语义](#触发计数语义)
+  - [BPMN 2.0 表示](#bpmn-20-表示)
+    - [OR-Join 实现](#or-join-实现)
+  - [形式化语义](#形式化语义)
+    - [状态机形式化](#状态机形式化)
+    - [进程代数 (CSP)](#进程代数-csp)
+  - [正确性证明](#正确性证明)
+    - [安全性](#安全性)
+    - [活性](#活性)
+  - [Rust 实现示例](#rust-实现示例)
+    - [基础实现](#基础实现)
+    - [广播通道实现](#广播通道实现)
+    - [复杂工作流示例](#复杂工作流示例)
+  - [与其他模式的关系](#与其他模式的关系)
+  - [应用场景](#应用场景)
+    - [注意事项](#注意事项)
+  - [学术参考](#学术参考)
+  - [相关概念](#相关概念)
 
 ## 模式定义与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多路合并模式允许多个分支独立地汇入同一个后续节点，无需同步。
 每个分支完成时都会触发后续活动的执行。
 
 ### 核心语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 $$
@@ -201,6 +232,7 @@ Next = execute -> SKIP
 -- 触发计数
 TriggerCount = trigger?i -> count(i) ; TriggerCount
 count(i) = increment -> SKIP
+
 ```
 
 **CCS 表示：**
@@ -601,6 +633,7 @@ $$
 4. **Recker, J., & Mendling, J.** (2006). "On the Translation between BPMN and BPEL: Conceptual Mismatch between Process Modeling Languages." *Proceedings of the 18th International Conference on Advanced Information Systems Engineering*, 521-532.
 
 5. **Laue, R., & Mendling, J.** (2009). "The Impact of Structuredness on Error Probability of Process Models." *Information Systems and E-Business Management*, 7(2), 251-275.
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -612,7 +645,12 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

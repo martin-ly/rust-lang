@@ -6,7 +6,28 @@
 
 ---
 
+## 📑 目录
+>
+- [算法选择决策树](#算法选择决策树)
+  - [📑 目录](#-目录)
+  - [📊 数据结构选择决策树](#-数据结构选择决策树)
+  - [🔀 排序算法选择](#-排序算法选择)
+    - [决策矩阵](#决策矩阵)
+    - [代码示例](#代码示例)
+  - [🔄 搜索算法选择](#-搜索算法选择)
+    - [搜索算法决策树](#搜索算法决策树)
+    - [搜索算法对比](#搜索算法对比)
+  - [🎯 图算法选择](#-图算法选择)
+    - [问题类型决策](#问题类型决策)
+  - [📊 动态规划决策](#-动态规划决策)
+    - [DP 适用性判断](#dp-适用性判断)
+    - [经典 DP 问题模式](#经典-dp-问题模式)
+  - [🔗 相关文档](#-相关文档)
+  - [**状态**: ✅ 100% 完成](#状态--100-完成)
+  - [相关概念](#相关概念)
+
 ## 📊 数据结构选择决策树
+>
 > **[来源: Rust Official Docs]**
 
 ```mermaid
@@ -44,9 +65,11 @@ graph TD
 ---
 
 ## 🔀 排序算法选择
+>
 > **[来源: Rust Official Docs]**
 
 ### 决策矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 场景 | 推荐算法 | 复杂度 | 稳定性 | 内存 |
@@ -113,7 +136,7 @@ graph TD
 | 插值搜索 | 均匀分布 | O(log log n)* | O(1) |
 | 指数搜索 | 有序 | O(log n) | O(1) |
 
-* 平均情况
+- 平均情况
 
 ```rust
 // 二分查找
@@ -254,8 +277,8 @@ fn longest_increasing_subsequence(nums: &[i32]) -> i32 {
 
 ## 🔗 相关文档
 
-* [C08 主索引](../../../crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)
-* [算法速查卡](../../02_reference/quick_reference/algorithms_cheatsheet.md)
+- [C08 主索引](../../../crates/c08_algorithms/docs/tier_01_foundations/02_主索引导航.md)
+- [算法速查卡](../../02_reference/quick_reference/algorithms_cheatsheet.md)
 
 ---
 
@@ -272,3 +295,10 @@ fn longest_increasing_subsequence(nums: &[i32]) -> i32 {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [formal_methods 目录](./README.md)
+- [上级目录](../README.md)

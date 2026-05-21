@@ -1,15 +1,53 @@
 # 线程模型的完整形式化语义
 
+## 📑 目录
+>
+- [线程模型的完整形式化语义](#线程模型的完整形式化语义)
+  - [📑 目录](#-目录)
+  - [1. 引言](#1-引言)
+  - [2. 线程状态机的形式化定义](#2-线程状态机的形式化定义)
+    - [2.1 线程状态](#21-线程状态)
+    - [2.2 状态转换规则](#22-状态转换规则)
+  - [3. 线程创建语义的形式化](#3-线程创建语义的形式化)
+    - [3.1 Spawn 操作的形式化定义](#31-spawn-操作的形式化定义)
+    - [3.2 Rust 代码示例](#32-rust-代码示例)
+    - [3.3 所有权转移语义](#33-所有权转移语义)
+  - [4. 线程调度语义](#4-线程调度语义)
+    - [4.1 OS 调度器的形式化模型](#41-os-调度器的形式化模型)
+    - [4.2 协作式 vs 抢占式调度](#42-协作式-vs-抢占式调度)
+  - [5. 线程局部存储语义](#5-线程局部存储语义)
+    - [5.1 `thread_local!` 的形式化定义](#51-thread_local-的形式化定义)
+    - [5.2 Rust 代码示例](#52-rust-代码示例)
+    - [5.3 安全论证](#53-安全论证)
+  - [6. 线程取消语义](#6-线程取消语义)
+    - [6.1 Park/Unpark 机制](#61-parkunpark-机制)
+    - [6.2 Rust 代码示例](#62-rust-代码示例)
+    - [6.3 Park 的 happens-before 关系](#63-park-的-happens-before-关系)
+  - [7. 线程安全 Trait 的形式化](#7-线程安全-trait-的形式化)
+    - [7.1 Send Trait 语义](#71-send-trait-语义)
+    - [7.2 Sync Trait 语义](#72-sync-trait-语义)
+    - [7.3 重要类型的线程安全分类](#73-重要类型的线程安全分类)
+    - [7.4 代码示例](#74-代码示例)
+  - [8. 综合安全论证](#8-综合安全论证)
+    - [8.1 线程安全定理](#81-线程安全定理)
+    - [8.2 形式化不变式](#82-形式化不变式)
+  - [9. 总结](#9-总结)
+  - [这些形式化定义确保了 Rust 并发程序的安全性和正确性。](#这些形式化定义确保了-rust-并发程序的安全性和正确性)
+  - [相关概念](#相关概念)
+
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 线程是操作系统提供的基本并发原语，Rust 通过 `std::thread` 模块提供了对操作系统线程的抽象。
 本文档从形式化角度定义线程的语义，包括线程生命周期、调度、局部存储以及线程安全 trait 的精确含义。
 
 ## 2. 线程状态机的形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 线程状态
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -403,7 +441,7 @@ fn thread_safety_example() {
 5. **Park/Unpark**：定义了线程阻塞/唤醒的语义和 happens-before 关系
 6. **Send/Sync**：精确形式化了线程安全 trait 的含义和推导规则
 
-这些形式化定义确保了 Rust 并发程序的安全性和正确性。
+这些形式化定义确保了 Rust 并发程序的安全性和正确性
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
@@ -415,7 +453,12 @@ fn thread_safety_example() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 相关概念
+
+- [上级目录](../README.md)

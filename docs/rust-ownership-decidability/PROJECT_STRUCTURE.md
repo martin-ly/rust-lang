@@ -8,10 +8,36 @@
 
 ---
 
+## 📑 目录
+>
+- [Rust 所有权可判定性 - 项目结构](#rust-所有权可判定性---项目结构)
+  - [📑 目录](#-目录)
+  - [📁 目录结构](#-目录结构)
+    - [核心文档](#核心文档)
+    - [1. 基础概念 (01-core-concepts/)](#1-基础概念-01-core-concepts)
+    - [2. 形式化基础 (formal-foundations/)](#2-形式化基础-formal-foundations)
+    - [3. Coq形式化 (coq-formalization/)](#3-coq形式化-coq-formalization)
+    - [4. Rust 1.94 对齐文档](#4-rust-194-对齐文档)
+    - [5. 元模型 (meta-model/)](#5-元模型-meta-model)
+    - [6. 其他重要目录](#6-其他重要目录)
+    - [7. 专题研究](#7-专题研究)
+    - [8. 项目文档](#8-项目文档)
+  - [📊 统计信息](#-统计信息)
+    - [文件类型分布](#文件类型分布)
+    - [代码统计](#代码统计)
+  - [🎯 快速导航](#-快速导航)
+    - [入门推荐](#入门推荐)
+    - [核心证明](#核心证明)
+  - [✅ 质量保证](#-质量保证)
+  - [*项目结构清晰，易于导航和维护*](#项目结构清晰易于导航和维护)
+  - [相关概念](#相关概念)
+
 ## 📁 目录结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 核心文档
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```
@@ -20,6 +46,7 @@
 ```
 
 ### 1. 基础概念 (01-core-concepts/)
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rust核心所有权概念的学习资源。
@@ -238,7 +265,13 @@ meta-model/
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 相关概念
+
+- [rust-ownership-decidability 目录](./README.md)
+- [上级目录](../README.md)
