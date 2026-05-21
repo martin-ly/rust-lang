@@ -16,7 +16,12 @@
 
 ## 📑 目录
 
-- [Rust 知识体系全局思维导图（Knowledge Mindmap）](#)
+- [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap)
+  - [📑 目录](#-目录)
+  - [一、L0-L7 全局知识体系 Mindmap](#一l0-l7-全局知识体系-mindmap)
+  - [二、五维主线 Mindmap](#二五维主线-mindmap)
+  - [三、Mindmap 与四层关系图谱的关联](#三mindmap-与四层关系图谱的关联)
+  - [四、相关概念链接](#四相关概念链接)
 
 ## 一、L0-L7 全局知识体系 Mindmap
 

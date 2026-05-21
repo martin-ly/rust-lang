@@ -215,14 +215,14 @@ classDiagram
     class Debug {
         +调试输出接口
     }
-    
+
     Any <|-- Sized : 子类型约束
     Sized <|-- Copy : 子类型约束
     Sized <|-- Clone : 子类型约束
     Sized <|-- Send : auto trait
     Sized <|-- Sync : auto trait
     Clone <|-- Copy : Copy 继承 Clone
-    
+
     note for Any "所有 Rust 类型的根\n（除 dyn Trait 外均实现）"
     note for Sized "99% 类型自动实现\n（dyn Trait / [T] 除外）"
     note for Copy "i32, bool, &T 等\n（堆分配类型除外）"
@@ -240,25 +240,25 @@ graph TD
     A --> D[ADT]
     A --> E[引用类型]
     A --> F[特殊类型]
-    
+
     B --> B1[整数 i/u]
     B --> B2[浮点 f]
     B --> B3[bool]
     B --> B4[char]
-    
+
     C --> C1[数组 [T; N]]
     C --> C2[元组 (A, B)]
     C --> C3[切片 [T]]
-    
+
     D --> D1[struct]
     D --> D2[enum]
     D --> D3[union]
-    
+
     E --> E1[&T]
     E --> E2[&mut T]
     E --> E3[*const T]
     E --> E4[*mut T]
-    
+
     F --> F1[! Never]
     F --> F2[() Unit]
     F --> F3[dyn Trait]

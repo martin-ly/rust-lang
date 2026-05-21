@@ -206,37 +206,37 @@ Unsafe 是公理系统的显式扩展:
 stateDiagram-v2
     [*] --> Safe: 编写 Rust 代码
     Safe --> Safe: 常规操作
-    
+
     Safe --> UnsafeBlock: 进入 unsafe { }
     note right of UnsafeBlock
         编译器暂停检查
         程序员承担证明责任
     end note
-    
+
     UnsafeBlock --> Safe: 块结束
     UnsafeBlock --> UB: 违反安全契约
-    
+
     Safe --> UnsafeFn: 调用 unsafe fn
     note right of UnsafeFn
         调用方需验证
         被调用方的不变式
     end note
-    
+
     UnsafeFn --> Safe: 返回安全值
     UnsafeFn --> UB: 前置条件不满足
-    
+
     Safe --> UnsafeTrait: impl unsafe Trait
     note right of UnsafeTrait
         全局影响:
         所有使用该 Trait 的代码
         都依赖此 impl 的正确性
     end note
-    
+
     UnsafeTrait --> Safe: 编译通过
     UnsafeTrait --> UB: 契约违反
-    
+
     UB --> [*]: 未定义行为发生
-    
+
     state Safe {
         [*] --> TypeSafe: 类型检查
         TypeSafe --> MemorySafe: 借用检查
@@ -246,7 +246,6 @@ stateDiagram-v2
 ```
 
 > **思维表征说明**: `stateDiagram-v2` 将 Safe/Unsafe 边界建模为**状态转换系统**——Safe 是「编译器保护态」，UnsafeBlock/UnsafeFn/UnsafeTrait 是「人工证明态」，UB 是「不可恢复的错误态」。关键洞察：从 Safe 进入 Unsafe 的每次转移都必须有**显式标记**（`unsafe` 关键字），且转移条件是「程序员已验证安全契约」。这与 `graph TD` 流程图（展示知识结构）形成互补——状态机图展示的是**运行时/编码时的状态约束**。 [来源: Rustonomicon §1; RFC 2585; Rust Reference §19]
-
 
 ```text
 Rust 区分两种不变式:

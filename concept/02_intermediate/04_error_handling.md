@@ -529,25 +529,25 @@ let result = select! {
 graph TD
     A[函数可能失败?] -->|是| B{失败类型?}
     A -->|否| C[返回裸类型 T]
-    
+
     B -->|可恢复错误| D[返回 Result<T, E>]
     B -->|不可恢复/程序 bug| E[panic!]
     B -->|值可能缺失| F[返回 Option<T>]
-    
+
     D --> G{调用方如何处理?}
     G -->|传播| H[使用 ? 运算符]
     G -->|转换错误| I[使用 map_err]
     G -->|提供默认值| J[使用 unwrap_or]
     G -->|合并多个错误| K[使用 anyhow/eyre]
-    
+
     E --> L{是否在 main/测试?}
     L -->|是| M[直接 panic]
     L -->|否| N[考虑改回 Result]
-    
+
     F --> O{缺失是错误还是正常?}
     O -->|正常场景| P[Option 足够]
     O -->|错误场景| Q[升级为 Result]
-    
+
     style C fill:#9f9
     style H fill:#9f9
     style M fill:#ff9

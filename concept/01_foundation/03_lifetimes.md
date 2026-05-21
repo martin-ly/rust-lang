@@ -351,7 +351,7 @@ graph BT
     C --> E['e]
     D --> BOT[函数局部<br/>最小元 ⊥]
     E --> BOT
-    
+
     style TOP fill:#9f9,stroke:#333
     style BOT fill:#f99,stroke:#333
     style A fill:#fff,stroke:#333
