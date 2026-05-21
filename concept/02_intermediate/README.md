@@ -49,10 +49,13 @@ mindmap
       传播[? 运算符]
 ```
 
-> **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。建议在学习各子模块前通览此图，定位当前概念在四核中的位置。关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型的枢纽交叉点。
+> **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。
+> 建议在学习各子模块前通览此图，定位当前概念在四核中的位置。
+> 关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型的枢纽交叉点。
 > [来源: 💡 原创分析]
-
-> **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。Trait 是 Rust 的行为抽象核心，泛型实现零成本参数多态，内存管理扩展所有权的表达能力（共享、内部可变性），错误处理将异常转化为类型系统的一部分。关键交叉点：**Trait Bounds** 是 Trait 与泛型的结合部。
+> **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。
+> Trait 是 Rust 的行为抽象核心，泛型实现零成本参数多态，内存管理扩展所有权的表达能力（共享、内部可变性），错误处理将异常转化为类型系统的一部分。
+> 关键交叉点：**Trait Bounds** 是 Trait 与泛型的结合部。
 
 ## 一、本层概念关系图（完整版）
 
@@ -165,6 +168,10 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [04_error_handling.md](./04_error_handling.md) | 错误处理 | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
 | [05_assert_matches.md](./05_assert_matches.md) | 模式匹配断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
 | [06_range_types.md](./06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
+| [07_closure_types.md](./07_closure_types.md) | 闭包类型系统 | 捕获模式、Fn/FnMut/FnOnce、move 闭包、生命周期擦除 | ✅ v1.0 | Ownership, Borrowing | Async, Iterator |
+| [08_interior_mutability.md](./08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
+| [09_serde_patterns.md](./09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
+| [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
 
 ---
 

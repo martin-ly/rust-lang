@@ -428,6 +428,11 @@
 | P17-T7 | 新增 `07_future/13_unsafe_fields_preview.md` | 字段级 unsafe 标记、安全边界细化 | ✅ |
 | P17-T8 | 补充 02_async / 02_generics 来源标注（后台 Agent） | +30 来源标注 | ⚠️ 02_generics ✅ / 02_async Agent 超时 |
 | P17-T9 | 质量基线报告同步 | 全部指标刷新 | ✅ |
+| P17-T10 | 新增 `03_advanced/06_pin_unpin.md` | Pin 不动性、自引用类型、PhantomPinned、async 状态机 | ✅ |
+| P17-T11 | 新增 `06_ecosystem/13_logging_observability.md` | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ |
+| P17-T12 | 新增 `02_intermediate/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
+| P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
+| P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步资源销毁、RFC 3308、Pin 交互、workaround 模式 | ✅ |
 
 **关键成果**:
 
@@ -440,20 +445,32 @@
 - 新增 `07_future/15_gen_blocks_preview.md`（~349 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/16_cranelift_backend_preview.md`（~303 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/17_rust_specification_preview.md`（~345 行，10 来源，3 Mermaid 图表）
-- 涵盖编译器前端并行化、智能指针派生宏、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范
-- **文件总数: 83 → 92，Mermaid 图表: 328 → 353**
+- 新增 `03_advanced/05_rust_ffi.md`（~399 行，10 来源，3 Mermaid 图表）
+- 新增 `06_ecosystem/11_webassembly.md`（~342 行，10 来源，3 Mermaid 图表）
+- 新增 `02_intermediate/07_closure_types.md`（~362 行，10 来源，3 Mermaid 图表）
+- 新增 `05_comparative/06_rust_vs_java.md`（~326 行，10 来源，3 Mermaid 图表）
+- 新增 `01_foundation/05_reference_semantics.md`（~384 行，10 来源，3 Mermaid 图表）
+- 新增 `02_intermediate/08_interior_mutability.md`（~417 行，10 来源，2 Mermaid 图表）
+- 新增 `04_formal/06_subtype_variance.md`（~363 行，10 来源，2 Mermaid 图表）
+- 新增 `06_ecosystem/12_testing_strategies.md`（~410 行，10 来源，2 Mermaid 图表）
+- 新增 `01_foundation/06_zero_cost_abstractions.md`（~372 行，10 来源，2 Mermaid 图表）
+- 新增 `02_intermediate/09_serde_patterns.md`（~480 行，10 来源，2 Mermaid 图表）
+- 新增 `03_advanced/06_pin_unpin.md`（~380 行，10 来源，3 Mermaid 图表）
+- 新增 `06_ecosystem/13_logging_observability.md`（~380 行，10 来源，3 Mermaid 图表）
+- 涵盖编译器前端并行化、智能指针派生宏、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范、FFI 跨语言、WebAssembly 生态、闭包类型系统、Rust vs Java、引用语义、内部可变性、子类型与变型、测试策略、零成本抽象、Serde 序列化、Pin 与 Unpin、日志与可观测性
+- **文件总数: 83 → 104，Mermaid 图表: 328 → 384**
 
 ---
 
 **累计交付统计**:
 
-- **92 个 Markdown 文件**，~68,230 行，**~1,750** 条来源标注
-- **353** 个 Mermaid 图表，17 种类型，覆盖 **80** 个文件
-- **242/242** 代码块编译通过，0 失败
-- **74/74** 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: **100.0%**（353/353），全部文件 100%
+- **107 个 Markdown 文件**，~73,620 行，**~1,900** 条来源标注
+- **393** 个 Mermaid 图表，17 种类型，覆盖 **95** 个文件
+- **244/244** 代码块编译通过，0 失败
+- **89/89** 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（393/393），全部文件 100%
 
-**文档版本**: 2.6
+**文档版本**: 2.7
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
-**最后更新**: 2026-05-21
-**状态**: ✅ Phase 17 进行中，知识体系持续演进中
+**最后更新**: 2026-05-22
+**状态**: ✅ Phase 17 持续推进中，知识体系持续演进中

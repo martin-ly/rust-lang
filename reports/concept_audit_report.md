@@ -1,22 +1,29 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-22T05:01
-> 扫描文件数: 74
+> 生成时间: 2026-05-22T06:33
+> 扫描文件数: 90
 > 版本对齐: Rust 1.95.0 stable
 
 ## 摘要
 
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
-| 扫描文件数 | 74 | — |
-| 跨文件链接 ≥3 | 74/74 | ✅ |
-| 死链接文件 | 0 | ✅ |
-| 命名规范符合 | 72/74 | ⚠️ |
+| 扫描文件数 | 90 | — |
+| 跨文件链接 ≥3 | 90/90 | ✅ |
+| 死链接文件 | 1 | ❌ |
+| 命名规范符合 | 88/90 | ⚠️ |
 | 代码块问题文件 | 0 | ✅ |
-| 显式 Bloom 标注 | 74/74 | ✅ |
-| 平均来源标注率 | 15.7% | ✅ |
+| 显式 Bloom 标注 | 90/90 | ✅ |
+| 平均来源标注率 | 15.3% | ✅ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 261 | — |
+
+## 死链接检测
+
+| 源文件 | 链接文本 | 死链接目标 |
+|:---|:---|:---|
+| concept/05_comparative/07_rust_vs_python.md | Rust vs Go | `./04_rust_vs_go.md` |
+| concept/05_comparative/07_rust_vs_python.md | Rust vs Go | `./04_rust_vs_go.md` |
 
 ## 命名不规范的文件
 
@@ -27,6 +34,10 @@
 
 | 文件 | 标注数 | 估算段落数 | 标注率 |
 |:---|:---|:---|:---|
+| concept/02_intermediate/08_interior_mutability.md | 19 | 73 | 9.7% |
+| concept/02_intermediate/09_serde_patterns.md | 17 | 79 | 9.7% |
+| concept/06_ecosystem/11_webassembly.md | 13 | 55 | 8.0% |
+| concept/06_ecosystem/13_logging_observability.md | 14 | 67 | 9.0% |
 | concept/07_future/07_mcdc_coverage_preview.md | 9 | 40 | 6.0% |
 | concept/07_future/09_parallel_frontend_preview.md | 13 | 41 | 9.5% |
 | concept/07_future/13_unsafe_fields_preview.md | 16 | 56 | 9.9% |

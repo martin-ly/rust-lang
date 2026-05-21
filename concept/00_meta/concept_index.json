@@ -1,11 +1,11 @@
 {
   "version": "2.1",
   "generated_at": "2026-05-21T14:20:02.840456",
-  "total_files": 92,
-  "total_lines": 68230,
-  "total_sources": 1750,
-  "total_mermaid": 353,
-  "mermaid_files": 80,
+  "total_files": 101,
+  "total_lines": 71720,
+  "total_sources": 1840,
+  "total_mermaid": 375,
+  "mermaid_files": 89,
   "cognitive_coverage": {
     "total_with_cognitive": 328,
     "total_mermaid": 328,
@@ -181,6 +181,18 @@
       "mermaid": 8
     },
     {
+      "path": "01_foundation/05_reference_semantics.md",
+      "lines": 384,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "01_foundation/06_zero_cost_abstractions.md",
+      "lines": 372,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
       "path": "01_foundation/README.md",
       "lines": 229,
       "sources": 5,
@@ -241,6 +253,24 @@
       "mermaid": 2
     },
     {
+      "path": "02_intermediate/07_closure_types.md",
+      "lines": 362,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "02_intermediate/08_interior_mutability.md",
+      "lines": 417,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
+      "path": "02_intermediate/09_serde_patterns.md",
+      "lines": 480,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
       "path": "03_advanced/01_concurrency.md",
       "lines": 2180,
       "sources": 39,
@@ -263,6 +293,12 @@
       "lines": 2098,
       "sources": 16,
       "mermaid": 8
+    },
+    {
+      "path": "03_advanced/05_rust_ffi.md",
+      "lines": 399,
+      "sources": 10,
+      "mermaid": 3
     },
     {
       "path": "03_advanced/README.md",
@@ -307,6 +343,12 @@
       "mermaid": 4
     },
     {
+      "path": "04_formal/06_subtype_variance.md",
+      "lines": 363,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
       "path": "04_formal/README.md",
       "lines": 241,
       "sources": 5,
@@ -347,6 +389,12 @@
       "lines": 638,
       "sources": 25,
       "mermaid": 5
+    },
+    {
+      "path": "05_comparative/06_rust_vs_java.md",
+      "lines": 326,
+      "sources": 10,
+      "mermaid": 3
     },
     {
       "path": "05_comparative/README.md",
@@ -430,6 +478,18 @@
       "path": "06_ecosystem/10_public_private_deps.md",
       "lines": 307,
       "sources": 6,
+      "mermaid": 2
+    },
+    {
+      "path": "06_ecosystem/11_webassembly.md",
+      "lines": 342,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "06_ecosystem/12_testing_strategies.md",
+      "lines": 410,
+      "sources": 10,
       "mermaid": 2
     },
     {
