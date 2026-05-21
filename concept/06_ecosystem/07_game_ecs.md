@@ -65,6 +65,108 @@
 
 > **核心洞察**: ECS 的"数据与行为分离"哲学与 Rust 的"数据与所有权分离"是**同构的**。Component 是被拥有的数据，System 是消耗/借用数据的函数，Entity 是数据的逻辑分组标识。
 
+**ECS 架构 ER 图（Mermaid erDiagram）**:
+
+```mermaid
+erDiagram
+    WORLD ||--o{ ENTITY : contains
+    WORLD ||--o{ ARCHETYPE : stores
+
+    ENTITY ||--o{ COMPONENT : "has 0..*"
+    ENTITY }o--|| ARCHETYPE : "belongs to"
+
+    ARCHETYPE ||--|{ COMPONENT : "defines composition"
+
+    SYSTEM }o--o{ COMPONENT : "reads/writes"
+    SYSTEM }o--o{ ENTITY : "queries via World"
+
+    WORLD {
+        HashMap entities
+        HashMap archetypes
+    }
+
+    ENTITY {
+        u64 id
+        u32 generation
+    }
+
+    COMPONENT {
+        TypeId type_id
+        Vec~u8~ data
+    }
+
+    ARCHETYPE {
+        Vec~ComponentId~ components
+        Table table
+    }
+
+    SYSTEM {
+        fn system_fn
+        Query query
+    }
+```
+
+> **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [来源: Bevy ECS Docs; Chen, *The Entity-Relationship Model*, 1976]
+
+**ECS 类型层次（Mermaid classDiagram）**:
+
+```mermaid
+classDiagram
+    class World {
+        +spawn() Entity
+        +query~Q~() Query~Q~
+        +insert_resource()
+    }
+
+    class Entity {
+        +u64 id
+        +u32 generation
+    }
+
+    class Component {
+        <<trait>>
+    }
+
+    class Transform {
+        +Vec3 translation
+        +Quat rotation
+        +Vec3 scale
+    }
+
+    class Velocity {
+        +Vec3 linear
+        +Vec3 angular
+    }
+
+    class System {
+        <<trait>>
+        +run()
+    }
+
+    class Query~Q~ {
+        +iter()
+        +iter_mut()
+        +single()
+    }
+
+    class Archetype {
+        +Vec~ComponentId~ ids
+        +Table storage
+    }
+
+    World "1" --> "*" Entity : contains
+    World "1" --> "*" Archetype : stores
+    Entity "1" --> "*" Component : has
+    Entity "*" --> "1" Archetype : belongs_to
+    System ..> Query~Q~ : uses
+    Query~Q~ ..> World : accesses
+
+    Component <|-- Transform
+    Component <|-- Velocity
+```
+
+> **思维表征说明**: 此 `classDiagram` 从**类型系统**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [来源: Bevy ECS Docs; Data-Oriented Design Book]
+
 ### 1.2 缓存友好性与 SoA 存储
 
 ```rust,ignore
@@ -157,7 +259,7 @@ queue.submit(std::iter::once(encoder.finish()));
 | wgpu 资源 | Rust 所有权表达 | GPU 安全语义 |
 |:---|:---|:---|
 | `Device` | `Arc`-like 内部引用 | GPU 上下文生命周期 |
-| `Buffer` | _owned_ by `BindGroup` or `Queue` | 内存绑定合法性 |
+| `Buffer` | *owned* by `BindGroup` or `Queue` | 内存绑定合法性 |
 | `CommandEncoder` | 线性使用（`&mut` + consume） | 命令顺序 + 无重复提交 |
 | `TextureView` | 借用自 `Texture` | 视图生命周期不超过纹理 |
 

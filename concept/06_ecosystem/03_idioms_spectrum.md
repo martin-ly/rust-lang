@@ -70,6 +70,7 @@
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
+  - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
 
 ---
 
@@ -1013,11 +1014,39 @@ graph TD
 - [L5 Rust vs Go](../05_comparative/02_rust_vs_go.md) —— 并发模型惯用法对比
 - [L7 版本跟踪](../07_future/05_rust_version_tracking.md) —— 1.95/1.96 新惯用法来源
 
+## 十五、惯用法选择的认知路径
+
+> **如何根据经验水平选择正确的惯用法层级？**
+
+```
+新手期（0-3 个月）
+    └─ 重点：L0 词法级 + L1 类型级
+    └─ 掌握：? 传播、match 解构、if let、Newtype、Iterator 链
+    └─ 避免：Pin、unsafe、复杂 Trait Bound
+
+成长期（3-12 个月）
+    └─ 重点：L2 接口级 + L3 资源级
+    └─ 掌握：Into/From、Deref、RAII、Scopeguard、内部可变性分层
+    └─ 避免：自定义 unsafe、复杂 Pin 自引用
+
+成熟期（1-3 年）
+    └─ 重点：L4 控制级 + L5 并发级
+    └─ 掌握：递归→循环变换、Send/Sync 显式化、Actor/CSP、无锁结构
+    └─ 避免：过度抽象、为简单场景引入复杂架构
+
+专家期（3 年+）
+    └─ 重点：L6 架构级
+    └─ 掌握：Tower Service 复合、ECS、错误内核、洋葱中间件
+    └─ 标志：能为团队制定惯用法规范，评审代码时识别反模式
+```
+
+> **思维表征说明**: 此认知路径将「七层惯用法谱系」转化为**渐进式学习阶梯**——不是要求初学者一次性掌握全部，而是根据经验匹配适当的抽象层级。这与 `inter_layer_topology.md` 的跨层认知路径和 `intra_layer_model_map.md` 的层内决策树形成三维导航：纵向（层间）、横向（层内）、深度（经验递进）。 [来源: Dreyfus 技能获取模型; Bloom 认知层级]
+
 ---
 
 > **权威来源**: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/) · [Rust Design Patterns](https://rust-unofficial.github.io/patterns/idioms/) · [Rust Style Guide](https://doc.rust-lang.org/style-guide/) · [Clippy Lints](https://rust-lang.github.io/rust-clippy/master/index.html) · [TRPL §13](https://doc.rust-lang.org/book/ch13-00-functional-features.html)
 >
 > **Rust 版本**: 1.95.0 stable (Edition 2024)
-> **文档版本**: 1.0
+> **文档版本**: 1.1
 > **最后更新**: 2026-05-21
-> **状态**: ✅ 惯用法谱系全景 v1.0
+> **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径

@@ -132,6 +132,59 @@ graph LR
 
 > **过渡**：以上矩阵回答了"工具有什么"和"工具保证什么"，接下来深入 Cargo 的 Workspace、Features 和 SemVer 机制，理解"工具如何协作"。
 
+**Rust 编译流程知识流动图（Mermaid graph LR）**:
+
+```mermaid
+graph LR
+    subgraph 前端
+        SRC[源码 .rs]
+        LEX[词法分析]
+        PAR[语法分析]
+        AST[AST]
+        HIR[HIR]
+        MIR[MIR]
+    end
+
+    subgraph 后端
+        LLVM[LLVM IR]
+        OPT[优化]
+        ASM[汇编]
+        OBJ[目标文件]
+        LINK[链接器]
+        BIN[可执行文件]
+    end
+
+    subgraph Cargo 调度
+        DEPS[依赖解析]
+        BUILD[构建调度]
+        CACHE[增量缓存]
+    end
+
+    SRC --> LEX
+    LEX --> PAR
+    PAR --> AST
+    AST --> HIR
+    HIR --> MIR
+
+    DEPS --> BUILD
+    BUILD --> SRC
+    CACHE --> BUILD
+
+    MIR --> LLVM
+    LLVM --> OPT
+    OPT --> ASM
+    ASM --> OBJ
+    OBJ --> LINK
+    LINK --> BIN
+
+    style SRC fill:#9f9
+    style BIN fill:#9f9
+    style MIR fill:#ff9
+    style LLVM fill:#ff9
+```
+
+> **思维表征说明**: 此 `graph LR` 知识流动图展示**编译数据在工具链各阶段的流动**——与 `inter_layer_topology.md` 的「知识流动」和 `system_design_principles.md` 的「设计决策流动」形成同族表征，但此图聚焦于**具体的编译器管道**。前端（蓝绿色）负责 Rust 特有的语义分析（所有权、生命周期、借用检查在 MIR 之前完成），后端（黄色）负责与目标平台无关的优化和代码生成。Cargo 的调度层（虚线框外）负责依赖管理和增量构建，与编译器前端并行工作。 [来源: rustc Dev Guide; LLVM Documentation; *Engineering a Compiler* — Cooper & Torczon]
+
 ---
 
 ## 三、Cargo 深层机制

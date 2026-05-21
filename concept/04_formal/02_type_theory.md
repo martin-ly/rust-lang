@@ -110,6 +110,74 @@ Rust 扩展:
 Rust 扩展: 在 [Var] 和 [App] 之间插入所有权检查
 ```
 
+**类型系统层次类图（Mermaid classDiagram）**:
+
+```mermaid
+classDiagram
+    class TypeSystem {
+        <<trait>>
+        +well_typed()
+        +type_safe()
+    }
+
+    class UntypedLambda {
+        <<基线>>
+        +任意自应用
+        +Curry 悖论风险
+    }
+
+    class SimplyTyped {
+        <<λ→>>
+        +类型保持
+        +终止性不保证
+    }
+
+    class SystemF {
+        <<λ2>>
+        +参数多态 ∀α.τ
+        +单态化实例化
+    }
+
+    class SystemFOmega {
+        <<λω>>
+        +类型构造子抽象
+        +GATs 理论基础
+    }
+
+    class DependentTypes {
+        <<λΠ>>
+        +值依赖类型
+        +完整规范表达能力
+    }
+
+    class HMInference {
+        <<算法>>
+        +Principal Type
+        +约束合一
+    }
+
+    class LinearTypes {
+        <<资源敏感>>
+        +所有权唯一
+        +仿射弱化
+    }
+
+    TypeSystem <|-- SimplyTyped : 扩展
+    TypeSystem <|-- UntypedLambda : 基线
+    SimplyTyped <|-- SystemF : +多态
+    SystemF <|-- SystemFOmega : +类型构造子
+    SystemFOmega <|-- DependentTypes : +值依赖
+    SystemF <|-- HMInference : 推断算法
+    SimplyTyped <|-- LinearTypes : +资源敏感
+
+    note for SystemF "Rust 泛型 <T> 的理论基础"
+    note for SystemFOmega "Rust GATs 的理论基础"
+    note for LinearTypes "Rust 所有权系统的理论基础"
+    note for HMInference "Rust 局部类型推断的理论基础"
+```
+
+> **思维表征说明**: `classDiagram` 将类型论中的**层次扩展关系**可视化——每个类型系统不是孤立的存在，而是在前一级基础上增加新能力。箭头方向表示「继承/扩展」：`λ→` 在无类型 λ 上添加类型，`System F` 在 `λ→` 上添加参数多态，`System Fω` 在 `System F` 上添加类型构造子抽象。Rust 的设计哲学是「选择足够表达力但可判定的子集」——因此 Rust 位于 `System F` + `HM` + `线性类型` 的交集，刻意排除了 `Dependent Types`（不可判定）和完整 `System Fω`（推断困难）。 [来源: Pierce 2002, *TAPL* Ch.11-30; Cardelli 1996, *Type Systems*]
+
 ---
 
 ## 四、定理推理链（Theorem Chain）

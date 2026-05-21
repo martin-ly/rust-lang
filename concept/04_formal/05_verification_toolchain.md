@@ -68,6 +68,115 @@ a-mir-formality:[████████░░] 类型系统规范验证
 
 > **关键洞察**: 从左到右，保证强度递增，但**时间成本不是单调的**——Verus 的 SMT 后端在某些场景下比 Kani 的模型检测更快，因为符号执行的剪枝效率取决于问题结构。
 
+### 1.3 验证工具层次类图
+
+```mermaid
+classDiagram
+    class BaseVerification {
+        <<abstract>>
+        +String target_language
+        +String verification_type
+        +bool supports_unsafe
+        +bool supports_concurrent
+        +AutomationLevel automation
+    }
+
+    class DynamicExecution {
+        <<abstract>>
+        +bool runtime_check
+        +ExecutionMode mode
+    }
+
+    class ModelChecking {
+        <<abstract>>
+        +BoundType bound
+        +SolverBackend solver
+    }
+
+    class DeductiveVerification {
+        <<abstract>>
+        +SpecificationLanguage spec_lang
+        +ProofBackend prover
+    }
+
+    class AutomatedDeductive {
+        <<abstract>>
+        +AnnotationBurden burden
+    }
+
+    class InteractiveProof {
+        <<abstract>>
+        +ProofAssistant assistant
+    }
+
+    class TypeSystemFormalization {
+        +FormalismLanguage lang
+        +AlignmentTarget rustc_version
+    }
+
+    BaseVerification <|-- DynamicExecution
+    BaseVerification <|-- ModelChecking
+    BaseVerification <|-- DeductiveVerification
+    BaseVerification <|-- TypeSystemFormalization
+
+    DynamicExecution <|-- Miri
+    ModelChecking <|-- Kani
+    DeductiveVerification <|-- AutomatedDeductive
+    DeductiveVerification <|-- InteractiveProof
+
+    AutomatedDeductive <|-- Verus
+    AutomatedDeductive <|-- Creusot
+    AutomatedDeductive <|-- Prusti
+    AutomatedDeductive <|-- RefinedRust
+
+    InteractiveProof <|-- Aeneas
+
+    class Miri {
+        +AliasModel alias_model
+        +run(program)
+    }
+
+    class Kani {
+        +generate_harness()
+        +symbolic_execute()
+    }
+
+    class Verus {
+        +SMTSolver z3
+        +ghost_state()
+        +linear_types()
+    }
+
+    class Creusot {
+        +Why3Backend why3
+        +weakest_precondition()
+    }
+
+    class Prusti {
+        +ViperBackend viper
+        +separation_logic()
+    }
+
+    class Aeneas {
+        +TranslationTarget target
+        +coq_extract()
+        +lean_extract()
+    }
+
+    class RefinedRust {
+        +IrisFramework iris
+        +zero_annotation()
+    }
+
+    class a-mir-formality {
+        +SmallStepSemantics semantics
+        +BidirectionalTyping rules
+        +align_with_rustc()
+    }
+```
+
+> **认知功能**: 此类图将验证工具按**验证范式**（动态执行、模型检测、演绎验证、类型规范）进行层次分类。关键洞察：**演绎验证**分支下又细分为**自动化演绎**（Verus/Creusot/Prusti/RefinedRust）和**交互式证明**（Aeneas），二者共享"规格+证明"的核心模式，但人机分工不同。Miri 和 Kani 处于"找反例"阵营，而 a-mir-formality 是唯一不验证具体程序、而是验证编译器本身的元工具。
+
 ---
 
 ## 二、Wikipedia 概念对齐
@@ -84,6 +193,61 @@ a-mir-formality:[████████░░] 类型系统规范验证
 | **Aeneas** | [Proof assistant](https://en.wikipedia.org/wiki/Proof_assistant) · [Dependent type](https://en.wikipedia.org/wiki/Dependent_type) | Coq、Lean、程序提取 | 函数式翻译 + 交互式证明 |
 | **RefinedRust** | [Automated theorem proving](https://en.wikipedia.org/wiki/Automated_theorem_proving) · [Type refinement](https://en.wikipedia.org/wiki/Refinement_type) | Liquid Types、Iris、高阶分离逻辑 | 自动分离逻辑推导 |
 | **a-mir-formality** | [Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics) · [Type safety](https://en.wikipedia.org/wiki/Type_safety) | Felleisen、Plotkin、类型规则 | 小步操作语义 + 类型规则 |
+
+### 2.1 验证工具 ↔ 形式化基础映射图
+
+```mermaid
+graph LR
+    subgraph 动态分析["动态分析层"]
+        MIRI[Miri] --> SB[Stacked Borrows]
+        MIRI --> TB[Tree Borrows]
+    end
+
+    subgraph 符号执行["符号执行层"]
+        KANI[Kani] --> BMC[Bounded Model Checking]
+        KANI --> SAT[SAT/SMT Solver]
+    end
+
+    subgraph SMT演绎["SMT 演绎层"]
+        VERUS[Verus] --> HOARE[Hoare Logic]
+        VERUS --> LINEAR[Linear Types]
+        VERUS --> GHOST[Ghost State]
+    end
+
+    subgraph WLP演绎["WLP 演绎层"]
+        CREUSOT[Creusot] --> WLP[Weakest Liberal Precondition]
+        CREUSOT --> WHY3[Why3 Platform]
+    end
+
+    subgraph 分离逻辑["分离逻辑层"]
+        PRUSTI[Prusti] --> SL[Separation Logic]
+        PRUSTI --> VIPER[Viper IL]
+        REFINED[RefinedRust] --> IRIS[Iris Framework]
+        REFINED --> REFINE[Refinement Types]
+    end
+
+    subgraph 交互证明["交互证明层"]
+        AENEAS[Aeneas] --> COQ[Coq]
+        AENEAS --> LEAN[Lean 4]
+        AENEAS --> DEP[Dependent Types]
+    end
+
+    subgraph 类型规范["类型规范层"]
+        AMIR[a-mir-formality] --> OPSEM[Operational Semantics]
+        AMIR --> BIDIR[Bidirectional Typing]
+        AMIR --> TSAFE[Type Safety Theorem]
+    end
+
+    style MIRI fill:#e3f2fd
+    style KANI fill:#e8f5e9
+    style VERUS fill:#fff3e0
+    style CREUSOT fill:#fce4ec
+    style PRUSTI fill:#f3e5f5
+    style AENEAS fill:#e0f2f1
+    style AMIR fill:#fff8e1
+```
+
+> **认知功能**: 此映射图将每个验证工具锚定到其**数学基础**，揭示工具之间的理论亲缘关系。例如：Verus 和 Creusot 虽然都是"演绎验证"，但 Verus 基于 Hoare 逻辑 + SMT，Creusot 基于最弱前置条件 + Why3——这解释了为什么 Creusot 在代数数据类型的功能正确性上更强，而 Verus 在并发系统验证上更优。颜色的暖冷梯度从"找反例"（冷色）过渡到"证明正确性"（暖色）。
 
 ---
 
@@ -300,6 +464,54 @@ jobs:
 ```
 
 > **来源**: [AWS s2n-quic Kani Integration] · [AWS Security Blog 2023]
+
+### 5.3 分层验证流程时序图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Dev as 开发者
+    participant L1 as L1 编译期
+    participant L2 as L2 动态检测
+    participant L3 as L3 符号执行
+    participant CI as CI/CD 系统
+    participant L4 as L4 契约验证
+    participant L5 as L5 协议验证
+
+    rect rgb(240, 248, 255)
+        Note over Dev,L1: 每次保存
+        Dev->>L1: cargo check + clippy
+        L1-->>Dev: 类型错误 / Lint 警告
+    end
+
+    rect rgb(255, 250, 240)
+        Note over Dev,L2: 每次提交
+        Dev->>L2: cargo test + cargo miri test
+        L2-->>Dev: UB 检测报告 / 回归结果
+    end
+
+    rect rgb(240, 255, 240)
+        Note over Dev,L3: 每次 PR / Nightly
+        Dev->>L3: cargo kani --harness *
+        L3-->>Dev: 边界条件覆盖报告<br/>反例或 exhaustive 确认
+    end
+
+    rect rgb(255, 240, 245)
+        Note over CI,L4: 核心模块变更 / Nightly
+        CI->>L4: verus verify / creusot prove
+        L4-->>CI: 功能正确性证明<br/>规格一致性检查
+    end
+
+    rect rgb(245, 245, 255)
+        Note over L5: 设计阶段
+        L5->>L5: TLA+ model check / P 验证
+        L5-->>L5: 分布式协议安全确认
+    end
+
+    Note over Dev,L5: 五层防御的累积保证<br/>每层补上一层的盲区<br/>L1 类型安全 ⊂ L2 UB 检测 ⊂ L3 边界覆盖 ⊂ L4 功能正确 ⊂ L5 协议安全
+```
+
+> **认知功能**: 此序列图将"五层防御"的静态表格转化为**时间维度的流程**。每个矩形框的底色与验证强度对应：冷色（编译期）→ 暖色（契约验证）。**关键洞察**：验证不是一次性事件，而是与开发工作流绑定的持续过程——L1-L3 在开发者本地完成（反馈延迟 < 30min），L4-L5 在 CI/设计阶段完成（反馈延迟小时级到天级）。箭头方向揭示信息流动：从开发者到工具的是"待验证代码"，从工具到开发者的是"验证结果"。
 
 ---
 

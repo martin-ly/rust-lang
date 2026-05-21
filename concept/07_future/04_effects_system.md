@@ -14,6 +14,39 @@
 
 ---
 
+## 〇、Effect System 概念全景
+
+```mermaid
+mindmap
+  root((Effect System<br/>效果系统))
+    理论基础
+      代数效应[代数效应<br/>Plotkin & Pretnar 2009]
+      类型效应[类型效应<br/>标记集合 + 传播检查]
+      效果多态[效果多态<br/>e 效果变量]
+    Rust 现有实现
+      async[async → Future 状态机<br/>效果: 异步挂起]
+      unsafe[unsafe → 安全边界标记<br/>效果: 放弃编译器保证]
+      const_fn[const fn → 编译期求值<br/>效果: 无副作用]
+      Result[Result<T,E> → 异常效果<br/>效果: 可失败]
+      Send[Send/Sync → 线程安全<br/>效果: 并发约束]
+    跨语言模型
+      Koka[Koka<br/>完整代数效应 + 处理器]
+      Eff[Eff<br/>代数效应 + 子类型]
+      Haskell[Haskell<br/>Monad 变换器]
+      Java[Java<br/>Checked Exceptions]
+      Rust当前[Rust 当前<br/>关键字 + Trait]
+      Rust理想[Rust 理想<br/>统一 effect 关键字]
+    演进方向
+      AsyncFn[AsyncFn<br/>效果多态原型]
+      gen_blocks[gen blocks<br/>同步协程效果]
+      effect_keyword[统一 effect 关键字<br/>远期方向]
+      backward_compat[向后兼容挑战<br/>Edition 迁移]
+```
+
+> **认知路径**: 本 mindmap 展示 Effect System 的四维认知空间——**理论基础**回答"是什么"，**Rust 现有实现**回答"现在有什么"，**跨语言模型**回答"别人怎么做"，**演进方向**回答"未来去哪"。读者可按自己的背景选择入口：类型论背景从"理论基础"进入，工程背景从"Rust 现有实现"进入。
+
+---
+
 ## 一、Effect 系统是什么？
 
 > **[来源: Plotkin & Pretnar 2009; Koka Documentation; Wikipedia: Effect System]** ✅
@@ -91,6 +124,44 @@ fn fetch() -> Data effect Async { ... }
 这与 checked exceptions 类似：Java 中调用 throws 方法必须 catch 或声明 throws
 ```
 
+### 2.3 效果状态转换图
+
+```mermaid
+stateDiagram-v2
+    [*] --> PureFunction: 定义普通函数
+    PureFunction --> AsyncContext: 调用 async fn
+    PureFunction --> UnsafeContext: 调用 unsafe fn
+    PureFunction --> ConstContext: 使用 const fn
+    PureFunction --> Throwing: 使用 ? / Result
+
+    AsyncContext --> AsyncPoll: .await / spawn
+    AsyncPoll --> [*]: Future 完成
+    AsyncContext --> Blocked: block_on
+    Blocked --> [*]: 效果消除(同步返回)
+
+    UnsafeContext --> Verified: unsafe {} 块内验证
+    Verified --> [*]: 安全边界确认
+
+    ConstContext --> [*]: 编译期求值完成
+
+    Throwing --> Handled: match / ? 传播
+    Handled --> [*]: 错误恢复或终止
+
+    note right of AsyncContext
+        效果污染:
+        调用 async fn 的函数
+        自身也携带 Async 效果
+    end note
+
+    note right of UnsafeContext
+        能力需求:
+        调用 unsafe fn 的代码
+        必须位于 unsafe {} 块内
+    end note
+```
+
+> **认知功能**: 此状态图将"效果污染"的抽象概念转化为可视化的状态转换。关键洞察：**效果不是终点，而是需要被处理（poll/await）或消除（block_on）的中间状态**。`async` → `await` → `Future 完成` 的三段式与 `unsafe` → `unsafe {} 验证` → `安全边界确认` 形成对偶——前者是计算挂起效果，后者是安全责任效果。
+
 ### 2.3 `AsyncFn`：Effect 多态的第一次尝试
 
 > **[来源: RFC 3668; Rust 1.85 Release Notes]**
@@ -129,6 +200,46 @@ where
 | **Java** | Checked exceptions | ⭐⭐ 弱 | 零 | Rust 可能借鉴"显式传播"，但拒绝异常机制 |
 | **Rust（当前）** | 关键字 + Trait | ⭐⭐⭐ 中 | 零 | 渐进式：async/unsafe/const 各走各的路 |
 | **Rust（理想）** | 类型效应 | ⭐⭐⭐⭐ 强 | 零 | 统一语法，保持零成本 |
+
+### 3.2 效果模型谱系图
+
+```mermaid
+graph TD
+    subgraph 理论基础["效果系统理论谱系"]
+        AE[代数效应<br/>Algebraic Effects] --> AE_SIG[操作签名]
+        AE --> AE_HANDLER[处理器 Handler]
+        TE[类型效应<br/>Type Effects] --> TE_TRACK[效果追踪]
+        TE --> TE_PROP[效果传播]
+        MONAD[Monad] --> MONAD_BIND[>>= 绑定]
+        MONAD --> MONAD_PURE[return 纯值]
+    end
+
+    subgraph 语言实现["语言实现映射"]
+        AE --> KOKA[Koka<br/>⭐⭐⭐⭐⭐ 完整]
+        AE --> EFF[Eff<br/>学术原型]
+        MONAD --> HASKELL[Haskell<br/>⭐⭐⭐⭐ 强]
+        TE --> JAVA[Java Checked Exceptions<br/>⭐⭐ 弱]
+        TE --> RUST_CUR[Rust 当前<br/>关键字 + Trait<br/>⭐⭐⭐ 中]
+        TE --> RUST_IDEAL[Rust 理想<br/>统一 effect 关键字<br/>⭐⭐⭐⭐ 强]
+    end
+
+    subgraph Rust映射["Rust 现有效果映射"]
+        RUST_CUR --> R_ASYNC[async fn<br/>→ Async 效果]
+        RUST_CUR --> R_UNSAFE[unsafe fn<br/>→ Unsafe 效果]
+        RUST_CUR --> R_CONST[const fn<br/>→ Const 效果]
+        RUST_CUR --> R_RESULT[Result<T,E><br/>→ Throws 效果]
+        RUST_CUR --> R_SEND[Send/Sync<br/>→ ThreadSafe 效果]
+    end
+
+    RUST_IDEAL --> UNIFIED[统一语法<br/>fn foo() -> T effects {Io, Async}]
+
+    style KOKA fill:#e1f5fe
+    style HASKELL fill:#e8f5e9
+    style RUST_CUR fill:#fff3e0
+    style RUST_IDEAL fill:#fce4ec
+```
+
+> **认知功能**: 此谱系图揭示 Effect System 的"理论-语言"双层结构。**代数效应**（Koka/Eff）与 **Monad**（Haskell）是两条独立的理论路线，而 **类型效应**（Java/Rust）是工程化的折中方案。Rust 当前处于"类型效应"象限，但正在向"统一语法"方向移动。颜色的深浅提示：浅色为理论原型，暖色为工程实践，粉色为未来方向。
 
 ### 3.2 为什么 Rust 拒绝 Monad？
 
@@ -197,6 +308,40 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
   现有 async/unsafe/const 关键字如何迁移到统一效果系统？
   → 最可能路径: 保留关键字，内部 desugar 为效果标记
 ```
+
+### 4.2 效果传播时序图
+
+```mermaid
+sequenceDiagram
+    autonumber
+    participant Caller as 调用者 foo()
+    participant Callee as 被调用者 bar()
+    participant EffectSys as 效果系统
+    participant Runtime as 运行时/处理器
+
+    Caller->>Callee: 调用 async fn bar()
+    activate Callee
+    Callee-->>Caller: 返回 impl Future<br/>(携带 Async 效果)
+    deactivate Callee
+
+    Caller->>EffectSys: 效果污染检查<br/>foo 是否允许 Async 效果?
+    EffectSys-->>Caller: 效果传播确认<br/>foo 也必须 async 或 block_on
+
+    alt 异步处理
+        Caller->>Runtime: .await / spawn(task)
+        Runtime->>Callee: poll Future
+        Callee-->>Runtime: Poll::Ready / Pending
+        Runtime-->>Caller: Future 完成<br/>(Async 效果消除)
+    else 同步阻塞
+        Caller->>Runtime: block_on(future)
+        Runtime->>Runtime: 忙等待/线程阻塞
+        Runtime-->>Caller: 同步返回 T<br/>(Async 效果 → 无效果)
+    end
+
+    note over Caller,Runtime: 效果多态场景<br/>AsyncFn 允许 F: sync 或 async<br/>效果变量 e 在调用点实例化
+```
+
+> **认知功能**: 此序列图将"效果污染"和"效果消除"的动态过程可视化。**步骤 1-2** 展示效果产生（被调用者返回携带效果的值），**步骤 3-4** 展示效果传播（效果系统强制调用者承担相同效果），**步骤 5-9** 展示效果处理（运行时通过 poll/await 消除效果）。关键洞察：**效果多态（AsyncFn）允许调用者在不知道被调用者具体效果的情况下编写泛型代码——效果变量 `e` 在调用点被实例化**。
 
 ### 4.3 `gen` blocks 与效果叠加
 

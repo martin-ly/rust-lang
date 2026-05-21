@@ -42,6 +42,7 @@
   - [八、相关概念链接（L0-L7 映射）](#八相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
+  - [七、系统设计决策的知识流动图](#七系统设计决策的知识流动图)
 
 ---
 
@@ -425,11 +426,51 @@ graph TD
 - [L0 可判定性谱系](../00_meta/decidability_spectrum.md) —— 系统设计的判定性边界
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
 
+## 七、系统设计决策的知识流动图
+
+> **设计决策如何在系统各层之间流动？**
+
+```mermaid
+graph LR
+    subgraph 需求层
+        REQ[需求分析<br/>功能/性能/安全]
+    end
+
+    subgraph 架构层
+        ARCH[架构选择<br/>微服务/单体/嵌入式]
+    end
+
+    subgraph 并发层
+        CONC[并发模型<br/>async/线程/Actor]
+    end
+
+    subgraph 安全层
+        SAFE[安全边界<br/>Safe/Unsafe/FFI]
+    end
+
+    subgraph 验证层
+        VERIFY[验证策略<br/>测试/Miri/Kani]
+    end
+
+    REQ -->|安全需求高| SAFE
+    REQ -->|性能需求高| CONC
+    REQ -->|规模需求高| ARCH
+
+    SAFE -->|unsafe 需求| CONC
+    CONC -->|async/线程选择| ARCH
+    ARCH -->|部署约束| VERIFY
+    SAFE -->|形式化需求| VERIFY
+
+    VERIFY -.->|反馈| REQ
+```
+
+> **思维表征说明**: 知识流动图是 `inter_layer_topology.md` 中「知识流动」概念在**系统设计场景**的具体化——它展示的不是概念之间的静态关系，而是**设计决策在系统各层之间的动态传播**。与 `graph TD` 流程图（展示结构）不同，知识流动图强调**反馈回路**（VERIFY → REQ 的虚线箭头）——设计不是一次性的，验证结果会反馈到需求层，驱动迭代优化。这是系统工程中「V 模型」的 Rust 特化版本。 [来源: Systems Engineering V-Model; ISO/IEC/IEEE 15288]
+
 ---
 
 > **权威来源**: [NIST SP 800-207](https://doi.org/10.6028/NIST.SP.800-207) · [SEL4 Formal Verification](https://sel4.systems/) · [WASI Specification](https://wasi.dev/) · [Armstrong 2003](https://erlang.org/download/armstrong_thesis_2003.pdf) · [Stroustrup 1994](https://www.stroustrup.com/dne.html) · [Brewer CAP](https://doi.org/10.1109/MC.2012.37) · [Lamport Paxos](https://doi.org/10.1145/3335772.3335939) · [Wadler Propositions as Sessions](https://doi.org/10.1145/2364527.2364568)
 >
 > **Rust 版本**: 1.95.0 stable (Edition 2024)
-> **文档版本**: 1.0
+> **文档版本**: 1.1
 > **最后更新**: 2026-05-21
-> **状态**: ✅ 系统设计原则与国际权威对齐 v1.0
+> **状态**: ✅ 系统设计原则与国际权威对齐 v1.1 — 新增知识流动图

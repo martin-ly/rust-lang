@@ -1,11 +1,11 @@
 {
-  "total_files": 53,
-  "total_lines": 45532,
+  "total_files": 63,
+  "total_lines": 50325,
   "total_todos_open": 0,
   "total_todos_done": 95,
-  "total_source_annotations": 696,
-  "version": "v1.2",
-  "generated_at": "2026-05-13",
+  "total_source_annotations": 851,
+  "version": "v2.0",
+  "generated_at": "2026-05-21",
   "files": [
     {
       "path": "concept/00.md",
@@ -377,6 +377,76 @@
       "todos_open": 0,
       "todos_done": 0,
       "source_annotations": 11
+    },
+    {
+      "path": "concept/00_meta/decidability_spectrum.md",
+      "lines": 611,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 14
+    },
+    {
+      "path": "concept/00_meta/expressiveness_multiview.md",
+      "lines": 651,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 17
+    },
+    {
+      "path": "concept/00_meta/inter_layer_topology.md",
+      "lines": 313,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 8
+    },
+    {
+      "path": "concept/00_meta/intra_layer_model_map.md",
+      "lines": 241,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 1
+    },
+    {
+      "path": "concept/00_meta/theorem_inference_forest.md",
+      "lines": 386,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 20
+    },
+    {
+      "path": "concept/00_meta/boundary_extension_tree.md",
+      "lines": 227,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 12
+    },
+    {
+      "path": "concept/00_meta/knowledge_mindmap.md",
+      "lines": 196,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 2
+    },
+    {
+      "path": "concept/05_comparative/05_execution_model_isomorphism.md",
+      "lines": 638,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 25
+    },
+    {
+      "path": "concept/06_ecosystem/03_idioms_spectrum.md",
+      "lines": 1053,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 40
+    },
+    {
+      "path": "concept/06_ecosystem/05_system_design_principles.md",
+      "lines": 477,
+      "todos_open": 0,
+      "todos_done": 0,
+      "source_annotations": 16
     }
   ]
 }

@@ -202,6 +202,51 @@ mod ast {
 }
 ```
 
+**Visitor 模式 UML 类图（Mermaid classDiagram）**:
+
+```mermaid
+classDiagram
+    class ExprVisitor {
+        <<trait>>
+        +visit_literal(val: i64)
+        +visit_add(left: &Expr, right: &Expr)
+    }
+
+    class Expr {
+        <<enum>>
+        +accept~V: ExprVisitor~(visitor: &mut V)
+    }
+
+    class Literal {
+        +value: i64
+    }
+
+    class Add {
+        +left: Box~Expr~
+        +right: Box~Expr~
+    }
+
+    class EvalVisitor {
+        +result: i64
+        +visit_literal(val)
+        +visit_add(l, r)
+    }
+
+    class PrintVisitor {
+        +output: String
+        +visit_literal(val)
+        +visit_add(l, r)
+    }
+
+    Expr <|-- Literal : 变体
+    Expr <|-- Add : 变体
+    ExprVisitor <|.. EvalVisitor : 实现
+    ExprVisitor <|.. PrintVisitor : 实现
+    Expr ..> ExprVisitor : accept 调用
+```
+
+> **思维表征说明**: `classDiagram` 是设计模式的**标准 UML 表达**——`--|>` 表示继承/变体关系，`<|..` 表示 trait 实现，`..>` 表示依赖关系。Visitor 模式的核心结构在此图中一目了然：Expr 是被访问的元素层次（enum 变体），ExprVisitor 是操作接口，EvalVisitor / PrintVisitor 是具体操作实现。这与 `graph TD` 流程图（展示概念关系）形成互补——类图展示的是**代码结构中的类型关系**。 [来源: GoF Design Patterns; UML 2.5 Class Diagram Standard]
+
 **与其他语言对比**：
 
 - **Java/C++**: 经典双重分发（`accept` + `visit`）；Rust 通过 `match` 枚举实现单分发，避免虚函数膨胀，但无法直接扩展现有 enum 的变体（需用 enum/struct 模拟开放访问者）。

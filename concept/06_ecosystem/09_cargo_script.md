@@ -142,6 +142,63 @@ edition = "2024"     # 默认当前 edition
 
 > [来源: [RFC 3503 §Motivation](https://github.com/rust-lang/rfcs/pull/3503) — 核心动机是降低 Rust 的"Hello World 门槛"，使 Rust 可以与 Python/Node.js 在脚本场景竞争。
 
+**Cargo Script 执行流程（Mermaid graph TD）**:
+
+```mermaid
+graph TD
+    A[单文件 script.rs] --> B{是否含 frontmatter?}
+    B -->|是| C[解析 ```cargo 代码块]
+    B -->|否| D[使用默认 manifest]
+
+    C --> E[生成临时 Cargo.toml]
+    D --> E
+
+    E --> F[创建匿名临时 crate]
+    F --> G[依赖解析 & 下载]
+    G --> H[编译缓存检查]
+
+    H -->|缓存命中| I[直接执行]
+    H -->|缓存未命中| J[调用 rustc 编译]
+    J --> K[生成可执行文件]
+    K --> I
+
+    I --> L[运行结果输出]
+
+    style A fill:#9f9
+    style L fill:#9f9
+    style H fill:#ff9
+```
+
+> **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: RFC 3502 §Execution Model; Cargo Book — Scripts]
+
+**何时使用 Cargo Script？决策树（Mermaid graph TD）**:
+
+```mermaid
+graph TD
+    A[需要写 Rust 代码?] --> B{项目规模?}
+
+    B -->|单文件脚本/原型| C{是否需要外部依赖?}
+    B -->|多文件/库/大型项目| D[使用 cargo new]
+
+    C -->|是| E{是否需 build.rs / workspace?}
+    C -->|否| F[Cargo Script 无依赖模式]
+
+    E -->|是| G[使用传统 Cargo 项目]
+    E -->|否| H[Cargo Script + frontmatter]
+
+    D --> I[完整项目结构<br/>Git 管理<br/>CI 集成]
+    G --> I
+    F --> J[快速运行<br/>零配置<br/>适合 gist 分享]
+    H --> J
+
+    style D fill:#9f9
+    style G fill:#9f9
+    style F fill:#ff9
+    style H fill:#ff9
+```
+
+> **思维表征说明**: 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。叶子节点的颜色编码（绿色=传统项目，黄色=Cargo Script）直观传达了推荐倾向。 [来源: RFC 3503 §Motivation; Cargo Book — When to use scripts]
+
 ---
 
 ## 四、工程实践
