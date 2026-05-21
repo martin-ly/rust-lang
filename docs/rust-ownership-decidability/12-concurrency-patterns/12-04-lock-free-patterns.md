@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 无锁编程模式](#rust-无锁编程模式)
@@ -32,13 +33,17 @@
   - [4. 无锁数据结构](#4-无锁数据结构)
     - [4.1 无锁栈](#41-无锁栈)
     - [4.2 无锁队列](#42-无锁队列)
+  - [（继续...）](#继续)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 内存模型基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Happens-Before 关系
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Happens-before 关系是并发程序分析的基础概念：
@@ -1362,7 +1367,26 @@ impl<T> CountedMSQueue<T> {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: Rust Reference - std::sync]**
+
+> **[来源: ACM - Concurrent Programming]**
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**

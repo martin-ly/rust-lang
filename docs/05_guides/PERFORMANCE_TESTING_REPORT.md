@@ -322,3 +322,12 @@ cargo bench --workspace
 > **[来源: IEEE - Software Performance Standards]**
 
 > **[来源: Criterion.rs Documentation]**
+
+> **[来源: Wikipedia - Software Testing]**
+> **[来源: TRPL Ch. 11 - Testing]**
+> **[来源: Rust Reference - Test Attributes]**
+> **[来源: ACM - Software Testing]**
+> **[来源: Wikipedia - Program Optimization]**
+> **[来源: Criterion.rs Documentation]**
+> **[来源: ACM - Performance Engineering]**
+> **[来源: Rust Performance Book]**

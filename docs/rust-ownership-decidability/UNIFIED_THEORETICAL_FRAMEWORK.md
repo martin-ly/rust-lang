@@ -1310,3 +1310,8 @@ $$
 > **[来源: Rust Reference - Type System]**
 
 > **[来源: Rustonomicon - The Dark Arts of Unsafe Rust]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

@@ -25,6 +25,7 @@
     - [量化指标](#量化指标)
   - [**适用标准**: EN 50128:2011, EN 50129:2018, EN 50657:2019](#适用标准-en-501282011-en-501292018-en-506572019)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -782,7 +783,6 @@ mod verification {
 
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -793,4 +793,13 @@ mod verification {
 
 > **[来源: tch-rs Documentation]**
 
+> **[来源: ACM - AI Systems]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**

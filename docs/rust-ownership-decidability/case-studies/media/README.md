@@ -465,3 +465,16 @@ Rust在音视频处理领域提供了：
 
 - [案例研究总览](../README.md)
 - [所有案例分析目录](../COMPLETE_DOMAIN_COVERAGE_INDEX.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

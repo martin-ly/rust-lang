@@ -25,6 +25,7 @@
     - [并发控制](#并发控制)
   - [参考文档](#参考文档)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 快速开始
 >
@@ -173,3 +174,23 @@ let data = Arc::new(Mutex::new(Vec::new()));
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

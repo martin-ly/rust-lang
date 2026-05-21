@@ -102,6 +102,7 @@
     - [12.3 测试策略](#123-测试策略)
   - [参考文献](#参考文献)
   - [*最后更新: 2026-03-05*](#最后更新-2026-03-05)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1589,7 +1590,6 @@ mod unit_tests {
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -1613,3 +1613,8 @@ mod unit_tests {
 > **[来源: MISRA C - Memory Constraints]**
 
 > **[来源: Rust Embedded Working Group]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

@@ -678,3 +678,16 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str { ... }
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

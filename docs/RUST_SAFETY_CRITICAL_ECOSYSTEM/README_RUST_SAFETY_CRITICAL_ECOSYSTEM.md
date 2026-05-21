@@ -42,6 +42,7 @@
   - [📞 联系与支持](#-联系与支持)
   - [**🎉 100% 完成，欢迎使用！**](#-100-完成欢迎使用)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎉 100% 全面完成
 >
@@ -466,3 +467,15 @@
 
 - [RUST_SAFETY_CRITICAL_ECOSYSTEM 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

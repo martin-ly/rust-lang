@@ -534,3 +534,24 @@ Thread 1 (最后一个持有者):          Thread 2 (尝试获取):
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Memory Management]**
+
+> **[来源: Rustonomicon - Memory Layout]**
+
+> **[来源: ACM - Memory Safety]**
+
+> **[来源: Wikipedia - Formal Methods]**

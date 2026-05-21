@@ -2447,3 +2447,12 @@ mod examples {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Decision Tree]**
+> **[来源: ACM - Decision Support Systems]**
+> **[来源: IEEE - Risk Analysis]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Wikipedia - Exception Handling]**
+> **[来源: TRPL Ch. 9 - Error Handling]**
+> **[来源: Rust Reference - Result]**
+> **[来源: RFC 2504 - Try Trait]**

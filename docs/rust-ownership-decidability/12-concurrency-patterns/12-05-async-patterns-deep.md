@@ -3936,3 +3936,12 @@ async fn update_db_safe(state: &AppState) {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **[来源: Rust Reference - std::sync]**
+> **[来源: ACM - Concurrent Programming]**
+> **[来源: Wikipedia - Design Pattern]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Gang of Four - Design Patterns]**
+> **[来源: ACM - Software Design Patterns]**

@@ -371,3 +371,16 @@ let x = match result {
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**

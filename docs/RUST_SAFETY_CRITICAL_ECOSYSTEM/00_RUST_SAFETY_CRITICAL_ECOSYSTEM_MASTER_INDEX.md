@@ -37,6 +37,7 @@
   - [📞 使用建议](#-使用建议)
   - [*本文档集已达到100%完成目标，是Rust安全关键系统开发的完整参考资料。*](#本文档集已达到100完成目标是rust安全关键系统开发的完整参考资料)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 快速导航
 >
@@ -387,3 +388,15 @@ TROUBLESHOOTING_AND_DEBUGGING_GUIDE.md
 
 - [RUST_SAFETY_CRITICAL_ECOSYSTEM 目录](./README.md)
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

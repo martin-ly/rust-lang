@@ -1247,3 +1247,8 @@ Rust 1.95+ 重要更新：
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Type System]**
+> **[来源: Pierce 2002 - TAPL]**
+> **[来源: Rust Reference - Type System]**
+> **[来源: ACM - Type Systems]**

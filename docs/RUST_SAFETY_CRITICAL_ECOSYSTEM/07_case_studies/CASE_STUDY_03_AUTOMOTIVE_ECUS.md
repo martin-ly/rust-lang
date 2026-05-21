@@ -38,6 +38,7 @@
   - [参考资源](#参考资源)
   - [**状态**: 概念验证/预研阶段](#状态-概念验证预研阶段)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -533,3 +534,15 @@ fn critical_calculation(x: u32) -> u32 {
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

@@ -343,3 +343,24 @@ C++ ↔ Rust 互操作是 Rust 2026 的核心目标之一。当前社区以 `cxx
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

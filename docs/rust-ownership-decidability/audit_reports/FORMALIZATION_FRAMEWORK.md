@@ -492,3 +492,24 @@ theorem progress {e τ} (h : ∅ ⊢ e : τ) :
 
 - [audit_reports 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Verification]**

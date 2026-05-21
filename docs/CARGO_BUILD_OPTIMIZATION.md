@@ -27,6 +27,7 @@
   - [⚠️ 注意事项](#️-注意事项)
   - [📚 参考资源](#-参考资源)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🚀 快速开始
 >
@@ -287,3 +288,23 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Program Optimization]**
+
+> **[来源: Criterion.rs]**
+
+> **[来源: ACM - Performance Engineering]**
+
+> **[来源: Rust Performance Book]**
+
+> **[来源: Wikipedia - Build Automation]**
+
+> **[来源: Cargo Book]**
+
+> **[来源: Rust Reference - Cargo]**
+
+> **[来源: crates.io Documentation]**

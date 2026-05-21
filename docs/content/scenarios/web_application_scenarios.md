@@ -137,3 +137,16 @@ async fn get_user(Path(id): Path<Uuid>) -> Json<User> {
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Web Framework]**
+
+> **[来源: axum.rs Documentation]**
+
+> **[来源: actix.rs Documentation]**
+
+> **[来源: RFC 2616 - HTTP]**

@@ -568,3 +568,24 @@ let ch = s.chars().nth(0);  // 返回 '你'
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - String (computer science)]**
+
+> **[来源: TRPL Ch. 8 - Strings]**
+
+> **[来源: Rust Reference - str]**
+
+> **[来源: Unicode Standard]**

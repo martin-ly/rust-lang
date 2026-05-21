@@ -1230,3 +1230,12 @@ fn scoped_threads() {
 > **[来源: ACM - Safe Mutation Patterns]**
 
 > **[来源: IEEE - Memory Safety in Concurrent Contexts]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
+> **[来源: ACM - AI Systems]**

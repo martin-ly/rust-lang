@@ -354,3 +354,24 @@ async fn send_example() {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: Rust Reference - std::sync]**
+
+> **[来源: ACM - Concurrent Programming]**
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: RFC 2394 - Async/Await]**

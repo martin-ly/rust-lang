@@ -1064,3 +1064,8 @@ atomic.store(value, order):
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

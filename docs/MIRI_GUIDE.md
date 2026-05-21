@@ -33,6 +33,7 @@
     - [标记 Miri 专用测试](#标记-miri-专用测试)
   - [最佳实践](#最佳实践)
   - [更多资源](#更多资源)
+  - [权威来源索引](#权威来源索引)
 
 ## 什么是 Miri
 >
@@ -365,3 +366,23 @@ mod non_miri_tests {
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

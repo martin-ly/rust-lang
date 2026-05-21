@@ -521,3 +521,16 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: RFC 2394 - Async/Await]**

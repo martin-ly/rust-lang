@@ -17,6 +17,7 @@
     - [更新依赖](#更新依赖)
   - [参考](#参考)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 前置要求
 >
@@ -120,3 +121,23 @@ nix flake update
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

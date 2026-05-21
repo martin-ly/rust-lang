@@ -776,3 +776,12 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Formal Verification]**
+> **[来源: Coq Reference Manual]**
+> **[来源: TLA+ Documentation]**
+> **[来源: ACM - Formal Methods]**

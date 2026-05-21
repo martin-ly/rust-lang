@@ -417,3 +417,24 @@ test-dev:
 
 - [06_toolchain 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Compiler Construction]**
+
+> **[来源: Rust Compiler Team Blog]**
+
+> **[来源: LLVM Documentation]**
+
+> **[来源: ACM - Compiler Design]**
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Artificial Intelligence]**
+
+> **[来源: tch-rs Documentation]**
+
+> **[来源: ACM - AI Systems]**

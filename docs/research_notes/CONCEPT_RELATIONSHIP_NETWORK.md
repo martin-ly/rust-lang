@@ -794,3 +794,8 @@ C6 共享借用 ⊥ C7 可变借用
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Network Programming]**
+> **[来源: Tokio Documentation]**
+> **[来源: Rust Reference - std::net]**
+> **[来源: IEEE - Network Protocols]**

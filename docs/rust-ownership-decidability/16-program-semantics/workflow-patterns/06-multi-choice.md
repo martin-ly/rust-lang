@@ -1,6 +1,7 @@
 # 06 多路选择模式 (Multi-Choice) - 完整形式化语义
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [06 多路选择模式 (Multi-Choice) - 完整形式化语义](#06-多路选择模式-multi-choice---完整形式化语义)
@@ -44,15 +45,19 @@
     - [9.3 嵌套多路选择](#93-嵌套多路选择)
   - [10. 总结](#10-总结)
   - [参考文献](#参考文献)
+  - [**最后更新**: 2026-03-07](#最后更新-2026-03-07)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多路选择模式（Multi-Choice，也称为 OR-Split）是工作流控制流模式中的核心模式之一，允许从多个分支中选择一个或多个路径执行。与排他选择（Exclusive Choice，XOR-Split）不同，多路选择可以同时激活多个满足条件的分支，为并行处理提供了灵活性。
 
 ### 1.1 历史背景
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 多路选择模式最早由 Wil van der Aalst 等人在 "Workflow Patterns" (2003) 中系统定义，成为工作流领域的标准术语。
@@ -726,7 +731,26 @@ OR-Split
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

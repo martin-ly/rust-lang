@@ -378,3 +378,24 @@ impl<F: NorFlash> ConfigStorage<F> {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Embedded System]**
+
+> **[来源: Rust Embedded WG]**
+
+> **[来源: Embassy Book]**
+
+> **[来源: RTIC Book]**

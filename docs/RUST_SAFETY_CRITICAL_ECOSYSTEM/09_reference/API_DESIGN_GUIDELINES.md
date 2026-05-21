@@ -30,6 +30,7 @@
     - [兼容性](#兼容性)
   - [*好的API设计是安全关键系统成功的基础。*](#好的api设计是安全关键系统成功的基础)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -651,3 +652,15 @@ safety-d = ["formal-verification"]
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

@@ -601,3 +601,8 @@ impl Handler<Message> for MyActor {
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **[来源: Rust Reference - std::sync]**
+> **[来源: ACM - Concurrent Programming]**

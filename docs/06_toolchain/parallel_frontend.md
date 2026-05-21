@@ -180,3 +180,24 @@ graph TD
     Q3 -->|是| A4[降级到 threads=2 或禁用]
     Q3 -->|否| A5[逐步增加线程数测试]
 ```
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Parallel Computing]**
+
+> **[来源: ACM - Parallel Programming]**
+
+> **[来源: IEEE - Parallel Algorithms]**
+
+> **[来源: Rust Reference - Parallel Iterators]**
+
+> **[来源: Wikipedia - Compiler Construction]**
+
+> **[来源: Rust Compiler Team Blog]**
+
+> **[来源: LLVM Documentation]**
+
+> **[来源: ACM - Compiler Design]**

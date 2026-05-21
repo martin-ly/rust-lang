@@ -619,3 +619,24 @@ vec.iter().map(|x| x * 2).collect::<Vec<_>>();
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Iterator Pattern]**
+
+> **[来源: TRPL Ch. 13 - Iterators]**
+
+> **[来源: Rust Reference - Iterator]**
+
+> **[来源: ACM - Iterator Patterns]**

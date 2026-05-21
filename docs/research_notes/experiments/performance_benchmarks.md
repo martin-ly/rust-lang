@@ -1481,3 +1481,8 @@ Rust 1.93.0 更新了捆绑的 musl 到 1.2.5：
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Program Optimization]**
+> **[来源: Criterion.rs Documentation]**
+> **[来源: ACM - Performance Engineering]**
+> **[来源: Rust Performance Book]**

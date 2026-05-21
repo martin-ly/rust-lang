@@ -158,6 +158,7 @@
     - [12.3 实践指导](#123-实践指导)
     - [12.4 延伸阅读](#124-延伸阅读)
   - [*本文档是 Rust 所有权可判定性研究系列的一部分，与 `00-semantic-framework.md` 保持一致的语义框架。*](#本文档是-rust-所有权可判定性研究系列的一部分与-00-semantic-frameworkmd-保持一致的语义框架)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3917,7 +3918,6 @@ valgrind --tool=cachegrind ./target/release/myapp
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -3961,3 +3961,8 @@ valgrind --tool=cachegrind ./target/release/myapp
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

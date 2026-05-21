@@ -369,3 +369,8 @@ pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
 > **[来源: Gang of Four]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Design Pattern]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Gang of Four - Design Patterns]**
+> **[来源: ACM - Software Design Patterns]**

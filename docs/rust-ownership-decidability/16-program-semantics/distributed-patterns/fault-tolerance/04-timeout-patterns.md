@@ -1,6 +1,7 @@
 # 超时模式语义 (Timeout Pattern Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [超时模式语义 (Timeout Pattern Semantics)](#超时模式语义-timeout-pattern-semantics)
@@ -24,8 +25,11 @@
     - [5.2 自适应收敛性](#52-自适应收敛性)
   - [6. 性能考量](#6-性能考量)
   - [7. 总结](#7-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 超时机制是分布式系统中保障服务质量、防止资源无限等待的基础组件。
@@ -34,6 +38,7 @@
 ---
 
 ## 2. 超时分类与语义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 超时类型谱系
@@ -922,7 +927,26 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

@@ -317,3 +317,16 @@ jobs:
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Verification]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Methods]**

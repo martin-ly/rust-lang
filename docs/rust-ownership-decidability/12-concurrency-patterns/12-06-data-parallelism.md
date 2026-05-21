@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 数据并行模式](#rust-数据并行模式)
@@ -27,13 +28,17 @@
     - [3.1 便携式SIMD](#31-便携式simd)
     - [3.2 向量操作](#32-向量操作)
     - [3.3 矩阵运算](#33-矩阵运算)
+  - [（继续...）](#继续)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 并行计算理论
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Amdahl定律与Gustafson定律
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```rust
@@ -929,7 +934,26 @@ pub fn parallel_simd_matrix_multiply(a: &[f32], b: &[f32], c: &mut [f32], n: usi
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Parallel Computing]**
+
+> **[来源: ACM - Parallel Programming]**
+
+> **[来源: IEEE - Parallel Algorithms]**
+
+> **[来源: Rust Reference - Parallel Iterators]**
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: Rust Reference - std::sync]**
+
+> **[来源: ACM - Concurrent Programming]**

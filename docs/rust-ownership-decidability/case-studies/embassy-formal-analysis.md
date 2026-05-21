@@ -1586,3 +1586,8 @@ async fn greedy_task() {
 > **[来源: RTIC Framework Documentation]**
 
 > **[来源: Rust Reference - async/await]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

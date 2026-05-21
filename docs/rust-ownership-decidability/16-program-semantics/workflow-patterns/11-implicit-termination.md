@@ -28,13 +28,14 @@
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📋 目录
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [11 隐式终止模式 (Implicit Termination)](#11-隐式终止模式-implicit-termination)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [模式定义与语义](#模式定义与语义)
     - [核心语义](#核心语义)
@@ -59,6 +60,7 @@
     - [注意事项](#注意事项)
   - [学术参考](#学术参考)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 模式定义与语义
 >
@@ -788,3 +790,23 @@ $$
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

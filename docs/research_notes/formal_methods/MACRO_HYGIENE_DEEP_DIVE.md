@@ -408,3 +408,16 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Macro (computer science)]**
+
+> **[来源: TRPL Ch. 19 - Macros]**
+
+> **[来源: Rust Reference - Macros]**
+
+> **[来源: The Little Book of Rust Macros]**

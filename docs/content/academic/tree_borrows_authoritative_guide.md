@@ -941,3 +941,12 @@ fn use_abstractions() {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rust Standard Library]**
+> **[来源: ACM - Systems Programming]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rustonomicon]**

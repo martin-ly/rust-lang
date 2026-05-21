@@ -23,6 +23,7 @@
   - [4. 维护记录](#4-维护记录)
   - [5. 相关文档](#5-相关文档)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 索引说明
 >
@@ -159,3 +160,15 @@
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Verification]**

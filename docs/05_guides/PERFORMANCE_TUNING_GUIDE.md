@@ -1045,3 +1045,8 @@ where
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Program Optimization]**
+> **[来源: Criterion.rs Documentation]**
+> **[来源: ACM - Performance Engineering]**
+> **[来源: Rust Performance Book]**

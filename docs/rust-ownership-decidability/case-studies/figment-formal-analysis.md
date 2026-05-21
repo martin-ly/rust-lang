@@ -59,6 +59,7 @@
     - [定理 5.1 (嵌套合并)](#定理-51-嵌套合并)
     - [定理 6.1 (环境变量嵌套)](#定理-61-环境变量嵌套)
   - [*代码示例: 11个完整示例*](#代码示例-11个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1824,3 +1825,8 @@ PREFIX_KEY__SUBKEY__VALUE → {"key": {"subkey": {"value": ...}}}
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

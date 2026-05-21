@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Parking\_lot 同步原语形式化分析](#parking_lot-同步原语形式化分析)
@@ -56,10 +57,13 @@
     - [反例 8.2 (过度优化风险)](#反例-82-过度优化风险)
     - [限制 8.3 (不支持静态初始化器)](#限制-83-不支持静态初始化器)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
@@ -72,6 +76,7 @@ parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
 ---
 
 ## 2. Mutex实现形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Word-size Mutex
@@ -660,7 +665,18 @@ static MUTEX: Mutex<i32> = Mutex::new(0);  // ✅ 现在支持
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

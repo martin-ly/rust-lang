@@ -57,6 +57,7 @@
     - [定理 7.2 (Diesel完备性边界)](#定理-72-diesel完备性边界)
   - [参考文献](#参考文献)
   - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -593,3 +594,15 @@ Diesel无法验证所有SQL语义正确性:
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

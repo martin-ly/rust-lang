@@ -82,6 +82,8 @@
     - [Appendix B: Custom Deserializer Implementation](#appendix-b-custom-deserializer-implementation)
     - [Appendix C: Performance Benchmarks](#appendix-c-performance-benchmarks)
     - [Appendix D: Quick Reference](#appendix-d-quick-reference)
+  - [*Counter-Examples: 15+*](#counter-examples-15)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3397,7 +3399,6 @@ mod benches {
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -3441,3 +3442,8 @@ mod benches {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

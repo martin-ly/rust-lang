@@ -451,3 +451,24 @@ Microsoft 在 Azure 基础设施中使用 Rust 和形式化验证:
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Verification]**

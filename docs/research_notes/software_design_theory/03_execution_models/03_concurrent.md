@@ -348,3 +348,16 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 - [03_execution_models 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: Rust Reference - std::sync]**
+
+> **[来源: ACM - Concurrent Programming]**

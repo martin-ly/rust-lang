@@ -9,6 +9,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rayon并行计算形式化分析](#rayon并行计算形式化分析)
@@ -52,10 +53,13 @@
     - [7.2 确定性保证](#72-确定性保证)
     - [定理 7.2 (确定性保证)](#定理-72-确定性保证)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-04*](#最后更新-2026-03-04)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Rayon是一个数据并行库，允许将串行迭代器转换为并行迭代器：
@@ -77,6 +81,7 @@ let sum: i32 = data.par_iter().map(|x| x * x).sum();
 ---
 
 ## 2. Fork-Join模型形式化
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 计算DAG
@@ -600,7 +605,26 @@ data.par_iter().for_each(|_| {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Parallel Computing]**
+
+> **[来源: ACM - Parallel Programming]**
+
+> **[来源: IEEE - Parallel Algorithms]**
+
+> **[来源: Rust Reference - Parallel Iterators]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

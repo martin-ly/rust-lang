@@ -306,3 +306,24 @@ fn main() {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Compiler Construction]**
+
+> **[来源: Rust Compiler Team Blog]**
+
+> **[来源: LLVM Documentation]**
+
+> **[来源: ACM - Compiler Design]**
+
+> **[来源: Wikipedia - Build Automation]**
+
+> **[来源: Cargo Book]**
+
+> **[来源: Rust Reference - Cargo]**
+
+> **[来源: crates.io Documentation]**

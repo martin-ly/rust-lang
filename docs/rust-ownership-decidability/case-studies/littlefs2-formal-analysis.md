@@ -65,6 +65,7 @@
     - [10.2 碎片化问题](#102-碎片化问题)
     - [10.3 并发访问限制](#103-并发访问限制)
   - [**代码示例**: 7个完整示例](#代码示例-7个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2020,7 +2021,6 @@ impl<S: Storage> ThreadSafeFS<S> {
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -2044,3 +2044,8 @@ impl<S: Storage> ThreadSafeFS<S> {
 > **[来源: NAND Flash Memory Standard]**
 
 > **[来源: Rust Embedded Working Group]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

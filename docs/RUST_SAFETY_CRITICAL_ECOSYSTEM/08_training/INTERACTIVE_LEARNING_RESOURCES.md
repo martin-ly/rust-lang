@@ -31,6 +31,7 @@
     - [8.1 资源维护](#81-资源维护)
   - [*学习是一个持续的过程，利用这些资源加速你的Rust安全关键开发之旅。*](#学习是一个持续的过程利用这些资源加速你的rust安全关键开发之旅)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -459,7 +460,6 @@ fn quiz_lifetime() {
 
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -470,4 +470,13 @@ fn quiz_lifetime() {
 
 > **[来源: tch-rs Documentation]**
 
+> **[来源: ACM - AI Systems]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**

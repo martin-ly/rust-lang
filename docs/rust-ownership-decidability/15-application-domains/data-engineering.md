@@ -33,7 +33,8 @@
     - [2. 并发处理](#2-并发处理)
     - [3. 错误处理](#3-错误处理)
   - [总结](#总结)
-  - [通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统。](#通过本文档介绍的技术开发者可以构建高性能高可靠性的数据处理系统)
+  - [通过本文档介绍的技术，开发者可以构建高性能、高可靠性的数据处理系统](#通过本文档介绍的技术开发者可以构建高性能高可靠性的数据处理系统)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1451,7 +1452,6 @@ Rust 在数据工程领域提供了：
 
 - [Parent README](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -1470,4 +1470,13 @@ Rust 在数据工程领域提供了：
 
 > **[来源: tch-rs Documentation]**
 
+> **[来源: ACM - AI Systems]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**

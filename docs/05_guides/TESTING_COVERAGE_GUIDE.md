@@ -619,3 +619,8 @@ pub fn is_test_db_ready() -> bool {
 > **[来源: Rust Reference - Test Attributes]**
 
 > **[来源: ACM - Software Testing Methods]**
+
+> **[来源: Wikipedia - Software Testing]**
+> **[来源: TRPL Ch. 11 - Testing]**
+> **[来源: Rust Reference - Test Attributes]**
+> **[来源: ACM - Software Testing]**

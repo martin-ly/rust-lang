@@ -276,3 +276,8 @@ impl<E, S> ProjectionSync<E, S> {
 > **[来源: IEEE - Event-Driven Architecture]**
 
 > **[来源: ACM - Data Consistency Patterns]**
+
+> **[来源: Wikipedia - Design Pattern]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Gang of Four - Design Patterns]**
+> **[来源: ACM - Software Design Patterns]**

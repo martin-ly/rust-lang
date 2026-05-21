@@ -401,3 +401,16 @@ protocol = "sparse"
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Build Automation]**
+
+> **[来源: Cargo Book]**
+
+> **[来源: Rust Reference - Cargo]**
+
+> **[来源: crates.io Documentation]**

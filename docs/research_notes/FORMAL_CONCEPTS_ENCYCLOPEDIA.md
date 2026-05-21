@@ -562,3 +562,12 @@ thread::spawn(move || {
 > **[来源: RustBelt - Rust Formal Semantics]**
 
 > **[来源: TLA+ Documentation]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rust Standard Library]**
+> **[来源: ACM - Systems Programming]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: Rustonomicon]**

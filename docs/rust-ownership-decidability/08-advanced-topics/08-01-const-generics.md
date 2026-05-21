@@ -891,3 +891,24 @@ trait Container {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Generic Programming]**
+
+> **[来源: TRPL Ch. 10 - Generics]**
+
+> **[来源: Rust Reference - Generics]**
+
+> **[来源: Wikipedia - Parametric Polymorphism]**

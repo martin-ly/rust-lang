@@ -1677,3 +1677,12 @@ pub mod test_config {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Decision Tree]**
+> **[来源: ACM - Decision Support Systems]**
+> **[来源: IEEE - Risk Analysis]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Wikipedia - Software Testing]**
+> **[来源: TRPL Ch. 11 - Testing]**
+> **[来源: Rust Reference - Test Attributes]**
+> **[来源: ACM - Software Testing]**

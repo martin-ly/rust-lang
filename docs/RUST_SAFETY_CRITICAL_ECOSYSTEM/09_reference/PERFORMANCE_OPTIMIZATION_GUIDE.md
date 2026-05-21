@@ -480,3 +480,12 @@ impl Drop for PerformanceCounter {
 > **[来源: ACM - Performance Engineering]**
 
 > **[来源: Rust Performance Book]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Program Optimization]**
+> **[来源: Criterion.rs Documentation]**
+> **[来源: ACM - Performance Engineering]**
+> **[来源: Rust Performance Book]**

@@ -263,3 +263,8 @@ impl<S, E> SagaExecutor<S, E> {
 > **[来源: IEEE - Distributed Transaction Patterns]**
 
 > **[来源: ACM - Compensation-Based Transactions]**
+
+> **[来源: Wikipedia - Design Pattern]**
+> **[来源: Rust API Guidelines]**
+> **[来源: Gang of Four - Design Patterns]**
+> **[来源: ACM - Software Design Patterns]**

@@ -26,6 +26,7 @@
     - [核心交叉引用文档](#核心交叉引用文档)
     - [快速入口](#快速入口)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
@@ -336,3 +337,23 @@
 ## 相关概念
 
 - [docs 目录](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: ACM - Systems Programming Languages]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

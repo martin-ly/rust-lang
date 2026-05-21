@@ -8,6 +8,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Thread Safety]** · **[来源: Wikipedia - Mutual Exclusion]** · **[来源: ACM - Safe Concurrency Patterns]** · **[来源: IEEE - Concurrent Programming Standards]**
 
 - [Rust 线程安全模式](#rust-线程安全模式)
@@ -31,13 +32,17 @@
     - [3.5 性能对比与选择](#35-性能对比与选择)
   - [4. 锁的类型与实现](#4-锁的类型与实现)
     - [4.1 操作系统互斥锁](#41-操作系统互斥锁)
+  - [继续下一部分？](#继续下一部分)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 理论基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 并发安全的形式化定义
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在并发编程中，安全性通常使用以下形式化概念描述：
@@ -1006,7 +1011,26 @@ pub fn benchmark_locks() {
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: Rust Reference - std::sync]**
+
+> **[来源: ACM - Concurrent Programming]**
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**

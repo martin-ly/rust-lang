@@ -415,3 +415,16 @@ Pin Def + Future Def ──→ Pin 保证 T1、自引用安全 T2、并发安全
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Rustonomicon]**
+
+> **[来源: Rust Reference - Unsafe]**
+
+> **[来源: RFC 2585 - Unsafe Guidelines]**

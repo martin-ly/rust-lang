@@ -275,3 +275,24 @@ let r2: &&i32 = &r;      // &'b &'a i32
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Verification]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

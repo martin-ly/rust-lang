@@ -162,3 +162,24 @@ let bin = bincode::serialize(&config)?;
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Decision Tree]**
+
+> **[来源: ACM - Decision Support Systems]**
+
+> **[来源: IEEE - Risk Analysis]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Wikipedia - Serialization]**
+
+> **[来源: serde.rs Documentation]**
+
+> **[来源: RFC 8259 - JSON]**
+
+> **[来源: ACM - Data Format Research]**

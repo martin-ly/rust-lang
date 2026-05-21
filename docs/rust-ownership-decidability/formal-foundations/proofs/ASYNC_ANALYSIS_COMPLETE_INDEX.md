@@ -428,3 +428,24 @@ CANCELPOINT-1:        取消只应在状态一致点发生
 
 - [proofs 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: RFC 2394 - Async/Await]**

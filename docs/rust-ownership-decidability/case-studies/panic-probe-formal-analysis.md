@@ -63,6 +63,7 @@
     - [10.2 双重Panic](#102-双重panic)
     - [10.3 硬件故障](#103-硬件故障)
   - [**代码示例**: 6个完整示例](#代码示例-6个完整示例)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1835,7 +1836,6 @@ fn panic(_info: &PanicInfo) -> ! {
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -1868,3 +1868,8 @@ fn panic(_info: &PanicInfo) -> ! {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

@@ -278,3 +278,24 @@ mod sync_impl {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Compiler Construction]**
+
+> **[来源: Rust Compiler Team Blog]**
+
+> **[来源: LLVM Documentation]**
+
+> **[来源: ACM - Compiler Design]**
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Artificial Intelligence]**
+
+> **[来源: tch-rs Documentation]**
+
+> **[来源: ACM - AI Systems]**

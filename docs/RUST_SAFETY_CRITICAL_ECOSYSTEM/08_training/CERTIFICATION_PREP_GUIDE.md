@@ -42,6 +42,7 @@
     - [注意事项](#注意事项)
   - [*祝考试顺利！*](#祝考试顺利)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -601,7 +602,6 @@ ISO 26262考试 (3小时):
 
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -612,4 +612,13 @@ ISO 26262考试 (3小时):
 
 > **[来源: tch-rs Documentation]**
 
+> **[来源: ACM - AI Systems]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**

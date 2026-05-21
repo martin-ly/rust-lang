@@ -350,3 +350,16 @@ Unsafe Fields 特性的一个重要推动力来自 **Rust for Linux** 项目。
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Rustonomicon]**
+
+> **[来源: Rust Reference - Unsafe]**
+
+> **[来源: RFC 2585 - Unsafe Guidelines]**

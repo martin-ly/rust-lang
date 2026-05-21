@@ -9,29 +9,34 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [1️⃣ Rust 官方生态更新](#1-rust-官方生态更新)
-  - [Rust 官方博客](#rust-官方博客)
-  - [crates.io 生态更新](#cratesio-生态更新)
-  - [RUSTSEC 安全公告](#rustsec-安全公告)
-- [2️⃣ 国际权威来源覆盖度](#2-国际权威来源覆盖度)
-  - [Google / Microsoft / AWS 官方更新](#google-microsoft-aws-官方更新)
-  - [学术与行业标准](#学术与行业标准)
-- [3️⃣ 项目内容同步](#3-项目内容同步)
-  - [代码库对齐](#代码库对齐)
-  - [文档完整性](#文档完整性)
-- [4️⃣ 技术债务评估](#4-技术债务评估)
-- [5️⃣ 归档与总结](#5-归档与总结)
-  - [本季度决策记录](#本季度决策记录)
-  - [下季度关注项](#下季度关注项)
-  - [检查表完成确认](#检查表完成确认)
+- [📅 每季度权威来源同步检查表](#-每季度权威来源同步检查表)
+  - [📑 目录](#-目录)
+  - [1️⃣ Rust 官方生态更新](#1️⃣-rust-官方生态更新)
+    - [Rust 官方博客](#rust-官方博客)
+    - [crates.io 生态更新](#cratesio-生态更新)
+    - [RUSTSEC 安全公告](#rustsec-安全公告)
+  - [2️⃣ 国际权威来源覆盖度](#2️⃣-国际权威来源覆盖度)
+    - [Google / Microsoft / AWS 官方更新](#google--microsoft--aws-官方更新)
+    - [学术与行业标准](#学术与行业标准)
+  - [3️⃣ 项目内容同步](#3️⃣-项目内容同步)
+    - [代码库对齐](#代码库对齐)
+    - [文档完整性](#文档完整性)
+  - [4️⃣ 技术债务评估](#4️⃣-技术债务评估)
+  - [5️⃣ 归档与总结](#5️⃣-归档与总结)
+    - [本季度决策记录](#本季度决策记录)
+    - [下季度关注项](#下季度关注项)
+    - [检查表完成确认](#检查表完成确认)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1️⃣ Rust 官方生态更新
+>
 > **[来源: Rust Official Docs]**
 
 ### Rust 官方博客
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 阅读 [Rust 官方博客](https://blog.rust-lang.org/) 本季度所有文章
@@ -45,6 +50,7 @@
 | | | | | |
 
 ### crates.io 生态更新
+>
 > **[来源: Rust Official Docs]**
 
 - [ ] 运行 `cargo outdated -R` 检查所有根依赖
@@ -185,9 +191,28 @@
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: ACM - Systems Programming]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon]**

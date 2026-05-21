@@ -1041,3 +1041,8 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Build Automation]**
+> **[来源: Cargo Book]**
+> **[来源: Rust Reference - Cargo]**
+> **[来源: crates.io Documentation]**

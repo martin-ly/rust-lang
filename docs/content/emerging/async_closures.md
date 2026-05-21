@@ -516,3 +516,8 @@ let f = async || {
 > **[来源: Tokio Documentation]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+> **[来源: TRPL Ch. 17 - Async]**
+> **[来源: Tokio Documentation]**
+> **[来源: RFC 2394 - Async/Await]**

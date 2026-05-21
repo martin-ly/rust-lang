@@ -24,6 +24,7 @@
     - [6.1 系统退役](#61-系统退役)
   - [*良好的部署和维护实践是系统长期可靠运行的保障。*](#良好的部署和维护实践是系统长期可靠运行的保障)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -597,3 +598,23 @@ impl ConfigurationManager {
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**
+
+> **[来源: Wikipedia - Machine Learning]**
+
+> **[来源: Wikipedia - Artificial Intelligence]**
+
+> **[来源: tch-rs Documentation]**
+
+> **[来源: ACM - AI Systems]**

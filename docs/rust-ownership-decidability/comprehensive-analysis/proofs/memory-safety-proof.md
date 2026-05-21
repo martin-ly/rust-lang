@@ -473,3 +473,24 @@ move(v, from, to) →
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Wikipedia - Memory Management]**
+
+> **[来源: Rustonomicon - Memory Layout]**
+
+> **[来源: ACM - Memory Safety]**
+
+> **[来源: Wikipedia - Formal Methods]**

@@ -415,3 +415,16 @@ where
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: RFC 2394 - Async/Await]**

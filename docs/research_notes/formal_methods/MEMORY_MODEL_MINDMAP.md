@@ -580,3 +580,16 @@ struct Node {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Management]**
+
+> **[来源: Rustonomicon - Memory Layout]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: ACM - Memory Safety]**

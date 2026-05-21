@@ -1565,3 +1565,12 @@ let dev2 = RefCellDevice::new(&bus)?;
 > **[来源: ARM CoreSight Technical Reference]**
 
 > **[来源: Rust Reference - no_std]**
+
+> **[来源: Wikipedia - Embedded System]**
+> **[来源: Rust Embedded WG]**
+> **[来源: Embassy Book]**
+> **[来源: IEEE - Embedded Software]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

@@ -1,6 +1,7 @@
 # 重试模式语义 (Retry Pattern Semantics)
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [重试模式语义 (Retry Pattern Semantics)](#重试模式语义-retry-pattern-semantics)
@@ -22,8 +23,11 @@
     - [5.2 活性保证](#52-活性保证)
   - [6. 性能与最佳实践](#6-性能与最佳实践)
   - [7. 总结](#7-总结)
+  - [$$](#)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 重试模式是分布式系统处理瞬时故障的基础机制。本文档深入分析各种重试策略的数学模型、语义保证及其在 Rust 中的实现。
@@ -31,6 +35,7 @@
 ---
 
 ## 2. 重试策略分类
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 策略类型谱系
@@ -934,7 +939,26 @@ $$
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [Parent README](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Gang of Four - Design Patterns]**
+
+> **[来源: ACM - Software Design Patterns]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

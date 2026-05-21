@@ -594,3 +594,8 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Embedded System]**
+> **[来源: Rust Embedded WG]**
+> **[来源: Embassy Book]**
+> **[来源: IEEE - Embedded Software]**

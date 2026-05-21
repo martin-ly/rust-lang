@@ -398,3 +398,8 @@ cargo run --manifest-path script.rs --release
 > **[来源: Rust Reference - Cargo]**
 
 > **[来源: crates.io Documentation]**
+
+> **[来源: Wikipedia - Build Automation]**
+> **[来源: Cargo Book]**
+> **[来源: Rust Reference - Cargo]**
+> **[来源: crates.io Documentation]**

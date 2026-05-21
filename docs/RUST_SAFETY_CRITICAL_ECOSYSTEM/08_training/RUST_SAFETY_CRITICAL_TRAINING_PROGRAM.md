@@ -57,6 +57,7 @@
   - [联系与注册](#联系与注册)
   - [**维护者**: Rust安全关键系统培训团队](#维护者-rust安全关键系统培训团队)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 培训体系概述
 >
@@ -527,7 +528,6 @@ cargo install kani-verifier verus
 
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -545,3 +545,12 @@ cargo install kani-verifier verus
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
+> **[来源: ACM - AI Systems]**

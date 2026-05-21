@@ -44,6 +44,7 @@
   - [八、总结](#八总结)
   - [**联系邮箱**: rust-safety-critical@example.com](#联系邮箱-rust-safety-criticalexamplecom)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 >
@@ -520,3 +521,15 @@ docs/
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

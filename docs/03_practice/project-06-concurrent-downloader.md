@@ -101,3 +101,16 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: crossbeam Documentation]**
+
+> **[来源: ACM - Concurrent Programming]**

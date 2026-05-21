@@ -60,3 +60,16 @@
 - [完整分析报告](./FINAL_COMPLETE_ANALYSIS_REPORT.md)
 - [完成报告 V3](./FINAL_COMPLETION_REPORT_V3.md)
 - [所有权可判定性总览](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

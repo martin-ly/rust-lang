@@ -214,3 +214,24 @@ graph LR
 | 版本 | 日期 | 变更 |
 |:---:|:---:|:---|
 | v1.0 | 2026-05-21 | 初始创建：30 个核心文件层次映射、定理链索引、跨层关系图谱、思维表征覆盖矩阵 |
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: ACM - Systems Programming Languages]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

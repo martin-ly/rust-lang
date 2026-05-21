@@ -420,3 +420,16 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

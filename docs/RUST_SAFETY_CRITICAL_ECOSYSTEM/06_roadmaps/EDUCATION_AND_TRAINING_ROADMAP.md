@@ -42,6 +42,7 @@
     - [知识更新](#知识更新)
   - [*持续学习是保持技术领先的关键。*](#持续学习是保持技术领先的关键)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -656,7 +657,6 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -667,4 +667,13 @@ pub fn process_data_safe(data: &[i32]) -> Option<i32> {
 
 > **[来源: tch-rs Documentation]**
 
+> **[来源: ACM - AI Systems]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**

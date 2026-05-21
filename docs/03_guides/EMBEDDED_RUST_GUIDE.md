@@ -335,3 +335,8 @@ graph TD
 > **[来源: IEEE - Embedded Software Standards]**
 
 > **[来源: ACM - Embedded Systems Survey]**
+
+> **[来源: Wikipedia - Embedded System]**
+> **[来源: Rust Embedded WG]**
+> **[来源: Embassy Book]**
+> **[来源: IEEE - Embedded Software]**

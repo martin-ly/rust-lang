@@ -2190,3 +2190,8 @@ Go 开发者学习 Rust 路径:
 > **[来源: TRPL - Fearless Concurrency]**
 
 > **[来源: golang.org Documentation]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

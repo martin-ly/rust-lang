@@ -8,16 +8,20 @@
 
 ## 📑 目录
 >
-- [当前版本状态](#当前版本状态)
-- [特性跟踪矩阵](#特性跟踪矩阵)
-  - [语言特性](#语言特性)
-  - [标准库 API](#标准库-api)
-  - [工具链与生态](#工具链与生态)
-  - [平台与系统编程](#平台与系统编程)
-- [更新检查清单](#更新检查清单)
-- [趋势跟踪](#趋势跟踪)
-  - [2026 Q2 关键里程碑](#2026-q2-关键里程碑)
-- [相关概念](#相关概念)
+- [Rust 特性跟踪看板模板](#rust-特性跟踪看板模板)
+  - [📑 目录](#-目录)
+  - [当前版本状态](#当前版本状态)
+  - [特性跟踪矩阵](#特性跟踪矩阵)
+    - [语言特性](#语言特性)
+    - [标准库 API](#标准库-api)
+    - [工具链与生态](#工具链与生态)
+    - [平台与系统编程](#平台与系统编程)
+  - [更新检查清单](#更新检查清单)
+  - [趋势跟踪](#趋势跟踪)
+    - [2026 Q2 关键里程碑](#2026-q2-关键里程碑)
+  - [*本模板基于 2026-05-08 的对称差分析报告创建。*](#本模板基于-2026-05-08-的对称差分析报告创建)
+  - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 当前版本状态
 >
@@ -137,3 +141,23 @@
 - [决策树模板](./TEMPLATE_DECISION_TREE.md)
 - [矩阵模板](./TEMPLATE_MATRIX.md)
 - [docs 总览](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
+> **[来源: TRPL - The Rust Programming Language]**
+
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: ACM - Systems Programming Languages]**
+
+> **[来源: IEEE - Programming Language Standards]**
+
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

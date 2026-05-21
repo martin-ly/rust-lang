@@ -671,3 +671,12 @@ async fn async_task_benchmark() {
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **[来源: Rust Reference - std::sync]**
+> **[来源: ACM - Concurrent Programming]**
+> **[来源: Wikipedia - Program Optimization]**
+> **[来源: Criterion.rs Documentation]**
+> **[来源: ACM - Performance Engineering]**
+> **[来源: Rust Performance Book]**

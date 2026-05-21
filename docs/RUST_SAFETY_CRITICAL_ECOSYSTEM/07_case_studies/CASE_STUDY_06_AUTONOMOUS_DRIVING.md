@@ -25,6 +25,7 @@
     - [安全指标](#安全指标)
   - [*本案例展示了Rust在高性能、高安全要求系统中的实际应用。*](#本案例展示了rust在高性能高安全要求系统中的实际应用)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -565,3 +566,15 @@ mod verification {
 ## 相关概念
 
 - [上级目录](../README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**

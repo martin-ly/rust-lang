@@ -1309,3 +1309,12 @@ Rust 的 trait 系统是类型系统的核心，提供了：
 > **[来源: IEEE - Interface Specification Standards]**
 
 > **[来源: Wadler - Theorems for Free! (1989)]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
+> **[来源: ACM - AI Systems]**

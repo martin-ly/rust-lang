@@ -467,3 +467,16 @@ where
 
 - [emerging 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Generic Programming]**
+
+> **[来源: TRPL Ch. 10 - Generics]**
+
+> **[来源: Rust Reference - Generics]**
+
+> **[来源: Wikipedia - Parametric Polymorphism]**

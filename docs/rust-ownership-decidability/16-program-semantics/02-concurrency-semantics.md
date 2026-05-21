@@ -128,6 +128,7 @@
     - [11.3 性能与安全权衡](#113-性能与安全权衡)
     - [11.4 最佳实践](#114-最佳实践)
   - [参考](#参考)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2982,7 +2983,6 @@ $$
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -3026,3 +3026,12 @@ $$
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+> **[来源: Wikipedia - Concurrency]**
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+> **[来源: Rust Reference - std::sync]**
+> **[来源: ACM - Concurrent Programming]**
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

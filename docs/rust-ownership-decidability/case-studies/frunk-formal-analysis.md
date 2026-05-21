@@ -56,6 +56,7 @@
     - [10.2 错误消息可读性](#102-错误消息可读性)
     - [10.3 与其他 trait 的互操作性](#103-与其他-trait-的互操作性)
   - [*分析深度: 高级技术分析*](#分析深度-高级技术分析)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -751,3 +752,15 @@ for x in list.into_vec() { }
 ---
 
 - [README](./README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: POPL 2018 - RustBelt]**

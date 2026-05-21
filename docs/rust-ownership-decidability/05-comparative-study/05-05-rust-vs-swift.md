@@ -1818,3 +1818,8 @@ fn explicit_drop() {
 > **[来源: Rust Reference - Unsafe Rust]**
 
 > **[来源: TRPL - Ownership]**
+
+> **[来源: Wikipedia - Memory Safety]**
+> **[来源: TRPL Ch. 4 - Ownership]**
+> **[来源: Rustonomicon - Ownership]**
+> **[来源: POPL 2018 - RustBelt]**

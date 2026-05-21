@@ -425,3 +425,12 @@ jobs:
 > **[来源: IEEE - Cybersecurity Standards]**
 
 > **[来源: OWASP - Software Supply Chain Risks]**
+
+> **[来源: ISO 26262 - Functional Safety]**
+> **[来源: IEC 61508 - Safety Standards]**
+> **[来源: MISRA Rust Guidelines]**
+> **[来源: Ferrocene Language Specification]**
+> **[来源: Wikipedia - Machine Learning]**
+> **[来源: Wikipedia - Artificial Intelligence]**
+> **[来源: tch-rs Documentation]**
+> **[来源: ACM - AI Systems]**

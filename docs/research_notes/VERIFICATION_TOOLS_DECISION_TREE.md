@@ -432,3 +432,24 @@
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Decision Tree]**
+
+> **[来源: ACM - Decision Support Systems]**
+
+> **[来源: IEEE - Risk Analysis]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: Wikipedia - Formal Verification]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: TLA+ Documentation]**
+
+> **[来源: ACM - Formal Methods]**

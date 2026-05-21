@@ -512,3 +512,24 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 ## 相关概念
 
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: ISO 26262 - Functional Safety]**
+
+> **[来源: IEC 61508 - Safety Standards]**
+
+> **[来源: MISRA Rust Guidelines]**
+
+> **[来源: Ferrocene Language Specification]**
+
+> **[来源: Wikipedia - Memory Management]**
+
+> **[来源: Rustonomicon - Memory Layout]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: ACM - Memory Safety]**

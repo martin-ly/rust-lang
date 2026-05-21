@@ -361,3 +361,16 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 - [03_execution_models 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Parallel Computing]**
+
+> **[来源: ACM - Parallel Programming]**
+
+> **[来源: IEEE - Parallel Algorithms]**
+
+> **[来源: Rust Reference - Parallel Iterators]**
