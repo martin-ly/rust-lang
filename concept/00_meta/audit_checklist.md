@@ -12,6 +12,7 @@
 
 - [概念一致性检查清单（Concept Consistency Audit Checklist）](#概念一致性检查清单concept-consistency-audit-checklist)
   - [📑 目录](#-目录)
+    - [〇、质量门禁流程](#〇质量门禁流程)
   - [一、关系清晰度检查（Inter-File Consistency） \[来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准\]](#一关系清晰度检查inter-file-consistency-来源-跨文件一致性审计方法论--确保概念定义在不同层级文件中保持逻辑等价-参照-ieee-1012-验证标准)
     - [1.1 跨层关系](#11-跨层关系)
     - [1.2 层内关系](#12-层内关系)
@@ -39,6 +40,50 @@
 
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
+### 〇、质量门禁流程
+
+```mermaid
+flowchart TD
+    Start([内容更新]) --> Q1{是否修改核心概念?}
+
+    Q1 -->|是| Q2{是否修改形式化定义?}
+    Q1 -->|否| Q3{是否修改链接?}
+
+    Q2 -->|是| L4["检查 L4 映射<br/>→ L1-L3 同步更新"]
+    Q2 -->|否| Q4{是否新增来源?}
+
+    Q3 -->|是| LINK["运行 concept_audit.py<br/>检查死链接"]
+    Q3 -->|否| DONE1[无需审计]
+
+    Q4 -->|是| PROV["检查来源格式<br/>✅/⚠️/🔍/💡"]
+    Q4 -->|否| Q5{是否新增定理?}
+
+    L4 --> Q5
+    LINK --> Q5
+    PROV --> Q5
+
+    Q5 -->|是| THEO["检查定理矩阵<br/>前提+结论+失效条件"]
+    Q5 -->|否| Q6{是否新增示例?}
+
+    THEO --> Q6
+    Q6 -->|是| EXAMPLE["检查代码块标注<br/>ignore/no_run/rust"]
+    Q6 -->|否| Q7{是否新增反例?}
+
+    EXAMPLE --> Q7
+    Q7 -->|是| COUNTER["检查反命题树<br/>边界条件覆盖"]
+    Q7 -->|否| FINAL["运行 concept_consistency_auditor.py"]
+
+    COUNTER --> FINAL
+    FINAL -->|0 错误| PASS["✅ 通过质量门禁"]
+    FINAL -->|有错误| FIX["修复后重审"]
+    FIX --> FINAL
+
+    style PASS fill:#c8e6c9
+    style FIX fill:#ffebee
+```
+
+> **认知功能**: 此流程图将质量门禁从"静态检查清单"转化为**动态决策流程**。每次内容更新后，按修改类型触发相应的检查分支：形式化定义修改→跨层一致性检查；新增来源→格式验证；新增定理→矩阵完整性检查；新增示例→代码块规范。最终必须通过 `concept_consistency_auditor.py` 的 0 错误验证。
+
 ## 一、关系清晰度检查（Inter-File Consistency） [来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准]
 
 ### 1.1 跨层关系
@@ -266,5 +311,5 @@ python audit.py --report > audit_report.md
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

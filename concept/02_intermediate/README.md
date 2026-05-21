@@ -11,6 +11,7 @@
 
 - [L2 进阶概念层（Intermediate）](#l2-进阶概念层intermediate)
   - [📑 目录](#-目录)
+    - [〇、L2 认知入口](#〇l2-认知入口)
   - [一、本层概念关系图（完整版）](#一本层概念关系图完整版)
     - [1.1 概念间语义链接](#11-概念间语义链接)
     - [1.2 关键交叉点：Trait Bounds](#12-关键交叉点trait-bounds)
@@ -21,6 +22,37 @@
   - [五、本层定理一致性概览](#五本层定理一致性概览)
   - [六、认知路径](#六认知路径)
   - [七、跨层出口](#七跨层出口)
+
+### 〇、L2 认知入口
+
+```mermaid
+mindmap
+  root((L2 进阶概念层<br/>Intermediate))
+    Trait
+      定义实现[Trait Definition / impl]
+      约束组合[Trait Bounds & where]
+      孤儿规则[Orphan Rule]
+      关联类型[GATs / Associated Types]
+      AutoTrait[Send / Sync Auto Traits]
+    泛型
+      单态化[Monomorphization]
+      常量泛型[Const Generics]
+      HRTB[HRTB in Bounds]
+    内存管理
+      Box[Box<T> 堆分配]
+      RcArc[Rc / Arc 引用计数]
+      RefCell[RefCell / Mutex 内部可变性]
+      Pin[Pin<&mut T> 不动性]
+    错误处理
+      Result[Result<T, E>]
+      Option[Option<T>]
+      传播[? 运算符]
+```
+
+> **认知功能**: 本图是 L2 层的**全景认知地图**，帮助读者在深入学习前建立"四核机制"的整体拓扑框架。建议在学习各子模块前通览此图，定位当前概念在四核中的位置。关键洞察：Trait 是 Rust 行为抽象的基石，Trait Bounds 是 Trait 与泛型的枢纽交叉点。
+> [来源: 💡 原创分析]
+
+> **认知路径**: 本 mindmap 展示 L2 层的**四核机制**。Trait 是 Rust 的行为抽象核心，泛型实现零成本参数多态，内存管理扩展所有权的表达能力（共享、内部可变性），错误处理将异常转化为类型系统的一部分。关键交叉点：**Trait Bounds** 是 Trait 与泛型的结合部。
 
 ## 一、本层概念关系图（完整版）
 
@@ -86,6 +118,9 @@ graph TB
     style MM fill:#9f9,stroke:#333
     style EH fill:#ff9,stroke:#333
 ```
+
+> **认知功能**: 本图是 L2 层的**概念关系网络图**，可视化四核心概念间的互构关系及与 L1/L3 的跨层连接。建议在遇到概念交叉问题时查阅，定位依赖路径与前置后置关系。关键洞察：Trait Bounds 是 L2 的枢纽交叉点，L2 整体是连接 L1 所有权基础与 L3 并发异步的语义桥梁。
+> [来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
 
@@ -237,5 +272,5 @@ Error Handling
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

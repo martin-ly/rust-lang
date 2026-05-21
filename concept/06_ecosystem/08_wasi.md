@@ -12,6 +12,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-13): 初始版本——覆盖 WASI 定位、Component Model 架构、`wit-bindgen`、能力安全、Rust `wasm32-wasi` 目标
+$entry
 
 ---
 
@@ -338,5 +339,5 @@ impl GuestFile for File {
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

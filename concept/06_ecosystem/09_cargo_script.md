@@ -56,7 +56,7 @@ rust-script script.rs
 
 **原生 Cargo Script（```cargo 代码块）**:
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -78,7 +78,7 @@ fn main() {
 
 **rust-script 风格（YAML frontmatter）**:
 
-```rust
+```rust,ignore
 #!/usr/bin/env rust-script
 ---
 [package]
@@ -205,7 +205,7 @@ graph TD
 
 ### 4.1 快速 CLI 原型
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -247,7 +247,7 @@ Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
 
 ### 4.3 数据处理与临时任务
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]

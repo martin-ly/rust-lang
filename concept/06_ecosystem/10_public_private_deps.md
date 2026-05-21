@@ -76,7 +76,7 @@ graph TD
 B = "1.0"
 ```
 
-```rust
+```rust,ignore
 // Crate A 的 src/lib.rs
 pub use B::SomeType;  // ❌ 泄漏：B 的类型进入 A 的公共 API
 
@@ -85,7 +85,7 @@ pub fn foo(x: B::SomeType) -> B::AnotherType { /* ... */ }
 
 此时，任何依赖 `A` 的 crate `C` **隐式依赖**了 `B` 的公共接口：
 
-```rust
+```rust,ignore
 // Crate C
 use A::foo;
 let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
@@ -120,7 +120,7 @@ C = { version = "2.0", public = false }
 
 ### 2.1 编译器可见性规则
 
-```rust
+```rust,ignore
 // Crate A (public = true for B, public = false for C)
 pub use B::SomeType;        // ✅ 允许：B 是公共依赖
 pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 pub API
@@ -228,7 +228,7 @@ cargo public-api diff    # 未来工具（基于 RFC 3516 实现）
 
 **步骤 2: 封装类型**:
 
-```rust
+```rust,ignore
 // 重构前：泄漏 B::Config
 pub fn parse_config(raw: &str) -> B::Config { /* ... */ }
 
@@ -302,5 +302,5 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

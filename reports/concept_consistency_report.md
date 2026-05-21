@@ -1,19 +1,23 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-21T13:06:19.572528
-> 扫描文件数: 58
-> 提取概念定义数: 420
+> 生成时间: 2026-05-21T14:19:10.075800
+> 扫描文件数: 59
+> 提取概念定义数: 425
 > 跨文件引用数: 165
 
 ## 目录
 
-1. [执行摘要](#一执行摘要)
-2. [Send / Sync 一致性检查](#二send--sync-一致性检查)
-3. [所有权三规则一致性检查](#三所有权三规则一致性检查)
-4. [生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
-5. [unsafe 语义一致性检查](#五unsafe-语义一致性检查)
-6. [跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
-7. [附录：概念定义统计](#七附录概念定义统计)
+- [概念一致性审计报告 (Concept Consistency Report)](#概念一致性审计报告-concept-consistency-report)
+  - [目录](#目录)
+  - [一、执行摘要](#一执行摘要)
+  - [二、Send / Sync 一致性检查](#二send--sync-一致性检查)
+  - [三、所有权三规则一致性检查](#三所有权三规则一致性检查)
+  - [四、生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
+  - [五、unsafe 语义一致性检查](#五unsafe-语义一致性检查)
+  - [六、跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
+  - [七、附录：概念定义统计](#七附录概念定义统计)
+    - [7.1 按概念分类统计](#71-按概念分类统计)
+    - [7.2 按文件统计](#72-按文件统计)
 
 ---
 
@@ -55,11 +59,11 @@
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
 | unsafe-UB | 107 | 28 |
-| 所有权-Move语义 | 73 | 25 |
-| Send+Sync | 44 | 20 |
+| 所有权-Move语义 | 74 | 25 |
+| Send+Sync | 46 | 20 |
 | 所有权-作用域绑定 | 31 | 13 |
-| unsafe-契约 | 30 | 12 |
-| 所有权-唯一所有权 | 28 | 13 |
+| unsafe-契约 | 31 | 13 |
+| 所有权-唯一所有权 | 29 | 14 |
 | unsafe-不变式 | 25 | 3 |
 | unsafe-语义 | 18 | 12 |
 | 生命周期-定义 | 14 | 7 |
@@ -80,18 +84,19 @@
 | concept\00_meta\concept_index.md | 8 | 4 | 19 |
 | concept\00_meta\decidability_spectrum.md | 4 | 0 | 16 |
 | concept\00_meta\expressiveness_multiview.md | 4 | 0 | 20 |
-| concept\00_meta\inter_layer_map.md | 11 | 2 | 13 |
+| concept\00_meta\inter_layer_map.md | 11 | 2 | 14 |
 | concept\00_meta\inter_layer_topology.md | 4 | 0 | 3 |
 | concept\00_meta\intra_layer_model_map.md | 0 | 0 | 9 |
 | concept\00_meta\knowledge_mindmap.md | 2 | 0 | 0 |
 | concept\00_meta\learning_guide.md | 8 | 0 | 13 |
 | concept\00_meta\methodology.md | 0 | 0 | 20 |
+| concept\00_meta\navigation.md | 2 | 0 | 0 |
 | concept\00_meta\quick_reference.md | 5 | 1 | 0 |
 | concept\00_meta\self_assessment.md | 11 | 1 | 0 |
 | concept\00_meta\semantic_expressiveness.md | 6 | 42 | 56 |
-| concept\00_meta\semantic_space.md | 12 | 19 | 30 |
+| concept\00_meta\semantic_space.md | 13 | 19 | 30 |
 | concept\00_meta\sources.md | 1 | 0 | 14 |
-| concept\00_meta\theorem_inference_forest.md | 7 | 0 | 14 |
+| concept\00_meta\theorem_inference_forest.md | 8 | 0 | 14 |
 | concept\00_meta\todos.md | 0 | 0 | 3 |
 | concept\01_foundation\01_ownership.md | 40 | 2 | 25 |
 | concept\01_foundation\02_borrowing.md | 2 | 2 | 31 |
@@ -118,7 +123,7 @@
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |
-| concept\06_ecosystem\03_idioms_spectrum.md | 6 | 0 | 32 |
+| concept\06_ecosystem\03_idioms_spectrum.md | 7 | 0 | 33 |
 | concept\06_ecosystem\04_application_domains.md | 0 | 0 | 35 |
 | concept\06_ecosystem\05_formal_ecosystem_tower.md | 0 | 0 | 4 |
 | concept\06_ecosystem\05_system_design_principles.md | 5 | 0 | 11 |

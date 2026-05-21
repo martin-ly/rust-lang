@@ -502,7 +502,7 @@ struct MyPtr<T> { ptr: *mut (), _marker: PhantomData<T> }
 **定义**: 可能失败的操作结果，`Ok(T)` 或 `Err(E)`
 **代码**:
 
-```rust
+```rust,ignore
 fn may_fail() -> Result<i32, String> {
     if random() { Ok(42) } else { Err("failed".to_string()) }
 }

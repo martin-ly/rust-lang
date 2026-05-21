@@ -597,7 +597,7 @@ Rust 如何表达并发和并行？从共享状态到消息传递到数据并行
 
 Rust 的并发安全不是运行时检查，而是**类型系统的定理**：
 
-```rust
+```rust,ignore
 // 编译器自动推导（auto trait）
 unsafe impl Send for MyType {}   // MyType 可跨线程转移所有权
 unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: Send）

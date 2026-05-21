@@ -18,6 +18,7 @@
 
 - [Rust 安全边界扩展推理树](#rust-安全边界扩展推理树)
   - [📑 目录](#-目录)
+    - [〇、安全边界认知全景](#〇安全边界认知全景)
   - [一、边界扩展总树](#一边界扩展总树)
   - [二、逐层扩展分析](#二逐层扩展分析)
     - [2.1 L0: Safe Rust（🟢 编译期保证）](#21-l0-safe-rust-编译期保证)
@@ -29,6 +30,38 @@
   - [四、边界扩展决策树](#四边界扩展决策树)
   - [五、认知路径（Cognitive Path）](#五认知路径cognitive-path)
   - [五、相关概念链接](#五相关概念链接)
+
+### 〇、安全边界认知全景
+
+```mermaid
+mindmap
+  root((Rust 安全边界<br/>扩展路径))
+    SafeRust["🟢 Safe Rust<br/>编译期保证"]
+      所有权[所有权唯一性]
+      借用[借用检查]
+      生命周期[生命周期约束]
+      类型系统[类型系统]
+    UnsafeRust["🟡 Unsafe Rust<br/>程序员契约"]
+      裸指针[解引用裸指针]
+      unsafe函数[调用 unsafe 函数]
+      unsafeTrait[实现 unsafe trait]
+      union访问[访问 union 字段]
+      内联汇编[内联汇编]
+    FFI边界["🔴 FFI 边界<br/>跨语言调用"]
+      externC[extern "C"]
+      no_mangle[#[no_mangle]]
+      C结构体[C 结构体映射]
+    内核嵌入式["⚫ 内核/嵌入式<br/>系统级风险"]
+      no_std[#![no_std]]
+      裸机目标[裸机目标]
+      panic_abort[panic=abort]
+      自定义分配器[自定义分配器]
+    WASM沙箱["🟡 WASM 沙箱<br/>能力安全"]
+      WASI[WASI 接口]
+      能力检查[能力检查器]
+```
+
+> **认知路径**: 本 mindmap 将 Rust 安全边界从中心（Safe Rust）向外扩展，每层扩展都意味着**编译器保证递减，程序员责任递增**。颜色编码：绿色=编译器全责，黄色=程序员契约，红色=跨语言风险，黑色=系统级风险。理解这条边界扩展路径，是评估 Rust 项目安全风险的元框架。
 
 ## 一、边界扩展总树
 
@@ -88,7 +121,7 @@ graph TD
 > **扩展条件**: `extern "C"` 函数声明、`#[no_mangle]`、C 结构体映射。
 > **风险**: C 代码的 UAF、DF、数据竞争可能通过 FFI 传入 Rust，破坏 Rust 的安全假设。 [来源: Rust FFI 指南, The Rustonomicon §4]
 
-```rust
+```rust,ignore
 // FFI 边界示例：Rust 调用 C
 extern "C" {
     fn c_function(ptr: *mut u8); // C 函数可能做任何事
@@ -222,5 +255,5 @@ graph TD
 ---
 
 > **文档版本**: 1.0
-> **最后更新**: 2026-05-21
+> **最后更新: 2026-05-21
 > **状态**: ✅ 边界扩展推理树 v1.0

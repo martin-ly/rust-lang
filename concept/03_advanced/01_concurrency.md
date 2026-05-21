@@ -420,6 +420,8 @@ sequenceDiagram
     end
 ```
 
+> **认知功能**: 时序因果可视化工具，将抽象的 Release-Acquire 内存序转化为可追踪的线程间消息传递流程。阅读无锁代码时对照此图，确认每一对 Release store 与 Acquire load 的精确配对关系。synchronizes-with 边是跨线程可见性的最小充分条件——没有这条边，就没有 happens-before。[来源: 💡 原创分析]
+
 > **思维表征说明**: `sequenceDiagram` 是 Mermaid 的**泳道/时序图**语法，与 `graph TD` 流程图不同——它强调**时间轴上的消息顺序**和**参与者（Actor）间的交互**，天然适合表达多线程间的 happens-before 同步关系。Release-Acquire 的本质是「消息发送-接收」协议，sequenceDiagram 的 `->>`（实线箭头）和 `-->>`（虚线返回）恰好对应 store 和 load 的因果方向。 [来源: Mermaid sequenceDiagram 文档; Boehm & Adve PLDI 2008]
 
 **内存序状态机（Mermaid stateDiagram）**:
@@ -475,6 +477,8 @@ stateDiagram-v2
         end note
     }
 ```
+
+> **认知功能**: 强度层级导航图，帮助程序员根据同步需求选择"最弱且足够"的 Ordering。从 Relaxed 出发按需升级，避免"SeqCst 最安全所以默认用它"的性能陷阱。核心洞察：内存序选择是性能与正确性的工程权衡，而非安全等级的单向攀升。[来源: 💡 原创分析]
 
 > **思维表征说明**: `stateDiagram-v2` 将五种 `Ordering` 建模为**状态层次**而非流程——从 Relaxed（最弱、成本最低）到 SeqCst（最强、成本最高），状态之间的转移对应「何时需要升级内存序」。这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [来源: Rust std::sync::atomic docs; C++ Standard §33.5]
 
@@ -707,6 +711,8 @@ graph TD
     F --> F3[Actor 模型]
 ```
 
+> **认知功能**: 概念全景地图，建立并发知识的空间结构。初学时用作导航目录，复习时快速定位薄弱概念。该图揭示 Rust 并发安全的三元支柱——类型系统（Send/Sync）、同步原语（Mutex/Atomic）与消息传递（Channel）——缺少任一维度都无法覆盖全部并发场景。[来源: 💡 原创分析]
+
 > **下一章**：思维导图展示了概念全景，§5 的决策树将提供具体场景下的选择逻辑。
 
 ---
@@ -730,6 +736,8 @@ graph TD
     A2[消息传递<br/>所有权转移 = 天然同步]
 ```
 
+> **认知功能**: 工程选型决策树，根据场景特征逐层分叉推荐并发模型。面对具体问题时从根节点逐层回答二元判断，最终落点的叶子节点即为候选方案。关键洞察：共享状态与消息传递并非互斥，性能需求与通信拓扑复杂度是决策的核心分叉条件。[来源: 💡 原创分析]
+
 ### 5.2 Send/Sync 手动实现边界
 
 ```mermaid
@@ -739,6 +747,8 @@ graph TD
     B3[为含 Cell/RefCell 的类型实现 Sync] -->|编译期| E1[E0225: conflicting impl / 逻辑错误]
     B4[跨线程使用 Rc] -->|编译期| E2[E0277: `Rc<T>` cannot be sent between threads safely]
 ```
+
+> **认知功能**: 错误预防检查表，可视化 unsafe impl Send/Sync 的常见陷阱与编译器的保护边界。在手动实现前逐条核对：裸指针通常安全，但 Rc/Cell/RefCell 跨线程是契约谎言。核心洞察：E0277 是类型系统在阻止 UB，而非编译器在刁难。[来源: 💡 原创分析]
 
 > **下一章**：决策树给出了选择逻辑，§6 的定理一致性矩阵将理论根基系统化为可追踪的推理链。
 
@@ -983,6 +993,8 @@ graph TD
     style T1 fill:#6f6
 ```
 
+> **认知功能**: 谬误识别流程图，逐层拆解"并发安全"的隐含前提与失效条件。当有人断言"Rust 并发绝对安全"时，用此图展示安全边界：编译期仅保证无数据竞争，运行时死锁、活锁、poison 和 unsafe 误用仍需人工防范。[来源: 💡 原创分析]
+
 **分析**: 并发安全是多层保证的——编译期排除数据竞争，但运行时仍需避免死锁、活锁、poison 和 unsafe 误用。
 
 #### 反命题 2: "Mutex 保证线程安全"
@@ -1009,6 +1021,8 @@ graph TD
     style T2 fill:#6f6
 ```
 
+> **认知功能**: 边界澄清图，区分 Mutex 提供的"互斥"（safety）与其他安全维度（liveness、性能、async 兼容性）。选型时检查三个维度：是否重入、是否可能 poison、是否跨越 await。核心洞察：线程安全 ≠ 程序正确，Mutex 不保证无死锁。[来源: 💡 原创分析]
+
 **分析**: Mutex 保证的是"互斥"（mutual exclusion），即安全性；但不保证无死锁、无性能瓶颈、无 poison。这些属于活性或工程问题。
 
 > **对应标注**：Mutex 的不可重入性与 [`01_foundation/01_ownership.md`](../01_foundation/01_ownership.md) §7.2 "常见陷阱：双重释放" 同属"同一实体多次获取导致错误"的模式。
@@ -1034,6 +1048,8 @@ graph TD
     style T3 fill:#6f6
 ```
 
+> **认知功能**: 选型纠偏图，揭示 Arc 的能力边界与典型误用场景。需要共享可变时配合 Mutex/RwLock，存在循环引用风险时考虑 Weak，单次共享且生命周期确定时可用 scoped thread 替代。核心洞察：Arc 解决"多所有者"问题，不解决"可变共享"和"循环引用"。[来源: 💡 原创分析]
+
 **分析**: `Arc` 解决的是"多个所有者"问题，不是"可变共享"问题，也不是"循环引用"问题。需配合 `Mutex`/`RwLock` 做内部可变，配合 `Weak` 打破循环。
 
 #### 反命题 4: "Atomic 操作总是线程安全的"
@@ -1054,6 +1070,8 @@ graph TD
     style T4 fill:#6f6
 ```
 
+> **认知功能**: 内存序警示图，揭示 Atomic 原子性与可见性的本质区别。使用 Atomic 时首先确认 Ordering 选择：Relaxed 不做同步用，Acquire/Release 需配对覆盖所有观察者。核心洞察：原子性 ≠ 顺序保证，错误的 Ordering 是并发 bug 中最隐蔽的来源。[来源: 💡 原创分析]
+
 **分析**: Atomic 只保证操作本身的原子性，不保证内存可见顺序。`Relaxed` 不提供 happens-before，错误的 Ordering 假设会导致同步失败。
 
 #### 反命题 5: "Mutex 保证临界区内指令不被重排"
@@ -1070,6 +1088,8 @@ graph TD
     style U4 fill:#6f6
     style F1 fill:#f96
 ```
+
+> **认知功能**: 编译器重排边界图，澄清 Mutex 的 Acquire/Release 语义覆盖范围。lock/unlock 保证临界区之间的 happens-before，但不限制临界区内部的编译器优化。与硬件/FFI 交互时若需禁止编译器重排，显式使用 compiler_fence。[来源: 💡 原创分析]
 
 **分析**: Mutex 的 `lock()` 隐含 Acquire，`unlock()` 隐含 Release，保证临界区之间的 happens-before。但**编译器仍可在临界区内重排无关指令**。若需禁止编译器重排（如与外部设备交互），需显式使用 `compiler_fence`。
 
@@ -1091,6 +1111,8 @@ graph TD
     style F3 fill:#f96
     style T1 fill:#6f6
 ```
+
+> **认知功能**: 性能与正确性权衡图，破除"SeqCst = 最安全默认"的迷信。绝大多数场景 Release/Acquire 足够，SeqCst 仅用于多变量全局协调。核心洞察：SeqCst 是最强语义但非最佳选择，过度同步导致不必要的内存屏障开销。[来源: 💡 原创分析]
 
 **分析**: `SeqCst` 是"最安全"但非"最佳"选择。绝大多数场景下，`Release`/`Acquire` 或 `AcqRel` 已足以建立所需 happens-before，且性能更优。SeqCst 的过度使用会导致不必要的内存屏障开销。
 
@@ -1232,6 +1254,8 @@ graph LR
     style B fill:#9cf
     style C fill:#9cf
 ```
+
+> **认知功能**: 因果链可视化，展示 Release-Acquire 配对如何从程序序砖块构建全局偏序。编写无锁代码时，用此四步验证每次共享数据访问是否有 hb 路径：sequenced-before → synchronizes-with → inter-thread-happens-before → happens-before。[来源: 💡 原创分析]
 
 **解释**：Release-Acquire 配对建立跨线程 synchronizes-with 边；若 B 看到 Release 写入的值，则 A 中 sequenced-before B 的所有操作对 C 可见。
 
@@ -1418,6 +1442,8 @@ graph TD
     B -.->|保护| D
 ```
 
+> **认知功能**: 无锁内存回收机制图，展示 epoch 如何用"批量延迟释放"换取"无锁读路径"。阅读 crossbeam-epoch 代码时对照此图理解 pin/defer_destroy 的时序：线程 pin 当前 epoch → 逻辑删除节点 → 等待所有线程 epoch 前进 → 物理释放。[来源: 💡 原创分析]
+
 **形式化根基**：
 
 ```text
@@ -1592,6 +1618,8 @@ graph LR
     T2 -->|窃取 steal FIFO| T1_tail[从 T1 尾部窃取 C]
     T3 -->|本地 pop| T3_local[X 执行]
 ```
+
+> **认知功能**: 调度器架构图，揭示 rayon 线程池的任务分配与负载均衡策略。使用 rayon 时理解 LIFO 本地执行 + FIFO 远端窃取的分工：本地操作保持缓存局部性，批量窃取最小化缓存一致性流量。避免过细粒度任务（< 1 μs）。[来源: 💡 原创分析]
 
 **机制分解**：
 
@@ -1958,6 +1986,8 @@ graph LR
     S2 --> S3[inter-thread-happens-before<br/>传递闭包]
     S3 --> S4[happens-before<br/>全局偏序]
 ```
+
+> **认知功能**: 形式化推导阶梯图，将抽象的内存模型层次转化为可追踪的四步构建过程。推理并发正确性时按此阶梯逐层验证：先确认单线程 sequenced-before，再定位跨线程 synchronizes-with，最后取传递闭包得到全局 happens-before。[来源: 💡 原创分析]
 
 ```rust,ignore
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};

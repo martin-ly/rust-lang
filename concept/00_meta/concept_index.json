@@ -1,542 +1,481 @@
 {
-  "version": "1.5",
-  "generated_at": "2026-05-21T13:06:30.371990",
-  "total_files": 76,
-  "total_lines": 61610,
+  "version": "2.1",
+  "generated_at": "2026-05-21T14:20:02.840456",
+  "total_files": 77,
+  "total_lines": 62489,
   "total_sources": 1235,
-  "mermaid_files": 60,
+  "total_mermaid": 311,
+  "mermaid_files": 62,
+  "cognitive_coverage": {
+    "total_with_cognitive": 137,
+    "total_mermaid": 311,
+    "coverage_percent": 44.1,
+    "l1_foundation": "100% (28/28)",
+    "l2_intermediate": "100% (26/26)",
+    "l3_advanced": "100% (44/44)"
+  },
   "files": [
     {
       "path": "00.md",
       "lines": 96,
       "sources": 4,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 1
     },
     {
       "path": "00_meta/audit_checklist.md",
-      "lines": 271,
+      "lines": 316,
       "sources": 15,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 1
     },
     {
       "path": "00_meta/authority_source_map.md",
       "lines": 121,
       "sources": 9,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "00_meta/boundary_extension_tree.md",
-      "lines": 227,
+      "lines": 259,
       "sources": 12,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "00_meta/concept_index.md",
       "lines": 613,
       "sources": 29,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "00_meta/decidability_spectrum.md",
       "lines": 611,
       "sources": 14,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "00_meta/expressiveness_multiview.md",
       "lines": 651,
       "sources": 17,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 7
     },
     {
       "path": "00_meta/inter_layer_map.md",
-      "lines": 466,
+      "lines": 525,
       "sources": 1,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "00_meta/inter_layer_topology.md",
       "lines": 313,
       "sources": 8,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "00_meta/intra_layer_model_map.md",
       "lines": 241,
       "sources": 1,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "00_meta/knowledge_mindmap.md",
-      "lines": 200,
+      "lines": 205,
       "sources": 2,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "00_meta/learning_guide.md",
-      "lines": 445,
+      "lines": 499,
       "sources": 17,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 1
     },
     {
       "path": "00_meta/methodology.md",
-      "lines": 418,
+      "lines": 452,
       "sources": 13,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
+    },
+    {
+      "path": "00_meta/navigation.md",
+      "lines": 211,
+      "sources": 0,
+      "mermaid": 0
     },
     {
       "path": "00_meta/quick_reference.md",
       "lines": 715,
       "sources": 4,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "00_meta/self_assessment.md",
       "lines": 2027,
       "sources": 13,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "00_meta/semantic_expressiveness.md",
-      "lines": 1047,
+      "lines": 1048,
       "sources": 9,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "00_meta/semantic_space.md",
-      "lines": 1108,
+      "lines": 1140,
       "sources": 2,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "00_meta/sources.md",
-      "lines": 381,
+      "lines": 413,
       "sources": 1,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "00_meta/theorem_inference_forest.md",
-      "lines": 386,
+      "lines": 421,
       "sources": 20,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "00_meta/todos.md",
       "lines": 249,
       "sources": 9,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "01.md",
       "lines": 2095,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 10
     },
     {
       "path": "01_foundation/01_ownership.md",
       "lines": 935,
       "sources": 33,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 7
     },
     {
       "path": "01_foundation/02_borrowing.md",
       "lines": 1141,
       "sources": 31,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "01_foundation/03_lifetimes.md",
       "lines": 1815,
       "sources": 39,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "01_foundation/04_type_system.md",
       "lines": 1674,
       "sources": 39,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 8
     },
     {
       "path": "01_foundation/README.md",
-      "lines": 200,
+      "lines": 229,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "02.md",
       "lines": 139,
       "sources": 5,
-      "has_bloom": false,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "02_intermediate/01_traits.md",
       "lines": 1788,
       "sources": 15,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "02_intermediate/02_generics.md",
       "lines": 2198,
       "sources": 32,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "02_intermediate/03_memory_management.md",
       "lines": 1541,
       "sources": 6,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "02_intermediate/04_error_handling.md",
       "lines": 1993,
       "sources": 33,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 8
     },
     {
       "path": "02_intermediate/README.md",
-      "lines": 242,
+      "lines": 270,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "03.md",
       "lines": 70,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "03_advanced/01_concurrency.md",
       "lines": 2180,
       "sources": 39,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 15
     },
     {
       "path": "03_advanced/02_async.md",
       "lines": 2544,
       "sources": 30,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 9
     },
     {
       "path": "03_advanced/03_unsafe.md",
-      "lines": 2276,
+      "lines": 2275,
       "sources": 49,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 10
     },
     {
       "path": "03_advanced/04_macros.md",
       "lines": 2098,
       "sources": 16,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 8
     },
     {
       "path": "03_advanced/README.md",
-      "lines": 231,
+      "lines": 261,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "04.md",
       "lines": 75,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "04_formal/01_linear_logic.md",
-      "lines": 878,
+      "lines": 879,
       "sources": 8,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "04_formal/02_type_theory.md",
       "lines": 909,
       "sources": 15,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "04_formal/03_ownership_formal.md",
-      "lines": 1258,
+      "lines": 1260,
       "sources": 7,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "04_formal/04_rustbelt.md",
-      "lines": 1054,
+      "lines": 1056,
       "sources": 9,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "04_formal/05_verification_toolchain.md",
       "lines": 636,
       "sources": 16,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 4
     },
     {
       "path": "04_formal/README.md",
-      "lines": 212,
+      "lines": 241,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "05.md",
       "lines": 81,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "05_comparative/01_rust_vs_cpp.md",
       "lines": 2251,
       "sources": 69,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 13
     },
     {
       "path": "05_comparative/02_rust_vs_go.md",
       "lines": 748,
       "sources": 22,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "05_comparative/03_paradigm_matrix.md",
       "lines": 710,
       "sources": 13,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 8
     },
     {
       "path": "05_comparative/04_safety_boundaries.md",
       "lines": 785,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 7
     },
     {
       "path": "05_comparative/05_execution_model_isomorphism.md",
       "lines": 638,
       "sources": 25,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "05_comparative/README.md",
-      "lines": 167,
+      "lines": 190,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "06.md",
       "lines": 66,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "06_ecosystem/01_toolchain.md",
       "lines": 1307,
       "sources": 38,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 9
     },
     {
       "path": "06_ecosystem/02_patterns.md",
       "lines": 1491,
       "sources": 33,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "06_ecosystem/03_core_crates.md",
       "lines": 1067,
       "sources": 19,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "06_ecosystem/03_idioms_spectrum.md",
-      "lines": 1053,
+      "lines": 1130,
       "sources": 40,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 5
     },
     {
       "path": "06_ecosystem/04_application_domains.md",
       "lines": 1242,
       "sources": 29,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "06_ecosystem/05_formal_ecosystem_tower.md",
-      "lines": 379,
+      "lines": 380,
       "sources": 3,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "06_ecosystem/05_system_design_principles.md",
       "lines": 477,
       "sources": 16,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "06_ecosystem/06_blockchain.md",
-      "lines": 669,
+      "lines": 670,
       "sources": 7,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "06_ecosystem/07_game_ecs.md",
       "lines": 1088,
       "sources": 29,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 7
     },
     {
       "path": "06_ecosystem/08_wasi.md",
-      "lines": 343,
+      "lines": 344,
       "sources": 8,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "06_ecosystem/09_cargo_script.md",
       "lines": 352,
       "sources": 9,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "06_ecosystem/10_public_private_deps.md",
-      "lines": 305,
+      "lines": 307,
       "sources": 6,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "06_ecosystem/README.md",
-      "lines": 146,
+      "lines": 175,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "07.md",
       "lines": 83,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "07_future/01_ai_integration.md",
       "lines": 1056,
       "sources": 68,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "07_future/02_formal_methods.md",
       "lines": 1363,
       "sources": 26,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 9
     },
     {
       "path": "07_future/03_evolution.md",
-      "lines": 1101,
+      "lines": 1102,
       "sources": 43,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 6
     },
     {
       "path": "07_future/04_effects_system.md",
-      "lines": 474,
+      "lines": 475,
       "sources": 11,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 4
     },
     {
       "path": "07_future/05_rust_version_tracking.md",
       "lines": 597,
       "sources": 26,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 3
     },
     {
       "path": "07_future/README.md",
-      "lines": 157,
+      "lines": 182,
       "sources": 5,
-      "has_bloom": true,
-      "has_mermaid": true
+      "mermaid": 2
     },
     {
       "path": "PLAN.md",
-      "lines": 221,
+      "lines": 279,
       "sources": 1,
-      "has_bloom": true,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "PLAN_Semantic_Space_Wave.md",
       "lines": 285,
       "sources": 1,
-      "has_bloom": false,
-      "has_mermaid": false
+      "mermaid": 0
     },
     {
       "path": "README.md",
       "lines": 140,
       "sources": 1,
-      "has_bloom": false,
-      "has_mermaid": false
+      "mermaid": 0
     }
   ]
 }

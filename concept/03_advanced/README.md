@@ -7,6 +7,40 @@
 
 ---
 
+### 〇、L3 认知入口
+
+```mermaid
+mindmap
+  root((L3 高级概念层<br/>Advanced))
+    并发
+      SendSync[Send / Sync]
+      MutexRwLock[Mutex / RwLock]
+      原子操作[Atomics & Memory Ordering]
+      Channel[Channel / Message Passing]
+    异步
+      Future[Future / Poll]
+      async_await[async / await]
+      Pin[Pin<&mut T>]
+      AFIT[AFIT / RPITIT]
+      Runtime[Runtime: Tokio]
+    Unsafe
+      裸指针[*const T / *mut T]
+      FFI[FFI 跨语言]
+      Union[Union / repr]
+      MaybeUninit[MaybeUninit]
+      Miri[Miri 验证]
+    宏
+      macro_rules[macro_rules!]
+      过程宏[Procedural Macros]
+      DSL[DSL 构建]
+```
+
+> **认知功能**: 全局概念导航图——在学习具体子主题前建立"并发-异步-Unsafe-宏"四域心智框架。
+> 使用建议：将本图作为目录锚点，定位感兴趣的概念后再深入对应文件阅读。
+> 关键洞察：L3 并非新增孤立语法，而是 L1 所有权与 L2 Trait 在复杂场景中的组合应用与边界突破。[来源: 💡 原创分析]
+
+> **认知路径**: 本 mindmap 展示 L3 层的**复杂场景组合**。并发将 L1 借用规则扩展到多线程，异步将所有权扩展到状态机，Unsafe 是安全边界的逃逸舱口，宏是元编程工具。核心洞察：**并发和异步都是所有权系统在不同执行模型下的应用**——线程是抢占式并行，Future 是协作式串行。
+
 ## 一、本层概念关系图（完整版）
 
 ```mermaid
@@ -70,6 +104,10 @@ graph TB
     style UN fill:#f66,stroke:#333
     style MAC fill:#9f9,stroke:#333
 ```
+
+> **认知功能**: 跨层依赖拓扑图——揭示 L3 核心四概念与 L1/L2 输入、L4/L7 输出之间的完整关系网络。
+> 使用建议：阅读本层任何文件前查看此图，理解该概念在知识体系中的上下游位置与依赖路径。
+> 关键洞察：Unsafe 处于中心辐射位——它是突破 safe 边界的唯一通道，也是所有 L3 概念通向形式化验证的必经枢纽。[来源: 💡 原创分析]
 
 ### 1.1 概念间语义链接
 
@@ -226,5 +264,5 @@ Macros
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

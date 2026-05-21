@@ -7,6 +7,35 @@
 
 ---
 
+### 〇、L4 认知入口
+
+```mermaid
+mindmap
+  root((L4 形式化理论层<br/>Formal Methods))
+    线性逻辑
+      张量[⊗ 张量 / ⅋ Par]
+      线性蕴含[⊸ 线性蕴含]
+      指数[!A / ?A]
+      Girard[Girard 1987]
+    类型论
+      HM[HM 类型推断]
+      代数类型[Algebraic Types]
+      子类型[Subtyping / Variance]
+      SystemF[System F / Fω]
+    所有权形式化
+      区域类型[Region Types]
+      分数权限[Fractional Permissions]
+      COR[Calculus of Ownership]
+      别名模型[Stacked/Tree Borrows]
+    RustBelt
+      Iris[Iris 分离逻辑]
+      Creusot[Creusot / Why3]
+      Verus[Verus / Kani]
+      并发安全[无数据竞争证明]
+```
+
+> **认知路径**: 本 mindmap 展示 L4 层的**数学根基**。线性逻辑提供资源语义，类型论提供结构规则，所有权形式化将两者映射到 Rust 的具体机制，RustBelt 提供机械可验证的安全证明。关键洞察：**L4 不是"更高级的知识"，而是 L1-L3 的"地基"**——形式化证明向下保证上层概念的安全性。
+
 ## 一、本层概念关系图（完整版）
 
 ```mermaid
@@ -207,5 +236,5 @@ L4 的形式化成果输出到：
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

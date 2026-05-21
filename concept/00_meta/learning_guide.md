@@ -11,6 +11,7 @@
 
 - [Rust 知识体系学习指南（Learning Guide）](#rust-知识体系学习指南learning-guide)
   - [📑 目录](#-目录)
+    - [〇、学习路径选择全景](#〇学习路径选择全景)
   - [一、如何使用本指南](#一如何使用本指南)
     - [1.1 选择你的起点](#11-选择你的起点)
     - [1.2 选择你的目标](#12-选择你的目标)
@@ -49,6 +50,59 @@
     - [诊断路径速查](#诊断路径速查)
 
 > **[来源: Bloom Taxonomy 2001; 认知科学前置依赖原则]** 学习路径基于认知层级和前置依赖设计。
+
+### 〇、学习路径选择全景
+
+```mermaid
+graph TD
+    subgraph 起点["选择你的起点"]
+        NEWBIE[完全新手<br/>无系统编程经验]
+        CPP[C/C++ 开发者]
+        JAVAGO[Java/Go 开发者]
+        HASKELL[Haskell/ML 开发者]
+    end
+
+    subgraph L1["L1 基础层"]
+        OWN[所有权]
+        BOR[借用]
+        LIFE[生命周期]
+        TYP[类型系统]
+    end
+
+    subgraph L2["L2 进阶层"]
+        TRAIT[Trait]
+        GEN[泛型]
+        MM[内存管理]
+        EH[错误处理]
+    end
+
+    subgraph L5["L5 对比层"]
+        VSCPP[Rust vs C++]
+        VSGO[Rust vs Go]
+    end
+
+    subgraph L4["L4 形式化"]
+        FORMAL[类型论/线性逻辑]
+    end
+
+    NEWBIE --> OWN
+    CPP --> OWN
+    CPP --> VSCPP
+    JAVAGO --> OWN
+    JAVAGO --> MM
+    HASKELL --> TRAIT
+    HASKELL --> FORMAL
+
+    OWN --> BOR --> LIFE --> TYP
+    TYP --> TRAIT --> GEN --> MM --> EH
+
+    style NEWBIE fill:#e3f2fd
+    style CPP fill:#e8f5e9
+    style JAVAGO fill:#fff3e0
+    style HASKELL fill:#fce4ec
+```
+
+> **认知功能**: 此路径图展示**不同背景学习者的最小阻力路径**。完全新手从 L1 基础层线性递进；C++ 开发者利用已有 RAII/指针知识，通过 Rust vs C++ 对比加速；Java/Go 开发者从 GC 思维转换，重点理解所有权替代 GC；Haskell/ML 开发者利用类型论基础，从 L2/L4 进入。颜色对应背景：蓝=新手、绿=C++、橙=Java/Go、粉=Haskell。
 
 ## 一、如何使用本指南
 
@@ -440,5 +494,5 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

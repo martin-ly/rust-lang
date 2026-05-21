@@ -205,7 +205,7 @@ Rust 的容错设计机制：
 | 热代码升级 | 无原生支持 | 需进程重启或动态链接 |
 | 进程隔离 | OS 进程 / WASM 沙箱 | 无 Erlang 的轻量级进程隔离 |
 
-```rust
+```rust,ignore
 // Rust 中的 Error Kernel 模式
 struct ErrorKernel {
     core_state: Mutex<CoreState>, // 最小关键状态

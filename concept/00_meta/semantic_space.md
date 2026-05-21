@@ -14,6 +14,7 @@
 - [Rust 表征空间（Semantic / Representational Space）](#rust-表征空间semantic--representational-space)
   - [📑 目录](#-目录)
   - [变更日志](#变更日志)
+    - [〇、表征空间认知全景](#〇表征空间认知全景)
   - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
     - [第 1 步：什么是表征空间？](#第-1-步什么是表征空间)
     - [第 2 步：Rust 的表征空间为什么是这些算子？](#第-2-步rust-的表征空间为什么是这些算子)
@@ -72,6 +73,38 @@
 
 > **来源**: [Rust Reference] · [RFCs] · [RustBelt] · [Wikipedia]
 >
+### 〇、表征空间认知全景
+
+```mermaid
+mindmap
+  root((Rust 表征空间<br/>Semantic Space))
+    核心算子
+      所有权[所有权<br/>线性逻辑]
+      借用[借用<br/>分离逻辑]
+      生命周期[生命周期<br/>区域类型]
+      Trait[Trait<br/>类型类]
+      泛型[泛型<br/>System F]
+    能且高效表达
+      系统编程[系统编程<br/>零成本抽象]
+      并发安全[并发安全<br/>Send/Sync]
+      内存安全[内存安全<br/>编译期保证]
+    能但低效表达
+      自引用结构[自引用结构<br/>Pin 复杂]
+      绿色线程[绿色线程<br/>无原生支持]
+      动态分发[动态分发<br/>dyn Trait]
+    不能表达
+      隐式GC[隐式 GC<br/>故意排除]
+      继承[继承<br/>Trait+组合替代]
+      异常[异常<br/>Result 替代]
+    等价表达选择
+      继承→Trait[继承 → Trait+组合]
+      异常→Result[异常 → Result]
+      虚函数→enum[虚函数 → enum/dyn Trait]
+      GC→所有权[Rc/Arc[GC → 所有权+Rc/Arc]]
+```
+
+> **认知路径**: 本 mindmap 从四个维度组织 Rust 表征空间：**核心算子**（Rust 提供什么表达工具）、**能且高效表达**（Sweet Spot）、**能但低效表达**（需要技巧）、**不能表达**（设计排除）。第四分支展示 Rust 如何提供**等价表达**替代其他语言的核心机制——这些替代不是简单的语法转换，而是语义保持的观察等价。
+
 ## 〇、认知路径（Cognitive Path）
 
 > **学习递进**: 从"编程语言能做什么"的直觉出发，逐步深入到 Rust 表征空间的元结构。
@@ -1103,5 +1136,5 @@ graph TD
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

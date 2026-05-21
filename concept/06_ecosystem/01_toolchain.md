@@ -726,7 +726,7 @@ mod linux_parallel_impl;
 | Panic 处理 | 必须自定义 | 无默认 panic handler | `#[panic_handler]` |
 | 启动运行时 | 无 `main` | 需自定义入口或链接脚本 | `#[no_main]` |
 
-```rust
+```rust,ignore
 // 嵌入式裸机目标示例（thumbv7em-none-eabihf）
 #![no_std]
 #![no_main]

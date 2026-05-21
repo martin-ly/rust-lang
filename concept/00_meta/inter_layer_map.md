@@ -13,6 +13,7 @@
 - [跨层知识图谱（Inter-Layer Dependency Map）](#跨层知识图谱inter-layer-dependency-map)
   - [📑 目录](#-目录)
   - [一、全局层级依赖图](#一全局层级依赖图)
+    - [1.1 层间定理传递链可视化](#11-层间定理传递链可视化)
   - [二、语义链接类型定义](#二语义链接类型定义)
   - [三、层间映射矩阵](#三层间映射矩阵)
     - [3.1 L1-L4 形式化映射（核心）](#31-l1-l4-形式化映射核心)
@@ -146,6 +147,64 @@ graph TB
     LL -.->|"线性逻辑 vs 经典逻辑"| CP
     RB -.->|"可验证性对比"| FM
 ```
+
+---
+
+### 1.1 层间定理传递链可视化
+
+```mermaid
+graph LR
+    subgraph L1["L1 基础概念"]
+        OWN[所有权唯一性]
+        BOR[引用规则]
+        LIFE[生命周期约束]
+        TYP[ADT 类型系统]
+    end
+
+    subgraph L2["L2 进阶概念"]
+        TRAIT[Trait 系统]
+        GEN[泛型约束]
+        MM[内存管理策略]
+    end
+
+    subgraph L3["L3 高级概念"]
+        CONC[并发原语]
+        ASYNC[异步状态机]
+        UNS[Unsafe 边界]
+    end
+
+    subgraph L4["L4 形式化理论"]
+        LL[线性逻辑]
+        TT[类型论]
+        OF[所有权形式化]
+        RB[RustBelt]
+    end
+
+    OWN ==>|"启用"| TRAIT
+    BOR ==>|"约束"| TRAIT
+    LIFE ==>|"约束"| GEN
+    TYP ==>|"基础"| TRAIT
+
+    TRAIT ==>|"Send/Sync"| CONC
+    GEN ==>|"Future"| ASYNC
+    MM ==>|"Rc/Arc"| CONC
+
+    CONC ==>|"需形式化"| RB
+    ASYNC ==>|"Pin 证明"| OF
+    UNS ==>|"契约验证"| RB
+
+    LL ==>|"资源语义"| OF
+    TT ==>|"类型规则"| GEN
+    OF ==>|"证明安全"| OWN
+    RB ==>|"分离逻辑"| UNS
+
+    style L1 fill:#e3f2fd
+    style L2 fill:#e8f5e9
+    style L3 fill:#fff3e0
+    style L4 fill:#fce4ec
+```
+
+> **认知功能**: 此传递链图将 L1→L2→L3→L4 的**正向递进**与 L4→L1 的**反向形式化证明**可视化。实线箭头表示"概念依赖"（上层依赖下层），粗实线表示"形式化证明"（L4 证明 L1 安全）。颜色分层：蓝=基础、绿=进阶、橙=高级、粉=形式化。关键洞察：**L4 不是 L3 的"更高级版本"，而是 L1-L3 的"数学根基"**——形式化理论向下证明上层概念的安全性。
 
 ---
 
@@ -461,5 +520,5 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)

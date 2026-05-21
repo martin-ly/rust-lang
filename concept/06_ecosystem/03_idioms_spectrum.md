@@ -19,6 +19,7 @@
 
 - [Rust 惯用法谱系全景（Idioms Spectrum）](#rust-惯用法谱系全景idioms-spectrum)
   - [📑 目录](#-目录)
+  - [〇、惯用法谱系认知全景](#〇惯用法谱系认知全景)
   - [零、TL;DR —— 惯用法速查](#零tldr--惯用法速查)
   - [一、权威来源与谱系方法论](#一权威来源与谱系方法论)
     - [1.1 惯用法的定义与判别标准](#11-惯用法的定义与判别标准)
@@ -64,13 +65,54 @@
   - [十一、Rust 1.95 新惯用法](#十一rust-195-新惯用法)
   - [十二、思维表征体系](#十二思维表征体系)
     - [12.1 惯用法选择决策树](#121-惯用法选择决策树)
-    - [12.2 惯用法效率矩阵](#122-惯用法效率矩阵)
+    - [12.2 惯用法效率-认知负荷象限图](#122-惯用法效率-认知负荷象限图)
+    - [12.3 惯用法效率矩阵](#123-惯用法效率矩阵)
   - [十三、定理推理链](#十三定理推理链)
     - [定理一致性矩阵（惯用法谱系专集）](#定理一致性矩阵惯用法谱系专集)
   - [十四、相关概念链接（L0-L7 映射）](#十四相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [十五、惯用法选择的认知路径](#十五惯用法选择的认知路径)
+
+---
+
+## 〇、惯用法谱系认知全景
+
+```mermaid
+mindmap
+  root((Rust 惯用法谱系<br/>L0-L6))
+    L0词法级
+      传播[? 传播<br/>自动错误传播]
+      match解构[match 解构<br/>穷尽性检查]
+      if_let_guards[if let guards<br/>局部模式+条件]
+      链式调用[链式方法调用<br/>Iterator/Option]
+    L1类型级
+      Newtype[Newtype<br/>零成本类型区分]
+      Typestate[Typestate<br/>编译期状态机]
+      PhantomData[PhantomData<br/>标记变型]
+    L2接口级
+      IntoFrom[Into/From<br/>隐式转换链]
+      Deref[Deref 多态<br/>智能指针透明]
+      TraitBound[Trait Bound 组合<br/>接口能力组合]
+    L3资源级
+      RAII[RAII 守卫<br/>自动资源释放]
+      Scopeguard[Scopeguard<br/>作用域退出]
+      Pin[Pin 不动性<br/>堆上位置稳定]
+    L4控制级
+      Iterator链[Iterator 链<br/>惰性求值]
+      递归转循环[递归→循环<br/>避免栈溢出]
+      早期返回[早期返回<br/>减少嵌套]
+    L5并发级
+      SendSync[Send/Sync 边界<br/>编译期线程安全]
+      Actor[Actor 单线程<br/>避免锁竞争]
+      Channel[Channel 所有权<br/>move 防竞争]
+    L6架构级
+      TowerService[Tower Service<br/>服务态射复合]
+      洋葱中间件[洋葱中间件<br/>横切关注点分离]
+      ECS[ECS Archetype<br/>缓存友好布局]
+```
+
+> **认知路径**: 本 mindmap 展示 Rust 惯用法的**七层抽象阶梯**。从 L0 词法级（语法糖）到 L6 架构级（系统设计），每层惯用法解决不同粒度的问题。新手应从 L0-L1 开始建立直觉，成长期聚焦 L2-L3，成熟期掌握 L4-L5，专家期探索 L6。每层节点的后缀标注核心特征，便于快速定位。
 
 ---
 
@@ -191,7 +233,7 @@ graph TD
 
 **非惯用**:
 
-```rust
+```rust,ignore
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = match File::open(path) {
         Ok(f) => f,
@@ -207,7 +249,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 **惯用**:
 
-```rust
+```rust,ignore
 fn read_file(path: &str) -> Result<String, io::Error> {
     let mut file = File::open(path)?;
     let mut contents = String::new();
@@ -226,7 +268,7 @@ fn read_file(path: &str) -> Result<String, io::Error> {
 
 **Rust 1.95 新增**: `if let` guards in match arms：
 
-```rust
+```rust,ignore
 // Rust 1.95+ 惯用：match 中使用 if let guards
 fn classify(value: Option<Result<i32, Error>>) -> &'static str {
     match value {
@@ -247,7 +289,7 @@ fn classify(value: Option<Result<i32, Error>>) -> &'static str {
 
 > **惯用**: 当只关心一个变体时，用 `if let` 替代 `match`。
 
-```rust
+```rust,ignore
 // 惯用：if let 局部绑定
 if let Some(value) = map.get(&key) {
     process(value);
@@ -266,7 +308,7 @@ match map.get(&key) {
 
 > **惯用**: 利用 `Iterator` 和 `Option`/`Result` 的链式方法组合计算。
 
-```rust
+```rust,ignore
 // 惯用：Iterator 消费链
 let sum_of_squares: i32 = numbers
     .iter()
@@ -317,7 +359,7 @@ impl Meters {
 
 > **惯用**: 利用泛型和 `PhantomData` 将状态编码到类型中，使非法状态不可表示。
 
-```rust
+```rust,ignore
 // 惯用：Typestate 编码连接状态
 struct Disconnected;
 struct Connected;
@@ -353,7 +395,7 @@ impl Client<Connected> {
 
 > **惯用**: 用 `PhantomData` 在不占用内存的情况下，向类型系统传递额外的约束信息。
 
-```rust
+```rust,ignore
 // 惯用：PhantomData 标记生命周期关系
 struct Iter<'a, T: 'a> {
     ptr: *const T,
@@ -374,7 +416,7 @@ struct MyBox<T> {
 
 > **惯用**: 利用零大小类型（如 `()`、`PhantomData<T>`、`!`）作为编译期标记，无运行时开销。
 
-```rust
+```rust,ignore
 // 惯用：ZST 作为能力标记（Capability）
 struct ReadPermission;
 struct WritePermission;
@@ -455,7 +497,7 @@ let first = buf.first(); // 透明调用 [T]::first
 
 > **惯用**: 用 `+` 组合 trait bounds 表达「能力交集」，用 `where` 子句处理复杂约束。
 
-```rust
+```rust,ignore
 // 惯用：trait bound 组合
 fn process<T>(item: T)
 where
@@ -498,7 +540,7 @@ greeting(&"Rust".to_owned());    // &String
 
 > **惯用**: 将资源获取与释放绑定到值的生命周期，利用 `Drop` 自动清理。
 
-```rust
+```rust,ignore
 // 惯用：RAII 锁守卫
 {
     let guard = mutex.lock().unwrap(); // 获取锁
@@ -518,7 +560,7 @@ greeting(&"Rust".to_owned());    // &String
 
 > **惯用**: 用 `scopeguard` crate 或自定义守卫，保证「无论是否 panic，退出时执行某操作」。
 
-```rust
+```rust,ignore
 // 惯用：scopeguard 保证退出处理
 use scopeguard::defer;
 
@@ -589,7 +631,7 @@ impl SelfReferential {
 
 > **惯用**: 用 Iterator 的懒性求值链替代命令式循环，利用 LLVM 优化生成高效代码。
 
-```rust
+```rust,ignore
 // 惯用：Iterator 消费链（零成本抽象）
 let max_even: Option<i32> = numbers
     .iter()
@@ -635,7 +677,7 @@ fn sum_fold(nums: &[i32]) -> i32 {
 
 > **惯用**: 用早期返回减少嵌套层级，用守卫子句（guard clause）快速排除非法输入。
 
-```rust
+```rust,ignore
 // 惯用：早期返回 + 守卫子句
 fn process(data: Option<&[u8]>) -> Result<Output, Error> {
     let data = data.ok_or(Error::EmptyInput)?;        // 守卫 1
@@ -684,7 +726,7 @@ let squares = (0..10).map(|n| n * n).collect::<Vec<i32>>();
 
 > **惯用**: 通过 `#[derive]` 或显式 `unsafe impl` 标记类型的线程安全属性，利用编译器推导复合类型的安全性。
 
-```rust
+```rust,ignore
 // 惯用：结构化推导线程安全
 #[derive(Clone)]
 struct Config {
@@ -707,7 +749,7 @@ struct LocalCache {
 
 > **惯用**: 利用 Actor 模型的单线程消息处理，避免显式锁，编译期保证状态独占访问。
 
-```rust
+```rust,ignore
 // 惯用：Actor 单线程处理（概念性，基于 actix 风格）
 struct CounterActor {
     count: i32,
@@ -736,7 +778,7 @@ impl Actor for CounterActor {
 
 > **惯用**: 通过 channel 发送值时利用 move 语义，编译期排除 use-after-send。
 
-```rust
+```rust,ignore
 // 惯用：channel + 所有权转移
 let (tx, rx) = mpsc::channel();
 let data = vec![1, 2, 3];
@@ -806,7 +848,7 @@ trait Service<Request> {
 
 > **惯用**: 中间件以洋葱层方式包裹核心处理逻辑，每层处理横切关注点（日志、认证、限流）。
 
-```rust
+```rust,ignore
 // 惯用：洋葱中间件（Tower 风格）
 async fn handler(req: Request) -> Response { /* 核心逻辑 */ }
 
@@ -826,7 +868,7 @@ let app = ServiceBuilder::new()
 
 > **惯用**: 用 ECS（Entity-Component-System）将数据（Component）与行为（System）分离，通过 Archetype 实现缓存友好布局。
 
-```rust
+```rust,ignore
 // 惯用：Bevy ECS 风格（概念性）
 #[derive(Component)]
 struct Position { x: f32, y: f32 }
@@ -850,7 +892,7 @@ fn movement(mut query: Query<(&mut Position, &Velocity)>) {
 
 > **惯用**: 将系统的核心状态集中在最小化的「错误内核」中，外围组件可失败重启，内核必须保持可用。
 
-```rust
+```rust,ignore
 // 惯用：错误内核模式（Erlang 思想在 Rust 中的编码）
 struct ErrorKernel {
     state: Mutex<CoreState>, // 最小核心状态
@@ -956,7 +998,42 @@ graph TD
     M -->|否| O[使用 Vec / 数组]
 ```
 
-### 12.2 惯用法效率矩阵
+### 12.2 惯用法效率-认知负荷象限图
+
+```mermaid
+quadrantChart
+    title Rust 惯用法效率 × 认知负荷象限图
+    x-axis 低认知负荷 --> 高认知负荷
+    y-axis 低效率/高开销 --> 高效率/零成本
+    quadrant-1 高认知 · 高效率
+    quadrant-2 低认知 · 高效率
+    quadrant-3 低认知 · 低效率
+    quadrant-4 高认知 · 低效率
+
+ "? 传播": [0.2, 0.95]
+ "match 解构": [0.2, 0.95]
+ "Newtype": [0.2, 0.95]
+ "Iterator 链": [0.3, 0.9]
+ "RAII 守卫": [0.15, 0.95]
+ "Into/From": [0.25, 0.95]
+ "早期返回": [0.15, 0.95]
+ "Typestate": [0.5, 0.95]
+ "PhantomData": [0.6, 0.95]
+ "Deref 多态": [0.45, 0.9]
+ "Pin 不动性": [0.75, 0.95]
+ "Send/Sync 显式化": [0.5, 0.9]
+ "Channel 所有权": [0.4, 0.85]
+ "Actor 单线程": [0.55, 0.8]
+ "Tower Service": [0.8, 0.85]
+ "ECS Archetype": [0.85, 0.9]
+ "RefCell": [0.35, 0.6]
+ "Mutex": [0.3, 0.5]
+ "Arc": [0.3, 0.7]
+```
+
+> **认知功能**: 此象限图将惯用法按**认知负荷**（学习成本）和**效率**（运行时开销）两个维度定位。右上象限（高认知·高效率）是"专家工具"——Pin、ECS、Tower Service 需要深度理解但带来架构级收益。左下象限（低认知·高效率）是"日常工具"——`?` 传播、match、Newtype 是每位 Rust 程序员应立即掌握的惯用法。右下象限几乎没有点，说明 Rust 的设计哲学避免了"高认知低收益"的陷阱。
+
+### 12.3 惯用法效率矩阵
 
 | 惯用法 | CPU 开销 | 内存开销 | 编译期开销 | 运行时确定性 |
 |:---|:---:|:---:|:---:|:---:|
@@ -1048,5 +1125,5 @@ graph TD
 >
 > **Rust 版本**: 1.95.0 stable (Edition 2024)
 > **文档版本**: 1.1
-> **最后更新**: 2026-05-21
+> **最后更新: 2026-05-21
 > **状态**: ✅ 惯用法谱系全景 v1.1 — 新增认知路径

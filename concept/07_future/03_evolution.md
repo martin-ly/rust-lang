@@ -10,6 +10,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-12): 初始版本
+$entry
 - v1.1 (2026-05-12): Wave 3 扩展——补充定义、关键趋势、Edition 机制、RFC 流程、演进路线图、官方来源
 - v1.2 (2026-05-14): 补充完整 Edition 变更清单（2015→2018→2021→2024）、Edition 与 rustc 版本解耦、`cargo fix --edition` 自动迁移机制、跨 Edition 代码示例、未来 Edition 方向（2027+）
 
@@ -344,7 +345,7 @@ timeline
 
 **示例 1：`dyn Trait` 显式标注**
 
-```rust
+```rust,ignore
 // Rust 2015 — dyn 可省略
 fn process(x: &MyTrait) -> Box<MyTrait> { /* ... */ }
 
@@ -406,7 +407,7 @@ println!("{}", p.y); // OK: p.y 未被捕获
 
 **示例 5：`impl Trait` 生命周期捕获（2024 核心变化）**
 
-```rust
+```rust,ignore
 // Rust 2021 — impl Trait 默认不捕获生命周期，导致常见编译错误
 fn numbers(nums: &[i32]) -> impl Iterator<Item = i32> {
     nums.iter().copied() // ERROR: captures lifetime '_
@@ -448,7 +449,7 @@ unsafe fn modern_write(ptr: *mut u8, val: u8) {
 
 **示例 7：`unsafe extern` 块（Rust 2024）**
 
-```rust
+```rust,ignore
 // Rust 2021
 extern "C" {
     fn strlen(p: *const c_char) -> usize;
@@ -1096,5 +1097,5 @@ graph TD
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
+**最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
