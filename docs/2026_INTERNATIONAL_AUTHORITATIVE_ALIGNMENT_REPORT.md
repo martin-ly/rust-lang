@@ -16,6 +16,7 @@
       - [核心发现](#核心发现)
       - [项目对齐状态](#项目对齐状态)
     - [1.2 Miri: Practical UB Detection - POPL 2026](#12-miri-practical-ub-detection---popl-2026)
+  - [相关概念文件](#相关概念文件)
       - [核心贡献](#核心贡献)
       - [项目对齐状态](#项目对齐状态-1)
     - [1.3 其他关键学术成果](#13-其他关键学术成果)
@@ -165,6 +166,14 @@
 ### 1.2 Miri: Practical UB Detection - POPL 2026
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+---
+
+## 相关概念文件
+
+- [Rust 概念知识体系](../concept/README.md) — 分层概念体系总览
+- [L4 形式化理论](../concept/04_formal/) — RustBelt、线性逻辑、类型论
+- [L6 生态工程](../concept/06_ecosystem/) — 工具链、设计模式、核心 crate
 
 **来源**: ACM POPL 2026
 **论文**: "Miri: Practical Undefined Behavior Detection for Rust"

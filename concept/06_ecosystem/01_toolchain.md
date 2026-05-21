@@ -185,6 +185,8 @@ graph LR
     style LLVM fill:#ff9
 ```
 
+> **认知功能**: 此图是 Rust 编译管道的**数据流解剖图**。读者可将编译错误定位到具体阶段——语法错误在 PAR 阶段、类型错误在 HIR 阶段、所有权错误在 MIR 阶段、链接错误在 LINK 阶段。Cargo 调度层与编译器并行工作，解释了为什么 `cargo build` 比 `rustc` 单文件编译更慢（依赖解析开销）但更可复现。关键认知：前端（到 MIR）是 Rust 特有的，后端（LLVM 起）与 C/C++ 共享，这意味着 Rust 的「额外安全」只增加前端编译时间，不改变运行时性能。 [来源: 💡 原创分析]
+
 > **思维表征说明**: 此 `graph LR` 知识流动图展示**编译数据在工具链各阶段的流动**——与 `inter_layer_topology.md` 的「知识流动」和 `system_design_principles.md` 的「设计决策流动」形成同族表征，但此图聚焦于**具体的编译器管道**。前端（蓝绿色）负责 Rust 特有的语义分析（所有权、生命周期、借用检查在 MIR 之前完成），后端（黄色）负责与目标平台无关的优化和代码生成。Cargo 的调度层（虚线框外）负责依赖管理和增量构建，与编译器前端并行工作。 [来源: rustc Dev Guide; LLVM Documentation; *Engineering a Compiler* — Cooper & Torczon]
 
 ---

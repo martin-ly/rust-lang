@@ -1,0 +1,104 @@
+# Summary
+
+- [Rust 概念知识体系 —— 全面分析论证与权威对齐](README.md)
+
+- [L0 元信息层索引（Meta Layer Index）](00.md)
+  - [概念一致性检查清单（Concept Consistency Audit Checklist）](00_meta/audit_checklist.md)
+  - [权威来源映射表（Authority Source Map）](00_meta/authority_source_map.md)
+  - [Rust 安全边界扩展推理树](00_meta/boundary_extension_tree.md)
+  - [全局概念索引（Concept Index）](00_meta/concept_index.md)
+  - [Rust 编译期可判定性谱系全景（Decidability Spectrum）](00_meta/decidability_spectrum.md)
+  - [Rust 语义表达力多视角深化（Multiview Expressiveness Analysis）](00_meta/expressiveness_multiview.md)
+  - [跨层知识图谱（Inter-Layer Dependency Map）](00_meta/inter_layer_map.md)
+  - [Rust 知识体系跨层依赖与蕴含拓扑图](00_meta/inter_layer_topology.md)
+  - [Rust 知识体系层次内模型间映射图](00_meta/intra_layer_model_map.md)
+  - [Rust 知识体系全局思维导图（Knowledge Mindmap）](00_meta/knowledge_mindmap.md)
+  - [Rust 知识体系学习指南（Learning Guide）](00_meta/learning_guide.md)
+  - [方法论：思维表征与知识结构规范](00_meta/methodology.md)
+  - [Rust 知识体系全景导航（Navigation Hub）](00_meta/navigation.md)
+  - [Rust 概念速查卡片（Quick Reference）](00_meta/quick_reference.md)
+  - [Rust 知识体系自测题库（Self-Assessment）](00_meta/self_assessment.md)
+  - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](00_meta/semantic_expressiveness.md)
+  - [Rust 表征空间（Semantic / Representational Space）](00_meta/semantic_space.md)
+  - [权威来源清单与知识来源关系分析](00_meta/sources.md)
+  - [Rust 知识体系定理推理森林](00_meta/theorem_inference_forest.md)
+  - [全局待办清单（Global TODO Tracker）](00_meta/todos.md)
+
+- [Rust vs C++：形式系统模型 vs 机制工程模型 —— 核心论点索引](01.md)
+
+- [L1 基础概念](01_foundation/README.md)
+  - [Ownership（所有权）](01_foundation/01_ownership.md)
+  - [Borrowing（借用）](01_foundation/02_borrowing.md)
+  - [Lifetimes（生命周期）](01_foundation/03_lifetimes.md)
+  - [Type System Basics（类型系统基础）](01_foundation/04_type_system.md)
+
+- [02](02.md)
+
+- [L2 进阶概念](02_intermediate/README.md)
+  - [Traits（Trait 系统）](02_intermediate/01_traits.md)
+  - [Generics（泛型系统）](02_intermediate/02_generics.md)
+  - [Memory Management（内存管理）](02_intermediate/03_memory_management.md)
+  - [Error Handling（错误处理）](02_intermediate/04_error_handling.md)
+  - [`assert_matches!`：模式匹配断言的形式化语义](02_intermediate/05_assert_matches.md)
+  - [Rust 范围类型语义：`std::ops::Range` → `core::range`](02_intermediate/06_range_types.md)
+
+- [L3 高级概念层索引（Advanced Layer Index）](03.md)
+
+- [L3 高级概念](03_advanced/README.md)
+  - [Concurrency（并发模型）](03_advanced/01_concurrency.md)
+  - [Async/Await（异步编程）](03_advanced/02_async.md)
+  - [Unsafe Rust](03_advanced/03_unsafe.md)
+  - [Macros（宏系统）](03_advanced/04_macros.md)
+
+- [L4 形式化理论层索引（Formal Methods Layer Index）](04.md)
+
+- [L4 形式化理论](04_formal/README.md)
+  - [Linear Logic & Affine Logic（线性逻辑与仿射逻辑）](04_formal/01_linear_logic.md)
+  - [Type Theory（类型论基础）](04_formal/02_type_theory.md)
+  - [Ownership Formalization（所有权形式化）](04_formal/03_ownership_formal.md)
+  - [RustBelt & Verification Toolchain（RustBelt 与验证工具链）](04_formal/04_rustbelt.md)
+  - [Verification Toolchain Selection Guide（验证工具链选择指南）](04_formal/05_verification_toolchain.md)
+
+- [L5 对比分析层索引（Comparative Analysis Layer Index）](05.md)
+
+- [L5 对比分析](05_comparative/README.md)
+  - [Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证](05_comparative/01_rust_vs_cpp.md)
+  - [Rust vs Go：线性所有权 vs CSP 过程逻辑](05_comparative/02_rust_vs_go.md)
+  - [Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）](05_comparative/03_paradigm_matrix.md)
+  - [Rust 安全保证的边界条件全景（Safety Boundary Panorama）](05_comparative/04_safety_boundaries.md)
+  - [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](05_comparative/05_execution_model_isomorphism.md)
+
+- [L6 生态工程层索引（Ecosystem & Engineering Layer Index）](06.md)
+
+- [L6 生态工程](06_ecosystem/README.md)
+  - [Toolchain（工具链与 Cargo）](06_ecosystem/01_toolchain.md)
+  - [Design Patterns（设计模式）](06_ecosystem/02_patterns.md)
+  - [Core Crates（核心开源库谱系）](06_ecosystem/03_core_crates.md)
+  - [Rust 惯用法谱系全景（Idioms Spectrum）](06_ecosystem/03_idioms_spectrum.md)
+  - [Application Domains（软件工程应用主题）](06_ecosystem/04_application_domains.md)
+  - [Formal Ecosystem Tower（Rust 生态形式化分层塔）](06_ecosystem/05_formal_ecosystem_tower.md)
+  - [Rust 系统设计原则与国际权威对齐](06_ecosystem/05_system_design_principles.md)
+  - [Blockchain & Smart Contract Security（区块链与智能合约安全）](06_ecosystem/06_blockchain.md)
+  - [Game Development & ECS Architecture（游戏开发与 ECS 架构）](06_ecosystem/07_game_ecs.md)
+  - [WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）](06_ecosystem/08_wasi.md)
+  - [Cargo Script：单文件 Rust 程序](06_ecosystem/09_cargo_script.md)
+  - [Public/Private Dependencies：可见性控制的工程化](06_ecosystem/10_public_private_deps.md)
+
+- [L7 前沿趋势层索引（Future & Trends Layer Index）](07.md)
+
+- [L7 前沿趋势](07_future/README.md)
+  - [AI × Rust：生成-验证闭环与确定性容器](07_future/01_ai_integration.md)
+  - [Formal Methods Industrialization（形式化方法工业化）](07_future/02_formal_methods.md)
+  - [Language Evolution（语言演进）](07_future/03_evolution.md)
+  - [Effects System: Concept Pre-study（效果系统：概念预研）](07_future/04_effects_system.md)
+  - [Rust 形式模型演进跟踪（1.79–1.97+）](07_future/05_rust_version_tracking.md)
+  - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](07_future/07_mcdc_coverage_preview.md)
+  - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](07_future/08_safety_tags_preview.md)
+  - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/borrowsanitizer_preview.md)
+  - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](07_future/open_enums_preview.md)
+
+- [Rust 概念知识体系 —— 可持续推进计划与任务](PLAN.md)
+
+- [Wave 11 计划：Rust 表征空间与语义边界全面梳理](PLAN_Semantic_Space_Wave.md)
+
+- [Summary](SUMMARY.md)

@@ -163,6 +163,8 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [02_generics.md](./02_generics.md) | 泛型系统 | 单态化、Trait Bounds、Const Generics、GATs、HRTB | ✅ v1.0 | Lifetimes, Type System | Async (Future), Memory (Pin) |
 | [03_memory_management.md](./03_memory_management.md) | 内存管理 | Box/Rc/Arc、RefCell/Mutex、Cell/UnsafeCell、Pin、MaybeUninit | ✅ v1.0 | Ownership, Borrowing | Concurrency (Arc), Unsafe (MaybeUninit) |
 | [04_error_handling.md](./04_error_handling.md) | 错误处理 | Result/Option、`?`、Custom Error、Error trait | ✅ v1.0 | Type System (enum), Trait | Async (异步错误传播) |
+| [05_assert_matches.md](./05_assert_matches.md) | 模式匹配断言 | `matches!`、`assert_matches!`、模式断言语义 | ✅ v1.0 | Type System (Pattern), Error Handling | Macros |
+| [06_range_types.md](./06_range_types.md) | 范围类型语义 | `std::ops::Range` → `core::range`、`IntoIterator` 设计 | ✅ v1.0 | Type System, Generics | Version Tracking |
 
 ---
 

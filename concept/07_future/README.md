@@ -133,6 +133,16 @@ graph TB
 | [02_formal_methods.md](./02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 | L4 RustBelt, L6 工具链, L3 Unsafe | L4 验证范围扩展 |
 | [03_evolution.md](./03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
 | [05_rust_version_tracking.md](./05_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
+| [open_enums_preview.md](./open_enums_preview.md) | 开放枚举预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
+| [borrowsanitizer_preview.md](./borrowsanitizer_preview.md) | BorrowSanitizer 预研 | Shadow Stack、运行时借用检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
+| [07_mcdc_coverage_preview.md](./07_mcdc_coverage_preview.md) | MC/DC Coverage 预研 | 安全关键覆盖率验证、DO-178C/ISO 26262 合规 | ✅ v1.0 | L3 Unsafe, L1 Type System | L6 安全关键应用 |
+| [08_safety_tags_preview.md](./08_safety_tags_preview.md) | Safety Tags 预研 | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 契约工具化 |
+| [09_parallel_frontend_preview.md](./09_parallel_frontend_preview.md) | 并行前端编译预研 | 查询系统并行化、类型检查并行化、编译时间优化 | ✅ v1.0 | L6 Toolchain, L3 Concurrency | L6 编译工具链性能演进 |
+| [10_derive_coerce_pointee_preview.md](./10_derive_coerce_pointee_preview.md) | 派生 CoercePointee 预研 | 智能指针自动类型强制、零 unsafe 代码 | ✅ v1.0 | L2 Generics, L3 Unsafe | L3 Unsafe 代码消除 |
+| [11_const_trait_impl_preview.md](./11_const_trait_impl_preview.md) | Const Trait Impl 预研 | 常量上下文 Trait 泛化、~const 效果限定 | ✅ v1.0 | L2 Trait, L1 Type System | L2 Trait 编译期扩展 |
+| [12_return_type_notation_preview.md](./12_return_type_notation_preview.md) | Return Type Notation 预研 | use<..> 精确捕获、生命周期显式控制 | ✅ v1.0 | L2 Trait, L3 Async | L3 Async API 稳定性 |
+| [13_unsafe_fields_preview.md](./13_unsafe_fields_preview.md) | Unsafe Fields 预研 | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 粒度细化 |
+| [14_ferrocene_preview.md](./14_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
 | [04_effects_system.md](./04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
 ---
@@ -141,6 +151,7 @@ graph TB
 
 | L7 方向 | 关联下层 | 关联方式 | 预测 |
 |:---|:---|:---|:---|
+| **并行前端编译** | L6 Toolchain | 利用多核 CPU 加速编译前端 | 大型 crate 编译时间 1.5-2x 提升，2027+ 稳定化 |
 | **AI 生成 + Rust 验证** | L3 Unsafe, L6 工具链 | AI 生成代码必须经过类型检查和验证 | 未来 unsafe 块将有机器可读的安全契约格式 |
 | **确定性容器** | L1 Ownership, L2 Memory | 消除运行时非确定性（如 AI 推理的副作用隔离） | 可能引入 `Deterministic<T>` 类型构造 |
 | **形式化 CI** | L4 RustBelt, L6 Toolchain | Kani/Verus 集成到 CI/CD | 每个 PR 自动运行形式化验证将成为标配 |

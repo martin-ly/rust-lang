@@ -461,19 +461,20 @@ timeline
 
 | 特性 | 当前状态 | 影响维度 | 概念文件 | 优先级 | 1.96 预期 |
 |:---|:---|:---|:---|:---:|:---|
-| `return_type_notation` (RTN) | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 继续演进 |
+| `return_type_notation` (RTN) | unstable | D2 类型 | [`concept/07_future/12_return_type_notation_preview.md`](./12_return_type_notation_preview.md) | 中 | 继续演进 |
 | `associated_type_defaults` | unstable | D2 类型 | `02_intermediate/01_traits.md` | 中 | 继续演进 |
 | `generic_const_exprs` | unstable | D1 计算 / D2 类型 | `02_intermediate/02_generics.md` | 中 | 继续演进 |
-| `unsafe_fields` | experimental | D7 安全边界 | `03_advanced/03_unsafe.md` | **高** | 早期实验 |
+| `unsafe_fields` | experimental | D7 安全边界 | [`concept/07_future/13_unsafe_fields_preview.md`](./13_unsafe_fields_preview.md) | **高** | 早期实验 |
 | `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/04_type_system.md` | 低 | 继续演进 |
 | `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
-| `const_trait_impl` (`~const`) | unstable | D1 计算 | `01_foundation/01_ownership.md` | **高** | 继续演进 |
+| `const_trait_impl` (`~const`) | unstable | D1 计算 | [`concept/07_future/11_const_trait_impl_preview.md`](./11_const_trait_impl_preview.md) | **高** | 继续演进 |
 | `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 继续演进 |
 | `next_solver` | nightly，目标 2026 稳定 | D2 类型 / D5 编译期 | `02_intermediate/01_traits.md` §12 · `crates/c04_generic/next_solver_preview.rs` | **高** | 目标稳定 |
 | `adt_const_params` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
 | `min_generic_const_args` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
 | `public_private_deps` | unstable · RFC 3516 · Help Wanted | D6 生态 | `concept/06_ecosystem/10_public_private_deps.md` | 中 | 目标稳定 |
 | `cargo_script` | unstable · RFC 3502+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
+| **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/14_ferrocene_preview.md`](./14_ferrocene_preview.md) | **高** | 持续更新 |
 
 > **1.96 Beta 已知变更**: Cargo 引入垃圾回收机制自动清理旧文件；`-Zscript` frontmatter 语法更新；`-Zwarnings` 新增 `build.warnings` 配置字段；`unstable-editions` 错误提示改进。
 
@@ -553,8 +554,8 @@ timeline
 
 | 特性 | 类别 | 项目覆盖 | 状态 |
 |:---|:---|:---|:---:|
-| `assert_matches!` / `debug_assert_matches!` | 标准库宏 | `docs/02_reference/quick_reference/assert_matches_guide.md` | ✅ 已创建 |
-| `core::range` 补齐 (`Range`/`RangeFrom`/`RangeToInclusive` + 迭代器) | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已更新 |
+| `assert_matches!` / `debug_assert_matches!` | 标准库宏 | `docs/02_reference/quick_reference/assert_matches_guide.md` · [`concept/02_intermediate/05_assert_matches.md`](../02_intermediate/05_assert_matches.md) | ✅ 已创建 |
+| `core::range` 补齐 (`Range`/`RangeFrom`/`RangeToInclusive` + 迭代器) | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` · [`concept/02_intermediate/06_range_types.md`](../02_intermediate/06_range_types.md) | ✅ 已更新 |
 | `NonZero` 整数范围迭代 | 标准库 API | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已更新 |
 | `impl From<bool> for {f32, f64}` | 标准库 trait | `crates/c02_type_system/src/rust_196_features.rs` | ✅ 已覆盖 |
 | `unused_features` lint (warn-by-default) | 编译器 lint | `docs/06_toolchain/` | 🟡 待补充 |
@@ -575,14 +576,14 @@ timeline
 
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
-| **Open Enums** | nightly 实验 | 2027+ | 🔴 缺失 | 待创建 `concept/07_future/open_enums_preview.md` |
-| **BorrowSanitizer** | 原型阶段 | 2027+ | 🔴 缺失 | 待创建 `docs/05_guides/borrowsanitizer_preview.md` |
-| **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | 🔴 缺失 | `docs/04_research/safety_critical_alignment_2026.md` §5 |
+| **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](./open_enums_preview.md) |
+| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/borrowsanitizer_preview.md`](./borrowsanitizer_preview.md) · [borrowsanitizer.com](https://borrowsanitizer.com/) |
+| **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](./07_mcdc_coverage_preview.md) · `docs/04_research/safety_critical_alignment_2026.md` §5 |
 | **cargo-semver-checks** | 社区工具，计划合并 cargo | 2026–2027 | 🔴 缺失 | 待加入工具链跟踪 |
 | **Cargo plumbing commands** | 原型 | 2027+ | 🔴 缺失 | 待加入工具链跟踪 |
-| **Safety Tags** | 设计讨论 | 2027+ | 🟡 跟踪 | `docs/05_guides/SAFETY_TAGS_GUIDE.md` |
-| **derive(CoercePointee)** | RFC 前设计 | 2027+ | 🟡 跟踪 | `crates/c04_generic/src/derive_coerce_pointee_tracking.rs` |
-| **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | `docs/06_toolchain/parallel_frontend.md` |
+| **Safety Tags** | 设计讨论（Pre-RFC 准备中） | 2027+ | ✅ 已创建 | [`concept/07_future/08_safety_tags_preview.md`](./08_safety_tags_preview.md) · `docs/05_guides/SAFETY_TAGS_GUIDE.md` |
+| **derive(CoercePointee)** | nightly 可用 | 2027+ | 🟡 跟踪 | [`concept/07_future/10_derive_coerce_pointee_preview.md`](./10_derive_coerce_pointee_preview.md) |
+| **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | [`concept/07_future/09_parallel_frontend_preview.md`](./09_parallel_frontend_preview.md) |
 
 ---
 
@@ -594,7 +595,8 @@ timeline
 | v1.1 | 2026-05-18 | 补充 Next Solver 至 1.96 跟踪表；补充 `adt_const_params`/`min_generic_const_args`/`public_private_deps`/`cargo_script` 跟踪项 |
 | v1.2 | 2026-05-18 | 网络对齐更新：1.96 beta 状态（2026-05-28 预计稳定）、cargo-script RFC 3502+3503 已批准、public/private deps RFC 3516 Help Wanted 状态、hickory CVE-2026-42254 记录 |
 | v1.3 | 2026-05-18 | Miri 全 workspace 验证：12 个 crate 2,212+ 测试通过，修复 2 处真实 UB（c04_generic 未对齐读取、c07_process 未初始化内存）、1 处 gen block 逻辑错误（c08_algorithms）
-| v1.4 | 2026-05-19 | 权威来源对齐冲刺完成：全项目 ~2,300+ Markdown 文件完成权威来源标注，concept/knowledge/docs/crates 100% 覆盖
+| v1.4 | 2026-05-19 | 权威来源对齐冲刺完成：全项目 ~2,300+ Markdown 文件完成权威来源标注，concept/knowledge/docs/crates 100% 覆盖 |
+| v1.5 | 2026-05-21 | 新增 `open_enums_preview.md` 概念预研文件；更新 Open Enums 跟踪状态为 ✅ 已创建；补充 GitHub #156628 跟踪来源 |
 
 ---
 

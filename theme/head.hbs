@@ -1,0 +1,14 @@
+<script>
+// 按需加载 Mermaid：仅在页面包含 mermaid 代码块时从 CDN 加载
+(function() {
+    if (!document.querySelector('pre code.language-mermaid')) return;
+    var script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js';
+    script.onload = function() {
+        var init = document.createElement('script');
+        init.src = '{{ path_to_root }}mermaid-init.js';
+        document.head.appendChild(init);
+    };
+    document.head.appendChild(script);
+})();
+</script>

@@ -282,7 +282,11 @@
 | P12-T10 | 07_future/ 覆盖率验证 | 0% → 100% | ✅ |
 | P12-T11 | 04_formal/ 目录全覆盖（5 文件 26 图表） | 20 个认知功能说明 | ✅ |
 | P12-T12 | 04_formal/ 覆盖率验证 | 0% → 100% | ✅ |
-| P12-T13 | 整体覆盖率跟踪 | 6.1% → 71.7% | ✅ |
+| P12-T13 | 06_ecosystem/ 目录全覆盖（13 文件 57 图表） | 52 个认知功能说明 | ✅ |
+| P12-T14 | 06_ecosystem/ 覆盖率验证 | 0% → 100% | ✅ |
+| P12-T15 | 00_meta/ + 根目录文件全覆盖（18 文件 59 图表） | 36 个认知功能说明 | ✅ |
+| P12-T16 | 00_meta/ + 根目录覆盖率验证 | 0% → 100% | ✅ |
+| P12-T17 | **整体覆盖率封顶** | 6.1% → **100.0%** | ✅ |
 
 **关键成果**:
 
@@ -291,10 +295,13 @@
 - 03_advanced/ 目录 44/44 图表，覆盖率 100%
 - 04_formal/ 目录 26/26 图表，覆盖率 100%
 - 05_comparative/ 目录 41/41 图表，覆盖率 100%
+- 06_ecosystem/ 目录 57/57 图表，覆盖率 100%
 - 07_future/ 目录 30/30 图表，覆盖率 100%
-- 六大目录（L1-L5, L7）全部封顶
-- 整体覆盖率从 6.1% 提升至 71.7%（+65.6 pp），223/311 图表有认知功能说明
-- 新增 184 条认知功能说明，每条均包含「功能定位 + 使用建议 + 关键洞察」
+- 00_meta/ 目录 48/48 图表，覆盖率 100%
+- 根目录文件 11/11 图表，覆盖率 100%
+- **全部 66 个含 Mermaid 文件、311 个图表，认知功能说明覆盖率 100%**
+- 整体覆盖率从 6.1% 提升至 **100.0%**（+93.9 pp），311/311 图表有认知功能说明
+- 新增 **292** 条认知功能说明，每条均包含「功能定位 + 使用建议 + 关键洞察」
 
 ---
 
@@ -304,9 +311,146 @@
 - 311 个 Mermaid 图表，17 种类型，覆盖 62 个文件
 - 226/226 代码块编译通过，0 失败
 - 59/59 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: 71.7%（223/311），六大目录 100%
+- Mermaid 认知功能说明覆盖率: **100.0%**（311/311），全部文件 100%
 
-**文档版本**: 2.0
-**对应 Rust 版本**: 1.95.0+ (Edition 2024)
+### Phase 13: Rust 1.96+ 前沿特性概念化与体系维护（2026-05-21）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P13-T1 | 新增 `07_future/open_enums_preview.md` 概念预研文件 | Open Enums 形式化语义、跨语言对比、API 设计模式 | ✅ |
+| P13-T2 | 更新 `05_rust_version_tracking.md` Open Enums 跟踪状态 | 状态: 🔴 缺失 → ✅ 已创建 | ✅ |
+| P13-T3 | 更新 `07_future/README.md` 文件索引 | 添加 open_enums_preview.md 条目 | ✅ |
+| P13-T4 | 同步 `audit_checklist.md` ⬜ → ✅（自动化验证项） | 19 项检查状态同步 | ✅ |
+| P13-T5 | 调研 Rust 1.96 特性纳入可行性 | 调研报告：core::range ✅ 适合，Open Enums/Cargo Script ⚠️ premature | ✅ |
+
+**关键成果**:
+
+- 创建 `open_enums_preview.md`（~18 KB），涵盖 `#[non_exhaustive]` 形式化语义、跨语言对比（Scala/Haskell/OCaml）、API 设计模式、反命题决策树
+- 补齐 version_tracking.md 中长期标记为"🔴 缺失"的 Open Enums 概念文件
+- audit_checklist.md 全部 ⬜ 项同步为 ✅，反映实际自动化审计通过状态
+- 确认 1.96 特性中 `core::range` / `assert_matches!` 适合概念化，`cargo script` / Open Enums 仍处 premature 阶段
+
+---
+
+**累计交付统计**:
+
+- **78 个 Markdown 文件**（+1），~62,671 行（+182），1,235+ 条来源标注
+- 311 个 Mermaid 图表，17 种类型，覆盖 66 个文件
+- 226/226 代码块编译通过，0 失败
+- 59/59 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（311/311），全部文件 100%
+
+### Phase 14: 模式匹配断言与对外发布准备（2026-05-21）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P14-T1 | 新增 `02_intermediate/05_assert_matches.md` | `matches!` / `assert_matches!` / `debug_assert_matches!` 形式化语义 | ✅ |
+| P14-T2 | mdBook 静态站点配置 | `book.toml` + `scripts/generate_summary.py` + Mermaid CDN 按需加载 | ✅ |
+| P14-T3 | GitHub Pages 自动部署工作流 | `.github/workflows/mdbook-pages.yml` | ✅ |
+| P14-T4 | 更新 02_intermediate/README.md 索引 | 添加 assert_matches 条目 | ✅ |
+| P14-T5 | 更新 version_tracking.md assert_matches 状态 | 添加 concept/ 引用 | ✅ |
+
+**关键成果**:
+
+- 新增 `02_intermediate/05_assert_matches.md`（~367 行，17 来源，3 Mermaid 图表）
+- mdBook 构建成功，Mermaid 图表 CDN 按需加载
+- GitHub Actions 自动部署工作流就绪
+- **文件总数: 78 → 79，代码块编译: 234 → 235/235**
+
+### Phase 15: Rust 1.96 范围类型概念化（2026-05-21）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P15-T1 | 新增 `02_intermediate/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
+| P15-T2 | 更新 version_tracking.md core::range 状态 | 添加 concept/ 引用 | ✅ |
+| P15-T3 | 更新 02_intermediate/README.md 索引 | 添加 range_types 条目 | ✅ |
+| P15-T4 | 质量基线报告同步更新 | 全部指标刷新 | ✅ |
+
+**关键成果**:
+
+- 新增 `02_intermediate/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
+- 涵盖 `IntoIterator` vs `Iterator` 设计权衡、`Copy` 语义影响、跨语言对比
+- **文件总数: 79 → 80，Mermaid 图表: 317 → 319，代码块编译: 235 → 239/239**
+
+---
+
+### Phase 15: Rust 1.96 范围类型与 BorrowSanitizer 概念化（2026-05-21）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P15-T1 | 新增 `02_intermediate/06_range_types.md` | `std::ops::Range` → `core::range` 语义演进 | ✅ |
+| P15-T2 | 新增 `07_future/borrowsanitizer_preview.md` | Shadow Stack、Lock-and-Key、Miri 对比 | ✅ |
+| P15-T3 | BorrowSanitizer 技术调研 | 详细调研报告：里程碑状态、Retag Intrinsics、GC 策略 | ✅ |
+| P15-T4 | 更新 version_tracking.md | core::range / BorrowSanitizer 状态更新 | ✅ |
+| P15-T5 | 质量基线报告同步 | 全部指标刷新至 81 文件 / 322 图表 / 239 编译 | ✅ |
+
+**关键成果**:
+
+- 新增 `02_intermediate/06_range_types.md`（~319 行，17 来源，2 Mermaid 图表）
+- 新增 `07_future/borrowsanitizer_preview.md`（~340 行，18 来源，3 Mermaid 图表）
+- BorrowSanitizer 调研完成：MCP #958 已发布、~80% Miri 测试通过、预期 Nightly 2026 Q4
+- **文件总数: 79 → 81，Mermaid 图表: 317 → 322，代码块编译: 235 → 239/239**
+
+---
+
+### Phase 16: MC/DC Coverage 概念化与来源标注率提升（已完成）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P16-T1 | 新增 `07_future/07_mcdc_coverage_preview.md` | DO-178C/ISO 26262 合规、MC/DC 形式化语义 | ✅ |
+| P16-T2 | 新增 `07_future/08_safety_tags_preview.md` | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ |
+| P16-T3 | 更新 version_tracking.md MC/DC / Safety Tags 状态 | 添加 concept/ 引用 | ✅ |
+| P16-T4 | 批量补充核心文件来源标注（3 文件并行） | 01_traits (+42) / 03_memory_management (+12) / 04_macros (+19) | ✅ |
+| P16-T5 | 质量基线报告同步 | 全部指标刷新至 83 文件 / 328 图表 / 241 编译 | ✅ |
+
+**关键成果**:
+
+- 新增 `07_future/07_mcdc_coverage_preview.md`（~310 行，16 来源，3 Mermaid 图表）
+- 新增 `07_future/08_safety_tags_preview.md`（~321 行，16 来源，3 Mermaid 图表）
+- 3 个子代理并行补充核心概念文件来源标注，总计 **+73** 个来源标注
+- 涵盖 MC/DC 数学定义、Safety Tags 契约形式化、DO-178C/ISO 26262 合规
+- **文件总数: 81 → 83，Mermaid 图表: 322 → 328，代码块编译: 239 → 241/241**
+
+---
+
+---
+
+### Phase 17: 并行前端编译概念化（进行中）
+
+| 任务ID | 任务内容 | 交付物 | 状态 |
+|:---|:---|:---|:---:|
+| P17-T1 | 新增 `07_future/09_parallel_frontend_preview.md` | 并行前端编译、查询系统并行化、性能分析 | ✅ |
+| P17-T2 | 更新 07_future/README.md 索引 | 添加 parallel_frontend 条目 | ✅ |
+| P17-T3 | 更新 version_tracking.md 并行前端状态 | 指向 concept/ 文件 | ✅ |
+| P17-T4 | 新增 `07_future/10_derive_coerce_pointee_preview.md` | 派生宏、智能指针类型强制、零 unsafe | ✅ |
+| P17-T5 | 新增 `07_future/11_const_trait_impl_preview.md` | 常量上下文 Trait、~const 效果限定 | ✅ |
+| P17-T6 | 新增 `07_future/12_return_type_notation_preview.md` | use<..> 精确捕获、生命周期显式控制 | ✅ |
+| P17-T7 | 新增 `07_future/13_unsafe_fields_preview.md` | 字段级 unsafe 标记、安全边界细化 | ✅ |
+| P17-T8 | 补充 02_async / 02_generics 来源标注（后台 Agent） | +30 来源标注 | ⚠️ 02_generics ✅ / 02_async Agent 超时 |
+| P17-T9 | 质量基线报告同步 | 全部指标刷新 | ✅ |
+
+**关键成果**:
+
+- 新增 `07_future/09_parallel_frontend_preview.md`（~320 行，7 来源，3 Mermaid 图表）
+- 新增 `07_future/10_derive_coerce_pointee_preview.md`（~319 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/11_const_trait_impl_preview.md`（~306 行，10 来源，2 Mermaid 图表）
+- 新增 `07_future/12_return_type_notation_preview.md`（~304 行，10 来源，2 Mermaid 图表）
+- 新增 `07_future/13_unsafe_fields_preview.md`（~332 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/14_ferrocene_preview.md`（~307 行，10 来源，3 Mermaid 图表）
+- 涵盖编译器前端并行化、智能指针派生宏、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证
+- **文件总数: 83 → 89，Mermaid 图表: 328 → 344**
+
+---
+
+**累计交付统计**:
+
+- **89 个 Markdown 文件**，~67,230 行，**~1,720** 条来源标注
+- **344** 个 Mermaid 图表，17 种类型，覆盖 **77** 个文件
+- **242/242** 代码块编译通过，0 失败
+- **71/71** 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（344/344），全部文件 100%
+
+**文档版本**: 2.6
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-21
-**状态**: ✅ 认知功能覆盖率提升完成 (Phase 12)
+**状态**: ✅ Phase 17 进行中，知识体系持续演进中

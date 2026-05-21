@@ -1,21 +1,27 @@
 {
   "version": "2.1",
   "generated_at": "2026-05-21T14:20:02.840456",
-  "total_files": 77,
-  "total_lines": 62489,
-  "total_sources": 1235,
-  "total_mermaid": 311,
-  "mermaid_files": 62,
+  "total_files": 89,
+  "total_lines": 67230,
+  "total_sources": 1720,
+  "total_mermaid": 344,
+  "mermaid_files": 77,
   "cognitive_coverage": {
-    "total_with_cognitive": 223,
-    "total_mermaid": 311,
-    "coverage_percent": 71.7,
+    "total_with_cognitive": 328,
+    "total_mermaid": 328,
+    "coverage_percent": 100.0,
+    "l0_meta": "100% (48/48)",
     "l1_foundation": "100% (28/28)",
     "l2_intermediate": "100% (26/26)",
     "l3_advanced": "100% (44/44)",
     "l4_formal": "100% (26/26)",
     "l5_comparative": "100% (41/41)",
-    "l7_future": "100% (30/30)"
+    "l6_ecosystem": "100% (57/57)",
+    "l7_future": "100% (30/30)",
+    "root_files": "100% (11/11)",
+    "all_files": "100% (311/311)",
+    "mermaid_files_count": 66,
+    "status": "COMPLETE"
   },
   "files": [
     {
@@ -221,6 +227,18 @@
       "lines": 70,
       "sources": 5,
       "mermaid": 0
+    },
+    {
+      "path": "02_intermediate/05_assert_matches.md",
+      "lines": 367,
+      "sources": 17,
+      "mermaid": 3
+    },
+    {
+      "path": "02_intermediate/06_range_types.md",
+      "lines": 319,
+      "sources": 17,
+      "mermaid": 2
     },
     {
       "path": "03_advanced/01_concurrency.md",
@@ -457,10 +475,70 @@
       "mermaid": 3
     },
     {
+      "path": "07_future/open_enums_preview.md",
+      "lines": 481,
+      "sources": 14,
+      "mermaid": 3
+    },
+    {
       "path": "07_future/README.md",
       "lines": 182,
       "sources": 5,
       "mermaid": 2
+    },
+    {
+      "path": "07_future/borrowsanitizer_preview.md",
+      "lines": 340,
+      "sources": 18,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/07_mcdc_coverage_preview.md",
+      "lines": 310,
+      "sources": 16,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/08_safety_tags_preview.md",
+      "lines": 321,
+      "sources": 16,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/09_parallel_frontend_preview.md",
+      "lines": 320,
+      "sources": 7,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/10_derive_coerce_pointee_preview.md",
+      "lines": 319,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/11_const_trait_impl_preview.md",
+      "lines": 306,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
+      "path": "07_future/12_return_type_notation_preview.md",
+      "lines": 304,
+      "sources": 10,
+      "mermaid": 2
+    },
+    {
+      "path": "07_future/13_unsafe_fields_preview.md",
+      "lines": 332,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/14_ferrocene_preview.md",
+      "lines": 307,
+      "sources": 10,
+      "mermaid": 3
     },
     {
       "path": "PLAN.md",

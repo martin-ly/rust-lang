@@ -119,7 +119,7 @@
 
 > **[Wikipedia: Generic programming](https://en.wikipedia.org/wiki/Generic_programming)** Generic programming is a style of computer programming in which algorithms are written in terms of types to-be-specified-later that are then instantiated when needed for specific types provided as parameters. Rust uses monomorphization to implement generics, generating specialized code at compile time for each concrete type used.
 >
-> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。
+> 关键区分：Rust 的泛型属于**参数多态**（parametric polymorphism），与 C++ 模板（textual substitution）和 Java 泛型（type erasure）在实现语义上存在本质差异。[来源: Wikipedia: Parametric polymorphism]
 
 ### 1.2 TRPL 官方定义
 
@@ -160,7 +160,7 @@
 | **类型参数** | `<T>` | 类型 | 无 | 最常见，泛型容器/函数 |
 | **生命周期参数** | `<'a>` | 引用有效期 | 推断 | 函数/结构体含引用 |
 
-> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 [L1 生命周期](../01_foundation/03_lifetimes.md) §4 和 [L4 所有权形式化](../04_formal/03_ownership_formal.md) §2.2。
+> **形式化对应**: 生命周期参数在类型论中对应 **区域类型 (Region Types, Tofte & Talpin 1994)**，即引用有效性的形式化约束。详见 [L1 生命周期](../01_foundation/03_lifetimes.md) §4 和 [L4 所有权形式化](../04_formal/03_ownership_formal.md) §2.2。[来源: Tofte & Talpin 1994 — Region Types]
 | **常量泛型** | `<const N: usize>` | 编译期常量值 | 无 | 固定大小数组、类型状态 |
 | **关联类型** | `type Item;` | Trait 内部类型 | 实现时确定 | Iterator、Future 等 |
 
@@ -271,7 +271,7 @@ graph TD
 代价: 编译时间增加 + 二进制体积膨胀（每个实例独立编译和链接）
 ```
 
-**语义保持定理（Monomorphization Semantic Preservation）**:
+**语义保持定理（Monomorphization Semantic Preservation）**: [来源: Rust Reference: Monomorphization]
 
 ```text
 前提: 泛型函数 G<T> 对类型参数 τ 单态化为 G_τ
@@ -289,7 +289,7 @@ graph TD
   6. 故单态化不改变可观察行为 ⟹ 语义保持 ∎
 ```
 
-**反例：`dyn Trait` 打破单态化语义保持的强等价**:
+**反例：`dyn Trait` 打破单态化语义保持的强等价**: [来源: Rust Reference: Trait Objects]
 
 | 维度 | 单态化 `Vec<i32>::push` | 动态分发 `dyn Drawable::draw` |
 |:---|:---|:---|
@@ -310,7 +310,7 @@ fn draw_dyn(d: &dyn Drawable) {
 }
 ```
 
-**边界：单态化不保持跨 crate 的 ABI 兼容性**:
+**边界：单态化不保持跨 crate 的 ABI 兼容性**: [来源: Rust Reference: Monomorphization]
 
 ```text
 边界条件: 单态化在每个 crate 中独立进行
@@ -509,7 +509,7 @@ struct LongTermStore<T: 'static> {
 
 > **[Wadler 1989 — "Theorems for Free!", POPL](https://dl.acm.org/doi/10.1145/75277.75305)** · **[Pierce 2002, Ch.23](https://www.cis.upenn.edu/~bcpierce/tapl/)** 参数性定理（Reynolds 1983 / Wadler 1989）是参数多态的核心元定理：多态函数的行为仅由其类型决定，与具体类型无关。 ✅ 已验证
 
-**核心定理**: 对于任意无 Trait Bound 的多态函数 `f: ∀T. τ(T)`，其可观察行为完全由类型结构 `τ` 决定，函数不能基于 `T` 的具体内部表示做分支。
+**核心定理**: 对于任意无 Trait Bound 的多态函数 `f: ∀T. τ(T)`，其可观察行为完全由类型结构 `τ` 决定，函数不能基于 `T` 的具体内部表示做分支。[来源: Wadler 1989 — Theorems for Free!]
 
 **示例推导 1：`fn f<T>(x: T) -> T`**
 
@@ -545,7 +545,7 @@ struct LongTermStore<T: 'static> {
 结论: 参数性 ⟹ 输出是输入的子序列（元素顺序保持，无新构造）
 ```
 
-**工程意义**: 参数性将类型签名转化为"免费定理"——调用方无需阅读实现即可推断函数的行为边界，显著降低认知负担。类型约束越严格（Trait Bounds），实现空间越小，推理能力越强。
+**工程意义**: 参数性将类型签名转化为"免费定理"——调用方无需阅读实现即可推断函数的行为边界，显著降低认知负担。类型约束越严格（Trait Bounds），实现空间越小，推理能力越强。[来源: Wadler 1989 / 原创分析]
 
 **反例边界：参数性何时失效**:
 
@@ -606,7 +606,7 @@ graph TD
 
 #### 5.7.1 常量表达式与 `generic_const_exprs`
 
-Rust 允许在类型位置使用编译期常量表达式，简单算术可直接书写，复杂表达式需用大括号包裹：
+Rust 允许在类型位置使用编译期常量表达式，简单算术可直接书写，复杂表达式需用大括号包裹：[来源: Rust Reference: Const Generics]
 
 ```rust,ignore
 // ✅ 合法: 简单算术表达式（1.51+）
@@ -622,7 +622,7 @@ fn padded_array<T: Default + Copy, const N: usize>() -> [T; { N + 4 }] {
 
 [来源: Rust Reference: Const Generics]
 
-然而，上述表达式能力仅限于**简单算术**和**字面量组合**。更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：
+然而，上述表达式能力仅限于**简单算术**和**字面量组合**。更复杂的类型级计算（如条件分支、递归常量函数结果作为类型参数、关联类型作为常量参数）需要 `generic_const_exprs` 不稳定特性：[来源: RFC 2920 — generic_const_exprs]
 
 ```rust,ignore
 #![feature(generic_const_exprs)]
@@ -661,7 +661,7 @@ impl<T, const N: usize> Matrix<T, N, N> {
 
 #### 5.7.2 where 约束中的 const generics
 
-`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：
+`where` 子句可对含 const generics 的复合类型施加约束，这是连接常量泛型与 Trait 约束系统的关键桥梁：[来源: Rust Reference: Trait Bounds]
 
 ```rust,ignore
 // ✅ 合法: 显式约束数组类型满足 Sized
@@ -720,7 +720,7 @@ where
 
 #### 5.7.3 默认 const generic 参数
 
-const generics 支持默认值，省略时自动填充（1.59+）：
+const generics 支持默认值，省略时自动填充（1.59+）：[来源: Rust Reference: Generic Parameters]
 
 ```rust
 // ✅ 合法: 默认常量泛型参数
@@ -790,7 +790,7 @@ type RingBuffer256<T> = RingBuffer<T, 256>;
 
 #### 5.7.5 Const Generics 与泛型关联类型的交互
 
-Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：
+Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: RFC 2000 / RFC 1598]
 
 ```rust,ignore
 // ❌ 不稳定: 关联类型不能直接携带 const generic
@@ -859,7 +859,7 @@ fn main() {
 
 #### 5.7.6 典型应用：固定大小数组的数学运算
 
-Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：
+Const Generics 最核心的工程应用之一是为固定大小数组提供类型安全的数学运算，数组维度作为类型的一部分参与编译期检查：[来源: RFC 2000 — Const Generics]
 
 ```rust
 use std::ops::{Add, Mul};
@@ -929,7 +929,7 @@ fn main() {
 
 #### 5.7.7 与 C++ 模板非类型参数的对比
 
-C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Parameters），Rust 的 Const Generics 在设计上深受其影响，但存在关键差异：
+C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Parameters），Rust 的 Const Generics 在设计上深受其影响，但存在关键差异：[来源: C++ Reference: Non-type template parameter]
 
 | **维度** | **Rust Const Generics** | **C++ 非类型模板参数 (NTTP)** |
 |:---|:---|:---|
@@ -945,7 +945,7 @@ C++ 模板自 C++98 起支持非类型模板参数（NTTP, Non-Type Template Par
 
 [来源: RFC 2000 — Const Generics] [来源: C++ Reference: Non-type template parameter] [来源: 原创分析]
 
-**核心差异的语义根源**:
+**核心差异的语义根源**: [来源: RFC 2000 — Const Generics]
 
 ```rust,ignore
 // Rust: 类型检查先于单态化，const generic 表达式必须在签名层面可验证
@@ -1300,7 +1300,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 
 **核心问题**: "如何写一段对任何类型都适用的代码？"
 
-**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。
+**过渡解释**: 从熟悉的概念出发是认知的最小阻力路径。将泛型类比为"填空题模板"——结构固定，具体内容由调用方填入。这一步建立直觉锚点：swap、min/max、容器等自然需要"对任意类型生效"。但类比有边界——填空题模板在 Rust 中不是文本替换（C++ 模板风格），而是类型参数化。从 Step 1 到 Step 2 的过渡发生在学习者首次写 `fn swap<T>(a: &mut T, b: &mut T)` 时，发现编译器不仅接受代码，还会检查类型能力。[来源: TRPL: Ch10.1 / 原创分析]
 
 ```text
 直觉映射:
@@ -1343,7 +1343,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "Rust 泛型和 Java/C++ 泛型有什么区别？"
 
-**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。
+**过渡解释**: 语法熟练后，学习者需要理解不同语言泛型实现的本质差异。Rust 的单态化（为每个具体类型生成专用代码）与 Java 的类型擦除（编译为 Object + 转换）、C++ 的模板（文本替换）形成鲜明对比。这一步是认知的关键跃迁——理解"零成本抽象"的工程含义：不是魔法，是编译期工作量换运行时零开销。从 Step 3 到 Step 4 的过渡由性能问题驱动：当二进制体积膨胀时，学习者需要理解为什么泛型"免费"的代价在哪里。[来源: Wikipedia: Generic programming / TRPL: Ch10.1]
 
 ```text
 三语言对比:
@@ -1392,7 +1392,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 
 **核心问题**: "怎么限制泛型参数只能是有序/可复制的类型？"
 
-**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区，需要形式化工具验证设计。
+**过渡解释**: 纯粹的参数多态过于受限（如 `fn max<T>(a: T, b: T) -> T` 无法比较）。Trait Bounds 引入约束多态，是泛型从"任意类型"到"满足条件的类型"的关键扩展。`where` 子句将约束从函数签名中分离，提升可读性。从 Step 5 到 Step 6 的过渡由高级场景驱动：当学习者需要表达"对所有生命周期都成立"或"类型包含编译期常量"时，进入泛型系统的深水区，需要形式化工具验证设计。[来源: TRPL: Ch10.2 / Rust Reference: Trait Bounds]
 
 ```text
 约束层级:
@@ -1478,7 +1478,7 @@ fn print_all(items: impl Iterator<Item = i32>) {
 fn print_all<T: Iterator<Item = i32>>(items: T) { ... }
 ```
 
-**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。
+**语义**: `print_all` 接受**任何**满足 `Iterator<Item = i32>` 的类型——调用者决定具体传入 `Vec::into_iter()`、`array::into_iter()` 还是自定义迭代器。函数内部只能使用 `Iterator` trait 的方法，无法知道具体类型。[来源: RFC 1951 / Rust Reference: Impl trait]
 
 #### 返回位置 `impl Trait` = Existential（存在）
 
@@ -2041,7 +2041,7 @@ Rust 刻意避免完整 HKT，因为：
 
 #### Lending Iterator 的完整类型论分析
 
-Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：
+Lending Iterator 是 GATs 的典范用例，其类型签名在标准 `Iterator` 中**无法表达**：[来源: RFC 1598 / TRPL: Ch19.3]
 
 ```rust
 trait LendingIterator {
