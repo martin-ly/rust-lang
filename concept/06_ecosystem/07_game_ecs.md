@@ -106,6 +106,8 @@ erDiagram
     }
 ```
 
+> **认知功能**: 此 ER 图帮助建立 ECS 数据模型的关系骨架——World 作为中心枢纽组织 Entity、Component 与 System 的关联，理解这一点是设计缓存友好架构的起点。建议在实现自定义 ECS 存储时，先画出版本化的 ER 图验证组件访问路径的合理性。关键洞察：System 不直接持有 Component，而是通过 World 间接查询，这种间接性是并行调度安全的前提。[来源: 💡 原创分析]
+
 > **思维表征说明**: `erDiagram` 是 Mermaid 的**实体关系图**语法，与 `classDiagram` 不同——它强调**实体间的 cardinality（基数）关系**（`||--o{` 表示一对多），天然适合表达 ECS 中「一个 World 包含多个 Entity」「一个 Entity 拥有多个 Component」「一个 System 查询多个 Component」的关系。这与 `graph TD` 层次图（展示概念分类）形成互补——ER 图展示的是**数据模型中的实体关联**。 [来源: Bevy ECS Docs; Chen, *The Entity-Relationship Model*, 1976]
 
 **ECS 类型层次（Mermaid classDiagram）**:
@@ -164,6 +166,8 @@ classDiagram
     Component <|-- Transform
     Component <|-- Velocity
 ```
+
+> **认知功能**: 此 classDiagram 从类型系统视角固化 ECS 的静态结构——Component 是数据 trait，System 是行为 trait，Query 是借用检查的代理。建议在深入 Bevy 源码前，以此图为锚点理解泛型参数的传播路径。关键洞察：Archetype 不是类型层次的节点，而是运行期存储优化的产物，这解释了为何 ECS 能在零成本抽象下实现 SOA 布局。[来源: 💡 原创分析]
 
 > **思维表征说明**: 此 `classDiagram` 从**类型系统**视角展示 ECS 架构——`World` 是容器根，`Entity` 是标识符，`Component` 是数据 trait，`System` 是行为 trait，`Query` 是借用检查的代理，`Archetype` 是存储优化结构。`-->` 表示组合关系，`..>` 表示依赖关系，`<|--` 表示继承。这种表征帮助程序员理解「ECS 不是 OOP 的替代品，而是数据导向的重新组织」。 [来源: Bevy ECS Docs; Data-Oriented Design Book]
 
@@ -236,6 +240,8 @@ graph TD
     G -.->|无冲突| I
     H -.->|无冲突| I
 ```
+
+> **认知功能**: 此调度图展示了 Bevy 的帧阶段流水线与 System 依赖关系——Update 阶段内的 System Set 按 Query 签名自动分析冲突并并行执行。建议将高频 System 注册到同一阶段，利用无冲突 Query 的自动并行提升吞吐。关键洞察：`&mut T` 与 `&T` 的互斥/共享关系直接映射到 System 的串行/并行调度，借用检查器成为调度器的形式化验证后端。[来源: 💡 原创分析]
 
 > **Bevy 调度安全**: 默认并行调度器在**编译期**收集所有 System 的 `Query` 签名，在**运行期**构建依赖图。`&mut T` vs `&T` 的冲突分析由 Rust 借用检查器保证，跨线程调度由 `Send` / `Sync` 保证。
 
@@ -326,6 +332,8 @@ graph LR
     B --> D[Component B<br/>[MaybeUninit&lt;U&gt;; MAX]]
     B --> E[Generation<br/>[u8; MAX]]
 ```
+
+> **认知功能**: 此图揭示了无 `alloc` 环境下 ECS 的静态存储本质——Entity ID 作为索引直接定位固定容量的组件数组，消除了动态分配的不确定性。建议在为掌机/嵌入式设计 ECS 时，用此模式替换桌面端的 HashMap 动态存储。关键洞察：`MaybeUninit` 数组与代际生成号的组合，在零堆分配条件下实现了实体复用与 ABA 问题的防御。[来源: 💡 原创分析]
 
 **设计模式要素**：
 
@@ -630,6 +638,8 @@ graph LR
     C --> D[GPU Hardware]
 ```
 
+> **认知功能**: 此管线图展示了跨线程渲染中的数据流动——游戏逻辑状态经 `Send` 传递到渲染线程，再提交到 GPU 驱动。建议将非 Send 资源（如 OpenGL 上下文）隔离在单线程的 RenderWorld 中。关键洞察：三线程分离不仅提升吞吐，更通过 Rust 的 `Send`/`Sync` 约束在编译期排除了跨线程数据竞争的全部可能空间。[来源: 💡 原创分析]
+
 | 阶段 | 线程 | Rust 保证 |
 |:---|:---|:---|
 | **Update** | 主线程 / 任务池 | `Query<&mut T>` 独占访问；并行 System 由 `Send` 约束 |
@@ -750,6 +760,8 @@ graph LR
     D -->|Submit: move| E[Queue<br/>驱动层]
 ```
 
+> **认知功能**: 此图追踪了渲染所有权从 World 到 GPU Queue 的完整转移链条——Extract 跨线程移动，Prepare 可变借用，Render 消费生成 CommandBuffer，Submit 最终转移所有权。建议在自定义 RenderNode 时严格遵循这一单向流动，避免在节点间保留对已消费资源的引用。关键洞察：wgpu 的 API 设计本质上是线性类型理论的工程实现，每一次所有权转移都对应一次形式化的资源消耗。[来源: 💡 原创分析]
+
 | 阶段 | 所有权操作 | Rust 保证 |
 |:---|:---|:---|
 | **Extract** | `Extract<T>` 要求 `T: Send`，将 MainWorld 的 Component 复制/移动到 RenderWorld | 跨线程数据传递安全 |
@@ -859,6 +871,8 @@ sequenceDiagram
     S->>S: 用真实输入重新模拟 N-2 → N
     Note over S: 状态校正，可能产生跳帧
 ```
+
+> **认知功能**: 此序列图刻画了回滚网络的核心时序——本地预测、远程输入延迟到达、快照回滚、重模拟校正。建议将 World 快照与输入历史数组分离管理，确保回滚点的状态可完整恢复。关键洞察：Rust ECS 的确定性保证了“重模拟”与“正向模拟”产生完全相同的状态序列，使回滚不是 hack，而是类型系统支持的标准操作。[来源: 💡 原创分析]
 
 | 回滚阶段 | ECS 实现 | 所有权考量 |
 |:---|:---|:---|

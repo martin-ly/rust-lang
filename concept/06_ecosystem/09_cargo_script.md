@@ -169,6 +169,8 @@ graph TD
     style H fill:#ff9
 ```
 
+> **认知功能**：此流程图揭示 Cargo Script 的"隐式编译"本质——单文件并非解释执行，而是经 frontmatter 解析、临时 crate 生成、缓存复用等步骤透明地完成编译。建议在理解执行延迟来源（首次编译 vs 缓存命中）和调试脚本依赖问题时调用此心智模型。关键洞察：缓存键基于文件内容与 frontmatter 的哈希，修改任一字符即触发重新编译。[来源: 💡 原创分析]
+
 > **思维表征说明**: `graph TD` 流程图将 Cargo Script 的**内部执行机制**可视化——从单文件输入到最终运行的完整管道。关键洞察：Cargo Script 并非「无需编译」，而是「**隐式管理编译**」——frontmatter 被解析为临时 `Cargo.toml`，编译缓存存储在 `~/.cargo/script-cache/`，第二次执行时若源码未变更则直接复用。这与传统 `cargo run` 的差异在于「临时项目」的自动化管理。 [来源: RFC 3502 §Execution Model; Cargo Book — Scripts]
 
 **何时使用 Cargo Script？决策树（Mermaid graph TD）**:
@@ -196,6 +198,8 @@ graph TD
     style F fill:#ff9
     style H fill:#ff9
 ```
+
+> **认知功能**：此决策树提供工程场景下的工具选择启发式——当项目规模、依赖复杂度或构建需求突破单文件边界时，应果断迁移至传统 Cargo 项目。建议在面对"这个脚本该用 Cargo Script 还是 cargo new？"的抉择时激活此判断框架。关键洞察：Cargo Script 的适用域是"快速验证与分享"，而非"长期维护与协作"；gist 友好的背后是 workspace 和 build.rs 等高级功能的缺失。[来源: 💡 原创分析]
 
 > **思维表征说明**: 此决策树帮助程序员在「Cargo Script」和「传统 Cargo 项目」之间做出**工程化的选择**——不是「Cargo Script 可以替代所有项目」，而是「根据项目规模、依赖复杂度、构建需求选择适当的工具」。叶子节点的颜色编码（绿色=传统项目，黄色=Cargo Script）直观传达了推荐倾向。 [来源: RFC 3503 §Motivation; Cargo Book — When to use scripts]
 
