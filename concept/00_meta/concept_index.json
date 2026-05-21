@@ -1,11 +1,11 @@
 {
   "version": "2.1",
   "generated_at": "2026-05-21T14:20:02.840456",
-  "total_files": 89,
-  "total_lines": 67230,
-  "total_sources": 1720,
-  "total_mermaid": 344,
-  "mermaid_files": 77,
+  "total_files": 92,
+  "total_lines": 68230,
+  "total_sources": 1750,
+  "total_mermaid": 353,
+  "mermaid_files": 80,
   "cognitive_coverage": {
     "total_with_cognitive": 328,
     "total_mermaid": 328,
@@ -537,6 +537,24 @@
     {
       "path": "07_future/14_ferrocene_preview.md",
       "lines": 307,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/15_gen_blocks_preview.md",
+      "lines": 349,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/16_cranelift_backend_preview.md",
+      "lines": 303,
+      "sources": 10,
+      "mermaid": 3
+    },
+    {
+      "path": "07_future/17_rust_specification_preview.md",
+      "lines": 345,
       "sources": 10,
       "mermaid": 3
     },

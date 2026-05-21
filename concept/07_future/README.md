@@ -143,6 +143,9 @@ graph TB
 | [12_return_type_notation_preview.md](./12_return_type_notation_preview.md) | Return Type Notation 预研 | use<..> 精确捕获、生命周期显式控制 | ✅ v1.0 | L2 Trait, L3 Async | L3 Async API 稳定性 |
 | [13_unsafe_fields_preview.md](./13_unsafe_fields_preview.md) | Unsafe Fields 预研 | 字段级 unsafe 标记、安全边界细化 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 粒度细化 |
 | [14_ferrocene_preview.md](./14_ferrocene_preview.md) | Ferrocene 预研 | Rust 安全关键认证工具链、ISO 26262 / DO-178C | ✅ v1.0 | L6 Toolchain, L7 Future | L6 安全关键工具链 |
+| [15_gen_blocks_preview.md](./15_gen_blocks_preview.md) | Gen Blocks 预研 | 泛化生成器、惰性迭代、异步流 | ✅ v1.0 | L3 Async, L2 Trait | L3 控制流泛化 |
+| [16_cranelift_backend_preview.md](./16_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
+| [17_rust_specification_preview.md](./17_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
 | [04_effects_system.md](./04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
 ---

@@ -437,18 +437,21 @@
 - 新增 `07_future/12_return_type_notation_preview.md`（~304 行，10 来源，2 Mermaid 图表）
 - 新增 `07_future/13_unsafe_fields_preview.md`（~332 行，10 来源，3 Mermaid 图表）
 - 新增 `07_future/14_ferrocene_preview.md`（~307 行，10 来源，3 Mermaid 图表）
-- 涵盖编译器前端并行化、智能指针派生宏、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证
-- **文件总数: 83 → 89，Mermaid 图表: 328 → 344**
+- 新增 `07_future/15_gen_blocks_preview.md`（~349 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/16_cranelift_backend_preview.md`（~303 行，10 来源，3 Mermaid 图表）
+- 新增 `07_future/17_rust_specification_preview.md`（~345 行，10 来源，3 Mermaid 图表）
+- 涵盖编译器前端并行化、智能指针派生宏、Const Trait 效果系统、RTN 精确捕获、Unsafe Fields、Ferrocene 认证、Gen Blocks、Cranelift 后端、Rust 语言规范
+- **文件总数: 83 → 92，Mermaid 图表: 328 → 353**
 
 ---
 
 **累计交付统计**:
 
-- **89 个 Markdown 文件**，~67,230 行，**~1,720** 条来源标注
-- **344** 个 Mermaid 图表，17 种类型，覆盖 **77** 个文件
+- **92 个 Markdown 文件**，~68,230 行，**~1,750** 条来源标注
+- **353** 个 Mermaid 图表，17 种类型，覆盖 **80** 个文件
 - **242/242** 代码块编译通过，0 失败
-- **71/71** 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: **100.0%**（344/344），全部文件 100%
+- **74/74** 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（353/353），全部文件 100%
 
 **文档版本**: 2.6
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)

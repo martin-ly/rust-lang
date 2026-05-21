@@ -1,8 +1,8 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T04:40:05.747486
-> 扫描文件数: 69
-> 提取概念定义数: 447
+> 生成时间: 2026-05-22T04:53:46.094151
+> 扫描文件数: 72
+> 提取概念定义数: 453
 > 跨文件引用数: 165
 
 ## 目录
@@ -58,10 +58,10 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 117 | 29 |
+| unsafe-UB | 121 | 30 |
 | 所有权-Move语义 | 76 | 25 |
 | Send+Sync | 49 | 22 |
-| unsafe-契约 | 36 | 15 |
+| unsafe-契约 | 38 | 16 |
 | 所有权-作用域绑定 | 31 | 13 |
 | 所有权-唯一所有权 | 29 | 14 |
 | unsafe-不变式 | 27 | 3 |
@@ -145,6 +145,9 @@
 | concept\07_future\10_derive_coerce_pointee_preview.md | 0 | 0 | 8 |
 | concept\07_future\11_const_trait_impl_preview.md | 0 | 0 | 8 |
 | concept\07_future\12_return_type_notation_preview.md | 0 | 0 | 8 |
+| concept\07_future\13_unsafe_fields_preview.md | 6 | 0 | 8 |
+| concept\07_future\14_ferrocene_preview.md | 0 | 0 | 8 |
+| concept\07_future\15_gen_blocks_preview.md | 0 | 0 | 8 |
 | concept\07_future\borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\open_enums_preview.md | 0 | 0 | 15 |
 

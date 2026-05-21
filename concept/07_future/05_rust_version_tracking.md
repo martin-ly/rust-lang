@@ -468,7 +468,7 @@ timeline
 | `new_range_syntax` (`..<`) | unstable | D1 计算 | `01_foundation/04_type_system.md` | 低 | 继续演进 |
 | `effects` (keyword generics) | experimental | D3 控制流 / D7 安全 | `07_future/04_effects_system.md` | **高** | 长期演进 |
 | `const_trait_impl` (`~const`) | unstable | D1 计算 | [`concept/07_future/11_const_trait_impl_preview.md`](./11_const_trait_impl_preview.md) | **高** | 继续演进 |
-| `gen_blocks` | unstable | D3 控制流 | `03_advanced/02_async.md` | **高** | 继续演进 |
+| `gen_blocks` | unstable | D3 控制流 | [`concept/07_future/15_gen_blocks_preview.md`](./15_gen_blocks_preview.md) | **高** | 继续演进 |
 | `next_solver` | nightly，目标 2026 稳定 | D2 类型 / D5 编译期 | `02_intermediate/01_traits.md` §12 · `crates/c04_generic/next_solver_preview.rs` | **高** | 目标稳定 |
 | `adt_const_params` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
 | `min_generic_const_args` | unstable | D2 类型 / D1 计算 | `02_intermediate/02_generics.md` | **高** | 目标稳定 |
@@ -584,6 +584,7 @@ timeline
 | **Safety Tags** | 设计讨论（Pre-RFC 准备中） | 2027+ | ✅ 已创建 | [`concept/07_future/08_safety_tags_preview.md`](./08_safety_tags_preview.md) · `docs/05_guides/SAFETY_TAGS_GUIDE.md` |
 | **derive(CoercePointee)** | nightly 可用 | 2027+ | 🟡 跟踪 | [`concept/07_future/10_derive_coerce_pointee_preview.md`](./10_derive_coerce_pointee_preview.md) |
 | **并行前端编译** | nightly 可用 | 2026–2027 | 🟡 跟踪 | [`concept/07_future/09_parallel_frontend_preview.md`](./09_parallel_frontend_preview.md) |
+| **Cranelift 后端** | rustup 可用（实验） | 2027+ | ✅ 已创建 | [`concept/07_future/16_cranelift_backend_preview.md`](./16_cranelift_backend_preview.md) |
 
 ---
 
