@@ -7,13 +7,14 @@
   "total_mermaid": 311,
   "mermaid_files": 62,
   "cognitive_coverage": {
-    "total_with_cognitive": 178,
+    "total_with_cognitive": 203,
     "total_mermaid": 311,
-    "coverage_percent": 57.2,
+    "coverage_percent": 65.3,
     "l1_foundation": "100% (28/28)",
     "l2_intermediate": "100% (26/26)",
     "l3_advanced": "100% (44/44)",
-    "l5_comparative": "100% (41/41)"
+    "l5_comparative": "100% (41/41)",
+    "l7_future": "100% (30/30)"
   },
   "files": [
     {
