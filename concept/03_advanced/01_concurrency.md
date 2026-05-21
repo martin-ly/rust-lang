@@ -395,6 +395,89 @@ let data = shared_data.load(Ordering::Acquire); // Acquire: 看到 store 后，d
 
 > **来源**: [Rust Reference: Memory model — Release-acquire ordering] · [Batty et al. 2011 — The Semantics of Multicore C] · [LLVM LangRef: Atomic Instructions]
 
+**Release-Acquire 时序可视化（Mermaid sequenceDiagram）**:
+
+```mermaid
+sequenceDiagram
+    participant A as 线程 A (生产者)
+    participant MEM as 共享内存
+    participant B as 线程 B (消费者)
+
+    Note over A: 构造 data = [1,2,3]
+    A->>MEM: atomic.store(data, Release)
+    Note right of A: Release 屏障:<br/>store 前的写不可重排<br/>到 store 之后
+
+    Note over MEM: data 已发布
+
+    B->>MEM: atomic.load(Acquire)
+    MEM-->>B: 返回 data
+    Note left of B: Acquire 屏障:<br/>load 后的读不可重排<br/>到 load 之前
+
+    Note over B: 安全读取 data
+
+    rect rgb(230, 255, 230)
+        Note over A,B: happens-before 关系:<br/>A 的 Release store → B 的 Acquire load<br/>建立 synchronizes-with 边<br/>A store 之前的所有写对 B load 之后可见
+    end
+```
+
+> **思维表征说明**: `sequenceDiagram` 是 Mermaid 的**泳道/时序图**语法，与 `graph TD` 流程图不同——它强调**时间轴上的消息顺序**和**参与者（Actor）间的交互**，天然适合表达多线程间的 happens-before 同步关系。Release-Acquire 的本质是「消息发送-接收」协议，sequenceDiagram 的 `->>`（实线箭头）和 `-->>`（虚线返回）恰好对应 store 和 load 的因果方向。 [来源: Mermaid sequenceDiagram 文档; Boehm & Adve PLDI 2008]
+
+**内存序状态机（Mermaid stateDiagram）**:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Relaxed: 默认/计数器
+    Relaxed --> Acquire: 需要观察其他线程的发布
+    Relaxed --> Release: 需要向其他线程发布数据
+
+    Acquire --> AcqRel: RMW 操作
+    Release --> AcqRel: RMW 操作
+
+    Relaxed --> SeqCst: 需要全局一致序
+    Acquire --> SeqCst: 严格协议
+    Release --> SeqCst: 严格协议
+    AcqRel --> SeqCst: 最严格同步
+
+    state "Relaxed (最弱)" as Relaxed {
+        note right of Relaxed
+            仅保证原子性
+            无 happens-before
+            成本最低
+        end note
+    }
+
+    state "Acquire (消费同步)" as Acquire {
+        note right of Acquire
+            load 后插入读屏障
+            消费 sw 边
+        end note
+    }
+
+    state "Release (产生同步)" as Release {
+        note right of Release
+            store 前插入写屏障
+            产生 sw 边
+        end note
+    }
+
+    state "AcqRel (RMW 双向)" as AcqRel {
+        note right of AcqRel
+            CAS/fetch_add 同时
+            acquire + release
+        end note
+    }
+
+    state "SeqCst (最强)" as SeqCst {
+        note right of SeqCst
+            全局全序
+            所有线程一致
+            成本最高
+        end note
+    }
+```
+
+> **思维表征说明**: `stateDiagram-v2` 将五种 `Ordering` 建模为**状态层次**而非流程——从 Relaxed（最弱、成本最低）到 SeqCst（最强、成本最高），状态之间的转移对应「何时需要升级内存序」。这帮助程序员建立直觉：不是「SeqCst 最安全所以总是用它」，而是「根据同步需求选择最弱且足够的 Ordering」。 [来源: Rust std::sync::atomic docs; C++ Standard §33.5]
+
 #### SeqCst 的全局序与适用边界
 
 ```text

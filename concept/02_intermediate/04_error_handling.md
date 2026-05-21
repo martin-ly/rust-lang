@@ -523,6 +523,39 @@ let result = select! {
 
 > **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
 
+**错误处理策略决策树（Mermaid graph TD）**:
+
+```mermaid
+graph TD
+    A[函数可能失败?] -->|是| B{失败类型?}
+    A -->|否| C[返回裸类型 T]
+    
+    B -->|可恢复错误| D[返回 Result<T, E>]
+    B -->|不可恢复/程序 bug| E[panic!]
+    B -->|值可能缺失| F[返回 Option<T>]
+    
+    D --> G{调用方如何处理?}
+    G -->|传播| H[使用 ? 运算符]
+    G -->|转换错误| I[使用 map_err]
+    G -->|提供默认值| J[使用 unwrap_or]
+    G -->|合并多个错误| K[使用 anyhow/eyre]
+    
+    E --> L{是否在 main/测试?}
+    L -->|是| M[直接 panic]
+    L -->|否| N[考虑改回 Result]
+    
+    F --> O{缺失是错误还是正常?}
+    O -->|正常场景| P[Option 足够]
+    O -->|错误场景| Q[升级为 Result]
+    
+    style C fill:#9f9
+    style H fill:#9f9
+    style M fill:#ff9
+    style N fill:#f99
+```
+
+> **思维表征说明**: 此 `graph TD` 决策树将错误处理的**策略选择**形式化为可遍历的判断流程——从「是否可能失败」开始，经过「失败类型」「调用方处理方式」等决策节点，最终到达叶子节点的具体 Rust 惯用法。与 ASCII 决策树相比，Mermaid 图的优势在于**可视化层次结构**和**颜色编码**（绿色=推荐，黄色=谨慎，红色=避免），帮助读者快速定位当前场景的正确策略。 [来源: TRPL §9; Rust API Guidelines; RFC 243]
+
 ### 6.1 反命题 1: "Result 消除了所有错误"
 
 > 运行时层 — Result 消除了静默错误忽略，但 unwrap 和 panic 仍是错误爆发的通道。

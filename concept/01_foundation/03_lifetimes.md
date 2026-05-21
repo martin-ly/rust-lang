@@ -339,6 +339,30 @@ graph TD
 
 > **[来源: Rust Reference: Subtyping]** Rust 中生命周期子类型关系 'static <: 'a 的形式化定义。✅
 
+**生命周期偏序集 Hasse 图（Mermaid）**:
+
+```mermaid
+graph BT
+    TOP['static<br/>最大元 ⊤] --> A['a]
+    TOP --> B['b]
+    TOP --> C['c]
+    A --> D['d]
+    B --> D
+    C --> E['e]
+    D --> BOT[函数局部<br/>最小元 ⊥]
+    E --> BOT
+    
+    style TOP fill:#9f9,stroke:#333
+    style BOT fill:#f99,stroke:#333
+    style A fill:#fff,stroke:#333
+    style B fill:#fff,stroke:#333
+    style C fill:#fff,stroke:#333
+    style D fill:#fff,stroke:#333
+    style E fill:#fff,stroke:#333
+```
+
+> **思维表征说明**: Hasse 图是偏序集的标准可视化方式——节点代表生命周期变量，**边代表直接的 outlives 关系**（省略可由传递性推出的间接关系）。`'static` 位于顶部（最大元，outlives 所有其他生命周期），函数局部生命周期位于底部（最小元，被所有其他生命周期 outlives）。此图帮助直观理解「为什么 `'static: 'a` 总是成立」以及「为什么循环约束 `'a: 'b` 且 `'b: 'a` 意味着 `'a = 'b`」。 [来源: Davey & Priestley, *Introduction to Lattices and Order*; Tofte & Talpin 1994]
+
 ### 4.3 定理：函数签名中的生命周期省略规则 ⟹ Elision 的完备性
 
 ```text

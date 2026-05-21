@@ -1,0 +1,208 @@
+# Rust 知识体系层次内模型间映射图
+
+> **定位**: 本文件梳理每一层（L1-L4）内部核心模型之间的等价、蕴含、依赖和互斥关系，回答「同一层级内的概念如何相互定义、相互支撑、相互约束」。
+> **原则**: 每个映射必须标注关系类型（≡ 同构 / ⟹ 蕴含 / ← 依赖 / ⊘ 互斥）和形式化依据。
+> **符号约定**: 同于 `inter_layer_topology.md`
+
+---
+
+> **Bloom 层级**: 元（Meta）
+
+**变更日志**:
+
+- v1.0 (2026-05-21): 初始版本——L1-L4 层内模型映射矩阵 + Mermaid 关系图
+
+---
+
+## 📑 目录
+
+- [Rust 知识体系层次内模型间映射图](#rust-知识体系层次内模型间映射图)
+  - [📑 目录](#-目录)
+  - [一、L1 基础概念层：所有权 · 借用 · 生命周期 · 类型系统](#一l1-基础概念层所有权--借用--生命周期--类型系统)
+    - [1.1 四元关系拓扑](#11-四元关系拓扑)
+    - [1.2 四元关系矩阵](#12-四元关系矩阵)
+  - [二、L2 进阶概念层：Trait · 泛型 · 内存管理 · 错误处理](#二l2-进阶概念层trait--泛型--内存管理--错误处理)
+    - [2.1 四元关系拓扑](#21-四元关系拓扑)
+    - [2.2 四元关系矩阵](#22-四元关系矩阵)
+  - [三、L3 高级概念层：并发 · 异步 · Unsafe · 宏](#三l3-高级概念层并发--异步--unsafe--宏)
+    - [3.1 四元关系拓扑](#31-四元关系拓扑)
+    - [3.2 四元关系矩阵](#32-四元关系矩阵)
+  - [四、L4 形式化层：线性逻辑 · 类型论 · 所有权形式化 · RustBelt · 验证工具链](#四l4-形式化层线性逻辑--类型论--所有权形式化--rustbelt--验证工具链)
+    - [4.1 五元关系拓扑](#41-五元关系拓扑)
+    - [4.2 五元关系矩阵](#42-五元关系矩阵)
+  - [五、模型间映射的形式化核心](#五模型间映射的形式化核心)
+    - [5.1 L1-L4 核心同构链](#51-l1-l4-核心同构链)
+  - [六、相关概念链接](#六相关概念链接)
+
+## 一、L1 基础概念层：所有权 · 借用 · 生命周期 · 类型系统
+
+### 1.1 四元关系拓扑
+
+```mermaid
+graph TD
+    O[所有权<br/>Ownership] -->|拥有值 ⟹ 可借用| B[借用<br/>Borrowing]
+    O -->|值有类型 ⟹ 类型约束| T[类型系统<br/>Type System]
+    B -->|借用有效期 ⟹ 生命周期约束| L[生命周期<br/>Lifetimes]
+    L -->|约束可满足 ⟹ 借用合法| B
+    T -->|类型包含引用 ⟹ 含生命周期| L
+    B -->|&mut 独占 ⟹ 所有权暂时转移| O
+    O -.->|≡ 仿射逻辑| O_F[仿射资源]
+    B -.->|≡ 分离逻辑| B_F[分数权限]
+    L -.->|≡ 区域类型| L_F[偏序约束]
+    T -.->|≡ 类型论| T_F[System F 扩展]
+```
+
+### 1.2 四元关系矩阵
+
+| 关系 | 模型 A | 模型 B | 关系类型 | 形式化依据 |
+|:---|:---|:---|:---:|:---|
+| 拥有-借用 | 所有权 | 借用 | ⟹ | 所有者有权出借只读或独占引用 |
+| 借用-生命周期 | 借用 | 生命周期 | ← | 借用的合法性由生命周期约束保证 |
+| 类型-生命周期 | 类型系统 | 生命周期 | ⟹ | 引用类型 `&'a T` 包含生命周期参数 |
+| 所有权-类型 | 所有权 | 类型系统 | ← | 类型的 `Drop` / `Copy` / `Clone` 决定所有权语义 |
+| 借用-所有权恢复 | 借用 | 所有权 | ⟹ | 借用结束后所有权归还（自动） |
+| 所有权-仿射逻辑 | 所有权 | 仿射逻辑 | ≡ | `own(x)` ↔ 独占资源命题 |
+| 借用-分离逻辑 | 借用 | 分离逻辑 | ≡ | `&x` ↔ `borrow(x, 1)`（分数权限） |
+| 生命周期-区域类型 | 生命周期 | 区域类型 | ≡ | `'a: 'b` ↔ 区域包含关系 |
+| &mut vs &mut | `&mut T`（A） | `&mut T`（B，重叠） | ⊘ | AXM：同一作用域内不允许重叠 `&mut` |
+
+---
+
+## 二、L2 进阶概念层：Trait · 泛型 · 内存管理 · 错误处理
+
+### 2.1 四元关系拓扑
+
+```mermaid
+graph TD
+    Tr[Trait<br/>接口抽象] -->|Trait 对象 ⟹ 运行时多态| M[内存管理<br/>动态分发]
+    Tr -->|Trait Bound ⟹ 泛型约束| G[泛型<br/>参数多态]
+    G -->|单态化 ⟹ 内存布局确定| M
+    G -->|Const Generics ⟹ 类型级计算| Tr
+    E[错误处理<br/>Result/Option] -->|? 运算符 ⟹ 泛型约束传播| G
+    E -->|Result 需要 Display/Debug| Tr
+    M -->|智能指针实现 Deref| Tr
+
+    Tr -.->|≡ 类型类| Tr_F[Haskell Typeclass]
+    G -.->|≡ System F| G_F[参数多态 λ 演算]
+    M -.->|≡ 区域内存| M_F[Tofte-Talpin]
+    E -.->|≡ 构造性排中| E_F[直觉主义逻辑 ∨]
+```
+
+### 2.2 四元关系矩阵
+
+| 关系 | 模型 A | 模型 B | 关系类型 | 形式化依据 |
+|:---|:---|:---|:---:|:---|
+| Trait-泛型 | Trait | 泛型 | ⟹ | Trait bound 约束泛型参数的能力 |
+| 泛型-内存 | 泛型 | 内存管理 | ⟹ | 单态化后内存布局静态确定 |
+| 错误-Trait | 错误处理 | Trait | ← | `Error` trait / `From` trait 支撑 `?` 传播 |
+| 内存-Trait | 内存管理 | Trait | ← | `Deref` / `Drop` / `AsRef` 是 Trait |
+| Trait-类型类 | Trait | Haskell Typeclass | ≡ | `impl Trait for T` ↔ `instance Trait T` |
+| 泛型-System F | 泛型 | System F | ≡ | `<T>` ↔ `ΛT.λx:T` |
+| 错误-直觉逻辑 | Result | 直觉主义逻辑 | ≡ | `Ok \| Err` ↔ 构造性析取 |
+
+---
+
+## 三、L3 高级概念层：并发 · 异步 · Unsafe · 宏
+
+### 3.1 四元关系拓扑
+
+```mermaid
+graph TD
+    C[并发<br/>线程/sync] -->|Send/Sync 类型 ⟹ async 安全| A[异步<br/>async/await]
+    C -->|MutexGuard 含 UnsafeCell| U[Unsafe<br/>原始指针]
+    A -->|Pin 基于 UnsafeCell| U
+    A -->|async fn 展开为宏| M[宏<br/>macro/proc-macro]
+    U -->|unsafe 实现同步原语| C
+    M -->|过程宏生成 async 包装| A
+
+    C -.->|≡ 进程代数| C_F[CCS/CSP]
+    A -.->|≡ CPS| A_F[Continuation]
+    U -.->|≡ 操作语义| U_F[Stacked/Tree Borrows]
+    M -.->|≡ 卫生宏| M_F[gensym]
+```
+
+### 3.2 四元关系矩阵
+
+| 关系 | 模型 A | 模型 B | 关系类型 | 形式化依据 |
+|:---|:---|:---|:---:|:---|
+| 并发-异步 | 并发 | 异步 | ⟹ | `async` 任务需满足 `Send` 才能跨线程调度 |
+| 并发-unsafe | 并发 | Unsafe | ← | `Mutex` / `Atomic` 内部使用 `UnsafeCell` |
+| 异步-unsafe | 异步 | Unsafe | ← | `Pin` 的内存稳定性依赖 `unsafe` 契约 |
+| 宏-异步 | 宏 | 异步 | ← | `async fn` / `await` 是编译器宏级变换 |
+| unsafe-并发 | Unsafe | 并发 | ⟹ | `unsafe impl Send/Sync` 扩展并发边界 |
+| 并发-CCS | 并发 | CCS/CSP | ≡ | `thread::spawn` ↔ `P \| Q` |
+| 异步-CPS | async/await | CPS | ≡ | `.await` ↔ 续体边界 |
+| unsafe-TreeBorrows | Unsafe | Tree Borrows | ≡ | `*ptr` ↔ 树形借用状态机转换 |
+
+---
+
+## 四、L4 形式化层：线性逻辑 · 类型论 · 所有权形式化 · RustBelt · 验证工具链
+
+### 4.1 五元关系拓扑
+
+```mermaid
+graph TD
+    LL[线性逻辑<br/>Girard 1987] -->|!A ↔ Copy| OF[所有权形式化<br/>COR / Oxide]
+    LL -->|⊸ ↔ move| OF
+    TT[类型论<br/>System F/HM] -->|类型安全 ⟹ 所有权安全| OF
+    TT -->|Progress+Preservation| RB[RustBelt<br/>Iris 逻辑]
+    OF -->|操作语义| RB
+    RB -->|验证条件| VT[验证工具链<br/>Kani/Creusot]
+    VT -->|反例/证明| RB
+
+    OF -.->|≡ 分离逻辑| SL[Reynolds 2002]
+    RB -.->|≡ 高阶并发分离逻辑| Iris[Jung 2018]
+    TT -.->|≡ Curry-Howard| CH[命题↔类型]
+```
+
+### 4.2 五元关系矩阵
+
+| 关系 | 模型 A | 模型 B | 关系类型 | 形式化依据 |
+|:---|:---|:---|:---:|:---|
+| 线性逻辑-所有权 | 线性逻辑 | 所有权形式化 | ≡ | `!A` ↔ `Copy` / `A ⊸ B` ↔ `move` |
+| 类型论-所有权 | 类型论 | 所有权形式化 | ⟹ | 类型安全 ⟹ 所有权安全（子集关系） |
+| 所有权-RustBelt | 所有权形式化 | RustBelt | ⟹ | COR 操作语义 → Iris 资源语义 |
+| RustBelt-工具链 | RustBelt | 验证工具链 | ← | 工具链验证 RustBelt 提出的验证条件 |
+| 类型论-CH | 类型论 | Curry-Howard | ≡ | 类型 ↔ 命题 / 程序 ↔ 证明 |
+| RustBelt-Iris | RustBelt | Iris 逻辑 | ≡ | `own(x)` ↔ Iris 资源命题 |
+| 所有权-分离逻辑 | 所有权形式化 | 分离逻辑 | ≡ | `struct` ↔ `P * Q` |
+
+---
+
+## 五、模型间映射的形式化核心
+
+### 5.1 L1-L4 核心同构链
+
+```text
+Rust 所有权  ≡  仿射逻辑 !A / A ⊸ B
+     ↓
+Rust 借用   ≡  分离逻辑 borrow(x, q)  （分数权限 q ∈ {1, ∞}）
+     ↓
+Rust 生命周期 ≡ 区域类型 κ ⊑ κ'  （偏序约束可满足性）
+     ↓
+Rust 类型系统 ≡ System F_ω 子集  （参数多态 + 受限高阶）
+     ↓
+Rust Trait    ≡  Haskell Typeclass  （约束多态 + 字典传递）
+     ↓
+Rust async    ≡  CPS + 状态机  （无栈协程 = defunctionalized continuation）
+     ↓
+Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
+```
+
+---
+
+## 六、相关概念链接
+
+- [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
+- [定理推理森林](theorem_inference_forest.md) —— 模型内定理链
+- [边界扩展树](boundary_extension_tree.md) —— 安全边界推演
+- [L1 所有权](../01_foundation/01_ownership.md)
+- [L1 借用](../01_foundation/02_borrowing.md)
+- [L4 线性逻辑](../04_formal/01_linear_logic.md)
+- [L4 所有权形式化](../04_formal/03_ownership_formal.md)
+
+---
+
+> **文档版本**: 1.0
+> **最后更新**: 2026-05-21
+> **状态**: ✅ 层次内模型间映射图 v1.0

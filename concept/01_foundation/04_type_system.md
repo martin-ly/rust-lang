@@ -183,6 +183,91 @@ Rust 扩展:
 
 Rust 类型系统的全部知识可以组织为"标量—复合—ADT—引用—特殊类型"五个维度，其中 ADT 是 Rust 区别于传统命令式语言的核心表达工具。
 
+**Rust 类型层次图（Mermaid classDiagram）**:
+
+```mermaid
+classDiagram
+    class Any {
+        +size_of_val()
+        +type_id()
+    }
+    class Sized {
+        +编译期已知大小
+    }
+    class Copy {
+        +按位复制语义
+    }
+    class Clone {
+        +显式克隆接口
+    }
+    class Send {
+        +可跨线程转移
+    }
+    class Sync {
+        +可跨线程共享引用
+    }
+    class Default {
+        +默认构造接口
+    }
+    class Display {
+        +格式化输出接口
+    }
+    class Debug {
+        +调试输出接口
+    }
+    
+    Any <|-- Sized : 子类型约束
+    Sized <|-- Copy : 子类型约束
+    Sized <|-- Clone : 子类型约束
+    Sized <|-- Send : auto trait
+    Sized <|-- Sync : auto trait
+    Clone <|-- Copy : Copy 继承 Clone
+    
+    note for Any "所有 Rust 类型的根\n（除 dyn Trait 外均实现）"
+    note for Sized "99% 类型自动实现\n（dyn Trait / [T] 除外）"
+    note for Copy "i32, bool, &T 等\n（堆分配类型除外）"
+    note for Send "Arc<T>, Mutex<T> 等\n（Rc<T>, Cell<T> 除外）"
+```
+
+> **思维表征说明**: `classDiagram` 是 Mermaid 的**类图/层次图**语法，与 `graph TD` 流程图不同——它强调**类型之间的继承/实现关系**（`--|>` 表示继承），天然适合表达 Rust 的 trait 层次结构。图中 `Copy <|-- Clone` 表示「实现 Copy 的类型必须也实现 Clone」，`Sized <|-- Send` 表示「Send 自动为所有 Sized 类型实现（除非 opt-out）」。这种表征帮助程序员建立「trait 是类型能力接口」的直觉。 [来源: Rust Reference §11; TRPL §10; UML Class Diagram Standard]
+
+> **类型分类层次（另一视角——数据导向）**:
+
+```mermaid
+graph TD
+    A[类型系统] --> B[标量类型]
+    A --> C[复合类型]
+    A --> D[ADT]
+    A --> E[引用类型]
+    A --> F[特殊类型]
+    
+    B --> B1[整数 i/u]
+    B --> B2[浮点 f]
+    B --> B3[bool]
+    B --> B4[char]
+    
+    C --> C1[数组 [T; N]]
+    C --> C2[元组 (A, B)]
+    C --> C3[切片 [T]]
+    
+    D --> D1[struct]
+    D --> D2[enum]
+    D --> D3[union]
+    
+    E --> E1[&T]
+    E --> E2[&mut T]
+    E --> E3[*const T]
+    E --> E4[*mut T]
+    
+    F --> F1[! Never]
+    F --> F2[() Unit]
+    F --> F3[dyn Trait]
+    F --> F4[impl Trait]
+    F --> F5[Fn/FnMut/FnOnce]
+```
+
+> **思维表征说明**: 此 `graph TD` 层次图从**数据构造**视角组织类型，与上面的 `classDiagram`（trait 能力视角）形成互补。左图回答「类型能做什么」（trait 层次），右图回答「类型如何构造」（数据层次）。二者结合构成 Rust 类型系统的完整认知地图。 [来源: Rust Reference §3, §6; TRPL §3]
+
 ```mermaid
 graph TD
     A[Type System 类型系统] --> B[标量类型]

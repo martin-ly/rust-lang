@@ -385,6 +385,37 @@ poll : Pin<&mut S_f> × &mut Context → Poll<U>
 
 > **来源**: [Rust Compiler: librustc_mir_transform/src/generator.rs — 状态机 lowering 实现] · [Async Book: Under the hood]
 
+**状态机可视化（Mermaid stateDiagram）**:
+
+```mermaid
+stateDiagram-v2
+    [*] --> Start: 创建 Future
+    Start --> Pending: 第1次 poll
+    Pending --> Suspend1: .await fut₁
+    Suspend1 --> Pending: 等待唤醒
+    Pending --> Suspend2: .await fut₂
+    Suspend2 --> Pending: 等待唤醒
+    Pending --> Ready: 所有 await 完成
+    Ready --> [*]: 返回结果
+
+    Start --> Panicked: panic!
+    Suspend1 --> Panicked: panic!
+    Suspend2 --> Panicked: panic!
+    Panicked --> [*]: 不可恢复
+
+    note right of Suspend1
+        Pin<&mut Self> 保证
+        状态机地址在此状态期间恒定
+    end note
+
+    note right of Ready
+        idempotent:
+        再次 poll 仍返回 Ready(v)
+    end note
+```
+
+> **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
+
 #### .await 的 CPS 变换规则
 
 ```text

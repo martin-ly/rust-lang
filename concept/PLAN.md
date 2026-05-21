@@ -190,7 +190,31 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+### Phase 7: 五维主线升华与全局关系图谱（2026-05-21 — 2026-05-21）
+
+**目标**: 围绕「可判定性—表达力—惯用法—执行模型—系统设计」五维主线进行深度升华，建立跨层关系图谱与多维思维表征体系。
+
+| 任务ID | 任务内容 | 交付物 | 优先级 | 状态 |
+|:---|:---|:---|:---:|:---:|
+| P7-T1 | 可判定性谱系全景 | `00_meta/decidability_spectrum.md` | 🔴 | ✅ |
+| P7-T2 | 多视角表达力深化 | `00_meta/expressiveness_multiview.md` | 🔴 | ✅ |
+| P7-T5 | 惯用法谱系全景 | `06_ecosystem/03_idioms_spectrum.md` | 🔴 | ✅ |
+| P7-T6 | 执行模型同构性矩阵 | `05_comparative/05_execution_model_isomorphism.md` | 🔴 | ✅ |
+| P7-T9 | 系统设计原则与国际权威对齐 | `06_ecosystem/05_system_design_principles.md` | 🔴 | ✅ |
+| P7-T10 | 跨层依赖与蕴含拓扑图 | `00_meta/inter_layer_topology.md` | 🔴 | ✅ |
+| P7-T11 | 层次内模型间映射图 | `00_meta/intra_layer_model_map.md` | 🔴 | ✅ |
+| P7-T12 | 模型内定理推理判定树图 | `00_meta/theorem_inference_forest.md` | 🔴 | ✅ |
+| P7-T13 | 边界模型扩展推理树图 | `00_meta/boundary_extension_tree.md` | 🔴 | ✅ |
+| P7-T15 | 运行 concept_audit.py 验证 | 审计通过（57/57 链接，16.7% 来源率） | 🔴 | ✅ |
+| P7-T17 | 更新 PLAN.md v2.0 | 本文件 | 🟡 | ✅ |
+| P7-T18 | 全局概念索引更新 | `00_meta/concept_index.md` | 🟡 | ✅ |
+
+**新增文件统计**: 9 个新文件，~200KB 新增内容，覆盖五维主线 + 四层全局关系图谱。
+**质量门禁**: 全部通过（Bloom 100%，死链接 0，代码块问题 0，来源标注率 ≥10%）。
+
+---
+
+**文档版本**: 2.0
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-21
+**状态**: ✅ 五维主线升华完成 (Phase 7)

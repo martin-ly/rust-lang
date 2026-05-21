@@ -57,6 +57,13 @@
     - [9.4 Lifetimes（生命周期 / 区域类型）](#94-lifetimes生命周期--区域类型)
     - [9.5 维护规范](#95-维护规范)
   - [十、语义表达力全景梳理（Phase F）](#十语义表达力全景梳理phase-f)
+  - [十一、Phase 7 五维升华新增概念索引](#十一phase-7-五维升华新增概念索引)
+    - [11.1 可判定性谱系（Decidability Spectrum）](#111-可判定性谱系decidability-spectrum)
+    - [11.2 表达力多视角（Expressiveness Multiview）](#112-表达力多视角expressiveness-multiview)
+    - [11.3 惯用法谱系（Idioms Spectrum）](#113-惯用法谱系idioms-spectrum)
+    - [11.4 执行模型同构性（Execution Model Isomorphism）](#114-执行模型同构性execution-model-isomorphism)
+    - [11.5 系统设计原则（System Design Principles）](#115-系统设计原则system-design-principles)
+    - [11.6 四层全局关系图谱](#116-四层全局关系图谱)
   - [八、TODO](#八todo)
 
 ## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
@@ -512,6 +519,73 @@
 
 ---
 
+## 十一、Phase 7 五维升华新增概念索引
+
+> Phase 7 于 2026-05-21 完成，新增 9 个文件，覆盖「可判定性—表达力—惯用法—执行模型—系统设计」五维主线 + 四层全局关系图谱。
+
+### 11.1 可判定性谱系（Decidability Spectrum）
+
+| 概念 | 文件 | Bloom | 核心判定问题 | 可判定性 |
+|:---|:---|:---:|:---|:---:|
+| 编译期可判定性谱系 | `00_meta/decidability_spectrum.md` | 分析→评价 | 全链路判定边界 | — |
+| L0 词法/语法判定 | 同上 | 分析 | Token→AST | ✅ |
+| L1 名称解析判定 | 同上 | 分析 | Path 唯一解析 | ✅ |
+| L2 类型推断判定 | 同上 | 分析 | 局部 HM 子集 | ✅ |
+| L2 Trait 求解判定 | 同上 | 分析 | 受限可满足性 | ⚠️ |
+| L3 借用检查判定 | 同上 | 分析 | NLL/Polonius | ✅ |
+| L4 CTFE 有界判定 | 同上 | 评价 | 步数/栈深上限 | ⚠️ |
+| L5 死锁不可判定 | 同上 | 评价 | Rice 定理 | ❌ |
+
+### 11.2 表达力多视角（Expressiveness Multiview）
+
+| 概念 | 文件 | Bloom | 理论视角 | 形式化对应 |
+|:---|:---|:---:|:---|:---|
+| Curry-Howard 对应 | `00_meta/expressiveness_multiview.md` | 分析→评价 | 类型语义 | 直觉主义逻辑 |
+| CPS/async 等价性 | 同上 | 评价 | 控制语义 | λ 演算 + 续体 |
+| π 演算 channel 移动 | 同上 | 分析 | 并发语义 | 线性 π 演算 |
+| 参数性 Theorems for Free | 同上 | 评价 | 抽象语义 | Reynolds 1983 |
+| 信息流控制 IFC | 同上 | 评价 | 安全语义 | Denning 1976 |
+
+### 11.3 惯用法谱系（Idioms Spectrum）
+
+| 概念 | 文件 | Bloom | 层级 | 效率 |
+|:---|:---|:---:|:---|:---:|
+| 七层惯用法谱系 | `06_ecosystem/03_idioms_spectrum.md` | 应用→分析 | L0-L6 | 零成本 |
+| Typestate 模式 | 同上 | 应用 | L1 类型级 | 零成本 |
+| Tower Service 组合 | 同上 | 分析 | L6 架构级 | 低开销 |
+| ECS Archetype | 同上 | 分析 | L6 架构级 | 零成本 |
+| 反惯用法判定树 | 同上 | 评价 | — | — |
+
+### 11.4 执行模型同构性（Execution Model Isomorphism）
+
+| 概念 | 文件 | Bloom | 执行模型 | 与 Go 同构度 |
+|:---|:---|:---:|:---|:---:|
+| 七类执行模型矩阵 | `05_comparative/05_execution_model_isomorphism.md` | 分析→评价 | 同步/异步/并行/CSP/Actor/内存/事件 | — |
+| async 与 goroutine 不同构 | 同上 | 评价 | 异步 vs 有栈协程 | 不同构 |
+| Rust-C++ 内存模型同构 | 同上 | 分析 | 原子序 Ordering | 同构 |
+| 三重等价性 | 同上 | 评价 | async/CPS/状态机 | 等价 |
+
+### 11.5 系统设计原则（System Design Principles）
+
+| 概念 | 文件 | Bloom | 国际权威对应 | 设计维度 |
+|:---|:---|:---:|:---|:---|
+| Capability-Based Security | `06_ecosystem/05_system_design_principles.md` | 评价→创造 | Dennis & Van Horn 1966 | 内存安全 |
+| Session Types 编码 | 同上 | 评价 | Honda 1993, Wadler 2012 | 并发安全 |
+| 零成本抽象 Stroustrup | 同上 | 评价 | Stroustrup 1994 | 性能 |
+| Error Kernel 模式 | 同上 | 创造 | Armstrong 2003 | 容错 |
+| 帕累托前沿决策 | 同上 | 创造 | — | 权衡 |
+
+### 11.6 四层全局关系图谱
+
+| 图谱 | 文件 | Bloom | 关系粒度 | 思维表征 |
+|:---|:---|:---:|:---|:---|
+| 跨层依赖拓扑 | `00_meta/inter_layer_topology.md` | 元 | 层间 ⟹/←/≡/⊘ | Mermaid + 矩阵 |
+| 层内模型映射 | `00_meta/intra_layer_model_map.md` | 元 | 模型间 ≡/⟹ | Mermaid + 矩阵 |
+| 定理推理森林 | `00_meta/theorem_inference_forest.md` | 元 | 公理→定理→推论 | 层级树 + Mermaid |
+| 边界扩展树 | `00_meta/boundary_extension_tree.md` | 元 | 安全边界扩展 | Mermaid + 风险矩阵 |
+
+---
+
 ## 八、TODO
 
 - [x] **高**: Wave 6 全量深度重构（27/27 文件）
@@ -524,6 +598,7 @@
 - [x] **低**: 导出为机器可解析格式（JSON/YAML）供自动一致性检查 —— 已完成 `concept_index.json`
 - [x] **高**: Wave 11 表征空间元分析（semantic_space.md）
 - [x] **低**: 与 `inter_layer_map.md` 的层间映射同步更新 —— ✅ 已完成
+- [x] **高**: Phase 7 五维主线升华（9 个新文件 + 四层全局关系图谱）— ✅ 2026-05-21 完成
 
 ---
 
@@ -531,7 +606,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-21
+**状态**: ✅ Phase 7 五维升华完成
