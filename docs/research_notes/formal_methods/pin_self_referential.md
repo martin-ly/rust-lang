@@ -799,3 +799,20 @@ async fn use_future() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Pointer (computer programming)]**
+
+> **[来源: Rust Reference - Pin]**
+
+> **[来源: Rustonomicon - Self-Referential Types]**
+
+> **[来源: TRPL Ch. 17 - Pin]**
+
+> **[来源: RFC 2349 - Pin API]**
+
+> **[来源: ACM - Safe Self-Referential Structures]**

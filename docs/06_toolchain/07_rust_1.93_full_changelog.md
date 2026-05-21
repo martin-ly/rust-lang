@@ -657,3 +657,16 @@ Rust 1.95+ 重要更新：
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Rust Release Notes]**
+
+> **[来源: RFCs - rust-lang/rfcs]**
+
+> **[来源: Rust Blog]**
+
+> **[来源: Rust Reference]**

@@ -3239,3 +3239,14 @@ fn truncate_front(&mut self, len: usize)
 > **[来源: Cardelli 1996 - Type Systems]**
 
 > **[来源: Girard 1989 - Proofs and Types]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages Survey]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

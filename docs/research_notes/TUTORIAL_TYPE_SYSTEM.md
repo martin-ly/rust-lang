@@ -759,3 +759,20 @@ Rust类型系统
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: Wikipedia - Hindley-Milner]**
+
+> **[来源: TRPL Ch. 3 - Common Types]**
+
+> **[来源: TRPL Ch. 10 - Generics]**
+
+> **[来源: Rust Reference - Type System]**
+
+> **[来源: Pierce 2002 - TAPL]**

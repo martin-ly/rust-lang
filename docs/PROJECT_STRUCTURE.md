@@ -7,6 +7,7 @@
 ---
 
 ## 目录概览
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -24,6 +25,7 @@ rust-lang/
 ---
 
 ## 文档结构 (docs/)
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -48,6 +50,7 @@ docs/
 ---
 
 ## Crate 结构 (crates/)
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心学习 Crate
@@ -235,7 +238,6 @@ integration_tests   # 集成测试
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

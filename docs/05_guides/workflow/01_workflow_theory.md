@@ -1086,3 +1086,16 @@ fn execute_workflow_steps(
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Workflow]**
+
+> **[来源: Wikipedia - Software Development Process]**
+
+> **[来源: ACM - Development Workflow Patterns]**
+
+> **[来源: IEEE - Software Process Standards]**

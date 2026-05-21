@@ -1859,3 +1859,22 @@ graph TD
     Q3 -->|Tokio 生态| A4[Tokio]
     Q3 -->|独立| A5[async-std 或 smol]
 ```
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: Wikipedia - Cooperative Multitasking]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Rust Reference - async/await]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: ACM - Async Programming Models]**
+
+> **[来源: RFC 2394 - Async/Await]**

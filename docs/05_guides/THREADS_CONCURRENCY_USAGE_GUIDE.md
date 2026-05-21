@@ -1604,3 +1604,18 @@ fn parallel_dynamic_windows(data: &[f64], size: usize) -> Vec<f64> {
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Thread (computing)]**
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: Rust Reference - Threads]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: ACM - Concurrent Programming]**

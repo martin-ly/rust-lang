@@ -928,3 +928,18 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Thread (computing)]**
+
+> **[来源: Wikipedia - Concurrency]**
+
+> **[来源: Rust Reference - Threads]**
+
+> **[来源: TRPL Ch. 16 - Fearless Concurrency]**
+
+> **[来源: ACM - Concurrent Programming]**

@@ -2,34 +2,38 @@
 
 本文档提供针对大型 Rust 项目（2000+ 依赖）的编译速度优化方案。
 
-
 ## 📑 目录
 >
-- [🚀 快速开始](#快速开始)
-  - [1. 安装优化工具](#1-安装优化工具)
-  - [2. 使用优化脚本编译](#2-使用优化脚本编译)
-- [⚙️ 环境变量配置](#环境变量配置)
-  - [Windows (PowerShell)](#windows-powershell)
-  - [Linux/macOS (Bash/Zsh)](#linuxmacos-bashzsh)
-- [📊 优化效果对比](#优化效果对比)
-- [🔧 配置文件说明](#配置文件说明)
-  - [.cargo/config.toml](#cargoconfigtoml)
-  - [Cargo.toml Profile 配置](#cargotoml-profile-配置)
-- [🛠️ 推荐工具](#推荐工具)
-- [📈 性能监控](#性能监控)
-  - [查看编译时间](#查看编译时间)
-  - [sccache 统计](#sccache-统计)
-- [🧹 清理和重置](#清理和重置)
-- [🔬 进阶优化](#进阶优化)
-  - [使用 Nightly 工具链（可选）](#使用-nightly-工具链可选)
-  - [内存优化（大型项目）](#内存优化大型项目)
-- [⚠️ 注意事项](#注意事项)
-- [📚 参考资源](#参考资源)
+- [Cargo 编译速度优化指南](#cargo-编译速度优化指南)
+  - [📑 目录](#-目录)
+  - [🚀 快速开始](#-快速开始)
+    - [1. 安装优化工具](#1-安装优化工具)
+    - [2. 使用优化脚本编译](#2-使用优化脚本编译)
+  - [⚙️ 环境变量配置](#️-环境变量配置)
+    - [Windows (PowerShell)](#windows-powershell)
+    - [Linux/macOS (Bash/Zsh)](#linuxmacos-bashzsh)
+  - [📊 优化效果对比](#-优化效果对比)
+  - [🔧 配置文件说明](#-配置文件说明)
+    - [.cargo/config.toml](#cargoconfigtoml)
+    - [Cargo.toml Profile 配置](#cargotoml-profile-配置)
+  - [🛠️ 推荐工具](#️-推荐工具)
+  - [📈 性能监控](#-性能监控)
+    - [查看编译时间](#查看编译时间)
+    - [sccache 统计](#sccache-统计)
+  - [🧹 清理和重置](#-清理和重置)
+  - [🔬 进阶优化](#-进阶优化)
+    - [使用 Nightly 工具链（可选）](#使用-nightly-工具链可选)
+    - [内存优化（大型项目）](#内存优化大型项目)
+  - [⚠️ 注意事项](#️-注意事项)
+  - [📚 参考资源](#-参考资源)
+  - [相关概念](#相关概念)
 
 ## 🚀 快速开始
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 安装优化工具
+>
 > **[来源: Rust Official Docs]**
 
 **Windows (PowerShell):**
@@ -46,6 +50,7 @@ chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
 ### 2. 使用优化脚本编译
+>
 > **[来源: Rust Official Docs]**
 
 ```powershell
@@ -63,11 +68,13 @@ chmod +x ./scripts/cargo-build-optimized.sh
 ```
 
 ## ⚙️ 环境变量配置
+>
 > **[来源: Rust Official Docs]**
 
 将以下内容添加到你的 PowerShell 配置文件 (`$PROFILE`) 或 `.bashrc`/`.zshrc`：
 
 ### Windows (PowerShell)
+>
 > **[来源: Rust Official Docs]**
 
 ```powershell
@@ -93,6 +100,7 @@ $env:CARGO_PROFILE_RELEASE_CODEGEN_UNITS = "16"
 ```
 
 ### Linux/macOS (Bash/Zsh)
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -116,6 +124,7 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 ```
 
 ## 📊 优化效果对比
+>
 > **[来源: Rust Official Docs]**
 
 | 优化项 | 预期效果 | 配置位置 |
@@ -127,9 +136,11 @@ export CARGO_PROFILE_RELEASE_CODEGEN_UNITS="16"
 | 并行编译 | 充分利用多核CPU | 环境变量 |
 
 ## 🔧 配置文件说明
+>
 > **[来源: Rust Official Docs]**
 
 ### .cargo/config.toml
+>
 > **[来源: Rust Official Docs]**
 
 主要优化配置：
@@ -149,6 +160,7 @@ protocol = "sparse"
 ```
 
 ### Cargo.toml Profile 配置
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -167,6 +179,7 @@ codegen-units = 1024
 ```
 
 ## 🛠️ 推荐工具
+>
 > **[来源: Rust Official Docs]**
 
 | 工具 | 用途 | 安装命令 |
@@ -265,11 +278,9 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

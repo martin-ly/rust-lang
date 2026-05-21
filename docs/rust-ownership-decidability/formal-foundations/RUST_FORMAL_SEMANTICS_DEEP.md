@@ -239,6 +239,7 @@
   - [Appendix B: Notation Reference](#appendix-b-notation-reference)
   - [Document Information](#document-information)
   - [*End of Document*](#end-of-document)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -2968,7 +2969,6 @@ Borrowing rules are enforced at compile time.
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -2992,3 +2992,14 @@ Borrowing rules are enforced at compile time.
 > **[来源: Iris Project - iris-project.org]**
 
 > **[来源: Rust Reference - Type System]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages Survey]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

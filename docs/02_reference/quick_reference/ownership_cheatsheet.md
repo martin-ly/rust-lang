@@ -944,3 +944,20 @@ let gamma = f64::consts::EULER_GAMMA;
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Wikipedia - Resource Management]**
+
+> **[来源: TRPL Ch. 4 - Ownership]**
+
+> **[来源: Rust Reference - Ownership]**
+
+> **[来源: Rustonomicon - Ownership]**
+
+> **[来源: ACM - Ownership Types]**

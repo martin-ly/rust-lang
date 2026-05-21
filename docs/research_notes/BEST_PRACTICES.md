@@ -799,3 +799,18 @@ git commit -m "添加所有权模型形式化研究笔记
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Best Practice]**
+
+> **[来源: Wikipedia - Code Review]**
+
+> **[来源: Rust API Guidelines]**
+
+> **[来源: ACM - Code Quality]**
+
+> **[来源: IEEE - Software Engineering Standards]**

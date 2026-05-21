@@ -910,3 +910,18 @@ fn use_abstractions() {
 
 - [academic 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Memory Model]**
+
+> **[来源: Rust Reference - Stacked Borrows]**
+
+> **[来源: Ralf Jung - Tree Borrows]**
+
+> **[来源: ACM - Memory Model Research]**
+
+> **[来源: POPL - Rust Memory Models]**

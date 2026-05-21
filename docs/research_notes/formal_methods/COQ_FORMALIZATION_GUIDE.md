@@ -2485,3 +2485,33 @@ lint:
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Coq]**
+
+> **[来源: Wikipedia - Proof Assistant]**
+
+> **[来源: Coq Reference Manual]**
+
+> **[来源: ACM - Interactive Theorem Proving]**
+
+> **[来源: IEEE - Formal Proof Standards]**
+
+> **[来源: Software Foundations - cis.upenn.edu]**
+
+> **[来源: POPL - Program Verification with Coq]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages Survey]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

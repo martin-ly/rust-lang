@@ -1217,3 +1217,20 @@ let saga = Saga::new()
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: TRPL]**
+
+> **[来源: Rust Standard Library]**
+
+> **[来源: Stack Overflow Rust Tag]**
+
+> **[来源: Rust Users Forum]**

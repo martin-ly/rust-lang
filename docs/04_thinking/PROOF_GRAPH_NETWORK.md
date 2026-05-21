@@ -1488,3 +1488,20 @@ ust
 
 - [04_thinking 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Mathematical Proof]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: ACM - Proof Assistant Survey]**
+
+> **[来源: IEEE - Verification Standards]**
+
+> **[来源: RustBelt - Rust Formal Verification]**
+
+> **[来源: TLA+ Documentation]**

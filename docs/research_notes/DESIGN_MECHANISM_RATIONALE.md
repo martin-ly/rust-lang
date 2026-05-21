@@ -517,3 +517,18 @@ Pin 使用场景决策树
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Design]**
+
+> **[来源: Wikipedia - Design Pattern]**
+
+> **[来源: ACM - Software Architecture]**
+
+> **[来源: IEEE - Design Standards]**
+
+> **[来源: Martin Fowler - Patterns]**

@@ -3,40 +3,45 @@
 > **日期**: 2026-04-10
 > **目标**: 从旧版Rust工具链迁移到最新生态
 
-
 ## 📑 目录
 >
-- [迁移清单](#迁移清单)
-  - [1. 工具链更新](#1-工具链更新)
-  - [2. 代码现代化](#2-代码现代化)
-    - [lazy_static → LazyLock](#lazy_static-lazylock)
-    - [async-trait → 原生async trait](#async-trait-原生async-trait)
-    - [生成器 → gen关键字](#生成器-gen关键字)
-  - [3. 配置更新](#3-配置更新)
-    - [Cargo.toml](#cargotoml)
-  - [4. CI/CD更新](#4-cicd更新)
-- [Rust 1.96 迁移章节](#rust-196-迁移章节)
-  - [概述](#概述)
-  - [从 1.94 到 1.96 的完整步骤](#从-194-到-196-的完整步骤)
-    - [步骤 1: 环境准备](#步骤-1-环境准备)
-    - [步骤 2: 依赖更新](#步骤-2-依赖更新)
-    - [步骤 3: 代码迁移](#步骤-3-代码迁移)
-    - [步骤 4: 测试验证](#步骤-4-测试验证)
-    - [步骤 5: 持续集成更新](#步骤-5-持续集成更新)
-  - [常见问题](#常见问题)
-    - [Q1: if let guards 导致编译错误？](#q1-if-let-guards-导致编译错误)
-    - [Q2: RangeInclusive 类型不匹配？](#q2-rangeinclusive-类型不匹配)
-    - [Q3: 新的 lint 警告导致 CI 失败？](#q3-新的-lint-警告导致-ci-失败)
-    - [Q4: Pin 转换失败？](#q4-pin-转换失败)
-    - [Q5: 元组 coercion 不生效？](#q5-元组-coercion-不生效)
-  - [版本兼容性表](#版本兼容性表)
-  - [回滚指南](#回滚指南)
-- [参考资源](#参考资源)
+- [2026年迁移指南](#2026年迁移指南)
+  - [📑 目录](#-目录)
+  - [迁移清单](#迁移清单)
+    - [1. 工具链更新](#1-工具链更新)
+    - [2. 代码现代化](#2-代码现代化)
+      - [lazy\_static → LazyLock](#lazy_static--lazylock)
+      - [async-trait → 原生async trait](#async-trait--原生async-trait)
+      - [生成器 → gen关键字](#生成器--gen关键字)
+    - [3. 配置更新](#3-配置更新)
+      - [Cargo.toml](#cargotoml)
+    - [4. CI/CD更新](#4-cicd更新)
+  - [Rust 1.96 迁移章节](#rust-196-迁移章节)
+    - [概述](#概述)
+    - [从 1.94 到 1.96 的完整步骤](#从-194-到-196-的完整步骤)
+      - [步骤 1: 环境准备](#步骤-1-环境准备)
+      - [步骤 2: 依赖更新](#步骤-2-依赖更新)
+      - [步骤 3: 代码迁移](#步骤-3-代码迁移)
+      - [步骤 4: 测试验证](#步骤-4-测试验证)
+      - [步骤 5: 持续集成更新](#步骤-5-持续集成更新)
+    - [常见问题](#常见问题)
+      - [Q1: if let guards 导致编译错误？](#q1-if-let-guards-导致编译错误)
+      - [Q2: RangeInclusive 类型不匹配？](#q2-rangeinclusive-类型不匹配)
+      - [Q3: 新的 lint 警告导致 CI 失败？](#q3-新的-lint-警告导致-ci-失败)
+      - [Q4: Pin 转换失败？](#q4-pin-转换失败)
+      - [Q5: 元组 coercion 不生效？](#q5-元组-coercion-不生效)
+    - [版本兼容性表](#版本兼容性表)
+    - [回滚指南](#回滚指南)
+  - [参考资源](#参考资源)
+  - [**详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md](#详细指南-2026_rust_ecosystem_comprehensive_reviewmd)
+  - [相关概念](#相关概念)
 
 ## 迁移清单
+>
 > **[来源: Rust Official Docs]**
 
 ### 1. 工具链更新
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -50,9 +55,11 @@ cargo install cargo-update cargo-tree cargo-outdated
 ```
 
 ### 2. 代码现代化
+>
 > **[来源: Rust Official Docs]**
 
 #### lazy_static → LazyLock
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -68,6 +75,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 ```
 
 #### async-trait → 原生async trait
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -84,6 +92,7 @@ trait Storage {
 ```
 
 #### 生成器 → gen关键字
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -96,9 +105,11 @@ gen fn my_gen() -> i32 { yield 1; }
 ```
 
 ### 3. 配置更新
+>
 > **[来源: Rust Official Docs]**
 
 #### Cargo.toml
+>
 > **[来源: Rust Official Docs]**
 
 ```toml
@@ -116,6 +127,7 @@ redundant_guards = "warn"
 ```
 
 ### 4. CI/CD更新
+>
 > **[来源: Rust Official Docs]**
 
 ```yaml
@@ -130,9 +142,11 @@ redundant_guards = "warn"
 ---
 
 ## Rust 1.96 迁移章节
+>
 > **[来源: Rust Official Docs]**
 
 ### 概述
+>
 > **[来源: Rust Official Docs]**
 
 Rust 1.95/1.96 引入了多项重要特性，包括 `if let guards` (1.95)、Range 类型改进和元组 coercion。本章节指导您从 1.94 平滑迁移到 1.96。
@@ -416,7 +430,6 @@ git checkout -- .
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

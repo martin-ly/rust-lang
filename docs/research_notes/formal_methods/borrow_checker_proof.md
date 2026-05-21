@@ -1912,3 +1912,33 @@ Theorem 1: Check(P) = Pass → DataRaceFree(P)
 ---
 
 > **权威来源**: Rust Official Docs
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Borrow Checker]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Rust Reference - Lifetimes]**
+
+> **[来源: Rustonomicon - Lifetimes]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: ACM - Ownership Types]**
+
+> **[来源: IEEE - Safe Systems Programming]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages Survey]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

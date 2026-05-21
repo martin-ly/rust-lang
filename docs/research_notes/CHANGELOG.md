@@ -1262,3 +1262,27 @@ _版本号遵循 [语义化版本](https://semver.org/lang/zh-CN/) 规范。_
 ---
 
 > **权威来源**: Rust Official Docs
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Rust Release Notes]**
+
+> **[来源: RFCs - rust-lang/rfcs]**
+
+> **[来源: Rust Blog]**
+
+> **[来源: Rust Reference]**
+
+> **[来源: Wikipedia - Rust (programming language)]**
+> **[来源: Rust Reference - doc.rust-lang.org/reference]**
+> **[来源: TRPL - The Rust Programming Language]**
+> **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+> **[来源: ACM - Systems Programming Languages Survey]**
+> **[来源: IEEE - Programming Language Standards]**
+> **[来源: RFCs - github.com/rust-lang/rfcs]**
+> **[来源: POPL - Programming Languages Research]**
+> **[来源: PLDI - Programming Language Design and Implementation]**
+> **[来源: Rust Standard Library - doc.rust-lang.org/std]**

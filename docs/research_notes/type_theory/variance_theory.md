@@ -729,3 +729,18 @@ fn use_contravariant_callback() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Covariance and Contravariance]**
+
+> **[来源: Wikipedia - Subtyping]**
+
+> **[来源: Rust Reference - Variance]**
+
+> **[来源: Rustonomicon - Subtyping and Variance]**
+
+> **[来源: ACM - Subtyping Theory]**

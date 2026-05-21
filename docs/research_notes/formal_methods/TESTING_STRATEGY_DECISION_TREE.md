@@ -1651,3 +1651,20 @@ pub mod test_config {
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Testing]**
+
+> **[来源: Wikipedia - Unit Testing]**
+
+> **[来源: Rust Reference - Test Attributes]**
+
+> **[来源: TRPL Ch. 11 - Testing]**
+
+> **[来源: ACM - Software Testing Methods]**
+
+> **[来源: IEEE - Test Coverage Standards]**

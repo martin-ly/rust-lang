@@ -1443,3 +1443,22 @@ $$\text{StateMachineGen}[\text{loop-match}] \rightarrow \text{OptimizedCodeGen}[
 ---
 
 > **权威来源**: Rust Official Docs
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - State Machine]**
+
+> **[来源: Wikipedia - Coroutine]**
+
+> **[来源: Rust Reference - async/await]**
+
+> **[来源: TRPL Ch. 17 - Async]**
+
+> **[来源: Tokio Documentation]**
+
+> **[来源: ACM - Async State Machines]**
+
+> **[来源: RFC 2394 - Async/Await]**

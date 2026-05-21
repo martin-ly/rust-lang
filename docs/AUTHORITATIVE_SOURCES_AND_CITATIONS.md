@@ -9,38 +9,42 @@
 
 ---
 
-
 ## 📑 目录
 >
-- [Rust 1.94.0 权威来源](#rust-1940-权威来源)
-  - [官方发布](#官方发布)
-  - [核心特性权威说明](#核心特性权威说明)
-    - [1. array_windows - 切片迭代方法](#1-array_windows---切片迭代方法)
-    - [2. LazyCell/LazyLock API稳定化](#2-lazycelllazylock-api稳定化)
-    - [3. AVX-512 FP16 Intrinsics](#3-avx-512-fp16-intrinsics)
-    - [4. Cargo TOML 1.1支持](#4-cargo-toml-11支持)
-- [Tree Borrows 权威来源](#tree-borrows-权威来源)
-  - [学术论文](#学术论文)
-  - [学术认可](#学术认可)
-  - [Tree Borrows核心优势](#tree-borrows核心优势)
-  - [与Stacked Borrows对比](#与stacked-borrows对比)
-- [Rust 2024 Edition 权威来源](#rust-2024-edition-权威来源)
-  - [官方文档](#官方文档)
-  - [gen关键字权威说明](#gen关键字权威说明)
-  - [Edition 2024主要变更 (官方)](#edition-2024主要变更-官方)
-- [Miri 权威来源](#miri-权威来源)
-  - [功能扩展 (2023-2026)](#功能扩展-2023-2026)
-  - [并发与性能改进](#并发与性能改进)
-  - [核心论文引用](#核心论文引用)
-- [大型项目迁移案例](#大型项目迁移案例)
-  - [Rust 2024 Edition迁移实践](#rust-2024-edition迁移实践)
-- [引用格式规范](#引用格式规范)
-  - [学术论文引用](#学术论文引用)
-  - [官方文档引用](#官方文档引用)
-  - [博客文章引用](#博客文章引用)
-- [验证清单](#验证清单)
+- [权威来源与引用](#权威来源与引用)
+  - [📑 目录](#-目录)
+  - [Rust 1.94.0 权威来源](#rust-1940-权威来源)
+    - [官方发布](#官方发布)
+    - [核心特性权威说明](#核心特性权威说明)
+      - [1. `array_windows` - 切片迭代方法](#1-array_windows---切片迭代方法)
+      - [2. LazyCell/LazyLock API稳定化](#2-lazycelllazylock-api稳定化)
+      - [3. AVX-512 FP16 Intrinsics](#3-avx-512-fp16-intrinsics)
+      - [4. Cargo TOML 1.1支持](#4-cargo-toml-11支持)
+  - [Tree Borrows 权威来源](#tree-borrows-权威来源)
+    - [学术论文](#学术论文)
+    - [学术认可](#学术认可)
+    - [Tree Borrows核心优势](#tree-borrows核心优势)
+    - [与Stacked Borrows对比](#与stacked-borrows对比)
+  - [Rust 2024 Edition 权威来源](#rust-2024-edition-权威来源)
+    - [官方文档](#官方文档)
+    - [gen关键字权威说明](#gen关键字权威说明)
+    - [Edition 2024主要变更 (官方)](#edition-2024主要变更-官方)
+  - [Miri 权威来源](#miri-权威来源)
+    - [功能扩展 (2023-2026)](#功能扩展-2023-2026)
+    - [并发与性能改进](#并发与性能改进)
+    - [核心论文引用](#核心论文引用)
+  - [大型项目迁移案例](#大型项目迁移案例)
+    - [Rust 2024 Edition迁移实践](#rust-2024-edition迁移实践)
+  - [引用格式规范](#引用格式规范)
+    - [学术论文引用](#学术论文引用)
+    - [官方文档引用](#官方文档引用)
+    - [博客文章引用](#博客文章引用)
+  - [验证清单](#验证清单)
+  - [**维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确](#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确)
+  - [相关概念](#相关概念)
 
 ## Rust 1.94.0 权威来源
+>
 > **[来源: Rust Official Docs]**
 
 ### 官方发布
@@ -52,9 +56,11 @@
 | InfoWorld报道 | <https://www.infoworld.com/article/4141483/> | 2026-03-05 | 技术特性解读 |
 
 ### 核心特性权威说明
+>
 > **[来源: Rust Official Docs]**
 
 #### 1. `array_windows` - 切片迭代方法
+>
 > **[来源: Rust Official Docs]**
 
 > "Rust 1.94 adds `array_windows`, an iterating method for slices. It works just like `windows` but with a constant length, so the iterator items are `&[T; N]` rather than dynamically-sized `&[T]`. In many cases, the window length may even be inferred by how the iterator is used!"
@@ -72,6 +78,7 @@ fn has_abba(s: &str) -> bool {
 ```
 
 #### 2. LazyCell/LazyLock API稳定化
+>
 > **[来源: Rust Official Docs]**
 
 **稳定化API列表** (官方)：
@@ -103,6 +110,7 @@ fn has_abba(s: &str) -> bool {
 > —— **HotHardware**, 2025-11-10
 
 #### 4. Cargo TOML 1.1支持
+>
 > **[来源: Rust Official Docs]**
 
 > "Cargo now parses TOML v1.1 for manifests and configuration files. Changes in TOML 1.1 include inline tables across multiple lines and with trailing commas, `\xHH` and `\e` string escape characters, and optional seconds in times."
@@ -112,9 +120,11 @@ fn has_abba(s: &str) -> bool {
 ---
 
 ## Tree Borrows 权威来源
+>
 > **[来源: Rust Official Docs]**
 
 ### 学术论文
+>
 > **[来源: Rust Official Docs]**
 
 | 论文 | 作者 | 会议 | 链接 |
@@ -123,6 +133,7 @@ fn has_abba(s: &str) -> bool {
 | Miri: Practical Undefined Behavior Detection for Rust | Ralf Jung et al. | POPL 2026 | <https://plf.inf.ethz.ch/research/popl26-miri.html> |
 
 ### 学术认可
+>
 > **[来源: Rust Official Docs]**
 
 > "We are pleased to announce that our paper 'Miri: Practical Undefined Behavior Detection for Rust' has been accepted at **POPL 2026**. Miri has come a long way since its first public release in 2017."
@@ -130,6 +141,7 @@ fn has_abba(s: &str) -> bool {
 > —— **Ralf Jung, ETH Zurich Programming Languages Group**, 2025-12-23
 
 ### Tree Borrows核心优势
+>
 > **[来源: Rust Official Docs]**
 
 来自官方文档 (doc.rust-lang.org/beta/nightly-rustc/miri/)：
@@ -137,6 +149,7 @@ fn has_abba(s: &str) -> bool {
 > "Tree structure with both parents and children since we want to be able to traverse the tree efficiently in both directions."
 
 ### 与Stacked Borrows对比
+>
 > **[来源: Rust Official Docs]**
 
 | 特性 | Stacked Borrows | Tree Borrows |
@@ -151,6 +164,7 @@ fn has_abba(s: &str) -> bool {
 ---
 
 ## Rust 2024 Edition 权威来源
+>
 > **[来源: Rust Official Docs]**
 
 ### 官方文档
@@ -305,11 +319,9 @@ Cargo：
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

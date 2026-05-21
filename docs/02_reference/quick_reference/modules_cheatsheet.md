@@ -1058,3 +1058,18 @@ let gamma = f64::consts::EULER_GAMMA;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Modular Programming]**
+
+> **[来源: Wikipedia - Software Component]**
+
+> **[来源: Rust Reference - Modules]**
+
+> **[来源: TRPL Ch. 7 - Packages and Modules]**
+
+> **[来源: ACM - Modular Software Design]**

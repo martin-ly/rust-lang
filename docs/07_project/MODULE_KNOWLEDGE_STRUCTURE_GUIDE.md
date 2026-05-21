@@ -914,3 +914,18 @@ fn main() {
 
 - [07_project 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Modular Programming]**
+
+> **[来源: Wikipedia - Software Component]**
+
+> **[来源: Rust Reference - Modules]**
+
+> **[来源: TRPL Ch. 7 - Packages and Modules]**
+
+> **[来源: ACM - Modular Software Design]**

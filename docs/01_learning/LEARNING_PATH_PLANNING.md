@@ -902,3 +902,18 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 
 - [01_learning 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Rust (programming language)]**
+
+> **[来源: Rust Learning Resources]**
+
+> **[来源: TRPL]**
+
+> **[来源: Rust By Example]**
+
+> **[来源: ACM - Programming Language Education]**

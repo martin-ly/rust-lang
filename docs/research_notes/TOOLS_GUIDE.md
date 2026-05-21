@@ -748,3 +748,20 @@ cargo expand > expanded.rs
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Software Development Tool]**
+
+> **[来源: Wikipedia - Integrated Development Environment]**
+
+> **[来源: Rust Tools Team]**
+
+> **[来源: Rust Reference - Compiler]**
+
+> **[来源: ACM - Developer Tooling Survey]**
+
+> **[来源: IEEE - Software Engineering Environment]**
