@@ -1,23 +1,13 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-21T12:24:57.502549
+> 生成时间: 2026-05-21T12:51:08.104818
 > 扫描文件数: 58
-> 提取概念定义数: 417
+> 提取概念定义数: 418
 > 跨文件引用数: 165
 
 ## 目录
 
-- [概念一致性审计报告 (Concept Consistency Report)](#概念一致性审计报告-concept-consistency-report)
-  - [目录](#目录)
-  - [一、执行摘要](#一执行摘要)
-  - [二、Send / Sync 一致性检查](#二send--sync-一致性检查)
-  - [三、所有权三规则一致性检查](#三所有权三规则一致性检查)
-  - [四、生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
-  - [五、unsafe 语义一致性检查](#五unsafe-语义一致性检查)
-  - [六、跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
-  - [七、附录：概念定义统计](#七附录概念定义统计)
-    - [7.1 按概念分类统计](#71-按概念分类统计)
-    - [7.2 按文件统计](#72-按文件统计)
+- [概念一致性审计报告 (Concept Consistency Report)](#)
 
 ---
 
@@ -60,7 +50,7 @@
 |:---|:---|:---|
 | unsafe-UB | 107 | 28 |
 | 所有权-Move语义 | 71 | 25 |
-| Send+Sync | 43 | 19 |
+| Send+Sync | 44 | 20 |
 | 所有权-作用域绑定 | 31 | 13 |
 | unsafe-契约 | 30 | 12 |
 | 所有权-唯一所有权 | 28 | 13 |
@@ -113,7 +103,7 @@
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |
 | concept\04_formal\04_rustbelt.md | 4 | 4 | 27 |
-| concept\04_formal\05_verification_toolchain.md | 1 | 1 | 11 |
+| concept\04_formal\05_verification_toolchain.md | 1 | 1 | 14 |
 | concept\05_comparative\01_rust_vs_cpp.md | 11 | 1 | 41 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -134,7 +124,7 @@
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 30 |
-| concept\07_future\04_effects_system.md | 3 | 3 | 9 |
+| concept\07_future\04_effects_system.md | 4 | 3 | 12 |
 | concept\07_future\05_rust_version_tracking.md | 0 | 1 | 20 |
 
 ---

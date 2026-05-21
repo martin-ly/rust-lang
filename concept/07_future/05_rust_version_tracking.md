@@ -11,6 +11,40 @@
 
 > **Bloom 层级**: 分析 → 应用
 >
+## 〇、形式模型演进认知入口
+
+```mermaid
+mindmap
+  root((Rust 形式模型演进<br/>1.79 → 1.97+))
+    所有权与别名模型
+      raw_op[&raw 操作符 1.82<br/>消除中间引用 UB]
+      if_let_guards[if-let guards 1.95<br/>模式匹配条件细化]
+      let_chains[let chains 1.88<br/>逻辑合取与模式绑定]
+      get_disjoint[get_disjoint_mut 1.85<br/>编译期证明索引不重叠]
+    类型系统扩展
+      precise_capturing[use&lt;..&gt; precise capturing 1.82<br/>存在类型区域参数显化]
+      trait_upcasting[Trait object upcasting 1.86<br/>子类型传递性闭合]
+      infer_const[_ 推断 const generics 1.89<br/>HM 推断向常量扩展]
+      assoc_bounds[Bounds on assoc types 1.79<br/>类型类约束组合传播]
+    异步与效果系统
+      async_closures[Async closures 1.85<br/>高阶函数异步扩展]
+      rpit_capture[RPIT lifetime capture 2024Ed<br/>隐式→显式契约]
+      gen_blocks[gen blocks 1.95 nightly<br/>同步协程语法糖]
+    Unsafe 边界精细化
+      unsafe_extern[unsafe extern + safe 1.82<br/>FFI 权限粒度细化]
+      naked[naked functions 1.88<br/>形式化保证显式逃逸口]
+      unsafe_op[unsafe_op_in_unsafe_fn 2024Ed<br/>调用者与实现者权限分离]
+      as_ref_unchecked[as_ref_unchecked 1.95<br/>指针到引用零成本转换]
+    编译期计算能力
+      inline_const[inline const blocks 1.79<br/>表达式级编译期计算]
+      const_asm[const in asm 1.82/1.87<br/>汇编与 Rust 控制流交互]
+      cold_path[cold_path hint 1.95<br/>性能语义显式表达]
+```
+
+> **认知路径**: 本 mindmap 将 1.79–1.97+ 的演进按**五维形式模型**组织。读者可按自身关注领域选择入口：内存安全研究者从"所有权与别名模型"进入，类型系统研究者从"类型系统扩展"进入，系统编程工程师从"Unsafe 边界精细化"进入。每个叶节点的后缀标注版本号，便于快速定位稳定状态。
+
+---
+
 ## 一、演进总览：五个形式模型维度
 
 ```mermaid
@@ -346,6 +380,38 @@ unsafe extern "C" {
 | **异步语义** | — | — | async closures 稳定 | let chains | — | async gen（RFC）|
 | **Unsafe 边界** | — | `unsafe extern` + `safe` | 2024 Ed RPIT capture | naked functions | `unsafe_op` 默认 | Safety Tags RFC |
 | **编译期计算** | inline const | const in asm | — | — | `cold_path` | `build-std` 进展 |
+
+---
+
+## 七、版本演进时间线
+
+```mermaid
+timeline
+    title Rust 形式模型演进时间线 (1.79 – 1.97+)
+
+    2024 Q2<br/>1.79 stable : inline const blocks : bounds on assoc types
+
+    2024 Q3<br/>1.82 stable : &raw operators : unsafe extern + safe : use&lt;..&gt; precise capturing
+
+    2024 Q4<br/>1.85 stable : extract_if / get_disjoint_mut : AsyncFn trait 家族 : async closures : 2024 Edition
+
+    2025 Q1<br/>1.88 stable : let chains : naked functions : _ infer const generics
+
+    2025 Q2<br/>1.95 stable : if-let guards : as_ref_unchecked : cold_path hint
+    2025 Q2<br/>1.95 nightly : gen blocks
+
+    2025 Q3<br/>1.96 beta : assert_matches! : core::range : NonZero iter : cargo config include
+
+    2026+<br/>1.97+ nightly : Tree Borrows 演进 : Effects 系统讨论 : Safety Tags RFC : async gen / Stream
+```
+
+> **认知功能**: 此 timeline 将版本矩阵的**空间对比**转化为**时间演进**，揭示三个节奏：
+>
+> 1. **稳定节奏**：每 6 周一个 stable release，小步快跑
+> 2. **Edition 节奏**：2024 Edition 是形式模型契约化的里程碑（RPIT capture、unsafe_op、let chains 三箭齐发）
+> 3. **前沿节奏**：nightly 实验（gen blocks、Effects、Safety Tags）到 stable 通常需要 1–3 年
+>
+> 时间轴上的密度分布提示：2024 Q3–Q4 和 2025 Q1–Q2 是形式模型变更最密集的两个窗口，对应 Rust 2024 Edition 的发布周期。
 
 ---
 
