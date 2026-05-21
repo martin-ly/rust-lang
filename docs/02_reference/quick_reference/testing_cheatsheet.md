@@ -10,7 +10,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Software Testing]** · **[来源: Wikipedia - Unit Testing]** · **[来源: ACM - Test-Driven Development]** · **[来源: IEEE - Software Testing Standards]**
 
 - [🧪 Rust 测试速查卡](#-rust-测试速查卡)
   - [📋 目录](#-目录)

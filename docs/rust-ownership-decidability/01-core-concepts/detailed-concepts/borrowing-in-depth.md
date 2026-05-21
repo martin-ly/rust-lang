@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Borrowing (computer science)]** · **[来源: Wikipedia - Alias Analysis]** · **[来源: ACM - Borrow Checker Algorithms]** · **[来源: IEEE - Static Analysis for Memory Safety]**
 
 - [借用深入分析](#借用深入分析)
   - [目录](#目录)

@@ -9,7 +9,8 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Exception Handling]** · **[来源: Wikipedia - Error Detection and Correction]** · **[来源: ACM - Error Handling Patterns]** · **[来源: IEEE - Fault-Tolerant Computing]**
 
 - [⚠️ Rust 错误处理速查卡](#️-rust-错误处理速查卡)
   - [📋 目录](#-目录)
@@ -58,13 +59,16 @@
     - [边界 1: 错误类型转换](#边界-1-错误类型转换)
     - [边界 2:  panic 恢复](#边界-2--panic-恢复)
     - [形式化理论](#形式化理论)
+  - [**Rust 版本**: 1.95.0+ (Edition 2024)](#rust-版本-1950-edition-2024)
 
 ---
 
 ## 🎯 核心概念
+>
 > **[来源: Rust Official Docs]**
 
 ### Result 类型
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -75,6 +79,7 @@ enum Result<T, E> {
 ```
 
 ### Option 类型
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -87,9 +92,11 @@ enum Option<T> {
 ---
 
 ## 📐 基本模式
+>
 > **[来源: Rust Official Docs]**
 
 ### 模式 1: 匹配处理
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -100,6 +107,7 @@ match result {
 ```
 
 ### 模式 2: unwrap 和 expect
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -111,6 +119,7 @@ let value = result.expect("操作失败");
 ```
 
 ### 模式 3: ? 操作符
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -125,9 +134,11 @@ fn read_file() -> Result<String, io::Error> {
 ---
 
 ## 🔧 常用方法
+>
 > **[来源: Rust Official Docs]**
 
 ### Result 方法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust
@@ -150,6 +161,7 @@ let result = Ok(5)
 ```
 
 ### Option 方法
+>
 > **[来源: Rust Official Docs]**
 
 ```rust

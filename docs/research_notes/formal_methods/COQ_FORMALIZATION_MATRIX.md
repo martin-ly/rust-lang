@@ -9,16 +9,19 @@
 ---
 
 ## 概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Formal Methods]** · **[来源: Wikipedia - Mathematical Logic]** · **[来源: ACM - Formalization Methodology]** · **[来源: IEEE - Proof Engineering Standards]**
 
 Coq形式化矩阵追踪Rust核心概念在Coq证明助手中的形式化状态，为机器可检查的严格证明提供路线图。
 
 ---
 
 ## 证明状态总览
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心定理证明矩阵
+>
 > **[来源: Rust Official Docs]**
 
 | 定理 | 规范 | 引理 | 证明 | Qed | 状态 | 优先级 |

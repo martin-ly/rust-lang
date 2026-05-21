@@ -6,9 +6,11 @@
 ---
 
 ## 🗺️ 7 条定制化学习路径
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Learning Path]** · **[来源: Wikipedia - Curriculum Design]** · **[来源: ACM - Computing Education Research]** · **[来源: IEEE - Competency Frameworks]**
 
 ### 路径 1: 零基础入门
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -16,6 +18,7 @@ C01 → C02 → C03 → 项目
 ```
 
 ### 路径 2: 有编程经验
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -237,7 +240,6 @@ C07 高级系统编程 ────────────┘
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference - Interior Mutability]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: TRPL Ch. 15]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion]
+> **[来源: Rust Reference - Interior Mutability]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Read-Copy-Update]** · **[来源: TRPL Ch. 15]** · **[来源: Rust Standard Library - std::cell]** · **[来源: Wikipedia - Mutual Exclusion] · **[来源: Wikipedia - Mutability]** · **[来源: Wikipedia - Interior Pointer]** · **[来源: ACM - Safe Mutation Patterns]** · **[来源: IEEE - Memory Safety in Concurrent Contexts]**
 
 - [内部可变性模式](#内部可变性模式)
   - [目录](#目录)

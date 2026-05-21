@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Region-Based Memory Management]** · **[来源: Wikipedia - Type Inference]** · **[来源: ACM - Lifetime Analysis Algorithms]** · **[来源: IEEE - Static Lifetime Verification]**
 
 - [生命周期精通](#生命周期精通)
   - [目录](#目录)

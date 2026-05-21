@@ -5,11 +5,12 @@
 > **形式化框架**: 容量不变式 + 溢出处理 + 零堆分配验证
 >
 > **参考**: heapless Documentation; The Rust Programming Language (Embedded); Real-Time Systems
-> **[来源: heapless Documentation - docs.rs/heapless]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Real-time Computing]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Stack-based Memory Allocation]** · **[来源: TRPL Ch. 15]**
+> **[来源: heapless Documentation - docs.rs/heapless]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Real-time Computing]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Stack-based Memory Allocation]** · **[来源: TRPL Ch. 15]** · **[来源: Wikipedia - Stack-Based Memory Allocation]** · **[来源: Wikipedia - Fixed-Size Data Structure]** · **[来源: ACM - Heapless Data Structures]** · **[来源: IEEE - Embedded Memory Management]**
 
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Heapless 嵌入式集合形式化分析](#heapless-嵌入式集合形式化分析)
@@ -100,10 +101,12 @@
     - [12.2 复合数据结构设计](#122-复合数据结构设计)
     - [12.3 测试策略](#123-测试策略)
   - [参考文献](#参考文献)
+  - [*最后更新: 2026-03-05*](#最后更新-2026-03-05)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 `heapless` 是Rust嵌入式生态系统中最重要的基础库之一，它为 `no_std` 环境提供了固定容量的集合类型。与标准库的动态分配集合不同，heapless在编译时确定容量，完全避免运行时堆分配。
@@ -125,6 +128,7 @@ $$
 ---
 
 ## 2. 理论基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 固定容量数据结构的代数定义
@@ -1580,7 +1584,6 @@ mod unit_tests {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

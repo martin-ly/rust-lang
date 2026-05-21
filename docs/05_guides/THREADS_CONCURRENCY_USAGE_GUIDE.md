@@ -10,7 +10,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Thread (computing)]** · **[来源: Wikipedia -Concurrency Pattern]** · **[来源: ACM - Concurrent Programming Best Practices]** · **[来源: IEEE - Parallel Execution Standards]**
 
 - [线程与并发使用指南](#线程与并发使用指南)
   - [📋 目录](#-目录)

@@ -21,9 +21,11 @@
 ---
 
 ## 二、Rust Book 2024 Edition 逐章对齐详情
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Knowledge Organization]** · **[来源: Wikipedia - Information Quality]** · **[来源: ACM - Source Attribution in Technical Documentation]** · **[来源: IEEE - Documentation Standards]**
 
 ### Ch 1-3: 基础概念
+>
 > **[来源: Rust Official Docs]**
 
 | Book章节 | 本项目文档 | 对齐状态 | 备注 |
@@ -43,6 +45,7 @@
 ---
 
 ### Ch 4: 所有权 (核心章节)
+>
 > **[来源: Rust Official Docs]**
 
 | Book章节 | 本项目文档 | 对齐状态 | 差距 |

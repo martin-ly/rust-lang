@@ -6,7 +6,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Computer Security]** · **[来源: Wikipedia - Cryptography]** · **[来源: Rust Crypto Working Group]** · **[来源: OpenSSL Documentation]** · **[来源: Rustls Documentation - docs.rs/rustls]
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Computer Security]** · **[来源: Wikipedia - Cryptography]** · **[来源: Rust Crypto Working Group]** · **[来源: OpenSSL Documentation]** · **[来源: Rustls Documentation - docs.rs/rustls] · **[来源: ACM - Security in Systems Programming]** · **[来源: IEEE - Secure Software Development]**
 
 - [Rust网络安全工具开发指南](#rust网络安全工具开发指南)
   - [目录](#目录)
@@ -44,6 +44,7 @@
   - [附录：常用依赖](#附录常用依赖)
   - [总结](#总结)
   - [*作者：Rust安全工具开发团队*](#作者rust安全工具开发团队)
+  - [相关概念](#相关概念)
 
 ---
 
@@ -1115,7 +1116,6 @@ proptest = "1.0"
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

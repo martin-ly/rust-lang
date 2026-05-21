@@ -8,16 +8,19 @@
 ---
 
 ## 概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Formal Verification]** · **[来源: Wikipedia - Model Checking]** · **[来源: ACM - Verification Tool Comparison]** · **[来源: IEEE - Software Verification Standards]**
 
 验证工具矩阵全面梳理Rust生态中的形式化验证工具、静态分析工具和测试工具，为不同验证需求提供工具选型参考。
 
 ---
 
 ## 一、形式化验证工具
+>
 > **[来源: Rust Official Docs]**
 
 ### 定理证明器
+>
 > **[来源: Rust Official Docs]**
 
 | 工具 | 类型 | 学习曲线 | 成熟度 | 适用场景 |

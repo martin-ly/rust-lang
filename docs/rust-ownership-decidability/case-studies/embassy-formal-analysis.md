@@ -5,7 +5,7 @@
 > **形式化框架**: async/await + 无堆分配 + 协作式调度
 >
 > **参考**: Embassy Documentation, Rust Async Working Group
-> **[来源: Embassy Documentation - embassy.dev]** · **[来源: Rust Async Working Group]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rust Embedded Book]** · **[来源: RTIC Documentation - rtic.rs]**
+> **[来源: Embassy Documentation - embassy.dev]** · **[来源: Rust Async Working Group]** · **[来源: Rust Reference - async/await]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Rust Embedded Book]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Embedded Operating System]** · **[来源: ACM - Async Embedded Frameworks]** · **[来源: IEEE - Real-Time Async Scheduling]**
 
 ---
 

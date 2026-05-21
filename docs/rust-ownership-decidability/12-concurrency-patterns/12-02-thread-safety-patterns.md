@@ -8,7 +8,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Thread Safety]** · **[来源: Wikipedia - Mutual Exclusion]** · **[来源: ACM - Safe Concurrency Patterns]** · **[来源: IEEE - Concurrent Programming Standards]**
 
 - [Rust 线程安全模式](#rust-线程安全模式)
   - [目录](#目录)

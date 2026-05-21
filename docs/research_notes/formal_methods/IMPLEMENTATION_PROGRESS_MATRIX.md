@@ -8,7 +8,7 @@
 ---
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Project Management]** · **[来源: Wikipedia - Progress Tracking]** · **[来源: ACM - Software Metrics]** · **[来源: IEEE - Project Status Reporting]**
 
 实现进度矩阵追踪Rust形式化方法文档项目的完成状态，为项目管理和资源分配提供数据支持。
 

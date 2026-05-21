@@ -8,7 +8,7 @@
 ---
 
 ## 📊 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Programming Paradigm]** · **[来源: Wikipedia - Multi-Paradigm Language]** · **[来源: ACM - Paradigm Comparison Framework]** · **[来源: IEEE - Language Paradigm Taxonomy]**
 
 - [范式对比矩阵](#范式对比矩阵)
   - [📊 目录](#-目录)

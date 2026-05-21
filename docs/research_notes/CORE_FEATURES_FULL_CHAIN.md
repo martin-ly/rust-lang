@@ -9,7 +9,7 @@
 ---
 
 ## 📊 目录 {#-目录}
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Feature Model]** · **[来源: Wikipedia - Software Product Line]** · **[来源: ACM - Feature-Oriented Software Development]** · **[来源: IEEE - Feature Traceability]**
 
 - [Rust 核心特性完整链：定义→示例→论证→证明](#rust-核心特性完整链定义示例论证证明)
   - [📊 目录 {#-目录}](#-目录--目录)

@@ -11,7 +11,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Type-Level Programming]** · **[来源: Wikipedia - Peano Axioms]** · **[来源: ACM - Type-Level Computation]** · **[来源: IEEE - Generic Programming in Systems Languages]**
 
 - [Typenum 类型级数字形式化分析](#typenum-类型级数字形式化分析)
   - [目录](#目录)
@@ -60,13 +61,16 @@
     - [11.2 错误信息](#112-错误信息)
     - [11.3 递归限制](#113-递归限制)
     - [11.4 反例：复杂计算](#114-反例复杂计算)
+  - [**代码示例**: 12个完整示例](#代码示例-12个完整示例)
 
 ---
 
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 问题背景
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 在Rust支持const generics之前（Rust 1.51之前），开发者无法在泛型参数中使用整数值。这给需要编译期大小确定的场景带来了挑战：
@@ -1088,7 +1092,6 @@ const COMPLEX: usize = ((100 + 200 + 300) * 4) + (1000 / 5);
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

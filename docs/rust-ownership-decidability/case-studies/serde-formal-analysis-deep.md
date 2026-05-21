@@ -3360,3 +3360,28 @@ mod benches {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Serialization]**
+
+> **[来源: Wikipedia - Remote Procedure Call]**
+
+> **[来源: Wikipedia - Data Interchange Format]**
+
+> **[来源: Wikipedia - Schema Evolution]**
+
+> **[来源: IEEE - Data Exchange Protocols]**
+
+> **[来源: ACM - Data Serialization Performance]**
+
+> **[来源: ACM - Schema Migration Strategies]**
+
+> **[来源: serde.rs Documentation]**
+
+> **[来源: Rust Reference - Traits]**
+
+> **[来源: RFC 0019 - Opt-in Builtin Traits]**

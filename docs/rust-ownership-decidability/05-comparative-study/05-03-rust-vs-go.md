@@ -4,7 +4,7 @@
 > **难度**: 🟢 入门
 > **目标读者**: 系统架构师、后端开发者、技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Go (programming language)]** · **[来源: Rust Reference]** · **[来源: Go Documentation - go.dev/doc]** · **[来源: IEEE Software - Language Comparison Studies]** · **[来源: Stack Overflow Developer Survey 2025]**
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Go (programming language)]** · **[来源: Rust Reference]** · **[来源: Go Documentation - go.dev/doc]** · **[来源: IEEE Software - Language Comparison Studies]** · **[来源: Stack Overflow Developer Survey 2025]** · **[来源: Wikipedia - Concurrent Computing]** · **[来源: ACM - Language Comparison Methodology]** · **[来源: IEEE - Systems Language Benchmarks]**
 
 ---
 

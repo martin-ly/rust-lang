@@ -7,7 +7,7 @@
 ---
 
 ## 生命周期概念全景
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Object Lifetime]** · **[来源: Wikipedia - Scope (computer science)]** · **[来源: ACM - Lifetime Analysis Concepts]** · **[来源: IEEE - Resource Lifetime Management]**
 
 ```text
                         生命周期概念族

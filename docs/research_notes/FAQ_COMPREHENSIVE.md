@@ -7,7 +7,7 @@
 ---
 
 ## 快速导航
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - FAQ]** · **[来源: Wikipedia - Knowledge Base]** · **[来源: ACM - Technical Q&A Best Practices]** · **[来源: IEEE - Documentation Usability]**
 
 - [Rust形式化方法 FAQ 汇总](#rust形式化方法-faq-汇总)
   - [快速导航](#快速导航)

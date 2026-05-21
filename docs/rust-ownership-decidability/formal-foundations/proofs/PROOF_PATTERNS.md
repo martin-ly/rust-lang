@@ -5,7 +5,7 @@
 > **适用框架**: Coq + Iris 分离逻辑
 >
 > **参考**: Pierce (2002). TAPL; Chlipala (2013). CPDT
-> **[来源: Pierce 2002 - Types and Programming Languages (TAPL)]** · **[来源: Chlipala 2013 - Certified Programming with Dependent Types (CPDT)]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: Coq Documentation - coq.inria.fr]** · **[来源: Iris Project - iris-project.org]** · **[来源: POPL 2018 - RustBelt]**
+> **[来源: Pierce 2002 - Types and Programming Languages (TAPL)]** · **[来源: Chlipala 2013 - Certified Programming with Dependent Types (CPDT)]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: Coq Documentation - coq.inria.fr]** · **[来源: Iris Project - iris-project.org]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Mathematical Proof]** · **[来源: ACM - Proof Engineering]** · **[来源: IEEE - Formal Proof Verification]**
 
 ---
 

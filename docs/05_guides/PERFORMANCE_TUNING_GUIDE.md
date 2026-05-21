@@ -9,7 +9,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Program Optimization]** · **[来源: Wikipedia - Profiling]** · **[来源: ACM - Performance Engineering]** · **[来源: IEEE - Software Performance Standards]**
 
 - [性能调优完整指南](#性能调优完整指南)
   - [📋 目录](#-目录)
@@ -63,6 +63,7 @@
       - [2. `ControlFlow<B, C>` - 流控制的零成本抽象](#2-controlflowb-c---流控制的零成本抽象)
       - [3. `LazyLock/LazyCell` 增强](#3-lazylocklazycell-增强)
       - [4. `f32/f64::consts` 新增数学常量](#4-f32f64consts-新增数学常量)
+  - [**最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 语义)](#最后更新-2026-05-08-深度整合-rust-195-语义)
 
 ---
 

@@ -5,13 +5,14 @@
 > **形式化框架**: Trait抽象 + 类型状态机 + 零成本抽象
 >
 > **参考**: embedded-hal v1.0 Documentation
-> **[来源: embedded-hal Documentation - docs.rs/embedded-hal]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Hardware Abstraction Layer]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Embedded Working Group]**
+> **[来源: embedded-hal Documentation - docs.rs/embedded-hal]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Hardware Abstraction Layer]** · **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Embedded System]** · **[来源: Rust Embedded Working Group]** · **[来源: ACM - HAL Design Patterns]** · **[来源: IEEE - Hardware-Software Interface Standards]**
 >
 > **分析深度**: 生产级技术分析
 
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Embedded-HAL 硬件抽象层深度形式化分析](#embedded-hal-硬件抽象层深度形式化分析)
@@ -72,13 +73,16 @@
     - [15.2 性能差异](#152-性能差异)
     - [15.3 资源限制](#153-资源限制)
     - [15.4 反例：错误模式](#154-反例错误模式)
+  - [**代码示例**: 15个完整示例](#代码示例-15个完整示例)
 
 ---
 
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 设计目标与定位
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 embedded-hal 是 Rust 嵌入式生态系统的核心基础设施，它定义了一组 trait（接口），用于抽象各种微控制器上的常见外设功能。
@@ -1536,7 +1540,6 @@ let dev2 = RefCellDevice::new(&bus)?;
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

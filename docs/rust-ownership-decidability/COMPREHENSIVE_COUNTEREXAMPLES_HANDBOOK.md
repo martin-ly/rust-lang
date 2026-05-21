@@ -2,7 +2,7 @@
 ---
 
 ## Part 2: Deep Dive Counter-Examples
-> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]**
+> **[来源: Rust Reference]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Memory Safety]** · **[来源: TRPL Ch. 4]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Wikipedia - Counterexample]** · **[来源: Wikipedia - Formal Verification]** · **[来源: ACM - Counterexample-Guided Verification]** · **[来源: IEEE - Error Pattern Analysis]**
 
 ### Extended Ownership Deep Dive
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**

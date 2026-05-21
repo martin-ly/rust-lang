@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Ownership Type]** · **[来源: Wikipedia - Linear Logic]** · **[来源: ACM - Ownership-Based Memory Management]** · **[来源: IEEE - Type-Based Memory Safety]**
 
 - [所有权深度解析](#所有权深度解析)
   - [目录](#目录)

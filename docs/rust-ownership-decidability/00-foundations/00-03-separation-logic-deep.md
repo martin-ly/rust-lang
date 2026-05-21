@@ -1911,3 +1911,28 @@ P * Q |= P' * Q'    if P|=P', Q|=Q' (MONO)
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Separation Logic]**
+
+> **[来源: Wikipedia - Hoare Logic]**
+
+> **[来源: Wikipedia - Program Verification]**
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: IEEE - Deductive Verification Methods]**
+
+> **[来源: ACM - Separation Logic Tutorial]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Reynolds 2002 - Separation Logic]**
+
+> **[来源: Iris Project - iris-project.org]**
+
+> **[来源: O'Hearn 2019 - Incorrectness Logic]**

@@ -7,7 +7,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Generic Programming]** · **[来源: Wikipedia - Dependent Type]** · **[来源: ACM - Const Generic Programming]** · **[来源: IEEE - Parameterized Type Systems]**
 
 - [常量泛型与类型级计算](#常量泛型与类型级计算)
   - [目录](#目录)

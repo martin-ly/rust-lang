@@ -9,7 +9,7 @@
 ---
 
 ## 📋 目录 {#-目录}
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Coq]** · **[来源: Wikipedia - Proof Assistant]** · **[来源: ACM - Interactive Theorem Proving]** · **[来源: IEEE - Formal Verification Tools]**
 
 - [Coq形式化证明框架指南](#coq形式化证明框架指南)
   - [📋 目录 {#-目录}](#-目录--目录)

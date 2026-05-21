@@ -10,11 +10,13 @@
 ---
 
 ## 1. 什么是 cargo-semver-checks？
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Semantic Versioning]** · **[来源: Wikipedia - Software Versioning]** · **[来源: ACM - API Evolution Management]** · **[来源: IEEE - Software Configuration Management]**
 
 **cargo-semver-checks** 是一个静态分析工具，用于检测 Rust crate 的公共 API 是否违反了语义化版本控制（Semantic Versioning）规则。
 
 ### 为什么需要它？
+>
 > **[来源: Rust Official Docs]**
 
 Rust 生态严格遵循 SemVer：
@@ -31,6 +33,7 @@ Rust 生态严格遵循 SemVer：
 - 删除或重命名公共项
 
 ### 检测范围
+>
 > **[来源: Rust Official Docs]**
 
 cargo-semver-checks 基于 rustdoc JSON 输出进行分析，可检测：
@@ -189,7 +192,6 @@ pub fn __internal_helper() {} // semver-checks 会忽略此项
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

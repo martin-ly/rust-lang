@@ -8,7 +8,7 @@
 
 ## 目录
 >
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - WebAssembly]** · **[来源: Wikipedia - Foreign Function Interface]** · **[来源: ACM - WASM Language Bindings]** · **[来源: IEEE - Web-Platform Interoperability]**
 
 - [wasm-bindgen形式化分析](#wasm-bindgen形式化分析)
   - [目录](#目录)

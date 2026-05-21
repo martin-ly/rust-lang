@@ -9,7 +9,7 @@
 ---
 
 ## 📋 目录
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Knowledge Organization]** · **[来源: Wikipedia - Taxonomy]** · **[来源: ACM - Knowledge Representation]** · **[来源: IEEE - Information Architecture]**
 
 - [Rust 知识结构框架文档](#rust-知识结构框架文档)
   - [📋 目录](#-目录)

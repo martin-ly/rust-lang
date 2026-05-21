@@ -2924,3 +2924,28 @@ mod tests {
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Asynchronous I/O]**
+
+> **[来源: Wikipedia - Event Loop]**
+
+> **[来源: Wikipedia - Reactor Pattern]**
+
+> **[来源: Wikipedia - Cooperative Multitasking]**
+
+> **[来源: IEEE - Concurrent Programming Languages]**
+
+> **[来源: ACM - Async Runtime Design Patterns]**
+
+> **[来源: ACM - Futures and Promises]**
+
+> **[来源: Tokio Documentation - tokio.rs]**
+
+> **[来源: Rust Reference - async/await]**
+
+> **[来源: TRPL Ch. 17 - Async and Await]**

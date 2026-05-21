@@ -5,7 +5,7 @@
 > **形式化框架**: 错误恢复 + 调试输出 + 探针协议
 >
 > **参考**: knurling-rs tools, ARM Cortex-M Fault Handling
-> **[来源: knurling-rs Documentation - knurling.ferrous-systems.com]** · **[来源: ARM Cortex-M Documentation - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Architecture]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]**
+> **[来源: knurling-rs Documentation - knurling.ferrous-systems.com]** · **[来源: ARM Cortex-M Documentation - developer.arm.com]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - ARM Architecture]** · **[来源: Rust Reference - no_std]** · **[来源: RTIC Documentation - rtic.rs]** · **[来源: Wikipedia - Debugging]** · **[来源: Wikipedia - Stack Trace]** · **[来源: ACM - Fault Diagnosis in Embedded Systems]** · **[来源: IEEE - Software Fault Tolerance]**
 
 ---
 
@@ -1830,7 +1830,6 @@ fn panic(_info: &PanicInfo) -> ! {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

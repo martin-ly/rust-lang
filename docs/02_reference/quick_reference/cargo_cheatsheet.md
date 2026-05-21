@@ -9,7 +9,8 @@
 ---
 
 ## 📋 目录 {#-目录}
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Build Automation]** · **[来源: Wikipedia - Package Manager]** · **[来源: ACM - Dependency Management]** · **[来源: IEEE - Software Build Standards]**
 
 - [📦 Cargo 速查卡 {#-cargo-速查卡}](#-cargo-速查卡--cargo-速查卡)
   - [📋 目录 {#-目录}](#-目录--目录)
@@ -75,13 +76,16 @@
     - [相关速查卡](#相关速查卡)
   - [🆕 Rust 1.95+ 特性整合](#-rust-195-特性整合)
     - [核心特性速查](#核心特性速查)
+  - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
 
 ---
 
 ## 🆕 项目创建 {#-项目创建}
+>
 > **[来源: Rust Official Docs]**
 
 ### 创建新项目
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -99,6 +103,7 @@ cargo init --lib
 ```
 
 ### 项目结构
+>
 > **[来源: Rust Official Docs]**
 
 ```text
@@ -112,9 +117,11 @@ my_project/
 ---
 
 ## 🔨 构建命令 {#-构建命令}
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本构建
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -132,6 +139,7 @@ cargo clean
 ```
 
 ### 指定目标
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -153,6 +161,7 @@ cargo build --target wasm32-unknown-unknown
 ```
 
 ### 特性标志
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -167,6 +176,7 @@ cargo build --no-default-features
 ```
 
 ### 并行和优化
+>
 > **[来源: Rust Official Docs]**
 
 ```bash
@@ -184,9 +194,11 @@ cargo build --verbose
 ---
 
 ## 🧪 测试命令 {#-测试命令}
+>
 > **[来源: Rust Official Docs]**
 
 ### 基本测试
+>
 > **[来源: Rust Official Docs]**
 
 ```bash

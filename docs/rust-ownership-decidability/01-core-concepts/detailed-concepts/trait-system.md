@@ -5,7 +5,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: RFC 255 - Trait Aliases]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Type Class]** · **[来源: Rust API Guidelines]**
+> **[来源: Rust Reference - Traits]** · **[来源: Wikipedia - Trait-based Programming]** · **[来源: RFC 255 - Trait Aliases]** · **[来源: TRPL Ch. 10]** · **[来源: Wikipedia - Type Class]** · **[来源: Rust API Guidelines]** · **[来源: Wikipedia - Trait (computer programming)]** · **[来源: Wikipedia - Polymorphism]** · **[来源: ACM - Trait-Based Language Design]** · **[来源: IEEE - Interface Specification Standards]**
 
 - [Trait 系统详解](#trait-系统详解)
   - [目录](#目录)

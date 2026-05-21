@@ -11,7 +11,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Heterogeneous Data Structure]** · **[来源: Wikipedia - Generic Programming]** · **[来源: ACM - Functional Data Structure Design]** · **[来源: IEEE - Type-Safe Generic Collections]**
 
 - [Frunk 函数式编程库形式化分析](#frunk-函数式编程库形式化分析)
   - [目录](#目录)
@@ -54,13 +55,16 @@
     - [10.1 编译时间增长](#101-编译时间增长)
     - [10.2 错误消息可读性](#102-错误消息可读性)
     - [10.3 与其他 trait 的互操作性](#103-与其他-trait-的互操作性)
+  - [*分析深度: 高级技术分析*](#分析深度-高级技术分析)
 
 ---
 
 ## 1. 项目概览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 背景与动机
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Frunk 是一个为 Rust 提供函数式编程范式和类型级编程工具的库。它受到 Haskell、Scala 等函数式语言中常见模式的启发，将这些概念移植到 Rust 的类型系统中。
@@ -743,7 +747,6 @@ for x in list.into_vec() { }
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

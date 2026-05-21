@@ -3,7 +3,7 @@
 Foreign Function Interface (FFI) 是 Rust 与外部代码交互的核心机制。本章节深入探讨如何使用 Rust 调用 C/C++ 库，以及如何用 Rust 编写可以被其他语言调用的库。
 
 ## 目录
-> **[来源: Rust Reference - FFI]** · **[来源: Wikipedia - Foreign Function Interface]** · **[来源: Rustonomicon - FFI]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - ABI]** · **[来源: POSIX Standard - pubs.opengroup.org]
+> **[来源: Rust Reference - FFI]** · **[来源: Wikipedia - Foreign Function Interface]** · **[来源: Rustonomicon - FFI]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - ABI]** · **[来源: POSIX Standard - pubs.opengroup.org] · **[来源: Wikipedia - Application Binary Interface]** · **[来源: ACM - Safe FFI Design]** · **[来源: IEEE - Language Binding Standards]**
 
 - [FFI 互操作性](#ffi-互操作性)
   - [目录](#目录)

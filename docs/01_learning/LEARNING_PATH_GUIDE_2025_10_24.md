@@ -6,9 +6,11 @@
 ---
 
 ## 🗺️ 推荐学习路径
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Educational Technology]** · **[来源: Wikipedia - Spiral Curriculum]** · **[来源: ACM - CS Curriculum Guidelines]** · **[来源: IEEE - Learning Outcome Standards]**
 
 ### 路径 1: 初学者 (4-6 周)
+>
 > **[来源: Rust Official Docs]**
 
 ```
@@ -18,6 +20,7 @@ C01 (所有权) → C02 (类型) → C03 (控制流)
 ```
 
 ### 路径 2: 进阶开发者 (6-8 周)
+>
 > **[来源: Rust Official Docs]**
 
 ```

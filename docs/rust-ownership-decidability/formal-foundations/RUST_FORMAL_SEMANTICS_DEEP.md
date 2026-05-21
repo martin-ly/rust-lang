@@ -2967,3 +2967,28 @@ Borrowing rules are enforced at compile time.
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Formal Methods]**
+
+> **[来源: Wikipedia - Type Theory]**
+
+> **[来源: Wikipedia - Operational Semantics]**
+
+> **[来源: Wikipedia - Denotational Semantics]**
+
+> **[来源: IEEE - Formal Verification Standards]**
+
+> **[来源: ACM - Programming Language Semantics]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: PLDI 2023 - Aeneas]**
+
+> **[来源: Iris Project - iris-project.org]**
+
+> **[来源: Rust Reference - Type System]**

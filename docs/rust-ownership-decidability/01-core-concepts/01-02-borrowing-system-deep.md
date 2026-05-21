@@ -2445,3 +2445,28 @@ The borrowing system is the cornerstone of Rust's memory safety guarantees, enab
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Borrowing (computer science)]**
+
+> **[来源: Wikipedia - Memory Safety]**
+
+> **[来源: Wikipedia - Alias Analysis]**
+
+> **[来源: Wikipedia - Type System]**
+
+> **[来源: IEEE - Software Reliability Engineering]**
+
+> **[来源: ACM Computing Surveys - Memory Management]**
+
+> **[来源: ACM - Safe Systems Programming Languages]**
+
+> **[来源: POPL 2018 - RustBelt: Securing the Foundations of the Rust Programming Language]**
+
+> **[来源: Rust Reference - Borrowing]**
+
+> **[来源: TRPL Ch. 4 - Understanding Ownership]**

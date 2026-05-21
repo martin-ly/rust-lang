@@ -7,7 +7,8 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+>
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Middleware]** · **[来源: Wikipedia - Service-Oriented Architecture]** · **[来源: ACM - Layered Service Design]** · **[来源: IEEE - Service Composition Standards]**
 
 - [Tower服务抽象形式化分析](#tower服务抽象形式化分析)
   - [目录](#目录)
@@ -35,10 +36,12 @@
     - [示例1: 完整服务栈](#示例1-完整服务栈)
     - [示例2: 自定义服务](#示例2-自定义服务)
     - [示例3: 自定义Layer](#示例3-自定义layer)
+  - [**状态**: ✅ 已对齐](#状态--已对齐)
 
 ---
 
 ## 1. 引言
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 Tower特点：
@@ -51,6 +54,7 @@ Tower特点：
 ---
 
 ## 2. Service trait
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 SERVICE-1 ( 核心trait )
@@ -328,7 +332,6 @@ where
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

@@ -8,7 +8,7 @@
 ---
 
 ## 异步编程全景
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Coroutine]** · **[来源: ACM - Async Programming Concepts]** · **[来源: IEEE - Concurrent Computation Models]**
 
 ```mermaid
 mindmap

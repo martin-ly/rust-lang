@@ -5,11 +5,12 @@
 > **形式化框架**: 写时复制 + 幂等性 + 磨损均衡 + 掉电安全
 >
 > **参考**: littlefs2 crate, ARM mbed LittleFS Specification
-> **[来源: littlefs2 Documentation - docs.rs/littlefs2]** · **[来源: ARM mbed LittleFS Specification]** · **[来源: Wikipedia - Flash Memory]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Wear Leveling]** · **[来源: Rust Reference - no_std]**
+> **[来源: littlefs2 Documentation - docs.rs/littlefs2]** · **[来源: ARM mbed LittleFS Specification]** · **[来源: Wikipedia - Flash Memory]** · **[来源: Rust Embedded Book]** · **[来源: Wikipedia - Wear Leveling]** · **[来源: Rust Reference - no_std]** · **[来源: Wikipedia - Flash File System]** · **[来源: ACM - Embedded File System Design]** · **[来源: IEEE - Non-Volatile Storage Management]**
 
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [LittleFS2 嵌入式文件系统形式化分析](#littlefs2-嵌入式文件系统形式化分析)
@@ -63,13 +64,16 @@
     - [10.1 存储空间耗尽](#101-存储空间耗尽)
     - [10.2 碎片化问题](#102-碎片化问题)
     - [10.3 并发访问限制](#103-并发访问限制)
+  - [**代码示例**: 7个完整示例](#代码示例-7个完整示例)
 
 ---
 
 ## 1. 项目概览与解决的问题
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 嵌入式存储的挑战
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 嵌入式系统在存储方面面临独特挑战：
@@ -2011,7 +2015,6 @@ impl<S: Storage> ThreadSafeFS<S> {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

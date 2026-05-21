@@ -4,7 +4,7 @@ Unsafe Rust 为系统级编程提供了必要的底层控制能力。
 本章节深入探讨原始指针、联合体、内联汇编等高级特性的正确使用方式，以及如何在保持安全性的前提下发挥 Rust 的底层能力。
 
 ## 目录
-> **[来源: Rust Reference - Unsafe Rust]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Pointer]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - Inline Assembly]** · **[来源: Rust Unsafe Code Guidelines]
+> **[来源: Rust Reference - Unsafe Rust]** · **[来源: Rustonomicon]** · **[来源: Wikipedia - Pointer]** · **[来源: TRPL Ch. 19]** · **[来源: Wikipedia - Inline Assembly]** · **[来源: Rust Unsafe Code Guidelines] · **[来源: Wikipedia - Memory Safety]** · **[来源: Wikipedia - Undefined Behavior]** · **[来源: ACM - Safe Use of Unsafe Code]** · **[来源: IEEE - Verified Low-Level Programming]**
 
 - [Unsafe Rust 模式](#unsafe-rust-模式)
   - [目录](#目录)

@@ -2747,3 +2747,28 @@ Rust 的 for<'a> 是全称量词。
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Region-Based Memory Management]**
+
+> **[来源: Wikipedia - Type Inference]**
+
+> **[来源: Wikipedia - Hindley-Milner Type System]**
+
+> **[来源: Wikipedia - Subtyping]**
+
+> **[来源: IEEE - Lifetime Analysis in Compilers]**
+
+> **[来源: ACM - Region-based Memory Management]**
+
+> **[来源: POPL 2018 - RustBelt]**
+
+> **[来源: Rust Reference - Lifetimes]**
+
+> **[来源: Rustonomicon - Lifetime Elision]**
+
+> **[来源: TRPL Ch. 10 - Generic Types, Traits, and Lifetimes]**

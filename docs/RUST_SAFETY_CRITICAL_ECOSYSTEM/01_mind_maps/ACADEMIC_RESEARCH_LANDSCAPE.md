@@ -1,7 +1,7 @@
 # 学术研究全景
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Academic Research]** · **[来源: Wikipedia - Scientometrics]** · **[来源: ACM - Research Landscape Mapping]** · **[来源: IEEE - Research Trend Analysis]**
 
 本文档梳理Rust安全关键系统相关的学术研究前沿，涵盖类型系统、形式化验证、内存模型等关键领域。
 

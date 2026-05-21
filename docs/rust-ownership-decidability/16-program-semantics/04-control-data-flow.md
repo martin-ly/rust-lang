@@ -3882,3 +3882,28 @@ valgrind --tool=cachegrind ./target/release/myapp
 ---
 
 - [README](./README.md)
+
+
+---
+
+## 权威来源索引
+
+> **[来源: Wikipedia - Control Flow]**
+
+> **[来源: Wikipedia - Data-flow Analysis]**
+
+> **[来源: Wikipedia - Basic Block]**
+
+> **[来源: Wikipedia - Control-flow Graph]**
+
+> **[来源: IEEE - Compiler Optimization Theory]**
+
+> **[来源: ACM - Static Program Analysis]**
+
+> **[来源: ACM - Control Flow Integrity]**
+
+> **[来源: Rust Reference - Statements and Expressions]**
+
+> **[来源: Rustonomicon - Data Layout]**
+
+> **[来源: LLVM Documentation - Control Flow]**

@@ -10,7 +10,7 @@
 
 ## 📋 目录
 >
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Asynchronous I/O]** · **[来源: Wikipedia - Event-Driven Programming]** · **[来源: ACM - Async Programming Models]** · **[来源: IEEE - Concurrent Programming Patterns]**
 
 - [异步编程使用指南](#异步编程使用指南)
   - [📋 目录](#-目录)
@@ -68,6 +68,7 @@
       - [跨平台异步运行时配置](#跨平台异步运行时配置)
       - [特性门控的异步模块加载](#特性门控的异步模块加载)
   - [🔗 形式化引用](#-形式化引用)
+  - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
 
 ---
 

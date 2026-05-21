@@ -3,7 +3,7 @@
 > **对比维度**: 内存安全、类型系统、并发模型、性能特征、运行时特性
 > **目标读者**: 有 Java 背景想了解 Rust 的开发者，技术决策者
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Java (programming language)]** · **[来源: Rust Reference]** · **[来源: Java Language Specification - docs.oracle.com/javase]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]**
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Java (programming language)]** · **[来源: Rust Reference]** · **[来源: Java Language Specification - docs.oracle.com/javase]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]** · **[来源: Wikipedia - Memory Management]** · **[来源: ACM - Managed vs Unmanaged Languages]** · **[来源: IEEE - Language Safety Comparison]**
 
 ---
 

@@ -5,7 +5,7 @@
 
 ## 目录
 >
-> **[来源: Polars Documentation - docs.pola.rs]** · **[来源: Apache Arrow - arrow.apache.org]** · **[来源: Wikipedia - Data Engineering]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: Rust Reference]**
+> **[来源: Polars Documentation - docs.pola.rs]** · **[来源: Apache Arrow - arrow.apache.org]** · **[来源: Wikipedia - Data Engineering]** · **[来源: ndarray Documentation - docs.rs/ndarray]** · **[来源: Candle (Hugging Face) - github.com/huggingface/candle]** · **[来源: Rust Reference]** · **[来源: Wikipedia - ETL]** · **[来源: ACM - Data Processing Pipelines]** · **[来源: IEEE - Big Data Systems]**
 
 - [Rust 数据工程](#rust-数据工程)
   - [目录](#目录)

@@ -8,16 +8,19 @@
 ---
 
 ## 概述
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Workflow Engine]** · **[来源: Wikipedia - Business Process Management]** · **[来源: ACM - Workflow System Design]** · **[来源: IEEE - Process Automation Standards]**
 
 工作流引擎能力矩阵对比主流工作流引擎的功能特性、适用场景和Rust集成能力，为技术选型提供参考。
 
 ---
 
 ## 引擎能力对比矩阵
+>
 > **[来源: Rust Official Docs]**
 
 ### 核心功能
+>
 > **[来源: Rust Official Docs]**
 
 | 引擎 | 持久化 | 补偿 | 人工任务 | 可视化 | 监控 | 定时触发 | 子流程 |

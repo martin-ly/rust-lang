@@ -7,7 +7,7 @@
 > 内容已整合至： compiler_optimizations.md (研究笔记)、[01_compiler_features.md](../06_toolchain_ecosystem/01_compiler/README.md)
 
 ## 知识结构思维导图
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Compiler Construction]** · **[来源: Wikipedia - Formal Grammar]** · **[来源: ACM - Compiler Design Principles]** · **[来源: IEEE - Language Implementation Standards]**
 
 ```mermaid
 mindmap

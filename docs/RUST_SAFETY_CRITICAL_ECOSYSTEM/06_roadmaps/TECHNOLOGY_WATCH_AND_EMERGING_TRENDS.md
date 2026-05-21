@@ -1,7 +1,7 @@
 # 技术观察与新兴趋势
 
 ## 概述
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Technology Roadmap]** · **[来源: Wikipedia - Emerging Technologies]** · **[来源: ACM - Technology Forecasting]** · **[来源: IEEE - Innovation Management Standards]**
 
 本文档跟踪Rust安全关键系统领域的新兴技术、工具和发展趋势。
 

@@ -3,7 +3,7 @@
 > **对比维度**: 内存安全模型、所有权系统、类型系统、并发模型、应用场景
 > **目标读者**: Swift 开发者学习 Rust，跨平台开发者技术选型
 > **文档版本**: 2.0.0 (L2+ 深度)
-> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Swift (programming language)]** · **[来源: Rust Reference]** · **[来源: Swift Documentation - swift.org]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]**
+> **[来源: Wikipedia - Rust (programming language)]** · **[来源: Wikipedia - Swift (programming language)]** · **[来源: Rust Reference]** · **[来源: Swift Documentation - swift.org]** · **[来源: IEEE Software - Language Comparison]** · **[来源: Stack Overflow Developer Survey 2025]** · **[来源: Wikipedia - Automatic Reference Counting]** · **[来源: ACM - Modern Systems Language Design]** · **[来源: IEEE - Language Interoperability]**
 
 ---
 

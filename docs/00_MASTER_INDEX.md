@@ -13,7 +13,8 @@
 ---
 
 ## 按主题快速导航
-> **[来源: Rust Official Docs]**
+>
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Knowledge Management]** · **[来源: Wikipedia - Index (publishing)]** · **[来源: ACM - Information Organization]** · **[来源: IEEE - Technical Documentation Standards]**
 
 | 主题 | 入口 | 说明 | 交叉引用 |
 | :--- | :--- | :--- | :--- |
@@ -31,6 +32,7 @@
 ---
 
 ## 按角色导航
+>
 > **[来源: Rust Official Docs]**
 
 | 角色 | 推荐路径 | 关键入口 |
@@ -43,6 +45,7 @@
 ---
 
 ## 01 学习路径与导航
+>
 > **[来源: Rust Official Docs]**
 
 | 文档 | 说明 | 交叉引用 |

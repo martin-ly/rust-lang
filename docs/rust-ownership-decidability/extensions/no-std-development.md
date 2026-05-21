@@ -5,7 +5,7 @@
 本章节深入探讨 no_std 开发的各个方面。
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Bare-Metal Programming]** · **[来源: Wikipedia - Embedded System]** · **[来源: ACM - Resource-Constrained Computing]** · **[来源: IEEE - Embedded Software Standards]**
 
 - [No_std 开发](#no_std-开发)
 

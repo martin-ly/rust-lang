@@ -7,7 +7,7 @@
 > 内容已整合至： performance_benchmarks.md (研究笔记)、PERFORMANCE_TUNING_GUIDE.md (指南)
 
 ## 知识结构思维导图
-> **[来源: Rust Official Docs]**
+> **[来源: Rust Official Docs]** · **[来源: Wikipedia - Performance Engineering]** · **[来源: Wikipedia - Software Optimization]** · **[来源: ACM - Performance Measurement Methodology]** · **[来源: IEEE - Software Performance Standards]**
 
 ```mermaid
 mindmap

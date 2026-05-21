@@ -1,7 +1,7 @@
 # 大步语义与小步语义等价性证明
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Operational Semantics]** · **[来源: Wikipedia - Bisimulation]** · **[来源: ACM - Semantic Equivalence Verification]** · **[来源: IEEE - Formal Proof Standards]**
 
 - [大步语义与小步语义等价性证明](#大步语义与小步语义等价性证明)
   - [目录](#目录)

@@ -8,7 +8,7 @@
 ---
 
 ## 目录
-> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+> **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]** · **[来源: Wikipedia - Pointer Aliasing]** · **[来源: Wikipedia - Memory Model]** · **[来源: ACM - Alias Analysis Methods]** · **[来源: IEEE - Memory Model Formalization]**
 
 - [Tree Borrows: Rust 别名模型的全面分析](#tree-borrows-rust-别名模型的全面分析)
   - [目录](#目录)
