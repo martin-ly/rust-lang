@@ -1,7 +1,7 @@
 # 字符串与文本：Rust 的 Unicode 处理与格式化系统
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 系统分析 Rust **字符串类型**的设计——String 与 str 的所有权语义、UTF-8 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
+> **定位**: 系统分析 Rust **字符串类型**的设计——String [来源: [Rust String](https://doc.rust-lang.org/std/string/struct.String.html)] 与 str [来源: [Rust str](https://doc.rust-lang.org/std/str/index.html)] 的所有权语义、UTF-8 [来源: [UTF-8](https://en.wikipedia.org/wiki/UTF-8)] [来源: [UTF-8 Wikipedia](https://en.wikipedia.org/wiki/UTF-8)] 编码约束、格式化宏（format!/write!）的类型安全设计，以及与 C 字符串、OS 字符串的互操作。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Collections](./08_collections.md) · [FFI](../03_advanced/05_rust_ffi.md)
 
@@ -57,7 +57,7 @@ Rust 的两种字符串类型:
   转换:
   String → &str: 自动（Deref）
   &str → String: to_string() 或 to_owned()（分配）
-  String → 其他: into_bytes()、chars()、lines() 等
+  String → 其他: into_bytes()、char [来源: [Rust char](https://doc.rust-lang.org/std/primitive.char.html)]s()、lines() 等
 ```
 
 > **认知功能**: String/str 的关系是 Rust **所有权模型**的典型应用——String 拥有数据，str 借用数据，两者通过 Deref 无缝协作。

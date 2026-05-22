@@ -1,0 +1,520 @@
+# 测试基础：从单元测试到集成测试
+
+> **Bloom 层级**: 应用 → 分析
+> **定位**: 系统讲解 Rust **测试机制**——从单元测试、集成测试到文档测试和基准测试，揭示 Rust 如何内置测试文化并支持多种测试层级。
+> **前置概念**: [Ownership](./01_ownership.md) · [Modules](./11_modules_and_paths.md) · [Error Handling](../02_intermediate/15_error_handling_deep_dive.md)
+> **后置概念**: [Testing Strategies](../06_ecosystem/16_testing.md) · [Security Practices](../06_ecosystem/19_security_practices.md)
+
+---
+
+> **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) · [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) · [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) · [Wikipedia — Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)
+
+## 📑 目录
+
+- [测试基础：从单元测试到集成测试](#测试基础从单元测试到集成测试)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 Rust 测试文化](#11-rust-测试文化)
+    - [1.2 测试类型全景](#12-测试类型全景)
+    - [1.3 测试的组织](#13-测试的组织)
+  - [二、技术细节](#二技术细节)
+    - [2.1 单元测试](#21-单元测试)
+    - [2.2 集成测试](#22-集成测试)
+    - [2.3 文档测试](#23-文档测试)
+  - [三、测试模式矩阵](#三测试模式矩阵)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
+  - [五、常见陷阱](#五常见陷阱)
+  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [相关概念文件](#相关概念文件)
+
+---
+
+## 一、核心概念
+
+### 1.1 Rust 测试文化
+
+```text
+Rust 的测试内置机制:
+
+  零配置:
+  ├── cargo test 自动发现测试
+  ├── 无需外部测试框架
+  ├── 内置断言宏
+  └── 与编译器深度集成
+
+  测试即文档:
+  ├── 文档测试运行代码示例
+  ├── 确保示例不过时
+  ├── 双重价值: 测试 + 文档
+  └── Rustdoc 集成
+
+  测试层级:
+  ├── 单元测试: 测试单个函数/模块
+  ├── 集成测试: 测试 crate 外部接口
+  ├── 文档测试: 测试代码示例
+  └── 基准测试: 测量性能
+
+  与其他语言的对比:
+  ┌─────────────────┬─────────────────┬─────────────────┐
+  │ 特性            │ Rust            │ 其他语言        │
+  ├─────────────────┼─────────────────┼─────────────────┤
+  │ 内置测试        │ ✅ 原生          │ 通常需框架      │
+  │ 文档测试        │ ✅ 原生          │ 罕见            │
+  │ 并发测试        │ ✅ 默认并行      │ 通常串行        │
+  │ 零配置          │ ✅ cargo test    │ 需配置          │
+  │ 编译期检查      │ ✅ 类型安全      │ 运行时检查      │
+  └─────────────────┴─────────────────┴─────────────────┘
+```
+
+> **认知功能**: Rust 的**测试是语言的一等公民**——不是事后添加的框架，而是编译器和工具链的核心功能。
+> [来源: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
+
+---
+
+### 1.2 测试类型全景
+
+```rust,ignore
+// Rust 测试类型示例
+
+// 1. 单元测试（在源码文件中）
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn it_works() {
+        assert_eq!(2 + 2, 4);
+    }
+
+    #[test]
+    #[should_panic(expected = "divide by zero")]
+    fn test_panic() {
+        let _ = 1 / 0;
+    }
+
+    #[test]
+    #[ignore = "not yet implemented"]
+    fn ignored_test() {
+        // 默认不运行，cargo test --ignored 运行
+    }
+}
+
+// 2. 集成测试（tests/ 目录）
+// tests/integration_test.rs
+use my_crate::add;
+
+#[test]
+fn test_add() {
+    assert_eq!(add(2, 3), 5);
+}
+
+// 3. 文档测试（在文档注释中）
+/// Adds two numbers.
+///
+/// # Examples
+///
+/// ```
+/// let result = my_crate::add(2, 3);
+/// assert_eq!(result, 5);
+/// ```
+pub fn add(a: i32, b: i32) -> i32 {
+    a + b
+}
+```
+
+> **类型洞察**: Rust 的**三层测试架构**（单元/集成/文档）覆盖了从内到外的完整验证需求。
+> [来源: [Rust Reference — Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
+
+---
+
+### 1.3 测试的组织
+
+```text
+测试目录结构:
+
+  src/
+  ├── lib.rs
+  └── some_module.rs
+      └── #[cfg(test)] mod tests { ... }
+
+  tests/
+  ├── integration_test.rs      # 集成测试 1
+  ├── another_test.rs          # 集成测试 2
+  └── common/mod.rs            # 共享测试辅助代码
+
+  benches/
+  └── my_benchmark.rs          # 基准测试（需 nightly 或 criterion）
+
+  examples/
+  └── simple.rs                # 可运行示例
+
+  测试执行:
+  ├── cargo test               # 运行所有测试
+  ├── cargo test --lib         # 只运行单元测试
+  ├── cargo test --test name   # 只运行指定集成测试
+  ├── cargo test --doc         # 只运行文档测试
+  ├── cargo test --ignored     # 运行被忽略的测试
+  └── cargo test -- --nocapture # 显示 println! 输出
+```
+
+> **组织洞察**: **tests/ 目录的集成测试作为独立 crate 编译**——它们只能访问 public API，强制测试公共接口。
+> [来源: [Cargo Book — Tests](https://doc.rust-lang.org/cargo/guide/tests.html)]
+
+---
+
+## 二、技术细节
+
+### 2.1 单元测试
+
+```rust,ignore
+// 单元测试详解
+
+pub struct Calculator;
+
+impl Calculator {
+    pub fn add(a: i32, b: i32) -> i32 { a + b }
+    pub fn divide(a: i32, b: i32) -> Option<i32> {
+        if b == 0 { None } else { Some(a / b) }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    // 基本断言
+    #[test]
+    fn test_add() {
+        assert_eq!(Calculator::add(2, 3), 5);
+        assert_ne!(Calculator::add(2, 2), 5);
+        assert!(Calculator::add(1, 1) > 0);
+    }
+
+    // 测试 Option
+    #[test]
+    fn test_divide() {
+        assert_eq!(Calculator::divide(10, 2), Some(5));
+        assert_eq!(Calculator::divide(10, 0), None);
+    }
+
+    // 自定义错误消息
+    #[test]
+    fn test_with_message() {
+        let result = Calculator::add(2, 2);
+        assert_eq!(result, 4, "Expected 2 + 2 = 4, got {}", result);
+    }
+
+    // 使用 Result 的测试
+    #[test]
+    fn test_result() -> Result<(), String> {
+        if Calculator::add(2, 2) == 4 {
+            Ok(())
+        } else {
+            Err("Math is broken".to_string())
+        }
+    }
+
+    // 共享设置
+    fn setup() -> Calculator {
+        Calculator
+    }
+
+    #[test]
+    fn test_with_setup() {
+        let calc = setup();
+        assert_eq!(calc.add(1, 1), 2);
+    }
+}
+```
+
+> **单元测试洞察**: **#[cfg(test)] 模块可以访问父模块的私有项**——这是测试私有函数的标准方式。
+> [来源: [TRPL — Unit Tests](https://doc.rust-lang.org/book/ch11-01-writing-tests.html)]
+
+---
+
+### 2.2 集成测试
+
+```rust,ignore
+// tests/integration_test.rs
+
+use my_crate::Database;
+
+#[test]
+fn test_database_connection() {
+    let db = Database::connect("test.db").unwrap();
+    db.execute("CREATE TABLE test (id INTEGER)").unwrap();
+
+    let result = db.query("SELECT * FROM test").unwrap();
+    assert!(result.is_empty());
+}
+
+// 共享辅助代码
+tests/
+├── common/
+│   ├── mod.rs
+│   └── helpers.rs
+├── integration_test.rs
+└── api_test.rs
+
+// tests/common/mod.rs
+pub fn setup_test_db() -> Database {
+    Database::connect(":memory:").unwrap()
+}
+
+// tests/integration_test.rs
+mod common;
+
+#[test]
+fn test_with_common() {
+    let db = common::setup_test_db();
+    // ...
+}
+
+// 注意: tests/common/mod.rs 不会作为测试文件执行
+// 只有 tests/*.rs 是测试入口
+```
+
+> **集成测试洞察**: **集成测试验证 crate 的公共 API**——它们确保对外承诺的行为实际工作。
+> [来源: [TRPL — Integration Tests](https://doc.rust-lang.org/book/ch11-03-test-organization.html)]
+
+---
+
+### 2.3 文档测试
+
+```rust,ignore
+// 文档测试: 代码即文档，文档即测试
+
+/// 计算斐波那契数列的第 n 项。
+///
+/// # Examples
+///
+/// 基本情况:
+/// ```
+/// assert_eq!(my_crate::fibonacci(0), 0);
+/// assert_eq!(my_crate::fibonacci(1), 1);
+/// ```
+///
+/// 递归情况:
+/// ```
+/// assert_eq!(my_crate::fibonacci(10), 55);
+/// ```
+///
+/// # Panics
+///
+/// 当 `n` 大于 93 时会 panic，因为结果会溢出 `u64`：
+///
+/// ```should_panic
+/// my_crate::fibonacci(94);
+/// ```
+pub fn fibonacci(n: u32) -> u64 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => {
+            if n > 93 { panic!("overflow") }
+            fibonacci(n - 1) + fibonacci(n - 2)
+        }
+    }
+}
+
+// 文档测试属性:
+// ├── ```          : 普通代码块（运行测试）
+// ├── ```ignore    : 不运行（示例代码）
+// ├── ```no_run    : 编译但不运行（可能 panic）
+// ├── ```should_panic : 期望 panic
+// ├── ```compile_fail : 期望编译失败
+// └── ```edition2024  : 指定 Edition
+
+// 隐藏代码:
+/// ```
+/// # fn main() {  // 隐藏但执行
+/// let result = my_crate::foo();
+/// # }
+/// ```
+```
+
+> **文档测试洞察**: **文档测试是 Rust 的差异化特性**——它解决了"文档示例过时"的普遍问题。
+> [来源: [Rustdoc — Documentation Tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html)]
+
+---
+
+## 三、测试模式矩阵
+
+```text
+场景 → 测试类型 → 工具/技术
+
+算法正确性:
+  → 单元测试
+  → assert_eq!, 边界条件
+  → #[test] fn test_edge_cases()
+
+API 契约:
+  → 集成测试
+  → 公开接口验证
+  → tests/api_test.rs
+
+并发安全:
+  → 单元测试 + loom
+  → 多线程场景
+  → cargo test -- --test-threads=1
+
+性能回归:
+  → 基准测试
+  → criterion
+  → benches/bench.rs
+
+文档准确性:
+  → 文档测试
+  → rustdoc --test
+  → 代码注释中的 ```
+
+属性测试:
+  → proptest / quickcheck
+  → 随机输入生成
+  → 发现边界情况
+```
+
+> **模式矩阵**: Rust 的**测试生态覆盖了验证的完整谱系**——从快速单元测试到深度属性测试。
+> [来源: [Rust Testing Best Practices](https://doc.rust-lang.org/rust-by-example/testing.html)]
+
+---
+
+## 四、反命题与边界分析
+
+### 4.1 反命题树
+
+```mermaid
+graph TD
+    ROOT["命题: 所有代码都需要 100% 测试覆盖"]
+    ROOT --> Q1{"是否是原型/探索性代码?"}
+    Q1 -->|是| MINIMAL["⚠️ 最小测试即可"]
+    Q1 -->|否| Q2{"是否安全关键?"}
+    Q2 -->|是| FULL["✅ 全面测试"]
+    Q2 -->|否| BALANCED["✅ 平衡覆盖"]
+
+    style MINIMAL fill:#fff3e0
+    style FULL fill:#c8e6c9
+    style BALANCED fill:#c8e6c9
+```
+
+> **认知功能**: **测试是投资**——在安全关键和长期维护的代码上回报最高，原型上可适度减少。
+> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/documentation.html#examples-use--not-try-not-unwrap-c-example)]
+
+---
+
+### 4.2 边界极限
+
+```text
+边界 1: 测试并行执行
+├── cargo test 默认并行运行
+├── 共享资源（文件、数据库）冲突
+├── 测试间可能互相影响
+└── 缓解: #[serial] 属性，或独立资源
+
+边界 2: 异步测试
+├── 异步测试需要特殊运行时
+├── tokio::test, async-std::test
+├── 阻塞 vs 非阻塞断言
+└── 缓解: 使用 async 测试宏
+
+边界 3: 外部依赖
+├── 网络服务、数据库可用性
+├── 测试环境配置复杂
+├── 测试速度变慢
+└── 缓解: mock, 内存数据库, HTTP 模拟
+
+边界 4: 全局状态
+├── 环境变量、静态变量
+├── 测试顺序影响结果
+├── 不可预测的行为
+└── 缓解: 隔离状态，或串行执行
+
+边界 5: 编译时间
+├── 大量测试增加编译时间
+├── #[cfg(test)] 代码仅在测试编译
+├── 但集成测试作为独立 crate 编译
+└── 缓解: 模块化，避免重复编译
+```
+
+> **边界要点**: 测试的边界主要与**并行执行**、**异步**、**外部依赖**、**全局状态**和**编译时间**相关。
+> [来源: [Cargo Book — Test Targets](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#tests)]
+
+---
+
+## 五、常见陷阱
+
+```text
+陷阱 1: 测试间共享可变状态
+  ❌ static mut COUNTER: i32 = 0;
+     #[test] fn test1() { unsafe { COUNTER += 1; } }
+     #[test] fn test2() { unsafe { COUNTER += 1; } }
+     // 并行执行导致数据竞争！
+
+  ✅ 每个测试独立状态
+     // 或使用 Mutex/Atomic
+
+陷阱 2: 忽略编译失败的文档测试
+  ❌ ```ignore
+     // 代码不编译也不运行
+
+  ✅ ```compile_fail
+     // 验证编译失败（有错误信息匹配）
+
+陷阱 3: 过度使用 unwrap 在测试
+  ❌ let result = operation().unwrap();
+     // 如果失败，测试 panic 信息不友好
+
+  ✅ let result = operation().expect("operation should succeed");
+     // 或使用 ? 在返回 Result 的测试中
+
+陷阱 4: 测试与实现耦合
+  ❌ 测试内部数据结构
+     // 重构时测试频繁失败
+
+  ✅ 测试公共行为
+     // 只通过公共 API 验证
+
+陷阱 5: 慢测试积累
+  ❌ 大量集成测试访问网络/数据库
+     // 反馈循环变慢
+
+  ✅ 分层测试金字塔
+     // 大量单元测试 + 少量集成测试
+```
+
+> **陷阱总结**: 测试的陷阱主要与**共享状态**、**文档测试属性**、**错误信息**、**耦合**和**速度**相关。
+> [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing/unit_testing.html)]
+
+---
+
+## 六、来源与延伸阅读
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) | ✅ 一级 | 基础教程 |
+| [Rust Reference — Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) | ✅ 一级 | 属性参考 |
+| [Rustdoc — Doc Tests](https://doc.rust-lang.org/rustdoc/write-documentation/documentation-tests.html) | ✅ 一级 | 文档测试 |
+| [Cargo Book — Tests](https://doc.rust-lang.org/cargo/guide/tests.html) | ✅ 一级 | Cargo 测试 |
+| [criterion.rs](https://bheisler.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试 |
+
+---
+
+## 相关概念文件
+
+- [Modules](./11_modules_and_paths.md) — 模块系统
+- [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理
+- [Testing Strategies](../06_ecosystem/16_testing.md) — 测试策略
+- [Security Practices](../06_ecosystem/19_security_practices.md) — 安全实践
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成

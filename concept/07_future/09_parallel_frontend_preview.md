@@ -1,4 +1,4 @@
-# 并行前端编译预研：Rust 编译器的多核扩展
+# 并行 [来源: [rayon](https://docs.rs/rayon/latest/rayon/)]前端编译预研：Rust 编译器 [来源: [rustc Parallel](https://rustc-dev-guide.rust-lang.org/compiler-src.html)]的多核扩展
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。
@@ -11,7 +11,7 @@
 
 ## 📑 目录
 
-- [并行前端编译预研：Rust 编译器的多核扩展](#并行前端编译预研rust-编译器的多核扩展)
+- [并行 \[来源: rayon\]前端编译预研：Rust 编译器 \[来源: rustc Parallel\]的多核扩展](#并行-来源-rayon前端编译预研rust-编译器-来源-rustc-parallel的多核扩展)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 编译器架构回顾](#11-rust-编译器架构回顾)
@@ -45,7 +45,7 @@ Rust 编译器采用传统的**前端-中端-后端**分离架构：
 > **前端职责**: 词法分析、语法分析、语义分析（类型检查、借用检查）
 > **中端职责**: MIR 优化、 borrow check、常量求值
 > **后端职责**: LLVM 代码生成、优化、目标平台适配
-> [来源: [Rust Reference — Compiler Overview](https://doc.rust-lang.org/rustc/overview.html)]
+> [来源: [Rust Reference — Compiler Overview](https://doc.rust-lang.org/rustc [来源: [Rust Compiler](https://doc.rust-lang.org/rustc/)]/overview.html)]
 
 ---
 
@@ -258,6 +258,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Compiler Team](https://github.com/rust-lang/compiler-team/) | ✅ 一级 | 编译器开发团队 |
 | [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) | ✅ 一级 | 官方项目目标 |

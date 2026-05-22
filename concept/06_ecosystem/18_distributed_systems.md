@@ -1,17 +1,19 @@
-# 分布式系统：Rust 在微服务与集群中的工程实践
+# 分布式 [来源: [Distributed Systems](https://en.wikipedia.org/wiki/Distributed_computing)]系统：Rust 在微服务 [来源: [Microservices](https://microservices.io/)]与集群中的工程实践
 
 > **Bloom 层级**: 应用 → 评价
 > **定位**: 分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。
-> **前置概念**: [Async](../03_advanced/02_async.md) · [Network](../04_networks/01_networks.md) · [Concurrency](../03_advanced/01_concurrency.md)
-> **后置概念**: [WebAssembly](./11_webassembly.md) · [Observability](./13_logging_observability.md)
+> **前置概念**: [Async](../03_advanced/02_async [来源: [Async Rust](https://rust-lang.github.io/async-book/)].md) ·
+> [Concurrency](../03_advanced/01_concurrency.md)
+> **后置概念**: [WebAssembly](./11_webassembly.md) ·
+> [Observability](./13_logging_observability.md)
 
 ---
 
-> **来源**: [tonic crate](https://docs.rs/tonic/latest/tonic/) · [tokio-rs ecosystem](https://tokio.rs/) · [Raft Consensus Paper](https://raft.github.io/raft.pdf) · [Consul by HashiCorp](https://www.consul.io/) · [Linkerd](https://linkerd.io/) · [NATS](https://nats.io/)
+> **来源**: [tonic [来源: [tonic](https://docs.rs/tonic/latest/tonic/)] crate](<https://docs.rs/tonic/latest/tonic/>) · [tokio [来源: [Tokio](https://tokio.rs/)]-rs ecosystem](<https://tokio.rs/>) · [Raft [来源: [Raft Paper](https://raft.github.io/raft.pdf)] Consensus Paper](<https://raft.github.io/raft.pdf>) · [Consul by HashiCorp](https://www.consul.io/) · [Linkerd](https://linkerd.io/) · [NATS](https://nats.io/)
 
 ## 📑 目录
 
-- [分布式系统：Rust 在微服务与集群中的工程实践](#分布式系统rust-在微服务与集群中的工程实践)
+- [分布式 \[来源: Distributed Systems\]系统：Rust 在微服务 \[来源: Microservices\]与集群中的工程实践](#分布式-来源-distributed [来源: [Rust Distributed Systems](https://rust-lang-nursery.github.io/rust-cookbook/web/clients.html)]-systems系统rust-在微服务-来源-microservices与集群中的工程实践)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Rust 在分布式系统中的定位](#11-rust-在分布式系统中的定位)
@@ -438,6 +440,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [tonic crate](https://docs.rs/tonic/latest/tonic/) | ✅ 一级 | gRPC 框架 |
 | [tokio.rs](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
@@ -452,7 +465,7 @@ graph TD
 ## 相关概念文件
 
 - [Async](../03_advanced/02_async.md) — 异步编程
-- [Network](../04_networks.md) — 网络编程
+- [Async](../03_advanced/02_async.md) — 异步编程
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发模型
 - [WebAssembly](./11_webassembly.md) — WebAssembly
 

@@ -1,8 +1,8 @@
-# DSL 与嵌入式设计：Rust 中的领域特定语言
+# DSL [来源: [DSL Wikipedia](https://en.wikipedia.org/wiki/Domain-specific_language)] 与嵌入 [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]式设计：Rust 中的领域特定语言
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
-> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Proc Macro](../03_advanced/07_proc_macro.md) · [Trait](./01_traits.md)
+> **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
+> **前置概念**: [Macros](../03_advanced/04_macro [来源: [Rust Macros](https://doc.rust-lang.org/reference/macros.html)]s.md) · [Proc Macro](../03_advanced/07_proc_macro [来源: [Rust Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)].md) · [Trait](./01_traits.md)
 > **后置概念**: [Serde Patterns](./09_serde_patterns.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 
 ---
@@ -11,7 +11,7 @@
 
 ## 📑 目录
 
-- [DSL 与嵌入式设计：Rust 中的领域特定语言](#dsl-与嵌入式设计rust-中的领域特定语言)
+- [DSL \[来源: DSL Wikipedia\] 与嵌入 \[来源: Rust Embedded Book\]式设计：Rust 中的领域特定语言](#dsl-来源-dsl-wikipedia-与嵌入-来源-rust-embedded-book式设计rust-中的领域特定语言)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 内嵌 DSL vs 外部 DSL](#11-内嵌-dsl-vs-外部-dsl)
@@ -324,7 +324,7 @@ SQL 查询:
   → 手动实现或 state_machine_future
 ```
 
-> **模式矩阵**: Rust 的 DSL 生态充分利用了**宏系统**和**类型系统**——两者结合使 DSL 既表达力强又类型安全。
+> **模式矩阵**: Rust 的 DSL 生态充分利用了**宏系统 [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros-by-example.html)]**和**类型系统**——两者结合使 DSL 既表达力强又类型安全。
 > [source: [Awesome Rust — DSL](https://github.com/rust-unofficial/awesome-rust)]
 
 ---
@@ -357,7 +357,7 @@ graph TD
 ```text
 边界 1: 宏的编译时间
 ├── 复杂宏 DSL 增加编译时间
-├── syn 解析是 CPU 密集型
+├── syn [来源: [syn crate](https://docs.rs/syn/latest/syn/)] 解析是 CPU 密集型
 ├── 每个使用宏的 crate 都需要重新解析
 └── 缓解: 优化宏实现、使用 proc-macro2
 
@@ -437,6 +437,11 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | ✅ 一级 | 宏系统入门 |
 | [nom Parser Combinators](https://docs.rs/nom/latest/nom/) | ✅ 一级 | 解析器组合子 |

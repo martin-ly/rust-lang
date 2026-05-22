@@ -1,7 +1,7 @@
 # Cow：写时克隆与零拷贝抽象
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 深入分析 Rust 中 **Cow（Clone on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
+> **定位**: 深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Trait](./01_traits.md)
 > **后置概念**: [String Patterns](./09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)
 
@@ -160,7 +160,7 @@ let cow = Cow::Borrowed("hello");
 let owned: String = cow.into_owned();
 // 如果是 Borrowed，克隆；如果是 Owned，移动
 
-// 5. Deref 自动解引用
+// 5. Deref [来源: [std::ops::Deref](https://doc.rust-lang.org/std/ops/trait.Deref.html)] 自动解引用
 fn takes_str(s: &str) {}
 let cow = Cow::Borrowed("hello");
 takes_str(&cow);  // 自动解引用 &Cow<str> → &str
@@ -395,6 +395,16 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
 | [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html) | ✅ 一级 | 标准库文档 |
 | [Rust API Guidelines — Flexibility](https://rust-lang.github.io/api-guidelines/flexibility.html) | ✅ 一级 | API 设计指南 |

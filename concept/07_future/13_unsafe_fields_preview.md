@@ -1,7 +1,7 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 探讨 Rust 中引入 **unsafe fields** 的提案——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
+> **定位**: 探讨 Rust 中引入 **unsafe [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)] [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)] field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]s** 的提案——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Safety Tags](./08_safety_tags_preview.md)
 
@@ -279,7 +279,7 @@ graph TD
 
 边界 4: 与 Pin/Unpin 的交互
 ├── Pin<&mut Self> 中访问 unsafe 字段需要 unsafe
-├── 但 Pin 的内存安全保证与 unsafe 字段的契约是独立的
+├── 但 Pin 的内存安全 [来源: [Rust Safety](https://www.rust-lang.org/policies/security)]保证与 unsafe 字段的契约是独立的
 └── 两者结合时，unsafe 块中需同时维持两种契约
 ```
 
@@ -306,6 +306,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust RFC 3458](https://github.com/rust-lang/rfcs/pull/3458) | ✅ 一级 | 官方 RFC，unsafe fields 设计 |
 | [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ 一级 | unsafe Rust 权威指南 |

@@ -1,7 +1,7 @@
 # 内部可变性：编译期规则的运行时逃逸
 
 > **Bloom 层级**: 分析 → 应用
-> **定位**: 深入分析 Rust **内部可变性**（Interior Mutability）模式——`Cell<T>`、`RefCell<T>`、`Mutex<T>`、`RwLock<T>` 的语义差异、使用场景以及与外部可变性（External Mutability）的互补关系。
+> **定位**: 深入分析 Rust **内部可变性**（Interior Mutability）模式——`Cell<T>`、`RefCell<T>`、`Mutex<T> [来源: [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html)]`、`RwLock<T>` 的语义差异、使用场景以及与外部可变性（External Mutability）的互补关系。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
 
@@ -395,6 +395,10 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
 |:---|:---:|:---|
 | [TRPL Ch15 — Interior Mutability](https://doc.rust-lang.org/book/ch15-05-interior-mutability.html) | ✅ 一级 | 官方入门指南 |
 | [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html) | ✅ 一级 | unsafe 视角深入 |

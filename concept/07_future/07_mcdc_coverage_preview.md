@@ -1,4 +1,4 @@
-# MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
+# MC/DC [来源: [DO-178C MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage [来源: [Rust Coverage](https://doc.rust-lang.org/rustc/instrument-coverage.html)])] [来源: [Wikipedia — MC/DC](https://en.wikipedia.org/wiki/Modified_condition/decision_coverage)] Coverage 概念预研：安全关键 Rust 的覆盖率 [来源: [grcov](https://github.com/mozilla/grcov)]验证
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。
@@ -7,11 +7,11 @@
 
 ---
 
-> **来源**: [DO-178C / ED-12C](https://www.rtca.org/product/do-178c/) · [ISO 26262](https://www.iso.org/standard/68383.html) · [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) · [MCDC Wikipedia](https://en.wikipedia.org/wiki/Code_coverage) · [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
+> **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) · [ISO 26262](https://www.iso.org/standard/68383.html) · [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) · [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) · [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
 
 ## 📑 目录
 
-- [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](#mcdc-coverage-概念预研安全关键-rust-的覆盖率验证)
+- [MC/DC \[来源: \[DO-178C MC/DC\](https://en.wikipedia.org/wiki/Modified\_condition/decision\_coverage \[来源: Rust Coverage\])\] \[来源: Wikipedia — MC/DC\] Coverage 概念预研：安全关键 Rust 的覆盖率 \[来源: grcov\]验证](#mcdc-来源-do-178c-mcdchttpsenwikipediaorgwikimodified_conditiondecision_coverage-来源-rust-coverage-来源-wikipedia--mcdc-coverage-概念预研安全关键-rust-的覆盖率-来源-grcov验证)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 覆盖率等级的层次结构](#11-覆盖率等级的层次结构)
@@ -253,6 +253,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [DO-178C / ED-12C](https://www.rtca.org/product/do-178c/) | ✅ 一级 | 航空软件标准，MC/DC 定义来源 |
 | [ISO 26262](https://www.iso.org/standard/68383.html) | ✅ 一级 | 汽车功能安全标准 |

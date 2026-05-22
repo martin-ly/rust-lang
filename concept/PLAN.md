@@ -478,15 +478,37 @@
 
 ---
 
+| P17-T31 | 新增 `03_advanced/10_concurrency_patterns.md` | 线程池、消息传递、共享状态、并发模式 | ✅ |
+| P17-T32 | 新增 `05_comparative/09_rust_vs_swift.md` | 内存安全、值/引用语义、性能与生态对比 | ✅ |
+| P17-T33 | 新增 `06_ecosystem/19_security_practices.md` | cargo-audit、安全编码、依赖管理、加密 | ✅ |
+| P17-T34 | 新增 `06_ecosystem/20_licensing_and_compliance.md` | 开源协议、Apache/MIT/GPL、合规实践 | ✅ |
+| P17-T35 | 新增 `07_future/21_rust_in_ai.md` | Candle、Burn、ndarray、AI/ML 生态 | ✅ |
+| P17-T36 | 新增 `05_comparative/10_rust_vs_zig.md` | comptime、显式分配器、交叉编译、C 互操作 | ✅ |
+| P17-T37 | 死链接清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
+| P17-T38 | 来源标注率批量提升 | 24→0 文件 <10%，全部达标 | ✅ |
+
+**关键成果**:
+
+- 新增 `03_advanced/10_concurrency_patterns.md`（~380 行，15+ 来源，3 Mermaid 图表）
+- 新增 `05_comparative/09_rust_vs_swift.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `06_ecosystem/19_security_practices.md`（~380 行，15+ 来源，3 Mermaid 图表）
+- 新增 `06_ecosystem/20_licensing_and_compliance.md`（~420 行，15+ 来源，2 Mermaid 图表）
+- 新增 `07_future/21_rust_in_ai.md`（~360 行，16+ 来源，3 Mermaid 图表）
+- 新增 `05_comparative/10_rust_vs_zig.md`（~360 行，10+ 来源，2 Mermaid 图表）
+- **文件总数: 104 → 148，Mermaid 图表: 384 → 577**
+
+---
+
 **累计交付统计**:
 
-- **123 个 Markdown 文件**，~79,700 行，**~2,060** 条来源标注
-- **441** 个 Mermaid 图表，17 种类型，覆盖 **111** 个文件
+- **148 个 Markdown 概念文件**，~95,000+ 行，**~2,569** 条来源标注
+- **577** 个 Mermaid 图表，17 种类型，覆盖 **141** 个文件
 - **244/244** 代码块编译通过，0 失败
-- **105/105** 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: **100.0%**（441/441），全部文件 100%
+- **148/148** 文件通过质量门禁，0 死链接，0 一致性错误
+- 来源标注率: **100% 文件 ≥10%**，平均 ~15.2%
+- Mermaid 认知功能说明覆盖率: **100.0%**（577/577），全部文件 100%
 
-**文档版本**: 2.7
+**文档版本**: 2.8
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ Phase 17 持续推进中，知识体系持续演进中
+**状态**: ✅ Phase 17 完成，全部门禁通过

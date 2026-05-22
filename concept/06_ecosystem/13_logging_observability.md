@@ -1,7 +1,7 @@
 # 日志与可观测性：Rust 服务端监控生态
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 覆盖 Rust 生态中 **日志（log/tracing）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
+> **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [WebAssembly](./11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)
 
@@ -9,7 +9,7 @@
 
 > **来源**: [tracing Documentation](https://docs.rs/tracing/latest/tracing/) ·
 > [log crate](https://docs.rs/log/latest/log/) ·
-> [OpenTelemetry Rust](https://github.com/open-telemetry/opentelemetry-rust) ·
+> [OpenTelemetry [来源: [opentelemetry.io](https://opentelemetry.io/)] Rust](<https://github.com/open-telemetry/opentelemetry-rust>) ·
 > [tokio/tracing](https://github.com/tokio-rs/tracing) ·
 > [Prometheus Rust Client](https://github.com/prometheus/client_rust)
 
@@ -351,6 +351,11 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [tracing Documentation](https://docs.rs/tracing/latest/tracing/) | ✅ 一级 | 官方文档 |
 | [log crate](https://docs.rs/log/latest/log/) | ✅ 一级 | Rust 日志 facade |

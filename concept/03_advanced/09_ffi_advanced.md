@@ -1,0 +1,528 @@
+# FFI [来源: [Rust FFI](https://doc.rust-lang.org/nomicon/ffi.html)] 高级主题：跨语言边界的安全与性能
+
+> **Bloom 层级**: 分析 → 评价
+> **定位**: 深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。
+> **前置概念**: [Unsafe](./03_unsafe [来源: [Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)].md) · [FFI Basics](./05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
+> **后置概念**: [Cross Compilation](../06_ecosystem/17_cross_compilation.md) · [WASI](../06_ecosystem/08_wasi.md)
+
+---
+
+> **来源**: [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) ·
+> [Rust Reference — FFI](https://doc.rust-lang.org/reference/items/external-blocks.html) ·
+> [bindgen Guide](https://rust-lang.github.io/rust-bindgen/) ·
+> [cbindgen](https://github.com/mozilla/cbindgen) ·
+> [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
+
+## 📑 目录
+
+- [FFI \[来源: Rust FFI\] 高级主题：跨语言边界的安全与性能](#ffi-来源-rust-ffi-高级主题跨语言边界的安全与性能)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 FFI 的安全契约](#11-ffi-的安全契约)
+    - [1.2 内存布局控制](#12-内存布局控制)
+    - [1.3 回调与闭包](#13-回调与闭包)
+  - [二、技术细节](#二技术细节)
+    - [2.1 复杂类型映射](#21-复杂类型映射)
+    - [2.2 线程安全边界](#22-线程安全边界)
+    - [2.3 错误处理与 Panic 安全](#23-错误处理与-panic-安全)
+  - [三、FFI 模式矩阵](#三ffi-模式矩阵)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
+  - [五、常见陷阱](#五常见陷阱)
+  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [相关概念文件](#相关概念文件)
+
+---
+
+## 一、核心概念
+
+### 1.1 FFI 的安全契约
+
+```text
+FFI 边界的安全模型:
+
+  Rust 侧保证:
+  ├── 传入 C 的指针有效（非悬空、正确对齐）
+  ├── 遵守 C API 的前置条件
+  ├── 不违反 C 库的不变性
+  └── 正确处理 C 返回的错误码
+
+  C 侧保证（需要文档明确）:
+  ├── 不修改 Rust 拥有的内存
+  ├── 不保留 Rust 传递的临时指针
+  ├── 线程安全行为（是否可重入）
+  └── 资源释放约定（谁 free？）
+
+  危险区域:
+  ├── C 代码可能越界写入
+  ├── C 可能返回未初始化内存
+  ├── C 可能不是线程安全的
+  └── C 可能在任何时刻 longjmp
+
+  Rust 的应对:
+  ├── unsafe 块标记不可验证区域
+  ├── 安全包装层提供类型安全
+  └── Miri / Sanitizers 动态检测
+```
+
+> **认知功能**: FFI 的**核心挑战**是**安全契约的隐式性**——C API 通常不形式化其契约，Rust 开发者必须通过文档和测试推断。
+> [来源: [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
+
+---
+
+### 1.2 内存布局控制
+
+```rust,ignore
+// 内存布局控制
+
+use std::os::raw::{c_int, c_void};
+
+// #[repr(C)]: C 兼容布局
+#[repr(C)]
+pub struct Point {
+    pub x: f64,
+    pub y: f64,
+}
+
+// #[repr(transparent)]: 单字段透传 ABI
+#[repr(transparent)]
+pub struct Handle(c_int);
+
+// #[repr(packed)]: 无填充（用于硬件映射）
+#[repr(C, packed)]
+pub struct PacketHeader {
+    pub flags: u8,
+    pub len: u16,  // 在 packed 中可能未对齐！
+    pub id: u32,
+}
+
+// 对齐控制
+#[repr(C, align(16))]
+pub struct AlignedBuffer {
+    pub data: [u8; 64],
+}
+
+// 联合体（Union）
+#[repr(C)]
+pub union Value {
+    pub int: c_int,
+    pub float: f32,
+    pub ptr: *mut c_void,
+}
+
+// 不透明类型（Opaque Struct）
+#[repr(C)]
+pub struct OpaqueContext {
+    _private: [u8; 0],  // 大小为 0，但外部不可构造
+}
+
+// 使用:
+extern "C" {
+    pub fn context_new() -> *mut OpaqueContext;
+    pub fn context_free(ctx: *mut OpaqueContext);
+}
+```
+
+> **布局洞察**: `#[repr(C)]` 是 FFI 的**基石**——它保证 Rust 结构体的内存布局与 C 完全相同。
+> [来源: [Rust Reference — Type Layout](https://doc.rust-lang.org/reference/type-layout.html)]
+
+---
+
+### 1.3 回调与闭包
+
+```rust,ignore
+// 将 Rust 闭包传递给 C 回调
+
+// C API 签名:
+// typedef void (*callback_t)(int value, void *user_data);
+// void register_callback(callback_t cb, void *user_data);
+
+use std::ffi::c_void;
+
+// 安全包装: 将 FnMut(i32) 转换为 C 回调
+pub fn with_callback<F>(mut f: F)
+where
+    F: FnMut(i32),
+{
+    unsafe extern "C" fn trampoline<F>(value: i32, user_data: *mut c_void)
+    where
+        F: FnMut(i32),
+    {
+        let closure = &mut *(user_data as *mut F);
+        closure(value);
+    }
+
+    let mut closure = f;
+    unsafe {
+        register_callback(
+            Some(trampoline::<F>),
+            &mut closure as *mut F as *mut c_void,
+        );
+    }
+}
+
+// 但需要考虑:
+// ├── 闭包生命周期必须长于 C 回调使用期
+// ├── panic 跨越 FFI 边界是 UB
+// ├── 多线程场景需要 Send/Sync
+// └── C 可能不保证回调只调用一次
+
+// 更好的设计: 使用 Box 管理生命周期
+pub struct CallbackHandle {
+    ptr: *mut c_void,
+}
+
+impl Drop for CallbackHandle {
+    fn drop(&mut self) {
+        unsafe { unregister_callback(self.ptr) };
+    }
+}
+```
+
+> **回调洞察**: Rust 闭包 → C 回调的**桥接**是 FFI 中最复杂的模式之一——它涉及生命周期、panic 安全和线程安全的多重考量。
+> [来源: [Rust FFI — Callbacks](https://doc.rust-lang.org/nomicon/ffi.html#callbacks-from-c-code-to-rust-functions)]
+
+---
+
+## 二、技术细节
+
+### 2.1 复杂类型映射
+
+```text
+类型映射矩阵:
+
+  基本类型:
+  ┌─────────────────┬─────────────────┐
+  │ C               │ Rust            │
+  ├─────────────────┼─────────────────┤
+  │ char            │ c_char (i8/u8)  │
+  │ short           │ c_short         │
+  │ int             │ c_int           │
+  │ long            │ c_long          │
+  │ long long       │ c_longlong      │
+  │ float           │ f32             │
+  │ double          │ f64             │
+  │ void*           │ *mut c_void      │
+  │ size_t          │ usize            │
+  │ ssize_t         │ isize           │
+  └─────────────────┴─────────────────┘
+
+  字符串:
+  ├── C char* → Rust *const c_char 或 CStr
+  ├── Rust &str → C 需要转换为 CString
+  └── 所有权: C 字符串可能需手动 free
+
+  数组:
+  ├── C 数组指针 + 长度
+  ├── Rust: 切片 &[T] 或 Vec<T>
+  └── 注意: C 不记录长度，需显式传递
+
+  函数指针:
+  ├── C: void (*fn)(int)
+  ├── Rust: Option<extern "C" fn(c_int)>
+  └── Option 用于允许 NULL 函数指针
+```
+
+> **映射洞察**: Rust 的 `std::os::raw` 模块提供**平台无关的 C 类型映射**——但 `c_char` 的符号性（signed/unsigned）因平台而异。
+> [来源: [std::os::raw](https://doc.rust-lang.org/std/os/raw/index.html)]
+
+---
+
+### 2.2 线程安全边界
+
+```rust,ignore
+// FFI 线程安全
+
+// 问题: C 库可能不是线程安全的
+
+// 标记 Send + Sync（需要验证 C 库线程安全）
+pub struct ThreadSafeHandle {
+    ptr: *mut c_void,
+}
+
+// 安全包装: 假设 C 库是线程安全的
+unsafe impl Send for ThreadSafeHandle {}
+unsafe impl Sync for ThreadSafeHandle {}
+
+// 更好的做法: 明确线程模型
+pub struct SendOnlyHandle {
+    ptr: *mut c_void,
+}
+unsafe impl Send for SendOnlyHandle {}
+// 不实现 Sync！只能在一个线程使用
+
+// 使用 Mutex 包装非线程安全 C 库
+use std::sync::Mutex;
+
+pub struct SyncWrapper {
+    inner: Mutex<*mut c_void>,
+}
+
+// 或使用 LocalKey 限制为线程本地
+use std::thread_local;
+
+thread_local! {
+    static LOCAL_CTX: *mut c_void = std::ptr::null_mut();
+}
+
+// 关键问题:
+// ├── C 库的线程模型是什么？
+// ├── 回调发生在哪个线程？
+// ├── C 库是否使用 TLS？
+// └── Rust 的 Send/Sync 标记是否准确？
+```
+
+> **线程安全洞察**: FFI 的**线程安全**不能自动推断——必须查阅 C 库文档或源码，然后显式标记 `Send`/`Sync`。
+> [来源: [Rust Nomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)]
+
+---
+
+### 2.3 错误处理与 Panic 安全
+
+```rust,ignore
+// Panic 跨越 FFI 边界 = 未定义行为
+
+// 安全包装: 捕获 panic
+pub fn safe_ffi_call() -> Result<(), String> {
+    std::panic::catch_unwind(|| {
+        // Rust 代码可能 panic
+        risky_operation();
+    }).map_err(|e| {
+        format!("Panic: {:?}", e.downcast_ref::<&str>())
+    })?;
+    Ok(())
+}
+
+// C 错误码映射
+#[derive(Debug)]
+pub enum FfiError {
+    NullPointer,
+    InvalidArg,
+    OutOfMemory,
+    Unknown(i32),
+}
+
+impl From<c_int> for FfiError {
+    fn from(code: c_int) -> Self {
+        match code {
+            -1 => FfiError::NullPointer,
+            -2 => FfiError::InvalidArg,
+            -3 => FfiError::OutOfMemory,
+            _ => FfiError::Unknown(code),
+        }
+    }
+}
+
+// 使用 Result:
+pub fn open_file(path: &str) -> Result<FileHandle, FfiError> {
+    let c_path = std::ffi::CString::new(path)?;
+    let handle = unsafe { c_open_file(c_path.as_ptr()) };
+    if handle.is_null() {
+        Err(FfiError::NullPointer)
+    } else {
+        Ok(FileHandle { ptr: handle })
+    }
+}
+
+// 资源清理（即使出错）:
+struct CleanupGuard<F: FnOnce()>(Option<F>);
+
+impl<F: FnOnce()> Drop for CleanupGuard<F> {
+    fn drop(&mut self) {
+        if let Some(f) = self.0.take() {
+            f();
+        }
+    }
+}
+```
+
+> **Panic 安全洞察**: `catch_unwind` 是 FFI 边界的**安全网**——但不应作为常规错误处理机制使用，它有性能开销且不能捕获所有 panic。
+> [来源: [std::panic::catch_unwind](https://doc.rust-lang.org/std/panic/fn.catch_unwind.html)]
+
+---
+
+## 三、FFI 模式矩阵
+
+```text
+场景 → 方案 → 关键考虑
+
+C 库包装:
+  → -sys crate 提供底层绑定
+  → 高层 crate 提供安全 API
+  → 关键: 谁管理内存？
+
+自动绑定生成:
+  → bindgen: C → Rust
+  → cbindgen: Rust → C
+  → 需要手动审查和调整
+
+内存共享:
+  → 共享缓冲区（&mut [u8]）
+  → 注意: C 可能越界写入
+  → 使用长度检查或 Miri 验证
+
+异步集成:
+  → C 回调 → Rust Future
+  → 需要 Waker 机制桥接
+  → 复杂但可行
+
+Opaque 指针:
+  → Rust 拥有，C 只使用
+  → 或 C 拥有，Rust 使用
+  → 明确所有权避免 double free
+```
+
+> **模式矩阵**: FFI 的**核心原则**是"在边界处验证"——所有跨边界的假设都必须在 Rust 侧显式检查。
+> [来源: [Rust FFI Guidelines](https://rust-lang.github.io/rust-bindgen/some-ffi-patterns.html)]
+
+---
+
+## 四、反命题与边界分析
+
+### 4.1 反命题树
+
+```mermaid
+graph TD
+    ROOT["命题: 所有 C 库都应包装为 safe Rust API"]
+    ROOT --> Q1{"是否理解 C API 契约?"}
+    Q1 -->|是| Q2{"是否有时间投资?"}
+    Q1 -->|否| UNSAFE["⚠️ 使用 raw FFI，标记 unsafe"]
+    Q2 -->|是| WRAP["✅ 创建 safe 包装"]
+    Q2 -->|否| RAW["⚠️ 使用 raw FFI"]
+
+    style UNSAFE fill:#ffcdd2
+    style WRAP fill:#c8e6c9
+    style RAW fill:#fff3e0
+```
+
+> **认知功能**: **Safe 包装是目标**，但**理解 C API 契约是前提**——不安全的包装比直接的 unsafe 更危险。
+> [来源: [Rust API Guidelines — Safety](https://rust-lang.github.io/api-guidelines/documentation.html#function-docs-include-error-conditions-and-panic-conditions-c-failure)]
+
+---
+
+### 4.2 边界极限
+
+```text
+边界 1: C++ 互操作
+├── C++ 的名称修饰、异常、类
+├── cxx crate 提供类型安全桥接
+├── 但仍有局限性（模板、多重继承）
+└── 缓解: C 兼容接口层
+
+边界 2: 长期运行的 C 回调
+├── Rust 闭包可能被 C 长期持有
+├── 生命周期管理复杂
+├── 需要 Pin 保证内存不移动
+└── 缓解: Box + Pin + 显式释放
+
+边界 3: 异常模型差异
+├── C++ 异常、setjmp/longjmp
+├── Rust panic
+├── 两者跨越边界都是 UB
+└── 缓解: 在边界处转换错误模型
+
+边界 4: 调试困难
+├── C 侧调试器看不到 Rust 类型
+├── Rust 侧调试器看不到 C 结构
+├── 栈跟踪跨越语言边界断裂
+└── 缓解: 统一使用 lldb/gdb
+
+边界 5: 构建系统集成
+├── Cargo 与 make/cmake/meson
+├── 交叉编译工具链
+├── 静态链接 vs 动态链接
+└── 缓解: build.rs + pkg-config
+```
+
+> **边界要点**: FFI 的边界主要与**C++ 互操作**、**回调生命周期**、**异常模型**、**调试**和**构建系统**相关。
+> [来源: [Rust FFI — Best Practices](https://doc.rust-lang.org/nomicon/ffi.html#best-practices)]
+
+---
+
+## 五、常见陷阱
+
+```text
+陷阱 1: 忽略 C 字符串的 NULL 终止
+  ❌ let c_str = my_rust_string.as_ptr();
+     // Rust 字符串不是 NULL 终止的！
+
+  ✅ let c_string = CString::new(my_rust_string)?;
+     // 确保 NULL 终止
+
+陷阱 2: 返回悬空指针
+  ❌ pub fn get_name() -> *const c_char {
+         let name = CString::new("temp").unwrap();
+         name.as_ptr()  // name 在这里被 drop！
+     }
+
+  ✅ pub fn get_name() -> CString {
+         CString::new("safe").unwrap()
+     }
+     // 或泄漏（如果必须返回指针）: into_raw()
+
+陷阱 3: 不匹配调用约定
+  ❌ extern fn callback(x: i32) {}
+     // 默认是 "Rust" 调用约定
+
+  ✅ unsafe extern "C" fn callback(x: c_int) {}
+     // C 调用约定
+
+陷阱 4: 忽略对齐要求
+  ❌ 将未对齐指针传递给 C
+     // C 可能假设对齐
+
+  ✅ 使用 #[repr(C)] 和正确对齐
+     // 或 memcpy 到对齐缓冲区
+
+陷阱 5: Panic 跨越 FFI
+  ❌ unsafe extern "C" fn cb() {
+         might_panic();  // UB！
+     }
+
+  ✅ unsafe extern "C" fn cb() {
+         let _ = std::panic::catch_unwind(|| {
+             might_panic();
+         });
+     }
+```
+
+> **陷阱总结**: FFI 的陷阱主要与**字符串**、**生命周期**、**调用约定**、**对齐**和 **panic** 相关。
+> [来源: [Rust FFI — Common Mistakes](https://doc.rust-lang.org/nomicon/ffi.html)]
+
+---
+
+## 六、来源与延伸阅读
+
+| 来源 | 可信度 | 说明 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+|:---|:---:|:---|
+| [Rust Nomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html) | ✅ 一级 | 权威指南 |
+| [bindgen Guide](https://rust-lang.github.io/rust-bindgen/) | ✅ 一级 | 绑定生成 |
+| [cbindgen](https://github.com/mozilla/cbindgen) | ✅ 一级 | Rust → C 头 |
+| [Rust Reference — extern](https://doc.rust-lang.org/reference/items/external-blocks.html) | ✅ 一级 | 语法参考 |
+| [cxx crate](https://cxx.rs/) | ✅ 一级 | C++ 互操作 |
+
+---
+
+## 相关概念文件
+
+- [Unsafe](./03_unsafe.md) — 不安全代码
+- [FFI Basics](./05_rust_ffi.md) — FFI 基础
+- [Cross Compilation](../06_ecosystem/17_cross_compilation.md) — 交叉编译
+- [Type System](../01_foundation/04_type_system.md) — 类型系统
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成

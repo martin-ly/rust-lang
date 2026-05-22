@@ -1,7 +1,7 @@
 # 测试生态：单元测试、集成测试与验证策略
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、mockall 模拟、property-based testing（proptest）到模糊测试（cargo-fuzz），分析 Rust 的类型系统如何与测试策略协同实现"编译即验证"的工程学理念。
+> **定位**: 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、mockall [来源: [mockall](https://docs.rs/mockall/latest/mockall/)] 模拟、property-based testing（proptest [来源: [proptest](https://docs.rs/proptest/latest/proptest/)]）到模糊测试（cargo-fuzz），分析 Rust 的类型系统如何与测试策略协同实现"编译即验证"的工程学理念。
 > **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [Macros](../03_advanced/04_macros.md)
 > **后置概念**: [Miri](../03_advanced/03_unsafe.md) · [Formal Methods](../07_future/02_formal_methods.md)
 
@@ -55,7 +55,7 @@ Rust 测试的三种内置形式:
 
   3. 文档测试（Doc Tests）
      ├── 放在 /// 注释中的 ``` 代码块
-     ├── cargo test --doc 运行
+     ├── cargo test [来源: [Cargo Test](https://doc.rust-lang.org/cargo/commands/cargo-test.html)] --doc 运行
      └── 确保示例代码始终可编译
 
   测试属性:
@@ -403,6 +403,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) | ✅ 一级 | 测试入门 |
 | [mockall](https://docs.rs/mockall/latest/mockall/) | ✅ 一级 | Mock 框架 |

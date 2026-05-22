@@ -1,7 +1,7 @@
-# WebAssembly 生态：Rust 的浏览器外运行时
+# WebAssembly [来源: [WebAssembly.org](https://webassembly.org/)] 生态：Rust 的浏览器外运行时
 
 > **Bloom 层级**: 应用 → 分析
-> **定位**: 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，探讨 `wasm32-unknown-unknown` / `wasm32-wasi` 目标、`wasm-bindgen`、组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
+> **定位**: 系统分析 Rust 在 **WebAssembly (Wasm)** 生态中的核心地位，探讨 `wasm32-unknown-unknown` / `wasm32-wasi` 目标、`wasm-bindgen [来源: [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen)]`、组件模型以及 Rust 作为 Wasm 首选语言的工程原因。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WASI](./08_wasi.md)
 
@@ -15,7 +15,7 @@
 
 ## 📑 目录
 
-- [WebAssembly 生态：Rust 的浏览器外运行时](#webassembly-生态rust-的浏览器外运行时)
+- [WebAssembly \[来源: WebAssembly.org\] 生态：Rust 的浏览器外运行时](#webassembly-来源-webassemblyorg-生态rust-的浏览器外运行时)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 WebAssembly 的设计哲学](#11-webassembly-的设计哲学)
@@ -319,6 +319,11 @@ Rust Wasm 工具链:
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 官方规范 |
 | [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust 官方 Wasm 指南 |

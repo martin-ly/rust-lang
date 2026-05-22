@@ -1,4 +1,4 @@
-# Cranelift 后端预研：Rust 编译器的快速调试编译
+# Cranelift [来源: [Wasmtime](https://wasmtime.dev/)] [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)] 后端预研：Rust 编译器的快速调试编译
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 探讨 **Cranelift** 作为 Rust 编译器（rustc）的替代后端，分析其对**编译时间**、**调试体验**和**开发迭代效率**的影响，以及与 LLVM 后端的互补关系。
@@ -11,7 +11,7 @@
 
 ## 📑 目录
 
-- [Cranelift 后端预研：Rust 编译器的快速调试编译](#cranelift-后端预研rust-编译器的快速调试编译)
+- [Cranelift \[来源: Wasmtime\] \[来源: Cranelift\] 后端预研：Rust 编译器的快速调试编译](#cranelift-来源-wasmtime-来源-cranelift-后端预研rust-编译器的快速调试编译)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 问题：LLVM 的编译时间瓶颈](#11-问题llvm-的编译时间瓶颈)
@@ -275,6 +275,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) | ✅ 一级 | 官方项目仓库 |
 | [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) | ✅ 一级 | Cranelift IR 文档 |

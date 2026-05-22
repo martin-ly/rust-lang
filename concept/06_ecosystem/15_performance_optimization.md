@@ -1,13 +1,13 @@
 # 性能优化：Rust 代码的测量与调优
 
 > **Bloom 层级**: 应用 → 评价
-> **定位**: 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、性能分析（flamegraph、perf）、缓存优化、SIMD 到零成本抽象的验证，建立"测量 → 分析 → 优化 → 验证"的工程闭环。
+> **定位**: 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、性能分析（flamegraph [来源: [flamegraph.rs](https://github.com/flamegraph-rs/flamegraph)]、perf）、缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象的验证，建立"测量 → 分析 → 优化 → 验证"的工程闭环。
 > **前置概念**: [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
 
 ---
 
-> **来源**: [Criterion.rs](https://bokeh.github.io/criterion.rs/book/) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) · [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) · [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
+> **来源**: [Criterion [来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)].rs](<https://bokeh.github.io/criterion.rs/book/>) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) · [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) · [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ## 📑 目录
 
@@ -416,6 +416,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Rust Performance Book](https://nnethercote.github.io/perf-book/) | ✅ 一级 | 官方性能优化指南 |
 | [Criterion.rs](https://bokeh.github.io/criterion.rs/book/) | ✅ 一级 | 基准测试框架 |

@@ -1,27 +1,31 @@
 # NLL 与 Polonius：借用检查器的演进
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 分析 Rust **借用检查器**的两次重大演进——Non-Lexical Lifetimes（NLL，1.31+ stable）如何放宽基于词法的生命周期限制，以及 **Polonius**（下一代借用检查器）如何通过基于数据流的分析进一步消除误报。
-> **前置概念**: [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md)
-> **后置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Unsafe](./03_unsafe.md)
+> **定位**: 深入分析 Rust **借用检查器**的两个里程碑——Non-Lexical Lifetimes (NLL) 如何放宽词法作用域限制，以及 Polonius 如何通过数据流分析实现更精确的借用检查，揭示 Rust 类型系统的持续演进。
+> **前置概念**: [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md)
+> **后置概念**: [Unsafe](./03_unsafe.md) · [Formal Methods](../04_formal/04_rustbelt.md)
 
 ---
 
-> **来源**: [Rust RFC 2094 — NLL](https://github.com/rust-lang/rfcs/pull/2094) · [Polonius Repository](https://github.com/rust-lang/polonius) · [Rust Blog — NLL](https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-impl-2018.html) · [Rust Blog — Polonius](https://blog.rust-lang.org/inside-rust/2023/02/15/polonius-update.html) · [Niko Matsakis Blog — Borrow Check](http://smallcultfollowing.com/babysteps/blog/2019/09/21/moving-borrow-check/) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html)
+> **来源**: [NLL RFC](https://rust-lang.github.io/rfcs/2094-nll.html) ·
+> [Polonius Talk — RustConf 2018](https://www.youtube.com/watch?v=_8X69Kw0EhY) ·
+> [Polonius Repository](https://github.com/rust-lang/polonius) ·
+> [The Rust Compiler Guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) ·
+> [Wikipedia — Data-flow Analysis](https://en.wikipedia.org/wiki/Data-flow_analysis)
 
 ## 📑 目录
 
 - [NLL 与 Polonius：借用检查器的演进](#nll-与-polonius借用检查器的演进)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
-    - [1.1 基于词法的生命周期（Lexical Lifetimes）](#11-基于词法的生命周期lexical-lifetimes)
-    - [1.2 NLL：非词法生命周期](#12-nll非词法生命周期)
-    - [1.3 Polonius：基于数据流的分析](#13-polonius基于数据流的分析)
+    - [1.1 词法生命周期的问题](#11-词法生命周期的问题)
+    - [1.2 NLL 的解决方案](#12-nll-的解决方案)
+    - [1.3 Polonius 的进一步精确化](#13-polonius-的进一步精确化)
   - [二、技术细节](#二技术细节)
     - [2.1 NLL 的实现机制](#21-nll-的实现机制)
-    - [2.2 Polonius 的 Origin 模型](#22-polonius-的-origin-模型)
-    - [2.3 迁移路径](#23-迁移路径)
-  - [三、影响分析](#三影响分析)
+    - [2.2 Polonius 的约束传播](#22-polonius-的约束传播)
+    - [2.3 借用检查的三代对比](#23-借用检查的三代对比)
+  - [三、影响范围矩阵](#三影响范围矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -33,108 +37,110 @@
 
 ## 一、核心概念
 
-### 1.1 基于词法的生命周期（Lexical Lifetimes）
+### 1.1 词法生命周期的问题
 
-```text
-Rust 2015 的借用检查器:
+```rust,ignore
+// 词法作用域借用检查（NLL 之前）的问题
 
-  核心假设: 引用的生命周期 = 其词法作用域
-  ├── let x = &data;  // x 的生命周期 = 当前 {} 块
-  └── 即使 x 最后一次使用后不再使用，生命周期仍然延续到块结束
+fn lexical_lifetime_problem() {
+    let mut data = vec![1, 2, 3];
 
-  问题示例:
-  let mut data = vec![1, 2, 3];
-  let x = &data[0];     // x 借用 data
-  println!("{}", x);    // x 最后一次使用
-  data.push(4);         // ❌ 编译错误！
-  // 错误: 不能可变借用 data，因为 x 仍在作用域内
-  // 即使 x 不再使用！
+    let x = &data[0];  // x 借用 data
+    // ──────────────────────────────────────
+    // 词法作用域: x 的生命周期延伸到作用域结束
+    // 即使 x 不再使用，借用仍然"有效"
+    // ──────────────────────────────────────
 
-  词法生命周期的保守性:
-  ├── 安全: 永远不会允许不安全的借用
-  ├── 精确性低: 经常拒绝实际上安全的代码
-  └── 程序员 workaround: 缩小作用域（嵌套块）
+    println!("{}", x);  // x 最后一次使用
 
-  let mut data = vec![1, 2, 3];
-  {
-      let x = &data[0];
-      println!("{}", x);
-  }  // x 在这里结束
-  data.push(4);  // ✅  workaround 成功
+    // ❌ NLL 之前: 编译错误！
+    // data.push(4);  // 不能可变借用 data
+    // 因为 x 的词法生命周期尚未结束
+
+    // ✅ NLL 之后: 编译通过！
+    // x 的"实际使用"已经结束，可以重新借用
+    data.push(4);
+}
+
+// 另一个经典例子
+fn drop_and_use() {
+    let mut s = String::from("hello");
+    let r = &s;
+    println!("{}", r);  // r 最后一次使用
+
+    // NLL 之前: drop(s); 在这里会报错
+    // NLL 之后: 可以，因为 r 不再使用
+    drop(s);
+}
 ```
 
-> **认知功能**: 词法生命周期是 Rust 最初的**保守策略**——确保绝对安全，但牺牲了表达能力。
-> **关键洞察**: 这种保守性是 Rust 早期"与借用检查器战斗"体验的主要来源。
-> [来源: [Rust RFC 2094 — NLL Motivation](https://github.com/rust-lang/rfcs/pull/2094)]
+> **认知功能**: 词法生命周期的**核心问题**是过度保守——它假设借用一直有效到作用域结束，而非实际最后一次使用。
+> [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)]
 
 ---
 
-### 1.2 NLL：非词法生命周期
+### 1.2 NLL 的解决方案
 
 ```text
-NLL（Non-Lexical Lifetimes）的设计:
+NLL (Non-Lexical Lifetimes) 的核心思想:
 
-  核心洞察: 引用的生命周期应在其**最后一次使用**结束，而非作用域结束
+  从"基于作用域"到"基于使用":
+  ├── 旧: 生命周期 = 词法作用域范围
+  ├── 新: 生命周期 = 从创建到最后一次使用的范围
+  └── 关键洞察: 借用只需在实际使用时有效
 
-  同样的代码，NLL 后:
-  let mut data = vec![1, 2, 3];
-  let x = &data[0];
-  println!("{}", x);    // x 的最后一次使用
-  data.push(4);         // ✅ NLL 允许！
-  // x 的生命周期在 println! 后结束
+  NLL 的实现:
+  ├── 基于 MIR（Mid-level IR）
+  ├── 数据流分析确定变量的"活跃性"
+  └── 在控制流图（CFG）上分析借用关系
 
-  NLL 的改进:
-  ├── 生命周期基于"使用点"而非"作用域"
-  ├── 控制流敏感: 不同分支有不同的生命周期结束点
-  └── 大量保守的编译错误被消除
+  影响:
+  ├── 更少的借用检查错误
+  ├── 更自然的代码模式
+  └── 与 C/C++ 的直觉更接近
 
-  NLL 与 Rust 2018:
-  ├── NLL 在 Rust 1.31（Edition 2018）中稳定
-  ├── 也部分回溯到 Rust 2015
-  └── 是 Rust 可用性提升的里程碑
+  稳定时间:
+  ├── 2018 Edition 默认启用
+  └── 所有 Edition 最终都迁移到 NLL
 ```
 
-> **NLL 洞察**: NLL 将借用检查从**语法分析**提升为**数据流分析**——引用的有效性追踪到其最后一次使用，而非语法作用域边界。
-> [来源: [Rust Blog — NLL Stabilization](https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-impl-2018.html)]
+> **NLL 洞察**: NLL 是 Rust **借用检查器的第一次重大演进**——它将理论上的仿射类型系统变得更实用，同时不牺牲安全性。
+> [来源: [The Rust Compiler Guide — NLL](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)]
 
 ---
 
-### 1.3 Polonius：基于数据流的分析
+### 1.3 Polonius 的进一步精确化
 
 ```text
-Polonius 的动机:
+Polonius: 下一代借用检查器
 
-  NLL 仍然无法处理的场景:
-  let mut data = vec![1, 2, 3];
-  let x = &data[0];
-  if some_condition {
-      println!("{}", x);  // 分支 1 使用 x
-  } else {
-      data.push(4);       // ❌ NLL 仍拒绝！
-      // 错误: x 可能在另一个分支中使用
-  }
-  // 即使 some_condition 为 false 时，x 根本不会被使用
+  命名来源:
+  └── 以莎士比亚《哈姆雷特》中的角色命名
+      // "To borrow, or not to borrow, that is the question"
 
-  Polonius 的解决方案:
-  ├── 基于数据流分析（Dataflow Analysis）
-  ├── 追踪引用在控制流图中的传播
-  └── 区分不同执行路径上的借用关系
+  核心改进:
+  ├── 基于"约束传播"而非"区域包含"
+  ├── 更精确地处理复杂控制流
+  └── 支持某些 NLL 拒绝的安全代码
 
-  Polonius 的分析:
-  ├── 如果 some_condition == false:
-  │   └── x 从未被使用 → 允许 data.push
-  ├── 如果 some_condition == true:
-  │   └── x 被使用 → 拒绝 data.push
-  └── 但 Rust 需要在编译期确定（不能运行时判断）
+  技术方法:
+  ├── 将借用检查转化为逻辑约束求解
+  ├── 使用 Datalog 表达约束
+  └── 在 CFG 的每个点上传播借用信息
 
-  实际结果:
-  └── 上述代码仍然被拒绝（因为存在一条路径 x 被使用）
-      // Polonius 的目标不是消除所有保守性
-      // 而是消除"明显安全但被拒绝"的情况
+  当前状态 (2024+):
+  ├── 已实现为 rustc 的实验性选项
+  ├── -Zpolonius 标志启用
+  └── 预计最终成为默认
+
+  Polonius 能编译的额外代码:
+  ├── 某些条件借用模式
+  ├── 循环中的更精确分析
+  └── 某些当前需要 unsafe 的安全模式
 ```
 
-> **Polonius 洞察**: Polonius 不是让借用检查器"更宽松"，而是让它"**更精确**"——基于数据流的 borrow set 追踪，而非近似的作用域分析。
-> [来源: [Polonius README](https://github.com/rust-lang/polonius)] · [来源: [Niko Matsakis — Polonius](http://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/)]
+> **Polonius 洞察**: Polonius 代表了借用检查从**专门算法**向**通用约束求解**的转变——它为未来的进一步精确化奠定了基础。
+> [来源: [Polonius Repository](https://github.com/rust-lang/polonius)]
 
 ---
 
@@ -143,137 +149,157 @@ Polonius 的动机:
 ### 2.1 NLL 的实现机制
 
 ```text
-NLL 的编译期算法:
+NLL 的数据流分析:
 
-  1. 构建 MIR（Mid-level IR）
-     ├── 将 Rust 代码转换为基本块（Basic Block）控制流图
-     └── 每个语句和终止符都是 MIR 的一部分
+  控制流图 (CFG):
+  ┌─────────┐
+  │  Entry  │
+  └────┬────┘
+       │
+  ┌────▼────┐
+  │ let x = │
+  │ &data   │
+  └────┬────┘
+       │
+  ┌────▼────┐
+  │ println!│
+  │ (x)     │
+  └────┬────┘
+       │
+  ┌────▼────┐
+  │ data.   │
+  │ push(4) │
+  └────┬────┘
+       │
+  ┌────▼────┐
+  │  Exit   │
+  └─────────┘
 
-  2. 生成 borrow 约束
-     ├── 每个借用产生一个"借用区域"（region）
-     ├── 约束: 借用区域必须包含所有使用点
-     └── 约束求解确定最小生命周期
+  分析过程:
+  1. 标记每个借用创建点
+  2. 反向传播"借用活跃"信息
+  3. 在 push(4) 点检查: &data 是否仍活跃?
+  4. 结论: x 在 println! 后不再活跃，可以 push
 
-  3. 数据流分析
-     ├── 前向分析: 哪些借用是"活跃的"
-     ├── 后向分析: 哪些值是"死亡的"
-     └── 结合确定借用的结束点
-
-  4. 错误生成
-     ├── 如果可变借用与活跃借用冲突 → 错误
-     ├── 错误指向借用的**创建点**和**冲突点**
-     └── NLL 的错误信息比词法生命周期更精确
-
-  与词法生命周期的差异:
-  ┌─────────────────┬─────────────────┬─────────────────┐
-  │ 特性            │ 词法生命周期    │ NLL             │
-  ├─────────────────┼─────────────────┼─────────────────┤
-  │ 生命周期结束    │ 作用域结束      │ 最后一次使用    │
-  │ 错误指向        │ 借用创建点      │ 冲突使用点      │
-  │ 分支敏感        │ 否              │ 部分            │
-  │ 实现复杂度      │ 低              │ 中              │
-  └─────────────────┴─────────────────┴─────────────────┘
+  与旧实现的对比:
+  ├── 旧: 基于 AST 的词法作用域
+  └── 新: 基于 MIR 的数据流分析
 ```
 
-> **实现洞察**: NLL 的核心是**MIR 上的数据流分析**——它将借用检查从 AST 层下移到 MIR 层，获得更精细的控制流信息。
-> [来源: [rustc-dev-guide — NLL](https://rustc-dev-guide.rust-lang.org/borrow_check.html)]
+> **实现洞察**: NLL 使用 **MIR 级别的数据流分析**——这是 Rust 编译器内部表示的成熟应用。
+> [来源: [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html)]
 
 ---
 
-### 2.2 Polonius 的 Origin 模型
+### 2.2 Polonius 的约束传播
 
 ```text
-Polonius 的核心抽象: Origin（起源）
+Polonius 的约束模型:
 
-  传统模型: 生命周期是"时间区间"
-  ├── 'a = 从第 5 行到第 10 行
-  └── 问题: 区间合并导致过度近似
+  基本约束:
+  ├── loan_created_at(L, P): 借用 L 在点 P 创建
+  ├── loan_killed_at(L, P): 借用 L 在点 P 被"杀死"
+  ├── loan_invalidated_at(L, P): 借用 L 在点 P 被非法使用
+  └── path_accessed_at(P, A): 路径 P 在点 A 被访问
 
-  Polonius 模型: 生命周期是"借用点的集合"
-  ├── 'a = {borrow1, borrow2, ...}
-  ├── 每个借用点追踪其来源（origin）
-  └── 更精确地表达"哪些借用是活跃的"
+  传播规则:
+  ├── 如果借用 L 在点 P 创建，它向下游传播
+  ├── 直到遇到 loan_killed_at 或 loan_invalidated_at
+  └── 如果存在非法访问，报告错误
 
-  数据流方程:
-  ├── 每个基本块输入一组活跃的 loan
-  ├── 块内语句可能"激活"或"杀死" loan
-  └── 输出传播到后继块
+  Datalog 表达:
+  // 借用活跃性传播
+  loan_live_at(L, P) :- loan_created_at(L, P).
+  loan_live_at(L, P2) :- loan_live_at(L, P1), successor(P1, P2), !loan_killed_at(L, P2).
 
-  与 NLL 的关系:
-  ├── NLL 是 Polonius 的简化版
-  ├── Polonius 更精确，但计算更昂贵
-  └── 未来可能: Polonius 作为可选的"严格模式"
+  // 错误检测
+  error(L, P) :- loan_live_at(L, P), loan_invalidated_at(L, P).
 
-  当前状态（截至 2026）:
-  ├── Polonius 仍在积极开发中
-  ├── 部分算法已集成到 rustc
-  └── 完全替换 NLL 仍需时间
+  优势:
+  ├── 声明式表达使算法更清晰
+  ├── 增量计算（只需重新分析变化的部分）
+  └── 易于扩展新规则
 ```
 
-> **Origin 洞察**: Polonius 的"借用点集合"模型是**集合论**在编译器中的优雅应用——它将时间区间的连续近似转化为离散点的精确追踪。
-> [来源: [Polonius Paper — OOPSLA 2021](https://github.com/rust-lang/polonius/blob/master/papers/poplar-oopsla-2021.pdf)]
+> **约束洞察**: Polonius 使用 **Datalog** 表达借用约束——这是一种**声明式逻辑编程语言**，使约束求解更加清晰和可扩展。
+> [来源: [Polonius — Datalog Approach](https://github.com/rust-lang/polonius/blob/master/README.md)]
 
 ---
 
-### 2.3 迁移路径
+### 2.3 借用检查的三代对比
 
 ```text
-Rust 借用检查器的演进时间线:
+借用检查器演进:
 
-  2010-2015: 词法生命周期（Rust 1.0）
-  ├── 基于 AST 的作用域分析
+  第一代: 词法生命周期 (Rust 1.0 - 2018)
+  ├── 基于 AST
+  ├── 生命周期 = 词法作用域
   ├── 保守但简单
-  └── "与借用检查器战斗"的时代
+  └── 示例: let x = &data; // x 活到作用域结束
 
-  2018: NLL 稳定（Rust 1.31）
-  ├── 基于 MIR 的数据流分析
-  ├── 消除大量保守错误
-  └── Rust 2018 Edition 的旗舰特性
+  第二代: NLL (Rust 2018+)
+  ├── 基于 MIR
+  ├── 生命周期 = 实际使用范围
+  ├── 通过数据流分析
+  └── 示例: let x = &data; println!(x); data.push(4); // OK
 
-  2020+: Polonius 开发中
-  ├── 更精确的 borrow set 追踪
-  ├── 处理更复杂的控制流模式
-  └── 目标是进一步消除误报
+  第三代: Polonius (未来)
+  ├── 基于约束传播
+  ├── 更精确的控制流分析
+  ├── 使用 Datalog 表达
+  └── 示例: 某些条件分支中的借用更精确
 
-  未来方向:
-  ├── 更精确的路径敏感分析
-  ├── 与类型系统更深集成
-  └── 可能支持部分"流敏感"借用
+  兼容性:
+  ├── 每一代都接受更多合法代码
+  ├── 安全性不降低（只增加接受的安全代码）
+  └── 无破坏性变更
+
+  性能:
+  ├── NLL 编译时间略增（MIR 分析）
+  ├── Polonius 可能进一步优化（增量求解）
+  └── 但代码质量提升值得代价
 ```
 
-> **演进洞察**: 借用检查器的演进反映了 Rust 的**长期承诺**——在不牺牲安全的前提下，持续提升表达力和可用性。
-> [来源: [Rust Roadmap — Borrow Checker](https://github.com/rust-lang/rust/labels/A-borrow-checker)]
+> **演进洞察**: 借用检查器的**三代演进**展示了 Rust **"不妥协安全，但持续改善 ergonomics"**的设计哲学。
+> [来源: [Rust Compiler Team — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
 ---
 
-## 三、影响分析
+## 三、影响范围矩阵
 
 ```text
-NLL 对生态的影响:
+NLL / Polonius 影响的代码模式:
 
-  代码简化:
-  ├── 大量嵌套作用域的 workaround 被消除
-  ├── API 设计更灵活（如 Entry API）
-  └── 学习曲线降低
+  模式 1: 提前释放借用
+  ├── let x = &data;
+  ├── use(x);
+  ├── // NLL: 这里可以修改 data
+  └── data.push(4);  // ✅ NLL 后编译通过
 
-  误报减少:
-  ├── 编译器错误信息更准确
-  ├── "这代码明明安全为什么编译不过"的抱怨减少
-  └── 开发者对借用检查器的信任提升
+  模式 2: 条件借用
+  ├── if condition {
+  ├──     let x = &data;
+  ├──     use(x);
+  ├── }
+  ├── // x 只在 if 分支中借用
+  └── data.push(4);  // ✅ NLL 后编译通过
 
-  Polonius 的预期影响:
-  ├── 进一步消除复杂控制流中的误报
-  ├── 使某些高级模式（如 self-referential）更容易表达
-  └── 可能为某些 unsafe 代码提供安全替代
+  模式 3: 循环中的借用
+  ├── for item in &data {
+  ├──     process(item);
+  ├── }
+  ├── // Polonius: 某些复杂循环模式
+  └── data.clear();  // NLL 通常 OK
 
-  形式化验证视角:
-  ├── NLL/Polonius 的分析是可形式化的
-  ├── RustBelt 已证明 NLL 的安全性
-  └── Polonius 的 Origin 模型也有形式化对应
+  模式 4: 交叉借用
+  ├── let x = &data[0];
+  ├── let y = &data[1];
+  ├── use(x, y);
+  └── // NLL 后更灵活
 ```
 
-> **影响洞察**: NLL 是 Rust 从"研究语言"走向"工业语言"的关键一步——它证明了**安全保证不需要牺牲可用性**。
-> [来源: [Rust Survey Results](https://blog.rust-lang.org/2020/12/16/rust-survey-2020.html)]
+> **影响矩阵**: NLL 主要改善了**"提前释放"**和**"条件借用"**模式，Polonius 将进一步改善**循环**和**交叉借用**。
+> [source: [NLL Stabilization Report](https://github.com/rust-lang/rust/issues/43234)]
 
 ---
 
@@ -283,101 +309,104 @@ NLL 对生态的影响:
 
 ```mermaid
 graph TD
-    ROOT["命题: Polonius 将消除所有借用检查误报"]
-    ROOT --> Q1{"是否是路径敏感的场景?"}
-    Q1 -->|是| PARTIAL["⚠️ 部分消除，但存在根本性限制"]
-    Q1 -->|否| NLL["✅ NLL 已足够"]
+    ROOT["命题: NLL 使所有借用代码都能编译"]
+    ROOT --> Q1{"是否存在数据竞争?"}
+    Q1 -->|是| REJECT["❌ 仍然拒绝"]
+    Q1 -->|否| Q2{"是否真正安全?"}
+    Q2 -->|是| ACCEPT["✅ NLL/Polonius 接受"]
+    Q2 -->|否| CONSERVATIVE["⚠️ 仍可能保守拒绝"]
 
-    style PARTIAL fill:#fff3e0
-    style NLL fill:#c8e6c9
+    style REJECT fill:#ffcdd2
+    style ACCEPT fill:#c8e6c9
+    style CONSERVATIVE fill:#fff3e0
 ```
 
-> **认知功能**: 此决策树展示 Polonius 的**能力边界**。它消除的是"明显安全但被保守拒绝"的情况，不是所有编译错误。
-> **关键洞察**: 借用检查器的根本限制是**必须在编译期确定安全性**——某些运行时才能确定的模式永远无法被接受。
-> [来源: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html#borrow-operators)]
+> **认知功能**: NLL 和 Polonius **只放宽"过度保守"**——它们不会接受任何不安全的代码。
+> [来源: [RFC 2094 — NLL Safety](https://rust-lang.github.io/rfcs/2094-nll.html#safety)]
 
 ---
 
 ### 4.2 边界极限
 
 ```text
-边界 1: 编译期确定性要求
-├── 借用检查器不能依赖运行时信息
-├── if condition { use_ref } else { mutate }
-├── 即使 condition 在运行时总是 false
-└── 编译器仍必须拒绝（存在一条不安全路径）
+边界 1: NLL 仍保守的情况
+├── 某些自引用结构
+├── 某些复杂循环模式
+├── 部分初始化数组
+└── 缓解: 使用 unsafe 或 Pin
 
-边界 2: 自引用结构
-├── NLL/Polonius 不解决自引用问题
-├── Pin 仍然需要
-├── 某些自引用模式可能需要 unsafe
-└── 这是所有权模型的根本限制
+边界 2: Polonius 的编译时间
+├── Datalog 求解可能较慢
+├── 增量编译缓解部分问题
+├── 大型 crate 可能受影响
+└── 持续优化中
 
-边界 3: 跨函数分析
-├── NLL 分析单个函数的 MIR
-├── 不追踪跨函数的借用关系
-├── 复杂场景需要显式生命周期标注
-└── 全局分析计算成本过高
+边界 3: 与 Unsafe 的交互
+├── NLL 不分析 unsafe 块内部
+├── unsafe 中的借用完全由开发者负责
+├── 外部函数接口 (FFI) 不受 NLL 保护
+└── 缓解: Miri 动态检测
 
-边界 4: 与 unsafe 的交互
-├── NLL 不分析 unsafe 块内的裸指针
-├── unsafe 代码绕过借用检查器
-├── 借用检查器假设 unsafe 代码是"正确"的
-└── Miri 等工具补充检测 unsafe 中的问题
+边界 4: 教学复杂性
+├── NLL 使借用规则更难直观解释
+├── "实际使用范围"比"作用域"抽象
+├── 新手可能困惑为什么某些代码通过
+└── 缓解: 从"作用域"直觉开始，逐步深入
 
-边界 5: 编译时间
-├── Polonius 的精确分析更耗时
-├── 大型 crate 的编译时间可能增加
-├── 需要优化算法实现
-└── 可能与增量编译产生冲突
+边界 5: 与 Edition 的关系
+├── NLL 是 Edition 2018 的一部分
+├── 旧 Edition 最终也迁移
+├── Polonius 可能跨 Edition 启用
+└── 无用户可见的 Edition 依赖
 ```
 
-> **边界要点**: 借用检查器的边界主要与**编译期确定性**、**自引用**、**跨函数分析**、**unsafe 交互**和**编译性能**相关。
-> [来源: [Rustonomicon — Borrowing](https://doc.rust-lang.org/nomicon/borrow-splitting.html)]
+> **边界要点**: NLL/Polonius 的边界主要与**仍保守的情况**、**编译时间**、**unsafe 交互**、**教学**和 **Edition** 相关。
+> [来源: [Polonius Limitations](https://github.com/rust-lang/polonius/blob/master/README.md)]
 
 ---
 
 ## 五、常见陷阱
 
 ```text
-陷阱 1: 认为 NLL 后所有代码都能编译
-  ❌ 期望 Polonius 能解决所有借用问题
-     // 某些模式本质上是 unsafe 的
+陷阱 1: 假设 NLL 允许所有安全代码
+  ❌ NLL 仍然保守
+     // 某些安全模式仍被拒绝
 
-  ✅ 理解借用检查器的根本限制
-     // 必要时使用 Rc/RefCell/unsafe
+  ✅ NLL 只改善了最常见的情况
+     // 不是完美的借用检查器
 
-陷阱 2: 过度依赖 NLL 的灵活性
-  ❌ 写依赖 NLL 的复杂控制流
-     // 代码难以阅读和维护
+陷阱 2: 忽视 drop 的顺序
+  ❌ let x = &data;
+     drop(data);  // 即使 NLL，仍可能错误
+     println!("{}", x);  // use after free!
 
-  ✅ 优先使用简单的借用模式
-     // NLL 是安全网，不是设计目标
+  ✅ NLL 保证 drop 顺序正确
+     // 但需理解为什么
 
-陷阱 3: 忽略错误信息的改进
-  ❌ 看到借用错误就盲目 clone
-     // NLL 的错误信息已大幅改进
+陷阱 3: 在 unsafe 中依赖 NLL
+  ❌ unsafe { /* 假设 NLL 会保护 */ }
+     // unsafe 中 NLL 不分析
 
-  ✅ 仔细阅读编译器建议
-     // rustc 经常建议正确的修复方案
+  ✅ unsafe 中手动保证安全
+     // NLL 是编译器辅助，不是万能
 
-陷阱 4: 混淆 NLL 和生命周期省略
-  ❌ 认为 NLL 消除了所有生命周期标注需求
-     // NLL 只影响函数体内，不影响签名
+陷阱 4: 混用新旧借用检查器
+  ❌ 在不同 Edition 间期望相同行为
+     // 某些边缘情况不同
 
-  ✅ 公共 API 仍需要显式生命周期标注
-     // NLL 不替代签名级的设计
+  ✅ 统一使用 2021 Edition
+     // 获得最新借用检查器
 
-陷阱 5: 在 unsafe 中假设 NLL 保护
-  ❌ 在 unsafe 块内依赖 NLL 防止数据竞争
-     // NLL 不分析 unsafe 代码
+陷阱 5: 过度优化借用结构
+  ❌ 为了通过 NLL 而扭曲代码结构
+     // 有时 Rc/Arc 更合理
 
-  ✅ unsafe 代码需要手动保证安全
-     // 使用 Miri 验证
+  ✅ 根据场景选择工具
+     // 借用、Rc、Arc 各有适用场景
 ```
 
-> **陷阱总结**: NLL/Polonius 的陷阱主要与**期望管理**、**代码设计**、**错误信息利用**、**签名标注**和**unsafe 边界**相关。
-> [来源: [Rust Compiler Error E0502](https://doc.rust-lang.org/error_codes/E0502.html)]
+> **陷阱总结**: NLL/Polonius 的陷阱主要与**过度期望**、**drop 顺序**、**unsafe 边界**、**Edition 差异**和**过度优化**相关。
+> [来源: [Common NLL Misconceptions](https://github.com/rust-lang/rust/issues/43234)]
 
 ---
 
@@ -385,26 +414,27 @@ graph TD
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
-| [RFC 2094 — NLL](https://github.com/rust-lang/rfcs/pull/2094) | ✅ 一级 | NLL RFC |
+| [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html) | ✅ 一级 | NLL 设计 RFC |
 | [Polonius Repository](https://github.com/rust-lang/polonius) | ✅ 一级 | Polonius 项目 |
-| [Rust Blog — NLL](https://blog.rust-lang.org/2018/12/06/Rust-1.31-and-impl-2018.html) | ✅ 一级 | NLL 稳定公告 |
-| [Niko Matsakis — Polonius](http://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/) | ✅ 二级 | 设计深度分析 |
-| [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | ✅ 一级 | 编译器实现 |
+| [RustConf 2018 — Polonius](https://www.youtube.com/watch?v=_8X69Kw0EhY) | ✅ 二级 | 演讲 |
+| [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | ✅ 一级 | 编译器指南 |
+| [NLL Stabilization](https://github.com/rust-lang/rust/issues/43234) | ✅ 一级 | 追踪 Issue |
 
 ---
 
 ## 相关概念文件
 
-- [Borrowing](../01_foundation/02_borrowing.md) — 借用规则
+- [Borrowing](../01_foundation/02_borrowing.md) — 借用系统
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期
-- [Pin](./06_pin_unpin.md) — Pin 不动性
+- [Type System](../01_foundation/04_type_system.md) — 类型系统
+- [Unsafe](./03_unsafe.md) — 不安全代码
 - [RustBelt](../04_formal/04_rustbelt.md) — 形式化验证
 
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
 >
-> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 10]
 
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)

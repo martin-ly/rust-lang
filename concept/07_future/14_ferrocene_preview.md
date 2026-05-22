@@ -1,7 +1,7 @@
-# Ferrocene 预研：Rust 的安全关键认证之路
+# Ferrocene [来源: [Ferrous Systems Ferrocene](https://ferrous-systems.com/ferrocene/)] [来源: [Ferrous Systems](https://ferrous-systems.com/ferrocene/)] 预研：Rust 的安全关键认证之路
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 探讨 **Ferrocene** —— Rust 的**安全关键认证工具链**，分析其对汽车（ISO 26262）、航空（DO-178C）和工业控制等安全关键领域的影响，以及 Rust 语言在形式化验证与工业认证之间的桥梁作用。
+> **定位**: 探讨 **Ferrocene** —— Rust 的**安全关键认证工具链**，分析其对汽车（ISO 26262 [来源: [ISO 26262](https://www.iso.org/standard/68383.html)]）、航空（DO-178C）和工业控制等安全关键领域的影响，以及 Rust 语言在形式化验证与工业认证之间的桥梁作用。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Formal Methods](./02_formal_methods.md) · [MC/DC Coverage](./07_mcdc_coverage_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)
 
@@ -11,7 +11,7 @@
 
 ## 📑 目录
 
-- [Ferrocene 预研：Rust 的安全关键认证之路](#ferrocene-预研rust-的安全关键认证之路)
+- [Ferrocene \[来源: Ferrous Systems Ferrocene\] \[来源: Ferrous Systems\] 预研：Rust 的安全关键认证之路](#ferrocene-来源-ferrous-systems-ferrocene-来源-ferrous-systems-预研rust-的安全关键认证之路)
   - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 安全关键软件的认证挑战](#11-安全关键软件的认证挑战)
@@ -279,6 +279,17 @@ graph TD
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
+| [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
+| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
+
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 |:---|:---:|:---|
 | [Ferrocene Project](https://ferrocene.dev/) | ✅ 一级 | 官方网站与文档 |
 | [Ferrocene Specification](https://spec.ferrocene.dev/) | ✅ 一级 | 技术规范 |
