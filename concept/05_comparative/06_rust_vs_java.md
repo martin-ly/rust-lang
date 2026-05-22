@@ -61,6 +61,7 @@ graph LR
 > **使用建议**: 延迟敏感场景（实时系统、高频交易、游戏引擎）选 Rust；快速迭代、延迟不敏感场景选 Java。
 > **关键洞察**: GC 的"开发者无负担"是一种**假象**——GC 调优（堆大小、GC 算法、暂停时间）在大型 Java 应用中同样复杂，只是复杂性从"写代码"转移到"运维调优"。
 > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [Java GC Tuning Guide](https://docs.oracle.com/en/java/javase/21/gctuning/)
+> [来源: [Wikipedia — Java (programming language)](https://en.wikipedia.org/wiki/Java_(programming_language))]
 
 ---
 

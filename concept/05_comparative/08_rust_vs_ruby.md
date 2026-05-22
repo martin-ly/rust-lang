@@ -250,6 +250,8 @@ Web 框架对比:
   └── 差距同样显著
 ```
 
+> [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
+
 > **性能洞察**: Rust 比 Ruby **快 10-100 倍**——但这只在**计算密集型**场景重要。IO 密集型场景差距缩小。
 > [来源: [The Computer Language Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/)]
 

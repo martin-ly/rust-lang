@@ -80,6 +80,8 @@
   end
 ```
 
+> [来源: [Erlang/OTP](https://www.erlang.org/)]
+
 > **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
 > [来源: [Elixir Error Handling](https://elixir-lang.org/getting-started/try-catch-and-rescue.html)]
 

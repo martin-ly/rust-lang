@@ -83,6 +83,8 @@
   // 使用 Rc<RefCell<Person>> 或 Weak 引用
 ```
 
+> [来源: [Swift Documentation](https://www.swift.org/documentation/)]
+
 > **认知功能**: Swift 的 **ARC** 是**自动化的引用计数**，Rust 的 **所有权**是**编译期的代数类型系统**——两者都安全，但机制完全不同。
 > [来源: [Swift ARC Documentation](https://docs.swift.org/swift-book/documentation/the-swift-programming-language/automaticreferencecounting/)]
 

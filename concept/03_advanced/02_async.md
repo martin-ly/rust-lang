@@ -423,6 +423,7 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 状态转移可视化工具——将编译器生成的匿名 enum 状态机映射为可读的状态图。读者可将此图作为阅读 MIR lowering 输出的"导航地图"，每个节点对应一个 enum 变体，每条边对应一次 poll 调用。关键洞察：Pin 约束不是装饰，而是 Suspend 状态期间地址恒定性的形式化保证。[来源: 💡 原创分析]
+> [来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 > [来源: [Rust Async Book]]
 
 > **思维表征说明**: `stateDiagram-v2` 是 Mermaid 专门用于状态机的语法，与 `graph TD` 流程图不同——它强调**状态**（节点）和**转移条件**（边标注），天然适合表达 Future 的 poll 状态机。每个状态对应编译器生成的 enum 变体，转移标注对应 poll 的返回值。 [来源: Mermaid stateDiagram 文档; RFC 2394 §3.2]
@@ -633,6 +634,7 @@ graph LR
 ```
 
 > **认知功能**: 工程权衡决策辅助——在三维设计空间中定位不同并发模型的优劣。读者在技术选型时，可对照延迟、内存、吞吐量三个维度的项目需求优先级，判断 Rust 的协作式选择是否为最优解。关键洞察：零成本抽象是刻意 trade-off，用程序员的显式挂起标注换取对底层硬件的最大控制。[来源: 💡 原创分析]
+> [来源: [Tokio Docs](https://tokio.rs/)]
 > [来源: [Rust Async Book]]
 
 **关键洞察**：协作式调度的零成本并非无代价——它要求程序员显式标注所有挂起点（`.await`），且阻塞调用会惩罚整个执行器。Rust 接受这一 trade-off，以换取对底层硬件的最大控制和 FFI 的完美兼容。
@@ -694,6 +696,7 @@ graph TD
 ```
 
 > **认知功能**: 概念拓扑速查图——以树状结构展示 async 知识体系的层级关系。读者遇到陌生子概念（如 Waker、Stream）时，可先在图中定位其所属分支，再追溯至文件对应章节。关键洞察：Future Trait 是整个异步子域的根节点，Pin 是连接"零成本"与"内存安全"的核心桥梁。[来源: 💡 原创分析]
+> [来源: [Rust Reference: Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
 > [来源: [Rust Async Book]]
 
 ---
@@ -778,6 +781,7 @@ graph TD
 ```
 
 > **认知功能**: 谬误诊断工具——针对"async/await 总是零成本"这一常见误解的系统性排查路径。读者在性能调优或技术辩论时，可按此树逐项检验前提条件（静态分发、状态机大小、递归深度）。关键洞察：零成本的成立需要三个前提同时满足，任意一个被违反都会导致性能退化。[来源: 💡 原创分析]
+> [来源: [TRPL: Ch17](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 > [来源: [Rust Async Book]]
 
 **修正认知**：
@@ -812,6 +816,7 @@ graph TD
 ```
 
 > **认知功能**: 生命周期认知修正器——打破"函数调用即执行到返回"的同步思维惯性。读者在设计取消安全（cancellation safety）时，应将此图作为检查清单，确保所有可能导致 Future 提前终止的路径都被处理。关键洞察：poll 是协作式请求而非命令式保证，取消是一等公民。[来源: 💡 原创分析]
+> [来源: [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)]
 > [来源: [Rust Async Book]]
 
 **修正认知**：
@@ -846,6 +851,7 @@ graph TD
 ```
 
 > **认知功能**: 语义差异探测器——揭示 `async fn` 与 `fn → impl Future` 在表面语法相似下的深层语义差异。读者在 trait 设计或生命周期标注遇到意外编译错误时，可对照此图排查生命周期捕获、环境捕获、trait 兼容性三个维度。关键洞察：语法糖触发的编译器特定转换路径，可能引入手写代码中不存在的约束。[来源: 💡 原创分析]
+> [来源: [Rust Reference: Future trait](https://doc.rust-lang.org/std/future/trait.Future.html)]
 > [来源: [Rust Async Book]]
 
 **修正认知**：
@@ -884,6 +890,7 @@ graph TD
 ```
 
 > **认知功能**: 技术选型向导——从任务特征（IO/CPU 密集度、并发规模、状态共享需求）出发的决策树。读者在新项目架构设计时，可从根节点出发回答两个关键问题，得到推荐的并发模型。关键洞察：选择 async 还是 thread 的本质是回答"任务是否以挂起等待为主"。[来源: 💡 原创分析]
+> [来源: [Rust Async Book: Execution](https://rust-lang.github.io/async-book/02_execution/01_chapter.html)]
 > [来源: [Rust Async Book]]
 
 ### 7.2 Pin 使用边界
@@ -900,6 +907,7 @@ graph TD
 ```
 
 > **认知功能**: 类型安全判定器——为手写 Future 或设计自引用结构提供 Pin 使用的判定流程。读者只需回答"是否包含自引用"和"是否需要地址稳定"两个问题，即可确定是否需要 Pin。关键洞察：自引用是 Pin 的充分条件而非必要条件，某些非自引用场景（如与硬件 DMA 交互）同样需要地址稳定。[来源: 💡 原创分析]
+> [来源: [Tokio Docs: Runtime](https://tokio.rs/tokio/topics/runtime)]
 > [来源: [Rust Async Book]]
 
 ---
@@ -1213,6 +1221,7 @@ graph TD
 ```
 
 > **认知功能**: 活性调试路径图——当 Future 陷入永久 Pending 时，按此决策树定位故障根因。读者可逐层检查 Waker 注册、Reactor 唤醒调用、poll 返回值合法性三个环节。关键洞察：`poll → Pending → wake → poll` 的闭环是异步执行器活性（liveness）的根本保证，任一环节断裂即导致活锁或饥饿。[来源: 💡 原创分析]
+> [来源: [Rust Reference: Pin](https://doc.rust-lang.org/reference/types/pin.html)]
 > [来源: [Rust Async Book]]
 
 > **[Async Book: Waker]** Waker 是 Future 与 Reactor 之间的桥梁——poll 时将 Waker 传递给底层 I/O 源，I/O 就绪时源通过 Waker 通知执行器重新调度该 Future。✅ 已验证
@@ -2212,6 +2221,8 @@ help: alloc232 was deallocated here:
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
 
+> [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
+>
 #### 场景 2：无效值检测（非法 bool 构造）
 
 ```rust,ignore
@@ -2236,6 +2247,8 @@ error: Undefined Behavior: constructing invalid value of type bool:
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
 
+> [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+>
 #### 场景 3：async 状态机中的未初始化内存
 
 ```rust,ignore
@@ -2267,6 +2280,8 @@ warning: the type `bool` does not permit being left uninitialized
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
 
+> [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
+>
 #### Miri 与 async 状态机的特殊关联
 
 ```text
@@ -2306,6 +2321,14 @@ Miri 的局限（与 loom 互补）:
 | Pin 形式化语义 | [PLDI 2024: RefinedRust] | ⚠️ 前沿研究 |
 | async 完整形式化 | 活跃研究领域 | 🔍 待验证 |
 | 异步计算与 Futures | [Wikipedia: Futures and promises] · [CMU 17-350: Safe Systems Programming] | ✅ |
+| async/await 语法 | [Rust Reference: Await expressions] · [TRPL: Ch17] | ✅ |
+| Future trait 语义 | [Rust Reference: Future trait] · [std::future::Future] | ✅ |
+| Pin 不动性保证 | [Rust Reference: Pin] · [RFC 2592] | ✅ |
+| 取消安全设计 | [Tokio Docs: Cancellation] · [Async Book: Cancellation] | ✅ |
+| Waker 契约 | [Rust Reference: Waker] · [std::task::Waker] | ✅ |
+| Stream trait | [futures-rs docs] · [Rust Async Book: Streams] | ✅ |
+| 动态分发开销 | [Rust Reference: Trait objects] · [Rust Performance Book] | ✅ |
+| Miri 检测能力 | [Miri Book] · [Rust Reference: UB] | ✅ |
 | 协程与生成器 | [Wikipedia: Coroutine] · [RFC 2394: async/await desugaring] | ✅ |
 | 惰性求值与响应式编程 | [Wikipedia: Lazy evaluation] · [CMU 15-214: Principles of Software Construction] | ✅ |
 
