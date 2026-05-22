@@ -444,6 +444,11 @@
 | P17-T23 | 新增 `04_formal/08_type_inference.md` | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ |
 | P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
 | P17-T25 | 新增 `01_foundation/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
+| P17-T26 | 新增 `06_ecosystem/16_testing.md` | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ |
+| P17-T27 | 新增 `03_advanced/08_nll_and_polonius.md` | 非词法生命周期、数据流分析、Origin 模型 | ✅ |
+| P17-T28 | 新增 `04_formal/09_operational_semantics.md` | 小步/大步语义、求值上下文、Rust 形式化 | ✅ |
+| P17-T29 | 新增 `02_intermediate/13_dsl_and_embedding.md` | 宏 DSL、Builder、Parser Combinator、类型安全 | ✅ |
+| P17-T30 | 新增 `01_foundation/09_strings_and_text.md` | String/str、UTF-8、格式化、OS 字符串、C 字符串 | ✅ |
 
 **关键成果**:
 
@@ -475,11 +480,11 @@
 
 **累计交付统计**:
 
-- **118 个 Markdown 文件**，~77,800 行，**~2,010** 条来源标注
-- **426** 个 Mermaid 图表，17 种类型，覆盖 **106** 个文件
+- **123 个 Markdown 文件**，~79,700 行，**~2,060** 条来源标注
+- **441** 个 Mermaid 图表，17 种类型，覆盖 **111** 个文件
 - **244/244** 代码块编译通过，0 失败
-- **100/100** 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: **100.0%**（426/426），全部文件 100%
+- **105/105** 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（441/441），全部文件 100%
 
 **文档版本**: 2.7
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)

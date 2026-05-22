@@ -164,6 +164,7 @@ graph TB
 | [05_rust_ffi.md](./05_rust_ffi.md) | FFI 跨语言 | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 | Type System + Unsafe | 生态 (跨语言), C++ 对比 |
 | [06_pin_unpin.md](./06_pin_unpin.md) | Pin 与 Unpin | 自引用类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
 | [07_proc_macro.md](./07_proc_macro.md) | 过程宏 | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
+| [08_nll_and_polonius.md](./08_nll_and_polonius.md) | NLL 与 Polonius | 非词法生命周期、数据流分析、Origin 模型、借用检查演进 | ✅ v1.0 | Borrowing, Lifetimes | RustBelt, Pin |
 
 ---
 

@@ -121,6 +121,9 @@ graph TB
 | [13_logging_observability.md](./13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 | L3 Async, L2 Error | 监控与诊断 |
 | [14_documentation.md](./14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 | L3 Macros, L2 Module | 知识传播 |
 | [15_performance_optimization.md](./15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 | L1 Zero Cost, L1 Ownership | Concurrency, Async |
+| [16_testing.md](./16_testing.md) | 测试生态 | 单元/集成/文档测试、mockall、proptest、cargo-fuzz | ✅ v1.0 | L2 Error, L3 Macros | Formal Methods, Miri |
+| [17_cross_compilation.md](./17_cross_compilation.md) | 交叉编译 | 多目标平台、条件编译、no_std、嵌入式、Tier 系统 | ✅ v1.0 | L1 Type System, L3 Unsafe | WASI, WebAssembly |
+| [18_distributed_systems.md](./18_distributed_systems.md) | 分布式系统 | gRPC、Raft、Actor、服务发现、微服务 | ✅ v1.0 | L3 Async, L4 Network | Observability, Wasm |
 
 ---
 

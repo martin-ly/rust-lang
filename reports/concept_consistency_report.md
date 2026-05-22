@@ -1,8 +1,8 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T07:20:58.907916
-> 扫描文件数: 90
-> 提取概念定义数: 463
+> 生成时间: 2026-05-22T09:14:50.470086
+> 扫描文件数: 105
+> 提取概念定义数: 469
 > 跨文件引用数: 165
 
 ## 目录
@@ -58,12 +58,12 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 124 | 33 |
+| unsafe-UB | 126 | 35 |
 | 所有权-Move语义 | 79 | 26 |
 | Send+Sync | 52 | 25 |
-| unsafe-契约 | 38 | 16 |
-| 所有权-作用域绑定 | 31 | 13 |
-| 所有权-唯一所有权 | 29 | 14 |
+| unsafe-契约 | 39 | 17 |
+| 所有权-作用域绑定 | 32 | 14 |
+| 所有权-唯一所有权 | 31 | 15 |
 | unsafe-不变式 | 27 | 3 |
 | unsafe-语义 | 18 | 12 |
 | 生命周期-定义 | 14 | 7 |
@@ -104,6 +104,9 @@
 | concept\01_foundation\04_type_system.md | 3 | 3 | 43 |
 | concept\01_foundation\05_reference_semantics.md | 0 | 0 | 8 |
 | concept\01_foundation\06_zero_cost_abstractions.md | 0 | 0 | 8 |
+| concept\01_foundation\07_control_flow.md | 0 | 0 | 8 |
+| concept\01_foundation\08_collections.md | 0 | 0 | 8 |
+| concept\01_foundation\09_strings_and_text.md | 0 | 0 | 8 |
 | concept\02_intermediate\01_traits.md | 7 | 1 | 29 |
 | concept\02_intermediate\02_generics.md | 3 | 5 | 41 |
 | concept\02_intermediate\03_memory_management.md | 18 | 1 | 36 |
@@ -114,12 +117,17 @@
 | concept\02_intermediate\08_interior_mutability.md | 1 | 0 | 8 |
 | concept\02_intermediate\09_serde_patterns.md | 0 | 0 | 8 |
 | concept\02_intermediate\10_module_system.md | 0 | 0 | 8 |
+| concept\02_intermediate\11_cow_and_borrowed.md | 0 | 0 | 8 |
+| concept\02_intermediate\12_smart_pointers.md | 2 | 0 | 8 |
+| concept\02_intermediate\13_dsl_and_embedding.md | 0 | 0 | 8 |
 | concept\03_advanced\01_concurrency.md | 37 | 10 | 22 |
 | concept\03_advanced\02_async.md | 11 | 9 | 36 |
 | concept\03_advanced\03_unsafe.md | 100 | 2 | 28 |
 | concept\03_advanced\04_macros.md | 0 | 1 | 30 |
 | concept\03_advanced\05_rust_ffi.md | 1 | 0 | 8 |
 | concept\03_advanced\06_pin_unpin.md | 1 | 0 | 8 |
+| concept\03_advanced\07_proc_macro.md | 0 | 0 | 8 |
+| concept\03_advanced\08_nll_and_polonius.md | 0 | 0 | 8 |
 | concept\04_formal\01_linear_logic.md | 10 | 2 | 25 |
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |
@@ -127,6 +135,8 @@
 | concept\04_formal\05_verification_toolchain.md | 1 | 1 | 14 |
 | concept\04_formal\06_subtype_variance.md | 0 | 0 | 8 |
 | concept\04_formal\07_separation_logic.md | 0 | 0 | 8 |
+| concept\04_formal\08_type_inference.md | 0 | 0 | 8 |
+| concept\04_formal\09_operational_semantics.md | 2 | 0 | 8 |
 | concept\05_comparative\01_rust_vs_cpp.md | 11 | 1 | 41 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -134,6 +144,7 @@
 | concept\05_comparative\05_execution_model_isomorphism.md | 4 | 0 | 17 |
 | concept\05_comparative\06_rust_vs_java.md | 1 | 0 | 8 |
 | concept\05_comparative\07_rust_vs_python.md | 2 | 0 | 8 |
+| concept\05_comparative\08_rust_vs_javascript.md | 0 | 0 | 8 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |
@@ -149,6 +160,9 @@
 | concept\06_ecosystem\11_webassembly.md | 0 | 0 | 8 |
 | concept\06_ecosystem\12_testing_strategies.md | 1 | 0 | 8 |
 | concept\06_ecosystem\13_logging_observability.md | 0 | 0 | 8 |
+| concept\06_ecosystem\14_documentation.md | 0 | 0 | 8 |
+| concept\06_ecosystem\15_performance_optimization.md | 1 | 0 | 8 |
+| concept\06_ecosystem\16_testing.md | 1 | 0 | 8 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
@@ -166,6 +180,7 @@
 | concept\07_future\16_cranelift_backend_preview.md | 0 | 0 | 8 |
 | concept\07_future\17_rust_specification_preview.md | 0 | 0 | 8 |
 | concept\07_future\18_async_drop_preview.md | 0 | 0 | 8 |
+| concept\07_future\19_specialization_preview.md | 0 | 0 | 8 |
 | concept\07_future\borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\open_enums_preview.md | 0 | 0 | 15 |
 

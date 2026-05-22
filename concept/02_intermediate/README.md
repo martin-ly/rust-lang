@@ -174,6 +174,8 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
 | [11_cow_and_borrowed.md](./11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
 | [12_smart_pointers.md](./12_smart_pointers.md) | 智能指针 | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
+| [13_dsl_and_embedding.md](./13_dsl_and_embedding.md) | DSL 与嵌入 | 宏 DSL、Builder、Parser Combinator、类型安全 | ✅ v1.0 | Trait, Macros | Serde, WebAssembly |
+| [14_newtype_and_wrapper.md](./14_newtype_and_wrapper.md) | Newtype 与包装器 | 类型安全、零成本抽象、孤儿规则、单位类型 | ✅ v1.0 | Type System, Trait | Patterns, Smart Pointers |
 
 ---
 
