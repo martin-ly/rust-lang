@@ -172,6 +172,8 @@ Trait Bounds 是 L2 的"枢纽概念"：
 | [08_interior_mutability.md](./08_interior_mutability.md) | 内部可变性 | Cell/RefCell/UnsafeCell、Mutex/RwLock、原子类型 | ✅ v1.0 | Ownership, Borrowing | Concurrency, Unsafe |
 | [09_serde_patterns.md](./09_serde_patterns.md) | Serde 序列化 | Serialize/Deserialize、自定义 Visitor、性能优化 | ✅ v1.0 | Trait, Generics | Application Domains |
 | [10_module_system.md](./10_module_system.md) | 模块系统 | Crate/Module/Package、可见性、use 声明、Workspace | ✅ v1.0 | Ownership, Type System | Macros, Toolchain |
+| [11_cow_and_borrowed.md](./11_cow_and_borrowed.md) | Cow 写时克隆 | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ v1.0 | Ownership, Borrowing | String Patterns, Zero Cost |
+| [12_smart_pointers.md](./12_smart_pointers.md) | 智能指针 | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ v1.0 | Ownership, Borrowing | Pin, Concurrency |
 
 ---
 

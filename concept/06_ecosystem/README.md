@@ -117,6 +117,10 @@ graph TB
 | [06_blockchain.md](./06_blockchain.md) | 区块链合约安全 | Solana/Substrate/Near、合约安全形式化、Kani 验证、无重入/溢出 | ✅ v1.0 | L1 Ownership、L3 Unsafe、L4 RustBelt | 链上安全保证 |
 | [07_game_ecs.md](./07_game_ecs.md) | 游戏 ECS 架构 | Bevy/Fyrox、ECS 与所有权协同、DOD、并发渲染 | ✅ v1.0 | L1 Ownership、L3 Concurrency | 游戏引擎选型 |
 | [08_wasi.md](./08_wasi.md) | WASI 与 Wasm | Component Model、wit-bindgen、能力安全、wasm32-wasi | ✅ v1.0 | L1 Ownership、L3 FFI | 跨平台沙箱部署 |
+| [11_webassembly.md](./11_webassembly.md) | WebAssembly | Rust 的 Wasm 编译模型、组件模型、应用场景 | ✅ v1.0 | L1 Type System, L3 FFI | 跨平台部署 |
+| [13_logging_observability.md](./13_logging_observability.md) | 日志与可观测性 | tracing、log、metrics、OpenTelemetry、分布式追踪 | ✅ v1.0 | L3 Async, L2 Error | 监控与诊断 |
+| [14_documentation.md](./14_documentation.md) | 文档生态 | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ v1.0 | L3 Macros, L2 Module | 知识传播 |
+| [15_performance_optimization.md](./15_performance_optimization.md) | 性能优化 | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ v1.0 | L1 Zero Cost, L1 Ownership | Concurrency, Async |
 
 ---
 

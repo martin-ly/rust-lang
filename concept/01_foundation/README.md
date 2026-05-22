@@ -147,6 +147,10 @@ Type System（理解"类型即证明"）
 | [02_borrowing.md](./02_borrowing.md) | 借用 | `&T`/`&mut T`、AXM 规则、Reborrow、NLL | ✅ v1.0 | Ownership | Lifetimes, Concurrency |
 | [03_lifetimes.md](./03_lifetimes.md) | 生命周期 | 标注、Elision、NLL、`'static`、HRTB、Variance | ✅ v1.0 | Borrowing | Generics, Async |
 | [04_type_system.md](./04_type_system.md) | 类型系统基础 | 标量/复合/ADT、impl/dyn Trait、类型推断 | ✅ v1.0 | Ownership | Trait, Generics, Macros |
+| [05_reference_semantics.md](./05_reference_semantics.md) | 引用语义 | Deref/DerefMut、自动解引用、智能指针接口 | ✅ v1.0 | Borrowing, Type System | Pin, FFI |
+| [06_zero_cost_abstractions.md](./06_zero_cost_abstractions.md) | 零成本抽象 | 单态化、内联、迭代器零成本、编译期优化 | ✅ v1.0 | Type System, Generics | Ecosystem Patterns |
+| [07_control_flow.md](./07_control_flow.md) | 控制流 | match/if let/loop、表达式导向、穷尽性检查 | ✅ v1.0 | Ownership, Type System | Iterator, Async |
+| [08_collections.md](./08_collections.md) | 集合类型 | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ v1.0 | Ownership, Generics | Smart Pointers, Ecosystem |
 
 ---
 

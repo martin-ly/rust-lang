@@ -1,8 +1,8 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T06:30:22.553806
-> 扫描文件数: 89
-> 提取概念定义数: 461
+> 生成时间: 2026-05-22T07:20:58.907916
+> 扫描文件数: 90
+> 提取概念定义数: 463
 > 跨文件引用数: 165
 
 ## 目录
@@ -60,7 +60,7 @@
 |:---|:---|:---|
 | unsafe-UB | 124 | 33 |
 | 所有权-Move语义 | 79 | 26 |
-| Send+Sync | 51 | 24 |
+| Send+Sync | 52 | 25 |
 | unsafe-契约 | 38 | 16 |
 | 所有权-作用域绑定 | 31 | 13 |
 | 所有权-唯一所有权 | 29 | 14 |
@@ -68,7 +68,7 @@
 | unsafe-语义 | 18 | 12 |
 | 生命周期-定义 | 14 | 7 |
 | Send | 12 | 5 |
-| Sync | 10 | 6 |
+| Sync | 11 | 7 |
 | 所有权-Copy例外 | 9 | 5 |
 | 生命周期-Rule3 | 8 | 1 |
 | 生命周期-Rule2 | 6 | 1 |
@@ -133,6 +133,7 @@
 | concept\05_comparative\04_safety_boundaries.md | 18 | 13 | 19 |
 | concept\05_comparative\05_execution_model_isomorphism.md | 4 | 0 | 17 |
 | concept\05_comparative\06_rust_vs_java.md | 1 | 0 | 8 |
+| concept\05_comparative\07_rust_vs_python.md | 2 | 0 | 8 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |

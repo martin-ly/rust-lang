@@ -38,9 +38,9 @@
 > **[来源: Rust Official Docs]**
 
 ```
-                    外部依赖
-                    /   |   \
-                   /    |    \
+                外部依赖
+                /   |   \
+                /    |    \
             Tokio   Serde   Rayon
                 \    |    /
                  \   |   /

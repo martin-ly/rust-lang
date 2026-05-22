@@ -161,6 +161,9 @@ graph TB
 | [02_async.md](./02_async.md) | 异步编程 | `Future`、`async/await`、`Pin`、AFIT/RPITIT、运行时 | ✅ v1.0 | Generics + Trait + Pin (L2) | 形式化 (Pin 语义), 生态 (Tokio) |
 | [03_unsafe.md](./03_unsafe.md) | Unsafe Rust | 裸指针、FFI、UB 边界、Safety 契约、Miri | ✅ v1.0 | 所有 L1-L2 概念 | RustBelt (unsafe 验证), C++ 对比 |
 | [04_macros.md](./04_macros.md) | 宏系统 | `macro_rules!`、过程宏、DSL、卫生宏 | ✅ v1.0 | Type System + Trait | 生态 (代码生成), AI (模板生成) |
+| [05_rust_ffi.md](./05_rust_ffi.md) | FFI 跨语言 | extern 块、ABI 兼容、类型映射、bindgen、回调封装 | ✅ v1.0 | Type System + Unsafe | 生态 (跨语言), C++ 对比 |
+| [06_pin_unpin.md](./06_pin_unpin.md) | Pin 与 Unpin | 自引用类型、PhantomPinned、async 状态机、Pin API 契约 | ✅ v1.0 | Ownership + Generics | Async, Gen Blocks |
+| [07_proc_macro.md](./07_proc_macro.md) | 过程宏 | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ v1.0 | Trait + Type System | 生态 (代码生成), DSL |
 
 ---
 

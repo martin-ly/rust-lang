@@ -433,6 +433,17 @@
 | P17-T12 | 新增 `02_intermediate/10_module_system.md` | Crate/Module/Package、可见性、use 声明、Workspace | ✅ |
 | P17-T13 | 新增 `04_formal/07_separation_logic.md` | * 算子、帧规则、CSL、Iris、RustBelt 应用映射 | ✅ |
 | P17-T14 | 新增 `07_future/18_async_drop_preview.md` | 异步资源销毁、RFC 3308、Pin 交互、workaround 模式 | ✅ |
+| P17-T15 | 新增 `05_comparative/07_rust_vs_python.md` | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL | ✅ |
+| P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
+| P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |
+| P17-T18 | 新增 `02_intermediate/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
+| P17-T19 | 新增 `07_future/19_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
+| P17-T20 | 新增 `01_foundation/07_control_flow.md` | match/if let/loop、表达式导向、穷尽性检查 | ✅ |
+| P17-T21 | 新增 `02_intermediate/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ |
+| P17-T22 | 新增 `06_ecosystem/15_performance_optimization.md` | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ |
+| P17-T23 | 新增 `04_formal/08_type_inference.md` | HM 算法、统一、Rust 扩展、Trait 约束推断 | ✅ |
+| P17-T24 | 新增 `05_comparative/08_rust_vs_javascript.md` | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ |
+| P17-T25 | 新增 `01_foundation/08_collections.md` | Vec/HashMap/BTreeMap/HashSet、Entry API、容量管理 | ✅ |
 
 **关键成果**:
 
@@ -464,11 +475,11 @@
 
 **累计交付统计**:
 
-- **107 个 Markdown 文件**，~73,620 行，**~1,900** 条来源标注
-- **393** 个 Mermaid 图表，17 种类型，覆盖 **95** 个文件
+- **118 个 Markdown 文件**，~77,800 行，**~2,010** 条来源标注
+- **426** 个 Mermaid 图表，17 种类型，覆盖 **106** 个文件
 - **244/244** 代码块编译通过，0 失败
-- **89/89** 文件通过质量门禁，0 死链接，0 一致性错误
-- Mermaid 认知功能说明覆盖率: **100.0%**（393/393），全部文件 100%
+- **100/100** 文件通过质量门禁，0 死链接，0 一致性错误
+- Mermaid 认知功能说明覆盖率: **100.0%**（426/426），全部文件 100%
 
 **文档版本**: 2.7
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)

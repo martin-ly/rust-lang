@@ -122,6 +122,7 @@ L1-L4 知识                L5 综合                L6-L7 决策
 | [03_paradigm_matrix.md](./03_paradigm_matrix.md) | 范式矩阵 | 多语言形式化对比、类型系统谱系、设计哲学 | ✅ v1.0 | L1-L4 所有概念 | 语言教学、研究定位 |
 | [06_rust_vs_java.md](./06_rust_vs_java.md) | Rust vs Java | 所有权 vs GC、并发模型、运行时架构、场景矩阵 | ✅ v1.0 | L1 Ownership, L3 Concurrency | JVM 迁移、企业系统选型 |
 | [07_rust_vs_python.md](./07_rust_vs_python.md) | Rust vs Python | 静态 vs 动态类型、所有权 vs GC、 fearless vs GIL、元编程 | ✅ v1.0 | L1 Ownership, L1 Type System | 性能瓶颈、混合架构选型 |
+| [08_rust_vs_javascript.md](./08_rust_vs_javascript.md) | Rust vs JavaScript | 编译 vs 解释、所有权 vs GC、Future vs Promise、WASM | ✅ v1.0 | L1 Ownership, L3 Async | Web 性能、WASM 集成 |
 
 ---
 
