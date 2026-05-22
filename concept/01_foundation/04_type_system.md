@@ -92,6 +92,20 @@
       - [11.5.6 `mem::size_of` 与 `mem::align_of` 的对比分析](#1156-memsize_of-与-memalign_of-的对比分析)
       - [11.5.7 边界极限测试：用 unsafe 窥探原始字节](#1157-边界极限测试用-unsafe-窥探原始字节)
     - [11.6 `union` 的类型安全边界](#116-union-的类型安全边界)
+    - [11.7 名义类型与结构类型（Nominal vs Structural Typing）](#117-名义类型与结构类型nominal-vs-structural-typing)
+      - [11.7.1 定义与形式化区分](#1171-定义与形式化区分)
+      - [11.7.2 Rust 的类型二元性：名义与结构并存](#1172-rust-的类型二元性名义与结构并存)
+      - [11.7.3 内部二元性：生命周期子类型化的结构本质](#1173-内部二元性生命周期子类型化的结构本质)
+      - [11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象](#1174-幻影类型与新类型惯用法名义类型的零成本抽象)
+      - [11.7.5 一致性规则与名义类型的深层绑定](#1175-一致性规则与名义类型的深层绑定)
+      - [11.7.6 FFI 翻译中的类型范式冲突](#1176-ffi-翻译中的类型范式冲突)
+      - [11.7.7 跨语言对比表](#1177-跨语言对比表)
+      - [11.7.8 反命题与边界分析](#1178-反命题与边界分析)
+        - [命题 1: "名义类型阻止了所有非预期的类型等价"](#命题-1-名义类型阻止了所有非预期的类型等价)
+        - [命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的问题"](#命题-2-结构类型系统可以解决孤儿规则orphan-rule的问题)
+        - [命题 3: "新类型模式（Newtype）具有零运行时成本"](#命题-3-新类型模式newtype具有零运行时成本)
+      - [11.7.9 认知路径：何时名义、何时结构](#1179-认知路径何时名义何时结构)
+    - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
@@ -1680,6 +1694,537 @@ unsafe {
 
 ---
 
+### 11.7 名义类型与结构类型（Nominal vs Structural Typing）
+
+> **Bloom 层级**: 理解 → 分析 → 评价
+>
+> 类型等价（type equivalence）是类型系统的核心问题：两个类型"相同"意味着什么？名义类型系统（Nominal Typing）以**显式声明的名称**作为类型身份的判据；结构类型系统（Structural Typing）以**内存布局与成员结构**作为类型身份的判据。Rust 并非纯粹的名义或结构系统，而是在不同构造上呈现独特的**类型二元性**——理解这种二元性，是掌握 Rust 类型系统设计哲学、一致性（coherence）规则与 FFI 边界的关键。
+>
+> **交叉链接**: [L2 Trait: 一致性规则](../02_intermediate/01_traits.md) · [L2 泛型: Variance](../02_intermediate/02_generics.md) · [L3 Unsafe: 裸指针与类型双关](../03_advanced/03_unsafe.md) · [L4 形式化: 子类型关系](../04_formal/02_type_theory.md)
+
+#### 11.7.1 定义与形式化区分
+
+> **[来源: Wikipedia — Nominal type system]** 在名义类型系统中，两种类型相等当且仅当它们具有相同的显式名称（name）；子类型关系也必须显式声明（如 `class A extends B`）。✅
+> **[来源: Wikipedia — Structural type system]** 在结构类型系统中，两种类型相等当且仅当它们具有兼容的结构（structure）；子类型关系由成员集合的包含关系自动推导。✅
+> **[来源: Pierce, *Types and Programming Languages* (TAPL), Ch.15]** "Nominal type systems associate types with names; structural type systems associate types with shapes." 名义系统将类型与名称绑定，结构系统将类型与形状绑定。✅
+> **[来源: TypeScript Handbook — Structural Type System]** TypeScript 使用结构类型系统："The basic rule for TypeScript's structural type system is that `x` is compatible with `y` if `y` has at least the same members as `x`." ✅
+
+形式化区分：
+
+```text
+名义类型等价（Nominal Equivalence）:
+  Γ ⊢ type A = ...
+  Γ ⊢ type B = ...
+  ─────────────────────────────
+  A ≡ B  ⟺  name(A) = name(B)
+
+结构类型等价（Structural Equivalence）:
+  struct(A) = { f₁: T₁, f₂: T₂, ... }
+  struct(B) = { f₁: T₁, f₂: T₂, ... }
+  ─────────────────────────────
+  A ≡ B  ⟺  struct(A) = struct(B)   （成员名称与类型均匹配）
+```
+
+**关键差异**：名义类型的身份由**声明位置**决定；结构类型的身份由**成员集合**决定。在名义系统中，即使两个类型的内存布局完全相同，只要名称不同，它们就是不兼容的；在结构系统中，只要布局相同，无论名称如何，它们就是兼容的。
+
+> **[来源: Cardelli & Wegner 1985, *On Understanding Types, Data Abstraction, and Polymorphism*]** 名义类型与结构类型的区分是类型系统设计的首要决策之一，它深刻影响语言的模块化、演化能力与类型检查算法。✅
+
+---
+
+#### 11.7.2 Rust 的类型二元性：名义与结构并存
+
+Rust 并非纯粹的名义类型系统，也非纯粹的结构类型系统。它在不同语法构造上呈现**不对称的二元性**：
+
+| **构造** | **类型判别方式** | **说明** |
+|:---|:---|:---|
+| `struct S { ... }` | **名义** | 必须显式声明名称，`S` 的身份由名称决定 |
+| `enum E { ... }` | **名义** | 变体名称是类型的身份标识 |
+| `trait Tr { ... }` | **名义** | 必须显式 `impl Tr for T`，无法自动推导 |
+| `(T, U)` 元组 | **结构** | 身份由成员类型序列决定，无名称约束 |
+| `[T; N]` 数组 | **结构** | 身份由元素类型与长度决定 |
+| `fn(T) -> U` | **结构** | 函数指针类型由参数与返回类型决定 |
+| 生命周期 `'a` | **结构** | 子类型关系由生命周期区域的包含关系决定 |
+
+> **[来源: Rust Reference: Types]** Rust 的 `struct`、`enum`、`trait` 均为名义类型构造；元组、数组、函数指针、切片为结构类型构造。✅
+
+**不对称性：名义包装与结构原型的共存**
+
+Rust 中存在一组有趣的"名义—结构配对"：
+
+```rust
+// ✅ 名义版本：单元结构体
+struct UnitA;
+struct UnitB;
+
+// 结构版本：单元类型
+let unit: () = ();
+
+// ✅ 名义版本：元组结构体
+struct Point(f64, f64);
+struct Vector(f64, f64);
+
+// 结构版本：匿名元组
+let tuple: (f64, f64) = (1.0, 2.0);
+
+// ✅ 名义版本：记录结构体
+struct Point2D { x: f64, y: f64 }
+struct Vector2D { x: f64, y: f64 }
+
+// ❌ 结构版本：记录结构体**没有**对应的匿名结构类型
+// Rust 不支持 { x: f64, y: f64 } 作为独立类型
+```
+
+> **[来源: RFC 2584: Structural Records (closed)]** Centril 提出的 Structural Records RFC 试图为 Rust 引入匿名记录类型 `{ x: f64, y: f64 }`，但该 RFC 已被关闭（postponed/closed）。这意味着 Rust 设计者**刻意保留了记录结构体的名义性**——记录字段的命名是类型身份的一部分，不可通过结构等价绕过。✅
+
+**关键洞察**：单元类型 `()` 和元组类型 `(T, U)` 既有名义包装（`struct Unit;`、`struct T(A, B)`）又有结构原型（`()`、`(A, B)`），但**记录结构体 `struct T { a: A }` 只有名义形式**。这种不对称性反映了 Rust 的设计哲学：
+
+- **简单组合**（元组、数组）使用结构类型，降低语法开销；
+- **语义命名**（记录字段）使用名义类型，强制显式契约；
+- **行为抽象**（trait）使用名义类型，确保一致性（coherence）可判定。
+
+```mermaid
+graph TD
+    A[Rust 类型构造] --> B[名义类型]
+    A --> C[结构类型]
+
+    B --> B1[struct S { a: A }<br/>记录结构体：无结构对应]
+    B --> B2[struct S(T, U)<br/>元组结构体：有结构对应]
+    B --> B3[struct S;<br/>单元结构体：有结构对应]
+    B --> B4[enum E { ... }<br/>枚举：无结构对应]
+    B --> B5[trait Tr { ... }<br/>Trait：无结构对应]
+
+    C --> C1[(T, U)<br/>元组]
+    C --> C2[[T; N]<br/>数组]
+    C --> C3[fn(T) -> U<br/>函数指针]
+    C --> C4['a, 'static<br/>生命周期]
+
+    B1 -.-> D["不对称性<br/>记录无结构 counterpart"]
+    C1 -.-> D
+```
+
+> **认知功能**: 此图揭示了 Rust 类型系统的"分裂性格"。关键认知：**不是所有构造都有名义/结构双版本**。记录结构体的纯粹名义性是有意的设计——它防止了"意外类型等价"（accidental type equivalence），确保 API 契约的显式性。元组结构体虽然可以模拟结构类型（`(f64, f64)` 与 `Point(f64, f64)` 布局相同），但 `Point` 和 `Vector` 因名称不同而互不兼容，这正是名义类型的保护作用。 [来源: 💡 原创分析]
+
+---
+
+#### 11.7.3 内部二元性：生命周期子类型化的结构本质
+
+Rust 的类型系统中最容易被忽视的二元性体现在**生命周期子类型化**中：
+
+```text
+生命周期子类型规则（结构子类型）:
+  'long <: 'short  ⟺  lifetime('long) ⊇ lifetime('short)
+
+即：生命周期 'a 是 'b 的子类型，当且仅当 'a 的存活区域包含 'b 的存活区域。
+```
+
+> **[来源: Rust Reference: Subtyping]** "Lifetime parameters are covariant: `'long` is a subtype of `'short` if `'long` outlives `'short`." 生命周期参数具有协变性，子类型关系由区域的包含关系（结构特征）决定。✅
+> **[来源: The Rustonomicon: Variance]** Rust 的 variance 系统决定了泛型参数在何种方向上保持子类型关系。生命周期是唯一在 Rust 中显式展示结构子类型的机制。✅
+
+这种**内部二元性**意味着：
+
+- `struct`、`enum`、`trait` 的等价与实现关系是**名义的**（必须显式声明）；
+- 生命周期的包含关系是**结构的**（由区域集合的数学关系自动推导）。
+
+**定理：Rust 是混合型类型系统**
+
+```text
+定理 T4: Rust 的类型判别机制是名义—结构混合体
+  前提: struct/enum/trait 使用名义等价（由名称决定）
+  前提: tuple/array/fn pointer 使用结构等价（由形状决定）
+  前提: lifetime 使用结构子类型（由区域包含关系决定）
+    ↓
+  结论: Rust 不是纯粹的名义系统，也不是纯粹的结构系统
+    ↓
+  ⟹ 编程者必须在不同构造上切换"名义思维"与"结构思维"
+```
+
+```rust
+// 结构子类型的体现：生命周期协变
+fn borrow_long<'long>(s: &'long str) {
+    // 'long 可以自动降级为 'short
+    fn inner<'short>(t: &'short str) {}
+    inner(s);  // ✅ 'long <: 'short，自动协变
+}
+
+// 名义类型的体现：struct 不自动等价
+struct Meters(f64);
+struct Feet(f64);
+
+fn use_meters(m: Meters) {}
+
+let f = Feet(3.28);
+// use_meters(f);  // ❌ 编译错误：Meters 与 Feet 不兼容
+```
+
+> **关键洞察**: 生命周期子类型化的结构性是 Rust 借用检查器的数学基础——它不需要程序员显式声明 `'long extends 'short`，编译器自动从代码的作用域结构中推导区域包含关系。这与 `trait` 实现形成鲜明对比：你必须写 `impl Trait for T`，编译器不会自动"发现"某个类型满足某个 trait。
+
+---
+
+#### 11.7.4 幻影类型与新类型惯用法：名义类型的零成本抽象
+
+Rust 的名义类型系统被刻意用于**零成本抽象**——通过新类型（Newtype）模式为相同底层结构赋予不同的语义身份：
+
+```rust
+// ✅ 新类型模式：相同结构，不同身份
+struct Kilometers(f64);
+struct Miles(f64);
+
+// 两者在内存中完全相同（大小 = 8 bytes，对齐 = 8），但类型不兼容
+fn distance_km(d: Kilometers) -> f64 { d.0 }
+fn distance_mi(d: Miles) -> f64 { d.0 }
+
+let k = Kilometers(5.0);
+let m = Miles(3.1);
+
+distance_km(k);  // ✅
+// distance_km(m);  // ❌ 编译错误：类型不匹配
+```
+
+> **[来源: TRPL: Ch19.3 — Newtype Pattern]** "The newtype pattern is useful for tasks like ensuring type safety and encapsulation... A tuple struct with a single field is a newtype pattern." ✅
+
+**幻影数据（PhantomData）与方差控制**
+
+`PhantomData<T>` 是名义类型系统的极致应用——它在运行时不占任何空间，但在编译期携带类型信息，控制泛型参数的 variance：
+
+```rust
+use std::marker::PhantomData;
+
+// ✅ 名义标记：Vec<T> 的所有权句柄，零运行时开销
+struct VecHandle<T> {
+    ptr: *mut T,
+    len: usize,
+    cap: usize,
+    _marker: PhantomData<T>,  // 告诉编译器：此结构逻辑上拥有 T
+}
+
+// PhantomData<T> 使 VecHandle<T> 对 T 协变
+// 这允许 VecHandle<&'static str> 作为 VecHandle<&'a str> 使用
+```
+
+> **[来源: Rust Reference: PhantomData]** `PhantomData<T>` 是零大小类型（ZST），用于影响编译期的类型检查行为（如 drop check、auto trait 推导、variance）。✅
+
+**定理：新类型模式的零成本性**
+
+```text
+定理 T5: 新类型模式（Newtype）具有零运行时成本
+  前提: struct Kilometers(f64) 与 f64 的内存布局完全相同
+  前提: PhantomData<T> 的大小为 0
+    ↓
+  结论: 名义区分在编译后完全消除
+    ↓
+  ⟹ 程序员获得类型安全的同时不支付运行时代价
+```
+
+> **[来源: Rust Reference: Type Layout]** 单字段元组结构体的布局与其字段类型相同（`#[repr(Rust)]` 下的当前保证）。✅
+> **[来源: The Rustonomicon: PhantomData]** PhantomData 是"名义类型系统的幽灵杠杆"——它不产生代码，但改变编译器的类型推导路径。✅
+
+---
+
+#### 11.7.5 一致性规则与名义类型的深层绑定
+
+Rust 的**一致性规则（Orphan Rules）**从根本上依赖于名义类型：
+
+```text
+一致性规则（简化）:
+  可以写 impl Trait for Type 当且仅当：
+    - 当前 crate 定义了 Trait，或
+    - 当前 crate 定义了 Type
+
+即：不能为"别人的 trait"和"别人的类型"同时写实现。
+```
+
+> **[来源: Rust Reference: Orphan Rules]** "An impl is valid only if either the trait or the type is local to the current crate." ✅
+> **[来源: RFC 1023: Rebalancing Coherence]** 一致性规则的设计目标是防止「重叠实现（overlapping impls）」，确保 trait 解析在编译期是确定性的。✅
+
+为什么一致性规则**必须**依赖名义类型？
+
+```text
+反事实推理：假设 Rust 使用纯结构类型系统
+  - 在结构系统中，类型由成员集合唯一确定
+  - 两个 crate 可以独立定义「成员相同但名称不同」的结构类型
+  - 如果允许为「结构等价」的外部类型写 impl，则两个 crate 可能为同一结构写重叠 impl
+  - 结果：trait 解析出现歧义，编译器无法确定使用哪个实现
+  - 结论：结构类型系统与全局一致性（global coherence）不兼容
+```
+
+**推论：名义身份是全局一致性的前提**
+
+```text
+推论 C1: 一致性规则要求类型具有全局唯一的名义身份
+  前提: 结构等价允许「不同名称、相同结构」的类型被视为等价
+  前提: trait 解析需要全局无歧义（coherence）
+    ↓
+  结论: 若 Rust 使用纯结构类型系统，则 coherence 无法保证
+    ↓
+  ⟹ Rust 对 struct/enum/trait 采用名义类型是 coherence 的必然要求
+```
+
+```rust
+// 一致性规则的实际影响
+// Crate A 定义了 trait Display（标准库）
+// Crate B 定义了 struct MyInt(i32)
+// Crate C 可以为 MyInt 实现 Display（拥有 MyInt）
+// Crate C 不能为 i32 实现 Display（都不拥有）
+
+// 这是名义系统的保护：i32 的身份是全局固定的（标准库所有）
+// 若 i32 的结构等价于 "相同位模式的自定义类型"，
+// 则 coherence 将因「谁有权实现 trait」而崩溃
+```
+
+> **[来源: Rust Internals — Blog: "Coherence in Rust"]** 名义类型的全局唯一身份使得编译器可以在 crate 边界上做出「是否存在重叠 impl」的确定性判断。✅ 二级来源
+
+---
+
+#### 11.7.6 FFI 翻译中的类型范式冲突
+
+从 C 翻译到 Rust 时，名义类型与结构类型的冲突产生深刻的工程影响。C 的 `struct` 在语义上更接近**结构类型**（C 编译器允许隐式类型转换和类型双关），而 Rust 的 `struct` 是**名义类型**。
+
+> **[来源: arXiv:2412.15042 — *Compiling C to Safe Rust, Formalized*]** "Nominal typing 'sets in stone' representation and mutability, causing 'contamination' when translating from C structs. A C struct with mixed read/write fields becomes a Rust struct where mutability is fixed at declaration." ✅
+
+**C 到 Rust 的翻译困境**：
+
+```c
+// C: 结构类型思维——内存块可以按需读写
+typedef struct {
+    int x;      // 有时只读
+    int y;      // 有时读写
+} Point;
+
+void read_only(const Point* p) { /* 只读访问 p->x, p->y */ }
+void read_write(Point* p) { p->x = 0; p->y = 0; }
+```
+
+```rust
+// Rust 翻译：名义类型思维——mutability 固定在声明处
+// 方案 A: 全部不可变（丢失写能力）
+struct PointImm { x: i32, y: i32 }
+
+// 方案 B: 全部可变（丢失只读保证）
+struct PointMut { x: i32, y: i32 }
+
+// 方案 C: 拆分结构（增加 API 复杂度）
+struct PointRead { x: i32, y: i32 }
+struct PointWrite { x: i32, y: i32 }
+```
+
+> **[来源: arXiv:2412.15042]** C 的 `const Point*` 是「调用时决定的只读视图」，Rust 的 `&Point` vs `&mut Point` 是「类型声明时固定的所有权状态」。这种差异导致 C→Rust 自动化翻译必须做「污染性选择」——要么保守地全部标记为 mutable，要么激进地拆分类型，两者都有代价。✅
+
+**形式化表达**：
+
+```text
+C 结构类型的灵活性:
+  const Point* p  ≡  p 指向的内存是只读的（调用时决定）
+  Point* p        ≡  p 指向的内存是可写的（调用时决定）
+
+Rust 名义类型的刚性:
+  &Point          ≡  Point 本身在声明时就是不可变的借用它
+  &mut Point      ≡  Point 本身在声明时就是通过可变引用借用它
+
+关键差异: C 的 const 是「视图属性」；Rust 的 &/&mut 是「类型身份的一部分」
+```
+
+---
+
+#### 11.7.7 跨语言对比表
+
+| **维度** | **Rust** | **TypeScript** | **Go** | **Haskell** | **C++ (Concepts)** |
+|:---|:---|:---|:---|:---|:---|
+| **基本对象类型** | 名义（`struct`） | 结构（shape） | 名义（`struct`） | 名义（`data`） | 名义（`class`/`struct`） |
+| **接口/行为抽象** | 名义（`trait`，需显式 `impl`） | 结构（duck typing） | **结构**（interface 自动满足） | 名义（Type Class，需显式 `instance`） | 结构（Concepts / SFINAE） |
+| **函数类型** | 结构（`fn(T) -> U`） | 结构 | 无独立函数类型 | 结构（`a -> b`） | 结构（函数指针） |
+| **元组/数组** | 结构 | 结构 | 结构（slice 接口） | 结构 | 结构（`std::tuple`） |
+| **生命周期/子类型** | **结构**（区域包含） | N/A | N/A | N/A | N/A |
+| **新类型支持** | ✅ 原生（tuple struct） | ⚠️ 需 branded type | ❌ 无 | ✅ `newtype` | ✅ 强类型别名 / wrapper |
+| **一致性保证** | ✅ 全局 coherence | ❌ 无（运行时才知） | ⚠️ 运行时 panic | ✅ 全局 coherence | ⚠️ 模板实例化歧义 |
+| **FFI 友好性** | ⚠️ 名义刚性导致翻译困难 | N/A | ⚠️ 名义 + 结构混合 | ⚠️ 名义 | ⚠️ 名义 |
+
+> **[来源: TypeScript Handbook]** TypeScript 的接口是纯粹结构的——只要对象满足接口的 shape，就自动兼容，无需显式声明 `implements`。✅ 三级来源
+> **[来源: Go Language Specification]** Go 的 interface 是结构类型的典型代表：类型自动满足 interface，只要它实现了所有方法。✅ 三级来源
+> **[来源: Haskell 2010 Report]** Haskell 的 Type Class 需要显式 `instance` 声明，与 Rust trait 同为名义系统。✅ 一级来源
+> **[来源: C++20 Concepts]** C++20 Concepts 是结构类型的回归：模板约束由「类型是否满足 expression 要求」自动判定，无需显式「实现」某个 concept。✅ 一级来源
+
+**关键观察**：
+
+- **TypeScript 与 Go** 在接口/行为层使用结构类型，降低了「适配成本」，但牺牲了编译期一致性保证；
+- **Haskell 与 Rust** 在行为抽象层使用名义类型（Type Class / Trait），确保了全局 coherence，但增加了「为外部类型实现接口」的摩擦；
+- **Rust 的独特性**：它是唯一在**生命周期子类型化**中使用结构类型、同时在**trait 实现**中使用名义类型的语言。这种二元性是 Rust 类型系统的核心张力。
+
+---
+
+#### 11.7.8 反命题与边界分析
+
+> **Bloom 层级**: 评价
+
+##### 命题 1: "名义类型阻止了所有非预期的类型等价"
+
+```mermaid
+graph TD
+    P["命题: 名义类型阻止所有非预期等价"] --> Q1{"涉及 struct/enum/trait?"}
+    Q1 -->|是| T1["定理成立: 名称不同 ⟹ 不兼容<br/>✅ 新类型模式保护"]
+    Q1 -->|否| Q2{"涉及 tuple/array/fn pointer?"}
+    Q2 -->|是| F1["反例: (i32, i32) 与 Point(i32, i32) 名义不同<br/>但可通过 .0/.1 结构兼容（非自动，但可转换）"]
+    Q2 -->|否| Q3{"涉及生命周期?"}
+    Q3 -->|是| F2["反例: 'static 与 'a 名义不同<br/>但 'static <: 'a 自动成立（结构子类型）"]
+    Q3 -->|否| T2["超出 Rust 类型系统范围"]
+
+    style T1 fill:#6f6
+    style F1 fill:#f96
+    style F2 fill:#f96
+    style T2 fill:#6f6
+```
+
+> **认知功能**: 此命题的 falsification 揭示了 Rust 类型二元性的本质。关键认知：**名义类型并非无处不在**。在 tuple、array、function pointer 和 lifetime 领域，结构等价仍然发挥作用。程序员不能简单地认为"只要名字不同就一定安全"——必须区分当前操作的是名义构造还是结构构造。 [来源: 💡 原创分析]
+
+**判定**: **FALSE**（假）。名义类型仅覆盖 `struct`/`enum`/`trait`，元组、数组、函数指针和生命周期仍遵循结构规则。
+
+##### 命题 2: "结构类型系统可以解决孤儿规则（Orphan Rule）的问题"
+
+```mermaid
+graph TD
+    P["命题: 结构类型解决孤儿规则问题"] --> Q1{"保留全局 coherence?"}
+    Q1 -->|是| F1["反例: 两个 crate 独立为结构等价的类型写 impl<br/>→ 重叠 impl 无法避免（coherence 崩溃）"]
+    Q1 -->|否| Q2{"允许运行时歧义解析?"}
+    Q2 -->|是| F2["反例: 类型检查不再静态确定<br/>→ 失去 Rust 核心保证（编译期解析）"]
+    Q2 -->|否| T1["放弃 trait 系统，改用其他机制<br/>→ 不再是 Rust"]
+
+    style F1 fill:#f66
+    style F2 fill:#f66
+    style T1 fill:#f96
+```
+
+> **认知功能**: 此命题是对「结构类型更灵活」直觉的形式化检验。关键认知：孤儿规则的约束**不是实现上的偶然**，而是**名义类型与全局 coherence 之间的逻辑必然**。结构类型允许「不同名称、相同结构」的类型存在，这使得「谁有权为类型实现 trait」成为不可判定问题。TypeScript 放弃全局 coherence（接口兼容是运行时的），Go 通过运行时 panic 处理歧义——Rust 选择名义类型来保持编译期确定性。 [来源: 💡 原创分析]
+
+**判定**: **FALSE**（假）。结构类型与全局 coherence 不兼容；若采用结构类型，要么放弃 coherence（TypeScript 模式），要么引入运行时歧义（Go 模式）。
+
+##### 命题 3: "新类型模式（Newtype）具有零运行时成本"
+
+```mermaid
+graph TD
+    P["命题: 新类型模式零运行时成本"] --> Q1{"单字段元组结构体?"}
+    Q1 -->|是| Q2{"#[repr(Rust)] 默认布局?"}
+    Q2 -->|是| T1["定理成立: 布局同构于底层类型<br/>✅ size_of::<Newtype>() == size_of::<Inner>()"]
+    Q2 -->|否| F1["反例: #[repr(C)] 可能引入不同 ABI 要求<br/>→ 需显式保证"]
+    Q1 -->|否| Q3{"多字段新类型?"}
+    Q3 -->|是| F2["反例: 多字段 struct 有独立布局<br/>→ 非零成本（但非新类型模式本意）"]
+
+    style T1 fill:#6f6
+    style F1 fill:#f96
+    style F2 fill:#f96
+```
+
+**判定**: **TRUE**（真），在 `#[repr(Rust)]` 单字段元组结构体的条件下。
+
+```rust
+use std::mem;
+
+struct Kilometers(f64);
+struct Miles(f64);
+
+fn main() {
+    assert_eq!(mem::size_of::<Kilometers>(), mem::size_of::<f64>());
+    assert_eq!(mem::size_of::<Miles>(), mem::size_of::<f64>());
+    assert_eq!(mem::align_of::<Kilometers>(), mem::align_of::<f64>());
+    // ✅ 零成本验证：新类型在内存中完全等同于底层类型
+}
+```
+
+> **[来源: Rust Reference: Type Layout]** "A tuple struct with a single field has the same layout as its field." ✅
+
+---
+
+#### 11.7.9 认知路径：何时名义、何时结构
+
+> **Bloom 层级**: 理解 → 分析
+
+Rust 编程者需要建立**双模式认知框架**，在不同场景下切换名义思维与结构思维：
+
+| **场景** | **思维模型** | **检查清单** |
+|:---|:---|:---|
+| 定义 `struct` / `enum` | **名义思维** | 「这个名字是否准确表达了语义？」 |
+| 实现 `trait` | **名义思维** | 「我是否有权为这个类型实现这个 trait？（一致性规则）」 |
+| 编写泛型约束 `<T: Trait>` | **名义思维** | 「Trait bound 是否足够精确，避免意外类型满足？」 |
+| 使用元组 `(T, U)` | **结构思维** | 「成员的顺序和类型是否匹配？」 |
+| 传递函数指针 `fn(T) -> U` | **结构思维** | 「参数和返回类型的签名是否兼容？」 |
+| 标注生命周期 `&'a T` | **结构思维** | 「引用存活区域是否包含被引用的数据区域？」 |
+| FFI 翻译 C `struct` | **范式冲突** | 「C 的灵活 mutability 如何在 Rust 的名义 rigid 中表达？」 |
+
+**六步认知路径**：
+
+**Step 1: 直觉困惑** — "为什么我不能把 `Feet` 传给需要 `Meters` 的函数？它们都是 `f64`！"
+> 困惑根源：将类型视为「内存布局」，而非「语义契约」。名义类型强制你认识到：**类型的身份独立于其表示**。
+
+**Step 2: 具体场景** — 混合使用 `Meters` 和 `Feet` 导致火星气候轨道器（Mars Climate Orbiter）式的单位灾难。新类型模式在编译期消除了这种错误。
+
+**Step 3: 模式抽象** — 「名义 = 语义契约 + 编译期强制」；「结构 = 形状兼容 + 自动推导」。Rust 在「需要强制契约」处使用名义，在「需要便捷组合」处使用结构。
+
+**Step 4: 形式规则** — 名义类型的等价规则：`S₁ ≡ S₂ ⟺ name(S₁) = name(S₂)`。结构类型的等价规则：`T₁ ≡ T₂ ⟺ fields(T₁) = fields(T₂)`。Rust 的混合规则：不同构造使用不同的等价判据。
+
+**Step 5: 代码验证** — 尝试为外部类型实现外部 trait（违反孤儿规则），观察编译器错误 E0117/E0210；尝试将 `Kilometers` 传给 `Miles` 参数，观察类型不匹配错误。这些错误不是限制，而是「名义身份保护」的证据。
+
+**Step 6: 边界测试** — 在 FFI 边界测试 `#[repr(C)] struct` 与 C 结构体的布局兼容性；测试 `PhantomData<T>` 对 Send/Sync 推导的影响；测试生命周期协变在嵌套泛型中的传播行为。
+
+> **来源**: [Rust Reference: Subtyping] · [Rust Reference: Variance] · [Rust Reference: PhantomData] · [Rustonomicon: PhantomData] · [RFC 2584: Structural Records] · [RFC 1023: Rebalancing Coherence] · [arXiv:2412.15042] · [Pierce, TAPL, Ch.15] · [Wikipedia: Nominal type system] · [Wikipedia: Structural type system] · [TypeScript Handbook: Structural Type System]
+
+---
+
+### 11.7.10 与多级引用语义的交叉：引用的名义与结构行为
+
+> **Bloom 层级**: 分析
+
+引用类型 `&T` 和 `&mut T` 本身是**结构构造**（structural construction）——它们由引用构造子 `&` / `&mut` 与目标类型 `T` 组合而成，不依赖类型名称。然而，引用类型的**等价性**却同时受名义与结构两股力量的支配：
+
+**结构行为（引用构造层面）**：
+
+```rust
+let r1: &i32 = &42;
+let r2: &&i32 = &r1;   // ✅ 结构组合：& 构造子嵌套
+let r3: &mut &i32 = &mut r1; // ❌ 错误：r1 不是 mut 绑定
+```
+
+- `&` 和 `&mut` 作为类型构造子是**结构的**：`&T` 的兼容性由 "是否是引用" 决定，不由名称决定。
+- 引用弱化 `&mut T → &T` 也是**结构的**：这是引用构造子自身的性质，与 `T` 是否名义无关。
+- 生命周期子类型化 `&'a T <: &'b T`（当 `'a: 'b`）同样是**结构的**：由生命周期区域的包含关系决定。
+
+**名义行为（目标类型层面）**：
+
+```rust
+struct Meters(f64);
+struct Feet(f64);
+
+let m: &Meters = &Meters(3.0);
+// let f: &Feet = m;           // ❌ 错误：&Meters 与 &Feet 不等价
+// 即使 Meters 和 Feet 内部都是 f64，名称不同导致 &Meters ≠ &Feet
+```
+
+- `&T` 的等价性**继承** `T` 的等价性：若 `T` 是名义类型（如 `struct Meters(f64)`），则 `&T` 也是名义区分的。
+- 这意味着：**引用构造是结构的，但引用的身份是名义的**——当目标类型具有名义身份时，引用也随之获得名义身份。
+
+**交叉边界定理**：
+
+> **定理 T6（引用的混合等价性）**：在 Rust 中，`&T₁ ≡ &T₂` 当且仅当 `T₁ ≡ T₂` **且** 生命周期约束相容。其中 `T₁ ≡ T₂` 的判定取决于 `T` 自身的类型系统类别（名义或结构）。引用构造子 `&` 本身不引入额外的名义约束，但也不消除目标类型的名义约束。
+>
+> **推论 C2**：`&mut T → &T` 的弱化在所有 `T` 上成立，无论 `T` 是名义还是结构类型。这是因为弱化是引用构造子的结构性质，与目标类型无关。
+>
+> **推论 C3**：多级引用 `&&T` 的自动解引用链深度由**结构规则**控制（编译期确定），但每一层解引用后的类型等价性仍受**目标类型的名义/结构性质**约束。
+
+```rust
+// 结构行为示例：元组引用可以跨名称兼容
+let t: &(i32, i32) = &(1, 2);
+let u: &(i32, i32) = t;  // ✅ 结构等价
+
+// 名义行为示例：新类型引用不兼容
+struct Point(i32, i32);
+let p: &Point = &Point(1, 2);
+// let q: &(i32, i32) = p;  // ❌ 名义不等价
+```
+
+> **分析**: 这一交叉点揭示了 Rust 类型系统的**层次化设计**：外层构造（引用、生命周期、泛型参数）倾向于结构规则以提供灵活性；内层原子类型（struct、enum、trait）倾向于名义规则以提供安全性与一致性。
+> [来源: [Rust Reference: Types] · [Rust Reference: Subtyping] · [Rust Reference: Type Coercions]]（一级来源）
+
+> **与多级引用语义的关联**: 详见 [`05_reference_semantics.md` §七](../01_foundation/05_reference_semantics.md) 对 `&mut &T`、`&&mut T` 及 partial reborrow 的深度分析——其中外层引用的可变性遵循结构规则，而内层引用的目标类型遵循名义或结构规则，两者的交互决定了复杂借用场景的类型检查行为。
+
+---
+
 ## 十二、待补充与演进方向（TODOs）
 >
 > [来源: [TRPL]]
@@ -1691,6 +2236,7 @@ unsafe {
 - [x] **TODO**: 补充 Zero-sized types (ZST) 和 PhantomData 的类型论意义 —— 优先级: 中 —— 已完成 §11.2
 - [x] **TODO**: 补充 Discriminant 和内存布局的底层分析 —— 优先级: 低 —— 已完成 §11.5 —— 2026-05-14
 - [x] **TODO**: 补充 `union` 的类型安全边界与使用模式 —— 优先级: 低 —— 已完成 §11.6
+- [x] **TODO**: 补充名义类型与结构类型（Nominal vs Structural Typing）的完整分析 —— 优先级: 高 —— 已完成 §11.7 —— 2026-05-22
 
 ---
 
