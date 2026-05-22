@@ -349,8 +349,8 @@ Wasm 线性内存布局:
 
 > **所有权映射**: Rust 的所有权系统在线性内存中映射为**编译期静态分析**——`Box<T>` 的 drop 调用释放堆内存，`Vec<T>` 的重新分配触发 `memory.grow`。Wasm 运行时的**边界检查**确保所有内存访问安全，与 Rust 的所有权保证形成**双层防御**。[来源: [WebAssembly Specification](https://webassembly.github.io/spec/)]
 
-```rust
-// Wasm 内存管理示例
+```rust,ignore
+// Wasm 内存管理示例（需要 wasm-bindgen crate）
 #[wasm_bindgen]
 pub fn allocate_vec(size: usize) -> *mut u8 {
     let mut vec = vec![0u8; size];

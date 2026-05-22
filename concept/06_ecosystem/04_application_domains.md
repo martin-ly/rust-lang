@@ -20,6 +20,7 @@
 > **[来源: Embedded Rust Book; Embassy Book]** ✅
 
 ### 1.1 Wikipedia 权威定义
+[来源: [Async Book](https://rust-lang.github.io/async-book/)]
 
 > **[Wikipedia: Software engineering]** Software engineering is an engineering-based approach to software development.
 > A software engineer is a person who applies the engineering design process to design, develop, test, maintain, and evaluate computer software.
@@ -61,24 +62,30 @@
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
 > **学习递进**: 从直觉出发，逐层深入核心概念。
+[来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 第 1 步：Rust适合哪些应用领域？
+[来源: [Tokio Docs](https://tokio.rs/)]
 
 系统编程/Web后端/嵌入式/区块链/游戏等
 
 ### 第 2 步：每个领域的核心挑战是什么？
+[来源: [Wikipedia](https://en.wikipedia.org/)]
 
 内存安全/性能/实时性/并发/安全性不同侧重
 
 ### 第 3 步：Rust在每个领域的独特优势？
+[来源: [ISO C++](https://isocpp.org/)]
 
 零成本安全/ fearless concurrency / 确定性资源管理
 
 ### 第 4 步：领域特定生态和工具链？
+[来源: [Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
 
 embedded-hal/actix/anchor/bevy等框架
 
 ### 第 5 步：Rust不适合哪些场景？
+[来源: [API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 快速原型/脚本/极度依赖GC生态的领域
 
@@ -1075,6 +1082,7 @@ graph TD
 > [来源: 💡 原创分析]
 
 > **过渡: L6 → L3**
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > 每个应用领域都面临特定的 unsafe 边界：嵌入式需要裸指针操作、WASM 需要 FFI 桥接、游戏引擎需要自定义内存分配器。这些场景不是"绕过 Rust 的安全保证"，而是"在理解安全边界的前提下精确控制"。
 >
@@ -1087,6 +1095,7 @@ graph TD
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
 
 > **过渡: L6 → L7**
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 >
 > 应用领域是技术演进的试验场：WASM 推动 Rust 的 `no_std` 生态成熟、AI 推理推动 `unsafe` 张量操作的封装标准化、嵌入式推动 `const generics` 的编译期计算。Rust 的未来方向由实际应用需求驱动。
 >

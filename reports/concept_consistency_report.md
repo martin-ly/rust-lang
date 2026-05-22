@@ -1,23 +1,19 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T15:06:07.833783
-> 扫描文件数: 161
-> 提取概念定义数: 481
+> 生成时间: 2026-05-22T15:26:05.992650
+> 扫描文件数: 165
+> 提取概念定义数: 483
 > 跨文件引用数: 163
 
 ## 目录
 
-- [概念一致性审计报告 (Concept Consistency Report)](#概念一致性审计报告-concept-consistency-report)
-  - [目录](#目录)
-  - [一、执行摘要](#一执行摘要)
-  - [二、Send / Sync 一致性检查](#二send--sync-一致性检查)
-  - [三、所有权三规则一致性检查](#三所有权三规则一致性检查)
-  - [四、生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
-  - [五、unsafe 语义一致性检查](#五unsafe-语义一致性检查)
-  - [六、跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
-  - [七、附录：概念定义统计](#七附录概念定义统计)
-    - [7.1 按概念分类统计](#71-按概念分类统计)
-    - [7.2 按文件统计](#72-按文件统计)
+1. [执行摘要](#一执行摘要)
+2. [Send / Sync 一致性检查](#二send--sync-一致性检查)
+3. [所有权三规则一致性检查](#三所有权三规则一致性检查)
+4. [生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
+5. [unsafe 语义一致性检查](#五unsafe-语义一致性检查)
+6. [跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
+7. [附录：概念定义统计](#七附录概念定义统计)
 
 ---
 
@@ -58,7 +54,7 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 139 | 39 |
+| unsafe-UB | 141 | 41 |
 | 所有权-Move语义 | 80 | 27 |
 | Send+Sync | 52 | 27 |
 | unsafe-契约 | 39 | 17 |
@@ -131,7 +127,7 @@
 | concept\02_intermediate\13_dsl_and_embedding.md | 0 | 0 | 8 |
 | concept\02_intermediate\14_newtype_and_wrapper.md | 0 | 0 | 8 |
 | concept\02_intermediate\15_error_handling_deep_dive.md | 0 | 0 | 8 |
-| concept\02_intermediate\15_iterator_patterns.md | 0 | 0 | 10 |
+| concept\02_intermediate\15_iterator_patterns.md | 0 | 0 | 6 |
 | concept\02_intermediate\16_iterator_patterns.md | 0 | 0 | 8 |
 | concept\02_intermediate\17_macro_patterns.md | 0 | 0 | 8 |
 | concept\02_intermediate\18_lifetimes_advanced.md | 0 | 0 | 8 |
@@ -233,12 +229,16 @@
 | concept\07_future\19_rust_for_linux.md | 0 | 0 | 8 |
 | concept\07_future\20_borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\21_rust_in_ai.md | 0 | 0 | 8 |
+| concept\07_future\22_edition_2024_guide.md | 0 | 0 | 8 |
 | concept\07_future\22_edition_guide.md | 0 | 0 | 8 |
 | concept\07_future\23_rust_edition_guide.md | 0 | 0 | 7 |
 | concept\07_future\24_roadmap.md | 0 | 0 | 17 |
 | concept\07_future\25_open_enums_preview.md | 0 | 0 | 15 |
 | concept\07_future\26_specialization_preview.md | 0 | 0 | 8 |
 | concept\07_future\27_compile_time_execution.md | 0 | 0 | 9 |
+| concept\07_future\28_rust_for_webassembly.md | 1 | 0 | 13 |
+| concept\07_future\borrowsanitizer_preview.md | 1 | 0 | 8 |
+| concept\07_future\open_enums_preview.md | 0 | 0 | 15 |
 
 ---
 

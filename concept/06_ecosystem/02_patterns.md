@@ -31,6 +31,7 @@
 > **来源**: <https://en.wikipedia.org/wiki/Typestate_analysis>
 
 > **认知路径（6步递进）**
+[来源: [TRPL](https://doc.rust-lang.org/book/)]
 >
 > 1. **为什么需要设计模式？** → 复用经过验证的方案，降低认知负荷与沟通成本
 > 2. **GoF模式在Rust中怎么用？** → 以Trait替代继承，以enum+match替代多态类层次
@@ -47,6 +48,7 @@
 > **[来源: Wikipedia — Design pattern; Wikipedia — RAII]** ✅
 
 ### 2.1 已有模式扩展
+[来源: [Wikipedia](https://en.wikipedia.org/)]
 
 | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** |
 |:---|:---|:---|:---|:---|
@@ -58,6 +60,7 @@
 | **FFI 模式** | 结构型 | 与 C 互操作 | `extern "C"` + `repr(C)` | 安全封装层 |
 
 ### 2.2 新增模式矩阵
+[来源: [ISO C++](https://isocpp.org/)]
 
 | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** |
 |:---|:---|:---|:---|:---|
@@ -71,6 +74,7 @@
 > **来源**: [Rust Design Patterns] · [GoF Design Patterns] · 可信度: ✅
 
 ### 2.3 断言/推理矩阵
+[来源: [Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
 
 | **模式** | **核心问题** | **解决方案** | **Rust特性** | **反模式/失效条件** |
 |:---|:---|:---|:---|:---|
@@ -83,6 +87,7 @@
 | **State Machine** | 状态转换遗漏 | 穷尽性匹配 ⟹ 非法转换编译错误 | `enum`+`match` | 边界：状态>20时enum难以维护 |
 
 > **过渡**：以上模式展示了Rust如何利用类型系统实现零成本抽象。然而，模式的滥用同样会产生"抽象债务"。以下反命题与反模式分析，旨在建立模式选择的批判性框架。
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -130,6 +135,7 @@ graph TD
 > **[来源: Tokio Documentation; Actix Docs]** ✅
 
 ### 4.1 Command 模式
+[来源: [API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 **定义**：将请求封装为对象，从而使你可用不同的请求、队列或日志来参数化其他对象。
 
@@ -177,6 +183,7 @@ impl Invoker {
 > **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
 
 ### 4.2 Visitor 模式
+[来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 **定义**：表示一个作用于某对象结构中各元素的操作，使你可以在不改变各元素类的前提下定义作用于这些元素的新操作。
 
@@ -269,6 +276,7 @@ classDiagram
 > **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
 
 ### 4.3 Strategy 模式
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 **定义**：定义一系列算法，把它们一个个封装起来，并且使它们可互相替换。
 
@@ -463,6 +471,7 @@ unsafe {
 > **来源**: [Rust API Guidelines] · [libloading docs] · 可信度: ✅
 
 > **过渡**：从静态分发的Strategy到动态加载的Plugin，Rust的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ### 4.6 Observer 模式
 
@@ -721,6 +730,7 @@ fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rusto
 > **来源**: [GoF Design Patterns] · [Rust API Guidelines] · [Bevy Docs] · 可信度: ✅
 
 > **过渡**：从动态加载的 Plugin 到事件驱动的 Observer，Rust 的模式谱系覆盖了编译期到运行时的全生命周期。理解这些实现机制后，必须警惕其对立面——反模式。
+[来源: [Async Book](https://rust-lang.github.io/async-book/)]
 
 ### 4.7 Rust 特有高级模式
 
@@ -1217,6 +1227,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 ---
 
 > **过渡**：反模式聚焦具体编码实践中的陷阱。以下反命题决策树则上升一层，批判性审视关于设计模式的元认知谬误。
+[来源: [Tokio Docs](https://tokio.rs/)]
 
 ## 六、反命题决策树 {L6}
 > [来源: [Rust Design Patterns]]

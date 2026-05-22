@@ -10,7 +10,6 @@
 > **来源**: [Rust Edition Guide — 2024](https://doc.rust-lang.org/edition-guide/rust-2024/index.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [RFC 3501 — Edition 2024](https://rust-lang.github.io/rfcs/3501-edition-2024.html) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Software Release Life Cycle](https://en.wikipedia.org/wiki/Software_release_life_cycle)
 
 ## 📑 目录
-> [来源: [TRPL]]
 
 - [Edition 2024 完全指南：新特性与迁移策略](#edition-2024-完全指南新特性与迁移策略)
   - [📑 目录](#-目录)
@@ -33,7 +32,6 @@
 ---
 
 ## 一、核心概念
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Edition 机制回顾
 
@@ -144,7 +142,6 @@ Edition 2024 核心特性:
 ---
 
 ## 二、技术细节
-> [来源: [TRPL]]
 
 ### 2.1 Gen Blocks
 
@@ -257,7 +254,6 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> {
 ---
 
 ## 三、新特性矩阵
-> [来源: [TRPL]]
 
 ```text
 特性 → 状态 → 迁移影响
@@ -299,7 +295,6 @@ Tail Expr Drop:
 ---
 
 ## 四、反命题与边界分析
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -362,7 +357,6 @@ graph TD
 ---
 
 ## 五、常见陷阱
-> [来源: [TRPL]]
 
 ```text
 陷阱 1: 忽略 cargo fix 的警告
@@ -407,7 +401,6 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
-> [来源: [TRPL]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -420,7 +413,6 @@ graph TD
 ---
 
 ## 相关概念文件
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust Version Tracking](./05_rust_version_tracking.md) — 版本跟踪
 - [Evolution](./03_evolution.md) — 语言演进
