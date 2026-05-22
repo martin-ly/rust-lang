@@ -1,4 +1,4 @@
-# Concurrency（并发模型）
+# Concurrency（并发 [来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]模型）
 >
 > **层次定位**: L3 高级概念 / 并发子域
 > **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L2 Trait](../02_intermediate/01_traits.md)
@@ -12,7 +12,7 @@
 > **所有权语义对齐**: 并发编程中的所有权遵循 Rust 核心原则——每个值有**唯一所有者**（单一所有权，资源唯一性），owner 离开**作用域**时自动**drop/释放**（RAII），值通过**move/转移**传递所有权（赋值、传参后原变量变为 uninitialized）[来源: Rust Reference — Ownership / 2025; RustBelt — 所有权类型系统的 Iris 形式化 / POPL 2018]
 > **后置概念**: [Async/Await](./02_async.md) · [Unsafe Rust](./03_unsafe.md)
 >
-> **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程安全假设的证明责任转移给程序员 [来源: Rustonomicon — Send and Sync / 2025]
+> **unsafe 语义对齐**: 当本文件提及 `unsafe impl Send/Sync` 时，遵循核心语义——`unsafe` 不是关闭检查器，而是将全局线程 [来源: [std::thread](https://doc.rust-lang.org/std/thread/index.html)]安全假设的证明责任转移给程序员 [来源: Rustonomicon — Send and Sync / 2025]
 > **主要来源**: [TRPL: Ch16](https://doc.rust-lang.org/book/ch16-00-concurrency.html) · [Rust Reference: Send and Sync] · [Wikipedia: Data race] · [Stanford CS340R]
 
 ---
@@ -29,7 +29,7 @@
 
 ## 📑 目录
 
-- [Concurrency（并发模型）](#concurrency并发模型)
+- [Concurrency（并发 \[来源: TRPL Ch. 16\]模型）](#concurrency并发-来源-trpl-ch-16模型)
   - [📑 目录](#-目录)
   - [零、认知路径（Cognitive Path）](#零认知路径cognitive-path)
     - [第 1 步：为什么单线程没问题？](#第-1-步为什么单线程没问题)

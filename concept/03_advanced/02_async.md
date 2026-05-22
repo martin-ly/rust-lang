@@ -1,9 +1,9 @@
-# Async/Await（异步编程）
+# Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
 >
 > **层次定位**: L3 高级概念 / 异步子域
 > **前置依赖**: [L2 泛型](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · [L1 生命周期](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
-> **跨层映射**: L3→L4 Future ↔  continuation monad | L3→L7 async effects → algebraic effects
+> **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
 > **定理链编号**: T-050 Pin 安全性 → T-051 轮询一致性 → T-052 async/await 转换正确性
 
 > **层级**: L3 高级概念
@@ -28,7 +28,7 @@
 
 ## 📑 目录
 
-- [Async/Await（异步编程）](#asyncawait异步编程)
+- [Async/Await（异步 \[来源: Async Rust\]编程）](#asyncawait异步-来源-async-rust编程)
   - [📑 目录](#-目录)
   - [〇、认知路径（Cognitive Path）](#〇认知路径cognitive-path)
   - [一、权威定义（Definition）](#一权威定义definition)

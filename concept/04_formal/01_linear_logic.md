@@ -1,4 +1,4 @@
-# Linear Logic & Affine Logic（线性逻辑与仿射逻辑）
+# Linear Logic & Affine Logic（线性逻辑 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]与仿射逻辑）
 
 > **层级**: L4 形式化理论
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
@@ -28,7 +28,7 @@ $entry
 
 > **[学术来源: Girard 1987, *Linear Logic* (Theoretical Computer Science 50:1-102)]** Linear logic introduces a new connective, the exponential `!A` ("of course A"), which allows a formula to be copied or discarded. Without `!`, every assumption must be used exactly once. This makes linear logic a **resource-sensitive logic**: propositions represent resources, and proofs represent resource-transforming processes. [来源] ✅
 
-> **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 [来源] ✅
+> **[学术来源: Pierce 2002, *Types and Programming Languages* (TAPL) §15.3]** Pierce 将子结构类型系统（substructural type systems）定位为"通过控制变量的使用次数来管理资源 [来源: [Linear Logic](https://plato.stanford.edu/entries/logic-linear/)]"的类型理论。线性类型（linear types）对应"恰好使用一次"，仿射类型（affine types）对应"最多使用一次"，这构成了 Rust 所有权系统的理论先声。此处为 L1/01_ownership.md §1 "什么是所有权" 的精确对应——Pierce 的形式化定义是 Rust 所有权规则的先验类型论基础。 [来源] ✅
 
 > **[学术来源: RustBelt: POPL 2018, Jung et al. *RustBelt: Securing the Foundations of the Rust Programming Language*]** Rust's ownership system can be understood as an **affine type system** embedded in a larger language with managed copying (`Clone`) and shared borrowing (`&T`). The core insight is that ownership tracking enforces the resource discipline of affine logic at compile time. [来源] ✅
 

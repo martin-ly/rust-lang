@@ -1,10 +1,10 @@
-# Borrowing（借用）
+# Borrowing（借用 [来源: [TRPL Ch. 4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]）
 >
 > **层次定位**: L1 基础概念 / 借用子域
 > **前置依赖**: [L1 所有权](./01_ownership.md)
 > **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用 → Send/Sync
-> **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含 → T-012 悬垂引用不可达
+> **定理链编号**: T-010 借用唯一性 → T-011 生命周期包含 → T-012 悬垂引用 [来源: [Rust Reference — References](https://doc.rust-lang.org/reference/types/pointer.html)]不可达
 
 > **层级**: L1 基础概念
 > **前置概念**: [Ownership](./01_ownership.md)
@@ -22,7 +22,7 @@
 
 ## 📑 目录
 
-- [Borrowing（借用）](#borrowing借用)
+- [Borrowing（借用 \[来源: TRPL Ch. 4.2\]）](#borrowing借用-来源-trpl-ch-42)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 TRPL 官方定义](#11-trpl-官方定义)

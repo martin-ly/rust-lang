@@ -1,4 +1,4 @@
-# Toolchain（工具链与 Cargo）
+# Toolchain（工具链 [来源: [Rustup](https://rust-lang.github.io/rustup/index.html)]与 Cargo [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]）
 
 > **层级**: L6 生态工程
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Macros](../03_advanced/04_macros.md)

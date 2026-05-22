@@ -1,4 +1,4 @@
-# AI × Rust：生成-验证闭环与确定性容器
+# AI [来源: [Are We Learning Yet?](https://www.arewelearningyet.com/)] × Rust：生成-验证闭环与确定性容器
 
 > **层级**: L7 前沿趋势
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Formal Methods](./02_formal_methods.md)
@@ -62,7 +62,7 @@ candle/burn/llm.rs等原生Rust ML生态
 >
 > **来源**: [Wikipedia — Artificial intelligence](https://en.wikipedia.org/wiki/Artificial_intelligence)
 
-人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。AI 的主要子领域包括：机器学习（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
+人工智能（AI）是指由机器（尤其是计算机系统）所表现出的智能。AI 研究被定义为对"智能代理"的研究：任何能够感知环境并采取行动以最大化实现其目标的机会的设备。AI 的主要子领域包括：机器学习 [来源: [Rust ML](https://www.arewelearningyet.com/)]（ML）、自然语言处理（NLP）、计算机视觉、机器人学和专家系统。在软件开发语境下，生成式 AI（Generative AI）通过大语言模型（LLM）生成代码、文档和测试。
 
 ### 2.2 大语言模型（Large Language Model, LLM）
 >

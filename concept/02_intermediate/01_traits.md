@@ -1,4 +1,4 @@
-# Traits（Trait 系统）
+# Trait [来源: [TRPL Ch. 10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)]s（Trait 系统）
 >
 > **层次定位**: L2 进阶概念 / Trait 子域
 > **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) · [L1 所有权](../01_foundation/01_ownership.md)
@@ -17,7 +17,7 @@
 **变更日志**:
 
 - v2.3 (2026-05-14): 深化 Const Trait（impl const Trait vs ~const 区别、macro_rules! 替代方案）、#[fundamental]（Pin<P> 修正、透明性原理、与 non_exhaustive 对比）；更新 TODO 列表
-- v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule covering 条件数学定义、System F 约束多态对接、Blanket impl 的 Horn 子句可满足性与重叠检测算法）
+- v2.2 (2026-05-13): Phase A-2 形式化深化——新增§4.1b Coherence 的形式化逻辑基础（类型论一致性公理、Orphan Rule [来源: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)] covering 条件数学定义、System F 约束多态对接、Blanket impl 的 Horn 子句可满足性与重叠检测算法）
 - v2.1 (2026-05-13): 补充 RPITIT 存在类型 vs 全称类型形式化语义与高阶边界、Const Trait / ~const 实验特性、#[fundamental] 与 Orphan Rule 例外、Negative Impls 形式化语义；更新 TODO 列表
 - v2.0 (2026-05-12): 深度重构——补充定理推理链（⟹ 标注）、反命题决策树系统、边界极限测试、6步认知路径与章节过渡
 - v1.0 (2026-05-12): 初始版本
@@ -26,7 +26,7 @@
 
 ## 📑 目录
 
-- [Traits（Trait 系统）](#traitstrait-系统)
+- [Trait \[来源: TRPL Ch. 10.2\]s（Trait 系统）](#trait-来源-trpl-ch-102strait-系统)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 对齐定义](#11-wikipedia-对齐定义)

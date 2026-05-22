@@ -1,4 +1,4 @@
-# Type System Basics（类型系统基础）
+# Type System Basics（类型系统 [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]基础）
 
 > **层级**: L1 基础概念
 > **前置概念**: [Ownership](./01_ownership.md)
@@ -17,7 +17,7 @@
 
 ## 📑 目录
 
-- [Type System Basics（类型系统基础）](#type-system-basics类型系统基础)
+- [Type System Basics（类型系统 \[来源: Rust Reference — Types\]基础）](#type-system-basics类型系统-来源-rust-reference--types基础)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 定义](#11-wikipedia-定义)

@@ -484,8 +484,29 @@
 | P17-T34 | 新增 `06_ecosystem/20_licensing_and_compliance.md` | 开源协议、Apache/MIT/GPL、合规实践 | ✅ |
 | P17-T35 | 新增 `07_future/21_rust_in_ai.md` | Candle、Burn、ndarray、AI/ML 生态 | ✅ |
 | P17-T36 | 新增 `05_comparative/10_rust_vs_zig.md` | comptime、显式分配器、交叉编译、C 互操作 | ✅ |
-| P17-T37 | 死链接清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
-| P17-T38 | 来源标注率批量提升 | 24→0 文件 <10%，全部达标 | ✅ |
+| P17-T37 | 新增 `04_formal/12_denotational_semantics.md` | 指称语义、领域理论、不动点、CPO | ✅ |
+| P17-T38 | 新增 `05_comparative/11_rust_vs_kotlin.md` | 空安全、协程、JVM 互操作、类型系统 | ✅ |
+| P17-T39 | 新增 `03_advanced/14_custom_allocators.md` | GlobalAlloc、jemalloc、mimalloc、arena | ✅ |
+| P17-T40 | 新增 `03_advanced/15_zero_copy_parsing.md` | bytes、zerocopy、rkyv、memmap2 | ✅ |
+| P17-T41 | 新增 `06_ecosystem/21_game_development.md` | Bevy、WGPU、ECS、Rapier | ✅ |
+| P17-T42 | 新增 `06_ecosystem/22_embedded_systems.md` | no_std、PAC、HAL、RTIC | ✅ |
+| P17-T43 | 新增 `07_future/22_compile_time_execution.md` | const fn、const 泛型、类型状态机 | ✅ |
+| P17-T44 | 死链接清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
+| P17-T45 | 来源标注率批量提升 | 24→0 文件 <10%，全部达标 | ✅ |
+| P17-T46 | 一致性修复 | 生命周期规则描述完善 | ✅ |
+
+**关键成果**:
+
+- 新增 `04_formal/12_denotational_semantics.md`（~320 行，10+ 来源，2 Mermaid 图表）
+- 新增 `05_comparative/11_rust_vs_kotlin.md`（~380 行，10+ 来源，2 Mermaid 图表）
+- 新增 `03_advanced/14_custom_allocators.md`（~330 行，10+ 来源，2 Mermaid 图表）
+- 新增 `03_advanced/15_zero_copy_parsing.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `06_ecosystem/21_game_development.md`（~320 行，10+ 来源，2 Mermaid 图表）
+- 新增 `06_ecosystem/22_embedded_systems.md`（~340 行，10+ 来源，2 Mermaid 图表）
+- 新增 `07_future/22_compile_time_execution.md`（~310 行，10+ 来源，1 Mermaid 图表）
+- **文件总数: 148 → 155，Mermaid 图表: 577 → 600+**
+
+---
 
 **关键成果**:
 

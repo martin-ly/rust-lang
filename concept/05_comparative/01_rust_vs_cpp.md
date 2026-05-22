@@ -1,4 +1,4 @@
-# Rust vs C++：形式系统模型 vs 机制工程模型 —— 全面分析论证
+# Rust vs C++ [来源: [Wikipedia — C++](https://en.wikipedia.org/wiki/C%2B%2B)]：形式系统模型 vs 机制工程模型 —— 全面分析论证
 
 ---
 
@@ -35,7 +35,7 @@
 > **[Wikipedia: Type system]** A type system is a logical system comprising a set of rules that assigns a property called a type to every term in a computer program.
 > **来源**: <https://en.wikipedia.org/wiki/Type_system>
 
-> **[Wikipedia: Resource acquisition is initialization]** Resource acquisition is initialization (RAII) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime.
+> **[Wikipedia: Resource acquisition is initialization]** Resource acquisition is initialization (RAII [来源: [Wikipedia — RAII](https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization)]) is a programming idiom used in several object-oriented, statically-typed programming languages to describe a particular language behavior. In RAII, holding a resource is a class invariant, and is tied to object lifetime.
 > **来源**: <https://en.wikipedia.org/wiki/Resource_acquisition_is_initialization>
 
 > **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter.

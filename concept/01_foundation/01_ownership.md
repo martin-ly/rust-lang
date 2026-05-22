@@ -1,4 +1,4 @@
-# Ownership（所有权）
+# Ownership（所有权 [来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]）
 >
 > **层次定位**: L1 基础概念 / 所有权子域
 > **前置依赖**: 无（L1 入口概念）
@@ -22,7 +22,7 @@
 
 ## 📑 目录
 
-- [Ownership（所有权）](#ownership所有权)
+- [Ownership（所有权 \[来源: TRPL Ch. 4\]）](#ownership所有权-来源-trpl-ch-4)
   - [📑 目录](#-目录)
   - [一、权威定义（Definition）](#一权威定义definition)
     - [1.1 Wikipedia 定义](#11-wikipedia-定义)
