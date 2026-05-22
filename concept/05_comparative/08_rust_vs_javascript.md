@@ -142,6 +142,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 和 JavaScript 的**内存模型差异**及 WASM 的**桥梁作用**。Rust 的确定性内存管理与 JS 的 GC 在 WASM 中通过线性内存交互。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: WASM 是 Rust 和 JavaScript **共存的运行时**——Rust 编译为 WASM 模块，JS 通过 JS API 调用，两者共享线性内存。
 > [来源: [WASM Memory Model](https://webassembly.github.io/spec/core/syntax/modules.html#memories)]
 

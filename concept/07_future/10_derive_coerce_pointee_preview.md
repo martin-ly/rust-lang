@@ -91,6 +91,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比了当前手动实现与目标派生方案的**安全差异**——手动实现引入 unsafe 风险，而派生宏由编译器生成已验证的代码。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于任何自定义智能指针，优先使用 `#[derive(CoercePointee)]`；仅在特殊布局需求时手动实现。
 > **关键洞察**: `CoerceUnsized` 和 `DispatchFromDyn` 的实现是**纯机械性**的——给定字段结构，实现是唯一确定的。这正是派生宏的理想应用场景。
 > [来源: [Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html)]
@@ -187,6 +188,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 `CoercePointee` 在智能指针 Trait 生态中的**边界**——它只自动化与类型强制相关的两个 Trait，其他 Trait（Deref、AsRef、Borrow）仍需手动实现。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: `CoercePointee` 是智能指针实现的**补充**而非替代。完整的智能指针仍需实现 Deref、DerefMut 等。
 > **关键洞察**: Rust 的标准库智能指针（Box、Rc、Arc）未来也可能使用 `#[derive(CoercePointee)]` 简化实现，降低维护负担。
 > [来源: 💡 原创分析]
@@ -237,6 +239,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否可以使用 `#[derive(CoercePointee)]`。核心判断标准是结构体是否满足约束条件以及是否需要特殊的强制行为。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于绝大多数自定义智能指针（如引用计数、自定义 Box），派生宏完全足够；仅在非常规布局（如分片存储、内联小对象优化）时需要手动实现。
 > **关键洞察**: `CoercePointee` 覆盖约 **80-90%** 的自定义智能指针场景，剩余场景需要手动 unsafe 实现。
 > [来源: 💡 原创分析]

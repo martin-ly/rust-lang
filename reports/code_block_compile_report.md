@@ -7,10 +7,10 @@
 
 | 指标 | 数值 |
 |:---|:---|
-| 测试代码块 | 258 |
-| 编译通过 | 258 |
+| 测试代码块 | 261 |
+| 编译通过 | 261 |
 | 编译失败 | 0 |
-| 跳过 (ignore/no_run) | 573 |
+| 跳过 (ignore/no_run) | 569 |
 | 通过率 | 100.0% |
 
 ## 编译通过的代码块（抽样）
@@ -24,16 +24,16 @@
 | concept\00_meta\quick_reference.md | 283 | normal | `fn identity<T>(x: T) -> T { x } // 单态化后生` |
 | concept\00_meta\quick_reference.md | 297 | normal | `trait LendingIterator {     type Item<'a` |
 | concept\00_meta\quick_reference.md | 331 | normal | `fn make_iter() -> impl Iterator<Item = i` |
-| concept\00_meta\quick_reference.md | 363 | normal | `fn longest<'a>(x: &'a str, y: &'a str) -` |
-| concept\00_meta\quick_reference.md | 388 | normal | `macro_rules! vec {     ($($x:expr),*) =>` |
-| concept\00_meta\quick_reference.md | 407 | normal | `let s1 = String::from("hello"); let s2 =` |
-| concept\00_meta\quick_reference.md | 423 | normal | `struct Meters(u32); struct Kilometers(u3` |
-| concept\00_meta\quick_reference.md | 605 | normal | `let mut v = vec![1, 2, 3]; v.push(4);` |
-| concept\00_meta\self_assessment.md | 165 | normal | `fn first_word(s: &str) -> &str {     &s[` |
-| concept\00_meta\self_assessment.md | 217 | normal | `trait Drawable {     fn draw(&self);` |
-| concept\00_meta\self_assessment.md | 253 | normal | `fn read_config(path: &str) -> Result<Str` |
-| concept\00_meta\self_assessment.md | 268 | normal | `struct A(&'static str); impl Drop for A` |
-| concept\00_meta\self_assessment.md | 295 | normal | `fn identity<T>(x: T) -> T { x } let a =` |
-| concept\00_meta\self_assessment.md | 360 | normal | `struct MyPtr<T> {     ptr: *mut (),` |
-| concept\00_meta\self_assessment.md | 386 | normal | `use std::cell::RefCell; let cell = RefCe` |
-| concept\00_meta\self_assessment.md | 1066 | normal | `fn first_char(s: &String) -> &str {` |
+| concept\00_meta\quick_reference.md | 365 | normal | `fn longest<'a>(x: &'a str, y: &'a str) -` |
+| concept\00_meta\quick_reference.md | 390 | normal | `macro_rules! vec {     ($($x:expr),*) =>` |
+| concept\00_meta\quick_reference.md | 409 | normal | `let s1 = String::from("hello"); let s2 =` |
+| concept\00_meta\quick_reference.md | 425 | normal | `struct Meters(u32); struct Kilometers(u3` |
+| concept\00_meta\quick_reference.md | 609 | normal | `let mut v = vec![1, 2, 3]; v.push(4);` |
+| concept\00_meta\self_assessment.md | 166 | normal | `fn first_word(s: &str) -> &str {     &s[` |
+| concept\00_meta\self_assessment.md | 218 | normal | `trait Drawable {     fn draw(&self);` |
+| concept\00_meta\self_assessment.md | 254 | normal | `fn read_config(path: &str) -> Result<Str` |
+| concept\00_meta\self_assessment.md | 269 | normal | `struct A(&'static str); impl Drop for A` |
+| concept\00_meta\self_assessment.md | 296 | normal | `fn identity<T>(x: T) -> T { x } let a =` |
+| concept\00_meta\self_assessment.md | 361 | normal | `struct MyPtr<T> {     ptr: *mut (),` |
+| concept\00_meta\self_assessment.md | 387 | normal | `use std::cell::RefCell; let cell = RefCe` |
+| concept\00_meta\self_assessment.md | 1067 | normal | `fn first_char(s: &String) -> &str {` |

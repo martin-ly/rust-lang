@@ -86,6 +86,7 @@
 ```
 
 > **认知功能**: 分离合取 `*` 是分离逻辑的**核心算子**——它将内存状态分解为不相交的片段，使局部推理成为可能。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: `*` 算子与 Rust 的 **ownership 转移** 同构——`P * Q` 意味着两段内存的 ownership 是分离的，这与 Rust 的核心规则"一个值只能有一个 owner"精确对应。
 > [来源: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf)]
 
@@ -202,6 +203,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Iris 框架的**层次结构**及其在 RustBelt 中的应用。Iris 不是单一逻辑，而是一个**逻辑框架**——基础层提供高阶分离逻辑，上层提供幽灵状态、协议和原子性抽象。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 理解 Iris 有助于阅读 RustBelt 论文——RustBelt 使用 Iris 的**不变量**和**协议**来形式化 Rust 的类型系统。
 > **关键洞察**: Iris 的**资源代数**（Resource Algebra）统一了所有权（独占有）、共享（读共享）和放弃（不可恢复）三种资源模式，这与 Rust 的 ownership 系统同构。
 > [来源: [Jung et al. 2018 — Iris from the Ground Up](https://doi.org/10.1017/S0956796818000151)] · [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]
@@ -262,6 +264,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示分离逻辑**形式化 Rust 的边界**——safe 子集已完全形式化（RustBelt），但 unsafe 代码需要额外的手动证明。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于 safe Rust，可以信赖编译器的正确性；对于 unsafe，需要理解底层分离逻辑语义。
 > **关键洞察**: RustBelt 证明的是 **safe Rust → 无 UB**，但**不证明 unsafe Rust 的正确性**——后者是程序员的责任。
 > [来源: [RustBelt Paper](https://doi.org/10.1145/3158154)]

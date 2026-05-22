@@ -85,6 +85,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示三种闭包 Trait 的**继承关系和能力层级**——Fn 最严格（只读），FnMut 次之（可修改），FnOnce 最宽松（可消费）。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 泛型约束优先使用最严格的 Trait（Fn → FnMut → FnOnce），以获得最大的调用灵活性。
 > **关键洞察**: `Fn: FnMut: FnOnce` 形成**子类型关系**——如果一个闭包是 `Fn`，它自动也是 `FnMut` 和 `FnOnce`。反之不成立。
 > [来源: [TRPL Ch13 — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)]
@@ -168,6 +169,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比函数指针与闭包的**本质区别**——函数指针无环境，闭包有环境（捕获的变量）。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 不需要环境时用函数指针（更轻量）；需要环境时用闭包。不捕获的闭包可自动转换为函数指针。
 > **关键洞察**: `fn(i32) -> i32` 实现了 `Fn(i32) -> i32`，因此任何接受闭包的地方都可传入函数指针。
 > [来源: [Rust Reference — Function Pointer Types](https://doc.rust-lang.org/reference/types/function-pointer.html)]
@@ -263,6 +265,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助选择闭包 Trait 约束。核心判断标准是**状态修改需求**和**复用性**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 优先 `Fn`，需要时升级到 `FnMut`，极少情况需要 `FnOnce`。
 > **关键洞察**: Trait 约束的选择是**API 契约设计**——约束越严格，调用者越灵活；约束越宽松，实现者越自由。
 > [来源: 💡 原创分析]

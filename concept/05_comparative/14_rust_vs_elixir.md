@@ -80,6 +80,26 @@
   end
 ```
 
+```rust
+fn safe_divide(a: i32, b: i32) -> Result<i32, &'static str> {
+    if b == 0 {
+        Err("division by zero")
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    let results = vec![safe_divide(10, 2), safe_divide(10, 0)];
+    for r in results {
+        match r {
+            Ok(v) => println!("ok: {}", v),
+            Err(e) => println!("err: {}", e),
+        }
+    }
+}
+```
+
 > [来源: [Erlang/OTP](https://www.erlang.org/)]
 
 > **认知功能**: **Rust 和 Elixir 对错误的根本态度不同**——Rust 在编译期预防，Elixir 在运行时恢复。
@@ -311,6 +331,35 @@ Rust 并发模型:
   ├── Rust match 必须穷尽
   ├── Elixir 函数多子句是主要匹配方式
   └── Elixir = 是匹配而非赋值
+```
+
+```rust
+enum Message {
+    Text(String),
+    Number(i32),
+    Empty,
+}
+
+fn describe(msg: &Message) -> String {
+    match msg {
+        Message::Text(s) if s.is_empty() => String::from("empty text"),
+        Message::Text(s) => format!("text: {}", s),
+        Message::Number(n) if *n < 0 => String::from("negative number"),
+        Message::Number(n) => format!("number: {}", n),
+        Message::Empty => String::from("empty"),
+    }
+}
+
+fn main() {
+    let msgs = vec![
+        Message::Text(String::from("hello")),
+        Message::Number(-5),
+        Message::Empty,
+    ];
+    for m in msgs {
+        println!("{}", describe(&m));
+    }
+}
 ```
 
 > **模式匹配洞察**: **Elixir 将模式匹配融入语言核心**——函数定义、变量绑定、控制流全部基于匹配。

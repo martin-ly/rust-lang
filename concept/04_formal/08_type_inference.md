@@ -131,6 +131,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 类型推断的**层次结构**——基于 HM 基础，扩展了 Trait、生命周期、关联类型等工业级特性。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: Rust 的类型推断不是纯 HM——它结合了**约束求解**（类型统一）和**Trait 解析**（目标导向搜索）。
 > [来源: [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html)]
 
@@ -292,6 +293,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示类型推断的**最佳实践**。核心原则是：**公共 API 显式标注，私有代码允许推断**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 显式类型是**文档**——在公共接口上，类型标注比推断更有价值。
 > [来源: [Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)]
 

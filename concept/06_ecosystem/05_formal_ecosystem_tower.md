@@ -78,6 +78,7 @@ graph BT
 ```
 
 > **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
@@ -193,6 +194,7 @@ quadrantChart
 ```
 
 > **认知功能**: quadrantChart 将 ASCII 矩阵升级为**交互式认知地图**。象限 1（右上）是"黄金区域"——Axum、SQLx、Tower 兼具高可组合性和可观的形式化深度。象限 4（右下）是"安全关键专用区"——Kani/Verus 可验证性极高但与其他生态组件的组合性有限（需注解/规格适配）。象限 2（左上）是"基础设施区"——Serde/Tracing 组合性极高但形式化验证价值较低（纯 safe Rust 已足够安全）。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）：
 

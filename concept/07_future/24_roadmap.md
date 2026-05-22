@@ -172,6 +172,36 @@ impl ToDebug for String {
 }
 ```
 
+```rust
+struct Buffer<T, const N: usize> {
+    data: [T; N],
+    len: usize,
+}
+
+impl<T: Default + Copy, const N: usize> Buffer<T, N> {
+    fn new() -> Self {
+        Buffer { data: [T::default(); N], len: 0 }
+    }
+    fn push(&mut self, value: T) {
+        if self.len < N {
+            self.data[self.len] = value;
+            self.len += 1;
+        }
+    }
+    fn get(&self, index: usize) -> Option<&T> {
+        self.data.get(index)
+    }
+}
+
+fn main() {
+    let mut buf: Buffer<i32, 4> = Buffer::new();
+    buf.push(10);
+    buf.push(20);
+    println!("{:?}", buf.get(0));
+    println!("{:?}", buf.get(1));
+}
+```
+
 **稳定化障碍**（截至 2026）：
 
 ```text
@@ -386,6 +416,23 @@ let gen = gen {
 // async {}  → 异步块  → Future
 // gen {}    → 生成器块 → Iterator
 // async gen {} → 异步生成器 → AsyncIterator (Stream)
+```
+
+```rust
+#![feature(gen_blocks, yield_expr)]
+
+fn main() {
+    let numbers = gen {
+        yield 1;
+        yield 2;
+        yield 3;
+    };
+    let mut sum = 0;
+    for n in numbers {
+        sum += n;
+    }
+    println!("sum = {}", sum);
+}
 ```
 
 > **设计哲学**: `gen` 关键字的引入遵循 Rust **语法对称性**原则——`async` 对应 `Future`，`gen` 对应 `Iterator`。远期可能探索 `async gen` 统一异步流。

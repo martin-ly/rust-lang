@@ -72,6 +72,7 @@
 ```
 
 > **认知功能**: 此对比揭示两种宏系统的**设计权衡**——macro_rules! 简单但受限，过程宏强大但复杂。选择取决于元编程任务的复杂度。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 过程宏不是 macro_rules! 的替代品，而是**互补工具**——简单代码生成用 macro_rules!，复杂逻辑（如 derive）用过程宏。
 > [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
 
@@ -106,6 +107,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示三种过程宏的**应用场景**。Derive 宏为类型自动生成 Trait 实现；Attribute 宏修改被标注的项；Function-like 宏在调用点展开。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 80% 的过程宏需求是 Derive 宏；Attribute 宏用于框架级的代码变换；Function-like 宏用于 DSL。
 > **关键洞察**: 三种宏的**编译期执行模型相同**——都是 `TokenStream → TokenStream` 的函数，区别在于调用语法和输入内容的结构。
 > [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
@@ -345,6 +347,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断是否应使用过程宏。核心原则是：**优先使用语言原生特性（泛型、Trait），过程宏是最后手段**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 80% 的"重复代码"可以用泛型解决；只有当模式跨越类型边界且无法抽象为 Trait 时，才考虑过程宏。
 > **关键洞察**: 过程宏增加了**编译时间**和**调试复杂度**——只在 boilerplate 显著影响可维护性时使用。
 > [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]

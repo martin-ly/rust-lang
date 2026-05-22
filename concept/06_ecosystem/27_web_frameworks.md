@@ -200,6 +200,55 @@ let app = Router::new()
     .with_state(Arc::new(AppState { db }));
 ```
 
+```rust
+use std::collections::HashMap;
+
+struct Request {
+    path: String,
+}
+
+struct Response {
+    status: u16,
+    body: String,
+}
+
+type Handler = fn(&Request) -> Response;
+
+struct Router {
+    routes: HashMap<String, Handler>,
+}
+
+impl Router {
+    fn new() -> Self {
+        Router { routes: HashMap::new() }
+    }
+    fn route(mut self, path: &str, handler: Handler) -> Self {
+        self.routes.insert(path.to_string(), handler);
+        self
+    }
+    fn handle(&self, req: &Request) -> Response {
+        match self.routes.get(&req.path) {
+            Some(h) => h(req),
+            None => Response {
+                status: 404,
+                body: "Not Found".to_string(),
+            },
+        }
+    }
+}
+
+fn hello(_req: &Request) -> Response {
+    Response { status: 200, body: "Hello, World!".to_string() }
+}
+
+fn main() {
+    let router = Router::new().route("/", hello);
+    let req = Request { path: "/".to_string() };
+    let res = router.handle(&req);
+    println!("status: {}, body: {}", res.status, res.body);
+}
+```
+
 > **Axum 洞察**: **Axum 是 Tokio 生态的"原生 Web 层"**——它不重新发明轮子，而是将 Tower 的 Service 抽象和 Hyper 的 HTTP 能力封装为符合人体工程学的 API。[来源: Axum docs]
 
 ### 2.2 Actix-web：Actor 模型的工业级实现
@@ -374,6 +423,24 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 ### 4.1 中间件模型分类
 
 > **[来源: Tower docs]** Tower is a library of modular and reusable components for building robust networking clients and servers. The core abstraction is the `Service` trait.
+
+```rust
+fn process(req: &str) -> String {
+    format!("handled: {}", req)
+}
+
+fn with_logging(req: &str, next: fn(&str) -> String) -> String {
+    println!("before: {}", req);
+    let res = next(req);
+    println!("after: {}", res);
+    res
+}
+
+fn main() {
+    let result = with_logging("hello", process);
+    println!("final: {}", result);
+}
+```
 
 ```text
 中间件模型对比:

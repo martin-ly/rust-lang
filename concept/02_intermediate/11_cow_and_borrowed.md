@@ -94,6 +94,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Cow 的**核心机制**——只在需要修改时才克隆，否则保持零拷贝借用。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 当 API 可能接受借用或拥有，且可能或不可能需要修改时，使用 Cow。
 > **关键洞察**: Cow 是 Rust **零成本抽象**的典范——如果不修改，它的开销与直接借用完全相同；如果需要修改，自动退化为拥有。
 > [来源: [std::borrow::Cow](https://doc.rust-lang.org/std/borrow/enum.Cow.html)]
@@ -310,6 +311,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断是否应使用 Cow。核心原则是：**只在需要同时支持借用/拥有且可能修改时使用 Cow**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 过度使用 Cow 会增加 API 复杂性和内存开销；只在真正需要灵活性时使用。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/flexibility.html)]
 

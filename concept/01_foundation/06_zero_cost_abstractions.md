@@ -94,6 +94,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比 Rust **单态化**与 Java **类型擦除**的实现差异——Rust 为每个类型生成专门代码，Java 使用通用代码加运行时类型处理。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 泛型代码无需担心性能——单态化保证与手写特化代码等效。但注意二进制大小可能增加（每个特化一份代码）。
 > **关键洞察**: 单态化的代价是**二进制膨胀**（code bloat）——每个类型参数组合生成独立代码。Rust 通过 LLVM 的合并优化（COMDAT folding）缓解这一问题。
 > [来源: [Rust Reference — Monomorphization](https://doc.rust-lang.org/reference/items/generics.html#monomorphization)]
@@ -267,6 +268,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断 Rust 抽象是否有运行时成本。核心判断标准是**是否使用动态分发或运行时管理机制**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 性能关键路径使用泛型 + 迭代器；需要运行时灵活性时接受 dyn Trait 的成本；避免在热路径使用 Rc/Arc/Mutex。
 > **关键洞察**: Rust 的**设计哲学**是"零成本抽象优先，运行时成本显式"。有成本的抽象（dyn Trait、Rc）在类型系统中明确标记，不会意外引入。
 > [来源: 💡 原创分析]

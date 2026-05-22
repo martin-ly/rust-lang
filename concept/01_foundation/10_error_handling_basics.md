@@ -73,6 +73,23 @@ Result<T, E>:
   └── unwrap 快速原型
 ```
 
+```rust
+fn divide(a: f64, b: f64) -> Result<f64, String> {
+    if b == 0.0 {
+        Err(String::from("division by zero"))
+    } else {
+        Ok(a / b)
+    }
+}
+
+fn main() {
+    match divide(10.0, 2.0) {
+        Ok(result) => println!("result: {}", result),
+        Err(e) => println!("error: {}", e),
+    }
+}
+```
+
 > **认知功能**: **Result 将错误从"隐藏的副作用"转变为"显式的类型"**——编译器强制处理所有错误路径。
 > [来源: [TRPL Ch. 9](https://doc.rust-lang.org/book/ch09-00-error-handling.html)]
 
@@ -113,6 +130,23 @@ Option<T>:
   Option → Result:
   opt.ok_or("not found")        // None → Err
   opt.ok_or_else(|| make_err()) // 惰性版本
+```
+
+```rust
+fn maybe_sqrt(x: f64) -> Option<f64> {
+    if x >= 0.0 {
+        Some(x.sqrt())
+    } else {
+        None
+    }
+}
+
+fn main() {
+    let value = maybe_sqrt(4.0)
+        .map(|v| v * 2.0)
+        .unwrap_or(0.0);
+    println!("{}", value);
+}
 ```
 
 > **Option 洞察**: **Option 消除了 null 指针问题**——编译器确保你处理"值不存在"的情况。
@@ -157,6 +191,20 @@ Option<T>:
   转换能力:
   ? 自动调用 From::from 转换错误类型
   └── 需要实现 From<E> for 目标错误类型
+```
+
+```rust
+fn parse_add_one(s: &str) -> Result<i32, std::num::ParseIntError> {
+    let n: i32 = s.parse()?;
+    Ok(n + 1)
+}
+
+fn main() {
+    match parse_add_one("42") {
+        Ok(n) => println!("{}", n),
+        Err(e) => println!("parse error: {}", e),
+    }
+}
 ```
 
 > **? 洞察**: **? 运算符是 Rust 错误处理的"语法糖"**——保持显式性的同时减少样板代码。

@@ -57,6 +57,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 FFI 边界的**安全截断机制**——Rust 的安全保证在 `extern` 块处终止，外部代码的行为不受 Rust 类型系统约束。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 所有 FFI 调用都应通过**薄封装层**（thin wrapper）进行，在封装层内用 `unsafe` 块隔离，向外暴露 safe API。
 > **关键洞察**: FFI 是 Rust **安全边界的显式逃逸口**。与 `unsafe` 块一样，FFI 的使用需要人工审计和文档化契约。
 > [来源: [Rustonomicon — FFI](https://doc.rust-lang.org/nomicon/ffi.html)]
@@ -268,6 +269,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust FFI 生态的**工具链层次**——从自动生成绑定到运行时动态加载，再到验证工具。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 优先使用 `bindgen`/`cbindgen` 自动生成绑定，减少手工错误；复杂场景使用 `libloading` 动态加载；所有 FFI 代码应用 Miri 和 valgrind 验证。
 > [来源: [bindgen User Guide](https://rust-lang.github.io/rust-bindgen/)]
 
@@ -293,6 +295,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 C 库是否适合被 Rust 安全封装。核心判断标准是**不变量的文档化程度**和**可表达性**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 优先封装有清晰 API 契约的 C 库（如 OpenSSL、SQLite）；避免封装内部行为不透明的遗留代码。
 > **关键洞察**: FFI 安全封装的本质是**将 C 的不变量映射到 Rust 的类型系统**。如果 C 库本身没有明确的不变量，映射就不可能完整。
 > [来源: 💡 原创分析]

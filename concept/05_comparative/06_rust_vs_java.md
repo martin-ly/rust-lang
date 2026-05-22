@@ -58,6 +58,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比 Rust 与 Java 的**内存管理债务转移**——Rust 将复杂性前移到编译期，Java 将其后移到运行时。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 延迟敏感场景（实时系统、高频交易、游戏引擎）选 Rust；快速迭代、延迟不敏感场景选 Java。
 > **关键洞察**: GC 的"开发者无负担"是一种**假象**——GC 调优（堆大小、GC 算法、暂停时间）在大型 Java 应用中同样复杂，只是复杂性从"写代码"转移到"运维调优"。
 > [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)] · [Java GC Tuning Guide](https://docs.oracle.com/en/java/javase/21/gctuning/)
@@ -110,6 +111,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比两种语言的**并发安全模型**——Rust 通过类型系统（Send/Sync）在编译期消除数据竞争；Java 通过 JMM 和开发者约定在运行时管理并发。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 高并发系统（微服务、网络服务）选 Rust（编译期安全）；遗留系统或需大量共享状态的系统选 Java（成熟的并发库生态）。
 > **关键洞察**: Rust 的 `Send`/`Sync` 是**类型系统的并发安全标记**——与 Java 的 `synchronized` 不同，它们不引入运行时开销，只是编译期的约束检查。
 > [来源: [Rustnomicon — Send and Sync](https://doc.rust-lang.org/nomicon/send-and-sync.html)] · [JLS — Memory Model](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)

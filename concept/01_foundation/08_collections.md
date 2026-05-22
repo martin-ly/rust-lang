@@ -64,6 +64,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 标准库集合的**分类谱系**。每种集合类型针对特定的访问模式和排序需求设计。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 默认使用 Vec 和 HashMap；需要排序时使用 BTreeMap；需要双端操作时使用 VecDeque。
 > **关键洞察**: Rust 的集合类型与 C++ STL 对应，但**所有权语义更严格**——插入操作是 move，访问需要借用。
 > [来源: [std::collections](https://doc.rust-lang.org/std/collections/index.html)]

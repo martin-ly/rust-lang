@@ -83,6 +83,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust → Wasm 的**完整编译与运行链路**，以及不同运行时的互操作层。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 浏览器场景用 `wasm-bindgen`；服务端/边缘用 `wasmtime` + WASI；组件化系统用 `wit-bindgen` + 组件模型。
 > **关键洞察**: Rust 编译到 Wasm **不是转译**（transpile），而是完整编译——rustc 通过 LLVM 的 Wasm 后端直接生成 Wasm 字节码，保留所有优化。
 > [来源: [Rust Wasm Book](https://rustwasm.github.io/book/)]

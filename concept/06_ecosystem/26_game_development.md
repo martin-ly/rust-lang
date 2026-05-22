@@ -119,6 +119,46 @@ ECS (Entity-Component-System):
   └── 运行时灵活
 ```
 
+```rust
+#[derive(Debug, Clone, Copy)]
+struct Vec2 {
+    x: f32,
+    y: f32,
+}
+
+impl Vec2 {
+    fn add(self, other: Vec2) -> Vec2 {
+        Vec2 {
+            x: self.x + other.x,
+            y: self.y + other.y,
+        }
+    }
+}
+
+#[derive(Debug)]
+struct Entity {
+    pos: Vec2,
+    vel: Vec2,
+}
+
+fn update(entities: &mut [Entity]) {
+    for e in entities {
+        e.pos = e.pos.add(e.vel);
+    }
+}
+
+fn main() {
+    let mut world = vec![
+        Entity {
+            pos: Vec2 { x: 0.0, y: 0.0 },
+            vel: Vec2 { x: 1.0, y: 0.5 },
+        },
+    ];
+    update(&mut world);
+    println!("{:?}", world);
+}
+```
+
 > **ECS 洞察**: **ECS 架构天然适合 Rust 的所有权模型**——系统之间不共享可变状态，编译期保证并行安全。
 > [来源: [Bevy ECS Guide](https://bevyengine.org/learn/book/getting-started/ecs/)]
 > [来源: [Bevy ECS](https://bevyengine.org/learn/book/getting-started/ecs/)]
@@ -269,6 +309,35 @@ wgpu:
   └─────────────────┴─────────────────┴─────────────────┘
 
 > [来源: [Rust GameDev WG](https://gamedev.rs/)]
+```
+
+```rust
+#[derive(Debug)]
+enum GameState {
+    Menu,
+    Playing { score: u32 },
+    GameOver,
+}
+
+fn transition(state: GameState, event: &str) -> GameState {
+    match (state, event) {
+        (GameState::Menu, "start") => GameState::Playing { score: 0 },
+        (GameState::Playing { score }, "score") => {
+            GameState::Playing { score: score + 10 }
+        }
+        (GameState::Playing { .. }, "end") => GameState::GameOver,
+        (GameState::GameOver, "restart") => GameState::Menu,
+        (s, _) => s,
+    }
+}
+
+fn main() {
+    let mut state = GameState::Menu;
+    state = transition(state, "start");
+    state = transition(state, "score");
+    state = transition(state, "end");
+    println!("{:?}", state);
+}
 ```
 
 > **性能洞察**: **Rust 的编译期保证让游戏性能优化更安全**——无数据竞争、无 use-after-free。

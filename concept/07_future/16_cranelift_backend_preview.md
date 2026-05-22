@@ -86,6 +86,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Cranelift 与 LLVM 的**互补定位**——Cranelift 负责快速 Debug 编译，LLVM 负责优化 Release 编译。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 开发迭代使用 Cranelift（`cargo build`）；CI/发布使用 LLVM（`cargo build --release`）。
 > **关键洞察**: Cranelift 的设计哲学是**"足够快，而非足够优"**——牺牲 10-20% 的运行时性能换取 2-5x 的编译速度提升。
 > [来源: [Cranelift Design Principles](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/ir.md)]

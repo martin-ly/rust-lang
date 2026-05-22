@@ -68,6 +68,7 @@ Rust 是表达式导向语言（Expression-Oriented Language）:
 ```
 
 > **认知功能**: 表达式导向是 Rust 的**核心设计哲学**——几乎所有控制结构都是表达式，可以嵌套、可以赋值、可以作为返回值。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 这使得 Rust 在没有三元运算符的情况下，仍然能写出比 C 更简洁的条件表达式。
 > [来源: [Rust Reference — Expressions vs Statements](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
 

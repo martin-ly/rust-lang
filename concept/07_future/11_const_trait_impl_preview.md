@@ -83,6 +83,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 `const impl` 解决的核心问题——通过 `~const` 限定和 `const impl` 标记，将 Trait 方法调用引入常量上下文。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 对于需要在 `const fn` 中使用的 Trait，使用 `const impl` 实现；对于仅运行时使用的 Trait，保持普通 impl。
 > **关键洞察**: `const impl` 不是简单的语法扩展，而是 Rust **效果系统**（Effect System）的雏形——`const` 是一种**效果**（effect），表示"无副作用、可编译期执行"。
 > [来源: [Rust RFC 2632 — Motivation](https://github.com/rust-lang/rfcs/pull/2632)]
@@ -221,6 +222,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断一个 Trait 是否适合提供 const impl。核心判断标准是**纯函数性**和**运行时独立性**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 数学运算、比较、拷贝等纯函数 Trait 优先 const impl；涉及 IO、随机数、全局状态的 Trait 不应 const impl。
 > **关键洞察**: `const` 在 Rust 中不仅是"编译期可执行"，更是"无副作用 + 确定性"的语义保证。这与函数式编程中的**纯函数**概念一致。
 > [来源: [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html)]

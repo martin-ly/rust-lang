@@ -110,6 +110,7 @@
 ```
 
 > **认知功能**: 特化引入了**实现优先级**的概念——当多个 impl 适用时，编译器选择最精确（最特化）的那个。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 这与 C++ 的**模板特化**类似，但 Rust 的版本是**类型安全**的——特化在编译期解析，不会出现链接期错误。
 > [来源: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210)]
 
@@ -139,6 +140,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示特化如何**扩展但不破坏** Coherence。Orphan Rule（孤儿规则）仍然限制跨 crate 的 impl，但 Overlap Rule 在特化条件下被放宽。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 特化不改变**全局唯一性**——对于任何具体类型，编译器仍然能确定唯一的 impl（选择最特化的）。
 > [来源: [Rust Reference — Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)]
 
@@ -293,6 +295,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示特化的**安全边界**。纯优化特化（不改变语义）是安全的；改变语义的特化可能导致意外行为。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 遵循"**特化只优化，不改变语义**"原则——这是避免特化相关 bug 的最佳实践。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 

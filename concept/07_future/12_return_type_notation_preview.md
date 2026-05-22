@@ -76,6 +76,7 @@ graph LR
 ```
 
 > **认知功能**: 此图对比隐式捕获与精确捕获的**可控性差异**——`use<..>` 将生命周期捕获从编译器推断转变为开发者显式声明。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: Edition 2024 代码中，所有返回 `impl Trait` / `async fn` 的函数都应显式考虑 `use<..>`；库作者更应优先使用以稳定 API 契约。
 > **关键洞察**: `use<..>` 是 Rust **显式优于隐式**原则在生命周期捕获上的延伸。与 `unsafe_op_in_unsafe_fn` 类似，它要求开发者明确声明语义边界。
 > [来源: [Rust RFC — Precise Capturing](https://github.com/rust-lang/rfcs/pull/2289)]
@@ -223,6 +224,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否需要在函数签名中添加 `use<..>`。核心判断标准是**Edition 版本**、**是否为库代码**和**生命周期复杂度**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 库代码（尤其 public API）在 Edition 2024 中强烈推荐显式 `use<..>`；应用代码在简单场景可依赖编译器默认。
 > **关键洞察**: `use<..>` 的价值与**API 稳定性需求**成正比。内部代码可以使用默认规则，但公开 API 应显式声明以提供长期稳定性保证。
 > [来源: 💡 原创分析]

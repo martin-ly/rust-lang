@@ -186,6 +186,19 @@ Iterator Trait:
       .collect()
 ```
 
+```rust
+fn main() {
+    let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    let result: Vec<i32> = data
+        .into_iter()
+        .filter(|x| x % 2 == 0)
+        .map(|x| x * x)
+        .take(3)
+        .collect();
+    println!("{:?}", result);
+}
+```
+
 > **链式洞察**: **适配器链是声明式数据处理的典范**——描述"做什么"而非"怎么做"。
 > [来源: [Rust By Example — Iterators](https://doc.rust-lang.org/rust-by-example/fn/closures/closure_examples/iter_any.html)]
 

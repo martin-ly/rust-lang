@@ -348,6 +348,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 DSL 的**适用边界**。核心原则是：**需要编译期验证时用 Rust DSL，需要通用可编辑性时用标准格式**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > [source: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ---

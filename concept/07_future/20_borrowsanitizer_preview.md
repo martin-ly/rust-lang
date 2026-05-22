@@ -96,6 +96,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 内存安全检测的**三层架构**——编译器负责静态保证，Miri 负责深度验证，BorrowSanitizer 负责工业级运行时检测。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 开发阶段使用编译器；测试阶段使用 BorrowSanitizer；深度审计使用 Miri。
 > **关键洞察**: BorrowSanitizer 的定位是"**可部署的 Miri 子集**"——牺牲部分检测能力以换取可接受的运行时开销。
 > [来源: 💡 原创分析]
@@ -193,6 +194,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Tree Borrows 形式模型如何分支为三个不同的工程实现：编译器（静态）、Miri（解释）、BorrowSanitizer（运行时插桩）。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 形式模型研究者关注 Tree Borrows 论文；工具开发者关注 Miri 和 BorrowSanitizer 的实现差异。
 > **关键洞察**: 三个实现共享同一**形式化语义**，但在**工程权衡**上不同——静态分析追求零开销，解释执行追求精确性，运行时检测追求可部署性。
 > [来源: 💡 原创分析]
@@ -219,6 +221,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助项目决策者判断 BorrowSanitizer 是否适合其场景。核心判断标准是"精确性要求"和"性能预算"。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: CI 集成测试使用 BorrowSanitizer；深度安全审计仍使用 Miri；生产环境依赖编译器保证。
 > **关键洞察**: BorrowSanitizer 不是 Miri 的替代，而是**Miri 的工业级近似**——覆盖 80% 的 UB 场景，但可集成到标准测试流程中。
 > [来源: 💡 原创分析]

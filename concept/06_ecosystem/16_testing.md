@@ -67,6 +67,7 @@ Rust 测试的三种内置形式:
 ```
 
 > **认知功能**: Rust 的测试框架是**语言内置**的——不需要外部依赖即可写测试。这与 JavaScript（需要 Jest/Mocha）或 Java（需要 JUnit）形成对比。
+> [来源: [TRPL — Testing]]
 > **关键洞察**: `#[cfg(test)]` 条件编译使测试代码在生产构建中**完全消除**——零运行时开销。
 > [来源: [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html)]
 
@@ -102,6 +103,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Rust 测试的**三层组织**。单元测试验证内部逻辑，集成测试验证公共契约，文档测试验证示例正确性。
+> [来源: [TRPL — Testing]]
 > **使用建议**: 优先写单元测试（快速、定位精确），补充集成测试（验证 API 契约），维护文档测试（保证示例有效）。
 > [来源: [Rust Test Organization](https://doc.rust-lang.org/book/ch11-03-test-organization.html)]
 
@@ -312,6 +314,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示测试投入的**优先级**。核心原则是：**公共 API + 复杂逻辑优先**。
+> [来源: [TRPL — Testing]]
 > **关键洞察**: Rust 的类型系统已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
 > [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/testing.html)]
 

@@ -96,6 +96,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 中三种**隐式引用/解引用机制**——自动引用（方法调用）、自动解引用（显式 * 操作）和 Deref 强制（类型转换）。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 利用自动机制简化代码，但理解其背后的规则以避免意外行为。
 > **关键洞察**: 这些隐式转换是**语法糖**——它们在编译期展开为显式操作，无运行时开销。
 > [来源: [Rust Reference — Method Call Expressions](https://doc.rust-lang.org/reference/expressions/method-call-expr.html#automatic-referencing)]
@@ -226,6 +227,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Deref 强制与借用检查器的**协作关系**——Deref 强制发生在借用检查之后，因此不会绕过安全保证。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: Deref 返回的引用**仍然受借用检查器约束**。`DerefMut::deref_mut` 返回的 `&mut self.0` 遵守所有可变引用的规则。
 > [来源: [Rust Reference — Borrow Checker](https://doc.rust-lang.org/reference/statements-and-expressions.html)]
 
@@ -289,6 +291,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断是否应为类型实现 Deref。核心判断标准是**语义是否属于"引用"家族**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: Deref 只用于**智能指针/引用包装器**。普通封装应使用显式方法，而非 Deref。
 > **关键洞察**: Deref 的滥用会导致**隐式行为过度**——调用者无法从代码中看出转换发生，增加理解成本。
 > [来源: [Rust API Guidelines — Deref](https://rust-lang.github.io/api-guidelines/predictability.html)]

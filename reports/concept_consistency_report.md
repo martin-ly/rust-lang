@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T14:29:00.546690
-> 扫描文件数: 164
-> 提取概念定义数: 480
-> 跨文件引用数: 164
+> 生成时间: 2026-05-22T15:06:07.833783
+> 扫描文件数: 161
+> 提取概念定义数: 481
+> 跨文件引用数: 163
 
 ## 目录
 
@@ -29,7 +29,7 @@
 | 所有权三规则一致性 | ✅ 通过 | 检测到 0 项 |
 | 生命周期省略规则一致性 | ✅ 通过 | 检测到 0 项 |
 | unsafe 语义一致性 | ✅ 通过 | 检测到 0 项 |
-| 跨文件段落引用有效性 | ✅ 全部有效 | 共 164 个引用 |
+| 跨文件段落引用有效性 | ✅ 全部有效 | 共 163 个引用 |
 | **总计** | **0 错误 / 0 警告 / 0 提示** | — |
 
 ## 二、Send / Sync 一致性检查
@@ -64,7 +64,7 @@
 | unsafe-契约 | 39 | 17 |
 | 所有权-作用域绑定 | 31 | 14 |
 | 所有权-唯一所有权 | 30 | 15 |
-| unsafe-不变式 | 27 | 3 |
+| unsafe-不变式 | 28 | 3 |
 | unsafe-语义 | 19 | 13 |
 | 生命周期-定义 | 14 | 7 |
 | Send | 11 | 5 |
@@ -139,7 +139,7 @@
 | concept\02_intermediate\20_type_system_advanced.md | 0 | 0 | 8 |
 | concept\03_advanced\01_concurrency.md | 30 | 9 | 19 |
 | concept\03_advanced\02_async.md | 11 | 9 | 36 |
-| concept\03_advanced\03_unsafe.md | 100 | 2 | 28 |
+| concept\03_advanced\03_unsafe.md | 101 | 2 | 28 |
 | concept\03_advanced\04_macros.md | 0 | 1 | 30 |
 | concept\03_advanced\05_rust_ffi.md | 1 | 0 | 8 |
 | concept\03_advanced\06_pin_unpin.md | 1 | 0 | 8 |
@@ -169,7 +169,6 @@
 | concept\04_formal\12_denotational_semantics.md | 0 | 0 | 8 |
 | concept\04_formal\13_formal_methods.md | 0 | 0 | 9 |
 | concept\04_formal\14_lambda_calculus.md | 0 | 0 | 7 |
-| concept\04_formal\15_category_theory.md | 0 | 1 | 24 |
 | concept\05_comparative\01_rust_vs_cpp.md | 9 | 0 | 37 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -232,10 +231,8 @@
 | concept\07_future\17_rust_specification_preview.md | 0 | 0 | 8 |
 | concept\07_future\18_async_drop_preview.md | 0 | 0 | 8 |
 | concept\07_future\19_rust_for_linux.md | 0 | 0 | 8 |
-| concept\07_future\19_specialization_preview.md | 0 | 0 | 8 |
 | concept\07_future\20_borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\21_rust_in_ai.md | 0 | 0 | 8 |
-| concept\07_future\22_compile_time_execution.md | 0 | 0 | 9 |
 | concept\07_future\22_edition_guide.md | 0 | 0 | 8 |
 | concept\07_future\23_rust_edition_guide.md | 0 | 0 | 7 |
 | concept\07_future\24_roadmap.md | 0 | 0 | 17 |

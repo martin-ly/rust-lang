@@ -77,6 +77,32 @@ Trait Object:
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+```rust
+trait Greet {
+    fn greet(&self);
+}
+
+struct Person;
+impl Greet for Person {
+    fn greet(&self) { println!("Hello from Person"); }
+}
+
+struct Robot;
+impl Greet for Robot {
+    fn greet(&self) { println!("Hello from Robot"); }
+}
+
+fn main() {
+    let greeters: Vec<Box<dyn Greet>> = vec![
+        Box::new(Person),
+        Box::new(Robot),
+    ];
+    for g in greeters {
+        g.greet();
+    }
+}
+```
+
 > **认知功能**: **Trait object 是 Rust 的运行时多态机制**——在需要异构集合或编译期未知类型时使用。
 > [来源: [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)]
 
@@ -180,6 +206,36 @@ Box<dyn Trait>:
   }
 ```
 
+```rust
+trait Process {
+    fn run(&self);
+}
+
+struct TaskA;
+impl Process for TaskA {
+    fn run(&self) { println!("Task A"); }
+}
+
+struct TaskB;
+impl Process for TaskB {
+    fn run(&self) { println!("Task B"); }
+}
+
+fn execute(items: Vec<Box<dyn Process + Send>>) {
+    for item in items {
+        item.run();
+    }
+}
+
+fn main() {
+    let tasks: Vec<Box<dyn Process + Send>> = vec![
+        Box::new(TaskA),
+        Box::new(TaskB),
+    ];
+    execute(tasks);
+}
+```
+
 > **Box 洞察**: **Box<dyn Trait> 是最常用的类型擦除**——简单、安全、灵活。
 > [来源: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html)]
 
@@ -228,6 +284,46 @@ Box<dyn Trait>:
 
   // 比 dyn Draw 更快（静态分发）
   // 但只能处理已知类型
+```
+
+```rust
+trait Drawable {
+    fn draw(&self);
+}
+
+struct Circle;
+impl Drawable for Circle {
+    fn draw(&self) { println!("Circle"); }
+}
+
+struct Square;
+impl Drawable for Square {
+    fn draw(&self) { println!("Square"); }
+}
+
+enum Shape {
+    Circle(Circle),
+    Square(Square),
+}
+
+impl Drawable for Shape {
+    fn draw(&self) {
+        match self {
+            Shape::Circle(c) => c.draw(),
+            Shape::Square(s) => s.draw(),
+        }
+    }
+}
+
+fn main() {
+    let shapes: Vec<Shape> = vec![
+        Shape::Circle(Circle),
+        Shape::Square(Square),
+    ];
+    for s in shapes {
+        s.draw();
+    }
+}
 ```
 
 > **自定义洞察**: **Enum 类型擦除比 trait object 更快**——但限制了可扩展性。

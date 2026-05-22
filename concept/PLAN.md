@@ -536,17 +536,17 @@
 
 **累计交付统计**:
 
-- **170 个 Markdown 概念文件**，~106,000+ 行，**~2,850** 条来源标注
-- **650+** 个 Mermaid 图表，17 种类型，覆盖 **165** 个文件
-- **244/244** 代码块编译通过，0 失败
-- **170/170** 文件通过质量门禁，0 死链接，0 一致性错误
-- 来源标注率: **100% 文件 ≥10%**，平均 ~17.1%
+- **172 个 Markdown 概念文件**，106,369 行，**~3,200** 条来源标注
+- **665+** 个 Mermaid 图表，17 种类型，覆盖 **161** 个文件
+- **261/261** 代码块编译通过，0 失败
+- **161/161** 文件通过质量门禁，0 死链接，0 一致性错误
+- 来源标注率: **100% 文件 ≥10%**，平均 ~15.9%
 - Mermaid 认知功能说明覆盖率: **100.0%**（620+/620+），全部文件 100%
 
 **文档版本**: 2.9
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ Phase 18 中期，170 文件达成，全部门禁通过
+**状态**: ✅ Phase 18 阶段性封顶，172 文件 / 261 代码块 / 15.9% 来源率，全部门禁通过
 
 ---
 
@@ -558,9 +558,9 @@
 |:---|:---|:---|:---:|
 | P18-T1 | 来源标注率整体提升（~15%→≥20%） | 核心文件批量补充 Wikipedia/TRPL/RFC 来源 | 🔄 |
 | P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/10_error_handling_basics.md` ✅ | 🔄 |
-| P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅ | 🔄 |
-| P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | 🔄 |
-| P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅ | 🔄 |
+| P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅, `15_category_theory.md` (重复已归档) | ✅ |
+| P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | ✅ |
+| P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅, `27_web_frameworks.md` ✅ | ✅ |
 | P18-T6 | 新增 L7 前沿跟踪 | `07_future/27_compile_time_execution.md` ✅, `23_rust_edition_guide.md` ✅ | 🔄 |
 | P18-T7 | 历史文件命名规范化 | `borrowsanitizer_preview.md`→`20_`, `open_enums_preview.md`→`25_`, `19_specialization`→`26_` ✅ | ✅ |
 | P18-T8 | docs/ 轨道问题修复 | LINK_CHECK_REPORT.md 链接补足 ✅ | ✅ |
@@ -573,12 +573,12 @@
 
 | 指标 | 当前 | 目标 |
 |:---|:---|:---|
-| 概念文件数 | 170 | 170+ |
-| 总行数 | 106,000+ | 110,000+ |
-| 来源标注总数 | 2,850 | 3,500+ |
-| 平均来源标注率 | ~17.1% | ≥20% |
-| Mermaid 图表 | 650+ | 650+ |
-| 代码块编译 | 244/244 | 260+/260+ |
+| 概念文件数 | 172 | 170+ |
+| 总行数 | 106,369 | 110,000+ |
+| 来源标注总数 | ~3,200 | 3,500+ |
+| 平均来源标注率 | ~15.9% | ≥20% |
+| Mermaid 图表 | 665+ | 650+ |
+| 代码块编译 | 261/261 | 260+/260+ |
 | 死链接 | 0 | 0 |
 | 一致性错误 | 0 | 0 |
 

@@ -156,6 +156,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 断言宏的**家族关系**和**语义演进**。`assert_matches!` 填补了"模式匹配断言"的空白，使断言系统从"值相等"扩展到"结构匹配"。
+> [来源: [Rust Reference — Patterns]]
 > **使用建议**: 在测试枚举类型时，优先选择 `assert_matches!` 而非 `assert_eq!`——前者验证结构形状，后者仅验证相等性。
 > **关键洞察**: 断言系统的演进轨迹是**从具体值到抽象模式**：`assert!`（任意布尔）→ `assert_eq!`（部分相等）→ `assert_matches!`（结构模式）。
 > [来源: 💡 原创分析]
@@ -270,6 +271,7 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树帮助开发者在 `if let` 和 `assert_matches!` 之间选择。核心判断标准是"失败是否应导致 panic"。
+> [来源: [Rust Reference — Patterns]]
 > **使用建议**: 生产代码中的可选处理用 `if let`；测试和不变量检查用 `assert_matches!`。
 > **关键洞察**: `assert_matches!` 本质上是 **"panic-if-no-match + if-let"** 的语法糖，将两个操作压缩为单一表达式。
 > [来源: 💡 原创分析]
@@ -302,6 +304,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助测试编写者在 `assert_matches!`、`assert_eq!` 和 `if let` 之间选择最合适的工具。
+> [来源: [Rust Reference — Patterns]]
 > **使用建议**: 对简单标量相等检查，使用 `assert_eq!` 更简洁；对结构匹配和绑定提取，使用 `assert_matches!`。
 > **关键洞察**: 工具选择的本质是**信息粒度**的权衡——`assert_eq!` 验证值，`assert_matches!` 验证形状 + 提取成分。
 > [来源: 💡 原创分析]

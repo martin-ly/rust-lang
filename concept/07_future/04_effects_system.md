@@ -45,6 +45,7 @@ mindmap
 ```
 
 > **认知功能**: 此 mindmap 构建 Effect System 的全局认知脚手架。**功能定位**: 将分散的效果机制（async/unsafe/const/Result/Send）整合为"理论-实现-对比-演进"四维分析框架。**使用建议**: 按背景选择入口——类型论背景从"理论基础"切入，工程背景从"Rust 现有实现"切入，策略背景从"演进方向"切入。**关键洞察**: Rust 当前的效果表达是碎片化的（各关键字独立运作），向统一 effect 关键字演进是消除碎片化的长期趋势，最大障碍并非技术可行性，而是向后兼容性与社区共识。[来源: 💡 原创分析]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ---
 
@@ -162,6 +163,7 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 此状态图将"效果污染"的抽象概念转化为可视化的状态转换。关键洞察：**效果不是终点，而是需要被处理（poll/await）或消除（block_on）的中间状态**。`async` → `await` → `Future 完成` 的三段式与 `unsafe` → `unsafe {} 验证` → `安全边界确认` 形成对偶——前者是计算挂起效果，后者是安全责任效果。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.3 `AsyncFn`：Effect 多态的第一次尝试
 
@@ -241,6 +243,7 @@ graph TD
 ```
 
 > **认知功能**: 此谱系图揭示 Effect System 的"理论-语言"双层结构。**代数效应**（Koka/Eff）与 **Monad**（Haskell）是两条独立的理论路线，而 **类型效应**（Java/Rust）是工程化的折中方案。Rust 当前处于"类型效应"象限，但正在向"统一语法"方向移动。颜色的深浅提示：浅色为理论原型，暖色为工程实践，粉色为未来方向。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.2 为什么 Rust 拒绝 Monad？
 

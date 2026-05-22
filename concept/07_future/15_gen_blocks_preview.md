@@ -85,6 +85,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 `async` 和 `gen` 的**统一底层机制**——两者都是编译器状态机，区别仅在恢复触发条件和返回类型。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 需要惰性序列（大集合、无限流）时使用 gen；需要异步等待时使用 async；两者结合时使用 async gen。
 > **关键洞察**: `gen` 的引入使 Rust 的**状态机语法**成为通用机制，不再局限于异步编程。
 > [来源: [Rust Compiler — Generator Internals](https://rustc-dev-guide.rust-lang.org/)]
@@ -181,6 +182,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 gen block 与 Stream 的**对称关系**——`gen` 对应 `Iterator`，`async gen` 对应 `Stream`。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 同步数据流使用 `gen`；异步数据流（如网络请求序列）使用 `async gen`。
 > **关键洞察**: `async gen` 解决了当前 Rust 中**异步迭代**的语法缺失——目前需要使用 `futures::stream::unfold` 或手动实现 `Stream` trait，语法繁琐。
 > [来源: [Async Working Group — Streams](https://rust-lang.github.io/async-fundamentals-initiative/)]
@@ -269,6 +271,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否使用 gen block。核心判断标准是**现有组合子是否足够**和**控制流复杂度**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 简单变换用组合子；复杂控制流用 gen；极端性能场景手动实现 Iterator。
 > **关键洞察**: gen block 的**性能开销**来自状态机转换和 Resume 参数传递。对于高频调用（如内层循环），手动 Iterator 可能快 10-30%。
 > [来源: [Rust Iterator Performance Guide](https://doc.rust-lang.org/std/iter/)]

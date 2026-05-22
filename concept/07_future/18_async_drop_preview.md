@@ -107,6 +107,7 @@ AsyncDrop 的提案设计（RFC 3308，简化版）:
 ```
 
 > **认知功能**: AsyncDrop 的核心设计挑战是**双重保证**——既要在正常情况下优雅关闭，又要在异常情况下（内存损坏、executor 关闭）安全清理。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **关键洞察**: 这与 C++ 析构函数的**不抛异常保证**类似——析构必须完成，即使部分资源无法优雅释放。
 > [来源: [RFC 3308 — Async Drop](https://github.com/rust-lang/rfcs/pull/3308)]
 
@@ -261,6 +262,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 AsyncDrop 的**多层级回退策略**。正常路径优先异步优雅关闭，异常路径回退到同步清理，极端异常（内存损坏）使用最小化 fallback。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 当前代码应同时实现 `Drop`（同步 fallback）和显式 `close()`（异步优雅），为未来的 AsyncDrop 做准备。
 > **关键洞察**: AsyncDrop 不会**替代** Drop，而是**扩展**它——类似 `async fn` 不替代 `fn`，而是增加异步能力。
 > [来源: [RFC 3308 — Compatibility](https://github.com/rust-lang/rfcs/pull/3308)]
@@ -313,6 +315,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树判断是否应等待 AsyncDrop。核心判断标准是**是否需要优雅关闭**和**是否在异步上下文中**。
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 > **使用建议**: 不在异步上下文中时，同步 Drop 或显式 block_on 可能是更安全的选择。
 > **关键洞察**: AsyncDrop 不是银弹——它增加了复杂度（需要 executor），在不需要优雅关闭的场景下是过度设计。
 > [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
