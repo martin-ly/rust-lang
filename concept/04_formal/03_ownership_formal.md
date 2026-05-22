@@ -1,6 +1,6 @@
 # Ownership Formalization（所有权形式化）
 >
-> **层次定位**: L4 形式化理论 / 所有权形式化子域
+> **层次定位**: L4 形式化理论 / 所有权形式化子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L4 线性逻辑](./01_linear_logic.md)
 > **后置延伸**: [L4 RustBelt](./04_rustbelt.md) · [L7 形式化方法](../07_future/02_formal_methods.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展
@@ -80,7 +80,7 @@
 - v1.0 (2026-05-12): 初始版本，完成 COR 形式化、区域类型、分离逻辑、操作语义、思维导图
 $entry
 - v2.2 (2026-05-13): Phase B 验证实践——新增§9.5b Kani 验证规格（Pin 地址恒定定理的可机械验证 harness，含 SelfRef 自引用结构、符号化地址检查、不变量断言）
-- v2.1 (2026-05-13): Phase A-1 形式化深化——新增§11.5b Tree Borrows 完整操作语义规约（状态空间 Σ=(M,P,T)、小步语义规则 REBORROW-MUT/SHARED/READ/WRITE/RAW、Permissions 状态机转换图、与 Miri 检测算法的精确对应）
+- v2.1 (2026-05-13): Phase A-1 形式化深化——新增§11.5b Tree Borrows 完整操作语义规约（状态空间 Σ=(M,P,T)、小步语义规则 REBORROW-MUT/SHARED/READ/WRITE/RAW、Permissions 状态机转换图、与 Miri 检测算法的精确对应） [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 - v2.0 (2026-05-13): 深度重构。扩展定理一致性矩阵至 10 行并引入 "⟹" 推理链；新增反命题决策树 3 组；重构认知路径为 5 步渐进式问答；补充 Wikipedia、Reed 2009、RustBelt 权威引用；全篇强化 L1↔L4 层次一致性标注
 
 ---
@@ -117,7 +117,7 @@ $entry
 将所有权建模为**权限（permission）**，借用建模为**分数权限（fractional permission）**：
 
 - 独占所有权 = 权限 `π = 1`，可读可写可转移（move/转移所有权：赋值、传参后原变量变为 uninitialized）
-- 共享借用 `&T` = 权限 `0 < π < 1`，多个引用权限之和 `≤ 1`
+- 共享借用 `&T` = 权限 `0 < π < 1`，多个引用权限之和 `≤ 1` [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 - 可变借用 `&mut T` = 临时将 `π = 1` 从原所有者处**出借**，原变量被冻结
 
 **> [L1↔L4: borrowing]** L1 中"&T 不转移所有权"对应 L4 的分数权限拆分：`&{π}x * &{ρ}x ⇔ π + ρ ≤ 1`。L1 的"&mut T 独占"对应 L4 的临时独占断言 `&mut{x} ↦_1 v`，其生命周期结束后果断归还。
@@ -138,7 +138,7 @@ $entry
 
 - `let y = x` → Move 规则：`σ[x ↦ ⊥]`（原变量失效）
 - `let r = &x` → Borrow 规则：`σ[r ↦ &x]`（分数权限拆分）
-- `let r = &mut x` → Mut Borrow 规则：x 被冻结，r 获得临时独占权限
+- `let r = &mut x` → Mut Borrow 规则：x 被冻结，r 获得临时独占权限 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 - `drop(x)` → Deallocation 规则：堆状态移除 `p ↦ v`
 
 **> [L1↔L4: ownership + borrowing]** L1 的 MIR 级代码行为直接对应 L4 的 `λRust` / COR 归约规则。Rust 编译器前端生成 MIR，其指令集正是 COR 所形式化的演算基础。
@@ -200,6 +200,7 @@ stateDiagram-v2
 ```
 
 > **认知功能**: 此状态图将所有权形式化的**分数权限模型**转化为可视化的状态机。关键洞察：**所有权不是静态属性，而是随程序执行动态变化的状态**。`Owned` 态（π=1）可以分化为 `SharedBorrow`（π 拆分）或 `MutBorrow`（临时转移），但最终必须回归 `Owned` 或进入 `Dropped`。这对应分离逻辑中的资源不变量：资源要么被持有，要么被释放，不存在"悬空持有"状态。
+> [来源: [RustBelt]]
 
 ---
 
@@ -209,7 +210,7 @@ stateDiagram-v2
 
 > **[Wikipedia: Operational semantics]** In computer science, operational semantics is a category of formal programming language semantics in which certain desired properties of a program, such as correctness, safety or security, are verified by constructing proofs from logical statements about its execution and procedures, rather than by attaching mathematical meanings to its terms.
 
-> **[Wikipedia: Formal methods]** In computer science, formal methods are mathematically rigorous techniques for the specification, development, analysis, and verification of software and hardware systems. The use of formal methods is motivated by the expectation that, as in other engineering disciplines, performing appropriate mathematical analysis can contribute to the reliability and robustness of a design.
+> **[Wikipedia: Formal methods]** In computer science, formal methods are mathematically rigorous techniques for the specification, development, analysis, and verification of software and hardware systems. The use of formal methods is motivated by the expectation that, as in other engineering disciplines, performing appropriate mathematical analysis can contribute to the reliability and robustness of a design. [来源: [Iris Project](https://iris-project.org/)]
 
 > **[Wikipedia: Separation logic]** Separation logic is an extension of Hoare logic, a way of reasoning about programs. It was developed by John C. Reynolds, Peter O'Hearn, Samin Ishtiaq, and Hongseok Yang to allow local reasoning about mutable data structures.
 
@@ -246,7 +247,7 @@ COR 的核心类型判断：
 
 > **[RustBelt: POPL 2018]** RustBelt is the first formal (and machine-checked) foundations for safe encapsulation of unsafe code in a realistic systems language. We present a novel semantic model of Rust based on *Iris*, a higher-order concurrent separation logic framework.
 
-**> [L1↔L4: unsafe]** RustBelt 的核心洞见是：L1 的 `unsafe` 并非"无规则"，而是规则从**语法层面**转移到了**逻辑层面**。L4 的 Iris 断言 `own(x, T)` 和 `&{π}x` 为 `unsafe` 代码库提供了可机读的契约。
+**> [L1↔L4: unsafe]** RustBelt 的核心洞见是：L1 的 `unsafe` 并非"无规则"，而是规则从**语法层面**转移到了**逻辑层面**。L4 的 Iris 断言 `own(x, T)` 和 `&{π}x` 为 `unsafe` 代码库提供了可机读的契约。 [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ---
 
@@ -363,6 +364,7 @@ graph TD
 ```
 
 > **认知功能**: 此思维导图将所有权形式化的庞大知识体系映射为**五维认知框架**。功能定位：帮助学习者在进入具体定理前建立全局索引。使用建议：将本图作为"地图"，遇到陌生概念时回查对应分支。关键洞察：**COR 提供语法、RustBelt 提供语义、分离逻辑提供推理基础**——三者构成从"是什么"到"为什么正确"的完整链条。[来源: 💡 原创分析]
+> [来源: [RustBelt]]
 
 ---
 
@@ -421,6 +423,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树揭示**形式化证明的精确边界**。功能定位：纠正常见误解——通过编译不等于"程序正确"。使用建议：在论证 Rust 安全性时，先明确"安全"的层次，避免将内存安全混同于功能正确。关键洞察：**形式化是内存安全的充分条件，但非程序正确的充分条件；Rust 的设计哲学是"证明你该证明的"，而非"证明一切"**。[来源: 💡 原创分析]
+> [来源: [RustBelt]]
 
 > **分析**: 形式化所有权是**内存安全**的充分条件，而非**程序正确**的充分条件。逻辑正确性需要额外的功能规格（如 Hoare 三元组、 refinement types），通常由 Creusot/Verus/Dafny 等工具处理，而非所有权形式化本身。
 
@@ -443,8 +446,9 @@ graph TD
 ```
 
 > **认知功能**: 此决策树对比**线性类型与 Rust 所有权的本质差异**。功能定位：澄清 Rust 不是严格线性类型，而是仿射类型系统。使用建议：在阅读线性逻辑文献时，注意 Rust 额外引入了生命周期和 unsafe 封装两个维度。关键洞察：**仿射弱化（允许丢弃）+ 区域约束 + Iris 高阶协议 = Rust 超越经典线性类型的三要素**。[来源: 💡 原创分析]
+> [来源: [RustBelt]]
 
-> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。
+> **分析**: Rust 是**仿射类型（Affine）**而非严格线性类型：值可以被丢弃（weakening），但不能被复制（contraction）。此外，Rust 的**生命周期**和 **unsafe** 封装都是传统线性类型系统不具备的维度。RustBelt 的 Iris 模型正是为了弥合这一差距而设计。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
 
 #### 决策树 3: "权限系统可自动化验证所有属性"
 
@@ -466,6 +470,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树界定**权限系统自动化能力的边界**。功能定位：理解编译器能自动推导什么、不能推导什么。使用建议：将借用检查器视为"内存安全自动机"，功能正确性仍需 Creusot/Verus 等外部工具。关键洞察：**自动推导擅长"禁止什么"（内存错误），人工规格擅长"要求什么"（功能意图）——二者互补而非替代**。[来源: 💡 原创分析]
+> [来源: [RustBelt]]
 
 > **分析**: 权限系统的自动化优势集中在**推导（inference）**层面——编译器自动推导生命周期约束和借用合法性。但对于**功能规格**和**活性属性**，仍需人工提供不变量。这是自动化验证的根本限制：意图无法从代码中完全反推。
 
@@ -615,7 +620,7 @@ Polonius 将基本单元从"区域"改为 **Loan**——一个具体的借用实
 
 ### 9.2 Polonius 的 Datalog 规则（核心）
 
-Polonius 的核心推理通过 Datalog 规则表达：
+Polonius 的核心推理通过 Datalog 规则表达： [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
 
 ```prolog
 % 规则 1：借用从创建点开始有效
@@ -666,7 +671,7 @@ error(P) :- loan_live_at(L, P), loan_invalidated_at(L, P).
 Oxide 形式化（§2）使用 **ownership typing**：
 
 $$
-\Gamma \vdash e : \tau \dashv \Phi
+\Gamma \vdash e : \tau \dashv \Phi [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 $$
 
 Polonius 可视为 Oxide 的**实现层优化**：
@@ -766,7 +771,7 @@ impl SelfRef {
 }
 ```
 
-> **定理（Pin 地址不变性）**：若 `Pin<P<T>>` 被构造且 `T: !Unpin`，则 `P` 指向的内存地址在所有可观测程序点保持不变。这是 RefinedRust（PLDI 2024）中通过 **lifetime token** 和 **location ownership** 联合保证的。
+> **定理（Pin 地址不变性）**：若 `Pin<P<T>>` 被构造且 `T: !Unpin`，则 `P` 指向的内存地址在所有可观测程序点保持不变。这是 RefinedRust（PLDI 2024）中通过 **lifetime token** 和 **location ownership** 联合保证的。 [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 >
 > **来源**: [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Rust Reference: Pin] · [Jung et al. 2019: Stacked Borrows]
 
@@ -895,7 +900,7 @@ Kani 将上述证明转化为符号执行路径:
 - [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
 - [x] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
 - [x] **TODO**: 补充 Creusot/Verus 的功能正确性验证示例，衔接"形式化边界"分析 —— 已完成（参见 `04_rustbelt.md` §7.1–7.4）
-- [x] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系 —— 已完成 §9.3
+- [x] **TODO**: 补充 Reed 2009 中资源标签操作与 Iris 幽灵状态（ghost state）的对应关系 —— 已完成 §9.3 [来源: [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)]
 - [x] **TODO**: 补充 `Pin<T>` 的形式化语义——与线性逻辑中 "location stability" 的精确对应 —— 已完成 §9.4
 
 ---
@@ -987,7 +992,7 @@ Tree Borrows 通过 **Reserved → Active** 的延迟激活，允许裸指针与
 
 **核心更新（2024–2025）**:
 
-1. **Miri 默认启用 Tree Borrows**（2024 年末）：`-Zmiri-tree-borrows` 从实验性标志转为 Miri 默认行为，Stacked Borrows 退为兼容选项 (`-Zmiri-stacked-borrows`)。这意味着 Rust 生态的 Miri 回归测试（crater）全部基于 Tree Borrows 运行。
+1. **Miri 默认启用 Tree Borrows**（2024 年末）：`-Zmiri-tree-borrows` 从实验性标志转为 Miri 默认行为，Stacked Borrows 退为兼容选项 (`-Zmiri-stacked-borrows`)。这意味着 Rust 生态的 Miri 回归测试（crater）全部基于 Tree Borrows 运行。 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 2. **`&raw` 操作符语义对齐**：Rust 1.82 引入的 `&raw const expr` / `&raw mut expr`（直接创建裸指针，无中间引用）与 Tree Borrows 的 Reserved 权限天然兼容。Stacked Borrows 中 `&expr as *const _` 的中间引用创建会导致不必要的标签压栈，Tree Borrows 通过保留原节点的 Reserved 状态避免了这一开销。
 

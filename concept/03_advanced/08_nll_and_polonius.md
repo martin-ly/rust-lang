@@ -76,6 +76,7 @@ fn drop_and_use() {
 
 > **认知功能**: 词法生命周期的**核心问题**是过度保守——它假设借用一直有效到作用域结束，而非实际最后一次使用。
 > [来源: [RFC 2094 — NLL](https://rust-lang.github.io/rfcs/2094-nll.html)]
+> [来源: [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html)]
 
 ---
 
@@ -106,6 +107,7 @@ NLL (Non-Lexical Lifetimes) 的核心思想:
 
 > **NLL 洞察**: NLL 是 Rust **借用检查器的第一次重大演进**——它将理论上的仿射类型系统变得更实用，同时不牺牲安全性。
 > [来源: [The Rust Compiler Guide — NLL](https://rustc-dev-guide.rust-lang.org/borrow_check/region_inference.html)]
+> [来源: [TRPL — Lifetimes](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html)]
 
 ---
 
@@ -141,6 +143,7 @@ Polonius: 下一代借用检查器
 
 > **Polonius 洞察**: Polonius 代表了借用检查从**专门算法**向**通用约束求解**的转变——它为未来的进一步精确化奠定了基础。
 > [来源: [Polonius Repository](https://github.com/rust-lang/polonius)]
+> [来源: [Rust Compiler Team — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
 ---
 
@@ -188,6 +191,7 @@ NLL 的数据流分析:
 
 > **实现洞察**: NLL 使用 **MIR 级别的数据流分析**——这是 Rust 编译器内部表示的成熟应用。
 > [来源: [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html)]
+> [来源: [Rust Reference — MIR](https://doc.rust-lang.org/reference/mir.html)]
 
 ---
 
@@ -223,6 +227,7 @@ Polonius 的约束模型:
 
 > **约束洞察**: Polonius 使用 **Datalog** 表达借用约束——这是一种**声明式逻辑编程语言**，使约束求解更加清晰和可扩展。
 > [来源: [Polonius — Datalog Approach](https://github.com/rust-lang/polonius/blob/master/README.md)]
+> [来源: [Rust Compiler Team — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
 
 ---
 
@@ -262,6 +267,7 @@ Polonius 的约束模型:
 
 > **演进洞察**: 借用检查器的**三代演进**展示了 Rust **"不妥协安全，但持续改善 ergonomics"**的设计哲学。
 > [来源: [Rust Compiler Team — Polonius](https://rust-lang.github.io/compiler-team/working-groups/polonius/)]
+> [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 ---
 
@@ -299,7 +305,8 @@ NLL / Polonius 影响的代码模式:
 ```
 
 > **影响矩阵**: NLL 主要改善了**"提前释放"**和**"条件借用"**模式，Polonius 将进一步改善**循环**和**交叉借用**。
-> [source: [NLL Stabilization Report](https://github.com/rust-lang/rust/issues/43234)]
+> [来源: [NLL Stabilization Report](https://github.com/rust-lang/rust/issues/43234)]
+> [来源: [Rust Reference — Borrowing](https://doc.rust-lang.org/reference/expressions.html# temporaries)]
 
 ---
 
@@ -323,6 +330,7 @@ graph TD
 
 > **认知功能**: NLL 和 Polonius **只放宽"过度保守"**——它们不会接受任何不安全的代码。
 > [来源: [RFC 2094 — NLL Safety](https://rust-lang.github.io/rfcs/2094-nll.html#safety)]
+> [来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)]
 
 ---
 
@@ -362,6 +370,7 @@ graph TD
 
 > **边界要点**: NLL/Polonius 的边界主要与**仍保守的情况**、**编译时间**、**unsafe 交互**、**教学**和 **Edition** 相关。
 > [来源: [Polonius Limitations](https://github.com/rust-lang/polonius/blob/master/README.md)]
+> [来源: [Rustonomicon — NLL](https://doc.rust-lang.org/nomicon/borrow-splitting.html)]
 
 ---
 
@@ -407,6 +416,7 @@ graph TD
 
 > **陷阱总结**: NLL/Polonius 的陷阱主要与**过度期望**、**drop 顺序**、**unsafe 边界**、**Edition 差异**和**过度优化**相关。
 > [来源: [Common NLL Misconceptions](https://github.com/rust-lang/rust/issues/43234)]
+> [来源: [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]
 
 ---
 
@@ -419,6 +429,9 @@ graph TD
 | [RustConf 2018 — Polonius](https://www.youtube.com/watch?v=_8X69Kw0EhY) | ✅ 二级 | 演讲 |
 | [rustc-dev-guide — Borrow Check](https://rustc-dev-guide.rust-lang.org/borrow_check.html) | ✅ 一级 | 编译器指南 |
 | [NLL Stabilization](https://github.com/rust-lang/rust/issues/43234) | ✅ 一级 | 追踪 Issue |
+| [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ 一级 | 语言参考 |
+| [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | ✅ 一级 | 基础教程 |
+| [Rustonomicon — NLL](https://doc.rust-lang.org/nomicon/borrow-splitting.html) | ✅ 一级 | 深入分析 |
 
 ---
 

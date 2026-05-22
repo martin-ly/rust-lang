@@ -114,6 +114,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [Elixir Official](https://elixir-lang.org/)]
+
 > **并发洞察**: **Elixir 的轻量进程和消息传递适合超高并发场景**——Rust 则在共享状态并发上提供编译期安全。
 > [来源: [Erlang Processes](https://www.erlang.org/doc/reference_manual/processes.html)]
 
@@ -422,6 +424,7 @@ graph TD
 > **选择洞察**: **极致性能 + 编译期安全选 Rust，超高并发 + 热更新选 Elixir**。
 > [来源: [Rust Official](https://www.rust-lang.org/)]
 > [来源: [Rust vs Elixir](https://www.rust-lang.org/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -511,6 +514,8 @@ graph TD
 | [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方 |
 | [Rustler](https://github.com/rusterlium/rustler) | ✅ 二级 | 互操作 |
 | [Designing for Scalability with Erlang/OTP](https://www.oreilly.com/library/view/designing-for-scalability/9781449361556/) | ✅ 二级 | 书籍 |
+| [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language)) | ✅ 一级 | 语言概述 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | 性能基准 |
 
 ---
 

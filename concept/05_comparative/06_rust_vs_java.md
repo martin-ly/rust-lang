@@ -129,6 +129,8 @@ graph TD
 | **动态加载** | 复杂（需 dlopen 等） | 原生（ClassLoader） |
 | **调试** | LLDB/GDB | JDWP/JVM TI |
 
+> [来源: [Wikipedia — Java (programming language)](https://en.wikipedia.org/wiki/Java_(programming_language))]
+
 > **架构洞察**: Rust 的**零运行时**设计使其适合资源受限环境（嵌入式、边缘计算、无服务器冷启动）。Java 的**富运行时**（JIT、GC、反射）使其适合长生命周期的服务端应用。
 > [来源: [JVM Specification](https://docs.oracle.com/javase/specs/jvms/se21/html/index.html)] · [Rust Runtime](https://doc.rust-lang.org/reference/runtime.html)
 
@@ -207,6 +209,8 @@ public static <T> T identity(T x) { return x; }
 | **机器学习** | ⚠️ tch-rs, burn | ✅ DL4J, Smile | **Java/Python** |
 | **金融高频交易** | ✅ 零分配，确定延迟 | ❌ GC 不可接受 | **Rust** |
 | **企业级应用** | ⚠️ 生态待成熟 | ✅ Spring, Jakarta EE | **Java** |
+
+> [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 
 > **场景洞察**: Rust 在**系统边界**（底层基础设施、延迟敏感）有绝对优势；Java 在**应用层**（业务系统、大数据）生态更成熟。两者在**微服务层**正在竞争。
 > [来源: [Stack Overflow Developer Survey 2025](https://survey.stackoverflow.co/)]
@@ -308,6 +312,8 @@ Java → Rust 的渐进迁移策略:
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | Rust 语言参考 |
 | [Stack Overflow Developer Survey](https://survey.stackoverflow.co/) | 🔍 三级 | 行业采用数据 |
 | [Java Memory Model](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html) | ✅ 一级 | JMM 规范 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | Web 框架性能对比 |
+| [Wikipedia — Java](https://en.wikipedia.org/wiki/Java_(programming_language)) | ✅ 一级 | 语言概述 |
 
 ---
 

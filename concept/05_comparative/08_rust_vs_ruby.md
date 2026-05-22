@@ -85,6 +85,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [Ruby Documentation](https://www.ruby-lang.org/en/documentation/)]
+
 > **认知功能**: Ruby 和 Rust 代表**类型系统的两个极端**——Ruby 将类型检查推迟到运行时以换取灵活性，Rust 在编译期完成所有检查以换取性能和安全性。
 > [来源: [Wikipedia — Duck Typing](https://en.wikipedia.org/wiki/Duck_typing)]
 
@@ -120,6 +122,8 @@
   │ 开发者负担      │ 无              │ 中（学习曲线）    │
   └─────────────────┴─────────────────┴─────────────────┘
 ```
+
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **内存洞察**: Ruby 的 **GC 简化开发**，Rust 的 **所有权提供可预测性**——选择取决于应用场景对延迟和吞吐量的要求。
 > [来源: [Ruby GC Guide](https://tenderlovemaking.com/tags/gc.html)]
@@ -342,6 +346,7 @@ graph TD
 
 > **认知功能**: Rust 和 Ruby **服务于不同的需求谱系**——取代不是目标，**选择合适工具**才是。
 > [来源: [Rust Design FAQ](https://doc.rust-lang.org/rustc/what-is-rustc.html)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -437,6 +442,8 @@ graph TD
 | [Benchmarks Game](https://benchmarksgame-team.pages.debian.net/benchmarksgame/) | ✅ 一级 | 性能基准 |
 | [Shopify Engineering](https://shopify.engineering/rust-at-shopify) | ✅ 二级 | 生产案例 |
 | [RubyConf Talks](https://rubyconf.org/) | ✅ 二级 | 社区演讲 |
+| [Wikipedia — Ruby](https://en.wikipedia.org/wiki/Ruby_(programming_language)) | ✅ 一级 | 语言概述 |
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 
 ---
 

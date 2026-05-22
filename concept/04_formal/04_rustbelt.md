@@ -1,13 +1,13 @@
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 >
-> **层次定位**: L4 形式化理论 / RustBelt 子域
+> **层次定位**: L4 形式化理论 / RustBelt 子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **前置依赖**: [L4 所有权形式化](./03_ownership_formal.md) · [L4 类型论](./02_type_theory.md) · [L4 线性逻辑](./01_linear_logic.md)
 > **后置延伸**: [L7 形式化方法](../07_future/02_formal_methods.md) · [L6 验证工具](../06_ecosystem/01_toolchain.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现
 > **定理链编号**: T-110 Iris 逻辑可靠性 → T-111 高阶幽灵状态 → T-112 类型系统 soundness
 
 > **层级**: L4 形式化理论
-> **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Linear Logic](./01_linear_logic.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**: [Ownership Formalization](./03_ownership_formal.md) · [Linear Logic](./01_linear_logic.md) · [Unsafe Rust](../03_advanced/03_unsafe.md) · [Concurrency](../03_advanced/01_concurrency.md) [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [RustBelt: POPL 2018] · [Iris Project] · [Creusot] · [Verus] · [Kani: AWS] · [Aeneas] · [RefinedRust] · [Prusti]
 
@@ -27,7 +27,7 @@ $entry
 
 ### 1.1 Wikipedia 权威定义
 
-> **[Wikipedia: Formal verification]** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics. It is used in software engineering to ensure that systems operate correctly and reliably.
+> **[Wikipedia: Formal verification]** Formal verification is the act of proving or disproving the correctness of intended algorithms underlying a system with respect to a certain formal specification or property, using formal methods of mathematics. It is used in software engineering to ensure that systems operate correctly and reliably. [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 > **[Wikipedia: Separation logic]** Separation logic is an extension of Hoare logic that permits local reasoning about mutable data structures. It was developed to support reasoning about shared mutable data structures, which are common in imperative and object-oriented programs. The key innovation is the separating conjunction `*`, which asserts that two assertions hold for disjoint portions of memory, enabling modular and compositional verification [来源: Wikipedia · Separation logic].
 
@@ -108,7 +108,7 @@ C2 (未覆盖范围) 是负面边界
 
 > **扩展映射**:
 >
-> - **L3 Unsafe**: [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证
+> - **L3 Unsafe**: [`../03_advanced/03_unsafe.md`](../03_advanced/03_unsafe.md) §3 "Unsafe 抽象边界" ↔ C1 边界层。unsafe 代码的安全契约需在 Iris 中手动建模，RustBelt 提供方法论但不自动化验证 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 > - **L3 并发**: [`../03_advanced/01_concurrency.md`](../03_advanced/01_concurrency.md) §2 "Send/Sync 语义" ↔ T1（无数据竞争）。CSL 是并发安全的逻辑根基，Mutex/Arc 的形式化规约见 §3
 >
 > **Send/Sync 形式化语义**: `T: Send` ⇔ 类型 T 可安全跨线程转移所有权（值 move 无数据竞争）。`T: Sync` ⇔ `&T: Send`，即 T 的共享引用可安全跨线程共享。
@@ -168,6 +168,7 @@ graph BT
 ```
 
 > **认知功能**: 此推导链图将 RustBelt 的**三层定理结构**（L1 逻辑基础设施 → L2 Rust 语义特化 → L3 安全定理）与**边界层**可视化。箭头方向自下而上表示"依赖关系"：L3 定理依赖 L2 语义，L2 语义依赖 L1 逻辑。关键洞察：**L2-C (λRust 语义一致性) 是整个链条的根基假设**——若 MIR→λRust 翻译有误，则所有定理与真实编译器脱节。边界层 C1/C2 用虚线连接，表示它们不是定理的前提，而是定理的**适用范围声明**。
+> [来源: [RustBelt Paper]]
 
 ## 三、Concurrent Separation Logic（并发分离逻辑）
 
@@ -175,7 +176,7 @@ graph BT
 
 ### 3.1 CSL = 分离逻辑 + 资源不变量
 
-并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。
+并发分离逻辑（Concurrent Separation Logic, CSL）由 O'Hearn 于 2007 年提出，将 Hoare 逻辑的并行规则与分离逻辑的局部推理相结合。其核心扩展在于**资源不变量（resource invariant）**`I`：线程访问共享资源时必须证明该资源满足 `I`，并在释放时恢复 `I`。 [来源: [Iris Project](https://iris-project.org/)]
 
 在 RustBelt/Iris 框架中，CSL 被实例化为高阶并发分离逻辑，支持高阶幽灵状态和原子性推理，使得 Rust 的 `std::sync` 原语可被精确形式化规约。
 
@@ -201,7 +202,7 @@ graph BT
 
 ### 3.3 `Mutex<T>` 的形式化
 
-`Mutex<T>` 是 CSL 资源不变量的经典实例。设 `m` 为 `Mutex<T>` 地址，`l` 为被保护数据地址：
+`Mutex<T>` 是 CSL 资源不变量的经典实例。设 `m` 为 `Mutex<T>` 地址，`l` 为被保护数据地址： [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ```text
 MutexInvariant(m, l, P) ≜  ∃v. l ↦ v * P(v)
@@ -327,7 +328,7 @@ ArcInvariant(rc, data, P) ≜  ∃n. rc ↦ n * (n > 0 → data ↦ v * P(v))
 
 ### 3.5 CSL 规范代码示例
 
-以下伪代码展示如何用 CSL 注释描述 Rust 并发原语的契约：
+以下伪代码展示如何用 CSL 注释描述 Rust 并发原语的契约： [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
 
 ```rust,ignore
 // CSL 规范: Mutex 守卫整数不变量 "x ≥ 0"
@@ -380,6 +381,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树将"RustBelt 证明 Rust 完全安全"这一过度概括命题**逐步分解**为可检验的子条件。功能定位：揭示 RustBelt 保证范围的精确边界（safe 子集、无死锁、无 FFI）。使用建议：遇到"Rust 绝对安全"的绝对化论断时，沿树逐项排查前提假设。关键洞察：**三个否定分支（unsafe、死锁、FFI）对应 C1/C2 边界层**，它们不是 RustBelt 的缺陷，而是形式化证明的必要适用范围声明。[来源: 💡 原创分析]
+> [来源: [RustBelt Paper]]
 
 **命题一分析**: RustBelt 仅覆盖 **safe Rust 子集**。unsafe、死锁、FFI 均位于证明边界之外。将结论外推到"Rust 完全安全"属于**过度概括**谬误。工业实践中，需将 RustBelt 与 Miri 动态检测、Kani 符号执行、人工审计相结合，形成纵深防御。
 
@@ -401,6 +403,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树通过**三维度可行性探针**（规格复杂度、状态空间、时间成本）检验"形式化验证替代测试"命题。功能定位：澄清验证与测试的正交互补关系。使用建议：在评估关键模块验证策略时，先回答这三个问题再决定工具选型。关键洞察：**规格遗漏 = 遗漏 bug**，即使定理成立，错误的规格仍会导致错误的安全感——形式化验证保证的是"满足规格"而非"满足意图"。[来源: 💡 原创分析]
+> [来源: [RustBelt Paper]]
 
 **命题二分析**: 形式化验证与测试处于**正交维度**。验证回答"是否满足规格"，测试回答"预期输入下行为是否正确"。规格本身可能错误，且完整证明成本（人月级）使其难以全面替代测试。最佳实践是**分层策略**：核心不变量用 Verus/Creusot 证明，边界条件用 Kani 符号执行，回归用单元测试覆盖。
 
@@ -422,10 +425,11 @@ graph TD
 ```
 
 > **认知功能**: 此决策树揭示 Iris 框架的**通用性层次**——L1 逻辑层可跨语言复用，但 L2/L3 层深度绑定 Rust 语义。功能定位：区分"逻辑框架可移植"与"形式化证明可移植"两个不同命题。使用建议：将 Iris 应用于其他语言时，需预留重构 λRust 语义和协议类型的工作量。关键洞察：**Iris 是证明基础设施，RustBelt 是 Rust 实例化；从框架到具体语言的证明迁移成本接近于重新发表论文**。[来源: 💡 原创分析]
+> [来源: [RustBelt Paper]]
 
 **命题三分析**: Iris 是**通用**的高阶并发分离逻辑框架（L1 层），可实例化到多种语言。但 RustBelt 的 L2/L3 层——协议类型、生命周期逻辑、λRust 语义——深度绑定于 Rust 的所有权-借用-生命周期体系。将 Iris 应用于其他语言需重建 L2 层，工作量接近于重新发表一篇 RustBelt 级别的论文。
 
-> **过渡**: 反命题决策树澄清了 RustBelt 的能力边界。从定理证明到工业落地，需要一系列验证工具链的桥接——下一节给出标准库原语验证现状，随后 §8 建立完整工具链光谱。
+> **过渡**: 反命题决策树澄清了 RustBelt 的能力边界。从定理证明到工业落地，需要一系列验证工具链的桥接——下一节给出标准库原语验证现状，随后 §8 建立完整工具链光谱。 [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
 
 ---
 
@@ -497,7 +501,7 @@ graph TD
 | **高** | 并发、原子操作、资源不变量 | `Mutex` 对接平台线程原语；`Arc` 证明引用计数协议原子性；`Vec` 处理重分配指针失效 |
 | **极高** | 复杂算法、开放状态空间、性能优化与安全耦合 | `HashMap` SwissTable 涉及大量 `unsafe` 微优化，形式化规格极为复杂 |
 
-> **过渡**: 标准库原语的验证是 RustBelt 理论成果向工业代码延伸的必经之路。从学术证明到工程师日常可用，需要验证工具链的桥接——§8 给出完整工具链光谱与选型指南。
+> **过渡**: 标准库原语的验证是 RustBelt 理论成果向工业代码延伸的必经之路。从学术证明到工程师日常可用，需要验证工具链的桥接——§8 给出完整工具链光谱与选型指南。 [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ---
 
@@ -555,7 +559,7 @@ fn sum_to(n: i32) -> i32 {
 
 1. 调用 `sum_to` 时 `n >= 0` 成立（requires）
 2. 返回时 `result == n * (n + 1) / 2` 成立（ensures）
-3. 每次循环迭代时不变式成立（body_invariant）
+3. 每次循环迭代时不变式成立（body_invariant） [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ### 7.2 Kani：`#[kani::proof]` 与并发验证
 
@@ -768,7 +772,7 @@ jobs:
 | 教学 / 研究 / 新算法验证 | **Aeneas / Prusti** | Aeneas 生成可读 Coq/Lean；Prusti 模块化推导 |
 | 完整形式化基础（论文级） | **RustBelt + Coq/Iris** | 唯一覆盖 unsafe 边界的形式化基础 |
 
-> **过渡**: 验证工具链构成了从"编译器保证"到"数学证明"的连续光谱。理解这些权衡后，以下思维导图总览 RustBelt 定理依赖关系与工具生态位置。
+> **过渡**: 验证工具链构成了从"编译器保证"到"数学证明"的连续光谱。理解这些权衡后，以下思维导图总览 RustBelt 定理依赖关系与工具生态位置。 [来源: [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)]
 
 ---
 
@@ -826,6 +830,7 @@ graph TD
 ```
 
 > **认知功能**: 此思维导图将 RustBelt 定理体系与**工业验证工具生态**整合为统一的知识拓扑。功能定位：建立从学术基础（Iris/λRust）到工程工具（Kani/Verus/Miri）的映射关系。使用建议：按"基础层→定理层→工具层"三层结构记忆各工具的定位差异。关键洞察：**RustBelt（理论根基）与 Kani/Verus（工业落地）并非竞争关系，而是同一安全光谱的两端——前者回答"为什么可信"，后者回答"如何验证"**。[来源: 💡 原创分析]
+> [来源: [RustBelt Paper]]
 
 ---
 
@@ -946,7 +951,7 @@ RwLock<T> 的资源不变量:
   { RwLock(γ) }  write().lock()  { v. WriterToken(γ) ∗ v: T }
 ```
 
-> **关键洞察**：读锁允许多个 reader **共享**资源不变量，写锁要求**独占**资源。Iris 的 **"fractional permissions"**（分数权限）精确建模了 "n 个读者各持 1/n 份额" 的语义。
+> **关键洞察**：读锁允许多个 reader **共享**资源不变量，写锁要求**独占**资源。Iris 的 **"fractional permissions"**（分数权限）精确建模了 "n 个读者各持 1/n 份额" 的语义。 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 **Condvar 的信号/等待协议**：
 

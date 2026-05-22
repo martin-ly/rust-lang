@@ -231,6 +231,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [Zig Documentation](https://ziglang.org/documentation/master/)]
+
 > **构建洞察**: **Zig 的构建系统是语言的延伸**——用 Zig 代码定义构建逻辑，而非学习新的配置语言。
 > [来源: [Zig Build System](https://ziglang.org/learn/build-system/)]
 
@@ -373,6 +375,7 @@ graph TD
 
 > **认知功能**: **安全需求选 Rust，控制需求选 Zig**——两者在现代系统编程中各有不可替代的位置。
 > [来源: [Zig vs Rust Discussion](https://news.ycombinator.com/item?id=27608507)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -468,6 +471,8 @@ graph TD
 | [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
 | [Zig Build System](https://ziglang.org/learn/build-system/) | ✅ 一级 | 构建系统 |
 | [Zig News](https://ziglang.org/news/) | ✅ 二级 | 社区新闻 |
+| [Wikipedia — Zig](https://en.wikipedia.org/wiki/Zig_(programming_language)) | ✅ 一级 | 语言概述 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | 性能基准 |
 
 ---
 

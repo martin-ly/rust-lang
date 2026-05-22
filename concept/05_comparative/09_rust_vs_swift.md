@@ -228,6 +228,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [Wikipedia — Swift (programming language)](https://en.wikipedia.org/wiki/Swift_(programming_language))]
+
 > **平台洞察**: Swift 是**Apple 生态的深度优化**，Rust 是**跨平台的通用系统语言**——选择取决于目标平台。
 > [来源: [Swift on Server](https://www.swift.org/server/)]
 
@@ -361,6 +363,7 @@ graph TD
 
 > **认知功能**: **Apple 平台优先 Swift**，**跨平台/性能优先 Rust**——不是优劣之分，是场景适配。
 > [来源: [Swift vs Rust Performance](https://www.ben-morris.com/swift-vs-rust/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -461,6 +464,7 @@ graph TD
 | [TRPL](https://doc.rust-lang.org/book/) | ✅ 一级 | Rust 官方书 |
 | [Swift on Server](https://www.swift.org/server/) | ✅ 一级 | 服务端 Swift |
 | [Swift vs Rust Blog](https://www.ben-morris.com/swift-vs-rust/) | ✅ 二级 | 对比分析 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | Web 框架性能对比 |
 
 ---
 

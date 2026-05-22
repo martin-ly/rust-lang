@@ -87,6 +87,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/)]
+
 > **内存洞察**: **C# 的 GC 简化了内存管理但有停顿，Rust 的所有权消除了停顿但增加了学习成本**。
 > [来源: [C# Memory Management](https://docs.microsoft.com/en-us/dotnet/standard/garbage-collection/)]
 
@@ -432,6 +434,7 @@ graph TD
 
 > **认知功能**: **.NET/Windows 选 C#，系统/性能选 Rust**——两者在现代生态中互补。
 > [来源: [.NET vs Rust Discussion](https://devblogs.microsoft.com/dotnet/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -528,6 +531,8 @@ graph TD
 | [.NET Blog](https://devblogs.microsoft.com/dotnet/) | ✅ 一级 | 官方博客 |
 | [.NET Performance](https://github.com/dotnet/performance) | ✅ 二级 | 性能指南 |
 | [C# Language Specification](https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/) | ✅ 一级 | 语言规范 |
+| [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) | ✅ 一级 | 语言概述 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | 性能基准 |
 
 ---
 

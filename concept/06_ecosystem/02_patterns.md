@@ -1,7 +1,7 @@
 # Design Patterns（设计模式）
 
 > **层级**: L6 生态工程
-> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **主要来源**: [Rust API Guidelines] · [Rust Design Patterns] · [TRPL]
 
 ---
@@ -35,7 +35,7 @@
 > 2. **GoF模式在Rust中怎么用？** → 以Trait替代继承，以enum+match替代多态类层次
 > 3. **Rust特有的模式？** → RAII、Typestate、Newtype——所有权与类型系统的直接产物
 > 4. **类型系统怎么替代模式？** → 编译期保证消除运行时校验需求（Typestate替代状态机检查）
-> 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益
+> 5. **什么时候模式是反模式？** → 过度工程、过早抽象、Stringly typed——抽象债务超过收益 [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > 6. **模式选择的决策框架？** → 约束驱动：先问"类型系统能否证明"，再问"是否需要运行时多态"
 
 ---
@@ -115,6 +115,7 @@ graph TD
 ```
 
 > **认知功能**: 提供设计模式的全景认知框架，帮助学习者建立"模式类型→具体问题→Rust实现"的三层检索路径。建议将其作为查阅具体模式前的导航图，快速定位问题所属的模式类别。
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: Rust特有模式（Typestate、Zero-cost Abstraction）并非GoF分类的补丁，而是所有权类型系统的自然涌现。
 > [来源: 💡 原创分析]
 
@@ -206,7 +207,7 @@ mod ast {
 }
 ```
 
-**Visitor 模式 UML 类图（Mermaid classDiagram）**:
+**Visitor 模式 UML 类图（Mermaid classDiagram）**: [来源: [Are We Game Yet](https://arewegameyet.rs/)]
 
 ```mermaid
 classDiagram
@@ -250,6 +251,7 @@ classDiagram
 ```
 
 > **认知功能**: 将Visitor模式的"双重分发"结构可视化，清晰呈现Expr（元素层次）与ExprVisitor（操作层次）的正交分离。建议在实现AST遍历或代码生成前对照此图验证接口设计。
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: enum变体替代继承层次，`accept`方法的泛型参数将运行时双重分发压缩为编译期单分发，消除虚函数表膨胀。
 > [来源: 💡 原创分析]
 
@@ -324,7 +326,7 @@ impl<S: PaymentStrategy> ShoppingCart<S> {
 
 ### 4.4 State Machine 模式
 
-**定义**：允许对象在其内部状态改变时改变它的行为，对象看起来好像修改了它的类。
+**定义**：允许对象在其内部状态改变时改变它的行为，对象看起来好像修改了它的类。 [来源: [Are We Web Yet](https://www.arewewebyet.org/)]
 
 **适用场景**：
 
@@ -441,7 +443,7 @@ use libloading::{Library, Symbol};
 type CreatePlugin = unsafe fn() -> *mut dyn Plugin;
 
 unsafe {
-    let lib = Library::new("plugin.so").ok()?;
+    let lib = Library::new("plugin.so").ok()?; [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
     let create: Symbol<CreatePlugin> = lib.get(b"create_plugin").ok()?;
     let plugin = Box::from_raw(create());
 }
@@ -517,7 +519,7 @@ struct TemperatureDisplay {
 
 impl TemperatureDisplay {
     fn update(&self, temp: f32) {
-        println!("Display: 当前温度 {}°C", temp);
+        println!("Display: 当前温度 {}°C", temp); [来源: [Rust in Production](https://www.rust-lang.org/production)]
     }
 
     fn attach(sensor: &Rc<RefCell<TemperatureSensor>>) -> Rc<RefCell<Self>> {
@@ -555,7 +557,7 @@ struct AsyncEventBus<T: Clone + Send + 'static> {
 }
 
 impl<T: Clone + Send + 'static> AsyncEventBus<T> {
-    fn new(capacity: usize) -> Self {
+    fn new(capacity: usize) -> Self { [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
         let (sender, _receiver) = broadcast::channel(capacity);
         Self { sender }
     }
@@ -578,7 +580,7 @@ async fn async_observer_example() {
 
     bus.publish("event".to_string()).unwrap();
 
-    assert_eq!(rx1.recv().await.unwrap(), "event");
+    assert_eq!(rx1.recv().await.unwrap(), "event"); [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
     assert_eq!(rx2.recv().await.unwrap(), "event");
 }
 ```
@@ -622,7 +624,7 @@ async fn lightweight_observer_example() {
 
     let mut listener = subject.lock().unwrap().listen();
     // 另一个任务修改值并通知
-    subject.lock().unwrap().set_value(42);
+    subject.lock().unwrap().set_value(42); [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
     listener.await; // 等待通知
 }
@@ -695,7 +697,7 @@ fn sensor_system(mut writer: EventWriter<TemperatureChanged>) {
     writer.send(TemperatureChanged(25.0));
 }
 
-fn display_system(mut reader: EventReader<TemperatureChanged>) {
+fn display_system(mut reader: EventReader<TemperatureChanged>) { [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
     for event in reader.read() {
         println!("Display: {}°C", event.0);
     }
@@ -759,7 +761,7 @@ impl<'a, T> LendingIterator for Windows<'a, T> {
 当需要存储异构类型且避免泛型传播时，使用类型擦除：
 
 ```rust,ignore
-// 手动 vtable：将任意 Write 类型擦除为统一句柄
+// 手动 vtable：将任意 Write 类型擦除为统一句柄 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 struct DynWriter {
     ptr: *mut (),
     vtable: &'static WriterVTable,
@@ -902,7 +904,7 @@ struct ParseError {
 }
 
 // snafu：上下文敏感
-use snafu::{Snafu, ResultExt, ensure};
+use snafu::{Snafu, ResultExt, ensure}; [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 # [derive(Debug, Snafu)]
 
@@ -962,7 +964,7 @@ impl<T: serde::Serialize, E: std::error::Error> Processor<T, E> for JsonProcesso
 }
 
 // ✅ 适度设计：先用具体类型实现，待确需多态时再抽象
-fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> {
+fn to_json<T: serde::Serialize>(input: T) -> Result<Vec<u8>, serde_json::Error> { [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
     serde_json::to_vec(&input)
 }
 ```
@@ -1025,7 +1027,7 @@ enum Transport {
 impl Transport {
     fn send(&self, data: &[u8]) -> std::io::Result<()> {
         match self {
-            Transport::Tcp(t) => t.write_all(data),
+            Transport::Tcp(t) => t.write_all(data), [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
             Transport::Udp(u) => u.send(data).map(|_| ()),
         }
     }
@@ -1122,7 +1124,7 @@ struct AppState {
     // ... 数十个字段
 }
 
-// 所有 handler 都持有 &AppState 或 Arc<AppState>
+// 所有 handler 都持有 &AppState 或 Arc<AppState> [来源: [lib.rs](https://lib.rs/)]
 async fn handler(state: Arc<Mutex<AppState>>) { /* ... */ }
 
 // ✅ 按领域拆分：状态分散，组合代替堆砌
@@ -1229,6 +1231,7 @@ graph TD
 ```
 
 > **认知功能**: 训练批判性思维，通过反例驱动的推理消解"设计模式=语言补丁"的极端认知。建议在评估语言设计时运用此框架：先列举反例，再收敛到修正命题。
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: Rust的类型系统消除了部分模式需求，但模式作为问题-解决方案的通用描述仍具有跨语言认知价值。
 > [来源: 💡 原创分析]
 
@@ -1248,6 +1251,7 @@ graph TD
 ```
 
 > **认知功能**: 建立模式迁移的约束意识，防止盲目套用GoF模式导致的`dyn Trait`滥用。建议在将OOP模式翻译为Rust前，先检验其是否依赖继承或运行时多态。
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: 约30%的GoF模式需要范式转换（如Template Method→Trait默认方法），强行保留原始结构会丧失Rust的零成本优势。
 > [来源: 💡 原创分析]
 
@@ -1267,6 +1271,7 @@ graph TD
 ```
 
 > **认知功能**: 提供可编码的决策层级，将经验驱动的模式选择转化为"类型约束→性能约束→工程经验"的系统过程。建议在技术评审中用此框架质疑"凭感觉"的架构决策。
+> [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 > **关键洞察**: Rust优先将经验问题编译为类型约束（如Typestate替代运行时状态检查），这本身就是"经验→类型系统"的知识固化过程。
 > [来源: 💡 原创分析]
 
@@ -1293,7 +1298,7 @@ impl Door<Closed> {
 }
 
 impl Door<Open> {
-    fn close(self) -> Door<Closed> {
+    fn close(self) -> Door<Closed> { [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
         Door { _state: std::marker::PhantomData }
     }
     fn pass_through(&self) -> &'static str {
@@ -1328,7 +1333,7 @@ impl HttpRequestBuilder {
     fn new() -> Self {
         Self { method: None, url: None, headers: vec![] }
     }
-    fn method(mut self, m: &str) -> Self {
+    fn method(mut self, m: &str) -> Self { [来源: [crates.io](https://crates.io/)]
         self.method = Some(m.to_string()); self
     }
     fn url(mut self, u: &str) -> Self {

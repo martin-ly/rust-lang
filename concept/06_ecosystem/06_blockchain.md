@@ -1,7 +1,7 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
 
 > **层级**: L6 应用主题
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Linear Logic](../04_formal/01_linear_logic.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Linear Logic](../04_formal/01_linear_logic.md) [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Application Domains](./04_application_domains.md)
 > **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain] · [Wikipedia: Smart contract]
 
@@ -20,7 +20,7 @@ $entry
 > **[Wikipedia — Blockchain]** A blockchain is a distributed ledger with growing lists of records (blocks) that are securely linked together via cryptographic hashes.
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
 
-> **[Wikipedia — Smart contract]** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code.
+> **[Wikipedia — Smart contract]** A smart contract is a self-executing program with the terms of the agreement between buyer and seller being directly written into lines of code. [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > **来源**: <https://en.wikipedia.org/wiki/Smart_contract>
 
 > **[Ethereum Docs]** Smart contract security is the practice of creating and maintaining smart contracts that are resilient to attacks, bugs, and unintended behavior.
@@ -37,7 +37,7 @@ $entry
 
 ### 第 2 步：Rust 链与 EVM 链的本质差异是什么？
 
-Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权模型天然匹配这种并行资源管理需求。
+Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 第 3 步：类型系统如何替代安全审计的一部分工作？
 
@@ -78,7 +78,7 @@ mindmap
 
 > **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
 >
-> **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。
+> **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 >
 > **关键洞察**: Rust 链的安全优势不是单一技术点，而是从编译期类型系统到运行时调度再到形式化验证的纵深防御体系。
 
@@ -121,7 +121,7 @@ fn process_instruction(
 }
 ```
 
-> **Solana 运行时借用检查**: Sealevel 并行执行引擎在**运行时**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。
+> **Solana 运行时借用检查**: Sealevel 并行执行引擎在**运行时**对账户状态进行借用检查（与 Rust 编译期借用检查同构），确保并行交易无数据竞争。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -228,7 +228,7 @@ mod erc20 {
 
 ### 3.2 形式化验证工具链：Kani 在合约验证中的应用
 
-Kani（AWS 开发的 Rust 模型检测器）可直接验证 ink! / Solana 合约中的关键不变量：
+Kani（AWS 开发的 Rust 模型检测器）可直接验证 ink! / Solana 合约中的关键不变量： [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 ```rust,ignore
 // ✅ Kani 验证：账户余额非负 + 总量守恒
@@ -386,7 +386,7 @@ let coin: Coin = get_coin();
 // 函数结尾未消费 coin → 编译器拒绝
 ```
 
-> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。
+> **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
 
 ### 4.2 Sui 的 Object-Centric 模型 vs Aptos 的账户存储模型
 
@@ -507,7 +507,7 @@ mod verification {
 
 ### 5.2 FRAME 存储与 Kani 的集成挑战
 
-Substrate FRAME 的存储 API 使用宏生成（`#[pallet::storage]`），这对 Kani 的符号执行构成挑战：
+Substrate FRAME 的存储 API 使用宏生成（`#[pallet::storage]`），这对 Kani 的符号执行构成挑战： [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 | 挑战 | 解决方案 | 验证范围 |
 |:---|:---|:---|
@@ -569,7 +569,7 @@ fn verify_weight_calculation_does_not_overflow() {
 
 ### 8.1 Solana SBF：eBPF 的受限安全子集
 
-SBF 是 Solana 对 eBPF（extended Berkeley Packet Filter）的扩展，用于在 Solana 虚拟机（SVM）中执行合约：
+SBF 是 Solana 对 eBPF（extended Berkeley Packet Filter）的扩展，用于在 Solana 虚拟机（SVM）中执行合约： [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 | 维度 | SBF 设计 | Rust 角色 | 安全约束 |
 |:---|:---|:---|:---|
@@ -623,7 +623,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 | **Polkadot PVF** | Wasm 子集 | 进行中（Wasm 核心形式化）| `rustc` → LLVM → Wasm | Wasm 宿主函数（Host Functions）的副作用形式化 |
 | **Move Bytecode** | Move IR → Move Bytecode | Move Prover（Boogie/Z3）| `movec` → Move Bytecode | 资源语义的形式化已较成熟（ abilities 系统）|
 
-> **核心洞察**: 区块链字节码的形式化语义研究遵循一个共同模式——**将高级语言（Rust/Move）的类型安全保证"下沉"到低级字节码的验证规则中**。SBF 的 verifier、PVF 的 Wasm 规范、Move 的字节码验证器，都是同一理念在不同技术路径上的实现。
+> **核心洞察**: 区块链字节码的形式化语义研究遵循一个共同模式——**将高级语言（Rust/Move）的类型安全保证"下沉"到低级字节码的验证规则中**。SBF 的 verifier、PVF 的 Wasm 规范、Move 的字节码验证器，都是同一理念在不同技术路径上的实现。 [来源: [crates.io](https://crates.io/)]
 
 > **来源**: [Solana — SBF Specification] · [Polkadot — PVF Documentation] · [eBPF ISA Specification] · [Wasm Core Spec] · [Move Prover Paper]
 

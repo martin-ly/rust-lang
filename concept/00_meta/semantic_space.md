@@ -372,6 +372,8 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **编译期计算** | `const generics` + `const fn` | 部分 | 零 | 常量求值 |
 | **类型级约束** | Trait bounds + 关联类型 | 完全 | 零 | 接口一致性 |
 
+[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)]
+
 ### 3.3 能但低效/痛苦表达
 
 | 概念 | Rust 表达 | 痛点 | 为什么痛苦 | 缓解方案 |
@@ -382,6 +384,8 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **复杂元编程** | 过程宏 | 调试困难、无类型信息 | TokenStream 是 untyped | `macro_rules!` + 约定 |
 | **快速原型** | 完整类型标注 | 编译时间 + 学习曲线 | 迭代慢 | `cargo script`、`.rs` 单文件 |
 | **递归数据结构** | `Box`/`Rc` + `enum` | 间接访问 | 无栈分配 | `Vec` 模拟树、arena 分配 |
+
+[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/) · [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread)]
 
 ### 3.4 不能表达 / 故意排除
 
@@ -397,6 +401,8 @@ Unsafe Rust 不是"关闭所有检查"，而是**打开特定的逃逸门**：
 | **联合体自动析构** | 不知道哪个变体活跃 | `enum` + `match`（标签联合体）| 设计哲学 | ❌  不可能 |
 | **协程（绿色线程）** | 与 OS 线程模型冲突 | `async`（协作式，非抢占）| RFC 230 | ⚠️ 可能新形式 |
 | **效果系统（Effects）** | 复杂度、与现有模型冲突 | 无直接替代 | — | ✅ 研究中 |
+
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/) · [RFCs](https://rust-lang.github.io/rfcs/) · [Wikipedia — Exception Handling](https://en.wikipedia.org/wiki/Exception_handling)]
 
 ### 3.5 未来扩展：表征空间的演化
 
@@ -629,6 +635,8 @@ fn main() {
 | 外部扩展 | 封闭（需修改源码继承）| 开放（可为外部类型 impl Trait）| ✅ Rust 更优 |
 | 性能 | vtable 间接调用 | 静态分发（`impl Drawable`）或动态（`dyn`）| ✅ 可控等价 |
 
+[来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html)]
+
 ### 4.3 等价性判定：异常 → Result
 
 **原始语义**：异常——非局部控制流，调用栈展开，自动析构局部变量。
@@ -664,6 +672,8 @@ fn main() {
 | 类型安全 | 可捕获任意类型（C++）| 错误类型在签名中显式 | ✅ Rust 更优 |
 | 控制流可见性 | 隐藏 | 显式（`?` 在源码中可见）| ⚠️ 表达性不等价 |
 | 不可恢复错误 | `std::terminate` / `RuntimeException` | `panic!` | ✅ 分离更清晰 |
+
+[来源: [TRPL — Error Handling](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference — The ? Operator](https://doc.rust-lang.org/reference/expressions/operator-expr.html#the-question-mark-operator)]
 
 ### 4.4 等价性判定：虚函数 → enum vs dyn Trait
 
@@ -730,6 +740,8 @@ fn main() {
 | 外部扩展 | 不可（需修改 enum 定义）| 可（为外部类型 impl Trait）| 是否需要插件架构 |
 | 穷尽检查 | ✅ match 强制穷尽 | ❌ 运行时分发无穷尽概念 | 安全性要求 |
 
+[来源: [Rust Reference — Enumerations](https://doc.rust-lang.org/reference/items/enumerations.html) · [TRPL — enum and match](https://doc.rust-lang.org/book/ch06-00-enums.html)]
+
 ### 4.5 等价性判定：GC → 所有权 + Rc/Arc
 
 **原始语义**：垃圾回收——运行时自动追踪对象可达性，回收不可达内存。
@@ -785,6 +797,8 @@ fn main() {
 | 回收时机 | 非确定性（GC 调度）| 确定性（Drop 离开作用域）| ⚠️ 时间不等价 |
 | 运行时成本 | GC 暂停、额外内存 | 引用计数原子操作（Arc）| ⚠️ 成本不等价 |
 | 缓存友好性 | 对象可能分散 | 所有权保证局部性 | ✅ Rust 更优 |
+
+[来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Drop](https://doc.rust-lang.org/reference/destructors.html)]
 
 > **关键洞察**: GC 和所有权在"内存最终释放"上观察等价，但在"回收时机确定性"和"循环引用处理"上语义不等价。Rust 用**确定性**和**零运行时开销**换取了**程序员负担**（需理解所有权）。
 
@@ -892,6 +906,8 @@ Rust 的机制组合遵循**约束满足的封闭世界**：
   编译期保证                      运行时检查              硬件保证         无保证
 ```
 
+[来源: [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [TRPL — Fearless Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
+
 ### 5.3 组合选择决策树
 
 ```mermaid
@@ -943,6 +959,8 @@ graph TD
 | **错误捕获时机** | 编译期 | 编译期 + 运行时 | 编译期 | 编译期 + 运行时 | 运行时为主 |
 | **内存安全保证** | 编译期完全 | 无（依赖程序员） | 编译期（GC 辅助） | 运行时（GC） | 运行时（VM） |
 | **并发安全保证** | 编译期（Send/Sync） | 无（依赖程序员） | 运行时（STM/GHC） | 运行时（channel） | 运行时（JMM） |
+
+[来源: [Wikipedia — Comparison of Programming Languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 表征空间的包含关系
 
@@ -1057,6 +1075,8 @@ graph TD
 
 > **认知功能**: 本图通过反事实推理验证"Rust 可以表达任何程序"这一命题，展示图灵完备性与表征空间边界的关键区分。建议在评估语言表达力时，区分"可计算"与"可简洁/安全表达"两个层次。关键洞察：被排除的绿色线程、GC 等并非不可计算，而是与 Rust 的零成本安全目标冲突。[来源: 💡 原创分析]
 
+[来源: [Wikipedia — Green Thread](https://en.wikipedia.org/wiki/Green_thread) · [RFC 230 — Remove Runtime](https://rust-lang.github.io/rfcs/0230-remove-runtime.html)]
+
 ### 7.2 "safe Rust 的封闭性限制了表达力"
 
 ```mermaid
@@ -1091,6 +1111,8 @@ graph TD
 
 > **认知功能**: 本图揭示等价表达的多维不等价性，纠正"语法替代即语义相同"的常见误解。建议在进行跨语言迁移或 Rust 内部方案选择时，从观察、性能、扩展性三个维度独立评估。关键洞察：观察等价是最弱的等价形式——它只保证外部可观测行为一致，不保证内部成本结构或演化路径一致。[来源: 💡 原创分析]
 
+[来源: [Wikipedia — Observational Equivalence](https://en.wikipedia.org/wiki/Observational_equivalence) · [Rust Reference — Behavior Considered Undefined](https://doc.rust-lang.org/reference/behavior-considered-undefined.html)]
+
 ---
 
 > **来源**: [Rust Reference] · [RFCs] · [RustBelt] · [Wikipedia]
@@ -1124,6 +1146,11 @@ graph TD
 | Rust 设计哲学 | Rust Reference · TRPL | ✅ 官方文档 |
 | 参数性定理 | Wadler 1989 · Theorems for Free! | ✅ 学术经典 |
 | 内存模型 | C11 Standard §5.1.2.4 · Rustonomicon | ✅ 标准/官方 |
+| Effects System | Rust Effects Initiative · Yoshua Wuyts 2024 | ✅ 研究阶段 |
+| Const Trait / Generic Const Items | RFC 3762 · rust#113521 | ✅ 官方提案 |
+| Strict Provenance | Rust Reference · RFC 4018 | ✅ 官方文档 |
+| 图灵完备类型系统 | Leffler 2017 · Rust Type System is Turing-Complete | ✅ 技术证明 |
+| 观察等价性 | Reynolds 1983 · relational parametricity | ✅ 学术经典 |
 
 ---
 

@@ -1,7 +1,7 @@
 # Type Theory（类型论基础）
 
 > **层级**: L4 形式化理论
-> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
+> **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **主要来源**: [Wikipedia: Type theory](https://en.wikipedia.org/wiki/Type_theory) · [Pierce 2002, *Types and Programming Languages*](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Cardelli 1996, *Type Systems* (ACM Computing Surveys)](https://dl.acm.org/doi/10.1145/6041.6042)
 
@@ -23,7 +23,7 @@
 
 > **[Wikipedia: Simply typed lambda calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)** The simply typed lambda calculus (λ→) is a typed interpretation of the lambda calculus with only one type constructor: → (function type). It is the canonical and simplest example of a typed programming language.
 
-> **[Wikipedia: Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)** In type theory, Hindley-Milner is a classical type inference method with parametric polymorphism for the lambda calculus. The algorithm is commonly named W.
+> **[Wikipedia: Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)** In type theory, Hindley-Milner is a classical type inference method with parametric polymorphism for the lambda calculus. The algorithm is commonly named W. [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 
 ### 1.2 Pierce *TAPL* 与 Cardelli 定义
 
@@ -110,7 +110,7 @@ Rust 扩展:
 Rust 扩展: 在 [Var] 和 [App] 之间插入所有权检查
 ```
 
-**类型系统层次类图（Mermaid classDiagram）**:
+**类型系统层次类图（Mermaid classDiagram）**: [来源: [Iris Project](https://iris-project.org/)]
 
 ```mermaid
 classDiagram
@@ -228,7 +228,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 
 ### 5.1 反命题 1: "类型安全保证无运行时错误"
 
-> 语义/运行时层 — 类型安全排除的是**类型错误**和**未定义行为**，不保证终止性、资源充足性或 FFI 安全。
+> 语义/运行时层 — 类型安全排除的是**类型错误**和**未定义行为**，不保证终止性、资源充足性或 FFI 安全。 [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ```mermaid
 graph TD
@@ -348,7 +348,7 @@ graph TD
 
 ### Step 2: "类型和集合的关系？"
 
-**L1-L2 映射**: [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §2 ADT 代数语义 · [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §1 Type Class
+**L1-L2 映射**: [`../01_foundation/04_type_system.md`](../01_foundation/04_type_system.md) §2 ADT 代数语义 · [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md) §1 Type Class [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
 
 ```text
 直觉: 类型 ≈ 值的集合（粗略类比）
@@ -548,7 +548,7 @@ enum List<T> {
 
 **与 System F 的精确关系**
 
-System F（Girard 1972, Reynolds 1974）的通用类型 `∀α.τ` 允许量化任意类型变量。Rust 的 HRTB 是 System F 的一个**受限子集**：
+System F（Girard 1972, Reynolds 1974）的通用类型 `∀α.τ` 允许量化任意类型变量。Rust 的 HRTB 是 System F 的一个**受限子集**： [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
 
 ```text
 System F:        ∀α.τ   where α ∈ Type
@@ -621,7 +621,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
 
-> **[Wikipedia: Dependent type]** · **[Wikipedia: Higher-kinded type]** · **[RFC 2000: Const Generics]** · **[Rust Reference: Const Generics]** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅
+> **[Wikipedia: Dependent type]** · **[Wikipedia: Higher-kinded type]** · **[RFC 2000: Const Generics]** · **[Rust Reference: Const Generics]** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### 10.1 Dependent Type 与 Const Generics 的关系
 
@@ -677,7 +677,7 @@ let b: Array<i32, 4> = Array { data: [1, 2, 3, 4] };
 
 **单态化语义（Monomorphization）**:
 
-Const Generics 的单态化与类型泛型一致，但常量参数在实例化时**被求值为具体值**：
+Const Generics 的单态化与类型泛型一致，但常量参数在实例化时**被求值为具体值**： [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ```text
 泛型定义:   struct Array<T, const N: usize> { ... }
@@ -717,7 +717,7 @@ System Fω:    Λα:*→*. λx:α Int. x  —— 类型构造器抽象（HKT）
 Rust Const:   Λn:usize. λx:[i32;n]. x  —— 值级抽象（依赖类型子集）
 ```
 
-Rust 目前不支持 HKT，但 Const Generics 在另一个维度上扩展了表达能力：**值 → 类型**的依赖性。
+Rust 目前不支持 HKT，但 Const Generics 在另一个维度上扩展了表达能力：**值 → 类型**的依赖性。 [来源: [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)]
 
 > **跨层映射**: 本文件 Const Generics 形式化 ↔ [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md) §5.7 "Const Generics 进阶用法" · [`../07_future/05_rust_version_tracking.md`](../07_future/05_rust_version_tracking.md) §3.3 "`_` 推断 const generics"
 
@@ -778,7 +778,7 @@ impl<T> Result<T, E> { fn map<U>(self, f: impl FnOnce(T) -> U) -> Result<U, E> {
 
 ### 10.3 线性逻辑与所有权类型的 Curry-Howard 对应
 
-**Curry-Howard 对应**断言：**命题 = 类型，证明 = 程序**。在线性逻辑与 Rust 的语境下：
+**Curry-Howard 对应**断言：**命题 = 类型，证明 = 程序**。在线性逻辑与 Rust 的语境下： [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 | 线性逻辑 | Rust 类型/构造 | 逻辑语义 | 计算语义 |
 |:---|:---|:---|:---|

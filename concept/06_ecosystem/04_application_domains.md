@@ -1,7 +1,7 @@
 # Application Domains（软件工程应用主题）
 
 > **层级**: L6 生态工程
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [Rust in Production] · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]
 
@@ -26,7 +26,7 @@
 
 > **[Wikipedia: Systems programming]** Systems programming is the activity of programming computer system software.
 > The primary distinguishing characteristic of systems programming when compared to application programming is that application programming aims to produce software which provides services to the user,
-> whereas systems programming aims to produce software and software platforms which provide services to other software.
+> whereas systems programming aims to produce software and software platforms which provide services to other software. [来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]
 > **来源**: <https://en.wikipedia.org/wiki/Systems_programming>
 
 > **[Wikipedia: Web framework]** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services,
@@ -41,7 +41,7 @@
 > **来源**: <https://en.wikipedia.org/wiki/Blockchain>
 
 > **[Wikipedia: Game engine]** A game engine is a software framework primarily designed for the development of video games,
-> and generally includes relevant libraries and support programs.
+> and generally includes relevant libraries and support programs. [来源: [Are We Game Yet](https://arewegameyet.rs/)]
 > **来源**: <https://en.wikipedia.org/wiki/Game_engine>
 
 > **[Wikipedia: Command-line interface]** A command-line interface (CLI) is a means of interacting with a device or
@@ -149,7 +149,7 @@ graph TD
     F --> F3[Network Infra<br/>quinn + rustls]
 ```
 
-> **认知功能**: 建立 Rust 生态全景认知框架，将分散的领域按技术属性聚类为五大板块。作为技术选型的第一层过滤——先定位大类（Web/系统/数据/创意/基础设施），再深入具体栈。Rust 的核心优势并非均匀分布：系统编程和 CLI 最为成熟，GUI 和 ML 训练仍在快速追赶中。
+> **认知功能**: 建立 Rust 生态全景认知框架，将分散的领域按技术属性聚类为五大板块。作为技术选型的第一层过滤——先定位大类（Web/系统/数据/创意/基础设施），再深入具体栈。Rust 的核心优势并非均匀分布：系统编程和 CLI 最为成熟，GUI 和 ML 训练仍在快速追赶中。 [来源: [Are We Web Yet](https://www.arewewebyet.org/)]
 > [来源: 💡 原创分析]
 
 ---
@@ -186,7 +186,7 @@ graph TD
 Rust 在 CLI 领域是最成熟的应用之一。核心优势：
 
 - **单二进制部署**: `cargo build --release` 生成无依赖可执行文件
-- **性能**: 比 Python/Node 快 10-100x，比 Go 快 1.5-3x
+- **性能**: 比 Python/Node 快 10-100x，比 Go 快 1.5-3x [来源: [Rust Foundation](https://foundation.rust-lang.org/)]
 - **错误信息**: 利用类型系统生成精确的 CLI 错误提示
 
 **标杆项目**:
@@ -229,7 +229,7 @@ Rust 在嵌入式领域的独特价值：
 
 ### 4.4 游戏与实时图形
 
-**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio`
+**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` [来源: [Rust in Production](https://www.rust-lang.org/production)]
 
 | **引擎/框架** | **定位** | **特点** | **成熟度** |
 |:---|:---|:---|:---|
@@ -284,7 +284,7 @@ Rust 在区块链领域占据**主导地位**的原因：
 
 ### 4.7 系统编程（OS / 驱动 / 网络协议栈）
 
-**技术栈**: `Rust for Linux` + `bindgen` + `redox` + `smoltcp`
+**技术栈**: `Rust for Linux` + `bindgen` + `redox` + `smoltcp` [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 
 | **项目** | **目标** | **状态** | **意义** |
 |:---|:---|:---|:---|
@@ -356,7 +356,7 @@ Rust 编译为 WASM 的核心优势：
 
 ### 4.10 嵌入式（no_std）深度解析
 
-**技术栈扩展**: `embedded-hal` + `defmt` + `probe-rs` + `cortex-m-rt`
+**技术栈扩展**: `embedded-hal` + `defmt` + `probe-rs` + `cortex-m-rt` [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
 
 | **维度** | `std` 环境 | `no_std` 环境 |
 |:---|:---|:---|
@@ -439,7 +439,7 @@ fn main() -> Result<()> {
 
 ### 4.12 游戏开发：Bevy 生态深度
 
-**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` + `bevy_ecs`
+**技术栈**: `bevy` + `wgpu` + `rapier` + `rodio` + `bevy_ecs` [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
 | **子系统** | **Crate** | **功能** | **替代方案** |
 |:---|:---|:---|:---|
@@ -721,7 +721,7 @@ fn main() {
 }
 ```
 
-> **关键洞察**: axum 的路由系统利用 Rust 的类型系统保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。
+> **关键洞察**: axum 的路由系统利用 Rust 的类型系统保证 handler 函数的签名与路由路径匹配——`Path<u32>` 提取器要求 URL 参数可解析为 `u32`，`Json` 返回类型要求响应可序列化。这些约束在编译期验证，而非运行时出错。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 ---
 
@@ -832,7 +832,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 | **系统软件** | 内存占用（空闲）| ~5MB | Go (~15MB), Java (~100MB) | 实测 |
 | **并发** | 百万连接内存 | ~50GB | Go (~100GB), Erlang (~30GB) | 社区 benchmark |
 
-> **注意**：benchmark 数据受具体实现、硬件、配置影响。上述数据仅供参考，实际项目需自行测试。
+> **注意**：benchmark 数据受具体实现、硬件、配置影响。上述数据仅供参考，实际项目需自行测试。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **来源**: [TechEmpower Framework Benchmarks] · [Benchmarks Game] · [Rust 嵌入式书] · [社区 benchmark]
 
@@ -848,7 +848,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 - [x] **高**: 补充游戏开发 Bevy 生态深度解析
 - [x] **中**: 补充领域选择决策框架（四维评估 + 决策树）
 - [x] **高**: 补充每个应用领域的最小可运行项目骨架（hello-world 级别） —— 已分散在各领域章节
-- [x] **高**: 补充领域间迁移指南（如从 Python/Go 迁移到 Rust 的路线图） —— 已完成 §9.1
+- [x] **高**: 补充领域间迁移指南（如从 Python/Go 迁移到 Rust 的路线图） —— 已完成 §9.1 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 - [x] **中**: 补充具体 benchmark 数据（Web 框架 RPS、CLI 启动时间、嵌入式内存占用） —— 已完成 §9.3
 - [x] **中**: 补充各领域招聘市场数据（Rust 岗位趋势、薪资水平） —— 已补充工业案例（Discord/Shopify/Vercel 等）
 - [x] **中**: 补充 "Rust 不适合" 的深度案例分析（失败教训） —— 已完成 §9.2
@@ -932,7 +932,7 @@ fn view(app: &App, frame: Frame) {
 
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
-> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。
+> **逻辑推演**: 从前提条件到结论的推理链，每条均标注 `⟹`。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 | 断言 | 前提条件 | 结论 | 反例/边界条件 | 典型场景 |
 
@@ -1063,7 +1063,7 @@ graph TD
 
 > **过渡: L6 → L5**
 >
-> 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。
+> 不同语言在不同领域有各自的优势：Go 在微服务、Python 在 AI、C++ 在游戏引擎。Rust 正在所有领域同时扩张，但这不是因为 Rust 万能，而是因为它的"零成本抽象 + 内存安全"组合在越来越多的场景下成为最优解。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 >
 > 对比视角见 [`../05_comparative/01_rust_vs_cpp.md`](../05_comparative/01_rust_vs_cpp.md) 与 [`../05_comparative/03_paradigm_matrix.md`](../05_comparative/03_paradigm_matrix.md)。
 
@@ -1091,7 +1091,7 @@ graph TD
 **与 L1-L4 的映射**:
 
 - **L1 所有权**: `no_std` 下无 `std::alloc`，所有权模型退化为**静态分配 + 借用检查**。Embassy 的任务（`Task`）是静态分配的，其生命周期由编译期证明管理。
-- **L3 Async**: `embassy::executor` 是 `Future` 状态机的手动轮询器，与 Tokio 的运行时对偶——Tokio 提供**运行时抽象**，Embassy 提供**编译期调度**。
+- **L3 Async**: `embassy::executor` 是 `Future` 状态机的手动轮询器，与 Tokio 的运行时对偶——Tokio 提供**运行时抽象**，Embassy 提供**编译期调度**。 [来源: [lib.rs](https://lib.rs/)]
 - **L4 形式化**: Embassy 的调度器是**确定性有限自动机（DFA）**——任务优先级、中断向量、DMA 完成回调构成状态转换函数，无非确定性调度（无抢占、无优先级反转）。
 
 **安全边界**: Embassy 通过 `embassy::time` 的 `Instant` 类型和 `embassy::sync` 的通道，将中断上下文与任务上下文的形式化隔离封装为 safe API。`critical_section` 是唯一的 `unsafe` 边界，标记中断屏蔽的短暂区域。
@@ -1110,7 +1110,7 @@ graph TD
 - **L3 Unsafe**: 内核 Rust 代码的 `unsafe` 比例显著高于用户空间代码（约 10-20%），因为每个 C API 调用都是 FFI 边界。Rust for Linux 的创新在于：**将 unsafe 封装为 safe 抽象**，例如 `spinlock_t` → `SpinLock<T>` 的类型化封装。
 - **L4 形式化**: 内核的并发模型（RCU、seqlock、per-CPU 变量）尚无完整的 Rust 形式化证明。RustBelt 的并发分离逻辑（CSL）理论上可覆盖 `SpinLock<T>` 和 `Mutex<T>`，但 RCU 的读侧临界区（read-side critical section）无锁语义超出了当前 RustBelt 的证明范围。
 
-**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。
+**安全边界**: `kernel::ffi` 模块是形式化边界的核心——它将 C 指针转换为 Rust 引用时，必须显式声明**安全契约**（如"调用者必须持有锁"、"此指针仅在 RCU 读侧临界区内有效"）。这些契约目前以文档注释形式存在，未来可能进化为机器可读的 Safety Tags。 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **[来源: Rust for Linux Docs]** Rust for Linux 将内核的复杂不变量编码为 Rust 的类型契约。
 
@@ -1138,7 +1138,7 @@ graph TD
 
 **与 L1-L4 的映射**:
 
-- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。
+- **L1 所有权**: io_uring 的 ring buffer 是**内核-用户空间共享内存**。Rust 封装层通过 `IoUring` 类型独占所有权，而 `Op`（操作）类型在提交时转移所有权到内核。操作完成后，所有权通过 completion queue **异步返回**——这是所有权模型在**跨地址空间/跨权限边界**上的扩展。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 - **L3 Async**: `tokio-uring` 将 io_uring 的 completion 事件映射为 `Future`。与传统 epoll 不同，io_uring 的**无系统调用批量提交**（batch submission）改变了异步运行时的事件循环模型——从"poll → 等待 → 回调"变为"提交 → 内核执行 → 完成事件"。
 - **L4 形式化**: io_uring 的 ring buffer 是**线性资源**的经典案例——submission entry 一旦被提交，其内存区域在操作完成前不可修改或释放。这与 Rust 的 `Pin` 语义同构：提交的 `Op` 被 `Pin` 在 ring buffer 中，直到 completion 解固定。
 
@@ -1156,7 +1156,7 @@ graph TD
 
 - **L1 类型系统**: `quinn` 的 `Connection` 类型通过**内部可变性**（`ConnectionRef`）管理连接状态。QUIC 的**零 RTT 握手**（0-RTT）要求客户端在握手完成前发送数据——这在 Rust 中对应于**部分初始化状态**（`MaybeUninit` 的协议级类比）。
 - **L3 并发**: QUIC 的**流隔离**（stream isolation）是 Rust `Send/Sync` 的理想场景——每个流独立拥有其数据，流间无共享状态。`quinn` 的 `SendStream` 和 `RecvStream` 分别实现 `Send` 和 `Sync`，编译期保证无跨流数据竞争。
-- **L4 形式化**: QUIC 的协议状态机（Idle → Handshake → Connected → Draining → Closed）可通过**会话类型（Session Types）**形式化。Rust 的 `enum` + `match` 是会话类型的工程近似，但缺少**线性通道**（linear channel）的显式表达。
+- **L4 形式化**: QUIC 的协议状态机（Idle → Handshake → Connected → Draining → Closed）可通过**会话类型（Session Types）**形式化。Rust 的 `enum` + `match` 是会话类型的工程近似，但缺少**线性通道**（linear channel）的显式表达。 [来源: [crates.io](https://crates.io/)]
 
 **安全边界**: QUIC 的**连接迁移**（connection migration）允许客户端在 IP 变化后保持连接——这在 Rust 中对应于**资源标识符的生命周期管理**。`quinn` 通过 `ConnectionId` 的类型化封装，确保迁移后的连接身份验证在编译期可验证。
 

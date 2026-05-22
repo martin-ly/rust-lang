@@ -246,6 +246,7 @@ graph TD
 ```
 
 > **认知功能**: 概念拓扑地图——将 Trait 系统的五维知识空间可视化，帮助学习者建立"定义→约束→分发→特殊类型→规则"的全局关联结构。
+> [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 作为学习导航锚点，每掌握一个子概念后回到图中定位其拓扑位置，避免碎片化记忆。
 > **关键洞察**: Trait 系统的设计精髓是"接口定义、泛型约束、分发机制"的三层正交分离，Orphan Rule 是连接三层的保险装置。
 >
@@ -777,6 +778,7 @@ graph TD
 ```
 
 > **认知功能**: 反事实推理工具——通过决策树形式化展示"定理何时成立、何时失效"的逻辑边界，将 E0119 的触发条件转化为可遍历的路径。
+> [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 遇到 E0119 错误时，沿树节点自查：是否存在 blanket impl？是否与具体 impl 重叠？两个 blanket 是否冲突？
 > **关键洞察**: Coherence 不是自动保证的——blanket impl 的存在会引入系统性冲突风险，specialization 只是缓解而非消除。
 >
@@ -812,6 +814,7 @@ graph TD
 ```
 
 > **认知功能**: 量词语义可视化——揭示全称量词 `∀T` 在具体类型和特化机制面前的精确边界，将 Horn 子句可满足性转化为直觉判断。
+> [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 编写 `impl<T> Foo for T` 前，先检查目标类型是否已有具体 impl；若需分层行为，评估 specialization 的适用性。
 > **关键洞察**: Blanket impl 的"全覆盖"是理想化的数学语义，工程现实中它必须与具体 impl 形成偏序关系才能共存。
 >
@@ -851,6 +854,7 @@ graph TD
 ```
 
 > **认知功能**: 类型论对偶辨析——区分存在类型的两种擦除层次（编译期擦除 vs 运行时擦除）及其工程后果。
+> [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 返回单一实现用 `impl Trait`，异构集合用 `dyn Trait`；遇到 E0746 时沿树回溯检查分发方式选择。
 > **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时已知(Trait(T))，信息隐藏的时机决定了能力边界。
 >
@@ -890,6 +894,7 @@ graph TD
 ```
 
 > **认知功能**: 概念纠偏工具——破除"对象安全 = Trait 可用"的直觉谬误，明确对象安全仅为 dyn Trait 的充要条件。
+> [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 设计 Trait 时若需支持 dyn，将 `Self: Sized` 方法拆分到独立 Trait（如 Iterator vs ExactSizeIterator）。
 > **关键洞察**: Clone 等非对象安全 Trait 在泛型约束中完全可用——对象安全限制的是运行时多态能力，而非编译期接口契约能力。
 >

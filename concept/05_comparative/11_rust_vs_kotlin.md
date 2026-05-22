@@ -176,6 +176,8 @@
   └─────────────────┴─────────────────┴─────────────────┘
 ```
 
+> [来源: [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language))]
+
 > **平台洞察**: **Kotlin 是 JVM 生态的最佳语言，Rust 是系统编程的最佳语言**——两者在各自主场无可替代。
 > [来源: [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html)]
 
@@ -416,6 +418,7 @@ graph TD
 
 > **认知功能**: **JVM/Android 选 Kotlin，系统/性能选 Rust**——两者在现代语言生态中互补而非竞争。
 > [来源: [Kotlin vs Rust Comparison](https://kotlinlang.org/docs/comparison-to-java.html)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -512,6 +515,8 @@ graph TD
 | [Kotlin vs Java](https://kotlinlang.org/docs/comparison-to-java.html) | ✅ 一级 | 对比 |
 | [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html) | ✅ 一级 | 协程 |
 | [Kotlin Multiplatform](https://kotlinlang.org/docs/multiplatform.html) | ✅ 一级 | 多平台 |
+| [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) | ✅ 一级 | 语言概述 |
+| [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) | 🔍 三级 | 性能基准 |
 
 ---
 

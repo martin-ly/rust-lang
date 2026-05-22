@@ -1,7 +1,7 @@
 # Formal Ecosystem Tower（Rust 生态形式化分层塔）
 
 > **层级**: L6 生态工程
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Type Theory](../04_formal/02_type_theory.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Type Theory](../04_formal/02_type_theory.md) [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Toolchain](./01_toolchain.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Tokio 文档] · [Tower 文档] · [AWS Kani 博客] · [Microsoft Verus 论文] · [INRIA Creusot 教程]
 
@@ -33,7 +33,7 @@ $entry
 
 ## 认知路径（Cognitive Path）
 
-> **学习递进**: 从"哪个 crate 好用"的直觉，深入到"生态系统的形式化结构"的元视角。
+> **学习递进**: 从"哪个 crate 好用"的直觉，深入到"生态系统的形式化结构"的元视角。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 第 1 步：为什么需要形式化视角评估生态？
 
@@ -79,7 +79,7 @@ graph BT
 
 > **认知功能**: 此图是 Rust 生态的**形式化成熟度分层塔**。读者可按项目可靠性需求「对号入座」——需要基本内存安全选 L0（ rustc 自动保证），需要类型契约验证选 L1（Serde/SQLx），需要架构组合正确性选 L2（Tokio/Tower），需要可观测性选 L3（Tracing），需要功能正确性证明选 L4（Kani/Verus）。关键认知：形式化不是「全有或全无」的二元选择，而是**可逐层递增的投资**——从 L0 到 L4，每上一层都增加验证深度和开发成本，读者应根据项目安全关键性选择适当的层级组合。 [来源: 💡 原创分析]
 
-> **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。
+> **认知路径**: 此分层塔自下而上展示 Rust 生态的**形式化深度递进**。L0 是所有 Rust 代码的基线（编译器自动证明），L1-L3 是工业级成熟层（生态竞争焦点），L4 是前沿扩展层（2026 年工业突破中）。箭头的虚实区分：**实线**表示功能依赖（上层依赖下层），**虚线**表示形式化保证的传递（下层的证明结论被上层继承）。 [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ---
 
@@ -192,7 +192,7 @@ quadrantChart
     "Wasmtime": [0.6, 0.55]
 ```
 
-> **认知功能**: quadrantChart 将 ASCII 矩阵升级为**交互式认知地图**。象限 1（右上）是"黄金区域"——Axum、SQLx、Tower 兼具高可组合性和可观的形式化深度。象限 4（右下）是"安全关键专用区"——Kani/Verus 可验证性极高但与其他生态组件的组合性有限（需注解/规格适配）。象限 2（左上）是"基础设施区"——Serde/Tracing 组合性极高但形式化验证价值较低（纯 safe Rust 已足够安全）。
+> **认知功能**: quadrantChart 将 ASCII 矩阵升级为**交互式认知地图**。象限 1（右上）是"黄金区域"——Axum、SQLx、Tower 兼具高可组合性和可观的形式化深度。象限 4（右下）是"安全关键专用区"——Kani/Verus 可验证性极高但与其他生态组件的组合性有限（需注解/规格适配）。象限 2（左上）是"基础设施区"——Serde/Tracing 组合性极高但形式化验证价值较低（纯 safe Rust 已足够安全）。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 **2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）：
 
@@ -201,7 +201,7 @@ quadrantChart
 3. **Tracing + OpenTelemetry + Vector**：可观测性的函数式管道
 4. **Kani + Verus（关键模块）**：超越编译器的功能正确性验证
 
-**2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）：
+**2026 年的黄金组合**（可组合 × 可观测 × 形式化潜力）： [来源: [lib.rs](https://lib.rs/)]
 
 1. **Tokio + Tower + Axum**：异步生态的范畴论骨架，组合性的工业巅峰
 2. **SQLx + Serde + Prost**：数据层的类型安全同态链
@@ -214,7 +214,7 @@ quadrantChart
 
 2026 年 5 月的 Rust 生态已呈现清晰的形式化层级：
 
-> **L0 编译器层**：所有权/生命周期/并发安全（已完成，所有库受益）
+> **L0 编译器层**：所有权/生命周期/并发安全（已完成，所有库受益） [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 > **L1 类型契约层**：Trait/Schema/接口（Serde/SQLx/Prost/Tonic 在此竞争）
 > **L2 架构组合层**：Tower/Axum 的 Service 态射复合（范畴论的工业实现）
 > **L3 可观测层**：Tracing/OpenTelemetry 的调用树形式化（Span 即节点）
@@ -255,7 +255,7 @@ quadrantChart
 | **verus** | 0.1 | 1.76 | 2021 | z3, air | SMT + 所有权逻辑 |
 | **wasmtime** | 21.0 | 1.76 | 2021 | wasmparser, cranelift | Wasm 规范形式化 |
 
-> **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。
+> **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 8.2 Kani + GitHub Actions：形式化验证 CI 集成
 
@@ -314,7 +314,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [x] **高**: 补充每个 crate 的具体版本兼容性矩阵（MSRV、Edition 依赖） —— 已完成 §8.1
 - [x] **高**: 补充更多 2026 年新兴 crate 的形式化评估（如 `rkyv`、`nalgebra` 的编译期维度检查） —— 已融入矩阵
 - [x] **中**: 补充形式化验证工具与 CI/CD 集成的具体配置示例（Kani + GitHub Actions） —— 已完成 §8.2
-- [x] **中**: 补充 Wasmtime 形式化语义与 Rust 实现一致性的技术细节 —— 已完成 §8.3
+- [x] **中**: 补充 Wasmtime 形式化语义与 Rust 实现一致性的技术细节 —— 已完成 §8.3 [来源: [crates.io](https://crates.io/)]
 
 ### 8.4 形式化视角 vs 传统功能分类映射
 

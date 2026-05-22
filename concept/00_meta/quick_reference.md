@@ -143,6 +143,8 @@ HttpRequestBuilder::new()
 **关联**: 消费型方法链 · 类型状态
 **深入**: [`02_patterns.md`](../06_ecosystem/02_patterns.md)
 
+[来源: [Rust Reference — Structs](https://doc.rust-lang.org/reference/items/structs.html) · [TRPL — Using Structs](https://doc.rust-lang.org/book/ch05-00-structs.html)]
+
 ### C
 
 #### `const` / `const fn`
@@ -176,6 +178,8 @@ let p2 = p1;  // p1 仍可用（Copy）
 **关联**: Send · Sync · CSP
 **深入**: [`01_concurrency.md`](../03_advanced/01_concurrency.md)
 
+[来源: [Rust Reference — const and static](https://doc.rust-lang.org/reference/items/constant-items.html) · [TRPL — Constants](https://doc.rust-lang.org/book/ch03-01-variables-and-mutability.html#constants)]
+
 ### D
 
 #### `Drop` Trait
@@ -201,6 +205,8 @@ impl Drop for MyType {
 **常见错误**: `dyn Trait` 要求 Trait 是对象安全的（无泛型方法、无 Self: Sized bound）
 **关联**: enum + match · 静态/动态分发 · vtable
 **深入**: [`04_type_system.md`](../01_foundation/04_type_system.md)
+
+[来源: [Rust Reference — Drop](https://doc.rust-lang.org/reference/destructors.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 ### E
 
@@ -344,6 +350,8 @@ fn make_iter() -> impl Iterator<Item = i32> {
 | `Mutex<T>` | ✅ | 锁 | 多线程互斥 |
 | `RwLock<T>` | ✅ | 锁 | 多读单写 |
 | `Atomic*` | ✅ | 硬件指令 | 整数/指针的原子操作 |
+
+[来源: [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html) · [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)]
 
 **深入**: [`03_memory_management.md`](../02_intermediate/03_memory_management.md)
 
@@ -524,6 +532,8 @@ let val = may_fail()?;  // ? 传播错误
 **关联**: 并发 · 所有权 · 数据竞争
 **深入**: [`01_concurrency.md`](../03_advanced/01_concurrency.md)
 
+[来源: [Rust Reference — Auto Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html) · [TRPL — Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]
+
 #### `Sized` / `?Sized`
 
 **定义**: `Sized` 标记编译期已知大小的类型；`?Sized` 允许动态大小类型（DST）
@@ -652,6 +662,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 | **E0658** | feature is unstable | 使用了不稳定特性 | 添加 `#![feature(...)]` 或使用稳定替代 | [03_evolution](../07_future/03_evolution.md) |
 | **E0716** | temporary value dropped while borrowed | 临时值的引用被延长 | 将临时值绑定到变量 | [03_lifetimes](../01_foundation/03_lifetimes.md) |
 
+[来源: [Rust Reference — Compiler Errors](https://doc.rust-lang.org/error_codes/) · [TRPL — Appendix: Error Codes](https://doc.rust-lang.org/book/appendix-02-operators.html)]
+
 ---
 
 ## 三、模式选择决策树（速查版）
@@ -680,6 +692,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
       └─ 编译期计算 → const generics / const fn
 ```
 
+[来源: [TRPL — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rust Reference — Interior Mutability](https://doc.rust-lang.org/reference/interior-mutability.html)]
+
 ---
 
 ## 四、跨语言对照速查
@@ -699,14 +713,28 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 | `Send/Sync` | — | — | — | — |
 | `unsafe` | 默认开放 | `sun.misc.Unsafe` | `unsafe` | `unsafePerformIO` |
 
+[来源: [Wikipedia — Comparison of Programming Languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) · [TRPL — Appendix](https://doc.rust-lang.org/book/appendix-03-derivable-traits.html)]
+
 ---
 
 > **深入阅读**: 本速查的完整理论背景见 [`semantic_space.md`](./semantic_space.md) §4（等价表达的语义保持）；系统学习路径见 [`learning_guide.md`](./learning_guide.md)。
 ---
 
-> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/)
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Rust Standard Library](https://doc.rust-lang.org/std/), [Rust Async Book](https://rust-lang.github.io/async-book/), [Cargo Book](https://doc.rust-lang.org/cargo/)
 >
-> **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
+> **速查来源索引**
+>
+> | 来源 | 链接 |
+> |:---|:---|
+> | Rust Reference | [doc.rust-lang.org/reference](https://doc.rust-lang.org/reference/) |
+> | TRPL | [doc.rust-lang.org/book](https://doc.rust-lang.org/book/) |
+> | Rustonomicon | [doc.rust-lang.org/nomicon](https://doc.rust-lang.org/nomicon/) |
+> | Rust Standard Library | [doc.rust-lang.org/std](https://doc.rust-lang.org/std/) |
+> | Rust Async Book | [rust-lang.github.io/async-book](https://rust-lang.github.io/async-book/) |
+> | Cargo Book | [doc.rust-lang.org/cargo](https://doc.rust-lang.org/cargo/) |
+> | Wikipedia — PL Comparison | [en.wikipedia.org/wiki/Comparison_of_programming_languages](https://en.wikipedia.org/wiki/Comparison_of_programming_languages) |
+>
+> **权威来源对齐变更日志**: 2026-05-22 批量补充来源标注（Rust Reference、TRPL、Rustonomicon、标准库、Wikipedia 等） [来源: Authority Source Sprint Batch 8]
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)

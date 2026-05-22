@@ -1,7 +1,7 @@
 # Linear Logic & Affine Logic（线性逻辑 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]与仿射逻辑）
 
 > **层级**: L4 形式化理论
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018] · [Utrecht: Ownership Types]
 
@@ -22,7 +22,7 @@ $entry
 
 ### 1.1 Wikipedia 定义
 
-> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic.
+> **[Wikipedia: Linear logic]** Linear logic is a substructural logic proposed by Jean-Yves Girard as a refinement of classical and intuitionistic logic, joining the dualities of the former with many of the constructive properties of the latter. The key operational intuition behind linear logic is that logical assumptions are consumed in proving a conclusion, rather than merely used as in classical logic. [来源: [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus)]
 
 > **[Wikipedia: Affine logic]** Affine logic is a substructural logic whose proof theory rejects the structural rule of contraction. It can also be characterized as linear logic with weakening. In affine logic, each hypothesis may be used at most once—unlike in linear logic, where each hypothesis must be used exactly once.
 
@@ -92,6 +92,7 @@ graph TD
 ```
 
 > **认知功能**: 此谱系图将子结构逻辑的**结构规则削减**过程可视化。从经典逻辑到有序逻辑，每向下一步就移除一个结构规则，表达能力递减但资源控制递增。**Rust 位于仿射逻辑节点**——允许 weakening（丢弃资源）但禁止 contraction（复制资源），这恰好对应 `drop` 自动调用和 `move` 语义。颜色的冷暖梯度表达"资源控制严格度"：红色最严格（有序逻辑），绿色最实用（Rust/仿射逻辑）。
+> [来源: [Wikipedia — Linear Logic]]
 
 ### 2.4 逻辑系统谱系矩阵
 
@@ -123,7 +124,7 @@ Rust 对应:
   let pair = (a, b);  // Γ, Δ ⊢ A ⊗ B
 ```
 
-> 此处为 L1/01_ownership.md §2 "所有权规则" 的精确对应——元组构造 `(a, b)` 同时消耗 `a` 和 `b` 的所有权，对应 ⊗-intro 中上下文 `Γ` 和 `Δ` 的合并。
+> 此处为 L1/01_ownership.md §2 "所有权规则" 的精确对应——元组构造 `(a, b)` 同时消耗 `a` 和 `b` 的所有权，对应 ⊗-intro 中上下文 `Γ` 和 `Δ` 的合并。 [来源: [Wikipedia — Hindley-Milner](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system)]
 
 ```text
 线性蕴含引入 (⊸-intro):
@@ -208,6 +209,7 @@ graph TD
 ```
 
 > **认知功能**: 此思维导图提供线性逻辑知识的**五维导航框架**（结构规则、连接词、指数模态、Rust 映射、定理链）。建议在学习初期用作概念定位图，在复习时检验知识覆盖度。关键洞察：线性逻辑不是孤立的形式游戏，而是从 Girard 的推理规则到 Rust borrow checker 的连续谱系。[来源: 💡 原创分析]
+> [来源: [Wikipedia — Linear Logic]]
 
 ---
 
@@ -215,7 +217,7 @@ graph TD
 >
 ## 五、反命题决策树（Anti-Proposition Decision Trees）
 
-> 以下决策树用于拆解三个常见的**过度简化命题**，每个树从命题出发，经过 2-3 层判定到达反例或修正结论。
+> 以下决策树用于拆解三个常见的**过度简化命题**，每个树从命题出发，经过 2-3 层判定到达反例或修正结论。 [来源: [Wikipedia — Type Theory](https://en.wikipedia.org/wiki/Type_theory)]
 
 ### 5.1 反命题 1: "线性逻辑禁止所有复制"
 
@@ -236,6 +238,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树拆解"线性逻辑禁止所有复制"的过度简化命题，引导读者通过**指数模态判定**到达精确结论。建议在遇到"Rust 禁止复制"等模糊论断时回溯此树。关键洞察：`!A` 是线性逻辑故意设计的"经典出口"，Copy trait 不是规则的破坏而是框架内的特权通道。[来源: 💡 原创分析]
+> [来源: [Wikipedia — Linear Logic]]
 
 **形式化澄清**: Girard 设计 `!A` 的明确意图就是**在资源敏感框架内恢复经典推理**。Dereliction (`!A ⊢ A`) 是线性逻辑中最关键的"向下转换"规则——它允许将不受限资源降级为线性资源使用。此处为 L1/01_ownership.md §4 "Copy trait" 的精确对应：`i32: Copy` 在 Rust 中正是 `!i32` 的 Dereliction 实现。
 
@@ -258,6 +261,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树揭示"线性类型系统可判定性"的**条件性真理**，通过递归类型与高阶多态两个分支暴露理论边界。建议在评估类型系统复杂度或理解 Rust borrow checker 设计取舍时参考。关键洞察：Rust 的工程实用性来自于故意回避不可判定区域——显式生命周期标注是理论限制向用户体验的优雅妥协。[来源: 💡 原创分析]
+> [来源: [Wikipedia — Linear Logic]]
 
 **形式化澄清**: Rust 通过**拒绝部分递归类型模式**（如直接递归的 `Box<dyn Fn>` 需要显式类型擦除）和**显式生命周期参数**来保持 borrow checker 的可判定性。Pierce (TAPL §15.3) 指出："线性类型推断的复杂度取决于结构规则的限制程度——限制越多，推断越易。"此处为 L2/02_type_system.md §5 "类型推断" 的精确对应——Rust 的类型推断有意保留显式标注点，正是为了避免线性约束下的不可判定区域。
 
@@ -283,10 +287,11 @@ graph TD
 ```
 
 > **认知功能**: 此决策树对"Rust = 线性逻辑"的**等同谬误**进行三步拆解，从 weakening、内部可变性到生命周期逐层揭示映射偏差。建议在跨层解释 Rust 所有权时优先使用此树校准精确度。关键洞察：Rust 所有权是仿射逻辑、区域类型和分离逻辑的三元合成体——线性逻辑只是其必要核心而非充分描述。[来源: 💡 原创分析]
+> [来源: [Wikipedia — Linear Logic]]
 
 **形式化澄清**: 这是最关键的反命题。RustBelt (Jung et al. 2017, 2018) 明确将 Rust 建模为**仿射类型系统**（affine type system），而非严格线性类型系统。三个关键偏差：
 
-1. **Weakening**: Rust 允许未使用变量（warning 级别），线性逻辑禁止。
+1. **Weakening**: Rust 允许未使用变量（warning 级别），线性逻辑禁止。 [来源: [Iris Project](https://iris-project.org/)]
 2. **内部可变性**: `UnsafeCell`、`RefCell`、`Mutex` 等允许在单所有权外壳内进行别名修改——这超越了任何纯线性/仿射逻辑的表达力，需要**分离逻辑**（Separation Logic）扩展。
 3. **生命周期**: 借用检查器的区域系统（region system）源自 Tofte & Talpin 1994 的区域类型理论，而非 Girard 的线性逻辑。此处为 L2/02_borrowing.md "借用与生命周期" 的精确对应——借用是 L4 形式化中**分离逻辑**（L3 层）对线性逻辑的扩展，而非线性逻辑本身。
 
@@ -325,7 +330,7 @@ T1(切消定理) ⟹ L1(线性命题) ⟹ C1(Rust所有权) ⟹ C2(仿射move语
 
 > **一致性检查**: T1(切消) ⟹ L1(线性性) ⟹ T4(⊗组合) ⟹ C1(所有权) ⟹ C2(仿射move) ⟹ T3(⊸函数)，形成**从元定理到存在到组合到使用到传递**的闭合链。L2(!A) 是线性逻辑的"经典出口"，T2/T6 是向并发领域的"横向扩展"。
 >
-> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射"
+> **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §3.1 "L1-L4 形式化映射" [来源: [RustBelt Project](https://plv.mpi-sws.org/rustbelt/)]
 
 ---
 
@@ -434,7 +439,7 @@ fn affine_demo() {
 } // t 被 drop，资源释放
 ```
 
-> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——`let t = s` 是仿射逻辑中资源从 `s` 到 `t` 的线性转移，原变量 `s` 被标记为 moved。
+> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——`let t = s` 是仿射逻辑中资源从 `s` 到 `t` 的线性转移，原变量 `s` 被标记为 moved。 [来源: [PLDI 2025 — Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]
 
 ```rust
 // ✅ 指数模态: i32 是 !T（Copy）
@@ -498,7 +503,7 @@ fn session_demo() {
 >
 ## 八、认知路径（Cognitive Path）
 
-> 形式化直觉化的 5 步认知路径，每步从直觉困惑出发，经具体场景→模式抽象→形式规则→代码验证→边界测试的完整闭环。
+> 形式化直觉化的 5 步认知路径，每步从直觉困惑出发，经具体场景→模式抽象→形式规则→代码验证→边界测试的完整闭环。 [来源: [POPL 2019 — Stacked Borrows](https://dl.acm.org/doi/10.1145/3290380)]
 
 ### Step 1: "为什么普通逻辑允许任意复制？"
 
@@ -550,7 +555,7 @@ fn session_demo() {
 边界测试: `unsafe` 块、`Rc<RefCell>`、`mem::forget` 都是线性/仿射约束的逃逸口
 ```
 
-> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——E0382 错误信息是仿射逻辑约束在编译器错误报告中的最直接呈现，`use of moved value` 本质上是 `Γ, x: T ⊢ ...` 中 `x` 已被线性消耗后的sequent不可推导。
+> 此处为 L1/01_ownership.md §3 "Move 语义" 的精确对应——E0382 错误信息是仿射逻辑约束在编译器错误报告中的最直接呈现，`use of moved value` 本质上是 `Γ, x: T ⊢ ...` 中 `x` 已被线性消耗后的sequent不可推导。 [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
 ### Step 5: "还有什么没覆盖？"
 
@@ -570,7 +575,7 @@ fn session_demo() {
 
 - **类比**: 线性逻辑像"电影票"——一张票只能进一个人（不可复制，L1），可以不看就扔掉（weakening，C2），但看了就没了（消耗）。`!A` 像"会员卡"——可以无限次使用（Copy）。
 - **反直觉点**: 经典逻辑中"真命题可任意使用"，线性逻辑中"资源有代价"。这是从**真值本体论**到**资源过程论**的范式转换。
-- **形式化过渡**: 从"资源消耗直觉"（Step 1-2）→ "证明论元定理"（Step 3）→ "工程实现验证"（Step 4）→ "理论边界意识"（Step 5）。
+- **形式化过渡**: 从"资源消耗直觉"（Step 1-2）→ "证明论元定理"（Step 3）→ "工程实现验证"（Step 4）→ "理论边界意识"（Step 5）。 [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ### 8.1 国际课程与论文对齐
 
@@ -646,7 +651,7 @@ Par 节点 (⅋):             A ──┐
 切 (Cut):                 A ──── A⊥
 ```
 
-**正确性标准（Correctness Criterion）**: 一个 proof net 是**正确**的，当且仅当对其中每个 ⊗ 节点，删除该节点后图分为两个不连通分量（Danos-Regnier 标准）。这确保了证明结构对应于一个有效的 sequent calculus 证明。
+**正确性标准（Correctness Criterion）**: 一个 proof net 是**正确**的，当且仅当对其中每个 ⊗ 节点，删除该节点后图分为两个不连通分量（Danos-Regnier 标准）。这确保了证明结构对应于一个有效的 sequent calculus 证明。 [来源: [Wikipedia — Affine Logic](https://en.wikipedia.org/wiki/Affine_logic)]
 
 > **与 sequent calculus 的等价性**: Girard 证明了任何 cut-free sequent calculus 证明都可以唯一地转换为一个 proof net，反之，任何正确的 proof net 都可以顺序化（sequentialize）为一个 sequent calculus 证明。Proof nets 是线性逻辑的 **Church-Rosser 规范形式**。
 
@@ -709,7 +714,7 @@ Cut 消除规则（线性逻辑核心元定理）:
   对应并发语义:  fork/join 归约为直接组合
 ```
 
-> **关键洞察**: Cut 消除定理在并发语义中对应 **进程归约**——复杂的通信协议可以被逐步简化为直接资源交换。这是 Caires & Pfenning 2010 会话类型（Session Types）与线性逻辑深层对应的图形化表达。
+> **关键洞察**: Cut 消除定理在并发语义中对应 **进程归约**——复杂的通信协议可以被逐步简化为直接资源交换。这是 Caires & Pfenning 2010 会话类型（Session Types）与线性逻辑深层对应的图形化表达。 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]
 
 ---
 

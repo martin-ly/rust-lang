@@ -211,6 +211,7 @@ graph TD
 ```
 
 > **认知功能**: 概念拓扑图——将内存管理的多维机制（所有权模型 × 可变性模式）可视化为层次化概念网络。读者应将其作为"认知地图"，在面临具体设计问题时快速定位所需机制（如"需要共享+可变"→ `Rc<RefCell<T>>`）。关键洞察：Stack/Heap 只是起点，真正的设计决策发生在智能指针与内部可变性的交叉组合空间。[来源: 💡 原创分析]
+> [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 > **过渡到定理推理链**: 思维导图呈现了内存管理的概念拓扑，但缺乏严格的逻辑推导关系。下一节通过"⟹"标注的定理链，将 Box 所有权、Rc/Arc 共享安全、RefCell 运行时检查等核心命题形式化为可验证的推理网络。
 
@@ -629,6 +630,7 @@ graph TD
 ```
 
 > **认知功能**: 反命题诊断树——通过分类决策将"智能指针安全性"拆解为可遍历的检查路径。读者可按实际使用的指针类型逐层排查：用 RefCell 时检查借用规则、用 Rc 时检查循环引用、用 Box 时检查是否触及 unsafe 边界。关键洞察：没有一种智能指针是"绝对安全"的，安全保证的层级随抽象降低而递减。[来源: 💡 原创分析]
+> [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 **四层分析**:
 
@@ -665,6 +667,7 @@ graph TD
 ```
 
 > **认知功能**: 语义边界标定器——精确标定 Rust "内存安全"与"无内存泄漏"之间的语义鸿沟。读者应以此纠正直觉误区：Rust 保证无 use-after-free 和 double-free，但循环引用、`mem::forget`、`Box::leak` 均为 Safe Rust 中的合法泄漏。关键洞察：泄漏是设计取舍而非缺陷——排除泄漏需要 GC 或更强的类型约束，Rust 选择将泄漏排除在 unsafe 定义之外。[来源: 💡 原创分析]
+> [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 **四层分析**:
 
@@ -698,6 +701,7 @@ graph TD
 ```
 
 > **认知功能**: 等价性辨析图——揭示 RefCell 与编译期借用检查在"安全性等价"背后的多维差异。读者在编译失败考虑回退到 RefCell 时，应评估：是否单线程、性能是否敏感、错误是否可承受 panic。关键洞察：RefCell 是"安全的妥协"而非"免费的替代"——它以运行时 panic 风险和计数开销换取编译期无法证明的灵活性。[来源: 💡 原创分析]
+> [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 **四层分析**:
 
@@ -734,6 +738,7 @@ graph TD
 ```
 
 > **认知功能**: 并发安全决策树——区分"内存安全"（无数据竞争）与"并发正确性"（无死锁、无 poisoning）两个层次。读者设计多线程共享状态时，应以此图为检查清单：排查锁嵌套顺序、panic 处理策略、锁粒度合理性。关键洞察：Arc<Mutex<T>> 的线程安全是有条件的——它阻止数据竞争，但死锁属于不可编译期判定（Halting Problem）的工程问题，需通过锁顺序约定与 try_lock 来缓解。[来源: 💡 原创分析]
+> [来源: [TRPL — Memory Management](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
 
 **四层分析**:
 

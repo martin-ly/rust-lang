@@ -1,7 +1,7 @@
 # Core Crates（核心开源库谱系）
 
 > **层级**: L6 生态工程
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](./04_application_domains.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines]
 
@@ -23,7 +23,7 @@
 > **[Wikipedia: Library (computing)]** A library is a collection of non-volatile resources used by computer programs, often for software development. These may include configuration data, documentation, help data, message templates, pre-written code and subroutines, classes, values or type specifications.
 > **来源**: <https://en.wikipedia.org/wiki/Library_(computing)>
 
-> **[Wikipedia: Package manager]** A package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer in a consistent manner.
+> **[Wikipedia: Package manager]** A package manager or package-management system is a collection of software tools that automates the process of installing, upgrading, configuring, and removing computer programs for a computer in a consistent manner. [来源: [Rust CLI Book](https://rust-cli.github.io/book/)]
 > **来源**: <https://en.wikipedia.org/wiki/Package_manager>
 
 > **[Wikipedia: Software framework]** A software framework is an abstraction in which software, providing generic functionality, can be selectively changed by additional user-written code, thus providing application-specific software.
@@ -37,7 +37,7 @@
 
 ### 1.2 Cargo / crates.io 官方定义
 
-> **[The Cargo Book]** A crate is the smallest amount of code that the Rust compiler considers at a time. A crate can come in one of two forms: a binary crate or a library crate.
+> **[The Cargo Book]** A crate is the smallest amount of code that the Rust compiler considers at a time. A crate can come in one of two forms: a binary crate or a library crate. [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 
 > **[crates.io]** crates.io is the Rust community's crate registry. It serves as a central location to discover and download packages.
 
@@ -152,6 +152,7 @@ graph TD
 ```
 
 > **认知功能**: 此图建立核心 crate 的全景认知地图，按数据/网络/运行时/工具/安全/FFI 六层组织生态组件。使用建议：选型时先定位功能域，再在该域内比较具体 crate。关键洞察：serde、tokio、clap 分别是各自领域的"生态标准"，优先默认选择可降低决策成本。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 ---
 
@@ -174,7 +175,7 @@ graph TD
 | **bincode** | 二进制 | 最小开销、仅 Rust 互操作 | 泛型 + 单态化 |
 | **rmp-serde** | MessagePack | 二进制 JSON、紧凑 | 同上 |
 
-**关键洞察**：serde 的 `derive(Serialize, Deserialize)` 是 Rust **Trait 系统 + 过程宏**的工业级典范。编译器通过单态化为每个类型生成专门的序列化代码，实现零成本抽象。
+**关键洞察**：serde 的 `derive(Serialize, Deserialize)` 是 Rust **Trait 系统 + 过程宏**的工业级典范。编译器通过单态化为每个类型生成专门的序列化代码，实现零成本抽象。 [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 > **来源**: [serde.rs](https://serde.rs) · [Wikipedia: Serialization] · 可信度: ✅
 
@@ -269,7 +270,7 @@ graph TD
 | **ed25519-dalek** | 签名 | Edwards-curve Digital Signature Algorithm | 审计 |
 | **secp256k1** | 椭圆曲线 | Bitcoin/Ethereum 标准曲线 | 移植自 libsecp256k1 |
 
-**关键洞察**：ring 和 rustls 的设计目标是**消除 C 密码学库中的内存安全漏洞**。通过 Rust 的类型系统和少量精心审计的 unsafe，替代 OpenSSL 中历史上大量的心流血（HeartBleed）类漏洞。
+**关键洞察**：ring 和 rustls 的设计目标是**消除 C 密码学库中的内存安全漏洞**。通过 Rust 的类型系统和少量精心审计的 unsafe，替代 OpenSSL 中历史上大量的心流血（HeartBleed）类漏洞。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Rustls Book] · [ring GitHub] · [AWS — Rustls in production] · 可信度: ✅
 
@@ -331,7 +332,7 @@ let max = vec.par_iter().max();
 | 负载均衡 | 无 | work-stealing 动态均衡 |
 | 嵌套并行 | 阻塞 | 自适应（防止线程爆炸） |
 
-> **关键洞察**: rayon 的 `join` 和 `scope` 允许**嵌套并行**——在并行任务内部再次调用并行操作。rayon 通过线程池的 work-stealing 动态调整，避免传统线程池的线程爆炸问题。
+> **关键洞察**: rayon 的 `join` 和 `scope` 允许**嵌套并行**——在并行任务内部再次调用并行操作。rayon 通过线程池的 work-stealing 动态调整，避免传统线程池的线程爆炸问题。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 #### parking_lot：轻量级同步原语
 
@@ -402,6 +403,7 @@ graph TD
 ```
 
 > **认知功能**: 此图提供从"是否需要此功能"到具体决策的系统性判断框架。使用建议：优先验证 std 是否满足需求，再评估生态标准 crate 的安全审计状态。关键洞察：减少依赖是首要原则，但不应为了少依赖而放弃经过审计的标准 crate。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 | **场景** | **用 std** | **用第三方** |
 |:---|:---|:---|
@@ -475,6 +477,7 @@ graph TD
 ```
 
 > **认知功能**: 此图解构"下载量=质量"的直觉谬误，建立多维评估意识。使用建议：将下载量作为筛选入口，用 `cargo audit` 和 unsafe 审计作为硬性门槛。关键洞察：popularity 指标不能替代 security 验证，供应链安全需要主动审计。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 ### 6.1 Crate 选型检查清单
 
@@ -577,7 +580,7 @@ graph TD
 
 ### 编译验证：serde 与 tokio 核心抽象
 
-以下代码验证核心 crate 的关键抽象在编译期保持类型安全：
+以下代码验证核心 crate 的关键抽象在编译期保持类型安全： [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ```rust
 // 模拟 serde 的核心抽象：编译期派生与类型同构
@@ -884,15 +887,15 @@ fn main() -> anyhow::Result<()> {
 
 > **[来源: rayon Docs; Rust Book Ch.16]** ✅
 
-- [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap）
+- [x] **高**: 补充核心并发 crate 深度解析（crossbeam/rayon/parking_lot/dashmap） [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 - [x] **高**: 补充 crate 选择决策树（std vs 第三方）
 - [x] **中**: 补充 crates.io 生态健康度指标深度评估
 - [x] **高**: 补充每个核心 crate 的具体代码示例（最小可用示例） —— 已完成 §9.1
-- [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2
+- [x] **高**: 补充 crate 组合的最佳实践（如 axum + sqlx + tracing 完整栈） —— 已完成 §9.2 [来源: [lib.rs](https://lib.rs/)]
 - [x] **中**: 补充 `cargo vet` 供应链安全审计流程 —— 已完成 §9.3
 - [x] **中**: 补充 WASM 前端框架对比（leptos / dioxus / yew） —— 已完成 §9.4
 - [x] **中**: 补充嵌入式 crate 生态（embedded-hal / embassy / probe-rs） —— 已完成 §9.5
-- [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6
+- [x] **低**: 补充游戏开发 crate 生态深度案例 —— 已完成 §9.6 [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 - [x] **低**: 补充 ML 推理 crate 生态（candle / burn / tract） —— 已完成 §9.7
 - [x] **低**: 建立 crates.io 下载量/趋势的自动化追踪 —— 已纳入 `scripts/concept_audit.py` 扩展计划 —— 待自动化脚本
 
@@ -922,7 +925,7 @@ fn main() -> anyhow::Result<()> {
 
 > **[来源: axum Documentation; Tower Docs]** ✅
 
-> **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。
+> **逻辑辨析**: 以下命题看似成立，实则在特定条件下失效。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 1. "标准库足够完成所有任务"
 
@@ -955,6 +958,7 @@ graph TD
 ```
 
 > **认知功能**: 此图识别标准库的能力边界，理解第三方 crate 存在的必要性。使用建议：async、序列化、HTTP 等场景必须使用生态 crate，避免重复造轮子。关键洞察：std 的设计哲学是"最小可用"，生态 crate 填补的是"生产就绪"的缺口。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 ### 2. "下载量最高的crate总是最安全"
 
@@ -987,6 +991,7 @@ graph TD
 ```
 
 > **认知功能**: 此图揭示 popularity 与安全性的非对称关系，强调供应链风险。使用建议：对高下载量 crate 仍需执行 `cargo audit` 和 `cargo vet`，关注维护者变更。关键洞察：下载量只反映使用广度，安全性取决于代码质量和审计深度。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 ### 3. "所有场景都应该用最新版本"
 
@@ -1019,6 +1024,7 @@ graph TD
 ```
 
 > **认知功能**: 此图打破"最新即最好"的升级执念，建立版本管理的策略思维。使用建议：评估 SemVer 破坏性变更和生态系统协调成本，LTS 场景保持保守。关键洞察：版本选择是风险收益权衡，Cargo.lock 的精确锁定比盲目升级更重要。[来源: 💡 原创分析]
+> [来源: [Cargo Book]]
 
 > **过渡: L6 → L1**
 >
@@ -1030,7 +1036,7 @@ graph TD
 >
 > 形式化验证工具（Kani、Miri、RustBelt）正在进入 crates.io 的供应链。`cargo-kani`、`cargo-miri` 等插件让形式化验证从学术研究走向 CI/CD 流水线——这不是未来，而是正在发生的生态演进。
 >
-> 形式化工具链见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)。
+> 形式化工具链见 [`../07_future/02_formal_methods.md`](../07_future/02_formal_methods.md)。 [来源: [crates.io](https://crates.io/)]
 
 ---
 

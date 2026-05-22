@@ -1,7 +1,7 @@
 # Public/Private Dependencies：可见性控制的工程化
 
 > **Bloom 层级**: 分析 → 评价
-> **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。
+> **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **对标**: Java 模块系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
 
 ---
@@ -60,7 +60,7 @@ graph TD
     style 隔离模式 fill:#e8f5e9
 ```
 
-> **认知路径**: 此对比图展示依赖泄漏问题的本质。**泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。**隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。这是 Rust 从"默认开放"向"显式契约"演进的关键机制。
+> **认知路径**: 此对比图展示依赖泄漏问题的本质。**泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。**隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。这是 Rust 从"默认开放"向"显式契约"演进的关键机制。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **认知功能**: 将依赖泄漏抽象问题具象为 crate 关系拓扑。**功能定位**：作为引入依赖时的可见性边界预判框架，左侧为反模式，右侧为目标架构。**使用建议**：代码审查时对照公共 API 边界验证 `public` 标记，默认采用隔离模式。**关键洞察**：`public = false` 是编译期合约——它将实现细节与接口契约在语义层面分离，使内部升级不再意外破坏下游编译。[来源: 💡 原创分析]
 
@@ -85,7 +85,7 @@ pub use B::SomeType;  // ❌ 泄漏：B 的类型进入 A 的公共 API
 pub fn foo(x: B::SomeType) -> B::AnotherType { /* ... */ }
 ```
 
-此时，任何依赖 `A` 的 crate `C` **隐式依赖**了 `B` 的公共接口：
+此时，任何依赖 `A` 的 crate `C` **隐式依赖**了 `B` 的公共接口： [来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 ```rust,ignore
 // Crate C
@@ -118,7 +118,7 @@ B = { version = "1.0", public = true }
 C = { version = "2.0", public = false }
 ```
 
-> **Nightly 状态**: Cargo 1.96 nightly 已列出 `public` 字段的最低 MSRV 要求；完整编译器可见性检查仍待实现。
+> **Nightly 状态**: Cargo 1.96 nightly 已列出 `public` 字段的最低 MSRV 要求；完整编译器可见性检查仍待实现。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 ### 2.1 编译器可见性规则
 
@@ -131,7 +131,7 @@ pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 
 编译器通过 `public` 标记实施**边界检查**：
 
 - `public = true` 的依赖类型可出现在 `pub` / `pub(crate)` API 中
-- `public = false` 的依赖类型**仅限**私有模块使用
+- `public = false` 的依赖类型**仅限**私有模块使用 [来源: [lib.rs](https://lib.rs/)]
 
 > [来源: [RFC 3516 §Semantics](https://github.com/rust-lang/rfcs/pull/3516) — 编译器在解析 `use` 语句和类型检查阶段验证公共 API 中是否出现私有依赖的类型。
 
@@ -145,7 +145,7 @@ A ──public──► B ──public──► D
 
 - `A` 的下游可见 `B` 和 `D`（公共依赖链传递）
 - `A` 的下游**不可见** `C`（私有依赖隔离）
-- `B` 若将 `D` 标记为 `public = false`，则 `A` 的下游仍不可见 `D`
+- `B` 若将 `D` 标记为 `public = false`，则 `A` 的下游仍不可见 `D` [来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 ---
 
@@ -206,7 +206,7 @@ flowchart TD
     style Newtype fill:#ffe0b2
 ```
 
-> **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。
+> **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 4.2 默认策略
 
@@ -272,7 +272,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ## 六、来源与延伸阅读
 
 - **一级**: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516)（目标 2026 稳定）
-- **一级**: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html)
+- **一级**: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) [来源: [crates.io](https://crates.io/)]
 - **二级**: [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) — Public/Private Deps Tracking Issue
 - **三级**: [cargo-semver-checks 文档](https://docs.rs/cargo-semver-checks) — SemVer 自动化检查工具
 

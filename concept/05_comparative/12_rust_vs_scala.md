@@ -81,6 +81,7 @@
 
 > **类型洞察**: **Scala 的类型系统更表达丰富（HKT），Rust 的类型系统更安全（所有权）**——两者代表了不同的设计哲学。
 > [来源: [Scala Type System](https://docs.scala-lang.org/scala3/book/types-intro.html)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -128,6 +129,7 @@
 
 > **匹配洞察**: **Scala 的模式匹配更灵活，Rust 的模式匹配更高效**——两者都提供编译期穷尽性检查。
 > [来源: [Scala Pattern Matching](https://docs.scala-lang.org/tour/pattern-matching.html)]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ---
 
@@ -174,6 +176,7 @@
 
 > **并发洞察**: **Scala 的 Actor 模型适合分布式，Rust 的所有权模型适合系统级**——两者各有主战场。
 > [来源: [Akka](https://akka.io/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -398,6 +401,7 @@ graph TD
 
 > **认知功能**: **高阶类型/大数据选 Scala，内存安全/系统编程选 Rust**——两者在不同领域不可替代。
 > [来源: [Scala vs Rust Discussion](https://users.scala-lang.org/)]
+> [来源: [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language))]
 
 ---
 
@@ -489,6 +493,7 @@ graph TD
 | [Scala Book](https://docs.scala-lang.org/scala3/book/introduction.html) | ✅ 一级 | Scala 3 书 |
 | [Akka](https://akka.io/) | ✅ 二级 | Actor 框架 |
 | [Scala vs Rust](https://users.scala-lang.org/) | ✅ 三级 | 社区讨论 |
+| [Wikipedia — Scala](https://en.wikipedia.org/wiki/Scala_(programming_language)) | ✅ 一级 | 语言概述 |
 
 ---
 

@@ -60,6 +60,7 @@ let s2 = s;  // ❌ 移动后 ptr_to_data 指向旧地址！
 
 > **核心问题**: Rust 默认允许移动值，但自引用结构体移动后，内部指针变成**悬空指针**（dangling pointer）。这在 C++ 中也是常见问题（move 后自引用失效）。
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html)]
 
 ---
 
@@ -86,6 +87,7 @@ graph TD
 > **使用建议**: 绝大多数 Rust 代码不需要直接操作 Pin。Pin 主要在 async/await、生成器和特定 unsafe 代码中使用。
 > **关键洞察**: Pin 不是"阻止移动"，而是**"承诺不移动"**——如果违反了承诺（通过 unsafe），结果是 UB。
 > [来源: [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html)]
+> [来源: [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349)]
 
 ---
 
@@ -117,6 +119,7 @@ Unpin trait 的语义:
 
 > **Unpin 洞察**: Unpin 是 Rust 的**默认安全网**——大多数类型自动 Unpin，只有在真正需要 Pin 保证的类型（如 Future）才不实现 Unpin。这避免了 Pin 污染普通代码。
 > [来源: [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html)]
+> [来源: [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)]
 
 ---
 
@@ -153,6 +156,7 @@ impl<P: Deref> Pin<P> {
 
 > **API 设计**: Pin 的 API 区分了**Unpin**和**!Unpin**类型——Unpin 类型操作安全且无需 unsafe；!Unpin 类型需要 unsafe 创建，但创建后的操作是安全的。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
+> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
 
 ---
 
@@ -193,6 +197,7 @@ impl SelfReferential {
 
 > **构建模式**: 自引用结构体的安全构建需要**两步初始化**——先在堆上分配（Box），然后 Pin，最后初始化自引用字段。`pin-project` crate 简化了这一过程。
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [pin-project Documentation](https://docs.rs/pin-project/latest/pin_project/)]
 
 ---
 
@@ -224,6 +229,7 @@ async/await 与 Pin 的关系:
 
 > **async 洞察**: Pin 是 async/await 的**底层基石**——没有 Pin，异步状态机就无法安全地持有跨 await 点的引用。Pin 使 Rust 的 async 实现既安全又零成本。
 > [来源: [Async Working Group — Pin](https://rust-lang.github.io/async-fundamentals-initiative/)]
+> [来源: [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html)]
 
 ---
 
@@ -266,6 +272,7 @@ async/await 与 Pin 的关系:
 
 > **最佳实践**: 绝大多数场景使用 `Box::pin` 或 `pin_mut!` 宏；手写 unsafe Pin 代码只在实现自定义 Future/Generator 时需要。
 > [来源: [pin-project Documentation](https://docs.rs/pin-project/latest/pin_project/)]
+> [来源: [Rust API Guidelines — Pin](https://rust-lang.github.io/api-guidelines/predictability.html)]
 
 ---
 
@@ -288,6 +295,7 @@ graph TD
 > **使用建议**: 优先避免自引用设计；必须自引用时用 Pin；需要移动时重新设计（如使用索引替代指针）。
 > **关键洞察**: Pin 是**最后手段**而非首选方案。大多数"需要自引用"的场景可以通过重新设计消除自引用需求。
 > [来源: [Rust API Guidelines — Pin](https://rust-lang.github.io/api-guidelines/predictability.html)]
+> [来源: [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)]
 
 ---
 
@@ -319,6 +327,7 @@ graph TD
 
 > **边界要点**: Pin 的边界主要与**内部可变性**和**Drop**交互相关。这些边界反映了 Pin 契约的复杂性——它不仅是一个类型包装器，更是一个**内存地址稳定性的语义保证**。
 > [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
+> [来源: [Rust Reference — Pin](https://doc.rust-lang.org/reference/types/pin.html)]
 
 ---
 
@@ -367,6 +376,7 @@ graph TD
 
 > **陷阱总结**: Pin 的大多数陷阱源于**对 Unpin/!Unpin 的误解**和**不安全的投影操作**。理解 Pin 的语义契约是避免这些陷阱的关键。
 > [来源: [Rust Compiler Error Index](https://doc.rust-lang.org/error_codes/index.html)]
+> [来源: [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html)]
 
 ---
 
@@ -379,6 +389,9 @@ graph TD
 | [Rustonomicon — Pinning](https://doc.rust-lang.org/nomicon/pinning.html) | ✅ 一级 | 深入 Pin 分析 |
 | [RFC 2349 — Pin](https://github.com/rust-lang/rfcs/pull/2349) | ✅ 一级 | Pin 设计 RFC |
 | [pin-project](https://docs.rs/pin-project/latest/pin_project/) | ✅ 一级 | 自引用结构体辅助 crate |
+| [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html) | ✅ 一级 | 标准库 API |
+| [std::marker::Unpin](https://doc.rust-lang.org/std/marker/trait.Unpin.html) | ✅ 一级 | Unpin 标准库 API |
+| [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | async 状态机 RFC |
 
 ---
 

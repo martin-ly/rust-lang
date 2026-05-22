@@ -77,6 +77,7 @@ Future 的本质:
 
 > **认知功能**: **Future 是"可暂停的函数"**——编译器将 async/await 转换为状态机，使代码看起来像同步但执行是异步的。
 > [来源: [Async Rust Book — Future](https://rust-lang.github.io/async-book/02_execution/02_future.html)]
+> [来源: [Rust Reference — Async/Await](https://doc.rust-lang.org/reference/expressions/await-expr.html)]
 
 ---
 
@@ -122,6 +123,7 @@ let future = Box::pin(async { /* ... */ });
 
 > **Pin 洞察**: **Pin 是 Rust async 的基石**——它解决了状态机自引用问题，使编译器生成的状态机可以安全地跨越 await 点。
 > [来源: [std::pin::Pin](https://doc.rust-lang.org/std/pin/struct.Pin.html)]
+> [来源: [RFC 2592 — Pin](https://rust-lang.github.io/rfcs/2592-pin.html)]
 
 ---
 
@@ -160,6 +162,7 @@ Waker: 异步通知机制
 
 > **Waker 洞察**: **Waker 是"按需唤醒"的优化**——没有它，执行器需要不断轮询所有任务（忙等待）。
 > [来源: [tokio.rs — Runtime](https://tokio.rs/tokio/topics/runtime)]
+> [来源: [Rust Reference — Waker](https://doc.rust-lang.org/std/task/struct.Waker.html)]
 
 ---
 
@@ -235,6 +238,7 @@ async fn process_stream() {
 
 > **并发洞察**: **tokio::join! 和 tokio::select! 是异步并发的核心原语**——它们对应同步并发中的 join 和 select 系统调用。
 > [来源: [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html)]
+> [来源: [Rust Async Book — Concurrency](https://rust-lang.github.io/async-book/06_multiple_futures/02_join.html)]
 
 ---
 
@@ -296,6 +300,7 @@ async fn auto_cancel() {
 
 > **取消洞察**: **Rust 的取消通过 Drop 传播**——当 Future 被 drop，所有已获取的资源自动清理，无需显式取消回调。
 > [来源: [Async Cancellation](https://rust-lang.github.io/async-book/08_workarounds/03_cancel_safe.html)]
+> [来源: [Tokio Docs — Cancellation](https://tokio.rs/tokio/topics/cancellation)]
 
 ---
 
@@ -361,6 +366,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 
 > **背压洞察**: **有界通道是异步背压的核心机制**——它使系统在生产者和消费者之间自动平衡负载。
 > [来源: [tokio::sync::mpsc](https://docs.rs/tokio/latest/tokio/sync/mpsc/index.html)]
+> [来源: [TRPL — Channels](https://doc.rust-lang.org/book/ch16-02-message-passing.html)]
 
 ---
 
@@ -402,6 +408,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 
 > **模式矩阵**: Rust 异步的**核心模式可以归纳为 6 类**——覆盖从简单并发到复杂流处理的大部分场景。
 > [来源: [Async Patterns](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
+> [来源: [Tokio Docs — Patterns](https://tokio.rs/tokio/topics)]
 
 ---
 
@@ -425,6 +432,7 @@ graph TD
 
 > **认知功能**: **async 适合 IO 密集型，CPU 密集型需要 spawn_blocking 或 rayon**——混合使用是关键。
 > [来源: [Async Rust Book — CPU Bound](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+> [来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
 ---
 
@@ -464,6 +472,7 @@ graph TD
 
 > **边界要点**: 异步的边界主要与**递归**、**调用栈**、**取消安全**、**调试**和**生态**相关。
 > [来源: [Async Rust Book — Workarounds](https://rust-lang.github.io/async-book/09_workarounds/00_intro.html)]
+> [来源: [Rust Reference — Async Blocks](https://doc.rust-lang.org/reference/expressions/block-expr.html#async-blocks)]
 
 ---
 
@@ -516,6 +525,7 @@ graph TD
 
 > **陷阱总结**: 异步陷阱主要与**阻塞**、**await 遗漏**、**取消安全**、**Send 约束**和**背压**相关。
 > [来源: [Common Async Mistakes](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
+> [来源: [Tokio Docs — Common Mistakes](https://tokio.rs/tokio/topics)]
 
 ---
 
@@ -528,6 +538,9 @@ graph TD
 | [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) | ✅ 一级 | 设计 RFC |
 | [TRPL — Async](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ 一级 | 基础教程 |
 | [tokio::select!](https://docs.rs/tokio/latest/tokio/macro.select.html) | ✅ 一级 | 并发原语 |
+| [Rust Reference — Await](https://doc.rust-lang.org/reference/expressions/await-expr.html) | ✅ 一级 | 语言参考 |
+| [RFC 2592 — Pin](https://rust-lang.github.io/rfcs/2592-pin.html) | ✅ 一级 | Pin 设计 RFC |
+| [std::task::Waker](https://doc.rust-lang.org/std/task/struct.Waker.html) | ✅ 一级 | 标准库 API |
 
 ---
 

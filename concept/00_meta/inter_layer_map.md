@@ -244,6 +244,8 @@ graph LR
 | Move/Copy | 内存管理 (Box) | Unsafe (MaybeUninit) | 线性逻辑 ⊗ /  weakening | **部分映射** | Copy = weakening 特例 |
 | — | Send/Sync (Marker Trait) | 并发安全保证 | 并发分离逻辑 (CSL) | **同态** | Send/Sync ⟹ CSL 资源安全 |
 
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/) · [TRPL](https://doc.rust-lang.org/book/) · [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+
 ### 3.2 L4-L3-L2 定理传递链
 
 ```text
@@ -310,6 +312,8 @@ graph LR
     来源: ✅ [Jung et al. POPL 2017] · ✅ [RustBelt website]
 ```
 
+[来源: [TRPL](https://doc.rust-lang.org/book/) · [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Wikipedia — Memory Safety](https://en.wikipedia.org/wiki/Memory_safety)]
+
 ### 4.2 链 2: 类型系统一致性
 
 ```text
@@ -334,6 +338,8 @@ graph LR
     来源: ✅ [TRPL Ch10] · ✅ [RFC: Trait Objects]
 ```
 
+[来源: [TAPL (Pierce, 2002)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [RFC 3417 — GATs](https://rust-lang.github.io/rfcs/3417-where-where.html)]
+
 ### 4.3 链 3: 异步正确性
 
 ```text
@@ -357,6 +363,8 @@ graph LR
     精度: ⚠️ 部分映射（Rust 的 Pin 比线性逻辑的位置稳定性更弱）
     来源: ✅ [RFC 2349: Pin] · [PLDI 2024: RefinedRust] · [Jung et al. 2018: Iris]
 ```
+
+[来源: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-01-futures-and-syntax.html) · [Rust Async Book](https://rust-lang.github.io/async-book/) · [RFC 2349 — Pin](https://rust-lang.github.io/rfcs/2349-pin.html) · [Wikipedia — Linear Temporal Logic](https://en.wikipedia.org/wiki/Linear_temporal_logic)]
 
 ---
 
@@ -403,6 +411,8 @@ L4 形式化保证的边界:
 └─────────────────────────────────────────────────────────────┘
 ```
 
+[来源: [Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)]
+
 ### 6.2 跨层断裂点
 
 ```text
@@ -438,6 +448,8 @@ L4 形式化保证的边界:
 | **L6 生态** | 应用 + 评价 | 实施、测试、优化 | "如何设计可维护的 Cargo workspace？" |
 | **L7 前沿** | 创造 | 假设、设计、预测 | "AI 生成代码需要怎样的类型系统？" |
 
+[来源: [Wikipedia — Bloom's Taxonomy](https://en.wikipedia.org/wiki/Bloom%27s_taxonomy) · [TRPL](https://doc.rust-lang.org/book/)]
+
 ---
 
 ## 八、来源与可信度
@@ -453,6 +465,10 @@ L4 形式化保证的边界:
 | 单态化 ⟹ 零成本 | Stroustrup (C++) · Rust RFC | ✅ |
 | GATs 可判定性限制 | Rust RFC · 类型论研究 | ⚠️ |
 | AI × Rust 约束关系 | — | 💡 原创推断 |
+| Effects System 映射 | Rust Effects Initiative · Yoshua Wuyts 2024 | ⚠️ 研究中 |
+| HRTB ↔ 全称量词 | RFC 387 · Rust Reference | ✅ |
+| Tree Borrows 模型 | Jung et al. arXiv 2023 | ✅ |
+| RefinedRust | PLDI 2024 | ✅ |
 
 ---
 
