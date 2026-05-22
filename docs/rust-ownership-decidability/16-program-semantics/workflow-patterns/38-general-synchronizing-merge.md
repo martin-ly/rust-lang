@@ -289,29 +289,17 @@ impl<T: Send + Clone + 'static> GeneralSynchronizingMerge<T> {
         let mut visited = HashSet::new();
         let mut reachable = HashSet::new();
         let mut stack = vec![merge_node];
-
         while let Some(node_id) = stack.pop() {
-            if visited.contains(&node_id) {
-                continue;
-            }
-            visited.insert(node_id);
-
+            if !visited.insert(node_id) { continue; }
             for (from, to) in &self.graph.edges {
                 if *to == node_id {
                     if let Some(node) = self.graph.nodes.get(from) {
                         match node {
-                            WorkflowNode::Task { id, .. } => {
-                                reachable.insert(*id);
-                            }
-                            WorkflowNode::Split { .. } | WorkflowNode::Merge { .. } => {
-                                stack.push(*from);
-                            }
-                            WorkflowNode::Loop { body, .. } => {
-                                stack.push(*body);
-                            }
+                            WorkflowNode::Task { id, .. } => { reachable.insert(*id); }
+                            WorkflowNode::Split { .. } | WorkflowNode::Merge { .. } => { stack.push(*from); }
+                            WorkflowNode::Loop { body, .. } => { stack.push(*body); }
                             WorkflowNode::Condition { true_branch, false_branch, .. } => {
-                                stack.push(*true_branch);
-                                stack.push(*false_branch);
+                                stack.push(*true_branch); stack.push(*false_branch);
                             }
                         }
                     }
@@ -319,15 +307,12 @@ impl<T: Send + Clone + 'static> GeneralSynchronizingMerge<T> {
                 }
             }
         }
-
         reachable
     }
 
     /// 执行动态分支检测与同步
     pub async fn execute<F, Fut>(
-        &self,
-        merge_node: NodeId,
-        branches: HashMap<BranchId, F>,
+        &self, merge_node: NodeId, branches: HashMap<BranchId, F>,
     ) -> HashMap<BranchId, T>
     where
         F: FnOnce() -> Fut + Send + 'static,
@@ -340,48 +325,28 @@ impl<T: Send + Clone + 'static> GeneralSynchronizingMerge<T> {
         let mut handles = Vec::new();
 
         for (id, branch) in branches {
-            if !reachable.contains(&id) {
-                continue;
-            }
+            if !reachable.contains(&id) { continue; }
             let completed = Arc::clone(&completed);
             let results = Arc::clone(&self.results);
             let completed_branches = Arc::clone(&self.completed_branches);
             let tx = tx.clone();
-
             let handle = tokio::spawn(async move {
                 let result = branch().await;
-                {
-                    let mut guard = results.lock().await;
-                    guard.insert(id, result);
-                }
-                {
-                    let mut guard = completed_branches.lock().await;
-                    guard.insert(id);
-                }
+                results.lock().await.insert(id, result);
+                completed_branches.lock().await.insert(id);
                 completed.fetch_add(1, Ordering::SeqCst);
                 let _ = tx.send(id).await;
             });
-
             handles.push(handle);
         }
 
         drop(tx);
-
         let mut done_count = 0;
         while done_count < total {
-            if let Some(_id) = rx.recv().await {
-                done_count += 1;
-            } else {
-                break;
-            }
+            if rx.recv().await.is_some() { done_count += 1; } else { break; }
         }
-
-        for handle in handles {
-            let _ = handle.await;
-        }
-
-        let guard = self.results.lock().await;
-        guard.clone()
+        for handle in handles { let _ = handle.await; }
+        self.results.lock().await.clone()
     }
 }
 ```
