@@ -405,3 +405,10 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```

@@ -449,6 +449,37 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn main() {
+    let mut config = std::collections::HashMap::new();
+    config.insert("host", "0.0.0.0");
+    config.insert("port", "8080");
+    for (k, v) in &config {
+        println!("{} = {}", k, v);
+    }
+}
+```
+
+```rust
+fn health_check() -> &'static str {
+    "ok"
+}
+
+fn main() {
+    println!("{}", health_check());
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

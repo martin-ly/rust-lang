@@ -393,6 +393,16 @@ fn main() {
 }
 ```
 
+
+```rust
+fn main() {
+    let a = vec![1, 2, 3];
+    let b = vec![4, 5, 6];
+    let sum: i32 = a.iter().zip(b.iter()).map(|(x, y)| x + y).sum();
+    println!("{}", sum); // 21
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 

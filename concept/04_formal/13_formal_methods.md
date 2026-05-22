@@ -452,6 +452,15 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let x = 42;
+    assert!(x > 0);
+    println!("verified: {}", x);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

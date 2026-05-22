@@ -602,6 +602,58 @@ graph LR
 
 ---
 
+
+```rust
+use std::collections::{BTreeMap, HashMap};
+
+fn main() {
+    let mut map = BTreeMap::new();
+    map.insert("a", 1);
+    map.insert("b", 2);
+    println!("{:?}", map);
+}
+```
+
+### 编译验证示例
+
+```rust
+use std::collections::BTreeMap;
+
+fn main() {
+    let mut map = BTreeMap::new();
+    map.insert(3, "c");
+    map.insert(1, "a");
+    map.insert(2, "b");
+    let keys: Vec<_> = map.keys().cloned().collect();
+    assert_eq!(keys, vec![1, 2, 3]);
+}
+```
+
+```rust
+use std::collections::VecDeque;
+
+fn main() {
+    let mut deque = VecDeque::new();
+    deque.push_front(1);
+    deque.push_back(2);
+    assert_eq!(deque.pop_front(), Some(1));
+    assert_eq!(deque.pop_back(), Some(2));
+}
+```
+
+```rust
+use std::collections::BinaryHeap;
+
+fn main() {
+    let mut heap = BinaryHeap::new();
+    heap.push(3);
+    heap.push(1);
+    heap.push(2);
+    assert_eq!(heap.pop(), Some(3));
+    assert_eq!(heap.pop(), Some(2));
+}
+```
+
 ## 相关概念文件
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

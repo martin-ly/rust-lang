@@ -451,6 +451,36 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let mut data = vec![1, 2, 3];
+    data.push(4);
+    println!("{:?}", data);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn main() {
+    let mut data = vec![1, 2, 3];
+    let x = &data[0];
+    println!("{}", x);
+    data.push(4);
+    println!("{:?}", data);
+}
+```
+
+```rust
+fn main() {
+    let mut s = String::from("hello");
+    let r = &s;
+    println!("{}", r);
+    drop(s);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

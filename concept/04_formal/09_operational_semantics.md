@@ -429,6 +429,54 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let x = 5;
+    let y = &x;
+    println!("{}", y);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn step(expr: &str) -> &str {
+    match expr {
+        "1 + 2 + 3" => "3 + 3",
+        "3 + 3" => "6",
+        _ => expr,
+    }
+}
+
+fn main() {
+    let mut e = "1 + 2 + 3";
+    while e != "6" {
+        e = step(e);
+        println!("step: {}", e);
+    }
+}
+```
+
+```rust
+fn eval(ctx: &str, val: i32) -> String {
+    format!("{}[{}]", ctx, val)
+}
+
+fn main() {
+    println!("{}", eval("1 + ", 2));
+}
+```
+
+```rust
+fn main() {
+    let mut state = 0;
+    let update = |s: &mut i32| *s += 1;
+    update(&mut state);
+    println!("{}", state);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

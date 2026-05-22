@@ -368,6 +368,44 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    use std::collections::HashMap;
+    let mut m = HashMap::new();
+    m.insert("key", 1);
+    println!("{:?}", m);
+}
+```
+
+### 编译验证示例
+
+```rust
+mod inner {
+    pub fn helper() -> i32 { 42 }
+}
+
+use inner::helper;
+
+fn main() {
+    assert_eq!(helper(), 42);
+}
+```
+
+```rust
+mod a {
+    pub mod b {
+        pub fn f() -> i32 { 1 }
+    }
+}
+
+use crate::a::b::f;
+
+fn main() {
+    assert_eq!(f(), 1);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

@@ -657,6 +657,14 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let msg = "Hello from Rust";
+    println!("{}", msg);
+}
+```
+
 ## 相关概念文件
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

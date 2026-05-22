@@ -373,6 +373,41 @@ fn main() {
 }
 ```
 
+### 编译验证示例
+
+```rust
+fn main() {
+    let identity = |x| x;
+    assert_eq!(identity(5), 5);
+
+    let add = |x, y| x + y;
+    assert_eq!(add(2, 3), 5);
+}
+```
+
+```rust
+fn main() {
+    let mut counter = 0;
+    let mut inc = || { counter += 1; counter };
+    assert_eq!(inc(), 1);
+    assert_eq!(inc(), 2);
+}
+```
+
+```rust
+fn apply<F>(f: F, x: i32) -> i32
+where
+    F: Fn(i32) -> i32,
+{
+    f(x)
+}
+
+fn main() {
+    let result = apply(|x| x * 2, 5);
+    assert_eq!(result, 10);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

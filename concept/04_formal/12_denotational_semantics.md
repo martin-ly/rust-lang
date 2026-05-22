@@ -344,6 +344,19 @@ fn main() {
 }
 ```
 
+
+```rust
+fn main() {
+    let compose = |f: fn(i32) -> i32, g: fn(i32) -> i32| {
+        move |x: i32| f(g(x))
+    };
+    let add1 = |x: i32| x + 1;
+    let double = |x: i32| x * 2;
+    let h = compose(add1, double);
+    println!("{}", h(5)); // 11
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

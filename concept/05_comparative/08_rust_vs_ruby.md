@@ -467,6 +467,38 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let msg = "Hello from Rust";
+    println!("{}", msg);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn process(data: Vec<i32>) -> Vec<i32> {
+    data.into_iter().map(|x| x * 2).collect()
+}
+
+fn main() {
+    let nums = vec![1, 2, 3, 4, 5];
+    let doubled = process(nums);
+    println!("{:?}", doubled);
+}
+```
+
+```rust
+fn main() {
+    let mut sum = 0;
+    for i in 1..=5 {
+        sum += i;
+    }
+    println!("{}", sum);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

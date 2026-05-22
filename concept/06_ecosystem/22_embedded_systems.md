@@ -487,6 +487,39 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```
+
+### 编译验证示例
+
+```rust
+use core::sync::atomic::{AtomicU32, Ordering};
+
+static COUNTER: AtomicU32 = AtomicU32::new(0);
+
+fn main() {
+    COUNTER.fetch_add(1, Ordering::Relaxed);
+    println!("{}", COUNTER.load(Ordering::Relaxed));
+}
+```
+
+```rust
+#[repr(C)]
+struct Register {
+    value: u32,
+}
+
+fn main() {
+    let reg = Register { value: 0xDEADBEEF };
+    println!("{:x}", reg.value);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

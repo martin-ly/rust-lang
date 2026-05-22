@@ -488,6 +488,36 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn main() {
+    let rows: Vec<(i32, String)> = vec![
+        (1, "Alice".to_string()),
+        (2, "Bob".to_string()),
+    ];
+    let names: Vec<String> = rows.iter().map(|r| r.1.clone()).collect();
+    println!("{:?}", names);
+}
+```
+
+```rust
+fn main() {
+    let mut conn = std::collections::HashMap::new();
+    conn.insert("user", "alice");
+    conn.insert("pass", "secret");
+    println!("{:?}", conn.get("user"));
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

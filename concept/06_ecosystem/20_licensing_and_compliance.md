@@ -460,6 +460,14 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

@@ -1,0 +1,574 @@
+# 元编程：Rust 的编译期代码生成与变换
+
+> **Bloom 层级**: 分析 → 评价
+> **定位**: 深入分析 Rust **元编程（Metaprogramming）**的技术体系——从声明式宏的模式匹配、过程宏的语法树操作，到 derive 宏的代码生成、quote/syn 工具体系，揭示 Rust 如何在编译期实现类型安全的代码变换同时保持宏卫生性（Hygiene）。
+> **前置概念**: [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) · [Macro Patterns](./17_macro_patterns.md)
+> **后置概念**: [Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](./13_dsl_and_embedding.md)
+
+---
+
+> **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) · [syn crate](https://docs.rs/syn/latest/syn/) · [quote crate](https://docs.rs/quote/latest/quote/) · [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) · [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html) · [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) · [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro) · [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)
+
+## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+
+- [元编程：Rust 的编译期代码生成与变换](#元编程rust-的编译期代码生成与变换)
+  - [📑 目录](#-目录)
+  - [一、核心概念](#一核心概念)
+    - [1.1 元编程的抽象层次](#11-元编程的抽象层次)
+    - [1.2 声明宏：模式匹配驱动](#12-声明宏模式匹配驱动)
+    - [1.3 过程宏：语法树操作](#13-过程宏语法树操作)
+  - [二、技术细节](#二技术细节)
+    - [2.1 syn/quote/proc-macro2 工具体系](#21-synquoteproc-macro2-工具体系)
+    - [2.2 Derive 宏的实现机制](#22-derive-宏的实现机制)
+    - [2.3 宏卫生性的形式化](#23-宏卫生性的形式化)
+  - [三、元编程技术矩阵](#三元编程技术矩阵)
+  - [四、反命题与边界分析](#四反命题与边界分析)
+    - [4.1 反命题树](#41-反命题树)
+    - [4.2 边界极限](#42-边界极限)
+  - [五、常见陷阱](#五常见陷阱)
+  - [六、来源与延伸阅读](#六来源与延伸阅读)
+  - [相关概念文件](#相关概念文件)
+
+---
+
+## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 1.1 元编程的抽象层次
+
+```text
+Rust 元编程的抽象层次（从低到高）:
+
+  层级 1: 文本替换 (C 预处理器)
+  ├── #define MAX 100
+  ├── 无类型安全，无作用域保护
+  └── 宏与代码完全混合，不可调试
+
+  层级 2: 语法树模式匹配 (macro_rules!)
+  ├── 操作 Token Tree，非纯文本
+  ├── 编译期展开后参与类型检查
+  ├── 卫生性保证：内部标识符不捕获外部
+  └── 例: vec!, println!, assert!
+
+  层级 3: 过程宏 (Proc Macro)
+  ├── 完整 AST/TokenStream 操作
+  ├── 使用 Rust 代码实现（编译为动态库）
+  ├── 分三类: Derive / Attribute / Function-like
+  └── 例: serde::Serialize, tracing::instrument
+
+  层级 4: 编译期计算 (const eval)
+  ├── const fn, const generics
+  ├── 类型系统内计算，非代码生成
+  └── 趋势: 替代部分宏使用场景
+
+  层级对比:
+  ┌─────────────┬─────────────┬─────────────┬─────────────┐
+  │ 特性        │ C 宏        │ macro_rules!│ Proc Macro  │
+  ├─────────────┼─────────────┼─────────────┼─────────────┤
+  │ 操作层面    │ 文本        │ Token Tree  │ AST/Token   │
+  │ 类型安全    │ ❌          │ 展开后检查  │ 展开后检查  │
+  │ 卫生性      │ ❌          │ ✅          │ ✅          │
+  │ 调试支持    │ ❌          │ ⚠️          │ ⚠️          │
+  │ 实现复杂度  │ 低          │ 中          │ 高          │
+  │ IDE 支持    │ 无          │ 有限        │ 较好        │
+  └─────────────┴─────────────┴─────────────┴─────────────┘
+```
+
+> **认知功能**: Rust 元编程的**层次递进设计**——从 C 的文本替换到 macro_rules! 的语法树匹配再到过程宏的完整 AST 操作，每一步都增加了表达能力同时保持类型安全和卫生性。
+> [来源: [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming)]
+> [来源: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html)]
+
+---
+
+### 1.2 声明宏：模式匹配驱动
+
+```text
+macro_rules! 的核心机制:
+
+  匹配原理:
+  ├── 输入被解析为 Token Tree（括号/方括号/花括号嵌套）
+  ├── 模式使用 $name:fragment 捕获片段
+  ├── 片段类型: expr, ty, pat, stmt, block, item, ident, path...
+  ├── 重复: $($x:expr),* 匹配零或多个逗号分隔表达式
+  └── 递归: 宏可以调用自身实现循环
+
+  卫生性机制:
+  ├── 隐式 gensym: 宏内部 let x = ... 不会捕获外部 x
+  ├── 标记（Syntax Context）: 每个标识符携带"出生地"信息
+  └── 对比 C: #define swap(a, b) { int t = a; a = b; b = t; }
+         // C 宏的 `t` 可能与外部变量冲突！
+
+  编译流程:
+  源码 Token Stream → macro_rules! 模式匹配 → 展开 Token Stream
+         ↓                                              ↓
+    词法分析                                    继续解析/类型检查
+```
+
+```rust,ignore
+// 声明宏示例：递归实现 vec! 变体
+// [来源: The Little Book of Rust Macros]
+macro_rules! my_vec {
+    // 基础: my_vec![] => Vec::new()
+    () => {
+        Vec::new()
+    };
+    // 单元素: my_vec![$x] => { let mut v = Vec::new(); v.push($x); v }
+    ($x:expr) => {{
+        let mut v = Vec::new();
+        v.push($x);
+        v
+    }};
+    // 多元素: my_vec![$x, $($rest),*]
+    ($x:expr, $($rest:expr),+) => {{
+        let mut v = my_vec!($($rest),+);
+        v.push($x);
+        v
+    }};
+}
+```
+
+> **认知功能**: macro_rules! 的**核心设计哲学**——用模式匹配而非命令式代码描述"输入长什么样、输出应该长什么样"，这与函数式编程中的模式匹配一脉相承。
+> [来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]
+> [来源: [Rust Reference — Macros by Example](https://doc.rust-lang.org/reference/macros-by-example.html)]
+
+---
+
+### 1.3 过程宏：语法树操作
+
+```text
+过程宏的三类形态:
+
+  派生宏 (Derive Macro):
+  ├── #[derive(Serialize)]
+  ├── 输入: struct/enum 定义
+  ├── 输出: trait 实现代码
+  └── 例: Debug, Clone, serde::Serialize, thiserror::Error
+
+  属性宏 (Attribute Macro):
+  ├── #[tracing::instrument]
+  ├── 输入: 任意 item + 属性参数
+  ├── 输出: 修改/替换后的 item
+  └── 例: tokio::main, rocket::get, axum::debug_handler
+
+  函数式宏 (Function-like Proc Macro):
+  ├── sql!("SELECT * FROM users")
+  ├── 输入: 任意 TokenStream
+  ├── 输出: 任意 TokenStream
+  └── 例: format_args!, concat!, 自定义 sql!, json!
+
+  共同特征:
+  ├── 编译为 proc-macro crate type（动态库）
+  ├── 在编译器展开阶段执行
+  ├── 只能操作 TokenStream，不能直接访问类型信息
+  └── 错误通过 proc_macro::Diagnostic / compile_error! 报告
+```
+
+> **认知功能**: 过程宏的**三类划分**对应三种"代码变换意图"——Derive 是"基于数据结构生成实现"，Attribute 是"基于元数据修改语义"，Function-like 是"自定义语法扩展"。
+> [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
+> [来源: [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
+
+---
+
+## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [syn crate docs](https://docs.rs/syn/latest/syn/)]
+
+### 2.1 syn/quote/proc-macro2 工具体系
+
+```text
+过程宏开发的三大支柱:
+
+  syn — 解析器:
+  ├── 将 TokenStream 解析为强类型 AST
+  ├── DeriveInput: 解析 struct/enum 定义
+  ├── ItemFn, ItemStruct, Expr, Type: 各类语法节点
+  ├── Feature flags: parsing, full, derive, visit, fold
+  └── 是 syn 的核心价值：把"token 序列"变成"可遍历的树"
+
+  quote — 代码生成:
+  ├── 使用模板语法生成 TokenStream
+  ├── #name: 插值已有变量
+  ├── #(#iter),*: 重复展开
+  └── 与 syn 配合使用：解析 → 变换 → 生成
+
+  proc-macro2 — 可测试的 TokenStream:
+  ├── 将编译器的 proc_macro 类型包装为可构造类型
+  ├── 可在单元测试中直接构造 TokenStream
+  ├── Span 信息保留，支持错误定位
+  └── 核心优势：proc_macro 只能在 proc-macro crate 中使用，
+      proc_macro2 可在任何 crate 中使用
+
+  工作流:
+  TokenStream (输入)
+       ↓ syn::parse
+  DeriveInput / ItemFn (AST)
+       ↓ 分析与变换
+  新的数据结构
+       ↓ quote!
+  TokenStream (输出)
+```
+
+```rust,ignore
+// Derive 宏示例骨架 [来源: syn docs]
+use proc_macro::TokenStream;
+use quote::quote;
+use syn::{parse_macro_input, DeriveInput};
+
+#[proc_macro_derive(MyDebug)]
+pub fn derive_my_debug(input: TokenStream) -> TokenStream {
+    let input = parse_macro_input!(input as DeriveInput);
+    let name = &input.ident;
+
+    let expanded = quote! {
+        impl std::fmt::Debug for #name {
+            fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                write!(f, "{} {{ ... }}", stringify!(#name))
+            }
+        }
+    };
+
+    TokenStream::from(expanded)
+}
+```
+
+> **认知功能**: syn/quote 的**互补设计**——syn 负责"理解代码"（解析），quote 负责"写出代码"（生成），两者结合使过程宏开发从"操作原始 token"提升到"操作语义结构"。
+> [来源: [quote crate docs](https://docs.rs/quote/latest/quote/)]
+> [来源: [proc-macro2 crate docs](https://docs.rs/proc-macro2/latest/proc_macro2/)]
+
+---
+
+### 2.2 Derive 宏的实现机制
+
+```text
+Derive 宏的编译器交互:
+
+  编译阶段:
+  1. 解析: 编译器解析 #[derive(Trait)] 所在 item
+  2. 分发: 编译器查找 proc_macro_derive 注册名称为 Trait 的宏
+  3. 调用: 将 item 的 TokenStream 传递给过程宏
+  4. 展开: 过程宏返回新的 TokenStream（通常是 impl 块）
+  5. 合并: 编译器将展开结果合并回 crate 的 AST
+
+  辅助属性 (Helper Attributes):
+  ├── #[serde(rename = "userName")] — 指导 derive 宏行为
+  ├── 过程宏通过 syn::Attribute 解析这些属性
+  └── 辅助属性本身通常不产生代码，只影响生成逻辑
+
+  编译时序约束:
+  ├── 过程宏 crate 必须先编译（host 平台）
+  ├── 依赖该宏的 crate 后编译（target 平台）
+  └── 因此过程宏不能访问被展开 crate 的类型信息
+```
+
+```mermaid
+sequenceDiagram
+    participant C as Compiler
+    participant PM as Proc Macro Crate
+    participant TS as TokenStream
+    C->>PM: 1. 加载 proc-macro 动态库
+    C->>TS: 2. 序列化 #[derive(X)] struct S {}
+    C->>PM: 3. 调用 derive_X(input_token_stream)
+    PM->>PM: 4. syn::parse → 分析 AST
+    PM->>PM: 5. quote! → 生成 impl 代码
+    PM->>C: 6. 返回输出 TokenStream
+    C->>C: 7. 合并展开结果到 crate AST
+    C->>C: 8. 继续类型检查与代码生成
+```
+
+> **认知功能**: Derive 宏的**编译时序限制**——过程宏在类型检查之前运行，因此只能基于语法结构（AST）生成代码，无法基于类型信息做决策。这是 Rust 宏系统与模板元编程（C++）的关键差异。
+> [来源: [Rust Reference — Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
+> [来源: [rustc Dev Guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)]
+
+---
+
+### 2.3 宏卫生性的形式化
+
+```text
+宏卫生性（Hygiene）的形式化理解:
+
+  问题起源:
+  ├── C 宏: #define swap(a,b) { int t=a; a=b; b=t; }
+  │   └── 如果调用处有 int t = 5;，宏内部的 t 会捕获外部变量！
+  ├── 这称为"变量捕获"或"名称污染"
+  └── 经典解决方案: 使用晦涩的变量名如 __swap_temp_123
+
+  Rust 的解决方案:
+  ├── 每个标识符携带 Span（语法上下文）
+  ├── 宏内部生成的标识符具有"宏内部上下文"
+  ├── 外部标识符具有"调用点上下文"
+  └── 不同上下文的同名标识符被视为不同符号
+
+  形式化类比:
+  ├── λ-演算中的 α-转换（alpha-conversion）
+  ├── 重命名绑定变量不改变程序语义
+  └── Rust 宏自动执行隐式 α-转换
+
+  边界案例:
+  ├── 显式传递的标识符: macro_rules! foo { ($x:ident) => { let $x = 1; } }
+  │   └── 此时 $x 使用调用者提供的上下文
+  ├── 字符串化: stringify!($x) 保留名称但丢失上下文
+  └── 混合卫生性: proc_macro2::Span::mixed_site() vs call_site()
+```
+
+> **认知功能**: 卫生性的**核心洞察**——Rust 不是"防止名称冲突"，而是通过为每个标识符附加"出生证明"（Span），使不同来源的同名标识符在语义上成为完全不同的实体。
+> [来源: [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro)]
+> [来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
+> [来源: [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html)]
+
+---
+
+## 三、元编程技术矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Cargo Book]]
+
+### 3.1 元编程技术选型矩阵
+
+| **场景** | **推荐技术** | **复杂度** | **维护性** | **替代方案** |
+|:---|:---|:---:|:---:|:---|
+| 简单代码重复消除 | macro_rules! | 低 | 高 | const fn（如适用） |
+| 数据结构派生实现 | Derive 宏 | 高 | 中 | 手动 impl / 泛型 |
+| 函数/方法增强（日志/度量） | Attribute 宏 | 高 | 中 | 泛型包装器 |
+| 嵌入式 DSL（SQL/JSON） | Function-like 宏 | 高 | 低 | 构建器模式 |
+| 编译期常量计算 | const fn / const eval | 低 | 极高 | 宏（不推荐） |
+| 条件编译 | cfg + cfg_if | 低 | 高 | macro_rules! |
+| 重复 trait 实现 | macro_rules! + 递归 | 中 | 中 | 泛型（受孤儿规则限制） |
+
+### 3.2 宏与 const eval 的演进趋势
+
+```text
+Rust 元编程的演进方向:
+
+  const fn 替代宏的场景（Rust 1.79+）:
+  ├── 编译期计算: const fn fib(n: usize) -> usize
+  ├── 常量泛型: [T; N] 的泛型操作
+  ├── const fn 中的循环和条件
+  └── 优势: 类型安全、IDE 支持好、错误信息清晰
+
+  宏仍然不可替代的场景:
+  ├── 语法扩展: vec![1, 2, 3] 的变参语法
+  ├── 派生代码生成: #[derive(Debug)]
+  ├── 条件编译的复杂逻辑
+  └── DSL 嵌入: sql!("SELECT ...")
+
+  未来: Macros 2.0 (macro 关键字)
+  ├── macro foo() { ... } 替代 macro_rules! foo { ... }
+  ├── 更好的模块系统集成
+  ├── 更强的类型感知
+  └── 状态: 实验性，未稳定
+```
+
+> **认知功能**: 元编程技术选型的**核心原则**——"能用 const fn 就不用宏，能用泛型就不用宏"——因为宏放弃了类型系统的保护，而 const eval 在编译期计算的同时保持类型安全。
+> [来源: [Rust RFC — const fn 演进](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md)]
+> [来源: [Rust Project Blog — Const Eval](https://blog.rust-lang.org/)]
+
+---
+
+## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+### 4.1 反命题树
+
+```text
+反命题 1: "宏是类型安全的"
+  └── ⚠️ 部分正确
+      ├── 宏本身不感知类型（在类型检查前展开）
+      ├── 展开后的代码受类型系统约束
+      ├── 错误可能映射到难以理解的宏内部位置
+      └── ✅ 正确表述: "宏展开后的代码是类型安全的，但宏定义本身无类型检查"
+> [来源: [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html)]
+
+反命题 2: "过程宏可以访问类型信息"
+  └── ❌ 否
+      ├── 过程宏接收的是 TokenStream，不是类型化 AST
+      ├── 无法知道变量类型、trait 实现情况
+      ├── 解析 syn::Type 只是语法层面的类型名，不是语义类型
+      └── ✅ 正确表述: "过程宏操作语法树，类型信息在宏展开后才可用"
+> [来源: [rustc Dev Guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html)]
+
+反命题 3: "卫生性完全消除了名称冲突"
+  └── ⚠️ 大部分情况
+      ├── 隐式生成的标识符不会冲突
+      ├── 显式传递的 ident 参数使用调用者上下文
+      ├── stringify! 生成的字符串无卫生性保护
+      └── ✅ 正确表述: "卫生性消除了意外捕获，但显式参数传递仍需注意"
+> [来源: [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
+```
+
+> **认知功能**: 反命题分析揭示了宏系统的**关键边界**——宏操作的是"语法"而非"语义"，这是宏强大与危险的根源：强大在于可以创造新语法，危险在于无法利用类型系统的安全保障。
+> [来源: [The Little Book of Rust Macros — Hygiene](https://veykril.github.io/tlborm/)]
+
+---
+
+### 4.2 边界极限
+
+```text
+边界 1: 递归宏深度
+  ├── 编译器对宏展开次数有限制
+  ├── 无限递归: macro_rules! infinite { () => { infinite!() }; }
+  └── 结果: error: recursion limit reached
+
+边界 2: TokenStream 的表达能力
+  ├── 过程宏不能生成新的 macro_rules!
+  ├── 不能修改 crate 边界外的代码
+  └── 极限: 宏是"局部变换"工具，不是"全局重构"工具
+
+边界 3: 编译时间开销
+  ├── 复杂过程宏（如 serde）显著增加编译时间
+  ├── syn 的 full feature 解析所有 Rust 语法，成本高
+  └── 极限: 在开发周期和运行时性能间权衡
+
+边界 4: IDE 支持
+  ├── 宏展开代码的跳转/补全支持有限
+  ├── proc_macro_span API 正在改善调试体验
+  └── 极限: 宏生成的代码对 IDE 是"黑盒"
+```
+
+> **认知功能**: 边界极限定义了元编程的**能力疆域**——理解"宏不能做什么"（访问类型信息、全局代码变换、无限递归）与理解"宏能做什么"同等重要。
+> [来源: [Rust Analyzer — Macro Expansion](https://rust-analyzer.github.io/manual.html#macro-expansion)]
+
+---
+
+## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
+
+```text
+陷阱 1: 宏中的错误信息定位
+  ❌ 在宏内部直接 panic!("invalid input")
+     // 错误指向宏定义位置，而非调用位置
+
+  ✅ 使用 syn::Error 或 proc_macro::Diagnostic
+     // return Err(syn::Error::new_spanned(input, "invalid input").into())
+     // 错误指向调用点的具体 token
+> [来源: [syn — Error Handling](https://docs.rs/syn/latest/syn/struct.Error.html)]
+
+陷阱 2:  hygiene 的意外行为
+  ❌ 期望宏内部变量与外部隔离，但通过 ident 参数绕过
+     // macro_rules! foo { ($x:ident) => { let $x = 1; } }
+     // foo!(existing_var); // 可能覆盖外部变量
+
+  ✅ 明确区分"宏生成标识符"和"调用者传入标识符"
+     // 内部变量使用内部上下文，参数使用调用者上下文
+> [来源: [Rust Reference — Hygiene](https://doc.rust-lang.org/reference/macros-by-example.html#hygiene)]
+
+陷阱 3: 重复模式中的尾随逗号
+  ❌ $($x:expr),* 不匹配 [1, 2, 3,]
+
+  ✅ 使用 $($x:expr),+ $(,)? 模式
+     // ,+ 匹配一个或多个
+     // $(,)? 可选尾随逗号
+> [来源: [The Little Book of Rust Macros — Repetition](https://veykril.github.io/tlborm/)]
+
+陷阱 4: 过程宏 crate 的依赖限制
+  ❌ 在 proc-macro crate 中依赖被展开 crate
+     // 循环依赖：A 依赖 proc-macro-B，B 依赖 A
+
+  ✅ 过程宏 crate 只能依赖其他非目标 crate
+     // 使用 dev-dependencies 在测试中引入被展开 crate
+> [来源: [Cargo Book — proc-macro](https://doc.rust-lang.org/cargo/reference/cargo-targets.html#proc-macro)]
+
+陷阱 5: 过度使用宏替代泛型
+  ❌ 为每个整数类型用宏生成相同实现
+     // macro_rules! impl_add { ($t:ty) => { ... } }
+     // impl_add!(i8); impl_add!(i16); ...
+
+  ✅ 优先使用泛型 + trait bound
+     // impl<T: Add<Output=T>> MyWrapper<T> { ... }
+     // 更少的代码，更好的错误信息
+> [来源: [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)]
+```
+
+> **陷阱总结**: 元编程的陷阱集中在**错误定位**、**卫生性理解**、**模式匹配细节**、**依赖限制**和**泛型替代**五个方面——每个陷阱都反映了"宏的语法层面操作"与"开发者的语义层面直觉"之间的鸿沟。
+> [来源: [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop)]
+
+---
+
+## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Cargo Book]]
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) | ✅ 一级 | 官方宏系统参考 |
+| [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) | ✅ 一级 | 官方教程宏章节 |
+| [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) | ✅ 一级 | 宏系统权威指南 |
+| [syn crate docs](https://docs.rs/syn/latest/syn/) | ✅ 一级 | AST 解析库 |
+| [quote crate docs](https://docs.rs/quote/latest/quote/) | ✅ 一级 | 代码生成库 |
+| [proc-macro2 crate docs](https://docs.rs/proc-macro2/latest/proc_macro2/) | ✅ 一级 | 可测试 TokenStream |
+| [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html) | ✅ 一级 | 宏系统演进 RFC |
+| [proc-macro Workshop](https://github.com/dtolnay/proc-macro-workshop) | ✅ 二级 | 过程宏练习 |
+| [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html) | ✅ 一级 | API 设计指南 |
+| [rustc Dev Guide — Macro Expansion](https://rustc-dev-guide.rust-lang.org/macro-expansion.html) | ✅ 一级 | 编译器宏展开 |
+| [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) | ✅ 三级 | 元编程概念 |
+| [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro) | ✅ 三级 | 卫生宏概念 |
+| [Rust Analyzer — Macro](https://rust-analyzer.github.io/manual.html#macro-expansion) | ✅ 二级 | IDE 宏展开支持 |
+| [RFC 911 — const fn](https://github.com/rust-lang/rfcs/blob/master/text/0911-const-fn.md) | ✅ 一级 | 常量函数 RFC |
+| [serde_derive 源码](https://github.com/serde-rs/serde) | ✅ 二级 | 工业级 Derive 宏参考 |
+
+---
+
+```mermaid
+graph TD
+    subgraph "声明宏"
+        A[TokenStream 输入] --> B{macro_rules! 模式匹配}
+        B -->|匹配成功| C[TokenStream 输出]
+        B -->|匹配失败| D[编译错误]
+        C --> E[类型检查]
+    end
+    subgraph "过程宏"
+        F[TokenStream 输入] --> G[syn::parse]
+        G --> H[DeriveInput/AST]
+        H --> I[变换逻辑]
+        I --> J[quote! 生成]
+        J --> K[TokenStream 输出]
+        K --> E
+    end
+    subgraph "运行时"
+        E --> L[代码生成]
+        L --> M[可执行文件]
+    end
+```
+
+## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+
+- [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) — 属性与声明宏基础
+- [Macro Patterns](./17_macro_patterns.md) — 宏的工程模式
+- [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏高级主题
+- [DSL](./13_dsl_and_embedding.md) — 领域特定语言嵌入
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Cargo Book](https://doc.rust-lang.org/cargo/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 9]
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成
+
+```rust
+macro_rules! say_hello {
+    () => {
+        println!("Hello, World!")
+    };
+}
+
+fn main() {
+    say_hello!();
+}
+```

@@ -670,3 +670,11 @@ fn check_overflow() {
     assert!(z < 2000);
 }
 ```
+
+```rust
+fn main() {
+    let x = 5;
+    assert_eq!(x * 2, 10);
+    println!("verified");
+}
+```

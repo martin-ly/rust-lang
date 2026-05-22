@@ -370,6 +370,37 @@ let x = 42;
 
 ---
 
+
+```rust
+fn main() {
+    let opt = Some(42);
+    if let Some(v) = opt {
+        println!("{}", v);
+    }
+}
+```
+
+### 编译验证示例
+
+```rust
+fn main() {
+    let x = Some(42);
+    assert!(matches!(x, Some(n) if n > 10));
+    assert!(!matches!(x, Some(n) if n > 100));
+
+    let y: Result<i32, &str> = Ok(7);
+    assert!(matches!(y, Ok(_)));
+}
+```
+
+```rust
+fn main() {
+    let msg = "hello";
+    assert!(matches!(msg, "hello"));
+    assert!(matches!(msg, "world" | "hello"));
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

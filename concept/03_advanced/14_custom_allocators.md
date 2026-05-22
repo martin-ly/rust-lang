@@ -424,6 +424,43 @@ unsafe impl GlobalAlloc for MyAllocator {
 static ALLOCATOR: MyAllocator = MyAllocator;
 ```
 
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3];
+    println!("capacity: {}", v.capacity());
+}
+```
+
+### 编译验证示例
+
+```rust
+use std::alloc::Layout;
+
+fn main() {
+    let layout = Layout::new::<u64>();
+    println!("size={}, align={}", layout.size(), layout.align());
+
+    let combined = Layout::new::<u32>()
+        .extend(Layout::new::<u64>()).unwrap()
+        .0;
+    println!("combined size={}", combined.size());
+}
+```
+
+```rust
+#[repr(C)]
+struct Point {
+    x: f64,
+    y: f64,
+}
+
+fn main() {
+    let p = Point { x: 1.0, y: 2.0 };
+    println!("size_of Point = {}", std::mem::size_of_val(&p));
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

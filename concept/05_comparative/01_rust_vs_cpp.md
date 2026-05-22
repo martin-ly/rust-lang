@@ -2076,3 +2076,13 @@ graph TD
 
 > **认知功能**: 批判性思维工具，通过反例检验「Rust 完全替代 C++」论断的适用边界。
 > [来源: [Wikipedia — C++](https://en.wikipedia.org/wiki/C%2B%2B)]
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    for i in &mut v {
+        *i *= 2;
+    }
+    println!("{:?}", v);
+}
+```

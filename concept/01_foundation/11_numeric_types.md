@@ -381,6 +381,14 @@ fn main() {
 }
 ```
 
+
+```rust
+fn main() {
+    let max_u8 = u8::MAX;
+    println!("{}", max_u8); // 255
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

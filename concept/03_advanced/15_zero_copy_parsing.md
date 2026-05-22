@@ -435,6 +435,33 @@ fn main() {
 }
 ```
 
+
+```rust
+fn main() {
+    let s = "hello";
+    let bytes = s.as_bytes();
+    println!("{:?}", bytes);
+}
+```
+
+### 编译验证示例
+
+```rust
+fn main() {
+    let data = b"hello world";
+    let s = std::str::from_utf8(data).unwrap();
+    println!("{}", s);
+}
+```
+
+```rust
+fn main() {
+    let bytes = &[0x01, 0x02, 0x00, 0x10];
+    let val = u32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]);
+    println!("{}", val);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

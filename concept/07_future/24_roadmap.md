@@ -697,6 +697,35 @@ graph TD
 
 ---
 
+### 编译验证示例
+
+```rust
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()
+}
+
+fn main() {
+    let sum: i32 = make_iter().sum();
+    println!("{}", sum);
+}
+```
+
+```rust
+#[non_exhaustive]
+pub enum Event { Click, KeyPress }
+
+fn handle(e: Event) -> &'static str {
+    match e {
+        Event::Click => "click",
+        Event::KeyPress => "key",
+    }
+}
+
+fn main() {
+    println!("{}", handle(Event::Click));
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

@@ -322,6 +322,14 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let feature = "preview";
+    println!("{}", feature);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

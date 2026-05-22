@@ -397,6 +397,61 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = vec![1, 2, 3];
+    println!("{:?}", data);
+}
+```
+
+### 编译验证示例
+
+```rust
+#[derive(Debug, Clone, Copy)]
+struct Vec2 {
+    x: f32,
+    y: f32,
+}
+
+impl Vec2 {
+    fn add(self, other: Vec2) -> Vec2 {
+        Vec2 { x: self.x + other.x, y: self.y + other.y }
+    }
+}
+
+fn main() {
+    let a = Vec2 { x: 1.0, y: 2.0 };
+    let b = Vec2 { x: 3.0, y: 4.0 };
+    println!("{:?}", a.add(b));
+}
+```
+
+```rust
+#[derive(Debug)]
+enum GameState {
+    Menu,
+    Playing { score: u32 },
+    GameOver,
+}
+
+fn main() {
+    let state = GameState::Playing { score: 100 };
+    println!("{:?}", state);
+}
+```
+
+```rust
+fn main() {
+    let mut positions = vec![(0.0, 0.0), (1.0, 2.0)];
+    for (x, y) in &mut positions {
+        *x += 1.0;
+        *y += 1.0;
+    }
+    println!("{:?}", positions);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

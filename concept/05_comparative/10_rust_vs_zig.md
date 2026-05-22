@@ -493,6 +493,41 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let msg = "Hello from Rust";
+    println!("{}", msg);
+}
+```
+
+### 编译验证示例
+
+```rust
+const fn make_array<const N: usize>() -> [i32; N] {
+    let mut arr = [0; N];
+    let mut i = 0;
+    while i < N {
+        arr[i] = i as i32;
+        i += 1;
+    }
+    arr
+}
+
+fn main() {
+    const ARR: [i32; 5] = make_array();
+    println!("{:?}", ARR);
+}
+```
+
+```rust
+fn main() {
+    let mut v = vec![1, 2, 3];
+    v.push(4);
+    println!("{:?}", v);
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

@@ -884,6 +884,41 @@ fn main() {
 
 ---
 
+### 编译验证示例
+
+```rust
+struct AiGenerated<T>(T);
+
+impl AiGenerated<String> {
+    fn parse_safe(s: &str) -> Option<Self> {
+        if s.len() < 1000 && s.is_ascii() {
+            Some(AiGenerated(s.to_string()))
+        } else {
+            None
+        }
+    }
+}
+
+fn main() {
+    let data = AiGenerated::parse_safe("hello ai").unwrap();
+    println!("{}", data.0);
+}
+```
+
+```rust
+fn validate_input(s: &str) -> Result<&str, &'static str> {
+    if s.is_ascii() && s.len() < 1000 {
+        Ok(s)
+    } else {
+        Err("invalid input")
+    }
+}
+
+fn main() {
+    println!("{:?}", validate_input("safe"));
+}
+```
+
 ## 十三、相关概念链接
 
 > **[来源: Deterministic Execution Research]** ✅

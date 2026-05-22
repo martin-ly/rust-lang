@@ -1,7 +1,7 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T16:04:32.240258
-> 扫描文件数: 164
+> 生成时间: 2026-05-22T16:06:28.759582
+> 扫描文件数: 165
 > 提取概念定义数: 482
 > 跨文件引用数: 163
 
@@ -182,6 +182,7 @@
 | concept\05_comparative\12_rust_vs_scala.md | 0 | 0 | 10 |
 | concept\05_comparative\13_rust_vs_csharp.md | 0 | 0 | 10 |
 | concept\05_comparative\14_rust_vs_elixir.md | 0 | 0 | 8 |
+| concept\05_comparative\15_rust_vs_typescript.md | 0 | 0 | 12 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |

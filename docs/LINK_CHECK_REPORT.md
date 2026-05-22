@@ -3937,10 +3937,10 @@ Files that mention key concepts but don't link to them:
 
 | 来源 | 链接 | 说明 |
 |:---|:---|:---|
-| Rust Reference | https://doc.rust-lang.org/reference/ | Rust 语言官方参考文档 |
-| The Rust Programming Language (TRPL) | https://doc.rust-lang.org/book/ | Rust 官方教程 |
-| Rust Standard Library | https://doc.rust-lang.org/std/ | Rust 标准库文档 |
-| Rustonomicon | https://doc.rust-lang.org/nomicon/ | Rust 高级/Unsafe 编程指南 |
-| RFCs - github.com/rust-lang/rfcs | https://github.com/rust-lang/rfcs | Rust 语言 RFC 仓库 |
+| Rust Reference | <https://doc.rust-lang.org/reference/> | Rust 语言官方参考文档 |
+| The Rust Programming Language (TRPL) | <https://doc.rust-lang.org/book/> | Rust 官方教程 |
+| Rust Standard Library | <https://doc.rust-lang.org/std/> | Rust 标准库文档 |
+| Rustonomicon | <https://doc.rust-lang.org/nomicon/> | Rust 高级/Unsafe 编程指南 |
+| RFCs - github.com/rust-lang/rfcs | <https://github.com/rust-lang/rfcs> | Rust 语言 RFC 仓库 |
 
 > 相关文档: [概念知识体系](../concept/README.md)

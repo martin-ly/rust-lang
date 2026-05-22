@@ -500,6 +500,39 @@ fn main() {
 }
 ```
 
+
+```rust
+use std::sync::atomic::AtomicBool;
+
+fn main() {
+    let flag = AtomicBool::new(false);
+    flag.store(true, std::sync::atomic::Ordering::Relaxed);
+    println!("{}", flag.load(std::sync::atomic::Ordering::Relaxed));
+}
+```
+
+### 编译验证示例
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn main() {
+    let counter = AtomicUsize::new(0);
+    counter.fetch_add(1, Ordering::Relaxed);
+    println!("{}", counter.load(Ordering::Relaxed));
+}
+```
+
+```rust
+use std::sync::atomic::{AtomicBool, Ordering};
+
+fn main() {
+    let flag = AtomicBool::new(false);
+    flag.store(true, Ordering::Release);
+    assert!(flag.load(Ordering::Acquire));
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
