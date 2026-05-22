@@ -10,6 +10,7 @@
 > **来源**: [Types and Programming Languages (Pierce)](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Wikipedia — Lambda Calculus](https://en.wikipedia.org/wiki/Lambda_calculus) · [Wikipedia — Simply Typed Lambda Calculus](https://en.wikipedia.org/wiki/Simply_typed_lambda_calculus) · [TRPL — Closures](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -28,11 +29,13 @@
     - [3.2 边界极限](#32-边界极限)
   - [四、常见陷阱](#四常见陷阱)
   - [五、来源与延伸阅读](#五来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -155,6 +158,7 @@ Rust 闭包:
 ---
 
 ## 二、计算能力
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -234,6 +238,7 @@ Y 组合子:
 ---
 
 ## 三、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -293,6 +298,7 @@ graph TD
 ---
 
 ## 四、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -351,6 +357,7 @@ graph TD
 ---
 
 ## 五、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -362,7 +369,6 @@ graph TD
 | [Wikipedia — Church Encoding](https://en.wikipedia.org/wiki/Church_encoding) | ✅ 二级 | Church 编码 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -409,6 +415,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

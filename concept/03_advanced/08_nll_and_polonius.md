@@ -14,6 +14,7 @@
 > [Wikipedia — Data-flow Analysis](https://en.wikipedia.org/wiki/Data-flow_analysis)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [NLL 与 Polonius：借用检查器的演进](#nll-与-polonius借用检查器的演进)
@@ -32,11 +33,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -152,6 +155,7 @@ Polonius: 下一代借用检查器
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 NLL 的实现机制
@@ -282,6 +286,7 @@ Polonius 的约束模型:
 ---
 
 ## 三、影响范围矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -322,6 +327,7 @@ NLL / Polonius 影响的代码模式:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -389,6 +395,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -436,6 +443,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -450,7 +458,6 @@ graph TD
 | [Rustonomicon — NLL](https://doc.rust-lang.org/nomicon/borrow-splitting.html) | ✅ 一级 | 深入分析 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -482,6 +489,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

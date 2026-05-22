@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) · [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html) · [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Wikipedia — Type Class](https://en.wikipedia.org/wiki/Type_class)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -184,6 +186,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -296,6 +299,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 三、Trait 模式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -334,6 +338,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -396,6 +401,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -444,6 +450,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -457,6 +464,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

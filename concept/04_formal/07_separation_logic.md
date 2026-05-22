@@ -10,6 +10,7 @@
 > **来源**: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968) · [Iris Framework](https://iris-project.org/) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -129,6 +131,7 @@
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -221,6 +224,7 @@ graph TD
 ---
 
 ## 三、Rust 的应用映射
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -259,6 +263,7 @@ Rust 概念 ↔ 分离逻辑映射:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -321,6 +326,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -357,6 +363,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -370,7 +377,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let mut x = 5;
@@ -379,7 +385,6 @@ fn main() {
     println!("{}", x); // 6
 }
 ```
-
 
 ```rust
 fn main() {
@@ -390,6 +395,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

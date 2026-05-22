@@ -10,6 +10,7 @@
 > **来源**: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) · [Rust Reference — Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html) · [Wikipedia — Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -34,6 +35,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -146,6 +148,7 @@ Iterator Trait:
 ---
 
 ## 二、常用模式
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -238,6 +241,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 三、自定义迭代器
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -279,6 +283,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 四、性能权衡
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -307,6 +312,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 五、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -329,6 +335,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 六、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -372,6 +379,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 七、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -384,7 +392,6 @@ zip: 并行迭代多个序列
 
 ---
 
-
 ```rust
 fn main() {
     let v = vec![1, 2, 3, 4, 5];
@@ -392,7 +399,6 @@ fn main() {
     println!("{}", sum); // 24
 }
 ```
-
 
 ```rust
 fn main() {
@@ -404,6 +410,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统

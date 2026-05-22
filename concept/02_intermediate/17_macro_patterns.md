@@ -14,6 +14,7 @@
 > [Wikipedia — Code Generation](https://en.wikipedia.org/wiki/Code_generation_(compiler))
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -39,6 +40,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -159,6 +161,7 @@
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -340,6 +343,7 @@ const SIZE: usize = const_max(10, 20);
 ---
 
 ## 三、宏模式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -382,6 +386,7 @@ Builder 生成:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -447,6 +452,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -510,6 +516,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -523,6 +530,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

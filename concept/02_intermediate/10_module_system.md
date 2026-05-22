@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [Rust RFC 2126 — Clarify and streamline paths and visibility](https://github.com/rust-lang/rfcs/pull/2126) · [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -29,11 +30,13 @@
     - [3.2 边界极限](#32-边界极限)
   - [四、常见陷阱](#四常见陷阱)
   - [五、来源与延伸阅读](#五来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -145,6 +148,7 @@ graph LR
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -249,6 +253,7 @@ serde = { workspace = true }
 ---
 
 ## 三、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -310,6 +315,7 @@ graph TD
 ---
 
 ## 四、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -356,6 +362,7 @@ graph TD
 ---
 
 ## 五、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -367,7 +374,6 @@ graph TD
 | [RFC 2126](https://github.com/rust-lang/rfcs/pull/2126) | ✅ 一级 | 路径与可见性澄清 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -407,6 +413,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

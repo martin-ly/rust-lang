@@ -34,6 +34,7 @@
     - [5.2 边界极限](#52-边界极限)
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
@@ -601,7 +602,6 @@ graph LR
 | [std::hash::BuildHasher](https://doc.rust-lang.org/std/hash/trait.BuildHasher.html) | ✅ 一级 | Hasher 工厂 trait 文档 |
 
 ---
-
 
 ```rust
 use std::collections::{BTreeMap, HashMap};

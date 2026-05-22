@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [全局概念索引（Concept Index）](#全局概念索引concept-index)
@@ -68,6 +69,7 @@
   - [八、TODO](#八todo)
 
 ## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 概念类型标记 [来源: 概念分类参照语义网络理论 — Collins & Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承]
@@ -91,6 +93,7 @@
 ---
 
 ## 二、核心概念索引（🔷） [来源: 概念定义基于 Rust Reference / RFCs / 学术论文; 索引结构参照 Wikipedia Infobox Pattern 的信息浓缩设计]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -290,6 +293,7 @@
 ---
 
 ## 三、交叉概念一致性审计（🔶） [来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak & Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -336,6 +340,7 @@
 ---
 
 ## 四、引用概念速查（🔹） [来源: 速查表设计参照认知心理学中的组块化 (Chunking) 原则 — Miller (1956); 信息压缩与快速检索]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -355,6 +360,7 @@
 ---
 
 ## 五、按 Bloom 层级排序 [来源: Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 记忆（Remember）→ 理解（Understand）
@@ -397,6 +403,7 @@
 ---
 
 ## 六、来源与可信度
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 索引设计决策 | 来源 | 可信度 |
@@ -409,6 +416,7 @@
 ---
 
 ## 七、Wave 11 新增概念索引
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -439,6 +447,7 @@
 ---
 
 ## 八、Wave 6 新增概念索引
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -469,6 +478,7 @@
 ---
 
 ## 九、交叉概念单一来源规范（Single Source of Truth）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -522,6 +532,7 @@
 ---
 
 ## 十、语义表达力全景梳理（Phase F）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[`semantic_expressiveness.md`](./semantic_expressiveness.md)** —— 2026-05-13 新建
@@ -543,6 +554,7 @@
 ---
 
 ## 十一、Phase 7 五维升华新增概念索引
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -613,6 +625,7 @@
 ---
 
 ## 八、TODO
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **高**: Wave 6 全量深度重构（27/27 文件）

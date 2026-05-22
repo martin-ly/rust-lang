@@ -13,6 +13,7 @@
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -38,6 +39,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -127,6 +129,7 @@ Rust 类型的变型规则:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -225,6 +228,7 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 ---
 
 ## 三、形式化分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -265,6 +269,7 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -322,6 +327,7 @@ graph TD
 ---
 
 ## 五、常见编译错误解析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -358,6 +364,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -371,6 +378,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

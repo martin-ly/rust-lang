@@ -10,6 +10,7 @@
 > **来源**: [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -162,6 +164,7 @@ Happens-Before 关系:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -366,6 +369,7 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 三、原子模式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -410,6 +414,7 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -478,6 +483,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -534,6 +540,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -552,6 +559,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [方法论：思维表征与知识结构规范](#方法论思维表征与知识结构规范)
@@ -79,6 +80,7 @@ mindmap
 > **认知路径**: 本 mindmap 展示 `concept/` 知识体系的**元规范**。三个主分支对应文件生产的三个阶段："内容结构模板"定义写什么，"思维表征规范"定义怎么可视化，"质量控制"定义怎么验证。所有概念文件必须遵循此模板，确保跨文件的一致性和可比较性。
 
 ## 一、内容结构模板（强制）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 每个概念文件必须遵循以下结构：
@@ -123,6 +125,7 @@ mindmap
 ---
 
 ## 二、思维表征规范
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 概念定义属性关系矩阵（Concept-Attribute-Relation Matrix） [来源: 概念属性矩阵方法论参照知识图谱表示学习 — Bordes et al. *Translating Embeddings for Modeling Multi-Relational Data* (NIPS 2013); 知识表示的三元组结构 (实体-关系-实体)]
@@ -209,6 +212,7 @@ graph TD
 ---
 
 ## 三、知识结构层级规范
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 理论-模型-实践三层结构 [来源: 知识组织三层模型参照布鲁纳 (Bruner) 的表征理论 — 动作表征 (Enactive) / 图像表征 (Iconic) / 符号表征 (Symbolic); 对应概念文件的 L4 理论 / L2 模型 / L1 实践映射]
@@ -233,6 +237,7 @@ graph TD
 ---
 
 ## 四、来源引用规范
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 引用格式
@@ -258,6 +263,7 @@ graph TD
 ---
 
 ## 五、代码示例规范
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 代码块格式
@@ -304,6 +310,7 @@ fn main() {
 ---
 
 ## 七、关系规范（新增 v1.1）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 语义链接类型
@@ -343,6 +350,7 @@ fn main() {
 ---
 
 ## 八、定理一致性规范（新增 v1.1）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 定理一致性矩阵格式
@@ -399,6 +407,7 @@ fn main() {
 ---
 
 ## 九、认知路径规范（新增 v1.1）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 9.1 认知路径格式
@@ -432,6 +441,7 @@ fn main() {
 ---
 
 ## 十、质量控制检查清单（v1.1 更新）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 在提交任何概念文件前，检查：
@@ -462,6 +472,7 @@ fn main() {
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

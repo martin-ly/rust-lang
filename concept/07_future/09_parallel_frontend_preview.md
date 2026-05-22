@@ -10,6 +10,7 @@
 > **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) · [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -114,6 +116,7 @@ graph LR
 ---
 
 ## 二、技术方案
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -185,6 +188,7 @@ graph TD
 ---
 
 ## 三、性能影响分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -202,6 +206,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -258,6 +263,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -277,6 +283,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -301,7 +308,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let feature = "preview";
@@ -310,6 +316,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

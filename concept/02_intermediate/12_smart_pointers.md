@@ -10,6 +10,7 @@
 > **来源**: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) · [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) · [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) · [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) · [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -154,6 +156,7 @@ let weak = Rc::downgrade(&data);
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -279,6 +282,7 @@ struct Node {
 ---
 
 ## 三、选型决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -321,6 +325,7 @@ struct Node {
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -389,6 +394,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -440,6 +446,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -454,6 +461,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

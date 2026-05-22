@@ -10,6 +10,7 @@
 > **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) · [core::range](https://doc.rust-lang.org/core/range/index.html) · [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -138,6 +140,7 @@ graph LR
 ---
 
 ## 二、形式化语义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -193,6 +196,7 @@ for i in r { /* r 被消费 */ }
 ---
 
 ## 三、跨语言对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -257,6 +261,7 @@ assert_eq!(sum1, sum2);
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -311,6 +316,7 @@ let rev = 10..0;
 ---
 
 ## 五、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -326,6 +332,7 @@ let rev = 10..0;
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -10,6 +10,7 @@
 > **来源**: [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) · [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844) · [Rust Blog — Specialization](https://blog.rust-lang.org/inside-rust/2021/09/06/Separating-contract-and-implementation.html) · [Rust Reference — Trait Implementations](https://doc.rust-lang.org/reference/items/implementations.html) · [Wikipedia — Multiple Dispatch](https://en.wikipedia.org/wiki/Multiple_dispatch)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC 1210]]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -153,6 +155,7 @@ graph TD
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC 1210]]
@@ -259,6 +262,7 @@ impl Container for Vec<u8> {
 ---
 
 ## 三、设计决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -289,6 +293,7 @@ impl Container for Vec<u8> {
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -355,6 +360,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC 1210]]
@@ -404,6 +410,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC 1210]]
@@ -419,6 +426,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

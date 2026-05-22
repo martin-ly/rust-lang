@@ -15,6 +15,7 @@
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,11 +36,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -190,6 +193,7 @@
 ---
 
 ## 二、工程实践差异
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -301,6 +305,7 @@ Web 框架对比:
 ---
 
 ## 三、互补使用场景
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -342,6 +347,7 @@ Rust + Ruby 的互补模式:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -408,6 +414,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -453,6 +460,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -466,7 +474,6 @@ graph TD
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -500,6 +507,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

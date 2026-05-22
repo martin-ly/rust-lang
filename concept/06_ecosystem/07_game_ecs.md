@@ -15,6 +15,7 @@
 ---
 
 ## 权威定义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs]** ✅
@@ -28,6 +29,7 @@
 ---
 
 ## 认知路径（Cognitive Path）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: wgpu Docs; Vulkan Spec]** ✅
@@ -53,6 +55,7 @@
 ---
 
 ## 一、ECS 架构与 Rust 的契合度
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Concurrency Book; Rayon Docs]** ✅
@@ -215,6 +218,7 @@ Bevy 的 Archetype 存储将相同组件组合的实体数据**连续存放**（
 ---
 
 ## 二、Rust 游戏引擎生态
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Data-Oriented Design Book; Richard Fabian]** ✅
@@ -551,6 +555,7 @@ fn blit_sprite(_fb: &mut FrameBuffer, _pos: &Position, _sprite: &Sprite) {
 ---
 
 ## 三、所有权模型在 ECS 中的表达
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Niko Matsakis Blog; Rust Game Dev Working Group]** ✅
@@ -600,6 +605,7 @@ fn spawn_enemy(
 ---
 
 ## 四、数据导向设计 (DOD) 与 Rust 零成本抽象的协同
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Bevy Book; Bevy ECS Docs; Fyrox Docs]** ✅
@@ -636,6 +642,7 @@ pub fn update_positions_simd(
 ---
 
 ## 五、并发渲染：Send/Sync 在多线程游戏循环中的保证
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: wgpu Docs; Vulkan Spec]** ✅

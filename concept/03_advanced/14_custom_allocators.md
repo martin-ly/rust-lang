@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) · [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) · [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -31,11 +32,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -110,6 +113,7 @@ GlobalAlloc:
 ---
 
 ## 二、实践模式
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -211,6 +215,7 @@ Arena 分配器模式:
 ---
 
 ## 三、内存布局与对齐
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -284,6 +289,7 @@ Arena 分配器模式:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -341,6 +347,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -390,6 +397,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -403,7 +411,6 @@ graph TD
 | [bumpalo](https://docs.rs/bumpalo/latest/bumpalo/) | ✅ 二级 | Bump 分配器 crate |
 
 ---
-
 
 ```rust,ignore
 // 自定义分配器示例（需要 nightly）
@@ -423,7 +430,6 @@ unsafe impl GlobalAlloc for MyAllocator {
 #[global_allocator]
 static ALLOCATOR: MyAllocator = MyAllocator;
 ```
-
 
 ```rust
 fn main() {
@@ -462,6 +468,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -10,6 +10,7 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [WGPU](https://wgpu.rs/) · [Rust GameDev Working Group](https://gamedev.rs/) · [Are We Game Yet?](https://arewegameyet.rs/) · [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -30,11 +31,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心架构
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -131,6 +134,7 @@ Bevy 引擎架构:
 ---
 
 ## 二、图形渲染
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -211,6 +215,7 @@ WGPU:
 ---
 
 ## 三、物理与音频
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 物理引擎
@@ -274,6 +279,7 @@ Rust 音频生态:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -335,6 +341,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -384,6 +391,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -396,7 +404,6 @@ graph TD
 | [rust-gpu](https://github.com/EmbarkStudios/rust-gpu) | ✅ 二级 | GPU 着色器 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -453,6 +460,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -16,6 +16,7 @@ $entry
 ---
 
 ## 〇、Effect System 概念全景
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -53,6 +54,7 @@ mindmap
 ---
 
 ## 一、Effect 系统是什么？
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -97,6 +99,7 @@ mindmap
 ---
 
 ## 二、Rust 中的现有 Effect 表达
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -201,6 +204,7 @@ where
 ---
 
 ## 三、跨语言对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -280,6 +284,7 @@ Rust 的替代方案:
 ---
 
 ## 四、对 Rust 类型系统的潜在影响
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -393,6 +398,7 @@ let iter = gen {
 ---
 
 ## 五、演进路线图与开放问题
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 语言团队已知讨论（公开信息）
@@ -439,6 +445,7 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## 六、相关概念链接
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -450,6 +457,7 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## 七、定理一致性矩阵（效果系统类型安全）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析; Koka; Plotkin & Pretnar 2009]** 以下矩阵梳理效果系统的类型安全保证与 Rust 的渐进式实现。
@@ -479,6 +487,7 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## Wikipedia 概念对齐
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -17,6 +17,7 @@
 ---
 
 ## 认知路径：六步递进理解范式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -39,6 +40,7 @@ Step 6: 怎么在代码中选择范式？
 ---
 
 ## 一、权威定义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Wikipedia 权威定义
@@ -60,6 +62,7 @@ Step 6: 怎么在代码中选择范式？
 ---
 
 ## 二、多语言形式化对比矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -184,6 +187,7 @@ graph LR
 ---
 
 ## 三、适用域决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | **场景** | **首选** | **次选** | **避免** |
@@ -218,6 +222,7 @@ graph LR
 ---
 
 ## 四、思维导图
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
@@ -252,6 +257,7 @@ graph TD
 > **过渡**: 思维导图展示四谱系分类，Rust 的独特性在于同时满足一组强约束。
 
 ## 五、定理：Rust 的不可压缩性
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -268,6 +274,7 @@ graph TD
 > **过渡**: 不可压缩性定理确定 Rust 的坐标，一致性矩阵将其锚定到 L1-L4 知识体系。
 
 ## 六、定理一致性矩阵（范式定位）— 带 ⟹ 推理链
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 范式维度 | Rust 定位 | 形式化根基 | 对应 L1-L4 文件 | 一致性状态 |
@@ -324,6 +331,7 @@ const fn / const 泛型
 > **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
 
 ## 七、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -423,6 +431,7 @@ graph TD
 ---
 
 ## 八、扩展内容：形式化谱系与更多语言对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -480,6 +489,7 @@ graph TD
 ---
 
 ## 九、新兴语言趋势分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -584,6 +594,7 @@ graph TD
 ---
 
 ## 十、学术参考文献
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **Cardelli, L., & Wegner, P. (1985).** *On understanding types, data abstraction, and polymorphism.* ACM Computing Surveys (CSUR), 17(4), 471-522. [来源: ACM Computing Surveys]
@@ -605,6 +616,7 @@ graph TD
 ---
 
 ## 十一、知识来源关系（Provenance）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | **论断** | **来源** | **可信度** |
@@ -717,6 +729,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 ---
 
 ## 十二、相关概念链接
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -734,6 +747,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 ---
 
 ## 十三、待补充与演进方向（TODOs）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **TODO**: 补充具体 benchmark 数据链接

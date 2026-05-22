@@ -12,6 +12,7 @@
 > **来源**: [tonic [来源: [tonic](https://docs.rs/tonic/latest/tonic/)] crate](<https://docs.rs/tonic/latest/tonic/>) · [tokio [来源: [Tokio](https://tokio.rs/)]-rs ecosystem](<https://tokio.rs/>) · [Raft [来源: [Raft Paper](https://raft.github.io/raft.pdf)] Consensus Paper](<https://raft.github.io/raft.pdf>) · [Consul by HashiCorp](https://www.consul.io/) · [Linkerd](https://linkerd.io/) · [NATS](https://nats.io/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Book]]
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -149,6 +151,7 @@ Rust async 运行时的分布式价值:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Book]]
@@ -298,6 +301,7 @@ async fn main() {
 ---
 
 ## 三、分布式模式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -342,6 +346,7 @@ async fn main() {
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -408,6 +413,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Book]]
@@ -456,6 +462,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Book]]
@@ -484,6 +491,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

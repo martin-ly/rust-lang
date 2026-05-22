@@ -10,6 +10,7 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://wgpu.rs/) · [Rust GameDev WG](https://gamedev.rs/) · [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -34,6 +35,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -173,6 +175,7 @@ fn main() {
 ---
 
 ## 二、渲染与图形
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -256,6 +259,7 @@ wgpu:
 ---
 
 ## 三、音频与输入
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -295,6 +299,7 @@ wgpu:
 ---
 
 ## 四、性能优化
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -364,6 +369,7 @@ fn main() {
 ---
 
 ## 五、反命题与适用场景
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
@@ -419,6 +425,7 @@ graph TD
 ---
 
 ## 六、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -464,6 +471,7 @@ graph TD
 ---
 
 ## 七、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -478,6 +486,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

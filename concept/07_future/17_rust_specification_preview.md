@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) · [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -134,6 +136,7 @@ Ferrocene 规范的局限:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -233,6 +236,7 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 三、社区视角
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -252,6 +256,7 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -317,6 +322,7 @@ graph TD
 ---
 
 ## 五、演进路线
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
@@ -334,6 +340,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -347,7 +354,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let feature = "preview";
@@ -356,6 +362,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

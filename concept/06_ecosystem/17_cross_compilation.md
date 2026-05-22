@@ -10,6 +10,7 @@
 > **来源**: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) · [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) · [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) · [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) · [cross crate](https://github.com/cross-rs/cross)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -146,6 +148,7 @@ Rust 的两种运行模式:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -261,6 +264,7 @@ Rust 的两种运行模式:
 ---
 
 ## 三、平台支持矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -315,6 +319,7 @@ Rust 的两种运行模式:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -377,6 +382,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -429,6 +435,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -446,6 +453,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [std::num](https://doc.rust-lang.org/std/num/) · [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
 ## 📑 目录
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [数值类型与运算：从整数到浮点的完整图景](#数值类型与运算从整数到浮点的完整图景)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 整数类型全景
@@ -166,6 +168,7 @@ a.overflowing_add(b);  // (44, true)
 ---
 
 ## 二、技术细节
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型转换与 as
@@ -292,6 +295,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ---
 
 ## 三、数值类型矩阵
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -329,6 +333,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -392,6 +397,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -429,6 +435,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -442,6 +449,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](./04_type_system.md) — 类型系统

@@ -16,6 +16,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐)
@@ -48,6 +49,7 @@
 ---
 
 ## 零、TL;DR —— 系统设计原则速查
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -68,6 +70,7 @@
 ---
 
 ## 一、权威来源与设计原则分类学
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -85,6 +88,7 @@
 ---
 
 ## 二、七项核心设计原则
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -244,6 +248,7 @@ impl Worker {
 ---
 
 ## 三、系统设计决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -298,6 +303,7 @@ graph LR
 ---
 
 ## 四、从 Rust 类型到分布式协议的隐喻映射
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Lamport Paxos, Brewer CAP, Rust Ownership Semantics]
@@ -338,6 +344,7 @@ graph TD
 ---
 
 ## 五、五层形式化扩展模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Kani Docs, Creusot, TLA+, Why3]
@@ -369,6 +376,7 @@ graph TD
 ---
 
 ## 六、思维表征体系
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 设计原则依赖图
@@ -418,6 +426,7 @@ graph TD
 ---
 
 ## 七、定理推理链
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 定理一致性矩阵（系统设计专集）
@@ -433,6 +442,7 @@ graph TD
 ---
 
 ## 八、相关概念链接（L0-L7 映射）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -462,6 +472,7 @@ graph TD
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
 
 ## 七、系统设计决策的知识流动图
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

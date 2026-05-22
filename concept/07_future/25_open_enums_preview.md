@@ -10,6 +10,7 @@
 > **来源**: [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) · [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) · [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) · [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) · [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) · [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) · [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC]]
@@ -43,6 +44,7 @@
 ---
 
 ## 一、核心概念：封闭 vs 开放枚举
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -147,6 +149,7 @@ extend enum Event {
 ---
 
 ## 二、`#[non_exhaustive]` 的形式化语义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC]]
@@ -235,6 +238,7 @@ fn process_external(r: Response) -> String {
 ---
 
 ## 三、跨语言对比：开放枚举的多种形态
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -320,6 +324,7 @@ graph LR
 ---
 
 ## 四、API 设计中的开放枚举模式
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -391,6 +396,7 @@ pub enum LogLevel {
 ---
 
 ## 五、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -457,6 +463,7 @@ pub enum ConstExample {
 ---
 
 ## 六、演进路线与预测
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC]]
@@ -475,6 +482,7 @@ pub enum ConstExample {
 ---
 
 ## 七、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RFC]]
@@ -492,6 +500,7 @@ pub enum ConstExample {
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

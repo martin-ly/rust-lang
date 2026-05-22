@@ -10,6 +10,7 @@
 > **来源**: [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) · [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) · [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) · [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -34,6 +35,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -129,6 +131,7 @@ Kleene 不动点定理:
 ---
 
 ## 二、Rust 的指称解释
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -220,6 +223,7 @@ Rust 类型的指称:
 ---
 
 ## 三、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -282,6 +286,7 @@ graph TD
 ---
 
 ## 四、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -322,6 +327,7 @@ graph TD
 ---
 
 ## 五、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -334,7 +340,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     // 简单的 lambda 演算风格闭包
@@ -343,7 +348,6 @@ fn main() {
     println!("{}", add5(3)); // 8
 }
 ```
-
 
 ```rust
 fn main() {
@@ -358,6 +362,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

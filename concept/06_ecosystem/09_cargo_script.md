@@ -9,6 +9,7 @@
 > [来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) · [RFC 3503 — Cargo Script Frontmatter](https://github.com/rust-lang/rfcs/pull/3503) · [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) · [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -26,7 +27,7 @@
   - [四、工程实践](#四工程实践)
     - [4.1 快速 CLI 原型](#41-快速-cli-原型)
 - [\[derive(Parser)\]](#deriveparser-1)
-  - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
+    - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
 - [\[derive(Deserialize)\]](#derivedeserialize)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -103,6 +105,7 @@ fn main() { /* ... */ }
 ---
 
 ## 二、Frontmatter 语法详解
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -137,6 +140,7 @@ edition = "2024"     # 默认当前 edition
 ---
 
 ## 三、与传统 Cargo 项目的对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -220,6 +224,7 @@ graph TD
 ---
 
 ## 四、工程实践
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -322,6 +327,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 六、与 L1-L4 的关系映射
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | L1-L4 概念 | Cargo Script 映射 |
@@ -334,6 +340,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 七、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - **一级**: [RFC 3503 — Cargo Script](https://github.com/rust-lang/rfcs/pull/3503)（FCP 完成，目标 2026 稳定）
@@ -346,6 +353,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -359,6 +367,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## Wikipedia 概念对齐
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

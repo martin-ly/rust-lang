@@ -10,6 +10,7 @@
 > **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) · [Ferrous Systems](https://ferrous-systems.com/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Embedded Rust Book]]
@@ -32,11 +33,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -169,6 +172,7 @@ no_std:
 ---
 
 ## 二、硬件抽象层
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Embedded Rust Book]]
@@ -274,6 +278,7 @@ BSP (Board Support Package):
 ---
 
 ## 三、实时系统
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Embedded Rust Book]]
@@ -361,6 +366,7 @@ RTIC (Real-Time Interrupt-driven Concurrency):
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -422,6 +428,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Embedded Rust Book]]
@@ -472,6 +479,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Embedded Rust Book]]
@@ -486,7 +494,6 @@ graph TD
 | [Ferrous Systems](https://ferrous-systems.com/) | ✅ 二级 | 培训咨询 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -521,6 +528,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

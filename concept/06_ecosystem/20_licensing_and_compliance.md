@@ -10,6 +10,7 @@
 > **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) · [Choose a License](https://choosealicense.com/) · [SPDX License List](https://spdx.org/licenses/) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [OSI Approved Licenses](https://opensource.org/licenses) · [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Foundation]]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -160,6 +162,7 @@ Rust 生态的许可证现状:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Foundation]]
@@ -291,6 +294,7 @@ MIT/Apache-2.0 双许可的实施:
 ---
 
 ## 三、许可证模式矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -329,6 +333,7 @@ GPL 项目:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -394,6 +399,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Foundation]]
@@ -441,6 +447,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Foundation]]
@@ -460,7 +467,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let data = vec![1, 2, 3];
@@ -469,6 +475,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

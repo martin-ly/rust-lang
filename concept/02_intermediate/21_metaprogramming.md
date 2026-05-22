@@ -10,6 +10,7 @@
 > **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [Rust Reference — Macros](https://doc.rust-lang.org/reference/macros.html) · [The Little Book of Rust Macros](https://veykril.github.io/tlborm/) · [syn crate](https://docs.rs/syn/latest/syn/) · [quote crate](https://docs.rs/quote/latest/quote/) · [proc-macro2 crate](https://docs.rs/proc-macro2/latest/proc_macro2/) · [RFC 1584 — Macros 2.0](https://rust-lang.github.io/rfcs/1584-macros.html) · [Wikipedia — Metaprogramming](https://en.wikipedia.org/wiki/Metaprogramming) · [Wikipedia — Hygienic Macro](https://en.wikipedia.org/wiki/Hygienic_macro) · [Rust API Guidelines — Macros](https://rust-lang.github.io/api-guidelines/macros.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -25,6 +26,8 @@
     - [2.2 Derive 宏的实现机制](#22-derive-宏的实现机制)
     - [2.3 宏卫生性的形式化](#23-宏卫生性的形式化)
   - [三、元编程技术矩阵](#三元编程技术矩阵)
+    - [3.1 元编程技术选型矩阵](#31-元编程技术选型矩阵)
+    - [3.2 宏与 const eval 的演进趋势](#32-宏与-const-eval-的演进趋势)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -35,6 +38,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -175,6 +179,7 @@ macro_rules! my_vec {
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [syn crate docs](https://docs.rs/syn/latest/syn/)]
@@ -324,6 +329,7 @@ sequenceDiagram
 ---
 
 ## 三、元编程技术矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -371,6 +377,7 @@ Rust 元编程的演进方向:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -438,6 +445,7 @@ Rust 元编程的演进方向:
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -494,6 +502,7 @@ Rust 元编程的演进方向:
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -541,6 +550,7 @@ graph TD
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

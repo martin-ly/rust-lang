@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -109,6 +110,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、如何使用本指南
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -146,6 +148,7 @@ graph TD
 > **[来源: TRPL 官方文档; Rust by Example]** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -245,6 +248,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: concept/ 目录结构; 00_meta/inter_layer_map.md]** 按 L0-L7 层级组织的 27+ 概念文件。
 
 ## 三、27 文件阅读指南
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下对每个核心文件提供：预计时间 → 前置文件 → 核心收获 → Checkpoint 问题。
@@ -324,6 +328,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: Make It Stick (Brown et al. 2014); 间隔重复研究]** 三遍阅读法和间隔重复基于认知科学证据。
 
 ## 四、阅读策略与技巧
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 三遍阅读法
@@ -369,6 +374,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: Rust 社区常见学习障碍调查; Rust Internals 论坛]** 常见困难基于社区反馈统计。
 
 ## 五、常见困难与突破建议
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 "生命周期理解不了"
@@ -414,6 +420,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 ---
 
 ## 六、进阶：从学习者到贡献者
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 当你完成所有 27 个文件的阅读并通过自测后，可以考虑：
@@ -430,6 +437,7 @@ Step 6: 02_async.md（1.5h）— 对比 Haskell 的 monad 和 Rust 的 async
 > **[来源: rustc 错误码索引; Rust Compiler Error Index]** 错误码映射基于 rustc 官方文档和概念知识体系的一致性标注。
 
 ## 七、编译错误码诊断索引（Error Code → Concept）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: rustc 错误码大全; Rust Compiler Error Index]** 本索引将最常见的 Rust 编译错误码映射到概念知识体系中的定义文件和修复路径，实现"遇到错误 → 定位概念 → 理解原理 → 修复代码"的闭环。

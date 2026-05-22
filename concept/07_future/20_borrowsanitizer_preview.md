@@ -10,6 +10,7 @@
 > **来源**: [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) · [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) · [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -145,6 +147,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 ---
 
 ## 二、与现有工具的对比矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -164,6 +167,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 ---
 
 ## 三、形式化语义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -214,6 +218,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -264,6 +269,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -294,6 +300,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -307,7 +314,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let feature = "preview";
@@ -316,6 +322,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

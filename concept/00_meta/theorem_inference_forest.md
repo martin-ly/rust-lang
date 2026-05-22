@@ -15,6 +15,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 知识体系定理推理森林](#rust-知识体系定理推理森林)
@@ -85,6 +86,7 @@ mindmap
 > **认知路径**: 本 mindmap 展示六棵定理树的**公理-定理对应关系**。每棵树的根是 L4 形式化公理，叶节点是 L1-L3 安全定理。跨树的关联（如 A5 同时支撑所有权树和并发树）揭示了 Rust 安全保证的**统一数学根基**——分离逻辑和 Iris 框架同时解释了内存安全和并发安全。
 
 ## 一、推理森林总览
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
@@ -150,6 +152,7 @@ graph TD
 ---
 
 ## 二、所有权定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 推理链
@@ -184,6 +187,7 @@ graph TD
 ---
 
 ## 三、借用定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 推理链
@@ -215,6 +219,7 @@ graph TD
 ---
 
 ## 四、生命周期定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 推理链
@@ -246,6 +251,7 @@ graph TD
 ---
 
 ## 五、类型系统定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 推理链
@@ -277,6 +283,7 @@ graph TD
 ---
 
 ## 六、并发定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 推理链
@@ -309,6 +316,7 @@ graph TD
 ---
 
 ## 七、异步定理树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 推理链
@@ -340,6 +348,7 @@ graph TD
 ---
 
 ## 八、跨树关联与一致性
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 核心定理依赖图
@@ -374,6 +383,7 @@ graph TD
 ---
 
 ## 九、定理一致性矩阵（全局）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理 | 失效条件 | 所在文件 |
@@ -389,6 +399,7 @@ graph TD
 ---
 
 ## 十、相关概念链接
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -403,6 +414,7 @@ graph TD
 - [L3 并发](../03_advanced/01_concurrency.md) —— T-040 / T-041 / T-042
 
 ## 十一、遍历定理森林的认知路径
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何阅读和验证定理推理森林？**

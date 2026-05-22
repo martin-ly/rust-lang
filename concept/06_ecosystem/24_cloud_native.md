@@ -10,6 +10,7 @@
 > **来源**: [Tokio](https://tokio.rs/) · [Axum](https://github.com/tokio-rs/axum) · [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) · [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [AWS Docs]]
@@ -31,11 +32,13 @@
     - [4.2 边界极限](#42-边界极限)
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
+    - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
 
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -117,6 +120,7 @@ Rust 云原生优势:
 ---
 
 ## 二、Web 框架
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [AWS Docs]]
@@ -215,6 +219,7 @@ Actix-web:
 ---
 
 ## 三、基础设施
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [AWS Docs]]
@@ -328,6 +333,7 @@ Actix-web:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -387,6 +393,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [AWS Docs]]
@@ -434,6 +441,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [AWS Docs]]
@@ -448,7 +456,6 @@ graph TD
 | [Twelve-Factor App](https://12factor.net/) | ✅ 二级 | 云原生原则 |
 
 ---
-
 
 ```rust
 fn main() {
@@ -481,6 +488,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

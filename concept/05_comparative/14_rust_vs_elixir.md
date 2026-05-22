@@ -10,6 +10,7 @@
 > **来源**: [Elixir Official](https://elixir-lang.org/) · [Erlang/OTP](https://www.erlang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Wikipedia — Erlang](https://en.wikipedia.org/wiki/Erlang_(programming_language))
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs Elixir](#rust-vs-elixir)
@@ -35,6 +36,7 @@
 ---
 
 ## 一、设计哲学对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -150,6 +152,7 @@ fn main() {
 ---
 
 ## 二、并发模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 BEAM 并发模型
@@ -254,6 +257,7 @@ Rust 并发模型:
 ---
 
 ## 三、类型系统
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 静态 vs 动态
@@ -377,6 +381,7 @@ fn main() {
 ---
 
 ## 四、运行时与部署
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Elixir Mix Deploy](https://hexdocs.pm/mix/Mix.Tasks.Deploy.html) · [Rust Compilation](https://doc.rust-lang.org/cargo/guide/build-cache.html)
@@ -419,6 +424,7 @@ fn main() {
 ---
 
 ## 五、互操作
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Rustler GitHub](https://github.com/rusterlium/rustler)
@@ -464,6 +470,7 @@ Rust ↔ Elixir 互操作:
 ---
 
 ## 六、反命题与适用场景
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 反命题树
@@ -523,6 +530,7 @@ graph TD
 ---
 
 ## 七、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Rust NIF Safety](https://www.erlang.org/doc/tutorial/nif.html)
@@ -571,6 +579,7 @@ graph TD
 ---
 
 ## 八、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -586,6 +595,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

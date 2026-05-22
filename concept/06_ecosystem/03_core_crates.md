@@ -15,6 +15,7 @@
 ---
 
 ## 一、权威定义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: serde.rs; serde Book]** ✅
@@ -45,6 +46,7 @@
 ---
 
 ## 认知路径（Cognitive Path）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Tokio Documentation; tokio.rs]** ✅
@@ -76,6 +78,7 @@ tokio/async-std/futures/smol的比较和选择
 supply chain/版本兼容性/维护者疲劳
 
 ## 二、概念属性矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: rayon Docs; Rust Book Ch.16]** ✅
@@ -117,6 +120,7 @@ supply chain/版本兼容性/维护者疲劳
 ---
 
 ## 三、思维导图
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: wasm-bindgen Guide; WebAssembly.org]** ✅
@@ -161,6 +165,7 @@ graph TD
 ---
 
 ## 四、核心 Crate 详解（按功能域）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: axum Documentation; Tower Docs]** ✅
@@ -442,6 +447,7 @@ graph TD
 ---
 
 ## 五、Crate 与 L1-L5 概念映射
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: clap Docs; Rust CLI Book]** ✅
@@ -461,6 +467,7 @@ graph TD
 ---
 
 ## 六、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: tracing Docs; OpenTelemetry Spec]** ✅

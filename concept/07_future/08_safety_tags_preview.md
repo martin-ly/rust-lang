@@ -10,6 +10,7 @@
 > **来源**: [Rust RFC: Safety Tags](https://github.com/rust-lang/rfcs/pull/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Rust Internals — Safety Annotations](https://internals.rust-lang.org/) · [Rust for Linux](https://rust-for-linux.com/) · [Prusti: Deductive Verification for Rust](https://www.pm.inf.ethz.ch/publications/getpdf.php?bibname=Own&id=AstrauskasMuellerPoliSummers21.pdf)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -115,6 +117,7 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 ---
 
 ## 二、形式化语义
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -167,6 +170,7 @@ graph TD
 ---
 
 ## 三、使用场景
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -236,6 +240,7 @@ unsafe extern "C" {
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -295,6 +300,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
@@ -312,6 +318,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -326,6 +333,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

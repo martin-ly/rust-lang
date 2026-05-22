@@ -12,6 +12,7 @@
 > **Bloom 层级**: 分析 → 应用
 >
 ## 〇、形式模型演进认知入口
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Release Notes]]
@@ -56,6 +57,7 @@ mindmap
 ---
 
 ## 一、演进总览：五个形式模型维度
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Release Notes]]
@@ -102,6 +104,7 @@ graph TD
 ---
 
 ## 二、维度一：所有权与别名模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Release Notes]]
@@ -170,6 +173,7 @@ graph TD
 ---
 
 ## 三、维度二：类型系统扩展
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Release Notes]]
@@ -236,6 +240,7 @@ graph TD
 ---
 
 ## 四、维度三：异步与效果系统
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Release Notes]]
@@ -298,6 +303,7 @@ graph TD
 ---
 
 ## 五、维度四：Unsafe 边界精细化
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 `unsafe extern` blocks + `safe` 关键字（1.82 stable，RFC 3484）
@@ -368,6 +374,7 @@ unsafe extern "C" {
 ---
 
 ## 六、维度五：编译期计算能力
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 Inline const blocks（1.79 stable）
@@ -403,6 +410,7 @@ unsafe extern "C" {
 ---
 
 ## 七、版本对比矩阵（形式模型视角）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -418,6 +426,7 @@ unsafe extern "C" {
 ---
 
 ## 七、版本演进时间线
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
@@ -452,6 +461,7 @@ timeline
 ---
 
 ## 八、形式化洞察：三个趋势
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 趋势 1：从隐式推断到显式契约
@@ -469,6 +479,7 @@ timeline
 ---
 
 ## 九、待跟踪前沿（nightly / RFC 阶段）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 特性 | 状态 | 形式化意义 |
@@ -546,6 +557,7 @@ timeline
 ---
 
 ## 十、1.97 Nightly 前瞻跟踪
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: releases.rs 2026-05-18; rust-lang/rust GitHub]**
@@ -574,6 +586,7 @@ timeline
 ---
 
 ## 十二、Rust 1.96.0 Beta 跟踪（2026-05-28 预计稳定）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: GitHub rust-lang/rust #156512]** · **[来源: releases.rs]** · **[来源: Inside Rust Blog 2026-05-18]** ✅

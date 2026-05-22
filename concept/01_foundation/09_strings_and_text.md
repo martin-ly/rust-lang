@@ -10,6 +10,7 @@
 > **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) · [std::str](https://doc.rust-lang.org/std/str/index.html) · [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) · [Unicode Standard](https://www.unicode.org/standard/standard.html) · [Rust Formatting](https://doc.rust-lang.org/std/fmt/index.html) · [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -151,6 +153,7 @@ println!("{}", p);  // 输出: (1, 2)
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -275,6 +278,7 @@ unsafe {
 ---
 
 ## 三、选型决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -317,6 +321,7 @@ FFI C 接口:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -379,6 +384,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -424,6 +430,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -438,6 +445,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

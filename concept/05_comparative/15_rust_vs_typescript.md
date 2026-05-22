@@ -657,7 +657,6 @@ graph TD
 
 ---
 
-
 ```rust
 fn main() {
     let msg = "Hello from Rust";

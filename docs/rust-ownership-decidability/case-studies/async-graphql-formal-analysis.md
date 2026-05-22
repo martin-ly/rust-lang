@@ -184,7 +184,6 @@ let schema = Schema::build(Query, Mutation, Subscription).finish();
 
 - [README](./README.md)
 
-
 ---
 
 ## 权威来源索引

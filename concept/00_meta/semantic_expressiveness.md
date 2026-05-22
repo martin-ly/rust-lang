@@ -16,6 +16,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -95,6 +96,7 @@
   - [相关概念文件](#相关概念文件)
 
 ## 零、TL;DR —— Rust 语义表达力速查
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -116,6 +118,7 @@ D7 安全            编译期 safe + unsafe 逃逸门          不保证活性/
 ---
 
 ## 一、权威来源与梳理方法论
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -155,6 +158,7 @@ Ch.19 The Rust runtime            →  D5 (并发运行时)
 ---
 
 ## 二、维度总览：7 维表达力光谱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 光谱图
@@ -204,6 +208,7 @@ graph LR
 ---
 
 ## 三、D1 计算表达力（Computational Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.17 Constant Evaluation; Ch.8 Expressions; RFC 2344; Rust Internals]**
@@ -287,6 +292,7 @@ Rust 的常量求值器（const evaluator）是 MIR 解释器的一个子集，*
 ---
 
 ## 四、D2 类型表达力（Type Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.10 Type system; Ch.11 Special types; RFC 1210; RFC 1598; RustBelt; Pierce TAPL Ch.23-24]**
@@ -383,6 +389,7 @@ Rust 削减:
 ---
 
 ## 五、D3 控制流表达力（Control Flow Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.8 Statements and expressions; Ch.9 Patterns; RFC 243; RFC 3668; Rust Internals]**
@@ -473,6 +480,7 @@ Rust 如何表达计算的控制结构？从结构化控制到异常处理到异
 ---
 
 ## 六、D4 内存与资源表达力（Memory & Resource Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.13 Memory model; Ch.10.4 Interior mutability; Ch.10.3 Type layout; Ch.16 Unsafety; Rustonomicon; RustBelt]**
@@ -579,6 +587,7 @@ A ⊸ B            fn(T) -> U —— 消耗 T 产生 U
 ---
 
 ## 七、D5 并发与并行表达力（Concurrency & Parallelism Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference: Send/Sync; std::sync/std::thread; RustBelt Ch.5-6; RFC 1296; Rayon Docs]**
@@ -684,6 +693,7 @@ unsafe impl Sync for MyType {}   // MyType 可跨线程共享引用（&MyType: S
 ---
 
 ## 八、D6 抽象与组合表达力（Abstraction & Composition Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.3 Macros; Ch.6 Items; Ch.12 Names; Ch.14 Linkage; RFC 1584; Rust Internals]**
@@ -775,6 +785,7 @@ Rust 的宏系统分为两层：
 ---
 
 ## 九、D7 安全边界表达力（Safety Boundary Expressiveness）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Reference Ch.16 Unsafety; Ch.16.2 Behavior considered undefined; Rustonomicon; RustBelt §8; Miri Book]**
@@ -872,6 +883,7 @@ RustBelt 证明范围:
 ---
 
 ## 十、跨维度对比矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -943,6 +955,7 @@ RustBelt 证明范围:
 ---
 
 ## 十一、演进路线图（与 L7 前沿对齐）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 11.1 各维度演进趋势
@@ -979,6 +992,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 ---
 
 ## 十二、相关概念链接（L0-L7 映射）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -1013,6 +1027,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 > **最终结论**: Rust 的语义表达力不是"最大化"，而是"有纪律的"——在系统编程需要的每个维度上提供足够的表达能力，同时通过类型系统、所有权和编译期检查将表达力的滥用限制在安全的边界内。理解这些边界不是限制，而是**工程能力的精确校准**。
 
 ## 附录：七维表达力光谱 Mindmap
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
@@ -1062,6 +1077,7 @@ mindmap
 ---
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

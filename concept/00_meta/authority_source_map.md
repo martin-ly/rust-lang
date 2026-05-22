@@ -21,6 +21,7 @@
 ---
 
 ## 一、一级来源：Rust 官方与形式化 [来源: 来源分级方法论基于证据金字塔模型 — 官方标准 > 学术论文 > 社区权威 > 实践经验]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -41,6 +42,7 @@
 ---
 
 ## 二、二级来源：跨语言权威入口 [来源: 跨语言对比方法论参照 concept/05_comparative/ 系列文件的对比框架]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -66,6 +68,7 @@
 ---
 
 ## 三、网络权威锚点（永久链接） [来源: 永久链接选择标准: 域名稳定性 > 版本归档 > 社区镜像; 参照 PURL (Persistent Uniform Resource Locator) 标准和 DOI 数字对象标识符的设计原则]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -103,6 +106,7 @@ dtolnay:               https://dtolnay.github.io/
 ---
 
 ## 四、执行批次 [来源: Authority Source Sprint 执行记录; 对齐方法论参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]

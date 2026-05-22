@@ -17,6 +17,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 执行模型同构性矩阵：同步 · 异步 · 并发 · 并行](#rust-执行模型同构性矩阵同步--异步--并发--并行)
@@ -61,6 +62,7 @@
 ---
 
 ## 零、TL;DR —— 执行模型速查
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -79,6 +81,7 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 ---
 
 ## 一、权威来源与同构性方法论
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 同构性的定义
@@ -121,6 +124,7 @@ graph TD
 ---
 
 ## 二、执行模型总览矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 执行模型 | 调度方式 | 内存模型 | 通信机制 | Rust 代表库 | Go 对应 | 理论根基 |
@@ -136,6 +140,7 @@ graph TD
 ---
 
 ## 三、同步模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: TRPL §16, Rust Reference §18]：OS 线程
@@ -177,6 +182,7 @@ handle.join().unwrap();
 ---
 
 ## 四、异步模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: RFC 2394, Async Book, Tokio Tutorial]：Future 与无栈协程
@@ -274,6 +280,7 @@ sequenceDiagram
 ---
 
 ## 五、并行模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: rayon docs, Blumofe 1999]：Fork-Join 与工作窃取
@@ -314,6 +321,7 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 ---
 
 ## 六、CSP 模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Hoare 1978, Milner π-Calculus 1992]：Channel 与所有权转移
@@ -364,6 +372,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 ---
 
 ## 七、Actor 模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Hewitt 1973, Actix docs]：命名实体与异步邮箱
@@ -414,6 +423,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 ---
 
 ## 八、内存共享模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Boehm & Adve PLDI 2008, Rust Reference §18.4]：原子性与 happens-before
@@ -458,6 +468,7 @@ fn consumer() {
 ---
 
 ## 九、事件驱动模型
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Stevens UNP, Tokio Internals]：Reactor 与 Proactor
@@ -474,6 +485,7 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 ---
 
 ## 十、Rust ↔ Go
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: rustvsgo.com, SPAA 2024] 执行模型全面对比
@@ -504,6 +516,7 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 ---
 
 ## 十一、async/await / CPS / 状态机
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: RFC 2394, Danvy & Filinski 1990] 三重等价性
@@ -536,6 +549,7 @@ CPS:               fn f(k: impl FnOnce(T) -> R) -> R {
 ---
 
 ## 十二、执行模型选择决策树
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid

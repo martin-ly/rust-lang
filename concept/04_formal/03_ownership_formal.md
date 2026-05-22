@@ -7,6 +7,7 @@
 > **定理链编号**: T-100 借用检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全完备性
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RustBelt]]
@@ -89,6 +90,7 @@ $entry
 ---
 
 ## 零、认知路径（Cognitive Path）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RustBelt]]
@@ -211,6 +213,7 @@ stateDiagram-v2
 ---
 
 ## 一、权威定义（Definition）
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [RustBelt]]
@@ -261,6 +264,7 @@ COR 的核心类型判断：
 ---
 
 ## 二、概念属性矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
