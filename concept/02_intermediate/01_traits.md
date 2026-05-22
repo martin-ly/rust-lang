@@ -25,6 +25,7 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference — Traits]]
 
 - [Trait \[来源: TRPL Ch. 10.2\]s（Trait 系统）](#trait-来源-trpl-ch-102strait-系统)
   - [📑 目录](#-目录)
@@ -84,6 +85,10 @@
     - [Step 4: 类型论映射 — Curry-Howard 与 Type Class](#step-4-类型论映射--curry-howard-与-type-class)
     - [Step 5: 工程权衡 — 静态分发 vs 动态分发](#step-5-工程权衡--静态分发-vs-动态分发)
     - [Step 6: 形式化掌控 — 定理链与设计验证](#step-6-形式化掌控--定理链与设计验证)
+| 补充来源项 1 | [来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html) | ✅ |
+| 补充来源项 2 | [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html) | ✅ |
+| 补充来源项 3 | [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ |
+| 补充来源项 4 | [来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class) | ✅ |
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、相关概念链接](#十相关概念链接)
     - [补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#补充章节impl-trait-在-trait-定义中的使用rpitit--afit)
@@ -120,6 +125,7 @@
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
+> [来源: [Rust Reference — Traits]]
 
 ### 1.1 Wikipedia 对齐定义
 
@@ -164,6 +170,7 @@ Trait 作为逻辑命题:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [Rust Reference — Traits]]
 
 ### 2.1 Trait 类型分类矩阵
 
@@ -212,6 +219,7 @@ Trait 作为逻辑命题:
 ---
 
 ## 三、思维导图（Mind Map）
+> [来源: [Rust Reference — Traits]]
 
 ```mermaid
 graph TD
@@ -249,6 +257,7 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 作为学习导航锚点，每掌握一个子概念后回到图中定位其拓扑位置，避免碎片化记忆。
 > **关键洞察**: Trait 系统的设计精髓是"接口定义、泛型约束、分发机制"的三层正交分离，Orphan Rule 是连接三层的保险装置。
+[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 >
 > [来源: 💡 原创分析]
 
@@ -257,6 +266,7 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+> [来源: [Rust Reference — Traits]]
 
 > **[来源: RFC 1023; Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化的确定性。
 
@@ -452,6 +462,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+> [来源: [Rust Reference — Traits]]
 
 ### 5.1 正确示例：Trait 定义与实现
 
@@ -750,10 +761,12 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 **原因**: `Vec<u8>` 同时满足 `Vec<T>`（T=u8）和 `Vec<u8>`，但两者不是严格的子类型关系。`min_specialization` 要求特化链必须是**全序（total order）**，禁止这种菱形重叠。
 
 > **关键洞察**: Specialization 不是"多继承"的替代物。它的语义是"为更具体的类型提供更高效的实现"，而非"为同一类型附加多个行为"。这与 C++ 模板特化的"代码选择"机制同构，但受 Coherence 公理约束。
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]
 
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
+> [来源: [Rust Reference — Traits]]
 
 > **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
 
@@ -781,6 +794,7 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 遇到 E0119 错误时，沿树节点自查：是否存在 blanket impl？是否与具体 impl 重叠？两个 blanket 是否冲突？
 > **关键洞察**: Coherence 不是自动保证的——blanket impl 的存在会引入系统性冲突风险，specialization 只是缓解而非消除。
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 >
 > [来源: 💡 原创分析]
 
@@ -817,6 +831,7 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 编写 `impl<T> Foo for T` 前，先检查目标类型是否已有具体 impl；若需分层行为，评估 specialization 的适用性。
 > **关键洞察**: Blanket impl 的"全覆盖"是理想化的数学语义，工程现实中它必须与具体 impl 形成偏序关系才能共存。
+[来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class)]
 >
 > [来源: 💡 原创分析]
 
@@ -857,6 +872,7 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 返回单一实现用 `impl Trait`，异构集合用 `dyn Trait`；遇到 E0746 时沿树回溯检查分发方式选择。
 > **关键洞察**: `impl Trait` 和 `dyn Trait` 在类型论中不等价——前者是 ∃T.编译期已知(Trait(T))，后者是 ∃T.运行时已知(Trait(T))，信息隐藏的时机决定了能力边界。
+[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 >
 > [来源: 💡 原创分析]
 
@@ -897,6 +913,7 @@ graph TD
 > [来源: [TRPL — Traits](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 > **使用建议**: 设计 Trait 时若需支持 dyn，将 `Self: Sized` 方法拆分到独立 Trait（如 Iterator vs ExactSizeIterator）。
 > **关键洞察**: Clone 等非对象安全 Trait 在泛型约束中完全可用——对象安全限制的是运行时多态能力，而非编译期接口契约能力。
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html)]
 >
 > [来源: 💡 原创分析]
 
@@ -914,6 +931,7 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+> [来源: [Rust Reference — Traits]]
 
 ### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
 
@@ -1047,6 +1065,7 @@ fn test_auto_trait() {
 ---
 
 ## 八、认知路径（Cognitive Path）
+> [来源: [Rust Reference — Traits]]
 
 > **[原创分析]** · **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构，六步形成"感性→知性→理性"的完整认知螺旋。 💡 原创分析
 
@@ -1149,6 +1168,7 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 九、知识来源关系（Provenance）
+> [来源: [Rust Reference — Traits]]
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -1172,6 +1192,7 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 十、相关概念链接
+> [来源: [Rust Reference — Traits]]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -1679,6 +1700,7 @@ struct Wrapper<T>(T);
 ```
 
 > **关键洞察**: `#[fundamental]` 是 Orphan Rule 的**安全阀**（safety valve），而非通用工具。它仅授予那些"语义上完全透明"的类型（引用、Box），因为这些类型的行为完全由其内容类型决定。将 `#[fundamental]` 开放给任意用户定义类型会导致 coherence 的系统性崩溃。
+[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 
 > **来源**: [RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html) · [Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules) · [RFC 2451](https://rust-lang.github.io/rfcs/2451-re-rebalancing-coherence.html)
 
@@ -1764,12 +1786,14 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 **原因**: Negative impl 必须满足与正向 impl 相同的 non-overlapping 约束。在 specialization 稳定之前，同一类型不能同时存在正负实现。
 
 > **关键洞察**: Negative impl 是 Rust trait 系统从**纯归纳定义**（只有正向规则）向**经典逻辑**（允许否定公理）的扩展。它为 unsafe 代码的形式化验证提供了关键基础设施——通过 `impl !Send for T`，开发者可以向编译器证明"此类型永远不会被发送到其他线程"，这是数据竞争自由证明的基石。
+[来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class)]
 
 > **来源**: [RFC 683](https://rust-lang.github.io/rfcs/0683-trait-system-refactor.html) · [Tracking Issue #68318](https://github.com/rust-lang/rust/issues/68318) · [Rust Unstable Book: negative_impls](https://doc.rust-lang.org/beta/unstable-book/language-features/negative-impls.html)
 
 ---
 
 ## 十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）
+> [来源: [Rust Reference — Traits]]
 
 > **[来源: Rust Project Goals 2026; rustc-next-trait-solver  crate]** ✅
 
@@ -1825,12 +1849,14 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 - 一些 previously-rejected 的合法代码会被正确接受
 
 > **关键洞察**: Next solver 不是"新功能"，而是"基础设施升级"。它不会立即改变你能写的 Rust 代码，但它是 GATs、TAIT、specialization 等特性从 "能用但有 bug" 走向 "稳定且可靠" 的必要条件。这类似于 2024 Edition 的 `unsafe_op_in_unsafe_fn` ——表面上是小改动，实际上是对语言契约的深层强化。
+[来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html)]
 
 > **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html) · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
 
 ---
 
 ## 十一、待补充与演进方向（TODOs）
+> [来源: [Rust Reference — Traits]]
 
 - [x] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 已完成 §补充章节 RPITIT —— 2026-05-13
 - [x] **TODO**: 补充 `Const Trait` / `~const` 实验特性（impl const Trait 区别、替代方案） —— 优先级: 低 —— 已完成 §补充章节 Const Trait —— 2026-05-14

@@ -27,6 +27,7 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Async Book]]
 
 - [Async/Await（异步 \[来源: Async Rust\]编程）](#asyncawait异步-来源-async-rust编程)
   - [📑 目录](#-目录)
@@ -83,6 +84,11 @@
       - [场景 2：无效值检测（非法 bool 构造）](#场景-2无效值检测非法-bool-构造)
       - [场景 3：async 状态机中的未初始化内存](#场景-3async-状态机中的未初始化内存)
       - [Miri 与 async 状态机的特殊关联](#miri-与-async-状态机的特殊关联)
+| 补充来源项 1 | [来源: [Rust Async Book](https://rust-lang.github.io/async-book/) | ✅ |
+| 补充来源项 2 | [来源: [Tokio Docs](https://tokio.rs/) | ✅ |
+| 补充来源项 3 | [来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html) | ✅ |
+| 补充来源项 4 | [来源: [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ |
+| 补充来源项 5 | [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ |
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、待补充与演进方向（TODOs）](#十待补充与演进方向todos)
     - [补充章节：AFIT（Async Fn In Traits）与 RPITIT](#补充章节afitasync-fn-in-traits与-rpitit)
@@ -104,6 +110,7 @@
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 〇、认知路径（Cognitive Path）
+> [来源: [Rust Async Book]]
 
 > **导读**：以下六步构成从直觉困惑到形式验证的完整递进链条。建议按顺序阅读，每步锚定后续章节的特定内容，形成"问题驱动→场景具象→模式抽象→规则形式→代码验证→边界测试"的闭环。
 
@@ -154,6 +161,7 @@ Step 6: "什么时候会阻塞？"
 ---
 
 ## 一、权威定义（Definition）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：在深入 Rust 的 async/await 之前，需先建立跨语言的语义坐标系。以下定义从 Wikipedia 的通用概念出发，收敛到 Rust 官方文档的精确语义，最终形式化为状态机与 trait 系统。三层定义形成"宽泛→精确→可执行"的漏斗。
 
@@ -209,6 +217,7 @@ Poll 类型:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：定义之后需辨析 async 在并发光谱中的精确位置。以下矩阵将 async 与线程、并行对比，澄清"异步≠并行≠并发"的常见误解；随后给出 Future 组合子与运行时选型矩阵，为工程决策提供依据。
 
@@ -258,6 +267,7 @@ Poll 类型:
 ---
 
 ## 三、形式化理论根基（Formal Foundation）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：属性矩阵回答了"是什么"，本节回答"为什么安全"。Rust 的 async/await 安全性建立在两个形式化支柱上：(1) 编译器将 async fn 转换为状态机，(2) Pin 保证该状态机在挂起期间内存地址恒定。二者共同构成"零成本 + 内存安全"的基石。
 
@@ -663,6 +673,7 @@ graph LR
 ---
 
 ## 四、思维导图（Mind Map）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：理论根基建立后，以下思维导图以可视化方式整合同步概念体系，从 Future Trait 出发，辐射到语法糖、Pin 语义、运行时与组合子四个维度。
 
@@ -702,6 +713,7 @@ graph TD
 ---
 
 ## 五、定理一致性矩阵（Theorem Consistency Matrix）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：思维导图提供概念拓扑，而定理矩阵提供严格的推理链条。以下 10 条定理按"语言层（L）→ 变换层（T）→ 约束层（C）→ 运行时层（P）→ 抽象层（A）→ 系统层（S）"递进排列，每行均含"⟹"推理链，展示从前提到结论的必然性。
 
@@ -757,6 +769,7 @@ graph TD
 ---
 
 ## 六、反命题决策树（Counter-proposition Decision Trees）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：定理矩阵回答"什么必然为真"，反命题决策树则揭示"什么看似为真实则不然"。以下三组反命题分别针对零成本、完成性与等价性三个常见误解，反例节点以红色标注，展示从直觉到谬误再到修正的完整路径。
 
@@ -869,6 +882,7 @@ graph TD
 ---
 
 ## 七、决策/边界判定树（Decision / Boundary Tree）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：反命题破除了常见神话，而决策树则提供正向的工程判断框架。以下两棵树分别解决"何时用 async"和"何时用 Pin"的选择问题，为实际编码提供可操作的判定路径。
 
@@ -913,6 +927,7 @@ graph TD
 ---
 
 ## 八、示例与反例（Examples & Counter-examples）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：理论最终需落地为代码。以下示例从正确用法出发，逐步深入到常见陷阱与边界极限测试，覆盖"阻塞误用→Send 约束→取消安全→生命周期"四个维度。
 
@@ -2085,6 +2100,7 @@ fn test_async_ready_flag() {
 ```
 
 > **注意**: `loom::future` 的异步支持主要用于测试**同步原语在异步上下文中的使用**（如 `Mutex`、`Atomic` 在 async 块中的交互），而非测试 async/await 本身的调度语义。async 调度语义由执行器（Tokio 等）保证，不在 loom 的验证范围内。[来源: loom docs: loom::future module]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 **实际用例：验证自定义并发原语**
 
@@ -2220,6 +2236,7 @@ help: alloc232 was deallocated here:
 ```
 
 > **关键洞察**: Miri 不仅报告 UB，还精确追踪**分配点**和**释放点**，帮助开发者理解指针何时变为悬垂。这对于 async 状态机中的自引用结构尤为重要——状态机被 Pin 后若被 unsafe 代码移动，内部自引用指针会变为悬垂，Miri 能精确定位违规的 `move` 操作。
+[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 > [来源: [RFC 2349](https://rust-lang.github.io/rfcs/2349-pin.html)]
 >
@@ -2246,6 +2263,7 @@ error: Undefined Behavior: constructing invalid value of type bool:
 ```
 
 > **关键洞察**: Rust 编译器假设 `bool` 只能是 `0x00` 或 `0x01`，并基于此做分支优化（如将 `if b` 编译为跳转表）。无效 `bool` 值会导致控制流跳转到任意位置。async 状态机的 discriminant（状态标签）同理——若通过 unsafe 构造无效状态标签，恢复执行时会进入不存在的状态分支。
+[来源: [Tokio Docs](https://tokio.rs/)]
 
 > [来源: [Rust Async Book: Cancellation](https://rust-lang.github.io/async-book/09_workarounds/03_cancel_safe.html)]
 >
@@ -2279,6 +2297,7 @@ warning: the type `bool` does not permit being left uninitialized
 ```
 
 > **关键洞察**: async 状态机的局部变量在挂起时被存入状态机结构体。若局部变量未初始化（通过 `MaybeUninit::uninit().assume_init()`），恢复执行后读取该变量即触发 UB。Miri 的 `invalid_value` lint 在解释执行时检测此类问题，而编译器仅发出 warning（无法静态确定 `assume_init` 是否安全）。
+[来源: [TRPL](https://doc.rust-lang.org/book/ch17-00-async-await.html)]
 
 > [来源: [Tokio Docs: Cancellation](https://tokio.rs/tokio/topics/cancellation)]
 >
@@ -2305,6 +2324,7 @@ Miri 的局限（与 loom 互补）:
 ---
 
 ## 九、知识来源关系（Provenance）
+> [来源: [Rust Async Book]]
 
 > **章节过渡**：所有论断均有出处。以下表格明确每条核心论断的来源与可信度等级，便于读者追溯与验证。
 
@@ -2335,6 +2355,7 @@ Miri 的局限（与 loom 互补）:
 ---
 
 ## 十、待补充与演进方向（TODOs）
+> [来源: [Rust Async Book]]
 
 - [x] **TODO**: 补充 Waker/Context 的底层机制 —— 已完成: 2026-05-14
 - [x] **TODO**: 补充 `Stream` / `Sink` trait 完整分析 —— 已完成: 2026-05-14
@@ -2444,6 +2465,7 @@ trait DataProvider<'a> {
 ---
 
 ## 十一、国际课程与论文对齐
+> [来源: [Rust Async Book]]
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
@@ -2462,6 +2484,7 @@ trait DataProvider<'a> {
 ---
 
 ## 十二、`AsyncFn` Trait 家族：异步闭包的类型化（1.85 stable，RFC 3668）
+> [来源: [Rust Async Book]]
 
 > **稳定版本**: Rust 1.85 (stable) · **适用 Edition**: 所有 Edition（非 Edition-gated）
 > **形式化意义**: 高阶函数的异步扩展——效果系统（Effect System）的原型
@@ -2546,6 +2569,7 @@ async fn async_fn(f: impl AsyncFn(i32) -> i32) -> i32 { f(42).await }
 ---
 
 ## 十三、`gen` blocks：同步协程的语义定位
+> [来源: [Rust Async Book]]
 
 > **稳定版本**: Rust 1.95 (stable，需 nightly feature gate) · **预计全面稳定**: 1.98+
 > **形式化意义**: 同步协程（Coroutine）的语法糖——`Iterator` 状态机的自动化生成
@@ -2610,6 +2634,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ---
 
 ## 相关概念链接
+> [来源: [Rust Async Book]]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -2639,6 +2664,7 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 ---
 
 ## Wikipedia 概念对齐
+> [来源: [Rust Async Book]]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 

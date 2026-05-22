@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Patterns](https://doc.rust-lang.org/reference/patterns.html) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::assert_matches](https://doc.rust-lang.org/std/assert_matches/macro.assert_matches.html) · [RFC 2005 — `matches!`](https://github.com/rust-lang/rfcs/pull/2005) · [std::matches](https://doc.rust-lang.org/std/macro.matches.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [`assert_matches!`：模式匹配断言的形式化语义](#assert_matches模式匹配断言的形式化语义)
   - [📑 目录](#-目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 `matches!`：模式匹配的布尔化
 
@@ -136,6 +138,7 @@ debug_assert_matches!(config, Config::Debug { verbose: true } => {
 ---
 
 ## 二、形式化语义
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 与 `assert!` / `assert_eq!` 的对比
 
@@ -206,6 +209,7 @@ assert_matches!(msg, Message::Coord { x, y } => {
 ---
 
 ## 三、使用场景与最佳实践
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 测试中的 Result/Option 断言
 
@@ -279,6 +283,7 @@ flowchart TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -355,6 +360,7 @@ let x = 42;
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 模式匹配的形式化根基
 - [Error Handling](./04_error_handling.md) — Result/Option 测试断言实践

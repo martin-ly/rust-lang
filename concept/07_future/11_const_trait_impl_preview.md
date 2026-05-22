@@ -10,6 +10,7 @@
 > **来源**: [Rust RFC — Const Traits](https://github.com/rust-lang/rfcs/pull/2632) · [Rust Reference — Const Evaluation](https://doc.rust-lang.org/reference/const_eval.html) · [Tracking Issue #67792](https://github.com/rust-lang/rust/issues/67792) · [Const Eval Working Group](https://github.com/rust-lang/const-eval)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Const Trait Impl 预研：常量上下文中的 Trait 泛化](#const-trait-impl-预研常量上下文中的-trait-泛化)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：常量上下文中的 Trait 鸿沟
 
@@ -115,6 +117,7 @@ graph TD
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 常量 Trait 的约束继承
 
@@ -179,6 +182,7 @@ graph TD
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 基础 const trait
@@ -203,6 +207,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -261,6 +266,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -290,6 +296,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Generics](../02_intermediate/02_generics.md) — 泛型与参数多态
 - [Traits](../02_intermediate/01_traits.md) — Trait 系统与接口抽象

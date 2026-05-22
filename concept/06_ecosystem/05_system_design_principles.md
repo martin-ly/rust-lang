@@ -47,6 +47,7 @@
 ---
 
 ## 零、TL;DR —— 系统设计原则速查
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 原则                    Rust 机制                      国际权威对应                    设计意图
@@ -64,6 +65,7 @@
 ---
 
 ## 一、权威来源与设计原则分类学
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 原则 | 国际权威来源 | 权威类型 | 应用领域 |
 |:---|:---|:---|:---|
@@ -78,6 +80,7 @@
 ---
 
 ## 二、七项核心设计原则
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: NIST SP 800-207, SEL4, Stroustrup 1994, Armstrong 2003]
 
@@ -234,6 +237,7 @@ impl Worker {
 ---
 
 ## 三、系统设计决策矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Rust Performance Book, Systems Design Interview, CAP Theorem]
 
@@ -416,6 +420,7 @@ graph TD
 ---
 
 ## 八、相关概念链接（L0-L7 映射）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
 
@@ -442,6 +447,7 @@ graph TD
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
 
 ## 七、系统设计决策的知识流动图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **设计决策如何在系统各层之间流动？**
 

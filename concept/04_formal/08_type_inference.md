@@ -10,6 +10,7 @@
 > **来源**: [Hindley 1969 — Principal Type-Schemes](https://doi.org/10.1093/comjnl/12.2.166) · [Milner 1978 — A Theory of Type Polymorphism](https://doi.org/10.1016/0022-0000(78)90014-4) · [Rust Reference — Type Inference](https://doc.rust-lang.org/reference/type-inference.html) · [Wikipedia — Hindley-Milner Type System](https://en.wikipedia.org/wiki/Hindley%E2%80%93Milner_type_system) · [Rust RFC 438 — Type Inference](https://github.com/rust-lang/rfcs/pull/438)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 从显式类型到隐式推断
 
@@ -138,6 +140,7 @@ graph TD
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 统一（Unification）
 
@@ -229,6 +232,7 @@ v.push(42);  // 推断 Vec<i32>
 ---
 
 ## 三、Rust 与 HM 的差异
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 对 HM 的关键扩展:
@@ -275,6 +279,7 @@ Rust 对 HM 的关键扩展:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -397,6 +402,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type Theory](./02_type_theory.md) — 类型论基础
 - [Generics](../02_intermediate/02_generics.md) — 泛型系统

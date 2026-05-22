@@ -37,6 +37,7 @@ $entry
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
 >
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 结构规则对比矩阵
 
@@ -621,6 +622,7 @@ fn session_demo() {
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
 >
 ## 十、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -721,6 +723,7 @@ Cut 消除规则（线性逻辑核心元定理）:
 > **来源**: [Girard 1987 — Linear Logic] · [Wadler 1990 — Linear types can change the world] · [RustBelt: POPL 2018]
 >
 ## 十二、Linear Haskell 与 Rust 的跨语言类型系统对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: Bernardy et al. 2017, *Linear Haskell: Practical Linearity in a Higher-Order Polymorphic Language*; PLDI 2018; GHC User Guide: LinearTypes]** Linear Haskell 是 GHC 9.x+ 引入的线性类型扩展，通过**重数（multiplicity）**概念在现有 Haskell 类型系统中嵌入线性约束。
 
@@ -865,6 +868,7 @@ Rust 所有权系统（仿射变体）:
 ---
 
 ## 十四、Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 线性逻辑核心概念与国际知识库映射。
 

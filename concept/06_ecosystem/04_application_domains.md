@@ -15,6 +15,7 @@
 ---
 
 ## 一、权威定义
+> [来源: [Rust Foundation]]
 
 > **[来源: Embedded Rust Book; Embassy Book]** ✅
 
@@ -55,6 +56,7 @@
 ---
 
 ## 认知路径（Cognitive Path）
+> [来源: [Rust Foundation]]
 
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
@@ -85,6 +87,7 @@ embedded-hal/actix/anchor/bevy等框架
 性能需求/安全需求/团队经验/生态成熟度矩阵
 
 ## 二、概念属性矩阵
+> [来源: [Rust Foundation]]
 
 > **[来源: clap Docs; Rust CLI Book]** ✅
 
@@ -117,6 +120,7 @@ embedded-hal/actix/anchor/bevy等框架
 ---
 
 ## 三、思维导图
+> [来源: [Rust Foundation]]
 
 > **[来源: Rust for Linux; Writing an OS in Rust]** ✅
 
@@ -155,6 +159,7 @@ graph TD
 ---
 
 ## 四、应用领域详解
+> [来源: [Rust Foundation]]
 
 > **[来源: wasm-bindgen Guide; WASI Preview]** ✅
 
@@ -351,6 +356,7 @@ Rust 编译为 WASM 的核心优势：
 | **Sycamore** | 细粒度响应式 | 类似 Solid.js、性能优先 | ⭐⭐⭐ |
 
 > **关键洞察**: Leptos 的**细粒度响应式**系统不在 WASM 层面做虚拟 DOM diff，而是直接在编译期生成信号（signal）依赖图。这使得其 WASM 输出体积极小，且运行时性能与手写 JavaScript 相当。
+[来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **来源**: [WebAssembly.org] · [Leptos Book] · [Dioxus Docs] · 可信度: ✅
 
@@ -394,6 +400,7 @@ fn main() -> ! {
 - 异步多任务 → `embassy`（协作式）或 `RTIC`（基于中断）
 
 > **关键洞察**: `defmt`（deferred formatting）通过将格式化字符串留在主机端，仅传输原始数据到调试器，将日志开销降低 **10-100 倍**。这是 Rust 嵌入式生态的**杀手级工具**。
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **来源**: [Ferrous Systems] · [Embassy Book] · [probe-rs] · 可信度: ✅
 
@@ -434,6 +441,7 @@ fn main() -> Result<()> {
 ```
 
 > **关键洞察**: Rust CLI 的**分发优势**是其他语言难以比拟的——`cargo build --release` 生成单二进制，`cargo-dist` 自动打包 Windows `.msi`、macOS `.dmg`、Linux `.deb`。无需运行时、无依赖地狱。
+[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]
 
 > **来源**: [Rust CLI Book] · [cargo-dist docs] · 可信度: ✅
 
@@ -471,12 +479,14 @@ fn move_player(
 ```
 
 > **关键洞察**: Bevy 的调度器在**编译期分析系统签名**，构建数据依赖有向无环图（DAG），自动并行化无依赖的系统。这是 Rust 借用检查器在**运行时调度**中的延伸应用。
+[来源: [Tokio Docs](https://tokio.rs/)]
 
 > **来源**: [Bevy Book] · [Bevy Cheatsheet] · 可信度: ✅
 
 ---
 
 ## 五、领域与 L1-L5 概念映射
+> [来源: [Rust Foundation]]
 
 > **[来源: Tokio Documentation; QUIC RFC 9000]** ✅
 
@@ -494,6 +504,7 @@ fn move_player(
 ---
 
 ## 六、反命题与边界分析
+> [来源: [Rust Foundation]]
 
 > **[来源: egui Docs; wgpu Docs]** ✅
 
@@ -537,6 +548,7 @@ graph TD
 ---
 
 ## 七、扩展内容：工业案例与趋势
+> [来源: [Rust Foundation]]
 
 > **[来源: Candle Docs; Burn Docs]** ✅
 
@@ -632,12 +644,14 @@ graph TD
 > [来源: 💡 原创分析]
 
 > **关键洞察**: 领域选择不是“Rust 是否适合”，而是**“约束优先级排序”**。当性能、安全、并发中任意两项为硬约束时，Rust 通常是最佳选择；当开发速度和生态数量为唯一约束时，其他语言可能更优。
+[来源: [Wikipedia — Software engineering](https://en.wikipedia.org/wiki/Software_engineering)]
 
 > **来源**: [Rust in Production] · [Rust Foundation Survey] · 可信度: ✅
 
 ---
 
 ## 八、知识来源关系（Provenance）
+> [来源: [Rust Foundation]]
 
 > **[来源: Data Engineering in Rust; polars Docs]** ✅
 
@@ -665,6 +679,7 @@ graph TD
 ---
 
 ## 九、相关概念链接
+> [来源: [Rust Foundation]]
 
 > **[来源: Cargo Script RFC; Rust Scripting]** ✅
 
@@ -833,12 +848,14 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 | **并发** | 百万连接内存 | ~50GB | Go (~100GB), Erlang (~30GB) | 社区 benchmark |
 
 > **注意**：benchmark 数据受具体实现、硬件、配置影响。上述数据仅供参考，实际项目需自行测试。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **来源**: [TechEmpower Framework Benchmarks] · [Benchmarks Game] · [Rust 嵌入式书] · [社区 benchmark]
 
 ---
 
 ## 十、待补充与演进方向（TODOs）
+> [来源: [Rust Foundation]]
 
 > **[来源: Embedded Rust Book; Embassy Book]** ✅
 
@@ -929,6 +946,7 @@ fn view(app: &App, frame: Frame) {
 - [x] **低**: 建立工业案例的持续追踪列表（谁在用 Rust、为什么、效果如何） —— 已融入 §9.2 失败案例分析和各应用领域章节
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
+> [来源: [Rust Foundation]]
 
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
 
@@ -951,6 +969,7 @@ fn view(app: &App, frame: Frame) {
 | **领域选择多维决策** | 性能/安全/生态/人才 ⟹ | 无银弹 | 混合语言架构 | 技术选型框架 |
 
 ## 反命题分析（Anti-Propositions）
+> [来源: [Rust Foundation]]
 
 > **[来源: clap Docs; Rust CLI Book]** ✅
 
@@ -1076,6 +1095,7 @@ graph TD
 ---
 
 ## 十一、生态前沿的形式化梳理（2026.05）
+> [来源: [Rust Foundation]]
 
 > **[来源: Rust for Linux; Writing an OS in Rust]** ✅
 
@@ -1213,6 +1233,7 @@ graph TD
 ---
 
 ## 十二、定理一致性矩阵（领域安全层）
+> [来源: [Rust Foundation]]
 
 > **[来源类型: 原创分析; Embassy Book; Rust for Linux; Aya Docs; QUIC RFC]** 以下矩阵梳理各应用领域的关键安全保证与失效条件。
 

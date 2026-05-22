@@ -10,6 +10,7 @@
 > **来源**: [Rust RFC — Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458) · [Rustonomicon — Unsafe Rust](https://doc.rust-lang.org/nomicon/) · [Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/) · [Rust Internals — Unsafe Field Discussion](https://internals.rust-lang.org/)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Unsafe Fields 预研：字段级安全边界的精确标注](#unsafe-fields-预研字段级安全边界的精确标注)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：unsafe 块的过度扩张
 
@@ -116,6 +118,7 @@ Rust unsafe 模型的演进层次:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法与语义
 
@@ -200,6 +203,7 @@ graph LR
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 原始指针封装
@@ -237,6 +241,7 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -292,6 +297,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -330,6 +336,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust 与内存安全
 - [Ownership](../01_foundation/01_ownership.md) — 所有权与借用

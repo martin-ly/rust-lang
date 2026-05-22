@@ -15,6 +15,7 @@
 > [Wikipedia — Rust (programming language)](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs Python：系统编程与动态脚本的对照分析](#rust-vs-python系统编程与动态脚本的对照分析)
   - [📑 目录](#-目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 设计哲学对比
 
@@ -148,6 +150,7 @@ graph LR
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 错误处理：Result vs Exception
 
@@ -251,6 +254,7 @@ def read_config(path: str) -> dict:
 ---
 
 ## 三、选型决策矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 场景 → 推荐语言 → 关键理由
@@ -291,6 +295,7 @@ CLI 工具:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -415,6 +420,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs Go](./02_rust_vs_go.md) — Rust vs Go 对比
 - [Rust vs Java](./06_rust_vs_java.md) — Rust vs Java 对比

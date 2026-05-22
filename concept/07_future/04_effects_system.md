@@ -16,6 +16,7 @@ $entry
 ---
 
 ## 〇、Effect System 概念全景
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 mindmap
@@ -50,6 +51,7 @@ mindmap
 ---
 
 ## 一、Effect 系统是什么？
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **[来源: Plotkin & Pretnar 2009; Koka Documentation; Wikipedia: Effect System]** ✅
 
@@ -91,6 +93,7 @@ mindmap
 ---
 
 ## 二、Rust 中的现有 Effect 表达
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实现了效果的隐性追踪**。
 
@@ -192,6 +195,7 @@ where
 ---
 
 ## 三、跨语言对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Koka; Eff Language; Haskell GHC; Java Exceptions]** ✅
 
@@ -268,6 +272,7 @@ Rust 的替代方案:
 ---
 
 ## 四、对 Rust 类型系统的潜在影响
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **[来源: Rust Internals Discussion; Type Theory Research]** ⚠️ 推测性
 的可能性
@@ -423,6 +428,7 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## 六、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -459,6 +465,7 @@ Q4: 与现有生态的兼容性？
 ---
 
 ## Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 

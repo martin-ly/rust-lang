@@ -15,6 +15,7 @@
 > [Wikipedia — Defense in Depth](https://en.wikipedia.org/wiki/Defense_in_depth_(computing))
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [安全 \[来源: OWASP\]实践：Rust 代码的防御性编程](#安全-来源-owasp实践rust-代码的防御性编程)
   - [📑 目录](#-目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 的安全基础
 
@@ -153,6 +155,7 @@ Rust 供应链风险:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 输入验证与清洗
 
@@ -306,6 +309,7 @@ Rust 安全审计工具:
 ---
 
 ## 三、安全模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 工具
@@ -347,6 +351,7 @@ Secrets 管理:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -409,6 +414,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 假设 safe Rust 完全安全
@@ -476,6 +482,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
 - [Type System](../01_foundation/04_type_system.md) — 类型系统

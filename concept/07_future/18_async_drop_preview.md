@@ -14,6 +14,7 @@
 > [TRPL Ch17 — Pin](https://doc.rust-lang.org/book/ch17-04-pin.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Async Drop：异步资源的优雅销毁](#async-drop异步资源的优雅销毁)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：同步 Drop 与异步资源的冲突
 
@@ -97,6 +99,7 @@ AsyncDrop 的提案设计（RFC 3308，简化版）:
   │  ├── async_drop(): 异步优雅关闭（需要 executor）         │
   │  └── drop(): 同步 fallback（内存不安全但必须完成）       │
   └─────────────────────────────────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   编译器生成的销毁逻辑:
   1. 如果类型实现 AsyncDrop:
@@ -144,6 +147,7 @@ AsyncDrop 与 Pin 的复杂关系:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 当前 Workaround 模式
 
@@ -270,6 +274,7 @@ graph TD
 ---
 
 ## 三、设计决策矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 当前推荐方案 → 未来 AsyncDrop 方案
@@ -297,6 +302,7 @@ Panic 中的资源清理:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -356,6 +362,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 假设 AsyncDrop 会立即稳定
@@ -421,6 +428,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程
 - [Pin](../03_advanced/06_pin_unpin.md) — Pin 不动性

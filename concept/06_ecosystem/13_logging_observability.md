@@ -14,6 +14,7 @@
 > [Prometheus Rust Client](https://github.com/prometheus/client_rust)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [日志与可观测性：Rust 服务端监控生态](#日志与可观测性rust-服务端监控生态)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 可观测性三支柱
 
@@ -130,6 +132,7 @@ async fn handle_request(req: Request) {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 日志级别与过滤
 
@@ -214,6 +217,7 @@ sequenceDiagram
 ---
 
 ## 三、选型决策矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 场景 → 推荐方案 → 关键 crate
@@ -249,6 +253,7 @@ WebAssembly:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -371,6 +376,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程（tracing 的核心用例）
 - [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理（与日志紧密关联）

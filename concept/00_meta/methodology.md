@@ -93,6 +93,7 @@ mindmap
 
 ## 一、权威定义（Definition）
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 ## 三、形式化理论根基（Formal Foundation）
 ## 四、思维导图（Mind Map）
 ## 五、决策/边界判定树（Decision / Boundary Tree）
@@ -449,6 +450,7 @@ fn main() {
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [概念一致性检查清单](./audit_checklist.md) — 质量门禁与审计标准
 - [语义表达力全景梳理](./semantic_expressiveness.md) — 横向语义维度框架

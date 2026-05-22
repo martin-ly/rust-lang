@@ -24,6 +24,7 @@ $entry
 ---
 
 ## 一、权威定义（Definition）
+> [来源: [RustBelt]]
 
 ### 1.1 Wikipedia 权威定义
 
@@ -53,6 +54,7 @@ $entry
 ---
 
 ## 二、定理一致性矩阵（Theorem Consistency Matrix）
+> [来源: [RustBelt]]
 
 > **[学术来源: Jung et al. 2017 POPL; Jung et al. 2018 POPL; Iris: JFP 2018]** 以下定理矩阵基于 RustBelt 系列论文及 Iris 框架的公理体系，每行包含"被依赖"（下游定理）与"失效条件"（假设被违反的情形）。
 
@@ -171,6 +173,7 @@ graph BT
 > [来源: [RustBelt Paper]]
 
 ## 三、Concurrent Separation Logic（并发分离逻辑）
+> [来源: [RustBelt]]
 
 > **[学术来源: O'Hearn 2007 (CSL 原始论文); Jung et al. 2015 (Iris); RustBelt: POPL 2018 §4–§5]** CSL 是分离逻辑向并发领域的自然延伸。Rust 的所有权系统与 CSL 的资源分区思想存在深层同构：`&mut T` 对应独占的分离合取 `l ↦ v`，`&T` 对应持久资源 `□(l ↦ v)`，`Mutex<T>` 对应资源不变量 `I`。
 
@@ -360,6 +363,7 @@ drop(arc2);  // rc: 1 → 0, 释放 data
 ---
 
 ## 四、反命题决策树（Antithesis Decision Trees）
+> [来源: [RustBelt]]
 
 > **[学术来源: RustBelt 系列论文; Iris 框架设计原则]** 以下决策树用于识别对 RustBelt 和形式化验证的常见误解，每棵树对应一个过度概括的命题。
 
@@ -434,6 +438,7 @@ graph TD
 ---
 
 ## 五、认知路径（Cognitive Path）
+> [来源: [RustBelt]]
 
 ```text
 认知路径：RustBelt 五步法
@@ -506,6 +511,7 @@ graph TD
 ---
 
 ## 七、验证工具链快速对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析]** 💡 以下为各工具核心能力的一页纸速查。
 
@@ -873,6 +879,7 @@ graph TD
 ---
 
 ## 十二、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -1055,6 +1062,7 @@ unsafe {
 ---
 
 ## 十四、Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** RustBelt 与分离逻辑核心概念与国际知识库映射。
 

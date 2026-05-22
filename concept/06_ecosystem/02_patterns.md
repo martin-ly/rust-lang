@@ -15,6 +15,7 @@
 ---
 
 ## 一、权威定义
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Design Patterns Book; Rust API Guidelines]** ✅
 
@@ -41,6 +42,7 @@
 ---
 
 ## 二、模式分类矩阵
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Wikipedia — Design pattern; Wikipedia — RAII]** ✅
 
@@ -85,6 +87,7 @@
 ---
 
 ## 三、Mermaid 图：模式关系图
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Reference: Generics; RFC 1210]** ✅
 
@@ -122,6 +125,7 @@ graph TD
 ---
 
 ## 四、各模式详解
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Tokio Documentation; Actix Docs]** ✅
 
@@ -778,6 +782,7 @@ struct WriterVTable {
 ```
 
 > **关键洞察**: `Box<dyn Write>` 是**动态擦除**，运行时通过 vtable 分发；`enum Either<L, R>` 是**静态擦除**，编译期确定分支，零运行时开销。
+[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]
 
 #### async/await 设计模式
 
@@ -857,6 +862,7 @@ impl Drop for FooContext {
 ```
 
 > **关键洞察**: FFI 安全封装的三层防线——**前置条件检查**（输入验证）、**不变式维护**（生命周期管理）、**后置条件保证**（返回值校验）。Rust 的类型系统负责编码不变式，运行时检查负责验证前置条件。
+[来源: [Rust API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 > **来源**: [The Rustonomicon — FFI] · [Rust FFI Guidelines] · 可信度: ✅
 
@@ -926,6 +932,7 @@ fn load(path: &str) -> Result<Config, Error> {
 ---
 
 ## 五、反模式（Anti-patterns）
+> [来源: [Rust Design Patterns]]
 
 > **Bloom 层级**: 应用 → 分析
 
@@ -1212,6 +1219,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 > **过渡**：反模式聚焦具体编码实践中的陷阱。以下反命题决策树则上升一层，批判性审视关于设计模式的元认知谬误。
 
 ## 六、反命题决策树 {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Performance Book; Benchmarks Game]** ✅
 
@@ -1363,10 +1371,12 @@ fn main() {
 ```
 
 > **关键洞察**: Typestate 模式利用泛型将运行时状态检查转化为编译期类型约束；Builder 模式利用所有权转移保证构造过程的原子性。两者都是 Rust 类型系统的**零成本抽象**——编译后无运行时开销。
+[来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ---
 
 ## 七、与 L1-L3 的概念映射 {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Design Patterns Book; Rust API Guidelines]** ✅
 
@@ -1387,6 +1397,7 @@ fn main() {
 ---
 
 ## 八、学术来源 {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Wikipedia — Design pattern; Wikipedia — RAII]** ✅
 
@@ -1402,6 +1413,7 @@ fn main() {
 ---
 
 ## 九、知识来源关系（Provenance） {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Reference: Generics; RFC 1210]** ✅
 
@@ -1430,6 +1442,7 @@ fn main() {
 ---
 
 ## 十、相关概念链接 {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: Tokio Documentation; Actix Docs]** ✅
 
@@ -1448,6 +1461,7 @@ fn main() {
 ---
 
 ## 十一、待补充与演进方向（TODOs） {L6}
+> [来源: [Rust Design Patterns]]
 
 > **[来源: RFC 1598 GATs; Rust Reference: GATs]** ✅
 
@@ -1465,12 +1479,14 @@ fn main() {
 | **Channel (mpsc)** | 生产者-消费者 | 内存拷贝/移动 | 缓冲区 | 低 | 任务解耦 |
 
 > **关键洞察**：Rust 的设计模式选择通常是在**零运行时开销**（单态化、GATs）和**编译期灵活性**（dyn、Type Erasure）之间权衡。没有绝对的最优模式，只有最匹配场景约束的模式。
+[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **来源**: [Rust Design Patterns Book] · [Rust Performance Book] · [Benchmarks Game]
 
 ---
 
 ## 九、定理一致性矩阵（模式正确性层）
+> [来源: [Rust Design Patterns]]
 
 > **[来源类型: 原创分析; Rust Design Patterns Book; Rust API Guidelines]** 以下矩阵梳理常见设计模式在 Rust 中的安全保证与误用后果。
 

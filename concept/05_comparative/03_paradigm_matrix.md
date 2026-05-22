@@ -58,6 +58,7 @@ Step 6: 怎么在代码中选择范式？
 ---
 
 ## 二、多语言形式化对比矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 核心维度矩阵（带 ⟹ 推理链）
 
@@ -315,6 +316,7 @@ const fn / const 泛型
 > **过渡**: 一致性矩阵证明自洽性，但科学严谨性要求主动寻找反命题和边界条件。
 
 ## 七、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 反命题: "Rust 是系统编程的最优解"
 
@@ -411,6 +413,7 @@ graph TD
 ---
 
 ## 八、扩展内容：形式化谱系与更多语言对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 编程语言形式化谱系
 
@@ -465,6 +468,7 @@ graph TD
 ---
 
 ## 九、新兴语言趋势分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **过渡**: 从静态矩阵对比延伸到动态演进——新兴语言的设计趋势揭示 Rust 所有权模型的行业影响力。
 
@@ -697,6 +701,7 @@ fn process(data: Vec<String>) -> Vec<String> {
 ---
 
 ## 十二、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

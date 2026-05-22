@@ -10,6 +10,7 @@
 > **来源**: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968) · [Iris Framework](https://iris-project.org/) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [分离逻辑：并发安全的指针推理系统](#分离逻辑并发安全的指针推理系统)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 霍尔逻辑与指针的困境
 
@@ -74,6 +76,7 @@
   │ 别名        │ 允许别名（重叠）             │ 禁止别名（互斥）            │
   │ Rust 对应   │ 多个 &T 借用同一数据         │ &mut T 独占访问             │
   └─────────────┴─────────────────────────────┴─────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   基本断言:
   ├── emp: 空堆（不拥有任何内存）
@@ -122,6 +125,7 @@
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 分离逻辑的断言语言
 
@@ -211,6 +215,7 @@ graph TD
 ---
 
 ## 三、Rust 的应用映射
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 Rust 概念 ↔ 分离逻辑映射:
@@ -246,6 +251,7 @@ Rust 概念 ↔ 分离逻辑映射:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -353,6 +359,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership Formal](./03_ownership_formal.md) — 所有权形式化
 - [RustBelt](./04_rustbelt.md) — Rust 类型系统形式化证明

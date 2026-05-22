@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Reference — Allocation](https://doc.rust-lang.org/reference/memory-allocation.html) · [RFC 1398 — Global Allocators](https://rust-lang.github.io/rfcs/1398-global_allocators.html) · [Wikipedia — Memory Management](https://en.wikipedia.org/wiki/Memory_management)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [自定义分配器与内存布局优化](#自定义分配器与内存布局优化)
   - [📑 目录](#-目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 GlobalAlloc Trait
 
@@ -104,6 +106,7 @@ GlobalAlloc:
 ---
 
 ## 二、实践模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 bumpalo — Bump 分配器
 
@@ -202,6 +205,7 @@ Arena 分配器模式:
 ---
 
 ## 三、内存布局与对齐
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 Layout
 
@@ -272,6 +276,7 @@ Arena 分配器模式:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -326,6 +331,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: Layout 不匹配
@@ -386,6 +392,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础
 - [Unsafe Rust](./03_unsafe.md) — unsafe Rust 基础

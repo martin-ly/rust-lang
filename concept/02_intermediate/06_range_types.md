@@ -10,6 +10,7 @@
 > **来源**: [RFC 3550 — New Range Types](https://github.com/rust-lang/rfcs/pull/3550) · [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/) · [std::ops::Range](https://doc.rust-lang.org/std/ops/struct.Range.html) · [core::range](https://doc.rust-lang.org/core/range/index.html) · [Iterator Trait](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [IntoIterator Trait](https://doc.rust-lang.org/std/iter/trait.IntoIterator.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 范围类型语义：`std::ops::Range` → `core::range`](#rust-范围类型语义stdopsrange--corerange)
   - [📑 目录](#-目录)
@@ -34,6 +35,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 范围类型的数学语义
 
@@ -132,6 +134,7 @@ graph LR
 ---
 
 ## 二、形式化语义
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 `Copy` 的语义影响
 
@@ -184,6 +187,7 @@ for i in r { /* r 被消费 */ }
 ---
 
 ## 三、跨语言对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Python：`range()` 函数
 
@@ -245,6 +249,7 @@ assert_eq!(sum1, sum2);
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -296,6 +301,7 @@ let rev = 10..0;
 ---
 
 ## 五、来源与延伸阅读
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -308,6 +314,7 @@ let rev = 10..0;
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统的形式化根基
 - [Generics](./02_generics.md) — 泛型与 trait bound

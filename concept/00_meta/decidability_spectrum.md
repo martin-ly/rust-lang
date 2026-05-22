@@ -409,6 +409,7 @@ Rust 的补偿机制（无法编译期判定时的工程策略）：
 ---
 
 ## 九、L6 代码生成与优化层
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **判定问题**: 优化变换是否保持程序语义？
 > **可判定性**: ❌ **不可判定**
@@ -591,10 +592,12 @@ graph TD
 ```
 
 > **认知功能**: 该图呈现八条定理的**依赖拓扑**——从数学公理（Rice 定理、HM 完备性等）到 Rust 编译器具体保证的推导路径。建议用于理解「为什么编译器能保证 X」的元理论根基。关键洞察：Rust 的编译期安全保证并非工程魔术，而是有坚实数学根基的——Iris 分离逻辑推导无数据竞争（T-DS-006）是最具代表性的例子。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
 ## 十五、相关概念链接（L0-L7 映射）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
 

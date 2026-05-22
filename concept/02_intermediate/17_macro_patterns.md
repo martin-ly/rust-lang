@@ -14,6 +14,7 @@
 > [Wikipedia — Code Generation](https://en.wikipedia.org/wiki/Code_generation_(compiler))
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [宏模式：编译期代码生成的工程实践](#宏模式编译期代码生成的工程实践)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 宏的工程价值
 
@@ -153,6 +155,7 @@
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 DRY 代码生成
 
@@ -331,6 +334,7 @@ const SIZE: usize = const_max(10, 20);
 ---
 
 ## 三、宏模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 宏类型 → 示例
@@ -370,6 +374,7 @@ Builder 生成:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -432,6 +437,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 宏参数多次求值
@@ -504,6 +510,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Attributes and Macros](../01_foundation/12_attributes_and_macros.md) — 属性与宏基础
 - [Proc Macros](../03_advanced/07_proc_macro.md) — 过程宏

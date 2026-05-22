@@ -14,6 +14,7 @@
 > [Wikipedia — Region-based Memory Management](https://en.wikipedia.org/wiki/Region-based_memory_management)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [生命周期高级主题：从 HRTB 到自引用类型](#生命周期高级主题从-hrtb-到自引用类型)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 高阶生命周期（HRTB）
 
@@ -145,6 +147,7 @@ HRTB (Higher-Ranked Trait Bounds):
   │ *const T        │ 对 T 协变       │
   │ *mut T          │ 对 T 不变       │
   └─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   变型的影响:
   ├── 协变允许放宽生命周期约束
@@ -158,6 +161,7 @@ HRTB (Higher-Ranked Trait Bounds):
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 HRTB 的实际应用
 
@@ -327,6 +331,7 @@ fn closure_lifetimes() {
 ---
 
 ## 三、生命周期模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 代码模式
@@ -362,6 +367,7 @@ fn closure_lifetimes() {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -424,6 +430,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 返回局部引用
@@ -482,6 +489,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期基础
 - [Pin](../03_advanced/06_pin_unpin.md) — Pin 与 Unpin

@@ -14,6 +14,7 @@
 > [Wikipedia — Non-blocking Algorithm](https://en.wikipedia.org/wiki/Non-blocking_algorithm)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [并发 \[来源: Rust Concurrency\]模式：从消息 \[来源: Message Passing\]传递到锁自由的数据结构](#并发-来源-rust-concurrency模式从消息-来源-message-passing传递到锁自由的数据结构)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 所有权与并发的统一
 
@@ -167,6 +169,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 通道模式
 
@@ -299,6 +302,7 @@ x.store(1, Ordering::SeqCst);
 ---
 
 ## 三、并发模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 工具
@@ -340,6 +344,7 @@ x.store(1, Ordering::SeqCst);
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -403,6 +408,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 在持有锁时调用用户代码
@@ -469,6 +475,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](./01_concurrency.md) — 并发基础
 - [Async](./02_async.md) — 异步编程

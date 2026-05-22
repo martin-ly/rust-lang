@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Modules](https://doc.rust-lang.org/reference/items/modules.html) · [TRPL Ch7 — Modules](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html) · [Rust RFC 2126 — Clarify and streamline paths and visibility](https://github.com/rust-lang/rfcs/pull/2126) · [Rust Edition Guide — Path Changes](https://doc.rust-lang.org/edition-guide/rust-2018/module-system.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [模块系统：Rust 的代码组织与可见性规则](#模块系统rust-的代码组织与可见性规则)
   - [📑 目录](#-目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Crate、Module、Package 的三层结构
 
@@ -139,6 +141,7 @@ graph LR
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 use 声明与路径解析
 
@@ -240,6 +243,7 @@ serde = { workspace = true }
 ---
 
 ## 三、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 反命题树
 
@@ -298,6 +302,7 @@ graph TD
 ---
 
 ## 四、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 认为文件路径自动成为模块
@@ -353,6 +358,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Cargo Toolchain](../06_ecosystem/01_toolchain.md) — Cargo 与 Workspace
 - [Macros](../03_advanced/04_macros.md) — 宏与模块交互

@@ -10,6 +10,7 @@
 > **来源**: [Rust Internals — BorrowSanitizer Discussion](https://internals.rust-lang.org/) · [Miri: An Interpreter for Rust's Mid-level IR](https://github.com/rust-lang/miri) · [AddressSanitizer Wiki](https://github.com/google/sanitizers/wiki/AddressSanitizer) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Tree Borrows Paper (POPL 2026)](https://perso.crans.org/vanille/treebor/) · [Stacked Borrows Paper](https://plv.mpi-sws.org/rustbelt/stacked-borrows/)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [BorrowSanitizer 概念预研：运行时借用检查工业化](#borrowsanitizer-概念预研运行时借用检查工业化)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题定义：编译期检查的边界
 
@@ -139,6 +141,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 ---
 
 ## 二、与现有工具的对比矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 工具 | 检测范围 | 运行方式 | 性能开销 | FFI | Tree Borrows | 适用阶段 |
 |:---|:---|:---|:---:|:---:|:---:|:---|
@@ -155,6 +158,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 ---
 
 ## 三、形式化语义
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 借用标签的生命周期
 
@@ -202,6 +206,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -249,6 +254,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 来源 |
 |:---|:---:|:---|:---|
@@ -289,6 +295,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统的形式化根基

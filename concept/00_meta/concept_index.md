@@ -89,6 +89,7 @@
 ---
 
 ## 二、核心概念索引（🔷） [来源: 概念定义基于 Rust Reference / RFCs / 学术论文; 索引结构参照 Wikipedia Infobox Pattern 的信息浓缩设计]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### A [来源: 概念定义基于 Rust Reference / TRPL / 学术论文]
 
@@ -285,6 +286,7 @@
 ---
 
 ## 三、交叉概念一致性审计（🔶） [来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak & Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念在**多个文件中重复出现**，需要确保定义一致：
 
@@ -328,6 +330,7 @@
 ---
 
 ## 四、引用概念速查（🔹） [来源: 速查表设计参照认知心理学中的组块化 (Chunking) 原则 — Miller (1956); 信息压缩与快速检索]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 首次出现文件 | 相关核心概念 | 简要说明 |
 |:---|:---|:---|:---|
@@ -396,6 +399,7 @@
 ---
 
 ## 七、Wave 11 新增概念索引
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念为 Wave 11（表征空间元分析）中**新增或强化**的元概念：
 
@@ -423,6 +427,7 @@
 ---
 
 ## 八、Wave 6 新增概念索引
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念为 Wave 6 全量深度重构中**新增或强化**的元概念与结构化元素：
 
@@ -450,6 +455,7 @@
 ---
 
 ## 九、交叉概念单一来源规范（Single Source of Truth）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念在多个文件中重复出现，本索引正式声明其**主定义文件**和**一致性规范**，确保全知识体系定义无冲突。
 
@@ -520,6 +526,7 @@
 ---
 
 ## 十一、Phase 7 五维升华新增概念索引
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > Phase 7 于 2026-05-21 完成，新增 9 个文件，覆盖「可判定性—表达力—惯用法—执行模型—系统设计」五维主线 + 四层全局关系图谱。
 

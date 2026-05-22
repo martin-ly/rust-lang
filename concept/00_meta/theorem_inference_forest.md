@@ -379,6 +379,7 @@ graph TD
 ---
 
 ## 十、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
 - [层次内模型映射](intra_layer_model_map.md) —— 同层模型横向关系

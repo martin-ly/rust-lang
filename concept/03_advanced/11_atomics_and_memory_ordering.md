@@ -10,6 +10,7 @@
 > **来源**: [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/index.html) · [Rust Atomics and Locks](https://marabos.nl/atomics/) · [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) · [LLVM Atomic Instructions](https://llvm.org/docs/Atomics.html) · [Wikipedia — Memory Ordering](https://en.wikipedia.org/wiki/Memory_ordering)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [原子操作与内存序：无锁并发的精确控制](#原子操作与内存序无锁并发的精确控制)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 原子类型全景
 
@@ -50,6 +52,7 @@ Rust 原子类型 (std::sync::atomic):
   │ AtomicUsize/Isize│ 指针大小       │ 索引/计数      │
   │ AtomicPtr<T>    │ 指针大小        │ 指针 CAS        │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   核心操作:
   ├── load: 读取值
@@ -155,6 +158,7 @@ Happens-Before 关系:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 原子操作详解
 
@@ -266,6 +270,7 @@ impl SpinLock {
   │ 全局顺序敏感           │ SeqCst                 │
   │ 不确定                 │ SeqCst                 │
   └────────────────────────┴────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   性能影响:
   ├── Relaxed: 最快，接近普通操作
@@ -355,6 +360,7 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 三、原子模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 原子类型 → 内存序 → 模式
@@ -396,6 +402,7 @@ impl<T> LockFreeStack<T> {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -461,6 +468,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: Relaxed 的误用
@@ -531,6 +539,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](./01_concurrency.md) — 并发基础
 - [Unsafe](./03_unsafe.md) — 不安全代码

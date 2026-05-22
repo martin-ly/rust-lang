@@ -12,6 +12,7 @@
 > **Bloom 层级**: 分析 → 应用
 >
 ## 〇、形式模型演进认知入口
+> [来源: [Rust Release Notes]]
 
 ```mermaid
 mindmap
@@ -42,6 +43,7 @@ mindmap
 ```
 
 > **认知功能**: 此 mindmap 将 1.79–1.97+ 演进按**五维形式模型**结构化展开，叶节点标注版本号，支持读者按领域快速定位关注点并判断稳定状态。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **使用建议**: 作为目录式入口按需展开；内存安全研究者优先关注"所有权与别名模型"，类型系统研究者优先关注"类型系统扩展"。
 >
@@ -52,6 +54,7 @@ mindmap
 ---
 
 ## 一、演进总览：五个形式模型维度
+> [来源: [Rust Release Notes]]
 
 ```mermaid
 graph TD
@@ -86,6 +89,7 @@ graph TD
 ```
 
 > **认知功能**: 此 graph 将五维演进转化为**层级树状结构**，清晰展示特性归属与维度边界，建立"特性→维度→版本"的三级索引。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **使用建议**: 对照后续各维度详细章节使用，快速定位特定版本的形式模型变更归属。
 >
@@ -94,6 +98,7 @@ graph TD
 ---
 
 ## 二、维度一：所有权与别名模型
+> [来源: [Rust Release Notes]]
 
 ### 2.1 `&raw const` / `&raw mut`（1.82 stable，RFC 2582）
 
@@ -159,6 +164,7 @@ graph TD
 ---
 
 ## 三、维度二：类型系统扩展
+> [来源: [Rust Release Notes]]
 
 ### 3.1 `+ use<'lt>` precise capturing（1.82 stable，RFC 3617）
 
@@ -222,6 +228,7 @@ graph TD
 ---
 
 ## 四、维度三：异步与效果系统
+> [来源: [Rust Release Notes]]
 
 ### 4.1 Async closures（1.85 stable，RFC 3668）
 
@@ -384,6 +391,7 @@ unsafe extern "C" {
 ---
 
 ## 七、版本对比矩阵（形式模型视角）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 形式模型维度 | 1.79 | 1.82 | 1.85 | 1.88 | 1.95 | 前沿（nightly）|
 |:---|:---|:---|:---|:---|:---|:---|
@@ -418,6 +426,7 @@ timeline
 ```
 
 > **认知功能**: 此 timeline 将版本矩阵的**空间对比**转化为**时间演进**，揭示三个节奏：
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > 1. **稳定节奏**：每 6 周一个 stable release，小步快跑
 > 2. **Edition 节奏**：2024 Edition 是形式模型契约化的里程碑（RPIT capture、unsafe_op、let chains 三箭齐发）

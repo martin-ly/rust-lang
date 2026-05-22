@@ -9,6 +9,7 @@
 > [来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) · [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Public/Private Dependencies：可见性控制的工程化](#publicprivate-dependencies可见性控制的工程化)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 〇、依赖可见性控制全景
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TD
@@ -68,6 +70,7 @@ graph TD
 ---
 
 ## 一、问题背景：依赖泄漏
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 什么是依赖泄漏
 
@@ -281,6 +284,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
 - [核心 Crate 选型](./03_core_crates.md) — 依赖可见性对 API 设计的影响
@@ -291,6 +295,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。
 

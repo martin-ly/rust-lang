@@ -15,6 +15,7 @@
 > [Rust ML Ecosystem](https://www.arewelearningyet.com/)
 
 ## 📑 目录
+> [来源: [Rust ML]]
 
 - [Rust 在 AI \[来源: Rust AI Ecosystem\] 与机器学习中的新兴角色](#rust-在-ai-来源-rust-ai-ecosystem-与机器学习中的新兴角色)
   - [📑 目录](#-目录)
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么 AI 需要 Rust
 
@@ -154,6 +156,7 @@ Rust 在 AI 流水线中的定位:
 ---
 
 ## 二、技术细节
+> [来源: [Rust ML]]
 
 ### 2.1 Candle：纯 Rust ML 框架
 
@@ -274,6 +277,7 @@ WASM 推理的优势:
 ---
 
 ## 三、应用场景矩阵
+> [来源: [Rust ML]]
 
 ```text
 场景 → 方案 → Rust 生态
@@ -310,6 +314,7 @@ WASM 推理的优势:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -372,6 +377,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust ML]]
 
 ```text
 陷阱 1: 过早优化推理性能
@@ -416,6 +422,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust ML]]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
@@ -433,6 +440,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [AI Integration](./01_ai_integration.md) — AI 集成
 - [WebAssembly](../06_ecosystem/11_webassembly.md) — WebAssembly

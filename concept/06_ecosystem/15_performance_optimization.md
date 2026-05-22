@@ -10,6 +10,7 @@
 > **来源**: [Criterion [来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)].rs](<https://bokeh.github.io/criterion.rs/book/>) · [Rust Performance Book](https://nnethercote.github.io/perf-book/) · [cargo-flamegraph](https://github.com/flamegraph-rs/flamegraph) · [Rust SIMD Guide](https://doc.rust-lang.org/std/simd/index.html) · [Coherence Cache Lines](https://en.wikipedia.org/wiki/CPU_cache) · [TRPL — Optimization](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [性能优化：Rust 代码的测量与调优](#性能优化rust-代码的测量与调优)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 测量优先原则
 
@@ -152,6 +154,7 @@ fn sum_loop(data: &[i32]) -> i32 {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Criterion：统计性基准测试
 
@@ -270,6 +273,7 @@ struct Compact {
 ---
 
 ## 三、优化策略矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 工具/技术 → 预期收益
@@ -313,6 +317,7 @@ SIMD 向量化:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -374,6 +379,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 在 debug 模式下测量性能
@@ -439,6 +445,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) — 零成本抽象
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型

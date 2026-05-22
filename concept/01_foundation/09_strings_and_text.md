@@ -10,6 +10,7 @@
 > **来源**: [std::string::String](https://doc.rust-lang.org/std/string/struct.String.html) · [std::str](https://doc.rust-lang.org/std/str/index.html) · [TRPL Ch8 — Strings](https://doc.rust-lang.org/book/ch08-02-strings.html) · [Unicode Standard](https://www.unicode.org/standard/standard.html) · [Rust Formatting](https://doc.rust-lang.org/std/fmt/index.html) · [RFC 504 — CString](https://github.com/rust-lang/rfcs/pull/504)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [字符串与文本：Rust 的 Unicode 处理与格式化系统](#字符串与文本rust-的-unicode-处理与格式化系统)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 String vs str：所有权谱系
 
@@ -145,6 +147,7 @@ println!("{}", p);  // 输出: (1, 2)
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 字符串切片与索引
 
@@ -266,6 +269,7 @@ unsafe {
 ---
 
 ## 三、选型决策矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 场景 → 推荐类型 → 关键理由
@@ -305,6 +309,7 @@ FFI C 接口:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -421,6 +426,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Borrowing](./02_borrowing.md) — 借用规则

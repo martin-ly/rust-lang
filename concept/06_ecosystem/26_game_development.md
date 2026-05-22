@@ -10,6 +10,7 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [wgpu](https://wgpu.rs/) · [Rust GameDev WG](https://gamedev.rs/) · [Wikipedia — Game Engine](https://en.wikipedia.org/wiki/Game_engine)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 游戏开发](#rust-游戏开发)
   - [📑 目录](#-目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 游戏引擎概览
 
@@ -65,6 +67,7 @@ Rust 游戏引擎生态:
   │ 学习曲线        │ 中              │ 中              │ 低              │
   │ 适用场景        │ 通用            │ 3D 游戏         │ 2D 原型         │
   └─────────────────┴─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > [来源: [Bevy Engine](https://bevyengine.org/learn/book/introduction/)]
 ```
@@ -166,6 +169,7 @@ fn main() {
 ---
 
 ## 二、渲染与图形
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 wgpu 与跨平台渲染
 
@@ -185,6 +189,7 @@ wgpu:
   │  Vulkan/Metal   │  ← 后端抽象
   │  /DX12/WebGPU   │
   └─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   代码示例:
 
@@ -245,6 +250,7 @@ wgpu:
 ---
 
 ## 三、音频与输入
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 音频系统:
@@ -281,6 +287,7 @@ wgpu:
 ---
 
 ## 四、性能优化
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 游戏性能优化:
@@ -307,6 +314,7 @@ wgpu:
   │ 生态成熟度      │ 中              │ 高              │
   │ 学习曲线        │ 中              │ 陡峭            │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > [来源: [Rust GameDev WG](https://gamedev.rs/)]
 ```
@@ -457,6 +465,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [ECS](11_ecs_pattern.md) — ECS 模式
 - [WebAssembly](13_webassembly.md) — WebAssembly

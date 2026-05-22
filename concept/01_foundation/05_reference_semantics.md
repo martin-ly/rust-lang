@@ -14,6 +14,7 @@
 > [Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [引用语义：自动解引用、Deref 强制与类型转换](#引用语义自动解引用deref-强制与类型转换)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 引用的多重含义
 
@@ -138,6 +140,7 @@ let s: &str = &b;  // ✅ &MyBox<String> → &String → &str
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 方法调用的自动引用
 
@@ -234,6 +237,7 @@ graph TD
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 智能指针透明化
@@ -276,6 +280,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -328,6 +333,7 @@ graph TD
 ---
 
 ## 五、常见困惑解析
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 困惑 1: &s 和 s.as_str() 的区别
@@ -375,6 +381,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Borrowing](./02_borrowing.md) — 借用与生命周期

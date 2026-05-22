@@ -10,6 +10,7 @@
 > **来源**: [Rust API Guidelines — Newtypes](https://rust-lang.github.io/api-guidelines/type-safety.html#c-newtype) · [TRPL — Newtype Pattern](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html#using-the-newtype-pattern-to-implement-external-traits-on-external-types) · [Wikipedia — Newtype](https://en.wikipedia.org/wiki/Newtype) · [Rust Reference — Tuple Structs](https://doc.rust-lang.org/reference/items/structs.html) · [Rust Patterns — Newtype](https://rust-unofficial.github.io/patterns/patterns/behavioural/newtype.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Newtype \[来源: Rust API Guidelines\] 与包装器模式：类型安全的零成本抽象](#newtype-来源-rust-api-guidelines-与包装器模式类型安全的零成本抽象)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Newtype 模式的本质
 
@@ -147,6 +149,7 @@ let b = SecondsNewtype(10.0);
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Deref 与自动解引用
 
@@ -253,6 +256,7 @@ Rust 中的包装器类型:
 ---
 
 ## 三、设计模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 模式 → 实现方式
@@ -294,6 +298,7 @@ Rust 中的包装器类型:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -357,6 +362,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 过度使用 Deref
@@ -428,6 +434,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Trait](./01_traits.md) — Trait 系统

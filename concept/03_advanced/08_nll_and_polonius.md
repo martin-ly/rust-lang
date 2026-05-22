@@ -36,6 +36,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 词法生命周期的问题
 
@@ -158,25 +159,30 @@ NLL 的数据流分析:
   ┌─────────┐
   │  Entry  │
   └────┬────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
        │
   ┌────▼────┐
   │ let x = │
   │ &data   │
   └────┬────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
        │
   ┌────▼────┐
   │ println!│
   │ (x)     │
   └────┬────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
        │
   ┌────▼────┐
   │ data.   │
   │ push(4) │
   └────┬────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
        │
   ┌────▼────┐
   │  Exit   │
   └─────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   分析过程:
   1. 标记每个借用创建点
@@ -311,6 +317,7 @@ NLL / Polonius 影响的代码模式:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -436,6 +443,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用系统
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期

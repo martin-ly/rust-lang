@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系学习指南（Learning Guide）](#rust-知识体系学习指南learning-guide)
   - [📑 目录](#-目录)
@@ -106,6 +107,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、如何使用本指南
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 选择你的起点
 
@@ -140,6 +142,7 @@ graph TD
 > **[来源: TRPL 官方文档; Rust by Example]** 不同背景的学习者有不同的概念迁移路径。
 
 ## 二、按背景的详细起点指南
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 完全新手路径（无系统编程经验） [来源: TRPL Ch1-3; Rust by Example; 前置依赖: 无; 认知负荷管理参照 Sweller — *Cognitive Load Theory* / 1988]
 

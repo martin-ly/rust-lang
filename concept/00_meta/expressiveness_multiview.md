@@ -652,6 +652,7 @@ graph TD
 ---
 
 ## 十三、相关概念链接（L0-L7 映射）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
 

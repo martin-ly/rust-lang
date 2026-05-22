@@ -7,6 +7,7 @@
 > **定理链编号**: T-100 借用检查可判定性 → T-101 所有权类型 soundness → T-102 内存安全完备性
 
 ## 📑 目录
+> [来源: [RustBelt]]
 
 - [Ownership Formalization（所有权形式化）](#ownership-formalization所有权形式化)
   - [📑 目录](#-目录)
@@ -86,6 +87,7 @@ $entry
 ---
 
 ## 零、认知路径（Cognitive Path）
+> [来源: [RustBelt]]
 
 > **目标**: 从直觉困惑到形式边界，建立 5 步递进式理解框架。
 
@@ -205,6 +207,7 @@ stateDiagram-v2
 ---
 
 ## 一、权威定义（Definition）
+> [来源: [RustBelt]]
 
 ### 1.1 Wikipedia 权威定义
 
@@ -252,6 +255,7 @@ COR 的核心类型判断：
 ---
 
 ## 二、概念属性矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 形式化方法对比矩阵
 
@@ -276,6 +280,7 @@ COR 的核心类型判断：
 ---
 
 ## 三、形式化理论根基
+> [来源: [RustBelt]]
 
 > **[学术来源: Felleisen & Hieb 1992, *The Revised Report on the Syntactic Theories of Sequential Control and State*; RustBelt: POPL 2018, Jung et al. *RustBelt* §3]** 操作语义规则描述状态转换，λRust 在此基础上扩展了所有权与借用。
 
@@ -328,6 +333,7 @@ COR 的核心类型判断：
 ---
 
 ## 四、思维导图
+> [来源: [RustBelt]]
 
 ```mermaid
 graph TD
@@ -369,6 +375,7 @@ graph TD
 ---
 
 ## 五、定理推理链
+> [来源: [RustBelt]]
 
 > **[学术来源: Jung et al. 2017 POPL, *RustBelt: Securing the Foundations of the Rust Programming Language*; Jung et al. 2018 POPL, *Iris from the Ground Up*]** RustBelt 在 Iris 高阶并发分离逻辑中建立了 Rust 安全性的机器检验证明。
 
@@ -488,6 +495,7 @@ graph TD
 ---
 
 ## 六、国际课程与论文对齐
+> [来源: [RustBelt]]
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
@@ -568,6 +576,7 @@ Oxide 视角:
 ---
 
 ## 七、知识来源关系
+> [来源: [RustBelt]]
 
 | **论断** | **来源** | **可信度** |
 |:---|:---|:---|
@@ -585,6 +594,7 @@ Oxide 视角:
 ---
 
 ## 八、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -600,6 +610,7 @@ Oxide 视角:
 ---
 
 ## 九、Polonius：Loan-based 形式化语义
+> [来源: [RustBelt]]
 
 ### 9.1 从区域到 Loans
 
@@ -896,6 +907,7 @@ Kani 将上述证明转化为符号执行路径:
 ---
 
 ## 十、待补充与演进方向（TODOs）
+> [来源: [RustBelt]]
 
 - [x] **TODO**: 引入 Polonius 新 borrow checker 对 T3（区域约束）定理的影响评估 —— **已完成 §9**
 - [x] **TODO**: 补充 Tree Borrows / Stacked Borrows 内存模型的形式化规则对比 —— **已完成 §11**
@@ -906,6 +918,7 @@ Kani 将上述证明转化为符号执行路径:
 ---
 
 ## 十一、别名模型：Stacked Borrows 与 Tree Borrows
+> [来源: [RustBelt]]
 
 > **[学术来源: Jung et al. 2019 POPL, *Stacked Borrows: An Aliasing Model for Rust*; Pichon-Pharabod & Dreyer 2024, *Tree Borrows: A New Aliasing Model for Rust*]** Rust 的别名模型定义了引用在内存中的合法使用方式，是 Miri 检测未定义行为的核心依据。
 
@@ -1151,11 +1164,13 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
     ┌─────────────┐
     │   Unique    │ ◄──── 初始状态（根节点或最新 &mut）
     └──────┬──────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
            │ 创建子 &mut
            ▼
     ┌─────────────┐
     │  Reserved   │ ◄──── 预留独占：允许只读别名，写时激活
     └──────┬──────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
       写   │   读
       ▼    │    ▼
   ┌──────┐ │ ┌──────┐
@@ -1163,11 +1178,13 @@ Tree Borrows 的状态空间 Σ = (M, P, T) 其中：
   └──┬───┘ │ └──┬───┘
      │     │    │
      └─────┴────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
             │
             ▼
     ┌─────────────┐
     │  Disabled   │ ◄──── 失效：任何访问均为 UB
     └─────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 转换触发条件:
   Unique → Reserved: 创建子 &mut 或 &raw mut
@@ -1259,6 +1276,7 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 ---
 
 ## 十二、Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 所有权形式化核心概念与国际知识库映射。
 

@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Trait Objects](https://doc.rust-lang.org/reference/types/trait-object.html) · [Wikipedia — Type Erasure](https://en.wikipedia.org/wiki/Type_erasure) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [TRPL — Trait Objects](https://doc.rust-lang.org/book/ch17-02-trait-objects.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [类型擦除与动态分发](#类型擦除与动态分发)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Trait Object
 
@@ -75,6 +77,7 @@ Trait Object:
   │ 异构集合        │ 不支持          │ 支持            │
   │ 编译期已知类型  │ 是              │ 否              │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [Rust Reference — Trait Objects]]
 ```
 
 ```rust
@@ -176,6 +179,7 @@ VTable (虚函数表):
 ---
 
 ## 二、类型擦除模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 Box<dyn Trait>
 
@@ -332,6 +336,7 @@ fn main() {
 ---
 
 ## 三、性能权衡
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 静态 vs 动态分发
 
@@ -360,6 +365,7 @@ fn main() {
   │ 分支预测        │ 准确            │ 可能失败        │
   │ 代码大小        │ 大              │ 小              │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   选择指南:
   ├── 性能关键路径: 静态
@@ -375,6 +381,7 @@ fn main() {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -433,6 +440,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 混淆 dyn Trait 和 impl Trait
@@ -492,6 +500,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Trait](../02_intermediate/01_traits.md) — Trait
 - [Generics](../02_intermediate/02_generics.md) — 泛型

@@ -16,6 +16,7 @@
 ---
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust Semantic Expressiveness: A Panoramic Survey（Rust 语义表达力全景梳理）](#rust-semantic-expressiveness-a-panoramic-surveyrust-语义表达力全景梳理)
   - [📑 目录](#-目录)
@@ -92,6 +93,7 @@
   - [相关概念文件](#相关概念文件)
 
 ## 零、TL;DR —— Rust 语义表达力速查
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 维度                Rust 定位                          边界特征
@@ -110,6 +112,7 @@ D7 安全            编译期 safe + unsafe 逃逸门          不保证活性/
 ---
 
 ## 一、权威来源与梳理方法论
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 来源分级
 
@@ -855,6 +858,7 @@ RustBelt 证明范围:
 ---
 
 ## 十、跨维度对比矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.1 Rust vs C++ vs Go vs Haskell：七维雷达图
 
@@ -901,6 +905,7 @@ RustBelt 证明范围:
    │
  3 │★ C++
    └──────────────────────────────→ 表达力/控制力
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
      3   4   5   6   7   8   9
 ```
 
@@ -957,6 +962,7 @@ Rust 的任何语义扩展必须满足以下约束（由语言设计哲学决定
 ---
 
 ## 十二、相关概念链接（L0-L7 映射）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 本文件维度 | L0-L7 映射文件 | 核心章节 | 关系类型 |
 |:---|:---|:---|:---:|
@@ -1036,6 +1042,7 @@ mindmap
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs C++ 对比](../05_comparative/01_rust_vs_cpp.md) — 四语言对比矩阵详情
 - [L4 形式化验证](../04_formal/04_rustbelt.md) — RustBelt 与 Oxide 语义

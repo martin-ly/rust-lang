@@ -10,6 +10,7 @@
 > **来源**: [TRPL — Macros](https://doc.rust-lang.org/book/ch19-06-macros.html) · [nom Parser Combinators](https://docs.rs/nom/latest/nom/) · [serde DSL Design](https://serde.rs/) · [Rust API Guidelines — DSLs](https://rust-lang.github.io/api-guidelines/predictability.html) · [Wikipedia — Domain-specific language](https://en.wikipedia.org/wiki/Domain-specific_language)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [DSL \[来源: DSL Wikipedia\] 与嵌入 \[来源: Rust Embedded Book\]式设计：Rust 中的领域特定语言](#dsl-来源-dsl-wikipedia-与嵌入-来源-rust-embedded-book式设计rust-中的领域特定语言)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 内嵌 DSL vs 外部 DSL
 
@@ -149,6 +151,7 @@ impl RequestBuilder<Ready> {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Parser Combinators
 
@@ -284,6 +287,7 @@ const fn validate_email_prefix(s: &str) -> bool {
 ---
 
 ## 三、设计模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → DSL 类型 → 实现方式 → 关键 crate
@@ -330,6 +334,7 @@ SQL 查询:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -393,6 +398,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 过度工程化 DSL
@@ -453,6 +459,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Macros](../03_advanced/04_macros.md) — 声明式宏
 - [Proc Macro](../03_advanced/07_proc_macro.md) — 过程宏

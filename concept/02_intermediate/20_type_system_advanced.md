@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Rust Type System Explained](https://doc.rust-lang.org/reference/type-system.html) · [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [高级类型系统：从关联类型到类型级编程](#高级类型系统从关联类型到类型级编程)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 impl Trait 的演进
 
@@ -165,6 +167,7 @@ Rust 的类型推断机制:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 impl Trait 在参数位置
 
@@ -318,6 +321,7 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 ---
 
 ## 三、类型系统模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 特性 → 代码模式
@@ -354,6 +358,7 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -416,6 +421,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: impl Trait 参数与返回混淆
@@ -475,6 +481,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统基础
 - [Generics](./02_generics.md) — 泛型系统

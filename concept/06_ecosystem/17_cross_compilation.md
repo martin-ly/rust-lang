@@ -10,6 +10,7 @@
 > **来源**: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) · [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) · [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) · [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) · [cross crate](https://github.com/cross-rs/cross)
 
 ## 📑 目录
+> [来源: [Cargo Book]]
 
 - [交叉编译：多目标平台支持与条件编译](#交叉编译多目标平台支持与条件编译)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Target Triple 的语义
 
@@ -53,6 +55,7 @@ Target Triple 格式: <arch><sub>-<vendor>-<sys>-<abi>
   │ sys      │ 操作系统: linux, darwin, windows, none      │
   │ abi      │ ABI: gnu, musl, eabi, eabihf, elf           │
   └──────────┴─────────────────────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   特殊 target:
   ├── *-none-*: 裸机/无操作系统（嵌入式）
@@ -139,6 +142,7 @@ Rust 的两种运行模式:
 ---
 
 ## 二、技术细节
+> [来源: [Cargo Book]]
 
 ### 2.1 交叉编译工具链
 
@@ -251,6 +255,7 @@ Rust 的两种运行模式:
 ---
 
 ## 三、平台支持矩阵
+> [来源: [Cargo Book]]
 
 ```text
 主流目标平台:
@@ -264,6 +269,7 @@ Rust 的两种运行模式:
   │ aarch64-apple-darwin   │ 1       │ ✅      │ Apple   │
   │ aarch64-unknown-linux-gnu│ 2     │ ✅      │ ARM 服务器│
   └────────────────────────┴─────────┴─────────┴─────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   移动:
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -273,6 +279,7 @@ Rust 的两种运行模式:
   │ x86_64-apple-ios       │ 2       │ ✅      │ iOS 模拟器│
   │ aarch64-apple-ios      │ 2       │ ✅      │ iOS 真机│
   └────────────────────────┴─────────┴─────────┴─────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   嵌入式 (no_std):
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -282,6 +289,7 @@ Rust 的两种运行模式:
   │ riscv32imac-unknown-none-elf│ 2  │ ❌      │ RISC-V  │
   │ avr-unknown-gnu-atmega328│ 3    │ ❌      │ Arduino │
   └────────────────────────┴─────────┴─────────┴─────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   Web:
   ┌────────────────────────┬─────────┬─────────┬─────────┐
@@ -299,6 +307,7 @@ Rust 的两种运行模式:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -358,6 +367,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Cargo Book]]
 
 ```text
 陷阱 1: 忘记安装 target
@@ -407,6 +417,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Cargo Book]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -421,6 +432,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Cargo 与工具链
 - [WASI](./08_wasi.md) — WASI 与 Wasm

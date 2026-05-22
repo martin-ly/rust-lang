@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Kotlin Documentation](https://kotlinlang.org/docs/home.html) · [Kotlinlang.org](https://kotlinlang.org/) · [Wikipedia — Kotlin](https://en.wikipedia.org/wiki/Kotlin_(programming_language)) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs Kotlin：静态安全的两种路径](#rust-vs-kotlin静态安全的两种路径)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 空安全机制
 
@@ -184,6 +186,7 @@
 ---
 
 ## 二、语言特性差异
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型推断与泛型
 
@@ -289,6 +292,7 @@
 ---
 
 ## 三、工程实践差异
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 构建系统
 
@@ -397,6 +401,7 @@
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -521,6 +526,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权
 - [Type System](../01_foundation/04_type_system.md) — 类型系统

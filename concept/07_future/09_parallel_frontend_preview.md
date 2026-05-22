@@ -10,6 +10,7 @@
 > **来源**: [Rust Compiler Team — Parallel Frontend](https://github.com/rust-lang/compiler-team/issues/) · [Rust Internals — Parallel Compilation](https://internals.rust-lang.org/) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/) · [Cargo Parallel Compilation](https://doc.rust-lang.org/cargo/reference/profiles.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [并行 \[来源: rayon\]前端编译预研：Rust 编译器 \[来源: rustc Parallel\]的多核扩展](#并行-来源-rayon前端编译预研rust-编译器-来源-rustc-parallel的多核扩展)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 编译器架构回顾
 
@@ -108,6 +110,7 @@ graph LR
 ---
 
 ## 二、技术方案
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 查询系统的并行化
 
@@ -176,6 +179,7 @@ graph TD
 ---
 
 ## 三、性能影响分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 场景 | 当前单线程 | 并行前端（目标） | 提升 |
 |:---|:---|:---|:---:|
@@ -190,6 +194,7 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -243,6 +248,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -283,6 +289,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链与编译器
 - [Evolution](./03_evolution.md) — 语言演进机制

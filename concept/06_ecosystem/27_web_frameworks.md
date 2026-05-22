@@ -66,9 +66,11 @@ Web 框架职能分层:
   │  L1: 运行时层 — async/await 调度、IO 事件  │
   │     [来源: Tokio docs] Runtime 模型      │
   └─────────────────────────────────────────┘
+> [来源: [Axum Docs]]
 ```
 
 > **认知功能**: Rust Web 框架的竞争力来自 L1+L2 的零成本抽象——无 GC、无运行时解释器，编译后即为高效原生代码。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.2 Rust Web 框架演进史
 
@@ -101,6 +103,7 @@ Rust Web 框架演进:
 ```
 
 > **洞察**: Rust Web 框架经历了从"百花齐放"到"头部收敛"的过程——Axum 和 Actix-web 占据生态主导地位，Rocket 坚守声明式哲学，Poem 填补 OpenAPI/GraphQL  niche。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.3 框架架构生态图
 
@@ -156,6 +159,7 @@ graph TD
 ```
 
 > **认知功能**: 生态依赖全景图——展示四个框架在 Tokio/Hyper/Tower 基础设施上的位置，以及上层扩展生态的兼容关系。关键洞察：TOWER 生态的共享性是 Axum 的核心优势，而 Actix-web 和 Rocket 的自研抽象层带来了生态隔离。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -450,6 +454,7 @@ fn main() {
   │  Service::call(Request) -> Future<Response>  │
   │  Layer::layer(inner) -> outer Service        │
   └─────────────────────────────────────────────┘
+> [来源: [Axum Docs]]
   特征: 函数式组合、类型安全、生态共享
   [来源: Tower docs]
 
@@ -458,6 +463,7 @@ fn main() {
   │  Transform::new_transform(service)           │
   │  Service::call(req, ctx) -> Future<Response> │
   └─────────────────────────────────────────────┘
+> [来源: [Axum Docs]]
   特征: 与 Actor 系统深度集成、自研生态
   [来源: Actix docs: Middleware]
 
@@ -467,6 +473,7 @@ fn main() {
   │  on_request(&self, req, data)               │
   │  on_response(&self, req, res)               │
   └─────────────────────────────────────────────┘
+> [来源: [Axum Docs]]
   特征: 生命周期钩子、非环绕式
   [来源: Rocket docs: Fairings]
 ```
@@ -576,6 +583,7 @@ graph TD
 ```
 
 > **认知功能**: 工程选型导航器——从生态兼容性、性能需求、API 风格偏好、社区成熟度四个维度出发，将框架特征与项目需求匹配。关键洞察：Axum 是 2024+ 新项目 safest default，Actix-web 是保守/成熟项目的稳妥选择。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 场景化推荐矩阵
 
@@ -619,6 +627,7 @@ graph TD
 ```
 
 > **认知功能**: 破除"Axum 万能论"——Tower 生态的复杂性、声明式宏的缺失、OpenAPI 的非原生支持、Actor 模型的缺乏，均为 Axum 的明确边界。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.2 反命题："Web 框架性能决定一切"
 

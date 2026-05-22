@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/error.html) · [std::result](https://doc.rust-lang.org/std/result/index.html) · [std::option](https://doc.rust-lang.org/std/option/index.html) · [Wikipedia — Exception Handling](https://en.wikipedia.org/wiki/Exception_handling)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 错误处理基础](#rust-错误处理基础)
   - [📑 目录](#-目录)
@@ -34,6 +35,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Result 类型
 
@@ -56,6 +58,7 @@ Result<T, E>:
   │ 控制流          │ 非局部跳转      │ 显式传播        │
   │ 文档化          │ 差              │ 类型即文档      │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   代码示例:
 
@@ -115,6 +118,7 @@ Option<T>:
   │ 组合能力        │ 弱              │ 强              │
   │ 文档化          │ 差              │ 类型即文档      │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   代码示例:
 
@@ -213,6 +217,7 @@ fn main() {
 ---
 
 ## 二、错误转换与组合
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 From trait
 
@@ -347,6 +352,7 @@ Result/Option 组合:
 ---
 
 ## 三、Panic 与不可恢复错误
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 panic! 宏
 
@@ -427,6 +433,7 @@ unwrap / expect:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -552,6 +559,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Error Handling](../02_intermediate/04_error_handling.md) — 进阶错误处理
 - [Type System](04_type_system.md) — 类型系统

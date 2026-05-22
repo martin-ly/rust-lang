@@ -14,6 +14,7 @@
 > [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [迭代器模式：Rust 的惰性计算与零成本抽象](#迭代器模式rust-的惰性计算与零成本抽象)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Iterator Trait 的设计
 
@@ -157,6 +159,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 自定义迭代器
 
@@ -312,6 +315,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ---
 
 ## 三、迭代器模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 迭代器方法 → 说明
@@ -353,6 +357,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -415,6 +420,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 忘记 collect
@@ -471,6 +477,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Trait](./01_traits.md) — Trait 系统
 - [Generics](./02_generics.md) — 泛型

@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Expressions](https://doc.rust-lang.org/reference/expressions.html) · [TRPL Ch3 — Control Flow](https://doc.rust-lang.org/book/ch03-05-control-flow.html) · [TRPL Ch6 — Match](https://doc.rust-lang.org/book/ch06-02-match.html) · [Rust Reference — Loop Expressions](https://doc.rust-lang.org/reference/expressions/loop-expr.html) · [RFC 160 — `if let`](https://github.com/rust-lang/rfcs/pull/160)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [控制流：表达式导向的流程控制](#控制流表达式导向的流程控制)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 表达式 vs 语句
 
@@ -59,6 +61,7 @@ Rust 是表达式导向语言（Expression-Oriented Language）:
   │ 三元运算符      │ a ? b : c       │ if a { b } else │
   │                 │                 │ { c }           │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   表达式导向的好处:
   ├── 控制流可以返回值，减少临时变量
@@ -173,6 +176,7 @@ if let Some(x) = opt1 && let Some(y) = opt2 && x > y {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 loop 与值返回
 
@@ -304,6 +308,7 @@ let x = if condition {
 ---
 
 ## 三、常见模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 使用 match 进行枚举处理
@@ -360,6 +365,7 @@ let x = if condition {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -421,6 +427,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 在 if/else 分支中返回不同类型
@@ -499,6 +506,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](./01_ownership.md) — 所有权模型
 - [Type System](./04_type_system.md) — 类型系统

@@ -10,6 +10,7 @@
 > **来源**: [RFC 2289 — Associated Type Bounds](https://github.com/rust-lang/rfcs/pull/2289) · [Rust Reference — Lifetime Elision](https://doc.rust-lang.org/reference/lifetime-elision.html) · [Async Working Group](https://rust-lang.github.io/async-fundamentals-initiative/) · [Tracking Issue #109417](https://github.com/rust-lang/rust/issues/109417)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Return Type Notation 预研：精确捕获的显式控制](#return-type-notation-预研精确捕获的显式控制)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：隐式捕获的生命周期泄漏
 
@@ -106,6 +108,7 @@ RTN 的应用场景:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法形式与语义
 
@@ -169,6 +172,7 @@ Edition 2024 行为:
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 最小捕获（推荐）
@@ -202,6 +206,7 @@ Edition 2024 行为:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -261,6 +266,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -290,6 +296,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期与借用检查
 - [Async](../03_advanced/02_async.md) — 异步编程与 Future

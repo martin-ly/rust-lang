@@ -9,6 +9,7 @@
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [跨层知识图谱（Inter-Layer Dependency Map）](#跨层知识图谱inter-layer-dependency-map)
   - [📑 目录](#-目录)
@@ -41,6 +42,7 @@
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 一、全局层级依赖图
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TB
@@ -219,6 +221,7 @@ graph LR
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 二、语义链接类型定义
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 所有跨层关系必须标注以下**语义类型**之一：
 
@@ -531,6 +534,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [L1 所有权与借用](../01_foundation/01_ownership.md) — 形式化映射起点
 - [L4 所有权形式化](../04_formal/03_ownership_formal.md) — 线性逻辑与分离逻辑

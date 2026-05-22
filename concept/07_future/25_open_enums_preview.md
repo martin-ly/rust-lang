@@ -10,6 +10,7 @@
 > **来源**: [RFC 2008 — `non_exhaustive`](https://github.com/rust-lang/rfcs/pull/2008) · [Rust Reference — Enum Types](https://doc.rust-lang.org/reference/items/enumerations.html) · [RFC 3518 — Sealed Traits](https://github.com/rust-lang/rfcs/pull/3518) · [GitHub #156628 — Open Enums Tracking](https://github.com/rust-lang/rust/issues/156628) · [Scala Sealed Traits](https://docs.scala-lang.org/tour/pattern-matching.html) · [Haskell Open Data Types](https://wiki.haskell.org/Open_data_type) · [OCaml Polymorphic Variants](https://ocaml.org/manual/polyvariant.html)
 
 ## 📑 目录
+> [来源: [RFC]]
 
 - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](#open-enums-概念预研从-non_exhaustive-到可扩展枚举)
   - [📑 目录](#-目录)
@@ -40,6 +41,7 @@
 ---
 
 ## 一、核心概念：封闭 vs 开放枚举
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 封闭枚举（Closed Enums）
 
@@ -141,6 +143,7 @@ extend enum Event {
 ---
 
 ## 二、`#[non_exhaustive]` 的形式化语义
+> [来源: [RFC]]
 
 ### 2.1 编译期影响：穷尽性检查的弱化
 
@@ -226,6 +229,7 @@ fn process_external(r: Response) -> String {
 ---
 
 ## 三、跨语言对比：开放枚举的多种形态
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Scala：Sealed Traits + 子类
 
@@ -308,6 +312,7 @@ graph LR
 ---
 
 ## 四、API 设计中的开放枚举模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 错误码枚举
 
@@ -376,6 +381,7 @@ pub enum LogLevel {
 ---
 
 ## 五、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
 
@@ -439,6 +445,7 @@ pub enum ConstExample {
 ---
 
 ## 六、演进路线与预测
+> [来源: [RFC]]
 
 | 特性 | 当前状态 | 预计稳定 | 影响 |
 |:---|:---|:---:|:---|
@@ -454,6 +461,7 @@ pub enum ConstExample {
 ---
 
 ## 七、来源与延伸阅读
+> [来源: [RFC]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -468,6 +476,7 @@ pub enum ConstExample {
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 枚举类型的形式化根基
 - [Traits](../02_intermediate/01_traits.md) — Sealed Traits 与开放/封闭设计

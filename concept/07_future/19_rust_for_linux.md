@@ -14,6 +14,7 @@
 > [Google — Rust in the Linux Kernel](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html)
 
 ## 📑 目录
+> [来源: [Rust for Linux]]
 
 - [Rust for Linux \[来源: Rust for Linux\]：操作系统内核中的内存安全](#rust-for-linux-来源-rust-for-linux操作系统内核中的内存安全)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么内核需要 Rust
 
@@ -145,6 +147,7 @@ Rust for Linux 项目结构:
 ---
 
 ## 二、技术细节
+> [来源: [Rust for Linux]]
 
 ### 2.1 C 互操作与绑定生成
 
@@ -286,6 +289,7 @@ Rust 驱动 vs C 驱动的对比:
 ---
 
 ## 三、采用状态矩阵
+> [来源: [Rust for Linux]]
 
 ```text
 Rust for Linux 采用状态 (2024+):
@@ -321,6 +325,7 @@ Rust for Linux 采用状态 (2024+):
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -383,6 +388,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust for Linux]]
 
 ```text
 陷阱 1: 忽视 C 绑定的不安全性
@@ -427,6 +433,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust for Linux]]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
@@ -444,6 +451,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — 不安全代码
 - [FFI](../03_advanced/05_rust_ffi.md) — 外部函数接口

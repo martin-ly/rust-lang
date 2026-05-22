@@ -14,6 +14,7 @@
 > [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [线性逻辑在 Rust 中的工程应用](#线性逻辑在-rust-中的工程应用)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 从线性逻辑到所有权
 
@@ -149,6 +151,7 @@ Session Types: 将通信协议编码为类型
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 所有权即线性类型
 
@@ -290,6 +293,7 @@ let committed = txn.commit();
 ---
 
 ## 三、工程应用矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 线性逻辑 → Rust 工程应用:
@@ -325,6 +329,7 @@ let committed = txn.commit();
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -443,6 +448,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Linear Logic](./01_linear_logic.md) — 线性逻辑
 - [Ownership](../01_foundation/01_ownership.md) — 所有权系统

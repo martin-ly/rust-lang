@@ -10,6 +10,7 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [WGPU](https://wgpu.rs/) · [Rust GameDev Working Group](https://gamedev.rs/) · [Are We Game Yet?](https://arewegameyet.rs/) · [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 游戏开发生态](#rust-游戏开发生态)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心架构
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 ECS 设计模式
 
@@ -53,6 +55,7 @@ ECS (Entity-Component-System):
   │ 并行化          │ 困难            │ 天然并行        │
   │ 运行时灵活性    │ 低              │ 高              │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   Rust 中的 ECS:
   ├── bevy_ecs: 最流行
@@ -124,6 +127,7 @@ Bevy 引擎架构:
 ---
 
 ## 二、图形渲染
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 WGPU — 跨平台图形
 
@@ -146,6 +150,7 @@ WGPU:
   │ 跨平台          │ 需适配          │ 统一 API        │
   │ WASM            │ WebGL           │ WebGPU          │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   代码示例:
 
@@ -262,6 +267,7 @@ Rust 音频生态:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -381,6 +387,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
 - [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化

@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Traits](https://doc.rust-lang.org/reference/items/traits.html) · [TRPL — Advanced Traits](https://doc.rust-lang.org/book/ch19-02-advanced-traits.html) · [RFC 0195 — Associated Items](https://rust-lang.github.io/rfcs/0195-associated-items.html) · [RFC 1598 — Generic Associated Types](https://rust-lang.github.io/rfcs/1598-generic_associated_types.html) · [Wikipedia — Type Class](https://en.wikipedia.org/wiki/Type_class)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [高级 Trait 主题：从关联类型到特化](#高级-trait-主题从关联类型到特化)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 关联类型（Associated Types）
 
@@ -178,6 +180,7 @@ impl<'a, T> LendingIterator for MutWindows<'a, T> {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 关联类型 vs 泛型参数
 
@@ -287,6 +290,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 三、Trait 模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 特性 → 代码模式
@@ -322,6 +326,7 @@ pub trait Service = Fn(Request) -> Response + Send + Sync + 'static;
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -381,6 +386,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 关联类型与泛型混用导致歧义
@@ -438,6 +444,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Traits](./01_traits.md) — Trait 基础
 - [Generics](./02_generics.md) — 泛型系统

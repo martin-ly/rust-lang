@@ -13,6 +13,7 @@
 > [std::cell Documentation](https://doc.rust-lang.org/std/cell/index.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [内部可变性：编译期规则的运行时逃逸](#内部可变性编译期规则的运行时逃逸)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 外部可变性与内部可变性的对比
 
@@ -138,6 +140,7 @@ RefCell<T> 的运行时借用规则:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 `Cell<T>`：无借用语义的复制
 
@@ -240,6 +243,7 @@ let rw = RwLock::new(vec![1, 2, 3]);
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: Rc<RefCell<T>> — 共享可变所有权（单线程）
@@ -295,6 +299,7 @@ let rw = RwLock::new(vec![1, 2, 3]);
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -356,6 +361,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: RefCell 在已持有 borrow 时调用 borrow_mut
@@ -411,6 +417,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型
 - [Borrowing](../01_foundation/02_borrowing.md) — 借用与生命周期

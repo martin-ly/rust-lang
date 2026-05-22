@@ -14,6 +14,7 @@
 > [Wikipedia — Foreign Function Interface](https://en.wikipedia.org/wiki/Foreign_function_interface)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [FFI \[来源: Rust FFI\] 高级主题：跨语言边界的安全与性能](#ffi-来源-rust-ffi-高级主题跨语言边界的安全与性能)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 FFI 的安全契约
 
@@ -186,6 +188,7 @@ impl Drop for CallbackHandle {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 复杂类型映射
 
@@ -207,6 +210,7 @@ impl Drop for CallbackHandle {
   │ size_t          │ usize            │
   │ ssize_t         │ isize           │
   └─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   字符串:
   ├── C char* → Rust *const c_char 或 CStr
@@ -343,6 +347,7 @@ impl<F: FnOnce()> Drop for CleanupGuard<F> {
 ---
 
 ## 三、FFI 模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → 关键考虑
@@ -379,6 +384,7 @@ Opaque 指针:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -441,6 +447,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 忽略 C 字符串的 NULL 终止
@@ -510,6 +517,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](./03_unsafe.md) — 不安全代码
 - [FFI Basics](./05_rust_ffi.md) — FFI 基础

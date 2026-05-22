@@ -31,6 +31,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 覆盖率等级的层次结构
 
@@ -170,6 +171,7 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 ---
 
 ## 三、跨语言对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 语言/工具 | MC/DC 支持 | 实现方式 | 标准合规 |
 |:---|:---:|:---|:---:|
@@ -184,6 +186,7 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -278,6 +281,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — 安全关键代码的 unsafe 边界
 - [Formal Methods](./02_formal_methods.md) — 形式化验证替代方案

@@ -14,6 +14,7 @@
 > [Java Memory Model (JMM)](https://docs.oracle.com/javase/specs/jls/se21/html/jls-17.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust vs Java：系统编程与托管运行时的范式对比](#rust-vs-java系统编程与托管运行时的范式对比)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 内存管理：所有权 vs GC
 
@@ -119,6 +121,7 @@ graph TD
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 运行时架构对比
 
@@ -199,6 +202,7 @@ public static <T> T identity(T x) { return x; }
 ---
 
 ## 三、场景适用矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 场景 | Rust | Java | 推荐 |
 |:---|:---|:---|:---:|
@@ -221,6 +225,7 @@ public static <T> T identity(T x) { return x; }
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -322,6 +327,7 @@ Java → Rust 的渐进迁移策略:
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs C++](./01_rust_vs_cpp.md) — Rust 与 C++ 的对比
 - [Rust vs Go](./02_rust_vs_go.md) — Rust 与 Go 的对比

@@ -13,6 +13,7 @@
 > [RFC 1681 — Macros 1.1](https://github.com/rust-lang/rfcs/pull/1681)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Serde 序列化模式：Rust 的类型驱动数据转换](#serde-序列化模式rust-的类型驱动数据转换)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Serde 的设计哲学
 
@@ -132,6 +134,7 @@ Serde 支持的格式生态:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Derive 宏的展开逻辑
 
@@ -291,6 +294,7 @@ Visitor 模式的核心作用:
 ---
 
 ## 三、使用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 基本 derive
@@ -351,6 +355,7 @@ Visitor 模式的核心作用:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -408,6 +413,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 枚举表示不匹配
@@ -471,6 +477,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Traits](./01_traits.md) — Trait 系统与 derive
 - [Macros](../03_advanced/04_macros.md) — 过程宏机制

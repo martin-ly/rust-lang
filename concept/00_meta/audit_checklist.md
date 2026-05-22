@@ -9,6 +9,7 @@
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [概念一致性检查清单（Concept Consistency Audit Checklist）](#概念一致性检查清单concept-consistency-audit-checklist)
   - [📑 目录](#-目录)
@@ -86,6 +87,7 @@ flowchart TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、关系清晰度检查（Inter-File Consistency） [来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 跨层关系
 
@@ -119,6 +121,7 @@ flowchart TD
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 二、定理一致性检查（Theorem Consistency） [来源: 形式化验证中的定理证明一致性 — 参照 TAPL (Pierce, 2002) 类型系统元理论; RustBelt (Jung et al., POPL 2018) 的协议验证框架]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 每个核心文件的定理链
 
@@ -142,6 +145,7 @@ flowchart TD
 ---
 
 ## 三、反例与边界完备性检查（Counter-example Completeness） [来源: 边界测试方法论 — 参照 Torchiano et al. (2018) 关于软件工程知识库边界分析的研究]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 每个核心概念的反例覆盖
 
@@ -164,6 +168,7 @@ flowchart TD
 ---
 
 ## 四、认知路径检查（Cognitive Path） [来源: 认知路径设计参照建构主义学习理论 — Bruner (1961) 发现学习理论; Ausubel (1968) 有意义学习理论; 概念文件的认知路径章节要求渐进式推导]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 渐进式推导
 
@@ -177,6 +182,7 @@ flowchart TD
 ---
 
 ## 五、来源与可信度检查（Provenance） [来源: 来源可信度分级 — 一级: Rust Reference/RFCs/学术论文; 二级: Rust Internals/开发者博客; 三级: TRPL/Rustonomicon; 参照证据金字塔模型]
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 5.1 来源标注
 
@@ -190,6 +196,7 @@ flowchart TD
 ---
 
 ## 六、跨引用密度检查（Cross-reference Density） [来源: 跨引用密度 ≥3/文件的要求参照 hypertext 认知负荷研究 — 适度链接促进概念网络形成，过度链接导致导航迷失; 本知识体系采用 3-5 个核心跨文件链接作为平衡点]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 检查项 | 检查方法 | 通过标准 | 状态 |
 |:---|:---|:---|:---|
@@ -201,6 +208,7 @@ flowchart TD
 ---
 
 ## 七、自动化检查脚本（已实现）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```bash
 # 概念一致性自动检查（已部署脚本）
@@ -296,6 +304,7 @@ python scripts/cross_concept_diff.py
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [知识体系方法论](./methodology.md) — 内容结构与思维表征规范
 - [权威来源清单](./sources.md) — 来源分级与引用规范

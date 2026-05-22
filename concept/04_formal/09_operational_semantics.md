@@ -10,6 +10,7 @@
 > **来源**: [Winskel 1993 — The Formal Semantics of Programming Languages](https://mitpress.mit.edu/9780262731034) · [Pierce 2002 — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/) · [Felleisen & Flatt — Modular Semantics](https://doi.org/10.1145/263690.263803) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Stacked Borrows Paper](https://doi.org/10.1145/3371106)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [操作语义：程序行为的形式化定义](#操作语义程序行为的形式化定义)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么需要操作语义
 
@@ -146,6 +148,7 @@
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 配置与转换规则
 
@@ -258,6 +261,7 @@ Rust 操作语义的独特挑战:
 ---
 
 ## 三、应用映射
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 操作语义在 Rust 中的应用:
@@ -294,6 +298,7 @@ Rust 操作语义的独特挑战:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -413,6 +418,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type Theory](./02_type_theory.md) — 类型论基础
 - [Ownership Formal](./03_ownership_formal.md) — 所有权形式化

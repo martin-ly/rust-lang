@@ -10,6 +10,7 @@
 > **来源**: [Tokio](https://tokio.rs/) · [Axum](https://github.com/tokio-rs/axum) · [Actix](https://actix.rs/) · [Rust Cloud Native](https://rust-cloud-native.github.io/) · [Wikipedia — Cloud Native](https://en.wikipedia.org/wiki/Cloud-native_computing)
 
 ## 📑 目录
+> [来源: [AWS Docs]]
 
 - [Rust 云原生生态](#rust-云原生生态)
   - [📑 目录](#-目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 云原生定义
 
@@ -111,6 +113,7 @@ Rust 云原生优势:
 ---
 
 ## 二、Web 框架
+> [来源: [AWS Docs]]
 
 ### 2.1 Axum
 
@@ -206,6 +209,7 @@ Actix-web:
 ---
 
 ## 三、基础设施
+> [来源: [AWS Docs]]
 
 ### 3.1 服务网格
 
@@ -302,6 +306,7 @@ Actix-web:
   │ 配置            │ 简单            │ 强大            │
   │ 语言            │ Ruby            │ Rust            │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   其他工具:
   ├── Prometheus [来源: [Prometheus](https://prometheus.io/)] 客户端库
@@ -315,6 +320,7 @@ Actix-web:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -371,6 +377,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [AWS Docs]]
 
 ```text
 陷阱 1: 忽略异步运行时选择
@@ -415,6 +422,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [AWS Docs]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -428,6 +436,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程
 - [Network](../06_ecosystem/18_distributed_systems.md) — 网络

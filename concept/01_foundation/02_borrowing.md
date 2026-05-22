@@ -21,6 +21,7 @@
 ---
 
 ## 📑 目录
+> [来源: [TRPL]]
 
 - [Borrowing（借用 \[来源: TRPL Ch. 4.2\]）](#borrowing借用-来源-trpl-ch-42)
   - [📑 目录](#-目录)
@@ -87,6 +88,7 @@
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
+> [来源: [TRPL]]
 
 ### 1.1 TRPL 官方定义
 
@@ -120,6 +122,7 @@
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [TRPL]]
 
 ### 2.1 借用类型核心矩阵
 
@@ -164,6 +167,7 @@
 ---
 
 ## 三、形式化理论根基（Formal Foundation）
+> [来源: [TRPL]]
 
 ### 3.1 分离逻辑（Separation Logic）视角
 
@@ -259,6 +263,7 @@ Ralf Jung 等人在 POPL 2021 提出的 Stacked Borrows 将内存访问建模为
 ---
 
 ## 四、思维导图（Mind Map）
+> [来源: [TRPL]]
 
 ```mermaid
 graph TD

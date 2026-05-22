@@ -10,6 +10,7 @@
 > **来源**: [Kani](https://github.com/model-checking/kani) · [Creusot](https://github.com/creusot-rs/creusot) · [Prusti](https://www.pm.inf.ethz.ch/research/prusti.html) · [Aeneas](https://github.com/AeneasVerif/aeneas) · [Wikipedia — Formal Verification](https://en.wikipedia.org/wiki/Formal_verification)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [形式化方法在 Rust 中的应用](#形式化方法在-rust-中的应用)
   - [📑 目录](#-目录)
@@ -33,6 +34,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 形式化验证层次
 
@@ -110,6 +112,7 @@
 ---
 
 ## 二、关键工具
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Kani — 模型检查
 
@@ -232,6 +235,7 @@ Miri:
 ---
 
 ## 三、应用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 安全边界验证
 
@@ -321,6 +325,7 @@ Miri:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -377,6 +382,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 过度信任验证工具
@@ -434,6 +440,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Verification Toolchain](05_verification_toolchain.md) — 验证工具链
 - [RustBelt](04_rustbelt.md) — RustBelt

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [全局待办清单（Global TODO Tracker）](#全局待办清单global-todo-tracker)
   - [📑 目录](#-目录)
@@ -31,6 +32,7 @@
   - [相关概念文件 \[来源: concept/00\_meta/learning\_guide.md — 学习路径设计; concept/00\_meta/methodology.md — 内容结构规范\]](#相关概念文件-来源-concept00_metalearning_guidemd--学习路径设计-concept00_metamethodologymd--内容结构规范)
 
 ## 一、高优先级 TODO（建议优先处理） [来源: 优先级排序基于概念依赖图的前置节点数量 — 前置越多的概念优先级越高]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L1 基础概念层
 
@@ -87,6 +89,7 @@
 ---
 
 ## 二、中优先级 TODO
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 文件 | TODO 内容 | 预计阶段 |
 |:---|:---|:---|:---|
@@ -112,6 +115,7 @@
 ---
 
 ## 三、低优先级 TODO
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 文件 | TODO 内容 | 预计阶段 |
 |:---|:---|:---|:---|
@@ -157,6 +161,7 @@
 ---
 
 ## 四、质量审计检查清单 [来源: 审计方法论参照 IEEE 1012 — 软件验证与确认标准; Rust RFC 流程 — 设计决策的公开审查机制]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 已完成的门禁检查
 
@@ -231,6 +236,7 @@
 ---
 
 ## 相关概念文件 [来源: concept/00_meta/learning_guide.md — 学习路径设计; concept/00_meta/methodology.md — 内容结构规范]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [概念一致性检查清单](./audit_checklist.md) — 审计标准与完成定义
 - [跨层知识图谱](./inter_layer_map.md) — TODO 优先级与层间依赖映射

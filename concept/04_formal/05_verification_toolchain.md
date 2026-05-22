@@ -181,6 +181,7 @@ classDiagram
 ---
 
 ## 二、Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
 
@@ -306,6 +307,7 @@ a-mir-formality (Coq/Lean)
 ---
 
 ## 四、ROI 分析框架
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析]** 💡 以下框架帮助团队量化形式化验证的投入产出比。
 
@@ -586,6 +588,7 @@ flowchart TD
 ---
 
 ## 九、常见误区与反模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 误区一："验证工具可以互相替代"
 
@@ -618,6 +621,7 @@ flowchart TD
 ---
 
 ## 十、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|

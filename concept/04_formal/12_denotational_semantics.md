@@ -10,6 +10,7 @@
 > **来源**: [The Semantics of Programming Languages (Winskel)](https://www.cl.cam.ac.uk/~gw104/Semantics.pdf) · [Domain Theory (Abramsky & Jung)](https://www.cs.ox.ac.uk/people/samson.abramsky/dt.ps) · [Wikipedia — Denotational Semantics](https://en.wikipedia.org/wiki/Denotational_semantics) · [Wikipedia — Domain Theory](https://en.wikipedia.org/wiki/Domain_theory)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [指称语义与领域理论](#指称语义与领域理论)
   - [📑 目录](#-目录)
@@ -31,6 +32,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 指称语义原理
 
@@ -52,6 +54,7 @@
   │ 类型安全        │ 逐步验证        │ 良定义性        │
   │ 并发            │ 交织序列        │ 幂域 / 余代数   │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   基本框架:
   [[_]]: 语法 → 语义域
@@ -122,6 +125,7 @@ Kleene 不动点定理:
 ---
 
 ## 二、Rust 的指称解释
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型即域
 
@@ -210,6 +214,7 @@ Rust 类型的指称:
 ---
 
 ## 三、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 反命题树
 
@@ -269,6 +274,7 @@ graph TD
 ---
 
 ## 四、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: 混淆语法与语义
@@ -318,6 +324,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type Theory](./02_type_theory.md) — 类型论
 - [Operational Semantics](./09_operational_semantics.md) — 操作语义

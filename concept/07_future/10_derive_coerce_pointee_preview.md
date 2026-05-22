@@ -10,6 +10,7 @@
 > **来源**: [Rust RFC — Derive CoercePointee](https://github.com/rust-lang/rfcs/pull/3621) · [Rust Reference — Coercion](https://doc.rust-lang.org/reference/type-coercions.html) · [The Rustonomicon — Coercions](https://doc.rust-lang.org/nomicon/coercions.html) · [Tracking Issue #123430](https://github.com/rust-lang/rust/issues/123430)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [派生 CoercePointee 预研：智能指针的自动类型强制](#派生-coercepointee-预研智能指针的自动类型强制)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：自定义智能指针的样板代码
 
@@ -123,6 +125,7 @@ struct MyBox<T: ?Sized> {
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 派生宏的展开逻辑
 
@@ -196,6 +199,7 @@ graph LR
 ---
 
 ## 三、安全分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 安全收益分析:
@@ -220,6 +224,7 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -271,6 +276,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -299,6 +305,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统基础
 - [Generics](../02_intermediate/02_generics.md) — 泛型与 Trait Bounds

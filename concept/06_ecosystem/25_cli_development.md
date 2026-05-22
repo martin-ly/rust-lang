@@ -10,6 +10,7 @@
 > **来源**: [clap](https://docs.rs/clap/latest/clap/) · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [Command Line Applications in Rust](https://rust-cli.github.io/book/index.html) · [Wikipedia — Command-line Interface](https://en.wikipedia.org/wiki/Command-line_interface) · [Cargo](https://doc.rust-lang.org/cargo/)
 
 ## 📑 目录
+> [来源: [Clap Docs]]
 
 - [Rust CLI 开发生态](#rust-cli-开发生态)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 CLI 设计原则
 
@@ -120,6 +122,7 @@ CLI 设计原则:
 ---
 
 ## 二、关键 crate
+> [来源: [Clap Docs]]
 
 ### 2.1 clap
 
@@ -212,6 +215,7 @@ clap 生态:
 ---
 
 ## 三、打包与分发
+> [来源: [Clap Docs]]
 
 ### 3.1 单一二进制
 
@@ -284,6 +288,7 @@ clap 生态:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -340,6 +345,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Clap Docs]]
 
 ```text
 陷阱 1: 忽略错误处理
@@ -384,6 +390,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Clap Docs]]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -397,6 +404,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理
 - [Performance](15_performance_optimization.md) — 性能优化

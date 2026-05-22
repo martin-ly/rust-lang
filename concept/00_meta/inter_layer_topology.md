@@ -15,6 +15,7 @@
 ---
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系跨层依赖与蕴含拓扑图](#rust-知识体系跨层依赖与蕴含拓扑图)
   - [📑 目录](#-目录)
@@ -29,6 +30,7 @@
   - [六、跨层认知路径（导航指南）](#六跨层认知路径导航指南)
 
 ## 一、跨层拓扑总图
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
 graph TD
@@ -154,6 +156,7 @@ graph TD
 ---
 
 ## 二、层次间关系矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 纵向依赖矩阵（学习路径）
 
@@ -251,6 +254,7 @@ graph LR
 ---
 
 ## 五、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [L0 可判定性谱系](decidability_spectrum.md) —— 全链路判定边界
 - [L0 表达力多视角](expressiveness_multiview.md) —— 七视角表达力深化

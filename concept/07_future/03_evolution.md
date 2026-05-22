@@ -17,6 +17,7 @@ $entry
 ---
 
 ## 〇、Rust 语言演进认知全景
+> [来源: [Rust Blog]]
 
 ```mermaid
 mindmap
@@ -46,12 +47,14 @@ mindmap
 ```
 
 > **认知功能**: 提供 Rust 语言演进的全景认知框架，将 RFC 流程、火车模型、Edition 机制与各阶段核心主题统一为层级化心智模型。建议作为"地图"使用：首次阅读把握整体节奏，后续按需深入特定 Edition。关键洞察：三个 Edition 的主题递进揭示了 Rust 从语法简化到语义精确的演化逻辑。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **认知路径**: 本 mindmap 将 Rust 演进组织为**机制层**（RFC/火车/Edition）和**内容层**（各 Edition 的核心主题）。读者可按时间轴从中心向外阅读，或按兴趣直接跳转到特定 Edition。2018 的主题是"路径清晰化"，2021 是"精细化所有权"，2024 是"显式化 Unsafe 边界"——三个 Edition 形成从"语法简化"到"语义精确"的递进。
 
 ---
 
 ## 一、基础定义
+> [来源: [Rust Blog]]
 
 > **[来源: Rust Edition Guide; RFC 2052]** ✅
 
@@ -70,6 +73,7 @@ mindmap
 ---
 
 ## 认知路径（Cognitive Path）
+> [来源: [Rust Blog]]
 
 > **[来源: RFC 2000; Rust Reference: Const Generics]** ✅
 
@@ -100,6 +104,7 @@ const泛型完善/GAT/ specialization/ type alias impl Trait
 基金会/BDFL退位/可持续发展/多样性
 
 ## 二、Rust 演进机制
+> [来源: [Rust Blog]]
 
 > **[来源: Rust Lang Team Blog; Koka Language]** ✅
 
@@ -340,6 +345,7 @@ timeline
 ```
 
 > **认知功能**: 此 timeline 将四个 Edition 的**数十项变更**浓缩为各自的核心主题。视觉上可以清晰看到演进节奏：2015→2018（3年，模块系统大改）→ 2021（3年，所有权精细化）→ 2024（3年，Unsafe 显式化）。每个 Edition 的变更数量递增，表明语言在保持向后兼容的同时不断清理历史包袱。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 #### 2.3.4 代码示例：同一功能在不同 Edition 中的写法差异
 
@@ -493,6 +499,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 ---
 
 ## 三、关键趋势深度分析
+> [来源: [Rust Blog]]
 
 > **[来源: Rust Lang Team Blog; Koka Language; Plotkin & Pretnar 2009]** ✅
 
@@ -727,6 +734,7 @@ timeline
 ```
 
 > **认知功能**: 纵向展示 Rust 2015–2027+ 的关键里程碑，以五个阶段划分演进节奏。建议横向对比各阶段技术重心，识别从"基础语义稳定"到"类型系统深化"的长期主线。关键洞察：GATs、AFIT、Effects 系统、Const 泛型等高级特性集中在 2022 年后，标志着 Rust 从"稳定可用"进入"表达能力扩展"的新阶段。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -965,6 +973,7 @@ graph TD
 ```
 
 > **认知功能**: 以反例驱动破除"Rust 已完成演化"的静态思维定势，训练批判性认知。建议从根命题出发，沿四条反例路径逐一验证，最终收敛到限定条件下的修正命题。关键洞察：const generics、specialization、async trait 等关键特性仍在演进，且新领域（内核/AI）不断产生新需求——语言演进是持续过程而非终点。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2. "Edition 机制完美解决兼容性"
 
@@ -997,6 +1006,7 @@ graph TD
 ```
 
 > **认知功能**: 辩证审视 Edition 机制的能力边界，避免将其神化为万能兼容性方案。建议对比四条反例（跨 Edition 交互复杂性、生态迁移成本、认知负担、工具链支持）与修正命题。关键洞察：Edition 解决的是编译期语法隔离，而非生态统一迁移成本或开发者认知负担——完美兼容性在任何语言中都不存在。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3. "Rust 的成功完全因为技术优越性"
 

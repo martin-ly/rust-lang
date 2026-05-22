@@ -32,6 +32,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Future 与状态机
 
@@ -371,6 +372,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 ---
 
 ## 三、异步模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 模式 → 工具
@@ -413,6 +415,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -545,6 +548,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](./02_async.md) — 异步基础
 - [Pin](./06_pin_unpin.md) — Pin 与 Unpin

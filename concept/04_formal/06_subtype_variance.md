@@ -13,6 +13,7 @@
 > [TAPL — Types and Programming Languages](https://www.cis.upenn.edu/~bcpierce/tapl/)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [子类型与变型：Rust 类型系统中的协变、逆变与不变](#子类型与变型rust-类型系统中的协变逆变与不变)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 子类型关系：'static 是 'a 的子类型
 
@@ -121,6 +123,7 @@ Rust 类型的变型规则:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 生命周期位置的变型推导
 
@@ -216,6 +219,7 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 ---
 
 ## 三、形式化分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 形式化定义:
@@ -253,6 +257,7 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -307,6 +312,7 @@ graph TD
 ---
 
 ## 五、常见编译错误解析
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 错误 1: "lifetime may not live long enough"
@@ -352,6 +358,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — Rust 类型系统
 - [Lifetimes](../01_foundation/03_lifetimes.md) — 生命周期与借用

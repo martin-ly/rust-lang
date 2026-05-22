@@ -10,6 +10,7 @@
 > **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html) · [TRPL — Data Types](https://doc.rust-lang.org/book/ch03-02-data-types.html) · [std::num](https://doc.rust-lang.org/std/num/) · [RFC 0560 — Integer Overflow](https://github.com/rust-lang/rfcs/blob/master/text/0560-integer-overflow.md) · [IEEE 754](https://en.wikipedia.org/wiki/IEEE_754)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [数值类型与运算：从整数到浮点的完整图景](#数值类型与运算从整数到浮点的完整图景)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 整数类型全景
 
@@ -49,6 +51,7 @@ Rust 整数类型:
   │ i128     │ 16 字节    │ -1.7e38 ~ 1.7e38             │
   │ isize    │ 指针大小   │ -2^(N-1) ~ 2^(N-1)-1         │
   └──────────┴────────────┴──────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   无符号整数:
   ┌──────────┬────────────┬──────────────────────────────┐
@@ -61,6 +64,7 @@ Rust 整数类型:
   │ u128     │ 16 字节    │ 0 ~ 3.4e38                   │
   │ usize    │ 指针大小   │ 0 ~ 2^N-1                    │
   └──────────┴────────────┴──────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   字面量表示:
   ├── 十进制: 98_222（下划线分隔可读性）
@@ -90,6 +94,7 @@ Rust 浮点类型 (IEEE 754 标准):
   │ f32      │ 4 字节     │ ~7 位十进制数                   │
   │ f64      │ 8 字节     │ ~15 位十进制数                  │
   └──────────┴────────────┴─────────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   默认类型: f64（现代 64 位 CPU 上 f64 与 f32 速度相同）
 
@@ -161,6 +166,7 @@ a.overflowing_add(b);  // (44, true)
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型转换与 as
 
@@ -184,6 +190,7 @@ let d: i32 = c as i32;  // 3 (截断小数)
 │ bool     │ ✅      │ ✅      │ ✅  │ ✅  │ -    │ ❌   │
 │ char     │ ✅      │ ✅      │ ✅  │ ✅  │ ❌   │ -    │
 └─────────────────────────────────────────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 // From/Into: 安全、无截断的转换
 let a: i32 = 42;
@@ -285,6 +292,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ---
 
 ## 三、数值类型矩阵
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 数值类型选择指南:
@@ -321,6 +329,7 @@ let size = NonZeroU32::new(1024).unwrap();
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -431,6 +440,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](./04_type_system.md) — 类型系统
 - [Zero Cost Abstractions](./06_zero_cost_abstractions.md) — 零成本抽象

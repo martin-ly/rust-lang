@@ -14,6 +14,7 @@
 > [RFC 2126 — Uniform Paths](https://rust-lang.github.io/rfcs/2126-path-clarity.html)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [模块系统与路径：Rust 的代码组织哲学](#模块系统与路径rust-的代码组织哲学)
   - [📑 目录](#-目录)
@@ -36,6 +37,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 模块层次结构
 
@@ -174,6 +176,7 @@ pub use self::hosting::add_to_waitlist;  // 外部可见
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 文件系统映射
 
@@ -307,6 +310,7 @@ serde = { version = "1", features = ["derive"] }
 ---
 
 ## 三、设计模式矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 模式 → 实现
@@ -338,6 +342,7 @@ serde = { version = "1", features = ["derive"] }
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -399,6 +404,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
 陷阱 1: mod 和文件不同步
@@ -455,6 +461,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](./01_ownership.md) — 所有权系统
 - [Type System](./04_type_system.md) — 类型系统

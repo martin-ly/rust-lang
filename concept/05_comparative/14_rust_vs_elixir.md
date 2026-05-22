@@ -34,6 +34,7 @@
 ---
 
 ## 一、设计哲学对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 错误处理哲学
 
@@ -61,6 +62,7 @@
   │ 失败代价        │ 低（类型检查）  │ 低（进程隔离）  │
   │ 整体理念        │ 预防错误        │ 拥抱失败        │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
   代码对比:
 
@@ -134,6 +136,7 @@ fn main() {
   │ 内存隔离        │ 依赖所有权      │ 物理隔离        │
   │ 热更新          │ 不支持          │ 支持            │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [Elixir Official]]
 ```
 
 > [来源: [Elixir Official](https://elixir-lang.org/)]
@@ -276,6 +279,7 @@ Rust 并发模型:
   │ 学习曲线        │ 陡峭            │ 平缓            │
   │ 文档内省        │ rustdoc         │ 类型规范        │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > [来源: [Elixir Typespecs](https://hexdocs.pm/elixir/typespecs.html)]
 
@@ -399,6 +403,7 @@ fn main() {
   │ 跨平台          │ 编译目标        │ VM 抽象         │
   │ 容器化          │ 优秀            │ 良好            │
   └─────────────────┴─────────────────┴─────────────────┘
+> [来源: [Elixir Official]]
 ```
 
 > **部署洞察**: **Rust 的零运行时适合静态部署，Elixir 的热更新适合长运行服务**。
@@ -571,6 +576,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust vs Go](12_rust_vs_go.md) — Rust vs Go
 - [Rust vs Haskell](10_rust_vs_haskell.md) — Rust vs Haskell

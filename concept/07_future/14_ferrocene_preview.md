@@ -10,6 +10,7 @@
 > **来源**: [Ferrocene Project](https://ferrocene.dev/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [ISO 26262 Standard](https://www.iso.org/standard/68383.html) · [DO-178C Standard](https://www.rtca.org/product/do-178c-software-considerations-in-airborne-systems-and-equipment-certification) · [Ferrous Systems Blog](https://ferrous-systems.com/blog/)
 
 ## 📑 目录
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Ferrocene \[来源: Ferrous Systems Ferrocene\] \[来源: Ferrous Systems\] 预研：Rust 的安全关键认证之路](#ferrocene-来源-ferrous-systems-ferrocene-来源-ferrous-systems-预研rust-的安全关键认证之路)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 安全关键软件的认证挑战
 
@@ -114,6 +116,7 @@ Ferrocene 的认证范围（当前）:
 ---
 
 ## 二、技术细节
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 认证工具链的构成
 
@@ -189,6 +192,7 @@ Ferrocene 证据包构成:
 ---
 
 ## 三、行业应用分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 行业 | 标准 | Rust/Ferrocene 价值 | 当前状态 |
 |:---|:---|:---|:---:|
@@ -204,6 +208,7 @@ Ferrocene 证据包构成:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -264,6 +269,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -304,6 +310,7 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链
 - [Formal Methods](./02_formal_methods.md) — 形式化方法工业化
