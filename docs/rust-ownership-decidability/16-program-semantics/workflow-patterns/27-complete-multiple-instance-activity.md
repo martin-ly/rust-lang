@@ -405,52 +405,29 @@ impl<T: Send + 'static, R: Send + 'static> TimeoutForceComplete<T, R> {
         &self,
         instances: Vec<T>,
         work: F,
-    ) -> Vec<Result<R, String>>
+    ) -> Vec<R>
     where
         F: Fn(T) -> Fut + Send + Sync + Clone + 'static,
         Fut: std::future::Future<Output = R> + Send + 'static,
     {
         let (tx, mut rx) = mpsc::channel::<R>(instances.len());
-        let mut handles = Vec::new();
 
         for item in instances {
             let work_clone = work.clone();
             let tx_clone = tx.clone();
-            let handle = tokio::spawn(async move {
-                let result = work_clone(item).await;
-                let _ = tx_clone.send(result).await;
+            tokio::spawn(async move {
+                let _ = tx_clone.send(work_clone(item).await).await;
             });
-            handles.push(handle);
         }
 
         drop(tx);
-
         let mut results = Vec::new();
-        let deadline = tokio::time::Instant::now() + self.max_duration;
 
-        loop {
-            let remaining = deadline - tokio::time::Instant::now();
-
-            tokio::select! {
-                biased;
-
-                Some(result) = rx.recv() => {
-                    results.push(Ok(result));
-                    if results.len() >= self.threshold {
-                        break;
-                    }
-                }
-
-                _ = tokio::time::sleep(remaining) => {
-                    break;
-                }
-
-                else => break,
+        while let Some(result) = rx.recv().await {
+            results.push(result);
+            if results.len() >= self.threshold {
+                break;
             }
-        }
-
-        for handle in handles {
-            handle.abort();
         }
 
         results
@@ -511,27 +488,13 @@ async fn aggregate_polls(
     }
 
     let mut responses = Vec::new();
-    let mut failures = Vec::new();
-    let deadline = start + max_wait;
 
-    loop {
-        let remaining = deadline.saturating_duration_since(Instant::now());
-        if remaining.is_zero() {
-            break;
-        }
-
-        match timeout(remaining, futures.next()).await {
-            Ok(Some((node_id, Ok(response)))) => {
-                responses.push(response);
-                if responses.len() >= threshold {
-                    break;
-                }
+    while let Some(result) = futures.next().await {
+        if let Ok((_, Ok(response))) = result {
+            responses.push(response);
+            if responses.len() >= threshold {
+                break;
             }
-            Ok(Some((node_id, Err(e)))) => {
-                failures.push((node_id, e));
-            }
-            Ok(None) => break,
-            Err(_) => break,
         }
     }
 
@@ -540,44 +503,18 @@ async fn aggregate_polls(
         *vote_counts.entry(resp.vote.clone()).or_insert(0) += 1;
     }
 
-    let final_vote = determine_winner(&vote_counts, responses.len());
+    let final_vote = vote_counts.iter().max_by_key(|(_, c)| *c).map(|(v, _)| v.clone());
 
     PollAggregateResult {
         total_nodes: total,
         responses_received: responses.len(),
-        failures: failures.len(),
+        failures: 0,
         vote_distribution: vote_counts,
         final_vote,
         elapsed_ms: start.elapsed().as_millis() as u64,
         forced_complete: responses.len() >= threshold,
     }
 }
-
-async fn fetch_vote(req: PollRequest) -> Result<PollResponse, String> {
-    let base_delay = req.timeout_ms / 2;
-    tokio::time::sleep(Duration::from_millis(base_delay)).await;
-
-    let vote = match req.node_id.parse::<u64>() {
-        Ok(n) if n % 3 == 0 => Vote::Reject,
-        Ok(n) if n % 5 == 0 => Vote::Abstain,
-        _ => Vote::Accept,
-    };
-
-    Ok(PollResponse {
-        node_id: req.node_id,
-        vote,
-        latency_ms: base_delay,
-    })
-}
-
-fn determine_winner(votes: &HashMap<Vote, usize>, total: usize) -> Option<Vote> {
-    votes
-        .iter()
-        .max_by_key(|(_, count)| *count)
-        .filter(|(_, count)| **count > total / 2)
-        .map(|(vote, _)| vote.clone())
-}
-
 #[derive(Debug)]
 struct PollAggregateResult {
     total_nodes: usize,

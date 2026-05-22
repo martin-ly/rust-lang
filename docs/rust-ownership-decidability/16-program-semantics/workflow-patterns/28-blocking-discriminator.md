@@ -412,41 +412,6 @@ where
     results
 }
 
-/// 支付确认场景：等待 2/3 确认
-pub async fn wait_for_confirmations(
-    confirmations: Vec<impl std::future::Future<Output = bool> + Send>,
-    required: usize,
-) -> (usize, Vec<bool>) {
-    let barrier = Arc::new(Barrier::new(required));
-    let mut handles = Vec::new();
-
-    for (idx, confirmation) in confirmations.into_iter().enumerate() {
-        let barrier_clone = Arc::clone(&barrier);
-
-        let handle = tokio::spawn(async move {
-            let confirmed = confirmation.await;
-            if confirmed {
-                let _ = barrier_clone.wait().await;
-            }
-            confirmed
-        });
-        handles.push(handle);
-    }
-
-    let mut confirmed_count = 0;
-    let mut results = Vec::new();
-
-    for handle in handles {
-        if let Ok(confirmed) = handle.await {
-            if confirmed {
-                confirmed_count += 1;
-            }
-            results.push(confirmed);
-        }
-    }
-
-    (confirmed_count, results)
-}
 ```
 
 ### 5.3 计数信号量实现

@@ -30,7 +30,6 @@
   - [6. 正确性证明](#6-正确性证明)
     - [6.1 活性 (Liveness)](#61-活性-liveness)
     - [6.2 安全性 (Safety)](#62-安全性-safety)
-    - [6.3 部分合并正确性](#63-部分合并正确性)
   - [7. 与其他模式的关系](#7-与其他模式的关系)
     - [7.1 模式层次](#71-模式层次)
     - [7.2 形式化关系](#72-形式化关系)
@@ -489,42 +488,24 @@ async fn read_with_consensus(
         .map(|(value, _)| value)
         .next();
 
-    let agreement_count = agreed_value
-        .as_ref()
-        .map(|v| responses.iter().filter(|r| r == &v).count())
-        .unwrap_or(0);
-
     drop(join_set);
 
     ConsensusResult {
         agreed_value,
         source_count: responses.len(),
-        agreement_count,
+        agreement_count: responses.len(),
         total_sources: total,
         elapsed_ms: start.elapsed().as_millis() as u64,
     }
 }
 
-async fn read_from_source(
-    source: DataSource,
-    key: String,
-) -> Option<DataValue> {
-    let delay = (1000.0 / source.reliability) as u64;
-    tokio::time::sleep(Duration::from_millis(delay)).await;
-
-    if source.reliability > 0.8 {
-        Some(DataValue {
-            key: key.clone(),
-            value: format!("value_for_{}", key),
-            version: 1,
-        })
-    } else {
-        Some(DataValue {
-            key: key.clone(),
-            value: format!("stale_value_for_{}", key),
-            version: 0,
-        })
-    }
+async fn read_from_source(source: DataSource, key: String) -> Option<DataValue> {
+    tokio::time::sleep(Duration::from_millis(100)).await;
+    Some(DataValue {
+        key,
+        value: format!("value_for_{}", source.id),
+        version: 1,
+    })
 }
 
 /// 基于部分合并的多数决投票
@@ -586,7 +567,7 @@ pub async fn majority_vote<V: Clone + Send + Eq + std::hash::Hash + 'static>(
 
 ### 6.2 安全性 (Safety)
 
-**定理**: 部分合并仅在至少 N 个分支完成后才触发。
+**定理**: 部分合并仅在至少 N 个分支完成后才触发，且合并结果仅包含已完成分支的结果。
 
 **证明**:
 
@@ -596,23 +577,15 @@ $$
 \text{merge} \iff c \geq n
 $$
 
-其中 $c$ 是已完成分支的计数。因此合并操作仅在至少 $n$ 个分支完成后触发。
+其中 $c$ 是已完成分支的计数。设完成集合为 $D$，$|D| \geq n$。
 
-### 6.3 部分合并正确性
-
-**定理**: 合并结果仅包含已完成分支的结果。
-
-**证明**:
-
-设完成集合为 $D$，$|D| \geq n$。
-
-合并函数:
+合并函数仅作用于已完成分支:
 
 $$
 \text{result} = \text{merge}(\{r_i \mid b_i \in D\})
 $$
 
-对于未完成分支 $b_j \notin D$，其结果 $r_j$ 不包含在合并输入中，因此不影响合并结果。
+对于未完成分支 $b_j \notin D$，其结果不影响合并结果。
 
 ---
 

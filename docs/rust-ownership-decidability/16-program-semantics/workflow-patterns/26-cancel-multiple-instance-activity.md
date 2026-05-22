@@ -41,8 +41,7 @@
     - [8.3 金融对账系统](#83-金融对账系统)
   - [9. 变体与扩展](#9-变体与扩展)
     - [9.1 超时自动取消](#91-超时自动取消)
-    - [9.2 优先级取消](#92-优先级取消)
-    - [9.3 级联取消](#93-级联取消)
+    - [9.2 级联取消](#92-级联取消)
   - [10. 总结](#10-总结)
   - [参考文献](#参考文献)
   - [**最后更新**: 2026-05-22](#最后更新-2026-05-22)
@@ -432,43 +431,6 @@ impl SelectiveCancelManager {
         self.metadata.insert(id, meta);
     }
 
-    /// 按优先级取消低优先级实例
-    pub fn cancel_by_priority_threshold(&mut self, threshold: u32) -> Vec<usize> {
-        let to_cancel: Vec<usize> = self
-            .metadata
-            .iter()
-            .filter(|(_, meta)| meta.priority < threshold)
-            .map(|(id, _)| *id)
-            .collect();
-
-        self.cancel_ids(&to_cancel)
-    }
-
-    /// 按类型取消特定类型的实例
-    pub fn cancel_by_type(&mut self, instance_type: &str) -> Vec<usize> {
-        let to_cancel: Vec<usize> = self
-            .metadata
-            .iter()
-            .filter(|(_, meta)| meta.instance_type == instance_type)
-            .map(|(id, _)| *id)
-            .collect();
-
-        self.cancel_ids(&to_cancel)
-    }
-
-    /// 按运行时长取消超时的实例
-    pub fn cancel_by_duration(&mut self, max_duration: Duration) -> Vec<usize> {
-        let now = Instant::now();
-        let to_cancel: Vec<usize> = self
-            .metadata
-            .iter()
-            .filter(|(_, meta)| now.duration_since(meta.created_at) > max_duration)
-            .map(|(id, _)| *id)
-            .collect();
-
-        self.cancel_ids(&to_cancel)
-    }
-
     /// 组合条件取消
     pub fn cancel_by_filter<F>(&mut self, filter: F) -> Vec<usize>
     where
@@ -558,78 +520,13 @@ async fn process_batch_with_selective_cancel(jobs: Vec<BatchJob>) -> Vec<JobResu
     let mut results = Vec::new();
     let mut completed_count = 0;
 
-    loop {
-        tokio::select! {
-            Some(result) = join_set.join_next() => {
-                match result {
-                    Ok((job_id, status)) => {
-                        completed_count += 1;
-                        results.push(JobResult {
-                            job_id,
-                            status,
-                            processed_at: Some(Instant::now()),
-                        });
-
-                        if completed_count % 5 == 0 {
-                            let late_jobs: Vec<String> = job_registry
-                                .iter()
-                                .filter(|(_, tracking)| {
-                                    Instant::now() > tracking.job.deadline &&
-                                    tracking.job.priority < 5
-                                })
-                                .map(|(id, _)| id.clone())
-                                .collect();
-
-                            for late_id in &late_jobs {
-                                if let Some(tracking) = job_registry.get(late_id) {
-                                    tracking.abort_handle.abort();
-                                }
-                            }
-                        }
-                    }
-                    Err(e) => {
-                        eprintln!("作业 panic: {:?}", e);
-                    }
-                }
-            }
-
-            _ = tokio::time::sleep(Duration::from_secs(30)) => {
-                let low_priority: Vec<_> = job_registry
-                    .iter()
-                    .filter(|(_, t)| t.job.priority < 3)
-                    .map(|(id, _)| id.clone())
-                    .collect();
-
-                for id in &low_priority {
-                    if let Some(tracking) = job_registry.get(id) {
-                        tracking.abort_handle.abort();
-                        results.push(JobResult {
-                            job_id: id.clone(),
-                            status: JobStatus::Timeout,
-                            processed_at: None,
-                        });
-                    }
-                }
-                break;
-            }
-
-            else => break,
-        }
-
-        if completed_count >= jobs.len() * 3 / 4 {
-            break;
-        }
-    }
-
     while let Some(result) = join_set.join_next().await {
         if let Ok((job_id, status)) = result {
-            if !results.iter().any(|r| r.job_id == job_id) {
-                results.push(JobResult {
-                    job_id,
-                    status,
-                    processed_at: Some(Instant::now()),
-                });
-            }
+            results.push(JobResult {
+                job_id,
+                status,
+                processed_at: Some(Instant::now()),
+            });
         }
     }
 
@@ -637,14 +534,7 @@ async fn process_batch_with_selective_cancel(jobs: Vec<BatchJob>) -> Vec<JobResu
 }
 
 async fn process_single_job(job: BatchJob) -> (String, JobStatus) {
-    let processing_time = match job.priority {
-        0..=2 => Duration::from_secs(1),
-        3..=5 => Duration::from_secs(3),
-        _ => Duration::from_secs(5),
-    };
-
-    tokio::time::sleep(processing_time).await;
-
+    tokio::time::sleep(Duration::from_secs(2)).await;
     if job.amount < 0.0 {
         (job.job_id, JobStatus::Failed("Invalid amount".to_string()))
     } else {
@@ -806,28 +696,7 @@ pub async fn auto_cancel_with_timeout(
 }
 ```
 
-### 9.2 优先级取消
-
-根据系统负载动态调整取消策略：
-
-```rust
-impl SelectiveCancelManager {
-    pub fn cancel_for_resource_relief(&mut self, target_count: usize) -> Vec<usize> {
-        let mut by_priority: Vec<_> = self.metadata.values().collect();
-        by_priority.sort_by_key(|m| m.priority);
-
-        let to_cancel: Vec<usize> = by_priority
-            .iter()
-            .take(self.metadata.len() - target_count)
-            .map(|m| m.id)
-            .collect();
-
-        self.cancel_ids(&to_cancel)
-    }
-}
-```
-
-### 9.3 级联取消
+### 9.2 级联取消
 
 取消一个实例时，级联取消依赖它的实例：
 
@@ -838,13 +707,12 @@ pub fn cancel_with_dependencies(
     dependency_graph: &HashMap<usize, Vec<usize>>,
 ) -> Vec<usize> {
     let mut to_cancel = vec![id];
-    let mut visited = std::collections::HashSet::new();
     let mut queue = vec![id];
 
     while let Some(current) = queue.pop() {
         if let Some(deps) = dependency_graph.get(&current) {
             for &dep in deps {
-                if visited.insert(dep) {
+                if !to_cancel.contains(&dep) {
                     queue.push(dep);
                     to_cancel.push(dep);
                 }
