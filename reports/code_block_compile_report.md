@@ -7,11 +7,17 @@
 
 | 指标 | 数值 |
 |:---|:---|
-| 测试代码块 | 342 |
-| 编译通过 | 342 |
-| 编译失败 | 0 |
-| 跳过 (ignore/no_run) | 579 |
-| 通过率 | 100.0% |
+| 测试代码块 | 344 |
+| 编译通过 | 343 |
+| 编译失败 | 1 |
+| 跳过 (ignore/no_run) | 581 |
+| 通过率 | 99.7% |
+
+## 编译失败的代码块
+
+| 文件 | 行号 | 模式 | 预览 | 错误信息 |
+|:---|:---|:---|:---|:---|
+| concept\06_ecosystem\28_devops_and_ci_cd.md | 552 | normal | `fn main() {     let version = env!("CARG` | error: environment variable `CARGO_PKG_VERSION` not defined at compile time  --> |
 
 ## 编译通过的代码块（抽样）
 
