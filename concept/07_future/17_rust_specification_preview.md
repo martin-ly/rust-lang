@@ -10,6 +10,8 @@
 > **来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Ferrocene Specification](https://spec.ferrocene.dev/) · [Rust Language Specification RFC](https://github.com/rust-lang/rfcs/pull/3355) · [Rust Compiler Team — Specification](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 语言规范预研：从参考文档到形式化规范](#rust-语言规范预研从参考文档到形式化规范)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：参考文档的局限性
@@ -130,6 +134,8 @@ Ferrocene 规范的局限:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 规范的内容层次
@@ -227,6 +233,8 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 三、社区视角
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 利益相关方 | 对规范的需求 | 当前痛点 | 优先级 |
@@ -244,6 +252,8 @@ Rust 规范维护的核心挑战:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -307,6 +317,7 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
 |:---|:---:|:---|:---|
@@ -323,6 +334,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -336,6 +348,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Formal Methods](./02_formal_methods.md) — 形式化方法工业化

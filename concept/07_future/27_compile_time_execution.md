@@ -10,6 +10,8 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Reference — Const Eval](https://doc.rust-lang.org/reference/const_eval.html) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Wikipedia — Compile Time](https://en.wikipedia.org/wiki/Compile_time) · [Rust Blog — Const Evaluation](https://blog.rust-lang.org/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference]]
 
 - [编译期执行与常量求值](#编译期执行与常量求值)
@@ -34,6 +36,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 const fn
@@ -154,6 +158,8 @@ Const Generics:
 ---
 
 ## 二、编译期能力边界
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference]]
 
 ### 2.1 稳定的编译期操作
@@ -229,6 +235,8 @@ Const Generics:
 ---
 
 ## 三、应用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 编译期计算
@@ -324,6 +332,8 @@ Const Generics:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -380,6 +390,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference]]
 
 ```text
@@ -429,6 +441,8 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference]]
 
 | 来源 | 可信度 | 说明 |
@@ -442,6 +456,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Generics](../02_intermediate/02_generics.md) — 泛型

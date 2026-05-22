@@ -9,6 +9,8 @@
 > [来源: [RFC 3502 — Cargo Script Manifest](https://github.com/rust-lang/rfcs/pull/3502) · [RFC 3503 — Cargo Script Frontmatter](https://github.com/rust-lang/rfcs/pull/3503) · [Cargo Book — Scripts](https://doc.rust-lang.org/cargo/reference/unstable.html#script) · [rust-lang/cargo#12207](https://github.com/rust-lang/cargo/issues/12207) · [rust-lang/rust#136889](https://github.com/rust-lang/rust/issues/136889)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Cargo Script：单文件 Rust 程序](#cargo-script单文件-rust-程序)
@@ -34,6 +36,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 Cargo Script（RFC 3502 + RFC 3503）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：RFC 3502 定义单文件 manifest 格式，RFC 3503 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
@@ -99,6 +103,8 @@ fn main() { /* ... */ }
 ---
 
 ## 二、Frontmatter 语法详解
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 完整字段支持
@@ -131,6 +137,8 @@ edition = "2024"     # 默认当前 edition
 ---
 
 ## 三、与传统 Cargo 项目的对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 维度 | `cargo new` 项目 | Cargo Script 单文件 |
@@ -212,6 +220,8 @@ graph TD
 ---
 
 ## 四、工程实践
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 快速 CLI 原型
@@ -288,6 +298,7 @@ fn main() {
 ---
 
 ## 五、形式化定位
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 匿名 Crate 语义
 
@@ -311,6 +322,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 六、与 L1-L4 的关系映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | L1-L4 概念 | Cargo Script 映射 |
 |:---|:---|
@@ -322,6 +334,7 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## 七、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - **一级**: [RFC 3503 — Cargo Script](https://github.com/rust-lang/rfcs/pull/3503)（FCP 完成，目标 2026 稳定）
 - **一级**: [Cargo Book — Unstable Features / Script](https://doc.rust-lang.org/cargo/reference/unstable.html#script)
@@ -334,6 +347,8 @@ Cargo Script:  File = Crate (单模块，无子模块)
 
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [工具链总览](./01_toolchain.md) — Cargo 工作空间与编译器生态
 - [核心 Crate 选型](./03_core_crates.md) — 脚本中常用依赖的选择策略
@@ -344,6 +359,8 @@ Cargo Script:  File = Crate (单模块，无子模块)
 ---
 
 ## Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。

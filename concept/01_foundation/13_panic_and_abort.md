@@ -14,6 +14,8 @@
 > [Wikipedia — Crash-only Software](https://en.wikipedia.org/wiki/Crash-only_software)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Panic 与 Abort：不可恢复错误的处理机制](#panic-与-abort不可恢复错误的处理机制)
@@ -37,6 +39,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Panic 的语义
@@ -168,6 +172,8 @@ Panic 传播机制:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 自定义 Panic 处理
@@ -302,6 +308,8 @@ fn configure_panic() {
 
 ## 三、设计模式矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 处理方式 → 代码示例
@@ -338,6 +346,8 @@ fn configure_panic() {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -404,6 +414,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -452,6 +464,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -463,6 +476,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) — 错误处理

@@ -54,7 +54,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Bridge 形式化分析](#bridge-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Bridge 结构）](#def-11bridge-结构)
@@ -546,7 +546,6 @@ graph LR
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
-
 
 > **[来源: ACM - Systems Programming Languages]**
 > **[来源: IEEE - Programming Language Standards]**

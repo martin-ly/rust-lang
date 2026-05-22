@@ -10,6 +10,8 @@
 > **来源**: [Rust RFC — Gen Blocks](https://github.com/rust-lang/rfcs/pull/3513) · [Rust Reference — Generators](https://doc.rust-lang.org/reference/expressions/generator-expr.html) · [Tracking Issue #93132](https://github.com/rust-lang/rust/issues/93132) · [Iterator RFCs](https://github.com/rust-lang/rfcs/labels/T-libs-api)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Gen Blocks 预研：超越异步的泛化生成器](#gen-blocks-预研超越异步的泛化生成器)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 从 async 到 gen 的泛化
@@ -124,6 +128,8 @@ graph TD
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 生成器状态机
@@ -209,6 +215,8 @@ graph LR
 
 ## 三、使用模式
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 无限序列
@@ -256,6 +264,8 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -313,6 +323,8 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
@@ -330,6 +342,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -343,6 +356,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程与 Future

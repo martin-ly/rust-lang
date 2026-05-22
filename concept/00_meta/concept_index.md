@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [全局概念索引（Concept Index）](#全局概念索引concept-index)
   - [📑 目录](#-目录)
@@ -67,6 +68,7 @@
   - [八、TODO](#八todo)
 
 ## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 概念类型标记 [来源: 概念分类参照语义网络理论 — Collins & Quillian (1969) 层次语义网络模型; 概念的层级组织与属性继承]
 
@@ -89,6 +91,8 @@
 ---
 
 ## 二、核心概念索引（🔷） [来源: 概念定义基于 Rust Reference / RFCs / 学术论文; 索引结构参照 Wikipedia Infobox Pattern 的信息浓缩设计]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### A [来源: 概念定义基于 Rust Reference / TRPL / 学术论文]
@@ -287,6 +291,8 @@
 
 ## 三、交叉概念一致性审计（🔶） [来源: 交叉一致性检查方法论参照概念图 (Concept Map) 理论 — Novak & Cañas, *The Theory Underlying Concept Maps* (2008); 知识网络的连通性验证]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念在**多个文件中重复出现**，需要确保定义一致：
 
@@ -331,6 +337,8 @@
 
 ## 四、引用概念速查（🔹） [来源: 速查表设计参照认知心理学中的组块化 (Chunking) 原则 — Miller (1956); 信息压缩与快速检索]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 首次出现文件 | 相关核心概念 | 简要说明 |
 |:---|:---|:---|:---|
@@ -347,6 +355,7 @@
 ---
 
 ## 五、按 Bloom 层级排序 [来源: Bloom, B.S. et al. — *Taxonomy of Educational Objectives: The Classification of Educational Goals*. Handbook I: Cognitive Domain. Longman, 1956 (revised 2001); 认知层级作为知识结构组织的主轴]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 记忆（Remember）→ 理解（Understand）
 
@@ -388,6 +397,7 @@
 ---
 
 ## 六、来源与可信度
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 索引设计决策 | 来源 | 可信度 |
 |:---|:---|:---|
@@ -399,6 +409,8 @@
 ---
 
 ## 七、Wave 11 新增概念索引
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念为 Wave 11（表征空间元分析）中**新增或强化**的元概念：
@@ -428,6 +440,8 @@
 
 ## 八、Wave 6 新增概念索引
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念为 Wave 6 全量深度重构中**新增或强化**的元概念与结构化元素：
 
@@ -455,6 +469,8 @@
 ---
 
 ## 九、交叉概念单一来源规范（Single Source of Truth）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 以下概念在多个文件中重复出现，本索引正式声明其**主定义文件**和**一致性规范**，确保全知识体系定义无冲突。
@@ -506,6 +522,7 @@
 ---
 
 ## 十、语义表达力全景梳理（Phase F）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[`semantic_expressiveness.md`](./semantic_expressiveness.md)** —— 2026-05-13 新建
 
@@ -526,6 +543,8 @@
 ---
 
 ## 十一、Phase 7 五维升华新增概念索引
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > Phase 7 于 2026-05-21 完成，新增 9 个文件，覆盖「可判定性—表达力—惯用法—执行模型—系统设计」五维主线 + 四层全局关系图谱。
@@ -594,6 +613,7 @@
 ---
 
 ## 八、TODO
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **高**: Wave 6 全量深度重构（27/27 文件）
 - [x] **高**: 为所有文件添加定理一致性矩阵 + 反命题决策树 + 认知路径

@@ -17,6 +17,7 @@
 ---
 
 ## 零、TL;DR —— 30 秒选型
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 你的场景 | 首选工具 | 次选 | 绝对不要 |
 |:---|:---|:---|:---|
@@ -36,6 +37,7 @@
 ---
 
 ## 一、工具链全景矩阵（选型版）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
@@ -182,6 +184,8 @@ classDiagram
 
 ## 二、Wikipedia 概念对齐
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 以下将各验证工具映射到其背后的计算机科学基础概念。
 
@@ -255,6 +259,7 @@ graph LR
 ---
 
 ## 三、a-mir-formality：Rust 类型系统规范
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Project Goals 2026 — a-mir-formality]** · **[来源: rustc-dev-guide]** · **[来源: POPL 2023 类型系统形式化论文]** ✅
 
@@ -307,6 +312,8 @@ a-mir-formality (Coq/Lean)
 ---
 
 ## 四、ROI 分析框架
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析]** 💡 以下框架帮助团队量化形式化验证的投入产出比。
@@ -407,6 +414,7 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 ---
 
 ## 五、分层验证策略
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 五层防御模型
 
@@ -521,6 +529,7 @@ sequenceDiagram
 ---
 
 ## 六、工具选择决策树
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 flowchart TD
@@ -555,6 +564,7 @@ flowchart TD
 ---
 
 ## 七、2026 工具状态更新
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: 各工具官方文档 2026-05]**
 
@@ -572,6 +582,7 @@ flowchart TD
 ---
 
 ## 八、工业案例速查
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 项目 | 组件 | 工具 | 验证目标 | 结果 |
 |:---|:---|:---|:---|:---|
@@ -588,6 +599,8 @@ flowchart TD
 ---
 
 ## 九、常见误区与反模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 误区一："验证工具可以互相替代"
@@ -621,6 +634,8 @@ flowchart TD
 ---
 
 ## 十、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |

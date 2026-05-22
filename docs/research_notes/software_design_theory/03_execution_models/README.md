@@ -8,6 +8,7 @@
 ---
 
 ## 📊 目录 {#-目录}
+>
 > **[来源: Rust Official Docs]**
 
 - [执行模型形式化框架](#执行模型形式化框架)
@@ -36,10 +37,12 @@
       - [代码示例更新](#代码示例更新)
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 宗旨
+>
 > **[来源: Rust Official Docs]**
 
 对同步、异步、并发、并行、分布式五类执行模型进行形式化分析，并与 Rust 形式化基础（async_state_machine、pin、Send/Sync、ownership、borrow）衔接。
@@ -47,6 +50,7 @@
 ---
 
 ## 执行模型分类
+>
 > **[来源: Rust Official Docs]**
 
 | 模型 | 定义 | 形式化文档 |
@@ -60,6 +64,7 @@
 ---
 
 ## 执行模型多维对比矩阵
+>
 > **[来源: Rust Official Docs]**
 
 下表为同步/异步/并发/并行/分布式的**概念定义/属性关系/选型**多维对比；与 [HIERARCHICAL_MAPPING_AND_SUMMARY](../../../research_notes/HIERARCHICAL_MAPPING_AND_SUMMARY.md) 文档↔思维表征映射衔接。各子文档在本矩阵中的位置见「形式化文档」列。
@@ -79,6 +84,7 @@
 ---
 
 ## 依赖引用
+>
 > **[来源: Rust Official Docs]**
 
 | 依赖 | 文档 |
@@ -93,6 +99,7 @@
 ---
 
 ## 边界分析
+>
 > **[来源: Rust Official Docs]**
 
 [06_boundary_analysis](./06_boundary_analysis.md)：各模型的安全/支持/表达边界。
@@ -100,6 +107,7 @@
 ---
 
 ## 模型选型决策（实质内容）
+>
 > **[来源: Rust Official Docs]**
 
 | 需求组合 | 推荐模型 | 典型场景 |
@@ -115,6 +123,7 @@
 ---
 
 ## 模型选择速查
+>
 > **[来源: Rust Official Docs]**
 
 | 需求 | 推荐模型 | crate |
@@ -128,9 +137,11 @@
 ---
 
 ## 典型场景与设计模式组合（实质内容）
+>
 > **[来源: Rust Official Docs]**
 
 ### 场景 1：批处理流水线（同步 + 策略）
+>
 > **[来源: Rust Official Docs]**
 
 **需求**：对一批数据按可配置策略处理。
@@ -149,6 +160,7 @@ fn process_batch<S: ProcessStrategy>(data: Vec<i32>, strategy: &S) -> Vec<i32> {
 ```
 
 ### 场景 2：高并发 Web 服务（异步 + Observer + 通道）
+>
 > **[来源: Rust Official Docs]**
 
 **需求**：请求处理 → 发事件 → 多订阅者（日志、通知、库存）。
@@ -355,7 +367,6 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

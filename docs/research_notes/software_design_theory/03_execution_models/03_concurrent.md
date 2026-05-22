@@ -379,7 +379,6 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 > **[来源: ACM - Concurrent Programming]**
 
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

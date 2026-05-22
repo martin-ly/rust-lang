@@ -7,6 +7,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 概念速查卡片（Quick Reference）](#rust-概念速查卡片quick-reference)
@@ -77,6 +79,8 @@
   - [四、跨语言对照速查](#四跨语言对照速查)
 
 ## 一、核心概念速查（按字母序） [来源: 速查内容基于 Rust Reference / TRPL / Rustonomicon / RFCs; 概念定义与 concept/ 目录核心文件保持一致]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Rust Standard Library / 2025; Rust Reference / 2025; TRPL / 2024]** 本速查表的所有概念定义均来源于 Rust 官方文档和学术论文。
@@ -643,6 +647,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ---
 
 ## 二、编译错误码速查
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 错误码 | 含义 | 触发场景 | 解决方向 | 深入文件 |
@@ -670,6 +676,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ---
 
 ## 三、模式选择决策树（速查版）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -701,6 +709,8 @@ fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
 ---
 
 ## 四、跨语言对照速查
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | Rust | C++ | Java | Go | Haskell |

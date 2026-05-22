@@ -39,6 +39,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. 卫生性机制概述
 >
@@ -443,7 +444,6 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -455,6 +455,5 @@ pub fn hygienic_macro(input: TokenStream) -> TokenStream {
 > **[来源: Rust Reference - Macros]**
 
 > **[来源: The Little Book of Rust Macros]**
-
 
 > **[来源: Wikipedia - Memory Safety]**

@@ -14,6 +14,8 @@
 > [W3C WebAssembly](https://www.w3.org/wasm/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [WebAssembly \[来源: WebAssembly.org\] 生态：Rust 的浏览器外运行时](#webassembly-来源-webassemblyorg-生态rust-的浏览器外运行时)
@@ -37,6 +39,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 WebAssembly 的设计哲学
@@ -109,6 +113,8 @@ graph LR
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 wasm32 目标三元组
@@ -216,6 +222,8 @@ graph TD
 
 ## 三、应用场景分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 场景 | 技术栈 | Rust 价值 | 代表项目 |
 |:---|:---|:---|:---|
@@ -232,6 +240,8 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -290,6 +300,8 @@ graph TD
 ---
 
 ## 五、工具链与运行时
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -326,6 +338,7 @@ Rust Wasm 工具链:
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 
@@ -345,6 +358,8 @@ Rust Wasm 工具链:
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Rust 工具链

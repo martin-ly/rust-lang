@@ -10,6 +10,8 @@
 > **来源**: [Reynolds 2002 — Separation Logic](https://www.cs.cmu.edu/~jcr/seplogic.pdf) · [O'Hearn 2019 — Separation Logic](https://doi.org/10.1145/3211968) · [Iris Framework](https://iris-project.org/) · [RustBelt Paper](https://doi.org/10.1145/3158154) · [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [分离逻辑：并发安全的指针推理系统](#分离逻辑并发安全的指针推理系统)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 霍尔逻辑与指针的困境
@@ -125,6 +129,8 @@
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 分离逻辑的断言语言
@@ -215,6 +221,8 @@ graph TD
 ---
 
 ## 三、Rust 的应用映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -251,6 +259,8 @@ Rust 概念 ↔ 分离逻辑映射:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -311,6 +321,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 混淆 * 与 ∧
@@ -346,6 +357,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -359,6 +371,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership Formal](./03_ownership_formal.md) — 所有权形式化

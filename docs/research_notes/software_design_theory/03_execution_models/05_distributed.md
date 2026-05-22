@@ -528,6 +528,5 @@ CQRS 使用 `tokio::sync::mpsc` 传递事件。
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
 
-
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**

@@ -42,7 +42,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Feature Model]** · **[来源: Wikipedia - Software Product Line]** · **[来源: ACM - Feature-Oriented Software Development]** · **[来源: IEEE - Feature Traceability]**
 
 - [Rust 核心特性完整链：定义→示例→论证→证明](#rust-核心特性完整链定义示例论证证明)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [1. 所有权](#1-所有权)
   - [2. 借用](#2-借用)
@@ -385,7 +385,6 @@
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
-
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**

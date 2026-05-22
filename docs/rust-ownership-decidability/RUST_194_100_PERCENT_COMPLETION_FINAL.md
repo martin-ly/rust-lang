@@ -41,6 +41,7 @@
   - [7. Conclusion](#7-conclusion)
   - [*"Formal methods require honesty about both achievements and limitations. This report reflects the true state of the project."*](#formal-methods-require-honesty-about-both-achievements-and-limitations-this-report-reflects-the-true-state-of-the-project)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 1. Executive Summary
 >
@@ -494,7 +495,6 @@ The admitted proofs are transparently documented and represent standard practice
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

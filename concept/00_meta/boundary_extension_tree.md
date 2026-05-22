@@ -15,6 +15,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 安全边界扩展推理树](#rust-安全边界扩展推理树)
@@ -68,6 +70,8 @@ mindmap
 > **认知路径**: 本 mindmap 将 Rust 安全边界从中心（Safe Rust）向外扩展，每层扩展都意味着**编译器保证递减，程序员责任递增**。颜色编码：绿色=编译器全责，黄色=程序员契约，红色=跨语言风险，黑色=系统级风险。理解这条边界扩展路径，是评估 Rust 项目安全风险的元框架。
 
 ## 一、边界扩展总树
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -97,6 +101,8 @@ graph TD
 ---
 
 ## 二、逐层扩展分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 L0: Safe Rust（🟢 编译期保证）
@@ -182,6 +188,8 @@ pub fn safe_wrapper(data: &mut [u8]) {
 ---
 
 ## 三、风险矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 边界层级 | 编译期保证 | 运行时检查 | 程序员责任 | 系统风险 | 补偿机制 |
@@ -197,6 +205,7 @@ pub fn safe_wrapper(data: &mut [u8]) {
 ---
 
 ## 四、边界扩展决策树
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -225,6 +234,7 @@ graph TD
 ---
 
 ## 五、认知路径（Cognitive Path）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **从边界外向内扩展的学习路径**：理解 Rust 安全边界不是一次性掌握全部，而是逐步扩展可信赖的范围。
 
@@ -257,6 +267,8 @@ graph TD
 > **思维表征说明**: 认知路径是**纵向递进的学习阶梯**——与 `graph TD` 流程图（展示知识结构）和 `stateDiagram`（展示状态约束）都不同，认知路径回答「**学习者应该以什么顺序掌握这些概念**」。每一步有明确的目标和验证标准，帮助学习者自我评估当前位置。此路径遵循「从安全到危险、从编译器保证到人工证明、从应用到形式化」的渐进原则。 [来源: 认知负荷理论 — Sweller (1988); Bloom  taxonomy]
 
 ## 五、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](inter_layer_topology.md)

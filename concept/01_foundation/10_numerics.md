@@ -392,6 +392,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 隐式截断
@@ -428,6 +429,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|

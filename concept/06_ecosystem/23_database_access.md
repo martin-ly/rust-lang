@@ -10,6 +10,8 @@
 > **来源**: [SQLx](https://github.com/launchbadge/sqlx) · [Diesel](https://diesel.rs/) · [SeaORM](https://www.sea-ql.org/SeaORM/) · [Rust Database Guide](https://rust-lang-nursery.github.io/rust-cookbook/database.html) · [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Tokio Docs]]
 
 - [Rust 数据库访问生态](#rust-数据库访问生态)
@@ -35,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 SQLx — 编译期检查
@@ -163,6 +167,8 @@ SeaORM:
 
 ## 二、查询模式
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 原始 SQL
 
@@ -265,6 +271,8 @@ SeaORM:
 ---
 
 ## 三、连接管理
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Tokio Docs]]
 
 ### 3.1 连接池
@@ -346,6 +354,8 @@ SeaORM:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -404,6 +414,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Tokio Docs]]
 
 ```text
@@ -461,6 +473,8 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Tokio Docs]]
 
 | 来源 | 可信度 | 说明 |
@@ -475,6 +489,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程

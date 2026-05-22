@@ -25,6 +25,7 @@
   - [📝 变更记录](#-变更记录)
   - [**维护者**: Rust-Ownership-Decidability Team](#维护者-rust-ownership-decidability-team)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 📋 版本标注分类
 >

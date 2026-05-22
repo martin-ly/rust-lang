@@ -2662,10 +2662,8 @@ type LargeChannel<T> = SizedChannel<T, 1000>;
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
 
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
-
 
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**

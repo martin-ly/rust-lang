@@ -1419,7 +1419,6 @@ impl<T> CountedMSQueue<T> {
 
 > **[来源: ACM - Software Design Patterns]**
 
-
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Memory Safety]**

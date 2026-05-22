@@ -15,6 +15,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系层次内模型间映射图](#rust-知识体系层次内模型间映射图)
@@ -37,6 +39,8 @@
   - [五、层内模型认知路径](#五层内模型认知路径)
 
 ## 一、L1 基础概念层：所有权 · 借用 · 生命周期 · 类型系统
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 四元关系拓扑
@@ -79,6 +83,8 @@ graph TD
 
 ## 二、L2 进阶概念层：Trait · 泛型 · 内存管理 · 错误处理
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 四元关系拓扑
 
@@ -118,6 +124,8 @@ graph TD
 ---
 
 ## 三、L3 高级概念层：并发 · 异步 · Unsafe · 宏
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 四元关系拓扑
@@ -159,6 +167,8 @@ graph TD
 ---
 
 ## 四、L4 形式化层：线性逻辑 · 类型论 · 所有权形式化 · RustBelt · 验证工具链
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 五元关系拓扑
@@ -199,6 +209,8 @@ graph TD
 ---
 
 ## 五、模型间映射的形式化核心
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 5.1 L1-L4 核心同构链
@@ -223,6 +235,8 @@ Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
 
 ## 六、相关概念链接
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](inter_layer_topology.md) —— L0-L7 纵向关系
 - [定理推理森林](theorem_inference_forest.md) —— 模型内定理链
@@ -233,6 +247,7 @@ Rust 并发     ≡  并发分离逻辑  （Iris: own + shr + 协议验证）
 - [L4 所有权形式化](../04_formal/03_ownership_formal.md)
 
 ## 五、层内模型认知路径
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何在同一层级内选择正确的模型？**——以 L1 基础层为例的决策路径。
 

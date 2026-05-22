@@ -7,6 +7,8 @@
 ---
 
 ## 〇、质量状态速览
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 指标 | 数值 | 状态 |
@@ -23,6 +25,8 @@
 ---
 
 ## 一、按层级导航（L0-L7）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### L0 元信息层 — 方法论与索引
@@ -135,6 +139,8 @@
 ---
 
 ## 二、按背景导航
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 完全新手（无系统编程经验）
@@ -181,6 +187,7 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 ---
 
 ## 三、按主题速查
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 你想了解 | 首选文件 | 次选 |
 |:---|:---|:---|
@@ -198,6 +205,7 @@ L5: paradigm_matrix（Rust 在设计空间中的位置）
 ---
 
 ## 四、质量报告
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [质量基线报告 v1.9](../../reports/QUALITY_BASELINE_v1_9.md)
 - [概念审计报告](../../reports/concept_audit_report.md)

@@ -25,6 +25,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [Rust Reference — Traits]]
 
 - [Trait \[来源: TRPL Ch. 10.2\]s（Trait 系统）](#trait-来源-trpl-ch-102strait-系统)
@@ -85,10 +86,6 @@
     - [Step 4: 类型论映射 — Curry-Howard 与 Type Class](#step-4-类型论映射--curry-howard-与-type-class)
     - [Step 5: 工程权衡 — 静态分发 vs 动态分发](#step-5-工程权衡--静态分发-vs-动态分发)
     - [Step 6: 形式化掌控 — 定理链与设计验证](#step-6-形式化掌控--定理链与设计验证)
-| 补充来源项 1 | [来源: [TRPL](https://doc.rust-lang.org/book/ch10-02-traits.html) | ✅ |
-| 补充来源项 2 | [来源: [Rust Reference](https://doc.rust-lang.org/reference/items/traits.html) | ✅ |
-| 补充来源项 3 | [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/) | ✅ |
-| 补充来源项 4 | [来源: [Wikipedia — Type class](https://en.wikipedia.org/wiki/Type_class) | ✅ |
   - [九、知识来源关系（Provenance）](#九知识来源关系provenance)
   - [十、相关概念链接](#十相关概念链接)
     - [补充章节：`impl Trait` 在 Trait 定义中的使用（RPITIT / AFIT）](#补充章节impl-trait-在-trait-定义中的使用rpitit--afit)
@@ -125,6 +122,7 @@
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
+>
 > [来源: [Rust Reference — Traits]]
 
 ### 1.1 Wikipedia 对齐定义
@@ -170,6 +168,7 @@ Trait 作为逻辑命题:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+>
 > [来源: [Rust Reference — Traits]]
 
 ### 2.1 Trait 类型分类矩阵
@@ -219,6 +218,7 @@ Trait 作为逻辑命题:
 ---
 
 ## 三、思维导图（Mind Map）
+>
 > [来源: [Rust Reference — Traits]]
 
 ```mermaid
@@ -266,6 +266,7 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+>
 > [来源: [Rust Reference — Traits]]
 
 > **[来源: RFC 1023; Rust Reference: Coherence]** Orphan Rule 是 Coherence 的工程实现机制，二者共同保证单态化的确定性。
@@ -462,6 +463,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+>
 > [来源: [Rust Reference — Traits]]
 
 ### 5.1 正确示例：Trait 定义与实现
@@ -766,6 +768,7 @@ impl Foo for Vec<u8> { fn foo() {} }       // ⚠️ 更特化
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
+>
 > [来源: [Rust Reference — Traits]]
 
 > **[RFC 1023](https://rust-lang.github.io/rfcs/1023-rebalancing-coherence.html)** · **[Rust Reference: Orphan Rules](https://doc.rust-lang.org/reference/items/implementations.html#orphan-rules)** · **[Rust Reference: Object Safety](https://doc.rust-lang.org/reference/items/traits.html#object-safety)** 反命题分析基于 Trait 系统的形式化语义和已知边界案例，按四层（编译期/运行时/语义/工程）系统分类。反例节点用 `fill:#f66`，定理成立用 `fill:#6f6`。 ✅ 已验证
@@ -931,6 +934,7 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+>
 > [来源: [Rust Reference — Traits]]
 
 ### 7.1 测试 1: Orphan Rule + Coherence 多层嵌套边界
@@ -1065,6 +1069,7 @@ fn test_auto_trait() {
 ---
 
 ## 八、认知路径（Cognitive Path）
+>
 > [来源: [Rust Reference — Traits]]
 
 > **[原创分析]** · **[TRPL: Ch10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)** 认知路径从直觉困惑到形式规则的渐进映射，基于 TRPL 教学顺序和类型论知识结构，六步形成"感性→知性→理性"的完整认知螺旋。 💡 原创分析
@@ -1168,6 +1173,7 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 九、知识来源关系（Provenance）
+>
 > [来源: [Rust Reference — Traits]]
 
 | **论断** | **来源** | **可信度** |
@@ -1192,6 +1198,7 @@ fn notify<T: Summary>(item: &T) { ... }
 ---
 
 ## 十、相关概念链接
+>
 > [来源: [Rust Reference — Traits]]
 
 | 概念 | 文件 | 关系 |
@@ -1793,6 +1800,7 @@ impl !Foo for Bar<String> {}     // ❌ 错误：与正向 impl 重叠
 ---
 
 ## 十二、补充章节：Next-generation Trait Solver（2026 旗舰稳定化目标）
+>
 > [来源: [Rust Reference — Traits]]
 
 > **[来源: Rust Project Goals 2026; rustc-next-trait-solver  crate]** ✅
@@ -1856,6 +1864,7 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 ---
 
 ## 十一、待补充与演进方向（TODOs）
+>
 > [来源: [Rust Reference — Traits]]
 
 - [x] **TODO**: 补充 `impl Trait` 在 `trait` 定义中的使用（存在类型 + 高阶） —— 优先级: 中 —— 已完成 §补充章节 RPITIT —— 2026-05-13

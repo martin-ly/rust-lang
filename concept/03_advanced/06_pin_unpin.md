@@ -14,6 +14,7 @@
 > [Tracking Issue #55766](https://github.com/rust-lang/rust/issues/55766)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Pin 与 Unpin：自引用类型的不动性保证](#pin-与-unpin自引用类型的不动性保证)
   - [📑 目录](#-目录)
@@ -36,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：自引用类型的移动陷阱
@@ -126,6 +129,7 @@ Unpin trait 的语义:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 Pin API 的契约
 
@@ -237,6 +241,8 @@ async/await 与 Pin 的关系:
 
 ## 三、使用模式
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 模式 1: 在 safe 代码中使用 Pin（Unpin 类型）
@@ -280,6 +286,8 @@ async/await 与 Pin 的关系:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -337,6 +345,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 误以为 Pin 阻止所有移动
@@ -386,6 +395,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -401,6 +411,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](./02_async.md) — 异步编程（Pin 的核心用例）

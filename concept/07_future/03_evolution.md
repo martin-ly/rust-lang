@@ -17,6 +17,7 @@ $entry
 ---
 
 ## 〇、Rust 语言演进认知全景
+>
 > [来源: [Rust Blog]]
 
 ```mermaid
@@ -54,6 +55,7 @@ mindmap
 ---
 
 ## 一、基础定义
+>
 > [来源: [Rust Blog]]
 
 > **[来源: Rust Edition Guide; RFC 2052]** ✅
@@ -73,6 +75,7 @@ mindmap
 ---
 
 ## 认知路径（Cognitive Path）
+>
 > [来源: [Rust Blog]]
 
 > **[来源: RFC 2000; Rust Reference: Const Generics]** ✅
@@ -104,6 +107,7 @@ const泛型完善/GAT/ specialization/ type alias impl Trait
 基金会/BDFL退位/可持续发展/多样性
 
 ## 二、Rust 演进机制
+>
 > [来源: [Rust Blog]]
 
 > **[来源: Rust Lang Team Blog; Koka Language]** ✅
@@ -499,6 +503,7 @@ Rust 语言团队已公开表示 Edition 将继续以约 3 年为周期发布。
 ---
 
 ## 三、关键趋势深度分析
+>
 > [来源: [Rust Blog]]
 
 > **[来源: Rust Lang Team Blog; Koka Language; Plotkin & Pretnar 2009]** ✅

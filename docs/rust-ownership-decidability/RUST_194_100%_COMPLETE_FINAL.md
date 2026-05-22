@@ -42,6 +42,7 @@
   - [🎊 完成声明](#-完成声明)
   - [**✅ 任务圆满完成！** 🏆](#-任务圆满完成-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎉 项目完成声明
 >
@@ -353,7 +354,6 @@ Theorem precise_capture_completeness_complete :
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

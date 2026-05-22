@@ -15,6 +15,8 @@
 > [Rust RFC 2318 — Custom Test Frameworks](https://github.com/rust-lang/rfcs/pull/2318)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [测试生态：单元测试、集成测试与验证策略](#测试生态单元测试集成测试与验证策略)
@@ -38,6 +40,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 的内置测试框架
@@ -143,6 +147,8 @@ Rust 类型系统作为验证工具:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 属性测试（Property-Based Testing）
@@ -256,6 +262,8 @@ cargo-fuzz: 基于 libFuzzer 的模糊测试
 ---
 
 ## 三、测试策略矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -300,6 +308,8 @@ unsafe 代码验证:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -365,6 +375,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忽略测试结果中的 flakiness
@@ -409,6 +420,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -429,6 +441,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Error Handling](../02_intermediate/04_error_handling.md) — 错误处理

@@ -10,6 +10,8 @@
 > **来源**: [Rust FAQ — Why MIT/Apache-2.0](https://www.rust-lang.org/policies/licenses) · [Choose a License](https://choosealicense.com/) · [SPDX License List](https://spdx.org/licenses/) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [OSI Approved Licenses](https://opensource.org/licenses) · [Wikipedia — Software License](https://en.wikipedia.org/wiki/Software_license)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Foundation]]
 
 - [许可证与合规：Rust 项目的法律工程](#许可证与合规rust-项目的法律工程)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 生态的许可证文化
@@ -156,6 +160,8 @@ Rust 生态的许可证现状:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Foundation]]
 
 ### 2.1 许可证合规工具链
@@ -286,6 +292,8 @@ MIT/Apache-2.0 双许可的实施:
 
 ## 三、许可证模式矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 推荐许可证 → 原因
@@ -321,6 +329,8 @@ GPL 项目:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -384,6 +394,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Foundation]]
 
 ```text
@@ -429,6 +441,8 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Foundation]]
 
 | 来源 | 可信度 | 说明 |
@@ -447,6 +461,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — 工具链

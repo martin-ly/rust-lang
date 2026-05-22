@@ -17,6 +17,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [TRPL — Error Handling]]
 
 - [Error Handling（错误处理）](#error-handling错误处理)
@@ -95,6 +96,7 @@
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
 
 ## 一、权威定义（Definition）
+>
 > [来源: [TRPL — Error Handling]]
 
 ### 1.1 Wikipedia 对齐定义
@@ -133,6 +135,7 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+>
 > [来源: [TRPL — Error Handling]]
 
 ### 2.1 错误处理机制矩阵
@@ -173,6 +176,7 @@ Result<T, E> ≅ T + E       （余和类型: Ok(T) + Err(E)）
 ---
 
 ## 三、思维导图（Mind Map）
+>
 > [来源: [TRPL — Error Handling]]
 
 ```mermaid
@@ -210,6 +214,7 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+>
 > [来源: [TRPL — Error Handling]]
 
 ### 4.1 引理：Result<T,E> ⟹ 和类型强制错误处理
@@ -307,6 +312,7 @@ graph TD
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+>
 > [来源: [TRPL — Error Handling]]
 
 ### 5.1 正确示例：`?` 运算符链式传播
@@ -529,6 +535,7 @@ let result = select! {
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
+>
 > [来源: [TRPL — Error Handling]]
 
 > **[TRPL: Ch9] · [Rust API Guidelines] · [RFC 243]** 反命题分析基于和类型、Monad bind 和 Rust 编译器检查的形式化语义。 ✅ 已验证
@@ -719,6 +726,7 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+>
 > [来源: [TRPL — Error Handling]]
 
 ### 7.1 测试 1: ? 运算符在闭包中的限制
@@ -865,6 +873,7 @@ fn nested_result_option() {
 ---
 
 ## 八、认知路径（Cognitive Path）
+>
 > [来源: [TRPL — Error Handling]]
 
 > **[原创分析] · [TRPL: Ch9]** 认知路径从"如何处理错误"直觉到和类型 + Error Monad 形式化的渐进映射。 💡 原创分析
@@ -986,6 +995,7 @@ Monad 定律验证:
 ---
 
 ## 九、知识来源关系（Provenance）
+>
 > [来源: [TRPL — Error Handling]]
 
 | **论断** | **来源** | **可信度** |
@@ -1974,6 +1984,7 @@ fn compute() -> Maybe<i32> {
 ---
 
 ## 十、相关概念链接
+>
 > [来源: [TRPL — Error Handling]]
 
 | 概念 | 文件 | 关系 |
@@ -1989,6 +2000,7 @@ fn compute() -> Maybe<i32> {
 ---
 
 ## 十一、待补充与演进方向（TODOs）
+>
 > [来源: [TRPL — Error Handling]]
 
 - [x] **TODO**: 补充 `std::backtrace::Backtrace` 与错误追踪 —— 优先级: 中 —— 已完成 §9.3 (2026-05-14)
@@ -2007,6 +2019,7 @@ fn compute() -> Maybe<i32> {
 ---
 
 ## Wikipedia 概念对齐
+>
 > [来源: [TRPL — Error Handling]]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。

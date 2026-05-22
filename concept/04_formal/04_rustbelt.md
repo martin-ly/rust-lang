@@ -24,6 +24,8 @@ $entry
 ---
 
 ## 一、权威定义（Definition）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [RustBelt]]
 
 ### 1.1 Wikipedia 权威定义
@@ -54,6 +56,8 @@ $entry
 ---
 
 ## 二、定理一致性矩阵（Theorem Consistency Matrix）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [RustBelt]]
 
 > **[学术来源: Jung et al. 2017 POPL; Jung et al. 2018 POPL; Iris: JFP 2018]** 以下定理矩阵基于 RustBelt 系列论文及 Iris 框架的公理体系，每行包含"被依赖"（下游定理）与"失效条件"（假设被违反的情形）。
@@ -173,6 +177,8 @@ graph BT
 > [来源: [RustBelt Paper]]
 
 ## 三、Concurrent Separation Logic（并发分离逻辑）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [RustBelt]]
 
 > **[学术来源: O'Hearn 2007 (CSL 原始论文); Jung et al. 2015 (Iris); RustBelt: POPL 2018 §4–§5]** CSL 是分离逻辑向并发领域的自然延伸。Rust 的所有权系统与 CSL 的资源分区思想存在深层同构：`&mut T` 对应独占的分离合取 `l ↦ v`，`&T` 对应持久资源 `□(l ↦ v)`，`Mutex<T>` 对应资源不变量 `I`。
@@ -363,6 +369,8 @@ drop(arc2);  // rc: 1 → 0, 释放 data
 ---
 
 ## 四、反命题决策树（Antithesis Decision Trees）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [RustBelt]]
 
 > **[学术来源: RustBelt 系列论文; Iris 框架设计原则]** 以下决策树用于识别对 RustBelt 和形式化验证的常见误解，每棵树对应一个过度概括的命题。
@@ -438,6 +446,8 @@ graph TD
 ---
 
 ## 五、认知路径（Cognitive Path）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [RustBelt]]
 
 ```text
@@ -481,6 +491,7 @@ graph TD
 ---
 
 ## 六、RustBelt 验证的标准库原语
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: RustBelt: POPL 2018; RustHornBelt: PLDI 2022; RefinedRust: PLDI 2024; Ralf Jung PhD Thesis 2020]**
 
@@ -512,6 +523,8 @@ graph TD
 
 ## 七、验证工具链快速对比
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源类型: 原创分析]** 💡 以下为各工具核心能力的一页纸速查。
 
@@ -535,6 +548,7 @@ graph TD
 ---
 
 ## 七之一、验证工具代码示例与 CI/CD 集成
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[Kani GitHub]** · **[Verus Documentation]** · **[Creusot Tutorial]** · **[Prusti GitHub]** 本节补充各工具的具体代码示例，以及验证工具与持续集成（CI）的集成方案。✅
 
@@ -684,6 +698,7 @@ jobs:
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [RustBelt \& Verification Toolchain（RustBelt 与验证工具链）](#rustbelt--verification-toolchainrustbelt-与验证工具链)
   - [一、权威定义（Definition）](#一权威定义definition)
@@ -733,6 +748,7 @@ jobs:
   - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
 
 ## 八、形式化验证工具链映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: 各工具官方论文/文档; AWS Kani Blog 2023; Microsoft Verus 文档; Inria Aeneas 文档]** 本节建立从"轻量级动态检测"到"heavyweight 定理证明"的完整工具链光谱，为工业选型提供决策依据。
 
@@ -783,6 +799,7 @@ jobs:
 ---
 
 ## 九、思维导图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -841,6 +858,7 @@ graph TD
 ---
 
 ## 十、国际课程与论文对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 核心内容 | 与本文件对应 |
 |:---|:---|:---|
@@ -879,6 +897,7 @@ graph TD
 ---
 
 ## 十二、相关概念链接
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
@@ -1062,6 +1081,7 @@ unsafe {
 ---
 
 ## 十四、Wikipedia 概念对齐
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** RustBelt 与分离逻辑核心概念与国际知识库映射。

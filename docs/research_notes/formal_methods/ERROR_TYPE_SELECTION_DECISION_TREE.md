@@ -45,6 +45,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 概述
 >
@@ -557,7 +558,6 @@ pub enum ConfigError {
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -577,7 +577,6 @@ pub enum ConfigError {
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
-
 
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**

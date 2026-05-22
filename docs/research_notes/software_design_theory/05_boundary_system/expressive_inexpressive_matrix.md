@@ -471,7 +471,6 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 
 > **[来源: Rustonomicon]**
 
-
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**

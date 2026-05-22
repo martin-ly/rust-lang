@@ -10,6 +10,8 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust By Example](https://doc.rust-lang.org/rust-by-example/error.html) · [std::result](https://doc.rust-lang.org/std/result/index.html) · [std::option](https://doc.rust-lang.org/std/option/index.html) · [Wikipedia — Exception Handling](https://en.wikipedia.org/wiki/Exception_handling)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 错误处理基础](#rust-错误处理基础)
@@ -35,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Result 类型
@@ -217,6 +221,8 @@ fn main() {
 ---
 
 ## 二、错误转换与组合
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 From trait
@@ -352,6 +358,8 @@ Result/Option 组合:
 ---
 
 ## 三、Panic 与不可恢复错误
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 panic! 宏
@@ -434,6 +442,8 @@ unwrap / expect:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -492,6 +502,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 过度使用 unwrap
@@ -546,6 +557,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -559,6 +571,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Error Handling](../02_intermediate/04_error_handling.md) — 进阶错误处理

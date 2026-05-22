@@ -267,6 +267,5 @@ BorrowCheck(程序 P):
 
 > **[来源: ACM - Formal Verification]**
 
-
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Memory Safety]**

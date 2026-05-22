@@ -10,6 +10,7 @@
 > **来源**: [DO-178C [来源: [FAA DO-178C](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] / ED-12C](<https://www.rtca.org/product/do-178c/>) · [ISO 26262](https://www.iso.org/standard/68383.html) · [Rust Tracking Issue #124656](https://github.com/rust-lang/rust/issues/124656) · [MCDC [来源: [FAA MC/DC](https://www.faa.gov/aircraft/air_cert/design_approvals/criteria/software)] Wikipedia](<https://en.wikipedia.org/wiki/Code_coverage>) · [NASA Software Safety Guidebook](https://ntrs.nasa.gov/citations/20030093620)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [MC/DC \[来源: \[DO-178C MC/DC\](https://en.wikipedia.org/wiki/Modified\_condition/decision\_coverage \[来源: Rust Coverage\])\] \[来源: Wikipedia — MC/DC\] Coverage 概念预研：安全关键 Rust 的覆盖率 \[来源: grcov\]验证](#mcdc-来源-do-178c-mcdchttpsenwikipediaorgwikimodified_conditiondecision_coverage-来源-rust-coverage-来源-wikipedia--mcdc-coverage-概念预研安全关键-rust-的覆盖率-来源-grcov验证)
   - [📑 目录](#-目录)
@@ -31,6 +32,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 覆盖率等级的层次结构
@@ -119,6 +122,7 @@ Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持
 ---
 
 ## 二、形式化语义
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 独立影响的形式化
 
@@ -172,6 +176,8 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 
 ## 三、跨语言对比
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 语言/工具 | MC/DC 支持 | 实现方式 | 标准合规 |
 |:---|:---:|:---|:---:|
@@ -186,6 +192,8 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -241,6 +249,7 @@ graph TD
 ---
 
 ## 五、演进路线与预测
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 里程碑 | 状态 | 预计时间 | 依赖 |
 |:---|:---:|:---|:---|
@@ -257,6 +266,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -281,6 +291,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — 安全关键代码的 unsafe 边界

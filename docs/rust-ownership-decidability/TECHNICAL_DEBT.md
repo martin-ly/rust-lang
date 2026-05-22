@@ -42,6 +42,7 @@
   - [结论](#结论)
   - [**状态: P0 证明 100% 完成，非P0证明部分完成**](#状态-p0-证明-100-完成非p0证明部分完成)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Deep Dive Documentation (COMPLETED)
 >
@@ -274,7 +275,6 @@ Known limitations:
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

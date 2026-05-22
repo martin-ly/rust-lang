@@ -25,6 +25,7 @@
       - [相关文档](#相关文档)
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 决策树概览
 >
@@ -469,7 +470,6 @@ impl CircuitBreaker {
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -481,6 +481,5 @@ impl CircuitBreaker {
 > **[来源: IEEE - Risk Analysis]**
 
 > **[来源: Rust API Guidelines]**
-
 
 > **[来源: IEEE - Programming Language Standards]**

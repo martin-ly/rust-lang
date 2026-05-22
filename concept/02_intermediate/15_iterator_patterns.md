@@ -10,9 +10,12 @@
 > **来源**: [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) · [Rust Reference — Iterators](https://doc.rust-lang.org/std/iter/trait.Iterator.html) · [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html) · [Wikipedia — Iterator Pattern](https://en.wikipedia.org/wiki/Iterator_pattern)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 迭代器模式](#rust-迭代器模式)
+  - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 Iterator Trait](#11-iterator-trait)
     - [1.2 适配器链](#12-适配器链)
@@ -31,6 +34,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 Iterator Trait
@@ -141,6 +146,8 @@ Iterator Trait:
 ---
 
 ## 二、常用模式
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 map-filter-collect
@@ -231,6 +238,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 三、自定义迭代器
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 自定义迭代器:
@@ -271,6 +279,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 四、性能权衡
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 性能对比:
@@ -298,6 +307,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 五、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 反命题:
@@ -319,6 +329,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 六、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 多次消费迭代器
@@ -361,6 +372,7 @@ zip: 并行迭代多个序列
 ---
 
 ## 七、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -372,7 +384,17 @@ zip: 并行迭代多个序列
 
 ---
 
+
+```rust
+fn main() {
+    let v = vec![1, 2, 3, 4, 5];
+    let sum: i32 = v.iter().map(|x| x * 2).filter(|x| *x > 4).sum();
+    println!("{}", sum); // 24
+}
+```
+
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 - [Generics](../02_intermediate/02_generics.md) — 泛型

@@ -10,6 +10,7 @@
 > **来源**: [TRPL — Async/Await](https://doc.rust-lang.org/book/ch17-00-async-await.html) · [Async Rust Book](https://rust-lang.github.io/async-book/) · [tokio.rs](https://tokio.rs/) · [RFC 2394 — Async/Await](https://rust-lang.github.io/rfcs/2394-async_await.html) · [Wikipedia — Futures and Promises](https://en.wikipedia.org/wiki/Futures_and_promises)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [异步模式：从 Future 到生产级并发](#异步模式从-future-到生产级并发)
   - [📑 目录](#-目录)
@@ -32,6 +33,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Future 与状态机
@@ -168,6 +171,7 @@ Waker: 异步通知机制
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 并发执行模式
 
@@ -373,6 +377,8 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 
 ## 三、异步模式矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 模式 → 工具
@@ -415,6 +421,8 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -480,6 +488,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 在 async 中阻塞
@@ -533,6 +542,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -548,6 +558,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](./02_async.md) — 异步基础

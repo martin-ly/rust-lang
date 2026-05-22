@@ -23,6 +23,7 @@
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 一、权威定义（Definition）
+>
 > [来源: [Rust Reference — Macros]]
 
 > [来源: [Rust Reference] · [TRPL] · [RFCs]
@@ -73,6 +74,7 @@ Rust 宏 hygiene:
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 二、概念属性矩阵（Attribute Matrix）
+>
 > [来源: [Rust Reference — Macros]]
 
 ### 2.1 宏类型对比矩阵
@@ -125,6 +127,7 @@ Rust 宏 hygiene:
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 三、形式化理论根基（Formal Foundation）
+>
 > [来源: [Rust Reference — Macros]]
 
 > **[Rust Reference: Hygiene]** Rust 的 macro_rules! 和过程宏是卫生的：宏内部定义的标识符不与外部冲突，形式化为 α-等价在宏展开中保持。✅ 已验证
@@ -241,6 +244,7 @@ macro_rules! 的模式匹配 = 语法树上的正则表达式:
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 四、思维导图（Mind Map）
+>
 > [来源: [Rust Reference — Macros]]
 
 ```mermaid
@@ -281,6 +285,7 @@ graph TD
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 五、决策/边界判定树（Decision / Boundary Tree）
+>
 > [来源: [Rust Reference — Macros]]
 
 > **过渡说明**: 以下决策树将 L3 理论（卫生性、编译期展开）和 L2 概念（四种宏类型）转化为 L1 工程实践中的可执行判断。每个节点对应一个具体的编程困境，每条边对应一个形式化保证或工程约束。
@@ -487,6 +492,7 @@ graph TD
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 六、定理推理链（Theorem Chain）
+>
 > [来源: [Rust Reference — Macros]]
 
 > **[Rust Reference: Hygiene]** 定理：Rust 宏系统是卫生的——宏内部定义的变量不会与外部变量冲突，宏不会意外捕获外部变量。这是 macro_rules! 和过程宏的核心保证。✅ 已验证
@@ -540,6 +546,7 @@ graph TD
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 七、示例与反例（Examples & Counter-examples）
+>
 > [来源: [Rust Reference — Macros]]
 
 ### 7.1 正确示例：`macro_rules!` 声明宏
@@ -743,6 +750,7 @@ graph TD
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 八、认知路径（Cognitive Path）
+>
 > [来源: [Rust Reference — Macros]]
 
 > **设计原理**: 以下六步遵循"先问为什么，再问是什么，最后问怎么做"的认知科学顺序。每一步回答一个具体困惑，并自然引出下一步的更深层次问题。
@@ -1032,6 +1040,7 @@ macro_rules! assert_impl {
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 补充章节：进阶主题与工程实践
+>
 > [来源: [Rust Reference — Macros]]
 
 > **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
@@ -2122,6 +2131,7 @@ mod internal {
 <!-- 层级一致性: L3 知识溯源 — 每个论断的可信度评级与来源锚定 -->
 
 ## 九、知识来源关系（Provenance）
+>
 > [来源: [Rust Reference — Macros]]
 
 | **论断** | **来源** | **可信度** |
@@ -2155,6 +2165,7 @@ mod internal {
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 十、待补充与演进方向（TODOs）
+>
 > [来源: [Rust Reference — Macros]]
 
 > **[proc_macro2 crate]** `proc_macro2` bridges the compiler's internal `proc_macro` API with a stable, testable interface, enabling `syn` and `quote` to build procedural macros outside the compiler environment. ✅ 已验证
@@ -2171,6 +2182,7 @@ mod internal {
 > [来源: [Rust Reference: Macros] · [RFC 1584] · [The Little Book of Rust Macros]
 >
 ## 相关概念链接
+>
 > [来源: [Rust Reference — Macros]]
 
 | 概念 | 文件 | 关系 |
@@ -2186,6 +2198,7 @@ mod internal {
 ---
 
 ## Wikipedia 概念对齐
+>
 > [来源: [Rust Reference — Macros]]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。

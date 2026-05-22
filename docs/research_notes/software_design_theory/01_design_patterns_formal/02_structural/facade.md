@@ -55,7 +55,7 @@
 > **[来源: Rust Official Docs]**
 
 - [Facade 形式化分析](#facade-形式化分析)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [形式化定义](#形式化定义)
     - [Def 1.1（Facade 结构）](#def-11facade-结构)
@@ -589,6 +589,5 @@ graph LR
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
-
 
 > **[来源: TRPL - The Rust Programming Language]**

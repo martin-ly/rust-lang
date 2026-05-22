@@ -392,7 +392,6 @@ fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {
 
 > **[来源: Rust Reference - Parallel Iterators]**
 
-
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**

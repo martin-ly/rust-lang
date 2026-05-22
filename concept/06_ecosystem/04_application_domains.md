@@ -15,11 +15,13 @@
 ---
 
 ## 一、权威定义
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Embedded Rust Book; Embassy Book]** ✅
 
 ### 1.1 Wikipedia 权威定义
+
 [来源: [Async Book](https://rust-lang.github.io/async-book/)]
 
 > **[Wikipedia: Software engineering]** Software engineering is an engineering-based approach to software development.
@@ -57,6 +59,7 @@
 ---
 
 ## 认知路径（Cognitive Path）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
@@ -65,26 +68,31 @@
 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 第 1 步：Rust适合哪些应用领域？
+
 [来源: [Tokio Docs](https://tokio.rs/)]
 
 系统编程/Web后端/嵌入式/区块链/游戏等
 
 ### 第 2 步：每个领域的核心挑战是什么？
+
 [来源: [Wikipedia](https://en.wikipedia.org/)]
 
 内存安全/性能/实时性/并发/安全性不同侧重
 
 ### 第 3 步：Rust在每个领域的独特优势？
+
 [来源: [ISO C++](https://isocpp.org/)]
 
 零成本安全/ fearless concurrency / 确定性资源管理
 
 ### 第 4 步：领域特定生态和工具链？
+
 [来源: [Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
 
 embedded-hal/actix/anchor/bevy等框架
 
 ### 第 5 步：Rust不适合哪些场景？
+
 [来源: [API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 快速原型/脚本/极度依赖GC生态的领域
@@ -94,6 +102,7 @@ embedded-hal/actix/anchor/bevy等框架
 性能需求/安全需求/团队经验/生态成熟度矩阵
 
 ## 二、概念属性矩阵
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: clap Docs; Rust CLI Book]** ✅
@@ -127,6 +136,7 @@ embedded-hal/actix/anchor/bevy等框架
 ---
 
 ## 三、思维导图
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Rust for Linux; Writing an OS in Rust]** ✅
@@ -166,6 +176,7 @@ graph TD
 ---
 
 ## 四、应用领域详解
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: wasm-bindgen Guide; WASI Preview]** ✅
@@ -493,6 +504,7 @@ fn move_player(
 ---
 
 ## 五、领域与 L1-L5 概念映射
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Tokio Documentation; QUIC RFC 9000]** ✅
@@ -511,6 +523,7 @@ fn move_player(
 ---
 
 ## 六、反命题与边界分析
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: egui Docs; wgpu Docs]** ✅
@@ -555,6 +568,7 @@ graph TD
 ---
 
 ## 七、扩展内容：工业案例与趋势
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Candle Docs; Burn Docs]** ✅
@@ -658,6 +672,7 @@ graph TD
 ---
 
 ## 八、知识来源关系（Provenance）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Data Engineering in Rust; polars Docs]** ✅
@@ -686,6 +701,7 @@ graph TD
 ---
 
 ## 九、相关概念链接
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Cargo Script RFC; Rust Scripting]** ✅
@@ -862,6 +878,7 @@ Rust 并非银弹。以下是真实场景中的**不适合案例**：
 ---
 
 ## 十、待补充与演进方向（TODOs）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Embedded Rust Book; Embassy Book]** ✅
@@ -953,6 +970,7 @@ fn view(app: &App, frame: Frame) {
 - [x] **低**: 建立工业案例的持续追踪列表（谁在用 Rust、为什么、效果如何） —— 已融入 §9.2 失败案例分析和各应用领域章节
 
 ## 断言一致性矩阵（Assertion Consistency Matrix）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Actix/axum Docs; Web Framework Benchmarks]** ✅
@@ -976,6 +994,7 @@ fn view(app: &App, frame: Frame) {
 | **领域选择多维决策** | 性能/安全/生态/人才 ⟹ | 无银弹 | 混合语言架构 | 技术选型框架 |
 
 ## 反命题分析（Anti-Propositions）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: clap Docs; Rust CLI Book]** ✅
@@ -1104,6 +1123,7 @@ graph TD
 ---
 
 ## 十一、生态前沿的形式化梳理（2026.05）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源: Rust for Linux; Writing an OS in Rust]** ✅
@@ -1242,6 +1262,7 @@ graph TD
 ---
 
 ## 十二、定理一致性矩阵（领域安全层）
+>
 > [来源: [Rust Foundation]]
 
 > **[来源类型: 原创分析; Embassy Book; Rust for Linux; Aya Docs; QUIC RFC]** 以下矩阵梳理各应用领域的关键安全保证与失效条件。

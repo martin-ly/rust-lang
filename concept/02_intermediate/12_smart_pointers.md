@@ -10,6 +10,8 @@
 > **来源**: [std::boxed::Box](https://doc.rust-lang.org/std/boxed/struct.Box.html) · [std::rc::Rc](https://doc.rust-lang.org/std/rc/struct.Rc.html) · [std::sync::Arc](https://doc.rust-lang.org/std/sync/struct.Arc.html) · [std::cell::RefCell](https://doc.rust-lang.org/std/cell/struct.RefCell.html) · [TRPL Ch15 — Smart Pointers](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html) · [Rustonomicon — Interior Mutability](https://doc.rust-lang.org/nomicon/interior-mutability.html)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [智能指针：堆内存管理与共享语义](#智能指针堆内存管理与共享语义)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 智能指针谱系
@@ -150,6 +154,8 @@ let weak = Rc::downgrade(&data);
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 RefCell 与 Cell：内部可变性
@@ -273,6 +279,8 @@ struct Node {
 ---
 
 ## 三、选型决策矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -313,6 +321,8 @@ struct Node {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -379,6 +389,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 混淆 clone 的语义
@@ -429,6 +440,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -442,6 +454,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Ownership](../01_foundation/01_ownership.md) — 所有权模型

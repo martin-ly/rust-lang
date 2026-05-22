@@ -14,6 +14,8 @@
 > [Kani Documentation](https://model-checking.github.io/kani/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL]]
 
 - [Rust 测试策略：从单元测试到属性验证](#rust-测试策略从单元测试到属性验证)
@@ -37,6 +39,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 测试生态全景
@@ -147,6 +151,8 @@ fn share(data: Arc<Mutex<Vec<i32>>>) {
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL]]
 
 ### 2.1 内置测试框架
@@ -278,6 +284,8 @@ Miri 的局限:
 ---
 
 ## 三、分层测试策略
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL]]
 
 | 层级 | 工具/方法 | 目标 | 频率 | 成本 |
@@ -297,6 +305,8 @@ Miri 的局限:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -358,6 +368,8 @@ graph TD
 ---
 
 ## 五、CI/CD 集成
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL]]
 
 ```yaml
@@ -396,6 +408,8 @@ jobs:
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL]]
 
 | 来源 | 可信度 | 说明 |
@@ -410,6 +424,8 @@ jobs:
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](./01_toolchain.md) — Rust 工具链

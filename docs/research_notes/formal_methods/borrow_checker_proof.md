@@ -101,7 +101,7 @@
 > **[来源: Rust Official Docs]** · **[来源: Wikipedia - Formal Proof]** · **[来源: Wikipedia - Separation Logic]** · **[来源: ACM - Borrow Checker Verification]** · **[来源: IEEE - Memory Safety Proofs]**
 
 - [借用检查器证明](#借用检查器证明)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📊 目录 {#-目录}](#-目录--目录)
   - [🎯 研究目标 {#-研究目标}](#-研究目标--研究目标)
     - [核心问题](#核心问题)

@@ -2681,7 +2681,6 @@ pub fn try_enqueue(&self, item: T) -> Result<(), T> {
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
 
-
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**

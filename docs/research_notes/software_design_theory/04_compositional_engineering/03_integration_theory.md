@@ -568,7 +568,6 @@ trait Command { fn execute(&self, req: &Request) -> Response; }
 
 > **[来源: Rustonomicon]**
 
-
 > **[来源: TRPL - The Rust Programming Language]**
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**

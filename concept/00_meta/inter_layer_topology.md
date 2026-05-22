@@ -15,6 +15,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系跨层依赖与蕴含拓扑图](#rust-知识体系跨层依赖与蕴含拓扑图)
@@ -30,6 +32,8 @@
   - [六、跨层认知路径（导航指南）](#六跨层认知路径导航指南)
 
 ## 一、跨层拓扑总图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -156,6 +160,8 @@ graph TD
 ---
 
 ## 二、层次间关系矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 纵向依赖矩阵（学习路径）
@@ -198,6 +204,7 @@ graph TD
 ---
 
 ## 三、知识流动图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph LR
@@ -242,6 +249,7 @@ graph LR
 ---
 
 ## 四、主题-层级交叉映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 主题 | L1 | L2 | L3 | L4 | L5 | L6 | L7 |
 |:---|:---|:---|:---|:---|:---|:---|:---|
@@ -254,6 +262,8 @@ graph LR
 ---
 
 ## 五、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [L0 可判定性谱系](decidability_spectrum.md) —— 全链路判定边界
@@ -268,6 +278,7 @@ graph LR
 - [PLAN.md](../PLAN.md) —— 项目演进计划
 
 ## 六、跨层认知路径（导航指南）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **如何根据当前水平选择正确的学习层级？**
 

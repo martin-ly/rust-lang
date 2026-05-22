@@ -10,6 +10,8 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 2000 — Const Generics](https://rust-lang.github.io/rfcs/2000-const-generics.html) · [Wikipedia — Zero-copy](https://en.wikipedia.org/wiki/Zero-copy)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [零拷贝解析与序列化优化](#零拷贝解析与序列化优化)
@@ -34,6 +36,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 零拷贝原理
@@ -110,6 +114,8 @@
 ---
 
 ## 二、关键技术
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 bytes crate
@@ -218,6 +224,8 @@ zerocopy:
 
 ## 三、序列化优化
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 rkyv
 
@@ -289,6 +297,8 @@ FlatBuffers / Cap'n Proto:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -348,6 +358,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -400,6 +412,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -413,7 +426,18 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let data = b"hello world";
+    let s = std::str::from_utf8(data).unwrap();
+    println!("{}", s);
+}
+```
+
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Memory Management](../02_intermediate/03_memory_management.md) — 内存管理基础

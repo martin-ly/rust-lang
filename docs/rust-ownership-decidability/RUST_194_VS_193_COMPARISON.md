@@ -59,6 +59,7 @@
   - [8. References](#8-references)
   - [*This document was generated based on official Rust release notes and verified against the actual compiler behavior.*](#this-document-was-generated-based-on-official-rust-release-notes-and-verified-against-the-actual-compiler-behavior)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Executive Summary
 >
@@ -533,7 +534,6 @@ No changes required to core formal models of Rust ownership (e.g., RustBelt, Oxi
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

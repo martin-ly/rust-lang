@@ -9,6 +9,8 @@
 > [来源: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516) · [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) · [rust-lang/cargo#9094](https://github.com/rust-lang/cargo/issues/9094) · [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Public/Private Dependencies：可见性控制的工程化](#publicprivate-dependencies可见性控制的工程化)
@@ -36,6 +38,8 @@
 ---
 
 ## 〇、依赖可见性控制全景
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -70,6 +74,8 @@ graph TD
 ---
 
 ## 一、问题背景：依赖泄漏
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 什么是依赖泄漏
@@ -110,6 +116,7 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 ---
 
 ## 二、核心机制
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 RFC 3516 引入 `public = true/false` 字段，显式标记依赖的**可见性契约**。该特性已被纳入 Rust 2026 Project Goals，但当前标记为 **Help Wanted** — 需要社区贡献者推动 MVP 实现和稳定化。
 
@@ -154,6 +161,7 @@ A ──public──► B ──public──► D
 ---
 
 ## 三、SemVer 兼容性影响
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 变更矩阵
 
@@ -180,6 +188,7 @@ cargo semver-checks
 ---
 
 ## 四、工程实践
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 依赖可见性决策流程
 
@@ -264,6 +273,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 五、与 L1-L4 的关系映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | L1-L4 概念 | Public/Private Deps 映射 |
 |:---|:---|
@@ -275,6 +285,7 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - **一级**: [RFC 3516 — Public & Private Dependencies](https://github.com/rust-lang/rfcs/pull/3516)（目标 2026 稳定）
 - **一级**: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) [来源: [crates.io](https://crates.io/)]
@@ -284,6 +295,8 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [工具链总览](./01_toolchain.md) — SemVer 兼容性与 Cargo 工作空间
@@ -295,6 +308,8 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 ---
 
 ## Wikipedia 概念对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[来源: Wikipedia]** 核心概念与国际知识库映射。

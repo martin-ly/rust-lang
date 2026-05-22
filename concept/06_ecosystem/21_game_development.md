@@ -10,6 +10,8 @@
 > **来源**: [Bevy Engine](https://bevyengine.org/) · [WGPU](https://wgpu.rs/) · [Rust GameDev Working Group](https://gamedev.rs/) · [Are We Game Yet?](https://arewegameyet.rs/) · [Wikipedia — Entity Component System](https://en.wikipedia.org/wiki/Entity_component_system)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 游戏开发生态](#rust-游戏开发生态)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心架构
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 ECS 设计模式
@@ -127,6 +131,8 @@ Bevy 引擎架构:
 ---
 
 ## 二、图形渲染
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 WGPU — 跨平台图形
@@ -205,6 +211,7 @@ WGPU:
 ---
 
 ## 三、物理与音频
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 物理引擎
 
@@ -268,6 +275,8 @@ Rust 音频生态:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -326,6 +335,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: ECS 反模式
@@ -374,6 +384,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -387,6 +398,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发

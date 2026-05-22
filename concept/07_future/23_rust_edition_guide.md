@@ -10,6 +10,8 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [RFC 2052 — Epochs](https://rust-lang.github.io/rfcs/2052-epochs.html) · [Rust Blog — Edition 2024](https://blog.rust-lang.org/) · [Wikipedia — Software Versioning](https://en.wikipedia.org/wiki/Software_versioning)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Edition Guide]]
 
 - [Rust Edition 机制与迁移指南](#rust-edition-机制与迁移指南)
@@ -31,6 +33,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Edition 机制
@@ -141,6 +145,8 @@ Edition 机制:
 ---
 
 ## 二、迁移策略
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Edition Guide]]
 
 ### 2.1 cargo fix
@@ -215,6 +221,8 @@ cargo fix:
 
 ## 三、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 反命题树
 
@@ -273,6 +281,8 @@ graph TD
 ---
 
 ## 四、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Edition Guide]]
 
 ```text
@@ -316,6 +326,8 @@ graph TD
 ---
 
 ## 五、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Edition Guide]]
 
 | 来源 | 可信度 | 说明 |
@@ -329,6 +341,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — 工具链

@@ -45,6 +45,7 @@
     - [项目影响](#项目影响)
   - [*Rust 1.94 所有权形式化 - P0 关键证明全部完成！* 🎊🎊🎊](#rust-194-所有权形式化---p0-关键证明全部完成-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎉 重大突破：P0 证明全部完成
 >
@@ -340,7 +341,6 @@ coq-formalization/theories/Advanced/
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

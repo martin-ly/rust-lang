@@ -10,6 +10,8 @@
 > **来源**: [The Embedded Rust Book](https://docs.rust-embedded.org/book/) · [The Rustonomicon](https://doc.rust-lang.org/nomicon/) · [Rust Embedded Working Group](https://github.com/rust-embedded/wg) · [Wikipedia — Embedded System](https://en.wikipedia.org/wiki/Embedded_system) · [Ferrous Systems](https://ferrous-systems.com/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Embedded Rust Book]]
 
 - [Rust 嵌入式系统开发](#rust-嵌入式系统开发)
@@ -35,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 no_std
@@ -165,6 +169,8 @@ no_std:
 ---
 
 ## 二、硬件抽象层
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Embedded Rust Book]]
 
 ### 2.1 PAC — 外设访问 crate
@@ -268,6 +274,8 @@ BSP (Board Support Package):
 ---
 
 ## 三、实时系统
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Embedded Rust Book]]
 
 ### 3.1 实时约束
@@ -354,6 +362,8 @@ RTIC (Real-Time Interrupt-driven Concurrency):
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -412,6 +422,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Embedded Rust Book]]
 
 ```text
@@ -460,6 +472,8 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Embedded Rust Book]]
 
 | 来源 | 可信度 | 说明 |
@@ -474,6 +488,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Unsafe](../03_advanced/03_unsafe.md) — unsafe Rust

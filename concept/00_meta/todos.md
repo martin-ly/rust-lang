@@ -8,6 +8,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [全局待办清单（Global TODO Tracker）](#全局待办清单global-todo-tracker)
@@ -32,6 +34,8 @@
   - [相关概念文件 \[来源: concept/00\_meta/learning\_guide.md — 学习路径设计; concept/00\_meta/methodology.md — 内容结构规范\]](#相关概念文件-来源-concept00_metalearning_guidemd--学习路径设计-concept00_metamethodologymd--内容结构规范)
 
 ## 一、高优先级 TODO（建议优先处理） [来源: 优先级排序基于概念依赖图的前置节点数量 — 前置越多的概念优先级越高]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L1 基础概念层
@@ -89,6 +93,8 @@
 ---
 
 ## 二、中优先级 TODO
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 文件 | TODO 内容 | 预计阶段 |
@@ -115,6 +121,8 @@
 ---
 
 ## 三、低优先级 TODO
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 文件 | TODO 内容 | 预计阶段 |
@@ -162,6 +170,8 @@
 
 ## 四、质量审计检查清单 [来源: 审计方法论参照 IEEE 1012 — 软件验证与确认标准; Rust RFC 流程 — 设计决策的公开审查机制]
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 已完成的门禁检查
 
@@ -195,6 +205,7 @@
 ---
 
 ## 五、v1.1 权威来源对齐任务清单 [来源: 来源对齐 Sprint 参照 AGENTS.md 质量铁三角 — Bloom 层级 100%、来源标注率 ≥15%、跨文件链接 ≥3/文件]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### Wave 1: 元信息层（已完成）
 
@@ -227,6 +238,7 @@
 - [x] `04_formal/04_rustbelt.md` —— 841 行 ✅（目标 350+）
 
 ## 六、下一步推进建议
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 1. **当前（进行中）**: Wave 2 —— L3 权威来源对齐
 2. **短期（1-2 周）**: Wave 3 —— L5-L7 深度扩展
@@ -236,6 +248,8 @@
 ---
 
 ## 相关概念文件 [来源: concept/00_meta/learning_guide.md — 学习路径设计; concept/00_meta/methodology.md — 内容结构规范]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [概念一致性检查清单](./audit_checklist.md) — 审计标准与完成定义

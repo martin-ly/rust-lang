@@ -15,6 +15,7 @@
 ---
 
 ## 一、权威定义
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Design Patterns Book; Rust API Guidelines]** ✅
@@ -43,11 +44,13 @@
 ---
 
 ## 二、模式分类矩阵
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Wikipedia — Design pattern; Wikipedia — RAII]** ✅
 
 ### 2.1 已有模式扩展
+
 [来源: [Wikipedia](https://en.wikipedia.org/)]
 
 | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** |
@@ -60,6 +63,7 @@
 | **FFI 模式** | 结构型 | 与 C 互操作 | `extern "C"` + `repr(C)` | 安全封装层 |
 
 ### 2.2 新增模式矩阵
+
 [来源: [ISO C++](https://isocpp.org/)]
 
 | **模式** | **分类** | **问题** | **Rust 实现** | **关键特性** |
@@ -74,6 +78,7 @@
 > **来源**: [Rust Design Patterns] · [GoF Design Patterns] · 可信度: ✅
 
 ### 2.3 断言/推理矩阵
+
 [来源: [Design Patterns](https://en.wikipedia.org/wiki/Design_pattern)]
 
 | **模式** | **核心问题** | **解决方案** | **Rust特性** | **反模式/失效条件** |
@@ -92,6 +97,7 @@
 ---
 
 ## 三、Mermaid 图：模式关系图
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Reference: Generics; RFC 1210]** ✅
@@ -130,11 +136,13 @@ graph TD
 ---
 
 ## 四、各模式详解
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Tokio Documentation; Actix Docs]** ✅
 
 ### 4.1 Command 模式
+
 [来源: [API Guidelines](https://rust-lang.github.io/api-guidelines/)]
 
 **定义**：将请求封装为对象，从而使你可用不同的请求、队列或日志来参数化其他对象。
@@ -183,6 +191,7 @@ impl Invoker {
 > **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
 
 ### 4.2 Visitor 模式
+
 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 **定义**：表示一个作用于某对象结构中各元素的操作，使你可以在不改变各元素类的前提下定义作用于这些元素的新操作。
@@ -276,6 +285,7 @@ classDiagram
 > **来源**: [GoF Design Patterns] · [Rust Design Patterns] · 可信度: ✅
 
 ### 4.3 Strategy 模式
+
 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 **定义**：定义一系列算法，把它们一个个封装起来，并且使它们可互相替换。
@@ -1230,6 +1240,7 @@ fn process_items(mut items: Vec<Item>) -> Vec<Processed> {
 [来源: [Tokio Docs](https://tokio.rs/)]
 
 ## 六、反命题决策树 {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Performance Book; Benchmarks Game]** ✅
@@ -1387,6 +1398,7 @@ fn main() {
 ---
 
 ## 七、与 L1-L3 的概念映射 {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Design Patterns Book; Rust API Guidelines]** ✅
@@ -1408,6 +1420,7 @@ fn main() {
 ---
 
 ## 八、学术来源 {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Wikipedia — Design pattern; Wikipedia — RAII]** ✅
@@ -1424,6 +1437,7 @@ fn main() {
 ---
 
 ## 九、知识来源关系（Provenance） {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Rust Reference: Generics; RFC 1210]** ✅
@@ -1453,6 +1467,7 @@ fn main() {
 ---
 
 ## 十、相关概念链接 {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: Tokio Documentation; Actix Docs]** ✅
@@ -1472,6 +1487,7 @@ fn main() {
 ---
 
 ## 十一、待补充与演进方向（TODOs） {L6}
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源: RFC 1598 GATs; Rust Reference: GATs]** ✅
@@ -1497,6 +1513,7 @@ fn main() {
 ---
 
 ## 九、定理一致性矩阵（模式正确性层）
+>
 > [来源: [Rust Design Patterns]]
 
 > **[来源类型: 原创分析; Rust Design Patterns Book; Rust API Guidelines]** 以下矩阵梳理常见设计模式在 Rust 中的安全保证与误用后果。

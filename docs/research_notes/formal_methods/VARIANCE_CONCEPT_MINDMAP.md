@@ -462,7 +462,6 @@ let local = String::from("local");
 
 > **[来源: ACM - Formal Verification]**
 
-
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**

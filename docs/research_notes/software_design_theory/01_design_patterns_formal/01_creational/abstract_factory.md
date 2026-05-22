@@ -538,7 +538,6 @@ graph LR
 
 > **[来源: ACM - Formal Verification]**
 
-
 > **[来源: Wikipedia - Memory Safety]**
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**

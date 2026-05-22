@@ -320,5 +320,4 @@ fn non_send_sync() {
 
 > **[来源: POPL 2018 - RustBelt]**
 
-
 > **[来源: POPL - Programming Languages Research]**

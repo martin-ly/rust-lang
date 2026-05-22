@@ -16,6 +16,7 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 系统设计原则与国际权威对齐](#rust-系统设计原则与国际权威对齐)
   - [📑 目录](#-目录)
@@ -48,6 +49,8 @@
 
 ## 零、TL;DR —— 系统设计原则速查
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 原则                    Rust 机制                      国际权威对应                    设计意图
@@ -66,6 +69,8 @@
 
 ## 一、权威来源与设计原则分类学
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 原则 | 国际权威来源 | 权威类型 | 应用领域 |
 |:---|:---|:---|:---|
@@ -80,6 +85,8 @@
 ---
 
 ## 二、七项核心设计原则
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: NIST SP 800-207, SEL4, Stroustrup 1994, Armstrong 2003]
@@ -238,6 +245,8 @@ impl Worker {
 
 ## 三、系统设计决策矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Rust Performance Book, Systems Design Interview, CAP Theorem]
 
@@ -289,6 +298,7 @@ graph LR
 ---
 
 ## 四、从 Rust 类型到分布式协议的隐喻映射
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Lamport Paxos, Brewer CAP, Rust Ownership Semantics]
 
@@ -328,6 +338,7 @@ graph TD
 ---
 
 ## 五、五层形式化扩展模型
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > [来源: Kani Docs, Creusot, TLA+, Why3]
 
@@ -358,6 +369,7 @@ graph TD
 ---
 
 ## 六、思维表征体系
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 设计原则依赖图
 
@@ -406,6 +418,7 @@ graph TD
 ---
 
 ## 七、定理推理链
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 定理一致性矩阵（系统设计专集）
 
@@ -420,6 +433,8 @@ graph TD
 ---
 
 ## 八、相关概念链接（L0-L7 映射）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
@@ -447,6 +462,8 @@ graph TD
 - [L0 表达力多视角](../00_meta/expressiveness_multiview.md) —— 安全语义视角
 
 ## 七、系统设计决策的知识流动图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **设计决策如何在系统各层之间流动？**

@@ -9,6 +9,8 @@
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [跨层知识图谱（Inter-Layer Dependency Map）](#跨层知识图谱inter-layer-dependency-map)
@@ -42,6 +44,8 @@
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 一、全局层级依赖图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -221,6 +225,8 @@ graph LR
 > **来源**: [Rust Reference] · [Rust Internals] · [concept/知识体系规范]
 >
 ## 二、语义链接类型定义
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 所有跨层关系必须标注以下**语义类型**之一：
@@ -237,6 +243,7 @@ graph LR
 ---
 
 ## 三、层间映射矩阵
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 L1-L4 形式化映射（核心）
 
@@ -280,6 +287,7 @@ graph LR
 ---
 
 ## 四、关键跨层推理链（定理一致性）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 链 1: 内存安全完备性
 
@@ -374,6 +382,7 @@ graph LR
 ---
 
 ## 五、层间一致性检查点
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 定义一致性检查
 
@@ -399,6 +408,7 @@ graph LR
 ---
 
 ## 六、反事实与边界条件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 什么情况下形式化保证失效？
 
@@ -440,6 +450,7 @@ L4 形式化保证的边界:
 ---
 
 ## 七、认知路径映射（Bloom 层级）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 每个层级对应 Bloom 认知层级的不同位置：
 
@@ -458,6 +469,7 @@ L4 形式化保证的边界:
 ---
 
 ## 八、来源与可信度
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 论断 | 来源 | 可信度 |
 |:---|:---|:---|
@@ -478,6 +490,7 @@ L4 形式化保证的边界:
 ---
 
 ## 九、Wave 6 层间映射更新
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 Wave 6 全量深度重构后，以下层间关系得到**显式标注**：
 
@@ -521,6 +534,7 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 ---
 
 ## 十、TODO
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **高**: Wave 6 全量深度重构 + 层间映射标注
 - [x] **高**: 为每个 L1-L3 文件添加"定理一致性矩阵"链接回本文件
@@ -534,6 +548,8 @@ L4 结论: 安全 = 编译期保证 ∪ 运行时检查 ∪ 程序员契约
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [L1 所有权与借用](../01_foundation/01_ownership.md) — 形式化映射起点

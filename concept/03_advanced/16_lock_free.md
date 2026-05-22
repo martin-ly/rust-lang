@@ -10,6 +10,8 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [C++ Memory Model](https://en.cppreference.com/w/cpp/atomic/memory_order) · [Wikipedia — Lock-free](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Herlihy & Shavit — The Art of Multiprocessor Programming](https://www.amazon.com/Art-Multiprocessor-Programming-Revised-Reprint/dp/0123973376)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [无锁编程与内存模型](#无锁编程与内存模型)
@@ -35,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 无锁 vs 无等待
@@ -159,6 +163,8 @@ ABA 问题:
 ---
 
 ## 二、关键数据结构
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Treiber Stack
@@ -285,6 +291,8 @@ Hazard Pointer:
 ---
 
 ## 三、Rust 无锁生态
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 crossbeam
@@ -354,6 +362,8 @@ lockfree crate:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -412,6 +422,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忘记内存序
@@ -466,6 +477,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -477,7 +489,20 @@ graph TD
 
 ---
 
+
+```rust
+use std::sync::atomic::{AtomicUsize, Ordering};
+
+fn main() {
+    let counter = AtomicUsize::new(0);
+    counter.fetch_add(1, Ordering::Relaxed);
+    println!("{}", counter.load(Ordering::Relaxed));
+}
+```
+
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发

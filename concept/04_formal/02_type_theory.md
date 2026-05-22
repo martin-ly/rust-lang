@@ -16,6 +16,7 @@
 ---
 
 ## 一、权威定义（Definition）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Wikipedia 定义
 
@@ -46,6 +47,7 @@ Rust 扩展:
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 类型论层次矩阵
 
@@ -84,6 +86,7 @@ Rust 扩展:
 ---
 
 ## 三、形式化理论根基
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: Pierce 2002, *TAPL* Ch.11; Cardelli 1996]** 代数数据类型（ADT）的积与余积语义是类型论的标准结论。
 
@@ -184,6 +187,7 @@ classDiagram
 ---
 
 ## 四、定理推理链（Theorem Chain）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: Wright & Felleisen 1994; Pierce 2002, *TAPL* Ch.8]** Progress + Preservation 是类型安全的标准证明框架。
 
@@ -224,6 +228,7 @@ Preservation: 若 ⊢ e : τ 且 e → e'，则 ⊢ e' : τ                    [
 ---
 
 ## 五、反命题决策树（Counter-proposition Decision Trees）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[学术来源: Cardelli 1996, §5; Pierce 2002, Ch.8]** 类型安全的边界是类型论的核心教学点。
 
@@ -335,6 +340,7 @@ graph TD
 ---
 
 ## 六、认知路径（Cognitive Path）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[原创分析]** · **[Pierce 2002, *TAPL*]** 五步递进，每步标注 L1-L3 概念锚点。 💡 原创分析
 
@@ -417,6 +423,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 ---
 
 ## 七、层次一致性标注（Layer Consistency Annotations）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 L4 → L1 下行映射
 
@@ -451,6 +458,7 @@ Rust 类型系统 = λ→ + System F + HM + λ<: + 线性类型 + 约束类型
 ---
 
 ## 八、思维导图
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```mermaid
 graph TD
@@ -492,6 +500,7 @@ graph TD
 ---
 
 ## 九、示例与反例
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 9.1 Variance 示例
 
@@ -589,6 +598,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 ---
 
 ## 十、知识来源与国际课程对齐
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | **论断/来源** | **核心内容** | **对应章节** | **可信度** |
 |:---|:---|:---|:---|
@@ -611,6 +621,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 > Rust 的具体实现见 [`../02_intermediate/02_generics.md`](../02_intermediate/02_generics.md)（泛型与单态化）与 [`../02_intermediate/01_traits.md`](../02_intermediate/01_traits.md)（Trait 作为 Type Class 的变体）。
 
 ## 十一、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 概念 | 文件 | 关系 |
 |:---|:---|:---|
@@ -625,6 +636,7 @@ Rust HRTB:       ∀'a.τ  where 'a ∈ Lifetime (Region)
 ---
 
 ## 十之一、补充：Dependent Type、Const Generics 与 HKT workaround
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 > **[Wikipedia: Dependent type]** · **[Wikipedia: Higher-kinded type]** · **[RFC 2000: Const Generics]** · **[Rust Reference: Const Generics]** 本节补充 Rust 类型系统与更高级类型论概念的关系，以及 Rust 在表达力边界上的工程妥协。✅ [来源: [POPL 2018 — RustBelt](https://dl.acm.org/doi/10.1145/3158154)]
 
@@ -894,6 +906,7 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 ---
 
 ## 十二、待补充与演进方向（TODOs）
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [x] **TODO**: 补充 Dependent type 与 Const Generics 的关系 —— 优先级: 中 —— 已完成 §10.1
 - [x] **TODO**: 补充 Higher-Kinded Types 的缺失与 workaround —— 优先级: 中 —— 已完成 §10.2

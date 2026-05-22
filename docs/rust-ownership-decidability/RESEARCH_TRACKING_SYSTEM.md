@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 形式化验证研究追踪系统](#rust-形式化验证研究追踪系统)
@@ -35,10 +36,13 @@
     - [每周检查](#每周检查)
     - [每月检查](#每月检查)
     - [季度检查](#季度检查)
+  - [**状态**: 活跃](#状态-活跃)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 1. 系统概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本系统用于持续追踪 Rust 形式化验证领域的最新研究进展，确保文档内容始终保持与权威资源对齐。
@@ -54,6 +58,7 @@
 ---
 
 ## 2. 追踪来源
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 顶级会议
@@ -349,11 +354,9 @@ echo "检查完成，请对比文档中的版本信息"
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

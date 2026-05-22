@@ -32,6 +32,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈](#rust-for-webassembly从-wasm-bindgen-到前端框架的深度技术栈)
@@ -61,6 +63,8 @@
 ---
 
 ## 一、权威定义与核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 Rust → Wasm 的编译模型
@@ -208,6 +212,8 @@ wasm-pack 工作流:
 ---
 
 ## 二、前端框架深度对比
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Yew：React 范式的 Rust 实现
@@ -283,6 +289,7 @@ fn Counter() -> impl IntoView {
 ---
 
 ## 三、性能特征与 Wasm 内存模型
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Rust Wasm vs JavaScript 性能边界
 
@@ -398,6 +405,7 @@ pub fn deallocate_vec(ptr: *mut u8, size: usize) {
 ---
 
 ## 四、工具链与工程实践
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 目标三元组与编译配置
 
@@ -452,6 +460,7 @@ Wasm 调试工具链:
 ---
 
 ## 五、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题决策树
 
@@ -528,6 +537,7 @@ Rust panic in Wasm:
 ---
 
 ## 六、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忽略 wasm32 的 usize = 32 位
@@ -558,6 +568,7 @@ Rust panic in Wasm:
 ---
 
 ## 七、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -579,6 +590,7 @@ Rust panic in Wasm:
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Rust 路线图](./24_roadmap.md) — Rust 语言演进方向与 Wasm 目标支持策略
 - [WebAssembly 生态](../06_ecosystem/11_webassembly.md) — Wasm 通用生态与工具链概览

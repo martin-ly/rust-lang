@@ -10,6 +10,8 @@
 > **来源**: [TRPL — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) · [Rust Reference — Attributes](https://doc.rust-lang.org/reference/attributes/testing.html) · [cargo test](https://doc.rust-lang.org/cargo/commands/cargo-test.html) · [Rust By Example — Testing](https://doc.rust-lang.org/rust-by-example/testing.html) · [Wikipedia — Unit Testing](https://en.wikipedia.org/wiki/Unit_testing)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [测试基础：从单元测试到集成测试](#测试基础从单元测试到集成测试)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 测试文化
@@ -167,6 +171,8 @@ pub fn add(a: i32, b: i32) -> i32 {
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 单元测试
@@ -345,6 +351,8 @@ pub fn fibonacci(n: u32) -> u64 {
 
 ## 三、测试模式矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 测试类型 → 工具/技术
@@ -386,6 +394,8 @@ API 契约:
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -449,6 +459,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -496,6 +508,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -508,6 +521,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Modules](./11_modules_and_paths.md) — 模块系统

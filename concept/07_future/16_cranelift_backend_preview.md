@@ -10,6 +10,8 @@
 > **来源**: [Cranelift Documentation](https://github.com/bytecodealliance/wasmtime/blob/main/cranelift/docs/index.md) · [rustc_codegen_cranelift](https://github.com/rust-lang/rustc_codegen_cranelift) · [Bytecode Alliance](https://bytecodealliance.org/) · [Rust Compiler Team — Cranelift](https://github.com/rust-lang/compiler-team/issues/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Cranelift \[来源: Wasmtime\] \[来源: Cranelift\] 后端预研：Rust 编译器的快速调试编译](#cranelift-来源-wasmtime-来源-cranelift-后端预研rust-编译器的快速调试编译)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
@@ -117,6 +121,8 @@ rustc_codegen_cranelift 项目:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 架构对比：LLVM vs Cranelift
@@ -188,6 +194,8 @@ graph TD
 
 ## 三、使用场景分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 场景 | 推荐后端 | 理由 |
 |:---|:---:|:---|
@@ -205,6 +213,8 @@ graph TD
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -266,6 +276,8 @@ graph TD
 ---
 
 ## 五、演进路线
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 | 里程碑 | 状态 | 预计时间 | 说明 |
@@ -282,6 +294,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
@@ -306,6 +319,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Toolchain](../06_ecosystem/01_toolchain.md) — Rust 工具链

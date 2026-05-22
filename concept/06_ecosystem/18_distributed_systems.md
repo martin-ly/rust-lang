@@ -12,6 +12,8 @@
 > **来源**: [tonic [来源: [tonic](https://docs.rs/tonic/latest/tonic/)] crate](<https://docs.rs/tonic/latest/tonic/>) · [tokio [来源: [Tokio](https://tokio.rs/)]-rs ecosystem](<https://tokio.rs/>) · [Raft [来源: [Raft Paper](https://raft.github.io/raft.pdf)] Consensus Paper](<https://raft.github.io/raft.pdf>) · [Consul by HashiCorp](https://www.consul.io/) · [Linkerd](https://linkerd.io/) · [NATS](https://nats.io/)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Book]]
 
 - [分布式 \[来源: Distributed Systems\]系统：Rust 在微服务 \[来源: Microservices\]与集群中的工程实践](#分布式-来源-distributed [来源: [Rust Distributed Systems](https://rust-lang-nursery.github.io/rust-cookbook/web/clients.html)]-systems系统rust-在微服务-来源-microservices与集群中的工程实践)
@@ -35,6 +37,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 在分布式系统中的定位
@@ -145,6 +149,8 @@ Rust async 运行时的分布式价值:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Book]]
 
 ### 2.1 gRPC 与 Protocol Buffers
@@ -293,6 +299,8 @@ async fn main() {
 
 ## 三、分布式模式矩阵
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 场景 → 方案 → Rust 生态
@@ -334,6 +342,8 @@ async fn main() {
 ---
 
 ## 四、反命题与边界分析
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
@@ -398,6 +408,8 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Book]]
 
 ```text
@@ -444,6 +456,8 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Book]]
 
 | 来源 | 可信度 | 说明 |
@@ -470,6 +484,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Async](../03_advanced/02_async.md) — 异步编程

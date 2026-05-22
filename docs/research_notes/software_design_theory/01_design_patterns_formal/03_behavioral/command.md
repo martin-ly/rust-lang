@@ -588,7 +588,6 @@ graph LR
 
 > **[来源: ACM - Formal Verification]**
 
-
 > **[来源: Wikipedia - Type System]**
 > **[来源: Wikipedia - Concurrency]**
 > **[来源: Wikipedia - Asynchronous I/O]**

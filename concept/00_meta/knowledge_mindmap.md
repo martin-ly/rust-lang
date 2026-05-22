@@ -15,6 +15,8 @@
 ---
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [Rust 知识体系全局思维导图（Knowledge Mindmap）](#rust-知识体系全局思维导图knowledge-mindmap)
@@ -25,6 +27,8 @@
   - [四、相关概念链接](#四相关概念链接)
 
 ## 一、L0-L7 全局知识体系 Mindmap
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -122,6 +126,8 @@ mindmap
 ---
 
 ## 二、五维主线 Mindmap
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```mermaid
@@ -192,6 +198,7 @@ mindmap
 ---
 
 ## 三、Mindmap 与四层关系图谱的关联
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 表征文件 | 认知功能 | 适用场景 |
 |:---|:---|:---|
@@ -204,6 +211,8 @@ mindmap
 > **使用建议**: 将本 mindmap 作为**每日打开的第一页**——30 秒浏览建立全局感，然后根据当前任务跳转到对应的导航文件（纵向/横向/深度/边界）。
 
 ## 四、相关概念链接
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [跨层依赖拓扑](./inter_layer_topology.md) —— L0-L7 纵向导航

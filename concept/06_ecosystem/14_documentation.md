@@ -10,6 +10,8 @@
 > **来源**: [rustdoc Documentation](https://doc.rust-lang.org/rustdoc/) · [RFC 1574 — API Documentation](https://github.com/rust-lang/rfcs/pull/1574) · [mdBook Guide](https://rust-lang.github.io/mdBook/) · [RFC 1946 — Intra-rustdoc links](https://github.com/rust-lang/rfcs/pull/1946) · [docs.rs](https://docs.rs/about)
 
 ## 📑 目录
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 - [文档生态：rustdoc、文档测试与 API 文档规范](#文档生态rustdoc文档测试与-api-文档规范)
@@ -33,6 +35,8 @@
 ---
 
 ## 一、核心概念
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 rustdoc：编译器集成的文档生成器
@@ -149,6 +153,8 @@ Rust 文档文化的独特性:
 ---
 
 ## 二、技术细节
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 文档注释语法
@@ -252,6 +258,8 @@ mdBook: Rust 生态的静态站点生成器
 ---
 
 ## 三、最佳实践
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ```text
@@ -323,6 +331,8 @@ API 文档规范（RFC 1574 推荐）:
 
 ## 四、反命题与边界分析
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
 
@@ -387,6 +397,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
 陷阱 1: 忘记 doctest 会失败
@@ -429,6 +440,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
 |:---|:---:|:---|
@@ -442,6 +454,8 @@ graph TD
 ---
 
 ## 相关概念文件
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 - [Cargo Toolchain](./01_toolchain.md) — Cargo 与 rustdoc 集成

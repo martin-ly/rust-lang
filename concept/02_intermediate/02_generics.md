@@ -27,6 +27,7 @@
 ---
 
 ## 📑 目录
+>
 > [来源: [TRPL — Generics]]
 
 - [Generics（泛型系统）](#generics泛型系统)
@@ -115,6 +116,7 @@
   - [十一、待补充与演进方向（TODOs）](#十一待补充与演进方向todos)
 
 ## 一、权威定义（Definition）
+>
 > [来源: [TRPL — Generics]]
 
 ### 1.1 Wikipedia 对齐定义
@@ -154,6 +156,7 @@
 ---
 
 ## 二、概念属性矩阵（Attribute Matrix）
+>
 > [来源: [TRPL — Generics]]
 
 ### 2.1 泛型参数类型矩阵
@@ -202,6 +205,7 @@
 ---
 
 ## 三、思维导图（Mind Map）
+>
 > [来源: [TRPL — Generics]]
 
 ```mermaid
@@ -242,6 +246,7 @@ graph TD
 ---
 
 ## 四、定理推理链（Theorem Chain）
+>
 > [来源: [TRPL — Generics]]
 
 ### 4.1 引理：参数多态 ⟹ System F 类型规则
@@ -391,6 +396,7 @@ fn draw_dyn(d: &dyn Drawable) {
 ---
 
 ## 五、示例与反例（Examples & Counter-examples）
+>
 > [来源: [TRPL — Generics]]
 
 ### 5.1 正确示例：泛型函数与约束
@@ -1035,6 +1041,7 @@ impl<T, const N: usize> RingBuffer<T, N> {
 ---
 
 ## 六、反命题与边界分析（Counter-proposition & Boundary Analysis）
+>
 > [来源: [TRPL — Generics]]
 
 > **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** · **[Rust Performance Book](https://nnethercote.github.io/perf-book/compile-times.html)** · **[RFC 2000](https://rust-lang.github.io/rfcs/2000-const-generics.html)** 反命题分析基于单态化、约束可满足性和 Const Generics 的形式化语义。 ✅ 已验证
@@ -1184,6 +1191,7 @@ graph TD
 ---
 
 ## 七、边界极限测试代码（Boundary Limit Tests）
+>
 > [来源: [TRPL — Generics]]
 
 ### 7.1 测试 1: 单态化代码膨胀与 dyn Trait 权衡极限
@@ -1307,6 +1315,7 @@ fn transpose<T: Copy, const R: usize, const C: usize>(
 ---
 
 ## 八、认知路径（Cognitive Path）
+>
 > [来源: [TRPL — Generics]]
 
 > **[原创分析]** · **[TRPL: Ch10.1](https://doc.rust-lang.org/book/ch10-01-syntax.html)** 认知路径从"通用代码"直觉到 System F 形式化的渐进映射，每步包含过渡解释、正例锚定、反例纠偏。 💡 原创分析
@@ -1456,6 +1465,7 @@ fn foo<T>() where T: Display + Clone { }  // where 子句（复杂约束）
 ---
 
 ## 九、知识来源关系（Provenance）
+>
 > [来源: [TRPL — Generics]]
 
 | **论断** | **来源** | **可信度** |
@@ -2119,6 +2129,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 ---
 
 ## 十、Rust 2024 Edition：`use<..>` Precise Capturing（RFC 3617）
+>
 > [来源: [TRPL — Generics]]
 
 > **稳定版本**: Rust 1.82 (stable) · **2024 Edition 默认行为变更**
@@ -2188,6 +2199,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 ---
 
 ## 十一、相关概念链接
+>
 > [来源: [TRPL — Generics]]
 
 | 概念 | 文件 | 关系 |
@@ -2204,6 +2216,7 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 ---
 
 ## 十一、待补充与演进方向（TODOs）
+>
 > [来源: [TRPL — Generics]]
 
 - [x] **TODO**: 补充 `min_specialization` 的当前状态与使用 —— 优先级: 中 —— 已完成 §9.2 —— 2026-05-14
