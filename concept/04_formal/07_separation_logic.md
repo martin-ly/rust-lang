@@ -370,6 +370,16 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    let mut x = 5;
+    let y = &mut x;
+    *y += 1;
+    println!("{}", x); // 6
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

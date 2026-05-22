@@ -658,3 +658,15 @@ flowchart TD
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 深化完成
+
+```rust,ignore
+// Kani 验证示例
+#[kani::proof]
+fn check_overflow() {
+    let x: u32 = kani::any();
+    let y: u32 = kani::any();
+    kani::assume(x < 1000 && y < 1000);
+    let z = x + y;
+    assert!(z < 2000);
+}
+```
