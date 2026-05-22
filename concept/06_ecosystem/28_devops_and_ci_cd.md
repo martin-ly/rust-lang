@@ -10,6 +10,7 @@
 > **来源**: [GitHub Actions Docs](https://docs.github.com/en/actions) · [Cargo Book — Workspaces](https://doc.rust-lang.org/cargo/reference/workspaces.html) · [cargo-release](https://github.com/crate-ci/cargo-release) · [Docker — Best Practices](https://docs.docker.com/build/building/multi-stage/) · [cargo-audit](https://github.com/RustSec/rustsec/tree/main/cargo-audit) · [cargo-deny](https://github.com/EmbarkStudios/cargo-deny) · [Cross-rs](https://github.com/cross-rs/cross) · [Rust CI Best Practices](https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/) · [Mozilla Rust CI Guide](https://firefox-source-docs.mozilla.org/build/buildsystem/rust.html)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -26,6 +27,8 @@
     - [2.3 交叉编译 CI 集成](#23-交叉编译-ci-集成)
     - [2.4 缓存策略与增量构建](#24-缓存策略与增量构建)
   - [三、DevOps 决策矩阵](#三devops-决策矩阵)
+    - [3.1 发布自动化决策](#31-发布自动化决策)
+    - [3.2 安全策略矩阵](#32-安全策略矩阵)
   - [四、反命题与边界分析](#四反命题与边界分析)
     - [4.1 反命题树](#41-反命题树)
     - [4.2 边界极限](#42-边界极限)
@@ -36,6 +39,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -141,6 +145,7 @@ Rust DevOps 工具全景:
 ---
 
 ## 二、技术细节
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [GitHub Actions Docs](https://docs.github.com/en/actions)]
@@ -353,6 +358,7 @@ graph LR
 ---
 
 ## 三、DevOps 决策矩阵
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -383,6 +389,7 @@ graph LR
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -446,6 +453,7 @@ graph LR
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -503,6 +511,7 @@ graph LR
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Cargo Book]]
@@ -548,8 +557,8 @@ graph TD
     end
 ```
 
-
-```rust
+```rust,ignore
+// 需要 Cargo 环境
 fn main() {
     let version = env!("CARGO_PKG_VERSION");
     println!("Version: {}", version);
@@ -557,6 +566,7 @@ fn main() {
 ```
 
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

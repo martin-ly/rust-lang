@@ -8,16 +8,10 @@
 | 指标 | 数值 |
 |:---|:---|
 | 测试代码块 | 344 |
-| 编译通过 | 343 |
-| 编译失败 | 1 |
-| 跳过 (ignore/no_run) | 581 |
-| 通过率 | 99.7% |
-
-## 编译失败的代码块
-
-| 文件 | 行号 | 模式 | 预览 | 错误信息 |
-|:---|:---|:---|:---|:---|
-| concept\06_ecosystem\28_devops_and_ci_cd.md | 552 | normal | `fn main() {     let version = env!("CARG` | error: environment variable `CARGO_PKG_VERSION` not defined at compile time  --> |
+| 编译通过 | 344 |
+| 编译失败 | 0 |
+| 跳过 (ignore/no_run) | 584 |
+| 通过率 | 100.0% |
 
 ## 编译通过的代码块（抽样）
 
@@ -34,12 +28,12 @@
 | concept\00_meta\quick_reference.md | 396 | normal | `macro_rules! vec {     ($($x:expr),*) =>` |
 | concept\00_meta\quick_reference.md | 415 | normal | `let s1 = String::from("hello"); let s2 =` |
 | concept\00_meta\quick_reference.md | 431 | normal | `struct Meters(u32); struct Kilometers(u3` |
-| concept\00_meta\quick_reference.md | 615 | normal | `let mut v = vec![1, 2, 3]; v.push(4);   ` |
+| concept\00_meta\quick_reference.md | 615 | normal | `let mut v = vec![1, 2, 3]; v.push(4);` |
 | concept\00_meta\self_assessment.md | 178 | normal | `fn first_word(s: &str) -> &str {     &s[` |
-| concept\00_meta\self_assessment.md | 234 | normal | `trait Drawable {     fn draw(&self);    ` |
+| concept\00_meta\self_assessment.md | 234 | normal | `trait Drawable {     fn draw(&self);` |
 | concept\00_meta\self_assessment.md | 272 | normal | `fn read_config(path: &str) -> Result<Str` |
-| concept\00_meta\self_assessment.md | 289 | normal | `struct A(&'static str); impl Drop for A ` |
-| concept\00_meta\self_assessment.md | 318 | normal | `fn identity<T>(x: T) -> T { x } let a = ` |
-| concept\00_meta\self_assessment.md | 391 | normal | `struct MyPtr<T> {     ptr: *mut (),     ` |
+| concept\00_meta\self_assessment.md | 289 | normal | `struct A(&'static str); impl Drop for A` |
+| concept\00_meta\self_assessment.md | 318 | normal | `fn identity<T>(x: T) -> T { x } let a =` |
+| concept\00_meta\self_assessment.md | 391 | normal | `struct MyPtr<T> {     ptr: *mut (),` |
 | concept\00_meta\self_assessment.md | 419 | normal | `use std::cell::RefCell; let cell = RefCe` |
-| concept\00_meta\self_assessment.md | 1171 | normal | `fn first_char(s: &String) -> &str {     ` |
+| concept\00_meta\self_assessment.md | 1171 | normal | `fn first_char(s: &String) -> &str {` |

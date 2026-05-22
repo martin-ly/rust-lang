@@ -1,19 +1,23 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T16:06:28.759582
-> 扫描文件数: 165
-> 提取概念定义数: 482
+> 生成时间: 2026-05-22T16:25:35.551736
+> 扫描文件数: 169
+> 提取概念定义数: 484
 > 跨文件引用数: 163
 
 ## 目录
 
-1. [执行摘要](#一执行摘要)
-2. [Send / Sync 一致性检查](#二send--sync-一致性检查)
-3. [所有权三规则一致性检查](#三所有权三规则一致性检查)
-4. [生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
-5. [unsafe 语义一致性检查](#五unsafe-语义一致性检查)
-6. [跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
-7. [附录：概念定义统计](#七附录概念定义统计)
+- [概念一致性审计报告 (Concept Consistency Report)](#概念一致性审计报告-concept-consistency-report)
+  - [目录](#目录)
+  - [一、执行摘要](#一执行摘要)
+  - [二、Send / Sync 一致性检查](#二send--sync-一致性检查)
+  - [三、所有权三规则一致性检查](#三所有权三规则一致性检查)
+  - [四、生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
+  - [五、unsafe 语义一致性检查](#五unsafe-语义一致性检查)
+  - [六、跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
+  - [七、附录：概念定义统计](#七附录概念定义统计)
+    - [7.1 按概念分类统计](#71-按概念分类统计)
+    - [7.2 按文件统计](#72-按文件统计)
 
 ---
 
@@ -54,7 +58,7 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 140 | 40 |
+| unsafe-UB | 142 | 41 |
 | 所有权-Move语义 | 80 | 27 |
 | Send+Sync | 52 | 27 |
 | unsafe-契约 | 39 | 17 |
@@ -113,6 +117,7 @@
 | concept\01_foundation\15_closure_basics.md | 1 | 0 | 8 |
 | concept\01_foundation\16_testing_basics.md | 0 | 0 | 8 |
 | concept\01_foundation\17_collections_advanced.md | 0 | 0 | 12 |
+| concept\01_foundation\18_strings_and_encoding.md | 0 | 0 | 10 |
 | concept\02_intermediate\01_traits.md | 7 | 1 | 29 |
 | concept\02_intermediate\02_generics.md | 3 | 5 | 41 |
 | concept\02_intermediate\03_memory_management.md | 18 | 1 | 36 |
@@ -134,6 +139,7 @@
 | concept\02_intermediate\18_lifetimes_advanced.md | 0 | 0 | 8 |
 | concept\02_intermediate\19_advanced_traits.md | 0 | 0 | 8 |
 | concept\02_intermediate\20_type_system_advanced.md | 0 | 0 | 8 |
+| concept\02_intermediate\21_metaprogramming.md | 0 | 0 | 10 |
 | concept\03_advanced\01_concurrency.md | 30 | 9 | 19 |
 | concept\03_advanced\02_async.md | 11 | 9 | 36 |
 | concept\03_advanced\03_unsafe.md | 101 | 2 | 28 |
@@ -167,6 +173,7 @@
 | concept\04_formal\12_denotational_semantics.md | 0 | 0 | 8 |
 | concept\04_formal\13_formal_methods.md | 0 | 0 | 9 |
 | concept\04_formal\14_lambda_calculus.md | 0 | 0 | 7 |
+| concept\04_formal\15_hoare_logic.md | 0 | 0 | 10 |
 | concept\05_comparative\01_rust_vs_cpp.md | 9 | 0 | 37 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -212,6 +219,7 @@
 | concept\06_ecosystem\25_cli_development.md | 0 | 0 | 8 |
 | concept\06_ecosystem\26_game_development.md | 0 | 0 | 6 |
 | concept\06_ecosystem\27_web_frameworks.md | 0 | 0 | 17 |
+| concept\06_ecosystem\28_devops_and_ci_cd.md | 2 | 0 | 11 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
