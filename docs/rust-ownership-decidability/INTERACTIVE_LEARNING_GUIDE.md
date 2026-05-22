@@ -31,6 +31,7 @@
     - [形式化更新](#形式化更新)
   - [**最后更新**: 2026-03-14](#最后更新-2026-03-14)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 🎯 如何使用本指南
 >
@@ -726,7 +727,6 @@ mod tests {
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
 
-
 ---
 
 ## 权威来源索引
@@ -738,7 +738,6 @@ mod tests {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL - The Rust Programming Language]**

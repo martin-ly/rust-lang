@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统可判定性 - 完整文档](#rust-所有权系统可判定性---完整文档)
@@ -42,15 +43,19 @@
     - [Phase 4: 验证发布 (目标: 100%)](#phase-4-验证发布-目标-100)
   - [参考文献](#参考文献)
   - [联系](#联系)
+  - [**当前进度**: 40%](#当前进度-40)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 项目概述
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 本项目构建 Rust 所有权系统的严格形式化理论，解决现有形式化模型中元模型和元形式语言说明不完整的问题。
 
 ### 核心问题
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 > "很多形式模型并没有完整的说明元模型和元形式语言，因为我们需要严格形式化证明。"
@@ -325,11 +330,9 @@ Proof. ... Qed.
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

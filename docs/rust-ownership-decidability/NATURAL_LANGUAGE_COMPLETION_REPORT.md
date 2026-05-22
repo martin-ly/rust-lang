@@ -45,6 +45,7 @@
     - [最终状态](#最终状态)
   - [*状态: 完成 ✅*](#状态-完成-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 完成情况概览
 >
@@ -459,7 +460,6 @@ Linearizability                 Definition Linearizable
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

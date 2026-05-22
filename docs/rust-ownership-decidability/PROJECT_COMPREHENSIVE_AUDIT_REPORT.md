@@ -45,6 +45,7 @@
     - [达到 100% 的关键路径](#达到-100-的关键路径)
   - [*版本: v1.0*](#版本-v10)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
 >
@@ -373,7 +374,6 @@ docs/rust-ownership-decidability/
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

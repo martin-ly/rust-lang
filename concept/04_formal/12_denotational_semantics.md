@@ -334,6 +334,16 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    // 简单的 lambda 演算风格闭包
+    let add = |x: i32| move |y: i32| x + y;
+    let add5 = add(5);
+    println!("{}", add5(3)); // 8
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

@@ -41,6 +41,7 @@
   - [Resources](#resources)
 - [// Extended content line 1200 for comprehensive Rust handbook](#-extended-content-line-1200-for-comprehensive-rust-handbook)
 - [相关概念](#相关概念)
+- [权威来源索引](#权威来源索引)
 
 ---
 
@@ -3251,7 +3252,6 @@ This handbook covered:
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**

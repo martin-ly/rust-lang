@@ -1,7 +1,7 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T15:52:33.211349
-> 扫描文件数: 162
+> 生成时间: 2026-05-22T16:04:32.240258
+> 扫描文件数: 164
 > 提取概念定义数: 482
 > 跨文件引用数: 163
 
@@ -112,6 +112,7 @@
 | concept\01_foundation\14_coercion_and_casting.md | 0 | 0 | 8 |
 | concept\01_foundation\15_closure_basics.md | 1 | 0 | 8 |
 | concept\01_foundation\16_testing_basics.md | 0 | 0 | 8 |
+| concept\01_foundation\17_collections_advanced.md | 0 | 0 | 12 |
 | concept\02_intermediate\01_traits.md | 7 | 1 | 29 |
 | concept\02_intermediate\02_generics.md | 3 | 5 | 41 |
 | concept\02_intermediate\03_memory_management.md | 18 | 1 | 36 |
@@ -150,6 +151,7 @@
 | concept\03_advanced\15_zero_copy_parsing.md | 0 | 0 | 9 |
 | concept\03_advanced\16_lock_free.md | 0 | 0 | 10 |
 | concept\03_advanced\17_type_erasure.md | 1 | 0 | 8 |
+| concept\03_advanced\18_network_programming.md | 0 | 0 | 12 |
 | concept\04_formal\01_linear_logic.md | 10 | 2 | 25 |
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |

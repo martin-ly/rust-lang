@@ -40,8 +40,9 @@
     - [8.1 为什么关联性重要？](#81-为什么关联性重要)
     - [8.2 关联网络的三个层次](#82-关联网络的三个层次)
     - [8.3 完整图景](#83-完整图景)
-  - [**下一篇**：阅读 `HISTORICAL_EVOLUTION.md` 了解理论的历史演化。](#下一篇阅读-historical_evolutionmd-了解理论的历史演化)
+  - [**下一篇**：阅读 `HISTORICAL_EVOLUTION.md` 了解理论的历史演化](#下一篇阅读-historical_evolutionmd-了解理论的历史演化)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、概念关联网络
 >
@@ -821,7 +822,6 @@ RustBelt：精确但复杂，覆盖 unsafe
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

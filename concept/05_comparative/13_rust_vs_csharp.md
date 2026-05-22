@@ -10,6 +10,7 @@
 > **来源**: [The Rust Programming Language](https://doc.rust-lang.org/book/) · [C# Documentation](https://docs.microsoft.com/en-us/dotnet/csharp/) · [Wikipedia — C Sharp](https://en.wikipedia.org/wiki/C_Sharp_(programming_language)) · [.NET Blog](https://devblogs.microsoft.com/dotnet/) · [Wikipedia — Rust](https://en.wikipedia.org/wiki/Rust_(programming_language))
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -37,6 +38,7 @@
 ---
 
 ## 一、核心对比
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -193,6 +195,7 @@
 ---
 
 ## 二、语言特性差异
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -351,6 +354,7 @@ unsafe 对比:
 ---
 
 ## 三、工程实践差异
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
@@ -425,6 +429,7 @@ unsafe 对比:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -493,6 +498,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ```text
@@ -539,6 +545,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 | 来源 | 可信度 | 说明 |
@@ -553,7 +560,16 @@ graph TD
 
 ---
 
+```rust
+fn main() {
+    let nums = vec![1, 2, 3];
+    let doubled: Vec<i32> = nums.iter().map(|x| x * 2).collect();
+    println!("{:?}", doubled);
+}
+```
+
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

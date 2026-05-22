@@ -43,6 +43,7 @@
   - [📞 索引快速导航](#-索引快速导航)
   - [**🎉 Rust 所有权系统可判定性知识库 - 100% 综合梳理完成! 🎉**](#-rust-所有权系统可判定性知识库---100-综合梳理完成-)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Comprehensive Knowledge Synthesis
 >
@@ -573,7 +574,6 @@ README.md (入口)
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

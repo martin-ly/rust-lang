@@ -27,6 +27,7 @@
   - [Cross-Reference Map](#cross-reference-map)
     - [Files Referenced By](#files-referenced-by)
   - [*This index was auto-generated. Last updated: 2026-03-06T11:41:17.918595*](#this-index-was-auto-generated-last-updated-2026-03-06t114117918595)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -102,6 +103,8 @@
 
 ## Formal Verification Links
 
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** · **[来源: [TRPL](https://doc.rust-lang.org/book/)]**
+
 ### Key Theorems
 
 | Theorem | Natural Language | Coq Formalization |
@@ -124,6 +127,8 @@ coq-formalization/
 ---
 
 ## Case Study Links
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]** · **[来源: [TRPL](https://doc.rust-lang.org/book/)]**
 
 ### Standard Library Case Studies
 
@@ -560,7 +565,6 @@ coq-formalization/
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
-
 
 ---
 

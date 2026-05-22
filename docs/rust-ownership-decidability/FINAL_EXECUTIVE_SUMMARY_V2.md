@@ -40,6 +40,7 @@
     - [项目价值](#项目价值)
     - [使用建议](#使用建议)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Final Executive Summary - Comprehensive Edition
 >
@@ -435,7 +436,6 @@ cat docs/rust-ownership-decidability/coq-formalization/theories/Advanced/Metathe
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

@@ -10,6 +10,7 @@
 > **来源**: [clap](https://docs.rs/clap/latest/clap/) · [Rust CLI Book](https://rust-cli.github.io/book/index.html) · [Command Line Applications in Rust](https://rust-cli.github.io/book/index.html) · [Wikipedia — Command-line Interface](https://en.wikipedia.org/wiki/Command-line_interface) · [Cargo](https://doc.rust-lang.org/cargo/)
 
 ## 📑 目录
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Clap Docs]]
@@ -35,6 +36,7 @@
 ---
 
 ## 一、核心概念
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -126,6 +128,7 @@ CLI 设计原则:
 ---
 
 ## 二、关键 crate
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Clap Docs]]
@@ -221,6 +224,7 @@ clap 生态:
 ---
 
 ## 三、打包与分发
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Clap Docs]]
@@ -296,6 +300,7 @@ clap 生态:
 ---
 
 ## 四、反命题与边界分析
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -355,6 +360,7 @@ graph TD
 ---
 
 ## 五、常见陷阱
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Clap Docs]]
@@ -402,6 +408,7 @@ graph TD
 ---
 
 ## 六、来源与延伸阅读
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Clap Docs]]
@@ -417,7 +424,25 @@ graph TD
 
 ---
 
+```rust,ignore
+// clap 命令行解析示例
+use clap::Parser;
+
+#[derive(Parser)]
+#[command(name = "myapp")]
+struct Cli {
+    #[arg(short, long)]
+    name: String,
+}
+
+fn main() {
+    let args = Cli::parse();
+    println!("Hello, {}!", args.name);
+}
+```
+
 ## 相关概念文件
+>
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]

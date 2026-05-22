@@ -4,6 +4,8 @@
 
 ## 统计
 
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** · **[来源: [TRPL](https://doc.rust-lang.org/book/)]**
+
 | 类别 | 数量 |
 |:---|:---:|
 | 总链接数 | 64071 |
@@ -13,6 +15,8 @@
 | 仅锚点链接 | 47007 |
 
 ## 损坏链接清单（按问题类型分组）
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** · **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 锚点不存在 (3100个)
 
@@ -3848,6 +3852,8 @@ Files that mention key concepts but don't link to them:
 
 ## 修复建议
 
+> **[来源: [TRPL](https://doc.rust-lang.org/book/)]** · **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
 ### 1. 文件不存在问题
 
 - 检查链接路径是否正确
@@ -3866,6 +3872,8 @@ Files that mention key concepts but don't link to them:
 - 可能是文档结构已更改但目录未更新
 
 ## 源文件问题统计
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]** · **[来源: [TRPL](https://doc.rust-lang.org/book/)]**
 
 | 源文件 | 损坏链接数 |
 |:---|:---:|
@@ -3924,5 +3932,15 @@ Files that mention key concepts but don't link to them:
 **总计 979 个文件包含损坏链接**
 
 ---
+
+## 来源与延伸阅读
+
+| 来源 | 链接 | 说明 |
+|:---|:---|:---|
+| Rust Reference | https://doc.rust-lang.org/reference/ | Rust 语言官方参考文档 |
+| The Rust Programming Language (TRPL) | https://doc.rust-lang.org/book/ | Rust 官方教程 |
+| Rust Standard Library | https://doc.rust-lang.org/std/ | Rust 标准库文档 |
+| Rustonomicon | https://doc.rust-lang.org/nomicon/ | Rust 高级/Unsafe 编程指南 |
+| RFCs - github.com/rust-lang/rfcs | https://github.com/rust-lang/rfcs | Rust 语言 RFC 仓库 |
 
 > 相关文档: [概念知识体系](../concept/README.md)

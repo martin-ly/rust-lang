@@ -37,6 +37,7 @@
     - [Detailed Error Analysis](#detailed-error-analysis)
   - [*Rust Version: 1.94.0*](#rust-version-1940)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## Executive Summary
 >
@@ -298,7 +299,6 @@ See `verification_results.json` for complete error messages for all 109 failed c
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

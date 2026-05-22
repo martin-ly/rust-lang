@@ -44,8 +44,9 @@
   - [版本历史](#版本历史)
     - [v1.0（2026-03-11）](#v102026-03-11)
   - [联系与反馈](#联系与反馈)
-  - [**开始探索**：建议从 `OVERVIEW_AND_INTUITION.md` 开始阅读！](#开始探索建议从-overview_and_intuitionmd-开始阅读)
+  - [**开始探索**：建议从 `OVERVIEW_AND_INTUITION.md` 开始阅读](#开始探索建议从-overview_and_intuitionmd-开始阅读)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 文档清单
 >
@@ -460,7 +461,6 @@
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

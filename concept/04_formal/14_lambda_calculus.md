@@ -363,6 +363,16 @@ graph TD
 
 ---
 
+
+```rust
+fn main() {
+    // Rust 中的高阶函数
+    let apply = |f: fn(i32) -> i32, x: i32| f(x);
+    let double = |x: i32| x * 2;
+    println!("{}", apply(double, 5)); // 10
+}
+```
+
 ## 相关概念文件
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >

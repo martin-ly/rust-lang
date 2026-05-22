@@ -7,6 +7,7 @@
 ---
 
 ## 目录结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [Rust 所有权系统 - 全面结构化分析](#rust-所有权系统---全面结构化分析)
@@ -62,13 +63,17 @@
     - [A.1 所有权系统思维导图](#a1-所有权系统思维导图)
     - [A.2 借用系统思维导图](#a2-借用系统思维导图)
     - [A.3 类型系统思维导图](#a3-类型系统思维导图)
+  - [**建议阅读顺序**: 按目录顺序阅读，结合代码实践](#建议阅读顺序-按目录顺序阅读结合代码实践)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 第一部分: 知识架构总览
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 Rust 语言特性全景图
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -873,11 +878,9 @@ Type System
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 

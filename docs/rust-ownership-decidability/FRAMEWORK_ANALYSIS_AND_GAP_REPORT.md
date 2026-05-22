@@ -54,6 +54,7 @@
   - [总结](#总结)
   - [**下一步**: 立即开始任务 A, B, C](#下一步-立即开始任务-a-b-c)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引)
 
 ## 第一部分: 现有框架缺失诊断
 >
@@ -590,7 +591,6 @@ digraph TheoremDependencies {
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
-
 
 ---
 

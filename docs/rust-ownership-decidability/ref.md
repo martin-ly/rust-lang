@@ -7,6 +7,7 @@
 ---
 
 ## 目录
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 - [统一理论框架](#统一理论框架)
@@ -67,11 +68,15 @@
     - [统一框架的核心价值](#统一框架的核心价值)
     - [立即可执行的行动](#立即可执行的行动)
     - [长期愿景](#长期愿景)
+  - [*"统一理论不是终点，而是深入理解的起点。"*](#统一理论不是终点而是深入理解的起点)
+  - [权威来源索引](#权威来源索引)
 
 ## 第一部分: 理论基础
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1.1 数学基础三层结构
+>
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ```text
@@ -742,11 +747,9 @@ Ltac full_auto :=
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
-
 ---
 
 - [README](./README.md)
-
 
 ---
 
