@@ -1,7 +1,7 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T12:02:49.931721
-> 扫描文件数: 144
+> 生成时间: 2026-05-22T12:34:08.815060
+> 扫描文件数: 152
 > 提取概念定义数: 486
 > 跨文件引用数: 165
 
@@ -107,6 +107,7 @@
 | concept\01_foundation\07_control_flow.md | 0 | 0 | 8 |
 | concept\01_foundation\08_collections.md | 0 | 0 | 8 |
 | concept\01_foundation\09_strings_and_text.md | 0 | 0 | 8 |
+| concept\01_foundation\10_error_handling_basics.md | 0 | 0 | 10 |
 | concept\01_foundation\10_numerics.md | 0 | 0 | 8 |
 | concept\01_foundation\11_modules_and_paths.md | 0 | 0 | 8 |
 | concept\01_foundation\12_attributes_and_macros.md | 0 | 0 | 8 |
@@ -129,6 +130,7 @@
 | concept\02_intermediate\13_dsl_and_embedding.md | 0 | 0 | 8 |
 | concept\02_intermediate\14_newtype_and_wrapper.md | 0 | 0 | 8 |
 | concept\02_intermediate\15_error_handling_deep_dive.md | 0 | 0 | 8 |
+| concept\02_intermediate\15_iterator_patterns.md | 0 | 0 | 10 |
 | concept\02_intermediate\16_iterator_patterns.md | 0 | 0 | 8 |
 | concept\02_intermediate\17_macro_patterns.md | 0 | 0 | 8 |
 | concept\02_intermediate\18_lifetimes_advanced.md | 0 | 0 | 8 |
@@ -149,6 +151,7 @@
 | concept\03_advanced\13_async_patterns.md | 0 | 0 | 8 |
 | concept\03_advanced\14_custom_allocators.md | 0 | 0 | 9 |
 | concept\03_advanced\15_zero_copy_parsing.md | 0 | 0 | 9 |
+| concept\03_advanced\16_lock_free.md | 0 | 0 | 10 |
 | concept\04_formal\01_linear_logic.md | 10 | 2 | 25 |
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |
@@ -162,6 +165,7 @@
 | concept\04_formal\10_category_theory.md | 0 | 0 | 8 |
 | concept\04_formal\11_separation_logic.md | 0 | 0 | 8 |
 | concept\04_formal\12_denotational_semantics.md | 0 | 0 | 8 |
+| concept\04_formal\13_formal_methods.md | 0 | 0 | 9 |
 | concept\05_comparative\01_rust_vs_cpp.md | 11 | 1 | 41 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -174,6 +178,7 @@
 | concept\05_comparative\09_rust_vs_swift.md | 0 | 0 | 8 |
 | concept\05_comparative\10_rust_vs_zig.md | 0 | 0 | 8 |
 | concept\05_comparative\11_rust_vs_kotlin.md | 0 | 0 | 11 |
+| concept\05_comparative\12_rust_vs_scala.md | 0 | 0 | 10 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |
@@ -198,6 +203,8 @@
 | concept\06_ecosystem\20_licensing_and_compliance.md | 0 | 0 | 8 |
 | concept\06_ecosystem\21_game_development.md | 0 | 0 | 8 |
 | concept\06_ecosystem\22_embedded_systems.md | 0 | 0 | 10 |
+| concept\06_ecosystem\23_database_access.md | 0 | 0 | 10 |
+| concept\06_ecosystem\24_cloud_native.md | 0 | 0 | 9 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
@@ -220,6 +227,7 @@
 | concept\07_future\21_rust_in_ai.md | 0 | 0 | 8 |
 | concept\07_future\22_compile_time_execution.md | 0 | 0 | 9 |
 | concept\07_future\22_edition_2024_guide.md | 0 | 0 | 8 |
+| concept\07_future\23_rust_edition_guide.md | 0 | 0 | 7 |
 | concept\07_future\borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\open_enums_preview.md | 0 | 0 | 15 |
 
