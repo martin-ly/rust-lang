@@ -7,10 +7,10 @@
 
 | 指标 | 数值 |
 |:---|:---|
-| 测试代码块 | 269 |
-| 编译通过 | 269 |
+| 测试代码块 | 261 |
+| 编译通过 | 261 |
 | 编译失败 | 0 |
-| 跳过 (ignore/no_run) | 576 |
+| 跳过 (ignore/no_run) | 573 |
 | 通过率 | 100.0% |
 
 ## 编译通过的代码块（抽样）
@@ -28,12 +28,12 @@
 | concept\00_meta\quick_reference.md | 392 | normal | `macro_rules! vec {     ($($x:expr),*) =>` |
 | concept\00_meta\quick_reference.md | 411 | normal | `let s1 = String::from("hello"); let s2 =` |
 | concept\00_meta\quick_reference.md | 427 | normal | `struct Meters(u32); struct Kilometers(u3` |
-| concept\00_meta\quick_reference.md | 611 | normal | `let mut v = vec![1, 2, 3]; v.push(4);   ` |
+| concept\00_meta\quick_reference.md | 611 | normal | `let mut v = vec![1, 2, 3]; v.push(4);` |
 | concept\00_meta\self_assessment.md | 172 | normal | `fn first_word(s: &str) -> &str {     &s[` |
-| concept\00_meta\self_assessment.md | 226 | normal | `trait Drawable {     fn draw(&self);    ` |
+| concept\00_meta\self_assessment.md | 226 | normal | `trait Drawable {     fn draw(&self);` |
 | concept\00_meta\self_assessment.md | 263 | normal | `fn read_config(path: &str) -> Result<Str` |
-| concept\00_meta\self_assessment.md | 279 | normal | `struct A(&'static str); impl Drop for A ` |
-| concept\00_meta\self_assessment.md | 307 | normal | `fn identity<T>(x: T) -> T { x } let a = ` |
-| concept\00_meta\self_assessment.md | 376 | normal | `struct MyPtr<T> {     ptr: *mut (),     ` |
+| concept\00_meta\self_assessment.md | 279 | normal | `struct A(&'static str); impl Drop for A` |
+| concept\00_meta\self_assessment.md | 307 | normal | `fn identity<T>(x: T) -> T { x } let a =` |
+| concept\00_meta\self_assessment.md | 376 | normal | `struct MyPtr<T> {     ptr: *mut (),` |
 | concept\00_meta\self_assessment.md | 403 | normal | `use std::cell::RefCell; let cell = RefCe` |
-| concept\00_meta\self_assessment.md | 1120 | normal | `fn first_char(s: &String) -> &str {     ` |
+| concept\00_meta\self_assessment.md | 1120 | normal | `fn first_char(s: &String) -> &str {` |
