@@ -77,6 +77,7 @@ mindmap
 > **认知路径**: 本 mindmap 从四个维度组织区块链安全知识：**Rust 链架构**回答"有哪些主流 Rust 链"，**漏洞类别消除**回答"Rust 消除了哪些 Solidity 漏洞"，**形式化验证**回答"如何证明合约正确"，**跨链对比**回答"Move vs Rust vs Solidity 的安全模型差异"。
 
 > **认知功能**: 本 mindmap 以四层架构组织区块链安全知识全景，帮助读者建立"链架构→漏洞消除→形式化验证→跨链对比"的系统认知框架。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **使用建议**: 学习新链时，将其归入对应分支并比较漏洞消除机制与形式化验证策略。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 >
@@ -151,6 +152,7 @@ graph TD
 > **来源**: [Solana Docs — Sealevel] · [Anatoly Yakovenko — Sealevel Paper]
 
 > **认知功能**: 此流程图揭示 Solana 如何将 Rust 的 `&`/`&mut` 借用语义映射到运行时并行调度策略，实现"无数据竞争的并行合约执行"。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 >
 > **使用建议**: 设计并行交易时，优先将账户标记为 read-only 以最大化并行度；mutually exclusive writes 需显式排序。
 >
@@ -360,6 +362,7 @@ classDiagram
 ```
 
 > **认知功能**: 此类图将三种合约语言的安全机制进行**类型系统级别的对比**。Move 的 Ability 系统（默认最严格，显式放宽）与 Rust 的 Trait 系统（默认宽松，显式约束）形成对偶。Solidity 没有编译期资源语义，依赖运行时修饰器和人工审计——这是 Solidity 合约漏洞频发的根本类型论原因。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 Move 资源模型的三要素
 

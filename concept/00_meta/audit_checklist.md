@@ -83,6 +83,7 @@ flowchart TD
 ```
 
 > **认知功能**: 此流程图将质量门禁从"静态检查清单"转化为**动态决策流程**。每次内容更新后，按修改类型触发相应的检查分支：形式化定义修改→跨层一致性检查；新增来源→格式验证；新增定理→矩阵完整性检查；新增示例→代码块规范。最终必须通过 `concept_consistency_auditor.py` 的 0 错误验证。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、关系清晰度检查（Inter-File Consistency） [来源: 跨文件一致性审计方法论 — 确保概念定义在不同层级文件中保持逻辑等价; 参照 IEEE 1012 验证标准]
 

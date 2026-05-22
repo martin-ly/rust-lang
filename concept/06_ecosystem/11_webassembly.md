@@ -204,6 +204,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比当前**模块级 Wasm** 与未来的**组件模型**。组件模型通过 WIT（Wasm Interface Types）实现跨语言的类型安全组合。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 当前项目使用模块级 Wasm + wasm-bindgen；面向未来的组件化系统开始评估 wit-bindgen。
 > **关键洞察**: 组件模型是 Wasm 的**"跨语言 ABI"**——类似于 COM 或 gRPC，但基于 Wasm 沙箱和 WIT 类型系统。
 > [来源: [Bytecode Alliance — Component Model](https://component-model.bytecodealliance.org/)]
@@ -246,6 +247,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树评估 Rust + Wasm 的适用性。核心判断标准是**宿主交互频率**和**二进制大小敏感度**。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 计算密集型、沙箱化需求高的场景优先 Rust + Wasm；与宿主频繁交互的场景需评估跨边界开销。
 > **关键洞察**: Wasm 的**跨边界调用**（Wasm ↔ Host）有固定开销（序列化/边界检查）。如果应用是"细粒度频繁调用"型，原生实现可能更优。
 > [来源: [Wasm Performance Guide](https://webassembly.org/docs/portability-and-performance/)]

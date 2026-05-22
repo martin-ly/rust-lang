@@ -300,6 +300,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 当前处理枚举演进的**唯一官方路径**——`#[non_exhaustive]` 是向后兼容扩展枚举的编译器支持机制。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 设计公共 API 时，若枚举代表可能扩展的概念域（错误类型、协议消息、事件），优先使用 `#[non_exhaustive]`。
 > **关键洞察**: Rust 选择"编译期失败 + 显式处理"而非"运行时开放"，体现了**Fail-Safe** 设计哲学。
 > [来源: 💡 原创分析]
@@ -397,6 +398,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助 API 设计者判断何时应使用 `#[non_exhaustive]`，区分"适合"、"不适合"和"需谨慎"三种场景。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对公共库中的枚举类型，按此树决策；内部枚举（`pub(crate)`）通常不需要。
 > **关键洞察**: `#[non_exhaustive]` 的代价是**消除穷尽性检查的保护**——下游代码失去编译器对 match 完备性的验证。
 > [来源: 💡 原创分析]

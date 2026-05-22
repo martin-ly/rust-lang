@@ -358,6 +358,7 @@ graph TD
 ```
 
 > **认知功能**: **无锁不是默认选择**——只有在**性能测量**证明锁是瓶颈，且团队有能力正确实现时，才使用无锁。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > [source: [Rust Atomics and Locks — When to Use](https://marabos.nl/atomics/when-to-use.html)]
 
 ---

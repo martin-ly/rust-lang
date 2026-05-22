@@ -84,6 +84,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Ferrocene 在 Rust 生态与工业认证标准之间的**桥梁位置**——它不是替代上游 Rust，而是为特定版本的上游 Rust 提供认证证据包。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 安全关键项目选择 Ferrocene 而非上游 Rust；一般项目继续使用上游 Rust。
 > **关键洞察**: Ferrocene 的商业模式是**"认证即服务"**——持续追踪上游 Rust 的演进，为每个重要版本提供独立的认证证据包。
 > [来源: [Ferrocene Project Overview](https://ferrocene.dev/)]
@@ -154,6 +155,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Ferrocene 与上游 Rust 的**版本延迟关系**——认证需要时间，Ferrocene 总是落后上游 6-12 个月。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 这种延迟是**设计上的必然**——认证不能加速，因为它涉及第三方审计机构的独立审查。安全关键项目接受这种延迟以换取可信性。
 > [来源: [Ferrous Systems — Ferrocene Update](https://ferrous-systems.com/blog/)]
 
@@ -225,6 +227,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助评估 Ferrocene 是否适合特定项目。核心判断标准是**std 依赖**、**目标平台支持**和**功能延迟容忍度**。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 裸机/RTOS 嵌入式项目优先考虑 Ferrocene；需要 std 或异步运行时的项目需评估替代方案。
 > **关键洞察**: Ferrocene 的**不适用场景**同样重要——明确边界避免项目在选择工具链时做出错误决策。
 > [来源: 💡 原创分析]

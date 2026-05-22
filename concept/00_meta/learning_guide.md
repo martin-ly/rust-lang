@@ -103,6 +103,7 @@ graph TD
 ```
 
 > **认知功能**: 此路径图展示**不同背景学习者的最小阻力路径**。完全新手从 L1 基础层线性递进；C++ 开发者利用已有 RAII/指针知识，通过 Rust vs C++ 对比加速；Java/Go 开发者从 GC 思维转换，重点理解所有权替代 GC；Haskell/ML 开发者利用类型论基础，从 L2/L4 进入。颜色对应背景：蓝=新手、绿=C++、橙=Java/Go、粉=Haskell。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ## 一、如何使用本指南
 

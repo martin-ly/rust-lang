@@ -61,6 +61,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示可观测性三支柱在 Rust 生态中的**实现映射**。logs 记录离散事件，metrics 聚合数值趋势，traces 追踪请求全链路——三者互补，缺一不可。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 生产环境应同时部署三种可观测性手段，覆盖不同时间粒度和分析维度。
 > **关键洞察**: Rust 的**零成本抽象**哲学同样适用于可观测性——tracing 的 Span 在 release 模式下可通过编译期开关完全消除开销。
 > [来源: [Google SRE Book — Monitoring](https://sre.google/sre-book/monitoring-distributed-systems/)] · [来源: [OpenTelemetry Specification](https://opentelemetry.io/docs/specs/otel/)]
@@ -205,6 +206,7 @@ sequenceDiagram
 ```
 
 > **认知功能**: 此序列图展示**分布式追踪**在微服务架构中的工作原理——trace ID 和 span context 通过 HTTP/gRPC header 传播，串联起跨服务的请求链路。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 在异步 Rust 服务中使用 `tracing-opentelemetry` 自动集成 OpenTelemetry，无需手动管理 trace context。
 > **关键洞察**: Rust 的异步模型（Future + Pin）与分布式追踪天然契合——tracing Span 的生命周期与 Future 的 poll 周期对齐，实现**零侵入**的上下文传播。
 > [来源: [OpenTelemetry Context Propagation](https://opentelemetry.io/docs/specs/otel/context/api-propagators/)]
@@ -265,6 +267,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断在特定场景下是否应使用 tracing 替代传统 log。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 异步服务几乎总是应使用 tracing；同步服务如果对结构化日志有需求也应迁移。
 > **关键洞察**: tracing 的**额外成本**仅在 span 创建时体现，且可通过编译期过滤完全消除。在大多数场景下，tracing 是 log 的超集。
 > [来源: [tokio/tracing Design](https://tokio.rs/blog/2019-08-tracing)]

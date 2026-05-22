@@ -75,6 +75,7 @@ Rust 性能优化的核心原则: "先测量，再优化"
 ```
 
 > **认知功能**: 测量优先原则避免了"过早优化"——Rust 的零成本抽象使代码清晰度和性能不再对立。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 在 Rust 中，**清晰的代码往往也是高性能的代码**——因为编译器的优化能力远超手写低级代码。
 > [来源: [Rust Performance Book — Profiling](https://nnethercote.github.io/perf-book/profiling.html)]
 

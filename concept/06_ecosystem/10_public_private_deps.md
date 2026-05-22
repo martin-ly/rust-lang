@@ -63,6 +63,7 @@ graph TD
 > **认知路径**: 此对比图展示依赖泄漏问题的本质。**泄漏模式**（红）中，Crate C 通过 Crate A 隐式依赖了 Crate B——当 A 升级或移除 B 时，C 的编译会意外失败。**隔离模式**（绿）中，`public = false` 将 Crate D 限制在 A 的私有模块内，Crate C 既看不到也用不了 D 的类型。这是 Rust 从"默认开放"向"显式契约"演进的关键机制。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 > **认知功能**: 将依赖泄漏抽象问题具象为 crate 关系拓扑。**功能定位**：作为引入依赖时的可见性边界预判框架，左侧为反模式，右侧为目标架构。**使用建议**：代码审查时对照公共 API 边界验证 `public` 标记，默认采用隔离模式。**关键洞察**：`public = false` 是编译期合约——它将实现细节与接口契约在语义层面分离，使内部升级不再意外破坏下游编译。[来源: 💡 原创分析]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ---
 
@@ -207,6 +208,7 @@ flowchart TD
 ```
 
 > **认知功能**: 此决策树将 RFC 3516 的工程实践转化为**可操作的检查清单**。核心原则：**默认私有（principle of least exposure）**，只有类型确实出现在公共 API 中才标记为 public。关键分支点是"未来可能替换实现"——如果答案是"是"，则优先使用 newtype 模式封装，保持依赖隔离的同时提供公共接口。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.2 默认策略
 

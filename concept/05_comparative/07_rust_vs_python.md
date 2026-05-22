@@ -63,6 +63,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 Rust 与 Python 的**设计哲学对立与互补**。两者在抽象成本、安全时机、显隐偏好上对立，但在"解决实际问题"的目标上互补。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 不要用 Rust 的哲学评判 Python，也不要用 Python 的哲学评判 Rust——它们解决不同问题域。
 > **关键洞察**: Rust 的"显式"和 Python 的"隐式"不是优劣之分，而是**可靠性 vs 开发效率**的权衡。Rust 为长期维护付出代价，Python 为快速迭代付出代价。
 > [来源: [Zen of Python — PEP 20](https://peps.python.org/pep-0020/)] · [来源: [Rust Language Design FAQ](https://doc.rust-lang.org/reference/introduction.html)]
@@ -308,6 +309,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 Rust 与 Python 的**互补性**。Rust 不会取代 Python——它们在不同场景下各有优势。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 新项目根据性能需求、生态依赖和团队技能选型；现有 Python 项目可通过 PyO3 逐步引入 Rust。
 > **关键洞察**: **混合架构**（Python 主逻辑 + Rust 性能模块）是工业界的最佳实践——例如 Python 的 NumPy/Pandas 底层都是 C/Fortran，未来可能更多用 Rust。
 > [来源: [PyO3 — Rust bindings for Python](https://pyo3.rs/)]

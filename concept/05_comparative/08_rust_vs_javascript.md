@@ -327,6 +327,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树展示 WASM 的**适用边界**。WASM 不是 JavaScript 的替代品，而是**互补技术**。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: 大多数现代 Web 应用应采用**混合架构**——JS 处理 UI 和 I/O，WASM 处理计算密集型任务。
 > [来源: [WASM Use Cases](https://webassembly.org/docs/use-cases/)]
 

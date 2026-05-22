@@ -81,6 +81,7 @@ graph TD
 ```
 
 > **认知功能**: 此图对比块级 unsafe 与字段级 unsafe 的**审计粒度差异**——字段级 unsafe 将安全责任从"代码区域"下推到"数据结构定义"。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 对于包含原始指针、手动内存管理字段的结构体，使用 `unsafe` 字段标记；纯安全字段保持普通声明。
 > **关键洞察**: `unsafe` 字段将**不变量文档化**从注释/文档转移到类型系统——字段声明即安全契约声明。
 > [来源: [Rust RFC 3458 — Motivation](https://github.com/rust-lang/rfcs/pull/3458)]
@@ -192,6 +193,7 @@ graph LR
 ```
 
 > **认知功能**: 此图展示 unsafe fields 与 Safety Tags 的**互补关系**——unsafe fields 解决"哪些代码需要审查"的问题，Safety Tags 解决"如何自动验证"的问题。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: unsafe fields 是 Safety Tags 的**前置基础设施**——没有字段级标记，自动化工具难以精确关联契约与代码位置。
 > [来源: [Safety Tags Preview](./08_safety_tags_preview.md)]
 
@@ -253,6 +255,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否应将字段标记为 unsafe。核心判断标准是**外部可访问性**和**safe API 封装程度**。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 公开结构体中所有原始指针字段都应 unsafe；私有结构体中若通过 safe 方法完全封装，可酌情省略。
 > **关键洞察**: unsafe 字段的价值与**封装程度**成反比——完全封装的内部字段不需要 unsafe 标记，因为外部无法直接访问。
 > [来源: 💡 原创分析]

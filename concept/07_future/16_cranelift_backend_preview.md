@@ -156,6 +156,7 @@ graph TD
 ```
 
 > **认知功能**: 此图展示 Cranelift 与 LLVM 在不同**优化级别**下的编译速度与运行时性能权衡。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **关键洞察**: Cranelift Debug 的**运行时性能约为 LLVM Debug 的 80%**，但编译速度快 2-5 倍。对于开发迭代，这是极佳的权衡。
 > [来源: [rustc_codegen_cranelift Benchmarks](https://github.com/rust-lang/rustc_codegen_cranelift)]
 
@@ -223,6 +224,7 @@ graph TD
 ```
 
 > **认知功能**: 此决策树帮助判断是否使用 Cranelift。核心判断标准是**构建类型**、**平台支持**和**LTO 需求**。
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **使用建议**: 开发迭代默认使用 Cranelift；Release 构建、交叉编译、LTO 场景使用 LLVM。
 > **关键洞察**: Cranelift 的**边界非常清晰**——它是 Debug 编译的专用工具，不试图替代 LLVM 的通用地位。
 > [来源: 💡 原创分析]
