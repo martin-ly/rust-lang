@@ -289,7 +289,7 @@ unsafe 代码验证:
 ```
 
 > **策略矩阵**: Rust 的测试生态是**分层验证**——从编译期类型检查到运行时模糊测试，每层针对不同类型的错误。
-> [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)]
+> [来源: [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html)] · [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ---
 
@@ -313,7 +313,7 @@ graph TD
 
 > **认知功能**: 此决策树展示测试投入的**优先级**。核心原则是：**公共 API + 复杂逻辑优先**。
 > **关键洞察**: Rust 的类型系统已消除了许多需要测试的"错误类"——测试应聚焦于**业务逻辑**而非**语言安全**。
-> [source: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/testing.html)]
+> [来源: [Rust API Guidelines — Testing](https://rust-lang.github.io/api-guidelines/testing.html)]
 
 ---
 
@@ -352,7 +352,7 @@ graph TD
 ```
 
 > **边界要点**: 测试生态的边界主要与**异步复杂性**、**全局状态**、**外部依赖**、**unsafe 验证**和**编译时间**相关。
-> [source: [Rust Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
+> [来源: [Rust Test Attributes](https://doc.rust-lang.org/reference/attributes/testing.html)]
 
 ---
 
@@ -396,31 +396,27 @@ graph TD
 ```
 
 > **陷阱总结**: 测试的陷阱主要与**flakiness**、**过度 mock**、**错误忽略**、**实现耦合**和**成功路径偏见**相关。
-> [source: [Rust Testing Best Practices](https://doc.rust-lang.org/rustc-guide/tests/intro.html)]
+> [来源: [Rust Testing Best Practices](https://doc.rust-lang.org/rustc-guide/tests/intro.html)]
 
 ---
 
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
 | [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式学习 |
+| [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) | ✅ 一级 | 测试入门 |
+| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
+| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
 | [RFC Book](https://rust-lang.github.io/rfcs/) | ✅ 一级 | RFC 文档 |
 | [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) | ✅ 二级 | 实践配方 |
 | [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
-| [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
-| [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
-| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-|:---|:---:|:---|
-| [TRPL Ch11 — Testing](https://doc.rust-lang.org/book/ch11-00-testing.html) | ✅ 一级 | 测试入门 |
 | [mockall](https://docs.rs/mockall/latest/mockall/) | ✅ 一级 | Mock 框架 |
 | [proptest](https://docs.rs/proptest/latest/proptest/) | ✅ 一级 | 属性测试 |
 | [cargo-fuzz](https://github.com/rust-fuzz/cargo-fuzz) | ✅ 一级 | 模糊测试 |
 | [Miri](https://github.com/rust-lang/miri) | ✅ 一级 | UB 检测 |
 | [loom](https://docs.rs/loom/latest/loom/) | ✅ 一级 | 并发测试 |
+| [Rust Testing Guide](https://doc.rust-lang.org/rust-by-example/testing.html) | ✅ 一级 | 测试指南 |
 
 ---
 

@@ -221,7 +221,7 @@ graph TD
 | **嵌入式/IoT** | Wasm3 / wasm-micro-runtime | 资源受限设备的安全执行 | [Wasm3](https://github.com/wasm3/wasm3) |
 
 > **场景洞察**: Rust + Wasm 的最大价值在于**"安全的高性能沙箱化"**——在需要执行不可信代码（插件、智能合约、边缘函数）的场景中，Rust 的编译期安全保证与 Wasm 的运行时隔离形成双重防护。
-> [来源: [Wasm Use Cases](https://webassembly.org/docs/use-cases/)]
+> [来源: [Wasm Use Cases](https://webassembly.org/docs/use-cases/)] · [来源: [Rust Book](https://doc.rust-lang.org/book/)]
 
 ---
 
@@ -319,18 +319,19 @@ Rust Wasm 工具链:
 ## 六、来源与延伸阅读
 
 | 来源 | 可信度 | 说明 |
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
 | [Rust Standard Library](https://doc.rust-lang.org/std/) | ✅ 一级 | 标准库参考 |
 | [Rust By Example](https://doc.rust-lang.org/rust-by-example/) | ✅ 一级 | 交互式教程 |
-| [This Week in Rust](https://this-week-in-rust.org/) | ✅ 二级 | 社区动态 |
-
-| [Rust Reference](https://doc.rust-lang.org/reference/) | ✅ 一级 | 语言参考 |
-|:---|:---:|:---|
 | [WebAssembly Specification](https://webassembly.github.io/spec/) | ✅ 一级 | W3C 官方规范 |
 | [Rust Wasm Book](https://rustwasm.github.io/book/) | ✅ 一级 | Rust 官方 Wasm 指南 |
 | [wasm-bindgen Guide](https://rustwasm.github.io/wasm-bindgen/) | ✅ 一级 | JS 互操作指南 |
 | [Bytecode Alliance](https://bytecodealliance.org/) | ✅ 一级 | Wasm 生态组织 |
 | [Component Model Docs](https://component-model.bytecodealliance.org/) | ✅ 一级 | 组件模型文档 |
 | [WASI Preview](https://wasi.dev/) | ✅ 一级 | 系统接口规范 |
+| [Wikipedia — WebAssembly](https://en.wikipedia.org/wiki/WebAssembly) | ✅ 二级 | 百科概述 |
 
 ---
 

@@ -128,7 +128,11 @@ graph TD
 | **形式化验证 / PL 研究** | L0 语义空间 → L4 全部 → L7 形式化方法 | 14-20 小时 |
 | **通过面试 / 快速上手** | L1 → L2 → L3 → L5 对比 → L6 模式 | 8-12 小时 |
 
-> **关键洞察**: 学习路径不是唯一的。本指南提供的是"最小阻力路径"——基于认知科学中的**前置依赖原则**和**间隔重复效应**设计 [来源: Make It Stick — Brown, Roediger & McDaniel / 2014; 核心论点: 间隔重复（spaced repetition）和检索练习（retrieval practice）比被动重读更有效; Willingham — *Why Don't Students Like School?* / 2009]。你可以随时跳转，但建议先完成某一层再进入下一层。
+> **关键洞察**: 学习路径不是唯一的。
+> 本指南提供的是"最小阻力路径"——基于认知科学中的**前置依赖原则**和**间隔重复效应**设计
+> [来源: Make It Stick — Brown, Roediger & McDaniel / 2014; 核心论点: 间隔重复（spaced repetition）和检索练习（retrieval practice）比被动重读更有效;
+> Willingham — *Why Don't Students Like School?* / 2009]。
+> 你可以随时跳转，但建议先完成某一层再进入下一层。
 
 ---
 

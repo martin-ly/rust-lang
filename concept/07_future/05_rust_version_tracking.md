@@ -576,8 +576,8 @@ timeline
 
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
-| **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](./open_enums_preview.md) |
-| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/borrowsanitizer_preview.md`](./borrowsanitizer_preview.md) · [borrowsanitizer.com](https://borrowsanitizer.com/) |
+| **Open Enums** | nightly 实验 (GitHub #156628) | 2027+ | ✅ 已创建 | [`concept/07_future/open_enums_preview.md`](./25_open_enums_preview.md) |
+| **BorrowSanitizer** | 原型阶段（~80% Miri 测试通过） | 2027+ | ✅ 已创建 | [`concept/07_future/borrowsanitizer_preview.md`](./20_borrowsanitizer_preview.md) · [borrowsanitizer.com](https://borrowsanitizer.com/) |
 | **MC/DC Coverage** | rustc 跟踪中 (rust#124656) | 2026–2027 | ✅ 已创建 | [`concept/07_future/07_mcdc_coverage_preview.md`](./07_mcdc_coverage_preview.md) · `docs/04_research/safety_critical_alignment_2026.md` §5 |
 | **cargo-semver-checks** | 社区工具，计划合并 cargo | 2026–2027 | 🔴 缺失 | 待加入工具链跟踪 |
 | **Cargo plumbing commands** | 原型 | 2027+ | 🔴 缺失 | 待加入工具链跟踪 |

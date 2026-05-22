@@ -1,0 +1,647 @@
+# Rust 2027 Edition 及未来路线图
+
+> **Bloom 层级**: 分析 → 评价
+> **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步 Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
+> **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
+> **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)
+
+---
+
+> **来源**: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) · [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) · [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) · [RFC 3185 — Static Async Traits](https://github.com/rust-lang/rfcs/pull/3185) · [RFC 2515 — Type Alias Impl Trait](https://github.com/rust-lang/rfcs/pull/2515) · [Rust Internals — 2027 Edition Wishlist](https://internals.rust-lang.org/) · [Rust Foundation Roadmap](https://foundation.rust-lang.org/) · [The Rust Programming Language](https://doc.rust-lang.org/book/) · [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516)
+
+## 📑 目录
+
+- [Rust 2027 Edition 及未来路线图](#rust-2027-edition-及未来路线图)
+  - [📑 目录](#-目录)
+  - [一、核心概念：Edition 2027 的设计空间](#一核心概念edition-2027-的设计空间)
+    - [1.1 Edition 演进节奏与政策](#11-edition-演进节奏与政策)
+    - [1.2 候选特性概览](#12-候选特性概览)
+    - [1.3 特性依赖与 Edition 2027 关联图](#13-特性依赖与-edition-2027-关联图)
+  - [二、类型系统前沿](#二类型系统前沿)
+    - [2.1 Specialization 稳定化](#21-specialization-稳定化)
+    - [2.2 Type Alias Impl Trait (TAIT)](#22-type-alias-impl-trait-tait)
+    - [2.3 可移植 SIMD (std::simd)](#23-可移植-simd-stdsimd)
+  - [三、异步与执行模型](#三异步与执行模型)
+    - [3.1 Async Traits 与静态分发](#31-async-traits-与静态分发)
+    - [3.2 Async Drop 与生命周期](#32-async-drop-与生命周期)
+    - [3.3 Custom Allocators 稳定化](#33-custom-allocators-稳定化)
+  - [四、语言级语法演进](#四语言级语法演进)
+    - [4.1 gen/kw：生成器关键字扩展](#41-genkw生成器关键字扩展)
+    - [4.2 Open Enums 与可扩展枚举](#42-open-enums-与可扩展枚举)
+    - [4.3 Effects System 与关键字泛型](#43-effects-system-与关键字泛型)
+  - [五、工具链与生态基础设施](#五工具链与生态基础设施)
+    - [5.1 BorrowSanitizer 工业化](#51-borrowsanitizer-工业化)
+    - [5.2 Cranelift 后端与编译速度](#52-cranelift-后端与编译速度)
+    - [5.3 Rust 规范文档化](#53-rust-规范文档化)
+  - [六、反命题与边界分析](#六反命题与边界分析)
+    - [6.1 反命题树](#61-反命题树)
+    - [6.2 边界极限](#62-边界极限)
+  - [七、常见陷阱](#七常见陷阱)
+  - [八、来源与延伸阅读](#八来源与延伸阅读)
+  - [相关概念文件](#相关概念文件)
+
+---
+
+## 一、核心概念：Edition 2027 的设计空间
+
+### 1.1 Edition 演进节奏与政策
+
+```text
+Rust Edition 时间线:
+
+  已发布:
+  ├── 2015 Edition: 初始稳定版本
+  ├── 2018 Edition: NLL, async/await, module 系统简化
+  ├── 2021 Edition: 预导入 panic, disjoint capture, IntoIterator for arrays
+  └── 2024 Edition: gen blocks, never type (!), RPIT lifetime capture
+
+  计划中:
+  └── 2027 Edition: 预计 2027 年发布（每 3 年周期）
+
+  Edition 选择政策:
+  ├── 不改变已有代码语义（除非显式切换 Edition）
+  ├── 同一编译器支持多 Edition 混编
+  ├── 新特性不一定需要新 Edition（大部分通过稳定化流程）
+  └── Edition 仅用于需要语法/语义 break 的特性
+```
+
+> **认知功能**: **Edition 是 Rust 语言演进的"节奏器"**——每 3 年一次的窗口允许必要的向后不兼容变更，同时保证生态整体连续性。
+> [来源: [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)]
+
+**Rust Foundation 2026–2027 战略重点**：
+
+```text
+Foundation 战略支柱:
+├── 开发者体验: 编译时间、IDE 响应、错误消息质量
+├── 安全与可靠: 形式化验证工具链、安全审计支持
+├── 生态可持续性: Crates.io 基础设施、供应链安全
+├── 教育与入职: 学习曲线平缓化、文档质量
+└── 行业采用: 嵌入式、操作系统、AI/ML 绑定
+```
+
+> **Foundation 视角**: 2027 Edition 不仅是语言特性集合，更是**生态成熟度的里程碑**——Foundation 的资源分配直接影响哪些特性获得优先工程支持。
+> [来源: [Rust Foundation Roadmap 2026](https://foundation.rust-lang.org/news/)]
+
+---
+
+### 1.2 候选特性概览
+
+```text
+2027 Edition 及远期候选特性矩阵:
+
+  类型系统:
+  ├── Specialization (RFC 1210) — 允许重叠 impl，更特化优先
+  ├── TAIT (RFC 2515) — type alias impl trait，命名隐藏类型
+  ├── GATs 完善 — 关联类型泛型参数的稳定化后续
+  └── Effects / Keyword Generics — 泛化 async/const/unsafe
+
+  异步:
+  ├── Async Traits (RFC 3185) — 原生 async fn in trait
+  ├── Async Drop — 异步析构语义
+  ├── Async Closures — 已稳定 1.85，后续扩展
+  └── Gen blocks — 已纳入 2024 Edition，后续 kw 扩展
+
+  系统编程:
+  ├── Custom Allocators (RFC 1398) — 全局/每类型自定义分配器
+  ├── Portable SIMD (RFC 3086) — std::simd 跨平台向量指令
+  ├── Naked Functions — 已稳定 1.88
+  └── Unsafe 语义精细化 — unsafe_op_in_unsafe_fn 等
+
+  工具链:
+  ├── BorrowSanitizer — 运行时借用检查工业化
+  ├── Cranelift 后端 — debug 构建编译加速
+  ├── Parallel Frontend — 编译器前端并行化
+  └── Rust Specification — 语言规范文档化
+```
+
+> **关键洞察**: **并非所有候选特性都需要 Edition 2027**——许多特性通过常规稳定化流程即可发布。Edition 窗口仅用于需要语法 break 或大规模迁移的特性。
+> [来源: [Rust Internals — Edition Planning](https://internals.rust-lang.org/)]
+
+### 1.3 特性依赖与 Edition 2027 关联图
+
+```mermaid
+graph TD
+    E2027["Edition 2027<br/>预计 2027 发布"] -->|可能包含| GEN["gen/kw 扩展"]
+    E2027 -->|可能包含| EFF["Effects System 初探"]
+    E2027 -->|工具链| CRA["Cranelift 默认 debug 后端"]
+
+    STAB["常规稳定化<br/>不依赖 Edition"] -->|预计 2026–2027| SPEC["Specialization"]
+    STAB -->|预计 2026–2027| SIMD["Portable SIMD"]
+    STAB -->|预计 2026–2027| ALLOC["Custom Allocators"]
+    STAB -->|预计 2026–2027| TAIT["TAIT"]
+    STAB -->|预计 2026+| ASYNC_D["Async Drop"]
+    STAB -->|预计 2026+| ASYNC_DYN["Async dyn Trait"]
+
+    RESEARCH["远期研究<br/>2028+"] --> EFF
+    RESEARCH --> OPEN["True Open Enums"]
+    RESEARCH --> ROW["Row Polymorphism"]
+
+    SPEC -.->|依赖| CHALK["Chalk 求解器"]
+    TAIT -.->|依赖| IMPL_TRAIT["impl Trait 完善"]
+    ASYNC_DYN -.->|依赖| ASYNC_TRAIT["Async Trait 基础"]
+
+    style E2027 fill:#e3f2fd
+    style STAB fill:#c8e6c9
+    style RESEARCH fill:#fff3e0
+```
+
+> **认知功能**: 此图区分三类特性演进路径——**常规稳定化**（不依赖 Edition）、**Edition 2027 候选**（需要语法 break 或生态协调）、**远期研究**（无明确时间表）。虚线表示技术依赖关系。
+> **使用建议**: 技术规划时优先关注"常规稳定化"路径的特性；仅在需要语法 break 时考虑 Edition 2027 窗口。
+> [来源: 💡 原创分析]
+
+---
+
+## 二、类型系统前沿
+
+### 2.1 Specialization 稳定化
+
+特化（Specialization）允许为特定类型提供比泛型实现更精确的 Trait 实现：
+
+```rust,ignore
+// 假设特化已稳定（当前 nightly only）
+impl<T: Debug> ToDebug for T {
+    default fn to_debug(&self) -> String {
+        format!("{:?}", self)
+    }
+}
+
+impl ToDebug for String {
+    fn to_debug(&self) -> String {
+        self.clone()  // 更高效的特化实现
+    }
+}
+```
+
+**稳定化障碍**（截至 2026）：
+
+```text
+阻塞问题:
+├── Lifetime 特化排序 — impl<T> Foo for T vs impl<T> Foo for &T
+├── 关联类型投影 soundness — 特化改变关联类型的类型安全
+├── Chalk 求解器集成 — 新 Trait 求解器需完全支持特化语义
+└── min_specialization 经验 — 标准库内部使用的简化版已积累实践经验
+```
+
+> **技术评价**: 特化的稳定化挑战**不在语法，而在类型系统 soundness**。关联类型与生命周期交互的 corner case 是主要阻塞因素。预计 **2027–2028** 完成稳定化。
+> [来源: [RFC 1210](https://github.com/rust-lang/rfcs/pull/1210)] · [来源: [Tracking Issue #31844](https://github.com/rust-lang/rust/issues/31844)]
+
+---
+
+### 2.2 Type Alias Impl Trait (TAIT)
+
+TAIT 允许在类型别名中命名 `impl Trait` 隐藏的具体类型：
+
+```rust,ignore
+// 当前: 返回位置 impl Trait (RPIT)
+fn make_iter() -> impl Iterator<Item = i32> {
+    vec![1, 2, 3].into_iter()
+}
+
+// TAIT 目标: 在类型别名中命名隐藏类型
+type MyIter = impl Iterator<Item = i32>;
+
+fn make_iter() -> MyIter {
+    vec![1, 2, 3].into_iter()
+}
+
+// 用途 1: 递归类型
+ type BoxedFuture<T> = impl Future<Output = T>;
+ fn recursive() -> BoxedFuture<i32> {
+     async { recursive().await }
+ }
+
+// 用途 2: 跨模块暴露有限类型信息
+```
+
+> **认知功能**: TAIT 填补了 Rust **存在类型（existential types）**的表达能力缺口——允许在模块/私有边界内命名隐藏类型，同时对外保持抽象。
+> [来源: [RFC 2515](https://github.com/rust-lang/rfcs/pull/2515)] · [来源: [Rust Internals — TAIT Status](https://internals.rust-lang.org/)]
+
+**TAIT 与 `type_alias_impl_trait` feature**：
+
+| 维度 | RPIT (稳定) | TAIT (开发中) |
+|:---|:---|:---|
+| 语法位置 | 函数返回类型 | 类型别名定义 |
+| 递归支持 | ❌ 有限 | ✅ 核心用例 |
+| 可见性控制 | 函数边界 | 模块边界 |
+| 稳定化预测 | ✅ 已稳定 | 🟡 2026–2027 |
+
+> **来源**: [Rust Reference — Types](https://doc.rust-lang.org/reference/types/impl-trait.html)
+
+---
+
+### 2.3 可移植 SIMD (std::simd)
+
+Portable SIMD 提供跨平台向量指令抽象：
+
+```rust,ignore
+#![feature(portable_simd)]
+use std::simd::{Simd, f32x4};
+
+fn vector_add(a: &[f32], b: &[f32], c: &mut [f32]) {
+    // 4 元素宽度的 SIMD 向量
+    let va = f32x4::from_slice(&a[0..4]);
+    let vb = f32x4::from_slice(&b[0..4]);
+    let vc = va + vb;  // 单条 SIMD 加法指令
+    c[0..4].copy_from_slice(&vc.to_array());
+}
+```
+
+**工程状态**（2026）：
+
+```text
+std::simd 状态:
+├── core::simd 已存在于 nightly 多年
+├── 主要阻塞: API 设计稳定性（元素宽度、掩码类型、水平操作）
+├── 架构覆盖: x86/SSE/AVX, ARM/NEON, WASM SIMD, RISC-V
+├── 与 auto-vectorization 的关系: SIMD 显式控制补充而非替代编译器自动向量化
+└── 预计稳定: 2026–2027（不依赖 Edition）
+```
+
+> **评价**: Portable SIMD 是 Rust **系统编程野心**的关键指标——向 C++ 的 `std::simd` (TS) 和 ISPC 看齐，同时保持零成本抽象和类型安全。
+> [来源: [RFC 3086](https://github.com/rust-lang/rfcs/pull/3086)] · [来源: [std::simd tracking](https://github.com/rust-lang/rust/issues/86656)]
+
+---
+
+## 三、异步与执行模型
+
+### 3.1 Async Traits 与静态分发
+
+Rust 1.75 已稳定 `async fn` in trait，但仍有重要限制：
+
+```rust
+// Rust 1.75+ 已支持（静态分发）
+trait AsyncProcessor {
+    async fn process(&self, input: Vec<u8>) -> Result<String, Box<dyn std::error::Error>>;
+}
+
+// 剩余限制 1: 不允许 dyn Trait
+// fn use_dyn(p: &dyn AsyncProcessor) { ... }  // ❌ 编译错误
+
+// 剩余限制 2: 关联类型中的 impl Future
+// trait Stream { async fn next(&mut self) -> Option<Self::Item>; }
+// 隐式返回类型无法完全控制 Send 边界
+```
+
+**2027 目标**: 完整 `dyn AsyncProcessor` 支持 + Send-bound 控制。
+
+> **技术要点**: `async fn in trait` 的稳定化通过 **RPITIT（Return Position Impl Trait In Traits）** 实现。`dyn` 支持需要解决**对象安全（object safety）**与**异步状态机大小**问题。
+> [来源: [RFC 3185](https://github.com/rust-lang/rfcs/pull/3185)] · [来源: [Rust Blog — Async Fn in Traits](https://blog.rust-lang.org/)]
+
+---
+
+### 3.2 Async Drop 与生命周期
+
+Async Drop 解决异步资源清理的核心需求：
+
+```rust,ignore
+// 假设的 async drop 语法（研究中）
+struct DbConnection { ... }
+
+impl AsyncDrop for DbConnection {
+    async fn drop(&mut self) {
+        self.flush().await;
+        self.close().await;
+    }
+}
+
+// 当前 workaround: 显式 async cleanup 方法
+impl DbConnection {
+    async fn close(self) -> Result<()> { ... }
+}
+// 风险: 用户可能忘记调用 close，导致资源泄漏
+```
+
+**设计挑战**:
+
+```text
+Async Drop 难题:
+├── 调用位置: 变量离开作用域时隐式 await？
+├── 死区（drop glue）: 编译器生成的隐式 drop 代码如何处理 async？
+├── 恐慌安全: async drop 中 panic 的语义
+├── 与 Pin 的交互: 已 Pin 的值 async drop 是否安全
+└── 性能: 隐式 await 可能引入意外的执行点
+```
+
+> **来源**: [Async Drop Tracking Issue](https://github.com/rust-lang/rust/issues/126534) · [来源: [Rust Internals — Async Drop Design](https://internals.rust-lang.org/)]
+
+---
+
+### 3.3 Custom Allocators 稳定化
+
+自定义分配器允许替换全局或特定类型的内存分配策略：
+
+```rust,ignore
+#![feature(allocator_api)]
+
+use std::alloc::{Allocator, GlobalAlloc, Layout, System};
+
+// 全局替换（已稳定 via #[global_allocator]）
+#[global_allocator]
+static GLOBAL: MyAllocator = MyAllocator;
+
+// 每类型分配器（开发中）
+struct ArenaVec<T, A: Allocator = Global> {
+    buf: RawVec<T, A>,
+}
+
+// 使用特定分配器
+let arena = bumpalo::Bump::new();
+let vec: Vec<u8, &bumpalo::Bump> = Vec::new_in(&arena);
+```
+
+**稳定化路径**:
+
+| 特性 | 状态 | 预计 |
+|:---|:---|:---:|
+| `#[global_allocator]` | ✅ 稳定 | — |
+| `Allocator` trait in std | 🟡 接近稳定 | 2026–2027 |
+| `Vec<T, A>` / `Box<T, A>` | 🟡 nightly | 2027+ |
+| 默认泛型参数 `A = Global` | ✅ 已稳定支持 | — |
+
+> **生态影响**: Custom Allocators 稳定化将**解锁游戏引擎、嵌入式系统、高频交易**等领域的零成本 arena/bump 分配——当前这些场景依赖不稳定的 `allocator_api` 或第三方 hack。
+> [来源: [RFC 1398](https://github.com/rust-lang/rfcs/pull/1398)] · [来源: [allocator_api tracking](https://github.com/rust-lang/rust/issues/32838)]
+
+---
+
+## 四、语言级语法演进
+
+### 4.1 gen/kw：生成器关键字扩展
+
+2024 Edition 引入 `gen {}` 块简化生成器语法。远期讨论扩展 `gen` 作为更通用的效果关键字：
+
+```rust,ignore
+// Rust 1.95+ (2024 Edition)
+let gen = gen {
+    yield 1;
+    yield 2;
+    yield 3;
+};
+
+// 远期讨论: gen fn / gen closure
+// gen fn count_to(n: i32) -> impl Iterator<Item = i32> {
+//     for i in 0..n { yield i; }
+// }
+
+// 与 async 的对称性:
+// async {}  → 异步块  → Future
+// gen {}    → 生成器块 → Iterator
+// async gen {} → 异步生成器 → AsyncIterator (Stream)
+```
+
+> **设计哲学**: `gen` 关键字的引入遵循 Rust **语法对称性**原则——`async` 对应 `Future`，`gen` 对应 `Iterator`。远期可能探索 `async gen` 统一异步流。
+> [来源: [RFC 3516](https://github.com/rust-lang/rfcs/pull/3516)] · [来源: [Rust Edition Guide — gen blocks](https://doc.rust-lang.org/edition-guide/rust-2024/gen-blocks.html)]
+
+---
+
+### 4.2 Open Enums 与可扩展枚举
+
+Rust 当前通过 `#[non_exhaustive]` 实现枚举的向后兼容扩展，但**非真正的开放枚举**：
+
+```rust
+// 当前: #[non_exhaustive]（编译期契约，运行时封闭）
+#[non_exhaustive]
+pub enum Event { Click, KeyPress }
+
+// 远期研究: 开放枚举允许跨 crate 扩展变体
+// 尚处于早期设计讨论阶段，无 RFC
+```
+
+**2027 预期**: `#[non_exhaustive]` 仍然是官方推荐路径。真正的开放枚举需要解决**穷尽性检查**与**零成本抽象**的根本张力。
+
+> **来源**: [RFC 2008](https://github.com/rust-lang/rfcs/pull/2008) · [来源: [Open Enums Discussion](https://internals.rust-lang.org/)]
+
+---
+
+### 4.3 Effects System 与关键字泛型
+
+Effects System（效果系统）是 Rust 远期最具雄心的类型系统扩展：
+
+```text
+效果系统愿景:
+
+  当前痛点:
+  ├── async fn / const fn / unsafe fn 语法不统一
+  ├── 无法泛化"效果"——如 async + const 组合
+  ├── 每个效果关键字都是硬编码的语言特性
+  └── 代码重复: async_trait crate, async_closure, const_trait_impl 各自为政
+
+  理想设计（研究中）:
+  fn<T, E: Effect> process() -> E::Wrap<i32> { ... }
+  // E 可以是 Async, Const, Identity（普通）
+  // 单一实现适配多种效果上下文
+
+  现实路径:
+  ├── 短期: 逐个稳定化 async/const/unsafe 特性
+  ├── 中期: 提取通用模式，减少重复实现
+  └── 长期: 可能引入效果系统，但 2027 前无明确 RFC
+```
+
+> **评价**: Effects System 是 Rust 的 **"圣杯"级特性**——统一 async/const/unsafe 的泛型抽象。但设计复杂度极高，涉及类型论中的 **algebraic effects** 和 **row polymorphism**。2027 Edition **极不可能**包含完整效果系统。
+> [来源: [Rust Effects System Pre-RFC](https://github.com/rust-lang/rfcs/pull/)] · [来源: [Rust Internals — Keyword Generics](https://internals.rust-lang.org/)]
+
+---
+
+## 五、工具链与生态基础设施
+
+### 5.1 BorrowSanitizer 工业化
+
+BorrowSanitizer 将 Miri 的 UB 检测能力扩展到编译后二进制：
+
+```text
+BorrowSanitizer 里程碑（2026 状态）:
+├── Pre-RFC / MCP #958: ✅ 发布
+├── Shadow Stack 实现: ✅ 完成
+├── Miri 测试套件通过率: 🟡 ~80%
+├── LLVM 组件 RFC: 🟡 起草中
+├── 垃圾回收 / 原子内存: 🔴 未完成
+└── Nightly 可用: 🔴 预计 2026 Q4+
+```
+
+> **2027 展望**: BorrowSanitizer 可能在 **2027 年进入 nightly 试验阶段**，但稳定化预计需要更长时间。参考 AddressSanitizer 的历史：从原型到稳定用了约 3–4 年。
+> [来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)] · [来源: [borrowsanitizer.com](https://borrowsanitizer.com/)]
+
+---
+
+### 5.2 Cranelift 后端与编译速度
+
+Cranelift 作为 debug 构建的替代后端，显著缩短编译时间：
+
+```text
+Cranelift 状态 (rustc_codegen_cranelift):
+├── 功能完整性: 🟡 ~95% Rust 特性支持
+├── debug 构建加速: ✅ 2–5x 更快（实测）
+├── 默认集成: 🔴 未默认，需 -Zcodegen-backend=cranelift
+├── 发布构建: ❌ 优化级别不及 LLVM
+└── 预计默认启用: 2027+（可能作为 Edition 2027 的默认 debug 后端）
+```
+
+> **生态意义**: Cranelift 默认化将**根本性改善 Rust "编译慢"的公众印象**——debug 循环的 2–5x 加速对新开发者体验影响巨大。
+> [来源: [Rust Project Goals — Cranelift](https://rust-lang.github.io/rust-project-goals/2026/)]
+
+---
+
+### 5.3 Rust 规范文档化
+
+Rust 语言规范（The Rust Specification）是 2026–2027 的旗舰目标之一：
+
+```text
+规范文档化目标:
+├── 当前: Rust Reference 是"非规范性的"事实参考
+├── 目标: 发布经 Ferrocene 工业验证的语言规范
+├── Ferrocene: 已提供 ISO 26262 / IEC 61508 合规的 Rust 子集规范
+├──  gaps: unsafe 语义、并发模型、FFI 边界仍在细化
+└── 预计初版: 2026–2027
+```
+
+> **来源**: [Rust Specification Project](https://rust-lang.github.io/rust-project-goals/2026/Rust-specification.html) · [来源: [Ferrocene](https://ferrocene.dev/)]
+
+---
+
+## 六、反命题与边界分析
+
+### 6.1 反命题树
+
+```mermaid
+graph TD
+    ROOT["命题: 项目应等待 2027 Edition 再采用新特性"]
+    ROOT --> Q1{"特性是否在 Edition 2024 已可用?"}
+    Q1 -->|是| USE_NOW["✅ 立即使用 — 无需等待"]
+    Q1 -->|否| Q2{"特性是否通过常规稳定化发布?"}
+
+    Q2 -->|是| Q3{"是否解决关键痛点?"}
+    Q2 -->|否| Q4{"是否需要 Edition break?"}
+
+    Q3 -->|是| USE_NOW
+    Q3 -->|否| WAIT["⚠️ 评估成本收益"]
+
+    Q4 -->|是| PLAN_2027["✅ 规划 2027 Edition 迁移"]
+    Q4 -->|否| WAIT
+
+    style USE_NOW fill:#c8e6c9
+    style PLAN_2027 fill:#c8e6c9
+    style WAIT fill:#fff3e0
+```
+
+> **认知功能**: 此决策树帮助技术决策者判断**何时采用新特性**——大多数特性不需要等待 Edition，Edition 仅用于需要 break 的变更。
+> **使用建议**: 对 async traits、TAIT、portable SIMD 等特性，关注其常规稳定化进度；对语法 break 类特性（如保留关键字变更），规划 Edition 迁移。
+> [来源: [Rust Edition Guide — When to Migrate](https://doc.rust-lang.org/edition-guide/)]
+
+---
+
+### 6.2 边界极限
+
+```text
+边界 1: 稳定化预测的不确定性
+├── 特性时间表基于当前信息，可能变化
+├── 依赖 nightly feature 的项目需承担不稳定性风险
+└── 缓解: 使用 cfg 保护，保持 fallback 实现
+
+边界 2: 生态碎片化风险
+├── 不同项目采用不同 Edition 和特性集合
+├── 库作者需维护多 Edition 兼容性
+└── 缓解: 库 crate 延迟采用最新 Edition，优先保持兼容性
+
+边界 3: 学习曲线加速
+├── 新特性增加语言表面积
+├── 新开发者面临更多概念
+└── 缓解: Foundation 投资教育材料，社区维护学习路径
+
+边界 4: 编译器复杂度
+├── 每增加一个特性，编译器维护负担增加
+├── 某些特性（effects system）可能重构类型系统核心
+└── 缓解: 严格的 RFC 流程、Crater 测试、渐进式稳定化
+
+边界 5: 行业认证与规范
+├── 安全关键行业（汽车、航空）需要稳定规范
+├── 新特性进入规范需要额外验证周期
+└── 缓解: Ferrocene 等商业供应商提供认证子集
+```
+
+> **边界要点**: 2027 Edition 的边界与**预测不确定性**、**生态兼容性**、**学习成本**、**编译器复杂度**和**行业认证**相关。这些边界限制了 Rust 的演进速度，也是语言质量的根本保障。
+> [来源: [Rust RFC Process](https://rust-lang.github.io/rfcs/)] · [来源: [Crater](https://github.com/rust-lang/crater)]
+
+---
+
+## 七、常见陷阱
+
+```text
+陷阱 1: 假设所有候选特性都会进入 2027 Edition
+  ❌ "等 2027 Edition 出了再用 async traits"
+     // 实际上 async traits 已通过常规流程稳定（1.75+）
+
+  ✅ 区分"Edition 特性"和"常规稳定化特性"
+     // 大部分特性不依赖 Edition
+
+陷阱 2: 在稳定代码中依赖 nightly feature
+  ❌ #![feature(specialization)] 用于生产库
+     // 阻塞 rustc 升级，用户被迫使用 nightly
+
+  ✅ 仅在实验性分支使用 nightly，稳定路径提供 fallback
+     // 或用 cfg 保护: #[cfg(feature = "unstable")]
+
+陷阱 3: 忽略 Edition 迁移成本
+  ❌ 大型 monorepo 一次性切换 Edition
+     // 数千个编译错误同时出现
+
+  ✅ 渐进式迁移: crate-by-crate，利用 cargo fix
+     // 先在叶子 crate 试验，再向上游推进
+
+陷阱 4: 过度预测"下个大特性"
+  ❌ 架构设计围绕 effects system 展开
+     // effects system 2027 前无 RFC，可能大幅变化
+
+  ✅ 基于当前稳定特性设计，为未来扩展预留接口
+     // 好的抽象不依赖特定语言特性
+
+陷阱 5: 低估规范/认证需求
+  ❌ 安全关键项目采用最新 nightly 特性
+     // 无法通过 ISO 26262 认证
+
+  ✅ 使用 Ferrocene 认证子集，或等待规范确认
+     // 安全关键项目滞后" bleeding edge" 2–3 年
+```
+
+> **陷阱总结**: 2027 Edition 规划的陷阱主要与**特性分类误解**、**nightly 依赖**、**迁移策略**、**过度预测**和**认证需求**相关。
+> [来源: [Rust Edition Guide — Migration](https://doc.rust-lang.org/edition-guide/editions/transitioning-an-existing-project-to-a-new-edition.html)]
+
+---
+
+## 八、来源与延伸阅读
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/) | ✅ 一级 | 官方 Edition 机制说明 |
+| [Rust Project Goals](https://rust-lang.github.io/rust-project-goals/) | ✅ 一级 | 官方年度项目目标 |
+| [RFC 1210 — Specialization](https://github.com/rust-lang/rfcs/pull/1210) | ✅ 一级 | 特化机制 RFC |
+| [RFC 2515 — TAIT](https://github.com/rust-lang/rfcs/pull/2515) | ✅ 一级 | 类型别名 impl trait |
+| [RFC 3086 — Portable SIMD](https://github.com/rust-lang/rfcs/pull/3086) | ✅ 一级 | 可移植 SIMD |
+| [RFC 1398 — Global Allocators](https://github.com/rust-lang/rfcs/pull/1398) | ✅ 一级 | 全局分配器 |
+| [RFC 3185 — Async Traits](https://github.com/rust-lang/rfcs/pull/3185) | ✅ 一级 | 异步 Trait |
+| [RFC 3516 — gen blocks](https://github.com/rust-lang/rfcs/pull/3516) | ✅ 一级 | 生成器语法 |
+| [Rust Foundation Roadmap](https://foundation.rust-lang.org/news/) | ✅ 一级 | 基金会战略 |
+| [The Rust Programming Language](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
+| [Rust Internals Forum](https://internals.rust-lang.org/) | ⚠️ 二级 | 设计讨论 |
+| [Ferrocene Specification](https://ferrocene.dev/) | ✅ 一级 | 工业级 Rust 规范 |
+
+---
+
+## 相关概念文件
+
+- [Edition Guide](23_rust_edition_guide.md) — Edition 机制与迁移策略
+- [BorrowSanitizer Preview](20_borrowsanitizer_preview.md) — 运行时借用检查工业化路径
+- [Specialization Preview](26_specialization_preview.md) — Trait 特化机制深度分析
+- [Open Enums Preview](25_open_enums_preview.md) — 可扩展枚举的设计空间
+- [Version Tracking](./05_rust_version_tracking.md) — 版本特性演进跟踪
+- [Evolution](./03_evolution.md) — 语言演进机制
+- [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Edition Guide](https://doc.rust-lang.org/edition-guide/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建 [来源: Authority Source Sprint Batch 11]
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成

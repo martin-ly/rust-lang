@@ -7,7 +7,7 @@
 
 ---
 
-### 〇、L7 认知入口
+## 〇、L7 认知入口
 
 ```mermaid
 mindmap
@@ -34,8 +34,9 @@ mindmap
 > **使用建议**: 从三大分支（AI 集成、形式化方法、语言演进）中选择切入点，再深入对应子文件。
 > **关键洞察**: AI、形式化、演进并非孤立趋势，而是相互约束、共同塑造 Rust 未来形态的**协同三角**。
 > [来源: 💡 原创分析]
-
-> **认知路径**: 本 mindmap 展示 L7 层的**演进预测**。AI 集成反向约束 L3 Unsafe 的精确性，形式化方法工业化为 L4 RustBelt 提供工具出口，语言演进扩展 L2 的泛型和 Trait 系统。L7 的独特特征：**反向驱动**——不是 L1-L6 的递进，而是对下层的反馈和约束。
+> **认知路径**: 本 mindmap 展示 L7 层的**演进预测**。
+> AI 集成反向约束 L3 Unsafe 的精确性，形式化方法工业化为 L4 RustBelt 提供工具出口，语言演进扩展 L2 的泛型和 Trait 系统。
+> L7 的独特特征：**反向驱动**——不是 L1-L6 的递进，而是对下层的反馈和约束。
 
 ## 一、本层概念关系图（完整版）
 
@@ -133,8 +134,8 @@ graph TB
 | [02_formal_methods.md](./02_formal_methods.md) | 形式化方法工业化 | Code-Level + System-Level 验证、PObserve、CI 集成 | ✅ v1.0 | L4 RustBelt, L6 工具链, L3 Unsafe | L4 验证范围扩展 |
 | [03_evolution.md](./03_evolution.md) | 语言演进 | Edition、RFC、Const 泛型、GATs、Effects、特化 | ✅ v1.0 | L2 Trait/Generics, L5 范式定位 | L2 特性扩展 |
 | [05_rust_version_tracking.md](./05_rust_version_tracking.md) | 版本特性演进 | 1.79–1.95+ 形式模型维度跟踪、五个趋势、前沿矩阵 | ✅ v1.0 | L1-L4 全部概念 | L1-L4 概念更新驱动 |
-| [open_enums_preview.md](./open_enums_preview.md) | 开放枚举预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
-| [borrowsanitizer_preview.md](./borrowsanitizer_preview.md) | BorrowSanitizer 预研 | Shadow Stack、运行时借用检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
+| [25_open_enums_preview.md](./25_open_enums_preview.md) | 开放枚举预研 | `#[non_exhaustive]` 形式化语义、跨语言对比、API 设计模式 | ✅ v1.0 | L1 Type System, L2 Traits | L1 穷尽性检查语义演进 |
+| [20_borrowsanitizer_preview.md](./20_borrowsanitizer_preview.md) | BorrowSanitizer 预研 | Shadow Stack、运行时借用检查、与 Miri 对比 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 检测工具化 |
 | [07_mcdc_coverage_preview.md](./07_mcdc_coverage_preview.md) | MC/DC Coverage 预研 | 安全关键覆盖率验证、DO-178C/ISO 26262 合规 | ✅ v1.0 | L3 Unsafe, L1 Type System | L6 安全关键应用 |
 | [08_safety_tags_preview.md](./08_safety_tags_preview.md) | Safety Tags 预研 | Unsafe 契约机器可读标注、AI 生成安全边界 | ✅ v1.0 | L3 Unsafe, L1 Ownership | L3 Unsafe 契约工具化 |
 | [09_parallel_frontend_preview.md](./09_parallel_frontend_preview.md) | 并行前端编译预研 | 查询系统并行化、类型检查并行化、编译时间优化 | ✅ v1.0 | L6 Toolchain, L3 Concurrency | L6 编译工具链性能演进 |
@@ -147,7 +148,7 @@ graph TB
 | [16_cranelift_backend_preview.md](./16_cranelift_backend_preview.md) | Cranelift 后端预研 | 快速调试编译、LLVM 替代后端 | ✅ v1.0 | L6 Toolchain | L6 编译工具链扩展 |
 | [17_rust_specification_preview.md](./17_rust_specification_preview.md) | Rust 语言规范预研 | 形式化规范演进、Ferrocene 先行探索 | ✅ v1.0 | L4 Formal, L7 Future | L4-L7 规范桥梁 |
 | [18_async_drop_preview.md](./18_async_drop_preview.md) | Async Drop 预研 | 异步资源销毁、RFC 3308、Pin 交互、workaround 模式 | ⚠️ nightly | L3 Async, L3 Pin | 异步生态完善 |
-| [19_specialization_preview.md](./19_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
+| [26_specialization_preview.md](./26_specialization_preview.md) | Specialization 预研 | Trait 实现特化、重叠 impl、min_specialization | ⚠️ nightly | L2 Trait, L2 Generics | 泛型表达能力扩展 |
 | [04_effects_system.md](./04_effects_system.md) | 效果系统预研 | Effect 类型论、Rust 现有 effect 映射、跨语言对比、演进路线 | ✅ v1.0 | L2 Trait, L3 Async, L4 Type Theory | L2-L3 效果统一化 |
 
 ---

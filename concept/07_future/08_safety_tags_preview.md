@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。
-> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [BorrowSanitizer](./borrowsanitizer_preview.md)
+> **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [BorrowSanitizer](./20_borrowsanitizer_preview.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [AI Integration](./01_ai_integration.md)
 
 ---
@@ -308,7 +308,7 @@ graph TD
 ## 相关概念文件
 
 - [Unsafe Rust](../03_advanced/03_unsafe.md) — Unsafe 边界与借用规则
-- [BorrowSanitizer](./borrowsanitizer_preview.md) — 运行时借用检查验证
+- [BorrowSanitizer](./20_borrowsanitizer_preview.md) — 运行时借用检查验证
 - [Formal Methods](./02_formal_methods.md) — 形式化验证工具链
 - [AI Integration](./01_ai_integration.md) — AI 生成代码的安全边界
 - [Version Tracking](./05_rust_version_tracking.md) — Rust 版本特性演进

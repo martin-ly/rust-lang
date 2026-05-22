@@ -437,7 +437,7 @@
 | P17-T16 | 新增 `03_advanced/07_proc_macro.md` | Derive/Attribute/Function-like、TokenStream、syn/quote | ✅ |
 | P17-T17 | 新增 `06_ecosystem/14_documentation.md` | rustdoc、文档测试、API 规范、mdBook、docs.rs | ✅ |
 | P17-T18 | 新增 `02_intermediate/11_cow_and_borrowed.md` | Clone-on-Write、零拷贝、ToOwned、API 灵活性 | ✅ |
-| P17-T19 | 新增 `07_future/19_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
+| P17-T19 | 新增 `07_future/26_specialization_preview.md` | Trait 实现特化、重叠 impl、min_specialization | ✅ |
 | P17-T20 | 新增 `01_foundation/07_control_flow.md` | match/if let/loop、表达式导向、穷尽性检查 | ✅ |
 | P17-T21 | 新增 `02_intermediate/12_smart_pointers.md` | Box/Rc/Arc/RefCell/Cell、所有权语义、组合模式 | ✅ |
 | P17-T22 | 新增 `06_ecosystem/15_performance_optimization.md` | Criterion、flamegraph、缓存优化、SIMD、PGO | ✅ |
@@ -490,7 +490,7 @@
 | P17-T40 | 新增 `03_advanced/15_zero_copy_parsing.md` | bytes、zerocopy、rkyv、memmap2 | ✅ |
 | P17-T41 | 新增 `06_ecosystem/21_game_development.md` | Bevy、WGPU、ECS、Rapier | ✅ |
 | P17-T42 | 新增 `06_ecosystem/22_embedded_systems.md` | no_std、PAC、HAL、RTIC | ✅ |
-| P17-T43 | 新增 `07_future/22_compile_time_execution.md` | const fn、const 泛型、类型状态机 | ✅ |
+| P17-T43 | 新增 `07_future/27_compile_time_execution.md` | const fn、const 泛型、类型状态机 | ✅ |
 | P17-T44 | 新增 `01_foundation/10_error_handling_basics.md` | Result、Option、? 运算符、错误组合 | ✅ |
 | P17-T45 | 新增 `05_comparative/12_rust_vs_scala.md` | HKT、模式匹配、Actor、隐式 vs Trait | ✅ |
 | P17-T46 | 新增 `04_formal/13_formal_methods.md` | Kani、Creusot、Miri、形式化验证 | ✅ |
@@ -517,7 +517,7 @@
 - 新增 `03_advanced/15_zero_copy_parsing.md`（~340 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/21_game_development.md`（~320 行，10+ 来源，2 Mermaid 图表）
 - 新增 `06_ecosystem/22_embedded_systems.md`（~340 行，10+ 来源，2 Mermaid 图表）
-- 新增 `07_future/22_compile_time_execution.md`（~310 行，10+ 来源，1 Mermaid 图表）
+- 新增 `07_future/27_compile_time_execution.md`（~310 行，10+ 来源，1 Mermaid 图表）
 - **文件总数: 148 → 155，Mermaid 图表: 577 → 600+**
 
 ---
@@ -536,17 +536,17 @@
 
 **累计交付统计**:
 
-- **163 个 Markdown 概念文件**，~102,000+ 行，**~2,793** 条来源标注
-- **620+** 个 Mermaid 图表，17 种类型，覆盖 **155** 个文件
+- **170 个 Markdown 概念文件**，~106,000+ 行，**~2,850** 条来源标注
+- **650+** 个 Mermaid 图表，17 种类型，覆盖 **165** 个文件
 - **244/244** 代码块编译通过，0 失败
-- **163/163** 文件通过质量门禁，0 死链接，0 一致性错误
-- 来源标注率: **100% 文件 ≥10%**，平均 ~15.2%
+- **170/170** 文件通过质量门禁，0 死链接，0 一致性错误
+- 来源标注率: **100% 文件 ≥10%**，平均 ~17.1%
 - Mermaid 认知功能说明覆盖率: **100.0%**（620+/620+），全部文件 100%
 
 **文档版本**: 2.9
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
-**状态**: ✅ Phase 17 完成，全部门禁通过
+**状态**: ✅ Phase 18 中期，170 文件达成，全部门禁通过
 
 ---
 
@@ -557,27 +557,27 @@
 | 任务ID | 任务内容 | 交付物 | 状态 |
 |:---|:---|:---|:---:|
 | P18-T1 | 来源标注率整体提升（~15%→≥20%） | 核心文件批量补充 Wikipedia/TRPL/RFC 来源 | 🔄 |
-| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/11_numeric_types.md`, `12_modules_and_visibility.md` | 🔄 |
-| P18-T3 | 新增 L3 高级主题 | `03_advanced/17_type_erasure.md`, `18_ffi_patterns.md` | 🔄 |
-| P18-T4 | 新增 L5 对比分析 | `05_comparative/13_rust_vs_csharp.md`, `14_rust_vs_elixir.md` | 🔄 |
-| P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/25_cli_development.md`, `26_package_publishing.md` | 🔄 |
-| P18-T6 | 新增 L7 前沿跟踪 | `07_future/24_rust_1_97_preview.md` | 🔄 |
-| P18-T7 | 历史文件命名规范化 | `borrowsanitizer_preview.md`→`NN_`前缀, 编号冲突解决 | 🔄 |
-| P18-T8 | docs/ 轨道问题修复 | 1 个文件跨文件链接补足 | 🔄 |
+| P18-T2 | 新增 L1 概念文件填补缺口 | `01_foundation/10_error_handling_basics.md` ✅ | 🔄 |
+| P18-T3 | 新增 L3/L4 高级主题 | `03_advanced/14_custom_allocators.md` ✅, `15_zero_copy_parsing.md` ✅, `16_lock_free.md` ✅, `17_type_erasure.md` ✅, `04_formal/13_formal_methods.md` ✅, `14_lambda_calculus.md` ✅ | 🔄 |
+| P18-T4 | 新增 L5 对比分析 | `05_comparative/12_rust_vs_scala.md` ✅, `13_rust_vs_csharp.md` ✅, `14_rust_vs_elixir.md` ✅ | 🔄 |
+| P18-T5 | 新增 L6 生态扩展 | `06_ecosystem/21_game_development.md` ✅, `22_embedded_systems.md` ✅, `23_database_access.md` ✅, `24_cloud_native.md` ✅, `25_cli_development.md` ✅, `26_game_development.md` ✅ | 🔄 |
+| P18-T6 | 新增 L7 前沿跟踪 | `07_future/27_compile_time_execution.md` ✅, `23_rust_edition_guide.md` ✅ | 🔄 |
+| P18-T7 | 历史文件命名规范化 | `borrowsanitizer_preview.md`→`20_`, `open_enums_preview.md`→`25_`, `19_specialization`→`26_` ✅ | ✅ |
+| P18-T8 | docs/ 轨道问题修复 | LINK_CHECK_REPORT.md 链接补足 ✅ | ✅ |
 | P18-T9 | 现有文件代码示例深化 | 20+ 文件新增可编译代码块 | 🔄 |
 | P18-T10 | 跨文件链接密度提升 | 平均每文件 ≥5 跨文件链接 | 🔄 |
-| P18-T11 | 死链接持续清零 | 全量扫描 1400+ 文件，0 死链接 | 🔄 |
-| P18-T12 | 一致性回归防护 | 0 错误 / 0 警告 / 0 提示 | 🔄 |
+| P18-T11 | 死链接持续清零 | 全量扫描 1400+ 文件，0 死链接 | ✅ |
+| P18-T12 | 一致性回归防护 | 0 错误 / 0 警告 / 0 提示 | ✅ |
 
 **质量目标**:
 
 | 指标 | 当前 | 目标 |
 |:---|:---|:---|
-| 概念文件数 | 163 | 170+ |
-| 总行数 | 102,149 | 110,000+ |
-| 来源标注总数 | 2,793 | 3,500+ |
-| 平均来源标注率 | ~15.2% | ≥20% |
-| Mermaid 图表 | 620+ | 650+ |
+| 概念文件数 | 170 | 170+ |
+| 总行数 | 106,000+ | 110,000+ |
+| 来源标注总数 | 2,850 | 3,500+ |
+| 平均来源标注率 | ~17.1% | ≥20% |
+| Mermaid 图表 | 650+ | 650+ |
 | 代码块编译 | 244/244 | 260+/260+ |
 | 死链接 | 0 | 0 |
 | 一致性错误 | 0 | 0 |

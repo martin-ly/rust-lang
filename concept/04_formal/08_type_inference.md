@@ -12,6 +12,7 @@
 ## 📑 目录
 
 - [类型推断：Hindley-Milner 算法与 Rust 的工业实现](#类型推断hindley-milner-算法与-rust-的工业实现)
+  - [📑 目录](#-目录)
   - [一、核心概念](#一核心概念)
     - [1.1 从显式类型到隐式推断](#11-从显式类型到隐式推断)
     - [1.2 Hindley-Milner 算法](#12-hindley-milner-算法)

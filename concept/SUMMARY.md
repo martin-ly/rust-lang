@@ -94,8 +94,8 @@
   - [Rust 形式模型演进跟踪（1.79–1.97+）](07_future/05_rust_version_tracking.md)
   - [MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证](07_future/07_mcdc_coverage_preview.md)
   - [Safety Tags 概念预研：Unsafe 契约的机器可读标注](07_future/08_safety_tags_preview.md)
-  - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/borrowsanitizer_preview.md)
-  - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](07_future/open_enums_preview.md)
+  - [BorrowSanitizer 概念预研：运行时借用检查工业化](07_future/20_borrowsanitizer_preview.md)
+  - [Open Enums 概念预研：从 `#[non_exhaustive]` 到可扩展枚举](07_future/25_open_enums_preview.md)
 
 - [Rust 概念知识体系 —— 可持续推进计划与任务](PLAN.md)
 

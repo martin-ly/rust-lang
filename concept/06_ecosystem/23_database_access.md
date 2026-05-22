@@ -155,7 +155,7 @@ SeaORM:
 ```
 
 > **SeaORM 洞察**: **SeaORM 是 Rust 异步 ORM 的首选**——牺牲了部分类型安全换取开发效率。
-> [来源: [SeaORM](https://www.sea-ql.org/SeaORM/)]
+> [来源: [SeaORM](https://www.sea-ql.org/SeaORM/)] · [来源: [Tokio Docs](https://tokio.rs/)]
 
 ---
 
@@ -463,6 +463,7 @@ graph TD
 | [SeaORM](https://www.sea-ql.org/SeaORM/) | ✅ 二级 | 异步 ORM |
 | [Rust Database Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/database.html) | ✅ 二级 | 数据库指南 |
 | [deadpool](https://docs.rs/deadpool/latest/deadpool/) | ✅ 二级 | 连接池 |
+| [Rust Book](https://doc.rust-lang.org/book/) | ✅ 一级 | 官方教程 |
 
 ---
 

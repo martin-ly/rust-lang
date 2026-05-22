@@ -1,9 +1,9 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T12:34:08.815060
-> 扫描文件数: 152
+> 生成时间: 2026-05-22T14:17:08.527444
+> 扫描文件数: 162
 > 提取概念定义数: 486
-> 跨文件引用数: 165
+> 跨文件引用数: 166
 
 ## 目录
 
@@ -29,7 +29,7 @@
 | 所有权三规则一致性 | ✅ 通过 | 检测到 0 项 |
 | 生命周期省略规则一致性 | ✅ 通过 | 检测到 0 项 |
 | unsafe 语义一致性 | ✅ 通过 | 检测到 0 项 |
-| 跨文件段落引用有效性 | ✅ 全部有效 | 共 165 个引用 |
+| 跨文件段落引用有效性 | ✅ 全部有效 | 共 166 个引用 |
 | **总计** | **0 错误 / 0 警告 / 0 提示** | — |
 
 ## 二、Send / Sync 一致性检查
@@ -86,7 +86,7 @@
 | concept\00_meta\expressiveness_multiview.md | 4 | 0 | 20 |
 | concept\00_meta\inter_layer_map.md | 11 | 2 | 14 |
 | concept\00_meta\inter_layer_topology.md | 4 | 0 | 3 |
-| concept\00_meta\intra_layer_model_map.md | 1 | 0 | 9 |
+| concept\00_meta\intra_layer_model_map.md | 0 | 0 | 9 |
 | concept\00_meta\knowledge_mindmap.md | 2 | 0 | 0 |
 | concept\00_meta\learning_guide.md | 8 | 0 | 13 |
 | concept\00_meta\methodology.md | 0 | 0 | 20 |
@@ -110,6 +110,7 @@
 | concept\01_foundation\10_error_handling_basics.md | 0 | 0 | 10 |
 | concept\01_foundation\10_numerics.md | 0 | 0 | 8 |
 | concept\01_foundation\11_modules_and_paths.md | 0 | 0 | 8 |
+| concept\01_foundation\11_numeric_types.md | 0 | 0 | 8 |
 | concept\01_foundation\12_attributes_and_macros.md | 0 | 0 | 8 |
 | concept\01_foundation\13_panic_and_abort.md | 1 | 0 | 8 |
 | concept\01_foundation\14_coercion_and_casting.md | 0 | 0 | 8 |
@@ -152,6 +153,7 @@
 | concept\03_advanced\14_custom_allocators.md | 0 | 0 | 9 |
 | concept\03_advanced\15_zero_copy_parsing.md | 0 | 0 | 9 |
 | concept\03_advanced\16_lock_free.md | 0 | 0 | 10 |
+| concept\03_advanced\17_type_erasure.md | 1 | 0 | 8 |
 | concept\04_formal\01_linear_logic.md | 10 | 2 | 25 |
 | concept\04_formal\02_type_theory.md | 3 | 17 | 20 |
 | concept\04_formal\03_ownership_formal.md | 5 | 10 | 25 |
@@ -166,6 +168,8 @@
 | concept\04_formal\11_separation_logic.md | 0 | 0 | 8 |
 | concept\04_formal\12_denotational_semantics.md | 0 | 0 | 8 |
 | concept\04_formal\13_formal_methods.md | 0 | 0 | 9 |
+| concept\04_formal\14_lambda_calculus.md | 0 | 0 | 7 |
+| concept\04_formal\15_category_theory.md | 0 | 1 | 24 |
 | concept\05_comparative\01_rust_vs_cpp.md | 11 | 1 | 41 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -179,6 +183,8 @@
 | concept\05_comparative\10_rust_vs_zig.md | 0 | 0 | 8 |
 | concept\05_comparative\11_rust_vs_kotlin.md | 0 | 0 | 11 |
 | concept\05_comparative\12_rust_vs_scala.md | 0 | 0 | 10 |
+| concept\05_comparative\13_rust_vs_csharp.md | 0 | 0 | 10 |
+| concept\05_comparative\14_rust_vs_elixir.md | 0 | 0 | 8 |
 | concept\06_ecosystem\01_toolchain.md | 2 | 0 | 36 |
 | concept\06_ecosystem\02_patterns.md | 4 | 0 | 18 |
 | concept\06_ecosystem\03_core_crates.md | 1 | 0 | 28 |
@@ -205,6 +211,9 @@
 | concept\06_ecosystem\22_embedded_systems.md | 0 | 0 | 10 |
 | concept\06_ecosystem\23_database_access.md | 0 | 0 | 10 |
 | concept\06_ecosystem\24_cloud_native.md | 0 | 0 | 9 |
+| concept\06_ecosystem\25_cli_development.md | 0 | 0 | 8 |
+| concept\06_ecosystem\26_game_development.md | 0 | 0 | 6 |
+| concept\06_ecosystem\27_web_frameworks.md | 0 | 0 | 17 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
@@ -223,13 +232,14 @@
 | concept\07_future\17_rust_specification_preview.md | 0 | 0 | 8 |
 | concept\07_future\18_async_drop_preview.md | 0 | 0 | 8 |
 | concept\07_future\19_rust_for_linux.md | 0 | 0 | 8 |
-| concept\07_future\19_specialization_preview.md | 0 | 0 | 8 |
+| concept\07_future\20_borrowsanitizer_preview.md | 1 | 0 | 8 |
 | concept\07_future\21_rust_in_ai.md | 0 | 0 | 8 |
-| concept\07_future\22_compile_time_execution.md | 0 | 0 | 9 |
-| concept\07_future\22_edition_2024_guide.md | 0 | 0 | 8 |
+| concept\07_future\22_edition_guide.md | 0 | 0 | 8 |
 | concept\07_future\23_rust_edition_guide.md | 0 | 0 | 7 |
-| concept\07_future\borrowsanitizer_preview.md | 1 | 0 | 8 |
-| concept\07_future\open_enums_preview.md | 0 | 0 | 15 |
+| concept\07_future\24_roadmap.md | 0 | 0 | 17 |
+| concept\07_future\25_open_enums_preview.md | 0 | 0 | 15 |
+| concept\07_future\26_specialization_preview.md | 0 | 0 | 8 |
+| concept\07_future\27_compile_time_execution.md | 0 | 0 | 9 |
 
 ---
 

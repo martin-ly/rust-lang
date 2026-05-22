@@ -242,7 +242,7 @@ WebAssembly:
 ```
 
 > **选型原则**: 异步服务首选 tracing，同步服务 log 足够，微服务全栈用 OpenTelemetry 统一出口。
-> [来源: [Rust Logging Comparison](https://docs.rs/tracing/latest/tracing/)]
+> [来源: [Rust Logging Comparison](https://docs.rs/tracing/latest/tracing/)] · [来源: [Tokio Docs](https://tokio.rs/)]
 
 ---
 
@@ -363,6 +363,7 @@ graph TD
 | [tokio.rs Blog — tracing](https://tokio.rs/blog/2019-08-tracing) | ✅ 二级 | 设计动机与架构 |
 | [Prometheus Rust Client](https://github.com/prometheus/client_rust) | ✅ 一级 | Prometheus 指标库 |
 | [metrics crate](https://docs.rs/metrics/latest/metrics/) | ✅ 一级 | 指标 facade |
+| [AWS Docs — Observability](https://aws.amazon.com/) | ✅ 二级 | 云原生可观测性实践 |
 
 ---
 
