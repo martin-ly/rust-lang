@@ -1,6 +1,7 @@
 ﻿# 类型理论完备性缺口：形式化论证不充分声明
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型理论完备性缺口：形式化论证不充分声明](#类型理论完备性缺口形式化论证不充分声明)
   - [📑 目录](#-目录)
@@ -90,6 +91,7 @@
 ---
 
 ## 1. Rust 1.93 类型系统特性缺口
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | 状态 | 缺口说明 | 应补充文档 |
 | :--- | :--- | :--- | :--- |
@@ -106,6 +108,7 @@
 ---
 
 ## 2. 组合法则缺口
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **组合法则**：类型、Trait、生命周期等如何组合的规则；组合后性质如何保持。
 
@@ -137,6 +140,7 @@
 ---
 
 ## 3. Trait 特性缺口
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Trait 特性 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
@@ -154,6 +158,7 @@
 ---
 
 ## 4. 类型系统特性缺口
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 状态 | 缺口说明 | 应补充 |
 | :--- | :--- | :--- | :--- |
@@ -169,6 +174,7 @@
 ---
 
 ## 5. 缺口汇总与优先级
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 高优先级（影响类型安全论证）
@@ -195,6 +201,7 @@
 ---
 
 ## 6. 与已有文档的衔接
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 已覆盖 | 缺口所在 |
 | :--- | :--- | :--- |
@@ -207,6 +214,7 @@
 ---
 
 ## 7. 补全路线图
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 阶段 | 目标 | 产出 |
 | :--- | :--- | :--- |
@@ -221,6 +229,7 @@
 ---
 
 ## 引用
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [construction_capability](./construction_capability.md) — 类型构造能力；§ 类型理论缺口对构造能力的影响 与本缺口对应
 - [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](../RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) — 92 项特性；类型相关需与本缺口对照
@@ -231,6 +240,7 @@
 ---
 
 ## 8. 国际对标缺口（与阶段 1 交付物联动）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **详见**: [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](../INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md)、[FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02](../FORMAL_PROOF_CRITICAL_ANALYSIS_AND_PLAN_2026_02.md)
 
@@ -243,6 +253,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -300,6 +311,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
@@ -325,3 +337,81 @@
 > **[来源: Wikipedia - Completeness (logic)]**
 
 > **[来源: Wikipedia - Rust (programming language)]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

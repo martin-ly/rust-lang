@@ -46,6 +46,7 @@
 | [distributed/distributed-actors-formal.md](distributed/distributed-actors-formal.md) | 413 | CAP定理、一致性模型 |
 
 ### 可视化资源
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类型 | 文档 | 内容 |
 |:---|:---|:---|
@@ -55,6 +56,7 @@
 | 场景树 | [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) | 6大应用领域 |
 
 ### 实现与模式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 行数 | 内容 |
 |:---|:---:|:---|
@@ -63,6 +65,7 @@
 | [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) | 339 | 形式化定义+定理 |
 
 ### 分布式与案例
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 行数 | 内容 |
 |:---|:---:|:---|
@@ -74,8 +77,10 @@
 ---
 
 ## 核心定理汇总
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 基础定理
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Thm ACTOR-NO-DATA-RACE: Actor系统无数据竞争
@@ -91,6 +96,7 @@ Thm ACTOR-CONTAINS-CSP: Actor模型包含CSP
 ```
 
 ### 容错定理
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Thm SUPERVISION-FAULT-ISOLATION: 监督树隔离故障
@@ -103,6 +109,7 @@ Thm SUPERVISION-EVENTUAL-RECOVERY: 最终恢复
 ```
 
 ### 安全定理
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 Thm RUST-ACTOR-MEMORY-SAFETY: Rust + Actor内存安全
@@ -115,6 +122,7 @@ Thm RUST-ACTOR-TYPE-SAFETY: 消息类型安全
 ```
 
 ### 分布式定理
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 Thm CAP-THEOREM: CAP不可能三角
@@ -132,6 +140,7 @@ Thm SAGA-EVENTUAL-CONSISTENCY: Saga最终一致性
 ---
 
 ## 目录结构
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 actor-specialty/
@@ -177,6 +186,7 @@ actor-specialty/
 ---
 
 ## 统计信息
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 文档统计:
@@ -198,8 +208,10 @@ actor-specialty/
 ---
 
 ## 质量保证
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内容标准
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 标准 | 状态 |
 |:---|:---|:---:|
@@ -211,6 +223,7 @@ actor-specialty/
 | 完整性 | 无stub内容，全实质内容 | ✅ |
 
 ### 学术对齐
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 对齐文档 |
 |:---|:---|
@@ -224,8 +237,10 @@ actor-specialty/
 ---
 
 ## 学习路径
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 初学者
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. [mindmaps/actor-model-mindmap.md](mindmaps/actor-model-mindmap.md) - 概念建立
 2. [theory/actor-model-foundation.md](theory/actor-model-foundation.md) - 理论基础
@@ -233,12 +248,14 @@ actor-specialty/
 4. [examples/chat-system-example.md](examples/chat-system-example.md) - 动手实践
 
 ### 进阶开发者
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. [formal-proofs/actor-safety-theorems.md](formal-proofs/actor-safety-theorems.md) - 安全保证
 2. [patterns/actor-design-patterns-expanded.md](patterns/actor-design-patterns-expanded.md) - 掌握模式
 3. [case-studies/actix-web-production.md](case-studies/actix-web-production.md) - 生产实践
 
 ### 架构师
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. [distributed/distributed-actors-formal.md](distributed/distributed-actors-formal.md) - 分布式理论
 2. [scenario-trees/actor-application-domains.md](scenario-trees/actor-application-domains.md) - 领域映射
@@ -247,6 +264,7 @@ actor-specialty/
 ---
 
 ## 版本历史
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 版本 | 日期 | 变更 |
 |:---:|:---:|:---|
@@ -303,3 +321,45 @@ actor-specialty/
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

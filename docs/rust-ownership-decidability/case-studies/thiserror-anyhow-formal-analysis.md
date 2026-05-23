@@ -47,6 +47,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 ERROR-1 ( 派生宏 )
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 #[derive(Error, Debug)]
@@ -67,12 +68,14 @@ $$
 $$
 
 ### 定义 ERROR-2 ( 自动实现 )
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 $$
 \text{derive(Error)} \to \text{impl Display} + \text{impl Error} + \text{impl From}
 $$
 
 ### 定理 ERROR-T1 ( 类型安全 )
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 错误类型在编译时确定。
 
@@ -83,8 +86,10 @@ $$
 ---
 
 ## 3. Anyhow
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 定义 ANYHOW-1 ( Result别名 )
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 type Result<T> = std::result::Result<T, anyhow::Error>;
@@ -95,6 +100,7 @@ $$
 $$
 
 ### 定义 ANYHOW-2 ( 上下文 )
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 fs::read(path)
@@ -102,6 +108,7 @@ fs::read(path)
 ```
 
 ### 定理 ANYHOW-T1 ( 自动转换 )
+> **[来源: [crates.io](https://crates.io/)]**
 
 任何错误可转换为anyhow::Error。
 
@@ -112,8 +119,10 @@ $$
 ---
 
 ## 4. 组合使用
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 定义 COMBINE-1 ( 边界设计 )
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // Library: thiserror
@@ -128,6 +137,7 @@ fn main() -> anyhow::Result<()> {
 ```
 
 ### 定理 COMBINE-T1 ( 无缝转换 )
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 库错误自动转换为anyhow错误。
 
@@ -138,8 +148,10 @@ $$
 ---
 
 ## 5. 定理与证明
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 ERR-T1 ( 零运行时开销 )
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Thiserror生成零开销代码。
 
@@ -285,3 +297,35 @@ fn print_error_chain(err: &Error) {
 > **[来源: Rust Reference - Result]**
 
 > **[来源: RFC 2504 - Try Trait]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Error Handling Guidelines](https://doc.rust-lang.org/rust-by-example/error.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

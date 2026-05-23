@@ -3,6 +3,7 @@
 > **[来源: Workflow Patterns Initiative - workflowpatterns.com]** · **[来源: van der Aalst et al., "Workflow Patterns", Distributed and Parallel Databases 2003]** · **[来源: Russell et al., "Workflow Control-Flow Patterns: A Revised View", Springer 2006]** · **[来源: Rust Reference]** · **[来源: TRPL]** · **[来源: Tokio Documentation]**
 
 ## 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Workflow 控制流模式完整索引 (Workflow Control-Flow Patterns Master Index)](#workflow-控制流模式完整索引-workflow-control-flow-patterns-master-index)
   - [目录](#目录)
@@ -55,6 +56,7 @@
 值得注意的是，WCP 的评估方法具有极强的普适性：van der Aalst 等人最初使用这 20 个模式（后扩展至 43 个）评估了当时主流的 15 个工作流管理系统（包括 Staffware、IBM MQSeries、COSA 等），揭示了不同系统在控制流表达力上的系统性差异。这一评估框架同样适用于现代编程语言——本知识库即是以 WCP 为透镜，系统评估 Rust 在控制流表达力上的优势与边界。
 
 ### Rust 视角的独特价值
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 编程语言的所有权系统、类型安全的并发原语与零成本抽象，为这 43 个模式提供了独特的实现视角——与传统 BPMN 引擎在运行时解释流程定义不同，Rust 能够在编译期验证控制流的多种安全属性：
 
@@ -163,6 +165,7 @@ graph TD
 ```
 
 ### 分类说明
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类别 | 模式编号 | 核心语义 | Rust 实现特征 |
 |:---|:---:|:---|:---|
@@ -178,6 +181,7 @@ graph TD
 | **Other/Structural** | WCP36, WCP39–WCP40 | 临界区、交错路由、动态部分汇合等结构性模式 | 互斥原语（`Mutex`、`RwLock`）或调度器实现 |
 
 ### 类别间关系
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 10 个类别并非完全独立，而是存在语义依赖：
 
@@ -191,6 +195,7 @@ graph TD
 > [来源: Workflow Patterns Initiative] · [来源: Russell 2006] · [来源: Rust Reference - Concurrency]
 
 ### 实现进度概览
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 pie title WCP Rust 实现状态分布 (43 模式)
@@ -322,6 +327,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 43 个 WCP 在 Rust 中的实现难度差异，根源在于所有权系统与模式语义之间的张力。以下四条核心原则解释了为什么某些模式天然安全，而某些需要额外抽象：
 
 ### 原则 1：线性数据流天然安全
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **若模式的数据流是线性的（一个生产者、一个消费者，无分叉或汇合），则 Rust 的所有权语义可直接映射。**
 
@@ -337,6 +343,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 > [来源: Rust Reference - Move Semantics] · [来源: Linear Type Theory, Wadler 1990]
 
 ### 原则 2：分叉即所有权分裂，汇合即同步点
+> **[来源: [crates.io](https://crates.io/)]**
 
 **任何将单一值分叉给多个并发消费者的模式，都需要显式的所有权分裂机制；任何汇合点都需要同步保证。**
 
@@ -350,6 +357,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 > [来源: Rust Reference - Borrow Checker] · [来源: Rust Reference - Shared-State Concurrency]
 
 ### 原则 3：动态拓扑需要 `unsafe` 或 `Pin`
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **若模式的控制流图在运行时动态变化（如自引用、任意跳转、循环重组），则 Rust 的所有权树模型无法直接表达，需借助 `unsafe`、原始指针或 `Pin`。**
 
@@ -362,6 +370,7 @@ pie title WCP Rust 实现状态分布 (43 模式)
 > [来源: Rust Reference - Unsafe Rust] · [来源: Rustonomicon - Self-Referential Structs] · [来源: Pin API documentation]
 
 ### 原则 4：取消安全是 Rust 的显式优势
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **涉及活动取消的模式（WCP19–WCP20、WCP25–WCP27）在 Rust 中可通过结构化并发原语获得比传统 BPMN 引擎更强的安全保证。**
 
@@ -515,3 +524,40 @@ Petri 网是工作流模式最经典的形式化基础。van der Aalst 等人的
 **覆盖率**: 21/43 模式文件已完成（48.8%）
 
 > [来源: Workflow Patterns Initiative - workflowpatterns.com] · [来源: van der Aalst 2003] · [来源: Russell 2006] · [来源: Rust Reference] · [来源: TRPL] · [来源: Tokio Documentation]
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

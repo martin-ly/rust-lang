@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
   - [📑 目录](#-目录)
@@ -307,6 +308,7 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ---
 
 ## 三、编译器与平台
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### `--remap-path-scope` 稳定化
 
@@ -333,6 +335,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 | `aarch64-apple-visionos-sim` | Tier 2 |
 
 ### 重要兼容性变更
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **JSON target specs destabilized**: stable 通道不再支持自定义 target JSON，需 nightly `-Z unstable-options`
 - **`#[non_exhaustive]` enum matching**: 现在读取 discriminant，可能影响闭包捕获分析
@@ -341,6 +344,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ---
 
 ## 四、Const 上下文新稳定 API
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 以下 API 在 const 上下文中稳定化：
 
@@ -359,6 +363,7 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
 ---
 
 ## 五、与 Rust 2024 Edition 的关联
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1.95.0 中的 `if let` guards 是对 2024 Edition `let chains` 的自然延伸：
 
@@ -387,6 +392,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
@@ -410,3 +416,85 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

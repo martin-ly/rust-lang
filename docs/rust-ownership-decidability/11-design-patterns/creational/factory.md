@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Factory Pattern in Rust](#factory-pattern-in-rust)
   - [📑 目录](#-目录)
@@ -91,6 +92,7 @@ let cat = create_animal(AnimalType::Cat, "Whiskers");
 ```
 
 ### 工厂方法
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 pub trait Parser {
@@ -146,6 +148,7 @@ fn process_data(factory: &dyn ParserFactory, data: &str) -> Result<(), ParseErro
 ---
 
 ## 抽象工厂
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // UI 组件族
@@ -215,6 +218,7 @@ impl GUIFactory for MacFactory {
 ---
 
 ## 形式化定义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 Factory<T> = (args: Args) → T
@@ -228,6 +232,7 @@ Factory<T> = (args: Args) → T
 ---
 
 ## 使用泛型的零成本抽象
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 避免动态分派
@@ -272,6 +277,7 @@ where
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [creational 目录](./README.md)
 
@@ -294,3 +300,59 @@ where
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

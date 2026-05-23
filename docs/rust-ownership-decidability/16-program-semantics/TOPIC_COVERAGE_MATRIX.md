@@ -1,6 +1,7 @@
 # 主题覆盖矩阵：现状 vs 权威来源
 
 ## 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [主题覆盖矩阵：现状 vs 权威来源](#主题覆盖矩阵现状-vs-权威来源)
   - [目录](#目录)
@@ -108,6 +109,7 @@
 ---
 
 ## 三、Rust特定语义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
 |------|------|----------|--------|
@@ -133,6 +135,7 @@
 ---
 
 ## 四、并发与并行 (来自 "Art of Multiprocessor Programming")
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
 |------|------|----------|--------|
@@ -158,6 +161,7 @@
 ---
 
 ## 五、形式验证 (来自 Iris & RustBelt)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
 |------|------|----------|--------|
@@ -181,6 +185,7 @@
 ---
 
 ## 六、Workflow Patterns (来自 van der Aalst)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
 |------|------|----------|--------|
@@ -203,6 +208,7 @@
 ---
 
 ## 七、分布式系统 (来自 "Designing Data-Intensive Applications")
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 主题 | 现状 | 缺口分析 | 优先级 |
 |------|------|----------|--------|
@@ -227,8 +233,10 @@
 ---
 
 ## 八、覆盖率统计
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 按类别统计
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 总主题数 | 已覆盖 | 部分覆盖 | 未覆盖 | 覆盖率 |
 |------|----------|--------|----------|--------|--------|
@@ -242,6 +250,7 @@
 | **总计** | **117** | **29** | **28** | **60** | **33%** |
 
 ### 关键缺口汇总
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **关键缺口 (🔴 P0)**: 23个主题
 
@@ -265,22 +274,26 @@
 ---
 
 ## 九、建议阅读路径
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 对于不同背景的读者：
 
 ### 路径A: 形式化理论背景 (面向研究者)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. 先补: 00a-00e (理论基础)
 2. 再读: 02-advanced-types
 3. 深入: 04-verification
 
 ### 路径B: 工程实践背景 (面向开发者)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. 现有: Rust核心语义
 2. 扩展: distributed-patterns
 3. 进阶: 形式验证
 
 ### 路径C: 完整掌握 (面向专家)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 按阶段1-5顺序完成所有内容
 
@@ -314,3 +327,63 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

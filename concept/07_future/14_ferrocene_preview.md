@@ -42,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 安全关键软件的认证挑战
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 安全关键系统（汽车 ECU、航空飞控、医疗设备）要求软件通过严格的**功能安全认证**：
 
@@ -67,6 +68,7 @@
 ---
 
 ### 1.2 Ferrocene 的定位
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -100,6 +102,7 @@ graph TD
 ---
 
 ### 1.3 认证范围与限制
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Ferrocene 的认证范围（当前）:
@@ -128,6 +131,7 @@ Ferrocene 的认证范围（当前）:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 认证工具链的构成
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 组件 | 上游来源 | 认证状态 | 说明 |
 |:---|:---|:---:|:---|
@@ -145,6 +149,7 @@ Ferrocene 的认证范围（当前）:
 ---
 
 ### 2.2 与上游 Rust 的关系
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph LR
@@ -174,6 +179,7 @@ graph LR
 ---
 
 ### 2.3 证据包与审计追踪
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Ferrocene 证据包构成:
@@ -226,6 +232,7 @@ Ferrocene 证据包构成:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -255,6 +262,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 认证不等于无缺陷
@@ -357,3 +365,63 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

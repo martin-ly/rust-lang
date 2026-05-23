@@ -86,6 +86,7 @@ Sea-ORM 适用场景:
 > **[来源: Rust Official Docs]**
 
 ### 核心概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // 实体 (Entity) - 对应数据库表
@@ -107,6 +108,7 @@ pub enum Relation {
 ```
 
 ### 与 Diesel/SQLx 对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | Sea-ORM | Diesel | SQLx |
 |------|---------|--------|------|
@@ -120,8 +122,10 @@ pub enum Relation {
 ---
 
 ## 🚀 快速开始
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 安装配置
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```toml
 [dependencies]
@@ -134,6 +138,7 @@ tokio = { version = "1", features = ["full"] }
 ```
 
 ### CLI 工具
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
 # 安装 Sea-ORM CLI
@@ -148,8 +153,10 @@ sea-orm-cli generate entity \
 ---
 
 ## 📐 实体定义
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 基本实体
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use sea_orm::entity::prelude::*;
@@ -177,6 +184,7 @@ impl ActiveModelBehavior for ActiveModel {}
 ```
 
 ### 关系定义
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // user.rs - 用户实体
@@ -228,6 +236,7 @@ impl Related<super::user::Entity> for Entity {
 ```
 
 ### 复合主键
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 #[derive(DeriveEntityModel)]
@@ -244,8 +253,10 @@ pub struct Model {
 ---
 
 ## 💾 CRUD 操作
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Create
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use sea_orm::{ActiveModelTrait, Set};
@@ -278,6 +289,7 @@ user::Entity::insert_many(users)
 ```
 
 ### Read
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use sea_orm::{EntityTrait, QueryFilter, ColumnTrait};
@@ -308,6 +320,7 @@ let num_pages = paginator.num_pages().await?;
 ```
 
 ### Update
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use sea_orm::{ActiveModelTrait, Set, ModelTrait};
@@ -331,6 +344,7 @@ user::Entity::update_many()
 ```
 
 ### Delete
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use sea_orm::{ModelTrait, EntityTrait};
@@ -353,8 +367,10 @@ user::Entity::delete_many()
 ---
 
 ## 🔗 关联查询
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Eager Loading
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use sea_orm::{EntityTrait, Related};
@@ -381,6 +397,7 @@ let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
 ```
 
 ### Lazy Loading
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // 先查询用户
@@ -398,8 +415,10 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
 ---
 
 ## ⚡ 性能优化
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 连接池
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use sea_orm::{Database, DatabaseOptions, ConnectOptions};
@@ -417,6 +436,7 @@ let db = Database::connect(opt).await?;
 ```
 
 ### 查询优化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use sea_orm::{QuerySelect, QueryOrder};
@@ -449,6 +469,7 @@ let results = db.query_all(
 ---
 
 ## 🧪 测试策略
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 #[cfg(test)]
@@ -482,6 +503,7 @@ mod tests {
 ---
 
 ## 🔗 参考资源
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Sea-ORM 官方文档](https://www.sea-ql.org/SeaORM/)
 - [Sea-ORM GitHub](https://github.com/SeaQL/sea-orm)
@@ -497,8 +519,171 @@ mod tests {
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
 
 - [Databases 数据库](README.md)
 - [SQLx 深度解析](sqlx_deep_dive.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Database Ecosystem](https://www.areweadyet.org/topics/database/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

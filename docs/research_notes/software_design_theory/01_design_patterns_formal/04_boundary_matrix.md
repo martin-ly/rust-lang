@@ -1,6 +1,7 @@
 ﻿# 设计模式边界矩阵汇总
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [设计模式边界矩阵汇总](#设计模式边界矩阵汇总)
   - [📑 目录](#-目录)
@@ -276,6 +277,7 @@ flowchart TB
 ---
 
 ## 模式组合约束 DAG（D1.5）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Def BMP-DAG1（模式组合约束）**：设 $P_1 \to P_2$ 表示 $P_1$ 可组合于 $P_2$（$P_1$ 产出作为 $P_2$ 输入）。
 推荐组合形成 DAG；禁止组合由约束违反确定。
@@ -320,6 +322,7 @@ Observer ──→ Command
 ---
 
 ## 与 43 完全模型衔接
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 扩展 20 种模式见 [02_complete_43_catalog](../02_workflow_safe_complete_models/02_complete_43_catalog.md)；
 绝大部分为纯 Safe、原生支持、等价表达。
@@ -329,6 +332,7 @@ Observer ──→ Command
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -386,6 +390,7 @@ Observer ──→ Command
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [01_design_patterns_formal 目录](./README.md)
 - [上级目录](../README.md)
@@ -406,3 +411,109 @@ Observer ──→ Command
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

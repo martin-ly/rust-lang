@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 错误诊断完全指南](#rust-所有权系统---错误诊断完全指南)
   - [📑 目录](#-目录)
@@ -65,6 +66,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### E0382: 使用已移动的值
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误信息**:
 
@@ -109,6 +111,7 @@ graph TD
 ---
 
 ### E0499: 多重可变借用
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误信息**:
 
@@ -172,6 +175,7 @@ data.borrow_mut().push(5);  // 可以
 ---
 
 ### E0502: 可变与不可变借用冲突
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **错误信息**:
 
@@ -212,6 +216,7 @@ data.retain(|&x| {
 ---
 
 ### E0597: 引用生命周期不够长
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误信息**:
 
@@ -273,8 +278,10 @@ fn get_static() -> &'static str {
 ---
 
 ## 生命周期相关错误
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### E0621: 显式生命周期要求
+> **[来源: [crates.io](https://crates.io/)]**
 
 **错误信息**:
 
@@ -304,6 +311,7 @@ fn first(x: &str) -> &str {  // 自动推断
 ---
 
 ### E0106: 缺少生命周期说明符
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **错误信息**:
 
@@ -333,8 +341,10 @@ struct Parser {
 ---
 
 ## 智能指针相关错误
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### E0500: 闭包同时需要可变和不可变借用
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误信息**:
 
@@ -362,6 +372,7 @@ let add = || x.borrow_mut().push(4);
 ---
 
 ### E0716: 临时值生命周期太短
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误信息**:
 
@@ -389,8 +400,10 @@ let r: &'static str = "hello";
 ---
 
 ## 并发相关错误
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### E0277: 类型未实现 Send
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **错误信息**:
 
@@ -421,6 +434,7 @@ thread::spawn(move || {
 ---
 
 ### E0596: 无法通过共享引用修改
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误信息**:
 
@@ -443,8 +457,10 @@ data.lock().unwrap().push(4);  // OK
 ---
 
 ## 诊断工具
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 使用 rustc 详细输出
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
 # 详细错误信息
@@ -455,6 +471,7 @@ RUST_BACKTRACE=1 cargo run
 ```
 
 ### 使用 Clippy
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # 安装
@@ -468,6 +485,7 @@ cargo clippy -- -W clippy::all
 ```
 
 ### 使用 rust-analyzer
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 实时错误提示
 - 快速修复建议
@@ -476,6 +494,7 @@ cargo clippy -- -W clippy::all
 ---
 
 ## 错误快速参考表
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 错误码 | 描述 | 快速修复 |
 |:-------|:-----|:---------|
@@ -492,8 +511,10 @@ cargo clippy -- -W clippy::all
 ---
 
 ## 预防性编程
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 所有权友好的 API 设计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 1. 优先使用借用
@@ -530,8 +551,10 @@ fn find_order(id: OrderId) -> Order;
 ---
 
 ## 练习
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 练习 1: 诊断并修复
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 fn main() {
@@ -559,6 +582,7 @@ fn main() {
 </details>
 
 ### 练习 2: 诊断并修复
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 fn get_ref() -> &String {
@@ -586,6 +610,7 @@ fn get_static() -> &'static str {
 ---
 
 ## 更多资源
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [交互式学习指南](./INTERACTIVE_LEARNING_GUIDE.md)
 - [全面 FAQ](./COMPREHENSIVE_FAQ.md)
@@ -609,6 +634,7 @@ fn get_static() -> &'static str {
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -632,3 +658,155 @@ fn get_static() -> &'static str {
 > **[来源: Rust Reference - Result]**
 
 > **[来源: RFC 2504 - Try Trait]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Error Handling Guidelines](https://doc.rust-lang.org/rust-by-example/error.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

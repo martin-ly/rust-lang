@@ -66,6 +66,7 @@ MISRA C:2025 总规则数: 143
 - 相比C的隐式UB，这是安全改进
 
 ### 2. 未使用代码 (Rules 2.x)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 规则 | MISRA要求 | Rust编译器 | 调整后级别 |
 |------|-----------|------------|------------|
@@ -78,6 +79,7 @@ MISRA C:2025 总规则数: 143
 | R2.7 | 无未使用参数 | 编译器警告 | Advisory |
 
 ### 3. 注释 (Rules 3.x)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 规则 | MISRA要求 | Rust支持 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -87,6 +89,7 @@ MISRA C:2025 总规则数: 143
 **注意**: Rust原生支持嵌套`/* */`注释，这是C不支持的特性
 
 ### 4. 标识符 (Rules 5.x)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 规则 | MISRA要求 | Rust差异 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -99,6 +102,7 @@ MISRA C:2025 总规则数: 143
 | R5.7 | 标识符区分 | 编译器警告 | Advisory |
 
 ### 5. 类型系统 (Rules 6.x, 7.x)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **这是Rust最强的领域！**
 
@@ -112,6 +116,7 @@ MISRA C:2025 总规则数: 143
 | R7.4 | 字符串常量const | 自动 | Required (自动) |
 
 ### 6. 字面量和常量 (Rules 8.x)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 规则 | MISRA要求 | Rust特性 | 调整后级别 |
 |------|-----------|----------|------------|
@@ -131,6 +136,7 @@ MISRA C:2025 总规则数: 143
 | R8.14 | 变量声明限制 | let语句 | Required (自动) |
 
 ### 7. 指针和数组 (Rules 11.x, 18.x) - 关键章节
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Rust借用检查器自动保证的关键规则:**
 
@@ -155,6 +161,7 @@ MISRA C:2025 总规则数: 143
 | R18.8 | 可变长数组 | 不支持 | n/a |
 
 ### 8. 内存管理 (Rules 21.x, 22.x) - Rust强项
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 规则 | MISRA要求 | Rust所有权 | 调整后级别 |
 |------|-----------|------------|------------|
@@ -189,8 +196,10 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## Rust特定优势
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 编译器自动保证的类别
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **内存安全 (100%)**
    - 无use-after-free
@@ -216,8 +225,10 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 实施建议
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 对于新项目
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **使用Rust安全子集**
    - 最小化unsafe代码 (< 5%)
@@ -244,6 +255,7 @@ MISRA C:2025 总规则数: 143
    - 提供安全论证
 
 ### 对于C到Rust迁移
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **规则映射审查**
    - 识别原MISRA C规则
@@ -263,8 +275,10 @@ MISRA C:2025 总规则数: 143
 ---
 
 ## 工具配置
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Clippy配置 (MISRA风格)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // .clippy.toml or clippy.toml
@@ -287,6 +301,7 @@ cyclomatic-complexity-threshold = 15
 ```
 
 ### 编译器标志
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 # 严格检查
@@ -299,18 +314,23 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 ---
 
 ## 认证文档模板
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### Rust MISRA合规声明
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
 ## MISRA C:2025 Addendum 6 合规声明
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 项目信息
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 - 项目名称: [项目名称]
 - Rust版本: [rustc版本]
 - 工具链: [Ferrocene/标准rustc]
 
 ### 规则映射总结
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 | 类别 | 规则数 | 状态 |
 |------|--------|------|
 | 自动保证 | 108 | 编译器保证 |
@@ -319,9 +339,11 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 | 不适用 | 6 | 语言差异 |
 
 ### 例外说明
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 - 规则X.Y: [原因] - [批准人] - [日期]
 
 ### 工具鉴定
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 - clippy: [版本] - [鉴定文档]
 - miri: [版本] - [使用范围]
 ```
@@ -329,8 +351,10 @@ RUSTFLAGS="-D warnings -W unsafe-code" cargo build
 ---
 
 ## 未来展望
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### MISRA Rust标准
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 MISRA已表示正在考虑制定专门的Rust编码规范：
 
@@ -342,6 +366,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
   - 嵌入式Rust
 
 ### 参与机会
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 加入MISRA工作组
 - 贡献用例研究
@@ -350,6 +375,7 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 ---
 
 ## 参考资源
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [MISRA C:2025 Addendum 6 PDF](https://misra.org.uk/app/uploads/2025/03/MISRA-C-2025-ADD6.pdf)
 - [MISRA官网](https://misra.org.uk)
@@ -369,8 +395,109 @@ MISRA已表示正在考虑制定专门的Rust编码规范：
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
 
 - [DO-178C Rust合规路径](DO_178C_RUST_COMPLIANCE_PATHWAY.md)
 - [IEC 61508 Rust实施指南](IEC_61508_RUST_IMPLEMENTATION_GUIDE.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

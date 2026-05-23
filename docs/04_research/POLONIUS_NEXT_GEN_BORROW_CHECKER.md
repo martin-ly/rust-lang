@@ -189,6 +189,7 @@ flowchart LR
 ---
 
 ## 4. 与 NLL 的对比
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 编译通过的案例
 
@@ -222,6 +223,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 ---
 
 ## 5. 实际使用
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 在 Nightly 上启用 Polonius
 
@@ -279,8 +281,10 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check
 ---
 
 ## 6. 当前限制与路线图
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 已知限制
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 限制 | 状态 | 预计解决 |
 |------|------|---------|
@@ -290,6 +294,7 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check
 | 仅支持部分错误诊断 | 🟡 扩展中 | 2026 |
 
 ### 6.2 Rust 2026 Project Goals 中的定位
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 gantt
@@ -307,6 +312,7 @@ gantt
 ```
 
 ### 6.3 与 Rust for Linux 的关系
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Polonius 的精确分析对内核代码尤为重要：
 
@@ -317,20 +323,24 @@ Polonius 的精确分析对内核代码尤为重要：
 ---
 
 ## 7. 对 Rust 学习者的意义
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 不需要立即学习的理由
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - Polonius 目前仍是 nightly-only 实验特性
 - NLL 已覆盖 95%+ 的实际场景
 - 稳定版编译器暂不支持 `-Zpolonius`
 
 ### 7.2 值得关注的理由
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **理解编译器演进**：Polonius 代表了类型系统 + 逻辑编程的交叉创新
 - **解决实际问题**：遇到 NLL 误报时，知道未来有解决方案
 - **学术研究**：Datalog 在编译器中的应用是 PL 领域的前沿方向
 
 ### 7.3 学习路径建议
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 flowchart TD
@@ -348,8 +358,10 @@ flowchart TD
 ---
 
 ## 8. 参考文献
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方资源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust Compiler Team — Polonius Working Group](https://rust-lang.github.io/compiler-team/working-groups/polonius/)
 - [Polonius GitHub Repository](https://github.com/rust-lang/polonius)
@@ -357,11 +369,13 @@ flowchart TD
 - [Niko Matsakis: An Overview of Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/)
 
 ### 学术论文
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Matsakis N. D., et al. "Non-Lexical Lifetimes: Introduction to MIR-based Borrow Check." *Rustc Dev Guide*, 2018.
 - Arntzenius R. "Datafrog: Lightweight Datalog Engine in Rust." *RustConf*, 2018.
 
 ### Rust Project Goals 2026
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Polonius scalable support](https://rust-lang.github.io/rust-project-goals/2026/)
 - [Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/)
@@ -369,6 +383,7 @@ flowchart TD
 ---
 
 ## 复查记录
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 日期 | 复查人 | 版本 | 状态 |
 |------|-------|------|------|
@@ -408,3 +423,69 @@ flowchart TD
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -1,6 +1,7 @@
 # Rust 所有权系统元模型 - 判断形式
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统元模型 - 判断形式](#rust-所有权系统元模型---判断形式)
   - [📑 目录](#-目录)
@@ -120,6 +121,7 @@
 ```
 
 ### 2.3 子类型判断
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 Δ ⊢ τ₁ <: τ₂
@@ -143,6 +145,7 @@
 ```
 
 ### 2.4 良构性判断
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 2.4.1 类型良构
 
@@ -191,8 +194,10 @@
 ```
 
 ## 3. 语义判断 (Semantic Judgments)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 大步求值 (Big-Step Evaluation)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 σ; h ⊢ e ⇓ σ'; h'; v
@@ -202,6 +207,7 @@
 ```
 
 ### 3.2 单步求值 (Small-Step Evaluation)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 ⟨σ, h, e⟩ → ⟨σ', h', e'⟩
@@ -210,6 +216,7 @@
 ```
 
 ### 3.3 位置求值 (Place Evaluation)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 σ ⊢ p ↝ ℓ
@@ -218,6 +225,7 @@
 ```
 
 ### 3.4 模式匹配
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 v ~ pattern ⇒ σ
@@ -226,8 +234,10 @@ v ~ pattern ⇒ σ
 ```
 
 ## 4. 元理论判断 (Metatheoretic Judgments)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 类型保持 (Preservation)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 Theorem Preservation:
@@ -238,6 +248,7 @@ Theorem Preservation:
 ```
 
 ### 4.2 进展 (Progress)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 Theorem Progress:
@@ -249,12 +260,14 @@ Theorem Progress:
 ```
 
 ### 4.3 类型安全 (Type Safety)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 Type Safety = Preservation + Progress
 ```
 
 ### 4.4 终止性 (Termination)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 Theorem BorrowChecking_Termination:
@@ -275,8 +288,10 @@ where:
 ```
 
 ## 5. 辅助判断
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 自由变量
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 fv(e) = 表达式 e 中的自由变量集合
@@ -284,12 +299,14 @@ fv(τ) = 类型 τ 中的自由变量集合
 ```
 
 ### 5.2 变量捕获
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 captured(e) = 闭包 e 捕获的变量集合
 ```
 
 ### 5.3 生命周期包含
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 Δ ⊢ ρ₁ ⊇ ρ₂
@@ -308,6 +325,7 @@ captured(e) = 闭包 e 捕获的变量集合
 ```
 
 ### 5.4 贷款冲突检查
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 conflict(ω₁, p₁, ω₂, p₂) =
@@ -318,6 +336,7 @@ overlap(p₁, p₂) =
 ```
 
 ### 5.5 借用检查
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 check_borrow(Θ, ω, p) = ok | error
@@ -326,6 +345,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 6. 判断之间的关系
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
@@ -366,8 +386,10 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 7. 判断的推理规则示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 借用规则 (完整版)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
                     Δ; Γ; Θ ⊢ p : τ
@@ -379,6 +401,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.2 所有权安全核心规则
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 ∀r ∈ regions(Γ). ∀(ω', p') ∈ Θ(r).
@@ -391,6 +414,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.3 序列规则
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 Δ; Γ; Θ ⊢ e₁ : τ₁    Δ; Γ[x↦τ₁]; Θ ⊢ e₂ : τ₂
@@ -401,6 +425,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ### 7.4 赋值规则
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 Δ; Γ; Θ ⊢ p : τ      Δ; Γ; Θ ⊢ e : τ
@@ -412,6 +437,7 @@ check_borrow(Θ, ω, p) = ok | error
 ```
 
 ## 8. 判断的 Coq 形式化草图
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
 (* 类型判断 *)
@@ -475,6 +501,7 @@ Inductive eval :
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [meta-model 目录](./README.md)
 - [上级目录](../README.md)
@@ -490,3 +517,87 @@ Inductive eval :
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

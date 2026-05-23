@@ -49,6 +49,7 @@ Socket2提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 2.1 (Socket Domain)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 pub enum Domain {
@@ -59,6 +60,7 @@ pub enum Domain {
 ```
 
 ### 定义 2.2 (Socket Type)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 pub enum Type {
@@ -69,6 +71,7 @@ pub enum Type {
 ```
 
 ### 定理 2.1 (类型安全组合)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > Domain × Type组合在编译时验证。
 
@@ -83,6 +86,7 @@ pub enum Type {
 ---
 
 ## 3. 生命周期管理
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 所有权语义
 
@@ -228,3 +232,22 @@ socket.connect(&tcp_addr)?;  // 运行时错误
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

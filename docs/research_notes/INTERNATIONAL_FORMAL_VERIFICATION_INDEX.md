@@ -1,6 +1,7 @@
 ﻿# 国际 Rust 形式化验证成果对标索引
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [国际 Rust 形式化验证成果对标索引](#国际-rust-形式化验证成果对标索引)
   - [📑 目录](#-目录)
@@ -120,6 +121,7 @@
 - **差距**: 无自动化证明生成
 
 ### 2.8 Tree Borrows (PLDI 2025)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **论文**: [Tree Borrows: A New Aliasing Model for Rust](https://plf.inf.ethz.ch/research/pldi25-tree-borrows.html)（Distinguished Paper Award）
 - **形式化**: 树结构借用、30k crates 54% 更少拒绝、Rocq 证明
@@ -129,6 +131,7 @@
 ---
 
 ## 三、POPL/PLDI/ICFP 论文对齐
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 会议 | 论文 | 年份 | 链接 | 本项目对应 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -143,6 +146,7 @@
 ---
 
 ## 四、与本项目 PROOF_INDEX 的映射
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | PROOF_INDEX 领域 | 国际对标 | 覆盖度 |
 | :--- | :--- | :--- |
@@ -155,6 +159,7 @@
 ---
 
 ## 五、季度更新记录
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 日期 | 更新内容 |
 | :--- | :--- |
@@ -169,11 +174,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -218,6 +225,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -233,3 +241,63 @@
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

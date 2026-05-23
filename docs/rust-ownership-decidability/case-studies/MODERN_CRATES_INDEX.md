@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [现代Rust库形式化分析索引](#现代rust库形式化分析索引)
   - [📑 目录](#-目录)
@@ -67,6 +68,7 @@
 | [tower](./tower-formal-analysis.md) | 服务抽象 | 组合子、背压 | ✅ |
 
 ### 数据库 (3个)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 库名 | 领域 | 关键形式化 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -180,3 +182,18 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

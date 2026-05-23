@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 完整领域覆盖索引](#rust-所有权系统---完整领域覆盖索引)
   - [📑 目录](#-目录)
@@ -123,8 +124,10 @@
 ---
 
 ## 📈 案例分析统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 深度分析文档 (1000+ 行)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 领域 | 行数 | 特色 |
 |:-----|:-----|:----:|:-----|
@@ -134,6 +137,7 @@
 | [Serde 深度分析](./serde-formal-analysis-deep.md) | 序列化 | 700+ | 宏系统分析 |
 
 ### 标准库分析系列
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [std-vec-formal-analysis.md](./std-vec-formal-analysis.md) - Vec 实现分析
 - [std-hashmap-formal-analysis.md](./std-hashmap-formal-analysis.md) - HashMap 实现
@@ -144,8 +148,10 @@
 ---
 
 ## 🎯 学习路径推荐
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 路径 1: Web 开发者
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 1. Web框架分析 (Actix-web / Axum)
@@ -155,6 +161,7 @@
 ```
 
 ### 路径 2: 系统开发者
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 1. 嵌入式分析 (Embassy / RTIC)
@@ -164,6 +171,7 @@
 ```
 
 ### 路径 3: 数据工程师
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 1. 数据库指南 (database/README.md)
@@ -173,6 +181,7 @@
 ```
 
 ### 路径 4: 多媒体开发者
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 1. 音视频指南 (media/README.md)
@@ -184,6 +193,7 @@
 ---
 
 ## 📝 补充计划
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 待补充案例
 
@@ -257,3 +267,27 @@
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

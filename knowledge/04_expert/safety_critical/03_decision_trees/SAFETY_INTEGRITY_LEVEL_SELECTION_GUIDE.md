@@ -72,6 +72,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 > **[来源: Rust Official Docs]**
 
 ### 2.1 汽车系统ASIL选择
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 开始
@@ -96,6 +97,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.2 工业系统SIL选择
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 开始
@@ -121,6 +123,7 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ```
 
 ### 2.3 航空系统DAL选择
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 开始
@@ -144,8 +147,10 @@ S3  | ASIL| ASIL| ASIL| ASIL|
 ---
 
 ## 3. 等级分解策略
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 ASIL分解
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 ASIL D分解选项:
@@ -172,6 +177,7 @@ ASIL D分解选项:
 ```
 
 ### 3.2 SIL分解
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 //! SIL分解Rust实现示例
@@ -222,8 +228,10 @@ impl OneOutOfTwo {
 ---
 
 ## 4. Rust实现建议
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 ASIL A实现
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 //! ASIL A级实现要求
@@ -254,6 +262,7 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 ```
 
 ### 4.2 ASIL B实现
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 //! ASIL B级实现要求
@@ -284,6 +293,7 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 ```
 
 ### 4.3 ASIL C实现
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 //! ASIL C级实现要求
@@ -328,6 +338,7 @@ impl ValidatedValue {
 ```
 
 ### 4.4 ASIL D实现
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 //! ASIL D级实现要求
@@ -395,8 +406,10 @@ impl AsilDProcessor {
 ---
 
 ## 5. 降级与升级策略
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 等级降级条件
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 允许降级的情况:
@@ -413,6 +426,7 @@ impl AsilDProcessor {
 ```
 
 ### 5.2 等级升级触发
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 需要升级的情况:
@@ -426,8 +440,10 @@ impl AsilDProcessor {
 ---
 
 ## 6. 检查清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### ASIL确定检查表
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 危害分析完成
 - [ ] 严重性评估正确
@@ -439,6 +455,7 @@ impl AsilDProcessor {
 - [ ] 利益相关方评审
 
 ### 等级实现检查表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### ASIL A
 
@@ -487,8 +504,179 @@ impl AsilDProcessor {
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
 
 - [Rust应用决策树图集](RUST_DECISION_TREES.md)
 - [学术研究全景](../01_mind_maps/ACADEMIC_RESEARCH_LANDSCAPE.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

@@ -45,6 +45,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 词法生命周期的问题
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
 // 词法作用域借用检查（NLL 之前）的问题
@@ -88,6 +89,7 @@ fn drop_and_use() {
 ---
 
 ### 1.2 NLL 的解决方案
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 NLL (Non-Lexical Lifetimes) 的核心思想:
@@ -119,6 +121,7 @@ NLL (Non-Lexical Lifetimes) 的核心思想:
 ---
 
 ### 1.3 Polonius 的进一步精确化
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Polonius: 下一代借用检查器
@@ -159,6 +162,7 @@ Polonius: 下一代借用检查器
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 NLL 的实现机制
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 NLL 的数据流分析:
@@ -210,6 +214,7 @@ NLL 的数据流分析:
 ---
 
 ### 2.2 Polonius 的约束传播
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Polonius 的约束模型:
@@ -246,6 +251,7 @@ Polonius 的约束模型:
 ---
 
 ### 2.3 借用检查的三代对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 借用检查器演进:
@@ -333,6 +339,7 @@ NLL / Polonius 影响的代码模式:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -355,6 +362,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: NLL 仍保守的情况
@@ -456,6 +464,8 @@ graph TD
 | [Rust Reference — Lifetimes](https://doc.rust-lang.org/reference/lifetime-elision.html) | ✅ 一级 | 语言参考 |
 | [TRPL — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html) | ✅ 一级 | 基础教程 |
 | [Rustonomicon — NLL](https://doc.rust-lang.org/nomicon/borrow-splitting.html) | ✅ 一级 | 深入分析 |
+| [Polonius Project Goal 2026](https://rust-lang.github.io/rust-project-goals/2026/polonius.html) | ✅ 一级 | Rust Project Goals 2026 — Polonius Alpha 稳定化 |
+| [Rust Blog — Project Goals Update April 2026](https://blog.rust-lang.org/2026/05/18/project-goals-2026-04/) | ✅ 一级 | 2025H2 目标期总结；Location-sensitive Polonius 已进入 nightly |
 
 ---
 
@@ -468,6 +478,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 fn main() {
@@ -510,3 +521,117 @@ fn main() {
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

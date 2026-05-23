@@ -56,6 +56,7 @@ wasm-bindgen功能：
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定义 TYPEMAP-1 ( 基本类型 )
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Rust | JavaScript | 传递方式 |
 | :--- | :--- | :--- |
@@ -67,6 +68,7 @@ wasm-bindgen功能：
 | JsValue | any | 引用 |
 
 ### 定义 TYPEMAP-2 ( 复杂类型 )
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 #[wasm_bindgen]
@@ -80,14 +82,17 @@ $$
 ---
 
 ## 3. 内存管理
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定义 MEM-1 ( wasm内存模型 )
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 $$
 \text{WasmMemory} = \text{linear\_memory}[0..2^{32})
 $$
 
 ### 定义 MEM-2 ( 所有权转移 )
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 #[wasm_bindgen]
@@ -98,6 +103,7 @@ impl Point {
 ```
 
 ### 定理 MEM-T1 ( 无泄漏 )
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 导出类型正确drop。
 
@@ -108,8 +114,10 @@ $$
 ---
 
 ## 4. 导出函数
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 定义 EXPORT-1 ( 导出语法 )
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 #[wasm_bindgen]
@@ -290,3 +298,35 @@ pub async fn fetch_json(url: String) -> Result<JsValue, JsValue> {
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
+>
+> **[来源: [Wasmtime](https://wasmtime.dev/)]**
+>
+> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
+>
+> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

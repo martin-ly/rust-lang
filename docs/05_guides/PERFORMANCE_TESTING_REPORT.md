@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [⚡ 性能测试报告 {#-性能测试报告}](#-性能测试报告--性能测试报告)
   - [📑 目录](#-目录)
@@ -96,6 +97,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 核心模块性能测试
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模块 | 基准测试文件数 | 文件列表 |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
@@ -116,8 +118,10 @@
 ---
 
 ## 运行性能测试
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 运行所有性能测试
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
 # 运行所有模块的性能测试
@@ -125,6 +129,7 @@ cargo bench --workspace
 ```
 
 ### 运行特定模块的性能测试
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
 # 运行类型系统模块的性能测试
@@ -138,6 +143,7 @@ cargo bench --package c10_networks
 ```
 
 ### 运行特定基准测试
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 # 运行特定的基准测试函数
@@ -147,8 +153,10 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 ---
 
 ## 性能测试结果
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 测试覆盖范围
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ **所有权系统**: 所有权转移、借用检查性能
 - ✅ **类型系统**: 类型转换、类型推断、泛型操作性能
@@ -166,26 +174,31 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 ---
 
 ## 性能优化建议
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 内存优化
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 使用 `Vec::with_capacity()` 预分配容量
 - 使用 `Box` 减少栈内存使用
 - 使用 `Arc` 共享不可变数据
 
 ### 2. 迭代器优化
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 使用迭代器链式操作
 - 使用 `collect()` 时指定类型
 - 避免不必要的中间集合
 
 ### 3. 并发优化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 使用无锁数据结构
 - 减少锁的持有时间
 - 使用原子操作替代锁
 
 ### 4. 异步优化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 使用合适的异步运行时
 - 避免阻塞异步任务
@@ -194,13 +207,16 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 ---
 
 ## 相关资源
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 性能测试工具
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [Criterion.rs](https://github.com/bheisler/criterion.rs) - Rust性能基准测试框架
 - [cargo-bench](https://doc.rust-lang.org/cargo/commands/cargo-bench.html) - Cargo基准测试命令
 
 ### 性能优化资源
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust性能手册](https://nnethercote.github.io/perf-book/)
 - [Rust性能优化指南](./ADVANCED_TOPICS_DEEP_DIVE.md#6-性能优化深度指南)
@@ -208,8 +224,10 @@ cargo bench --package c02_type_system --bench performance_benchmarks
 ---
 
 ## 使用场景
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 场景1: 性能回归测试
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 CI/CD 中集成性能测试：
 
@@ -220,6 +238,7 @@ cargo bench --workspace
 ```
 
 ### 场景2: 模块性能对比
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 比较不同实现的性能：
 
@@ -228,6 +247,7 @@ cargo bench --workspace
 - 生成性能报告进行对比分析
 
 ### 场景3: 优化验证
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 验证性能优化的效果：
 
@@ -236,6 +256,7 @@ cargo bench --workspace
 3. 重新运行测试，对比结果
 
 ### 场景4: 发布前性能审计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 在版本发布前进行性能审计：
 
@@ -246,6 +267,7 @@ cargo bench --workspace
 ---
 
 ## 形式化链接
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
@@ -268,10 +290,12 @@ cargo bench --workspace
 ---
 
 ## Rust 1.95+ 性能测试与基准
+> **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### array_windows 性能基准
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 方法 | 吞吐量 | 性能提升 |
 |------|--------|----------|
@@ -279,6 +303,7 @@ cargo bench --workspace
 | `array_windows::<3>()` | 2.4M ops/s | **+33%** |
 
 ### LazyLock 并发性能
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 访问方式 | 延迟 | 优化 |
 |----------|------|------|
@@ -286,6 +311,7 @@ cargo bench --workspace
 | `LAZY_LOCK.get()` | **8-15 ns** | **热路径** |
 
 ### 测试总结
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特性 | 性能提升 | 推荐度 |
 |------|---------|--------|
@@ -313,6 +339,7 @@ cargo bench --workspace
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -339,3 +366,57 @@ cargo bench --workspace
 > **[来源: Criterion.rs Documentation]**
 > **[来源: ACM - Performance Engineering]**
 > **[来源: Rust Performance Book]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
+>
+> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

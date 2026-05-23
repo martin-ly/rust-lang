@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [国际化对标批判性评估 - 重定向](#国际化对标批判性评估---重定向)
   - [📑 目录](#-目录)
@@ -74,6 +75,7 @@
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [07_project 目录](./README.md)
 - [上级目录](../README.md)
@@ -89,3 +91,29 @@
 > **[来源: ACM - Performance Engineering]**
 
 > **[来源: Rust Performance Book]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
+>
+> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

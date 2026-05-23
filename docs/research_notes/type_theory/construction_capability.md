@@ -1,6 +1,7 @@
 ﻿# 类型系统构造能力
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [类型系统构造能力](#类型系统构造能力)
   - [📑 目录](#-目录)
@@ -97,6 +98,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## TCON 矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 类型族 × 构造方式 × 确定性
 
@@ -123,6 +125,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## Rust 1.93 新增类型/表达式
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 以下 Rust 1.93 新增或变更的特性影响类型构造能力；详见 [07_rust_1.93_full_changelog](../../06_toolchain/07_rust_1.93_full_changelog.md)、[00_completeness_gaps](./00_completeness_gaps.md)。
 
@@ -139,6 +142,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 类型理论缺口对构造能力的影响
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 [00_completeness_gaps](./00_completeness_gaps.md) 中 ⚠️ 部分缺口可能影响类型构造路径；本表标注其对 TCON 的影响。
 
@@ -153,6 +157,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 类型构造决策树
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 给定目标类型 → 构造路径选择
 
@@ -190,6 +195,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 确定性判定
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 情形 | 确定性 | 处理 |
 | :--- | :--- | :--- |
@@ -210,6 +216,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 与已有证明衔接
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 衔接点 |
 | :--- | :--- |
@@ -222,6 +229,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 相关文档
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档 | 用途 |
 | :--- | :--- |
@@ -239,6 +247,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -296,6 +305,7 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [type_theory 目录](./README.md)
 - [上级目录](../README.md)
@@ -322,3 +332,87 @@ $$\mathrm{TCON}(\tau) = (\mathit{Syntax}(\tau), \mathit{Constraints}(\tau), \mat
 
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Memory Safety]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

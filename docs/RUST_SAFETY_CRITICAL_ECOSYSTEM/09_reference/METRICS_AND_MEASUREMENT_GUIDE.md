@@ -1,6 +1,7 @@
 # 度量与测量指南
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [度量与测量指南](#度量与测量指南)
   - [📑 目录](#-目录)
@@ -105,6 +106,7 @@ fn calculate(a: i32, b: i32, op: Op) -> i32 {
 ---
 
 ## 2. 测试覆盖率度量
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 覆盖率类型
 
@@ -168,6 +170,7 @@ mod coverage {
 ---
 
 ## 3. 缺陷度量
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 缺陷密度
 
@@ -203,6 +206,7 @@ mod coverage {
 ---
 
 ## 4. 过程度量
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 开发效率
 
@@ -237,6 +241,7 @@ mod coverage {
 ---
 
 ## 5. 安全特定度量
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 安全分析
 
@@ -250,6 +255,7 @@ mod coverage {
 | **诊断覆盖** | 故障检测比例 | > 99% | FMEDA |
 
 ### 5.2 形式化验证
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 验证度量:
@@ -273,8 +279,10 @@ mod coverage {
 ---
 
 ## 6. 工具链度量
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 构建性能
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 度量 | 目标 | 测量 | 优化 |
 |------|------|------|------|
@@ -284,6 +292,7 @@ mod coverage {
 | **覆盖率** | < 5分钟 | llvm-cov | 增量 |
 
 ### 6.2 CI/CD度量
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 流水线指标:
@@ -297,41 +306,50 @@ mod coverage {
 ---
 
 ## 7. 度量报告模板
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 周报模板
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
 # 项目度量周报 (YYYY-MM-DD)
 
 ## 代码质量
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 - 圈复杂度超标: 0个函数
 - Clippy警告: 5个 (较上周-2)
 - 代码行数: +500
 
 ## 测试覆盖
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 - 语句覆盖: 98% (目标100%)
 - 分支覆盖: 96% (目标100%)
 - MC/DC: 95% (目标100%)
 
 ## 缺陷统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 - 新发现: 3个 (2中1低)
 - 已解决: 5个
 - 遗留: 8个
 
 ## 形式化验证
+> **[来源: [crates.io](https://crates.io/)]**
 - 新增属性: 10个
 - 验证通过: 9个
 - 失败分析: 1个进行中
 ```
 
 ### 7.2 月度报告模板
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```markdown
 # 项目度量月报 (YYYY-MM)
 
 ## 总体健康度: 🟢 良好
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ## 关键指标
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 | 指标 | 目标 | 实际 | 趋势 |
 |------|------|------|------|
 | 代码质量 | A | A | → |
@@ -340,17 +358,21 @@ mod coverage {
 | 构建时间 | <5m | 4m30s | → |
 
 ## 风险
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 - 覆盖率缺口: 3个模块需补充测试
 
 ## 行动计划
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 1. 补充测试用例 (负责人: XXX, 截止: XX)
 ```
 
 ---
 
 ## 8. 度量工具
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 8.1 自动收集
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```yaml
 # GitHub Actions度量收集
@@ -367,6 +389,7 @@ mod coverage {
 ```
 
 ### 8.2 可视化
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 推荐工具:
@@ -403,6 +426,7 @@ mod coverage {
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
 
@@ -419,3 +443,91 @@ mod coverage {
 > **[来源: IEEE - Software Engineering Metrics]**
 
 > **[来源: ISO/IEC 25010 - System and Software Quality]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [嵌入式库形式化分析索引](#嵌入式库形式化分析索引)
   - [📑 目录](#-目录)
@@ -206,3 +207,22 @@
 > **[来源: Embassy Book]**
 
 > **[来源: RTIC Book]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

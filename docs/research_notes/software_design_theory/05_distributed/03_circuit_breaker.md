@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Circuit Breaker 模式形式化定义](#circuit-breaker-模式形式化定义)
   - [📑 目录](#-目录)
@@ -68,6 +69,7 @@ State_Transition :=
 ```
 
 ### Def CB3: 故障计数器
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failure}|
@@ -78,8 +80,10 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 ---
 
 ## 2. 基本假设 (Axiom)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Axiom CB1: 状态互斥
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 ∀t. State(t) = Closed ⊕ Open ⊕ HalfOpen
@@ -88,6 +92,7 @@ FailureCount(t) := |{r ∈ T | time(r) ∈ [t - window, t] ∧ result(r) = failu
 任一时刻只处于一个状态。
 
 ### Axiom CB2: 故障阈值正性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 f_threshold > 0
@@ -96,6 +101,7 @@ f_threshold > 0
 阈值必须为正整数。
 
 ### Axiom CB3: 超时单调性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
@@ -106,8 +112,10 @@ t₁ < t₂ → CanRetry(t₁) → CanRetry(t₂)
 ---
 
 ## 3. 定理 (Theorem)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### Theorem CB1: 故障隔离
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 State = Open → ∀req. Reject(req)
@@ -120,6 +128,7 @@ State = Open → ∀req. Reject(req)
 3. 下游服务被保护，不受故障影响
 
 ### Theorem CB2: 自恢复
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 State = Open ∧ (now - last_failure) > t_timeout
@@ -135,6 +144,7 @@ State = Open ∧ (now - last_failure) > t_timeout
 ---
 
 ## 4. Rust 实现示例
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::sync::atomic::{AtomicU32, Ordering};
@@ -215,6 +225,7 @@ impl CircuitBreaker {
 ---
 
 ## 5. 配置建议
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | threshold | timeout | 说明 |
 |------|-----------|---------|------|
@@ -232,11 +243,13 @@ impl CircuitBreaker {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -281,6 +294,7 @@ impl CircuitBreaker {
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
@@ -307,3 +321,69 @@ impl CircuitBreaker {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

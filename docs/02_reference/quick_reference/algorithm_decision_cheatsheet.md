@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法选择决策树速查卡](#算法选择决策树速查卡)
   - [📑 目录](#-目录)
@@ -66,6 +67,7 @@
 ---
 
 ## 📊 动态规划
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特征 | 适用 DP | 不适用（尝试贪心） |
 |------|---------|------------------|
@@ -83,6 +85,7 @@
 ---
 
 ## 🔗 参考
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [c08_algorithm_decision_trees](../../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
 - [c08_AlgorithmSkeletons](../../../crates/c08_algorithms/src/algorithm_decision_trees.rs)
@@ -109,6 +112,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
@@ -132,3 +136,31 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+

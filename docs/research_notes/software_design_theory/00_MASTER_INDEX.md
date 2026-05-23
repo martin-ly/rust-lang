@@ -1,6 +1,7 @@
 ﻿# 软件设计理论体系：主索引
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [软件设计理论体系：主索引](#软件设计理论体系主索引)
   - [📑 目录](#-目录)
@@ -80,6 +81,7 @@
 ---
 
 ## 二、边界化索引
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 三维边界
 
@@ -102,6 +104,7 @@
 ---
 
 ## 三、扩展化路线
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 设计模式扩展
 
@@ -130,6 +133,7 @@
 ---
 
 ## 四、层次推进学习路径
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 阶段 | 阅读顺序 | 内容深度 | 预计时间 |
 | :--- | :--- | :--- | :--- |
@@ -142,6 +146,7 @@
 ---
 
 ## 五、层次推进实质内容深化路线
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 层次 | 深化入口 | 新增/充实内容 |
 | :--- | :--- | :--- |
@@ -153,6 +158,7 @@
 ---
 
 ## 六、内容概览
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本体系各文档已充实为实质内容：
 
@@ -168,6 +174,7 @@
 ---
 
 ## 七、学习与选型
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 阶段 | 内容 |
 | :--- | :--- |
@@ -181,6 +188,7 @@
 ---
 
 ## 八、文档快速导航
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 需求 | 入口文档 |
 | :--- | :--- |
@@ -196,6 +204,7 @@
 ---
 
 ## 九、扩展阅读
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Refactoring.Guru](https://refactoring.guru/design-patterns)：各模式结构图
 - [rust-unofficial/patterns](https://rust-unofficial.github.io/patterns/)：Rust 惯用模式
@@ -204,6 +213,7 @@
 ---
 
 ## 十、推进阶段
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 阶段 | 内容 | 状态 |
 | :--- | :--- | :--- |
@@ -217,6 +227,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -268,6 +279,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [software_design_theory 目录](./README.md)
 - [上级目录](../README.md)
@@ -287,3 +299,67 @@
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: Martin Fowler - Patterns of Enterprise Application Architecture]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

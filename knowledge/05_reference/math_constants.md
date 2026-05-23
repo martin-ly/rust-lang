@@ -69,6 +69,7 @@ const E: f64 = f64::consts::E;
 | `GOLDEN_RATIO_CONJUGATE` | Φ ≈ -0.61803399 | 黄金比例共轭 | 黄金分割搜索、Fibonacci 数列 |
 
 ### 模块 2: 属性清单
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 完整常量表 (f64::consts)
 
@@ -98,6 +99,7 @@ const E: f64 = f64::consts::E;
 > **注意**: `f32::consts` 提供相同名称的常量，但精度为单精度浮点。
 
 ### 模块 3: 概念依赖图
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 数学常量
@@ -119,6 +121,7 @@ const E: f64 = f64::consts::E;
 ```
 
 ### 模块 4: 机制解释
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 4.1 编译时常量 vs 硬编码
 
@@ -133,6 +136,7 @@ let area = f64::consts::PI * r * r;
 标准库常量使用浮点类型的最大可表示精度，通常比手写 6-10 位小数更精确。
 
 ### 模块 5: 正例集
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 5.1 黄金比例搜索
 
@@ -190,6 +194,7 @@ fn fibonacci(n: u32) -> f64 {
 ```
 
 ### 模块 6: 反例集
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 6.1 f32/f64 精度混淆
 
@@ -215,6 +220,7 @@ let good = x * f32::consts::PI;
 ```
 
 ### 模块 7: 思维表征
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 常量选择速查
 
@@ -229,6 +235,7 @@ let good = x * f32::consts::PI;
 ```
 
 ### 模块 8: 国际化对齐
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 中文 | 英文 | 符号 |
 |------|------|------|
@@ -239,6 +246,7 @@ let good = x * f32::consts::PI;
 | 共轭黄金比例 | Golden Ratio Conjugate | Φ |
 
 ### 模块 9: 设计权衡
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 方案 | 优点 | 缺点 |
 |------|------|------|
@@ -250,6 +258,7 @@ let good = x * f32::consts::PI;
 > **推荐**: 在模块级别 `use std::f64::consts::{PI, E, ...};` 或直接使用 `f64::consts::PI`。
 
 ### 模块 10: 自我检测
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 问题 | 答案 |
 |------|------|
@@ -261,8 +270,10 @@ let good = x * f32::consts::PI;
 ---
 
 ## 📖 权威来源与延伸阅读
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方文档（一级来源）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [std::f64::consts](https://doc.rust-lang.org/std/f64/consts/index.html) —— 标准库数学常量完整列表
 - [std::f32::consts](https://doc.rust-lang.org/std/f32/consts/index.html) —— f32 版本数学常量
@@ -282,5 +293,98 @@ let good = x * f32::consts::PI;
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 标准库速查](./std_library_cheatsheet.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

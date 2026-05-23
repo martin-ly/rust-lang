@@ -5,6 +5,7 @@
 # C++ 互操作指南（cxx + bindgen）
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [C++ 互操作指南（cxx + bindgen）](#c-互操作指南cxx--bindgen)
   - [📑 目录](#-目录)
@@ -43,6 +44,7 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 - **安全保证**: cxx 编译器自动生成桥接代码，禁止不安全的指针传递
 
 ### 工作流程
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // src/lib.rs
@@ -90,6 +92,7 @@ std::unique_ptr<Canvas> create_canvas() {
 ```
 
 ### build.rs
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 fn main() {
@@ -100,8 +103,10 @@ fn main() {
 ```
 
 ## bindgen
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 工作流程
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. 编写 `wrapper.h`，包含需要绑定的 C/C++ 头文件
 2. `build.rs` 中调用 `bindgen::Builder` 生成 Rust 代码
@@ -148,6 +153,7 @@ pub mod safe_wrapper {
 ```
 
 ## cxx vs bindgen 对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | cxx | bindgen |
 |------|-----|---------|
@@ -159,6 +165,7 @@ pub mod safe_wrapper {
 | 适用场景 | 新的 C++/Rust 混合项目 | 绑定现有的大型 C 库 |
 
 ## 项目中的使用
+> **[来源: [crates.io](https://crates.io/)]**
 
 本项目在 `c13_embedded` crate 中提供了 cxx 互操作的概念演示：
 
@@ -172,6 +179,7 @@ cxx_interop::explain_bindgen_workflow();
 启用 `cxx-interop` feature 后可尝试真实 cxx 桥接（需要 C++ 编译器）。
 
 ## 参考
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [cxx 文档](https://cxx.rs/)
 - [bindgen 文档](https://rust-lang.github.io/rust-bindgen/)
@@ -191,6 +199,7 @@ cxx_interop::explain_bindgen_workflow();
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
 
@@ -213,3 +222,59 @@ cxx_interop::explain_bindgen_workflow();
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

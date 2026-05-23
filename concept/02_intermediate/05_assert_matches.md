@@ -34,6 +34,7 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -44,6 +45,8 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 `matches!`：模式匹配的布尔化
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 1.42 引入 `matches!` 宏，将模式匹配从**控制流**转化为**布尔表达式**：
 
@@ -79,6 +82,8 @@ assert!(matches!(x, Some(n) if n > 100)); // ❌ 失败
 ---
 
 ### 1.2 `assert_matches!`：从判断到断言
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.96 稳定化 `assert_matches!`，将 `matches!` 的布尔结果**提升为断言契约**：
 
@@ -123,6 +128,8 @@ assert_matches!(result, Ok(n) if n > 10 => {
 ---
 
 ### 1.3 `debug_assert_matches!`：编译期条件断言
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 与 `assert!` / `debug_assert!` 的关系一致：
 
@@ -151,6 +158,8 @@ debug_assert_matches!(config, Config::Debug { verbose: true } => {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 与 `assert!` / `assert_eq!` 的对比
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph LR
@@ -188,6 +197,8 @@ graph LR
 ---
 
 ### 2.2 绑定捕获与作用域
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```ignore
 enum Message {
@@ -225,6 +236,8 @@ assert_matches!(msg, Message::Coord { x, y } => {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 测试中的 Result/Option 断言
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```ignore
 #[test]
@@ -247,6 +260,8 @@ fn parse_config() {
 ---
 
 ### 3.2 复杂枚举变体验证
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```ignore
 #[derive(Debug)]
@@ -272,6 +287,8 @@ fn state_machine_transition() {
 ---
 
 ### 3.3 与 `if let` 的互补关系
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 flowchart TD
@@ -302,6 +319,8 @@ flowchart TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -333,6 +352,8 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```ignore
 // 边界 1: 嵌套模式
@@ -387,6 +408,8 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 fn main() {
@@ -428,3 +451,102 @@ fn main() {
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**

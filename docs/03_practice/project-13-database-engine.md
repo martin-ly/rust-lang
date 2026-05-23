@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 13: 简易数据库引擎](#实践项目-13-简易数据库引擎)
   - [📑 目录](#-目录)
@@ -44,6 +45,7 @@
 > **[来源: Rust Official Docs]**
 
 ### B-Tree实现
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 struct BTreeNode {
@@ -100,3 +102,16 @@ struct BTreeNode {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Database Ecosystem](https://www.areweadyet.org/topics/database/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

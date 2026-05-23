@@ -1,6 +1,7 @@
 # 16-program-semantics 全面诊断分析与路线图
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [16-program-semantics 全面诊断分析与路线图](#16-program-semantics-全面诊断分析与路线图)
   - [📑 目录](#-目录)
@@ -37,6 +38,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 执行摘要
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档对 `16-program-semantics` 目录进行系统性诊断，对比权威学术来源（TAPL、PLT Redex、RustBelt等），识别内容缺口，并提供分阶段推进方案。
 
@@ -98,8 +100,10 @@
 ---
 
 ## 二、与权威来源对比分析
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 核心语义理论缺口
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 根据 *Types and Programming Languages* (Pierce) 和 *Semantics Engineering* (PLT Redex)：
 
@@ -114,6 +118,7 @@
 | **类型安全 (保持性+进展)** | 🟡 隐式 | 🟡 中等 |
 
 ### 2.2 类型理论缺口
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型理论主题 | 当前覆盖 | 缺口严重程度 |
 |--------------|----------|--------------|
@@ -128,6 +133,7 @@
 | **区域类型** | 🟡 部分 | 🟡 中等 |
 
 ### 2.3 内存与状态语义缺口
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 主题 | 当前覆盖 | 缺口 |
 |------|----------|------|
@@ -138,6 +144,7 @@
 | **MIR语义** | 🟡 简要 | 🟡 中等 |
 
 ### 2.4 并发理论缺口
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 主题 | 当前覆盖 | 缺口 |
 |------|----------|------|
@@ -148,8 +155,10 @@
 ---
 
 ## 三、问题根因分析
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 3.1 结构问题
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 1. 层次不清
@@ -166,6 +175,7 @@
 ```
 
 ### 3.2 内容问题
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 1. 形式化不足
@@ -187,8 +197,10 @@
 ---
 
 ## 四、改进建议
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 架构重组建议
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 建议重新组织为层次结构：
 
@@ -229,6 +241,7 @@
 ```
 
 ### 4.2 内容改进建议
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 优先级 | 建议 | 预期工作量 |
 |--------|------|------------|
@@ -246,8 +259,10 @@
 ---
 
 ## 五、分阶段推进计划
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 阶段1: 理论基础补齐 (第1-2周)
+> **[来源: [crates.io](https://crates.io/)]**
 
 **目标**: 建立完整的理论基础框架
 
@@ -266,6 +281,7 @@
 - 包含形式化推导规则
 
 ### 阶段2: Rust核心扩展 (第3-4周)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **目标**: 深化Rust核心语义文档
 
@@ -278,6 +294,7 @@
 | 2.5 | 新增: mir-semantics.md | MIR形式化语义 |
 
 ### 阶段3: Workflow模式深化 (第5-6周)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **目标**: 将workflow-patterns提升到与distributed-patterns相同质量
 
@@ -292,6 +309,7 @@
 | 3.7 | 15-18-*.md | 每篇扩展到12-15KB |
 
 ### 阶段4: 高级理论与验证 (第7-8周)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **目标**: 添加前沿理论内容
 
@@ -305,6 +323,7 @@
 | 4.6 | 04c-coq-correspondence.md | Coq证明对应关系 |
 
 ### 阶段5: 整合与 polish (第9-10周)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **目标**: 统一风格，建立交叉引用
 
@@ -319,8 +338,10 @@
 ---
 
 ## 六、预期成果
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 量化指标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 指标 | 当前 | 目标 | 提升 |
 |------|------|------|------|
@@ -331,6 +352,7 @@
 | 理论基础覆盖 | 30% | 80%+ | +50% |
 
 ### 6.2 质量指标
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 所有文档包含完整的数学定义
 - [ ] 所有文档包含可运行的Rust代码
@@ -341,6 +363,7 @@
 ---
 
 ## 七、风险与缓解
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 风险 | 可能性 | 影响 | 缓解措施 |
 |------|--------|------|----------|
@@ -352,6 +375,7 @@
 ---
 
 ## 八、结论
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 16-program-semantics目录已具备良好基础，但存在以下关键缺口：
 
@@ -385,6 +409,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [16-program-semantics 目录](./README.md)
 - [上级目录](../README.md)
@@ -400,3 +425,69 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化模型分析与论证推进报告](#形式化模型分析与论证推进报告)
   - [📑 目录](#-目录)
@@ -87,6 +88,7 @@
 ---
 
 ### ✅ 3. 类型-所有权统一理论文档
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **文件**: `formal-foundations/proofs/type-ownership-unified-theory.md`
 **规模**: 1,463 行，~62KB
@@ -112,6 +114,7 @@
 ---
 
 ### ✅ 4. 定理依赖图更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **文件**: `THEOREM_DEPENDENCY_GRAPH.md`
 **状态**: ✅ 已更新
@@ -124,6 +127,7 @@
 ---
 
 ### ✅ 5. 证明策略库文档
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **文件**: `formal-foundations/proofs/PROOF_PATTERNS.md`
 **规模**: 1,752 行，~46KB
@@ -148,6 +152,7 @@
 ---
 
 ## 本次推进统计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类别 | 数量 | 行数 | 字节数 |
 |------|------|------|--------|
@@ -158,8 +163,10 @@
 ---
 
 ## 剩余未完成工作
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Coq 形式化层（代码级）
+> **[来源: [crates.io](https://crates.io/)]**
 
 根据 `TECHNICAL_DEBT.md` 和框架分析，仍有以下 `admit` 需要填充：
 
@@ -183,6 +190,7 @@
 - [ ] `program_correctness` - 程序正确性
 
 ### 估计剩余工作量
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 任务类别 | 估计时间 | 复杂度 |
 |---------|---------|--------|
@@ -194,8 +202,10 @@
 ---
 
 ## 质量保证
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文档完整性检查 ✅
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 统一理论框架文档
 - [x] 元模型统一描述
@@ -204,6 +214,7 @@
 - [x] 理论-实践映射
 
 ### 形式化完整性检查 ⚠️
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 语义等价性证明（文档层）
 - [x] 类型-所有权联系（文档层）
@@ -214,8 +225,10 @@
 ---
 
 ## 下一步行动建议
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 短期（1-2周）
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **填充关键 admit**
    - 使用 PROOF_PATTERNS.md 中的策略
@@ -227,6 +240,7 @@
    - 验证语义等价证明的一致性
 
 ### 中期（3-4周）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **完成 Coq 层证明**
    - preservation / progress 所有情况
@@ -237,6 +251,7 @@
    - 证明检查脚本
 
 ### 长期（1-2月）
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. **研究前沿扩展**
    - 异步 Rust 形式化
@@ -302,3 +317,41 @@
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

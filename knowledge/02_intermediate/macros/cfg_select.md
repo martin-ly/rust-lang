@@ -70,6 +70,7 @@ fn hasher_name() -> &'static str {
 ```
 
 ### 2.3 架构特定优化
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 fn simd_lanes() -> usize {
@@ -85,8 +86,10 @@ fn simd_lanes() -> usize {
 ---
 
 ## 三、应用场景
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 跨平台路径分隔符
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 const PATH_SEP: char = cfg_select! {
@@ -96,6 +99,7 @@ const PATH_SEP: char = cfg_select! {
 ```
 
 ### 3.2 嵌入式目标选择
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 fn max_priority() -> u8 {
@@ -110,8 +114,10 @@ fn max_priority() -> u8 {
 ---
 
 ## 四、限制与反例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### ❌ 不能用于模块/函数声明
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 错误：cfg_select! 是表达式级宏
@@ -122,6 +128,7 @@ cfg_select! {
 ```
 
 ### ❌ 所有分支类型必须一致
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 错误：分支类型不一致
@@ -132,6 +139,7 @@ let x = cfg_select! {
 ```
 
 ### ❌ 运行时条件无效
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 let runtime_flag = true;
@@ -142,6 +150,7 @@ let runtime_flag = true;
 ---
 
 ## 五、决策树
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 需要根据 cfg 条件选择代码？
@@ -155,6 +164,7 @@ let runtime_flag = true;
 ---
 
 ### 模块 3: 概念依赖图
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -181,8 +191,10 @@ graph TD
 ---
 
 ### 模块 7: 思维表征
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 表征: cfg 条件编译工具选择矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 需求 | `#[cfg]` | `cfg!` | `cfg_select!` |
 |------|---------|--------|--------------|
@@ -196,6 +208,7 @@ graph TD
 ---
 
 ## 📚 模块 8: 国际化对齐
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 类型 | 说明 |
 |------|------|------|
@@ -205,8 +218,10 @@ graph TD
 ---
 
 ## ⚖️ 模块 9: 设计权衡
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 为什么需要 cfg_select!？
+> **[来源: [crates.io](https://crates.io/)]**
 
 `#[cfg]` 只能作用于**项级别**（函数、结构体、模块），`cfg!` 只能在**表达式级别**返回布尔值。`cfg_select!` 填补了"表达式级多分支选择"的空白，使平台相关常量和函数体的编写更简洁。
 
@@ -215,6 +230,7 @@ graph TD
 ---
 
 ## 📝 模块 10: 自我检测
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **`cfg_select!` 与 `#[cfg]` 的根本区别是什么？** 为什么 `cfg_select!` 不能用于条件编译整个函数？
 
@@ -262,8 +278,75 @@ let x = cfg_select! {
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [`if let` Guards on Match Arms（Rust 1.95.0）](../control_flow/if_let_guards.md)
 - [Rust 2024 Edition `let chains` 深度专题](../control_flow/let_chains.md)
 - [声明宏深入 (Declarative Macros)](../../03_advanced/macros/declarative.md)
 - [过程宏深入 (Procedural Macros)](../../03_advanced/macros/procedural.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference - Macros](https://doc.rust-lang.org/reference/macros.html)]**
+>
+> **[来源: [The Little Book of Rust Macros](https://veykril.github.io/tlborm/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

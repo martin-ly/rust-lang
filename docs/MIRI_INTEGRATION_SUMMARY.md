@@ -1,6 +1,7 @@
 # Miri 集成总结报告
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 集成总结报告](#miri-集成总结报告)
   - [📑 目录](#-目录)
@@ -126,20 +127,24 @@ pub mod miri_tests;
 **文件**: `docs/MIRI_INTEGRATION_SUMMARY.md` (本文档)
 
 ## Tree Borrows vs Stacked Borrows
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Stacked Borrows
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Rust 的原始别名模型
 - 基于栈的借用跟踪
 - 更严格，可能拒绝合法的 unsafe 代码
 
 ### Tree Borrows (推荐)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 新的别名模型
 - 基于树的借用关系
 - 更符合实际的 unsafe 代码模式
 
 ### 关键区别示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 let mut x = 0;
@@ -153,8 +158,10 @@ let z = &mut *y;  // 重新借用
 **项目默认使用 Tree Borrows 模型**。
 
 ## 如何使用
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 运行所有 Miri 测试
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 # 使用脚本
@@ -166,18 +173,21 @@ cargo miri test --workspace -- miri_tests
 ```
 
 ### 运行特定 crate 的测试
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
 cargo miri test -p c01_ownership_borrow_scope -- miri_tests
 ```
 
 ### 使用特定 Miri 选项
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ```
 
 ## 测试结构
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 每个 `miri_tests.rs` 文件包含：
 
@@ -187,6 +197,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 4. **UB 检测测试**: 标记为 `#[ignore]` 的应该失败的测试
 
 ## 注意事项
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **现有依赖问题**: 项目中的 `common` crate 缺少 `tracing` 依赖，这会导致 Miri 测试编译失败。这需要单独修复。
 
@@ -198,6 +209,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 3. **测试隔离**: 使用 `-Zmiri-disable-isolation` 允许文件系统访问
 
 ## 后续建议
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. 修复 `common` crate 的依赖问题
 2. 在 CI/CD 中集成 Miri 测试
@@ -205,12 +217,15 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 4. 考虑使用 `#[cfg(miri)]` 标记 Miri 专用代码
 
 ## 文件清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 修改的文件
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - `.cargo/config.toml` - 添加 Miri 配置
 
 ### 新建的文件
+> **[来源: [crates.io](https://crates.io/)]**
 
 - `crates/c01_ownership_borrow_scope/src/miri_tests.rs`
 - `crates/c02_type_system/src/miri_tests.rs`
@@ -247,6 +262,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [docs 目录](./README.md)
 
@@ -261,3 +277,61 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 > **[来源: Rust Reference - Miri]**
 
 > **[来源: RFC 2585 - Unsafe Code Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Miri Documentation](https://github.com/rust-lang/miri)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

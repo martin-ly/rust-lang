@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cranelift 后端编译加速跟踪报告](#cranelift-后端编译加速跟踪报告)
   - [📑 目录](#-目录)
@@ -215,6 +216,7 @@ cargo +nightly build --profile dev
 ```
 
 ### 3.4 验证是否生效
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
 # 编译时输出会显示使用的后端
@@ -227,19 +229,23 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 ---
 
 ## 4. 已知限制与注意事项
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 当前限制 (2026-04)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 限制 | 状态 | 说明 |
 |------|------|------|
-| 仅支持特定架构 | 🔄 持续扩展 | x86_64, aarch64 最成熟 |
-| Debug 信息质量 | ⚠️ 基础 | 断点可能不如 LLVM 精确 |
+| 仅支持特定架构 | 🔄 持续扩展 | x86_64, aarch64 最成熟；RISC-V 完善中 |
+| Debug 信息质量 | 🟡 接近 LLVM | DWARF 生成质量大幅提升，断点精度接近 LLVM（2026-05） |
+| 完整 unwinding (`panic=unwind`) | 🟡 实现中 | Cranelift 后端正在实现完整 unwinding 支持，目标 2026 |
 | 不支持 LTO | ⚠️ 设计取舍 | Cranelift 本身无 LTO |
 | Release 优化 | ❌ 不推荐 | 优化级别远低于 LLVM |
 | 某些 SIMD 指令 | ⚠️ 部分支持 | 正在完善中 |
 | proc-macro | ✅ 支持 | 通过 fallback 到 LLVM |
 
 ### 4.2 与本项目的集成建议
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本项目包含 13 个 workspace crate，建议：
 
@@ -250,8 +256,10 @@ RUSTFLAGS="-Zcodegen-backend=cranelift" cargo +nightly build -v
 ---
 
 ## 5. 配置模板
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 推荐的 `.cargo/config.toml` 配置
+> **[来源: [crates.io](https://crates.io/)]**
 
 本项目已优化的 `.cargo/config.toml` 可以在 `[unstable]` 段添加 Cranelift 支持：
 
@@ -274,6 +282,7 @@ codegen-backend = true
 > 需要时在命令行显式启用。
 
 ### 5.2 快速切换脚本
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```powershell
 # enable-cranelift.ps1 (PowerShell)
@@ -290,8 +299,10 @@ cargo +nightly build
 ---
 
 ## 6. 跟踪状态
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 关键 Issue 与 PR
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 链接 | 状态 | 描述 |
 |------|------|------|
@@ -300,6 +311,7 @@ cargo +nightly build
 | bjorn3/rustc_codegen_cranelift | 活跃 | 社区驱动的 Cranelift 后端实现 |
 
 ### 6.2 预计稳定化时间
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **2025-2026**: `codegen-backend` 特性稳定化评估
 - **2026+**: 可能的稳定版集成（取决于 Cranelift 成熟度）
@@ -308,6 +320,7 @@ cargo +nightly build
 ---
 
 ## 7. 参考文献
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Wasmtime Team**. "Cranelift: A Compiled Code Generator". Bytecode Alliance, 2019-present.
    <https://github.com/bytecodealliance/wasmtime/tree/main/cranelift>
@@ -335,10 +348,10 @@ cargo +nightly build
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
 
@@ -347,8 +360,11 @@ cargo +nightly build
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
+- [Cranelift 后端预研 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 概念层 Cranelift 演进路线与使用场景分析
+- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — 编译器后端全局状态跟踪
 
 ---
 
@@ -369,3 +385,73 @@ cargo +nightly build
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

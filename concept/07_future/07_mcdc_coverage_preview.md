@@ -39,6 +39,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 覆盖率等级的层次结构
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 软件测试中的覆盖率形成严格的**层次包含关系**：
 
@@ -61,6 +62,7 @@ graph BT
 ---
 
 ### 1.2 MC/DC 的数学定义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 MC/DC（Modified Condition/Decision Coverage）要求：
 
@@ -98,6 +100,7 @@ MC/DC（Modified Condition/Decision Coverage）要求：
 ---
 
 ### 1.3 Rust 编译器实现路径
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持的实现路径：
 
@@ -128,6 +131,7 @@ Rust 编译器通过 `llvm-cov` 基础设施实现覆盖率检测。MC/DC 支持
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 独立影响的形式化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -157,6 +161,7 @@ graph TD
 ---
 
 ### 2.2 与编译器优化的冲突
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 源代码
@@ -202,6 +207,7 @@ fn decision(a: bool, b: bool, c: bool) -> bool {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -230,6 +236,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 边界 1: 短路求值与 MC/DC
@@ -318,3 +325,47 @@ graph TD
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

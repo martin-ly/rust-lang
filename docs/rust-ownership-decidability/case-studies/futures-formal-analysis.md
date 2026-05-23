@@ -49,8 +49,10 @@ futures crate提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 2.1 Then组合
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 定理 2.1 (顺序组合)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > `then`创建顺序执行的Future链。
 
@@ -72,8 +74,10 @@ $$
 ∎
 
 ### 2.2 Select组合
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 2.2 (竞争选择)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > `select`等待多个Future，返回先完成的。
 
@@ -91,8 +95,10 @@ select! {
 ---
 
 ## 3. Stream处理
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定义 3.1 (Stream Trait)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 pub trait Stream {
@@ -104,6 +110,7 @@ pub trait Stream {
 ```
 
 ### 定理 3.1 (流组合)
+> **[来源: [crates.io](https://crates.io/)]**
 
 > Stream支持map、filter、fold等操作。
 
@@ -251,3 +258,29 @@ select! {
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

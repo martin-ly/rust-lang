@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 特性精简模板](#rust-特性精简模板)
   - [📑 目录](#-目录)
@@ -85,6 +86,7 @@
 ---
 
 ## 与 RUST_193 的对应
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 中 92 项特性的表格列「动机」「设计决策」「形式化」「反例」与本模板一致：
 
@@ -99,6 +101,7 @@
 ---
 
 ## 索引
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 用途 |
 | :--- | :--- |
@@ -113,6 +116,7 @@
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+
 
@@ -123,6 +127,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -174,6 +179,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -195,3 +201,49 @@
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

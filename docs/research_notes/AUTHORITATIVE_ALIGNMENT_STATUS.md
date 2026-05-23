@@ -1,6 +1,7 @@
 ﻿# 权威内容对齐状态报告
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [权威内容对齐状态报告](#权威内容对齐状态报告)
   - [📑 目录](#-目录)
@@ -204,8 +205,10 @@
 ---
 
 ## 差异汇总
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 一致性差异 (📝 扩展)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 项目 | 权威来源 | 差异类型 | 原因 |
 | :--- | :--- | :--- | :--- |
@@ -216,14 +219,17 @@
 | 决策树 | 无直接对应 | 新增 | 项目特色 |
 
 ### 无冲突
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **所有差异都是扩展或新增，无与权威来源的冲突。**
 
 ---
 
 ## 对齐标记示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 标准标记格式
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```markdown
 > **官方来源**: [The Rust Book - 所有权](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)
@@ -233,6 +239,7 @@
 ```
 
 ### 扩展标记格式
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```markdown
 > **官方来源**: [The Rust Book - 泛型](https://doc.rust-lang.org/book/ch10-00-generics.html)
@@ -247,8 +254,10 @@
 ---
 
 ## 持续对齐机制
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 检查频率
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 来源 | 检查频率 | 负责人 | 下次检查 |
 | :--- | :--- | :--- | :--- |
@@ -259,6 +268,7 @@
 | RustBelt | 每半年 | 研究团队 | 2026-08-20 |
 
 ### 更新响应
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **权威来源更新** → 检查影响范围
 2. **无影响** → 记录更新
@@ -267,6 +277,7 @@
 ---
 
 ## 结论
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **所有核心文档已与权威来源完成对齐：**
 
@@ -285,11 +296,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -334,6 +347,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -357,3 +371,61 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

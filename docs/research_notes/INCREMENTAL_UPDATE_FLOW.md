@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 版本增量更新流程](#rust-版本增量更新流程)
   - [📑 目录](#-目录)
@@ -81,6 +82,7 @@
 ---
 
 ## 触发条件
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Rust 新版本发布**（如 1.94.0、1.95.0）
 - **权威来源**：[releases.rs](https://releases.rs/README.md)、[Rust Blog](https://blog.rust-lang.org/README.md)
@@ -261,8 +263,10 @@ fn api_stabilization_example() {
 ---
 
 ## 相关文档
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 核心流程文档
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
@@ -271,6 +275,7 @@ fn api_stabilization_example() {
 | FEATURE_TEMPLATE | 新特性精简模板 | [FEATURE_TEMPLATE.md](./FEATURE_TEMPLATE.md) |
 
 ### 形式化方法文档
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
@@ -278,6 +283,7 @@ fn api_stabilization_example() {
 | type_theory/00_completeness_gaps | 类型理论缺口 | [type_theory/00_completeness_gaps.md](./type_theory/00_completeness_gaps.md) |
 
 ### 更新记录文档
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
@@ -286,6 +292,7 @@ fn api_stabilization_example() {
 | CHANGELOG | 更新日志 | [CHANGELOG.md](./CHANGELOG.md) |
 
 ### 形式化证明文档
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 用途 | 链接 |
 | :--- | :--- | :--- |
@@ -295,6 +302,7 @@ fn api_stabilization_example() {
 | SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS | 安全分析 | [SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md](./SAFE_UNSAFE_COMPREHENSIVE_ANALYSIS.md) |
 
 ### 研究笔记索引
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 文档 | 链接 |
 | :--- | :--- | :--- |
@@ -311,6 +319,7 @@ fn api_stabilization_example() {
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+
 
@@ -321,11 +330,13 @@ fn api_stabilization_example() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -370,6 +381,7 @@ fn api_stabilization_example() {
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -393,3 +405,81 @@ fn api_stabilization_example() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

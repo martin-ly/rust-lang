@@ -1,6 +1,7 @@
 # 16-program-semantics 目录扩展总结
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [16-program-semantics 目录扩展总结](#16-program-semantics-目录扩展总结)
   - [📑 目录](#-目录)
@@ -48,6 +49,7 @@
 | **总计** | **19 个** | **~395 KB** | **完成** |
 
 ### 详细文件列表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### Communication (通信模式)
 
@@ -83,8 +85,10 @@
 ---
 
 ## 内容特点
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 形式化定义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 每个文件包含：
 
@@ -93,12 +97,14 @@
 - **操作语义规则**: 推导式形式化
 
 ### Rust 实现
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 完整可运行的代码示例
 - 异步/await 模式
 - 实际框架集成 (tokio, tonic, etcd-client)
 
 ### 架构图示
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ASCII 架构图
 - 状态机图
@@ -208,3 +214,27 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

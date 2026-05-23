@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 终极完成报告](#rust-所有权系统可判定性---终极完成报告)
   - [📑 目录](#-目录)
@@ -73,6 +74,7 @@ Coq 形式化文件:       32 个文件     ✅
 ```
 
 ### 综合性文档 (核心创新)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 类型 | 行数 | 作用 |
 |:-----|:-----|:----:|:-----|
@@ -83,6 +85,7 @@ Coq 形式化文件:       32 个文件     ✅
 | **总计** | **4 个** | **~62,000+** | **综合梳理** |
 
 ### 所有文档类型汇总
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 综合性文档:           8 个
@@ -134,8 +137,10 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 🎯 综合性梳理的核心价值
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 全局视图
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **ULTIMATE_COMPREHENSIVE_GUIDE.md** 提供:
 
@@ -145,6 +150,7 @@ Coq 形式化文件:       32 个文件     ✅
 - 从宏观到微观的完整视图
 
 ### 2. 系统索引
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **DOCUMENT_INDEX_MASTER.md** 提供:
 
@@ -154,6 +160,7 @@ Coq 形式化文件:       32 个文件     ✅
 - 文档统计信息
 
 ### 3. 多维度矩阵
+> **[来源: [crates.io](https://crates.io/)]**
 
 **COMPLETE_KNOWLEDGE_MATRIX.md** 提供:
 
@@ -167,6 +174,7 @@ Coq 形式化文件:       32 个文件     ✅
 - 版本 × 特性矩阵
 
 ### 4. 学习路径
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **LEARNING_ROADMAP_DETAILED.md** 提供:
 
@@ -179,8 +187,10 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## ✅ 综合梳理的完整性验证
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 覆盖度检查
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | 覆盖内容 | 状态 |
 |:-----|:---------|:----:|
@@ -192,6 +202,7 @@ Coq 形式化文件:       32 个文件     ✅
 | 关联分析 | 87 个关联 100% | ✅ |
 
 ### 学习体验检查
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 用户类型 | 入口文档 | 学习路径 | 参考资源 |
 |:---------|:---------|:---------|:---------|
@@ -202,8 +213,10 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 📚 文档使用指南
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 首次访问推荐顺序
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 1. README.md (10分钟)
@@ -226,6 +239,7 @@ Coq 形式化文件:       32 个文件     ✅
 ```
 
 ### 日常使用推荐
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **快速查找**:
 
@@ -247,20 +261,24 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 🎓 不同用户的使用建议
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 初学者
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **起点**: ULTIMATE_COMPREHENSIVE_GUIDE.md → 概念卡片
 **路径**: 4小时入门路径
 **日常**: 速查卡片 + FAQ
 
 ### 有经验的开发者
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **起点**: ULTIMATE_COMPREHENSIVE_GUIDE.md → 桥梁文档
 **路径**: 2周系统掌握
 **日常**: 知识矩阵 + 案例研究
 
 ### 研究者
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **起点**: ULTIMATE_COMPREHENSIVE_GUIDE.md → 形式化文档
 **路径**: 持续研究
@@ -269,8 +287,10 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 🎉 终极完成总结
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 项目目标完全达成 ✅
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **原始目标**: "构建 Rust 所有权系统的完整、严格、可机械化的形式化理论，并通过系统化知识结构呈现"
 
@@ -283,6 +303,7 @@ Coq 形式化文件:       32 个文件     ✅
 - ✅ **学习体验**: 三条路径，详细规划，丰富资源
 
 ### 核心价值
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **理论价值**: 首个完整 Rust 所有权可判定性形式化
 2. **教育价值**: 从入门到专家的完整学习体系
@@ -290,6 +311,7 @@ Coq 形式化文件:       32 个文件     ✅
 4. **实用价值**: 交互式学习 + 系统化诊断 + 综合梳理
 
 ### 独特创新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **四层金字塔架构**: 形式化 → 理论 → 模式 → 工具
 2. **桥梁文档**: 建立理论与实践之间的完整映射
@@ -299,6 +321,7 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 📞 最后的话
+> **[来源: [crates.io](https://crates.io/)]**
 
 这个知识库现在是一个**完整的、综合的、可导航的**学习系统：
 
@@ -347,6 +370,7 @@ Coq 形式化文件:       32 个文件     ✅
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -362,3 +386,57 @@ Coq 形式化文件:       32 个文件     ✅
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

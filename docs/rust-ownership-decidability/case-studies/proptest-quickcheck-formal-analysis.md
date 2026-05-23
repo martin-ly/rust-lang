@@ -197,3 +197,24 @@ fn prop_div(a: i32, b: i32) -> TestResult {
 > **[来源: Rust Reference - Test Attributes]**
 
 > **[来源: ACM - Software Testing]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Test Documentation](https://doc.rust-lang.org/rustc/tests/index.html)]**
+>
+> **[来源: [Criterion.rs](https://bheisler.github.io/criterion.rs/book/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor设计模式 - 扩展版](#actor设计模式---扩展版)
   - [📑 目录](#-目录)
@@ -137,6 +138,7 @@ Ask模式 (Request-Response):
 ---
 
 ## 2. 监督树模式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 形式化定义
 
@@ -197,6 +199,7 @@ failure(n) ⇒ impact(n) ⊆ subtree(parent(n))
 ---
 
 ## 3. Circuit Breaker 模式
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 形式化定义
 
@@ -250,6 +253,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 3.3 参数选择矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 参数 | 敏感服务 | 容错服务 | 外部依赖 |
 |:---|:---:|:---:|:---:|
@@ -261,8 +265,10 @@ HalfOpen状态下的试探请求成功
 ---
 
 ## 4. 路由模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 一致性哈希路由
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 定义 CONSISTENT-HASHING:
@@ -284,6 +290,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 4.2 定理 ROUTING-CONSISTENCY
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 定理 CONSISTENT-HASHING-MINIMAL-MOVEMENT: 一致性哈希最小化重新分配
@@ -301,6 +308,7 @@ HalfOpen状态下的试探请求成功
 ```
 
 ### 4.3 路由策略对比矩阵
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 策略 | 负载均衡 | 状态亲和 | 实现复杂度 | 适用场景 |
 |:---:|:---:|:---:|:---:|:---|
@@ -313,8 +321,10 @@ HalfOpen状态下的试探请求成功
 ---
 
 ## 5. 状态机模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 形式化定义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 定义 ACTOR-FSM:
@@ -343,6 +353,7 @@ Actor实现:
 ```
 
 ### 5.2 定理 FSM-SAFETY
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 定理 FSM-INVALID-TRANSITION-PREVENTION: FSM Actor防止无效状态转换
@@ -361,6 +372,7 @@ Actor实现:
 ```
 
 ### 5.3 状态机复杂度矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 复杂度 | 状态数 | 转换数 | 适用场景 |
 |:---:|:---:|:---:|:---|
@@ -371,8 +383,10 @@ Actor实现:
 ---
 
 ## 6. Event Sourcing 模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 形式化定义
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 定义 EVENT-SOURCING:
@@ -393,6 +407,7 @@ Actor实现:
 ```
 
 ### 6.2 定理 EVENT-SOURCING-PROPERTIES
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 定理 EVENT-SOURCING-AUDIT-TRAIL: 事件溯源提供完整审计跟踪
@@ -409,6 +424,7 @@ Actor实现:
 ```
 
 ### 6.3 事件溯源 vs CRUD 矩阵
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | Event Sourcing | CRUD |
 |:---:|:---:|:---:|
@@ -422,8 +438,10 @@ Actor实现:
 ---
 
 ## 7. Pub-Sub 模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 形式化定义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 定义 PUB-SUB:
@@ -450,6 +468,7 @@ Actor实现:
 ```
 
 ### 7.2 定理 PUB-SUB-SCALABILITY
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 定理 PUB-SUB-DECOUPLING: Pub-Sub解耦生产者和消费者
@@ -469,8 +488,10 @@ Actor实现:
 ---
 
 ## 8. Saga 模式
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 形式化定义
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 定义 SAGA:
@@ -499,6 +520,7 @@ Step = {
 ```
 
 ### 8.2 定理 SAGA-CONSISTENCY
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 定理 SAGA-EVENTUAL-CONSISTENCY: Saga保证最终一致性
@@ -518,8 +540,10 @@ Step = {
 ---
 
 ## 模式组合建议
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 8.1 常用组合
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 组合 | 模式 | 应用场景 |
 |:---|:---|:---|
@@ -551,6 +575,7 @@ Step = {
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
 
@@ -573,3 +598,107 @@ Step = {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

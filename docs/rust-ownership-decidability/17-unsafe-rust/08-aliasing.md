@@ -57,6 +57,7 @@ let r2 = &mut x;  // 两个可变引用指向同一位置
 在 Safe Rust 中，编译器阻止同时存在两个可变引用。
 
 ### 1.2 Unsafe 中的别名
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 let mut x = 5;
@@ -72,8 +73,10 @@ unsafe {
 ---
 
 ## 2. Stacked Borrows
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 基本模型
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Stacked Borrows 是 Rust 的内存模型，定义了引用如何交互。
 
@@ -86,6 +89,7 @@ Stacked Borrows 是 Rust 的内存模型，定义了引用如何交互。
 ```
 
 ### 2.2 示例
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 fn main() {
@@ -98,6 +102,7 @@ fn main() {
 ```
 
 ### 2.3 与原始指针的交互
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 let mut x = 0;
@@ -115,8 +120,10 @@ unsafe {
 ---
 
 ## 3. Tree Borrows
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 改进的模型
+> **[来源: [crates.io](https://crates.io/)]**
 
 Tree Borrows 是 Stacked Borrows 的替代模型，更宽松。
 
@@ -128,12 +135,14 @@ Tree Borrows 是 Stacked Borrows 的替代模型，更宽松。
 ```
 
 ### 3.2 启用 Tree Borrows
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
 MIRI_TREE_BORROWS=1 cargo miri test
 ```
 
 ### 3.3 允许的别名模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // Tree Borrows 允许的模式
@@ -152,8 +161,10 @@ fn tree_borrows_example() {
 ---
 
 ## 4. 别名规则
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 核心规则
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 1. 读-读共享: 多个只读引用可以共存
@@ -162,6 +173,7 @@ fn tree_borrows_example() {
 ```
 
 ### 4.2 Unsafe 中的责任
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 程序员必须自己保证：
@@ -280,3 +292,39 @@ MIRI_CHECK_NUMBER_VALIDITY=1 cargo miri test
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

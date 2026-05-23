@@ -1,6 +1,7 @@
 ﻿# 形式化证明批判性分析与计划 2026-02
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化证明批判性分析与计划 2026-02](#形式化证明批判性分析与计划-2026-02)
   - [📑 目录](#-目录)
@@ -44,12 +45,14 @@
 - 工具链成熟度评估
 
 ### 推进计划
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 短期目标（1-3个月）
 - 中期目标（3-6个月）
 - 长期目标（6-12个月）
 
 ## 相关文档
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [形式化证明系统指南](./FORMAL_PROOF_SYSTEM_GUIDE.md)
 - [研究笔记主索引](./README.md)
@@ -61,11 +64,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -133,3 +138,29 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

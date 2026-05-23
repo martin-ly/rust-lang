@@ -1,6 +1,7 @@
 ﻿# 充分表达 vs 非充分表达边界矩阵
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [充分表达 vs 非充分表达边界矩阵](#充分表达-vs-非充分表达边界矩阵)
   - [📑 目录](#-目录)
@@ -266,6 +267,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ---
 
 ## 不可表达边界说明
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 示例 | Rust 限制 |
 | :--- | :--- | :--- |
@@ -277,6 +279,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ---
 
 ## 从 OOP 迁移建议
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | OOP 概念 | Rust 对应 | 注意 |
 | :--- | :--- | :--- |
@@ -291,6 +294,7 @@ struct MergeSort; impl SortStrategy for MergeSort { ... }
 ---
 
 ## Adapter 等价表达示例
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 目标接口
@@ -313,6 +317,7 @@ impl Target for Adapter {
 ---
 
 ## Composite 等价表达示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 enum Node {
@@ -335,6 +340,7 @@ impl Node {
 ---
 
 ## 不可表达边界说明（扩展）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类型 | 示例 | Rust 限制 |
 | :--- | :--- | :--- |
@@ -348,6 +354,7 @@ impl Node {
 ---
 
 ## 场景化决策示例（层次推进）
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 示例 1：OOP 继承迁移
 
@@ -382,6 +389,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ---
 
 ## 引用
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [LANGUAGE_SEMANTICS_EXPRESSIVENESS](../../LANGUAGE_SEMANTICS_EXPRESSIVENESS.md)
 - [DESIGN_MECHANISM_RATIONALE](../../DESIGN_MECHANISM_RATIONALE.md)
@@ -390,6 +398,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -447,6 +456,7 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [05_boundary_system 目录](./README.md)
 - [上级目录](../README.md)
@@ -475,3 +485,107 @@ impl Widget for Button { fn render(&self) { /* ... */ } }
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [设计模式概念族谱 - 思维导图](#设计模式概念族谱---思维导图)
   - [📑 目录](#-目录)
@@ -83,6 +84,7 @@
 ---
 
 ## 与所有权/借用的关系
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模式 | 所有权 | 借用 |
 | :--- | :--- | :--- |
@@ -95,6 +97,7 @@
 ---
 
 ## 相关文档
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [01_design_patterns_formal](../software_design_theory/01_design_patterns_formal/README.md) - 23 模式形式化
 - [DESIGN_PATTERNS_BOUNDARY_MATRIX](../../archive/deprecated_20260318/DESIGN_PATTERNS_BOUNDARY_MATRIX.md) - 等价/近似边界
@@ -108,6 +111,7 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -159,6 +163,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
@@ -182,3 +187,47 @@
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

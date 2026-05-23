@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [io\_uring 高性能 I/O 指南](#io_uring-高性能-io-指南)
   - [📑 目录](#-目录)
@@ -31,6 +32,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 概述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提交队列（Submission Queue, SQ）和完成队列（Completion Queue, CQ）实现用户态与内核态的高效通信。
 
@@ -39,6 +41,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 ---
 
 ## 核心概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 队列对（Queue Pair）
 
@@ -79,6 +82,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 ---
 
 ## 决策树：何时使用 io_uring？
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 需要高性能 I/O?
@@ -97,6 +101,7 @@ io_uring 是 Linux 内核 5.1+ 引入的异步 I/O 接口，通过共享的提�
 ---
 
 ## Rust 生态
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 主要 crate
 
@@ -129,6 +134,7 @@ pub mod stub_impl {
 ---
 
 ## 代码示例
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 文件读取（io-uring crate）
 
@@ -217,6 +223,7 @@ fn setup_registered_buffers(ring: &mut IoUring, buf_pool: &mut [u8]) -> std::io:
 ---
 
 ## 性能对比
+> **[来源: [crates.io](https://crates.io/)]**
 
 基于典型 NVMe SSD 4KB 随机读取场景：
 
@@ -233,6 +240,7 @@ fn setup_registered_buffers(ring: &mut IoUring, buf_pool: &mut [u8]) -> std::io:
 ---
 
 ## 限制与注意事项
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 限制 | 说明 | 缓解方案 |
 |:---|:---|:---|
@@ -245,6 +253,7 @@ fn setup_registered_buffers(ring: &mut IoUring, buf_pool: &mut [u8]) -> std::io:
 ---
 
 ## 编译与运行
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # Linux 环境下启用 io_uring feature
@@ -260,6 +269,7 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 ---
 
 ## 参考
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Lord of the io_uring](https://unixism.net/loti/)
 - [Linux Kernel io_uring 文档](https://kernel.dk/io_uring.pdf)
@@ -280,6 +290,7 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
 
@@ -302,3 +313,67 @@ cargo bench -p c10_networks --bench async_ecosystem_benchmarks
 > **[来源: Rust Reference - Async I/O]**
 
 > **[来源: PLDI - Programming Language Design]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

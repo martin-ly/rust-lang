@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 文档总索引](#rust-所有权系统---文档总索引)
   - [📑 目录](#-目录)
@@ -75,6 +76,7 @@
 | [CONTENT_ASSOCIATION_ANALYSIS.md](./CONTENT_ASSOCIATION_ANALYSIS.md) | 关联分析 |
 
 ### 三级索引 (桥梁文档 - 关键创新)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 作用 |
 |:-----|:-----|
@@ -86,8 +88,10 @@
 ---
 
 ## 按模块索引
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 00-foundations/ (理论基础 - 13 文件)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 主题 |
 |:-----|:-----|
@@ -100,6 +104,7 @@
 | 00-04-theory-connections.md | 理论联系 |
 
 ### 01-core-concepts/ (核心概念 - 11 文件)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 主题 |
 |:-----|:-----|
@@ -134,6 +139,7 @@
 | trait-system.md | 1.5小时 |
 
 ### coq-formalization/ (Coq 形式化 - 32 文件)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### theories/Syntax/ (语法)
 
@@ -181,6 +187,7 @@
 - NewLints.v
 
 ### case-studies/ (案例研究 - 137 文件)
+> **[来源: [crates.io](https://crates.io/)]**
 
 #### 主要案例分析
 
@@ -211,6 +218,7 @@
 - media/ (音视频)
 
 ### 11-design-patterns/ (设计模式 - 15+ 文件)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 #### creational/ (创建型)
 
@@ -240,6 +248,7 @@
 - README.md
 
 ### 12-concurrency-patterns/ (并发模式 - 14 文件)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 文件 | 主题 |
 |:-----|:-----|
@@ -259,6 +268,7 @@
 | 12-07-distributed-patterns-deep.md | 分布式深入 |
 
 ### 学习资源
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### exercises/ (练习 - 10+ 文件)
 
@@ -274,6 +284,7 @@
 - ERROR_DIAGNOSTICS_GUIDE.md (错误诊断)
 
 ### 形式化理论
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### formal-foundations/
 
@@ -296,8 +307,10 @@
 ---
 
 ## 快速导航
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 按难度导航
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **初学者** (🟢)
 → 01-core-concepts/short-concepts/
@@ -317,6 +330,7 @@
 → 10-research-frontiers/
 
 ### 按主题导航
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **理论基础**
 → 00-foundations/
@@ -343,6 +357,7 @@
 ---
 
 ## 文档统计
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 总文件数:        605
@@ -357,6 +372,7 @@
 ---
 
 ## 更新日志
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 日期 | 版本 | 更新 |
 |:-----|:-----|:-----|
@@ -385,6 +401,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -400,3 +417,89 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

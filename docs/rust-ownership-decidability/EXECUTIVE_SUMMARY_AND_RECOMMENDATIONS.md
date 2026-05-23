@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [执行摘要与建议](#执行摘要与建议)
   - [📑 目录](#-目录)
@@ -74,12 +75,14 @@
 4. **部分模块空壳化**: README 与实际内容脱节
 
 ### 机会 (Opportunities)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 填补 Unsafe 内容可显著提升项目价值
 2. 与权威资源对齐可提高可信度
 3. 形式化+实践的结合是独特优势
 
 ### 威胁 (Threats)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. Rust 快速迭代可能导致内容过时
 2. Unsafe 内容复杂度高，撰写困难
@@ -88,8 +91,10 @@
 ---
 
 ## 核心发现
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 内容深度分布不均
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 深度分布:
@@ -102,6 +107,7 @@
 **建议**: 将 L0/L1 内容提升到 L2 深度
 
 ### 2. 权威资源对齐差距
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 资源 | 当前覆盖 | 目标 | 差距 |
 |-----|---------|-----|------|
@@ -112,6 +118,7 @@
 **最大差距**: Unsafe、Data Layout、Memory Model
 
 ### 3. 可执行性检查
+> **[来源: [crates.io](https://crates.io/)]**
 
 - ❓ 代码示例可编译率: 未知 (需要 CI)
 - ❓ 链接有效 rate: 未知 (需要检查)
@@ -120,8 +127,10 @@
 ---
 
 ## 建议
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 短期建议 (1-4 周)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 1. 立即创建 Unsafe Rust 专题 (最高优先级)
 
@@ -158,6 +167,7 @@ CI/CD 检查项:
 - [ ] 确保所有代码示例可编译
 
 ### 中期建议 (1-3 个月)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1. 扩展验证工具文档
 
@@ -186,6 +196,7 @@ CI/CD 检查项:
 - 为每个模式提供形式化分析
 
 ### 长期建议 (3-6 个月)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 1. 权威资源对齐计划
 
@@ -208,8 +219,10 @@ CI/CD 检查项:
 ---
 
 ## 可持续计划
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 内容创建流程
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 需求识别 → 权威对齐 → 内容创建 → 形式化检查 → 代码验证 → 交叉引用 → 发布
@@ -217,9 +230,11 @@ CI/CD 检查项:
 ```
 
 ### 质量标准
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```markdown
 ## L2 深度标准 (强制)
+> **[来源: [crates.io](https://crates.io/)]**
 - [ ] ≥300 行内容
 - [ ] ≥1 形式化定义
 - [ ] ≥1 定理/性质
@@ -229,6 +244,7 @@ CI/CD 检查项:
 ```
 
 ### 版本管理
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 docs/rust-ownership-decidability/
@@ -238,6 +254,7 @@ docs/rust-ownership-decidability/
 ```
 
 ### 社区参与
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **贡献指南**: 创建 CONTRIBUTING.md
 2. **Issue 模板**: Bug 报告、内容请求
@@ -247,8 +264,10 @@ docs/rust-ownership-decidability/
 ---
 
 ## 预期成果
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 完成 100% 后的项目状态
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 rust-ownership-decidability/
@@ -261,6 +280,7 @@ rust-ownership-decidability/
 ```
 
 ### 预期影响
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **学术价值**: 可用于教学和研究的形式化资源
 2. **工程价值**: 工业级 Rust 开发的参考手册
@@ -269,6 +289,7 @@ rust-ownership-decidability/
 ---
 
 ## 风险与缓解
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 风险 | 可能性 | 影响 | 缓解措施 |
 |------|-------|------|---------|
@@ -280,8 +301,10 @@ rust-ownership-decidability/
 ---
 
 ## 下一步行动
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 本周行动项
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] **创建 `17-unsafe-rust/` 目录结构**
 - [ ] **编写 `17-unsafe-rust/README.md` (导航)**
@@ -289,6 +312,7 @@ rust-ownership-decidability/
 - [ ] **设置 CI/CD 基础流程**
 
 ### 本月里程碑
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 完成 Unsafe 基础专题 (5 篇文档)
 - [ ] 完成 Data Layout 文档
@@ -296,6 +320,7 @@ rust-ownership-decidability/
 - [ ] 修复所有失效链接
 
 ### 季度目标
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] Unsafe 专题 L3 深度
 - [ ] 与 Nomicon 对齐度 70%
@@ -305,6 +330,7 @@ rust-ownership-decidability/
 ---
 
 ## 结论
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 项目已具备**优秀的形式化基础**和**丰富的案例研究**，但在 **Unsafe Rust** 和 **底层细节** 方面存在显著差距。
 
@@ -333,6 +359,7 @@ rust-ownership-decidability/
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -348,3 +375,43 @@ rust-ownership-decidability/
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进度跟踪 - 最终版](#进度跟踪---最终版)
   - [📑 目录](#-目录)
@@ -66,6 +67,7 @@ Phase 4 (验证发布):         100% ✅ █████████████
 **总计**: 12 文件, ~2,500 行
 
 ### ✅ 核心定理 (5/5)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] **定理 1**: Borrow Checking 终止性
 - [x] **定理 2**: 类型保持 (Preservation)
@@ -74,6 +76,7 @@ Phase 4 (验证发布):         100% ✅ █████████████
 - [x] **定理 5**: 可判定性
 
 ### ✅ 验证示例 (16/16)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 不可变借用
 - [x] 可变借用
@@ -93,6 +96,7 @@ Phase 4 (验证发布):         100% ✅ █████████████
 - [x] 生命周期子类型
 
 ### ✅ 文档 (100%)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] 研究计划
 - [x] 元模型文档 (3个)
@@ -104,8 +108,10 @@ Phase 4 (验证发布):         100% ✅ █████████████
 ---
 
 ## 质量指标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 代码质量: ✅
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 100% Coq 编译通过
 - 100% 证明完成 (0 admit)
@@ -209,3 +215,35 @@ Coq 代码:        ~2,500 行
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

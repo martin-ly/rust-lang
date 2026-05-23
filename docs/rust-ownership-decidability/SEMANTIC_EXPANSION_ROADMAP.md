@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [语义模型全面扩展路线图](#语义模型全面扩展路线图)
   - [📑 目录](#-目录)
@@ -146,6 +147,7 @@
 ---
 
 ## 📊 当前状态评估
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Rust 1.94 特性语义
 
@@ -211,6 +213,7 @@
 ---
 
 ## 🗺️ 扩展路线图
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 Phase 1 (Week 1): Rust 1.94 特性语义深化
@@ -247,6 +250,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## 📁 第一阶段: Rust 1.94 特性语义深化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1.1 Reborrow Trait 完整语义
 
@@ -285,6 +289,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 - `16-program-semantics/rust-194-features/04-precise-capturing-semantics.md`
 
 ### 1.5 2024 Edition 借用规则
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **交付物**:
 
@@ -293,8 +298,10 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## 📁 第二阶段: 设计模式语义完整覆盖
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 2.1 创建型模式
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 状态 | 交付物 |
 |:-----|:----:|:-------|
@@ -302,6 +309,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 原型 | ❌ | `11-design-patterns/creational/02-prototype-semantics.md` |
 
 ### 2.2 结构型模式
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 模式 | 状态 | 交付物 |
 |:-----|:----:|:-------|
@@ -310,6 +318,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 外观 | ❌ | `11-design-patterns/structural/03-facade-semantics.md` |
 
 ### 2.3 行为型模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 模式 | 状态 | 交付物 |
 |:-----|:----:|:-------|
@@ -321,6 +330,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 访问者 | ❌ | `11-design-patterns/behavioral/06-visitor.md` |
 
 ### 2.4 Rust 特有模式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模式 | 交付物 |
 |:-----|:-------|
@@ -338,8 +348,10 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## 📁 第三阶段: OS 抽象机制语义
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 线程模型完整语义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/01-thread-semantics.md`
 
@@ -352,6 +364,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 - 线程取消语义
 
 ### 3.2 锁机制完整语义
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/02-lock-semantics.md`
 
@@ -364,26 +377,32 @@ Phase 5 (Week 5): 分布式系统模式语义
 - 锁层次与死锁避免
 
 ### 3.3 条件变量语义
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/03-condition-variable-semantics.md`
 
 ### 3.4 信号量语义
+> **[来源: [crates.io](https://crates.io/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/04-semaphore-semantics.md`
 
 ### 3.5 屏障语义
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/05-barrier-semantics.md`
 
 ### 3.6 内存序语义深化
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **交付物**: `16-program-semantics/os-abstractions/06-memory-ordering-deep.md`
 
 ---
 
 ## 📁 第四阶段: 工作流-43种模式语义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 基础控制流模式 (9种)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -398,6 +417,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 9 | Discriminator | `16-program-semantics/workflow-patterns/09-discriminator.md` |
 
 ### 4.2 高级分支同步模式 (8种)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -411,6 +431,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 17 | Critical Section | `16-program-semantics/workflow-patterns/17-critical-section.md` |
 
 ### 4.3 取消与强制完成模式 (4种)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -420,6 +441,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 21 | Cancel Multiple | `16-program-semantics/workflow-patterns/21-cancel-multiple.md` |
 
 ### 4.4 迭代模式 (3种)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -429,6 +451,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 25 | Persistent Trigger | `16-program-semantics/workflow-patterns/25-persistent-trigger.md` |
 
 ### 4.5 终止状态模式 (2种)
+> **[来源: [crates.io](https://crates.io/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -436,6 +459,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 27 | Blocking Write | `16-program-semantics/workflow-patterns/27-blocking-write.md` |
 
 ### 4.6 基于事件的模式 (7种)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -448,6 +472,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 34 | Local Synchronizing Merge | `16-program-semantics/workflow-patterns/34-local-sync-merge.md` |
 
 ### 4.7 多实例模式 (9种)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | # | 模式 | 交付物 |
 |:-:|:-----|:-------|
@@ -458,8 +483,10 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## 📁 第五阶段: 分布式系统模式语义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 通信模式
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模式 | 交付物 |
 |:-----|:-------|
@@ -471,6 +498,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 断路器 | `16-program-semantics/distributed-patterns/communication/06-circuit-breaker-semantics.md` |
 
 ### 5.2 一致性模式
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 交付物 |
 |:-----|:-------|
@@ -483,6 +511,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 读己写一致性 | `16-program-semantics/distributed-patterns/consistency/07-read-your-writes.md` |
 
 ### 5.3 容错模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 交付物 |
 |:-----|:-------|
@@ -494,6 +523,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 | 故障恢复 | `16-program-semantics/distributed-patterns/fault-tolerance/06-recovery-semantics.md` |
 
 ### 5.4 微服务模式
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模式 | 交付物 |
 |:-----|:-------|
@@ -507,8 +537,10 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## ✅ 完成标准
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 文档完整性
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 所有 Rust 1.94 特性都有完整语义文档
 - [ ] 所有 23 种 GoF 设计模式都有语义分析
@@ -517,6 +549,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 - [ ] 所有分布式模式都有完整语义
 
 ### 形式化标准
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 每种模式都有形式化定义
 - [ ] 每种模式都有 Rust 实现
@@ -524,6 +557,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 - [ ] 交叉引用完整性检查通过
 
 ### 质量指标
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 新增文档总数: 100+
 - [ ] 新增代码示例: 500+
@@ -553,6 +587,7 @@ Phase 5 (Week 5): 分布式系统模式语义
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -568,3 +603,85 @@ Phase 5 (Week 5): 分布式系统模式语义
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

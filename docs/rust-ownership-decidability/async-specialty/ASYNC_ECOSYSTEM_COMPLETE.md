@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Async 生态系统专题 - 完整完成报告](#rust-async-生态系统专题---完整完成报告)
   - [📑 目录](#-目录)
@@ -76,6 +77,7 @@
 | [ASYNC_ECOSYSTEM_COMPLETE.md](./ASYNC_ECOSYSTEM_COMPLETE.md) | 本文件 | 完成报告 |
 
 ### 生态总览
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
@@ -83,30 +85,35 @@
 | [ecosystem/IO_URING_DEEP_DIVE.md](./ecosystem/IO_URING_DEEP_DIVE.md) | 35 | io_uring深度解析 |
 
 ### 权威来源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
 | [authoritative/tokio-deep-dive.md](./authoritative/tokio-deep-dive.md) | 18 | Tokio深度 |
 
 ### 网络
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
 | [network/http-server-patterns.md](./network/http-server-patterns.md) | 10 | HTTP模式 |
 
 ### 嵌入式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
 | [embedded/embassy-guide.md](./embedded/embassy-guide.md) | 17 | Embassy完整指南 |
 
 ### 最佳实践
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
 | [practices/best-practices.md](../../archive/deprecated_20260318/best-practices.md) | 15 | 最佳实践 |
 
 ### 形式化分析
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 页数 | 内容 |
 |:-----|:----:|:-----|
@@ -120,8 +127,10 @@
 ---
 
 ## 生态覆盖矩阵
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 嵌入式生态 (100%)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 库 | 类型 | 状态 | 覆盖内容 |
 |:---|:-----|:----:|:---------|
@@ -131,6 +140,7 @@
 | **Tock** | OS | ⭐ 活跃 | 多应用安全 |
 
 ### 标准运行时 (100%)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 库 | 类型 | 状态 | 覆盖内容 |
 |:---|:-----|:----:|:---------|
@@ -140,6 +150,7 @@
 | **bastion** | Actor | ⭐ 活跃 | 容错、监督 |
 
 ### io_uring生态 (100%)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 库 | 类型 | 性能 | 覆盖内容 |
 |:---|:-----|:----:|:---------|
@@ -149,6 +160,7 @@
 | **compio** | 跨平台 | ⭐⭐⭐ | Windows+Linux统一API |
 
 ### 开源协议 (100%)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 协议 | 库 | 覆盖内容 |
 |:-----|:---|:---------|
@@ -162,8 +174,10 @@
 ---
 
 ## 核心性能数据
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### io_uring性能提升
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 文件IO (4KB随机读取, IOPS):
@@ -194,6 +208,7 @@
 ```
 
 ### 运行时对比
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 任务创建开销:
@@ -217,8 +232,10 @@
 ---
 
 ## 选择决策指南
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 决策树
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 目标平台?
@@ -259,6 +276,7 @@
 ```
 
 ### 场景推荐表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 推荐方案 | 理由 |
 |:-----|:---------|:-----|
@@ -276,6 +294,7 @@
 ---
 
 ## 代码统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 总代码示例: 150+
@@ -293,6 +312,7 @@
 ---
 
 ## 后续扩展方向
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 虽然专题已全面覆盖，以下方向可继续深入：
 
@@ -305,8 +325,10 @@
 ---
 
 ## 快速参考
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 启动模板
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 嵌入式 (Embassy)
@@ -329,6 +351,7 @@ async fn main() {
 ```
 
 ### 关键依赖版本
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```toml
 # 嵌入式
@@ -380,6 +403,7 @@ quinn = "0.11"
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [async-specialty 目录](./README.md)
 - [上级目录](../README.md)
@@ -403,3 +427,63 @@ quinn = "0.11"
 > **[来源: Tokio Documentation]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
+>
+> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

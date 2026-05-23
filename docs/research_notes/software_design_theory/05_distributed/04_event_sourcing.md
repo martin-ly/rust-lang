@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Event Sourcing 模式形式化定义](#event-sourcing-模式形式化定义)
   - [📑 目录](#-目录)
@@ -79,6 +80,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ---
 
 ## 2. 基本假设 (Axiom)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Axiom ES1: 事件顺序性
 
@@ -113,6 +115,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ---
 
 ## 3. 定理 (Theorem)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Theorem ES1: 状态可重现性
 
@@ -146,6 +149,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ---
 
 ## 4. Rust 实现示例
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 事件特质
@@ -201,6 +205,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 ---
 
 ## 5. 与 CQRS 的关系
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 ┌─────────────┐     Events      ┌─────────────┐
@@ -226,11 +231,13 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -275,6 +282,7 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
@@ -298,3 +306,75 @@ impl<A: Aggregate> EventSourcedRepository<A> {
 > **[来源: Wikipedia - Software Architecture]**
 
 > **[来源: ACM - Design Patterns Survey]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

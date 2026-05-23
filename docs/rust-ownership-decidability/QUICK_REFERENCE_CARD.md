@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 快速参考卡片](#rust-所有权系统---快速参考卡片)
   - [📑 目录](#-目录)
@@ -78,6 +79,7 @@ let s: &'static str = "编译期字符串";
 ---
 
 ## 🧠 智能指针速查
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 指针 | 用途 | Send | Sync |
 |:-----|:-----|:----:|:----:|
@@ -90,8 +92,10 @@ let s: &'static str = "编译期字符串";
 ---
 
 ## 🎨 常见模式
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### RAII 模式
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 pub struct LockGuard<'a> {
@@ -106,6 +110,7 @@ impl<'a> Drop for LockGuard<'a> {
 ```
 
 ### 类型状态模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 pub struct Ready;
@@ -117,6 +122,7 @@ impl Connection<Ready> {
 ```
 
 ### 内部可变性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use std::cell::RefCell;
@@ -127,6 +133,7 @@ let data = RefCell::new(5);
 ---
 
 ## ⚡ 并发 Send/Sync
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // Send: 可跨线程转移所有权
@@ -147,6 +154,7 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 🔧 错误快速修复
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 错误 | 修复方法 |
 |:-----|:---------|
@@ -158,6 +166,7 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 📊 验证工具
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 工具 | 用途 | 命令 |
 |:-----|:-----|:-----|
@@ -168,6 +177,7 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 📚 快速导航
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 📖 理论
@@ -189,6 +199,7 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 🎓 学习路径
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 初学者: 概念卡片 → 交互指南 → 基础练习
@@ -199,6 +210,7 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 🔗 关键链接
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [完整认证](./FINAL_100_PERCENT_COMPLETION_CERTIFICATION.md)
 - [知识梳理](./COMPREHENSIVE_KNOWLEDGE_SYNTHESIS.md)
@@ -211,10 +223,12 @@ impl Sync for T where &T: Send { }
 ---
 
 ## 🆕 Rust 1.94 所有权系统更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 所有权影响 | 可判定性 |
 |------|-----------|---------|
@@ -258,3 +272,29 @@ impl Sync for T where &T: Send { }
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

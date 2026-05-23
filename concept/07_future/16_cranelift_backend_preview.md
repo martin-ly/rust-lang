@@ -42,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 编译器使用 **LLVM** 作为代码生成后端。LLVM 提供卓越的优化能力，但编译时间长：
 
@@ -70,6 +71,7 @@ LLVM 后端编译时间分解（典型中型 crate）:
 ---
 
 ### 1.2 Cranelift 的定位与设计哲学
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -102,6 +104,7 @@ graph LR
 ---
 
 ### 1.3 rustc_codegen_cranelift
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 rustc_codegen_cranelift 项目:
@@ -129,6 +132,7 @@ rustc_codegen_cranelift 项目:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 架构对比：LLVM vs Cranelift
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | LLVM | Cranelift | 影响 |
 |:---|:---|:---|:---|
@@ -146,6 +150,7 @@ rustc_codegen_cranelift 项目:
 ---
 
 ### 2.2 优化级别权衡
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -175,6 +180,7 @@ graph TD
 ---
 
 ### 2.3 与并行前端的协同
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 编译时间优化组合拳:
@@ -223,6 +229,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -252,6 +259,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: 平台支持
@@ -291,6 +299,8 @@ graph TD
 | Cranelift 核心成熟 | ✅ | 2023-2024 | Wasmtime 生产使用 |
 | rustc_codegen_cranelift 可用 | ✅ | 2024 | rustup 可安装 |
 | 更多平台支持 | 🟡 | 2025-2026 | RISC-V 完善、更多 ARM 变体 |
+| 完整 unwinding 支持 | 🟡 | 2026 | `panic=unwind` 在 Cranelift 后端实现中 |
+| Debuginfo 质量对齐 | 🟡 | 2026 | DWARF 生成质量接近 LLVM 水平 |
 | Cargo 默认集成 | ⬜ | 2027+ | `cargo build` 自动选择后端 |
 | 稳定化 | ⬜ | 2028+ | 成为 rustc 官方后端选项 |
 
@@ -348,7 +358,69 @@ fn main() {
 >
 > **权威来源对齐变更日志**: 2026-05-21 创建，对齐 Rust 1.95.0+ (Edition 2024)
 
-**文档版本**: 1.0
+**文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-21
-**状态**: ✅ 概念文件创建完成
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

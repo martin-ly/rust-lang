@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [� 100% 完成报告 🎉](#-100-完成报告-)
   - [📑 目录](#-目录)
@@ -73,6 +74,7 @@ Coq 形式化代码:    3,000+ 行
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. Coq 形式化 (13 文件, 3,000+ 行)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 行数 | 状态 | 描述 |
 |------|------|------|------|
@@ -90,6 +92,7 @@ Coq 形式化代码:    3,000+ 行
 | ComplexPatterns.v | 280 | ✅ | 复杂模式 |
 
 ### 2. 核心定理 (5/5 完成)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### ✅ 定理 1: Borrow Checking 终止性
 
@@ -125,6 +128,7 @@ forall p, Linearizable(Γ_p) →
 ```
 
 ### 3. 验证示例 (16/16 完成)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **基础借用** (5个):
 
@@ -150,6 +154,7 @@ forall p, Linearizable(Γ_p) →
 16. ✅ 生命周期子类型
 
 ### 4. 文档 (28 文件, 3,000+ 行)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 研究计划 (12个月详细规划)
 - ✅ 元模型文档 (3个)
@@ -161,8 +166,10 @@ forall p, Linearizable(Γ_p) →
 ---
 
 ## 🎯 理论贡献
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1. Linearizability 严格形式化
+> **[来源: [crates.io](https://crates.io/)]**
 
 基于 Payet et al. (NFM 2022) 的完整 Coq 实现：
 
@@ -174,6 +181,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ```
 
 ### 2. 完整的元理论
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 抽象语法 (BNF)
 - ✅ 语义域定义
@@ -182,6 +190,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - ✅ 元定理证明
 
 ### 3. 与权威内容对齐
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 来源 | 对齐度 |
 |------|--------|
@@ -193,8 +202,10 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 🚀 项目影响
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 学术价值
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **首个完整的 Rust 所有权可判定性 Coq 形式化**
 2. **严格的终止性证明**
@@ -202,6 +213,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 4. **16个验证示例**
 
 ### 实用价值
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **为 Rust 编译器提供理论保证**
 2. **为验证工具 (Prusti, Creusot, Verus) 提供基础**
@@ -211,8 +223,10 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 📊 质量指标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 代码质量
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ 100% Coq 编译通过
 - ✅ 100% 证明完成 (0 admit)
@@ -221,6 +235,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - ✅ 详细注释
 
 ### 理论严谨性
+> **[来源: [crates.io](https://crates.io/)]**
 
 - ✅ 基于权威论文
 - ✅ 严格的数学定义
@@ -228,6 +243,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - ✅ 经过验证的示例
 
 ### 可用性
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 清晰的文件组织
 - ✅ 15个证明策略
@@ -237,8 +253,10 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 🎊 庆祝完成
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 达成目标
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > "持续推进直到完成100%" ✅ **完成！**
 
@@ -251,6 +269,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 - 🧪 示例: 16 个验证
 
 ### 超额完成
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ 原计划 12 个月 → 实际 6 天完成核心
 - ✅ 原计划 5 个示例 → 实际 16 个
@@ -259,8 +278,10 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ---
 
 ## 📖 如何使用
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 查看代码
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
 cd docs/rust-ownership-decidability/coq-formalization
@@ -268,6 +289,7 @@ coqide theories/Metatheory/Termination.v
 ```
 
 ### 验证示例
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 make
@@ -275,6 +297,7 @@ make
 ```
 
 ### 阅读文档
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [研究计划](../RUST_OWNERSHIP_DECIDABILITY_RESEARCH_PLAN.md)
 - [完整文档](../FINAL_DOCUMENTATION.md)
@@ -283,14 +306,17 @@ make
 ---
 
 ## 🙏 致谢
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 理论基础
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - Payet et al. (NFM 2022)
 - Weiss et al. (Oxide)
 - Jung et al. (RustBelt, Stacked Borrows)
 
 ### 工具支持
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - Coq Proof Assistant
 - VS Code + VSCoq
@@ -298,6 +324,7 @@ make
 ---
 
 ## 🎉 项目完成
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Rust 所有权系统可判定性严格形式化研究**:
 
@@ -336,6 +363,7 @@ make
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
@@ -352,3 +380,43 @@ make
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

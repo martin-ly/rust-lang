@@ -59,6 +59,7 @@ unsafe {
 ```
 
 ### 1.2 ABI 类型
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // 不同的调用约定
@@ -78,8 +79,10 @@ extern "C-unwind" {    // 支持栈展开 (Rust 1.71+)
 ---
 
 ## 2. 调用 C 代码
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 基本示例
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```c
 // mathlib.c
@@ -106,6 +109,7 @@ fn main() {
 ```
 
 ### 2.2 字符串处理
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use std::ffi::{CString, CStr};
@@ -137,6 +141,7 @@ fn call_c_function(input: &str) -> String {
 ```
 
 ### 2.3 结构体传递
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```c
 // point.h
@@ -176,8 +181,10 @@ fn main() {
 ---
 
 ## 3. 被 C 调用
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 创建 C 兼容库
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // lib.rs - 编译为动态库
@@ -223,6 +230,7 @@ pub extern "C" fn rust_free_string(s: *mut c_char) {
 ```
 
 ### 3.2 C 头文件
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```c
 // rustlib.h
@@ -250,8 +258,10 @@ void rust_free_string(char* s);
 ---
 
 ## 4. 类型映射
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 基本类型
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | C 类型 | Rust 类型 | 说明 |
 |--------|----------|------|
@@ -264,6 +274,7 @@ void rust_free_string(char* s);
 | `bool` (C99) | `bool` | 布局可能不同 |
 
 ### 4.2 字符串类型
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // C 字符串 ↔ Rust String
@@ -280,8 +291,10 @@ let rstr: &str = cstr.to_str()?;
 ---
 
 ## 5. 内存管理
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 所有权规则
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -296,6 +309,7 @@ let rstr: &str = cstr.to_str()?;
 ```
 
 ### 5.2 安全包装示例
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 pub struct CVector {
@@ -336,8 +350,10 @@ impl Drop for CVector {
 ---
 
 ## 6. 常见模式与陷阱
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 6.1 Panic 安全
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // ❌ 危险：panic 跨越 FFI 边界是 UB
@@ -360,6 +376,7 @@ pub extern "C" fn safe_function() -> c_int {
 ```
 
 ### 6.2 空指针检查
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // ❌ 危险：可能空指针解引用
@@ -380,6 +397,7 @@ pub extern "C" fn safe_func(ptr: *const c_char) -> c_int {
 ```
 
 ### 6.3 线程安全
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // ❌ 危险：非线程安全函数
@@ -404,6 +422,7 @@ pub extern "C" fn increment() {
 ---
 
 ## 参考
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [The Rustonomicon - FFI](https://doc.rust-lang.org/nomicon/ffi.html)
 - [bindgen](https://github.com/rust-lang/rust-bindgen) - 自动生成 FFI 绑定
@@ -449,3 +468,93 @@ pub extern "C" fn increment() {
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
+>
+> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

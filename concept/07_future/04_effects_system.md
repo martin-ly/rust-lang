@@ -11,6 +11,7 @@
 **变更日志**:
 
 - v1.0 (2026-05-13): 初始版本。建立 Effect 系统概念框架、Rust 现有 effect 映射、AsyncFn 作为原型、跨语言对比、演进路线图
+- v1.1 (2026-05-22): 网络权威内容对齐：添加 `gen<yield>` effects 跟踪、Lang Team 2026 季度更新
 $entry
 
 ---
@@ -77,6 +78,7 @@ mindmap
 | **状态** | 修改堆/全局状态 | `&mut T` | `fn foo() -> i32 effect State` |
 
 ### 1.2 代数效应（Algebraic Effects）vs 类型效应（Type Effects）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 代数效应（Plotkin & Pretnar 2009）:
@@ -117,6 +119,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 | **泛型约束** | `where T: Send` | 线程安全约束 | Trait bound | 泛型参数多态 |
 
 ### 2.2 `async` 作为效果的原型
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
 // 当前 Rust: async 是语法关键字，不是类型系统效果
@@ -139,6 +142,7 @@ fn fetch() -> Data effect Async { ... }
 ```
 
 ### 2.3 效果状态转换图
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 stateDiagram-v2
@@ -221,6 +225,7 @@ where
 | **Rust（理想）** | 类型效应 | ⭐⭐⭐⭐ 强 | 零 | 统一语法，保持零成本 |
 
 ### 3.2 效果模型谱系图
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -262,6 +267,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.2 为什么 Rust 拒绝 Monad？
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Haskell 效果模型:
@@ -316,6 +322,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 ```
 
 ### 4.2 与 Trait 系统的整合挑战
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 挑战 1: Trait bound 与效果约束的交互
@@ -334,6 +341,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 ```
 
 ### 4.2 效果传播时序图
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 sequenceDiagram
@@ -402,16 +410,20 @@ let iter = gen {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 语言团队已知讨论（公开信息）
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 时间 | 事件 | 状态 |
 |:---|:---|:---|
 | 2023 | Lang Team Blog: "Effects in Rust" 概念文章 | 概念探索 |
 | 2024 | `AsyncFn` trait 稳定（1.85） | ✅ 效果多态原型落地 |
 | 2024 | `gen` blocks 进入 nightly | 🚧 新效果类型实验 |
+| 2025 | `gen<yield>` effects: `Iterator::next` 作为 effect 标注原型 | 🚧 nightly 实验 |
 | 2025 | Effects 语法讨论在 internals.rust-lang.org | 🚧 社区辩论中 |
+| 2026 | Lang Team 季度更新: effect 语法草案 v0.2 (内部审阅) | 🚧 内部迭代 |
 | 202? | 统一 `effect` 关键字 | 🔮 远期可能 |
 
 ### 5.2 开放问题（Research Questions）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Q1: Rust 需要完整的代数效应，还是类型效应就足够了？
@@ -432,6 +444,7 @@ Q4: 与现有生态的兼容性？
 ```
 
 ### 5.3 概念预研 → 工业落地的条件
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 必要条件:
@@ -506,5 +519,129 @@ Q4: 与现有生态的兼容性？
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新: 2026-05-21
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 07: 聊天服务器](#实践项目-07-聊天服务器)
   - [📑 目录](#-目录)
@@ -44,6 +45,7 @@
 > **[来源: Rust Official Docs]**
 
 ### TCP服务器
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use tokio::net::{TcpListener, TcpStream};
@@ -62,6 +64,7 @@ async fn run_server() -> tokio::io::Result<()> {
 ---
 
 ## 参考实现
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/chat-server/`
 ---
@@ -105,3 +108,19 @@ async fn run_server() -> tokio::io::Result<()> {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

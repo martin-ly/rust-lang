@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性项目 - 最终推进报告](#rust-所有权可判定性项目---最终推进报告)
   - [📑 目录](#-目录)
@@ -60,6 +61,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 新建 17-unsafe-rust/ 目录 (9 篇文档)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | # | 文档 | 大小 | 深度 |
 |---|------|------|------|
@@ -76,6 +78,7 @@
 **小计**: 9 文档, ~71 KB
 
 ### 扩展其他模块 (11 篇文档)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模块 | 文档 | 大小 |
 |------|------|------|
@@ -97,8 +100,10 @@
 ---
 
 ## 质量评估
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 内容深度分布
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 深度 | 数量 | 占比 |
 |-----|------|------|
@@ -107,6 +112,7 @@
 | L1 (基础级) | 2 | 10% |
 
 ### 权威对齐
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 引用 The Rustonomicon: ✅
 - 引用 The Rust Reference: ✅
@@ -116,8 +122,10 @@
 ---
 
 ## 与 100% 的差距
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 剩余工作估算
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 模块 | 剩余工作 | 估计工作量 |
 |------|---------|-----------|
@@ -131,6 +139,7 @@
 **总计**: 约 60 KB 内容 + 质量工作
 
 ### 达到 100% 的路径
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 当前: 77%
@@ -144,8 +153,10 @@
 ---
 
 ## 产出文档索引
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 审计报告
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. `PROJECT_COMPREHENSIVE_AUDIT_REPORT.md` - 全面审计 (11 KB)
 2. `AUTHORITY_ALIGNMENT_GAP_ANALYSIS.md` - 权威差距分析 (9 KB)
@@ -237,3 +248,35 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

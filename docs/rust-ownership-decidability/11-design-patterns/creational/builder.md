@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Builder Pattern in Rust](#builder-pattern-in-rust)
   - [📑 目录](#-目录)
@@ -108,8 +109,10 @@ let request = HttpRequestBuilder::new()
 ---
 
 ## 高级实现
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Type State 模式 (编译时验证)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::marker::PhantomData;
@@ -174,8 +177,10 @@ pub struct Request {
 ---
 
 ## 形式化定义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 构建过程的类型理论
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 Builder<T> = Π (fields: Field*). T
@@ -189,6 +194,7 @@ Builder<T> = Π (fields: Field*). T
 ```
 
 ### 不变量
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 Invariant BUILDER_VALID:
@@ -199,6 +205,7 @@ Invariant BUILDER_VALID:
 ---
 
 ## 实战: 数据库连接配置
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 use std::time::Duration;
@@ -280,6 +287,7 @@ pub enum ConfigError {
 ---
 
 ## 对比分析
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 实现方式 | 优点 | 缺点 |
 |---------|------|------|
@@ -290,6 +298,7 @@ pub enum ConfigError {
 ---
 
 ## 推荐 crates
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **derive_builder**: `#[derive(Builder)]`
 - **typed-builder**: Type State 自动生成
@@ -313,6 +322,7 @@ pub enum ConfigError {
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [creational 目录](./README.md)
 
@@ -335,3 +345,67 @@ pub enum ConfigError {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

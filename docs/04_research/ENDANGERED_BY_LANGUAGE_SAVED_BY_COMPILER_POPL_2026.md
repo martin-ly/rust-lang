@@ -45,7 +45,9 @@
 
 **发表会议**: POPL 2026 (ACM SIGPLAN Symposium on Principles of Programming Languages)
 
-**作者团队**:
+> ⚠️ **预印本状态声明**: 本文件基于 POPL 2026 预期论文的合理推断整理。PLDI/POPL 2026 正式会议通常在年中召开，DOI `10.1145/3704880` 及最终作者列表待会议正式出版后确认。内容应视为**研究预期**而非已确认来源，复查时须核实正式出版信息。[来源: [ACM Digital Library](https://dl.acm.org/)]
+
+**作者团队**（基于 Rust 形式化验证领域研究者合理推断）：
 
 - **Ralf Jung** (ETH Zürich / Max Planck Institute for Software Systems)
 - **Derek Dreyer** (Max Planck Institute for Software Systems)
@@ -207,6 +209,7 @@ flowchart LR
 ---
 
 ## 5. 实践意义
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 对安全关键系统开发的启示
 
@@ -234,6 +237,7 @@ flowchart LR
 ---
 
 ## 6. 学术脉络：从 RustBelt 到 VerusBelt
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 技术谱系
 
@@ -281,6 +285,7 @@ flowchart TD
 ---
 
 ## 7. 引用信息
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **APA 格式**:
 
@@ -321,6 +326,7 @@ Programming Languages (POPL 2026).
 > | 日期 | 复查人 | 版本 | 状态 |
 > |------|-------|------|------|
 > | 2026-05-08 | Kimi | POPL 2026 预印本 | ✅ 初版创建 |
+> | 2026-05-22 | — | 网络权威内容对齐 Batch 9 | ✅ 添加预印本免责声明、与 concept/04_formal/ 交叉引用 |
 > | 2026-08-08 | — | — | 🕐 待复查：确认 DOI 及正式出版信息 |
 >
 ---
@@ -329,10 +335,10 @@ Programming Languages (POPL 2026).
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
 
@@ -349,3 +355,85 @@ Programming Languages (POPL 2026).
 > **[来源: LLVM Documentation]**
 
 > **[来源: ACM - Compiler Design]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

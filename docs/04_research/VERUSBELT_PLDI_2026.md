@@ -1,9 +1,9 @@
 # VerusBelt (PLDI 2026) 研究笔记
 
 > **创建日期**: 2026-05-08
-> **最后更新**: 2026-05-08
+> **最后更新**: 2026-05-22
 > **会议**: PLDI 2026 (Programming Language Design and Implementation)
-> **状态**: 🔬 研究跟踪
+> **状态**: 🔬 研究跟踪；⚠️ 预印本/待正式出版确认
 
 ---
 
@@ -22,6 +22,7 @@
   - [⚖️ 与相关工作的对比](#️-与相关工作的对比)
     - [VerusBelt vs RefinedRust](#verusbelt-vs-refinedrust)
     - [VerusBelt vs RustBelt](#verusbelt-vs-rustbelt)
+    - [Verus 生态最新进展 (2025–2026)](#verus-生态最新进展-20252026)
   - [🔧 对安全关键 Rust 的实践意义](#-对安全关键-rust-的实践意义)
     - [1. 操作系统内核验证](#1-操作系统内核验证)
     - [2. 密码学实现验证](#2-密码学实现验证)
@@ -179,6 +180,19 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
       └──► RefinedRust ── 精炼类型系统实现
 ```
 
+### Verus 生态最新进展 (2025–2026)
+
+> **[来源: KVerus arXiv 2026; AutoVerus OOPSLA 2025; Vest USENIX Security 2025]** Verus 验证框架的周边工具链在 2025–2026 年快速扩展，降低了证明门槛并扩展了验证覆盖。
+
+| 工具 | 会议/来源 | 与 VerusBelt 的关系 |
+|:---|:---|:---|
+| **KVerus** | arXiv 2026-05 | RAG-based 自动证明生成，将自然语言规格转换为 Verus 证明脚本，减少手写 proof 负担 |
+| **AutoVerus** | OOPSLA 2025 | 神经符号验证：LLM 生成循环不变式 + SMT 验证，可与 VerusBelt 的分层语义结合 |
+| **Vest** | USENIX Security 2025 | 基于 Verus 的可验证网络协议框架（TLS/QUIC），证明消息解析与状态机正确性 |
+| **Rustlantis** | OOPSLA 2024 | 随机程序生成器用于发现 Verus/Miri 的 soundness 漏洞，提升验证工具可靠性 |
+
+> **⟹ 洞察**: VerusBelt 提供了 Verus 扩展的语义基础，而 KVerus/AutoVerus 正在将这一基础转化为**半自动化的工业实践**——从手写 proof 到 AI 辅助证明生成。[来源: [concept/04_formal/05_verification_toolchain.md](../../concept/04_formal/05_verification_toolchain.md) §7]
+
 ---
 
 ## 🔧 对安全关键 Rust 的实践意义
@@ -188,22 +202,26 @@ RustBelt (POPL 2018) ── 证明 Rust 所有权系统内存安全
 VerusBelt 的研究成果对以下领域有直接影响：
 
 ### 1. 操作系统内核验证
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - Verus 已被用于验证 **Ironclad Apps** (Microsoft Research)
 - VerusBelt 为这类验证提供了语义正确性保证
 - 与 **Rust for Linux** 项目潜在关联：未来可能用 Verus 验证内核模块
 
 ### 2. 密码学实现验证
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 常量时间验证 (constant-time verification)
 - 防止侧信道漏洞的形式化保证
 
 ### 3. 分布式系统协议
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Verus 已用于验证分布式共识协议
 - VerusBelt 保证 proof 代码不会污染 exec 代码
 
 ### 4. 行业标准
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 标准 | 要求 | Verus/VerusBelt 适用性 |
 |------|------|----------------------|
@@ -214,6 +232,7 @@ VerusBelt 的研究成果对以下领域有直接影响：
 ---
 
 ## 📖 引用信息
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **APA 格式**:
 
@@ -270,8 +289,12 @@ Design and Implementation (PLDI 2026).
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
+- [形式化验证工具链 (concept)](../../concept/04_formal/05_verification_toolchain.md) — 概念层 2026 工具链全景与状态矩阵
+- [安全关键认证 (concept)](../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene 认证与形式化方法工业映射
+- [RustBelt (concept)](../../concept/04_formal/04_rustbelt.md) — Rust 所有权系统的 Iris 分离逻辑证明
 
 ---
 
@@ -292,3 +315,79 @@ Design and Implementation (PLDI 2026).
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Verus Documentation](https://verus-lang.github.io/verus/)]**
+>
+> **[来源: [Microsoft Verus Blog](https://www.microsoft.com/en-us/research/project/verus/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

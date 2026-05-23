@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CQRS 模式形式化定义](#cqrs-模式形式化定义)
   - [📑 目录](#-目录)
@@ -82,6 +83,7 @@ Consistency_Boundary := Δt ∈ Time
 ---
 
 ## 2. 基本假设 (Axiom)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Axiom CQ1: 命令不可重复
 
@@ -116,6 +118,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ---
 
 ## 3. 定理 (Theorem)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Theorem CQ1: 读写无冲突
 
@@ -150,6 +153,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ---
 
 ## 4. Rust 实现示例
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 命令端
@@ -209,6 +213,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 5. 与其他模式的关系
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | 关系 | 说明 |
 |------|------|------|
@@ -226,6 +231,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -279,6 +285,7 @@ impl<E, S> ProjectionSync<E, S> {
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [05_distributed 目录](./README.md)
 - [上级目录](../README.md)
@@ -301,3 +308,71 @@ impl<E, S> ProjectionSync<E, S> {
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

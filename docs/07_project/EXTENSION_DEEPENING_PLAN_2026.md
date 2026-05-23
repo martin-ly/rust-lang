@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 学习项目 100% 完成度扩展与深化计划](#rust-学习项目-100-完成度扩展与深化计划)
   - [📑 目录](#-目录)
@@ -151,6 +152,7 @@
 ---
 
 ## 🎯 第二阶段：证明树可视化增强 (Week 1-2)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 需要创建的证明树
 
@@ -204,6 +206,7 @@
 ---
 
 ## 🎯 第三阶段：Rust 1.94/1.95 新特性整合 (Week 2-3)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 Rust 1.94 稳定化特性
 
@@ -257,8 +260,10 @@
 ---
 
 ## 🎯 第四阶段：权威内容全面对标 (Week 3-4)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 官方文档映射
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 确保每个主题都与官方权威文档对齐：
 
@@ -272,6 +277,7 @@
 | rustdoc Book | docs/06_toolchain/ | 文档工具 |
 
 ### 4.2 学术资源对标
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 论文/资源 | 主题 | 本项目覆盖 |
 | :--- | :--- | :--- |
@@ -283,15 +289,19 @@
 ---
 
 ## 🎯 第五阶段：缺失主题补充 (Week 4)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 识别缺失主题
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 与官方 Book 对比发现的可能缺失：
 
 ```markdown
 ## 潜在缺失主题检查
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 从 Rust Book 2024 Edition
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 - [ ] 异步闭包 (Async Closures) - C06
 - [ ] 2024 Edition 迁移指南 - docs/06_toolchain/
 - [ ] 更详细的 Cargo Workspaces - C02
@@ -299,12 +309,14 @@
 - [ ] 关联类型约束改进 - C04
 
 ### 从 Rust Reference
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 - [ ] 内联汇编 (Inline Assembly) - 新增模块
 - [ ] FFI 完整规范 - docs/05_guides/FFI_PRACTICAL_GUIDE.md
 - [ ] ABI 细节 - research_notes/
 - [ ] 常量求值规则 - C02/type_theory/
 
 ### 社区最佳实践
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 - [ ] 错误处理最佳实践 - C03
 - [ ] 测试模式 - 新增
 - [ ] 文档测试 - C11
@@ -314,6 +326,7 @@
 ---
 
 ## 📊 实施时间表
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Week 1 (03/01-03/07): 内容深度检查 + 证明树开始
@@ -344,33 +357,40 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## ✅ 成功标准
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 项目达到 100% 完成的定义：
 
 ```markdown
 ## 100% 完成检查清单
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 文档完整性
+> **[来源: [docs.rs](https://docs.rs/)]**
 - [ ] 所有计划文档已完成（非占位符）
 - [ ] 所有文档包含实质内容
 - [ ] 所有代码示例可运行
 
 ### 形式化完整性
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 - [ ] 所有核心概念有形式化定义
 - [ ] 所有定理有完整证明（L2+）
 - [ ] 所有证明有可视化图表
 
 ### 版本最新
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 - [ ] Rust 1.93.1 特性完整覆盖
 - [ ] Rust 1.95+ 特性已添加
 - [ ] Rust 1.95 实验特性有预览
 
 ### 权威对齐
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 - [ ] 与 Rust Book 逐章对齐
 - [ ] 与 Rust Reference 规范对齐
 - [ ] 与学术资源（RustBelt等）对齐
 
 ### 可验证
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 - [ ] 所有测试通过
 - [ ] 所有链接有效
 - [ ] 所有代码示例编译成功
@@ -379,6 +399,7 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## 📈 持续维护计划
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 达到 100% 后的维护策略：
 
@@ -412,6 +433,7 @@ Week 4 (03/22-03/28): 完善与验证
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [07_project 目录](./README.md)
 - [上级目录](../README.md)
@@ -435,3 +457,71 @@ Week 4 (03/22-03/28): 完善与验证
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

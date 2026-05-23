@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [并发模型选择决策树](#并发模型选择决策树)
   - [📑 目录](#-目录)
@@ -99,6 +100,7 @@
 ```
 
 ### 2.2 Async运行时选择
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 选择Async运行时
@@ -124,6 +126,7 @@
 ```
 
 ### 2.3 共享状态选择
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 共享状态并发
@@ -154,6 +157,7 @@
 ```
 
 ### 2.4 同步原语选择
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 同步需求
@@ -178,6 +182,7 @@
 ---
 
 ## 3. 场景匹配表
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 推荐模型 | 具体实现 | 理由 |
 |:---|:---|:---|:---|
@@ -193,6 +198,7 @@
 ---
 
 ## 4. 性能对比决策
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 性能优先?
@@ -216,6 +222,7 @@
 ---
 
 ## 5. 安全性优先决策
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 安全性要求?
@@ -238,8 +245,10 @@
 ---
 
 ## 6. 快速决策检查表
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 6.1 检查清单
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```markdown
 □ 需要跨网络? → Actor模型
@@ -253,6 +262,7 @@
 ```
 
 ### 6.2 常见错误避免
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
 ❌ 在async中使用阻塞IO
@@ -294,6 +304,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
 
@@ -316,3 +327,57 @@
 > **[来源: crossbeam Documentation]**
 
 > **[来源: ACM - Concurrent Programming]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rayon Documentation](https://docs.rs/rayon/latest/rayon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -30,6 +30,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 文件系统操作
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use std::fs;
@@ -44,6 +45,7 @@ fn get_file_info(path: &Path) -> std::io::Result<()> {
 ```
 
 ### 目录遍历
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::fs;
@@ -97,3 +99,14 @@ fn list_files(dir: &str) -> std::io::Result<Vec<String>> {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

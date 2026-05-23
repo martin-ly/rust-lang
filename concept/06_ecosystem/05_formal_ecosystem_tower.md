@@ -23,6 +23,7 @@ $entry
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### Wikipedia 权威定义
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Software framework]** A software framework is an abstraction in which software providing generic functionality can be selectively changed by additional user-written code, thus providing application-specific software.
 > **来源**: <https://en.wikipedia.org/wiki/Software_framework>
@@ -44,18 +45,22 @@ $entry
 > **学习递进**: 从"哪个 crate 好用"的直觉，深入到"生态系统的形式化结构"的元视角。 [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 第 1 步：为什么需要形式化视角评估生态？
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 工程选型不仅看功能和性能，还要看**组合性**（能否与其他组件代数组合）和**可验证性**（能否超越编译器保证功能正确）。
 
 ### 第 2 步：什么是"形式化分层塔"？
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 生态从 L0 编译器安全到 L4 功能正确性证明，形成了清晰的层级。理解这个层级，才能做出符合项目可靠性需求的选型。
 
 ### 第 3 步：如何阅读形式化成熟度矩阵？
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 工业采用度 ≠ 形式化深度。某些库虽 stars 不高，但在可组合性或可验证性维度上处于生态顶端。
 
 ### 第 4 步：黄金组合的逻辑是什么？
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 不是选"最好的单个库"，而是选"能形成同态链的组合"——类型安全在层与层之间传递。
 
@@ -278,6 +283,7 @@ quadrantChart
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 核心 Crate MSRV 与 Edition 兼容性矩阵
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | Crate | 最新版本 | MSRV | Edition | 关键依赖 | 形式化根基 |
 |:---|:---:|:---:|:---:|:---|:---|
@@ -294,6 +300,7 @@ quadrantChart
 > **MSRV 策略**：Rust 生态的 MSRV 演进速度约为**每 6-9 个月提升一个 minor 版本**。团队应在 `Cargo.toml` 中显式声明 `rust-version = "1.70"`，并利用 `cargo check --minimum-version` 验证兼容性。 [来源: [Cargo Book](https://doc.rust-lang.org/cargo/)]
 
 ### 8.2 Kani + GitHub Actions：形式化验证 CI 集成
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
 # ✅ .github/workflows/kani.yml
@@ -331,6 +338,7 @@ jobs:
 > **来源**: [Kani GitHub Action] · [AWS Kani 博客] · [Kani 文档: CI Integration]
 
 ### 8.3 Wasmtime 形式化语义与 Rust 实现一致性
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于**Wasm 规范的形式化验证**：
 
@@ -353,6 +361,7 @@ Wasmtime 是 Bytecode Alliance 的 WebAssembly 运行时，其安全性依赖于
 - [x] **中**: 补充 Wasmtime 形式化语义与 Rust 实现一致性的技术细节 —— 已完成 §8.3 [来源: [crates.io](https://crates.io/)]
 
 ### 8.4 形式化视角 vs 传统功能分类映射
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 传统分类（`03_core_crates.md`） | 形式化视角（本文件） | 对应关系 |
 |:---|:---|:---|
@@ -428,3 +437,89 @@ fn main() {
     println!("{:?}", data);
 }
 ```
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

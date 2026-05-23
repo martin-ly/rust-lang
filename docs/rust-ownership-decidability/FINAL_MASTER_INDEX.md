@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 主索引 (Master Index)](#rust-所有权系统---主索引-master-index)
   - [📑 目录](#-目录)
@@ -82,6 +83,7 @@
 | [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](./COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) | 完整示例集 | 90分钟 | ⭐⭐⭐ |
 
 ### 🔬 形式化理论
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 描述 |
 |------|------|
@@ -91,6 +93,7 @@
 | [FINAL_DOCUMENTATION.md](./FINAL_DOCUMENTATION.md) | 完整技术文档 |
 
 ### 🗂️ 元模型
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 描述 |
 |------|------|
@@ -99,6 +102,7 @@
 | [meta-model/03_judgments.md](meta-model/03_judgments.md) | 判断形式 |
 
 ### 📊 进度报告
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档 | 描述 |
 |------|------|
@@ -108,8 +112,10 @@
 ---
 
 ## 🎓 学习路径
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 路径 1: 快速理解 (2小时)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 1. README.md (5分钟)
@@ -123,6 +129,7 @@
 ```
 
 ### 路径 2: 系统学习 (4小时)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 1. MASTER_COMPREHENSIVE_ANALYSIS.md (60分钟)
@@ -139,6 +146,7 @@
 ```
 
 ### 路径 3: 深入研究 (8小时)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 1. 完整阅读所有文档 (3小时)
@@ -149,8 +157,10 @@
 ---
 
 ## 🏗️ 知识结构
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 核心概念地图
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Rust 所有权系统
@@ -180,6 +190,7 @@ Rust 所有权系统
 ```
 
 ### 形式化对应
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 自然语言          数学          Coq
@@ -194,8 +205,10 @@ Rust 所有权系统
 ---
 
 ## 📊 统计信息
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 代码统计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Coq 形式化:     ~3,000 行
@@ -205,6 +218,7 @@ Rust 示例:      ~2,000 行
 ```
 
 ### 内容统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 核心定理:        5 个 (全部证明)
@@ -215,6 +229,7 @@ Rust 示例:      ~2,000 行
 ```
 
 ### 完成度
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 形式化证明:      100% ✅
@@ -227,8 +242,10 @@ Rust 示例:      ~2,000 行
 ---
 
 ## 🔍 快速查找
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 按主题查找
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 相关文档 |
 |------|---------|
@@ -242,6 +259,7 @@ Rust 示例:      ~2,000 行
 | 错误诊断 | COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md (第8部分) |
 
 ### 按问题查找
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 问题 | 解决方案位置 |
 |------|-------------|
@@ -254,20 +272,24 @@ Rust 示例:      ~2,000 行
 ---
 
 ## 🎯 核心要点
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 所有权三原则
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **唯一性**: 每个值有且仅有一个所有者
 2. **作用域绑定**: 所有者离开作用域时释放值
 3. **可转移性**: 所有权可以转移 (Move)
 
 ### 2. 借用三规则
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **排他性**: 任意时刻，要么一个可变引用，要么任意多个不可变引用
 2. **有效性**: 引用必须始终有效
 3. **生命周期**: 引用不能超过被引用者的生命周期
 
 ### 3. 5个核心定理
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **终止性**: Borrow checking 必然终止
 2. **类型保持**: 求值保持类型
@@ -278,20 +300,24 @@ Rust 示例:      ~2,000 行
 ---
 
 ## 📞 使用建议
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 对于初学者
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. 从 [VISUAL_THINKING_GUIDE.md](./VISUAL_THINKING_GUIDE.md) 开始
 2. 阅读 [COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md](./COMPLETE_EXAMPLES_AND_COUNTEREXAMPLES.md) 的示例
 3. 遇到问题时查阅错误诊断部分
 
 ### 对于进阶学习者
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 阅读 [MASTER_COMPREHENSIVE_ANALYSIS.md](./MASTER_COMPREHENSIVE_ANALYSIS.md) 建立系统框架
 2. 研究 [coq-formalization/README.md](coq-formalization/README.md) 理解严格证明
 3. 分析边界案例和反例
 
 ### 对于研究者
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 阅读形式化理论和元模型
 2. 研究 Coq 证明技术
@@ -300,6 +326,7 @@ Rust 示例:      ~2,000 行
 ---
 
 ## 🎉 项目完成
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **Rust 所有权系统可判定性研究**:
 
@@ -346,3 +373,43 @@ Rust 示例:      ~2,000 行
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

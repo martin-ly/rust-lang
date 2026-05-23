@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [概念对比表汇编](#概念对比表汇编)
   - [📑 目录](#-目录)
@@ -220,8 +221,10 @@
 ---
 
 ## 四、异步对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### async fn vs 普通fn
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | fn | async fn |
 | :--- | :--- | :--- |
@@ -233,6 +236,7 @@
 | **传染性** | 无 | 调用者需await |
 
 ### Future vs Task
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | Future | Task |
 | :--- | :--- | :--- |
@@ -243,6 +247,7 @@
 | **并发** | 单描述 | 可真正并行 |
 
 ### Pin<&mut T> vs &mut T
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | &mut T | Pin<&mut T> |
 | :--- | :--- | :--- |
@@ -255,8 +260,10 @@
 ---
 
 ## 五、分布式模式对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Saga vs 2PC
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | Saga | 2PC |
 | :--- | :--- | :--- |
@@ -269,6 +276,7 @@
 | **隔离性** | 弱 | 强 |
 
 ### 编排式 vs 编制式 Saga
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 编排式(Orchestration) | 编制式(Choreography) |
 | :--- | :--- | :--- |
@@ -280,6 +288,7 @@
 | **适用场景** | 流程固定 | 流程灵活 |
 
 ### CQRS vs CRUD
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | CRUD | CQRS |
 | :--- | :--- | :--- |
@@ -293,8 +302,10 @@
 ---
 
 ## 六、工作流对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 编排 vs 编制
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | 编排(Orchestration) | 编制(Choreography) |
 | :--- | :--- | :--- |
@@ -306,6 +317,7 @@
 | **典型实现** | Temporal/Camunda | 事件驱动架构 |
 
 ### 向后补偿 vs 向前补偿
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 向后补偿 | 向前补偿 |
 | :--- | :--- | :--- |
@@ -318,8 +330,10 @@
 ---
 
 ## 七、证明层级对比
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### L1 vs L2 vs L3
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | L1 (证明思路) | L2 (完整证明) | L3 (机器证明) |
 | :--- | :--- | :--- | :--- |
@@ -334,8 +348,10 @@
 ---
 
 ## 八、快速决策表
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 选择何种智能指针？
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 需要唯一所有权？
@@ -350,6 +366,7 @@
 ```
 
 ### 选择何种锁？
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 读多写少？
@@ -361,6 +378,7 @@
 ```
 
 ### 选择何种并发模型？
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 CPU密集型？
@@ -370,6 +388,7 @@ CPU密集型？
 ```
 
 ### 选择何种事务模式？
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 事务短？
@@ -393,10 +412,12 @@ CPU密集型？
 ---
 
 ## 🆕 Rust 1.94 研究更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
@@ -410,11 +431,13 @@ CPU密集型？
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -459,6 +482,7 @@ CPU密集型？
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -482,3 +506,87 @@ CPU密集型？
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

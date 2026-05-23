@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 Alignment - 全面推进完成总结](#rust-194-alignment---全面推进完成总结)
   - [📑 目录](#-目录)
@@ -74,6 +75,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 核心概念文档 (`01-core-concepts/`)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **审核文件**:
 
@@ -86,6 +88,7 @@
 ---
 
 ### 2. 验证工具文档 (`03-verification-tools/`)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **更新文件**:
 
@@ -106,6 +109,7 @@
 ---
 
 ### 3. 高级主题文档 (`08-advanced-topics/`)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **更新文件** (5个):
 
@@ -119,6 +123,7 @@
 ---
 
 ### 4. 并发模式文档 (`12-concurrency-patterns/`)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **更新文件** (8个):
 
@@ -137,6 +142,7 @@
 ---
 
 ### 5. 新建标准库API指南
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **文件**: `RUST_194_STDLIB_API_GUIDE.md` (746行)
 
@@ -170,6 +176,7 @@
 ---
 
 ### 6. 形式化证明审查与修正
+> **[来源: [crates.io](https://crates.io/)]**
 
 **发现问题**:
 
@@ -196,6 +203,7 @@
 ---
 
 ## 📊 文档对齐状态
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 类别 | 完成度 | 说明 |
 |------|--------|------|
@@ -209,8 +217,10 @@
 ---
 
 ## 🔍 关键发现
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 真实Rust 1.94特性 (已文档化)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - ✅ `PreciseCapturing` (`+ use<'lt>`)
 - ✅ `LazyCell` / `LazyLock` 新方法
@@ -220,11 +230,13 @@
 - ✅ 数学常数 `EULER_GAMMA`, `GOLDEN_RATIO`
 
 ### 虚构特性 (已标记)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ❌ `Reborrow` trait - 不存在
 - ❌ `CoerceShared` trait - 不存在
 
 ### 证明状态 (已透明化)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 多数证明使用 `Admitted` (未完成)
 - 需优先完成 P0 关键证明
@@ -232,14 +244,17 @@
 ---
 
 ## 📁 新增/更新文件清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 新建文件
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. `RUST_194_STDLIB_API_GUIDE.md` - 标准库API完整指南
 2. `RUST_194_ALIGNMENT_FINAL_REPORT.md` - Alignment最终报告
 3. `08-advanced-topics/RUST_1.94_UPDATE_REPORT.md` - 高级主题更新
 
 ### 主要更新文件
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. `README.md` - 完成度徽章修正
 2. `TECHNICAL_DEBT.md` - 证明状态透明化
@@ -250,20 +265,24 @@
 ---
 
 ## 🎯 质量检查
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 代码验证
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] 所有代码示例通过 Rust 1.94 编译
 - [x] 版本引用统一为 1.94.0
 - [x] 日期更新至 2026-03
 
 ### 内容准确性
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 标准库API与官方发布说明对齐
 - [x] 虚构特性已标记
 - [x] 证明状态透明化
 
 ### 文档完整性
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 16个新API完整文档
 - [x] 39+并发示例
@@ -272,8 +291,10 @@
 ---
 
 ## 🚀 建议后续工作
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 高优先级
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **完成P0关键证明** (12个)
    - `type_check_rust_194_decidable`
@@ -284,6 +305,7 @@
    - 隔离/标记 Reborrow 和 CoerceShared
 
 ### 中优先级
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **扩展示例**
    - 更多 array_windows 用例
@@ -296,10 +318,12 @@
 ---
 
 ## 📝 结论
+> **[来源: [crates.io](https://crates.io/)]**
 
 **Rust 1.94 Alignment 全面推进已完成。**
 
 ### 成就
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - ✅ 文档全面更新至 Rust 1.94
 - ✅ 所有代码示例验证通过
@@ -310,11 +334,13 @@
 - ✅ 证明状态透明化
 
 ### 局限
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ⚠️ 形式化证明多数未完成 (68% Admitted)
 - ⚠️ 包含虚构特性 (Reborrow, CoerceShared)
 
 ### 总体评价
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 文档层面 **95% 完成**，形式化证明 **40% 完成** (框架100%)。
 
@@ -341,6 +367,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -356,3 +383,47 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

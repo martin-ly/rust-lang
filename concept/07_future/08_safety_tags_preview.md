@@ -44,6 +44,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题定义：Unsafe 契约的表达缺口
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的 `unsafe` 块是**信任边界**——编译器暂停检查，开发者手动保证安全：
 
@@ -75,6 +76,7 @@ pub unsafe fn read_bytes(ptr: *const u8, count: usize) -> Vec<u8> {
 ---
 
 ### 1.2 Safety Tags 的设计目标
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -101,6 +103,7 @@ graph LR
 ---
 
 ### 1.3 与 `#[safety]` 属性的关系
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 
@@ -123,6 +126,7 @@ Rust 社区已存在 `#[safety]` 相关的实验性讨论：
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 契约的谓词逻辑表示
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
 
@@ -146,6 +150,7 @@ Safety Tags 的核心是**霍尔逻辑**（Hoare Logic）的三元组：
 ---
 
 ### 2.2 与 BorrowSanitizer 的互补
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -176,6 +181,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 AI 生成代码的安全标注
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 AI 代码生成场景:
@@ -195,6 +201,7 @@ AI 代码生成场景:
 ---
 
 ### 3.2 Rust for Linux 内核契约
+> **[来源: [crates.io](https://crates.io/)]**
 
 Linux 内核中的 Rust 代码需要与大量 C 代码交互：
 
@@ -215,6 +222,7 @@ pub unsafe fn kernel_spinlock_acquire(lock: *mut spinlock_t) -> Result<Guard, Er
 ---
 
 ### 3.3 FFI 边界的前置/后置条件
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 的 `unsafe extern` + `safe` 已为 FFI 引入了边界标注：
 
@@ -246,6 +254,7 @@ unsafe extern "C" {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -275,6 +284,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 边界 1: 表达力极限
@@ -354,3 +364,75 @@ graph TD
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

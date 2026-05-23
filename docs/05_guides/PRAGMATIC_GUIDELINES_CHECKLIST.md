@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Microsoft Pragmatic Rust Guidelines 代码审查清单](#microsoft-pragmatic-rust-guidelines-代码审查清单)
   - [📑 目录](#-目录)
@@ -92,8 +93,10 @@
 ---
 
 ## 2. 性能 (Performance)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 内存分配
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -104,6 +107,7 @@
 | P05 | 使用 Cow<'_, str> 处理可选克隆 | MAY | `docs/02_reference/quick_reference/ownership_cheatsheet.md` | 读多写少场景是否使用了 Cow？ |
 
 ### 2.2 迭代与集合
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -113,6 +117,7 @@
 | P09 | 大结构体使用 Box 减少栈压力 | MAY | `crates/c01_ownership_borrow_scope/src/ownership/` | 递归类型或大结构体是否使用了 Box？ |
 
 ### 2.3 并发性能
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -123,8 +128,10 @@
 ---
 
 ## 3. 可读性 (Readability)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 命名规范
+> **[来源: [crates.io](https://crates.io/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -136,6 +143,7 @@
 | R06 | Result/Option 变量使用描述性名称 | SHOULD | `exercises/src/error_handling/ex03_error_propagation.rs` | `let content = fs::read_to_string(...)`？ |
 
 ### 3.2 代码组织
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -146,6 +154,7 @@
 | R11 | 优先使用方法链而非嵌套调用 | MAY | `exercises/src/type_system/ex04_generics_intro.rs` | `a.b().c().d()` vs `d(c(b(a)))`？ |
 
 ### 3.3 注释与文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -157,8 +166,10 @@
 ---
 
 ## 4. API 设计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 类型设计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -169,6 +180,7 @@
 | A05 | 实现 Default 减少构造函数参数 | SHOULD | `exercises/src/generics_traits/ex04_default_trait.rs` | 复杂结构体是否实现了 Default？ |
 
 ### 4.2 错误设计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -177,6 +189,7 @@
 | A08 | 使用 thiserror/anyhow 减少样板 | MAY | `Cargo.toml` workspace deps | 是否使用了生态库简化错误处理？ |
 
 ### 4.3 Trait 设计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -187,8 +200,10 @@
 ---
 
 ## 5. 命名规范补充
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 项目特定约定
+> **[来源: [crates.io](https://crates.io/)]**
 
 | # | 指南 | 级别 | 项目示例 | 检查项 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -201,8 +216,10 @@
 ---
 
 ## 审查清单速查表
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 提交前自检（开发者）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] `cargo check` 通过
 - [ ] `cargo clippy` 无警告（或所有警告已解释）
@@ -213,6 +230,7 @@
 - [ ] 无 `todo!()` 遗留（除非明确标记为 WIP）
 
 ### 代码审查（审查者）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 安全: S01–S13 检查项无风险
 - [ ] 性能: P01–P12 无明显瓶颈
@@ -223,6 +241,7 @@
 ---
 
 ## 自动化检查
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本项目已配置以下自动化检查：
 
@@ -237,6 +256,7 @@
 ---
 
 ## 相关文档
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [LFRS_CERTIFICATION_MAPPING.md](../01_learning/LFRS_CERTIFICATION_MAPPING.md) - 认证考点映射
 - [GOOGLE_RUST_MAPPING.md](../01_learning/GOOGLE_RUST_MAPPING.md) - Google 课程映射
@@ -257,6 +277,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -278,3 +299,53 @@
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

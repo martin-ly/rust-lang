@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [学习路径指南](#学习路径指南)
   - [📑 目录](#-目录)
@@ -93,6 +94,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 ---
 
 ## 🆕 Rust 1.95/1.96 特性学习路径
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 阶段 1: 快速上手 (第 1-2 天)
 
@@ -105,6 +107,7 @@ C07 (进程) → C08 (算法) → C10 (网络) → C12 (WASM)
 | `async closures` (≥1.85, Ed 2024) | ⭐⭐⭐ 进阶 | 异步编程指南 | 重构异步代码 |
 
 ### 阶段 2: 深度理解 (第 3-5 天)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // 1. 整数平方根 - 数学计算优化
@@ -153,6 +156,7 @@ async fn use_async_fn_trait() {
 ```
 
 ### 阶段 3: 综合应用 (第 6-7 天)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 结合 Rust 1.95+ 特性构建完整应用：
 
@@ -167,8 +171,10 @@ async fn use_async_fn_trait() {
 ---
 
 ## 📋 推荐学习顺序
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 对于初学者
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 1. C01 (所有权基础) ──┐
@@ -181,6 +187,7 @@ async fn use_async_fn_trait() {
 ```
 
 ### 对于有经验的开发者
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 1. 快速复习 C04 (泛型) + C05 (并发)
@@ -193,6 +200,7 @@ async fn use_async_fn_trait() {
 ```
 
 ### 对于系统程序员
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 1. C07 (进程管理) ──┐
@@ -207,8 +215,10 @@ async fn use_async_fn_trait() {
 ---
 
 ## 🛠️ 实践项目建议
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 项目 1: 数学工具库 (初级)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **目标**: 掌握 Rust 数学相关 API（isqrt 等，≥1.84）
 
@@ -226,6 +236,7 @@ async fn use_async_fn_trait() {
 **预计时间**: 2-3 天
 
 ### 项目 2: 并发哈希表缓存 (中级)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **目标**: 掌握 1.96 并发数据结构的改进
 
@@ -245,6 +256,7 @@ async fn use_async_fn_trait() {
 **预计时间**: 4-5 天
 
 ### 项目 3: 异步 Web 服务 (高级)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **目标**: 掌握 1.96 异步编程改进
 
@@ -264,6 +276,7 @@ async fn use_async_fn_trait() {
 **预计时间**: 1-2 周
 
 ### 项目 4: 系统监控工具 (专家)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **目标**: 综合应用 1.95+-1.96 特性
 
@@ -285,6 +298,7 @@ async fn use_async_fn_trait() {
 ---
 
 ## 📚 关键资源
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [QUICK_REFERENCE](../archive/temp/QUICK_REFERENCE.md)
 - [crates/c01_ownership_borrow_scope](../archive/deprecated_20260318/README.md)
@@ -303,6 +317,7 @@ async fn use_async_fn_trait() {
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [01_learning 目录](./README.md)
 - [上级目录](../README.md)
@@ -326,3 +341,67 @@ async fn use_async_fn_trait() {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

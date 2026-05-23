@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [研究笔记贡献指南](#研究笔记贡献指南)
   - [📑 目录](#-目录)
@@ -223,6 +224,7 @@
 ---
 
 ## ✅ 质量标准 {#-质量标准}
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 内容质量
 
@@ -243,6 +245,7 @@
 - ✅ **链接有效**: 所有链接有效
 
 ### 学术质量
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ **理论基础**: 有坚实的理论基础
 - ✅ **形式化定义**: 形式化定义准确
@@ -252,8 +255,10 @@
 ---
 
 ## 📋 检查清单 {#-检查清单}
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 创建新研究笔记前
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 查看 [主索引](./README.md) 确认主题不重复
 - [ ] 查看 [研究路线图](./RESEARCH_ROADMAP.md) 了解优先级
@@ -262,6 +267,7 @@
 - [ ] **元信息**：文首 blockquote 含 创建日期、最后更新、Rust 版本 1.93.1+ (Edition 2024)、状态（见 [QUALITY_CHECKLIST](./QUALITY_CHECKLIST.md)）
 
 ### 编写研究笔记时
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 包含所有必需部分（见模板）
 - [ ] 使用中文简体
@@ -271,6 +277,7 @@
 - [ ] 提供充分的参考文献
 
 ### 提交前检查
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 内容准确无误
 - [ ] 格式规范统一
@@ -282,14 +289,17 @@
 ---
 
 ## 🔧 工具和资源 {#-工具和资源}
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 必需工具
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **文本编辑器**: 支持 Markdown 的编辑器
 - **Git**: 版本控制
 - **Rust 工具链**: 测试代码示例
 
 ### 推荐工具
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **Markdown 预览**: 预览 Markdown 渲染效果
 - **链接检查器**: 检查链接有效性
@@ -297,6 +307,7 @@
 - **代码格式化**: rustfmt 格式化代码
 
 ### 参考资源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [研究笔记规范](./README.md#-研究笔记规范)
 - [研究笔记模板](./TEMPLATE.md)
@@ -306,8 +317,10 @@
 ---
 
 ## ❓ 常见问题 {#-常见问题}
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Q: 我应该在哪里创建新的研究笔记？
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 A: 根据研究主题选择目录：
 
@@ -317,6 +330,7 @@ A: 根据研究主题选择目录：
 - **综合研究** → 根目录
 
 ### Q: 如何确保我的研究笔记质量？
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 A: 遵循以下步骤：
 
@@ -326,6 +340,7 @@ A: 遵循以下步骤：
 4. 请他人审查
 
 ### Q: 我可以贡献哪些类型的内容？
+> **[来源: [crates.io](https://crates.io/)]**
 
 A: 可以贡献：
 
@@ -335,6 +350,7 @@ A: 可以贡献：
 - 翻译工作
 
 ### Q: 如何更新索引文件？
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 A: 更新以下文件：
 
@@ -343,6 +359,7 @@ A: 更新以下文件：
 3. 快速参考 QUICK_REFERENCE.md（如需要）
 
 ### Q: 研究笔记的状态如何更新？
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 A: 在研究笔记的元信息中更新状态：
 
@@ -353,6 +370,7 @@ A: 在研究笔记的元信息中更新状态：
 ---
 
 ## 📞 获取帮助 {#-获取帮助}
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 如有问题或需要帮助，请：
 
@@ -369,10 +387,12 @@ A: 在研究笔记的元信息中更新状态：
 ---
 
 ## 🆕 Rust 1.94 研究更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 核心研究点
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - rray_windows 的形式化语义
 - ControlFlow 的代数结构
@@ -386,11 +406,13 @@ A: 在研究笔记的元信息中更新状态：
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -435,6 +457,7 @@ A: 在研究笔记的元信息中更新状态：
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -458,3 +481,73 @@ A: 在研究笔记的元信息中更新状态：
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

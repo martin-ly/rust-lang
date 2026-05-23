@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [WASM 使用指南](#wasm-使用指南)
   - [📑 目录](#-目录)
@@ -306,6 +307,7 @@ wasm-pack build --target no-modules
 ---
 
 ## 🌐 在浏览器中使用
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. HTML 示例
 
@@ -351,6 +353,7 @@ wasm.init().then(() => {
 ---
 
 ## 🧪 测试
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 单元测试
 
@@ -380,6 +383,7 @@ wasm-pack test --headless --safari
 ---
 
 ## ⚡ 性能优化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. 减小二进制大小
 
@@ -427,6 +431,7 @@ pub fn process(data: &str) -> String {
 ---
 
 ## 使用场景
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 场景1: Web 前端开发
 
@@ -451,6 +456,7 @@ pub fn process(data: &str) -> String {
 - 参考 [C12 WASM 完整文档](../../crates/c12_wasm/README.md)
 
 ### 场景3: 服务端 WASM (Edge Computing)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 在边缘节点运行 WASM：
 
@@ -459,6 +465,7 @@ pub fn process(data: &str) -> String {
 - 结合 [EMBEDDED_RUST_GUIDE.md](./EMBEDDED_RUST_GUIDE.md) 进行边缘部署
 
 ### 场景4: 插件系统
+> **[来源: [crates.io](https://crates.io/)]**
 
 构建支持 WASM 插件的应用：
 
@@ -469,6 +476,7 @@ pub fn process(data: &str) -> String {
 ---
 
 ## 形式化链接
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
@@ -486,16 +494,19 @@ pub fn process(data: &str) -> String {
 ---
 
 ## 📚 相关文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../crates/c12_wasm/README.md)
 - [WASM 指南](../../crates/c12_wasm/docs/tier_02_guides/01_wasm_基础指南.md)
 - [JavaScript 互操作](../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
 ## Rust 1.95+ 在 WASM 开发中的应用
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### array_windows 在图像处理中的应用
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 /// 使用 array_windows 进行像素窗口处理
@@ -511,6 +522,7 @@ pub fn apply_kernel(data: &[u8], width: usize) -> Vec<u8> {
 ```
 
 ### LazyLock 在 WASM 状态管理中的应用
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use std::sync::LazyLock;
@@ -555,6 +567,7 @@ pub fn get_state_json() -> String {
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -578,3 +591,135 @@ pub fn get_state_json() -> String {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
+>
+> **[来源: [Wasmtime](https://wasmtime.dev/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

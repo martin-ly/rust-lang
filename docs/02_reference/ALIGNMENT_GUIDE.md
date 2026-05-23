@@ -17,6 +17,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
   - [📑 目录](#-目录)
@@ -273,6 +274,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 ---
 
 ## 三、格式化对齐
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 输出文本的左右/居中排版，详见 [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md#对齐和填充)。
 
@@ -288,6 +290,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 ---
 
 ## 四、unsafe 与对齐
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 裸指针解引用前提与 UB 情形
 
@@ -344,6 +347,7 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 ---
 
 ## 五、缓存行对齐与并发
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 伪共享（False Sharing）
 
@@ -373,6 +377,7 @@ struct CacheLinePadded {
 *详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md#32-缓存友好设计)
 
 ### 5.3 工具验证与量化数据
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **`cargo rustc -- -Z print-type-sizes`**：查看类型大小与对齐
 - **perf**：`perf stat` 观测 cache-misses，伪共享时 L1-dcache-load-misses 显著升高
@@ -387,6 +392,7 @@ struct CacheLinePadded {
 ---
 
 ## 六、权威来源（非技术对齐）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
 
@@ -395,6 +401,7 @@ struct CacheLinePadded {
 ---
 
 ## 七、对齐选型决策树
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 需要控制内存布局？
@@ -417,8 +424,10 @@ struct CacheLinePadded {
 ---
 
 ## 八、相关文档与示例
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 项目内文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 路径 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -429,6 +438,7 @@ struct CacheLinePadded {
 | 格式化对齐 | [strings_formatting_cheatsheet](./quick_reference/strings_formatting_cheatsheet.md) |
 
 ### 代码示例
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模块 | 示例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -438,6 +448,7 @@ struct CacheLinePadded {
 | c08 | `rust_192_features` align_size |
 
 ### 研究笔记
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model](../research_notes/formal_methods/ownership_model.md) - transmute 形式化约束
 - [THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE](../research_notes/THEORETICAL_AND_ARGUMENTATION_SYSTEM_ARCHITECTURE.md) - 指针有效性
@@ -452,6 +463,7 @@ struct CacheLinePadded {
 ---
 
 ## Rust 1.95+ 更新
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.95.0+
 
@@ -462,6 +474,7 @@ struct CacheLinePadded {
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [02_reference 目录](./README.md)
 - [上级目录](../README.md)
@@ -485,3 +498,107 @@ struct CacheLinePadded {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -55,6 +55,7 @@
    - 影响Rust设计
 
 ### Rust形式化
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Jung, R., et al.** (2018). RustBelt: Securing the Foundations of the Rust Programming Language. *POPL*.
    - Rust的第一个完整形式化模型
@@ -73,6 +74,7 @@
     - 利用所有权简化内存建模
 
 ### 验证工具
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Denis, X., Jourdan, J.-H., & Marché, C.** (2022). Creusot: A Foundry for the Deductive Verification of Rust Programs. *ICFEM*.
     - 预言变量编码可变借用
@@ -91,6 +93,7 @@
     - 资源代数支持
 
 ### 类型推断与可判定性
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **Damas, L., & Milner, R.** (1982). Principal type-schemes for functional programs. *POPL*.
     - HM类型推断的经典论文
@@ -101,6 +104,7 @@
     - 各种片段的分类
 
 ### 借用检查
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Rust RFC 2094: Non-Lexical Lifetimes** (2017).
     - NLL的详细设计文档
@@ -111,12 +115,14 @@
     - 流敏感的类型系统
 
 ### 并发与内存模型
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Vafeiadis, V., & Narayan, C.** (2013). Relaxed Separation Logic: A Program Logic for C11 Concurrency. *OOPSLA*.
     - 并发程序的分离逻辑
     - 影响Rust并发验证
 
 ## 在线资源
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 官方文档
 
@@ -204,3 +210,23 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

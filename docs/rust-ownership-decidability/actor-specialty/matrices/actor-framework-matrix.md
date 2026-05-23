@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor框架对比矩阵](#actor框架对比矩阵)
   - [📑 目录](#-目录)
@@ -74,6 +75,7 @@
 ---
 
 ## 矩阵4: 适用场景矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | Actix | Bastion | coerce | Xtra | Heph | Stakker |
 |:---|:---:|:---:|:---:|:---:|:---:|:---:|
@@ -90,6 +92,7 @@
 ---
 
 ## 矩阵5: 并发模型对比
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Actor | CSP(Go) | Async(Rust) | 线程池 |
 |:---:|:---:|:---:|:---:|:---:|
@@ -106,6 +109,7 @@
 ---
 
 ## 矩阵6: 消息传递语义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 语义 | Actix | Bastion | coerce | Erlang | Akka |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -119,6 +123,7 @@
 ---
 
 ## 矩阵7: 序列化与传输
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | coerce | Akka Remote | Orleans | Erlang |
 |:---:|:---:|:---:|:---:|:---:|
@@ -132,6 +137,7 @@
 ---
 
 ## 矩阵8: 监督策略对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 策略 | Bastion | coerce | Akka | Erlang |
 |:---:|:---:|:---:|:---:|:---:|
@@ -146,6 +152,7 @@
 ---
 
 ## 快速选择决策表
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 如果你的需求是... | 选择框架 | 理由 |
 |:---|:---|:---|
@@ -214,3 +221,35 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

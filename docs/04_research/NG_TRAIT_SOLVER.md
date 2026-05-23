@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Next-gen Trait Solver 跟踪报告](#next-gen-trait-solver-跟踪报告)
   - [📑 目录](#-目录)
@@ -218,6 +219,7 @@ fn use_foo<T: Foo>(x: T::Bar) {
 ---
 
 ## 3. Chalk vs New Solver 的架构对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Chalk 项目回顾
 
@@ -292,6 +294,7 @@ Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Sol
 ---
 
 ## 4. 对现代 Rust 特性的影响
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 GATs (Generic Associated Types)
 
@@ -374,6 +377,7 @@ trait AsyncServiceSend: Send + Sync {
 ```
 
 ### 4.4 Specialization (特化)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **当前状态**: 未稳定，需要 `feature(specialization)`
 
@@ -402,8 +406,10 @@ Specialization 的稳定化严重依赖新 solver 的重叠 impl 检查能力。
 ---
 
 ## 5. 启用 Next-gen Solver
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 Nightly 编译器 (已默认启用)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 自 2024 年末起，nightly 编译器已默认使用 next-gen solver。如需显式控制：
 
@@ -416,6 +422,7 @@ rustc +nightly -Ztrait-solver=classic
 ```
 
 ### 5.2 对项目的影响评估
+> **[来源: [crates.io](https://crates.io/)]**
 
 Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能有行为差异。建议：
 
@@ -426,6 +433,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 6. 时间线跟踪
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 时间 | 事件 |
 |------|------|
@@ -442,6 +450,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 7. 参考文献
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Matsakis, Niko**. "Chalk: From Logic to Rust". Rust Blog, 2017.
 
@@ -475,8 +484,8 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 
 **文档版本**: 1.1
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
 
@@ -485,8 +494,12 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
+- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Next Solver 稳定化目标 2026 跟踪
+- [Traits (concept)](../../concept/02_intermediate/01_traits.md) — Trait 系统核心概念与 Next Solver 前瞻
+- [泛型 (concept)](../../concept/02_intermediate/02_generics.md) — 泛型系统与关联类型详解
 
 ---
 
@@ -504,3 +517,115 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

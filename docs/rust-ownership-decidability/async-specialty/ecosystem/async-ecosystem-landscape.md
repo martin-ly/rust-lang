@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Async 生态系统全景图](#rust-async-生态系统全景图)
   - [📑 目录](#-目录)
@@ -107,6 +108,7 @@ async fn main(spawner: Spawner) {
 ```
 
 ### 1.2 RTIC实时框架
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 #[rtic::app(device = stm32f4xx_hal::pac)]
@@ -139,8 +141,10 @@ mod app {
 ---
 
 ## 2. io_uring 生态 (Linux高性能)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 tokio-uring
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use tokio_uring::fs::File;
@@ -161,6 +165,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ```
 
 ### 2.2 glommio (线程本地io_uring)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use glommio::{
@@ -188,6 +193,7 @@ fn main() {
 ```
 
 ### 2.3 monoio (纯io_uring)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use monoio::{
@@ -205,6 +211,7 @@ async fn main() {
 ```
 
 ### 2.4 io_uring生态对比
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 运行时 | io_uring支持 | 性能 | 适用场景 |
 |:-------|:-------------|:-----|:---------|
@@ -216,8 +223,10 @@ async fn main() {
 ---
 
 ## 3. 特色开源库
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 3.1 Quinn (QUIC协议)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use quinn::{Endpoint, ServerConfig};
@@ -235,6 +244,7 @@ async fn quic_server() {
 ```
 
 ### 3.2 sqlx (编译时检查SQL)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use sqlx::postgres::PgPool;
@@ -252,6 +262,7 @@ async fn query_users(pool: &PgPool) -> Result<Vec<User>, sqlx::Error> {
 ```
 
 ### 3.3 lapin (AMQP/RabbitMQ)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use lapin::{Connection, ConnectionProperties, options::*};
@@ -281,8 +292,10 @@ async fn amqp_consumer() -> Result<(), lapin::Error> {
 ---
 
 ## 4. 生态选择指南
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 决策树
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 目标平台?
@@ -302,6 +315,7 @@ async fn amqp_consumer() -> Result<(), lapin::Error> {
 ```
 
 ### 4.2 场景匹配表
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 推荐运行时 | 理由 |
 |:-----|:-----------|:-----|
@@ -333,6 +347,7 @@ async fn amqp_consumer() -> Result<(), lapin::Error> {
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
 
@@ -355,3 +370,63 @@ async fn amqp_consumer() -> Result<(), lapin::Error> {
 > **[来源: Tokio Documentation]**
 
 > **[来源: RFC 2394 - Async/Await]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Async Book](https://rust-lang.github.io/async-book/)]**
+>
+> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

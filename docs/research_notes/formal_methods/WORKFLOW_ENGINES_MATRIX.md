@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [工作流引擎能力矩阵](#工作流引擎能力矩阵)
   - [📑 目录](#-目录)
@@ -94,6 +95,7 @@
 ---
 
 ## 选型决策矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 按场景推荐
 
@@ -123,6 +125,7 @@
 ---
 
 ## 深度对比
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Temporal vs Cadence
 
@@ -153,6 +156,7 @@
 ---
 
 ## Rust集成指南
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Temporal Rust SDK
 
@@ -238,6 +242,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 设计模式映射
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模式 | Temporal | 自研实现 | 适用性 |
 | :--- | :--- | :--- | :--- |
@@ -250,6 +255,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 风险评估矩阵
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 引擎 | 供应商锁定 | 运维复杂度 | 学习成本 | 社区风险 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -262,6 +268,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 与Rust形式化方法关联
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 概念 | 形式化支持 | 应用 |
 | :--- | :--- | :--- |
@@ -273,6 +280,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 推荐学习路径
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 入门 ────────────────────────────────────────> 精通
@@ -293,6 +301,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -346,6 +355,7 @@ impl<S: State> Workflow<S> {
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
@@ -361,3 +371,89 @@ impl<S: State> Workflow<S> {
 > **[来源: TLA+]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

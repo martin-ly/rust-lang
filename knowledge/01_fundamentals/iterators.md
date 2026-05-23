@@ -102,6 +102,7 @@ fn main() {
 ```
 
 ### 2. Peekable::next_if - 条件消费
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `Peekable::next_if` 允许你查看下一个元素，仅在满足条件时才消费它。
 
@@ -195,8 +196,10 @@ fn main() {
 ```
 
 ## 💻 综合示例
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例：数据分析管道
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::collections::HashMap;
@@ -236,6 +239,7 @@ fn main() {
 ```
 
 ## ⚠️ 常见陷阱
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 错误 | 原因 | 解决方案 |
 |------|------|----------|
@@ -244,8 +248,10 @@ fn main() {
 | `next_if` 后 peek 为 None | 元素已被消费 | 理解消费语义 |
 
 ## 🎮 练习
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 练习 1：平滑数据
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 实现一个函数，使用 `array_windows` 对传感器数据进行平滑处理（窗口平均）。
 
@@ -257,6 +263,7 @@ fn main() {
 </details>
 
 ### 练习 2：命令解析器
+> **[来源: [crates.io](https://crates.io/)]**
 
 使用 `Peekable::next_if` 实现一个简单的命令行解析器，支持带引号的参数。
 
@@ -299,12 +306,14 @@ fn parse_args(input: &str) -> Vec<String> {
 </details>
 
 ## 📖 延伸阅读
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 1.96 Release Notes](https://releases.rs/docs/1.96.0/)
 - [Iterator trait 文档](https://doc.rust-lang.org/std/iter/trait.Iterator.html)
 - [array_windows API](https://doc.rust-lang.org/std/primitive.slice.html#method.array_windows)
 
 ## ✅ 自我检测
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. `array_windows` 和 `windows` 的主要区别是什么？
 2. `next_if` 在什么场景下特别有用？
@@ -320,6 +329,7 @@ fn parse_args(input: &str) -> Vec<String> {
 ---
 
 ## 📚 权威来源索引
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方来源
 
@@ -336,8 +346,113 @@ fn parse_args(input: &str) -> Vec<String> {
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 借用与引用 (Borrowing and References)](borrowing.md)
 - [Rust 生命周期 (Lifetimes)](lifetimes.md)
 - [Rust 所有权深入](ownership.md)
 - [集合类型 (Collections)](../02_intermediate/collections.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

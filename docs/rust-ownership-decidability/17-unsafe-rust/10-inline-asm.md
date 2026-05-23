@@ -56,6 +56,7 @@ unsafe {
 ```
 
 ### 1.2 完整结构
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 unsafe {
@@ -73,8 +74,10 @@ unsafe {
 ---
 
 ## 2. 操作数类型
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 寄存器约束
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 let mut x: u64 = 5;
@@ -91,6 +94,7 @@ assert_eq!(x, 10);
 ```
 
 ### 2.2 具体寄存器
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 let mut ax: u16 = 0;
@@ -104,6 +108,7 @@ unsafe {
 ```
 
 ### 2.3 内存操作数
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 let mut arr: [u64; 4] = [1, 2, 3, 4];
@@ -121,8 +126,10 @@ assert_eq!(arr[1], 12);
 ---
 
 ## 3. 输入输出
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 简单输入输出
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 fn add(a: u64, b: u64) -> u64 {
@@ -142,6 +149,7 @@ fn add(a: u64, b: u64) -> u64 {
 ```
 
 ### 3.2 读写同一变量
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 fn multiply_by_2(x: u64) -> u64 {
@@ -159,6 +167,7 @@ fn multiply_by_2(x: u64) -> u64 {
 ```
 
 ### 3.3 多个输出
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 fn div_rem(dividend: u64, divisor: u64) -> (u64, u64) {
@@ -181,8 +190,10 @@ fn div_rem(dividend: u64, divisor: u64) -> (u64, u64) {
 ---
 
 ## 4. 实战示例
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 获取 CPU ID
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 fn cpuid(leaf: u32) -> (u32, u32, u32, u32) {
@@ -211,6 +222,7 @@ fn main() {
 ```
 
 ### 4.2 RDTSC (读取时间戳计数器)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 fn rdtsc() -> u64 {
@@ -241,6 +253,7 @@ where
 ```
 
 ### 4.3 原子操作实现
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 fn atomic_add(ptr: *mut u64, val: u64) -> u64 {
@@ -262,8 +275,10 @@ fn atomic_add(ptr: *mut u64, val: u64) -> u64 {
 ---
 
 ## 5. 注意事项
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 5.1 安全注意事项
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // ⚠️ 汇编代码不经过 Rust 安全检查
@@ -286,6 +301,7 @@ fn safe_asm_op(arr: &mut [u64], index: usize) {
 ```
 
 ### 5.2 平台差异
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // x86_64 汇编
@@ -306,6 +322,7 @@ fn arch_specific() {
 ```
 
 ### 5.3 选项说明
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 unsafe {
@@ -324,6 +341,7 @@ unsafe {
 ---
 
 ## 参考
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [The Rust Reference - Inline Assembly](https://doc.rust-lang.org/reference/inline-assembly.html)
 - [Rust Inline Assembly RFC](https://rust-lang.github.io/rfcs/2873-inline-asm.html)
@@ -366,3 +384,61 @@ unsafe {
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

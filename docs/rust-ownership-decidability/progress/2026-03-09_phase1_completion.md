@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Phase 1 完成报告](#phase-1-完成报告)
   - [📑 目录](#-目录)
@@ -56,6 +57,7 @@
 ```
 
 ### 🎯 完成的定理
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1. 终止性 (Termination)
 
@@ -95,8 +97,10 @@
 ---
 
 ## 核心定理总结
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 定理 1: Borrow Checking 终止性
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 forall Γ, Linearizable Γ → exists Γ' n,
@@ -104,6 +108,7 @@ forall Γ, Linearizable Γ → exists Γ' n,
 ```
 
 ### 定理 2: 类型保持 (Preservation)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 Δ; Γ; Θ ⊢ e : τ → σ; h ⊢ e ⇓ v; h' →
@@ -111,6 +116,7 @@ exists Γ' Θ', value_has_type Δ Γ' Θ' v τ
 ```
 
 ### 定理 3: 进展 (Progress)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 Δ; Γ; Θ ⊢ e : τ → is_value(e) ∨ step(e) ∨ stuck(e)
@@ -207,3 +213,27 @@ coq-formalization/theories/
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

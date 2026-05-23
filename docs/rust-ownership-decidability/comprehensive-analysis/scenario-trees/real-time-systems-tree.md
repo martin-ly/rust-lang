@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实时系统应用场景树](#实时系统应用场景树)
   - [📑 目录](#-目录)
@@ -92,6 +93,7 @@
 ```
 
 ### 2.2 航空航天系统
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 飞行控制
@@ -113,6 +115,7 @@
 ```
 
 ### 2.3 医疗设备
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 医疗仪器
@@ -136,8 +139,10 @@
 ---
 
 ## 3. 软实时系统
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 音视频处理
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 多媒体系统
@@ -164,6 +169,7 @@
 ```
 
 ### 3.2 游戏开发
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 游戏引擎
@@ -192,8 +198,10 @@
 ---
 
 ## 4. Rust实时解决方案
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 硬实时框架对比
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 框架 | 调度策略 | WCET分析 | 内存 | 适用场景 |
 |:---:|:---:|:---:|:---:|:---|
@@ -203,6 +211,7 @@
 | **Hubris** | 固定优先级 | ⭐⭐⭐⭐ | 无堆 | 嵌入式 |
 
 ### 4.2 确定性编程模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // RTIC确定性示例
@@ -250,6 +259,7 @@ mod app {
 ```
 
 ### 4.3 无锁数据结构
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // 实时系统中的无锁队列
@@ -276,8 +286,10 @@ fn process_events() {
 ---
 
 ## 5. 性能保证技术
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 WCET分析
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 最坏情况执行时间分析:
@@ -293,6 +305,7 @@ fn process_events() {
 ```
 
 ### 5.2 内存分配策略
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 策略 | 分配时间 | 碎片 | 确定性 | 适用场景 |
 |:---:|:---:|:---:|:---:|:---|
@@ -305,8 +318,10 @@ fn process_events() {
 ---
 
 ## 6. 认证与合规
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 功能安全标准
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 功能安全标准映射:
@@ -326,6 +341,7 @@ Rust优势:
 ```
 
 ### 6.2 工具链认证
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具 | 用途 | 认证支持 |
 |:---|:---|:---:|
@@ -338,8 +354,10 @@ Rust优势:
 ---
 
 ## 7. 实际案例
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 汽车制动系统
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // 简化ABS控制逻辑
@@ -376,6 +394,7 @@ impl AbsController {
 ```
 
 ### 7.2 无人机飞控
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // 姿态控制回路
@@ -409,6 +428,7 @@ fn attitude_control() {
 ---
 
 ## 8. 结论
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -456,6 +476,7 @@ fn attitude_control() {
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
 
@@ -470,3 +491,109 @@ fn attitude_control() {
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -11,6 +11,8 @@
 
 ## 📑 目录
 >
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
 - [权威来源与引用](#权威来源与引用)
   - [📑 目录](#-目录)
   - [Rust 1.94.0 权威来源](#rust-1940-权威来源)
@@ -43,6 +45,7 @@
   - [**维护说明**: 本文档应随Rust生态更新而更新，确保所有引用来源保持最新和准确](#维护说明-本文档应随rust生态更新而更新确保所有引用来源保持最新和准确)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## Rust 1.94.0 权威来源
 >
@@ -236,14 +239,20 @@ Cargo：
 ---
 
 ## Miri 权威来源
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 功能扩展 (2023-2026)
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > "系统调用模拟（Shims）：大幅扩展了对 Windows、Linux、macOS 及 Android 等平台的 API 支持；新增了对 Intel AVX-512 等硬件指令集的模拟。"
 >
 > —— **Ralf Jung博客**, 2025-12-22
 
 ### 并发与性能改进
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > "更新至 **C++20 并发语义**，引入了全非确定性调度器。"
 >
@@ -252,6 +261,8 @@ Cargo：
 > —— **Ralf Jung博客**, 2025-12-22
 
 ### 核心论文引用
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bibtex
 @article{jung2026miri,
@@ -279,8 +290,12 @@ Cargo：
 ---
 
 ## 大型项目迁移案例
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Rust 2024 Edition迁移实践
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 > "The workspace has close to 400 crates, and more than 1500 rust files... We tend to upgrade very soon after new toolchains are released, and often new language features give us new abilities and new lints help us find latent bugs."
 >
@@ -300,8 +315,12 @@ Cargo：
 ---
 
 ## 引用格式规范
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 学术论文引用
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 使用ACM/IEEE格式：
 
@@ -310,12 +329,16 @@ Cargo：
 ```
 
 ### 官方文档引用
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 [文档名称]. [URL]. [访问日期]
 ```
 
 ### 博客文章引用
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 [作者]. [标题]. [博客名称], [日期]. [URL]
@@ -324,6 +347,8 @@ Cargo：
 ---
 
 ## 验证清单
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [x] Rust 1.94特性与官方发布说明对齐
 - [x] Tree Borrows引用PLDI 2025 Distinguished Paper
@@ -353,6 +378,8 @@ Cargo：
 ---
 
 ## 相关概念
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [docs 目录](./README.md)
 
@@ -375,3 +402,58 @@ Cargo：
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

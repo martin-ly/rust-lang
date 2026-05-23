@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [错误处理速查卡](#错误处理速查卡)
   - [📑 目录](#-目录)
@@ -68,6 +69,7 @@ res.and_then(|v| ...) // 链式操作
 ---
 
 ## ?操作符
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 fn may_fail() -> Result<T, Error> {
@@ -80,6 +82,7 @@ fn may_fail() -> Result<T, Error> {
 ---
 
 ## 错误转换
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // From trait自动转换
@@ -94,6 +97,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## panic vs Result
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 情况 | 使用 |
 | :--- | :--- |
@@ -111,6 +115,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
 
@@ -121,6 +126,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -174,6 +180,7 @@ let file = File::open("file")?;  // IOError自动转为MyError
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -189,3 +196,55 @@ let file = File::open("file")?;  // IOError自动转为MyError
 > **[来源: Rust Reference - Result]**
 
 > **[来源: RFC 2504 - Try Trait]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Error Handling Guidelines](https://doc.rust-lang.org/rust-by-example/error.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

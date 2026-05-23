@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内容创建批次 1 - 完成报告](#内容创建批次-1---完成报告)
   - [📑 目录](#-目录)
@@ -56,6 +57,7 @@
 **小结**: 填补了系统编程基础内容的缺失。
 
 ### 3. 填充 13-architecture-patterns/
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
 |-----|------|------|------|
@@ -65,6 +67,7 @@
 **小结**: 将架构模式从 1 个文档扩展到 3 个。
 
 ### 4. 填充 14-distributed-systems/
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
 |-----|------|------|------|
@@ -73,6 +76,7 @@
 **小结**: 添加分布式系统核心内容。
 
 ### 5. 扩展 03-verification-tools/
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
 |-----|------|------|------|
@@ -82,6 +86,7 @@
 **小结**: 验证工具从 2 个扩展到 4 个。
 
 ### 6. 扩展 05-comparative-study/
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文件 | 大小 | 深度 | 描述 |
 |-----|------|------|------|
@@ -93,6 +98,7 @@
 ---
 
 ## 统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 新增文件
 
@@ -203,3 +209,18 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

@@ -51,6 +51,7 @@ serde_json提供:
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 定理 2.1 (类型一致性)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > Serialize实现保证类型一致的JSON输出。
 
@@ -69,6 +70,7 @@ $$
 ∎
 
 ### 定理 2.2 (逃逸安全)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > 字符串自动转义，防止注入。
 
@@ -222,3 +224,29 @@ struct Data {
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Serde Documentation](https://serde.rs/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

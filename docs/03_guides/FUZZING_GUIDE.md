@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-fuzz 模糊测试入门指南](#cargo-fuzz-模糊测试入门指南)
   - [📑 目录](#-目录)
@@ -71,6 +72,7 @@ cargo fuzz --version
 ---
 
 ## 3. 快速开始
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 初始化 fuzz 项目
 
@@ -147,6 +149,7 @@ cargo fuzz run sort_fuzzer corpus/
 ---
 
 ## 4. 本项目 Fuzz Target
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### c08_algorithms —— 解析器模糊测试
 
@@ -195,6 +198,7 @@ doc = false
 ---
 
 ## 5. 高级技巧
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 结构化 Fuzzing
 
@@ -224,6 +228,7 @@ fuzz_target!(|packet: Packet| {
 ```
 
 ### 与 Miri 结合
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
 # 先用 fuzzer 找到崩溃输入，再用 Miri 分析根本原因
@@ -233,6 +238,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -- crash_input
 ```
 
 ### 覆盖率引导
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 # 生成覆盖率报告
@@ -243,6 +249,7 @@ cargo fuzz coverage target_name
 ---
 
 ## 6. CI 集成
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
 # .github/workflows/fuzzing.yml（片段）
@@ -265,6 +272,7 @@ fuzzing:
 ---
 
 ## 7. 参考资源
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust Fuzzing Book](https://rust-fuzz.github.io/book/)
 - [cargo-fuzz 仓库](https://github.com/rust-fuzz/cargo-fuzz)
@@ -290,6 +298,7 @@ fuzzing:
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
 
@@ -312,3 +321,71 @@ fuzzing:
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

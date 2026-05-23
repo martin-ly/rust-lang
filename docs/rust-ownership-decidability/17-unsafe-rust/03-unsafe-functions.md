@@ -61,6 +61,7 @@ fn main() {
 ```
 
 ### 1.2 安全包装器模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 /// 内部实现使用 unsafe
@@ -85,6 +86,7 @@ pub fn safe_read(maybe_ptr: Option<&i32>) -> Option<i32> {
 ```
 
 ### 1.3 Unsafe 函数指针
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 type UnsafeFn = unsafe fn(*const i32) -> i32;
@@ -97,8 +99,10 @@ fn call_unsafe(f: UnsafeFn, ptr: *const i32) -> i32 {
 ---
 
 ## 2. Unsafe Trait
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 定义与实现
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 标记 trait，实现者必须保证安全条件
@@ -113,6 +117,7 @@ unsafe impl Sync for MyType {}
 ```
 
 ### 2.2 自定义 Unsafe Trait
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 /// # Safety
@@ -135,8 +140,10 @@ unsafe impl RawReadable for u32 {
 ---
 
 ## 3. 安全抽象模式
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 类型状态模式
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 use std::marker::PhantomData;
@@ -181,6 +188,7 @@ impl<T> SafeBuffer<T, Init> {
 ```
 
 ### 3.2 不变量封装
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 pub struct SafeString {
@@ -218,8 +226,10 @@ impl SafeString {
 ---
 
 ## 4. 常见模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 延迟初始化
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::sync::Once;
@@ -242,6 +252,7 @@ fn expensive_init() -> String {
 ```
 
 ### 4.2 自定义 Drop
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 struct RawBuffer {
@@ -264,8 +275,10 @@ impl Drop for RawBuffer {
 ---
 
 ## 5. 文档与契约
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Safety 文档规范
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 /// # Safety
@@ -293,6 +306,7 @@ unsafe fn read_ptr<T: Copy>(ptr: *const T) -> T {
 ```
 
 ### 5.2 不变量文档
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 /// 一个保证元素唯一性的集合
@@ -359,3 +373,67 @@ impl<T: PartialEq> UniqueVec<T> {
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

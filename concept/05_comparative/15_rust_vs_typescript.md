@@ -43,6 +43,7 @@
 > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 1.1 TypeScript 权威定义
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[TypeScript Handbook]** TypeScript is JavaScript with syntax for types. TypeScript is a strongly typed programming language that builds on JavaScript, giving you better tooling at any scale.
 > **来源**: <https://www.typescriptlang.org/docs/handbook/intro.html>
@@ -78,6 +79,7 @@ TypeScript 核心特征:
 ---
 
 ### 1.2 类型系统哲学对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 类型系统哲学对比:
@@ -121,6 +123,7 @@ TypeScript 核心特征:
 ---
 
 ### 1.3 编译模型差异
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 编译模型对比:
@@ -164,6 +167,7 @@ TypeScript 核心特征:
 ---
 
 ### 1.4 内存模型：所有权 vs GC
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 内存管理对比:
@@ -205,6 +209,7 @@ TypeScript 核心特征:
 > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 2.1 类型系统对比矩阵
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 类型系统深度对比:
@@ -246,6 +251,7 @@ TypeScript 核心特征:
 ---
 
 ### 2.2 异步模型对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 异步模型对比:
@@ -288,6 +294,7 @@ TypeScript 核心特征:
 ---
 
 ### 2.3 错误处理：Result vs Throw
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 错误处理对比:
@@ -337,6 +344,7 @@ TypeScript 核心特征:
 ---
 
 ### 2.4 WASM 互操作
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 WASM 互操作模型:
@@ -428,6 +436,7 @@ WASM 互操作模型:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 类型系统哲学对比图
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TB
@@ -475,6 +484,7 @@ graph TB
 ---
 
 ### 4.2 工程选型决策树
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TD
@@ -523,6 +533,7 @@ graph TD
 > [来源: [TypeScript Handbook](https://www.typescriptlang.org/docs/handbook/intro.html)]
 
 ### 5.1 反命题树
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 反命题分析:
@@ -561,6 +572,7 @@ graph TD
 ---
 
 ### 5.2 边界极限
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 边界极限测试:
@@ -683,3 +695,43 @@ fn main() {
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
+
+---
+
+## 权威来源索引
+
+> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

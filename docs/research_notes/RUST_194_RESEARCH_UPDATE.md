@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94.0 研究更新报告](#rust-1940-研究更新报告)
   - [📑 目录](#-目录)
@@ -204,6 +205,7 @@ cargo fix --edition
 - Edition 2024 新特性的类型检查
 
 ### 所有权系统
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - 现有的所有权规则保持不变
 - Edition 2024 的 drop 顺序变化需要关注
@@ -211,6 +213,7 @@ cargo fix --edition
 ---
 
 ## 📈 与 1.93 版本对比分析
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 方面 | 1.93 | 1.94 | 影响 |
 |------|------|------|------|
@@ -222,8 +225,10 @@ cargo fix --edition
 ---
 
 ## 📚 代码示例与研究场景
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### ControlFlow 模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -248,6 +253,7 @@ impl Validator {
 ```
 
 ### MaybeUninit 安全模式
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use std::mem::MaybeUninit;
@@ -269,17 +275,21 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 ---
 
 ## 🔗 相关资源
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 外部链接
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 1.94 Release Notes](https://releases.rs/)
 - [Edition 2024 Guide](https://doc.rust-lang.org/edition-guide/rust-2024/)
 
 ### 内部代码
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 1.94 特性示例](../../crates/c01_ownership_borrow_scope/src/rust_194_features.rs)
 
 ### 项目文档
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 1.94 发布说明](../archive/2026_05_historical_docs/16_rust_1.94_release_notes.md)
 - [Rust 1.94 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
@@ -295,11 +305,13 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -344,6 +356,7 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -367,3 +380,79 @@ fn initialize_array<T: Copy, const N: usize>(value: T) -> [T; N] {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

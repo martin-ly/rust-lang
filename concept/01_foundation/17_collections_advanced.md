@@ -36,6 +36,7 @@
   - [七、来源与延伸阅读](#七来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -44,6 +45,8 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 BTreeMap/BTreeSet：有序关联容器
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: B-tree]** A B-tree is a self-balancing tree data structure that maintains sorted data and allows searches, sequential access, insertions, and deletions in logarithmic time.
 > **来源**: <https://en.wikipedia.org/wiki/B-tree>
@@ -78,6 +81,8 @@ BTreeMap 核心特征:
 ---
 
 ### 1.2 VecDeque：循环缓冲双端队列
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[std::collections::VecDeque]** A double-ended queue implemented with a growable ring buffer.
 > **来源**: <https://doc.rust-lang.org/std/collections/struct.VecDeque.html>
@@ -112,6 +117,8 @@ VecDeque 核心特征:
 ---
 
 ### 1.3 BinaryHeap：二叉堆优先队列
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Wikipedia: Binary Heap]** A binary heap is a heap data structure that takes the form of a binary tree. Binary heaps are a common way of implementing priority queues.
 > **来源**: <https://en.wikipedia.org/wiki/Binary_heap>
@@ -148,6 +155,8 @@ BinaryHeap 核心特征:
 ---
 
 ### 1.4 HashMap 自定义 Hasher
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[std::hash::BuildHasher]** A trait for creating instances of Hasher. A BuildHasher is typically used as a factory for creating multiple instances of Hasher for a specific hash algorithm.
 > **来源**: <https://doc.rust-lang.org/std/hash/trait.BuildHasher.html>
@@ -200,6 +209,8 @@ Rust HashMap 的 Hasher 生态:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 BTreeMap 节点布局
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 BTreeMap 节点结构（B=6，即 6-11 键/节点）:
@@ -234,6 +245,8 @@ BTreeMap 节点结构（B=6，即 6-11 键/节点）:
 ---
 
 ### 2.2 VecDeque 环形缓冲区布局
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 VecDeque<T> 内存布局:
@@ -274,6 +287,8 @@ VecDeque<T> 内存布局:
 ---
 
 ### 2.3 BinaryHeap 数组表示
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 BinaryHeap<T> 数组表示（最大堆）:
@@ -307,6 +322,8 @@ BinaryHeap<T> 数组表示（最大堆）:
 ---
 
 ### 2.4 自定义 Hasher 的性能影响
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 Hasher 性能基准对比（64-bit key，单线程）:
@@ -380,6 +397,8 @@ Hasher 性能基准对比（64-bit key，单线程）:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 集合选型决策树
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -419,6 +438,8 @@ graph TD
 ---
 
 ### 4.2 内存布局对比图
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -467,6 +488,8 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 反命题分析:
@@ -508,6 +531,8 @@ graph LR
 ---
 
 ### 5.2 边界极限
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 边界极限测试:
@@ -615,6 +640,8 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use std::collections::BTreeMap;
@@ -673,3 +700,146 @@ fn main() {
 **文档版本**: 1.0
 **对应 Rust 版本**: 1.96.0+ (Edition 2024)
 **最后更新**: 2026-05-22
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**

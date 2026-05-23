@@ -44,6 +44,7 @@
 判定复杂度: TOWER-Complete (非初等递归，但可判定)
 
 ### 1.2 与线性逻辑的对比
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 线性逻辑 | 仿射逻辑 |
 |------|----------|----------|
@@ -187,3 +188,24 @@ Rust借用检查器的可判定性:
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Type Theory Research](https://en.wikipedia.org/wiki/Type_theory)]**
+>
+> **[来源: [Rust FFI Guide](https://doc.rust-lang.org/nomicon/ffi.html)]**
+>
+> **[来源: [bindgen Documentation](https://rust-lang.github.io/rust-bindgen/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

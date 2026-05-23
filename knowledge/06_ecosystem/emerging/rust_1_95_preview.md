@@ -23,3 +23,18 @@
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
 - [Rust 1.95 新特性](rust_1_95.md)
 - [Cargo 基础](../cargo_basics.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

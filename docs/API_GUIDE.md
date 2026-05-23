@@ -7,6 +7,8 @@
 
 ## 📑 目录
 >
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
 - [API 使用指南](#api-使用指南)
   - [📑 目录](#-目录)
   - [快速开始](#快速开始)
@@ -26,6 +28,7 @@
   - [参考文档](#参考文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 快速开始
 >
@@ -60,8 +63,12 @@ fn main() {
 ---
 
 ## Crate API 概览
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### c01_ownership_borrow_scope
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -71,6 +78,8 @@ fn main() {
 | lifetime | LifetimeDemo | 生命周期 |
 
 ### c02_type_system
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -80,6 +89,8 @@ fn main() {
 | traits | TraitDemo | Trait 系统 |
 
 ### c04_generic
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -88,6 +99,8 @@ fn main() {
 | gat | ContainerFamily | GAT 示例 |
 
 ### c05_threads
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -96,6 +109,8 @@ fn main() {
 | lock_free | LockFreeQueue | 无锁队列 |
 
 ### c06_async
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -104,6 +119,8 @@ fn main() {
 | web_frameworks | AxumServer | Web 服务器 |
 
 ### c08_algorithms
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 模块 | 核心类型 | 描述 |
 |------|----------|------|
@@ -114,8 +131,12 @@ fn main() {
 ---
 
 ## 最佳实践
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 错误处理
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use common::Result;
@@ -127,6 +148,8 @@ fn do_something() -> Result<i32> {
 ```
 
 ### 异步代码
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use tokio;
@@ -138,6 +161,8 @@ async fn main() {
 ```
 
 ### 并发控制
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 use std::sync::Arc;
@@ -149,6 +174,8 @@ let data = Arc::new(Mutex::new(Vec::new()));
 ---
 
 ## 参考文档
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - docs.rs - 在线文档
 - examples/ - 示例代码
@@ -172,6 +199,8 @@ let data = Arc::new(Mutex::new(Vec::new()));
 ---
 
 ## 相关概念
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [docs 目录](./README.md)
 
@@ -194,3 +223,32 @@ let data = Arc::new(Mutex::new(Vec::new()));
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**

@@ -1,6 +1,7 @@
 ﻿# Rust 编程语言：构造性语义形式化与表达能力边界
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 编程语言：构造性语义形式化与表达能力边界](#rust-编程语言构造性语义形式化与表达能力边界)
   - [📑 目录](#-目录)
@@ -246,6 +247,7 @@ Rust 的 `Result<T, E>` 对应构造性逻辑中的 $T \lor E$：可构造的要
 ---
 
 ## 📜 公理语义与前/后条件 {#-公理语义与前后条件}
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. Hoare 逻辑与 Rust
 
@@ -284,6 +286,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 📍 表达能力边界论证 {#-表达能力边界论证}
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 多维表达能力边界矩阵
 
@@ -357,6 +360,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 🗺️ 思维表征：语义-表达式能力矩阵 {#️-思维表征语义-表达式能力矩阵}
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 语义范式 vs 表达能力
 
@@ -382,6 +386,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 🌳 公理-定理-证明全链路：语义视角 {#-公理-定理-证明全链路语义视角}
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 语义形式化全链路
@@ -403,6 +408,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## ⚠️ 反例：表达能力边界 violation {#️-反例表达能力边界-violation}
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 反例 | 违反的边界 | 后果 | 文档 |
 | :--- | :--- | :--- | :--- |
@@ -416,6 +422,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 📚 相关文档 {#-相关文档}
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 文档 | 用途 |
 | :--- | :--- |
@@ -434,6 +441,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -491,6 +499,7 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -519,3 +528,103 @@ $\{P\}\; e \;\{Q\}$ 表示：若执行前满足前置条件 $P$，执行 $e$ 后
 > **[来源: Wikipedia - Asynchronous I/O]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

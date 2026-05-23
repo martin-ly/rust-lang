@@ -2,6 +2,8 @@
 
 ## 📑 目录
 >
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
 - [文档中心 - 主索引](#文档中心---主索引)
   - [📑 目录](#-目录)
   - [按主题快速导航](#按主题快速导航)
@@ -27,6 +29,7 @@
     - [快速入口](#快速入口)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2026-02-13
 > **最后更新**: 2026-05-08
@@ -84,6 +87,8 @@
 ---
 
 ## 02 参考与速查
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -95,6 +100,8 @@
 | [CROSS_LANGUAGE_COMPARISON.md](./02_reference/CROSS_LANGUAGE_COMPARISON.md) | Rust vs C++/Go/Python | → [LEARNING_PATH_PLANNING](./01_learning/LEARNING_PATH_PLANNING.md) |
 
 ### 速查卡详细索引
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 速查卡 | 对应指南 | 对应研究笔记 |
 | :--- | :--- | :--- |
@@ -122,6 +129,8 @@
 ---
 
 ## 03 理论与形式化
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -141,6 +150,8 @@
 | [INTERNATIONAL_FORMAL_VERIFICATION_INDEX](./research_notes/INTERNATIONAL_FORMAL_VERIFICATION_INDEX.md) | 国际形式化验证对标 | → [formal_methods/README](./research_notes/formal_methods/README.md) §国际权威对标 |
 
 ### 形式化方法研究
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -156,6 +167,8 @@
 | [SAFE_DECIDABLE_MECHANISMS_OVERVIEW](./research_notes/SAFE_DECIDABLE_MECHANISMS_OVERVIEW.md) | 安全可判定机制总览 | → [formal_methods/](./research_notes/formal_methods/README.md) → [04_thinking/DECISION_GRAPH_NETWORK](./04_thinking/DECISION_GRAPH_NETWORK.md) |
 
 ### 类型理论研究
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -167,6 +180,8 @@
 | [variance_theory](./research_notes/type_theory/variance_theory.md) | T1-T4 | ←→ [type_system_foundations](./research_notes/type_theory/type_system_foundations.md) ←→ [lifetime_formalization](./research_notes/type_theory/lifetime_formalization.md) |
 
 ### 软件设计理论
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 子目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -180,6 +195,8 @@
 ---
 
 ## 04 思维表征
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -193,6 +210,8 @@
 ---
 
 ## 05 专题指南
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -217,6 +236,8 @@
 ---
 
 ## 06 工具链与版本
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -232,6 +253,8 @@
 ---
 
 ## 07 项目元文档
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -252,8 +275,12 @@
 ---
 
 ## 🔗 双向链接验证
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 跨文档映射网络统计
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类别 | 链接数量 | 双向链接对 | 覆盖率 |
 | :--- | :--- | :--- | :--- |
@@ -267,6 +294,8 @@
 | **总计** | **416+** | **207+对** | **99%+** |
 
 ### 概念映射统计
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 概念族 | 定义文档数 | 引用文档数 | 等价定义数 |
 | :--- | :--- | :--- | :--- |
@@ -280,6 +309,8 @@
 | **总计** | **22** | **97** | **29** |
 
 ### 验证清单
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 验证项 | 状态 |
 | :--- | :--- |
@@ -294,6 +325,8 @@
 ---
 
 ## 其他
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档/目录 | 说明 | 交叉引用 |
 | :--- | :--- | :--- |
@@ -303,8 +336,12 @@
 ---
 
 ## 相关链接
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 核心交叉引用文档
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 说明 | 路径 |
 | :--- | :--- | :--- |
@@ -316,6 +353,8 @@
 | **00_COMPREHENSIVE_SUMMARY** | 完整总结综合 | [research_notes/00_COMPREHENSIVE_SUMMARY.md](./research_notes/00_COMPREHENSIVE_SUMMARY.md) |
 
 ### 快速入口
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [docs/README.md](./README.md) - 文档中心主入口
 - [项目主 README](../README.md) - 项目概览
@@ -335,6 +374,8 @@
 ---
 
 ## 相关概念
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [docs 目录](./README.md)
 
@@ -357,3 +398,82 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

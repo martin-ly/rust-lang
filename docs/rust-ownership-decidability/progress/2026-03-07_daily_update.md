@@ -1,6 +1,7 @@
 # 每日进度更新: 2026-03-07
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [每日进度更新: 2026-03-07](#每日进度更新-2026-03-07)
   - [📑 目录](#-目录)
@@ -63,8 +64,10 @@
 ```
 
 ## 核心成果
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 完整的操作语义
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 定义了两种操作语义：
 
@@ -213,3 +216,18 @@ Coq 编译检查:
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

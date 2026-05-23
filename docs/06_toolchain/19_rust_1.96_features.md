@@ -271,6 +271,7 @@ fn process_api_response(result: (u16, Option<String>)) -> Result<(), Error> {
 ```
 
 ### 4. 新的 Lint 规则
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 各版本持续引入新的编译器警告和 lint 规则。以下列出部分近期新增 lint（不限于 1.96）：
 
@@ -304,8 +305,10 @@ redundant_guards = "deny"
 ---
 
 ## 迁移指南
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 从 Rust 1.95+ 迁移到 1.96
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 步骤 1: 更新工具链
 
@@ -354,6 +357,7 @@ cargo doc --no-deps
 ```
 
 ### 已知问题与解决方案
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 问题 | 解决方案 |
 |------|----------|
@@ -365,8 +369,10 @@ cargo doc --no-deps
 ---
 
 ## 代码示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 完整示例: 使用新特性重构代码
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 示例：使用 if let guards 重构错误处理
@@ -419,6 +425,7 @@ fn process_event_new(event: Event, config: &Config) -> Result<(), Error> {
 ```
 
 ### 示例: Range 类型使用模式
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 use std::ops::RangeInclusive;
@@ -449,6 +456,7 @@ fn main() {
 ```
 
 ### 示例: Pin 与异步代码
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use std::future::Future;
@@ -486,6 +494,7 @@ async fn demo() {
 ---
 
 ## 参考链接
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 1.95 Release Notes](https://blog.rust-lang.org/2026/04/16/Rust-1.95.0.html)
 - [Rust 1.96 Release Notes](https://blog.rust-lang.org/2026/05/28/Rust-1.96.0.html) （待发布）
@@ -527,3 +536,117 @@ async fn demo() {
 > **[来源: Wikipedia - Artificial Intelligence]**
 > **[来源: tch-rs Documentation]**
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

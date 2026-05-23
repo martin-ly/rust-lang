@@ -1,23 +1,19 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-23T01:55:51.458651
+> 生成时间: 2026-05-23T09:36:35.527302
 > 扫描文件数: 175
 > 提取概念定义数: 495
 > 跨文件引用数: 163
 
 ## 目录
 
-- [概念一致性审计报告 (Concept Consistency Report)](#概念一致性审计报告-concept-consistency-report)
-  - [目录](#目录)
-  - [一、执行摘要](#一执行摘要)
-  - [二、Send / Sync 一致性检查](#二send--sync-一致性检查)
-  - [三、所有权三规则一致性检查](#三所有权三规则一致性检查)
-  - [四、生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
-  - [五、unsafe 语义一致性检查](#五unsafe-语义一致性检查)
-  - [六、跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
-  - [七、附录：概念定义统计](#七附录概念定义统计)
-    - [7.1 按概念分类统计](#71-按概念分类统计)
-    - [7.2 按文件统计](#72-按文件统计)
+1. [执行摘要](#一执行摘要)
+2. [Send / Sync 一致性检查](#二send--sync-一致性检查)
+3. [所有权三规则一致性检查](#三所有权三规则一致性检查)
+4. [生命周期省略规则一致性检查](#四生命周期省略规则一致性检查)
+5. [unsafe 语义一致性检查](#五unsafe-语义一致性检查)
+6. [跨文件段落引用有效性检查](#六跨文件段落引用有效性检查)
+7. [附录：概念定义统计](#七附录概念定义统计)
 
 ---
 
@@ -229,7 +225,7 @@
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
 | concept\07_future\04_effects_system.md | 4 | 3 | 12 |
-| concept\07_future\05_rust_version_tracking.md | 1 | 1 | 20 |
+| concept\07_future\05_rust_version_tracking.md | 1 | 1 | 21 |
 | concept\07_future\07_mcdc_coverage_preview.md | 0 | 0 | 7 |
 | concept\07_future\08_safety_tags_preview.md | 1 | 0 | 10 |
 | concept\07_future\09_parallel_frontend_preview.md | 0 | 0 | 8 |

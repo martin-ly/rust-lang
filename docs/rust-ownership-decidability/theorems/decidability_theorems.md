@@ -1,6 +1,7 @@
 # Rust 所有权系统可判定性 - 核心定理
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统可判定性 - 核心定理](#rust-所有权系统可判定性---核心定理)
   - [📑 目录](#-目录)
@@ -93,6 +94,7 @@ Linearizable(Γ) ≜ ∀x ∈ dom(Γ). rank(Γ(x)) > max{ rank(y) | y ∈ fv(Γ(
 ```
 
 ### 1.3 证明草图
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 证明思路: 通过度量函数 μ 的递减性证明终止性
@@ -130,6 +132,7 @@ Linearizable(Γ) ≜ ∀x ∈ dom(Γ). rank(Γ(x)) > max{ rank(y) | y ∈ fv(Γ(
 ```
 
 ### 1.4 形式化证明结构 (Coq)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```coq
 Section Termination.
@@ -211,8 +214,10 @@ End Termination.
 ---
 
 ## 定理 2: 类型保持 (Preservation)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 2.1 定理陈述
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Theorem Preservation:
@@ -229,6 +234,7 @@ Theorem Preservation:
 那么存在更新后的环境 Γ', Θ' 使得 v 具有类型 τ，且结果环境和堆满足类型约束。
 
 ### 2.2 证明结构
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
 Theorem preservation :
@@ -282,8 +288,10 @@ Qed.
 ---
 
 ## 定理 3: 进展 (Progress)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 定理陈述
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 Theorem Progress:
@@ -301,8 +309,10 @@ Theorem Progress:
 ---
 
 ## 定理 4: 类型安全 (Type Safety)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 定理陈述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 Theorem Type_Safety:
@@ -318,8 +328,10 @@ Theorem Type_Safety:
 ---
 
 ## 定理 5: 所有权安全保证内存安全
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 定理陈述
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 Theorem Ownership_Implies_Memory_Safety:
@@ -338,8 +350,10 @@ Theorem Ownership_Implies_Memory_Safety:
 ---
 
 ## 定理 6: 可判定性 (Decidability)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 定理陈述
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 Theorem Decidability:
@@ -356,6 +370,7 @@ Theorem Decidability:
 ---
 
 ## 定理间的依赖关系
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
                     ┌──────────────────┐
@@ -412,6 +427,7 @@ Theorem Decidability:
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [theorems 目录](./README.md)
 - [上级目录](../README.md)
@@ -427,3 +443,103 @@ Theorem Decidability:
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

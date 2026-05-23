@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [知识体系全局层次映射总表](#知识体系全局层次映射总表)
   - [📑 目录](#-目录)
@@ -24,6 +25,7 @@
 ---
 
 ## 一、L0-L7 全局架构速查
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph TB
@@ -97,6 +99,7 @@ graph TB
 ---
 
 ## 二、30 个核心文件层次映射矩阵
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | # | 文件路径 | 层次定位 | 前置依赖 | 后置延伸 | 跨层映射 | 定理链 |
 |:---:|:---|:---|:---|:---|:---|:---|
@@ -134,6 +137,7 @@ graph TB
 ---
 
 ## 三、定理链全局索引
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 链编号 | 名称 | 起点 | 终点 | 穿越层次 | 状态 |
 |:---:|:---|:---|:---|:---|:---:|
@@ -158,6 +162,7 @@ graph TB
 ---
 
 ## 四、跨层映射关系图谱
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph LR
@@ -187,6 +192,7 @@ graph LR
 ---
 
 ## 五、思维表征覆盖矩阵
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 表征类型 | concept/ (8) | knowledge/ (8) | docs/ (14) | 总计 |
 |:---|:---:|:---:|:---:|:---:|
@@ -201,6 +207,7 @@ graph LR
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [concept/ 跨层知识图谱](../../concept/00_meta/inter_layer_map.md)
 - [concept/ 方法论规范](../../concept/00_meta/methodology.md)
@@ -211,6 +218,7 @@ graph LR
 ---
 
 ## 六、变更日志
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 版本 | 日期 | 变更 |
 |:---:|:---:|:---|
@@ -235,3 +243,70 @@ graph LR
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -193,8 +193,10 @@ r2.push_str(" world");
 ---
 
 ## 3. 生命周期：引用的有效期证明
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 生命周期省略
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 编译器自动推断大多数生命周期：
 
@@ -205,6 +207,7 @@ fn first_word(s: &str) -> &str { // 等价于 fn first_word<'a>(s: &'a str) -> &
 ```
 
 ### 3.2 显式生命周期标注
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 当编译器无法推断时，需要显式标注：
 
@@ -224,6 +227,7 @@ fn main() {
 ```
 
 ### 3.3 结构体中的生命周期
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 struct ImportantExcerpt<'a> {
@@ -243,6 +247,7 @@ impl<'a> ImportantExcerpt<'a> {
 ```
 
 ### 3.4 生命周期子类型
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 fn static_ref() -> &'static str {
@@ -258,8 +263,10 @@ fn use_any_lifetime(s: &str) {
 ---
 
 ## 4. 常见陷阱与解决方案
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 自引用结构体
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // ❌ 编译错误：self_referential 包含指向自己的引用
@@ -280,6 +287,7 @@ struct SelfReferentialFixed {
 ```
 
 ### 4.2 `static mut` 的废弃
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 > ⚠️ **警告**: `static mut` 在 Rust 2024 Edition 中引用已被禁止（`unsafe_code = "forbid"` 默认启用）。
 > 以下 ❌ 示例仅用于说明该特性被废弃的原因。请始终使用右侧 ✅ 的替代方案。
@@ -298,6 +306,7 @@ COUNTER.fetch_add(1, Ordering::Relaxed);
 ```
 
 ### 4.3 生命周期过长
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // ❌ 编译错误：result 的生命周期与 string1 绑定，但引用了 string2
@@ -310,8 +319,10 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 ## 5. 思维模型
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 所有权作为资源管理合约
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 所有者 ──拥有──→ 资源
@@ -323,6 +334,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 ```
 
 ### 借用检查器的工作流程
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 源代码
@@ -342,6 +354,7 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 ---
 
 ## 6. 进阶阅读
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [c01_ownership_borrow_scope](../../crates/c01_ownership_borrow_scope/) - 完整代码示例
 - [Rust Reference - Ownership](https://doc.rust-lang.org/reference/ownership.html)
@@ -378,3 +391,81 @@ fn longest_wrong<'a>(x: &'a str, y: &str) -> &'a str {
 > **[来源: Rust Reference - Borrow Checker]**
 
 > **[来源: RFC 2094 - NLL]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

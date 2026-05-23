@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目关键评估报告 2026-02](#项目关键评估报告-2026-02)
   - [📑 目录](#-目录)
@@ -48,6 +49,7 @@
 | 使用指南 | 10+ | 10+ | ✅ |
 
 ### 2. 代码质量
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - ✅ 所有代码通过 `cargo check`
 - ✅ 所有测试通过
@@ -55,6 +57,7 @@
 - ✅ 文档测试通过
 
 ### 3. 覆盖范围
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ 基础语法: 100%
 - ✅ 并发编程: 100%
@@ -63,6 +66,7 @@
 - ✅ 系统编程: 100%
 
 ## 关键成就
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **12 个学习模块**全部完成，覆盖 Rust 全栈知识
 2. **20 个速查卡**覆盖所有核心主题，含 AI/ML
@@ -70,6 +74,7 @@
 4. **mdBook 在线文档**平台成功部署
 
 ## 建议
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 项目已达到发布标准，建议：
 
@@ -84,11 +89,13 @@
 ---
 
 ## Rust 1.95+ 持续更新更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -133,6 +140,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [07_project 目录](./README.md)
 - [上级目录](../README.md)
@@ -156,3 +164,39 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

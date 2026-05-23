@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内容创建批次 2 - 完成报告](#内容创建批次-2---完成报告)
   - [📑 目录](#-目录)
@@ -58,6 +59,7 @@
 **小结**: 添加研究前沿内容。
 
 ### 3. 填充 exercises/
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 大小 | 描述 |
 |-----|------|------|
@@ -68,8 +70,10 @@
 ---
 
 ## 统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 新增文件
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 数量 | 总大小 |
 |-----|------|--------|
@@ -77,6 +81,7 @@
 | 更新 README | 2 | - |
 
 ### 内容深度
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 深度 | 数量 |
 |-----|------|
@@ -200,3 +205,27 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

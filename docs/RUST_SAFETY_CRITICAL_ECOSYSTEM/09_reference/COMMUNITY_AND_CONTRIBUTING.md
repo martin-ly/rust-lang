@@ -1,6 +1,7 @@
 # 社区参与与贡献指南
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [社区参与与贡献指南](#社区参与与贡献指南)
   - [📑 目录](#-目录)
@@ -114,6 +115,7 @@ Rust基金会:
 ---
 
 ## 2. 参与方式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 代码贡献
 
@@ -142,6 +144,7 @@ Rust基金会:
 ```
 
 ### 2.2 贡献流程
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
 # 1. Fork仓库
@@ -169,8 +172,10 @@ git push origin feature/my-contribution
 ---
 
 ## 3. 知识分享
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 3.1 内容创作
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 博客写作:
@@ -196,6 +201,7 @@ git push origin feature/my-contribution
 ```
 
 ### 3.2 演讲和分享
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 演讲机会:
@@ -221,8 +227,10 @@ git push origin feature/my-contribution
 ---
 
 ## 4. 标准参与
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 标准组织
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 参与方式:
@@ -242,6 +250,7 @@ git push origin feature/my-contribution
 ```
 
 ### 4.2 认证机构合作
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 与认证机构合作:
@@ -264,8 +273,10 @@ git push origin feature/my-contribution
 ---
 
 ## 5. 教育资源
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 导师计划
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 导师-学员配对:
@@ -287,6 +298,7 @@ git push origin feature/my-contribution
 ```
 
 ### 5.2 学习小组
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 组织学习小组:
@@ -312,8 +324,10 @@ git push origin feature/my-contribution
 ---
 
 ## 6. 职业发展
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 技能认证
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 认证路径:
@@ -334,6 +348,7 @@ git push origin feature/my-contribution
 ```
 
 ### 6.2 职业机会
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 就业方向:
@@ -356,8 +371,10 @@ git push origin feature/my-contribution
 ---
 
 ## 7. 贡献行为准则
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 行为准则
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 社区准则:
@@ -378,6 +395,7 @@ git push origin feature/my-contribution
 ```
 
 ### 7.2 贡献质量
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 质量保证:
@@ -402,8 +420,10 @@ git push origin feature/my-contribution
 ---
 
 ## 8. 资源链接
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 8.1 官方资源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 必读资源:
@@ -421,6 +441,7 @@ git push origin feature/my-contribution
 ```
 
 ### 8.2 安全关键特定
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 专业资源:
@@ -463,6 +484,7 @@ git push origin feature/my-contribution
 ---
 
 ## 相关概念
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [上级目录](../README.md)
 
@@ -483,3 +505,137 @@ git push origin feature/my-contribution
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

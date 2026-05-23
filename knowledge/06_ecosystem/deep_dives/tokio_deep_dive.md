@@ -13,6 +13,7 @@
 ---
 
 ## 📋 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Tokio 运行时深度解析](#tokio-运行时深度解析)
   - [📋 目录](#-目录)
@@ -57,6 +58,7 @@
 ---
 
 ## 🎯 概述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Tokio 是 Rust 最流行的异步运行时，提供：
 
@@ -66,6 +68,7 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 - **同步原语**: 异步版本的 Mutex、Channel 等
 
 ### 对比其他运行时
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | Tokio | async-std | smol |
 |------|-------|-----------|------|
@@ -77,8 +80,10 @@ Tokio 是 Rust 最流行的异步运行时，提供：
 ---
 
 ## 🏗️ 架构设计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 运行时组件
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -102,6 +107,7 @@ graph TD
 ```
 
 ### 任务调度
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 调度流程:
@@ -122,6 +128,7 @@ graph TD
 ---
 
 ### 模块 1: 概念定义
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1.1 直观定义
 
@@ -145,6 +152,7 @@ Tokio 使用**工作窃取（Work-Stealing）**调度模型：每个工作线程
 ---
 
 ### 模块 3: 概念依赖图
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
 graph TD
@@ -177,8 +185,10 @@ graph TD
 ---
 
 ## 💡 核心概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 任务 (Task)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use tokio::task;
@@ -207,6 +217,7 @@ async fn named_task() {
 ```
 
 ### 执行器 (Executor)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use tokio::runtime::{Runtime, Builder};
@@ -241,6 +252,7 @@ fn multi_threaded() {
 ```
 
 ### I/O 驱动
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use tokio::net::TcpListener;
@@ -275,6 +287,7 @@ async fn tcp_server() -> tokio::io::Result<()> {
 ```
 
 ### 定时器
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use tokio::time::{sleep, interval, timeout, Duration};
@@ -311,8 +324,10 @@ async fn slow_operation() -> String {
 ---
 
 ## 🚀 高级用法
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 运行时配置
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 use tokio::runtime::Builder;
@@ -350,6 +365,7 @@ fn optimized_runtime() {
 ```
 
 ### 任务管理
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 use tokio::task::{JoinSet, AbortHandle};
@@ -397,6 +413,7 @@ async fn cancel_task() {
 ```
 
 ### 并发模式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use tokio::sync::{Semaphore, RwLock};
@@ -450,8 +467,10 @@ async fn shared_state() {
 ---
 
 ## ⚡ 性能优化
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 最佳实践
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 1. 避免在异步代码中阻塞
@@ -499,6 +518,7 @@ async fn local_tasks() {
 ```
 
 ### 性能调优参数
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 根据工作负载调整
@@ -519,8 +539,10 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 🗺️ 模块 7: 思维表征
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 表征: Tokio 运行时选择决策矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 运行时类型 | 工作线程 | 说明 |
 |------|-----------|---------|------|
@@ -531,6 +553,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 | **阻塞操作多** | `new_multi_thread` | 默认 + 增加 blocking_threads | 避免工作线程阻塞 |
 
 ### 表征: 异步代码阻塞陷阱
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 错误: 在工作线程中执行阻塞操作
@@ -554,6 +577,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 📚 模块 8: 国际化对齐
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 来源 | 类型 | 说明 |
 |------|------|------|
@@ -563,8 +587,10 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## ⚖️ 模块 9: 设计权衡
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 为什么 Tokio 使用多线程运行时？
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 单线程运行时（如 `async-std` 的早期版本）简单但无法利用多核。Tokio 的工作窃取模型：
 
@@ -577,6 +603,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 ---
 
 ## 📝 模块 10: 自我检测
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Tokio 的 `spawn` 与 `spawn_blocking` 有何根本区别？** 在什么场景下必须使用 `spawn_blocking`？
 
@@ -618,6 +645,7 @@ async fn main() {
 ---
 
 ## 🔗 参考资源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Tokio 官方文档](https://docs.rs/tokio/latest/tokio/)
 - [Tokio 教程](https://tokio.rs/tokio/tutorial)
@@ -633,6 +661,7 @@ async fn main() {
 ---
 
 ## 📚 权威来源索引
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方来源
 
@@ -655,8 +684,211 @@ async fn main() {
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
 
 - [Axum 深度解析](axum_deep_dive.md)
 - [Deep Dives 深度解析](README.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+

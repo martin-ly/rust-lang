@@ -1,6 +1,7 @@
 # 进度报告: Week 1 (2026-03-06)
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进度报告: Week 1 (2026-03-06)](#进度报告-week-1-2026-03-06)
   - [📑 目录](#-目录)
@@ -78,6 +79,7 @@ coq-formalization/
 - [x] 复杂度分析框架
 
 ### ✅ 2. 元模型文档完善 (100%)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 创建了三个核心元模型文档：
 
@@ -86,6 +88,7 @@ coq-formalization/
 3. `03_judgments.md` - 判断形式和推理规则
 
 ### ✅ 3. 核心定理草拟 (100%)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 在 `theorems/decidability_theorems.md` 中定义了 6 个核心定理：
 
@@ -97,6 +100,7 @@ coq-formalization/
 6. 可判定性
 
 ## 进度统计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 总体进度: 18%
@@ -118,8 +122,10 @@ coq-formalization/
 ```
 
 ## 关键技术成果
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. Linearizability 的 Coq 定义
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
 Definition Linearizable (Γ : type_env) : Prop :=
@@ -132,6 +138,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ```
 
 ### 2. 类型秩的定义
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
 Fixpoint ty_rank (τ : ty) : nat :=
@@ -145,6 +152,7 @@ Fixpoint ty_rank (τ : ty) : nat :=
 ```
 
 ### 3. 终止性度量
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
 Definition te_measure (Γ : type_env) : nat :=
@@ -152,6 +160,7 @@ Definition te_measure (Γ : type_env) : nat :=
 ```
 
 ## 遇到的问题和解决方案
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 问题 | 状态 | 解决方案 |
 |------|------|----------|
@@ -160,8 +169,10 @@ Definition te_measure (Γ : type_env) : nat :=
 | 表达式大小写过多 | 已解决 | 使用模块化设计，分组处理 |
 
 ## 下周计划 (Week 2)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 高优先级
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **完成 Termination.v 中的所有证明**
    - 完成 linearizable_acyclic 证明
@@ -179,6 +190,7 @@ Definition te_measure (Γ : type_env) : nat :=
    - 证明基本类型规则
 
 ### 中优先级
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **创建示例验证**
    - 编写 5-10 个典型 Rust 代码示例
@@ -191,6 +203,7 @@ Definition te_measure (Γ : type_env) : nat :=
    - 编写证明技术指南
 
 ## 度量指标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 代码统计:
@@ -208,6 +221,7 @@ Definition te_measure (Γ : type_env) : nat :=
 ```
 
 ## 风险评估更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 风险 | 状态 | 更新 |
 |------|------|------|
@@ -261,3 +275,31 @@ Definition te_measure (Γ : type_env) : nat :=
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+

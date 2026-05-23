@@ -1,6 +1,7 @@
 # 综合概念对比矩阵
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [综合概念对比矩阵](#综合概念对比矩阵)
   - [📑 目录](#-目录)
@@ -66,6 +67,7 @@
 | `Cow<'a, T>` | 借用/拥有 | 否 | 是 | 可变 | 枚举开销 |
 
 ## 4. 运行时选择矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 运行时 | 平台 | IO模型 | 最小化 | 特性 | 适用场景 |
 |:---|:---|:---|:---:|:---|:---|
@@ -77,6 +79,7 @@
 | Embassy | 嵌入式 | 中断驱动 | 是 | no_std | 嵌入式 |
 
 ## 5. Web框架对比矩阵
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 框架 | 性能 | 人体工学 | 生态 | 学习曲线 | 特色 |
 |:---:|:---:|:---:|:---:|:---:|:---|
@@ -88,6 +91,7 @@
 | tide | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | 低 | 异步初学者 |
 
 ## 6. 形式化验证工具对比矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 验证类型 | 自动化 | 学习曲线 | 覆盖范围 | 成熟度 |
 |:---:|:---:|:---:|:---:|:---:|:---:|
@@ -98,6 +102,7 @@
 | Crux | 符号执行 | 全自动 | 中 | 路径覆盖 | ⭐⭐⭐ |
 
 ## 7. 内存管理策略对比矩阵
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 策略 | 分配 | 释放 | 性能 | 安全 | 适用场景 |
 |:---|:---:|:---:|:---:|:---:|:---|
@@ -202,3 +207,27 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

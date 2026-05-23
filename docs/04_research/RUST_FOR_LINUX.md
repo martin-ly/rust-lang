@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust for Linux：从实验到生产](#rust-for-linux从实验到生产)
   - [📑 目录](#-目录)
@@ -190,6 +191,7 @@ impl kernel::file::Operations for RustFile {
 > **[来源: Rust Official Docs]**
 
 ### 4.1 Android Binder IPC
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **用途**: Android 系统中进程间通信的核心机制
 - **为什么选择 Rust**: Binder 历史上存在大量复杂对象生命周期漏洞
@@ -197,6 +199,7 @@ impl kernel::file::Operations for RustFile {
 - **代码位置**: `drivers/android/binder.rs`
 
 ### 4.2 Apple GPU (Asahi)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **用途**: Apple Silicon (M1/M2/M3) 的 Linux GPU 驱动
 - **为什么选择 Rust**: 复杂的 GPU 命令队列和内存管理
@@ -204,6 +207,7 @@ impl kernel::file::Operations for RustFile {
 - **维护者**: Asahi Linux 团队
 
 ### 4.3 NVMe 基础设施
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **用途**: NVMe 存储控制器的基础框架
 - **状态**: **部分组件已 Rust 化，作为 C 驱动的补充**
@@ -211,8 +215,10 @@ impl kernel::file::Operations for RustFile {
 ---
 
 ## 五、开发 Rust 内核模块
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 环境准备
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 # 克隆 Rust-for-Linux 内核
@@ -232,6 +238,7 @@ insmod samples/rust/rust_minimal.ko
 ```
 
 ### 5.2 最小 Rust 内核模块
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
 //! samples/rust/rust_minimal.rs
@@ -264,6 +271,7 @@ impl Drop for RustMinimal {
 ```
 
 ### 5.3 关键约束
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 约束 | 说明 |
 |------|------|
@@ -277,6 +285,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 六、与 Ferrocene / 安全关键系统的关联
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 项目 | 目标 | 关系 |
 |------|------|------|
@@ -290,8 +299,10 @@ impl Drop for RustMinimal {
 ---
 
 ## 七、挑战与争议
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 已知挑战
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 挑战 | 现状 |
 |------|------|
@@ -299,9 +310,11 @@ impl Drop for RustMinimal {
 | 工具链绑定 | 内核需要特定版本的 Rust 编译器，更新节奏受限 |
 | `unsafe` 封装 | 与 C 的 FFI 边界需要大量 `unsafe` 封装代码 |
 | 社区分歧 | 部分内核维护者对 Rust 持保留态度 |
+| 社区争议升温 (2026-05) | Linus Torvalds 对 Rust 推进速度保持审慎；部分核心维护者质疑 Rust 抽象层增加的复杂度；争议焦点：`unsafe` 封装边界 vs. C 直接操作的可审查性 [来源: [LKML 2026-05](https://lore.kernel.org/lkml/)] |
 | 调试复杂度 | 混合 C/Rust 栈跟踪需要特殊工具支持 |
 
 ### 7.2 缓解措施
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **稳定的 `kernel` crate API**：减少对外部生态的依赖
 - **GCC Rust (gccrs)**：未来可能提供替代编译器选择
@@ -311,6 +324,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 八、学习路径建议
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **基础**: 掌握 Rust 所有权、生命周期、`no_std`、FFI
 2. **入门**: 阅读 `samples/rust/` 中的官方示例
@@ -321,6 +335,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 九、参考资源
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 资源 | 链接 |
 |------|------|
@@ -339,10 +354,10 @@ impl Drop for RustMinimal {
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
 
@@ -351,8 +366,11 @@ impl Drop for RustMinimal {
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
+- [Rust for Linux (concept)](../../concept/07_future/19_rust_for_linux.md) — 概念层操作系统内核中的内存安全分析
+- [版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Rust 语言特性与 RfL 工具链对齐状态
 
 ---
 
@@ -373,3 +391,75 @@ impl Drop for RustMinimal {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -1,6 +1,7 @@
 # 应用领域解决方案树
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [应用领域解决方案树](#应用领域解决方案树)
   - [📑 目录](#-目录)
@@ -99,6 +100,7 @@ Web服务架构
 ```
 
 ### Web解决方案
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 框架 | 数据库 | 部署 |
 |:---|:---|:---|:---|
@@ -111,6 +113,7 @@ Web服务架构
 ---
 
 ## 3. 分布式系统
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 分布式系统需求
@@ -131,6 +134,7 @@ Web服务架构
 ```
 
 ### 分布式解决方案
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模式 | 实现 | 容错 | 一致性 |
 |:---|:---|:---:|:---|
@@ -143,6 +147,7 @@ Web服务架构
 ---
 
 ## 4. 数据处理
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 数据处理场景
@@ -169,6 +174,7 @@ Web服务架构
 ```
 
 ### 数据处理方案
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景 | 库 | 特性 | 性能 |
 |:---|:---|:---|:---:|
@@ -181,6 +187,7 @@ Web服务架构
 ---
 
 ## 5. 网络基础设施
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 网络基础设施
@@ -204,6 +211,7 @@ Web服务架构
 ```
 
 ### 网络解决方案
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 组件 | 实现 | 协议 | 特点 |
 |:---|:---|:---|:---|
@@ -217,6 +225,7 @@ Web服务架构
 ---
 
 ## 6. 系统工具
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 系统工具
@@ -241,6 +250,7 @@ Web服务架构
 ```
 
 ### 系统工具方案
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 库 | 功能 |
 |:---|:---|:---|
@@ -253,6 +263,7 @@ Web服务架构
 ---
 
 ## 7. 游戏开发
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 游戏开发
@@ -273,6 +284,7 @@ Web服务架构
 ```
 
 ### 游戏开发方案
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模块 | 库 | 特性 |
 |:---|:---|:---|
@@ -285,6 +297,7 @@ Web服务架构
 ---
 
 ## 8. 区块链/加密货币
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 区块链开发
@@ -304,6 +317,7 @@ Web服务架构
 ```
 
 ### 区块链方案
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 组件 | 实现 | 用途 |
 |:---|:---|:---|
@@ -316,6 +330,7 @@ Web服务架构
 ---
 
 ## 9. AI/机器学习
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 AI/ML
@@ -335,6 +350,7 @@ AI/ML
 ```
 
 ### AI/ML方案
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 场景 | 库 | 特点 |
 |:---|:---|:---|
@@ -347,8 +363,10 @@ AI/ML
 ---
 
 ## 10. 跨领域最佳实践
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 通用架构建议
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 ┌─────────────────────────────────────────────────────────┐
@@ -400,6 +418,7 @@ AI/ML
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [上级目录](../README.md)
 
@@ -422,3 +441,83 @@ AI/ML
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

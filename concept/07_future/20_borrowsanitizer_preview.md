@@ -42,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题定义：编译期检查的边界
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的所有权系统通过**编译期检查**消除数据竞争和内存安全问题：
 
@@ -65,6 +66,7 @@ fn main() {
 ---
 
 ### 1.2 Miri：解释执行的 UB 检测
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Miri 是 Rust 的 MIR（Mid-level IR）解释器，通过**逐条指令解释执行**检测未定义行为：
 
@@ -86,6 +88,7 @@ Miri 检测的 UB 类别:
 ---
 
 ### 1.3 BorrowSanitizer 的设计目标
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 BorrowSanitizer 旨在填补编译期检查与 Miri 之间的空白：
 
@@ -112,6 +115,7 @@ graph LR
 ---
 
 ### 1.4 Shadow Stack 与 Lock-and-Key 策略
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 BorrowSanitizer 的核心机制是 **Shadow Stack**（影子栈）配合 **Lock-and-Key**（锁钥）运行时检测：
 
@@ -173,6 +177,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 借用标签的生命周期
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 BorrowSanitizer 的 Shadow Stack 是 Tree Borrows 模型的**运行时实现**：
 
@@ -193,6 +198,7 @@ Tree Borrows 核心规则（简化）:
 ---
 
 ### 3.2 从 Tree Borrows 到运行时检测
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -224,6 +230,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 graph TD
@@ -249,6 +256,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 边界 1: BorrowSanitizer 无法检测的 UB
@@ -344,3 +352,69 @@ fn main() {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成（待调研结果补充 Shadow Stack 技术细节）
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 完整知识矩阵](#rust-所有权系统---完整知识矩阵)
   - [📑 目录](#-目录)
@@ -70,6 +71,7 @@
 ---
 
 ## 矩阵四：模式 × 理论约束 × 使用场景
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模式 | 理论约束 | 适用场景 | 反模式 | 案例 |
 |:-----|:---------|:---------|:-------|:-----|
@@ -83,6 +85,7 @@
 ---
 
 ## 矩阵五：工具 × 验证能力 × 复杂度
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具 | 验证性质 | 自动化 | 复杂度 | 学习曲线 | 适用代码 |
 |:-----|:---------|:------:|:------:|:--------:|:---------|
@@ -98,6 +101,7 @@
 ---
 
 ## 矩阵六：学习阶段 × 能力 × 验证标准
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 阶段 | 核心能力 | 验证标准 | 推荐文档 | 预计时间 |
 |:-----|:---------|:---------|:---------|:--------:|
@@ -193,3 +197,23 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

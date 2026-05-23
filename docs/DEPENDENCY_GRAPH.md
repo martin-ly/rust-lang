@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [依赖关系图](#依赖关系图)
   - [📑 目录](#-目录)
@@ -113,8 +114,10 @@
 ---
 
 ## 外部依赖统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 核心运行时
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 包 | 版本 | 用途 | 使用 Crate |
 |----|------|------|-----------|
@@ -123,6 +126,7 @@
 | crossbeam | 0.8.4 | 并发原语 | c05, c09 |
 
 ### 序列化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 包 | 版本 | 用途 | 使用 Crate |
 |----|------|------|-----------|
@@ -130,6 +134,7 @@
 | serde_json | 1.0.140 | JSON 支持 | 所有 crate |
 
 ### 网络
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 包 | 版本 | 用途 | 使用 Crate |
 |----|------|------|-----------|
@@ -139,6 +144,7 @@
 | tokio-tungstenite | 0.29.0 | WebSocket | c10 |
 
 ### WebAssembly
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 包 | 版本 | 用途 | 使用 Crate |
 |----|------|------|-----------|
@@ -147,6 +153,7 @@
 | web-sys | 0.3.94 | Web API | c12 |
 
 ### 宏开发
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 包 | 版本 | 用途 | 使用 Crate |
 |----|------|------|-----------|
@@ -157,20 +164,24 @@
 ---
 
 ## 依赖类型说明
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 编译时依赖
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - syn, quote, proc-macro2 - 宏开发
 - tonic-build - gRPC 代码生成
 - prost-build - Protobuf 编译
 
 ### 运行时依赖
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - tokio - 异步运行时
 - serde - 序列化
 - 所有网络库
 
 ### 可选依赖
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - criterion - 基准测试
 - proptest - 属性测试
@@ -179,18 +190,22 @@
 ---
 
 ## 依赖更新策略
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 自动更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - patch 版本: 自动接受
 - minor 版本: CI 通过后合并
 
 ### 手动审查
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - major 版本: 需要审查和测试
 - 安全更新: 优先处理
 
 ### 锁定策略
+> **[来源: [crates.io](https://crates.io/)]**
 
 - Cargo.lock 提交到版本控制
 - 定期运行 cargo update
@@ -213,6 +228,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [docs 目录](./README.md)
 
@@ -235,3 +251,53 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

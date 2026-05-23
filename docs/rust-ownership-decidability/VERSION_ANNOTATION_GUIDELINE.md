@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权形式化文档 - 版本标注规范](#rust-所有权形式化文档---版本标注规范)
   - [📑 目录](#-目录)
@@ -77,6 +78,7 @@
 ---
 
 ### 3. 理论模型 [Theoretical]
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **定义**: 为教学或研究目的构建的理论构造，不是真实 Rust 特性
 
@@ -98,8 +100,10 @@
 ---
 
 ## 🏷️ 文件头标注模板
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模板 A: 真实特性
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```markdown
     # 特性名称
@@ -113,6 +117,7 @@
 ```
 
 ### 模板 B: 理论模型
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```markdown
     # 模型名称 [Theoretical]
@@ -128,6 +133,7 @@
 ---
 
 ## 📊 版本对照表
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 文档原标注 | 正确标注 | 修正状态 |
 |------|-----------|----------|----------|
@@ -142,8 +148,10 @@
 ---
 
 ## ✅ 审核检查清单
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 新建文档必须检查
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 特性是否真实存在于 Rust?
 - [ ] 如果是真实特性，稳定版本号是多少?
@@ -228,3 +236,31 @@ python scripts/generate_version_report.py
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

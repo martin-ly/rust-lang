@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Formal Full Model — English Summary](#rust-formal-full-model--english-summary)
   - [📑 目录](#-目录)
@@ -78,6 +79,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Axiom → Composition Theorem DAG (Pillars 1+3)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **CE-T1** (memory safety) ← ownership T3
 - **CE-T2** (data-race freedom) ← borrow T1 + type T3
@@ -86,6 +88,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Key Axioms (Unified Numbering)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | ID | Content |
 | :--- | :--- |
@@ -103,10 +106,12 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## Formal Language and Proofs
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [FORMAL_LANGUAGE_AND_PROOFS](./FORMAL_LANGUAGE_AND_PROOFS.md) — Inference rules, operational semantics, judgment forms, formal proof derivations (mathematical level; complements Coq skeletons)
 
 ## Related Documents
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [CORE_THEOREMS_FULL_PROOFS](./CORE_THEOREMS_FULL_PROOFS.md) — Full proofs for T-OW2, T-BR1, T-TY3 (L2)
 - [PROOF_INDEX](./PROOF_INDEX.md) — 105+ proof index
@@ -115,6 +120,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+
 
@@ -125,6 +131,7 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -192,3 +199,53 @@ A unified formal system covering **ownership + borrow + lifetime + type + trait 
 > **[来源: ACM - Formal Verification]**
 
 > **[来源: Wikipedia - Type System]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

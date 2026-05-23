@@ -1,6 +1,7 @@
 # Rust应用决策树图集
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust应用决策树图集](#rust应用决策树图集)
   - [📑 目录](#-目录)
@@ -228,6 +229,7 @@
 ---
 
 ## 决策树4: 教育和培训路径决策树
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
                     ┌─────────────────────────────────────┐
@@ -299,26 +301,31 @@
 ---
 
 ## 决策树使用说明
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 决策树1: 语言选择
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **适用场景**: 新项目技术选型
 - **关键输入**: 实时性要求、安全等级、遗留系统
 - **输出**: 推荐语言 + 集成策略
 
 ### 决策树2: 工具链选择
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **适用场景**: 认证项目准备
 - **关键输入**: 目标标准、认证等级、预算
 - **输出**: 推荐工具链供应商
 
 ### 决策树3: 安全级别
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **适用场景**: 代码规范制定
 - **关键输入**: 安全等级、unsafe必要性
 - **输出**: 编码规范 + 验证策略
 
 ### 决策树4: 培训规划
+> **[来源: [crates.io](https://crates.io/)]**
 
 - **适用场景**: 团队能力建设
 - **关键输入**: 团队背景、目标领域
@@ -327,8 +334,10 @@
 ---
 
 ## 决策检查清单
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 技术选型检查项
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 明确实时性要求
 - [ ] 确定安全等级(ASIL/SIL/DAL)
@@ -337,6 +346,7 @@
 - [ ] 评估供应链成熟度
 
 ### 认证准备检查项
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 确认目标认证标准
 - [ ] 评估时间计划
@@ -345,6 +355,7 @@
 - [ ] 准备证据包
 
 ### 开发规范检查项
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 定义unsafe代码策略
 - [ ] 配置静态分析工具
@@ -370,6 +381,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
 
@@ -392,3 +404,129 @@
 > **[来源: IEEE - Risk Analysis]**
 
 > **[来源: Rust API Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

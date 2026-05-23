@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 08: 内存缓存系统](#实践项目-08-内存缓存系统)
   - [📑 目录](#-目录)
@@ -43,6 +44,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 并发安全缓存
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::collections::HashMap;
@@ -66,6 +68,7 @@ impl Cache {
 ---
 
 ## 参考实现
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/cache-system/`
 ---
@@ -86,6 +89,7 @@ impl Cache {
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
@@ -109,3 +113,14 @@ impl Cache {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

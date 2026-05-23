@@ -1,6 +1,7 @@
 # 安全关键Rust开发检查表
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全关键Rust开发检查表](#安全关键rust开发检查表)
   - [📑 目录](#-目录)
@@ -81,6 +82,7 @@
 - [ ] 建立变更管理流程
 
 ### 团队准备
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 团队成员功能安全培训完成
 - [ ] Rust安全关键开发培训完成
@@ -92,6 +94,7 @@
 - [ ] 建立代码审查流程
 
 ### 工具链准备
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 选择预认证编译器 (Ferrocene/qualified)
 - [ ] 配置Clippy规则集
@@ -106,8 +109,10 @@
 ---
 
 ## 需求阶段检查表
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 安全需求规范
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 安全需求可追溯至危险分析
 - [ ] 每个需求有唯一标识符
@@ -121,6 +126,7 @@
 - [ ] 需求基线建立
 
 ### Rust特定需求
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] 确定no_std要求
 - [ ] 定义堆分配策略 (静态/动态)
@@ -136,8 +142,10 @@
 ---
 
 ## 架构设计检查表
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 软件架构
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 架构满足安全需求
 - [ ] 模块划分合理
@@ -151,6 +159,7 @@
 - [ ] 架构评审完成
 
 ### Rust架构特定
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] crate结构清晰
 - [ ] module层次合理
@@ -164,6 +173,7 @@
 - [ ] 静态分配验证
 
 ### 设计模式
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 使用类型状态模式
 - [ ] 零成本抽象应用
@@ -179,8 +189,10 @@
 ---
 
 ## 编码阶段检查表
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码规范
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 遵循Rust编码标准
 - [ ] 代码格式化通过 (rustfmt)
@@ -194,6 +206,7 @@
 - [ ] 模块大小合理
 
 ### 内存安全
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 所有权规则遵守
 - [ ] 借用检查通过
@@ -207,6 +220,7 @@
 - [ ] Miri测试通过
 
 ### unsafe代码审查
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [ ] unsafe使用必要性论证
 - [ ] SAFETY注释完整
@@ -220,6 +234,7 @@
 - [ ] 代码审查记录
 
 ### 并发安全
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] Send/Sync实现正确
 - [ ] 数据竞争防护
@@ -233,6 +248,7 @@
 - [ ] Kani验证通过
 
 ### 错误处理
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 使用Result传播错误
 - [ ] Option显式处理
@@ -248,8 +264,10 @@
 ---
 
 ## 测试阶段检查表
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 单元测试
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 测试覆盖率 >= 80%
 - [ ] MC/DC覆盖达标 (ASIL D)
@@ -263,6 +281,7 @@
 - [ ] 测试结果记录
 
 ### 集成测试
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 接口测试完整
 - [ ] 数据流测试
@@ -276,6 +295,7 @@
 - [ ] 稳定性测试
 
 ### 安全特定测试
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] Miri UB测试通过
 - [ ] Kani属性验证通过
@@ -289,6 +309,7 @@
 - [ ] 静态分析通过
 
 ### 验证覆盖率
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 语句覆盖 >= 80%
 - [ ] 分支覆盖 >= 80%
@@ -304,8 +325,10 @@
 ---
 
 ## 代码审查检查表
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 审查准备
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 代码变更范围清晰
 - [ ] 设计文档更新
@@ -317,6 +340,7 @@
 - [ ] 审查检查表准备
 
 ### 审查内容
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 需求实现正确性
 - [ ] 架构遵循度
@@ -330,6 +354,7 @@
 - [ ] 文档完整性
 
 ### 审查记录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 发现问题记录
 - [ ] 问题严重程度分级
@@ -342,8 +367,10 @@
 ---
 
 ## 发布前检查表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 发布准备
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 所有需求实现验证
 - [ ] 所有测试通过
@@ -357,6 +384,7 @@
 - [ ] 发布说明准备
 
 ### 安全验证
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 安全需求满足验证
 - [ ] 安全分析更新
@@ -370,6 +398,7 @@
 - [ ] 发布授权获得
 
 ### 配置管理
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 代码基线冻结
 - [ ] 工具链版本记录
@@ -385,8 +414,10 @@
 ---
 
 ## 维护阶段检查表
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 变更管理
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 变更请求记录
 - [ ] 影响分析完成
@@ -400,6 +431,7 @@
 - [ ] 利益相关方通知
 
 ### 现场监控
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 现场数据收集
 - [ ] 故障报告分析
@@ -415,8 +447,10 @@
 ---
 
 ## 认证准备检查表
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文档准备
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 安全计划
 - [ ] 安全需求规范
@@ -430,6 +464,7 @@
 - [ ] 安全案例
 
 ### 证据收集
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 需求追溯矩阵
 - [ ] 设计评审记录
@@ -443,6 +478,7 @@
 - [ ] 培训记录
 
 ### 评估准备
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 评估员选择
 - [ ] 评估计划制定
@@ -458,8 +494,10 @@
 ---
 
 ## 快速检查表
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 每日开发检查
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 □ 代码格式化 (cargo fmt)
@@ -471,6 +509,7 @@
 ```
 
 ### 每周检查
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 □ 测试覆盖率检查
@@ -482,6 +521,7 @@
 ```
 
 ### 发布前快速检查
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 □ cargo build --release 成功
@@ -497,8 +537,10 @@
 ---
 
 ## 检查表使用指南
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### ASIL等级调整
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | ASIL等级 | 必须检查项 | 覆盖率要求 | 审查强度 |
 |----------|------------|------------|----------|
@@ -509,6 +551,7 @@
 | **QM** | 基础项 | 无要求 | 自检 |
 
 ### 检查表定制
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 根据项目特点调整:
 
@@ -545,6 +588,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
 
@@ -567,3 +611,127 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+

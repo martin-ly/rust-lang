@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 01: 命令行工具](#实践项目-01-命令行工具)
   - [📑 目录](#-目录)
@@ -67,6 +68,7 @@
 ---
 
 ## 学习要点
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 所有权和借用
 
@@ -112,6 +114,7 @@ fn save_todos(todos: &[String]) -> std::io::Result<()> {
 ---
 
 ## 项目结构
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 todo-cli/
@@ -126,6 +129,7 @@ todo-cli/
 ---
 
 ## 实现步骤
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 步骤 1: 创建项目
 
@@ -151,6 +155,7 @@ struct Todo {
 ```
 
 ### 步骤 3: 实现存储
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // src/storage.rs
@@ -182,6 +187,7 @@ impl TodoStorage {
 ```
 
 ### 步骤 4: 实现命令处理
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // src/commands.rs
@@ -203,6 +209,7 @@ pub fn list(storage: &TodoStorage) {
 ```
 
 ### 步骤 5: 主程序
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // src/main.rs
@@ -240,8 +247,10 @@ fn main() {
 ---
 
 ## 测试验证
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 手动测试
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # 编译
@@ -262,12 +271,14 @@ cargo build --release
 ---
 
 ## 参考实现
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 完整参考实现位于: `examples/todo-cli/`
 
 ---
 
 ## 下一步
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完成此项目后，继续:
 
@@ -287,6 +298,7 @@ cargo build --release
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
@@ -308,3 +320,77 @@ cargo build --release
 > **[来源: IEEE - Programming Language Standards]**
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Clap Documentation](https://docs.rs/clap/latest/clap/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

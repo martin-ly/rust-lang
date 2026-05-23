@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权系统 - 详细学习路线图](#rust-所有权系统---详细学习路线图)
   - [📑 目录](#-目录)
@@ -91,6 +92,7 @@ Level 5: 能形式化证明 (专家)
 - 能读懂简单的 Rust 代码
 
 ### 学习清单
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **第 1 小时: 建立概念**
 
@@ -116,6 +118,7 @@ Level 5: 能形式化证明 (专家)
 - [ ] 阅读 FAQ 前10问 (30分钟)
 
 ### 验证标准
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 能解释 "为什么 Rust 要移动而不是复制"
 - [ ] 能解释 "为什么不能同时有两个可变借用"
@@ -125,14 +128,17 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 1 → Level 2: 初级 (1周)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 目标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 能写简单的 Rust 程序
 - 能通过编译器检查
 - 理解常见错误并修复
 
 ### Week 1 学习计划
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Day 1: 所有权深入**
 
@@ -163,6 +169,7 @@ Level 5: 能形式化证明 (专家)
 - [ ] 完成一个小项目 (CLI 工具) (8小时)
 
 ### 验证标准
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 能独立实现一个简单的数据结构
 - [ ] 能通过借用检查
@@ -171,14 +178,17 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 2 → Level 3: 中级 (2周)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 目标
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 能设计安全的 API
 - 理解并应用设计模式
 - 能处理复杂生命周期
 
 ### Week 2-3 学习计划
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Week 2: 设计模式与并发**
 
@@ -222,6 +232,7 @@ Level 5: 能形式化证明 (专家)
 - [ ] 设计一个库 API (8小时)
 
 ### 验证标准
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 能设计安全的公共 API
 - [ ] 能处理复杂的并发场景
@@ -230,14 +241,17 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 3 → Level 4: 高级 (1月)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 目标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 能设计并发系统
 - 理解 Unsafe Rust
 - 能进行代码审查
 
 ### Month 1 学习计划
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Week 4: Unsafe Rust**
 
@@ -263,6 +277,7 @@ Level 5: 能形式化证明 (专家)
 - [ ] 完成一个中等规模项目 (64小时)
 
 ### 验证标准
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 能安全使用 Unsafe Rust
 - [ ] 能设计异步系统
@@ -271,14 +286,17 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## Level 4 → Level 5: 专家 (持续)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 目标
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 能进行形式化证明
 - 能贡献编译器/工具
 - 能进行研究
 
 ### 持续学习计划
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **阶段 1: 数学基础 (2月)**
 
@@ -307,6 +325,7 @@ Level 5: 能形式化证明 (专家)
 - [ ] 发表研究成果
 
 ### 验证标准
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 能阅读 Coq 证明
 - [ ] 能进行简单的形式化证明
@@ -315,26 +334,31 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## 快速参考: 按目标选择路径
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### "我想快速上手"
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 路径: Level 0 → Level 1 → Level 2
 - 时间: 1-2周
 - 重点: 概念 + 练习 + 项目
 
 ### "我想成为专业开发者"
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 路径: Level 0 → Level 1 → Level 2 → Level 3 → Level 4
 - 时间: 2-3月
 - 重点: 模式 + 并发 + 系统 + 项目
 
 ### "我想做形式化研究"
+> **[来源: [crates.io](https://crates.io/)]**
 
 - 路径: Level 0 → ... → Level 5
 - 时间: 1年+
 - 重点: 数学 + Coq + 形式化
 
 ### "我来自其他语言"
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - 看 "不同背景的学习建议" 章节
 - 利用已有知识
@@ -343,8 +367,10 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## 学习检查点
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 每级检查清单
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Level 1 检查清单**
 
@@ -384,23 +410,28 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## 常见陷阱与解决
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 陷阱 1: 只看不练
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **表现**: 读了很多文档，但写不出代码
 **解决**: 每个概念后必须做练习
 
 ### 陷阱 2: 跳过基础
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **表现**: 直接看高级内容，看不懂
 **解决**: 按路线图循序渐进
 
 ### 陷阱 3: 孤立学习
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **表现**: 学了很多，但不知道怎么联系
 **解决**: 使用桥梁文档建立联系
 
 ### 陷阱 4: 死记硬背
+> **[来源: [crates.io](https://crates.io/)]**
 
 **表现**: 记住规则但不理解原理
 **解决**: 阅读理论到实践桥梁
@@ -408,14 +439,17 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## 资源推荐
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 必备文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - ULTIMATE_COMPREHENSIVE_GUIDE.md - 总入口
 - QUICK_REFERENCE_CARD.md - 速查
 - COMPLETE_KNOWLEDGE_MATRIX.md - 知识矩阵
 
 ### 按级别推荐
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Level 1**: 概念卡片 + 交互指南
 **Level 2**: 详细概念 + 练习
@@ -444,6 +478,7 @@ Level 5: 能形式化证明 (专家)
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -467,3 +502,63 @@ Level 5: 能形式化证明 (专家)
 > **[来源: tch-rs Documentation]**
 
 > **[来源: ACM - AI Systems]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Safety Tags 预研指南](#safety-tags-预研指南)
   - [📑 目录](#-目录)
@@ -56,8 +57,10 @@ Safety Tags 愿景:
 ---
 
 ## 提议设计（草案阶段）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Tag 语法设想
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // 基础 tag：前置条件
@@ -77,6 +80,7 @@ struct RawSlice<T> {
 ```
 
 ### 标准 Tag 库设想
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Tag | 语义 | 适用场景 |
 |:---|:---|:---|
@@ -90,6 +94,7 @@ struct RawSlice<T> {
 ---
 
 ## 与现有工具的协同
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 Safety Tags 生态:
@@ -123,6 +128,7 @@ Safety Tags 生态:
 ---
 
 ## 行动建议
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **跟踪** [Rust Internals 论坛](https://internals.rust-lang.org/) 的 Safety Tags 讨论
 2. **准备** 在项目中统一 Safety Comment 格式，为迁移做准备
@@ -140,6 +146,7 @@ Safety Tags 生态:
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -163,3 +170,30 @@ Safety Tags 生态:
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

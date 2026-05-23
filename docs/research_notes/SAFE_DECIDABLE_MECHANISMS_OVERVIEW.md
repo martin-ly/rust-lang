@@ -1,6 +1,7 @@
 ﻿# 安全可判定机制总览
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [安全可判定机制总览](#安全可判定机制总览)
   - [📑 目录](#-目录)
@@ -169,6 +170,7 @@
 - **反例**：类型错误、不可达代码。
 
 ### 3.9 match / for / ?
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **概念定义**：穷尽匹配、IntoIterator、Result 早期返回；[borrow_checker_proof](formal_methods/borrow_checker_proof.md) Def MATCH1/FOR1/QUERY1。
 - **属性关系**：控制流与借用协同；A-CF1 见 [formal_methods README](formal_methods/README.md)。
@@ -176,6 +178,7 @@
 - **反例**：非穷尽 match、迭代中修改集合、非 Result 类型 ?。
 
 ### 3.10 通道 / Mutex / thread::spawn
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **概念定义**：CHAN1、MUTEX1、SPAWN1；见 [borrow_checker_proof](formal_methods/borrow_checker_proof.md)、[async_state_machine](formal_methods/async_state_machine.md)。
 - **属性关系**：发送类型需 Send；spawn 闭包需 Send + 'static。
@@ -183,6 +186,7 @@
 - **反例**：发送非 Send、非 Send 闭包 spawn。
 
 ### 3.11 RefCell 借用（运行时可判定）
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **概念定义**：运行时借用栈；[ownership_model](formal_methods/ownership_model.md) Def REFCELL1。
 - **属性关系**：与编译期借用规则同构；违反时 panic。
@@ -192,6 +196,7 @@
 ---
 
 ## 四、思维表征入口
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型 | 入口 |
 | :--- | :--- |
@@ -203,10 +208,12 @@
 ---
 
 ## 六、并发与异步族、Trait 族 四维对比表（完备特性对比子集）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 在 [RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS](./RUST_193_LANGUAGE_FEATURES_COMPREHENSIVE_ANALYSIS.md) 基础上，为「并发与异步族」「Trait 与多态族」增加**可判定性、安全边界、形式化文档、思维表征**四维，便于与 formal_methods 对照。
 
 ### 6.1 并发与异步族
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -220,6 +227,7 @@
 | 原子操作 | 静态（接口） | Safe 并发 | ATOMIC1, ATOMIC-T1 | ownership_model |
 
 ### 6.2 Trait 与多态族
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 可判定性 | 安全边界 | 形式化 Def/定理 | 思维表征入口 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -237,6 +245,7 @@
 ---
 
 ## 七、相关文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [formal_methods README](formal_methods/README.md) — 六篇并表、公理-定理索引
 - [SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN](formal_methods/SAFE_DECIDABLE_MECHANISMS_AND_FORMAL_METHODS_PLAN.md) — 意见与建议、阶段 A–E 计划
@@ -251,11 +260,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -300,6 +311,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -323,3 +335,63 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

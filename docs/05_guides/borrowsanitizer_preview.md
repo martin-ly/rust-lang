@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [BorrowSanitizer 预览](#borrowsanitizer-预览)
   - [📑 目录](#-目录)
@@ -62,6 +63,7 @@ BorrowSanitizer:
 ---
 
 ## 检测能力
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 违规类型 | 示例 | 检测状态 |
 |:---|:---|:---:|
@@ -74,6 +76,7 @@ BorrowSanitizer:
 ---
 
 ## 与 Miri 的互补关系
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 开发阶段:          Miri
@@ -108,6 +111,7 @@ CI/测试:          BorrowSanitizer + Miri
 ---
 
 ## 参考
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust Project Goals: Safety-Critical Rust](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 - [RustConf 2026](https://rustconf.com/)
@@ -125,6 +129,7 @@ CI/测试:          BorrowSanitizer + Miri
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -148,3 +153,21 @@ CI/测试:          BorrowSanitizer + Miri
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]

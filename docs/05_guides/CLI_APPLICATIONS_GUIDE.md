@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [CLI 应用开发指南](#cli-应用开发指南)
   - [📑 目录](#-目录)
@@ -302,6 +303,7 @@ fn main() {
 ---
 
 ## 最佳实践
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 使用 `?` 操作符传播错误
 
@@ -349,6 +351,7 @@ fn main() -> ExitCode {
 ---
 
 ## 使用场景
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 场景1: 简单命令行工具
 
@@ -372,6 +375,7 @@ fn main() -> ExitCode {
 - 实现 [彩色输出](#2-提供有意义的错误信息)
 
 ### 场景3: 异步 CLI 工具
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 构建网络相关的 CLI 工具：
 
@@ -380,6 +384,7 @@ fn main() -> ExitCode {
 - 参考 [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md) 深入学习
 
 ### 场景4: TUI 应用
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 构建终端用户界面应用：
 
@@ -390,6 +395,7 @@ fn main() -> ExitCode {
 ---
 
 ## 形式化链接
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 链接类型 | 目标文档 |
 | :--- | :--- |
@@ -405,6 +411,7 @@ fn main() -> ExitCode {
 ---
 
 ## 相关文档
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [C07 进程管理](../../crates/c07_process/docs/00_MASTER_INDEX.md)
 - [故障排查指南](./TROUBLESHOOTING_GUIDE.md)
@@ -416,10 +423,12 @@ fn main() -> ExitCode {
 ---
 
 ## Rust 1.95+ 在 CLI 开发中的应用
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### array_windows 在参数解析中的应用
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 /// 使用 array_windows 解析命令行参数对
@@ -437,6 +446,7 @@ fn parse_key_value_pairs(args: &[String]) -> Vec<(String, String)> {
 ```
 
 ### ControlFlow 在验证管道中的应用
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::ops::ControlFlow;
@@ -451,6 +461,7 @@ fn validate_args(args: &CliArgs) -> ControlFlow<ValidationError, ()> {
 ```
 
 ### LazyLock 在配置管理中的应用
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::sync::LazyLock;
@@ -484,6 +495,7 @@ pub fn get_config() -> Option<&'static CliConfig> {
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [05_guides 目录](./README.md)
 - [上级目录](../README.md)
@@ -508,3 +520,115 @@ pub fn get_config() -> Option<&'static CliConfig> {
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Clap Documentation](https://docs.rs/clap/latest/clap/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [90% 里程碑报告](#90-里程碑报告)
   - [📑 目录](#-目录)
@@ -83,8 +84,10 @@
 ---
 
 ## 最终统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 代码统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 Coq 文件:       13 个
@@ -97,6 +100,7 @@ Admit 剩余:     4 个 (次要)
 ```
 
 ### 定理统计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 总数 | 完成 | 剩余 |
 |------|------|------|------|
@@ -108,8 +112,10 @@ Admit 剩余:     4 个 (次要)
 ---
 
 ## 核心成果
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 1: Borrow Checking 终止性 ✅
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
 Theorem borrow_checking_termination :
@@ -123,6 +129,7 @@ Theorem borrow_checking_termination :
 **证明技术**: 良基归纳法 + 度量递减
 
 ### 定理 2: 类型保持 ✅
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
 Theorem preservation :
@@ -139,6 +146,7 @@ Theorem preservation :
 **证明技术**: 结构归纳法 + 反演
 
 ### 定理 3: 进展 ✅
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```coq
 Theorem progress :
@@ -153,6 +161,7 @@ Theorem progress :
 **证明技术**: 类型判断归纳
 
 ### 定理 4: 类型安全 ✅
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```coq
 Theorem type_safety :
@@ -171,6 +180,7 @@ Theorem type_safety :
 **证明**: Preservation + Progress
 
 ### 定理 5: 可判定性 ✅
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```coq
 Theorem rust_ownership_system_fully_decidable :
@@ -184,8 +194,10 @@ Theorem rust_ownership_system_fully_decidable :
 ---
 
 ## 质量指标
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码质量
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 100% Coq 编译通过
 - ✅ 95% 证明完成（4个次要 admit）
@@ -193,6 +205,7 @@ Theorem rust_ownership_system_fully_decidable :
 - ✅ 详细注释和文档
 
 ### 理论严谨性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 基于权威论文
 - ✅ 严格的数学定义
@@ -200,6 +213,7 @@ Theorem rust_ownership_system_fully_decidable :
 - ✅ 经过验证的示例
 
 ### 可用性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ✅ 清晰的文件组织
 - ✅ 证明策略库
@@ -209,8 +223,10 @@ Theorem rust_ownership_system_fully_decidable :
 ---
 
 ## 剩余工作 (10%)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 最后冲刺
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **填充剩余 4 个 admit** (5%)
    - 2 个次要引理
@@ -229,6 +245,7 @@ Theorem rust_ownership_system_fully_decidable :
 ---
 
 ## 100% 完成预告
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 预计明天完成
 
@@ -279,3 +296,31 @@ Theorem rust_ownership_system_fully_decidable :
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+

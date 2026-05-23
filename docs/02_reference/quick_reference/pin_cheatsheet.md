@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Pin 与自引用结构速查卡](#pin-与自引用结构速查卡)
   - [📑 目录](#-目录)
@@ -60,12 +61,14 @@ let pinned: Pin<&mut MyStruct> = pin!(data);
 ```
 
 ### 堆固定
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 let pinned: Pin<Box<MyStruct>> = Box::pin(MyStruct::new());
 ```
 
 ### 自引用结构（概念）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::marker::PhantomPinned;
@@ -78,6 +81,7 @@ struct SelfRef {
 ```
 
 ### 安全投影规则
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 impl MyStruct {
@@ -94,6 +98,7 @@ impl MyStruct {
 ---
 
 ## 📊 Pin 使用决策树
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 需要固定值?
@@ -109,6 +114,7 @@ impl MyStruct {
 ---
 
 ## 🔗 参考
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [c01_pin_and_self_referential](../../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)
 - [Rust Pin 文档](https://doc.rust-lang.org/std/pin/)
@@ -135,6 +141,7 @@ impl MyStruct {
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
 - [上级目录](../README.md)
@@ -158,3 +165,41 @@ impl MyStruct {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

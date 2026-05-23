@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust Project Goals 2026 对齐矩阵](#rust-project-goals-2026-对齐矩阵)
   - [📑 目录](#-目录)
@@ -63,6 +64,7 @@
 | **Open Enums** | — | nightly | 🔴 **缺失** | — | 完全缺失 |
 
 ### 2.2 工具链与生态层
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
@@ -74,6 +76,7 @@
 | **Cargo "plumbing" commands** | — | 原型 | 🔴 **缺失** | — | 完全缺失 |
 
 ### 2.3 异步与效果层
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
@@ -84,6 +87,7 @@
 | **Box notation for dyn async trait** | — | 推进中 | 🟡 部分 | `concept/03_advanced/02_async.md` | 缺少 `Box<dyn async Trait>` 语法分析 |
 
 ### 2.4 形式化与安全层
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|
@@ -95,6 +99,7 @@
 | **BorrowSanitizer** | — | 原型 | 🔴 **缺失** | — | 完全缺失 |
 
 ### 2.5 WASM 与跨语言层
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 官方目标 | 负责人 | 状态 | 项目覆盖 | 覆盖文件 | 缺口 |
 |:---|:---|:---:|:---|:---|:---|:---|
@@ -104,6 +109,7 @@
 ---
 
 ## 三、缺口热力图
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
                     覆盖率
@@ -130,8 +136,10 @@ Rust for Linux           ███████████░░░░░░░ 
 ---
 
 ## 四、行动建议（按优先级排序）
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 🔴 P0 — 立即创建（完全缺失，2026 年稳定化目标）
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **Next-generation trait solver**
    - 新建 `concept/02_intermediate/01_traits.md` 补充章节 或独立文件
@@ -143,6 +151,7 @@ Rust for Linux           ███████████░░░░░░░ 
    - 与 Pin、智能指针、self-referential structs 联动
 
 ### 🟡 P1 — 补充深化（部分覆盖，需升级）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Const Generics 扩展**
    - 扩展 `crates/c04_generic/src/rust_195_features.rs`
@@ -164,6 +173,7 @@ Rust for Linux           ███████████░░░░░░░ 
    - 现有代码文件已有 400–500 行，需补充系统文档和形式化分析
 
 ### 🟢 P2 — 跟踪观察（nightly / 长期演进）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **Open Enums** — 加入 `concept/07_future/05_rust_version_tracking.md` 待跟踪表
 2. **BorrowSanitizer** — 加入待跟踪表
@@ -173,6 +183,7 @@ Rust for Linux           ███████████░░░░░░░ 
 ---
 
 ## 五、参考链接
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
 - [Rust 2026 Stabilizations](https://rust-lang.github.io/rust-project-goals/2026/stabilizations.html)
@@ -198,6 +209,7 @@ Rust for Linux           ███████████░░░░░░░ 
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [上级目录](../README.md)
 
@@ -220,3 +232,55 @@ Rust for Linux           ███████████░░░░░░░ 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

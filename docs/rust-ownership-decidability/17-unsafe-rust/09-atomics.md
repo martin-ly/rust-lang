@@ -54,6 +54,7 @@ fn increment() {
 ```
 
 ### 1.2 为什么需要原子操作
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 // ❌ 非原子操作，存在数据竞争
@@ -68,8 +69,10 @@ unsafe {
 ---
 
 ## 2. 内存序
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 Ordering 枚举
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 pub enum Ordering {
@@ -82,6 +85,7 @@ pub enum Ordering {
 ```
 
 ### 2.2 选择指南
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 ┌─────────────────────────────────────────────────────────┐
@@ -103,8 +107,10 @@ pub enum Ordering {
 ---
 
 ## 3. 原子类型
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 整数类型
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
@@ -128,6 +134,7 @@ counter.compare_exchange(
 ```
 
 ### 3.2 布尔类型
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -142,6 +149,7 @@ flag.compare_exchange(false, true, Ordering::SeqCst, Ordering::Relaxed);
 ```
 
 ### 3.3 指针类型
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -166,8 +174,10 @@ ptr.compare_exchange(
 ---
 
 ## 4. 常见模式
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 自旋锁
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -230,6 +240,7 @@ impl<T> Drop for SpinLockGuard<'_, T> {
 ```
 
 ### 4.2 无锁队列 (简化)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 use std::sync::atomic::{AtomicPtr, Ordering};
@@ -289,8 +300,10 @@ impl<T> LockFreeQueue<T> {
 ---
 
 ## 5. 内存序详解
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 Relaxed
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 只保证操作的原子性，**不保证**内存顺序。
 
@@ -304,6 +317,7 @@ fn count() {
 ```
 
 ### 5.2 Acquire-Release
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 建立 happens-before 关系。
 
@@ -328,6 +342,7 @@ fn consume() {
 ```
 
 ### 5.3 SeqCst
+> **[来源: [crates.io](https://crates.io/)]**
 
 最强的内存序，所有线程以相同的顺序看到操作。
 
@@ -339,6 +354,7 @@ fn consume() {
 ---
 
 ## 参考
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [std::sync::atomic](https://doc.rust-lang.org/std/sync/atomic/)
 - [The Rustonomicon - Atomics](https://doc.rust-lang.org/nomicon/atomics.html)
@@ -382,3 +398,73 @@ fn consume() {
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

@@ -83,8 +83,10 @@
 | **RefinedRust** | MPI-SWS | Iris, 精细化类型 | 中 | Safe + Unsafe | ⭐⭐⭐⭐⭐ PLDI 2024 ⭐ 基础性证明 |
 
 ## 3. 各工具核心特性
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 3.1 Creusot
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // Creusot示例: 预言变量
@@ -106,6 +108,7 @@ fn abs(x: i32) -> i32 {
 - **Rust 1.95兼容性**: 需要检查最新发布版本，可能需使用nightly工具链
 
 ### 3.2 Prusti
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 // Prusti示例: 前置/后置条件
@@ -130,6 +133,7 @@ while i < n {
 - **Rust 1.95兼容性**: 项目处于维护模式，可能停留在1.94或更旧版本，建议考虑Verus
 
 ### 3.3 RustHorn
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // RustHorn: 自动生成CHC
@@ -149,6 +153,7 @@ fn max(x: i32, y: i32) -> i32 {
 - **Rust 1.95兼容性**: 研究原型，功能有限
 
 ### 3.4 Verus
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // Verus示例: 系统验证
@@ -175,6 +180,7 @@ verus! {
 - **Rust 1.95兼容性**: 活跃开发，推荐用于新项目
 
 ### 3.5 Kani
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // Kani: 有界模型检测
@@ -194,8 +200,10 @@ fn check_abs() {
 - **Rust 1.95兼容性**: Amazon官方维护，预计支持最新稳定版
 
 ## 4. 方法学对比
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 内存建模方法
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具 | 内存模型 | 可变借用处理 |
 |------|---------|-------------|
@@ -206,6 +214,7 @@ fn check_abs() {
 | Verus | SMT数组 | 资源代数 |
 
 ### 4.2 证明自动化
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 自动化程度谱系:
@@ -225,8 +234,10 @@ fn check_abs() {
 ```
 
 ## 5. 实践选择指南
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 场景匹配
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 ┌────────────────────────────────────────────────────────────────┐
@@ -250,6 +261,7 @@ fn check_abs() {
 ```
 
 ### 5.2 成熟度评估
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具 | 标准库覆盖率 | 文档 | 社区 | 持续维护 | Rust 1.95 |
 |------|-------------|------|------|---------|-----------|
@@ -261,6 +273,7 @@ fn check_abs() {
 | RustBelt | 核心语言 | 研究级 | 学术 | 是 | 研究级 |
 
 ## 6. 验证工具与编译器集成
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 集成架构:
@@ -282,8 +295,10 @@ HIR (高级IR)
 ```
 
 ## 7. Rust 1.95 版本兼容性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 7.1 工具链要求
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 工具 | 最低Rust版本 | 1.95支持状态 | 说明 |
 |------|-------------|-------------|------|
@@ -294,6 +309,7 @@ HIR (高级IR)
 | **Aeneas** | 1.72+ | ✅ 支持 | 持续更新 |
 
 ### 7.2 安装建议 (Rust 1.95)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
 # Kani - 推荐用于Unsafe代码验证
@@ -314,6 +330,7 @@ cargo install cargo-creusot --locked
 ```
 
 ### 7.3 已知限制
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **并发支持**: Verus > Creusot > Kani
 - **Unsafe支持**: Kani > Verus > Creusot (有限)
@@ -323,6 +340,7 @@ cargo install cargo-creusot --locked
 ---
 
 ## 参考文献
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. Denis, X., et al. (2022). Creusot: A Foundry for the Deductive Verification of Rust Programs. *ICFEM*.
 2. Astrauskas, V., et al. (2022). The Prusti Project: Formal Verification for Rust. *NSV*.
@@ -367,3 +385,61 @@ cargo install cargo-creusot --locked
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

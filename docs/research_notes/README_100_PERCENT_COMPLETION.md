@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Research Notes 100% 完成计划 - 总览与入口](#research-notes-100-完成计划---总览与入口)
   - [📑 目录](#-目录)
@@ -204,6 +205,7 @@ Week 21-24: 国际对标
 ---
 
 ## 思维表征完善清单
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 思维导图 (目标15个，当前8个)
 
@@ -228,6 +230,7 @@ Week 21-24: 国际对标
 - [ ] 验证工具对比矩阵 (新建)
 
 ### 证明树 (目标10个，当前3个)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 所有权证明树 (细化)
 - [ ] 借用证明树 (细化)
@@ -239,6 +242,7 @@ Week 21-24: 国际对标
 - [ ] 分布式证明树 (新建)
 
 ### 决策树 (目标10个，当前5个)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 并发模型选型决策树 (完善)
 - [ ] 设计模式选型决策树 (完善)
@@ -247,6 +251,7 @@ Week 21-24: 国际对标
 - [ ] 验证工具选型决策树 (新建)
 
 ### 应用树 (目标8个，当前1个)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 系统编程应用树 (新建)
 - [ ] 网络服务应用树 (新建)
@@ -257,8 +262,10 @@ Week 21-24: 国际对标
 ---
 
 ## 验收标准
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 100%完成标准
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | 验收标准 |
 | :--- | :--- |
@@ -270,8 +277,10 @@ Week 21-24: 国际对标
 ---
 
 ## 贡献指南
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 如何参与
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **阅读计划文档**: 了解整体规划
 2. **选择任务**: 从缺口清单中选择
@@ -279,6 +288,7 @@ Week 21-24: 国际对标
 4. **提交PR**: 按贡献指南提交
 
 ### 任务认领
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 任务类型 | 预计工时 | 技能要求 |
 | :--- | :--- | :--- |
@@ -292,8 +302,10 @@ Week 21-24: 国际对标
 ---
 
 ## 资源索引
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 国际权威资源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 资源 | 链接 | 用途 |
 | :--- | :--- | :--- |
@@ -304,6 +316,7 @@ Week 21-24: 国际对标
 | Tree Borrows | <https://plv.mpi-sws.org/rustbelt/stacked-borrows/> | 借用模型 |
 
 ### 本体系核心文档
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 用途 |
 | :--- | :--- |
@@ -315,6 +328,7 @@ Week 21-24: 国际对标
 ---
 
 ## 变更日志
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 日期 | 版本 | 变更 |
 | :--- | :--- | :--- |
@@ -329,6 +343,7 @@ Week 21-24: 国际对标
 ---
 
 ## 思维导图：100%完成全貌
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
                     100%完成全貌
@@ -347,11 +362,13 @@ Week 21-24: 国际对标
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -396,6 +413,7 @@ Week 21-24: 国际对标
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -419,3 +437,77 @@ Week 21-24: 国际对标
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

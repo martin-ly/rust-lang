@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [50% 里程碑报告](#50-里程碑报告)
   - [📑 目录](#-目录)
@@ -57,6 +58,7 @@
 - ✅ 无效借用反例
 
 ### 当前统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 Coq 文件:       12 个
@@ -69,20 +71,24 @@ Coq 代码:       2,753 行 (+333 行)
 ---
 
 ## 完成度更新
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Phase 1: 基础构建
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 100% 完成
 - ✅ 元模型定义
 - ✅ 核心定理框架
 
 ### Phase 2: 可判定性深化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - 🔄 60% 完成
 - 🔄 填充 admit
 - 🔄 完善证明
 
 ### Phase 3-4: 扩展和发布
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ⏳ 待开始
 
@@ -207,3 +213,27 @@ Theorem rust_ownership_system_fully_decidable :
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

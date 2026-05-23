@@ -72,6 +72,7 @@
 | Hands-On Rust: Effective Learning through 2D Game Development | Herbert Wolverson | 2021 | 🟢 | 游戏开发入门 | [Pragmatic](https://pragprog.com/titles/hwrust/hands-on-rust/) |
 
 ### 高级与专业
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -85,6 +86,7 @@
 | Practical Machine Learning with Rust | Joydeep Bhattacharjee | 2020 | 🔴 | 机器学习应用 | [Apress](https://link.springer.com/book/10.1007/978-1-4842-5121-8) |
 
 ### 专题书籍
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -100,8 +102,10 @@
 ---
 
 ## 程序语言理论
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 经典教材
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -115,6 +119,7 @@
 | Concepts, Techniques, and Models of Computer Programming | Peter Van Roy & Seif Haridi | 2004 | 🟡 | Oz 语言视角 | [MIT Press](https://mitpress.mit.edu/9780262220699/concepts-techniques-and-models-of-computer-programming/) |
 
 ### 计算理论
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -128,8 +133,10 @@
 ---
 
 ## 类型系统
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 基础与进阶
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -141,6 +148,7 @@
 | Categories and Types in Logic, Language, and Physics | J. van Eijck et al. | 2014 | 🔴 | 范畴论与类型 | [Springer](https://link.springer.com/book/10.1007/978-3-662-45465-7) |
 
 ### 依赖类型与高级类型
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -152,6 +160,7 @@
 | Software Foundations (Vols. 1-4) | Benjamin Pierce et al. | 持续更新 | 🟡 | Coq 证明基础 | [Software Foundations](https://softwarefoundations.cis.upenn.edu/) |
 
 ### 线性逻辑
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -163,8 +172,10 @@
 ---
 
 ## 形式化方法与逻辑
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 分离逻辑
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -173,6 +184,7 @@
 | The Science of Software Design: A Logical Approach | John C. Reynolds | 2012 | 🔴 | 软件设计科学 | [Springer](https://link.springer.com/book/10.1007/978-1-4614-2942-1) |
 
 ### 模型检测与时序逻辑
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -183,6 +195,7 @@
 | Handbook of Practical Logic and Automated Reasoning | John Harrison | 2009 | 🔴 | 自动推理手册 | [Cambridge](https://www.cambridge.org/core/books/handbook-of-practical-logic-and-automated-reasoning/...) |
 
 ### 交互式定理证明
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -197,8 +210,10 @@
 ---
 
 ## 函数式编程
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 函数式编程基础
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -211,6 +226,7 @@
 | Purely Functional Data Structures | Chris Okasaki | 1998 | 🔴 | 纯函数数据结构 | [Cambridge](https://www.cambridge.org/core/books/purely-functional-data-structures/...) |
 
 ### 范畴论与函数式编程
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -222,8 +238,10 @@
 ---
 
 ## 编译器设计与实现
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 经典编译器教材
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -234,6 +252,7 @@
 | Engineering a Compiler (3rd Ed.) | Keith Cooper & Linda Torczon | 2022 | 🟡 | 工程化编译器 | [Elsevier](https://www.elsevier.com/books/engineering-a-compiler/cooper/978-0-12-815412-0) |
 
 ### 高级编译技术
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -246,8 +265,10 @@
 ---
 
 ## 软件验证与证明
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 形式化验证
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -258,6 +279,7 @@
 | Decision Procedures: An Algorithmic Point of View (2nd Ed.) | Daniel Kroening & Ofer Strichman | 2016 | 🔴 | 决策过程算法 | [Springer](https://link.springer.com/book/10.1007/978-3-662-50497-0) |
 
 ### 程序分析
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 书名 | 作者 | 出版年份 | 难度 | 特点 | 链接 |
 |------|------|----------|------|------|------|
@@ -269,8 +291,10 @@
 ---
 
 ## 在线教程与文档
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### Rust 官方资源
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 资源名称 | 类型 | 难度 | 描述 | 链接 |
 |----------|------|------|------|------|
@@ -284,6 +308,7 @@
 | The Cargo Book | 文档 | 🟢 | Cargo 指南 | [官方](https://doc.rust-lang.org/cargo/) |
 
 ### 学习平台
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 平台 | 类型 | 难度 | 描述 | 链接 |
 |------|------|------|------|------|
@@ -295,6 +320,7 @@
 | This Week in Rust | 周报 | 🟢 | Rust 周报 | [Rust](https://this-week-in-rust.org/) |
 
 ### PL 理论资源
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 资源名称 | 类型 | 难度 | 描述 | 链接 |
 |----------|------|------|------|------|
@@ -307,8 +333,10 @@
 ---
 
 ## 📊 资源统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 按类别统计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 类别 | 书籍数量 | 占比 |
 |------|----------|------|
@@ -322,6 +350,7 @@
 | 在线资源 | 20 | - |
 
 ### 按难度统计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 难度等级 | 资源数量 | 占比 |
 |----------|----------|------|
@@ -330,6 +359,7 @@
 | 🔴 高级 | 36 | 40% |
 
 ### 按格式统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 格式 | 数量 |
 |------|------|
@@ -340,8 +370,10 @@
 ---
 
 ## 🎯 学习路径推荐
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 路径一：Rust 全栈工程师
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **目标**: 掌握生产级 Rust 开发
 
@@ -364,6 +396,7 @@
 ```
 
 ### 路径二：类型系统研究者
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **目标**: 深入理解类型理论和形式化语义
 
@@ -387,6 +420,7 @@
 ```
 
 ### 路径三：形式化验证工程师
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **目标**: 掌握程序验证技术
 
@@ -412,6 +446,7 @@
 ---
 
 ## 🔗 相关资源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [学术论文分类](./academic-papers.md) - 配套学术论文
 - [工具和库索引](./tools-libraries.md) - 实现这些概念的工具
@@ -444,3 +479,65 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

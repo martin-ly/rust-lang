@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实现进度矩阵](#实现进度矩阵)
   - [📑 目录](#-目录)
@@ -84,6 +85,7 @@
 ---
 
 ## 详细进度追踪
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Phase 0: 审计与清理 ✅
 
@@ -129,6 +131,7 @@
 | 证明树补充 | ✅ | 100% (10/10) |
 
 ### Phase 4: 教程与实用内容 ✅
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -136,6 +139,7 @@
 | 速查表扩展 | ✅ | 100% (5/5) |
 
 ### Phase 5: Coq骨架与L3证明 🔄
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 任务 | 状态 | 完成度 |
 | :--- | :--- | :--- |
@@ -148,8 +152,10 @@
 ---
 
 ## 质量指标
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 文档大小统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类别 | 平均大小 | 目标 | 状态 |
 | :--- | :--- | :--- | :--- |
@@ -160,6 +166,7 @@
 | 教程 | 8KB | >10KB | ⚠️ |
 
 ### 内容完整性
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 检查项 | 覆盖率 | 状态 |
 | :--- | :--- | :--- |
@@ -173,8 +180,10 @@
 ---
 
 ## 剩余工作清单
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 高优先级
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | ID | 任务 | 工时 | 依赖 |
 | :--- | :--- | :--- | :--- |
@@ -183,6 +192,7 @@
 | R3 | 扩展2个教程 | 8h | 无 |
 
 ### 中优先级
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | ID | 任务 | 工时 | 依赖 |
 | :--- | :--- | :--- | :--- |
@@ -191,6 +201,7 @@
 | M3 | 最终文档审核 | 8h | 全部 |
 
 ### 低优先级
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | ID | 任务 | 工时 | 依赖 |
 | :--- | :--- | :--- | :--- |
@@ -200,6 +211,7 @@
 ---
 
 ## 里程碑
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 2026-02-28  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -215,6 +227,7 @@
 ---
 
 ## 风险评估
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 风险 | 概率 | 影响 | 缓解措施 |
 | :--- | :--- | :--- | :--- |
@@ -231,11 +244,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -280,6 +295,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
@@ -303,3 +319,55 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

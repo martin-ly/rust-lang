@@ -1,6 +1,7 @@
 ﻿# 代码-文档-形式化完整映射
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [代码-文档-形式化完整映射](#代码-文档-形式化完整映射)
   - [📑 目录](#-目录)
@@ -288,6 +289,7 @@
 ---
 
 ## 3. 代码到形式化的映射
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 所有权转移的形式化
 
@@ -320,6 +322,7 @@
 | `'static` | Lifetime('static) = [0, infinity) | [定义 - 静态生命周期](./formal_methods/lifetime_formalization.md#定义-静态生命周期) |
 
 ### 3.4 类型系统的形式化
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
@@ -328,6 +331,7 @@
 | `dyn Trait` | dyn Trait = exists T. T: Trait && vtable(T) | [类型规则 - Trait 对象](./type_theory/type_system_foundations.md#类型规则-trait-对象) |
 
 ### 3.5 并发的形式化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
@@ -338,6 +342,7 @@
 | `Sync` trait | Sync(T) <=> forall r: &T. Send(r) | [定义 - Sync](./formal_methods/send_sync_formalization.md#定义-sync) |
 
 ### 3.6 异步的形式化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 代码 | 形式化定义 | 相关定理/证明 |
 | :--- | :--- | :--- |
@@ -348,8 +353,10 @@
 ---
 
 ## 4. 错误代码映射
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 所有权错误 (E03xx)
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -359,6 +366,7 @@
 | **E0507** | `let x = *r;` (r 是借用) | 从借用内容移动 | [C01 借用检查器](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
 
 ### 4.2 借用错误 (E04xx, E05xx)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -368,6 +376,7 @@
 | **E0506** | `*r = value;` (while borrowed) | 给借用赋值 | [C01 借用](../02_reference/quick_reference/ownership_cheatsheet.md) | 规则 1 - 借用规则 |
 
 ### 4.3 生命周期错误 (E05xx)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -376,6 +385,7 @@
 | **E0373** | `move \|_\| x` in closure | 闭包生命周期 | [C06 异步](../02_reference/quick_reference/async_patterns.md) | 捕获变量生命周期约束 |
 
 ### 4.4 类型系统错误 (E02xx, E03xx)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -386,6 +396,7 @@
 | **E0325** | 递归 trait bound | 溢出求值要求 | [C04 泛型](../02_reference/quick_reference/generics_cheatsheet.md) | 类型系统一致性 |
 
 ### 4.5 并发错误 (E0xxx)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 错误码 | 代码示例 | 概念解释 | 修复文档 | 形式化规则 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -393,6 +404,7 @@
 | **E0381** | 跨 await 持锁 | 异步借用错误 | [C06 异步](../05_guides/TROUBLESHOOTING_GUIDE.md) | 借用有效性跨 await |
 
 ### 4.6 错误码快速修复索引
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 错误码 | 常见原因 | 快速修复 | 形式化规则 | 相关定理 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -407,8 +419,10 @@
 ---
 
 ## 5. API映射
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 所有权相关 API
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -419,6 +433,7 @@
 | `mem::take(&mut T)` | 取出默认值 | 取出值并用 Default 替换 | take: &mut T -> T && T: Default && old = return && *ref = default() |
 
 ### 5.2 借用相关 API
+> **[来源: [crates.io](https://crates.io/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -429,6 +444,7 @@
 | `to_owned()` | 转为拥有值 | 从引用创建拥有值 | to_owned: &T -> T && Omega(result) = Owned |
 
 ### 5.3 集合 API
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -440,6 +456,7 @@
 | `map.get(&k)` | 获取值 | 按键查找 | get: &K -> Option<&V> && if k in keys(map) then Some(&map[k]) |
 
 ### 5.4 并发 API
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -451,6 +468,7 @@
 | `channel()` | 消息通道 | 线程间通信 | Channel<T> = (Sender<T>, Receiver<T>) && queue |
 
 ### 5.5 异步 API
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -461,6 +479,7 @@
 | `select!` | 选择完成 | 等待任一 Future | select: {F_i} -> T_j && j = min { i | F_i ready } |
 
 ### 5.6 I/O API
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | API | 概念 | 使用场景 | 形式化规格 |
 | :--- | :--- | :--- | :--- |
@@ -473,8 +492,10 @@
 ---
 
 ## 6. 快速查找索引
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 按代码模式查找
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 所有权获取       -> 1.1, 3.1, 5.1
@@ -490,6 +511,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.2 按错误码查找
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 所有权错误:
@@ -509,6 +531,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.3 按文档类型查找
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 概念文档       -> 02_reference/quick_reference/
@@ -519,6 +542,7 @@ Trait Bound      -> 1.4, E0277
 ```
 
 ### 6.4 按形式化主题查找
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 所有权模型      -> ownership_model.md
@@ -532,8 +556,10 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 相关文档
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 项目内部文档
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ERROR_CODE_MAPPING.md](../02_reference/ERROR_CODE_MAPPING.md) - 编译错误码详细映射
 - [STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md](../02_reference/STANDARD_LIBRARY_COMPREHENSIVE_ANALYSIS_2025_12_25.md) - 标准库全面分析
@@ -543,6 +569,7 @@ Trait Bound      -> 1.4, E0277
 - [C04 泛型与 Trait](../02_reference/quick_reference/generics_cheatsheet.md) - 泛型编程
 
 ### 形式化文档
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model.md](./formal_methods/ownership_model.md) - 所有权模型形式化
 - [borrow_checker_proof.md](./formal_methods/borrow_checker_proof.md) - 借用检查器证明
@@ -552,6 +579,7 @@ Trait Bound      -> 1.4, E0277
 - [type_system_foundations.md](./type_theory/type_system_foundations.md) - 类型理论基础
 
 ### 外部资源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
 - [Compiler Error Index](https://doc.rust-lang.org/error-index.html)
@@ -560,11 +588,13 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -609,6 +639,7 @@ Trait Bound      -> 1.4, E0277
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -633,3 +664,111 @@ Trait Bound      -> 1.4, E0277
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

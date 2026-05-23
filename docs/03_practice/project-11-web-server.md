@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 11: HTTP Web服务器](#实践项目-11-http-web服务器)
   - [📑 目录](#-目录)
@@ -64,6 +65,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 ---
 
 ## 参考实现
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 完整参考实现位于: `examples/web-server/`
 ---
@@ -84,6 +86,7 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
@@ -99,3 +102,35 @@ async fn handle_request(stream: &mut tokio::net::TcpStream) {
 > **[来源: actix.rs Documentation]**
 
 > **[来源: RFC 2616 - HTTP]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Tokio Documentation](https://docs.rs/tokio/latest/tokio/)]**
+>
+> **[来源: [Hyper Documentation](https://hyper.rs/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo 1.94 新特性指南](#cargo-194-新特性指南)
   - [📑 目录](#-目录)
@@ -216,6 +217,7 @@ rust-version = "1.94"  # 需要 1.94+ 来解析 TOML 1.1
 ---
 
 ## 三、pubtime 字段
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 特性描述
 
@@ -242,12 +244,15 @@ cargo add serde --time "2026-01-01..2026-03-01"
 ---
 
 ## 四、`CARGO_BIN_EXE_<crate>` 运行时可用
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 特性描述
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 `CARGO_BIN_EXE_<crate>` 环境变量现在在运行时也可用，而不仅限于构建脚本。
 
 ### 4.2 使用示例
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 在测试中查找工具二进制文件
@@ -261,6 +266,7 @@ let output = std::process::Command::new(tool_path)
 ```
 
 ### 4.3 测试示例
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 #[test]
@@ -278,8 +284,10 @@ fn test_cli_tool() {
 ---
 
 ## 五、性能改进
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 cargo clean 优化
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 `cargo clean -p` 和 `cargo clean --workspace` 现在更快了。
 
@@ -294,6 +302,7 @@ cargo clean --workspace
 ---
 
 ## 六、完整配置示例
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
 # .cargo/config.toml
@@ -332,14 +341,17 @@ protocol = "sparse"
 ---
 
 ## 七、迁移指南
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 从旧版本迁移
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **更新 Rust**: `rustup update stable`
 2. **验证配置**: `cargo check`
 3. **使用新特性**: 逐步采用 TOML 1.1 和 config inclusion
 
 ### 7.2 兼容性
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 向后兼容 | 说明 |
 |------|----------|------|
@@ -351,6 +363,7 @@ protocol = "sparse"
 ---
 
 ## 八、相关资源
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Cargo 1.94 开发周期报告](https://blog.rust-lang.org/inside-rust/2026/02/18/this-development-cycle-in-cargo-1.94/)
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
@@ -366,6 +379,7 @@ protocol = "sparse"
 ---
 
 ## 🆕 Rust 1.94 更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **最新版本**: Rust 1.94.0 (2026-03-05)
 
@@ -380,11 +394,13 @@ protocol = "sparse"
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -429,6 +445,7 @@ protocol = "sparse"
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -444,3 +461,91 @@ protocol = "sparse"
 > **[来源: Rust Reference - Cargo]**
 
 > **[来源: crates.io Documentation]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

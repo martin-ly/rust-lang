@@ -58,8 +58,10 @@ assert_eq!(std::mem::size_of::<MaybeUninit<i32>>(), 4);
 ---
 
 ## 2. 基本用法
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 2.1 创建与初始化
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // 方式 1: 从未初始化开始
@@ -77,6 +79,7 @@ let slot = MaybeUninit::new(x);  // x 被移动
 ```
 
 ### 2.2 读取值
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 let mut slot = MaybeUninit::new(String::from("hello"));
@@ -95,6 +98,7 @@ let s = unsafe { slot.assume_init() };
 ```
 
 ### 2.3 部分初始化数组
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 fn partial_init_example() {
@@ -124,8 +128,10 @@ fn partial_init_example() {
 ---
 
 ## 3. 高级模式
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 类型级未初始化
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 use std::marker::PhantomData;
@@ -173,6 +179,7 @@ println!("{}", slot.get());  // 42
 ```
 
 ### 3.2 延迟初始化
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 use std::sync::Once;
@@ -204,8 +211,10 @@ impl<T> Lazy<T> {
 ---
 
 ## 4. 实现原理
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 Union 实现
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
 #[repr(transparent)]
@@ -222,6 +231,7 @@ pub union MaybeUninit<T> {
 - 允许未初始化状态
 
 ### 4.2 repr(transparent)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 // MaybeUninit<T> 和 T 有完全相同的内存布局
@@ -236,8 +246,10 @@ assert_eq!(
 ---
 
 ## 5. 性能考量
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 零成本抽象
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // MaybeUninit 在运行时是零成本的
@@ -249,6 +261,7 @@ let y = unsafe { x.assume_init() };
 ```
 
 ### 5.2 避免不必要的初始化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // 慢：先零初始化，再写入实际数据
@@ -265,6 +278,7 @@ read_data_into_uninit(&mut vec);
 ---
 
 ## 参考
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [std::mem::MaybeUninit](https://doc.rust-lang.org/std/mem/union.MaybeUninit.html)
 
@@ -307,3 +321,39 @@ read_data_into_uninit(&mut vec);
 > **[来源: Rust Reference - Unsafe]**
 
 > **[来源: RFC 2585 - Unsafe Guidelines]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+

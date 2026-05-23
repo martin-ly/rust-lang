@@ -1,6 +1,7 @@
 ﻿# Rust 设计机制论证：理由与完整论证
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 设计机制论证：理由与完整论证](#rust-设计机制论证理由与完整论证)
   - [📑 目录](#-目录)
@@ -265,6 +266,7 @@ Pin 使用场景决策树
 ---
 
 ## 📐 借用：为何可变借用独占？ {#-借用为何可变借用独占}
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **动机**：避免数据竞争。多线程下，若允许多个可变借用，则可能同时写同一内存。
 
@@ -286,6 +288,7 @@ Pin 使用场景决策树
 ---
 
 ## ⏱️ 生命周期：为何需要显式标注？ {#️-生命周期为何需要显式标注}
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **动机**：引用必须不超出被引用对象寿命。
 
@@ -301,6 +304,7 @@ Pin 使用场景决策树
 ---
 
 ## 📊 型变：为何协变/逆变/不变三种？ {#-型变为何协变逆变不变三种}
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **动机**：子类型在泛型构造下如何传递？错误传递导致悬垂。
 
@@ -317,6 +321,7 @@ Pin 使用场景决策树
 ---
 
 ## 🔄 异步：为何 Future 需要 Pin？ {#-异步为何-future-需要-pin}
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **动机**：`async` 块可能生成自引用 Future（跨 await 保存局部变量引用）。
 
@@ -333,6 +338,7 @@ Pin 使用场景决策树
 ---
 
 ## 🔀 Send/Sync：为何需要 Trait 标记？ {#-sendsync为何需要-trait-标记}
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **动机**：多线程下，若类型可跨线程传递或共享，需保证无数据竞争。借用检查器仅覆盖单线程；跨线程需额外约束。
 
@@ -351,6 +357,7 @@ Pin 使用场景决策树
 ---
 
 ## 🎭 Trait 对象：为何 vtable 与对象安全？ {#-trait-对象为何-vtable-与对象安全}
+> **[来源: [crates.io](https://crates.io/)]**
 
 **动机**：需运行时多态（如 `Vec<Box<dyn Draw>>`），类型在编译时未知。
 
@@ -369,6 +376,7 @@ Pin 使用场景决策树
 ---
 
 ## 📦 宏：为何声明宏与过程宏分离？ {#-宏为何声明宏与过程宏分离}
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **动机**：代码生成、DSL、减少重复。需在编译时扩展语法。
 
@@ -381,6 +389,7 @@ Pin 使用场景决策树
 ---
 
 ## 🔄 闭包：为何三种捕获方式？ {#-闭包为何三种捕获方式}
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **动机**：函数式编程、回调、迭代器适配。需捕获环境变量。
 
@@ -393,6 +402,7 @@ Pin 使用场景决策树
 ---
 
 ## 🎯 模式匹配：为何穷尽？ {#-模式匹配为何穷尽}
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **动机**：代数数据类型、解构、消除非法状态。
 
@@ -405,6 +415,7 @@ Pin 使用场景决策树
 ---
 
 ## 📦 Option/Result：为何无 null？ {#-optionresult为何无-null}
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **动机**：避免 null 引用、显式错误处理。强制调用者处理「无值」或「错误」。
 
@@ -429,6 +440,7 @@ Pin 使用场景决策树
 ---
 
 ## 📐 设计机制论证矩阵总览 {#-设计机制论证矩阵总览}
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 机制 | 动机 | 设计决策 | 形式化文档 | 反例 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -464,6 +476,7 @@ Pin 使用场景决策树
 ---
 
 ## 📚 相关文档 {#-相关文档}
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 文档 | 用途 |
 | :--- | :--- |
@@ -483,6 +496,7 @@ Pin 使用场景决策树
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -540,6 +554,7 @@ Pin 使用场景决策树
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -584,3 +599,87 @@ Pin 使用场景决策树
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

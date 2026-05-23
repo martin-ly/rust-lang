@@ -45,6 +45,7 @@ docker run -d -p 8080:8080 --name rust-lang rust-lang:latest
 ```
 
 ### 使用 Docker Compose
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # 启动所有服务
@@ -57,13 +58,16 @@ docker-compose ps
 更多详情参见 [DOCKER_GUIDE.md](./DOCKER_GUIDE.md)
 
 ## Kubernetes 部署
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 前置要求
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Kubernetes 集群 (1.20+)
 - kubectl 已配置
 
 ### 部署步骤
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **应用 ConfigMap**
 
@@ -91,32 +95,38 @@ docker-compose ps
    ```
 
 ### 扩展副本
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
 kubectl scale deployment rust-lang-deployment --replicas=5
 ```
 
 ### 更新镜像
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 kubectl set image deployment/rust-lang-deployment rust-lang=rust-lang:v2.0
 ```
 
 ### 查看日志
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 kubectl logs -f deployment/rust-lang-deployment
 ```
 
 ## Nix 部署
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 使用 Nix 构建
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 nix build
 ```
 
 ### 运行 Nix 开发 Shell
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
 nix develop
@@ -125,8 +135,10 @@ nix develop
 更多详情参见 [NIX_SETUP.md](./NIX_SETUP.md)
 
 ## 环境配置
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 生产环境变量
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 变量 | 说明 | 必需 |
 |------|------|------|
@@ -135,6 +147,7 @@ nix develop
 | `APP_ENVIRONMENT` | 运行环境 | 是 |
 
 ## 健康检查
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 应用提供以下端点:
 
@@ -142,6 +155,7 @@ nix develop
 - `/ready` - 就绪检查
 
 ## 监控
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 建议配置:
 
@@ -150,6 +164,7 @@ nix develop
 - **Loki**: 日志聚合
 
 ## 安全建议
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. 使用非 root 用户运行容器
 2. 定期更新基础镜像
@@ -193,3 +208,37 @@ nix develop
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

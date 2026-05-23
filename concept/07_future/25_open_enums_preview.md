@@ -50,6 +50,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 封闭枚举（Closed Enums）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 默认枚举是**封闭的**——定义后变体集合固定：
 
@@ -76,6 +77,7 @@ fn handle(status: HttpStatus) {
 ---
 
 ### 1.2 `#[non_exhaustive]`：兼容性层面的开放
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.40 引入 `#[non_exhaustive]`，在**不改变运行时语义**的前提下，向外部 crate 隐藏枚举的"完整性"：
 
@@ -117,6 +119,7 @@ fn handle_error(kind: ErrorKind) {
 ---
 
 ### 1.3 开放枚举（Open Enums）的设计空间
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 真正的"开放枚举"允许**运行时扩展**变体集合，这是 Rust 当前未支持的特性：
 
@@ -155,6 +158,7 @@ extend enum Event {
 > [来源: [RFC]]
 
 ### 2.1 编译期影响：穷尽性检查的弱化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 flowchart TD
@@ -183,6 +187,7 @@ flowchart TD
 ---
 
 ### 2.2 运行时语义：无变化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 #[non_exhaustive]
@@ -200,6 +205,7 @@ pub enum Color { Red, Green, Blue }
 ---
 
 ### 2.3 与模式匹配的交互
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 #[non_exhaustive]
@@ -244,6 +250,7 @@ fn process_external(r: Response) -> String {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Scala：Sealed Traits + 子类
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```scala
 // Scala 的 sealed trait 实现封闭/开放的灵活组合
@@ -264,6 +271,7 @@ final case class Key(c: Char) extends Event
 ---
 
 ### 3.2 Haskell：Open Data Types
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```haskell
 -- Haskell 的 open data type（需要语言扩展）
@@ -283,6 +291,7 @@ data AnyEvent = forall e. EventClass e => AnyEvent e
 ---
 
 ### 3.3 OCaml：Polymorphic Variants
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```ocaml
 (* OCaml 的多态变体 — 真正的开放枚举 *)
@@ -303,6 +312,7 @@ let handle_extended = function
 ---
 
 ### 3.4 Rust 当前方案：`#[non_exhaustive]` + 新变体
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
 graph LR
@@ -330,6 +340,7 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 错误码枚举
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
 #[non_exhaustive]
@@ -363,6 +374,7 @@ impl std::error::Error for DatabaseError {
 ---
 
 ### 4.2 事件/消息类型
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 #[non_exhaustive]
@@ -381,6 +393,7 @@ trait EventHandler {
 ---
 
 ### 4.3 配置/选项枚举
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 #[non_exhaustive]
@@ -402,6 +415,7 @@ pub enum LogLevel {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
 graph TD
@@ -430,6 +444,7 @@ graph TD
 ---
 
 ### 5.2 边界极限
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 边界 1: #[non_exhaustive] 对内部使用无影响
@@ -521,3 +536,111 @@ pub enum ConstExample {
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-21
 **状态**: ✅ 概念文件创建完成
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

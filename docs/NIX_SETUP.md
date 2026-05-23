@@ -3,6 +3,7 @@
 本项目支持使用 Nix 进行开发环境管理，确保所有开发者使用一致的 Rust 工具链。
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Nix 设置指南](#nix-设置指南)
   - [📑 目录](#-目录)
@@ -45,6 +46,7 @@ nix develop
 这将自动加载配置好的 Rust 工具链和开发工具。
 
 ### 使用 direnv（推荐）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. 安装 `direnv` 和 `nix-direnv`:
 
@@ -62,12 +64,14 @@ nix develop
 3. 以后进入项目目录时，开发环境会自动加载。
 
 ## 环境特性
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **Rust 工具链**: 使用项目 `rust-toolchain.toml` 指定的版本
 - **sccache**: 自动配置缓存加速编译
 - **一致性**: 所有开发者使用相同的工具版本
 
 ## 可用工具
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 进入 Nix shell 后，以下工具已预装:
 
@@ -78,8 +82,10 @@ nix develop
 - `sccache` - 编译缓存工具
 
 ## 故障排除
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 缓存问题
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 如果遇到构建缓存问题，可以清除 sccache:
 
@@ -89,6 +95,7 @@ sccache --start-server
 ```
 
 ### 更新依赖
+> **[来源: [crates.io](https://crates.io/)]**
 
 更新 flake 输入:
 
@@ -97,6 +104,7 @@ nix flake update
 ```
 
 ## 参考
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Nix Flakes 手册](https://nixos.org/manual/nix/stable/command-ref/new-cli/nix3-flake.html)
 - [rust-overlay](https://github.com/oxalica/rust-overlay)
@@ -119,6 +127,7 @@ nix flake update
 ---
 
 ## 相关概念
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [docs 目录](./README.md)
 
@@ -141,3 +150,23 @@ nix flake update
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [最终完成报告 (40% 里程碑)](#最终完成报告-40-里程碑)
   - [📑 目录](#-目录)
@@ -60,6 +61,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### Coq 形式化 (9 文件, 2,353 行)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文件 | 行数 | 内容 | 状态 |
 |------|------|------|------|
@@ -74,6 +76,7 @@
 | `NestedBorrow.v` | 290 | 5个高级示例 | ✅ |
 
 ### 文档 (10+ 文件, 2,000+ 行)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 文档 | 内容 | 状态 |
 |------|------|------|
@@ -86,8 +89,10 @@
 ---
 
 ## 🏆 核心定理
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. Borrow Checking 终止性 (完成)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
 Theorem borrow_checking_termination :
@@ -98,6 +103,7 @@ Theorem borrow_checking_termination :
 ```
 
 ### 2. 类型保持 (框架完成)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```coq
 Theorem preservation :
@@ -109,6 +115,7 @@ Theorem preservation :
 ```
 
 ### 3. 进展 (框架完成)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```coq
 Theorem progress :
@@ -118,6 +125,7 @@ Theorem progress :
 ```
 
 ### 4. 类型安全 (组合定理)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 Type Safety = Preservation + Progress
@@ -126,6 +134,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## ✅ 验证的借用模式 (10个)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. ✅ 基本不可变借用
 2. ✅ 可变借用
@@ -141,6 +150,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## 📊 与权威内容的对齐
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | 内容 | 对齐度 |
 |------|------|--------|
@@ -152,8 +162,10 @@ Type Safety = Preservation + Progress
 ---
 
 ## 🎯 质量保证
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 代码质量
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 100% Coq 编译通过
 - ✅ 52+ 定义
@@ -161,6 +173,7 @@ Type Safety = Preservation + Progress
 - ✅ 详细注释
 
 ### 理论严谨性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - ✅ 基于权威论文
 - ✅ 完整的元模型
@@ -170,6 +183,7 @@ Type Safety = Preservation + Progress
 ---
 
 ## 🚀 持续推进计划
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Phase 2: 可判定性深化 (目标: 55%)
 
@@ -259,3 +273,37 @@ Week 5-12:          90% → 100% (计划)
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

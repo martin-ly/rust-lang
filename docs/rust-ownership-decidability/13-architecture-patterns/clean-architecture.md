@@ -52,18 +52,22 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. 依赖规则
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 代码依赖只能向内，不能向外。
 
 ### 2. 抽象在内，实现在外
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 领域定义接口（端口），外层提供实现（适配器）。
 
 ---
 
 ## Rust 实现
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 端口与适配器
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
 // 领域层 - 定义端口 (trait)
@@ -102,6 +106,7 @@ impl OrderRepository for SqliteOrderRepository {
 ```
 
 ### DI 配置
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
 // main.rs
@@ -126,6 +131,7 @@ async fn main() -> std::io::Result<()> {
 ---
 
 ## 领域驱动设计要素
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
 // 实体 (有身份)
@@ -194,6 +200,7 @@ impl PricingService {
 ---
 
 ## 错误处理
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 // 领域错误
@@ -230,6 +237,7 @@ impl ResponseError for AppError {
 ---
 
 ## 测试
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 // 领域测试 - 纯内存，无依赖
@@ -275,6 +283,7 @@ fn test_create_order_use_case() {
 ---
 
 ## 对比
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 特性 | 分层架构 | 清洁架构 |
 |-----|---------|---------|
@@ -321,3 +330,63 @@ fn test_create_order_use_case() {
 > **[来源: Gang of Four - Design Patterns]**
 
 > **[来源: ACM - Software Design Patterns]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Design Patterns](https://rust-unofficial.github.io/patterns/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

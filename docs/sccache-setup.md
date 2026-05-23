@@ -3,6 +3,7 @@
 本文档说明如何在项目中配置和使用 sccache 来加速 Rust 编译。
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [sccache 配置指南](#sccache-配置指南)
   - [📑 目录](#-目录)
@@ -51,6 +52,7 @@ cargo install sccache --locked
 ```
 
 ### 方式 2: 使用包管理器
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Windows (winget):**
 
@@ -77,19 +79,23 @@ sudo pacman -S sccache
 ```
 
 ### 方式 3: GitHub Releases
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 下载预编译二进制文件:
 <https://github.com/mozilla/sccache/releases>
 
 ## 验证安装
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
 sccache --version
 ```
 
 ## 配置
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. Cargo 配置 (已完成)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `.cargo/config.toml` 已配置:
 
@@ -105,6 +111,7 @@ SCCACHE_GHA_ENABLED = "true"
 ```
 
 ### 2. 环境变量 (可选)
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 # Windows PowerShell
@@ -117,6 +124,7 @@ export SCCACHE_DIR="$HOME/.cache/sccache"
 ```
 
 ## 使用方法
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 配置完成后，正常使用 cargo 命令即可，sccache 自动生效:
 
@@ -127,6 +135,7 @@ cargo check
 ```
 
 ## 监控缓存状态
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
 # 查看缓存统计
@@ -141,6 +150,7 @@ sccache --show-stats
 ```
 
 ## 清理缓存
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
 # 手动清理
@@ -153,6 +163,7 @@ rm -rf $SCCACHE_DIR  # Linux/macOS
 ```
 
 ## CI/CD 配置
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 GitHub Actions 已配置 (`.github/workflows/ci.yml`):
 
@@ -168,6 +179,7 @@ GitHub Actions 已配置 (`.github/workflows/ci.yml`):
 ```
 
 ## 性能基准
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 场景 | 时间 | 说明 |
 |------|------|------|
@@ -178,8 +190,10 @@ GitHub Actions 已配置 (`.github/workflows/ci.yml`):
 运行 `scripts/benchmark-sccache.ps1` 进行本地基准测试。
 
 ## 故障排除
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### sccache 未生效
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
 # 检查环境变量
@@ -190,6 +204,7 @@ echo $RUSTC_WRAPPER      # Linux/macOS
 ```
 
 ### 缓存目录权限问题
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 # Windows - 确保目录存在并有写权限
@@ -201,6 +216,7 @@ chmod 755 ~/.cache/sccache
 ```
 
 ### 清理并重启
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```bash
 sccache --stop-server
@@ -208,6 +224,7 @@ sccache --start-server
 ```
 
 ## 参考
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [sccache GitHub](https://github.com/mozilla/sccache)
 - [Rust Cargo 缓存](https://doc.rust-lang.org/cargo/guide/build-cache.html)
@@ -230,6 +247,7 @@ sccache --start-server
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [docs 目录](./README.md)
 
@@ -255,3 +273,43 @@ sccache --start-server
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

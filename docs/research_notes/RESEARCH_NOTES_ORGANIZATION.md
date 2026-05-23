@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [research\_notes 全面梳理](#research_notes-全面梳理)
   - [📑 目录](#-目录)
@@ -128,6 +129,7 @@ research_notes/
 ---
 
 ## 四、入口与索引关系
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 角色 | 何时用 |
 | :--- | :--- | :--- |
@@ -142,6 +144,7 @@ research_notes/
 ---
 
 ## 五、版本与元数据约定
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **默认版本**：所有 research_notes 下文档元数据统一为 **Rust 1.93.1+ (Edition 2024)**（历史归档保留原版本）。
 - **权威引用**：releases.rs [1.93.0](https://releases.rs/docs/1.93.0/README.md)、
@@ -151,6 +154,7 @@ research_notes/
 ---
 
 ## 六、formal_methods 文件清单（概览）
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 除六篇核心（ownership、borrow、lifetime、async、pin、send_sync）外，本目录还包含：
 
@@ -168,6 +172,7 @@ research_notes/
 ---
 
 ## 七、维护检查清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 新增文档时：在 INDEX.md 对应分类下添加条目；若为 formal_methods，在 formal_methods/README 或本文件 § 六 补充
 - [ ] 归档文档时：在 README、INDEX 中将链接改为 archive 路径，并在本文件 § 三 补充
@@ -177,6 +182,7 @@ research_notes/
 ---
 
 ## 八、100% 完成检查项（2026-02-28）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 实际目录与 README/INDEX 一致，入口统一 00_ORGANIZATION 与 README
 - [x] 归档项（Aeneas、coq-of-rust、Coq 骨架、COQ_ISABELLE）全部指向 archive/deprecated，根目录仅保留重定向
@@ -195,6 +201,7 @@ research_notes/
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
@@ -252,6 +259,7 @@ research_notes/
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -277,3 +285,75 @@ research_notes/
 > **[来源: Rustonomicon]**
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

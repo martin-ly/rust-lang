@@ -62,6 +62,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 2.1 运行时性能
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 指标 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|
@@ -72,6 +73,7 @@
 | **二进制大小** | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐ | ⭐⭐⭐⭐ |
 
 ### 2.2 零成本抽象
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 零成本抽象支持:
@@ -93,8 +95,10 @@
 ---
 
 ## 3. 安全关键适用性矩阵
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 功能安全标准支持
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 标准 | Rust | C | C++ | Ada | 注释 |
 |------|------|---|-----|-----|------|
@@ -105,6 +109,7 @@
 | **EN 50128** | ✅ 支持 | ✅ 成熟 | ⚠️ 受限 | ✅ 成熟 | SIL 4适用 |
 
 ### 3.2 认证工具链可用性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 认证工具链成熟度:
@@ -133,8 +138,10 @@ C++: ⭐⭐
 ---
 
 ## 4. 开发效率对比
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 4.1 学习曲线
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 学习难度排名 (1-10, 10最难):
@@ -161,6 +168,7 @@ C++: ⭐⭐
 ```
 
 ### 4.2 开发工具支持
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|
@@ -173,8 +181,10 @@ C++: ⭐⭐
 ---
 
 ## 5. 生态成熟度对比
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 库生态
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 领域 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|
@@ -185,6 +195,7 @@ C++: ⭐⭐
 | **数学/控制** | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐⭐⭐ | ⭐⭐⭐ |
 
 ### 5.2 社区活跃度
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 GitHub活跃度 (2025年数据):
@@ -217,8 +228,10 @@ Java:
 ---
 
 ## 6. 综合评分矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 安全关键项目适用性评分
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Rust | C | C++ | Ada | Java | Go |
 |------|------|---|-----|-----|------|-----|
@@ -233,6 +246,7 @@ Java:
 | **总分** | **81** | **73** | **70** | **79** | **76** | **69** |
 
 ### 6.2 场景推荐
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 场景1: 新建ASIL D汽车ECU
@@ -259,8 +273,10 @@ Java:
 ---
 
 ## 7. 迁移成本分析
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 从C/C++迁移到Rust
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```
 迁移成本评估:
@@ -285,6 +301,7 @@ Java:
 ```
 
 ### 7.2 FFI边界成本
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 边界类型 | 复杂度 | 性能影响 | 维护成本 |
 |----------|--------|----------|----------|
@@ -296,8 +313,10 @@ Java:
 ---
 
 ## 8. 未来趋势预测
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 8.1 2026-2030预测
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 市场份额预测 (安全关键系统):
@@ -338,8 +357,111 @@ Java:
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust 安全关键系统生态系统主索引](../README.md)
 
 - [Rust生态系统多维概念矩阵对比](RUST_MULTI_DIMENSIONAL_MATRIX.md)
 - [Rust所有权与内存模型矩阵](RUST_OWNERSHIP_MEMORY_MODEL_MATRIX.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

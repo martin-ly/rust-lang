@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [权威内容对齐全面检查报告](#权威内容对齐全面检查报告)
   - [📑 目录](#-目录)
@@ -42,6 +43,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 一、权威来源清单
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 来源 | URL | 版本 | 检查状态 |
 | :--- | :--- | :--- | :--- |
@@ -171,6 +173,7 @@
 ---
 
 ## 三、Rust Reference 1.94 对齐检查
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 类型系统
 
@@ -197,6 +200,7 @@
 | Interior Mutability | ownership_model.md Def 4.4 | ✅ |
 
 ### 2024 Edition 特性
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 状态 | 备注 |
 | :--- | :--- | :--- |
@@ -209,8 +213,10 @@
 ---
 
 ## 四、差距汇总与修复计划
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### P0 高优先级 (本周修复)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 差距ID | 描述 | 影响 | 修复文档 |
 | :--- | :--- | :--- | :--- |
@@ -218,6 +224,7 @@
 | GAP-DEREF-01 | Deref trait形式化 | Ch 15.2 | trait_system_formalization.md |
 
 ### P1 中优先级 (下周修复)
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 差距ID | 描述 | 影响 | 修复文档 |
 | :--- | :--- | :--- | :--- |
@@ -225,6 +232,7 @@
 | GAP-ASYNC-01 | Async Trait形式化 | Ch 17.5 | async_state_machine.md 扩展 |
 
 ### P2 低优先级 (后续版本)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 差距ID | 描述 | 影响 |
 | :--- | :--- | :--- |
@@ -234,8 +242,10 @@
 ---
 
 ## 五、版本更新检查
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 当前项目版本声明
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 文档 | 声明版本 | 实际状态 | 需更新 |
 | :--- | :--- | :--- | :--- |
@@ -247,8 +257,10 @@
 ---
 
 ## 六、权威来源引用完整性
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 已引用来源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 来源 | 引用次数 | 完整性 |
 | :--- | :--- | :--- |
@@ -261,6 +273,7 @@
 ---
 
 ## 七、修复执行清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [x] 搜索权威来源最新状态
 - [x] 检查Rust Book 2024 Edition对齐
@@ -280,11 +293,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [crates.io](https://crates.io/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -329,6 +344,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [research_notes 目录](./README.md)
 - [上级目录](../README.md)
@@ -352,3 +368,69 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

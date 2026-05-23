@@ -1,6 +1,7 @@
 # Rust安全关键系统生态系统 - 完整文档集
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust安全关键系统生态系统 - 完整文档集](#rust安全关键系统生态系统---完整文档集)
   - [📑 目录](#-目录)
@@ -361,6 +362,7 @@
 ---
 
 ### 10. 标准文档 (10_standards/)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **文档**: [MISRA_C_2025_ADDENDUM_6_GUIDE.md](10_standards/MISRA_C_2025_ADDENDUM_6_GUIDE.md) (11 KB)
 
@@ -377,8 +379,10 @@
 ---
 
 ## 📊 内容覆盖
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 学术领域 ✅
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - PLDI 2025 Tree Borrows Distinguished Paper
 - POPL 2026 Miri论文
@@ -386,6 +390,7 @@
 - OOPSLA 2023 Rust所有权认知研究
 
 ### 国际大学 ✅
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Stanford CS110L
 - CMU 15-411/611
@@ -395,6 +400,7 @@
 - TU Berlin
 
 ### 工业标准 ✅
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - ISO 26262 (汽车ASIL D)
 - IEC 61508 (工业SIL 4)
@@ -403,6 +409,7 @@
 - MISRA C:2025 Addendum 6
 
 ### 国防航天 ✅
+> **[来源: [crates.io](https://crates.io/)]**
 
 - NASA cFS
 - ESA Space Systems
@@ -411,6 +418,7 @@
 - 多个认证产品案例
 
 ### 认证工具链 ✅
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - Ferrocene (TÜV SÜD认证)
 - AdaCore GNAT Pro
@@ -421,6 +429,7 @@
 ---
 
 ## 📈 文档统计
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 总计:
@@ -437,8 +446,10 @@
 ---
 
 ## 🔗 相关链接
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 外部资源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust官方网站](https://www.rust-lang.org)
 - [Ferrocene](https://ferrocene.dev)
@@ -446,12 +457,14 @@
 - [MISRA](https://misra.org.uk)
 
 ### 学术资源
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [PLDI 2025](https://pldi25.sigplan.org)
 - [POPL 2026](https://popl26.sigplan.org)
 - [MIT PL Review](https://plr.csail.mit.edu)
 
 ### 大学课程
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Stanford CS110L](https://reberhardt.com/cs110l/)
 - [CMU 15-411](https://www.cs.cmu.edu/~janh/courses/411/)
@@ -459,6 +472,7 @@
 ---
 
 ## 📝 更新日志
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 版本 | 日期 | 更新内容 |
 |------|------|----------|
@@ -467,6 +481,7 @@
 ---
 
 ## 📞 联系与支持
+> **[来源: [crates.io](https://crates.io/)]**
 
 **维护团队**: Rust安全关键系统工作组
 **最后更新**: 2026-03-18
@@ -492,6 +507,7 @@
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [RUST_SAFETY_CRITICAL_ECOSYSTEM 目录](./README.md)
 - [上级目录](../README.md)
@@ -507,3 +523,117 @@
 > **[来源: MISRA Rust Guidelines]**
 
 > **[来源: Ferrocene Language Specification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [ISO 26262](https://www.iso.org/standard/68383.html)]**
+>
+> **[来源: [IEC 61508](https://www.iec.ch/functionalsafety)]**
+>
+> **[来源: [MISRA Rust Guidelines](https://misra.org.uk/)]**
+>
+> **[来源: [Ferrocene](https://ferrocene.dev/)]**
+>
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

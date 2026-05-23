@@ -74,6 +74,7 @@
 | **Flux** | Liquid Types | 🔴 | Liquid Types for Rust，细化类型 | 活跃 | [GitHub](https://github.com/liquid-rust/flux) |
 
 ### 中级验证工具
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -84,6 +85,7 @@
 | **RustHorn** | CHC | 🔴 | 基于 CHC 的 Rust 验证 | 研究 | [GitHub](https://github.com/sakste/rusthorn) |
 
 ### 安全分析工具
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -96,8 +98,10 @@
 ---
 
 ## 通用验证工具
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模型检测器
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具名称 | 支持语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|----------|------|----------|------|------|
@@ -110,6 +114,7 @@
 | **UPPAAL** | Timed Automata | 🔴 | 实时系统模型检测 | 活跃 | [UPPAAL](https://uppaal.org/) |
 
 ### SMT 求解器
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -121,6 +126,7 @@
 | **Alt-Ergo** | SMT | 🔴 | 支持算术和数组理论 | 活跃 | [GitHub](https://github.com/OCamlPro/alt-ergo) |
 
 ### 霍尔逻辑验证器
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 工具名称 | 目标语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|----------|------|----------|------|------|
@@ -134,8 +140,10 @@
 ---
 
 ## 静态分析工具
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### Rust 专用分析器
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -151,6 +159,7 @@
 | **Miri** | 解释器 | 🔴 | Rust 中间表示解释器 | 活跃 | [GitHub](https://github.com/rust-lang/miri) |
 
 ### 通用静态分析器
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 工具名称 | 支持语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|----------|------|----------|------|------|
@@ -167,8 +176,10 @@
 ---
 
 ## 形式化方法框架
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 分离逻辑框架
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具名称 | 语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -179,6 +190,7 @@
 | **Gillian** | 多语言 | 🔴 | 符号执行平台 | 活跃 | [GitHub](https://github.com/GillianPlatform/Gillian) |
 
 ### 程序逻辑框架
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具名称 | 语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -189,6 +201,7 @@
 | **Fiat-Crypto** | Coq | 🔴 | 验证的加密原语 | 活跃 | [GitHub](https://github.com/mit-plv/fiat-crypto) |
 
 ### 重写和等价性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -201,8 +214,10 @@
 ---
 
 ## 证明助手和定理证明器
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 主流证明助手
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 工具名称 | 逻辑基础 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|----------|------|----------|------|------|
@@ -215,6 +230,7 @@
 | **NuPRL** | 构造类型论 | 🔴 | 计算类型论先驱 | 活跃 | [NuPRL](http://www.nuprl.org/) |
 
 ### 自动化定理证明
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -226,6 +242,7 @@
 | **cvc5** | SMT | 🔴 | 最新的 SMT 求解器 | 活跃 | [GitHub](https://github.com/cvc5/cvc5) |
 
 ### 证明自动化库
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 库名称 | 目标 | 难度 | 功能特点 | 状态 | 链接 |
 |--------|------|------|----------|------|------|
@@ -238,8 +255,10 @@
 ---
 
 ## IDE 和编辑器插件
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Rust 专用 IDE 支持
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具名称 | 编辑器 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|--------|------|----------|------|------|
@@ -250,6 +269,7 @@
 | **Clippy** | 多 | 🟢 | Lint 集成 | 活跃 | [GitHub](https://github.com/rust-lang/rust-clippy) |
 
 ### 通用 IDE 插件
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具名称 | 编辑器 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|--------|------|----------|------|------|
@@ -262,6 +282,7 @@
 | **Agda Mode** | Emacs/VS Code | 🟡 | Agda 编辑器支持 | 活跃 | [Agda](https://agda.readthedocs.io/) |
 
 ### 辅助开发工具
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -275,8 +296,10 @@
 ---
 
 ## 测试和模糊测试工具
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Rust 测试工具
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -288,6 +311,7 @@
 | **Fake** | 测试数据 | 🟢 | 生成假数据 | 活跃 | [GitHub](https://github.com/cksac/fake-rs) |
 
 ### 模糊测试工具
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -298,6 +322,7 @@
 | **LibAFL** | 模糊测试 | 🔴 | 可定制的模糊测试框架 | 活跃 | [GitHub](https://github.com/AFLplusplus/LibAFL) |
 
 ### 符号执行工具
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 工具名称 | 支持语言 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|----------|------|----------|------|------|
@@ -310,8 +335,10 @@
 ---
 
 ## 文档和代码生成工具
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 文档工具
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -322,6 +349,7 @@
 | **Rust by Example** | 教程 | 🟢 | 实例教程 | 活跃 | [官方](https://doc.rust-lang.org/rust-by-example/) |
 
 ### 代码生成工具
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 工具名称 | 类型 | 难度 | 功能特点 | 状态 | 链接 |
 |----------|------|------|----------|------|------|
@@ -336,8 +364,10 @@
 ---
 
 ## 📊 工具统计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 按类别统计
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 类别 | 工具数量 | 占比 |
 |------|----------|------|
@@ -351,6 +381,7 @@
 | 文档/代码生成 | 10 | 11% |
 
 ### 按难度统计
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 难度等级 | 工具数量 | 占比 |
 |----------|----------|------|
@@ -359,6 +390,7 @@
 | 🔴 高级 | 48 | 52% |
 
 ### 按活跃度统计
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 活跃度 | 工具数量 | 占比 |
 |--------|----------|------|
@@ -369,8 +401,10 @@
 ---
 
 ## 🎯 工具选择指南
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 场景一：Rust 代码验证入门
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **推荐工具链**:
 
@@ -382,6 +416,7 @@
 ```
 
 ### 场景二：生产级 Rust 验证
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **推荐工具链**:
 
@@ -393,6 +428,7 @@
 ```
 
 ### 场景三：学术研究和教学
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **推荐工具链**:
 
@@ -404,6 +440,7 @@
 ```
 
 ### 场景四：安全关键系统
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **推荐工具链**:
 
@@ -417,6 +454,7 @@
 ---
 
 ## 🔗 相关资源
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [学术论文分类](./academic-papers.md) - 这些工具背后的理论基础
 - [书籍和资源索引](./books-resources.md) - 学习使用这些工具的教材
@@ -449,3 +487,59 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

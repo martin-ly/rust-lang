@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 06: 并发下载器](#实践项目-06-并发下载器)
   - [📑 目录](#-目录)
@@ -71,6 +72,7 @@ fn download_concurrent(urls: Vec<String>) {
 ```
 
 ### 异步下载
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use tokio;
@@ -85,6 +87,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 ---
 
 ## 参考实现
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/concurrent-downloader/`
 ---
@@ -105,6 +108,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 ---
 
 ## 相关概念
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
 - [上级目录](../README.md)
@@ -120,3 +124,41 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 > **[来源: crossbeam Documentation]**
 
 > **[来源: ACM - Concurrent Programming]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

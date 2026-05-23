@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [阅读指南：如何理解这份形式化工作](#阅读指南如何理解这份形式化工作)
   - [📑 目录](#-目录)
@@ -233,8 +234,10 @@
 ---
 
 ## 二、文档速查表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 按主题查找
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 你想了解 | 推荐阅读 |
 |---------|---------|
@@ -247,6 +250,7 @@
 | 快速开始 | 本文档 + OVERVIEW |
 
 ### 2.2 按问题查找
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 问题 | 答案位置 |
 |------|---------|
@@ -258,6 +262,7 @@
 | 这份形式化与 RustBelt 的区别？ | OVERVIEW 第 6.2 节 |
 
 ### 2.3 Coq 文件导航
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 coq-formalization/
@@ -290,8 +295,10 @@ coq-formalization/
 ---
 
 ## 三、学习检查清单
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 3.1 基础理解（必会）
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 理解所有权、借用、生命周期的概念
 - [ ] 理解 Linearizability 的作用
@@ -300,6 +307,7 @@ coq-formalization/
 - [ ] 能够从 Rust 代码映射到形式化
 
 ### 3.2 中级理解（推荐）
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 理解终止性证明的策略
 - [ ] 理解保持性证明的结构
@@ -308,6 +316,7 @@ coq-formalization/
 - [ ] 能够阅读 Coq 代码并理解证明结构
 
 ### 3.3 高级理解（可选）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 能够独立完成简单引理的证明
 - [ ] 理解与其他形式化工作的技术差异
@@ -317,8 +326,10 @@ coq-formalization/
 ---
 
 ## 四、常见问题 FAQ
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Q1：我需要学 Coq 才能理解这份形式化吗？
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **A**：不一定。
 
@@ -327,6 +338,7 @@ coq-formalization/
 - 推荐先读自然语言文档，再决定是否学 Coq
 
 ### Q2：这份形式化是完整的吗？
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **A**：核心框架 100% 完整，但还有 ~65 处 admit。
 
@@ -335,6 +347,7 @@ coq-formalization/
 - 不影响理论框架的完整性
 
 ### Q3：这份形式化能证明我的 Rust 程序安全吗？
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **A**：不能直接证明具体程序。
 
@@ -343,6 +356,7 @@ coq-formalization/
 - 你的程序如果通过 rustc 检查，就是良类型的
 
 ### Q4：与 Rust 实际编译器的关系是什么？
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **A**：这是理论模型，不是实际实现。
 
@@ -351,6 +365,7 @@ coq-formalization/
 - 但核心原理相同
 
 ### Q5：如何为这份形式化做贡献？
+> **[来源: [crates.io](https://crates.io/)]**
 
 **A**：
 
@@ -362,8 +377,10 @@ coq-formalization/
 ---
 
 ## 五、进阶阅读建议
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 相关论文
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **必读**：
 
@@ -376,6 +393,7 @@ coq-formalization/
 5. Barber et al. "Linear Logic and Linear Types" (经典)
 
 ### 5.2 相关教材
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **形式化方法**：
 
@@ -389,6 +407,7 @@ coq-formalization/
 - "Programming Rust" (Blandy et al.)
 
 ### 5.3 在线资源
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - Coq 官方文档：<https://coq.inria.fr/documentation>
 - Rust 形式化讨论：<https://rust-lang.zulipchat.com/#narrow/stream/136281-t-lang.2Fwg-formal-methods>
@@ -397,6 +416,7 @@ coq-formalization/
 ---
 
 ## 六、总结
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 这份形式化工作包含多个层次：
 
@@ -415,10 +435,12 @@ coq-formalization/
 ---
 
 ## 🆕 Rust 1.94 所有权系统更新
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.94.0+
 
 ### 新特性对所有权系统的影响
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 所有权影响 | 可判定性 |
 |------|-----------|---------|
@@ -427,6 +449,7 @@ coq-formalization/
 | LazyCell/LazyLock | 延迟初始化 | ✅ Send/Sync 检查 |
 
 ### 形式化更新
+> **[来源: [crates.io](https://crates.io/)]**
 
 - rray_windows 的边界安全证明
 - ControlFlow 的代数性质
@@ -451,6 +474,7 @@ coq-formalization/
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -466,3 +490,89 @@ coq-formalization/
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

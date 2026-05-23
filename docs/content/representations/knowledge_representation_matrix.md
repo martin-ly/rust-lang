@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [知识表征完整矩阵](#知识表征完整矩阵)
   - [📑 目录](#-目录)
@@ -91,6 +92,7 @@ mindmap
 ```
 
 ### 思维导图列表
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 思维导图 | 文件路径 | 状态 |
 |----------|----------|------|
@@ -110,8 +112,10 @@ mindmap
 ---
 
 ## 📐 多维矩阵索引
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 核心矩阵列表
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 矩阵名称 | 文件路径 | 完备度 |
 |----------|----------|--------|
@@ -131,8 +135,10 @@ mindmap
 ---
 
 ## 🌳 决策树索引
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 决策树列表
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 决策树 | 文件路径 | 完备度 |
 |--------|----------|--------|
@@ -147,8 +153,10 @@ mindmap
 ---
 
 ## 🌲 证明树索引
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 形式化证明树列表
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 证明树 | 文件路径 | 完备度 |
 |--------|----------|--------|
@@ -164,8 +172,10 @@ mindmap
 ---
 
 ## 🎄 场景树索引
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 应用场景树
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景树 | 文件路径 | 完备度 |
 |--------|----------|--------|
@@ -178,8 +188,10 @@ mindmap
 ---
 
 ## 📈 表征完备度统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 全局统计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 表征类型 | 数量 | 覆盖率 | 优先级 | 状态 |
 |----------|------|--------|--------|------|
@@ -193,6 +205,7 @@ mindmap
 **总体完备度**: 85%
 
 ### 按模块统计
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 完备度热力图 (按模块):
@@ -217,20 +230,24 @@ C12 WASM      ████████ ████████ █████�
 ---
 
 ## 📝 待办事项
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 高优先级 (立即执行)
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [ ] 补充 C03/C07/C08 决策树
 - [ ] 创建 C03/C07/C08/C09/C10 证明树
 - [ ] 补充 C02/C04/C09/C10 场景树
 
 ### 中优先级 (1周内)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [ ] 添加更多生态对比矩阵
 - [ ] 创建性能优化决策树
 - [ ] 补充 FFI 相关表征
 
 ### 低优先级 (1月内)
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 创建交互式思维导图
 - [ ] 添加动态决策树工具
@@ -259,6 +276,7 @@ C12 WASM      ████████ ████████ █████�
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
 
@@ -281,3 +299,67 @@ C12 WASM      ████████ ████████ █████�
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [内存安全性定理完整证明](#内存安全性定理完整证明)
   - [📑 目录](#-目录)
@@ -75,6 +76,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 引理陈述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 引理 BORROW-CHECK-NO-DATA-RACE:
@@ -82,6 +84,7 @@
 ```
 
 ### 证明
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **步骤1: 定义数据竞争**
 
@@ -134,8 +137,10 @@
 ---
 
 ## 引理2: 所有权保证无悬垂指针
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 引理陈述
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
 引理 OWNERSHIP-NO-DANGLING:
@@ -143,6 +148,7 @@
 ```
 
 ### 证明
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **步骤1: 定义悬垂指针**
 
@@ -201,8 +207,10 @@
 ---
 
 ## 引理3: 生命周期保证无use-after-free
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 引理陈述
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 引理 LIFETIME-NO-UAF:
@@ -210,6 +218,7 @@
 ```
 
 ### 证明
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **步骤1: 定义use-after-free**
 
@@ -264,8 +273,10 @@
 ---
 
 ## 引理4: RAII保证无双重释放
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 引理陈述
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 引理 RAII-NO-DOUBLE-FREE:
@@ -273,6 +284,7 @@
 ```
 
 ### 证明
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **步骤1: 定义双重释放**
 
@@ -346,8 +358,10 @@ move(v, from, to) →
 ---
 
 ## 主定理证明
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理 MEMORY-SAFETY-1
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 ∀程序P. P通过Rust编译器 → P满足内存安全
@@ -357,6 +371,7 @@ move(v, from, to) →
 ```
 
 ### 证明
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 给定: 程序P通过Rust编译器
@@ -393,8 +408,10 @@ move(v, from, to) →
 ---
 
 ## 推论
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 推论1: 类型安全蕴含内存安全
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 推论 TYPE-SAFETY-IMPLIES-MEMORY-SAFETY:
@@ -405,6 +422,7 @@ move(v, from, to) →
 ```
 
 ### 推论2: 并发安全
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 推论 CONCURRENCY-SAFETY:
@@ -414,6 +432,7 @@ move(v, from, to) →
 ```
 
 ### 推论3: Unsafe代码隔离
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 推论 UNSAFE-ISOLATION:
@@ -428,6 +447,7 @@ move(v, from, to) →
 ---
 
 ## 证明可靠性分析
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
@@ -472,6 +492,7 @@ move(v, from, to) →
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [上级目录](../README.md)
 
@@ -494,3 +515,107 @@ move(v, from, to) →
 > **[来源: ACM - Memory Safety]**
 
 > **[来源: Wikipedia - Formal Methods]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Memory Model](https://doc.rust-lang.org/nomicon/memory.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

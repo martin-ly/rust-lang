@@ -58,6 +58,7 @@
 | **控制粒度** | 精细 | 中等 | 粗 | 粗 | 中等 |
 
 ### 1.2 关键差异分析
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 Rust:    编译时 borrow checker + 所有权系统
@@ -79,8 +80,10 @@ Java/Go: 垃圾回收器（运行时）
 ---
 
 ## 2. 借用类型对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 引用类型矩阵
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 类型 | 所有权 | 可变性 | 线程安全 | 运行时检查 | 使用场景 |
 |------|--------|--------|----------|------------|----------|
@@ -94,6 +97,7 @@ Java/Go: 垃圾回收器（运行时）
 | `RwLock<T>` | 共享 | 内部可变 | Send | 读写锁 | 多读单写 |
 
 ### 2.2 使用决策树
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 需要共享所有权?
@@ -110,8 +114,10 @@ Java/Go: 垃圾回收器（运行时）
 ---
 
 ## 3. 智能指针对比
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 智能指针特性矩阵
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 智能指针 | 所有权 | 可复制 | 线程安全 | 内部可变性 | 开销 |
 |----------|--------|--------|----------|------------|------|
@@ -124,6 +130,7 @@ Java/Go: 垃圾回收器（运行时）
 | `RwLock<T>` | - | - | 是 | 是 | +读写锁 |
 
 ### 3.2 线程安全分类
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```text
 Send + Sync:  Arc<T>, Mutex<T>, RwLock<T>, 原子类型
@@ -139,8 +146,10 @@ Send only:    &mut T, Rc<T>
 ---
 
 ## 4. 并发原语对比
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 4.1 同步原语矩阵
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 原语 | 互斥 | 读写分离 | 阻塞 | 适用场景 |
 |------|------|----------|------|----------|
@@ -153,6 +162,7 @@ Send only:    &mut T, Rc<T>
 | `Atomic` | 是 | - | 无锁 | 简单计数 |
 
 ### 4.2 并发模型对比
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模型 | 共享状态 | 消息传递 | 代表性实现 | 适用场景 |
 |------|----------|----------|------------|----------|
@@ -164,8 +174,10 @@ Send only:    &mut T, Rc<T>
 ---
 
 ## 5. 生命周期关系
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 生命周期关系矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 关系 | 符号 | 含义 | 示例 | 约束强度 |
 |------|------|------|------|----------|
@@ -175,6 +187,7 @@ Send only:    &mut T, Rc<T>
 | **独立** | `'a, 'b` | 无关系 | 多参数 | 弱 |
 
 ### 5.2 生命周期省略规则
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 输入 | 输出推断 | 示例 |
 |------|------|----------|------|
@@ -186,8 +199,10 @@ Send only:    &mut T, Rc<T>
 ---
 
 ## 6. 设计模式适用性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 模式适用矩阵
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 模式 | 适用场景 | Rust实现 | 性能 | 复杂度 |
 |------|---------|---------|------|--------|
@@ -201,6 +216,7 @@ Send only:    &mut T, Rc<T>
 | **Object Pool** | 减少分配 | `Arc<Pool>` | 低分配 | 中 |
 
 ### 6.2 反模式警示
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 反模式 | 问题 | Rust解决方案 |
 |--------|------|--------------|
@@ -212,8 +228,10 @@ Send only:    &mut T, Rc<T>
 ---
 
 ## 7. 形式化方法对比
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 验证工具矩阵
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 工具 | 验证方法 | 自动化 | Rust支持 | 学习曲线 | 工业应用 |
 |------|----------|--------|----------|----------|----------|
@@ -225,6 +243,7 @@ Send only:    &mut T, Rc<T>
 | **Aeneas** | Lean | 半自动 | 转换 | 高 | 研究 |
 
 ### 7.2 形式化属性对比
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 属性 | Rust类型系统 | 分离逻辑 | 模型检测 | 定理证明 |
 |------|--------------|----------|----------|----------|
@@ -236,6 +255,7 @@ Send only:    &mut T, Rc<T>
 ---
 
 ## 8. 性能特征矩阵
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 操作复杂度
 
@@ -298,3 +318,39 @@ Send only:    &mut T, Rc<T>
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

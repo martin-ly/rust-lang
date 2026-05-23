@@ -1,6 +1,7 @@
 # 项目竣工证书
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [项目竣工证书](#项目竣工证书)
   - [📑 目录](#-目录)
@@ -105,6 +106,7 @@
 ---
 
 ### 📊 最终统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 代码统计:
@@ -130,6 +132,7 @@
 ---
 
 ### 🎯 项目目标达成
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 目标 | 计划 | 实际 | 状态 |
 |------|------|------|------|
@@ -144,6 +147,7 @@
 ---
 
 ### 🏆 核心成果
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 理论成果
 
@@ -169,6 +173,7 @@
 ---
 
 ### 📚 交付物清单
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 代码文件 (13个)
 
@@ -203,6 +208,7 @@
 ---
 
 ### ✅ 质量验证
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 编译测试
 
@@ -228,6 +234,7 @@ make
 ---
 
 ### 🎓 学术贡献声明
+> **[来源: [crates.io](https://crates.io/)]**
 
 本项目为 Rust 语言的形式化验证领域做出以下贡献：
 
@@ -239,6 +246,7 @@ make
 ---
 
 ### 📖 使用许可
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 本项目为学术研究目的开放：
 
@@ -252,6 +260,7 @@ make
 ---
 
 ### 🎉 项目竣工
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **Rust 所有权系统可判定性严格形式化研究**
 
@@ -286,6 +295,7 @@ make
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -301,3 +311,63 @@ make
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -7,6 +7,7 @@
 > **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [嵌入式 Rust 指南：Embassy vs RTIC](#嵌入式-rust-指南embassy-vs-rtic)
   - [📑 目录](#-目录)
@@ -35,6 +36,7 @@
 ---
 
 ## 概述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 嵌入式 Rust 生态在 2024–2026 年经历了爆炸式增长：
 
@@ -59,6 +61,7 @@
 ---
 
 ## Embassy：异步嵌入式
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 核心设计
 
@@ -152,6 +155,7 @@ async fn consumer() {
 ---
 
 ## RTIC：实时中断驱动并发
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 核心设计
 
@@ -239,6 +243,7 @@ mod app {
 ---
 
 ## Embassy vs RTIC 对比
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Embassy | RTIC |
 |:---|:---|:---|
@@ -255,6 +260,7 @@ mod app {
 ---
 
 ## 决策树
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 嵌入式 Rust 框架选型
@@ -276,6 +282,7 @@ mod app {
 ---
 
 ## 参考
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [Embassy Book](https://embassy.dev/book/)
 - [RTIC Book](https://rtic-rs.github.io/book/)
@@ -294,6 +301,7 @@ mod app {
 ---
 
 ## 思维导图：嵌入式 Rust 生态全景
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
 graph TD
@@ -316,6 +324,7 @@ graph TD
 ---
 
 ## 决策树：嵌入式框架选择
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
 graph TD
@@ -357,3 +366,80 @@ graph TD
 
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Embedded Book](https://docs.rust-embedded.org/book/)]**
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

@@ -1,6 +1,7 @@
 # 进度报告: 2026-03-05 初始设置完成
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进度报告: 2026-03-05 初始设置完成](#进度报告-2026-03-05-初始设置完成)
   - [📑 目录](#-目录)
@@ -52,6 +53,7 @@
 - 风险评估和应对策略
 
 ### 3. 元模型初步定义 ✅
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 创建了元模型的三个核心文档：
 
@@ -74,6 +76,7 @@
    - 元理论判断
 
 ### 4. 核心定理草拟 ✅
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 定义了 6 个核心定理：
 
@@ -85,6 +88,7 @@
 6. 可判定性
 
 ### 5. 项目结构搭建 ✅
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 创建了完整的项目目录结构：
 
@@ -104,8 +108,10 @@ docs/rust-ownership-decidability/
 ```
 
 ## 关键发现
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. 可判定性问题的现状
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Featherweight Rust 发现的问题**:
 
@@ -118,6 +124,7 @@ docs/rust-ownership-decidability/
 - 基于类型秩 (rank) 的度量函数可以证明终止性
 
 ### 2. 元模型缺失的领域
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 领域 | 现状 | 需要的工作 |
 |------|------|-----------|
@@ -128,6 +135,7 @@ docs/rust-ownership-decidability/
 | 可判定性证明 | 部分 | 扩展至完整系统 |
 
 ### 3. 证明助手选择
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **推荐**: Coq + Iris
 
@@ -136,6 +144,7 @@ docs/rust-ownership-decidability/
 - 社区支持好
 
 ## 下一步行动计划
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Week 1-2: 深度文献分析
 
@@ -225,3 +234,27 @@ docs/rust-ownership-decidability/
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

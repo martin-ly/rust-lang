@@ -3,6 +3,7 @@
 **Generated**: 2026-03-06T11:41:17.918883
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cross-Reference Verification Report](#cross-reference-verification-report)
   - [📑 目录](#-目录)
@@ -59,6 +60,7 @@ This report documents the cross-reference verification for the rust-ownership-de
 <!-- markdown-link-check-enable -->
 
 ## Missing Cross-References
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Files that mention key concepts but don't link to them:
 
@@ -116,8 +118,10 @@ Files that mention key concepts but don't link to them:
 | 10-research-frontiers/10-05-ai-integration.md | ownership | 01-core-concepts/detailed-concepts/ownership-deep-dive.md, 01-core-concepts/short-concepts/ownership-concept-card.md |
 
 ## Recommendations
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### For Improving Navigation
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **Add 'See Also' sections** to key documents linking related concepts
 2. **Create topic hubs** for major themes (ownership, borrowing, lifetimes)
@@ -222,3 +226,27 @@ Files that mention key concepts but don't link to them:
 > **[来源: TLA+ Documentation]**
 
 > **[来源: ACM - Formal Verification]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

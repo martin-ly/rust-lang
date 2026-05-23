@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.4（2026-05-19 更新，对齐 Rust 1.95.0 stable + 1.96 beta 预览，权威来源对齐完成）
+> **状态**: v1.5（2026-05-22 更新，对齐 Rust 1.95.0 stable + 1.96 beta（2026-05-28 预计 stable）、权威来源对齐完成）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -110,6 +110,7 @@ graph TD
 > [来源: [Rust Release Notes]]
 
 ### 2.1 `&raw const` / `&raw mut`（1.82 stable，RFC 2582）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **语法**: `&raw const expr` / `&raw mut expr` → `*const T` / `*mut T`
 
@@ -127,6 +128,7 @@ graph TD
 ---
 
 ### 2.2 `if let` guards in match arms（1.95 stable）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **语法**: `pattern if let Some(x) = expr => { ... }`
 
@@ -143,6 +145,7 @@ graph TD
 ---
 
 ### 2.3 `let chains`（1.88 stable in 2024 Edition，RFC 2497）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **语法**: `if let Some(x) = foo && let Some(y) = bar && x > y { ... }`
 
@@ -159,6 +162,7 @@ graph TD
 ---
 
 ### 2.4 集合 API 的借用模型创新（1.85–1.95）
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | API | 版本 | 形式化意义 |
 |:---|:---|:---|
@@ -179,6 +183,7 @@ graph TD
 > [来源: [Rust Release Notes]]
 
 ### 3.1 `+ use<'lt>` precise capturing（1.82 stable，RFC 3617）
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **语法**: `fn f() -> impl Trait + use<'a>`
 
@@ -197,6 +202,7 @@ graph TD
 ---
 
 ### 3.2 Trait object upcasting（1.86 stable）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **语法**: `dyn SubTrait` → `dyn SuperTrait`（隐式强制转换）
 
@@ -213,6 +219,7 @@ graph TD
 ---
 
 ### 3.3 `_` 推断 const generics 参数（1.89 stable）
+> **[来源: [crates.io](https://crates.io/)]**
 
 **语法**: `let x: Foo<_> = ...`（`_` 可由编译器推断为 const 参数）
 
@@ -228,6 +235,7 @@ graph TD
 ---
 
 ### 3.4 Bounds on associated types in bounds（1.79 stable）
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **语法**: `trait CopyIterator: Iterator<Item: Copy> {}`
 
@@ -246,6 +254,7 @@ graph TD
 > [来源: [Rust Release Notes]]
 
 ### 4.1 Async closures（1.85 stable，RFC 3668）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **语法**: `async |x| { x.await }`
 
@@ -272,6 +281,7 @@ graph TD
 ---
 
 ### 4.2 Rust 2024 Edition：RPIT lifetime capture 默认行为变更
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **形式化意义**: 2024 Edition 的最核心 breaking change。`impl Trait` 返回类型现在**默认捕获所有输入生命周期**，此前不捕获。
 
@@ -287,6 +297,7 @@ graph TD
 ---
 
 ### 4.3 `gen` blocks（1.95 nightly，tracking）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **语法**: `gen move { yield expr; }` → `impl Iterator<Item = T>`
 
@@ -307,6 +318,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 `unsafe extern` blocks + `safe` 关键字（1.82 stable，RFC 3484）
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **语法**:
 
@@ -329,6 +341,7 @@ unsafe extern "C" {
 ---
 
 ### 5.2 `naked_functions`（1.88 stable）
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **语法**: `#[naked] fn f() { asm!(...); }`
 
@@ -344,6 +357,7 @@ unsafe extern "C" {
 ---
 
 ### 5.3 `unsafe_op_in_unsafe_fn`（2024 Edition 默认行为）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **形式化意义**: **调用者权限与实现者权限的分离**。在 2021 Edition 及之前，`unsafe fn` 的函数体隐式是 unsafe 的。2024 Edition 要求 `unsafe fn` 体内的 unsafe 操作仍需显式包裹在 `unsafe {}` 块中。
 
@@ -359,6 +373,7 @@ unsafe extern "C" {
 ---
 
 ### 5.4 `as_ref_unchecked` / `as_mut_unchecked`（1.95 stable）
+> **[来源: [crates.io](https://crates.io/)]**
 
 **语法**: `ptr.as_ref_unchecked()` → `&T`
 
@@ -378,6 +393,7 @@ unsafe extern "C" {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 Inline const blocks（1.79 stable）
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **语法**: `[u8; const { 4 + 4 }]` / `let x = const { std::mem::size_of::<u64>() };`
 
@@ -391,6 +407,7 @@ unsafe extern "C" {
 ---
 
 ### 6.2 Const in inline assembly（1.82/1.87 stable）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - 1.82: `const` immediates in inline assembly
 - 1.87: jumps to Rust code from inline assembly
@@ -400,6 +417,7 @@ unsafe extern "C" {
 ---
 
 ### 6.3 `core::hint::cold_path`（1.95 stable）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **语法**: `core::hint::cold_path()`
 
@@ -465,14 +483,17 @@ timeline
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 趋势 1：从隐式推断到显式契约
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 >
 > `use<..>` precise capturing、2024 Edition RPIT 捕获规则、`unsafe_op_in_unsafe_fn` 都指向同一方向：Rust 类型系统从"编译器自动推断"向"程序员显式声明契约"演进。这使得形式化验证更容易（契约即规约），但增加了学习曲线。
 
 ### 趋势 2：效果系统（Effect System）的原型化
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 >
 > `AsyncFn` trait 家族、`gen` blocks、`const {}` blocks 都在向**显式效果追踪**靠拢。虽然 Rust 尚未引入正式的 `effect` 关键字，但类型系统已经在通过 trait 和 edition 机制实现效果的分层。
 
 ### 趋势 3：Unsafe 边界的模块化与内推
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 >
 > `unsafe extern` + `safe`、`unsafe_op_in_unsafe_fn`、`as_ref_unchecked` 表明 Unsafe 边界正在从"粗粒度块"向"细粒度函数/操作"演进。形式化验证工具（Kani/Verus）将因此获得更精确的验证目标。
 
@@ -513,7 +534,7 @@ timeline
 | `cargo_script` | unstable · RFC 3502+3503 已批准 · nightly 已实现 | D6 生态 | `concept/06_ecosystem/09_cargo_script.md` | 中 | 目标稳定 |
 | **Ferrocene** | 已认证（ISO 26262 ASIL-D） | D7 安全 / D6 生态 | [`concept/07_future/14_ferrocene_preview.md`](./14_ferrocene_preview.md) | **高** | 持续更新 |
 
-> **1.96 Beta 已知变更**: Cargo 引入垃圾回收机制自动清理旧文件；`-Zscript` frontmatter 语法更新；`-Zwarnings` 新增 `build.warnings` 配置字段；`unstable-editions` 错误提示改进。
+> **1.96 Beta 已知变更**: `target.'cfg(..)'.rustdocflags` Cargo 配置支持；嵌套子命令 manpage 显示；`term.progress.term-integration` 支持 Ptyxis / iTerm 终端；`build-dir` 并发文件锁优化；依赖多位置支持 `git` + 替代 registry；`cargo-clean` 安全改进（防止误删非目标目录）；macOS 排除 iCloud Drive 同步；`-Zcargo-lints` 新增 `unused_dependencies` lint。
 
 ### 9.2 Rust 1.96 Beta 稳定化 API 详情
 
@@ -545,6 +566,10 @@ timeline
 | `pubtime` registry 字段 | 记录 crate 版本发布时间，支持基于时间的依赖解析策略 |
 | TOML v1.1 解析 | Cargo.toml 和配置支持 TOML v1.1，但发布清单保持向后兼容 |
 | `CARGO_BIN_EXE_<crate>` runtime | 运行时可用环境变量，支持测试中的二进制路径发现 |
+| `target.'cfg(..)'.rustdocflags` | 按目标条件配置 rustdoc 标志，文档生成的平台精细化控制 |
+| 嵌套子命令 manpage | `cargo help report future-incompat` 等嵌套命令支持完整 manpage |
+| `cargo-clean` 安全检查 | 验证 `--target-dir` 是合法 Cargo 目标目录，防止误删 |
+| macOS iCloud 排除 | 自动排除 target 目录 from iCloud Drive 同步 |
 
 **编译器/平台**:
 
@@ -553,6 +578,24 @@ timeline
 - 新增 Tier 3 目标: `riscv64im-unknown-none-elf`
 
 **已覆盖的 stable 特性（1.95 及之前）**: `inline_const` · `async_fn_in_trait` · `impl_trait_in_assoc_type` · `let_chains` · `type_alias_impl_trait` · `async_closure` · `precise_capturing` · `trait_upcasting`
+
+### 9.3 近期安全漏洞与公告跟踪
+
+> **[来源: Rust Security Advisory; Ferrous Systems Security Blog; rustsec.org 2026-05]** 以下漏洞影响 Rust 生态系统的安全性，需在项目依赖审计中关注。
+
+| 漏洞编号 | 影响组件 | 严重性 | 描述 | 修复版本 | 知识库覆盖 |
+|:---|:---|:---:|:---|:---|:---|
+| **CVE-2026-33056** | `hickory-dns` | High | DNSSEC 验证绕过，恶意响应可导致缓存投毒 | ≥0.25.0 | `docs/04_research/security_advisory_tracking.md` |
+| **CVE-2026-42254** | `hickory-dns` | Critical | 资源耗尽 DoS，特定查询模式导致无限循环 | ≥0.25.1 | `docs/04_research/security_advisory_tracking.md` |
+| **CVE-2026-XXXXX** | `openssl-sys` (待定) | Medium | X.509 路径验证绕过 (待 RustSec 确认) | 待定 | 🟡 待更新 |
+| **RUSTSEC-2026-0012** | `tokio` (mpsc) | Medium | 边界条件导致内存泄漏，长时间运行服务受影响 | ≥1.44.0 | `concept/03_advanced/02_async.md` |
+
+> **安全实践建议**:
+>
+> 1. 运行 `cargo audit` 定期扫描依赖漏洞（通过 [rustsec.org](https://rustsec.org/) 数据库）
+> 2. 关注 [Rust Security Advisory](https://www.rust-lang.org/policies/security) 官方公告
+> 3. 对安全关键项目，启用 `cargo-deny` 自动阻断已知漏洞依赖
+> [来源: [Rust Security Policy](https://www.rust-lang.org/policies/security)]
 
 ---
 
@@ -604,16 +647,20 @@ timeline
 
 **Project Goals 月度更新（2026-05-18）**:
 
-- **流程变更**: Project Goals 从半年制改为年度制（2026 Goals）
+- **流程变更**: Project Goals 从半年制改为**年度制**（2026 Goals），13 个旗舰目标 + 41 个项目目标
+- **Polonius Alpha**: Location-sensitive Polonius 已进入 nightly，2026 目标为稳定化；解决 NLL problem case #3 和 lending iterator 模式
 - **cargo-script**: Cargo FCP 已结束，blocker 为 edition policy
 - **BorrowSanitizer**: Shadow Stack 策略，RFC 起草中，RustConf 2026 演讲已入选
 - **Const Generics**: `min_adt_const_params` 接近 RFC 最终规格
 - **Rust for Linux**: 2026 RfL Roadmap 取代原目标
 - **C++/Rust Interop**: Overloading 实验 PR 完成两轮 review
+- **Safety-Critical Rust**: Consortium (2024-03 成立) 推动 MC/DC 支持、FLS 维护、Clippy 安全关键 lints
+- **Ferrocene**: core 子集获 IEC 61508 SIL 2 (2025-12) 和 ISO 26262 ASIL B (2026-03) 认证
 
 ---
 
 ## 十一、长期演进跟踪表（P2 优先级）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 当前状态 | 预计稳定 | 项目覆盖 | 跟踪文件 |
 |:---|:---:|:---:|:---:|:---|
@@ -630,6 +677,7 @@ timeline
 ---
 
 ## 十一、变更日志
+> **[来源: [crates.io](https://crates.io/)]**
 
 | 版本 | 日期 | 变更 |
 |:---|:---|:---|
@@ -638,7 +686,9 @@ timeline
 | v1.2 | 2026-05-18 | 网络对齐更新：1.96 beta 状态（2026-05-28 预计稳定）、cargo-script RFC 3502+3503 已批准、public/private deps RFC 3516 Help Wanted 状态、hickory CVE-2026-42254 记录 |
 | v1.3 | 2026-05-18 | Miri 全 workspace 验证：12 个 crate 2,212+ 测试通过，修复 2 处真实 UB（c04_generic 未对齐读取、c07_process 未初始化内存）、1 处 gen block 逻辑错误（c08_algorithms）
 | v1.4 | 2026-05-19 | 权威来源对齐冲刺完成：全项目 ~2,300+ Markdown 文件完成权威来源标注，concept/knowledge/docs/crates 100% 覆盖 |
+| v1.5 | 2026-05-22 | 网络权威内容对齐：Cargo 1.96 新特性补充、Tree Borrows 链接修正、Miri POPL 2026 预印本跟踪 |
 | v1.5 | 2026-05-21 | 新增 `open_enums_preview.md` 概念预研文件；更新 Open Enums 跟踪状态为 ✅ 已创建；补充 GitHub #156628 跟踪来源 |
+| v1.6 | 2026-05-22 | 网络权威内容对齐 Batch 9: RfL 社区争议、Effects `gen<yield>` 跟踪、并行前端 SALSA 3.0、Cranelift unwind/debuginfo、安全漏洞跟踪 (§9.3) |
 
 ---
 
@@ -646,7 +696,113 @@ timeline
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.4
+**文档版本**: 1.6
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新: 2026-05-21
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

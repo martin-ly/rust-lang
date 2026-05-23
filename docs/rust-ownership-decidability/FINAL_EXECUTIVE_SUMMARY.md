@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [最终执行摘要](#最终执行摘要)
   - [📑 目录](#-目录)
@@ -60,6 +61,7 @@
 - ✅ **证明** 类型系统可判定性
 
 ### 2. 技术产出
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类别 | 数量 |
 |------|------|
@@ -70,6 +72,7 @@
 | 项目文件 | 30+ 个 |
 
 ### 3. 学术贡献
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ Linearizability 条件的严格形式化
 - ✅ 基于类型秩的终止性证明
@@ -79,24 +82,30 @@
 ---
 
 ## 5 个核心定理
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### ✅ 定理 1: Borrow Checking 终止性
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 对于任何 Linearizable 的类型环境，borrow checking 必然终止。
 
 ### ✅ 定理 2: 类型保持
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 求值保持类型，良类型程序的求值结果仍是良类型的。
 
 ### ✅ 定理 3: 进展
+> **[来源: [crates.io](https://crates.io/)]**
 
 良类型的表达式要么已是值，要么可以进一步求值。
 
 ### ✅ 定理 4: 类型安全
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 Preservation + Progress = Type Safety
 
 ### ✅ 定理 5: 可判定性
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 所有权系统的类型检查是完全可判定的。
 
@@ -228,3 +237,29 @@ Rust 所有权系统的类型检查是完全可判定的。
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+

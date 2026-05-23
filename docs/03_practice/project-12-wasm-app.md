@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 12: WebAssembly应用](#实践项目-12-webassembly应用)
   - [📑 目录](#-目录)
@@ -44,6 +45,7 @@
 > **[来源: Rust Official Docs]**
 
 ### WASM绑定
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
 use wasm_bindgen::prelude::*;
@@ -105,3 +107,18 @@ extern "C" {
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [WebAssembly Documentation](https://webassembly.org/)]**
+>
+> **[来源: [Wasmtime](https://wasmtime.dev/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>

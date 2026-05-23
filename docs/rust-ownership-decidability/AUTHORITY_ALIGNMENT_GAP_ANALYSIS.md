@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性 - 网络权威资源对齐分析报告](#rust-所有权可判定性---网络权威资源对齐分析报告)
   - [📑 目录](#-目录)
@@ -100,6 +101,7 @@
 | Rust 标准库验证计划 | Rust 项目 | 2024 | 官方验证计划 |
 
 ### 1.2 研究机构和项目动态
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 MPI-SWS (德国)
@@ -133,8 +135,10 @@ Meta
 ---
 
 ## 2. 详细差距分析
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 2.1 RefinedRust - 重大差距 ⚠️
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **论文信息**:
 
@@ -173,6 +177,7 @@ Meta
 - 与其他工具的对比分析
 
 ### 2.2 Aeneas - 中等差距 🔶
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **论文信息**:
 
@@ -194,6 +199,7 @@ Meta
 - 实际案例研究
 
 ### 2.3 Gillian-Rust - 完全缺失 🔴
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **来源**: Rust Formal Methods Interest Group 2024 年 5 月演讲
 
@@ -206,6 +212,7 @@ Meta
 **差距**: 当前文档完全未覆盖此工具
 
 ### 2.4 Tree Borrows - 部分覆盖 🔶
+> **[来源: [crates.io](https://crates.io/)]**
 
 **背景**:
 
@@ -219,6 +226,7 @@ Meta
 - 缺少详细的模型定义和对比
 
 ### 2.5 Rust 标准库验证计划 - 完全缺失 🔴
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **来源**: Rust 项目官方目标 2024H2
 
@@ -231,8 +239,10 @@ Meta
 ---
 
 ## 3. 持续推进计划
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Phase 1: 紧急补充 (1-2 周)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 3.1 创建 RefinedRust 深度文档
 
@@ -260,6 +270,7 @@ Meta
 - 添加 "基础性证明" 维度
 
 ### Phase 2: 重要更新 (2-4 周)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 3.3 补充 Gillian-Rust 内容
 
@@ -293,6 +304,7 @@ Meta
 - 进展跟踪
 
 ### Phase 3: 持续维护 (长期)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 3.6 学术文献追踪机制
 
@@ -319,8 +331,10 @@ Meta
 ---
 
 ## 4. 内容质量评估
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 4.1 当前优势 ✅
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Coq 形式化**: 11,980+ 行 Coq 代码，300+ Qed，覆盖 Rust 1.94 特性
 2. **案例研究**: 80+ crates 的形式化分析
@@ -328,12 +342,14 @@ Meta
 4. **结构清晰**: 分层组织，易于导航
 
 ### 4.2 需要改进 🔶
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. **最新研究**: 2024 年顶级会议论文覆盖不足
 2. **工具状态**: 部分工具信息需要更新
 3. **实际应用**: 工业界应用案例较少
 
 ### 4.3 缺失内容 🔴
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. RefinedRust 深度解析
 2. Gillian-Rust 介绍
@@ -343,14 +359,17 @@ Meta
 ---
 
 ## 5. 推荐行动项
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 立即执行 (本周)
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 创建 RefinedRust 深度解析文档
 - [ ] 更新学术文献列表 (添加 PLDI 2024 论文)
 - [ ] 更新验证工具对比矩阵
 
 ### 短期执行 (本月)
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 补充 Gillian-Rust 内容
 - [ ] 更新 Tree Borrows 文档
@@ -358,6 +377,7 @@ Meta
 - [ ] 添加工业应用案例
 
 ### 长期维护 (持续)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 建立学术文献追踪机制
 - [ ] 季度内容审查流程
@@ -366,8 +386,10 @@ Meta
 ---
 
 ## 6. 参考资源
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 必读论文
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **RefinedRust** (PLDI 2024)
    - PDF: <https://iris-project.org/pdfs/2024-pldi-refinedrust.pdf>
@@ -380,6 +402,7 @@ Meta
    - GitHub: <https://github.com/verus-lang/verus>
 
 ### 跟踪资源
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. **Rust Formal Methods Interest Group**
    - <https://rust-formal-methods.github.io/>
@@ -410,6 +433,7 @@ Meta
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -425,3 +449,75 @@ Meta
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+

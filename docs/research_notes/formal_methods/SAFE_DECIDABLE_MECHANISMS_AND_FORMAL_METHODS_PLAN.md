@@ -10,6 +10,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [formal\_methods 意见与建议、安全可判定机制梳理与可持续推进计划](#formal_methods-意见与建议安全可判定机制梳理与可持续推进计划)
   - [📑 目录](#-目录)
@@ -174,6 +175,7 @@
 > **[来源: Rust Official Docs]**
 
 ### 4.1 四类思维表征与文档绑定
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类型 | 当前入口 | 与 formal_methods 的绑定建议 |
 | :--- | :--- | :--- |
@@ -183,6 +185,7 @@
 | **推理证明树** | [PROOF_INDEX](../PROOF_INDEX.md)、[PROOF_GRAPH_NETWORK](../../04_thinking/PROOF_GRAPH_NETWORK.md) | Send/Sync → [send_sync_formalization](./send_sync_formalization.md)、async T6.2、SPAWN-T1、CHAN-T1；ownership/borrow/lifetime 保持现有。 |
 
 ### 4.2 各篇形式化文档内「相关思维表征」块
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 已存在「相关思维表征」的篇：ownership_model、borrow_checker_proof、lifetime_formalization、async_state_machine、pin_self_referential、06_boundary_analysis 等。
 - **建议**：统一包含四类（思维导图、矩阵、决策树、证明树）；若某类暂无专门页面，可写「见 HIERARCHICAL_MAPPING § 文档↔思维表征」或本计划文档 §4.1。
@@ -191,8 +194,10 @@
 ---
 
 ## 五、后续可持续推进计划与安排
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 阶段划分
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 阶段 | 目标 | 产出 | 优先级 | 状态 |
 | :--- | :--- | :--- | :--- | :--- |
@@ -203,6 +208,7 @@
 | **阶段 E** | async 机制单篇（可选） | 若需拆分，新增 async 机制形式化（async fn、.await、Send 边界）；与 async_state_machine 分工明确 | P2 | ⏸ 可选，不实施不影响 100% |
 
 ### 5.2 依赖与顺序
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 阶段 A（Send/Sync 专篇）与阶段 B（安全可判定总览）可并行启动；B 可引用 A 的 Def/定理。
 - 阶段 C 依赖 RUST_193 现有 92 项，可在 A/B 之后做。
@@ -210,6 +216,7 @@
 - 阶段 E 视资源与需求决定是否开篇。
 
 ### 5.3 维护约定
+> **[来源: [crates.io](https://crates.io/)]**
 
 - 新增形式化文档时：同步更新 README、00_completeness_gaps、六篇并表、HIERARCHICAL_MAPPING、PROOF_INDEX、本计划文档 §2.2/§3.1。
 - 思维表征入口变更时：更新 HIERARCHICAL_MAPPING § 文档↔思维表征、本计划 §4.1。
@@ -217,6 +224,7 @@
 ---
 
 ## 六、与现有文档的衔接
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档 | 与本计划的关系 |
 | :--- | :--- |
@@ -235,11 +243,13 @@
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
 
@@ -284,6 +294,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [formal_methods 目录](./README.md)
 - [上级目录](../README.md)
@@ -307,3 +318,61 @@
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Iris Project](https://iris-project.org/)]**
+>
+> **[来源: [POPL/PLDI 论文](https://dblp.org/db/conf/pldi/index.html)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

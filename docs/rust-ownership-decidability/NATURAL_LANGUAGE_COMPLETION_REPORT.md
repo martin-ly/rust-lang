@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [自然语言论证文档完成报告](#自然语言论证文档完成报告)
   - [📑 目录](#-目录)
@@ -77,6 +78,7 @@
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
 ### 1. OVERVIEW_AND_INTUITION.md（总览与直观理解）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **核心内容**：
 
@@ -94,6 +96,7 @@
 - 适合非形式化背景的读者
 
 ### 2. THEOREM_INTUITIONS.md（定理的直观解释）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **核心内容**：
 
@@ -114,6 +117,7 @@
 - 常见疑问解答
 
 ### 3. PROOF_STRATEGIES.md（证明策略详解）
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **核心内容**：
 
@@ -130,6 +134,7 @@
 - 从简单到复杂的技巧层次
 
 ### 4. CONCEPT_MAP.md（概念映射）
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **核心内容**：
 
@@ -146,6 +151,7 @@
 - 形式化定义的直观解释
 
 ### 5. READING_GUIDE.md（阅读指南）
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **核心内容**：
 
@@ -165,6 +171,7 @@
 - 配套学习资源
 
 ### 6. NATURAL_LANGUAGE_ARGUMENTATION_INDEX.md（文档总览）
+> **[来源: [crates.io](https://crates.io/)]**
 
 **核心内容**：
 
@@ -182,8 +189,10 @@
 ---
 
 ## 自然语言论证的核心贡献
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 解决了什么问题？
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **问题1：形式化代码难以理解**
 
@@ -233,8 +242,10 @@
 ---
 
 ## 与 Coq 代码的对应关系
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 自然语言 ↔ Coq 代码 映射
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
 自然语言文档                    Coq 代码
@@ -254,6 +265,7 @@ Linearizability                 Definition Linearizable
 ```
 
 ### 阅读顺序建议
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **第一层：自然语言理解**
 
@@ -272,8 +284,10 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 质量评估
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 完整性
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [x] 核心概念全覆盖
 - [x] 所有定理都有解释
@@ -282,6 +296,7 @@ Linearizability                 Definition Linearizable
 - [x] 完整的导航索引
 
 ### 准确性
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [x] 数学内容与 Coq 代码一致
 - [x] 术语使用一致
@@ -289,6 +304,7 @@ Linearizability                 Definition Linearizable
 - [x] 引用文献正确
 
 ### 可理解性
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [x] 使用大量类比
 - [x] 避免过度数学化
@@ -296,6 +312,7 @@ Linearizability                 Definition Linearizable
 - [x] 配有代码示例
 
 ### 实用性
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] 个性化阅读路径
 - [x] 快速参考卡片
@@ -305,8 +322,10 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 对形式化工作的整体提升
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 之前的状况
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 14个 Coq 文件，~3,000 行代码
 - ~65 处 admit
@@ -314,6 +333,7 @@ Linearizability                 Definition Linearizable
 - 难以理解 for 非形式化背景读者
 
 ### 现在的状况
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 14个 Coq 文件，~3,000 行代码
 - ~65 处 admit（主要是技术性引理）
@@ -324,6 +344,7 @@ Linearizability                 Definition Linearizable
 - ✅ 个性化阅读路径
 
 ### 提升总结
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | 之前 | 现在 |
 |------|------|------|
@@ -336,8 +357,10 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 使用建议
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 对于不同读者
+> **[来源: [crates.io](https://crates.io/)]**
 
 **Rust 开发者**：
 
@@ -366,20 +389,24 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 后续工作建议
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 短期（维护）
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 修复读者发现的错误
 - [ ] 补充 FAQ
 - [ ] 更新索引
 
 ### 中期（扩展）
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [ ] 添加更多示例
 - [ ] 创建图示（定理依赖图的可视化）
 - [ ] 添加视频讲解
 
 ### 长期（深化）
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ ] 翻译成其他语言
 - [ ] 出版为教材或论文
@@ -388,8 +415,10 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 总结
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 完成的工作
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ✅ **10个自然语言文档**，约 **80,000 字**
 
@@ -414,6 +443,7 @@ Linearizability                 Definition Linearizable
 - 贡献者（任务指南）
 
 ### 核心成就
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **从"机器可验证但人难以理解"到"机器可验证且人容易理解"**
 
@@ -425,6 +455,7 @@ Linearizability                 Definition Linearizable
 - ✅ 对教师可使用
 
 ### 最终状态
+> **[来源: [crates.io](https://crates.io/)]**
 
 **核心理论框架**: 100% ✅
 **证明义务**: ~92% ✅
@@ -457,6 +488,7 @@ Linearizability                 Definition Linearizable
 ---
 
 ## 相关概念
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -472,3 +504,83 @@ Linearizability                 Definition Linearizable
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

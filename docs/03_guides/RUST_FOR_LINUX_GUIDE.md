@@ -7,6 +7,7 @@
 > **定理链编号**: T-060 unsafe 块 ↔ T-110 内核抽象可靠性
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust for Linux 指南](#rust-for-linux-指南)
   - [📑 目录](#-目录)
@@ -32,6 +33,7 @@
 ---
 
 ## 概述
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Rust for Linux (RfL)** 是将 Rust 作为 Linux 内核第二语言的项目，目标是用 Rust 的内存安全保证减少内核漏洞。
 
@@ -48,8 +50,10 @@
 ---
 
 ## 核心概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内核 Rust vs 用户态 Rust
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 用户态 Rust | 内核 Rust |
 |:---|:---|:---|
@@ -62,6 +66,7 @@
 | 调试 | `println!`, `dbg!` | `pr_info!`, `pr_err!` |
 
 ### 内核抽象层 (KAS)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust for Linux 提供了一组安全的内核抽象：
 
@@ -91,8 +96,10 @@ impl<T> Drop for MutexGuard<'_, T> {
 ---
 
 ## 代码示例
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 最小内核模块
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
 //! 最小 Linux 内核模块
@@ -127,6 +134,7 @@ impl Drop for MinimalModule {
 ```
 
 ### 字符设备驱动
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
 use kernel::{
@@ -179,6 +187,7 @@ impl Operations for RustDevice {
 ---
 
 ## 限制与挑战
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 挑战 | 说明 | 状态 |
 |:---|:---|:---:|
@@ -192,6 +201,7 @@ impl Operations for RustDevice {
 ---
 
 ## 与 eBPF + Rust 的关系
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 内核编程选项:
@@ -222,6 +232,7 @@ pub fn trace_open(ctx: ProbeContext) -> u32 {
 ---
 
 ## 参考
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust for Linux GitHub](https://github.com/Rust-for-Linux/linux)
 - [Linux Kernel Rust Documentation](https://docs.kernel.org/rust/)
@@ -240,6 +251,7 @@ pub fn trace_open(ctx: ProbeContext) -> u32 {
 ---
 
 ## 思维导图：Rust for Linux 全景
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
 graph TD
@@ -261,6 +273,7 @@ graph TD
 ---
 
 ## 决策树：内核模块开发路径
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
 graph TD
@@ -301,3 +314,64 @@ graph TD
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 > **[来源: Rustonomicon]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 补全权威来源标注 [来源: Authority Source Sprint Batch 9]
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

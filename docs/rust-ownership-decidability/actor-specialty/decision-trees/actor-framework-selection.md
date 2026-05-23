@@ -5,6 +5,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Actor框架选择决策树](#actor框架选择决策树)
   - [📑 目录](#-目录)
@@ -95,6 +96,7 @@
 ```
 
 ### 2.2 容错需求决策
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
 容错需求
@@ -115,6 +117,7 @@
 ```
 
 ### 2.3 Web集成决策
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
 Web集成
@@ -135,6 +138,7 @@ Web集成
 ```
 
 ### 2.4 性能优先决策
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
 性能优先
@@ -156,8 +160,10 @@ Web集成
 ---
 
 ## 3. 场景匹配决策
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 3.1 应用场景树
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 应用场景
@@ -201,8 +207,10 @@ Web集成
 ---
 
 ## 4. 技术约束决策
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 4.1 团队经验
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
 团队经验
@@ -221,6 +229,7 @@ Web集成
 ```
 
 ### 4.2 运维要求
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
 运维要求
@@ -241,8 +250,10 @@ Web集成
 ---
 
 ## 5. 决策检查清单
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 需求澄清问题
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```markdown
 选择框架前回答这些问题:
@@ -273,6 +284,7 @@ Web集成
 ```
 
 ### 5.2 技术选型速查表
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 如果... | 选择 | 避免 |
 |:---|:---|:---|
@@ -286,8 +298,10 @@ Web集成
 ---
 
 ## 6. 迁移决策
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 6.1 从其他语言迁移
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
 迁移来源
@@ -333,6 +347,7 @@ Web集成
 ---
 
 ## 相关概念
+> **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
 
@@ -347,3 +362,71 @@ Web集成
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

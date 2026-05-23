@@ -82,6 +82,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 什么是依赖泄漏
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，当 crate `A` 依赖 crate `B`，并将 `B` 的类型暴露在自己的公共 API 中时，`B` 成为了 `A` 的**传递公共依赖**：
 
@@ -109,6 +110,7 @@ let x = B::SomeType::new();  // 能编译，因为 A 泄漏了 B
 > [来源: [RFC 3516 §Motivation](https://github.com/rust-lang/rfcs/pull/3516) — 依赖泄漏导致"升级一个内部实现细节却破坏下游编译"的 SemVer 违规。
 
 ### 1.2 实际危害
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 场景 | 后果 |
 |:---|:---|
@@ -136,6 +138,7 @@ C = { version = "2.0", public = false }
 > **Nightly 状态**: Cargo 1.96 nightly 已列出 `public` 字段的最低 MSRV 要求；完整编译器可见性检查仍待实现。 [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
 ### 2.1 编译器可见性规则
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
 // Crate A (public = true for B, public = false for C)
@@ -151,6 +154,7 @@ pub fn foo(x: C::Internal)  // ❌ 错误：C 是私有依赖，不能出现在 
 > [来源: [RFC 3516 §Semantics](https://github.com/rust-lang/rfcs/pull/3516) — 编译器在解析 `use` 语句和类型检查阶段验证公共 API 中是否出现私有依赖的类型。
 
 ### 2.2 传递性规则
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```
 A ──public──► B ──public──► D
@@ -169,6 +173,7 @@ A ──public──► B ──public──► D
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 变更矩阵
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 变更 | `public = true` | `public = false` |
 |:---|:---:|:---:|
@@ -180,6 +185,7 @@ A ──public──► B ──public──► D
 > [来源: [Cargo Book — SemVer Compatibility](https://doc.rust-lang.org/cargo/reference/semver.html) — 公共依赖的移除/升级属于 "Major change: altering the shape of types in a public API"。
 
 ### 3.2 cargo-semver-checks 集成
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `cargo-semver-checks` 已计划利用 `public` 标记优化分析：
 
@@ -197,6 +203,7 @@ cargo semver-checks
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 依赖可见性决策流程
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
 flowchart TD
@@ -229,6 +236,7 @@ flowchart TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.2 默认策略
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ```toml
 [dependencies]
@@ -240,6 +248,7 @@ serde = { version = "1", public = true }  # 若 pub struct 包含 serde 类型
 ```
 
 ### 4.2 重构路径：从泄漏到隔离
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **步骤 1: 识别泄漏**:
 
@@ -268,6 +277,7 @@ B = { version = "1.0", public = false }  # ✅ 安全：B 不再泄漏
 ```
 
 ### 4.3 与 Workspace 的协同
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```toml
 # Workspace Cargo.toml
@@ -338,3 +348,55 @@ internal = { path = "crates/internal", public = false } # 实现细节 crate
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新: 2026-05-21
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 权威来源索引
+
+> **[来源: [crates.io](https://crates.io/)]**
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

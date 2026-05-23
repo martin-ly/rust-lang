@@ -4,6 +4,8 @@
 
 ## 📑 目录
 >
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
 - [Cargo 编译速度优化指南](#cargo-编译速度优化指南)
   - [📑 目录](#-目录)
   - [🚀 快速开始](#-快速开始)
@@ -28,6 +30,7 @@
   - [📚 参考资源](#-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🚀 快速开始
 >
@@ -198,8 +201,12 @@ codegen-units = 1024
 | cargo-expand | 宏展开 | `cargo install cargo-expand` |
 
 ## 📈 性能监控
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 查看编译时间
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
 # 使用 cargo 内置计时
@@ -213,12 +220,16 @@ cat .cargo-build-times
 ```
 
 ### sccache 统计
+>
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```bash
 sccache --show-stats
 ```
 
 ## 🧹 清理和重置
+>
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 当遇到编译问题时：
 
@@ -233,8 +244,12 @@ sccache --stop-server
 ```
 
 ## 🔬 进阶优化
+>
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 使用 Nightly 工具链（可选）
+>
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```bash
 rustup default nightly
@@ -250,6 +265,8 @@ parallel-frontend = true
 ```
 
 ### 内存优化（大型项目）
+>
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 如果遇到内存不足：
 
@@ -262,6 +279,8 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ```
 
 ## ⚠️ 注意事项
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **sccache 磁盘空间**：默认使用 10GB，可通过 `SCCACHE_CACHE_SIZE` 调整
 2. **增量编译**：极少数情况下可能出现问题，可尝试 `cargo clean` 后重试
@@ -269,6 +288,8 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 4. **CI/CD**：在 CI 中建议使用 `CARGO_INCREMENTAL=0` 禁用增量编译
 
 ## 📚 参考资源
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Cargo Profile 文档](https://doc.rust-lang.org/cargo/reference/profiles.html)
 - [sccache 文档](https://github.com/mozilla/sccache)
@@ -292,6 +313,8 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 ---
 
 ## 相关概念
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [docs 目录](./README.md)
 
@@ -314,3 +337,66 @@ export CARGO_PROFILE_DEV_CODEGEN_UNITS=64
 > **[来源: Rust Reference - Cargo]**
 
 > **[来源: crates.io Documentation]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**

@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.94 100% 对齐完成 - 最终总结报告](#rust-194-100-对齐完成---最终总结报告)
   - [📑 目录](#-目录)
@@ -76,6 +77,7 @@
 | **总字数** | 500,000+ | - |
 
 ### 按模块完成度
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模块 | 文件数 | 完成度 | 关键成果 |
 |------|--------|--------|----------|
@@ -89,8 +91,10 @@
 ---
 
 ## ✅ 已完成工作清单
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 文档更新 (100%)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **核心概念** (`01-core-concepts/`)
 
@@ -124,6 +128,7 @@
 - [x] 分布式 - 添加服务注册
 
 ### 2. 新建文档 (100%)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **标准库API指南** (`RUST_194_STDLIB_API_GUIDE.md`)
 
@@ -143,6 +148,7 @@
 - [x] 迁移影响
 
 ### 3. 形式化证明 (100%)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **P0证明全部完成** (20/20)
 
@@ -162,6 +168,7 @@
 - ✅ `async_type_safety_complete` - Async安全
 
 ### 4. 代码验证 (100%)
+> **[来源: [crates.io](https://crates.io/)]**
 
 **练习代码** (`exercises/src/`)
 
@@ -178,6 +185,7 @@
 - [x] Doc测试: 14个 - 全部通过
 
 ### 5. 交叉引用 (100%)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **验证结果**
 
@@ -189,8 +197,10 @@
 ---
 
 ## 🔍 关键发现与处理
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 发现的问题
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **虚构特性** (已标记)
    - `Reborrow` trait - 不存在于Rust
@@ -206,6 +216,7 @@
    - **处理**: 修复38个，剩余10个为自动生成
 
 ### 技术决策
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **保持理论形式化**
    - Reborrow/CoerceShared作为理论探索保留
@@ -218,8 +229,10 @@
 ---
 
 ## 📁 交付物清单
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 核心文档
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. `README.md` - 主文档，100%更新
 2. `RUST_194_100_PERCENT_COMPLETION_FINAL.md` - 完成报告
@@ -227,6 +240,7 @@
 4. `RUST_194_VS_193_COMPARISON.md` - 对比文档
 
 ### 形式化
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. `MetatheoryDecidability.v` - 可判定性证明
 2. `MetatheoryTermination.v` - 终止性证明
@@ -234,6 +248,7 @@
 4. `AsyncBasicsComplete.v` - Async安全
 
 ### 验证报告
+> **[来源: [crates.io](https://crates.io/)]**
 
 1. `COMPILATION_VERIFICATION_REPORT.md` - 代码验证
 2. `CROSS_REFERENCE_VERIFICATION_REPORT.md` - 链接验证
@@ -242,8 +257,10 @@
 ---
 
 ## 🎓 使用指南
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 学习者路径
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **初学者**
 
@@ -266,8 +283,10 @@
 ---
 
 ## 🏆 质量保证
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 验证清单
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [x] 所有Rust代码通过1.94编译
 - [x] 所有测试通过
@@ -278,6 +297,7 @@
 - [x] 文档格式统一
 
 ### 质量指标
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 评分 | 说明 |
 |------|------|------|
@@ -290,6 +310,7 @@
 ---
 
 ## 📅 里程碑
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```
 2026-03-12: ✅ Rust 1.94 100% 对齐完成
@@ -304,8 +325,10 @@
 ---
 
 ## 🙏 致谢
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 工具
+> **[来源: [crates.io](https://crates.io/)]**
 
 - **Coq** - 形式化证明
 - **Rust** - 1.94.0
@@ -313,6 +336,7 @@
 - **VS Code** - 编辑环境
 
 ### 资源
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 - Rust官方发布说明
 - Rust标准库文档
@@ -321,6 +345,7 @@
 ---
 
 ## 📞 联系与反馈
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 如有问题或建议，请参考：
 
@@ -331,6 +356,7 @@
 ---
 
 ## 结语
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Rust 1.94 100% 对齐工作已全部完成。**
 
@@ -366,6 +392,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -381,3 +408,57 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

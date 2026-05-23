@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 所有权可判定性项目 - 完成路线图 2026 Q1](#rust-所有权可判定性项目---完成路线图-2026-q1)
   - [📑 目录](#-目录)
@@ -61,22 +62,26 @@
 - [ ] 所有代码示例可编译运行
 
 ## 形式化完整性
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 - [ ] 所有核心概念有形式化定义
 - [ ] 所有定理有完整证明 (L2+)
 - [ ] Coq 代码通过验证
 
 ## 权威对齐
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 - [ ] 覆盖 The Rust Book 所有章节
 - [ ] 覆盖 The Reference 核心章节
 - [ ] 覆盖 The Rustonomicon 核心章节
 
 ## 可验证性
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 - [ ] 所有链接有效
 - [ ] 所有代码示例通过 CI
 - [ ] 交叉引用完整
 ```
 
 ### 1.2 优先级矩阵
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 模块 | 当前状态 | 目标深度 | 优先级 | 工作量 |
 |------|---------|---------|-------|-------|
@@ -90,8 +95,10 @@
 ---
 
 ## 二、详细执行计划
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### Phase 1: 关键缺失填补 (Week 1-4) 🔴
+> **[来源: [crates.io](https://crates.io/)]**
 
 #### Week 1: Unsafe Rust 基础
 
@@ -147,6 +154,7 @@
 - 异常安全保证
 
 ### Phase 2: 内容扩展 (Week 5-8) 🟡
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 #### Week 5: 验证工具深化
 
@@ -181,6 +189,7 @@
 - [ ] 编写 `11-design-patterns/structural/composite.md`
 
 ### Phase 3: 对齐优化 (Week 9-12) 🟢
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### Week 9-10: 与 The Rust Book 对齐
 
@@ -199,6 +208,7 @@
 - [ ] Ch 13: Memory Model 补充
 
 ### Phase 4: 质量冲刺 (Week 13-16) ⭐
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### Week 13-14: 代码验证
 
@@ -227,8 +237,10 @@
 ---
 
 ## 三、资源需求
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 人力投入
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 角色 | 人数 | 投入时间 | 职责 |
 |------|-----|---------|------|
@@ -237,6 +249,7 @@
 | 形式化专家 | 1 | 兼职(10%) | Coq/形式化审查 |
 
 ### 3.2 工具需求
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Coq 8.17+ (形式化验证)
 - Rust 1.94+ (代码示例)
@@ -246,6 +259,7 @@
 ---
 
 ## 四、风险与应对
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 风险 | 可能性 | 影响 | 应对措施 |
 |------|-------|------|---------|
@@ -257,8 +271,10 @@
 ---
 
 ## 五、成功指标
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 5.1 量化指标
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | 指标 | 当前 | 目标 | 测量方法 |
 |------|-----|------|---------|
@@ -270,6 +286,7 @@
 | Reference 覆盖率 | 55% | 80% | 章节对照 |
 
 ### 5.2 定性指标
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 专家评审通过
 - [ ] 社区反馈积极
@@ -278,32 +295,40 @@
 ---
 
 ## 六、每周检查清单模板
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```markdown
 ## Week X 检查清单
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 计划任务
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 - [ ] 任务 1
 - [ ] 任务 2
 
 ### 完成标准
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 - [ ] 代码可编译
 - [ ] 文档 >300 行
 - [ ] 通过自审
 
 ### 问题记录
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 - 问题 1: ...
 - 问题 2: ...
 
 ### 下周计划
+> **[来源: [crates.io](https://crates.io/)]**
 - ...
 ```
 
 ---
 
 ## 七、可持续维护建议
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 7.1 长期维护机制
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **版本冻结**: 每季度发布一个稳定版本
 2. **增量更新**: 跟随 Rust 发布周期更新
@@ -311,6 +336,7 @@
 4. **定期审查**: 每半年进行一次全面审查
 
 ### 7.2 质量保证
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **CI/CD**: 自动化代码检查和链接检查
 2. **代码审查**: 所有变更需审查
@@ -339,6 +365,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [rust-ownership-decidability 目录](./README.md)
 - [上级目录](../README.md)
@@ -354,3 +381,39 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+

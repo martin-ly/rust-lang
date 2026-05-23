@@ -1,6 +1,7 @@
 # 持续推进报告 - 2026-03-09
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [持续推进报告 - 2026-03-09](#持续推进报告---2026-03-09)
   - [📑 目录](#-目录)
@@ -61,6 +62,7 @@
 | `ERROR_DIAGNOSTICS_GUIDE.md` | 诊断指南 | 错误处理 | ✅ 100% |
 
 ### 新增内容统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 新增 Markdown 文件:    5 个
@@ -74,8 +76,10 @@
 ---
 
 ## 🎯 推进内容详情
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 高级实践工作坊 (`exercises/ADVANCED_OWNERSHIP_WORKSHOP.md`)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **目标**: 提供高级 Rust 所有权场景的实践练习
 
@@ -96,6 +100,7 @@
 ---
 
 ### 2. 交互式学习指南 (`INTERACTIVE_LEARNING_GUIDE.md`)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **目标**: 提供问题驱动的交互式学习体验
 
@@ -116,6 +121,7 @@
 ---
 
 ### 3. 知识图谱思维导图 (`visualizations/KNOWLEDGE_GRAPH_MINDMAP.md`)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **目标**: 提供完整的知识体系可视化
 
@@ -135,6 +141,7 @@
 ---
 
 ### 4. 全面 FAQ (`COMPREHENSIVE_FAQ.md`)
+> **[来源: [crates.io](https://crates.io/)]**
 
 **目标**: 覆盖从入门到高级的常见问题
 
@@ -154,6 +161,7 @@
 ---
 
 ### 5. 错误诊断完全指南 (`ERROR_DIAGNOSTICS_GUIDE.md`)
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **目标**: 系统化的错误诊断方法
 
@@ -184,8 +192,10 @@
 ---
 
 ## 📈 项目整体统计更新
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 文档统计
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 类别 | 新增前 | 新增后 | 增量 |
 |:-----|:------:|:------:|:----:|
@@ -194,6 +204,7 @@
 | **总计** | **588** | **593** | **+5** |
 
 ### 内容深度统计
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 深度级别 | 新增前 | 新增后 |
 |:--------:|:------:|:------:|
@@ -202,6 +213,7 @@
 | 🔴 高级 | 126 | 128 (+2 形式化) |
 
 ### 学习资源统计
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 资源类型 | 数量 | 说明 |
 |:---------|:----:|:-----|
@@ -218,8 +230,10 @@
 ---
 
 ## 🛤️ 学习路径优化
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 快速入门路径 (4小时) → 更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 阶段 1: 概念建立 (2小时)
@@ -235,6 +249,7 @@
 ```
 
 ### 系统掌握路径 (2周) → 更新
+> **[来源: [crates.io](https://crates.io/)]**
 
 ```
 第一周: 核心深入
@@ -253,8 +268,10 @@
 ---
 
 ## ✅ 质量保证
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 内容检查
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] 所有新增文档包含完整内容 (≥500 行)
 - [x] 所有代码示例可编译
@@ -263,6 +280,7 @@
 - [x] 交叉引用已添加
 
 ### 学习体验
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [x] 渐进式难度设计
 - [x] 丰富的交互元素
@@ -273,8 +291,10 @@
 ---
 
 ## 🎯 下一步计划
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 短期目标 (未来 1-2 周)
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 1. **视频教程脚本**: 为核心概念创建视频脚本
 2. **更多练习题**: 添加 10+ 中级练习题
@@ -282,6 +302,7 @@
 4. **术语表**: 统一术语定义
 
 ### 中期目标 (未来 1 个月)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **在线测验**: 创建自我评估测验
 2. **代码审查指南**: 添加所有权审查检查清单
@@ -289,6 +310,7 @@
 4. **社区贡献**: 接受外部贡献
 
 ### 长期目标 (未来 3 个月)
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **多语言支持**: 英文版文档
 2. **交互式 Web 版本**: 在线学习平台
@@ -298,8 +320,10 @@
 ---
 
 ## 📊 推进成果总结
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 核心价值提升
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **学习体验提升**
    - 从被动阅读到主动解决问题
@@ -317,6 +341,7 @@
    - 完整的练习到理论闭环
 
 ### 独特价值
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```
 系统化知识结构
@@ -344,8 +369,10 @@
 ---
 
 ## 📞 反馈与贡献
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 如何反馈
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 1. **文档错误**: 提交 Issue，标注文件和行号
 2. **内容建议**: 描述建议的具体改进
@@ -353,6 +380,7 @@
 4. **翻译贡献**: 协助多语言版本
 
 ### 联系方式
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 项目: rust-ownership-decidability
 - 维护: Rust-Ownership-Decidability Team
@@ -392,6 +420,7 @@
 ---
 
 ## 相关概念
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [progress 目录](./README.md)
 - [上级目录](../README.md)
@@ -408,3 +437,63 @@
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

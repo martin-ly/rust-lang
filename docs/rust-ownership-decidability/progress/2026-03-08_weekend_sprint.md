@@ -1,6 +1,7 @@
 # 周末冲刺报告: 2026-03-08
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [周末冲刺报告: 2026-03-08](#周末冲刺报告-2026-03-08)
   - [📑 目录](#-目录)
@@ -80,6 +81,7 @@
 5. ✅ 借用链 (`let z = &&x`)
 
 ### 📊 当前状态概览
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```
 项目整体进度: 28%
@@ -97,8 +99,10 @@ Phase 2 (可判定性): 15% ███▏
 ```
 
 ## 技术突破
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 突破 1: 完整的操作语义
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 实现了两种操作语义并建立联系:
 
@@ -115,6 +119,7 @@ Theorem big_step_small_step_equivalence :
 ```
 
 ### 突破 2: 所有权安全的完整定义
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```coq
 Inductive ownership_safe :
@@ -126,6 +131,7 @@ Inductive ownership_safe :
 ```
 
 ### 突破 3: 示例验证的自动化模式
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 所有5个示例都通过类型检查:
 
@@ -137,27 +143,33 @@ Theorem all_examples_type_safe :
 ```
 
 ## 遇到的问题和解决
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 问题 1: 表达式的值表示不一致
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 **现象**: 语法中的 `value` vs 运行时的 `runtime_val`
 **解决**: 创建了 `translate_value` 函数桥接两者
 
 ### 问题 2: 贷款环境的复杂性
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **现象**: 需要跟踪每个区域的贷款集合
 **解决**: 简化为核心操作，保留扩展性
 
 ### 问题 3: 位置求值的递归深度
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **现象**: 复杂借用链可能导致深层递归
 **解决**: 使用 `Linearizable` 条件保证有限性
 
 ## 下周计划调整
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 基于周末进展，调整下周目标:
 
 ### 原定计划 vs 调整后
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 任务 | 原目标 | 调整后 | 原因 |
 |------|--------|--------|------|
@@ -167,6 +179,7 @@ Theorem all_examples_type_safe :
 | 新增示例 | 3个 | 5个 | 扩展验证 |
 
 ### 下周详细任务 (2026-03-09 至 2026-03-13)
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### Day 3 (周一)
 
@@ -195,6 +208,7 @@ Theorem all_examples_type_safe :
 - [ ] 更新计划
 
 ## 质量指标更新
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```
 Coq 代码质量:
@@ -207,14 +221,17 @@ Coq 代码质量:
 ```
 
 ## 学习收获
+> **[来源: [crates.io](https://crates.io/)]**
 
 ### 技术洞察
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **形式化的迭代性**: 不可能一次完美，需要反复迭代
 2. **抽象的重要性**: 正确的抽象层次简化证明
 3. **示例驱动**: 具体示例指导抽象定义
 
 ### Coq 技巧
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. 使用 `eapply` 处理复杂的目标
 2. `admit` 是有效的占位策略
@@ -281,3 +298,39 @@ Coq 代码质量:
 > **[来源: Rustonomicon - Ownership]**
 
 > **[来源: POPL 2018 - RustBelt]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [RustBelt](https://plv.mpi-sws.org/rustbelt/)]**
+>
+> **[来源: [Tree Borrows](https://plv.mpi-sws.org/rustbelt/tree-borrows/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+

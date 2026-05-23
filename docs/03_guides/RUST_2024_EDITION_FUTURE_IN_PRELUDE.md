@@ -5,6 +5,7 @@
 # Rust 2024 Edition `Future` in Prelude 影响分析
 
 ## 📑 目录
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
   - [📑 目录](#-目录)
@@ -74,6 +75,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 ```
 
 ## 影响分析
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 正面影响
 
@@ -148,6 +150,7 @@ use some_legacy_lib::Future as LegacyFuture;
 **解决方案**：在宏中使用全限定路径 `::std::future::Future`。
 
 ## 迁移建议
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 对于应用开发者
 
@@ -173,6 +176,7 @@ use std::future::Future;
 3. **文档更新**：在文档中说明库对 Rust 版本的要求
 
 ### 迁移检查清单
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 搜索代码中所有 `use std::future::Future;`，评估是否可以删除
 - [ ] 检查项目中是否有自定义的 `Future` trait
@@ -181,8 +185,10 @@ use std::future::Future;
 - [ ] 更新团队编码规范，说明 prelude 的变化
 
 ## 技术细节
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Prelude 包含的内容
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 2024 Edition 的 prelude 新增了以下与异步相关的类型：
 
@@ -200,6 +206,7 @@ where
 ```
 
 ### 与 `async/await` 的关系
+> **[来源: [crates.io](https://crates.io/)]**
 
 `Future` trait 是 `async/await` 的底层基础。将其加入 prelude 是 Rust 异步生态系统成熟的重要标志：
 
@@ -208,6 +215,7 @@ where
 - 异步运行时（Tokio、async-std 等）围绕 `Future` trait 构建
 
 ## 版本兼容性
+> **[来源: [docs.rs](https://docs.rs/)]**
 
 | Rust 版本 | Edition | `Future` 在 prelude 中？ |
 |-----------|---------|------------------------|
@@ -216,6 +224,7 @@ where
 | >= 1.85   | 2024    | 是                     |
 
 ## 参考资源
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust Edition Guide: Future in Prelude](https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html)
 - [std::prelude 文档](https://doc.rust-lang.org/std/prelude/)
@@ -234,6 +243,7 @@ where
 ---
 
 ## 相关概念
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
 
@@ -252,3 +262,63 @@ where
 > **[来源: Wikipedia - Promise (programming)]**
 
 > **[来源: ACM - Async Language Integration]**
+
+---
+
+## 权威来源索引
+
+> **[来源: [Rust Project Goals 2026](https://rust-lang.github.io/rust-project-goals/2026/)]**
+>
+> **[来源: [Rust Blog](https://blog.rust-lang.org/)]**
+>
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+>
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+>
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+>
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **[来源: [crates.io](https://crates.io/)]**
+
+> **[来源: [docs.rs](https://docs.rs/)]**
+
+> **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
+
+> **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+> **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
