@@ -49,6 +49,7 @@ fn sum3(a: Result<i32, &'static str>, b: Result<i32, &'static str>) -> Result<i3
 - 对外 API 使用语义明确的错误类型（可结合 `thiserror`）；
 - 小范围 `try` 块提升表达式可读性；
 - 仅在需要时引入 `anyhow`/`eyre` 等动态错误类型。
+
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
