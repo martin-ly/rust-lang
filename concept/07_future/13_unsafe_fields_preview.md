@@ -32,6 +32,7 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：unsafe 块的过度扩张
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 当前 Rust 中，`unsafe` 的粒度是**代码块**（block）。即使只有一行代码需要 unsafe，整个块都被标记为 unsafe：
@@ -68,6 +70,7 @@ unsafe {
 ---
 
 ### 1.2 `unsafe` 字段提案
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -99,6 +102,7 @@ graph TD
 ---
 
 ### 1.3 与现有 unsafe 模型的对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -133,6 +137,7 @@ Rust unsafe 模型的演进层次:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法与语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -169,6 +174,7 @@ impl RawBuffer {
 ---
 
 ### 2.2 不变量契约
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -192,6 +198,7 @@ unsafe 字段的不变量模式:
 ---
 
 ### 2.3 与 Safety Tags 的协同
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -265,6 +272,7 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -290,6 +298,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

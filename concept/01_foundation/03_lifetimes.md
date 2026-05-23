@@ -1,6 +1,8 @@
 # Lifetimes（生命周期）
 
 > **层级**: L1 基础概念
+> **A/S/P 标记**: **S+A** — Structure + Application
+> **双维定位**: C×App — 在复杂场景下正确标注生命周期
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Advanced Generics](../02_intermediate/02_generics.md) · [Async/Await](../03_advanced/02_async.md) · [Pin](../03_advanced/02_async.md)
 > **主要来源**: [TRPL: Ch10.3](https://doc.rust-lang.org/book/ch10-03-lifetime-syntax.html) · [Wikipedia: Region-based memory management] · [Rust Reference: Lifetime elision]

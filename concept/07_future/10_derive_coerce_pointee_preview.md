@@ -32,6 +32,7 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：自定义智能指针的样板代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，自定义智能指针（如 `Rc<T>`、`Box<T>` 的替代实现）需要手动实现 `CoerceUnsized` 和 `DispatchFromDyn` 才能支持**自动类型强制**（如 `SmartPtr<T>` → `SmartPtr<dyn Trait>`）：
@@ -77,6 +79,7 @@ where
 ---
 
 ### 1.2 CoerceUnsized 与 DispatchFromDyn
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -109,6 +112,7 @@ graph TD
 ---
 
 ### 1.3 `#[derive(CoercePointee)]` 方案
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -140,6 +144,7 @@ struct MyBox<T: ?Sized> {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 派生宏的展开逻辑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -167,6 +172,7 @@ struct SmartPtr<T: ?Sized> {
 ---
 
 ### 2.2 约束条件
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 约束 | 说明 | 违反后果 |
@@ -182,6 +188,7 @@ struct SmartPtr<T: ?Sized> {
 ---
 
 ### 2.3 与现有 Trait 的交互
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -248,6 +255,7 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -274,6 +282,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

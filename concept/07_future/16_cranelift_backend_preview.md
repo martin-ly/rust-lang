@@ -32,6 +32,7 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：LLVM 的编译时间瓶颈
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 编译器使用 **LLVM** 作为代码生成后端。LLVM 提供卓越的优化能力，但编译时间长：
@@ -71,6 +73,7 @@ LLVM 后端编译时间分解（典型中型 crate）:
 ---
 
 ### 1.2 Cranelift 的定位与设计哲学
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -104,6 +107,7 @@ graph LR
 ---
 
 ### 1.3 rustc_codegen_cranelift
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -132,6 +136,7 @@ rustc_codegen_cranelift 项目:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 架构对比：LLVM vs Cranelift
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | LLVM | Cranelift | 影响 |
@@ -150,6 +155,7 @@ rustc_codegen_cranelift 项目:
 ---
 
 ### 2.2 优化级别权衡
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -180,6 +186,7 @@ graph TD
 ---
 
 ### 2.3 与并行前端的协同
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -229,6 +236,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -259,6 +267,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

@@ -1,6 +1,8 @@
 # Type System Basics（类型系统 [来源: [Rust Reference — Types](https://doc.rust-lang.org/reference/types.html)]基础）
 
 > **层级**: L1 基础概念
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Und — 理解 ADT 的代数结构
 > **前置概念**: [Ownership](./01_ownership.md)
 > **后置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Algebraic Data Types](../02_intermediate/01_traits.md)
 > **主要来源**: [TRPL: Ch3](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html) · [TRPL: Ch6](https://doc.rust-lang.org/book/ch06-00-enums.html) · [Wikipedia: Type system] · [Rust Reference: Types]

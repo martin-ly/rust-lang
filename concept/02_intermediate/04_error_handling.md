@@ -1,6 +1,8 @@
 # Error Handling（错误处理）
 
 > **层级**: L2 进阶概念
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 实施 Result/Option 传播模式
 > **前置概念**: [Type System Basics](../01_foundation/04_type_system.md) · [Ownership](../01_foundation/01_ownership.md) · [Traits](./01_traits.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)
 > **主要来源**: [TRPL: Ch9](https://doc.rust-lang.org/book/ch09-00-error-handling.html) · [Rust Reference: Errors] · [Wikipedia: Exception handling] · [RFC 243]

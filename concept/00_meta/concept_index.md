@@ -66,6 +66,12 @@
     - [11.4 执行模型同构性（Execution Model Isomorphism）](#114-执行模型同构性execution-model-isomorphism)
     - [11.5 系统设计原则（System Design Principles）](#115-系统设计原则system-design-principles)
     - [11.6 四层全局关系图谱](#116-四层全局关系图谱)
+  - [十二、A/S/P 标记索引与双维认知定位](#十二asp-标记索引与双维认知定位)
+    - [12.1 A/S/P 标记速查](#121-asp-标记速查)
+    - [12.2 Krathwohl 知识维度索引](#122-krathwohl-知识维度索引)
+  - [十三、判定树与失效分析树索引](#十三判定树与失效分析树索引)
+    - [13.1 概念判定森林索引](#131-概念判定森林索引)
+    - [13.2 失效分析树索引](#132-失效分析树索引)
   - [八、TODO](#八todo)
 
 ## 一、索引使用说明 [来源: 倒排索引方法论参照信息检索标准 — Manning, Raghavan & Schütze, *Introduction to Information Retrieval* (Cambridge, 2008); 语义链接网络参照 Knowledge Graph 构建方法论]
@@ -628,6 +634,63 @@
 
 ---
 
+## 十二、A/S/P 标记索引与双维认知定位
+>
+> [来源: `cognitive_dimension_matrix.md` · `asp_marking_guide.md`]
+
+### 12.1 A/S/P 标记速查
+
+| 标记 | 含义 | 可自动化 | 核心概念文件数 | 快速识别 |
+|:---:|:---|:---:|:---:|:---|
+| **A** | Application — 语法/API/标准结构 | 🟢 高 | 2 | 速查表、文档、模板 |
+| **S** | Structure — 心智模型/解释推理 | 🟡 中 | 22 | 类比、可视化、反例 |
+| **P** | Procedure — 策略/决策/验证 | 🔴 低 | 2 | 案例、评审、实践 |
+| **A+S** | 应用+结构 | 混合 | 8 | 基础概念应用 |
+| **S+P** | 结构+程序 | 混合 | 19 | 高级设计决策 |
+| **A+S+P** | 全维度 | 混合 | 5 | 领域工程 |
+
+> **学习策略**: A 类可外包给 AI；S 类需刻意练习建立心智模型；P 类需实际项目经验积累。[来源: arxiv 2604.06331v1]
+
+### 12.2 Krathwohl 知识维度索引
+
+| 知识维度 | 主导 Bloom 层级 | 代表概念 | 可自动化 |
+|:---|:---:|:---|:---:|
+| **事实性** | 记忆 → 应用 | 语法、API、关键字 | 🟢 高 |
+| **概念性** | 理解 → 分析 | 所有权、借用、生命周期、Trait | 🟡 中 |
+| **程序性** | 应用 → 创造 | 错误处理设计、并发架构、unsafe 论证 | 🔴 低 |
+| **元认知** | 分析 → 创造 | 学习路径设计、能力自评、验证策略 | 🔴 低 |
+
+---
+
+## 十三、判定树与失效分析树索引
+>
+> [来源: `concept_definition_decision_forest.md` · `fault_tree_analysis_collection.md`]
+
+### 13.1 概念判定森林索引
+
+| 判定树 | 概念文件 | 判定节点数 | 边界条件数 | 失效模式数 |
+|:---|:---|:---:|:---:|:---:|
+| 所有权判定树 | `01_foundation/01_ownership.md` | 3 | 3 | 5 |
+| 借用判定树 | `01_foundation/02_borrowing.md` | 2 | 4 | 4 |
+| 生命周期判定树 | `01_foundation/03_lifetimes.md` | 3 | 4 | 5 |
+| Trait 判定树 | `02_intermediate/01_traits.md` | 4 | 3 | 4 |
+| 泛型判定树 | `02_intermediate/02_generics.md` | 3 | 4 | 4 |
+| 并发判定树 | `03_advanced/01_concurrency.md` | 3 | 4 | 5 |
+| 异步判定树 | `03_advanced/02_async.md` | 4 | 4 | 5 |
+| Unsafe 判定树 | `03_advanced/03_unsafe.md` | 3 | 5 | 6 |
+
+### 13.2 失效分析树索引
+
+| FTA 顶事件 | 中间事件数 | 基本事件数 | 最小割集数 | 风险等级 |
+|:---|:---:|:---:|:---:|:---:|
+| 内存安全失效 | 4 | 7 | 4 | 🔴 高 |
+| 并发安全失效 | 3 | 9 | 5 | 🔴 高 |
+| 类型系统失效 | 4 | 7 | 4 | 🟡 中 |
+| 异步安全失效 | 3 | 6 | 4 | 🟡 中 |
+| Unsafe 契约失效 | 5 | 16 | 4 | 🔴 高 |
+
+---
+
 ## 八、TODO
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
@@ -650,7 +713,7 @@
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.2
+**文档版本**: 1.4
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-22
-**状态**: ✅ Phase 7 五维升华完成
+**最后更新**: 2026-05-23
+**状态**: ✅ 权威来源对齐 Wave 1-6 完成（A/S/P + 双维矩阵 + 判定森林 + FTA + 问题/能力图谱 + 知识图谱本体 + RustBelt 谓词 + 范式转换矩阵）

@@ -32,6 +32,7 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：隐式捕获的生命周期泄漏
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，异步函数和返回 `impl Trait` 的函数**隐式捕获**所有输入生命周期：
@@ -65,6 +67,7 @@ async fn borrow<'a>(x: &'a str) -> &'a str {
 ---
 
 ### 1.2 `use<..>` 精确捕获语法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -94,6 +97,7 @@ graph LR
 ---
 
 ### 1.3 RPITIT 与 AFIT 的上下文
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -123,6 +127,7 @@ RTN 的应用场景:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 语法形式与语义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -146,6 +151,7 @@ use<..> 语法形式:
 ---
 
 ### 2.2 与生命周期省略的对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 场景 | 生命周期省略 | `use<..>` 精确捕获 | 效果 |
@@ -161,6 +167,7 @@ use<..> 语法形式:
 ---
 
 ### 2.3 版本迁移：Edition 2021 → 2024
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -230,6 +237,7 @@ Edition 2024 行为:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -259,6 +267,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

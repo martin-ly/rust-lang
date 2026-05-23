@@ -1,6 +1,8 @@
 # Borrowing（借用 [来源: [TRPL Ch. 4.2](https://doc.rust-lang.org/book/ch04-02-references-and-borrowing.html)]）
 >
 > **层次定位**: L1 基础概念 / 借用子域
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Und — AXM 规则的结构化推理
 > **前置依赖**: [L1 所有权](./01_ownership.md)
 > **后置延伸**: [L2 Trait](../02_intermediate/01_traits.md) · [L4 分离逻辑](../04_formal/01_linear_logic.md) · [L3 并发](../03_advanced/01_concurrency.md)
 > **跨层映射**: L1→L4 借用规则 ↔ 线性逻辑 !A 规则 | L1→L3 借用 → Send/Sync

@@ -1,6 +1,8 @@
 # Trait [来源: [TRPL Ch. 10.2](https://doc.rust-lang.org/book/ch10-02-traits.html)]s（Trait 系统）
 >
 > **层次定位**: L2 进阶概念 / Trait 子域
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Ana — 分析 Orphan Rule 的设计意图
 > **前置依赖**: [L1 类型系统](../01_foundation/04_type_system.md) · [L1 所有权](../01_foundation/01_ownership.md)
 > **后置延伸**: [L3 并发](../03_advanced/01_concurrency.md) · [L4 类型论](../04_formal/02_type_theory.md) · [L6 设计模式](../06_ecosystem/02_patterns.md)
 > **跨层映射**: L2→L4 Trait ↔ 类型类 (Type Class) | L2→L3 Send/Sync Trait

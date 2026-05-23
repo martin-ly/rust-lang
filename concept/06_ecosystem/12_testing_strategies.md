@@ -36,6 +36,7 @@
   - [五、CI/CD 集成](#五cicd-集成)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 测试生态全景
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -81,6 +83,7 @@ graph TD
 ---
 
 ### 1.2 测试金字塔的 Rust 映射
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -124,6 +127,7 @@ Rust 的额外优势:
 ---
 
 ### 1.3 编译期即测试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -162,6 +166,7 @@ fn share(data: Arc<Mutex<Vec<i32>>>) {
 > [来源: [TRPL]]
 
 ### 2.1 内置测试框架
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -218,6 +223,7 @@ fn test_public_api() {
 ---
 
 ### 2.2 属性测试与模糊测试
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -260,6 +266,7 @@ fuzz_target!(|data: &[u8]| {
 ---
 
 ### 2.3 Miri：未定义行为检测
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -321,6 +328,7 @@ Miri 的局限:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -347,6 +355,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

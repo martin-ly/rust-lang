@@ -1,6 +1,8 @@
 # Unsafe Rust
 
 > **层级**: L3 高级概念
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: P×Eva — 评判 unsafe 契约的充分性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [FFI] · [Embedded] · [Custom Allocators]
 > **主要来源**: [TRPL: Ch19.1](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html) · [Rust Reference: Unsafe Rust] · [Rustonomicon](https://doc.rust-lang.org/nomicon/) · [RFC 2585]

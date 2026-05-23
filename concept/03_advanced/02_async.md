@@ -1,6 +1,8 @@
 # Async/Await（异步 [来源: [Async Rust](https://rust-lang.github.io/async-book/)]编程）
 >
 > **层次定位**: L3 高级概念 / 异步子域
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Ana — 分析 Pin 与状态机的交互
 > **前置依赖**: [L2 泛型](../02_intermediate/02_generics.md) · [L2 Trait](../02_intermediate/01_traits.md) · [L1 生命周期](../01_foundation/03_lifetimes.md)
 > **后置延伸**: [L4 异步语义形式化](../04_formal/03_ownership_formal.md) · [L6 Tokio](../06_ecosystem/03_core_crates.md) · [L7 效果系统](../07_future/04_effects_system.md)
 > **跨层映射**: L3→L4 Future [来源: [std::future::Future](https://doc.rust-lang.org/std/future/trait.Future.html)] ↔  continuation monad | L3→L7 async effects → algebraic effects
@@ -104,6 +106,7 @@
     - [13.3 形式化定位](#133-形式化定位)
   - [相关概念链接](#相关概念链接)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
+  - [权威来源索引](#权威来源索引)
 
 ## 〇、认知路径（Cognitive Path）
 >

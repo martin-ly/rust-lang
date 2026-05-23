@@ -45,6 +45,7 @@
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
   - [七、系统设计决策的知识流动图](#七系统设计决策的知识流动图)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -176,6 +177,7 @@ trait Service<Request> {
 - `ServiceBuilder::new().layer(a).layer(b).service(handler)` 是**初始对象到终对象的态射链**。
 
 ### 2.5 分布式一致性：从所有权到共识的隐喻
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **核心隐喻**: Rust 的所有权转移（move）在分布式系统中对应**状态的唯一主节点（single primary）**——任何时刻，数据的所有权只存在于一个节点，避免了分布式系统中的 split-brain 问题。
@@ -257,6 +259,7 @@ impl Worker {
 > [来源: Rust Performance Book, Systems Design Interview, CAP Theorem]
 
 ### 3.1 安全-性能-可维护性帕累托前沿
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -291,6 +294,7 @@ graph LR
 | 形式化验证 (Kani) | ⭐⭐⭐⭐⭐ | ⭐⭐⭐ | ⭐⭐ | 安全关键系统 |
 
 ### 3.2 场景驱动的设计选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 推荐架构 | Rust 生态 | 关键原则 |
@@ -383,6 +387,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 设计原则依赖图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -404,6 +409,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 系统架构决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -435,6 +441,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 定理一致性矩阵（系统设计专集）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
@@ -454,6 +461,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
@@ -467,6 +475,7 @@ graph TD
 | 容错设计 | Result / panic | 错误处理 | 并发容错 | 进程代数 | vs Erlang OTP | Actor 框架 | 混沌工程 |
 
 ### 相关概念文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [L7 形式化方法工业化](../07_future/02_formal_methods.md) —— 五层形式化扩展的详细展开

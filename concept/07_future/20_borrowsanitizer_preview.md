@@ -32,6 +32,7 @@
   - [五、演进路线与预测](#五演进路线与预测)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题定义：编译期检查的边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的所有权系统通过**编译期检查**消除数据竞争和内存安全问题：
@@ -66,6 +68,7 @@ fn main() {
 ---
 
 ### 1.2 Miri：解释执行的 UB 检测
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Miri 是 Rust 的 MIR（Mid-level IR）解释器，通过**逐条指令解释执行**检测未定义行为：
@@ -88,6 +91,7 @@ Miri 检测的 UB 类别:
 ---
 
 ### 1.3 BorrowSanitizer 的设计目标
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 BorrowSanitizer 旨在填补编译期检查与 Miri 之间的空白：
@@ -115,6 +119,7 @@ graph LR
 ---
 
 ### 1.4 Shadow Stack 与 Lock-and-Key 策略
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 BorrowSanitizer 的核心机制是 **Shadow Stack**（影子栈）配合 **Lock-and-Key**（锁钥）运行时检测：
@@ -177,6 +182,7 @@ Miri 使用 tracing GC（stop-the-world 扫描所有可达 provenance）。Borro
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 借用标签的生命周期
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 BorrowSanitizer 的 Shadow Stack 是 Tree Borrows 模型的**运行时实现**：
@@ -198,6 +204,7 @@ Tree Borrows 核心规则（简化）:
 ---
 
 ### 3.2 从 Tree Borrows 到运行时检测
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -230,6 +237,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -256,6 +264,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

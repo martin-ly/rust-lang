@@ -32,6 +32,7 @@
   - [五、演进路线](#五演进路线)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 安全关键软件的认证挑战
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 安全关键系统（汽车 ECU、航空飞控、医疗设备）要求软件通过严格的**功能安全认证**：
@@ -68,6 +70,7 @@
 ---
 
 ### 1.2 Ferrocene 的定位
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -102,6 +105,7 @@ graph TD
 ---
 
 ### 1.3 认证范围与限制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -131,6 +135,7 @@ Ferrocene 的认证范围（当前）:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 认证工具链的构成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 组件 | 上游来源 | 认证状态 | 说明 |
@@ -149,6 +154,7 @@ Ferrocene 的认证范围（当前）:
 ---
 
 ### 2.2 与上游 Rust 的关系
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -179,6 +185,7 @@ graph LR
 ---
 
 ### 2.3 证据包与审计追踪
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -232,6 +239,7 @@ Ferrocene 证据包构成:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -262,6 +270,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

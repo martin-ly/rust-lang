@@ -42,16 +42,19 @@ $entry
 > **学习递进**: 从"Wasm 是什么"的直觉，深入到"Component Model 如何用能力安全模型替代传统系统调用"的形式化理解。
 
 ### 第 1 步：为什么需要 WASI？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WebAssembly 最初为浏览器设计，但**沙箱化**使其成为服务端和嵌入式的理想目标——前提是有安全的系统接口。WASI 提供了这个接口，且核心设计原则是**能力安全（Capability Security）**：程序只能访问显式被授予的能力。
 
 ### 第 2 步：Component Model 与传统 Wasm 模块有何不同？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 传统 Wasm 模块是**扁平的**——导入/导出通过低级的整数索引。Component Model 引入了**接口类型（Interface Types）**、**世界（World）**和**组件组合**——将 Wasm 从汇编级抽象提升到软件组件级抽象。
 
 ### 第 3 步：Rust 在 Wasm 生态中的独特地位？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust 的 `wasm32-unknown-unknown` 和 `wasm32-wasi` 目标使 Rust 成为 Wasm 生态的**首选语言**。`cargo` 与 `wasm-pack`/`wit-bindgen` 的集成，以及 Rust 的零成本抽象，使其在 Wasm 运行时性能上具有显著优势。
@@ -120,6 +123,7 @@ graph TD
 > [来源: [WASI Spec]]
 
 ### 3.1 WASI 的三层架构
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -177,6 +181,7 @@ let dir_cap = preopen_dir("/sandbox/data")?;
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 能力传递时序图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -207,6 +212,7 @@ sequenceDiagram
 > [来源: [WASI Spec]]
 
 ### 4.2 WIT（Wasm Interface Types）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 WIT 是 Component Model 的接口定义语言（IDL），用于描述组件间的契约：
@@ -261,6 +267,7 @@ fn calc(input: CalcInput) -> Result<i32, String> {
 **类型安全保证**: WIT 的 `result<T, E>` 映射到 Rust 的 `Result<T, String>`，编译器强制处理错误分支——跨组件边界保持了 Rust 的类型安全承诺。[来源: wit-bindgen Docs] ✅
 
 ### 4.3 世界（World）与组件组合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -284,6 +291,7 @@ World = 导入接口集 + 导出接口集
 > [来源: [WASI Spec]]
 
 ### 5.1 `no_std` + `wasm32` 的约束与模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 Rust 的 `wasm32-wasi` 目标默认使用 `no_std` + `alloc`：
@@ -310,6 +318,7 @@ use wasi::cli::stdout::OutputStream;
 | Rust 生态 | `wasm-bindgen` | `wit-bindgen` + `cargo component` |
 
 ### 5.2 错误处理跨边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 WIT 的 `result` 类型与 Rust 的 `Result` 的映射确保了错误不会静默丢失：

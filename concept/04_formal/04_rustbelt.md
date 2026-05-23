@@ -1,6 +1,8 @@
 # RustBelt & Verification Toolchain（RustBelt 与验证工具链）
 >
 > **层次定位**: L4 形式化理论 / RustBelt 子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价安全性定理的假设边界
 > **前置依赖**: [L4 所有权形式化](./03_ownership_formal.md) · [L4 类型论](./02_type_theory.md) · [L4 线性逻辑](./01_linear_logic.md)
 > **后置延伸**: [L7 形式化方法](../07_future/02_formal_methods.md) · [L6 验证工具](../06_ecosystem/01_toolchain.md)
 > **跨层映射**: L4→L7 机械证明 → 自动化验证 | L4→L6 逻辑规则 → 工具实现

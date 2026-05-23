@@ -40,6 +40,7 @@
   - [六、演进路线与预测](#六演进路线与预测)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -50,6 +51,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 封闭枚举（Closed Enums）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 默认枚举是**封闭的**——定义后变体集合固定：
@@ -77,6 +79,7 @@ fn handle(status: HttpStatus) {
 ---
 
 ### 1.2 `#[non_exhaustive]`：兼容性层面的开放
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 Rust 1.40 引入 `#[non_exhaustive]`，在**不改变运行时语义**的前提下，向外部 crate 隐藏枚举的"完整性"：
@@ -119,6 +122,7 @@ fn handle_error(kind: ErrorKind) {
 ---
 
 ### 1.3 开放枚举（Open Enums）的设计空间
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 真正的"开放枚举"允许**运行时扩展**变体集合，这是 Rust 当前未支持的特性：
@@ -158,6 +162,7 @@ extend enum Event {
 > [来源: [RFC]]
 
 ### 2.1 编译期影响：穷尽性检查的弱化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -187,6 +192,7 @@ flowchart TD
 ---
 
 ### 2.2 运行时语义：无变化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -205,6 +211,7 @@ pub enum Color { Red, Green, Blue }
 ---
 
 ### 2.3 与模式匹配的交互
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -250,6 +257,7 @@ fn process_external(r: Response) -> String {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 Scala：Sealed Traits + 子类
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```scala
@@ -271,6 +279,7 @@ final case class Key(c: Char) extends Event
 ---
 
 ### 3.2 Haskell：Open Data Types
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```haskell
@@ -291,6 +300,7 @@ data AnyEvent = forall e. EventClass e => AnyEvent e
 ---
 
 ### 3.3 OCaml：Polymorphic Variants
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```ocaml
@@ -312,6 +322,7 @@ let handle_extended = function
 ---
 
 ### 3.4 Rust 当前方案：`#[non_exhaustive]` + 新变体
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -340,6 +351,7 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 错误码枚举
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -374,6 +386,7 @@ impl std::error::Error for DatabaseError {
 ---
 
 ### 4.2 事件/消息类型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -393,6 +406,7 @@ trait EventHandler {
 ---
 
 ### 4.3 配置/选项枚举
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -415,6 +429,7 @@ pub enum LogLevel {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -444,6 +459,7 @@ graph TD
 ---
 
 ### 5.2 边界极限
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust

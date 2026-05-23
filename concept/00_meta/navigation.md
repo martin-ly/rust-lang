@@ -15,13 +15,16 @@
 | 指标 | 数值 | 状态 |
 |:---|:---|:---:|
 | 核心概念文件 | 58 | ✅ |
-| 总文件数 | 76 | ✅ |
-| 总行数 | 62,278 | ✅ |
-| 来源标注 | 1,235 | ✅ |
-| Mermaid 图表 | 313（17 种类型） | ✅ |
+| 总文件数 | **81** | ✅ |
+| 总行数 | ~75,000 | ✅ |
+| 来源标注 | ~1,350 | ✅ |
+| Mermaid 图表 | **332（20 种类型）** | ✅ |
 | 代码块编译 | 226/226 通过 | ✅ |
 | 死链接 | 0 | ✅ |
 | 概念一致性 | 0 错误 / 0 警告 | ✅ |
+| A/S/P 标记覆盖 | 58/58（100%） | ✅ |
+| 判定树覆盖 | 8 棵（L1-L4） | ✅ |
+| FTA 覆盖 | 5 棵（五大顶事件） | ✅ |
 
 ---
 
@@ -48,6 +51,16 @@
 | [semantic_expressiveness](semantic_expressiveness.md) | 表达力七维光谱：控制/数据/类型/并发/内存/抽象/安全 | 2 |
 | [decidability_spectrum](decidability_spectrum.md) | 可判定性谱系：9 层判定边界 + Rice 定理 | 6 |
 | [expressiveness_multiview](expressiveness_multiview.md) | 表达力七视角：类型/控制/内存/并发/抽象/安全/模块 | 7 |
+| [cognitive_dimension_matrix](cognitive_dimension_matrix.md) | 双维认知矩阵：Krathwohl × Bloom 全局映射 | 1 |
+| [asp_marking_guide](asp_marking_guide.md) | A/S/P 三维标记规范：认知自动化边界 | 2 |
+| [concept_definition_decision_forest](concept_definition_decision_forest.md) | 概念判定森林：8 棵判定树（定义→前提→规则→判定） | 10 |
+| [fault_tree_analysis_collection](fault_tree_analysis_collection.md) | 失效分析树集：5 棵标准 FTA（IEC 61025） | 5 |
+| [quality_dashboard_v2](quality_dashboard_v2.md) | 思维表征覆盖率仪表板：332 图表 / 20 种类型 | 1 |
+| [problem_graph](problem_graph.md) | 问题图谱：六大系统级问题分解树（全局→概念→方法） | 6 |
+| [competency_graph](competency_graph.md) | 能力图谱：六维雷达 + Dreyfus 映射 + 自评工具 | 3 |
+| [kg_ontology](kg_ontology.md) | 知识图谱本体：8 实体类型 + 8 关系类型 + RDF/OWL 格式 | 2 |
+| [rustbelt_predicate_map](rustbelt_predicate_map.md) | RustBelt 谓词映射：own/shr/生命周期令牌 L4→L1 可视化 | 4 |
+| [paradigm_transition_matrix](paradigm_transition_matrix.md) | 范式转换矩阵：C++/Java/Go/Python → Rust 模式映射 | 3 |
 | [audit_checklist](audit_checklist.md) | 质量门禁：跨文件一致性检查清单 | 1 |
 
 ### L1 基础概念层 — 所有权、借用、生命周期、类型系统

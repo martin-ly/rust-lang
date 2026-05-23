@@ -32,6 +32,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 rustdoc：编译器集成的文档生成器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -82,6 +84,7 @@ graph LR
 ---
 
 ### 1.2 文档测试（Doc Tests）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -121,6 +124,7 @@ graph LR
 ---
 
 ### 1.3 文档作为类型系统的一部分
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -164,6 +168,7 @@ Rust 文档文化的独特性:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 文档注释语法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -205,6 +210,7 @@ pub fn documented() {}
 ---
 
 ### 2.2 Intra-doc Links
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -232,6 +238,7 @@ pub fn demo() {}
 ---
 
 ### 2.3 mdBook 与知识体系站点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -346,6 +353,7 @@ API 文档规范（RFC 1574 推荐）:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -370,6 +378,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

@@ -1,6 +1,8 @@
 # Ownership Formalization（所有权形式化）
 >
 > **层次定位**: L4 形式化理论 / 所有权形式化子域 [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价形式化模型的完备性
 > **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L4 线性逻辑](./01_linear_logic.md)
 > **后置延伸**: [L4 RustBelt](./04_rustbelt.md) · [L7 形式化方法](../07_future/02_formal_methods.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L4↔L1 形式化 ↔ 直觉 双射 | L4→L3 Unsafe 边界 ↔ 公理扩展

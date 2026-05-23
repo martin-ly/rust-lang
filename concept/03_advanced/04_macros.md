@@ -1,6 +1,8 @@
 # Macros（宏系统）
 
 > **层级**: L3 高级概念
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: P×Cre — 设计元编程抽象
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [DSL Construction] · [Meta-programming]
 > **主要来源**: [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html) · [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/) · [Rust Reference: Macros]

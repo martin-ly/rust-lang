@@ -1,6 +1,8 @@
 # Ownership（所有权 [来源: [TRPL Ch. 4](https://doc.rust-lang.org/book/ch04-01-what-is-ownership.html)]）
 >
 > **层次定位**: L1 基础概念 / 所有权子域
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Und — 建立所有权唯一性心智模型
 > **前置依赖**: 无（L1 入口概念）
 > **后置延伸**: [L2 泛型](../02_intermediate/02_generics.md) · [L4 所有权形式化](../04_formal/03_ownership_formal.md) · [L3 Unsafe](../03_advanced/03_unsafe.md)
 > **跨层映射**: L1→L4 形式化嵌入 | L1→L3 工程扩展

@@ -1,6 +1,8 @@
 # Concurrency（并发 [来源: [TRPL Ch. 16](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]模型）
 >
 > **层次定位**: L3 高级概念 / 并发子域
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价并发设计的安全性
 > **前置依赖**: [L1 所有权](../01_foundation/01_ownership.md) · [L1 借用](../01_foundation/02_borrowing.md) · [L2 Trait](../02_intermediate/01_traits.md)
 > **后置延伸**: [L4 RustBelt](../04_formal/04_rustbelt.md) · [L6 Tokio 生态](../06_ecosystem/03_core_crates.md) · [L7 AI 并发](../07_future/01_ai_integration.md)
 > **跨层映射**: L3→L4 Send/Sync ↔ 分离逻辑资源分片 | L3→L6 并发模式 → 工程实现
@@ -82,6 +84,7 @@
       - [反命题 3: "Arc 替代所有所有权共享"](#反命题-3-arc-替代所有所有权共享)
       - [反命题 4: "Atomic 操作总是线程安全的"](#反命题-4-atomic-操作总是线程安全的)
       - [反命题 5: "Mutex 保证临界区内指令不被重排"](#反命题-5-mutex-保证临界区内指令不被重排)
+  - [权威来源索引](#权威来源索引)
 
 ## 零、认知路径（Cognitive Path）
 >

@@ -1,6 +1,8 @@
 # Linear Logic & Affine Logic（线性逻辑 [来源: [Wikipedia — Linear Logic](https://en.wikipedia.org/wiki/Linear_logic)]与仿射逻辑）
 
 > **层级**: L4 形式化理论
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Ana — 分析线性逻辑到 Rust 的映射
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TAPL — Pierce 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)]
 > **后置概念**: [Ownership Formalization](./03_ownership_formal.md) · [RustBelt](./04_rustbelt.md)
 > **主要来源**: [Wikipedia: Linear logic] · [Wikipedia: Affine logic] · [Girard 1987] · [Pierce 2002, TAPL §15] · [RustBelt: POPL 2018] · [Utrecht: Ownership Types]

@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 问题：同步 Drop 与异步资源的冲突
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -85,6 +87,7 @@
 ---
 
 ### 1.2 AsyncDrop Trait 设计
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -125,6 +128,7 @@ AsyncDrop 的提案设计（RFC 3308，简化版）:
 ---
 
 ### 1.3 与 Pin 的交互
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -162,6 +166,7 @@ AsyncDrop 与 Pin 的复杂关系:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 当前 Workaround 模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -219,6 +224,7 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 ---
 
 ### 2.2 AsyncDrop 的实现挑战
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -254,6 +260,7 @@ impl<T: AsyncClose> Drop for CloseOnDrop<T> {
 ---
 
 ### 2.3 与 Drop 的兼容性
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -326,6 +333,7 @@ Panic 中的资源清理:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -351,6 +359,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text

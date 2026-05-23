@@ -37,6 +37,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -47,6 +48,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 的内置测试框架
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -83,6 +85,7 @@ Rust 测试的三种内置形式:
 ---
 
 ### 1.2 测试组织层次
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -120,6 +123,7 @@ graph TD
 ---
 
 ### 1.3 编译即验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -158,6 +162,7 @@ Rust 类型系统作为验证工具:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 属性测试（Property-Based Testing）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -198,6 +203,7 @@ proptest! {
 ---
 
 ### 2.2 Mock 与依赖注入
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -240,6 +246,7 @@ fn test_user_service() {
 ---
 
 ### 2.3 模糊测试（Fuzzing）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -324,6 +331,7 @@ unsafe 代码验证:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -348,6 +356,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
