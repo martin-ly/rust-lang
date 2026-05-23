@@ -189,7 +189,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 单元测试详解
 
 pub struct Calculator;

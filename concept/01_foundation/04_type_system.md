@@ -1106,7 +1106,7 @@ let s = infallible_op()?;  // ? 不会返回，因为 Err(!) 无法构造
 
 #### ZST 的类型论意义
 
-```rust,ignore
+```rust
 // ✅ 所有 ZST 在运行时占 0 字节
 struct Unit;           // 单元结构体
 enum Void {}          // 空枚举（无变体）
@@ -1173,7 +1173,7 @@ struct Invariant<T>(PhantomData<*mut T>);    // T 不变
 
 **定义**：Const Generics 允许类型参数中包含**编译期常量值**（如 `N: usize`），使数组长度等值成为类型系统的一部分：
 
-```rust,ignore
+```rust
 // ✅ Const Generics：数组长度作为类型参数
 struct Array<T, const N: usize> {
     data: [T; N],  // N 是编译期已知的常量
@@ -1749,7 +1749,7 @@ fn main() {
 
 `union` 允许在同一内存位置存储不同类型（C 兼容），但**所有访问都必须 unsafe**：
 
-```rust,ignore
+```rust
 union IntOrFloat {
     i: i32,
     f: f32,

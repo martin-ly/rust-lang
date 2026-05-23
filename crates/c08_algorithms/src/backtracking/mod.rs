@@ -171,11 +171,18 @@ mod tests {
 
     #[test]
     #[cfg_attr(miri, ignore)]
+    #[test]
+    #[cfg(not(miri))]
     fn test_nqueens_parallel_and_async() {
         assert_eq!(nqueens_count_parallel(4), 2);
 
         let rt = tokio::runtime::Runtime::new().expect("创建Tokio运行时失败");
-        let count8 = rt.block_on(async { nqueens_solutions_async(8).await.expect("异步N皇后求解失败").len() });
+        let count8 = rt.block_on(async {
+            nqueens_solutions_async(8)
+                .await
+                .expect("异步N皇后求解失败")
+                .len()
+        });
         assert_eq!(count8, 92);
     }
 

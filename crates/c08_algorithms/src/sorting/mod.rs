@@ -376,16 +376,25 @@ mod tests {
     }
 
     #[test]
-    fn test_counting_and_radix_u32() {
+    #[test]
+    fn test_counting_and_radix_u32_sync() {
         let v = vec![5u32, 1, 3, 3, 0, 9, 255, 128, 128, 2];
         let c = counting_sort_sync_u32(&v);
         assert!(c.windows(2).all(|w| w[0] <= w[1]));
-        let cp = counting_sort_parallel_u32(&v);
-        assert_eq!(c, cp);
         let r = radix_sort_lsd_sync_u32(v.clone());
         assert!(r.windows(2).all(|w| w[0] <= w[1]));
     }
 
+    #[test]
+    #[cfg(not(miri))]
+    fn test_counting_and_radix_u32_parallel() {
+        let v = vec![5u32, 1, 3, 3, 0, 9, 255, 128, 128, 2];
+        let c = counting_sort_sync_u32(&v);
+        let cp = counting_sort_parallel_u32(&v);
+        assert_eq!(c, cp);
+    }
+
+    #[test]
     #[test]
     fn test_shell_and_bucket() {
         let mut v = vec![9, 1, 8, 2, 7, 3, 6, 4, 5];

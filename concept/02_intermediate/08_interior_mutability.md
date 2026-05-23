@@ -162,7 +162,7 @@ RefCell<T> 的运行时借用规则:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 use std::cell::Cell;
 
 // Cell<T> 的核心机制: 通过复制/替换修改值
@@ -193,7 +193,7 @@ let v = c.get();  // v = 5, c 内部仍为 5
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 use std::cell::RefCell;
 
 let data = RefCell::new(vec![1, 2, 3]);
@@ -229,7 +229,7 @@ println!("{:?}", r);
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 use std::sync::{Mutex, RwLock};
 
 // Mutex: 互斥访问（任意读写，但独占）

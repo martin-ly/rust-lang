@@ -119,7 +119,7 @@
 
 **步骤 4**：判表达 → [expressive_inexpressive_matrix](./expressive_inexpressive_matrix.md) → **等价**。
 
-**结论**：可零依赖、纯 Safe、等价实现。代码见 [03_semantic_boundary_map 示例 1](../02_workflow_safe_complete_models/03_semantic_boundary_map.md#示例-1跨平台-ui-组件族)。
+**结论**：可零依赖、纯 Safe、等价实现。代码见 [03_semantic_boundary_map 示例 1](../../../archive/deprecated_20260318/research_notes/software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md#示例-1跨平台-ui-组件族)。
 
 ---
 

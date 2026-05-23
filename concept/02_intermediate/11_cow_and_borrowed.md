@@ -157,7 +157,7 @@ Cow<'a, B> 的定义:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 use std::borrow::Cow;
 
 // 1. 创建 Cow

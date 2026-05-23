@@ -88,7 +88,7 @@ Rust 中的类型变换:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,ignore
+```rust
 // Deref 强制: 最常用的 coercion
 
 use std::ops::Deref;
@@ -181,7 +181,7 @@ takes_mut(&mut string);  // &mut String → &mut str
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // as 转换: 显式、可能截断
 
 // 数值类型间转换

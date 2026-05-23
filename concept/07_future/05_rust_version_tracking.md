@@ -713,6 +713,7 @@ timeline
 | v1.5 | 2026-05-21 | 新增 `open_enums_preview.md` 概念预研文件；更新 Open Enums 跟踪状态为 ✅ 已创建；补充 GitHub #156628 跟踪来源 |
 | v1.6 | 2026-05-22 | 网络权威内容对齐 Batch 9: RfL 社区争议、Effects `gen<yield>` 跟踪、并行前端 SALSA 3.0、Cranelift unwind/debuginfo、安全漏洞跟踪 (§9.3) |
 | v1.7 | 2026-05-22 | 1.96 Stable 冲刺准备：更新 beta.8 状态（最终候选）、补充 Ferrocene 26.02.0 认证交叉引用、全项目来源标注 100% 达标 |
+| v1.8 | 2026-05-23 | 100% 完成度冲刺收尾：0 死链接确认（全项目 1,493 文件）、Miri c09/c08 修复并行测试兼容性（rayon 排除）、代码块编译器 367/367 通过、concept_audit.py 死链接检测增强 |
 
 ---
 
@@ -720,10 +721,10 @@ timeline
 >
 > **权威来源对齐变更日志**: 2026-05-19 补全权威来源标注（Rust Reference、TRPL、Rustonomicon、RFCs、学术论文） [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.7
+**文档版本**: 1.8
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-22
-**状态**: ✅ 权威来源对齐完成 (Batch 9) / 1.96 Stable 冲刺准备中
+**最后更新**: 2026-05-23
+**状态**: ✅ 100% 完成度冲刺收尾 / 0 死链接 / Miri 验证通过
 
 ---
 

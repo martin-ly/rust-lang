@@ -3,6 +3,7 @@ use c08_algorithms::searching::*;
 use c08_algorithms::sorting::*;
 use c08_algorithms::string_algorithms::*;
 
+#[cfg(not(miri))]
 #[test]
 fn test_sorting_parallel_and_async() {
     // parallel
@@ -20,6 +21,7 @@ fn test_sorting_parallel_and_async() {
     assert!(v.windows(2).all(|w| w[0] <= w[1]));
 }
 
+#[cfg(not(miri))]
 #[test]
 fn test_searching_parallel_and_async() {
     let data: Vec<_> = (0..100_000).collect();
@@ -35,6 +37,7 @@ fn test_searching_parallel_and_async() {
     assert_eq!(found, 99_999);
 }
 
+#[cfg(not(miri))]
 #[test]
 fn test_graph_async_bfs_and_dijkstra() {
     // Unweighted graph for BFS
@@ -67,6 +70,7 @@ use std::time::Instant;
 
 use c08_algorithms::advanced_algorithms::ParallelSort;
 
+#[cfg(not(miri))]
 #[test]
 fn bench_parallel_quicksort_vs_std_sort() {
     let mut data1: Vec<i32> = (0..50_000).rev().collect();
@@ -89,6 +93,7 @@ fn bench_parallel_quicksort_vs_std_sort() {
     );
 }
 
+#[cfg(not(miri))]
 #[test]
 fn bench_memory_pool_allocate_deallocate() {
     use c08_algorithms::performance_optimization::MemoryPool;
@@ -114,6 +119,7 @@ fn bench_memory_pool_allocate_deallocate() {
     );
 }
 
+#[cfg(not(miri))]
 #[test]
 fn test_counting_and_radix_sorts() {
     let v: Vec<u32> = (0..10_000u32).rev().collect();
@@ -131,6 +137,7 @@ fn test_counting_and_radix_sorts() {
     assert_eq!(r, ra);
 }
 
+#[cfg(not(miri))]
 #[test]
 fn test_manacher_and_floyd() {
     let (s, l) = manacher_longest_palindrome("forgeeksskeegfor");

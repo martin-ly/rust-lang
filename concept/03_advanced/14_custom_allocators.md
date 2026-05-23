@@ -34,6 +34,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -44,6 +45,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 GlobalAlloc Trait
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -88,6 +90,7 @@ GlobalAlloc:
 ---
 
 ### 1.2 分配器属性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -121,6 +124,7 @@ GlobalAlloc:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 bumpalo — Bump 分配器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -154,6 +158,7 @@ Bump Allocation:
 ---
 
 ### 2.2 jemalloc / mimalloc
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -188,6 +193,7 @@ Bump Allocation:
 ---
 
 ### 2.3 arena 分配器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -226,6 +232,7 @@ Arena 分配器模式:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 Layout
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -262,6 +269,7 @@ Arena 分配器模式:
 ---
 
 ### 3.2 对齐约束
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -302,6 +310,7 @@ Arena 分配器模式:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -326,6 +335,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -421,7 +431,7 @@ graph TD
 
 ---
 
-```rust,ignore
+```rust
 // 自定义分配器示例（需要 nightly）
 use std::alloc::{GlobalAlloc, Layout, System};
 
@@ -448,6 +458,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -627,4 +638,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

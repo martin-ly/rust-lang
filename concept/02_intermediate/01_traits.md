@@ -493,7 +493,7 @@ impl !Sync for RawFd {}  // 显式阻止自动 Sync
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // ✅ 正确: 定义 Trait + 实现 + 泛型约束
 pub trait Summary {
     fn summarize(&self) -> String;
@@ -522,7 +522,7 @@ pub fn notify<T: Summary>(item: &T) {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 // ✅ 正确: 关联类型使接口更简洁
 pub trait Iterator {
     type Item;  // 关联类型
@@ -630,7 +630,7 @@ fn returns_iter() -> impl Iterator<Item = u32> {
 
 普通关联类型只能表达"每个实现者对应一个类型"[来源: TRPL: Ch19.3; Rust Reference: Associated Types]：
 
-```rust,ignore
+```rust
 trait Iterator {
     type Item;           // 无泛型参数
     fn next(&mut self) -> Option<Self::Item>;
@@ -690,7 +690,7 @@ impl<'t, T> LendingIterator for Windows<'t, T> {
 
 在 GATs 之前，若 trait 需要与泛型参数相关的类型，只能将泛型参数提升到 trait 本身[来源: TRPL: Ch19.3 — Advanced Traits]：
 
-```rust,ignore
+```rust
 // GATs 之前：笨拙的 trait 级泛型
 trait Convert<Input> {
     type Output;
@@ -986,7 +986,7 @@ graph TD
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust,ignore
+```rust
 // 边界: Orphan Rule 对嵌套泛型、元组、引用的精确判定
 
 // 情况 1: 为外部 Wrapper 实现外部 Trait —— 非法
@@ -1016,7 +1016,7 @@ impl<T> LocalTrait for Vec<T> {}
 
 > **[来源: RFC 255; Rust Reference: Object Safety]** 对象安全的三类典型违规：返回 Self（隐含 Sized）、泛型方法（vtable 无法实例化）、静态方法（无 self 无法 dispatch）。
 
-```rust,ignore
+```rust
 // 边界: 对象安全条件的精确测试与分发方式差异
 
 // ✅ 对象安全: 方法返回引用，不涉及 Self
@@ -1065,7 +1065,7 @@ fn dynamic_dispatch() -> Box<dyn Iterator<Item = u32>> {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust,ignore
+```rust
 // 边界: Blanket impl 与关联类型的递归约束求解 + Auto Trait 保守推导
 
 trait Convert<T> {
@@ -1417,7 +1417,7 @@ impl Parser for WordParser {
 }
 ```
 
-```rust,ignore
+```rust
 // ❌ 错误：参数位置 impl Trait 在 trait 定义中不允许
 trait Builder {
     fn build(source: impl Default) -> Self;  // E0562: trait 方法参数位置不支持 impl Trait

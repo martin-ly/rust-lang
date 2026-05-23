@@ -1,6 +1,7 @@
 ﻿# 可视化文档索引
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [可视化文档索引](#可视化文档索引)
@@ -38,6 +39,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-12-25
 > **最后更新**: 2026-02-28
@@ -85,6 +87,7 @@
   - [**最后更新**: 2026-03-14 (Rust 1.94 深度整合)](#最后更新-2026-03-14-rust-194-深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -113,7 +116,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#思维导图任务关系网络)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **内容**：
 
@@ -142,7 +145,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **对比维度**：
 
@@ -161,7 +164,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **对比策略**：
 
@@ -180,7 +183,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#概念对比矩阵)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **对比工具**：
 
@@ -205,7 +208,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#决策树任务优先级决策)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **决策流程**：
 
@@ -238,7 +241,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **内容**：
 
@@ -250,7 +253,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-**文档**: [TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md](../archive/process_reports/2026_02/TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md#进度跟踪矩阵)
+**文档**: TASK_ORCHESTRATION_AND_EXECUTION_PLAN.md（已归档）
 
 **可视化**：
 
@@ -268,6 +271,7 @@
 ---
 
 ## 🔗 相关文档 {#-相关文档}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 核心文档
@@ -289,6 +293,7 @@
 ---
 
 ## 💻 可视化代码示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: Mermaid 思维导图代码
@@ -329,6 +334,7 @@ graph TB
 ```
 
 ### 示例 2: 概念对比矩阵代码
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```markdown
@@ -340,6 +346,7 @@ graph TB
 ```
 
 ### 示例 3: 决策树代码
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -359,6 +366,7 @@ graph TB
 ```
 
 ### 示例 4: Rust 可视化代码
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -392,9 +400,11 @@ fn main() {
 ---
 
 ## 🔗 形式化链接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 可视化文档索引
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 可视化类型 | 文档 | 内容 |
@@ -405,6 +415,7 @@ fn main() {
 | 证明树 | [PROOF_INDEX](./PROOF_INDEX.md) | 证明树结构 |
 
 ### 研究笔记链接
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 类别 | 文档 | 可视化内容 |
@@ -414,6 +425,7 @@ fn main() {
 | 实验研究 | [experiments/performance_benchmarks.md](./experiments/performance_benchmarks.md) | 性能图表 |
 
 ### 形式化定理链接
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 定理 | 可视化表示 | 代码示例位置 |
@@ -431,12 +443,14 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.94 深度整合更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.94.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.94更新要点
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 本文档已针对 **Rust 1.94** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -482,6 +496,7 @@ fn main() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [research_notes 目录](./README.md)
@@ -621,4 +636,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

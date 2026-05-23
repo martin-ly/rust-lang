@@ -48,7 +48,7 @@
 
 自引用结构体（self-referential struct）在 Rust 中是一个经典的安全难题：
 
-```rust,ignore
+```rust
 // 概念示例（不安全代码）
 struct SelfRef {
     data: String,

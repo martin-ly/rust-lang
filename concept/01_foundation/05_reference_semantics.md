@@ -69,6 +69,7 @@
     - [7.9 形式化视角](#79-形式化视角)
     - [7.10 名义与结构类型的引用边界](#710-名义与结构类型的引用边界)
   - [来源与延伸阅读（本节）](#来源与延伸阅读本节)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -152,7 +153,7 @@ graph LR
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 use std::ops::Deref;
 
 struct MyBox<T>(T);
@@ -194,7 +195,7 @@ let s: &str = &b;  // ✅ &MyBox<String> → &String → &str
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 let s = String::from("hello");
 
 // 情况 1: self 方法
@@ -562,7 +563,7 @@ assert_eq!(x, 20);
 > - `&&mut T`: 一个共享引用，其目标是一个可变引用。你不能通过外层的共享引用修改任何东西（外层是共享的），但可以通过内层的可变引用修改目标——前提是内层可变引用本身可达。
 > [来源: [Rust Reference — Reference Types](https://doc.rust-lang.org/reference/types/pointer.html)]
 
-```rust,ignore
+```rust
 let mut x = 1;
 let mut y = 2;
 let r_mut = &mut x;         // r_mut: &mut i32
@@ -641,7 +642,7 @@ fn partial_reborrow_demo(p: &mut Point3D) {
 
 Rust Internals 社区（quinedot, kpreid, 2023）深入讨论了部分重借用的一个核心限制：**当前 Rust 类型系统无法表达"对父结构体的可变引用，排除某个子字段"的签名**。
 
-```rust,ignore
+```rust
 struct Parent {
     child: Child,
     other: i32,
@@ -1000,7 +1001,7 @@ let r3 = r2;        // r3: &&mut i32（复制共享引用是允许的）
   - **Trait 对象（Trait Objects）**: `&mut dyn Trait` 无法按字段拆分，因为具体字段布局被擦除
   - **联合体（Unions）**: 由于字段可能重叠，部分重借用不安全
 
-```rust,ignore
+```rust
 union MyUnion {
     a: i32,
     b: f32,

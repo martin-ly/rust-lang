@@ -104,6 +104,7 @@
     - [16.6 代码示例：正确使用 + 典型错误](#166-代码示例正确使用--典型错误)
   - [十七、待补充与演进方向（TODOs）](#十七待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、权威定义（Definition）
 >
@@ -538,7 +539,7 @@ fn main() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust
 // ✅ 正确: 结构体持有引用时必须标注生命周期
 struct ImportantExcerpt<'a> {
     part: &'a str,
@@ -611,7 +612,7 @@ fn main() {
 
 **修正方案**：
 
-```rust,ignore
+```rust
 // ✅ 修正: 确保被引用数据存活足够长
 fn main() {
     let novel = String::from("Call me...");
@@ -1509,7 +1510,7 @@ where
 | **关联类型展开歧义** | `impl Trait` 在 trait 中等价于一个匿名关联类型，但生命周期参数如何传递到该匿名关联类型缺乏语法约定 |
 | **HRTB 交互复杂** | `for<'a> Trait<'a>::method() -> impl Trait` 中的生命周期量化与 `impl Trait` 的隐式捕获发生语法冲突 |
 
-```rust,ignore
+```rust
 // Rust 1.75+ 支持:
 trait Factory {
     fn create(&self) -> impl Iterator<Item = i32>;
@@ -1585,7 +1586,7 @@ impl<'s> LendingIterator for Words<'s> {
 
 标准 `Iterator` 的定义为：
 
-```rust,ignore
+```rust
 trait Iterator {
     type Item;
     fn next(&mut self) -> Option<Self::Item>;
@@ -1649,7 +1650,7 @@ Lending Iterator 通过 GATs 将 `Item` 参数化为 `Item<'a>`，并用 `where 
 > **[来源: Rust Reference: Unions]** `union` 的所有 variant 共享同一起始地址，内存对齐等于所有 variant 对齐的最大值。✅
 > **[来源: Rust Reference: Type Layout]** `enum` 的内存布局包含 discriminant（tag），而 `union` 不含 tag。✅
 
-```rust,ignore
+```rust
 union IntOrFloat {
     i: i32,
     f: f32,

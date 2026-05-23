@@ -667,7 +667,7 @@ fn main() {
 
 #### 边界测试 2：递归宏的栈深度极限
 
-```rust,ignore
+```rust
 // 边界: 递归宏深度限制（默认 128）
 
 macro_rules! count {
@@ -687,7 +687,7 @@ fn main() {
 
 #### 边界测试 3：过程宏的 TokenStream 解析失败
 
-```rust,ignore
+```rust
 // 边界: 过程宏遇到非法输入时的 panic
 
 // 假设某 derive 宏期望 struct，但收到 fn:
@@ -785,7 +785,7 @@ graph TD
 
 **概念解答**: DRY（Don't Repeat Yourself）不仅是代码行数问题，更是**语义一致性**问题。当同一模式在 10 处重复时，任何修改都面临"漏改一处"的风险。泛型解决类型层面的重复，宏解决语法模式层面的重复。
 
-```rust,ignore
+```rust
 // 反面: 重复代码
 let v1 = {
     let mut temp = Vec::new();
@@ -832,7 +832,7 @@ let v2 = make_vec![3, 4];
 | 自定义语法（DSL） | ❌ 不支持 | ✅ `sql!(SELECT * FROM users)` |
 | 编译期代码生成 | ❌ 不支持 | ✅ `#[derive(Debug)]` |
 
-```rust,ignore
+```rust
 // 泛型无法做到: 可变参数
 fn print_all<T>(items: &[T]) { /* 只能接收切片 */ }
 
@@ -1272,7 +1272,7 @@ fn main() {
 
 **反例：重复器长度不匹配**
 
-```rust,ignore
+```rust
 // ❌ 反例: 多个重复器长度不匹配
 macro_rules! bad_zip {
     ($($a:expr),* ; $($b:expr),*) => {
@@ -2019,7 +2019,7 @@ fn foo() {}
 2. **提取并复用完整函数签名** —— 泛型参数、where 子句、生命周期界限的 token 模式极其复杂，声明宏几乎无法正确编写
 3. **递归遍历函数体内部的表达式节点** —— 无 `Fold` 机制，只能做浅层 token 替换
 
-```rust,ignore
+```rust
 // ❌ 声明宏尝试包裹函数（迅速耗尽能力）
 macro_rules! trace_fn {
     (fn $name:ident($($arg:ident: $ty:ty),*) -> $ret:ty $body:block) => {
@@ -2112,7 +2112,7 @@ macro（声明宏 2.0，不稳定）:
 
 **反例：`macro` 关键词的当前限制**
 
-```rust,ignore
+```rust
 // ❌ 反例: macro 关键字尚未稳定，不能在 stable Rust 使用
 // 以下代码仅在 nightly 编译：
 #![feature(decl_macro)]
@@ -2131,7 +2131,7 @@ fn main() {
 
 **边界：混合使用策略**
 
-```rust,ignore
+```rust
 // ✅ 边界: 当前最佳实践（stable Rust）
 // 继续使用 macro_rules!，但用模块系统模拟可见性
 

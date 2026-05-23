@@ -32,6 +32,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 impl Trait 的演进
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -86,6 +88,7 @@ trait Foo {
 ---
 
 ### 1.2 Const Generics
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -141,6 +144,7 @@ impl<T, const R: usize, const C: usize> Matrix<T, R, C> {
 ---
 
 ### 1.3 类型推断与约束求解
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -182,9 +186,10 @@ Rust 的类型推断机制:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 impl Trait 在参数位置
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // impl Trait 参数 vs 泛型参数的对比
 
 // impl Trait 参数（简洁）
@@ -226,9 +231,10 @@ trait Parser {
 ---
 
 ### 2.2 Const Generics 实战
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 // Const Generics 实战示例
 
 // 1. 编译期大小检查的矩阵乘法
@@ -288,6 +294,7 @@ impl<T: Copy, const N: usize> Stack<T, N> {
 ---
 
 ### 2.3 类型别名与类型族
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -382,6 +389,7 @@ impl AddOne for std::marker::U0 { type Result = std::marker::U1; }
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -404,6 +412,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -678,4 +687,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -133,7 +133,7 @@ Rust 浮点类型 (IEEE 754 标准):
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 // 整数溢出行为（release vs debug）
 
 // Debug 模式: 溢出 panic!
@@ -277,7 +277,7 @@ assert!(overflowed);
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 use std::num::{NonZeroU32, NonZeroU64};
 
 // NonZero 类型: 保证值不为零

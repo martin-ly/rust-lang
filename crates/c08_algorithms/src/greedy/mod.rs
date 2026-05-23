@@ -313,16 +313,23 @@ mod tests {
     }
 
     #[test]
-    fn test_coin_change_greedy() {
+    #[test]
+    fn test_coin_change_greedy_sync() {
         let coins = vec![1, 5, 10, 25];
         let r1 = coin_change_greedy_sync(coins.clone(), 41);
         assert_eq!(r1.iter().sum::<i64>(), 41);
         assert!(r1.len() <= 5);
+    }
 
+    #[test]
+    #[cfg(not(miri))]
+    fn test_coin_change_greedy_parallel() {
+        let coins = vec![1, 5, 10, 25];
         let r2 = coin_change_greedy_parallel(coins.clone(), 41);
         assert_eq!(r2.iter().sum::<i64>(), 41);
     }
 
+    #[test]
     #[test]
     fn test_fractional_knapsack() {
         let items = vec![
@@ -352,7 +359,10 @@ mod tests {
         assert!(!codes.is_empty());
         let bits = huffman_encode(s, &codes);
         let decoded = huffman_decode(&bits, tree.as_ref().expect("霍夫曼树为空"));
-        assert_eq!(String::from_utf8(decoded).expect("解码结果不是有效UTF-8"), s);
+        assert_eq!(
+            String::from_utf8(decoded).expect("解码结果不是有效UTF-8"),
+            s
+        );
     }
 
     #[test]

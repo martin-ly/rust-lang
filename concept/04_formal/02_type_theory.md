@@ -703,7 +703,7 @@ Idris:  Vec : Nat -> Type -> Type
 
 Rust 的 **Const Generics**（常量泛型，Rust 1.51+ 稳定）是依赖类型的**有限子集**：
 
-```rust,ignore
+```rust
 // ✅ Rust: 值（常量）出现在类型参数中
 struct Array<T, const N: usize> {
     data: [T; N],  // N 是编译期常量，属于类型的一部分
@@ -824,7 +824,7 @@ impl TypeConstructor for OptionConstructor {
 
 #### Workaround 2: 宏生成单态代码
 
-```rust,ignore
+```rust
 macro_rules! monomorphic_map {
     ($container:ty, $f:expr, $input:expr) => {{
         $input.into_iter().map($f).collect::<$container>()

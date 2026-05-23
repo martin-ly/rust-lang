@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [控制流决策树](#控制流决策树)
@@ -26,6 +27,7 @@
   - [**状态**: ✅ 100% 完成](#状态--100-完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📊 控制流选择决策树
 >
@@ -106,6 +108,7 @@ match result {
 ---
 
 ## 🔄 循环结构决策
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 循环类型选择矩阵
@@ -155,6 +158,7 @@ loop {
 ---
 
 ## ⚡ 迭代器 vs 循环
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 决策流程
@@ -220,6 +224,7 @@ let result = collection.iter().try_for_each(|item| {
 ---
 
 ## 🎯 错误处理控制流
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 错误处理决策树
@@ -253,6 +258,7 @@ graph TD
 ---
 
 ## 📋 快速参考表
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 需求 | 控制流结构 | 代码示例 |
@@ -271,11 +277,12 @@ graph TD
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [C03 主索引](../../../crates/c03_control_fn/docs/tier_01_foundations/02_主索引导航.md)
 - [MIND_MAP_COLLECTION](../../04_thinking/MIND_MAP_COLLECTION.md)
-- [ControlFlow 示例](../../../../examples/rust_194_control_flow_demo.rs)
+- [ControlFlow 示例](../../../examples/rust_194_control_flow_demo.rs)
 
 ---
 
@@ -296,6 +303,7 @@ graph TD
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [formal_methods 目录](./README.md)
@@ -409,4 +417,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -503,7 +503,7 @@ fn main() {
 
 #### 栈 Pin vs 堆 Pin
 
-```rust,ignore
+```rust
 use std::pin::Pin;
 
 // ❌ 栈 Pin：生命周期受限，地址保证仅在当前作用域有效
@@ -583,7 +583,7 @@ impl SelfReferential {
 
 #### `Vec<T>`：连续内存与指数扩容
 
-```rust,ignore
+```rust
 use std::mem;
 
 // ✅ Vec 内存布局（简化）
@@ -1173,7 +1173,7 @@ c.borrow_mut().push_str("hello");     // 运行时检查的可变借用
 
 #### 用途：未初始化内存的安全抽象
 
-```rust,ignore
+```rust
 use std::mem::MaybeUninit;
 
 // ✅ 安全地分配未初始化的数组
@@ -1225,7 +1225,7 @@ let x: MaybeUninit<bool> = MaybeUninit::uninit();
 
 #### 数组初始化示例
 
-```rust,ignore
+```rust
 use std::mem::MaybeUninit;
 
 // ✅ 模式：安全初始化固定大小数组，避免默认构造开销
@@ -1318,7 +1318,7 @@ vec.push(1);  // 使用指定的分配器
 | **开销** | 零运行时开销（只是不调用 drop） | 零运行时开销（编译期标记） |
 | **使用场景** | 临时阻止析构（如跨 FFI 边界） | 长期控制析构（如 union、自定义容器） |
 
-```rust,ignore
+```rust
 use std::mem::{ManuallyDrop, forget};
 
 // ✅ mem::forget: 消耗值，阻止析构
@@ -1377,7 +1377,7 @@ pub struct Vec<T> {
 
 **扩容策略**： amortized O(1) push
 
-```rust,ignore
+```rust
 // ✅ Vec 的扩容行为（标准库实现细节）
 let mut v = Vec::new();
 assert_eq!(v.capacity(), 0);  // 初始无分配
@@ -1400,7 +1400,7 @@ assert_eq!(v.capacity(), 8);
 
 **反例：扩容导致引用失效**
 
-```rust,ignore
+```rust
 let mut v = vec![1, 2, 3];
 let r = &v[0];  // ✅ 获取对第一个元素的引用
 
@@ -1431,7 +1431,7 @@ pub struct String {
 | `push` | 追加 UTF-8 字符（1-4 字节） | 追加单个元素 |
 | `as_bytes()` | `&[u8]`（O(1)） | — |
 
-```rust,ignore
+```rust
 // ✅ String 的 UTF-8 保证
 let mut s = String::from("hello");
 s.push('世');  // 追加 3 字节 UTF-8 序列 [E4, B8, 96]
@@ -1471,7 +1471,7 @@ HashMap<K, V>:
 > [来源: [TRPL]]
 ```
 
-```rust,ignore
+```rust
 use std::collections::HashMap;
 
 // ✅ HashMap 的 SwissTable 行为
@@ -1530,7 +1530,7 @@ static GLOBAL: MiMalloc = MiMalloc;
 
 **边界：分配器不是万能的**
 
-```rust,ignore
+```rust
 // ❌ 频繁的小分配仍会产生开销，无论使用哪个分配器
 for i in 0..1_000_000 {
     let _ = Box::new(i);  // 每次循环都堆分配——分配器无法优化算法本身

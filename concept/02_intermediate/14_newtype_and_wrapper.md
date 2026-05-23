@@ -46,7 +46,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust
 // Newtype: 单字段元组结构体
 struct Meters(f64);
 struct Seconds(f64);

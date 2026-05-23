@@ -46,7 +46,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust
 // 闭包的基本语法
 
 // 1. 最简单的闭包
@@ -87,7 +87,7 @@ let process = |x: i32| -> i32 {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,ignore
+```rust
 // 三种闭包 trait
 
 // Fn: 不可变借用捕获，可多次调用
@@ -145,7 +145,7 @@ let closure_fn_once = move || {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 // 闭包捕获与所有权的交互
 
 // 场景 1: 不可变借用
@@ -193,7 +193,7 @@ println!("{}", x);  // ✅ i32 是 Copy
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 高阶函数：接受闭包作为参数
 
 // 1. 简单高阶函数

@@ -791,7 +791,7 @@ void process() {
 
 #### `mem::forget` vs `.release()`：主动放弃析构
 
-```rust,ignore
+```rust
 // ✅ Rust: mem::forget 是 unsafe 边界，显式且罕见
 let s = String::from("leak");
 std::mem::forget(s);  // 故意泄漏，编译器允许但需 unsafe 理由
@@ -818,7 +818,7 @@ s.release();  // 释放所有权但不 delete，常规代码中常见
 
 #### `mem::forget` 的语义与边界
 
-```rust,ignore
+```rust
 use std::mem;
 
 let s = String::from("leak");
@@ -838,7 +838,7 @@ mem::forget(s);  // ✅ 安全：s 不会被 drop，内存泄漏但无 UB
 
 #### `ManuallyDrop<T>`：显式控制析构时机
 
-```rust,ignore
+```rust
 use std::mem::ManuallyDrop;
 
 let mut s = ManuallyDrop::new(String::from("controlled"));

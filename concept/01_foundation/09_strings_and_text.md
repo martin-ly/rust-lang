@@ -169,7 +169,7 @@ println!("{}", p);  // 输出: (1, 2)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 let s = "hello 世界";  // 11 个字节（ASCII 5 + 中文 6）
 
 // ❌ 字符串不支持整数索引
@@ -210,7 +210,7 @@ if let Some(substr) = s.get(0..5) {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 use std::ffi::{OsString, OsStr};
 use std::path::{Path, PathBuf};
 
@@ -250,7 +250,7 @@ p.push("file.txt");
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 use std::ffi::{CString, CStr};
 use std::os::raw::c_char;
 

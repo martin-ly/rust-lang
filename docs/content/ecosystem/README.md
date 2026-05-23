@@ -139,11 +139,11 @@ async fn get_user(
 
 **学习路径**:
 
-1. [Axum 基础](axum_deep_dive.md#基础)
-2. [提取器详解](axum_deep_dive.md#提取器)
-3. [中间件系统](axum_deep_dive.md#中间件)
-4. [错误处理](axum_deep_dive.md#错误处理)
-5. [性能优化](axum_deep_dive.md#性能优化)
+1. [Axum 基础](web_frameworks/axum_deep_dive.md#基础)
+2. [提取器详解](web_frameworks/axum_deep_dive.md#提取器)
+3. [中间件系统](web_frameworks/axum_deep_dive.md#中间件)
+4. [错误处理](web_frameworks/axum_deep_dive.md#错误处理)
+5. [性能优化](web_frameworks/axum_deep_dive.md#性能优化)
 
 ---
 

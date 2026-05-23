@@ -190,7 +190,7 @@ Panic 传播机制:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 自定义 panic 行为
 
 use std::panic;

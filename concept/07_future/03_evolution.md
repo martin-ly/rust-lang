@@ -833,7 +833,7 @@ nightly Rust 提供了访问不稳定特性的能力，但需谨慎使用：
 
 **启用特性**：
 
-```rust,ignore
+```rust
 #![feature(never_type)]           // 启用 never type
 #![feature(generic_const_exprs)]  // 启用泛型 const 表达式
 #![feature(type_alias_impl_trait)] // 启用 TAIT
@@ -917,7 +917,7 @@ components = ["rust-src", "rustc-dev", "llvm-tools"]
 
 以下代码验证 Rust 的 API 稳定性契约——公开 Trait 的变更如何通过版本控制保持向后兼容：
 
-```rust,ignore
+```rust
 // 模拟 Rust 标准库的 API 稳定性：Trait 默认方法保证向后兼容
 pub trait Processable {
     // 稳定的核心方法

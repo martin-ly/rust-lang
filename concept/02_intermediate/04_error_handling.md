@@ -455,7 +455,7 @@ fn main() {
 
 **修正方案**：
 
-```rust,ignore
+```rust
 // ✅ 修正: 必须处理 Result
 fn main() {
     let file = std::fs::File::create("/root/protected.txt")
@@ -470,7 +470,7 @@ fn main() {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust,ignore
+```rust
 // ✅ 边界: Option 与 Result 的优雅互转
 struct User { name: String }
 
@@ -953,7 +953,7 @@ fn nested_result_option() {
 
 **过渡解释**: 在直觉锚定后，需要将抽象概念映射到具体语法。这一步覆盖 `Result::Ok/Err`、`Option::Some/None`、`match`、`if let`、`?` 等核心语法。关键是建立"错误是值，不是控制流异常"的理解。从 Step 2 到 Step 3 的过渡由简洁性需求驱动：当学习者发现嵌套 match 过于冗长时，`?` 运算符成为自然的学习目标。
 
-```rust,ignore
+```rust
 // 核心语法模式:
 fn may_fail() -> Result<i32, String> {
     Ok(42)
@@ -1169,7 +1169,7 @@ where
 
 `Backtrace` 通过运行时栈展开（stack unwinding）捕获当前调用链：
 
-```rust,ignore
+```rust
 use std::backtrace::Backtrace;
 
 fn inner() {
@@ -1331,7 +1331,7 @@ impl std::error::Error for TracedError {
 
 **协同使用示例**：
 
-```rust,ignore
+```rust
 use std::backtrace::Backtrace;
 use std::fmt;
 
@@ -1837,7 +1837,7 @@ fn parse_port(s: &str) -> Result<u16, LocatedError> {
 
 **协同模式**：在关键错误路径中同时使用两者——`Location` 提供**精确错误源点**，`Backtrace` 提供**传播路径上下文**：
 
-```rust,ignore
+```rust
 use std::backtrace::Backtrace;
 use std::panic::Location;
 use std::fmt;
@@ -1954,7 +1954,7 @@ impl AppError {
 2. 断言和调试辅助函数
 3. 宏生成的代码（`assert!`、`unwrap` 等标准库模式）
 
-```rust,ignore
+```rust
 // ❌ 不建议：热路径中的高频辅助函数
 #[track_caller]
 fn add_one(x: i32) -> i32 { x + 1 }  // 无错误报告需求，浪费 ABI 修改

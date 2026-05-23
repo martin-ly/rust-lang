@@ -137,6 +137,10 @@ def check_cross_links(content, file_path):
     links = re.findall(r'\[([^\]]+)\]\((\.\.?/[^)]+\.md)\)', content)
     # 也匹配绝对路径链接（以 /concept/ 开头）
     links += re.findall(r'\[([^\]]+)\]\((/[^)]+\.md)\)', content)
+    # 匹配同目录直接文件名链接 [text](file.md)
+    links += re.findall(r'\[([^\]]+)\]\(([a-zA-Z0-9_][a-zA-Z0-9_\-\.]*\.md)\)', content)
+    # 匹配非 .md 文件链接（如 .rs）
+    links += re.findall(r'\[([^\]]+)\]\((\.\.?/[^)]+\.(?:rs|toml|yaml|json))\)', content)
 
     dead_links = []
     for text, target in links:

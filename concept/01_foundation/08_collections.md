@@ -39,8 +39,6 @@
 ## 一、核心概念
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
->
-> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 集合类型谱系
 >
@@ -163,7 +161,7 @@ BTreeMap<K, V>:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // Vec 的容量管理
 
 let mut vec = Vec::new();

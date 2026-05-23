@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 从线性逻辑到所有权
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -81,6 +83,7 @@
 ---
 
 ### 1.2 资源作为类型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -121,6 +124,7 @@ fd.close();  // fd 被消费
 ---
 
 ### 1.3 Session Types 与通信协议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -166,9 +170,10 @@ Session Types: 将通信协议编码为类型
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 所有权即线性类型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // Rust 的所有权 = 仿射类型
 
 // 线性类型要求: 值必须恰好使用一次
@@ -209,6 +214,7 @@ let v = l.into_inner();  // 必须显式消费
 ---
 
 ### 2.2 仿射类型与 Drop
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -247,6 +253,7 @@ impl Drop for DatabaseConnection {
 ---
 
 ### 2.3 类型状态模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -353,6 +360,7 @@ let committed = txn.commit();
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -375,6 +383,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -634,4 +643,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

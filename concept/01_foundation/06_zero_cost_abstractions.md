@@ -118,7 +118,7 @@ graph LR
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 // 高层抽象代码
 let sum: i32 = (0..100)
     .map(|x| x * 2)

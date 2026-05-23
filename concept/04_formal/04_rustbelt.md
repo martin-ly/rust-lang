@@ -65,6 +65,7 @@ $entry
 > **[学术来源: Jung et al. 2017 POPL; Jung et al. 2018 POPL; Iris: JFP 2018]** 以下定理矩阵基于 RustBelt 系列论文及 Iris 框架的公理体系，每行包含"被依赖"（下游定理）与"失效条件"（假设被违反的情形）。
 
 ### 2.1 矩阵总览（11 行）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 编号 | 定理 / 公理 | 前提 | 结论 | 被依赖 | 失效条件 | 层次 |
@@ -82,6 +83,7 @@ $entry
 | **C2** | RustBelt 不覆盖范围 | 安全 Rust 语法上合法 | 未初始化内存 / FFI / 死锁仍可能发生 | 无（负面边界） | 任何安全 Rust 代码仍可能触发死锁（活性未保证） | **边界** |
 
 ### 2.2 ⟹ 推理链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -106,6 +108,7 @@ C2 (未覆盖范围) 是负面边界
 > **跨层映射**: 本文件定理 ↔ [`00_meta/inter_layer_map.md`](../00_meta/inter_layer_map.md) §4.1 "内存安全完备性" · §5.2 "定理一致性检查"
 
 ### 2.3 层次一致性标注（L1–L3 及扩展映射）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **层次** | **编号范围** | **内容** | **与 Rust 的映射** |
@@ -129,6 +132,7 @@ C2 (未覆盖范围) 是负面边界
 ---
 
 ### 2.4 RustBelt 定理推导链可视化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -197,6 +201,7 @@ graph BT
 在 RustBelt/Iris 框架中，CSL 被实例化为高阶并发分离逻辑，支持高阶幽灵状态和原子性推理，使得 Rust 的 `std::sync` 原语可被精确形式化规约。
 
 ### 3.2 关键概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 记号 | 名称 | 直觉含义 | Rust 对应 |
@@ -247,7 +252,7 @@ MutexInvariant(m, l, P) ≜  ∃v. l ↦ v * P(v)
 
 > **[来源: Kani Documentation: Concurrent verification; RustBelt POPL 2018 §5]** CSL 的 `MutexInvariant` 规约可在 Kani 中编码为**并发验证 harness**。Kani 通过符号化线程交错，验证在所有可能的执行顺序下数据竞争不存在。
 
-```rust,ignore
+```rust
 // Kani 验证规格: Mutex 保护的数据访问无竞争
 // 运行: cargo kani --harness mutex_no_data_race
 
@@ -320,6 +325,7 @@ Kani 并发验证的工作方式:
 > **来源**: [Kani Book: Concurrent programs] · [RustBelt: POPL 2018 §5 — Mutex CSL proof] · [Kani GitHub: std::sync verification]
 
 ### 3.4 `Arc<T>` 的形式化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 `Arc<T>` 需建模**引用计数协议**。设 `rc` 为引用计数地址，`data` 为堆数据地址：
@@ -386,6 +392,7 @@ drop(arc2);  // rc: 1 → 0, 释放 data
 > **[学术来源: RustBelt 系列论文; Iris 框架设计原则]** 以下决策树用于识别对 RustBelt 和形式化验证的常见误解，每棵树对应一个过度概括的命题。
 
 ### 4.1 命题一："RustBelt 证明了 Rust 完全安全"
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -409,6 +416,7 @@ graph TD
 **命题一分析**: RustBelt 仅覆盖 **safe Rust 子集**。unsafe、死锁、FFI 均位于证明边界之外。将结论外推到"Rust 完全安全"属于**过度概括**谬误。工业实践中，需将 RustBelt 与 Miri 动态检测、Kani 符号执行、人工审计相结合，形成纵深防御。
 
 ### 4.2 命题二："形式化验证可以替代测试"
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -432,6 +440,7 @@ graph TD
 **命题二分析**: 形式化验证与测试处于**正交维度**。验证回答"是否满足规格"，测试回答"预期输入下行为是否正确"。规格本身可能错误，且完整证明成本（人月级）使其难以全面替代测试。最佳实践是**分层策略**：核心不变量用 Verus/Creusot 证明，边界条件用 Kani 符号执行，回归用单元测试覆盖。
 
 ### 4.3 命题三："Iris 逻辑适用于所有语言"
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -511,6 +520,7 @@ graph TD
 > **[学术来源: RustBelt: POPL 2018; RustHornBelt: PLDI 2022; RefinedRust: PLDI 2024; Ralf Jung PhD Thesis 2020]**
 
 ### 6.1 已验证 / 待验证矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 原语 | 安全属性 | 验证状态 | 难度 | 关键引用 |
@@ -525,6 +535,7 @@ graph TD
 | **Box** | 堆分配 + 唯一所有权 | ✅ 已验证 | 低 | RustBelt 基础语义 |
 
 ### 6.2 验证难度分析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 难度 | 特征 | 典型障碍 |
@@ -572,6 +583,7 @@ graph TD
 > **[Kani GitHub]** · **[Verus Documentation]** · **[Creusot Tutorial]** · **[Prusti GitHub]** 本节补充各工具的具体代码示例，以及验证工具与持续集成（CI）的集成方案。✅
 
 ### 7.1 Prusti：`#[requires]` / `#[ensures]` 示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -602,6 +614,7 @@ fn sum_to(n: i32) -> i32 {
 3. 每次循环迭代时不变式成立（body_invariant） [来源: [Wikipedia — Separation Logic](https://en.wikipedia.org/wiki/Separation_logic)]
 
 ### 7.2 Kani：`#[kani::proof]` 与并发验证
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -623,6 +636,7 @@ fn check_atomic_increment() {
 **验证原理**: Kani 基于 **CBMC（C Bounded Model Checker）**，将 Rust MIR 翻译为 C 代码，然后用 SAT/SMT 求解器验证所有可达状态下的断言。`#[kani::unwind(5)]` 限制循环展开深度，使验证可终止。
 
 ### 7.3 Verus：`proof fn` 与所有权推理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -654,6 +668,7 @@ verus! {
 **验证原理**: Verus 使用 **所有权类型 + 分离逻辑** 的混合方法。`proof fn` 在编译期被擦除（零运行时开销），其证明由 Z3 SMT 求解器完成。
 
 ### 7.4 Creusot：分离逻辑契约与预言（Prophecy）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust,ignore
@@ -674,6 +689,7 @@ async fn compute() -> i32 { ... }
 **验证原理**: Creusot 将 Rust 程序翻译为 **Why3**，Why3 生成证明义务（proof obligations）交给多种 SMT 求解器（Alt-Ergo、CVC5、Z3）。预言（prophecy）变量允许验证异步代码中"未来才会确定的值"。
 
 ### 7.5 CI/CD 集成方案
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```yaml
@@ -771,6 +787,7 @@ jobs:
     - [7.9 `Vec` 重新分配：借用与重分配的形式化处理](#79-vec-重新分配借用与重分配的形式化处理)
   - [十三、待补充与演进方向（TODOs）](#十三待补充与演进方向todos)
   - [十四、Wikipedia 概念对齐](#十四wikipedia-概念对齐)
+  - [权威来源索引](#权威来源索引)
 
 ## 八、形式化验证工具链映射
 >
@@ -779,6 +796,7 @@ jobs:
 > **[学术来源: 各工具官方论文/文档; AWS Kani Blog 2023; Microsoft Verus 文档; Inria Aeneas 文档]** 本节建立从"轻量级动态检测"到"heavyweight 定理证明"的完整工具链光谱，为工业选型提供决策依据。
 
 ### 8.1 工具链全景矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 工具 | 方法 | 覆盖范围 | 自动化 | 工业适用性 | 代表项目 / 背书 |
@@ -791,6 +809,7 @@ jobs:
 | **Aeneas** | 借用函数式翻译 | 安全属性、类型保持性 | 半自动（Coq/Lean 骨架） | ⭐⭐ 研究 | EPFL · Inria |
 
 ### 8.2 验证方法光谱图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -812,6 +831,7 @@ jobs:
 ```
 
 ### 8.3 工业选型决策路径
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 场景 | 推荐工具 | 理由 |
@@ -908,6 +928,7 @@ graph TD
 ---
 
 ## 十一、知识来源关系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **论断** | **来源** | **可信度** |
@@ -945,6 +966,7 @@ graph TD
 ---
 
 ### 7.6 RefinedRust：自动化分离逻辑推导
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 RefinedRust（PLDI 2024）是 RustBelt 的**自动化扩展**——它从 Rust 类型系统自动推导 separation logic 规约，无需手动编写 Iris 证明：
@@ -972,6 +994,7 @@ Option<T>       ⟹    Some(v) ∗ type_interp(v, T) ∨ None
 > **来源**: [PLDI 2024 · RefinedRust] · [RefinedRust GitHub] · [RustBelt: POPL 2018]
 
 ### 7.7 RustHornBelt：Horn 子句验证与 CHC 求解
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 RustHornBelt（OOPSLA 2022）将 RustBelt 的分离逻辑规约转换为 **Horn 子句（Horn Clauses）**，利用 Constrained Horn Clause (CHC) 求解器进行自动化验证：
@@ -995,6 +1018,7 @@ fn swap(a: &mut i32, b: &mut i32)
 > **来源**: [OOPSLA 2022 · RustHornBelt] · [CHC Solver: Z3/Spacer] · [RustBelt: POPL 2018]
 
 ### 7.8 CSL 中 `RwLock` 与 `Condvar` 的 Iris 建模
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 RustBelt 的并发分离逻辑（CSL）为同步原语提供了形式化规约：
@@ -1029,7 +1053,7 @@ Condvar 规约（简化）:
     { CondvarState(γ) }    // 可能唤醒一个等待者
 ```
 
-```rust,ignore
+```rust
 // ✅ Rust 中的 RwLock 使用（与 CSL 规约对应）
 use std::sync::{Arc, RwLock};
 
@@ -1050,6 +1074,7 @@ drop(w);
 > **来源**: [RustBelt: POPL 2018 §5–§6] · [Jung PhD Thesis 2020 · CSL] · [Iris Tutorial: iris-project.org]
 
 ### 7.9 `Vec` 重新分配：借用与重分配的形式化处理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 `Vec` 重新分配（realloc）是借用检查器的一个经典**临时打破规则**的场景：在 `push` 触发扩容时，所有现有引用必须暂时失效，然后在新的内存块上重建不变量。
@@ -1073,7 +1098,7 @@ push 操作:
 
 > **关键洞察**：在 realloc 的瞬间，旧的 `buf` 被释放（`old_buf ↦ ⊥`），所有指向旧 `buf` 的借用都**物理失效**。Rust 的编译期保证（`&mut self`）确保在 `push` 期间没有任何 `&Vec<T>` 或 `&T` 存活——借用检查器在语法层面防止了观察 realloc 的可能性。
 
-```rust,ignore
+```rust
 // ✅ 借用检查器阻止观察 realloc
 let mut v = vec![1, 2, 3];
 let r = &v[0];      // ✅ 获取共享引用
@@ -1095,6 +1120,7 @@ unsafe {
 ---
 
 ## 十三、待补充与演进方向（TODOs）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [x] **TODO**: 补充各工具的具体代码示例（Prusti `#[requires]`/`#[ensures]`、Kani `#[kani::proof]`、Verus `proof fn`、Creusot 前置/后置条件）—— 已完成 §7.1–7.4
@@ -1420,4 +1446,3 @@ unsafe {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

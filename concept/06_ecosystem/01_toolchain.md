@@ -60,6 +60,7 @@ graph LR
 > **[来源: Clippy Documentation; Rust API Guidelines]** ✅
 
 ### 2.1 核心工具矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **工具** | **功能** | **使用频率** | **关键特性** |
@@ -76,6 +77,7 @@ graph LR
 | `cargo audit` | 安全审计 | CI | 依赖漏洞扫描 |
 
 ### 2.2 Cargo.toml vs package.json / go.mod / requirements.txt
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **维度** | **Cargo.toml** | **package.json** | **go.mod** | **requirements.txt** |
@@ -94,6 +96,7 @@ graph LR
 > **[来源: SemVer Specification]** 语义化版本规范（SemVer 2.0.0）定义了 MAJOR.MINOR.PATCH 的兼容性契约。 ✅
 
 ### 2.3 Clippy Lint 分类矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **分类** | **作用** | **示例 lint** | **默认级别** |
@@ -110,6 +113,7 @@ graph LR
 > **来源**: [Clippy Lint Categories](https://doc.rust-lang.org/clippy/lints.html) · 可信度: ✅
 
 ### 2.4 编译器优化等级矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **等级** | **调试信息** | **优化策略** | **编译速度** | **适用场景** |
@@ -124,6 +128,7 @@ graph LR
 > **来源**: [The rustc Book — Codegen Options](https://doc.rust-lang.org/rustc/codegen-options/index.html#opt-level) · 可信度: ✅
 
 ### 2.5 断言/推理矩阵
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **断言** | **前提** | **结论（⟹ 推理链）** | **工具链组件** | **失效条件** |
@@ -205,6 +210,7 @@ graph LR
 > **[来源: Cargo Book — Workspaces; RFC 2906]**
 
 ### 3.1 Workspace 高级用法
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **[Cargo Book]** A workspace is a collection of one or more packages that share the same `Cargo.lock` and output directory. Workspaces help manage multiple related packages developed in tandem.
@@ -354,6 +360,7 @@ mod sync_impl;
 > **[来源: Cargo Book — Features; The Rust Reference — Conditional Compilation]**
 
 ### 3.2 Features 与条件编译
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **[Cargo Book]** Features are a mechanism for conditional compilation that allow a package to declare optional dependencies and togglable functionality.
@@ -410,7 +417,7 @@ graph TD
 - 无法为同一 crate 的不同依赖方启用互斥 feature
 - `resolver = "2"` 减少了 dev-dependency 的 feature 泄漏
 
-```rust,ignore
+```rust
 // 若 crate-a 启用 serde/derive，crate-b 自动获得 derive 能力
 // 这既是便利（代码共享），也是风险（feature 污染）
 ```
@@ -512,6 +519,7 @@ cargo bloat --no-default-features
 > **[来源: Cargo Book — Manifest Format; crates.io Docs — Publishing]**
 
 ### 3.3 Cargo.toml 完整字段解析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | **字段** | **层级** | **作用** | **示例** |
@@ -535,6 +543,7 @@ cargo bloat --no-default-features
 > **[来源: SemVer Spec 2.0.0; Cargo Book — SemVer Compatibility]**
 
 ### 3.4 SemVer 兼容性规则详解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **[SemVer 2.0.0]** Given a version number MAJOR.MINOR.PATCH, increment the:
@@ -565,6 +574,7 @@ cargo bloat --no-default-features
 > **[来源: LLVM Target Triple Docs; rustc Target Tier Policy]**
 
 ### 4.1 目标三元组（Target Triple）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **[Wikipedia]** A target triple is a string that uniquely identifies a target platform for compilation, typically in the form `architecture-vendor-operating_system-abi`.
@@ -590,6 +600,7 @@ cargo bloat --no-default-features
 > **[来源: rustup Docs — Cross-compilation; musl libc Docs]**
 
 ### 4.2 工具链配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -605,6 +616,7 @@ linker = "aarch64-linux-gnu-gcc"
 ```
 
 ### 4.2.1 musl vs glibc：静态链接的权衡
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **维度** | **glibc (gnu)** | **musl** |
@@ -629,6 +641,7 @@ docker run -v $(pwd):/src rust:1.78-alpine sh -c \
 > **来源**: [musl libc](https://musl.libc.org/) · [Rust Platform Support] · 可信度: ✅
 
 ### 4.2.2 链接器配置与交叉编译环境
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 除了 `.cargo/config.toml` 指定链接器外，完整的交叉编译环境还需：
@@ -796,6 +809,7 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 > **[来源: rustc Target Specification Docs; LLVM Target Registry]**
 
 ### 4.3 自定义 Target
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 对于未官方支持的平台，可编写自定义 target spec JSON：
@@ -839,6 +853,7 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 > **[来源: rustdoc Book; RFC 1574 — API Documentation]**
 
 ### 5.2 rustdoc
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **[The Rustdoc Book]** rustdoc is the documentation tool for Rust. It processes Rust source code and Markdown comments to produce HTML documentation.
@@ -853,6 +868,7 @@ build-std = ["core", "alloc"]  # cargo build -Z build-std
 > **[来源: RustSec Advisory DB; cargo-audit Docs]**
 
 ### 5.3 cargo-audit
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **[RustSec]** Audit `Cargo.lock` files for crates with security vulnerabilities reported to the [RustSec Advisory Database](https://rustsec.org/).
@@ -870,6 +886,7 @@ cargo audit
 > **[来源: cargo-deny Book; Embark Studios Blog]**
 
 ### 5.4 cargo-deny
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **[Embark Studios]** A cargo plugin that lets you lint your project's dependency graph to ensure all your dependencies conform to your requirements.
@@ -895,6 +912,7 @@ multiple-versions = "warn"
 > **[来源: cargo-nextest Docs; nextest Book]**
 
 ### 5.5 cargo-nextest
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **[nextest]** A next-generation test runner for Rust projects.
@@ -981,6 +999,7 @@ flowchart LR
 > **[来源: rustc Dev Guide — Driver; Query System]**
 
 ### 7.1 rustc_driver
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **[rustc Dev Guide]** The `rustc_driver` crate serves as the main entry point to the compiler. It parses command-line arguments, sets up the compilation session, and orchestrates the various compiler queries.
@@ -1001,6 +1020,7 @@ flowchart LR
 > **[来源: LLVM Language Reference; rustc Dev Guide — Codegen]**
 
 ### 7.2 LLVM IR
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **[LLVM Project]** LLVM IR is a low-level intermediate representation used by the LLVM compiling infrastructure. It is a strongly typed, SSA-form representation that is target-independent.
@@ -1089,6 +1109,7 @@ graph TD
 以下三个反命题揭示工具链常见的认知误区，每个反命题通过"假设→反驳→后果"结构呈现。
 
 ### 10.1 "Cargo 解决所有依赖问题"
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -1105,6 +1126,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.2 "编译器警告可以忽略"
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -1121,6 +1143,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 10.3 "工具链选择不影响代码质量"
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -1194,6 +1217,7 @@ graph TD
 | 安全边界 | [`../05_comparative/04_safety_boundaries.md`](../05_comparative/04_safety_boundaries.md) | 质量门禁 |
 
 ### 编译验证：Edition 机制与向后兼容性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 以下代码验证 Rust Edition 机制如何保证跨版本的编译期兼容性：
@@ -1221,6 +1245,7 @@ fn main() {
 ---
 
 ### 13.1 `cargo-fuzz`：模糊测试集成
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `cargo-fuzz` 基于 LLVM 的 libFuzzer，为 Rust 提供覆盖率引导的模糊测试：
@@ -1267,6 +1292,7 @@ cargo fuzz run parse_target -- -max_total_time=300
 > **来源**: [cargo-fuzz 文档] · [libFuzzer 文档] · [LLVM Fuzzing] · [Rust Fuzz Book]
 
 ### 13.2 `sccache`：分布式编译缓存
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `sccache`（Mozilla 开发）为 Rust/C/C++ 提供编译缓存和分布式编译：
@@ -1315,6 +1341,7 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 ---
 
 ## 十五、定理一致性矩阵（工具链保证层）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源类型: 原创分析; Cargo Book; Clippy Docs; Miri Book]** 以下矩阵梳理 Rust 工具链各组件提供的保证及其边界。
@@ -1715,4 +1742,3 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

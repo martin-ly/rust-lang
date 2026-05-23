@@ -555,7 +555,7 @@ fn main() {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 // ✅ 边界: method call 的隐式重新借用
 fn main() {
     let mut v = vec![1, 2, 3];
@@ -908,7 +908,7 @@ Cow<'a, T> 的约束:
 
 #### 强制解引用的规则
 
-```rust,ignore
+```rust
 use std::ops::{Deref, DerefMut};
 
 struct MyBox<T>(T);
@@ -953,7 +953,7 @@ b.push_str(" world");  // ✅ 自动解引用: &mut MyBox<String> → &mut Strin
 | **典型实现者** | 智能指针（Box、Rc、Arc、Vec） | 视图类型（String → str、PathBuf → Path） |
 | **方法调用** | `wrapper.method()` 自动转发 | 需显式 `.as_ref().method()` |
 
-```rust,ignore
+```rust
 // ✅ Deref: 智能指针自动获得内部类型的方法
 let v = vec![1, 2, 3];
 v.len();  // Vec 通过 Deref 到 [T]，自动调用 slice 的 len()

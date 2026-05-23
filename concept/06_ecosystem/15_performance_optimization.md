@@ -32,6 +32,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 测量优先原则
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -91,6 +93,7 @@ Rust 性能优化的核心原则: "先测量，再优化"
 ---
 
 ### 1.2 编译器优化层级
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -129,9 +132,10 @@ Rust 编译器的优化:
 ---
 
 ### 1.3 零成本抽象的验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 // 验证零成本抽象: 迭代器 vs 手写循环
 
 // 迭代器版本（清晰）
@@ -169,6 +173,7 @@ fn sum_loop(data: &[i32]) -> i32 {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Criterion：统计性基准测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -203,6 +208,7 @@ criterion_main!(benches);
 ---
 
 ### 2.2 Flamegraph：可视化性能分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -237,6 +243,7 @@ criterion_main!(benches);
 ---
 
 ### 2.3 缓存友好性与内存布局
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -341,6 +348,7 @@ SIMD 向量化:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -363,6 +371,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -610,4 +619,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

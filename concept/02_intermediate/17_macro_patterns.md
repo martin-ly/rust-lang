@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 宏的工程价值
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -88,6 +90,7 @@
 ---
 
 ### 1.2 声明宏 vs 过程宏
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -124,6 +127,7 @@
 ---
 
 ### 1.3 宏的卫生性工程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -170,9 +174,10 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 DRY 代码生成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 为多个类型实现相同 Trait
 
 macro_rules! impl_display {
@@ -235,9 +240,10 @@ define_enum_with_display! {
 ---
 
 ### 2.2 条件编译模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 // cfg 与宏结合的条件编译
 
 // 平台特定实现
@@ -291,9 +297,10 @@ macro_rules! log {
 ---
 
 ### 2.3 编译期计算
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 // 编译期计算的宏技巧
 
 // 计算参数个数
@@ -398,6 +405,7 @@ Builder 生成:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -420,6 +428,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -719,4 +728,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

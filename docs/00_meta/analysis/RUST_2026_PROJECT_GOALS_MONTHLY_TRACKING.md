@@ -185,8 +185,8 @@
 | T01 | Cranelift 后端提速编译 | ✅ | [`docs/06_toolchain/CRANELIFT_BACKEND_GUIDE.md`](../../06_toolchain/CRANELIFT_BACKEND_GUIDE.md) — 安装、配置、项目级与单次编译、实测数据完整 |
 | T02 | Miri UB 检测普及化 | ✅ | [`docs/05_guides/MIRI_PRACTICAL_GUIDE.md`](../../05_guides/MIRI_PRACTICAL_GUIDE.md) — 466 行实战指南，覆盖 UAF、OOB、数据竞争、未初始化内存等常见 UB 模式 |
 | T03 | Cargo TOML v1.1 支持 | ✅ | [`docs/06_toolchain/TOML_V11_CARGO_GUIDE.md`](../../06_toolchain/TOML_V11_CARGO_GUIDE.md) — 多行内联表、尾部逗号、扩展裸键规则等新特性详解 |
-| T04 | cargo-script (`cargo +nightly script`) | ✅ | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../crates/c03_control_fn/examples/cargo_script_demo.rs) — 可直接运行的 shebang 脚本示例 |
-| T05 | cargo-semver-checks 集成 | ✅ | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../crates/c10_networks/src/cargo_semver_checks_guide.rs) — API 兼容性检查指南，覆盖 major/minor/patch 判定规则 |
+| T04 | cargo-script (`cargo +nightly script`) | ✅ | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) — 可直接运行的 shebang 脚本示例 |
+| T05 | cargo-semver-checks 集成 | ✅ | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) — API 兼容性检查指南，覆盖 major/minor/patch 判定规则 |
 | T06 | rust-analyzer 性能与功能完善 | 🟡 | IDE 配置有提及，缺少性能调优指南、Chalk 求解器原理和宏扩展诊断 |
 | T07 | 编译时间持续优化 (parallel frontend) | 🟡 | [`reports/COMPILATION_OPTIMIZATION_REPORT.md`](../../../reports/COMPILATION_OPTIMIZATION_REPORT.md) 有数据，但缺少并行前端实际操作指南 |
 | T08 | `rustc_codegen_gcc` 后端进展 | 🔴 | 无覆盖 — GCC 后端对特定架构（如 RISC-V）有独特价值 |
@@ -435,8 +435,8 @@
 | VerusBelt | [`docs/04_research/VERUSBELT_PLDI_2026.md`](../../04_research/VERUSBELT_PLDI_2026.md) | Markdown | 229 |
 | C++ 互操作 | [`docs/03_guides/CXX_INTEROP_GUIDE.md`](../../03_guides/CXX_INTEROP_GUIDE.md) | Markdown | 151 |
 | Rust for Linux | [`docs/04_research/RUST_FOR_LINUX.md`](../../04_research/RUST_FOR_LINUX.md) | Markdown | 272 |
-| cargo-script | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../crates/c03_control_fn/examples/cargo_script_demo.rs) | Rust 示例 | — |
-| cargo-semver-checks | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../crates/c10_networks/src/cargo_semver_checks_guide.rs) | Rust 源码 | — |
+| cargo-script | [`crates/c03_control_fn/examples/cargo_script_demo.rs`](../../../crates/c03_control_fn/examples/cargo_script_demo.rs) | Rust 示例 | — |
+| cargo-semver-checks | [`crates/c10_networks/src/cargo_semver_checks_guide.rs`](../../../crates/c10_networks/src/cargo_semver_checks_guide.rs) | Rust 源码 | — |
 
 ---
 

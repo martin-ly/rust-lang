@@ -10,7 +10,7 @@
 > **来源**: [std::iter::Iterator](https://doc.rust-lang.org/std/iter/trait.Iterator.html) ·
 > [TRPL — Iterators](https://doc.rust-lang.org/book/ch13-02-iterators.html) ·
 > [Rust Iterator Cheat Sheet](https://doc.rust-lang.org/std/iter/index.html) ·
-> [Cliff Click — Iterators in Rust](<https://www.youtube.com/watch?v=y-ek> three) ·
+> [Cliff Click — Iterators in Rust](https://www.youtube.com/watch?v=y-ek3S9JFPw) ·
 > [RFC 0235 — IntoIterator](https://rust-lang.github.io/rfcs/0235-collections-conventions.html)
 
 ## 📑 目录
@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Iterator Trait 的设计
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust,ignore
@@ -86,9 +88,10 @@ pub trait Iterator {
 ---
 
 ### 1.2 惰性计算链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,ignore
+```rust
 // 迭代器的惰性计算
 
 let result: Vec<i32> = vec![1, 2, 3, 4, 5]
@@ -128,6 +131,7 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 ---
 
 ### 1.3 消费者与适配器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -174,9 +178,10 @@ let result: Vec<i32> = vec![1, 2, 3, 4, 5]
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 自定义迭代器
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 自定义迭代器: Fibonacci 序列
 
 struct Fibonacci {
@@ -230,6 +235,7 @@ where I::Item: Clone
 ---
 
 ### 2.2 迭代器优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -274,6 +280,7 @@ where I::Item: Clone
 ---
 
 ### 2.3 IntoIterator 与 for 循环
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -381,6 +388,7 @@ for x in &mut v { /* x 是 &mut i32 */ }
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -403,6 +411,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -672,4 +681,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

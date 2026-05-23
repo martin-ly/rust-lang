@@ -19,7 +19,7 @@
 | **L2 进阶** | 23 安全/43 完全、语义边界图、三维边界矩阵 | [02_workflow_safe_complete_models](02_workflow_safe_complete_models/README.md)、[05_boundary_system](05_boundary_system/README.md) |
 | **L3 深入** | 执行模型、组合工程、扩展模式代码、反模式与规避 | [03_execution_models](03_execution_models/README.md)、[04_compositional_engineering](04_compositional_engineering/README.md)、[07_anti_patterns](./07_anti_patterns.md) |
 
-**实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 [03_semantic_boundary_map 场景 7–9](02_workflow_safe_complete_models/03_semantic_boundary_map.md#场景化-safe-决策-3-例)。
+**实操入口**：执行模型 + 设计模式可运行示例见 [03_execution_models 可运行示例](03_execution_models/README.md#可运行示例层次推进)；语义边界 Safe 决策 3 例见 [03_semantic_boundary_map 场景 7–9](../../archive/deprecated_20260318/research_notes/software_design_theory/02_workflow_safe_complete_models/03_semantic_boundary_map.md#场景化-safe-决策-3-例)。
 
 **全面论证推进**：设计模式、分布式模式、工作流模式论证深化见 [COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN](./COMPREHENSIVE_ARGUMENTATION_GAP_ANALYSIS_AND_PLAN.md)。
 

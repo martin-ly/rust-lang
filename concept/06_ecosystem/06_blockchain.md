@@ -36,6 +36,7 @@ $entry
 > **学习递进**: 从"区块链为什么需要 Rust"的直觉，深入到"类型系统如何消除整类合约漏洞"的形式化理解。
 
 ### 第 1 步：为什么区块链领域特别需要内存安全？
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 智能合约一旦部署即不可篡改，漏洞意味着**不可逆的资金损失**（The DAO、Parity 多签冻结等事件）。传统 EVM/Solidity 合约依赖运行时检查和人工审计，而 Rust 的编译期保证可消除整类漏洞。
@@ -45,11 +46,13 @@ $entry
 Solana/Polkadot/Near 等 Rust 链将**合约执行模型**从"单线程状态机"推进到"并行交易处理"（Sealevel）或"异构分片"（Substrate）。Rust 的所有权模型天然匹配这种并行资源管理需求。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 第 3 步：类型系统如何替代安全审计的一部分工作？
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 重入攻击、整数溢出、未初始化存储——这些在 Solidity 中需要人工审计的漏洞，在 Rust 中由编译器**statically reject**。理解这种"漏洞类别消除"机制，是评估 Rust 链安全优势的核心。
 
 ### 第 4 步：形式化验证在合约中的边界在哪里？
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Kani 等工具可以验证 unsafe 边界和整数无溢出，但无法验证**业务逻辑正确性**（如"只有所有者才能转账"）。类型系统消除"如何做"的错误，形式化验证消除"做什么"的偏差。
@@ -101,6 +104,7 @@ mindmap
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 内存安全 ⟹ 合约无重入/溢出漏洞
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 漏洞类别 | Solidity/EVM 现状 | Rust 合约的编译期保证 |
@@ -114,6 +118,7 @@ mindmap
 > **核心洞察**: Rust 不是"让漏洞更难发生"，而是**让整类漏洞在编译期成为不可类型化的程序**。这是从"防御性编程"到"构造性安全"的范式跃迁。
 
 ### 1.2 无 GC 的确定性执行
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 区块链要求**完全确定性**——相同的输入必须在所有节点上产生相同的输出。Rust 的无垃圾回收（GC-less）内存管理消除了 GC 暂停和内存布局非确定性，使得 Rust 合约的执行时间可预测性远高于 Go 或 Java 实现。
@@ -148,6 +153,7 @@ fn process_instruction(
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 Solana (Sealevel)：并行合约执行引擎
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | Solana 设计 | Rust 角色 |
@@ -179,6 +185,7 @@ graph TD
 > **关键洞察**: Sealevel 的并行不是自动的——它依赖交易显式声明账户访问模式，这与 Rust 编译期借用检查同构。
 
 ### 2.2 Polkadot (Substrate)：异构分片与 FRAME
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | Substrate 设计 | Rust 角色 |
@@ -225,6 +232,7 @@ mod erc20 {
 ```
 
 ### 2.3 Near Protocol：用户友好与分片执行
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | Near 设计 | Rust 角色 |
@@ -242,6 +250,7 @@ mod erc20 {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 漏洞类别消除矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 漏洞 | Solidity 根源 | Rust 消除机制 | 形式化根基 |
@@ -259,7 +268,7 @@ mod erc20 {
 
 Kani（AWS 开发的 Rust 模型检测器）可直接验证 ink! / Solana 合约中的关键不变量： [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 
-```rust,ignore
+```rust
 // ✅ Kani 验证：账户余额非负 + 总量守恒
 #[cfg(kani)]
 mod verification {
@@ -319,6 +328,7 @@ mod verification {
 Move 语言（最初为 Diem 设计，现由 Sui 和 Aptos 生态主导）将**资源导向编程（Resource-Oriented Programming）**作为核心安全机制。其设计理念与 Rust 的所有权模型高度同构，但在区块链语境下有独特的表达形式。
 
 ### 4.0 Move vs Rust 合约类型层次对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -397,6 +407,7 @@ classDiagram
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 Move 资源模型的三要素
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Move 的 `struct` 默认具有**线性资源语义**——不可复制、不可隐式丢弃，必须通过显式 `ability` 声明解除限制：
@@ -425,6 +436,7 @@ let coin: Coin = get_coin();
 > **核心洞察**: Move 的 abilities 是**能力安全（Capability Security）**在类型系统中的表达。与 Rust 的所有权转移不同，Move 通过**编译期 ability 检查**和**字节码验证器（bytecode verifier）**双重保障资源安全。 [来源: [lib.rs](https://lib.rs/)]
 
 ### 4.2 Sui 的 Object-Centric 模型 vs Aptos 的账户存储模型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Sui (Object-Centric) | Aptos (账户存储) | Rust/ink! (Wasm) |
@@ -450,6 +462,7 @@ public fun get_balance(addr: address): u64 acquires Coin {
 ```
 
 ### 4.3 Move 与 Rust 合约的形式化差异
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 安全维度 | Move (Sui/Aptos) | Rust (ink!/Solana) | 形式化根基 |
@@ -463,6 +476,7 @@ public fun get_balance(addr: address): u64 acquires Coin {
 > **关键差异**: Move 的**字节码验证器**在部署时执行额外的安全检查（引用不悬空、资源不丢失、类型不混淆），这是 Rust 编译器不提供的**链上验证层**。Rust 合约依赖 Wasm 沙箱和运行时检查，而 Move 合约在**字节码级别**即被验证为安全。
 
 ### 4.4 双花预防的形式化对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -504,6 +518,7 @@ public fun split(coin: Coin, amount: u64): (Coin, Coin) {
 > **[来源: Interlay Docs; Kani Verification Blog; Substrate FRAME Docs]** ✅
 
 ### 5.1 Interlay: 使用 Kani 验证 BRC-20 桥接 Pallet
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Interlay（比特币-波卡桥接协议）在其 Substrate pallet 中引入 Kani 验证，覆盖以下关键不变量：
@@ -515,7 +530,7 @@ Interlay（比特币-波卡桥接协议）在其 Substrate pallet 中引入 Kani
 | **提款原子性** | `withdraw(addr, amount) ⟹ balance_before - amount == balance_after` | 防止重入导致的余额不一致 |
 | **时间锁单调性** | `unlock_time >= block_timestamp + MIN_LOCK_PERIOD` | 防止时间操纵攻击 |
 
-```rust,ignore
+```rust
 // ✅ Interlay pallet: Kani 验证抵押率不变量
 #[cfg(kani)]
 mod verification {
@@ -573,6 +588,7 @@ fn verify_weight_calculation_does_not_overflow() {
 ```
 
 ### 5.3 形式化验证的覆盖边界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 可验证 | 不可验证（当前工具限制）|
@@ -652,6 +668,7 @@ fn process_instruction(
 > **SBF Verifier 的形式化根基**: Solana 字节码验证器实现了**控制流完整性（CFI）**和**内存安全**的静态检查。这与 Rust 编译器的借用检查器是互补的——Rust 保证源代码级安全，SBF verifier 保证字节码级安全。
 
 ### 8.2 Polkadot PVF：Wasm 验证函数的形式化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，由中继链（Relay Chain）验证者执行：
@@ -666,6 +683,7 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **PVF 的形式化方向**: Polkadot 团队正在研究 Wasm 子集的**形式化语义**，以确保 PVF 的执行在所有 Wasm 运行时（Wasmi、Wasmtime）上产生相同结果。这与 Rust 的 `unsafe` 代码指南项目类似——定义哪些 Wasm 构造是" well-defined "的。
 
 ### 8.3 形式化语义进展对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 规范 | 字节码层 | 形式化验证状态 | Rust 编译链路 | 关键挑战 |
@@ -905,4 +923,3 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

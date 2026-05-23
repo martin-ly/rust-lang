@@ -45,6 +45,7 @@ fn test_exception_cases() {
 
 /// 测试资源耗尽情况
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_resource_exhaustion() {
     // 测试大量数据操作
     let very_large_size = 1000000;
@@ -58,6 +59,7 @@ fn test_resource_exhaustion() {
 
 /// 测试并发安全
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_concurrent_safety() {
     use std::sync::{Arc, Mutex};
     use std::thread;

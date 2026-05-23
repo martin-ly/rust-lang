@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 高阶生命周期（HRTB）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -84,6 +86,7 @@ HRTB (Higher-Ranked Trait Bounds):
 ---
 
 ### 1.2 生命周期省略规则
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -125,6 +128,7 @@ HRTB (Higher-Ranked Trait Bounds):
 ---
 
 ### 1.3 变型（Variance）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -176,6 +180,7 @@ HRTB (Higher-Ranked Trait Bounds):
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 HRTB 的实际应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -238,6 +243,7 @@ where F: for<'a> Fn(&'a str)
 ---
 
 ### 2.2 自引用与 Pin
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -297,9 +303,10 @@ impl SelfReferential {
 ---
 
 ### 2.3 生命周期与闭包
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 // 闭包捕获与生命周期
 
 fn closure_lifetimes() {
@@ -391,6 +398,7 @@ fn closure_lifetimes() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -413,6 +421,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -686,4 +695,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

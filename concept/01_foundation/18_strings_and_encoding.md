@@ -84,7 +84,7 @@ Rust 字符串类型的所有权谱系:
   └── 生命周期: 'static
 ```
 
-```rust,ignore
+```rust
 // 所有权转换示例 [来源: TRPL]
 fn main() {
     let s1 = String::from("hello");     // 拥有的 String
@@ -228,7 +228,7 @@ Rust 的字符串类型全景:
   └─────────────┴─────────────┴─────────────────────────────┘
 ```
 
-```rust,ignore
+```rust
 // 安全字符串处理示例 [来源: Rust Standard Library]
 fn safe_slice(s: &str, start: usize, end: usize) -> Option<&str> {
     // get 方法在边界无效时返回 None，不 panic

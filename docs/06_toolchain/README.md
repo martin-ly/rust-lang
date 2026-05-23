@@ -233,8 +233,8 @@ lto = true
 
 - [Workspace 管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#2-创建和配置-workspace)
 - [依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#3-依赖管理)
-- [Feature 管理](./02_cargo_workspace_guide.md#5-feature-管理)
-- [构建优化](./02_cargo_workspace_guide.md#7-构建优化)
+- [Feature 管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#5-feature-管理)
+- [构建优化](../archive/deprecated_20260318/02_cargo_workspace_guide.md#7-构建优化)
 
 #### 文档生成
 
@@ -413,7 +413,7 @@ serde = { version = "1.0", features = ["derive"] }
 tokio = { version = "1.0", features = ["full"] }
 ```
 
-**详细指南**: [02_cargo_workspace_guide.md#2](./02_cargo_workspace_guide.md#2-创建和配置-workspace)
+**详细指南**: [02_cargo_workspace_guide.md#2](../archive/deprecated_20260318/02_cargo_workspace_guide.md#2-创建和配置-workspace)
 
 ---
 
@@ -567,7 +567,7 @@ resolver = "2"  # 使用 Resolver 2
 tokio = { version = "1.0", features = ["full"] }
 ```
 
-**参考**: [02_cargo_workspace_guide.md#3.3](./02_cargo_workspace_guide.md#33-依赖版本统一)
+**参考**: [02_cargo_workspace_guide.md#3.3](../archive/deprecated_20260318/02_cargo_workspace_guide.md#33-依赖版本统一)
 
 ---
 

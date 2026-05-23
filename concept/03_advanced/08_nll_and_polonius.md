@@ -35,6 +35,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,9 +46,10 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 词法生命周期的问题
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust
 // 词法作用域借用检查（NLL 之前）的问题
 
 fn lexical_lifetime_problem() {
@@ -89,6 +91,7 @@ fn drop_and_use() {
 ---
 
 ### 1.2 NLL 的解决方案
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -121,6 +124,7 @@ NLL (Non-Lexical Lifetimes) 的核心思想:
 ---
 
 ### 1.3 Polonius 的进一步精确化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -162,6 +166,7 @@ Polonius: 下一代借用检查器
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 NLL 的实现机制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -214,6 +219,7 @@ NLL 的数据流分析:
 ---
 
 ### 2.2 Polonius 的约束传播
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -251,6 +257,7 @@ Polonius 的约束模型:
 ---
 
 ### 2.3 借用检查的三代对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -339,6 +346,7 @@ NLL / Polonius 影响的代码模式:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -362,6 +370,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -478,6 +487,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -634,4 +644,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

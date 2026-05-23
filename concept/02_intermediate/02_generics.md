@@ -843,7 +843,7 @@ type RingBuffer256<T> = RingBuffer<T, 256>;
 
 Const Generics 与 GATs（Generic Associated Types，见 §9.5）的交互是 Rust 类型系统向依赖类型演进的显著标志。关联类型可携带生命周期参数，但在稳定 Rust 中**不能直接携带 const generic 参数**：[来源: RFC 2000 / RFC 1598]
 
-```rust,ignore
+```rust
 // ❌ 不稳定: 关联类型不能直接携带 const generic
 trait Grid {
     type Row<const N: usize>;  // 需 generic_const_exprs
@@ -1320,7 +1320,7 @@ let good = |s: &str| -> &str { &s[1..] };
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust,ignore
+```rust
 // 边界: const generics 支持有限类型级运算，特化尚未稳定
 
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
@@ -1573,7 +1573,7 @@ fn print_all<T: Iterator<Item = i32>>(items: T) { ... }
 
 #### 返回位置 `impl Trait` = Existential（存在）
 
-```rust,ignore
+```rust
 // ✅ 返回位置：实现者决定具体类型，调用者只能使用 Trait bounds
 fn make_iter() -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()  // 具体类型：Vec<i32>::IntoIter
@@ -2154,7 +2154,7 @@ trait LendingIterator {
 
 **为什么标准 Iterator 不足**:
 
-```rust,ignore
+```rust
 trait Iterator {
     type Item;  // 无生命周期参数
     fn next(&mut self) -> Option<Self::Item>;

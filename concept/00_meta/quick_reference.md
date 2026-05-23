@@ -94,7 +94,7 @@
 **定义**: 协作式多任务的语法糖，`async fn` 编译为 `enum Future` 状态机
 **代码**:
 
-```rust,ignore
+```rust
 async fn foo() -> i32 { 42 }
 // 等价于: fn foo() -> impl Future<Output = i32>
 ```
@@ -223,7 +223,7 @@ impl Drop for MyType {
 **定义**: 和类型（Sum Type），变体间互斥，编译期穷尽检查
 **代码**:
 
-```rust,ignore
+```rust
 enum Option<T> { None, Some(T) }
 enum Result<T, E> { Ok(T), Err(E) }
 ```
@@ -454,7 +454,7 @@ struct Kilometers(u32);
 **定义**: 可能为空的值，`Some(T)` 或 `None`，强制调用者处理空值
 **代码**:
 
-```rust,ignore
+```rust
 let x: Option<i32> = Some(5);
 let y = x.unwrap_or(0);  // 安全取值
 ```

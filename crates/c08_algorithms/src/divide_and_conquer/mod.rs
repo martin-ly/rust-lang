@@ -389,9 +389,15 @@ mod tests {
     use super::*;
 
     #[test]
-    fn test_max_subarray_sum() {
+    fn test_max_subarray_sum_sync() {
         let nums = vec![-2, 1, -3, 4, -1, 2, 1, -5, 4];
         assert_eq!(max_subarray_sum_sync(&nums), 6);
+    }
+
+    #[test]
+    #[cfg(not(miri))]
+    fn test_max_subarray_sum_parallel() {
+        let nums = vec![-2, 1, -3, 4, -1, 2, 1, -5, 4];
         assert_eq!(max_subarray_sum_parallel(&nums), 6);
     }
 
@@ -418,7 +424,9 @@ mod tests {
     #[test]
     fn test_quickselect_and_karatsuba() {
         let mut v = vec![7, 2, 5, 3, 9, 1, 6, 4, 8];
-        let kth = quickselect_kth(&mut v, 4).copied().expect("快速选择第k小元素失败");
+        let kth = quickselect_kth(&mut v, 4)
+            .copied()
+            .expect("快速选择第k小元素失败");
         assert_eq!(kth, 5);
         assert_eq!(
             karatsuba_mul("12345678901234567890", "9876543210"),

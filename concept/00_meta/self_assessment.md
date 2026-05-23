@@ -1189,7 +1189,7 @@ fn first_char(s: &String) -> &str {
 >
 > [来源: [Wikipedia — Type System](https://en.wikipedia.org/wiki/Type_system)]
 
-```rust,ignore
+```rust
 enum Message {
     Quit,
     Move { x: i32, y: i32 },

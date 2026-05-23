@@ -114,7 +114,6 @@ fn test_parallel_algorithms_correctness() {
 /// 测试异步闭包算法
 #[tokio::test]
 #[cfg_attr(miri, ignore)]
-#[cfg_attr(miri, ignore)]
 async fn test_async_closure_algorithms() {
     let data = vec![1, 2, 3, 4, 5];
     let mapper =
@@ -321,6 +320,7 @@ fn test_algorithm_stability() {
 
 /// 测试算法可扩展性
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_algorithm_scalability() {
     let sizes = vec![100, 1000, 10000];
 

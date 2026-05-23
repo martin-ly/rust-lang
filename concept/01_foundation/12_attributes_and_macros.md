@@ -97,7 +97,7 @@ Rust 属性分类:
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,ignore
+```rust
 // macro_rules! 声明宏
 
 // 最简单的宏: 类似于 C 的 #define，但类型安全
@@ -149,7 +149,7 @@ let v = vec_custom![1, 2, 3,];
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,ignore
+```rust
 // 卫生性（Hygiene）: 宏不会意外捕获外部变量
 
 fn hygiene_demo() {
@@ -207,7 +207,7 @@ macro_rules! swap {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust,ignore
+```rust
 // 宏的模式匹配语法
 
 macro_rules! complex_macro {
@@ -281,7 +281,7 @@ let empty = sum!();         // 0
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 // 递归宏: 通过模式匹配实现递归
 
 // 计算参数个数

@@ -36,6 +36,7 @@
   - [五、迁移路径](#五迁移路径)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 内存管理：所有权 vs GC
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -76,6 +78,7 @@ graph LR
 ---
 
 ### 1.2 类型系统：静态显式 vs 静态推断
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -101,6 +104,7 @@ graph LR
 ---
 
 ### 1.3 并发模型：所有权约束 vs JMM
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -136,6 +140,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 运行时架构对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | Rust | Java |
@@ -156,6 +161,7 @@ graph TD
 ---
 
 ### 2.2 异常处理哲学
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -190,9 +196,10 @@ graph TD
 ---
 
 ### 2.3 泛型实现：单态化 vs 擦除
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,ignore
+```rust
 // Rust: 泛型单态化（Monomorphization）
 fn identity<T>(x: T) -> T { x }
 
@@ -249,6 +256,7 @@ public static <T> T identity(T x) { return x; }
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -275,6 +283,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -448,4 +457,3 @@ Java → Rust 的渐进迁移策略:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

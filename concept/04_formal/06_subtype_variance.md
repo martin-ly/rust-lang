@@ -35,6 +35,7 @@
   - [五、常见编译错误解析](#五常见编译错误解析)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 子类型关系：'static 是 'a 的子类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 在 Rust 中，子类型关系主要出现在**生命周期**之间：
@@ -73,6 +75,7 @@
 ---
 
 ### 1.2 变型三态：协变、逆变、不变
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -105,6 +108,7 @@ graph LR
 ---
 
 ### 1.3 Rust 中的变型规则
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -138,6 +142,7 @@ Rust 类型的变型规则:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 生命周期位置的变型推导
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -168,9 +173,10 @@ let r: &mut &'a str = &mut s;  // ❌ 编译错误！
 ---
 
 ### 2.2 结构体与枚举的变型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 // 结构体的变型由字段推导
 struct Wrapper<'a, T> {
     item: &'a T,  // &'a T: 协变 over 'a, 协变 over T
@@ -203,6 +209,7 @@ enum Option<'a, T> {
 ---
 
 ### 2.3 函数指针的变型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -281,6 +288,7 @@ let f: fn() -> &'a str = returns_static;  // ✅ &'static str <: &'a str
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -303,6 +311,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -502,4 +511,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-
