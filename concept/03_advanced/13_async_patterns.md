@@ -1,6 +1,8 @@
 # 异步模式：从 Future 到生产级并发
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Ana — 分析异步模式的状态机变换
 > **定位**: 深入分析 Rust **异步编程的高级模式**——从 Future 状态机、Pin 保证到并发执行和取消传播，揭示 Rust async/await 如何在零运行时开销下实现高效并发。
 > **前置概念**: [Async](./02_async.md) · [Pin](./06_pin_unpin.md) · [Concurrency](./01_concurrency.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Tokio](https://tokio.rs/)

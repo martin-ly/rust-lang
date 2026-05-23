@@ -345,3 +345,7 @@ ex:Borrowing rdf:type ex:Concept ;
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — 8 种实体类型 + 8 种关系类型 + 完整三元组实例 + Turtle/JSON-LD 机器格式 + 与现有符号对照 [来源: 权威来源对齐 Wave 6]
+
+---
+
+> **相关文件**: [概念索引](concept_index.md) · [知识图谱数据](kg_data.json) · [跨层拓扑](inter_layer_topology.md) · [层内映射](intra_layer_model_map.md)

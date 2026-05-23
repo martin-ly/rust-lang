@@ -1457,3 +1457,6 @@ unsafe {
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+
+> **相关谓词映射**: [own(τ) / shr(κ, ℓ) 完整映射](../00_meta/rustbelt_predicate_map.md) · [标准库谓词规范](../00_meta/rustbelt_predicate_map.md#五谓词组合与-rust-代码对应)
+> **相关 FTA**: [Unsafe 契约失效树](../00_meta/fault_tree_analysis_collection.md#六unsafe-契约失效树)

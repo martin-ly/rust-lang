@@ -1,6 +1,8 @@
 # Serde 序列化模式：Rust 的类型驱动数据转换
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用 Serde 序列化设计模式
 > **定位**: 深入分析 **Serde** —— Rust 生态中主导的序列化/反序列化框架，探讨 `Serialize [来源: [serde::Serialize](https://docs.rs/serde/latest/serde/trait.Serialize.html)]`/`Deserialize` derive 宏、自定义序列化逻辑、以及类型系统如何保障数据转换的安全性。
 > **前置概念**: [Traits](./01_traits.md) · [Macros](../03_advanced/04_macros.md) · [Generics](./02_generics.md)
 > **后置概念**: [Core Crates](../06_ecosystem/03_core_crates.md) · [Application Domains](../06_ecosystem/04_application_domains.md)

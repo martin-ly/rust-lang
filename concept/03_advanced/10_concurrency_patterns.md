@@ -1,6 +1,8 @@
 # 并发 [来源: [Rust Concurrency](https://doc.rust-lang.org/book/ch16-00-concurrency.html)]模式：从消息 [来源: [Message Passing](https://doc.rust-lang.org/book/ch16-02-message-passing.html)]传递到锁自由的数据结构
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Ana — 分析并发模式的设计意图
 > **定位**: 深入分析 Rust **并发编程的高级模式**——从 Actor 模型、通道模式到无锁数据结构和内存序，揭示 Rust 所有权系统如何为并发安全提供编译期保证。
 > **前置概念**: [Concurrency](./01_concurrency.md) · [Async](./02_async.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Distributed Systems](../06_ecosystem/18_distributed_systems.md) · [Lockfree](../03_advanced/01_concurrency.md)

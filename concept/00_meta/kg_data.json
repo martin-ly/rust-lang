@@ -1,0 +1,90 @@
+{
+  "@context": {
+    "ex": "https://rust-lang-knowledge-graph.org/",
+    "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
+  },
+  "metadata": {
+    "version": "1.0",
+    "generated": "2026-05-23",
+    "rust_version": "1.95.0+",
+    "source": "concept/00_meta/kg_ontology.md"
+  },
+  "entities": {
+    "concepts": [
+      {"id": "ex:Ownership", "label_en": "Ownership", "label_zh": "所有权", "layer": "L1", "bloom": "Understand", "asp": "S"},
+      {"id": "ex:Borrowing", "label_en": "Borrowing", "label_zh": "借用", "layer": "L1", "bloom": "Understand", "asp": "S"},
+      {"id": "ex:Lifetimes", "label_en": "Lifetimes", "label_zh": "生命周期", "layer": "L1", "bloom": "Apply", "asp": "S+A"},
+      {"id": "ex:TypeSystem", "label_en": "Type System", "label_zh": "类型系统", "layer": "L1", "bloom": "Understand", "asp": "S"},
+      {"id": "ex:Trait", "label_en": "Trait", "label_zh": "Trait", "layer": "L2", "bloom": "Analyze", "asp": "S"},
+      {"id": "ex:Generics", "label_en": "Generics", "label_zh": "泛型", "layer": "L2", "bloom": "Apply", "asp": "A+S"},
+      {"id": "ex:MemoryManagement", "label_en": "Memory Management", "label_zh": "内存管理", "layer": "L2", "bloom": "Analyze", "asp": "S+P"},
+      {"id": "ex:ErrorHandling", "label_en": "Error Handling", "label_zh": "错误处理", "layer": "L2", "bloom": "Apply", "asp": "A+S"},
+      {"id": "ex:Concurrency", "label_en": "Concurrency", "label_zh": "并发", "layer": "L3", "bloom": "Analyze", "asp": "S+P"},
+      {"id": "ex:AsyncAwait", "label_en": "Async/Await", "label_zh": "异步", "layer": "L3", "bloom": "Analyze", "asp": "S+P"},
+      {"id": "ex:UnsafeRust", "label_en": "Unsafe Rust", "label_zh": "Unsafe Rust", "layer": "L3", "bloom": "Evaluate", "asp": "S+P"},
+      {"id": "ex:Macros", "label_en": "Macros", "label_zh": "宏", "layer": "L3", "bloom": "Analyze", "asp": "S+P"},
+      {"id": "ex:LinearLogic", "label_en": "Linear Logic", "label_zh": "线性逻辑", "layer": "L4", "bloom": "Evaluate", "asp": "S"},
+      {"id": "ex:TypeTheory", "label_en": "Type Theory", "label_zh": "类型论", "layer": "L4", "bloom": "Analyze", "asp": "S"},
+      {"id": "ex:OwnershipFormal", "label_en": "Ownership Formalization", "label_zh": "所有权形式化", "layer": "L4", "bloom": "Analyze", "asp": "S+P"},
+      {"id": "ex:RustBelt", "label_en": "RustBelt", "label_zh": "RustBelt", "layer": "L4", "bloom": "Evaluate", "asp": "S+P"}
+    ],
+    "theories": [
+      {"id": "ex:AffineLogic", "label_en": "Affine Logic", "label_zh": "仿射逻辑"},
+      {"id": "ex:SeparationLogic", "label_en": "Separation Logic", "label_zh": "分离逻辑"},
+      {"id": "ex:RegionTypes", "label_en": "Region Types", "label_zh": "区域类型"},
+      {"id": "ex:SystemF", "label_en": "System F", "label_zh": "System F"},
+      {"id": "ex:IrisLogic", "label_en": "Iris Logic", "label_zh": "Iris 逻辑"}
+    ],
+    "properties": [
+      {"id": "ex:Send", "label_en": "Send", "label_zh": "Send"},
+      {"id": "ex:Sync", "label_en": "Sync", "label_zh": "Sync"},
+      {"id": "ex:Copy", "label_en": "Copy", "label_zh": "Copy"},
+      {"id": "ex:Sized", "label_en": "Sized", "label_zh": "Sized"}
+    ],
+    "rules": [
+      {"id": "ex:AXM", "label_en": "Alias-XOR-Mutation", "label_zh": "AXM 规则"},
+      {"id": "ex:OrphanRule", "label_en": "Orphan Rule", "label_zh": "孤儿规则"},
+      {"id": "ex:Elision", "label_en": "Lifetime Elision", "label_zh": "生命周期省略"}
+    ]
+  },
+  "relations": [
+    {"source": "ex:Ownership", "relation": "dependsOn", "target": "ex:TypeSystem"},
+    {"source": "ex:Borrowing", "relation": "dependsOn", "target": "ex:Ownership"},
+    {"source": "ex:Lifetimes", "relation": "dependsOn", "target": "ex:Borrowing"},
+    {"source": "ex:Trait", "relation": "dependsOn", "target": "ex:TypeSystem"},
+    {"source": "ex:Generics", "relation": "dependsOn", "target": "ex:TypeSystem"},
+    {"source": "ex:MemoryManagement", "relation": "dependsOn", "target": "ex:Ownership"},
+    {"source": "ex:Concurrency", "relation": "dependsOn", "target": "ex:Borrowing"},
+    {"source": "ex:AsyncAwait", "relation": "dependsOn", "target": "ex:Generics"},
+    {"source": "ex:UnsafeRust", "relation": "mutexWith", "target": "ex:Ownership"},
+    {"source": "ex:Ownership", "relation": "equivalentTo", "target": "ex:AffineLogic"},
+    {"source": "ex:Borrowing", "relation": "equivalentTo", "target": "ex:SeparationLogic"},
+    {"source": "ex:Lifetimes", "relation": "equivalentTo", "target": "ex:RegionTypes"},
+    {"source": "ex:Generics", "relation": "equivalentTo", "target": "ex:SystemF"},
+    {"source": "ex:RustBelt", "relation": "dependsOn", "target": "ex:SeparationLogic"},
+    {"source": "ex:RustBelt", "relation": "dependsOn", "target": "ex:IrisLogic"},
+    {"source": "ex:Send", "relation": "instanceOf", "target": "ex:Trait"},
+    {"source": "ex:Sync", "relation": "instanceOf", "target": "ex:Trait"},
+    {"source": "ex:AXM", "relation": "appliesTo", "target": "ex:Borrowing"},
+    {"source": "ex:OrphanRule", "relation": "appliesTo", "target": "ex:Trait"},
+    {"source": "ex:Elision", "relation": "appliesTo", "target": "ex:Lifetimes"}
+  ],
+  "decision_trees": [
+    {"concept": "ex:Ownership", "tree": "concept_definition_decision_forest.md#二所有权判定树"},
+    {"concept": "ex:Borrowing", "tree": "concept_definition_decision_forest.md#三借用判定树"},
+    {"concept": "ex:Lifetimes", "tree": "concept_definition_decision_forest.md#四生命周期判定树"},
+    {"concept": "ex:Trait", "tree": "concept_definition_decision_forest.md#五trait-判定树"},
+    {"concept": "ex:Generics", "tree": "concept_definition_decision_forest.md#六泛型判定树"},
+    {"concept": "ex:Concurrency", "tree": "concept_definition_decision_forest.md#七并发判定树"},
+    {"concept": "ex:AsyncAwait", "tree": "concept_definition_decision_forest.md#八异步判定树"},
+    {"concept": "ex:UnsafeRust", "tree": "concept_definition_decision_forest.md#九unsafe-判定树"}
+  ],
+  "fault_trees": [
+    {"top_event": "内存安全失效", "tree": "fault_tree_analysis_collection.md#二内存安全失效树"},
+    {"top_event": "并发安全失效", "tree": "fault_tree_analysis_collection.md#三并发安全失效树"},
+    {"top_event": "类型系统失效", "tree": "fault_tree_analysis_collection.md#四类型系统失效树"},
+    {"top_event": "异步安全失效", "tree": "fault_tree_analysis_collection.md#五异步安全失效树"},
+    {"top_event": "Unsafe契约失效", "tree": "fault_tree_analysis_collection.md#六unsafe-契约失效树"}
+  ]
+}

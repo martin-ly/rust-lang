@@ -1,6 +1,8 @@
 # Language Evolution（语言演进）
 
 > **层级**: L7 前沿趋势
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价语言演进方向的技术路线
 > **前置概念**: 全部前置层级
 > **主要来源**: [Rust RFCs](https://rust-lang.github.io/rfcs/) · [Rust Blog](https://blog.rust-lang.org/) · [Edition Guide](https://doc.rust-lang.org/edition-guide/) · [Inside Rust](https://blog.rust-lang.org/inside-rust/) · [Wikipedia]
 
@@ -1459,3 +1461,6 @@ graph TD
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+
+
+> **相关文件**: [版本跟踪](../07_future/05_rust_version_tracking.md) · [Effects 系统](../07_future/04_effects_system.md) · [能力图谱](../00_meta/competency_graph.md)

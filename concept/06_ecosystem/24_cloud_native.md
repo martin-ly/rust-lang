@@ -1,6 +1,8 @@
 # Rust 云原生生态
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **双维定位**: P×Cre — 设计云原生架构
 > **定位**: 分析 Rust 在云原生领域的应用——从微服务框架到容器化部署，探讨 Rust 的内存安全与性能优势如何重塑云基础设施。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Network](../06_ecosystem/18_distributed_systems.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [Distributed Systems](18_distributed_systems.md)

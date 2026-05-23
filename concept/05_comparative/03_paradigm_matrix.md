@@ -1,6 +1,8 @@
 # Paradigm Matrix: Multi-Language Formal Comparison（多语言范式对比矩阵）
 
 > **层级**: L5 对比分析
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Ana — 分析多语言类型系统谱系
 > **前置概念**: [Rust vs C++](./01_rust_vs_cpp.md) · [Rust vs Go](./02_rust_vs_go.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **后置概念**: [Future Evolution](../07_future/03_evolution.md)
 > **主要来源**: [Wikipedia: Comparison of programming languages] · [Wikipedia: Programming paradigm] · [Wikipedia: Type system] · [PL Papers]
@@ -973,3 +975,6 @@ fn process(data: Vec<String>) -> Vec<String> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+
+> **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [执行模型同构](./05_execution_model_isomorphism.md) · [类型论](../04_formal/02_type_theory.md)

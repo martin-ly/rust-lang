@@ -1,6 +1,8 @@
 # Application Domains（软件工程应用主题）
 
 > **层级**: L6 生态工程
+> **A/S/P 标记**: **A+S+P** — 全维度
+> **双维定位**: P×Eva — 评估 Rust 在特定领域的适用性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Core Crates](./03_core_crates.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **后置概念**: [AI Integration](../07_future/01_ai_integration.md) · [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [Rust in Production] · [Rust Foundation] · [Ferrous Systems] · [RustConf] · [AWS/Google/Microsoft Rust 博客]

@@ -1,6 +1,8 @@
 # Core Crates（核心开源库谱系）
 
 > **层级**: L6 生态工程
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: P×Eva — 评估生态 crate 的安全性和可维护性
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md) [来源: [Rust FFI Guidelines](https://doc.rust-lang.org/nomicon/ffi.html)]
 > **后置概念**: [Application Domains](./04_application_domains.md)
 > **主要来源**: [crates.io](https://crates.io) · [lib.rs](https://lib.rs) · [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/) · [Rust API Guidelines]
@@ -1425,3 +1427,6 @@ graph TD
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+
+> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)

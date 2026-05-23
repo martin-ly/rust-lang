@@ -1,6 +1,8 @@
 # Gen Blocks 预研：超越异步的泛化生成器
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Gen Blocks 预览特性
 > **定位**: 探讨 Rust 中 **gen blocks**（生成器块）的提案——将 `async`/`.await` 的模式从**异步计算**泛化到**惰性迭代**和**协程**，分析其对迭代器生态、流处理（Stream）和异步生成器的影响。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits/Iterators](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)

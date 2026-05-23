@@ -845,3 +845,6 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+
+> **相关文件**: [范式矩阵](./03_paradigm_matrix.md) · [异步](../03_advanced/02_async.md) · [并发](../03_advanced/01_concurrency.md)

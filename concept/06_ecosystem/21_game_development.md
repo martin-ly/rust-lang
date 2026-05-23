@@ -1,6 +1,8 @@
 # Rust 游戏开发生态
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **双维定位**: P×Cre — 设计游戏开发架构
 > **定位**: 分析 Rust 在游戏开发领域的生态格局——从 Bevy ECS 到 WGPU 图形渲染，探讨 Rust 的内存安全与性能优势如何重塑游戏引擎设计。
 > **前置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Type System](../01_foundation/04_type_system.md) · [Performance](../06_ecosystem/15_performance_optimization.md)
 > **后置概念**: [WebAssembly](../06_ecosystem/11_webassembly.md) · [ECS](../06_ecosystem/04_application_domains.md)

@@ -1,6 +1,8 @@
 # Rust CLI 开发生态
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用 CLI 开发模式
 > **定位**: 探讨 Rust 在命令行工具开发领域的生态——从 clap 的参数解析到 indicatif 的进度条，分析 Rust 如何成为现代 CLI 工具的首选语言。
 > **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [Type System](../01_foundation/04_type_system.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Performance](../06_ecosystem/15_performance_optimization.md) · [Cross Compilation](17_cross_compilation.md)

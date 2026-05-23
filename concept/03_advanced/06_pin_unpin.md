@@ -1,6 +1,8 @@
 # Pin 与 Unpin：自引用类型的不动性保证
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Pin 不动性对自引用的必要性
 > **定位**: 深入分析 Rust 中 **Pin<&mut T>** 和 **Unpin** 的设计动机——解决自引用类型（self-referential structs）在内存移动时的安全问题，探讨 Pin 与 Future、Generator 的交互，以及 async/await 的状态机实现。
 > **前置概念**: [Async](./02_async.md) · [Ownership](../01_foundation/01_ownership.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Unsafe](./03_unsafe.md) · [Gen Blocks](../07_future/15_gen_blocks_preview.md)

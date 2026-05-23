@@ -1,6 +1,8 @@
 # Unsafe Fields 预研：字段级安全边界的精确标注
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Unsafe Fields 预览特性
 > **定位**: 探讨 Rust 中引入 **unsafe [来源: [Rust Unsafe](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)] [来源: [Rust Nomicon](https://doc.rust-lang.org/nomicon/)] [来源: [Rust Reference — Unsafe](https://doc.rust-lang.org/reference/unsafe-keyword.html)] field [来源: [Rust RFC - Unsafe Fields](https://github.com/rust-lang/rfcs/pull/3458)]s** 的提案——允许在结构体字段级别标记 `unsafe`，将 `unsafe` 的粒度从**代码块**细化到**字段访问**，提升 unsafe Rust 的局部性和可审计性。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Safety Tags](./08_safety_tags_preview.md)

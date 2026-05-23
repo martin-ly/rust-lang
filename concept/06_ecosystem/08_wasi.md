@@ -1,6 +1,8 @@
 # WASI & WebAssembly Component Model（WASI 与 WebAssembly 组件模型）
 
 > **层级**: L6 应用主题
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用 WASI 能力安全模型
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/03_unsafe.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Application Domains](./04_application_domains.md) · [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md)
 > **主要来源**: [WASI Preview 2 Docs] · [WebAssembly Component Model Spec] · [wit-bindgen Docs] · [WASMtime Docs] · [Rust WASM Working Group] · [Wikipedia: WebAssembly]

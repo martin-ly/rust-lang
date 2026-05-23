@@ -1,6 +1,8 @@
 # Rust 测试策略：从单元测试到属性验证
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **双维定位**: P×App — 实施多层测试策略
 > **定位**: 系统分析 Rust 生态中的**测试方法论**——从内置测试框架到属性测试（proptest）、模糊测试（cargo-fuzz）、Miri 验证和形式化测试（Kani），构建多层次的质量保证体系。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)

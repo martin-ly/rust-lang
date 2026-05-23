@@ -1,6 +1,8 @@
 # 高级类型系统：从关联类型到类型级编程
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析高级类型系统特性的形式化边界
 > **定位**: 深入分析 Rust **类型系统的高级特性**——从 GATs、impl Trait 到类型级计算和 const generics，揭示 Rust 如何在保持编译期安全的同时提供强大的抽象能力。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](./02_generics.md) · [Traits](./01_traits.md)
 > **后置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Category Theory](../04_formal/10_category_theory.md)

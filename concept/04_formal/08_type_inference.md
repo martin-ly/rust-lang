@@ -1,6 +1,8 @@
 # 类型推断：Hindley-Milner 算法与 Rust 的工业实现
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 HM 类型推断算法
 > **定位**: 深入分析 **Hindley-Milner (HM) 类型推断算法**——从 λ 演算到 Rust 的工业实现，探讨 HM 的完备性、Rust 对 HM 的扩展（trait 约束、泛型、生命周期），以及类型推断与代码可读性的平衡。
 > **前置概念**: [Type Theory](./02_type_theory.md) · [Generics](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置概念**: [RustBelt](./04_rustbelt.md) · [Subtype Variance](./06_subtype_variance.md)

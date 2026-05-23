@@ -1,6 +1,8 @@
 # Const Trait Impl 预研：常量上下文中的 Trait 泛化
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Const Trait Impl 预览特性
 > **定位**: 探讨 Rust 在**常量上下文**（`const fn`）中支持 Trait 调用的演进，分析其对泛型编程、`const fn` 表达能力以及编译期计算的影响。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Evolution](./03_evolution.md)

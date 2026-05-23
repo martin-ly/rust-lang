@@ -1,6 +1,8 @@
 # Rust 嵌入式系统开发
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **双维定位**: P×Cre — 设计嵌入式系统架构
 > **定位**: 探讨 Rust 在嵌入式系统领域的应用——从 `no_std` 到裸机编程，分析内存安全如何保证关键系统的可靠性。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [Memory Management](../02_intermediate/03_memory_management.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Cross Compilation](./17_cross_compilation.md) · [RTOS](../06_ecosystem/04_application_domains.md)

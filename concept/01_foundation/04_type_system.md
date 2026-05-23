@@ -3046,3 +3046,6 @@ let p: &Point = &Point(1, 2);
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树) · [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)
+> **相关 FTA**: [类型系统失效树](../00_meta/fault_tree_analysis_collection.md#四类型系统失效树)

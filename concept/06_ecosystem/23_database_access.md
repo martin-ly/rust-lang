@@ -1,6 +1,8 @@
 # Rust 数据库访问生态
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用数据库访问模式
 > **定位**: 分析 Rust 的数据库访问生态——从 SQLx 的编译期检查到 Diesel 的 ORM [来源: [Wikipedia — ORM](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping)]，探讨类型安全如何消除运行时查询错误。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Type System](../01_foundation/04_type_system.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [Performance](../06_ecosystem/15_performance_optimization.md) · [Web Development](../06_ecosystem/04_application_domains.md)

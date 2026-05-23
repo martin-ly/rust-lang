@@ -1,6 +1,8 @@
 # Cranelift [来源: [Wasmtime](https://wasmtime.dev/)] [来源: [Cranelift](https://github.com/bytecodealliance/wasmtime/tree/main/cranelift)] 后端预研：Rust 编译器的快速调试编译
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Cranelift 后端预览特性
 > **定位**: 探讨 **Cranelift** 作为 Rust 编译器（rustc）的替代后端，分析其对**编译时间**、**调试体验**和**开发迭代效率**的影响，以及与 LLVM 后端的互补关系。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Parallel Frontend](./09_parallel_frontend_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)

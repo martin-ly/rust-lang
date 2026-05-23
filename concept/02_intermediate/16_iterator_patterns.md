@@ -1,6 +1,8 @@
 # 迭代器模式：Rust 的惰性计算与零成本抽象
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用迭代器模式和惰性求值
 > **定位**: 深入分析 Rust **迭代器（Iterator trait）**的设计——从惰性计算链、消费者-迭代器分离到自定义迭代器实现，揭示 Rust 如何通过类型系统实现编译期优化的惰性序列处理。
 > **前置概念**: [Trait](./01_traits.md) · [Generics](./02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Async Iterator](../03_advanced/02_async.md) · [Zero Cost](../01_foundation/06_zero_cost_abstractions.md)

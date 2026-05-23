@@ -2290,3 +2290,6 @@ Box<MaybeUninit<T>>.field → Box<MaybeUninit<FieldType>>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [借用判定树](../00_meta/concept_definition_decision_forest.md#三借用判定树)
+> **相关 FTA**: [内存安全失效树](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)

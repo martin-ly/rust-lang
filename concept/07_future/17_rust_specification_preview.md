@@ -1,6 +1,8 @@
 # Rust 语言规范预研：从参考文档到形式化规范
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Rust 规范预览特性
 > **定位**: 探讨 Rust 语言从**参考文档**（Rust Reference）向**形式化规范**演进的必要性与路径，分析 Ferrocene、编译器开发和形式化验证社区对规范的不同需求。
 > **前置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md) · [Ferrocene](./14_ferrocene_preview.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)

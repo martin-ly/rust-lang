@@ -204,9 +204,8 @@ Pre-research: Monitor the tracking issue for stabilization progress."#
             }
         }
 
-        let inner: Box<dyn Iterator<Item = String>> = Box::new(
-            ["a", "b"].iter().map(|s| s.to_string()),
-        );
+        let inner: Box<dyn Iterator<Item = String>> =
+            Box::new(["a", "b"].iter().map(|s| s.to_string()));
         let lines = Lines(inner);
         lines.collect()
     }
@@ -665,7 +664,12 @@ impl<T> Container<T> for SimpleTree<T> {
         let mut iter = items.into_iter();
         Self {
             root: iter.next(),
-            children: iter.map(|item| SimpleTree { root: Some(item), children: vec![] }).collect(),
+            children: iter
+                .map(|item| SimpleTree {
+                    root: Some(item),
+                    children: vec![],
+                })
+                .collect(),
         }
     }
     fn len(&self) -> usize {

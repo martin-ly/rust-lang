@@ -2566,3 +2566,5 @@ RUSTFLAGS="-Znext-solver=globally" cargo +nightly check
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树)

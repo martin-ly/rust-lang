@@ -1066,3 +1066,7 @@ graph TD
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — 八棵核心判定树（所有权/借用/生命周期/Trait/泛型/并发/异步/Unsafe）+ Mermaid 可视化 + 失效条件矩阵 + 交叉一致性图 + 与定理森林对照 [来源: 权威来源对齐 Wave 2]
+
+---
+
+> **相关文件**: [定理推理森林](theorem_inference_forest.md) · [失效分析树集](fault_tree_analysis_collection.md) · [边界扩展树](boundary_extension_tree.md) · [知识图谱本体](kg_ontology.md)

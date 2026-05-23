@@ -700,3 +700,7 @@ graph TD
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — 五棵标准 FTA（内存/并发/类型/异步/Unsafe）+ IEC 61025 符号系统 + 最小割集分析 + 跨树关联 [来源: 权威来源对齐 Wave 3]
+
+---
+
+> **相关文件**: [概念判定森林](concept_definition_decision_forest.md) · [边界扩展树](boundary_extension_tree.md) · [安全边界](../05_comparative/04_safety_boundaries.md) · [Miri 验证](../../reports/MIRI_VALIDATION_2026_05_23.md)

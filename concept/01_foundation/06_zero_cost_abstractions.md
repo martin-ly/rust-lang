@@ -1,6 +1,8 @@
 # 零成本抽象：Rust 的性能哲学
 
 > **Bloom 层级**: 理解 → 分析
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价零成本抽象的设计权衡
 > **定位**: 深入分析 Rust **零成本抽象**（Zero-Cost Abstractions）的设计哲学——探讨泛型、迭代器、Trait 对象等高层抽象如何在编译期消除运行时开销，以及与 C++ "零开销原则" 的对比。
 > **前置概念**: [Ownership](./01_ownership.md) · [Generics](../02_intermediate/02_generics.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Rust vs C++](../05_comparative/01_rust_vs_cpp.md) · [Toolchain](../06_ecosystem/01_toolchain.md)

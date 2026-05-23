@@ -751,7 +751,7 @@ mod tests {
             basic_coercion::Wrapper::from(42),
             basic_coercion::Wrapper::from("test".to_string()),
         );
-        assert_eq!(tuple.0 .0, 42);
-        assert_eq!(tuple.1 .0, "test");
+        assert_eq!(tuple.0.0, 42);
+        assert_eq!(tuple.1.0, "test");
     }
 }

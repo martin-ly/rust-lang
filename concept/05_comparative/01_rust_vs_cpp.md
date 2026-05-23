@@ -5,6 +5,8 @@
 ---
 
 > **层级**: L5 对比分析
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价技术选型的形式化论据
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Type System](../01_foundation/04_type_system.md) · [Linear Logic](../04_formal/01_linear_logic.md)
 > **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md) · [Safety Boundaries](./04_safety_boundaries.md)
 > **主要来源**: [TRPL] · [Rust Reference] · [Wikipedia: C++] · [Wikipedia: Rust] · [Wikipedia: Linear logic] · [Wikipedia: Type system] · [Wikipedia: Resource acquisition is initialization] · [Wikipedia: Programming language]
@@ -2556,3 +2558,6 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+
+> **相关文件**: [范式转换矩阵](../00_meta/paradigm_transition_matrix.md) · [Rust vs Go](./02_rust_vs_go.md) · [执行模型同构](./05_execution_model_isomorphism.md)

@@ -1,6 +1,8 @@
 # Toolchain（工具链 [来源: [Rustup](https://rust-lang.github.io/rustup/index.html)]与 Cargo [来源: [Cargo Book](https://doc.rust-lang.org/cargo/index.html)]）
 
 > **层级**: L6 生态工程
+> **A/S/P 标记**: **A+P** — Application + Procedure
+> **双维定位**: P×Eva — 评估工具链选型和验证策略
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Macros](../03_advanced/04_macros.md)
 > **后置概念**: [CI/CD Integration]
 > **主要来源**: [The Cargo Book](https://doc.rust-lang.org/cargo/) · [Rustup Documentation] · [Clippy Documentation]
@@ -1752,3 +1754,6 @@ export SCCACHE_REGION=us-east-1        # AWS 区域
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > [来源: [crates.io](https://crates.io/)]
+
+
+> **相关文件**: [能力图谱](../00_meta/competency_graph.md#六工程实践) · [质量仪表板](../00_meta/quality_dashboard_v2.md) · [版本跟踪](../07_future/05_rust_version_tracking.md)

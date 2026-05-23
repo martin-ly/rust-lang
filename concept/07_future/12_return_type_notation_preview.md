@@ -1,6 +1,8 @@
 # Return Type Notation 预研：精确捕获的显式控制
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析返回类型标注预览特性
 > **定位**: 探讨 Rust 1.95+ 中 **Return Type Notation (RTN)** —— `use<..>` 精确捕获语法，分析其对异步 Trait、生命周期推断和 API 稳定性的影响。
 > **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [Version Tracking](./05_rust_version_tracking.md)

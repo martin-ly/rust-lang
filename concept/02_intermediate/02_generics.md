@@ -3059,3 +3059,5 @@ fn foo<'a>(x: &'a str) -> impl Display + use<'a> { x }
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
+
+> **相关判定树**: [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)

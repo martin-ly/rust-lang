@@ -1,6 +1,8 @@
 # 内部可变性：编译期规则的运行时逃逸
 
 > **Bloom 层级**: 分析 → 应用
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Ana — 分析内部可变性的安全边界
 > **定位**: 深入分析 Rust **内部可变性**（Interior Mutability）模式——`Cell<T>`、`RefCell<T>`、`Mutex<T> [来源: [std::sync::Mutex](https://doc.rust-lang.org/std/sync/struct.Mutex.html)]`、`RwLock<T>` 的语义差异、使用场景以及与外部可变性（External Mutability）的互补关系。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)

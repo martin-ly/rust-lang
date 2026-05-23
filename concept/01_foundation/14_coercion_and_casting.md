@@ -1,6 +1,8 @@
 # 类型强制与转换：显式与隐式的边界
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Und — 理解类型转换和强制转换规则
 > **定位**: 系统讲解 Rust **类型强制（coercion）**和**类型转换（casting）**——从 deref 强制、子类型强制到显式 `as` 转换，揭示 Rust 如何在安全与灵活性之间精确控制类型变换。
 > **前置概念**: [Type System](./04_type_system.md) · [Ownership](./01_ownership.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [FFI](../03_advanced/05_rust_ffi.md) · [Generics](../02_intermediate/02_generics.md)

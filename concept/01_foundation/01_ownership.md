@@ -1238,3 +1238,6 @@ pub unsafe extern "C" fn borrow_to_c(s: *const u8, len: usize) {
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > [来源: [crates.io](https://crates.io/)]
 > [来源: [docs.rs](https://docs.rs/)]
+
+> **相关判定树**: [所有权判定树](../00_meta/concept_definition_decision_forest.md#二所有权判定树) · [内存安全 FTA](../00_meta/fault_tree_analysis_collection.md#二内存安全失效树)
+> **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射)

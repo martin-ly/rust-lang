@@ -1,6 +1,8 @@
 # 派生 CoercePointee 预研：智能指针的自动类型强制
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Derive CoercePointee 预览特性
 > **定位**: 探讨 Rust 1.95+ 中通过派生宏自动化 `CoerceUnsized` 和 `DispatchFromDyn` 实现，降低自定义智能指针的**样板代码**和**unsafe 实现风险**。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Generics](../02_intermediate/02_generics.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Evolution](./03_evolution.md)

@@ -1,6 +1,8 @@
 # Rust vs Go：线性所有权 vs CSP 过程逻辑
 
 > **层级**: L5 对比分析
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价并发模型的设计差异
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Memory Management](../02_intermediate/03_memory_management.md)
 > **后置概念**: [Paradigm Matrix](./03_paradigm_matrix.md)
 > **主要来源**: [TRPL] · [Effective Go] · [Wikipedia: Communicating sequential processes] · [Wikipedia: Go]
@@ -999,3 +1001,6 @@ func ParseJSON(input string) string {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+
+> **相关文件**: [Rust vs C++](./01_rust_vs_cpp.md) · [范式矩阵](./03_paradigm_matrix.md) · [问题图谱](../00_meta/problem_graph.md#三并发系统设计问题树)

@@ -1,6 +1,8 @@
 # 编译期执行与常量求值
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — StructureProcedure
+> **双维定位**: C×Eva — 评估编译期执行的能力边界
 > **定位**: 深入探讨 Rust 的**编译期执行**能力——从 `const fn` 到 `const` 泛型，分析 Rust 如何在编译期完成计算，实现零成本抽象。
 > **前置概念**: [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) · [Trait](../02_intermediate/01_traits.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)

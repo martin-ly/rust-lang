@@ -1,6 +1,8 @@
 # Formal Methods Industrialization（形式化方法工业化）
 
 > **层级**: L7 前沿趋势
+> **A/S/P 标记**: **P** — Procedure（策略决策）
+> **双维定位**: P×Eva — 评估形式化验证的工业 ROI
 > **前置概念**: [RustBelt](../04_formal/04_rustbelt.md) · [Ownership Formalization](../04_formal/03_ownership_formal.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [TLA+] · [P Language] · [POPL/PLDI 2024-2026] · [Wikipedia] · [O'Hearn 2007 — Separation Logic]
 
@@ -1903,3 +1905,6 @@ graph TD
 > [来源: [docs.rs](https://docs.rs/)]
 > [来源: [This Week in Rust](https://this-week-in-rust.org/)]
 > [来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]
+
+
+> **相关文件**: [RustBelt 谓词映射](../00_meta/rustbelt_predicate_map.md) · [能力图谱](../00_meta/competency_graph.md#五形式化能力) · [RustBelt](../04_formal/04_rustbelt.md)

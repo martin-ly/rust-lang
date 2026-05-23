@@ -1,6 +1,8 @@
 # 算法与竞赛编程 (Algorithms & Competitive Programming)
 
 > **层级**: L6 应用主题
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用算法和竞赛编程模式
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Performance Optimization](./15_performance_optimization.md)
 > **主要来源**: [CLRS — Introduction to Algorithms] · [LeetCode] · [Codeforces] · [TRPL] · [Rust Reference] · [VeriContest arXiv 2026-05-08] · [Kani Docs] · [CSES Problem Set]

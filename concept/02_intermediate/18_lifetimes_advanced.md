@@ -1,6 +1,8 @@
 # 生命周期高级主题：从 HRTB 到自引用类型
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析高级生命周期的约束传播
 > **定位**: 深入分析 Rust **生命周期**的高级主题——从高阶生命周期（HRTB）、生命周期省略规则到自引用结构和 Pin，揭示生命周期系统如何处理最复杂的借用场景。
 > **前置概念**: [Lifetimes](../01_foundation/03_lifetimes.md) · [Traits](./01_traits.md) · [Generics](./02_generics.md)
 > **后置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [NLL](../03_advanced/08_nll_and_polonius.md) · [RustBelt](../04_formal/04_rustbelt.md)

@@ -1411,3 +1411,6 @@ graph TD
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+> **相关判定树**: [并发判定树](../00_meta/concept_definition_decision_forest.md#七并发判定树)
+> **相关 FTA**: [并发安全失效树](../00_meta/fault_tree_analysis_collection.md#三并发安全失效树)

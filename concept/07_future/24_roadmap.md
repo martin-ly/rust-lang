@@ -1,6 +1,8 @@
 # Rust 2027 Edition 及未来路线图
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — StructureProcedure
+> **双维定位**: C×Eva — 评价 Rust 技术路线图
 > **定位**: 分析 Rust **2027 Edition 及更远期**的潜在特性集合——从 gen/kw、特化稳定化、可移植 SIMD、自定义分配器到异步 Trait、TAIT 等前沿议题，评价其技术成熟度与生态影响。
 > **前置概念**: [Edition Guide](23_rust_edition_guide.md) · [Version Tracking](./05_rust_version_tracking.md) · [Evolution](./03_evolution.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust in AI](./21_rust_in_ai.md)

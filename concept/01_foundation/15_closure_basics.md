@@ -1,6 +1,8 @@
 # 闭包基础：捕获环境与匿名函数
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用闭包和捕获模式
 > **定位**: 系统讲解 Rust **闭包（Closure）**——从环境捕获、Fn/FnMut/FnOnce trait 到闭包作为参数和返回值，揭示 Rust 如何将函数式编程的灵活性与所有权系统的安全性结合。
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md)
 > **后置概念**: [Iterator](../02_intermediate/16_iterator_patterns.md) · [Async](../03_advanced/02_async.md) · [Functional Patterns](../02_intermediate/07_closure_types.md)

@@ -3715,3 +3715,6 @@ gen block    =  λ(). suspend(yield) → Iterator // 协作式生成
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+> **相关判定树**: [异步判定树](../00_meta/concept_definition_decision_forest.md#八异步判定树)
+> **相关 FTA**: [异步安全失效树](../00_meta/fault_tree_analysis_collection.md#五异步安全失效树)

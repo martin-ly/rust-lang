@@ -1,6 +1,8 @@
 # Verification Toolchain Selection Guide（验证工具链选择指南）
 
 > **层级**: L4 形式化理论 → L6 工业实践
+> **A/S/P 标记**: **P** — Procedure
+> **双维定位**: P×Eva — 评估验证工具的 ROI 和适用性
 > **前置概念**: [RustBelt](./04_rustbelt.md) · [Ownership Formalization](./03_ownership_formal.md) · [Unsafe Rust](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](../07_future/02_formal_methods.md)
 > **主要来源**: [AWS Kani] · [Microsoft Verus] · [Creusot] · [Miri Book] · [Prusti] · [Aeneas] · [RefinedRust] · [a-mir-formality]

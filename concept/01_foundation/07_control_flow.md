@@ -1,6 +1,8 @@
 # 控制流：表达式导向的流程控制
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用控制流结构和模式匹配
 > **定位**: 分析 Rust **控制流结构**的设计哲学——从表达式导向（expression-oriented）的 `if`/`match`/`loop`，到 `if let`/`while let` 的模式匹配集成，揭示 Rust 如何将控制流转化为**值生成**而非**副作用执行**。
 > **前置概念**: [Ownership](./01_ownership.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md)

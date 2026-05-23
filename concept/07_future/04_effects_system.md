@@ -1,6 +1,8 @@
 # Effects System: Concept Pre-study（效果系统：概念预研）
 
 > **层级**: L7 前沿趋势
+> **A/S/P 标记**: **S** — Structure（心智模型）
+> **双维定位**: C×Ana — 分析 Effects 系统对 Rust 的潜力
 > **定位**: 本文件是 Rust 效果系统（Effect System）的**概念预研**，跟踪类型系统向显式效果追踪演进的理论动向与工程实践。内容具有推测性，随语言团队决策动态更新。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type Theory](../04_formal/02_type_theory.md)
 > **主要来源**: [Koka] · [Eff] · [Haskell GHC] · [Rust Lang Team Blog] · [类型理论研究]
@@ -654,3 +656,6 @@ Q4: 与现有生态的兼容性？
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+
+> **相关文件**: [异步](../03_advanced/02_async.md) · [类型论](../04_formal/02_type_theory.md) · [问题图谱](../00_meta/problem_graph.md)

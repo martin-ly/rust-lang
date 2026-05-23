@@ -1,6 +1,8 @@
 # Specialization：Trait 实现的精确化与重叠解析
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 Specialization 预览特性
 > **定位**: 分析 Rust **特化（Specialization）**机制的设计动机——允许为特定类型提供比泛型实现更精确的 Trait 实现，解决当前 Orphan Rule 和 Coherence 规则下的表达能力限制。
 > **前置概念**: [Trait](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Const Trait Impl](./11_const_trait_impl_preview.md) · [Effects System](./04_effects_system.md)

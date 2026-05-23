@@ -1,6 +1,8 @@
 # MC/DC Coverage 概念预研：安全关键 Rust 的覆盖率验证
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 MCDC 覆盖率预览特性
 > **定位**: 探讨 Modified Condition/Decision Coverage（MC/DC）作为**安全关键软件验证**核心指标的形式化语义，以及 Rust 编译器实现 MC/DC 覆盖率的技术路径。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Rust for Linux](../06_ecosystem/04_application_domains.md)

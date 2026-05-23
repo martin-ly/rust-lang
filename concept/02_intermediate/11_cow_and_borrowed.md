@@ -1,6 +1,8 @@
 # Cow：写时克隆与零拷贝抽象
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价写时复制的性能权衡
 > **定位**: 深入分析 Rust 中 **Cow（Clone [来源: [std::clone::Clone](https://doc.rust-lang.org/std/clone/trait.Clone.html)] on Write）**类型的设计——如何在**借用**（零拷贝）和**拥有**（必要时克隆）之间自动切换，以及它在 API 设计中的广泛应用。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Trait](./01_traits.md)
 > **后置概念**: [String Patterns](./09_serde_patterns.md) · [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md)

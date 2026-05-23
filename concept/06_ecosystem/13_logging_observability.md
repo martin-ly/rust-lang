@@ -1,6 +1,8 @@
 # 日志与可观测性：Rust 服务端监控生态
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **双维定位**: P×App — 实施可观测性工程实践
 > **定位**: 覆盖 Rust 生态中 **日志（log/tracing [来源: [tokio tracing](https://docs.rs/tracing/latest/tracing/)]）**、**指标（metrics）**、**分布式追踪（distributed tracing）**三大可观测性支柱，分析各 crate 的设计哲学与选型策略。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Error Handling](../02_intermediate/04_error_handling.md)
 > **后置概念**: [WebAssembly](./11_webassembly.md) · [Rust Version Tracking](../07_future/05_rust_version_tracking.md)

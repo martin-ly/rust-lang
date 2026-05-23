@@ -1,6 +1,8 @@
 # 并行 [来源: [rayon](https://docs.rs/rayon/latest/rayon/)]前端编译预研：Rust 编译器 [来源: [rustc Parallel](https://rustc-dev-guide.rust-lang.org/compiler-src.html)]的多核扩展
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析并行前端预览特性
 > **定位**: 探讨 Rust 编译器前端从**单线程串行**到**多核并行**的架构演进，分析其对编译时间、增量编译和 IDE 响应性的影响。
 > **前置概念**: [Toolchain](../06_ecosystem/01_toolchain.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Evolution](./03_evolution.md)

@@ -1,6 +1,8 @@
 # 引用语义：自动解引用、Deref 强制与类型转换
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Und — 理解引用语义是所有权模型的延伸
 > **定位**: 深入分析 Rust 的**引用语义机制**——自动解引用（Auto-deref）、Deref 强制（Deref Coercion）、类型强制（Type Coercion）以及它们与借用检查器的交互，澄清开发者常见的隐式转换困惑。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Type System](./04_type_system.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/03_memory_management.md) · [Generics](../02_intermediate/02_generics.md)

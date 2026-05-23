@@ -1,6 +1,8 @@
 # 文档生态：rustdoc、文档测试与 API 文档规范
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 文档工具和约定的应用
 > **定位**: 覆盖 Rust **文档生态**的核心工具与实践——从 rustdoc 的渲染机制、文档测试（doctest）、到 API 文档规范（RFC 1574）和 mdBook 静态站点生成，分析 Rust 文档文化如何成为语言生态的竞争优势。
 > **前置概念**: [Macros](../03_advanced/04_macros.md) · [Module System](../02_intermediate/10_module_system.md)
 > **后置概念**: [Cargo Toolchain](./01_toolchain.md) · [WebAssembly](./11_webassembly.md)

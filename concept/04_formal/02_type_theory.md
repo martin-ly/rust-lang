@@ -1236,3 +1236,5 @@ fn invariant<'a>(x: &'a mut String) -> &'a mut str {
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+
+> **相关判定树**: [Trait 判定树](../00_meta/concept_definition_decision_forest.md#五trait-判定树) · [泛型判定树](../00_meta/concept_definition_decision_forest.md#六泛型判定树)

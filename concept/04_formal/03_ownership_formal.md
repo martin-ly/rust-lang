@@ -1746,3 +1746,5 @@ Miri 的 Tree Borrows 检测器直接实现了上述操作语义：
 > [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
 > [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
 > [来源: [crates.io](https://crates.io/)]
+
+> **相关谓词映射**: [RustBelt 核心谓词](../00_meta/rustbelt_predicate_map.md#一rustbelt-核心谓词定义) · [定理推导链](../00_meta/rustbelt_predicate_map.md#六从谓词到定理的推导链)

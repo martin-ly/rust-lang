@@ -1,6 +1,6 @@
 # 概念知识体系自动化审计报告 v2.0
 
-> 生成时间: 2026-05-23T17:46
+> 生成时间: 2026-05-23T18:04
 > 扫描文件数: 185
 > 版本对齐: Rust 1.95.0 stable
 
@@ -9,29 +9,14 @@
 | 指标 | 数值 | 状态 |
 |:---|:---|:---|
 | 扫描文件数 | 185 | — |
-| 跨文件链接 ≥3 | 175/185 | ⚠️ |
+| 跨文件链接 ≥3 | 185/185 | ✅ |
 | 死链接文件 | 0 | ✅ |
 | 命名规范符合 | 185/185 | ✅ |
 | 代码块问题文件 | 0 | ✅ |
 | 显式 Bloom 标注 | 185/185 | ✅ |
-| 平均来源标注率 | 34.0% | ✅ |
+| 平均来源标注率 | 33.8% | ✅ |
 | TODO 待完成 | 0 | ✅ |
 | TODO 已完成 | 248 | — |
-
-## 跨文件链接不足的文件
-
-| 文件 | 链接数 | 现有链接目标 |
-|:---|:---|:---|
-| concept/00_meta/asp_marking_guide.md | 0 | 无 |
-| concept/00_meta/cognitive_dimension_matrix.md | 0 | 无 |
-| concept/00_meta/competency_graph.md | 0 | 无 |
-| concept/00_meta/concept_definition_decision_forest.md | 0 | 无 |
-| concept/00_meta/fault_tree_analysis_collection.md | 0 | 无 |
-| concept/00_meta/kg_ontology.md | 0 | 无 |
-| concept/00_meta/paradigm_transition_matrix.md | 0 | 无 |
-| concept/00_meta/problem_graph.md | 0 | 无 |
-| concept/00_meta/quality_dashboard_v2.md | 0 | 无 |
-| concept/00_meta/rustbelt_predicate_map.md | 0 | 无 |
 
 ## 方法论说明
 

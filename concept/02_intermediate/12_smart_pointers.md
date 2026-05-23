@@ -1,6 +1,8 @@
 # 智能指针：堆内存管理与共享语义
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价不同智能指针的适用场景
 > **定位**: 系统分析 Rust **智能指针**的设计——Box（独占堆分配）、Rc/Arc（引用计数共享）、RefCell/Cell（内部可变性）、以及它们的组合使用模式，揭示每种指针类型的所有权语义和适用场景。
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Memory Management](./03_memory_management.md)
 > **后置概念**: [Pin](../03_advanced/06_pin_unpin.md) · [Cow](./11_cow_and_borrowed.md)

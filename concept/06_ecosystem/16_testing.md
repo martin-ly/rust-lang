@@ -1,6 +1,8 @@
 # 测试生态：单元测试、集成测试与验证策略
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A+P** — ApplicationProcedure
+> **双维定位**: P×App — 测试框架和策略的应用
 > **定位**: 覆盖 Rust **测试生态**的全景——从内置测试框架（#[test]）、mockall [来源: [mockall](https://docs.rs/mockall/latest/mockall/)] 模拟、property-based testing（proptest [来源: [proptest](https://docs.rs/proptest/latest/proptest/)]）到模糊测试（cargo-fuzz），分析 Rust 的类型系统如何与测试策略协同实现"编译即验证"的工程学理念。
 > **前置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [Macros](../03_advanced/04_macros.md)
 > **后置概念**: [Miri](../03_advanced/03_unsafe.md) · [Formal Methods](../07_future/02_formal_methods.md)

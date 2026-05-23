@@ -1,6 +1,8 @@
 # 属性与声明宏：编译期元编程基础
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用属性和宏扩展
 > **定位**: 系统讲解 Rust **属性（attributes）**和**声明宏（macro_rules!）**——从编译期元编程的基础语法到模式匹配、递归宏和卫生性，揭示 Rust 如何在编译期生成代码同时保持类型安全。
 > **前置概念**: [Type System](./04_type_system.md) · [Modules](./11_modules_and_paths.md)
 > **后置概念**: [Proc Macros](../03_advanced/07_proc_macro.md) · [DSL](../02_intermediate/13_dsl_and_embedding.md)

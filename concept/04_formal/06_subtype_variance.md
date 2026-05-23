@@ -1,6 +1,8 @@
 # 子类型与变型：Rust 类型系统中的协变、逆变与不变
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析变型和子类型的传播规则
 > **定位**: 深入分析 Rust 类型系统中的**子类型关系**与**变型规则**（Variance），解释为什么 `&'static str` 可以赋给 `&'a str`，但 `&mut &'static str` 不能赋给 `&mut &'a str`。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Type Theory](./02_type_theory.md) · [RustBelt](./04_rustbelt.md)

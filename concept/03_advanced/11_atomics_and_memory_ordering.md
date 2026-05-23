@@ -1,6 +1,8 @@
 # 原子操作与内存序：无锁并发的精确控制
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: P×Eva — 评估原子操作内存序的选型
 > **定位**: 深入分析 Rust **原子类型（Atomic）**和**内存排序（Memory Ordering [来源: [Atomic Ordering](https://doc.rust-lang.org/std/sync/atomic/enum.Ordering.html)]）**——从基本的 load/store 到 compare-and-swap 和释放-获取语义，揭示无锁编程中硬件内存模型的精确控制。
 > **前置概念**: [Concurrency](./01_concurrency.md) · [Unsafe](./03_unsafe.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Lockfree Data Structures](https://en.wikipedia.org/wiki/Non-blocking_algorithm) · [Distributed Systems](../06_ecosystem/18_distributed_systems.md)

@@ -1,6 +1,8 @@
 # Safety Tags 概念预研：Unsafe 契约的机器可读标注
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析安全标签预览特性
 > **定位**: 探讨 Safety Tags 作为 Rust **unsafe 代码契约**的机器可读标注机制，从人工文档注释演进为编译器可理解、工具可验证的安全契约格式。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [BorrowSanitizer](./20_borrowsanitizer_preview.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [AI Integration](./01_ai_integration.md)

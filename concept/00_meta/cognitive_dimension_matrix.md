@@ -329,3 +329,7 @@ graph LR
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — Krathwohl × Bloom 双维矩阵 + L1-L7 全层映射 + A/S/P 整合 + 认知路径规划 [来源: 权威来源对齐 Wave 1]
+
+---
+
+> **相关文件**: [A/S/P 标记规范](asp_marking_guide.md) · [能力图谱](competency_graph.md) · [方法论](methodology.md) · [概念索引](../00_meta/concept_index.md)

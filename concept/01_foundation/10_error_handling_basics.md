@@ -1,6 +1,8 @@
 # Rust 错误处理基础
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **A+S** — Application + Structure
+> **双维定位**: C×App — 应用 Result/Option 错误传播模式
 > **定位**: 系统讲解 Rust 的错误处理机制——从 `Result` 和 `Option` 到 `?` 运算符，分析 Rust 如何将错误处理融入类型系统，实现编译期安全。
 > **前置概念**: [Ownership](01_ownership.md) · [Type System](04_type_system.md) · [Control Flow](07_control_flow.md)
 > **后置概念**: [Error Handling](../02_intermediate/04_error_handling.md) · [Panic](../03_advanced/03_unsafe.md) · [Logging](../06_ecosystem/13_logging_observability.md)

@@ -1,6 +1,8 @@
 # 集合类型：Rust 标准库的数据结构谱系
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 标准集合 API 的应用
 > **定位**: 系统分析 Rust **标准库集合类型**的设计——从 Vec/VecDeque 的顺序容器，到 HashMap/BTreeMap 的关联容器，再到 HashSet/BTreeSet 的集合类型，揭示每种数据结构的所有权语义、性能特征和选型策略。
 > **前置概念**: [Ownership](./01_ownership.md) · [Borrowing](./02_borrowing.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Smart Pointers](../02_intermediate/12_smart_pointers.md) · [Smart Pointers](../02_intermediate/12_smart_pointers.md)

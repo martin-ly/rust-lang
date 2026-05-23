@@ -1,6 +1,8 @@
 # BorrowSanitizer 概念预研：运行时借用检查工业化
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **S** — Structure
+> **双维定位**: C×Ana — 分析 BorrowSanitizer 预览特性
 > **定位**: 探讨 BorrowSanitizer 作为 Rust **运行时借用检查**工具的工业化路径，从 Miri 的纯解释执行扩展到编译后二进制检测的设计空间。
 > **前置概念**: [Unsafe Rust](../03_advanced/03_unsafe.md) · [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Version Tracking](./05_rust_version_tracking.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [RustBelt](../04_formal/04_rustbelt.md)

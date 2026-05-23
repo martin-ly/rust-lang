@@ -1,6 +1,8 @@
 # Public/Private Dependencies：可见性控制的工程化
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用依赖可见性规则
 > **定位**: 解决 Rust  crate 图中"依赖泄漏"问题的核心机制，使 API 稳定性与依赖演进解耦。 [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 > **对标**: Java 模块系统 `requires` vs `requires transitive`，C++ 前置声明 vs 完整包含
 

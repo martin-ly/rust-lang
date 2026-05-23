@@ -1,6 +1,8 @@
 # Blockchain & Smart Contract Security（区块链与智能合约安全）
 
 > **层级**: L6 应用主题
+> **A/S/P 标记**: **A+S+P** — 全维度
+> **双维定位**: P×Cre — 设计区块链系统的 Rust 架构
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Lifetimes](../01_foundation/03_lifetimes.md) · [Type System](../01_foundation/04_type_system.md) · [Unsafe](../03_advanced/03_unsafe.md) · [Linear Logic](../04_formal/01_linear_logic.md) [来源: [Rust by Example](https://doc.rust-lang.org/rust-by-example/)]
 > **后置概念**: [Formal Ecosystem Tower](./05_formal_ecosystem_tower.md) · [Application Domains](./04_application_domains.md)
 > **主要来源**: [Solana Docs] · [Polkadot Substrate Docs] · [Near Protocol Docs] · [Kani Verification Blog] · [Rust in Blockchain Report] · [Wikipedia: Blockchain] · [Wikipedia: Smart contract]

@@ -344,3 +344,7 @@ graph LR
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — 六维能力模型 + Dreyfus 映射 + 自评量表 + 薄弱点训练路径 + 背景定制路径 [来源: 权威来源对齐 Wave 5]
+
+---
+
+> **相关文件**: [A/S/P 标记规范](asp_marking_guide.md) · [双维认知矩阵](cognitive_dimension_matrix.md) · [问题图谱](problem_graph.md) · [学习指南](learning_guide.md)

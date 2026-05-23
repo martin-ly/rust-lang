@@ -1,6 +1,8 @@
 # Rust for Linux [来源: [Rust for Linux](https://rust-for-linux.com/)]：操作系统内核中的内存安全
 
 > **Bloom 层级**: 分析 → 评价
+> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **双维定位**: P×Cre — 设计 Rust for Linux 架构
 > **定位**: 深入分析 **Rust for Linux** 项目——如何将 Rust 引入 Linux 内核开发，从驱动程序编写、C 互操作到内核特定的安全保证，揭示系统编程范式的历史性转变。
 > **前置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md) · [Cross Compilation](../06_ecosystem/17_cross_compilation.md)
 > **后置概念**: [Formal Methods](../04_formal/04_rustbelt.md) · [Evolution](./03_evolution.md)

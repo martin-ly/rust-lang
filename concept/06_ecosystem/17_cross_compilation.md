@@ -1,13 +1,19 @@
 # 交叉编译：多目标平台支持与条件编译
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 交叉编译工具链的应用
 > **定位**: 分析 Rust **交叉编译**生态——从 target triple 的语义、条件编译（cfg）、到不同架构（x86_64/ARM/RISC-V/WASM）的编译策略，揭示 Rust 如何在不修改源代码的情况下支持从嵌入式到服务器的全谱系平台。
 > **前置概念**: [Toolchain](./01_toolchain.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [WASI](./08_wasi.md) · [WebAssembly](./11_webassembly.md)
 
 ---
 
-> **来源**: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) · [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) · [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) · [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) · [cross crate](https://github.com/cross-rs/cross)
+> **来源**: [Rustup Cross-compilation](https://rust-lang.github.io/rustup/cross-compilation.html) ·
+> [Cargo Book — Targets](https://doc.rust-lang.org/cargo/reference/config.html#target) ·
+> [RFC 0131 — Target Specification](https://github.com/rust-lang/rfcs/pull/131) ·
+> [The rustc Book — Targets](https://doc.rust-lang.org/rustc/targets/index.html) ·
+> [cross crate](https://github.com/cross-rs/cross)
 
 ## 📑 目录
 >

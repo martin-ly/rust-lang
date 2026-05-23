@@ -1,6 +1,8 @@
 # Design Patterns（设计模式）
 
 > **层级**: L6 生态工程
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×App — 应用设计模式解决类型安全问题
 > **前置概念**: [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Type System](../01_foundation/04_type_system.md) [来源: [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/)]
 > **主要来源**: [Rust API Guidelines] · [Rust Design Patterns] · [TRPL]
 
@@ -1992,3 +1994,6 @@ fn main() {
 > [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
 > [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
 > [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+
+
+> **相关文件**: [问题图谱](../00_meta/problem_graph.md) · [能力图谱](../00_meta/competency_graph.md#三设计能力) · [Trait](../02_intermediate/01_traits.md)

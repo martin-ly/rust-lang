@@ -1,6 +1,8 @@
 # `assert_matches!`：模式匹配断言的形式化语义
 
 > **Bloom 层级**: 应用 → 分析
+> **A/S/P 标记**: **A** — Application
+> **双维定位**: F×App — 断言和模式匹配语法应用
 > **定位**: 将 Rust 的**模式匹配**能力从"表达式求值"扩展到"测试断言"的工程机制，实现编译期模式检查与运行时断言的统一。
 > **前置概念**: [Type System](../01_foundation/04_type_system.md) · [Error Handling](./04_error_handling.md)
 > **后置概念**: [Macros](../03_advanced/04_macros.md) · [Version Tracking](../07_future/05_rust_version_tracking.md)

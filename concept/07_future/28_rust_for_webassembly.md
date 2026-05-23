@@ -1,6 +1,8 @@
 # Rust for WebAssembly：从 wasm-bindgen 到前端框架的深度技术栈
 
 > **Bloom 层级**: 应用 → 评价
+> **A/S/P 标记**: **A+S+P** — ApplicationStructureProcedure
+> **双维定位**: P×Cre — 设计 Rust for WASM 架构
 > **定位**: 深度评价 Rust 在 **WebAssembly (Wasm)** 全栈开发中的技术成熟度——从 wasm-bindgen/wasm-pack 工具链到 Yew/Leptos 前端框架，分析 Rust→Wasm 编译模型、JS 互操作内存模型、性能权衡边界与工程选型决策。
 > **前置概念**: [Rust 路线图](./24_roadmap.md) · [WebAssembly 生态](../06_ecosystem/11_webassembly.md) · [Web 框架](../06_ecosystem/27_web_frameworks.md)
 > **后置概念**: [WASI 预览](../06_ecosystem/08_wasi.md) · [形式化方法](./02_formal_methods.md)

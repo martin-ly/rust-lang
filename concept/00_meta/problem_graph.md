@@ -413,3 +413,7 @@ graph TD
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — 六大系统级问题树（内存安全/并发/异步/FFI/性能/错误处理）+ 三层分解结构 + 方法层映射 + 交叉索引 [来源: 权威来源对齐 Wave 5]
+
+---
+
+> **相关文件**: [能力图谱](competency_graph.md) · [概念判定森林](concept_definition_decision_forest.md) · [表征空间](semantic_space.md) · [系统设计原则](../06_ecosystem/05_system_design_principles.md)

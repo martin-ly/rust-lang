@@ -1,6 +1,8 @@
 # Edition 2024 完全指南：新特性与迁移策略
 
 > **Bloom 层级**: 应用 → 评价
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用 Edition 指南
 > **定位**: 全面讲解 Rust **Edition 2024** 的新特性——从 gen blocks、async closures 到 never type 和 lifetime captures，揭示 Edition 机制如何在不破坏兼容性的前提下推进语言演进。
 > **前置概念**: [Rust Version Tracking](./05_rust_version_tracking.md) · [Async](../03_advanced/02_async.md) · [Generics](../02_intermediate/02_generics.md)
 > **后置概念**: [Evolution](./03_evolution.md) · [NLL](../03_advanced/08_nll_and_polonius.md)

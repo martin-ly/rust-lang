@@ -1,6 +1,8 @@
 # Rust Web 框架对比与选型
 
 > **Bloom 层级**: 应用 → 评价
+> **A/S/P 标记**: **A+S** — ApplicationStructure
+> **双维定位**: C×App — 应用 Web 框架模式
 > **定位**: 对比分析 Rust 主流 Web 框架——Axum、Actix-web、Rocket、Poem——从架构设计、运行时集成、中间件机制到性能特征，建立系统化的选型决策框架。
 > **前置概念**: [Async](../03_advanced/02_async.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Traits](../02_intermediate/01_traits.md)
 > **后置概念**: [云原生生态](./24_cloud_native.md) · [设计模式](02_patterns.md)

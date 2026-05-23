@@ -2537,3 +2537,6 @@ enum SafeValue {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **相关判定树**: [生命周期判定树](../00_meta/concept_definition_decision_forest.md#四生命周期判定树)
+> **相关谓词映射**: [生命周期令牌 [α]₁](../00_meta/rustbelt_predicate_map.md#四生命周期令牌-α₁-映射)

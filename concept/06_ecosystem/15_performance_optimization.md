@@ -1,6 +1,8 @@
 # 性能优化：Rust 代码的测量与调优
 
 > **Bloom 层级**: 应用 → 评价
+> **A/S/P 标记**: **S+P** — StructureProcedure
+> **双维定位**: P×Eva — 评估性能优化策略
 > **定位**: 覆盖 Rust **性能优化**的核心方法论——从基准测试（criterion）、性能分析（flamegraph [来源: [flamegraph.rs](https://github.com/flamegraph-rs/flamegraph)]、perf）、缓存优化、SIMD [来源: [packed_simd](https://doc.rust-lang.org/std/simd/index.html)] 到零成本抽象的验证，建立"测量 → 分析 → 优化 → 验证"的工程闭环。
 > **前置概念**: [Zero Cost Abstractions](../01_foundation/06_zero_cost_abstractions.md) · [Ownership](../01_foundation/01_ownership.md)
 > **后置概念**: [Concurrency](../03_advanced/01_concurrency.md) · [Async](../03_advanced/02_async.md)

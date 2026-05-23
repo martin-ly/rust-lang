@@ -353,3 +353,7 @@ graph TD
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — own/shr/生命周期令牌三大谓词定义 + L4→L1 映射可视化 + 标准库谓词规范 + 定理推导链 + 与判定森林对照 [来源: 权威来源对齐 Wave 6]
+
+---
+
+> **相关文件**: [RustBelt](../04_formal/04_rustbelt.md) · [所有权形式化](../04_formal/03_ownership_formal.md) · [定理推理森林](theorem_inference_forest.md) · [概念判定森林](concept_definition_decision_forest.md)

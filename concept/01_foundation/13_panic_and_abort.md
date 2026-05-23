@@ -1,6 +1,8 @@
 # Panic 与 Abort：不可恢复错误的处理机制
 
 > **Bloom 层级**: 理解 → 应用
+> **A/S/P 标记**: **S+P** — Structure + Procedure
+> **双维定位**: C×Eva — 评价 panic 与 abort 的策略选择
 > **定位**: 系统讲解 Rust **panic** 机制——从 panic 与 Result 的哲学分野、panic 传播、到自定义 panic 处理和 abort 模式，揭示 Rust 如何在"优雅失败"与"快速崩溃"之间做出设计选择。
 > **前置概念**: [Error Handling](../02_intermediate/15_error_handling_deep_dive.md) · [Ownership](./01_ownership.md)
 > **后置概念**: [Unsafe](../03_advanced/03_unsafe.md) · [FFI](../03_advanced/05_rust_ffi.md)

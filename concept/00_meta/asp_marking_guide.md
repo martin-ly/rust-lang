@@ -455,3 +455,7 @@ graph LR
 **变更日志**:
 
 - v1.0 (2026-05-23): 初始版本 — A/S/P 三维标记定义 + 全量 58 文件标记 + 自动化边界分析 + 概念索引整合规范 [来源: 权威来源对齐 Wave 1]
+
+---
+
+> **相关文件**: [双维认知矩阵](cognitive_dimension_matrix.md) · [概念判定森林](concept_definition_decision_forest.md) · [能力图谱](competency_graph.md) · [方法论](methodology.md)

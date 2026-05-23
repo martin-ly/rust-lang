@@ -1190,3 +1190,5 @@ Rust 所有权系统（仿射变体）:
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
+
+> **相关谓词映射**: [own(τ) 谓词](../00_meta/rustbelt_predicate_map.md#二所有权谓词-ownτ-映射) · [shr(κ, ℓ) 谓词](../00_meta/rustbelt_predicate_map.md#三共享谓词-shrκ-ℓ-映射)
