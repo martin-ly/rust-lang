@@ -2,8 +2,8 @@
 
 > **Bloom 层级**: 评价 → 创造
 > **定位**: 对比 Rust 和 Elixir（Erlang VM）在并发模型、错误处理、类型系统和运行时的异同。
-> **前置概念**: [Rust vs Go](12_rust_vs_go.md) · [Rust vs Haskell](10_rust_vs_haskell.md) · [Async](../03_advanced/02_async.md)
-> **后置概念**: [Ecosystem](20_ecosystem_comparison.md) · [Concurrency](../03_advanced/01_concurrency.md)
+> **前置概念**: [Rust vs Go](02_rust_vs_go.md) · [Rust vs Haskell](03_paradigm_matrix.md) · [Async](../03_advanced/02_async.md)
+> **后置概念**: [Ecosystem](../06_ecosystem/README.md) · [Concurrency](../03_advanced/01_concurrency.md)
 
 ---
 
@@ -42,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 错误处理哲学
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -116,6 +117,7 @@ fn main() {
 ---
 
 ### 1.2 并发模型对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -158,6 +160,7 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 BEAM 并发模型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -202,6 +205,7 @@ BEAM (Erlang VM) 并发:
 ---
 
 ### 2.2 Rust 并发模型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -265,6 +269,7 @@ Rust 并发模型:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 静态 vs 动态
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -311,6 +316,7 @@ Rust 并发模型:
 ---
 
 ### 3.2 模式匹配
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -480,6 +486,7 @@ Rust ↔ Elixir 互操作:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -507,6 +514,7 @@ graph TD
 ---
 
 ### 6.2 适用场景矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -608,8 +616,8 @@ graph TD
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-- [Rust vs Go](12_rust_vs_go.md) — Rust vs Go
-- [Rust vs Haskell](10_rust_vs_haskell.md) — Rust vs Haskell
+- [Rust vs Go](02_rust_vs_go.md) — Rust vs Go
+- [Rust vs Haskell](03_paradigm_matrix.md) — Rust vs Haskell
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
 - [Async](../03_advanced/02_async.md) — 异步
 
@@ -784,4 +792,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

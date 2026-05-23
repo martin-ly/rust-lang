@@ -8,7 +8,7 @@
 ---
 
 > **来源**: [Rust for Linux](https://rust-for-linux.com/) ·
-> [Linux Kernel Rust Documentation](<https://docs.kernel> [来源: [Linux Kernel](https://www.kernel.org/doc/html/latest/rust/)].org/rust/index.html) ·
+> [Linux Kernel Rust Documentation](https://www.kernel.org/doc/html/latest/rust/index.html) ·
 > [LWN — Rust in the Linux Kernel](https://lwn.net/Articles/829858/) ·
 > [Rust CVE Database](https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=rust) ·
 > [Google — Rust in the Linux Kernel](https://security.googleblog.com/2021/04/rust-in-linux-kernel.html)
@@ -46,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 为什么内核需要 Rust
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -82,6 +83,7 @@ Linux 内核的安全现状:
 ---
 
 ### 1.2 Rust for Linux 架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -116,6 +118,7 @@ Rust for Linux 项目结构:
 ---
 
 ### 1.3 内核中的 unsafe 边界
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -162,6 +165,7 @@ Rust for Linux 项目结构:
 > [来源: [Rust for Linux]]
 
 ### 2.1 C 互操作与绑定生成
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -205,6 +209,7 @@ Rust for Linux 项目结构:
 ---
 
 ### 2.2 内核抽象层
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -265,6 +270,7 @@ impl FileOperations for MyDevice {
 ---
 
 ### 2.3 驱动程序开发模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -360,6 +366,7 @@ Rust for Linux 采用状态 (2024+):
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -382,6 +389,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -642,4 +650,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

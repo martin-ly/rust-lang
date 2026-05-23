@@ -1,6 +1,7 @@
 ﻿# 🔀 Rust 线程与并发速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔀 Rust 线程与并发速查卡](#-rust-线程与并发速查卡)
@@ -311,6 +312,7 @@ for i in 0..3 {
 ---
 
 ## 🎯 消息传递
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Channel
@@ -355,6 +357,7 @@ for received in rx {
 ---
 
 ## 🔧 无锁数据结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Atomic 类型
@@ -400,6 +403,7 @@ Ordering::Relaxed
 ---
 
 ## 💡 代码示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 示例 1: 线程池实现
@@ -621,6 +625,7 @@ for h in handles {
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 场景: 高并发 Web 服务器
@@ -691,6 +696,7 @@ fn main() {
 ---
 
 ## 🔍 死锁检测与运行时验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **说明**：死锁无法静态判定（见 [06_boundary_analysis](../../research_notes/software_design_theory/03_execution_models/06_boundary_analysis.md) § 静态判定 vs 运行时验证）。需以下工具辅助：
@@ -707,6 +713,7 @@ fn main() {
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 反例 1: 将非 Send 类型传入 spawn
@@ -837,24 +844,27 @@ thread::spawn(move || {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [线程与并发完整文档](../../../crates/c05_threads/docs/README.md)
 - [线程与并发 README](../../../crates/c05_threads/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 以下示例位于 `crates/c05_threads/examples/`，可直接运行（例如：`cargo run -p c05_threads --example message_passing_demo`）。
 
 - [消息传递与高级并发](../../../crates/c05_threads/examples/message_passing_demo.rs)、[advanced_concurrency_patterns_demo.rs](../../../crates/c05_threads/examples/advanced_concurrency_patterns_demo.rs)
 - [背压与流式处理](../../../crates/c05_threads/examples/backpressure_overview_demo.rs)、[stream_backpressure_demo.rs](../../../crates/c05_threads/examples/stream_backpressure_demo.rs)、[stream_rate_batch_demo.rs](../../../crates/c05_threads/examples/stream_rate_batch_demo.rs)
-- [优先级通道与实战模式](../../../crates/c05_threads/examples/priority_channels_demo.rs)、[real_world_threading_demo.rs](../../../crates/c05_threads/examples/real_world_threading_demo.rs)、[performance_optimization_demo.rs](../../../crates/c05_threads/examples/performance_optimization_demo.rs)
+- [优先级通道与实战模式](../../../crates/c05_threads/examples/priority_channels_demo.rs)、[real_world_threading_demo.rs](../../../crates/c05_threads/examples/real_world_threading_demo.rs)、[performance_optimization_demo.rs](../../../crates/c05_threads/examples/c05_performance_optimization_demo.rs)
 - Rust 1.92 特性演示（代码示例待补充）
 
 ---
 
 ## 🔗 相关资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [并发模式速查卡](./async_patterns.md)
@@ -863,6 +873,7 @@ thread::spawn(move || {
 ---
 
 ## 🆕 Rust 1.93.0 并发改进
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内存分配优化
@@ -889,6 +900,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方文档
@@ -942,6 +954,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 ---
 
 ## Rust 1.95+ 并发特性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### LazyLock 在并发状态管理中的应用
@@ -994,6 +1007,7 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1288,4 +1302,3 @@ fn parallel_window_process(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

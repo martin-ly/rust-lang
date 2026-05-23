@@ -911,3 +911,9 @@ mod tool_qualification {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+## 相关概念
+
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene vs CompCert 对比、TQL-1~TQL-5 工具鉴定映射

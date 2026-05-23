@@ -556,3 +556,9 @@
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+## 相关概念
+
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Property Preservation 论证链

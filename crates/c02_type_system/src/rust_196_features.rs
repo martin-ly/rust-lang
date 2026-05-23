@@ -59,7 +59,6 @@ impl BoolToFloatConversionExamples {
 // 2. `VecDeque::new` 的 const 上下文支持 (1.96 stable)
 // ============================================================================
 
-use std::assert_matches;
 use std::collections::VecDeque;
 
 /// # `VecDeque::new` const 支持

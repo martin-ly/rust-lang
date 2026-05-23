@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: 分析 → 评价
 > **定位**: 深入分析 Rust **FFI（外部函数接口）**的高级主题——从复杂类型映射、回调函数、到线程安全和内存布局控制，揭示如何在不安全边界上维持 Rust 的安全保证。
-> **前置概念**: [Unsafe](./03_unsafe [来源: [Unsafe Rust](https://doc.rust-lang.org/book/ch19-01-unsafe-rust.html)].md) · [FFI Basics](./05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
+> **前置概念**: [Unsafe](./03_unsafe.md) · [FFI Basics](./05_rust_ffi.md) · [Type System](../01_foundation/04_type_system.md)
 > **后置概念**: [Cross Compilation](../06_ecosystem/17_cross_compilation.md) · [WASI](../06_ecosystem/08_wasi.md)
 
 ---
@@ -46,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 FFI 的安全契约
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -81,6 +82,7 @@ FFI 边界的安全模型:
 ---
 
 ### 1.2 内存布局控制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -140,6 +142,7 @@ extern "C" {
 ---
 
 ### 1.3 回调与闭包
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust,ignore
@@ -203,6 +206,7 @@ impl Drop for CallbackHandle {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 复杂类型映射
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -247,6 +251,7 @@ impl Drop for CallbackHandle {
 ---
 
 ### 2.2 线程安全边界
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -297,6 +302,7 @@ thread_local! {
 ---
 
 ### 2.3 错误处理与 Panic 安全
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -408,6 +414,7 @@ Opaque 指针:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -430,6 +437,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -718,4 +726,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

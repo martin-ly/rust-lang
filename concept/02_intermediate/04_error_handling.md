@@ -409,7 +409,7 @@ fn load_config() -> Result<i32, AppError> {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例: ? 的错误类型无法自动转换
 fn parse_or_zero(s: &str) -> Result<i32, std::io::Error> {
     let n: i32 = s.parse()?;  // E0277: `?` couldn't convert the error

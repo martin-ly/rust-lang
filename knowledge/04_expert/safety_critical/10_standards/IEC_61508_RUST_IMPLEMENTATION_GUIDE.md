@@ -905,3 +905,9 @@ impl SafetyOpcUaServer {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+## 相关概念
+
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — IEC 61508 SIL 2 core 子集认证详情

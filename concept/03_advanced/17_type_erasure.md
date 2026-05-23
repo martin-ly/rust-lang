@@ -42,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Trait Object
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -119,6 +120,7 @@ fn main() {
 ---
 
 ### 1.2 VTable
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -153,6 +155,7 @@ VTable (虚函数表):
 ---
 
 ### 1.3 对象安全
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -194,6 +197,7 @@ VTable (虚函数表):
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 Box<dyn Trait>
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -259,6 +263,7 @@ fn main() {
 ---
 
 ### 2.2 自定义类型擦除
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -356,6 +361,7 @@ fn main() {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 静态 vs 动态分发
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -405,6 +411,7 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -428,6 +435,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -535,7 +543,7 @@ graph TD
 
 - [Trait](../02_intermediate/01_traits.md) — Trait
 - [Generics](../02_intermediate/02_generics.md) — 泛型
-- [Performance](15_performance_optimization.md) — 性能优化
+- [Performance](../06_ecosystem/15_performance_optimization.md) — 性能优化
 - [Type System](../01_foundation/04_type_system.md) — 类型系统
 
 ---
@@ -703,4 +711,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

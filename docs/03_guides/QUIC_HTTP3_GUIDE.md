@@ -1,13 +1,14 @@
 # QUIC / HTTP/3 指南
 
 > **层级**: L6 生态工具 / L3 高级网络
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../crates/c10_networks/)
+> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: RFC 9000 (QUIC)]** · **[来源: RFC 9114 (HTTP/3)]** · **[来源: quinn crate]** ✅
 
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [QUIC / HTTP/3 指南](#quic--http3-指南)
@@ -27,6 +28,7 @@
   - [权威来源索引](#权威来源索引)
 
 ## 概述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **QUIC** (Quick UDP Internet Connections) 是 Google 提出、IETF 标准化的传输层协议，基于 UDP 构建，旨在替代 TCP + TLS + HTTP/2 的组合。
@@ -48,6 +50,7 @@ HTTP              HTTP              HTTP
 ---
 
 ## QUIC 核心特性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 特性 | TCP+TLS | QUIC | 影响 |
@@ -61,6 +64,7 @@ HTTP              HTTP              HTTP
 ---
 
 ## Rust 生态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | Crate | 层级 | 说明 | 成熟度 |
@@ -74,6 +78,7 @@ HTTP              HTTP              HTTP
 ---
 
 ## 决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -93,6 +98,7 @@ HTTP              HTTP              HTTP
 ---
 
 ## 代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### QUIC 客户端（quinn）
@@ -223,6 +229,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 ## 与 HTTP/2 的对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 维度 | HTTP/2 | HTTP/3 |
@@ -238,6 +245,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 ## 限制
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 限制 | 说明 |
@@ -251,6 +259,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 ## 参考
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [RFC 9000: QUIC](https://datatracker.ietf.org/doc/html/rfc9000)
@@ -270,6 +279,7 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -373,4 +383,3 @@ async fn http3_get(url: &str) -> Result<String, Box<dyn std::error::Error>> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

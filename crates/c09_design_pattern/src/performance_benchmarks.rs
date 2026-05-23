@@ -144,10 +144,12 @@ impl ProxyBenchmark {
 }
 
 /// 并行模式性能测试
+#[cfg(not(miri))]
 pub struct ParallelBenchmark {
     data_size: usize,
 }
 
+#[cfg(not(miri))]
 impl ParallelBenchmark {
     pub fn new(data_size: usize) -> Self {
         Self { data_size }
@@ -188,6 +190,7 @@ pub struct PerformanceTestSuite {
     singleton_benchmark: SingletonBenchmark,
     flyweight_benchmark: FlyweightBenchmark,
     proxy_benchmark: ProxyBenchmark,
+    #[cfg(not(miri))]
     parallel_benchmark: ParallelBenchmark,
 }
 
@@ -203,6 +206,7 @@ impl PerformanceTestSuite {
             singleton_benchmark: SingletonBenchmark::new(10000),
             flyweight_benchmark: FlyweightBenchmark::new(1000),
             proxy_benchmark: ProxyBenchmark::new(1000),
+            #[cfg(not(miri))]
             parallel_benchmark: ParallelBenchmark::new(100000),
         }
     }
@@ -228,11 +232,19 @@ impl PerformanceTestSuite {
         let proxy_requests = self.proxy_benchmark.benchmark_proxy_requests();
         println!("代理模式请求性能: {:.2} ms", proxy_requests);
 
+        #[cfg(not(miri))]
         let parallel_reduction = self.parallel_benchmark.benchmark_parallel_reduction();
+        #[cfg(not(miri))]
         println!("并行归约性能: {:.2} ms", parallel_reduction);
+        #[cfg(miri)]
+        let parallel_reduction = 0.0;
 
+        #[cfg(not(miri))]
         let data_parallelism = self.parallel_benchmark.benchmark_data_parallelism();
+        #[cfg(not(miri))]
         println!("数据并行处理性能: {:.2} ms", data_parallelism);
+        #[cfg(miri)]
+        let data_parallelism = 0.0;
 
         BenchmarkResults {
             singleton_access,
@@ -323,6 +335,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg(not(miri))]
     fn test_parallel_benchmark() {
         let benchmark = ParallelBenchmark::new(1000);
         let result = benchmark.benchmark_parallel_reduction();

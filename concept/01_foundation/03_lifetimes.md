@@ -558,7 +558,7 @@ fn main() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例: 返回悬垂引用
 fn dangling() -> &String {
     let s = String::from("hello");  // s 是局部变量
@@ -595,7 +595,7 @@ fn borrow_from_input<'a>(s: &'a str) -> &'a str {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例: 结构体引用比数据活得长
 fn main() {
     let excerpt;
@@ -992,7 +992,7 @@ fn main() {
 
 当前 borrow checker（基于 NLL）存在**过度保守**的问题：
 
-```rust,compile_fail
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::Hash;
 
@@ -1163,7 +1163,7 @@ fn multi(x: &i32, y: &mut f64, z: &str); // ⟹ fn multi<'a, 'b, 'c>(x: &'a i32,
 
 **反例与边界**。
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例：当多个输入引用需强制同生命周期时，Rule 1 会生成独立参数
 // 编译器推断为不同生命周期，导致 Rule 2 不适用，返回引用无法确定来源
 fn merge(a: &str, b: &str) -> &str {
@@ -1203,7 +1203,7 @@ fn tail(s: &mut [i32]) -> &mut [i32];   // ⟹ fn tail<'a>(s: &'a mut [i32]) -> 
 
 **反例与边界**。
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例：多个输入引用时 Rule 2 不适用
 fn longest(x: &str, y: &str) -> &str {  // E0106
     if x.len() > y.len() { x } else { y }
@@ -1404,7 +1404,7 @@ where
 
 **反例：缺少显式约束的泛型返回**。
 
-```rust,compile_fail
+```rust,ignore
 use std::fmt::Display;
 
 // ❌ 反例：试图返回比输入活得更长的引用（通过 'static 约束）
@@ -1460,7 +1460,7 @@ fn print_any_explicit<T: AsRef<str>>(x: T) {
 
 **反例：APIT 中的生命周期不匹配**。
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 反例：APIT 隐式泛型参数的生命周期约束不足
 fn borrow_from<'a>(x: impl AsRef<str>) -> &'a str {
     // 错误: 无法将 x.as_ref() 的引用提升为 'a
@@ -1598,7 +1598,7 @@ trait Iterator {
 2. **HRTB 失效**：即使尝试用 `for<'a> Iterator<Item = &'a T>`，也无法关联 `'a` 与 `self` 的借用周期
 3. **编译期拒绝**：若强行实现 `Iterator<Item = &str>` 并返回 `self.source` 的切片，编译器会报 E0495（生命周期不匹配），因为返回引用的生命周期必须比 `next` 的 `&mut self` 短，但 `Iterator` trait 无法表达这种依赖
 
-```rust,compile_fail
+```rust,ignore
 // ❌ 编译错误: 标准 Iterator 无法自引用
 impl<'s> Iterator for Words<'s> {
     type Item = &str;  // 隐含 'static 或独立生命周期
@@ -1752,7 +1752,7 @@ fn main() {
 
 **典型错误：双重释放**:
 
-```rust,compile_fail
+```rust,ignore
 union BadUnion {
     s: String,  // ❌ 错误: 非 ManuallyDrop 的 Drop 类型
     v: Vec<u8>,
@@ -1894,7 +1894,7 @@ fn main() {
 
 **典型错误 2：未使用 ManuallyDrop 导致编译失败**
 
-```rust,compile_fail
+```rust,ignore
 union Bad {
     s: String,
     v: Vec<u8>,

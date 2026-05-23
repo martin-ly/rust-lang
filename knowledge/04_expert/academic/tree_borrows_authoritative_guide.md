@@ -1188,3 +1188,9 @@ fn use_abstractions() {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
+
+---
+
+## 相关概念
+
+- [引用语义 (concept)](../../../concept/01_foundation/05_reference_semantics.md) — Tree Borrows 工业级应用与 Miri 默认启用状态

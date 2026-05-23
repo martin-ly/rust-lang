@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust for Linux：从实验到生产](#rust-for-linux从实验到生产)
@@ -191,6 +192,7 @@ impl kernel::file::Operations for RustFile {
 > **[来源: Rust Official Docs]**
 
 ### 4.1 Android Binder IPC
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - **用途**: Android 系统中进程间通信的核心机制
@@ -199,6 +201,7 @@ impl kernel::file::Operations for RustFile {
 - **代码位置**: `drivers/android/binder.rs`
 
 ### 4.2 Apple GPU (Asahi)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **用途**: Apple Silicon (M1/M2/M3) 的 Linux GPU 驱动
@@ -207,6 +210,7 @@ impl kernel::file::Operations for RustFile {
 - **维护者**: Asahi Linux 团队
 
 ### 4.3 NVMe 基础设施
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **用途**: NVMe 存储控制器的基础框架
@@ -215,9 +219,11 @@ impl kernel::file::Operations for RustFile {
 ---
 
 ## 五、开发 Rust 内核模块
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 环境准备
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -238,9 +244,10 @@ insmod samples/rust/rust_minimal.ko
 ```
 
 ### 5.2 最小 Rust 内核模块
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust,ignore
+```rust,compile_fail
 //! samples/rust/rust_minimal.rs
 //! Linux 内核中的最小 Rust 模块
 
@@ -271,6 +278,7 @@ impl Drop for RustMinimal {
 ```
 
 ### 5.3 关键约束
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 约束 | 说明 |
@@ -285,6 +293,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 六、与 Ferrocene / 安全关键系统的关联
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 项目 | 目标 | 关系 |
@@ -299,9 +308,11 @@ impl Drop for RustMinimal {
 ---
 
 ## 七、挑战与争议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 7.1 已知挑战
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 挑战 | 现状 |
@@ -314,6 +325,7 @@ impl Drop for RustMinimal {
 | 调试复杂度 | 混合 C/Rust 栈跟踪需要特殊工具支持 |
 
 ### 7.2 缓解措施
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **稳定的 `kernel` crate API**：减少对外部生态的依赖
@@ -324,6 +336,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 八、学习路径建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **基础**: 掌握 Rust 所有权、生命周期、`no_std`、FFI
@@ -335,6 +348,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 九、参考资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 资源 | 链接 |
@@ -366,6 +380,7 @@ impl Drop for RustMinimal {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -462,4 +477,3 @@ impl Drop for RustMinimal {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

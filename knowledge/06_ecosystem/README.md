@@ -98,3 +98,11 @@
 ## 相关概念
 
 - [Cargo 基础](./cargo_basics.md)
+
+---
+
+## 相关概念
+
+- [Rust for Linux (concept)](../../concept/07_future/19_rust_for_linux.md) — 操作系统内核中的内存安全
+- [Cranelift 后端 (concept)](../../concept/07_future/16_cranelift_backend_preview.md) — 快速调试编译
+- [并行前端 (concept)](../../concept/07_future/09_parallel_frontend_preview.md) — SALSA 3.0 与多核编译加速

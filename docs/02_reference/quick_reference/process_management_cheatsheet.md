@@ -1,6 +1,7 @@
 ﻿# 进程管理快速参考卡片
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [进程管理快速参考卡片](#进程管理快速参考卡片)
@@ -261,6 +262,7 @@ ProcessConfig {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 启用性能监控
@@ -286,6 +288,7 @@ let result = manager.optimize_memory().await;
 ---
 
 ## 🐛 错误处理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -302,6 +305,7 @@ match manager.spawn(config) {
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 反例 1: 不检查子进程退出状态
@@ -345,12 +349,14 @@ fn handler(_: i32) {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [进程管理完整文档](../../../crates/c07_process/docs/README.md)
 - [进程管理 README](../../../crates/c07_process/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 以下示例位于 `crates/c07_process/examples/`，可直接运行（例如：`cargo run -p c07_process --example process_management_demo`）。
@@ -358,12 +364,13 @@ fn handler(_: i32) {
 - [进程管理演示](../../../crates/c07_process/examples/process_management_demo.rs)
 - [异步进程与 IPC](../../../crates/c07_process/examples/async_process_demo.rs)、[ipc_communication_demo.rs](../../../crates/c07_process/examples/ipc_communication_demo.rs)
 - [信号处理与进程组](../../../crates/c07_process/examples/signal_handling_demo.rs)、[process_group_demo.rs](../../../crates/c07_process/examples/process_group_demo.rs)
-- [进程监控与性能优化](../../../crates/c07_process/examples/process_monitoring_demo.rs)、[performance_optimization_demo.rs](../../../crates/c07_process/examples/performance_optimization_demo.rs)
+- [进程监控与性能优化](../../../crates/c07_process/examples/process_monitoring_demo.rs)、[performance_optimization_demo.rs](../../../crates/c07_process/examples/c07_performance_optimization_demo.rs)
 - [跨平台演示](../../../crates/c07_process/examples/cross_platform_demo.rs)
 
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 场景 1: 构建任务调度器
@@ -525,6 +532,7 @@ impl ProcessMonitor {
 ---
 
 ## 📐 形式化方法链接
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 理论基础
@@ -548,6 +556,7 @@ impl ProcessMonitor {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 官方文档
@@ -583,6 +592,7 @@ impl ProcessMonitor {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -641,6 +651,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [quick_reference 目录](./README.md)
@@ -823,4 +834,3 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

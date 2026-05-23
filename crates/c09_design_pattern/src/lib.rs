@@ -17,6 +17,7 @@ pub mod structural;
 
 // 高级设计模式模块
 pub mod concurrency;
+#[cfg(not(miri))]
 pub mod parallel;
 
 // 领域特定设计模式应用

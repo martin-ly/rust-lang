@@ -1,13 +1,14 @@
 # libp2p 指南
 
 > **层级**: L6 生态工具 / L3 高级网络
-> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../crates/c10_networks/)
+> **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Network Programming](../../crates/c10_networks/)
 > **Bloom 层级**: 应用 → 分析
 > **[来源: libp2p Specification]** · **[来源: rust-libp2p crate]** · **[来源: Protocol Labs - libp2p]** · **[来源: Wikipedia - Peer-to-Peer]** ✅
 
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [libp2p 指南](#libp2p-指南)
@@ -53,6 +54,7 @@ libp2p 协议栈
 ---
 
 ## 核心概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Multiaddr —— 统一的地址格式
@@ -93,6 +95,7 @@ PeerId = multihash(public_key)
 ---
 
 ## 决策树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -112,6 +115,7 @@ PeerId = multihash(public_key)
 ---
 
 ## 代码示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 基础节点（rust-libp2p）
@@ -238,6 +242,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ---
 
 ## 与中心化方案的对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Client-Server | libp2p P2P |
@@ -252,6 +257,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ---
 
 ## Rust 生态状态
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | Crate | 版本 | 状态 |
@@ -264,6 +270,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ---
 
 ## 限制
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 限制 | 说明 |
@@ -277,6 +284,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ---
 
 ## 参考
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [libp2p Specification](https://specs.libp2p.io/)
@@ -295,6 +303,7 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -394,4 +403,3 @@ kademlia.get_record(Key::from(vec![1, 2, 3]));
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

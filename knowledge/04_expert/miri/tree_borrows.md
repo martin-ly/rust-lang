@@ -1078,3 +1078,9 @@ fn mixed_refs(x: &mut i32) {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
+
+---
+
+## 相关概念
+
+- [引用语义 (concept)](../../../concept/01_foundation/05_reference_semantics.md) — §7.4 Tree Borrows 与多级引用、部分重借用

@@ -5,8 +5,8 @@
 > **📌 简介**: Rust 1.96.0 预计于 2026 年 5 月 28 日发布。当前处于 Beta 阶段，以下特性已通过 FCP 或正在最终稳定化流程中，极有可能进入稳定版。
 >
 > **预计发布**: 2026-05-28
-> **版本状态**: 🧪 Beta
-> **权威来源**: [releases.rs](https://releases.rs/)
+> **版本状态**: 🧪 Beta 8（最终候选，无已知 release blocker）
+> **权威来源**: [releases.rs](https://releases.rs/) · [Rust Beta 1.96.0-beta.8](https://doc.rust-lang.org/beta/releases.html)
 
 ---
 
@@ -303,3 +303,11 @@ cargo +nightly -Z script run my_script.rs
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+## 相关概念
+
+- [Rust for Linux (concept)](../../../concept/07_future/19_rust_for_linux.md) — 2026 RfL Roadmap 与社区争议
+- [Cranelift 后端 (concept)](../../../concept/07_future/16_cranelift_backend_preview.md) — unwind/debuginfo 2026 进展
+- [并行前端 (concept)](../../../concept/07_future/09_parallel_frontend_preview.md) — 1.3-1.5x 编译加速实测

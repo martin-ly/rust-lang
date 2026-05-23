@@ -231,8 +231,8 @@ lto = true
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-- [Workspace 管理](./02_cargo_workspace_guide.md#2-创建和配置-workspace)
-- [依赖管理](./02_cargo_workspace_guide.md#3-依赖管理)
+- [Workspace 管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#2-创建和配置-workspace)
+- [依赖管理](../archive/deprecated_20260318/02_cargo_workspace_guide.md#3-依赖管理)
 - [Feature 管理](./02_cargo_workspace_guide.md#5-feature-管理)
 - [构建优化](./02_cargo_workspace_guide.md#7-构建优化)
 

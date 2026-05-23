@@ -750,7 +750,7 @@ Rust 语言团队在过去 6 个 release cycle 中反复使用以下三种模式
 
 即使不考虑 GATs，普通关联类型（`type Output;`）的归一化（normalization）也涉及将类型族实例化为具体类型。在存在高阶 trait bound（`for<T: Trait> <T as Assoc>::Type: Bound`）时，归一化可能需要实例化无限类型序列。考虑以下理论上的构造：
 
-```rust,ignore
+```rust,compile_fail
 trait Rec { type Next: Rec; }
 impl<T: Rec> Rec for Wrap<T> {
     type Next = Wrap<T::Next>;

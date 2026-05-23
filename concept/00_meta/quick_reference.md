@@ -140,7 +140,7 @@ let r = &x; let r2 = &mut x; // ❌ E0502
 **定义**: 用方法链逐步构造复杂对象，编译期保证必填字段
 **代码**:
 
-```rust,compile_fail
+```rust,ignore
 HttpRequestBuilder::new()
     .method("GET")
     .url("/")

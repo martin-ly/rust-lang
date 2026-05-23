@@ -7,7 +7,7 @@
 
 ---
 
-> **来源**: [Serde Documentation](<https://serde> [来源: [serde.rs](https://serde.rs/)].rs/) ·
+> **来源**: [Serde Documentation](https://serde.rs/) ·
 > [Serde Book](https://serde.rs/impl-serialize.html) ·
 > [Rust Reference — Derive](https://doc.rust-lang.org/reference/procedural-macros.html#derive-macros) ·
 > [RFC 1681 — Macros 1.1](https://github.com/rust-lang/rfcs/pull/1681)

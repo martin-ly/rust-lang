@@ -34,3 +34,9 @@
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
 **最后更新**: 2026-05-19
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
+
+---
+
+## 相关概念
+
+- [形式化验证工具链 (concept)](../../../concept/04_formal/05_verification_toolchain.md) — KVerus (arXiv 2026)、AutoVerus (OOPSLA 2025)、Vest (USENIX Security 2025)

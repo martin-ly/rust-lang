@@ -426,3 +426,9 @@ Ferrocene项目旨在提供经过TÜV SÜD认证的Rust工具链，使Rust能够
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+---
+
+## 相关概念
+
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — Ferrocene 26.02.0 ASIL B / SIL 2 认证与 DO-178C/DO-333/DO-330 映射矩阵

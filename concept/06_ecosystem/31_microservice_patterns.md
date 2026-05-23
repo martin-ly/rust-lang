@@ -10,6 +10,7 @@
 > **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Tower](https://docs.rs/tower/latest/tower/) · [failsafe crate](https://docs.rs/failsafe/latest/failsafe/) · [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) · [Kafka Documentation](https://kafka.apache.org/documentation/)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [微服务架构模式 (Microservice Architecture Patterns)](#微服务架构模式-microservice-architecture-patterns)
@@ -87,7 +88,7 @@ graph TD
 
 > [来源: [Consul Documentation](https://developer.hashicorp.com/consul/docs)] · [来源: [etcd Documentation](https://etcd.io/docs/)]
 
-```rust,ignore
+```rust,compile_fail
 use consul::{Client, Config};
 
 async fn register_service() -> Result<(), Box<dyn std::error::Error>> {
@@ -220,6 +221,7 @@ async fn rate_limit_layer<B>(req: Request<B>, next: Next<B>)
 > [来源: [Release It! (Michael Nygard)](https://pragprog.com/titles/mnee2/release-it-second-edition/)]
 
 ### 4.1 状态机模型 (Closed/Open/Half-Open)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -722,6 +724,7 @@ Rust 微服务并非银弹:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [事件驱动架构](./32_event_driven_architecture.md) — 事件总线、消息队列、Reactive Streams
@@ -918,4 +921,3 @@ Rust 微服务并非银弹:
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

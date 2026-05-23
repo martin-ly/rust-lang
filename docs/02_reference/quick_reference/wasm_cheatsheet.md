@@ -76,6 +76,7 @@ wasm-pack new my-wasm-project
 ```
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [WASM 快速参考卡片](#wasm-快速参考卡片)
@@ -240,6 +241,7 @@ wasm-pack build --target bundler
 ---
 
 ## 🌐 在浏览器中使用 {#-在浏览器中使用}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```html
@@ -254,6 +256,7 @@ wasm-pack build --target bundler
 ---
 
 ## ⚡ 性能优化 {#-性能优化}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 减小二进制大小
@@ -280,6 +283,7 @@ wasm-opt -Os pkg/my_project_bg.wasm -o pkg/my_project_optimized.wasm
 ---
 
 ## 🚫 反例速查 {#-反例速查}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 反例 1: 在 wasm 中使用阻塞 API
@@ -320,12 +324,14 @@ for i in 0..10000 {
 ---
 
 ## 📚 相关文档 {#-相关文档}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [WASM 完整文档](../../../crates/c12_wasm/docs/README.md)
 - [WASM README](../../../crates/c12_wasm/README.md)
 
 ## 🧩 相关示例代码 {#-相关示例代码}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 以下示例位于 `crates/c12_wasm/examples/`，可直接运行（例如：`cargo run -p c12_wasm --example 01_basic_add`）。
@@ -334,11 +340,12 @@ for i in 0..10000 {
 - [字符串与数组](../../../crates/c12_wasm/examples/02_string_operations.rs)、[03_array_processing.rs](../../../crates/c12_wasm/examples/03_array_processing.rs)
 - [计数器与 WASI](../../../crates/c12_wasm/examples/04_counter_class.rs)、[05_wasi_file_processor.rs](../../../crates/c12_wasm/examples/05_wasi_file_processor.rs)
 - [异步 fetch、设计模式、微服务](../../../crates/c12_wasm/examples/06_async_fetch.rs)、[07_design_patterns.rs](../../../crates/c12_wasm/examples/07_design_patterns.rs)、[08_container_microservice.rs](../../../crates/c12_wasm/examples/08_container_microservice.rs)
-- [Rust 1.91/1.92 特性演示](../../../crates/c12_wasm/examples/rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c12_wasm/examples/rust_192_features_demo.rs)
+- [Rust 1.91/1.92 特性演示](../../../crates/c12_wasm/examples/c12_rust_191_features_demo.rs)、[rust_192_features_demo.rs](../../../crates/c12_wasm/examples/c12_rust_192_features_demo.rs)
 
 ---
 
 ## 📚 相关资源 {#-相关资源}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 官方文档
@@ -358,6 +365,7 @@ for i in 0..10000 {
 - [JavaScript 互操作](../../../crates/c12_wasm/docs/tier_02_guides/03_javascript_互操作.md)
 
 ## 🎯 使用场景 {#-使用场景}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 场景 1: 浏览器图像处理器
@@ -509,6 +517,7 @@ pub fn process_task(task_json: &str) -> String {
 ---
 
 ## 📐 形式化方法链接 {#-形式化方法链接}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 理论基础
@@ -551,6 +560,7 @@ pub fn process_task(task_json: &str) -> String {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -599,11 +609,13 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## Rust 1.95+ 在WASM中的深度应用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: WASM开发
 
 ### array_windows 在 WASM 图像处理中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -619,6 +631,7 @@ pub fn apply_kernel(data: &[u8]) -> Vec<u8> {
 ```
 
 ### LazyLock 在 WASM 状态管理中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -639,6 +652,7 @@ pub fn get_state() -> String {
 ```
 
 ### 性能提升总结
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | WASM场景应用 | 性能提升 |
@@ -667,6 +681,7 @@ pub fn get_state() -> String {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
@@ -841,4 +856,3 @@ pub fn get_state() -> String {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

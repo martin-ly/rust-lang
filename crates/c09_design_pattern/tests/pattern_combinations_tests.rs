@@ -230,6 +230,7 @@ fn test_game_engine_concurrent_inputs() {
 }
 
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_pattern_combination_performance() {
     use std::time::Instant;
 

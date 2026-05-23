@@ -2,8 +2,8 @@
 
 > **Bloom 层级**: 应用 → 评价
 > **定位**: 探讨 Rust 在游戏开发领域的应用——从 ECS 架构到渲染引擎，分析 Rust 的性能优势和开发模式。
-> **前置概念**: [ECS](11_ecs_pattern.md) · [Memory](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership.md)
-> **后置概念**: [WebAssembly](13_webassembly.md) · [Performance](15_performance_optimization.md)
+> **前置概念**: [ECS](07_game_ecs.md) · [Memory](../02_intermediate/03_memory_management.md) · [Concurrency](../03_advanced/01_concurrency.md) · [Ownership](../01_foundation/01_ownership.md)
+> **后置概念**: [WebAssembly](11_webassembly.md) · [Performance](15_performance_optimization.md)
 
 ---
 
@@ -41,6 +41,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 游戏引擎概览
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -85,6 +86,7 @@ Rust 游戏引擎生态:
 ---
 
 ### 1.2 ECS 架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -183,6 +185,7 @@ fn main() {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 wgpu 与跨平台渲染
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -232,6 +235,7 @@ wgpu:
 ---
 
 ### 2.2 渲染管线
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -377,6 +381,7 @@ fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 反命题树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -401,6 +406,7 @@ graph TD
 ---
 
 ### 5.2 适用场景
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -497,8 +503,8 @@ graph TD
 >
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
-- [ECS](11_ecs_pattern.md) — ECS 模式
-- [WebAssembly](13_webassembly.md) — WebAssembly
+- [ECS](07_game_ecs.md) — ECS 模式
+- [WebAssembly](11_webassembly.md) — WebAssembly
 - [Performance](15_performance_optimization.md) — 性能优化
 - [Memory](../02_intermediate/03_memory_management.md) — 内存管理
 - [Concurrency](../03_advanced/01_concurrency.md) — 并发
@@ -647,4 +653,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

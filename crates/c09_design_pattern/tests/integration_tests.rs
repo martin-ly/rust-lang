@@ -11,7 +11,7 @@ use c09_design_pattern::structural::flyweight::define::{
     Flyweight, OptimizedFlyweightFactory as FlyweightFactory,
 };
 use c09_design_pattern::structural::proxy::define::{Proxy, RealSubject, Subject};
-use c09_design_pattern::{get_patterns_by_execution_model, get_version, ExecutionModel};
+use c09_design_pattern::{ExecutionModel, get_patterns_by_execution_model, get_version};
 
 #[cfg(test)]
 mod integration_tests {
@@ -52,13 +52,16 @@ mod integration_tests {
         let asyncs = get_patterns_by_execution_model(ExecutionModel::Async);
         let hybrid = get_patterns_by_execution_model(ExecutionModel::Hybrid);
 
-        assert!(sync
-            .iter()
-            .any(|p| p.name == "Singleton" || p.name == "Builder"));
+        assert!(
+            sync.iter()
+                .any(|p| p.name == "Singleton" || p.name == "Builder")
+        );
         assert!(asyncs.iter().any(|p| p.name == "Actor"));
-        assert!(hybrid
-            .iter()
-            .any(|p| p.name == "Proxy" || p.name == "Observer"));
+        assert!(
+            hybrid
+                .iter()
+                .any(|p| p.name == "Proxy" || p.name == "Observer")
+        );
     }
 
     /// 测试代理模式与享元模式的集成
@@ -213,6 +216,7 @@ mod performance_tests {
     use std::time::Instant;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_singleton_performance() {
         let singleton = Singleton::new();
 
@@ -231,6 +235,7 @@ mod performance_tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_flyweight_performance() {
         let mut factory = FlyweightFactory::new();
 
@@ -255,6 +260,7 @@ mod performance_tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_proxy_performance() {
         let start = Instant::now();
 

@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: 应用 → 评价
 > **定位**: 分析 Rust 在**分布式系统**中的独特价值——从 gRPC 服务网格、分布式共识到消息队列和 actor 模型，揭示 Rust 如何在云原生基础设施中提供 C++ 的性能和 Go 的开发效率。
-> **前置概念**: [Async](../03_advanced/02_async [来源: [Async Rust](https://rust-lang.github.io/async-book/)].md) ·
+> **前置概念**: [Async](../03_advanced/02_async.md) ·
 > [Concurrency](../03_advanced/01_concurrency.md)
 > **后置概念**: [WebAssembly](./11_webassembly.md) ·
 > [Observability](./13_logging_observability.md)
@@ -44,6 +44,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Rust 在分布式系统中的定位
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -82,6 +83,7 @@
 ---
 
 ### 1.2 异步运行时作为分布式基础
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -120,6 +122,7 @@ Rust async 运行时的分布式价值:
 ---
 
 ### 1.3 服务发现与负载均衡
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -160,6 +163,7 @@ Rust async 运行时的分布式价值:
 > [来源: [Rust Book]]
 
 ### 2.1 gRPC 与 Protocol Buffers
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -216,6 +220,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ### 2.2 分布式共识与 Raft
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -247,6 +252,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ---
 
 ### 2.3 Actor 模型与消息传递
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -358,6 +364,7 @@ async fn main() {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -381,6 +388,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -636,4 +644,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -1455,3 +1455,9 @@ fn good_slice() {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
+
+---
+
+## 相关概念
+
+- [NLL 与 Polonius (concept)](../../../concept/03_advanced/08_nll_and_polonius.md) — Polonius 对条件借用/循环分析的改进

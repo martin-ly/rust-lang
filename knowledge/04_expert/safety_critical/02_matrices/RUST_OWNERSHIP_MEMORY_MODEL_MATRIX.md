@@ -10,7 +10,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────────────┐
 │                    Rust所有权三原则                                  │
 ├─────────────────────────────────────────────────────────────────────┤
@@ -663,3 +663,10 @@ static mut BUFFER: FixedBuffer<1024> = FixedBuffer::new();
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+---
+
+## 相关概念
+
+- [Tree Borrows (concept)](../../../../concept/01_foundation/05_reference_semantics.md) — PLDI 2025 Distinguished Paper 别名模型
+- [Ferrocene 认证 (concept)](../../../../concept/04_formal/16_aerospace_certification_formal_methods.md) — 认证分层矩阵（core/alloc/std）

@@ -2,7 +2,7 @@
 
 > **Bloom 层级**: 应用 → 分析
 > **定位**: 分析 Rust 中 **DSL（领域特定语言）**的构建方法——从宏驱动的内嵌 DSL（如 html!、sql!）、到外部 DSL 的解析器 [来源: [Parsing in Rust](https://rust-lang.github.io/rustc-dev-guide/grammar.html)]组合子（parser combinators），再到 Rust 作为宿主语言的嵌入策略，揭示类型安全 DSL 的设计模式。
-> **前置概念**: [Macros](../03_advanced/04_macro [来源: [Rust Macros](https://doc.rust-lang.org/reference/macros.html)]s.md) · [Proc Macro](../03_advanced/07_proc_macro [来源: [Rust Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)].md) · [Trait](./01_traits.md)
+> **前置概念**: [Macros](../03_advanced/04_macros.md) · [Proc Macro](../03_advanced/07_proc_macro.md) · [Trait](./01_traits.md)
 > **后置概念**: [Serde Patterns](./09_serde_patterns.md) · [WebAssembly](../06_ecosystem/11_webassembly.md)
 
 ---

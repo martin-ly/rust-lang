@@ -8,6 +8,7 @@ use c09_design_pattern::game_engine_patterns::{
 use c09_design_pattern::os_patterns::SystemResourceManagerSingleton;
 
 #[test]
+#[cfg_attr(miri, ignore)]
 fn integration_event_dispatch_throughput() {
     let mut em = EventManager::new();
     em.subscribe(AchievementSystem::new());

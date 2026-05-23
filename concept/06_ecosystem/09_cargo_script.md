@@ -27,7 +27,7 @@
   - [四、工程实践](#四工程实践)
     - [4.1 快速 CLI 原型](#41-快速-cli-原型)
 - [\[derive(Parser)\]](#deriveparser-1)
-    - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
+  - [4.3 数据处理与临时任务](#43-数据处理与临时任务)
 - [\[derive(Deserialize)\]](#derivedeserialize)
   - [六、与 L1-L4 的关系映射](#六与-l1-l4-的关系映射)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
@@ -45,6 +45,7 @@
 Cargo Script（RFC 3502 + RFC 3503）允许在单个 `.rs` 文件中编写完整 Rust 程序并直接执行，**无需 `Cargo.toml` 或项目目录结构**。两个 RFC 均已获批：RFC 3502 定义单文件 manifest 格式，RFC 3503 定义 frontmatter 语法。当前 nightly 已实现核心支持，目标 2026 年稳定化。
 
 ### 1.1 三种执行方式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -60,13 +61,14 @@ rust-script script.rs
 ```
 
 ### 1.2 嵌入式 Manifest
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 单文件通过 frontmatter 或 Markdown 代码块声明依赖与元数据：
 
 **原生 Cargo Script（```cargo 代码块）**:
 
-```rust,ignore
+```rust,compile_fail
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -113,6 +115,7 @@ fn main() { /* ... */ }
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 完整字段支持
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 字段 | 必需 | 说明 | 示例 |
@@ -124,6 +127,7 @@ fn main() { /* ... */ }
 | `profile` | 否 | 编译优化配置 | `profile.release.lto = true` |
 
 ### 2.2 依赖解析机制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Cargo Script 的依赖解析**等价于**一个隐式生成的 `Cargo.toml`：
@@ -234,9 +238,10 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 4.1 快速 CLI 原型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust,compile_fail
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -278,9 +283,10 @@ Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
 - 类型安全替代 Bash/Python 脚本
 
 ### 4.3 数据处理与临时任务
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust,ignore
+```rust,compile_fail
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -476,4 +482,3 @@ Cargo Script:  File = Crate (单模块，无子模块)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

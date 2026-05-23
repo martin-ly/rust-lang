@@ -96,6 +96,7 @@ debug_assert_matches!(result, Ok(42));
 ```
 
 ### 4. 集合 `push_mut` / `insert_mut`
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 `Vec`、`VecDeque`、`LinkedList` 新增返回可变引用的插入方法：
@@ -130,6 +131,7 @@ assert_eq!(list.into_iter().collect::<Vec<_>>(), [2, 2]);
 ```
 
 ### 5. `MaybeUninit` 数组双向转换
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -152,6 +154,7 @@ let view: &[MaybeUninit<i32>] = uninit_array.as_ref();
 ```
 
 ### 6. 原子类型 `update` / `try_update`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -173,6 +176,7 @@ assert_eq!(counter.load(Ordering::Relaxed), 7);
 ```
 
 ### 7. 原始指针安全转换
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -186,6 +190,7 @@ let ref_mut: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 ```
 
 ### 8. `bool: TryFrom<{integer}>`
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -196,6 +201,7 @@ let flag: bool = 2i32.try_into()?; // Err(BoolError)
 ```
 
 ### 9. `core::range` 模块与 `RangeInclusive` 类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -208,6 +214,7 @@ assert!(r.contains(&5));
 ```
 
 ### 10. `Cell<[T]>` 与 `Cell<[T; N]>` 的数组视图
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -221,6 +228,7 @@ assert_eq!(cell_array.get()[0], 100);
 ```
 
 ### 11. `Layout` 分配器辅助方法
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -241,6 +249,7 @@ let combined = layout.extend_packed(Layout::new::<u8>()).unwrap();
 ```
 
 ### 12. `core::hint::cold_path`
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 标记极少执行的分支路径，优化编译器的分支预测和代码布局：
@@ -261,6 +270,7 @@ fn parse_input(input: &str) -> Result<i32, ParseError> {
 ```
 
 ### 13. Const 上下文 API 稳定化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 以下 API 现在可在 `const fn` 中使用：
@@ -277,6 +287,7 @@ const fn check_flow() -> bool {
 ```
 
 ### 14. 路径段关键字导入重命名
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 现在可以导入路径段关键字（如 `crate`、`super`、`self`）并进行重命名：
@@ -287,6 +298,7 @@ use std::io::{self as io_mod, Read};
 ```
 
 ### 15. `irrefutable_let_patterns` Lint 不再作用于 Let Chains
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -299,6 +311,7 @@ if let Some(x) = opt && let Some(y) = opt2 {
 ```
 
 ### 16. PowerPC/PowerPC64 内联汇编稳定化
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -321,6 +334,7 @@ fn read_timebase() -> u64 {
 ---
 
 ## 🖥️ 平台支持升级
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 Rust 1.95 将以下平台晋升至 **Tier 2**（提供预编译标准库）：
@@ -338,9 +352,11 @@ Rust 1.95 将以下平台晋升至 **Tier 2**（提供预编译标准库）：
 ---
 
 ## ⚙️ 编译器与工具改进
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### `--remap-path-scope`
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 控制编译结果中路径重映射的范围：
@@ -354,11 +370,13 @@ rustc --remap-path-scope=all -Z remap-cwd-prefix=. src/main.rs
 ```
 
 ### `str::contains` aarch64 Neon 加速
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在启用 `neon` target feature 的 aarch64 目标上，`str::contains` 使用 SIMD 加速，性能提升显著。
 
 ### Rustdoc 改进
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **搜索排序**: 不稳定项在搜索结果中排名降低，减少误用
@@ -367,6 +385,7 @@ rustc --remap-path-scope=all -Z remap-cwd-prefix=. src/main.rs
 ---
 
 ## 📊 与 1.94 对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特性 | 1.94 | 1.95 |
@@ -385,9 +404,11 @@ rustc --remap-path-scope=all -Z remap-cwd-prefix=. src/main.rs
 ---
 
 ## ⚠️ 兼容性注意
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 1. JSON Target Specs 已去稳定化
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 自定义目标规范现在需要 `-Z unstable-options`：
@@ -403,6 +424,7 @@ rustc +nightly -Z unstable-options --target my-target.json
 > Cargo 自动处理：使用 `-Z json-target-spec` flag。
 
 ### 2. `$crate::{self}` 导入不再允许
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -414,6 +436,7 @@ use $crate;
 ```
 
 ### 3. `Eq::assert_receiver_is_total_eq` 已废弃
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 手动实现 `Eq` 时会触发未来兼容性警告：
@@ -429,6 +452,7 @@ impl Eq for MyType {}
 ```
 
 ### 4. 数组强制转换推断变化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 数组强制转换可能减少类型推断约束，某些代码需要显式类型标注：
@@ -440,6 +464,7 @@ let boxed: Box<[i32]> = arr.into(); // 若推断失败需显式标注
 ```
 
 ### 5. `mut ref` 模式正确 Feature-Gate
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -450,6 +475,7 @@ let Struct { mut ref field } = s;
 ```
 
 ### 6. 其他兼容性变更
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **`ambiguous_glob_imported_traits` FCW**: glob 导入的歧义 trait 现在触发未来兼容性警告
@@ -463,9 +489,11 @@ let Struct { mut ref field } = s;
 ---
 
 ## 🔄 迁移指南
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 从 `cfg-if` 迁移到 `cfg_select!`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -487,6 +515,7 @@ cfg_select! {
 ```
 
 ### 原子操作简化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -504,6 +533,7 @@ atomic.update(Ordering::Relaxed, |x| x * 2);
 ```
 
 ### 断言迁移
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -517,9 +547,11 @@ assert_matches!(result, Ok(_));
 ---
 
 ## 🧠 思维表征
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### Rust 1.95 迁移决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -541,6 +573,7 @@ assert_matches!(result, Ok(_));
 ---
 
 ## ⚖️ 设计权衡
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | API/特性 | 优点 | 代价 | 适用场景 |
@@ -556,9 +589,11 @@ assert_matches!(result, Ok(_));
 ---
 
 ## 📝 自我检测
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1.95 特性使用 Checklist
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [ ] 是否使用了 `assert_matches!` 替代 `assert!(matches!(...))`？
@@ -574,6 +609,7 @@ assert_matches!(result, Ok(_));
 ---
 
 ## 🔗 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 1.95.0 Release Notes](https://releases.rs/docs/1.95.0/)
@@ -596,6 +632,7 @@ assert_matches!(result, Ok(_));
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 标准库速查](../../05_reference/std_library_cheatsheet.md)
@@ -758,3 +795,8 @@ assert_matches!(result, Ok(_));
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
+---
+
+## 相关概念
+
+- [Effects 系统 (concept)](../../../concept/07_future/04_effects_system.md) — `gen<yield>` effects 跟踪
