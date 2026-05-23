@@ -1,8 +1,8 @@
 # 概念一致性审计报告 (Concept Consistency Report)
 
-> 生成时间: 2026-05-22T16:25:35.551736
-> 扫描文件数: 169
-> 提取概念定义数: 484
+> 生成时间: 2026-05-23T01:55:51.458651
+> 扫描文件数: 175
+> 提取概念定义数: 495
 > 跨文件引用数: 163
 
 ## 目录
@@ -58,11 +58,11 @@
 
 | 概念 | 提取次数 | 涉及文件数 |
 |:---|:---|:---|
-| unsafe-UB | 142 | 41 |
+| unsafe-UB | 149 | 45 |
 | 所有权-Move语义 | 80 | 27 |
-| Send+Sync | 52 | 27 |
+| Send+Sync | 54 | 29 |
 | unsafe-契约 | 39 | 17 |
-| 所有权-作用域绑定 | 31 | 14 |
+| 所有权-作用域绑定 | 33 | 15 |
 | 所有权-唯一所有权 | 30 | 15 |
 | unsafe-不变式 | 28 | 3 |
 | unsafe-语义 | 19 | 13 |
@@ -82,7 +82,7 @@
 | concept\00_meta\authority_source_map.md | 1 | 0 | 0 |
 | concept\00_meta\boundary_extension_tree.md | 1 | 0 | 5 |
 | concept\00_meta\concept_index.md | 8 | 4 | 19 |
-| concept\00_meta\decidability_spectrum.md | 4 | 0 | 16 |
+| concept\00_meta\decidability_spectrum.md | 5 | 0 | 19 |
 | concept\00_meta\expressiveness_multiview.md | 4 | 0 | 20 |
 | concept\00_meta\inter_layer_map.md | 11 | 2 | 14 |
 | concept\00_meta\inter_layer_topology.md | 4 | 0 | 3 |
@@ -101,8 +101,8 @@
 | concept\01_foundation\01_ownership.md | 43 | 2 | 25 |
 | concept\01_foundation\02_borrowing.md | 4 | 2 | 31 |
 | concept\01_foundation\03_lifetimes.md | 27 | 5 | 50 |
-| concept\01_foundation\04_type_system.md | 3 | 3 | 43 |
-| concept\01_foundation\05_reference_semantics.md | 0 | 0 | 8 |
+| concept\01_foundation\04_type_system.md | 3 | 3 | 54 |
+| concept\01_foundation\05_reference_semantics.md | 1 | 0 | 36 |
 | concept\01_foundation\06_zero_cost_abstractions.md | 0 | 0 | 8 |
 | concept\01_foundation\07_control_flow.md | 0 | 0 | 8 |
 | concept\01_foundation\08_collections.md | 0 | 0 | 8 |
@@ -167,13 +167,14 @@
 | concept\04_formal\07_separation_logic.md | 0 | 0 | 8 |
 | concept\04_formal\08_type_inference.md | 0 | 0 | 8 |
 | concept\04_formal\09_linear_logic_applications.md | 0 | 0 | 8 |
-| concept\04_formal\09_operational_semantics.md | 2 | 0 | 8 |
+| concept\04_formal\09_operational_semantics.md | 5 | 0 | 15 |
 | concept\04_formal\10_category_theory.md | 0 | 0 | 8 |
 | concept\04_formal\11_separation_logic.md | 0 | 0 | 8 |
 | concept\04_formal\12_denotational_semantics.md | 0 | 0 | 8 |
 | concept\04_formal\13_formal_methods.md | 0 | 0 | 9 |
 | concept\04_formal\14_lambda_calculus.md | 0 | 0 | 7 |
 | concept\04_formal\15_hoare_logic.md | 0 | 0 | 10 |
+| concept\04_formal\16_aerospace_certification_formal_methods.md | 1 | 0 | 14 |
 | concept\05_comparative\01_rust_vs_cpp.md | 9 | 0 | 37 |
 | concept\05_comparative\02_rust_vs_go.md | 2 | 0 | 27 |
 | concept\05_comparative\03_paradigm_matrix.md | 0 | 0 | 15 |
@@ -220,6 +221,10 @@
 | concept\06_ecosystem\26_game_development.md | 0 | 0 | 6 |
 | concept\06_ecosystem\27_web_frameworks.md | 0 | 0 | 17 |
 | concept\06_ecosystem\28_devops_and_ci_cd.md | 2 | 0 | 11 |
+| concept\06_ecosystem\29_algorithms_competitive_programming.md | 0 | 0 | 24 |
+| concept\06_ecosystem\30_system_composability.md | 0 | 0 | 8 |
+| concept\06_ecosystem\31_microservice_patterns.md | 1 | 0 | 4 |
+| concept\06_ecosystem\32_event_driven_architecture.md | 0 | 0 | 10 |
 | concept\07_future\01_ai_integration.md | 5 | 0 | 32 |
 | concept\07_future\02_formal_methods.md | 1 | 0 | 43 |
 | concept\07_future\03_evolution.md | 1 | 0 | 31 |
@@ -247,6 +252,7 @@
 | concept\07_future\26_specialization_preview.md | 0 | 0 | 8 |
 | concept\07_future\27_compile_time_execution.md | 0 | 0 | 9 |
 | concept\07_future\28_rust_for_webassembly.md | 1 | 0 | 13 |
+| concept\07_future\29_ebpf_rust.md | 4 | 0 | 20 |
 
 ---
 

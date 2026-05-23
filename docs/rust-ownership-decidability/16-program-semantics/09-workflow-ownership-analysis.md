@@ -36,6 +36,7 @@
     - [7.3 Rust 工作流引擎设计原则](#73-rust-工作流引擎设计原则)
   - [参考文献](#参考文献)
   - [权威来源索引](#权威来源索引)
+  - [相关文件](#相关文件)
 
 ---
 
@@ -702,6 +703,17 @@ async fn good_deferred_choice(rx: &mut tokio::sync::mpsc::Receiver<i32>) -> i32 
 ## 权威来源索引
 
 > **[来源: Rust Reference]** · **[来源: Rust Standard Library]** · **[来源: TRPL]** · **[来源: Rustonomicon]** · **[来源: Workflow Patterns Initiative]** · **[来源: van der Aalst et al. (2003)]** · **[来源: Russell et al. (2006)]** · **[来源: Tokio Documentation]** · **[来源: POPL 2018 - RustBelt]** · **[来源: Rust Internals - Polonius Update]**
+
+---
+
+## 相关文件
+
+- [工作流模式总览](08-workflow-patterns.md)
+- [工作流模式主索引](workflow-patterns/00-workflow-patterns-master-index.md)
+- [并发编程模型](../../../concept/03_advanced/01_concurrency.md)
+- [异步编程模型](../../../concept/03_advanced/02_async.md)
+- [形式化操作语义](../../../concept/04_formal/09_operational_semantics.md)
+- [系统可组合性设计模式](../../../concept/06_ecosystem/30_system_composability.md)
 
 ---
 

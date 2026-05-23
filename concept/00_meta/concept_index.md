@@ -103,7 +103,9 @@
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
 | **ADT (Algebraic Data Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 Trait、L4 类型论 | 理解 | ← 类型系统基础 → 模式匹配 |
+| **Aerospace Certification & Formal Methods** | [L4: 航空航天认证](../04_formal/16_aerospace_certification_formal_methods.md) | L4 RustBelt、L4 形式化方法 | 分析 | ← RustBelt + 形式化方法 → 安全关键认证 |
 | **AFIT (Async Fn In Trait)** | [L3: 异步](../03_advanced/02_async.md) | L2 Trait、L7 演进 | 分析 | ← Trait + async → RPITIT |
+| **Algorithms & Competitive Programming** | [L6: 算法与竞赛编程](../06_ecosystem/29_algorithms_competitive_programming.md) | L1 所有权、L2 泛型、L3 并发 | 应用 | ← 所有权 + 泛型 → 算法验证 |
 | **Alias-XOR-Mutation (AXM)** | [L1: 借用](../01_foundation/02_borrowing.md) | L3 并发、L4 分离逻辑 | 理解 | ← 所有权 → 并发安全 |
 | **Arc** | [L2: 内存管理](../02_intermediate/03_memory_management.md) | L3 并发、L1 所有权 | 应用 | ← Rc + Send/Sync → 跨线程共享 |
 | **Async/Await** | [L3: 异步](../03_advanced/02_async.md) | L2 泛型、L3 Pin、L4 形式化 | 分析 | ← Future + Pin → 运行时 |
@@ -139,6 +141,7 @@
 
 | 概念 | 主文件 | 交叉引用 | Bloom 层级 | 语义链接 |
 |:---|:---|:---|:---|:---|
+| **eBPF Rust Mapping** | [L7: eBPF Rust 映射](../07_future/29_ebpf_rust.md) | L3 Unsafe、L6 生态 | 分析 | ← Unsafe + FFI → 内核可编程 |
 | **Edition Mechanism** | [L7: 语言演进](../07_future/03_evolution.md) | 所有层 | 评价 | ← RFC 流程 → 向后兼容演进 |
 | **Elision Rules** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L2 泛型、L4 区域类型 | 应用 | ← 生命周期标注 → 简化书写 |
 | **enum (Sum Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L2 错误处理、L4 代数类型 | 理解 | ≡ 和类型 / 余积 (A + B) |
@@ -248,6 +251,7 @@
 | **struct (Product Type)** | [L1: 类型系统](../01_foundation/04_type_system.md) | L4 代数类型 | 理解 | ≡ 积类型 / 记录 (A × B) |
 | **Subtyping / Variance** | [L1: 生命周期](../01_foundation/03_lifetimes.md) | L4 类型论 | 分析 | ← 生命周期 → 类型安全 |
 | **Supertrait** | [L2: Trait](../02_intermediate/01_traits.md) | L4 子类型 | 理解 | ← Trait 继承 → 组合约束 |
+| **System Composability** | [L6: 系统可组合性](../06_ecosystem/30_system_composability.md) | L1 所有权、L2 Trait、L3 异步 | 评价 | ← Trait + 泛型 + 异步 → 架构组合 |
 
 ### T
 
@@ -648,5 +652,5 @@
 
 **文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-21
+**最后更新**: 2026-05-22
 **状态**: ✅ Phase 7 五维升华完成

@@ -738,7 +738,7 @@ let idx = n as i32;
 
 ### 7.3 浮点精度陷阱
 
-```rust
+```rust,ignore
 // ❌ 错误：直接比较
 // if a == 0.3 { ... }
 
@@ -751,7 +751,7 @@ if (a - 0.3).abs() < EPS { /* 视为相等 */ }
 
 ### 7.4 过度 `clone()` 导致 TLE
 
-```rust
+```rust,ignore
 // ❌ 反模式：循环中克隆整个 Vec
 let mut temp = nums.clone(); // O(n) 每次迭代
 

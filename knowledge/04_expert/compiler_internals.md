@@ -904,3 +904,9 @@ fn main() {
 - [Rust Compiler Development Guide](https://rustc-dev-guide.rust-lang.org/)
 - [Rust 形式化语义](./academic/coq_formalization_guide.md)
 - [Unsafe Rust 指南](../03_advanced/unsafe/unsafe_rust.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: rustc Dev Guide](https://rustc-dev-guide.rust-lang.org/)** · **[来源: Rust Reference — Compiler Overview](https://doc.rust-lang.org/reference/)** · **[来源: MIRI 文档](https://github.com/rust-lang/miri)** · **[来源: LLVM 文档](https://llvm.org/docs/)** · **[来源: Trait Solving — chalk / next-gen solver](https://rust-lang.github.io/chalk/book/)** · **[来源: RFC 1214 — `where` 子句](https://rust-lang.github.io/rfcs/1214-where-clauses.html)** · **[来源: Niko Matsakis Blog — Borrow Checker Internals](https://smallcultfollowing.com/babysteps/)** · **[来源: Rust Compiler Development Guide — MIR](https://rustc-dev-guide.rust-lang.org/mir/index.html)** · **[来源: Polonius 下一代借用检查器](https://github.com/rust-lang/polonius)** · **[来源: The Rustc Book](https://doc.rust-lang.org/rustc/index.html)**

@@ -1,0 +1,707 @@
+# 事件驱动架构 (Event-Driven Architecture)
+
+> **Bloom 层级**: 应用 → 创造
+> **定位**: 从系统架构视角分析 Rust 实现事件驱动架构的核心模式——类型安全事件总线、消息队列集成、幂等处理、背压传播——揭示所有权系统与不可变事件流的深层契合。
+> **前置概念**: [Async](../03_advanced/02_async.md) · [微服务架构模式](./31_microservice_patterns.md) · [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md)
+> **后置概念**: [分布式系统](./18_distributed_systems.md) · [云原生](./24_cloud_native.md)
+
+---
+
+> **来源**: [Tokio](https://tokio.rs/) · [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html) · [lapin crate](https://docs.rs/lapin/latest/lapin/) · [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/) · [NATS](https://docs.rs/nats/latest/nats/) · [Reactive Streams Specification](https://www.reactive-streams.org/)
+
+## 📑 目录
+
+- [事件驱动架构 (Event-Driven Architecture)](#事件驱动架构-event-driven-architecture)
+  - [📑 目录](#-目录)
+  - [一、引言](#一引言)
+  - [二、发布-订阅](#二发布-订阅)
+    - [2.1 tokio::sync::broadcast](#21-tokiosyncbroadcast)
+    - [2.2 bus crate](#22-bus-crate)
+    - [2.3 Redis Pub/Sub](#23-redis-pubsub)
+  - [三、事件总线](#三事件总线)
+  - [四、消息队列](#四消息队列)
+    - [4.1 lapin (AMQP/RabbitMQ)](#41-lapin-amqprabbitmq)
+    - [4.2 rdkafka (Apache Kafka)](#42-rdkafka-apache-kafka)
+    - [4.3 nats](#43-nats)
+    - [4.4 消息保证对比](#44-消息保证对比)
+  - [五、事件处理器](#五事件处理器)
+    - [5.1 幂等性保证](#51-幂等性保证)
+    - [5.2 至少一次与恰好一次语义](#52-至少一次与恰好一次语义)
+    - [5.3 去重机制](#53-去重机制)
+  - [六、Saga 编排器](#六saga-编排器)
+  - [七、Reactive Streams](#七reactive-streams)
+  - [八、综合示例](#八综合示例)
+  - [九、所有权交互](#九所有权交互)
+  - [十、反命题与边界](#十反命题与边界)
+  - [十一、常见陷阱](#十一常见陷阱)
+  - [十二、来源](#十二来源)
+  - [相关概念](#相关概念)
+
+---
+
+## 一、引言
+
+```text
+事件驱动架构核心特征:
+  松耦合      → 生产者不依赖消费者的存在，通过事件契约间接通信
+  可扩展性    → 水平扩展消费者组，分区并行处理
+
+Rust 差异化优势:
+  ├── 类型安全事件: enum DomainEvent 编译期穷尽匹配
+  ├── 零拷贝序列化: rkyv, flatbuffers 零反序列化开销
+  ├── 所有权转移: 生产 → 队列 → 消费，所有权清晰流转
+  ├── Send/Sync 保证: 跨线程事件传递编译期验证
+  └── 无 GC: 消费者长时间运行无停顿
+```
+
+> **认知功能**: Rust 的事件驱动架构不仅是"高性能消息传递"，而是**类型安全的状态机网络**——每个事件类型在编译期验证，每个处理器状态转换受所有权约束。
+> [来源: [Tokio Documentation](https://tokio.rs/)]
+
+```mermaid
+graph LR
+    A[生产者服务] -->|OrderCreated| B[事件总线<br/>类型安全 enum]
+    B -->|订阅| C[库存服务]
+    B -->|订阅| D[通知服务]
+    B -->|持久化| F[消息队列<br/>Kafka/RabbitMQ]
+    F -->|重放| G[事件溯源存储]
+    C -->|Command| H[库存数据库]
+    style B fill:#e3f2fd
+    style F fill:#fff3e0
+```
+
+---
+
+## 二、发布-订阅
+
+### 2.1 tokio::sync::broadcast
+
+Tokio 提供的多播通道，支持多个消费者接收同一事件流：
+
+```rust,ignore
+use tokio::sync::broadcast;
+use serde::{Serialize, Deserialize};
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+struct DomainEvent {
+    event_id: uuid::Uuid, event_type: String,
+    payload: String, timestamp: chrono::DateTime<chrono::Utc>,
+}
+
+#[tokio::main]
+async fn main() {
+    let (tx, _rx) = broadcast::channel::<DomainEvent>(1024);
+    let mut rx1 = tx.subscribe();
+    tokio::spawn(async move {
+        while let Ok(event) = rx1.recv().await { println!("[Inventory] {:?}", event); }
+    });
+    let mut rx2 = tx.subscribe();
+    tokio::spawn(async move {
+        while let Ok(event) = rx2.recv().await { println!("[Notification] {:?}", event); }
+    });
+    let event = DomainEvent {
+        event_id: uuid::Uuid::new_v4(), event_type: "OrderCreated".to_string(),
+        payload: r#"{"order_id": "123"}"#.to_string(), timestamp: chrono::Utc::now(),
+    };
+    if let Err(e) = tx.send(event) { eprintln!("No receivers: {}", e); }
+}
+```
+
+| 特性 | `tokio::sync::broadcast` | `tokio::sync::mpsc` | `tokio::sync::watch` |
+|:---|:---|:---|:---|
+| 模式 | 1:N 广播 | 1:1 或 M:N | 1:N 仅最新值 |
+| 缓冲区 | 有界环形缓冲 | 有界队列 | 单值覆盖 |
+| 背压 | 慢消费者丢消息 | 阻塞/错误 | 总是最新 |
+| 适用场景 | 事件通知 | 任务队列 | 状态广播 |
+
+> **广播洞察**: `broadcast` 的**环形缓冲区**意味着消费者按自己的速度消费——慢消费者会丢失旧消息（而非阻塞生产者）。这是"可用性优先"的设计权衡。
+> [来源: [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html)]
+
+### 2.2 bus crate
+
+跨线程的同步消息总线，适合 CPU 密集型计算场景中的事件分发。async 场景优先使用 `tokio::sync::broadcast`。
+> [来源: [bus crate](https://docs.rs/bus/latest/bus/)]
+
+### 2.3 Redis Pub/Sub
+
+Redis Pub/Sub 是**即发即弃**——无持久化、无确认。生产环境需要 Kafka/RabbitMQ 等持久化消息队列。
+> [来源: [Redis Pub/Sub](https://redis.io/docs/manual/pubsub/)]
+
+---
+
+## 三、事件总线
+
+类型安全的事件总线利用 Rust 的 enum 实现编译期穷尽匹配：
+
+```mermaid
+graph TD
+    A[Command Handler] -->|生成| B[DomainEvent Enum]
+    B -->|OrderCreated| C[订单处理器]
+    B -->|PaymentReceived| D[支付处理器]
+    B -->|match event| F[编译期穷尽检查]
+    style B fill:#e3f2fd
+    style F fill:#e8f5e9
+```
+
+```rust,ignore
+use serde::{Serialize, Deserialize};
+use uuid::Uuid;
+use chrono::{DateTime, Utc};
+use std::collections::HashMap;
+use tokio::sync::mpsc;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "event_type", rename_all = "PascalCase")]
+pub enum DomainEvent {
+    UserCreated { event_id: Uuid, user_id: Uuid, email: String, created_at: DateTime<Utc> },
+    OrderPlaced { event_id: Uuid, order_id: Uuid, user_id: Uuid, items: Vec<OrderLineItem>, total_amount: f64, placed_at: DateTime<Utc> },
+    PaymentProcessed { event_id: Uuid, order_id: Uuid, payment_id: Uuid, amount: f64, status: PaymentStatus, processed_at: DateTime<Utc> },
+    InventoryReserved { event_id: Uuid, order_id: Uuid, sku: String, quantity: u32, reserved_at: DateTime<Utc> },
+}
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct OrderLineItem { pub sku: String, pub quantity: u32, pub unit_price: f64 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub enum PaymentStatus { Approved, Declined, Pending }
+
+#[async_trait::async_trait]
+pub trait EventHandler: Send + Sync {
+    async fn handle(&self, event: &DomainEvent) -> Result<(), EventHandlerError>;
+    fn event_types(&self) -> Vec<&'static str>;
+}
+
+pub struct TypedEventBus {
+    tx: mpsc::Sender<DomainEvent>,
+    handlers: HashMap<String, Vec<Box<dyn EventHandler>>>,
+}
+
+impl TypedEventBus {
+    pub fn new(buffer: usize) -> (Self, mpsc::Receiver<DomainEvent>) {
+        let (tx, rx) = mpsc::channel(buffer);
+        (Self { tx, handlers: HashMap::new() }, rx)
+    }
+    pub async fn publish(&self, event: DomainEvent) -> Result<(), mpsc::error::SendError<DomainEvent>> { self.tx.send(event).await }
+    pub fn subscribe(&mut self, event_type: &'static str, handler: Box<dyn EventHandler>) { self.handlers.entry(event_type.to_string()).or_default().push(handler); }
+    pub async fn run(mut self, mut rx: mpsc::Receiver<DomainEvent>) {
+        while let Some(event) = rx.recv().await {
+            let event_type = match &event {
+                DomainEvent::UserCreated { .. } => "UserCreated",
+                DomainEvent::OrderPlaced { .. } => "OrderPlaced",
+                DomainEvent::PaymentProcessed { .. } => "PaymentProcessed",
+                DomainEvent::InventoryReserved { .. } => "InventoryReserved",
+            };
+            if let Some(handlers) = self.handlers.get(event_type) {
+                for handler in handlers { if let Err(e) = handler.handle(&event).await { tracing::error!("Handler error: {:?}", e); } }
+            }
+        }
+    }
+}
+
+struct EmailHandler;
+#[async_trait::async_trait]
+impl EventHandler for EmailHandler {
+    async fn handle(&self, event: &DomainEvent) -> Result<(), EventHandlerError> {
+        match event {
+            DomainEvent::UserCreated { email, .. } => println!("Welcome {}", email),
+            DomainEvent::OrderPlaced { order_id, .. } => println!("Order {}", order_id),
+            _ => {}
+        }
+        Ok(())
+    }
+    fn event_types(&self) -> Vec<&'static str> { vec!["UserCreated", "OrderPlaced"] }
+}
+```
+
+> **类型安全洞察**: Rust enum 的 `#[serde(tag = "event_type")]` 实现**标记联合**序列化——JSON 中的 `event_type` 字段决定反序列化到哪个变体。反序列化失败是类型错误，不是运行时 panic。
+> [来源: [serde enum representations](https://serde.rs/enum-representations.html)]
+
+---
+
+## 四、消息队列
+
+### 4.1 lapin (AMQP/RabbitMQ)
+
+```rust,ignore
+use lapin::{Connection, ConnectionProperties, options::*, types::FieldTable};
+
+async fn rabbitmq_example() -> Result<(), Box<dyn std::error::Error>> {
+    let conn = Connection::connect("amqp://guest:guest@localhost:5672/%2f", ConnectionProperties::default()).await?;
+    let channel = conn.create_channel().await?;
+    channel.queue_declare("order_queue", QueueDeclareOptions::default(), FieldTable::default()).await?;
+    let payload = serde_json::to_vec(&event)?;
+    channel.basic_publish("", "order_queue", BasicPublishOptions::default(), &payload,
+        BasicProperties::default().with_delivery_mode(2)).await?;
+    let mut consumer = channel.basic_consume("order_queue", "consumer", BasicConsumeOptions::default(), FieldTable::default()).await?;
+    while let Some(delivery) = consumer.next().await {
+        let delivery = delivery?;
+        let event: DomainEvent = serde_json::from_slice(&delivery.data)?;
+        process_event(&event).await?;
+        delivery.ack(BasicAckOptions::default()).await?;
+    }
+    Ok(())
+}
+```
+
+> **AMQP 洞察**: RabbitMQ 的**交换机-队列-绑定**模型提供了灵活的路由能力（direct/topic/headers/fanout）。`lapin` 的 async API 与 Tokio 无缝集成。
+> [来源: [lapin crate](https://docs.rs/lapin/latest/lapin/)]
+
+### 4.2 rdkafka (Apache Kafka)
+
+```rust,ignore
+use rdkafka::{producer::{FutureProducer, FutureRecord}, consumer::{StreamConsumer, Consumer}, config::ClientConfig, message::Message};
+use futures::StreamExt;
+
+fn create_producer(brokers: &str) -> FutureProducer {
+    ClientConfig::new().set("bootstrap.servers", brokers).set("message.timeout.ms", "5000")
+        .set("acks", "all").set("retries", "3").set("enable.idempotence", "true")
+        .create().expect("Producer failed")
+}
+
+async fn publish_event(producer: &FutureProducer, topic: &str, event: &DomainEvent) -> Result<(), rdkafka::error::KafkaError> {
+    let key = match event {
+        DomainEvent::OrderPlaced { order_id, .. } | DomainEvent::PaymentProcessed { order_id, .. } => order_id.to_string(),
+        _ => uuid::Uuid::new_v4().to_string(),
+    };
+    let payload = serde_json::to_vec(event).unwrap();
+    producer.send(FutureRecord::to(topic).key(&key).payload(&payload), Duration::from_secs(5)).await?;
+    Ok(())
+}
+
+fn create_consumer(brokers: &str, group_id: &str, topics: &[&str]) -> StreamConsumer {
+    let consumer: StreamConsumer = ClientConfig::new().set("group.id", group_id)
+        .set("bootstrap.servers", brokers).set("enable.auto.commit", "false")
+        .set("auto.offset.reset", "earliest").create().expect("Consumer failed");
+    consumer.subscribe(topics).unwrap(); consumer
+}
+
+async fn consume_events(consumer: StreamConsumer) {
+    let mut stream = consumer.stream();
+    while let Some(result) = stream.next().await {
+        match result {
+            Ok(msg) => {
+                if let Some(payload) = msg.payload() {
+                    match serde_json::from_slice::<DomainEvent>(payload) {
+                        Ok(event) => { if process_event(&event).await.is_err() { continue; } }
+                        Err(e) => tracing::error!("Deserialize error: {}", e),
+                    }
+                }
+                let _ = consumer.commit_message(&msg, rdkafka::consumer::CommitMode::Sync);
+            }
+            Err(e) => tracing::error!("Kafka error: {}", e),
+        }
+    }
+}
+```
+
+> **Kafka 洞察**: Kafka 的**分区-偏移量**模型使事件成为**不可变日志**。`enable.idempotence=true` 开启幂等生产者，保证单分区内精确一次语义。
+> [来源: [Kafka Documentation](https://kafka.apache.org/documentation/)]
+
+### 4.3 nats
+
+NATS 是**极简高性能**消息系统——无持久化时单节点可达百万消息/秒。JetStream 扩展提供持久化和流处理。
+> [来源: [NATS Documentation](https://docs.nats.io/)]
+
+### 4.4 消息保证对比
+
+```mermaid
+graph LR
+    A[生产者] -->|至少一次| B[RabbitMQ<br/>手动 ACK]
+    A -->|精确一次| C[Kafka<br/>幂等生产者 + 事务]
+    A -->|最多一次| D[NATS Core<br/>自动 ACK]
+```
+
+| 消息系统 | 最多一次 | 至少一次 | 精确一次 | 持久化 | 吞吐量 |
+|:---|:---:|:---:|:---:|:---:|:---:|
+| **RabbitMQ** | ✅ | ✅ (手动 ACK) | ⚠️ (事务) | ✅ | 中 |
+| **Kafka** | ✅ | ✅ | ✅ (幂等+事务) | ✅ | 极高 |
+| **NATS Core** | ✅ (默认) | ❌ | ❌ | ❌ | 极高 |
+| **NATS JetStream** | ✅ | ✅ (ACK) | ⚠️ (去重窗口) | ✅ | 高 |
+| **Redis Pub/Sub** | ✅ | ❌ | ❌ | ❌ | 高 |
+
+> **语义洞察**: **精确一次处理**在分布式系统中本质上是"至少一次投递 + 幂等消费"。Kafka 的精确一次限于单分区，跨分区仍需业务层幂等。
+> [来源: [Kafka Exactly-Once Semantics](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/)]
+
+---
+
+## 五、事件处理器
+
+### 5.1 幂等性保证
+
+```rust,ignore
+use std::collections::HashSet;
+use tokio::sync::RwLock;
+use chrono::{DateTime, Utc, Duration};
+
+struct IdempotentProcessor {
+    processed_ids: RwLock<HashSet<Uuid>>,
+    window_start: RwLock<DateTime<Utc>>,
+    window_size: Duration,
+}
+
+impl IdempotentProcessor {
+    async fn process(&self, event_id: Uuid, handler: impl AsyncFnOnce()) -> Result<(), String> {
+        self.cleanup_window().await;
+        { let ids = self.processed_ids.read().await; if ids.contains(&event_id) { return Ok(()); } }
+        handler().await;
+        self.processed_ids.write().await.insert(event_id);
+        Ok(())
+    }
+    async fn cleanup_window(&self) {
+        let now = Utc::now();
+        let mut start = self.window_start.write().await;
+        if now - *start > self.window_size { self.processed_ids.write().await.clear(); *start = now; }
+    }
+}
+```
+
+> **幂等洞察**: 幂等性的本质是**操作的可重复性**——数学上 `f(f(x)) = f(x)`。业务层幂等键（如订单 ID）比消息系统层的精确一次更可靠。
+> [来源: [Idempotent Consumer Pattern](https://microservices.io/patterns/communication-style/idempotent-consumer.html)]
+
+### 5.2 至少一次与恰好一次语义
+
+```text
+至少一次 (At-Least-Once): 生产者重试直到确认，消费者成功处理手动 ACK，要求消费者幂等
+恰好一次 (Exactly-Once): Kafka 幂等生产者 + 事务原子提交，局限单分区精确一次
+
+策略对比:
+  ┌─────────────────┬──────────────────────┬──────────────────────┐
+  │ 策略            │ 至少一次 + 幂等      │ Kafka 精确一次事务   │
+  ├─────────────────┼──────────────────────┼──────────────────────┤
+  │ 复杂度          │ 低                   │ 高                   │
+  │ 吞吐量影响      │ 无                   │ 中等                 │
+  │ 跨系统一致性    │ 需额外设计           │ 不解决               │
+  │ 推荐场景        │ 通用首选             │ 金融级单分区事务     │
+  └─────────────────┴──────────────────────┴──────────────────────┘
+```
+
+### 5.3 去重机制
+
+| 去重层级 | 实现方式 | 有效期 | 可靠性 |
+|:---|:---|:---:|:---:|
+| 内存缓存 | `HashSet<Uuid>` | 进程生命周期 | 低 |
+| Redis SET | `SETNX event_id 1` + TTL | 可配置 | 中 |
+| 数据库唯一约束 | `UNIQUE(event_id)` | 永久 | 高 |
+| Bloom Filter | `bloom::CountingBloomFilter` | 可配置 | 中（有误判） |
+
+```rust,ignore
+use redis::AsyncCommands;
+async fn dedup_with_redis(redis: &mut redis::aio::MultiplexedConnection, event_id: Uuid, ttl: u64) -> Result<bool, redis::RedisError> {
+    let key = format!("event:processed:{}", event_id);
+    let is_new: bool = redis.set_nx(&key, 1).await?;
+    if is_new { redis.expire(&key, ttl as i64).await?; }
+    Ok(is_new)
+}
+```
+
+> **去重洞察**: Bloom Filter 是**空间效率最优**的去重结构——适合海量事件流。Rust 的 `bloom` crate 提供计数式布隆过滤器，支持删除操作。
+> [来源: [bloom crate](https://docs.rs/bloom/latest/bloom/)]
+
+---
+
+## 六、Saga 编排器
+
+状态机驱动的事件流编排，通过事件触发状态转换：
+
+```mermaid
+stateDiagram-v2
+    [*] --> OrderPlaced: 下单
+    OrderPlaced --> InventoryReserved: 库存预留成功
+    OrderPlaced --> InventoryFailed: 库存不足
+    InventoryReserved --> PaymentProcessed: 支付成功
+    InventoryReserved --> PaymentFailed: 支付失败
+    PaymentProcessed --> OrderCompleted: 完成
+    PaymentFailed --> InventoryReleased: 释放库存
+    InventoryFailed --> OrderCancelled: 取消订单
+    InventoryReleased --> OrderCancelled: 取消订单
+```
+
+```rust,ignore
+use std::collections::HashMap;
+
+#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+pub enum SagaState {
+    OrderPlaced, InventoryReserved, InventoryFailed, PaymentProcessed,
+    PaymentFailed, OrderCompleted, OrderCancelled, InventoryReleased,
+}
+
+struct StateTransition {
+    from: SagaState, event: &'static str, to: SagaState,
+    action: Box<dyn Fn(&DomainEvent) -> Vec<DomainEvent> + Send + Sync>,
+}
+
+pub struct SagaOrchestrator {
+    transitions: Vec<StateTransition>,
+    states: HashMap<Uuid, SagaState>,
+}
+
+impl SagaOrchestrator {
+    pub fn new() -> Self {
+        let mut t = Vec::new();
+        t.push(StateTransition { from: SagaState::OrderPlaced, event: "InventoryReserved", to: SagaState::InventoryReserved, action: Box::new(|_| vec![]) });
+        t.push(StateTransition { from: SagaState::OrderPlaced, event: "InventoryFailed", to: SagaState::InventoryFailed, action: Box::new(|_| vec![]) });
+        t.push(StateTransition { from: SagaState::InventoryReserved, event: "PaymentProcessed", to: SagaState::PaymentProcessed, action: Box::new(|_| vec![]) });
+        t.push(StateTransition { from: SagaState::InventoryReserved, event: "PaymentFailed", to: SagaState::PaymentFailed, action: Box::new(|_| vec![]) });
+        Self { transitions: t, states: HashMap::new() }
+    }
+    pub async fn handle_event(&mut self, order_id: Uuid, event: &DomainEvent) -> Vec<DomainEvent> {
+        let current = self.states.get(&order_id).cloned().unwrap_or(SagaState::OrderPlaced);
+        let event_type = match event {
+            DomainEvent::InventoryReserved { .. } => "InventoryReserved",
+            DomainEvent::PaymentProcessed { status: PaymentStatus::Approved, .. } => "PaymentProcessed",
+            DomainEvent::PaymentProcessed { status: PaymentStatus::Declined, .. } => "PaymentFailed",
+            _ => return vec![],
+        };
+        for tx in &self.transitions {
+            if tx.from == current && tx.event == event_type {
+                self.states.insert(order_id, tx.to.clone());
+                return (tx.action)(event);
+            }
+        }
+        vec![]
+    }
+}
+```
+
+> **编排器洞察**: Saga 编排器是**状态机的事件流解释器**——将异步分布式流程建模为确定性自动机。Rust 的 `match` + enum 使状态转换在编译期部分可验证。
+> [来源: [rust_fsm crate](https://docs.rs/rust_fsm/latest/rust_fsm/)]
+
+---
+
+## 七、Reactive Streams
+
+Reactive Streams 规范定义了异步背压感知的数据流接口。Rust 中通过 `futures::Stream` + `tokio::sync::mpsc` 实现：
+
+```rust,ignore
+use futures::stream::{self, StreamExt};
+use tokio::sync::mpsc;
+
+async fn reactive_pipeline() {
+    let (tx, rx) = mpsc::channel::<DomainEvent>(100);
+    tokio::spawn(async move {
+        for i in 0..1000 {
+            let event = DomainEvent::OrderPlaced {
+                event_id: uuid::Uuid::new_v4(), order_id: uuid::Uuid::new_v4(),
+                user_id: uuid::Uuid::new_v4(), items: vec![], total_amount: i as f64, placed_at: chrono::Utc::now(),
+            };
+            if tx.send(event).await.is_err() { break; }
+        }
+    });
+    let _results: Vec<_> = stream::unfold(rx, |mut rx| async move { rx.recv().await.map(|e| (e, rx)) })
+        .filter(|e| futures::future::ready(matches!(e, DomainEvent::OrderPlaced { .. })))
+        .buffer_unordered(10)
+        .map(|e| async move { process_event(&e).await })
+        .buffered(5)
+        .collect().await;
+}
+```
+
+| 背压机制 | 实现 | 行为 | 适用场景 |
+|:---|:---|:---|:---|
+| 有界 channel | `mpsc::channel(n)` | 满时阻塞/等待 | 任务队列 |
+| 丢弃旧消息 | `broadcast` | 慢消费者丢消息 | 实时指标 |
+| 并发限制 | `buffer_unordered(n)` | 限制并发处理数 | CPU 密集型 |
+| 优雅降级 | `try_send` | 满时返回错误 | 拒绝服务保护 |
+
+> **背压洞察**: Reactive Streams 的核心契约是**生产者不压垮消费者**——有界 channel 是最简单的背压实现，将消费者的处理能力反馈给生产者。
+> [来源: [Reactive Streams Specification](https://www.reactive-streams.org/)] · [来源: [Tokio Streams](https://docs.rs/tokio-stream/latest/tokio_stream/)]
+
+---
+
+## 八、综合示例
+
+```rust,ignore
+use serde::{Serialize, Deserialize};
+use uuid::Uuid;
+use chrono::{DateTime, Utc};
+use std::collections::HashSet;
+use tokio::sync::{mpsc, RwLock};
+use rdkafka::{producer::{FutureProducer, FutureRecord}, consumer::{StreamConsumer, Consumer}, config::ClientConfig, message::Message};
+use futures::StreamExt;
+use std::sync::Arc;
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(tag = "event_type", rename_all = "PascalCase")]
+pub enum DomainEvent {
+    OrderPlaced { event_id: Uuid, order_id: Uuid, user_id: Uuid, total: f64, placed_at: DateTime<Utc> },
+    PaymentConfirmed { event_id: Uuid, order_id: Uuid, amount: f64, confirmed_at: DateTime<Utc> },
+}
+
+pub struct IdempotentEventHandler {
+    seen_ids: Arc<RwLock<HashSet<Uuid>>>,
+    kafka_producer: FutureProducer,
+}
+
+impl IdempotentEventHandler {
+    pub fn new(kafka_producer: FutureProducer) -> Self {
+        Self { seen_ids: Arc::new(RwLock::new(HashSet::new())), kafka_producer }
+    }
+    pub async fn handle(&self, event: DomainEvent) -> Result<(), Box<dyn std::error::Error>> {
+        let event_id = match &event { DomainEvent::OrderPlaced { event_id, .. } => *event_id, DomainEvent::PaymentConfirmed { event_id, .. } => *event_id };
+        { let seen = self.seen_ids.read().await; if seen.contains(&event_id) { return Ok(()); } }
+        match &event {
+            DomainEvent::OrderPlaced { order_id, total, .. } => {
+                let payment_event = DomainEvent::PaymentConfirmed { event_id: Uuid::new_v4(), order_id: *order_id, amount: *total, confirmed_at: Utc::now() };
+                self.publish("payment-events", &payment_event).await?;
+            }
+            DomainEvent::PaymentConfirmed { order_id, amount, .. } => println!("Confirmed {}: ${}", order_id, amount),
+        }
+        self.seen_ids.write().await.insert(event_id); Ok(())
+    }
+    async fn publish(&self, topic: &str, event: &DomainEvent) -> Result<(), rdkafka::error::KafkaError> {
+        let payload = serde_json::to_vec(event).unwrap();
+        let key = match event { DomainEvent::OrderPlaced { order_id, .. } => order_id.to_string(), DomainEvent::PaymentConfirmed { order_id, .. } => order_id.to_string() };
+        self.kafka_producer.send(FutureRecord::to(topic).key(&key).payload(&payload), Duration::from_secs(5)).await?;
+        Ok(())
+    }
+}
+
+pub struct EventBus { tx: mpsc::Sender<DomainEvent> }
+impl EventBus {
+    pub fn new(buffer: usize) -> (Self, mpsc::Receiver<DomainEvent>) { let (tx, rx) = mpsc::channel(buffer); (Self { tx }, rx) }
+    pub async fn publish(&self, event: DomainEvent) -> Result<(), mpsc::error::SendError<DomainEvent>> { self.tx.send(event).await }
+}
+
+async fn kafka_bridge(consumer: StreamConsumer, bus: EventBus) -> Result<(), Box<dyn std::error::Error>> {
+    let mut stream = consumer.stream();
+    while let Some(result) = stream.next().await {
+        match result {
+            Ok(msg) => {
+                if let Some(payload) = msg.payload() {
+                    match serde_json::from_slice::<DomainEvent>(payload) {
+                        Ok(event) => { if bus.publish(event).await.is_err() { tracing::error!("Bus publish failed"); } }
+                        Err(e) => tracing::error!("Deserialize error: {}", e),
+                    }
+                }
+                let _ = consumer.commit_message(&msg, rdkafka::consumer::CommitMode::Async);
+            }
+            Err(e) => tracing::error!("Kafka error: {}", e),
+        }
+    }
+    Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<(), Box<dyn std::error::Error>> {
+    tracing_subscriber::fmt::init();
+    let producer: FutureProducer = ClientConfig::new().set("bootstrap.servers", "localhost:9092")
+        .set("message.timeout.ms", "5000").set("enable.idempotence", "true").create()?;
+    let (bus, mut rx) = EventBus::new(1000);
+    let handler = Arc::new(IdempotentEventHandler::new(producer.clone()));
+    tokio::spawn(async move { while let Some(event) = rx.recv().await { let h = handler.clone(); tokio::spawn(async move { if let Err(e) = h.handle(event).await { tracing::error!("Handler error: {}", e); } }); } });
+    let consumer: StreamConsumer = ClientConfig::new().set("group.id", "order-processors")
+        .set("bootstrap.servers", "localhost:9092").set("enable.auto.commit", "false")
+        .set("auto.offset.reset", "earliest").create()?;
+    consumer.subscribe(&["order-events"])?;
+    kafka_bridge(consumer, bus).await?;
+    Ok(())
+}
+```
+
+> **综合示例洞察**: 该示例展示了 Rust 事件驱动的**全栈组合**——类型安全 enum + Kafka 持久化 + 幂等处理 + 内存去重 + 背压传播。每个组件都可独立测试和替换。
+> [来源: [rdkafka examples](https://github.com/fede1024/rust-rdkafka/tree/master/examples)]
+
+---
+
+## 九、所有权交互
+
+```text
+事件所有权生命周期:
+  生产: 服务 A 创建事件 → 序列化为字节 → 所有权转移到网络/队列
+  队列: Kafka/RabbitMQ 持有字节 → 反序列化时重新进入 Rust 所有权系统
+  消费: 服务 B 接收字节 → let event = serde_json::from_slice(&bytes)? → 所有权转移到 event
+  原则: 不共享引用跨服务; Send 保证线程安全; Arc<DomainEvent> 多处只读避免拷贝
+```
+
+```rust,ignore
+fn produce_event(event: DomainEvent) -> Vec<u8> {
+    serde_json::to_vec(&event).unwrap() // event move 进序列化器
+}
+fn consume_event(bytes: Vec<u8>) -> DomainEvent {
+    serde_json::from_slice(&bytes).unwrap() // bytes 所有权转移给反序列化器
+}
+async fn broadcast_with_arc(event: DomainEvent, subscribers: Vec<mpsc::Sender<Arc<DomainEvent>>>) {
+    let shared = Arc::new(event);
+    for tx in subscribers { let _ = tx.send(Arc::clone(&shared)).await; }
+}
+```
+
+> **所有权洞察**: Rust 的所有权系统在分布式场景中的隐喻是——**事件作为不可变的值，在服务和线程边界间通过序列化/反序列化转移所有权**。这与事件溯源的"事件不可变"原则完美契合。
+> [来源: [The Rust Programming Language — Ownership](https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html)]
+
+---
+
+## 十、反命题与边界
+
+```text
+事件驱动并非万能:
+  ├── 反命题 1: 事件驱动比 RPC 更快
+  │   └── 否。消息队列增加延迟。优势是解耦和弹性。
+  ├── 反命题 2: 类型安全消除所有集成错误
+  │   └── 否。Schema 演化仍可能导致反序列化失败。
+  ├── 反命题 3: 幂等处理无需考虑时序
+  │   └── 否。补偿事件必须在原始事件处理完成后到达。
+  ├── 反命题 4: 背压永远不会丢失消息
+  │   └── 否。有界 channel 满时可能拒绝新消息。
+  └── 反命题 5: Send/Sync 保证分布式安全
+      └── 否。线程安全 ≠ 业务正确性。缓解: 混沌测试
+```
+
+> **边界洞察**: 事件驱动的边界在于**认知复杂度**——系统行为由事件流和状态机交互涌现。Rust 降低实现层错误，设计层错误仍需架构纪律。
+> [来源: [Designing Data-Intensive Applications](https://dataintensive.net/)]
+
+---
+
+## 十一、常见陷阱
+
+```text
+陷阱 1: 忽略事件顺序性  →  ❌ 时序假设  ✅ Kafka 同分区按 key 保序
+陷阱 2: 全局事件枚举    →  ❌ 变更瓶颈  ✅ 按限界上下文拆分 enum
+陷阱 3: 无界内存去重    →  ❌ OOM 风险  ✅ TTL + 滑动窗口
+陷阱 4: 消费者慢重平衡   →  ❌ 单线程   ✅ 批量拉取 + 并发 + 手动提交
+陷阱 5: 忽略 poison msg →  ❌ 无限重试  ✅ 死信队列 (DLQ)
+```
+
+> **陷阱总结**: 事件驱动的陷阱多与**分布式系统的时序、故障、规模**相关。Rust 的类型安全和内存安全消除了部分陷阱（如序列化竞态），但架构层面的反模式仍需经验规避。
+> [来源: [Anti-patterns in Event-Driven Architecture](https://solace.com/blog/event-driven-architecture-anti-patterns/)]
+
+---
+
+## 十二、来源
+
+| 来源 | 可信度 | 说明 |
+|:---|:---:|:---|
+| [Tokio Documentation](https://tokio.rs/) | ✅ 一级 | 异步运行时 |
+| [Tokio Broadcast](https://docs.rs/tokio/latest/tokio/sync/broadcast/index.html) | ✅ 一级 | 广播通道 |
+| [lapin crate](https://docs.rs/lapin/latest/lapin/) | ✅ 一级 | AMQP/RabbitMQ |
+| [rdkafka crate](https://docs.rs/rdkafka/latest/rdkafka/) | ✅ 一级 | Kafka 客户端 |
+| [NATS Documentation](https://docs.nats.io/) | ✅ 一级 | 消息系统 |
+| [Reactive Streams Specification](https://www.reactive-streams.org/) | ✅ 一级 | 背压规范 |
+| [Kafka Exactly-Once Semantics](https://www.confluent.io/blog/exactly-once-semantics-are-possible-heres-how-apache-kafka-does-it/) | ✅ 一级 | 精确一次语义 |
+| [Microservices Patterns (Chris Richardson)](https://microservices.io/book/) | ✅ 一级 | 事件驱动模式 |
+| [Designing Data-Intensive Applications](https://dataintensive.net/) | ✅ 一级 | 分布式系统基础 |
+| [Serde Enum Representations](https://serde.rs/enum-representations.html) | ✅ 一级 | 序列化模式 |
+| [bus crate](https://docs.rs/bus/latest/bus/) | ✅ 二级 | 同步广播通道 |
+| [bloom crate](https://docs.rs/bloom/latest/bloom/) | ✅ 二级 | 布隆过滤器 |
+| [rust_fsm crate](https://docs.rs/rust_fsm/latest/rust_fsm/) | ✅ 二级 | 状态机 DSL |
+
+---
+
+## 相关概念
+
+- [微服务架构模式](./31_microservice_patterns.md) — Saga、CQRS、熔断器、API 网关
+- [分布式系统](./18_distributed_systems.md) — gRPC、Raft、Actor 模型
+- [云原生](./24_cloud_native.md) — Kubernetes、容器化、可观测性
+- [系统设计原则](./05_system_design_principles.md) — 安全-性能-可维护性帕累托前沿
+- [Async](../03_advanced/02_async.md) — async/await、并发模型
+- [泛型](../02_intermediate/02_generics.md) · [Trait](../02_intermediate/01_traits.md) — 类型组合、抽象机制
+
+---
+
+> **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/)
+>
+> **权威来源对齐变更日志**: 2026-05-22 创建事件驱动架构概念文件 [来源: Authority Source Sprint Batch 9]
+
+**文档版本**: 1.0
+**对应 Rust 版本**: 1.96.0+ (Edition 2024)
+**最后更新**: 2026-05-22
+**状态**: ✅ 概念文件创建完成

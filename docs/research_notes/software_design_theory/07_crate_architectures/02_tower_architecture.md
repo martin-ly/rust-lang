@@ -473,3 +473,11 @@ Tower 处于"抽象 sweet spot"——足够底层以支持任意请求-响应协
 > - 对应 Rust 版本: 1.95.0+ (Edition 2024)
 > - 最后更新: 2026-05-22
 > - 状态: ✅ 初版完成
+
+---
+
+## 相关架构与延伸阅读
+
+- [Tokio 异步运行时架构](./06_tokio_architecture.md)
+- [Axum Web 框架架构](./07_axum_architecture.md)
+- [系统可组合性设计模式](../../../../concept/06_ecosystem/30_system_composability.md)

@@ -1088,3 +1088,9 @@ impl AuthManager {
 - [性能优化](performance_optimization.md)
 - [Rust 泛型深入](../02_intermediate/generics.md)
 - [Rust 集合类型 (Collections)](../02_intermediate/collections.md)
+
+---
+
+## 权威来源索引
+
+> **[来源: TRPL — Ch19.3 高级 Traits](https://doc.rust-lang.org/book/ch19-03-advanced-traits.html)** · **[来源: Rust Reference — Marker Traits](https://doc.rust-lang.org/reference/special-types-and-traits.html)** · **[来源: Fähndrich & Leino, "Declaring and Checking Non-null Types in an Object-Oriented Language", OOPSLA 2003](https://doi.org/10.1145/949305.949332)** · **[来源: Pierce, "Types and Programming Languages" (TAPL), MIT Press 2002](https://www.cis.upenn.edu/~bcpierce/tapl/)** · **[来源: Rustnomicon — Type System](https://doc.rust-lang.org/nomicon/)** · **[来源: RFC 1228 — ` specialization `](https://rust-lang.github.io/rfcs/1228-specialization.html)** · **[来源: Rust API Guidelines — Type Safety](https://rust-lang.github.io/api-guidelines/type-safety.html)** · **[来源: Session Types in Rust (Honda 1993 / POPL)](https://dl.acm.org/doi/10.1145/143165.143526)** · **[来源: Oxide: The Essence of Rust (Weiss et al., POPL 2023)](https://arxiv.org/abs/1903.00982)** · **[来源: Rust RFC Book — Type System Evolution](https://rust-lang.github.io/rfcs/)**

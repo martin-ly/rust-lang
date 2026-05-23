@@ -1,8 +1,8 @@
 # 系统可组合性 (System Composability)
 
 > **层级**: L6 生态工程
-> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Iterator](../01_foundation/04_iterator.md)
-> **后置概念**: [Tower 架构](../04_formal/05_system_design_principles.md) · [应用域](./04_application_domains.md)
+> **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Traits](../02_intermediate/01_traits.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Iterator](../02_intermediate/15_iterator_patterns.md)
+> **后置概念**: [Tower 架构](../04_formal/10_category_theory.md) · [应用域](./04_application_domains.md)
 > **主要来源**: [Rust Reference](https://doc.rust-lang.org/reference/) · [Tokio 文档](https://docs.rs/tokio/) · [Tower 文档](https://docs.rs/tower/) · [rayon 文档](https://docs.rs/rayon/)
 
 ---
@@ -280,7 +280,7 @@ loop {
 
 `bus` crate 提供了广播通道，实现一对多事件分发：
 
-```rust
+```rust,ignore
 use bus::Bus;
 
 let mut bus = Bus::<Event>::new(10);
@@ -344,7 +344,7 @@ graph LR
 
 **`Service` Trait —— 请求-响应的态射**：
 
-```rust
+```rust,ignore
 pub trait Service<Request> {
     type Response;
     type Error;
@@ -471,7 +471,7 @@ use tower::layer::util::Identity;
 
 **推论**：有界通道将**无界内存增长**转化为**有界延迟增长**，这是背压的核心价值。
 
-```rust
+```rust,ignore
 // 反例：unbounded 通道允许无界内存增长
 let (tx, mut rx) = mpsc::unbounded_channel();
 loop {
@@ -492,7 +492,7 @@ loop {
 
 嵌套泛型在组合深度增加时会产生难以阅读的类型签名：
 
-```rust
+```rust,ignore
 // ❌ 反模式：深层嵌套的泛型类型签名
 type BadService = RateLimit<
     Retry<
@@ -521,7 +521,7 @@ let service: BoxService<Request, Response, Error> = ServiceBuilder::new()
 
 ### 4.2 `dyn Trait` 在热路径上破坏单态化
 
-```rust
+```rust,ignore
 // ❌ 反模式：热路径上的动态分发
 fn process(items: &mut dyn Iterator<Item = i32>) -> i32 {
     items.filter(|x| x > &0).map(|x| x * 2).sum()
@@ -618,7 +618,7 @@ async fn good() {
 ## 七、相关概念链接
 
 - [L3: Async](../03_advanced/02_async.md) —— 异步数据流管道的根基
-- [L3: Iterator](../01_foundation/04_iterator.md) —— 同步管道-过滤器的核心机制
+- [L3: Iterator](../02_intermediate/15_iterator_patterns.md) —— 同步管道-过滤器的核心机制
 - [L6: Tower 形式化生态塔](./05_formal_ecosystem_tower.md) —— Tower 在形式化分层中的位置
 - [L4: Type Theory](../04_formal/02_type_theory.md) —— 幺半群与范畴论的数学基础
 - [L6: Core Crates](./03_core_crates.md) —— 可组合生态的 crate 谱系

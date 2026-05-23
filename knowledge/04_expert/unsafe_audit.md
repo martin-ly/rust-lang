@@ -1292,3 +1292,9 @@ let combined = Layout::new::<u32>().extend_packed(Layout::new::<u8>()).unwrap();
 **状态**: ✅ 权威来源对齐完成 (Batch 8)
 
 *贡献者: Rust 中文知识库维护团队*
+
+---
+
+## 权威来源索引
+
+> **[来源: Rust Reference — Unsafe Rust](https://doc.rust-lang.org/reference/unsafe-blocks.html)** · **[来源: Rustonomicon](https://doc.rust-lang.org/nomicon/)** · **[来源: Unsafe Code Guidelines](https://rust-lang.github.io/unsafe-code-guidelines/)** · **[来源: Miri 官方文档](https://github.com/rust-lang/miri)** · **[来源: Ralf Jung — Stacked Borrows / Tree Borrows](https://www.ralfj.de/blog/)** · **[来源: Rust By Example — Unsafe Operations](https://doc.rust-lang.org/rust-by-example/unsafe.html)** · **[来源: RFC 2585 — Unsafe Blockin](https://rust-lang.github.io/rfcs/2585-unsafe-block-in-unsafe-fn.html)** · **[来源: cargo-geiger](https://github.com/rust-crate/cargo-geiger)** · **[来源: cargo-fuzz 指南](https://rust-fuzz.github.io/book/)** · **[来源: LLVM Sanitizer Docs](https://clang.llvm.org/docs/AddressSanitizer.html)**
