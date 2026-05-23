@@ -1,9 +1,9 @@
 # Polonius：下一代 Borrow Checker 深度解析
 
 > **文档状态**: 活跃维护
-> **最后更新**: 2026-05-08
+> **最后更新**: 2026-05-22
 > **Rust 版本**: Nightly 1.97.0 (Polonius 实验中)
-> **关联目标**: [Rust 2026 Project Goals — Polonius scalable support](https://rust-lang.github.io/rust-project-goals/2026/)
+> **关联目标**: [Rust 2026 Project Goals — Polonius Alpha 稳定化](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)
 
 ---
 
@@ -189,6 +189,7 @@ flowchart LR
 ---
 
 ## 4. 与 NLL 的对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 4.1 编译通过的案例
@@ -223,6 +224,7 @@ pub fn polonius_wins(vec: &mut Vec<i32>) -> i32 {
 ---
 
 ## 5. 实际使用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 5.1 在 Nightly 上启用 Polonius
@@ -281,9 +283,11 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check
 ---
 
 ## 6. 当前限制与路线图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 已知限制
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 限制 | 状态 | 预计解决 |
@@ -293,7 +297,10 @@ RUSTFLAGS="-Zpolonius" cargo +nightly check
 | 不支持 `unsafe` 代码特殊分析 | 🟡 与 RustBelt 协作中 | 长期 |
 | 仅支持部分错误诊断 | 🟡 扩展中 | 2026 |
 
+> **2026-05 最新动态**: Location-sensitive analysis 原型已在 nightly 可用 (`-Zpolonius=next`)，解决 NLL problem case #3（lending iterator 模式）。Project Goals 2026 将 Polonius Alpha 稳定化列为年度旗舰目标，由 Rust 基金会资助。[来源: [Rust Project Goals 2026 — Polonius](https://rust-lang.github.io/rust-project-goals/2026/polonius.html)]
+
 ### 6.2 Rust 2026 Project Goals 中的定位
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -312,6 +319,7 @@ gantt
 ```
 
 ### 6.3 与 Rust for Linux 的关系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Polonius 的精确分析对内核代码尤为重要：
@@ -323,9 +331,11 @@ Polonius 的精确分析对内核代码尤为重要：
 ---
 
 ## 7. 对 Rust 学习者的意义
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 7.1 不需要立即学习的理由
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - Polonius 目前仍是 nightly-only 实验特性
@@ -333,6 +343,7 @@ Polonius 的精确分析对内核代码尤为重要：
 - 稳定版编译器暂不支持 `-Zpolonius`
 
 ### 7.2 值得关注的理由
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **理解编译器演进**：Polonius 代表了类型系统 + 逻辑编程的交叉创新
@@ -340,6 +351,7 @@ Polonius 的精确分析对内核代码尤为重要：
 - **学术研究**：Datalog 在编译器中的应用是 PL 领域的前沿方向
 
 ### 7.3 学习路径建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -358,9 +370,11 @@ flowchart TD
 ---
 
 ## 8. 参考文献
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Rust Compiler Team — Polonius Working Group](https://rust-lang.github.io/compiler-team/working-groups/polonius/)
@@ -369,12 +383,14 @@ flowchart TD
 - [Niko Matsakis: An Overview of Polonius](https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius/)
 
 ### 学术论文
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - Matsakis N. D., et al. "Non-Lexical Lifetimes: Introduction to MIR-based Borrow Check." *Rustc Dev Guide*, 2018.
 - Arntzenius R. "Datafrog: Lightweight Datalog Engine in Rust." *RustConf*, 2018.
 
 ### Rust Project Goals 2026
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Polonius scalable support](https://rust-lang.github.io/rust-project-goals/2026/)
@@ -383,6 +399,7 @@ flowchart TD
 ---
 
 ## 复查记录
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 日期 | 复查人 | 版本 | 状态 |
@@ -395,10 +412,10 @@ flowchart TD
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust Reference、TRPL、标准库官方来源标注 [来源: Authority Source Sprint Batch 8]
 
-**文档版本**: 1.1
+**文档版本**: 1.2
 **对应 Rust 版本**: 1.95.0+ (Edition 2024)
-**最后更新**: 2026-05-19
-**状态**: ✅ 权威来源对齐完成 (Batch 8)
+**最后更新**: 2026-05-22
+**状态**: ✅ 权威来源对齐完成 (Batch 9)
 
 ---
 
@@ -469,6 +486,12 @@ flowchart TD
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
+## 相关概念
+
+- [NLL 与 Polonius (concept)](../../concept/03_advanced/08_nll_and_polonius.md) — 概念层 NLL → Polonius 演进分析，含三代借用检查器对比表
+- [Polonius 跟踪报告](POLONIUS_TRACKING.md) — 本目录内的 Polonius 状态跟踪与技术细节
+- [Rust 版本跟踪 (concept)](../../concept/07_future/05_rust_version_tracking.md) — Project Goals 2026 全局状态与 nightly 特性跟踪
+
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
@@ -488,4 +511,3 @@ flowchart TD
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-
