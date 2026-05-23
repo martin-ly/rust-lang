@@ -96,7 +96,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 自动驾驶感知系统
 
 #![no_std]  // 核心模块
@@ -252,7 +252,7 @@ pub mod output {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use crossbeam::channel;
 use std::thread;
 
@@ -317,7 +317,7 @@ impl PerceptionPipeline {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 零分配图像处理
 pub struct ImagePool<const N: usize> {
     buffers: [Option<ImageBuffer>; N],
@@ -368,7 +368,7 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// 2oo3投票机制
 pub struct Voter3<T> {
     sources: [Box<dyn Sensor<T>>; 3],
@@ -420,7 +420,7 @@ impl DiverseDetector {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 运行时监控
 pub struct SafetyMonitor {
     timing_checker: TimingChecker,

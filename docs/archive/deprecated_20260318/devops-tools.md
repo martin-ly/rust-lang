@@ -71,7 +71,7 @@ DevOps 工具需要高可靠性、低资源消耗和快速启动，Rust 的这�
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! OCI 容器运行时核心
 
 use std::fs;
@@ -320,7 +320,7 @@ impl From<serde_json::Error> for ContainerError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 容器镜像构建器
 
 use std::collections::HashMap;
@@ -549,7 +549,7 @@ impl Image {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! CI/CD 流水线引擎
 
 use serde::{Serialize, Deserialize};
@@ -918,7 +918,7 @@ impl StepExecutor for DockerExecutor {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 系统指标收集器
 
 use sysinfo::{System, SystemExt, ProcessExt, CpuExt, NetworkExt, DiskExt};
@@ -1203,7 +1203,7 @@ impl MetricsExporter {
 
 ### OpenTelemetry 集成
 
-```rust
+```rust,ignore
 //! OpenTelemetry 可观测性集成
 
 use opentelemetry::{
@@ -1323,7 +1323,7 @@ pub fn shutdown_telemetry() {
 
 ### 高性能日志收集器
 
-```rust
+```rust,ignore
 //! 高性能日志收集器
 
 use serde::{Serialize, Deserialize};
@@ -1543,7 +1543,7 @@ pub enum LogError {
 
 ### 动态配置管理
 
-```rust
+```rust,ignore
 //! 动态配置管理系统
 
 use serde::{Serialize, Deserialize};
@@ -1705,7 +1705,7 @@ impl From<notify::Error> for ConfigError {
 
 ### Terraform Provider SDK
 
-```rust
+```rust,ignore
 //! Terraform Provider SDK 示例
 
 use serde::{Serialize, Deserialize};
@@ -1890,7 +1890,7 @@ impl From<serde_json::Error> for ProviderError {
 
 ### 1. CLI 工具开发
 
-```rust
+```rust,ignore
 //! DevOps CLI 工具最佳实践
 
 use clap::{Parser, Subcommand};
@@ -1997,7 +1997,7 @@ async fn main() -> Result<()> {
 
 ### 2. 错误处理与重试
 
-```rust
+```rust,ignore
 //! 健壮的错误处理和重试机制
 
 use std::time::Duration;

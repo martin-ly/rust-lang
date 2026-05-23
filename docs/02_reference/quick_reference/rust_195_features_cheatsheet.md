@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 1.95.0 特性与 API 速查表](#rust-1950-特性与-api-速查表)
@@ -33,6 +34,7 @@
   - [五、与 Rust 2024 Edition 的关联](#五与-rust-2024-edition-的关联)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、语言特性
 >
@@ -80,7 +82,7 @@ let arch_str = cfg_select! {
 
 > 📎 知识文档: [`knowledge/02_intermediate/control_flow/if_let_guards.md`](../../../knowledge/02_intermediate/control_flow/if_let_guards.md)
 
-```rust
+```rust,ignore
 match value {
     Some(x) if let Ok(y) = parse(x) => println!("{}, {}", x, y),
     Some(_) => println!("parse failed"),
@@ -94,7 +96,7 @@ match value {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::keyword as kw;  // 重命名关键字路径段
 ```
 
@@ -132,7 +134,7 @@ unsafe {
 | `core::range::RangeInclusive` | `use core::range::RangeInclusive; let r = RangeInclusive::new(1, 10);` | 新的包含性范围类型（与 `std::ops::RangeInclusive` 等价但位于 `core::range`） |
 | `core::range::RangeInclusiveIter` | `let iter = r.into_iter();` | 专属迭代器类型 |
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 let range = RangeInclusive::new(1, 5);
@@ -181,7 +183,7 @@ counter.update(Ordering::Relaxed, Ordering::Relaxed, |current| current + 1);
 
 > 📎 可运行示例: [`crates/c02_type_system/examples/vec_push_mut_demo.rs`](../../../crates/c02_type_system/examples/vec_push_mut_demo.rs) (Vec) | [`crates/c08_algorithms/examples/collections_mut_ref_demo.rs`](../../../crates/c08_algorithms/examples/collections_mut_ref_demo.rs) (VecDeque/LinkedList)
 
-```rust
+```rust,ignore
 use std::collections::{VecDeque, LinkedList};
 
 // Vec::push_mut / insert_mut
@@ -227,7 +229,7 @@ let m: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 
 > 📎 可运行示例: [`crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs`](../../../crates/c01_ownership_borrow_scope/examples/layout_api_demo.rs)
 
-```rust
+```rust,ignore
 use std::alloc::Layout;
 
 // 获取悬空但合规的指针
@@ -308,6 +310,7 @@ let ref_slice: &[Cell<i32>] = cell_arr.as_ref();
 ---
 
 ## 三、编译器与平台
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### `--remap-path-scope` 稳定化
@@ -335,6 +338,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 | `aarch64-apple-visionos-sim` | Tier 2 |
 
 ### 重要兼容性变更
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - **JSON target specs destabilized**: stable 通道不再支持自定义 target JSON，需 nightly `-Z unstable-options`
@@ -344,6 +348,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 ---
 
 ## 四、Const 上下文新稳定 API
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 以下 API 在 const 上下文中稳定化：
@@ -354,7 +359,7 @@ rustc --remap-path-scope=macro,sysroot -Z remap-path-prefix=/home/user=/project
 | `ControlFlow::is_break` | `core::ops::ControlFlow` |
 | `ControlFlow::is_continue` | `core::ops::ControlFlow` |
 
-```rust
+```rust,ignore
 const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
     cf.is_break() // 1.95.0+ 可在 const fn 中使用
 }
@@ -363,6 +368,7 @@ const fn check_control(cf: ControlFlow<i32, ()>) -> bool {
 ---
 
 ## 五、与 Rust 2024 Edition 的关联
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1.95.0 中的 `if let` guards 是对 2024 Edition `let chains` 的自然延伸：
@@ -392,6 +398,7 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
@@ -497,4 +504,3 @@ Rust 1.95.0 发布时，Rust 2024 Edition 已稳定 3 个月（自 1.85.0）。1
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

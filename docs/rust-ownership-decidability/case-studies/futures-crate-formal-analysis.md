@@ -49,7 +49,7 @@ Futures crate提供:
 ### 定理 2.1 (map_ok/map_err)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 impl<TryFuture> FutureExt for TryFuture {
     fn map_ok<F, T>(self, f: F) -> MapOk<Self, F>
     where F: FnOnce(Self::Ok) -> T;
@@ -79,7 +79,7 @@ $$
 
 ### 定理 3.1 (Stream组合)
 
-```rust
+```rust,ignore
 impl<St> StreamExt for St {
     fn map<F, T>(self, f: F) -> Map<Self, F>;
     fn filter<F>(self, f: F) -> Filter<Self, F>;
@@ -93,7 +93,7 @@ impl<St> StreamExt for St {
 
 **实现**:
 
-```rust
+```rust,ignore
 stream.map(|item| async { process(item) })
     .buffer_unordered(10)  // 最多10个并发
 ```
@@ -111,7 +111,7 @@ stream.map(|item| async { process(item) })
 
 ### 定义 4.1 (Sink)
 
-```rust
+```rust,ignore
 trait Sink<Item> {
     type Error;
 
@@ -141,7 +141,7 @@ trait Sink<Item> {
 
 ### 定理 5.1 (channel背压)
 
-```rust
+```rust,ignore
 let (tx, rx) = mpsc::channel(10);  // 缓冲10个
 
 // 当缓冲满时，send返回Pending
@@ -156,7 +156,7 @@ let (tx, rx) = mpsc::channel(10);  // 缓冲10个
 
 ### 反例 6.1 (忘记驱动Stream)
 
-```rust
+```rust,ignore
 let stream = futures::stream::iter(vec![1, 2, 3]);
 // stream不做任何事，直到被poll
 

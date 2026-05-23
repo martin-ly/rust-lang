@@ -54,7 +54,7 @@
 
 **卫生性 (Hygiene)** 确保宏生成的标识符不会与宏外部的标识符意外冲突。
 
-```rust
+```rust,ignore
 // 定义宏
 macro_rules! using_a {
     ($e:expr) => {
@@ -165,7 +165,7 @@ make_var!(x, 42);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 macro_rules! use_var {
     ($e:expr) => {
         $e + a  // 'a' 引用在宏定义上下文解析
@@ -234,7 +234,7 @@ mixed_context!(y);
 
 宏导出的标识符需要在不同 crate 间保持卫生性：
 
-```rust
+```rust,ignore
 // crate_a: 定义宏
 #[macro_export]
 macro_rules! export_var {
@@ -344,7 +344,7 @@ let val = const_hygiene_break!(MyConst);
 
 过程宏使用 `Span` 系统实现卫生性：
 
-```rust
+```rust,ignore
 use proc_macro::{Span, TokenStream, TokenTree, Ident};
 
 #[proc_macro]

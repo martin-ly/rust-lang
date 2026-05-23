@@ -197,7 +197,7 @@ Mutable(x, T) →  own(x, T)  （当可变借用结束）
 
 **为什么禁止同时读写？**
 
-```rust
+```rust,ignore
 // 假设Rust允许这样（实际不行）
 let mut data = vec![1, 2, 3];
 let r1 = &data[0];      // 读取第一个元素
@@ -250,7 +250,7 @@ println!("{}", s);  // "hello!"
 
 每个借用都有隐式或显式的生命周期：
 
-```rust
+```rust,ignore
 // 显式生命周期
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -274,7 +274,7 @@ fn first_word(s: &str) -> &str {  // 等价于 fn first_word<'a>(s: &'a str) -> 
 ### 4.3 生命周期与借用检查
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn example() {
     let r;          // r的生命周期: 'outer
     {
@@ -380,7 +380,7 @@ impl SelfReferential {
 ### 6.1 同时读写错误
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 错误代码
 let mut s = String::from("hello");
 let r1 = &s;
@@ -409,7 +409,7 @@ let r2 = &mut s;      // OK!
 ### 6.2 生命周期不匹配
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 错误代码
 fn return_dangling() -> &String {
     let s = String::from("hello");
@@ -440,7 +440,7 @@ fn return_shared() -> Arc<String> {
 ### 6.3 迭代器失效
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 错误代码
 let mut vec = vec![1, 2, 3];
 for item in &vec {
@@ -450,7 +450,7 @@ for item in &vec {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 先收集再处理
 let to_add: Vec<_> = vec.iter().map(|x| x * 2).collect();
 vec.extend(to_add);
@@ -494,7 +494,7 @@ impl Node {
 ### 7.2 观察者模式
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 trait Observer {
     fn update(&self, event: &Event);
 }
@@ -519,7 +519,7 @@ impl<'a> Subject<'a> {
 ### 7.3 RAII与借用结合
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 struct Guard<'a> {
     data: &'a mut Data,
     original: Data,

@@ -239,7 +239,7 @@ $$
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub struct Vec<T, const N: usize> {
     buffer: [MaybeUninit<T>; N],
     len: usize,
@@ -276,7 +276,7 @@ $$
 
 1. **push操作**: 仅当 $n < N$ 时成功
 
-   ```rust
+   ```rust,ignore
    pub fn push(&mut self, item: T) -> Result<(), T> {
        if self.len < N {  // 检查容量
            // ... 添加元素
@@ -290,7 +290,7 @@ $$
 
 2. **pop操作**: 仅当 $n > 0$ 时成功
 
-   ```rust
+   ```rust,ignore
    pub fn pop(&mut self) -> Option<T> {
        if self.len > 0 {
            self.len -= 1;
@@ -307,7 +307,7 @@ $$
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 fn push(&mut self, item: T) -> Result<(), T> {
     if self.len < N {
         // 安全: len < N 保证buffer[len]在范围内
@@ -338,7 +338,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 fn pop(&mut self) -> Option<T> {
     if self.len > 0 {
         self.len -= 1;
@@ -371,7 +371,7 @@ $$
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 pub struct String<const N: usize> {
     vec: Vec<u8, N>,
 }
@@ -401,7 +401,7 @@ HeaplessString确保UTF-8有效性通过以下机制:
 
 1. **构造函数**: 仅从有效UTF-8源创建
 
-   ```rust
+   ```rust,ignore
    pub fn from_str(s: &str) -> Result<Self, Error> {
        // str已经是有效UTF-8
        // 检查容量后复制
@@ -410,7 +410,7 @@ HeaplessString确保UTF-8有效性通过以下机制:
 
 2. **push字符**: 仅接受 `char` 类型（Rust保证是有效Unicode）
 
-   ```rust
+   ```rust,ignore
    pub fn push(&mut self, c: char) -> Result<(), Error> {
        let mut buf = [0; 4];
        let bytes = c.encode_utf8(&mut buf);
@@ -428,7 +428,7 @@ HeaplessString确保UTF-8有效性通过以下机制:
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 pub struct LinearMap<K, V, const N: usize> {
     buffer: [MaybeUninit<(K, V)>; N],
     len: usize,
@@ -451,7 +451,7 @@ $$
 
 LinearMap使用线性搜索:
 
-```rust
+```rust,ignore
 pub fn get(&self, key: &K) -> Option<&V>
 where
     K: Eq,
@@ -492,7 +492,7 @@ $$
 
 单生产者单消费者（SPSC）队列:
 
-```rust
+```rust,ignore
 pub struct Queue<T, const N: usize> {
     head: AtomicUsize,
     tail: AtomicUsize,
@@ -522,7 +522,7 @@ $$
 
 多生产者多消费者（MPMC）队列使用原子操作保证线程安全:
 
-```rust
+```rust,ignore
 pub struct MpMcQueue<T, const N: usize> {
     // 使用原子操作协调多个生产者/消费者
 }
@@ -554,7 +554,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 pub struct BinaryHeap<T, const N: usize, const MAX: bool = true> {
     data: Vec<T, N>,
 }
@@ -628,7 +628,7 @@ $$
 
 Rust const generics将容量 $N$ 编码为类型:
 
-```rust
+```rust,ignore
 let v1: Vec<u8, 64> = Vec::new();
 let v2: Vec<u8, 128> = Vec::new();
 
@@ -644,7 +644,7 @@ $$
 
 **容量推导**:
 
-```rust
+```rust,ignore
 fn create_vec() -> Vec<u8, 64> {
     Vec::new()  // 类型推导确定N=64
 }
@@ -660,7 +660,7 @@ fn create_vec() -> Vec<u8, 64> {
 
 虽然heapless不直接提供类型级算术，但可以与 `typenum` 结合:
 
-```rust
+```rust,ignore
 use typenum::consts::U64;
 use generic_array::GenericArray;
 
@@ -719,7 +719,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 pub fn push(&mut self, item: T) -> Result<(), T> {
     if self.len < N {
         // item的所有权转移到buffer
@@ -755,7 +755,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 pub fn pop(&mut self) -> Option<T> {
     if self.len > 0 {
         self.len -= 1;
@@ -789,7 +789,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 pub fn iter(&self) -> Iter<'_, T, N> {
     Iter {
         vec: self,
@@ -811,7 +811,7 @@ $$
 
 这确保:
 
-```rust
+```rust,ignore
 let v = Vec::<u8, 64>::new();
 let it = v.iter();
 // v.push(1);  // 编译错误: v已被借用
@@ -830,7 +830,7 @@ for x in it { ... }
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T, const N: usize> Drop for Vec<T, N> {
     fn drop(&mut self) {
         // 1. 逐个drop已初始化的元素
@@ -924,7 +924,7 @@ $$
 
 迭代器持有 `&Vec` 或 `&mut Vec`:
 
-```rust
+```rust,ignore
 // 共享迭代: &Vec
 pub fn iter(&self) -> Iter<'_, T, N>;  // 借用 &self
 
@@ -1047,7 +1047,7 @@ $$
 
 **API设计**:
 
-```rust
+```rust,ignore
 // 返回Result的操作
 pub fn push(&mut self, item: T) -> Result<(), T>;
 pub fn extend_from_slice(&mut self, other: &[T]) -> Result<(), ()>;
@@ -1060,7 +1060,7 @@ pub fn remove(&mut self, index: usize) -> T;  // 索引必须在范围内
 
 **错误传播模式**:
 
-```rust
+```rust,ignore
 // 模式1: 显式处理
 match vec.push(item) {
     Ok(()) => {},
@@ -1085,7 +1085,7 @@ let _ = vec.push(item);  // 危险！仅在proof下使用
 
 Heapless错误类型实现标准Error trait:
 
-```rust
+```rust,ignore
 impl<T> fmt::Display for CapacityError<T> {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         write!(f, "insufficient capacity")
@@ -1106,7 +1106,7 @@ impl<T: fmt::Debug> Error for CapacityError<T> {}
 ### 反例 9.1 (容量不足)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 问题: 容量不足以处理最大输入
 fn receive_data(stream: &mut impl Read) -> Result<Vec<u8, 64>, Error> {
     let mut buffer = Vec::<u8, 64>::new();
@@ -1127,7 +1127,7 @@ fn receive_data(stream: &mut impl Read) -> Result<Vec<u8, 64>, Error> {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 使用迭代器适配器优雅处理
 fn receive_data(stream: &mut impl Read) -> Result<Vec<u8, 64>, Error> {
     let mut buffer = Vec::<u8, 64>::new();
@@ -1146,7 +1146,7 @@ fn receive_data(stream: &mut impl Read) -> Result<Vec<u8, 64>, Error> {
 ### 反例 9.2 (递归栈溢出)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 危险: 大容量Vec在递归中可能导致栈溢出
 fn recursive_process(depth: usize) {
     let large_buffer = Vec::<u8, 8192>::new();  // 8KB栈空间
@@ -1181,7 +1181,7 @@ fn recursive_process(depth: usize) {
 ### 反例 9.3 (大栈帧)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 危险: 多个大容量类型同时存在
 fn process_large_data() {
     let buf1 = Vec::<u64, 1024>::new();  // 8KB
@@ -1196,7 +1196,7 @@ fn process_large_data() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 使用作用域限制同时存在的变量
 fn process_large_data() {
     {
@@ -1222,7 +1222,7 @@ fn process_large_data() {
 ### 反例 9.4 (Clone性能问题)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 问题: 克隆大Vec导致大量栈复制
 fn duplicate_data(input: &Vec<u8, 4096>) -> Vec<u8, 4096> {
     input.clone()  // 复制4KB栈数据！
@@ -1237,7 +1237,7 @@ for _ in 0..1000 {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 使用引用避免克隆
 fn process_data(input: &Vec<u8, 4096>) {
     process(input);  // 仅传递引用
@@ -1348,7 +1348,7 @@ static mut GLOBAL_BUF: Vec<u8, 4096> = Vec::new();
 
 **实时系统设计**:
 
-```rust
+```rust,ignore
 // 传感器数据采集（硬实时）
 #[rtic::app(device = stm32f4::Peripherals)]
 mod app {
@@ -1381,7 +1381,7 @@ mod app {
 
 **单生产者单消费者模式**:
 
-```rust
+```rust,ignore
 static mut QUEUE: Queue<Event, 32> = Queue::new();
 
 // 中断处理器（高优先级）
@@ -1408,7 +1408,7 @@ fn main_loop() {
 
 **MPMC模式（原子操作）**:
 
-```rust
+```rust,ignore
 use heapless::mpmc::Q64;
 
 static QUEUE: Q64<Event> = Q64::new();
@@ -1438,7 +1438,7 @@ fn consumer_task() {
 
 RTIC (Real-Time Interrupt-driven Concurrency) 与heapless完美配合:
 
-```rust
+```rust,ignore
 #[rtic::app(device = hal::pac, dispatchers = [USART1])]
 mod app {
     use heapless::{Vec, spsc::Queue};
@@ -1511,14 +1511,14 @@ mod app {
 
 2. **考虑边界情况**
 
-   ```rust
+   ```rust,ignore
    // 添加安全余量
    const BUFFER_SIZE: usize = MAX_PACKET_SIZE + 64;  // 头部+余量
    ```
 
 3. **使用类型别名**
 
-   ```rust
+   ```rust,ignore
    // 定义语义化的容量类型
    pub type PacketBuffer = Vec<u8, 576>;  // MTU + 头部
    pub type FrameQueue = Queue<Frame, 8>;
@@ -1539,7 +1539,7 @@ mod app {
 
 **嵌套集合**:
 
-```rust
+```rust,ignore
 // 固定大小的二维数组
 pub type Matrix<const M: usize, const N: usize> = Vec<Vec<f32, N>, M>;
 
@@ -1552,7 +1552,7 @@ for _ in 0..3 {
 
 **自定义数据结构**:
 
-```rust
+```rust,ignore
 // 带元数据的环形缓冲区
 pub struct RingBuffer<T, const N: usize> {
     data: Vec<T, N>,

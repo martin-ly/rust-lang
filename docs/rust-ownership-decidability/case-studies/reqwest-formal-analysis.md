@@ -71,7 +71,7 @@ Reqwest是Rust最流行的HTTP客户端，提供:
 ### 定义 2.1 (ClientBuilder)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct ClientBuilder {
     config: Config,
 }
@@ -91,7 +91,7 @@ impl ClientBuilder {
 
 **证明**:
 
-```rust
+```rust,ignore
 let client = Client::builder()
     .timeout(Duration::from_secs(10))
     .pool_max_idle_per_host(10)
@@ -116,7 +116,7 @@ let client = Client::builder()
 
 **证明**:
 
-```rust
+```rust,ignore
 pub struct Client {
     inner: Arc<ClientInner>,
 }
@@ -139,7 +139,7 @@ pub struct Client {
 ### 定义 3.1 (RequestBuilder)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub struct RequestBuilder {
     client: Client,
     request: Result<Request, Error>,
@@ -153,7 +153,7 @@ pub struct RequestBuilder {
 
 **证明**:
 
-```rust
+```rust,ignore
 let request = client
     .get("https://api.example.com/users")
     .header("Authorization", "Bearer token")
@@ -186,7 +186,7 @@ let request = client
 
 **实现**:
 
-```rust
+```rust,ignore
 impl RequestBuilder {
     pub fn json<T: Serialize>(self, json: &T) -> Self {
         let body = serde_json::to_vec(json).unwrap();
@@ -213,7 +213,7 @@ impl RequestBuilder {
 
 **证明**:
 
-```rust
+```rust,ignore
 let mut stream = response.bytes_stream();
 
 while let Some(chunk) = stream.next().await {
@@ -240,7 +240,7 @@ while let Some(chunk) = stream.next().await {
 
 **证明**:
 
-```rust
+```rust,ignore
 #[derive(Deserialize)]
 struct User {
     id: u64,
@@ -270,7 +270,7 @@ let user: User = response.json().await?;
 
 **实现**:
 
-```rust
+```rust,ignore
 pub struct Client {
     inner: Arc<ClientInner>,
     // 包含连接池
@@ -297,7 +297,7 @@ pub struct Client {
 
 **实现**:
 
-```rust
+```rust,ignore
 let client = Client::builder()
     .timeout(Duration::from_secs(30))
     .build()?;
@@ -326,7 +326,7 @@ client.get(url).timeout(Duration::from_secs(10)).send().await?;
 
 **模式**:
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct LoggingClient {
     inner: Client,
@@ -352,7 +352,7 @@ impl LoggingClient {
 ### 反例 8.1 (未处理错误)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 危险: 忽略错误
 let resp = client.get(url).send().await.unwrap();
 
@@ -367,7 +367,7 @@ match client.get(url).send().await {
 ### 反例 8.2 (每次请求新建Client)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 低效: 每次新建Client，无连接复用
 for url in urls {
     let client = Client::new();  // 不要这样做
@@ -384,7 +384,7 @@ for url in urls {
 ### 反例 8.3 (大文件内存加载)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 危险: 大文件导致OOM
 let bytes = response.bytes().await?;  // 加载整个文件
 

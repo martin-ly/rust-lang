@@ -326,7 +326,7 @@ Q(x) ::= process(x).0
 ### 基础实现
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -390,7 +390,7 @@ impl<'a, T: Send, R: Send> BranchHandler<'a, T, R> {
 ### 广播通道实现
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 
 /// 基于广播通道的多路合并
@@ -467,7 +467,7 @@ pub async fn broadcast_example() {
 ### 复杂工作流示例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use tokio::task::JoinHandle;
 
 /// 复杂多路合并工作流

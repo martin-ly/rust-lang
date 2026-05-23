@@ -766,7 +766,7 @@ $$\forall r: \text{ref}(r) \land \text{lifetime}(r) = \ell \rightarrow \forall t
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x

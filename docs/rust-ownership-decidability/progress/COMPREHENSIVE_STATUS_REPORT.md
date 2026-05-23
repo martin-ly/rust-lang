@@ -164,7 +164,7 @@ Definition Linearizable (Γ : type_env) : Prop :=
 ### 示例 1: 基本不可变借用
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let x = 5;
 let y = &x;
 *y  // 返回 5
@@ -175,7 +175,7 @@ let y = &x;
 ### 示例 2: 可变借用
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let mut x = 5;
 let y = &mut x;
 *y = 10;
@@ -187,7 +187,7 @@ let y = &mut x;
 ### 示例 3: 多个共享借用
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let x = 5;
 let y = &x;
 let z = &x;
@@ -199,7 +199,7 @@ let z = &x;
 ### 示例 4: Box 类型
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let x = Box::new(5);
 *x  // 返回 5
 ```
@@ -209,7 +209,7 @@ let x = Box::new(5);
 ### 示例 5: 借用链
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let x = 5;
 let y = &x;
 let z = &y;

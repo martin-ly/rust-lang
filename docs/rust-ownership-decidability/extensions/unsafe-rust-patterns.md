@@ -169,7 +169,7 @@ unsafe impl<T: Sync> Sync for SafeBuffer<T> {}
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::ptr;
 
 /// 实现一个轻量化的 Vec
@@ -387,7 +387,7 @@ unsafe impl<T: Send> Sync for SpscQueue<T> {}
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::mem::{size_of, transmute};
 
 /// 用于解析二进制协议的 Union
@@ -575,7 +575,7 @@ impl<T, const N: usize> Drop for ArrayVec<T, N> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::arch::asm;
 
 /// 使用内联汇编读取 CPU 时间戳计数器
@@ -681,7 +681,7 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::arch::naked_asm;
 
 /// 裸函数用于实现上下文切换
@@ -798,7 +798,7 @@ impl CStringList {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 表示 C 库中的不透明类型
 #[repr(C)]
 pub struct OpaqueContext {
@@ -986,7 +986,7 @@ impl Uart16550 {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use core::arch::global_asm;
 
 /// 中断描述符表项
@@ -1247,7 +1247,7 @@ impl PacketHeader {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 use std::ptr::NonNull;
 use std::sync::atomic::{AtomicUsize, Ordering};

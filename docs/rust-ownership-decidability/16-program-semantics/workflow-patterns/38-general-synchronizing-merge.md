@@ -245,7 +245,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -359,7 +359,7 @@ impl<T: Send + Clone + 'static> GeneralSynchronizingMerge<T> {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use futures::stream::FuturesUnordered;
 use futures::StreamExt;
 use thiserror::Error;
@@ -543,7 +543,7 @@ impl<'a> GraphAnalyzer<'a> {
 ### 5.3 通用工作流引擎完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use uuid::Uuid;
 
@@ -710,7 +710,7 @@ $$
 
 **场景**: 支持任意拓扑的BPMN引擎
 
-```rust
+```rust,ignore
 engine:
   - parse BPMN with loops and conditions
   - discover reachable branches dynamically
@@ -723,7 +723,7 @@ engine:
 
 **场景**: 节点动态加入/离开的分布式系统
 
-```rust
+```rust,ignore
 distributed:
   - topology changes at runtime
   - discover reachable nodes
@@ -739,7 +739,7 @@ distributed:
 ### 9.1 超时通用同步合并
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 struct TimeoutGeneralSyncMerge<T> {
     graph: WorkflowGraph,
     global_timeout: Duration,

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 04: 密码生成器](#实践项目-04-密码生成器)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/password-generator/`](#完整参考实现位于-examplespassword-generator)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -44,9 +46,10 @@
 > **[来源: Rust Official Docs]**
 
 ### 随机数生成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use rand::{thread_rng, Rng};
 
 fn generate_password(length: usize) -> String {
@@ -64,6 +67,7 @@ fn generate_password(length: usize) -> String {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/password-generator/`
@@ -123,4 +127,3 @@ fn generate_password(length: usize) -> String {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

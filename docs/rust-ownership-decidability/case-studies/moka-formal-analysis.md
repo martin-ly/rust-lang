@@ -49,7 +49,7 @@ Moka提供:
 
 > 使用分段锁提高并发度。
 
-```rust
+```rust,ignore
 let cache: Cache<String, Vec<u8>> = Cache::builder()
     .max_capacity(10000)
     .build();
@@ -61,7 +61,7 @@ let cache: Cache<String, Vec<u8>> = Cache::builder()
 
 > 读取路径无需锁定。
 
-```rust
+```rust,ignore
 // 并发安全读取
 if let Some(value) = cache.get(&key).await {
     return value;
@@ -94,7 +94,7 @@ if let Some(value) = cache.get(&key).await {
 
 > 支持多种过期策略。
 
-```rust
+```rust,ignore
 let cache = Cache::builder()
     .max_capacity(10000)
     .time_to_live(Duration::from_secs(60))   // TTL
@@ -110,7 +110,7 @@ let cache = Cache::builder()
 
 ### 反例 5.1 (缓存雪崩)
 
-```rust
+```rust,ignore
 // 同时大量miss，后端压力
 let value = cache.get(&key).await
     .unwrap_or_else(|| fetch_expensive(key).await);

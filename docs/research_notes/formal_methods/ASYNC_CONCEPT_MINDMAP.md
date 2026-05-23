@@ -169,7 +169,7 @@ mindmap
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // async fn 编译后的状态机
 enum MyAsyncFn {
     Start,
@@ -222,7 +222,7 @@ impl Future for MyAsyncFn {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -262,7 +262,7 @@ enum Poll<T> {
 ### 跨await持有锁的危险
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // ❌ 危险: 锁guard跨越await
 async fn bad() {
     let guard = mutex.lock().unwrap();
@@ -294,7 +294,7 @@ async fn better() {
 ### join! - 并行等待
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use tokio::join;
 
 async fn fetch_data() {
@@ -310,7 +310,7 @@ async fn fetch_data() {
 ### select! - 竞赛等待
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use tokio::select;
 
 async fn race() {
@@ -331,7 +331,7 @@ async fn race() {
 ### 取消安全
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 非取消安全: 操作可能部分完成
 async fn not_cancellation_safe() {
     file.write(b"header").await?;
@@ -421,7 +421,7 @@ async fn cancellation_safe() {
 ### Future trait
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;

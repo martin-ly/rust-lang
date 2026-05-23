@@ -92,7 +92,7 @@
 - 安全关键：故障必须安全处理
 - 远程部署：无法物理访问调试
 
-```rust
+```rust,ignore
 // 桌面环境：可以简单panic并退出
 fn main() {
     let result = risky_operation();
@@ -154,7 +154,7 @@ panic-probe 提供：
 4. **Defmt集成**：压缩日志格式支持
 5. **可配置策略**：根据环境选择不同行为
 
-```rust
+```rust,ignore
 // 典型配置
 [dependencies]
 panic-probe = { version = "0.3", features = ["print-defmt"] }
@@ -184,7 +184,7 @@ fn main() -> ! {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Panic流程
 pub fn panic_impl(info: &PanicInfo) -> ! {
     // 1. 禁用中断（防止嵌套panic）
@@ -217,7 +217,7 @@ enum AbortStrategy {
 | `panic-semihosting` | 半主机输出 | 仿真 | ~2KB |
 | `panic-itm` | ITM输出 | 跟踪调试 | ~500B |
 
-```rust
+```rust,ignore
 // panic-halt 实现
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {
@@ -277,7 +277,7 @@ RTT是SEGGER开发的实时传输协议：
 3. 无需目标CPU参与数据传输
 4. 支持多通道（日志、命令、数据）
 
-```rust
+```rust,ignore
 // RTT通道定义
 struct RttChannel {
     name: *const u8,
@@ -363,7 +363,7 @@ fn write(channel: &mut RttChannel, data: &[u8]) {
 
 栈回溯（Stack Unwinding）在panic时捕获调用链：
 
-```rust
+```rust,ignore
 // Cortex-M栈回溯
 struct StackFrame {
     r0: u32,
@@ -415,7 +415,7 @@ fn resolve_symbol(pc: u32, elf: &Elf) -> Option<String> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 标准库PanicInfo
 pub struct PanicInfo<'a> {
     payload: &'a (dyn Any + Send),
@@ -455,7 +455,7 @@ impl<'a> Location<'a> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Panic处理器trait（概念性）
 pub trait PanicHandler {
     // 永不返回
@@ -506,7 +506,7 @@ impl ConfigurablePanic {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // panic-probe与defmt集成
 use defmt::error;
 
@@ -542,7 +542,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 探针通信trait
 pub trait ProbeChannel {
     type Error;
@@ -609,7 +609,7 @@ impl ProbeChannel for ItmChannel {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 开发配置: panic-probe + defmt
 [dependencies]
 panic-probe = { version = "0.3", features = ["print-defmt"] }
@@ -652,7 +652,7 @@ fn main() -> ! {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 生产配置: panic-reset
 [dependencies]
 panic-reset = "0.1"
@@ -699,7 +699,7 @@ fn enter_safe_mode() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
 use littlefs2::io::Write;
 
@@ -799,7 +799,7 @@ fn check_previous_panics(fs: &Filesystem<FlashStorage>) {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 通过无线连接发送panic信息
 use embassy_net::tcp::TcpSocket;
 
@@ -848,7 +848,7 @@ fn send_panic_report(info: &PanicInfo) -> Result<(), Error> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // IEC 61508 / ISO 26262 兼容的panic处理
 
 // 安全状态
@@ -973,7 +973,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // Cargo.toml
 [package]
 name = "embedded-app"
@@ -1043,7 +1043,7 @@ async fn main(_spawner: Spawner) {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // src/panic_handler.rs
 
 use core::panic::PanicInfo;
@@ -1218,7 +1218,7 @@ fn get_timestamp() -> u64 {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // src/fault_log.rs
 
 use littlefs2::fs::{Filesystem, File, OpenOptions};
@@ -1363,7 +1363,7 @@ pub struct FaultStatistics {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // src/recovery.rs
 
 use core::sync::atomic::{AtomicU8, Ordering};
@@ -1558,7 +1558,7 @@ fn restore_context_and_return() -> ! { loop {} }
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 测量panic处理时间
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
@@ -1617,7 +1617,7 @@ Panic发生时开销：
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 开发阶段：最大调试信息
 #[cfg(debug_assertions)]
 mod panic_config {
@@ -1654,7 +1654,7 @@ lto = true         # 链接时优化
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 恢复状态机
 enum RecoveryState {
     Normal,
@@ -1804,7 +1804,7 @@ ARM Cortex-M的异常/调用约定：
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 问题：栈溢出可能导致双重panic
 fn recursive_function(depth: usize) {
     let large_array = [0u8; 1024];
@@ -1837,7 +1837,7 @@ unsafe extern "C" fn HardFault(_frame: &ExceptionFrame) -> ! {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 问题：panic处理中再次panic
 #[panic_handler]
 fn panic(info: &PanicInfo) -> ! {
@@ -1864,7 +1864,7 @@ fn panic(info: &PanicInfo) -> ! {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 问题：硬件故障可能破坏panic处理
 #[panic_handler]
 fn panic(_info: &PanicInfo) -> ! {

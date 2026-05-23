@@ -40,7 +40,7 @@ Rust Actor框架全景:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 // 定义消息
@@ -98,7 +98,7 @@ async fn main() {
 
 ### 3.1 监督树架构
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 fn main() {
@@ -144,7 +144,7 @@ fn main() {
 
 ### 4.1 分布式Actor
 
-```rust
+```rust,ignore
 use coerce::actor::{Actor, ActorSystem};
 use coerce::remote::RemoteActorSystem;
 

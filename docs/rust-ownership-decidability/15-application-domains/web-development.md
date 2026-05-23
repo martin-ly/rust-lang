@@ -82,7 +82,7 @@ Web 开发是 Rust 应用最广泛的领域之一。
 
 Axum 是由 Tokio 团队开发的 Web 框架，与 Tower 生态系统深度集成。
 
-```rust
+```rust,ignore
 //! Axum 完整示例
 
 use axum::{
@@ -426,7 +426,7 @@ async fn main() {
 
 Actix-web 是基于 Actor 模型的高性能 Web 框架。
 
-```rust
+```rust,ignore
 //! Actix-web 完整示例
 
 use actix_web::{
@@ -711,7 +711,7 @@ async fn main() -> std::io::Result<()> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 //! WebAssembly 前端开发
 
 use wasm_bindgen::prelude::*;
@@ -991,7 +991,7 @@ use wasm_bindgen::closure::Closure;
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! Yew 框架 - React-like 的 Rust 前端框架
 
 use yew::prelude::*;
@@ -1209,7 +1209,7 @@ fn main() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! Leptos 全栈框架示例
 
 use leptos::*;
@@ -1453,7 +1453,7 @@ fn main() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! REST API 设计与 OpenAPI 集成
 
 use axum::{
@@ -1752,7 +1752,7 @@ async fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 //! SQLx 数据库集成
 
 use sqlx::{PgPool, Row, QueryBuilder, Postgres};
@@ -1981,7 +1981,7 @@ impl<'a> Transaction<'a> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 //! JWT 认证与授权
 
 use jsonwebtoken::{encode, decode, Header, Validation, EncodingKey, DecodingKey, TokenData};
@@ -2152,7 +2152,7 @@ impl PermissionChecker {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 //! WebSocket 实时通信
 
 use axum::{
@@ -2448,7 +2448,7 @@ spec:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 //! 统一的错误处理
 
 use axum::{
@@ -2493,7 +2493,7 @@ impl IntoResponse for AppError {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 //! 配置管理
 
 use serde::Deserialize;

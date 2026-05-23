@@ -252,7 +252,7 @@ SeqCst (顺序一致性) 形式化定义:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::thread;
 
@@ -282,7 +282,7 @@ fn relaxed_counter() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 use std::thread;
 
@@ -312,7 +312,7 @@ fn acquire_release_example() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::thread;
 

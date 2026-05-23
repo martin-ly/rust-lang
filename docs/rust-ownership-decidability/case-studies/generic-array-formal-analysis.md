@@ -93,7 +93,7 @@
 
 在 Rust 1.51 引入 const generics (最小可行版本) 之前，Rust 开发者面临一个核心问题：**无法在泛型代码中使用固定大小的数组**。考虑以下场景：
 
-```rust
+```rust,ignore
 // ❌ Rust 1.51 之前无法编译
 fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 ```
@@ -149,7 +149,7 @@ fn process<N>(data: [u8; N])  // 错误：N 必须是编译时常量
 
 typenum 是一个在 Rust 类型系统中实现无符号整数运算的库。其核心思想是将数字编码为类型：
 
-```rust
+```rust,ignore
 // typenum 类型级数字示例
 use typenum::{U0, U1, U2, U8, U16, U32, U64, U128, U256};
 
@@ -177,7 +177,7 @@ example::<U32>();  // 打印: Array size: 32
 
 typenum 使用二叉树结构编码二进制数：
 
-```rust
+```rust,ignore
 // 核心类型定义
 pub struct UInt<U, B> {
     _marker: PhantomData<(U, B)>,
@@ -211,7 +211,7 @@ use typenum::consts::U5;  // 等同于上面
 
 typenum 支持丰富的编译时运算：
 
-```rust
+```rust,ignore
 use typenum::{Sum, Prod, Quot, Min, Max, Exp2};
 use typenum::consts::{U8, U16, U32, U2, U4};
 
@@ -238,7 +238,7 @@ type IsEqual = typenum::Eq<U16, U16>;    // True
 
 **实际应用 - 密码学块大小**：
 
-```rust
+```rust,ignore
 use typenum::{Sum, consts::*};
 
 // AES-GCM 需要块大小 + 标签大小
@@ -261,7 +261,7 @@ type AesGcmOutputSize = Sum<BlockSize, TagSize>;  // U32
 >
 > **完备性保证**: 对于任意无符号整数 N, M，存在唯一的类型表示，且 N op M 的结果也是编译时确定的类型。
 
-```rust
+```rust,ignore
 // 完备性示例：任意大小数组
 use generic_array::{GenericArray, ArrayLength};
 use typenum::{Unsigned, consts::*};
@@ -293,7 +293,7 @@ any_size::<U65536>();  // 64 KB
 
 GenericArray 的核心定义：
 
-```rust
+```rust,ignore
 /// 泛型数组类型
 ///
 /// T: 元素类型
@@ -312,7 +312,7 @@ pub unsafe trait ArrayLength<T>: Unsigned {
 
 **内部实现细节**：
 
-```rust
+```rust,ignore
 // 对于不同大小，有不同的实现策略
 
 // 小数组：直接内联存储
@@ -339,7 +339,7 @@ unsafe impl<T> ArrayLength<T> for U4096 {
 | 类型级运算 | ❌ | ✅ |
 | 生态兼容性 | 原生支持 | 需适配，但支持主要生态库 |
 
-```rust
+```rust,ignore
 // 原生数组 (Rust 1.51+)
 fn native_array<const N: usize>(arr: [u8; N]) -> [u8; N] {
     arr
@@ -370,7 +370,7 @@ fn extended(arr: GenericArray<u8, U32>) -> GenericArray<u8, U48> {
 
 GenericArray 提供与原生数组相同的内存布局保证：
 
-```rust
+```rust,ignore
 use std::mem;
 use generic_array::{GenericArray, typenum::consts::*};
 
@@ -402,7 +402,7 @@ fn verify_layout() {
 > 3. 因此 GenericArray 的内存表示与原生数组完全相同
 > 4. 可以通过 `transmute` 安全转换（在 unsafe 块中）
 
-```rust
+```rust,ignore
 use std::mem::{self, MaybeUninit};
 use generic_array::{GenericArray, typenum::consts::*};
 
@@ -433,7 +433,7 @@ fn layout_equivalence() {
 
 ArrayLength trait 是 generic-array 的核心抽象：
 
-```rust
+```rust,ignore
 /// 标记 trait，表示一个类型可以作为数组长度
 ///
 /// # Safety
@@ -446,7 +446,7 @@ pub unsafe trait ArrayLength<T>: Unsigned {
 
 **实现机制**：
 
-```rust
+```rust,ignore
 // typenum 的 Unsigned trait 提供编译时大小信息
 pub trait Unsigned {
     const USIZE: usize;
@@ -475,7 +475,7 @@ impl_array_length!(U0, U1, U2, U3, U4, U5, /* ... */ U512);
 
 ArrayLength 使用关联类型模式实现类型级抽象：
 
-```rust
+```rust,ignore
 // 使用关联类型实现类型级映射
 use generic_array::ArrayLength;
 
@@ -499,7 +499,7 @@ fn check_storage() {
 
 ArrayLength 与标准库 trait 的集成：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::*;
 
@@ -545,7 +545,7 @@ impl<T: Copy, N: ArrayLength<T>> Copy for GenericArray<T, N> {}
 
 创建所有元素为默认值的数组：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 
@@ -572,7 +572,7 @@ fn default_example() {
 
 从切片创建 GenericArray（切片长度必须匹配）：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 
@@ -592,7 +592,7 @@ fn from_slice_example() {
 
 **类型安全变体** - clone_from_slice：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U3;
 
@@ -614,7 +614,7 @@ fn clone_from_slice_example() {
 
 适用于元素需要 Clone 的场景：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U2;
 
@@ -645,7 +645,7 @@ fn clone_example() {
 
 **generate() - 函数式构造**：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U5;
 
@@ -664,7 +664,7 @@ fn generate_example() {
 
 **from_exact_iter() - 迭代器构造**：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U3;
 
@@ -690,7 +690,7 @@ fn from_iter_example() {
 
 对每个元素应用函数：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 
@@ -714,7 +714,7 @@ fn map_example() {
 
 合并两个数组：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U3;
 
@@ -737,7 +737,7 @@ fn zip_example() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 
@@ -765,7 +765,7 @@ fn conversion_example() {
 
 GenericArray 支持多种迭代模式：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U5;
 
@@ -801,7 +801,7 @@ fn iterator_example() {
 
 GenericArray 支持 serde 的 Serialize 和 Deserialize：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 use serde::{Serialize, Deserialize};
@@ -835,7 +835,7 @@ fn serialize_example() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U4;
 use serde::{Serialize, Deserialize};
@@ -867,7 +867,7 @@ fn deserialize_example() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U1024;
 
@@ -896,7 +896,7 @@ fn performance_notes() {
 
 generic-array 是 RustCrypto 生态的核心依赖：
 
-```rust
+```rust,ignore
 use sha2::{Sha256, Digest};
 use generic_array::typenum::consts::U32;
 use generic_array::GenericArray;
@@ -923,7 +923,7 @@ fn sha2_example() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use aes::{Aes128, BlockEncrypt, BlockDecrypt, NewBlockCipher};
 use generic_array::{GenericArray, typenum::consts::U16};
 
@@ -950,7 +950,7 @@ fn aes_example() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::consts::U16;
 
@@ -990,7 +990,7 @@ fn block_processing_example() {
 > 3. **时序安全**: 无分支依赖于敏感数据，支持常量时间操作实现
 > 4. **零成本抽象**: 编译后与原生数组代码相同，无额外运行时开销
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U32;
 
@@ -1075,7 +1075,7 @@ struct Buffer<T, const N: usize> {
 
 **混合使用策略**：
 
-```rust
+```rust,ignore
 // 使用 const generics 定义，转换为 generic-array 进行运算
 use generic_array::GenericArray;
 use typenum::consts::*;
@@ -1100,7 +1100,7 @@ where
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use generic_array::{GenericArray, typenum::consts::*};
 
@@ -1131,7 +1131,7 @@ fn benchmark_comparison(c: &mut Criterion) {
 
 编译器优化后的代码对比：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::*;
 
@@ -1154,7 +1154,7 @@ fn native_array_ops() -> i32 {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::*;
 
@@ -1178,7 +1178,7 @@ type Large = U4096;  // 较长编译时间
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::{consts::*, Sum};
 
@@ -1208,7 +1208,7 @@ struct CbcMode {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, typenum::consts::*};
 
 /// IPv4 头部 (20 bytes)
@@ -1248,7 +1248,7 @@ struct EthernetHeader {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::consts::*;
 use std::ops::{Add, Mul};
@@ -1286,7 +1286,7 @@ fn vec3_example() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::{Prod, consts::*};
 use std::ops::Mul;
@@ -1358,7 +1358,7 @@ fn matrix_example() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::consts::*;
 use std::marker::PhantomData;
@@ -1441,7 +1441,7 @@ fn ring_buffer_example() {
 ### 12.3 类型安全的状态机
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::{Sum, consts::*};
 use std::marker::PhantomData;
@@ -1536,7 +1536,7 @@ fn state_machine_example() {
 
 > **问题**: 大 GenericArray 在栈上分配可能导致栈溢出
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::U1000000;
 
@@ -1558,7 +1558,7 @@ fn stack_overflow_risk() {
 
 > **问题**: 过大的类型可能导致编译器递归限制错误
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::*;
 

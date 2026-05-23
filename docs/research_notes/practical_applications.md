@@ -215,7 +215,7 @@
 
 **关键代码示例**：
 
-```rust
+```rust,ignore
 // 系统调用实现示例
 pub struct Syscall {
     number: u64,
@@ -270,7 +270,7 @@ impl Syscall {
 
 **关键代码示例**：
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -357,7 +357,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 **关键代码示例**：
 
-```rust
+```rust,ignore
 use actix_web::{web, App, HttpServer, Responder};
 
 async fn index() -> impl Responder {
@@ -447,7 +447,7 @@ async fn main() -> std::io::Result<()> {
 
 **关键代码示例**：
 
-```rust
+```rust,ignore
 use tikv::storage::{Engine, Snapshot};
 use tikv::raftstore::store::Engines;
 
@@ -537,7 +537,7 @@ impl TiKVEngine {
 
 **关键代码示例**：
 
-```rust
+```rust,ignore
 #![no_std]
 
 use tock::kernel;
@@ -611,7 +611,7 @@ impl TockOS {
 
 **关键实现**：
 
-```rust
+```rust,ignore
 use axum::{
     extract::State,
     routing::get,
@@ -696,7 +696,7 @@ async fn main() {
 
 **关键实现**：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use std::sync::Arc;
 

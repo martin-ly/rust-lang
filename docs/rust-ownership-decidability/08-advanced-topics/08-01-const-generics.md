@@ -258,7 +258,7 @@ const RESULT: usize = add::<3, 5>();  // 值 8
 
 基于常量值的特化（部分支持）：
 
-```rust
+```rust,ignore
 // 通用实现
 impl<T, const N: usize> Array<T, N> {
     fn len(&self) -> usize { N }
@@ -304,7 +304,7 @@ const fn length<T>(_: &T) -> usize {
 
 常量求值涉及**停机问题**：
 
-```rust
+```rust,ignore
 const fn compute() -> usize {
     // 这个函数会停机吗？
     loop {}  // 编译期无限循环
@@ -363,7 +363,7 @@ where
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 好的：简单表达式
 struct Good<const N: usize>([u8; N * 2]);
 
@@ -430,7 +430,7 @@ impl Buffer<{1024 * 1024}> for Box<[u8; 1024 * 1024]> {
 ### 5.3 SIMD优化
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 根据大小选择SIMD宽度
 struct SimdVec<T, const N: usize>([T; N]);
 
@@ -457,7 +457,7 @@ impl SimdVec<f32, 8> {
 ### 6.1 类型状态模式
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 编译期状态机
 struct Connection<const STATE: ConnectionState>;
 
@@ -486,7 +486,7 @@ impl Connection<CONNECTED> {
 ### 6.2 编译期配置
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 编译期特性开关
 struct Features<const FLAGS: u32>;
 
@@ -513,7 +513,7 @@ type DebugFeatures = Features<0b0111>;
 ### 6.3 维度分析
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 编译期单位检查
 struct Quantity<T, const M: i32, const L: i32, const T: i32>(T);
 // M: 质量维度, L: 长度维度, T: 时间维度
@@ -659,7 +659,7 @@ buf.push(1).unwrap();
 ### 8.2 编译期解析器
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 编译期正则表达式（简化示例）
 struct RegexMatcher<const PATTERN: &'static str>;
 
@@ -683,7 +683,7 @@ assert!(email.is_match("test@example.com"));
 ### 8.3 单位系统
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::ops::{Add, Sub, Mul, Div};
 
 #[derive(Clone, Copy, Debug, PartialEq)]
@@ -742,7 +742,7 @@ let f: Force<f64> = calculate_force(m, a);  // 98 N，编译期维度检查！
 
 Rust 1.94 正式稳定了常量泛型默认值，这是一项期待已久的功能：
 
-```rust
+```rust,ignore
 // 基本语法
 struct Buffer<T, const SIZE: usize = 1024> {
     data: [T; SIZE],
@@ -780,7 +780,7 @@ let square_matrix: Matrix<f64, 4, = Matrix { data: [[0.0; 4]; 4] };
 
 **实际应用场景**：
 
-```rust
+```rust,ignore
 // 网络数据包，默认 MTU 大小
 struct Packet<const SIZE: usize = 1500> {
     data: [u8; SIZE],
@@ -803,7 +803,7 @@ struct ThreadPool<const N: usize = 4> {
 
 Rust 1.94 放宽了常量表达式的一些限制：
 
-```rust
+```rust,ignore
 // 更复杂的常量泛型表达式
 struct SplitArray<T, const N: usize> {
     left: [T; N / 2],
@@ -861,7 +861,7 @@ struct Good<const N: usize>([u8; N]);
 
 **2. 复杂表达式**:
 
-```rust
+```rust,ignore
 // 简单的可以
 fn simple<const N: usize>() -> [u8; N + 1] { ... }
 
@@ -885,7 +885,7 @@ trait Config {
 
 **1. 更多常量类型** (adt_const_params)
 
-```rust
+```rust,ignore
 // 未来可能支持
 struct Config<const NAME: &'static str>;
 struct Point<const LABEL: char>;
@@ -893,7 +893,7 @@ struct Point<const LABEL: char>;
 
 **2. 常量泛型表达式**:
 
-```rust
+```rust,ignore
 // 更复杂的编译期计算
 fn split<const N: usize>(arr: [u8; N * 2]) -> ([u8; N], [u8; N]) {
     // ...
@@ -902,7 +902,7 @@ fn split<const N: usize>(arr: [u8; N * 2]) -> ([u8; N], [u8; N]) {
 
 **3. 泛型关联常量 (GAC)**:
 
-```rust
+```rust,ignore
 // 在 trait 中使用关联常量作为泛型参数
 trait Container {
     const SIZE: usize;

@@ -41,6 +41,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c07_process/docs/README.md) | [代码示例](../../../crates/c07_process/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -91,6 +92,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -104,7 +106,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c07_process::prelude::*;
 
 // 创建进程管理器
@@ -157,7 +159,7 @@ manager.kill(pid)?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c07_process::AsyncProcessManager;
 
 let manager = AsyncProcessManager::new().await;
@@ -181,7 +183,7 @@ manager.wait_with_timeout(pid, Duration::from_secs(5)).await?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c07_process::IpcManager;
 
 let mut ipc = IpcManager::new(IpcConfig::default());
@@ -202,7 +204,7 @@ let queue = ipc.create_message_queue("my_queue", 100)?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c07_process::SyncManager;
 
 let mut sync = SyncManager::new(SyncConfig::default());
@@ -229,7 +231,7 @@ let rwlock = sync.create_rwlock("my_rwlock")?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 ProcessConfig {
     program: String,           // 程序路径
     args: Vec<String>,        // 命令行参数
@@ -269,7 +271,7 @@ ProcessConfig {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use c07_process::performance::enhanced::*;
 
 let config = PerformanceConfig {
@@ -291,7 +293,7 @@ let result = manager.optimize_memory().await;
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use c07_process::error::ProcessError;
 
 match manager.spawn(config) {
@@ -314,7 +316,7 @@ match manager.spawn(config) {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let mut child = Command::new("cat").arg("file").spawn()?;
 // 不调用 wait() 可能导致僵尸进程
 ```
@@ -323,7 +325,7 @@ let mut child = Command::new("cat").arg("file").spawn()?;
 
 **修正**:
 
-```rust
+```rust,ignore
 let status = child.wait()?;
 assert!(status.success());
 ```
@@ -480,7 +482,7 @@ fn sandboxed_execute(program: &str, args: &[&str]) -> std::io::Result<std::proce
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tokio::process::{Command, Child};
 use tokio::time::{sleep, Duration};
 
@@ -601,7 +603,7 @@ impl ProcessMonitor {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)

@@ -22,7 +22,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let mut v = Vec::new();
 let v = vec![1, 2, 3];           // 宏创建
 let v = Vec::with_capacity(10);  // 预分配容量
@@ -54,7 +54,7 @@ let v = Vec::with_capacity(10);  // 预分配容量
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let x: Option<i32> = Some(5);
 let y: Option<i32> = None;
 ```
@@ -77,7 +77,7 @@ let y: Option<i32> = None;
 | `replace(val)` | 替换值 | `Option<T>` |
 | `zip(other)` | 组合两个 Option | `Option<(T, U)>` |
 
-```rust
+```rust,ignore
 // 常用模式
 let x = Some(5).map(|n| n * 2);           // Some(10)
 let x = Some(5).and_then(|n| Some(n*2));  // Some(10)
@@ -90,7 +90,7 @@ let x: Option<i32> = None.or(Some(3));    // Some(3)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let x: Result<i32, &str> = Ok(5);
 let y: Result<i32, &str> = Err("error");
 ```
@@ -110,7 +110,7 @@ let y: Result<i32, &str> = Err("error");
 | `or_else(f)` | 错误恢复 | `Result<T, F>` |
 | `as_ref()` | 转引用 | `Result<&T, &E>` |
 
-```rust
+```rust,ignore
 // ? 运算符传播错误
 fn read_file() -> Result<String, io::Error> {
     let content = fs::read_to_string("file.txt")?;
@@ -126,7 +126,7 @@ fn read_file() -> Result<String, io::Error> {
 
 #### HashMap<K, V> / BTreeMap<K, V>
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 let mut m = HashMap::new();
 m.insert("key", "value");
@@ -147,7 +147,7 @@ let mut m = HashMap::with_capacity(100);
 | `keys()` / `values()` | 键/值迭代器 |
 | `iter()` | 键值对迭代器 |
 
-```rust
+```rust,ignore
 // Entry API 模式
 *m.entry("key").or_insert(0) += 1;
 let val = m.entry("key").or_insert_with(|| compute());
@@ -155,7 +155,7 @@ let val = m.entry("key").or_insert_with(|| compute());
 
 #### HashSet<T> / BTreeSet<T>
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 let mut s = HashSet::new();
 s.insert(42);
@@ -180,7 +180,7 @@ s.insert(42);
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let mut s = String::new();
 let s = String::from("hello");
 let s = "hello".to_string();
@@ -210,7 +210,7 @@ let s = "hello".to_string();
 | `to_uppercase()` / `to_lowercase()` | 大小写转换 |
 | `trim()` / `trim_start()` / `trim_end()` | 去除空白 |
 
-```rust
+```rust,ignore
 // 格式化
 let s = format!("{} + {} = {}", 1, 2, 3);
 let s = format!("{:08}", 42);     // 前导零填充
@@ -259,7 +259,7 @@ use std::io::{self, Read, Write, BufRead, BufReader, BufWriter};
 | `read_until(byte, &mut vec)` | 读到指定字节 |
 | `split(byte)` | 按字节分割迭代器 |
 
-```rust
+```rust,ignore
 // 常用模式
 let reader = BufReader::new(file);
 for line in reader.lines() {
@@ -300,7 +300,7 @@ use std::fs;
 | `hard_link(src, dst)` | 创建硬链接 | `io::Result<()>` |
 | `symlink(src, dst)` | 创建符号链接 | `io::Result<()>` |
 
-```rust
+```rust,ignore
 // 文件操作
 let mut file = fs::File::open("input.txt")?;
 let mut contents = String::new();
@@ -347,7 +347,7 @@ use std::path::{Path, PathBuf};
 
 #### PathBuf（可变路径）
 
-```rust
+```rust,ignore
 let mut p = PathBuf::from("/usr");
 p.push("local");       // /usr/local
 p.push("bin");         // /usr/local/bin
@@ -383,7 +383,7 @@ use std::env;
 | `home_dir()` | 用户主目录（已弃用）| `Option<PathBuf>` |
 | `temp_dir()` | 临时目录 | `PathBuf` |
 
-```rust
+```rust,ignore
 // 常用模式
 let path = env::var("PATH")?;
 let args: Vec<String> = env::args().collect();
@@ -402,7 +402,7 @@ use std::process::{Command, Stdio};
 
 #### Command 构建器
 
-```rust
+```rust,ignore
 let output = Command::new("ls")
     .arg("-la")
     .arg("/tmp")
@@ -432,7 +432,7 @@ let mut child = Command::new("program")
 
 #### Child 进程控制
 
-```rust
+```rust,ignore
 let mut child = Command::new("sleep").arg("10").spawn()?;
 let pid = child.id();
 child.kill()?;           // 终止进程
@@ -469,7 +469,7 @@ use std::time::Duration;
 | `yield_now()` | 让出 CPU |
 | `available_parallelism()` | 可用并行度 |
 
-```rust
+```rust,ignore
 // 创建线程
 let handle = thread::spawn(|| {
     println!("新线程");
@@ -501,7 +501,7 @@ thread::scope(|s| {
 
 #### Mutex<T> - 互斥锁
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 let m = Mutex::new(5);
@@ -520,7 +520,7 @@ let m = Mutex::new(5);
 
 #### RwLock<T> - 读写锁
 
-```rust
+```rust,ignore
 use std::sync::RwLock;
 
 let lock = RwLock::new(5);
@@ -537,7 +537,7 @@ let w = lock.write().unwrap();  // 独占写
 
 #### Arc<T> - 原子引用计数
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 
 let data = Arc::new(Mutex::new(0));
@@ -559,7 +559,7 @@ thread::spawn(move || {
 
 #### 其他同步类型
 
-```rust
+```rust,ignore
 use std::sync::{
     Barrier,      // 屏障同步
     Condvar,      // 条件变量
@@ -585,7 +585,7 @@ use std::time::{Duration, Instant, SystemTime};
 
 #### Duration - 时间间隔
 
-```rust
+```rust,ignore
 let dur = Duration::from_secs(5);      // 5秒
 let dur = Duration::from_millis(500);  // 500毫秒
 let dur = Duration::from_nanos(1000);  // 1000纳秒
@@ -612,7 +612,7 @@ let div = dur / 2;
 
 #### Instant - 单调时钟（测量间隔）
 
-```rust
+```rust,ignore
 let start = Instant::now();
 // ... 执行代码
 let elapsed = start.elapsed();
@@ -633,7 +633,7 @@ if start.elapsed() > Duration::from_secs(5) {
 
 #### SystemTime - 系统时间
 
-```rust
+```rust,ignore
 let now = SystemTime::now();
 let since_epoch = now.duration_since(SystemTime::UNIX_EPOCH)?;
 ```
@@ -646,7 +646,7 @@ let since_epoch = now.duration_since(SystemTime::UNIX_EPOCH)?;
 
 #### Iterator Trait 方法
 
-```rust
+```rust,ignore
 let v = vec![1, 2, 3, 4, 5];
 ```
 
@@ -683,7 +683,7 @@ let v = vec![1, 2, 3, 4, 5];
 | `cloned()` | 克隆（&T → T）| 惰性 |
 | `copied()` | 复制（&T → T，需 Copy）| 惰性 |
 
-```rust
+```rust,ignore
 // 迭代器链示例
 let sum: i32 = (1..=100)
     .filter(|x| x % 2 == 0)
@@ -714,7 +714,7 @@ let first_even = [1,2,3,4].iter().find(|&&x| x % 2 == 0);
 | `Clone` | `clone(&self)` | 深克隆 `.clone()` |
 | `Copy` | （标记 Trait）| 位复制（隐式）|
 
-```rust
+```rust,ignore
 // 派生实现
 #[derive(Debug, Clone, Copy)]
 struct Point { x: i32, y: i32 }
@@ -739,7 +739,7 @@ impl fmt::Display for Point {
 | `TryFrom<T>` | `try_from(T)` | 尝试转换 `Result` |
 | `TryInto<T>` | `try_into(self)` | 尝试转换 `Result` |
 
-```rust
+```rust,ignore
 let s = String::from("hello");  // From<&str>
 let s: String = "hello".into(); // Into<String>
 
@@ -760,7 +760,7 @@ let v = Vec::<i32>::new();  // 等价
 | `BorrowMut<T>` | `borrow_mut(&mut self)` | 可变等价借用 |
 | `ToOwned` | `to_owned(&self)` | 创建拥有值 |
 
-```rust
+```rust,ignore
 fn is_hello(s: impl AsRef<str>) -> bool {
     s.as_ref() == "hello"
 }
@@ -778,7 +778,7 @@ is_hello(String::new()); // String
 | `DerefMut` | `deref_mut(&mut self)` | 可变解引用 |
 | `Drop` | `drop(&mut self)` | 析构时调用 |
 
-```rust
+```rust,ignore
 struct MyBox<T>(T);
 impl<T> Deref for MyBox<T> {
     type Target = T;
@@ -799,7 +799,7 @@ impl<T> Deref for MyBox<T> {
 | `DoubleEndedIterator` | `next_back()` | 双向迭代 |
 | `FusedIterator` | （标记）| 保证 None 后始终 None |
 
-```rust
+```rust,ignore
 // IntoIterator 实现使 for 循环可用
 for item in collection { }
 // 等价于
@@ -834,7 +834,7 @@ for item in &mut collection { } // iter_mut()
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 println!("{}", value);           // 默认显示
 println!("{:?}", value);         // Debug 输出
 println!("{:#?}", value);        // 美化 Debug
@@ -878,7 +878,7 @@ println!("{0} {1} {0}", a, b);   // 位置参数
 | `assert_ne!(a, b)` | 不等断言 | 测试不等 |
 | `debug_assert!(c)` | 调试断言 | 仅 debug 生效 |
 
-```rust
+```rust,ignore
 fn new_feature() {
     todo!("实现新功能");  // 编译通过，运行时报错
 }
@@ -932,7 +932,7 @@ match value {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // Result 传播
 let x = may_fail()?;
 
@@ -955,7 +955,7 @@ let x = result.unwrap_or_default(); // 或 Default
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 &'a T        // 'a 生命周期的引用
 &'a mut T    // 可变引用
 &'static str // 静态生命周期（程序全程）

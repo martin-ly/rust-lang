@@ -218,7 +218,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 分析模块间的依赖关系并生成可视化
 use std::collections::{HashMap, HashSet};
 use std::fs;

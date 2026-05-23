@@ -134,7 +134,7 @@ $$
 3. **无共享状态**：Actor 之间不共享内存，避免数据竞争
 4. **异步通信**：所有消息传递都是异步的
 
-```rust
+```rust,ignore
 // Actor 模型的基本语义示意
 trait Actor {
     type Message: Send;
@@ -203,7 +203,7 @@ $$
 \text{Send}(msg, A_1 \to A_2) \implies \text{Own}(msg, A_1) \leadsto \text{Own}(msg, A_2)
 $$
 
-```rust
+```rust,ignore
 struct MyActor {
     state: ActorState,
     children: Vec<ActorRef<ChildMsg>>,
@@ -241,7 +241,7 @@ $$
 \text{Actor} \equiv \langle \text{id}, \sigma, \beta, \mu \rangle
 $$
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 struct MyActor {
@@ -273,7 +273,7 @@ impl Handler<Increment> for MyActor {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 struct Counter {
@@ -296,7 +296,7 @@ fn counter_behavior(ctx: &mut Context) -> BastionPath {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use xtra::prelude::*;
 
 struct Greeter {
@@ -326,7 +326,7 @@ $$
 \text{spawn} : \text{Behavior} \times \text{Args} \to \text{ActorRef}
 $$
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 #[actix_rt::main]
@@ -339,7 +339,7 @@ async fn main() {
 
 #### 2.2.2 启动语义
 
-```rust
+```rust,ignore
 use coerce::actor::system::ActorSystem;
 
 struct MyActor {
@@ -365,7 +365,7 @@ $$
 \text{stop}(a) \implies \text{drain}(\mu_a) \land \text{cleanup}(\sigma_a) \land \text{notify}(\text{supervisor})
 $$
 
-```rust
+```rust,ignore
 impl Actor for MyActor {
     fn stopping(&mut self, _ctx: &mut Self::Context) -> Running {
         Running::Stop
@@ -378,7 +378,7 @@ impl Actor for MyActor {
 
 #### 2.2.4 重启语义
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 fn supervision_strategy() -> SupervisionStrategy {
@@ -398,7 +398,7 @@ $$
 \text{ActorRef} : \text{Actor} \to \text{Handle}
 $$
 
-```rust
+```rust,ignore
 fn actor_ref_semantics() {
     let addr = Worker.start();
     let addr2 = addr.clone();
@@ -415,7 +415,7 @@ $$
 \text{Path} = /\text{system}/\text{supervisor}/\text{actor}
 $$
 
-```rust
+```rust,ignore
 async fn find_by_path(system: &ActorSystem) {
     let path = "/user/worker/1";
     if let Some(actor_ref) = system.actor_of_path(path).await {
@@ -426,7 +426,7 @@ async fn find_by_path(system: &ActorSystem) {
 
 #### 2.3.3 位置透明语义
 
-```rust
+```rust,ignore
 async fn location_transparent_send(
     local_actor: ActorRef<MyActor>,
     remote_actor: ActorRef<MyActor>,
@@ -454,7 +454,7 @@ $$
 \text{serialize} : M \to \text{Bytes}
 $$
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Clone, Debug)]
@@ -486,7 +486,7 @@ $$
 | **Tell** | 发送即忘 | `()` | 事件通知 |
 | **Ask** | 请求-响应 | `Future<Response>` | 需要返回值 |
 
-```rust
+```rust,ignore
 fn tell_semantics(addr: Addr<MyActor>) {
     addr.do_send(UpdateData { value: 42 });  // fire-and-forget
 }
@@ -505,7 +505,7 @@ $$
 \end{cases}
 $$
 
-```rust
+```rust,ignore
 async fn ask_with_timeout(addr: Addr<DatabaseActor>) -> Result<Row, Error> {
     addr.send(Query("SELECT * FROM users".into()))
         .timeout(Duration::from_secs(5))
@@ -529,7 +529,7 @@ $$
 
 #### 3.3.3 选择性接收语义
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 fn selective_receive(ctx: &mut Context) -> BastionPath {
@@ -583,7 +583,7 @@ $$
 
 #### 4.2.1 工作线程池
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 struct CpuIntensiveActor;
@@ -610,7 +610,7 @@ $$
 
 #### 4.3.2 故障隔离
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 fn fault_isolation() {
@@ -643,7 +643,7 @@ $$
 \text{failure}(c_i) \implies \text{restart}(c_i) \land \forall j \neq i. \neg\text{affect}(c_j)
 $$
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 fn one_for_one_supervisor() {

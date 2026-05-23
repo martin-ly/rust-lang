@@ -134,7 +134,7 @@ Proof:
 ## 🎯 Rust 代码验证
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn borrowing_safety_theorem() {
     let mut data = vec![1, 2, 3];
 

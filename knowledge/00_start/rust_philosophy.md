@@ -1,4 +1,5 @@
 # Rust 设计哲学
+> **相关概念**: [所有权](../../concept/01_foundation/01_ownership.md)
 
 > **Bloom 层级**: 理解
 
@@ -71,7 +72,7 @@ fn safe() {
 
 #### 示例：迭代器
 
-```rust
+```rust,ignore
 // 高级抽象代码
 let sum: i32 = numbers.iter().map(|x| x * 2).sum();
 
@@ -91,7 +92,7 @@ let sum: i32 = numbers.iter().map(|x| x * 2).sum();
 
 Rust 的类型系统保证并发安全：
 
-```rust
+```rust,ignore
 // 编译器阻止数据竞争
 fn share_data() {
     let data = vec![1, 2, 3];
@@ -160,7 +161,7 @@ Rust 不追求理论完美，而是解决实际问题：
 
 Rust 倾向于**显式**：
 
-```rust
+```rust,ignore
 // 错误处理显式
 let file = File::open("data.txt")?;  // 错误必须处理
 

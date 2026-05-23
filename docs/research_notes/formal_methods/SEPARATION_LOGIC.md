@@ -162,7 +162,7 @@ H ⊨ P -* Q    H' ⊨ P    H ⊥ H'
 
 **在Rust中的应用**:
 
-```rust
+```rust,ignore
 // 只使用x，y不受影响
 { x ↦ _ }
 *x = 42;
@@ -234,7 +234,7 @@ own(x, v) ≃ x ↦ v
 
 **移动语义**:
 
-```rust
+```rust,ignore
 let y = x;  // x的所有权转移到y
 
 // 逻辑上:
@@ -394,7 +394,7 @@ P ={E}=∗ Q
 
 **在并发中的应用**:
 
-```rust
+```rust,ignore
 { x ↦ n }
 x.fetch_add(1, Relaxed)
 { x ↦ n+1 }

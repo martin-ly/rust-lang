@@ -267,7 +267,7 @@ Rust应用领域覆盖图:
 
 ### 内存安全保证
 
-```rust
+```rust,ignore
 // 嵌入式: 无堆分配的静态内存管理
 static mut BUFFER: [u8; 1024] = [0; 1024];
 
@@ -280,7 +280,7 @@ let tx = db.begin().await?; // RAII自动回滚
 
 ### 并发安全
 
-```rust
+```rust,ignore
 // 云计算: 服务网格的无锁并发
 let shared_config = Arc::new(RwLock<Config>); // Send + Sync
 
@@ -293,7 +293,7 @@ tensor.par_iter_mut().for_each(|x| *x += 1.0);
 
 ### 零成本抽象
 
-```rust
+```rust,ignore
 // CLI: 迭代器链的性能等同于手写循环
 args.filter(|a| a.starts_with("--")).map(|a| parse(a))
 

@@ -348,7 +348,7 @@ impl<R: Renderer> Page<R> {
 
 **Singleton 近似**：
 
-```rust
+```rust,ignore
 use std::sync::OnceLock;
 static INSTANCE: OnceLock<Config> = OnceLock::new();
 
@@ -360,7 +360,7 @@ fn config() -> &'static Config {
 
 **Observer 近似（channel 替代）**：
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 let (tx, rx) = mpsc::channel();
 // 发布者：tx.send(event)
@@ -384,7 +384,7 @@ fn interpret(e: &Expr) -> i32 {
 
 **Memento 近似（Clone）**：
 
-```rust
+```rust,ignore
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 struct State { data: String }
 

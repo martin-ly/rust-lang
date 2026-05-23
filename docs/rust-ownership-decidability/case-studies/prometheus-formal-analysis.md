@@ -51,7 +51,7 @@ Prometheus客户端提供:
 
 > Counter只增不减。
 
-```rust
+```rust,ignore
 let counter = Counter::new("requests_total", "Total requests")?;
 counter.inc();      // +1
 counter.add(5.0);   // +5
@@ -64,7 +64,7 @@ counter.add(5.0);   // +5
 
 > Gauge可增可减。
 
-```rust
+```rust,ignore
 let gauge = Gauge::new("temperature", "Current temp")?;
 gauge.set(25.0);
 gauge.inc();
@@ -83,7 +83,7 @@ gauge.sub(1.0);
 
 > 相同指标名必须有相同标签集。
 
-```rust
+```rust,ignore
 // 正确: 相同标签
 requests.with_label_values(&["/api", "200"]).inc();
 requests.with_label_values(&["/health", "200"]).inc();
@@ -102,7 +102,7 @@ requests.with_label_values(&["/api"]).inc();  // panic!
 
 > Counter使用原子操作。
 
-```rust
+```rust,ignore
 // 内部使用 AtomicU64
 pub fn inc(&self) {
     self.inner.inc_by(1.0);
@@ -117,7 +117,7 @@ pub fn inc(&self) {
 
 ### 反例 5.1 (Histogram桶配置)
 
-```rust
+```rust,ignore
 // 桶边界必须递增
 let buckets = vec![0.005, 0.01, 0.025, 0.05, 0.1,
                    0.25, 0.5, 1.0, 2.5, 5.0, 10.0];
@@ -129,7 +129,7 @@ let hist = Histogram::with_opts(
 
 ### 反例 5.2 (标签基数)
 
-```rust
+```rust,ignore
 // 危险: 高基数标签
 for user in users {
     requests

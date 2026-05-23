@@ -70,7 +70,7 @@
 
 **用途**: 简化控制流与 `Option`/`Result` 的互操作
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // 1.94 新特性
@@ -100,7 +100,7 @@ fn process_items(items: &[i32]) -> Option<i32> {
 
 **用途**: 高性能格式化，避免额外分配
 
-```rust
+```rust,ignore
 // 1.94 新特性
 use std::fmt::Write;
 
@@ -142,7 +142,7 @@ match range {
 
 **用途**: 安全地映射 RefCell 内部值
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(Some(42));

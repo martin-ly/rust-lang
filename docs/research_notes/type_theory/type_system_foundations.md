@@ -392,7 +392,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 1. 蕴含 (A → B): 函数类型
 fn implication<A, B>(f: impl Fn(A) -> B, a: A) -> B {
     f(a)  // 应用函数，构造 B 的证明
@@ -506,7 +506,7 @@ fn swap_iso<A, B>() -> Iso<(A, B), (B, A)> {
 
 **9. 否定 ($\neg A$): 函数到空类型**
 
-```rust
+```rust,ignore
 // ¬A 对应于 A -> ! (A 到空类型的函数)
 // 表示 "A 是不可证明的" 或 "A 导致矛盾"
 
@@ -528,7 +528,7 @@ fn absurd<A>(never: !) -> A {
 
 **10. 量词与容器类型**
 
-```rust
+```rust,ignore
 // ∀x:A. P(x) 对应于依赖函数类型 (x: A) -> P(x)
 // 在 Rust 中近似于泛型: fn<T>(x: T) -> P<T>
 
@@ -554,7 +554,7 @@ fn displayable(value: impl std::fmt::Display) -> Box<dyn std::fmt::Display> {
 
 **11. 自然数与 Peano 算术 (递归类型)**
 
-```rust
+```rust,ignore
 // 自然数作为递归类型
 // Nat = Z | S Nat
 // 对应于归纳定义的数据类型
@@ -1767,7 +1767,7 @@ fn identity<T>(x: T) -> T {
 $$\text{identity} = \Lambda \alpha. \lambda x:\alpha. x : \forall \alpha. \alpha \to \alpha$$
 
 **Rust 实例化**:
-```rust
+```rust,ignore
 let x = identity(5i32);  // T = i32
 ```
 
@@ -1993,7 +1993,7 @@ solve({C(τ₁,...) = C'(τ₁',...)} ∪ C) =
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **示例 1: 恒等函数**:
-```rust
+```rust,ignore
 fn identity(x) { x }
 ```
 
@@ -2007,7 +2007,7 @@ fn identity(x) { x }
 结果: `fn identity<T>(x: T) -> T`
 
 **示例 2: 复合函数**:
-```rust
+```rust,ignore
 fn compose(f, g, x) { f(g(x)) }
 ```
 
@@ -2124,7 +2124,7 @@ $$\text{Type}<\text{const } N: \text{usize}>$$
 > **[来源: TRPL - The Rust Programming Language]**
 
 **错误代码**:
-```rust
+```rust,ignore
 fn add(x: i32, y: i32) -> i32 {
     x + y
 }
@@ -2167,7 +2167,7 @@ error[E0308]: mismatched types
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
 **错误代码**:
-```rust
+```rust,ignore
 fn main() {
     let x = y + 5;  // 错误: y 未定义
 }
@@ -2202,7 +2202,7 @@ error[E0425]: cannot find value `y` in this scope
 > **[来源: ACM - Systems Programming Languages]**
 
 **错误代码**:
-```rust
+```rust,ignore
 // 尝试构造 Omega 组合子
 fn omega<F>(f: F) -> !
 where
@@ -2237,7 +2237,7 @@ error[E0277]: the trait bound `F: FnOnce<(F,)>` is not satisfied
 - 这防止了 Y 组合子（不动点组合子）的直接表达，除非显式使用递归类型
 
 **正确写法（使用 trait object）**:
-```rust
+```rust,ignore
 fn omega(f: Box<dyn Fn(Box<dyn Fn(_) -> !>) -> !>) -> ! {
     f(f)
 }
@@ -2389,7 +2389,7 @@ fn use_complex() {
 > **[来源: POPL - Programming Languages Research]**
 
 **悬垂引用**:
-```rust
+```rust,ignore
 fn dangling_reference() -> &i32 {
     let x = 5;
     &x  // 错误! x 在函数结束时被释放
@@ -2432,7 +2432,7 @@ impl MyTrait for String {}  // 可以: 当前 crate 的 trait
 ```
 
 **矛盾实现**:
-```rust
+```rust,ignore
 trait Same<T> {
     fn is_same(&self, other: &T) -> bool;
 }
@@ -3074,7 +3074,7 @@ $$
 
 **Rust 示例**:
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // 1.94 新特性
@@ -3154,7 +3154,7 @@ $$(..=\text{end}).\text{contains}(x) \iff x \leq \text{end}$$
 
 **Rust 示例**:
 
-```rust
+```rust,ignore
 use std::ops::RangeToInclusive;
 
 // 1.94 新类型
@@ -3228,7 +3228,7 @@ $$
 
 **Rust 示例**:
 
-```rust
+```rust,ignore
 use std::fmt::Write;
 
 // 1.94 高性能格式化
@@ -3272,7 +3272,7 @@ fn format_numbers_old(numbers: &[i32]) -> String {
 
 **形式化类型**:
 
-```rust
+```rust,ignore
 fn truncate_front(&mut self, len: usize)
 ```
 

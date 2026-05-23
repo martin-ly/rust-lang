@@ -49,7 +49,7 @@
 ### 定义 ERROR-1 ( 派生宏 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[derive(Error, Debug)]
 pub enum DataStoreError {
     #[error("data store disconnected")]
@@ -91,7 +91,7 @@ $$
 ### 定义 ANYHOW-1 ( Result别名 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 type Result<T> = std::result::Result<T, anyhow::Error>;
 ```
 
@@ -102,7 +102,7 @@ $$
 ### 定义 ANYHOW-2 ( 上下文 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fs::read(path)
     .with_context(|| format!("failed to read config from {}", path))?
 ```
@@ -124,7 +124,7 @@ $$
 ### 定义 COMBINE-1 ( 边界设计 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Library: thiserror
 #[derive(Error, Debug)]
 pub enum MyError { ... }
@@ -173,7 +173,7 @@ $$
 
 ### 示例1: 库错误定义
 
-```rust
+```rust,ignore
 use std::io;
 use thiserror::Error;
 
@@ -212,7 +212,7 @@ pub fn load_config(path: &str) -> ConfigResult<Config> {
 
 ### 示例2: 应用错误处理
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 fn main() -> Result<()> {
@@ -237,7 +237,7 @@ fn fetch_data(url: &str) -> Result<String> {
 
 ### 示例3: 错误链遍历
 
-```rust
+```rust,ignore
 use anyhow::Error;
 
 fn print_error_chain(err: &Error) {

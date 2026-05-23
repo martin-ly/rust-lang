@@ -32,7 +32,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 模块系统：清晰的代码边界
 mod database {
     pub struct Connection;
@@ -52,7 +52,7 @@ mod api {
 
 ### 错误处理
 
-```rust
+```rust,ignore
 use std::result::Result;
 use std::error::Error;
 

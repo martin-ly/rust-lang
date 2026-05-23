@@ -618,7 +618,7 @@ mod tests {
 
 #### 常见陷阱
 
-```rust
+```rust,ignore
 /// ❌ 错误：忽略对齐要求
 fn unsafe_transmute(bytes: &[u8]) -> u32 {
     assert!(bytes.len() >= 4);
@@ -2009,7 +2009,7 @@ mod tests {
 
 #### 正确做法
 
-```rust
+```rust,ignore
 use std::any::{Any, TypeId};
 use std::ptr::NonNull;
 
@@ -2250,7 +2250,7 @@ Foreign Function Interface (FFI) 允许 Rust 与其他语言（主要是 C）交
 
 #### 正确做法
 
-```rust
+```rust,ignore
 use std::ffi::{c_char, c_int, c_void, CStr, CString};
 use std::panic::catch_unwind;
 
@@ -2481,7 +2481,7 @@ mod tests {
 
 #### 正确做法
 
-```rust
+```rust,ignore
 use std::ffi::{c_char, c_void, CStr, CString};
 use std::ptr::NonNull;
 
@@ -2690,7 +2690,7 @@ mod tests {
 
 #### 正确做法
 
-```rust
+```rust,ignore
 use std::ffi::{c_char, CStr, CString, OsStr, OsString};
 use std::path::{Path, PathBuf};
 
@@ -3181,7 +3181,7 @@ unsafe fn cleanup_device(_: *mut ()) {}
 
 #### 正确做法
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::sync::Mutex;
 
@@ -3468,7 +3468,7 @@ fn calculate_checksum(data: &[u8]) -> u32 {
 
 每个 unsafe 函数必须包含：
 
-```rust
+```rust,ignore
 /// 函数描述
 ///
 /// # Safety

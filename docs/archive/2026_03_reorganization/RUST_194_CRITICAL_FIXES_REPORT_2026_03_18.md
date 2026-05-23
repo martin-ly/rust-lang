@@ -29,7 +29,7 @@
 
 **修复前代码**:
 
-```rust
+```rust,ignore
 pub fn find_anagrams(s: &str, window_size: usize) -> Vec<String> {
     let mut seen = HashMap::new();
     let chars: Vec<char> = s.chars().collect();
@@ -44,7 +44,7 @@ pub fn find_anagrams(s: &str, window_size: usize) -> Vec<String> {
 
 **修复后代码**:
 
-```rust
+```rust,ignore
 pub fn find_anagrams(words: &[&str]) -> Vec<Vec<String>> {
     let mut groups: HashMap<String, Vec<String>> = HashMap::new();
 
@@ -77,7 +77,7 @@ pub fn find_anagrams(words: &[&str]) -> Vec<Vec<String>> {
 
 **修复前代码**:
 
-```rust
+```rust,ignore
 pub fn golden_section_search<F>(
     mut left: f64,
     mut right: f64,
@@ -150,7 +150,7 @@ where
 
 **修复示例**:
 
-```rust
+```rust,ignore
 // 修复前
 let config = GLOBAL_CONFIG.lock().unwrap();
 

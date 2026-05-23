@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Pin 与自引用结构速查卡](#pin-与自引用结构速查卡)
@@ -21,6 +22,7 @@
   - [**最后更新**: 2026-05-08](#最后更新-2026-05-08)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 🎯 核心概念
 >
@@ -53,7 +55,7 @@ Pin<P> 的核心保证:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::pin::pin;
 
 let data = MyStruct::new();
@@ -61,13 +63,15 @@ let pinned: Pin<&mut MyStruct> = pin!(data);
 ```
 
 ### 堆固定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let pinned: Pin<Box<MyStruct>> = Box::pin(MyStruct::new());
 ```
 
 ### 自引用结构（概念）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -81,9 +85,10 @@ struct SelfRef {
 ```
 
 ### 安全投影规则
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 impl MyStruct {
     // ✅ 安全: 投影到不包含自引用的字段
     fn get_name(self: Pin<&Self>) -> &str {
@@ -98,6 +103,7 @@ impl MyStruct {
 ---
 
 ## 📊 Pin 使用决策树
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -114,6 +120,7 @@ impl MyStruct {
 ---
 
 ## 🔗 参考
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [c01_pin_and_self_referential](../../../crates/c01_ownership_borrow_scope/src/pin_and_self_referential.rs)
@@ -141,6 +148,7 @@ impl MyStruct {
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
@@ -202,4 +210,3 @@ impl MyStruct {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

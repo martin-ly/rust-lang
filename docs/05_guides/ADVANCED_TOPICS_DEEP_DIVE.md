@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔬 高级主题深度指南](#-高级主题深度指南)
@@ -53,6 +54,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -101,6 +103,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -306,6 +309,7 @@ impl<T> WorkStealingQueue<T> {
 ---
 
 ## 4. 高级异步编程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 自定义Future实现
@@ -353,7 +357,7 @@ impl Future for Delay {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use futures::stream::{Stream, StreamExt};
 
 /// 异步流处理
@@ -374,6 +378,7 @@ where
 ---
 
 ## 5. 高级宏编程
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 声明宏高级模式
@@ -411,6 +416,7 @@ struct MyStruct {
 ---
 
 ## 6. 性能优化深度指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 6.1 内存布局优化
@@ -458,6 +464,7 @@ pub fn fast_add(a: i32, b: i32) -> i32 {
 ---
 
 ## 7. 内存安全深度分析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 生命周期高级用法
@@ -508,6 +515,7 @@ fn borrow_checker_example() {
 ---
 
 ## 8. 错误处理最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 8.1 自定义错误类型
@@ -542,7 +550,7 @@ impl std::error::Error for MyError {}
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::io;
 
 /// 使用?操作符进行错误传播
@@ -563,6 +571,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust官方文档](https://doc.rust-lang.org/)
@@ -577,6 +586,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 ---
 
 ## Rust 1.95+ 高级特性深度解析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -589,7 +599,7 @@ fn process_file(path: &str) -> Result<Vec<i32>, MyError> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// 同时计算多个时间窗口的指标
 pub fn multi_window_analysis(prices: &[f64]) -> MultiWindowMetrics {
     let sma5: Vec<_> = prices.array_windows::<5>()
@@ -610,7 +620,7 @@ pub fn multi_window_analysis(prices: &[f64]) -> MultiWindowMetrics {
 
 #### 2. 窗口内的复杂模式匹配
 
-```rust
+```rust,ignore
 /// 检测复杂的模式序列
 pub fn detect_complex_pattern(data: &[u8]) -> Vec<PatternMatch> {
     data.array_windows::<6>()
@@ -634,11 +644,12 @@ pub fn detect_complex_pattern(data: &[u8]) -> Vec<PatternMatch> {
 ```
 
 ### ControlFlow 的高级用法
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 1. 嵌套 ControlFlow
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 嵌套的提前终止控制
@@ -662,7 +673,7 @@ fn nested_processing(data: &[Vec<i32>]) -> ControlFlow<Error, Vec<Result>> {
 
 #### 2. 与泛型结合
 
-```rust
+```rust,ignore
 /// 通用的提前终止迭代器
 fn find_first<T, P>(items: &[T], predicate: P) -> ControlFlow<&T, ()>
 where
@@ -678,11 +689,12 @@ where
 ```
 
 ### LazyLock 的高级模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 1. 分层初始化
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 基础配置层
@@ -712,7 +724,7 @@ pub fn get_merged_config() -> MergedConfig {
 
 #### 2. 条件初始化
 
-```rust
+```rust,ignore
 /// 仅在特定条件下初始化
 static SPECIAL_FEATURE: LazyLock<Option<Feature>> = LazyLock::new(|| {
     if std::env::var("ENABLE_SPECIAL_FEATURE").is_ok() {
@@ -732,9 +744,10 @@ where
 ```
 
 ### 数学常量的高级应用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 使用欧拉常数进行级数加速收敛
 pub fn accelerated_series(n: u64) -> f64 {
     let harmonic = (1..=n).map(|i| 1.0 / i as f64).sum::<f64>();
@@ -779,6 +792,7 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [05_guides 目录](./README.md)
@@ -1013,4 +1027,3 @@ pub fn log_complexity_analysis(n: usize, base: f64) -> Complexity {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

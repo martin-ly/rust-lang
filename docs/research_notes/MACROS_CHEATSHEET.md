@@ -142,7 +142,7 @@ vec![1, 2, 3,];  // 带结尾逗号
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义
 use proc_macro::TokenStream;
 
@@ -165,7 +165,7 @@ struct MyStruct;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义
 #[proc_macro_attribute]
 pub fn my_attr(args: TokenStream, input: TokenStream) -> TokenStream {
@@ -185,7 +185,7 @@ fn my_func() {}
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义
 #[proc_macro]
 pub fn my_macro(input: TokenStream) -> TokenStream {
@@ -218,7 +218,7 @@ let v = vec![0; 5];  // [0, 0, 0, 0, 0]
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 println!("Hello");
 println!("{}", value);
 println!("{:?}", debug_value);
@@ -230,7 +230,7 @@ println!("{:>8}", text);   // 右对齐，宽度8
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 assert!(condition);
 assert_eq!(a, b);
 assert_ne!(a, b);
@@ -255,7 +255,7 @@ fn stub() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 include!("path/to/file.rs");  // 包含文件内容
 include_str!("path/to/file.txt");  // 包含为&str
 include_bytes!("path/to/file.bin");  // 包含为&[u8]
@@ -282,7 +282,7 @@ cargo rustc -- -Z unpretty=expanded
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 #![feature(trace_macros)]
 
 trace_macros!(true);
@@ -295,7 +295,7 @@ trace_macros!(false);
 ## 宏卫生性 (Hygiene)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 macro_rules! using_a {
     ($e:expr) => {
         { let a = 42; $e }
@@ -386,7 +386,7 @@ struct Point { x: i32, y: i32 }
 ## 属性宏
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[test]           // 测试函数
 #[inline]         // 内联建议
 #[cfg(test)]      // 条件编译

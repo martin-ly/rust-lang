@@ -1,4 +1,6 @@
 # Async Closures 异步闭包
+>
+> **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 
 > **Bloom 层级**: 理解
 
@@ -68,7 +70,7 @@ Rust 提供三种"异步可调用"形式，它们的捕获语义截然不同：
 
 通过代码行为刻画三种形式的差异：
 
-```rust
+```rust,ignore
 // 形式 A: async 块（非闭包）
 let s = String::from("hello");
 let fut = async {
@@ -234,7 +236,7 @@ graph TD
 
 **`AsyncFn` trait 的关联类型设计**:
 
-```rust
+```rust,ignore
 // 标准库中的实际定义（简化）
 pub trait AsyncFn<Args>: AsyncFnMut<Args> {
     type Output;
@@ -250,7 +252,7 @@ pub trait AsyncFn<Args>: AsyncFnMut<Args> {
 
 对比 `Fn` trait：
 
-```rust
+```rust,ignore
 pub trait Fn<Args>: FnMut<Args> {
     extern "rust-call" fn call(&self, args: Args) -> Self::Output;
 }
@@ -262,7 +264,7 @@ pub trait Fn<Args>: FnMut<Args> {
 
 **异步闭包的状态机布局**:
 
-```rust
+```rust,ignore
 let prefix = String::from("msg:");
 let f = async |x: i32| {
     println!("{}{}", prefix, x);  // prefix 被按引用捕获
@@ -273,7 +275,7 @@ let f = async |x: i32| {
 
 编译器生成的状态机概念上如下：
 
-```rust
+```rust,ignore
 struct AsyncClosure<'a> {
     prefix: &'a String,  // 按引用捕获
 }
@@ -298,7 +300,7 @@ impl<'a> AsyncClosure<'a> {
 
 **异步闭包与普通闭包返回 async 块的运行时差异**:
 
-```rust
+```rust,ignore
 // 普通闭包返回 async 块
 let f = || async { ... };
 // 调用时: f() 同步返回 Future（已拥有所有捕获）
@@ -336,7 +338,7 @@ async fn minimal() {
 
 使用异步闭包实现一个高阶异步函数 `async_map`：
 
-```rust
+```rust,compile_fail
 async fn async_map<T, U, F>(items: Vec<T>, f: F) -> Vec<U>
 where
     F: AsyncFn(T) -> U,
@@ -369,7 +371,7 @@ async fn main() {
 
 带背压和错误处理的异步闭包处理器：
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 
@@ -421,7 +423,7 @@ where
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn bad_closure_type() {
     let mut counter = 0;
 
@@ -480,7 +482,7 @@ async fn good_move_closure() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn bad_spawn_async_closure() {
     let local = String::from("hello");
 
@@ -501,7 +503,7 @@ async fn bad_spawn_async_closure() {
 
 **修复方案 A** — 使用 `async move ||`：
 
-```rust
+```rust,ignore
 async fn good_spawn_move() {
     let local = String::from("hello");
 
@@ -519,7 +521,7 @@ async fn good_spawn_move() {
 
 **修复方案 B** — 使用 `Arc` 共享：
 
-```rust
+```rust,ignore
 async fn good_spawn_arc() {
     let local = Arc::new(String::from("hello"));
 
@@ -546,7 +548,7 @@ async fn good_spawn_arc() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn bad_once() {
     let data = vec![1, 2, 3];
 
@@ -575,7 +577,7 @@ error[E0382]: use of moved value: `f`
 **修复方案**:
 如果确实需要多次调用，不应使用 `async move ||`。改用 `async ||`（按引用捕获）或显式 `Arc<Mutex<T>>`：
 
-```rust
+```rust,ignore
 async fn good_multiple() {
     use std::sync::Arc;
     use tokio::sync::Mutex;
@@ -850,7 +852,7 @@ trait AsyncFn<Args> {
 
 **题 1**: 修复以下代码，使其能够通过编译并正确运行：
 
-```rust
+```rust,ignore
 async fn process_items(items: Vec<i32>) {
     let mut results = vec![];
 
@@ -879,7 +881,7 @@ async fn process_items(items: Vec<i32>) {
 
 **修复**:
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 

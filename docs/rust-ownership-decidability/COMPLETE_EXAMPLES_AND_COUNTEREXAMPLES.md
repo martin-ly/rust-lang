@@ -55,7 +55,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ===== 示例 1.1.1: 基本移动 =====
 fn main() {
     let s1 = String::from("hello");
@@ -103,7 +103,7 @@ fn move_through(s: String) -> String {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // ===== 示例 1.2.1: 基本类型的 Copy =====
 fn main() {
     let x = 5;
@@ -149,7 +149,7 @@ fn main() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // ===== 示例 1.3.1: 自动 Drop =====
 struct CustomDrop {
     name: String,
@@ -198,7 +198,7 @@ fn take_ownership(c: CustomDrop) {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // ===== 示例 2.1.1: 基本不可变借用 =====
 fn main() {
     let x = 5;
@@ -235,7 +235,7 @@ fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ===== 示例 2.2.1: 基本可变借用 =====
 fn main() {
     let mut x = 5;
@@ -285,7 +285,7 @@ fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // ===== 示例 2.3.1: 不能同时有 & 和 &mut =====
 fn main() {
     let mut x = 5;
@@ -329,7 +329,7 @@ fn main() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // ===== 示例 3.1.1: 显式标注 =====
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -382,7 +382,7 @@ fn main() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // ===== 示例 3.2.1: 规则 1 - 输入生命周期 =====
 fn foo(x: &i32) {  // 省略: fn foo<'a>(x: &'a i32)
     // x 获得生命周期 'a
@@ -411,7 +411,7 @@ impl MyStruct {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // ===== 示例 3.3.1: 字符串字面量 =====
 fn main() {
     let s: &'static str = "我有 'static 生命周期";
@@ -446,7 +446,7 @@ fn main() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // ===== 示例 4.1.1: 所有权结构体 =====
 struct User {
     username: String,
@@ -508,7 +508,7 @@ fn main() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ===== 示例 4.2.1: 拥有所有权的枚举 =====
 enum Message {
     Quit,
@@ -557,7 +557,7 @@ fn main() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // ===== 示例 5.1.1: Box<T> =====
 fn main() {
     let b = Box::new(5);  // 在堆上分配
@@ -599,7 +599,7 @@ fn main() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // ===== 示例 5.2.1: 闭包捕获环境 =====
 fn main() {
     let x = 5;
@@ -647,7 +647,7 @@ fn main() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // ===== 反例 6.1.1: 使用已移动的值 =====
 fn main() {
     let s = String::from("hello");
@@ -688,7 +688,7 @@ fn main() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // ===== 反例 6.2.1: 同时有 & 和 &mut =====
 fn main() {
     let mut x = 5;
@@ -726,7 +726,7 @@ fn main() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // ===== 反例 6.3.1: 返回引用不明确 =====
 fn longest(x: &str, y: &str) -> &str {  // ❌ 需要显式生命周期
     if x.len() > y.len() { x } else { y }
@@ -802,7 +802,7 @@ impl SelfReferential {
 ### 7.2 协变与逆变
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ===== 示例 7.2.1: &T 是协变的 =====
 fn get_static_ref() -> &'static str {
     "static string"
@@ -834,7 +834,7 @@ fn box_example() {
 ### 7.3 内部可变性模式
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ===== 示例 7.3.1: Cell<T> (只能 Copy 类型) =====
 use std::cell::Cell;
 

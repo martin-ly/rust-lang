@@ -136,7 +136,7 @@ $$
 
 **pin操作** (进入临界区):
 
-```rust
+```rust,ignore
 fn pin(&self) -> Guard {
     // 1. 加载当前全局epoch
     let global_epoch = E.load(Acquire);
@@ -153,7 +153,7 @@ fn pin(&self) -> Guard {
 
 **unpin操作** (离开临界区):
 
-```rust
+```rust,ignore
 fn unpin(&self) {
     self.active.store(false, Release);
 }
@@ -167,7 +167,7 @@ impl Drop for Guard {
 
 **defer操作** (延迟回收):
 
-```rust
+```rust,ignore
 fn defer<F>(&self, f: F)
 where F: FnOnce() + Send
 {
@@ -251,7 +251,7 @@ $$
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 struct Queue<T> {
     head: AtomicPtr<Node<T>>,
     tail: AtomicPtr<Node<T>>,
@@ -277,7 +277,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 fn push(&self, t: T) {
     let new = Box::into_raw(Box::new(Node {
         data: MaybeUninit::new(t),
@@ -320,7 +320,7 @@ fn push(&self, t: T) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 fn pop(&self) -> Option<T> {
     let guard = epoch::pin();
 
@@ -432,7 +432,7 @@ T1: CAS A → 成功，但队列状态已变!
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 struct Stack<T> {
     head: AtomicPtr<Node<T>>,
 }
@@ -446,7 +446,7 @@ struct Node<T> {
 ### 算法 4.1 (Treiber push/pop)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 impl<T> Stack<T> {
     fn push(&self, t: T) {
         let new = Box::into_raw(Box::new(Node {
@@ -507,7 +507,7 @@ impl<T> Stack<T> {
 - **push/pop**: owner线程在底部操作(LIFO)
 - **steal**: 其他线程在顶部操作(FIFO)
 
-```rust
+```rust,ignore
 struct ChaseLev<T> {
     buffer: AtomicPtr<Buffer<T>>,
     top: AtomicUsize,      // 窃取端
@@ -575,13 +575,13 @@ $$
 ### 定义 5.2 (Fence语义)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 atomic::fence(Ordering::SeqCst);
 ```
 
 **使用场景**:
 
-```rust
+```rust,ignore
 // 批量操作后的同步
 for i in 0..n {
     data[i].store(values[i], Relaxed);
@@ -636,7 +636,7 @@ flag.store(true, Relaxed);
 ### 反例 7.1 (忘记pin)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 错误!
 let node = queue.head.load(Relaxed);  // 没有pin!
 // node可能被其他线程释放!
@@ -644,7 +644,7 @@ let node = queue.head.load(Relaxed);  // 没有pin!
 
 **正确**:
 
-```rust
+```rust,ignore
 let guard = epoch::pin();
 let node = queue.head.load(Acquire, &guard);
 // 安全，node不会被释放直到guard drop
@@ -653,14 +653,14 @@ let node = queue.head.load(Acquire, &guard);
 ### 反例 7.2 (不正确的内存序)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 错误: Relaxed不足以建立happens-before
 self.ptr.store(new, Relaxed);
 ```
 
 **正确**:
 
-```rust
+```rust,ignore
 self.ptr.store(new, Release);
 ```
 

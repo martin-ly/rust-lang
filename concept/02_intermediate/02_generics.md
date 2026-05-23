@@ -746,7 +746,7 @@ where
 
 更进阶的用法是利用 `where` 子句实现**类型级条件实现（Type-level Conditional Impl）**，这是类型状态机的基础：
 
-```rust,ignore
+```rust
 #![feature(generic_const_exprs)]
 
 // 仅当 N > 0 时实现 NonEmpty（利用 where 子句的常量约束技巧）
@@ -1718,7 +1718,7 @@ impl Parse for String {
 
 以下是一个完整的 `min_specialization` 工程用例，展示如何为字符串类型提供零拷贝优化：
 
-```rust,ignore
+```rust
 #![feature(min_specialization)]
 
 use std::fmt::Write;

@@ -1,4 +1,6 @@
 # 智能指针 (Smart Pointers)
+>
+> **相关概念**: [智能指针](../../concept/02_intermediate/03_memory_management.md)
 
 > **Bloom 层级**: 理解
 
@@ -64,14 +66,14 @@
 
 **`Box<T>` 的核心语义**：
 
-```rust
+```rust,ignore
 let b = Box::new(5);  // 5 在堆上，b 在栈上持有指针
 // b 自动实现 Deref，*b 等价于 *(b.deref())
 ```
 
 **`Rc<T>` 的引用计数语义**：
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 let data = Rc::new(vec![1, 2, 3]);
@@ -84,7 +86,7 @@ let data3 = Rc::clone(&data);  // 引用计数 +1
 
 **`RefCell<T>` 的运行时借用检查**：
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(5);
@@ -197,7 +199,7 @@ graph TD
 
 **`Deref` 的强制转换（Deref Coercion）**：
 
-```rust
+```rust,ignore
 use std::ops::Deref;
 
 impl<T> Deref for Box<T> {
@@ -292,7 +294,7 @@ fn main() {
 
 #### 5.1 Minimal（最小正例）
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 // 共享只读数据
@@ -349,7 +351,7 @@ fn main() {
 
 使用 `Weak` 打破循环引用：
 
-```rust
+```rust,ignore
 use std::rc::{Rc, Weak};
 use std::cell::RefCell;
 
@@ -438,7 +440,7 @@ struct Node {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(5);
@@ -458,7 +460,7 @@ thread 'main' panicked at 'already borrowed: BorrowMutError'
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(5);
@@ -479,7 +481,7 @@ let borrow3 = cell.borrow_mut();  // ✅ 现在可以获取可变借用
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -500,7 +502,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use std::thread;
 
@@ -793,7 +795,7 @@ fn main() {
 
 **题 2**: 以下代码试图在多线程中共享 `Rc` 但失败。请用 `Arc` 和 `Mutex` 修复：
 
-```rust
+```rust,compile_fail
 use std::rc::Rc;
 use std::thread;
 

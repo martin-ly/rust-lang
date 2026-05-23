@@ -1,4 +1,6 @@
 # Rust 字符串处理 (String Handling)
+>
+> **相关概念**: [字符串](../../concept/01_foundation/09_strings_and_text.md)
 
 > **Bloom 层级**: 理解
 
@@ -178,7 +180,7 @@ graph TD
 
 **`String` 实现了 `Deref<Target = str>`**：
 
-```rust
+```rust,ignore
 impl Deref for String {
     type Target = str;
     fn deref(&self) -> &str { /* 返回内部缓冲区视图 */ }
@@ -195,7 +197,7 @@ let slice: &str = &s;  // 自动 Deref: &String → &str
 
 **`String` 从 `&str` 创建时的内存复制**：
 
-```rust
+```rust,ignore
 let literal: &str = "hello";      // 静态内存，编译期确定
 let owned: String = literal.to_string();  // 堆分配 + 复制内容
 
@@ -208,7 +210,7 @@ let owned: String = literal.to_string();  // 堆分配 + 复制内容
 
 **UTF-8 验证的成本**：
 
-```rust
+```rust,ignore
 // 从 Vec<u8> 创建 String 时必须验证 UTF-8
 let bytes = vec![0x80, 0x81, 0x82];
 let s = String::from_utf8(bytes);  // Err: 无效的 UTF-8 序列
@@ -290,7 +292,7 @@ fn build_csv(items: &[&str]) -> String {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 let s = "你好";
 let first = s[0];  // ❌ 编译错误！
 ```
@@ -305,7 +307,7 @@ error[E0277]: the type `str` cannot be indexed by `{integer}`
 
 **修复方案**:
 
-```rust
+```rust,ignore
 let s = "你好";
 let first_char = s.chars().next().unwrap();  // '你'
 let first_byte = s.as_bytes()[0];             // 0xE4（如果确实需要字节）
@@ -317,7 +319,7 @@ let first_byte = s.as_bytes()[0];             // 0xE4（如果确实需要字节
 
 **错误代码**:
 
-```rust
+```rust,ignore
 let s1 = String::from("Hello");
 let s2 = String::from("World");
 let s3 = s1 + " " + &s2;
@@ -328,7 +330,7 @@ println!("{}", s1);  // ❌ 编译错误！s1 已被移动
 
 **修复方案**:
 
-```rust
+```rust,ignore
 let s1 = String::from("Hello");
 let s2 = String::from("World");
 let s3 = format!("{} {}", s1, s2);  // ✅ 不消耗所有权
@@ -341,7 +343,7 @@ println!("s1 still usable: {}", s1);
 
 **错误代码**:
 
-```rust
+```rust,ignore
 let s = "你好世界";
 let slice = &s[0..2];  // ❌ 运行时 panic！
 ```
@@ -356,7 +358,7 @@ thread 'main' panicked at 'byte index 2 is not a char boundary'
 
 **修复方案**:
 
-```rust
+```rust,ignore
 let s = "你好世界";
 if let Some(slice) = s.get(0..3) {
     println!("{}", slice);  // "你"
@@ -822,7 +824,7 @@ fn main() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,compile_fail
 use std::ffi::{CString, CStr, OsString, OsStr};
 
 fn main() {
@@ -910,7 +912,7 @@ fn build_csv(items: &[&str]) -> String {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ✗ 避免链式 +
 let s = s1 + "/" + &s2 + "/" + &s3;
 
@@ -922,7 +924,7 @@ let s = format!("{}/{}/{}", s1, s2, s3);
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // ✗ let c = s[0];  // 编译错误
 // ✓ 使用安全的 API
 if let Some(c) = s.chars().nth(0) {
@@ -940,7 +942,7 @@ if let Some(c) = s.chars().nth(0) {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let s = "你好";
 // let c = s[0];  // ❌ 编译错误：类型 `str` 不能索引
 // 原因：UTF-8 编码下，"你" = [228, 189, 160]（3 字节）
@@ -953,7 +955,7 @@ let first_char = s.chars().next().unwrap(); // '你'
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let s1 = String::from("Hello");
 let s2 = String::from("World");
 let s3 = s1 + " " + &s2;  // s1 被移动，之后不可用
@@ -965,7 +967,7 @@ println!("{}", s2);     // ✓ s2 仍可用
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let s = "你好";
 assert_eq!(s.len(), 6);            // 6 字节（UTF-8 编码）
 assert_eq!(s.chars().count(), 2);  // 2 个字符
@@ -975,7 +977,7 @@ assert_eq!(s.chars().count(), 2);  // 2 个字符
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let invalid = vec![b'H', b'i', 0, b'!'];
 let result = CString::new(invalid);
 assert!(result.is_err());  // ❌ 不能包含 null 字节
@@ -985,7 +987,7 @@ assert!(result.is_err());  // ❌ 不能包含 null 字节
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let s = "你好";
 // let slice = &s[0..2];  // ❌ 运行时 panic
 // ✅ 使用安全的 get 方法

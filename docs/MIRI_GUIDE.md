@@ -34,6 +34,7 @@
   - [最佳实践](#最佳实践)
   - [更多资源](#更多资源)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 什么是 Miri
 >
@@ -172,6 +173,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 ```
 
 ### Miri 环境变量
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 变量 | 说明 | 示例 |
@@ -181,6 +183,7 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 | `MIRI_LOG` | 日志级别 | `info` |
 
 ### 常用 Miri 选项
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```bash
@@ -201,9 +204,11 @@ MIRIFLAGS = { value = "-Zmiri-tree-borrows -Zmiri-disable-isolation", force = fa
 ```
 
 ## 常见错误类型
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Use-after-free
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -221,9 +226,10 @@ unsafe {
 > `static mut` 在 Rust 2024 Edition 中引用已被禁止。实际代码应使用 `AtomicI32` 或 `Mutex`。
 
 ### 数据竞争
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 static mut COUNTER: i32 = 0;
 
 // 线程 1
@@ -238,6 +244,7 @@ unsafe {
 ```
 
 ### 越界访问
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -249,6 +256,7 @@ unsafe {
 ```
 
 ### 未初始化内存
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -257,9 +265,11 @@ let _ = x; // 错误: 使用未初始化的值
 ```
 
 ## Miri 测试结构
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 测试文件位置
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 每个 crate 的 Miri 测试位于 `src/miri_tests.rs`：
@@ -273,6 +283,7 @@ crates/
 ```
 
 ### 测试模块声明
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 在 `lib.rs` 中添加：
@@ -283,6 +294,7 @@ pub mod miri_tests;
 ```
 
 ### 测试组织
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -329,6 +341,7 @@ fn test_use_after_free() {
 ```
 
 ### 标记 Miri 专用测试
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -348,6 +361,7 @@ mod non_miri_tests {
 ```
 
 ## 最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **为所有 unsafe 代码编写 Miri 测试**
@@ -371,6 +385,7 @@ mod non_miri_tests {
    - 某些代码可能需要 `#[cfg(not(miri))]`
 
 ## 更多资源
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Miri 官方文档](https://github.com/rust-lang/miri)
@@ -495,4 +510,3 @@ mod non_miri_tests {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

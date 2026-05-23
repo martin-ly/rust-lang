@@ -145,7 +145,7 @@ mindmap
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义可能失败的操作
 fn divide(a: f64, b: f64) -> Result<f64, MathError> {
     if b == 0.0 {
@@ -189,7 +189,7 @@ fn calculate(x: f64, y: f64) -> Result<f64, MathError> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -214,7 +214,7 @@ pub enum ConfigError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 fn main() -> Result<()> {
@@ -256,7 +256,7 @@ fn main() -> Result<()> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ✅ 使用Result - 调用者决定如何处理
 fn parse_port(s: &str) -> Result<u16, ParseError>;
 
@@ -282,7 +282,7 @@ fn parse_user_input(s: &str) -> i32 {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 impl From<io::Error> for MyError {
     fn from(err: io::Error) -> Self {
         MyError::Io(err)
@@ -300,7 +300,7 @@ fn read_file() -> Result<String, MyError> {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 统一处理Option和Result
 fn get_or_default<T: Default>(opt: Option<T>) -> T {
     opt? // 如果是None，返回默认值
@@ -316,7 +316,7 @@ fn get_or_default<T: Default>(opt: Option<T>) -> T {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 match result {
     Ok(value) => value,
     Err(e) => {
@@ -330,7 +330,7 @@ match result {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 let data = operation()
     .map_err(|e| Error::with_context(e, "在初始化阶段"))?;
 ```
@@ -339,7 +339,7 @@ let data = operation()
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 let result = primary_op()
     .or_else(|_| fallback_op())
     .or_else(|_| default_op())?;
@@ -348,7 +348,7 @@ let result = primary_op()
 ### 模式4: 聚合错误
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let errors: Vec<Error> = operations
     .iter()
     .filter_map(|op| op.execute().err())

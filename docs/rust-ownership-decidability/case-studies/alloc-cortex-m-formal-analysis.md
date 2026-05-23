@@ -80,7 +80,7 @@ $$
 ### 定义 ALLOC-1 ( GlobalAlloc trait )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 unsafe impl GlobalAlloc for CortexMAllocator {
     unsafe fn alloc(&self, layout: Layout) -> *mut u8;
     unsafe fn dealloc(&self, ptr: *mut u8, layout: Layout);
@@ -145,7 +145,7 @@ $$
 
 ### 示例1: 全局分配器配置
 
-```rust
+```rust,ignore
 use alloc_cortex_m::CortexMHeap;
 use core::alloc::Layout;
 
@@ -177,7 +177,7 @@ fn alloc_error(_layout: Layout) -> ! {
 
 ### 示例2: 自定义分配器
 
-```rust
+```rust,ignore
 use core::alloc::{GlobalAlloc, Layout};
 use core::ptr::NonNull;
 
@@ -215,7 +215,7 @@ impl<const N: usize, const SIZE: usize> FixedBlockAllocator<N, SIZE> {
 
 ### 示例3: 内存使用监控
 
-```rust
+```rust,ignore
 struct InstrumentedAllocator<A> {
     inner: A,
     allocated: AtomicUsize,

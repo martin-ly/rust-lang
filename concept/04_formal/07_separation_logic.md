@@ -32,6 +32,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 霍尔逻辑与指针的困境
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 经典霍尔逻辑（Hoare Logic）在推理指针程序时面临**框架问题**（Frame Problem）：
@@ -68,6 +70,7 @@
 ---
 
 ### 1.2 分离合取：* 算子
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -104,6 +107,7 @@
 ---
 
 ### 1.3 帧规则与局部推理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -140,6 +144,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 分离逻辑的断言语言
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -168,6 +173,7 @@
 ---
 
 ### 2.2 从 SL 到并发分离逻辑（CSL）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -198,6 +204,7 @@
 ---
 
 ### 2.3 Iris：高阶并发分离逻辑
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -275,6 +282,7 @@ Rust 概念 ↔ 分离逻辑映射:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -300,6 +308,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -516,4 +525,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

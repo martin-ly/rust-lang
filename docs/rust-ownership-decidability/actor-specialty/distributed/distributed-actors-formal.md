@@ -189,7 +189,7 @@ Happens-before关系:
 ### 3.3 Vector Clocks实现
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Vector clock实现
 #[derive(Clone, Debug)]
 pub struct VectorClock {
@@ -308,7 +308,7 @@ Actor应用:
     - 分布式映射
 ```
 
-```rust
+```rust,ignore
 // G-Counter (增长计数器)
 #[derive(Clone)]
 pub struct GCounter {
@@ -411,7 +411,7 @@ Saga = (T, C, ≺)
 ### 5.3 Saga协调器Actor
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Saga协调器
 pub struct SagaCoordinator {
     steps: Vec<SagaStep>,
@@ -515,7 +515,7 @@ Phi累积失败检测:
 ### 7.1 集群架构
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // coerce集群配置
 use coerce::actor::system::ActorSystem;
 use coerce::remote::cluster::Cluster;
@@ -544,7 +544,7 @@ async fn main() {
 ### 7.2 分片配置
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use coerce::persistent::Shard;
 
 // 定义分片Actor

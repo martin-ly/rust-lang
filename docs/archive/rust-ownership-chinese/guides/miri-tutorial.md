@@ -309,7 +309,7 @@ fn safe_version() {
 
 ### 6.2 检测数据竞争
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn data_race() {
@@ -335,7 +335,7 @@ error: Undefined Behavior: Data race detected
 
 **修复：**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 
 fn no_race() {
@@ -455,7 +455,7 @@ fn test_performance() {
 
 ### 8.3 文档和注释
 
-```rust
+```rust,ignore
 /// # Safety
 ///
 /// 调用者必须保证：

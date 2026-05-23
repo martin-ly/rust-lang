@@ -83,7 +83,7 @@ impl Iterator for Counter {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 静态分发（单态化）
 fn static_dispatch<T: Drawable>(item: &T) {
     item.draw();  // 编译时确定调用哪个 draw

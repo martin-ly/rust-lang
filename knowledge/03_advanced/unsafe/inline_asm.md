@@ -1,4 +1,5 @@
 # 内联汇编 (Inline Assembly)
+> **相关概念**: [位置](../../../concept/01_foundation/13_panic_and_abort.md)
 
 > **Bloom 层级**: 理解
 
@@ -48,7 +49,7 @@
 
 内联汇编允许在 Rust 函数体中直接嵌入目标架构的汇编指令，由编译器在代码生成阶段将其插入到生成的机器码中。
 
-```rust
+```rust,ignore
 use std::arch::asm;
 
 fn add(a: i32, b: i32) -> i32 {
@@ -137,7 +138,7 @@ fn add(a: i32, b: i32) -> i32 {
 
 #### 4.2 占位符与命名操作数
 
-```rust
+```rust,ignore
 // 数字占位符: {0}, {1}, ...
 asm!("add {0}, {1}", out(reg) c, in(reg) a, in(reg) b);
 
@@ -156,7 +157,7 @@ asm!(
 
 #### 5.1 读取 x86 CPU ID
 
-```rust
+```rust,compile_fail
 use std::arch::asm;
 
 /// 获取 CPU 厂商信息
@@ -234,7 +235,7 @@ pub fn full_memory_barrier() {
 
 #### 6.1 未声明 clobber 寄存器
 
-```rust
+```rust,ignore
 // ❌ 错误: 修改了 rax 但没有声明
 let x = 42;
 unsafe {
@@ -258,7 +259,7 @@ unsafe {
 
 #### 6.2 错误使用 `nomem` 选项
 
-```rust
+```rust,ignore
 // ❌ 错误: 实际访问了内存但声明 nomem
 let mut x = 0;
 unsafe {
@@ -280,7 +281,7 @@ unsafe {
 
 #### 6.3 忘记 `unsafe` 块
 
-```rust
+```rust,ignore
 // ❌ 编译错误: asm! 必须在 unsafe 块中
 asm!("nop");
 

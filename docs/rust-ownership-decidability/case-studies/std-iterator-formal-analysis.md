@@ -158,7 +158,7 @@ impl Iterator for Counter {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 fn size_hint(&self) -> (usize, Option<usize>) {
     (lower_bound, upper_bound)
 }
@@ -184,7 +184,7 @@ $$
 
 **实现示例**:
 
-```rust
+```rust,ignore
 impl Iterator for VecIntoIter<T> {
     fn size_hint(&self) -> (usize, Option<usize>) {
         let len = self.len();
@@ -215,7 +215,7 @@ impl Iterator for Range<usize> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 struct Map<I, F> {
     iter: I,
     f: F,
@@ -240,19 +240,19 @@ impl<I: Iterator, F: FnMut(I::Item) -> B> Iterator for Map<I, F> {
 
 **Identity**:
 
-```rust
+```rust,ignore
 iter.map(|x| x)  // 等价于 iter
 ```
 
 **Composition**:
 
-```rust
+```rust,ignore
 iter.map(f).map(g)  // 等价于 iter.map(|x| g(f(x)))
 ```
 
 实现:
 
-```rust
+```rust,ignore
 // iter.map(f).map(g).next()
 self.iter.next().map(f).map(g)
 
@@ -295,7 +295,7 @@ impl<I: Iterator, P: FnMut(&I::Item) -> bool> Iterator for Filter<I, P> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 fn fold<B, F>(self, init: B, mut f: F) -> B
 where
     F: FnMut(B, Self::Item) -> B,
@@ -330,7 +330,7 @@ where
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<I: Iterator> Iterator for Take<I> {
     fn next(&mut self) -> Option<Self::Item> {
         if self.n == 0 {
@@ -364,7 +364,7 @@ impl<I: Iterator> Iterator for Take<I> {
 
 **证明**:
 
-```rust
+```rust,ignore
 let iter = vec.iter()
     .map(|x| expensive_operation(x))  // 不执行
     .filter(|x| x > 0)                 // 不执行
@@ -405,7 +405,7 @@ pub trait FusedIterator: Iterator {}
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<I: FusedIterator> Iterator for Fuse<I> {
     fn next(&mut self) -> Option<Self::Item> {
         if self.done {
@@ -517,7 +517,7 @@ pub trait IntoIterator {
 
 **展开**:
 
-```rust
+```rust,ignore
 // 源码
 for x in vec {
     println!("{}", x);
@@ -603,7 +603,7 @@ for x in v {  // 消耗v
 ### 反例 10.1 (修改被迭代集合)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 for x in &v {
     v.push(*x);  // 编译错误! 不可变借用期间修改
@@ -624,7 +624,7 @@ v.push(4);  // 可能重新分配，使iter悬垂
 ### 反例 10.3 (无限迭代器)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let iter = std::iter::repeat(1);  // 无限
 let sum: i32 = iter.sum();  // 无限循环!
 
@@ -635,7 +635,7 @@ take(100).sum()  // 限制数量
 ### 反例 10.4 (忘记collect)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 vec.iter().map(|x| x * 2);  // 惰性，不执行任何操作!
 
 // 正确

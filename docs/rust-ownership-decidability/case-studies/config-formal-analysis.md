@@ -50,7 +50,7 @@ config crate提供:
 
 > 后添加的源覆盖先添加的源。
 
-```rust
+```rust,ignore
 let cfg = Config::builder()
     .add_source(File::with_name("default"))      // 1. 默认值
     .add_source(File::with_name("config"))       // 2. 配置文件
@@ -69,7 +69,7 @@ let cfg = Config::builder()
 
 > 表结构深度合并，标量值完全覆盖。
 
-```rust
+```rust,ignore
 // default.toml
 [server]
 host = "0.0.0.0"
@@ -91,7 +91,7 @@ port = 3000
 
 > 通过serde实现类型安全获取。
 
-```rust
+```rust,ignore
 #[derive(Deserialize)]
 struct Settings {
     port: u16,      // 自动验证范围
@@ -109,7 +109,7 @@ let settings: Settings = cfg.try_deserialize()?;
 
 ### 反例 5.1 (缺失配置)
 
-```rust
+```rust,ignore
 // 未处理缺失配置
 let port = cfg.get_int("port")?;  // 可能Err
 
@@ -119,7 +119,7 @@ let port: u16 = cfg.get("port").unwrap_or(8080);
 
 ### 反例 5.2 (类型不匹配)
 
-```rust
+```rust,ignore
 // 配置中是字符串，但尝试获取整数
 // 自动转换可能失败
 let port: u16 = cfg.get("port")?;  // 需确保格式正确

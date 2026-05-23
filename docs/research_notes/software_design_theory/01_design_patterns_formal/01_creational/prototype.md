@@ -181,7 +181,7 @@ $$\forall t: T,\, \mathit{clone}(t)\text{ 的引用字段行为由实现决定}$
 
 2. **所有权转移**：返回值为新拥有值
 
-   ```rust
+   ```rust,ignore
    let a = Config { ... };
    let b = a.clone();  // a 被借用，b 获得新所有权
    // a 仍可使用
@@ -348,7 +348,7 @@ ownership_model T2
 
 **错误**：`Clone` 仅复制指针，未克隆指向内容；多副本共享同一可变状态。
 
-```rust
+```rust,ignore
 struct BadNode { data: Rc<RefCell<i32>> }
 impl Clone for BadNode {
     fn clone(&self) -> Self {

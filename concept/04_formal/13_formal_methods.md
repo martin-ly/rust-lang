@@ -33,6 +33,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -43,6 +44,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 形式化验证层次
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -78,6 +80,7 @@
 ---
 
 ### 1.2 验证方法分类
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -126,6 +129,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Kani — 模型检查
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -168,6 +172,7 @@ Kani:
 ---
 
 ### 2.2 Creusot — 演绎验证
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -212,6 +217,7 @@ Creusot:
 ---
 
 ### 2.3 Miri — 未定义行为检测
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -255,6 +261,7 @@ Miri:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 安全边界验证
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -293,6 +300,7 @@ Miri:
 ---
 
 ### 3.2 并发正确性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -350,6 +358,7 @@ Miri:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -371,6 +380,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -630,4 +640,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

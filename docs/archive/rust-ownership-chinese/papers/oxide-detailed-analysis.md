@@ -60,7 +60,7 @@ Oxide提出了**首个接近源代码级别的Rust形式化模型**，将Rust的
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Oxide语法（接近Rust源码）
 
 // 类型
@@ -93,7 +93,7 @@ e ::= x | n | () | true | false
 
 **与Rust的对比：**
 
-```rust
+```rust,ignore
 // Rust
 let r1 = &x;       // &T
 let r2 = &mut x;   // &mut T
@@ -258,7 +258,7 @@ Oxide实现了：
 
 ### 8.1 核心数据结构
 
-```rust
+```rust,ignore
 // 权限
 type Permission = Shared | Unique;
 

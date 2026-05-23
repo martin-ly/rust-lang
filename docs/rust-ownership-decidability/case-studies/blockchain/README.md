@@ -96,7 +96,7 @@ Rust在区块链领域迅速崛起成为首选语言，主要基于以下核心�
 
 区块链系统的共识算法对执行确定性有严格要求。Rust的所有权系统从根本上保障了这一点：
 
-```rust
+```rust,ignore
 // 示例：Rust所有权确保共识状态的一致性
 pub struct ConsensusState {
     view_number: u64,
@@ -164,7 +164,7 @@ Rust的高性能特性：
 
 ink! 是 Parity Technologies 开发的基于Rust的智能合约语言，编译为WASM在Substrate链上运行。
 
-```rust
+```rust,ignore
 #![cfg_attr(not(feature = "std"), no_std, no_main)]
 
 #[ink::contract]
@@ -288,7 +288,7 @@ mod token {
 
 Substrate是Parity开发的模块化区块链框架：
 
-```rust
+```rust,ignore
 // FRAME Pallet 示例：自定义链上逻辑
 #![cfg_attr(not(feature = "std"), no_std)]
 
@@ -360,7 +360,7 @@ pub mod pallet {
 
 Solana使用Rust编写原生程序，基于BPF（Berkeley Packet Filter）字节码：
 
-```rust
+```rust,ignore
 use solana_program::{
     account_info::{next_account_info, AccountInfo},
     entrypoint,
@@ -402,7 +402,7 @@ pub fn process_instruction(
 
 NEAR Protocol的智能合约开发：
 
-```rust
+```rust,ignore
 use near_sdk::borsh::{self, BorshDeserialize, BorshSerialize};
 use near_sdk::{env, near_bindgen, AccountId, Balance};
 
@@ -442,7 +442,7 @@ impl Contract {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use sha2::{Sha256, Digest};
 use std::time::{SystemTime, UNIX_EPOCH};
 
@@ -510,7 +510,7 @@ pub struct Block {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rand::Rng;
 use std::collections::HashMap;
 
@@ -573,7 +573,7 @@ pub enum StakeError {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use serde::{Serialize, Deserialize};
 
@@ -651,7 +651,7 @@ pub enum ConsensusEvent {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::collections::{BTreeMap, HashMap, HashSet};
 use std::time::{Duration, Instant};
 
@@ -863,7 +863,7 @@ impl Plumtree {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use rocksdb::{DB, Options, ColumnFamilyDescriptor, WriteBatch};
 use std::sync::Arc;
 
@@ -1000,7 +1000,7 @@ pub struct Header {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 状态数据库 - 维护账户状态
 pub struct StateDB {
     /// 底层KV存储
@@ -1103,7 +1103,7 @@ struct SnapshotMeta {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 归档节点配置
 pub struct ArchiveConfig {
     /// 保留完整历史
@@ -1254,7 +1254,7 @@ impl From<serde_json::Error> for ArchiveError {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use sha2::{Sha256, Digest};
 use serde::{Serialize, Deserialize};
 use std::time::{SystemTime, UNIX_EPOCH};
@@ -1390,7 +1390,7 @@ fn current_timestamp() -> u64 {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// 挖矿管理器
@@ -1517,7 +1517,7 @@ impl Miner {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use secp256k1::{Secp256k1, Message, PublicKey, ecdsa::Signature};
 use std::collections::HashMap;
 
@@ -1673,7 +1673,7 @@ pub struct Receipt {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, RwLock};
 use std::sync::Arc;
 
@@ -1892,7 +1892,7 @@ pub enum BlockError {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// 自动做市商(AMM) - Uniswap V2风格
 pub struct AMM {
     /// 储备金
@@ -2153,7 +2153,7 @@ pub enum DeFiError {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// 超额抵押借贷协议（Compound/Aave风格）
 pub struct LendingProtocol {
     /// 支持的代币市场
@@ -2410,7 +2410,7 @@ pub enum LendingError {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// 多代币流动性池 - Balancer风格
 pub struct WeightedPool {
     /// 池中的代币
@@ -2526,7 +2526,7 @@ impl WeightedPool {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 重入攻击防护模式
 pub struct ReentrancyGuard {
     locked: std::cell::RefCell<bool>,
@@ -2639,7 +2639,7 @@ pub enum SecurityError {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use num_traits::{CheckedAdd, CheckedSub, CheckedMul, CheckedDiv};
 
 /// 安全数学运算trait
@@ -2770,7 +2770,7 @@ pub enum MathError {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 
 /// 基于角色的访问控制
@@ -2963,7 +2963,7 @@ pub enum AccessError {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::process::{Command, Child};
 use std::time::Duration;
 

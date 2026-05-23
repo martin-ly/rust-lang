@@ -126,7 +126,7 @@ LRT → ◇(Completed ∨ Compensated)
 
 ## 4. Rust 实现示例
 
-```rust
+```rust,ignore
 use std::time::{Duration, Instant};
 use serde::{Serialize, Deserialize};
 

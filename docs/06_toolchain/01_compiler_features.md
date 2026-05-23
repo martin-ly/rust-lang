@@ -829,7 +829,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 **示例**:
 
-```rust
+```rust,ignore
 // ✅ 推荐: 小而专注的 crate
 // lib.rs
 pub mod core;
@@ -857,7 +857,7 @@ pub mod everything_in_one_file; // 10000+ lines
 
 **优化建议**:
 
-```rust
+```rust,ignore
 // ✅ 使用 derive 宏
 #[derive(Debug, Clone, Serialize, Deserialize)]
 struct Data { /* ... */ }
@@ -1043,7 +1043,7 @@ LLVM IR --(LLVM优化)--> 目标代码
 
 形式化表示为：
 
-```rust
+```rust,ignore
 // 编译过程的形式化类型（概念性）
 type SourceCode = String;
 type TokenStream = Vec<Token>;
@@ -1117,7 +1117,7 @@ fn borrow_check_example() {
 
 不同优化级别对应不同的程序转换强度：
 
-```rust
+```rust,ignore
 // 形式化语义：优化级别定义允许的转换集合
 enum OptimizationLevel {
     O0,  // 无优化：保持源代码语义，适合调试
@@ -1171,7 +1171,7 @@ impl OptimizationLevel {
 
 Link-Time Optimization 的形式化效果：
 
-```rust
+```rust,ignore
 // 形式化：LTO 允许跨模块优化
 // 对于模块 A 和 B，LTO 可以：
 // 1. 内联跨模块函数调用

@@ -172,7 +172,7 @@ pub const IORING_OP_CLOSE: u8 = 19;
 ### 2.1 基本API
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use libc::*;
 use std::os::unix::io::RawFd;
 use std::ptr::{null, null_mut};
@@ -282,7 +282,7 @@ impl IoUring {
 ### 2.2 文件IO示例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::fs::OpenOptions;
 use std::os::unix::io::AsRawFd;
 
@@ -340,7 +340,7 @@ fn io_uring_file_read() -> io::Result<()> {
 ### 2.3 网络IO示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// io_uring TCP服务器
 fn io_uring_tcp_server() -> io::Result<()> {
     let mut ring = IoUring::new(256, IORING_SETUP_SQPOLL)?; // 启用内核轮询
@@ -409,7 +409,7 @@ fn io_uring_tcp_server() -> io::Result<()> {
 ### 3.1 轮询模式 (SQPOLL)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 内核轮询模式 - 完全绕过syscall
 fn sqpoll_mode() -> io::Result<()> {
     // IORING_SETUP_SQPOLL: 内核线程轮询SQ
@@ -437,7 +437,7 @@ fn sqpoll_mode() -> io::Result<()> {
 ### 3.2 注册缓冲区 (Registered Buffers)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 /// 预注册缓冲区 - 避免每次IO的内存注册开销
 fn registered_buffers() -> io::Result<()> {
     let mut ring = IoUring::new(256, 0)?;
@@ -481,7 +481,7 @@ fn registered_buffers() -> io::Result<()> {
 ### 3.3 IO链路与超时
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 链接多个IO操作
 fn linked_operations() -> io::Result<()> {
     let mut ring = IoUring::new(32, 0)?;
@@ -577,7 +577,7 @@ fn linked_operations() -> io::Result<()> {
 ### 5.1 io-uring (底层绑定)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use io_uring::{IoUring, opcode, types, squeue, cqueue};
 
 fn main() -> std::io::Result<()> {

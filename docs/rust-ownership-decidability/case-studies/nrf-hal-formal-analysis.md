@@ -64,7 +64,7 @@ $$
 
 **特性**: 每个外设只能实例化一次。
 
-```rust
+```rust,ignore
 let p = pac::Peripherals::take().unwrap();
 let uart = Uarte::new(p.UARTE0, ...);
 // p.UARTE0 已消费，不能再次使用
@@ -118,7 +118,7 @@ $$
 ### 定义 PPI-2 ( 通道组 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 ppi.channel0.set_event_endpoint(timer.compare0());
 ppi.channel0.set_task_endpoint(uart.starttx());
 ppi.channel0.enable();
@@ -181,7 +181,7 @@ $$
 
 ### 示例1: UART with EasyDMA
 
-```rust
+```rust,ignore
 use nrf_hal::uarte::{Uarte, Pins};
 use nrf_hal::gpio::Level;
 
@@ -212,7 +212,7 @@ fn uarte_example(p: pac::Peripherals) {
 
 ### 示例2: PPI自动触发
 
-```rust
+```rust,ignore
 use nrf_hal::ppi::Ppi;
 use nrf_hal::timer::Timer;
 use nrf_hal::gpio::Pin;
@@ -235,7 +235,7 @@ fn ppi_example(p: pac::Peripherals) {
 
 ### 示例3: 低功耗模式
 
-```rust
+```rust,ignore
 use nrf_hal::power::Power;
 
 fn low_power_example(p: pac::Peripherals) {
@@ -254,7 +254,7 @@ fn low_power_example(p: pac::Peripherals) {
 
 ### 示例4: SAADC采样
 
-```rust
+```rust,ignore
 use nrf_hal::saadc::{Saadc, SaadcConfig, ChannelConfig, Reference, Gain};
 
 fn saadc_example(p: pac::Peripherals) {

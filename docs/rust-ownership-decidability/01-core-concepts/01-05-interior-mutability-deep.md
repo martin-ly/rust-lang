@@ -106,7 +106,7 @@ This rule enables the compiler to guarantee memory safety without a garbage coll
 
 Consider this problematic scenario:
 
-```rust
+```rust,ignore
 // This does NOT compile - Rust's borrow checker rejects it
 struct SharedCounter {
     value: i32,
@@ -292,7 +292,7 @@ Atomic types use **CPU atomic instructions** (like `LOCK XADD` on x86) to provid
 
 `Cell<T>` is the simplest form of interior mutability. It provides mutation through shared references by **moving values in and out**:
 
-```rust
+```rust,ignore
 pub struct Cell<T> {
     value: UnsafeCell<T>,
 }
@@ -572,7 +572,7 @@ RefCell maintains a state machine for tracking borrows:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::cell::{UnsafeCell, Cell};
 use std::ops::{Deref, DerefMut};
 
@@ -753,7 +753,7 @@ let _ref = cell.borrow(); // PANIC: already mutably borrowed
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 // GOOD: Short borrow scopes
@@ -837,7 +837,7 @@ assert_eq!(result.len(), 6);
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // Conceptual implementation (simplified)
 pub struct Mutex<T: ?Sized> {
     // Platform-specific mutex primitive
@@ -1048,7 +1048,7 @@ Memory ordering controls how atomic operations are synchronized across threads:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, AtomicUsize, Ordering};
 use std::thread;
 
@@ -1523,7 +1523,7 @@ fn initialize_config() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 // DEADLOCK: LazyLock initialization depends on itself
@@ -1756,7 +1756,7 @@ fn main() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Using crossbeam for lock-free data structures
 use crossbeam::queue::ArrayQueue;
 use std::sync::Arc;

@@ -68,7 +68,7 @@
 
 类型状态模式（Type State Pattern）是一种利用类型系统在编译时编码和验证对象状态的编程技术。它将状态从运行时值提升为编译期类型，使得非法状态转换在编译时被阻止。
 
-```rust
+```rust,ignore
 // 传统运行时状态检查
 pub struct Connection {
     state: ConnectionState,  // 运行时值
@@ -104,7 +104,7 @@ impl Connection<Connected> {
 3. **类型推断**: 减少显式类型标注的繁琐
 4. **没有空值**: Option类型配合类型状态更安全
 
-```rust
+```rust,ignore
 // 编译期移除不可能状态
 let conn = Connection::<Disconnected>::new("localhost");
 conn.query("SELECT 1");  // 编译错误！Disconnected状态没有query方法
@@ -153,7 +153,7 @@ pub struct StateMachine<State> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 定义状态标记（零大小类型）
 pub struct Idle;
 pub struct Running;
@@ -173,7 +173,7 @@ pub struct Process<State> {
 
 状态转换通过方法实现，消费旧状态，返回新状态：
 
-```rust
+```rust,ignore
 impl Process<Idle> {
     // start消费Idle状态的Process，返回Running状态的Process
     pub fn start(self) -> Process<Running> {
@@ -265,7 +265,7 @@ fn main() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 关键点：self（非&self）消费所有权
 impl Connection<Disconnected> {
     pub fn connect(self) -> Connection<Connected> {
@@ -355,7 +355,7 @@ impl Client<Connected> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 // 状态标记
@@ -556,7 +556,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 // 状态标记，使用类型区分构建阶段
@@ -712,7 +712,7 @@ fn main() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::marker::PhantomData;
@@ -857,7 +857,7 @@ fn main() -> io::Result<()> {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 use std::collections::HashMap;
 
@@ -1039,7 +1039,7 @@ fn main() -> Result<(), PaymentError> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 某些状态转换可以逆转
 impl Connection<Connected> {
     pub fn disconnect(self) -> Connection<Disconnected> {
@@ -1187,7 +1187,7 @@ impl Connection<Connected, Authenticated> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::marker::PhantomData;
 use std::pin::Pin;
@@ -1245,7 +1245,7 @@ async fn example() -> Result<(), Error> {
 
 类型状态模式增加了代码量和复杂性：
 
-```rust
+```rust,ignore
 // 无类型状态：一个impl块
 struct Connection {
     state: State,
@@ -1276,7 +1276,7 @@ impl Connection<Connected> {
 
 当状态维度增加时，类型组合呈指数增长：
 
-```rust
+```rust,ignore
 // 2个维度，每个2个状态 = 4种组合
 Connection<Connected, Authenticated>
 Connection<Connected, Anonymous>
@@ -1290,7 +1290,7 @@ Connection<Disconnected, Anonymous>
 
 类型状态难以序列化，因为状态是类型而非值：
 
-```rust
+```rust,ignore
 // 难以存储到数据库
 impl serde::Serialize for Connection<Connected> {
     // 反序列化后恢复为什么类型？
@@ -1303,7 +1303,7 @@ impl serde::Serialize for Connection<Connected> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 类型状态：静态分发，零成本
 let conn = Connection::new().connect().authenticate()?;
 
@@ -1339,7 +1339,7 @@ conn.connect();  // 运行时检查当前状态
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 状态类型使用名词或形容词
 struct Connected;
 struct Authenticated;
@@ -1366,7 +1366,7 @@ impl Connection<Connected> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 /// A database connection.
 ///
 /// The connection uses type states to ensure at compile time that:

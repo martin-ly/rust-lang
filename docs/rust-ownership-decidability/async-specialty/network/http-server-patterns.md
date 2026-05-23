@@ -33,7 +33,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Router, Json, extract::{State, Path},
@@ -99,7 +99,7 @@ async fn main() {
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use actix_web::{web, App, HttpServer, HttpResponse, Result};
 use actix::prelude::*;
 
@@ -162,7 +162,7 @@ async fn main() -> std::io::Result<()> {
 ### 2.1 认证中间件
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use axum::{
     middleware::{self, Next},
     response::Response,
@@ -205,7 +205,7 @@ let app = Router::new()
 ### 2.2 限流中间件
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use std::collections::HashMap;
@@ -265,7 +265,7 @@ async fn rate_limit_middleware<B>(
 ### 3.1 统一错误响应
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use axum::{
     response::{IntoResponse, Response},
     Json,
@@ -335,7 +335,7 @@ async fn handler() -> Result<Json<Data>, AppError> {
 ### 3.2 请求验证
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use validator::{Validate, ValidationError};
 use serde::Deserialize;
 
@@ -369,7 +369,7 @@ async fn create_user(
 ### 4.1 SSE (Server-Sent Events)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use axum::{
     response::sse::{Event, Sse},
     Router,
@@ -401,7 +401,7 @@ let app = Router::new()
 ### 4.2 文件流式下载
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use axum::{
     body::Body,
     response::Response,
@@ -438,7 +438,7 @@ async fn download_file(
 ## 5. 优雅关闭
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tokio::signal;
 
 #[tokio::main]

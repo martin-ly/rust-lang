@@ -303,7 +303,7 @@ fn lock_free_counter() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -478,7 +478,7 @@ cargo rustc --release -- --emit=asm
 ### 内存使用规范
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 
 // 推荐: 使用常量泛型指定大小

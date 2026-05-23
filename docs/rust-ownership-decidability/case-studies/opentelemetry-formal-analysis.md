@@ -54,7 +54,7 @@ OpenTelemetry提供:
 
 > TracerProvider全局注册，线程安全。
 
-```rust
+```rust,ignore
 let provider = TracerProvider::builder()
     .with_simple_exporter(exporter)
     .build();
@@ -72,7 +72,7 @@ global::set_tracer_provider(provider);
 
 > SpanContext跨服务边界传播。
 
-```rust
+```rust,ignore
 // 提取上游上下文
 let parent_context = propagator.extract(&headers);
 
@@ -89,7 +89,7 @@ let span = tracer
 
 > Baggage跨边界传递键值数据。
 
-```rust
+```rust,ignore
 // 设置baggage
 let _ = Context::current_with_baggage(vec![
     KeyValue::new("user.id", user_id),
@@ -125,7 +125,7 @@ let _ = Context::current_with_baggage(vec![
 
 > BatchSpanProcessor聚合后导出。
 
-```rust
+```rust,ignore
 BatchSpanProcessor::builder(exporter)
     .with_max_queue_size(2048)
     .with_scheduled_delay(Duration::from_secs(5))
@@ -140,7 +140,7 @@ BatchSpanProcessor::builder(exporter)
 
 ### 反例 6.1 (Span未结束)
 
-```rust
+```rust,ignore
 // 错误: span未结束
 {
     let span = tracer.start("operation");
@@ -159,7 +159,7 @@ span.end();
 
 ### 反例 6.2 (阻塞导出器)
 
-```rust
+```rust,ignore
 // 错误: 使用简单导出器生产环境
 TracerProvider::builder()
     .with_simple_exporter(exporter)  // 阻塞!

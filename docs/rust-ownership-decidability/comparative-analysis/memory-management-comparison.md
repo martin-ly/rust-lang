@@ -590,7 +590,7 @@ fn static_lifetime() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::sync::Arc;
 use std::cell::RefCell;
@@ -720,7 +720,7 @@ void thread_safe() {
 ### Rust 的生命周期作为区域
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Rust 的生命周期就是区域内存管理
 fn region_based_management() {
     // 区域开始
@@ -758,7 +758,7 @@ fn scoped_threads() {
 ### 竞技场分配器（Arena Allocator）
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 竞技场分配：批量释放
 use bumpalo::Bump;
 
@@ -838,7 +838,7 @@ void arena_cpp() {
 
 Rust 允许在同一程序中使用多种内存管理策略：
 
-```rust
+```rust,ignore
 use std::alloc::{alloc, dealloc, Layout};
 use std::rc::Rc;
 use std::sync::Arc;

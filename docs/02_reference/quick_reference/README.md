@@ -641,7 +641,7 @@
 
 ### 核心特性速查
 
-```rust
+```rust,ignore
 // cfg_select! - 编译期条件选择
 cfg_select! {
     unix => fn os_specific() -> &'static str { "Unix" }

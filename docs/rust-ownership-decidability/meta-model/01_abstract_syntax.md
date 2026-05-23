@@ -271,7 +271,7 @@ program ::=
 ### 9.1 简单借用
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let mut x: i32 = 5;
 let y: &i32 = &x;
 *x  // 使用
@@ -280,7 +280,7 @@ let y: &i32 = &x;
 ### 9.2 可变借用
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let mut x: i32 = 5;
 let y: &mut i32 = &mut x;
 *y = 10;

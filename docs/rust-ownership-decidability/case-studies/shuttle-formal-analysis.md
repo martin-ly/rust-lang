@@ -49,7 +49,7 @@ Shuttle提供:
 
 > Shuttle控制任务调度顺序。
 
-```rust
+```rust,ignore
 #[test]
 fn test_concurrent() {
     shuttle::check_random(
@@ -90,7 +90,7 @@ fn test_concurrent() {
 
 > 通过种子重现特定调度。
 
-```rust
+```rust,ignore
 shuttle::check_random_with_seed(
     || { ... },
     100,
@@ -106,7 +106,7 @@ shuttle::check_random_with_seed(
 
 ### 反例 5.1 (超时依赖)
 
-```rust
+```rust,ignore
 // Shuttle不模拟真实时间
 sleep(Duration::from_secs(1)).await;  // 立即返回
 // 测试不能依赖真实时间

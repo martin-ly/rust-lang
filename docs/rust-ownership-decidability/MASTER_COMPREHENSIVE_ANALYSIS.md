@@ -452,7 +452,7 @@ Rust 的解决方案:
 ### 5.3 生命周期省略规则详解
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 规则 1: 每个引用参数获得独立生命周期
 fn foo(x: &i32)           →  fn foo<'a>(x: &'a i32)
 fn bar(x: &i32, y: &i32)  →  fn bar<'a, 'b>(x: &'a i32, y: &'b i32)

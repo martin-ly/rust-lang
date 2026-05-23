@@ -1,4 +1,5 @@
 # Hello, World
+> **相关概念**: [控制流](../../concept/01_foundation/07_control_flow.md)
 
 > **Bloom 层级**: 理解
 
@@ -122,7 +123,7 @@ cargo run --release
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 println!("Hello, world!");           // 基本用法
 println!("Hello, {}!", "Rust");      // 格式化
 println!("1 + 1 = {}", 1 + 1);       // 表达式

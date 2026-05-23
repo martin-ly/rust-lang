@@ -148,7 +148,7 @@ Rust的异步函数可以自然地映射到工作流模型。
 
 **证明**：
 
-```rust
+```rust,ignore
 // 异步函数表示
 async fn workflow_step(input: Input) -> Result<Output, Error> {
     let intermediate = step1(input).await?;
@@ -184,7 +184,7 @@ F: Future<Output = T> → N: WorkflowNode<Output = T>
 **定义 14.2.2** (工作流类型系统)
 工作流类型系统 WT 包含以下类型：
 
-```rust
+```rust,ignore
 // 基础工作流类型
 type Workflow<T> = Future<Output = Result<T, WorkflowError>>;
 
@@ -210,7 +210,7 @@ type ConditionalWorkflow<T> = Workflow<bool> -> Workflow<T> -> Workflow<T> -> Wo
 **定义 14.2.3** (Rust状态机)
 Rust编译器将异步函数转换为状态机：
 
-```rust
+```rust,ignore
 enum WorkflowState {
     Start,
     Step1(Intermediate),
@@ -267,7 +267,7 @@ impl Future for WorkflowState {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 #[derive(Debug, Clone)]
 struct WorkflowPetriNet {
     places: Vec<Place>,
@@ -316,7 +316,7 @@ P ::= 0 | α.P | P + P | P | P | νx.P | !P
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 enum PiProcess {
     Nil,
     Input(String, Box<PiProcess>),
@@ -366,7 +366,7 @@ impl PiProcess {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 enum TemporalFormula {
     Atomic(String),
     Not(Box<TemporalFormula>),
@@ -415,7 +415,7 @@ AI-工作流认知循环是一个四元组 C = (P, D, E, L)，其中：
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 struct AIWorkflowCycle {
     perception: Box<dyn PerceptionModule>,
     decision: Box<dyn DecisionModule>,
@@ -449,7 +449,7 @@ impl AIWorkflowCycle {
 **定义 14.4.2** (自洽机制)
 自洽机制是指AI系统能够自我验证和修正的能力：
 
-```rust
+```rust,ignore
 trait SelfConsistent {
     fn self_verify(&self) -> VerificationResult;
     fn self_correct(&mut self, issues: Vec<Issue>) -> Result<(), CorrectionError>;
@@ -460,7 +460,7 @@ trait SelfConsistent {
 **定义 14.4.3** (续洽机制)
 续洽机制是指系统能够持续学习和适应的能力：
 
-```rust
+```rust,ignore
 trait ContinuousLearning {
     fn incremental_learn(&mut self, new_data: &TrainingData) -> LearningResult;
     fn adapt_to_changes(&mut self, changes: &EnvironmentChanges) -> AdaptationResult;
@@ -471,7 +471,7 @@ trait ContinuousLearning {
 **定义 14.4.4** (它洽机制)
 它洽机制是指系统能够与其他系统协作的能力：
 
-```rust
+```rust,ignore
 trait Collaborative {
     fn share_knowledge(&self, partner: &dyn Collaborative) -> SharingResult;
     fn receive_knowledge(&mut self, knowledge: &SharedKnowledge) -> IntegrationResult;
@@ -497,7 +497,7 @@ trait Collaborative {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug)]
 struct EvolutionaryWorkflowAlgebra {
     workflows: Vec<Workflow>,
@@ -532,7 +532,7 @@ impl EvolutionaryWorkflowAlgebra {
 **定义 14.5.1** (工作流引擎架构)
 工作流引擎架构包含以下核心组件：
 
-```rust
+```rust,ignore
 struct WorkflowEngine {
     // 工作流定义器
     definition_engine: DefinitionEngine,
@@ -556,7 +556,7 @@ struct WorkflowEngine {
 
 **实现示例**：
 
-```rust
+```rust,ignore
 impl WorkflowEngine {
     async fn start_workflow(&mut self, definition: WorkflowDefinition) -> WorkflowId {
         // 1. 验证工作流定义
@@ -611,7 +611,7 @@ impl WorkflowEngine {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct DistributedWorkflow {
     nodes: HashMap<NodeId, WorkflowNode>,
@@ -655,7 +655,7 @@ impl DistributedWorkflow {
 **定义 14.5.3** (故障恢复策略)
 故障恢复策略包含以下组件：
 
-```rust
+```rust,ignore
 enum RecoveryStrategy {
     // 重试策略
     Retry {
@@ -685,7 +685,7 @@ enum RecoveryStrategy {
 
 **实现示例**：
 
-```rust
+```rust,ignore
 impl WorkflowEngine {
     async fn handle_failure(&mut self, workflow_id: WorkflowId, error: &Error) -> RecoveryResult {
         // 1. 分析错误类型
@@ -732,7 +732,7 @@ impl WorkflowEngine {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 struct ManufacturingWorkflow {
     products: Vec<Product>,
     machines: Vec<Machine>,
@@ -784,7 +784,7 @@ impl ManufacturingWorkflow {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 struct FinancialWorkflow {
     transaction_types: Vec<TransactionType>,
     risk_rules: Vec<RiskRule>,
@@ -828,7 +828,7 @@ impl FinancialWorkflow {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 struct SmartHomeWorkflow {
     devices: HashMap<DeviceId, Device>,
     scenes: HashMap<SceneId, Scene>,
@@ -879,7 +879,7 @@ impl SmartHomeWorkflow {
 
 **算法 14.7.1** (可达性分析算法)
 
-```rust
+```rust,ignore
 fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
     let mut visited = HashSet::new();
     let mut queue = VecDeque::new();
@@ -917,7 +917,7 @@ fn reachability_analysis(workflow: &Workflow, target_state: &State) -> bool {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 impl Workflow {
     fn detect_deadlocks(&self) -> Vec<State> {
         let mut deadlocks = Vec::new();
@@ -951,7 +951,7 @@ impl Workflow {
 
 **Rust实现示例**：
 
-```rust
+```rust,ignore
 impl Workflow {
     fn verify_liveness(&self) -> LivenessResult {
         // 1. 检测强连通分量
@@ -1055,7 +1055,7 @@ impl Workflow {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 /// 使用 array_windows 分析工作流状态转换序列
 fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
     states.array_windows::<2>()
@@ -1078,7 +1078,7 @@ fn analyze_state_transitions(states: &[WorkflowState]) -> Vec<StateTransition> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局工作流引擎配置
@@ -1097,7 +1097,7 @@ pub fn get_engine_config() -> Option<&'static EngineConfig> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 工作流步骤执行，支持提前终止

@@ -185,7 +185,7 @@ fn main() {
 
 **为什么可变借用必须是唯一的？**
 
-```rust
+```rust,ignore
 // 假设允许多个可变借用（危险！）
 fn dangerous_scenario() {
     let mut v = vec![1, 2, 3];
@@ -278,7 +278,7 @@ fn main() {
 
 在 NLL 之前，引用的生命周期与词法作用域绑定：
 
-```rust
+```rust,ignore
 // 旧版 Rust（2015 edition，无 NLL）
 fn old_style() {
     let mut x = 5;
@@ -328,7 +328,7 @@ fn nll_analysis() {
 
 **控制流感知**: NLL 理解控制流结构：
 
-```rust
+```rust,ignore
 fn control_flow_nll() {
     let mut x = 5;
 
@@ -352,7 +352,7 @@ fn control_flow_nll() {
 
 NLL 虽然强大，但仍有无法处理的情况：
 
-```rust
+```rust,ignore
 fn nll_limitation() {
     let mut x = 5;
     let y = &x;
@@ -368,7 +368,7 @@ fn nll_limitation() {
 
 解决方案：缩小 y 的作用域：
 
-```rust
+```rust,ignore
 fn nll_workaround() {
     let mut x = 5;
 
@@ -487,7 +487,7 @@ fn main() {
 
 **显式重新借用**:
 
-```rust
+```rust,ignore
 let r1 = &mut x;
 let r2: &mut i32 = &mut *r1;  // 显式重新借用
 ```
@@ -551,7 +551,7 @@ fn pattern_reborrow() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 fn iterator_invalidation() {
     let mut v = vec![1, 2, 3];
 
@@ -599,7 +599,7 @@ fn solution_iterator() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // ❌ 危险的设计
 struct Parser {
     text: String,
@@ -656,7 +656,7 @@ fn first_word(s: &str) -> &str {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ✅ 显式生命周期标注
 fn first_word<'a>(s: &'a str) -> &'a str {
     &s[0..s.find(' ').unwrap_or(s.len())]
@@ -672,7 +672,7 @@ fn first_word(s: &str) -> &str {  // 编译器自动推断
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 // ❌ 错误：引用不能跨越线程边界
@@ -881,7 +881,7 @@ func main() {
 ### 7.1 借用与复制的性能对比
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 // 测试数据
@@ -952,7 +952,7 @@ fn further_optimized(data: &mut [i32]) {
 ### 7.3 共享借用的缓存友好性
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 场景：并行读取大量数据
 fn parallel_read(data: &[f64]) -> f64 {
     use rayon::prelude::*;
@@ -1050,7 +1050,7 @@ fn slice_patterns(data: &mut [i32]) {
 ### 8.4 泛型与借用
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 使用 Borrow trait 抽象借用
 use std::borrow::Borrow;
 

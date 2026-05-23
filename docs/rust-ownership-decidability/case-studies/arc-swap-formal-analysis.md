@@ -51,7 +51,7 @@ arc-swap提供:
 
 > load()使用原子操作，不阻塞。
 
-```rust
+```rust,ignore
 let config: ArcSwap<Config> = ArcSwap::new(Arc::new(Config::default()));
 
 // 多线程并发读取
@@ -64,7 +64,7 @@ let cfg = config.load();  // 无锁，获取Arc
 
 > store()原子替换指针。
 
-```rust
+```rust,ignore
 config.store(Arc::new(new_config));
 // 原Arc延迟释放
 ```
@@ -79,7 +79,7 @@ config.store(Arc::new(new_config));
 
 > 保证写入对后续读取可见。
 
-```rust
+```rust,ignore
 // Thread A: store(Release)
 config.store(Arc::new(cfg));
 
@@ -97,7 +97,7 @@ let cfg = config.load();  // 看到完整cfg
 
 > 旧Arc在所有读取者完成后释放。
 
-```rust
+```rust,ignore
 {
     let guard = config.load();
     // 旧Config保持有效
@@ -113,7 +113,7 @@ let cfg = config.load();  // 看到完整cfg
 
 ### 反例 5.1 (频繁交换)
 
-```rust
+```rust,ignore
 // 频繁交换可能导致内存堆积
 loop {
     config.store(Arc::new(load_config()));
@@ -125,7 +125,7 @@ loop {
 
 ### 反例 5.2 (递归锁)
 
-```rust
+```rust,ignore
 // 不要在load guard内store
 let guard = config.load();
 config.store(Arc::new(Config::new()));  // 可能死锁/性能问题

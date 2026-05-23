@@ -113,7 +113,7 @@ Tonic是Rust的gRPC实现，提供:
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Message for MyProto {
     fn encode(&self, buf: &mut impl BufMut) -> Result<(), EncodeError> {
         // 按proto格式编码
@@ -143,7 +143,7 @@ impl Message for MyProto {
 ### 定义 3.1 (Service trait)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[tonic::async_trait]
 trait Greeter {
     async fn say_hello(
@@ -162,7 +162,7 @@ trait Greeter {
 
 代码生成:
 
-```rust
+```rust,ignore
 // 生成的trait
 #[tonic::async_trait]
 pub trait Greeter: Send + Sync + 'static {
@@ -181,7 +181,7 @@ pub trait Greeter: Send + Sync + 'static {
 ### 定义 3.2 (Client stub)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 pub struct GreeterClient<T> {
     inner: tonic::client::Grpc<T>,
 }
@@ -221,7 +221,7 @@ rpc ListFeatures(Rectangle) returns (stream Feature);
 
 **证明**:
 
-```rust
+```rust,ignore
 #[tonic::async_trait]
 trait RouteGuide {
     type ListFeaturesStream: Stream<Item = Result<Feature, Status>> + Send;
@@ -255,7 +255,7 @@ rpc RouteChat(stream RouteNote) returns (stream RouteNote);
 
 **实现**:
 
-```rust
+```rust,ignore
 async fn route_chat(
     &self,
     request: Request<Streaming<RouteNote>>,
@@ -299,7 +299,7 @@ async fn route_chat(
 ### 定义 5.1 (Interceptor)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 type Interceptor = fn(Request<()>) -> Result<Request<()>, Status>;
 ```
 
@@ -310,7 +310,7 @@ type Interceptor = fn(Request<()>) -> Result<Request<()>, Status>;
 
 **实现**:
 
-```rust
+```rust,ignore
 let interceptor = |mut req: Request<()>| {
     req.metadata_mut().insert("x-auth", "token".parse()?);
     Ok(req)
@@ -366,7 +366,7 @@ Server::builder()
 
 **实现**:
 
-```rust
+```rust,ignore
 impl From<Error> for Status {
     fn from(e: Error) -> Self {
         match e {
@@ -406,7 +406,7 @@ impl From<Error> for Status {
 ### 反例 8.1 (流耗尽)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 async fn bad_handler(request: Request<Streaming<Data>>) {
     let stream = request.into_inner();
     // 错误: 没有消费流
@@ -425,7 +425,7 @@ async fn good_handler(request: Request<Streaming<Data>>) {
 ### 反例 8.2 (超时处理)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 需要设置超时
 let timeout = Duration::from_secs(5);
 let response = tokio::time::timeout(timeout, client.say_hello(request)).await??;

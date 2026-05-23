@@ -326,7 +326,7 @@ fn runtime_borrow_checking() {
 
 **为什么必须运行时？**
 
-```rust
+```rust,ignore
 fn conditional_borrow(flag: bool) {
     let cell = RefCell::new(5);
 
@@ -538,7 +538,7 @@ Rust的零成本抽象原则:
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 优先使用编译时检查（零成本）
 fn prefer_compile_time() {
     let data = vec![1, 2, 3];
@@ -691,7 +691,7 @@ struct GoodNode {
 ### 9.2 代码审查检查清单
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 检查清单：运行时资源管理
 
 // ✅ 正确：编译时管理

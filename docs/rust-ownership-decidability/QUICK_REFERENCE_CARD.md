@@ -34,7 +34,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 1. 唯一性     // 每个值有且仅有一个所有者
 2. 作用域绑定 // 所有者离开作用域时释放值
 3. 可转移性   // 所有权可以转移 (Move)
@@ -46,7 +46,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 不可变借用: 多个 &T 同时存在
 let r1 = &data;
 let r2 = &data;  // OK
@@ -65,7 +65,7 @@ let r = &mut data;  // OK
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 编译器自动推断 (省略规则)
 fn first(x: &str) -> &str { &x[0..1] }
 
@@ -97,7 +97,7 @@ let s: &'static str = "编译期字符串";
 ### RAII 模式
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 pub struct LockGuard<'a> {
     lock: &'a Lock,
 }
@@ -112,7 +112,7 @@ impl<'a> Drop for LockGuard<'a> {
 ### 类型状态模式
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub struct Ready;
 pub struct Running;
 
@@ -135,7 +135,7 @@ let data = RefCell::new(5);
 ## ⚡ 并发 Send/Sync
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // Send: 可跨线程转移所有权
 // Sync: 可跨线程共享引用 (&T: Send)
 

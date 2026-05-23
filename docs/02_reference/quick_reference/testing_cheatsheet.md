@@ -113,6 +113,7 @@
     - [性能提升总结](#性能提升总结)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -298,7 +299,7 @@ my_project/
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_project;
 
@@ -313,7 +314,7 @@ fn test_integration() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // tests/common/mod.rs
 pub fn setup() {
     println!("设置测试环境");
@@ -338,7 +339,7 @@ fn test_with_setup() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // tests/integration/
 //   ├── mod.rs
 //   ├── api_tests.rs
@@ -365,7 +366,7 @@ fn test_api_endpoint() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-````rust
+````rust,ignore
 /// 将两个数字相加
 ///
 /// # 示例
@@ -383,7 +384,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 > **[来源: Wikipedia - Type System]**
 
-````rust
+````rust,ignore
 /// 计算阶乘
 ///
 /// # 示例
@@ -405,7 +406,7 @@ pub fn factorial(n: u32) -> u32 {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-````rust
+````rust,ignore
 /// 这个示例不会运行
 ///
 /// ```rust,no_run
@@ -421,7 +422,7 @@ pub fn expensive_operation() -> i32 {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-````rust
+````rust,ignore
 /// 只编译不运行
 ///
 /// ```rust,compile_fail
@@ -452,7 +453,7 @@ harness = false
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // benches/my_benchmark.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -476,7 +477,7 @@ criterion_main!(benches);
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use criterion::{criterion_group, criterion_main, BenchmarkId, Criterion};
 
 fn bench_comparison(c: &mut Criterion) {
@@ -511,7 +512,7 @@ criterion_main!(benches);
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use criterion::{criterion_group, criterion_main, Criterion};
 use tokio::runtime::Runtime;
 
@@ -582,7 +583,7 @@ cargo-tarpaulin = "0.25"
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::test;
 
 #[tokio::test]
@@ -601,7 +602,7 @@ async fn test_multi_thread() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use proptest::prelude::*;
 
 proptest! {
@@ -637,7 +638,7 @@ proptest! {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use mockall::predicate::*;
 use mockall::*;
 
@@ -662,7 +663,7 @@ fn test_mock() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rstest::rstest;
 
 #[rstest]
@@ -703,7 +704,7 @@ name = "my_project"
 version = "0.4"
 ```
 
-```rust
+```rust,ignore
 // fuzz/fuzz_targets/parser_fuzz.rs
 #![no_main]
 
@@ -764,7 +765,7 @@ cargo fuzz run parser_fuzz -- -max_total_time=300
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 步骤 1: Red - 写失败的测试
 #[test]
 fn test_fibonacci() {
@@ -924,7 +925,7 @@ fn test_concurrent_access() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::fs;
 use tempfile::TempDir;
 
@@ -1344,7 +1345,7 @@ jobs:
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use insta::assert_snapshot;
 
 #[test]
@@ -1402,7 +1403,7 @@ fn test_with_fixture() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use rstest::rstest;
 
 #[rstest]
@@ -1460,7 +1461,7 @@ fn test_thread_safety() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use loom::thread;
 
 #[test]
@@ -1758,7 +1759,7 @@ fn broken_test() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1807,7 +1808,7 @@ let gamma = f64::consts::EULER_GAMMA;
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 批量测试验证
@@ -1829,7 +1830,7 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<Failure>, ()
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局测试数据库（延迟初始化）

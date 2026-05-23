@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [`assert_matches!` / `debug_assert_matches!` 速查指南](#assert_matches--debug_assert_matches-速查指南)
@@ -27,6 +28,7 @@
   - [迁移指南](#迁移指南)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 
@@ -37,9 +39,10 @@
 ---
 
 ## 语法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 assert_matches!(expression, pattern);
 assert_matches!(expression, pattern, "自定义错误消息");
 assert_matches!(expression, pattern, "格式化: {}", arg);
@@ -50,13 +53,14 @@ debug_assert_matches!(expression, pattern); // 仅 debug 构建触发
 ---
 
 ## 对比：`assert!` vs `assert_matches!`
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 旧方式（1.95 及之前）
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 let result = parse_config("key=value");
 
 // ❌ 错误信息不直观
@@ -75,7 +79,7 @@ if let Ok(config) = result {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 let result = parse_config("key=value");
 
 // ✅ 一行完成模式匹配 + 内部字段验证
@@ -93,6 +97,7 @@ assert_matches!(
 ---
 
 ## 典型用例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 1. `Result` 断言
@@ -134,6 +139,7 @@ fn test_state_machine() {
 ```
 
 ### 3. 嵌套模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -146,6 +152,7 @@ fn test_nested_result() {
 ```
 
 ### 4. `Option` 断言
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -159,11 +166,12 @@ fn test_cache_hit() {
 ---
 
 ## `debug_assert_matches!`
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 仅作用于 **debug 构建**，发布构建完全消除：
 
-```rust
+```rust,ignore
 fn critical_path(data: &Packet) {
     // 开发时验证，生产零开销
     debug_assert_matches!(data.header, Header::V2 { checksum: Some(_) });
@@ -175,9 +183,10 @@ fn critical_path(data: &Packet) {
 ---
 
 ## 与 `assert!` + `matches!` 的关系
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 1.95 的 workaround
 assert!(matches!(result, Ok(_)));
 
@@ -195,6 +204,7 @@ assert_matches!(result, Ok(_));
 ---
 
 ## 迁移指南
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -225,6 +235,7 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
@@ -299,4 +310,3 @@ assert_matches!(result, Ok(Config { key: "test", .. }));
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

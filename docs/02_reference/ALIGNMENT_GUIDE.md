@@ -17,6 +17,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 对齐知识综合指南](#rust-对齐知识综合指南)
@@ -50,6 +51,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录 {#-目录}
 >
@@ -86,6 +88,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -172,7 +175,7 @@ assert_eq!(size_of::<Example>(), 24);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 默认 #[repr(Rust)]：编译器可重排字段以优化
 struct DefaultLayout { a: u8; b: u64; }
 
@@ -207,7 +210,7 @@ struct CLayoutAligned { x: u64; y: u64; }
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 大字段后置导致多出填充
 struct Bad { a: u8; b: u64; c: u8; }  // 24 bytes
 
@@ -221,7 +224,7 @@ struct Good { b: u64; a: u8; c: u8; } // 16 bytes
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::num::NonZeroUsize;
 
 /// 将 size 向上对齐到 alignment 的整数倍
@@ -245,7 +248,7 @@ fn align_up_div_ceil(size: usize, alignment: NonZeroUsize) -> usize {
 
 `std::alloc::Layout` 描述内存块的大小与对齐，用于 `alloc`、`GlobalAlloc` 等。
 
-```rust
+```rust,ignore
 use std::alloc::Layout;
 
 // 构造布局：size 和 align 必须满足约束（align 为 2 的幂，size 为 align 的倍数等）
@@ -274,6 +277,7 @@ let aligned = layout.align_to(Layout::new::<u64>().align()).unwrap();
 ---
 
 ## 三、格式化对齐
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 输出文本的左右/居中排版，详见 [strings_formatting_cheatsheet.md](./quick_reference/strings_formatting_cheatsheet.md#对齐和填充)。
@@ -290,6 +294,7 @@ println!("{:*>10}", x);  // 右对齐，* 填充
 ---
 
 ## 四、unsafe 与对齐
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 裸指针解引用前提与 UB 情形
@@ -347,6 +352,7 @@ let b: u32 = unsafe { std::mem::transmute::<u32, u32>(a) };
 ---
 
 ## 五、缓存行对齐与并发
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 伪共享（False Sharing）
@@ -377,6 +383,7 @@ struct CacheLinePadded {
 *详见* [c01 09_性能优化参考](../../crates/c01_ownership_borrow_scope/docs/tier_03_references/09_性能优化参考.md#32-缓存友好设计)
 
 ### 5.3 工具验证与量化数据
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **`cargo rustc -- -Z print-type-sizes`**：查看类型大小与对齐
@@ -392,6 +399,7 @@ struct CacheLinePadded {
 ---
 
 ## 六、权威来源（非技术对齐）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **说明**：此处「对齐」指项目文档与官方发布的一致性，与内存对齐无技术关联。技术读者可跳过。
@@ -401,6 +409,7 @@ struct CacheLinePadded {
 ---
 
 ## 七、对齐选型决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -424,9 +433,11 @@ struct CacheLinePadded {
 ---
 
 ## 八、相关文档与示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 项目内文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 主题 | 路径 |
@@ -438,6 +449,7 @@ struct CacheLinePadded {
 | 格式化对齐 | [strings_formatting_cheatsheet](./quick_reference/strings_formatting_cheatsheet.md) |
 
 ### 代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模块 | 示例 |
@@ -448,6 +460,7 @@ struct CacheLinePadded {
 | c08 | `rust_192_features` align_size |
 
 ### 研究笔记
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [ownership_model](../research_notes/formal_methods/ownership_model.md) - transmute 形式化约束
@@ -463,6 +476,7 @@ struct CacheLinePadded {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -474,6 +488,7 @@ struct CacheLinePadded {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [02_reference 目录](./README.md)
@@ -601,4 +616,3 @@ struct CacheLinePadded {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

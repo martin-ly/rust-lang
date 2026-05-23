@@ -86,7 +86,7 @@ miri run  # 或 cargo miri test
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Kani 验证示例
 #[kani::proof]
 fn check_vector_push() {
@@ -111,7 +111,7 @@ fn check_vector_push() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Prusti 契约示例
 use prusti_contracts::*;
 

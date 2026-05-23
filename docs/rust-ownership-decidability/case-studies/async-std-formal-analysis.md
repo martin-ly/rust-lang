@@ -104,7 +104,7 @@ $$
 
 **读取文件**:
 
-```rust
+```rust,ignore
 // std (同步)
 let content = std::fs::read_to_string("file.txt")?;
 
@@ -130,7 +130,7 @@ let content = async_std::fs::read_to_string("file.txt").await?;
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 pub mod task {
     pub fn spawn<F, T>(future: F) -> JoinHandle<T>
     where F: Future<Output = T> + Send + 'static,
@@ -146,7 +146,7 @@ pub mod task {
 
 **证明**:
 
-```rust
+```rust,ignore
 use async_std::task;
 
 async fn my_code() {
@@ -185,7 +185,7 @@ Created ──► Spawned ──► Running ──► Completed
 
 **证明**:
 
-```rust
+```rust,ignore
 pub fn spawn<F, T>(future: F) -> JoinHandle<T>
 where
     F: Future<Output = T> + Send + 'static,
@@ -208,7 +208,7 @@ where
 ### 定义 3.2 (取消机制)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub struct JoinHandle<T> {
     // 可用于取消任务
 }
@@ -225,7 +225,7 @@ impl<T> JoinHandle<T> {
 
 **证明**:
 
-```rust
+```rust,ignore
 async fn cancellable() {
     let resource = acquire().await;
 
@@ -259,7 +259,7 @@ async fn cancellable() {
 ### 定义 4.1 (Stream trait)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 trait Stream {
     type Item;
 
@@ -285,13 +285,13 @@ trait Stream {
 
 **Functor**:
 
-```rust
+```rust,ignore
 stream.map(f).map(g) = stream.map(|x| g(f(x)))
 ```
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<S: Stream> Stream for Map<S, F> {
     type Item = U;
 
@@ -314,7 +314,7 @@ impl<S: Stream> Stream for Map<S, F> {
 
 **证明**:
 
-```rust
+```rust,ignore
 use async_std::stream;
 
 let mut s = stream::repeat(1).fuse();
@@ -348,7 +348,7 @@ while let Some(v) = s.next().await {
 
 **证明**:
 
-```rust
+```rust,ignore
 pub struct Mutex<T> {
     // 内部使用阻塞队列
 }
@@ -386,7 +386,7 @@ impl<T> Mutex<T> {
 ### 定义 5.1 (Channel类型)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub fn channel<T>(cap: usize) -> (Sender<T>, Receiver<T>);
 ```
 
@@ -397,7 +397,7 @@ pub fn channel<T>(cap: usize) -> (Sender<T>, Receiver<T>);
 
 **证明**:
 
-```rust
+```rust,ignore
 async fn producer(tx: Sender<Data>) {
     loop {
         let data = produce().await;
@@ -431,7 +431,7 @@ async fn producer(tx: Sender<Data>) {
 
 **实现方式**:
 
-```rust
+```rust,ignore
 pub async fn read(path: impl AsRef<Path>) -> Result<Vec<u8>> {
     spawn_blocking(|| std::fs::read(path)).await
 }
@@ -461,7 +461,7 @@ pub async fn read(path: impl AsRef<Path>) -> Result<Vec<u8>> {
 
 **实现**:
 
-```rust
+```rust,ignore
 use async_std::net::TcpStream;
 use async_std::os::unix::io::AsRawFd;
 
@@ -485,7 +485,7 @@ async fn zero_copy_sendfile(from: File, to: TcpStream) -> Result<()> {
 
 **问题**:
 
-```rust
+```rust,ignore
 // 在Tokio运行时中调用async-std API
 #[tokio::main]
 async fn main() {
@@ -502,7 +502,7 @@ async fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 使用兼容性层
 #[async_std::main]
 async fn main() {
@@ -520,7 +520,7 @@ async fn main() {
 ### 反例 8.1 (阻塞操作)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 async fn bad() {
     // 错误: 在异步代码中阻塞
     std::thread::sleep(Duration::from_secs(1));
@@ -535,7 +535,7 @@ async fn good() {
 ### 反例 8.2 (运行时混用)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() {
     // 可能失败

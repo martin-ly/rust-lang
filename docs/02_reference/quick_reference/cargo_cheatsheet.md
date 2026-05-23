@@ -80,6 +80,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -108,6 +109,7 @@ cargo init --lib
 ```
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [📦 Cargo 速查卡 {#-cargo-速查卡}](#-cargo-速查卡--cargo-速查卡)
@@ -178,6 +180,7 @@ cargo init --lib
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ### 项目结构
 
@@ -346,6 +349,7 @@ cargo bench --bench my_benchmark test_name
 ---
 
 ## 📚 依赖管理 {#-依赖管理}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 添加依赖
@@ -425,6 +429,7 @@ cargo audit fix
 ---
 
 ## 📤 发布命令 {#-发布命令}
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 发布准备
@@ -463,6 +468,7 @@ cargo release --workspace --dry-run
 ---
 
 ## 🏢 工作空间 {#-工作空间}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 工作空间命令
@@ -503,6 +509,7 @@ tokio = { version = "1.0", features = ["full"] }
 ---
 
 ## ⚙️ 配置文件 {#️-配置文件}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Cargo.toml 结构
@@ -564,6 +571,7 @@ serde = ["dep:serde"]
 ---
 
 ## 🛠️ 常用工具 {#️-常用工具}
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 代码格式化
@@ -653,6 +661,7 @@ cargo expand my_function
 ---
 
 ## 🎯 常用别名 {#-常用别名}
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 配置别名
@@ -695,6 +704,7 @@ cargo clippy-all
 ---
 
 ## 📊 常用工作流 {#-常用工作流}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 开发工作流
@@ -765,6 +775,7 @@ cargo publish
 ---
 
 ## 🔍 故障排查 {#-故障排查}
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 清理和重建
@@ -816,6 +827,7 @@ cargo build --target <target>
 ---
 
 ## 🚫 反例速查 {#-反例速查}
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 反例 1: 依赖版本冲突
@@ -854,6 +866,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [工具链文档索引](../../06_toolchain/README.md)
@@ -861,6 +874,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 - [Cargo 包管理与工作空间索引（项目内）](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
 
 ## 🧩 相关示例代码 {#-相关示例代码}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 这些示例可帮助你把 Cargo 的核心命令串成完整工作流：
@@ -877,9 +891,11 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
   - `cargo run -p c12_wasm --example 02_string_operations`
 
 ## 📚 相关资源 {#-相关资源}
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Cargo 官方文档](https://doc.rust-lang.org/cargo/)
@@ -887,6 +903,7 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 - [Cargo 参考手册](https://doc.rust-lang.org/cargo/reference/)
 
 ### 项目内部文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Cargo 包管理完整文档](../../../crates/c02_type_system/docs/cargo_package_management/README.md)
@@ -894,9 +911,11 @@ tempfile = "3.0"  # 若仅测试用，不应放这里
 - [Cargo 工作空间指南](../../archive/deprecated_20260318/02_cargo_workspace_guide.md)
 
 ## 🎯 使用场景 {#-使用场景}
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 场景 1: 多平台库开发
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```toml
@@ -928,6 +947,7 @@ alloc = []
 ```
 
 ### 场景 2: 工作空间发布管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```toml
@@ -977,6 +997,7 @@ $ cargo publish -p app
 ```
 
 ### 场景 3: 性能优化构建配置
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```toml
@@ -1020,9 +1041,11 @@ $ cargo bloat --release
 ---
 
 ## 📐 形式化方法链接 {#-形式化方法链接}
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 理论基础
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 形式化文档 | 描述 |
@@ -1032,6 +1055,7 @@ $ cargo bloat --release
 | **Trait 系统** | [trait_system_formalization](../../research_notes/type_theory/trait_system_formalization.md) | 特征组合的兼容性 |
 
 ### 形式化定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 CARGO-T1（依赖解析正确性）**: 若 Cargo.toml 中的依赖约束可满足，则存在唯一的版本选择满足所有约束。
@@ -1041,6 +1065,7 @@ $ cargo bloat --release
 ---
 
 ### 相关速查卡
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [模块系统速查卡](./modules_cheatsheet.md) - Crate 和模块
@@ -1059,14 +1084,16 @@ $ cargo bloat --release
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1116,6 +1143,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1400,4 +1428,3 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

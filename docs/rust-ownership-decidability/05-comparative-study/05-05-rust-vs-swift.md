@@ -309,7 +309,7 @@ class HTMLElement {
 
 **Rust 解决方案:**
 
-```rust
+```rust,ignore
 // Rust 循环引用解决方案
 
 // 1. 所有权转移 (默认)
@@ -682,7 +682,7 @@ if case .success(let data) = result {
 
 **Rust enum:**
 
-```rust
+```rust,ignore
 // Rust 枚举相同概念
 enum Result<T, E> {
     Ok(T),
@@ -755,7 +755,7 @@ let drawables: [any Drawable] = [Circle(), Rectangle()]
 
 **Rust Trait:**
 
-```rust
+```rust,ignore
 // Trait 定义
 pub trait Drawable {
     fn draw(&self);
@@ -1093,7 +1093,7 @@ func updateUI() async {
 
 **Rust async/await:**
 
-```rust
+```rust,ignore
 use tokio;
 
 // 异步函数
@@ -1255,7 +1255,7 @@ func wrapper(_ operation: () throws -> Void) rethrows {
 
 **Rust:**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 fn operation_a() -> Result<()> {
@@ -1565,7 +1565,7 @@ func fetchMultipleUsers() async throws -> [User] {
 
 **Rust:**
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]

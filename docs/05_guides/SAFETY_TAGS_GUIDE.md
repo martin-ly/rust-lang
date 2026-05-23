@@ -62,7 +62,7 @@ Safety Tags 愿景:
 ### Tag 语法设想
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 基础 tag：前置条件
 #[safety_tag(pre: valid_ptr(self), aligned(self))]
 unsafe fn as_ref_unchecked(&self) -> &T { ... }

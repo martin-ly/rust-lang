@@ -1,6 +1,7 @@
 ﻿# 🔷 Rust 类型系统速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔷 Rust 类型系统速查卡](#-rust-类型系统速查卡)
@@ -75,6 +76,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c02_type_system/docs/README.md) | [代码示例](../../../crates/c02_type_system/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -160,6 +162,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -273,7 +276,7 @@ impl Summary for Article {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 方式 1: impl Trait
 fn notify(item: &impl Summary) {
     println!("{}", item.summarize());
@@ -301,7 +304,7 @@ where
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // impl Trait 语法
 fn returns_summarizable() -> impl Summary {
     Article {
@@ -326,7 +329,7 @@ fn returns_trait_object() -> Box<dyn Summary> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // From trait
 impl From<i32> for MyType {
     fn from(val: i32) -> Self {
@@ -346,7 +349,7 @@ let my: MyType = 42.into();
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::convert::TryFrom;
 
 impl TryFrom<i32> for PositiveInt {
@@ -379,6 +382,7 @@ let c = 100i32 as u8;  // 100
 ---
 
 ## 📦 泛型编程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 泛型函数
@@ -429,7 +433,7 @@ impl Point<f32> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 trait Iterator {
     type Item;  // 关联类型
 
@@ -448,6 +452,7 @@ impl Iterator for Counter {
 ---
 
 ## 🎭 型变（Variance）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 协变（Covariant）- &T
@@ -498,6 +503,7 @@ fn invariant<'a, 'b>(x: &'a mut i32, y: &'b mut i32) {
 ---
 
 ## 🔍 常用 Trait
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### Debug & Display
@@ -544,7 +550,7 @@ let d2 = d1.clone();  // 显式克隆
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 #[derive(PartialEq, Eq)]
 struct Point { x: i32, y: i32 }
 
@@ -573,6 +579,7 @@ assert!(p1 < p2);
 ---
 
 ## 🧬 高级类型
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 类型别名
@@ -594,7 +601,7 @@ fn distance() -> Kilometers {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 fn never_returns() -> ! {
     panic!("This function never returns!");
 }
@@ -624,6 +631,7 @@ struct MyType<T> {
 ---
 
 ## 🎯 常见模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 新类型模式（Newtype）
@@ -649,7 +657,7 @@ fn run(distance: Meters, time: Seconds) {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 struct Locked;
 struct Unlocked;
 
@@ -685,7 +693,7 @@ door.open();  // ✅ OK
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 struct EmailBuilder<Subject, Body> {
     to: String,
     subject: Subject,
@@ -726,13 +734,14 @@ impl EmailBuilder<Set<String>, Set<String>> {
 ---
 
 ## ⚡ 性能提示
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 单态化（Monomorphization）
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 泛型函数会为每个具体类型生成一份代码
 fn generic<T: Display>(t: T) {
     println!("{}", t);
@@ -752,7 +761,7 @@ generic("hello"); // 生成 generic::<&str>
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 静态分派（单态化）
 fn static_dispatch<T: Summary>(item: &T) {
     item.summarize();
@@ -774,7 +783,7 @@ fn dynamic_dispatch(item: &dyn Summary) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use std::mem::{size_of, align_of};
 
 // 对齐 = 各字段对齐的最大值
@@ -794,6 +803,7 @@ struct CacheAligned { data: [u8; 64]; }
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 反例 1: 为 Copy 类型实现 Clone 不一致
@@ -802,7 +812,7 @@ struct CacheAligned { data: [u8; 64]; }
 
 **错误示例**:
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone)]
 struct Bad {
     data: String,  // ❌ String 不是 Copy，不能 derive Copy
@@ -828,7 +838,7 @@ struct Good {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
@@ -869,6 +879,7 @@ fn take_slice<T>(t: &[T]) {}
 ---
 
 ## 🔗 快速跳转
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 深入学习
@@ -901,9 +912,11 @@ fn take_slice<T>(t: &[T]) {}
 ---
 
 ## 💡 使用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景 1: 状态机类型系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -974,6 +987,7 @@ fn main() {
 ```
 
 ### 场景 2: 类型安全的配置构建
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -1031,6 +1045,7 @@ fn main() {
 ```
 
 ### 场景 3: 零成本抽象的数据库查询
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -1087,9 +1102,11 @@ fn main() {
 ---
 
 ## ⚠️ 边界情况
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 边界 1: 动态大小类型 (DST)
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -1113,6 +1130,7 @@ fn main() {
 ```
 
 ### 边界 2: 递归类型与间接
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -1149,9 +1167,10 @@ fn main() {
 ```
 
 ### 边界 3: 生命周期子类型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn longer_lifetime<'a: 'b, 'b>(x: &'a str, _y: &'b str) -> &'b str {
     x  // 'a 比 'b 活得长，所以可以返回 &'b str
 }
@@ -1174,9 +1193,11 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.93.0 新特性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### MaybeUninit API 增强
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **改进**: 新增多个安全操作方法
@@ -1196,6 +1217,7 @@ unsafe { uninit.assume_init_drop() };
 ```
 
 ### 切片到数组转换
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -1209,9 +1231,11 @@ let array: &[i32; 4] = slice.as_array().unwrap();
 ---
 
 ## Rust 1.92.0 新特性（历史）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### const 上下文增强
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **改进**: 支持对非静态常量的引用
@@ -1231,12 +1255,14 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统完整文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统 README](../../../crates/c02_type_system/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 以下示例位于 `crates/c02_type_system/examples/`，可直接运行（例如：`cargo run -p c02_type_system --example type_system_example`）。
@@ -1249,21 +1275,25 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 官方文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 类型系统文档](https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html)
 - [Rust Reference - Types](https://doc.rust-lang.org/reference/types.html)
 
 ### 项目内部文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [类型系统完整文档](../../../crates/c02_type_system/docs/README.md)
 - [类型系统研究笔记](../../research_notes/type_theory/README.md)
 
 ### 相关速查卡
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与类型系统
@@ -1282,6 +1312,7 @@ const REF: &i32 = &VALUE;  // ✅ 现在支持
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -1312,6 +1343,7 @@ Rust 1.95+ 重要更新：
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1661,4 +1693,3 @@ Rust 1.95+ 重要更新：
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
-

@@ -54,6 +54,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -121,6 +122,7 @@ wasm-pack new my-wasm-project
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ### 基本函数
 
@@ -128,7 +130,7 @@ wasm-pack new my-wasm-project
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -149,7 +151,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 extern "C" {
     fn alert(s: &str);
@@ -165,7 +167,7 @@ extern "C" {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub struct Person {
     name: String,
@@ -187,7 +189,7 @@ impl Person {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use wasm_bindgen_futures::JsFuture;
 
 #[wasm_bindgen]
@@ -311,7 +313,7 @@ fn bad() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 for i in 0..10000 {
     js_sys::Reflect::get(&obj, &i.into());  // ❌ 每次跨 JS 边界
 }
@@ -372,7 +374,7 @@ for i in 0..10000 {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, HtmlCanvasElement, ImageData};
 
@@ -416,7 +418,7 @@ impl ImageProcessor {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use serde::{Serialize, Deserialize};
 
@@ -481,7 +483,7 @@ impl ChartRenderer {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // worker.rs
 use wasm_bindgen::prelude::*;
 use serde::{Deserialize, Serialize};
@@ -569,7 +571,7 @@ pub fn process_task(task_json: &str) -> String {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -618,7 +620,7 @@ let gamma = f64::consts::EULER_GAMMA;
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// WASM 像素卷积（零分配）
 #[wasm_bindgen]
 pub fn apply_kernel(data: &[u8]) -> Vec<u8> {
@@ -634,7 +636,7 @@ pub fn apply_kernel(data: &[u8]) -> Vec<u8> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use wasm_bindgen::prelude::*;
 

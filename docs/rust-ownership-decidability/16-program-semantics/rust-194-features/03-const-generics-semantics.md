@@ -521,7 +521,7 @@ fn array_type_equivalence() {
 ### 7.3 类型级别的常量计算
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 在类型级别进行计算
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
@@ -584,7 +584,7 @@ where
 ### 7.5 Const 表达式求值
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // const fn 与 const generic 结合
 const fn pow2(n: usize) -> usize {
     1 << n
@@ -625,7 +625,7 @@ fn const_eval_example() {
 ### 7.6 数组长度泛型
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 处理不同长度的数组
 fn concatenate<T: Copy, const N: usize, const M: usize>(
     a: [T; N],
@@ -663,7 +663,7 @@ fn split<T: Copy, const N: usize, const M: usize>(
 ### 7.7 泛型特化
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 基于 const generic 的特化
 trait Process {
     fn process(&self);

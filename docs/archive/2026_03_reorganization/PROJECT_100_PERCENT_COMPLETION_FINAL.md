@@ -82,7 +82,7 @@
 
 **迁移详情**:
 
-```rust
+```rust,ignore
 // 旧代码
 use once_cell::sync::Lazy;
 static CONFIG: Lazy<String> = Lazy::new(|| load_config());

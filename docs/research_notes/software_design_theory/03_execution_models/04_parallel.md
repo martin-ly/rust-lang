@@ -128,7 +128,7 @@ $\mathit{par\_map}(f, S) = \mathit{merge}(\mathit{map}(f, S_1), \ldots, \mathit{
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 let v: Vec<i32> = (0..1000).collect();
@@ -240,7 +240,7 @@ loop {
 ## 分治与递归并行
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn parallel_quicksort<T: Send + Ord>(v: &mut [T]) {

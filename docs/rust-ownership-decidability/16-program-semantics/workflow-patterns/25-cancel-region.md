@@ -314,7 +314,7 @@ $$
 
 Rust 中实现取消区域的核心工具包括 `CancellationToken`、`tokio::select!`、作用域退出和 `JoinSet::abort_all()`：
 
-```rust
+```rust,ignore
 use tokio_util::sync::CancellationToken;
 use tokio::task::JoinSet;
 use std::time::Duration;
@@ -374,7 +374,7 @@ where
 
 使用 `futures::future::Abortable` 和结构化并发实现类型安全的区域取消：
 
-```rust
+```rust,ignore
 use futures::future::Abortable;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -437,7 +437,7 @@ impl<T: Send + 'static> JoinSetRegion<T> {
 
 > **[来源: Tokio Docs - tokio::task]** · **[来源: TRPL Ch. 16 - Concurrency]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio_util::sync::CancellationToken;
 use std::time::Duration;
@@ -715,7 +715,7 @@ sequenceDiagram
 
 **场景**: 向多个下游服务并行发起请求，如果整体超时，取消所有未完成的请求。
 
-```rust
+```rust,ignore
 pub async fn fetch_with_timeout_cancel(
     endpoints: Vec<String>, overall_timeout: Duration,
 ) -> Vec<Result<String, String>> {
@@ -750,7 +750,7 @@ async fn fetch_endpoint(endpoint: &str) -> Result<String, String> {
 
 **场景**: 在测试框架中，如果一个测试失败，取消同一测试组内的其他并发测试。
 
-```rust
+```rust,ignore
 pub async fn run_test_group(tests: Vec<TestCase>) -> TestGroupResult {
     let token = CancellationToken::new();
     let mut set = JoinSet::new();
@@ -784,7 +784,7 @@ pub async fn run_test_group(tests: Vec<TestCase>) -> TestGroupResult {
 
 取消区域可以嵌套：内部区域的取消不会传播到外部区域，除非显式配置。
 
-```rust
+```rust,ignore
 pub struct NestedCancelRegion {
     parent_token: CancellationToken,
     child_regions: Vec<CancelRegion>,
@@ -808,7 +808,7 @@ impl NestedCancelRegion {
 
 取消只在满足特定条件时触发：
 
-```rust
+```rust,ignore
 pub async fn conditional_cancel_region<F, Fut>(
     condition: impl Fn() -> bool, body: F,
 ) where F: FnOnce(CancellationToken) -> Fut, Fut: std::future::Future<Output = ()>,
@@ -830,7 +830,7 @@ pub async fn conditional_cancel_region<F, Fut>(
 
 只取消区域内的一部分活动：
 
-```rust
+```rust,ignore
 pub struct PartialCancelRegion {
     token: CancellationToken,
     critical_token: CancellationToken,

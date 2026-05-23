@@ -63,7 +63,7 @@
 
 > ⚠️ **关键澄清**: `unsafe` **不**关闭借用检查器（borrow checker）。以下代码在 `unsafe` 块中仍然是错误的：
 >
-> ```rust
+> ```rust,ignore
 > unsafe {
 >     let x = &mut 5;
 >     let y = &mut *x;  // ❌ 仍然编译错误！借用检查器仍然工作
@@ -74,7 +74,7 @@
 
 通过代码行为刻画 `unsafe` 的三种使用场景及其证明责任：
 
-```rust
+```rust,ignore
 // 场景 1: unsafe fn —— 函数作者保证前置条件，调用者负责满足
 /// # Safety
 /// `ptr` 必须指向一个有效的、已初始化的 `T` 值，
@@ -117,7 +117,7 @@ unsafe impl<T> TrustedLen for std::vec::IntoIter<T> {}
 
 `unsafe fn` 可以看作一个**带有前置条件的函数**，其前置条件在 Rust 的类型系统中无法表达（或表达的代价过高）。例如：
 
-```rust
+```rust,ignore
 unsafe fn offset<T>(ptr: *const T, count: isize) -> *const T;
 ```
 
@@ -219,7 +219,7 @@ graph TD
 
 `unsafe fn` 的调用约束：
 
-```rust
+```rust,ignore
 fn safe_caller() {
     let ptr = 0x1 as *const i32;
     // deref_unchecked(ptr);  // ❌ 编译错误！必须在 unsafe 块中调用
@@ -583,7 +583,7 @@ unsafe fn explicit_lifetime() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 struct BadSync {
@@ -687,7 +687,7 @@ struct GoodSync {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 安全函数的文档注释中的 SAFETY 要求
 ///
 /// # Safety

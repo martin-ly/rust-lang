@@ -136,7 +136,7 @@ cargo test --workspace --doc
 
 **LLD 链接器适配**:
 
-```rust
+```rust,ignore
 // .cargo/config.toml
 # Rust 1.90+ 默认使用 LLD 作为 Linux x86_64 链接器
 # 如需回退到默认链接器，添加以下配置：
@@ -811,7 +811,7 @@ fn complex_processing(data: &[Vec<i32>]) -> Vec<i32> {
 
 #### 性能对比示例
 
-```rust
+```rust,ignore
 // Rust 1.90 vs 1.91 - 内存分配性能对比
 
 // 场景：创建大量小对象
@@ -886,7 +886,7 @@ fn parse_many_small_jsons(data: &str) -> Vec<Value> {
 
 #### 新特性：对非静态变量的引用
 
-```rust
+```rust,ignore
 // Rust 1.90 - 仅支持对静态变量的引用
 static S: i32 = 25;
 const C: &i32 = &S;  // ✅ 1.90 支持
@@ -916,7 +916,7 @@ const OUTPUT: i32 = process_reference(INPUT_REF);  // ✅ 1.91 支持
 
 #### 新特性：静态变量的直接操作
 
-```rust
+```rust,ignore
 // Rust 1.91 - 在 const 上下文中对静态变量进行更多操作
 
 static COUNTER: AtomicU32 = AtomicU32::new(0);
@@ -1096,7 +1096,7 @@ fn example_control_flow() {
 
 参考：`std::fmt::DebugList` 文档与 Rust 1.83 发布说明。
 
-```rust
+```rust,ignore
 use std::fmt;
 
 // Rust 1.90 - 手动处理未穷尽的 Debug 输出
@@ -1142,7 +1142,7 @@ fn example_debug_list() {
 >
 > 本节保留为“如何写异步流处理”的示例，性能请在你的 runtime + workload 下基准测试。
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -1226,7 +1226,7 @@ fn benchmark_split() {
 
 #### 2. `Vec::try_reserve_exact`
 
-```rust
+```rust,ignore
 // Rust 1.91 - 新增：尝试精确分配容量，可能失败
 let mut vec = Vec::new();
 
@@ -1247,7 +1247,7 @@ match vec.try_reserve_exact(1000000) {
 
 #### 3. 其他改进的 API
 
-```rust
+```rust,ignore
 // Option 和 Result 的改进方法
 let opt: Option<i32> = Some(42);
 
@@ -1287,7 +1287,7 @@ let owned = s.clone();  // 1.91 优化：减少不必要的分配
 
 #### 生命周期错误改进
 
-```rust
+```rust,ignore
 // 1.91 对生命周期错误的诊断更清晰
 fn problematic_function<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
     if x.len() > y.len() {
@@ -1349,7 +1349,7 @@ cargo build  # 第二次构建，1.91 的缓存命中率更高
 
 **Rust 1.91** 的 Clippy 新增了以下 lints：
 
-```rust
+```rust,ignore
 // 新的 Clippy lints 示例
 
 // 1. 检测不必要的克隆
@@ -1375,7 +1375,7 @@ async fn example() {
 
 **Rust 1.91** 的 Rustfmt 包含了以下格式化改进：
 
-```rust
+```rust,ignore
 // Rustfmt 1.91 改进：更一致的代码格式化
 
 // 链式方法调用的格式化改进
@@ -1445,7 +1445,7 @@ fn parse_config<R: BufRead>(reader: &mut R) -> Result<Config, Box<dyn std::error
 
 利用 Rust 1.91 的性能改进：
 
-```rust
+```rust,ignore
 // 利用 JIT 优化和内存分配改进
 
 fn process_large_dataset_1_91(data: &[Vec<i32>]) -> Vec<i32> {
@@ -1478,7 +1478,7 @@ fn parse_json_lines_1_91(json_lines: &str) -> Vec<Value> {
 
 利用 Rust 1.91 的异步迭代器改进：
 
-```rust
+```rust,ignore
 use futures::stream::{self, Stream, StreamExt};
 
 // ✅ 1.91 异步迭代器优化
@@ -1596,7 +1596,7 @@ fn my_function() {
 
 #### 问题 3：const 上下文代码需要调整
 
-```rust
+```rust,ignore
 // 旧代码（1.90）
 static VALUE: i32 = 42;
 const REF: &i32 = &VALUE;

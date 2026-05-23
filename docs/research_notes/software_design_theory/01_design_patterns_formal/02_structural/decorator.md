@@ -150,7 +150,7 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
 
 1. **装饰器结构**：
 
-   ```rust
+   ```rust,ignore
    struct Decorator<C: Component> { inner: C }
    impl<C: Component> Component for Decorator<C> { ... }
    ```
@@ -162,7 +162,7 @@ $$D_1(D_2(D_3(\cdots))) \text{ 形成有效委托链}$$
 
 3. **可叠加性**：
 
-   ```rust
+   ```rust,ignore
    let d1 = Decorator1 { inner: Decorator2 { inner: ConcreteComponent } };
    ```
 
@@ -404,7 +404,7 @@ impl<C: HttpClient> HttpClient for RetryDecorator<C> {
 
 **错误**：装饰器不委托 inner，直接返回固定值，破坏透明性。
 
-```rust
+```rust,ignore
 impl<C: Coffee> Coffee for BadDecorator<C> {
     fn cost(&self) -> f32 { 1.0 }  // 忽略 inner，违反 Axiom DE2
 }

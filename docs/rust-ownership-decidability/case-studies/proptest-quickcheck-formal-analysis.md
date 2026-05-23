@@ -50,7 +50,7 @@
 
 > 属性定义输入输出关系。
 
-```rust
+```rust,ignore
 // QuickCheck
 quickcheck! {
     fn prop_reverse_reverse(xs: Vec<u32>) -> bool {
@@ -78,7 +78,7 @@ proptest! {
 
 > 生成器可组合。
 
-```rust
+```rust,ignore
 let user_strategy = (any::<String>(), 0..100u8)
     .prop_map(|(name, age)| User { name, age });
 ```
@@ -109,7 +109,7 @@ let user_strategy = (any::<String>(), 0..100u8)
 
 > Proptest支持状态机模型测试。
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug, StateMachineTest)]
 ref_state_machine! {
     name = MyStateMachine,
@@ -126,7 +126,7 @@ ref_state_machine! {
 
 ### 反例 6.1 (不够通用)
 
-```rust
+```rust,ignore
 // 仅测试特定值
 #[test]
 fn test_add() {
@@ -144,7 +144,7 @@ proptest! {
 
 ### 反例 6.2 (忽略前提)
 
-```rust
+```rust,ignore
 // 未处理除零
 fn prop_div(a: i32, b: i32) -> bool {
     a / b == a / b  // b=0时panic

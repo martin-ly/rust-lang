@@ -64,7 +64,7 @@
 
 **描述**: 允许在泛型参数中使用更复杂的常量表达式
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 使用 const 泛型进行编译时计算
@@ -109,7 +109,7 @@ where
 
 **描述**: 原生支持异步闭包，无需 `async move` 包裹
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 use std::future::Future;
@@ -153,7 +153,7 @@ async fn new_way() {
 
 **描述**: 在关联类型中使用 `impl Trait`
 
-```rust
+```rust,ignore
 #![feature(impl_trait_in_assoc_type)]
 
 trait AsyncIterator {
@@ -201,7 +201,7 @@ impl AsyncIterator for Counter {
 
 **描述**: 在类型别名中使用 `impl Trait`
 
-```rust
+```rust,ignore
 #![feature(type_alias_impl_trait)]
 
 // 定义不透明的类型别名

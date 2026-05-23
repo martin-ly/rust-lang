@@ -87,7 +87,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 use std::collections::HashSet;
 
@@ -178,7 +178,7 @@ impl Handler<SendMessage> for UserActor {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 pub struct RoomActor {
     room_id: RoomId,
     name: String,
@@ -257,7 +257,7 @@ impl Handler<BroadcastMessage> for RoomActor {
 ### 2.3 会话Actor (WebSocket连接)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct SessionActor {
     session_id: SessionId,
     user_id: Option<UserId>,
@@ -380,7 +380,7 @@ impl Handler<ChatMessage> for SessionActor {
 ### 3.1 Actor系统启动
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 pub struct ChatSystem {
@@ -448,7 +448,7 @@ async fn ws_route(
 ### 3.2 消息格式
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 客户端消息
 #[derive(Deserialize)]
 #[serde(tag = "type")]
@@ -510,7 +510,7 @@ enum ServerMessage {
 ### 4.1 消息持久化
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 pub struct MessagePersistenceActor {
     db_pool: DbPool,
     buffer: Vec<ChatMessage>,
@@ -549,7 +549,7 @@ impl MessagePersistenceActor {
 ### 4.2 消息推送
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub struct PushNotificationActor {
     fcm_client: FcmClient,
     apns_client: ApnsClient,
@@ -600,7 +600,7 @@ impl Handler<NewMessage> for PushNotificationActor {
 ### 5.1 水平扩展
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 使用一致性哈希分片
 struct ShardedChatSystem {
     shards: HashMap<u64, Addr<ChatSystem>>,
@@ -618,7 +618,7 @@ impl ShardedChatSystem {
 ### 5.2 连接优化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 使用连接池
 impl ChatSystem {
     fn distribute_load(&self) {

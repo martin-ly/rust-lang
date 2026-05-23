@@ -108,6 +108,7 @@
     - [11.7.10 与多级引用语义的交叉：引用的名义与结构行为](#11710-与多级引用语义的交叉引用的名义与结构行为)
   - [十二、待补充与演进方向（TODOs）](#十二待补充与演进方向todos)
   - [Wikipedia 概念对齐](#wikipedia-概念对齐)
+  - [权威来源索引](#权威来源索引)
 
 ## 一、权威定义（Definition）
 >
@@ -1622,7 +1623,7 @@ for msg in &msgs {
 
 **`DiscriminantKind` trait**（unstable，需 nightly）提供了在泛型上下文中获取类型的 "discriminant 类型" 的能力：
 
-```rust,ignore
+```rust
 #![feature(discriminant_kind)]
 use std::marker::DiscriminantKind;
 

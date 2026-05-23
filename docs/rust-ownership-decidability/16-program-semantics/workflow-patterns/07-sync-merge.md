@@ -369,7 +369,7 @@ $$
 ## Rust 实现示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::{Barrier, Mutex};
 use std::collections::HashMap;
@@ -429,7 +429,7 @@ impl<T> BranchHandle<T> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use tokio::sync::Barrier;
 use std::sync::Arc;
 
@@ -520,7 +520,7 @@ pub async fn barrier_example() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 /// 基于 Channel 的同步合并
@@ -582,7 +582,7 @@ impl<T> BranchSender<T> {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use tokio::task::JoinHandle;
 use std::sync::atomic::{AtomicUsize, Ordering};
 

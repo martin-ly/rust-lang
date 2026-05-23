@@ -133,7 +133,7 @@ Coq形式化
 
 **CPS风格转换**:
 
-```rust
+```rust,ignore
 // 原始Rust
 let x = f();
 g(x);
@@ -357,7 +357,7 @@ Box拥有堆位置ℓ，且ℓ的内容满足T的所有权
 
 **Cell**提供内部可变性：
 
-```rust
+```rust,ignore
 impl<T: Copy> Cell<T> {
     pub fn get(&self) -> T { ... }
     pub fn set(&self, val: T) { ... }
@@ -390,7 +390,7 @@ set方法规范：
 
 **RefCell**提供运行时借用检查：
 
-```rust
+```rust,ignore
 impl<T> RefCell<T> {
     pub fn borrow(&self) -> Ref<T> { ... }
     pub fn borrow_mut(&self) -> RefMut<T> { ... }
@@ -436,7 +436,7 @@ borrow_mut()操作：
 
 **Rc**使用引用计数：
 
-```rust
+```rust,ignore
 impl<T> Rc<T> {
     pub fn new(val: T) -> Rc<T> { ... }
     pub fn clone(&self) -> Rc<T> { ... }
@@ -481,7 +481,7 @@ drop() 规范（通过Drop trait）：
 
 **Mutex**提供互斥访问：
 
-```rust
+```rust,ignore
 impl<T> Mutex<T> {
     pub fn new(val: T) -> Mutex<T> { ... }
     pub fn lock(&self) -> MutexGuard<T> { ... }

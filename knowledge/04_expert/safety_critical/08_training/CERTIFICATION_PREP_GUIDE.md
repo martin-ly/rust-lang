@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [条件](../../../../concept/01_foundation/07_control_flow.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -242,7 +243,7 @@ Rust特定:
 
 #### 模拟试题
 
-```rust
+```rust,ignore
 // 试题1: ASIL等级匹配
 // 题目: 以下哪种情况适合使用Rust的哪些特性来满足ASIL D要求？
 
@@ -258,7 +259,7 @@ Rust特定:
 5. 故障注入测试
 ```
 
-```rust
+```rust,ignore
 // 试题2: 工具鉴定
 // 题目: 如何使用Rust工具链满足TCL 1要求？
 

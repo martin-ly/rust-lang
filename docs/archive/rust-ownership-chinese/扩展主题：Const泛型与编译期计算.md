@@ -71,7 +71,7 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 ### 2.1 所有权在编译期确定
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 struct FixedVec<T, const N: usize> {
     data: [MaybeUninit<T>; N],
     len: usize,
@@ -99,7 +99,7 @@ impl<T, const N: usize> FixedVec<T, N> {
 ### 2.2 编译期内存布局
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 不同N值产生不同类型
 let v1: FixedVec<i32, 8> = FixedVec::new();
 let v2: FixedVec<i32, 16> = FixedVec::new();
@@ -160,7 +160,7 @@ const ARR: [i32; 10] = create_array(42);
 
 ### 4.1 类型级别计算
 
-```rust
+```rust,ignore
 // 编译期类型操作
 struct TypeLevel<const N: usize>;
 

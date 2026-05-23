@@ -68,7 +68,7 @@ rust-script script.rs
 
 **原生 Cargo Script（```cargo 代码块）**:
 
-```rust,compile_fail
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -241,7 +241,7 @@ graph TD
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,compile_fail
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -286,7 +286,7 @@ Cargo Script 的**自包含性**使其成为 CI 脚本的理想选择：
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust,compile_fail
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]

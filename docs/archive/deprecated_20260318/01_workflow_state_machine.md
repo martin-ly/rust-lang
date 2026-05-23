@@ -128,7 +128,7 @@ WorkflowInstance := (workflow_id, instance_id, current_state, context, history)
 
 ## 4. Rust 实现示例
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use async_trait::async_trait;
 

@@ -370,7 +370,7 @@ pub fn factorial(n: u64) -> u64 {
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: Rustonomicon - Ownership]**
 
-```rust
+```rust,ignore
 use std::boxed::Box;
 use std::fmt::Display;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -495,7 +495,7 @@ impl<T: Ord + Clone> TreeNode<T> {
 > **[来源: Rust Standard Library - std::fs]**
 > **[来源: Rustonomicon - FFI]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::fs;
 use std::path::{Path, PathBuf};
@@ -694,7 +694,7 @@ $$
 
 **场景**: 遍历文件系统目录树
 
-```rust
+```rust,ignore
 /// 递归搜索匹配模式的文件
 fn find_files(pattern: &str, dir: &Path) -> Vec<PathBuf> {
     let mut matches = Vec::new();

@@ -198,7 +198,7 @@ $$
 
 **示例：**
 
-```rust
+```rust,ignore
 fn divide(x: int, y: int) -> (r: int)
     requires y != 0           // Pre(x, y) := (y ≠ 0)
     ensures r * y == x        // Post(x, y, r) := (r × y = x)
@@ -319,7 +319,7 @@ verus --export-smtlib queries.smt2 src/main.rs
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use vstd::prelude::*;
 
 verus! {
@@ -346,7 +346,7 @@ fn divide(numerator: int, denominator: int) -> (result: int)
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 数组查找
@@ -382,7 +382,7 @@ fn find(arr: &[u32], key: u32) -> (idx: usize)
 ### 5.3 证明块（proof blocks）
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 fn binary_search(v: &[u64], needle: u64) -> (result: usize)
@@ -428,7 +428,7 @@ fn binary_search(v: &[u64], needle: u64) -> (result: usize)
 ### 6.1 借用规则验证
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 安全的交换函数
@@ -461,7 +461,7 @@ fn unique_borrow(arr: &mut [u32], i: usize, j: usize)
 ### 6.2 幽灵类型（Ghost Types）
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use vstd::ghost::Ghost;
 
 verus! {
@@ -505,7 +505,7 @@ impl Counter {
 ### 7.1 归纳证明
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 递归函数及其规范
@@ -550,7 +550,7 @@ fn factorial_iter(n: u64) -> (res: u64)
 ### 7.2 量化与 forall
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 数组所有元素满足性质
@@ -595,7 +595,7 @@ fn has_zero(arr: &[i32]) -> (b: bool)
 ### 7.3 线性幽灵状态
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use vstd::linear::Linear;
 
 verus! {
@@ -642,7 +642,7 @@ impl Resource {
 ### 8.1 验证 Vec 操作
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 安全的 push 操作验证
@@ -686,7 +686,7 @@ fn filter_positive(v: &[i32]) -> (result: Vec<i32>)
 ### 8.2 链表操作验证
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 struct Node<T> {
@@ -730,7 +730,7 @@ fn list_find(head: &Node<u64>, target: u64) -> (found: bool)
 ### 8.3 排序算法验证
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 /// 插入排序验证
@@ -824,7 +824,7 @@ fn count(arr: &[i32], value: i32) -> usize {
 
 ```markdown
 1. **渐进式规范**: 从简单属性开始，逐步增加复杂度
-   ```rust
+   ```rust,ignore
    // 第一步：基本类型安全
    fn step1(x: u64) -> (r: u64)
        ensures r >= 0
@@ -837,7 +837,7 @@ fn count(arr: &[i32], value: i32) -> usize {
 
 1. **合理设计循环不变式**: 覆盖所有变化的变量
 
-   ```rust
+   ```rust,ignore
    while i < n
        invariant
            0 <= i <= n,           // 边界
@@ -847,13 +847,13 @@ fn count(arr: &[i32], value: i32) -> usize {
 
 2. **使用 spec 函数**: 将复杂规范抽象为可重用函数
 
-   ```rust
+   ```rust,ignore
    spec fn is_valid_state(s: &State) -> bool { ... }
    ```
 
 3. **分离证明代码**: 使用 proof 块组织复杂证明
 
-   ```rust
+   ```rust,ignore
    proof {
        // 辅助证明步骤
        assert_by(...);
@@ -865,7 +865,7 @@ fn count(arr: &[i32], value: i32) -> usize {
 ### 10.2 常见陷阱
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 verus! {
 
 // 陷阱1：忘记循环不变式

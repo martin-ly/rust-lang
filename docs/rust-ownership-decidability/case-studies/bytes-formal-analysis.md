@@ -74,7 +74,7 @@
 ### 定义 2.1 (Bytes结构)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct Bytes {
     ptr: *mut u8,      // 数据指针
     len: usize,        // 长度
@@ -125,7 +125,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Clone for Bytes {
     fn clone(&self) -> Bytes {
         // 原子递增引用计数
@@ -163,7 +163,7 @@ impl Drop for Bytes {
 ### 定义 3.1 (BytesMut结构)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub struct BytesMut {
     ptr: *mut u8,
     len: usize,
@@ -181,7 +181,7 @@ pub struct BytesMut {
 
 与Vec相同的策略:
 
-```rust
+```rust,ignore
 fn reserve(&mut self, additional: usize) {
     let required = self.len + additional;
     if required > self.cap {
@@ -204,7 +204,7 @@ fn reserve(&mut self, additional: usize) {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl BytesMut {
     pub fn freeze(mut self) -> Bytes {
         // 只需转换类型，不复制数据
@@ -235,7 +235,7 @@ impl BytesMut {
 ### 定义 4.1 (split_off)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 impl Bytes {
     pub fn split_off(&mut self, at: usize) -> Bytes {
         assert!(at <= self.len);
@@ -290,7 +290,7 @@ other:  Bytes { ptr: 0x1030, len: 70 }
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Bytes {
     pub fn slice(&self, range: impl RangeBounds<usize>) -> Bytes {
         let (start, end) = bounds(range, self.len);
@@ -326,7 +326,7 @@ impl Bytes {
 
 **证明**:
 
-```rust
+```rust,ignore
 unsafe impl Send for Bytes {}
 unsafe impl Sync for Bytes {}
 ```
@@ -349,7 +349,7 @@ unsafe impl Sync for Bytes {}
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Drop for Inner {
     fn drop(&mut self) {
         if self.ref_cnt.load(Relaxed) == 0 {
@@ -380,7 +380,7 @@ impl Drop for Inner {
 
 **实现**:
 
-```rust
+```rust,ignore
 impl Buf for Bytes {
     fn remaining(&self) -> usize {
         self.len
@@ -425,7 +425,7 @@ impl Buf for Bytes {
 ### 反例 8.1 (忘记slice是引用)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let data = Bytes::from(vec![1, 2, 3, 4, 5]);
 let sub = data.slice(1..3);  // 引用data
 
@@ -439,7 +439,7 @@ drop(data);
 ### 反例 8.2 (BytesMut的aliasing)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let mut buf = BytesMut::with_capacity(1024);
 buf.put(&[1, 2, 3]);
 
@@ -454,7 +454,7 @@ buf.put(&[4, 5, 6]);   // 错误! 可能重新分配
 ### 反例 8.3 (大缓冲区不释放)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let mut buf = BytesMut::with_capacity(1024 * 1024);
 // 使用...
 buf.clear();  // 不清容量，只清长度

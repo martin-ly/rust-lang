@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 12: WebAssembly应用](#实践项目-12-webassembly应用)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/wasm-app/`](#完整参考实现位于-exampleswasm-app)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -45,9 +47,10 @@
 > **[来源: Rust Official Docs]**
 
 ### WASM绑定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]

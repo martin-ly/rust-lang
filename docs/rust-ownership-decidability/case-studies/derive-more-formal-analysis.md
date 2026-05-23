@@ -67,7 +67,7 @@ derive_more提供:
 
 > 生成代码与手写实现等价。
 
-```rust
+```rust,ignore
 #[derive(Add)]
 struct Point { x: i32, y: i32 }
 
@@ -93,7 +93,7 @@ impl Add for Point {
 
 > 算术运算保持Rust默认溢出行为。
 
-```rust
+```rust,ignore
 #[derive(Add)]
 struct Counter(u32);
 
@@ -108,7 +108,7 @@ struct Counter(u32);
 
 ### 反例 5.1 (泛型约束)
 
-```rust
+```rust,ignore
 #[derive(Add)]
 struct Wrapper<T>(T);  // 需要T: Add
 

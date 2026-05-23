@@ -31,6 +31,7 @@
   - [四、常见陷阱](#四常见陷阱)
   - [五、来源与延伸阅读](#五来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -41,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 指称语义原理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -75,6 +77,7 @@
 ---
 
 ### 1.2 完备偏序（CPO）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -104,6 +107,7 @@
 ---
 
 ### 1.3 不动点定理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -140,6 +144,7 @@ Kleene 不动点定理:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型即域
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -169,6 +174,7 @@ Rust 类型的指称:
 ---
 
 ### 2.2 所有权即线性性
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -197,6 +203,7 @@ Rust 类型的指称:
 ---
 
 ### 2.3 生命周期即区域
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -235,6 +242,7 @@ Rust 类型的指称:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -259,6 +267,7 @@ graph TD
 ---
 
 ### 3.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -488,4 +497,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

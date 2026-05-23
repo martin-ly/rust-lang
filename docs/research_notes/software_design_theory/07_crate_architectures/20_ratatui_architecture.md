@@ -21,7 +21,7 @@ Ratatui 的三大设计支柱：
 > [来源: Ratatui Docs — Overview](https://ratatui.rs/)
 > [来源: Ratatui GitHub — Architecture](https://github.com/ratatui/ratatui)
 
-```rust
+```rust,ignore
 use ratatui::{
     backend::CrosstermBackend,
     widgets::{Block, Borders, Paragraph},
@@ -100,7 +100,7 @@ graph LR
 
 Ratatui 的核心数据结构是一个二维 `Cell` 数组，每个 `Cell` 编码一个终端字符格子的完整状态：
 
-```rust
+```rust,ignore
 pub struct Buffer {
     area: Rect,           // 可见区域
     content: Vec<Cell>,   // 扁平化的二维网格
@@ -133,7 +133,7 @@ pub struct Cell {
 
 Ratatui 的 `Widget` trait 是**消费型 trait** (consuming trait)，即 `render` 方法获取 `self` 的所有权：
 
-```rust
+```rust,ignore
 pub trait Widget {
     fn render(self, area: Rect, buf: &mut Buffer);
 }
@@ -160,7 +160,7 @@ impl Widget for Block<'_> {
 
 对于需要在帧间保持状态的组件（如 `List`、`Table`、`Scrollbar`），Ratatui 提供了第二个 trait：
 
-```rust
+```rust,ignore
 pub trait StatefulWidget {
     type State;
     fn render(self, area: Rect, buf: &mut Buffer, state: &mut Self::State);
@@ -187,7 +187,7 @@ frame.render_stateful_widget(list, area, &mut list_state);
 
 Ratatui 的布局系统采用**Cassowary 约束求解算法**的简化版（类似 Flutter 的 `flex` 布局）：
 
-```rust
+```rust,ignore
 let layout = Layout::default()
     .direction(Direction::Vertical)
     .constraints([
@@ -221,7 +221,7 @@ let layout = Layout::default()
 
 Ratatui 的性能关键不在于"渲染"，而在于**避免不必要的终端输出**：
 
-```rust
+```rust,ignore
 impl Terminal {
     pub fn draw<F>(&mut self, f: F) -> io::Result<CompletedFrame>
     where F: FnOnce(&mut Frame)
@@ -264,7 +264,7 @@ impl Terminal {
 
 Ratatui 通过 `Backend` trait 解耦与具体终端库的依赖：
 
-```rust
+```rust,ignore
 pub trait Backend {
     fn draw<'a, I>(&mut self, content: I) -> io::Result<()>
     where I: Iterator<Item = (u16, u16, &'a Cell)>;
@@ -334,7 +334,7 @@ fn test_ui_renders_correctly() {
 
 Ratatui 本身不提供事件循环，但与 Tokio / `crossterm` 的异步事件流无缝集成：
 
-```rust
+```rust,ignore
 use tokio::time::{interval, Duration};
 use crossterm::event::{Event, KeyCode};
 

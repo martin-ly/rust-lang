@@ -55,7 +55,7 @@ serde_json提供:
 
 > Serialize实现保证类型一致的JSON输出。
 
-```rust
+```rust,ignore
 let data = MyStruct { x: 1, y: 2 };
 let json = serde_json::to_string(&data)?;
 // 保证: JSON结构对应Rust结构
@@ -74,7 +74,7 @@ $$
 
 > 字符串自动转义，防止注入。
 
-```rust
+```rust,ignore
 let s = "hello\nworld\"quoted";
 let json = serde_json::to_string(&s)?;
 // 输出: "hello\nworld\"quoted"
@@ -98,7 +98,7 @@ let json = serde_json::to_string(&s)?;
 
 **防护**:
 
-```rust
+```rust,ignore
 let deserializer = serde_json::Deserializer::from_str(input);
 deserializer.disable_recursion_limit();  // 需显式启用风险
 ```
@@ -109,7 +109,7 @@ deserializer.disable_recursion_limit();  // 需显式启用风险
 
 > JSON数字范围可能超出Rust类型。
 
-```rust
+```rust,ignore
 let json = "340282366920938463463374607431768211456"; // > u128::MAX
 
 // 错误
@@ -129,7 +129,7 @@ let n: f64 = serde_json::from_str(json)?;
 
 > 使用Cow实现零拷贝反序列化。
 
-```rust
+```rust,ignore
 use std::borrow::Cow;
 
 #[derive(Deserialize)]
@@ -152,7 +152,7 @@ let data: Data = serde_json::from_str(json)?;
 
 > StreamDeserializer处理大JSON流。
 
-```rust
+```rust,ignore
 let stream = serde_json::Deserializer::from_reader(reader)
     .into_iter::<MyType>();
 
@@ -169,7 +169,7 @@ for item in stream {
 
 ### 反例 6.1 (浮点精度)
 
-```rust
+```rust,ignore
 // JSON浮点数可能丢失精度
 let json = r#"{"value": 0.1}"#;
 let data: MyStruct = serde_json::from_str(json)?;
@@ -178,7 +178,7 @@ let data: MyStruct = serde_json::from_str(json)?;
 
 ### 反例 6.2 (未转义键)
 
-```rust
+```rust,ignore
 #[derive(Serialize)]
 struct Data {
     #[serde(rename = "type")]  // 关键字需处理

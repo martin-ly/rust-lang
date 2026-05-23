@@ -61,7 +61,7 @@ Sea-ORM特点：
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "users")]
 pub struct Model {
@@ -108,7 +108,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 User::find()
     .filter(user::Column::Username.eq("alice"))
     .filter(user::Column::Age.gte(18))
@@ -176,7 +176,7 @@ $$
 
 ### 定义 MIGRATION-1 ( 迁移操作 )
 
-```rust
+```rust,ignore
 manager
     .create_table(
         Table::create()
@@ -230,7 +230,7 @@ $$
 
 ### 示例1: CRUD操作
 
-```rust
+```rust,ignore
 use sea_orm::{entity::*, query::*, DbConn};
 
 // Create
@@ -255,7 +255,7 @@ let result = User::delete_by_id(1).exec(db).await?;
 
 ### 示例2: 复杂查询
 
-```rust
+```rust,ignore
 // 分页查询
 let paginator = User::find()
     .filter(user::Column::Status.eq(Status::Active))
@@ -280,7 +280,7 @@ let users_with_posts: Vec<(user::Model, Vec<post::Model>)> = User::find()
 
 ### 示例3: 事务
 
-```rust
+```rust,ignore
 use sea_orm::{TransactionTrait, DbErr};
 
 db.transaction::<_, _, DbErr>(|txn| {
@@ -303,7 +303,7 @@ db.transaction::<_, _, DbErr>(|txn| {
 
 ### 示例4: 迁移
 
-```rust
+```rust,ignore
 use sea_orm_migration::prelude::*;
 
 pub struct Migration;

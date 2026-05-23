@@ -123,7 +123,7 @@ await Pending     →  suspend（挂起，稍后继续）
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -144,7 +144,7 @@ async fn main_async() {
 
 **自引用 Future 与 Pin**：
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -244,7 +244,7 @@ Future 执行流程（简化）：
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ? 操作符传播 Result
 async fn fetch_and_parse() -> Result<Data, Error> {
     let raw = fetch().await?;

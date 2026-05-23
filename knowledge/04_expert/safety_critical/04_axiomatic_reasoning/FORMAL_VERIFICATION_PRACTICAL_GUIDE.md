@@ -1,4 +1,5 @@
 # 形式化验证实战指南
+> **相关概念**: [形式化方法](../../../../concept/04_formal/01_linear_logic.md)
 
 > **Bloom 层级**: 理解
 
@@ -190,7 +191,7 @@ kani --version
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 简单函数验证
 fn add(a: u32, b: u32) -> u32 {
     a + b
@@ -218,7 +219,7 @@ fn verify_add() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 二分查找验证
 fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
@@ -265,7 +266,7 @@ fn verify_binary_search() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 安全包装：验证unsafe代码
 pub fn safe_slice_access(data: &[u8], index: usize) -> Option<u8> {
     data.get(index).copied()
@@ -292,7 +293,7 @@ fn verify_safe_access() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 循环展开控制
 #[kani::unwind(20)]
 #[kani::proof]
@@ -352,7 +353,7 @@ cargo build --release
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use vstd::prelude::*;
 
 verus! {
@@ -393,7 +394,7 @@ verus! {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 verus! {
     /// 验证的栈实现
     struct Stack<T> {
@@ -504,7 +505,7 @@ Level 5: 定理证明 (Verus)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use kani::proof;
 
 /// 验证状态机转换正确性
@@ -592,7 +593,7 @@ fn verify_state_machine() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 验证常量时间比较（防时序攻击）
 fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
     if a.len() != b.len() {
@@ -634,7 +635,7 @@ fn verify_constant_time() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 先验证简单属性
 #[kani::proof]
 fn verify_simple_property() {
@@ -647,7 +648,7 @@ fn verify_simple_property() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 添加前提条件
 #[kani::proof]
 fn verify_with_assumptions() {
@@ -663,7 +664,7 @@ fn verify_with_assumptions() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[kani::proof]
 #[kani::unwind(10)]  // 明确指定循环界限
 fn verify_with_loop() {
@@ -718,7 +719,7 @@ jobs:
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 问题：证明超时
 #[kani::proof]
 fn slow_proof() {

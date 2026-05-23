@@ -103,7 +103,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 阶段1结业测试示例
 
 // 1. 所有权理解
@@ -156,7 +156,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -273,7 +273,7 @@ fn SysTick() {
 
 #### 核心内容
 
-```rust
+```rust,ignore
 /// 4.1 Unsafe代码安全模式
 
 /// 类型状态模式

@@ -98,7 +98,7 @@
 
 **关键实现**
 
-```rust
+```rust,ignore
 // Executor核心: 任务调度
 pub struct Executor {
     // 任务队列 (侵入式链表，无动态分配)
@@ -180,7 +180,7 @@ impl Executor {
 
 **关键实现**
 
-```rust
+```rust,ignore
 #[rtic::app(device = stm32f4xx_hal::pac)]
 mod app {
     // 共享资源声明
@@ -307,7 +307,7 @@ Tokio架构:
 
 **关键数据结构与算法**
 
-```rust
+```rust,ignore
 // 任务结构 (侵入式链表节点)
 pub(crate) struct Task {
     // 状态: RUNNING, SCHEDULED, COMPLETED, etc.
@@ -395,7 +395,7 @@ struct Level {
 
 **设计模式分析**
 
-```rust
+```rust,ignore
 // Tower Service模式
 pub trait Service<Request> {
     type Response;
@@ -455,7 +455,7 @@ let app = Router::new()
 
 **Actor集成**
 
-```rust
+```rust,ignore
 // HTTP处理器作为Actor消息处理
 impl Actor for WsChatSession {
     type Context = ws::WebsocketContext<Self>;
@@ -524,7 +524,7 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for WsChatSession {
 
 **容错机制**
 
-```rust
+```rust,ignore
 // 监督树配置
 Bastion::supervisor(|sp| {
     sp.with_strategy(SupervisionStrategy::OneForOne)
@@ -550,7 +550,7 @@ Bastion::supervisor(|sp| {
 
 **创新点**: 编译时SQL验证
 
-```rust
+```rust,ignore
 // 编译时检查SQL语法和类型
 let users = sqlx::query_as::<_, User>(
     "SELECT id, name, email FROM users WHERE active = $1"

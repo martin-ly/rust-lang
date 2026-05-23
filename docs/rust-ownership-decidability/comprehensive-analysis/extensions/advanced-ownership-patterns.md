@@ -45,7 +45,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 问题: 自引用结构
 struct Parser {
     text: String,
@@ -107,7 +107,7 @@ impl SelfReferential {
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 使用ouroboros简化自引用
 use ouroboros::self_referencing;
 
@@ -242,7 +242,7 @@ impl Graph {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 类型擦除的集合
 pub struct ObjectPool {
     objects: Vec<Box<dyn Drawable>>,
@@ -275,7 +275,7 @@ impl ObjectPool {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 手动类型擦除 (更可控)
 pub struct ErasedHandle {
     data: *mut (),
@@ -337,7 +337,7 @@ impl Drop for ErasedHandle {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 数据库连接状态机
 pub struct Connection<State> {
     config: Config,
@@ -431,7 +431,7 @@ async fn use_connection() -> Result<(), Error> {
 ### 5.1 视图与切片
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 零拷贝数据解析
 pub struct Packet<'a> {
     buffer: &'a [u8],
@@ -481,7 +481,7 @@ impl<'a> Packet<'a> {
 ### 5.2 IoSlice
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::io::IoSlice;
 use std::os::unix::io::AsRawFd;
 
@@ -513,7 +513,7 @@ pub fn write_vectored(fd: RawFd, buffers: &[&[u8]]) -> io::Result<usize> {
 ### 6.1 Pin的深入理解
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Pin保证自引用安全
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -554,7 +554,7 @@ impl Future for ReadFile {
 ### 6.2 Stream模式
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
@@ -684,7 +684,7 @@ impl SoAParticles {
 ### 8.1 安全封装
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // C库包装示例
 pub struct SecureContext {
     ptr: *mut ffi::Context,

@@ -69,7 +69,7 @@
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x = String::from("hello");
     let y = x;           // 所有权从x转移到y
@@ -99,7 +99,7 @@ error[E0382]: borrow of moved value: `x`
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 方案1: 使用clone
 let y = x.clone();
 println!("{}", x);  // OK
@@ -131,7 +131,7 @@ Move(x, y, v) 后:
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Person {
     name: String,
     age: u32,
@@ -170,7 +170,7 @@ error[E0382]: borrow of partially moved value: `p`
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 方案1: 借用字段
 let name = &p.name;
 
@@ -196,7 +196,7 @@ let Person { name, age } = p;
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut x = 5;
     let r1 = &x;        // 不可变借用
@@ -226,7 +226,7 @@ error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immuta
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 方案1: 缩小r1的作用域
 {
     let r1 = &x;
@@ -256,7 +256,7 @@ until r₁ is dropped
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut x = 5;
     let r1 = &mut x;
@@ -287,7 +287,7 @@ error[E0499]: cannot borrow `x` as mutable more than once at a time
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 顺序使用
 let r1 = &mut x;
 *r1 = 10;
@@ -307,7 +307,7 @@ let r2 = &mut x;
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn dangling() -> &String {
     let s = String::from("hello");
     &s  // 错误: s将在函数结束时被释放
@@ -368,7 +368,7 @@ lifetime(&s) ⊆ lifetime(s)
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() {
         x
@@ -422,7 +422,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -455,7 +455,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 
 let data = Arc::new(5);
@@ -512,7 +512,7 @@ error[E0277]: `RefCell<i32>` cannot be sent between threads safely
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 let data = Mutex::new(5);
@@ -532,7 +532,7 @@ thread::spawn(move || {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn bad() {
     let mutex = Mutex::new(0);
     let guard = mutex.lock().unwrap();
@@ -553,7 +553,7 @@ async fn bad() {
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;  // 异步版本的Mutex
 
 async fn good() {
@@ -579,7 +579,7 @@ async fn good() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 static mut INSTANCE: Option<Singleton> = None;
 
 fn get_instance() -> &'static Singleton {
@@ -600,7 +600,7 @@ fn get_instance() -> &'static Singleton {
 
 **Rust惯用法**:
 
-```rust
+```rust,ignore
 use std::sync::OnceLock;
 
 static INSTANCE: OnceLock<Singleton> = OnceLock::new();

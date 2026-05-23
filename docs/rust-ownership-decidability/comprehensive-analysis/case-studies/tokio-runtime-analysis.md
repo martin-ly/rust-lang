@@ -121,7 +121,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 任务结构定义
 pub(crate) struct Task {
     /// 任务状态: RUNNING, SCHEDULED, COMPLETED, etc.
@@ -152,7 +152,7 @@ pub(crate) enum Stage {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub(crate) struct Queue {
     /// 本地队列 (LIFO)
     local: VecDeque<NonNull<Task>>,
@@ -211,7 +211,7 @@ impl Queue {
 
 #### 平台抽象
 
-```rust
+```rust,ignore
 /// IO驱动抽象
 driver: {
     #[cfg(unix)]
@@ -230,7 +230,7 @@ driver: {
 
 #### 事件循环
 
-```rust
+```rust,ignore
 impl Driver {
     /// 轮询IO事件
     pub(crate) fn poll(&mut self, cx: &mut Context<'_>) -> Poll<()> {
@@ -259,7 +259,7 @@ impl Driver {
 
 #### 分层时间轮实现
 
-```rust
+```rust,ignore
 /// 6层时间轮实现
 pub(crate) struct TimerWheel {
     /// 6层: 256 slots each
@@ -306,7 +306,7 @@ Tick处理        O(1)         每tick处理一个slot
 ### 3.1 线程安全
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 核心类型的Send/Sync实现分析
 
 /// Runtime是Send + Sync
@@ -360,7 +360,7 @@ pub struct LocalSet {
 ### 3.3 取消安全性
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 取消安全的异步操作示例
 /// 关键点: 在await点可以被取消而不导致不一致状态
 
@@ -403,7 +403,7 @@ pub async fn unsafe_cancel() {
 ### 4.2 性能优化技术
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 1. 批量处理
 pub fn poll_batch(&mut self, cx: &mut Context) {
     // 一次poll处理多个任务，减少同步开销
@@ -449,7 +449,7 @@ pub struct InjectionQueue {
 ### 5.2 unsafe代码审计
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Tokio中unsafe使用统计
 
 // 1. 原始指针操作 (主要)
@@ -480,7 +480,7 @@ pub unsafe fn epoll_ctl(...) { ... }
 ### 6.1 内部可变性模式
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // Cell用于计数器 (无锁)
 pub struct Metrics {
     tasks_spawned: Cell<u64>,
@@ -503,7 +503,7 @@ pub(crate) struct SharedQueue {
 ### 6.2 状态机模式
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Task作为状态机
 enum TaskState {
     /// 任务被创建但未调度

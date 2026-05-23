@@ -154,7 +154,7 @@ fn ownership_transfer_demo() {
 
 Channels enforce type safety through the `Send` trait:
 
-```rust
+```rust,ignore
 /// T: Send ensures values can cross thread boundaries safely
 pub fn channel<T: Send>() -> (Sender<T>, Receiver<T>)
 
@@ -220,7 +220,7 @@ fn mpsc_example() {
 
 Oneshot channels are optimized for single message communication, typically used for request-response patterns.
 
-```rust
+```rust,ignore
 use tokio::sync::oneshot;
 
 /// oneshot channels close after a single message
@@ -249,7 +249,7 @@ async fn oneshot_example() {
 
 Broadcast channels send the same message to multiple receivers.
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 
 /// broadcast: one sender, multiple receivers
@@ -283,7 +283,7 @@ async fn broadcast_example() {
 
 Watch channels maintain the most recent value, useful for configuration or state propagation.
 
-```rust
+```rust,ignore
 use tokio::sync::watch;
 
 /// watch: always access the latest value
@@ -467,7 +467,7 @@ fn channel_isolation() {
    - Ownership transfer happens atomically at receive point
    - Send bound ensures value can safely exist on new thread
 
-```rust
+```rust,ignore
 /// Async channel safety demonstration
 use tokio::sync::mpsc;
 
@@ -604,7 +604,7 @@ impl<T, R> Drop for WorkerPool<T, R> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 use std::panic;
@@ -717,7 +717,7 @@ fn worker_pool_with_recovery() {
 
 The pipeline pattern chains processing stages, where each stage receives input from the previous stage and sends output to the next.
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -836,7 +836,7 @@ fn image_pipeline_example() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
@@ -921,7 +921,7 @@ fn bounded_queue_with_backpressure() {
 
 The request-response pattern implements synchronous-style communication over asynchronous channels.
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, oneshot};
 use std::collections::HashMap;
 
@@ -1026,7 +1026,7 @@ async fn rpc_example() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, oneshot};
 
 /// COUNTER-EXAMPLE: Response sent to wrong requestor due to ID mismatch
@@ -1102,7 +1102,7 @@ async fn safe_request_response() {
 
 The pub-sub pattern allows publishers to broadcast messages to multiple subscribers without knowing who they are.
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 use std::collections::HashMap;
 
@@ -1191,7 +1191,7 @@ async fn event_bus_example() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 use std::time::Duration;
 
@@ -1278,7 +1278,7 @@ impl<T: Clone + Send + 'static> ReliablePubSub<T> {
 
 Async channels come in bounded and unbounded variants, each with distinct memory and performance characteristics.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 /// Comparison of bounded vs unbounded channels
@@ -1317,7 +1317,7 @@ async fn channel_types_comparison() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 /// COUNTER-EXAMPLE: Unbounded channel can cause OOM
@@ -1376,7 +1376,7 @@ async fn bounded_with_backpressure() {
 
 The `select!` macro allows waiting on multiple channel operations simultaneously.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::select;
 
@@ -1428,7 +1428,7 @@ async fn select_with_timeout() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::select;
 use tokio::sync::{mpsc, oneshot};
 
@@ -1509,7 +1509,7 @@ async fn safe_select_cleanup() {
 
 Priority channels allow processing messages based on importance rather than arrival order.
 
-```rust
+```rust,ignore
 use std::collections::BinaryHeap;
 use std::cmp::Ordering;
 use tokio::sync::mpsc;
@@ -1808,7 +1808,7 @@ fn channel_recovery_after_panic() {
 
 Batch processing amortizes channel overhead by processing multiple messages together.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use std::time::{Duration, Instant};
 
@@ -1894,7 +1894,7 @@ async fn batch_tradeoff_demo() {
 
 Using `Arc` for shared data reduces copying when multiple consumers need the same data.
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::broadcast;
 
@@ -1945,7 +1945,7 @@ async fn zero_copy_broadcast() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 
 /// COUNTER-EXAMPLE: Unnecessary cloning wastes memory
@@ -2028,7 +2028,7 @@ This section presents a complete chat server implementation demonstrating messag
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::{mpsc, broadcast, RwLock};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
@@ -2303,7 +2303,7 @@ Connection Flow Ownership Analysis:
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::signal;
 
 /// Graceful shutdown implementation
@@ -2353,7 +2353,7 @@ async fn run_with_graceful_shutdown(server: ChatServer, addr: &str) {
 
 **Problem**: Using `std::sync::mpsc` in async code blocks the executor thread.
 
-```rust
+```rust,ignore
 /// COUNTER-EXAMPLE: Blocking send in async context
 async fn blocking_send_in_async() {
     let (tx, _rx) = std::sync::mpsc::channel::<i32>();
@@ -2383,7 +2383,7 @@ async fn async_send_in_async() {
 
 **Problem**: Unbounded channels can exhaust memory under load.
 
-```rust
+```rust,ignore
 /// COUNTER-EXAMPLE: Unbounded channel causing memory exhaustion
 fn unbounded_channel_anti_pattern() {
     let (tx, _rx) = tokio::sync::mpsc::unbounded_channel::<Vec<u8>>();
@@ -2420,7 +2420,7 @@ fn bounded_channel_solution() {
 
 **Problem**: Holding a synchronous receiver across await points can cause issues.
 
-```rust
+```rust,ignore
 /// COUNTER-EXAMPLE: Potential deadlock holding receiver
 async fn holding_receiver_across_await() {
     let (tx, rx) = std::sync::mpsc::channel::<i32>();
@@ -2459,7 +2459,7 @@ async fn proper_async_receive() {
 
 **Problem**: Creating too many channels creates overhead and complexity.
 
-```rust
+```rust,ignore
 /// COUNTER-EXAMPLE: Too many channels
 fn channel_per_task_overhead() {
     let mut handles = vec![];
@@ -2511,7 +2511,7 @@ fn work_queue_pattern() {
 
 Rust 1.94 introduces several features that enhance message passing patterns:
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// Rust 1.94: LazyLock for global channel registries

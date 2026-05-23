@@ -150,7 +150,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 1. **持有关系**：$\Omega(A) \supset S$ 表示 $A$ 拥有 $S$
 
-   ```rust
+   ```rust,ignore
    struct Adapter { inner: S }  // A 拥有 S
    ```
 
@@ -188,7 +188,7 @@ $$\mathit{op}_T(\&a) \text{ 内调用 } \&a.\mathit{inner} \text{，满足借用
 
 3. **委托链**：
 
-   ```rust
+   ```rust,ignore
    impl Target for Adapter {
        fn op(&self) {  // &self
            self.inner.source_op();  // &self 借用 inner
@@ -335,7 +335,7 @@ borrow_checker_proof
 
 **场景**：现有 `reqwest` 返回 `Result<Response, reqwest::Error>`；需适配为统一 `trait HttpClient` 返回 `Result<String, Box<dyn std::error::Error>>`。
 
-```rust
+```rust,ignore
 trait HttpClient {
     fn get(&self, url: &str) -> Result<String, Box<dyn std::error::Error>>;
 }
@@ -395,7 +395,7 @@ fn fetch_data<H: HttpClient>(client: &H, url: &str) -> Result<String, Box<dyn st
 
 **错误**：Adapter 在委托时静默丢弃、篡改或反转语义。
 
-```rust
+```rust,ignore
 impl Logger for BadAdapter {
     fn log(&self, msg: &str) {
         if msg.contains("secret") { return; }  // 静默丢弃，违反 Axiom AD1

@@ -171,7 +171,6 @@ mod tests {
 
     #[test]
     #[cfg_attr(miri, ignore)]
-    #[test]
     #[cfg(not(miri))]
     fn test_nqueens_parallel_and_async() {
         assert_eq!(nqueens_count_parallel(4), 2);

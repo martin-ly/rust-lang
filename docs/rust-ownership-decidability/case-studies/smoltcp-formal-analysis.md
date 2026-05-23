@@ -190,7 +190,7 @@ $$
 ### 定义 POOL-1 ( 包缓冲区池 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 pub struct PacketBuffer<const N: usize> {
     storage: [u8; N],
     metadata: PacketMetadata,
@@ -262,7 +262,7 @@ $$
 ### 示例1: 基本TCP服务器
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use smoltcp::iface::{Config, Interface, SocketSet};
 use smoltcp::socket::TcpSocket;
 use smoltcp::phy::{Device, DeviceCapabilities};
@@ -334,7 +334,7 @@ fn tcp_server() {
 ### 示例2: UDP通信
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use smoltcp::socket::UdpSocket;
 
 fn udp_example() {
@@ -370,7 +370,7 @@ fn udp_example() {
 ### 示例3: DHCP客户端
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use smoltcp::dhcp::Client as DhcpClient;
 
 fn dhcp_example() {
@@ -399,7 +399,7 @@ fn dhcp_example() {
 ### 示例4: 多协议支持
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn multi_protocol() {
     let mut sockets = SocketSet::new(vec![]);
 

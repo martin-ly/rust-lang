@@ -214,7 +214,7 @@ println!("{:?}", v); // [1, 2, 3, 42]
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 返回新创建的数据
 fn create_greeting(name: &str) -> String {
     format!("Hello, {}!", name)
@@ -278,7 +278,7 @@ fn find_user(id: u64) -> Option<User> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // Vec所有权
 let mut vec = Vec::new();
 let s = String::from("hello");
@@ -330,7 +330,7 @@ let removed = map.remove("key").unwrap(); // 所有权转移
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 单所有
 let data = Box::new(vec![1, 2, 3]);
 

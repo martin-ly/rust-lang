@@ -44,6 +44,7 @@
 > **[来源: 各工具官方文档; AWS Kani Blog 2023; SOSP 2024 Verus; PLDI 2024 RefinedRust; Rust Project Goals 2026]** 以下矩阵聚焦于"选择维度"，而非工具内部原理。内部原理见 [`04_rustbelt.md`](./04_rustbelt.md) §7–§8。
 
 ### 1.1 八维选型矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **维度** | **Miri** | **Kani** | **Verus** | **Creusot** | **Prusti** | **Aeneas** | **RefinedRust** | **a-mir-formality** |
@@ -58,6 +59,7 @@
 | **目标** | 运行时 UB | 属性验证 | 系统验证 | 算法验证 | 教学/研究 | 证明翻译 | 自动内存安全 | 类型系统规范 |
 
 ### 1.2 覆盖强度光谱
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -75,6 +77,7 @@ a-mir-formality:[████████░░] 类型系统规范验证
 > **关键洞察**: 从左到右，保证强度递增，但**时间成本不是单调的**——Verus 的 SMT 后端在某些场景下比 Kani 的模型检测更快，因为符号执行的剪枝效率取决于问题结构。
 
 ### 1.3 验证工具层次类图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -207,6 +210,7 @@ classDiagram
 | **a-mir-formality** | [Operational semantics](https://en.wikipedia.org/wiki/Operational_semantics) · [Type safety](https://en.wikipedia.org/wiki/Type_safety) | Felleisen、Plotkin、类型规则 | 小步操作语义 + 类型规则 |
 
 ### 2.1 验证工具 ↔ 形式化基础映射图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -272,6 +276,7 @@ graph LR
 > **[来源: Rust Project Goals 2026 — a-mir-formality]** · **[来源: rustc-dev-guide]** · **[来源: POPL 2023 类型系统形式化论文]** ✅
 
 ### 3.1 为什么需要类型系统规范？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 当前 Rust 的类型系统规则分散在：
@@ -283,6 +288,7 @@ graph LR
 **a-mir-formality** 是 Rust 官方正在构建的**机器可检查的 MIR 形式化规范**，目标成为 Rust 类型系统的"单一真相源"。
 
 ### 3.2 技术架构
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -302,6 +308,7 @@ a-mir-formality (Coq/Lean)
 - 与 `rustc` 的 trait solver 行为逐一对齐
 
 ### 3.3 与验证工具链的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 角色 | 说明 |
@@ -311,6 +318,7 @@ a-mir-formality (Coq/Lean)
 | **循环验证** | a-mir-formality 验证 rustc → rustc 编译 a-mir-formality |
 
 ### 3.4 当前状态（2026-05）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 里程碑 | 状态 | 预计 |
@@ -332,6 +340,7 @@ a-mir-formality (Coq/Lean)
 > **[来源类型: 原创分析]** 💡 以下框架帮助团队量化形式化验证的投入产出比。
 
 ### 4.1 ROI 公式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -348,6 +357,7 @@ a-mir-formality (Coq/Lean)
 | **维护成本** | 规格随代码演化的同步成本 | 低 (Miri) – 高 (手写证明) |
 
 ### 4.2 场景化 ROI 评估
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 场景 A: 安全关键网络协议（如 TLS/QUIC 实现）
@@ -408,6 +418,7 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 ```
 
 ### 4.3 决策阈值
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -434,6 +445,7 @@ ROI: ★★☆☆☆ 低–中 — 仅限学术/核心基础设施 [来源: ICFP
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 五层防御模型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -453,6 +465,7 @@ Layer 1 ──→ Layer 2 ──→ Layer 3 ──→ Layer 4 ──→ Layer 5
 | **L5 协议** | `TLA+` / `P` | 分布式安全 | 设计阶段 | 中 |
 
 ### 5.2 组合策略：AWS s2n-quic 实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```yaml
@@ -497,6 +510,7 @@ jobs:
 > **来源**: [AWS s2n-quic Kani Integration] · [AWS Security Blog 2023]
 
 ### 5.3 分层验证流程时序图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -634,6 +648,7 @@ flowchart TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 误区一："验证工具可以互相替代"
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -645,6 +660,7 @@ flowchart TD
 ```
 
 ### 误区二："形式化验证是一次性投入"
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -654,6 +670,7 @@ flowchart TD
 ```
 
 ### 误区三："零标注工具 = 零成本"
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -883,4 +900,3 @@ fn main() {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

@@ -5,6 +5,7 @@
 # Rust 2024 Edition `Future` in Prelude 影响分析
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition `Future` in Prelude 影响分析](#rust-2024-edition-future-in-prelude-影响分析)
@@ -30,6 +31,7 @@
   - [参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -75,6 +77,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 ```
 
 ## 影响分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 正面影响
@@ -93,7 +96,7 @@ fn box_future() -> Box<dyn Future<Output = i32>> {
 
 如果项目中定义了与标准库同名的 `Future` trait：
 
-```rust
+```rust,ignore
 // 项目自定义的 Future trait
 pub trait Future {
     fn execute(&self);
@@ -107,7 +110,7 @@ impl Future for MyTask {
 
 **解决方案**：
 
-```rust
+```rust,ignore
 // 使用全限定路径或重命名
 use std::future::Future as StdFuture;
 
@@ -131,13 +134,13 @@ impl StdFuture for MyTask {
 
 某些旧版库可能导出自己的 `Future` 类型：
 
-```rust
+```rust,ignore
 use some_legacy_lib::Future; // 可能与 prelude 的 Future 冲突
 ```
 
 **解决方案**：
 
-```rust
+```rust,ignore
 // 显式指定要使用的 Future
 use std::future::Future as StdFuture;
 use some_legacy_lib::Future as LegacyFuture;
@@ -150,6 +153,7 @@ use some_legacy_lib::Future as LegacyFuture;
 **解决方案**：在宏中使用全限定路径 `::std::future::Future`。
 
 ## 迁移建议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 对于应用开发者
@@ -176,6 +180,7 @@ use std::future::Future;
 3. **文档更新**：在文档中说明库对 Rust 版本的要求
 
 ### 迁移检查清单
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [ ] 搜索代码中所有 `use std::future::Future;`，评估是否可以删除
@@ -185,9 +190,11 @@ use std::future::Future;
 - [ ] 更新团队编码规范，说明 prelude 的变化
 
 ## 技术细节
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### Prelude 包含的内容
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 Rust 2024 Edition 的 prelude 新增了以下与异步相关的类型：
@@ -196,7 +203,7 @@ Rust 2024 Edition 的 prelude 新增了以下与异步相关的类型：
 
 这使得以下代码无需任何导入即可编译：
 
-```rust
+```rust,ignore
 fn spawn_task<T>(task: T) -> Box<dyn Future<Output = T::Output>>
 where
     T: Future,
@@ -206,6 +213,7 @@ where
 ```
 
 ### 与 `async/await` 的关系
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 `Future` trait 是 `async/await` 的底层基础。将其加入 prelude 是 Rust 异步生态系统成熟的重要标志：
@@ -215,6 +223,7 @@ where
 - 异步运行时（Tokio、async-std 等）围绕 `Future` trait 构建
 
 ## 版本兼容性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | Rust 版本 | Edition | `Future` 在 prelude 中？ |
@@ -224,6 +233,7 @@ where
 | >= 1.85   | 2024    | 是                     |
 
 ## 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust Edition Guide: Future in Prelude](https://doc.rust-lang.org/edition-guide/rust-2024/future-in-prelude.html)
@@ -243,6 +253,7 @@ where
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -321,4 +332,3 @@ where
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

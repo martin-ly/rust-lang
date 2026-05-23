@@ -208,7 +208,7 @@ impl<K: Eq + std::hash::Hash, V: Clone> Cache<K, V> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::Barrier;
 
 fn barrier_example() {
@@ -234,7 +234,7 @@ fn barrier_example() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Semaphore;
 
@@ -268,7 +268,7 @@ async fn semaphore_example() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, oneshot};
 
 // Actor消息
@@ -357,7 +357,7 @@ pub fn start_actor() -> CacheActorHandle {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn pipeline_example() {
@@ -397,7 +397,7 @@ async fn pipeline_example() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use futures::future::{join, select, try_join};
 
 async fn future_composition() {
@@ -427,7 +427,7 @@ async fn future_composition() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn data_parallel() {
@@ -454,7 +454,7 @@ fn data_parallel() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rayon::join;
 
 fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
@@ -485,7 +485,7 @@ fn parallel_merge_sort<T: Ord + Send>(data: &mut [T]) {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 // 定义Actor
@@ -607,7 +607,7 @@ impl<T> LockFreeStack<T> {
 
 Rust 1.94 引入了 `LazyLock::get()`、`get_mut()` 和 `force_mut()` 方法，为线程安全的延迟初始化提供了更灵活的访问方式：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::collections::HashMap;
 
@@ -664,7 +664,7 @@ fn concurrent_lazy_access() {
 ### 单线程延迟初始化 - LazyCell
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 /// 单线程环境下的延迟计算
@@ -760,7 +760,7 @@ fn calculate_mean(data: &[u8]) -> f64 {
 ### 避免常见陷阱
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：在异步代码中阻塞
 async fn bad_practice() {
     std::thread::sleep(std::time::Duration::from_secs(1)); // 阻塞整个线程！
@@ -772,7 +772,7 @@ async fn good_practice() {
 }
 ```
 
-```rust
+```rust,ignore
 // ❌ 错误：在锁中持有await
 async fn bad_mutex() {
     let data = Arc::new(Mutex::new(vec![]));

@@ -315,7 +315,7 @@ $$
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use tokio::task::{AbortHandle, JoinSet};
@@ -402,7 +402,7 @@ pub async fn cancel_multiple_with_joinset<R>(
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::time::{Duration, Instant};
 use tokio::task::AbortHandle;
@@ -474,7 +474,7 @@ impl SelectiveCancelManager {
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::time::{Duration, Instant};
 use tokio::task::JoinSet;
 
@@ -602,7 +602,7 @@ $$
 
 Rust 的 `AbortHandle::abort()` 是幂等操作:
 
-```rust
+```rust,ignore
 handle.abort(); // 第一次取消
 handle.abort(); // 第二次：无效果
 ```
@@ -663,7 +663,7 @@ $$
 
 **场景**: 大规模数据批处理中，取消超时或失败的分片任务
 
-```rust
+```rust,ignore
 rules:
   - 运行时间 > 阈值 → 取消
   - 依赖的上游任务失败 → 取消
@@ -675,7 +675,7 @@ rules:
 
 **场景**: 爬虫任务中取消重复或低价值的 URL 抓取
 
-```rust
+```rust,ignore
 instances:
   - URL 已存在于数据库 → 取消
   - 域名 robots.txt 禁止 → 取消
@@ -687,7 +687,7 @@ instances:
 
 **场景**: 对账作业中取消已确认无误的批次，集中资源处理异常批次
 
-```rust
+```rust,ignore
 conditions:
   - 差异金额为 0 → 取消（无需人工复核）
   - 已自动调平 → 取消
@@ -704,7 +704,7 @@ conditions:
 
 实例运行超过指定时间后自动取消：
 
-```rust
+```rust,ignore
 pub async fn auto_cancel_with_timeout(
     handle: AbortHandle,
     duration: Duration,
@@ -719,7 +719,7 @@ pub async fn auto_cancel_with_timeout(
 
 取消一个实例时，级联取消依赖它的实例：
 
-```rust
+```rust,ignore
 pub fn cancel_with_dependencies(
     &mut self,
     id: usize,

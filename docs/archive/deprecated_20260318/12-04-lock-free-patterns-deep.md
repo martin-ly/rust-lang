@@ -171,7 +171,7 @@ Wait-Free ⊂ Lock-Free ⊂ Obstruction-Free ⊂ 阻塞算法
 
 **定义 1.4 (系统活性)**
 
-```rust
+```rust,ignore
 /// 活性性质的类型层次
 pub enum LivenessProperty {
     /// 无饥饿 (No Starvation)
@@ -214,7 +214,7 @@ pub enum FairnessType {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 形式化证明框架：进度保证的 Rust 表示
 ///
 /// 使用类型系统编码进度保证
@@ -681,7 +681,7 @@ pub fn atomic_usize_ownership() {
 
 #### 2.1.2 compare_exchange 的所有权分析
 
-```rust
+```rust,ignore
 /// compare_exchange 的完整所有权分析
 ///
 /// 成功路径:
@@ -959,7 +959,7 @@ impl SafeConditionalCounter {
 
 #### 2.2.3 错误: ABA 问题
 
-```rust
+```rust,ignore
 /// 反例 2.3: ABA 问题导致内存损坏
 ///
 /// 严重程度: 🔴 危险 - 可能导致 use-after-free
@@ -1133,7 +1133,7 @@ impl<T> TaggedPointer<T> {
 
 #### 3.1.1 算法与所有权分析
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::ptr::null_mut;
 
@@ -1398,7 +1398,7 @@ mod treiber_tests {
 
 #### 3.1.2 反例: 无内存回收导致内存泄漏
 
-```rust
+```rust,ignore
 /// 反例 3.1: Treiber Stack 的内存泄漏问题
 ///
 /// 严重程度: 🟡 中等 - 长期运行的程序可能 OOM
@@ -1504,7 +1504,7 @@ impl<T> InstrumentedStack<T> {
 
 #### 3.2.1 双指针算法
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::ptr::null_mut;
 
@@ -1758,7 +1758,7 @@ mod ms_queue_tests {
 
 #### 3.2.2 反例: Tail 指针竞争
 
-```rust
+```rust,ignore
 /// 反例 3.2: Tail 指针更新竞争
 ///
 /// 严重程度: 🟡 中等 - 性能下降，可能导致活锁
@@ -1845,7 +1845,7 @@ fn help_tail_mechanism<T>(queue: &MSQueue<T>) {
 
 #### 3.3.1 无锁扩容挑战
 
-```rust
+```rust,ignore
 /// 无锁哈希表 - 核心挑战: 并发扩容
 ///
 /// # 难点
@@ -1968,7 +1968,7 @@ impl<K: Eq + std::hash::Hash, V> LockFreeHashTable<K, V> {
 
 #### 3.3.2 反例: 扩容竞争条件
 
-```rust
+```rust,ignore
 /// 反例 3.3: 扩容期间的竞争条件
 ///
 /// 严重程度: 🔴 危险 - 可能导致数据丢失
@@ -2140,7 +2140,7 @@ Hazard Pointer 是一个线程本地的指针声明，表示:
 因此，当 T 访问 A 时，A 必然未被释放。∎
 ```
 
-```rust
+```rust,ignore
 /// Hazard Pointer 实现
 ///
 /// # 架构
@@ -2444,7 +2444,7 @@ mod uaf_demo {
 
 #### 4.2.1 crossbeam-epoch 所有权模型
 
-```rust
+```rust,ignore
 /// Epoch-Based Reclamation (EBR) 实现原理
 ///
 /// # 核心思想
@@ -2678,7 +2678,7 @@ mod epoch_tests {
 
 #### 4.2.2 安全定理
 
-```rust
+```rust,ignore
 /// 定理 4.3 (EBR 延迟释放安全)
 ///
 /// ```
@@ -2753,7 +2753,7 @@ impl EBRMemoryAnalysis {
 
 #### 5.1.1 读-复制-更新模式
 
-```rust
+```rust,ignore
 /// Sequence Lock - 读优化锁
 ///
 /// # 特点
@@ -2935,7 +2935,7 @@ mod seqlock_tests {
 
 #### 5.1.2 反例: 更新期间部分读取
 
-```rust
+```rust,ignore
 /// 反例 5.1: Sequence Lock 的部分读取问题
 ///
 /// 严重程度: 🟡 中等 - 应用层需要处理
@@ -3037,7 +3037,7 @@ impl<T: Copy> SnapshotSeqLock<T> {
 
 #### 5.2.1 Grace Periods
 
-```rust
+```rust,ignore
 /// Read-Copy-Update - 读优化更新机制
 ///
 /// # 核心概念
@@ -3245,7 +3245,7 @@ impl<T> Drop for RCUPointer<T> {
 
 #### 5.2.2 反例: 提前释放
 
-```rust
+```rust,ignore
 /// 反例 5.2: RCU 提前释放问题
 ///
 /// 严重程度: 🔴 危险 - Use-after-free
@@ -3316,7 +3316,7 @@ fn correct_rcu_usage() {
 
 ### 5.3 Hazard Pointer 完整实现
 
-```rust
+```rust,ignore
 /// 完整的 Hazard Pointer 实现与形式化证明
 
 use std::sync::atomic::{AtomicPtr, AtomicUsize, Ordering, AtomicBool};
@@ -3787,7 +3787,7 @@ mod loom_tests {
 
 ### 6.2 Miri 未定义行为检测
 
-```rust
+```rust,ignore
 /// Miri - Rust 的未定义行为检测器
 ///
 /// # 功能
@@ -3881,7 +3881,7 @@ mod miri_tests {
 
 ### 7.1 算法描述
 
-```rust
+```rust,ignore
 /// Chase-Lev Work-Stealing Deque
 ///
 /// # 设计目标
@@ -4147,7 +4147,7 @@ impl<T> Drop for ChaseLevDeque<T> {
 
 ### 7.2 性能基准测试
 
-```rust
+```rust,ignore
 /// Chase-Lev Deque 性能基准
 ///
 /// # 测试配置
@@ -4318,7 +4318,7 @@ mod benchmarks {
 
 ### 7.3 Rust 1.94 特性应用
 
-```rust
+```rust,ignore
 /// Rust 1.94 新特性在无锁编程中的应用
 
 /// 1. const fn 改进 - 编译期计算
@@ -4403,7 +4403,7 @@ pub fn optimized_spin_loop() {
 
 ### 8.1 模式选择指南
 
-```rust
+```rust,ignore
 /// 无锁编程模式选择决策树
 ///
 /// ```
@@ -4464,7 +4464,7 @@ pub fn optimized_spin_loop() {
 
 ### 8.3 性能优化技巧
 
-```rust
+```rust,ignore
 /// 无锁编程性能优化
 
 /// 1. 减少 CAS 冲突

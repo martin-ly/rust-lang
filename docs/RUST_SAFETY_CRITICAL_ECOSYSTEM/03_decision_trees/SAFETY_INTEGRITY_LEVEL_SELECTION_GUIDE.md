@@ -228,7 +228,7 @@ ASIL D分解选项:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! SIL分解Rust实现示例
 
 /// 2x2取2架构 (SIL 4)
@@ -283,7 +283,7 @@ impl OneOutOfTwo {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 //! ASIL A级实现要求
 
 #![forbid(unsafe_code)]  // 推荐
@@ -315,7 +315,7 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! ASIL B级实现要求
 
 #![forbid(unsafe_code)]  // 要求
@@ -347,7 +347,7 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! ASIL C级实现要求
 
 #![forbid(unsafe_code)]
@@ -393,7 +393,7 @@ impl ValidatedValue {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! ASIL D级实现要求
 
 #![forbid(unsafe_code)]

@@ -56,7 +56,7 @@ futures crate提供:
 
 > `then`创建顺序执行的Future链。
 
-```rust
+```rust,ignore
 future_a.then(|result_a| async move {
     future_b(result_a).await
 })
@@ -81,7 +81,7 @@ $$
 
 > `select`等待多个Future，返回先完成的。
 
-```rust
+```rust,ignore
 select! {
     a = future_a => { /* a完成 */ },
     b = future_b => { /* b完成 */ },
@@ -100,7 +100,7 @@ select! {
 ### 定义 3.1 (Stream Trait)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub trait Stream {
     type Item;
 
@@ -114,7 +114,7 @@ pub trait Stream {
 
 > Stream支持map、filter、fold等操作。
 
-```rust
+```rust,ignore
 stream
     .map(|x| x * 2)
     .filter(|x| *x > 10)
@@ -135,7 +135,7 @@ stream
 
 ### 定义 4.1 (Sink Trait)
 
-```rust
+```rust,ignore
 pub trait Sink<Item> {
     type Error;
 
@@ -166,7 +166,7 @@ pub trait Sink<Item> {
 
 > `join!`同时执行多个Future。
 
-```rust
+```rust,ignore
 let (a, b) = join!(future_a, future_b);
 ```
 
@@ -190,7 +190,7 @@ $$
 
 ### 反例 6.1 (忘记poll)
 
-```rust
+```rust,ignore
 // 错误: 手动实现Future但忘记wake
 impl Future for MyFuture {
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output> {
@@ -205,7 +205,7 @@ impl Future for MyFuture {
 
 ### 反例 6.2 (Select取消)
 
-```rust
+```rust,ignore
 select! {
     a = async {
         resource.lock().await;  // 获取锁

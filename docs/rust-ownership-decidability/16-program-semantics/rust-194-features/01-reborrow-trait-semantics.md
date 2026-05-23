@@ -454,7 +454,7 @@ fn nested_reborrow() {
 ### 7.4 模式匹配中的 Reborrow
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 fn match_reborrow(opt: &mut Option<i32>) {
     match opt {
         Some(ref val) => {
@@ -561,7 +561,7 @@ fn closure_reborrow() {
 ### 8.4 与 Pin 的交互
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 fn pin_reborrow<T>(pinned: Pin<&mut T>) -> Pin<&T> {

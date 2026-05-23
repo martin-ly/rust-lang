@@ -160,7 +160,7 @@ $$
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 fn spawn<F>(future: F) -> JoinHandle<F::Output>
 where F: Future + Send + 'static,
       F::Output: Send + 'static
@@ -219,7 +219,7 @@ $$
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 let result = handle.await;
 ```
 
@@ -281,7 +281,7 @@ $$
 
 **性质1**: 所有权通过通道转移
 
-```rust
+```rust,ignore
 tx.send(v).await  // 转移v的所有权到通道
 rx.recv().await   // 从通道转移v的所有权到接收者
 ```
@@ -299,7 +299,7 @@ $$
 
 **性质3**: 通道关闭检测
 
-```rust
+```rust,ignore
 match tx.send(v).await {
     Ok(()) => /* 成功 */,
     Err(_) => /* 通道已关闭，v的所有权返回 */
@@ -370,7 +370,7 @@ $$
 
 **无锁算法**:
 
-```rust
+```rust,ignore
 // 本地push
 fn push(&self, task: Task) {
     let b = self.bottom.fetch_add(1, Relaxed);
@@ -468,7 +468,7 @@ $$
 ### 定义 6.1 (Async Mutex)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 struct Mutex<T> {
     state: AtomicUsize,
     value: UnsafeCell<T>,
@@ -518,7 +518,7 @@ CAS操作确保只有一个任务获得锁。
 
 lock().await返回Future，不会阻塞当前线程:
 
-```rust
+```rust,ignore
 async fn use_mutex(m: Arc<Mutex<i32>>) {
     let mut guard = m.lock().await;  // 如果锁被持有，让出
     *guard += 1;                      // 修改值
@@ -571,7 +571,7 @@ $$
 
 Tokio关键API的trait约束:
 
-```rust
+```rust,ignore
 fn spawn<F>(future: F) -> JoinHandle<F::Output>
 where F: Future + Send + 'static,
       F::Output: Send + 'static;

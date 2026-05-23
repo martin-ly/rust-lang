@@ -141,7 +141,7 @@
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 trait Button { fn render(&self) -> String; }
 trait TextBox { fn render(&self) -> String; }
 trait UIFactory {
@@ -166,7 +166,7 @@ impl UIFactory for WinFactory {
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 type Next = Option<Box<dyn Handler>>;
 trait Handler {
     fn handle(&self, req: &mut Request, next: Next) -> Response;
@@ -191,7 +191,7 @@ impl Handler for AuthHandler {
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 trait Command {
     fn execute(&self, ctx: &mut Context);
     fn undo(&self, ctx: &mut Context);
@@ -214,7 +214,7 @@ impl Command for InsertCmd {
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 let (tx, _) = broadcast::channel::<OrderEvent>(32);
 // 发布者：tx.send(OrderEvent::Shipped { id: 1 });
@@ -231,7 +231,7 @@ let (tx, _) = broadcast::channel::<OrderEvent>(32);
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 // Domain Model：Order 含 add_item、submit 等
 pub struct Order { id: u64, items: Vec<OrderItem>, status: OrderStatus }
 impl Order {
@@ -265,7 +265,7 @@ impl<R: OrderRepository> OrderService<R> {
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 trait Command {
     fn execute(&self, ctx: &mut EditorContext);
     fn undo(&self, ctx: &mut EditorContext);
@@ -380,7 +380,7 @@ std::thread::spawn(move || {
 
 **实现**：
 
-```rust
+```rust,ignore
 // ffi 模块内
 #[repr(C)]
 struct CConfig { enabled: i32, timeout: i32 }

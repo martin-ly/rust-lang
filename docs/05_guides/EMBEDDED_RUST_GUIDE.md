@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [嵌入式 Rust 专题指南](#嵌入式-rust-专题指南)
@@ -43,6 +44,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 文档定位
 >
@@ -93,7 +95,7 @@ T-BR1、[UNSAFE_RUST_GUIDE](./UNSAFE_RUST_GUIDE.md)（no_std、裸机 unsafe 契
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -117,7 +119,7 @@ fn panic(_info: &PanicInfo) -> ! {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -148,7 +150,7 @@ fn main() -> ! {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -218,7 +220,7 @@ fn get_counter() -> u32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 
 use core::alloc::{GlobalAlloc, Layout};
@@ -276,7 +278,7 @@ impl StaticPool {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -333,6 +335,7 @@ mod app {
 ---
 
 ## 常用嵌入式 Crate
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 用途 | crate | 说明 |
@@ -347,13 +350,14 @@ mod app {
 ---
 
 ## 最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 使用 `const` 进行编译时计算
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use core::cell::UnsafeCell;
 
 const BUFFER_SIZE: usize = 1024;
@@ -366,7 +370,7 @@ static BUFFER: UnsafeCell<[u8; BUFFER_SIZE]> = UnsafeCell::new([0; BUFFER_SIZE])
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use core::cell::UnsafeCell;
 
 // 推荐：使用静态缓冲区（UnsafeCell 封装）
@@ -380,7 +384,7 @@ static TX_BUFFER: UnsafeCell<[u8; 256]> = UnsafeCell::new([0; 256]);
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use core::cell::RefCell;
 use cortex_m::interrupt::Mutex;
 
@@ -396,6 +400,7 @@ fn update_data(value: u32) {
 ---
 
 ## 使用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 场景1: 裸机嵌入式开发
@@ -444,6 +449,7 @@ fn update_data(value: u32) {
 ---
 
 ## 形式化链接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 链接类型 | 目标文档 |
@@ -461,6 +467,7 @@ fn update_data(value: u32) {
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [C01 所有权](../../crates/c01_ownership_borrow_scope/docs/00_MASTER_INDEX.md)
@@ -473,6 +480,7 @@ fn update_data(value: u32) {
 ---
 
 ## Rust 1.95+ 在嵌入式开发中的应用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -516,7 +524,7 @@ pub fn edge_detection(samples: &[u16], threshold: u16) -> Vec<usize> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局硬件配置（延迟初始化，节省启动时间）
@@ -540,7 +548,7 @@ pub fn is_dma_ready() -> bool {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 初始化序列，支持故障恢复
@@ -568,7 +576,7 @@ fn initialize_peripherals() -> ControlFlow<InitError, ()> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// 在 `no_std` 环境下使用 array_windows
 #![no_std]
 
@@ -614,6 +622,7 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [05_guides 目录](./README.md)
@@ -641,7 +650,6 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **[来源: Rust Embedded WG]**
 > **[来源: Embassy Book]**
 > **[来源: IEEE - Embedded Software]**
-
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 > **[来源: ACM - Systems Programming Languages]**
@@ -789,4 +797,3 @@ fn median_filter(a: u8, b: u8, c: u8) -> u8 {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

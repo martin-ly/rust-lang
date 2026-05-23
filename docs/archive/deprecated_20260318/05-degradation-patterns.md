@@ -172,7 +172,7 @@ Resource(feature) = Resource_total × Importance(feature) / Σ Importance(fᵢ)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU8, Ordering};
 use std::sync::Arc;
@@ -483,7 +483,7 @@ pub enum DegradationError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 回退策略 trait
 #[async_trait]
 pub trait FallbackStrategy<T, E>: Send + Sync {
@@ -608,7 +608,7 @@ impl<T, E> ResilientExecutor<T, E> {
 
 ### 4.3 特性开关集成
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 
 /// 特性开关管理器
@@ -656,7 +656,7 @@ impl FeatureController {
 
 ### 4.4 负载削减实现
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 
 /// 负载削减器

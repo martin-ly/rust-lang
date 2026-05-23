@@ -925,7 +925,7 @@ A & B 就像一家餐厅菜单：
 
 **计算解释**:
 
-```rust
+```rust,ignore
 // A ⊕ B 对应 enum Either<A, B>
 enum Either<A, B> {
     Left(A),   // ⊕R1
@@ -995,7 +995,7 @@ fn to_top<T>(_x: T) -> () {
 
 **计算解释**:
 
-```rust
+```rust,ignore
 // 0 对应 ! (never type)
 // 一个不可能存在的值
 
@@ -1355,7 +1355,7 @@ A ⊸ (B ⊸ C) ≅ (A ⊗ B) ⊸ C     (currying)
 
 #### 4.3.3 Rust 中的同构
 
-```rust
+```rust,ignore
 // 1 ⊗ A ≅ A
 fn unit_left<A>(x: A) -> ((), A) {
     ((), x)
@@ -1514,7 +1514,7 @@ A ⊢ 1 是有效的（允许弱化）
 
 **反例 2：隐式复制**
 
-```rust
+```rust,ignore
 // 违反收缩规则
 fn implicit_copy() {
     let x = String::from("hello");
@@ -1566,7 +1566,7 @@ fn resource_leak() {
 
 **改进方案**:
 
-```rust
+```rust,ignore
 fn proper_resource_handling() -> Result<(), std::io::Error> {
     let file = File::open("data.txt")?;
     // 使用 file...
@@ -2006,7 +2006,7 @@ A ──── A⊥    A ──── A⊥
 
 **计算意义**：
 
-```rust
+```rust,ignore
 // 证明网归约对应于程序执行
 
 // 原始程序（带"切割"）
@@ -2255,7 +2255,7 @@ Client: 接收 Response
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 使用 session_types crate 的示例
 
 use session_types::*;
@@ -2292,7 +2292,7 @@ fn main() {
 
 #### 9.3.1 更复杂的协议
 
-```rust
+```rust,ignore
 // 带选择的分支协议
 
 // 服务器可以提供计算或退出
@@ -2615,7 +2615,7 @@ impl<T> Drop for Box<T> {
 
 #### 12.1.2 Arena 分配器
 
-```rust
+```rust,ignore
 // Arena 分配器使用线性类型追踪生命周期
 struct Arena {
     memory: Vec<u8>,
@@ -2637,7 +2637,7 @@ impl Arena {
 
 #### 12.2.1 通道的类型安全
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 // 通道端点是线性的

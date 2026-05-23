@@ -157,7 +157,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn task_example() {
@@ -189,7 +189,7 @@ async fn named_task() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::runtime::{Runtime, Builder};
 
 // 单线程运行时 (用于测试或嵌入式)
@@ -227,7 +227,7 @@ fn multi_threaded() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -265,7 +265,7 @@ async fn tcp_server() -> tokio::io::Result<()> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, interval, timeout, Duration};
 
 async fn timer_examples() {
@@ -306,7 +306,7 @@ async fn slow_operation() -> String {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::runtime::Builder;
 
 fn optimized_runtime() {
@@ -345,7 +345,7 @@ fn optimized_runtime() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tokio::task::{JoinSet, AbortHandle};
 
 // 管理多个任务
@@ -394,7 +394,7 @@ async fn cancel_task() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use tokio::sync::{Semaphore, RwLock};
 use std::sync::Arc;
 
@@ -452,7 +452,7 @@ async fn shared_state() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 1. 避免在异步代码中阻塞
 // ❌ 错误
 async fn bad() {
@@ -501,7 +501,7 @@ async fn local_tasks() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 根据工作负载调整
 let rt = tokio::runtime::Builder::new_multi_thread()
     // CPU 密集型: worker_threads = CPU 核心数

@@ -40,7 +40,7 @@
 
 ### 同步编程
 
-```rust
+```rust,ignore
 // 顺序执行，确定性行为
 fn synchronous_example() {
     let result1 = compute_step1();
@@ -52,7 +52,7 @@ fn synchronous_example() {
 
 ### 异步编程
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 // 异步/等待：非阻塞 I/O

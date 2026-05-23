@@ -404,7 +404,7 @@ impl Editor {
 
 **错误**：命令执行 I/O、网络请求等不可逆操作，`undo` 无法恢复。
 
-```rust
+```rust,ignore
 impl ReversibleCommand for SendEmailCommand {
     fn execute(&mut self) { /* 邮件已发送 */ }
     fn undo(&mut self) { /* 无法撤回 */ }

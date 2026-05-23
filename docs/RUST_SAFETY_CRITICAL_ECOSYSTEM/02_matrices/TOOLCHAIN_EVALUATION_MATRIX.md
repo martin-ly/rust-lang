@@ -117,7 +117,7 @@ GCC-Rust:    ⭐⭐⭐ (GCC后端)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // clippy.toml 推荐配置
 
 # 安全关键级别
@@ -385,7 +385,7 @@ wildcards = "deny"
 ### 8.2 日志和跟踪
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // defmt 推荐配置
 use defmt::*;
 

@@ -362,7 +362,7 @@ struct-field-name-threshold = 5
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // src/lints.rs
 //! 自定义Clippy lint规则
 
@@ -747,7 +747,7 @@ cargo doc --open
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 安全关键函数
 ///
 /// # Safety

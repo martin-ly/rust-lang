@@ -104,7 +104,7 @@ HList（Heterogeneous List）是 Frunk 的核心抽象。与标准库中的 `Vec
 
 **类型表示**：
 
-```rust
+```rust,ignore
 // HList 的类型编码
 HCons<H1, HCons<H2, HCons<H3, HNil>>>
 // 表示包含 H1, H2, H3 三个元素的列表
@@ -162,7 +162,7 @@ Frunk 大量使用类型级递归来实现复杂操作：
 
 Coproduct 是 HList 的对偶概念，表示"可能是这些类型中的某一个"：
 
-```rust
+```rust,ignore
 // 类似于枚举，但保持开放
 Coprod!(A, B, C)  // 可以是 A、B 或 C
 ```
@@ -235,7 +235,7 @@ pub trait Generic {
 
 标签字段系统允许基于名称的操作：
 
-```rust
+```rust,ignore
 pub struct Field<Name, Type> {
     name: PhantomData<Name>,
     value: Type,
@@ -263,7 +263,7 @@ pub struct age;
 
 使用 Frunk 可以为任意结构体编写通用序列化代码：
 
-```rust
+```rust,ignore
 use frunk::{Generic, HList};
 use serde::Serialize;
 
@@ -290,7 +290,7 @@ where
 
 Frunk 可以用于实现验证式构建器模式：
 
-```rust
+```rust,ignore
 use frunk::hlist::HList;
 
 // 带有必填字段追踪的构建器
@@ -325,7 +325,7 @@ impl<Rest> Builder<Rest> {
 
 HList 可以配合函数式操作符使用：
 
-```rust
+```rust,ignore
 use frunk::hlist;
 use frunk::monoid::Monoid;
 
@@ -366,7 +366,7 @@ let mapped = data.map(
 
 `generic-array` 配合 `typenum` 提供了另一种编译期数组大小方案：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::U10;
 
@@ -397,7 +397,7 @@ let list = hlist![1, "two", 3.0];
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use frunk::{hlist, HList, HMappable};
 
 fn main() {
@@ -424,7 +424,7 @@ fn main() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use frunk::{Generic, LabelledGeneric};
 use frunk::labelled::Field;
 
@@ -466,7 +466,7 @@ fn promote_person(person: Person, dept: String) -> Employee {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use frunk::{hlist, HList, HNil};
 use frunk::hlist::{HCons, Selector};
 
@@ -556,7 +556,7 @@ Frunk 大量使用模板元编程，对编译时间有显著影响：
 
 Frunk 设计为零运行时开销抽象：
 
-```rust
+```rust,ignore
 // 编译后的 HList 操作完全内联
 let list = hlist![1, 2, 3];
 let (head, tail) = list.pop();
@@ -569,7 +569,7 @@ HList 的内存布局与手动展开的结构体相同，无额外开销。
 ### 7.3 内存布局
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // HList
 let list = hlist![1u8, 2u16, 3u32];
 // 内存布局: [u8:1][padding][u16:2][padding][u32:3]
@@ -610,7 +610,7 @@ struct Equivalent {
 
 1. **限制递归深度**：
 
-```rust
+```rust,ignore
 // 不推荐：深层 HList
 let deep = hlist![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
 
@@ -621,7 +621,7 @@ let group2 = hlist![6, 7, 8, 9, 10];
 
 1. **使用 newtype 模式**：
 
-```rust
+```rust,ignore
 // 封装复杂类型减少类型长度
 struct Config(HList![...]);
 ```
@@ -638,7 +638,7 @@ struct Config(HList![...]);
 
 1. **优先使用 LabelledGeneric**：
 
-```rust
+```rust,ignore
 // 使用字段名而非位置，提高可维护性
 #[derive(LabelledGeneric)]
 struct Config {
@@ -649,14 +649,14 @@ struct Config {
 
 1. **组合优于继承**：
 
-```rust
+```rust,ignore
 // 使用 HList 组合而非 trait 继承
 type MiddlewareStack = HList![Auth, Logging, Metrics];
 ```
 
 1. **类型别名简化**：
 
-```rust
+```rust,ignore
 // 为复杂 HList 类型创建别名
 type UserFields = HList![String, u32, String, bool];
 ```
@@ -716,7 +716,7 @@ hlist![e₁, e₂, ..., eₙ] : HCons<T₁, HCons<T₂, ... HCons<Tₙ, HNil>...
 
 **反例 10.1.1（深层 HList）**
 
-```rust
+```rust,ignore
 // 超过 15 个元素的 HList 显著增加编译时间
 let very_deep = hlist![
     1, 2, 3, 4, 5, 6, 7, 8, 9, 10,
@@ -741,7 +741,7 @@ let transformed = very_deep
 
 **反例 10.1.2（类型错误诊断）**
 
-```rust
+```rust,ignore
 #[derive(Generic)]
 struct A { x: i32, y: String }
 
@@ -777,7 +777,7 @@ error[E0271]: type mismatch resolving `<String as ToRef>::Output == i32`
 
 **反例 10.1.3（标准库 trait 冲突）**
 
-```rust
+```rust,ignore
 use frunk::hlist::HList;
 use std::iter::IntoIterator;
 

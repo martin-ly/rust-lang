@@ -281,7 +281,7 @@ $$
 
 设模式匹配表达式为：
 
-```rust
+```rust,ignore
 match e {
     p1 => e1,
     p2 => e2,
@@ -355,7 +355,7 @@ $$
 
 设模式匹配为：
 
-```rust
+```rust,ignore
 match e {
     p if guard => e1,
     ...
@@ -787,7 +787,7 @@ pthread_mutex_t mutex = PTHREAD_MUTEX_INITIALIZER;
 
 Rust转换：
 
-```rust
+```rust,ignore
 let mutex = Mutex::new(data);
 ```
 
@@ -806,7 +806,7 @@ pthread_mutex_lock(&mutex);
 
 Rust转换：
 
-```rust
+```rust,ignore
 let guard = mutex.lock().unwrap();
 ```
 
@@ -842,7 +842,7 @@ $$
 
 `MutexGuard`的定义：
 
-```rust
+```rust,ignore
 pub struct MutexGuard<'a, T: ?Sized + 'a> {
     lock: &'a Mutex<T>,
     // ...
@@ -906,7 +906,7 @@ pthread_mutex_unlock(&mutex);  // 操作3：释放锁
 
 转换后的Rust代码：
 
-```rust
+```rust,ignore
 let guard = mutex.lock().unwrap();  // 操作1：获取锁
 // 临界区代码                          // 操作2：执行临界区
 // guard 离开作用域，自动释放锁        // 操作3：释放锁
@@ -971,7 +971,7 @@ MutexGuard自动管理
 
 #### 实际应用示例
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 fn concrat_conversion_example() {

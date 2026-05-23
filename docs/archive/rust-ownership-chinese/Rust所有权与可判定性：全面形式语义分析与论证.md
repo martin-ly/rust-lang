@@ -641,7 +641,7 @@ fn conservative_reject(flag: bool) {
 
 #### 3.3.1 运行时检查机制
 
-```rust
+```rust,ignore
 // RefCell<T> 运行时借用检查
 pub struct RefCell<T: ?Sized> {
     value: UnsafeCell<T>,

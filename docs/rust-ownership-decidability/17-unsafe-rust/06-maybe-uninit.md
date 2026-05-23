@@ -63,7 +63,7 @@ assert_eq!(std::mem::size_of::<MaybeUninit<i32>>(), 4);
 ### 2.1 创建与初始化
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 方式 1: 从未初始化开始
 let mut slot = MaybeUninit::uninit();
 unsafe {
@@ -81,7 +81,7 @@ let slot = MaybeUninit::new(x);  // x 被移动
 ### 2.2 读取值
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let mut slot = MaybeUninit::new(String::from("hello"));
 
 // 方式 1: 引用 (不移动)
@@ -100,7 +100,7 @@ let s = unsafe { slot.assume_init() };
 ### 2.3 部分初始化数组
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn partial_init_example() {
     let mut arr: [MaybeUninit<String>; 5] =
         unsafe { MaybeUninit::uninit().assume_init() };
@@ -133,7 +133,7 @@ fn partial_init_example() {
 ### 3.1 类型级未初始化
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 // 状态标记类型
@@ -181,7 +181,7 @@ println!("{}", slot.get());  // 42
 ### 3.2 延迟初始化
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::sync::Once;
 
 struct Lazy<T> {
@@ -216,7 +216,7 @@ impl<T> Lazy<T> {
 ### 4.1 Union 实现
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[repr(transparent)]
 pub union MaybeUninit<T> {
     uninit: (),
@@ -233,7 +233,7 @@ pub union MaybeUninit<T> {
 ### 4.2 repr(transparent)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // MaybeUninit<T> 和 T 有完全相同的内存布局
 assert_eq!(
     std::mem::size_of::<MaybeUninit<i64>>(),
@@ -251,7 +251,7 @@ assert_eq!(
 ### 5.1 零成本抽象
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // MaybeUninit 在运行时是零成本的
 // 只是编译时的类型标记
 
@@ -263,7 +263,7 @@ let y = unsafe { x.assume_init() };
 ### 5.2 避免不必要的初始化
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 慢：先零初始化，再写入实际数据
 let mut vec = vec![0; 1000];  // 写 1000 个 0
 read_data_into(&mut vec);      // 再写 1000 个实际值

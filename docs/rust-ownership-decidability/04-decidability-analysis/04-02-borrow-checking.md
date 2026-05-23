@@ -195,7 +195,7 @@ $$
 ### 算法 3.1 (NLL借用检查)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn nll_borrow_check(mir: &Mir) -> Result<(), BorrowErrors> {
     // 1. 构建区域约束图
     let region_graph = build_region_graph(mir);
@@ -389,7 +389,7 @@ error(P, B) :-
 ### 算法 4.1 (Polonius求解)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn polonius_borrow_check(mir: &Mir) -> Result<(), BorrowErrors> {
     // 1. 提取事实
     let facts = extract_facts(mir);

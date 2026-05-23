@@ -208,7 +208,7 @@ impl Drop for ThreadPool {
 
 ### 核心实现
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use std::future::Future;
 use std::pin::Pin;
@@ -420,7 +420,7 @@ async fn fetch_user_data(client: &AsyncHttpClient, user_id: u64) -> Result<Strin
 
 ### 核心实现
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::Hash;
 use std::ptr::NonNull;
@@ -664,7 +664,7 @@ impl<K, V> Clone for ThreadSafeLRUCache<K, V> {
 
 ### 核心实现
 
-```rust
+```rust,ignore
 use std::path::{Path, PathBuf, Component};
 use std::io;
 use std::fs;
@@ -966,7 +966,7 @@ impl PermissionManager {
 
 ### 核心实现
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::time::SystemTime;

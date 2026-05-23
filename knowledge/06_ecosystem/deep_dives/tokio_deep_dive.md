@@ -1,4 +1,5 @@
 # Tokio 运行时深度解析
+> **相关概念**: [Tokio](../../../concept/03_advanced/02_async.md)
 
 > **Bloom 层级**: 理解
 
@@ -201,7 +202,7 @@ graph TD
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn task_example() {
@@ -231,7 +232,7 @@ async fn named_task() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use tokio::runtime::{Runtime, Builder};
 
 // 单线程运行时 (用于测试或嵌入式)
@@ -267,7 +268,7 @@ fn multi_threaded() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -303,7 +304,7 @@ async fn tcp_server() -> tokio::io::Result<()> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, interval, timeout, Duration};
 
 async fn timer_examples() {
@@ -345,7 +346,7 @@ async fn slow_operation() -> String {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use tokio::runtime::Builder;
 
 fn optimized_runtime() {
@@ -384,7 +385,7 @@ fn optimized_runtime() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use tokio::task::{JoinSet, AbortHandle};
 
 // 管理多个任务
@@ -433,7 +434,7 @@ async fn cancel_task() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::{Semaphore, RwLock};
 use std::sync::Arc;
 
@@ -492,7 +493,7 @@ async fn shared_state() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 1. 避免在异步代码中阻塞
 // ❌ 错误
 async fn bad() {
@@ -541,7 +542,7 @@ async fn local_tasks() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 根据工作负载调整
 let rt = tokio::runtime::Builder::new_multi_thread()
     // CPU 密集型: worker_threads = CPU 核心数
@@ -637,7 +638,7 @@ let rt = tokio::runtime::Builder::new_multi_thread()
 
 2. **以下代码有什么问题？如何修复？**
 
-```rust
+```rust,compile_fail
 #[tokio::main]
 async fn main() {
     let handle = tokio::spawn(async {
@@ -655,7 +656,7 @@ async fn main() {
 
 **修复**:
 
-```rust
+```rust,compile_fail
 #[tokio::main]
 async fn main() {
     let handle = tokio::spawn(async {

@@ -102,7 +102,7 @@ let buf: Buffer<u8, 2048> = Buffer { data: [0; 2048] };
 
 #### 新增内容
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94+: 原生 async trait，无需 async-trait crate！
 
 trait AsyncProcessor {
@@ -140,7 +140,7 @@ impl AsyncProcessor for MyProcessor {
 
 #### 新增内容
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: C-unwind ABI 稳定
 
 // 标准 C ABI：panic 会导致未定义行为
@@ -176,7 +176,7 @@ pub extern "C-unwind" fn c_unwind_function() {
 
 #### 新增内容
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: 使用 proc_macro_span 获取精确位置
 #[proc_macro_derive(Debuggable)]
 pub fn derive_debuggable(input: TokenStream) -> TokenStream {
@@ -257,7 +257,7 @@ pub fn derive_debuggable(input: TokenStream) -> TokenStream {
 
 **之前:**
 
-```rust
+```rust,ignore
 use async_trait::async_trait;
 
 #[async_trait]
@@ -279,7 +279,7 @@ trait MyTrait {
 
 **之前:**
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn my_func() {
     // panic 会导致 UB
@@ -288,7 +288,7 @@ pub extern "C" fn my_func() {
 
 **Rust 1.94+:**
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C-unwind" fn my_func() {
     // panic 会安全传播

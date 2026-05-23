@@ -52,7 +52,7 @@ async-graphql提供:
 
 > Object派生宏生成GraphQL类型定义。
 
-```rust
+```rust,ignore
 #[derive(SimpleObject)]
 struct User {
     id: ID,
@@ -73,7 +73,7 @@ struct User {
 
 > 解析器可注入Schema上下文。
 
-```rust
+```rust,ignore
 struct Query;
 
 #[Object]
@@ -98,7 +98,7 @@ impl Query {
 
 > 可配置最大查询深度。
 
-```rust
+```rust,ignore
 let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
     .limit_depth(10)  // 最大深度10
     .finish();
@@ -110,7 +110,7 @@ let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
 
 > 可配置查询复杂度评分。
 
-```rust
+```rust,ignore
 .schema_builder()
     .limit_complexity(100)  // 最大复杂度
 ```
@@ -125,7 +125,7 @@ let schema = Schema::build(Query, EmptyMutation, EmptySubscription)
 
 > 订阅返回Stream。
 
-```rust
+```rust,ignore
 struct Subscription;
 
 #[Subscription]
@@ -144,7 +144,7 @@ impl Subscription {
 
 ### 反例 6.1 (N+1查询)
 
-```rust
+```rust,ignore
 // 嵌套解析器可能N+1
 async fn friends(&self, ctx: &Context<'_>) -> Vec<User> {
     // 每个User分别查询friends
@@ -159,7 +159,7 @@ async fn find_user_by_id(ctx: &Context<'_>, id: ID) -> User {
 
 ### 反例 6.2 (无限制查询)
 
-```rust
+```rust,ignore
 // 未配置深度限制，可能DoS
 let schema = Schema::build(Query, Mutation, Subscription).finish();
 // 恶意查询: query { a { a { a { ... } } } }

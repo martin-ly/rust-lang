@@ -176,7 +176,7 @@
 ### 常见组合
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Builder + TypeState
 UserBuilder::new()
     .name("Alice")  // returns UserBuilder<HasName>

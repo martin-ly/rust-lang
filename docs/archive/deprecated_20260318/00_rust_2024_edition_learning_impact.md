@@ -132,7 +132,7 @@ cargo fix --edition-idioms
 
 ### 4.2 `unsafe_op_in_unsafe_fn` 示例
 
-```rust
+```rust,ignore
 // Rust 2021 - unsafe fn 内不需要显式标记 unsafe 块
 #[edition = "2021"]
 unsafe fn old_style() {
@@ -154,7 +154,7 @@ unsafe fn new_style() {
 
 ### 4.3 `static mut` 替代方案
 
-```rust
+```rust,ignore
 // ❌ Rust 2024 禁止：&static mut 引用
 // static mut COUNTER: i32 = 0;
 // let _ = unsafe { &mut COUNTER };
@@ -226,7 +226,7 @@ fn process_mutex() {
 
 ### 4.6 宏片段说明符更新
 
-```rust
+```rust,ignore
 // Rust 2024 - 宏片段说明符增强
 macro_rules! create_fn {
     // 新的片段说明符支持
@@ -299,7 +299,7 @@ cargo clippy --all-targets --all-features
 
 ### 5.2 兼容性检查代码
 
-```rust
+```rust,ignore
 // 在 build.rs 或 CI 中检查 Edition 兼容性
 #[cfg(not(edition = "2024"))]
 compile_error!("This crate requires Rust 2024 Edition");

@@ -728,7 +728,7 @@ impl Future for SimpleFuture {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 async fn async_function() -> i32 {
     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
     42
@@ -751,7 +751,7 @@ async fn main() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 async fn combined_future() -> i32 {
     let a = async_function().await;
     let b = async_function().await;
@@ -873,7 +873,7 @@ impl Future for AsyncCounter {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -913,7 +913,7 @@ impl Future for ConcurrentSafeFuture {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // async 函数被编译器转换为状态机
 async fn example_async() -> i32 {
     let x = 10;
@@ -978,7 +978,7 @@ impl Future for ExampleAsyncState {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use tokio::time::{sleep, Duration};
 

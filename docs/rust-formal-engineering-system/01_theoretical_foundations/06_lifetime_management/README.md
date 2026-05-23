@@ -129,7 +129,7 @@ fn trait_object_lifetime() {
 
 ### 高级生命周期模式
 
-```rust
+```rust,ignore
 // 生命周期与泛型结合
 struct Parser<'input, T> {
     input: &'input str,

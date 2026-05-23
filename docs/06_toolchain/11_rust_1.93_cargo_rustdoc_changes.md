@@ -28,6 +28,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -167,9 +168,10 @@ cargo clean --workspace
 ---
 
 ## 完整代码示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 //! Rust 1.93 Cargo 和 Rustdoc 变更完整示例
 
 /// CARGO_CFG_DEBUG_ASSERTIONS 检测示例
@@ -491,6 +493,7 @@ mod tests {
 ---
 
 ## 形式化规范链接
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 工具 | 配置参考 | 形式化规范 |
@@ -506,6 +509,7 @@ mod tests {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -701,4 +705,3 @@ Rust 1.95+ 重要更新：
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

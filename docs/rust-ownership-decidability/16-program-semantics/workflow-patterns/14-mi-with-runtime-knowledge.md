@@ -312,7 +312,7 @@ $$
 
 利用 Rust 的 `Vec` 和动态并发原语实现运行时确定实例数的多实例模式：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::sync::Arc;
 use tokio::sync::Barrier;
@@ -374,7 +374,7 @@ where
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use tokio::task::JoinSet;
 use thiserror::Error;
@@ -453,7 +453,7 @@ pub fn barrier_wait(n: usize, arrived: &AtomicUsize) {
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use rand::Rng;
 
@@ -647,7 +647,7 @@ $$
 
 电商系统在每日开盘时从消息队列获取待处理订单，队列长度 $N$ 在批处理启动前已知。
 
-```rust
+```rust,ignore
 let orders = message_queue.drain_all().await;
 let n = orders.len();  // N 在启动前已知
 let results = process_orders_parallel(orders).await;
@@ -659,7 +659,7 @@ let results = process_orders_parallel(orders).await;
 
 MapReduce 框架中，输入数据分片数量 $N$ 在任务启动前由输入大小和分片策略确定：
 
-```rust
+```rust,ignore
 let n = compute_shard_count(file_size, 64 * 1024 * 1024);
 let shards = split_input(file, n);
 let map_results: Vec<_> = shards.into_par_iter().map(|s| map_task(s)).collect();
@@ -671,7 +671,7 @@ let map_results: Vec<_> = shards.into_par_iter().map(|s| map_task(s)).collect();
 
 数据库分片迁移工具，根据源表行数动态确定并行迁移任务数量：
 
-```rust
+```rust,ignore
 let row_count = source_table.count().await;
 let shard_size = 10_000;
 let n = (row_count + shard_size - 1) / shard_size;
@@ -689,7 +689,7 @@ let ranges: Vec<_> = (0..n).map(|i| i * shard_size..((i + 1) * shard_size).min(r
 
 预取 N 个实例后批量启动：
 
-```rust
+```rust,ignore
 pub async fn buffered_spawn<const BUFFER: usize, F, Fut, R>(
     factories: Vec<F>,
 ) -> Vec<R>
@@ -713,7 +713,7 @@ where F: Fn() -> Fut + Send + 'static, Fut: Future<Output = R> + Send + 'static,
 
 为不同实例分配优先级：
 
-```rust
+```rust,ignore
 pub struct PrioritizedInstance<F> { priority: u32, factory: F }
 pub async fn execute_prioritized<F, Fut, R>(instances: Vec<PrioritizedInstance<F>>) -> Vec<R> {
     let mut instances = instances;

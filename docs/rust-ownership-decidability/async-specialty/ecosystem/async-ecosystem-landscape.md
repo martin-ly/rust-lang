@@ -81,7 +81,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -110,7 +110,7 @@ async fn main(spawner: Spawner) {
 ### 1.2 RTIC实时框架
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[rtic::app(device = stm32f4xx_hal::pac)]
 mod app {
     #[shared]
@@ -146,7 +146,7 @@ mod app {
 ### 2.1 tokio-uring
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use tokio_uring::fs::File;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -167,7 +167,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 2.2 glommio (线程本地io_uring)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use glommio::{
     io::{DmaFile, OpenOptions},
     LocalExecutorBuilder, Placement,
@@ -195,7 +195,7 @@ fn main() {
 ### 2.3 monoio (纯io_uring)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use monoio::{
     fs::File,
     io::{AsyncReadRent, AsyncWriteRent},
@@ -228,7 +228,7 @@ async fn main() {
 ### 3.1 Quinn (QUIC协议)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use quinn::{Endpoint, ServerConfig};
 
 async fn quic_server() {
@@ -246,7 +246,7 @@ async fn quic_server() {
 ### 3.2 sqlx (编译时检查SQL)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use sqlx::postgres::PgPool;
 
 async fn query_users(pool: &PgPool) -> Result<Vec<User>, sqlx::Error> {
@@ -264,7 +264,7 @@ async fn query_users(pool: &PgPool) -> Result<Vec<User>, sqlx::Error> {
 ### 3.3 lapin (AMQP/RabbitMQ)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use lapin::{Connection, ConnectionProperties, options::*};
 
 async fn amqp_consumer() -> Result<(), lapin::Error> {

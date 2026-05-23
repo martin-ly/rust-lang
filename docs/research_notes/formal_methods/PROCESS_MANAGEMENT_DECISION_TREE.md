@@ -118,7 +118,7 @@ fn parent_child_communication() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use memmap2::{MmapMut, MmapOptions};
 
@@ -141,7 +141,7 @@ fn shared_memory_ipc() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::os::unix::net::UnixListener;
 
 // 推荐: 使用 Unix 域套接字
@@ -226,7 +226,7 @@ fn process_sync() {
 ### 代码示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 大文件传输 - 使用内存映射
 use memmap2::Mmap;
 use std::fs::File;

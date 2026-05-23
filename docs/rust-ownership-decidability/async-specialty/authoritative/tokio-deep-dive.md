@@ -97,7 +97,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Tokio调度器核心结构
 pub struct Scheduler {
     /// 全局队列 - 所有线程可访问
@@ -135,7 +135,7 @@ pub struct GlobalQueue {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 impl LocalQueue {
     /// 从本地队列弹出任务 (LIFO - 热数据)
     fn pop(&mut self) -> Option<Task> {
@@ -192,7 +192,7 @@ impl LocalQueue {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 /// 工作线程主循环
 fn worker_loop(&self) {
     let local = &self.local_queue;
@@ -234,7 +234,7 @@ fn worker_loop(&self) {
 ### 3.1 跨平台抽象
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// IO驱动 trait
 pub(crate) trait Driver {
     /// 注册IO资源
@@ -272,7 +272,7 @@ pub struct IocpDriver {
 ### 3.2 epoll实现细节
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 impl EpollDriver {
     fn new() -> io::Result<Self> {
         let fd = unsafe { libc::epoll_create1(libc::EPOLL_CLOEXEC) };
@@ -378,7 +378,7 @@ TcpStream创建流程:
 ### 4.1 分层时间轮
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// Tokio的分层时间轮
 pub struct Timer {
     /// 6层时间轮
@@ -413,7 +413,7 @@ pub struct Wheel {
 ### 4.2 Timer操作
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 impl Timer {
     /// 添加超时
     fn add_timeout(&mut self, deadline: Instant, waker: Waker) -> TimerHandle {
@@ -475,7 +475,7 @@ impl Timer {
 ### 5.1 AsyncRead/AsyncWrite trait
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// Tokio的异步IO trait
 pub trait AsyncRead {
     fn poll_read(
@@ -501,7 +501,7 @@ pub trait AsyncWrite {
 ### 5.2 与std::io的桥梁
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 将std::io::Read适配为AsyncRead
 pub struct BlockingReader<T> {
     inner: T,
@@ -555,7 +555,7 @@ impl<T: Read + Send + 'static> AsyncRead for BlockingReader<T> {
 ### 6.1 批处理模式
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 低效: 多次小写
 for chunk in chunks {
     stream.write(chunk).await?;
@@ -578,7 +578,7 @@ if !buf.is_empty() {
 ### 6.2 避免任务切换
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 低效: 频繁yield
 for i in 0..1_000_000 {
     tokio::task::yield_now().await;
@@ -598,7 +598,7 @@ for batch in (0..1_000_000).step_by(BATCH_SIZE) {
 ### 6.3 内存池
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use bytes::BytesMut;
 
 // 重用缓冲区
@@ -632,7 +632,7 @@ fn put_buffer(mut buf: BytesMut) {
 ### 7.1 Tokio Console
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // Cargo.toml
 [dependencies]
 console-subscriber = "0.2"
@@ -650,7 +650,7 @@ async fn main() {
 ### 7.2 Tracing集成
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tracing::{info, instrument};
 
 #[instrument]

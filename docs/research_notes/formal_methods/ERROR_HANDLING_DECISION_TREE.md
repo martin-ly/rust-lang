@@ -250,7 +250,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 重试决策树
 fn should_retry(error: &Error) -> RetryDecision {
     match error.kind() {
@@ -395,7 +395,7 @@ fn should_retry(error: &Error) -> RetryDecision {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // Option → Result
 let result = option.ok_or(Error::NotFound)?;
 let result = option.ok_or_else(|| Error::compute())?;
@@ -460,7 +460,7 @@ let value = result.unwrap();        // 仅用于原型/测试
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 库代码 (lib.rs)
 use thiserror::Error;
 
@@ -553,7 +553,7 @@ fn main() -> Result<()> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 use serde::Serialize;
 
@@ -627,7 +627,7 @@ pub enum AppError {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 fn process_user(user_id: Uuid) -> Result<()> {
@@ -660,7 +660,7 @@ fn process_user(user_id: Uuid) -> Result<()> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -710,7 +710,7 @@ fn load_config(path: &str) -> Result<Config, ConfigError> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 领域层错误
 #[derive(Error, Debug)]
 pub enum DomainError {
@@ -765,7 +765,7 @@ impl From<ApplicationError> for ApiError {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 pub trait HttpStatusCode {
     fn status_code(&self) -> StatusCode;
 }
@@ -787,7 +787,7 @@ impl HttpStatusCode for ApiError {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 pub struct ErrorBuilder {
     code: ErrorCode,
@@ -849,7 +849,7 @@ let err = ErrorBuilder::new(ErrorCode::NotFound)
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::io;
 
 #[derive(Error, Debug)]
@@ -876,7 +876,7 @@ fn read_config() -> Result<Config, AppError> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 当需要自定义错误信息时
 fn parse_port(s: &str) -> Result<u16, AppError> {
     s.parse::<u16>()
@@ -915,7 +915,7 @@ fn load_users() -> Result<Vec<User>> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use tracing::{error, warn, info, instrument};
 
 #[instrument(skip(db), fields(user_id = %user_id))]
@@ -953,7 +953,7 @@ async fn authenticate_user(
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 pub fn format_error_report(err: &anyhow::Error) -> String {
     let mut report = String::new();
 
@@ -996,7 +996,7 @@ fn suggest_fixes(err: &anyhow::Error) -> String {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use metrics::{counter, gauge, histogram};
 
 pub fn report_error(err: &AppError) {
@@ -1085,7 +1085,7 @@ fn test_error_propagation() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #[tokio::test]
 async fn test_retry_logic() {
     let mut attempts = 0;
@@ -1133,7 +1133,7 @@ async fn test_circuit_breaker() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 生产代码中使用 unwrap
 let config = fs::read_to_string("config.json").unwrap();
 let port = config.parse::<u16>().unwrap();
@@ -1155,7 +1155,7 @@ let val = Some(42).expect("this is a bug: value should exist");
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 使用 String 丢失类型安全
 fn do_something() -> Result<(), String> {
     Err("something went wrong".to_string())
@@ -1187,7 +1187,7 @@ match do_something() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 丢失了上下文信息
 fn process_file(path: &str) -> Result<Data, io::Error> {
     let content = fs::read_to_string(path)?;
@@ -1217,7 +1217,7 @@ fn process_file(path: &str) -> Result<Data> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // ❌ 错误: Option 表示错误
 fn find_user(id: Uuid) -> Option<User> {
     // 如果数据库连接失败返回 None?
@@ -1249,7 +1249,7 @@ fn find_user(id: Uuid) -> Result<User, FindUserError> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 完全忽略错误
 let _ = file.write_all(data);
 
@@ -1277,7 +1277,7 @@ let _ = cache.insert(key, value); // 缓存失败可接受
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 过于详细的错误枚举
 #[derive(Error, Debug)]
 enum DatabaseError {
@@ -1310,7 +1310,7 @@ enum DatabaseError {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // ❌ 错误: Rc 不能跨线程
 #[derive(Error, Debug)]
 enum BadError {
@@ -1337,7 +1337,7 @@ enum GoodError {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 每次调用都分配字符串，即使成功
 fn parse_hot(input: &[u8]) -> Result<Item, String> {
     if input.is_empty() {
@@ -1373,7 +1373,7 @@ enum LazyError {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 //! 完整的多层错误处理示例
 
 use std::collections::HashMap;
@@ -1674,7 +1674,7 @@ fn main() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 //! 生产级错误处理：重试、断路器、超时
 
 use std::future::Future;
@@ -2076,7 +2076,7 @@ mod tests {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 //! anyhow 和 thiserror 的最佳实践组合
 
 // ==================== 库代码 (使用 thiserror) ====================

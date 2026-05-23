@@ -162,7 +162,7 @@
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use temporal_sdk::{ActivityOptions, WorkflowContext, workflow};
 
 #[workflow]
@@ -194,7 +194,7 @@ async fn compensate_payment(ctx: &mut WorkflowContext, order_id: String) {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // Rust原生状态机实现
 use std::collections::HashMap;
 

@@ -325,7 +325,7 @@ println!("{} 长度是 {}", s1, len);  // s1仍然可用!
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 规则1: 可同时有多个不可变借用
 let r1 = &s;
 let r2 = &s;
@@ -367,7 +367,7 @@ r2.push_str("!");
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 fn dangle() -> &String {  // 错误! 返回悬垂引用
     let s = String::from("hello");
     &s  // s在函数结束时释放
@@ -451,7 +451,7 @@ let processed = process(data);  // 转移所有权
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn analyze(data: &[u8]) -> Analysis {
     // 只读分析，不修改
     Analysis {

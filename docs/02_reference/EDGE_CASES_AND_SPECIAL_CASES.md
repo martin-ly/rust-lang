@@ -83,6 +83,7 @@
     - [形式化文档](#形式化文档)
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -111,7 +112,7 @@ empty.get(0);   // ✅ 返回 None
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 let map: HashMap<i32, &str> = HashMap::new();
@@ -143,7 +144,7 @@ slice.iter().next();  // ✅ 返回 None
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let empty: Vec<i32> = vec![];
 empty.sort();  // ✅ 无操作，不 panic
 empty.binary_search(&0);  // ✅ Err(0)，表示应插入位置
@@ -177,7 +178,7 @@ single.chunks(1).count();  // 1
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let handles: Vec<_> = vec![];
 for h in handles {
     h.join().unwrap();
@@ -191,7 +192,7 @@ for h in handles {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 let (tx, rx) = mpsc::channel();
@@ -217,6 +218,7 @@ match mutex.lock() {
 ---
 
 ## 数值溢出
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 整数溢出（debug 下 panic）
@@ -244,6 +246,7 @@ let y = x.checked_div(zero);  // ✅ None
 ---
 
 ## 字符串与切片
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 空字符串
@@ -284,6 +287,7 @@ let sub = &s[2..2];  // ✅ ""
 ---
 
 ## unsafe 与 FFI
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 空指针解引用
@@ -302,7 +306,7 @@ if !ptr.is_null() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 #[repr(C)]
 struct Foo { x: i32 }
 
@@ -320,7 +324,7 @@ fn safe_wrapper() -> Option<&'static Foo> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // ❌ 返回局部变量的引用
 fn bad() -> &i32 {
     let x = 42;
@@ -334,6 +338,7 @@ fn good(x: &i32) -> &i32 { x }
 ---
 
 ## WASM 特例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 无 std 环境
@@ -347,9 +352,10 @@ fn good(x: &i32) -> &i32 { x }
 ```
 
 ### 阻塞 API 在 WASM
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ❌ wasm32 下 std::thread::sleep 可能不可用或行为不同
 // std::thread::sleep(Duration::from_secs(1));
 
@@ -361,9 +367,11 @@ fn good(x: &i32) -> &i32 { x }
 ---
 
 ## panic 边界
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### panic 与 unwrap
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -377,6 +385,7 @@ res.unwrap_or_default();  // ✅ 或 map_err 处理
 ```
 
 ### 断言边界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -388,12 +397,14 @@ v.get(10);  // ✅ 返回 None
 ---
 
 ## 空 Future 与异步
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 空 select
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::select;
 
 // 无分支的 select! 会永久挂起
@@ -406,6 +417,7 @@ tokio::select! {
 ```
 
 ### 已完成 Future
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -418,9 +430,11 @@ let f = std::future::ready(42);
 ---
 
 ## Rust 1.93 行为变更特例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### BTreeMap::append 行为变更
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **Rust 1.93** 起，`BTreeMap::append` 当追加的条目已存在时，**不再覆盖**目标中的现有键，而是保留目标中的值。
@@ -440,6 +454,7 @@ assert_eq!(a.get(&1), Some(&"a"));
 ```
 
 ### Copy specialization 移除
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **Rust 1.93** 在 Copy trait 上停止内部使用 specialization。部分标准库 API 可能改为调用 `Clone::clone` 而非按位复制，**可能导致性能回归**。
@@ -451,6 +466,7 @@ let v2 = v.clone();  // 可能受影响
 ```
 
 ### vec::IntoIter 与 RefUnwindSafe
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **Rust 1.93** 放宽 `vec::IntoIter<T>: UnwindSafe` 约束，不再要求 `T: RefUnwindSafe`。
@@ -467,9 +483,11 @@ assert_unwind_safe::<IntoIter<*mut i32>>();  // 1.93 可行
 ---
 
 ## 更多边界情况代码示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 所有权边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 部分移动后使用
@@ -514,6 +532,7 @@ fn copy_behavior() {
 ```
 
 ### 生命周期边界
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 生命周期省略规则边界
@@ -550,6 +569,7 @@ fn nll_example() {
 ```
 
 ### 泛型边界
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### 递归类型大小边界
@@ -588,11 +608,12 @@ fn zero_sized_types() {
 ```
 
 ### 模式匹配边界
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 穷尽性检查边界
 
-```rust
+```rust,ignore
 enum Option<T> {
     Some(T),
     None,
@@ -626,6 +647,7 @@ fn at_binding(x: Option<i32>) -> i32 {
 ```
 
 ### 并发边界
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 #### 死锁边界
@@ -670,6 +692,7 @@ fn auto_trait_bounds() {
 ```
 
 ### unsafe 边界
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 裸指针解引用边界
@@ -711,6 +734,7 @@ fn unaligned_pointer() {
 ```
 
 ### 迭代器边界
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 迭代器失效边界
@@ -733,9 +757,11 @@ fn iterator_invalidation() {
 ---
 
 ## 🔗 形式化边界分析
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 所有权与借用边界
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 边界情况 | 形式化规则 | 相关文档 |
@@ -745,6 +771,7 @@ fn iterator_invalidation() {
 | NLL | $\text{Scope}(r) = [t_1, t_{\text{last\_use}}]$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md) |
 
 ### 类型系统边界
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 边界情况 | 形式化规则 | 相关文档 |
@@ -754,6 +781,7 @@ fn iterator_invalidation() {
 | 生命周期子类型 | $\ell_2 <: \ell_1 \leftrightarrow \ell_1 \supseteq \ell_2$ | [lifetime_formalization](../research_notes/formal_methods/lifetime_formalization.md#定义-14-生命周期子类型) |
 
 ### 并发边界
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 边界情况 | 形式化规则 | 相关文档 |
@@ -763,6 +791,7 @@ fn iterator_invalidation() {
 | 数据竞争 | $\text{DataRaceFree}(P)$ 编译期保证 | [borrow_checker_proof](../research_notes/formal_methods/borrow_checker_proof.md#定理-1-数据竞争自由) |
 
 ### unsafe 边界
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 边界情况 | 形式化规则 | 相关文档 |
@@ -774,9 +803,11 @@ fn iterator_invalidation() {
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 速查卡
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [集合与迭代器速查卡](./quick_reference/collections_iterators_cheatsheet.md)
@@ -785,6 +816,7 @@ fn iterator_invalidation() {
 - [所有权速查卡](./quick_reference/ownership_cheatsheet.md)
 
 ### 形式化文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
@@ -795,6 +827,7 @@ fn iterator_invalidation() {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -997,4 +1030,3 @@ fn iterator_invalidation() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

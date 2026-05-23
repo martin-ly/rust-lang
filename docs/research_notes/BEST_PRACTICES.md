@@ -553,7 +553,7 @@ fn main() {
 
 **示例**:
 
-```rust
+```rust,ignore
 // ❌ 错误示例
 fn main() {
     let s = String::from("hello");

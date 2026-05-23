@@ -69,7 +69,7 @@ $$
 
 **估计**:
 
-```rust
+```rust,ignore
 // 最小二乘估计
 β̂ = Σ(n_i - n̄)(t_i - t̄) / Σ(n_i - n̄)²
 ```
@@ -136,7 +136,7 @@ $$
 
 ### 反例 5.1 (编译器优化)
 
-```rust
+```rust,ignore
 // 危险: 可能被优化掉
 c.bench_function("noop", |b| {
     b.iter(|| {
@@ -155,7 +155,7 @@ c.bench_function("real", |b| {
 
 ### 反例 5.2 (不稳定测量)
 
-```rust
+```rust,ignore
 // 第一次运行包含缓存预热，应在迭代外
 let data = setup_data();  // 在iter外准备
 c.bench_function("cached", |b| {

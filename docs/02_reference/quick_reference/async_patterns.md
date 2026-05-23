@@ -1,6 +1,7 @@
 ﻿# ⚡ Rust 异步编程速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [⚡ Rust 异步编程速查卡](#-rust-异步编程速查卡)
@@ -75,6 +76,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c06_async/docs/README.md) | [代码示例](../../../crates/c06_async/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -160,6 +162,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
   - [相关概念](#相关概念)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -277,7 +280,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 pub trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -301,7 +304,7 @@ pub enum Poll<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn fetch_data() -> String {
     "data".to_string()
 }
@@ -321,7 +324,7 @@ async fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::join;
 
 async fn task1() -> u32 { 1 }
@@ -343,7 +346,7 @@ async fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::select;
 
 async fn operation() {
@@ -360,7 +363,7 @@ async fn operation() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
@@ -371,13 +374,14 @@ async fn fetch_with_timeout() -> Result<String, tokio::time::error::Elapsed> {
 ---
 
 ## 🏗️ 运行时对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### Tokio（推荐，功能最全）
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Cargo.toml
 [dependencies]
 tokio = { version = "1", features = ["full"] }
@@ -405,7 +409,7 @@ async fn main() { }
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 [dependencies]
 async-std = { version = "1", features = ["attributes"] }
 
@@ -426,7 +430,7 @@ async fn main() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 [dependencies]
 smol = "2"
 
@@ -445,13 +449,14 @@ fn main() {
 ---
 
 ## 🔄 常见并发模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模式 1: Fan-out（任务分发）
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn fan_out(items: Vec<i32>) -> Vec<i32> {
@@ -477,7 +482,7 @@ async fn fan_out(items: Vec<i32>) -> Vec<i32> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 
 async fn process_stream() {
@@ -495,7 +500,7 @@ async fn process_stream() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 struct Actor {
@@ -521,7 +526,7 @@ impl Actor {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn csp_pattern() {
@@ -544,13 +549,14 @@ async fn csp_pattern() {
 ---
 
 ## 🔐 共享状态
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 模式 1: Arc + Mutex
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -582,7 +588,7 @@ async fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tokio::sync::RwLock;
 
 let data = Arc::new(RwLock::new(vec![1, 2, 3]));
@@ -599,13 +605,14 @@ write.push(4);
 ---
 
 ## 🌐 网络编程模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### TCP Server
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -635,7 +642,7 @@ async fn main() -> std::io::Result<()> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use reqwest;
 
 #[tokio::main]
@@ -653,13 +660,14 @@ async fn main() -> Result<(), reqwest::Error> {
 ---
 
 ## ⚡ 性能优化
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 1. 批处理
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use std::collections::VecDeque;
 
@@ -684,7 +692,7 @@ async fn batch_processor() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use deadpool_postgres::{Config, Pool};
 
 async fn with_pool() {
@@ -702,7 +710,7 @@ async fn with_pool() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tokio_util::sync::CancellationToken;
 
 async fn cancellable_task() {
@@ -729,13 +737,14 @@ async fn cancellable_task() {
 ---
 
 ## ⚠️ 常见陷阱
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 陷阱 1: 在 async 中使用标准库阻塞 API
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // ❌ 错误：阻塞运行时
 async fn bad() {
     std::thread::sleep(Duration::from_secs(1));  // 阻塞！
@@ -753,7 +762,7 @@ async fn good() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 async fn bad(mutex: Arc<Mutex<i32>>) {
     let guard = mutex.lock().await;
@@ -777,7 +786,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ❌ 串行执行
 async fn bad() {
     task1().await;
@@ -795,6 +804,7 @@ async fn good() {
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 采用统一模板：错误示例 → 原因 → 修正。与「常见陷阱」互补。
@@ -821,7 +831,7 @@ async fn good() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 持有 MutexGuard 跨越 await 可能导致死锁
 async fn bad(mutex: Arc<Mutex<i32>>) {
     let guard = mutex.lock().unwrap();
@@ -834,7 +844,7 @@ async fn bad(mutex: Arc<Mutex<i32>>) {
 
 **修正**:
 
-```rust
+```rust,ignore
 // ✅ 缩小锁的作用域，在 await 前释放
 async fn good(mutex: Arc<Mutex<i32>>) {
     {
@@ -849,6 +859,7 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 ---
 
 ## 🎯 选择决策树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -870,9 +881,10 @@ async fn good(mutex: Arc<Mutex<i32>>) {
 ---
 
 ## 📊 Tokio 完整功能
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 [dependencies]
 tokio = { version = "1", features = [
     "macros",      // #[tokio::main]
@@ -890,6 +902,7 @@ tokio = { version = "1", features = [
 ---
 
 ## 🔗 快速跳转
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 深入学习
@@ -920,13 +933,14 @@ tokio = { version = "1", features = [
 ---
 
 ## 💡 使用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 场景 1: Web 服务器并发处理
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -962,7 +976,7 @@ async fn main() -> std::io::Result<()> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn fetch_user(id: u32) -> Result<String, &'static str> {
@@ -1003,7 +1017,7 @@ async fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{sleep, Duration};
 
@@ -1035,13 +1049,14 @@ async fn main() {
 ---
 
 ## ⚠️ 边界情况
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 边界 1: 异步递归
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -1067,9 +1082,10 @@ async fn main() {
 ```
 
 ### 边界 2: 异步 Drop
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -1106,9 +1122,10 @@ async fn main() {
 ```
 
 ### 边界 3: 限流与背压
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 
@@ -1140,14 +1157,16 @@ async fn main() {
 ---
 
 ## 🆕 Rust 1.93.0 异步改进
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### musl 1.2.5 DNS 解析改进
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **改进**: 静态链接的 musl 二进制文件在网络操作中更可靠
 
-```rust
+```rust,ignore
 // Rust 1.93.0 (musl 1.2.5) 改进
 use std::net::TcpStream;
 
@@ -1164,14 +1183,16 @@ let stream = TcpStream::connect("example.com:80")?;
 ---
 
 ## Rust 1.92.0 异步改进（历史）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 异步迭代器性能提升
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **改进**: 性能提升 15-20%
 
-```rust
+```rust,ignore
 // Rust 1.92.0 优化后的异步迭代器
 async fn process_stream() {
     let mut stream = async_stream::stream! {
@@ -1190,6 +1211,7 @@ async fn process_stream() {
 ```
 
 ### JIT 编译器优化
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **改进**: 异步代码性能提升，更好的内联优化
@@ -1203,12 +1225,14 @@ async fn process_stream() {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [异步编程完整文档](../../../crates/c06_async/docs/README.md)
 - [异步编程 README](../../../crates/c06_async/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 以下示例位于 `crates/c06_async/examples/`，可直接运行（例如：`cargo run -p c06_async --example async_patterns_demo`）。
@@ -1221,9 +1245,11 @@ async fn process_stream() {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 官方文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 异步编程文档](https://doc.rust-lang.org/book/ch16-00-fearless-concurrency.html)
@@ -1231,12 +1257,14 @@ async fn process_stream() {
 - [Tokio 文档](https://tokio.rs/)
 
 ### 项目内部文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [异步编程完整文档](../../../crates/c06_async/docs/README.md)
 - [异步状态机研究](../../research_notes/formal_methods/async_state_machine.md)
 
 ### 相关速查卡
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [线程与并发速查卡](./threads_concurrency_cheatsheet.md) - 并发编程对比
@@ -1255,12 +1283,14 @@ async fn process_stream() {
 ---
 
 ## Rust 1.95+ 异步模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### ControlFlow 在异步错误处理中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 异步验证管道
@@ -1284,9 +1314,10 @@ where
 ```
 
 ### LazyLock 在异步运行时配置中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局异步运行时配置
@@ -1342,6 +1373,7 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1667,4 +1699,3 @@ pub fn get_async_config() -> Option<&'static AsyncConfig> {
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

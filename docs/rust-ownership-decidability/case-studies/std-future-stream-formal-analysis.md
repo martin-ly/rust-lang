@@ -89,7 +89,7 @@ Future和Stream是Rust异步编程的核心抽象:
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
 
@@ -143,7 +143,7 @@ $$
 
 > Future实现了类似Monad的结构:
 
-```rust
+```rust,ignore
 // return/pure: 将值包装为立即完成的Future
 fn ready<T>(val: T) -> impl Future<Output = T>;
 
@@ -175,7 +175,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub struct Waker {
     inner: RawWaker,
 }
@@ -224,14 +224,14 @@ Task scheduled
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Send for Waker {}
 impl Sync for Waker {}
 ```
 
 **实现**:
 
-```rust
+```rust,ignore
 pub fn wake_by_ref(&self) {
     // 原子操作，线程安全
     unsafe { (self.vtable.wake)(self.data) }
@@ -251,7 +251,7 @@ pub fn wake_by_ref(&self) {
 ### 定义 4.1 (Stream trait)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 trait Stream {
     type Item;
 
@@ -277,7 +277,7 @@ trait Stream {
 
 **实现**:
 
-```rust
+```rust,ignore
 async fn collect<S: Stream>(stream: S) -> Vec<S::Item> {
     let mut items = Vec::new();
     while let Some(item) = stream.next().await {
@@ -310,7 +310,7 @@ $$
 
 **示例转换**:
 
-```rust
+```rust,ignore
 // 源码
 async fn example() -> i32 {
     let x = async_op1().await;
@@ -371,7 +371,7 @@ impl Future for ExampleFuture {
 
 **原因**:
 
-```rust
+```rust,ignore
 async fn self_ref() {
     let local = String::from("hello");
     let ref_to_local = &local;  // 借用!
@@ -436,7 +436,7 @@ Created ──► Spawned ──► Running ──► Completed
 
 **算法**:
 
-```rust
+```rust,ignore
 // 每个线程有自己的队列
 thread_local! {
     static LOCAL_QUEUE: Queue<Task>;
@@ -479,7 +479,7 @@ fn run() {
 ### 定理 7.1 (Future组合)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // map: 转换结果
 fn map<F, T>(self, f: F) -> Map<Self, F>
 where F: FnOnce(Self::Output) -> T;
@@ -507,7 +507,7 @@ $$
 ### 定理 7.2 (并发组合)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // join: 等待所有完成
 async fn join<A, B>(a: A, b: B) -> (A::Output, B::Output);
 
@@ -542,7 +542,7 @@ async fn select<A, B>(a: A, b: B) -> Either<A::Output, B::Output>;
 
 **示例**:
 
-```rust
+```rust,ignore
 // 取消安全: 使用 RAII
 async fn safe_operation() {
     let guard = acquire_resource();
@@ -585,7 +585,7 @@ async fn unsafe_operation() {
 ### 反例 9.1 (在async中阻塞)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 async fn bad() {
     std::thread::sleep(Duration::from_secs(1));  // 阻塞!
 }
@@ -599,7 +599,7 @@ async fn good() {
 ### 反例 9.2 (忘记Pin)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 async fn bad(mut self_ref: SelfRef) {
     self_ref.setup();  // 创建自引用
     // 移动!
@@ -615,7 +615,7 @@ async fn good(mut self_ref: Pin<Box<SelfRef>>) {
 ### 反例 9.3 (递归async)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 async fn recursive(n: usize) {
     if n > 0 {
         recursive(n - 1).await;  // 无限类型!
@@ -633,7 +633,7 @@ async fn recursive(n: usize) {
 ### 反例 9.4 (select后使用未完成Future)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let a = slow_op();
 let b = fast_op();
 

@@ -496,7 +496,7 @@ impl Subject {
 ### 6.3 反模式：不必要的 RefCell
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：在可以编译时解决的地方使用 RefCell
 fn unnecessary_refcell() {
     let cell = RefCell::new(5);

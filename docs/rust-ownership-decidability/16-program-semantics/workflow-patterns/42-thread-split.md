@@ -487,7 +487,7 @@ fn do_other_work() {
 
 对于 I/O 密集型场景，异步任务分裂比 OS 线程更高效：
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 use std::sync::Arc;
 
@@ -577,7 +577,7 @@ async fn process_item(item: Item) -> Result<ProcessedItem, String> {
 
 `rayon` 提供数据并行分裂，`crossbeam` 提供灵活的作用域线程：
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use crossbeam::thread;
 
@@ -784,7 +784,7 @@ $$
 
 **场景**: Web 网关接收到用户请求后，将请求分裂为三个并行处理流：输入验证、审计日志记录、用户行为分析。三个流独立执行，互不阻塞。
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 use std::sync::Arc;
 
@@ -888,7 +888,7 @@ async fn analyze_user_behavior(req: &UserRequest) -> Result<(), String> {
 
 **场景**: 大数据集的分裂-映射-归约并行处理。
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// MapReduce 风格的数据并行分裂
@@ -921,7 +921,7 @@ fn map_count_chars(s: &str) -> std::collections::HashMap<char, usize> {
 
 **场景**: 应用启动时并行初始化独立的子系统。
 
-```rust
+```rust,ignore
 use tokio::try_join;
 
 #[derive(Debug, Clone)]
@@ -983,7 +983,7 @@ pub enum InitError {
 
 根据运行时条件决定是否分裂：
 
-```rust
+```rust,ignore
 /// 条件线程分裂：仅在高负载时分裂处理
 pub fn conditional_split(data: Vec<u32>, threshold: usize) -> Vec<u64> {
     if data.len() < threshold {
@@ -1003,7 +1003,7 @@ pub fn conditional_split(data: Vec<u32>, threshold: usize) -> Vec<u64> {
 
 根据可用资源动态调整分裂粒度：
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// 自适应分裂：根据 CPU 核心数调整并行度
@@ -1024,7 +1024,7 @@ pub fn adaptive_split(data: Vec<f64>) -> Vec<f64> {
 
 多级分裂形成并行树：
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// 嵌套并行：矩阵分块后每块内继续分裂

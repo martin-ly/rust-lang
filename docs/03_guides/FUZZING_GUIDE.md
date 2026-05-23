@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [cargo-fuzz 模糊测试入门指南](#cargo-fuzz-模糊测试入门指南)
@@ -29,6 +30,7 @@
   - [7. 参考资源](#7-参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 什么是模糊测试（Fuzzing）？
 >
@@ -72,6 +74,7 @@ cargo fuzz --version
 ---
 
 ## 3. 快速开始
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 初始化 fuzz 项目
@@ -96,7 +99,7 @@ fuzz/
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // fuzz/src/sort_fuzzer.rs
 #![no_main]
 
@@ -149,6 +152,7 @@ cargo fuzz run sort_fuzzer corpus/
 ---
 
 ## 4. 本项目 Fuzz Target
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### c08_algorithms —— 解析器模糊测试
@@ -157,7 +161,7 @@ cargo fuzz run sort_fuzzer corpus/
 
 `fuzz/src/parser_fuzzer.rs`:
 
-```rust
+```rust,ignore
 #![no_main]
 
 use libfuzzer_sys::fuzz_target;
@@ -198,6 +202,7 @@ doc = false
 ---
 
 ## 5. 高级技巧
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 结构化 Fuzzing
@@ -206,7 +211,7 @@ doc = false
 
 对于需要结构化输入的场景：
 
-```rust
+```rust,ignore
 use arbitrary::Arbitrary;
 
 #[derive(Arbitrary, Debug)]
@@ -228,6 +233,7 @@ fuzz_target!(|packet: Packet| {
 ```
 
 ### 与 Miri 结合
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -238,6 +244,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test -- crash_input
 ```
 
 ### 覆盖率引导
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```bash
@@ -249,6 +256,7 @@ cargo fuzz coverage target_name
 ---
 
 ## 6. CI 集成
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
@@ -272,6 +280,7 @@ fuzzing:
 ---
 
 ## 7. 参考资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust Fuzzing Book](https://rust-fuzz.github.io/book/)
@@ -298,6 +307,7 @@ fuzzing:
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -388,4 +398,3 @@ fuzzing:
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

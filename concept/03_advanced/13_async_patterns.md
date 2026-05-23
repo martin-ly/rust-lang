@@ -30,6 +30,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -40,6 +41,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Future 与状态机
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -89,6 +91,7 @@ Future 的本质:
 ---
 
 ### 1.2 Pin 与自引用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -136,6 +139,7 @@ let future = Box::pin(async { /* ... */ });
 ---
 
 ### 1.3 Waker 与执行器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -180,6 +184,7 @@ Waker: 异步通知机制
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 并发执行模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -255,6 +260,7 @@ async fn process_stream() {
 ---
 
 ### 2.2 取消与超时
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -318,6 +324,7 @@ async fn auto_cancel() {
 ---
 
 ### 2.3 背压与流控制
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -437,6 +444,7 @@ async fn batch_processing(mut rx: mpsc::Receiver<i32>) {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -460,6 +468,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -750,4 +759,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

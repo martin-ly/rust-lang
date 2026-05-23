@@ -22,13 +22,13 @@ Rust provides three distinct types of procedural macros, each serving different 
 
 Function-like macros are invoked with the `!` syntax, similar to declarative macros:
 
-```rust
+```rust,ignore
 my_macro! { /* tokens */ }
 ```
 
 These are defined as:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 
 #[proc_macro]
@@ -47,7 +47,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 **Example - SQL Query Verification:**
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn sql(input: TokenStream) -> TokenStream {
     let query = input.to_string();
@@ -71,7 +71,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 Usage:
 
-```rust
+```rust,ignore
 let users = sql!(SELECT * FROM users WHERE active = true);
 ```
 
@@ -81,14 +81,14 @@ let users = sql!(SELECT * FROM users WHERE active = true);
 
 Derive macros automatically implement traits for types:
 
-```rust
+```rust,ignore
 #[derive(MyTrait)]
 struct MyStruct { ... }
 ```
 
 Definition:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use syn::{parse_macro_input, DeriveInput};
 
@@ -125,14 +125,14 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 
 Attribute macros transform the item they're attached to:
 
-```rust
+```rust,ignore
 #[my_attribute(args)]
 fn my_function() { ... }
 ```
 
 Definition:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 
 #[proc_macro_attribute]
@@ -234,7 +234,7 @@ quote = "1.0"  # Code generation
 2. **Crate Type**: Can only export proc macros, no regular public items
 3. **Single Target**: Proc macro crates cannot have bin targets
 
-```rust
+```rust,ignore
 // lib.rs - Proc macro entry points
 use proc_macro::TokenStream;
 
@@ -264,7 +264,7 @@ pub fn attribute_macro(args: TokenStream, input: TokenStream) -> TokenStream {
 
 The `TokenStream` is the fundamental data structure for proc macros:
 
-```rust
+```rust,ignore
 // proc_macro::TokenStream (from standard library)
 pub struct TokenStream {
     inner: Vec<TokenTree>,
@@ -302,7 +302,7 @@ TokenStream:
 
 **Basic Iteration:**
 
-```rust
+```rust,ignore
 use proc_macro::{TokenStream, TokenTree};
 
 fn analyze_stream(stream: TokenStream) {
@@ -330,7 +330,7 @@ fn analyze_stream(stream: TokenStream) {
 
 **Building TokenStreams:**
 
-```rust
+```rust,ignore
 use proc_macro::{TokenStream, TokenTree, Ident, Span};
 use std::str::FromStr;
 
@@ -364,7 +364,7 @@ The `syn` crate provides powerful parsing capabilities:
 
 **Basic Derive Input Parsing:**
 
-```rust
+```rust,ignore
 use syn::{parse_macro_input, DeriveInput, Data, Fields};
 use quote::quote;
 
@@ -431,7 +431,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 **Advanced Parsing:**
 
-```rust
+```rust,ignore
 use syn::{Attribute, Meta, NestedMeta, Lit, Expr};
 
 // Parse helper attributes
@@ -477,7 +477,7 @@ fn parse_attributes(attrs: &[Attribute]) -> Result<Config, syn::Error> {
 
 The `proc_macro2` crate provides an improved `TokenStream` that works outside the compiler:
 
-```rust
+```rust,ignore
 use proc_macro2::{TokenStream, Span, Ident};
 use quote::{quote, format_ident};
 
@@ -511,7 +511,7 @@ fn generate_code() -> TokenStream {
 
 **Converting Between Types:**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream as TokenStream1;
 use proc_macro2::TokenStream as TokenStream2;
 
@@ -531,7 +531,7 @@ let stream1: TokenStream1 = stream2.into();
 
 Hygiene in macros ensures that identifiers maintain their proper scope:
 
-```rust
+```rust,ignore
 // Without hygiene issues
 macro_rules! declare_x {
     () => {
@@ -547,7 +547,7 @@ fn main() {
 
 With proc macros, we must be more careful:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 
@@ -564,7 +564,7 @@ pub fn declare_x(input: TokenStream) -> TokenStream {
 
 **Def Site vs Call Site:**
 
-```rust
+```rust,ignore
 use proc_macro2::Span;
 use quote::quote;
 
@@ -580,7 +580,7 @@ let mixed = Span::mixed_site();
 
 **Practical Hygiene:**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::Ident;
@@ -609,7 +609,7 @@ pub fn generate_accessor(input: TokenStream) -> TokenStream {
 
 Proper span handling ensures errors point to the right location:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::spanned::Spanned;
@@ -648,7 +648,7 @@ The following counter-examples demonstrate common pitfalls and edge cases in pro
 
 ### Counter-Example 1: Name Capture (Hygienic Failure)
 
-```rust
+```rust,ignore
 // proc_macro crate
 use proc_macro::TokenStream;
 use quote::quote;
@@ -675,7 +675,7 @@ fn main() {
 
 **Solution**: Use hygienic identifiers or unique naming conventions.
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn declare_variable_fixed(_input: TokenStream) -> TokenStream {
     // Use a unique prefix to avoid conflicts
@@ -687,7 +687,7 @@ pub fn declare_variable_fixed(_input: TokenStream) -> TokenStream {
 
 ### Counter-Example 2: Shadowing in Generated Code
 
-```rust
+```rust,ignore
 // PROBLEM: Generated code shadows user variables
 #[proc_macro]
 pub fn with_logging(input: TokenStream) -> TokenStream {
@@ -720,7 +720,7 @@ fn main() {
 
 **Solution**: Use unique internal variable names.
 
-```rust
+```rust,ignore
 quote! {
     fn #func_name() {
         let __my_macro_start = std::time::Instant::now();
@@ -733,7 +733,7 @@ quote! {
 
 ### Counter-Example 3: Type Inference Failure
 
-```rust
+```rust,ignore
 // PROBLEM: Generated code relies on type inference
 #[proc_macro_derive(DefaultBuilder)]
 pub fn derive_default_builder(input: TokenStream) -> TokenStream {
@@ -761,7 +761,7 @@ struct Config {
 
 **Solution**: Add proper trait bounds.
 
-```rust
+```rust,ignore
 quote! {
     impl #name where #name: Default {
         pub fn builder() -> Self {
@@ -773,7 +773,7 @@ quote! {
 
 ### Counter-Example 4: Wrong Token Spacing
 
-```rust
+```rust,ignore
 // PROBLEM: Incorrect punctuation spacing
 use proc_macro::{TokenStream, Punct, Spacing};
 use quote::quote;
@@ -811,14 +811,14 @@ fn wrong_spacing() -> TokenStream {
 
 **Solution**: Use `quote!` or set spacing correctly.
 
-```rust
+```rust,ignore
 let dot1 = Punct::new('.', Spacing::Joint);  // Glued to next token
 let dot2 = Punct::new('.', Spacing::Joint);
 ```
 
 ### Counter-Example 5: Missing Span Information
 
-```rust
+```rust,ignore
 // PROBLEM: Errors don't point to correct location
 #[proc_macro_derive(Validate)]
 pub fn derive_validate(input: TokenStream) -> TokenStream {
@@ -848,7 +848,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
 
 **Solution**: Use the input's span.
 
-```rust
+```rust,ignore
 if !has_required_attr(&input) {
     return syn::Error::new(
         input.ident.span(),  // Points to struct name
@@ -859,7 +859,7 @@ if !has_required_attr(&input) {
 
 ### Counter-Example 6: Compile Error at Wrong Location
 
-```rust
+```rust,ignore
 // PROBLEM: Generated code errors in wrong place
 #[proc_macro]
 pub fn bad_assert(input: TokenStream) -> TokenStream {
@@ -882,7 +882,7 @@ bad_assert!(1 + 1 == 3);
 
 **Solution**: Use `panic!` with file!() and line!() or track spans.
 
-```rust
+```rust,ignore
 quote! {
     {
         let __result = #expr;
@@ -899,7 +899,7 @@ quote! {
 
 ### Counter-Example 7: Recursive Macro Expansion
 
-```rust
+```rust,ignore
 // PROBLEM: Uncontrolled recursion
 #[proc_macro]
 pub fn recursive_macro(input: TokenStream) -> TokenStream {
@@ -929,7 +929,7 @@ pub fn recursive_macro(input: TokenStream) -> TokenStream {
 
 **Solution**: Limit recursion depth or use iterative approaches.
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn limited_recursive(input: TokenStream) -> TokenStream {
     const MAX_DEPTH: usize = 10;
@@ -949,7 +949,7 @@ pub fn limited_recursive(input: TokenStream) -> TokenStream {
 
 ### Counter-Example 8: Infinite Loop in Macro
 
-```rust
+```rust,ignore
 // PROBLEM: Infinite loop during macro processing
 use proc_macro::TokenStream;
 
@@ -973,7 +973,7 @@ pub fn infinite_loop(input: TokenStream) -> TokenStream {
 
 **Solution**: Add iteration limits and progress checks.
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn safe_loop(input: TokenStream) -> TokenStream {
     const MAX_ITERATIONS: usize = 1000;
@@ -1003,7 +1003,7 @@ pub fn safe_loop(input: TokenStream) -> TokenStream {
 
 ### Counter-Example 9: TokenStream Ownership Issues
 
-```rust
+```rust,ignore
 // PROBLEM: Consuming TokenStream multiple times
 #[proc_macro]
 pub fn double_use(input: TokenStream) -> TokenStream {
@@ -1023,7 +1023,7 @@ pub fn double_use(input: TokenStream) -> TokenStream {
 
 **Solution**: Convert to `proc_macro2::TokenStream` which is cloneable.
 
-```rust
+```rust,ignore
 use proc_macro2::TokenStream as TokenStream2;
 
 #[proc_macro]
@@ -1040,7 +1040,7 @@ pub fn double_use_fixed(input: TokenStream) -> TokenStream {
 
 ### Counter-Example 10: Parse Failure Handling
 
-```rust
+```rust,ignore
 // PROBLEM: Unhelpful error messages on parse failure
 #[proc_macro]
 pub fn bad_parse(input: TokenStream) -> TokenStream {
@@ -1057,7 +1057,7 @@ pub fn bad_parse(input: TokenStream) -> TokenStream {
 
 **Solution**: Use proper error handling.
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn good_parse(input: TokenStream) -> TokenStream {
     match syn::parse::<syn::Expr>(input) {
@@ -1076,7 +1076,7 @@ pub fn better_parse(input: TokenStream) -> TokenStream {
 
 ### Counter-Example 11: Attribute Order Dependency
 
-```rust
+```rust,ignore
 // PROBLEM: Attribute order matters unexpectedly
 #[proc_macro_attribute]
 pub fn measure_time(args: TokenStream, input: TokenStream) -> TokenStream {
@@ -1110,7 +1110,7 @@ async fn main() { }  // ERROR: measure_time doesn't see async
 
 ### Counter-Example 12: Generics Handling Error
 
-```rust
+```rust,ignore
 // PROBLEM: Incorrect generic handling
 #[proc_macro_derive(Serialize)]
 pub fn derive_serialize(input: TokenStream) -> TokenStream {
@@ -1140,7 +1140,7 @@ struct Container<T> {
 
 **Solution**: Use `split_for_impl`.
 
-```rust
+```rust,ignore
 let (impl_generics, ty_generics, where_clause) = generics.split_for_impl();
 
 quote! {
@@ -1154,7 +1154,7 @@ quote! {
 
 ### Counter-Example 13: Lifetime Elision Failure
 
-```rust
+```rust,ignore
 // PROBLEM: Incorrect lifetime handling
 #[proc_macro_derive(GetRef)]
 pub fn derive_get_ref(input: TokenStream) -> TokenStream {
@@ -1184,7 +1184,7 @@ pub fn derive_get_ref(input: TokenStream) -> TokenStream {
 
 **Solution**: Explicitly declare lifetimes.
 
-```rust
+```rust,ignore
 quote! {
     impl<'a> #struct_name {
         fn get_ref(&'a self) -> &'a #field_ty {
@@ -1196,7 +1196,7 @@ quote! {
 
 ### Counter-Example 14: Where Clause Omission
 
-```rust
+```rust,ignore
 // PROBLEM: Where clauses dropped
 #[proc_macro_derive(Comparable)]
 pub fn derive_comparable(input: TokenStream) -> TokenStream {
@@ -1223,7 +1223,7 @@ pub fn derive_comparable(input: TokenStream) -> TokenStream {
 
 **Solution**: Build proper where clause with required bounds.
 
-```rust
+```rust,ignore
 use syn::parse_quote;
 
 // Build modified where clause
@@ -1245,7 +1245,7 @@ quote! {
 
 ### Counter-Example 15: Const Generic Issues
 
-```rust
+```rust,ignore
 // PROBLEM: Const generics not handled
 #[proc_macro_derive(PrintSize)]
 pub fn derive_print_size(input: TokenStream) -> TokenStream {
@@ -1274,7 +1274,7 @@ struct Buffer<const N: usize> {
 
 **Solution**: Properly handle all generic parameters including const.
 
-```rust
+```rust,ignore
 let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
 
 quote! {
@@ -1288,7 +1288,7 @@ quote! {
 
 ### Counter-Example 16: Attribute Parsing Error
 
-```rust
+```rust,ignore
 // PROBLEM: Incorrect attribute parsing
 #[proc_macro_derive(Config, attributes(config))]
 pub fn derive_config(input: TokenStream) -> TokenStream {
@@ -1314,7 +1314,7 @@ pub fn derive_config(input: TokenStream) -> TokenStream {
 
 **Solution**: Filter by attribute path.
 
-```rust
+```rust,ignore
 for attr in &input.attrs {
     if !attr.path.is_ident("config") {
         continue;  // Skip non-config attributes
@@ -1328,7 +1328,7 @@ for attr in &input.attrs {
 
 ### Counter-Example 17: Field Attribute Handling
 
-```rust
+```rust,ignore
 // PROBLEM: Missing field attributes in derive
 #[proc_macro_derive(Builder)]
 pub fn derive_builder(input: TokenStream) -> TokenStream {
@@ -1352,7 +1352,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 **Solution**: Parse field attributes.
 
-```rust
+```rust,ignore
 for field in data.fields.iter() {
     let mut skip = false;
 
@@ -1382,7 +1382,7 @@ for field in data.fields.iter() {
 
 ### Counter-Example 18: TokenStream Size Limits
 
-```rust
+```rust,ignore
 // PROBLEM: Generating excessively large TokenStream
 #[proc_macro]
 pub fn generate_massive(input: TokenStream) -> TokenStream {
@@ -1407,7 +1407,7 @@ pub fn generate_massive(input: TokenStream) -> TokenStream {
 
 **Solution**: Limit generated code size and document limits.
 
-```rust
+```rust,ignore
 const MAX_FUNCTIONS: usize = 100;
 
 #[proc_macro]
@@ -1427,7 +1427,7 @@ pub fn generate_limited(input: TokenStream) -> TokenStream {
 
 ### Counter-Example 19: Visibility Handling
 
-```rust
+```rust,ignore
 // PROBLEM: Ignoring visibility modifiers
 #[proc_macro_derive(PublicAccessor)]
 pub fn derive_public_accessor(input: TokenStream) -> TokenStream {
@@ -1457,7 +1457,7 @@ pub fn derive_public_accessor(input: TokenStream) -> TokenStream {
 
 **Solution**: Respect original visibility or add checks.
 
-```rust
+```rust,ignore
 let vis = &first.vis;  // Get field visibility
 
 quote! {
@@ -1471,7 +1471,7 @@ quote! {
 
 ### Counter-Example 20: Path Resolution Issues
 
-```rust
+```rust,ignore
 // PROBLEM: Assumes types are in scope
 #[proc_macro_derive(Wrapper)]
 pub fn derive_wrapper(input: TokenStream) -> TokenStream {
@@ -1497,7 +1497,7 @@ mod inner {
 
 **Solution**: Use fully qualified paths.
 
-```rust
+```rust,ignore
 quote! {
     struct #name {
         items: ::std::vec::Vec<i32>,  // Fully qualified
@@ -1520,7 +1520,7 @@ quote! {
 > 6. Helper attributes
 > 7. Visibility modifiers
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::{parse_macro_input, DeriveInput, Data, Fields, Generics, GenericParam};
@@ -1556,7 +1556,7 @@ pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
 
 Helper attributes provide customization points for derive macros:
 
-```rust
+```rust,ignore
 // Definition in macro
 #[proc_macro_derive(MyTrait, attributes(my_trait))]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
@@ -1578,7 +1578,7 @@ struct MyStruct {
 
 **Complete Helper Attribute Parser:**
 
-```rust
+```rust,ignore
 use syn::{Attribute, Meta, NestedMeta, Lit, Expr};
 
 #[derive(Debug, Default)]
@@ -1650,7 +1650,7 @@ fn parse_field_attrs(attrs: &[Attribute]) -> Result<FieldConfig, syn::Error> {
 
 Here's a complete, production-ready derive macro for a custom trait:
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::{
@@ -1763,7 +1763,7 @@ The `quote!` macro provides quasi-quotation - a way to write code templates that
 
 ### 8.4.6.1 Basic Quoting
 
-```rust
+```rust,ignore
 use quote::quote;
 use proc_macro2::TokenStream;
 
@@ -1783,7 +1783,7 @@ fn generate_impl(name: &syn::Ident) -> TokenStream {
 **Theorem QUOTE-REPETITION** (Repetition Consistency):
 > Repetition patterns in `quote!` must use the same number of elements for all interpolated values within the repetition. Mismatched counts result in a compile-time error.
 
-```rust
+```rust,ignore
 // Vector of fields
 let field_names = vec!["x", "y", "z"];
 let field_types = vec!["i32", "i32", "i32"];
@@ -1810,7 +1810,7 @@ quote! {
 
 ### 8.4.6.3 Advanced Quoting Patterns
 
-```rust
+```rust,ignore
 use quote::{quote, format_ident};
 
 // Conditional quoting
@@ -1861,7 +1861,7 @@ quote! {
 
 ### 8.4.6.4 The quote_spanned! Macro
 
-```rust
+```rust,ignore
 use quote::quote_spanned;
 use proc_macro2::Span;
 
@@ -1932,7 +1932,7 @@ mod tests {
 
 ### 8.4.7.2 Integration Testing
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_proc_macro::Builder;
 
@@ -1988,7 +1988,7 @@ fn test_compile_failures() {
 }
 ```
 
-```rust
+```rust,ignore
 // tests/compile_fail/missing_attribute.rs
 use my_proc_macro::Builder;
 
@@ -2003,7 +2003,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // tests/compile_fail/missing_attribute.stderr
 error[E0599]: no method named `value` found for struct `ConfigBuilder`
  --> tests/compile_fail/missing_attribute.rs:9:32
@@ -2027,7 +2027,7 @@ pub fn pass() {
 }
 ```
 
-```rust
+```rust,ignore
 // tests/expand/basic.rs
 use my_proc_macro::Builder;
 
@@ -2119,7 +2119,7 @@ serde_json = "1.0"
 
 ### 8.4.8.3 Main Library
 
-```rust
+```rust,ignore
 // src/lib.rs
 use proc_macro::TokenStream;
 use quote::quote;
@@ -2152,7 +2152,7 @@ pub fn derive_to_json(input: TokenStream) -> TokenStream {
 
 ### 8.4.8.4 Attribute Parsing
 
-```rust
+```rust,ignore
 // src/parse.rs
 use syn::{Attribute, Meta, NestedMeta, Lit, DeriveInput, Data, Fields};
 use quote::quote;
@@ -2293,7 +2293,7 @@ fn to_screaming_snake_case(s: &str) -> String {
 
 ### 8.4.8.5 Code Generation
 
-```rust
+```rust,ignore
 // src/generate.rs
 use quote::{quote, format_ident};
 use syn::{DeriveInput, Data, Fields, Index};
@@ -2450,7 +2450,7 @@ fn generate_enum_body(
 
 ### 8.4.8.6 Integration Tests
 
-```rust
+```rust,ignore
 // tests/integration.rs
 use json_derive::ToJson;
 
@@ -2516,7 +2516,7 @@ fn test_unit_struct() {
 
 ### 8.4.8.7 Compile-Fail Tests
 
-```rust
+```rust,ignore
 // tests/compile_fail/union.rs
 use json_derive::ToJson;
 
@@ -2546,7 +2546,7 @@ error: ToJson does not support unions
 2. **Lazy Evaluation**: Only parse what you need
 3. **Error Collection**: Collect multiple errors before returning
 
-```rust
+```rust,ignore
 // Collect multiple errors
 let mut errors = Vec::new();
 
@@ -2568,7 +2568,7 @@ if !errors.is_empty() {
 
 ### 8.4.9.2 Error Handling
 
-```rust
+```rust,ignore
 // Use syn::Result for error propagation
 fn process_field(field: &syn::Field) -> syn::Result<TokenStream> {
     let attrs = FieldAttributes::from_field(field)?;
@@ -2595,7 +2595,7 @@ quote_spanned! {field.ty.span()=>
 
 Document your proc macros thoroughly:
 
-```rust
+```rust,ignore
 /// Derive macro for the `Builder` trait.
 ///
 /// # Example

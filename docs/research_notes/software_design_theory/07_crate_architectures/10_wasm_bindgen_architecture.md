@@ -75,7 +75,7 @@ graph TB
 
 给定 Rust 代码：
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub fn greet(name: &str) -> String {
     format!("Hello, {}!", name)
@@ -84,7 +84,7 @@ pub fn greet(name: &str) -> String {
 
 宏展开后生成（简化示意）：
 
-```rust
+```rust,ignore
 // 导出函数到 WASM 的导出表
 #[export_name = "greet"]
 pub extern "C" fn __wasm_bindgen_generated_greet(
@@ -119,7 +119,7 @@ export function greet(name) {
 ### 3.2 `JsValue` — JS 值的 opaque 封装
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[repr(transparent)]
 pub struct JsValue {
     idx: u32,  // 在 JS 句柄表中的索引
@@ -144,7 +144,7 @@ pub struct JsValue {
 ### 3.3 `Closure` — Rust 闭包作为 JS 回调
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub struct Closure<T: ?Sized> {
     js: ManuallyDrop<JsValue>,
     _drop: fn(*mut T),  // 析构时释放 Rust 闭包
@@ -170,7 +170,7 @@ impl<T: ?Sized> Closure<T> {
 2. 生成一个 JS `Function` 包装器，通过导入的 WASM 函数间接调用 Rust 闭包
 3. JS 侧持有 `Closure` 的 `JsValue` 句柄；Rust 侧通过 `Closure::drop` 在不再使用时释放堆内存
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use wasm_bindgen::closure::Closure;
 use web_sys::{console, window};
@@ -233,7 +233,7 @@ WASM 模块拥有一个连续的线性内存（`WebAssembly.Memory`），JS 和 
 ### 4.2 字符串传递：拷贝 vs 借用
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub fn takes_str(s: &str) {
     // &str 借用：零拷贝，JS 字符串被解码到 WASM 内存的临时区域
@@ -275,7 +275,7 @@ pub fn returns_string() -> String {
 ### 5.1 `&[u8]` 与 `Uint8Array` 的共享内存
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use js_sys::Uint8Array;
 use wasm_bindgen::prelude::*;
 
@@ -322,7 +322,7 @@ const resultPtr = process_bytes(ptr, data.length);
 ### 6.1 Rust `async fn` 的 JS 暴露
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
     let window = web_sys::window().unwrap();
@@ -372,7 +372,7 @@ export async function fetch_data(url) {
 | `web_sys::WebSocket` | ~20 方法 | 网络 |
 | `js_sys::Array`, `Object`, `Promise` | ~100 方法 | JS 内置对象 |
 
-```rust
+```rust,ignore
 use web_sys::{Document, Element, HtmlCanvasElement, Window};
 use wasm_bindgen::prelude::*;
 
@@ -400,7 +400,7 @@ pub fn setup_canvas() -> Result<(), JsValue> {
 ### 7.2 `dyn_into` 与 `unchecked_ref`：类型转换的两面
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 安全的运行时类型检查（对应 JS instanceof）
 let canvas: HtmlCanvasElement = element.dyn_into()?;
 
@@ -433,7 +433,7 @@ let func: &js_sys::Function = closure.as_ref().unchecked_ref();
 ### 8.2 内存分配策略
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // wasm-bindgen 导出的分配器接口
 #[wasm_bindgen]
 extern "C" {
@@ -469,7 +469,7 @@ WASM 模块使用 `dlmalloc` 或 Rust 默认分配器管理线性内存内的堆
 
 如果只需要在 JS 中调用一个纯计算函数（如图像滤镜、加密运算），而不需要复杂的类型交互，`wasm-pack` 配合手工 `extern "C"` 接口可能生成更小的 WASM 二进制：
 
-```rust
+```rust,ignore
 // 无 wasm-bindgen：仅使用 core + no_std
 #[no_mangle]
 pub extern "C" fn blur_image(ptr: *mut u8, len: usize, radius: f32) {
@@ -483,7 +483,7 @@ pub extern "C" fn blur_image(ptr: *mut u8, len: usize, radius: f32) {
 
 `Closure::forget` 将 Rust 闭包泄漏到 JS 堆，永不释放。如果频繁创建闭包（如每帧的动画回调），会导致 WASM 线性内存的持续增长：
 
-```rust
+```rust,ignore
 // ❌ 危险：每次调用都泄漏一个闭包
 pub fn set_callback() {
     let closure = Closure::wrap(Box::new(|| {

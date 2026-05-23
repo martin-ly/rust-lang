@@ -80,7 +80,7 @@ An async computation is a partial function `f: State × Event → State ∪ Resu
 **Definition 1.2 (Future)**:
 A `Future` is a trait representing a value that may not be ready yet:
 
-```rust
+```rust,ignore
 /// Core Future trait from std::future
 pub trait Future {
     type Output;
@@ -111,7 +111,7 @@ Where the following laws must hold:
 
 **Example 1.1: TimerFuture with Correctness Proof**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -216,7 +216,7 @@ Self-referential structs require pinning, which constrains how the state machine
 **Challenge 4: Send/Sync Propagation**
 The `Send` and `Sync` properties must propagate correctly through the async transformation.
 
-```rust
+```rust,ignore
 /// Example: Ownership transformation in async functions
 ///
 /// Source code:
@@ -266,7 +266,7 @@ Given async function `f` with `n` await points, the desugared state machine has:
 
 **Example 2.1: State Machine Transformation with Ownership Analysis**
 
-```rust
+```rust,ignore
 /// Original async function
 async fn download_and_process(url: String) -> Result<Vec<u8>, String> {
     // State 0: Initial state
@@ -394,7 +394,7 @@ fn process_data(data: Vec<u8>) -> Vec<u8> {
 
 **Counter-Example 2.1: Incorrect State Machine that Violates Ownership**
 
-```rust
+```rust,ignore
 /// DANGER: This state machine has use-after-free vulnerability
 ///
 /// DO NOT USE: Educational counter-example only
@@ -461,7 +461,7 @@ Invariants:
 
 **Why Pin is Necessary (Self-Reference Theorem)**:
 
-```rust
+```rust,ignore
 /// Theorem: Self-referential structs require pinning
 ///
 /// Proof by contradiction:
@@ -646,7 +646,7 @@ async fn safe_async() {
 
 **Formal Transformation Rules**:
 
-```rust
+```rust,ignore
 /// Rule 1: Simple async function
 ///
 /// Source:
@@ -739,7 +739,7 @@ fn make_future(x: String, y: &str) -> impl Future<Output = usize> + '_ {
 
 **Example 2.3: Complete Desugaring Example**
 
-```rust
+```rust,ignore
 /// Original async function
 async fn fetch_and_process(
     client: &HttpClient,
@@ -905,7 +905,7 @@ mod desugared {
 
 **Counter-Example 2.3: Move Semantics Gone Wrong**
 
-```rust
+```rust,ignore
 /// DANGER: Incorrect capture semantics in async
 
 /// Counter-example 1: Moving borrowed data
@@ -1032,7 +1032,7 @@ QED
 
 **Example 3.1: Correct Send Implementation**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::task::JoinHandle;
 
@@ -1078,7 +1078,7 @@ fn spawn_send_task() -> JoinHandle<Vec<u8>> {
 
 **Counter-Example 3.1: Non-Send Type Across Await**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -1158,7 +1158,7 @@ Constraints:
 
 **Example 3.2: Valid Borrowed Data Across Await**
 
-```rust
+```rust,ignore
 /// Valid: Borrow from parameter (long lifetime)
 async fn process_with_ref(data: &[u8]) -> usize {
     // data is borrowed for the function's lifetime
@@ -1203,7 +1203,7 @@ async fn use_arc_data(arc_data: Arc<Vec<u8>>) -> u8 {
 
 **Counter-Example 3.2: Borrowed Reference Invalidated**
 
-```rust
+```rust,ignore
 /// DANGER: Borrow of local data across await
 ///
 /// This will NOT compile - the borrow checker prevents it
@@ -1299,7 +1299,7 @@ async fn correct_arc() -> u8 {
 
 **Formal Capture Rules**:
 
-```rust
+```rust,ignore
 /// Rule 1: async {} captures by reference (immutable by default)
 ///
 /// Source:
@@ -1343,7 +1343,7 @@ fn mixed_capture(s: String, v: Vec<u8>) -> impl Future<Output = usize> {
 
 **Example 3.3: Correct Capture Semantics**
 
-```rust
+```rust,ignore
 /// Example 1: Move for ownership transfer
 fn spawn_with_move(data: Vec<u8>) -> tokio::task::JoinHandle<usize> {
     // data is moved into the async block
@@ -1417,7 +1417,7 @@ impl SelfRefCapture {
 
 **Counter-Example 3.3: Unexpected Move vs Borrow**
 
-```rust
+```rust,ignore
 /// Counter-example 1: Accidental move
 fn accidental_move(data: Vec<u8>) -> impl Future<Output = ()> {
     // This moves data into the async block
@@ -1524,7 +1524,7 @@ These ensure the task can safely run on any thread at any time.
 
 **Example 4.1: Correct Task Spawning**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -1599,7 +1599,7 @@ async fn process_item(item: String) -> String {
 
 **Counter-Example 4.1: Local Reference in Spawn**
 
-```rust
+```rust,ignore
 /// DANGER: Trying to spawn with stack reference
 
 pub async fn bad_spawn_with_ref() {
@@ -1710,7 +1710,7 @@ Ownership rules:
 
 **Example 4.2: Correct Select Usage**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{timeout, Duration};
 
@@ -1793,7 +1793,7 @@ async fn process_work(_work: WorkItem) {}
 
 **Counter-Example 4.2: Resource Leak in Select**
 
-```rust
+```rust,ignore
 /// DANGER: Resource leak when select cancels a branch
 
 use tokio::sync::mpsc;
@@ -1956,7 +1956,7 @@ Source Stream → Transform → Transform → Sink
 
 **Example 4.3: Correct Stream Processing**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -2068,7 +2068,7 @@ pub async fn backpressure_stream() {
 
 **Counter-Example 4.3: Iterator Invalidation**
 
-```rust
+```rust,ignore
 /// DANGER: Holding reference while modifying source
 
 pub async fn bad_iterator_invalidation() {
@@ -2230,7 +2230,7 @@ This section presents formal theorems about async Rust safety with proof sketche
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 /// Theorem: Async function preserves ownership safety
 ///
 /// Statement:
@@ -2271,7 +2271,7 @@ This section presents formal theorems about async Rust safety with proof sketche
 
 > **[来源: ACM - Concurrent Programming]**
 
-```rust
+```rust,ignore
 /// Theorem: Pin guarantees self-referential safety
 ///
 /// Statement:
@@ -2356,7 +2356,7 @@ impl SelfRef {
 
 > **[来源: crossbeam Documentation]**
 
-```rust
+```rust,ignore
 /// Theorem: Send requirement for spawn
 ///
 /// Statement:
@@ -2414,7 +2414,7 @@ fn verify_non_send_fails() {
 
 > **[来源: Tokio Documentation]**
 
-```rust
+```rust,ignore
 /// Theorem: Borrowing across await points requires lifetime containment
 ///
 /// Statement:
@@ -2474,7 +2474,7 @@ async fn valid_borrow(data: &[u8]) -> u8 {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 /// Theorem: Select cancellation safety
 ///
 /// Statement:
@@ -2573,7 +2573,7 @@ async fn cancel_safe_alternative() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// PROBLEM EXPLANATION:
 /// Holding a mutex guard across an await point can cause deadlocks
 /// because the guard is not released while waiting.
@@ -2666,7 +2666,7 @@ pub async fn alternative_sync_mutex(data: Arc<SyncMutex<Vec<i32>>>) {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 /// PROBLEM EXPLANATION:
 /// Non-Send types cannot be safely sent between threads. Spawning tasks
 /// with Non-Send types on a multi-threaded runtime causes compile errors
@@ -2773,7 +2773,7 @@ pub async fn localset_solution() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 /// PROBLEM EXPLANATION:
 /// Self-referential structs (containing pointers to their own fields)
 /// must be pinned. Without Pin, moving the struct invalidates the
@@ -2903,7 +2903,7 @@ fn safe_usage() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// PROBLEM EXPLANATION:
 /// Spawned tasks may outlive the function that spawned them.
 /// Borrowing stack data creates a 'static requirement violation.
@@ -3020,7 +3020,7 @@ async fn process_data(data: Vec<i32>) -> i32 {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// PROBLEM EXPLANATION:
 /// Concurrent access to shared mutable state without proper synchronization
 /// leads to race conditions: non-deterministic, incorrect results.
@@ -3309,7 +3309,7 @@ This case study presents a complete async HTTP server with formal ownership anal
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 //! Async HTTP Server - Case Study
 //!
 //! This implementation demonstrates proper ownership management in
@@ -3707,7 +3707,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// OWNERSHIP FLOW DIAGRAM:
 ///
 /// Server::run
@@ -3754,7 +3754,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 /// PITFALL 1: Long-lived read locks
 ///
 /// WRONG:

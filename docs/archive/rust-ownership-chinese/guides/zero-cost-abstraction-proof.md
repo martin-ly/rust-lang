@@ -234,7 +234,7 @@ manual_add:
 
 ### 5.1 类型状态代码
 
-```rust
+```rust,ignore
 struct Unverified;
 struct Verified;
 
@@ -343,7 +343,7 @@ process:
 
 ### 7.1 异步代码
 
-```rust
+```rust,ignore
 async fn fetch_data() -> String {
     let data = read_file().await;
     process(data).await
@@ -352,7 +352,7 @@ async fn fetch_data() -> String {
 
 ### 7.2 状态机生成
 
-```rust
+```rust,ignore
 // 编译器生成的状态机（简化）
 enum FetchDataFuture {
     Start,
@@ -434,7 +434,7 @@ impl Future for FetchDataFuture {
 
 ### 9.1 基准测试
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn bench_iter(c: &mut Criterion) {

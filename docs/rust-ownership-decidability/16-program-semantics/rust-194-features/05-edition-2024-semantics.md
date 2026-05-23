@@ -777,7 +777,7 @@ Rust 2024 Edition 的借用检查器变化：
 ### 10.2 MIR 表示变化
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 2021 Edition MIR
 _2 = &mut _1;           // 借用整个变量
 

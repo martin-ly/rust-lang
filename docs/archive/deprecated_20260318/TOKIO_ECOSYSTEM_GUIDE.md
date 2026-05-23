@@ -171,7 +171,7 @@ Tokio 使用两级队列系统：
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::runtime::{Builder, Runtime};
 use std::time::Duration;
 
@@ -212,7 +212,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 任务管理
 
-```rust
+```rust,ignore
 use tokio::task::{self, JoinSet};
 use tokio::sync::mpsc;
 use std::time::Duration;
@@ -252,7 +252,7 @@ async fn task_management_examples() {
 
 #### 同步原语
 
-```rust
+```rust,ignore
 use tokio::sync::{Mutex, RwLock, Semaphore, broadcast, mpsc, oneshot};
 use std::sync::Arc;
 
@@ -314,7 +314,7 @@ async fn synchronization_primitives() {
 
 #### DON'Ts
 
-```rust
+```rust,ignore
 // 错误：在 async 中执行阻塞操作
 async fn bad_example() {
     std::thread::sleep(Duration::from_secs(1)); // 阻塞整个线程！
@@ -378,7 +378,7 @@ Axum 是一个基于 Tokio 和 Tower 的 Web 框架，设计目标是：
 
 #### 基础路由和处理器
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post, put, delete, Router},
     extract::{Path, Query, State},
@@ -530,7 +530,7 @@ async fn main() {
 
 #### 自定义提取器
 
-```rust
+```rust,ignore
 use axum::{
     extract::{FromRequestParts, TypedHeader},
     headers::{authorization::Bearer, Authorization},
@@ -576,7 +576,7 @@ async fn protected_route(current_user: CurrentUser) -> String {
 
 #### 错误处理
 
-```rust
+```rust,ignore
 use axum::{
     response::{IntoResponse, Response},
     Json,
@@ -697,7 +697,7 @@ message User {
 
 #### Build 配置
 
-```rust
+```rust,ignore
 // build.rs
 fn main() {
     tonic_build::configure()
@@ -710,7 +710,7 @@ fn main() {
 
 #### 服务端实现
 
-```rust
+```rust,ignore
 use tonic::{transport::Server, Request, Response, Status};
 use tokio_stream::wrappers::ReceiverStream;
 use tokio::sync::mpsc;
@@ -818,7 +818,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 客户端实现
 
-```rust
+```rust,ignore
 use tonic::transport::Channel;
 use tokio_stream::StreamExt;
 
@@ -883,7 +883,7 @@ Tower 是一个模块化、可重用的网络服务组件库，提供：
 
 #### Service Trait
 
-```rust
+```rust,ignore
 pub trait Service<Request> {
     type Response;
     type Error;
@@ -907,7 +907,7 @@ pub trait Layer<S> {
 
 #### 中间件组合
 
-```rust
+```rust,ignore
 use tower::{ServiceBuilder, ServiceExt};
 use tower::limit::{RateLimitLayer, ConcurrencyLimitLayer};
 use tower::timeout::TimeoutLayer;
@@ -937,7 +937,7 @@ where
 
 #### 自定义 Layer
 
-```rust
+```rust,ignore
 use tower::{Layer, Service};
 use std::{
     future::Future,
@@ -994,7 +994,7 @@ where
 
 #### 熔断器
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use std::time::{Duration, Instant};
@@ -1073,7 +1073,7 @@ impl CircuitBreaker {
 
 #### 中间件顺序建议
 
-```rust
+```rust,ignore
 ServiceBuilder::new()
     .layer(TraceLayer::new_for_http())      // 1. 日志记录
     .layer(TimeoutLayer::new(Duration::from_secs(30)))  // 2. 超时
@@ -1110,7 +1110,7 @@ Tracing 是 Rust 生态的分布式追踪和日志框架，提供：
 
 #### 基础使用
 
-```rust
+```rust,ignore
 use tracing::{info, debug, error, span, Level, Instrument};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -1151,7 +1151,7 @@ pub async fn process_order(order: Order, db: &Database) -> Result<Receipt, Error
 
 #### OpenTelemetry 集成
 
-```rust
+```rust,ignore
 use opentelemetry::{
     global,
     trace::TracerProvider,
@@ -1248,7 +1248,7 @@ myapp/
 
 #### 主入口
 
-```rust
+```rust,ignore
 // src/main.rs
 use myapp::{app, config, telemetry};
 use std::sync::Arc;
@@ -1274,7 +1274,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 #### 应用构建
 
-```rust
+```rust,ignore
 // src/app.rs
 use axum::Router;
 use std::sync::Arc;
@@ -1303,7 +1303,7 @@ pub async fn create_app(config: Arc<Config>) -> Result<Router, Box<dyn std::erro
 
 #### 优雅关闭
 
-```rust
+```rust,ignore
 // src/shutdown.rs
 use tokio::signal;
 use std::time::Duration;
@@ -1341,7 +1341,7 @@ pub async fn signal() {
 
 ### 8.1 运行时调优
 
-```rust
+```rust,ignore
 use tokio::runtime::Builder;
 
 fn create_optimized_runtime() -> tokio::runtime::Runtime {
@@ -1360,7 +1360,7 @@ fn create_optimized_runtime() -> tokio::runtime::Runtime {
 
 ### 8.2 内存优化
 
-```rust
+```rust,ignore
 use bytes::BytesMut;
 
 pub struct BufferPool {
@@ -1381,7 +1381,7 @@ impl BufferPool {
 
 ### 8.3 网络优化
 
-```rust
+```rust,ignore
 pub fn create_optimized_http_client() -> reqwest::Client {
     reqwest::Client::builder()
         .pool_max_idle_per_host(100)
@@ -1413,7 +1413,7 @@ pub fn create_optimized_http_client() -> reqwest::Client {
 
 ### 9.1 性能问题
 
-```rust
+```rust,ignore
 // 启用 Tokio Console
 #[tokio::main]
 async fn main() {

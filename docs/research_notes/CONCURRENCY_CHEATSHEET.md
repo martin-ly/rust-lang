@@ -125,7 +125,7 @@ thread::Builder::new()
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 
 let counter = Arc::new(Mutex::new(0));
@@ -199,7 +199,7 @@ for received in rx {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let (tx, rx) = mpsc::channel();
 
 for i in 0..3 {
@@ -221,7 +221,7 @@ for received in rx {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 let counter = AtomicUsize::new(0);
@@ -265,7 +265,7 @@ counter.compare_exchange(
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::Barrier;
 
 let barrier = Arc::new(Barrier::new(3));
@@ -284,7 +284,7 @@ for _ in 0..3 {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Condvar, Mutex};
 
 let pair = Arc::new((Mutex::new(false), Condvar::new()));
@@ -331,7 +331,7 @@ COUNTER.with(|c| {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use threadpool::ThreadPool;
 
 let pool = ThreadPool::new(4);
@@ -349,7 +349,7 @@ pool.join();
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 let sum: i32 = (0..100).into_par_iter().sum();

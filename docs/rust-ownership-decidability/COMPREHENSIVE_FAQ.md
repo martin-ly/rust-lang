@@ -91,7 +91,7 @@
 
 **A**: Rust 的所有权系统是为了在编译时保证内存安全，而不需要垃圾回收器。
 
-```rust
+```rust,ignore
 // C/C++ 中可能的错误
 char* ptr = malloc(100);
 free(ptr);
@@ -160,7 +160,7 @@ struct Buffer { data: Vec<u8> }
 
 **A**:
 
-```rust
+```rust,ignore
 // 1. 临时借用 → 使用引用
 fn process(data: &Data) {
     // 读取数据，不获取所有权
@@ -203,7 +203,7 @@ let large = Box::new([0u8; 1000000]);  // 大数组在堆上
 
 **A**: 为了防止数据竞争。考虑以下场景：
 
-```rust
+```rust,ignore
 let mut data = vec![1, 2, 3];
 let first = &data[0];  // 指向索引 0
 data.push(4);          // 可能重新分配内存！
@@ -213,7 +213,7 @@ println!("{}", first); // 危险！
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方法 1: 缩小借用作用域
 {
     let first = &data[0];
@@ -284,7 +284,7 @@ impl SelfReferential {
 
 **A**:
 
-```rust
+```rust,ignore
 // 规则 1: 每个引用参数有自己的生命周期
 fn foo(x: &i32, y: &i32)  // 实际: fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
 
@@ -319,7 +319,7 @@ fn return_part<'a, 'b: 'a>(x: &'a str, y: &'b str) -> &'a str {
 
 **A**: `'static` 表示整个程序生命周期：
 
-```rust
+```rust,ignore
 // 1. 字符串字面量
 let s: &'static str = "hello";  // 编译期存储
 
@@ -339,7 +339,7 @@ where
 
 **常见误解**:
 
-```rust
+```rust,ignore
 // ❌ 错误：不是 'static 就能一直存活
 fn bad() -> &'static String {
     let s = String::from("temp");
@@ -397,7 +397,7 @@ thread::spawn(move || {
 
 **A**:
 
-```rust
+```rust,ignore
 // RefCell: 单线程运行时借用检查
 use std::cell::RefCell;
 let cell = RefCell::new(5);
@@ -484,7 +484,7 @@ for _ in 0..10 {
 
 **A**:
 
-```rust
+```rust,ignore
 // 策略 1: 锁顺序
 // 总是以相同顺序获取锁
 fn transfer(from: &Mutex<Account>, to: &Mutex<Account>, amount: u64) {
@@ -666,7 +666,7 @@ unsafe {
 | 速度 | 慢（解释器） | 快（SAT/SMT） |
 | 用途 | 调试具体 bug | 验证属性 |
 
-```rust
+```rust,ignore
 // Kani 示例：验证属性
 #[kani::proof]
 fn test_abs() {
@@ -730,7 +730,7 @@ fn longest<'a, T: PartialEq>(x: &'a [T], y: &'a [T]) -> &'a [T] {
 
 **A**: 遵循以下原则：
 
-```rust
+```rust,ignore
 // 1. 使用借用而不是所有权
 pub fn process(data: &[u8]) -> Result<Output, Error> {
     // 调用者保留所有权

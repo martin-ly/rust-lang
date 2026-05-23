@@ -267,7 +267,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 
 /// 局部同步合并执行器（编译时固定分支）
@@ -342,7 +342,7 @@ macro_rules! local_sync_merge {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use thiserror::Error;
 
@@ -427,7 +427,7 @@ impl ResilientLocalSyncMerge {
 ### 5.3 本地数据聚合完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 #[derive(Clone, Debug)]
@@ -632,7 +632,7 @@ $$
 
 **场景**: 从固定数量的本地数据源聚合
 
-```rust
+```rust,ignore
 sources:
   - read from 4 local sensors
   - wait for all readings
@@ -644,7 +644,7 @@ sources:
 
 **场景**: 编译时确定的并行构建任务
 
-```rust
+```rust,ignore
 build:
   - compile lib_a, lib_b, lib_c in parallel
   - link when all complete
@@ -656,7 +656,7 @@ build:
 
 **场景**: 工业控制中固定传感器的数据采集
 
-```rust
+```rust,ignore
 sensors:
   - 8 temperature sensors
   - 4 pressure sensors
@@ -671,7 +671,7 @@ sensors:
 ### 9.1 超时局部同步合并
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct TimeoutLocalSyncMerge<const N: usize> {
     timeout_ms: u64,
 }
@@ -694,7 +694,7 @@ impl<const N: usize> TimeoutLocalSyncMerge<N> {
 
 保持结果按固定顺序返回：
 
-```rust
+```rust,ignore
 pub async fn ordered_merge<T, F, const N: usize>(futures: [F; N]) -> [T; N]
 where
     F: Future<Output = T>,

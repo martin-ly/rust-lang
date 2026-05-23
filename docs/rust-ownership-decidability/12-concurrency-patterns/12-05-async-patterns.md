@@ -226,7 +226,7 @@ pub fn async_move_block(data: Vec<u8>) -> impl std::future::Future<Output = usiz
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -304,7 +304,7 @@ impl AsyncFileReader {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use tokio::runtime::{Builder, Runtime};
 
 /// 自定义 Tokio 运行时配置
@@ -379,7 +379,7 @@ impl DedicatedRuntimes {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::task::{JoinSet, spawn_local, LocalSet};
 
 /// Work-Stealing 原理：
@@ -450,7 +450,7 @@ pub async fn local_tasks_example() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::cmp::Ordering;
 use std::collections::BinaryHeap;
 use tokio::sync::Semaphore;
@@ -548,7 +548,7 @@ impl<T> PriorityScheduler<T> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::task_local;
 
 /// 任务局部存储（类似线程局部存储，但是 per-task）
@@ -728,7 +728,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> Cache<K, V> {
 
 Rust 1.94 引入了 `Peekable::next_if_map` 方法，在处理异步流时特别有用，可以实现条件消费和转换：
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 /// 条件消费异步消息流
@@ -860,7 +860,7 @@ pub mod stream_extensions {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use tokio::sync::RwLock;
 
@@ -912,7 +912,7 @@ async fn use_lazy_config() {
 }
 ```
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, oneshot};
 use std::time::Duration;
 

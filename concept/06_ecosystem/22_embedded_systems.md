@@ -35,6 +35,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 no_std
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -99,6 +101,7 @@ no_std:
 ---
 
 ### 1.2 裸机编程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -138,6 +141,7 @@ no_std:
 ---
 
 ### 1.3 内存布局
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -181,6 +185,7 @@ no_std:
 > [来源: [Embedded Rust Book]]
 
 ### 2.1 PAC — 外设访问 crate
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -214,6 +219,7 @@ PAC (Peripheral Access Crate):
 ---
 
 ### 2.2 HAL — 硬件抽象层
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -252,6 +258,7 @@ HAL (Hardware Abstraction Layer):
 ---
 
 ### 2.3 BSP — 板级支持包
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -290,6 +297,7 @@ BSP (Board Support Package):
 > [来源: [Embedded Rust Book]]
 
 ### 3.1 实时约束
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -325,6 +333,7 @@ BSP (Board Support Package):
 ---
 
 ### 3.2 RTIC 框架
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -380,6 +389,7 @@ RTIC (Real-Time Interrupt-driven Concurrency):
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -403,6 +413,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -513,6 +524,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -684,4 +696,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

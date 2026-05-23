@@ -113,7 +113,7 @@ SIL 4系统要求:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! SIL 4级联锁系统 - EN 50128/50129
 
 #![no_std]
@@ -576,7 +576,7 @@ pub mod types {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 通道A和B使用不同算法实现相同功能
 
 /// 通道A: 基于哈希表的进路检查

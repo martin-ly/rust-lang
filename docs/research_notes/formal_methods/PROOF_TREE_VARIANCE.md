@@ -220,7 +220,7 @@ let r: &mut i32 = &mut x;
 
 **示例**:
 
-```rust
+```rust,ignore
 fn take_animal(a: &Animal) {}
 fn take_dog(d: &Dog) {}
 
@@ -244,7 +244,7 @@ let f: fn(&Dog) = take_animal;  // 安全!
 
 考虑:
 
-```rust
+```rust,ignore
 let mut a: A = ...;
 let r: &mut B = &mut a;  // 由假设，允许
 *r = B_value;            // 写入 B 值到 A 的内存
@@ -279,7 +279,7 @@ fn covariance_example() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 trait Animal { fn speak(&self); }
 trait Dog: Animal { fn bark(&self); }
 

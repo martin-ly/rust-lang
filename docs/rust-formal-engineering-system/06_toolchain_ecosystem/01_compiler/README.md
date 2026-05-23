@@ -38,7 +38,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 条件编译
 #[cfg(target_os = "linux")]
 fn linux_only() {}
@@ -127,7 +127,7 @@ const _: () = assert!(std::mem::size_of::<usize>() == 8, "64-bit only");
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 派生宏
 use proc_macro::TokenStream;
 use quote::quote;

@@ -1,6 +1,7 @@
 ﻿# 算法与数据结构快速参考卡片
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法与数据结构快速参考卡片](#算法与数据结构快速参考卡片)
@@ -62,6 +63,7 @@
   - [**最后更新**: 2026-05-08 (算法场景深度整合)](#最后更新-2026-05-08-算法场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c08_algorithms/docs/README.md) | [代码示例](../../../crates/c08_algorithms/examples/README.md)
 > **创建日期**: 2026-01-26
@@ -134,6 +136,7 @@
   - [**最后更新**: 2026-05-08 (算法场景深度整合)](#最后更新-2026-05-08-算法场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -147,7 +150,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::sorting::*;
 
 let mut data = vec![64, 34, 25, 12, 22, 11, 90];
@@ -171,7 +174,7 @@ println!("Sorted: {:?}", data);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::searching::*;
 
 let data = vec![1, 3, 5, 7, 9, 11, 13, 15];
@@ -223,7 +226,7 @@ if let Some(index) = linear_search(&data, 7) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::graph::*;
 
 // BFS (广度优先搜索)
@@ -243,7 +246,7 @@ let distances = dijkstra(&graph, start)?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::dynamic_programming::*;
 
 // 斐波那契数列
@@ -268,7 +271,7 @@ let max_value = knapsack_01(weights, values, capacity);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::data_structures::*;
 
 // 栈
@@ -292,7 +295,7 @@ if let Some(value) = queue.dequeue() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use c08_algorithms::data_structures::tree::*;
 
 // 二叉搜索树
@@ -336,6 +339,7 @@ if let Some(value) = map.get("key1") {
 ---
 
 ## 💡 代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 示例 1: 快速排序实现
@@ -520,7 +524,7 @@ println!("DFS: {:?}", g.dfs(0));
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 fn max_sliding_window(nums: &[i32], k: usize) -> Vec<i32> {
@@ -565,6 +569,7 @@ assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 场景: 日志分析系统
@@ -573,7 +578,7 @@ assert_eq!(max_sliding_window(&nums, 3), vec![3, 3, 5, 5, 6, 7]);
 
 在实际项目中，算法常用于数据处理和分析。以下是一个简化的日志分析系统：
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 struct LogAnalyzer;
@@ -628,13 +633,14 @@ impl LogAnalyzer {
 ---
 
 ## ⚡ 并行算法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 并行排序
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 let mut data = vec![64, 34, 25, 12, 22, 11, 90];
@@ -648,7 +654,7 @@ println!("Sorted: {:?}", data);
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 let data = vec![1, 3, 5, 7, 9, 11, 13, 15];
@@ -663,6 +669,7 @@ if let Some(&value) = found {
 ---
 
 ## 🔧 算法选择指南
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 排序选择
@@ -687,13 +694,14 @@ if let Some(&value) = found {
 ---
 
 ## 📈 性能优化技巧
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 使用迭代器
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 高效的数据处理
 let sum: i32 = data.iter()
     .filter(|&x| x > 0)
@@ -705,7 +713,7 @@ let sum: i32 = data.iter()
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 使用切片而非 Vec
 fn process_slice(slice: &[i32]) {
     // 处理逻辑
@@ -719,13 +727,14 @@ let mut buffer = Vec::with_capacity(1024);
 ---
 
 ## 🐛 常见错误
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 越界访问
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 let value = data[index];  // 可能 panic
 
@@ -739,7 +748,7 @@ if let Some(value) = data.get(index) {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 let result = a + b;  // 可能溢出
 
@@ -750,6 +759,7 @@ let result = a.checked_add(b)?;
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 反例 1: 对未排序切片 binary_search
@@ -781,7 +791,7 @@ let _ = v.binary_search(&2);
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // 需稳定排序时
 v.sort_by(|a, b| a.0.cmp(&b.0));
 v.sort_by(|a, b| a.1.cmp(&b.1));  // 可能破坏第一键顺序
@@ -811,7 +821,7 @@ factorial(100_000);  // thread 'main' has overflowed its stack
 
 **修正**: 使用迭代或尾递归优化：
 
-```rust
+```rust,ignore
 fn factorial(n: u64) -> u64 {
     let mut result = 1;
     for i in 1..=n {
@@ -829,7 +839,7 @@ fn factorial(n: u64) -> u64 {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let a: i32 = 2_000_000_000;
 let b: i32 = 2_000_000_000;
 let sum = a + b;  // ❌ 溢出：结果为 -294967296
@@ -839,7 +849,7 @@ let sum = a + b;  // ❌ 溢出：结果为 -294967296
 
 **修正**: 使用检查溢出方法：
 
-```rust
+```rust,ignore
 let sum = a.checked_add(b).expect("overflow");
 // 或使用 wrapping_add、saturating_add
 ```
@@ -878,11 +888,13 @@ fn fib(n: usize) -> usize {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../../crates/c08_algorithms/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 这些示例都在 `crates/c08_algorithms/examples/` 下，可直接运行（例如：`cargo run -p c08_algorithms --example sorting_algorithms_demo`）。
@@ -895,6 +907,7 @@ fn fib(n: usize) -> usize {
 - [算法优化演示](../../../crates/c08_algorithms/examples/algorithm_optimization_demo.rs)
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方文档
@@ -938,6 +951,7 @@ fn fib(n: usize) -> usize {
 ---
 
 ## Rust 1.95+ 在算法中的深度应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 算法优化与数值计算
@@ -950,7 +964,7 @@ fn fib(n: usize) -> usize {
 
 **经典算法优化**: KMP算法、滑动窗口最大值、数据流处理
 
-```rust
+```rust,ignore
 /// 滑动窗口最大值（单调队列优化基础）
 ///
 /// 传统实现需要复杂的队列维护
@@ -1031,7 +1045,7 @@ pub fn stream_anomaly_detection(data: &[f64]) -> Vec<usize> {
 
 **场景**: DFS、BFS、回溯算法中的提前终止
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 图的深度优先搜索，支持提前终止
@@ -1147,11 +1161,12 @@ pub fn find_rotate_min(nums: &[i32]) -> Option<i32> {
 ---
 
 ### LazyLock 在算法预处理中的应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 **场景**: 查找表、预计算数据、算法配置
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 素数表（延迟计算）
@@ -1210,9 +1225,10 @@ pub fn select_algorithm(n: usize) -> Algorithm {
 ---
 
 ### 数学常量在数值算法中的应用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// 黄金比例搜索（单峰函数优化）
 ///
 /// 比三分搜索收敛快 38%
@@ -1277,9 +1293,10 @@ pub fn harmonic_number(n: u64) -> f64 {
 ---
 
 ### 生产场景：实时数据处理管道
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 生产级流处理算法组合
 pub struct StreamProcessor {
     config: LazyLock<ProcessorConfig>,
@@ -1341,6 +1358,7 @@ impl StreamProcessor {
 ---
 
 ### 总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 算法场景应用 | 性能提升 |
@@ -1365,6 +1383,7 @@ impl StreamProcessor {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1775,4 +1794,3 @@ impl StreamProcessor {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

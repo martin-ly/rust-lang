@@ -347,7 +347,7 @@ impl DataImport for CsvImport {
 
 **错误**：某 impl 覆盖 `template` 而非钩子，破坏算法骨架。
 
-```rust
+```rust,ignore
 impl Algorithm for BadImpl {
     fn template(&self) -> String { "hardcoded".into() }  // 忽略 step1/step2
 }

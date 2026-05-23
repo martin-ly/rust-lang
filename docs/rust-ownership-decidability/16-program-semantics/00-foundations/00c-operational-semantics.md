@@ -83,7 +83,7 @@ e ::= n | e₁ + e₂ | e₁ - e₂
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 fn eval(e: Expr, env: &Env) -> Value {
     match e {
         Expr::Num(n) => Value::Int(n),  // NUM 规则
@@ -116,7 +116,7 @@ fn eval(e: Expr, env: &Env) -> Value {
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 // VAR: 从环境读取
 let x = env.get("x");  // σ(x) = v
 
@@ -155,7 +155,7 @@ E ::= []               (空上下文 - 归约点)
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 // E + e: 先求值左操作数
 let result = { compute_left() } + right;
 
@@ -252,7 +252,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 {
     let x = File::open("file.txt")?;
     // 使用 x
@@ -277,7 +277,7 @@ let r = &mut y;  // BORROW-MUT: 创建可变引用
 ### 5.2 Rust 的线程语义
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // t1 ||| t2
 let t1 = thread::spawn(|| { /* ... */ });
 let t2 = thread::spawn(|| { /* ... */ });

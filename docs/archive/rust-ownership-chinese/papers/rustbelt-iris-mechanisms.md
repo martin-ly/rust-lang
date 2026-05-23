@@ -347,7 +347,7 @@ $$
 
 **全局不变量**：
 
-```rust
+```rust,ignore
 static COUNTER: AtomicUsize = AtomicUsize::new(0);
 ```
 
@@ -373,7 +373,7 @@ $$
 
 **Treiber Stack push操作**：
 
-```rust
+```rust,ignore
 fn push(&self, value: T) {
     let new_node = Box::new(Node { value, next: self.head.load() });
     while self.head.compare_exchange(new_node.next, new_node).is_err() {

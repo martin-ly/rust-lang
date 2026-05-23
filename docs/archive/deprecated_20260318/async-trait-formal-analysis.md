@@ -87,7 +87,7 @@ Rust 1.75+支持RPITIT但存在限制：
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[async_trait]
 trait MyTrait {
     async fn method(&self) -> i32;
@@ -109,7 +109,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[async_trait]
 impl MyTrait for MyStruct {
     async fn method(&self) -> i32 { 42 }
@@ -133,7 +133,7 @@ impl MyTrait for MyStruct {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[async_trait]
 trait MyTrait {
     async fn method(&self) -> i32;  // 默认+Send
@@ -167,7 +167,7 @@ $$
 
 ### 定义 LIFETIME-1 ( 隐式生命周期 )
 
-```rust
+```rust,ignore
 #[async_trait]
 trait MyTrait<'a> {
     async fn method(&'a self) -> &'a str;
@@ -210,7 +210,7 @@ $$
 
 ### 示例1: 基础trait
 
-```rust
+```rust,ignore
 use async_trait::async_trait;
 
 #[async_trait]
@@ -244,7 +244,7 @@ impl Database for Postgres {
 
 ### 示例2: 泛型trait
 
-```rust
+```rust,ignore
 use async_trait::async_trait;
 
 #[async_trait]
@@ -280,7 +280,7 @@ where
 
 ### 示例3: 非Send边界
 
-```rust
+```rust,ignore
 use async_trait::async_trait;
 
 // 本地trait，不要求Send（用于单线程上下文）

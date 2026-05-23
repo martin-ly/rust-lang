@@ -313,7 +313,7 @@ fn benchmark_complex_macro() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 
 // 简单的派生宏

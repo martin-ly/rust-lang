@@ -1,4 +1,5 @@
 > **权威来源**: [ISO 26262](https://www.iso.org/standard/68383.html), [SAE J3016](https://www.sae.org/standards/content/j3016_202104/), [Rust Reference](https://doc.rust-lang.org/reference/)
+> **相关概念**: [DSL](../../../../concept/02_intermediate/13_dsl_and_embedding.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增自动驾驶 Rust 应用案例来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -66,7 +67,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! 自动驾驶感知系统
 
 #![no_std]  // 核心模块
@@ -220,7 +221,7 @@ pub mod output {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use crossbeam::channel;
 use std::thread;
 
@@ -283,7 +284,7 @@ impl PerceptionPipeline {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 零分配图像处理
 pub struct ImagePool<const N: usize> {
     buffers: [Option<ImageBuffer>; N],
@@ -334,7 +335,7 @@ impl<'a, const N: usize> Drop for PooledImage<'a, N> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 2oo3投票机制
 pub struct Voter3<T> {
     sources: [Box<dyn Sensor<T>>; 3],
@@ -386,7 +387,7 @@ impl DiverseDetector {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 运行时监控
 pub struct SafetyMonitor {
     timing_checker: TimingChecker,

@@ -1,4 +1,6 @@
 # 声明式宏 (Declarative Macros)
+>
+> **相关概念**: [声明宏](../../../concept/03_advanced/04_macros.md)
 
 > **Bloom 层级**: 理解
 
@@ -50,7 +52,7 @@
 
 与 C 预处理器不同，Rust 宏操作的是**结构化 Token 树**，而非原始文本：
 
-```rust
+```rust,ignore
 // C 宏（文本替换）
 #define SQUARE(x) x * x
 SQUARE(1 + 2)  // 展开为 1 + 2 * 1 + 2 = 5 ❌ 错误！
@@ -443,7 +445,7 @@ macro_rules! good_max {
 
 **错误代码**:
 
-```rust
+```rust,compile_fail
 macro_rules! bad_parse {
     ($a:expr, $b:expr) => {
         ($a, $b)
@@ -508,7 +510,7 @@ fn main() {
 
 **修复方案** — 通过参数传递外部标识符:
 
-```rust
+```rust,compile_fail
 macro_rules! make_fn_using {
     ($name:ident, $var:ident) => {
         fn $name() -> i32 {
@@ -800,7 +802,7 @@ macro_rules! sum {
 
 **题 2**: 以下宏试图生成 getter 方法，但编译失败。请修复：
 
-```rust
+```rust,ignore
 macro_rules! make_getters {
     ($($field:ident),*) => {
         $(
@@ -828,7 +830,7 @@ impl Person {
 
 **修复**:
 
-```rust
+```rust,ignore
 macro_rules! make_getters {
     ($($field:ident: $ty:ty),* $(,)?) => {
         $(

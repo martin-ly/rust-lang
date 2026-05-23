@@ -1,6 +1,7 @@
 ﻿# Rust 思维表征方式文档 / Thinking Representation Methods Documentation
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 思维表征方式文档 / Thinking Representation Methods Documentation](#rust-思维表征方式文档--thinking-representation-methods-documentation)
@@ -68,6 +69,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **创建日期**: 2025-12-11
 > **最后更新**: 2026-05-08
@@ -145,6 +147,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1577,6 +1580,7 @@ graph LR
 - ✅ 需要做出技术选型决策
 
 ### 6.3 何时使用决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - ✅ 需要根据场景选择合适的特性
@@ -1588,6 +1592,7 @@ graph LR
 - ✅ 规划学习路径
 
 ### 6.4 何时使用证明树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - ✅ 需要验证安全性的正确性
@@ -1596,6 +1601,7 @@ graph LR
 - ✅ 需要形式化验证
 
 ### 6.5 何时使用转换树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - ✅ 需要理解概念间的转换关系（所有权↔借用、Option↔Result）
@@ -1610,9 +1616,10 @@ graph LR
 > **[来源: Rust Official Docs]**
 
 ### 示例 1: 思维导图生成器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 /// 思维导图生成器 - 将 Rust 知识结构化
@@ -1675,6 +1682,7 @@ fn create_ownership_mindmap() -> MindMapGenerator {
 ```
 
 ### 示例 2: 决策树枚举实现
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -1735,6 +1743,7 @@ impl DecisionEngine {
 > **[来源: Rust Official Docs]**
 
 ### 7.1 官方资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust 官方文档](https://doc.rust-lang.org/)
@@ -1743,6 +1752,7 @@ impl DecisionEngine {
 - [Rust Reference](https://doc.rust-lang.org/reference/)
 
 ### 7.2 项目资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [MIND_MAP_COLLECTION.md](./MIND_MAP_COLLECTION.md) - 思维导图集合
@@ -1750,6 +1760,7 @@ impl DecisionEngine {
 - [PROOF_GRAPH_NETWORK.md](./PROOF_GRAPH_NETWORK.md) - 证明图网
 
 ### 7.3 相关文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [MULTI_DIMENSIONAL_CONCEPT_MATRIX.md](./MULTI_DIMENSIONAL_CONCEPT_MATRIX.md) - 多维概念矩阵
@@ -1774,6 +1785,7 @@ impl DecisionEngine {
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -1823,6 +1835,7 @@ impl DecisionEngine {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [04_thinking 目录](./README.md)
@@ -2490,4 +2503,3 @@ impl DecisionEngine {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

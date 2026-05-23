@@ -348,7 +348,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 生成思维导图、矩阵等思维表征模板
 use std::fmt::Write;
 

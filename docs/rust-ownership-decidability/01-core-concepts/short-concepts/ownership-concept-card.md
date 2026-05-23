@@ -89,7 +89,7 @@ println!("{}", s2);               // OK
 
 ### 反例
 
-```rust
+```rust,ignore
 let s1 = String::from("hello");
 let s2 = s1;
 println!("{}", s1);  // 错误: 使用了已移动的值

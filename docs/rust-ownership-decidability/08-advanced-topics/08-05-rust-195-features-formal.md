@@ -120,7 +120,7 @@ $$
 
 **与传统守卫的组合**:
 
-```rust
+```rust,ignore
 match msg {
     Message::Text(text)
         if let Some(u) = current_user
@@ -245,7 +245,7 @@ $$
 
 **示例**:
 
-```rust
+```rust,ignore
 fn narrow<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a> { x }
 fn wide<'a, 'b>(x: &'a str, y: &'b str) -> impl Display + use<'a, 'b> { x }
 

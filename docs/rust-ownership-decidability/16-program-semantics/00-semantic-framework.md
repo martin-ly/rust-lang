@@ -291,7 +291,7 @@ $$
 \text{Own}(x, T) \vdash \exists v. x \mapsto v * T(v) \quad \text{(资源包含)}
 $$
 
-```rust
+```rust,ignore
 // 所有权语义示例
 fn ownership_semantics() {
     // 所有权获取
@@ -485,7 +485,7 @@ $$
 \frac{x : T}{\langle r = \&x, \sigma \rangle \to \langle (), \sigma[r \mapsto \text{ref}(x)] \rangle}
 $$
 
-```rust
+```rust,ignore
 fn borrow_semantics() {
     let s = String::from("hello");
 
@@ -689,7 +689,7 @@ fn concurrent_model() {
 
 并行执行模型利用数据并行性：
 
-```rust
+```rust,ignore
 // 使用 Rayon 进行数据并行
 use rayon::prelude::*;
 
@@ -1502,7 +1502,7 @@ $$
 \text{Channel} : T \to \text{Send} \times \text{Recv} \quad \text{where } \text{Own}(T) \to \text{Channel}(T)
 $$
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -1971,7 +1971,7 @@ $$
 \text{Poll} = \text{Ready}(T) \mid \text{Pending}
 $$
 
-```rust
+```rust,ignore
 // Poll 模型语义示例
 async fn poll_model_example() {
     // 每个 .await 是一个潜在的挂起点
@@ -2065,7 +2065,7 @@ impl Future for TimerFuture {
 
 `async/await` 被编译器转换为状态机：
 
-```rust
+```rust,ignore
 // 源代码
 async fn example() -> i32 {
     let x = async_op1().await;
@@ -2173,7 +2173,7 @@ fn pin_semantics() {
 
 取消安全是指当 Future 被丢弃时的正确性：
 
-```rust
+```rust,ignore
 // 取消安全的异步操作
 use tokio::select;
 
@@ -2286,7 +2286,7 @@ fn create_waker(queue: Arc<Mutex<VecDeque<Task>>>) -> Waker {
 
 工作窃取是一种负载均衡策略：
 
-```rust
+```rust,ignore
 // 工作窃取队列的概念模型
 use crossbeam::deque::{Injector, Stealer, Worker};
 
@@ -2344,7 +2344,7 @@ struct Task;
 
 协作式调度依赖任务主动让出控制权：
 
-```rust
+```rust,ignore
 // 协作式调度的 yield 语义
 async fn cooperative_scheduling() {
     for i in 0..10 {
@@ -2486,7 +2486,7 @@ fn counter_actor_example() {
 
 Actor 有其明确的生命周期：
 
-```rust
+```rust,ignore
 // Actor 生命周期管理
 enum ActorLifecycle {
     Starting,
@@ -2629,7 +2629,7 @@ impl Supervisor {
 
 位置透明允许 Actor 不感知本地或远程：
 
-```rust
+```rust,ignore
 // Actor 路径（位置无关的标识）
 struct ActorPath {
     protocol: String,  // "akka", "actix", 等
@@ -2745,7 +2745,7 @@ impl FailureDetector {
 
 分布式系统中的一致性与可用性权衡：
 
-```rust
+```rust,ignore
 // CAP 定理的语义表达
 enum ConsistencyLevel {
     Strong,       // 线性一致性
@@ -3170,7 +3170,7 @@ $$
 \text{BlockingIO} : \text{Request} \to \text{ThreadSleep} \to \text{Response}
 $$
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{Read, Write};
 
@@ -3219,7 +3219,7 @@ fn handle_connection(_stream: TcpStream) {
 
 非阻塞 I/O 立即返回，不会阻塞线程：
 
-```rust
+```rust,ignore
 // 使用 mio 库实现非阻塞 I/O
 use mio::{Events, Interest, Poll, Token};
 use mio::net::TcpStream;
@@ -3293,7 +3293,7 @@ $$
 \text{AsyncIO} : \text{Request} \to \text{Future}\langle \text{Response} \rangle \to \text{Callback}
 $$
 
-```rust
+```rust,ignore
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
 
@@ -3547,7 +3547,7 @@ $$
 
 其中 $\epsilon$ 是效果集合，可能包含 `io`、`read`、`write`、`divergence` 等。
 
-```rust
+```rust,ignore
 // 效果系统语义（概念性）
 // pure : 纯函数，无副作用
 // io : 有 I/O 效果
@@ -3594,7 +3594,7 @@ fn complex_operation(data: &mut Vec<i32>) {
 
 能力系统（Capability System）控制对资源的访问：
 
-```rust
+```rust,ignore
 // 能力系统语义（概念性）
 
 // 定义能力
@@ -3725,7 +3725,7 @@ fn non_lexical_lifetimes() {
 
 Rust 编译器检查模式匹配是否穷尽：
 
-```rust
+```rust,ignore
 // 穷尽性检查
 enum Option<T> {
     Some(T),

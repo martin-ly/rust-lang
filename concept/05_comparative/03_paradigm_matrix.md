@@ -44,6 +44,7 @@ Step 6: 怎么在代码中选择范式？
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 Wikipedia 权威定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Programming paradigm]** A programming paradigm is a relatively high-level way to conceptualize and structure the implementation of a computer program.
@@ -69,6 +70,7 @@ Step 6: 怎么在代码中选择范式？
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 核心维度矩阵（带 ⟹ 推理链）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | **维度** | **Rust** | **C** | **C++** | **Go** | **Haskell** | **Java** | **Swift** | **TypeScript** | **Zig** |
@@ -127,6 +129,7 @@ GC (Go/Java/Haskell/TS)
 > **过渡**: 从静态矩阵对比，到理解这些维度如何在历史演进中形成不同的设计哲学。
 
 ### 2.2 设计哲学谱系
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -136,6 +139,7 @@ Rust 独特位置: 同时拥有 "底层控制" 和 "编译期证明安全"
 ```
 
 ### 2.3 编程语言类型系统谱系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -341,6 +345,7 @@ const fn / const 泛型
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.1 反命题: "Rust 是系统编程的最优解"
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -363,6 +368,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.2 反命题: "Rust 是纯函数式语言"
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -387,6 +393,7 @@ graph TD
 > **边界分析**: Rust 借鉴了 Haskell/ML 的代数数据类型、模式匹配，但 `mut`/`unsafe`/无约束 IO 明确表明它不是纯函数式语言。误判这一点会导致 `unsafe` 边界和并发模型的误用。
 
 ### 7.3 反命题: "多范式总是好的"
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -411,6 +418,7 @@ graph TD
 > **边界分析**: 多范式≠多收益。缺乏统一原则时，范式冲突会成为技术债务。成功的 Rust 项目通过编码规范、架构分层、代码审查来约束范式选择。
 
 ### 7.4 反命题: "类型系统限制表达力"
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -445,6 +453,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.1 编程语言形式化谱系
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -482,6 +491,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 8.2 扩展对比矩阵（6 语言）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 维度 | C | C++ | Rust | Go | Java | Haskell |
@@ -507,6 +517,7 @@ graph TD
 > **过渡**: 从静态矩阵对比延伸到动态演进——新兴语言的设计趋势揭示 Rust 所有权模型的行业影响力。
 
 ### 9.1 内存安全成为系统语言标配
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -536,6 +547,7 @@ graph TD
 > **来源**: [Swift Evolution SE-0377] · [Odin Docs] · [Kotlin/Native Memory Model] · [PLDI 2024 Trends]
 
 ### 9.2 扩展语言矩阵（Swift、Kotlin、Odin）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **维度** | **Swift** | **Kotlin** | **Odin** |
@@ -559,6 +571,7 @@ graph TD
 > **Odin 的设计哲学**: Odin 明确拒绝 Rust 的借用检查器，主张"显式优于隐式"——程序员通过 `context.allocator` 控制内存，通过 `defer` 管理资源。与 Zig 类似，Odin 追求 C 的简单性 + 现代类型系统。 [来源: Odin Lang Docs / GingerBill Blog]
 
 ### 9.3 Rust 在范式谱系中的精确定位
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -648,6 +661,7 @@ graph TD
 ---
 
 ### 8.3 新兴语言对比：Vale、Hylo、Mojo
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 2023-2025 年涌现了一批受 Rust 启发的新语言，它们在内存安全和性能之间探索不同路径：
@@ -708,6 +722,7 @@ fn borrow_mut(x: inout String):
 > **来源**: [Vale 语言文档] · [Hylo 语言文档] · [Mojo 文档] · [Swift 6 Concurrency] · [Carbon 设计文档]
 
 ### 8.4 编程范式在 AI 辅助编程时代的演化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 AI 辅助编程（GitHub Copilot、ChatGPT、Claude）正在改变编程语言的设计权衡：
@@ -958,4 +973,3 @@ fn process(data: Vec<String>) -> Vec<String> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

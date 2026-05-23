@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [LLM 辅助 C to Rust 迁移工具评估报告](#llm-辅助-c-to-rust-迁移工具评估报告)
@@ -42,6 +43,7 @@
   - [7. 参考文献](#7-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 概述
 >
@@ -122,7 +124,7 @@ int* create_array(int n) {
 
 **C2Rust 输出**:
 
-```rust
+```rust,ignore
 // output.rs (简化)
 use ::libc;
 extern "C" {
@@ -233,6 +235,7 @@ pub unsafe extern "C" fn create_array(n: libc::c_int) -> *mut libc::c_int {
 ---
 
 ## 4. SafeNet (STVR 2024)
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 论文信息
@@ -296,6 +299,7 @@ SafeNet 架构:
 ---
 
 ## 5. LLM 辅助翻译的最新进展 (ICSE 2024/2025)
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 研究趋势
@@ -453,6 +457,7 @@ c2rust transpile compile_commands.json
 - 理解所有权转换的逻辑
 
 ### 6.3 成本估算
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 方法 | 每 1000 行 C 代码的估计成本 |
@@ -466,6 +471,7 @@ c2rust transpile compile_commands.json
 ---
 
 ## 7. 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Immunant, Inc.** "C2Rust: Migrating C to Rust".
@@ -520,6 +526,7 @@ c2rust transpile compile_commands.json
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -667,4 +674,3 @@ c2rust transpile compile_commands.json
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

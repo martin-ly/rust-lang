@@ -164,7 +164,7 @@ prophesy(v) 创建一个预言变量 π
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Pearlite: Creusot 的规格语言
 
 // 前置条件
@@ -188,7 +188,7 @@ prophesy(v) 创建一个预言变量 π
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // 简单函数规范
@@ -219,7 +219,7 @@ fn max(x: &u32, y: &u32) -> Option<u32> {
 ### 3.3 逻辑函数与谓词
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 逻辑函数：纯函数，用于规范
 #[logic]
 fn factorial(n: u64) -> u64 {
@@ -247,7 +247,7 @@ fn binary_search(arr: &[u32], needle: u32) -> bool {
 ### 4.1 Trait 与规范
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 为 trait 添加规范
 #[trait]
 pub trait MyTrait {
@@ -275,7 +275,7 @@ impl MyTrait for MyStruct {
 ### 4.2 幽灵状态
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 幽灵状态：验证时使用，运行时消除
 use creusot_contracts::ghost_ptr::*;
 
@@ -295,7 +295,7 @@ fn increment_ghost(p: GhostPtrMut<i32>) {
 ### 4.3 向量与序列
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use creusot_contracts::logic::Seq;
 
 // Seq<T> 是逻辑层面的序列类型
@@ -323,7 +323,7 @@ fn reverse_vec<T>(seq: &mut Vec<T>) {
 ### 5.1 完整示例：二分查找
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // 先序谓词

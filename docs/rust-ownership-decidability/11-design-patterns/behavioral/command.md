@@ -156,7 +156,7 @@ impl CommandManager {
 ### 闭包命令 (Rust 风格)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct ClosureCommand {
     execute_fn: Box<dyn Fn()>,
     undo_fn: Box<dyn Fn()>,

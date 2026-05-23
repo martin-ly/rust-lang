@@ -53,7 +53,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 双分区OTA更新示例
 
 pub struct DualPartitionManager {
@@ -117,7 +117,7 @@ impl DualPartitionManager {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 //! 健康监控系统
 
 pub struct HealthMonitor {
@@ -176,7 +176,7 @@ impl HealthMonitor {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! 结构化日志记录
 
 use serde::Serialize;
@@ -244,7 +244,7 @@ impl SecureLogger {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 //! 故障检测系统
 
 pub struct FaultDetector {
@@ -305,7 +305,7 @@ impl FaultDetectionAlgorithm for DriftDetector {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! 故障响应自动化
 
 pub struct FaultResponseSystem {
@@ -389,7 +389,7 @@ impl FaultResponseSystem {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 //! 补丁管理流程
 
 pub struct PatchManager {
@@ -457,7 +457,7 @@ impl PatchManager {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! 配置版本控制
 
 pub struct ConfigurationManager {

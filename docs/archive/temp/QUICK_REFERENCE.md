@@ -142,7 +142,7 @@ let s2 = s1;  // s1 失效（Move）
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 不可变借用
 let s = String::from("hello");
 let len = calculate_length(&s);  // 借用，不取得所有权
@@ -219,7 +219,7 @@ enum Result<T, E> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义 Trait
 trait Summary {
     fn summarize(&self) -> String;
@@ -268,7 +268,7 @@ where
 
 ### 条件表达式
 
-```rust
+```rust,ignore
 // if 表达式
 let number = 6;
 if number % 2 == 0 {
@@ -294,7 +294,7 @@ let Some(x) = some_option else {
 
 ### 模式匹配
 
-```rust
+```rust,ignore
 // match 表达式
 match value {
     1 => println!("one"),
@@ -320,7 +320,7 @@ match num {
 
 ### 循环
 
-```rust
+```rust,ignore
 // loop
 loop {
     if condition {
@@ -391,7 +391,7 @@ fn forever() -> ! {
 
 ### 闭包
 
-```rust
+```rust,ignore
 // 闭包语法
 let add_one = |x| x + 1;
 let add = |x: i32, y: i32| -> i32 { x + y };
@@ -421,7 +421,7 @@ fn make_adder(x: i32) -> impl Fn(i32) -> i32 {
 
 ### Result 类型
 
-```rust
+```rust,ignore
 // Result 定义
 enum Result<T, E> {
     Ok(T),
@@ -452,7 +452,7 @@ fn process() -> Result<String, std::io::Error> {
 
 ### Option 类型
 
-```rust
+```rust,ignore
 // Option 定义
 enum Option<T> {
     Some(T),
@@ -479,7 +479,7 @@ some_number.and_then(|x| Some(x * 2));
 
 ### panic
 
-```rust
+```rust,ignore
 // 主动 panic
 panic!("crash and burn");
 
@@ -519,7 +519,7 @@ let handle = thread::spawn(move || {
 
 ### 消息传递
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 // 创建 Channel
@@ -539,7 +539,7 @@ let tx1 = tx.clone();
 
 ### 共享状态
 
-```rust
+```rust,ignore
 use std::sync::{Mutex, Arc};
 
 // Mutex
@@ -571,7 +571,7 @@ let w = lock.write().unwrap();
 
 ### async/await
 
-```rust
+```rust,ignore
 // 异步函数
 async fn hello_world() {
     println!("hello, world!");
@@ -594,7 +594,7 @@ async fn learn_and_sing() {
 
 ### tokio 基础
 
-```rust
+```rust,ignore
 // tokio runtime
 #[tokio::main]
 async fn main() {
@@ -628,7 +628,7 @@ tokio::select! {
 
 ### 打印宏
 
-```rust
+```rust,ignore
 // println!
 println!("Hello, {}!", name);
 println!("x = {}, y = {}", x, y);
@@ -647,7 +647,7 @@ let s = format!("x = {}", x);
 
 ### 调试宏
 
-```rust
+```rust,ignore
 // dbg!
 let a = 2;
 let b = dbg!(a * 2) + 1;  // 打印并返回值
@@ -663,7 +663,7 @@ debug_assert!(expensive_check());
 
 ### 其他常用宏
 
-```rust
+```rust,ignore
 // vec!
 let v = vec![1, 2, 3];
 
@@ -696,7 +696,7 @@ if cfg!(target_os = "windows") {
 
 ### 基础 Trait
 
-```rust
+```rust,ignore
 // Clone
 let x = value.clone();
 
@@ -742,7 +742,7 @@ let num: Result<i32, _> = "42".parse();
 
 ### 运算符 Trait
 
-```rust
+```rust,ignore
 // Add, Sub, Mul, Div
 impl Add for Point {
     type Output = Point;
@@ -769,7 +769,7 @@ impl Drop for MyStruct {
 
 ### 迭代器 Trait
 
-```rust
+```rust,ignore
 // Iterator
 impl Iterator for Counter {
     type Item = u32;

@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 01: 命令行工具](#实践项目-01-命令行工具)
@@ -32,6 +33,7 @@
   - [下一步](#下一步)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -68,6 +70,7 @@
 ---
 
 ## 学习要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. 所有权和借用
@@ -114,6 +117,7 @@ fn save_todos(todos: &[String]) -> std::io::Result<()> {
 ---
 
 ## 项目结构
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```
@@ -129,6 +133,7 @@ todo-cli/
 ---
 
 ## 实现步骤
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 步骤 1: 创建项目
@@ -155,6 +160,7 @@ struct Todo {
 ```
 
 ### 步骤 3: 实现存储
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -187,9 +193,10 @@ impl TodoStorage {
 ```
 
 ### 步骤 4: 实现命令处理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // src/commands.rs
 use crate::storage::TodoStorage;
 
@@ -209,9 +216,10 @@ pub fn list(storage: &TodoStorage) {
 ```
 
 ### 步骤 5: 主程序
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // src/main.rs
 use std::env;
 
@@ -247,9 +255,11 @@ fn main() {
 ---
 
 ## 测试验证
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 手动测试
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```bash
@@ -271,6 +281,7 @@ cargo build --release
 ---
 
 ## 参考实现
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 完整参考实现位于: `examples/todo-cli/`
@@ -278,6 +289,7 @@ cargo build --release
 ---
 
 ## 下一步
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完成此项目后，继续:
@@ -298,6 +310,7 @@ cargo build --release
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
@@ -393,4 +406,3 @@ cargo build --release
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -250,7 +250,7 @@ impl<K: std::hash::Hash + Eq + Clone, V: Clone> Cache<K, V> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -323,7 +323,7 @@ fn backpressure_producer_consumer() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -376,7 +376,7 @@ fn fan_out_fan_in() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Semaphore;
 

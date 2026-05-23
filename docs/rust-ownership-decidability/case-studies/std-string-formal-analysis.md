@@ -82,7 +82,7 @@ Rust的字符串系统是其类型安全的核心展示:
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 拥有所有权的可变字符串
 pub struct String {
     vec: Vec<u8>,  // 基于Vec<u8>
@@ -172,7 +172,7 @@ $$
 1. `String::new()`: 空字符串，有效UTF-8
 2. `String::from_utf8()`: 显式检查UTF-8有效性
 
-   ```rust
+   ```rust,ignore
    pub fn from_utf8(vec: Vec<u8>) -> Result<String, FromUtf8Error> {
        match run_utf8_validation(&vec) {
            Ok(()) => Ok(String { vec }),
@@ -185,7 +185,7 @@ $$
 
 **修改操作**:
 
-```rust
+```rust,ignore
 impl String {
     pub fn push(&mut self, ch: char) {
         // char保证是有效的Unicode标量值
@@ -221,7 +221,7 @@ UTF-8字符串的**字符边界**是有效UTF-8序列的起始位置。
 
 **边界检查**:
 
-```rust
+```rust,ignore
 impl ops::Index<ops::Range<usize>> for String {
     type Output = str;
 
@@ -242,7 +242,7 @@ impl ops::Index<ops::Range<usize>> for String {
 
 **is_char_boundary实现**:
 
-```rust
+```rust,ignore
 pub fn is_char_boundary(&self, index: usize) -> bool {
     if index == self.len() { return true; }
     match self.as_bytes().get(index) {
@@ -307,7 +307,7 @@ push操作基于Vec::push，均摊分析相同:
 
 **证明**:
 
-```rust
+```rust,ignore
 let s: &str = &string[1..5];
 ```
 
@@ -329,7 +329,7 @@ let s: &str = &string[1..5];
 ### 定义 5.1 (转换trait)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 impl AsRef<str> for String {
     fn as_ref(&self) -> &str { self }
 }
@@ -351,7 +351,7 @@ impl Deref for String {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Deref for String {
     type Target = str;
 
@@ -395,7 +395,7 @@ where B: ToOwned,
 
 **读取路径**:
 
-```rust
+```rust,ignore
 impl Deref for Cow<'_, str> {
     type Target = str;
 
@@ -412,7 +412,7 @@ impl Deref for Cow<'_, str> {
 
 **修改路径**:
 
-```rust
+```rust,ignore
 impl Cow<'_, str> {
     pub fn to_mut(&mut self) -> &mut String {
         match *self {
@@ -445,7 +445,7 @@ impl Cow<'_, str> {
 ### 定义 6.1 (Char迭代器)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 pub struct Chars<'a> {
     iter: slice::Iter<'a, u8>,
 }
@@ -458,7 +458,7 @@ pub struct Chars<'a> {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Iterator for Chars<'_> {
     type Item = char;
 
@@ -497,7 +497,7 @@ impl Iterator for Chars<'_> {
 
 **证明**:
 
-```rust
+```rust,ignore
 pub fn lines(&self) -> Lines<'_> {
     Lines { inner: self.split(|b| *b == b'\n' || *b == b'\r') }
 }
@@ -530,7 +530,7 @@ pub fn lines(&self) -> Lines<'_> {
 ### 反例 8.1 (非法UTF-8序列)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 错误: 尝试创建包含非法字节的String
 let invalid_utf8 = vec![0x80, 0x81, 0x82];
 let s = String::from_utf8(invalid_utf8).unwrap();  // panic!
@@ -557,7 +557,7 @@ let slice = &s[1..2];  // OK - 字符边界
 ### 反例 8.3 (索引混淆)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 let s = "你好".to_string();
 
 // 错误理解: 以为索引是字符位置

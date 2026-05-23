@@ -66,7 +66,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -123,7 +123,7 @@ $$
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 struct Context<'a> {
     waker: &'a Waker,
     _marker: PhantomData<&'a ()>,
@@ -223,7 +223,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 执行器主循环
 loop {
     for task in ready_queue {
@@ -310,7 +310,7 @@ Future的poll实现必须满足：
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 Pin<P<T>> where P: Deref
 ```
 
@@ -328,7 +328,7 @@ $$
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 #[pin_project]
 struct SelfReferential {
     data: String,
@@ -357,7 +357,7 @@ $$
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 impl<T> Drop for Pin<Box<T>> {
     fn drop(&mut self) {
         // 保证在Pin状态下调用T::drop
@@ -479,7 +479,7 @@ $$
 ### 6.1 Waker的克隆语义
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct Waker {
     inner: RawWaker,
@@ -525,7 +525,7 @@ $$
 ### 6.3 虚假唤醒处理
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 loop {
     match future.poll(cx) {
         Ready(v) => return v,
@@ -557,7 +557,7 @@ $$
 ### 7.1 编译转换规则
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 源代码
 async fn foo(x: i32) -> i32 {
     let y = bar(x).await;
@@ -650,7 +650,7 @@ $$
 ### 8.1 取消语义
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 let handle = tokio::spawn(async {
     // 可能被取消的任务
     select! {
@@ -725,7 +725,7 @@ $$
 ### 9.1 信号量形式化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 struct Semaphore {
     permits: AtomicUsize,
     waiters: Queue<Waker>,

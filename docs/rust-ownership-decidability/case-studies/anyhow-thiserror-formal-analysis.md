@@ -57,7 +57,7 @@
 ### 定义 2.1 (anyhow::Error)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct Error {
     inner: Box<dyn ErrorImpl>,
 }
@@ -87,7 +87,7 @@ pub struct Error {
 ### 定义 2.2 (派生宏)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[derive(Error, Debug)]
 pub enum MyError {
     #[error("IO error: {0}")]
@@ -105,7 +105,7 @@ pub enum MyError {
 
 **展开后**:
 
-```rust
+```rust,ignore
 impl std::fmt::Display for MyError {
     fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
         match self {
@@ -137,7 +137,7 @@ impl std::error::Error for MyError {
 
 > Anyhow支持运行时添加上下文。
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 fn read_config() -> Result<Config> {
@@ -170,7 +170,7 @@ Caused by:
 
 > Anyhow的`?`自动转换任何错误。
 
-```rust
+```rust,ignore
 fn main() -> anyhow::Result<()> {
     let file = std::fs::File::open("test")?;  // io::Error → anyhow::Error
     let num: i32 = "abc".parse()?;            // ParseIntError → anyhow::Error
@@ -180,7 +180,7 @@ fn main() -> anyhow::Result<()> {
 
 **机制**:
 
-```rust
+```rust,ignore
 impl From<E: std::error::Error> for Error {
     fn from(e: E) -> Self {
         // 类型擦除包装
@@ -209,7 +209,7 @@ impl From<E: std::error::Error> for Error {
 
 ### 反例 6.1 (混用错误类型)
 
-```rust
+```rust,ignore
 // 错误: 混用anyhow和thiserror可能困惑
 pub fn lib_function() -> anyhow::Result<()> {
     // 库应该返回具体错误类型
@@ -226,7 +226,7 @@ pub fn lib_function() -> Result<(), LibError> {
 
 ### 反例 6.2 (过度使用上下文)
 
-```rust
+```rust,ignore
 // 过度包装，信息冗余
 let x = op1().context("op1 failed")?;
 let y = op2().context("op2 failed")?;

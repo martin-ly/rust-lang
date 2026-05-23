@@ -69,7 +69,7 @@
 ### 端口与适配器
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 领域层 - 定义端口 (trait)
 pub trait OrderRepository {
     fn find_by_id(&self, id: OrderId) -> Result<Option<Order>, Error>;
@@ -108,7 +108,7 @@ impl OrderRepository for SqliteOrderRepository {
 ### DI 配置
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // main.rs
 use actix_web::{web, App, HttpServer};
 
@@ -133,7 +133,7 @@ async fn main() -> std::io::Result<()> {
 ## 领域驱动设计要素
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 实体 (有身份)
 pub struct Order {
     id: OrderId,
@@ -202,7 +202,7 @@ impl PricingService {
 ## 错误处理
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 领域错误
 #[derive(Debug, thiserror::Error)]
 pub enum DomainError {
@@ -239,7 +239,7 @@ impl ResponseError for AppError {
 ## 测试
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 领域测试 - 纯内存，无依赖
 #[test]
 fn test_order_creation() {

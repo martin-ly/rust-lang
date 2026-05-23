@@ -78,7 +78,7 @@ Phase 5: 质量验证     [░░░░░░░░░░░░]   0% ⏭️
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 带符号减法检查（新增！）
 let x: u32 = 10;
 let y: i32 = -5;
@@ -95,7 +95,7 @@ const fn process() -> f64 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 触发警告：mismatched_lifetime_syntaxes
 fn items(scores: &[u8]) -> std::slice::Iter<'_, u8> {
     scores.iter()

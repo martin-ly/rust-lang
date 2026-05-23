@@ -61,7 +61,7 @@ Pin-project解决的问题：
 ### 定义 PIN-1 ( Pin保证 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 Pin<P<T>> where P: Deref
 ```
 
@@ -121,7 +121,7 @@ $$
 ### 定义 PROJECTION-1 ( 安全投影 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[pin_project]
 struct Foo {
     #[pin]
@@ -155,7 +155,7 @@ $$
 ### 定义 MACRO-1 ( pin_project! )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[pin_project]
 struct MyFuture {
     #[pin]
@@ -166,7 +166,7 @@ struct MyFuture {
 
 **生成代码**:
 
-```rust
+```rust,ignore
 struct MyFuture {
     inner: InnerFuture,
     buffer: Vec<u8>,
@@ -192,7 +192,7 @@ impl MyFuture {
 ### 定义 DROP-1 ( PinnedDrop )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 #[pin_project(PinnedDrop)]
 struct Foo {
     #[pin]
@@ -247,7 +247,7 @@ $$
 ### 示例1: 基础自引用
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 use std::pin::Pin;
 use std::marker::PhantomPinned;
@@ -283,7 +283,7 @@ impl SelfReferential {
 ### 示例2: 异步组合器
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 use std::future::Future;
 use std::pin::Pin;
@@ -321,7 +321,7 @@ impl<F: Future> Future for Timeout<F> {
 ### 示例3: 流适配器
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 use futures::stream::{Stream, FusedStream};
 use std::pin::Pin;
@@ -368,7 +368,7 @@ impl<S: FusedStream, F> FusedStream for Filter<S, F> {
 ### 示例4: PinnedDrop
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use pin_project::{pin_project, pinned_drop};
 use std::pin::Pin;
 

@@ -78,7 +78,7 @@
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! 输液泵控制器 - IEC 62304 Class C
 
 #![no_std]

@@ -98,7 +98,7 @@ Rust提供了多种并发模型，从传统的线程到现代的异步编程。
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Send: 可安全跨线程转移所有权
 pub unsafe auto trait Send {}
 
@@ -234,7 +234,7 @@ let r2 = data.read().unwrap();
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 let counter = AtomicUsize::new(0);
@@ -267,7 +267,7 @@ counter.compare_exchange(current, new, Ordering::Acquire, Ordering::Relaxed);
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -283,7 +283,7 @@ let result = f.await;  // 在async上下文中执行
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 async fn fetch_data(url: &str) -> Result<String, Error> {
     let response = reqwest::get(url).await?;
     let data = response.text().await?;
@@ -321,7 +321,7 @@ async fn fetch_multiple() -> Result<(), Error> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 数据并行
@@ -338,7 +338,7 @@ let (a, b) = rayon::join(
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use crossbeam::channel;
 use std::thread;
 
@@ -363,7 +363,7 @@ thread::spawn(move || {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use actix::prelude::*;
 
 struct MyActor {
@@ -410,7 +410,7 @@ impl Handler<MyMessage> for MyActor {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ❌ 跨越await持有std Mutex
 async fn bad() {
     let guard = mutex.lock().unwrap();
@@ -447,7 +447,7 @@ async fn good2() {
 - 需要真正的并行
 - 阻塞操作
 
-```rust
+```rust,ignore
 use std::thread;
 
 let handle = thread::spawn(|| {
@@ -473,7 +473,7 @@ let result = handle.join().unwrap();
 - 高并发(数万连接)
 - 非阻塞
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() {
     let listener = tokio::net::TcpListener::bind("127.0.0.1:8080").await.unwrap();
@@ -499,7 +499,7 @@ async fn main() {
 - 数据处理
 - 集合操作
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 let sum: i32 = (0..1_000_000)
@@ -523,7 +523,7 @@ let sum: i32 = (0..1_000_000)
 - 容错需求
 - 状态封装
 
-```rust
+```rust,ignore
 // actix示例
 use actix::prelude::*;
 

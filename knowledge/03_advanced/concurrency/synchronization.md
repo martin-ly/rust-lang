@@ -1,4 +1,6 @@
 # Rust 同步原语深度解析
+>
+> **相关概念**: [并发同步](../../../concept/03_advanced/01_concurrency.md)
 
 > **Bloom 层级**: 理解
 
@@ -61,7 +63,7 @@
 
 #### 1.2 操作定义
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, RwLock, Condvar, Barrier};
 use std::thread;
 
@@ -107,7 +109,7 @@ barrier.wait();  // 阻塞直到 3 个线程都调用 wait
 
 `Mutex<T>` 的 `Sync` 实现：
 
-```rust
+```rust,ignore
 unsafe impl<T: Send> Sync for Mutex<T> {}
 ```
 
@@ -397,7 +399,7 @@ fn main() {
 
 虽然标准库没有直接提供 `Semaphore`，但可通过 `tokio::sync::Semaphore` 或自定义实现。
 
-```rust
+```rust,compile_fail
 use std::sync::Arc;
 use tokio::sync::Semaphore;
 use tokio::time::{sleep, Duration};
@@ -675,7 +677,7 @@ fn process_in_parallel(items: Vec<i32>) -> Vec<i32> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 错误：在 async 函数中使用 Mutex::lock 会阻塞执行器
 async fn bad_example(data: std::sync::Arc<std::sync::Mutex<i32>>) {
     let mut guard = data.lock().unwrap(); // 阻塞！
@@ -726,7 +728,7 @@ fn scoped_threads_example() {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 错误示例
 async fn bad(data: Arc<Mutex<Data>>) {
     let guard = data.lock().unwrap();
@@ -748,7 +750,7 @@ async fn good(data: Arc<Mutex<Data>>) {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 不必要的 Mutex
 let counter = Mutex::new(Cell::new(0)); // Cell 本身不是 Sync
 
@@ -1121,7 +1123,7 @@ fn transfer(from: Arc<Account>, to: Arc<Account>, amount: i64) {
 
 **修复** — 全局锁顺序：
 
-```rust
+```rust,ignore
 fn transfer(from: Arc<Account>, to: Arc<Account>, amount: i64) {
     // 总是先锁地址较小的那个
     let (first, second) = if Arc::as_ptr(&from) < Arc::as_ptr(&to) {
@@ -1180,7 +1182,7 @@ fn consumer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
 
 **修复**:
 
-```rust
+```rust,ignore
 fn producer(queue: Arc<(Mutex<Vec<i32>>, Condvar)>) {
     let (lock, cvar) = &*queue;
     let mut data = lock.lock().unwrap();

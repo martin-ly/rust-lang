@@ -451,7 +451,7 @@ public class JavaConcurrency {
 
 Rust 的所有权系统提供编译期并发安全：
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -578,7 +578,7 @@ public class NullProblem {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Rust 泛型（单态化）
 struct Box_<T> {
     value: T,
@@ -702,7 +702,7 @@ class HelloController {
 | 测试 | 内置 + criterion | ★★★★☆ |
 | 构建工具 | Cargo | ★★★★★ |
 
-```rust
+```rust,ignore
 // Axum Web 示例
 use axum::{
     routing::get,
@@ -763,7 +763,7 @@ public class FileProcessing {
 
 #### Rust
 
-```rust
+```rust,ignore
 use std::fs;
 use std::io::{self, BufRead, BufReader};
 
@@ -830,7 +830,7 @@ public class UserController {
 
 #### Rust (Axum + SQLx)
 
-```rust
+```rust,ignore
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -962,7 +962,7 @@ public class OrderService {
    - 需要内存安全保证
    - 防止数据竞争
 
-```rust
+```rust,ignore
 // Rust 优势场景：高性能网络服务
 use tokio::net::TcpListener;
 
@@ -1018,7 +1018,7 @@ async fn main() -> tokio::io::Result<()> {
 
 #### JNI/JNA 集成
 
-```rust
+```rust,ignore
 // Rust 代码编译为动态库供 Java 调用
 #[no_mangle]
 pub extern "system" fn Java_com_example_native_1lib_processData(

@@ -50,7 +50,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 零成本泛型
 /// 编译后为每个类型生成专用代码
 pub fn process<T: Processor>(item: T) -> T::Output {
@@ -159,7 +159,7 @@ impl ParticleSoA {
 ### 3.1 常量泛型
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 编译时已知大小的数组
 pub struct Buffer<T, const N: usize> {
     data: [T; N],
@@ -231,7 +231,7 @@ const MAX_BUFFER_SIZE: usize = validate_config(512, 16);
 ### 4.1 分支预测提示
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 使用likely/unlikely提示
 #[cfg(feature = "nightly")]
 use std::intrinsics::{likely, unlikely};
@@ -262,7 +262,7 @@ pub fn process_safe(value: Option<i32>) -> i32 {
 ### 4.2 SIMD向量化
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 使用packed_simd或std::simd
 #[cfg(feature = "simd")]
 use std::simd::*;
@@ -296,7 +296,7 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 ### 5.1 无分配设计
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 
 /// 静态分配池
@@ -341,7 +341,7 @@ impl<'a, T> Drop for PoolRef<'a, T> {
 ### 5.2 中断延迟优化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 最小化临界区
 pub struct MinimalCriticalSection;
 
@@ -373,7 +373,7 @@ impl MinimalCriticalSection {
 ### 6.1 基准测试
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 使用criterion进行基准测试
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -396,7 +396,7 @@ criterion_main!(benches);
 ### 6.2 运行时性能监控
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// 性能计数器
 pub struct PerformanceCounter {
     start: u64,

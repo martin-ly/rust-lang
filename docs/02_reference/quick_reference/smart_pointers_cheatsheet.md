@@ -1,6 +1,7 @@
 ﻿# 🎯 Rust 智能指针速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🎯 Rust 智能指针速查卡](#-rust-智能指针速查卡)
@@ -72,6 +73,7 @@
   - [🎯 **掌握智能指针，灵活管理内存！**](#-掌握智能指针灵活管理内存)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c01_ownership_borrow_scope/docs/README.md) | [代码示例](../../../crates/c01_ownership_borrow_scope/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -154,6 +156,7 @@
   - [🎯 **掌握智能指针，灵活管理内存！**](#-掌握智能指针灵活管理内存)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -238,7 +241,7 @@ fn take_ownership(b: Box<i32>) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 创建
 let b = Box::new(value);
 let b = Box::from(value);
@@ -286,7 +289,7 @@ println!("count: {}", Rc::strong_count(&a));
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 多重所有权（单线程）
 struct Node {
     value: i32,
@@ -308,7 +311,7 @@ let child2 = Rc::clone(&node);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 // 创建
@@ -390,7 +393,7 @@ for handle in handles {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 
 // API 与 Rc 相同，但线程安全
@@ -428,7 +431,7 @@ let mut r = data.borrow_mut();
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 在不可变引用中修改数据
 struct Counter {
     count: RefCell<i32>,
@@ -449,7 +452,7 @@ impl Counter {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 let cell = RefCell::new(value);
@@ -470,7 +473,7 @@ let value = cell.into_inner();
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 let cell = RefCell::new(5);
 
 let r1 = cell.borrow();      // OK
@@ -541,7 +544,7 @@ impl SharedData {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 let mutex = Mutex::new(value);
@@ -601,7 +604,7 @@ writer.join().unwrap();
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 读多写少的场景
 use std::sync::{Arc, RwLock};
 
@@ -626,7 +629,7 @@ impl Cache {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::sync::RwLock;
 
 let rwlock = RwLock::new(value);
@@ -706,7 +709,7 @@ let branch = Rc::new(Node {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::rc::{Rc, Weak};
 
 // 创建弱引用
@@ -988,7 +991,7 @@ fn main() {
 
 Rust 1.95+ 大幅增强了 `LazyCell` 和 `LazyLock`，新增了安全访问方法：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::LazyCell;
 
@@ -1093,9 +1096,10 @@ impl AppConfig {
 - **性能关键路径**: 先用 `get()` 检查，避免不必要的锁操作
 
 ### 示例 5: 使用 Pin 的自引用结构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -1140,6 +1144,7 @@ println!("{}", data.get_data());
 > **[来源: Rust Official Docs]**
 
 ### 场景: 图结构实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 在实际项目中，智能指针常用于实现复杂的数据结构。以下是一个有向图的实现：
@@ -1213,6 +1218,7 @@ impl<T> Graph<T> {
 > **[来源: Rust Official Docs]**
 
 ### 决策树
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -1232,6 +1238,7 @@ impl<T> Graph<T> {
 ```
 
 ### 性能对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 类型         | 开销         | 线程安全 | 可变性     |
@@ -1243,6 +1250,7 @@ impl<T> Graph<T> {
 | `RwLock<T>`  | 锁开销       | ✅       | 运行时检查 |
 
 ### 常见组合
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 场景               | 推荐组合                  |
@@ -1258,11 +1266,12 @@ impl<T> Graph<T> {
 > **[来源: Rust Official Docs]**
 
 ### 反例 1: Rc 用于多线程
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let rc = Rc::new(1);
 thread::spawn(|| {
     println!("{}", rc);  // ❌ Rc 不是 Send
@@ -1273,7 +1282,7 @@ thread::spawn(|| {
 
 **修正**:
 
-```rust
+```rust,ignore
 let arc = Arc::new(1);
 thread::spawn(move || println!("{}", arc));
 ```
@@ -1281,11 +1290,12 @@ thread::spawn(move || println!("{}", arc));
 ---
 
 ### 反例 2: RefCell 在已借出时再次借用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let r = RefCell::new(1);
 let g1 = r.borrow_mut();
 let g2 = r.borrow();  // ❌ panic: 已借出可变借用
@@ -1295,7 +1305,7 @@ let g2 = r.borrow();  // ❌ panic: 已借出可变借用
 
 **修正**:
 
-```rust
+```rust,ignore
 let g1 = r.borrow_mut();
 drop(g1);  // 先释放
 let g2 = r.borrow();
@@ -1304,6 +1314,7 @@ let g2 = r.borrow();
 ---
 
 ### 反例 3: 循环引用导致内存泄漏
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **错误示例**:
@@ -1343,6 +1354,7 @@ struct Node {
 ---
 
 ### 反例 4: 错误地使用 Mutex 守卫
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误示例**:
@@ -1362,7 +1374,7 @@ let first = &lock[0];  // 持有对锁内数据的引用
 
 **修正**:
 
-```rust
+```rust,ignore
 let first = {
     let lock = data.lock().unwrap();
     lock[0]  // 复制值，而不是返回引用
@@ -1372,6 +1384,7 @@ let first = {
 ---
 
 ### 反例 5: Pin 误用导致未定义行为
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误示例**:
@@ -1401,7 +1414,7 @@ impl Unmovable {
 
 **修正**: 使用 `Pin::get_unchecked_mut` 在 unsafe 块中修改：
 
-```rust
+```rust,ignore
 impl Unmovable {
     fn new(data: String) -> Pin<Box<Self>> {
         let mut boxed = Box::pin(Unmovable {
@@ -1428,6 +1441,7 @@ impl Unmovable {
 - [智能指针 API 参考](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 以下示例位于 `crates/c01_ownership_borrow_scope/examples/`，可直接运行（例如：`cargo run -p c01_ownership_borrow_scope --example advanced_ownership_examples`）。
@@ -1439,15 +1453,18 @@ impl Unmovable {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 智能指针文档](https://doc.rust-lang.org/book/ch15-00-smart-pointers.html)
 - [Rust Reference - Smart Pointers](https://doc.rust-lang.org/reference/types/pointer.html)
 
 ### 项目内部文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [完整智能指针文档](../../../crates/c01_ownership_borrow_scope/docs/tier_03_references/05_智能指针API参考.md)
@@ -1455,6 +1472,7 @@ impl Unmovable {
 - [所有权系统研究](../../research_notes/formal_methods/ownership_model.md)
 
 ### 形式化理论与类型系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [所有权模型形式化](../../research_notes/formal_methods/ownership_model.md) — 所有权系统形式化基础
@@ -1464,6 +1482,7 @@ impl Unmovable {
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 智能指针类型理论
 
 ### 相关速查卡
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 所有权与智能指针
@@ -1496,6 +1515,7 @@ impl Unmovable {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1937,4 +1957,3 @@ impl Unmovable {
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

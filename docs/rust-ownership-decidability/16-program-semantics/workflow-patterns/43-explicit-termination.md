@@ -340,7 +340,7 @@ $$
 
 Rust 提供了多种显式终止的机制：
 
-```rust
+```rust,ignore
 use std::process;
 
 #[derive(Debug, Clone, PartialEq)]
@@ -415,7 +415,7 @@ fn process_data(data: &str) -> Result<String, String> {
 
 使用 `JoinSet` 和结构化并发实现异步显式终止：
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tokio::task::JoinSet;
@@ -467,7 +467,7 @@ pub fn explicit_exit(code: i32, reason: &str) -> ! {
 
 > **[来源: Tokio Docs - tokio::net]** · **[来源: TRPL Ch. 20 - Web Server]**
 
-```rust
+```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::broadcast;
 use tokio::signal;
@@ -696,7 +696,7 @@ $$
 
 **场景**: 在线支付系统中，支付请求必须明确结束于成功、失败或超时三种终止状态之一，每种状态触发不同的后续业务逻辑。
 
-```rust
+```rust,ignore
 use std::time::{Duration, Instant};
 use thiserror::Error;
 
@@ -826,7 +826,7 @@ graph TD
 
 **Rust 实现**:
 
-```rust
+```rust,ignore
 pub enum EndNode {
     Success,
     Failure(String),

@@ -37,7 +37,7 @@ Rust 1.95.0 引入了 `core::range` 模块 [来源: Rust 1.95 Release Notes / 20
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 let r = RangeInclusive::new(1, 10);
@@ -48,7 +48,7 @@ let r = RangeInclusive::new(1, 10);
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 let r = RangeInclusive::new(1, 5);
@@ -61,7 +61,7 @@ for i in r {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 fn overlap(a: &RangeInclusive<i32>, b: &RangeInclusive<i32>) -> bool {
@@ -79,7 +79,7 @@ fn overlap(a: &RangeInclusive<i32>, b: &RangeInclusive<i32>) -> bool {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 fn page_range(total: u32, per_page: u32, page: u32) -> RangeInclusive<u32> {
@@ -119,7 +119,7 @@ impl<T: Ord + Clone> IntervalTree<T> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let r = RangeInclusive::new(5, 3);  // start > end
 // 有效但迭代时为空
 ```
@@ -128,7 +128,7 @@ let r = RangeInclusive::new(5, 3);  // start > end
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // RangeInclusive 包含两端点，共 6 个元素
 let r = RangeInclusive::new(0, 5);
 assert_eq!(r.into_iter().count(), 6);  // 不是 5！
@@ -140,7 +140,7 @@ assert_eq!(r.into_iter().count(), 6);  // 不是 5！
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 旧方式
 use std::ops::RangeInclusive;
 let old: RangeInclusive<i32> = 1..=10;

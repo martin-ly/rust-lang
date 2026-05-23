@@ -226,6 +226,7 @@ fn test_edge_cases() {
 
 /// 测试大数据集性能
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_large_dataset_performance() {
     use std::time::Instant;
 

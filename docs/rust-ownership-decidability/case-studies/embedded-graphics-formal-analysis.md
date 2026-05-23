@@ -96,7 +96,7 @@ $$
 ### 定义 TARGET-1 ( DrawTarget trait )
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 trait DrawTarget {
     type Color;
     type Error;
@@ -152,7 +152,7 @@ $$
 ### 示例1: 基本绘制
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use embedded_graphics::{
     pixelcolor::Rgb565,
     prelude::*,
@@ -203,7 +203,7 @@ fn draw_example<D: DrawTarget<Color = Rgb565>>(
 ### 示例2: 显示驱动实现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use embedded_graphics::draw_target::DrawTarget;
 use embedded_graphics::pixelcolor::Rgb565;
 use embedded_hal::digital::OutputPin;
@@ -251,7 +251,7 @@ impl<SPI, DC, RST> ST7735<SPI, DC, RST> {
 ### 示例3: 动画与双缓冲
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use embedded_graphics::image::Image;
 use tinybmp::Bmp;
 
@@ -284,7 +284,7 @@ fn animation_example() {
 ### 示例4: 进度条组件
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 struct ProgressBar {
     position: Point,
     size: Size,

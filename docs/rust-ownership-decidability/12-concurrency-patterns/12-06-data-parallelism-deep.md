@@ -126,7 +126,7 @@ Data parallelism encompasses two major architectural paradigms:
 - Deterministic execution order
 - Best for regular, data-parallel computations
 
-```rust
+```rust,ignore
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
 
 /// SIMD vector addition (Rust 1.94 stable portable_simd)
@@ -155,7 +155,7 @@ where
 - More flexible but higher overhead
 - Best for irregular, task-parallel computations
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// MIMD parallel map using Rayon
@@ -189,7 +189,7 @@ where
 - Regular access patterns
 - Embarrassingly parallel (minimal communication)
 
-```rust
+```rust,ignore
 /// Data parallelism: same operation on each element
 pub fn normalize_vectors(vectors: &mut [Vec<f64>]) {
     vectors.par_iter_mut().for_each(|v| {
@@ -209,7 +209,7 @@ pub fn normalize_vectors(vectors: &mut [Vec<f64>]) {
 - Potentially irregular patterns
 - May require synchronization
 
-```rust
+```rust,ignore
 use rayon::join;
 
 /// Task parallelism: different operations on same data
@@ -262,7 +262,7 @@ Rayon's design follows three core principles:
 2. **Composable Abstractions**: Parallel iterators mirror sequential ones
 3. **Adaptive Scheduling**: Work stealing adjusts to load dynamically
 
-```rust
+```rust,ignore
 /// Rayon parallel iterator chain
 use rayon::prelude::*;
 
@@ -313,7 +313,7 @@ Rayon uses a work-stealing scheduler with the following properties:
 
 Rayon leverages Rust's ownership system for safety:
 
-```rust
+```rust,ignore
 /// Ownership in parallel context
 pub fn ownership_demo() {
     let data = vec![1, 2, 3, 4, 5];
@@ -390,7 +390,7 @@ Guarantee:
 
 **Rust Implementation**:
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Proof by construction: safe parallel iteration
@@ -430,7 +430,7 @@ Guarantee:
 
 **Proof**:
 
-```rust
+```rust,ignore
 /// Determinism demonstration
 pub fn determinism_proof() {
     let data = vec![1, 2, 3, 4, 5];
@@ -464,7 +464,7 @@ pub fn determinism_proof() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Parallel map ownership semantics
@@ -501,7 +501,7 @@ where
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use rayon::prelude::*;
 
@@ -532,7 +532,7 @@ pub fn bad_par_map() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use rayon::prelude::*;
 
@@ -586,7 +586,7 @@ pub fn par_map_with_aggregation() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Reduce requires associative operation
@@ -612,7 +612,7 @@ pub fn par_reduce_demo() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// ❌ COUNTER-EXAMPLE: Non-associative operation
@@ -654,7 +654,7 @@ pub fn string_concat_order() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// ✅ Tree reduction for better parallelization
@@ -701,7 +701,7 @@ pub fn custom_tree_reduce() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Filter predicate ownership
@@ -742,7 +742,7 @@ pub fn par_filter_with_context() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Filter + map with result collection
@@ -775,7 +775,7 @@ pub fn par_partition() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::collections::HashMap;
 
@@ -822,7 +822,7 @@ pub fn group_by_example() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::collections::HashMap;
 
@@ -874,7 +874,7 @@ pub fn non_deterministic_ordering() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Closure is moved to worker threads → must be Send
@@ -898,7 +898,7 @@ pub fn send_requirement() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::cell::RefCell;
 use rayon::prelude::*;
@@ -944,7 +944,7 @@ pub fn capture_notsend() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Collecting results requires Send, not necessarily Sync
@@ -971,7 +971,7 @@ pub fn collection_requirements() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::cell::UnsafeCell;
 
@@ -1035,7 +1035,7 @@ pub fn safe_collection() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rayon::slice::ParallelSliceMut;
 
 /// Rayon's parallel sort uses sample sort algorithm:
@@ -1083,7 +1083,7 @@ pub fn parallel_sort_by_key() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use rayon::slice::ParallelSliceMut;
 
 /// Stable vs Unstable sort
@@ -1116,7 +1116,7 @@ pub fn stability_demo() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Parallel binary search (for sorted data)
@@ -1162,7 +1162,7 @@ pub fn parallel_find_all<T: Send + PartialEq + Sync>(data: &[T], target: &T) -> 
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// ❌ COUNTER-EXAMPLE: Trying to early terminate with find
@@ -1201,7 +1201,7 @@ pub fn hybrid_search() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::collections::{HashMap, HashSet, VecDeque};
 
@@ -1257,7 +1257,7 @@ impl Graph {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::sync::Arc;
 
@@ -1329,7 +1329,7 @@ pub fn parallel_graph_mutation() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// ❌ COUNTER-EXAMPLE: Too fine-grained parallelism
@@ -1351,7 +1351,7 @@ pub fn too_fine_grained() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// ❌ COUNTER-EXAMPLE: Too coarse-grained parallelism
@@ -1374,7 +1374,7 @@ pub fn too_coarse_grained() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Finding optimal chunk size
@@ -1413,7 +1413,7 @@ pub fn chunk_size_benchmark() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use rayon::prelude::*;
 
@@ -1457,7 +1457,7 @@ pub fn no_false_sharing() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use std::sync::atomic::{AtomicU64, Ordering};
 use rayon::prelude::*;
@@ -1508,7 +1508,7 @@ pub fn thread_local_accumulation() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use rayon::iter::plumbing::{Consumer, Producer, ProducerCallback, UnindexedConsumer};
 use rayon::iter::{ParallelIterator, IndexedParallelIterator};
 
@@ -1601,7 +1601,7 @@ impl Producer for StepProducer {
 
 #### Safety Invariants
 
-```rust
+```rust,ignore
 /// Safety invariants for custom parallel iterators:
 ///
 /// 1. No aliasing: Each element is produced exactly once
@@ -1633,7 +1633,7 @@ impl<T: Send> ParallelIterator for SafeParIter<T> {
 
 #### Scope for Spawning
 
-```rust
+```rust,ignore
 use rayon::scope;
 
 /// Scoped spawning allows borrowing from stack
@@ -1659,7 +1659,7 @@ fn expensive_computation(n: usize) -> i32 {
 
 #### Safety Guarantees
 
-```rust
+```rust,ignore
 use rayon::scope;
 
 /// Scope safety: borrowed references valid for scope duration
@@ -1706,7 +1706,7 @@ pub fn scope_escape_attempt() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Image represented as flat RGB buffer
@@ -1842,7 +1842,7 @@ fn vertical_blur(data: &[u8], width: usize, x: usize, y: usize, radius: usize) -
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// Sobel edge detection (parallel)
@@ -1899,7 +1899,7 @@ pub fn parallel_sobel(image: &Image) -> Image {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 /// Performance comparison framework
 pub fn benchmark_image_processing() {
     use std::time::Instant;
@@ -1938,7 +1938,7 @@ pub fn benchmark_image_processing() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 /// Understanding memory bandwidth limits
 pub fn memory_bandwidth_analysis() {
     // Image processing is often memory-bound, not compute-bound
@@ -2014,7 +2014,7 @@ pub fn memory_bandwidth_analysis() {
 
 Rust 1.94 includes several features that enhance data parallelism:
 
-```rust
+```rust,ignore
 /// Rust 1.94: Precise capturing in closures
 /// More flexible lifetime inference for parallel closures
 

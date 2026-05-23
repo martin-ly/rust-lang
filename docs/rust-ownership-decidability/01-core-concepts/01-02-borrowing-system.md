@@ -59,7 +59,7 @@
 
 所有权系统的一个问题：严格的Move语义导致频繁的所有权转移。
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let len = calculate_length(s);  // s被move到函数
@@ -143,7 +143,7 @@ fn main() {
 ### 2.3 示例：多读者模式
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 多读者场景：配置读取
 struct Config {
     settings: HashMap<String, String>,
@@ -200,7 +200,7 @@ fn main() {
 ### 3.3 反例：同时多个可变借用
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn multiple_mut_borrows() {
     let mut data = vec![1, 2, 3];
 
@@ -261,7 +261,7 @@ loan(ℓ, Mut, r) ∈ L  ∧  loan(ℓ', _, r') ∈ L
 ### 5.1 编译时检查
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn dangle() -> &String {  // 错误!
     let s = String::from("hello");
     &s  // s在函数结束时被drop
@@ -281,7 +281,7 @@ error[E0106]: missing lifetime specifier
 ### 5.2 反例：返回局部引用
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn dangling_reference() -> &i32 {
     let x = 5;
     &x  // x 在这里离开作用域被释放
@@ -443,7 +443,7 @@ NLL的关键：生命周期基于**使用位置**而非**作用域范围**。
 ### 10.1 链表迭代
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 struct Node<T> {
     value: T,
     next: Option<Box<Node<T>>>,
@@ -463,7 +463,7 @@ fn iterate_list<T>(head: &Node<T>) {
 ### 10.2 树遍历
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct TreeNode<T> {
     value: T,
     left: Option<Box<TreeNode<T>>>,
@@ -485,7 +485,7 @@ fn inorder_traversal<T>(root: &TreeNode<T>) {
 ### 10.3 并发读取
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn concurrent_reads() {

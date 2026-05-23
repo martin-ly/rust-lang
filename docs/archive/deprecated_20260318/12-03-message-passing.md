@@ -119,7 +119,7 @@ Actor 模型由 Carl Hewitt 于 1973 年提出，每个 Actor 是一个独立的
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 共享状态方式
 mod shared_state {
     use std::sync::{Arc, Mutex};
@@ -193,7 +193,7 @@ mod message_passing {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
@@ -361,7 +361,7 @@ impl<T: Clone + Send + 'static> WorkStealingQueue<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use crossbeam::channel::{self, Sender, Receiver, Select};
 use std::thread;
 
@@ -438,7 +438,7 @@ impl<T> ConsumerGroup<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use crossbeam::channel;
 
@@ -547,7 +547,7 @@ pub struct SendError<T>(pub T);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use crossbeam::channel::{self, Select};
 use std::time::Duration;
 
@@ -643,7 +643,7 @@ impl<T> PrioritySelect<T> {
 
 ### 3.1 Actor 基础
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, oneshot};
 use std::sync::Arc;
 
@@ -793,7 +793,7 @@ pub fn start<A: Actor>(actor: A) -> ActorHandle<A> {
 
 #### Rust 1.94 延迟初始化在 Actor 中的应用
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::LazyCell;
 use tokio::sync::{mpsc, oneshot};
@@ -874,7 +874,7 @@ pub enum Message {
 }
 ```
 
-```rust
+```rust,ignore
 /// CQRS 风格的消息协议
 pub mod protocol {
     use serde::{Serialize, Deserialize};

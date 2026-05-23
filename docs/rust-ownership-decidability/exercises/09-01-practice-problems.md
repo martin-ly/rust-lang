@@ -43,7 +43,7 @@
 
 **题目**: 修复以下代码中的借用错误
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello");
     let r1 = &s;
@@ -74,7 +74,7 @@ fn main() {
 
 **题目**: 实现一个简单的智能指针 MyBox，包含 Deref 和 Drop
 
-```rust
+```rust,ignore
 struct MyBox<T> {
     // 你的实现
 }
@@ -131,7 +131,7 @@ fn main() {
 
 **题目**: 追踪以下代码的所有权转移
 
-```rust
+```rust,ignore
 fn main() {
     let s1 = String::from("hello");
     let s2 = take_ownership(s1);
@@ -179,7 +179,7 @@ fn give_back(s: String) -> String {
 
 **题目**: 为以下函数标注正确的生命周期
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
@@ -203,7 +203,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **题目**: 为以下结构体添加生命周期标注
 
-```rust
+```rust,ignore
 struct Parser {
     text: &str,
 }
@@ -222,7 +222,7 @@ impl Parser {
 <details>
 <summary>点击查看答案</summary>
 
-```rust
+```rust,ignore
 struct Parser<'a> {
     text: &'a str,
 }
@@ -251,7 +251,7 @@ impl<'a> Parser<'a> {
 
 **题目**: 修复以下生命周期错误
 
-```rust
+```rust,ignore
 fn make_string() -> &String {
     let s = String::from("hello");
     &s
@@ -312,7 +312,7 @@ fn factorial(n: u64) -> u64 {
 <details>
 <summary>点击查看答案</summary>
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 #[logic]

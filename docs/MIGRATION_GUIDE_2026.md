@@ -4,6 +4,7 @@
 > **目标**: 从旧版Rust工具链迁移到最新生态
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [2026年迁移指南](#2026年迁移指南)
@@ -37,6 +38,7 @@
   - [**详细指南**: 2026\_RUST\_ECOSYSTEM\_COMPREHENSIVE\_REVIEW.md](#详细指南-2026_rust_ecosystem_comprehensive_reviewmd)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 迁移清单
 >
@@ -70,7 +72,7 @@ cargo install cargo-update cargo-tree cargo-outdated
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 旧代码
 use lazy_static::lazy_static;
 lazy_static! {
@@ -88,7 +90,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 旧代码
 #[async_trait::async_trait]
 trait Storage {
@@ -107,7 +109,7 @@ trait Storage {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 旧代码 (不稳定特性)
 #![feature(generators)]
 || { yield 1; }
@@ -227,7 +229,7 @@ opaque_hidden_inferred_bound = "warn"
 
 将嵌套的 `if let` 转换为守卫模式：
 
-```rust
+```rust,ignore
 // 迁移前 (Rust 1.94)
 match event {
     Event::Message(text) => {
@@ -450,6 +452,7 @@ git checkout -- .
 ---
 
 ## 参考资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [Rust 1.95 Release Notes](https://blog.rust-lang.org/)
@@ -473,6 +476,7 @@ git checkout -- .
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [docs 目录](./README.md)
@@ -611,4 +615,3 @@ git checkout -- .
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -277,7 +277,7 @@ fn config() -> &'static Config {
 
 **决策**：共享可变 → 用 channel 或 `Arc<Mutex<Vec<Callback>>>`；channel 为纯 Safe，无共享可变。
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 let (tx, rx) = mpsc::channel::<Event>();
 // 发布者：tx.send(e)
@@ -293,7 +293,7 @@ let (tx, rx) = mpsc::channel::<Event>();
 
 **决策**：需 FFI → 局部 unsafe；封装为 Safe trait。
 
-```rust
+```rust,ignore
 pub trait PaymentGateway { fn charge(&self, amount: u64) -> Result<(), String>; }
 
 struct FFIPaymentGateway { /* 持有 *mut c_void 等 */ }

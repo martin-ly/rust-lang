@@ -73,7 +73,7 @@
 
 **代码示例**:
 
-```rust
+```rust,ignore
 // 研究场景：验证异步迭代器性能改进
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -117,7 +117,7 @@ fn process(n: i32) -> impl Future<Output = ()> {
 
 **代码示例**:
 
-```rust
+```rust,ignore
 // 研究场景：const 上下文中的引用语义
 // 形式化问题：&mut static 在 const 中的类型规则
 
@@ -160,7 +160,7 @@ const fn with_static_ref() -> &'static mut i32 {
 
 **代码示例**:
 
-```rust
+```rust,ignore
 // 研究场景：JIT 优化对异步代码的影响
 // 形式化问题：运行时优化与静态分析的关系
 

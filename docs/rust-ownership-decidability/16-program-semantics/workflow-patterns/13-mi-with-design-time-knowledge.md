@@ -298,7 +298,7 @@ $$
 
 利用 Rust 的 `const generics` 特性，在类型层面编码设计时已知数量 $N$：
 
-```rust
+```rust,ignore
 use std::future::Future;
 
 /// 设计时已知实例数的多实例执行器
@@ -365,7 +365,7 @@ where
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Barrier;
 use thiserror::Error;
@@ -467,7 +467,7 @@ where
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use rand::Rng;
 use std::sync::atomic::{AtomicU64, Ordering};
@@ -684,7 +684,7 @@ enum CreditCheck { BureauReport, IncomeVerification, EmploymentHistory }
 
 Raft 共识算法中，已知固定 $N$ 个节点需要并行发送心跳。$N$ 为编译期常量，允许栈上分配结果数组。
 
-```rust
+```rust,ignore
 struct RaftNode<const N: usize> { peers: [PeerId; N] }
 ```
 
@@ -694,7 +694,7 @@ struct RaftNode<const N: usize> { peers: [PeerId; N] }
 
 图像处理流水线，设计时已知需要 4 个固定阶段：去噪、锐化、色彩校正、压缩。
 
-```rust
+```rust,ignore
 impl Pipeline<4> {
     fn process(image: Image) -> Image {
         // 使用 rayon::join 进行二叉树并行分解
@@ -736,7 +736,7 @@ pub struct HeterogeneousMI<const N: usize, R> {
 
 利用 const generics 实现编译期递归展开：
 
-```rust
+```rust,ignore
 pub const fn parallel_reduce<const N: usize>(values: [f64; N]) -> f64 {
     match N {
         0 => 0.0,

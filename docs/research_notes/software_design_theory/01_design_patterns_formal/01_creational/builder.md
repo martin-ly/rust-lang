@@ -156,7 +156,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
 2. **单次使用保证**：
 
-   ```rust
+   ```rust,ignore
    let builder = ConfigBuilder::new();
    let config = builder.build()?;  // builder 所有权转移
    // builder.build()?;  // 编译错误：builder 已移动
@@ -181,7 +181,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
 1. **类型状态定义**：
 
-   ```rust
+   ```rust,ignore
    struct ConfigBuilder<State> { host: Option<String>, port: Option<u16>, _state: PhantomData<State> }
    struct SetHost;
    struct SetPort;
@@ -190,7 +190,7 @@ $$\mathit{build}(b) = t \implies \nexists b': B,\, b' = b \land \mathit{build}(b
 
 2. **状态转换**：
 
-   ```rust
+   ```rust,ignore
    impl ConfigBuilder<SetHost> {
        fn host(self, h: String) -> ConfigBuilder<SetPort> { ... }
    }
@@ -248,7 +248,7 @@ Builder 为纯 Safe；链式 `set` + `build(self)` 消费所有权，无 `unsafe
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 struct Config {
     host: String,
     port: u16,
@@ -359,7 +359,7 @@ ownership_model T2
 
 **场景**：构建 HTTP 请求；URL 必填，headers/body 可选；链式调用 + `ok_or` 校验。
 
-```rust
+```rust,ignore
 struct HttpRequest { url: String, headers: Vec<(String, String)>, body: Option<String> }
 
 struct HttpRequestBuilder {
@@ -432,7 +432,7 @@ let req = HttpRequestBuilder::new()
 
 **反例**：`build()` 在必填字段未设置时调用 → 返回 `Err` 或 panic。类型状态模式可强制编译期检查。
 
-```rust
+```rust,ignore
 // 运行时错误
 let config = ConfigBuilder::new()
     // .host(...)  // 遗漏

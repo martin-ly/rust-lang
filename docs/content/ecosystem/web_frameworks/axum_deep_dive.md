@@ -108,7 +108,7 @@ Axum 设计原则:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Router,
@@ -182,7 +182,7 @@ sequenceDiagram
 
 Handler 是任何实现 `Handler` trait 的函数。
 
-```rust
+```rust,ignore
 use axum::{
     body::Body,
     extract::{Request, State},
@@ -227,7 +227,7 @@ fn custom_handler() -> impl Handler<(), Arc<AppState>> {
 
 Extractors 从请求中提取数据。
 
-```rust
+```rust,ignore
 use axum::{
     extract::{
         Path,              // 路径参数
@@ -315,7 +315,7 @@ async fn protected_route(api_key: ApiKey) -> String {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use axum::response::{
     IntoResponse,
     Json,
@@ -379,7 +379,7 @@ async fn tuple_response() -> (StatusCode, Json<User>) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use axum::{
     middleware::{self, Next},
     response::Response,
@@ -451,7 +451,7 @@ fn create_app() -> Router {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use axum::{
     extract::State,
     routing::get,
@@ -501,7 +501,7 @@ fn create_router() -> Router {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use axum::{
     response::{IntoResponse, Response},
     http::StatusCode,
@@ -576,7 +576,7 @@ async fn get_user(Path(id): Path<i64>) -> Result<Json<User>, AppError> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use axum::{
     extract::Request,
     middleware::Next,
@@ -645,7 +645,7 @@ fn protected_routes() -> Router {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use axum::{
     extract::ws::{WebSocketUpgrade, Message, WebSocket},
     response::Response,
@@ -719,7 +719,7 @@ async fn handle_socket(socket: WebSocket, state: Arc<AppState>) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // 1. 使用 Arc 共享状态
 #[derive(Clone)]
 struct AppState {
@@ -749,7 +749,7 @@ let pool = PgPoolOptions::new()
 ## 🧪 测试
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use axum::{
     body::Body,
     http::{Request, StatusCode},

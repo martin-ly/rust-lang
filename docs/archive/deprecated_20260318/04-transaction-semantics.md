@@ -150,7 +150,7 @@ Participant 状态:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 2PC 协调者
 struct TwoPhaseCoordinator {
     transaction_id: TxId,
@@ -277,7 +277,7 @@ impl TwoPhaseParticipant {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 协调者故障恢复
 struct CoordinatorRecovery {
     log: TransactionLog,
@@ -367,7 +367,7 @@ Participants: 正式提交
   - 参与者在等待 DoCommit 时超时 → 可以安全提交（已 PreCommit）
 ```
 
-```rust
+```rust,ignore
 // 3PC 协调者
 struct ThreePhaseCoordinator {
     state: ThreePCState,
@@ -480,7 +480,7 @@ Saga 模式 (长事务分解):
 
 ### 5.2 Rust 实现
 
-```rust
+```rust,ignore
 // Saga 步骤 trait
 trait SagaStep: Send + Sync {
     type Input;
@@ -607,7 +607,7 @@ async fn place_order(request: OrderRequest) -> Result<Order, SagaError> {
 
 ### 6.1 分布式隔离级别
 
-```rust
+```rust,ignore
 // SQL 标准隔离级别
 enum IsolationLevel {
     ReadUncommitted,  // 读未提交

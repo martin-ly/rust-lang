@@ -196,7 +196,7 @@ Rust 1.94 adds three new methods to both `LazyCell` (single-threaded) and `LazyL
 
 **Code Example:**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 fn main() {
@@ -253,7 +253,7 @@ fn main() {
 
 **Code Example:**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::collections::HashMap;
 use std::sync::Mutex;
@@ -328,7 +328,7 @@ These methods combine conditional consumption with mapping. They peek at the nex
 
 **Code Example:**
 
-```rust
+```rust,ignore
 fn main() {
     let data = vec!["1", "two", "3", "four", "5"];
     let mut iter = data.into_iter().peekable();
@@ -627,7 +627,7 @@ Rust 1.94 relaxes the `T: Ord` bound on several `BinaryHeap<T>` methods, allowin
 
 **Code Example:**
 
-```rust
+```rust,ignore
 use std::collections::BinaryHeap;
 
 // A type that doesn't implement Ord
@@ -865,7 +865,7 @@ name = "worker"
 
 `src/main.rs`:
 
-```rust
+```rust,ignore
 use std::process::Command;
 
 fn main() {
@@ -913,7 +913,7 @@ Fused multiply-add (`a * b + c`) is now available in `const fn`, `const` blocks,
 
 **Code Example:**
 
-```rust
+```rust,ignore
 // Compile-time computation with mul_add
 const fn polynomial(x: f64) -> f64 {
     // Compute: 2x² + 3x + 1
@@ -973,7 +973,7 @@ fn main() {
 
 ### From `once_cell` to `std::sync::LazyLock`
 
-```rust
+```rust,ignore
 // Before (once_cell)
 use once_cell::sync::Lazy;
 static DATA: Lazy<Vec<i32>> = Lazy::new(|| vec![1, 2, 3]);
@@ -985,7 +985,7 @@ static DATA: LazyLock<Vec<i32>> = LazyLock::new(|| vec![1, 2, 3]);
 
 ### Using `array_windows` vs `windows`
 
-```rust
+```rust,ignore
 // Before: Dynamic windows with runtime bounds
 for window in slice.windows(4) {
     let a = window[0]; // Runtime bounds check

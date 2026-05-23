@@ -278,7 +278,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::Arc;
@@ -349,7 +349,7 @@ pub struct MultiChoiceResult<R> {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use thiserror::Error;
 
@@ -446,7 +446,7 @@ pub struct ResilientResult<R> {
 ### 5.3 订单处理完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug)]
 struct Order {
     id: String,
@@ -657,7 +657,7 @@ $$
 
 **场景**: 根据订单属性应用多个处理规则
 
-```rust
+```rust,ignore
 rules:
   - 金额>1000 → 需要经理审批
   - 是VIP → 优先处理
@@ -672,7 +672,7 @@ rules:
 
 **场景**: 对同一数据集应用多个转换
 
-```rust
+```rust,ignore
 processors:
   - 数据清洗
   - 格式验证
@@ -687,7 +687,7 @@ processors:
 
 **场景**: 根据用户偏好发送多渠道通知
 
-```rust
+```rust,ignore
 channels:
   - email_enabled → 发送邮件
   - sms_enabled → 发送短信
@@ -718,7 +718,7 @@ struct WeightedBranch<T, R> {
 
 守卫条件可在运行时动态添加/移除：
 
-```rust
+```rust,ignore
 impl<T, R> DynamicMultiChoice<T, R> {
     pub fn add_branch_runtime(&mut self, branch: Branch<T, R>);
     pub fn remove_branch(&mut self, name: &str);

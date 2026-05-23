@@ -294,7 +294,7 @@ MISRA C:2025 总规则数: 143
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // .clippy.toml or clippy.toml
 
 # 避免隐式转换 (对应MISRA数值转换规则)

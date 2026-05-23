@@ -146,7 +146,7 @@ State = Open ∧ (now - last_failure) > t_timeout
 ## 4. Rust 实现示例
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::time::{Duration, Instant};
 

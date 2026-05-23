@@ -1,6 +1,7 @@
 ﻿# 网络编程快速参考卡片
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [网络编程快速参考卡片](#网络编程快速参考卡片)
@@ -52,6 +53,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c10_networks/docs/README.md) | [代码示例](../../../crates/c10_networks/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -114,6 +116,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -127,7 +130,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c10_networks::prelude::*;
 
 // 创建 HTTP 客户端
@@ -152,7 +155,7 @@ let response = client
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c10_networks::tcp::TcpListener;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -215,7 +218,7 @@ loop {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c10_networks::websocket::WebSocket;
 
 // 客户端连接
@@ -240,7 +243,7 @@ if let Some(msg) = ws.recv().await? {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c10_networks::dns::DnsResolver;
 
 let resolver = DnsResolver::from_system().await?;
@@ -270,7 +273,7 @@ for ip in ips {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let client = HttpClient::builder()
     .timeout(Duration::from_secs(30))
     .connect_timeout(Duration::from_secs(10))
@@ -282,7 +285,7 @@ let client = HttpClient::builder()
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 let listener = TcpListener::bind("127.0.0.1:8080")
     .with_nodelay(true)  // 禁用 Nagle 算法
     .with_keepalive(Duration::from_secs(60))
@@ -292,13 +295,14 @@ let listener = TcpListener::bind("127.0.0.1:8080")
 ---
 
 ## ⚡ 异步模式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 并发处理多个请求
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use futures::future;
 
 let urls = vec![
@@ -318,7 +322,7 @@ let results = future::join_all(futures).await;
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use futures::StreamExt;
 
 let mut stream = client.get_stream("https://api.example.com/stream").await?;
@@ -332,9 +336,10 @@ while let Some(chunk) = stream.next().await {
 ---
 
 ## 🐛 错误处理
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use c10_networks::error::NetworkError;
 
 match client.get(url).await {
@@ -354,13 +359,14 @@ match client.get(url).await {
 ---
 
 ## 🔒 安全特性
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### HTTPS/TLS
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 let client = HttpClient::builder()
     .tls_config(TlsConfig::default())
     .danger_accept_invalid_certs(false)  // 生产环境设为 false
@@ -371,7 +377,7 @@ let client = HttpClient::builder()
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Basic 认证
 let response = client
     .get(url)
@@ -390,13 +396,14 @@ let response = client
 ---
 
 ## 📊 性能优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 连接池
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 let client = HttpClient::builder()
     .pool_max_idle_per_host(10)
     .pool_idle_timeout(Duration::from_secs(90))
@@ -407,7 +414,7 @@ let client = HttpClient::builder()
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 let response = client
     .get(url)
     .header("Accept-Encoding", "gzip, deflate")
@@ -418,6 +425,7 @@ let response = client
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 反例 1: 忽略连接错误
@@ -426,7 +434,7 @@ let response = client
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let stream = TcpStream::connect("127.0.0.1:8080").unwrap();  // ❌ 失败即 panic
 ```
 
@@ -434,7 +442,7 @@ let stream = TcpStream::connect("127.0.0.1:8080").unwrap();  // ❌ 失败即 pa
 
 **修正**:
 
-```rust
+```rust,ignore
 let stream = TcpStream::connect("127.0.0.1:8080")?;
 ```
 
@@ -446,7 +454,7 @@ let stream = TcpStream::connect("127.0.0.1:8080")?;
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let mut buf = [0u8; 1024];
 stream.read(&mut buf);  // ❌ 可能永久阻塞
 ```
@@ -458,12 +466,14 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [网络模块完整文档](../../../crates/c10_networks/docs/README.md)
 - [网络模块 README](../../../crates/c10_networks/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 以下示例位于 `crates/c10_networks/examples/`，可直接运行（例如：`cargo run -p c10_networks --example tcp_echo_server`）。
@@ -478,13 +488,14 @@ stream.read(&mut buf);  // ❌ 可能永久阻塞
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 场景 1: REST API 客户端
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use reqwest::Client;
 use serde::{Deserialize, Serialize};
 
@@ -519,9 +530,10 @@ async fn create_user(client: &Client, name: &str, email: &str) -> Result<UserRes
 ```
 
 ### 场景 2: 实时聊天服务器
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
 use tokio::sync::broadcast;
 use futures::{SinkExt, StreamExt};
@@ -562,9 +574,10 @@ async fn chat_server() -> anyhow::Result<()> {
 ```
 
 ### 场景 3: 高性能代理服务器
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tokio::io::{self, AsyncReadExt, AsyncWriteExt};
 use tokio::net::{TcpListener, TcpStream};
 
@@ -594,9 +607,11 @@ async fn proxy_server() -> io::Result<()> {
 ---
 
 ## 📐 形式化方法链接
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 理论基础
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 概念 | 形式化文档 | 描述 |
@@ -607,6 +622,7 @@ async fn proxy_server() -> io::Result<()> {
 | **并发安全** | [borrow_checker_proof](../../research_notes/formal_methods/borrow_checker_proof.md) | 并发访问数据竞争自由 |
 
 ### 形式化定理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **定理 NET-T1（并发连接安全）**: 若异步网络操作满足 Send/Sync 约束，则跨任务连接操作数据竞争自由。
@@ -616,15 +632,18 @@ async fn proxy_server() -> io::Result<()> {
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 官方文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [std::net 文档](https://doc.rust-lang.org/std/net/)
 - [Tokio 网络文档](https://tokio.rs/)
 
 ### 项目内部文档
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [完整文档](../../../crates/c10_networks/README.md)
@@ -634,6 +653,7 @@ async fn proxy_server() -> io::Result<()> {
 - [形式化方法研究](../../research_notes/formal_methods/README.md)
 
 ### 相关速查卡
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [异步编程速查卡](./async_patterns.md) - 异步网络编程
@@ -649,14 +669,16 @@ async fn proxy_server() -> io::Result<()> {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -696,14 +718,16 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## Rust 1.95+ 在网络编程中的深度应用
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 网络编程开发
 
 ### ControlFlow 在请求处理管道中的应用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// HTTP 中间件链
@@ -716,9 +740,10 @@ pub fn process_request(req: Request) -> ControlFlow<Response, Request> {
 ```
 
 ### LazyLock 在连接池管理中的应用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局连接池（延迟初始化）
@@ -735,6 +760,7 @@ pub fn get_connection() -> Option<Connection> {
 ```
 
 ### 性能提升总结
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 特性 | 网络编程场景应用 | 性能提升 |
@@ -763,6 +789,7 @@ pub fn get_connection() -> Option<Connection> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [quick_reference 目录](./README.md)
@@ -963,4 +990,3 @@ pub fn get_connection() -> Option<Connection> {
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

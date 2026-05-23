@@ -447,7 +447,7 @@ research_notes/
 ### 示例 1: 研究笔记系统导航代码
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 研究场景：使用类型系统导航研究笔记
 use std::collections::HashMap;
 

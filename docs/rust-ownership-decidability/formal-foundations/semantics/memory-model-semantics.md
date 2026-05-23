@@ -999,7 +999,7 @@ union of variants:
 ### B.1 基本借用检查
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let mut x = 5;
 let y = &mut x;    // 可变借用开始
 *y = 10;           // 通过借用修改

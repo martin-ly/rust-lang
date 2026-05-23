@@ -32,7 +32,7 @@
 
 **程序**:
 
-```rust
+```rust,ignore
 // 反转链表
 fn reverse(head: *mut Node) -> *mut Node {
     let mut prev = std::ptr::null_mut();
@@ -152,7 +152,7 @@ $$
 
 **Prusti**: Rust 程序的形式验证器。
 
-```rust
+```rust,ignore
 #[requires(x > 0)]
 #[ensures(ret > 0)]
 fn double(x: i32) -> i32 {
@@ -172,7 +172,7 @@ fn double(x: i32) -> i32 {
 
 **不安全块的前置/后置**:
 
-```rust
+```rust,ignore
 /// 前置条件: ptr 非空且已对齐
 /// 后置条件: 返回 ptr 指向的值
 unsafe fn read_ptr<T>(ptr: *const T) -> T {
@@ -218,7 +218,7 @@ $$
 
 **Rust 对应**: `Result` 和 `Option` 类型。
 
-```rust
+```rust,ignore
 // { true }
 fn may_fail() -> Result<i32, Error> { ... }
 // { ret.is_ok() => ... }

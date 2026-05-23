@@ -1,4 +1,5 @@
 # 过程宏 (Procedural Macros)
+> **相关概念**: [过程宏](../../../concept/03_advanced/07_proc_macro.md)
 
 > **Bloom 层级**: 理解
 
@@ -60,7 +61,7 @@
 
 #### 1.2 操作定义
 
-```rust
+```rust,ignore
 // Cargo.toml
 // [lib]
 // proc-macro = true
@@ -210,7 +211,7 @@ graph TD
 
 **syn crate 的 AST 结构**：
 
-```rust
+```rust,ignore
 // DeriveInput 表示被 derive 的类型
 pub struct DeriveInput {
     pub attrs: Vec<Attribute>,
@@ -238,7 +239,7 @@ pub struct FieldsNamed {
 
 过程宏在编译期执行，不直接影响运行时内存布局。但它们生成的代码决定了类型的内存表示：
 
-```rust
+```rust,ignore
 #[derive(MyBuilder)]
 struct Config {
     host: String,
@@ -280,7 +281,7 @@ struct Config {
 
 #### 5.1 Minimal（最小正例）
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};
@@ -306,7 +307,7 @@ pub fn hello_derive(input: TokenStream) -> TokenStream {
 
 为枚举生成 Display 实现：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, Data, DeriveInput, Fields};
@@ -356,7 +357,7 @@ pub fn display_enum_derive(input: TokenStream) -> TokenStream {
 
 处理泛型和生命周期的 Builder 宏（简化版）：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, Data, DeriveInput, Fields, GenericParam, Generics};
@@ -431,7 +432,7 @@ pub fn builder_derive(input: TokenStream) -> TokenStream {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(CloneMy)]
 pub fn clone_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -458,7 +459,7 @@ error[E0107]: missing generics for struct `MyStruct<T>`
 
 **修复方案**:
 
-```rust
+```rust,ignore
 let (impl_generics, ty_generics, where_clause) = input.generics.split_for_impl();
 
 let expanded = quote! {
@@ -478,7 +479,7 @@ let expanded = quote! {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(BadDebug)]
 pub fn bad_debug(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -511,7 +512,7 @@ error[E0609]: no field `nonexistent_field` on type `MyStruct`
 
 **修复方案** — 使用 `quote_spanned!`：
 
-```rust
+```rust,ignore
 let field = /* 获取某个字段 */;
 let field_span = field.span();
 
@@ -528,7 +529,7 @@ let expanded = quote_spanned! { field_span =>
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(PanicDerive)]
 pub fn panic_derive(input: TokenStream) -> TokenStream {
     panic!("something went wrong");  // ❌ 编译器 panic！
@@ -539,7 +540,7 @@ pub fn panic_derive(input: TokenStream) -> TokenStream {
 
 **修复方案**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(SafeDerive)]
 pub fn safe_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -771,7 +772,7 @@ pub fn safe_derive(input: TokenStream) -> TokenStream {
 
 **题 1**: 修复以下过程宏，使其正确处理泛型结构体：
 
-```rust
+```rust,ignore
 #[proc_macro_derive(MyDefault)]
 pub fn my_default(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -791,7 +792,7 @@ pub fn my_default(input: TokenStream) -> TokenStream {
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 #[proc_macro_derive(MyDefault)]
 pub fn my_default(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -815,7 +816,7 @@ pub fn my_default(input: TokenStream) -> TokenStream {
 
 **题 2**: 以下过程宏在编译时 panic，请修复为优雅的错误报告：
 
-```rust
+```rust,ignore
 #[proc_macro_derive(Check)]
 pub fn check(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -831,7 +832,7 @@ pub fn check(input: TokenStream) -> TokenStream {
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 #[proc_macro_derive(Check)]
 pub fn check(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);

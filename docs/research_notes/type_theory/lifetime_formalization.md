@@ -264,7 +264,7 @@ $$C = \{\ell_1 <: \ell_2, \ell_2 <: \ell_3, \ldots\}$$
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() {
         x

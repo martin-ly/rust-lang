@@ -570,21 +570,21 @@ Cell::set(this: &Cell<T>, v: T)
 
 1. **维护类型不变式**
 
-   ```rust
+   ```rust,ignore
    // 好的: 维护Vec的len <= cap
    unsafe { (*ptr).set_len(new_len); }
    ```
 
 2. **正确处理所有权**
 
-   ```rust
+   ```rust,ignore
    // 好的: ptr::read转移所有权
    let value = unsafe { ptr::read(ptr) };
    ```
 
 3. **避免数据竞争**
 
-   ```rust
+   ```rust,ignore
    // 好的: 使用原子操作
    unsafe { (*ptr).counter.fetch_add(1, Ordering::SeqCst); }
    ```
@@ -592,7 +592,7 @@ Cell::set(this: &Cell<T>, v: T)
 ### 8.2 自定义智能指针
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 pub struct MyBox<T> {
     ptr: Unique<T>,
 }
@@ -623,7 +623,7 @@ impl<T> Drop for MyBox<T> {
 ### 8.3 并发数据结构
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct LockFreeQueue<T> {
     head: AtomicPtr<Node<T>>,
     tail: AtomicPtr<Node<T>>,

@@ -1985,3 +1985,10 @@ fn main() {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
+
+> **补充来源**
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]

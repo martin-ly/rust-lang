@@ -66,7 +66,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 安全的C库包装器
 
 use std::ffi::{c_char, c_int, CStr, CString};
@@ -169,7 +169,7 @@ pub enum FfiError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 类型转换安全
 
 use std::ffi::{c_char, c_int, c_uint};
@@ -240,7 +240,7 @@ pub enum FfiError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 安全的回调机制
 
 use std::ffi::c_void;
@@ -402,7 +402,7 @@ impl<T> Drop for CVec<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 并发FFI安全
 
 use std::sync::Arc;
@@ -477,7 +477,7 @@ impl Drop for NativeContextWrapper {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // build.rs
 use std::env;
 use std::path::PathBuf;

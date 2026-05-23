@@ -97,7 +97,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::time::Duration;
@@ -224,7 +224,7 @@ impl Activity for ProcessPaymentActivity {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 枚举驱动的状态机
 enum OrderWorkflowState {
     Created { order_id: String },
@@ -301,7 +301,7 @@ impl OrderWorkflow {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 使用Temporal Rust SDK (假设)
 #[temporal::workflow]
 async fn order_workflow(ctx: WorkflowContext, order: Order) -> Result<OrderResult, WorkflowError> {

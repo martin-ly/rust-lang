@@ -61,7 +61,7 @@ Creating → Ready → Closing → Closed
 
 > 池强制执行最大连接数。
 
-```rust
+```rust,ignore
 let pool = Pool::builder(manager)
     .max_size(16)
     .build()?;
@@ -82,7 +82,7 @@ let pool = Pool::builder(manager)
 
 > 连接通过Drop自动归还。
 
-```rust
+```rust,ignore
 {
     let conn = pool.get().await?;  // 获取连接
     conn.query(...).await?;        // 使用
@@ -111,7 +111,7 @@ $$
 
 > 等待连接时可设置超时。
 
-```rust
+```rust,ignore
 let conn = pool
     .timeout_get(Some(Duration::from_secs(5)))
     .await?;
@@ -127,7 +127,7 @@ let conn = pool
 
 > 连接归还时可验证健康。
 
-```rust
+```rust,ignore
 impl Manager for MyManager {
     async fn recycle(&self, conn: &mut Connection) -> RecycleResult {
         // 验证连接可用
@@ -144,7 +144,7 @@ impl Manager for MyManager {
 
 ### 反例 6.1 (连接泄漏)
 
-```rust
+```rust,ignore
 // 危险: 长期持有连接
 let conn = pool.get().await?;
 loop {
@@ -164,7 +164,7 @@ loop {
 
 ### 反例 6.2 (阻塞操作)
 
-```rust
+```rust,ignore
 // 在异步池中执行阻塞操作
 let conn = pool.get().await?;
 conn.execute_blocking_query()?;  // 阻塞线程!

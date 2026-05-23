@@ -62,7 +62,7 @@ Diesel是Rust的编译时SQL检查ORM：
 ### 定义 DSL-1 ( 查询DSL )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 users.filter(name.eq("Alice")).limit(10).load::<User>(conn)
 ```
 
@@ -99,7 +99,7 @@ $$
 ### 定义 QUERY-1 ( Select查询 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let query = users.select((id, name));
 ```
 
@@ -110,7 +110,7 @@ $$
 ### 定义 QUERY-2 ( 类型推断 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let results: Vec<User> = users.load(conn)?;
 ```
 
@@ -137,7 +137,7 @@ $$
 
 diesel.toml + migrations → schema.rs
 
-```rust
+```rust,ignore
 table! {
     users (id) {
         id -> Int4,
@@ -150,7 +150,7 @@ table! {
 ### 定义 SCHEMA-2 ( 关联类型 )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[derive(Associations)]
 #[diesel(belongs_to(User))]
 struct Post { ... }
@@ -168,7 +168,7 @@ $$
 ### 定义 MIGRATION-1 ( 迁移结构 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // up.sql
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
@@ -196,7 +196,7 @@ $$
 ### 定义 CONN-1 ( 连接池 )
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 let manager = ConnectionManager::<PgConnection>::new(database_url);
 let pool = Pool::builder().build(manager)?;
 ```
@@ -242,7 +242,7 @@ $$
 
 ### 示例1: CRUD操作
 
-```rust
+```rust,ignore
 use diesel::prelude::*;
 use schema::users;
 
@@ -269,7 +269,7 @@ diesel::delete(users::table.find(user.id))
 
 ### 示例2: 关联查询
 
-```rust
+```rust,ignore
 #[derive(Queryable, Identifiable)]
 struct User { id: i32, name: String }
 
@@ -292,7 +292,7 @@ let users_with_posts = User::table
 
 ### 示例3: 复杂查询
 
-```rust
+```rust,ignore
 use diesel::dsl::*;
 
 // 聚合查询

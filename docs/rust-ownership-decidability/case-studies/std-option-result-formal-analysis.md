@@ -132,7 +132,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T> Option<T> {
     pub fn map<U, F>(self, f: F) -> Option<U>
     where F: FnOnce(T) -> U
@@ -147,7 +147,7 @@ impl<T> Option<T> {
 
 **Identity**:
 
-```rust
+```rust,ignore
 opt.map(|x| x)
 = match opt {
     Some(x) => Some((|x| x)(x)) = Some(x),
@@ -158,7 +158,7 @@ opt.map(|x| x)
 
 **Composition**:
 
-```rust
+```rust,ignore
 opt.map(g).map(f)
 = match (match opt { Some(x) => Some(g(x)), None => None }) {
     Some(y) => Some(f(y)),
@@ -198,7 +198,7 @@ opt.map(g).map(f)
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T> Option<T> {
     pub fn and_then<U, F>(self, f: F) -> Option<U>
     where F: FnOnce(T) -> Option<U>
@@ -213,13 +213,13 @@ impl<T> Option<T> {
 
 **Left Identity**:
 
-```rust
+```rust,ignore
 Some(a).and_then(f) = f(a)  // 定义
 ```
 
 **Right Identity**:
 
-```rust
+```rust,ignore
 opt.and_then(|x| Some(x))
 = match opt {
     Some(x) => (|x| Some(x))(x) = Some(x),
@@ -230,7 +230,7 @@ opt.and_then(|x| Some(x))
 
 **Associativity**:
 
-```rust
+```rust,ignore
 opt.and_then(f).and_then(g)
 = match (match opt { Some(x) => f(x), None => None }) {
     Some(y) => g(y),
@@ -321,7 +321,7 @@ fn either_to_result<T, E>(e: Either<E, T>) -> Result<T, E> {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T, E> Result<T, E> {
     pub fn map_err<F, O>(self, op: O) -> Result<T, F>
     where O: FnOnce(E) -> F
@@ -354,7 +354,7 @@ impl<T, E> Result<T, E> {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // expr? 等价于
 match expr {
     Ok(val) => val,
@@ -372,7 +372,7 @@ match expr {
 
 类型检查规则:
 
-```rust
+```rust,ignore
 fn foo() -> Result<T, E> {
     let x = may_fail()?;  // 要求 may_fail(): Result<T, E2> 其中 E2: Into<E>
     Ok(x)
@@ -395,7 +395,7 @@ fn foo() -> Result<T, E> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 trait Try: FromResidual<<Self as Try>::Residual> {
     type Output;
     type Residual;
@@ -413,7 +413,7 @@ trait Try: FromResidual<<Self as Try>::Residual> {
 
 **实现示例**:
 
-```rust
+```rust,ignore
 impl<T> Try for Option<T> {
     type Output = T;
     type Residual = Option<!>;
@@ -430,7 +430,7 @@ impl<T> Try for Option<T> {
 
 **Option与Result互操作**:
 
-```rust
+```rust,ignore
 fn mixed() -> Result<T, Error> {
     let opt: Option<T> = ...;
     let x = opt.ok_or(Error::NotFound)?;  // Option -> Result
@@ -460,7 +460,7 @@ fn mixed() -> Result<T, Error> {
 
 **证明**:
 
-```rust
+```rust,ignore
 opt.and_then(|y| Some(f(y)))
 = match opt {
     Some(x) => Some(f(x)),
@@ -478,7 +478,7 @@ opt.and_then(|y| Some(f(y)))
 
 **证明**:
 
-```rust
+```rust,ignore
 opt.map(|x| x) = opt  // 定理2.1已证
 
 opt.and_then(|x| Some(x))
@@ -501,7 +501,7 @@ opt.and_then(|x| Some(x))
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T> Option<T> {
     pub fn unwrap_or(self, default: T) -> T {
         match self {
@@ -524,7 +524,7 @@ impl<T> Option<T> {
 
 **对比**:
 
-```rust
+```rust,ignore
 // unwrap_or: 总是计算默认值
 opt.unwrap_or(expensive_computation())
 
@@ -553,7 +553,7 @@ opt.unwrap_or_else(|| expensive_computation())
 
 **表示优化** (Nullable Pointer Optimization):
 
-```rust
+```rust,ignore
 // Option<&T> 大小与 &T 相同
 size_of::<Option<&T>>() == size_of::<&T>()
 
@@ -578,7 +578,7 @@ if (maybe_value != NULL) {
 }
 ```
 
-```rust
+```rust,ignore
 // Rust: Option，编译后相同
 if let Some(value) = maybe_value {
     // 使用 value
@@ -609,7 +609,7 @@ Result<T, E>
 
 当 `E` 是指针类型时:
 
-```rust
+```rust,ignore
 Result<(), Box<Error>>
 // 可以用空指针表示 Ok(())，与Option优化类似
 ```
@@ -652,7 +652,7 @@ Result<(), Box<Error>>
 ### 反例 8.1 (滥用unwrap)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 危险: 可能panic
 let x = some_option.unwrap();
 
@@ -670,7 +670,7 @@ let x = some_option.unwrap_or(default);
 ### 反例 8.2 (忽略Result)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 危险: 错误被忽略
 fs::write("file.txt", data);  // 编译警告!
 
@@ -690,7 +690,7 @@ let _ = fs::write("file.txt", data);
 ### 反例 8.3 (过度嵌套)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 嵌套过深，难以阅读
 let result = opt
     .map(|x| x * 2)
@@ -711,7 +711,7 @@ fn process(opt: Option<i32>) -> Option<String> {
 ### 最佳实践 8.4 (自定义错误类型)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[derive(Debug, thiserror::Error)]
 enum MyError {
     #[error("IO error: {0}")]

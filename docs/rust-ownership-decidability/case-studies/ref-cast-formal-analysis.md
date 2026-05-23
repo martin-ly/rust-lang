@@ -49,7 +49,7 @@ ref-cast提供:
 
 > 允许从&T到&Wrapper<T>的转换。
 
-```rust
+```rust,ignore
 use ref_cast::RefCast;
 
 #[derive(RefCast)]
@@ -70,7 +70,7 @@ let w: &Wrapper = Wrapper::ref_cast(s);
 
 > 自动实现RefCast trait。
 
-```rust
+```rust,ignore
 #[derive(RefCast)]
 #[repr(transparent)]
 pub struct Username(String);
@@ -91,7 +91,7 @@ pub struct Username(String);
 
 > 要求透明表示确保布局兼容。
 
-```rust
+```rust,ignore
 #[repr(transparent)]  // 必须!
 struct Wrapper(T);
 ```
@@ -104,7 +104,7 @@ struct Wrapper(T);
 
 ### 反例 5.1 (非透明类型)
 
-```rust
+```rust,ignore
 #[derive(RefCast)]
 // 忘记#[repr(transparent)]
 struct Wrapper(String);  // 编译错误!

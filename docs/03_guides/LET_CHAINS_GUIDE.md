@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Let Chains 全面指南](#let-chains-全面指南)
@@ -37,6 +38,7 @@
   - [八、延伸阅读](#八延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -112,6 +114,7 @@ fn classify(msg: Option<String>) -> String {
 ---
 
 ## 二、语法规则与限制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 绑定可见性
@@ -148,7 +151,7 @@ if flag && let Some(n) = opt && n > 5 {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误：let chains 不支持 `||`
 if let Some(a) = opt_a || let Some(b) = opt_b {
     // ...
@@ -162,6 +165,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 ---
 
 ## 三、与旧模式对比
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 嵌套 if let → 扁平 let chains
@@ -178,7 +182,7 @@ if let Some(a) = opt_a || let Some(b) = opt_b {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 写法 A: match arm guard（推荐在模式匹配场景）
 match value {
     Some(ref s) if let Ok(n) = s.parse::<i32>() => println!("整数: {}", n),
@@ -203,9 +207,11 @@ if let Some(ref s) = value && let Ok(n) = s.parse::<i32>() {
 ---
 
 ## 四、实战模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 配置解析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -223,9 +229,10 @@ fn get_timeout(config: &std::collections::HashMap<String, String>) -> Option<u64
 ```
 
 ### 4.2 异步条件等待
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::watch;
 
 async fn wait_for_state(rx: &mut watch::Receiver<Option<String>>) {
@@ -239,6 +246,7 @@ async fn wait_for_state(rx: &mut watch::Receiver<Option<String>>) {
 ```
 
 ### 4.3 错误累积报告
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -258,12 +266,14 @@ fn validate_user(name: Option<&str>, age: Option<&str>) -> Result<(), String> {
 ---
 
 ## 五、常见陷阱
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 5.1 陷阱 1：`||` 的误解
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 if let Some(a) = opt_a || let Some(b) = opt_b {
     // 不知道应该用 a 还是 b
@@ -277,9 +287,10 @@ match (opt_a, opt_b) {
 ```
 
 ### 5.2 陷阱 2：所有权与借用冲突
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let msg = Some(String::from("hello"));
 
 // ❌ 编译错误：msg 在 let 中被移动
@@ -296,6 +307,7 @@ if let Some(ref s) = msg && s.len() > 3 {
 ```
 
 ### 5.3 陷阱 3：变量遮蔽的意外
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -308,6 +320,7 @@ if let Some(x) = x && x > 5 {
 ```
 
 ### 5.4 陷阱 4：与早期返回混用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -339,6 +352,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ---
 
 ## 六、版本兼容
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 稳定版本 | 说明 |
@@ -352,6 +366,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ---
 
 ## 七、快速参考卡
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -369,6 +384,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ---
 
 ## 八、延伸阅读
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust Reference: Let Chains](https://doc.rust-lang.org/reference/expressions/if-expr.html)
@@ -386,6 +402,7 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -489,4 +506,3 @@ fn process(data: Option<&str>) -> Result<i32, String> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

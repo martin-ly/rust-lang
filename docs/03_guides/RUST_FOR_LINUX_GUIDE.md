@@ -7,6 +7,7 @@
 > **定理链编号**: T-060 unsafe 块 ↔ T-110 内核抽象可靠性
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust for Linux 指南](#rust-for-linux-指南)
@@ -24,6 +25,7 @@
   - [思维导图：Rust for Linux 全景](#思维导图rust-for-linux-全景)
   - [决策树：内核模块开发路径](#决策树内核模块开发路径)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **层级**: L7 前沿 / L3 高级系统编程
 > **前置概念**: [Unsafe](../../concept/03_advanced/03_unsafe.md) · [FFI](../../concept/03_advanced/03_unsafe.md) · [Build Systems](../../concept/06_ecosystem/01_toolchain.md)
@@ -33,6 +35,7 @@
 ---
 
 ## 概述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **Rust for Linux (RfL)** 是将 Rust 作为 Linux 内核第二语言的项目，目标是用 Rust 的内存安全保证减少内核漏洞。
@@ -50,9 +53,11 @@
 ---
 
 ## 核心概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 内核 Rust vs 用户态 Rust
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 维度 | 用户态 Rust | 内核 Rust |
@@ -66,11 +71,12 @@
 | 调试 | `println!`, `dbg!` | `pr_info!`, `pr_err!` |
 
 ### 内核抽象层 (KAS)
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust for Linux 提供了一组安全的内核抽象：
 
-```rust
+```rust,ignore
 // 内核锁封装（自动释放）
 pub struct Mutex<T> {
     inner: UnsafeCell<bindings::mutex>,
@@ -96,12 +102,14 @@ impl<T> Drop for MutexGuard<'_, T> {
 ---
 
 ## 代码示例
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 最小内核模块
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 //! 最小 Linux 内核模块
 //!
 //! 编译: 需要 Linux 源码树 + rustavailable
@@ -134,9 +142,10 @@ impl Drop for MinimalModule {
 ```
 
 ### 字符设备驱动
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use kernel::{
     file::{File, Operations},
     io_buffer::{IoBufferReader, IoBufferWriter},
@@ -187,6 +196,7 @@ impl Operations for RustDevice {
 ---
 
 ## 限制与挑战
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 挑战 | 说明 | 状态 |
@@ -201,6 +211,7 @@ impl Operations for RustDevice {
 ---
 
 ## 与 eBPF + Rust 的关系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -217,7 +228,7 @@ impl Operations for RustDevice {
 
 **Aya** 项目允许用 Rust 编写 eBPF 程序：
 
-```rust
+```rust,ignore
 // Aya: Rust eBPF 程序
 use aya_ebpf::{macros::kprobe, programs::ProbeContext, bindings::*);
 
@@ -232,6 +243,7 @@ pub fn trace_open(ctx: ProbeContext) -> u32 {
 ---
 
 ## 参考
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust for Linux GitHub](https://github.com/Rust-for-Linux/linux)
@@ -251,6 +263,7 @@ pub fn trace_open(ctx: ProbeContext) -> u32 {
 ---
 
 ## 思维导图：Rust for Linux 全景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -273,6 +286,7 @@ graph TD
 ---
 
 ## 决策树：内核模块开发路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -374,4 +388,3 @@ graph TD
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

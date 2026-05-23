@@ -185,7 +185,7 @@ enum Permission {
 ### 更多代码合法
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 示例1: 重叠借用
 fn overlapping_borrows() {
     let mut data = [1, 2, 3, 4, 5];

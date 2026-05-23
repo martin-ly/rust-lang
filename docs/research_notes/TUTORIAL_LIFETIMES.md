@@ -115,7 +115,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 大多数情况下，编译器自动推断：
 
-```rust
+```rust,ignore
 fn first_word(s: &str) -> &str { ... }
 
 // 编译器自动添加：
@@ -201,7 +201,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn parse<'a, 'b>(
     input: &'a str,
     config: &'b Config
@@ -214,7 +214,7 @@ fn parse<'a, 'b>(
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 impl<'a> Person<'a> {
     fn get_name(&self) -> &'a str {
         self.name

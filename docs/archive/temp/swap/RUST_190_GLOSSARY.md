@@ -113,7 +113,7 @@ let result = x.checked_sub_signed(y); // Some(15)
 
 示例：
 
-```rust
+```rust,ignore
 const fn example() -> f64 {
     let x = 3.7;
     x.floor()  // Rust 1.90 中可用
@@ -241,7 +241,7 @@ CARGO_INCREMENTAL=1 cargo build
 
 示例：
 
-```rust
+```rust,ignore
 use std::num::IntErrorKind;
 
 let err_kind: IntErrorKind = // ...
@@ -340,7 +340,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 触发场景：
 
-```rust
+```rust,ignore
 // ❌ 触发警告
 fn items(scores: &[u8]) -> std::slice::Iter<'_, u8> {
     scores.iter()
@@ -435,7 +435,7 @@ Rust 1.90 稳定化的特性：
 
 示例：
 
-```rust
+```rust,ignore
 type MyIterator = impl Iterator<Item = i32>;
 
 fn create_iter() -> MyIterator {

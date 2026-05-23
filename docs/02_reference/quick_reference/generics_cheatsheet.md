@@ -1,6 +1,7 @@
 ﻿# 🔷 Rust 泛型编程速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔷 Rust 泛型编程速查卡](#-rust-泛型编程速查卡)
@@ -58,6 +59,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c04_generic/docs/README.md) | [代码示例](../../../crates/c04_generic/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -126,6 +128,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -270,7 +273,7 @@ enum Result<T, E> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 使用 where 子句
 fn some_function<T, U>(t: T, u: U) -> i32
 where
@@ -287,7 +290,7 @@ where
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 可比较
 fn compare<T: PartialOrd>(a: T, b: T) -> bool {
     a > b
@@ -307,6 +310,7 @@ fn print<T: Display>(item: T) {
 ---
 
 ## 🔧 高级特性
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 关联类型
@@ -349,6 +353,7 @@ let arr: Array<i32, 5> = Array { data: [0; 5] };
 ---
 
 ## 🎯 常见模式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 模式 1: 泛型函数
@@ -365,7 +370,7 @@ fn swap<T>(x: &mut T, y: &mut T) {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 impl<T> Point<T> {
     fn x(&self) -> &T {
         &self.x
@@ -384,7 +389,7 @@ impl Point<f32> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 impl<T: Display> ToString for T {
     fn to_string(&self) -> String {
         format!("{}", self)
@@ -395,13 +400,14 @@ impl<T: Display> ToString for T {
 ---
 
 ## 📚 性能考虑
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 单态化 (Monomorphization)
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 编译时生成具体类型
 let integer = largest(&[1, 2, 3]);  // 生成 largest_i32
 let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
@@ -416,6 +422,7 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 反例 1: 遗漏 Trait 约束
@@ -424,7 +431,7 @@ let float = largest(&[1.0, 2.0]);   // 生成 largest_f64
 
 **错误示例**:
 
-```rust
+```rust,ignore
 fn largest<T>(list: &[T]) -> &T {
     let mut largest = &list[0];
     for item in list {
@@ -456,7 +463,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 fn print_all<T: Display>(items: Vec<T>) {
     for i in items { println!("{}", i); }
 }
@@ -467,7 +474,7 @@ fn print_all<T: Display>(items: Vec<T>) {
 
 **修正**:
 
-```rust
+```rust,ignore
 fn print_all(items: Vec<Box<dyn Display>>) {
     for i in items { println!("{}", i); }
 }
@@ -476,12 +483,14 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [泛型编程完整文档](../../../crates/c04_generic/docs/README.md)
 - [泛型编程 README](../../../crates/c04_generic/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 以下示例位于 `crates/c04_generic/examples/`，可直接运行（例如：`cargo run -p c04_generic --example generic_collections_demo`）。
@@ -492,6 +501,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 - Rust 1.91/1.92 特性演示（代码示例待补充）
 
 ## 🔗 相关资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [类型系统速查卡](./type_system.md)
@@ -500,6 +510,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 ---
 
 ## 🆕 Rust 1.93.0 泛型改进
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### MaybeUninit 泛型支持增强
@@ -508,7 +519,7 @@ fn print_all(items: Vec<Box<dyn Display>>) {
 
 **改进**: MaybeUninit 的新方法支持泛型类型
 
-```rust
+```rust,ignore
 // Rust 1.93.0 新特性
 use std::mem::MaybeUninit;
 
@@ -526,6 +537,7 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 ---
 
 ## Rust 1.92.0 泛型改进（历史）
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### const 上下文增强
@@ -534,7 +546,7 @@ fn init_array<T, const N: usize>(init: impl Fn(usize) -> T) -> [T; N] {
 
 **改进**: 支持对非静态常量的引用，应用于泛型配置
 
-```rust
+```rust,ignore
 // Rust 1.92.0 新特性
 const fn get_config<T>() -> T
 where
@@ -552,6 +564,7 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 官方文档
@@ -580,6 +593,7 @@ const REF: &i32 = &CONFIG;  // ✅ 现在支持
 ---
 
 ## 💡 使用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 场景 1: 通用 Repository 模式
@@ -765,13 +779,14 @@ fn main() {
 ---
 
 ## ⚠️ 边界情况
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 边界 1: 孤儿规则 (Orphan Rule)
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust,compile_fail
+```rust
 // ❌ 错误：违反孤儿规则
 // 不能为外部类型实现外部 trait
 // impl serde::Serialize for std::collections::HashMap<String, i32> {
@@ -821,6 +836,7 @@ fn main() {
 ```
 
 ### 边界 3: 复杂 Trait 约束
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -844,6 +860,7 @@ fn main() {
 ```
 
 ### 形式化理论
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 泛型相关的完备性保证
@@ -858,14 +875,16 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -905,11 +924,13 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## Rust 1.95+ 在泛型中的深度应用
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 泛型开发
 
 ### ControlFlow 在泛型约束中的应用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -935,9 +956,10 @@ where
 ```
 
 ### LazyLock 在泛型常量中的应用
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 泛型类型缓存
@@ -947,6 +969,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 ```
 
 ### 性能提升总结
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特性 | 泛型场景应用 | 性能提升 |
@@ -975,6 +998,7 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1247,4 +1271,3 @@ static TYPE_CACHE: LazyLock<HashMap<TypeId, String>> = LazyLock::new(|| {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

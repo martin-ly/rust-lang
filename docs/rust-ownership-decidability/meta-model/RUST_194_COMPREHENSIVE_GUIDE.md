@@ -116,7 +116,7 @@ Rust 1.94 对齐是将 Rust 所有权系统的形式化框架扩展到包含 Rus
 
 想象你有一把可变的钥匙（`&mut T`），你可以在不交出原钥匙的情况下，复制一把只读的钥匙（`&T`）给别人。
 
-```rust
+```rust,ignore
 let mut data = 42;
 let mut_ref = &mut data;  // 可变借用
 let shared_ref = mut_ref.reborrow();  // 复制只读视图
@@ -158,7 +158,7 @@ Theorem reborrow_preserves_ownership_safety :
 
 CoerceShared 允许在不同共享类型之间安全转换：
 
-```rust
+```rust,ignore
 let mut_ref: &mut i32 = ...;
 let shared_ref: &i32 = mut_ref;  // 隐式转换
 
@@ -193,7 +193,7 @@ Inductive has_coerce_shared : ty -> coerce_target -> Prop :=
 
 常量泛型允许你在类型中使用编译时常量：
 
-```rust
+```rust,ignore
 // 数组类型 [T; N]，N 是编译时常量
 struct Array<T, const N: usize> {
     data: [T; N],
@@ -308,7 +308,7 @@ Theorem edition_2024_more_permissive :
 
 直接在 trait bound 中约束关联类型：
 
-```rust
+```rust,ignore
 // 旧方式：需要 where 子句
 fn process<T: Iterator>(x: T)
 where
@@ -338,7 +338,7 @@ Inductive assoc_ty_bound : Type :=
 
 新 lint 帮助捕获潜在问题：
 
-```rust
+```rust,ignore
 // 警告：函数指针比较可能不可预测
 if foo == bar { ... }
 
@@ -367,7 +367,7 @@ Definition check_redundant_lifetimes (sig : fn_sig) : list string := ...
 
 异步编程基础：
 
-```rust
+```rust,ignore
 async fn fetch_data() -> Data {
     let response = make_request().await;
     parse(response)
@@ -485,7 +485,7 @@ Theorem rust_194_feature_composition_safe :
 ### 示例 1: 组合使用 Reborrow 和 Precise Capturing
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn make_reborrow_closure<'a>(x: &'a mut i32)
     -> impl Fn() -> &i32 + use<'a> {
     || x.reborrow()

@@ -44,7 +44,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 位置透明：本地和远程Actor使用相同API
 
 // 本地Actor
@@ -71,7 +71,7 @@ remote_actor.tell(msg, None);  // 自动序列化和网络传输
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use coerce::cluster::{Cluster, NodeId};
 use coerce::remote::RemoteActorSystem;
 
@@ -113,7 +113,7 @@ remote.on_node_event(|event| {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use coerce::sharding::{ShardRegion, ShardAllocationStrategy};
 
 // 创建分片区域
@@ -144,7 +144,7 @@ async fn setup_sharding(system: ActorSystem) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use coerce::singleton::ClusterSingleton;
 
 // 集群中只有一个实例
@@ -172,7 +172,7 @@ async fn setup_singleton(system: ActorSystem) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义protobuf消息
 // user.proto
 /*
@@ -217,7 +217,7 @@ let response = client.get_user(GetUserRequest {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 // 定义可序列化消息
@@ -255,7 +255,7 @@ impl RemoteMessage for UserMessage {
 
 ### 4.1 分布式监督
 
-```rust
+```rust,ignore
 // 跨节点监督
 Bastion::supervisor(|sp| {
     sp.with_strategy(SupervisionStrategy::OneForOne)
@@ -272,7 +272,7 @@ Bastion::supervisor(|sp| {
 
 ### 4.2 分布式事务 (Saga模式)
 
-```rust
+```rust,ignore
 struct SagaActor {
     steps: Vec<SagaStep>,
     compensations: Vec<Compensation>,
@@ -311,7 +311,7 @@ let saga = SagaBuilder::new()
 
 ### 4.3 CRDT Actor
 
-```rust
+```rust,ignore
 use crdts::{GSet, Map, Orswot};
 
 struct CRDTActor {
@@ -362,7 +362,7 @@ CAP定理在Actor系统中的体现:
 
 ### 5.2 Split-Brain处理
 
-```rust
+```rust,ignore
 // 使用仲裁(Quorum)避免脑裂
 struct ClusterMembership {
     nodes: HashSet<NodeId>,

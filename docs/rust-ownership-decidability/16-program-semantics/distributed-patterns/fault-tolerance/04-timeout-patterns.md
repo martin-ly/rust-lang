@@ -197,7 +197,7 @@
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -294,7 +294,7 @@ where
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::sync::atomic::{AtomicU64, Ordering};
 use tokio::sync::RwLock;
@@ -459,7 +459,7 @@ impl TieredAdaptiveTimeout {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tokio::select;
 use tokio::sync::oneshot;
 use std::sync::Arc;
@@ -590,7 +590,7 @@ impl CancellableHttpClient {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// 分层超时配置
 #[derive(Debug, Clone)]
 pub struct TimeoutHierarchy {
@@ -693,7 +693,7 @@ impl<S: Stream> Stream for StreamWithTimeout<S> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 超时预算上下文
 #[derive(Debug, Clone, Copy)]
 pub struct TimeoutBudget {

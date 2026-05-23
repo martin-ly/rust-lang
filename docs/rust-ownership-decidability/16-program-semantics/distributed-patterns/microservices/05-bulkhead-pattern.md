@@ -209,7 +209,7 @@
 ### 4.1 核心舱壁实现
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -465,7 +465,7 @@ impl Clone for Bulkhead {
 ### 4.2 多舱壁管理器
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 /// 舱壁管理器
@@ -538,7 +538,7 @@ pub enum BulkheadManagerError {
 ### 4.3 舱壁与断路器集成
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// 带断路器的舱壁
 pub struct CircuitBreakerBulkhead {
     bulkhead: Arc<Bulkhead>,
@@ -595,7 +595,7 @@ pub enum CircuitBreakerBulkheadError<E> {
 ### 4.4 自适应舱壁
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 自适应舱壁（根据负载动态调整容量）
 pub struct AdaptiveBulkhead {
     inner: Arc<Bulkhead>,

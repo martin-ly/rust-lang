@@ -1,4 +1,5 @@
 # 安装 Rust
+> **相关概念**: [工具链](../../concept/06_ecosystem/01_toolchain.md)
 
 > **Bloom 层级**: 理解
 

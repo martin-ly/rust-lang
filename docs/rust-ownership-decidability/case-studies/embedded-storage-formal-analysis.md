@@ -85,7 +85,7 @@ $$
 ### 定义 STORAGE-2 ( 可擦除存储 )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 trait NorFlash: ReadStorage {
     const SECTOR_SIZE: usize;
     fn erase(&mut self, from: u32, to: u32) -> Result<(), Self::Error>;
@@ -241,7 +241,7 @@ $$
 ### 示例1: Flash驱动实现
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use embedded_storage::nor_flash::{NorFlash, ReadNorFlash};
 
 struct MyFlash {
@@ -317,7 +317,7 @@ impl NorFlash for MyFlash {
 ### 示例2: 文件系统抽象
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use embedded_storage::Storage;
 
 struct BlockDevice<S: Storage> {
@@ -346,7 +346,7 @@ impl<S: Storage> BlockDevice<S> {
 ### 示例3: 配置存储
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use embedded_storage::nor_flash::NorFlash;
 use serde::{Serialize, Deserialize};
 

@@ -70,7 +70,7 @@
 
 Rust 的借用检查器在编译期验证内存安全，但其内部工作机制复杂：
 
-```rust
+```rust,ignore
 fn example(v: &mut Vec<i32>) {
     v.push(v.len());  // 同时使用 &mut v 和 &v
 }
@@ -114,7 +114,7 @@ fn example(v: &mut Vec<i32>) {
 
 **示例**：
 
-```rust
+```rust,ignore
 // Rust 代码
 let x = read_input();
 let y = x + 1;
@@ -163,7 +163,7 @@ Place ::= x              (局部变量)
 
 **示例**：
 
-```rust
+```rust,ignore
 if x > 0 {
     y = 1;
 } else {
@@ -186,7 +186,7 @@ LLBC 的核心思想：**将隐式借用显式化**
 
 Rust 借用是隐式的：
 
-```rust
+```rust,ignore
 let x = &mut v;  // 借用 v
 *x = 42;         // 使用借用
 // 借用隐式结束

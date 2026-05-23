@@ -599,7 +599,7 @@ fn functional_api() {
 ### 并发访问
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn concurrent_reads() {

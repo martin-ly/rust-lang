@@ -394,7 +394,7 @@ pub fn assign_merge(order: &Order) -> &'static str {
 > **[来源: Rust Standard Library - Result]**
 > **[来源: TRPL Ch. 9 - Error Handling]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug, Clone)]
@@ -474,7 +474,7 @@ impl ProcessingPath {
 ### 5.3 订单处理完整示例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -724,7 +724,7 @@ $$
 
 **场景**: 根据订单特征选择不同验证路径，最终统一输出验证结果
 
-```rust
+```rust,ignore
 pub fn validate_order(order: &OrderRequest) -> Result<ValidationSummary, String> {
     let summary = if order.items.is_empty() {
         return Err("空订单".to_string());
@@ -826,7 +826,7 @@ impl<T> MergedValue<T> {
 
 在异步流中实现 Simple Merge 语义：
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 pub async fn merge_streams<T>(

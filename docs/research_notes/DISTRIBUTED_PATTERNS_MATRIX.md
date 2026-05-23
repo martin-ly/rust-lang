@@ -50,7 +50,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Saga 协调器示例
 enum SagaAction {
     BookHotel,
@@ -85,7 +85,7 @@ impl SagaCoordinator {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 命令端
 struct OrderCommandHandler {
     event_store: EventStore,

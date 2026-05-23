@@ -162,7 +162,7 @@
 
 **Kani**:
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn check_overflow() {
     let x: u32 = kani::any();

@@ -67,7 +67,7 @@
 
 在传统的同步编程中，当程序执行 I/O 操作（如网络请求、文件读写）时，线程会被阻塞，无法执行其他任务。异步编程允许在等待 I/O 完成时释放线程去处理其他任务，从而显著提高资源利用率。
 
-```rust
+```rust,ignore
 // 同步代码 - 线程阻塞
 fn fetch_data_sync() -> String {
     let response = reqwest::blocking::get("https://api.example.com").unwrap();
@@ -85,7 +85,7 @@ async fn fetch_data_async() -> String {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -107,7 +107,7 @@ enum Poll<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Rust使用协作式调度 - 任务显式让出控制权
 async fn cooperative_task() {
     loop {
@@ -184,7 +184,7 @@ impl Future for Delay {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use futures::future::{self, FutureExt, TryFutureExt};
 
 async fn future_composition() -> Result<String, Error> {
@@ -229,7 +229,7 @@ async fn complex_composition(user_id: u64) -> Result<UserProfile, Error> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // async函数返回的Future是一个状态机
 async fn example() -> i32 {
     let x = 1;           // 状态1
@@ -322,7 +322,7 @@ fn problem_demo() {
 
 ### 3.2 Pin的类型系统
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -421,7 +421,7 @@ impl AsyncDataBuffer {
 
 ### 3.4 Pin在异步代码中的应用
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 use std::task::{Context, Poll};
@@ -485,7 +485,7 @@ impl<'a> Future for MyFuture<'a> {
 
 ### 4.1 语法糖展开
 
-```rust
+```rust,ignore
 // 原始async代码
 async fn fetch_and_process(url: &str) -> Result<String, Error> {
     let response = fetch(url).await?;
@@ -534,7 +534,7 @@ impl<'a> Future for FetchAndProcessFuture<'a> {
 
 ### 4.2 生命周期与捕获
 
-```rust
+```rust,ignore
 // async fn 与 async move 的区别
 
 // async fn: 参数按引用捕获
@@ -587,7 +587,7 @@ fn mixed_capture() {
 
 ### 4.3 async trait（Rust 1.94+ 原生支持）
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94+: async fn 在 trait 中原生支持！
 // 不再需要 async-trait crate
 
@@ -642,7 +642,7 @@ impl DataFetcher for UserService {
 
 ### 5.1 Tokio运行时架构
 
-```rust
+```rust,ignore
 use tokio::runtime::{Builder, Runtime};
 use tokio::task;
 
@@ -687,7 +687,7 @@ tokio::task::LocalSet::new().run_until(async {
 
 ### 5.2 async-std运行时
 
-```rust
+```rust,ignore
 use async_std::task;
 
 // async-std使用全局运行时
@@ -726,7 +726,7 @@ fn configure_async_std() {
 | 启动时间 | 稍慢 | 中等 | 快 |
 | 定制化 | 高 | 中 | 低 |
 
-```rust
+```rust,ignore
 // smol运行时示例
 use smol::future;
 
@@ -758,7 +758,7 @@ async fn mixed_runtime() {
 
 ### 5.4 运行时选择指南
 
-```rust
+```rust,ignore
 // 使用Tokio的场景：
 // - 大型网络应用
 // - 需要完整的生态（HTTP, WebSocket, gRPC等）
@@ -790,7 +790,7 @@ fn no_runtime() {
 
 ### 6.1 Stream基础
 
-```rust
+```rust,ignore
 use futures::stream::{self, Stream, StreamExt};
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -821,7 +821,7 @@ async fn stream_basics() {
 
 ### 6.2 高级流操作
 
-```rust
+```rust,ignore
 use futures::stream::{StreamExt, TryStreamExt};
 use tokio_stream::StreamExt as TokioStreamExt;
 
@@ -891,7 +891,7 @@ impl Stream for IntervalStream {
 
 ### 6.3 背压与流量控制
 
-```rust
+```rust,ignore
 use futures::channel::mpsc;
 use futures::stream::StreamExt;
 
@@ -944,7 +944,7 @@ async fn rate_limiting() {
 
 ### 7.1 跨await的所有权转移
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -995,7 +995,7 @@ async fn read_data(mut buf: Vec<u8>) -> (usize, Vec<u8>) {
 
 ### 7.2 生命周期与异步闭包
 
-```rust
+```rust,ignore
 // 异步闭包的生命周期挑战
 fn async_closure_lifetime() {
     let data = String::from("hello");
@@ -1030,7 +1030,7 @@ where
 
 ### 7.3 取消安全
 
-```rust
+```rust,ignore
 use tokio::select;
 
 // 取消安全问题
@@ -1123,7 +1123,7 @@ impl<R: AsyncRead + Unpin> CancelSafeReader<R> {
 
 ### 8.1 任务调度优化
 
-```rust
+```rust,ignore
 use tokio::task;
 
 // CPU密集型任务应在blocking线程池执行
@@ -1184,7 +1184,7 @@ async fn coalesced_work() {
 
 ### 8.2 内存优化
 
-```rust
+```rust,ignore
 use bytes::BytesMut;
 
 // 使用Bytes减少复制
@@ -1233,7 +1233,7 @@ async fn shrink_future_size() {
 
 ### 8.3 性能分析工具
 
-```rust
+```rust,ignore
 // 使用tracing进行性能追踪
 use tracing::{info_span, Instrument};
 
@@ -1265,7 +1265,7 @@ async fn main() {
 
 Rust 1.94 最重要的异步特性是原生支持 `async fn` 在 trait 中：
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: 原生 async trait，无需额外 crate！
 
 // 基础 async trait
@@ -1307,7 +1307,7 @@ trait Repository<T> {
 
 **对比：新旧方式**
 
-```rust
+```rust,ignore
 // ❌ Rust 1.75 之前：需要 async-trait crate
 use async_trait::async_trait;
 
@@ -1331,7 +1331,7 @@ trait SendableStyle: Send + Sync {
 
 Return Position Impl Trait In Traits (RPITIT) 在 Rust 1.94 中完全稳定：
 
-```rust
+```rust,ignore
 // 在 trait 中使用 impl Trait 作为返回类型
 trait Factory {
     fn create(&self) -> impl Product;
@@ -1358,7 +1358,7 @@ trait ApiClient {
 
 Rust 1.94 改进了异步闭包的支持：
 
-```rust
+```rust,ignore
 // 异步闭包（实验性功能，在部分上下文中可用）
 async fn with_async_closure() {
     let data = vec![1, 2, 3];
@@ -1400,7 +1400,7 @@ where
 
 ### 10.1 高性能Web服务器
 
-```rust
+```rust,ignore
 use tokio::net::{TcpListener, TcpStream};
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -1449,7 +1449,7 @@ async fn handle_connection(mut socket: TcpStream) -> Result<(), Box<dyn std::err
 
 ### 10.2 数据库连接池
 
-```rust
+```rust,ignore
 use deadpool::managed::{Manager, Pool, RecycleResult};
 use tokio_postgres::{Client, Config, NoTls};
 
@@ -1509,7 +1509,7 @@ async fn use_connection_pool() {
 
 ### 10.3 消息队列消费者
 
-```rust
+```rust,ignore
 use lapin::{Connection, ConnectionProperties, Consumer, options::*};
 use futures::StreamExt;
 

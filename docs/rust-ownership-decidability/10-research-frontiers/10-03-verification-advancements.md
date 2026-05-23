@@ -241,7 +241,7 @@ Z3 SMT 求解器
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 // 新的规范语法更加直观
@@ -278,7 +278,7 @@ impl Counter {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // Prusti 现在支持循环不变量合成
 fn find_max(arr: &[i32]) -> Option<i32> {
     if arr.is_empty() {
@@ -302,7 +302,7 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 验证特质实现满足约束
 #[prusti::spec_only]
 trait Bounded {
@@ -327,7 +327,7 @@ fn process_bounded<T: Bounded>(x: T) -> T {
 
 Prusti 正在扩展对 Unsafe Rust 的支持：
 
-```rust
+```rust,ignore
 // Prusti 的 Unsafe 支持（实验性）
 
 #[extern_spec]
@@ -394,7 +394,7 @@ Prusti 2024 年的性能改进：
 
 Kani 是基于 CBMC（C Bounded Model Checker）的 Rust 验证工具，使用模型检查技术验证 Rust 代码。
 
-```rust
+```rust,ignore
 use kani::proof;
 
 // Kani 的基本用法
@@ -425,7 +425,7 @@ Kani 的核心特性：
 
 Kani 对并发代码的验证支持：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 
 #[proof]
@@ -461,7 +461,7 @@ fn verify_atomic_counter() {
 
 Kani 用于验证标准库的实现：
 
-```rust
+```rust,ignore
 // 验证 Vec 的操作
 #[proof]
 fn verify_vec_push() {
@@ -566,7 +566,7 @@ Verus 的设计哲学：
 
 Verus 的并发验证能力：
 
-```rust
+```rust,ignore
 use vstd::prelude::*;
 
 verus! {
@@ -616,7 +616,7 @@ impl<T> ThreadSafeQueue<T> {
 
 Verus 在操作系统验证中的应用：
 
-```rust
+```rust,ignore
 use vstd::prelude::*;
 
 verus! {
@@ -674,7 +674,7 @@ impl BuddyAllocator {
 
 Verus 使用线性类型和幽灵状态进行验证：
 
-```rust
+```rust,ignore
 verus! {
 
 // 幽灵状态：仅用于验证，运行时无开销
@@ -750,7 +750,7 @@ Why3 平台
 
 Creusot 使用 Pearlite 作为规范语言：
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // 基本规范
@@ -813,7 +813,7 @@ Creusot 的标准库验证覆盖情况（2024）：
 
 Creusot 的证明自动化策略：
 
-```rust
+```rust,ignore
 // 自动证明
 #[trusted] // 信任此函数的实现
 fn system_call() -> i32;
@@ -854,7 +854,7 @@ fn factorial_monotonic(n: Int, m: Int) {
 
 Aeneas 将 Rust 代码提取为函数式语言，然后进行验证。
 
-```rust
+```rust,ignore
 // Aeneas 工作流程
 // 1. 提取 Rust 到 Lean/F* 等
 // 2. 在定理证明器中验证
@@ -893,7 +893,7 @@ Aeneas 的特点：
 
 RefinedRust 探索在 Rust 中集成精炼类型：
 
-```rust
+```rust,ignore
 // RefinedRust 概念
 
 #[refine(|x: i32| x > 0)]
@@ -920,7 +920,7 @@ fn inverse(x: i32) -> i32 {
 
 Rudra 是静态分析工具，用于检测 Unsafe Rust 中的内存安全漏洞。
 
-```rust
+```rust,ignore
 // Rudra 可以检测的模式
 
 // 1. 恐慌安全漏洞

@@ -167,7 +167,7 @@
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let s2 = s;  // s 的所有权转移到 s2
@@ -177,7 +177,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 使用克隆（Clone）
 fn main() {
     let s = String::from("hello");
@@ -235,7 +235,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Person {
     name: String,
     age: u32,
@@ -254,7 +254,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 克隆字段
 fn main() {
     let p = Person {
@@ -311,7 +311,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello");
 
@@ -324,7 +324,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 使用作用域隔离
 fn main() {
     let mut s = String::from("hello");
@@ -393,7 +393,7 @@ fn process(s: String) -> String {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello");
 
@@ -406,7 +406,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 先不可变后可变
 fn main() {
     let mut s = String::from("hello");
@@ -466,7 +466,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let s2 = s;  // s 被移动
@@ -476,7 +476,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 克隆
 fn main() {
     let s = String::from("hello");
@@ -518,7 +518,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let r = &s;
@@ -529,7 +529,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 确保借用结束后再移动
 fn main() {
     let s = String::from("hello");
@@ -561,7 +561,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello");
     let r = &s;
@@ -596,7 +596,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     let r = &s;
@@ -606,7 +606,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 克隆
 fn main() {
     let s = String::from("hello");
@@ -647,7 +647,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let arr = [String::from("a"), String::from("b")];
     let r = &arr;
@@ -657,7 +657,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 克隆
 fn main() {
     let arr = [String::from("a"), String::from("b")];
@@ -691,7 +691,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn print_it<T>(x: T) {
     println!("{}", x);  // Error: E0277 - T doesn't implement Display
 }
@@ -703,7 +703,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 use std::fmt::Display;
 
 // 方案 1: 添加 Trait Bound
@@ -752,7 +752,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let v = Vec::new();  // Error: E0282 - cannot infer type for type parameter `T`
     v.push(42);
@@ -761,7 +761,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 显式类型标注
 fn main() {
     let v: Vec<i32> = Vec::new();  // ✅
@@ -794,7 +794,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = "hello".into();  // Error: E0283 - type annotations needed
 }
@@ -802,7 +802,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 显式类型
 fn main() {
     let s: String = "hello".into();  // ✅
@@ -826,7 +826,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x: i32 = "hello";  // Error: E0308 - expected i32, found &str
 }
@@ -834,7 +834,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 修正类型声明
 fn main() {
     let x: &str = "hello";  // ✅
@@ -870,7 +870,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn add(a: i32, b: i32) -> i32 {
     "not a number"  // Error: E0308
 }
@@ -905,7 +905,7 @@ fn add_result(a: i32, b: i32) -> Result<i32, String> {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {  // Error: E0106
     if x.len() > y.len() { x } else { y }
 }
@@ -992,7 +992,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let r;
     {
@@ -1005,7 +1005,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 确保引用不超过被引用者的生命周期
 fn main() {
     let s = String::from("hello");
@@ -1105,7 +1105,7 @@ fn make_container_owned(s: &str) -> ContainerOwned {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
     if x.len() > y.len() { x } else { y }  // Error: E0495
 }
@@ -1113,7 +1113,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 统一生命周期
 fn foo<'a>(x: &'a str, y: &'a str) -> &'a str {
     if x.len() > y.len() { x } else { y }
@@ -1146,7 +1146,7 @@ fn foo<'a, 'b>(x: &'a str, y: &'b str) -> Either<'a, 'b> {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x: i32;
     println!("{}", x);  // Error: E0381
@@ -1174,7 +1174,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x = 5;
     x = 6;  // Error: E0384
@@ -1209,7 +1209,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 enum Direction {
     North,
     South,
@@ -1229,7 +1229,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 fn main() {
     let d = Direction::North;
     match d {
@@ -1265,7 +1265,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let Some(x) = None;  // Error: E0005
 }
@@ -1307,7 +1307,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn foo((x, y): (i32, i32)) {}  // 正常情况
 
 fn bar(Some(x): Option<i32>) {  // Error: E0297
@@ -1341,7 +1341,7 @@ fn bar(opt: Option<i32>) {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Foo;
 
 impl Foo {
@@ -1386,7 +1386,7 @@ impl Foo {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     println!("{}", unknown_var);  // Error: E0425
 }
@@ -1413,7 +1413,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #![feature(box_syntax)]  // Error: E0554 (在 stable/beta)
 
 fn main() {}
@@ -1447,7 +1447,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use non_existent::Module;  // Error: E0432
 
 fn main() {}
@@ -1455,7 +1455,7 @@ fn main() {}
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 检查模块路径
 use std::collections::HashMap;  // ✅ 正确路径
 
@@ -1480,7 +1480,7 @@ fn main() {}
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use serde::Serialize;  // Error: E0433 - 未在 Cargo.toml 中添加 serde
 
 fn main() {}
@@ -1494,7 +1494,7 @@ fn main() {}
 serde = { version = "1.0", features = ["derive"] }
 ```
 
-```rust
+```rust,ignore
 use serde::Serialize;  // ✅
 
 #[derive(Serialize)]
@@ -1538,7 +1538,7 @@ cargo update
 
 **错误代码**:
 
-```rust
+```rust,ignore
 // 在某个 crate 中
 mod internal {
     pub fn secret() {}
@@ -1550,7 +1550,7 @@ use crate::internal;  // Error: E0603
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 将模块声明为 pub
 pub mod internal {
     pub fn secret() {}
@@ -1580,7 +1580,7 @@ pub use internal::secret;  // ✅ 重新导出
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let s = String::from("hello");
     s.push_str(" world");  // Error: E0596
@@ -1609,7 +1609,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x = 42;
     x.push(5);  // Error: E0599 - i32 没有 push 方法
@@ -1638,7 +1638,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Point { x: i32, y: i32 }
 
 fn main() {
@@ -1670,7 +1670,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn main() {
     let x = 42;
     let y = *x;  // Error: E0614 - i32 不能解引用
@@ -1699,7 +1699,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 mod inner {
     pub struct Foo {
         secret: i32,
@@ -1752,7 +1752,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Foo;
 
 trait Bar {
@@ -1796,7 +1796,7 @@ impl Bar for Foo {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 trait Greet {
     fn greet(&self, name: &str);
 }
@@ -1838,7 +1838,7 @@ impl Greet for Person {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Wrapper<T> {  // Error: E0392
     value: i32,
 }
@@ -1846,7 +1846,7 @@ struct Wrapper<T> {  // Error: E0392
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 使用泛型参数
 struct Wrapper<T> {
     value: T,
@@ -1903,7 +1903,7 @@ trait Bar: Foo {}  // ✅ 单向约束
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn make_closure() -> Box<dyn Fn() -> i32> {
     let x = 42;
     Box::new(|| x)  // Error: E0373
@@ -1952,7 +1952,7 @@ fn make_closure_static() -> impl Fn() -> i32 {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -1995,7 +1995,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn bad_async() {
     let mut s = String::from("hello");
     let r1 = &mut s;
@@ -2050,7 +2050,7 @@ async fn some_async() {}
 
 **错误代码**:
 
-```rust
+```rust,ignore
 async fn fib(n: u32) -> u32 {  // Error: E0733
     if n <= 1 { n } else { fib(n - 1).await + fib(n - 2).await }
 }
@@ -2087,7 +2087,7 @@ fn fib(n: u32) -> Pin<Box<dyn Future<Output = u32>>> {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::io;
 use std::fmt::Write as io;  // Error: E0252
 ```
@@ -2182,7 +2182,7 @@ mod inner {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn bad() -> &str {
     let s = String::from("hello");
     &s  // Error: E0515
@@ -2221,7 +2221,7 @@ fn good_lifetime<'a>(input: &'a str) -> &'a str {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn get_ref() -> &'static str {
     let s = String::from("hello");
     &s  // Error: E0521
@@ -2282,6 +2282,7 @@ fn main() {
 ---
 
 ## 警告 (W开头)
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### W0001 - 未使用的变量
@@ -2397,6 +2398,7 @@ fn main() {
 ---
 
 ### W0005 - 死代码
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **警告信息**: `dead_code`
@@ -2431,6 +2433,7 @@ fn main() {}
 ---
 
 ### W0006 - 未处理的 Result
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **警告信息**: `unused Result that must be used`
@@ -2470,6 +2473,7 @@ fn main() {
 ---
 
 ## 错误码快速修复索引表
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 错误码 | 常见原因 | 快速修复 | 相关概念 |
@@ -2500,9 +2504,11 @@ fn main() {
 ---
 
 ## 相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 项目内文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 主题 | 路径 | 描述 |
@@ -2516,6 +2522,7 @@ fn main() {
 | 宏系统 | `crates/c11_macro_system/docs/` | 宏编程指南 |
 
 ### 速查卡
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 速查卡 | 路径 | 内容 |
@@ -2526,6 +2533,7 @@ fn main() {
 | 生命周期 | `quick_reference/lifetimes_cheatsheet.md` | 生命周期速查 |
 
 ### 官方资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Compiler Error Index](https://doc.rust-lang.org/error-index.html) - 官方错误码索引
@@ -2533,6 +2541,7 @@ fn main() {
 - [The Rust Book](https://doc.rust-lang.org/book/) - Rust 官方教程
 
 ### 形式化理论
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [所有权模型形式化](../research_notes/formal_methods/ownership_model.md)
@@ -2542,6 +2551,7 @@ fn main() {
 ---
 
 ## 故障排查建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 1. **阅读完整错误信息**: Rust 编译器错误信息通常很详细，包含具体位置和建议
@@ -2554,6 +2564,7 @@ fn main() {
 ---
 
 ## Rust 1.95+ 更新说明
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -2612,6 +2623,7 @@ Rust 1.94 对错误诊断进行了多项改进：
 ---
 
 ## 思维导图：Rust 错误码体系
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -2633,6 +2645,7 @@ graph TD
 ---
 
 ## 决策树：编译错误诊断流程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -3564,4 +3577,3 @@ graph TD
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

@@ -286,7 +286,7 @@ impl ThreadSafeFrameAllocator {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 //! 虚拟内存管理
 
 use std::collections::HashMap;
@@ -469,7 +469,7 @@ impl AddressSpace {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 //! 操作系统引导代码示例
 
 #![no_std]
@@ -667,7 +667,7 @@ impl fmt::Write for SerialPort {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 //! 块设备驱动示例
 
 use alloc::vec::Vec;
@@ -756,7 +756,7 @@ impl AhciController {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 //! 简单的日志结构文件系统
 
 use alloc::collections::BTreeMap;
@@ -872,7 +872,7 @@ pub enum FsError { InvalidMagic, InodeNotFound, BlockNotFound, NoSpace, NotImple
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 //! 简化的 TCP/IP 协议栈
 
 use alloc::collections::VecDeque;
@@ -990,7 +990,7 @@ pub struct TcpPacket { header: TcpHeader, data: Vec<u8> }
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! OCI 容器运行时核心实现
 
 use std::fs;
@@ -1105,7 +1105,7 @@ impl From<serde_json::Error> for ContainerError {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! 零拷贝 I/O 实现
 
 use std::fs::File;
@@ -1153,7 +1153,7 @@ impl ZeroCopyReader {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! SIMD 并行处理
 
 #[cfg(target_arch = "x86_64")]
@@ -1252,7 +1252,7 @@ pub type KernelResult<T> = Result<T, KernelError>;
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! 安全的内存访问模式
 
 /// 使用 RAII 管理资源

@@ -195,7 +195,7 @@ edition = "2021"
 prusti-contracts = { git = "https://github.com/viperproject/prusti-contracts.git" }
 ```
 
-```rust
+```rust,ignore
 // src/lib.rs
 use prusti_contracts::*;
 
@@ -267,7 +267,7 @@ Rust 代码
 
 **后置条件 (@ensures):** 函数返回时必须满足的条件
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 计算绝对值
@@ -296,7 +296,7 @@ $$
 
 ### 4.2 断言
 
-```rust
+```rust,ignore
 #[ensures(result > 0)]
 fn always_positive() -> i32 {
     let x = 42;
@@ -309,7 +309,7 @@ fn always_positive() -> i32 {
 
 纯函数是无副作用、仅依赖输入的函数：
 
-```rust
+```rust,ignore
 /// 纯函数：无副作用，仅依赖输入
 #[pure]
 #[requires(x >= 0)]
@@ -329,7 +329,7 @@ fn sqrt_estimate(x: u32) -> u32 {
 
 谓词是可重用的规范函数：
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 链表节点
@@ -369,7 +369,7 @@ fn find_in_sorted(head: &Node, target: i32) -> Option<usize> {
 
 循环不变式是在每次迭代前后都保持成立的条件：
 
-```rust
+```rust,ignore
 #[ensures(result >= 0)]
 fn sum_array(arr: &[i32]) -> i32 {
     let mut sum = 0;
@@ -407,7 +407,7 @@ fn sum_of(arr: &[i32]) -> i32 {
 
 `old(expr)` 表示函数执行前的值：
 
-```rust
+```rust,ignore
 struct Counter {
     value: i32,
 }
@@ -430,7 +430,7 @@ impl Counter {
 
 ### 5.4 全称与存在量词
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 全称量词：所有元素满足条件
@@ -488,7 +488,7 @@ fn sum_positive_only(arr: &[i32]) -> i32 {
 
 ### 6.1 二分查找验证
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 验证二分查找正确性
@@ -535,7 +535,7 @@ fn is_sorted_slice(arr: &[i32]) -> bool {
 
 ### 6.2 栈的实现与验证
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 pub struct Stack<T> {
@@ -587,7 +587,7 @@ where
 
 ### 6.3 链表验证
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 pub struct ListNode {
@@ -662,7 +662,7 @@ pub fn insert_sorted(list: ListNode, value: i32) -> ListNode {
 
 ### 6.4 排序算法验证
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 选择排序验证
@@ -736,7 +736,7 @@ fn count(arr: &[i32], value: i32) -> usize {
 
 幽灵变量用于验证辅助，不生成运行时代码：
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 幽灵变量用于验证辅助
@@ -756,7 +756,7 @@ fn compute_with_proof(a: i32, b: i32) -> (i32, i32) {
 
 ### 7.2 外部函数规范
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 // 为外部函数添加规范
@@ -776,7 +776,7 @@ impl Vec<i32> {
 
 ### 7.3 类型不变式
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 带有不变式的类型
@@ -807,7 +807,7 @@ impl NonNegative {
 
 ### 7.4 枚举与模式匹配
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 enum Option<T> {
@@ -872,7 +872,7 @@ impl<T> Option<T> {
 
 ```markdown
 1. **增量式验证**: 从简单规范开始，逐步完善
-   ```rust
+   ```rust,ignore
    // 第一步：基本后置条件
    #[ensures(result >= 0)]
 
@@ -885,14 +885,14 @@ impl<T> Option<T> {
 
 1. **纯函数优先**: 尽可能将辅助逻辑声明为 pure
 
-   ```rust
+   ```rust,ignore
    #[pure]
    fn helper(x: i32) -> bool { ... }
    ```
 
 2. **循环不变式设计**: 确保覆盖所有变量
 
-   ```rust
+   ```rust,ignore
    while i < n {
        body_invariant!(i <= n);
        body_invariant!(sum == sum_of(&arr[0..i]));
@@ -902,7 +902,7 @@ impl<T> Option<T> {
 
 3. **使用谓词复用**: 将复杂规范抽象为谓词
 
-   ```rust
+   ```rust,ignore
    #[predicate]
    fn is_valid_state(s: &State) -> bool { ... }
    ```
@@ -913,7 +913,7 @@ impl<T> Option<T> {
 
 **陷阱 1: 忘记循环不变式**
 
-```rust
+```rust,ignore
 // ❌ 错误：未指定循环不变式
 fn sum_wrong(arr: &[i32]) -> i32 {
     let mut sum = 0;
@@ -940,7 +940,7 @@ fn sum_correct(arr: &[i32]) -> i32 {
 
 **陷阱 2: 量词使用不当**
 
-```rust
+```rust,ignore
 // ❌ 错误：量词范围不明确
 #[ensures(forall(|i| arr[i] > 0))]  // i 的范围？
 
@@ -950,7 +950,7 @@ fn sum_correct(arr: &[i32]) -> i32 {
 
 **陷阱 3: 递归谓词无终止**
 
-```rust
+```rust,ignore
 // ❌ 错误：递归可能不终止
 #[predicate]
 fn bad_recursive(node: &Node) -> bool {
@@ -969,7 +969,7 @@ fn good_recursive(node: &Node) -> bool {
 
 **陷阱 4: 忽略溢出**
 
-```rust
+```rust,ignore
 // ❌ 错误：未考虑溢出
 #[ensures(result > x)]
 fn double(x: i32) -> i32 {
@@ -1001,7 +1001,7 @@ fn double_safe(x: i32) -> i32 {
 
 ### 调试验证失败
 
-```rust
+```rust,ignore
 #[requires(x > 0)]
 #[ensures(result > x)]  // 验证失败？
 fn double(x: i32) -> i32 {

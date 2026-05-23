@@ -78,7 +78,7 @@
 
 Frontmatter 位于文件顶部，使用 `---` 分隔符包裹 TOML 配置：
 
-```rust
+```rust,ignore
 ---
 cargo
 [package]
@@ -107,7 +107,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 ---
 cargo
 [dependencies]
@@ -124,7 +124,7 @@ serde_json = "1"
 
 对于无依赖的脚本，甚至可以省略 frontmatter：
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 fn main() {
     println!("Hello, Cargo Script!");
@@ -143,7 +143,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 ---
 cargo
 [package]
@@ -188,7 +188,7 @@ cargo +nightly fetch-json.rs
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 ---
 cargo
 [dependencies]
@@ -211,7 +211,7 @@ fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ---
 cargo
@@ -271,7 +271,7 @@ graph LR
 ### 场景 1：替代 Python 系统脚本
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ---
 cargo

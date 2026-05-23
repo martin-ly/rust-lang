@@ -331,7 +331,7 @@ Proof:
 
 **Architecture Overview**:
 
-```rust
+```rust,ignore
 // Actix 0.13+ (Rust 1.94 compatible)
 use actix::prelude::*;
 
@@ -347,7 +347,7 @@ pub trait Actor {
 
 **Ownership Model Analysis**:
 
-```rust
+```rust,ignore
 // The Handler trait captures ownership transfer
 pub trait Handler<M: Message> {
     type Result: MessageResponse<Self, M>;
@@ -360,7 +360,7 @@ pub trait Handler<M: Message> {
 
 **Message Passing Implementation**:
 
-```rust
+```rust,ignore
 // Message trait requires Send + 'static
 pub trait Message: Send + 'static {
     type Result: Send;
@@ -374,7 +374,7 @@ impl Message for MyMessage {
 
 **Address System and Ownership**:
 
-```rust
+```rust,ignore
 // Addr<T> is like an Arc<...> but with actor semantics
 pub struct Addr<A: Actor> {
     tx: mpsc::UnboundedSender<Envelope<A>>,
@@ -413,7 +413,7 @@ Proof:
 
 **Supervisor Tree Architecture**:
 
-```rust
+```rust,ignore
 // Bastion 0.4+ (Rust 1.94 compatible)
 use bastion::prelude::*;
 
@@ -474,7 +474,7 @@ Proof:
 
 **Compile-Time Actor Isolation**:
 
-```rust
+```rust,ignore
 // This will NOT compile - violating actor isolation
 struct BadActor {
     shared: Arc<Mutex<i32>>,  // Shared state!
@@ -491,7 +491,7 @@ struct GoodActor {
 
 **Message Ownership Transfer**:
 
-```rust
+```rust,ignore
 // Moving ownership into message
 #[derive(Message)]
 #[rtype(result = "Result<(), Error>")]
@@ -523,7 +523,7 @@ impl Handler<ProcessData> for Worker {
 
 **Tell Pattern (Fire-and-Forget)**:
 
-```rust
+```rust,ignore
 // Asynchronous, no response expected
 impl Handler<TellMessage> for ActorA {
     type Result = ();
@@ -538,7 +538,7 @@ impl Handler<TellMessage> for ActorA {
 
 **Ask Pattern (Request-Response)**:
 
-```rust
+```rust,ignore
 // Synchronous-like request/response
 impl Handler<AskMessage> for ActorB {
     type Result = ResponseFuture<Result<Response, Error>>;
@@ -582,7 +582,7 @@ Proof:
 
 **Counter-Example: Circular Ask Deadlock**:
 
-```rust
+```rust,ignore
 // VIOLATION: Circular dependency
 impl Handler<GetBalance> for AccountA {
     type Result = ResponseFuture<Money>;
@@ -643,7 +643,7 @@ Proof:
 
 **Counter-Example: Supervision Bypass**:
 
-```rust
+```rust,ignore
 // VIOLATION: Direct actor reference bypasses supervision
 struct BadSupervisor {
     children: Vec<Addr<Worker>>,
@@ -695,7 +695,7 @@ Transitions:
 
 **Implementation**:
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::time::{Duration, Instant};
 
@@ -780,7 +780,7 @@ Proof:
 
 **Counter-Example: Half-Open Race Condition**:
 
-```rust
+```rust,ignore
 // VIOLATION: Unsafe half-open state handling
 struct UnsafeCircuitBreaker {
     state: CircuitState,  // Not protected!
@@ -854,7 +854,7 @@ Proof by Rust type system:
 
 **Example: Correct Ownership Transfer**:
 
-```rust
+```rust,ignore
 #[derive(Message)]
 #[rtype(result = "()")]
 struct ProcessOrder {
@@ -904,7 +904,7 @@ processor.send(order).await?;
 
 **Interior Mutability Pattern**:
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 use std::rc::Rc;
 
@@ -936,7 +936,7 @@ impl Handler<GetCached> for CachingActor {
 
 **Safe State Updates**:
 
-```rust
+```rust,ignore
 // Pattern: State machine transitions
 enum ConnectionState {
     Disconnected,
@@ -992,7 +992,7 @@ impl Handler<Connect> for ConnectionManager {
 
 **Counter-Example: Data Race in Actor State**:
 
-```rust
+```rust,ignore
 // VIOLATION: Attempting to share mutable state
 struct UnsafeActor {
     counter: Arc<AtomicU32>,  // Shared across threads!
@@ -1042,7 +1042,7 @@ impl Handler<Increment> for SafeActor {
 
 **Problem: Dangling References**:
 
-```rust
+```rust,ignore
 // VIOLATION: Message contains reference
 #[derive(Message)]
 struct BadMessage<'a> {
@@ -1074,7 +1074,7 @@ fn example() {
 
 **Counter-Example: The Dangling Reference**:
 
-```rust
+```rust,ignore
 // Compile error demonstration
 use actix::prelude::*;
 
@@ -1091,7 +1091,7 @@ impl<'a> Message for BadMessage<'a> {
 
 **Solution: Use Owned Types**:
 
-```rust
+```rust,ignore
 // CORRECT: Owned data in messages
 #[derive(Message, Clone)]
 #[rtype(result = "()")]
@@ -1137,7 +1137,7 @@ impl Handler<IndexedMessage> for BufferManager {
 
 **Problem: Mailbox Overflow**:
 
-```rust
+```rust,ignore
 // VIOLATION: Blocking I/O in handler
 struct DatabaseActor {
     conn: DatabaseConnection,
@@ -1162,7 +1162,7 @@ impl Handler<Query> for DatabaseActor {
 
 **Counter-Example: Blocking IO Deadlock**:
 
-```rust
+```rust,ignore
 // Scenario: Two actors blocking on each other
 struct ActorA;
 struct ActorB;
@@ -1195,7 +1195,7 @@ impl Handler<RequestFromB> for ActorA {
 
 **Solution: Async Handlers**:
 
-```rust
+```rust,ignore
 // CORRECT: Non-blocking async handler
 use actix::prelude::*;
 use tokio::time::{sleep, Duration};
@@ -1247,7 +1247,7 @@ impl Handler<Compute> for WorkerActor {
 
 **Problem: Violates Actor Model**:
 
-```rust
+```rust,ignore
 // VIOLATION: Shared mutable state
 use std::sync::{Arc, Mutex};
 
@@ -1292,7 +1292,7 @@ fn create_violation() {
 
 **Counter-Example: Deadlock Through Shared State**:
 
-```rust
+```rust,ignore
 // Scenario: Deadlock through nested lock acquisition
 struct AccountActor {
     balance: Arc<Mutex<f64>>,
@@ -1325,7 +1325,7 @@ impl Handler<Transfer> for AccountActor {
 
 **Solution: Proper Message Passing**:
 
-```rust
+```rust,ignore
 // CORRECT: Each actor owns its state
 struct CounterActor {
     count: i32,  // Private, owned state
@@ -1402,7 +1402,7 @@ impl Handler<ApplyEvent> for EventSourcedCounter {
 
 **Problem: Deadlock**:
 
-```rust
+```rust,ignore
 // VIOLATION: Circular ask pattern
 struct ActorA {
     b: Addr<ActorB>,
@@ -1457,7 +1457,7 @@ impl Handler<GetDataB> for ActorB {
 
 **Counter-Example: Three-Actor Deadlock**:
 
-```rust
+```rust,ignore
 // Circular wait among three actors
 struct ActorA { b: Addr<ActorB> }
 struct ActorB { c: Addr<ActorC> }
@@ -1493,7 +1493,7 @@ impl Handler<Request> for ActorC {
 
 **Solution: Timeout and Supervision**:
 
-```rust
+```rust,ignore
 // CORRECT: Timeout prevents indefinite blocking
 use tokio::time::{timeout, Duration};
 
@@ -1581,7 +1581,7 @@ impl Handler<Response> for ActorA {
 
 **Problem: Unbounded Actor Creation**:
 
-```rust
+```rust,ignore
 // VIOLATION: Spawning without cleanup
 struct RequestHandler;
 
@@ -1610,7 +1610,7 @@ impl Handler<HttpRequest> for RequestHandler {
 
 **Counter-Example: Resource Exhaustion**:
 
-```rust
+```rust,ignore
 // Scenario: Cascading actor creation
 struct NodeActor {
     children: Vec<Addr<NodeActor>>,
@@ -1647,7 +1647,7 @@ impl Handler<SpawnTree> for NodeActor {
 
 **Solution: Supervision and Lifecycle**:
 
-```rust
+```rust,ignore
 // CORRECT: Worker pool with lifecycle management
 struct WorkerPool {
     workers: Vec<Addr<WorkerActor>>,
@@ -1788,7 +1788,7 @@ impl RateLimitedSpawner {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // Protocol messages with ownership semantics
 
 // Connection management
@@ -1855,7 +1855,7 @@ struct GetHistory {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // ChatServer - central coordinator
 struct ChatServer {
     sessions: HashMap<SessionId, Addr<ClientSession>>,
@@ -2095,7 +2095,7 @@ Proof:
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // PITFALL 1: Blocking on broadcast
 impl Handler<SendMessage> for Room {
     type Result = Result<MessageId, SendError>;

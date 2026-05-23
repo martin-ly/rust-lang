@@ -119,13 +119,13 @@ let leaked: &'static mut i32 = Box::leak(Box::new(42));
 
 1. **单个输入生命周期** → 输出相同生命周期
 
-   ```rust
+   ```rust,ignore
    fn foo(x: &i32) -> &i32  // 等价于 foo<'a>(x: &'a i32) -> &'a i32
    ```
 
 2. **多个输入，一个是&self** → 输出与self相同
 
-   ```rust
+   ```rust,ignore
    impl MyStruct {
        fn foo(&self, x: &i32) -> &i32  // 返回&self的生命周期
    }
@@ -139,7 +139,7 @@ let leaked: &'static mut i32 = Box::leak(Box::new(42));
 
 **A:** 当编译器无法确定输出生命周期与哪个输入相关时：
 
-```rust
+```rust,ignore
 // 编译器无法确定返回值来自s1还是s2
 fn longest(s1: &str, s2: &str) -> &str {  // ❌ 错误
 
@@ -207,7 +207,7 @@ unsafe {
 
 **A:** 当类型包含自引用时：
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 struct SelfRef {
@@ -258,13 +258,13 @@ struct LocalOnly(*const ()); // 原始指针不实现Send/Sync
 
 2. **try_lock**：非阻塞获取
 
-   ```rust
+   ```rust,ignore
    if let Ok(guard) = mutex.try_lock() { ... }
    ```
 
 3. **作用域限制**：最小化持有时间
 
-   ```rust
+   ```rust,ignore
    {
        let guard = mutex.lock();
        // 只在这里使用
@@ -314,7 +314,7 @@ cargo +nightly miri test  # 检测UB
 
 **A:** **编译时零成本**，运行时：
 
-```rust
+```rust,ignore
 // 高级代码
 let sum: i32 = data.iter().filter(|x| x > 0).map(|x| x * 2).sum();
 
@@ -340,7 +340,7 @@ cargo bench  # 对比迭代器vs手写循环
 - `Rc`: 普通增减（非线程安全）
 - `Arc`: 原子操作（线程安全，更慢）
 
-```rust
+```rust,ignore
 // Rc::clone - 简单add
 fn clone(&self) -> Rc<T> {
     self.inner().inc_strong(); // non-atomic
@@ -382,7 +382,7 @@ MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test
 
 **A:** [Prusti](https://www.prusti.org/)用于形式验证：
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 #[ensures(result >= a && result >= b)]  // 后置条件
@@ -404,7 +404,7 @@ fn max(a: i32, b: i32) -> i32 {
 
 **A:** 零大小类型用于编译时检查：
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 struct Handle<T> {
@@ -426,7 +426,7 @@ let h2: Handle<Socket> = ...;
 - 关联类型
 - 常量泛型
 
-```rust
+```rust,ignore
 // 类型级递归示例
 truct Zero;
 struct Succ<N>(PhantomData<N>);

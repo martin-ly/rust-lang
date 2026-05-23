@@ -684,7 +684,7 @@ fn unsized_coercion() {
 ### 9.1 与泛型的交互
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn generic_coercion<T>(mut v: Vec<T>) -> &[T] {
     &v  // Vec<T> → &[T] 通过 Deref
 }

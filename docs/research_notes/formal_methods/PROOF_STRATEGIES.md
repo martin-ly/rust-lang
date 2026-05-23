@@ -85,7 +85,7 @@
 
 **Rust示例 - 列表长度**:
 
-```rust
+```rust,ignore
 // 证明: length(append(xs, ys)) = length(xs) + length(ys)
 
 // 基础: xs = []
@@ -121,7 +121,7 @@ length(append(x::xs', ys))
 
 **Rust示例 - 表达式求值**:
 
-```rust
+```rust,ignore
 enum Expr {
     Num(i32),
     Add(Box<Expr>, Box<Expr>),
@@ -163,7 +163,7 @@ fn eval_terminates(e: &Expr) -> bool {
 
 **Rust示例 - 快速排序**:
 
-```rust
+```rust,ignore
 fn quicksort<T: Ord>(arr: &mut [T]) {
     if arr.len() <= 1 { return; }
 
@@ -270,7 +270,7 @@ s₁ R s₂ 且 s₂ → s₂'  ⇒  ∃s₁'. s₁ → s₁' 且 s₁' R s₂'
 
 **Rust示例**:
 
-```rust
+```rust,ignore
 // 证明: 存在满足某性质的类型
 
 // 构造性证明: 给出具体类型
@@ -312,7 +312,7 @@ while b do
 
 **Rust示例**:
 
-```rust
+```rust,ignore
 // 证明: 二分查找正确
 fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
@@ -386,7 +386,7 @@ C ⊑ A  ⟺  C的行为是A行为的子集
 
 **Rust示例**:
 
-```rust
+```rust,ignore
 // 模块A: 已验证
 mod A {
     #[ensures(result > 0)]

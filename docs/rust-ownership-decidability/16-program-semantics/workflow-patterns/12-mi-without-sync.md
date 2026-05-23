@@ -326,7 +326,7 @@ Instance(c, item) ::= process(item).c<result>.0
 ### 基础实现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use tokio::task::JoinHandle;
@@ -455,7 +455,7 @@ pub async fn multi_instance_example() {
 ### 动态实例池
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, Semaphore};
 
 /// 带资源限制的动态实例池
@@ -523,7 +523,7 @@ pub enum MIError {
 ### 流式处理实现
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio_stream::Stream;
 

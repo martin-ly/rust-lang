@@ -81,7 +81,7 @@
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Router, Extension,
@@ -140,7 +140,7 @@ async fn proxy_to_user_service(
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 使用Envoy或自定义sidecar实现横切关注点
 
 pub struct SidecarConfig {
@@ -195,7 +195,7 @@ impl<S> SidecarMiddleware<S> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use consul::Client;
 use serde::{Deserialize, Serialize};
 
@@ -267,7 +267,7 @@ impl ServiceDiscovery {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 pub enum LoadBalanceStrategy {
@@ -318,7 +318,7 @@ impl LoadBalancer {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use raft::{Config, Raft, StateRole};
 
 pub struct RaftNode {
@@ -360,7 +360,7 @@ impl RaftNode {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use redis::AsyncCommands;
 use uuid::Uuid;
 
@@ -550,7 +550,7 @@ async fn saga_example() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use lapin::{Connection, ConnectionProperties, Channel, options::*, types::FieldTable};
 
 pub struct MessageBus {
@@ -608,7 +608,7 @@ impl MessageBus {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 use std::collections::HashMap;
 
@@ -712,7 +712,7 @@ impl Order {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::time::{Duration, Instant};
 use tokio::time::sleep;
@@ -891,7 +891,7 @@ impl RateLimitedService {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use opentelemetry::trace::{Tracer, SpanKind};
 use opentelemetry::Context;
 
@@ -928,7 +928,7 @@ pub async fn traced_operation() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use axum::{routing::get, Json, Router};
 use serde_json::json;
 

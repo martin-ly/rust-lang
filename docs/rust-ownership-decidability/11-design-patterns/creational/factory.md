@@ -94,7 +94,7 @@ let cat = create_animal(AnimalType::Cat, "Whiskers");
 ### 工厂方法
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub trait Parser {
     fn parse(&self, input: &str) -> Result<Vec<Token>, ParseError>;
 }

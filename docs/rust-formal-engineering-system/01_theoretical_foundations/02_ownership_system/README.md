@@ -185,7 +185,7 @@ fn raii_pattern() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 闭包捕获所有权的方式
 fn closure_ownership() {
     let s = String::from("hello");

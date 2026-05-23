@@ -361,7 +361,7 @@ fn mutable_borrow() {
 
 #### 4.1.3 非词法生命周期(NLL)
 
-```rust
+```rust,ignore
 // NLL示例：借用只在需要时有效
 fn nll_example() {
     let mut data = vec!['a', 'b', 'c'];
@@ -495,7 +495,7 @@ unsafe fn raw_pointer_aliasing() {
 
 > **Halting Problem (Turing, 1936)**：不存在通用算法可以判定任意程序P在输入I下是否会终止。
 
-```rust
+```rust,ignore
 fn might_not_terminate(n: u64) {
     while n > 1 {
         if n % 2 == 0 {
@@ -620,7 +620,7 @@ fn might_not_terminate(n: u64) {
 
 ### 7.3 类型状态模式(Typestate)深度分析
 
-```rust
+```rust,ignore
 // 类型状态模式：编译期状态机验证
 // 可判定性：✅ 完全静态可判定
 

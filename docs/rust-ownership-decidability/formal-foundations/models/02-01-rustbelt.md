@@ -285,7 +285,7 @@ Region α ⊆ CFG  (控制流图的子集)
 ### 6.1 Send Trait
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 pub unsafe auto trait Send { }
 ```
 
@@ -303,7 +303,7 @@ pub unsafe auto trait Send { }
 ### 6.2 Sync Trait
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub unsafe auto trait Sync { }
 ```
 
@@ -363,7 +363,7 @@ pub fn swap<T>(x: &mut T, y: &mut T) {
 ### 7.2 发现的标准库Bug
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 问题代码 (已修复)
 impl<T> Borrow<T> for RefCell<T> {
     fn borrow(&self) -> &T {

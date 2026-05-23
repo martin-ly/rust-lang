@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 06: 并发下载器](#实践项目-06-并发下载器)
@@ -20,6 +21,7 @@
   - [完整参考实现位于: `examples/concurrent-downloader/`](#完整参考实现位于-examplesconcurrent-downloader)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -48,7 +50,7 @@
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::sync::{Arc, Mutex};
 
@@ -72,9 +74,10 @@ fn download_concurrent(urls: Vec<String>) {
 ```
 
 ### 异步下载
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio;
 
 async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
@@ -87,6 +90,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/concurrent-downloader/`
@@ -108,6 +112,7 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
@@ -161,4 +166,3 @@ async fn download_async(url: &str) -> Result<Vec<u8>, reqwest::Error> {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

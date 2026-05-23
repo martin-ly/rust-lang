@@ -53,7 +53,7 @@ IEC 61508-x:
 
 #### Rust优势在IEC 61508中的体现
 
-```rust
+```rust,ignore
 //! SIL 3级工业控制器示例
 //!
 //! IEC 61508-3 Table A.1 技术措施Rust实现
@@ -216,7 +216,7 @@ mod verification {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 //! IEC 61508-3 Table A.1 Rust实现
 
 /// 1a. 模块化
@@ -305,7 +305,7 @@ pub enum CommunicationResult<T> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 //! IEC 61508-3 Table A.2 Rust实现
 
 /// 1a. 等价类分析 - 使用property testing
@@ -393,7 +393,7 @@ Rust适用性: SCL 2-3
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! IEC 61508-2 硬件容错架构Rust实现
 
 /// 1oo1架构 - 单通道
@@ -464,7 +464,7 @@ impl Voter {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 //! SIL 2级Modbus实现
 
 use std::time::Duration;
@@ -534,7 +534,7 @@ pub trait ModbusTransport {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! SIL 3级OPC UA服务器
 
 use opcua::server::prelude::*;

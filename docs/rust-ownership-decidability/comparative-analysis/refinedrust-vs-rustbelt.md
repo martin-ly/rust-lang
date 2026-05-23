@@ -179,7 +179,7 @@
 
 **RustBelt: λRust**
 
-```rust
+```rust,ignore
 // λRust 语法 (简化)
 exp ::= x                     // 变量
       | λx.e                  // 函数
@@ -200,7 +200,7 @@ exp ::= x                     // 变量
 
 **RefinedRust: Radium**
 
-```rust
+```rust,ignore
 // Radium (基于 MIR)
 // 支持:
 // - 完整 Rust 语法
@@ -253,7 +253,7 @@ fn get_unchecked_mut<T>(
 
 **关键区别示例**:
 
-```rust
+```rust,ignore
 // 整数溢出
 let x: i32 = 2_000_000_000;
 let y = x + x;  // 溢出!
@@ -267,7 +267,7 @@ let y = x + x;  // 溢出!
 
 **RustBelt 类型**:
 
-```rust
+```rust,ignore
 // λRust 类型
 τ ::= Int                  // 无限整数
     | Bool                 // 布尔值
@@ -278,7 +278,7 @@ let y = x + x;  // 溢出!
 
 **RefinedRust 类型 (精细化)**:
 
-```rust
+```rust,ignore
 // 精细化类型
 τ ::= int{i32}             // 32位整数，可能溢出
     | #v @ place_τ         // 值 v 在位置类型
@@ -290,7 +290,7 @@ let y = x + x;  // 溢出!
 
 **创新: Borrow Names**:
 
-```rust
+```rust,ignore
 // 可变引用的数学值是对 (当前值, borrow name)
 &mut T  refined by  (v, γ)
 
@@ -433,7 +433,7 @@ fn push(&mut self, value: T) { ... }
 
 **问题**: Rust 的 "places" (也称为 lvalues) 是什么？
 
-```rust
+```rust,ignore
 // Places 出现在:
 let x = &mut obj.field;  // obj.field 是 place
 arr[index] = value;      // arr[index] 是 place

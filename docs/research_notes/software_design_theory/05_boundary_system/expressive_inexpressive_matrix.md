@@ -256,7 +256,7 @@ trait 组合、委托、结构体嵌套不引入全局可变/继承/反射；
 
 **Strategy**：trait 即策略接口，`impl Trait` 即具体策略；语义完全等价。
 
-```rust
+```rust,ignore
 trait SortStrategy { fn sort(&self, data: &mut [i32]); }
 struct QuickSort; impl SortStrategy for QuickSort { ... }
 struct MergeSort; impl SortStrategy for MergeSort { ... }

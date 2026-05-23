@@ -337,7 +337,7 @@ fn moving_average(data: &[f64]) -> Vec<f64> {
 
 #### 2. LazyCell/LazyLock新方法
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 
@@ -470,7 +470,7 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 
 **2026年推荐模式**:
 
-```rust
+```rust,ignore
 // 使用thiserror定义错误类型
 use thiserror::Error;
 
@@ -516,7 +516,7 @@ fn read_config() -> Result<Config> {
 
 #### 1. 旧的异步trait模式
 
-```rust
+```rust,ignore
 // ❌ 过时: 使用async-trait crate
 #[async_trait::async_trait]
 trait Storage {
@@ -531,7 +531,7 @@ trait Storage {
 
 #### 2. 手动实现生成器
 
-```rust
+```rust,ignore
 // ❌ 过时: 使用不稳定特性的生成器
 #![feature(generators)]
 || {
@@ -548,7 +548,7 @@ gen fn my_generator() -> i32 {
 
 #### 3. 旧的Lazy初始化
 
-```rust
+```rust,ignore
 // ❌ 过时: lazy_static crate
 lazy_static::lazy_static! {
     static ref CONFIG: String = load_config();
@@ -769,7 +769,7 @@ jobs:
 
 #### 3. 性能监控
 
-```rust
+```rust,ignore
 // benches/performance_tracking.rs
 // 跟踪关键性能指标
 

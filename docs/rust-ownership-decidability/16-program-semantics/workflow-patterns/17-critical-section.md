@@ -58,7 +58,7 @@ $$
 ## Rust 实现示例
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::{Mutex, RwLock, Semaphore};
 

@@ -112,7 +112,7 @@ pub enum Ordering {
 ### 3.1 整数类型
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicI32, AtomicUsize, Ordering};
 
 let counter = AtomicUsize::new(0);
@@ -151,7 +151,7 @@ flag.compare_exchange(false, true, Ordering::SeqCst, Ordering::Relaxed);
 ### 3.3 指针类型
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 
 let ptr: AtomicPtr<i32> = AtomicPtr::new(std::ptr::null_mut());
@@ -307,7 +307,7 @@ impl<T> LockFreeQueue<T> {
 
 只保证操作的原子性，**不保证**内存顺序。
 
-```rust
+```rust,ignore
 // 用于独立计数器
 static COUNTER: AtomicUsize = AtomicUsize::new(0);
 
@@ -321,7 +321,7 @@ fn count() {
 
 建立 happens-before 关系。
 
-```rust
+```rust,ignore
 // 标记数据是否准备好
 static READY: AtomicBool = AtomicBool::new(false);
 static DATA: AtomicUsize = AtomicUsize::new(0);

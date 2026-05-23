@@ -33,7 +33,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;
@@ -68,7 +68,7 @@ fn main() {
 
 修复以下代码：
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello");
 
@@ -105,7 +105,7 @@ fn main() {
 
 实现一个函数，返回两个字符串切片中较长的一个。
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     // 实现这里
 }

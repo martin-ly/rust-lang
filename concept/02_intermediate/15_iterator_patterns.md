@@ -31,6 +31,7 @@
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -41,6 +42,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 Iterator Trait
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -73,6 +75,7 @@ Iterator Trait:
 ---
 
 ### 1.2 适配器链
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -114,6 +117,7 @@ Iterator Trait:
 ---
 
 ### 1.3 惰性求值
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -157,6 +161,7 @@ Iterator Trait:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 map-filter-collect
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -185,6 +190,7 @@ map-filter-collect:
 ---
 
 ### 2.2 fold 与归约
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -217,6 +223,7 @@ fold 与归约:
 ---
 
 ### 2.3 zip 与并行迭代
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -550,4 +557,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

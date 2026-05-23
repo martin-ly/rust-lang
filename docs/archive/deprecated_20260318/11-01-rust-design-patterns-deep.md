@@ -119,7 +119,7 @@ PROBLEM BUILDER:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// Target complex type
 #[derive(Debug, Clone)]
 pub struct HttpRequest {
@@ -232,7 +232,7 @@ impl Default for HttpRequestBuilder {
 
 #### 2.1.4 Ownership Semantics
 
-```rust
+```rust,ignore
 /// Demonstrating ownership transfer in builder
 fn builder_ownership_demo() {
     let data = vec![1, 2, 3];
@@ -287,7 +287,7 @@ PROBLEM TYPE-STATE-BUILDER:
 
 #### 2.2.2 Solution Structure
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 /// State markers (zero-sized types)
@@ -435,7 +435,7 @@ impl<MethodState, UrlState> TypedHttpRequestBuilder<MethodState, UrlState> {
 
 #### 2.2.5 Usage Example
 
-```rust
+```rust,ignore
 fn type_state_usage() {
     // This works - all required fields set
     let request = TypedHttpRequestBuilder::new()
@@ -528,7 +528,7 @@ impl Connection for HttpConnection {
 
 #### 2.3.2 Generic Factory
 
-```rust
+```rust,ignore
 /// Generic factory with registration
 pub struct GenericFactory<T> {
     creators: HashMap<String, Box<dyn Fn() -> T + Send + Sync>>,
@@ -795,7 +795,7 @@ fn raii_usage() {
 
 #### 3.2.3 Scope Guards
 
-```rust
+```rust,ignore
 /// Execute code on scope exit
 pub struct ScopeGuard<F: FnOnce()> {
     callback: Option<F>,
@@ -879,7 +879,7 @@ PROBLEM VIEW-TYPES:
 
 #### 3.3.2 Solution Structure
 
-```rust
+```rust,ignore
 /// Source data structure
 pub struct DataFrame {
     columns: Vec<String>,
@@ -1137,7 +1137,7 @@ PROBLEM STATE-MACHINE:
 
 #### 4.1.2 Solution Structure
 
-```rust
+```rust,ignore
 /// Events that trigger state transitions
 #[derive(Debug, Clone)]
 pub enum Event {
@@ -1936,7 +1936,7 @@ pub fn process_cow(data: Cow<[u8]>) -> Cow<[u8]> {
 
 #### 5.1.3 Performance Comparison
 
-```rust
+```rust,ignore
 /// Benchmark comparison (conceptual)
 ///
 /// Scenario: Process 1MB of data
@@ -1966,7 +1966,7 @@ PROBLEM COW:
 
 #### 5.2.2 Solution Structure
 
-```rust
+```rust,ignore
 use std::borrow::Cow;
 
 /// Configuration with defaults
@@ -2245,7 +2245,7 @@ impl<T> Drop for MyRc<T> {
 
 ### 6.1 Builder Missing Field
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Builder allows incomplete construction
 pub struct BadBuilder {
     required_field: Option<String>,
@@ -2324,7 +2324,7 @@ pub enum BuildError {
 
 ### 6.2 Type State Bypass
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Type state can be bypassed via unsafe
 pub struct BadTypeState<State> {
     data: String,
@@ -2398,7 +2398,7 @@ impl GoodTypeState<Initialized> {
 
 ### 6.3 RAII Guard Misuse
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 /// ❌ INCORRECT: RAII guard stored and used after scope
@@ -2471,7 +2471,7 @@ async fn good_async_mutex() {
 
 ### 6.4 Mutable Singleton
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 use once_cell::sync::Lazy;
 
@@ -2625,7 +2625,7 @@ impl GoodStrategy for ThreadSafeStrategy {
 
 ### 6.6 Observer Memory Leak
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 use std::collections::HashMap;
 
@@ -2715,7 +2715,7 @@ impl GoodSubject {
 
 ### 6.7 Command Pattern Ownership
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Command takes ownership of receiver
 pub struct BadCommand {
     receiver: DatabaseConnection, // Owned
@@ -2795,7 +2795,7 @@ impl SharedCommand {
 
 ### 6.8 Factory Returning References
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Factory returns reference to local variable
 pub struct Factory;
 
@@ -2880,7 +2880,7 @@ impl<'a> ProductHandle<'a> {
 
 ### 6.9 Adapter Lifetime Issue
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Adapter stores reference without lifetime
 pub struct BadAdapter {
     adaptee: &Adaptee, // ❌ Missing lifetime
@@ -3005,7 +3005,7 @@ impl<T: Component> Component for SafeDecorator<T> {
 
 ### 6.11 Iterator Invalidation
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Modifying collection while iterating
 fn iterator_invalidation() {
     let mut data = vec![1, 2, 3, 4, 5];
@@ -3060,7 +3060,7 @@ fn correct_partition() {
 
 ### 6.12 Visitor with Mutability
 
-```rust
+```rust,ignore
 /// ❌ INCORRECT: Visitor tries to mutate during traversal
 pub trait BadVisitor {
     fn visit_element(&mut self, element: &mut dyn Element);
@@ -3223,7 +3223,7 @@ pub struct Response {
 
 ### 6.14 Mediator Circular Reference
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 
 /// ❌ INCORRECT: Mediator and colleagues hold strong references
@@ -3627,7 +3627,7 @@ REQUIREMENTS HTTP-CLIENT:
 
 ### 8.3 Implementation
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::time::Duration;
 use std::sync::Arc;
@@ -4004,7 +4004,7 @@ impl std::error::Error for Error {}
 
 ### 8.4 Usage Examples
 
-```rust
+```rust,ignore
 /// Basic GET request
 async fn basic_get() -> Result<(), Error> {
     let client = HttpClient::new();

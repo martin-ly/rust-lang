@@ -192,7 +192,7 @@ $$
 
 **死锁检测算法：**
 
-```rust
+```rust,ignore
 /// 等待图算法
 fn detect_deadlock(wait_graph: &Graph<ProcessId>) -> Option<Vec<ProcessId>> {
     // 使用 DFS 检测循环
@@ -400,7 +400,7 @@ Terminated = if deadlock(System) then STOP else RUN
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 use tokio::sync::watch;

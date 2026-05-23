@@ -116,7 +116,7 @@ X = 已知晓值
   • 带宽占用低
 ```
 
-```rust
+```rust,ignore
 // Gossip 协议实现
 trait GossipProtocol {
     type Data: Clone + Mergeable;
@@ -161,7 +161,7 @@ impl<T: Hash + Eq + Clone> AntiEntropySync<T> {
 ### 3.2 读修复与 hinted handoff
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 读修复: 读取时发现不一致并修复
 struct ReadRepair<R> {
     replicas: Vec<R>,
@@ -273,7 +273,7 @@ impl HintedHandoff {
 ### 4.2 Rust 实现
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug, Default)]
 struct VectorClock {
     clocks: HashMap<NodeId, u64>,
@@ -371,7 +371,7 @@ CRDT (Conflict-free Replicated Data Types):
 ### 5.2 常见 CRDT 实现
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // G-Counter (增长计数器)
 #[derive(Clone)]
 struct GCounter {
@@ -510,7 +510,7 @@ impl<T: Hash + Eq + Clone> LWWSet<T> {
 ### 6.1 冲突检测与解决
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 冲突解决 trait
 trait ConflictResolver<T> {
     fn resolve(&self, versions: Vec<Versioned<T>>) -> T;

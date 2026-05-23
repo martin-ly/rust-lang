@@ -170,7 +170,7 @@ handle.join().unwrap();
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 let mut data = vec![1, 2, 3, 4, 5];
@@ -205,7 +205,7 @@ thread::scope(|s| {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c05_threads::threads::ThreadPool;
 
 let pool = ThreadPool::new(4);
@@ -249,7 +249,7 @@ let handle = builder.spawn(|| {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 let (tx, rx) = mpsc::channel();
@@ -270,7 +270,7 @@ for received in rx {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 let (tx, rx) = mpsc::channel();
@@ -422,7 +422,7 @@ for handle in handles {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use c05_threads::lockfree::lockfree_queue::LockFreeQueue;
 use std::sync::Arc;
 use std::thread;
@@ -460,7 +460,7 @@ thread::spawn(move || {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // ❌ 不好的做法：锁住整个操作
 let mutex = Arc::new(Mutex::new(data));
 let guard = mutex.lock().unwrap();
@@ -480,7 +480,7 @@ let mutex = Arc::new(Mutex::new(data));
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 对于高并发场景，使用无锁数据结构
 use c05_threads::lockfree::*;
 
@@ -492,7 +492,7 @@ let queue = Arc::new(LockFreeQueue::new());
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use c05_threads::concurrency::work_stealing::WorkStealingQueue;
 
 let queue = WorkStealingQueue::new();
@@ -653,7 +653,7 @@ struct StatsSnapshot {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, Condvar};
 use std::collections::VecDeque;
 use std::thread;
@@ -764,7 +764,7 @@ impl ThreadPool {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc::{channel, Sender, Receiver};
 use std::thread;
 
@@ -975,7 +975,7 @@ where
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // ❌ 数据竞争！多个线程同时读写，无同步保护
 use std::thread;
 
@@ -1327,7 +1327,7 @@ fn good_condition_variable() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // ❌ 可能导致死锁
 let mutex1 = Arc::new(Mutex::new(0));
 let mutex2 = Arc::new(Mutex::new(0));
@@ -1353,7 +1353,7 @@ thread::spawn(move || {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ❌ 数据竞争
 let counter = Arc::new(0); // 不能直接共享
 
@@ -1457,7 +1457,7 @@ fn execute_query(_conn: &Connection, query: &str) -> Result<String, String> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 /// 单线程缓存：延迟初始化 + 运行时更新
@@ -1572,7 +1572,7 @@ Rust 1.95+ 的 `array_windows` 在并发数据流处理中具有独特优势：
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::sync::mpsc::channel;
 

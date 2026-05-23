@@ -62,7 +62,7 @@ Axum是Tokio生态的现代Web框架：
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 Router::new()
     .route("/", get(root))
     .route("/users", post(create_user))
@@ -79,7 +79,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn get_user(Path(id): Path<u64>) -> impl IntoResponse
 ```
 
@@ -109,7 +109,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait FromRequest<S>: Sized {
     type Rejection: IntoResponse;
     async fn from_request(req: Request, state: &S) -> Result<Self, Self::Rejection>;
@@ -126,7 +126,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn handler(
     Path(id): Path<u64>,
     Query(params): Query<SearchParams>,
@@ -187,7 +187,7 @@ $$
 
 ### 定义 STATE-1 ( 共享状态 )
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct AppState {
     db: Database,
@@ -247,7 +247,7 @@ $$
 
 ### 示例1: CRUD API
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post, put, delete},
     Router, Json, extract::Path,
@@ -329,7 +329,7 @@ fn app() -> Router {
 
 ### 示例2: 自定义提取器
 
-```rust
+```rust,ignore
 use axum::{
     async_trait,
     extract::FromRequestParts,
@@ -372,7 +372,7 @@ async fn protected_handler(
 
 ### 示例3: 中间件
 
-```rust
+```rust,ignore
 use axum::{
     middleware::{self, Next},
     response::Response,
@@ -412,7 +412,7 @@ fn app_with_middleware() -> Router {
 
 ### 示例4: 错误处理
 
-```rust
+```rust,ignore
 use axum::{
     response::{IntoResponse, Response},
     Json,

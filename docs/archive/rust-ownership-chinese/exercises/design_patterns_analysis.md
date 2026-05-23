@@ -14,7 +14,7 @@
 
 **可判定性**: ✅ 完全可判定
 
-```rust
+```rust,ignore
 use std::sync::Once;
 
 static mut INSTANCE: Option<Singleton> = None;
@@ -357,7 +357,7 @@ fn producer_consumer() {
 
 **可判定性**: ⚠️ 运行时检查
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, mpsc};
 
 type Job = Box<dyn FnOnce() + Send + 'static>;

@@ -142,7 +142,7 @@ Rust 编译器可以自动推断某些常见的生命周期模式，减少显式
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 显式版本
 fn explicit<'a, 'b>(x: &'a i32, y: &'b i32) -> i32 { ... }
 
@@ -187,7 +187,7 @@ impl<'a> Parser<'a> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误：无法推断输出生命周期
 fn ambiguous(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
@@ -203,7 +203,7 @@ fn explicit<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 示例：分析这个函数签名
 fn process(data: &str, config: &Config) -> &str;
 
@@ -231,7 +231,7 @@ fn process<'a>(data: &'a str, config: &Config) -> &'a str;
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 场景：解析器返回与输入文本相同生命周期的结果
 struct Parser<'text, 'config> {
     text: &'text str,
@@ -286,7 +286,7 @@ where
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 泛型函数的生命周期标注
 fn find_min<'a, T: Ord>(slice: &'a [T]) -> Option<&'a T> {
     slice.iter().min()
@@ -308,7 +308,7 @@ trait Iterable<'a> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 返回实现了特定 trait 的引用
 fn get_displayable<'a>(x: &'a str) -> &'a dyn std::fmt::Display {
     x
@@ -328,7 +328,7 @@ where
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 'static 生命周期贯穿整个程序执行
 let s: &'static str = "Hello, World!";  // 字符串字面量是 'static
 
@@ -374,7 +374,7 @@ std::thread::spawn(move || {
 
 当需要接受对任意生命周期的引用时，使用 HRTB：
 
-```rust
+```rust,ignore
 // ❌ 错误：生命周期参数应该放在哪里？
 fn apply<F>(f: F)
 where
@@ -412,7 +412,7 @@ F: for<'a> Trait<'a>  ≡  ∀'a: F 满足 Trait<'a>
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 fn with_data<F, R>(f: F) -> R
 where
     F: for<'a> FnOnce(&'a Data) -> R,
@@ -431,7 +431,7 @@ with_data(|d: &Data| {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 struct EventHandler {
     callbacks: Vec<Box<dyn for<'a> Fn(&'a Event) + Send + Sync>>,
 }
@@ -454,7 +454,7 @@ impl EventHandler {
 
 #### 应用 3: 解析器 trait
 
-```rust
+```rust,ignore
 trait Parser {
     fn parse<'a>(&self, input: &'a str) -> Result<Token<'a>, Error>;
 }
@@ -518,7 +518,7 @@ where
 ### 陷阱 1: 返回局部变量的引用
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ❌ 严重错误
 fn get_string() -> &str {
     let s = String::from("hello");
@@ -544,7 +544,7 @@ fn get_substring<'a>(s: &'a str) -> &'a str {
 ### 陷阱 2: 生命周期过长
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 生命周期约束过强
 fn process<'a>(data: &'a mut Data) -> &'a Result {
     let temp = compute(data);
@@ -563,7 +563,7 @@ fn process_fixed(data: &mut Data) -> Result {
 ### 陷阱 3: 结构体自引用
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ❌ 自引用结构体是 Rust 的难题
 struct SelfRef {
     data: String,
@@ -620,7 +620,7 @@ where
 ### 陷阱 5: HRTB 与具体生命周期冲突
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 fn problematic<F>(f: F)
 where
@@ -809,7 +809,7 @@ fn optimized_access(slice: &[i32; 100], index: usize) -> &i32 {
 
 生命周期检查是 Rust 编译时间的重要组成部分：
 
-```rust
+```rust,ignore
 // 简单生命周期：编译快
 fn simple<'a>(x: &'a str) -> &'a str { x }
 
@@ -838,7 +838,7 @@ where
 ### 7.4 缓存局部性与生命周期
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 差：多次获取引用
 fn unoptimized(data: &[i32]) {
     for i in 0..100 {
@@ -924,7 +924,7 @@ fn windows<T>(slice: &[T], size: usize) -> Windows<T> {
 ### 8.3 回调注册系统
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 struct EventSystem {
     handlers: Vec<Box<dyn for<'a> Fn(&'a Event) + Send + Sync>>,
 }
@@ -954,7 +954,7 @@ system.register(|e: &Event| {
 ### 8.4 数据库连接池
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 struct Pool<'env> {
     env: &'env Environment,
     connections: Vec<Connection<'env>>,

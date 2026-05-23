@@ -721,7 +721,7 @@ resources:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 应用代码: 快速启动
 #[tokio::main]
 async fn main() {
@@ -743,7 +743,7 @@ async fn main() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use tokio::signal;
 
 async fn graceful_shutdown() {

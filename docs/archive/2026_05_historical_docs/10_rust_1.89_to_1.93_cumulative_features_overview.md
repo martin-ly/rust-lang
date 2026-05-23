@@ -122,7 +122,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! Rust 1.89→1.93 累积特性使用示例
 
 use std::collections::VecDeque;

@@ -205,7 +205,7 @@ fn lifetime_erasure() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 过程宏示例
 use proc_macro::TokenStream;
 

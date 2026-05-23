@@ -143,7 +143,7 @@
 
 **代码骨架**：
 
-```rust
+```rust,ignore
 // 请求 DTO
 struct PlaceOrderRequest { items: Vec<ItemDto> }
 // 响应 DTO

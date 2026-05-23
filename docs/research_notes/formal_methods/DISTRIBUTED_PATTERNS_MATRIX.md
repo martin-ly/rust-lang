@@ -156,7 +156,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Saga协调器
 pub struct Saga {
     steps: Vec<SagaStep>,
@@ -211,7 +211,7 @@ saga.execute().await?;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 use std::time::{Duration, Instant};
 
@@ -277,7 +277,7 @@ impl CircuitBreaker {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use backoff::{ExponentialBackoff, future::retry};
 
 pub async fn with_retry<F, Fut, T>(operation: F) -> Result<T, Error>
@@ -333,7 +333,7 @@ let result = with_retry(|| async {
 ## 推荐技术栈
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 完整分布式Rust栈
 [dependencies]
 # Web框架

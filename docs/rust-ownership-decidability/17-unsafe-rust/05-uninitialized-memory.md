@@ -50,7 +50,7 @@
 
 未初始化内存是指**已分配但未写入值**的内存。在 Rust 中，读取未初始化内存是**立即 UB**。
 
-```rust
+```rust,ignore
 // ❌ 错误：读取未初始化变量
 let x: i32;
 println!("{}", x);  // 编译错误！
@@ -59,7 +59,7 @@ println!("{}", x);  // 编译错误！
 ### 1.2 什么时候会遇到
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 场景 1: 大块内存分配
 let mut buffer: [u8; 1024];  // 未初始化
 
@@ -130,7 +130,7 @@ assert_eq!(init, 42);
 ### 3.2 批量初始化模式
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn initialize_array<T, F>(len: usize, mut f: F) -> Vec<T>
 where
     F: FnMut(usize) -> T,
@@ -160,7 +160,7 @@ where
 ### 4.1 类型定义
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[repr(transparent)]
 pub union MaybeUninit<T> {
     uninit: (),
@@ -177,7 +177,7 @@ pub union MaybeUninit<T> {
 ### 4.2 核心方法
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 impl<T> MaybeUninit<T> {
     // 创建未初始化
     pub const fn uninit() -> Self;
@@ -201,7 +201,7 @@ impl<T> MaybeUninit<T> {
 ### 4.3 读写操作
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 let mut slot: MaybeUninit<String> = MaybeUninit::uninit();
@@ -226,7 +226,7 @@ let s = unsafe { slot.assume_init() };
 ### 5.1 实现 ArrayVec
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub struct ArrayVec<T, const N: usize> {
     data: [MaybeUninit<T>; N],
     len: usize,
@@ -323,7 +323,7 @@ impl Drop for FfiBuffer {
 ### 6.1 错误：批量 assume_init
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 危险：假设整个数组已初始化
 let mut arr: [MaybeUninit<String>; 10] =
     unsafe { MaybeUninit::uninit().assume_init() };
@@ -340,7 +340,7 @@ for elem in &arr {
 ### 6.2 错误：忘记析构
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ❌ 内存泄漏
 type BoxMaybe<T> = Box<MaybeUninit<T>>;
 
@@ -351,7 +351,7 @@ let b: BoxMaybe<String> = Box::new(MaybeUninit::new(String::from("hello")));
 ### 6.3 正确检查清单
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 unsafe {
     // ✅ 检查 1：确保已写入
     assert!(!ptr.is_null());

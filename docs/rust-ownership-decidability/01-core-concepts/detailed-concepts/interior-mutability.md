@@ -136,7 +136,7 @@ let r: &T = &x
 
 **定义 2.1** (`Cell<T>`): `Cell<T>` 是一种提供内部可变性的容器，通过值的**移动**实现修改，适用于实现 `Copy` 的类型。
 
-```rust
+```rust,ignore
 pub struct Cell<T: ?Sized> {
     value: UnsafeCell<T>,
 }
@@ -211,7 +211,7 @@ let string_cell: Cell<String> = Cell::new(String::from("hello"));
 
 `Cell<T>` 故意不实现 `Sync`，防止多线程同时访问：
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 use std::sync::Arc;
 use std::thread;
@@ -326,7 +326,7 @@ fn dfs(node: &Rc<Node>) {
 
 **定义 3.1** (`RefCell<T>`): `RefCell<T>` 提供运行时借用检查的内部可变性，允许在单线程环境中获取可变或不可变引用。
 
-```rust
+```rust,ignore
 pub struct RefCell<T: ?Sized> {
     borrow: Cell<BorrowFlag>,
     value: UnsafeCell<T>,
@@ -479,7 +479,7 @@ fn leak_example() {
 
 **解决方案**: 缩小借用范围
 
-```rust
+```rust,ignore
 fn fixed_example() {
     let cell = RefCell::new(5);
 
@@ -724,7 +724,7 @@ fn recursive_call(cell: &RefCell<i32>) {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 fn recursive_call_fixed(cell: &RefCell<i32>) {
     let should_recurse = {
         let mut borrow = cell.borrow_mut();
@@ -767,7 +767,7 @@ fn deadlock_example() {
 
 **解决方案**: 统一加锁顺序
 
-```rust
+```rust,ignore
 fn safe_locking() {
     let m1 = Arc::new(Mutex::new(0));
     let m2 = Arc::new(Mutex::new(0));
@@ -798,7 +798,7 @@ fn slow_with_lock() {
 
 **解决方案**: 缩小锁的作用域
 
-```rust
+```rust,ignore
 fn fast_with_lock() {
     let data = Mutex::new(vec![1, 2, 3]);
 
@@ -816,7 +816,7 @@ fn fast_with_lock() {
 ### 陷阱 4: 在 async 中使用 Mutex
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：标准库 Mutex 在 async 中可能导致线程阻塞
 async fn bad_async() {
     let mutex = std::sync::Mutex::new(0);
@@ -1044,7 +1044,7 @@ func main() {
 ### 7.2 基准测试
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::cell::RefCell;
 use std::sync::{Arc, Mutex};
@@ -1092,7 +1092,7 @@ atomic_increment     time: [2 ns]       # 原子指令，跨核同步
 ### 7.3 缓存影响
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 坏的访问模式：缓存行乒乓
 fn cache_unfriendly(data: &[AtomicUsize]) {
     for _ in 0..1000 {
@@ -1115,7 +1115,7 @@ fn cache_friendly(data: &[AtomicUsize]) {
 ### 7.4 内存布局
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // RefCell<T> 的内存开销
 struct RefCell<T> {
     borrow: Cell<isize>,  // 8 bytes（借用计数）
@@ -1138,7 +1138,7 @@ struct Mutex<T> {
 ### 8.1 自定义内部可变性类型
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::cell::UnsafeCell;
 
 // 简化的单线程计数器
@@ -1239,7 +1239,7 @@ impl<T> LockFreeStack<T> {
 ### 8.4 作用域线程模式
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 use crossbeam::scope;  // crossbeam crate
 

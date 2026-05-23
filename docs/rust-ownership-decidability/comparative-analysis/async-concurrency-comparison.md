@@ -134,7 +134,7 @@ $$
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Rust async/await
 async fn process_user(user_id: u64) -> Result<Invoice, Error> {
     let user = fetch_user(user_id).await?;
@@ -215,7 +215,7 @@ $$
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Future组合子
 fetch_user(id)
     .and_then(|user| fetch_orders(user.id))
@@ -287,7 +287,7 @@ $$
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // Rust Actor (actix)
 impl Handler<Message> for MyActor {
     type Result = Response;
@@ -363,7 +363,7 @@ $$
 ### 5.2 Rust Async Channels
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // Rust async channels (tokio)
 let (tx, rx) = tokio::sync::mpsc::channel(10);
 
@@ -432,7 +432,7 @@ $$
 ### 6.2 Async模型
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // Async任务
 tokio::spawn(async {
     // 协作式执行
@@ -622,7 +622,7 @@ Rust Async:
 ### 9.3 混合策略
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // Rust: 线程池 + Async执行器
 #[tokio::main]
 async fn main() {

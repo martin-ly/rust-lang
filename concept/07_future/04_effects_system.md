@@ -78,6 +78,7 @@ mindmap
 | **状态** | 修改堆/全局状态 | `&mut T` | `fn foo() -> i32 effect State` |
 
 ### 1.2 代数效应（Algebraic Effects）vs 类型效应（Type Effects）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -119,6 +120,7 @@ Rust 尚未引入统一的 `effect` 关键字，但**已经通过不同机制实
 | **泛型约束** | `where T: Send` | 线程安全约束 | Trait bound | 泛型参数多态 |
 
 ### 2.2 `async` 作为效果的原型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -142,6 +144,7 @@ fn fetch() -> Data effect Async { ... }
 ```
 
 ### 2.3 效果状态转换图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -225,6 +228,7 @@ where
 | **Rust（理想）** | 类型效应 | ⭐⭐⭐⭐ 强 | 零 | 统一语法，保持零成本 |
 
 ### 3.2 效果模型谱系图
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -267,6 +271,7 @@ graph TD
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.2 为什么 Rust 拒绝 Monad？
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -322,6 +327,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 ```
 
 ### 4.2 与 Trait 系统的整合挑战
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -341,6 +347,7 @@ fn block_on<T>(f: impl Future<Output = T>) -> T effects {} {
 ```
 
 ### 4.2 效果传播时序图
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -410,6 +417,7 @@ let iter = gen {
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 5.1 语言团队已知讨论（公开信息）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 时间 | 事件 | 状态 |
@@ -423,6 +431,7 @@ let iter = gen {
 | 202? | 统一 `effect` 关键字 | 🔮 远期可能 |
 
 ### 5.2 开放问题（Research Questions）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -444,6 +453,7 @@ Q4: 与现有生态的兼容性？
 ```
 
 ### 5.3 概念预研 → 工业落地的条件
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -644,4 +654,3 @@ Q4: 与现有生态的兼容性？
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

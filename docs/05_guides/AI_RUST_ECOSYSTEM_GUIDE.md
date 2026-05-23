@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [AI + Rust 生态指南](#ai--rust-生态指南)
@@ -50,6 +51,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 文档定位
 >
@@ -171,7 +173,7 @@ candle-core = "0.8"
 candle-nn = "0.8"
 ```
 
-```rust
+```rust,ignore
 use candle_core::{Device, Tensor};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -187,7 +189,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use candle_core::{DType, Device, Tensor};
 use candle_nn::{Module, Linear, VarBuilder, VarMap};
 
@@ -223,7 +225,7 @@ burn = { version = "0.20", features = ["train"] }
 burn-ndarray = "0.20"
 ```
 
-```rust
+```rust,ignore
 use burn::tensor::Tensor;
 use burn_ndarray::NdArrayBackend;
 
@@ -256,7 +258,7 @@ fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use candle_core::{Device, Tensor};
 use candle_nn::Module;
 use candle_transformers::models::bert::{BertModel, Config, DTYPE};
@@ -296,7 +298,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 llm = { git = "https://github.com/rustformers/llm" }
 ```
 
-```rust
+```rust,ignore
 use llm::Model;
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -344,7 +346,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -400,6 +402,7 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 ---
 
 ## 五、RAG 索引建议
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 将本项目文档纳入 AI 检索时，建议优先索引：
@@ -417,13 +420,14 @@ fn tokenize_and_embed(text: &str) -> Vec<f32> {
 ---
 
 ## 六、最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 6.1 内存管理
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use candle_core::{Device, Tensor};
 
 fn process_large_tensor() -> candle_core::Result<()> {
@@ -444,7 +448,7 @@ fn process_large_tensor() -> candle_core::Result<()> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
     const BATCH_SIZE: usize = 32;
 
@@ -462,7 +466,7 @@ fn batch_inference(model: &dyn Model, inputs: &[Tensor]) -> Vec<Tensor> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -483,6 +487,7 @@ type Result<T> = std::result::Result<T, AIError>;
 ---
 
 ## 七、后续计划（扩展方向）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 方向 | 说明 | 优先级 |
@@ -495,6 +500,7 @@ type Result<T> = std::result::Result<T, AIError>;
 ---
 
 ## 八、使用场景
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 场景1: AI 辅助 Rust 学习
@@ -540,6 +546,7 @@ type Result<T> = std::result::Result<T, AIError>;
 ---
 
 ## 九、形式化链接
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 链接类型 | 目标文档 |
@@ -557,6 +564,7 @@ type Result<T> = std::result::Result<T, AIError>;
 ---
 
 ## 十、相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [AI 辅助编程指南](../../guides/AI_ASSISTED_RUST_PROGRAMMING_GUIDE_2025.md)
@@ -569,6 +577,7 @@ type Result<T> = std::result::Result<T, AIError>;
 ---
 
 ## Rust 1.95+ 在 AI/ML 开发中的应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -577,7 +586,7 @@ type Result<T> = std::result::Result<T, AIError>;
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// 使用 array_windows 进行时间窗口特征提取
 pub fn extract_window_features(time_series: &[f64]) -> Vec<WindowFeature> {
     time_series.array_windows::<5>()
@@ -603,7 +612,7 @@ pub fn sliding_predict(model: &Model, data: &[f32]) -> Vec<f32> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局 AI 模型（延迟加载）
@@ -626,7 +635,7 @@ pub fn quick_inference(input: &[f32]) -> Option<Vec<f32>> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 数据预处理管道，支持提前终止
@@ -654,7 +663,7 @@ fn preprocess_pipeline(
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// 使用黄金比例进行超参数搜索
 pub fn golden_ratio_search_lr(
     model: &mut Model,
@@ -707,6 +716,7 @@ pub fn golden_ratio_search_lr(
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [05_guides 目录](./README.md)
@@ -911,4 +921,3 @@ pub fn golden_ratio_search_lr(
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

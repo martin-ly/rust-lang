@@ -118,7 +118,7 @@ fn factorial(n: u32) -> u32 {
 
 Rust 代码表示的特殊挑战：
 
-```rust
+```rust,ignore
 // Rust 特有的语义特征
 
 // 1. 所有权信息
@@ -285,7 +285,7 @@ fn to_uppercase_inplace(s: &mut String) {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // LLM 可能生成的有问题的代码
 
 // 问题 1：所有权错误
@@ -313,7 +313,7 @@ unsafe fn bad_unsafe(ptr: *mut i32) -> i32 {
 
 使用 LLM 从代码中推断规范：
 
-```rust
+```rust,ignore
 // 规范推断示例
 
 // 输入代码
@@ -354,7 +354,7 @@ pub fn binary_search(/* ... */) -> Option<usize> {
 
 LLM 辅助的 Rust 代码补全：
 
-```rust
+```rust,ignore
 // 代码补全场景
 
 fn process_user_input(input: &str) -> Result<(), Error> {
@@ -380,7 +380,7 @@ fn process_user_input(input: &str) -> Result<(), Error> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 需要理解所有权的补全
 
 fn ownership_completion() {
@@ -409,7 +409,7 @@ fn ownership_completion() {
 
 LLM 辅助验证工具的使用：
 
-```rust
+```rust,ignore
 // 验证辅助示例
 
 #[kani::proof]
@@ -458,7 +458,7 @@ fn verify_function() {
 证明完成 ✓
 ```
 
-```rust
+```rust,ignore
 // 对应的 Rust 验证证明搜索
 
 // 目标：证明 Vec::push 保持非空性
@@ -478,7 +478,7 @@ pub fn push(&mut self, value: T) {
 
 从规范自动合成证明：
 
-```rust
+```rust,ignore
 // 证明合成示例
 
 // 规范
@@ -511,7 +511,7 @@ fn sum_to_n(n: u32) -> u32 {
 
 自动修复失败的证明：
 
-```rust
+```rust,ignore
 // 失败的证明示例
 
 #[proof]
@@ -619,7 +619,7 @@ fn find_max(arr: &[i32]) -> Option<i32> {
 
 自动推断数据结构不变量：
 
-```rust
+```rust,ignore
 // 数据结构不变量合成
 
 pub struct BinaryHeap<T> {
@@ -647,7 +647,7 @@ impl<T: Ord> BinaryHeap<T> {
 
 并发程序的复杂不变量合成：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 pub struct LockFreeStack<T> {
@@ -722,7 +722,7 @@ class InvariantSynthesizer(nn.Module):
 
 AI 辅助的借用检查错误诊断：
 
-```rust
+```rust,ignore
 // 原始错误代码
 fn example() {
     let mut x = String::from("hello");
@@ -758,7 +758,7 @@ fn example() {
 
 分析验证工具的错误报告：
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn verify_add() {
     let a: u32 = kani::any();
@@ -790,7 +790,7 @@ fn verify_add() {
 
 自动生成代码修复：
 
-```rust
+```rust,ignore
 // 问题代码
 fn parse_number(s: &str) -> i32 {
     s.parse().unwrap() // 可能 panic
@@ -957,7 +957,7 @@ fn modified(x: u32, y: u32) -> u32 {
 
 根据代码特征自适应选择验证策略：
 
-```rust
+```rust,ignore
 // AI 自适应验证决策
 
 fn adaptive_verification(code: &RustCode) -> VerificationPlan {
@@ -1020,7 +1020,7 @@ fn adaptive_verification(code: &RustCode) -> VerificationPlan {
 
 专门用于验证的 AI 工具：
 
-```rust
+```rust,ignore
 // 专用验证 AI 的功能示例
 
 // 1. RustVerifAI (概念)

@@ -50,7 +50,7 @@ c02_type_system = { path = "../crates/c02_type_system" }
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::smart_pointers::BoxExample;
 use c02_type_system::collections::HashMapExample;
 
@@ -138,7 +138,7 @@ fn main() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use common::Result;
 
 fn do_something() -> Result<i32> {
@@ -151,7 +151,7 @@ fn do_something() -> Result<i32> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tokio;
 
 #[tokio::main]
@@ -164,7 +164,7 @@ async fn main() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 

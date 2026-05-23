@@ -137,7 +137,7 @@ int main() {
 
 **Rust 版本 - 编译期阻止:**
 
-```rust
+```rust,ignore
 // 尝试返回局部变量引用 - 编译错误
 fn get_greeting() -> &String {
     let msg = String::from("Hello, World!");
@@ -248,7 +248,7 @@ int main() {
 
 **Rust 版本 - Option 强制处理:**
 
-```rust
+```rust,ignore
 fn find_user(id: i32) -> Option<String> {
     if id == 1 {
         Some(String::from("Alice"))
@@ -654,7 +654,7 @@ fn main() {
 
 **Send/Sync 定义:**
 
-```rust
+```rust,ignore
 // Send: 类型可以安全地转移到另一个线程
 pub unsafe auto trait Send {
     // 空 trait，仅作为标记

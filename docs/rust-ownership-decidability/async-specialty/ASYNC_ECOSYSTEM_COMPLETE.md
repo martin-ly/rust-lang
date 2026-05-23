@@ -330,7 +330,7 @@
 ### 启动模板
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 嵌入式 (Embassy)
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {

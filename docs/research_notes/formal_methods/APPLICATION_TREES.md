@@ -294,7 +294,7 @@ Web应用
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Bevy风格ECS
 #[derive(Component)]
 struct Position(Vec3);

@@ -145,7 +145,7 @@ spawn 的所有权规则:
   返回值: T: Send，才能通过 JoinHandle 传递回父线程
 ```
 
-```rust
+```rust,ignore
 // 合法：String 实现了 Send
 thread::spawn(|| {
     let s = String::from("hello");
@@ -186,7 +186,7 @@ thread::spawn(|| {
 ### 4.2 协作式 vs 抢占式调度
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 协作式让出 CPU
 thread::yield_now();
 

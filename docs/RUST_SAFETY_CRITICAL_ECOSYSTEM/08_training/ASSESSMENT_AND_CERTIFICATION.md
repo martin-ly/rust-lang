@@ -288,7 +288,7 @@ Level 3: Center of Excellence
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 问题1: 修复编译错误
 fn main() {
     let s1 = String::from("hello");
@@ -321,7 +321,7 @@ fn process(data: &[u8]) -> Vec<u8> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 问题1: 实现线程安全计数器
 use std::sync::atomic::{AtomicU32, Ordering};
 

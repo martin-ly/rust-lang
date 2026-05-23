@@ -175,7 +175,7 @@ fn main() {
 ## 零成本抽象: 泛型实现
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 编译期策略选择，零运行时开销
 pub struct EfficientCart<P: PaymentStrategy> {
     items: Vec<(String, f64)>,

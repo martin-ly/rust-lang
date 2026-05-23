@@ -381,7 +381,7 @@ $$\text{Inv}[F] \Leftrightarrow \forall S, T. (S <: T \land S \neq T) \Rightarro
 
 **反例代码**（伪代码，实际 Rust 会拒绝）：
 
-```rust
+```rust,ignore
 // 假设 &mut T 协变，则 &mut &'static str <: &mut &'a str
 fn evil(mut r: &mut &'a str) {
     let short: &str = "short";
@@ -465,7 +465,7 @@ fn evil(mut r: &mut &'a str) {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn covariant_example() {
     let long: &'static str = "hello";
     let short: &'a str = long;  // 协变：'static : 'a
@@ -531,7 +531,7 @@ fn invariant_example() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 struct CovariantWrapper<T> {

@@ -38,7 +38,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 结构体使用 PascalCase
 struct UserAccount { }
 
@@ -54,7 +54,7 @@ fn process<T, U>(data: T) -> U { }
 
 ### 代码组织
 
-```rust
+```rust,ignore
 // 1. 按功能分组相关代码
 // 2. 使用模块清晰分离关注点
 // 3. 优先使用组合而非继承
@@ -73,7 +73,7 @@ mod parser {
 
 ### 优先使用 Result 而非 panic
 
-```rust
+```rust,ignore
 // ✅ 好的做法
 fn read_config(path: &str) -> Result<Config, io::Error> {
     let content = fs::read_to_string(path)?;
@@ -86,7 +86,7 @@ let config = read_config("config.toml").unwrap();
 
 ### 自定义错误类型
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -130,7 +130,7 @@ struct Optimized {
 
 ### Send 和 Sync
 
-```rust
+```rust,ignore
 // 自动实现 Send 和 Sync 的类型是线程安全的
 // 手动实现需要 unsafe
 
@@ -179,7 +179,7 @@ mod tests {
 
 ### 文档测试
 
-```rust
+```rust,ignore
 /// 计算两数之和
 /// ```
 /// use mycrate::add;

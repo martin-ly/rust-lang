@@ -309,7 +309,7 @@ $$
 ### 基础实现
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use tokio::sync::{watch, Notify};
@@ -440,7 +440,7 @@ impl OrderProcessor {
 ### 组合里程碑
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 使用 watch 通道的实现
 pub struct WatchMilestone<T: Clone> {
     tx: watch::Sender<Option<T>>,
@@ -534,7 +534,7 @@ pub async fn milestone_example() {
 ### 带超时的里程碑
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 /// 带超时的里程碑控制器

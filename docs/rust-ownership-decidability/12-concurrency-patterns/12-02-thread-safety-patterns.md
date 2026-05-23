@@ -61,7 +61,7 @@
 **定义 1.1.2 (竞态条件)**
 竞态条件发生在程序的行为依赖于事件或线程的相对时序时。与数据竞争不同，竞态条件可能发生在数据竞争自由的程序中。
 
-```rust
+```rust,ignore
 // 竞态条件示例：检查-操作（TOCTOU）
 use std::sync::Arc;
 use std::thread;
@@ -126,7 +126,7 @@ T: Send + Sync     ⇔ Rc<T>: !Send ∧ !Sync (因为引用计数非原子)
 
 Rust 通过类型系统在编译时防止数据竞争：
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -156,7 +156,7 @@ fn data_race_prevention() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 pub unsafe auto trait Send {
     // 空 trait，仅用于标记
 }
@@ -171,7 +171,7 @@ pub unsafe auto trait Send {
 
 **手动实现示例**:
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::marker::PhantomData;
 
@@ -213,7 +213,7 @@ unsafe impl Sync for ThreadSafeHandle {}
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 pub unsafe auto trait Sync {
     // 空 trait，仅用于标记
 }
@@ -238,7 +238,7 @@ T: Sync ⇔ &T: Send
 - `Cell<T>`（内部可变性，非线程安全）
 - `RefCell<T>`（运行时借用检查，非线程安全）
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 use std::sync::Arc;
 use std::thread;
@@ -281,7 +281,7 @@ fn sync_demonstration() {
 
 Rust 编译器自动推导 Send 和 Sync：
 
-```rust
+```rust,ignore
 // 自动 Send + Sync
 struct Point { x: i32, y: i32 }
 
@@ -469,7 +469,7 @@ fn refcell_single_thread() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, MutexGuard};
 use std::thread;
 use std::time::Duration;
@@ -594,7 +594,7 @@ impl ConfigManager {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, RwLock, RwLockReadGuard, RwLockWriteGuard};
 use std::collections::HashMap;
 
@@ -705,7 +705,7 @@ impl<K: Eq + std::hash::Hash + Clone, V: Clone> FastConcurrentCache<K, V> {
 
 Rust 1.94 为 `LazyLock` 和 `LazyCell` 引入了新的访问方法，简化了线程安全延迟初始化：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -765,7 +765,7 @@ fn scoped_with_lazy() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::thread;
 
@@ -962,7 +962,7 @@ impl<T> SynchronizedData<T> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::time::{Duration, Instant};
 use std::sync::{Arc, Mutex, RwLock};
 use std::sync::atomic::{AtomicUsize, Ordering};

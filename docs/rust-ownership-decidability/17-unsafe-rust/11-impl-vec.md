@@ -108,7 +108,7 @@ impl<T> MyVec<T> {
 ### 2.2 Push 操作
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 impl<T> MyVec<T> {
     pub fn push(&mut self, value: T) {
         // 检查容量
@@ -166,7 +166,7 @@ impl<T> MyVec<T> {
 ### 2.3 Pop 操作
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 impl<T> MyVec<T> {
     pub fn pop(&mut self) -> Option<T> {
         if self.len == 0 {
@@ -186,7 +186,7 @@ impl<T> MyVec<T> {
 ### 2.4 索引访问
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 impl<T> Index<usize> for MyVec<T> {
     type Output = T;
 
@@ -209,7 +209,7 @@ impl<T> IndexMut<usize> for MyVec<T> {
 ## 3. Drop 实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 impl<T> Drop for MyVec<T> {
     fn drop(&mut self) {
         if self.cap == 0 {
@@ -237,7 +237,7 @@ impl<T> Drop for MyVec<T> {
 ## 4. 迭代器实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub struct IntoIter<T> {
     ptr: NonNull<T>,
     cap: usize,

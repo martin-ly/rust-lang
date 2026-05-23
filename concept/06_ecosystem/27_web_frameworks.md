@@ -10,6 +10,7 @@
 > **来源**: [Axum](https://docs.rs/axum/latest/axum/) · [Actix-web](https://actix.rs/) · [Rocket](https://rocket.rs/) · [Poem](https://docs.rs/poem/latest/poem/) · [Tokio](https://tokio.rs/) · [TechEmpower Benchmarks](https://www.techempower.com/benchmarks/) · [RFC 2394](https://rust-lang.github.io/rfcs/2394-async_await.html)
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust Web 框架对比与选型](#rust-web-框架对比与选型)
@@ -41,13 +42,16 @@
   - [八、常见陷阱](#八常见陷阱)
   - [九、来源与延伸阅读](#九来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
 ## 一、权威定义与概述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1.1 Web 框架的职能定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Wikipedia: Web framework]** A web framework (WF) or web application framework (WAF) is a software framework that is designed to support the development of web applications including web services, web resources, and web APIs.
@@ -76,6 +80,7 @@ Web 框架职能分层:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.2 Rust Web 框架演进史
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -110,6 +115,7 @@ Rust Web 框架演进:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.3 框架架构生态图
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```mermaid
@@ -169,6 +175,7 @@ graph TD
 ---
 
 ## 二、框架核心架构对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 2.1 Axum：Tokio 生态的原生扩展
@@ -380,9 +387,11 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 ---
 
 ## 三、异步运行时集成对比
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 3.1 运行时绑定策略
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -416,6 +425,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 > **关键洞察**: **所有主流 Rust Web 框架均绑定 Tokio**——这不是偶然，而是生态收敛的结果。Tokio 的 M:N 调度、工作窃取线程池和丰富的生态（tonic、hyper、axum）使其成为事实标准。[来源: Tokio docs] [来源: 💡 原创分析]
 
 ### 3.2 运行时兼容性矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **维度** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
@@ -432,6 +442,7 @@ Server::new(TcpListener::bind("0.0.0.0:3000"))
 ---
 
 ## 四、中间件机制深度对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 中间件模型分类
@@ -489,6 +500,7 @@ fn main() {
 ```
 
 ### 4.2 中间件对比矩阵
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | **中间件能力** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
@@ -509,6 +521,7 @@ fn main() {
 ---
 
 ## 五、性能基准与资源效率
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 5.1 TechEmpower 基准解读
@@ -549,6 +562,7 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 > **性能洞察**: **Rust Web 框架的整体性能远超 GC 语言**——即使是最"慢"的 Rocket，也数倍于 Go 和 Node.js。在 Rust 内部选择时，性能差异通常不是首要决策因素。[来源: TechEmpower] [来源: 💡 原创分析]
 
 ### 5.2 资源占用对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **维度** | **Axum** | **Actix-web** | **Rocket** | **Poem** |
@@ -565,9 +579,11 @@ TechEmpower Round 22+ 解读（JSON 序列化 / 单次查询 / 多次查询）:
 ---
 
 ## 六、选型决策框架
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 6.1 "选哪个框架？" 决策树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -601,6 +617,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 6.2 场景化推荐矩阵
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | **场景** | **推荐框架** | **理由** |
@@ -617,9 +634,11 @@ graph TD
 ---
 
 ## 七、反命题与边界分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 7.1 反命题："Axum 总是最佳选择"
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -648,6 +667,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 7.2 反命题："Web 框架性能决定一切"
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -683,6 +703,7 @@ graph TD
 ---
 
 ## 八、常见陷阱
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -730,6 +751,7 @@ graph TD
 ---
 
 ## 九、来源与延伸阅读
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 来源 | 可信度 | 说明 |
@@ -750,6 +772,7 @@ graph TD
 ---
 
 ## 相关概念文件
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Async/Await](../03_advanced/02_async.md) — 异步编程基础
@@ -853,4 +876,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

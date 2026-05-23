@@ -93,6 +93,7 @@ fn test_error_paths() {
 
 /// 测试资源耗尽情况
 #[test]
+#[cfg_attr(miri, ignore)]
 fn test_resource_exhaustion() {
     // 测试大量数据
     let very_large_size = 1000000;

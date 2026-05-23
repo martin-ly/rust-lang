@@ -124,7 +124,7 @@ mod tests {
 <details>
 <summary>点击展开</summary>
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -506,7 +506,7 @@ mod tests {
 
 **目标**: 实现一个带有回调的解析器，处理复杂生命周期。
 
-```rust
+```rust,ignore
 /// 解析事件
 type ParseEvent<'a> = &'a str;
 
@@ -598,7 +598,7 @@ mod tests {
 
 为练习 2 中的 `MyRc<T>` 正确实现 `Send` 和 `Sync` trait。
 
-```rust
+```rust,ignore
 // TODO: 在什么条件下 MyRc<T> 是 Send？
 // TODO: 在什么条件下 MyRc<T> 是 Sync？
 // TODO: MyWeak<T> 呢？

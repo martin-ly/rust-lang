@@ -1,4 +1,5 @@
 # Rust Edition 2024 完整指南
+> **相关概念**: [Edition](../../concept/06_ecosystem/01_toolchain.md)
 
 > **Bloom 层级**: 理解
 > **版本**: Edition 2024
@@ -203,7 +204,7 @@ cargo test
 
 #### 3.1 需要修改的代码
 
-```rust
+```rust,ignore
 // Rust 2021 - 合法
 struct gen;  // 名为 gen 的类型
 fn gen() {}  // 名为 gen 的函数
@@ -231,7 +232,7 @@ cargo fix --edition
 
 宏匹配规则对尾逗号的处理更一致。
 
-```rust
+```rust,ignore
 // Rust 2021 - 某些情况下不匹配
 macro_rules! example {
     ($e:expr,)* => {};  // 不匹配尾逗号
@@ -249,7 +250,7 @@ macro_rules! example {
 
 `impl Trait` 的捕获规则更加精确。
 
-```rust
+```rust,ignore
 // Rust 2021 - 捕获所有生命周期
 fn foo(x: &i32) -> impl Fn() -> &i32 {
     || x  // 捕获 x 的生命周期
@@ -298,7 +299,7 @@ rust-version = "1.82.0"
 
 #### 步骤 4：处理手动变更
 
-```rust
+```rust,ignore
 // 前：可能使用 gen 作为变量名
 let gen = || { /* ... */ };
 
@@ -425,7 +426,7 @@ macro_rules! foo {
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 // lib.rs - Rust 2021
 pub struct gen<T>(pub T);
 
@@ -495,7 +496,7 @@ C++ 的"永远向后兼容"导致语言复杂度累积（如 `auto` 的语义变
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Rust 1.95+ 预览
 fn fibonacci() -> impl Iterator<Item = u64> {
     gen {
@@ -545,7 +546,7 @@ fn fibonacci() -> impl Iterator<Item = u64> {
 
 **题 1**: 以下代码在 Edition 2024 下编译失败。请修复：
 
-```rust
+```rust,ignore
 fn make_closure(x: &i32) -> impl Fn() -> &i32 {
     || x
 }
@@ -554,7 +555,7 @@ fn make_closure(x: &i32) -> impl Fn() -> &i32 {
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 fn make_closure(x: &i32) -> impl Fn() -> &i32 + use<'_> {
     || x
 }

@@ -61,7 +61,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 显式标注
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
@@ -84,19 +84,19 @@ where
 
 1. **每个引用参数有独立生命周期**
 
-   ```rust
+   ```rust,ignore
    fn foo(x: &i32, y: &i32)  // 隐式: fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
    ```
 
 2. **单一输入生命周期应用到输出**
 
-   ```rust
+   ```rust,ignore
    fn foo(x: &i32) -> &i32   // 隐式: fn foo<'a>(x: &'a i32) -> &'a i32
    ```
 
 3. **`&self`的生命周期应用到输出**
 
-   ```rust
+   ```rust,ignore
    fn foo(&self) -> &T       // 隐式: fn foo<'a>(&'a self) -> &'a T
    fn foo(&self, x: &T) -> &T  // 规则1+3: fn foo<'a, 'b>(&'a self, x: &'b T) -> &'a T
    ```
@@ -190,7 +190,7 @@ fn identity<'a>(x: &'a str) -> &'a str {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 fn get_name<'a>(person: &'a Person) -> &'a str {
     &person.name
 }
@@ -226,7 +226,7 @@ fn choose<'a>(first: &'a str, second: &'a str, use_first: bool) -> &'a str {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 默认'static
 trait Trait {}
 Box<dyn Trait>           // Box<dyn Trait + 'static>
@@ -263,7 +263,7 @@ fn example() {
 ## 与泛型结合
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 泛型函数带生命周期
 fn process<'a, T>(data: &'a [T]) -> impl Iterator<Item = &'a T> {
     data.iter()
@@ -341,7 +341,7 @@ impl SelfReferential {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 'a: 'b  // 'a 至少和 'b 一样长（'a 包含 'b）
 T: 'a   // T 中所有引用至少存活 'a
 ```
@@ -375,7 +375,7 @@ T: 'a   // T 中所有引用至少存活 'a
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 省略前
 fn foo<'a>(x: &'a str) -> &'a str { x }
 
@@ -406,7 +406,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 impl<'a> Parser<'a> {
     fn input(&self) -> &'a str { self.input }
 }
@@ -416,7 +416,7 @@ impl<'a> Parser<'a> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
     // 返回与input关联的数据
 }
@@ -430,14 +430,14 @@ fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str {
 ### HRTB (高阶trait bound)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 F: for<'a> Fn(&'a str) -> &'a str
 ```
 
 ### 多重约束
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 trait Foo<'a, 'b>
 where
     'a: 'b,  // 'a 至少和 'b 一样长
@@ -453,7 +453,7 @@ where
 ### 错误1: 返回局部引用
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 fn bad() -> &str {
     let s = String::from("hello");
@@ -469,7 +469,7 @@ fn good() -> String {
 ### 错误2: 生命周期不匹配
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 fn longest(x: &str, y: &str) -> &str { ... }
 
@@ -529,7 +529,7 @@ struct OwnedData {
 ### 技巧2: 生命周期推断
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 大多数情况下不需要显式标注
 let r = &x;  // 编译器自动推断
 ```
@@ -537,7 +537,7 @@ let r = &x;  // 编译器自动推断
 ### 技巧3: 显式drop
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 {
     let r = &x;
     // 使用 r

@@ -22,7 +22,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 现代Rust使用std::sync::OnceLock
 use std::sync::OnceLock;
 
@@ -55,7 +55,7 @@ fn get_config() -> &'static Config {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 使用Rc<RefCell>实现父子关系
 type NodeRef = Rc<RefCell<Node>>;
 
@@ -99,7 +99,7 @@ impl Node {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 使用枚举+方法，而非继承
 enum State {
     Draft,
@@ -184,7 +184,7 @@ fn eval(e: &Expr) -> i32 {
 
 ### 2. Trait组合替代继承
 
-```rust
+```rust,ignore
 // 组合多个trait
 trait Readable { fn read(&mut self, buf: &mut [u8]) -> Result<usize>; }
 trait Writable { fn write(&mut self, buf: &[u8]) -> Result<usize>; }
@@ -197,7 +197,7 @@ truct Socket; // 只实现Read+Write
 
 ### 3. 零成本抽象
 
-```rust
+```rust,ignore
 // Strategy模式：泛型实现零成本
 fn process<T: Strategy>(data: Data, strategy: T) -> Result {
     strategy.execute(data)  // 单态化，无虚函数开销

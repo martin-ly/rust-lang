@@ -52,6 +52,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -91,7 +92,7 @@ fn check_vector_support() {
 
 **Rust 1.93** 稳定了 `system` ABI 的 C 风格可变参数函数声明。
 
-```rust
+```rust,ignore
 extern "system" {
     fn printf(format: *const u8, ...);
 }
@@ -188,6 +189,7 @@ extern "system" {
 ---
 
 ## 编译器
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### -C jump-tables=bool 稳定化
@@ -205,6 +207,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ## 平台支持
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### riscv64a23-unknown-linux-gnu Tier 2
@@ -226,6 +229,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ## 标准库
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### Copy 不再使用 specialization
@@ -275,6 +279,7 @@ rustc -C jump-tables=false main.rs  # 禁用跳转表
 ---
 
 ## Cargo
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### CARGO_CFG_DEBUG_ASSERTIONS
@@ -312,6 +317,7 @@ cargo clean --workspace
 ---
 
 ## Rustdoc
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 移除 #![doc(document_private_items)]
@@ -355,6 +361,7 @@ cargo clean --workspace
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 1.93 vs 1.92 对比](./05_rust_1.93_vs_1.92_comparison.md)
@@ -365,6 +372,7 @@ cargo clean --workspace
 ---
 
 ## 形式化规范与参考
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 类型系统形式化
@@ -398,9 +406,10 @@ cargo clean --workspace
 ---
 
 ## 完整特性代码示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 //! Rust 1.93 所有新特性完整示例
 
 // ============================================================================
@@ -696,6 +705,7 @@ mod tests {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -910,4 +920,3 @@ Rust 1.95+ 重要更新：
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

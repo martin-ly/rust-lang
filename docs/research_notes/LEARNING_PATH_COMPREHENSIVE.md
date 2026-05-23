@@ -362,7 +362,7 @@
 
 **问题1**: 为什么这段代码编译失败？
 
-```rust
+```rust,ignore
 let x = String::from("hello");
 let y = x;
 println!("{}", x);

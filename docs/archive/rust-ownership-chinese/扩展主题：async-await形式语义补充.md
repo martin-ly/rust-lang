@@ -40,7 +40,7 @@
 ### 1.1 Future类型定义
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -80,13 +80,13 @@ $$
 
 **转换规则**：
 
-```rust
+```rust,ignore
 async fn foo() -> T { body }
 ```
 
 转换为状态机：
 
-```rust
+```rust,ignore
 enum FooStateMachine {
     Start,
     State1 { /* 捕获的变量 */ },
@@ -139,7 +139,7 @@ $$
 
 **关键问题**：当异步函数挂起（await）时，局部变量的借用是否仍然有效？
 
-```rust
+```rust,ignore
 async fn example() {
     let data = vec![1, 2, 3];
     let ref = &data[0];  // 借用
@@ -171,7 +171,7 @@ $$
 
 **捕获规则**：
 
-```rust
+```rust,ignore
 async fn foo() {
     let x = String::new();
     let r = &x;  // 错误！
@@ -188,7 +188,7 @@ async fn foo() {
 
 **正确模式**：
 
-```rust
+```rust,ignore
 async fn foo() {
     let x = String::new();
     bar().await;
@@ -209,7 +209,7 @@ $$
 
 **Pin的必要性**：
 
-```rust
+```rust,ignore
 async fn self_referential_example() {
     let mut x = [1, 2, 3];
     let ptr = &mut x[0] as *mut i32;  // 指向局部数组
@@ -241,13 +241,13 @@ $$
 
 **跨线程Spawn要求**：
 
-```rust
+```rust,ignore
 tokio::spawn(async { ... });  // 要求 Future: Send
 ```
 
 **反例**：
 
-```rust
+```rust,ignore
 let rc = Rc::new(42);
 tokio::spawn(async move {
     println!("{}", *rc);  // 错误！Rc<!Send>
@@ -258,7 +258,7 @@ tokio::spawn(async move {
 
 **关键规则**：
 
-```rust
+```rust,ignore
 async fn hold_across_await() {
     let mutex = Mutex::new(42);
     let guard = mutex.lock().await;  // 获取锁
@@ -319,7 +319,7 @@ async fn example(x: i32) -> i32 {
 
 **展开后的状态机**：
 
-```rust
+```rust,ignore
 enum ExampleState {
     Start(i32),           // 初始状态，捕获参数x
     State1 { y: i32 },    // 执行let y = x + 1后
@@ -362,7 +362,7 @@ impl Future for ExampleState {
 
 ### 6.2 借用冲突示例分析
 
-```rust
+```rust,ignore
 async fn conflict_example() {
     let mut data = vec![1, 2, 3];
     let r1 = &mut data[0];
@@ -404,7 +404,7 @@ async fn conflict_example() {
 
 **Mutex在异步中的语义**：
 
-```rust
+```rust,ignore
 pub struct Mutex<T> {
     inner: std::sync::Mutex<T>,
 }

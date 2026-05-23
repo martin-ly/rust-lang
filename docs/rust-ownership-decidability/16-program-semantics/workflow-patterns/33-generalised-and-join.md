@@ -262,7 +262,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
@@ -385,7 +385,7 @@ impl<T: Send + 'static> CounterBasedANDJoin<T> {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 use thiserror::Error;
 
@@ -504,7 +504,7 @@ impl<T: Send + Clone + 'static> ResilientGeneralisedANDJoin<T> {
 ### 5.3 动态工作流完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use uuid::Uuid;
 
@@ -692,7 +692,7 @@ $$
 
 **场景**: BPMN引擎中动态创建子流程
 
-```rust
+```rust,ignore
 workflow:
   - parse incoming request
   - dynamically generate task list
@@ -705,7 +705,7 @@ workflow:
 
 **场景**: 根据数据特征动态选择处理步骤
 
-```rust
+```rust,ignore
 pipeline:
   - analyze data schema
   - dynamically create transformation branches
@@ -718,7 +718,7 @@ pipeline:
 
 **场景**: 根据可用插件动态创建执行分支
 
-```rust
+```rust,ignore
 plugins:
   - discover available plugins at runtime
   - create branch for each plugin
@@ -734,7 +734,7 @@ plugins:
 ### 9.1 带超时的广义AND合并
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct TimeoutGeneralisedANDJoin<T> {
     global_timeout: Duration,
     per_branch_timeout: Duration,
@@ -747,7 +747,7 @@ struct TimeoutGeneralisedANDJoin<T> {
 
 不同分支有不同权重要求：
 
-```rust
+```rust,ignore
 struct WeightedGenANDJoin<T> {
     branches: HashMap<BranchId, (f64, Box<dyn Fn() -> T>)>,
     threshold_weight: f64,

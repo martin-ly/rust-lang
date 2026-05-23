@@ -162,7 +162,7 @@ def parallel_map(func, data, workers=4):
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Rust 不需要这些优化技巧，原生就快
 
 // 向量化可以使用 SIMD
@@ -235,7 +235,7 @@ MyClass.method = new_method
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Rust：编译期捕获所有类型错误
 fn process_data(data: &[HashMap<String, i32>]) -> Option<i32> {
     if data.is_empty() {
@@ -460,7 +460,7 @@ class NeuralNet(torch.nn.Module):
 
 Rust 的 ML 生态正在快速发展：
 
-```rust
+```rust,ignore
 // Rust ML 生态（发展中）
 
 // 1. Burn - 纯 Rust 深度学习框架
@@ -613,7 +613,7 @@ if __name__ == "__main__":
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use axum::{
     extract::{Path, State},
     http::StatusCode,
@@ -714,7 +714,7 @@ def process_data(file_path: str) -> pd.DataFrame:
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use polars::prelude::*;
 
 fn process_data(file_path: &str) -> Result<DataFrame, PolarsError> {
@@ -754,7 +754,7 @@ fn process_data(file_path: &str) -> Result<DataFrame, PolarsError> {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // Rust 代码（使用 PyO3）
 use pyo3::prelude::*;
 use numpy::PyArray1;
@@ -856,7 +856,7 @@ def compute_heavy(data: list[float]) -> float:
     return result
 ```
 
-```rust
+```rust,ignore
 // Rust 替换（快 50-100 倍）
 #[pyfunction]
 fn compute_heavy(data: Vec<f64>) -> f64 {

@@ -1227,7 +1227,7 @@ $$
 
 #### 6.1.3 生命周期建模
 
-```rust
+```rust,ignore
 // Vec 引用的生命周期约束
 fn get<'a, T>(v: &'a Vec<T>, i: usize) -> &'a T
 
@@ -1304,7 +1304,7 @@ HashMap<K,V> ≜ ∃n. {
 
 **插入** (insert):
 
-```rust
+```rust,ignore
 // 返回旧值 (如果有)
 fn insert(&mut self, k: K, v: V) -> Option<V>
 ```
@@ -1321,7 +1321,7 @@ $$
 
 **可变引用获取**:
 
-```rust
+```rust,ignore
 fn get_mut<'a>(&'a mut self, k: &K) -> Option<&'a mut V>
 ```
 
@@ -1349,7 +1349,7 @@ struct Ref<'a, T> {
 
 #### 6.4.2 生命周期约束
 
-```rust
+```rust,ignore
 fn longest<'a, 'b>(x: &'a str, y: &'b str) -> &'a str
 where
     'a: 'b,  // 'a 包含 'b
@@ -1370,7 +1370,7 @@ $$
 
 #### 6.4.3 生命周期省略规则
 
-```rust
+```rust,ignore
 // 省略前
 fn foo<'a>(x: &'a i32) -> &'a i32
 

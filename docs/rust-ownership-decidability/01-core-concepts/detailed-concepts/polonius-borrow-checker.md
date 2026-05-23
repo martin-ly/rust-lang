@@ -183,7 +183,7 @@ trait LendingIterator {
 
 **用途**:
 
-```rust
+```rust,ignore
 // 遍历行而不分配
 let lines = reader.lines();
 while let Some(line) = lines.next() {
@@ -197,7 +197,7 @@ while let Some(line) = lines.next() {
 
 **当前问题** (Pin API 的复杂性):
 
-```rust
+```rust,ignore
 // 现在：使用 Pin<Box<dyn Future>> 实现自引用
 async fn foo() {
     let local = 42;
@@ -345,7 +345,7 @@ fn example(x: &mut i32) {
 
 **示例 1: 条件返回**
 
-```rust
+```rust,ignore
 fn find_or_insert<'a>(
     map: &'a mut HashMap<String, String>,
     key: &str,
@@ -388,7 +388,7 @@ impl Buffer {
 
 **示例 3: 循环中的借用**
 
-```rust
+```rust,ignore
 fn process_queue(queue: &mut VecDeque<Item>) {
     while let Some(item) = queue.front() {
         if item.ready() {
@@ -407,7 +407,7 @@ fn process_queue(queue: &mut VecDeque<Item>) {
 ### 5.2 Polonius 接受的代码
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #![feature(polonius)]
 
 fn polonius_example(vec: &mut Vec<i32>) -> &i32 {
@@ -481,7 +481,7 @@ RefinedRust 前端:
 
 **EuroRust 2024 提案**:
 
-```rust
+```rust,ignore
 // 可能的语法: 'self 生命周期
 struct Parser<'input> {
     input: &'input str,

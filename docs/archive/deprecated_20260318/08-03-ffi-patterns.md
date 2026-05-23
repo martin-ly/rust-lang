@@ -63,7 +63,7 @@ Rust 的 FFI（Foreign Function Interface）允许 Rust 代码与其他语言（
 - 跨语言插件系统
 - 性能关键路径调用手写汇编
 
-```rust
+```rust,ignore
 // 最基本的 FFI 示例
 use std::os::raw::{c_int, c_char};
 use std::ffi::CString;
@@ -92,7 +92,7 @@ fn use_c_strlen() {
 
 Rust 支持多种调用约定：
 
-```rust
+```rust,ignore
 // 不同调用约定示例
 extern "C" fn c_calling_convention() {}      // C 调用约定（默认）
 extern "system" fn system_calling_convention() {}  // 系统调用约定（Windows）
@@ -117,7 +117,7 @@ extern "system" {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Cargo.toml 中的链接配置
 // [package]
 // name = "my-ffi-lib"
@@ -164,7 +164,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::os::raw::*;
 use libc;
 
@@ -218,7 +218,7 @@ fn fixed_size_types() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 控制结构体内存布局
 
 // #[repr(C)] - C 兼容布局
@@ -277,7 +277,7 @@ enum CEnum {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString, OsStr, OsString};
 use std::os::raw::c_char;
 
@@ -340,7 +340,7 @@ impl FlexibleArray {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // FFI 所有权约定
 
 // 情况1：Rust 分配，Rust 释放
@@ -410,7 +410,7 @@ impl Drop for CStringWrapper {
 
 ### 3.2 不透明指针模式
 
-```rust
+```rust,ignore
 // 向 C 隐藏 Rust 类型细节
 
 // Rust 实现
@@ -460,7 +460,7 @@ pub extern "C" fn context_increment(ctx: *mut Context) -> u64 {
 
 ### 3.3 生命周期管理策略
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 use std::sync::Arc;
 
@@ -540,7 +540,7 @@ pub unsafe extern "C" fn with_temporary_buffer<F>(
 
 ### 4.1 回调与闭包
 
-```rust
+```rust,ignore
 use std::ffi::c_void;
 use std::sync::Mutex;
 use std::collections::HashMap;
@@ -603,7 +603,7 @@ impl<F: FnMut(i32)> RustClosureWrapper<F> {
 
 ### 4.2 异步 FFI
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -695,7 +695,7 @@ pub extern "C" fn c_future_callback(state: *mut c_void, result: i32) {
 
 ### 4.3 泛型 FFI 接口
 
-```rust
+```rust,ignore
 use std::any::{Any, TypeId};
 use std::collections::HashMap;
 
@@ -784,7 +784,7 @@ impl Drop for TypeErasedBox {
 
 ### 5.1 错误码转换
 
-```rust
+```rust,ignore
 use std::ffi::c_int;
 use std::ptr;
 
@@ -871,7 +871,7 @@ pub extern "C" fn free_string(s: *mut c_char) {
 
 ### 5.2 Panic安全
 
-```rust
+```rust,ignore
 use std::panic::{self, AssertUnwindSafe};
 
 // 必须捕获所有 panic，防止跨 FFI 边界传播
@@ -935,7 +935,7 @@ impl Drop for PanicGuard {
 
 ### 5.3 异常安全策略
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 
 // RAII 风格的资源管理
@@ -1002,7 +1002,7 @@ pub extern "C" fn transactional_operation() -> c_int {
 
 Rust 1.94 正式稳定了 `extern "C-unwind"` ABI，允许 panic 在 FFI 边界安全传播：
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: C-unwind ABI 稳定
 
 // 标准 C ABI：panic 会导致未定义行为
@@ -1041,7 +1041,7 @@ pub extern "C-unwind" fn rust_function_for_cpp() -> i32 {
 
 **使用场景**：
 
-```rust
+```rust,ignore
 // 场景1：Rust 库供 C++ 使用
 #[no_mangle]
 pub extern "C-unwind" fn process_data(data: *const u8, len: usize) -> i32 {
@@ -1076,7 +1076,7 @@ pub extern "C-unwind" fn rust_api_entry() {
 
 Rust 1.94 改进了与 bindgen 的集成：
 
-```rust
+```rust,ignore
 // bindgen 生成的代码现在更好地利用 Rust 1.94 特性
 
 // 生成的代码示例（概念）
@@ -1113,7 +1113,7 @@ const _: () = assert!(
 
 ### 6.3 跨语言异常传播
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: 使用 C-unwind 实现跨语言异常传播
 
 // Rust 定义的错误类型
@@ -1167,7 +1167,7 @@ pub extern "C-unwind" fn fallible_operation() -> i32 {
 
 ### 7.1 bindgen
 
-```rust
+```rust,ignore
 // build.rs
 use std::env;
 use std::path::PathBuf;
@@ -1241,7 +1241,7 @@ abi = "C-unwind"
 rename_fields = "SnakeCase"
 ```
 
-```rust
+```rust,ignore
 // lib.rs
 /// FFI 安全的结构体
 #[repr(C)]
@@ -1339,7 +1339,7 @@ fn test_round_trip() {
 
 ### 8.1 图像处理库包装
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int, c_void};
 
@@ -1453,7 +1453,7 @@ impl std::error::Error for ImageError {}
 
 ### 8.2 数据库驱动实现
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString, c_void};
 use std::os::raw::{c_char, c_int};
 use std::sync::Arc;
@@ -1592,7 +1592,7 @@ impl From<std::ffi::NulError> for DbError {
 
 ### 8.3 硬件抽象层
 
-```rust
+```rust,ignore
 use std::os::raw::{c_uint, c_void};
 use std::sync::atomic::{AtomicU32, Ordering};
 

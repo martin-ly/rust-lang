@@ -247,7 +247,7 @@ static ALLOCATOR: ThreadTrackingAllocator = ThreadTrackingAllocator;
 
 #### 实践示例
 
-```rust
+```rust,ignore
 // Rust 1.93: 条件汇编指令
 pub unsafe fn optimized_copy(src: *const u8, dst: *mut u8, len: usize) {
     std::arch::asm!(
@@ -311,7 +311,7 @@ pub unsafe fn optimized_copy(src: *const u8, dst: *mut u8, len: usize) {
 
 #### 实践示例
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // 示例: 安全的未初始化缓冲区管理
@@ -449,7 +449,7 @@ pub unsafe extern "C" fn string_from_raw(parts: *mut StringParts) -> String {
 
 #### 实践示例
 
-```rust
+```rust,ignore
 // Rust 1.93: 高性能无检查操作
 pub fn fast_bit_manipulation(data: &[u32]) -> Vec<u32> {
     data.iter()
@@ -506,7 +506,7 @@ pop_front_if<P>(&mut self, predicate: P) -> Option<T>
 
 #### 实践示例
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 // Rust 1.93: 条件弹出简化代码

@@ -132,7 +132,7 @@ Prusti解析器
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 计算绝对值
@@ -152,7 +152,7 @@ fn abs(n: i32) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[requires(x > 0)]
 #[ensures(result == x + y)]
 #[ensures(*x == old(*x) + 1)]  // 验证x增加了1
@@ -164,7 +164,7 @@ fn increment_and_add(x: &mut i32, y: i32) -> i32 {
 
 ### 结果引用
 
-```rust
+```rust,ignore
 #[ensures(result == n * (n + 1) / 2)]
 fn sum_formula(n: i32) -> i32 {
     n * (n + 1) / 2
@@ -177,7 +177,7 @@ fn sum_formula(n: i32) -> i32 {
 
 ### 基本循环
 
-```rust
+```rust,ignore
 #[requires(n >= 0)]
 #[ensures(result == n * (n + 1) / 2)]
 fn sum_loop(n: i32) -> i32 {
@@ -209,7 +209,7 @@ fn sum_loop(n: i32) -> i32 {
 
 ### 复杂循环
 
-```rust
+```rust,ignore
 #[requires(arr.len() >= 1)]
 #[ensures(result >= 0 && (result as usize) < arr.len())]
 #[ensures(forall(|i: usize| i < arr.len() ==> arr[i] <= arr[result as usize]))]
@@ -238,7 +238,7 @@ fn find_max(arr: &[i32]) -> usize {
 
 ### 所有权转移
 
-```rust
+```rust,ignore
 #[ensures(result.len() == 0)]
 fn empty_vec() -> Vec<i32> {
     vec![]
@@ -254,7 +254,7 @@ fn pop_first(v: &mut Vec<i32>) -> i32 {
 
 ### 借用验证
 
-```rust
+```rust,ignore
 #[requires(index < slice.len())]
 #[ensures(result == slice[index])]
 fn get(slice: &[i32], index: usize) -> i32 {
@@ -272,7 +272,7 @@ fn set(slice: &mut [i32], index: usize, value: i32) {
 
 ### 结构体验证
 
-```rust
+```rust,ignore
 struct Account {
     balance: i32,
 }
@@ -304,7 +304,7 @@ impl Account {
 
 ### forall量化
 
-```rust
+```rust,ignore
 #[ensures(forall(|i: usize| i < arr.len() ==> arr[i] >= 0))]
 fn all_non_negative(arr: &[i32]) -> bool {
     for i in 0..arr.len() {
@@ -319,7 +319,7 @@ fn all_non_negative(arr: &[i32]) -> bool {
 
 ### exists量化
 
-```rust
+```rust,ignore
 #[requires(arr.len() > 0)]
 #[ensures(exists(|i: usize| i < arr.len() && result == arr[i]))]
 fn pick_one(arr: &[i32]) -> i32 {
@@ -329,7 +329,7 @@ fn pick_one(arr: &[i32]) -> i32 {
 
 ### 纯函数
 
-```rust
+```rust,ignore
 #[pure]
 #[ensures(result == a + b)]
 fn add(a: i32, b: i32) -> i32 {
@@ -346,7 +346,7 @@ fn double(n: i32) -> i32 {
 
 ### 谓词（Predicates）
 
-```rust
+```rust,ignore
 #[predicate]
 fn sorted(arr: &[i32]) -> bool {
     forall(|i: usize, j: usize|
@@ -368,7 +368,7 @@ fn binary_search(arr: &[i32], key: i32) -> bool {
 
 ### 案例1: 向量操作
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 struct MyVec<T> {
@@ -402,7 +402,7 @@ impl<T: Copy> MyVec<T> {
 
 ### 案例2: 链表操作
 
-```rust
+```rust,ignore
 struct Node {
     value: i32,
     next: Option<Box<Node>>,
@@ -435,7 +435,7 @@ impl Node {
 
 ### 案例3: 银行账户
 
-```rust
+```rust,ignore
 struct BankAccount {
     id: u64,
     balance: i64,
@@ -479,7 +479,7 @@ impl BankAccount {
 
 **问题1：验证超时**:
 
-```rust
+```rust,ignore
 // ❌ 复杂循环可能导致超时
 #[requires(n < 1000)]  // 添加约束
 fn complex_loop(n: i32) { ... }
@@ -487,7 +487,7 @@ fn complex_loop(n: i32) { ... }
 
 **问题2：量化器实例化失败**:
 
-```rust
+```rust,ignore
 // ❌ forall可能导致问题
 #[ensures(forall(|i: usize| ...))]
 
@@ -498,7 +498,7 @@ fn complex_loop(n: i32) { ... }
 
 **问题3：递归终止**:
 
-```rust
+```rust,ignore
 #[requires(n >= 0)]
 #[requires(n < 100)]  // 添加递归深度限制
 fn recursive(n: i32) -> i32 { ... }

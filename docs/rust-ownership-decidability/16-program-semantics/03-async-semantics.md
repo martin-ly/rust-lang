@@ -211,7 +211,7 @@ Rust 的异步模型具有以下独特的语义特性：
 
 Rust 的 `async/await` 语法提供了一种**顺序化表达异步计算**的方式：
 
-```rust
+```rust,ignore
 // 同步代码
 fn sync_fetch() -> String {
     let data = blocking_read();  // 阻塞线程
@@ -231,7 +231,7 @@ $$
 \text{async fn } f() \to T \equiv \text{fn } f() \to \text{impl Future<Output = T>}
 $$
 
-```rust
+```rust,ignore
 // async fn 本质上是返回 Future 的函数
 async fn example() -> i32 {
     let x = compute().await;
@@ -267,7 +267,7 @@ $$
 \text{Future}\langle T \rangle : \text{Computation} \times \text{State} \times \text{Context} \to \text{Poll}\langle T \rangle
 $$
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -287,7 +287,7 @@ pub enum Poll<T> {
 
 **Future 是惰性的（Lazy）**：
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn lazy_semantics() {
@@ -309,7 +309,7 @@ async fn lazy_semantics() {
 
 Future 本质上是**编译器生成的状态机**：
 
-```rust
+```rust,ignore
 // 源代码
 async fn state_machine_example() -> i32 {
     let a = async_op1().await;  // 状态 0 -> 状态 1
@@ -374,7 +374,7 @@ Future 组合子实现了**函数式编程中的组合模式**：
 | `join` | 并发执行 | $\text{join}(f_1, f_2) = (f_1, f_2)$ |
 | `race` | 竞争执行 | $\text{race}(f_1, f_2) = f_1 \oplus f_2$ |
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn combinator_semantics() -> i32 {
@@ -718,7 +718,7 @@ async fn lifetime_capture() {
 2. **后续轮询**：检查操作状态
 3. **完成轮询**：返回 Ready
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -765,7 +765,7 @@ async fn polling_semantics() {
 
 Future 完成的语义保证：
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn completion_semantics() {
@@ -800,7 +800,7 @@ async fn reusable_future() {
 
 **取消语义**描述了当 Future 被丢弃时的行为：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -860,7 +860,7 @@ async fn cancellation_propagation() {
 
 **async 块**被编译器转换为状态机：
 
-```rust
+```rust,ignore
 // 源代码
 async fn example(x: i32) -> i32 {
     let y = step1(x).await;
@@ -1037,7 +1037,7 @@ $$
 \text{await} : \text{Future}\langle T \rangle \to T \quad \text{(with potential suspension)}
 $$
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn suspension_points() {
@@ -1074,7 +1074,7 @@ async fn some_async_op() -> i32 { 42 }
 
 **挂起点的语义效果：**
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn suspension_effects() {
@@ -1190,7 +1190,7 @@ async fn resume_semantics() {
 
 **async fn 的语义转换**：
 
-```rust
+```rust,ignore
 // 源代码
 async fn async_function(x: i32, y: i32) -> i32 {
     let sum = x + y;
@@ -1214,7 +1214,7 @@ fn async_function_desugared(x: i32, y: i32) -> impl Future<Output = i32> {
 
 **返回类型的自动包装**：
 
-```rust
+```rust,ignore
 // async fn 自动包装返回类型
 async fn returns_i32() -> i32 {
     42  // 自动包装为 Future<Output = i32>
@@ -1246,7 +1246,7 @@ async fn with_try_operator() -> Result<i32, std::io::Error> {
 
 **递归异步函数的挑战和解决方案**：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -1422,7 +1422,7 @@ fn pin_mut_usage() {
 
 **Unpin trait** 标记类型可以安全移动：
 
-```rust
+```rust,ignore
 use std::marker::Unpin;
 
 // 自动实现 Unpin 的条件：所有字段都实现 Unpin
@@ -1535,7 +1535,7 @@ fn self_referential_usage() {
 
 **Pin 投影**允许从固定的容器访问内部字段：
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 use std::ptr::NonNull;
@@ -1880,7 +1880,7 @@ $$
 \text{spawn} : \text{Future}\langle T \rangle \to \text{JoinHandle}\langle T \rangle
 $$
 
-```rust
+```rust,ignore
 use tokio::task::JoinHandle;
 
 async fn task_spawning_semantics() {
@@ -1925,7 +1925,7 @@ async fn spawn_guarantees() {
 
 **任务执行**的语义细节：
 
-```rust
+```rust,ignore
 // 任务执行流程
 async fn task_execution_flow() {
     println!("1. Task created");
@@ -1967,7 +1967,7 @@ enum TaskState {
 
 **任务完成**的语义保证：
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn task_completion_semantics() {
@@ -2043,7 +2043,7 @@ async fn task_completion_semantics() {
 Worker 2 (空闲) 从 Worker 1 的底部窃取任务
 ```
 
-```rust
+```rust,ignore
 // crossbeam-deque 的工作窃取队列
 use crossbeam::deque::{Injector, Stealer, Worker};
 
@@ -2095,7 +2095,7 @@ impl WorkStealingQueues {
 
 **窃取策略**的语义规则：
 
-```rust
+```rust,ignore
 use crossbeam::deque::Steal;
 
 impl WorkStealingQueues {
@@ -2213,7 +2213,7 @@ impl LoadBalanceMetrics {
 
 **yield_now** 的协作式让出语义：
 
-```rust
+```rust,ignore
 use tokio::task;
 
 async fn yield_semantics() {
@@ -2337,7 +2337,7 @@ use std::pin::Pin;
 
 **调度公平性**的语义保证：
 
-```rust
+```rust,ignore
 // 公平性语义：确保任务不会饿死
 struct FairScheduler {
     queues: Vec<VecDeque<Task>>,
@@ -2413,7 +2413,7 @@ impl FairScheduler {
 
 **非阻塞 I/O** 的核心语义：
 
-```rust
+```rust,ignore
 // 非阻塞 I/O 语义
 async fn non_blocking_io_semantics() {
     // 1. 发起非阻塞操作
@@ -2458,7 +2458,7 @@ fn blocking_comparison() {
 
 **就绪通知**的语义机制：
 
-```rust
+```rust,ignore
 use std::os::unix::io::{AsRawFd, RawFd};
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -2526,7 +2526,7 @@ async fn readiness_interest() {
 └─────────────────────────────────────┘
 ```
 
-```rust
+```rust,ignore
 // 平台特定的 I/O 驱动
 #[cfg(target_os = "linux")]
 mod io_driver {
@@ -2594,7 +2594,7 @@ async fn unified_io_semantics() {
 └────────────────────────────────────────┘
 ```
 
-```rust
+```rust,ignore
 // 事件循环语义
 struct Reactor {
     events: Vec<Event>,
@@ -2667,7 +2667,7 @@ impl Clone for Event {
 
 **事件分发**的语义规则：
 
-```rust
+```rust,ignore
 use tokio::net::TcpListener;
 
 async fn event_dispatch_semantics() {
@@ -2721,7 +2721,7 @@ async fn handle_connection(
 
 **处理器注册**的语义细节：
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -2789,7 +2789,7 @@ impl Drop for RegistrationHandle {
 
 **AsyncRead** trait 的语义定义：
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
@@ -2854,7 +2854,7 @@ async fn async_read_semantics() {
 
 **AsyncWrite** trait 的语义定义：
 
-```rust
+```rust,ignore
 // AsyncWrite trait 语义
 trait AsyncWrite {
     fn poll_write(
@@ -2901,7 +2901,7 @@ async fn async_write_semantics() {
 
 **缓冲 I/O** 的语义优化：
 
-```rust
+```rust,ignore
 use tokio::io::{AsyncBufReadExt, AsyncWriteExt, BufReader, BufWriter};
 
 async fn buffering_semantics() {
@@ -2964,7 +2964,7 @@ async fn double_buffering() {
 | 挂起 | 无 | 支持 |
 | 背压 | 无 | 支持 |
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::task::{Context, Poll};
 
@@ -3008,7 +3008,7 @@ async fn stream_semantics() {
 
 **拉取模型**的语义：
 
-```rust
+```rust,ignore
 // 拉取模型：消费者控制数据流
 async fn pull_model_semantics() {
     use tokio_stream::StreamExt;
@@ -3033,7 +3033,7 @@ async fn pull_model_semantics() {
 
 **Stream 终止**的语义：
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 
 async fn stream_termination_semantics() {
@@ -3072,7 +3072,7 @@ async fn stream_termination_semantics() {
 
 **map/filter** 的语义：
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 
 async fn map_filter_semantics() {
@@ -3105,7 +3105,7 @@ async fn map_filter_semantics() {
 
 **take/skip** 的语义：
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 
 async fn take_skip_semantics() {
@@ -3141,7 +3141,7 @@ async fn take_skip_semantics() {
 
 **buffer/chunks** 的语义：
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 
 async fn buffer_chunks_semantics() {
@@ -3193,7 +3193,7 @@ async fn buffer_chunks_semantics() {
 
 **背压（Backpressure）**的语义：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn backpressure_semantics() {
@@ -3231,7 +3231,7 @@ async fn backpressure_semantics() {
 
 **缓冲区管理**的语义：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn buffer_management_semantics() {
@@ -3279,7 +3279,7 @@ async fn buffer_management_semantics() {
 
 **慢消费者**的处理策略：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio_stream::StreamExt;
 
@@ -3395,7 +3395,7 @@ async fn slow_consumer_strategies() {
 
 **取消请求**的语义：
 
-```rust
+```rust,ignore
 use tokio::task::JoinHandle;
 
 async fn cancellation_request_semantics() {
@@ -3439,7 +3439,7 @@ async fn cancellation_checkpoints() {
 
 **取消传播**的语义规则：
 
-```rust
+```rust,ignore
 async fn cancellation_propagation_semantics() {
     // 父任务取消会传播给子任务
     let parent = tokio::spawn(async {
@@ -3497,7 +3497,7 @@ async fn prevent_cancellation_propagation() {
 
 **取消时清理**的语义：
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -3570,7 +3570,7 @@ async fn async_cleanup() {
 
 **结构化并发**的语义：
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 
 async fn structured_concurrency_semantics() {
@@ -3625,7 +3625,7 @@ async fn select_structured_concurrency() {
 
 **取消边界**的语义：
 
-```rust
+```rust,ignore
 // 取消边界：防止取消传播到关键区域
 async fn cancellation_boundary() {
     // 在取消边界内执行关键操作
@@ -3673,7 +3673,7 @@ async fn abort_handle_semantics() {
 
 **资源泄漏预防**的语义：
 
-```rust
+```rust,ignore
 // RAII + 异步清理
 async fn prevent_resource_leaks() {
     struct DatabaseConnection {
@@ -3732,7 +3732,7 @@ async fn prevent_resource_leaks() {
 
 **timeout** 的语义：
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 async fn timeout_semantics() {
@@ -3786,7 +3786,7 @@ async fn fallible_operation() -> Result<String, std::io::Error> {
 
 **嵌套 timeout** 的语义：
 
-```rust
+```rust,ignore
 async fn nested_timeout_semantics() {
     // 外层 timeout: 总时间限制
     // 内层 timeout: 单个操作限制
@@ -3828,7 +3828,7 @@ async fn operation_with_variable_delay(step: usize) -> Result<String, std::io::E
 
 **timeout 与取消**的交互语义：
 
-```rust
+```rust,ignore
 async fn timeout_cancellation_interaction() {
     let handle = tokio::spawn(async {
         // 内部 timeout
@@ -3897,7 +3897,7 @@ async fn graceful_shutdown_with_timeout() {
 
 **join!** 的并发语义：
 
-```rust
+```rust,ignore
 async fn join_semantics() {
     // join!: 并发执行，等待所有完成
     let (a, b, c) = tokio::join!(
@@ -3956,7 +3956,7 @@ async fn fallible_b() -> Result<i32, std::io::Error> {
 
 **select!** 的竞争语义：
 
-```rust
+```rust,ignore
 async fn select_semantics() {
     // select!: 等待多个 Future，返回第一个完成的
     let result = tokio::select! {
@@ -4025,7 +4025,7 @@ async fn select_loop_semantics() {
 
 **race** 的语义：
 
-```rust
+```rust,ignore
 use futures::future::select;
 
 async fn race_semantics() {
@@ -4082,7 +4082,7 @@ async fn futures_race_semantics() {
 
 **异步 Mutex** 的语义：
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 
 async fn async_mutex_semantics() {
@@ -4137,7 +4137,7 @@ async fn some_async_op() {
 
 **异步 RwLock** 的语义：
 
-```rust
+```rust,ignore
 use tokio::sync::RwLock;
 
 async fn async_rwlock_semantics() {
@@ -4193,7 +4193,7 @@ async fn rwlock_upgrade_downgrade() {
 
 **异步 Channel** 的语义：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn async_channel_semantics() {
@@ -4256,7 +4256,7 @@ async fn channel_types() {
 
 **Semaphore** 的并发控制语义：
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 
 async fn semaphore_semantics() {
@@ -4326,7 +4326,7 @@ async fn bulk_permits() {
 
 **Barrier** 的同步语义：
 
-```rust
+```rust,ignore
 use tokio::sync::Barrier;
 
 async fn barrier_semantics() {
@@ -4361,7 +4361,7 @@ async fn barrier_semantics() {
 
 **异步栅栏（Latch）** 的语义：
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Notify;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -4460,7 +4460,7 @@ async fn latch_semantics() {
 └─────────────────────────────────────────┘
 ```
 
-```rust
+```rust,ignore
 // Tokio 运行时组件
 async fn runtime_components() {
     // 创建多线程运行时
@@ -4489,7 +4489,7 @@ async fn runtime_components() {
 
 **任务调度器**的语义：
 
-```rust
+```rust,ignore
 // 不同类型的调度器
 fn scheduler_types() {
     // 1. 多线程调度器（默认）
@@ -4528,7 +4528,7 @@ async fn scheduler_configuration() {
 
 **计时器驱动**的语义：
 
-```rust
+```rust,ignore
 async fn timer_semantics() {
     // 睡眠（延迟）
     tokio::time::sleep(tokio::time::Duration::from_secs(1)).await;
@@ -4563,7 +4563,7 @@ async fn timer_semantics() {
 
 **block_on** 的阻塞语义：
 
-```rust
+```rust,ignore
 fn block_on_semantics() {
     let rt = tokio::runtime::Runtime::new().unwrap();
 
@@ -4602,7 +4602,7 @@ fn block_on_limitations() {
 
 **spawn** 的任务创建语义：
 
-```rust
+```rust,ignore
 async fn spawn_boundary_semantics() {
     // spawn 进入运行时
     let handle = tokio::spawn(async {
@@ -4642,7 +4642,7 @@ async fn runtime_boundary_crossing() {
 
 **运行时切换**的语义：
 
-```rust
+```rust,ignore
 // 运行时切换模式
 async fn runtime_switching() {
     // 使用通道在运行时间通信
@@ -4678,7 +4678,7 @@ async fn runtime_switching() {
 
 **嵌套运行时**的限制：
 
-```rust
+```rust,ignore
 fn nested_runtime_semantics() {
     let outer = tokio::runtime::Runtime::new().unwrap();
 
@@ -4701,7 +4701,7 @@ fn nested_runtime_semantics() {
 
 **运行时间通信**的语义：
 
-```rust
+```rust,ignore
 // 使用通道进行运行时间通信
 async fn runtime_communication() {
     use tokio::sync::mpsc;
@@ -4734,7 +4734,7 @@ async fn runtime_communication() {
 
 **运行时隔离**的语义保证：
 
-```rust
+```rust,ignore
 // 运行时隔离示例
 async fn runtime_isolation() {
     // 每个运行时有独立的任务队列、I/O 驱动、计时器
@@ -4784,7 +4784,7 @@ async fn runtime_isolation() {
 
 **Send/Sync** 的异步语义：
 
-```rust
+```rust,ignore
 // Send: 可以跨线程传递
 // Sync: 可以跨线程共享引用
 
@@ -4832,7 +4832,7 @@ async fn check_traits<T: Send + Sync>(value: T) {
 
 **异步生命周期**的验证：
 
-```rust
+```rust,ignore
 // 异步生命周期约束
 async fn lifetime_check<'a>(data: &'a str) -> &'a str {
     // 返回值的生命周期与输入相同
@@ -4898,7 +4898,7 @@ fn pin_safety_check() {
 
 **异步死锁**的检测和预防：
 
-```rust
+```rust,ignore
 // 死锁模式 1: 循环等待
 async fn deadlock_pattern_1() {
     let lock1 = tokio::sync::Mutex::new(1);
@@ -4946,7 +4946,7 @@ async fn some_async_op() {
 
 **任务饥饿**的检测和预防：
 
-```rust
+```rust,ignore
 // 饥饿模式
 async fn starvation_pattern() {
     // 长时间运行的任务不给其他任务机会
@@ -4982,7 +4982,7 @@ async fn priority_starvation() {
 
 **异步内存泄漏**的检测：
 
-```rust
+```rust,ignore
 // 泄漏模式 1: 忘记清理
 async fn leak_pattern_1() {
     let (tx, mut rx) = tokio::sync::mpsc::channel(100);
@@ -5043,7 +5043,7 @@ async fn leak_solution() {
 
 **编译器优化**的语义保证：
 
-```rust
+```rust,ignore
 // 零成本抽象：async/await 编译为高效状态机
 
 // 源代码
@@ -5149,7 +5149,7 @@ where
 
 **任务密度**的语义影响：
 
-```rust
+```rust,ignore
 // 高任务密度：大量小任务
 async fn high_task_density() {
     let mut handles = vec![];
@@ -5184,7 +5184,7 @@ async fn batched_tasks() {
 
 **上下文切换**的语义成本：
 
-```rust
+```rust,ignore
 // 上下文切换来源：
 // 1. await 点
 // 2. 锁竞争
@@ -5220,7 +5220,7 @@ async fn process(x: i32) -> i32 {
 
 **内存占用**的语义优化：
 
-```rust
+```rust,ignore
 // 减少状态机大小
 async fn compact_state_machine() {
     // 大的数据应该提前 drop

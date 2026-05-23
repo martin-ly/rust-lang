@@ -129,7 +129,7 @@ v.push(v.len());  // 同时使用 &mut v (push) 和 &v (len)
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 let mut root = 0;
 let x = &mut root;
 *x = 42;
@@ -278,7 +278,7 @@ TB 不再在引用创建时固定其可访问范围，而是使用**延迟初始
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 标记 (Tag)
 tag ::= ℕ
 
@@ -429,7 +429,7 @@ let c = x;        // OK, r 仍保持 Frozen
 
 Reserved 是 TB 支持两阶段借用的关键：
 
-```rust
+```rust,ignore
 let mut x = 0;
 let r = &mut x;   // r: Reserved (而非 Unique)
 
@@ -466,7 +466,7 @@ let r = &mut x;
 
 对于内部可变性类型（如 `Cell<T>`），需要特殊处理：
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 let c = Cell::new(0);
@@ -516,7 +516,7 @@ v.push(v.len());
 
 #### 5.2.2 读-读重排序
 
-```rust
+```rust,ignore
 let mut root = 0;
 let x = &mut root;
 *x = 42;
@@ -542,7 +542,7 @@ let second = unsafe { ptr.add(1).read() };  // TB: OK, SB: UB
 
 #### 5.3.1 无效化后使用
 
-```rust
+```rust,ignore
 let mut x = 0;
 let r = &mut x;
 *x = 1;           // 激活 r
@@ -624,7 +624,7 @@ TB 已验证支持以下编译器优化：
 
 #### 6.2.2 冗余读取消除
 
-```rust
+```rust,ignore
 let a = *x;
 let b = *x;  // 如果 x 是 Frozen，可优化为使用 a
 ```
@@ -671,7 +671,7 @@ TB 已在 Miri（Rust 的未定义行为检测解释器）中实现：
 
 1. **UnsafeCell 滥用**
 
-```rust
+```rust,ignore
 // 错误：通过 &T 修改非 UnsafeCell 数据
 let x = &data;
 unsafe { *(x as *const _ as *mut _) = 42; }
@@ -679,7 +679,7 @@ unsafe { *(x as *const _ as *mut _) = 42; }
 
 1. **裸指针别名违规**
 
-```rust
+```rust,ignore
 // 错误：通过裸指针创建重叠的可变引用
 let ptr = addr_of_mut!(data);
 let r1 = unsafe { &mut *ptr };
@@ -806,7 +806,7 @@ Well-typed Safe Rust (通过借用检查器)
 
 Tree Borrows 为 `std::ptr::Unique` 的语义化铺平道路:
 
-```rust
+```rust,ignore
 // Vec 使用 Unique 作为内部指针
 pub struct Vec<T> {
     buf: Unique<T>,  // 未来可能获得 noalias 语义
@@ -847,7 +847,7 @@ pub struct Vec<T> {
 
 **应该做的** ✅:
 
-```rust
+```rust,ignore
 // 1. 使用两阶段借用模式
 vec.push(vec.len());
 
@@ -865,7 +865,7 @@ unsafe { ptr.read() }; // TB: OK
 
 **避免做的** ❌:
 
-```rust
+```rust,ignore
 // 1. 通过 &T 修改非 UnsafeCell 数据
 let x = &data;
 unsafe { *(x as *const _ as *mut _) = 42; } // UB

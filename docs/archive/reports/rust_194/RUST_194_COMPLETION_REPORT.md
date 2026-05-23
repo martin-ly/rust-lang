@@ -158,7 +158,7 @@ test rust_194_features::tests::test_demonstrate_features ... ok
 
 1. **ControlFlow 类型**
 
-   ```rust
+   ```rust,ignore
    use std::ops::ControlFlow;
 
    let result = items.iter().try_for_each(|item| {

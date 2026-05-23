@@ -42,7 +42,7 @@ RustBelt 是首个完整的 Rust 形式化安全证明。
 
 将 Rust 翻译到纯函数式语言进行验证。
 
-```rust
+```rust,ignore
 // Rust 代码
 type List = Option<Box<Node>>;
 

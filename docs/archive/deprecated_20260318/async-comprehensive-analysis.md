@@ -51,7 +51,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 形式1: 函数上的async
 async fn function() -> T { }
 // 等价于: fn function() -> impl Future<Output=T>
@@ -85,7 +85,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基础形式
 future.await
 
@@ -125,7 +125,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // async fn + trait
 #[async_trait]
 trait Service {
@@ -209,7 +209,7 @@ async unsafe fn unsafe_async() { }
 
 **源代码**:
 
-```rust
+```rust,ignore
 async fn example(x: i32) -> String {
     let a = compute_a(x).await;
     let b = compute_b(&a).await;
@@ -219,7 +219,7 @@ async fn example(x: i32) -> String {
 
 **转换后状态机**:
 
-```rust
+```rust,ignore
 // 编译器生成的状态机类型
 enum ExampleFuture {
     // 状态0: 初始状态
@@ -321,7 +321,7 @@ impl Future for ExampleFuture {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn with_lifetimes<'a>(data: &'a str) -> &'a str {
     // 状态机必须保存生命周期引用
     process(data).await
@@ -414,7 +414,7 @@ $$
 
 ### 3.2 Reactor模式详解
 
-```rust
+```rust,ignore
 /// Reactor - 事件多路复用核心
 ///
 /// 职责: 管理IO资源，等待就绪事件，分发Waker
@@ -523,7 +523,7 @@ $$
 
 **转换规则**:
 
-```rust
+```rust,ignore
 // 规则1: 顺序表达式
 async { e1; e2 }
 // ↓ CPS
@@ -562,7 +562,7 @@ $$
 
 **定义 Monad**:
 
-```rust
+```rust,ignore
 trait Monad {
     fn return_(T) -> Self<T>;
     fn bind(Self<T>, F: Fn(T) -> Self<U>) -> Self<U>;
@@ -580,7 +580,7 @@ trait Monad {
 
 **单子定律验证**:
 
-```rust
+```rust,ignore
 // 左单位元: return(x) >>= f ≡ f(x)
 async { x }.and_then(f)
 // ≡
@@ -666,7 +666,7 @@ Waker创建链:
 
 **Waker实现细节**:
 
-```rust
+```rust,ignore
 /// Waker内部结构
 pub struct Waker {
     /// 指向RawWaker的指针
@@ -749,7 +749,7 @@ Context链:
 
 ### 5.3 Pin与状态机的交互
 
-```rust
+```rust,ignore
 /// Pin在状态机中的作用
 ///
 /// 问题: 状态机内部可能包含自引用

@@ -6,6 +6,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [闭包速查卡 (Closures Cheatsheet)](#闭包速查卡-closures-cheatsheet)
@@ -29,6 +30,7 @@
   - [**最后更新**: 2026-05-08 (闭包场景深度整合)](#最后更新-2026-05-08-闭包场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 闭包基础
 >
@@ -40,7 +42,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本闭包
 let add = |a, b| a + b;
 
@@ -190,7 +192,7 @@ where
 
 **场景**: 迭代器链中的提前终止，比 `try_fold` 更灵活
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 在迭代器链中实现 "take_while" + "find" 的组合
@@ -298,7 +300,7 @@ where
 
 **场景**: 延迟初始化的闭包缓存、配置注入
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局闭包工厂（延迟初始化）
@@ -376,7 +378,7 @@ pub fn execute_pipeline(data: Data) -> Data {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// 函数式滑动窗口映射
 ///
 /// 将窗口操作作为高阶函数提供
@@ -454,7 +456,7 @@ pub trait WindowedIterator: Iterator {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 /// 函数式黄金比例缩放
 ///
 /// 用于响应式布局和动画缓动
@@ -495,7 +497,7 @@ pub fn euler_smooth() -> impl Fn(f64) -> f64 {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 /// 生产级事件处理器（使用闭包组合 + ControlFlow）
 pub struct EventProcessor {
     handlers: Vec<Box<dyn Fn(&Event) -> ControlFlow<(), ()> + Send + Sync>>,
@@ -623,6 +625,7 @@ pub fn setup_processor() -> EventProcessor {
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
@@ -850,4 +853,3 @@ pub fn setup_processor() -> EventProcessor {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

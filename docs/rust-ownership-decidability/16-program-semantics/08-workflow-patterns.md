@@ -238,7 +238,7 @@ $$
 \langle s, a \rangle \xrightarrow{\text{execute}} \langle s', d \rangle \quad \text{其中 } s \in \mathcal{S}, a \in \mathcal{A}, s' \in \mathcal{S}, d \in \mathcal{D}
 $$
 
-```rust
+```rust,ignore
 /// 工作流定义的核心 trait
 pub trait Workflow {
     /// 工作流类型标识
@@ -285,7 +285,7 @@ $$
 \text{BusinessProcess} \xrightarrow{\text{model}} \text{WorkflowModel} \xrightarrow{\text{implement}} \text{WorkflowImplementation}
 $$
 
-```rust
+```rust,ignore
 /// 业务过程模型
 pub struct BusinessProcess {
     pub name: String,
@@ -322,7 +322,7 @@ $$
 \text{WorkflowState} \xrightarrow{\text{transition}} \text{NewState} \land \text{OldState} \text{ 自动失效}
 $$
 
-```rust
+```rust,ignore
 // 使用类型状态确保状态转换安全
 pub struct WorkflowInstance<State> {
     state: State,
@@ -384,7 +384,7 @@ $$
 \text{FSM} = \langle Q, \Sigma, \delta, q_0, F \rangle
 $$
 
-```rust
+```rust,ignore
 /// 有限状态机工作流
 pub struct WorkflowFSM<Q, E> {
     current_state: Q,
@@ -435,7 +435,7 @@ $$
 - $P$：前置条件
 - $E$：后置条件
 
-```rust
+```rust,ignore
 /// 活动语义 trait
 pub trait ActivitySemantic {
     type Input;
@@ -457,7 +457,7 @@ $$
 \text{Transition} = \langle \text{source}, \text{target}, \text{trigger}, \text{guard}, \text{action} \rangle
 $$
 
-```rust
+```rust,ignore
 /// 转换语义
 pub struct Transition<S, E> {
     pub source: S,
@@ -480,7 +480,7 @@ $$
 \text{Instantiate} : \text{WorkflowDefinition} \times \text{Input} \to \text{WorkflowInstance}
 $$
 
-```rust
+```rust,ignore
 /// 工作流实例
 pub struct WorkflowInstance<W: Workflow> {
     pub id: WorkflowId,
@@ -569,7 +569,7 @@ $$
 \text{ParallelSplit}(a_1, a_2, \ldots, a_n) = \parallel(a_1, a_2, \ldots, a_n)
 $$
 
-```rust
+```rust,ignore
 /// 并行分叉
 pub struct ParallelFork<A: Activity> {
     branches: Vec<A>,

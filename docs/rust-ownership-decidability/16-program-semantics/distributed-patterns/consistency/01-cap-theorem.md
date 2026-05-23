@@ -117,7 +117,7 @@ CP 系统行为:
   代表系统: etcd, ZooKeeper, HBase, MongoDB (配置为 CP)
 ```
 
-```rust
+```rust,ignore
 // CP 风格的一致性优先实现
 struct CPSystem {
     state: RaftState,  // 使用 Raft 共识
@@ -171,7 +171,7 @@ AP 系统行为:
   代表系统: Cassandra, DynamoDB, Couchbase, Eureka
 ```
 
-```rust
+```rust,ignore
 // AP 风格的可用性优先实现
 struct APSystem {
     local_store: HashMap<Key, VersionedValue>,
@@ -233,7 +233,7 @@ PACELC 定理扩展:
   - 写操作: 副本确认数可调
 ```
 
-```rust
+```rust,ignore
 enum ConsistencyLevel {
     One,         // 一个副本确认（最快，最弱）
     Quorum,      // 多数派（平衡）
@@ -325,7 +325,7 @@ $$
 ### 5.1 一致性级别配置
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 可配置一致性 trait
 trait ConsistencyConfigurable {
     fn with_consistency(self, level: ConsistencyLevel) -> Self;
@@ -367,7 +367,7 @@ async fn example(db: &Database) {
 ### 5.2 冲突解决策略
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 冲突解决 trait
 trait ConflictResolver<T> {
     fn resolve(&self, versions: Vec<Versioned<T>>) -> T;

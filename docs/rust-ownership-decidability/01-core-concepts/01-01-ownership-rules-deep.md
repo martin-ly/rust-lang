@@ -850,7 +850,7 @@ Rust使用仿射逻辑，因为:
 
 **移动的形式化表示**:
 
-```rust
+```rust,ignore
 // Rust代码
 let x: T = ...;  // x获得类型T的值
 let y = x;       // 移动到y
@@ -987,7 +987,7 @@ pub trait Copy: Clone { }
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn foo(a: String, b: String) -> String { ... }
 
 // 调用
@@ -1063,7 +1063,7 @@ fn reinit_example() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn use_after_move() {
     let s = String::from("hello");
     let s2 = s;              // s被移动到s2
@@ -1144,7 +1144,7 @@ let s = take_and_return(s);  // 移动出去再移回来
 
 **错误代码**:
 
-```rust
+```rust,ignore
 struct Person {
     name: String,
     age: u32,
@@ -1189,7 +1189,7 @@ error[E0382]: borrow of partially moved value: `p`
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 只使用未移动的字段
 let p = Person { name: String::from("Alice"), age: 30 };
 let name = p.name;
@@ -1249,7 +1249,7 @@ fn match_move_error(msg: Message) {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 引用绑定
 fn match_ref(msg: Message) {
     match &msg {
@@ -1284,7 +1284,7 @@ fn match_single_arm_ref(msg: Message) {
 
 **Rust 1.94+ 改进**:
 
-```rust
+```rust,ignore
 // 使用if let保护
 fn match_with_guard(msg: Message) {
     if let Message::Write(ref text) = msg {
@@ -1399,7 +1399,7 @@ fn closure_clone() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn loop_move_error() {
     let s = String::from("hello");
 
@@ -1485,7 +1485,7 @@ fn loop_reinit() {
 
 **错误假设**:
 
-```rust
+```rust,ignore
 #[derive(Clone)]
 struct Wrapper(String);  // 只有Clone，没有Copy
 
@@ -1519,7 +1519,7 @@ fn copy_confusion() {
 
 **正确代码**:
 
-```rust
+```rust,ignore
 // 方案1: 显式Clone
 #[derive(Clone)]
 struct Wrapper(String);
@@ -1606,7 +1606,7 @@ fn edition_2024_temporaries() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 显式drop控制
 use std::mem::drop;
 
@@ -1696,7 +1696,7 @@ mem::forget作用:
 
 **mem::forget的合理使用**:
 
-```rust
+```rust,ignore
 // 场景1: 将所有权转移到非Rust代码
 extern "C" {
     fn take_ownership(ptr: *mut c_void);
@@ -1722,7 +1722,7 @@ fn prevent_double_drop() {
 
 **安全替代方案**:
 
-```rust
+```rust,ignore
 // 使用ManuallyDrop代替mem::forget
 use std::mem::ManuallyDrop;
 
@@ -1783,7 +1783,7 @@ ManuallyDrop语义:
 
 **正确使用**:
 
-```rust
+```rust,ignore
 // 方案1: 显式drop
 fn correct_explicit_drop() {
     let mut res = ManuallyDrop::new(Resource(String::from("test")));
@@ -1832,7 +1832,7 @@ fn union_usage() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 struct SelfReferential {
@@ -2158,7 +2158,7 @@ async fn async_closure_usage() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn generic_take<T>(item: T) -> T {
     // 假设T是Copy
     let item2 = item;  // 如果是非Copy，这里是移动
@@ -2226,7 +2226,7 @@ where
 
 **Trait Bound推导**:
 
-```rust
+```rust,ignore
 // 自动推导的trait bounds
 struct Wrapper<T>(T);
 
@@ -2251,7 +2251,7 @@ where
 
 **错误代码**:
 
-```rust
+```rust,ignore
 trait Processor {
     fn process(self);
 }
@@ -2299,7 +2299,7 @@ Box<dyn Trait>:
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 借用trait对象
 fn borrow_trait_object(processor: &dyn Processor) {
     processor.process();  // 需要修改trait定义接受&self
@@ -2465,7 +2465,7 @@ fn use_swap_remove() {
 
 **Rust 1.94+ Vec改进**:
 
-```rust
+```rust,ignore
 // extract_if (不稳定特性)
 #![feature(extract_if)]
 
@@ -2522,7 +2522,7 @@ struct Wrapper {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 避免在drop中panic
 impl Drop for SafeStruct {
     fn drop(&mut self) {
@@ -2593,7 +2593,7 @@ impl Drop for SafeWrapper {
 
 **问题场景** (Rust 1.94+ const fn限制):
 
-```rust
+```rust,ignore
 const fn const_move<T>(x: T) -> (T, T) {
     let y = x;  // 移动
     (x, y)      // ERROR: 在const fn中不能复制后使用
@@ -2911,7 +2911,7 @@ Drop标志位图:
 
 **条件Drop代码生成**:
 
-```rust
+```rust,ignore
 // 源代码
 fn conditional(b: bool) {
     let x = String::from("a");
@@ -3415,7 +3415,7 @@ fn borrowed_container_usage() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // Vec<T>简化实现
 pub struct Vec<T> {
     ptr: NonNull<T>,      // 拥有堆内存
@@ -3525,7 +3525,7 @@ cap: 分配的容量
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     fn grow(&mut self) {
         let new_cap = if self.cap == 0 {
@@ -3582,7 +3582,7 @@ ptr指向 0x1000
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 impl<T> IntoIterator for Vec<T> {
     type Item = T;
     type IntoIter = IntoIter<T>;
@@ -3726,7 +3726,7 @@ where
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // Rust 1.94: inline const
 const fn compute_size() -> usize {
     1024

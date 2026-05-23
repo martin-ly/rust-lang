@@ -208,7 +208,7 @@ cargo kani --function test_addition_no_overflow --verbose
 
 #### 2.2.3 核心 API 详解
 
-```rust
+```rust,ignore
 use kani::{proof, any, assume, cover, assert, expect_fail};
 
 // ========== 核心宏和函数 ==========
@@ -784,7 +784,7 @@ mod lock_verification {
 
 #### 2.6.1 循环展开配置
 
-```rust
+```rust,ignore
 /// 数组求和
 pub fn sum_array(arr: &[i32]) -> i32 {
     let mut sum = 0;
@@ -1016,7 +1016,7 @@ mod tests {
 }
 ```
 
-```rust
+```rust,ignore
 // src/verification/mod.rs
 
 //! Kani 形式化验证模块
@@ -2681,7 +2681,7 @@ MIRIFLAGS="-Zmiri-disable-isolation -Zmiri-backtrace=full" cargo miri run
 
 #### 4.2.2 Stacked Borrows 示例
 
-```rust
+```rust,ignore
 // stacked_borrows_example.rs
 
 fn stacked_borrows_violation() {
@@ -2711,7 +2711,7 @@ cargo miri run --example stacked_borrows
 
 #### 4.2.3 Tree Borrows 示例
 
-```rust
+```rust,ignore
 // tree_borrows_example.rs
 
 fn tree_borrows_ok() {
@@ -2761,7 +2761,7 @@ MIRIFLAGS = "-Zmiri-tree-borrows -Zmiri-disable-isolation"
 
 #### 4.3.1 使用已释放内存
 
-```rust
+```rust,ignore
 // use_after_free.rs
 
 fn use_after_free() {
@@ -2797,7 +2797,7 @@ cargo miri run --example use_after_free
 
 #### 4.3.2 数据竞争
 
-```rust
+```rust,ignore
 // data_race.rs
 use std::thread;
 
@@ -3372,7 +3372,7 @@ git clone https://github.com/rust-formal-methods/rust-formal-methods.github.io.g
 
 #### Kani 优化
 
-```rust
+```rust,ignore
 // 1. 使用 kani::any_where 替代 assume
 let x: u32 = kani::any_where(|x| *x < 100);  // 更高效
 

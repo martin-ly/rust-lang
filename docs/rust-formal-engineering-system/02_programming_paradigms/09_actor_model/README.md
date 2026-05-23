@@ -100,7 +100,7 @@ fn demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc::{channel, Sender, Receiver};
 
 // 消息类型
@@ -168,7 +168,7 @@ impl AsyncProcessor {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // 监督策略
@@ -253,7 +253,7 @@ impl Supervisor {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // 轮询路由
@@ -324,7 +324,7 @@ impl<M: Clone + Send + 'static> BroadcastRouter<M> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};

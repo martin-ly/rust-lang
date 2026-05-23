@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Async Closures 深度指南](#async-closures-深度指南)
@@ -41,6 +42,7 @@
   - [八、延伸阅读](#八延伸阅读)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -89,7 +91,7 @@ where
 
 Rust 1.95 引入了原生异步闭包语法：
 
-```rust
+```rust,ignore
 let closure = async |x: i32| -> i32 {
     tokio::time::sleep(Duration::from_millis(10)).await;
     x * 2
@@ -103,6 +105,7 @@ let closure = async |x: i32| -> i32 {
 ---
 
 ## 二、AsyncFn Trait 家族
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 2.1 三层 trait 体系
@@ -150,7 +153,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 所有 async fn 自动实现 AsyncFn
 async fn plain_async(x: i32) -> i32 { x + 1 }
 // plain_async 实现了 AsyncFn(i32) -> i32
@@ -165,7 +168,7 @@ let c3 = async |x: i32| -> String { s }; // impl AsyncFnOnce (消耗 s)
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 旧方式: Fn() -> impl Future
 fn old_closure() -> impl Fn(i32) -> Pin<Box<dyn Future<Output = i32> + Send>>> {
     |x| Box::pin(async move { x * 2 })
@@ -189,6 +192,7 @@ fn new_closure() -> impl AsyncFn(i32) -> i32 {
 ---
 
 ## 三、捕获语义深度解析
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 3.1 捕获模式
@@ -197,7 +201,7 @@ fn new_closure() -> impl AsyncFn(i32) -> i32 {
 
 异步闭包的捕获规则与同步闭包一致，但捕获的是**生成 Future 所需的状态**，而非 Future 本身：
 
-```rust
+```rust,ignore
 let multiplier = 10;
 
 // 捕获 multiplier 的不可变引用
@@ -218,7 +222,7 @@ let c3 = async move |idx: usize| -> Option<i32> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 let local = String::from("hello");
 
 // ❌ 错误：闭包捕获了 local 的引用，但闭包比 local 活得久
@@ -232,7 +236,7 @@ let good: Box<dyn AsyncFn() -> String> = Box::new(async move || local.clone());
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 let s = String::from("data");
 
 // 旧方式：async move ||
@@ -259,13 +263,14 @@ let new = async || {
 ---
 
 ## 四、框架实战：Axum 与 Tokio
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 4.1 Axum Handler 中的异步闭包
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use axum::{routing::get, Router};
 use std::time::Duration;
 
@@ -290,7 +295,7 @@ async fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use axum::{extract::Request, middleware::Next, response::Response};
 
 /// 通用的异步中间件工厂
@@ -321,7 +326,7 @@ where
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 
 async fn parallel_map<F>(items: Vec<i32>, f: F) -> Vec<i32>
@@ -348,12 +353,14 @@ where
 ---
 
 ## 五、高级模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 类型擦除与动态分发
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 
@@ -375,6 +382,7 @@ pub struct AsyncRouter {
 ```
 
 ### 5.2 递归异步闭包
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -397,9 +405,10 @@ async fn async_fib() -> impl AsyncFn(u32) -> u32 {
 ```
 
 ### 5.3 组合子模式
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 两个 AsyncFn 的串联组合
 pub fn compose<A, B, C>(
     f: impl AsyncFn(A) -> B + Clone,
@@ -424,9 +433,11 @@ assert_eq!(double_then_string(21).await, "42");
 ---
 
 ## 六、常见陷阱与调试
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 6.1 陷阱 1：混淆 `async fn` 与 `AsyncFn` 边界
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -441,9 +452,10 @@ fn caller() {
 ```
 
 ### 6.2 陷阱 2：`Send` 边界传递
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：闭包捕获了 !Send 类型
 let rc = std::rc::Rc::new(42);
 let bad = async move |x: i32| x + *rc; // Rc 不是 Send
@@ -458,9 +470,10 @@ tokio::spawn(good(1)); // OK
 ```
 
 ### 6.3 陷阱 3：生命周期与 `Box<dyn>`
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let data = vec![1, 2, 3];
 
 // ❌ 错误：借用生命周期不够长
@@ -473,9 +486,11 @@ let good: Box<dyn AsyncFn() -> i32 + Send> = Box::new(async move || data.len());
 ---
 
 ## 七、版本兼容与迁移
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 7.1 渐进式采用
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -492,6 +507,7 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 ```
 
 ### 7.2 最低版本要求
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 特性 | 稳定版本 | 说明 |
@@ -506,6 +522,7 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 ---
 
 ## 八、延伸阅读
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [RFC 3668: Async Closures](https://rust-lang.github.io/rfcs/3668-async-closures.html)
@@ -525,6 +542,7 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -669,4 +687,3 @@ fn handler<F>(f: F) where F: AsyncFn(i32) -> i32 {}
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

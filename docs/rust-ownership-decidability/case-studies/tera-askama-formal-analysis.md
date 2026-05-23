@@ -49,7 +49,7 @@
 
 > 模板运行时加载，上下文动态绑定。
 
-```rust
+```rust,ignore
 let mut context = Context::new();
 context.insert("name", &user.name);
 context.insert("items", &items);
@@ -82,7 +82,7 @@ let rendered = tera.render("template.html", &context)?;
 
 > Askama在编译时验证模板字段。
 
-```rust
+```rust,ignore
 #[derive(Template)]
 #[template(path = "hello.html")]
 struct HelloTemplate<'a> {
@@ -126,7 +126,7 @@ struct HelloTemplate<'a> {
 
 ### 反例 5.1 (XSS注入)
 
-```rust
+```rust,ignore
 // 危险: 使用|safe过滤器
 let html = format!("<div>{}</div>", user_input);
 template.render(Context::new().insert("content", &html|safe));
@@ -136,7 +136,7 @@ template.render(Context::new().insert("content", &html|safe));
 
 ### 反例 5.2 (模板注入)
 
-```rust
+```rust,ignore
 // 危险: 用户输入作为模板
 tera.render_str(&user_input, &context)?;  // SSTI风险!
 

@@ -215,7 +215,7 @@ Rust 1.94.0 为 `LazyCell` 和 `LazyLock` 添加了以下方法：
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 
@@ -289,7 +289,7 @@ fn math_constants() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 fn next_if_map_example() {
@@ -340,7 +340,7 @@ fn char_to_usize() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 const fn const_math() {
     // 乘加运算: a * b + c
     let result = 2.0f64.mul_add(3.0, 4.0);

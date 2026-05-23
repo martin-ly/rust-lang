@@ -85,7 +85,7 @@ graph TD
 | 需要绑定多个值 | `match` | `match pair { (a, b) => ... }` |
 | 条件守卫 | `match` | `match x { v if v > 0 => ... }` |
 
-```rust
+```rust,ignore
 // ❌ 不推荐: 对 Option 使用 match
 match option {
     Some(v) => println!("{}", v),
@@ -124,7 +124,7 @@ match result {
 | 可能不执行 | `while let` | 模式匹配条件 |
 | 无限循环 | `loop` | 服务器、事件循环 |
 
-```rust
+```rust,ignore
 // 1. 遍历集合
 for item in collection {
     println!("{}", item);
@@ -185,7 +185,7 @@ graph LR
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 场景: 找第一个满足条件的元素
 
 // ❌ 不推荐: 手动循环

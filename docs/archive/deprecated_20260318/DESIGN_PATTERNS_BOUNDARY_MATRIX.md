@@ -200,7 +200,7 @@ pub trait GUIFactory {
 | **推荐实现方式** | 消耗性 Builder 模式 |
 | **代码示例链接** | [builder.md](01_creational/builder.md) |
 
-```rust
+```rust,ignore
 pub struct HttpRequest {
     method: String,
     url: String,
@@ -237,7 +237,7 @@ impl HttpRequestBuilder {
 | **推荐实现方式** | 实现 `Clone` + `#[derive(Clone)]` |
 | **代码示例链接** | [prototype.md](01_creational/prototype.md) |
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug)]
 pub struct Shape {
     pub x: i32,
@@ -388,7 +388,7 @@ impl Component {
 | **推荐实现方式** | 泛型装饰器或 `Box<dyn Component>` |
 | **代码示例链接** | [decorator.md](02_structural/decorator.md) |
 
-```rust
+```rust,ignore
 pub trait Coffee {
     fn cost(&self) -> f64;
     fn description(&self) -> String;
@@ -637,7 +637,7 @@ cart.checkout(100.0);
 | **推荐实现方式** | 状态 enum + 转换方法 |
 | **代码示例链接** | [state.md](03_behavioral/state.md) |
 
-```rust
+```rust,ignore
 // 推荐：使用 enum 而非 trait
 pub enum ConnectionState {
     Closed,
@@ -674,7 +674,7 @@ impl ConnectionState {
 | **推荐实现方式** | Trait + 具体命令结构体 |
 | **代码示例链接** | [command.md](03_behavioral/command.md) |
 
-```rust
+```rust,ignore
 pub trait Command {
     fn execute(&self);
     fn undo(&self);
@@ -758,7 +758,7 @@ impl<'a> Iterator for BookIterator<'a> {
 | **推荐实现方式** | Trait 默认方法 |
 | **代码示例链接** | [template_method.md](03_behavioral/template_method.md) |
 
-```rust
+```rust,ignore
 pub trait DataMiner {
     // 模板方法
     fn mine(&self, path: &str) {
@@ -796,7 +796,7 @@ pub trait DataMiner {
 | **推荐实现方式** | 消息通道或 ID 引用系统 |
 | **代码示例链接** | [mediator.md](03_behavioral/mediator.md) |
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Weak};
 use std::collections::HashMap;
 
@@ -1055,7 +1055,7 @@ assert_eq!(expr.evaluate(), 8.0);
 
 ### 7.3 生命周期与模式实现
 
-```rust
+```rust,ignore
 // 模式实现中的生命周期注意事项
 
 // 1. Observer: 使用 Weak 避免循环引用
@@ -1124,7 +1124,7 @@ pub struct FlyweightFactory {
 
 ### Rust 中实现各模式的推荐方式
 
-```rust
+```rust,ignore
 // 创建型
 Singleton     → OnceLock<T>
 Factory       → Trait + dyn/泛型

@@ -130,7 +130,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
 where
     T: Sized,
@@ -157,7 +157,7 @@ where
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 1.93 - 动态大小，无法解构
 for window in data.windows(3) {
     // window: &[i32]
@@ -268,7 +268,7 @@ fn moving_average<const N: usize>(data: &[f64]) -> Vec<f64> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // benchmarks
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -330,7 +330,7 @@ pub enum ControlFlow<B, C = ()> {
 
 **ControlFlow 是一个 Bifunctor**:
 
-```rust
+```rust,ignore
 // 映射 Break 值
 impl<B, C> ControlFlow<B, C> {
     pub fn map_break<F, T>(self, f: F) -> ControlFlow<T, C>
@@ -344,7 +344,7 @@ impl<B, C> ControlFlow<B, C> {
 
 **与 try_fold 的关系**:
 
-```rust
+```rust,ignore
 // try_fold 的签名
 fn try_fold<B, F, R>(&mut self, init: B, f: F) -> R
 where
@@ -390,7 +390,7 @@ fn find_first_v2<T>(items: &[T], predicate: impl Fn(&T) -> bool) -> Option<&T> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 /// 验证所有元素，返回第一个错误及其索引
 fn validate_all<T, E>(
     items: &[T],
@@ -409,7 +409,7 @@ fn validate_all<T, E>(
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// 二维搜索，找到目标立即终止所有循环
 fn search_2d<T: Eq>(matrix: &[Vec<T>], target: &T) -> Option<(usize, usize)> {
     matrix.iter().enumerate().try_for_each(|(i, row)| {
@@ -428,7 +428,7 @@ fn search_2d<T: Eq>(matrix: &[Vec<T>], target: &T) -> Option<(usize, usize)> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 use tokio::time::{sleep, Duration};
 
@@ -465,7 +465,7 @@ where T: Clone
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 impl<T, F: FnOnce() -> T> LazyCell<T, F> {
     pub const fn new(f: F) -> LazyCell<T, F>;
 }
@@ -484,7 +484,7 @@ impl<T, F: FnOnce() -> T> Deref for LazyCell<T, F> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 impl<T, F> LazyCell<T, F> {
     // 获取引用，不触发初始化
     pub fn get(&self) -> Option<&T>;
@@ -514,7 +514,7 @@ impl<T, F> LazyCell<T, F> {
 
 #### 模式1: 条件初始化检查
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 struct Config {
@@ -557,7 +557,7 @@ fn load_from_disk() -> String {
 
 #### 模式2: 线程安全延迟初始化
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 static METRICS: LazyLock<Metrics> = LazyLock::new(|| {
@@ -584,7 +584,7 @@ fn record_metric(name: &str, value: f64) {
 ### 4.1 next_if_map 语义
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 impl<I: Iterator> Peekable<I> {
     /// 如果下一个元素满足条件，应用映射并返回
     pub fn next_if_map<R>(
@@ -608,7 +608,7 @@ impl<I: Iterator> Peekable<I> {
 ### 4.3 实际应用: 词法分析器
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 struct Lexer<I: Iterator<Item = char>> {
@@ -658,7 +658,7 @@ impl<I: Iterator<Item = char>> Lexer<I> {
 ### 5.1 新增常量
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // f32::consts
 pub const EULER_GAMMA: f32 = 0.5772156649015329_f32;
 pub const GOLDEN_RATIO: f32 = 1.618033988749895_f32;

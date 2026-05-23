@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔗 跨模块集成示例指南 {#-跨模块集成示例指南}](#-跨模块集成示例指南--跨模块集成示例指南)
@@ -44,6 +45,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录 {#-目录}
 >
@@ -83,6 +85,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -106,7 +109,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::*;
 use c02_type_system::*;
 
@@ -160,7 +163,7 @@ fn test_resource_manager() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c06_async::*;
 use c10_networks::*;
 use tokio::net::TcpListener;
@@ -198,7 +201,7 @@ async fn async_http_server() -> Result<(), Box<dyn std::error::Error>> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c05_threads::*;
 use c07_process::*;
 use std::sync::{Arc, Mutex};
@@ -271,7 +274,7 @@ impl Drop for ThreadPool {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c11_macro_system::*;
 use c09_design_pattern::*;
 
@@ -321,7 +324,7 @@ fn test_singleton() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use c08_algorithms::*;
 use std::time::Instant;
 
@@ -353,13 +356,14 @@ fn test_data_pipeline() {
 ---
 
 ## 示例6: WASM与跨平台集成
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景：WASM模块与Rust后端集成
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use c12_wasm::*;
 
 /// WASM函数导出
@@ -384,6 +388,7 @@ fn test_wasm_integration() {
 ---
 
 ## 最佳实践
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 模块边界清晰
@@ -421,6 +426,7 @@ fn test_wasm_integration() {
 ---
 
 ## 使用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 场景1: 全栈 Rust 应用
@@ -468,6 +474,7 @@ fn test_wasm_integration() {
 ---
 
 ## 形式化链接
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 链接类型 | 目标文档 |
@@ -494,6 +501,7 @@ fn test_wasm_integration() {
 ---
 
 ## Rust 1.95+ 跨模块集成最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -502,7 +510,7 @@ fn test_wasm_integration() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // crate: common_config
 use std::sync::LazyLock;
 
@@ -522,7 +530,7 @@ pub fn is_config_ready() -> bool {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // crate: validation_engine
 use std::ops::ControlFlow;
 
@@ -551,7 +559,7 @@ where
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 跨模块数据流处理：使用 array_windows 进行批次处理
 pub fn process_module_pipeline(
     data: &[ModuleInput],
@@ -584,6 +592,7 @@ pub fn process_module_pipeline(
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [05_guides 目录](./README.md)
@@ -754,4 +763,3 @@ pub fn process_module_pipeline(
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

@@ -175,7 +175,7 @@ let s2 = s1;  // 转移所有权
 ### 3.4 反例：使用已Move的值
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn use_after_move() {
     let s = String::from("hello");
     let t = s;  // s 被移动到 t
@@ -368,7 +368,7 @@ let s2 = s1.clone();  // 显式深拷贝
 ### 8.2 反例：使用已Move的值
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 let t = s;
 println!("{}", s);  // 编译错误: use of moved value

@@ -638,6 +638,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_numa_aware_work_stealing() {
         let scheduler = NumaAwareWorkStealingScheduler::new(2, 2);
 

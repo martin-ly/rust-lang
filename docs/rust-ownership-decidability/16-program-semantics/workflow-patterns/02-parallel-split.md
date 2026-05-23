@@ -303,7 +303,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 /// 使用 std::thread 的并行分裂
@@ -345,7 +345,7 @@ where
 
 **所有权分布示例**:
 
-```rust
+```rust,ignore
 fn ownership_distribution() {
     let data_a = vec![1, 2, 3];
     let data_b = vec![4, 5, 6];
@@ -363,7 +363,7 @@ fn ownership_distribution() {
 
 **类型安全保证**:
 
-```rust
+```rust,ignore
 fn type_safe_parallel() {
     let shared = std::sync::Arc::new(std::sync::Mutex::new(0));
     let clone = shared.clone();
@@ -378,7 +378,7 @@ fn type_safe_parallel() {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use thiserror::Error;
@@ -435,7 +435,7 @@ impl ParallelSplitExecutor {
 ### 5.3 微服务并行启动完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use tokio::time::{sleep, Instant};
 
@@ -635,7 +635,7 @@ flowchart LR
 
 **场景**: Web 服务同时从多个数据源获取数据
 
-```rust
+```rust,ignore
 async fn get_dashboard_data(user_id: u64) -> Dashboard {
     let (profile, notifications, stats) = tokio::join!(
         db::get_profile(user_id),
@@ -655,7 +655,7 @@ async fn get_dashboard_data(user_id: u64) -> Dashboard {
 
 **场景**: 将大任务分发给多个工作节点并行处理
 
-```rust
+```rust,ignore
 fn distributed_map_reduce(data: Vec<i32>) -> i32 {
     let chunks: Vec<_> = data.chunks(data.len() / 4).map(|c| c.to_vec()).collect();
     let handles: Vec<_> = chunks.into_iter()
@@ -670,7 +670,7 @@ fn distributed_map_reduce(data: Vec<i32>) -> i32 {
 
 **场景**: 并行处理多个传感器数据流
 
-```rust
+```rust,ignore
 async fn process_sensor_streams() {
     let _ = tokio::join!(
         process_temperature(),
@@ -690,7 +690,7 @@ async fn process_sensor_streams() {
 
 仅在条件满足时创建对应分支：
 
-```rust
+```rust,ignore
 pub async fn conditional_parallel_split<T>(
     conditions: Vec<bool>,
     branches: Vec<impl FnOnce() -> T>,
@@ -708,7 +708,7 @@ pub async fn conditional_parallel_split<T>(
 
 分裂为固定数量的并行分支：
 
-```rust
+```rust,ignore
 pub fn partial_parallel_split<T>(
     items: Vec<T>, chunk_size: usize,
     f: impl Fn(Vec<T>) -> Vec<T> + Clone + Send + 'static,
@@ -734,7 +734,7 @@ flowchart LR
     fork2 --> D[Activity D]
 ```
 
-```rust
+```rust,ignore
 let (b, (c, d)) = tokio::join!(
     async { task_b().await },
     async { tokio::join!(async { task_c().await }, async { task_d().await }) },

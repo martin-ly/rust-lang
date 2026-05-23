@@ -23,7 +23,7 @@ mio 的三大核心抽象：
 > [来源: mio Docs — Getting Started](https://docs.rs/mio/latest/mio/)
 > [来源: Tokio Docs — mio Integration](https://tokio.rs/tokio/topics/runtime-internals)
 
-```rust
+```rust,ignore
 use mio::{Events, Interest, Poll, Token};
 use mio::net::TcpListener;
 
@@ -123,7 +123,7 @@ mio 的统一策略：
 
 `Token` 是 mio 最核心的类型创新——一个 `usize` 大小的**用户定义标识符**，将操作系统返回的就绪事件与应用程序的上下文关联起来：
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Token(pub usize);
 
@@ -157,7 +157,7 @@ impl Server {
 
 `Interest` 将事件类型编码为位掩码，支持编译期组合：
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone, Debug, PartialEq, Eq)]
 pub struct Interest(u8);
 
@@ -191,7 +191,7 @@ registry.register(&mut socket, Token(0), RW)?;
 
 `Registry` 实现了 `Sync` 但不实现 `Send`，这是一个经过深思熟虑的设计决策：
 
-```rust
+```rust,ignore
 impl Registry {
     /// 注册 IO 源，需要 &mut self —— 但 Registry 通过内部同步保证线程安全
     pub fn register(&self, source: &mut impl Source, token: Token, interests: Interest)
@@ -257,7 +257,7 @@ sequenceDiagram
 
 Tokio 将 mio 的 `Waker` 与 Rust 标准库的 `std::task::Waker` 桥接：
 
-```rust
+```rust,ignore
 // Tokio 内部简化示意
 struct IoWaker {
     inner: mio::Waker,           // 唤醒事件循环
@@ -286,7 +286,7 @@ impl std::task::Wake for IoWaker {
 
 mio 的抽象层厚度可以通过对比直接使用 epoll 的代码来量化：
 
-```rust
+```rust,ignore
 // ===== 直接使用 Linux epoll =====
 unsafe {
     let epfd = libc::epoll_create1(libc::EPOLL_CLOEXEC);

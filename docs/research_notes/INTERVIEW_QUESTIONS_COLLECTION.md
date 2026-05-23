@@ -115,7 +115,7 @@
 
 **Q4: 为什么这段代码编译错误？如何修复？**
 
-```rust
+```rust,ignore
 let x = String::from("hello");
 let y = x;
 println!("{}", x);
@@ -128,7 +128,7 @@ println!("{}", x);
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 方案1: clone
 let y = x.clone();
 
@@ -198,7 +198,7 @@ x.set(10);  // 内部修改
 
 **Q8: 解释这段代码为什么错误：**
 
-```rust
+```rust,ignore
 let mut x = 5;
 let r1 = &x;
 let r2 = &mut x;
@@ -252,7 +252,7 @@ let z = &mut x;  // 在NLL之前编译错误
 
 零大小类型，用于告诉编译器使用了某个类型，影响生命周期。
 
-```rust
+```rust,ignore
 struct Slice<'a, T: 'a> {
     ptr: *const T,
     _marker: PhantomData<&'a T>,
@@ -284,7 +284,7 @@ async/await需要Pin因为Future是状态机，可能自引用。
 - `swap`: 交换两个可变引用的值
 - `replace`: 替换值并返回旧值
 
-```rust
+```rust,ignore
 mem::swap(&mut a, &mut b);  // a和b交换
 let old = mem::replace(&mut a, new);  // a=new，返回旧值
 ```
@@ -343,7 +343,7 @@ let x: &'static str = Box::leak(Box::new(String::from("hello")));
 
 使用`AtomicUsize`作为引用计数：
 
-```rust
+```rust,ignore
 struct Arc<T> {
     ptr: NonNull<ArcInner<T>>,
 }
@@ -458,7 +458,7 @@ trait Iterator {
 
 高阶trait bound (HRTB)，表示"对于所有生命周期"。
 
-```rust
+```rust,ignore
 F: for<'a> Fn(&'a str) -> &'a str
 ```
 
@@ -479,7 +479,7 @@ F: for<'a> Fn(&'a str) -> &'a str
 
 允许关联类型有泛型参数：
 
-```rust
+```rust,ignore
 trait Container {
     type Item<'a>;
     fn get(&self, index: usize) -> Option<Self::Item<'_>>;
@@ -497,7 +497,7 @@ trait Container {
 
 为特定类型提供泛型的特殊实现：
 
-```rust
+```rust,ignore
 impl<T> Trait for T { default fn method() {} }
 impl Trait for i32 { fn method() {} }  // 特化
 ```
@@ -631,7 +631,7 @@ let ptr: *const MySlice;  // 包含长度信息
 
 编译器将async函数转换为状态机：
 
-```rust
+```rust,ignore
 async fn foo() { bar().await; }
 
 // 转换为：
@@ -685,7 +685,7 @@ enum FooFuture {
 
 `.await`前释放锁：
 
-```rust
+```rust,ignore
 // ❌ 危险
 let guard = mutex.lock().unwrap();
 some_async().await;
@@ -712,7 +712,7 @@ let guard = tokio_mutex.lock().await;
 
 等待多个Future，哪个先完成就执行哪个：
 
-```rust
+```rust,ignore
 tokio::select! {
     _ = task1 => println!("task1"),
     _ = task2 => println!("task2"),
@@ -739,7 +739,7 @@ tokio::select! {
 3. Reactor处理IO事件
 4. Waker唤醒Task
 
-```rust
+```rust,ignore
 struct Runtime {
     task_queue: VecDeque<Task>,
 }
@@ -933,7 +933,7 @@ impl Runtime {
 <details>
 <summary>答案</summary>
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Mutex;
 
@@ -961,7 +961,7 @@ struct LruCache<K, V> {
 <details>
 <summary>答案</summary>
 
-```rust
+```rust,ignore
 struct Saga {
     steps: Vec<Step>,
     compensations: Vec<Compensation>,
@@ -996,7 +996,7 @@ impl Saga {
 <details>
 <summary>答案</summary>
 
-```rust
+```rust,ignore
 struct ConnectionPool {
     connections: Mutex<Vec<Connection>>,
     max_size: usize,
@@ -1026,7 +1026,7 @@ impl ConnectionPool {
 <details>
 <summary>答案</summary>
 
-```rust
+```rust,ignore
 struct MyFuture {
     state: State,
 }
@@ -1070,7 +1070,7 @@ impl Future for MyFuture {
 3. **Projection**: 读模型
 4. **Command Handler**: 处理命令
 
-```rust
+```rust,ignore
 // 事件
 trait Event {}
 

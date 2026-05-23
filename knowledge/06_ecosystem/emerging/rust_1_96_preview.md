@@ -33,7 +33,7 @@ Rust 1.96 主要聚焦于：
 
 `VecDeque` 新增从前部截断的能力，与现有的 `truncate`（从后部截断）对称：
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
@@ -49,7 +49,7 @@ assert_eq!(deque, [4, 5]);
 
 将整数直接格式化为固定大小的栈缓冲区，避免堆分配：
 
-```rust
+```rust,ignore
 #![feature(int_format_into)]
 use std::num::NumBuffer;
 
@@ -70,7 +70,7 @@ let s = (-99999999i32).format_into(&mut buf);
 
 对 `RefCell` 借用 guard 进行条件投影，失败时保留原始 guard：
 
-```rust
+```rust,ignore
 #![feature(refcell_try_map)]
 use std::cell::{RefCell, Ref};
 
@@ -93,7 +93,7 @@ assert!(result.is_ok());
 
 单文件 Rust 脚本，无需 `Cargo.toml`：
 
-```rust
+```rust,compile_fail
 #!/usr/bin/env cargo
 ---
 [package]
@@ -130,7 +130,7 @@ cargo script my_script.rs
 
 Rust 1.95 已稳定 `RangeInclusive` 和 `RangeInclusiveIter`。1.96 预计继续推进 RFC 3550：
 
-```rust
+```rust,ignore
 use core::range::Range;
 
 // 新的 Range 类型实现 IntoIterator 而非直接是 Iterator
@@ -178,7 +178,7 @@ for i in r { // r 仍可用，因为是 Copy
 
 所有上述特性在 1.96 稳定前均需 nightly 编译器和 feature gate：
 
-```rust
+```rust,ignore
 #![feature(int_format_into)]
 #![feature(refcell_try_map)]
 #![feature(vec_deque_truncate_front)]

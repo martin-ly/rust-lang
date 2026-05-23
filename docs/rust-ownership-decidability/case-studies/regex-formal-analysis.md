@@ -58,7 +58,7 @@ Rust regex crate提供:
 
 **实现**:
 
-```rust
+```rust,ignore
 let re = Regex::new(r"(abc");  // 错误! 未闭合组
 // 返回Err，不panic
 ```
@@ -69,7 +69,7 @@ let re = Regex::new(r"(abc");  // 错误! 未闭合组
 
 > 正则应在编译或启动时编译，避免运行时开销。
 
-```rust
+```rust,ignore
 lazy_static! {
     static ref RE: Regex = Regex::new(r"...").unwrap();
 }
@@ -147,7 +147,7 @@ $$
 
 ### 反例 6.1 (捕获组滥用)
 
-```rust
+```rust,ignore
 // 慢: 使用捕获组但不需要
 let re = Regex::new(r"(a+)").unwrap();
 
@@ -157,7 +157,7 @@ let re = Regex::new(r"(?:a+)").unwrap();
 
 ### 反例 6.2 (贪婪匹配)
 
-```rust
+```rust,ignore
 // 可能意外匹配过多
 let re = Regex::new(r".*foo").unwrap();
 

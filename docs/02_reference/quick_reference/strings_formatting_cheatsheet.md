@@ -1,6 +1,7 @@
 ﻿# 📝 Rust 字符串与格式化速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [📝 Rust 字符串与格式化速查卡](#-rust-字符串与格式化速查卡)
@@ -66,6 +67,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c02_type_system/docs/README.md) | [代码示例](../../../crates/c02_type_system/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -142,6 +144,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -1054,6 +1057,7 @@ let c = &s[1..3];  // ❌ 可能 panic：非字符边界
 ---
 
 ### 反例 3: 错误处理从字节到字符串的转换
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误示例**:
@@ -1084,11 +1088,12 @@ let s = String::from_utf8_lossy(&[0x80, 0x81, 0x82]);
 ---
 
 ### 反例 4: format!  panic 导致的拒绝服务
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 fn log_user_input(input: &str) {
     // ❌ 如果 input 包含 { 会导致 panic
     println!(input);
@@ -1113,11 +1118,12 @@ fn log_user_input(input: &str) {
 ---
 
 ### 反例 5: 在热路径上频繁分配字符串
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 fn process_logs(logs: &[LogEntry]) -> String {
     let mut result = String::new();
     for log in logs {
@@ -1132,7 +1138,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 
 **修正**:
 
-```rust
+```rust,ignore
 fn process_logs(logs: &[LogEntry]) -> String {
     let mut result = String::with_capacity(logs.len() * 50);  // 预分配
     for log in logs {
@@ -1168,6 +1174,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 > **[来源: Rust Official Docs]**
 
 ### 官方文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 字符串文档](https://doc.rust-lang.org/std/string/struct.String.html)
@@ -1175,12 +1182,14 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [Rust Reference - String Literals](https://doc.rust-lang.org/reference/tokens.html#string-literals)
 
 ### 项目内部文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [完整类型系统文档](../../../crates/c02_type_system/docs/README.md)
 - [字符串研究笔记](../../research_notes/README.md)
 
 ### 形式化理论与类型系统
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 字符串类型与类型理论
@@ -1189,6 +1198,7 @@ fn process_logs(logs: &[LogEntry]) -> String {
 - [构造能力理论](../../research_notes/type_theory/construction_capability.md) — 字符串操作表达能力
 
 ### 相关速查卡
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [类型系统速查卡](./type_system.md) - String 和 &str 类型
@@ -1207,14 +1217,16 @@ fn process_logs(logs: &[LogEntry]) -> String {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1268,6 +1280,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1633,4 +1646,3 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

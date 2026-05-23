@@ -50,7 +50,7 @@ pulldown-cmark提供:
 
 > 按需生成事件，不构建完整AST。
 
-```rust
+```rust,ignore
 let parser = Parser::new(markdown);
 for event in parser {
     match event {
@@ -87,7 +87,7 @@ for event in parser {
 
 > 默认返回原始输入的切片。
 
-```rust
+```rust,ignore
 let markdown = "Hello **world**";
 let parser = Parser::new(markdown);
 // Event::Text 返回 &str 指向 markdown
@@ -101,7 +101,7 @@ let parser = Parser::new(markdown);
 
 ### 反例 5.1 (未处理所有事件)
 
-```rust
+```rust,ignore
 // 忽略某些事件可能导致渲染错误
 for event in parser {
     if let Event::Text(t) = event {

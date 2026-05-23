@@ -145,7 +145,7 @@ graph TD
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 嵌套作用域
 let mut data = vec![1, 2, 3];
 {
@@ -186,7 +186,7 @@ error[E0502]: cannot borrow `data` as mutable because
 
 **常见场景与修复**:
 
-```rust
+```rust,ignore
 // 场景: 遍历并修改
 let mut data = vec![1, 2, 3];
 
@@ -291,7 +291,7 @@ error[E0621]: explicit lifetime required in the type of `x`
 
 **修复模式**:
 
-```rust
+```rust,ignore
 // 错误
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
@@ -321,7 +321,7 @@ error[E0106]: missing lifetime specifier
 
 **修复模式**:
 
-```rust
+```rust,ignore
 // 错误
 struct Parser {
     text: &str,
@@ -413,7 +413,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 
 **修复模式**:
 
-```rust
+```rust,ignore
 // 错误
 use std::rc::Rc;
 use std::thread;
@@ -444,7 +444,7 @@ error[E0596]: cannot borrow data in a `&` reference as mutable
 
 **修复模式**:
 
-```rust
+```rust,ignore
 // 错误
 let data = Arc::new(vec![1, 2, 3]);
 data.push(4);  // 错误！
@@ -516,7 +516,7 @@ cargo clippy -- -W clippy::all
 ### 所有权友好的 API 设计
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 1. 优先使用借用
 pub fn process(data: &[u8]) -> Result<(), Error>;
 
@@ -556,7 +556,7 @@ fn find_order(id: OrderId) -> Order;
 ### 练习 1: 诊断并修复
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3];
     let first = &data[0];
@@ -584,7 +584,7 @@ fn main() {
 ### 练习 2: 诊断并修复
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 fn get_ref() -> &String {
     let s = String::from("hello");
     &s

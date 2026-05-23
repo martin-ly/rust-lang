@@ -163,7 +163,7 @@ $$
 ### 3.2 异步 tokio::sync::mpsc
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 async fn async_channel_semantics() {
@@ -196,7 +196,7 @@ async fn async_channel_semantics() {
 ### 3.3 oneshot 通道语义
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::oneshot;
 
 // 单次通信（请求-响应模式）
@@ -219,7 +219,7 @@ async fn oneshot_semantics() {
 
 **oneshot 类型安全:**
 
-```rust
+```rust,ignore
 // Sender<T> 只能使用一次
 impl<T> Sender<T> {
     pub fn send(self, t: T) -> Result<(), T>;
@@ -254,7 +254,7 @@ impl<T> Sender<T> {
 ### 4.2 分布式一致性语义
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 精确一次语义（Exactly-Once）
 pub trait ExactlyOnceDelivery {
     // 消息ID去重
@@ -278,7 +278,7 @@ pub trait ExactlyOnceDelivery {
 ### 4.3 超时与重试语义
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 pub struct ReliableSender<T> {
     timeout: Duration,
     max_retries: u32,

@@ -58,7 +58,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn process_data(data: &mut Vec<u32>) {
     let ref1 = &mut data[0];
@@ -101,7 +101,7 @@ fn process_data_index(data: &mut Vec<u32>) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn get_reference() -> &String {
     let s = String::from("hello");
@@ -136,7 +136,7 @@ impl<'a> Container<'a> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 缺少trait约束
 fn find_max<T>(list: &[T]) -> T {
     let mut max = list[0];
@@ -177,7 +177,7 @@ fn find_max_ref<T: PartialOrd>(list: &[T]) -> &T {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误: 在no_std中使用标准库类型
 #![no_std]
 
@@ -214,7 +214,7 @@ fn use_static_vec() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::panic;
 
 /// 安全关键panic处理器
@@ -419,7 +419,7 @@ MIRIFLAGS="-Zmiri-stack-frame=16777216" cargo miri test
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 问题1: 验证超时
 // 解决: 添加展开限制
 #[kani::proof]
@@ -488,7 +488,7 @@ panic-halt = "0.2"
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 禁用运行时检查(仅在充分验证后)
 #[cfg(not(debug_assertions))]
 pub fn fast_add(a: u32, b: u32) -> u32 {
@@ -592,7 +592,7 @@ mod tool_qualification {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use log::{info, warn, error, debug, trace};
 
 /// 结构化日志
@@ -622,7 +622,7 @@ pub fn log_safety_event(event: SafetyEvent) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// 编译时断言
 const_assert!(std::mem::size_of::<State>() <= 64);
 

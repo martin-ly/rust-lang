@@ -7,6 +7,7 @@
 > **定理链编号**: T-050 Pin 安全性 → T-060 unsafe 抽象
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [嵌入式 Rust 指南：Embassy vs RTIC](#嵌入式-rust-指南embassy-vs-rtic)
@@ -27,6 +28,7 @@
   - [思维导图：嵌入式 Rust 生态全景](#思维导图嵌入式-rust-生态全景)
   - [决策树：嵌入式框架选择](#决策树嵌入式框架选择)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **层级**: L6 生态工具 / L3 高级系统编程
 > **前置概念**: [Async](../../concept/03_advanced/02_async.md) · [Ownership](../../concept/01_foundation/01_ownership.md) · [Unsafe](../../concept/03_advanced/03_unsafe.md)
@@ -36,6 +38,7 @@
 ---
 
 ## 概述
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 嵌入式 Rust 生态在 2024–2026 年经历了爆炸式增长：
@@ -61,6 +64,7 @@
 ---
 
 ## Embassy：异步嵌入式
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 核心设计
@@ -102,7 +106,7 @@ main loop {           #[embassy_executor::main]
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
 use embassy_stm32::gpio::{Level, Output, Speed};
@@ -128,7 +132,7 @@ async fn main(_spawner: Spawner) {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use embassy_sync::channel::Channel;
 use embassy_sync::blocking_mutex::raw::ThreadModeRawMutex;
 
@@ -155,6 +159,7 @@ async fn consumer() {
 ---
 
 ## RTIC：实时中断驱动并发
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 核心设计
@@ -190,7 +195,7 @@ RTIC 调度模型:
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use rtic::app;
 
 #[app(device = stm32f4xx_hal::pac, peripherals = true)]
@@ -243,6 +248,7 @@ mod app {
 ---
 
 ## Embassy vs RTIC 对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 维度 | Embassy | RTIC |
@@ -260,6 +266,7 @@ mod app {
 ---
 
 ## 决策树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -282,6 +289,7 @@ mod app {
 ---
 
 ## 参考
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Embassy Book](https://embassy.dev/book/)
@@ -301,6 +309,7 @@ mod app {
 ---
 
 ## 思维导图：嵌入式 Rust 生态全景
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -324,6 +333,7 @@ graph TD
 ---
 
 ## 决策树：嵌入式框架选择
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -442,4 +452,3 @@ graph TD
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

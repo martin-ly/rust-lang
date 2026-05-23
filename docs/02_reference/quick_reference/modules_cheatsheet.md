@@ -78,6 +78,7 @@
     - [核心特性速查](#核心特性速查)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -134,7 +135,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // src/main.rs
 mod my_module; // 声明模块，内容在 my_module.rs
 
@@ -160,7 +161,7 @@ fn private_function() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // src/main.rs
 mod my_module; // 声明模块，内容在 my_module/mod.rs
 
@@ -169,7 +170,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // src/my_module/mod.rs
 pub fn public_function() {
     println!("Public function");
@@ -216,7 +217,7 @@ mod my_module {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 mod my_module {
     // 在当前 crate 内可见
     pub(crate) fn crate_visible() {}
@@ -267,7 +268,7 @@ mod my_module {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 导入模块
 use std::collections::HashMap;
 
@@ -279,7 +280,7 @@ let map = HashMap::new();
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 导入函数
 use std::fs::read_to_string;
 
@@ -298,7 +299,7 @@ use std::collections::*;
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 使用 as 重命名
 use std::collections::HashMap as Map;
 
@@ -322,7 +323,7 @@ use std::{
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 导入当前模块
 use self::my_module;
 
@@ -336,13 +337,14 @@ use crate::root_module;
 ---
 
 ## 🛤️ 路径系统
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 绝对路径
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 从 crate 根开始
 use crate::my_module::my_function;
 
@@ -354,7 +356,7 @@ use std::collections::HashMap;
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 mod parent {
     mod child {
         fn function() {}
@@ -370,7 +372,7 @@ mod parent {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 完整路径
 use std::collections::hash_map::HashMap;
 
@@ -381,6 +383,7 @@ use std::collections::HashMap;
 ---
 
 ## 📁 文件组织
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 单文件模块
@@ -393,7 +396,7 @@ src/
 └── lib.rs
 ```
 
-```rust
+```rust,ignore
 // src/lib.rs
 pub mod utils;
 pub mod models;
@@ -410,7 +413,7 @@ src/
 └── models.rs
 ```
 
-```rust
+```rust,ignore
 // src/main.rs
 mod utils;
 mod models;
@@ -437,7 +440,7 @@ src/
     └── post.rs
 ```
 
-```rust
+```rust,ignore
 // src/utils/mod.rs
 pub mod helper;
 
@@ -469,13 +472,14 @@ src/
 ---
 
 ## 📦 Crate 系统
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 库 Crate
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // src/lib.rs
 pub mod utils;
 pub mod models;
@@ -487,7 +491,7 @@ pub fn public_api() {}
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // src/main.rs
 use my_crate::utils;
 
@@ -509,7 +513,7 @@ src/
     └── tool2.rs
 ```
 
-```rust
+```rust,ignore
 // src/bin/tool1.rs
 use my_crate::utils;
 
@@ -529,7 +533,7 @@ serde = "1.0"
 tokio = { version = "1", features = ["full"] }
 ```
 
-```rust
+```rust,ignore
 // 使用外部 crate
 use serde::{Serialize, Deserialize};
 use tokio::runtime::Runtime;
@@ -538,6 +542,7 @@ use tokio::runtime::Runtime;
 ---
 
 ## 🎯 常用模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 重导出
@@ -575,7 +580,7 @@ mod tests {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 使用 type 别名
 pub type Map<K, V> = std::collections::HashMap<K, V>;
 
@@ -600,9 +605,10 @@ pub mod public_module {
 ```
 
 ### 模块组织最佳实践
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // src/lib.rs
 // 1. 外部依赖
 use std::collections::HashMap;
@@ -623,12 +629,14 @@ pub fn public_api() {}
 ---
 
 ## 📚 路径规则速查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 模块路径
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 绝对路径（从 crate 根）
 crate::module::item
 
@@ -641,9 +649,10 @@ std::collections::HashMap
 ```
 
 ### use 路径
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 导入到当前作用域
 use std::collections::HashMap;
 
@@ -660,9 +669,11 @@ use std::collections::*;
 ---
 
 ## 🎓 常见模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 模块初始化
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -679,6 +690,7 @@ pub fn setup() {
 ```
 
 ### 模块测试
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -694,6 +706,7 @@ mod tests {
 ```
 
 ### 特性模块
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -711,14 +724,16 @@ mod sync_impl {
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 反例 1: 循环引用导致编译失败
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // mod_a.rs
 use crate::mod_b::B;
 pub struct A { pub b: B }
@@ -735,6 +750,7 @@ pub struct B { pub a: A }
 ---
 
 ### 反例 2: 在非 pub 项的路径上使用 pub
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **错误示例**:
@@ -753,6 +769,7 @@ mod inner {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [项目架构指南](../../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
@@ -762,6 +779,7 @@ mod inner {
 - [Workspace 模块示例：类型系统模块 README](../../../crates/c02_type_system/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 这些文件展示了“模块/子模块/导出”的真实组织方式（可直接打开阅读）：
@@ -773,15 +791,18 @@ mod inner {
 - [C10 crate 根与统一 API 组织](../../../crates/c10_networks/src/lib.rs)、[unified_api.rs](../../../crates/c10_networks/src/unified_api.rs)
 
 ## 📚 相关资源
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [Rust 模块系统文档](https://doc.rust-lang.org/book/ch07-00-managing-growing-projects-with-packages-crates-and-modules.html)
 - [Cargo 文档](https://doc.rust-lang.org/cargo/)
 
 ### 项目内部文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [Cargo 包管理与模块索引](../../../crates/c02_type_system/docs/cargo_package_management/00_INDEX.md)
@@ -790,6 +811,7 @@ mod inner {
 - [字符串与格式化速查卡](./strings_formatting_cheatsheet.md) - 模块中的字符串处理
 
 ### 相关速查卡
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [所有权系统速查卡](./ownership_cheatsheet.md) - 模块中的所有权规则
@@ -799,12 +821,14 @@ mod inner {
 ---
 
 ## 💡 使用场景
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 场景 1: 分层架构组织
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // src/lib.rs
 //! Web 服务器库
 
@@ -818,7 +842,7 @@ pub use handlers::user_handler;
 pub use models::User;
 ```
 
-```rust
+```rust,ignore
 // src/handlers/mod.rs
 //! HTTP 请求处理器
 
@@ -840,7 +864,7 @@ impl fmt::Display for HandlerError {
 }
 ```
 
-```rust
+```rust,ignore
 // src/handlers/user_handler.rs
 //! 用户相关请求处理
 
@@ -874,9 +898,10 @@ pub struct Post {
 ```
 
 ### 场景 2: 特性门控模块
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // Cargo.toml
 // [features]
 // default = ["std"]
@@ -930,6 +955,7 @@ pub fn read_file(path: &str) -> Result<String, std::io::Error> {
 ```
 
 ### 场景 3: 私有实现细节
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -992,9 +1018,11 @@ mod tests {
 ---
 
 ## ⚠️ 边界情况
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 边界 1: 模块可见性陷阱
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -1018,6 +1046,7 @@ fn main() {
 ```
 
 ### 边界 2: 重导出与命名空间
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -1048,9 +1077,10 @@ fn main() {
 ```
 
 ### 边界 3: 循环依赖解决
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ❌ 避免这种循环依赖：
 // mod a { use crate::b::B; }
 // mod b { use crate::a::A; }
@@ -1086,6 +1116,7 @@ fn main() {
 ```
 
 ### 形式化理论
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [类型系统完备性缺口](../../research_notes/type_theory/00_completeness_gaps.md) — 模块系统与类型可见性的形式化保证
@@ -1102,14 +1133,16 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1444,4 +1477,3 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

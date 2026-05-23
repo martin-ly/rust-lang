@@ -356,7 +356,7 @@ Rust编译器会自动推断生命周期，遵循以下规则：
 
 **定义 (Future)**: 表示异步计算的trait，可以被轮询以检查是否完成。
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -491,7 +491,7 @@ T₁, T₂, T₃ 失败 → C₂, C₁
 
 **反例 1: 使用已移动值**
 
-```rust
+```rust,ignore
 let x = String::from("hello");
 let y = x;
 println!("{}", x);  // 错误: value borrowed here after move
@@ -508,7 +508,7 @@ println!("{}", x);  // 错误: value borrowed here after move
 
 **反例 1: 可变借用与不可变借用冲突**
 
-```rust
+```rust,ignore
 let mut x = 5;
 let r1 = &x;
 let r2 = &mut x;  // 错误: cannot borrow as mutable
@@ -530,7 +530,7 @@ let r;
 
 **反例: Rc跨线程**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 

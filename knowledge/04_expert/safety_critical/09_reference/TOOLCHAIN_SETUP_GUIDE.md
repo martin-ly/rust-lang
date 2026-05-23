@@ -314,7 +314,7 @@ struct-field-name-threshold = 5
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // src/lints.rs
 //! 自定义Clippy lint规则
 
@@ -703,7 +703,7 @@ cargo doc --open
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 安全关键函数
 ///
 /// # Safety

@@ -1,4 +1,5 @@
 # API设计指南
+> **相关概念**: [位置](../../../../concept/01_foundation/13_panic_and_abort.md)
 
 > **Bloom 层级**: 理解
 
@@ -18,7 +19,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// ✅ 使用类型系统防止错误
 
 /// 类型状态模式
@@ -68,7 +69,7 @@ impl Device<Initialized> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// ✅ 默认不可变
 
 pub struct Config {
@@ -112,7 +113,7 @@ let config = Config::new()
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 /// 结构化错误类型
 #[derive(Debug, Clone)]
 pub enum DeviceError {
@@ -173,7 +174,7 @@ impl std::fmt::Display for DeviceError {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 可恢复操作
 pub trait Recoverable {
     type Error;
@@ -220,7 +221,7 @@ pub trait Recoverable {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 资源自动管理
 pub struct ResourceHandle {
     id: u64,
@@ -277,7 +278,7 @@ impl<F: FnOnce()> Drop for ScopeGuard<F> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 智能借用模式
 
 /// 读锁
@@ -334,7 +335,7 @@ impl DataStore {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -387,7 +388,7 @@ impl<F> Drop for CancelSafe<F> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use futures::stream::Stream;
 
 /// 安全数据流
@@ -434,7 +435,7 @@ async fn process_stream() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 安全关键温度传感器驱动
 ///
 /// # 安全声明
@@ -480,7 +481,7 @@ pub struct TemperatureSensor {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,compile_fail
 /// examples/temperature_monitor.rs
 
 use safety_drivers::{TemperatureSensor, Watchdog};

@@ -107,7 +107,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 单元测试
 #[cfg(test)]
 mod tests {
@@ -206,7 +206,7 @@ mod miri_tests {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 使用 criterion 进行基准测试
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 

@@ -94,7 +94,7 @@ graph TD
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use sqlx::query_as;
 
 // 编译时检查 SQL 语法和表存在性
@@ -129,7 +129,7 @@ async fn get_user(pool: &PgPool, user_id: i64) -> Result<User, sqlx::Error> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 自动类型推导
 let count: i64 = sqlx::query_scalar("SELECT COUNT(*) FROM users")
     .fetch_one(pool)
@@ -151,7 +151,7 @@ struct UserWithPosts {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use sqlx::postgres::PgPoolOptions;
 
 // 创建连接池
@@ -180,7 +180,7 @@ let (users, posts): (Vec<User>, Vec<Post>) = tokio::try_join!(
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use sqlx::postgres::{PgPool, PgPoolOptions};
 
 #[derive(Clone)]
@@ -220,7 +220,7 @@ impl Database {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use sqlx::{Postgres, Transaction};
 
 async fn transfer_funds(
@@ -286,7 +286,7 @@ async fn nested_transaction_example(db: &Database) -> Result<(), sqlx::Error> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use sqlx::{QueryBuilder, Postgres};
 
 // 动态查询构建
@@ -366,7 +366,7 @@ CREATE TABLE IF NOT EXISTS posts (
 );
 ```
 
-```rust
+```rust,ignore
 use sqlx::migrate;
 
 async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError> {
@@ -397,7 +397,7 @@ async fn run_migrations(pool: &PgPool) -> Result<(), sqlx::migrate::MigrateError
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 1. 使用 fetch_one 替代 fetch_all (当只需要一行时)
 let user: User = sqlx::query_as("SELECT * FROM users WHERE id = $1")
     .bind(id)

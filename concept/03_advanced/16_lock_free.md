@@ -35,6 +35,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 无锁 vs 无等待
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -85,6 +87,7 @@
 ---
 
 ### 1.2 ABA 问题
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -130,6 +133,7 @@ ABA 问题:
 ---
 
 ### 1.3 内存序选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -175,6 +179,7 @@ ABA 问题:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Treiber Stack
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -229,6 +234,7 @@ Treiber Stack:
 ---
 
 ### 2.2 Michael-Scott Queue
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -267,6 +273,7 @@ Michael-Scott Queue:
 ---
 
 ### 2.3 Hazard Pointer
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -307,6 +314,7 @@ Hazard Pointer:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 crossbeam
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -341,6 +349,7 @@ crossbeam 生态:
 ---
 
 ### 3.2 lockfree
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -380,6 +389,7 @@ lockfree crate:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -403,6 +413,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -528,6 +539,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -730,4 +742,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

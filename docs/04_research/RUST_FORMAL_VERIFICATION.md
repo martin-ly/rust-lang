@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 形式化验证学术导读](#rust-形式化验证学术导读)
@@ -41,6 +42,7 @@
   - [7. 参考文献](#7-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 为什么 Rust 需要形式化验证？
 >
@@ -250,7 +252,7 @@ RefinedRust 工作流程:
 
 RefinedRust 允许在 Rust 类型上附加**逻辑谓词**：
 
-```rust
+```rust,ignore
 // RefinedRust 注释语法 (概念性示例)
 #[refined("len >= 0 && len <= cap")]
 struct Vec<T> {
@@ -305,6 +307,7 @@ impl<T> Vec<T> {
 ---
 
 ## 4. 面向学习者的阅读路径
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 基础阶段 (1-2 周)
@@ -381,6 +384,7 @@ impl<T> Vec<T> {
 ---
 
 ## 5. 与项目已有形式化证明内容的衔接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 5.1 现有内容盘点
@@ -394,6 +398,7 @@ impl<T> Vec<T> {
 - 生命周期分析框架
 
 ### 5.2 衔接建议
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 现有内容 | RustBelt 对应 | 扩展方向 |
@@ -404,6 +409,7 @@ impl<T> Vec<T> {
 | 并发安全模型 | RustBelt + Iris 并发 | Sync/Send 的形式化语义 |
 
 ### 5.3 新增研究方向建议
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. **Tree Borrows 模型**: 作为 Stacked Borrows 的替代，更精确地描述 Rust 的别名规则
@@ -413,6 +419,7 @@ impl<T> Vec<T> {
 ---
 
 ## 6. 关键概念速查表
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 术语 | 解释 |
@@ -429,6 +436,7 @@ impl<T> Vec<T> {
 ---
 
 ## 7. 参考文献
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 1. **Jung, R., Jourdan, J.-H., Krebbers, R., & Dreyer, D.** *"RustBelt: Securing the Foundations of the Rust Programming Language"*. POPL 2017.
@@ -492,6 +500,7 @@ impl<T> Vec<T> {
 ---
 
 ## 相关概念
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [上级目录](../README.md)
@@ -627,4 +636,3 @@ impl<T> Vec<T> {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

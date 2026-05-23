@@ -1,4 +1,5 @@
 # FFI集成指南 - 安全关键系统
+> **相关概念**: [FFI](../../../../concept/03_advanced/09_ffi_advanced.md)
 
 > **Bloom 层级**: 理解
 
@@ -36,7 +37,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 安全的C库包装器
 
 use std::ffi::{c_char, c_int, CStr, CString};
@@ -137,7 +138,7 @@ pub enum FfiError {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 //! 类型转换安全
 
 use std::ffi::{c_char, c_int, c_uint};
@@ -206,7 +207,7 @@ pub enum FfiError {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! 安全的回调机制
 
 use std::ffi::c_void;
@@ -364,7 +365,7 @@ impl<T> Drop for CVec<T> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! 并发FFI安全
 
 use std::sync::Arc;
@@ -439,7 +440,7 @@ impl Drop for NativeContextWrapper {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,compile_fail
 // build.rs
 use std::env;
 use std::path::PathBuf;

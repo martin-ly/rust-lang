@@ -345,7 +345,7 @@ impl<T> IdentityMap<T> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 pub struct OrderService {
     repo: Box<dyn Repository<Order>>,
 }
@@ -364,7 +364,7 @@ impl OrderService {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 trait Repository<T> {
     fn find(&self, id: u64) -> Option<T>;
     fn save(&mut self, entity: T) -> Result<(), String>;
@@ -381,7 +381,7 @@ impl Repository<User> for UserRepository {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct UserDto {
     pub id: u64,
@@ -436,7 +436,7 @@ impl<T, A: Specification<T>, B: Specification<T>> Specification<T> for AndSpec<A
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 表级数据访问：一张表对应一个 Gateway
 pub struct UserGateway {
     // 内部持 Connection 等；实际项目用 sqlx/diesel；Connection 为 trait 抽象
@@ -489,7 +489,7 @@ impl User {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 外部系统集成：封装 HTTP 客户端、FFI 等
 pub trait PaymentGateway: Send + Sync {
     fn charge(&self, amount: u64, token: &str) -> Result<ChargeId, String>;
@@ -508,7 +508,7 @@ impl PaymentGateway for StripeGateway {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 分离模型/视图/控制器；模块分层
 mod model {
     pub struct Order { pub id: u64, pub amount: u64 }
@@ -556,7 +556,7 @@ impl Router {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 粗粒度远程接口：减少跨边界调用次数
 #[derive(serde::Serialize, serde::Deserialize)]
 pub struct OrderBatchRequest {
@@ -635,7 +635,7 @@ impl App {
 ### Optimistic Offline Lock
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 乐观并发控制：版本号 + CAS
 pub struct Entity {
     pub id: u64,

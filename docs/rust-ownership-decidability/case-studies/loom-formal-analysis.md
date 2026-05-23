@@ -49,7 +49,7 @@ Loom提供:
 
 > Loom探索所有可能的线程交错。
 
-```rust
+```rust,ignore
 loom::model(|| {
     let data = Arc::new(AtomicUsize::new(0));
 
@@ -82,7 +82,7 @@ loom::model(|| {
 
 > 验证原子操作内存顺序正确性。
 
-```rust
+```rust,ignore
 // 测试可能暴露弱序问题
 loom::model(|| {
     let x = Arc::new(AtomicBool::new(false));
@@ -101,7 +101,7 @@ loom::model(|| {
 
 > 验证happens-before关系。
 
-```rust
+```rust,ignore
 loom::model(|| {
     let data = Arc::new((AtomicUsize::new(0), AtomicUsize::new(0)));
     // 线程1: Release写
@@ -118,7 +118,7 @@ loom::model(|| {
 
 ### 反例 5.1 (状态爆炸)
 
-```rust
+```rust,ignore
 // 太多线程导致路径爆炸
 loom::model(|| {
     for _ in 0..100 {

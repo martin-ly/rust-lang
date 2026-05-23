@@ -140,7 +140,7 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 
 基于 MCP (Major Change Proposal) 的讨论，提议的合约语法:
 
-```rust
+```rust,ignore
 // 前置条件
 #[requires(index < self.len())]
 // 后置条件
@@ -151,7 +151,7 @@ Rust 标准库是 Rust 生态系统的基石，被无数应用程序依赖。
 
 **更复杂的示例**:
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     /// # Safety
     /// `index` must be within bounds

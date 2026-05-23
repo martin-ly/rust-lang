@@ -148,7 +148,7 @@ These code blocks require external crates that are not available in standalone `
 
 Many code blocks are standalone statements that need to be wrapped in `main()`:
 
-```rust
+```rust,ignore
 // Current (fails)
 let arr: Array<i32, 5> = Array { data: [1, 2, 3, 4, 5] };
 
@@ -180,7 +180,7 @@ NLL的关键：生命周期基于**使用位置**而非**作用域范围**。
 
 The `ownership-counterexamples.md` file contains **intentionally broken** code to demonstrate errors:
 
-```rust
+```rust,ignore
 fn use_after_move() {
     let s1 = String::from("hello");
     let s2 = s1;  // s1 moved to s2

@@ -155,7 +155,7 @@ let s2 = s1;  // 移动发生
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 fn example() {
     let mut data = vec![1, 2, 3];
     let first = &data[0];
@@ -240,7 +240,7 @@ take_static("hello");  // OK
 
 **A**: 当编译器无法推断时:
 
-```rust
+```rust,ignore
 // 编译器可以自动推断 (省略规则)
 fn first_word(s: &str) -> &str { ... }
 
@@ -271,7 +271,7 @@ unsafe { println!("{}", *ptr); }
 
 1. **调用 unsafe 函数**
 
-```rust
+```rust,ignore
 unsafe { libc::malloc(1024); }
 ```
 
@@ -290,7 +290,7 @@ unsafe { COUNTER += 1; }
 
 1. **访问 union 字段**
 
-```rust
+```rust,ignore
 union MyUnion { i: i32, f: f32 }
 unsafe { println!("{}", u.i); }
 ```
@@ -305,7 +305,7 @@ unsafe { println!("{}", u.i); }
 
 **A**: `unsafe` 不意味着 "危险"，而是 "程序员保证正确":
 
-```rust
+```rust,ignore
 // 这个 unsafe 块实际上是安全的，因为 Vec 保证布局正确
 unsafe {
     let slice = std::slice::from_raw_parts(ptr, len);
@@ -365,7 +365,7 @@ unsafe {
 
 **A**: 引用计数不是原子的:
 
-```rust
+```rust,ignore
 // Rc 的内部:
 struct Rc<T> {
     ptr: NonNull<RcBox<T>>,
@@ -414,7 +414,7 @@ struct RcBox<T> {
 
 **A**: 不能。形式化验证只能验证**规范**，而规范可能不完整:
 
-```rust
+```rust,ignore
 // 验证这个函数没有溢出
 #[requires(x >= 0)]
 #[ensures(result >= x)]
@@ -551,7 +551,7 @@ jobs:
 
 **A**: 通常**零成本**:
 
-```rust
+```rust,ignore
 // Rust
 let data = vec![1, 2, 3];
 process(data);  // 移动，只是指针复制
@@ -577,7 +577,7 @@ process(data);  // 移动，只是指针复制
 
 1. **使用引用**
 
-```rust
+```rust,ignore
 // 不好
 fn process(s: String) { ... }
 process(data.clone());
@@ -599,7 +599,7 @@ fn process(s: Cow<str>) {
 
 1. **使用迭代器而非集合**
 
-```rust
+```rust,ignore
 // 不好: 分配新 Vec
 let doubled: Vec<_> = data.iter().map(|x| x * 2).collect();
 
@@ -651,7 +651,7 @@ v.borrow_mut().push(2);  // 运行时检查
 
 **A**:
 
-```rust
+```rust,ignore
 // 问题
 fn get_string() -> &str {  // 错误!
     let s = String::from("hello");
@@ -692,7 +692,7 @@ rustc --explain E0499  # 查看详细解释
 
 1. **使用显式生命周期**
 
-```rust
+```rust,ignore
 // 将隐式变为显式，理解问题
 fn foo<'a, 'b>(x: &'a str, y: &'b str) -> &'a str { ... }
 ```

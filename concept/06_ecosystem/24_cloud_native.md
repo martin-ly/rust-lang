@@ -34,6 +34,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -44,6 +45,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 云原生定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -78,6 +80,7 @@
 ---
 
 ### 1.2 Rust 优势
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -128,6 +131,7 @@ Rust 云原生优势:
 > [来源: [AWS Docs]]
 
 ### 2.1 Axum
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -178,6 +182,7 @@ Axum:
 ---
 
 ### 2.2 Actix-web
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -229,6 +234,7 @@ Actix-web:
 > [来源: [AWS Docs]]
 
 ### 3.1 服务网格
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -259,6 +265,7 @@ Actix-web:
 ---
 
 ### 3.2 容器运行时
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -300,6 +307,7 @@ Actix-web:
 ---
 
 ### 3.3 可观测性
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -346,6 +354,7 @@ Actix-web:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -367,6 +376,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -474,6 +484,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -629,4 +640,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

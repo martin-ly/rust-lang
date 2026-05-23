@@ -477,7 +477,7 @@ fn authorize_access(user: &str, resource: &str) -> Result<Permission, String> {
 
 对于异步任务，Rust 生态系统提供了宏级的合并原语：
 
-```rust
+```rust,ignore
 use tokio::try_join;
 use futures::future::join;
 use std::sync::Arc;
@@ -559,7 +559,7 @@ pub enum Error {
 
 `crossbeam` 提供了比标准库更丰富的线程合并原语，包括作用域线程和并行迭代器：
 
-```rust
+```rust,ignore
 use crossbeam::thread;
 use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -864,7 +864,7 @@ fn authorize(resource: &str, action: &str) -> Result<AuthzResult, String> {
 
 **场景**: 从多个数据源并行获取数据后合并为统一视图。
 
-```rust
+```rust,ignore
 use tokio::try_join;
 
 /// 并行获取用户数据后合并
@@ -921,7 +921,7 @@ async fn fetch_notifications(_user_id: u64) -> Result<Vec<Notification>, ApiErro
 
 **场景**: 构建系统中并行编译多个模块后合并产物进行链接。
 
-```rust
+```rust,ignore
 use std::thread;
 use std::path::PathBuf;
 
@@ -974,7 +974,7 @@ fn link_objects(objects: &[PathBuf]) -> Result<BuildArtifact, BuildError> {
 
 在指定时间内未完成则返回部分结果：
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 pub async fn merge_with_timeout<T, E>(
@@ -994,7 +994,7 @@ pub async fn merge_with_timeout<T, E>(
 
 只合并满足条件的线程结果：
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 
 pub async fn selective_merge<T: Send + 'static>(
@@ -1027,7 +1027,7 @@ pub async fn selective_merge<T: Send + 'static>(
 
 多层级联合并结果：
 
-```rust
+```rust,ignore
 /// 树形级联合并：O(log n) 层合并
 pub fn cascading_merge<T: Send + Clone>(
     data: Vec<T>,

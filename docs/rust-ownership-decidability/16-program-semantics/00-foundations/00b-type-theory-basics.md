@@ -151,7 +151,7 @@ HM 类型推断的核心算法：
 
 **Rust 的类型推断**:
 
-```rust
+```rust,ignore
 // 编译器自动推断类型
 let pair = (1, "hello");  // (i32, &str)
 let f = |x| x + 1;         // impl Fn(i32) -> i32
@@ -199,7 +199,7 @@ fn compose<A, B, C>(f: impl Fn(B) -> C, g: impl Fn(A) -> B)
 
 **Rust 变型规则**:
 
-```rust
+```rust,ignore
 // 协变: &'a T 随着 'a 增大而增大
 fn covariant<'a, 'b: 'a>(x: &'b str) -> &'a str { x }
 
@@ -251,7 +251,7 @@ fn nested<'a, 'b: 'a>(x: &'b &'a str) -> &'a str { x }
 ### 5.2 Rust 中的递归类型
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // List<T> = μα. Unit + (T × α)
 enum List<T> {
     Nil,           // Unit
@@ -368,7 +368,7 @@ Kind 是"类型的类型"：
 ### 7.2 Rust 的限制与 workaround
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // Rust 不完全支持高阶类型，但可以用 GAT 模拟
 
 // 类型构造子: Option<_> 是 * → *
@@ -415,7 +415,7 @@ Rust 的类型系统保证：
 - **类型安全**: 进展性 + 保持性
 - **线程安全**: Send/Sync trait 检查
 
-```rust
+```rust,ignore
 // 编译器拒绝不安全代码
 fn unsafe_attempt() {
     let r;

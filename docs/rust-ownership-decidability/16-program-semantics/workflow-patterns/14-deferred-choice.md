@@ -272,7 +272,7 @@ Timeout(t) = WAIT(t) -> E3 -> SKIP  -- 超时作为默认分支
 
 **检测算法：**
 
-```rust
+```rust,ignore
 /// 竞态条件检测器
 pub struct RaceDetector {
     event_log: Vec<(EventId, Timestamp)>,
@@ -388,7 +388,7 @@ $$
 ### 基础实现
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use tokio::sync::{mpsc, oneshot};
@@ -537,7 +537,7 @@ pub async fn race_choice<T>(receivers: Vec<oneshot::Receiver<T>>) -> Option<T> {
 ### 外部事件处理
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 带超时处理的延迟选择
 pub async fn deferred_choice_with_timeout<T>(
     receivers: Vec<oneshot::Receiver<T>>,
@@ -590,7 +590,7 @@ pub async fn approval_workflow() -> ApprovalEvent {
 ### 超时处理实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 /// 带优先级的延迟选择

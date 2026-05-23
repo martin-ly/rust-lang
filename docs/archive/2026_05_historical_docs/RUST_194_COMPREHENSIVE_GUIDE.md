@@ -89,7 +89,7 @@ let is_increasing = data.array_windows::<2>()
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::rust_194_features::count_increasing_triplets;
 
 let data = vec![1, 2, 3, 2, 4, 5, 6];
@@ -101,7 +101,7 @@ let count = count_increasing_triplets(&data);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c02_type_system::rust_194_features::SequenceValidator;
 
 let data = vec![1, 2, 3, 4, 5];
@@ -112,7 +112,7 @@ assert!(SequenceValidator::is_monotonically_increasing(&data));
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c03_control_fn::rust_194_features::StateMachineParser;
 
 let states = vec!["idle", "running", "running", "stopped", "idle"];
@@ -162,7 +162,7 @@ impl<T> LazyCache<T> {
 
 ### 条件延迟初始化
 
-```rust
+```rust,ignore
 use c03_control_fn::rust_194_features::ConditionalLazyController;
 
 // 只在满足条件时初始化
@@ -204,7 +204,7 @@ impl<T> ThreadSafeCache<T> {
 
 ### 欧拉-马歇罗尼常数 (EULER_GAMMA)
 
-```rust
+```rust,ignore
 use c02_type_system::rust_194_features::math_consts_f64::EULER_GAMMA;
 
 // 调和数近似计算
@@ -216,7 +216,7 @@ fn approximate_harmonic_number(n: u64) -> f64 {
 
 ### 黄金比例 (GOLDEN_RATIO)
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::rust_194_features::{
     GoldenSectionSearch, math_consts_f64::GOLDEN_RATIO
 };
@@ -228,7 +228,7 @@ let minimum = searcher.find_minimum(|x| (x - 2.0).powi(2), 0.0, 5.0);
 
 ### 黄金比例在布局中的应用
 
-```rust
+```rust,ignore
 use c12_wasm::rust_194_features::golden_ratio_layout;
 
 // 计算黄金比例布局
@@ -250,7 +250,7 @@ println!("主要区域: {}, 次要区域: {}", major, minor);
 
 ### 示例1: 数据管道处理
 
-```rust
+```rust,ignore
 use c02_type_system::rust_194_features::SequenceValidator;
 use c03_control_fn::rust_194_features::EventStreamProcessor;
 
@@ -270,7 +270,7 @@ fn process_data_pipeline(data: &[i32]) {
 
 ### 示例2: 配置管理
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::rust_194_features::LazyCache;
 use c03_control_fn::rust_194_features::ConditionalLazyController;
 
@@ -283,7 +283,7 @@ struct AppConfig {
 
 ### 示例3: 数值分析工作流
 
-```rust
+```rust,ignore
 use c01_ownership_borrow_scope::rust_194_features::{
     GoldenSectionSearch, harmonic_number_approx
 };
@@ -307,7 +307,7 @@ fn numerical_analysis_workflow() {
 
 ### array_windows 性能
 
-```rust
+```rust,ignore
 // ✅ 推荐: 避免不必要的 collect
 for [a, b] in data.array_windows::<2>() {
     process_pair(a, b);
@@ -320,7 +320,7 @@ for [a, b] in &windows { ... }
 
 ### LazyCell 性能
 
-```rust
+```rust,ignore
 // ✅ 推荐: 预热缓存
 let cache = LazyCache::new();
 cache.get_or_init(|| load_expensive_data()); // 启动时初始化
@@ -331,7 +331,7 @@ let data = cache.get(); // 直接返回引用
 
 ### 数学计算优化
 
-```rust
+```rust,ignore
 // ✅ 推荐: 小n用精确计算，大n用近似
 fn smart_harmonic(n: u64) -> f64 {
     if n < 100 {
@@ -367,7 +367,7 @@ for [a, b] in data.array_windows::<2>() {
 
 ### Q3: 如何选择数学常量的精度？
 
-```rust
+```rust,ignore
 // 一般计算用 f64
 use c02_type_system::rust_194_features::math_consts_f64::GOLDEN_RATIO;
 
@@ -379,7 +379,7 @@ use c02_type_system::rust_194_features::math_consts_f32::GOLDEN_RATIO;
 
 旧版本文件已移至 `src/archive/` 目录，不再维护。建议迁移到1.94特性：
 
-```rust
+```rust,ignore
 // 旧方式 (1.90)
 // rust_190_features.rs
 

@@ -267,7 +267,7 @@ TEnum : 和类型（sum type）
 
 **与真实 Rust 的对比**：
 
-```rust
+```rust,ignore
 // 真实 Rust
 impl<T> Option<T> {
   fn map<U, F: FnOnce(T) -> U>(self, f: F) -> Option<U> {

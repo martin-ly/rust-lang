@@ -117,7 +117,7 @@ Reserved ──read──► Active ──write──► Active
 
 SB 中，`&mut *x` 立即获得完整权限，导致父引用 `x` 被冻结或禁用。TB 引入 **Reserved** 状态：新引用创建时处于 Reserved，首次写操作时才转为 Active。在 Reserved 阶段，父引用仍可自由使用。
 
-```rust
+```rust,ignore
 fn reserved_demo(x: &mut i32) {
     let y = &mut *x;  // y: Reserved, x: Active
     println!("{}", *x);  // ✅ x 仍可读
@@ -224,7 +224,7 @@ fn unsafe_code(x: *mut i32) {
 
 **树的构建过程**：
 
-```rust
+```rust,ignore
 fn tree_construction() {
     let mut data = 0;
     let x = &mut data;      // 根节点: x (Active)
@@ -409,7 +409,7 @@ fn good_write(x: &mut i32) {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 fn bad_dangling() -> i32 {
     let ptr: *mut i32;
     {

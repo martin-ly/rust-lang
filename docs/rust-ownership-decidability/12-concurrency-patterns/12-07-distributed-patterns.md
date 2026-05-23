@@ -120,7 +120,7 @@ pub enum ConfigError {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -320,7 +320,7 @@ pub enum CausalOrder {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 分布式系统故障模型
 
 /// 故障检测器
@@ -444,7 +444,7 @@ impl BFTConfig {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use tokio::sync::{RwLock, mpsc};
@@ -671,7 +671,7 @@ impl RaftNode {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -794,7 +794,7 @@ pub fn get_service_registry() -> &'static ServiceRegistry {
 }
 ```
 
-```rust
+```rust,ignore
 use rand::Rng;
 use std::time::Duration;
 

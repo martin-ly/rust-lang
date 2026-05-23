@@ -58,7 +58,7 @@ governor提供:
 
 > 以固定速率补充令牌，突发时可消耗桶内令牌。
 
-```rust
+```rust,ignore
 let quota = Quota::per_second(nonzero!(10u32))  // 每秒10个
     .allow_burst(nonzero!(5u32));                // 桶容量5
 
@@ -81,7 +81,7 @@ $$
 
 > `Arc<RateLimiter>`可跨任务共享。
 
-```rust
+```rust,ignore
 let limiter = Arc::new(RateLimiter::direct(quota));
 
 for _ in 0..10 {
@@ -108,7 +108,7 @@ for _ in 0..10 {
 
 ### 反例 5.2 (内存增长)
 
-```rust
+```rust,ignore
 // 每个key一个限流器需限制数量
 let mut limiters: HashMap<String, RateLimiter> = HashMap::new();
 // 无限增长可能OOM

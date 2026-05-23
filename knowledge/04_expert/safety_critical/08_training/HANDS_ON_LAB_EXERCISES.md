@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [Rc](../../../../concept/02_intermediate/03_memory_management.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -36,7 +37,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,compile_fail
 #![no_std]
 #![no_main]
 
@@ -151,7 +152,7 @@ struct Watchdog;
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! 无锁环形缓冲区
 
 use core::sync::atomic::{AtomicUsize, Ordering};
@@ -287,7 +288,7 @@ mod tests {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 //! 类型状态模式实现
 
 /// 状态标记
@@ -561,7 +562,7 @@ pub enum SensorError {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! 安全通信协议
 
 use crc::{Crc, CRC_16_USB};

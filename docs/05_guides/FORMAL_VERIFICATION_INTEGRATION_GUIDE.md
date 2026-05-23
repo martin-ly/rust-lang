@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [形式化验证整合指南](#形式化验证整合指南)
@@ -31,6 +32,7 @@
   - [**状态**: ✅ 生产就绪](#状态--生产就绪)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -57,6 +59,7 @@
   - [**状态**: ✅ 生产就绪](#状态--生产就绪)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -230,7 +233,7 @@ mod verification {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 验证 Unsafe 代码
 #[kani::proof]
 fn verify_raw_ptr() {
@@ -304,7 +307,7 @@ Prusti 使用分离逻辑验证 Rust 代码。
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 /// 阶乘函数 - 带完整契约
@@ -350,7 +353,7 @@ fn safe_get(array: &[i32], index: usize) -> i32 {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 冒泡排序 - 带完整证明
 #[requires(arr.len() <= 1000)]  // 限制大小以确保终止
 #[ensures(forall(|i: usize, j: usize|
@@ -411,6 +414,7 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 ---
 
 ## 🎓 工具选择决策树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -440,6 +444,7 @@ fn binary_search_prusti(arr: &[i32], target: i32) -> Option<usize> {
 ---
 
 ## 🔗 综合示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 完整的验证套件
@@ -575,6 +580,7 @@ mod miri_tests {
 ---
 
 ## 📊 验证覆盖率目标
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 模块 | Miri | Kani | Prusti | 目标覆盖率 |
@@ -609,6 +615,7 @@ mod miri_tests {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
@@ -631,12 +638,10 @@ mod miri_tests {
 > **[来源: TLA+ Documentation]**
 > **[来源: ACM - Formal Methods]**
 
-
 > **[来源: POPL - Programming Languages Research]**
 > **[来源: PLDI - Programming Language Design]**
 > **[来源: Wikipedia - Rust (programming language)]**
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
-
 
 > **[来源: IEEE - Programming Language Standards]**
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
@@ -817,4 +822,3 @@ mod miri_tests {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

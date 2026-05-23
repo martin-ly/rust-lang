@@ -33,6 +33,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -43,6 +44,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 1.1 ECS 设计模式
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -95,6 +97,7 @@ ECS (Entity-Component-System):
 ---
 
 ### 1.2 Bevy 架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -142,6 +145,7 @@ Bevy 引擎架构:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 WGPU — 跨平台图形
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -184,6 +188,7 @@ WGPU:
 ---
 
 ### 2.2 渲染管线
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -223,6 +228,7 @@ WGPU:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 物理引擎
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -257,6 +263,7 @@ Rust 物理引擎:
 ---
 
 ### 3.2 音频系统
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -291,6 +298,7 @@ Rust 音频生态:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -314,6 +322,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -421,6 +430,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -616,4 +626,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

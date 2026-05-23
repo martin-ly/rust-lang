@@ -251,7 +251,7 @@ let n2 = n1;    // Copy类型，栈值复制
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait Drop {
     fn drop(&mut self);
 }

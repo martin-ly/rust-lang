@@ -63,7 +63,7 @@ notify提供:
 
 ### 定理 3.1 (事件类型)
 
-```rust
+```rust,ignore
 pub enum EventKind {
     Access(AccessKind),
     Create(CreateKind),
@@ -84,7 +84,7 @@ pub enum EventKind {
 
 > 可配置事件批量处理。
 
-```rust
+```rust,ignore
 let config = Config::default()
     .with_poll_interval(Duration::from_secs(2))
     .with_compare_contents(true);
@@ -105,7 +105,7 @@ let config = Config::default()
 
 ### 反例 5.2 (句柄泄漏)
 
-```rust
+```rust,ignore
 // 忘记unwatch导致资源泄漏
 let watcher: RecommendedWatcher = Watcher::new(tx)?;
 watcher.watch(path, RecursiveMode::Recursive)?;

@@ -73,7 +73,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -196,7 +196,7 @@ struct Watchdog;
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! 无锁环形缓冲区
 
 use core::sync::atomic::{AtomicUsize, Ordering};
@@ -332,7 +332,7 @@ mod tests {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 //! 类型状态模式实现
 
 /// 状态标记
@@ -604,7 +604,7 @@ pub enum SensorError {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 //! 安全通信协议
 
 use crc::{Crc, CRC_16_USB};

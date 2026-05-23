@@ -54,7 +54,7 @@ image crate提供:
 
 > 缓冲区大小严格匹配图像尺寸×通道数。
 
-```rust
+```rust,ignore
 pub struct ImageBuffer<P: Pixel, Container> {
     width: u32,
     height: u32,
@@ -71,7 +71,7 @@ pub struct ImageBuffer<P: Pixel, Container> {
 
 > 像素访问自动边界检查。
 
-```rust
+```rust,ignore
 let pixel = img.get_pixel(x, y);  // 返回Option
 let pixel = img[(x, y)];          // 越界panic
 ```
@@ -86,7 +86,7 @@ let pixel = img[(x, y)];          // 越界panic
 
 > 解码器验证文件头与数据一致性。
 
-```rust
+```rust,ignore
 let img = image::open("corrupt.png")?;  // 返回ImageError
 // 不panic，返回错误
 ```
@@ -97,7 +97,7 @@ let img = image::open("corrupt.png")?;  // 返回ImageError
 
 > 可设置内存与尺寸限制。
 
-```rust
+```rust,ignore
 let reader = Reader::open("huge.png")?
     .memory_limit(1024 * 1024 * 100)  // 100MB限制
     .dimensions_limit(10000, 10000);   // 尺寸限制
@@ -113,7 +113,7 @@ let reader = Reader::open("huge.png")?
 
 > 编码时验证目标格式支持。
 
-```rust
+```rust,ignore
 img.save("output.jpg")?;  // 自动选择编码器
 img.save_with_format("output.bin", ImageFormat::Png)?;
 ```
@@ -128,7 +128,7 @@ img.save_with_format("output.bin", ImageFormat::Png)?;
 
 > 像素迭代器保证顺序与边界。
 
-```rust
+```rust,ignore
 for pixel in img.pixels() {
     // 每个pixel: (x, y, Pixel)
 }
@@ -142,7 +142,7 @@ for pixel in img.pixels() {
 
 ### 反例 6.1 (未检查尺寸)
 
-```rust
+```rust,ignore
 // 可能导致内存爆炸
 let img = image::open("untrusted.png")?;  // 无限制
 

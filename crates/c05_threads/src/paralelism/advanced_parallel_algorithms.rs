@@ -425,6 +425,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_merge_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90, 5];
         let expected = vec![5, 11, 12, 22, 25, 34, 64, 90];
@@ -434,6 +435,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_quick_sort() {
         let mut arr = vec![64, 34, 25, 12, 22, 11, 90, 5];
         let expected = vec![5, 11, 12, 22, 25, 34, 64, 90];
@@ -443,6 +445,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_radix_sort() {
         let mut arr = vec![170, 45, 75, 90, 2, 802, 24, 66];
         let expected = vec![2, 24, 45, 66, 75, 90, 170, 802];
@@ -452,6 +455,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_dot_product() {
         let v1 = vec![1.0, 2.0, 3.0];
         let v2 = vec![4.0, 5.0, 6.0];
@@ -462,6 +466,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_parallel_matrix_multiply() {
         let a = vec![vec![1.0, 2.0], vec![3.0, 4.0]];
         let b = vec![vec![5.0, 6.0], vec![7.0, 8.0]];

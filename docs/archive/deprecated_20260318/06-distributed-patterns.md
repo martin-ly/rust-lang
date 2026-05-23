@@ -105,7 +105,7 @@ $$
 
 Rust 的类型系统和所有权模型为分布式系统开发提供了独特的语义保证：
 
-```rust
+```rust,ignore
 /// 分布式节点语义模型
 ///
 /// Rust 通过类型系统保证：
@@ -170,7 +170,7 @@ $$
 - $A(S)$: **可用性 (Availability)** - 每个请求都能获得响应
 - $P(S)$: **分区容错性 (Partition Tolerance)** - 系统在网络分区时继续运行
 
-```rust
+```rust,ignore
 /// CAP 策略枚举
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CAPStrategy {
@@ -280,7 +280,7 @@ $$
 \text{RemoteCall}: f(x) \xrightarrow{\text{network}} \{y, \text{timeout}, \text{failure}\} \quad \text{(异步、不确定、跨进程)}
 $$
 
-```rust
+```rust,ignore
 /// RPC 语义模型
 ///
 /// 核心语义差异：
@@ -376,7 +376,7 @@ pub mod grpc_semantics {
 
 **序列化/反序列化语义：**
 
-```rust
+```rust,ignore
 /// 序列化语义模型
 ///
 /// 关键属性：
@@ -435,7 +435,7 @@ pub fn serialize_event(event: &UserEvent) -> Result<Vec<u8>, String> {
 
 **超时和重试语义：**
 
-```rust
+```rust,ignore
 /// 重试策略语义
 #[derive(Clone, Debug)]
 pub enum RetryPolicy {
@@ -548,7 +548,7 @@ where
 
 **生产者-消费者语义：**
 
-```rust
+```rust,ignore
 /// 消息队列语义模型
 ///
 /// 核心概念：
@@ -670,7 +670,7 @@ type DeliveryTag = u64;
 
 **消息持久化语义：**
 
-```rust
+```rust,ignore
 /// 消息持久化级别
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum PersistenceLevel {
@@ -719,7 +719,7 @@ impl PersistenceLevel {
 
 **至少一次/恰好一次语义：**
 
-```rust
+```rust,ignore
 /// 消息传递保证语义
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum DeliveryGuarantee {
@@ -838,7 +838,7 @@ impl DedupStore {
 
 **背压和流控制：**
 
-```rust
+```rust,ignore
 /// 背压（Backpressure）语义
 ///
 /// 当消费者处理速度慢于生产者时，需要流控制机制
@@ -942,7 +942,7 @@ impl<T> RateLimitedProducer<T> {
 
 **主题订阅语义：**
 
-```rust
+```rust,ignore
 /// 发布-订阅语义模型
 ///
 /// 核心概念：
@@ -1065,7 +1065,7 @@ impl NatsSubscription {
 
 **消息过滤语义：**
 
-```rust
+```rust,ignore
 /// 消息过滤语义
 ///
 /// 支持多种过滤策略：
@@ -1147,7 +1147,7 @@ impl MessageFilter for HeaderFilter {
 
 **订阅者管理语义：**
 
-```rust
+```rust,ignore
 /// 订阅者管理器
 pub struct SubscriptionManager {
     /// 主题 → 订阅者列表
@@ -1261,7 +1261,7 @@ impl SubscriberHandle {
 
 **消息顺序保证：**
 
-```rust
+```rust,ignore
 /// 消息顺序语义
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum OrderingGuarantee {
@@ -1359,7 +1359,7 @@ pub enum OrderValidationResult {
 
 **服务注册语义：**
 
-```rust
+```rust,ignore
 /// 服务注册语义模型
 ///
 /// 核心概念：
@@ -1479,7 +1479,7 @@ impl Lease {
 
 **服务发现语义：**
 
-```rust
+```rust,ignore
 /// 服务发现语义
 pub trait ServiceDiscovery {
     /// 同步发现：立即返回已知实例
@@ -1621,7 +1621,7 @@ impl ServerSideDiscovery {
 
 **健康检查语义：**
 
-```rust
+```rust,ignore
 /// 健康检查语义模型
 #[async_trait]
 pub trait HealthChecker {
@@ -1815,7 +1815,7 @@ impl LoadBalancer for AdaptiveLoadBalancer {
 
 **Gossip 协议语义：**
 
-```rust
+```rust,ignore
 /// Gossip 协议语义模型
 ///
 /// 核心概念：
@@ -2012,7 +2012,7 @@ pub struct GossipDigest {
 
 **一致性哈希语义：**
 
-```rust
+```rust,ignore
 /// 一致性哈希语义
 ///
 /// 核心特性：
@@ -2156,7 +2156,7 @@ impl WeightedConsistentHash {
 
 **虚拟节点语义：**
 
-```rust
+```rust,ignore
 /// 虚拟节点语义
 ///
 /// 目的：
@@ -2250,7 +2250,7 @@ impl VirtualNodeManager {
 
 **两阶段提交 (2PC) 语义：**
 
-```rust
+```rust,ignore
 /// 两阶段提交语义模型
 ///
 /// Phase 1 (Prepare): 协调者询问所有参与者是否可提交
@@ -2432,7 +2432,7 @@ pub enum TxOutcome {
 
 **三阶段提交 (3PC) 语义：**
 
-```rust
+```rust,ignore
 /// 三阶段提交语义模型
 ///
 /// 解决 2PC 的协调者单点故障阻塞问题：
@@ -2545,7 +2545,7 @@ pub enum TimeoutDecision {
 
 **Paxos 语义：**
 
-```rust
+```rust,ignore
 /// Paxos 共识算法语义模型
 ///
 /// 核心概念：
@@ -2808,7 +2808,7 @@ impl Value {
 
 **Raft 语义：**
 
-```rust
+```rust,ignore
 /// Raft 共识算法语义模型
 ///
 /// 三个子问题：
@@ -3130,7 +3130,7 @@ mod raft_safety_tests {
 
 **向量时钟语义：**
 
-```rust
+```rust,ignore
 /// 向量时钟语义
 ///
 /// 用于跟踪分布式系统中的因果依赖关系
@@ -3271,7 +3271,7 @@ impl VersionVector {
 
 **因果一致性语义：**
 
-```rust
+```rust,ignore
 /// 因果一致性语义
 ///
 /// 保证：如果事件 A 因果地先于事件 B（A → B），
@@ -3410,7 +3410,7 @@ pub enum CausalViolation {
 
 **读修复语义：**
 
-```rust
+```rust,ignore
 /// 读修复语义
 ///
 /// 在读取时检测并修复副本之间的不一致
@@ -3581,7 +3581,7 @@ pub enum ReadResult<V> {
 
 **反熵机制：**
 
-```rust
+```rust,ignore
 /// 反熵（Anti-Entropy）机制
 ///
 /// 定期比较和同步副本之间的差异，减少不一致
@@ -3771,7 +3771,7 @@ impl MerkleTree {
 
 **Saga 模式语义：**
 
-```rust
+```rust,ignore
 /// Saga 模式语义
 ///
 /// 将长事务拆分为一系列本地事务，每个本地事务有对应的补偿操作
@@ -4086,7 +4086,7 @@ pub trait AnySaga: Send + Sync {
 
 **补偿事务语义：**
 
-```rust
+```rust,ignore
 /// 补偿事务语义
 ///
 /// 每个业务操作必须有对应的补偿操作
@@ -4196,7 +4196,7 @@ impl CompensatableAction for CreateOrderAction {
 
 **TCC 模式语义：**
 
-```rust
+```rust,ignore
 /// TCC (Try-Confirm-Cancel) 模式语义
 ///
 /// 三个阶段：
@@ -4461,7 +4461,7 @@ impl TccAction for AccountDebitAction {
 
 **熔断器状态机语义：**
 
-```rust
+```rust,ignore
 /// 熔断器模式语义模型
 ///
 /// 三个状态：
@@ -4803,7 +4803,7 @@ pub trait CircuitStateStore: Send + Sync {
 
 **失败计数语义：**
 
-```rust
+```rust,ignore
 /// 失败计数策略
 #[derive(Debug, Clone)]
 pub enum FailureCountStrategy {
@@ -4932,7 +4932,7 @@ impl SlidingWindowFailureCounter {
 
 **恢复探测语义：**
 
-```rust
+```rust,ignore
 /// 恢复探测策略
 #[derive(Debug, Clone)]
 pub enum RecoveryProbeStrategy {
@@ -5032,7 +5032,7 @@ struct Request;
 
 **指数退避语义：**
 
-```rust
+```rust,ignore
 /// 指数退避语义
 ///
 /// 公式：delay = min(base * 2^attempt + jitter, max_delay)
@@ -5163,7 +5163,7 @@ where
 
 **抖动语义：**
 
-```rust
+```rust,ignore
 /// 抖动策略详细说明
 ///
 /// 目的：避免惊群效应（Thundering Herd）
@@ -5212,7 +5212,7 @@ impl JitterStrategy {
 
 **断路器集成：**
 
-```rust
+```rust,ignore
 /// 重试与熔断器集成
 ///
 /// 语义：
@@ -5304,7 +5304,7 @@ impl std::fmt::Display for RetryableError {
 
 **资源隔离语义：**
 
-```rust
+```rust,ignore
 /// 舱壁隔离模式（Bulkhead）
 ///
 /// 原理：将资源分成独立的池，一个池的故障不会影响其他池
@@ -5547,7 +5547,7 @@ pub enum BulkheadError {
 
 **线程池隔离：**
 
-```rust
+```rust,ignore
 /// 线程池隔离
 ///
 /// 不同服务使用独立的线程池，避免一个服务耗尽所有线程
@@ -5651,7 +5651,7 @@ pub enum RejectReason {
 
 **信号量隔离：**
 
-```rust
+```rust,ignore
 /// 基于信号量的隔离（异步友好）
 
 pub struct SemaphoreBulkhead {
@@ -5729,7 +5729,7 @@ pub enum SemaphoreResult<T> {
 
 **令牌桶语义：**
 
-```rust
+```rust,ignore
 /// 令牌桶限流算法
 ///
 /// 原理：
@@ -5919,7 +5919,7 @@ impl DistributedTokenBucket {
 
 **漏桶语义：**
 
-```rust
+```rust,ignore
 /// 漏桶限流算法
 ///
 /// 原理：
@@ -6045,7 +6045,7 @@ pub enum LeakyResult {
 
 **固定窗口语义：**
 
-```rust
+```rust,ignore
 /// 固定窗口限流
 ///
 /// 原理：将时间划分为固定窗口，每个窗口有独立的计数器
@@ -6115,7 +6115,7 @@ pub enum WindowResult {
 
 **滑动窗口语义：**
 
-```rust
+```rust,ignore
 /// 滑动窗口限流
 ///
 /// 原理：使用滑动窗口计算最近 window_size 时间内的请求数
@@ -6278,7 +6278,7 @@ impl DistributedSlidingWindow {
 
 **水平分片语义：**
 
-```rust
+```rust,ignore
 /// 水平分片（Sharding）语义
 ///
 /// 将数据按行分散到多个节点
@@ -6409,7 +6409,7 @@ pub enum ShardError {
 
 **垂直分片语义：**
 
-```rust
+```rust,ignore
 /// 垂直分片语义
 ///
 /// 按列分片，不同字段存储在不同节点
@@ -6525,7 +6525,7 @@ pub enum FieldValue {
 
 **分片键选择：**
 
-```rust
+```rust,ignore
 /// 分片键选择策略
 ///
 /// 好的分片键应该：
@@ -6644,7 +6644,7 @@ pub struct ShardKeyScore {
 
 **分片再平衡：**
 
-```rust
+```rust,ignore
 /// 分片再平衡管理器
 ///
 /// 处理数据迁移，最小化对服务的影响
@@ -6891,7 +6891,7 @@ pub enum MigrationError {
 
 **主从复制语义：**
 
-```rust
+```rust,ignore
 /// 主从复制语义模型
 ///
 /// 一主多从架构：
@@ -7117,7 +7117,7 @@ pub enum ReadResult {
 
 **多主复制语义：**
 
-```rust
+```rust,ignore
 /// 多主复制语义
 ///
 /// 多个节点都可以处理写操作，需要冲突解决
@@ -7289,7 +7289,7 @@ impl MultiMasterReplication {
 
 **读写分离语义：**
 
-```rust
+```rust,ignore
 /// 读写分离路由
 ///
 /// 自动根据操作类型和一致性要求路由到合适的节点
@@ -7380,7 +7380,7 @@ pub enum ReadRoute {
 
 **复制延迟语义：**
 
-```rust
+```rust,ignore
 /// 复制延迟监控与管理
 
 pub struct ReplicationLagMonitor {
@@ -7505,7 +7505,7 @@ impl ReplicationLagMonitor {
 
 **LRU 语义：**
 
-```rust
+```rust,ignore
 /// LRU (Least Recently Used) 缓存
 ///
 /// 语义：当缓存满时，淘汰最久未使用的条目
@@ -7614,7 +7614,7 @@ struct LinkedList<K, V> {
 
 **LFU 语义：**
 
-```rust
+```rust,ignore
 /// LFU (Least Frequently Used) 缓存
 ///
 /// 语义：当缓存满时，淘汰访问频率最低的条目
@@ -7802,7 +7802,7 @@ pub struct SlruCache<K, V> {
 
 **TTL 语义：**
 
-```rust
+```rust,ignore
 /// TTL (Time To Live) 缓存
 ///
 /// 条目在指定时间后过期
@@ -7924,7 +7924,7 @@ impl TtlTier {
 
 **缓存一致性：**
 
-```rust
+```rust,ignore
 /// 缓存一致性模式
 
 /// Cache-Aside 模式
@@ -8017,7 +8017,7 @@ pub trait Store<K, V>: Send + Sync {
 
 **缓存穿透防护：**
 
-```rust
+```rust,ignore
 /// 缓存穿透：查询不存在的数据，导致每次都打到存储层
 /// 解决方案：布隆过滤器 + 空值缓存
 
@@ -8127,7 +8127,7 @@ impl<K: Eq + std::hash::Hash> NullValueCache<K> {
 
 **缓存雪崩防护：**
 
-```rust
+```rust,ignore
 /// 缓存雪崩：大量缓存同时过期，导致请求打到存储层
 /// 解决方案：随机过期时间 + 互斥锁 + 提前刷新
 
@@ -8240,7 +8240,7 @@ impl<K, V> Clone for CacheAvalancheGuard<K, V> {
 
 **缓存击穿防护：**
 
-```rust
+```rust,ignore
 /// 缓存击穿：热点 key 过期瞬间，大量请求打到存储层
 /// 解决方案：互斥锁 + 逻辑过期
 
@@ -8329,7 +8329,7 @@ struct CacheEntry<V> {
 
 **缓存预热：**
 
-```rust
+```rust,ignore
 /// 缓存预热
 ///
 /// 在系统启动或低峰期提前加载热点数据
@@ -8447,7 +8447,7 @@ enum WarmEntryResult {
 
 **事件追加语义：**
 
-```rust
+```rust,ignore
 /// 事件存储语义
 ///
 /// 核心原则：
@@ -8591,7 +8591,7 @@ pub trait DomainEvent: Send + Sync {
 
 **事件版本语义：**
 
-```rust
+```rust,ignore
 /// 事件版本管理
 ///
 /// 处理事件模式的演化
@@ -8748,7 +8748,7 @@ pub enum UpgradeError {
 
 **事件序列化：**
 
-```rust
+```rust,ignore
 /// 事件序列化策略
 
 pub trait EventSerializer: Send + Sync {
@@ -8797,7 +8797,7 @@ pub struct Envelope {
 
 **快照语义：**
 
-```rust
+```rust,ignore
 /// 快照机制
 ///
 /// 用于加速状态重建，避免重放所有历史事件
@@ -8900,7 +8900,7 @@ impl<S: Clone + Send> SnapshotManager<S> {
 
 **重放语义：**
 
-```rust
+```rust,ignore
 /// 事件重放
 ///
 /// 从事件流重建聚合状态
@@ -8987,7 +8987,7 @@ pub enum ReplayError {
 
 **投影语义：**
 
-```rust
+```rust,ignore
 /// 投影（Projection / Read Model）
 ///
 /// 将事件流转换为查询优化的视图
@@ -9144,7 +9144,7 @@ impl EventStream {
 
 **写模型语义：**
 
-```rust
+```rust,ignore
 /// CQRS 命令端（写模型）
 ///
 /// 职责：处理命令，维护聚合状态，产生事件
@@ -9296,7 +9296,7 @@ pub enum PublishError {
 
 **验证语义：**
 
-```rust
+```rust,ignore
 /// 命令验证
 ///
 /// 确保命令满足业务规则和不变量
@@ -9386,7 +9386,7 @@ pub struct OrderItem {
 
 **事件发布语义：**
 
-```rust
+```rust,ignore
 /// 事件发布策略
 
 #[async_trait]
@@ -9535,7 +9535,7 @@ impl Transaction {
 
 **读模型语义：**
 
-```rust
+```rust,ignore
 /// CQRS 查询端（读模型）
 ///
 /// 职责：提供优化的查询视图
@@ -9653,7 +9653,7 @@ pub enum QueryError {
 
 **查询优化语义：**
 
-```rust
+```rust,ignore
 /// 查询优化器
 ///
 /// 转换和优化查询条件以利用索引
@@ -9779,7 +9779,7 @@ trait QueryExt: Query {
 
 **物化视图语义：**
 
-```rust
+```rust,ignore
 /// 物化视图（Materialized View）
 ///
 /// 预计算的查询结果，由事件更新
@@ -9905,7 +9905,7 @@ impl ViewManager {
 
 **定时任务语义：**
 
-```rust
+```rust,ignore
 /// 分布式定时任务调度
 ///
 /// 确保任务在集群中只执行一次
@@ -10130,7 +10130,7 @@ pub enum JobStoreError {
 
 **延迟任务语义：**
 
-```rust
+```rust,ignore
 /// 延迟任务队列
 ///
 /// 任务在未来某个时间点执行
@@ -10217,7 +10217,7 @@ pub enum StorageError {
 
 **工作流调度语义：**
 
-```rust
+```rust,ignore
 /// 分布式工作流引擎
 ///
 /// 管理复杂的多步骤业务流程
@@ -10538,7 +10538,7 @@ pub enum WorkflowEvent {
 
 **基于 Redis 的锁：**
 
-```rust
+```rust,ignore
 /// Redis 分布式锁
 ///
 /// 使用 SET key value NX EX 实现
@@ -10771,7 +10771,7 @@ impl From<redis::RedisError> for LockError {
 
 **基于 ZooKeeper 的锁：**
 
-```rust
+```rust,ignore
 /// ZooKeeper 分布式锁
 ///
 /// 使用临时顺序节点实现
@@ -10897,7 +10897,7 @@ pub enum ZkError {
 
 **基于 etcd 的锁：**
 
-```rust
+```rust,ignore
 /// etcd 分布式锁
 ///
 /// 使用租约（lease）和事务实现
@@ -10996,7 +10996,7 @@ impl From<etcd_client::Error> for LockError {
 
 **锁续期语义：**
 
-```rust
+```rust,ignore
 /// 锁续约管理器
 ///
 /// 自动续约以防止锁过期

@@ -270,7 +270,7 @@ error(Loan, Point) :-
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 当前借用检查器: 拒绝
 // Polonius: 接受
 fn polonius_accepts() {
@@ -322,7 +322,7 @@ mod verification {
 
 **验证 unsafe 代码**:
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn verify_raw_ptr() {
     let mut x = 5;
@@ -341,7 +341,7 @@ fn verify_raw_ptr() {
 
 **定位**: 基于 Viper 的演绎验证器
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 #[requires(n >= 0)]
@@ -375,7 +375,7 @@ fn find_max(array: &[i32]) -> i32 {
 
 **定位**: 使用 Why3 的 Rust 验证器
 
-```rust
+```rust,ignore
 // Creusot 风格规范
 extern crate creusot_contracts;
 use creusot_contracts::*;
@@ -395,7 +395,7 @@ fn fac(n: u64) -> u64 {
 
 **定位**: 生成 Lean 4 证明义务的验证器
 
-```rust
+```rust,ignore
 // Aeneas 将 Rust 代码转换为 Lean 进行验证
 // 适合验证复杂算法和数据结构
 

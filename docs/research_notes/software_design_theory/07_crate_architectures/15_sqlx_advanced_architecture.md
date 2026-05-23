@@ -83,7 +83,7 @@ graph TB
 ### 3.1 `Executor` — 统一查询执行接口
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 pub trait Executor<'c>: Send + Debug + Sized {
     type Database: Database;
 
@@ -126,7 +126,7 @@ pub trait Executor<'c>: Send + Debug + Sized {
 ### 3.2 `FromRow` — 行到结构体的类型安全映射
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 pub trait FromRow<'r, R: Row>: Sized {
     fn from_row(row: &'r R) -> Result<Self, Error>;
 }
@@ -134,7 +134,7 @@ pub trait FromRow<'r, R: Row>: Sized {
 
 `FromRow` 定义了如何将数据库行转换为 Rust 类型。`query_as!` 宏生成的代码在编译期即确定了列名到字段的映射，但运行时仍通过 `FromRow` 执行实际构造。
 
-```rust
+```rust,ignore
 use sqlx::FromRow;
 
 #[derive(FromRow)]
@@ -161,7 +161,7 @@ impl<'r> FromRow<'r, PgRow> for User {
 ### 3.3 `Type`, `Encode`, `Decode` — 类型系统的三支柱
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub trait Type<DB: Database> {
     fn type_info() -> <DB as Database>::TypeInfo;
     fn compatible(ty: &<DB as Database>::TypeInfo) -> bool;
@@ -216,7 +216,7 @@ sequenceDiagram
 
 生成的代码（简化）近似：
 
-```rust
+```rust,ignore
 // query!("SELECT id, name FROM users WHERE id = $1", id)
 // 生成一个匿名记录类型：
 struct _QueryRecord {
@@ -231,7 +231,7 @@ sqlx::query_as::<_, _QueryRecord>("SELECT id, name FROM users WHERE id = $1")
 ### 4.2 `query_as!` 与显式类型的映射
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[derive(sqlx::FromRow)]
 struct User {
     id: i64,
@@ -275,7 +275,7 @@ graph TB
     style Pool fill:#e3f2fd
 ```
 
-```rust
+```rust,ignore
 use sqlx::postgres::PgPoolOptions;
 
 let pool = PgPoolOptions::new()
@@ -360,7 +360,7 @@ graph LR
 ### 7.1 同一段查询的两种表达
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // SQLx：原生 SQL
 let users = sqlx::query_as!(User,
     r#"
@@ -378,7 +378,7 @@ let users = sqlx::query_as!(User,
 .await?;
 ```
 
-```rust
+```rust,ignore
 // Diesel：DSL 构建
 diesel::users
     .left_join(posts::table.on(posts::user_id.eq(users::id)))
@@ -447,7 +447,7 @@ $ SQLX_OFFLINE=true cargo build
 
 SQLx 的宏要求查询字符串在编译期可确定（字面量）。对于完全动态的查询构建（如用户驱动的查询条件组合），需要回退到 `sqlx::query`（非宏版本），此时失去编译期验证：
 
-```rust
+```rust,ignore
 // ✅ 编译期验证
 sqlx::query!("SELECT * FROM users WHERE id = $1", id)
 
@@ -461,7 +461,7 @@ sqlx::query(&sql).bind(id).fetch_one(&pool).await?;
 
 SQLx 不是 ORM，不提供关联加载、懒加载、级联删除等 ORM 特性。如果业务模型高度关系化且需要这些便利，Diesel 或 SeaORM 更合适。
 
-```rust
+```rust,ignore
 // SeaORM 的关联加载（SQLx 不支持）
 let user = User::find_by_id(1).one(&db).await?;
 let posts = user.find_related(Post).all(&db).await?;

@@ -287,7 +287,7 @@ fn main() {
 
 **场景**：Web API 订单处理（表示层 + 业务层 + 数据层）。
 
-```rust
+```rust,ignore
 // 层 1：DTO（跨边界）
 #[derive(serde::Serialize, serde::Deserialize)]
 pub struct PlaceOrderDto { pub items: Vec<ItemDto> }

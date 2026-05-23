@@ -593,7 +593,7 @@ impl Iterator for MyIterator {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 struct Array<T, const N: usize> {
     data: [T; N],
 }
@@ -713,7 +713,7 @@ impl<'a, T> Iterator for SliceIter<'a, T> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 trait Functor {
     type Map<U>;  // GAT: 类型级函数
 
@@ -750,7 +750,7 @@ impl<T> Functor for OptionFunctor<T> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 struct Matrix<T, const ROWS: usize, const COLS: usize> {
     data: [[T; COLS]; ROWS],
 }
@@ -792,7 +792,7 @@ fn use_matrix() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 trait AsyncIterator {
     type Item<'a>
     where
@@ -835,7 +835,7 @@ impl AsyncIterator for AsyncRange {
 - 允许关联类型依赖于生命周期
 - 提供更灵活的类型抽象
 
-```rust
+```rust,ignore
 trait Family {
     type Member<T>;
 }
@@ -992,7 +992,7 @@ GATs 扩展 Trait 的关联类型为类型级函数；const 泛型参与类型�
 
 **示例**:
 
-```rust
+```rust,ignore
 // Rust 1.93.0: MaybeUninit 与 GATs
 trait Container {
     type Item<T>;

@@ -345,7 +345,7 @@ $$
 ### 基础实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::Arc;
@@ -473,7 +473,7 @@ pub async fn parallel_download_example() {
 ### 进度报告实现
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 /// 带进度报告的多实例
@@ -566,7 +566,7 @@ pub async fn download_with_progress() {
 ### 容错实现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 错误处理变体：允许部分失败
 pub struct FaultTolerantMultiInstance<T, R, E> {
     factory: Arc<dyn Fn(T) -> Pin<Box<dyn Future<Output = Result<R, E>> + Send>> + Send + Sync>,

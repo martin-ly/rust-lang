@@ -125,7 +125,7 @@ cargo bloat --release
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// unsafe代码审计检查表
 ///
 /// 审计要点:
@@ -279,7 +279,7 @@ cargo tree --edges normal --prefix none | sort | uniq
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 /// 运行时安全监控
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -353,7 +353,7 @@ pub enum SecurityAction {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// 简单的入侵检测系统
 pub struct IntrusionDetector {
     pattern_db: Vec<AttackPattern>,
@@ -521,7 +521,7 @@ jobs:
 ### 6.2 安全指标仪表板
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 安全指标收集
 pub struct SecurityMetrics {
     pub vulnerability_count: AtomicU64,

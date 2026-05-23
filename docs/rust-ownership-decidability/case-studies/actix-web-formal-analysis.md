@@ -84,7 +84,7 @@ Actix-web是基于Actor模型的Rust Web框架，结合了:
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 trait Actor: Sized {
     type Context: ActorContext;
 
@@ -110,7 +110,7 @@ $$
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub struct Addr<A: Actor> {
     tx: mpsc::UnboundedSender<Envelope<A>>,
 }
@@ -130,7 +130,7 @@ $$
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 trait Handler<M: Message> {
     type Result;
     fn handle(&mut self, msg: M, ctx: &mut Self::Context) -> Self::Result;
@@ -151,7 +151,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Handler<MyMessage> for MyActor {
     type Result = Response;
 
@@ -176,7 +176,7 @@ impl Handler<MyMessage> for MyActor {
 
 **证明**:
 
-```rust
+```rust,ignore
 struct MyActor {
     state: i32,  // 私有状态
 }
@@ -210,7 +210,7 @@ impl Handler<Increment> for MyActor {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 trait Handler<T>: Clone + 'static
 where
     T: FromRequest,
@@ -230,7 +230,7 @@ where
 
 **证明**:
 
-```rust
+```rust,ignore
 async fn handler(
     path: web::Path<(u32, String)>,
     query: web::Query<Search>,
@@ -269,7 +269,7 @@ Starting ──► Started ──► Running ──► Stopping ──► Stoppe
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Actor for MyActor {
     fn started(&mut self, ctx: &mut Context) {
         // 1. Actor启动后调用
@@ -305,7 +305,7 @@ impl Actor for MyActor {
 ### 定义 4.1 (FromRequest)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 trait FromRequest: Sized {
     type Error;
     type Future: Future<Output = Result<Self, Self::Error>>;
@@ -323,7 +323,7 @@ trait FromRequest: Sized {
 
 **自定义提取器**:
 
-```rust
+```rust,ignore
 struct UserToken(String);
 
 impl FromRequest for UserToken {
@@ -352,7 +352,7 @@ async fn handler(token: UserToken) -> impl Responder {
 ### 定义 4.2 (App路由配置)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 App::new()
     .service(
         web::resource("/users/{id}")
@@ -368,7 +368,7 @@ App::new()
 
 **证明**:
 
-```rust
+```rust,ignore
 // 路由: /users/{id}
 // Handler: id: u32
 
@@ -396,7 +396,7 @@ async fn get_user(id: web::Path<u32>) -> impl Responder {
 ### 定义 5.1 (Transform)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 trait Transform<S, B> {
     type Request;
     type Response;
@@ -419,7 +419,7 @@ trait Transform<S, B> {
 
 **证明**:
 
-```rust
+```rust,ignore
 App::new()
     .wrap(middleware::Logger::default())
     .wrap(middleware::Compress::default())
@@ -465,7 +465,7 @@ Response (反向传播)
 
 **证明**:
 
-```rust
+```rust,ignore
 // 顺序A
 app.wrap(Logger).wrap(Compress)
 // 执行: Logger -> Compress -> Handler
@@ -510,7 +510,7 @@ pub struct Arbiter {
 
 **证明**:
 
-```rust
+```rust,ignore
 // Actor注册到Arbiter
 MyActor.start();  // 在当前Arbiter启动
 
@@ -539,7 +539,7 @@ Arbiter::new().exec_fn(|| {
 
 **证明**:
 
-```rust
+```rust,ignore
 Addr::builder()
     .bounded(100)  // 队列最多100条消息
     .start(MyActor);
@@ -589,7 +589,7 @@ Addr::builder()
 
 **所有权管理**:
 
-```rust
+```rust,ignore
 async fn handler(body: web::Json<Data>) -> impl Responder {
     // body拥有请求体数据
     process(body).await

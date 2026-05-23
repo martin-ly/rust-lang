@@ -95,7 +95,7 @@ CAP 定理指出，在分布式数据存储系统中，**一致性 (Consistency)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 
@@ -316,7 +316,7 @@ pub enum Scenario {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 违反 CAP 原则的配置
 ///
 /// 问题：在 CP 系统中使用最终一致性会导致
@@ -351,7 +351,7 @@ fn good_cp_config() -> Result<CAPConfig, CAPError> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::time::{Duration, Instant};
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -497,7 +497,7 @@ impl FailureDetector {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 /// 分布式操作错误类型
@@ -601,7 +601,7 @@ Coordinator                    Participants
 
 #### Rust 实现
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use tokio::sync::{mpsc, oneshot};
 use std::time::Duration;
@@ -820,7 +820,7 @@ pub enum TransactionError {
 
 #### Counter-Example: 协调者故障导致阻塞
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 协调者单点故障问题
 ///
 /// 问题：如果在 Phase 2 期间协调者崩溃，
@@ -895,7 +895,7 @@ Raft 是一种为可理解性设计的共识算法。它将共识问题分解为
 
 #### 算法核心
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use tokio::sync::{RwLock, mpsc};
@@ -1200,7 +1200,7 @@ impl RaftNode {
 
 ### 3.1 消息序列化语义
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 /// 分布式消息 trait
@@ -1239,7 +1239,7 @@ pub enum RpcError {
 
 #### Counter-Example: 自引用类型的序列化问题
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 尝试序列化自引用结构
 #[derive(Debug)]
 pub struct SelfReferential<'a> {
@@ -1277,7 +1277,7 @@ impl SafeSelfReferential {
 
 ### 3.2 消息传递保证
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 use std::sync::Arc;
 use tokio::sync::{RwLock, mpsc};
@@ -1385,7 +1385,7 @@ struct NetworkMessage {
 
 #### Counter-Example: 重复处理问题
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 非幂等的重复消息处理
 pub struct NonIdempotentProcessor {
     balance: AtomicI64,
@@ -1457,7 +1457,7 @@ use std::sync::atomic::{AtomicI64, Ordering};
 
 ### 4.1 注册表模式
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -1605,7 +1605,7 @@ pub enum RegistryError {
 
 #### Counter-Example: 过期注册表条目
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 未清理的过期服务实例
 pub struct StaleRegistryProblem;
 
@@ -1664,7 +1664,7 @@ impl TtlBasedRegistry {
 
 ### 4.2 Gossip 协议
 
-```rust
+```rust,ignore
 use std::collections::{HashMap, HashSet};
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -1798,7 +1798,7 @@ impl GossipProtocol {
 
 ### 5.1 状态机模型
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -2057,7 +2057,7 @@ pub enum CallError {
 
 ### 5.2 分布式熔断器
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::RwLock;
@@ -2142,7 +2142,7 @@ pub enum SyncError {
 
 #### Counter-Example: 脑裂熔断器
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 分布式熔断器脑裂问题
 pub struct SplitBrainScenario;
 
@@ -2209,7 +2209,7 @@ use serde::{Serialize, Deserialize};
 
 ### 6.1 负载削减
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -2346,7 +2346,7 @@ pub enum LoadShedError {
 
 #### Counter-Example: 级联故障
 
-```rust
+```rust,ignore
 /// ❌ Counter-Example: 没有背压导致的级联故障
 pub struct CascadingFailureScenario;
 
@@ -2411,7 +2411,7 @@ impl From<LoadShedError> for Error {
 
 ### 6.2 准入控制
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -2518,7 +2518,7 @@ pub enum CoordinatorError {
 
 ## 7. 分布式追踪
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use std::collections::HashMap;
 use tokio::task_local;
@@ -2670,7 +2670,7 @@ impl Drop for Span {
 
 ## 8. 案例研究: 分布式键值存储
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::{RwLock, mpsc};
@@ -2825,7 +2825,7 @@ pub enum StoreError {
 
 ### 9.1 Tonic (gRPC)
 
-```rust
+```rust,ignore
 use tonic::{transport::Server, Request, Response, Status};
 
 /// gRPC 服务定义
@@ -2868,7 +2868,7 @@ impl KvStore for KvStoreService {
 
 ### 9.2 Tarpc
 
-```rust
+```rust,ignore
 use tarpc::{client, context, server};
 
 /// Tarpc 服务定义

@@ -923,3 +923,11 @@ Polkadot 的 PVF 是平行链（Parachain）状态转换函数的 Wasm 编码，
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **补充来源**
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]

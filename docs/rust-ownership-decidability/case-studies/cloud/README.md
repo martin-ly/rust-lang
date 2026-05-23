@@ -126,7 +126,7 @@ impl<T> ConnectionPool<T> {
 
 Rust 的所有权系统天然适合云原生环境的高并发需求：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use std::sync::Arc;
 
@@ -153,7 +153,7 @@ pub async fn handle_requests(
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // Rust 的高性能 HTTP 服务
 use axum::{routing::get, Router};
 use std::net::SocketAddr;
@@ -196,7 +196,7 @@ async fn handler() -> &'static str {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // Firecracker 的核心设计理念
 pub struct Vmm {
     // 设备管理
@@ -225,7 +225,7 @@ impl Vmm {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Linkerd2-proxy 的连接处理
 pub struct Proxy {
     inbound: Inbound,
@@ -256,7 +256,7 @@ impl Proxy {
 
 youki 是使用 Rust 编写的 OCI 运行时，旨在替代 runc：
 
-```rust
+```rust,ignore
 // youki 的核心容器生命周期管理
 use youki::container::Container;
 use youki::spec::Spec;
@@ -300,7 +300,7 @@ impl ContainerBuilder {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 
 /// OCI Runtime Spec 的 Rust 实现
@@ -347,7 +347,7 @@ pub fn load_spec(path: &Path) -> Result<Spec, SpecError> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::path::PathBuf;
 
 /// cgroups v2 统一管理器
@@ -436,7 +436,7 @@ impl CgroupV2 {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use nix::sched::{clone, unshare, CloneFlags};
 use nix::sys::wait::waitpid;
 use nix::unistd::Pid;
@@ -538,7 +538,7 @@ where
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use nix::mount::{mount, umount, MsFlags};
 
 /// 设置容器的根文件系统
@@ -624,7 +624,7 @@ pub fn pivot_rootfs(new_root: &Path, put_old: &Path) -> Result<(), MountError> {
 
 kube-rs 是 Kubernetes 的官方 Rust 客户端：
 
-```rust
+```rust,ignore
 use kube::{Client, Config, api::{Api, ListParams, ResourceExt}};
 use k8s_openapi::api::core::v1::Pod;
 
@@ -651,7 +651,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use kube::runtime::controller::{Action, Controller};
 use kube::runtime::finalizer::{finalizer, Event as FinalizerEvent};
 use kube::{Resource, ResourceExt};
@@ -715,7 +715,7 @@ pub async fn run(client: Client) -> Result<(), Error> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use kube::CustomResource;
 use schemars::JsonSchema;
 use serde::{Deserialize, Serialize};
@@ -782,7 +782,7 @@ pub enum DatabasePhase {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use k8s_openapi::api::apps::v1::{Deployment, DeploymentSpec};
 use k8s_openapi::api::core::v1::{Container, ContainerPort, PodSpec, PodTemplateSpec};
 use k8s_openapi::apimachinery::pkg::apis::meta::v1::{LabelSelector, ObjectMeta};
@@ -903,7 +903,7 @@ async fn ensure_service(
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use kube::api::{DeleteParams, Patch, PatchParams, WatchEvent};
 
 /// 使用 Patch 更新资源
@@ -991,7 +991,7 @@ async fn delete_pod_with_grace_period(
 
 Linkerd2-proxy 是 Linkerd 服务网格的数据平面代理：
 
-```rust
+```rust,ignore
 use tower::ServiceBuilder;
 use tower_http::trace::TraceLayer;
 
@@ -1053,7 +1053,7 @@ impl InboundProxy {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use rustls::{Certificate, PrivateKey, ServerConfig, ClientConfig};
 use rustls_pemfile::{certs, pkcs8_private_keys};
 
@@ -1134,7 +1134,7 @@ impl RotatingIdentity {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use regex::Regex;
 
@@ -1225,7 +1225,7 @@ impl<S> Layer<S> for TimeoutRetryLayer {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use opentelemetry::trace::{Tracer, SpanKind};
 use prometheus::{Counter, Histogram, Registry};
 
@@ -1328,7 +1328,7 @@ where
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use lambda_runtime::{service_fn, LambdaEvent, Error};
 use serde_json::{json, Value};
 
@@ -1373,7 +1373,7 @@ async fn main() -> Result<(), Error> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::sync::OnceLock;
 use aws_sdk_dynamodb::Client as DynamoClient;
 use aws_sdk_s3::Client as S3Client;
@@ -1439,7 +1439,7 @@ impl AppState {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use actix_web::{web, App, HttpResponse, HttpServer};
 use std::collections::HashMap;
 
@@ -1524,7 +1524,7 @@ impl WasmRuntime {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
@@ -1744,7 +1744,7 @@ impl<T: StateMachine> RaftNode<T> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::net::SocketAddr;
 use tokio::sync::RwLock;
@@ -1879,7 +1879,7 @@ impl ConsulClient {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 负载均衡器 trait
@@ -1985,7 +1985,7 @@ impl ConsistentHash {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use tokio::time::{Duration, Instant};
 
@@ -2145,7 +2145,7 @@ where
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use opentelemetry::trace::{Tracer, SpanKind, TraceContextExt};
 use opentelemetry::global;
 use opentelemetry_otlp::WithExportConfig;
@@ -2242,7 +2242,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use prometheus::{Counter, Histogram, Gauge, Registry, Encoder, TextEncoder};
 use prometheus::{register_counter, register_histogram, register_gauge};
 use std::time::Instant;
@@ -2369,7 +2369,7 @@ async fn metrics_endpoint() -> impl IntoResponse {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use tracing::{info, warn, error, debug, span, Level, Instrument};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use tracing_subscriber::fmt::format::FmtSpan;
@@ -2461,7 +2461,7 @@ macro_rules! app_log {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 /// 健康检查类型
@@ -2591,7 +2591,7 @@ async fn startup_probe(State(registry): State<Arc<HealthRegistry>>) -> impl Into
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // src/main.rs
 use axum::{
     routing::{get, post},
@@ -3178,7 +3178,7 @@ ENTRYPOINT ["/app/my-app"]
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 延迟初始化减少启动时间
 use std::sync::OnceLock;
 

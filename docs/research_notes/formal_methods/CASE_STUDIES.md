@@ -62,7 +62,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Vec的不变式
 invariant Vec<T> {
     // 长度不超过容量
@@ -82,7 +82,7 @@ invariant Vec<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     #[requires(self.len < self.cap)]
     #[ensures(self.len == old(self.len) + 1)]
@@ -110,7 +110,7 @@ impl<T> Vec<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[requires(self.len > 0)]
 #[ensures(self.len == old(self.len) - 1)]
 #[ensures(result == old(self[self.len - 1]))]
@@ -148,7 +148,7 @@ invariant: ptr points to valid T
 
 **操作证明**:
 
-```rust
+```rust,ignore
 // new操作
 #[ensures(result.ptr points to valid T)]
 #[ensures(*result.ptr == value)]
@@ -183,7 +183,7 @@ Rc<T> {
 
 **clone证明**:
 
-```rust
+```rust,ignore
 #[ensures(result points to same T as self)]
 #[ensures(ref_count incremented)]
 fn clone(&self) -> Rc<T> {
@@ -196,7 +196,7 @@ fn clone(&self) -> Rc<T> {
 
 **Drop证明**:
 
-```rust
+```rust,ignore
 #[ensures(if old(ref_count) == 1 then
            T dropped and memory deallocated
           else
@@ -261,7 +261,7 @@ MutexGuard<T>: Deref, DerefMut
 
 **结构**:
 
-```rust
+```rust,ignore
 struct Node<T> {
     data: T,
     next: AtomicPtr<Node<T>>,
@@ -283,7 +283,7 @@ struct Queue<T> {
 
 **操作证明**:
 
-```rust
+```rust,ignore
 // enqueue
 #[ensures(queue contains new element at tail)]
 fn enqueue(&self, value: T) {
@@ -355,7 +355,7 @@ Future<T> = StateMachine {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // 调度器不变式
 invariant Scheduler {
     // 所有就绪任务最终被执行
@@ -398,7 +398,7 @@ fn constant_time_eq(a: &[u8], b: &[u8]) -> bool {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 防止编译器优化掉清零操作
 fn secure_zero(memory: &mut [u8]) {
     for byte in memory.iter_mut() {
@@ -423,7 +423,7 @@ fn secure_zero(memory: &mut [u8]) {
 
 **Rust侧规范**:
 
-```rust
+```rust,ignore
 // 前置条件: 指针有效
 #[requires(ptr != null)]
 #[requires(ptr is valid for size_of::<T>())]
@@ -448,7 +448,7 @@ T* alloc_T() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 跨越FFI边界的不变式
 invariant CrossFFI {
     // 结构体布局兼容

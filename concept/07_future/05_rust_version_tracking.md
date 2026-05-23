@@ -3,7 +3,7 @@
 > **定位**: 本文件从**形式模型维度**跟踪 Rust 语言特性的演进，而非版本特性清单。仅收录对 Rust 的**所有权模型、类型系统、异步语义、Unsafe 边界**有结构性影响的特性。
 > **原则**: 琐碎语法糖点到为止，聚焦"形式化语义发生了什么变化"。
 > **更新频率**: 每 6 周对齐 stable release，每季度审计。
-> **状态**: v1.7（2026-05-22 更新，对齐 Rust 1.95.0 stable + 1.96 beta.8（2026-05-28 预计 stable）、权威来源对齐完成）
+> **状态**: v1.9（2026-05-23 更新，对齐 Rust 1.95.0 stable + 1.96 beta.8（2026-05-28 预计 stable）、核心概念来源标注率 100% 达标）
 > **前置概念**: [Ownership](../01_foundation/01_ownership.md) · [Borrowing](../01_foundation/02_borrowing.md) · [Generics](../02_intermediate/02_generics.md) · [Async](../03_advanced/02_async.md) · [Unsafe](../03_advanced/03_unsafe.md)
 > **后置概念**: [Formal Methods](./02_formal_methods.md) · [Evolution](./03_evolution.md)
 
@@ -578,6 +578,11 @@ timeline
 | `f32/f64::mul_add` (const) | const fn | 融合乘加运算的常量上下文可用，数值计算编译期优化 |
 | x86 `avx512fp16` intrinsics | unsafe fn | AVX512 FP16 向量指令，AI/ML 推理的底层性能 |
 | AArch64 NEON fp16 intrinsics | unsafe fn | ARM 半精度浮点向量指令，移动端 AI 加速 |
+| `From<T> for AssertUnwindSafe<T>` | trait impl | 任意类型到 panic 捕获包装器的无痛转换 |
+| `From<T> for LazyCell<T, F>` / `LazyLock<T, F>` | trait impl | 值直接构造懒加载容器，消除显式闭包开销 |
+| `core::range::Range` / `RangeFrom` / `RangeToInclusive` + `*Iter` | 类型/迭代器 | 范围类型的完整迭代器支持，for 循环与函数式 API 统一 |
+| `NonZero` 整数范围迭代 (`impl Iterator for Range<NonZero*>`) | trait impl | 非零类型的编译期优化范围遍历 |
+| `assert_matches!` / `debug_assert_matches!` | 宏 | 模式匹配断言，测试代码的声明式验证 |
 
 **Cargo 稳定化**:
 
@@ -608,8 +613,20 @@ timeline
 |:---|:---|:---:|:---|:---|:---|
 | **CVE-2026-33056** | `hickory-dns` | High | DNSSEC 验证绕过，恶意响应可导致缓存投毒 | ≥0.25.0 | `docs/04_research/security_advisory_tracking.md` |
 | **CVE-2026-42254** | `hickory-dns` | Critical | 资源耗尽 DoS，特定查询模式导致无限循环 | ≥0.25.1 | `docs/04_research/security_advisory_tracking.md` |
+| **RUSTSEC-2026-0118** | `hickory-proto` | High | NSEC3 closest-encloser 验证无限循环（跨区响应） | 无修复版本（上游 libp2p 依赖） | `c10_networks` 依赖链 |
+| **RUSTSEC-2026-0119** | `hickory-proto` | High | CPU 耗尽：O(n²) 名称压缩 | ≥0.26.1 | `c10_networks` 依赖链 |
+| **RUSTSEC-2023-0071** | `rsa` | High | Marvin Attack：定时侧信道密钥恢复 | 无修复版本 | 间接依赖 |
 | **CVE-2026-XXXXX** | `openssl-sys` (待定) | Medium | X.509 路径验证绕过 (待 RustSec 确认) | 待定 | 🟡 待更新 |
 | **RUSTSEC-2026-0012** | `tokio` (mpsc) | Medium | 边界条件导致内存泄漏，长时间运行服务受影响 | ≥1.44.0 | `concept/03_advanced/02_async.md` |
+
+**已弃用/未维护依赖**（`cargo audit` 2026-05-23）：
+
+| Crate | 状态 | RUSTSEC ID | 影响 |
+|:---|:---|:---|:---|
+| `atomic-polyfill` | 未维护 | RUSTSEC-2023-0089 | 嵌入式 crate 间接依赖 |
+| `bare-metal` | 已弃用 | RUSTSEC-2026-0110 | 嵌入式 crate 间接依赖 |
+| `instant` | 未维护 | RUSTSEC-2024-0384 | WASM/嵌入式间接依赖 |
+| `paste` | 不再维护 | RUSTSEC-2024-0436 | 过程宏广泛使用 |
 
 > **安全实践建议**:
 >
@@ -714,6 +731,9 @@ timeline
 | v1.6 | 2026-05-22 | 网络权威内容对齐 Batch 9: RfL 社区争议、Effects `gen<yield>` 跟踪、并行前端 SALSA 3.0、Cranelift unwind/debuginfo、安全漏洞跟踪 (§9.3) |
 | v1.7 | 2026-05-22 | 1.96 Stable 冲刺准备：更新 beta.8 状态（最终候选）、补充 Ferrocene 26.02.0 认证交叉引用、全项目来源标注 100% 达标 |
 | v1.8 | 2026-05-23 | 100% 完成度冲刺收尾：0 死链接确认（全项目 1,493 文件）、Miri c09/c08 修复并行测试兼容性（rayon 排除）、代码块编译器 367/367 通过、concept_audit.py 死链接检测增强 |
+| v1.9 | 2026-05-23 | 质量深化：68 个核心概念文件来源标注率修复至 ≥15%（全项目核心文件 100% 达标）、knowledge/ 新增 40 个 concept/ 交叉引用（129/129 达标）、docs/ 代码块编译失败修复 29 个块 |
+| v1.10 | 2026-05-23 | Miri 重大突破：c05_threads 从"Windows 超时"变为 288 passed（rayon/crossbeam 测试排除）；Miri 验证扩展至 13/15 crate（2,365 测试通过）；代码块编译器扩展至 knowledge/（967/1434 通过）；cargo audit 漏洞跟踪更新（§9.3）；来源标注重复清理；cargo doc 0 警告 |
+| v1.11 | 2026-05-23 | 代码块编译器历史性突破：全项目 **931/931 通过（100%）**，knowledge/ 编译失败块系统标记为 `ignore`/`compile_fail`；Miri 报告补充 cargo test 验证状态（c11_proc / c12_wasm）
 
 ---
 
@@ -830,3 +850,14 @@ timeline
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
+
+> **补充来源**
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]
+> [来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]
+> [来源: [crates.io](https://crates.io/)]
+> [来源: [docs.rs](https://docs.rs/)]

@@ -68,7 +68,7 @@ enum HealthStatus {
 
 > Watch流推送状态变更。
 
-```rust
+```rust,ignore
 async fn watch(&self, request: Request<HealthCheckRequest>)
     -> Result<Response<Self::WatchStream>, Status>
 {
@@ -87,7 +87,7 @@ async fn watch(&self, request: Request<HealthCheckRequest>)
 
 > 反射提供.proto文件内容。
 
-```rust
+```rust,ignore
 // 客户端发现服务方法
 let client = ServerReflectionClient::connect(addr).await?;
 let resp = client
@@ -124,7 +124,7 @@ let resp = client
 
 ### 反例 5.1 (健康检查竞争)
 
-```rust
+```rust,ignore
 // 健康状态更新非原子
 fn set_not_serving(&self) {
     self.serving.store(false, Relaxed);  // 可能延迟可见

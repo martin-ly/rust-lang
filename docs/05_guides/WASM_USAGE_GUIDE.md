@@ -154,7 +154,7 @@ cd my-wasm-project
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // src/lib.rs
 use wasm_bindgen::prelude::*;
 
@@ -175,7 +175,7 @@ pub fn greet(name: &str) -> String {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -203,7 +203,7 @@ pub fn log_message(message: &str) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -237,7 +237,7 @@ impl Person {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use js_sys::Promise;
@@ -359,7 +359,7 @@ wasm.init().then(() => {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use wasm_bindgen_test::*;
 
 wasm_bindgen_test_configure!(run_in_browser);
@@ -414,7 +414,7 @@ wasm-opt -Os pkg/my_wasm_project_bg.wasm -o pkg/my_wasm_project_optimized.wasm
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ❌ 不好：多次分配
 pub fn process(data: &str) -> String {
     data.to_uppercase()
@@ -508,7 +508,7 @@ pub fn process(data: &str) -> String {
 ### array_windows 在图像处理中的应用
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 使用 array_windows 进行像素窗口处理
 #[wasm_bindgen]
 pub fn apply_kernel(data: &[u8], width: usize) -> Vec<u8> {
@@ -524,7 +524,7 @@ pub fn apply_kernel(data: &[u8], width: usize) -> Vec<u8> {
 ### LazyLock 在 WASM 状态管理中的应用
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use wasm_bindgen::prelude::*;
 

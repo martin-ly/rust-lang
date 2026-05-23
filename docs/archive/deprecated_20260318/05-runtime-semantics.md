@@ -223,7 +223,7 @@ $$
 \text{RustRuntime} = \text{Startup} + \text{PanicHandler} + \text{GlobalAlloc} + \text{OSAbstraction}
 $$
 
-```rust
+```rust,ignore
 // #![no_std] 环境：仅使用 core 和 alloc
 #![no_std]
 #![no_main]
@@ -283,7 +283,7 @@ $$
 \text{Runtime} : \langle e, \sigma \rangle \to \langle v, \sigma' \rangle \quad \text{（状态转换在运行时发生）}
 $$
 
-```rust
+```rust,ignore
 // 编译时保证示例
 fn compile_time_guarantees() {
     // 编译时类型检查
@@ -576,7 +576,7 @@ fn memory_layout_semantics() {
 
 #### 2.2.3 对齐和填充语义
 
-```rust
+```rust,ignore
 #[repr(C)]  // C 兼容布局
 struct CLayout {
     a: u8,
@@ -694,7 +694,7 @@ fn drop_semantics() {
 
 Rust 按照**创建顺序的逆序**进行析构：
 
-```rust
+```rust,ignore
 fn drop_order_semantics() {
     // 变量按逆序 drop
     let a = Resource { id: 1, data: vec![] };
@@ -733,7 +733,7 @@ fn vec_drop_order() {
 
 **mem::forget** 阻止析构函数的调用：
 
-```rust
+```rust,ignore
 use std::mem;
 
 fn forget_semantics() {
@@ -877,7 +877,7 @@ fn id_semantics() {
 
 #### 3.1.3 标记类型语义
 
-```rust
+```rust,ignore
 use std::marker::{Copy, Send, Sync, Sized, Unpin};
 
 // 自动 trait（标记 trait）
@@ -1020,7 +1020,7 @@ fn any_trait_semantics() {
 
 #### 3.3.2 向下转换语义
 
-```rust
+```rust,ignore
 fn downcast_semantics() {
     fn process_any(value: &dyn Any) {
         match value.downcast_ref::<i32>() {
@@ -1036,7 +1036,7 @@ fn downcast_semantics() {
 
 #### 3.3.3 运行时类型信息
 
-```rust
+```rust,ignore
 use std::any::type_name;
 
 fn rtti_semantics() {
@@ -1089,7 +1089,7 @@ fn os_scheduler_semantics() {
 
 **Linux 线程创建的系统调用追踪：**
 
-```rust
+```rust,ignore
 fn thread_syscall_analysis() {
     // pthread_create 内部调用：
     // 1. mmap/mprotect：分配线程栈
@@ -1111,7 +1111,7 @@ $$
 \text{ThreadState} : \{ \text{New}, \text{Runnable}, \text{Running}, \text{Blocked}, \text{Terminated} \}
 $$
 
-```rust
+```rust,ignore
 fn thread_state_transitions() {
     // New -> Runnable
     let handle = thread::spawn(|| {
@@ -1135,7 +1135,7 @@ fn thread_state_transitions() {
 
 #### 4.1.3 上下文切换开销
 
-```rust
+```rust,ignore
 use std::time::Instant;
 
 fn context_switch_overhead() {
@@ -1211,7 +1211,7 @@ impl SimpleExecutor {
 
 #### 4.2.2 工作窃取调度
 
-```rust
+```rust,ignore
 // crossbeam-deque 的工作窃取语义
 use crossbeam_deque::{Worker, Stealer, Injector};
 
@@ -1256,7 +1256,7 @@ fn rayon_scheduling() {
 
 #### 4.2.3 优先级调度
 
-```rust
+```rust,ignore
 // Tokio 的任务优先级（通过任务属性）
 #[tokio::main]
 async fn priority_scheduling() {
@@ -1282,7 +1282,7 @@ async fn priority_scheduling() {
 
 #### 4.3.1 yield_now 语义
 
-```rust
+```rust,ignore
 use std::task::Poll;
 
 fn yield_semantics() {
@@ -1298,7 +1298,7 @@ fn yield_semantics() {
 
 #### 4.3.2 自愿让出语义
 
-```rust
+```rust,ignore
 fn cooperative_yielding() {
     // 协作式调度要求任务主动让出
     async fn cooperative_task() {
@@ -1435,7 +1435,7 @@ fn io_wakeup_semantics() {
 
 #### 5.2.1 反应堆模式
 
-```rust
+```rust,ignore
 // mio 提供的反应堆模式
 use mio::{Events, Interest, Poll, Token};
 use mio::net::TcpListener;
@@ -1488,7 +1488,7 @@ fn io_event_notification_semantics() {
 
 #### 5.2.3 就绪状态管理
 
-```rust
+```rust,ignore
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 use tokio::net::TcpStream;
 
@@ -1510,7 +1510,7 @@ async fn readiness_management() {
 
 #### 5.3.1 打开/关闭语义
 
-```rust
+```rust,ignore
 use std::fs::OpenOptions;
 
 fn file_open_semantics() {
@@ -1538,7 +1538,7 @@ impl Drop for File {
 
 #### 5.3.2 读/写语义
 
-```rust
+```rust,ignore
 use std::io::{Read, Write, Seek, SeekFrom};
 
 fn file_rw_semantics() {
@@ -1556,7 +1556,7 @@ fn file_rw_semantics() {
 
 #### 5.3.3 同步语义（fsync）
 
-```rust
+```rust,ignore
 use std::os::unix::io::AsRawFd;
 use std::fs::File;
 use std::io::Write;
@@ -1612,7 +1612,7 @@ fn handle_connection(mut stream: TcpStream) {
 
 #### 6.1.2 数据传输语义
 
-```rust
+```rust,ignore
 use std::io::{Read, Write};
 
 fn tcp_data_transfer() {
@@ -1629,7 +1629,7 @@ fn tcp_data_transfer() {
 
 #### 6.1.3 连接关闭语义
 
-```rust
+```rust,ignore
 fn tcp_connection_close() {
     // TCP 四次挥手：
     // 1. FIN -> 主动关闭方发送 FIN
@@ -1671,7 +1671,7 @@ fn udp_datagram_semantics() {
 
 #### 6.2.2 无连接语义
 
-```rust
+```rust,ignore
 fn udp_connectionless_semantics() {
     let socket = UdpSocket::bind("0.0.0.0:0").unwrap();
 
@@ -1713,7 +1713,7 @@ fn connection_timeout_semantics() {
 
 #### 6.3.2 读写超时
 
-```rust
+```rust,ignore
 fn read_write_timeout() {
     let stream = TcpStream::connect("127.0.0.1:8080").unwrap();
 
@@ -1825,7 +1825,7 @@ fn do_work() {
 
 #### 7.1.3 高精度计时器
 
-```rust
+```rust,ignore
 fn high_precision_timing() {
     // 测量短操作的时间
     let iterations = 1_000_000;
@@ -1876,7 +1876,7 @@ fn thread_sleep_semantics() {
 
 #### 7.2.2 异步延迟
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn async_delay_semantics() {
@@ -1896,7 +1896,7 @@ async fn async_delay_semantics() {
 
 #### 7.2.3 定时器语义
 
-```rust
+```rust,ignore
 use tokio::time::{interval, Interval};
 
 async fn timer_semantics() {
@@ -1919,7 +1919,7 @@ async fn timer_semantics() {
 
 #### 7.3.1 相对超时
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 async fn relative_timeout_semantics() {
@@ -1944,7 +1944,7 @@ async fn slow_operation() -> String {
 
 #### 7.3.2 绝对超时
 
-```rust
+```rust,ignore
 use tokio::time::Instant;
 
 async fn absolute_timeout_semantics() {
@@ -1976,7 +1976,7 @@ fn process(_data: Vec<u8>) {}
 
 #### 7.3.3 超时组合
 
-```rust
+```rust,ignore
 use tokio::time::timeout;
 
 async fn timeout_composition() {
@@ -2010,7 +2010,7 @@ async fn fetch_item(i: u32) -> String {
 
 #### 8.1.1 展开调用栈
 
-```rust
+```rust,ignore
 fn panic_unwind_semantics() {
     // Panic 时的栈展开（unwind）
 
@@ -2097,7 +2097,7 @@ fn panic_strategy_comparison() {
 
 #### 8.2.1 ? 运算符语义
 
-```rust
+```rust,ignore
 fn question_mark_semantics() -> Result<(), Box<dyn std::error::Error>> {
     // ? 运算符展开：
     // let x = operation()?;
@@ -2261,7 +2261,7 @@ fn signal_safe_code() {
 
 #### 9.1.1 ABI 兼容性
 
-```rust
+```rust,ignore
 use std::os::raw::{c_int, c_char, c_void};
 
 // C 函数声明
@@ -2286,7 +2286,7 @@ fn abi_compatibility() {
 
 #### 9.1.2 调用约定
 
-```rust
+```rust,ignore
 // 定义 C 可调用的函数
 #[no_mangle]
 pub extern "C" fn rust_function(x: i32) -> i32 {
@@ -2308,7 +2308,7 @@ pub extern "C" fn distance(p1: Point, p2: Point) -> f64 {
 
 #### 9.1.3 类型转换语义
 
-```rust
+```rust,ignore
 fn type_conversion_semantics() {
     // Rust 类型到 C 类型映射
 
@@ -2348,7 +2348,7 @@ fn repr_c_semantics() {
 
 #### 9.2.2 repr(transparent) 语义
 
-```rust
+```rust,ignore
 #[repr(transparent)]
 struct Wrapper<T>(T);
 
@@ -2392,7 +2392,7 @@ fn packed_semantics() {
 
 #### 9.3.1 回调安全性
 
-```rust
+```rust,ignore
 // 从 C 调用 Rust 回调
 extern "C" fn rust_callback(data: *mut c_void, value: c_int) {
     let state = unsafe { &mut *(data as *mut MyState) };
@@ -2412,7 +2412,7 @@ impl MyState {
 
 #### 9.3.2 线程边界
 
-```rust
+```rust,ignore
 use std::sync::mpsc::channel;
 
 fn callback_thread_boundary() {
@@ -2429,7 +2429,7 @@ fn callback_thread_boundary() {
 
 #### 9.3.3 生命周期管理
 
-```rust
+```rust,ignore
 struct OwnedContext {
     data: String,
 }
@@ -2537,7 +2537,7 @@ fn false_sharing_avoidance() {
 
 #### 10.2.1 SIMD 语义
 
-```rust
+```rust,ignore
 #![feature(portable_simd)]
 use std::simd::*;
 
@@ -2571,7 +2571,7 @@ fn auto_vectorization() {
 
 #### 10.2.3 显式向量化
 
-```rust
+```rust,ignore
 use std::simd::*;
 
 fn explicit_vectorization() {
@@ -2597,7 +2597,7 @@ fn explicit_vectorization() {
 
 #### 10.3.1 分支提示
 
-```rust
+```rust,ignore
 fn branch_hints() {
     // likely/unlikely（需要 nightly 或外部 crate）
 
@@ -2730,7 +2730,7 @@ fn optimize_bounds_checks() {
 
 #### 11.2.1 Option/Result 语义
 
-```rust
+```rust,ignore
 fn option_result_semantics() {
     // Option：可能为空（None）或包含值（Some）
     let maybe_value: Option<i32> = Some(42);

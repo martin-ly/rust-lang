@@ -35,6 +35,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 CI/CD 管道与 Rust 构建特性
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 的编译模型对 CI/CD 设计有深远影响：
@@ -80,6 +82,7 @@ Rust CI/CD 核心约束:
 ---
 
 ### 1.2 工具链矩阵
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -115,6 +118,7 @@ Rust DevOps 工具全景:
 ---
 
 ### 1.3 安全审计在 DevOps 中的定位
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -154,6 +158,7 @@ Rust DevOps 工具全景:
 > [来源: [GitHub Actions Docs](https://docs.github.com/en/actions)]
 
 ### 2.1 GitHub Actions 工作流设计
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -228,6 +233,7 @@ jobs:
 ---
 
 ### 2.2 Docker 多阶段构建优化
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -280,6 +286,7 @@ ENTRYPOINT ["myapp"]
 ---
 
 ### 2.3 交叉编译 CI 集成
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -320,6 +327,7 @@ CI 交叉编译策略:
 ---
 
 ### 2.4 缓存策略与增量构建
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -371,6 +379,7 @@ graph LR
 > [来源: [Cargo Book]]
 
 ### 3.1 发布自动化决策
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | **场景** | **工具** | **配置复杂度** | **适用规模** |
@@ -382,6 +391,7 @@ graph LR
 | 企业级供应链合规 | cargo-vet + cargo-deny | 高 | 企业/安全关键 |
 
 ### 3.2 安全策略矩阵
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | **策略** | **工具** | **CI 阶段** | **阻止发布** |
@@ -404,6 +414,7 @@ graph LR
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -438,6 +449,7 @@ graph LR
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -711,4 +723,3 @@ fn main() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

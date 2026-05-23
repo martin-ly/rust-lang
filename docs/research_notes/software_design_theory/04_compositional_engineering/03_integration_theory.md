@@ -189,7 +189,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Builder + Strategy：可配置的排序策略
 trait SortStrategy { fn sort(&self, v: &mut [i32]); }
 struct QuickSort;
@@ -311,7 +311,7 @@ fn place_order<R: OrderRepo>(repo: &R, t: OrderType, amount: u64) -> Result<(), 
 
 **场景**：订单创建需配置校验、持久化。
 
-```rust
+```rust,ignore
 // Builder：多步骤构建
 struct OrderBuilder { items: Vec<Item>, valid: bool }
 impl OrderBuilder {
@@ -432,7 +432,7 @@ impl Node {
 
 **场景**：HTTP 请求经认证→限流→业务处理；每步可封装为 Command；处理完成后发事件。
 
-```rust
+```rust,ignore
 // 链式处理器：Vec 顺序尝试，替代 Option<Box<Handler>>
 fn handle_chain(handlers: &[Box<dyn Handler>], req: &Request) -> Response {
     for h in handlers {

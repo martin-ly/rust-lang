@@ -281,7 +281,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::Arc;
@@ -383,7 +383,7 @@ impl<T: Send + 'static> CancellingPartialJoinFuturesUnordered<T> {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use tokio::time::timeout;
 use thiserror::Error;
@@ -491,7 +491,7 @@ impl<T: Send + 'static> ResilientCancellingPartialJoin<T> {
 ### 5.3 数据中心竞速完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::time::{sleep, Duration};
 
@@ -679,7 +679,7 @@ $$
 
 **场景**: 向多个数据中心查询，取最快响应
 
-```rust
+```rust,ignore
 datacenters:
   - query 5 DCs in parallel
   - take first 2 responses
@@ -691,7 +691,7 @@ datacenters:
 
 **场景**: 金融系统中从多个交易所获取报价
 
-```rust
+```rust,ignore
 exchanges:
   - request quotes from 10 exchanges
   - use first 3 valid quotes for pricing
@@ -703,7 +703,7 @@ exchanges:
 
 **场景**: 多个节点竞争分布式锁
 
-```rust
+```rust,ignore
 nodes:
   - 10 nodes try to acquire lock
   - first node wins
@@ -720,7 +720,7 @@ nodes:
 
 引入超时机制：
 
-```rust
+```rust,ignore
 struct TimeoutCancellingPartialJoin<T> {
     threshold: usize,
     total: usize,

@@ -318,7 +318,7 @@ $$
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use futures::stream::FuturesUnordered;
 use futures::StreamExt;
 
@@ -383,7 +383,7 @@ impl<T, R> ForceCompleteMultiInstance<T, R> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use tokio::time::timeout;
 use tokio::sync::mpsc;
@@ -443,7 +443,7 @@ impl<T: Send + 'static, R: Send + 'static> TimeoutForceComplete<T, R> {
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::time::Duration;
 use futures::stream::FuturesUnordered;
@@ -645,7 +645,7 @@ $$
 
 **场景**: 分布式系统中收集节点投票，达到法定人数后立即决策
 
-```rust
+```rust,ignore
 rules:
   - 总节点: 100
   - 法定阈值: 51 (51%)
@@ -658,7 +658,7 @@ rules:
 
 **场景**: Raft/Paxos 协议中，收到大多数 AppendEntries 响应后即提交日志
 
-```rust
+```rust,ignore
 consensus:
   - 收到 majority (N/2+1) 确认 → 提交
   - 未收到确认的节点 → 下次心跳同步
@@ -669,7 +669,7 @@ consensus:
 
 **场景**: 用户行为分析中，收集足够样本量后即停止收集
 
-```rust
+```rust,ignore
 sampling:
   - 目标样本量: 10,000
   - 置信度: 95%
@@ -703,7 +703,7 @@ impl PercentageThreshold {
 
 不同实例具有不同权重：
 
-```rust
+```rust,ignore
 pub struct WeightedInstance<T> {
     pub item: T,
     pub weight: f64,
@@ -719,7 +719,7 @@ pub fn weighted_threshold_met(instances: &[WeightedInstance<T>], threshold: f64)
 
 根据运行时情况动态调整阈值：
 
-```rust
+```rust,ignore
 pub struct AdaptiveThreshold {
     base_threshold: usize,
     min_threshold: usize,

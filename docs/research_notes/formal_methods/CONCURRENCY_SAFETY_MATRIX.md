@@ -219,7 +219,7 @@
 ### Send/Sync 公理
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Axiom SEND1: Send类型可跨线程转移所有权
 unsafe impl<T: Send> Send for Wrapper<T> {}
 

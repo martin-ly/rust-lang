@@ -56,7 +56,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 fn main() {
     let s1 = String::from("hello");
     let s2 = s1;
@@ -100,7 +100,7 @@ fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 fn main() {
     let data = vec![1, 2, 3, 4, 5];
     let first = get_first(data);
@@ -157,7 +157,7 @@ fn get_first(v: &[i32]) -> i32 {  // 接受切片引用
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3];
 
@@ -283,7 +283,7 @@ fn first_word(s: &str) -> &str {
 
 但这段代码不能？
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() {
         x
@@ -340,7 +340,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 修复以下结构体的生命周期错误：
 
-```rust
+```rust,ignore
 struct Parser {
     text: &str,  // 错误！需要生命周期
 }

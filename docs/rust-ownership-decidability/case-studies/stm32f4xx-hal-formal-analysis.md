@@ -149,7 +149,7 @@ $$
 
 ### 示例1: 时钟配置
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::{pac, prelude::*, rcc::RccExt};
 
 fn clock_example(dp: pac::Peripherals) {
@@ -168,7 +168,7 @@ fn clock_example(dp: pac::Peripherals) {
 
 ### 示例2: DMA串口
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::{dma::Streams, serial::Serial};
 
 fn dma_uart_example(dp: pac::Peripherals) {
@@ -192,7 +192,7 @@ fn dma_uart_example(dp: pac::Peripherals) {
 
 ### 示例3: ADC多通道
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::adc::{Adc, config::Scan};
 
 fn adc_example(dp: pac::Peripherals) {
@@ -211,7 +211,7 @@ fn adc_example(dp: pac::Peripherals) {
 
 ### 示例4: 定时器PWM
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::timer::pwm::Pwm;
 
 fn pwm_example(dp: pac::Peripherals) {

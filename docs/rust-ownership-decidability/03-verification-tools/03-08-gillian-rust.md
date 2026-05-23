@@ -315,7 +315,7 @@ Gillian-Rust 验证流程:
 
 **Vec 实现验证** (概念性):
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     unsafe fn get_unchecked_mut(&mut self, index: usize) -> &mut T {
         // Gillian-Rust 验证:

@@ -85,7 +85,7 @@ Theorem borrow_checking_termination :
 
 **rustc 模块**: `compiler/rustc_borrowck/src/lib.rs`
 
-```rust
+```rust,ignore
 // rustc 借用检查入口
 pub fn mir_borrowck(tcx: TyCtxt<'_>, def_id: LocalDefId) -> BorrowCheckResult {
     // ...
@@ -163,7 +163,7 @@ Theorem type_safety :
 
 **rustc 模块**: `compiler/rustc_typeck/src/`
 
-```rust
+```rust,ignore
 // rustc 类型检查入口
 pub fn typeck(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &TypeckResults<'_> {
     let mut type_checker = TypeChecker::new(tcx, def_id);
@@ -266,7 +266,7 @@ Theorem rust_type_system_fully_decidable :
 
 **rustc 编译流程**:
 
-```rust
+```rust,ignore
 // rustc_driver/src/lib.rs
 pub fn compile_input(
     sess: &Session,
@@ -339,7 +339,7 @@ Theorem preservation :
 
 **rustc 优化流程**:
 
-```rust
+```rust,ignore
 // compiler/rustc_mir_transform/src/lib.rs
 pub fn run_optimization_passes(tcx: TyCtxt<'_>, body: &mut Body<'_>) {
     // 每个优化都必须保持语义
@@ -395,7 +395,7 @@ Theorem borrow_check_equivalence :
 
 **rustc 借用检查详细流程**:
 
-```rust
+```rust,ignore
 // compiler/rustc_borrowck/src/lib.rs
 fn mir_borrowck(tcx: TyCtxt<'_>, def_id: LocalDefId) -> &BorrowCheckResult {
     let body = tcx.optimized_mir(def_id);
@@ -587,7 +587,7 @@ Featherweight Rust (本工作)
 ### 8.2 开发者如何使用形式化
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 1. 理解编译错误
 error[E0382]: use of moved value
 // 理解: 线性逻辑 - 资源已消耗

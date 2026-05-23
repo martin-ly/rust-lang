@@ -308,7 +308,7 @@ $$
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL Ch. 16 - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -432,7 +432,7 @@ impl<T: Clone + Send> StateMachineInterleaved<T> {
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: Rustonomicon - Ownership]**
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 use thiserror::Error;
 
@@ -686,7 +686,7 @@ $$
 
 **场景**: 数据库 schema 迁移，步骤可任意顺序但不能并发
 
-```rust
+```rust,ignore
 let engine = DatabaseMigrationEngine::new(steps);
 engine.migrate_interleaved().await?;
 ```
@@ -698,7 +698,7 @@ engine.migrate_interleaved().await?;
 
 **场景**: 系统配置更新，各模块更新无依赖但不能并发
 
-```rust
+```rust,ignore
 let mut router = InterleavedRouter::new();
 router.add_activity(|| update_db_config());
 router.add_activity(|| update_cache_config());
@@ -711,7 +711,7 @@ router.execute_interleaved().await;
 
 **场景**: 服务启动时的资源初始化
 
-```rust
+```rust,ignore
 let init = ConstrainedInterleaved::new();
 init.add_activity("Init DB", vec![], init_db);
 init.add_activity("Init Cache", vec![], init_cache);
@@ -728,7 +728,7 @@ init.execute_all().await?;
 
 活动有偏序约束，满足约束的任意顺序执行：
 
-```rust
+```rust,ignore
 impl<T: Clone + Send> ConstrainedInterleaved<T> {
     pub fn add_dependency(&mut self, from: usize, to: usize) {
         self.activities[to].dependencies.insert(from);
@@ -741,7 +741,7 @@ impl<T: Clone + Send> ConstrainedInterleaved<T> {
 
 显式声明依赖关系，只有依赖满足后才可执行：
 
-```rust
+```rust,ignore
 let mut interleaved = ConstrainedInterleaved::new();
 interleaved.add_activity("A", vec![], || Ok(1));
 interleaved.add_activity("B", vec![0], || Ok(2)); // 依赖 A

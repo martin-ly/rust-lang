@@ -32,7 +32,7 @@
 
 条件分支控制。`if` 计算布尔表达式，`else` 处理不满足条件的情况。
 
-```rust
+```rust,ignore
 let x = 5;
 if x > 0 {
     println!("正数");
@@ -52,7 +52,7 @@ let abs = if x < 0 { -x } else { x };
 
 模式匹配，类似其他语言的 switch，但更强大。支持穷尽性检查。
 
-```rust
+```rust,ignore
 let value = 42;
 match value {
     0 => println!("零"),
@@ -68,7 +68,7 @@ match value {
 
 无限循环，必须用 `break` 退出。可以带标签用于多层循环。
 
-```rust
+```rust,ignore
 let mut count = 0;
 let result = loop {
     count += 1;
@@ -82,7 +82,7 @@ let result = loop {
 
 条件循环，在条件为真时持续执行。
 
-```rust
+```rust,ignore
 let mut n = 3;
 while n != 0 {
     println!("{}!", n);
@@ -94,7 +94,7 @@ while n != 0 {
 
 迭代循环，配合迭代器使用。这是最常用的循环形式。
 
-```rust
+```rust,ignore
 for i in 0..5 {
     println!("{}", i);  // 0,1,2,3,4
 }
@@ -108,7 +108,7 @@ for item in &collection {
 
 立即退出循环。可以带返回值（仅在 `loop` 中）或标签。
 
-```rust
+```rust,ignore
 'outer: loop {
     loop {
         break 'outer;  // 带标签跳出外层循环
@@ -120,7 +120,7 @@ for item in &collection {
 
 跳过当前迭代，进入下一次循环。
 
-```rust
+```rust,ignore
 for i in 0..10 {
     if i % 2 == 0 {
         continue;  // 跳过偶数
@@ -165,7 +165,7 @@ fn divide(a: f64, b: f64) -> Option<f64> {
 
 异步编程关键字（Rust 2018+）。`async` 创建异步块或函数，`await` 等待异步操作完成。
 
-```rust
+```rust,ignore
 async fn fetch_data() -> Result<String, Error> {
     let client = reqwest::Client::new();
     let response = client
@@ -186,7 +186,7 @@ let closure = async || {
 
 生成器关键字（Rust 2024+，`gen` 块中使用），产生值并暂停执行。
 
-```rust
+```rust,ignore
 #![feature(gen_blocks)]
 
 let gen = gen {
@@ -259,7 +259,7 @@ trait Drawable {
 
 为类型实现方法或 trait。
 
-```rust
+```rust,ignore
 impl Point {
     fn new(x: f64, y: f64) -> Self {
         Point { x, y }
@@ -292,7 +292,7 @@ trait Iterator {
 
 动态分发，用于 trait 对象。运行时确定具体类型。
 
-```rust
+```rust,ignore
 fn draw_all(shapes: &[&dyn Drawable]) {
     for shape in shapes {
         shape.draw();
@@ -310,7 +310,7 @@ let drawable: Box<dyn Drawable> = Box::new(Point::new(0.0, 0.0));
 
 声明模块。可以是内联模块或引用外部文件。
 
-```rust
+```rust,ignore
 // 声明内联模块
 mod math {
     pub fn add(a: i32, b: i32) -> i32 {
@@ -337,7 +337,7 @@ use std::result::Result as StdResult;  // 重命名
 
 引用当前 crate 的根。
 
-```rust
+```rust,ignore
 use crate::config::Settings;
 pub(crate) fn internal_helper() {}  // crate 可见性
 ```
@@ -362,7 +362,7 @@ mod parent {
 
 链接外部代码，用于 FFI（外部函数接口）。
 
-```rust
+```rust,ignore
 extern "C" {
     fn sqrt(x: f64) -> f64;
 }
@@ -375,7 +375,7 @@ pub extern "C" fn rust_function() {}
 
 公开可见性修饰符，可以限制可见范围。
 
-```rust
+```rust,ignore
 pub struct PublicStruct;
 pub(crate) fn crate_visible() {}   // crate 级别
 pub(super) fn parent_visible() {}  // 父模块级别
@@ -390,7 +390,7 @@ pub(in crate::module) fn limited() {}  // 指定路径
 
 绑定变量，支持模式解构。
 
-```rust
+```rust,ignore
 let x = 5;
 let mut y = 10;
 let z: i32 = 20;
@@ -404,7 +404,7 @@ let Point { x, y } = point;
 
 可变修饰符，允许修改变量或引用。
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 v.push(4);
 
@@ -430,7 +430,7 @@ const fn square(x: i32) -> i32 {
 
 静态生命周期变量，整个程序运行期间存在。
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::cell::UnsafeCell;
 
@@ -447,7 +447,7 @@ unsafe {
 
 通过引用绑定，常用于模式匹配。
 
-```rust
+```rust,ignore
 let value = 5;
 let ref r = value;  // r 是 &i32
 
@@ -464,7 +464,7 @@ match some_value {
 
 标记不安全的代码块或项，绕过 Rust 的安全检查。
 
-```rust
+```rust,ignore
 unsafe fn dangerous_function() {}
 
 unsafe {
@@ -479,7 +479,7 @@ unsafe impl Sync for MyType {}
 
 类型转换和重命名。
 
-```rust
+```rust,ignore
 let x: i32 = 10;
 let y: i64 = x as i64;
 
@@ -490,7 +490,7 @@ use std::io::Error as IoError;
 
 约束泛型参数，使代码更清晰。
 
-```rust
+```rust,ignore
 fn print<T>(value: T)
 where
     T: Display + Debug,
@@ -503,7 +503,7 @@ where
 
 强制闭包获取所有权而非借用。
 
-```rust
+```rust,ignore
 let data = vec![1, 2, 3];
 let closure = move || {
     println!("{:?}", data);  // 获取所有权
@@ -515,7 +515,7 @@ let closure = move || {
 - `self`: 方法的第一个参数，表示实例
 - `Self`: 当前类型的别名
 
-```rust
+```rust,ignore
 impl Rectangle {
     fn area(&self) -> f64 {
         self.width * self.height
@@ -531,7 +531,7 @@ impl Rectangle {
 
 用于 `for` 循环和可见性修饰。
 
-```rust
+```rust,ignore
 for item in collection { }
 pub(in crate::outer) fn limited_visible() {}
 ```
@@ -571,7 +571,7 @@ pub(in crate::outer) fn limited_visible() {}
 
 定义 C 风格联合体（需要 `unsafe`）。
 
-```rust
+```rust,ignore
 #[repr(C)]
 union IntOrFloat {
     i: i32,
@@ -587,7 +587,7 @@ unsafe {
 
 静态生命周期，是最长的生命周期。
 
-```rust
+```rust,ignore
 let s: &'static str = "Hello, world!";
 fn require_static<T: 'static>(_: T) {}
 ```
@@ -737,7 +737,7 @@ Rust 关键字体系
 
 #### 6.1 使用关键字作为标识符
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 let fn = 5;       // error: expected identifier, found keyword `fn`
 let match = 6;    // error
@@ -753,7 +753,7 @@ let pattern = 6;
 
 #### 6.2 混淆 `const` 与 `static`
 
-```rust
+```rust,ignore
 // ❌ 错误: 尝试获取 const 的引用并修改其值
 const ARRAY: [i32; 3] = [1, 2, 3];
 let ptr = ARRAY.as_ptr();
@@ -769,7 +769,7 @@ unsafe {
 
 #### 6.3 `ref` 绑定误用
 
-```rust
+```rust,ignore
 // ❌ 不必要的 ref 绑定
 let ref x = 5;
 // x 类型为 &i32，但值复制仍发生

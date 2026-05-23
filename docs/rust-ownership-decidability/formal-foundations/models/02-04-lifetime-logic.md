@@ -57,7 +57,7 @@
 
 **问题：悬挂引用**:
 
-```rust
+```rust,ignore
 fn dangling_reference() -> &String {  // 错误!
     let s = String::from("hello");
     &s  // s在函数结束时被drop
@@ -136,7 +136,7 @@ fn valid_reference(s: &String) -> &str {
 
 **示例**:
 
-```rust
+```rust,ignore
 fn example() {
     let x = 1;           // n₁: 'a 开始
     {                    // n₂
@@ -431,7 +431,7 @@ solve(C) =
 
 **示例**:
 
-```rust
+```rust,ignore
 fn choose<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
     x
 }

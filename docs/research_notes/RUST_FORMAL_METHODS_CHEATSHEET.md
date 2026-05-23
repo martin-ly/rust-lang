@@ -75,7 +75,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 1. 每个值有唯一所有者
 let s = String::from("hello");  // s是所有者
 
@@ -113,7 +113,7 @@ let len = calculate_length(&s1);  // 借用s1
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 显式标注
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
@@ -268,7 +268,7 @@ unsafe {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 async fn foo() -> i32 { 42 }
 
 // 等价于
@@ -292,7 +292,7 @@ fn foo() -> impl Future<Output = i32> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // ✅ 取消安全: 使用临时文件
 async fn safe_write(path: &str, data: &[u8]) {
     let temp = format!("{}.tmp", path);
@@ -310,7 +310,7 @@ async fn safe_write(path: &str, data: &[u8]) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Mutex
 let counter = Arc::new(Mutex::new(0));
 *counter.lock().unwrap() += 1;
@@ -325,7 +325,7 @@ data.write().unwrap().push(1);
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // mpsc
 let (tx, rx) = mpsc::channel();
 tx.send(42).unwrap();
@@ -462,7 +462,7 @@ T: 'a   →  T中所有引用存活至少 'a
 ### 错误1: 使用已移动值
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 let x = String::from("hello");
 let y = x;
@@ -477,7 +477,7 @@ let y = &x;          // 借用
 ### 错误2: 借用冲突
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 let mut x = 5;
 let r1 = &x;
@@ -495,7 +495,7 @@ let r2 = &mut x;  // OK
 ### 错误3: Rc跨线程
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 let data = Rc::new(5);
 thread::spawn(move || {

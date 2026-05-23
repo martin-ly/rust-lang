@@ -54,7 +54,7 @@ tokio::process提供:
 
 > 标准库Command的异步扩展。
 
-```rust
+```rust,ignore
 use tokio::process::Command;
 
 let mut child = Command::new("/bin/cat")
@@ -73,7 +73,7 @@ let mut child = Command::new("/bin/cat")
 
 > 子进程IO与AsyncRead/AsyncWrite集成。
 
-```rust
+```rust,ignore
 let mut child = Command::new("/bin/ls")
     .stdout(Stdio::piped())
     .spawn()?;
@@ -97,7 +97,7 @@ while let Some(line) = lines.next_line().await? {
 
 > wait()不阻塞运行时线程。
 
-```rust
+```rust,ignore
 let status = child.wait().await?;
 if status.success() {
     println!("Exit: {}", status.code().unwrap_or(-1));
@@ -110,7 +110,7 @@ if status.success() {
 
 > 可配置超时终止。
 
-```rust
+```rust,ignore
 let status = timeout(Duration::from_secs(30), child.wait())
     .await
     .map_err(|_| {
@@ -128,7 +128,7 @@ let status = timeout(Duration::from_secs(30), child.wait())
 
 > 先尝试SIGTERM，再SIGKILL。
 
-```rust
+```rust,ignore
 // 发送SIGTERM (Unix) 或 Terminate (Windows)
 child.kill().await?;
 ```
@@ -141,7 +141,7 @@ child.kill().await?;
 
 ### 反例 6.1 (僵尸进程)
 
-```rust
+```rust,ignore
 // 错误: 不wait导致僵尸
 let _child = Command::new("sleep").arg("10").spawn()?;
 // 进程结束后成为僵尸
@@ -152,7 +152,7 @@ let status = child.wait().await?;
 
 ### 反例 6.2 (管道填满)
 
-```rust
+```rust,ignore
 // 错误: 不读取stdout导致子进程阻塞
 let child = Command::new("yes")
     .stdout(Stdio::piped())

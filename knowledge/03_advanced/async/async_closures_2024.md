@@ -1,4 +1,6 @@
 # Rust 2024 Edition Async Closures 完整指南
+>
+> **相关概念**: [异步闭包](../../../concept/03_advanced/02_async.md)
 
 > **Bloom 层级**: 理解
 
@@ -15,7 +17,7 @@ Async closures 是 Rust 1.85+ 中稳定化的重要特性 [来源: RFC 3668 — 
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 传统写法（Rust 1.84 及之前）
 let fetch = |url: &str| async move {
     reqwest::get(url).await?.text().await
@@ -58,7 +60,7 @@ let fetch = async |url: &str| -> Result<String, Error> {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 安全：纯计算，无状态变更
 let task = async || {
     item * 2
@@ -85,7 +87,7 @@ let risky = async || {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 pub fn basic_async_closure() -> impl Fn(i32) -> Pin<Box<dyn Future<Output = i32> + Send>> {
     let modern = |x: i32| -> Pin<Box<dyn Future<Output = i32> + Send>> {
         Box::pin(async move { x * 2 })
@@ -144,7 +146,7 @@ pub async fn process_stream_with_async_closure(
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub async fn cancellation_safe_async_closure(items: Vec<i32>) -> Vec<i32> {
     let mut results = Vec::new();
 
@@ -307,7 +309,7 @@ Rust 的 async 闭包需要解决三个核心问题：
 
 3. **以下代码用传统写法实现。请改写为 2024 async closure 语法：**
 
-```rust
+```rust,ignore
 let process = |items: Vec<i32>| {
     Box::pin(async move {
         let mut sum = 0;
@@ -322,7 +324,7 @@ let process = |items: Vec<i32>| {
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 let process = async |items: Vec<i32>| -> i32 {
     let mut sum = 0;
     for item in items {

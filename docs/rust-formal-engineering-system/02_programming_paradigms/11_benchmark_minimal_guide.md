@@ -58,7 +58,7 @@ fn fibonacci(n: u64) -> u64 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Cargo.toml:
 // [dev-dependencies]
 // criterion = { version = "0.5", features = ["html_reports"] }
@@ -98,7 +98,7 @@ criterion_main!(benches);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::black_box;
 
 // black_box 告诉编译器不要优化掉计算
@@ -128,7 +128,7 @@ pub fn custom_black_box<T>(dummy: T) -> T {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::{BenchmarkId, Criterion};
 
 // 测试不同输入规模下的性能
@@ -159,7 +159,7 @@ fn bench_various_sizes(c: &mut Criterion) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::{BenchmarkId, Criterion};
 
 // 实现 1：迭代器
@@ -211,7 +211,7 @@ fn bench_comparison(c: &mut Criterion) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::{async_executor::FuturesExecutor, Criterion};
 
 async fn async_fibonacci(n: u64) -> u64 {
@@ -241,7 +241,7 @@ fn bench_async(c: &mut Criterion) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::{Criterion, Throughput};
 
 fn bench_with_throughput(c: &mut Criterion) {
@@ -275,7 +275,7 @@ fn bench_with_throughput(c: &mut Criterion) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use criterion::{Criterion, SamplingMode};
 
 fn configure_statistics(c: &mut Criterion) {
@@ -306,7 +306,7 @@ fn expensive_operation() -> Vec<u32> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use criterion::Criterion;
 
 fn bench_with_warmup(c: &mut Criterion) {
@@ -334,7 +334,7 @@ fn cache_sensitive_operation() -> Vec<f64> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // benches/bench1.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -421,7 +421,7 @@ $ cargo flamegraph --bench my_benchmark
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // 使用 dhat 进行堆分析
 // Cargo.toml:
 // [dev-dependencies]
@@ -447,7 +447,7 @@ fn profile_memory() {
 ## 常见陷阱与避免方法
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // ❌ 陷阱 1：测试代码被优化掉
 fn bad_bench1(c: &mut Criterion) {
     c.bench_function("optimized_away", |b| {
@@ -512,7 +512,7 @@ fn good_bench3(c: &mut Criterion) {
 ## 快速开始模板
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // benches/template.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 

@@ -96,7 +96,7 @@
    - 需要可预测的性能
    - 避免长时间的阻塞操作
 
-```rust
+```rust,ignore
 // 传统文件系统在嵌入式环境的问题
 use std::fs::File;  // ❌ 需要std，嵌入式不可用
 
@@ -248,7 +248,7 @@ struct MetadataPair {
 
 COW是LittleFS保证原子性的核心机制：
 
-```rust
+```rust,ignore
 /// COW操作原理
 ///
 /// 1. 不就地修改数据
@@ -325,7 +325,7 @@ impl<'a> CowOperation<'a> {
 
 元数据对提供原子更新能力：
 
-```rust
+```rust,ignore
 /// 元数据对实现双块原子更新
 struct MetadataPair {
     blocks: [u32; 2],
@@ -387,7 +387,7 @@ impl MetadataPair {
 
 LittleFS使用轮询分配实现磨损均衡：
 
-```rust
+```rust,ignore
 /// 磨损均衡分配器
 struct WearLevelingAllocator {
     /// 下一个分配的块
@@ -553,7 +553,7 @@ impl LookaheadCache {
 
 Storage trait抽象底层存储：
 
-```rust
+```rust,ignore
 /// 存储抽象trait
 pub trait Storage {
     /// 错误类型
@@ -610,7 +610,7 @@ impl<S: NorFlash> Storage for NorFlashAdapter<S> {
 
 FileSystem trait提供文件系统操作：
 
-```rust
+```rust,ignore
 pub trait FileSystem {
     type File: File;
     type Dir: Dir;
@@ -669,7 +669,7 @@ pub trait FileSystem {
 
 文件和目录trait：
 
-```rust
+```rust,ignore
 /// 文件trait
 pub trait File: Read + Write + Seek {
     /// 获取文件大小
@@ -716,7 +716,7 @@ pub enum FileType {
 
 IO traits提供基本读写：
 
-```rust
+```rust,ignore
 /// 读取trait
 pub trait Read {
     type Error;
@@ -786,7 +786,7 @@ pub enum SeekFrom {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, Allocation, File, OpenOptions};
 use littlefs2::io::{Read, Write, Result};
 use chrono::{DateTime, Utc};
@@ -918,7 +918,7 @@ impl<S: Storage> SensorLogger<S> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
 use littlefs2::path::PathBuf;
 use sha2::{Sha256, Digest};
@@ -1076,7 +1076,7 @@ impl<S: Storage> FirmwareManager<S> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
 use serde::{Serialize, Deserialize};
 use postcard;
@@ -1219,7 +1219,7 @@ impl<S: Storage> ConfigManager<S> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, Dir, OpenOptions};
 use littlefs2::path::PathBuf;
 
@@ -1366,7 +1366,7 @@ impl<S: Storage> CircularLog<S> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, OpenOptions};
 use littlefs2::path::PathBuf;
 use serde::{Serialize, Deserialize};
@@ -1514,7 +1514,7 @@ fn database_example() -> Result<(), Error> {
 | 大文件 | 支持 | 支持更好 |
 | 碎片化 | 较少 | 严重 |
 
-```rust
+```rust,ignore
 // FATFS: 需要显式同步，掉电可能损坏
 file.write(data)?;
 // 如果这里掉电，文件可能损坏
@@ -1543,7 +1543,7 @@ file.sync()?;  // 原子提交
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 裸Flash操作
 unsafe {
     // 危险：无抽象，易出错
@@ -1593,7 +1593,7 @@ fs.open_file_with_options_and_then(
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use littlefs2::fs::{Filesystem, File, Dir, OpenOptions};
 use littlefs2::path::PathBuf;
 use heapless::String;
@@ -1794,7 +1794,7 @@ fn wear_uniformity(block_count: usize, total_writes: usize) -> f32 {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 恢复过程
 fn mount_time(block_count: usize) -> Duration {
     // 1. 读取superblock: O(1)
@@ -1817,7 +1817,7 @@ fn mount_time(block_count: usize) -> Duration {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 块大小应该匹配Flash的擦除块大小
 // 典型值：
 // - NOR Flash: 4KB
@@ -1870,7 +1870,7 @@ fn distribute_path(id: u32, base: &str) -> String {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 1. 幂等重试
 fn robust_write(fs: &Filesystem, path: &str, data: &[u8]) -> Result<(), Error> {
     for attempt in 0..3 {
@@ -1904,7 +1904,7 @@ fn recover_from_error(fs: &mut Filesystem) -> Result<(), Error> {
 ### 8.5 电源故障保护
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 重要操作后立即同步
 fn critical_write(file: &mut impl File, data: &[u8]) -> Result<(), Error> {
     file.write_all(data)?;
@@ -2012,7 +2012,7 @@ $$\max(\text{erase\_count}) - \min(\text{erase\_count}) \leq 1$$
 ### 10.1 存储空间耗尽
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 问题：写入时空间不足
 // 可能原因：
 // 1. 碎片化（虽然LittleFS碎片化较少）
@@ -2038,7 +2038,7 @@ fn write_with_gc(fs: &Filesystem, data: &[u8]) -> Result<(), Error> {
 
 虽然LittleFS碎片化较少，但长期使用仍可能产生：
 
-```rust
+```rust,ignore
 // 检测碎片化
 fn fragmentation_ratio(fs: &Filesystem) -> f32 {
     let total = fs.total_space().unwrap();
@@ -2057,7 +2057,7 @@ fn fragmentation_ratio(fs: &Filesystem) -> f32 {
 ### 10.3 并发访问限制
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // LittleFS不支持多线程并发
 // 需要外部同步
 

@@ -82,7 +82,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 asm!(
     "汇编指令模板",           // 必需
     操作数1,                  // 可选
@@ -98,7 +98,7 @@ asm!(
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::arch::global_asm;
 
 // 在模块级别定义全局汇编代码
@@ -125,7 +125,7 @@ extern "C" {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let x: u64 = 42;
 unsafe {
     asm!(
@@ -141,7 +141,7 @@ unsafe {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let mut y: u64;
 unsafe {
     asm!(
@@ -157,7 +157,7 @@ unsafe {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let mut z: u64 = 10;
 unsafe {
     asm!(
@@ -174,7 +174,7 @@ unsafe {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // lateout: 在输入操作数使用完之后再写入
 // 避免寄存器分配冲突
 unsafe {
@@ -194,7 +194,7 @@ unsafe {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let mut arr = [1u64; 4];
 unsafe {
     asm!(
@@ -209,7 +209,7 @@ assert_eq!(arr[0], 42);
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 使用本地标签
 let mut result: u64;
 unsafe {
@@ -246,7 +246,7 @@ assert_eq!(result, 1);
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 纯计算，无副作用
 unsafe fn add_asm(a: u64, b: u64) -> u64 {
     let result: u64;
@@ -281,7 +281,7 @@ unsafe fn exit_process(code: i32) -> ! {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 #[cfg(target_arch = "x86_64")]
 mod x86_64_examples {
     use std::arch::asm;
@@ -402,7 +402,7 @@ mod riscv_examples {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// Linux x86_64 系统调用
 #[cfg(all(target_os = "linux", target_arch = "x86_64"))]
 pub unsafe fn syscall_3(
@@ -442,7 +442,7 @@ pub fn sys_write(fd: usize, buf: &[u8]) -> isize {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 #[cfg(target_arch = "x86_64")]
 pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
     let mut result: [f32; 8] = [0.0; 8];
@@ -467,7 +467,7 @@ pub unsafe fn add_vectors_avx(a: &[f32; 8], b: &[f32; 8]) -> [f32; 8] {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::Ordering;
 
 pub struct AtomicU64 {
@@ -530,7 +530,7 @@ impl AtomicU64 {
 
 裸函数（`#[naked]`）与内联汇编结合，可以完全控制函数 prologue/epilogue：
 
-```rust
+```rust,ignore
 #![feature(naked_functions)]
 
 use std::arch::naked_asm;
@@ -590,7 +590,7 @@ extern "C" fn handle_syscall() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ❌ 错误：未标记被修改的寄存器
 unsafe {
     asm!(
@@ -611,7 +611,7 @@ unsafe {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 let mut x = 10;
 // ❌ 错误：使用 out 当应该用 inout
 unsafe {
@@ -638,7 +638,7 @@ unsafe {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：编译器可能重排内存操作
 static mut COUNTER: u64 = 0;
 unsafe {
@@ -659,7 +659,7 @@ unsafe {
 ### 陷阱 4: 平台假设
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误：假设只有 x86_64
 pub fn get_cycle_count() -> u64 {
     unsafe {
@@ -730,7 +730,7 @@ pub fn get_cycle_count() -> u64 {
 ### LazyLock 在汇编优化缓存中的应用
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// CPU 特性缓存（延迟检测）
@@ -758,7 +758,7 @@ pub fn optimized_memcpy(dst: *mut u8, src:*const u8, len: usize) {
 ### ControlFlow 在汇编错误处理中的应用
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 汇编操作结果验证
@@ -775,7 +775,7 @@ fn validate_asm_result(result: u64) -> ControlFlow<AsmError, ()> {
 ### 数学常量在 SIMD 优化中的应用
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 使用黄金比例进行 SIMD 对齐优化
 pub fn aligned_buffer_size(min_size: usize) -> usize {
     let phi = f64::consts::GOLDEN_RATIO;

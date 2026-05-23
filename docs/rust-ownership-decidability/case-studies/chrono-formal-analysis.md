@@ -94,7 +94,7 @@ $$
 ### 定义 DURATION-1 ( TimeDelta )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let duration = TimeDelta::hours(2) + TimeDelta::minutes(30);
 ```
 
@@ -119,7 +119,7 @@ $$
 ### 定义 TZ-1 ( 时区转换 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 let utc: DateTime<Utc> = local.with_timezone(&Utc);
 ```
 
@@ -151,7 +151,7 @@ $$
 ### 定义 FORMAT-1 ( 格式化模式 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let formatted = now.format("%Y-%m-%d %H:%M:%S");
 ```
 
@@ -171,7 +171,7 @@ $$
 
 ### 定义 ARITH-1 ( 日期算术 )
 
-```rust
+```rust,ignore
 let tomorrow = today + TimeDelta::days(1);
 let next_month = today.checked_add_months(Months::new(1));
 ```
@@ -210,7 +210,7 @@ $$
 
 ### 示例1: 基础操作
 
-```rust
+```rust,ignore
 use chrono::{DateTime, Utc, Local, NaiveDate, NaiveDateTime, TimeDelta};
 
 fn main() {
@@ -236,7 +236,7 @@ fn main() {
 
 ### 示例2: 解析和格式化
 
-```rust
+```rust,ignore
 use chrono::{DateTime, NaiveDate, Utc};
 
 fn parse_dates() -> Result<(), chrono::ParseError> {
@@ -256,7 +256,7 @@ fn parse_dates() -> Result<(), chrono::ParseError> {
 
 ### 示例3: 日期算术
 
-```rust
+```rust,ignore
 use chrono::{Datelike, Months, NaiveDate, TimeDelta, Weekday};
 
 fn schedule_meeting(start: NaiveDate, weeks: u32) -> Vec<NaiveDate> {

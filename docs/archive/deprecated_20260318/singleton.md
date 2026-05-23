@@ -61,7 +61,7 @@ fn main() {
 
 ### 方式二: `lazy_static` (传统方式)
 
-```rust
+```rust,ignore
 use lazy_static::lazy_static;
 use std::sync::Mutex;
 

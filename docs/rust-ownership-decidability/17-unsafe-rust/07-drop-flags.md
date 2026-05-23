@@ -100,7 +100,7 @@ fn main() {
 
 确保在 Drop 实现中访问的引用总是有效的。
 
-```rust
+```rust,ignore
 struct Inspector<'a>(&'a u8);
 
 impl<'a> Drop for Inspector<'a> {
@@ -216,7 +216,7 @@ impl<T> Drop for DoubleDrop<T> {
 
 **修正**:
 
-```rust
+```rust,ignore
 impl<T> Drop for DoubleDrop<T> {
     fn drop(&mut self) {
         // 不要手动 drop，让编译器处理

@@ -69,7 +69,7 @@ Rand crate提供:
 ### 定义 2.1 (RngCore)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub trait RngCore {
     fn next_u32(&mut self) -> u32;
     fn next_u64(&mut self) -> u64;
@@ -85,7 +85,7 @@ pub trait RngCore {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl RngCore for MyRng {
     fn next_u32(&mut self) -> u32 {
         // 必须实现
@@ -105,7 +105,7 @@ impl RngCore for MyRng {
 ### 定义 2.2 (Rng trait)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub trait Rng: RngCore {
     fn gen<T>(&mut self) -> T where Standard: Distribution<T>;
     fn gen_range<T, R>(&mut self, range: R) -> T;
@@ -120,7 +120,7 @@ pub trait Rng: RngCore {
 
 **实现**:
 
-```rust
+```rust,ignore
 let i: i32 = rng.gen();      // 随机i32
 let f: f64 = rng.gen();      // 随机f64 (0..1)
 let b: bool = rng.gen();     // 随机bool
@@ -155,7 +155,7 @@ let b: bool = rng.gen();     // 随机bool
 
 **定义**:
 
-```rust
+```rust,ignore
 pub trait CryptoRng: RngCore {}
 
 impl CryptoRng for ChaCha20Rng {}
@@ -186,7 +186,7 @@ impl CryptoRng for OsRng {}
 
 **实现**:
 
-```rust
+```rust,ignore
 fn gen_range<T, R>(&mut self, range: R) -> T
 where
     T: SampleUniform,
@@ -210,7 +210,7 @@ where
 
 **证明**:
 
-```rust
+```rust,ignore
 use rand::distributions::{Distribution, WeightedIndex};
 
 let choices = ['a', 'b', 'c'];
@@ -236,7 +236,7 @@ let choice = choices[dist.sample(&mut rng)];
 
 **实现**:
 
-```rust
+```rust,ignore
 use rand::SeedableRng;
 use rand::rngs::StdRng;
 
@@ -266,7 +266,7 @@ assert_eq!(rng1.gen::<u32>(), rng2.gen::<u32>());  // 相同
 
 **实现**:
 
-```rust
+```rust,ignore
 thread_local! {
     static THREAD_RNG: RefCell<ReseedingRng<ChaCha20Core, OsRng>> = ...;
 }
@@ -287,7 +287,7 @@ thread_local! {
 
 **模式**:
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 
 let rng = Arc::new(Mutex::new(StdRng::from_entropy()));
@@ -309,7 +309,7 @@ thread::spawn(move || {
 ### 反例 7.1 (不可重现测试)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 测试可能随机失败
 #[test]
 fn bad_test() {
@@ -329,7 +329,7 @@ fn good_test() {
 ### 反例 7.2 (不安全密钥生成)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 不安全: 使用非加密RNG生成密钥
 let key: [u8; 32] = SmallRng::from_entropy().gen();
 
@@ -340,7 +340,7 @@ let key: [u8; 32] = OsRng.gen();
 ### 反例 7.3 (模偏差)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 有偏: 简单取模
 let n = rng.gen::<u32>() % 100;  // 不均匀!
 

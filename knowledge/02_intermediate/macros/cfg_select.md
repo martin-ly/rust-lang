@@ -1,4 +1,5 @@
 # `cfg_select!` 宏（Rust 1.95.0）
+> **相关概念**: [Select](../../../concept/03_advanced/02_async.md)
 
 > **Bloom 层级**: 理解
 
@@ -19,7 +20,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 cfg_select! {
     condition1 => expr1,
     condition2 => expr2,
@@ -125,7 +126,7 @@ fn max_priority() -> u8 {
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 错误：cfg_select! 是表达式级宏
 cfg_select! {
     target_os = "linux" => mod linux_impl;
@@ -137,7 +138,7 @@ cfg_select! {
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 错误：分支类型不一致
 let x = cfg_select! {
     target_os = "linux" => 42,
@@ -149,7 +150,7 @@ let x = cfg_select! {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 let runtime_flag = true;
 // 错误：runtime_flag 不是 cfg 条件
 // cfg_select! { runtime_flag => ... }
@@ -252,7 +253,7 @@ graph TD
 
 2. **以下代码有什么问题？如何修复？**
 
-```rust
+```rust,ignore
 let x = cfg_select! {
     target_os = "linux" => 42,
     target_os = "macos" => 100,
@@ -266,7 +267,7 @@ let x = cfg_select! {
 
 **修复**:
 
-```rust
+```rust,ignore
 let x = cfg_select! {
     target_os = "linux" => 42,
     target_os = "macos" => 100,

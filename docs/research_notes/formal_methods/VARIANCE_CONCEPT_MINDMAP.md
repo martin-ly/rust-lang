@@ -102,7 +102,7 @@ T <: U  →  C<T> <: C<U>
 
 **示例**:
 
-```rust
+```rust,ignore
 // &'static str 是 &'a str 的子类型
 let s: &'static str = "hello";
 let r: &'a str = s;  // OK，协变
@@ -142,7 +142,7 @@ T <: U  →  C<U> <: C<T>
 
 **示例**:
 
-```rust
+```rust,ignore
 // 接受 &'a str 的函数可以传给接受 &'static str 的位置
 fn handler(_: &'static str) {}
 
@@ -233,7 +233,7 @@ let mut r1: &mut &'static str = &mut "hello";
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 fn(T) -> U
 //   T: 逆变(-)
 //      U: 协变(+)
@@ -284,7 +284,7 @@ fn takes_str<'a>(s: &'a str) {}
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // Box的协变性允许：
 fn process_box(b: Box<&'a str>) { }
 
@@ -302,7 +302,7 @@ let mut r: &mut &'static str = &mut "hello";
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 回调函数参数是逆变的
 fn set_handler<F>(f: F)
 where
@@ -323,7 +323,7 @@ set_handler(|s: &'static str| { });  // OK
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 假设&mut是协变的（实际不是）
 let mut r1: &mut &'static str = &mut "hello";
 let r2: &mut &'a str = r1;  // 假设这是合法的

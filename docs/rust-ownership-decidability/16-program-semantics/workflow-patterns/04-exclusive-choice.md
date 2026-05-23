@@ -340,7 +340,7 @@ $$
 
 Rust 的 `match` 表达式是排他选择最原生的实现。编译器对 `match` 进行穷尽性检查（exhaustiveness checking），确保所有可能的情况都被处理，从而在编译期保证排他选择的完备性。
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -434,7 +434,7 @@ fn mask_account(account: &str) -> String {
 > **[来源: Rust Standard Library - Result]**
 > **[来源: TRPL Ch. 9 - Error Handling]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug, Clone, PartialEq, Eq)]
@@ -525,7 +525,7 @@ pub fn hierarchical_choice(payment: &PaymentMethod) -> &'static str {
 ### 5.3 支付处理完整示例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 use std::time::Duration;
 use tokio::time::sleep;
@@ -779,7 +779,7 @@ $$
 
 **场景**: 根据用户选择的支付方式路由到不同处理通道
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug)]
 pub enum PaymentRoute {
     CreditCard(CreditCardDetails),
@@ -805,7 +805,7 @@ pub async fn route_payment(route: PaymentRoute, amount: Decimal) -> Transaction 
 
 **场景**: 根据用户角色授予不同权限
 
-```rust
+```rust,ignore
 pub enum Role {
     Admin, Editor, Viewer, Guest,
 }
@@ -827,7 +827,7 @@ pub fn get_permissions(role: Role) -> Vec<Permission> {
 
 **场景**: 根据任务特征选择执行策略
 
-```rust
+```rust,ignore
 pub enum TaskPriority {
     Critical, High, Normal, Low,
 }
@@ -874,7 +874,7 @@ where T: Clone,
 
 基于事件驱动的动态选择，使用 `futures::select!` 或 `tokio::select!`：
 
-```rust
+```rust,ignore
 use futures::stream::FuturesUnordered;
 
 pub async fn race_branches<T>(

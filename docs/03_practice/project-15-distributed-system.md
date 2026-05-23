@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 15: 分布式KV存储](#实践项目-15-分布式kv存储)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/distributed-kv/`](#完整参考实现位于-examplesdistributed-kv)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -45,9 +47,10 @@
 > **[来源: Rust Official Docs]**
 
 ### Raft算法
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 enum RaftState {
     Follower,
     Candidate,
@@ -64,6 +67,7 @@ struct RaftNode {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/distributed-kv/`
@@ -123,4 +127,3 @@ struct RaftNode {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

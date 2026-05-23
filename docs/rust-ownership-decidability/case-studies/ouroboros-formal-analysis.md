@@ -110,7 +110,7 @@ Ouroboros 是一个 Rust 宏库，用于安全地创建**自引用结构体（Se
 
 自引用结构体是指其某个字段包含对同一结构体其他字段的引用。这种设计在某些场景下非常自然：
 
-```rust
+```rust,ignore
 // 理想化的自引用结构体（Rust不允许直接这样写）
 struct Document {
     content: String,
@@ -131,7 +131,7 @@ struct Document {
 
 手动实现自引用结构体充满了危险：
 
-```rust
+```rust,ignore
 use std::ptr::NonNull;
 
 // 危险的手动实现
@@ -185,7 +185,7 @@ fn main() {
 
 Rust 的借用规则明确禁止自引用：
 
-```rust
+```rust,ignore
 // 编译错误：生命周期不匹配
 struct Document<'a> {
     content: String,
@@ -227,7 +227,7 @@ impl<'a> Document<'a> {
 
 **输入结构体**:
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 #[self_referencing]
@@ -244,7 +244,7 @@ struct DataWithSlice {
 
 宏生成的构建器确保在结构体被固定之前完成所有初始化：
 
-```rust
+```rust,ignore
 // 宏生成的代码（简化示意）
 impl DataWithSlice {
     pub fn new<F>(data: Vec<u8>, slice_builder: F) -> Pin<Box<Self>>
@@ -279,7 +279,7 @@ impl DataWithSlice {
 
 完整的宏生成代码包含以下组件：
 
-```rust
+```rust,ignore
 // === 自动生成的结构体定义 ===
 #[repr(C)]  // 确保字段布局稳定
 struct DataWithSlice {
@@ -332,7 +332,7 @@ impl DataWithSlice {
 
 Ouroboros 使用闭包 API 来安全地访问自引用字段，这是其核心设计模式：
 
-```rust
+```rust,ignore
 // 宏生成的 with_slice 方法
 impl DataWithSlice {
     /// 安全访问自引用字段 slice
@@ -366,7 +366,7 @@ impl DataWithSlice {
 
 闭包 API 强制实现**借用纪律**：
 
-```rust
+```rust,ignore
 let data = DataWithSlice::new(
     vec![1, 2, 3, 4, 5],
     |data| &data[1..4],  // slice = &[2, 3, 4]
@@ -387,7 +387,7 @@ data.with_slice(|slice| {
 
 **作用域保证**:
 
-```rust
+```rust,ignore
 impl DataWithSlice {
     // 不可变借用投影
     pub fn with_slice<R, F>(&self, f: F) -> R
@@ -440,7 +440,7 @@ struct DataWithSlice {
 
 Ouroboros 通过实现 `!Unpin` 来阻止结构体被移动：
 
-```rust
+```rust,ignore
 // 宏自动生成
 impl !Unpin for DataWithSlice {}
 ```
@@ -510,7 +510,7 @@ pub struct DataWithSlice {
 
 Ouroboros 引入特殊的 `'this` 生命周期来表示"结构体的生命周期"：
 
-```rust
+```rust,ignore
 #[self_referencing]
 struct Document {
     content: String,
@@ -538,7 +538,7 @@ struct Document {
 
 自引用引入了复杂的生命周期方差问题：
 
-```rust
+```rust,ignore
 #[self_referencing]
 struct Container<'a> {
     data: &'a str,
@@ -562,7 +562,7 @@ struct Container<'a> {
 
 Ouroboros 自动推导生命周期约束：
 
-```rust
+```rust,ignore
 #[self_referencing]
 struct ComplexDoc<'a, T> {
     owner: String,
@@ -595,7 +595,7 @@ struct ComplexDoc<'a, T> {
 
 `or_shared` 允许创建共享的自引用：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 use std::sync::Arc;
 
@@ -626,7 +626,7 @@ impl SharedData {
 
 Ouroboros 完全支持异步代码：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 #[self_referencing]
@@ -670,7 +670,7 @@ async fn process() {
 
 支持递归数据结构：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 #[self_referencing]
@@ -706,7 +706,7 @@ impl TreeNode {
 
 Ouroboros 默认使用 `Box::pin` 进行堆分配：
 
-```rust
+```rust,ignore
 pub fn new(...) -> Pin<Box<Self>>
 ```
 
@@ -724,7 +724,7 @@ pub fn new(...) -> Pin<Box<Self>>
 
 **结构体内存布局**:
 
-```rust
+```rust,ignore
 #[self_referencing]
 struct Example {
     a: String,      // 24 bytes
@@ -751,7 +751,7 @@ struct Example {
 
 使用 `cargo asm` 或 `godbolt.org` 验证：
 
-```rust
+```rust,ignore
 // 用户代码
 data.with_slice(|s| s.len())
 
@@ -777,7 +777,7 @@ data.with_slice(|s| s.len())
 
 实现一个高效的零拷贝解析器：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 #[self_referencing]
@@ -816,7 +816,7 @@ fn main() {
 
 实现带索引的缓存结构：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 use std::collections::HashMap;
 
@@ -861,7 +861,7 @@ impl IndexedCache {
 
 实现父子双向引用的树：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 #[self_referencing]
@@ -941,7 +941,7 @@ impl Tree {
 
 两者可以协同使用：
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 use pin_project::pin_project;
 use std::pin::Pin;
@@ -985,7 +985,7 @@ impl Future for DataProcessor {
 ### 11.1 基本自引用模式
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 
 // 最简单的自引用：Vec 和它的切片
@@ -1011,7 +1011,7 @@ fn main() {
 ### 11.2 多字段相互引用
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 use std::collections::HashMap;
 
@@ -1067,7 +1067,7 @@ impl DocumentStore {
 ### 11.3 复杂数据结构
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use ouroboros::self_referencing;
 use std::pin::Pin;
 

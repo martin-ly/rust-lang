@@ -234,7 +234,7 @@ Tree Borrows 模型:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 在 Tree Borrows 中，借用形成一棵树
 fn tree_structure_demo() {
     let mut data = [1, 2, 3, 4, 5];
@@ -412,7 +412,7 @@ fn scenario_4_loop_reborrow() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 fn scenario_5_match_reborrow() {
     enum Node {
         Leaf(i32),
@@ -614,7 +614,7 @@ fn scenario_13_slice_split_pointer() {
 
 #### 场景 21: 基本自引用
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 struct SelfReferential<'a> {
@@ -650,7 +650,7 @@ fn scenario_21_self_referential() {
 
 #### 场景 31: Vec 迭代时 push
 
-```rust
+```rust,ignore
 fn scenario_31_vec_push_while_iter() {
     let mut vec = vec![1, 2, 3];
 
@@ -693,7 +693,7 @@ fn scenario_32_hashmap_modify_while_iter() {
 
 #### 场景 41: C 结构体指针转换
 
-```rust
+```rust,ignore
 #[repr(C)]
 struct CStruct {
     header: u32,

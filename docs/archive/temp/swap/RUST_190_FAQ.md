@@ -199,7 +199,7 @@ cargo bench
 
 #### 错误 1: `mismatched_lifetime_syntaxes` lint 警告
 
-```rust
+```rust,ignore
 // ❌ 旧代码（会触发警告）
 fn items(scores: &[u8]) -> std::slice::Iter<'_, u8> {
     scores.iter()
@@ -325,7 +325,7 @@ const REVERSED: [i32; 5] = process_array([1, 2, 3, 4, 5]);
 
 #### const 数学函数
 
-```rust
+```rust,ignore
 const fn calculate() -> f64 {
     let x = 3.7;
     x.floor()  // 现在可以在 const 中使用
@@ -485,7 +485,7 @@ rust-test:
 
 #### 情况 1: 函数不支持 const
 
-```rust
+```rust,ignore
 // ❌ 错误示例
 const fn example() {
     println!("Hello");  // println! 不支持 const

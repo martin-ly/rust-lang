@@ -61,7 +61,7 @@ PyO3功能：
 ### 定义 GIL-1 ( GIL抽象 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 Python::with_gil(|py| {
     // GIL held here
 });
@@ -109,7 +109,7 @@ $$
 ### 定义 CONV-2 ( PyObject )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let obj: &PyAny = ...;
 let extracted: i32 = obj.extract()?;
 ```
@@ -122,7 +122,7 @@ let extracted: i32 = obj.extract()?;
 ### 定义 MODULE-1 ( 模块定义 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[pymodule]
 fn mymodule(_py: Python, m: &PyModule) -> PyResult<()> {
     m.add_function(wrap_pyfunction!(my_func, m)?)?;
@@ -134,7 +134,7 @@ fn mymodule(_py: Python, m: &PyModule) -> PyResult<()> {
 ### 定义 MODULE-2 ( 函数导出 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[pyfunction]
 fn my_func(a: i32, b: i32) -> i32 { a + b }
 ```
@@ -147,7 +147,7 @@ fn my_func(a: i32, b: i32) -> i32 { a + b }
 ### 定义 PYOBJ-1 ( 类定义 )
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #[pyclass]
 struct MyClass {
     #[pyo3(get, set)]
@@ -180,7 +180,7 @@ $$
 ### 定义 EXCEPT-1 ( Rust结果传播 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 #[pyfunction]
 fn may_fail() -> PyResult<i32> {
     Err(PyRuntimeError::new_err("error"))
@@ -225,7 +225,7 @@ $$
 
 ### 示例1: 基础模块
 
-```rust
+```rust,ignore
 use pyo3::prelude::*;
 
 /// Formats the sum of two numbers as string.
@@ -244,7 +244,7 @@ fn string_sum(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ### 示例2: 类导出
 
-```rust
+```rust,ignore
 use pyo3::prelude::*;
 
 #[pyclass]
@@ -277,7 +277,7 @@ fn counter_mod(_py: Python, m: &PyModule) -> PyResult<()> {
 
 ### 示例3: 处理Python对象
 
-```rust
+```rust,ignore
 use pyo3::prelude::*;
 use pyo3::types::PyList;
 

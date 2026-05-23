@@ -126,7 +126,7 @@ mindmap
 ### 2. 状态机实现
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Rust 状态机 DSL 示例
 use state_machine_procmacro::fsm;
 
@@ -155,7 +155,7 @@ fsm! {
 ### 3. Saga 模式实现
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // Saga 编排器
 trait SagaActivity {
     type Input;
@@ -210,7 +210,7 @@ impl SagaOrchestrator {
 ### 与 Tokio 集成
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use tokio::sync::mpsc;
 
@@ -238,7 +238,7 @@ impl WorkflowEngine {
 ### 1. 并行分支
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use futures::future::join_all;
 
 async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>> {
@@ -257,7 +257,7 @@ async fn parallel_branch(activities: Vec<Activity>) -> Vec<Result<Output, Error>
 ### 2. 定时器与延迟
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep_until, Instant};
 
 struct TimerActivity {
@@ -275,7 +275,7 @@ impl TimerActivity {
 ### 3. 事件驱动工作流
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::broadcast;
 
 struct EventDrivenWorkflow {

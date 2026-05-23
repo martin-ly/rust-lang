@@ -22,7 +22,7 @@ Tracing 的四大设计支柱：
 > [来源: Tracing Docs — Core Concepts](https://docs.rs/tracing/latest/tracing/)
 > [来源: Tokio Blog — Introducing Tracing](https://tokio.rs/blog/2019-08-tracing)
 
-```rust
+```rust,ignore
 use tracing::{info, info_span, Instrument};
 
 async fn process_request(req: Request) -> Response {
@@ -126,7 +126,7 @@ stateDiagram-v2
 
 Tracing 的字段系统通过 `Value` trait 实现**编译期类型检查 + 运行时结构化输出**：
 
-```rust
+```rust,ignore
 pub trait Value: 'static {
     fn record(&self, key: &Field, visitor: &mut dyn Visit);
 }
@@ -138,7 +138,7 @@ impl<T: Value> Value for Option<T> { /* ... */ }
 impl<T: Value> Value for &[T] { /* ... */ }
 ```
 
-```rust
+```rust,ignore
 // 编译期保证：不支持的类型无法通过
 info!(count = 42u32);           // ✅ OK
 info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
@@ -153,7 +153,7 @@ info!(data = vec![1,2,3]);      // ❌ 编译错误：Vec<i32> 未实现 Value
 
 `#[instrument]` 过程宏通过编译期代码生成，在函数入口/出口自动创建 Span：
 
-```rust
+```rust,ignore
 #[tracing::instrument(level = "info", skip(_ctx), fields(req_id = %req.id))]
 async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> {
     // 编译期自动展开为：
@@ -178,7 +178,7 @@ async fn handle_request(req: Request, _ctx: Context) -> Result<Response, Error> 
 
 Tracing-Subscriber 直接复用 Tower 的 `Layer` trait 模式：
 
-```rust
+```rust,ignore
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use tracing_subscriber::fmt;
 use tracing_opentelemetry::OpenTelemetryLayer;
@@ -210,7 +210,7 @@ subscriber.init();
 
 当没有 Subscriber 注册，或当前 `Level` 低于过滤阈值时：
 
-```rust
+```rust,ignore
 // tracing::info!("message") 展开为：
 {
     static META: Metadata<'static> = Metadata::new(/* 编译期常量 */);
@@ -237,7 +237,7 @@ subscriber.init();
 
 所有 `span!` / `event!` 宏在展开时都会生成**静态 `Metadata<'static>` 常量**：
 
-```rust
+```rust,ignore
 static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
     "my_event",
     "my_module",
@@ -267,7 +267,7 @@ static MY_EVENT_METADATA: Metadata<'static> = Metadata::new(
 
 `Span` 本身不持有线程局部状态，可以安全地跨线程传递：
 
-```rust
+```rust,ignore
 let span = tracing::info_span!("cross_thread");
 std::thread::spawn(move || {
     let _enter = span.enter();
@@ -289,7 +289,7 @@ std::thread::spawn(move || {
 
 Tracing 的 `Span` 使用**引用计数 + 弱引用**管理生命周期：
 
-```rust
+```rust,ignore
 pub struct Span {
     inner: Option<Inner>,
 }

@@ -132,7 +132,7 @@ In the context of Rust's ownership system, Serde demonstrates how complex data t
 
 The foundation of Serde rests on two primary traits that define the contract between data structures and serialization formats:
 
-```rust
+```rust,ignore
 /// Trait for data structures that can be serialized to any supported format.
 pub trait Serialize {
     /// Serialize this value into the given Serde serializer.
@@ -193,7 +193,7 @@ The `Deserialize` trait is more complex due to lifetime management:
 2. **`Sized` bound**: Required because deserialization creates values, and the size must be known at compile time.
 3. **`'static` variant**: `DeserializeOwned` is a convenience trait for types that don't borrow.
 
-```rust
+```rust,ignore
 /// A type that can be deserialized from any format without borrowing.
 ///
 /// This is equivalent to `Deserialize<'static>` but easier to write in bounds.
@@ -286,7 +286,7 @@ For any two types T₁ and T₂ where T₁ ≠ T₂, if format F can distinguish
 
 The `Serializer` trait defines the interface that data structures use to output their data:
 
-```rust
+```rust,ignore
 /// Trait for serializing Rust data structures into a specific format.
 ///
 /// This trait defines a visitor-style API where each method handles
@@ -393,7 +393,7 @@ pub trait Serializer: Sized {
 
 The `Deserializer` trait is the dual of `Serializer`, providing methods to extract typed data:
 
-```rust
+```rust,ignore
 /// Trait for deserializing data from a specific format into Rust types.
 ///
 /// The `'de` lifetime parameter represents the lifetime of the data being
@@ -596,7 +596,7 @@ The serializer pattern in Serde uses a visitor-style approach where:
 
 Serialization follows a state machine pattern where each compound type creates a context:
 
-```rust
+```rust,ignore
 /// Example: Custom JSON Serializer State Machine
 enum JsonSerializerState {
     Start,
@@ -643,7 +643,7 @@ impl<W: Write> JsonSerializer<W> {
 
 Serde serialization is type-driven, meaning the Rust type system determines the serialization format:
 
-```rust
+```rust,ignore
 // A struct serializes as an object/map
 #[derive(Serialize)]
 struct Person {
@@ -685,7 +685,7 @@ enum Message {
 
 While zero-copy is primarily a deserialization concern, serialization also benefits from borrowed data:
 
-```rust
+```rust,ignore
 use serde::Serialize;
 
 /// A struct with borrowed data can be serialized without allocation
@@ -722,7 +722,7 @@ fn serialize_borrowed() {
 
 Lifetime management is the most complex aspect of Serde deserialization. The `'de` lifetime parameter represents the data source's lifetime.
 
-```rust
+```rust,ignore
 /// Borrowed data deserialization
 ///
 /// The 'de lifetime ensures that borrowed references don't outlive
@@ -752,7 +752,7 @@ fn demonstrate_lifetimes() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// Category 1: Owned deserialization
 /// The type owns all its data, no lifetimes needed
 #[derive(Deserialize)]
@@ -784,7 +784,7 @@ struct MixedData<'de> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // The 'de lifetime appears in multiple places:
 
 // 1. On the Deserialize trait
@@ -820,7 +820,7 @@ pub trait Deserializer<'de>: Sized {
 
 The visitor pattern decouples type construction from data parsing. This is crucial for handling format-specific quirks.
 
-```rust
+```rust,ignore
 /// The Visitor trait defines how to construct a type from deserialized data.
 ///
 /// Each method handles a specific data type. Implementations should only
@@ -885,7 +885,7 @@ pub trait Visitor<'de>: Sized {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess};
 use std::fmt;
 
@@ -943,7 +943,7 @@ impl<'de> Deserialize<'de> for StringOrVec {
 
 For compound types, Serde provides access traits that iterate over elements:
 
-```rust
+```rust,ignore
 /// Access to a sequence during deserialization
 pub trait SeqAccess<'de> {
     type Error: Error;
@@ -1037,7 +1037,7 @@ The `#[derive(Serialize)]` macro generates an implementation of the `Serialize` 
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // Input:
 #[derive(Serialize)]
 struct Person {
@@ -1064,7 +1064,7 @@ impl Serialize for Person {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 #[derive(Serialize)]
 struct ConfiguredStruct {
     // Rename the field in output
@@ -1107,7 +1107,7 @@ The `#[derive(Deserialize)]` macro generates an implementation of the `Deseriali
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // Input:
 #[derive(Deserialize)]
 struct Person {
@@ -1206,7 +1206,7 @@ impl<'de> Deserialize<'de> for Field {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 #[derive(Deserialize)]
 struct ConfiguredDeserialization {
     // Rename field for input
@@ -1245,7 +1245,7 @@ fn default_count() -> u32 {
 
 Serde supports multiple enum serialization strategies:
 
-```rust
+```rust,ignore
 // Default: Externally tagged
 #[derive(Serialize, Deserialize)]
 enum ExternallyTagged {
@@ -1308,7 +1308,7 @@ enum Untagged {
 
 **Problem:** Trying to return borrowed data beyond its lifetime.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // WRONG: This struct tries to borrow data that doesn't exist
@@ -1347,7 +1347,7 @@ fn lifetime_mismatch_demo() {
 
 **Problem:** Recursive types cause infinite size.
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 // WRONG: This type has infinite size!
@@ -1383,7 +1383,7 @@ struct LinkedListNode {
 
 **Problem:** Creating self-referential structs during deserialization.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use std::pin::Pin;
 
@@ -1425,7 +1425,7 @@ struct ExternalReference {
 
 **Problem:** Untagged enums can deserialize to wrong variants.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug, PartialEq)]
@@ -1483,7 +1483,7 @@ fn complex_ambiguity() {
 
 **Problem:** Incompatible attributes causing deserialization failures.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // WRONG: These attributes conflict!
@@ -1538,7 +1538,7 @@ struct CatchAllConfig {
 
 **Problem:** Misunderstanding when fields are skipped.
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -1595,7 +1595,7 @@ fn skip_confusion_demo() {
 
 **Problem:** Expecting zero-copy but getting allocation anyway.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // WRONG expectation: This doesn't guarantee zero-copy!
@@ -1655,7 +1655,7 @@ fn flexible_demo() {
 
 **Problem:** Generic constraints for owned deserialization.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // A function that requires owned deserialization
@@ -1713,7 +1713,7 @@ fn correct_borrowing() {
 
 **Problem:** Incomplete visitor implementations cause deserialization failures.
 
-```rust
+```rust,ignore
 use serde::de::{self, Deserialize, Deserializer, Visitor};
 use std::fmt;
 
@@ -1795,7 +1795,7 @@ impl<'de> Visitor<'de> for CompleteVisitor {
 
 **Problem:** Incorrect extraction from `serde_json::Value`.
 
-```rust
+```rust,ignore
 use serde_json::{Value, json};
 
 fn value_extraction_problems() {
@@ -1877,7 +1877,7 @@ fn struct_extraction(data: Value) -> Result<UserData, serde_json::Error> {
 
 **Problem:** Expecting zero-copy when format requires processing.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use std::borrow::Cow;
 
@@ -1951,7 +1951,7 @@ fn correct_escape_handling() {
 
 **Problem:** Incorrect handling of streaming deserialization.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use serde_json::StreamDeserializer;
 
@@ -2038,7 +2038,7 @@ fn robust_streaming(data: &str) -> Vec<Event> {
 
 **Problem:** Mismatched field naming between serialization and deserialization.
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 // Server-side definition
@@ -2109,7 +2109,7 @@ fn flexible_naming() {
 
 **Problem:** Panics during default value generation.
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use std::sync::OnceLock;
 
@@ -2195,7 +2195,7 @@ impl RobustConfig {
 
 **Problem:** Internally tagged enums have limitations with certain variant types.
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 // WRONG: Internally tagged enum with newtype variant
@@ -2293,7 +2293,7 @@ The `serde_json` crate is the reference implementation for JSON serialization.
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// Core JSON serializer
 pub struct Serializer<W, F = CompactFormatter> {
     writer: W,
@@ -2312,7 +2312,7 @@ pub struct Deserializer<R> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // Number handling
 fn json_number_handling() {
     // JSON has a single Number type
@@ -2348,7 +2348,7 @@ fn json_escapes() {
 
 Bincode is a compact binary format optimized for speed and size.
 
-```rust
+```rust,ignore
 use bincode::{serialize, deserialize, config};
 
 fn bincode_demo() {
@@ -2384,7 +2384,7 @@ fn bincode_demo() {
 
 MessagePack is a binary format that aims for JSON compatibility with better performance.
 
-```rust
+```rust,ignore
 use rmp_serde::{to_vec, from_slice};
 
 fn messagepack_demo() {
@@ -2436,7 +2436,7 @@ fn messagepack_demo() {
 
 Zero-copy deserialization eliminates memory allocation for borrowed data:
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // Zero-copy capable
@@ -2489,7 +2489,7 @@ fn benchmark_zero_copy() {
 
 Streaming deserialization processes large data without loading everything into memory:
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use serde_json::StreamDeserializer;
 
@@ -2530,7 +2530,7 @@ fn alert(msg: &str) {
 
 Reusing buffers reduces allocation overhead:
 
-```rust
+```rust,ignore
 use serde_json::Deserializer;
 
 fn buffer_reuse() {
@@ -2579,7 +2579,7 @@ fn process(value: serde_json::Value) {
 
 This case study demonstrates a production-ready serialization layer for a REST API server.
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 use serde_json::Value;
 use std::collections::HashMap;
@@ -2854,7 +2854,7 @@ fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // High-performance batch processing
 use rayon::prelude::*;
 
@@ -3013,7 +3013,7 @@ Benchmarks show serde-generated serialization within 1-5% of hand-written code.
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use serde::{Serialize, Serializer, ser::{self, SerializeSeq}};
 use std::io::Write;
 
@@ -3205,7 +3205,7 @@ impl ser::Error for BinaryError {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use serde::de::{self, Deserialize, Deserializer, Visitor, SeqAccess, MapAccess};
 use std::io::Read;
 

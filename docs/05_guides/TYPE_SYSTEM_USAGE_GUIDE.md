@@ -70,7 +70,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c02_type_system::primitive_types::scalar_types::number::enhanced_integer::SafeInteger;
 use c02_type_system::type_composition::collection::vec::TypedVector;
 
@@ -110,7 +110,7 @@ fn main() {
 
 **示例：安全整数运算**
 
-```rust
+```rust,ignore
 use c02_type_system::primitive_types::scalar_types::number::enhanced_integer::SafeInteger;
 
 fn safe_math() {
@@ -132,7 +132,7 @@ fn safe_math() {
 
 `type_class/` 和 `type_composition/` 模块展示泛型编程与 Trait 系统：
 
-```rust
+```rust,ignore
 use c02_type_system::type_class::define::{Describable, Measurable};
 
 #[derive(Debug)]
@@ -161,7 +161,7 @@ impl<T: std::ops::Add<Output = T> + Copy> Measurable for Point<T> {
 
 `type_variance/` 模块演示协变、逆变与不变的实际影响：
 
-```rust
+```rust,ignore
 use c02_type_system::type_variance::covariance::CovariantExample;
 use c02_type_system::type_variance::contravariance::ContravariantExample;
 
@@ -183,7 +183,7 @@ fn demonstrate_contravariance(f: fn(&'static str)) {
 
 `advanced_pattern_matching/` 模块提供动态模式匹配和优化：
 
-```rust
+```rust,ignore
 use c02_type_system::advanced_pattern_matching::{
     DynamicPatternMatcher, DynamicPattern, OptimizationStats
 };
@@ -204,7 +204,7 @@ fn advanced_matching() {
 
 `precise_capturing_guide/` 模块深度解析 Rust 1.95+ 的 `use<..>` 语法：
 
-```rust
+```rust,ignore
 use c02_type_system::precise_capturing_guide::PreciseCapturingGuide;
 
 // Rust 1.95+: 使用 use<..> 精确控制生命周期捕获
@@ -226,7 +226,7 @@ fn precise_capturing_example() {
 - **`bool` 转浮点数**: `impl From<bool> for {f32, f64}`
 - **`core::range` 改进**: `RangeInclusive` 性能优化
 
-```rust
+```rust,ignore
 use c02_type_system::rust_195_features::{
     demonstrate_if_let_guards,
     demonstrate_bool_to_float,
@@ -258,7 +258,7 @@ fn main() {
 
 `advanced_error_handling/` 模块提供类型安全的错误处理模式：
 
-```rust
+```rust,ignore
 use c02_type_system::advanced_error_handling::{
     ErrorContext, ContextualError, RecoveryStrategy, ErrorRecovery
 };

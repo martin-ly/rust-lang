@@ -1,4 +1,5 @@
 # Kubernetes 部署完整指南
+> **相关概念**: [云原生](../../../concept/06_ecosystem/24_cloud_native.md)
 
 > **Bloom 层级**: 理解
 
@@ -681,7 +682,7 @@ resources:
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,compile_fail
 // 应用代码: 快速启动
 #[tokio::main]
 async fn main() {
@@ -703,7 +704,7 @@ async fn main() {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use tokio::signal;
 
 async fn graceful_shutdown() {

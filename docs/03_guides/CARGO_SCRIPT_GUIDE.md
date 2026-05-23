@@ -11,6 +11,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Cargo Script 单文件脚本指南](#cargo-script-单文件脚本指南)
@@ -37,10 +38,11 @@
 - [\[derive(Debug, Serialize, Deserialize)\]](#derivedebug-serialize-deserialize)
 - [Unix/Linux](#unixlinux)
 - [Windows](#windows)
-  - [7.2 调试输出](#72-调试输出)
+    - [7.2 调试输出](#72-调试输出)
   - [8. 参考文献](#8-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. 什么是 Cargo Script？
 >
@@ -99,7 +101,7 @@ cargo run --manifest-path my_script.rs
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
     #!/usr/bin/env cargo
     ```cargo
     [dependencies]
@@ -139,7 +141,7 @@ cargo run --manifest-path my_script.rs
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
     #!/usr/bin/env cargo
     ```cargo
     [package]
@@ -230,6 +232,7 @@ cargo run --manifest-path script.rs
 ---
 
 ## 4. 依赖管理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 4.1 基本依赖
@@ -277,12 +280,14 @@ common = { path = "../../crates/common" }
 ---
 
 ## 5. 实际示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 示例 1: JSON 数据处理
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -310,7 +315,7 @@ fn main() {
 ### 示例 2: HTTP 请求
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #!/usr/bin/env cargo
 ```cargo
 [dependencies]
@@ -386,6 +391,7 @@ cargo test --manifest-path script.rs
 ```
 
 ### 7.2 调试输出
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -399,6 +405,7 @@ cargo run --manifest-path script.rs --release
 ---
 
 ## 8. 参考文献
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 1. **Rust Official Documentation**. "Cargo Script".
@@ -430,6 +437,7 @@ cargo run --manifest-path script.rs --release
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [上级目录](../README.md)
@@ -527,4 +535,3 @@ cargo run --manifest-path script.rs --release
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

@@ -50,7 +50,7 @@
 
 > 容量满时驱逐最久未访问项。
 
-```rust
+```rust,ignore
 let mut cache = LruCache::new(NonZeroUsize::new(3).unwrap());
 cache.put("a", 1);
 cache.put("b", 2);
@@ -69,7 +69,7 @@ cache.put("d", 4);   // 驱逐b (最久未用)
 
 > 并发LRU使用分段锁。
 
-```rust
+```rust,ignore
 let cache = DashCache::new(1000);
 cache.insert(key, value).await;
 let val = cache.get(&key).await;
@@ -85,7 +85,7 @@ let val = cache.get(&key).await;
 
 > 时间过期独立于LRU。
 
-```rust
+```rust,ignore
 #[cached(size = 100, time = 60)]  // 60秒过期
 fn expensive_compute(input: u64) -> u64 {
     // 结果缓存60秒
@@ -100,7 +100,7 @@ fn expensive_compute(input: u64) -> u64 {
 
 ### 反例 5.1 (缓存穿透)
 
-```rust
+```rust,ignore
 // 大量不存在的key查询
 cache.get(&nonexistent_key);  // 每次miss
 
@@ -109,7 +109,7 @@ cache.get(&nonexistent_key);  // 每次miss
 
 ### 反例 5.2 (大Value)
 
-```rust
+```rust,ignore
 // 缓存超大对象可能导致OOM
 cache.insert(key, huge_vec);  // 需限制value大小
 ```

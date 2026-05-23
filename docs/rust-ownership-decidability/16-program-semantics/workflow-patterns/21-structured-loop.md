@@ -318,7 +318,7 @@ $$
 
 Rust 提供了丰富的循环构造，所有都遵循结构化程序设计原则：
 
-```rust
+```rust,ignore
 /// While 循环：先测试条件
 pub fn while_loop_example(items: &[i32]) -> i32 {
     let mut sum = 0;
@@ -367,7 +367,7 @@ pub fn labeled_loop(matrix: &[&[i32]], target: i32) -> Option<(usize, usize)> {
 
 使用迭代器适配器和异步循环实现高级结构化循环：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::time::Duration;
 use tokio::time::{sleep, Instant};
@@ -431,7 +431,7 @@ where
 ### 5.3 指数退避重试完整示例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use tokio::time::{sleep, Instant};
 use thiserror::Error;
@@ -669,7 +669,7 @@ $$
 
 在 Rust 中：
 
-```rust
+```rust,ignore
 // 循环版本
 while condition(state) { state = body(state); }
 
@@ -771,7 +771,7 @@ pub fn aggregate_iterator(items: Vec<String>) -> String {
 
 **前测试循环 (While)**:
 
-```rust
+```rust,ignore
 while condition { body(); }
 ```
 
@@ -779,7 +779,7 @@ while condition { body(); }
 
 Rust 没有原生 `do-while`，但可以通过 `loop` + `break` 模拟：
 
-```rust
+```rust,ignore
 loop {
     body();
     if !condition { break; }

@@ -36,6 +36,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -46,6 +47,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 所有权与并发的统一
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -89,6 +91,7 @@ Rust 并发的核心洞察:
 ---
 
 ### 1.2 Send 与 Sync：编译期并发安全
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust,ignore
@@ -132,6 +135,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 ---
 
 ### 1.3 共享状态 vs 消息传递
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -184,6 +188,7 @@ fn spawn_thread<T: Send + 'static>(data: T) {
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 通道模式
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -230,6 +235,7 @@ let (tx, mut rx) = mpsc::channel(100);
 ---
 
 ### 2.2 无锁数据结构
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -272,6 +278,7 @@ let (tx, mut rx) = mpsc::channel(100);
 ---
 
 ### 2.3 内存顺序
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -368,6 +375,7 @@ x.store(1, Ordering::SeqCst);
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -391,6 +399,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -655,4 +664,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

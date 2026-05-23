@@ -80,7 +80,7 @@
 
 在系统编程中，类型与字节之间的转换是常见需求，但也充满危险：
 
-```rust
+```rust,ignore
 // 危险的手动转换
 unsafe fn dangerous_cast(bytes: &[u8]) -> &MyStruct {
     &*(bytes.as_ptr() as *const MyStruct)
@@ -119,7 +119,7 @@ Rust的内存模型对类型转换有严格要求：
 - 引用必须非空且对齐
 - enum值必须是定义的一个变体
 
-```rust
+```rust,ignore
 // 违反类型有效性
 let b: bool = std::mem::transmute(2u8);  // 未定义行为！
 let c: char = std::mem::transmute(0x110000u32);  // 无效Unicode！
@@ -137,7 +137,7 @@ Bytemuck通过类型系统保证安全的字节转换：
 4. **类型安全**：编译时捕获不安全的转换尝试
 5. **无panic选项**：提供返回Result的API
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice};
 
 #[derive(Copy, Clone, Pod, Zeroable)]
@@ -172,7 +172,7 @@ Pod类型是Bytemuck的核心概念：
 4. 没有`Drop`实现
 5. 标记为`#[repr(C)]`或`#[repr(transparent)]`
 
-```rust
+```rust,ignore
 // 有效的Pod类型示例
 #[derive(Copy, Clone, Pod, Zeroable)]
 #[repr(C)]
@@ -212,7 +212,7 @@ struct BadEnum {
 
 Zeroable类型可以安全地初始化为全零：
 
-```rust
+```rust,ignore
 pub unsafe trait Zeroable: Copy {
     fn zeroed() -> Self;
 }
@@ -267,7 +267,7 @@ assert_eq!(std::mem::align_of::<Mixed>(), 8);
 
 **Bytemuck的对齐检查**：
 
-```rust
+```rust,ignore
 use bytemuck;
 
 let bytes: &[u8] = &[0; 8];
@@ -285,7 +285,7 @@ let always_ok: Result<&u64, _> = bytemuck::try_from_bytes(&[0; 8]);
 
 跨平台数据交换需要考虑字节顺序：
 
-```rust
+```rust,ignore
 // 字节顺序转换
 fn to_le_bytes<T: Pod>(value: &T) -> Vec<u8> {
     let bytes = bytemuck::bytes_of(value);
@@ -341,7 +341,7 @@ pub unsafe trait Pod: Copy + 'static + Send + Sync {
 
 **派生宏展开**：
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone, Pod, Zeroable)]
 #[repr(C)]
 struct Vector3 {
@@ -367,7 +367,7 @@ impl Clone for Vector3 {
 
 **自定义实现**：
 
-```rust
+```rust,ignore
 // 手动实现（需要unsafe）
 #[repr(C)]
 struct CustomPod {
@@ -396,7 +396,7 @@ pub unsafe trait Zeroable: Copy {
 
 **使用场景**：
 
-```rust
+```rust,ignore
 // 安全清零
 let buffer: [f32; 1024] = <[f32; 1024] as Zeroable>::zeroed();
 
@@ -414,7 +414,7 @@ let state = State::zeroed();
 
 **与MaybeUninit对比**：
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // 传统方式（unsafe）
@@ -432,7 +432,7 @@ let buffer: [f32; 1024] = Zeroable::zeroed();
 
 对于不是所有位模式都有效的类型：
 
-```rust
+```rust,ignore
 pub unsafe trait CheckedBitPattern: Copy {
     type Bits: Pod;
 
@@ -465,7 +465,7 @@ if let Some(pct) = bytemuck::checked::try_from_bytes::<Percentage>(&bytes) {
 
 NoUninit确保类型无未初始化位：
 
-```rust
+```rust,ignore
 pub unsafe trait NoUninit: Copy + 'static + Send + Sync {
     // 所有位都有定义，即使不是所有模式都有效
 }
@@ -489,7 +489,7 @@ struct NumericData {
 
 TransparentWrapper用于新类型模式：
 
-```rust
+```rust,ignore
 pub unsafe trait TransparentWrapper<Inner: ?Sized> {
     fn wrap_ref(inner: &Inner) -> &Self;
     fn wrap_mut(inner: &mut Inner) -> &mut Self;
@@ -515,7 +515,7 @@ let user_id: &UserId = UserId::wrap_ref(&raw_id);
 
 Bytemuck的派生宏编译期验证：
 
-```rust
+```rust,ignore
 // 编译期检查清单
 #[derive(Pod, Zeroable)]
 #[repr(C)]
@@ -549,7 +549,7 @@ struct BadRepr {
 
 GPU图形编程需要大量类型转换：
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice};
 
 // 顶点数据
@@ -606,7 +606,7 @@ impl GpuBuffer {
 
 实时音频处理需要高效的数据转换：
 
-```rust
+```rust,ignore
 use bytemuck::Pod;
 
 // 音频采样类型
@@ -660,7 +660,7 @@ impl LittleEndianI16 {
 
 数值计算中的向量化：
 
-```rust
+```rust,ignore
 use bytemuck::cast_slice;
 
 // SIMD友好的结构体
@@ -712,7 +712,7 @@ fn call_external_blas(data: &mut [Vec3]) {
 
 高效的二进制序列化：
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable};
 use std::io::{Read, Write};
 
@@ -777,7 +777,7 @@ fn read_message<R: Read>(reader: &mut R) -> std::io::Result<(MessageHeader, Vec<
 
 与C库交互：
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable};
 
 // C结构体定义
@@ -849,7 +849,7 @@ pub fn get_points_safe() -> Vec<Point> {
 
 **API风格对比**：
 
-```rust
+```rust,ignore
 // Bytemuck风格
 let value: &u32 = bytemuck::try_from_bytes(bytes)?;
 let values: &[u32] = bytemuck::cast_slice(bytes);
@@ -865,7 +865,7 @@ let value = u32::read_from(bytes)?;
 
 `std::mem::transmute`是最危险的转换方式：
 
-```rust
+```rust,ignore
 // 危险的transmute
 unsafe {
     let bytes: [u8; 4] = [0x12, 0x34, 0x56, 0x78];
@@ -889,7 +889,7 @@ let value: &u32 = bytemuck::try_from_bytes(&bytes)?;
 
 原始指针转换：
 
-```rust
+```rust,ignore
 // 原始指针（unsafe，需要所有检查）
 unsafe fn raw_cast<T>(bytes: &[u8]) -> Option<&T> {
     if bytes.len() < std::mem::size_of::<T>() {
@@ -914,7 +914,7 @@ let value = bytemuck::try_from_bytes::<T>(bytes)?;
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice, cast_slice_mut};
 
 // 像素格式定义
@@ -1035,7 +1035,7 @@ impl GpuTexture {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable, cast_slice};
 
 // 顶点属性语义标记
@@ -1164,7 +1164,7 @@ impl Mesh {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable, TransparentWrapper};
 
 // 安全的Union替代方案
@@ -1260,7 +1260,7 @@ fn deserialize_values(bytes: &[u8]) -> Option<&[TypedValue]> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use bytemuck::{Pod, Zeroable};
 
 // 列主序矩阵（OpenGL风格）
@@ -1377,7 +1377,7 @@ impl Mat4 {
 
 基准测试数据（处理100万个元素）：
 
-```rust
+```rust,ignore
 // 测试场景：f32数组转换为u8数组
 
 // 方案1: 手动复制
@@ -1403,7 +1403,7 @@ let bytes: &[u8] = bytemuck::cast_slice(&floats);
 
 Bytemuck的连续内存布局允许编译器自动向量化：
 
-```rust
+```rust,ignore
 // 编译器可以向量化
 fn add_vectors(a: &[Vec3], b: &[Vec3], result: &mut [Vec3]) {
     for i in 0..a.len() {
@@ -1456,7 +1456,7 @@ fn update_particles(particles: &mut [Particle]) {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 1. 使用repr(C)确保布局
 #[repr(C)]
 struct GoodLayout {
@@ -1498,7 +1498,7 @@ struct WithPadding {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 策略1：保证输入对齐
 fn process_aligned<T: Pod>(data: &[u8]) -> Option<&T> {
     // 使用try_前缀方法
@@ -1527,7 +1527,7 @@ struct UnalignedData {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 模式1: 返回Result
 fn parse_checked<T: Pod>(data: &[u8]) -> Result<&T, ParseError> {
     bytemuck::try_from_bytes(data)
@@ -1573,7 +1573,7 @@ fn detailed_check<T: Pod>(data: &[u8]) -> Result<&T, ConversionError> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -1681,7 +1681,7 @@ $$
 ### 10.1 bool类型转换陷阱
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // ❌ bool不是所有位模式有效
 #[derive(Pod)]  // 编译错误！
 #[repr(C)]
@@ -1720,7 +1720,7 @@ impl ValidatedBool {
 ### 10.2 char类型限制
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // ❌ char不是所有位模式有效（必须是有效Unicode）
 #[derive(Pod)]  // 编译错误！
 #[repr(C)]
@@ -1745,7 +1745,7 @@ impl SafeChar {
 ### 10.3 引用类型限制
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // ❌ 引用类型不是Pod
 #[derive(Pod)]  // 编译错误！
 #[repr(C)]

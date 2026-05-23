@@ -65,7 +65,7 @@ fn test_simple() {
 
 > 支持复杂类型的快照。
 
-```rust
+```rust,ignore
 #[derive(Serialize)]
 struct User { id: u64, name: String }
 
@@ -84,7 +84,7 @@ insta::assert_json_snapshot!(user, {
 
 > 内联快照存储在源码中。
 
-```rust
+```rust,ignore
 insta::assert_snapshot!(result, @"snapshot content");
 //          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 //          运行 cargo insta review 更新
@@ -116,7 +116,7 @@ INSTA_UPDATE=always cargo test
 
 ### 反例 5.1 (非确定性输出)
 
-```rust
+```rust,ignore
 // 危险: 包含时间戳
 let output = format!("Result at {}", Utc::now());
 insta::assert_snapshot!(output);  // 总是失败!
@@ -129,7 +129,7 @@ insta::assert_snapshot!(output, {
 
 ### 反例 5.2 (大快照文件)
 
-```rust
+```rust,ignore
 // 避免巨大快照，考虑选择性验证
 insta::assert_snapshot!(huge_json);  // 难以审查
 

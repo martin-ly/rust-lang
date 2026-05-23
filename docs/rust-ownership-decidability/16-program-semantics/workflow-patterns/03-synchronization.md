@@ -296,7 +296,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::sync::{mpsc, Barrier, Arc};
 
@@ -359,7 +359,7 @@ fn type_system_prevents_race() {
 
 **Rust 类型系统保证同步示例**:
 
-```rust
+```rust,ignore
 async fn async_type_safety() {
     let task_a = async { "Hello" };
     let task_b = async { "World" };
@@ -371,7 +371,7 @@ async fn async_type_safety() {
 ### 5.2 带错误处理的高级实现
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::time::Duration;
@@ -434,7 +434,7 @@ pub fn barrier_synchronization(workers: usize) {
 ### 5.3 分布式任务汇聚完整示例
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 #[derive(Clone, Debug)]
@@ -560,7 +560,7 @@ $$
 
 在 Rust 中，若 C 需要各分支结果作为输入：
 
-```rust
+```rust,ignore
 let (result_a, result_b) = tokio::join!(task_a, task_b);
 let combined = combine(result_a, result_b); // C 开始执行
 ```
@@ -661,7 +661,7 @@ flowchart LR
 
 **场景**: 并行计算后汇聚所有分片结果
 
-```rust
+```rust,ignore
 fn map_reduce(data: Vec<i32>) -> i32 {
     let chunks: Vec<_> = data.chunks(data.len() / 4).map(|c| c.to_vec()).collect();
     let handles: Vec<_> = chunks.into_iter()
@@ -679,7 +679,7 @@ fn map_reduce(data: Vec<i32>) -> i32 {
 
 **场景**: 编译系统的多阶段并行构建与同步
 
-```rust
+```rust,ignore
 async fn build_system() -> Result<BuildArtifact, BuildError> {
     let (lib_a, lib_b, lib_c) = tokio::join!(
         compile_module("src/a"),
@@ -697,7 +697,7 @@ async fn build_system() -> Result<BuildArtifact, BuildError> {
 
 **场景**: 分布式事务的并行执行与最终同步确认
 
-```rust
+```rust,ignore
 async fn distributed_transaction() -> Result<TransactionReceipt, TxError> {
     let (debit, credit, notify) = tokio::join!(
         debit_account("A", 100.0),
@@ -720,7 +720,7 @@ async fn distributed_transaction() -> Result<TransactionReceipt, TxError> {
 
 等待部分分支而非全部分支：
 
-```rust
+```rust,ignore
 pub async fn partial_sync<T>(
     tasks: Vec<impl Future<Output = T>>,
     required: usize,
@@ -741,7 +741,7 @@ pub async fn partial_sync<T>(
 
 在指定时间内同步，超时时返回部分结果：
 
-```rust
+```rust,ignore
 pub async fn timeout_sync<T>(
     tasks: Vec<impl Future<Output = T> + Send>,
     duration: Duration,
@@ -771,7 +771,7 @@ flowchart LR
     join2 --> G
 ```
 
-```rust
+```rust,ignore
 async fn nested_sync() {
     let (b, c) = tokio::join!(task_b(), task_c());
     let (e, f) = tokio::join!(task_e(process(b, c).clone()), task_f(process(b, c)));

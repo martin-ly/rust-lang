@@ -51,7 +51,7 @@
 
 > 监听SIGTERM/SIGINT触发关闭。
 
-```rust
+```rust,ignore
 let (shutdown_tx, mut shutdown_rx) = mpsc::channel::<()>(1);
 
 tokio::spawn(async move {
@@ -70,7 +70,7 @@ tokio::spawn(async move {
 
 > 资源按创建逆序释放。
 
-```rust
+```rust,ignore
 struct App {
     db_pool: Pool,      // 后释放
     http_client: Client,
@@ -84,7 +84,7 @@ struct App {
 
 > 某些资源需显式关闭。
 
-```rust
+```rust,ignore
 // 停止接受新连接
 server_handle.stop_accepting().await;
 
@@ -102,7 +102,7 @@ server_handle.graceful_shutdown(Duration::from_secs(30)).await;
 
 > 超时后强制终止。
 
-```rust
+```rust,ignore
 tokio::select! {
     _ = graceful_shutdown() => {
         info!("Graceful shutdown completed");
@@ -121,7 +121,7 @@ tokio::select! {
 
 ### 反例 5.1 (立即退出)
 
-```rust
+```rust,ignore
 // 错误: 立即退出，资源泄漏
 #[tokio::main]
 async fn main() {
@@ -141,7 +141,7 @@ tokio::select! {
 
 ### 反例 5.2 (死锁关闭)
 
-```rust
+```rust,ignore
 // 错误: 依赖已关闭组件
 async fn shutdown(&self) {
     self.db.close().await;

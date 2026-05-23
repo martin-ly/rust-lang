@@ -58,7 +58,7 @@
 
 **模式**: RAII (Resource Acquisition Is Initialization)
 
-```rust
+```rust,ignore
 // 理论对应: 资源在构造时获得，在析构时释放
 // 对应线性逻辑: A ⊸ B (转移所有权)
 
@@ -102,7 +102,7 @@ fn use_file() {
 
 **模式**: Builder 模式（分阶段构造）
 
-```rust
+```rust,ignore
 // 理论对应: 部分构造的状态可以丢弃（0次使用）
 // 或者完成构造后使用（1次使用）
 
@@ -162,7 +162,7 @@ fn example() {
 
 **模式**: 类型状态（编译期状态机）
 
-```rust
+```rust,ignore
 // 理论对应: 不同类型状态在不同"区域"有效
 
 pub struct Disconnected;
@@ -220,7 +220,7 @@ impl Connection<Connected> {
 
 **模式**: 访问者模式（分离遍历和修改）
 
-```rust
+```rust,ignore
 // 问题: 遍历树时不能修改节点
 // 解决: 先收集信息，再统一修改
 
@@ -320,7 +320,7 @@ fn example() {
 
 **模式**: 零拷贝解析
 
-```rust
+```rust,ignore
 // 理论对应: 解析结果的生命周期 ≤ 输入数据的生命周期
 
 pub struct Parser<'a> {
@@ -415,7 +415,7 @@ fn anywhere_in_program() -> &'static str {
 
 **模式**: 工作窃取线程池
 
-```rust
+```rust,ignore
 use crossbeam::channel;
 use std::thread;
 
@@ -463,7 +463,7 @@ impl Worker {
 
 **模式**: 读写锁
 
-```rust
+```rust,ignore
 use std::sync::RwLock;
 
 // 理论对应: T: Sync 表示 &T: Send
@@ -531,7 +531,7 @@ impl<K: Eq + Hash, V: Clone> Cache<K, V> {
 ### 6.1 RAII + 类型状态
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 pub struct Connection<State> {
     fd: RawFd,
     state: PhantomData<State>,
@@ -551,7 +551,7 @@ impl Drop for Connection<Closed> {
 ### 6.2 Builder + 内部可变性
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct SharedConfigBuilder {
     config: RefCell<PartialConfig>,
 }

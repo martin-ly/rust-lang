@@ -147,7 +147,7 @@ Created → Scheduled → Running ↔ Blocked → Completed
 
 ✅ **async/await ↔ CPS**
 
-```rust
+```rust,ignore
 async { e1; e2 } ⟺ λk. desugar(e1)(λ_. desugar(e2)k)
 ```
 
@@ -190,7 +190,7 @@ Ready(T) ↔ Return(T)
 
 ✅ **Pin与自引用**
 
-```rust
+```rust,ignore
 Pin<&mut Self> ⟹ 状态机不移动 ⟹ 自引用指针有效
 ```
 

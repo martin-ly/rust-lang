@@ -112,7 +112,7 @@
 
 **Rust 设计理念:**
 
-```rust
+```rust,ignore
 // Rust: 编译期支付成本，运行时零开销
 // 编译器做尽可能多检查，确保运行时安全
 
@@ -316,7 +316,7 @@ func main() {
 
 **Rust 内存布局控制:**
 
-```rust
+```rust,ignore
 // Rust 可以精确控制内存布局
 #[repr(C)]  // C 兼容布局
 struct Packet {
@@ -549,7 +549,7 @@ func workerPool() {
 
 **Rust 线程:**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::sync::mpsc;
 use std::time::Duration;
@@ -671,7 +671,7 @@ func channelDemo() {
 
 **Rust Channels:**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -802,7 +802,7 @@ func safeWithAtomic() {
 
 **Rust 数据竞争防护 (编译期阻止):**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn compileTimeSafety() {
@@ -897,7 +897,7 @@ func httpServer() {
 
 **Rust 显式 async/await:**
 
-```rust
+```rust,ignore
 use tokio;
 use tokio::time::{sleep, Duration};
 
@@ -1196,7 +1196,7 @@ func process() {
 
 **Rust Result:**
 
-```rust
+```rust,ignore
 use std::fmt;
 use std::error::Error;
 use std::io;
@@ -1303,7 +1303,7 @@ func loadApp() error {
 
 **Rust 错误传播:**
 
-```rust
+```rust,ignore
 use std::fs;
 use std::io;
 
@@ -1642,7 +1642,7 @@ func main() {
 
 **Rust HTTP 服务 (使用 Axum):**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     http::StatusCode,
@@ -1748,7 +1748,7 @@ func processItems(items []int) []int {
 
 **Rust 并发处理:**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::time::Duration;
 
@@ -1834,7 +1834,7 @@ func processLine(num int, line string) error {
 
 **Rust 文件处理:**
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{self, BufRead, BufReader};
 use std::path::Path;
@@ -1945,7 +1945,7 @@ func dbOperations() error {
 
 **Rust 数据库操作 (使用 sqlx):**
 
-```rust
+```rust,ignore
 use sqlx::{sqlite::SqlitePool, Row};
 use anyhow::Result;
 

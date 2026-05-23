@@ -63,7 +63,7 @@ Tokio是Rust异步生态核心运行时：
 ### 定义 RUNTIME-1 ( 运行时配置 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let runtime = tokio::runtime::Builder::new_multi_thread()
     .worker_threads(4)
     .max_blocking_threads(512)
@@ -99,7 +99,7 @@ $$
 ### 定义 TASK-1 ( 任务创建 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let handle = tokio::spawn(async {
     // async code
 });
@@ -138,7 +138,7 @@ $$
 ### 定义 IO-1 ( 异步IO操作 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 let mut file = tokio::fs::File::open("file.txt").await?;
 let mut contents = String::new();
 file.read_to_string(&mut contents).await?;
@@ -174,7 +174,7 @@ $$
 ### 定义 TIME-1 ( 定时器 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 tokio::time::sleep(Duration::from_secs(1)).await;
 ```
 
@@ -185,7 +185,7 @@ $$
 ### 定义 TIME-2 ( Interval )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let mut interval = tokio::time::interval(Duration::from_secs(1));
 ```
 
@@ -206,7 +206,7 @@ $$
 ### 定义 SYNC-1 ( MPSC Channel )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 let (tx, rx) = tokio::sync::mpsc::channel(100);
 ```
 
@@ -217,7 +217,7 @@ $$
 ### 定义 SYNC-2 ( Mutex )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let data = Arc::new(tokio::sync::Mutex::new(0));
 let mut guard = data.lock().await;
 ```
@@ -262,7 +262,7 @@ $$
 
 ### 示例1: 并发HTTP请求
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 async fn fetch_all(urls: Vec<String>) -> Vec<Result<String, Error>> {
@@ -290,7 +290,7 @@ async fn fetch_all(urls: Vec<String>) -> Vec<Result<String, Error>> {
 
 ### 示例2: 任务同步
 
-```rust
+```rust,ignore
 use tokio::sync::{mpsc, Barrier};
 
 async fn coordinated_work(n_workers: usize) {

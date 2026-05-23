@@ -151,7 +151,7 @@ struct DistributedSystem {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 一致性哈希
 struct ConsistentHash {
     ring: BTreeMap<u64, Node>,
@@ -234,7 +234,7 @@ enum CircuitState {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 
 struct RateLimiter {

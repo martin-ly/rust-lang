@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [性能优化](../../../../concept/06_ecosystem/15_performance_optimization.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -22,7 +23,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 零成本泛型
 /// 编译后为每个类型生成专用代码
 pub fn process<T: Processor>(item: T) -> T::Output {
@@ -134,7 +135,7 @@ impl ParticleSoA {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 编译时已知大小的数组
 pub struct Buffer<T, const N: usize> {
     data: [T; N],
@@ -209,7 +210,7 @@ const MAX_BUFFER_SIZE: usize = validate_config(512, 16);
 >
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 使用likely/unlikely提示
 #[cfg(feature = "nightly")]
 use std::intrinsics::{likely, unlikely};
@@ -241,7 +242,7 @@ pub fn process_safe(value: Option<i32>) -> i32 {
 >
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 使用packed_simd或std::simd
 #[cfg(feature = "simd")]
 use std::simd::*;
@@ -277,7 +278,7 @@ pub fn simd_add(a: &[f32], b: &[f32], result: &mut [f32]) {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 
 /// 静态分配池
@@ -323,7 +324,7 @@ impl<'a, T> Drop for PoolRef<'a, T> {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 最小化临界区
 pub struct MinimalCriticalSection;
 
@@ -357,7 +358,7 @@ impl MinimalCriticalSection {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 使用criterion进行基准测试
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -381,7 +382,7 @@ criterion_main!(benches);
 >
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// 性能计数器
 pub struct PerformanceCounter {
     start: u64,

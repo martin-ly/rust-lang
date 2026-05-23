@@ -45,7 +45,7 @@ walkdir提供:
 
 > 可选择遍历顺序。
 
-```rust
+```rust,ignore
 WalkDir::new(".")
     .contents_first(true)   // 文件先于目录
     .into_iter()
@@ -64,7 +64,7 @@ WalkDir::new(".")
 
 > 默认不跟随符号链接。
 
-```rust
+```rust,ignore
 WalkDir::new(".")
     .follow_links(true)     // 跟随符号链接
     .max_open(10)           // 限制同时打开文件数
@@ -80,7 +80,7 @@ WalkDir::new(".")
 
 > 检测并跳过循环链接。
 
-```rust
+```rust,ignore
 for entry in WalkDir::new(".").follow_links(true) {
     match entry {
         Ok(e) => println!("{}", e.path().display()),
@@ -100,7 +100,7 @@ for entry in WalkDir::new(".").follow_links(true) {
 
 ### 反例 5.1 (TOCTOU)
 
-```rust
+```rust,ignore
 for entry in WalkDir::new(".") {
     let entry = entry?;
     let path = entry.path();
@@ -112,7 +112,7 @@ for entry in WalkDir::new(".") {
 
 ### 反例 5.2 (路径长度)
 
-```rust
+```rust,ignore
 // Windows长路径可能失败
 WalkDir::new("\\\\?\\C:\\very\\long\\path...")
 ```

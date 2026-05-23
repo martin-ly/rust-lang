@@ -52,7 +52,7 @@ flate2提供:
 
 > 编码器包装Write实现压缩写入。
 
-```rust
+```rust,ignore
 pub struct GzEncoder<W: Write> {
     inner: zio::Writer<GzHeader, Compress, W>,
 }
@@ -70,7 +70,7 @@ impl<W: Write> Write for GzEncoder<W> {
 
 > 级别范围0-9，默认6。
 
-```rust
+```rust,ignore
 let encoder = GzEncoder::new(file, Compression::default());
 let encoder = GzEncoder::new(file, Compression::best());    // 9
 let encoder = GzEncoder::new(file, Compression::fast());    // 1
@@ -87,7 +87,7 @@ let encoder = GzEncoder::new(file, Compression::none());    // 0
 
 > 内部缓冲区自动刷新。
 
-```rust
+```rust,ignore
 let mut encoder = GzEncoder::new(Vec::new(), Compression::default());
 encoder.write_all(data)?;  // 可能部分压缩
 encoder.finish()?;         // 刷新所有数据
@@ -103,7 +103,7 @@ encoder.finish()?;         // 刷新所有数据
 
 > 解压缩检测格式错误。
 
-```rust
+```rust,ignore
 let mut decoder = GzDecoder::new(corrupt_data);
 let mut output = Vec::new();
 decoder.read_to_end(&mut output)?;  // 返回InvalidData错误
@@ -115,7 +115,7 @@ decoder.read_to_end(&mut output)?;  // 返回InvalidData错误
 
 > 应用层需限制输出大小。
 
-```rust
+```rust,ignore
 // 防止zip bomb
 let limit = 1024 * 1024 * 100;  // 100MB
 let mut output = Vec::with_capacity(limit);
@@ -129,7 +129,7 @@ let mut output = Vec::with_capacity(limit);
 
 ### 反例 5.1 (忘记finish)
 
-```rust
+```rust,ignore
 let mut encoder = GzEncoder::new(file, Compression::default());
 encoder.write_all(data)?;
 // 错误: 忘记finish，数据不完整
@@ -141,7 +141,7 @@ encoder.finish()?;
 
 ### 反例 5.2 (压缩炸弹)
 
-```rust
+```rust,ignore
 // 解压不受信任的压缩数据需限制
 let mut decoder = GzDecoder::new(untrusted);
 let mut output = Vec::new();

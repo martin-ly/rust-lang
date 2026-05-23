@@ -311,7 +311,7 @@ $$
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL Ch. 16 - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex, Condvar};
 use tokio::sync::{broadcast, watch};
@@ -385,7 +385,7 @@ impl AtomicPersistentTrigger {
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: Rustonomicon - Ownership]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::sync::atomic::{AtomicUsize, Ordering};
 use tokio::sync::RwLock;
@@ -688,7 +688,7 @@ $$
 
 **场景**: 系统维护期间的告警通知
 
-```rust
+```rust,ignore
 let alert_center = MaintenanceAlertCenter::new();
 // 告警持久化，运维人员上线后可查看历史告警
 ```
@@ -700,7 +700,7 @@ let alert_center = MaintenanceAlertCenter::new();
 
 **场景**: 消息通知系统，确保用户上线后收到离线消息
 
-```rust
+```rust,ignore
 let queue = PersistentNotificationQueue::new(1000);
 queue.notify(message).await?;
 // 用户上线后从队列消费
@@ -711,7 +711,7 @@ queue.notify(message).await?;
 
 **场景**: 分布式系统中的配置更新广播
 
-```rust
+```rust,ignore
 let config_trigger = WatchTrigger::new(initial_config);
 // 所有节点订阅，配置更新时自动同步
 ```
@@ -726,7 +726,7 @@ let config_trigger = WatchTrigger::new(initial_config);
 
 向多个接收者广播持久信号：
 
-```rust
+```rust,ignore
 impl<T: Clone + Send> BroadcastTrigger<T> {
     pub fn broadcast(&self, value: T) -> Result<usize, broadcast::error::SendError<T>> {
         self.sender.send(value)
@@ -739,7 +739,7 @@ impl<T: Clone + Send> BroadcastTrigger<T> {
 
 要求接收者显式确认：
 
-```rust
+```rust,ignore
 impl<T: Clone + Send> AcknowledgedTrigger<T> {
     pub async fn acknowledge(&self) {
         // 清除持久状态

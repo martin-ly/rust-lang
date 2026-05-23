@@ -89,7 +89,7 @@
 
 **修复前**:
 
-```rust
+```rust,ignore
 pub struct FibonacciCache {
     cache: Vec<LazyCell<u64>>, // 永远为空
 }
@@ -102,7 +102,7 @@ impl FibonacciCache {
 
 **修复后**:
 
-```rust
+```rust,ignore
 pub struct FibonacciCache {
     cache: HashMap<u32, u64>,
 }
@@ -126,7 +126,7 @@ impl FibonacciCache {
 
 **修复前**:
 
-```rust
+```rust,ignore
 pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
     self.data.array_windows::<4>()
         .map(|w| i32::from_le_bytes([w[0], w[1], w[2], w[3]]))
@@ -137,7 +137,7 @@ pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
 
 **修复后**:
 
-```rust
+```rust,ignore
 pub fn read_all_i32_le(&self) -> impl Iterator<Item = i32> + '_ {
     self.data.chunks_exact(4)
         .map(|chunk| i32::from_le_bytes([chunk[0], chunk[1], chunk[2], chunk[3]]))
@@ -228,7 +228,7 @@ fn test_wasm_memory_view_out_of_bounds() {
 
 #### c06_async 优化前
 
-```rust
+```rust,ignore
 pub async fn analyze_string(s: &str) -> UnicodeComposition {
     for ch in s.chars() {
         // ...
@@ -241,7 +241,7 @@ pub async fn analyze_string(s: &str) -> UnicodeComposition {
 
 #### 优化后
 
-```rust
+```rust,ignore
 pub async fn analyze_string(s: &str) -> UnicodeComposition {
     for ch in s.chars() {
         // ...
@@ -257,7 +257,7 @@ pub async fn analyze_string(s: &str) -> UnicodeComposition {
 
 #### c05_threads 优化前
 
-```rust
+```rust,ignore
 pub fn get(&mut self) -> &T {
     if self.value.is_none() {
         self.value = Some((self.init)());
@@ -268,7 +268,7 @@ pub fn get(&mut self) -> &T {
 
 #### 优化后
 
-```rust
+```rust,ignore
 pub fn get(&mut self) -> &T {
     self.value.get_or_insert_with(self.init) // ✅ 简洁且安全
 }
@@ -278,7 +278,7 @@ pub fn get(&mut self) -> &T {
 
 #### c09_design_pattern 优化前
 
-```rust
+```rust,ignore
 pub fn get_config_readonly() -> Option<&'static GlobalConfig> {
     None // ❌ 始终返回 None
 }
@@ -286,7 +286,7 @@ pub fn get_config_readonly() -> Option<&'static GlobalConfig> {
 
 #### 优化后
 
-```rust
+```rust,ignore
 pub fn with_config_readonly<F, R>(f: F) -> R
 where
     F: FnOnce(&GlobalConfig) -> R,
@@ -306,7 +306,7 @@ where
 
 为所有可能 panic 的函数添加了 `# Panics` 文档：
 
-```rust
+```rust,ignore
 /// 获取可变引用（保留析构函数）
 ///
 /// # Panics
@@ -321,7 +321,7 @@ pub fn get_mut(&mut self) -> &mut T {
 
 为 unsafe 代码添加了详细的安全说明：
 
-```rust
+```rust,ignore
 /// 从字节切片安全转换
 ///
 /// # Safety
@@ -334,7 +334,7 @@ pub unsafe fn from_bytes_unchecked(bytes: &[u8]) -> Self
 
 为浮点计算添加了精度说明：
 
-```rust
+```rust,ignore
 /// 使用 Binet 公式计算斐波那契数
 ///
 /// # 精度限制

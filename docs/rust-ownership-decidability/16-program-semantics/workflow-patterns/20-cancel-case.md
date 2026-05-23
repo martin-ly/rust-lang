@@ -318,7 +318,7 @@ $$
 
 利用 Rust 的 `tokio::task::AbortHandle`、`tokio::select!` 和 `Drop` 特性实现案例级取消：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::sync::Arc;
 use tokio::sync::{Mutex, broadcast};
@@ -382,7 +382,7 @@ impl<F: FnOnce()> Drop for CleanupGuard<F> {
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use tokio::select;
 use tokio::time::{sleep, Duration};
@@ -464,7 +464,7 @@ where F: FnOnce() -> T + Send + 'static, T: Send + 'static {
 
 > **[来源: Rust Standard Library]** · **[来源: Tokio Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use std::sync::atomic::{AtomicBool, AtomicU64, Ordering};
 
@@ -700,7 +700,7 @@ $$
 
 案例在超过预定时间后自动取消：
 
-```rust
+```rust,ignore
 pub async fn execute_with_timeout<F, T>(case: &CaseManager, work: F, timeout: Duration) -> Option<T>
 where F: Future<Output = T> {
     select! { result = work => Some(result), _ = sleep(timeout) => { case.cancel_case().await; None } }
@@ -713,7 +713,7 @@ where F: Future<Output = T> {
 
 根据取消原因执行不同级别的清理：
 
-```rust
+```rust,ignore
 pub enum CancelLevel { Soft, Hard, Nuclear }
 impl AdvancedCaseManager {
     pub async fn cancel_with_level(&self, level: CancelLevel) {
@@ -732,7 +732,7 @@ impl AdvancedCaseManager {
 
 一个案例的取消触发相关案例的级联取消：
 
-```rust
+```rust,ignore
 use std::sync::Weak;
 
 pub struct CrossCaseCancel { case_managers: Arc<Mutex<Vec<Weak<AdvancedCaseManager>>>> }

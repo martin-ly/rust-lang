@@ -247,7 +247,7 @@ trait False {}
 
 **步骤 4**: 编码布尔运算
 
-```rust
+```rust,ignore
 // 编码逻辑运算为类型约束
 
 // A ∧ B  =>  (A, B)
@@ -267,7 +267,7 @@ impl Not<True> for !() {}  // 否定
 
 **步骤 5**: 完整编码示例
 
-```rust
+```rust,ignore
 // 公式: ∀x.∃y.(x ∧ y)
 // 编码:
 
@@ -493,7 +493,7 @@ $$
 
 **关键问题**: 关联类型归一化
 
-```rust
+```rust,ignore
 <T as Iterator>::Item  ~>  U  (如果 impl Iterator for T { type Item = U; })
 ```
 
@@ -516,7 +516,7 @@ $$
 ### 定义 5.2 (递归 Trait实现)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 递归 impl
 impl<T> Trait for T where T: OtherTrait<T> {}
 ```

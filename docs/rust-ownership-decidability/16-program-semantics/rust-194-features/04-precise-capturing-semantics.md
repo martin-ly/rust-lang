@@ -69,14 +69,14 @@ Precise Capturing（精确捕获）是 Rust 1.94 引入的重要特性，通过 
 
 在传统 Rust 中，`impl Trait` 会捕获所有输入生命周期：
 
-```rust
+```rust,ignore
 // 传统方式：捕获所有生命周期
 fn foo<'a, 'b>(x: &'a i32, y: &'b i32) -> impl Trait<'a, 'b>;
 ```
 
 使用 `use<'lt>`，可以精确指定捕获的生命周期：
 
-```rust
+```rust,ignore
 // 精确捕获：只捕获 'a
 fn bar<'a, 'b>(x: &'a i32, y: &'b i32) -> impl Trait + use<'a>;
 ```
@@ -439,7 +439,7 @@ $$
 ### 7.1 基本精确捕获
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 传统方式：捕获所有生命周期
 fn classic_way<'a, 'b>(x: &'a i32, y: &'b i32) -> impl Fn() -> i32 + 'a + 'b {
     move || x + y  // 捕获 'a 和 'b
@@ -464,7 +464,7 @@ fn example() {
 ### 7.2 空捕获
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // use<> 表示不捕获任何生命周期
 fn no_capture<T>(x: T) -> impl FnOnce() -> T + use<> {
     || x  // x 是 owned，不依赖引用生命周期
@@ -486,7 +486,7 @@ fn empty_capture_example() {
 ### 7.3 闭包中的精确捕获
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn closure_precise_capture<'a, 'b, 'c>(
     a: &'a str,
     b: &'b str,
@@ -513,7 +513,7 @@ fn example() {
 ### 7.4 迭代器返回
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 fn filter_by_key<'a, 'b, T: 'a>(
     items: &'a [T],
     key: &'b T::Key,
@@ -564,7 +564,7 @@ struct Config {
 ### 7.6 复杂生命周期场景
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 struct Parser<'input> {
     source: &'input str,
     position: usize,
@@ -605,7 +605,7 @@ impl Token {
 ### 7.7 trait 中的精确捕获
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 trait Processor {
     fn process<'a>(&self, input: &'a str) -> impl Display + use<'a>;
 }
@@ -626,7 +626,7 @@ impl Processor for MyProcessor {
 ### 8.1 与生命周期子类型的交互
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn subtyping_capture<'long: 'short>(
     long_ref: &'long i32,
     short_ref: &'short i32,
@@ -678,7 +678,7 @@ fn closure_capture_modes() {
 ### 8.3 与泛型的交互
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn generic_precise_capture<'a, T: 'a>(
     value: &'a T,
 ) -> impl Fn() -> &'a T + use<'a> {
@@ -700,7 +700,7 @@ impl<'a, T: 'a> Wrapper<'a, T> {
 ### 8.4 与 Pin 的交互
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 fn pinned_precise_capture<'a, T>(
@@ -719,7 +719,7 @@ fn pinned_precise_capture<'a, T>(
 ### 9.1 何时使用精确捕获
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 1. 当返回值不依赖所有输入生命周期时
 fn get_name<'a, 'b>(person: &'a Person, config: &'b Config) -> impl Display + use<'a> {
     &person.name  // 只依赖 'a

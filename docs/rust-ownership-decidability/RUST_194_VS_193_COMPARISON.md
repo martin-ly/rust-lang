@@ -171,7 +171,7 @@ This lint helps catch patterns that could lead to unsoundness in ownership reaso
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::LazyCell;
 
@@ -379,7 +379,7 @@ fn increment() {
 
 **After (1.93+ - with warning):**
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 // Option 1: Use static instead
@@ -399,7 +399,7 @@ thread_local! {
 
 **Migration path from `once_cell` crate to std:**
 
-```rust
+```rust,ignore
 // Before (once_cell crate)
 use once_cell::sync::Lazy;
 static DATA: Lazy<Vec<i32>> = Lazy::new(|| vec![1, 2, 3]);

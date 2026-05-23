@@ -1517,7 +1517,6 @@ mod tests {
 
     #[test]
     #[cfg_attr(miri, ignore)]
-    #[test]
     #[cfg(not(miri))]
     fn test_sequential_vs_parallel() {
         let s = ConcurrencyAlgorithmDecisionTree::sequential_vs_parallel();

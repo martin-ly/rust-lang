@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Next-gen Trait Solver 跟踪报告](#next-gen-trait-solver-跟踪报告)
@@ -42,6 +43,7 @@
   - [7. 参考文献](#7-参考文献)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 1. Rust 当前 Trait Solver 的局限
 >
@@ -179,7 +181,7 @@ Next-gen trait solver（内部代号 `new-solver`）是 Rust 编译器团队从 
 
 所有类型系统查询统一为 `Goal`：
 
-```rust
+```rust,ignore
 // rustc 内部表示 (简化)
 enum Goal<'tcx> {
     // 证明类型实现 trait
@@ -219,6 +221,7 @@ fn use_foo<T: Foo>(x: T::Bar) {
 ---
 
 ## 3. Chalk vs New Solver 的架构对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 3.1 Chalk 项目回顾
@@ -294,6 +297,7 @@ Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Sol
 ---
 
 ## 4. 对现代 Rust 特性的影响
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 4.1 GATs (Generic Associated Types)
@@ -304,7 +308,7 @@ Rust 1.0  Solver ──→ NLL Era ──→ Chalk 实验 ──→ Next-gen Sol
 
 GATs 允许 trait 拥有带泛型参数的关联类型：
 
-```rust
+```rust,ignore
 trait LendingIterator {
     type Item<'a>;
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
@@ -317,7 +321,7 @@ trait LendingIterator {
 - 减少 "ambiguous projection" 错误
 - 支持更复杂的 GAT trait bounds
 
-```rust
+```rust,ignore
 // 新 solver 下更可能成功编译的场景:
 trait Container {
     type Iter<'a>: Iterator<Item = &'a Self::Item>;
@@ -377,13 +381,14 @@ trait AsyncServiceSend: Send + Sync {
 ```
 
 ### 4.4 Specialization (特化)
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **当前状态**: 未稳定，需要 `feature(specialization)`
 
 Specialization 允许为更具体的类型提供 trait 的替代实现：
 
-```rust
+```rust,ignore
 trait Convert<T> {
     fn convert(&self) -> T;
 }
@@ -406,9 +411,11 @@ Specialization 的稳定化严重依赖新 solver 的重叠 impl 检查能力。
 ---
 
 ## 5. 启用 Next-gen Solver
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 5.1 Nightly 编译器 (已默认启用)
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 自 2024 年末起，nightly 编译器已默认使用 next-gen solver。如需显式控制：
@@ -422,6 +429,7 @@ rustc +nightly -Ztrait-solver=classic
 ```
 
 ### 5.2 对项目的影响评估
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能有行为差异。建议：
@@ -433,6 +441,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 6. 时间线跟踪
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 时间 | 事件 |
@@ -450,6 +459,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 7. 参考文献
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **Matsakis, Niko**. "Chalk: From Logic to Rust". Rust Blog, 2017.
@@ -494,6 +504,7 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -628,4 +639,3 @@ Next-gen solver 的设计目标是**向后兼容**，但某些边缘案例可能
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

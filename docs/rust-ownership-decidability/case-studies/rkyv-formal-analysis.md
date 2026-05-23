@@ -124,7 +124,7 @@ Rkyv 零拷贝流程:
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // rkyv 的三个核心 trait
 pub trait Archive {
     type Archived;    // 存档后的类型
@@ -153,7 +153,7 @@ pub trait Deserialize<D: Fallible>: Archive {
 
 **绝对指针的问题**:
 
-```rust
+```rust,ignore
 // 传统序列化: 使用绝对地址
 struct NodeWithAbsolutePtr {
     value: i32,
@@ -168,7 +168,7 @@ struct NodeWithAbsolutePtr {
 
 **相对指针的解决方案**:
 
-```rust
+```rust,ignore
 // rkyv 使用相对偏移
 struct RelPtr<T> {
     offset: isize,  // 相对于当前位置的偏移
@@ -194,7 +194,7 @@ struct RelPtr<T> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rkyv::rel_ptr::RelPtr;
 
 // RelPtr 的核心实现
@@ -222,7 +222,7 @@ impl<T: ?Sized, OO: Offset> RelPtr<T, OO> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 
 #[derive(Archive, Serialize, Deserialize)]
@@ -258,7 +258,7 @@ struct Person {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 示例: 验证相对指针的位置无关性
 use rkyv::archived_root;
 
@@ -319,7 +319,7 @@ pub trait Archive {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 
 #[derive(Archive, Serialize, Deserialize)]
@@ -357,7 +357,7 @@ struct Point3D {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize, ser::Serializer};
 
 #[derive(Archive, Serialize, Deserialize, Debug, PartialEq)]
@@ -437,7 +437,7 @@ fn serialization_process() {
 
 对于特殊需求，可以手动实现 Archive trait：
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use std::sync::Arc;
 
@@ -493,7 +493,7 @@ impl<S: Serializer> Serialize<S> for CachedString {
 
 Rkyv 提供了强大的字节级验证机制，可以在访问前确保存档的完整性：
 
-```rust
+```rust,ignore
 use rkyv::check_archived_root;
 
 fn safe_access(bytes: &[u8]) -> Result<(), Box<dyn std::error::Error>> {
@@ -527,7 +527,7 @@ fn safe_access(bytes: &[u8]) -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use rkyv::validation::{check_archived_root, validator::DefaultValidator};
 use bytecheck::CheckBytes;
 
@@ -566,7 +566,7 @@ struct MyStruct {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rkyv::Archived;
 
 fn boundary_validation() {
@@ -628,7 +628,7 @@ Rkyv 提供两种访问模式，对应不同的安全保证：
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rkyv::validation::Valid;
 
 // Valid trait 标记可以在验证后安全访问的类型
@@ -663,7 +663,7 @@ fn use_valid_trait() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 /// 根据场景选择适当的访问模式
 mod safety_strategy {
     use rkyv::{archived_root, check_archived_root};
@@ -730,7 +730,7 @@ rkyv 零拷贝优势: 约 2.1x ~ 14x
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use rkyv::{Archive, Deserialize, Serialize};
 use serde::{Deserialize as SerdeDeserialize, Serialize as SerdeSerialize};
@@ -782,7 +782,7 @@ fn bench_comparison(c: &mut Criterion) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// 分析不同方案的内存使用
 fn memory_usage_analysis() {
     let data = create_large_dataset();
@@ -813,7 +813,7 @@ fn memory_usage_analysis() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize, ser::Serializer};
 
 /// 1. 使用固定大小类型减少指针跳转
@@ -872,7 +872,7 @@ fn controlled_allocation() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use rkyv::with::Endian;
 
@@ -903,7 +903,7 @@ struct CrossPlatformDataArchived {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 
 /// 处理对齐问题
@@ -932,7 +932,7 @@ struct PackedData {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 
 /// 使用版本属性管理兼容性
@@ -992,7 +992,7 @@ mod v2 {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use std::path::Path;
 
@@ -1041,7 +1041,7 @@ impl ConfigCache {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use std::collections::HashMap;
 
@@ -1117,7 +1117,7 @@ impl SaveGameManager {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use bytes::Bytes;
 
@@ -1196,7 +1196,7 @@ impl ZeroCopyQueue {
 
 > **反例**: 修改 rkyv 存档字节后，继续使用原始存档引用会导致未定义行为。
 >
-> ```rust
+> ```rust,ignore
 > let original = vec![1u32, 2, 3];
 > let mut bytes = rkyv::to_bytes::<_, 256>(&original).unwrap();
 >
@@ -1217,7 +1217,7 @@ impl ZeroCopyQueue {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// rkyv 的平台限制
 ///
 /// 1. 字节序差异
@@ -1252,7 +1252,7 @@ struct CrossPlatformSafe {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// rkyv 的递归限制
 ///
 /// 默认情况下，rkyv 支持递归数据结构，但有栈深度限制。
@@ -1293,7 +1293,7 @@ struct Graph {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// rkyv 不支持直接的 trait 对象序列化
 ///
 /// 限制原因:
@@ -1330,7 +1330,7 @@ struct TypeErased {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize, ser::Serializer};
 use std::collections::{HashMap, BTreeMap, HashSet};
 
@@ -1691,7 +1691,7 @@ mod benchmarks {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use rkyv::{Archive, Serialize, Deserialize};
 use sled::Db;
 

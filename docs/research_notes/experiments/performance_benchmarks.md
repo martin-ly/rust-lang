@@ -451,7 +451,7 @@
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use std::time::Duration;
 
@@ -538,7 +538,7 @@ criterion_main!(allocation_benches);
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
@@ -627,7 +627,7 @@ criterion_main!(concurrency_benches);
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use serde::{Deserialize, Serialize};
 
@@ -758,7 +758,7 @@ harness = false
 
 创建数据收集脚本：
 
-```rust
+```rust,ignore
 // scripts/collect_benchmark_data.rs
 use std::process::Command;
 use std::fs;
@@ -911,7 +911,7 @@ fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn fibonacci(n: u64) -> u64 {
@@ -934,7 +934,7 @@ criterion_main!(benches);
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn stack_allocation(c: &mut Criterion) {
@@ -963,7 +963,7 @@ criterion_main!(benches);
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 use std::sync::{Arc, Mutex};
 use std::thread;
@@ -1006,7 +1006,7 @@ criterion_main!(benches);
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn stack_allocation(c: &mut Criterion) {
@@ -1046,7 +1046,7 @@ criterion_main!(benches);
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
@@ -1114,7 +1114,7 @@ criterion_main!(concurrency_benches);
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 

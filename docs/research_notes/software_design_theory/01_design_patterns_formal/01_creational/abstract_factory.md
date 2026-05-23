@@ -148,7 +148,7 @@ $$\Omega(\mathit{create}_i(f)) \cap \Omega(f) = \emptyset$$
 
 1. **trait 定义**：
 
-   ```rust
+   ```rust,ignore
    trait GuiFactory {
        type B: Button;
        type D: Dialog;
@@ -234,7 +234,7 @@ Abstract Factory 为纯 Safe；trait 多态工厂、产品所有权转移，无 
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait Button { fn render(&self); }
 trait Dialog { fn render(&self); }
 
@@ -352,7 +352,7 @@ ownership_model T2
 
 **错误**：从不同工厂取产品组合，风格不一致。
 
-```rust
+```rust,ignore
 let win_factory = WinFactory;
 let mac_factory = MacFactory;
 // 混用：WinButton + MacDialog → 风格不一致

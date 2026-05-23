@@ -84,7 +84,7 @@ Rust标准库提供了一套线程安全的同步原语:
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 pub struct Arc<T: ?Sized> {
     ptr: NonNull<ArcInner<T>>,
     phantom: PhantomData<ArcInner<T>>,
@@ -129,7 +129,7 @@ $$
 
 **Arc的trait实现**:
 
-```rust
+```rust,ignore
 unsafe impl<T: ?Sized + Sync + Send> Send for Arc<T> {}
 unsafe impl<T: ?Sized + Sync + Send> Sync for Arc<T> {}
 ```
@@ -146,7 +146,7 @@ unsafe impl<T: ?Sized + Sync + Send> Sync for Arc<T> {}
 
 **为什么需要两者**:
 
-```rust
+```rust,ignore
 // 场景1: Send但不是Sync (如Cell)
 let arc = Arc::new(Cell::new(0));
 // arc可以转移到其他线程 (Send)
@@ -170,7 +170,7 @@ let arc = Arc::new(Cell::new(0));
 
 **clone**:
 
-```rust
+```rust,ignore
 fn clone(&self) -> Self {
     let old_size = self.inner().strong.fetch_add(1, Relaxed);
     if old_size > MAX_REFCOUNT {
@@ -188,7 +188,7 @@ $$
 
 **drop**:
 
-```rust
+```rust,ignore
 fn drop(&mut self) {
     if self.inner().strong.fetch_sub(1, Release) == 1 {
         fence(Acquire);
@@ -224,7 +224,7 @@ $$
 
 **关键场景**:
 
-```rust
+```rust,ignore
 // Thread 1
 let data = Arc::new(42);  // 1. 创建
 let data2 = data.clone();  // 2. clone
@@ -251,7 +251,7 @@ thread::spawn(move || {    // 3. 转移到Thread 2
 
 **更复杂的场景** (最后一次drop):
 
-```rust
+```rust,ignore
 // Thread 1
 let data = Arc::new(42);
 // ... 使用 ...
@@ -288,7 +288,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 pub struct Mutex<T: ?Sized> {
     inner: sys::Mutex,  // 平台特定的互斥锁
     poison: Cell<bool>, // 中毒标记
@@ -316,7 +316,7 @@ $$
 
 **lock操作**:
 
-```rust
+```rust,ignore
 fn lock(&self) -> LockResult<MutexGuard<T>> {
     unsafe { self.inner.lock() }  // 底层阻塞
     MutexGuard::new(self)
@@ -332,7 +332,7 @@ fn lock(&self) -> LockResult<MutexGuard<T>> {
 
 MutexGuard不实现Copy，且:
 
-```rust
+```rust,ignore
 impl<T: ?Sized> !Send for MutexGuard<T> {}
 ```
 
@@ -340,7 +340,7 @@ Guard不能跨线程转移，确保解锁发生在锁定线程。
 
 **自动解锁**:
 
-```rust
+```rust,ignore
 impl<T: ?Sized> Drop for MutexGuard<T> {
     fn drop(&mut self) {
         unsafe { self.mutex.inner.unlock() }
@@ -371,7 +371,7 @@ RAII确保锁最终释放。∎
 
 **Rust额外保证**:
 
-```rust
+```rust,ignore
 let guard = mutex.lock();
 let guard2 = mutex.lock();  // 编译错误! guard仍然存活
 ```
@@ -388,7 +388,7 @@ let guard2 = mutex.lock();  // 编译错误! guard仍然存活
 
 **反例**:
 
-```rust
+```rust,ignore
 // Thread 1
 let g1 = m1.lock();
 let g2 = m2.lock();  // 可能阻塞
@@ -540,7 +540,7 @@ Rust的RwLock实现策略:
 ### 定义 5.1 (Condvar操作)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 impl Condvar {
     fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>>;
     fn notify_one(&self);
@@ -577,7 +577,7 @@ $$
 
 **标准使用模式**:
 
-```rust
+```rust,ignore
 while !condition {
     condvar.wait(&mut guard);
 }
@@ -587,7 +587,7 @@ while !condition {
 
 **虚假唤醒(Spurious Wakeup)**: 等待线程可能在未被通知的情况下唤醒。
 
-```rust
+```rust,ignore
 // 错误
 if !condition {
     condvar.wait(&mut guard);
@@ -673,7 +673,7 @@ let node2 = Arc::new(Node { next: Some(node1.clone()) });
 ### 反例 7.2 (MutexGuard越界使用)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let guard = mutex.lock();
 let ref1 = &*guard;
 drop(guard);  // 释放锁
@@ -682,7 +682,7 @@ drop(guard);  // 释放锁
 
 实际上，Rust不允许这样:
 
-```rust
+```rust,ignore
 let ref1 = &*mutex.lock();  // 临时guard在分号后drop
 // ref1 生命周期不够长
 ```
@@ -690,7 +690,7 @@ let ref1 = &*mutex.lock();  // 临时guard在分号后drop
 ### 反例 7.3 (不正确使用Atomic代替Mutex)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 错误: 非原子操作使用AtomicBool
 static FLAG: AtomicBool = AtomicBool::new(false);
 
@@ -706,7 +706,7 @@ if !FLAG.load(Relaxed) {
 
 **正确做法**:
 
-```rust
+```rust,ignore
 if FLAG.compare_exchange(false, true, AcqRel, Relaxed).is_ok() {
     do_work();
 }

@@ -522,7 +522,7 @@ fn main() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -603,7 +603,7 @@ async fn use_future() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 

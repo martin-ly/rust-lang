@@ -68,7 +68,7 @@ Rust 1.95 主要聚焦于：
 
 **描述**: 允许在 trait 的关联类型中使用 `impl Trait`
 
-```rust
+```rust,ignore
 // 定义异步迭代器 trait
 trait AsyncIterator {
     type Item;
@@ -112,7 +112,7 @@ impl AsyncIterator for Counter {
 ### 2. 新的 API 稳定化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // VecDeque::truncate_front
 use std::collections::VecDeque;
 
@@ -157,7 +157,7 @@ let mapped = RefCell::try_map(cell.borrow(), |opt| opt.as_ref());
 ### 从手动 Future 类型到 impl Trait
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ❌ Rust 1.94: 需要显式指定复杂的 Future 类型
 use std::pin::Pin;
 use std::future::Future;

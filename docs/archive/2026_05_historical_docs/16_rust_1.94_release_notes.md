@@ -135,7 +135,7 @@ fn main() {
 
 Rust 1.94 为 `LazyCell` 和 `LazyLock` 添加了多个实用方法：
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 
@@ -171,7 +171,7 @@ static CONFIG: LazyLock<String> = LazyLock::new(|| load_config());
 
 Rust 1.94 在 `f32::consts` 和 `f64::consts` 中新增了两个重要数学常量：
 
-```rust
+```rust,ignore
 // 欧拉-马歇罗尼常数 (Euler-Mascheroni constant)
 // γ ≈ 0.5772156649015329
 let gamma = f64::consts::EULER_GAMMA;
@@ -214,7 +214,7 @@ where
 
 `Peekable` 迭代器新增了两个实用方法：
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 let mut iter = vec![1, 2, 3, 4, 5].into_iter().peekable();
@@ -431,7 +431,7 @@ include = [
 
 **建议应用模式**:
 
-```rust
+```rust,ignore
 // 热路径优化模式
 if let Some(config) = LazyLock::get(&CONFIG) {
     // 无锁快速路径 - 99.9% 的请求走这里
@@ -530,7 +530,7 @@ fn moving_average_new(data: &[f64]) -> Vec<f64> {
 
 #### 迁移 2: 优化 `LazyLock` 热路径
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| AppConfig::load());
@@ -561,7 +561,7 @@ fn process_request() {
 
 #### 迁移 3: 使用 `ControlFlow` 改进流控制
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // ❌ Rust 1.93: 使用 Result 表达提前终止（语义不清晰）
@@ -589,7 +589,7 @@ fn find_valid_controlflow(items: &[Item]) -> ControlFlow<Item, ()> {
 
 #### 迁移 4: 使用新的数学常量
 
-```rust
+```rust,ignore
 // ❌ Rust 1.93: 硬编码常量，精度受限
 const GOLDEN_RATIO: f64 = 1.618_033_988_749_895_f64;
 
@@ -704,7 +704,7 @@ pub enum TradeSignal {
 
 ### 场景 2: 高频交易连接池
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicU64, Ordering};
 
@@ -740,7 +740,7 @@ pub async fn submit_order(order: Order) -> Result<OrderId, TradingError> {
 
 ### 场景 3: 数据验证管道
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 用户注册数据验证
@@ -816,7 +816,7 @@ pub fn register_user(data: RegistrationData) -> Result<User, ValidationError> {
 
 ### 场景 4: 科学计算（数值优化）
 
-```rust
+```rust,ignore
 /// 使用黄金比例搜索进行一维优化
 pub fn golden_section_minimize<F>(
     f: F,

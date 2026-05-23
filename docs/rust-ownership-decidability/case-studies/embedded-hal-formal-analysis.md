@@ -170,7 +170,7 @@ embedded-hal的解决方案:
 
 embedded-hal通过trait抽象隐藏硬件差异:
 
-```rust
+```rust,ignore
 // 通用的GPIO输出trait
 pub trait OutputPin {
     type Error;
@@ -195,7 +195,7 @@ pub fn blink_led<P: OutputPin>(led: &mut P, delay: &mut impl DelayUs) {
 
 使用泛型单态化实现零成本抽象:
 
-```rust
+```rust,ignore
 // 编译前：泛型代码
 fn use_pin<P: OutputPin>(pin: &mut P) {
     pin.set_high().unwrap();
@@ -212,7 +212,7 @@ fn use_pin<P: OutputPin>(pin: &mut P) {
 
 使用类型状态机在编译期防止错误:
 
-```rust
+```rust,ignore
 // 引脚在不同模式下有不同的类型
 let pa0: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 // pa0 不能调用 set_high()，编译期阻止
@@ -270,7 +270,7 @@ pub trait StatefulOutputPin: OutputPin {
 
 HAL实现使用类型参数编码引脚状态:
 
-```rust
+```rust,ignore
 // 引脚模式类型
 struct Input<MODE> { _mode: PhantomData<MODE> }
 struct Output<MODE> { _mode: PhantomData<MODE> }
@@ -334,7 +334,7 @@ impl PA0<Input<Floating>> {
 
 ToggleableOutputPin提供状态翻转功能:
 
-```rust
+```rust,ignore
 pub trait ToggleableOutputPin: OutputPin {
     type Error;
     fn toggle(&mut self) -> Result<(), Self::Error>;
@@ -351,7 +351,7 @@ fn blink_fast<P: ToggleableOutputPin>(led: &mut P) {
 
 **与手动实现的对比**:
 
-```rust
+```rust,ignore
 // 手动实现（需要读取当前状态）
 if led.is_set_high()? {
     led.set_low()?;
@@ -402,7 +402,7 @@ pub trait OutputPin {
 
 embedded-hal 1.0 使用 `embedded_io` trait 进行串口通信:
 
-```rust
+```rust,ignore
 use embedded_hal::serial::{Read, Write};
 use nb::block;
 
@@ -431,7 +431,7 @@ fn write_bytes<UART: Write>(uart: &mut UART, data: &[u8]) -> Result<(), UART::Er
 
 串口配置通常由HAL实现提供:
 
-```rust
+```rust,ignore
 // 以 stm32f4xx-hal 为例
 use stm32f4xx_hal::{
     serial::{config::Config, Serial},
@@ -462,7 +462,7 @@ let (mut tx, mut rx) = serial.split();
 
 基于串口实现Modbus RTU协议的示例:
 
-```rust
+```rust,ignore
 use embedded_hal::serial::{Read, Write};
 use nb::block;
 
@@ -528,7 +528,7 @@ impl<UART: Read + Write> ModbusRTU<UART> {
 
 SPI使用设备trait抽象总线访问:
 
-```rust
+```rust,ignore
 use embedded_hal::spi::{SpiDevice, SpiBus};
 
 // SpiDevice表示一个独占的SPI设备
@@ -551,7 +551,7 @@ pub enum Operation<'a> {
 
 SPI事务确保操作的原子性:
 
-```rust
+```rust,ignore
 // 示例：读取传感器数据（需要多字节交换）
 fn read_sensor_data<SPI: SpiDevice>(spi: &mut SPI) -> Result<SensorData, SPI::Error> {
     let mut tx_buf = [0x3B | 0x80, 0x00, 0x00, 0x00, 0x00, 0x00]; // 读命令 + 5字节数据
@@ -591,7 +591,7 @@ fn read_sensor_data<SPI: SpiDevice>(spi: &mut SPI) -> Result<SensorData, SPI::Er
 
 使用 `SpiDevice` 管理片选:
 
-```rust
+```rust,ignore
 use embedded_hal::spi::SpiDevice;
 use embedded_hal_bus::spi::RefCellDevice;
 
@@ -617,7 +617,7 @@ sensor2.transaction(...)?;
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 pub trait I2c<A: AddressMode = SevenBitAddress> {
     type Error;
 
@@ -659,7 +659,7 @@ const EXT_EEPROM_ADDR: u16 = 0x2FF;
 
 **地址冲突处理**:
 
-```rust
+```rust,ignore
 // 某些设备支持地址引脚配置
 pub struct Mpu6050<I2C> {
     i2c: I2C,
@@ -681,7 +681,7 @@ impl<I2C: I2c> Mpu6050<I2C> {
 
 I2C典型操作模式:
 
-```rust
+```rust,ignore
 impl<I2C: I2c> Mpu6050<I2C> {
     // 写单个寄存器
     fn write_register(&mut self, reg: u8, value: u8) -> Result<(), I2C::Error> {
@@ -721,7 +721,7 @@ impl<I2C: I2c> Mpu6050<I2C> {
 
 延迟是最常用的定时器功能:
 
-```rust
+```rust,ignore
 use embedded_hal::delay::DelayNs;
 
 pub trait DelayNs {
@@ -737,7 +737,7 @@ pub trait DelayNs {
 
 **使用示例**:
 
-```rust
+```rust,ignore
 fn blink_with_delay<P: OutputPin, D: DelayNs>(
     led: &mut P,
     delay: &mut D,
@@ -757,7 +757,7 @@ fn blink_with_delay<P: OutputPin, D: DelayNs>(
 
 倒计时定时器用于非阻塞延迟:
 
-```rust
+```rust,ignore
 use embedded_hal::timer::{CountDown, Periodic};
 use fugit::TimerDurationU32;
 
@@ -796,7 +796,7 @@ fn periodic_sampling<T: CountDown>(
 
 PWM（脉宽调制）用于模拟输出:
 
-```rust
+```rust,ignore
 use embedded_hal::pwm::SetDutyCycle;
 
 pub trait SetDutyCycle {
@@ -839,7 +839,7 @@ fn fade_led<PWM: SetDutyCycle>(pwm: &mut PWM) -> Result<(), PWM::Error> {
 
 模数转换:
 
-```rust
+```rust,ignore
 use embedded_hal::adc::{OneShot, Channel};
 
 pub trait OneShot<ADC> {
@@ -878,7 +878,7 @@ impl<PIN: Channel<Adc, ID = u8>> TemperatureSensor<PIN> {
 
 数模转换:
 
-```rust
+```rust,ignore
 use embedded_hal::dac::SetValue;
 
 pub trait SetValue {
@@ -950,7 +950,7 @@ nrf-hal-common = "0.18"
 
 将MPU6050驱动从STM32F4迁移到nRF52:
 
-```rust
+```rust,ignore
 // 原STM32F4代码
 use stm32f4xx_hal::{i2c::I2c, gpio::GPIOA};
 
@@ -984,7 +984,7 @@ let mut mpu = Mpu6050::new(i2c);  // 驱动代码完全不变！
 
 embedded-hal核心trait完全支持no_std:
 
-```rust
+```rust,ignore
 #![no_std]
 
 use embedded_hal::digital::{InputPin, OutputPin};
@@ -1010,7 +1010,7 @@ fn use_peripherals<P: OutputPin, SPI: SpiDevice, I2C: I2c>(
 
 某些功能需要堆分配，应作为可选特性:
 
-```rust
+```rust,ignore
 // Cargo.toml
 [features]
 default = []
@@ -1079,7 +1079,7 @@ pub fn read_buffer<'a, I2C: I2c>(
 
 embedded-hal-async提供异步trait:
 
-```rust
+```rust,ignore
 use embedded_hal_async::spi::SpiDevice;
 use embedded_hal_async::i2c::I2c;
 
@@ -1113,7 +1113,7 @@ async fn main(spawner: Spawner) {
 
 BMP280气压传感器驱动:
 
-```rust
+```rust,ignore
 use embedded_hal::i2c::I2c;
 use embedded_hal::delay::DelayNs;
 
@@ -1185,7 +1185,7 @@ impl<I2C: I2c, DELAY: DelayNs> Bmp280<I2C, DELAY> {
 
 SSD1306 OLED驱动:
 
-```rust
+```rust,ignore
 use embedded_hal::i2c::I2c;
 use embedded_hal::digital::OutputPin;
 use embedded_hal::delay::DelayNs;
@@ -1296,7 +1296,7 @@ impl<I2C: I2c, RST: OutputPin, DELAY: DelayNs> Ssd1306<I2C, RST, DELAY> {
 ### 13.1 跨平台LED闪烁
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -1400,7 +1400,7 @@ fn main() -> ! {
 ### 13.2 传感器读取
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use embedded_hal::i2c::I2c;
 use embedded_hal::delay::DelayNs;
 use embedded_hal::digital::OutputPin;
@@ -1510,7 +1510,7 @@ Driver<Platform> 类型正确 ⟹ 可编译且行为一致
 
 **示例**: Input模式的引脚不能调用set_high():
 
-```rust
+```rust,ignore
 let pin: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 // pin.set_high();  // 编译错误：Input模式没有实现OutputPin
 ```
@@ -1559,7 +1559,7 @@ let pin: PA0<Input<Floating>> = gpioa.pa0.into_floating_input();
 
 不同的HAL实现可能返回不同的错误类型:
 
-```rust
+```rust,ignore
 // 泛型代码需要处理多种错误
 fn use_i2c<I: I2c>(i2c: &mut I) -> Result<(), MyError> {
     i2c.write(addr, data).map_err(|_| MyError::I2c)?;
@@ -1592,7 +1592,7 @@ fn use_i2c<I: I2c>(i2c: &mut I) -> Result<(), MyError> {
 
 **反例 1: 共享可变状态**
 
-```rust
+```rust,ignore
 // 危险：多个驱动共享同一I2C总线而不加锁
 static I2C_BUS: Mutex<RefCell<Option<Twim>>> = Mutex::new(RefCell::new(None));
 
@@ -1601,7 +1601,7 @@ static I2C_BUS: Mutex<RefCell<Option<Twim>>> = Mutex::new(RefCell::new(None));
 
 **正确做法**:
 
-```rust
+```rust,ignore
 use embedded_hal_bus::i2c::RefCellDevice;
 
 let bus = RefCell::new(i2c);

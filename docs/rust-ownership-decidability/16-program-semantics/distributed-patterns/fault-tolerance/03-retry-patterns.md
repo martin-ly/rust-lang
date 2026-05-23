@@ -204,7 +204,7 @@ P_collision_jitter ≈ P_collision / jitter_factor
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::fmt::Debug;
 use std::future::Future;
 use std::pin::Pin;
@@ -487,7 +487,7 @@ pub enum RetryError<E> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::Hash;
 use tokio::sync::RwLock;
@@ -674,7 +674,7 @@ impl<S, C, T: Clone + Send + Sync + 'static, E: Clone + Send + Sync + 'static>
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 熔断感知重试
 pub struct CircuitBreakerRetry<S, CB> {
     strategy: S,

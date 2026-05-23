@@ -133,7 +133,7 @@ async-specialty/
 
 ### 选择合适的运行时
 
-```rust
+```rust,ignore
 // 1. 通用场景 - Tokio (最流行)
 [dependencies]
 tokio = { version = "1", features = ["full"] }
@@ -154,7 +154,7 @@ smol = "2"
 
 ### 基础惯用法
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 // 惯用法1: 顺序执行
@@ -243,7 +243,7 @@ trait Service<Request> {
 **协议解析状态机**:
 > 使用枚举和模式匹配实现
 
-```rust
+```rust,ignore
 enum ProtocolState {
     ReadingHeader { buf: BytesMut },
     ReadingBody { header: Header, remaining: usize },
@@ -255,7 +255,7 @@ enum ProtocolState {
 
 **[Embassy指南](./embedded/embassy-guide.md)**
 
-```rust
+```rust,ignore
 #[embassy_executor::main]
 async fn main(spawner: Spawner) {
     let p = embassy_stm32::init(Default::default());

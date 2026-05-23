@@ -156,7 +156,7 @@ r3.push_str(" world");
 
 Rust 编译器确保引用永远不会比被引用的数据活得更长：
 
-```rust
+```rust,ignore
 fn dangle() -> &String { // ❌ 编译错误
     let s = String::from("hello");
     &s

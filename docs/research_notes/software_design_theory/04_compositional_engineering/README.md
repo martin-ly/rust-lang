@@ -115,7 +115,7 @@ impl ConfigFactory for DefaultFactory {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // DTO：跨边界
 #[derive(Clone, serde::Serialize, serde::Deserialize)]
 pub struct OrderDto { pub id: u64, pub amount: u64 }

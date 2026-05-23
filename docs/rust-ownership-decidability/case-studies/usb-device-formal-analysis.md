@@ -225,7 +225,7 @@ $$
 ### 示例1: USB串口(CDC)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use usb_device::{bus::UsbBusAllocator, device::{UsbDevice, UsbDeviceBuilder, UsbVidPid}};
 use usb_device::class::cdc_acm::{CDCACMClass, Sender, Receiver};
 
@@ -270,7 +270,7 @@ fn usb_cdc_example() {
 ### 示例2: USB HID键盘
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use usb_device::class::hid::HIDClass;
 
 struct KeyboardReport {
@@ -321,7 +321,7 @@ fn usb_hid_keyboard() {
 ### 示例3: 自定义USB类
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use usb_device::class::UsbClass;
 use usb_device::endpoint::{EndpointType, EndpointAddress};
 

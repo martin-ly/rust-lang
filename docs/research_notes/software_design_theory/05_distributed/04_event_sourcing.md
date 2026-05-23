@@ -151,7 +151,7 @@ State(tₙ) = apply(apply(...apply(S₀, e₁), e₂)...eₙ)
 ## 4. Rust 实现示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 事件特质
 pub trait Event: Serialize + DeserializeOwned + Clone {
     type AggregateId;

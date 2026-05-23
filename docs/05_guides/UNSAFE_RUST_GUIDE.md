@@ -117,7 +117,7 @@ Rust 的 `unsafe` 关键字允许你执行以下五种操作：
 4. **访问 `union` 的字段**
 5. **使用 `asm!` 内联汇编** (Rust 1.90+)
 
-```rust
+```rust,ignore
 unsafe {
     // 在 unsafe 块中执行上述操作
 }
@@ -243,7 +243,7 @@ fn raw_pointer_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::os::raw::{c_char, c_int, c_void};
 use std::ffi::{CStr, CString};
 
@@ -588,7 +588,7 @@ unsafe impl<T: Sync> Sync for MyBox<T> {}
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // ❌ UB: 解引用空指针
 unsafe {
     let ptr: *const i32 = std::ptr::null();
@@ -614,7 +614,7 @@ unsafe {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // ❌ UB: 使用释放后的指针
 unsafe {
     let ptr: *const i32 = {
@@ -645,7 +645,7 @@ println!("{}", *my_box);
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // ❌ UB: 多线程无同步访问
 static mut COUNTER: i32 = 0;
 
@@ -673,7 +673,7 @@ COUNTER.fetch_add(1, Ordering::SeqCst);
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // ❌ UB: 违反类型对齐
 unsafe {
     let bytes: [u8; 8] = [0; 8];
@@ -799,7 +799,7 @@ unsafe {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // ❌ UB: 二次释放
 struct BadDrop {
     ptr: *mut u8,
@@ -852,7 +852,7 @@ impl Drop for SafeDrop {
 
 1. **封装 unsafe**: 将 `unsafe` 块封装在安全 API 内部
 
-   ```rust
+   ```rust,ignore
    // 安全的公开 API
    pub fn safe_api() -> Result<String, Error> {
        unsafe {
@@ -874,7 +874,7 @@ impl Drop for SafeDrop {
 
 3. **最小化范围**: 仅对必需的操作使用 `unsafe`
 
-   ```rust
+   ```rust,ignore
    // ❌ 不好的做法
    unsafe {
        let a = safe_op1();
@@ -1044,7 +1044,7 @@ let result = items.iter().try_for_each(|&n| {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 延迟初始化的 unsafe 全局缓冲区
@@ -1062,7 +1062,7 @@ pub fn get_buffer() -> Option<&'static UnsafeBuffer> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 安全的指针操作，支持提前终止

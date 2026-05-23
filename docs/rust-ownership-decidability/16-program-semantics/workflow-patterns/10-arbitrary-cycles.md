@@ -425,7 +425,7 @@ pub enum CycleError {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 /// 工作流状态
 #[derive(Clone, Debug, PartialEq, Eq, Hash)]
 pub enum WorkflowState {
@@ -596,7 +596,7 @@ impl StateMachineFlow {
 ### 带循环检测的实现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 
 /// 带循环检测的任意循环执行器

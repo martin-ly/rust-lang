@@ -135,7 +135,7 @@
 ### 3.2 Rust 实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, atomic::{AtomicBool, Ordering}};
 use std::time::{Duration, Instant};
 use tokio::time::{interval, timeout};
@@ -282,7 +282,7 @@ impl PhiAccrualFailureDetector {
 ### 4.1 超时设计原则
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 自适应超时
 struct AdaptiveTimeout {
     base_timeout: Duration,
@@ -381,7 +381,7 @@ impl TieredTimeout {
 ### 5.1 重启策略
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 监督者模式 (Supervisor Pattern)
 enum RestartStrategy {
     OneForOne,    // 一个子进程失败，只重启它
@@ -445,7 +445,7 @@ impl Supervisor {
 ### 5.2 检查点与恢复
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 检查点机制
 trait Checkpointable {
     type State: Serialize + DeserializeOwned;
@@ -505,7 +505,7 @@ impl<P: Checkpointable> CheckpointManager<P> {
 ### 6.2 舱壁隔离
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // Bulkhead 模式 - 资源隔离
 struct Bulkhead {
     name: String,

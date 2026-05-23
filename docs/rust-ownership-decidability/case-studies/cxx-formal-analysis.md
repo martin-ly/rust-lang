@@ -53,7 +53,7 @@ CXX提供:
 
 > #[cxx::bridge]定义共享接口。
 
-```rust
+```rust,ignore
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
@@ -91,7 +91,7 @@ mod ffi {
 
 > 单向所有权转移。
 
-```rust
+```rust,ignore
 // Rust -> C++
 let obj = ffi::create();  // UniquePtr<MyCppClass>
 // 自动delete当离开作用域
@@ -103,7 +103,7 @@ let obj = ffi::create();  // UniquePtr<MyCppClass>
 
 > 共享所有权，引用计数。
 
-```rust
+```rust,ignore
 let shared1 = ffi::create_shared();
 let shared2 = shared1.clone();  // 引用计数+1
 ```
@@ -118,7 +118,7 @@ let shared2 = shared1.clone();  // 引用计数+1
 
 > C++异常转换为Rust panic。
 
-```rust
+```rust,ignore
 // C++抛出 -> Rust panic (需catch_unwind)
 let result = catch_unwind(|| {
     ffi::may_throw();
@@ -133,7 +133,7 @@ let result = catch_unwind(|| {
 
 ### 反例 6.1 (原始指针逃逸)
 
-```rust
+```rust,ignore
 // 危险: 获取原始指针
 let ptr = obj.get();  // *const T
 // obj销毁后ptr悬垂

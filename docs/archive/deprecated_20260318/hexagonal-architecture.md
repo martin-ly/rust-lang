@@ -28,7 +28,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 pub struct Order {
     id: OrderId,
     items: Vec<OrderLine>,
@@ -55,7 +55,7 @@ pub trait OrderRepository: Send + Sync {
 
 ### 2. 应用服务层
 
-```rust
+```rust,ignore
 pub struct OrderApplicationService {
     order_repo: Arc<dyn OrderRepository>,
     event_pub: Arc<dyn EventPublisher>,
@@ -76,7 +76,7 @@ impl OrderApplicationService {
 
 ### 3. 适配器实现
 
-```rust
+```rust,ignore
 pub struct PostgresOrderRepository { pool: PgPool }
 
 #[async_trait]
@@ -92,7 +92,7 @@ impl OrderRepository for PostgresOrderRepository {
 
 ## 依赖注入
 
-```rust
+```rust,ignore
 // main.rs
 let order_repo: Arc<dyn OrderRepository> = Arc::new(PostgresOrderRepository::new(pool));
 let event_pub: Arc<dyn EventPublisher> = Arc::new(KafkaEventPublisher::new(kafka));

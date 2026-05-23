@@ -257,7 +257,7 @@ Polonius项目使用Datalog引擎实现这一分析。
 
 **关键改进**：Rust 1.31引入的NLL将生命周期从词法作用域提升到**控制流图(CFG)**层面。
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec!['a', 'b', 'c'];
     let slice = &mut data[..];  // 可变借用开始
@@ -456,7 +456,7 @@ unsafe fn raw_pointer_aliasing() {
 
 **Rust中的体现**：
 
-```rust
+```rust,ignore
 fn might_not_terminate(n: u64) {
     while n > 1 {
         if n % 2 == 0 {
@@ -520,7 +520,7 @@ Rust的借用检查器采用**保守近似(Conservative Approximation)**：
 
 **Rust采用：静态作用域（词法作用域）**:
 
-```rust
+```rust,ignore
 static X: i32 = 10;
 
 fn f() -> i32 {

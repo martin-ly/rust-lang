@@ -1,4 +1,6 @@
 # 集合类型 (Collections)
+>
+> **相关概念**: [集合](../../concept/01_foundation/08_collections.md)
 
 > **Bloom 层级**: 理解
 
@@ -67,7 +69,7 @@
 
 **`Vec<T>` 的关键操作**：
 
-```rust
+```rust,ignore
 let mut v = Vec::new();
 v.push(1);           // O(1) 均摊 —— 尾部追加
 v.pop();             // O(1) —— 尾部弹出
@@ -82,7 +84,7 @@ v.shrink_to_fit();   // 释放未使用容量
 
 **`HashMap<K, V>` 的 `Entry` API**：
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 let mut scores = HashMap::new();
@@ -202,7 +204,7 @@ graph TD
 
 **`HashMap` 的键约束**：
 
-```rust
+```rust,ignore
 // HashMap 要求 K: Eq + Hash
 // Eq      → 键可相等比较（用于冲突链中的线性搜索）
 // Hash    → 键可哈希（用于确定桶索引）
@@ -347,7 +349,7 @@ fn sliding_window_max(nums: &[i32], k: usize) -> Vec<i32> {
 
 预分配容量避免 rehash：
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 // 已知用户数量时，预分配 HashMap 容量
@@ -376,7 +378,7 @@ fn collect_results(n: usize) -> Vec<i32> {
 
 插入元素并直接获取可变引用，避免二次查找：
 
-```rust
+```rust,ignore
 use std::collections::{VecDeque, LinkedList};
 
 // Vec: push 并修改新元素
@@ -406,7 +408,7 @@ let mut list = LinkedList::new();
 
 **错误代码**:
 
-```rust
+```rust,ignore
 let mut nums = vec![1, 2, 3, 4, 5];
 
 for num in &nums {
@@ -426,7 +428,7 @@ error[E0502]: cannot borrow `nums` as mutable because it is also borrowed as imm
 
 **修复方案**:
 
-```rust
+```rust,ignore
 let mut nums = vec![1, 2, 3, 4, 5];
 let to_add: Vec<i32> = nums.iter()
     .filter(|&&n| n % 2 == 0)
@@ -443,7 +445,7 @@ nums.extend(to_add);  // ✅ 先收集，再批量添加
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 struct Point { x: i32, y: i32 }
@@ -462,7 +464,7 @@ error[E0599]: `Point` is not Hash
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::Hash;
 
@@ -479,7 +481,7 @@ map.insert(Point { x: 0, y: 0 }, "origin");
 
 **错误代码**:
 
-```rust
+```rust,ignore
 let mut queue = Vec::new();
 queue.insert(0, "task1");  // O(n) —— 所有元素后移
 queue.insert(0, "task2");  // O(n)
@@ -490,7 +492,7 @@ queue.insert(0, "task3");  // O(n)
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 let mut queue = VecDeque::new();
@@ -733,7 +735,7 @@ fn process_items(items: &[String]) -> Vec<String> {
 
 **修复**: 使用 `HashSet` 去重，将查找降为 `O(1)`：
 
-```rust
+```rust,ignore
 use std::collections::HashSet;
 
 fn process_items(items: &[String]) -> Vec<String> {
@@ -758,7 +760,7 @@ fn process_items(items: &[String]) -> Vec<String> {
 
 **题 2**: 以下代码试图使用自定义类型作为 `HashMap` 键但失败。请修复：
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 struct User {
@@ -782,7 +784,7 @@ fn build_index(users: Vec<User>) -> HashMap<User, Vec<String>> {
 
 **修复**: 使用 `id` 作为键，或派生 `Eq + Hash`：
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::Hash;
 

@@ -125,7 +125,7 @@ pub fn matrix_multiply(a: &[f32], b: &[f32], n: usize) -> Vec<f32> {
 
 **混合策略**：Python用于原型开发，Rust用于生产部署
 
-```rust
+```rust,ignore
 // 使用PyO3实现Python扩展
 use pyo3::prelude::*;
 
@@ -155,7 +155,7 @@ pyo3 = { version = "0.20", features = ["extension-module"] }
 numpy = "0.20"
 ```
 
-```rust
+```rust,ignore
 use numpy::{PyArray1, PyArray2, PyReadonlyArray2};
 use pyo3::prelude::*;
 
@@ -206,7 +206,7 @@ ndarray-rand = "0.14"
 
 **基础操作**
 
-```rust
+```rust,ignore
 use ndarray::{Array, Array2, ArrayView, Axis, s};
 use ndarray_rand::RandomExt;
 use ndarray_rand::rand_distr::Uniform;
@@ -236,7 +236,7 @@ fn main() {
 
 **高级操作**
 
-```rust
+```rust,ignore
 use ndarray::{concatenate, stack, Zip};
 
 fn advanced_operations() {
@@ -272,7 +272,7 @@ fn advanced_operations() {
 nalgebra = "0.32"
 ```
 
-```rust
+```rust,ignore
 use nalgebra::{DMatrix, DVector, Matrix3, Vector3, SVD};
 
 fn linear_algebra_demo() {
@@ -311,7 +311,7 @@ fn linear_algebra_demo() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use ndarray::{Array, ArrayD, IxDyn};
 
 // 动态维度张量
@@ -388,7 +388,7 @@ impl Tensor {
 cudarc = { version = "0.10", features = ["cuda-12000"] }
 ```
 
-```rust
+```rust,ignore
 use cudarc::driver::{CudaDevice, CudaSlice, LaunchAsync, LaunchConfig};
 use cudarc::nvrtc::compile_ptx;
 
@@ -479,7 +479,7 @@ candle-datasets = "0.3"
 
 **基础用法**
 
-```rust
+```rust,ignore
 use candle_core::{Device, Tensor, DType};
 use candle_nn::{Linear, Module, VarBuilder, VarMap, Optimizer, SGD};
 
@@ -510,7 +510,7 @@ fn candle_demo() -> anyhow::Result<()> {
 
 **BERT推理示例**
 
-```rust
+```rust,ignore
 use candle_transformers::models::bert::{BertModel, Config, DTYPE};
 use candle_nn::VarBuilder;
 use tokenizers::Tokenizer;
@@ -552,7 +552,7 @@ burn = { version = "0.11", features = ["wgpu", "train"] }
 
 **训练示例**
 
-```rust
+```rust,ignore
 use burn::module::Module;
 use burn::nn::{Linear, ReLU, loss::MSELoss};
 use burn::optim::{Adam, AdamConfig};
@@ -617,7 +617,7 @@ dfdx使用Rust类型系统实现编译时形状检查：
 dfdx = "0.13"
 ```
 
-```rust
+```rust,ignore
 use dfdx::prelude::*;
 
 fn type_checked_nn() {
@@ -656,7 +656,7 @@ tch-rs提供Rust绑定的PyTorch C++ API：
 tch = "0.14"
 ```
 
-```rust
+```rust,ignore
 use tch::{nn, Device, Tensor, nn::Module};
 
 fn torch_example() {
@@ -712,7 +712,7 @@ linfa-preprocessing = "0.7"
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use linfa::prelude::*;
 use linfa_clustering::{KMeans, GaussianMixtureModel};
 use ndarray::{Array1, Array2};
@@ -746,7 +746,7 @@ fn clustering_examples() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use linfa_trees::DecisionTree;
 use linfa_linear::FittedLogisticRegression;
 use linfa::metrics::multiclass::ConfusionMatrix;
@@ -779,7 +779,7 @@ fn classification_examples() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use linfa_linear::{LinearRegression, RidgeRegression, Lasso};
 
 fn regression_examples() {
@@ -814,7 +814,7 @@ fn regression_examples() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use candle_nn::{Linear, Module, ReLU, Dropout, VarBuilder, BatchNorm};
 
 pub struct FeedForwardNetwork {
@@ -888,7 +888,7 @@ impl FeedForwardNetwork {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use candle_nn::{Conv2d, Conv2dConfig, MaxPool2d, Module};
 
 pub struct ConvNet {
@@ -963,7 +963,7 @@ impl ConvNet {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 pub struct LstmCell {
     input_size: usize,
     hidden_size: usize,
@@ -1049,7 +1049,7 @@ impl Lstm {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 pub struct MultiHeadAttention {
     num_heads: usize,
     d_model: usize,
@@ -1149,7 +1149,7 @@ impl TransformerBlock {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use ort::{Environment, Session, Value};
 
 fn onnx_inference() -> ort::Result<()> {
@@ -1186,7 +1186,7 @@ fn onnx_inference() -> ort::Result<()> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tflite::interpreter::{Interpreter, InterpreterBuilder};
 use tflite::ops::builtin::BuiltinOpResolver;
 use tflite::model::FlatBufferModel;
@@ -1224,7 +1224,7 @@ fn tflite_inference() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 针对嵌入式设备的优化推理
 use alloc::vec::Vec;
 use microml::prelude::*;
@@ -1279,7 +1279,7 @@ fn relu(x: f32) -> f32 {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use tokenizers::Tokenizer;
 use tokenizers::models::bpe::BPE;
 use tokenizers::pre_tokenizers::whitespace::Whitespace;
@@ -1315,7 +1315,7 @@ fn tokenization_examples() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use candle_transformers::models::bert::{BertModel, Config, DTYPE};
 use candle_nn::VarBuilder;
 use tokenizers::Tokenizer;
@@ -1385,7 +1385,7 @@ impl BertEmbedder {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use candle_transformers::models::llama::{Llama, Config as LlamaConfig};
 use candle_core::{Tensor, DType, Device};
 
@@ -1506,7 +1506,7 @@ impl TextGenerator {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use image::{ImageBuffer, Rgb, DynamicImage, GenericImageView};
 use ndarray::{Array, Array3};
 
@@ -1593,7 +1593,7 @@ impl ImageProcessor {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use candle_core::{Tensor, DType, Device};
 use candle_nn::VarBuilder;
 
@@ -1747,7 +1747,7 @@ impl ObjectDetector {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use candle_core::{Tensor, DType, Device};
 use candle_nn::{Module, VarBuilder, Linear, Conv2d, Conv2dConfig, MaxPool2d};
 
@@ -1855,7 +1855,7 @@ image-classifier/
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // src/data.rs
 use candle_core::{Device, Result, Tensor};
 use image::{DynamicImage, GenericImageView};
@@ -1990,7 +1990,7 @@ impl Iterator for DataLoader {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // src/model.rs
 use candle_core::{Result, Tensor};
 use candle_nn::{BatchNorm, Conv2d, Conv2dConfig, Linear, Module, VarBuilder};
@@ -2092,7 +2092,7 @@ impl Module for ConvClassifier {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // src/train.rs
 use candle_core::{Device, Result, Tensor, DType};
 use candle_nn::{loss::cross_entropy, Module, Optimizer, VarBuilder, VarMap, SGD};
@@ -2201,7 +2201,7 @@ impl Trainer {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // src/inference.rs
 use candle_core::{Device, Result, Tensor};
 use candle_nn::Module;
@@ -2312,7 +2312,7 @@ impl OptimizedInference {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // src/main.rs
 mod data;
 mod model;
@@ -2380,7 +2380,7 @@ fn load_model(path: &str, num_classes: usize, device: &Device) -> anyhow::Result
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use ndarray::{Array, Array2, Axis};
 
@@ -2426,7 +2426,7 @@ pub fn configure_thread_pool() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::simd::*;
 
 // 使用 portable-simd 进行向量化计算
@@ -2489,7 +2489,7 @@ pub fn simd_dot_product(a: &[f32], b: &[f32]) -> f32 {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use ndarray::{Array, Array2, Array3, Axis, ShapeBuilder};
 
 // 优化内存布局以提高缓存命中率

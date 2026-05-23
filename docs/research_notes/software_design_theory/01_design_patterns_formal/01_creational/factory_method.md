@@ -342,7 +342,7 @@ ownership_model T2
 
 **错误**：`match` 未穷尽或返回 `Option` 却不处理 `None`。
 
-```rust
+```rust,ignore
 fn create_product(t: ProductType) -> Box<dyn Product> {
     match t {
         ProductType::A => Box::new(ConcreteProductA),

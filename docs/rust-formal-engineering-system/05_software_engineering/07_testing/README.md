@@ -85,7 +85,7 @@ fn some_operation() -> Result<i32, String> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_crate::add;
 
@@ -99,7 +99,7 @@ fn test_add_integration() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 加法函数
 ///
 /// # Examples

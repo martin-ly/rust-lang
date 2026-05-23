@@ -68,7 +68,7 @@ Segment = 倒排索引 + 存储字段
 
 > commit创建新的搜索可见点。
 
-```rust
+```rust,ignore
 let mut index_writer = index.writer(50_000_000)?;
 index_writer.add_document(doc)?;
 index_writer.commit()?;  // 新文档可搜索
@@ -80,7 +80,7 @@ index_writer.commit()?;  // 新文档可搜索
 
 > 未提交数据可丢弃。
 
-```rust
+```rust,ignore
 index_writer.rollback()?;  // 丢弃未提交文档
 ```
 
@@ -94,7 +94,7 @@ index_writer.rollback()?;  // 丢弃未提交文档
 
 > Reader基于提交点快照搜索。
 
-```rust
+```rust,ignore
 let reader = index.reader()?;
 let searcher = reader.searcher();  // 当前快照
 // 后续commit不影响此searcher
@@ -110,7 +110,7 @@ let searcher = reader.searcher();  // 当前快照
 
 > 小段自动合并成大段。
 
-```rust
+```rust,ignore
 let mut index_writer = index.writer_with_num_threads(1, 50_000_000)?;
 index_writer.set_merge_policy(Box::new(LogMergePolicy::default()));
 ```
@@ -123,7 +123,7 @@ index_writer.set_merge_policy(Box::new(LogMergePolicy::default()));
 
 ### 反例 6.1 (频繁提交)
 
-```rust
+```rust,ignore
 // 每次添加都提交，性能极差
 for doc in docs {
     index_writer.add_document(doc)?;
@@ -139,7 +139,7 @@ index_writer.commit()?;
 
 ### 反例 6.2 (写后读)
 
-```rust
+```rust,ignore
 index_writer.add_document(doc)?;
 // 错误: 未提交不可搜索
 let results = searcher.search(&query, &TopDocs::with_limit(10))?;

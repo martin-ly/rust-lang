@@ -32,6 +32,7 @@
   - [五、常见陷阱与最佳实践](#五常见陷阱与最佳实践)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -42,6 +43,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 FFI 的基本模型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 Rust 通过 FFI 与外部代码交互时，安全保证在边界处**显式截断**：
@@ -74,6 +76,7 @@ graph LR
 ---
 
 ### 1.2 ABI 与调用约定
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -104,6 +107,7 @@ Rust 支持的 ABI:
 ---
 
 ### 1.3 类型映射与布局兼容
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | Rust 类型 | C 类型 | 布局保证 | 注意 |
@@ -136,6 +140,7 @@ Rust 支持的 ABI:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 extern 块的完整语法
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust,ignore
@@ -175,6 +180,7 @@ unsafe {
 ---
 
 ### 2.2 不透明类型与封装
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust,ignore
@@ -220,6 +226,7 @@ impl Drop for SafeConnection {
 ---
 
 ### 2.3 回调与闭包传递
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust,ignore
@@ -304,6 +311,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -330,6 +338,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -543,4 +552,3 @@ graph TD
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

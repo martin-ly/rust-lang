@@ -163,7 +163,7 @@ $$
 \text{index}(s)}{\text{target}: \text{transmit}(i, \mathcal{E}(v))} \quad \frac{\text{receive}(i, b) \quad s = \mathcal{S}[i]}{\text{host}: \mathcal{R}(s, b)}
 $$
 
-```rust
+```rust,ignore
 // 目标端: 极简操作
 defmt::info!("x = {=u8}", x);
 // 传输: [index: u16, value: u8]
@@ -431,7 +431,7 @@ $$
 
 运行时过滤器实现为简单的整数比较:
 
-```rust
+```rust,ignore
 fn is_enabled(level: Level) -> bool {
     level as u8 >= CURRENT_LEVEL.load(Ordering::Relaxed)
 }
@@ -690,7 +690,7 @@ $$
 
 分析日志宏展开:
 
-```rust
+```rust,ignore
 defmt::info!("x = {}", x);
 // 展开为:
 {
@@ -723,7 +723,7 @@ defmt::info!("x = {}", x);
 
 对于动态大小类型（如`&str`）:
 
-```rust
+```rust,ignore
 defmt::info!("msg = {}", s);
 // 展开包含:
 buf[offset] = s.len() as u8;  // LEB128长度编码
@@ -760,7 +760,7 @@ $$
 
 主机端从ELF文件读取格式字符串，使用与 `core::fmt` 相同的格式化逻辑:
 
-```rust
+```rust,ignore
 // 主机端解码器伪代码
 fn decode_log(frame: &Frame) -> String {
     let format_string = lookup_string(frame.string_index);
@@ -809,7 +809,7 @@ fn decode_log(frame: &Frame) -> String {
 
 defmt通过宏展开静态计算所需缓冲区大小:
 
-```rust
+```rust,ignore
 // 宏展开时计算
 const MAX_SIZE: usize = {
     let mut size = 2;  // 字符串索引
@@ -830,7 +830,7 @@ let mut buf = [0u8; MAX_SIZE];
 
 对于嵌套类型（实现 `Format` trait的结构体），展开为递归编码:
 
-```rust
+```rust,ignore
 // 结构体编码展开
 impl Format for MyStruct {
     fn format(&self, f: &mut Formatter) {
@@ -899,7 +899,7 @@ $$
 
 `Format` trait 定义类型的可格式化性:
 
-```rust
+```rust,ignore
 trait Format {
     fn format(&self, f: &mut Formatter);
 }
@@ -921,7 +921,7 @@ $$
 
 **派生宏生成的实现**:
 
-```rust
+```rust,ignore
 #[derive(Format)]
 struct Point { x: u32, y: u32 }
 
@@ -1001,7 +1001,7 @@ $$
 
 Rust类型系统通过宏展开强制执行类型匹配:
 
-```rust
+```rust,ignore
 defmt::info!("x = {=u8}", x);
 // 宏解析格式说明符 {=u8}
 // 生成代码要求 x: u8
@@ -1009,13 +1009,13 @@ defmt::info!("x = {=u8}", x);
 
 如果类型不匹配:
 
-```rust
+```rust,ignore
 defmt::info!("x = {=u8}", 42u32);  // 编译错误!
 ```
 
 宏展开会生成类型检查代码:
 
-```rust
+```rust,ignore
 {
     let _type_check: u8 = x;  // 类型约束
     // ...
@@ -1026,7 +1026,7 @@ defmt::info!("x = {=u8}", 42u32);  // 编译错误!
 
 对于派生 `Format` 的自定义类型，类型系统确保递归一致性:
 
-```rust
+```rust,ignore
 #[derive(Format)]
 struct Wrapper<T>(T);
 
@@ -1049,13 +1049,13 @@ struct Wrapper<T>(T);
 
 对于引用参数:
 
-```rust
+```rust,ignore
 defmt::info!("msg = {}", &s);  // s: &str
 ```
 
 宏展开保持生命周期约束:
 
-```rust
+```rust,ignore
 {
     let ref_: &str = &s;  // 生命周期检查
     ref_.format(f);  // Format for &str 使用借用
@@ -1064,7 +1064,7 @@ defmt::info!("msg = {}", &s);  // s: &str
 
 对于临时值:
 
-```rust
+```rust,ignore
 defmt::info!("x = {}", get_value());  // 值被移动或复制
 ```
 
@@ -1072,7 +1072,7 @@ defmt::info!("x = {}", get_value());  // 值被移动或复制
 
 对于非`'static`字符串:
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 defmt::info!("msg = {}", s.as_str());
 // s 必须存活至此语句结束（显然成立）
@@ -1099,7 +1099,7 @@ defmt::info!("msg = {}", s.as_str());
 
 defmt的`no_std`兼容性和`no_alloc`保证:
 
-```rust
+```rust,ignore
 // Cargo.toml
 defmt = "0.3"
 // 默认依赖: 无 alloc
@@ -1117,7 +1117,7 @@ pub struct Encoder {
 
 对于大结构体，使用迭代编码:
 
-```rust
+```rust,ignore
 impl Format for LargeStruct {
     fn format(&self, f: &mut Formatter) {
         // 逐字段编码，每个字段使用固定大小缓冲区
@@ -1180,7 +1180,7 @@ macro_rules! defmt_info {
 
 由于缓冲区大小精确匹配最大编码大小，且编码函数严格执行边界检查:
 
-```rust
+```rust,ignore
 fn write_bytes(&mut self, bytes: &[u8]) {
     assert!(self.pos + bytes.len() <= self.buf.len());
     self.buf[self.pos..self.pos + bytes.len()].copy_from_slice(bytes);
@@ -1206,7 +1206,7 @@ fn write_bytes(&mut self, bytes: &[u8]) {
 
 在多核心或中断场景:
 
-```rust
+```rust,ignore
 // defmt使用原子操作保护全局状态
 static mut ENCODER: Encoder = Encoder::new();
 
@@ -1223,7 +1223,7 @@ pub fn write(bytes: &[u8]) {
 
 关键区实现（典型嵌入式）:
 
-```rust
+```rust,ignore
 fn critical_section<F, R>(f: F) -> R
 where F: FnOnce(CriticalSection) -> R {
     let primask = cortex_m::register::primask::read();
@@ -1244,7 +1244,7 @@ where F: FnOnce(CriticalSection) -> R {
 
 对于无锁实现（某些平台），使用原子指针交换:
 
-```rust
+```rust,ignore
 static BUFFER: AtomicPtr<Buffer> = AtomicPtr::new(...);
 ```
 
@@ -1343,7 +1343,7 @@ $$
 
 具体上界计算:
 
-```rust
+```rust,ignore
 // 宏展开时计算
 const MAX_STACK: usize = {
     size_of::<Encoder>() +  // 编码器状态
@@ -1557,7 +1557,7 @@ $$
 
 浮点数的二进制传输可能导致精度误解:
 
-```rust
+```rust,ignore
 let x: f32 = 0.1;
 defmt::info!("x = {}", x);
 // 主机解码显示: 0.10000000149011612
@@ -1575,7 +1575,7 @@ $$
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 使用显示精度
 let x: f32 = 0.1;
 defmt::info!("x = {=f32:.4}", x);  // 显示4位小数
@@ -1584,7 +1584,7 @@ defmt::info!("x = {=f32:.4}", x);  // 显示4位小数
 
 或理解浮点语义，使用定点数:
 
-```rust
+```rust,ignore
 // 使用定点数表示货币等
 let cents: i32 = 10;  // 0.10美元
 defmt::info!("amount = {}.{:02}", cents / 100, cents % 100);
@@ -1598,7 +1598,7 @@ defmt::info!("amount = {}.{:02}", cents / 100, cents % 100);
 
 记录大型结构体可能产生意外的大传输量:
 
-```rust
+```rust,ignore
 #[derive(Format)]
 struct SensorData {
     readings: [f32; 1024],  // 4KB数据
@@ -1627,7 +1627,7 @@ $$
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 1. 只记录摘要
 impl SensorData {
     fn summary(&self) -> impl Format {
@@ -1661,7 +1661,7 @@ for chunk in data.readings.chunks(16) {
 
 递归结构可能导致栈溢出:
 
-```rust
+```rust,ignore
 #[derive(Format)]
 struct Node {
     value: u32,
@@ -1690,7 +1690,7 @@ defmt::info!("tree = {}", tree);  // 可能栈溢出
 
 派生宏生成的代码:
 
-```rust
+```rust,ignore
 impl Format for Node {
     fn format(&self, f: &mut Formatter) {
         self.value.format(f);
@@ -1703,7 +1703,7 @@ impl Format for Node {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 手动实现，限制深度
 impl Format for Node {
     fn format(&self, f: &mut Formatter) {
@@ -1730,7 +1730,7 @@ impl Node {
 
 或使用迭代方式:
 
-```rust
+```rust,ignore
 // 使用显式栈
 fn format_iter(&self, f: &mut Formatter) {
     // 实现省略
@@ -1748,7 +1748,7 @@ fn format_iter(&self, f: &mut Formatter) {
 
 **级别选择策略**:
 
-```rust
+```rust,ignore
 // ERROR: 系统无法继续运行
 if sensor_init_failed {
     defmt::error!("sensor init failed: {:?}", err);
@@ -1791,7 +1791,7 @@ rustflags = [
 
 **使用结构体记录相关数据**:
 
-```rust
+```rust,ignore
 #[derive(Format)]
 struct Event {
     timestamp: u64,
@@ -1836,7 +1836,7 @@ probe-rs run --chip nRF52840 target/thumbv7em-none-eabihf/release/app
 
 **自定义日志输出**:
 
-```rust
+```rust,ignore
 // 自定义传输后端
 use defmt::Decoder;
 
@@ -1853,7 +1853,7 @@ fn main() {
 
 **性能分析**:
 
-```rust
+```rust,ignore
 // 使用timestamp进行性能分析
 let start = get_cycle_count();
 operation();

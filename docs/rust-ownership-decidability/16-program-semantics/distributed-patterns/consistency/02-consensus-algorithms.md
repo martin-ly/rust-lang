@@ -170,7 +170,7 @@ Proposer           Acceptor
 ### 3.3 Rust 实现框架
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Paxos 消息类型
 #[derive(Clone, Debug)]
 enum PaxosMessage {
@@ -328,7 +328,7 @@ Leader 完备性 (Leader Completeness):
 ### 4.4 Rust Raft 实现
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // Raft 状态
 enum NodeState {
     Follower {

@@ -64,7 +64,7 @@ name = "no-std-demo"
 
 **src/main.rs:**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -105,7 +105,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 在 no_std 环境中，某些标准功能需要手动实现：
 
-```rust
+```rust,ignore
 #![feature(lang_items)]
 #![no_std]
 
@@ -261,7 +261,7 @@ SECTIONS
 
 **src/main.rs:**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -309,7 +309,7 @@ fn main() -> ! {
 
 实现自定义 HAL：
 
-```rust
+```rust,ignore
 #![no_std]
 
 use embedded_hal::digital::v2::{InputPin, OutputPin};
@@ -417,7 +417,7 @@ impl OutputPin for Pin<Output> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -467,7 +467,7 @@ fn main() -> ! {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -532,7 +532,7 @@ pub extern "C" fn rust_main() -> ! {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// ARMv8-A MMU 配置
 pub struct MMU;
 
@@ -624,7 +624,7 @@ pub unsafe fn setup_page_table() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 #![feature(allocator_api)]
 #![no_std]
 
@@ -729,7 +729,7 @@ fn alloc_error_handler(layout: Layout) -> ! {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use core::alloc::{GlobalAlloc, Layout};
 use core::cell::UnsafeCell;
 
@@ -896,7 +896,7 @@ unsafe impl GlobalAlloc for BuddyAllocator {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 #![no_std]
 
 use core::panic::PanicInfo;
@@ -960,7 +960,7 @@ fn print_backtrace() {}
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use cortex_m_rt::{exception, ExceptionFrame};
 
 #[exception]

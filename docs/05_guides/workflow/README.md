@@ -39,7 +39,7 @@
 
 ### array_windows 在 CI/CD 日志分析中的应用
 
-```rust
+```rust,ignore
 /// 使用 array_windows 分析 CI 日志序列
 fn detect_failure_pattern(logs: &[LogEntry]) -> Vec<usize> {
     logs.array_windows::<3>()
@@ -57,7 +57,7 @@ fn detect_failure_pattern(logs: &[LogEntry]) -> Vec<usize> {
 
 ### LazyLock 在工作流配置中的应用
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局工作流配置（延迟加载）

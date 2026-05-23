@@ -201,7 +201,7 @@ Rust 的 `&mut T` 和 `&T` 会生成 LLVM 的 `noalias` 属性：
 
 ### 5.1 避免别名冲突
 
-```rust
+```rust,ignore
 // ✅ 好的做法：明确所有权转移
 fn process(data: &mut [u8]) {
     let ptr = data.as_mut_ptr();

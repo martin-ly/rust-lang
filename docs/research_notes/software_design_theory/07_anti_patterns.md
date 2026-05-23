@@ -118,7 +118,7 @@
 
 **代码示例：使用已移动值**:
 
-```rust
+```rust,ignore
 // 错误：s 已移动至 s2，不能再使用
 let s = String::from("hello");
 let s2 = s;
@@ -154,7 +154,7 @@ a.borrow_mut().next = Some(b.clone());  // 环：a → b → a
 
 **代码示例：迭代中修改集合**:
 
-```rust
+```rust,ignore
 // 错误：for 循环持有 &mut v，与 v.push 冲突
 let mut v = vec![1, 2, 3];
 for x in &mut v {
@@ -191,7 +191,7 @@ fn process(data: &Vec<String>) -> Vec<String> {
 
 **代码示例：过度泛型**:
 
-```rust
+```rust,ignore
 // 反模式：三层泛型，调用处类型推断困难，编译慢
 fn process<A, B, C, F, G>(a: A, b: B, f: F, g: G) -> C
 where
@@ -270,7 +270,7 @@ where
 
 **反模式**：`Rc<RefCell<T>>` 跨线程。
 
-```rust
+```rust,ignore
 // 错误：Rc 非 Send
 let data = Rc::new(RefCell::new(0));
 thread::spawn(move || {
@@ -280,7 +280,7 @@ thread::spawn(move || {
 
 **正确**：`Arc<Mutex<T>>`。
 
-```rust
+```rust,ignore
 let data = Arc::new(Mutex::new(0));
 let data_clone = Arc::clone(&data);
 thread::spawn(move || {
@@ -296,7 +296,7 @@ thread::spawn(move || {
 
 **正确**：先收集再修改。
 
-```rust
+```rust,ignore
 let to_add: Vec<_> = v.iter().filter(|x| x > 0).cloned().collect();
 v.extend(to_add);
 ```
@@ -309,7 +309,7 @@ v.extend(to_add);
 
 **正确**：用 Factory Method。
 
-```rust
+```rust,ignore
 trait Creator {
     fn create(&self) -> Box<dyn Button>;
 }
@@ -323,7 +323,7 @@ trait Creator {
 
 **正确**：直接创建。
 
-```rust
+```rust,ignore
 let item = Item::new();  // 无需缓存
 ```
 
@@ -335,7 +335,7 @@ let item = Item::new();  // 无需缓存
 
 **正确**：`?` 传播或 `match` 处理。
 
-```rust
+```rust,ignore
 let x = result?;
 // 或
 let x = match result {

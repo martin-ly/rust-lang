@@ -161,7 +161,7 @@
 ### 3.1 连接所有权设计
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::RwLock;
 use tokio::net::TcpStream;
@@ -216,7 +216,7 @@ pub enum ConnectionState {
 ### 3.2 连接池共享所有权
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 连接池 - 使用Arc实现共享所有权
 pub struct ConnectionPool {
     // Arc<RwLock<>> 允许多读者或单写者
@@ -289,7 +289,7 @@ impl ConnectionPool {
 ### 3.3 请求处理生命周期
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 /// 请求处理器
 pub struct RequestHandler {
     // 共享状态使用Arc
@@ -359,7 +359,7 @@ impl RequestHandler {
 ### 4.1 缓冲区池
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 对象池模式 - 复用缓冲区
 pub struct BufferPool {
     // 使用crossbeam的MPMC队列实现无锁池
@@ -428,7 +428,7 @@ fn handle_request(pool: &BufferPool) {
 ### 4.2 Arena分配器
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 每请求Arena分配器
 pub struct RequestArena {
     bump: bumpalo::Bump,
@@ -479,7 +479,7 @@ async fn process_request(mut req: Request) -> Response {
 ### 5.1 异步运行时配置
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// Tokio运行时优化配置
 pub fn create_runtime() -> Runtime {
     tokio::runtime::Builder::new_multi_thread()
@@ -536,7 +536,7 @@ pub async fn send_file(
 ### 6.1 CPU优化
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 1. 缓存行对齐
 #[repr(align(64))]
 struct PaddedCounter {

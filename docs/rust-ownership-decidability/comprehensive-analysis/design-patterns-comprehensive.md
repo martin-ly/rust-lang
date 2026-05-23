@@ -94,7 +94,7 @@ mindmap
 
 **解决方案**: 使用`Into` trait进行类型转换
 
-```rust
+```rust,ignore
 // 定义
 pub trait Into<T>: Sized {
     fn into(self) -> T;
@@ -138,7 +138,7 @@ $$
 
 **变体1: 消耗型Builder (所有权严格)**:
 
-```rust
+```rust,ignore
 pub struct HttpRequestBuilder {
     url: Option<String>,
     method: Option<Method>,
@@ -182,7 +182,7 @@ let request = HttpRequestBuilder::new()
 
 **变体2: 类型状态Builder (编译时验证)**:
 
-```rust
+```rust,ignore
 // 使用类型状态确保正确构建顺序
 pub struct HttpRequestBuilder<State> {
     url: State::Url,
@@ -251,7 +251,7 @@ let request = HttpRequestBuilder::new()
 
 **解决方案**: 元组结构体包装
 
-```rust
+```rust,ignore
 // 基本Newtype
 pub struct UserId(u64);
 pub struct OrderId(u64);
@@ -281,7 +281,7 @@ $$
 
 **问题**: 如何在保持封装的同时提供透明访问？
 
-```rust
+```rust,ignore
 pub struct SmartBuffer {
     inner: Vec<u8>,
     modified: bool,
@@ -317,7 +317,7 @@ buf.extend_from_slice(b"data"); // 通过DerefMut，modified = true
 
 **问题**: 如何在编译时确保状态转换正确？
 
-```rust
+```rust,ignore
 // TCP连接状态机
 pub struct TcpConnection<State> {
     socket: TcpStream,

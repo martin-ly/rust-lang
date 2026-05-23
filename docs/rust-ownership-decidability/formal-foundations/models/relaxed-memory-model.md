@@ -166,7 +166,7 @@ A happens-before D
 
 **Release-Acquire 同步**：
 
-```rust
+```rust,ignore
 // Thread 1: 发布数据
 DATA.store(42, Ordering::Relaxed);
 READY.store(true, Ordering::Release);  // Release 屏障
@@ -209,7 +209,7 @@ Rust Ordering ≈ C++ memory_order
 ### 3.2 Atomic 类型
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, AtomicUsize, AtomicPtr};
 
 // 标准原子类型
@@ -427,7 +427,7 @@ Protocol(γ) ::=
 
 在原始 Arc 实现中发现了一个数据竞争 bug：
 
-```rust
+```rust,ignore
 // 简化的问题代码
 impl<T> Arc<T> {
     fn clone(&self) -> Arc<T> {
@@ -457,7 +457,7 @@ impl<T> Arc<T> {
 
 **修复**：
 
-```rust
+```rust,ignore
 fn clone(&self) -> Arc<T> {
     // 使用 Acquire 确保看到之前的 Release
     let old = self.strong.fetch_add(1, Ordering::Acquire);

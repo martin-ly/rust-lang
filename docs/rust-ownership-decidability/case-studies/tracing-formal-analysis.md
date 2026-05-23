@@ -101,7 +101,7 @@ $$
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 let span = tracing::info_span!("request", request_id = %id);
 let _enter = span.enter();
 ```
@@ -120,7 +120,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 impl Drop for Entered<'_> {
     fn drop(&mut self) {
         self.span.exit();
@@ -148,7 +148,7 @@ impl Drop for Entered<'_> {
 
 **证明**:
 
-```rust
+```rust,ignore
 async fn parent() {
     let span = tracing::info_span!("parent");
     let _enter = span.enter();
@@ -184,7 +184,7 @@ async fn child() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 tracing::info!(
     target: "database",
     query = %sql,
@@ -206,7 +206,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 // 编译错误: 格式不匹配
 tracing::info!(value = %non_display_value);  // 如果non_display_value没有Display
 
@@ -228,7 +228,7 @@ tracing::info!(value = ?debug_value);  // 使用Debug格式
 ### 定义 3.2 (Value trait)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 trait Value: 'static {
     fn record(&self, key: &Field, visitor: &mut dyn Visit);
 }
@@ -241,7 +241,7 @@ trait Value: 'static {
 
 **实现**:
 
-```rust
+```rust,ignore
 impl Value for i64 {
     fn record(&self, key: &Field, visitor: &mut dyn Visit) {
         visitor.record_i64(key, *self);
@@ -268,7 +268,7 @@ impl Value for i64 {
 ### 定义 4.1 (Layer trait)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 trait Layer<S: Subscriber> {
     fn on_new_span(&self, attrs: &Attributes, id: &Id, ctx: Context<S>);
     fn on_event(&self, event: &Event, ctx: Context<S>);
@@ -285,7 +285,7 @@ trait Layer<S: Subscriber> {
 
 **证明**:
 
-```rust
+```rust,ignore
 let subscriber = Registry::default()
     .with(fmt::layer())  // 格式化输出
     .with(jaeger_layer)   // Jaeger导出
@@ -312,7 +312,7 @@ Filter ──► FmtLayer ──► JaegerLayer
 ### 定义 4.2 (Filter)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let filter = EnvFilter::new("info,database=debug")
     .add_directive("hyper=warn".parse()?);
 ```
@@ -324,7 +324,7 @@ let filter = EnvFilter::new("info,database=debug")
 
 **证明**:
 
-```rust
+```rust,ignore
 tracing::info!("message");  // 级别是常量
 ```
 
@@ -351,7 +351,7 @@ tracing::info!("message");  // 级别是常量
 
 **证明**:
 
-```rust
+```rust,ignore
 async fn operation() {
     // work
 }
@@ -361,7 +361,7 @@ let fut = operation().instrument(tracing::info_span!("op"));
 
 **机制**:
 
-```rust
+```rust,ignore
 impl<T: Future> Future for Instrumented<T> {
     type Output = T::Output;
 
@@ -385,7 +385,7 @@ impl<T: Future> Future for Instrumented<T> {
 ### 定义 5.2 (当前Span存储)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 thread_local! {
     static CURRENT_SPAN: RefCell<Option<Span>> = RefCell::new(None);
 }
@@ -421,14 +421,14 @@ thread_local! {
 
 **证明**:
 
-```rust
+```rust,ignore
 // 如果静态最大级别是WARN
 tracing::info!("message");  // 编译为空
 ```
 
 宏展开:
 
-```rust
+```rust,ignore
 if Level::INFO <= STATIC_MAX_LEVEL {
     // emit event
 }
@@ -448,7 +448,7 @@ if Level::INFO <= STATIC_MAX_LEVEL {
 ### 定义 6.1 (采样)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 let sampler = Sampler::new(0.01);  // 1%采样
 ```
 
@@ -459,7 +459,7 @@ let sampler = Sampler::new(0.01);  // 1%采样
 
 **实现**:
 
-```rust
+```rust,ignore
 fn should_sample(trace_id: u64, rate: f64) -> bool {
     let hash = hash(trace_id);
     (hash as f64 / u64::MAX as f64) < rate
@@ -484,7 +484,7 @@ fn should_sample(trace_id: u64, rate: f64) -> bool {
 
 **实现**:
 
-```rust
+```rust,ignore
 use tracing_opentelemetry::OpenTelemetryLayer;
 use opentelemetry::sdk::trace::Tracer;
 
@@ -514,7 +514,7 @@ tracing_subscriber::registry()
 ### 反例 8.1 (昂贵计算在字段中)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 不好: 即使日志禁用也执行计算
 tracing::info!(result = expensive_computation());
 
@@ -530,7 +530,7 @@ if tracing::enabled!(Level::INFO) {
 ### 反例 8.2 (忘记enter)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let span = tracing::info_span!("operation");
 // 错误: 没有enter，span不活跃
 operation().await;
@@ -543,7 +543,7 @@ operation().await;
 ### 反例 8.3 (跨await持有enter guard)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 async fn bad() {
     let span = tracing::info_span!("op");
     let _enter = span.enter();

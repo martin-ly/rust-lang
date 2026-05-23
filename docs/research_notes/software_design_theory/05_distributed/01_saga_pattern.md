@@ -155,7 +155,7 @@ Saga 满足弱原子性：
 ## 4. Rust 实现示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Saga 执行器核心接口
 pub trait SagaStep {
     type State;

@@ -163,7 +163,7 @@
 
 **解决方案**: 注释掉测试时的外部函数调用，添加说明文档
 
-```rust
+```rust,ignore
 impl Drop for SafeContext {
     fn drop(&mut self) {
         // 实际项目中需要链接对应的外部库

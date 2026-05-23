@@ -314,7 +314,7 @@ $$
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use futures::stream::FuturesUnordered;
 use futures::StreamExt;
 
@@ -377,7 +377,7 @@ impl<T, R> StructuredPartialJoin<T, R> {
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use tokio::task::JoinSet;
 
 /// 使用 JoinSet 实现结构化部分合并
@@ -421,7 +421,7 @@ where
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::time::Duration;
 
@@ -658,7 +658,7 @@ $$
 
 **场景**: 从多个数据源读取同一数据，需要 2/3 共识才信任结果
 
-```rust
+```rust,ignore
 sources: ["primary", "replica_a", "replica_b", "replica_c", "replica_d"]
 threshold: 3 (2/3 of 5)
 strategy: 3 个一致读数 → 返回共识值; 否则报错
@@ -669,7 +669,7 @@ strategy: 3 个一致读数 → 返回共识值; 否则报错
 
 **场景**: 分布式共识协议中，收到多数投票后即做出决策
 
-```rust
+```rust,ignore
 nodes: ["node_1", "node_2", "node_3", "node_4", "node_5"]
 threshold: 3 (majority)
 action: 收到 3 个相同投票后决定提交/回滚
@@ -680,7 +680,7 @@ action: 收到 3 个相同投票后决定提交/回滚
 
 **场景**: 分布式数据库中，从多个副本读取，取多数副本的值
 
-```rust
+```rust,ignore
 replicas: ["shard_1", "shard_2", "shard_3"]
 threshold: 2
 behavior: 2 个副本返回相同值 → 返回该值
@@ -696,7 +696,7 @@ behavior: 2 个副本返回相同值 → 返回该值
 
 在指定时间内未达到阈值则返回当前结果：
 
-```rust
+```rust,ignore
 pub async fn partial_join_with_timeout<T, R>(
     join: Arc<PartialJoin>,
     timeout_duration: Duration,
@@ -711,7 +711,7 @@ pub async fn partial_join_with_timeout<T, R>(
 
 不同分支具有不同权重：
 
-```rust
+```rust,ignore
 pub struct WeightedBranch<T> {
     pub item: T,
     pub weight: f64,
@@ -727,7 +727,7 @@ pub fn weighted_threshold_met(branches: &[WeightedBranch<T>], threshold: f64) ->
 
 根据运行时条件动态调整阈值：
 
-```rust
+```rust,ignore
 pub struct AdaptivePartialJoin {
     base_threshold: usize,
     min_threshold: usize,

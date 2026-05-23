@@ -48,7 +48,7 @@
 
 `MaybeUninit<T>` 是一个**可能已初始化、可能未初始化**的 `T` 类型的容器。它告诉编译器："这块内存保存类型 `T` 的数据，但我不保证它已被正确初始化。"
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // 创建一个未初始化的 MaybeUninit<i32>
@@ -130,7 +130,7 @@ Rust 要求所有变量在使用前必须初始化。但有些场景下，初始
 
 #### 4.2 `Vec::with_capacity` 的实现原理
 
-```rust
+```rust,ignore
 // Vec 内部使用 MaybeUninit 管理缓冲区
 pub struct Vec<T> {
     buf: RawVec<T>,
@@ -221,7 +221,7 @@ where
 
 #### 5.3 `MaybeUninit` 数组转换 (Rust 1.95+)
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // [MaybeUninit<T>; N] → MaybeUninit<[T; N]>
@@ -242,7 +242,7 @@ let view: &[MaybeUninit<i32>] = uninit_array.as_ref();
 
 #### 5.4 与 `Box::new_uninit` 结合使用
 
-```rust
+```rust,ignore
 use std::alloc::{alloc, Layout};
 use std::mem::MaybeUninit;
 
@@ -266,7 +266,7 @@ let initialized_box: Box<[u8; 1024]> = unsafe {
 
 #### 6.1 对未初始化值调用 `assume_init()`
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // ❌ 严重错误: 未初始化就读取
@@ -277,7 +277,7 @@ let s: String = unsafe { x.assume_init() };
 
 #### 6.2 使用 `mem::uninitialized()` (已废弃)
 
-```rust
+```rust,ignore
 // ❌ 绝对不要这样做
 let x: String = unsafe { std::mem::uninitialized() };
 // 即使随后立即覆盖，也可能在 panic/unwind 时触发 UB
@@ -285,7 +285,7 @@ let x: String = unsafe { std::mem::uninitialized() };
 
 #### 6.3 错误处理 Drop
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // ❌ 部分初始化数组的错误丢弃

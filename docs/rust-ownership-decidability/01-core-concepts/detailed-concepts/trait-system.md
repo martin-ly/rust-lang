@@ -157,7 +157,7 @@ impl<T> Point<T> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 简单 trait bound
 fn print<T: Display>(value: T) {
     println!("{}", value);
@@ -192,7 +192,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 泛型与生命周期结合
 fn longest<'a, T>(x: &'a T, y: &'a T) -> &'a T
 where
@@ -221,7 +221,7 @@ where
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 trait Add<Rhs = Self> {
     type Output;
     fn add(self, rhs: Rhs) -> Self::Output;
@@ -274,7 +274,7 @@ identity(String::new()); // 调用 identity_string
 
 **定义 3.1** (关联类型): 关联类型是 trait 中定义的类型占位符，由实现者指定具体类型。
 
-```rust
+```rust,ignore
 trait Iterator {
     type Item;  // 关联类型
     fn next(&mut self) -> Option<Self::Item>;
@@ -320,7 +320,7 @@ trait AssociatedProcessor {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 trait Graph {
     type Node: Clone + Debug;
     type Edge: Clone;
@@ -381,7 +381,7 @@ impl Shape for Square {
 
 **定义 4.1** (Trait Object): Trait 对象是实现了特定 trait 的具体类型的擦除类型，表示为 `dyn Trait`。
 
-```rust
+```rust,ignore
 // 静态分发（单态化）
 fn static_dispatch<T: Drawable>(item: T) {
     item.draw();
@@ -449,7 +449,7 @@ trait ObjectSafe {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 场景 1: 异构集合
 fn draw_all(items: &[&dyn Drawable]) {
     for item in items {
@@ -491,7 +491,7 @@ struct EventSystem {
 | 异构集合 | ❌ | ✅ |
 | 运行时选择 | ❌ | ✅ |
 
-```rust
+```rust,ignore
 // 静态分发 - 零运行时开销
 fn process_static<T: Processor>(p: T) {
     p.process();  // 直接调用，内联可能
@@ -570,7 +570,7 @@ impl Pet for Cat {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 trait Collection {
     type Item;
     type Iterator: Iterator<Item = Self::Item>;
@@ -600,7 +600,7 @@ impl<T> Collection for MyVec<T> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #![feature(min_specialization)]
 
 // 通用实现
@@ -626,7 +626,7 @@ impl ToDebugString for String {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 自动 trait（以前叫 OIBIT）
 // 自动为满足条件的类型实现
 
@@ -650,7 +650,7 @@ impl !Sync for RawPointer {}
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误：违反孤儿规则
 impl Display for Vec<i32> {
     fn fmt(&self, f: &mut Formatter) -> Result {
@@ -661,7 +661,7 @@ impl Display for Vec<i32> {
 
 **解决方案 1: Newtype 模式**
 
-```rust
+```rust,ignore
 struct MyVec(Vec<i32>);
 
 impl Display for MyVec {
@@ -689,7 +689,7 @@ impl MyDisplay for Vec<i32> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误：递归类型没有固定大小
 enum Json {
     Null,
@@ -703,7 +703,7 @@ enum Json {
 
 **解决方案**: 使用 Box 提供间接层
 
-```rust
+```rust,ignore
 enum Json {
     Null,
     Bool(bool),
@@ -736,7 +736,7 @@ fn make_iterator<'a>(data: &'a [i32]) -> impl Iterator<Item = &'a i32> + 'a {
 ### 陷阱 4: 过多的 trait bound
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ 过于复杂，难以阅读和维护
 fn process<T, U, V>(x: T, y: U, z: V)
 where
@@ -748,7 +748,7 @@ where
 
 **解决方案**: 定义组合 trait
 
-```rust
+```rust,ignore
 trait Processable: Clone + Send + Sync + Display + Debug {}
 impl<T: Clone + Send + Sync + Display + Debug> Processable for T {}
 
@@ -762,7 +762,7 @@ where
 ### 陷阱 5: 过度使用动态分发
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ❌ 不必要的动态分发
 fn process(items: &[Box<dyn Drawable>]) {
     for item in items {
@@ -957,7 +957,7 @@ class Collection c a | c -> a where
 ### 8.1 单态化的代码膨胀
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 单态化导致代码复制
 fn process<T: Drawable>(item: T) {
     item.draw();
@@ -987,7 +987,7 @@ fn process_dynamic(items: &[&dyn Drawable]) {
 ### 8.2 静态分发 vs 动态分发性能
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 // 静态分发
@@ -1038,7 +1038,7 @@ trait Iterator {
 ### 8.4 泛型缓存优化
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 使用泛型缓存重复计算
 struct CachedFn<F, T> {
     f: F,

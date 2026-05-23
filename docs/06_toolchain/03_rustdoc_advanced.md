@@ -221,7 +221,7 @@ target/doc/
 
 **外部文档注释** (`///`):
 
-````rust
+````rust,ignore
 /// 这是一个公开函数的文档
 ///
 /// # Examples
@@ -249,7 +249,7 @@ pub fn multiply(a: i32, b: i32) -> i32 {
 
 **块文档注释**:
 
-```rust
+```rust,ignore
 /** 外部块文档注释
  *
  * 支持多行
@@ -318,7 +318,7 @@ pub fn demo() {}
 
 **基础代码块**:
 
-````rust
+````rust,ignore
 /// ```
 /// let x = 42;
 /// assert_eq!(x, 42);
@@ -328,7 +328,7 @@ pub fn example() {}
 
 **指定语言**:
 
-````rust
+````rust,ignore
 /// ```rust
 /// // Rust 代码
 /// ```
@@ -346,7 +346,7 @@ pub fn multi_lang() {}
 
 **编译失败的示例**:
 
-````rust
+````rust,ignore
 /// ```compile_fail
 /// // 这段代码应该编译失败
 /// let x: i32 = "string";
@@ -368,7 +368,7 @@ pub fn error_demo() {}
 
 **自动测试**:
 
-````rust
+````rust,ignore
 /// 加法函数
 ///
 /// # Examples
@@ -396,7 +396,7 @@ cargo test --doc
 
 **隐藏部分代码**:
 
-````rust
+````rust,ignore
 /// ```
 /// # use my_crate::setup;
 /// # let ctx = setup();
@@ -408,7 +408,7 @@ pub fn demo() {}
 
 **`no_run`**: 编译但不运行
 
-````rust
+````rust,ignore
 /// ```no_run
 /// // 这段代码会编译，但不会运行
 /// std::process::exit(0);
@@ -418,7 +418,7 @@ pub fn exit_demo() {}
 
 **`ignore`**: 忽略测试
 
-````rust
+````rust,ignore
 /// ```ignore
 /// // 这段代码被忽略
 /// ```
@@ -427,7 +427,7 @@ pub fn ignored() {}
 
 **`should_panic`**: 应该 panic
 
-````rust
+````rust,ignore
 /// ```should_panic
 /// panic!("This should panic");
 /// ```
@@ -440,7 +440,7 @@ pub fn panic_demo() {}
 
 > **[来源: POPL - Programming Languages Research]**
 
-````rust
+````rust,ignore
 /// ```
 /// use my_crate::MyType;
 /// let x = MyType::new();
@@ -593,7 +593,7 @@ pub fn function() {}
 
 **标准章节**:
 
-````rust
+````rust,ignore
 /// # Examples
 ///
 /// ```
@@ -759,7 +759,7 @@ rustdoc-args = ["--html-in-header", "header.html"]
 
 **基础用法**:
 
-```rust
+```rust,ignore
 #[doc = "这是文档字符串"]
 pub fn func1() {}
 
@@ -780,7 +780,7 @@ pub fn add(a: i32, b: i32) -> i32 {  // 搜索别名
 ### 8.2 条件文档
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[cfg_attr(feature = "docs", doc = "Extended documentation")]
 pub fn conditional_doc() {}
 
@@ -1199,7 +1199,7 @@ pub fn multiply(a: i32, b: i32) -> i32 {
 ### 16.2 文档测试高级用法
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 /// 处理可能失败的操作
 ///
 /// # Examples
@@ -1243,7 +1243,7 @@ pub fn process(input: &str) -> Result<String, Error> {
 ### 16.3 形式化文档链接
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 实现了 [`Clone`] 和 [`Default`] 的类型
 ///
 /// # 类型系统
@@ -1292,7 +1292,7 @@ impl<T: Clone + Default> MyType<T> {
 ### 16.4 条件文档示例
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #![cfg_attr(docsrs, feature(doc_cfg))]
 
 /// 异步处理函数（仅在启用 async 特性时可用）

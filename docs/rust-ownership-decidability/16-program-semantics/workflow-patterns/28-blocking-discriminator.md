@@ -374,7 +374,7 @@ where
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use tokio::sync::Barrier;
 use std::sync::Arc;
 
@@ -422,7 +422,7 @@ where
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Notify;
 
@@ -645,7 +645,7 @@ $$
 
 **场景**: 等待多个区块链节点确认交易，2/3 确认后认为交易有效
 
-```rust
+```rust,ignore
 nodes: ["node_a", "node_b", "node_c", "node_d", "node_e"]
 required_confirmations: 3
 strategy: 阻塞直到 3 个确认，其余继续监控
@@ -656,7 +656,7 @@ strategy: 阻塞直到 3 个确认，其余继续监控
 
 **场景**: 两阶段提交中，等待多数参与者投票后决定提交/回滚
 
-```rust
+```rust,ignore
 participants: ["db_shard_1", "db_shard_2", "db_shard_3"]
 required_votes: 2
 behavior: 2 个 YES → 提交; 否则回滚
@@ -667,7 +667,7 @@ behavior: 2 个 YES → 提交; 否则回滚
 
 **场景**: 航空航天冗余系统中，等待多数子系统一致后才执行关键操作
 
-```rust
+```rust,ignore
 subsystems: ["primary", "backup_a", "backup_b", "backup_c"]
 required_agreement: 3
 action: 3 个一致读数后才调整航向
@@ -683,7 +683,7 @@ action: 3 个一致读数后才调整航向
 
 在指定时间内未达到阈值则超时失败：
 
-```rust
+```rust,ignore
 pub async fn blocking_disc_with_timeout(
     disc: Arc<SemaphoreBlockingDisc>,
     timeout_duration: std::time::Duration,
@@ -698,7 +698,7 @@ pub async fn blocking_disc_with_timeout(
 
 根据运行时条件动态调整阈值：
 
-```rust
+```rust,ignore
 pub struct DynamicBlockingDisc {
     threshold: std::sync::atomic::AtomicUsize,
     counter: std::sync::atomic::AtomicUsize,

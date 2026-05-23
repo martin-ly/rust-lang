@@ -172,7 +172,7 @@ mod verification {
 | `kani::any_where::<i32>(\|x\| x > 0)` | 满足条件的任意值 | 需额外约束时 |
 | `kani::any::<[u8; 32]>()` | 任意 32 字节数组 | 固定大小数组 |
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn check_any_where() {
     let x: u32 = kani::any_where(|v: &u32| *v >= 10 && *v <= 20);
@@ -186,7 +186,7 @@ fn check_any_where() {
 
 `kani::assume(cond)` 告诉 Kani：**只考虑满足 `cond` 的输入**。这用于限定验证范围，排除不感兴趣的状态。
 
-```rust
+```rust,ignore
 /// 计算整数平方根（向下取整）
 pub fn isqrt(x: u32) -> u32 {
     let mut r = 0u32;
@@ -214,7 +214,7 @@ fn check_isqrt() {
 
 `kani::assert(cond, msg)` 是 Kani 的核心验证原语。如果存在任何符号执行路径使 `cond` 为 `false`，Kani 会报告反例。
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn check_division() {
     let a: i32 = kani::any();
@@ -283,7 +283,7 @@ mod verification {
 
 当自动展开不足以证明正确性时，可手动插入**循环不变量断言**。
 
-```rust
+```rust,ignore
 /// 线性查找
 pub fn find(arr: &[i32], target: i32) -> Option<usize> {
     for (i, &x) in arr.iter().enumerate() {
@@ -322,7 +322,7 @@ fn check_find_correctness() {
 
 递归函数同样需要展开限制：
 
-```rust
+```rust,ignore
 /// 计算阶乘
 pub fn factorial(n: u32) -> u32 {
     if n == 0 {
@@ -396,7 +396,7 @@ mod verification {
 ### 5.2 验证内存布局假设
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::alloc::{self, Layout};
 
 /// 自定义分配器：分配 n 个 T 的数组
@@ -426,7 +426,7 @@ fn check_alloc_non_null() {
 ### 6.1 案例一：验证正确的 `Vec::push` 等价实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 一个简化的 Vec 等价实现（仅用于教学）
 pub struct SimpleVec<T> {
     ptr: *mut T,
@@ -681,7 +681,7 @@ mod ringbuf_verification {
 ### 7.2 典型案例：整数溢出
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub fn average(a: u32, b: u32) -> u32 {
     (a + b) / 2  // 漏洞：a + b 可能溢出
 }

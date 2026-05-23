@@ -231,7 +231,7 @@ impl SafeString {
 ### 4.1 延迟初始化
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::sync::Once;
 
 static INIT: Once = Once::new();
@@ -280,7 +280,7 @@ impl Drop for RawBuffer {
 ### 5.1 Safety 文档规范
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// # Safety
 ///
 /// ## 前置条件

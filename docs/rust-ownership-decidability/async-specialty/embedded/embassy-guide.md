@@ -103,7 +103,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
 use embassy_stm32::gpio::{Level, Output, Speed};
@@ -162,7 +162,7 @@ async fn main(spawner: Spawner) {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
 
 // 延迟
@@ -200,7 +200,7 @@ async fn with_timeout<T>(
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use embassy_stm32::exti::ExtiInput;
 use embassy_stm32::gpio::Pull;
 
@@ -238,7 +238,7 @@ spawner.spawn(button_task(button)).unwrap();
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use embassy_stm32::usart::{Uart, Config};
 use embassy_stm32::dma::NoDma;
 
@@ -274,7 +274,7 @@ let uart = Uart::new(
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use embassy_stm32::i2c::I2c;
 
 // 异步传感器读取
@@ -308,7 +308,7 @@ async fn read_all_sensors(i2c: &mut I2c<'static>) -> [SensorData; 3] {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use embassy_stm32::spi::Spi;
 use embassy_stm32::gpio::Output;
 
@@ -336,7 +336,7 @@ impl<'a> SpiDevice<'a> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // Embassy默认不使用堆分配
 // 所有任务在编译时确定
 
@@ -362,7 +362,7 @@ fn main() -> ! {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use heapless::Vec;
 use heapless::spsc::Queue;
 
@@ -408,7 +408,7 @@ async fn consumer() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // Embassy自动管理tickless idle
 // 当没有任务就绪时，进入WFI/低功耗模式
 
@@ -440,7 +440,7 @@ async fn low_power_task() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use embassy_stm32::low_power::LowPower;
 
 async fn sleep_until_event() {
@@ -468,7 +468,7 @@ async fn sleep_until_event() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use embassy_sync::mutex::Mutex;
 use embassy_sync::blocking_mutex::raw::ThreadModeRawMutex;
 
@@ -505,7 +505,7 @@ async fn sensor_task1(i2c: &'static Mutex<ThreadModeRawMutex, I2c<'static>>) {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use embassy_sync::signal::Signal;
 use embassy_sync::channel::{Channel, Sender, Receiver};
 
@@ -553,7 +553,7 @@ async fn consumer_ch(receiver: Receiver<'static, ThreadModeRawMutex, Data, 10>) 
 ## 7. USB设备开发
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use embassy_usb::UsbDevice;
 use embassy_usb::class::cdc_acm::CdcAcmClass;
 
@@ -597,7 +597,7 @@ async fn cdc_task(mut class: CdcAcmClass<'static>) {
 ### 8.1 defmt日志
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use defmt::*;
 
 #[embassy_executor::task]
@@ -628,7 +628,7 @@ lto = true
 opt-level = 'z'
 ```
 
-```rust
+```rust,ignore
 // 检查任务堆栈使用
 use embassy_executor::task;
 

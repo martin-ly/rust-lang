@@ -500,7 +500,7 @@ z: &mut i32      -- Uniq 借用
 
 **理解生命周期**：
 
-```rust
+```rust,ignore
 fn foo(x: &i32) -> &i32 { x }  // 省略生命周期
 
 fn foo<'a>(x: &'a i32) -> &'a i32 { x }  // 显式生命周期

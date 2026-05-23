@@ -227,7 +227,7 @@ $$
 | 资源释放 | 垃圾回收或手动 | RAII + 所有权转移 |
 | 并发安全 | 运行时检查 | 编译时静态验证 |
 
-```rust
+```rust,ignore
 fn ownership_affects_dataflow() {
     // 所有权转移数据流
     let s1 = String::from("hello");     // s1 获得所有权
@@ -1023,7 +1023,7 @@ $$
 \text{Own}(x, T) \Rightarrow \text{Borrow}(r, \&T) \land \text{Own}(x, T) \text{ （temporarily restricted）}
 $$
 
-```rust
+```rust,ignore
 fn borrow_flow() {
     let data = vec![1, 2, 3, 4, 5];
 
@@ -1585,7 +1585,7 @@ fn lifetime_propagation() {
 
 生命周期约束通过 trait bound 传播：
 
-```rust
+```rust,ignore
 // 生命周期约束
 fn lifetime_constraint<'a, T>(x: &'a T) -> &'a T
 where
@@ -1624,7 +1624,7 @@ struct SelfReferential<'a> {
 
 编译器通过生命周期省略规则自动推导：
 
-```rust
+```rust,ignore
 // 省略规则 1：每个引用参数获得独立生命周期
 fn first_rule(s: &str) -> &str {     // 等价于：fn first_rule<'a>(s: &'a str) -> &'a str
     s
@@ -1835,7 +1835,7 @@ fn use_point_identification() {
 
 编译器使用到达定义分析检测未初始化变量：
 
-```rust
+```rust,ignore
 fn uninitialized_variable_detection() {
     let x: i32;
 
@@ -1952,7 +1952,7 @@ fn lexical_vs_nll() {
 
 资源的活跃性影响 Drop 调用时机：
 
-```rust
+```rust,ignore
 fn resource_liveness() {
     let file = File::open("data.txt"); // 资源活跃开始
 
@@ -2014,7 +2014,7 @@ fn condition() -> bool { true }
 
 追踪借用的创建和使用：
 
-```rust
+```rust,ignore
 fn borrow_creation_points() {
     let data = vec![1, 2, 3];
 
@@ -2117,7 +2117,7 @@ fn complex_nll() {
 
 Rust 支持变量的部分初始化：
 
-```rust
+```rust,ignore
 fn partial_initialization() {
     let mut x: (i32, i32);
 
@@ -2145,7 +2145,7 @@ fn partial_move() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 struct Point3D {
     x: f64,
     y: f64,
@@ -2275,7 +2275,7 @@ const FIB_10: u64 = fibonacci(10);
 
 常量泛型允许类型参数化为常量：
 
-```rust
+```rust,ignore
 // 常量泛型结构体
 struct Array<T, const N: usize> {
     data: [T; N],
@@ -2939,7 +2939,7 @@ fn create_waker(queue: Arc<Mutex<VecDeque<Task>>>) -> std::task::Waker {
 
 Stream 是异步的迭代器：
 
-```rust
+```rust,ignore
 use futures::stream::Stream;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -2983,7 +2983,7 @@ async fn stream_data_flow() {
 
 背压防止生产者过快淹没消费者：
 
-```rust
+```rust,ignore
 use futures::channel::mpsc;
 use futures::sink::SinkExt;
 use futures::stream::StreamExt;
@@ -3019,7 +3019,7 @@ async fn backpressure_data_flow() {
 
 缓冲优化批量处理：
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 async fn buffered_data_flow() {
@@ -3075,7 +3075,7 @@ async fn async_step2(x: i32) -> i32 {
 
 #### 8.3.2 挂起-恢复数据流
 
-```rust
+```rust,ignore
 use std::future::poll_fn;
 use std::task::Poll;
 
@@ -3111,7 +3111,7 @@ async fn some_async_operation() -> i32 {
 
 异步任务的取消需要正确处理：
 
-```rust
+```rust,ignore
 use tokio::select;
 
 async fn cancellation_data_flow() {
@@ -3289,7 +3289,7 @@ fn first_element<T>(v: &[T]) -> Option<&T> {
 
 #### 9.2.2 Trait 解析
 
-```rust
+```rust,ignore
 trait Display {
     fn display(&self) -> String;
 }
@@ -3399,7 +3399,7 @@ fn unused_detection() {
 
 #### 9.3.2 未使用导入检测
 
-```rust
+```rust,ignore
 // 警告：未使用的导入
 // use std::collections::HashMap;
 
@@ -3467,7 +3467,7 @@ $$
 \langle e, \sigma \rangle \to \langle e', \sigma' \rangle
 $$
 
-```rust
+```rust,ignore
 // 变量查找
 \frac{x \in \text{dom}(\sigma)}{\langle x, \sigma \rangle \to \langle \sigma(x), \sigma \rangle}
 
@@ -3875,7 +3875,7 @@ cargo miri test
 cargo miri run
 ```
 
-```rust
+```rust,ignore
 // Miri 检测的问题
 
 // 未定义行为检测
@@ -3992,7 +3992,7 @@ fn allocation_profiling() {
 
 #### 11.3.3 缓存分析
 
-```rust
+```rust,ignore
 // 缓存友好的数据访问模式
 fn cache_friendly() {
     let n = 1000;

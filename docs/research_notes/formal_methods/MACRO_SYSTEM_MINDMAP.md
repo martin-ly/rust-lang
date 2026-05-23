@@ -151,7 +151,7 @@ macro_rules! macro_name {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 macro_rules! vec {
     // 零个或多个，逗号分隔
     ($($x:expr),*) => {{
@@ -180,7 +180,7 @@ vec![1, 2, 3,]
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 1. 派生宏
 #[proc_macro_derive(MyTrait)]
 pub fn derive_my_trait(input: TokenStream) -> TokenStream {
@@ -206,7 +206,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 定义
 use proc_macro::TokenStream;
 use quote::quote;

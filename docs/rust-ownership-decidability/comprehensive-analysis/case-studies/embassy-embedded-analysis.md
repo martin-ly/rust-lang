@@ -134,7 +134,7 @@
 ### 2.2 任务调度器实现
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 嵌入式Executor - 无堆分配实现
 pub struct Executor {
     /// 侵入式就绪队列
@@ -214,7 +214,7 @@ impl Executor {
 ### 2.3 定时器实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 系统定时器队列
 pub struct TimerQueue {
     /// 按到期时间排序的任务堆
@@ -296,7 +296,7 @@ pub async fn sleep_until(deadline: Instant) {
 ### 3.1 类型状态模式
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// GPIO引脚的类型状态实现
 /// 编译时确保配置正确
 
@@ -352,7 +352,7 @@ pin.set_high();  // OK
 ### 3.2 异步外设访问
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 异步UART实现
 pub struct Uart<'d, T: Instance> {
     inner: PeripheralRef<'d, T>,
@@ -465,7 +465,7 @@ impl<'d, T: Instance> UartRx<'d, T> {
 ### 4.3 并发安全
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 中断与Executor的交互
 
 /// 中断安全的共享状态
@@ -511,7 +511,7 @@ async fn task() {
 ### 5.2 能效特性
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 /// 睡眠模式集成
 impl Executor {
     fn sleep_if_idle(&self) {

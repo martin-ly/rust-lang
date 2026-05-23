@@ -181,7 +181,7 @@
 
 **方案**:
 
-```rust
+```rust,ignore
 // AUTOSAR RTE接口封装
 pub struct RteInterface {
     port: *mut raw::Rte_Port,
@@ -218,7 +218,7 @@ impl RteInterface {
 
 **方案**: 使用FreeRTOS/Zephyr的Rust绑定
 
-```rust
+```rust,ignore
 // FreeRTOS任务封装
 pub struct Task {
     handle: FreeRTOS_TaskHandle_t,
@@ -261,7 +261,7 @@ let control_task = Task::new(
 
 #### CAN通信
 
-```rust
+```rust,ignore
 use embedded_can::{Can, Frame, Id, StandardId};
 
 pub struct CanController<C: Can> {
@@ -291,7 +291,7 @@ impl<C: Can> CanController<C> {
 
 #### SOME/IP (服务导向通信)
 
-```rust
+```rust,ignore
 // 用于自适应AUTOSAR (AP)
 pub struct SomeIpService {
     endpoint: SocketAddr,
@@ -344,7 +344,7 @@ impl SomeIpService {
 ### E2E保护
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 端到端(E2E)保护
 pub struct E2EProtected<T> {
     data: T,
@@ -375,7 +375,7 @@ impl<T: Serialize> E2EProtected<T> {
 ### 安全监控
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 安全监控器
 pub struct SafetyMonitor {
     watch_counter: AtomicU32,
@@ -409,7 +409,7 @@ impl SafetyMonitor {
 ### 代码大小优化
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -435,7 +435,7 @@ pub struct CompactStruct {
 ### 执行时间优化
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 确定性的集合操作
 use heapless::Vec;
 

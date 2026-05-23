@@ -58,6 +58,7 @@
   - [十五、相关概念链接（L0-L7 映射）](#十五相关概念链接l0-l7-映射)
     - [L0-L7 纵向映射](#l0-l7-纵向映射)
     - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -97,6 +98,7 @@ Actor          actix / ractor          Hewitt Actor 1973       无原生        
 | L3 | 等价（Bisimulation） | 行为不可区分 | Rust async/await 状态机 ↔ 理论无栈协程（在 poll 语义下等价） |
 
 ### 1.2 执行模型分类学
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 执行模型可按三个维度分类：
@@ -167,6 +169,7 @@ handle.join().unwrap();
 - 线程数量受 OS 限制（通常数千个为上限）。
 
 ### 3.2 与 Go M:N 调度的对比
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 特征 | Rust 1:1 | Go M:N (GMP) |
@@ -233,6 +236,7 @@ impl Future for ExampleFuture {
 ```
 
 ### 4.2 Poll 契约与 Waker 机制
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **Poll 契约**: `Future::poll` 必须满足：
@@ -267,6 +271,7 @@ sequenceDiagram
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.3 与 Go goroutine 的本质差异
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 特征 | Rust async/await | Go goroutine |
@@ -360,6 +365,7 @@ let received = rx.recv().unwrap(); // 所有权转移到 received
 ```
 
 ### 6.2 与 Go channel 的同构与差异
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 特征 | Rust channel | Go channel |
@@ -413,6 +419,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 - **生命周期隔离**: Actor 状态封装在 Actor 内部，外部只能通过消息接口访问。
 
 ### 7.2 Actor vs CSP 的形式化区分
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 维度 | CSP | Actor |
@@ -449,6 +456,7 @@ addr.do_send(Increment); // 异步发送，编译期检查消息类型
 > **同构性评价**: Rust 的五种 `Ordering` 与 C++11 的 `memory_order` **一一同构**（isomorphic）。在 Rust 中写 `AtomicUsize::fetch_add(1, Ordering::Acquire)` 与在 C++ 中写 `atomic_var.fetch_add(1, std::memory_order_acquire)` 具有完全相同的语义。 [来源: Rust Reference §18.4.2]
 
 ### 8.2 Acquire-Release 的语义精化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -498,6 +506,7 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 > [来源: rustvsgo.com, SPAA 2024] 执行模型全面对比
 
 ### 10.1 并发模型哲学
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 维度 | Rust | Go |
@@ -510,6 +519,7 @@ Rust 的事件驱动模型是**显式的**：程序员需选择 executor（Tokio
 | 生态复杂度 | 高（需选择 Tokio/async-std/rayon） | 低（标准库即完整） |
 
 ### 10.2 性能特征对比
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 场景 | Rust | Go | 理论解释 |
@@ -591,9 +601,11 @@ graph TD
 ---
 
 ## 十三、思维表征体系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 13.1 执行模型维度雷达图
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -611,6 +623,7 @@ radar
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 13.2 内存-计算-通信 三维模型空间
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```mermaid
@@ -643,9 +656,11 @@ graph TD
 ---
 
 ## 十四、定理推理链
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 定理一致性矩阵（执行模型同构性专集）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 编号 | 定理 | 前提 | 结论 | L4 公理依赖 | 失效条件 | 错误码映射 |
@@ -664,6 +679,7 @@ graph TD
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### L0-L7 纵向映射
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 本文件主题 | L1 基础 | L2 进阶 | L3 高级 | L4 形式化 | L5 对比 | L6 生态 | L7 前沿 |
@@ -677,6 +693,7 @@ graph TD
 | 事件驱动 | — | — | `mio` / `tokio` | Reactor 模式 | vs Go netpoller | 网络框架 | io_uring |
 
 ### 相关概念文件
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [L3 并发编程](../03_advanced/01_concurrency.md) —— Send/Sync / Mutex / 内存模型
@@ -828,4 +845,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

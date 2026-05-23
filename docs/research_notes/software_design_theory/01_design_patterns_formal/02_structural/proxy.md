@@ -148,7 +148,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 1. **虚拟代理**：
 
-   ```rust
+   ```rust,ignore
    struct LazyProxy { inner: OnceLock<RealSubject> }
    impl Subject for LazyProxy {
        fn request(&self) -> String {
@@ -182,7 +182,7 @@ $$\mathit{delegate}(p) \text{ 满足借用/所有权规则；无循环依赖}$$
 
 1. **权限检查**：
 
-   ```rust
+   ```rust,ignore
    struct GuardedProxy<T> { inner: T, permission: Permission }
    impl<T: Subject> Subject for GuardedProxy<T> {
        fn request(&self) -> String {

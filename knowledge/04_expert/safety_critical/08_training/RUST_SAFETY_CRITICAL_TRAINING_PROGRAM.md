@@ -280,7 +280,7 @@
 
 - **Kani**: 模型检查
 
-  ```rust
+  ```rust,ignore
   #[kani::proof]
   fn verify_addition() {
       let a: u32 = kani::any();

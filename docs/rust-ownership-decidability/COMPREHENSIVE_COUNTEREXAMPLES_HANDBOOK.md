@@ -70,7 +70,7 @@ The Rust ownership system is built on three core rules:
 
 **❌ Common Move Mistake:**
 
-```rust
+```rust,ignore
 fn main() {
     let original = String::from("I own this");
 
@@ -111,7 +111,7 @@ fn borrow_data(s: &String) {
 
 Solution 2 - Cloning:
 
-```rust
+```rust,ignore
 fn main() {
     let original = String::from("I own this");
 
@@ -152,7 +152,7 @@ Not all types are moved. Types implementing `Copy` are copied instead.
 
 **❌ Assuming Copy Behavior:**
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 struct Point {
     x: i32,
@@ -228,7 +228,7 @@ fn main() {
 
 **✅ Explicit Ordering:**
 
-```rust
+```rust,ignore
 fn explicit_order() {
     let a = Resource("A");
 
@@ -261,7 +261,7 @@ The borrowing rules can be summarized as:
 
 **❌ Violating Exclusive Mutable Borrow:**
 
-```rust
+```rust,ignore
 fn double_mutable_borrow() {
     let mut data = String::from("hello");
 
@@ -309,19 +309,19 @@ Rust has rules for inferring lifetimes:
 
 **Rule 1: Each input parameter gets its own lifetime**
 
-```rust
+```rust,ignore
 fn foo(x: &i32, y: &i32)  // Elided: fn foo<'a, 'b>(x: &'a i32, y: &'b i32)
 ```
 
 **Rule 2: If exactly one input lifetime, it's assigned to all outputs**
 
-```rust
+```rust,ignore
 fn foo(x: &i32) -> &i32  // Elided: fn foo<'a>(x: &'a i32) -> &'a i32
 ```
 
 **Rule 3: If `&self` or `&mut self`, its lifetime is assigned to all outputs**
 
-```rust
+```rust,ignore
 impl MyStruct {
     fn method(&self) -> &str  // Elided: fn method<'a>(&'a self) -> &'a str
 }
@@ -329,7 +329,7 @@ impl MyStruct {
 
 **❌ When Elision Fails:**
 
-```rust
+```rust,ignore
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }  // ERROR: which lifetime for return?
@@ -353,7 +353,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **❌ Misunderstanding 'static:**
 
-```rust
+```rust,ignore
 fn make_static(s: &str) -> &'static str {
     s  // ERROR: 'a may not be 'static
 }
@@ -466,7 +466,7 @@ Understanding how async works:
 
 **❌ Assuming Sequential Execution:**
 
-```rust
+```rust,ignore
 async fn sequential_mistake() {
     let task1 = async_task_1();  // Returns Future, doesn't run!
     let task2 = async_task_2();  // Returns Future, doesn't run!
@@ -479,7 +479,7 @@ async fn sequential_mistake() {
 
 **✅ True Sequential:**
 
-```rust
+```rust,ignore
 async fn true_sequential() {
     async_task_1().await;  // Run and complete
     async_task_2().await;  // Then run this
@@ -488,7 +488,7 @@ async fn true_sequential() {
 
 **✅ True Concurrent:**
 
-```rust
+```rust,ignore
 async fn true_concurrent() {
     let task1 = tokio::spawn(async_task_1());
     let task2 = tokio::spawn(async_task_2());
@@ -508,7 +508,7 @@ Not all async operations are cancellation-safe.
 
 **❌ Not Cancellation-Safe:**
 
-```rust
+```rust,ignore
 async fn not_cancellation_safe() {
     let file = File::create("output.txt").await.unwrap();
 
@@ -523,7 +523,7 @@ async fn not_cancellation_safe() {
 
 **✅ Cancellation-Safe:**
 
-```rust
+```rust,ignore
 async fn cancellation_safe() -> std::io::Result<()> {
     let data = b"prepared data";
 
@@ -563,7 +563,7 @@ C strings are fundamentally different from Rust strings:
 
 **❌ Incorrect String Conversion:**
 
-```rust
+```rust,ignore
 use std::ffi::CString;
 
 unsafe fn string_mistake() {
@@ -579,7 +579,7 @@ unsafe fn string_mistake() {
 
 **✅ Proper String Lifetime:**
 
-```rust
+```rust,ignore
 use std::ffi::CString;
 
 unsafe fn string_correct() {
@@ -616,7 +616,7 @@ struct Point {
 
 **✅ Verify with static_assertions:**
 
-```rust
+```rust,ignore
 use static_assertions::assert_eq_size;
 
 #[repr(C)]
@@ -844,7 +844,7 @@ let r = &mut s;  // Mutable borrow
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // Function with lifetimes
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str { }
 
@@ -866,7 +866,7 @@ fn first(s: &str) -> &str { &s[0..1] }
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // Builder Pattern
 let config = ConfigBuilder::new()
     .host("localhost")
@@ -902,21 +902,21 @@ Mutex::new(0);       // Thread-safe
 
 1. **Forgetting `mut`**
 
-   ```rust
+   ```rust,ignore
    let s = String::new();  // Immutable!
    s.push_str("hello");    // ERROR
    ```
 
 2. **String vs &str confusion**
 
-   ```rust
+   ```rust,ignore
    fn takes(s: String) {}
    takes("hello");  // ERROR: expected String
    ```
 
 3. **Unwrap abuse**
 
-   ```rust
+   ```rust,ignore
    let x = result.unwrap();  // Panics on error!
    ```
 
@@ -933,7 +933,7 @@ Mutex::new(0);       // Thread-safe
 
 1. **Iterator invalidation**
 
-   ```rust
+   ```rust,ignore
    for item in &vec {
        vec.push(item);  // ERROR
    }
@@ -941,7 +941,7 @@ Mutex::new(0);       // Thread-safe
 
 2. **Lifetime in structs**
 
-   ```rust
+   ```rust,ignore
    struct MyStruct {
        data: &str,  // ERROR: missing lifetime
    }
@@ -949,14 +949,14 @@ Mutex::new(0);       // Thread-safe
 
 3. **Closure capture**
 
-   ```rust
+   ```rust,ignore
    let s = String::new();
     move || s  // s moved
    ```
 
 4. **Send/Sync bounds**
 
-   ```rust
+   ```rust,ignore
    std::thread::spawn(|| {
        let rc = Rc::new(0);
    });  // ERROR: Rc not Send

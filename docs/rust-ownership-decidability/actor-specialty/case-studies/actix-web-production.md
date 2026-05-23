@@ -101,7 +101,7 @@ Actix-web 在Web生态中的位置:
 ### 2.1 连接管理Actor
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 每个HTTP连接由WorkerActor处理
 use actix::prelude::*;
 
@@ -152,7 +152,7 @@ impl Handler<Response> for Worker {
 ### 2.2 服务器Actor架构
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 服务器Actor管理所有工作线程
 pub struct Server {
     workers: Vec<Addr<Worker>>,
@@ -220,7 +220,7 @@ impl Handler<NewConnection> for Server {
 ### 4.1 Actor-based路由
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use actix_web::{web, App, HttpResponse, HttpServer};
 
 // 应用状态作为Actor
@@ -258,7 +258,7 @@ HttpServer::new(|| {
 ### 4.2 WebSocket Actor
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use actix_web_actors::ws;
 
 // WebSocket连接Actor
@@ -308,7 +308,7 @@ impl StreamHandler<Result<ws::Message, ws::ProtocolError>> for ChatSession {
 ### 5.1 Actor-based中间件
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 日志中间件
 pub struct Logger;
 
@@ -369,7 +369,7 @@ where
 ### 6.1 配置优化
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 生产环境配置
 HttpServer::new(app_factory)
     .workers(num_cpus::get() * 2)  // CPU核心数 * 2
@@ -386,7 +386,7 @@ HttpServer::new(app_factory)
 ### 6.2 错误处理
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use actix_web::{error, http::StatusCode};
 
 // 自定义错误类型

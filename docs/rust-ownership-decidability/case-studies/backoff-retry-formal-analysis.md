@@ -50,7 +50,7 @@ backoff提供:
 
 > 延迟按指数增长。
 
-```rust
+```rust,ignore
 let backoff = ExponentialBackoff {
     initial_interval: Duration::from_millis(100),
     multiplier: 2.0,
@@ -110,7 +110,7 @@ $$
 
 ### 反例 5.1 (无退避重试)
 
-```rust
+```rust,ignore
 // 危险: 立即重试可能压垮服务
 for _ in 0..10 {
     if let Err(e) = request().await {
@@ -125,7 +125,7 @@ retry(backoff, request).await?;
 
 ### 反例 5.2 (幂等性假设)
 
-```rust
+```rust,ignore
 // 非幂等操作重试可能导致重复
 retry(backoff, || charge_credit_card()).await?;  // 危险!
 

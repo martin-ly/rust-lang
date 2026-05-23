@@ -100,7 +100,7 @@ Kani 架构:
 
 **示例验证代码**:
 
-```rust
+```rust,ignore
 // Firecracker virtio 块的验证 harness
 #[kani::proof]
 fn verify_virtio_blk_request() {
@@ -141,7 +141,7 @@ fn verify_virtio_blk_request() {
 
 **验证方法**:
 
-```rust
+```rust,ignore
 // 连接状态机验证
 #[kani::proof]
 fn verify_connection_state_machine() {
@@ -283,7 +283,7 @@ spec deposit {
 
 **技术特点**:
 
-```rust
+```rust,ignore
 verus! {
     // 操作系统页表管理验证
     fn map_page(

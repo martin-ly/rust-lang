@@ -497,7 +497,7 @@ std::expected<double, std::string> safe_divide(double a, double b) {
 
 #### Rust Result
 
-```rust
+```rust,ignore
 // 显式错误处理
 fn divide(a: f64, b: f64) -> Result<f64, String> {
     if b == 0.0 {
@@ -568,7 +568,7 @@ int parallel_sum_cpp(const std::vector<int>& data) {
 
 #### Rust 并发
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 使用 Rayon 库进行数据并行
@@ -790,7 +790,7 @@ use std::sync::Arc;
 
 #### FFI 示例
 
-```rust
+```rust,ignore
 // Rust 暴露给 C++ 的接口
 #[no_mangle]
 pub extern "C" fn process_data(data: *const u8, len: usize) -> i32 {

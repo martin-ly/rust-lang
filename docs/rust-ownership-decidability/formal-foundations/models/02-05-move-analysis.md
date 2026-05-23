@@ -213,7 +213,7 @@ owns(Γ, p) ≡ 路径p在上下文Γ中是未借用的且拥有资源
 
 **部分移动**:
 
-```rust
+```rust,ignore
 fn partial_move() {
     let p = Point { x: String::from("x"), y: String::from("y") };
 
@@ -248,7 +248,7 @@ fn partial_move() {
 
 **Drop trait**定义资源释放的行为:
 
-```rust
+```rust,ignore
 trait Drop {
     fn drop(&mut self);
 }
@@ -471,7 +471,7 @@ let y = x;       I(x) = Uninit (如果¬Copy)
 
 **分支合并**:
 
-```rust
+```rust,ignore
 fn maybe_init(b: bool) -> String {
     let x: String;
 

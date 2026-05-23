@@ -78,7 +78,7 @@ $$
 ### 定义 SERVICE-2 ( 生成trait )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[tonic::async_trait]
 trait Greeter {
     async fn say_hello(
@@ -96,7 +96,7 @@ trait Greeter {
 ### 定义 CODEC-1 ( Protobuf编解码 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 trait Codec {
     type Encode: Message;
     type Decode: Message;
@@ -144,7 +144,7 @@ $$
 ### 定义 INTERCEPT-1 ( Interceptor )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 type Interceptor = fn(Request<()>) -> Result<Request<()>, Status>;
 ```
 
@@ -165,7 +165,7 @@ $$
 ### 定义 TLS-1 ( 证书验证 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 Server::builder()
     .tls_config(ServerTlsConfig::new()
         .identity(identity)
@@ -212,7 +212,7 @@ $$
 ### 示例1: 基础服务
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use tonic::{transport::Server, Request, Response, Status};
 use hello_world::greeter_server::{Greeter, GreeterServer};
 use hello_world::{HelloReply, HelloRequest};
@@ -254,7 +254,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 示例2: 流服务
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use tonic::{Request, Response, Status, Streaming};
 use tokio_stream::wrappers::ReceiverStream;
 
@@ -303,7 +303,7 @@ impl Greeter for MyGreeter {
 ### 示例3: 拦截器
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 fn auth_interceptor(req: Request<()>) -> Result<Request<()>, Status> {
     let token = req.metadata()
         .get("authorization")

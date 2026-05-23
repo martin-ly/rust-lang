@@ -432,7 +432,7 @@ unsafe impl Sync for MyPtr {}
 
 在不稳定特性（`negative_impls`）下，还可显式**否定**自动推导：
 
-```rust,ignore
+```rust
 #![feature(negative_impls)]
 struct RawFd(i32);
 
@@ -1759,7 +1759,7 @@ impl Add<&str> for &str {
 
 #### 边界与反例：滥用 fundamental 会破坏 coherence
 
-```rust,ignore
+```rust
 #![feature(fundamental)]
 
 #[fundamental]
@@ -1804,7 +1804,7 @@ Negative impl 在逻辑上不是"暂时未实现"，而是**永久承诺**（sem
 
 Negative impl 对 Auto trait 有额外意义：它**阻止编译器的自动推导**：
 
-```rust,ignore
+```rust
 #![feature(negative_impls)]
 
 struct RawFd(i32);
@@ -1829,7 +1829,7 @@ struct RawFd(i32);
 
 Negative impl 不仅是语义承诺，还通过 coherence 机制**物理阻止**下游 crate 添加冲突实现：
 
-```rust,ignore
+```rust
 #![feature(negative_impls)]
 
 trait Marker {}

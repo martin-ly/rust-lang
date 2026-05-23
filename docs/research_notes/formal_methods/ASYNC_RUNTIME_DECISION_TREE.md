@@ -127,7 +127,7 @@
 ### 基础Tokio应用
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 启动TCP服务器
@@ -151,7 +151,7 @@ async fn handle_connection(mut socket: tokio::net::TcpStream) {
 ### 混合同步/异步代码
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() {
     // CPU密集型任务放入spawn_blocking

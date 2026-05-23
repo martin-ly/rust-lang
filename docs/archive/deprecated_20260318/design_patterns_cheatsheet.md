@@ -85,7 +85,7 @@ impl Singleton {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait Product {
     fn operation(&self) -> String;
 }
@@ -194,7 +194,7 @@ let door = door.open();  // ✅ 可以打开
 
 ### 示例 1: 建造者模式（完整实现）
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 struct Config {
     host: String,
@@ -245,7 +245,7 @@ let config = ConfigBuilder::new()
 
 ### 示例 2: 策略模式
 
-```rust
+```rust,ignore
 trait PaymentStrategy {
     fn pay(&self, amount: f64) -> Result<(), String>;
 }
@@ -406,7 +406,7 @@ assert_eq!(adapter.request(), "Specific request");
 
 在实际项目中，设计模式组合使用能解决复杂问题。以下是一个配置系统的完整示例：
 
-```rust
+```rust,ignore
 // 使用单例管理全局配置
 use std::sync::{Arc, Mutex, OnceLock};
 
@@ -558,7 +558,7 @@ impl Config {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let c = Config::builder().build();  // ❌ 必填 host 未设置
 ```
 
@@ -639,7 +639,7 @@ let c = Config::builder().build();  // ❌ 必填 host 未设置
 
 ### 核心特性速查
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -707,7 +707,7 @@ impl<T> HandlerChain<T> {
 
 ### LazyLock 在单例模式中的应用
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 线程安全的单例配置

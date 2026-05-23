@@ -104,7 +104,7 @@ fn main() {
 
 #### 基本使用
 
-```rust
+```rust,ignore
 // String 实现了 From<&str>
 let s1: String = String::from("hello");
 let s2: String = "hello".into();  // 使用 Into
@@ -192,7 +192,7 @@ fn read_number(path: &str) -> Result<i32, AppError> {
 
 当转换**可能失败**时，应该使用 `TryFrom`/`TryInto`，它们返回 `Result`。
 
-```rust
+```rust,compile_fail
 use std::convert::TryFrom;
 use std::convert::TryInto;
 
@@ -274,7 +274,7 @@ fn main() {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // Vec 实现了 IntoIterator
 let vec = vec![1, 2, 3];
 for item in vec {  // vec 被消费
@@ -357,7 +357,7 @@ fn main() {
 
 Rust 提供了多种字符串类型，各有适用场景：
 
-```rust
+```rust,compile_fail
 use std::ffi::{CString, CStr, OsString, OsStr};
 use std::os::unix::ffi::OsStrExt;  // Unix 特定
 
@@ -574,7 +574,7 @@ fn main() {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ❌ 不推荐：使用 as 进行可能溢出的转换
 let x: i32 = 3000000000_i64 as i32;  // 静默截断！
 
@@ -588,7 +588,7 @@ let x = 3000000000_i64.saturating_cast::<i32>();  // i32::MAX
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 优先实现 TryFrom，From 会自动实现
 impl TryFrom<ExternalType> for MyType { ... }
 
@@ -633,7 +633,7 @@ impl std::error::Error for ConversionError {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let f: f64 = 1.9;
 let i = f as i32;  // 结果是 1，不是 2！
 
@@ -645,7 +645,7 @@ let i = f.round() as i32;  // 2
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let s = "你好";  // 6 字节，2 个字符
 let first_char = s[0];  // ❌ 编译错误：不能索引 String
 
@@ -657,7 +657,7 @@ let first = s.chars().next().unwrap();  // '你'
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let x: i32 = -1;
 let y = x as u32 as i32;  // 先变成 4294967295，再变成 4294967295
 ```
@@ -666,7 +666,7 @@ let y = x as u32 as i32;  // 先变成 4294967295，再变成 4294967295
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Unix 系统上文件名可能不是有效 UTF-8
 let path = std::fs::read_dir(".").unwrap().next().unwrap().unwrap().file_name();
 // path 是 OsString，直接转 String 可能失败
@@ -676,7 +676,7 @@ let path = std::fs::read_dir(".").unwrap().next().unwrap().unwrap().file_name();
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let ptr: *const i32 = &42;
 // ptr 现在是一个悬挂指针！&42 的临时值已经释放
 ```

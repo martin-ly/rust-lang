@@ -136,7 +136,7 @@ if let Some(v) = cf.continue_value() {
 
 **应用场景**:
 
-```rust
+```rust,ignore
 // 在 try_for_each 中使用
 fn find_negative(numbers: &[i32]) -> Option<i32> {
     numbers.iter().try_for_each(|&n| {
@@ -230,7 +230,7 @@ cargo fix --edition
 ### ControlFlow 模式
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // 验证器模式

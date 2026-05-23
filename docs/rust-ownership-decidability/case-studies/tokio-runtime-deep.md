@@ -132,7 +132,7 @@ Each component has specific responsibilities and interacts with others through w
 
 The scheduler is responsible for executing asynchronous tasks. Tokio provides two primary scheduler flavors:
 
-```rust
+```rust,ignore
 // Current-thread scheduler
 let rt = tokio::runtime::Builder::new_current_thread()
     .build()
@@ -167,7 +167,7 @@ The I/O driver integrates with the operating system's asynchronous I/O facilitie
 - **Windows**: IOCP (I/O Completion Ports)
 - **io_uring**: Experimental support on Linux
 
-```rust
+```rust,ignore
 // Internal structure (simplified)
 pub(crate) struct Driver {
     inner: Inner,
@@ -194,7 +194,7 @@ The timer system provides:
 - `tokio::time::interval`: Periodic execution
 - `tokio::time::timeout`: Operation timeouts
 
-```rust
+```rust,ignore
 pub(crate) struct Timer {
     wheel: Wheel,
     next_expiration: Option<Instant>,
@@ -207,7 +207,7 @@ pub(crate) struct Timer {
 
 For operations that cannot be made asynchronous, Tokio provides a dedicated thread pool:
 
-```rust
+```rust,ignore
 // Spawn blocking operation
 let result = tokio::task::spawn_blocking(|| {
     // CPU-intensive or blocking I/O work
@@ -225,7 +225,7 @@ let result = tokio::task::spawn_blocking(|| {
 
 **Definition**: Executes all tasks on the current OS thread.
 
-```rust
+```rust,ignore
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
     // All tasks run on the main thread
@@ -258,7 +258,7 @@ Corollary: No Send bound required for Rc, RefCell
 
 **Definition**: Uses a work-stealing algorithm across multiple OS threads.
 
-```rust
+```rust,ignore
 #[tokio::main(flavor = "multi_thread", worker_threads = 8)]
 async fn main() {
     // Tasks may migrate between worker threads
@@ -305,7 +305,7 @@ Algorithm WORK-STEALING:
 
 A Tokio task is the fundamental unit of concurrent execution. Formally:
 
-```rust
+```rust,ignore
 /// Conceptual task structure
 struct Task {
     /// The future to execute
@@ -380,7 +380,7 @@ Theorem SPAWN-SAFETY:
 3. 'static bound ensures captured references outlive task execution
 4. Therefore, Send + 'static are necessary conditions
 
-```rust
+```rust,ignore
 // Valid: String is Send + 'static
 let data: String = "hello".to_string();
 tokio::spawn(async move {
@@ -408,7 +408,7 @@ Theorem SPAWN-LOCAL-SAFETY:
   Note: Send bound NOT required as task never migrates threads
 ```
 
-```rust
+```rust,ignore
 // Valid on current_thread runtime
 let data: Rc<String> = Rc::new("hello".to_string());
 tokio::task::spawn_local(async move {
@@ -420,7 +420,7 @@ tokio::task::spawn_local(async move {
 
 > **[来源: Rustonomicon]**
 
-```rust
+```rust,ignore
 /// Handle for awaiting task completion
 pub struct JoinHandle<T> {
     raw: Option<RawTask>,
@@ -484,7 +484,7 @@ Ownership Model:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 
@@ -513,7 +513,7 @@ Invariants:
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 let (tx, mut rx) = mpsc::channel(100);
@@ -533,7 +533,7 @@ tx.send("message").await?;
 
 The `JoinHandle` provides a mechanism to await task completion and retrieve results:
 
-```rust
+```rust,ignore
 let handle: JoinHandle<i32> = tokio::spawn(async {
     compute_something().await
 });
@@ -566,7 +566,7 @@ Theorem JOINHANDLE-LIFETIME:
 
 Tokio builds upon the `mio` crate for platform-specific I/O multiplexing:
 
-```rust
+```rust,ignore
 // Conceptual mio integration
 struct IoDriver {
     registry: Registry,
@@ -634,7 +634,7 @@ mod kqueue {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 #[cfg(windows)]
 mod iocp {
     use windows_sys::Win32::System::IO::{CreateIoCompletionPort, GetQueuedCompletionStatus};
@@ -686,7 +686,7 @@ mod iocp {
 
 Tokio uses a hierarchical timer wheel for efficient timer management:
 
-```rust
+```rust,ignore
 /// Hierarchical timer wheel with 6 levels
 pub(crate) struct Timer {
     /// Wheel levels: [ms, 100ms, 1s, 10s, 100s, 1000s]
@@ -723,7 +723,7 @@ Level 5: 64 slots × 1000s = 64000s range, 1000s resolution
 
 > **[来源: Rust Reference]**
 
-```rust
+```rust,ignore
 /// Create a sleep future
 pub fn sleep(duration: Duration) -> Sleep {
     Sleep::new_timeout(Instant::now() + duration)
@@ -754,7 +754,7 @@ Theorem TIMER-ACCURACY:
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 impl Future for Sleep {
     type Output = ();
 
@@ -786,7 +786,7 @@ This section presents 15+ counter-examples demonstrating common mistakes and ant
 
 **Problem**: Attempting to use `spawn_local` without a `LocalSet` on a multi-threaded runtime.
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 #[tokio::main(flavor = "multi_thread")]
@@ -810,7 +810,7 @@ thread 'main' panicked at 'spawn_local called from outside of the LocalSet'
 
 **Correct Usage**:
 
-```rust
+```rust,ignore
 #[tokio::main(flavor = "multi_thread")]
 async fn main() {
     let local = tokio::task::LocalSet::new();
@@ -845,7 +845,7 @@ Violation leads to: panic! at runtime
 
 **Problem**: Trying to spawn a future containing `!Send` types on a multi-threaded runtime.
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::cell::RefCell;
 
@@ -876,7 +876,7 @@ error[E0277]: `Rc<RefCell<Vec<i32>>>` cannot be sent between threads safely
 
 **Solutions**:
 
-```rust
+```rust,ignore
 // Solution 1: Use Arc + Mutex instead of Rc + RefCell
 use std::sync::Arc;
 use tokio::sync::Mutex;
@@ -888,7 +888,7 @@ tokio::spawn(async move {
 });
 ```
 
-```rust
+```rust,ignore
 // Solution 2: Use current_thread runtime
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
@@ -921,7 +921,7 @@ Fix: Replace with:
 
 **Problem**: Performing blocking I/O or CPU-intensive work directly in async code.
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() {
     let handles: Vec<_> = (0..100)
@@ -961,7 +961,7 @@ Impact of blocking in async:
 
 **Solution**: Use `spawn_blocking` for blocking operations.
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() {
     let handles: Vec<_> = (0..100)
@@ -1011,7 +1011,7 @@ Corollary: Always use spawn_blocking for:
 
 **Problem**: Holding a standard library mutex across an await point.
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 #[tokio::main]
@@ -1045,7 +1045,7 @@ async fn main() {
 
 **Solution**: Use `tokio::sync::Mutex` for async contexts.
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 
 #[tokio::main]
@@ -1095,7 +1095,7 @@ Theorem MUTEX-TYPE-SAFETY:
 
 **Problem**: Using unbounded channels without backpressure can cause memory exhaustion.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 #[tokio::main]
@@ -1139,7 +1139,7 @@ Time    | Queue Size | Memory Used
 
 **Solution**: Use bounded channels with backpressure.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 #[tokio::main]
@@ -1192,7 +1192,7 @@ Liveness Property:
 
 **Problem**: Accumulating data in a task without proper cleanup.
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use tokio::time::{self, Duration};
 
@@ -1226,7 +1226,7 @@ async fn main() {
 
 **Solution**: Implement proper eviction and limits.
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use tokio::time::{self, Duration, Instant};
 
@@ -1274,7 +1274,7 @@ impl<K: Eq + std::hash::Hash, V> BoundedCache<K, V> {
 
 **Problem**: Race condition between timer expiration and explicit cancellation.
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration, timeout};
 
 #[tokio::main]
@@ -1305,7 +1305,7 @@ async fn expensive_computation() -> String {
 
 **Solution**: Use graceful cancellation with cancellation tokens.
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration, timeout};
 use tokio_util::sync::CancellationToken;
 
@@ -1361,7 +1361,7 @@ Solution: CancellationToken provides cooperative cancellation
 
 **Problem**: Using `tokio::select!` without properly handling cancelled branches.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{sleep, Duration};
 
@@ -1397,7 +1397,7 @@ async fn main() {
 
 **Solution**: Use biased selection or proper message handling.
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{sleep, Duration, interval};
 
@@ -1454,7 +1454,7 @@ Theorem SELECT-CANCELLATION:
 
 **Problem**: Types that need cleanup logic in async context.
 
-```rust
+```rust,ignore
 use tokio::net::TcpStream;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -1498,7 +1498,7 @@ async fn main() {
 
 **Solution**: Use explicit async cleanup methods.
 
-```rust
+```rust,ignore
 use tokio::net::TcpStream;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -1563,7 +1563,7 @@ async fn main() {
 
 **Problem**: Runtime drops pending tasks without completion on shutdown.
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1592,7 +1592,7 @@ fn main() {
 
 **Solution**: Use `block_on` with proper shutdown sequence.
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 use std::sync::Arc;
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -1646,7 +1646,7 @@ Theorem RUNTIME-SHUTDOWN:
 
 **Problem**: Using `spawn_blocking` without considering pool limits.
 
-```rust
+```rust,ignore
 use tokio::task;
 use std::time::Duration;
 
@@ -1677,7 +1677,7 @@ async fn main() {
 
 **Solution**: Configure blocking pool or use semaphores.
 
-```rust
+```rust,ignore
 use tokio::task;
 use tokio::sync::Semaphore;
 use std::sync::Arc;
@@ -1714,7 +1714,7 @@ async fn main() {
 
 **Problem**: Choosing the wrong runtime flavor for the workload.
 
-```rust
+```rust,ignore
 // BAD: Using current_thread for CPU-bound parallel work
 #[tokio::main(flavor = "current_thread")]
 async fn main() {
@@ -1742,7 +1742,7 @@ async fn main() {
 
 **Solution**: Choose appropriate runtime flavor.
 
-```rust
+```rust,ignore
 // GOOD: Multi-thread runtime for parallel CPU work
 #[tokio::main(flavor = "multi_thread", worker_threads = 8)]
 async fn main() {
@@ -1775,7 +1775,7 @@ async fn main() {
 
 **Problem**: Misunderstanding LocalSet requirements.
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 #[tokio::main(flavor = "multi_thread")]
@@ -1801,7 +1801,7 @@ async fn main() {
 
 **Solution**: Use LocalSet correctly within its scope.
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 
 #[tokio::main(flavor = "multi_thread")]
@@ -1844,7 +1844,7 @@ async fn main() {
 
 **Problem**: Task aborted while holding resources.
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 use std::sync::Arc;
 
@@ -1883,7 +1883,7 @@ async fn main() {
 
 **Solution**: Use cancellation-safe operations and cleanup.
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 use std::sync::Arc;
 use tokio_util::sync::CancellationToken;
@@ -1947,7 +1947,7 @@ async fn main() {
 
 **Problem**: Timer intervals drift over time due to processing delays.
 
-```rust
+```rust,ignore
 use tokio::time::{interval, Duration, Instant};
 
 #[tokio::main]
@@ -1980,7 +1980,7 @@ Tick 3 at 4.70s (expected: 3s)  // 0.70s drift
 
 **Solution**: Use `interval_at` with missed tick behavior.
 
-```rust
+```rust,ignore
 use tokio::time::{interval_at, Duration, Instant, MissedTickBehavior};
 
 #[tokio::main]
@@ -2023,7 +2023,7 @@ Burst:      Process all missed ticks immediately
 
 **Problem**: Deadlock when acquiring multiple async locks in different orders.
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 use std::sync::Arc;
 
@@ -2065,7 +2065,7 @@ async fn main() {
 
 **Solution**: Always acquire locks in consistent order.
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;
 use std::sync::Arc;
 
@@ -2120,7 +2120,7 @@ async fn main() {
 
 **Problem**: Acquiring semaphore permits without releasing them.
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 
@@ -2150,7 +2150,7 @@ async fn main() {
 
 **Solution**: Use RAII patterns or explicit release.
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 
@@ -2195,7 +2195,7 @@ async fn main() {
 
 **Problem**: Reusing buffers incorrectly in async I/O.
 
-```rust
+```rust,ignore
 use tokio::net::TcpStream;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -2226,7 +2226,7 @@ fn process(data: &[u8]) {
 
 **Solution**: Always respect the length returned by read operations.
 
-```rust
+```rust,ignore
 use tokio::net::TcpStream;
 use tokio::io::{AsyncReadExt, AsyncWriteExt};
 
@@ -2363,7 +2363,7 @@ Task Polling Lifecycle:
 
 **Task Memory Structure**:
 
-```rust
+```rust,ignore
 // Simplified task representation
 struct Task {
     // Header (fixed size)
@@ -2416,7 +2416,7 @@ Theorem MEMORY-EFFICIENCY:
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! High-performance Tokio-based HTTP server
 //! Demonstrates best practices for async Rust
 
@@ -2784,7 +2784,7 @@ async fn main() -> tokio::io::Result<()> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! Performance optimizations for the HTTP server
 
 use tokio::net::TcpSocket;

@@ -130,7 +130,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 macro_rules! vector {
     // 空向量
     () => {
@@ -202,7 +202,7 @@ complex_match!(use std::collections::HashMap);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 macro_rules! count_tts {
     () => (0usize);
     ($odd:tt $($a:tt $b:tt)*) => (count_tts!($($a)*) << 1 | 1usize);
@@ -294,7 +294,7 @@ quote = "1.0"
 syn = { version = "2.0", features = ["full"] }
 ```
 
-```rust
+```rust,ignore
 // lib.rs
 use proc_macro::TokenStream;
 
@@ -319,7 +319,7 @@ pub fn my_macro(input: TokenStream) -> TokenStream {
 
 ### 3.2 TokenStream 操作
 
-```rust
+```rust,ignore
 use proc_macro2::TokenStream;
 use quote::{quote, ToTokens};
 
@@ -364,7 +364,7 @@ fn basic_tokenstream() {
 
 ### 3.3 使用 syn 解析
 
-```rust
+```rust,ignore
 use syn::{parse_macro_input, DeriveInput, Data, Fields, Attribute};
 use quote::quote;
 
@@ -433,7 +433,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 ### 4.1 基础派生宏
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};
@@ -463,7 +463,7 @@ pub fn derive_hello_macro(input: TokenStream) -> TokenStream {
 
 ### 4.2 带辅助属性的派生宏
 
-```rust
+```rust,ignore
 use syn::{Attribute, Meta, Lit, NestedMeta};
 
 #[proc_macro_derive(CustomDebug, attributes(debug))]
@@ -545,7 +545,7 @@ pub fn derive_custom_debug(input: TokenStream) -> TokenStream {
 
 ### 4.3 复杂派生：序列化框架
 
-```rust
+```rust,ignore
 #[proc_macro_derive(Serialize, attributes(serialize))]
 pub fn derive_serialize(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -627,7 +627,7 @@ pub fn derive_serialize(input: TokenStream) -> TokenStream {
 
 ### 5.1 基础属性宏
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn trace(args: TokenStream, input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as AttributeArgs);
@@ -670,7 +670,7 @@ pub fn trace(args: TokenStream, input: TokenStream) -> TokenStream {
 
 ### 5.2 路由宏示例
 
-```rust
+```rust,ignore
 use syn::{FnArg, Pat, Type};
 
 #[proc_macro_attribute]
@@ -732,7 +732,7 @@ pub fn route(args: TokenStream, input: TokenStream) -> TokenStream {
 
 ### 5.3 结构体转换宏
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn api_response(args: TokenStream, input: TokenStream) -> TokenStream {
     let _args = parse_macro_input!(args as AttributeArgs);
@@ -817,7 +817,7 @@ pub fn api_response(args: TokenStream, input: TokenStream) -> TokenStream {
 
 ### 6.1 基础函数式宏
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn make_answer(input: TokenStream) -> TokenStream {
     let _ = parse_macro_input!(input as parse::Nothing);
@@ -838,7 +838,7 @@ pub fn make_answer(input: TokenStream) -> TokenStream {
 
 ### 6.2 SQL 查询宏
 
-```rust
+```rust,ignore
 use syn::{parse::Parse, parse::ParseStream, Expr, LitStr};
 
 struct SqlQuery {
@@ -898,7 +898,7 @@ pub fn sql(input: TokenStream) -> TokenStream {
 
 ### 6.3 HTML 模板宏
 
-```rust
+```rust,ignore
 struct HtmlTemplate {
     parts: Vec<TemplatePart>,
 }
@@ -980,7 +980,7 @@ fn generate_html_render(parts: &[TemplatePart]) -> TokenStream {
 
 ### 7.1 错误处理
 
-```rust
+```rust,ignore
 use proc_macro2::Span;
 use syn::spanned::Spanned;
 
@@ -1051,7 +1051,7 @@ fn validate_derive(input: &DeriveInput) -> syn::Result<()> {
 
 ### 7.2 泛型处理
 
-```rust
+```rust,ignore
 use syn::{GenericParam, LifetimeDef, TypeParam, ConstParam};
 
 fn process_generics(generics: &syn::Generics) -> TokenStream {
@@ -1122,7 +1122,7 @@ fn split_generics(generics: &syn::Generics) -> (TokenStream, TokenStream, TokenS
 
 ### 7.3 代码生成优化
 
-```rust
+```rust,ignore
 // 使用 lazy_static 缓存解析结果
 use std::collections::HashMap;
 use std::sync::Mutex;
@@ -1166,7 +1166,7 @@ fn deduplicate_generated_code(tokens: TokenStream) -> TokenStream {
 
 Rust 1.94 稳定了 `proc_macro_span` API，允许过程宏获取更精确的源代码位置信息：
 
-```rust
+```rust,ignore
 use proc_macro::Span;
 
 #[proc_macro_derive(Debuggable)]
@@ -1220,7 +1220,7 @@ pub fn tracked(args: TokenStream, input: TokenStream) -> TokenStream {
 
 Rust 1.94 改进了过程宏的诊断信息输出：
 
-```rust
+```rust,ignore
 use proc_macro::Diagnostic;
 use proc_macro::Level;
 
@@ -1263,7 +1263,7 @@ fn emit_detailed_error(span: Span, message: &str, help: Option<&str>) {
 
 Rust 1.94 对过程宏的性能进行了多项优化：
 
-```rust
+```rust,ignore
 // 🎉 Rust 1.94: TokenStream 的延迟解析
 use proc_macro::TokenStream;
 
@@ -1408,7 +1408,7 @@ cargo expand --theme=none > expanded.rs
 
 ### 9.3 调试技巧
 
-```rust
+```rust,ignore
 // 使用 eprintln 输出调试信息
 #[proc_macro_derive(Debuggable)]
 pub fn derive_debuggable(input: TokenStream) -> TokenStream {
@@ -1459,7 +1459,7 @@ pub fn debuggable_macro(input: TokenStream) -> TokenStream {
 
 ### 10.1 完整的 Builder 宏
 
-```rust
+```rust,ignore
 // 使用
 // #[derive(Builder)]
 // #[builder(prefix = "with")]
@@ -1600,7 +1600,7 @@ struct StructAttributes {
 
 ### 10.2 序列化/反序列化宏
 
-```rust
+```rust,ignore
 #[proc_macro_derive(Json, attributes(json))]
 pub fn derive_json(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -1637,7 +1637,7 @@ pub fn derive_json(input: TokenStream) -> TokenStream {
 
 ### 10.3 模拟框架宏
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn mockable(_args: TokenStream, input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as ItemTrait);

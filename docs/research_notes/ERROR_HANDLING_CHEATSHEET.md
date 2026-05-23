@@ -47,7 +47,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 opt.unwrap()        // 获取值，None时panic
 opt.unwrap_or(def)  // 获取值或默认值
 opt.ok_or(err)      // Option -> Result
@@ -59,7 +59,7 @@ opt.and_then(|v| ...) // 链式操作
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 res.unwrap()        // 获取值，Err时panic
 res?                // 传播错误
 res.map_err(|e| ...) // 错误映射
@@ -71,7 +71,7 @@ res.and_then(|v| ...) // 链式操作
 ## ?操作符
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn may_fail() -> Result<T, Error> {
     let x = operation1()?;  // 错误时提前返回
     let y = operation2()?;
@@ -84,7 +84,7 @@ fn may_fail() -> Result<T, Error> {
 ## 错误转换
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // From trait自动转换
 impl From<IOError> for MyError {
     fn from(e: IOError) -> Self { ... }

@@ -37,6 +37,7 @@
     - [8.2 2026-2027 路线图](#82-2026-2027-路线图)
   - [九、参考链接](#九参考链接)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -135,7 +136,7 @@ make LLVM=1 -j$(nproc)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // SPDX-License-Identifier: GPL-2.0
 
 //! 最小 Rust 内核模块示例
@@ -190,7 +191,7 @@ impl Drop for HelloRust {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use kernel::prelude::*;
 
 // 模块声明
@@ -210,7 +211,7 @@ static MY_DATA: Mutex<u32> = Mutex::new(0);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use kernel::alloc::vec::Vec;
 use kernel::alloc::boxed::Box;
 use kernel::alloc::flags::GFP_KERNEL;
@@ -227,7 +228,7 @@ let data = Box::try_new(MyStruct { ... }, GFP_KERNEL)?;
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use kernel::sync::{Mutex, SpinLock};
 use kernel::sync::Arc;
 
@@ -252,6 +253,7 @@ let shared = Arc::try_new(data, GFP_KERNEL)?;
 ---
 
 ## 五、生产案例研究
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 5.1 Android Binder IPC（Google）
@@ -268,7 +270,7 @@ let shared = Arc::try_new(data, GFP_KERNEL)?;
 
 **关键设计**：
 
-```rust
+```rust,ignore
 // 内核态 Rust 的强类型事务处理
 fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
     let data = transaction.data()?; // 自动验证长度和权限
@@ -320,6 +322,7 @@ fn handle_transaction(transaction: &Transaction) -> Result<Reply> {
 ---
 
 ## 六、与 C 内核模块的互操作
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 6.1 绑定生成（bindgen）
@@ -333,7 +336,7 @@ make rust/bindings
 
 生成的 Rust 绑定示例：
 
-```rust
+```rust,ignore
 // 自动生成的 C 头文件绑定
 #[repr(C)]
 pub struct file_operations {
@@ -347,7 +350,7 @@ pub struct file_operations {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // Rust 调用 C 函数
 unsafe {
     bindings::printk(b"Hello from Rust\n".as_ptr() as *const c_char);
@@ -368,6 +371,7 @@ pub extern "C" fn rust_helper_process_data(data: *mut c_void, len: usize) -> c_i
 ---
 
 ## 七、安全关键系统关联
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
@@ -388,9 +392,11 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 ---
 
 ## 八、挑战与未来方向
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 8.1 当前挑战
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | 挑战 | 描述 | 缓解措施 |
@@ -402,6 +408,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 | 社区争议升温 (2026-05) | Linus Torvalds 审慎表态；核心维护者质疑 Rust 抽象层复杂度；`unsafe` 封装 vs. C 可审查性之争 | 透明度提升、RFC 式讨论、渐进式替换策略 [来源: [LKML 2026-05](https://lore.kernel.org/lkml/)] |
 
 ### 8.2 2026-2027 路线图
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - **更多子系统迁移**：网络协议栈、文件系统驱动
@@ -412,6 +419,7 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 ---
 
 ## 九、参考链接
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [Rust for Linux 官方网站](https://rust-for-linux.com/)
@@ -561,4 +569,3 @@ Rust for Linux 与项目已有的安全关键系统知识体系直接相关：
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

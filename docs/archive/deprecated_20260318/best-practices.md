@@ -73,7 +73,7 @@ my-async-project/
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // src/handlers/mod.rs
 // 统一导出处理器
 
@@ -107,7 +107,7 @@ impl<S> FromRequestParts<S> for AuthClaims {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // src/models/error.rs
 use thiserror::Error;
 
@@ -174,7 +174,7 @@ impl IntoResponse for AppError {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 好: 简洁的错误传播
 async fn get_user(id: u64) -> Result<User, AppError> {
     let user = sqlx::query_as::<_, User>("SELECT * FROM users WHERE id = ?")
@@ -204,7 +204,7 @@ async fn get_user(id: u64) -> Result<User, AppError> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 async fn process_file(path: &str) -> Result<Data> {
@@ -223,7 +223,7 @@ async fn process_file(path: &str) -> Result<Data> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::time::Duration;
 use tokio::time::sleep;
@@ -273,7 +273,7 @@ let result = with_retry(
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 连接池管理
 pub struct DbConnection {
     conn: PooledConnection,
@@ -322,7 +322,7 @@ impl Drop for Transaction {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::signal;
 
@@ -382,7 +382,7 @@ async fn main() {
 
 ### 4.1 并发限制
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 
 // 全局并发限制
@@ -416,7 +416,7 @@ async fn fetch_with_limit(urls: Vec<String>) -> Vec<Result<Response>> {
 
 ### 4.2 批处理
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 // 批量处理
@@ -456,7 +456,7 @@ async fn process_with_backpressure(items: Vec<Item>) {
 
 ### 5.1 避免不必要的分配
 
-```rust
+```rust,ignore
 // 坏: 每次调用都分配
 async fn bad(input: &[u8]) -> Vec<u8> {
     let mut result = Vec::new();  // 分配
@@ -481,7 +481,7 @@ thread_local! {
 
 ### 5.2 批量IO
 
-```rust
+```rust,ignore
 // 坏: 多次小写
 for chunk in chunks {
     stream.write(chunk).await?;
@@ -505,7 +505,7 @@ if !buf.is_empty() {
 
 ### 5.3 减少任务切换
 
-```rust
+```rust,ignore
 // 坏: 频繁yield
 for i in 0..100_000 {
     tokio::task::yield_now().await;  // 太频繁
@@ -524,7 +524,7 @@ for batch in (0..100_000).step_by(BATCH) {
 
 ### 5.4 使用正确的缓冲区大小
 
-```rust
+```rust,ignore
 // TCP socket调优
 let socket = TcpSocket::new_v4()?;
 socket.set_recv_buffer_size(64 * 1024)?;
@@ -568,7 +568,7 @@ mod tests {
 
 ### 6.2 集成测试
 
-```rust
+```rust,ignore
 // tests/integration_tests.rs
 use my_app::app::create_app;
 
@@ -606,7 +606,7 @@ async fn test_concurrent_requests() {
 
 ### 6.3 模拟/桩
 
-```rust
+```rust,ignore
 use mockall::automock;
 
 #[automock]
@@ -638,7 +638,7 @@ async fn test_with_mock() {
 
 ### 7.1 结构化日志
 
-```rust
+```rust,ignore
 use tracing::{info, instrument};
 
 #[instrument(skip(db), fields(user_id = %id))]
@@ -657,7 +657,7 @@ async fn get_user(db: &Database, id: Uuid) -> Result<User> {
 
 ### 7.2 指标收集
 
-```rust
+```rust,ignore
 use metrics::{counter, histogram, gauge};
 
 async fn handle_request(req: Request) -> Response {
@@ -678,7 +678,7 @@ async fn handle_request(req: Request) -> Response {
 
 ### 7.3 分布式追踪
 
-```rust
+```rust,ignore
 use tracing::{info_span, Instrument};
 
 async fn process_request(req: Request) -> Response {

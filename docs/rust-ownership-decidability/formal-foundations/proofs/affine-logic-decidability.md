@@ -241,7 +241,7 @@ CG(Γ₁ ∪ Γ₂, f a) = (α, C₁ ∪ C₂ ∪ {τ₁ = τ₂ → α})
 
 **合一算法** (Robinson, 1965):
 
-```rust
+```rust,ignore
 fn unify(c1: Type, c2: Type) -> Result<Substitution, Error> {
     match (c1, c2) {
         // 相同类型
@@ -315,7 +315,7 @@ count(x, e) = 表达式 e 中变量 x 的出现次数
 
 考虑嵌套函数应用:
 
-```rust
+```rust,ignore
 f₁ (f₂ (f₃ (... (fₙ x)...)))
 ```
 
@@ -350,7 +350,7 @@ f₁ (f₂ (f₃ (... (fₙ x)...)))
 
 **生命周期参数**:
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
@@ -358,7 +358,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 **Trait约束**:
 
-```rust
+```rust,ignore
 fn print<T: Display>(x: T)
 ```
 
@@ -366,7 +366,7 @@ fn print<T: Display>(x: T)
 
 **高阶类型**:
 
-```rust
+```rust,ignore
 fn map<F, T, U>(f: F, v: Vec<T>) -> Vec<U>
 where F: Fn(T) -> U
 ```
@@ -388,7 +388,7 @@ where F: Fn(T) -> U
 ### 6.3 实际算法：Hindley-Milner扩展
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 类型推断主函数
 fn infer(expr: &Expr, env: &mut TypeEnv) -> Result<Type, TypeError> {
     match expr {
@@ -539,7 +539,7 @@ let x = String::from("temp");  // 创建
 ### 8.2 关键数据结构
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 类型定义
 enum Type {
     Var(String),              // 类型变量: α, β, ...

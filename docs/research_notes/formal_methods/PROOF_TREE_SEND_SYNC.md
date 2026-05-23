@@ -264,7 +264,7 @@ fn not_send_example() {
 ### Sync 示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 use std::thread;
 

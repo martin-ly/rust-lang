@@ -135,7 +135,7 @@ Aeneas (Inria):
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// RustBelt: 验证Rust标准库
 ///
 /// 成果:

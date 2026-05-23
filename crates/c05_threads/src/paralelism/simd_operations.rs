@@ -651,6 +651,7 @@ mod tests {
     use super::*;
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_simd_vector() {
         let v = SimdVector::new(vec![1.0, 2.0, 3.0]);
         assert_eq!(v.len(), 3);
@@ -658,6 +659,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_simd_math() {
         let a = SimdVector::new(vec![1.0, 2.0, 3.0]);
         let b = SimdVector::new(vec![4.0, 5.0, 6.0]);
@@ -673,6 +675,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_simd_parallel_processing() {
         let data: Vec<i32> = (1..=10).collect();
         let threads = 4;
@@ -686,6 +689,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_auto_vectorization() {
         let a = vec![1.0, 2.0, 3.0];
         let b = vec![4.0, 5.0, 6.0];

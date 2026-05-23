@@ -80,7 +80,7 @@
 
 嵌入式系统需要处理多个并发任务，但传统方法面临诸多挑战：
 
-```rust
+```rust,ignore
 // 裸机轮询方式 - 复杂难以维护
 fn main() -> ! {
     loop {
@@ -130,7 +130,7 @@ fn main() -> ! {
 | 跨平台移植 | 高度硬件相关 | 维护困难 |
 | 学习曲线 | C API，复杂配置 | 开发效率低 |
 
-```rust
+```rust,ignore
 // FreeRTOS风格（概念性，unsafe FFI）
 unsafe fn task_sensor(_: *mut c_void) {
     loop {
@@ -154,7 +154,7 @@ Embassy针对嵌入式优化的异步运行时：
 5. **低功耗内置**：自动进入睡眠模式，无需手动管理
 6. **类型安全**：Rust类型系统保证并发安全
 
-```rust
+```rust,ignore
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Timer};
 
@@ -187,7 +187,7 @@ async fn main(spawner: Spawner) {
 
 Rust的async/await工作原理：
 
-```rust
+```rust,ignore
 // 原始代码
 async fn fetch_data() -> Data {
     let conn = connect().await;
@@ -234,7 +234,7 @@ impl Future for FetchDataFuture {
 
 **Future Trait**：
 
-```rust
+```rust,ignore
 pub trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -252,7 +252,7 @@ pub enum Poll<T> {
 
 Embassy的任务模型：
 
-```rust
+```rust,ignore
 /// Executor结构
 pub struct Executor {
     run_queue: RunQueue,
@@ -294,7 +294,7 @@ impl Executor {
 
 Waker是异步任务的通知机制：
 
-```rust
+```rust,ignore
 pub trait Wake {
     fn wake(self: Arc<Self>);
     fn wake_by_ref(self: &Arc<Self>);
@@ -328,7 +328,7 @@ async fn wait_for_interrupt() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
 
 async fn sleep_example() {
@@ -372,7 +372,7 @@ impl TimerQueue {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use embassy_sync::signal::Signal;
 
 static BUTTON_PRESS: Signal<CriticalSectionRawMutex, ()> = Signal::new();
@@ -403,7 +403,7 @@ async fn button_handler() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 pub trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -429,7 +429,7 @@ impl<'a> Context<'a> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 pub trait Executor {
     fn run(&mut self) -> !;
 
@@ -446,7 +446,7 @@ pub trait Executor {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub struct Spawner {
     executor: ExecutorRef,
 }
@@ -468,7 +468,7 @@ impl Spawner {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 pub struct Timer {
     deadline: Instant,
 }
@@ -503,7 +503,7 @@ impl Future for Timer {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 pub struct Channel<M, T, const N: usize> {
     mutex: M,
     queue: UnsafeCell<heapless::spsc::Queue<T, N>>,
@@ -568,7 +568,7 @@ impl<M: RawMutex, T, const N: usize> Channel<M, T, N> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Ticker};
 use embassy_sync::channel::Channel;
@@ -647,7 +647,7 @@ async fn process_batch(readings: &[SensorReading]) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use embassy_net::{Stack, tcp::TcpSocket};
 
 #[embassy_executor::task]
@@ -707,7 +707,7 @@ async fn connection_handler(
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Copy, Debug)]
 enum UiEvent {
     ButtonPress(ButtonId),
@@ -788,7 +788,7 @@ async fn ui_controller() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 #[embassy_executor::task]
 async fn low_power_node() {
     let wakeup_pin = Input::new(p.P0_02, Pull::Up);
@@ -833,7 +833,7 @@ async fn perform_measurement() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 static IPC_CHANNEL: Channel<CriticalSectionRawMutex, IpcMessage, 16> = Channel::new();
 
 #[cortex_m_rt::entry]
@@ -932,7 +932,7 @@ async fn core1_main_task() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use embassy_executor::Spawner;
 use embassy_time::{Duration, Ticker};
 use embassy_sync::channel::Channel;
@@ -1065,7 +1065,7 @@ async fn main_monitor() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Copy, Debug, PartialEq)]
 enum DeviceState {
     Idle,
@@ -1165,7 +1165,7 @@ async fn shutting_down_state() -> StateEvent {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 const MAX_CONCURRENT_CONNECTIONS: usize = 4;
 static CONNECTION_PERMITS: Channel<CriticalSectionRawMutex, (), MAX_CONCURRENT_CONNECTIONS> =
     Channel::new();
@@ -1245,7 +1245,7 @@ async fn handle_connection(
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 #[embassy_executor::task]
 async fn low_power_collector() {
     let wakeup_pin = Input::new(p.P0_02, Pull::Up);
@@ -1313,7 +1313,7 @@ async fn upload_pending_data() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Embassy任务内存模型
 
 // 1. 任务栈（静态分配）
@@ -1336,7 +1336,7 @@ async fn example_task() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Embassy协作式切换
 fn switch_tasks(from: &mut Task, to: &mut Task) {
     to.poll();  // 直接调用，~10-20 cycles
@@ -1353,7 +1353,7 @@ fn switch_tasks(from: &mut Task, to: &mut Task) {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 协作式调度响应时间
 
 // 最坏情况：长任务不yield
@@ -1383,7 +1383,7 @@ async fn good_task() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 1. 任务应该小而专注
 #[embassy_executor::task]
 async fn led_blinker(mut led: Output<'static>) {
@@ -1420,7 +1420,7 @@ async fn event_handler() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 1. 使用Mutex保护共享资源
 static SHARED_DATA: Mutex<CriticalSectionRawMutex, SharedState> =
     Mutex::new(SharedState::new());
@@ -1451,7 +1451,7 @@ async fn waiter() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 使用?传播错误
 async fn fallible_operation() -> Result<Data, Error> {
     let conn = connect().await?;
@@ -1481,7 +1481,7 @@ where
 ### 8.4 调试技巧
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 1. 任务执行时间测量
 async fn measured_task() {
     let start = Instant::now();
@@ -1576,7 +1576,7 @@ fn check_stack_usage() {
 ### 10.1 阻塞操作陷阱
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 错误：在中断中使用阻塞操作
 #[interrupt]
 fn TIMER_IRQ() {
@@ -1593,7 +1593,7 @@ fn TIMER_IRQ() {
 ### 10.2 递归Spawn限制
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 问题：动态递归spawn可能导致资源耗尽
 async fn recursive_task(depth: usize) {
     if depth > 0 {
@@ -1608,7 +1608,7 @@ const MAX_DEPTH: usize = 5;
 ### 10.3 优先级反转
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 协作式无抢占，所以没有传统优先级反转
 // 但长任务可能饿死其他任务
 

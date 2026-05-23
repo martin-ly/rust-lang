@@ -41,6 +41,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**最后更新**: 2026-05-08 (添加 1.95+ 引用)](#最后更新-2026-05-08-添加-195-引用)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -77,7 +78,7 @@
 - 解决高阶类型边界问题
 - 改进对 GAT (Generic Associated Types) 的支持
 
-```rust
+```rust,ignore
 // 新求解器将更好处理的案例
 #![feature(next_solver)]
 
@@ -107,7 +108,7 @@ where
 - 异步析构与借用检查器的交互
 - Pin 语义在异步 Drop 中的扩展
 
-```rust
+```rust,ignore
 #![feature(async_drop)]
 
 struct AsyncResource;
@@ -134,7 +135,7 @@ impl AsyncDrop for AsyncResource {
 
 **描述**: 原生的生成器/协程支持
 
-```rust
+```rust,ignore
 #![feature(generators)]
 
 let gen = || {
@@ -165,7 +166,7 @@ let iter = std::iter::iter! {
 
 **描述**: `Pin<&mut T>` 的自动重新借用
 
-```rust
+```rust,ignore
 // 现在需要显式重新借用
 let pinned: Pin<&mut T> = ...;
 use_pinned(pinned.as_mut());  // 必须显式 as_mut
@@ -220,7 +221,7 @@ rustc -Cdebuginfo-compression=zlib program.rs
 
 **状态**: 接近稳定
 
-```rust
+```rust,ignore
 #[repr(align(16))]
 fn aligned_function() {
     // 函数地址 16 字节对齐
@@ -230,6 +231,7 @@ fn aligned_function() {
 ---
 
 ## 标准库实验
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 1. 严格指针来源 (Strict Provenance)
@@ -257,7 +259,7 @@ let addr = ptr.addr();
 
 **状态**: 实验中
 
-```rust
+```rust,ignore
 #![feature(offset_of_slice)]
 
 // 获取切片字段偏移
@@ -279,6 +281,7 @@ let offset = offset_of!(Struct, field[0]);
 ---
 
 ## Cargo 实验
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 1. Build Dir 新布局
@@ -310,6 +313,7 @@ cargo build --timings -Zsection-timings
 ---
 
 ## 形式化研究机会
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 高优先级研究主题
@@ -325,6 +329,7 @@ cargo build --timings -Zsection-timings
 | 严格指针来源 | 指针操作的严格语义 | [ownership_model](../research_notes/formal_methods/ownership_model.md) |
 
 ### 建议添加的形式化定义
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 **Def 1.95-1 (Async Drop 安全)**: 异步析构保证资源最终释放，即使通过异步边界
@@ -336,9 +341,11 @@ cargo build --timings -Zsection-timings
 ---
 
 ## 风险与注意事项
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 实验特性风险
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 风险 | 说明 | 缓解措施 |
@@ -349,6 +356,7 @@ cargo build --timings -Zsection-timings
 | 形式化过期 | 形式化文档可能跟不上实现 | 标记为实验性 |
 
 ### 生产使用建议
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -373,6 +381,7 @@ cargo build --timings -Zsection-timings
 ---
 
 ## 相关文档
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 文档 | 说明 |
@@ -391,6 +400,7 @@ cargo build --timings -Zsection-timings
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **最新版本**: Rust 1.95.0+ (2026-03-05)
@@ -517,4 +527,3 @@ cargo build --timings -Zsection-timings
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

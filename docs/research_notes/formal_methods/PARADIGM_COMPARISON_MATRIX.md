@@ -109,7 +109,7 @@
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 函数式 + 泛型 + 并发
 use rayon::prelude::*;
 
@@ -179,7 +179,7 @@ Haskell     GC                    ⭐⭐⭐⭐      ⭐⭐        ⭐⭐
 
 Rust的选择:**显式错误处理优先**
 
-```rust
+```rust,ignore
 // Rust风格: 显式、可组合
 fn read_file(path: &str) -> Result<String, io::Error> {
     fs::read_to_string(path)
@@ -221,7 +221,7 @@ let content = read_file("a.txt")
 
 Rust的优势:**静态分发零成本 + 动态分发灵活性**
 
-```rust
+```rust,ignore
 // 静态分发: 零成本
 fn static_dispatch<T: Drawable>(item: &T) {
     item.draw();  // 单态化，内联

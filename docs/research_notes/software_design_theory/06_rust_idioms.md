@@ -422,7 +422,7 @@ fn combine_all() -> Option<u32> {
 ### 7.4 与 Builder 必填校验衔接
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 struct ConfigBuilder {
     host: Option<String>,
     port: Option<u16>,
@@ -461,7 +461,7 @@ impl ConfigBuilder {
 ### 8.3 完整代码示例：字符串处理
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::borrow::Cow;
 
 fn process_string(s: &str) -> Cow<str> {

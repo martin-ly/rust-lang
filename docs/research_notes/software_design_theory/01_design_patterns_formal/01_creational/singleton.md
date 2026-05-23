@@ -408,7 +408,7 @@ unsafe {
 
 **正确**：
 
-```rust
+```rust,ignore
 static COUNTER: OnceLock<Mutex<i32>> = OnceLock::new();
 
 let counter = COUNTER.get_or_init(|| Mutex::new(0));

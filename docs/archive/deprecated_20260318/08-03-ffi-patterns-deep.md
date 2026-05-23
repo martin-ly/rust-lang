@@ -159,7 +159,7 @@ pub unsafe extern "C" fn unsafe_ffi(ptr: *mut Vec<i32>) {
 
 **Invariant 2: Programmer Responsible for Pre/Post Conditions**
 
-```rust
+```rust,ignore
 /// # Safety
 ///
 /// - `ptr` must be a valid, non-null pointer to a `Data` structure
@@ -181,7 +181,7 @@ pub unsafe extern "C" fn free_data(ptr: *mut Data) {
 
 **Invariant 3: ABI Compatibility Must Match Exactly**
 
-```rust
+```rust,ignore
 // Rust side
 #[repr(C)]
 pub struct Point {
@@ -214,7 +214,7 @@ double compute_distance(Point p1, Point p2);
 
 Every FFI function should document its safety contract:
 
-```rust
+```rust,ignore
 /// Creates a new data structure and returns an opaque pointer.
 ///
 /// # Returns
@@ -255,7 +255,7 @@ Memory management across FFI boundaries is one of the most challenging aspects o
 
 In this pattern, Rust maintains full ownership and control over memory. Foreign code receives only opaque pointers.
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int};
 
@@ -390,7 +390,7 @@ int main() {
 
 When C needs to manage the lifetime of data, or when integrating with existing C codebases:
 
-```rust
+```rust,ignore
 use std::alloc::{self, Layout};
 use std::ffi::c_void;
 use std::mem;
@@ -522,7 +522,7 @@ pub unsafe extern "C" fn free_c_buffer(buffer: COwnedBuffer) {
 
 For complex scenarios where both sides need access:
 
-```rust
+```rust,ignore
 use std::ffi::c_void;
 use std::os::raw::c_int;
 use std::sync::{Arc, Mutex, RwLock, Weak};
@@ -677,7 +677,7 @@ pub unsafe extern "C" fn shared_data_ref_count(handle: *const SharedDataHandle) 
 
 For integrating with custom C allocators:
 
-```rust
+```rust,ignore
 use std::alloc::{GlobalAlloc, Layout, System};
 use std::ffi::c_void;
 use std::os::raw::{c_char, c_int};
@@ -778,7 +778,7 @@ Complete mapping between Rust and C types:
 
 For types passed directly between Rust and C:
 
-```rust
+```rust,ignore
 /// Point structure with C-compatible layout
 #[repr(C)]
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -851,7 +851,7 @@ pub extern "C" fn value_get_int(val: &Value) -> i64 {
 
 For hiding implementation details:
 
-```rust
+```rust,ignore
 /// Opaque type - only usable through pointers
 pub struct InternalData {
     // Private fields
@@ -899,7 +899,7 @@ pub unsafe extern "C" fn opaque_data_free(ptr: *mut OpaqueData) {
 
 ### 3.4 String Handling
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString, NulError};
 use std::os::raw::c_char;
 
@@ -978,7 +978,7 @@ pub unsafe extern "C" fn rust_string_from_bytes(
 
 ### 3.5 Slice Types
 
-```rust
+```rust,ignore
 use std::os::raw::c_void;
 use std::slice;
 
@@ -1060,7 +1060,7 @@ pub unsafe extern "C" fn slice_copy(
 **Theorem FFI-PANIC-SAFETY**:
 > Panics unwinding across the FFI boundary into foreign code constitute **undefined behavior**.
 
-```rust
+```rust,ignore
 // This is UNDEFINED BEHAVIOR if called from C:
 #[no_mangle]
 pub extern "C" fn might_panic() {
@@ -1072,7 +1072,7 @@ pub extern "C" fn might_panic() {
 
 ### 4.2 The Solution: catch_unwind
 
-```rust
+```rust,ignore
 use std::ffi::c_void;
 use std::os::raw::{c_char, c_int};
 use std::panic::{self, AssertUnwindSafe};
@@ -1151,7 +1151,7 @@ pub extern "C" fn safe_operation(input: c_int) -> FfiResult<c_int> {
 
 For simpler cases, aborting may be preferred:
 
-```rust
+```rust,ignore
 use std::panic;
 
 /// Configure the runtime to abort on panic.
@@ -1233,7 +1233,7 @@ This section presents common mistakes when working with FFI. Each example demons
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Use after free
 #[no_mangle]
 pub unsafe extern "C" fn bad_use_after_free() {
@@ -1251,7 +1251,7 @@ pub unsafe extern "C" fn bad_use_after_free() {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Invalidate pointer after free
 #[no_mangle]
 pub unsafe extern "C" fn good_lifetime_management() {
@@ -1267,7 +1267,7 @@ pub unsafe extern "C" fn good_lifetime_management() {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Returning pointer to local
 #[no_mangle]
 pub extern "C" fn bad_dangling_return() -> *const i32 {
@@ -1283,7 +1283,7 @@ pub extern "C" fn bad_dangling_return() -> *const i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Use Box for heap allocation
 #[no_mangle]
 pub extern "C" fn good_heap_return() -> *mut i32 {
@@ -1315,7 +1315,7 @@ pub unsafe extern "C" fn good_caller_provided(
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: No null check
 #[no_mangle]
 pub unsafe extern "C" fn bad_null_deref(ptr: *mut Data) {
@@ -1330,7 +1330,7 @@ pub unsafe extern "C" fn bad_null_deref(ptr: *mut Data) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Always check for null
 #[no_mangle]
 pub unsafe extern "C" fn good_null_check(ptr: *mut Data) -> c_int {
@@ -1360,7 +1360,7 @@ pub unsafe extern "C" fn good_optional_pointer(
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Reading uninitialized memory
 #[no_mangle]
 pub unsafe extern "C" fn bad_uninitialized() -> i32 {
@@ -1377,7 +1377,7 @@ pub unsafe extern "C" fn bad_uninitialized() -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Initialize before use
 #[no_mangle]
 pub extern "C" fn good_initialized() -> i32 {
@@ -1400,7 +1400,7 @@ pub unsafe extern "C" fn good_maybe_uninit() -> Data {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 #[repr(C)]
 #[derive(Clone, Copy)]
 pub enum Status {
@@ -1428,7 +1428,7 @@ pub unsafe extern "C" fn bad_enum_value(status: Status) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Validate enum values
 #[no_mangle]
 pub unsafe extern "C" fn good_enum_value(status: u32) -> c_int {
@@ -1459,7 +1459,7 @@ pub unsafe extern "C" fn good_int_status(status: u32) -> c_int {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Treating any byte array as C string
 #[no_mangle]
 pub unsafe extern "C" fn bad_string_handling(
@@ -1479,7 +1479,7 @@ pub unsafe extern "C" fn bad_string_handling(
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Explicit length handling
 #[no_mangle]
 pub unsafe extern "C" fn good_string_handling(
@@ -1526,7 +1526,7 @@ pub unsafe extern "C" fn good_string_conversion(
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Trusting caller-provided length
 #[no_mangle]
 pub unsafe extern "C" fn bad_slice_handling(
@@ -1546,7 +1546,7 @@ pub unsafe extern "C" fn bad_slice_handling(
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Validate pointer and use safe operations
 #[no_mangle]
 pub unsafe extern "C" fn good_slice_handling(
@@ -1570,7 +1570,7 @@ pub unsafe extern "C" fn good_slice_handling(
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Uncontrolled panic
 #[no_mangle]
 pub extern "C" fn bad_panic_boundary() {
@@ -1587,7 +1587,7 @@ pub extern "C" fn bad_panic_boundary() {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Catch panics at boundary
 use std::panic::catch_unwind;
 
@@ -1610,7 +1610,7 @@ pub extern "C" fn good_panic_safety() -> c_int {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 // ANTI-PATTERN: Non-Sync type shared across threads
@@ -1635,7 +1635,7 @@ pub extern "C" fn bad_thread_access() -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Use thread-safe types
 use std::sync::atomic::{AtomicI32, Ordering};
 
@@ -1665,7 +1665,7 @@ pub extern "C" fn good_mutex_access(value: i32) -> usize {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Creating mutable aliases
 #[no_mangle]
 pub unsafe extern "C" fn bad_mutable_alias(ptr: *mut Data) {
@@ -1684,7 +1684,7 @@ pub unsafe extern "C" fn bad_mutable_alias(ptr: *mut Data) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: No aliasing through raw pointers
 #[no_mangle]
 pub unsafe extern "C" fn good_no_alias(ptr: *mut Data) {
@@ -1718,7 +1718,7 @@ pub unsafe extern "C" fn good_array_access(
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Wrong calling convention
 #[no_mangle]
 pub extern "stdcall" fn bad_abi_windows(x: i32) -> i32 {
@@ -1737,7 +1737,7 @@ pub extern "stdcall" fn bad_abi_windows(x: i32) -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Match the ABI on both sides
 // Rust:
 #[no_mangle]
@@ -1761,7 +1761,7 @@ pub extern "system" fn good_abi_windows(hwnd: HWND, msg: UINT) -> LRESULT {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // Rust side - no repr(C)
 pub struct Point {
     pub x: f64,
@@ -1843,7 +1843,7 @@ typedef struct {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Manual bit manipulation
 #[repr(C)]
 pub struct GoodBitfield {
@@ -1884,7 +1884,7 @@ bitfield! {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Storing callback without lifetime tracking
 type Callback = extern "C" fn(i32) -> i32;
 
@@ -1916,7 +1916,7 @@ pub extern "C" fn trigger_callback(x: i32) -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Track callback validity
 use std::sync::atomic::{AtomicBool, Ordering};
 
@@ -1964,7 +1964,7 @@ pub struct CallbackContext {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Allocating without guaranteed free path
 #[no_mangle]
 pub extern "C" fn bad_resource_leak() -> *mut Data {
@@ -1982,7 +1982,7 @@ pub extern "C" fn bad_resource_leak() -> *mut Data {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: RAII wrapper for C
 #[repr(C)]
 pub struct ManagedResource {
@@ -2032,7 +2032,7 @@ pub unsafe extern "C" fn good_ref_release(ptr: *const RefCountedData) {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Silent integer overflow
 #[no_mangle]
 pub extern "C" fn bad_integer_overflow(a: i32, b: i32) -> i32 {
@@ -2042,7 +2042,7 @@ pub extern "C" fn bad_integer_overflow(a: i32, b: i32) -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Check for overflow
 #[no_mangle]
 pub extern "C" fn good_checked_add(a: i32, b: i32) -> FfiResult<i32> {
@@ -2065,7 +2065,7 @@ pub extern "C" fn good_checked_add(a: i32, b: i32) -> FfiResult<i32> {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Unsafe static mut
 static mut GLOBAL_COUNTER: i32 = 0;
 
@@ -2080,7 +2080,7 @@ pub extern "C" fn bad_increment() -> i32 {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Atomic operations
 use std::sync::atomic::{AtomicI32, Ordering};
 
@@ -2096,7 +2096,7 @@ pub extern "C" fn good_increment() -> i32 {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Multiple free paths
 #[no_mangle]
 pub unsafe extern "C" fn bad_double_free(ptr: *mut Data) {
@@ -2110,7 +2110,7 @@ pub unsafe extern "C" fn bad_double_free(ptr: *mut Data) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Null after free
 #[no_mangle]
 pub unsafe extern "C" fn good_single_free(ptr: *mut Data) {
@@ -2129,7 +2129,7 @@ pub unsafe extern "C" fn good_single_free(ptr: *mut Data) {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Wrong destruction order
 #[repr(C)]
 pub struct ResourcePair {
@@ -2150,7 +2150,7 @@ pub unsafe extern "C" fn bad_drop_order(pair: *mut ResourcePair) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Document and respect dependencies
 /// # Safety
 ///
@@ -2172,7 +2172,7 @@ pub unsafe extern "C" fn good_independent_drop(pair: *mut ResourcePair) {
 
 **The Problem:**
 
-```rust
+```rust,ignore
 // ANTI-PATTERN: Type punning through void*
 #[no_mangle]
 pub extern "C" fn bad_type_confusion(ptr: *mut c_void, type_tag: i32) {
@@ -2190,7 +2190,7 @@ pub extern "C" fn bad_type_confusion(ptr: *mut c_void, type_tag: i32) {
 
 **The Solution:**
 
-```rust
+```rust,ignore
 // CORRECT: Use tagged union
 #[repr(C)]
 pub enum DataTag {
@@ -2227,7 +2227,7 @@ Bindgen automatically generates Rust FFI bindings from C header files.
 bindgen = "0.69"
 ```
 
-```rust
+```rust,ignore
 // build.rs
 use std::env;
 use std::path::PathBuf;
@@ -2262,7 +2262,7 @@ fn main() {
 
 **Advanced Bindgen Configuration:**
 
-```rust
+```rust,ignore
 // build.rs - Advanced configuration
 fn main() {
     let bindings = bindgen::Builder::default()
@@ -2292,7 +2292,7 @@ fn main() {
 
 **Using Generated Bindings:**
 
-```rust
+```rust,ignore
 // src/lib.rs
 #![allow(non_upper_case_globals)]
 #![allow(non_camel_case_types)]
@@ -2367,7 +2367,7 @@ documentation_style = "c"
 
 **Rust Source:**
 
-```rust
+```rust,ignore
 // src/lib.rs
 
 /// A data store for user information
@@ -2474,7 +2474,7 @@ cxx = "1.0"
 cxx-build = "1.0"
 ```
 
-```rust
+```rust,ignore
 // build.rs
 fn main() {
     cxx_build::bridge("src/main.rs")
@@ -2486,7 +2486,7 @@ fn main() {
 
 ### 7.2 CXX Bridge
 
-```rust
+```rust,ignore
 // src/lib.rs
 #[cxx::bridge]
 mod ffi {
@@ -2528,7 +2528,7 @@ impl MyRustType {
 
 ### 7.3 Safe String Handling
 
-```rust
+```rust,ignore
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
@@ -2554,7 +2554,7 @@ fn use_cxx_string() {
 
 ### 7.4 Safe Vectors
 
-```rust
+```rust,ignore
 #[cxx::bridge]
 mod ffi {
     unsafe extern "C++" {
@@ -2581,7 +2581,7 @@ mod rust_ffi {
 
 ### 7.5 Safe Exceptions
 
-```rust
+```rust,ignore
 #[cxx::bridge]
 mod ffi {
     extern "Rust" {
@@ -2608,7 +2608,7 @@ fn use_cpp() {
 
 ### 7.6 Shared Types
 
-```rust
+```rust,ignore
 #[cxx::bridge]
 mod ffi {
     // Shared struct - layout guaranteed compatible
@@ -2658,7 +2658,7 @@ pyo3 = { version = "0.20", features = ["extension-module"] }
 
 ### 8.2 Basic Module Structure
 
-```rust
+```rust,ignore
 // src/lib.rs
 use pyo3::prelude::*;
 use pyo3::types::{PyDict, PyList, PyTuple};
@@ -2848,7 +2848,7 @@ print(dist)  # 11.0
 
 ### 8.4 Memory Management in PyO3
 
-```rust
+```rust,ignore
 use pyo3::prelude::*;
 use std::ffi::CString;
 
@@ -2923,7 +2923,7 @@ magnus = { version = "0.6", features = ["full"] }
 
 ### 9.2 Basic Extension
 
-```rust
+```rust,ignore
 // src/lib.rs
 use magnus::{
     class, define_module, function, method, prelude::*, wrap, Error, RArray, RHash, RString, Value,
@@ -3134,7 +3134,7 @@ puts MyRubyGem.string_reverse("hello")  # "olleh"
 
 ### 9.4 Error Handling
 
-```rust
+```rust,ignore
 use magnus::{Error, exception};
 
 /// Custom error type
@@ -3217,7 +3217,7 @@ napi-build = "2"
 
 ### 10.2 Basic Module
 
-```rust
+```rust,ignore
 // src/lib.rs
 use napi::bindgen_prelude::*;
 use napi_derive::napi;
@@ -3521,7 +3521,7 @@ computeWithCallback([1, 2, 3, 4, 5], (err, result) => {
 
 ### 11.1 Object Pools
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::sync::{Arc, Mutex};
 use std::os::raw::c_int;
@@ -3670,7 +3670,7 @@ impl MessageHeader {
 
 ### 11.3 Async FFI with Futures
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -3772,7 +3772,7 @@ pub unsafe extern "C" fn async_operation_free(handle: *mut FutureHandle<i32>) {
 
 ### 11.4 Memory-Mapped I/O
 
-```rust
+```rust,ignore
 use std::fs::OpenOptions;
 use std::os::raw::c_int;
 

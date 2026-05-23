@@ -138,7 +138,7 @@ CBMC 的处理流程：
 
 Kani 采用**有界模型检测 (Bounded Model Checking)**，对循环和递归设置界限：
 
-```rust
+```rust,ignore
 // Kani 会展开循环最多 10 次
 cargo kani --unwind 10
 
@@ -270,7 +270,7 @@ edition = "2021"
 
 ### 5.1 基础证明函数
 
-```rust
+```rust,ignore
 // 最简单的证明函数
 #[kani::proof]
 fn test_addition() {
@@ -287,7 +287,7 @@ fn test_addition() {
 
 `kani::any()` 生成符号值，代表所有可能的输入：
 
-```rust
+```rust,ignore
 use kani::Arbitrary;
 
 #[derive(Arbitrary)]  // 自动生成任意值
@@ -322,7 +322,7 @@ fn test_struct() {
 
 **假设 (Assume) - 前置条件：**
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn test_division() {
     let x: i32 = kani::any();
@@ -340,7 +340,7 @@ fn test_division() {
 
 **断言 (Assert) - 后置条件：**
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn test_abs() {
     let x: i32 = kani::any();
@@ -358,7 +358,7 @@ fn test_abs() {
 
 ### 5.4 循环展开
 
-```rust
+```rust,ignore
 // 需要指定循环展开次数
 #[kani::proof]
 #[kani::unwind(10)]  // 展开循环最多 10 次
@@ -382,7 +382,7 @@ fn test_loop() {
 
 ### 6.1 算术运算验证
 
-```rust
+```rust,ignore
 /// 安全加法函数
 fn saturating_add(a: u32, b: u32) -> u32 {
     a.saturating_add(b)
@@ -435,7 +435,7 @@ fn verify_checked_mul() {
 
 ### 6.2 二分查找验证
 
-```rust
+```rust,ignore
 /// 二分查找实现
 fn binary_search(arr: &[i32], target: i32) -> Option<usize> {
     let mut left = 0;
@@ -499,7 +499,7 @@ fn verify_binary_search_not_found() {
 
 ### 6.3 Unsafe 代码验证
 
-```rust
+```rust,ignore
 /// 安全的内存复制
 unsafe fn copy_nonoverlapping<T>(src: *const T, dst: *mut T, count: usize) {
     std::ptr::copy_nonoverlapping(src, dst, count);
@@ -545,7 +545,7 @@ fn verify_raw_pointer() {
 
 ### 6.4 状态机验证
 
-```rust
+```rust,ignore
 /// 简单的状态机
 #[derive(Clone, Copy, PartialEq)]
 enum State {
@@ -633,7 +633,7 @@ cargo kani --coverage --visualize
 
 ### 7.2 假设契约
 
-```rust
+```rust,ignore
 /// 契约：函数的前置条件
 struct Contract<T> {
     value: T,
@@ -670,7 +670,7 @@ fn verify_contract() {
 
 Kani 对多线程的支持有限，主要用于验证同步原语：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 #[kani::proof]
@@ -715,7 +715,7 @@ fn verify_atomic_operations() {
 
 ```markdown
 1. **渐进式验证**: 从简单属性开始，逐步增加复杂度
-   ```rust
+   ```rust,ignore
    // 第一步：验证基本属性
    #[kani::proof]
    fn test_basic() { ... }
@@ -727,7 +727,7 @@ fn verify_atomic_operations() {
 
 1. **合理设置展开界限**: 根据算法复杂度设置
 
-   ```rust
+   ```rust,ignore
    // 对于 O(n) 算法，界限设为 n 的最大值
    #[kani::unwind(100)]
    fn test_linear_algorithm() {
@@ -747,7 +747,7 @@ fn verify_atomic_operations() {
 
 **陷阱 1: 循环界限不足**
 
-```rust
+```rust,ignore
 #[kani::proof]
 #[kani::unwind(5)]  // 界限太小！
 fn test_loop() {
@@ -763,7 +763,7 @@ fn test_loop() {
 
 **陷阱 2: 忘记假设约束**
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn test_division_unconstrained() {
     let x: i32 = kani::any();
@@ -776,7 +776,7 @@ fn test_division_unconstrained() {
 
 **陷阱 3: 状态空间爆炸**
 
-```rust
+```rust,ignore
 // ❌ 错误：状态空间太大
 #[kani::proof]
 fn test_explosion() {
@@ -812,7 +812,7 @@ fn test_constrained() {
 
 ### 性能优化建议
 
-```rust
+```rust,ignore
 // 1. 使用较小的数据类型
 let x: u8 = kani::any();  // 比 u64 更快
 

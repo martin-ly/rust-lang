@@ -35,6 +35,7 @@
   - [六、常见陷阱](#六常见陷阱)
   - [七、来源与延伸阅读](#七来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -43,6 +44,7 @@
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 1.1 异步网络 IO 模型
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Asynchronous I/O]** Asynchronous I/O (AIO) is a form of input/output processing that permits other processing to continue before the transmission has finished.
@@ -88,6 +90,7 @@
 ---
 
 ### 1.2 Tokio Runtime 架构
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -140,6 +143,7 @@ Tokio Runtime 架构:
 ---
 
 ### 1.3 TCP vs UDP 语义差异
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[RFC 793 — TCP]** The Transmission Control Protocol (TCP) is intended for use as a highly reliable host-to-host protocol between hosts in packet-switched computer communication networks.
@@ -188,6 +192,7 @@ TCP vs UDP 语义矩阵:
 ---
 
 ### 1.4 Tower Service 抽象
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[Tower Service Trait]** The Service trait is an abstraction of a function of the form `fn(Request) -> Future<Output = Response>`.
@@ -241,6 +246,7 @@ Tower 核心抽象:
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 2.1 Tokio TCP 服务端实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -282,6 +288,7 @@ async fn main() -> tokio::io::Result<()> {
 ---
 
 ### 2.2 Tokio UDP 编程模型
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -309,6 +316,7 @@ async fn main() -> tokio::io::Result<()> {
 ---
 
 ### 2.3 Socket 选项与调优
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -347,6 +355,7 @@ async fn main() -> tokio::io::Result<()> {
 ---
 
 ### 2.4 Tower 中间件栈
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -430,6 +439,7 @@ let service = ServiceBuilder::new()
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 4.1 Tokio 网络 IO 架构图
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -476,6 +486,7 @@ graph TB
 ---
 
 ### 4.2 Tower Service 中间件栈
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -523,6 +534,7 @@ graph LR
 > [来源: [Tokio Documentation](https://tokio.rs/)]
 
 ### 5.1 反命题树
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -562,6 +574,7 @@ graph LR
 ---
 
 ### 5.2 边界极限
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -784,4 +797,3 @@ graph LR
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

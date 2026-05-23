@@ -82,7 +82,7 @@ for window in slice.array_windows() {
 ### 2.1 方法签名
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 impl<T> [T] {
     pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
     where
@@ -132,7 +132,7 @@ fn analyze_type_safety() {
 ### 3.2 生命周期语义
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 fn lifetime_semantics(data: &[i32]) -> impl Iterator<Item = &[i32; 2]> + '_ {
     // 返回的迭代器与输入切片共享生命周期
     data.array_windows()
@@ -239,7 +239,7 @@ fn pairwise_differences(data: &[i32]) -> impl Iterator<Item = i32> + '_ {
 ### 5.2 模式匹配
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ABBA 模式检测 (Advent of Code 2016)
 fn has_abba(s: &str) -> bool {
     s.as_bytes()

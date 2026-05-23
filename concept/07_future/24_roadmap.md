@@ -290,7 +290,7 @@ fn make_iter() -> MyIter {
 
 Portable SIMD 提供跨平台向量指令抽象：
 
-```rust,ignore
+```rust
 #![feature(portable_simd)]
 use std::simd::{Simd, f32x4};
 
@@ -958,3 +958,11 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
+
+> **补充来源**
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]
+> [来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]
+> [来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]

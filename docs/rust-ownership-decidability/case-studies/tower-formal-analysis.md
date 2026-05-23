@@ -61,7 +61,7 @@ Tower特点：
 ### 定义 SERVICE-1 ( 核心trait )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 trait Service<Request> {
     type Response;
     type Error;
@@ -112,7 +112,7 @@ trait Layer<S> {
 ### 定义 LAYER-2 ( 组合 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let stack = ServiceBuilder::new()
     .layer(TimeoutLayer::new(Duration::from_secs(10)))
     .layer(RetryLayer::new(policy))
@@ -132,14 +132,14 @@ $$
 ### 定义 COMPOSE-1 ( AndThen )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 service.and_then(|response| async { /* process */ })
 ```
 
 ### 定义 COMPOSE-2 ( 映射 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 service.map_request(|req| transform(req))
        .map_response(|res| transform(res))
 ```
@@ -152,7 +152,7 @@ service.map_request(|req| transform(req))
 ### 定义 BACKPRESSURE-1 ( 限流 )
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 RateLimitLayer::new(100, Duration::from_secs(1))
 ```
 
@@ -163,7 +163,7 @@ $$
 ### 定义 BACKPRESSURE-2 ( 并发控制 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 ConcurrencyLimitLayer::new(10)
 ```
 
@@ -179,7 +179,7 @@ $$
 ### 定义 TIMEOUT-1 ( 超时层 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 TimeoutLayer::new(Duration::from_secs(5))
 ```
 
@@ -190,7 +190,7 @@ $$
 ### 定义 RETRY-1 ( 重试策略 )
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 RetryLayer::new(RetryPolicy::new(3))
 ```
 
@@ -228,7 +228,7 @@ $$
 
 ### 示例1: 完整服务栈
 
-```rust
+```rust,ignore
 use tower::{Service, ServiceBuilder, ServiceExt};
 use tower::limit::{RateLimitLayer, ConcurrencyLimitLayer};
 use tower::timeout::TimeoutLayer;
@@ -259,7 +259,7 @@ where
 
 ### 示例2: 自定义服务
 
-```rust
+```rust,ignore
 use tower::Service;
 use std::task::{Context, Poll};
 use std::future::Future;
@@ -291,7 +291,7 @@ where
 
 ### 示例3: 自定义Layer
 
-```rust
+```rust,ignore
 use tower::{Layer, Service};
 
 #[derive(Clone)]

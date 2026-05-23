@@ -156,7 +156,7 @@ ExponentialBackoff → prevents thundering herd
 ## 4. Rust 实现示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use rand::Rng;
 
@@ -297,7 +297,7 @@ pub async fn fetch_with_retry(url: &str) -> Result<String, RetryError<reqwest::E
 ## 6. 可重试错误分类
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub fn is_retryable_error<E: std::error::Error>(e: &E) -> bool {
     // 瞬态错误
     if let Some(io_err) = e.downcast_ref::<std::io::Error>() {

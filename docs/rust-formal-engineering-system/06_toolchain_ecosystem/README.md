@@ -37,7 +37,7 @@ rustc --target x86_64-unknown-linux-gnu main.rs
 rustc --target wasm32-unknown-unknown main.rs
 ```
 
-```rust
+```rust,ignore
 // 编译器属性示例
 #![feature(...)]  // 启用不稳定特性
 

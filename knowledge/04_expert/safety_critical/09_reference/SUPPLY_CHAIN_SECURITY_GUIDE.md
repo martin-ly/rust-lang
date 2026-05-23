@@ -61,7 +61,7 @@
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 /// 依赖评估检查表
 pub struct DependencyCriteria {
     /// 维护活跃度

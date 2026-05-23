@@ -140,7 +140,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 2. **穷尽匹配**：
 
-   ```rust
+   ```rust,ignore
    match state { State::A => ..., State::B => ..., State::C => ... }
    ```
 
@@ -164,7 +164,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 1. **类型状态定义**：
 
-   ```rust
+   ```rust,ignore
    struct Config<State> { data: i32, _marker: PhantomData<State> }
    struct Locked;
    struct Unlocked;
@@ -172,7 +172,7 @@ $$\forall s: S,\, \forall e: \mathit{Event},\, \exists s': S,\, \delta(s, e) = s
 
 2. **状态特定方法**：
 
-   ```rust
+   ```rust,ignore
    impl Config<Locked> { fn unlock(self) -> Config<Unlocked> { ... } }
    impl Config<Unlocked> { fn lock(self) -> Config<Locked> { ... } fn get(&self) -> i32 { ... } }
    ```
@@ -351,7 +351,7 @@ impl Order {
 
 **错误**：枚举状态允许不该存在的转换，或漏掉分支。
 
-```rust
+```rust,ignore
 match &self.state {
     State::A => { self.state = State::B; }
     State::B => { self.state = State::C; }

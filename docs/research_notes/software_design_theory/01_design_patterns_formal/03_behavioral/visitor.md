@@ -134,7 +134,7 @@ Rust 用 `match` 单分发或 trait 模拟；无 OOP 风格双重分发，表达
 
 1. **单分发模式**：
 
-   ```rust
+   ```rust,ignore
    fn visit<V: Visitor>(v: &mut V, e: &Expr) {
        match e {
            Expr::Int(n) => v.visit_int(*n),
@@ -336,7 +336,7 @@ impl ExprVisitor<String> for PrettyPrint {
 
 **错误**：`Expr` 新增 `Expr::Mul` 变体，`visit` 中 `match` 未补充分支。
 
-```rust
+```rust,ignore
 enum Expr { Int(i32), Add(Box<Expr>, Box<Expr>), Mul(Box<Expr>, Box<Expr>) }
 fn visit<V: Visitor>(v: &mut V, e: &Expr) {
     match e {

@@ -393,7 +393,7 @@ public class ResourceManagement {
 
 **Rust RAII:**
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{self, BufRead, BufReader, BufWriter, Write};
 
@@ -471,7 +471,7 @@ Object[] objects = new Object[1000];  // 每个元素是指针
 
 **Rust 内存布局控制:**
 
-```rust
+```rust,ignore
 // Rust 可以精确控制内存布局
 
 // 默认布局 (可能与 C 不同)
@@ -568,7 +568,7 @@ public void boxing() {
 
 **Rust 单态化:**
 
-```rust
+```rust,ignore
 // Rust 泛型为每个类型生成专门代码
 
 // 为 i32 生成一份代码
@@ -739,7 +739,7 @@ public record Circle(double radius) implements Shape {
 
 **Rust Enum (真正的 ADT):**
 
-```rust
+```rust,ignore
 // Rust 原生支持 ADT
 pub enum Result<T, E> {
     Ok(T),
@@ -938,7 +938,7 @@ public class JavaConcurrency {
 
 **Rust 线程:**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::sync::mpsc;
 use std::time::Duration;
@@ -1232,7 +1232,7 @@ public class AsyncJava {
 
 **Rust async/await:**
 
-```rust
+```rust,ignore
 use tokio;
 
 pub async fn async_example() {
@@ -1328,7 +1328,7 @@ public void tryWithResources() throws IOException {
 
 **Rust Result:**
 
-```rust
+```rust,ignore
 use std::fs;
 use std::io;
 
@@ -1396,7 +1396,7 @@ public void operationC() throws IOException {
 
 **Rust:**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 
 pub fn operation_a() -> Result<()> {
@@ -1554,7 +1554,7 @@ public class CollectionOperations {
 
 **Rust:**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 pub fn process(input: Vec<String>) -> Vec<String> {
@@ -1810,7 +1810,7 @@ record User(Long id, String name) {}
 
 **Rust (Axum):**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Json, Router,

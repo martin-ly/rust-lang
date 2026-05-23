@@ -797,7 +797,7 @@ Graph: 'c → 'b → 'a → 'static
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 fn solve_constraints(constraints: &[Constraint]) -> Result<Assignment, Error> {
     // Build graph
     let mut graph = Graph::new();
@@ -995,7 +995,7 @@ fn main() {
 
 **Problem**: Attempting to create two simultaneous mutable borrows.
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3];
 
@@ -1048,7 +1048,7 @@ fn main() {
 
 **Problem**: Returning a reference to a local variable.
 
-```rust
+```rust,ignore
 fn get_reference() -> &i32 {
     let x = 5;
     &x  // ERROR: returns reference to local
@@ -1092,7 +1092,7 @@ fn get_reference<'a>(x: &'a i32) -> &'a i32 {
 
 **Problem**: More complex case of returning a reference to stack data.
 
-```rust
+```rust,ignore
 struct Config {
     value: String,
 }
@@ -1119,7 +1119,7 @@ error[E0106]: missing lifetime specifier
 
 **Solution**:
 
-```rust
+```rust,ignore
 fn get_config_string(config: &Config) -> &str {
     &config.value  // Reference to parameter, valid as long as config lives
 }
@@ -1139,7 +1139,7 @@ fn get_config_string() -> String {
 
 **Problem**: Struct containing a reference to its own field.
 
-```rust
+```rust,ignore
 struct Parser {
     text: String,
     current: &str,  // Reference to text
@@ -1169,7 +1169,7 @@ error[E0106]: missing lifetime specifier
 
 **Solution**:
 
-```rust
+```rust,ignore
 // Use indices instead of references
 struct Parser {
     text: String,
@@ -1199,7 +1199,7 @@ struct Parser {
 
 **Problem**: Incorrect assumptions about lifetime variance.
 
-```rust
+```rust,ignore
 fn extend_lifetime<'a, 'b>(x: &'a str) -> &'b str
 where
     'a: 'b,
@@ -1235,7 +1235,7 @@ error[E0597]: `s` does not live long enough
 
 **Solution**:
 
-```rust
+```rust,ignore
 // Correct usage - don't extend beyond actual lifetime
 fn use_correctly() {
     let s = String::from("hello");
@@ -1250,7 +1250,7 @@ fn use_correctly() {
 
 **Problem**: Incorrect HRTB usage.
 
-```rust
+```rust,ignore
 fn process<F>(f: F)
 where
     F: for<'a> Fn(&'a str) -> &'a str,
@@ -1290,7 +1290,7 @@ where
 
 **Problem**: Lifetime constraints in associated types.
 
-```rust
+```rust,ignore
 trait Container {
     type Item;
     fn get(&self) -> &Self::Item;
@@ -1320,7 +1320,7 @@ error[E0106]: missing lifetime specifier
 
 **Solution**:
 
-```rust
+```rust,ignore
 trait Container<'a> {
     type Item: 'a;
     fn get(&self) -> &'a Self::Item;
@@ -1373,7 +1373,7 @@ impl<'t> LendingIterator for WindowIter<'t> {
 
 **Solution**:
 
-```rust
+```rust,ignore
 trait LendingIterator {
     type Item<'a> where Self: 'a;
     fn next<'a>(&'a mut self) -> Option<Self::Item<'a>>;
@@ -1396,7 +1396,7 @@ impl<'t> LendingIterator for WindowIter<'t> {
 
 **Problem**: Lifetime elision with `impl Trait`.
 
-```rust
+```rust,ignore
 fn make_iter(data: &Vec<i32>) -> impl Iterator<Item = &i32> {
     data.iter()
 }
@@ -1449,7 +1449,7 @@ fn use_iter_correctly() {
 
 **Problem**: Lifetimes across await points.
 
-```rust
+```rust,ignore
 async fn process_data(data: &str) -> String {
     let result = fetch_data().await;  // Suspension point
     format!("{} - {}", data, result)  // data must be valid across await
@@ -1479,7 +1479,7 @@ error[E0597]: `local` does not live long enough
 
 **Solution**:
 
-```rust
+```rust,ignore
 async fn process_data_owned(data: String) -> String {
     let result = fetch_data().await;
     format!("{} - {}", data, result)
@@ -1498,7 +1498,7 @@ async fn caller_fixed() {
 
 **Problem**: Modifying a collection while iterating.
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3, 4, 5];
 
@@ -1550,7 +1550,7 @@ fn main() {
 
 **Problem**: References invalidated by vector growth.
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3];
     let first = &data[0];
@@ -1581,7 +1581,7 @@ error[E0502]: cannot borrow `data` as mutable because it is also borrowed as imm
 
 **Solution**:
 
-```rust
+```rust,ignore
 fn main() {
     let mut data = vec![1, 2, 3];
 
@@ -1603,7 +1603,7 @@ fn main() {
 
 **Problem**: String slices invalidated by mutation.
 
-```rust
+```rust,ignore
 fn main() {
     let mut s = String::from("hello world");
     let word = &s[0..5];  // Slice referencing s
@@ -1650,7 +1650,7 @@ fn main() {
 
 **Problem**: Closures capturing references with incorrect lifetimes.
 
-```rust
+```rust,ignore
 fn make_closure<'a>(s: &'a str) -> impl Fn() -> &'a str {
     move || s
 }
@@ -1743,7 +1743,7 @@ NLL uses dataflow analysis to determine when borrows actually end.
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Borrow set computation
 fn compute_borrow_set(cfg: &Cfg) -> BorrowSet {
     let mut borrow_set = BorrowSet::new();
@@ -1776,7 +1776,7 @@ fn liveness_analysis(cfg: &Cfg, borrow_set: &BorrowSet) -> Liveness {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 fn check_borrows(cfg: &Cfg, liveness: &Liveness) -> Result<(), Vec<BorrowError>> {
     let mut errors = Vec::new();
 
@@ -1979,7 +1979,7 @@ A loan is a borrow expression like `&x` or `&mut y`
 
 Polonius asks: "What loans could this reference be based on?"
 
-```rust
+```rust,ignore
 let x = &mut data;  // loan L1: mut borrow of data
 let y = x;          // y has same origin as x: {L1}
 
@@ -2078,7 +2078,7 @@ error(L, P) :-
 
 #### 7.4.2 Implementation Sketch
 
-```rust
+```rust,ignore
 struct PoloniusEngine {
     facts: Facts,
     output: Output,
@@ -2149,7 +2149,7 @@ This section explores advanced borrowing patterns in Rust.
 
 Reborrowing converts one reference type to another, typically shortening the lifetime.
 
-```rust
+```rust,ignore
 // Reborrowing pattern
 fn reborrow_example<T: DerefMut<Target=U>, U>(r: &mut T) -> &mut U {
     &mut **r  // Reborrow: &mut T → &mut U
@@ -2168,7 +2168,7 @@ where 'b: 'a (shorter lifetime)
 
 #### 8.1.3 Common Patterns
 
-```rust
+```rust,ignore
 // Pattern 1: Reborrow for method dispatch
 fn use_vec(vec: &mut Vec<i32>) {
     // Automatic reborrow: &mut Vec → &mut [i32]
@@ -2301,7 +2301,7 @@ trait LendingIterator {
 
 #### 8.4.2 Implementation Example
 
-```rust
+```rust,ignore
 struct WindowIter<'t> {
     data: &'t [i32],
     pos: usize,
@@ -2321,7 +2321,7 @@ impl<'t> LendingIterator for WindowIter<'t> {
 
 #### 8.4.3 Use Case: In-Place Parsing
 
-```rust
+```rust,ignore
 struct Parser<'input> {
     input: &'input str,
     pos: usize,
@@ -2353,7 +2353,7 @@ impl<'input> LendingIterator for Parser<'input> {
 
 #### 8.5.1 The Problem
 
-```rust
+```rust,ignore
 // Cannot do this safely:
 struct SelfRef {
     data: String,
@@ -2363,7 +2363,7 @@ struct SelfRef {
 
 #### 8.5.2 Pin Solution
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -2417,7 +2417,7 @@ This section provides a detailed analysis of how the borrow checker interacts wi
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 pub struct HashMap<K, V, S = RandomState> {
     // ...
 }
@@ -2433,7 +2433,7 @@ impl<K, V, S> HashMap<K, V, S> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 pub struct IterMut<'a, K, V> {
     inner: RawIter<(K, V)>,
     marker: PhantomData<&'a mut HashMap<K, V>>,
@@ -2474,7 +2474,7 @@ item: (&'a K, &'a mut V)
 
 #### 9.3.3 Why Keys are Immutable
 
-```rust
+```rust,ignore
 // This is NOT allowed:
 fn broken<K, V>(map: &mut HashMap<K, V>) {
     for (k, v) in map.iter_mut() {
@@ -2492,7 +2492,7 @@ Reason: Changing keys would change their hash values, invalidating the hash tabl
 
 #### 9.4.1 Entry Definition
 
-```rust
+```rust,ignore
 pub enum Entry<'a, K, V> {
     Occupied(OccupiedEntry<'a, K, V>),
     Vacant(VacantEntry<'a, K, V>),
@@ -2501,7 +2501,7 @@ pub enum Entry<'a, K, V> {
 
 #### 9.4.2 Borrow Checker Guarantees
 
-```rust
+```rust,ignore
 fn entry_example(map: &mut HashMap<String, i32>) {
     match map.entry("key".to_string()) {
         Entry::Occupied(e) => {
@@ -2521,7 +2521,7 @@ fn entry_example(map: &mut HashMap<String, i32>) {
 
 #### 9.5.1 The Problem
 
-```rust
+```rust,ignore
 // Cannot do this:
 fn concurrent_access(map: &mut HashMap<String, i32>) {
     let iter = map.iter();
@@ -2533,7 +2533,7 @@ fn concurrent_access(map: &mut HashMap<String, i32>) {
 
 #### 9.5.2 Solutions
 
-```rust
+```rust,ignore
 // Solution 1: Collect keys first
 fn solution1(map: &mut HashMap<String, i32>) {
     let keys: Vec<_> = map.keys().cloned().collect();
@@ -2581,7 +2581,7 @@ This appendix covers borrow checker features and improvements in Rust 1.94.
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // Rust 1.82+ precise capturing
 fn precise_capture<'a, 'b>(
     x: &'a i32,
@@ -2596,7 +2596,7 @@ fn precise_capture<'a, 'b>(
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Rust 1.87+ improved lifetime syntax
 fn foo<T>(x: &impl for<'a> Trait<'a>) { }
 
@@ -2619,7 +2619,7 @@ const fn modify_in_const(x: &mut i32) {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Rust 1.82+ Pin::as_deref_mut
 impl<P: DerefMut> Pin<P> {
     pub fn as_deref_mut(self: &mut Pin<P>) -> &mut P::Target {

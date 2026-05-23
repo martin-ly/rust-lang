@@ -1045,7 +1045,7 @@ fn main() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Trait 约束用于限制泛型类型参数
 trait Clone {
     fn clone(&self) -> Self;
@@ -1415,7 +1415,7 @@ Rust 1.93.0 稳定化了 `MaybeUninit<T>` 切片的新方法：
 
 这些方法为 Trait 对象的底层实现提供了更安全的工具，特别是在处理 Trait 对象集合时：
 
-```rust
+```rust,ignore
 // Trait 对象集合的安全初始化
 let mut objects: Vec<MaybeUninit<dyn Trait>> = Vec::new();
 // ... 初始化过程
@@ -1475,7 +1475,7 @@ T : Deref<Target = U>
 
 `DerefMut` trait允许可变解引用。
 
-```rust
+```rust,ignore
 trait DerefMut: Deref {
     fn deref_mut(&mut self) -> &mut Self::Target;
 }
@@ -1568,7 +1568,7 @@ fn box_deref() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 struct MyBox<T>(T);
 
 impl<T> Deref for MyBox<T> {
@@ -1593,7 +1593,7 @@ fn custom_smart_pointer() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 fn hello(name: &str) {
     println!("Hello, {}!", name);
 }
@@ -1615,7 +1615,7 @@ fn deref_coercion_in_args() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 impl<T> DerefMut for MyBox<T> {
     fn deref_mut(&mut self) -> &mut T {
         &mut self.0

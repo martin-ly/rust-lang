@@ -109,7 +109,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // domain/mod.rs - 领域层
 pub mod entities;
 pub mod repositories;
@@ -252,7 +252,7 @@ pub struct CreateUserRequest {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ports.rs - 定义端口（trait）
 
 // 入站端口（驱动应用）
@@ -421,7 +421,7 @@ async fn main() {
 
 ### Rust实现
 
-```rust
+```rust,ignore
 // commands.rs
 pub struct CreateOrderCommand {
     pub order_id: String,
@@ -504,7 +504,7 @@ impl EventHandler for OrderProjection {
 
 ### 架构
 
-```rust
+```rust,ignore
 // events.rs
 #[derive(Serialize, Deserialize, Clone, Debug)]
 #[serde(tag = "type")]
@@ -716,7 +716,7 @@ impl EventStore for PostgresEventStore {
 
 ### 服务边界划分
 
-```rust
+```rust,ignore
 // 使用workspace组织微服务
 // Cargo.toml (workspace root)
 [workspace]
@@ -777,7 +777,7 @@ my_project/
 
 ### 分层错误类型
 
-```rust
+```rust,ignore
 // domain/errors.rs
 #[derive(Debug, thiserror::Error)]
 pub enum DomainError {
@@ -850,7 +850,7 @@ impl From<ApplicationError> for ApiError {
 
 ### 分层配置
 
-```rust
+```rust,ignore
 use config::{Config, ConfigError, Environment, File};
 use serde::Deserialize;
 

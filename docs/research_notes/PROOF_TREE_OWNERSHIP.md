@@ -90,7 +90,7 @@ T-OW1: 所有权唯一性
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // 资源创建时
 let r = Resource::new();
 // owner(r) = 当前作用域
@@ -101,7 +101,7 @@ let r = Resource::new();
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 假设: owner(r) = A
 let b = a;  // move
 // 归纳: owner(r) = B (A 失去所有权)

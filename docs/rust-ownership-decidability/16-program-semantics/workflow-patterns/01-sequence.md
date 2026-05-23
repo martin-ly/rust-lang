@@ -352,7 +352,7 @@ fn process(s: String) -> String {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use thiserror::Error;
 
@@ -428,7 +428,7 @@ pub fn try_sequence() -> Result<String, Box<dyn std::error::Error>> {
 ### 5.3 订单处理流水线完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 #[derive(Clone, Debug)]
 struct Order {
     id: String,
@@ -553,14 +553,14 @@ $$
 
 在 Rust 中，若 B 需要 A 产生的值作为输入：
 
-```rust
+```rust,ignore
 let a_result = a(); // A 产生值
 let b_result = b(a_result); // B 消费该值
 ```
 
 移动语义保证 `a_result` 必须先被生产（A 完成），然后才能被移动给 B。编译器拒绝：
 
-```rust
+```rust,ignore
 let b_result = b(a_result); // ❌ 如果 a_result 还未定义
 let a_result = a();
 ```
@@ -635,7 +635,7 @@ $$
 
 **场景**: 编译器的各阶段严格顺序执行
 
-```rust
+```rust,ignore
 fn compile(source: String) -> Result<Binary, CompileError> {
     let tokens = lexer::lex(source)?;          // 词法分析
     let ast = parser::parse(tokens)?;          // 语法分析
@@ -656,7 +656,7 @@ fn compile(source: String) -> Result<Binary, CompileError> {
 
 **场景**: 数据提取、转换、加载的顺序处理
 
-```rust
+```rust,ignore
 async fn etl_pipeline(source: DataSource) -> Result<DataWarehouse, EtlError> {
     let raw = extract(source).await?;
     let cleaned = clean(raw).await?;
@@ -673,7 +673,7 @@ async fn etl_pipeline(source: DataSource) -> Result<DataWarehouse, EtlError> {
 
 **场景**: 金融交易的严格顺序验证和处理
 
-```rust
+```rust,ignore
 fn process_transaction(tx: Transaction) -> Result<Receipt, TxError> {
     let validated = validate_signature(tx)?;
     let checked = check_balance(validated)?;
@@ -751,7 +751,7 @@ Sequence
         └── Task D
 ```
 
-```rust
+```rust,ignore
 let nested = sequence(
     || sequence(step_a, step_b),
     || sequence(step_c, step_d),

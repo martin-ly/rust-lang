@@ -1525,7 +1525,7 @@ error[E0597]: `x` does not live long enough
 
 #### 7.3.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Variance error with mutable references
 fn variance_error() {
     fn foo(x: &mut Vec<&'static str>) {
@@ -1580,7 +1580,7 @@ error[E0597]: `s` does not live long enough
 
 #### 7.4.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Trait bound not satisfied
 trait Drawable {
     fn draw(&self);
@@ -1635,7 +1635,7 @@ error[E0277]: the trait bound `Point: Drawable` is not satisfied
 
 #### 7.5.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Associated type mismatch
 trait Container {
     type Item;
@@ -1707,7 +1707,7 @@ error[E0271]: type mismatch resolving `<VecWrapper<&str> as Container>::Item == 
 
 #### 7.6.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Higher-ranked lifetime error
 fn higher_ranked_error() {
     fn take_closure<F>(f: F)
@@ -1765,7 +1765,7 @@ error[E0515]: cannot return reference to local variable `local`
 
 #### 7.7.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Impl trait opaque type mismatch
 trait Animal {
     fn name(&self) -> &str;
@@ -2127,7 +2127,7 @@ error[E0117]: only traits defined in the current crate can be implemented for ar
 
 #### 7.13.1 Example Code
 
-```rust
+```rust,ignore
 // ERROR: Drop check violation (from RFC 1238)
 struct MyStruct<'a, T: 'a> {
     reference: &'a T,
@@ -2512,7 +2512,7 @@ own_chan(c, P) -- owns channel c with protocol P
 
 #### 9.5.1 Unsafe Function Specification
 
-```rust
+```rust,ignore
 /// SAFETY: ptr must be valid and aligned
 unsafe fn read_ptr<T>(ptr: *const T) -> T {
     *ptr
@@ -2529,7 +2529,7 @@ unsafe fn read_ptr<T>(ptr: *const T) -> T {
 
 #### 9.5.3 Safe Wrapper Verification
 
-```rust
+```rust,ignore
 fn safe_read<T>(r: &T) -> T {
     unsafe { read_ptr(r as *const T) }
 }
@@ -3028,7 +3028,7 @@ Constraint:
 
 #### 11.3.1 Desugaring
 
-```rust
+```rust,ignore
 async fn foo() -> i32 { 42 }
 
 // Desugars to:

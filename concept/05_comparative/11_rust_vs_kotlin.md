@@ -35,6 +35,7 @@
   - [五、常见陷阱](#五常见陷阱)
   - [六、来源与延伸阅读](#六来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 空安全机制
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -96,6 +98,7 @@
 ---
 
 ### 1.2 并发模型
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -151,6 +154,7 @@
 ---
 
 ### 1.3 平台与生态
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -201,6 +205,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 类型推断与泛型
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -236,6 +241,7 @@
 ---
 
 ### 2.2 扩展函数与 Trait
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -271,6 +277,7 @@
 ---
 
 ### 2.3 协程与 async/await
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -313,6 +320,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 3.1 构建系统
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -346,6 +354,7 @@
 ---
 
 ### 3.2 互操作性
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -385,6 +394,7 @@
 ---
 
 ### 3.3 工具链
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -428,6 +438,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -453,6 +464,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -738,4 +750,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

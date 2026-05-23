@@ -40,6 +40,7 @@
   - [迁移检查清单](#迁移检查清单)
   - [相关链接](#相关链接)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -53,7 +54,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 match value {
     pattern if let Some(x) = option => { /* use x */ }
     _ => {}
@@ -66,7 +67,7 @@ match value {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 match event {
     Event::Click(pos)
         if let Some(x) = pos.x
@@ -93,7 +94,7 @@ match event {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ✅ Rust 1.95+ 推荐写法
 match message {
     Message::Text(content) if let Some(user) = current_user => {
@@ -141,7 +142,7 @@ match message {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 数组/向量切片
 let slice = &arr[0..5];        // 索引 0-4
 let slice = &arr[0..=5];       // 索引 0-5
@@ -181,6 +182,7 @@ vec.get(0..=5);                // 获取 0-5
 > **[来源: Rust Official Docs]**
 
 ### Rust 1.96 新增 Lints
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | Lint | 默认级别 | 说明 | 修复建议 |
@@ -190,6 +192,7 @@ vec.get(0..=5);                // 获取 0-5
 | `opaque_hidden_inferred_bound` | Warn | 不透明类型隐藏推断边界 | 显式指定类型边界 |
 
 ### 配置方式
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -208,6 +211,7 @@ opaque_hidden_inferred_bound = "allow"
 ```
 
 ### 命令行使用
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```bash
@@ -224,12 +228,14 @@ cargo build -- -D unused_tuple_struct_fields
 ---
 
 ## 快速参考示例
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### if let guards 模板
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 模板 1: 单一守卫
 match value {
     Pattern(x) if let Some(y) = option => { }
@@ -256,9 +262,10 @@ match value {
 ```
 
 ### Range 常用模式
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 模式 1: 检查值范围
 if (0..100).contains(&value) { }
 
@@ -281,6 +288,7 @@ match age {
 ```
 
 ### PinCoerceUnsized 快速使用（nightly 前瞻，实验性）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > ⚠️ `PinCoerceUnsized` 是 **nightly-only** 实验性特性，需要 nightly 编译器和对应 feature gate，当前 stable 不支持。
@@ -305,6 +313,7 @@ async fn demo() {
 ```
 
 ### 元组 Coercion 示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -325,6 +334,7 @@ let wide: (i64, i64) = widen(narrow);
 ---
 
 ## 迁移检查清单
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [ ] 运行 `rustup update` 升级到 1.96
@@ -337,6 +347,7 @@ let wide: (i64, i64) = widen(narrow);
 ---
 
 ## 相关链接
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [官方 Release Notes](https://blog.rust-lang.org/)
@@ -468,4 +479,3 @@ let wide: (i64, i64) = widen(narrow);
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

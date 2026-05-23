@@ -76,7 +76,7 @@ Drop Elaboration 是 Rust 编译器的一个关键阶段，负责确定在何时
 
 然而，当控制流复杂时，确定 Drop 的位置变得非平凡：
 
-```rust
+```rust,ignore
 {
     let x = Box::new(1);
     let y = Box::new(2);
@@ -153,7 +153,7 @@ T-Tree ::= Leaf(Type, State)
 
 **示例**：
 
-```rust
+```rust,ignore
 let x: (Box<i32>, Box<i32>);
 // T-Forest: Node((Box<i32>, Box<i32>), [Leaf(Uninit), Leaf(Uninit)])
 
@@ -169,7 +169,7 @@ let y = x.0;
 
 不同的控制流路径可能有不同的 Drop 需求：
 
-```rust
+```rust,ignore
 let x: Box<i32>;
 if condition {
     x = Box::new(1);  // 路径 A: x 已初始化
@@ -296,7 +296,7 @@ G ⊢ ⟨l, h, drop x⟩ ↝ ⟨l, h, drop_glue(τ, x)⟩
 
 Drop Elaboration 将隐式 Drop 转换为显式 `drop` 和 `forget` 调用：
 
-```rust
+```rust,ignore
 // 源代码
 {
     let x = Box::new(1);
@@ -348,7 +348,7 @@ if E₁ else E₂ = λp. if E₁(p) = E₂(p)
 
 为了处理条件 Drop，引入布尔标志：
 
-```rust
+```rust,ignore
 // 原始代码
 let x: Box<i32>;
 if condition {
@@ -507,7 +507,7 @@ Admitted.
 ### 6.1 条件 Drop
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 源代码
 let x: Box<i32>;
 if n > 0 {
@@ -533,7 +533,7 @@ flag_x := false;
 ### 6.2 元组析构
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 源代码
 let x: (Box<i32>, Box<i32>, Box<i32>);
 x.0 = Box::new(1);
@@ -564,7 +564,7 @@ forget(x);
 ### 6.3 循环与 Drop
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 源代码
 loop {
     let x = Box::new(1);

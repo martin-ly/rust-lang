@@ -599,7 +599,7 @@ rustc_mir/           (* MIR 表示 *)
 
 #### 5.1.2 MIRI 的未定义行为检测
 
-```rust
+```rust,ignore
 // MIRI 可以检测的未定义行为：
 // 1. 使用已释放的内存
 let x = Box::new(42);
@@ -642,7 +642,7 @@ fn verify_add() {
 
 #### 5.2.2 Kani 验证模式
 
-```rust
+```rust,ignore
 // 函数契约验证
 #[kani::requires(x > 0)]
 #[kani::ensures(|result| *result > x)]
@@ -671,7 +671,7 @@ fn verify_sum() {
 
 #### 5.3.1 Prusti 规格说明
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 // 前置条件和后置条件

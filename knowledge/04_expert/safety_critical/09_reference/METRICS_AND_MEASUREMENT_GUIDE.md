@@ -26,7 +26,7 @@
 | **函数长度** | 代码行数 | ≤ 50 | clippy |
 | **参数数量** | 函数参数个数 | ≤ 5 | clippy |
 
-```rust
+```rust,ignore
 // 圈复杂度示例
 fn calculate(a: i32, b: i32, op: Op) -> i32 {
     match op {           // +1

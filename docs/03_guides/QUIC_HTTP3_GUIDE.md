@@ -26,6 +26,7 @@
   - [参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -105,7 +106,7 @@ HTTP              HTTP              HTTP
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use quinn::{ClientConfig, Endpoint};
 use rustls::pki_types::ServerName;
 use std::net::SocketAddr;
@@ -146,7 +147,7 @@ async fn quic_client(
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use quinn::{ServerConfig, Endpoint};
 use std::net::SocketAddr;
 use std::sync::Arc;
@@ -190,7 +191,7 @@ async fn handle_connection(connection: quinn::Connection) {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use h3_quinn::quinn;
 use h3::client::Connection;
 use http::Request;

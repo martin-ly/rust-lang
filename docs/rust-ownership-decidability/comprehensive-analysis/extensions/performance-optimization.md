@@ -67,7 +67,7 @@ opt-level = 3           # 构建脚本也优化
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 强制内联
 #[inline(always)]
 fn hot_path(x: i32) -> i32 {
@@ -157,7 +157,7 @@ struct GoodLayout {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use bumpalo::Bump;
 
 // Arena分配模式
@@ -232,7 +232,7 @@ pub fn parse_headers(data: &[u8]) -> Vec<&[u8]> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use crossbeam::queue::ArrayQueue;
 use crossbeam::epoch::{self, Atomic, Owned};
 use std::sync::atomic::Ordering;
@@ -323,7 +323,7 @@ pub fn format_message(msg: &str) -> String {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 使用packed_simd或std::simd (nightly)
 #[cfg(feature = "simd")]
 use std::simd::*;
@@ -362,7 +362,7 @@ struct AlignedBuffer([f32; 256]);
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -508,7 +508,7 @@ impl<R: io::Read> PrefetchReader<R> {
 ### 5.2 io_uring (Linux)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[cfg(target_os = "linux")]
 use io_uring::{IoUring, opcode, types};
 
@@ -607,7 +607,7 @@ fn matmul_fast(a: &[f32], b: &[f32], c: &mut [f32], n: usize) {
 ### 6.2 哈希表优化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::BuildHasherDefault;
 use twox_hash::XxHash64;
@@ -643,7 +643,7 @@ pub fn count_frequencies(items: &[u64]) -> FxHashMap<u64, usize> {
 ### 7.1 Criterion基准测试
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn fibonacci(n: u64) -> u64 {

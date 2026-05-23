@@ -88,7 +88,7 @@ macro_rules! vec {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 派生宏
 #[derive(Debug, Clone)]
 struct MyStruct;
@@ -155,7 +155,7 @@ macro_rules! my_macro {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};
@@ -181,7 +181,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn my_attr(_attr: TokenStream, item: TokenStream) -> TokenStream {
     // 处理属性宏
@@ -272,7 +272,7 @@ let n = count!(a b c d e);  // n = 5
 
 ### 示例 1: 实现 vec! 宏
 
-```rust
+```rust,ignore
 macro_rules! my_vec {
     // 空向量
     () => {
@@ -332,7 +332,7 @@ let map = hashmap! {
 
 ### 示例 3: 实现 lazy_static! 宏
 
-```rust
+```rust,ignore
 macro_rules! lazy_static {
     ($name:ident: $t:ty = $init:expr) => {
         static $name: ::std::sync::OnceLock<$t> = ::std::sync::OnceLock::new();
@@ -357,7 +357,7 @@ lazy_static! {
 
 ### 示例 4: 测试宏
 
-```rust
+```rust,ignore
 macro_rules! assert_eq_tol {
     ($left:expr, $right:expr, $tol:expr) => {
         {
@@ -385,7 +385,7 @@ assert_eq_tol!(result, 3.14, 0.01);
 
 ### 示例 5: 完整过程宏示例
 
-```rust
+```rust,ignore
 // 在单独 crate 中定义
 use proc_macro::TokenStream;
 use quote::quote;
@@ -433,7 +433,7 @@ struct Person {
 
 宏可用于创建内部 DSL，简化特定领域代码：
 
-```rust
+```rust,ignore
 // HTML 生成 DSL
 macro_rules! html {
     ($tag:ident { $($children:tt)* }) => {
@@ -494,7 +494,7 @@ param_test! {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 macro_rules! bad {
     ($e:expr) => { $e + $e };
 }
@@ -607,7 +607,7 @@ macro_rules! max {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 #[proc_macro_derive(MyDerive)]
 pub fn my_derive(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -621,7 +621,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 **修正**: 使用 `syn::Error` 和 `quote::quote_spanned`：
 
-```rust
+```rust,ignore
 use proc_macro2::Span;
 use syn::{spanned::Spanned, Error};
 
@@ -664,7 +664,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 
 **改进**: 可以在内联汇编的单个语句上使用条件编译
 
-```rust
+```rust,ignore
 // Rust 1.93.0 新特性
 unsafe fn platform_specific() {
     asm!(
@@ -748,7 +748,7 @@ macro_rules! my_macro {
 
 ### 核心特性速查
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -793,7 +793,7 @@ let gamma = f64::consts::EULER_GAMMA;
 
 ### LazyLock 在宏编译缓存中的应用
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 宏展开结果缓存

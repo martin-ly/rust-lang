@@ -23,7 +23,7 @@ Crossbeam 的五大核心模块：
 > [来源: Crossbeam Docs — Overview](https://docs.rs/crossbeam/latest/crossbeam/)
 > [来源: Fraser, K. (2004). "Practical Lock-Freedom". PhD thesis, University of Cambridge]
 
-```rust
+```rust,ignore
 use crossbeam::channel::{bounded, select};
 use crossbeam::queue::ArrayQueue;
 
@@ -132,7 +132,7 @@ stateDiagram-v2
 
 Crossbeam 的 `pin()` 函数返回一个特殊的 guard，将 epoch 的生命周期与 Rust 的借用系统绑定：
 
-```rust
+```rust,ignore
 pub fn pin() -> Guard {
     let local = LocalEpoch::current();
     local.pin();
@@ -166,7 +166,7 @@ impl Guard {
 
 Crossbeam 对 `std::sync::atomic` 进行了高层抽象，将**内存排序 (memory ordering)** 编码为类型级约束：
 
-```rust
+```rust,ignore
 use crossbeam::atomic::AtomicCell;
 
 // AtomicCell<T> 要求 T: Copy，保证原子操作的安全性
@@ -174,7 +174,7 @@ let cell = AtomicCell::new(42);
 let old = cell.fetch_add(1);  // SeqCst 默认排序
 ```
 
-```rust
+```rust,ignore
 // crossbeam-queue 中的无锁队列使用精心选择的内存排序
 pub struct ArrayQueue<T> {
     head: AtomicUsize,   // 仅生产者线程写入 → Relaxed/Release
@@ -202,7 +202,7 @@ struct Slot<T> {
 
 Crossbeam 的 `scope` 是 `std::thread::scope` 的工业先驱，展示了 Rust 如何在**编译期保证跨线程借用的安全性**：
 
-```rust
+```rust,ignore
 crossbeam::scope(|s| {
     let data = vec![1, 2, 3];
     s.spawn(|_| {
@@ -231,7 +231,7 @@ crossbeam::scope(|s| {
 
 Crossbeam 的 `ArrayQueue` 是一个**多生产者多消费者 (MPMC)** 无锁队列。其线性化点 (linearization point) 分析如下：
 
-```rust
+```rust,ignore
 pub fn push(&self, value: T) -> Result<(), T> {
     loop {
         let tail = self.tail.load(Ordering::Relaxed);

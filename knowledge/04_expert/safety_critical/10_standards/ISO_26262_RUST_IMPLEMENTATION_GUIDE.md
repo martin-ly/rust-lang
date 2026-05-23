@@ -89,7 +89,7 @@ pub enum BufferError {
 
 **安全机制Rust实现**:
 
-```rust
+```rust,ignore
 /// E2E(End-to-End)保护 - ASIL D要求
 pub struct E2EProtection {
     sequence_counter: u8,
@@ -202,7 +202,7 @@ pub enum DivisionError {
 
 **1. 模块化与封装**:
 
-```rust
+```rust,ignore
 /// ASIL D级软件架构示例
 ///
 /// 架构设计满足:
@@ -267,7 +267,7 @@ pub mod actuator_interface {
 
 **2. 错误处理架构**:
 
-```rust
+```rust,ignore
 /// 分层错误处理
 ///
 /// 符合ISO 26262-6 Table 2 (错误检测机制)

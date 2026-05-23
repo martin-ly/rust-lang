@@ -86,7 +86,7 @@
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 pub struct HashMap<K, V, S = RandomState> {
     base: RawTable<(K, V)>,
     hash_builder: S,
@@ -241,7 +241,7 @@ $$
 ### 算法 4.1 (Robin Hood Insert)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn insert(&mut self, k: K, v: V) -> Option<V> {
     let hash = self.hash(&k);
     let mut dib = 0;  // Distance to Initial Bucket
@@ -326,7 +326,7 @@ $$
 ### 算法 4.2 (查找)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn get(&self, k: &K) -> Option<&V> {
     let hash = self.hash(k);
     let mut pos = hash & self.bucket_mask;
@@ -385,7 +385,7 @@ $$
 ### 算法 4.3 ( tombstone 删除)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn remove(&mut self, k: &K) -> Option<V> {
     let hash = self.hash(k);
     if let Some((pos, _)) = self.find(k, hash) {
@@ -424,7 +424,7 @@ fn remove(&mut self, k: &K) -> Option<V> {
 
 **访问前检查**:
 
-```rust
+```rust,ignore
 match self.ctrl[pos] {
     EMPTY => return None,  // 安全返回
     h if h == hash_high_bits(hash) => {
@@ -453,7 +453,7 @@ match self.ctrl[pos] {
 
 **Drop实现**:
 
-```rust
+```rust,ignore
 impl<K, V> Drop for HashMap<K, V> {
     fn drop(&mut self) {
         for i in 0..self.capacity() {
@@ -489,7 +489,7 @@ impl<K, V> Drop for HashMap<K, V> {
 
 **迭代器实现**:
 
-```rust
+```rust,ignore
 struct Iter<'a, K, V> {
     inner: &'a RawTable<(K, V)>,
     pos: usize,
@@ -585,7 +585,7 @@ $$
 ### 定义 7.1 (Entry类型)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 enum Entry<'a, K, V> {
     Occupied(OccupiedEntry<'a, K, V>),
     Vacant(VacantEntry<'a, K, V>),
@@ -605,7 +605,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 match map.entry(key) {
     Entry::Occupied(e) => {
         // e 持有对值的独占可变引用
@@ -634,7 +634,7 @@ match map.entry(key) {
 ### 反例 8.1 (不正确的Hash实现)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 错误: 哈希与相等不一致
 struct BadKey {
     id: u32,
@@ -663,7 +663,7 @@ impl PartialEq for BadKey {
 ### 反例 8.2 (迭代期间修改)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let mut map = HashMap::new();
 map.insert(1, "a");
 map.insert(2, "b");
@@ -678,7 +678,7 @@ for (k, v) in &map {
 ### 边界情况 8.3 (零大小类型)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let mut map: HashMap<(), i32> = HashMap::new();
 map.insert((), 42);
 ```

@@ -72,7 +72,7 @@ src/
 
 ### 核心代码
 
-```rust
+```rust,ignore
 // domain/entities.rs - 领域实体
 pub struct User {
     id: UserId,

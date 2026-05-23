@@ -181,7 +181,7 @@ tokens_{t+1} = min(tokens_t + rate × Δt, capacity)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -465,7 +465,7 @@ impl<E: std::fmt::Debug + std::fmt::Display> std::error::Error for CircuitBreake
 
 ### 4.2 异步适配器与集成
 
-```rust
+```rust,ignore
 /// 断路器 HTTP 中间件
 use tower::{Layer, Service};
 use std::task::{Context, Poll};
@@ -628,7 +628,7 @@ impl AdaptiveCircuitBreaker {
 
 ### 4.3 事件通知与可观测性
 
-```rust
+```rust,ignore
 /// 断路器事件
 #[derive(Debug, Clone)]
 pub enum CircuitBreakerEvent {
@@ -797,7 +797,7 @@ Spec == Init ∧ □[Next]_vars ∧ WF_vars(AttemptRecovery)
 
 ### 6.1 多级断路器
 
-```rust
+```rust,ignore
 /// 分层断路器
 pub struct HierarchicalCircuitBreaker {
     /// 全局断路器
@@ -832,7 +832,7 @@ impl HierarchicalCircuitBreaker {
 
 ### 6.2 预测性断路器
 
-```rust
+```rust,ignore
 /// 基于机器学习的预测性断路器
 pub struct PredictiveCircuitBreaker {
     inner: CircuitBreaker,

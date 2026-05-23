@@ -59,7 +59,7 @@ Clap是Rust标准命令行解析库：
 ### 定义 DERIVE-1 ( 结构体派生 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[derive(Parser)]
 #[command(name = "myapp", version = "1.0")]
 struct Cli {
@@ -103,7 +103,7 @@ $$
 ### 定义 ARG-1 ( 位置参数 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[derive(Parser)]
 struct Args {
     input: PathBuf,        // 必需位置参数
@@ -118,7 +118,7 @@ $$
 ### 定义 ARG-2 ( 可选参数 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 #[derive(Parser)]
 struct Args {
     #[arg(short, long)]
@@ -149,7 +149,7 @@ $$
 ### 定义 VALIDATE-1 ( 值验证 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[derive(Parser)]
 struct Args {
     #[arg(short, long, value_parser = clap::value_parser!(u32).range(1..=100))]
@@ -164,7 +164,7 @@ $$
 ### 定义 VALIDATE-2 ( 组合约束 )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[derive(Args)]
 struct Config {
     #[arg(group = "input", required = true)]
@@ -186,7 +186,7 @@ $$
 ### 定义 SUBCMD-1 ( 子命令枚举 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[derive(Subcommand)]
 enum Commands {
     Add { files: Vec<PathBuf> },
@@ -239,7 +239,7 @@ $$
 ### 示例1: 完整CLI
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use clap::{Parser, Subcommand, Args};
 use std::path::PathBuf;
 
@@ -291,7 +291,7 @@ fn main() {
 ### 示例2: 高级验证
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use clap::{Parser, error::ErrorKind};
 
 #[derive(Parser)]

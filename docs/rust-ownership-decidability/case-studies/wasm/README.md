@@ -123,7 +123,7 @@ WebAssembly (WASM) 是一种**低级别字节码格式**，设计用于在现代
 
 **工作原理**:
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 // 导出一个函数到JavaScript
@@ -244,7 +244,7 @@ lto = true
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 // 当WASM模块加载时调用
@@ -300,7 +300,7 @@ impl Calculator {
 
 **使用Serde进行序列化**:
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 use wasm_bindgen::prelude::*;
 
@@ -326,7 +326,7 @@ pub fn process_user(data: &str) -> Result<JsValue, JsValue> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use js_sys::Function;
 
@@ -385,7 +385,7 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 // 值在WASM堆上分配
@@ -414,7 +414,7 @@ pub fn sum_buffer(data: &[u8]) -> u32 {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 // 使用Box管理生命周期
@@ -484,7 +484,7 @@ wasm-snip pkg/*.wasm -o snipped.wasm
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -504,7 +504,7 @@ pub fn sum_array(data: &[f64]) -> f64 {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use js_sys::Float64Array;
 
@@ -534,7 +534,7 @@ pub fn process_array(input: &Float64Array) -> Float64Array {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use web_sys::{CanvasRenderingContext2d, ImageData};
 
@@ -584,7 +584,7 @@ impl ImageProcessor {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use sha2::{Sha256, Digest};
 
@@ -604,7 +604,7 @@ pub fn sha256_hash(input: &[u8]) -> Vec<u8> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use nalgebra::{Vector2, Vector3};
 
@@ -669,7 +669,7 @@ mod tests {
 
 ### 8.3 性能分析
 
-```rust
+```rust,ignore
 use web_sys::console;
 
 #[wasm_bindgen]

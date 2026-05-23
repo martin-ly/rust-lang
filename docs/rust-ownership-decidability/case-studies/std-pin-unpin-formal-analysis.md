@@ -86,7 +86,7 @@
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 struct SelfRef {
     data: String,
     ptr: *const String,  // 指向 data
@@ -147,7 +147,7 @@ impl SelfRef {
 
 **在自引用结构中的风险**:
 
-```rust
+```rust,ignore
 let s = SelfRef::new();
 let ptr = s.ptr;  // 指向 s.data
 let s2 = s;       // 移动 s 到 s2
@@ -217,7 +217,7 @@ $$
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 pub auto trait Unpin {}
 ```
 
@@ -255,7 +255,7 @@ struct Container<T> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 标记为 !Unpin
 pub struct PhantomPinned;
 
@@ -276,7 +276,7 @@ struct SelfRef {
 
 **证明**:
 
-```rust
+```rust,ignore
 struct MyFuture {
     data: String,
     ptr: *const String,
@@ -301,7 +301,7 @@ struct MyFuture {
 ### 定义 5.1 (Pin创建)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 impl<P: Deref> Pin<P> {
     pub unsafe fn new_unchecked(pointer: P) -> Pin<P> {
         Pin { pointer }
@@ -342,7 +342,7 @@ impl<P: Deref<Target: Unpin>> Pin<P> {
 
 > 以下操作对任意 `Pin<P>` 安全:
 
-```rust
+```rust,ignore
 impl<P: Deref> Pin<P> {
     // 获取共享引用 (始终安全)
     pub fn as_ref(&self) -> Pin<&P::Target>;
@@ -373,7 +373,7 @@ impl<P: Deref> Pin<P> {
 
 > 以下操作需要 `unsafe`，只应在知道类型是 `Unpin` 或特殊处理时使用:
 
-```rust
+```rust,ignore
 impl<P: DerefMut> Pin<P> {
     // 获取可变引用
     pub unsafe fn get_unchecked_mut(self) -> &mut P::Target;
@@ -386,7 +386,7 @@ impl<P: DerefMut> Pin<P> {
 
 **安全条件**:
 
-```rust
+```rust,ignore
 // 安全情况1: T: Unpin
 let mut x = 5;
 let mut pinned = Pin::new(&mut x);
@@ -419,7 +419,7 @@ impl MyFuture {
 ### 定义 6.1 (Future trait)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
     fn poll(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Self::Output>;
@@ -437,7 +437,7 @@ trait Future {
 
 **async fn展开**:
 
-```rust
+```rust,ignore
 async fn foo() {
     let x = [1, 2, 3];
     let y = &x[0];  // 借用局部变量
@@ -481,7 +481,7 @@ enum FooFuture {
 2. 如果有，状态体包含自引用
 3. 自动生成 `!Unpin`
 
-```rust
+```rust,ignore
 async fn has_borrow() {
     let x = [1, 2, 3];
     let y = &x[0];
@@ -533,7 +533,7 @@ $$
 
 **证明**:
 
-```rust
+```rust,ignore
 let data: Pin<Box<MyFuture>> = Box::pin(MyFuture::new());
 ```
 
@@ -551,7 +551,7 @@ let data: Pin<Box<MyFuture>> = Box::pin(MyFuture::new());
 ### 反例 8.1 (错误地从Pin创建可变引用)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct SelfRef {
     data: String,
     ptr: *const String,
@@ -572,7 +572,7 @@ let mut s = Box::pin(SelfRef::new());
 
 **正确做法**:
 
-```rust
+```rust,ignore
 impl SelfRef {
     fn get_data(self: Pin<&mut Self>) -> Pin<&mut String> {
         unsafe { self.map_unchecked_mut(|s| &mut s.data) }
@@ -586,7 +586,7 @@ let r = s.as_mut().get_data();  // 返回 Pin<&mut String>
 ### 反例 8.2 (错误实现Unpin)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 struct Bad {
     data: String,
     ptr: *const String,  // 指向 data
@@ -605,7 +605,7 @@ let p = Pin::new(&b);  // 使用 Pin::new (安全版本)
 ### 反例 8.3 (Pin投影错误)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 struct MyFuture {
     field1: String,
     field2: String,
@@ -624,7 +624,7 @@ impl MyFuture {
 
 **正确**:
 
-```rust
+```rust,ignore
 fn field2_mut(self: Pin<&mut Self>) -> Pin<&mut String> {
     unsafe { self.map_unchecked_mut(|s| &mut s.field2) }
 }

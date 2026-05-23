@@ -110,7 +110,7 @@ $$
 
 > rustls强制执行严格的证书链验证。
 
-```rust
+```rust,ignore
 let config = ClientConfig::builder()
     .with_root_certificates(root_store)
     .with_no_client_auth();
@@ -132,7 +132,7 @@ let config = ClientConfig::builder()
 
 ### 反例 6.1 (证书固定滥用)
 
-```rust
+```rust,ignore
 // 不推荐: 完全禁用验证
 let config = ClientConfig::builder()
     .dangerous()
@@ -141,7 +141,7 @@ let config = ClientConfig::builder()
 
 ### 反例 6.2 (会话缓存)
 
-```rust
+```rust,ignore
 // 注意: 会话ticket包含敏感信息
 let mut config = ClientConfig::new();
 config.enable_tickets = true;

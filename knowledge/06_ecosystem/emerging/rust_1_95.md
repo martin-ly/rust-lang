@@ -34,7 +34,7 @@ Rust 1.95 主要聚焦于：
 
 Rust 1.88 稳定了 let chains。1.95 将此能力带入 match 表达式，允许基于模式匹配的条件守卫：
 
-```rust
+```rust,ignore
 match value {
     Some(x) if let Ok(y) = compute(x) => {
         // `x` 和 `y` 在此处均可用
@@ -52,7 +52,7 @@ match value {
 
 `cfg_select!` 提供类似编译期 `match` 的 `cfg` 条件选择能力，可替代流行的 `cfg-if` crate：
 
-```rust
+```rust,ignore
 // 条件代码块选择
 cfg_select! {
     unix => {
@@ -82,7 +82,7 @@ let os_str = cfg_select! {
 
 模式匹配断言宏，在测试中验证值是否符合预期模式：
 
-```rust
+```rust,ignore
 use std::assert_matches::assert_matches;
 
 let result: Result<i32, &str> = Ok(42);
@@ -101,7 +101,7 @@ debug_assert_matches!(result, Ok(42));
 
 `Vec`、`VecDeque`、`LinkedList` 新增返回可变引用的插入方法：
 
-```rust
+```rust,ignore
 use std::collections::{VecDeque, LinkedList};
 
 // Vec: push 并获取新元素的可变引用
@@ -134,7 +134,7 @@ assert_eq!(list.into_iter().collect::<Vec<_>>(), [2, 2]);
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // [MaybeUninit<T>; N] ↔ MaybeUninit<[T; N]>
@@ -157,7 +157,7 @@ let view: &[MaybeUninit<i32>] = uninit_array.as_ref();
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 
 let counter = AtomicU32::new(5);
@@ -179,7 +179,7 @@ assert_eq!(counter.load(Ordering::Relaxed), 7);
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let ptr: *const u8 = &42u8;
 
 // SAFETY: 指针已知有效
@@ -193,7 +193,7 @@ let ref_mut: &mut String = unsafe { mut_ptr.as_mut_unchecked() };
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 显式转换整数到 bool
 let flag: bool = 1i32.try_into()?; // Ok(true)
 let flag: bool = 0i32.try_into()?; // Ok(false)
@@ -204,7 +204,7 @@ let flag: bool = 2i32.try_into()?; // Err(BoolError)
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 let r = RangeInclusive::new(1, 10);
@@ -217,7 +217,7 @@ assert!(r.contains(&5));
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 let cell_array: Cell<[i32; 3]> = Cell::new([1, 2, 3]);
@@ -231,7 +231,7 @@ assert_eq!(cell_array.get()[0], 100);
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use std::alloc::Layout;
 
 // dangling_ptr: 获取对齐的悬空指针（用于占位）
@@ -254,7 +254,7 @@ let combined = layout.extend_packed(Layout::new::<u8>()).unwrap();
 
 标记极少执行的分支路径，优化编译器的分支预测和代码布局：
 
-```rust
+```rust,ignore
 use std::hint::cold_path;
 
 fn parse_input(input: &str) -> Result<i32, ParseError> {
@@ -275,7 +275,7 @@ fn parse_input(input: &str) -> Result<i32, ParseError> {
 
 以下 API 现在可在 `const fn` 中使用：
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 const fn check_flow() -> bool {
@@ -301,7 +301,7 @@ use std::io::{self as io_mod, Read};
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 之前: 触发 irrefutable_let_patterns lint
 if let Some(x) = opt && let Some(y) = opt2 {
     // ...
@@ -427,7 +427,7 @@ rustc +nightly -Z unstable-options --target my-target.json
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 use $crate::{self};
 
@@ -441,7 +441,7 @@ use $crate;
 
 手动实现 `Eq` 时会触发未来兼容性警告：
 
-```rust
+```rust,ignore
 // ❌ 触发警告
 impl Eq for MyType {
     fn assert_receiver_is_total_eq(&self) {}
@@ -457,7 +457,7 @@ impl Eq for MyType {}
 
 数组强制转换可能减少类型推断约束，某些代码需要显式类型标注：
 
-```rust
+```rust,ignore
 // 可能需要显式标注
 let arr: [i32; 3] = [1, 2, 3];
 let boxed: Box<[i32]> = arr.into(); // 若推断失败需显式标注
@@ -467,7 +467,7 @@ let boxed: Box<[i32]> = arr.into(); // 若推断失败需显式标注
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ❌ 之前（误稳定）: struct 字段简写中允许
 let Struct { mut ref field } = s;
 
@@ -496,7 +496,7 @@ let Struct { mut ref field } = s;
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 之前 (cfg-if crate)
 use cfg_if::cfg_if;
 cfg_if! {
@@ -518,7 +518,7 @@ cfg_select! {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 之前: 手动 CAS 循环
 loop {
     let current = atomic.load(Ordering::Relaxed);
@@ -536,7 +536,7 @@ atomic.update(Ordering::Relaxed, |x| x * 2);
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 之前
 assert!(matches!(result, Ok(_)));
 

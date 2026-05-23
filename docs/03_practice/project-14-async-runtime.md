@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 14: 异步运行时原型](#实践项目-14-异步运行时原型)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/async-runtime/`](#完整参考实现位于-examplesasync-runtime)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -45,9 +47,10 @@
 > **[来源: Rust Official Docs]**
 
 ### 自定义Future
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -69,6 +72,7 @@ impl Future for MyFuture {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/async-runtime/`
@@ -90,6 +94,7 @@ impl Future for MyFuture {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [03_practice 目录](./README.md)
@@ -139,4 +144,3 @@ impl Future for MyFuture {
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

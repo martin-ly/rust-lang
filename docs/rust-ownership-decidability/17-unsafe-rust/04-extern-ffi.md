@@ -45,7 +45,7 @@
 
 FFI (Foreign Function Interface) 允许 Rust 代码与其他语言（主要是 C）交互。
 
-```rust
+```rust,ignore
 // 声明外部函数
 extern "C" {
     fn sqrt(x: f64) -> f64;
@@ -61,7 +61,7 @@ unsafe {
 ### 1.2 ABI 类型
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 不同的调用约定
 extern "C" {           // C 标准调用约定
     fn c_function();
@@ -91,7 +91,7 @@ int add(int a, int b) {
 }
 ```
 
-```rust
+```rust,ignore
 // main.rs
 use std::os::raw::c_int;
 
@@ -111,7 +111,7 @@ fn main() {
 ### 2.2 字符串处理
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::ffi::{CString, CStr};
 use std::os::raw::c_char;
 
@@ -153,7 +153,7 @@ typedef struct {
 double point_distance(Point p1, Point p2);
 ```
 
-```rust
+```rust,ignore
 use std::os::raw::c_double;
 
 #[repr(C)]  // 关键！确保 C 兼容布局
@@ -186,7 +186,7 @@ fn main() {
 ### 3.1 创建 C 兼容库
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // lib.rs - 编译为动态库
 use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int};
@@ -276,7 +276,7 @@ void rust_free_string(char* s);
 ### 4.2 字符串类型
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // C 字符串 ↔ Rust String
 
 // &str / String -> *const c_char
@@ -311,7 +311,7 @@ let rstr: &str = cstr.to_str()?;
 ### 5.2 安全包装示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 pub struct CVector {
     ptr: *mut f64,
     len: usize,
@@ -355,7 +355,7 @@ impl Drop for CVector {
 ### 6.1 Panic 安全
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // ❌ 危险：panic 跨越 FFI 边界是 UB
 #[no_mangle]
 pub extern "C" fn may_panic() {
@@ -378,7 +378,7 @@ pub extern "C" fn safe_function() -> c_int {
 ### 6.2 空指针检查
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // ❌ 危险：可能空指针解引用
 #[no_mangle]
 pub extern "C" fn unsafe_func(ptr: *const c_char) {
@@ -399,7 +399,7 @@ pub extern "C" fn safe_func(ptr: *const c_char) -> c_int {
 ### 6.3 线程安全
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // ❌ 危险：非线程安全函数
 static mut GLOBAL: i32 = 0;
 

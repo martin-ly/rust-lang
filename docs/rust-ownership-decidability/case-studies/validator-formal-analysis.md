@@ -47,7 +47,7 @@ validator提供:
 
 > Validate派生宏在编译时生成验证代码。
 
-```rust
+```rust,ignore
 #[derive(Validate)]
 struct User {
     #[validate(email)]
@@ -95,7 +95,7 @@ impl Validate for User {
 
 > 嵌套结构自动递归验证。
 
-```rust
+```rust,ignore
 #[derive(Validate)]
 struct Company {
     #[validate]
@@ -116,7 +116,7 @@ struct Company {
 
 > 支持自定义验证逻辑。
 
-```rust
+```rust,ignore
 #[derive(Validate)]
 struct Order {
     #[validate(custom = "validate_delivery_date")]
@@ -136,7 +136,7 @@ fn validate_delivery_date(date: &str) -> Result<(), ValidationError> {
 
 ### 反例 6.1 (忘记调用validate)
 
-```rust
+```rust,ignore
 let user = User { email, password };
 // 错误: 直接使用未验证数据
 save_to_db(&user);
@@ -148,7 +148,7 @@ save_to_db(&user);
 
 ### 反例 6.2 (并发修改)
 
-```rust
+```rust,ignore
 // 验证后修改数据绕过验证
 user.validate()?;
 user.email = "invalid".to_string();  // 绕过!

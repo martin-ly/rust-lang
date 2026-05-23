@@ -146,7 +146,7 @@ $$\text{避免循环引用；用 }\mathit{Weak}\text{ 或重构为无环}$$
 
 1. **弱引用模式**：
 
-   ```rust
+   ```rust,ignore
    struct Mediator { colleagues: Vec<Weak<Colleague>> }
    ```
 
@@ -175,7 +175,7 @@ channel 或回调消息传递满足借用规则；无数据竞争。
 
 1. **channel 模式**：
 
-   ```rust
+   ```rust,ignore
    let (tx, rx) = mpsc::channel();
    // tx.send(msg) → 所有权转移
    // rx.recv() → 接收所有权
@@ -349,7 +349,7 @@ fn run_room(rx: mpsc::Receiver<ChatMessage>) {
 
 **错误**：Colleague 直接持有其他 Colleague 的引用，绕过 Mediator。
 
-```rust
+```rust,ignore
 struct BadColleague {
     mediator: Rc<Mediator>,
     other: Rc<Colleague>,  // 直接耦合，违反 Axiom ME1

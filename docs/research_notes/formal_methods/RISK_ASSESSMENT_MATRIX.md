@@ -159,7 +159,7 @@ jobs:
 
 **缓解策略:**
 
-```rust
+```rust,ignore
 // FFI边界安全封装
 pub struct SafeLegacyWrapper {
     inner: *mut c_void,  // 底层指针
@@ -232,7 +232,7 @@ unsafe impl Send for SafeLegacyWrapper {}
 ### 监控工具
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 代码分析
 cargo tree              # 依赖分析
 cargo geiger            # unsafe代码统计

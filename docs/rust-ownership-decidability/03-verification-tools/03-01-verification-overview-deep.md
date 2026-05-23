@@ -132,7 +132,7 @@ Static analysis tools examine source code without executing it, identifying pote
 
 **Clippy**: Rust's official linter provides over 550 lints covering correctness, style, and performance. While primarily a linting tool, many clippy lints catch serious correctness issues:
 
-```rust
+```rust,ignore
 // Counter-Example 1: Clippy catches infinite recursion
 impl Clone for MyType {
     fn clone(&self) -> Self {
@@ -287,7 +287,7 @@ fn stacked_borrows_example() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // BUG: Reading uninitialized memory
 fn uninitialized_memory_bug() -> i32 {
     let x: i32;
@@ -322,7 +322,7 @@ error: Undefined Behavior: using uninitialized data
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::thread;
 use std::ptr;
 
@@ -436,7 +436,7 @@ fn type_punning_fixed() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // BUG: Misaligned pointer dereference
 fn misaligned_access_bug() {
     let bytes: [u8; 8] = [0; 8];
@@ -635,7 +635,7 @@ mod tests {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // BUG: Incorrect memory ordering
 fn weak_ordering_bug() {
     use std::sync::atomic::{AtomicBool, AtomicU32};
@@ -689,7 +689,7 @@ fn ordering_fixed() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // BUG: Classic ABA problem in lock-free stack
 struct LockFreeStack<T> {
     head: AtomicPtr<Node<T>>,
@@ -788,7 +788,7 @@ impl<T> LockFreeStack<T> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // BUG: Classic ABA problem
 fn aba_problem_bug() {
     use loom::sync::atomic::AtomicPtr;
@@ -854,7 +854,7 @@ fn aba_problem_bug() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // BUG: Dekker's algorithm with wrong orderings fails
 fn dekker_wrong_ordering() {
     loom::model(|| {
@@ -914,7 +914,7 @@ fn dekker_correct() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // BUG: Lost wakeup in condition variable pattern
 use std::sync::{Mutex, Condvar};
 
@@ -974,7 +974,7 @@ fn lost_wakeup_fixed() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // BUG: Circular wait deadlock
 fn deadlock_bug() {
     loom::model(|| {
@@ -1028,7 +1028,7 @@ fn deadlock_fixed() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // loom.toml or environment variables
 LOOM_MAX_PREEMPTIONS=3  // Limit context switches for bounded checking
 LOOM_MAX_BRANCHES=10000 // Limit explored branches
@@ -1051,7 +1051,7 @@ Creusot is a deductive verification tool for Rust that translates Rust programs 
 
 Creusot translates Rust's MIR to WhyML, preserving ownership information through the `pearlite` specification language.
 
-```rust
+```rust,ignore
 // Rust code with Creusot specifications
 use creusot_contracts::*;
 
@@ -1090,7 +1090,7 @@ Proof Result
 
 Pearlite is Creusot's specification language, a pure subset of Rust extended with logical operators.
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // Logical functions (ghost code)
@@ -1157,7 +1157,7 @@ Creusot generates three categories of proof obligations:
 
 Preconditions must hold at call sites:
 
-```rust
+```rust,ignore
 #[requires(!self.is_full())]  // Cannot push to full vector
 #[ensures(self.len() == old(self.len()) + 1)]
 #[ensures(self.last() == elem)]
@@ -1175,7 +1175,7 @@ pub fn push<T>(&mut self, elem: T) {
 
 Postconditions guarantee what the function establishes:
 
-```rust
+```rust,ignore
 #[requires(x >= 0)]
 #[requires(y >= 0)]
 #[ensures(result == x + y)]  // Functional correctness
@@ -1192,7 +1192,7 @@ pub fn add(x: u32, y: u32) -> u32 {
 
 Loop invariants capture inductive properties:
 
-```rust
+```rust,ignore
 #[ensures(result == sum_range(0, n))]
 pub fn sum_to(n: u32) -> u32 {
     let mut i = 0;
@@ -1215,7 +1215,7 @@ pub fn sum_to(n: u32) -> u32 {
 
 #### Counter-Example 4.1: Integer Overflow
 
-```rust
+```rust,ignore
 // FAILED VERIFICATION: Potential overflow
 #[requires(x >= 0 && y >= 0)]
 #[ensures(result == x + y)]  // May overflow!
@@ -1234,7 +1234,7 @@ pub fn add_safe(x: i32, y: i32) -> i32 {
 
 #### Counter-Example 4.2: Array Bounds
 
-```rust
+```rust,ignore
 // FAILED VERIFICATION: Index out of bounds
 #[requires(arr.len() > 0)]
 pub fn first_unsafe(arr: &[i32]) -> i32 {
@@ -1251,7 +1251,7 @@ pub fn first_safe(arr: &[i32]) -> i32 {
 
 #### Counter-Example 4.3: Logic Error in Specification
 
-```rust
+```rust,ignore
 // FAILED VERIFICATION: Wrong postcondition
 #[ensures(result > x)]  // ERROR: Not true when x is max value!
 pub fn increment(x: u32) -> u32 {
@@ -1268,7 +1268,7 @@ pub fn increment_safe(x: u32) -> u32 {
 
 #### Counter-Example 4.4: Broken Loop Invariant
 
-```rust
+```rust,ignore
 // FAILED VERIFICATION: Invariant not maintained
 pub fn factorial(n: u32) -> u32 {
     let mut result = 1;
@@ -1316,7 +1316,7 @@ fn factorial_logic(n: u32) -> u32 {
 
 #### 4.5.1 Mutable Borrows
 
-```rust
+```rust,ignore
 #[requires(x < 100)]
 #[ensures(*x == old(*x) + 1)]
 #[ensures(^x == *x)]  // Final value equals current value
@@ -1327,7 +1327,7 @@ pub fn increment_mut(x: &mut u32) {
 
 #### 4.5.2 Trait Specifications
 
-```rust
+```rust,ignore
 #[trusted]  // Trusted trait for external types
 trait MyTrait {
     #[ensures(result > 0)]
@@ -1348,7 +1348,7 @@ Prusti is a verification tool for Rust built on the Viper verification infrastru
 
 Prusti uses annotations directly in Rust code:
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 #[requires(x > 0)]
@@ -1364,7 +1364,7 @@ pub fn increment(x: i32) -> i32 {
 
 #### 5.2.1 Pure Functions
 
-```rust
+```rust,ignore
 #[pure]
 #[ensures(result >= 0)]
 fn abs_pure(x: i32) -> i32 {
@@ -1374,7 +1374,7 @@ fn abs_pure(x: i32) -> i32 {
 
 #### 5.2.2 Predicates
 
-```rust
+```rust,ignore
 #[predicate]
 fn is_positive(x: i32) -> bool {
     x > 0
@@ -1388,7 +1388,7 @@ pub fn use_positive(x: i32) {
 
 #### 5.2.3 Snapshots
 
-```rust
+```rust,ignore
 #[ensures(result == old(self.len()))]
 #[ensures(self.len() == 0)]
 pub fn clear(&mut self) {
@@ -1402,7 +1402,7 @@ pub fn clear(&mut self) {
 
 #### Counter-Example 5.1: Failing Postcondition
 
-```rust
+```rust,ignore
 // FAILED: Postcondition might not hold
 #[ensures(result > 0)]
 pub fn failing_post(x: i32) -> i32 {
@@ -1440,7 +1440,7 @@ Fuzzing complements formal verification by finding bugs through randomized testi
 
 proptest is a property testing framework inspired by Hypothesis. It generates random test cases and shrinks failures to minimal examples.
 
-```rust
+```rust,ignore
 use proptest::prelude::*;
 
 proptest! {
@@ -1475,7 +1475,7 @@ proptest! {
 
 #### Counter-Example 6.1: Parser Bug
 
-```rust
+```rust,ignore
 // A JSON parser might have this bug
 fn parse_json_buggy(input: &str) -> Result<JsonValue, Error> {
     // Fuzzing finds inputs like:
@@ -1534,7 +1534,7 @@ fn truncate_fixed(s: &str, max_len: usize) -> &str {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // fuzz/fuzz_targets/my_target.rs
 #![no_main]
 use libfuzzer_sys::fuzz_target;
@@ -1552,7 +1552,7 @@ fuzz_target!(|data: &[u8]| {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use bolero::check;
 
 #[test]
@@ -1666,7 +1666,7 @@ This case study demonstrates verifying a simplified `Vec` implementation using C
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 use std::alloc::{self, Layout};
 use std::ptr::{self, NonNull};
@@ -1719,7 +1719,7 @@ impl<T> Vec<T> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 impl<T: Clone> Vec<T> {
     #[requires(self.len() < usize::MAX)]
     #[requires(self.len() <= self.capacity())]
@@ -1774,7 +1774,7 @@ impl<T: Clone> Vec<T> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     #[requires(!self.is_empty())]
     #[ensures(self.len() == old(self.len()) - 1)]
@@ -1795,7 +1795,7 @@ impl<T> Vec<T> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::ops::Index;
 
 impl<T> Index<usize> for Vec<T> {
@@ -1916,7 +1916,7 @@ jobs:
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// # Verification
 ///
 /// This function has been verified with Creusot:

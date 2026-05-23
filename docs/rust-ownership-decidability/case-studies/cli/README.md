@@ -126,7 +126,7 @@ Rust 已成为构建命令行工具的首选语言之一，这并非偶然。以
 
 Rust 的抽象机制不会带来运行时开销。这意味着你可以编写高层次的、富有表现力的代码，同时获得与手写底层代码相当的性能。
 
-```rust
+```rust,ignore
 // 高层次的迭代器链，编译为高效的机器码
 let total_size: u64 = entries
     .iter()
@@ -312,7 +312,7 @@ tokei
 
 Rust CLI 工具常用的性能优化技术：
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 并行处理文件
@@ -341,7 +341,7 @@ fn search_in_large_file(path: &Path, pattern: &str) -> io::Result<Vec<usize>> {
 
 Rust 的类型系统和错误处理机制确保 CLI 工具的健壮性：
 
-```rust
+```rust,ignore
 use std::process;
 
 fn main() {
@@ -382,7 +382,7 @@ fn main() {
 clap = { version = "4.5", features = ["derive", "env", "cargo"] }
 ```
 
-```rust
+```rust,ignore
 use clap::{Parser, Subcommand, ValueEnum};
 
 #[derive(Parser)]
@@ -431,7 +431,7 @@ clap 的派生宏 (derive macros) 提供了声明式的参数定义方式：
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 use std::path::PathBuf;
 
@@ -481,7 +481,7 @@ struct Args {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 use std::str::FromStr;
 
@@ -523,7 +523,7 @@ struct Args {
 
 复杂的 CLI 工具通常需要子命令来组织功能：
 
-```rust
+```rust,ignore
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
@@ -613,7 +613,7 @@ fn main() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use clap::{Parser, builder::PossibleValuesParser};
 
 #[derive(Parser)]
@@ -646,7 +646,7 @@ fn parse_duration(s: &str) -> Result<std::time::Duration, String> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 use std::path::PathBuf;
 
@@ -690,7 +690,7 @@ struct Args {
 crossterm = "0.27"
 ```
 
-```rust
+```rust,ignore
 use crossterm::{
     cursor,
     event::{self, Event, KeyCode, KeyEventKind},
@@ -749,7 +749,7 @@ fn main() -> io::Result<()> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use crossterm::terminal;
 
 fn get_terminal_info() -> io::Result<()> {
@@ -780,7 +780,7 @@ ratatui = "0.25"
 crossterm = "0.27"
 ```
 
-```rust
+```rust,ignore
 use crossterm::{
     event::{self, DisableMouseCapture, EnableMouseCapture, Event, KeyCode},
     execute,
@@ -916,7 +916,7 @@ fn ui(f: &mut Frame, app: &App) {
 indicatif = "0.17"
 ```
 
-```rust
+```rust,ignore
 use indicatif::{ProgressBar, ProgressStyle, MultiProgress};
 use std::thread;
 use std::time::Duration;
@@ -1020,7 +1020,7 @@ owo-colors = "4.0"
 colored = "2.1"
 ```
 
-```rust
+```rust,ignore
 // 使用 owo-colors
 use owo_colors::OwoColorize;
 
@@ -1049,7 +1049,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // 使用 colored
 use colored::Colorize;
 
@@ -1067,7 +1067,7 @@ fn main() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use colored::control;
 
 fn main() {
@@ -1106,7 +1106,7 @@ fn main() {
 walkdir = "2.4"
 ```
 
-```rust
+```rust,ignore
 use walkdir::WalkDir;
 use std::path::Path;
 
@@ -1164,7 +1164,7 @@ fn find_files_by_extension<P: AsRef<Path>>(path: P, ext: &str) {
 ignore = "0.4"
 ```
 
-```rust
+```rust,ignore
 use ignore::WalkBuilder;
 
 fn main() {
@@ -1254,7 +1254,7 @@ fn create_symlink_windows(original: &str, link: &str) -> io::Result<()> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::fs;
 use std::os::unix::fs::PermissionsExt;
 use std::path::Path;
@@ -1305,7 +1305,7 @@ fn manage_permissions_windows<P: AsRef<Path>>(path: P) -> std::io::Result<()> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::path::{Path, PathBuf, MAIN_SEPARATOR};
 
 fn main() {
@@ -1408,7 +1408,7 @@ serde = { version = "1.0", features = ["derive"] }
 toml = "0.8"
 ```
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 use std::fs;
 use std::path::Path;
@@ -1501,7 +1501,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_yaml = "0.9"
 ```
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -1537,7 +1537,7 @@ serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
 ```
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Serialize, Deserialize)]
@@ -1557,7 +1557,7 @@ struct JsonConfig {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::env;
 use serde::Deserialize;
 
@@ -1631,7 +1631,7 @@ fn manual_env_reading() {
 dirs = "5.0"
 ```
 
-```rust
+```rust,ignore
 use std::path::PathBuf;
 
 struct XdgPaths {
@@ -1698,7 +1698,7 @@ fn setup_app_directories(app_name: &str) -> std::io::Result<()> {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 use validator::{Validate, ValidationError};
 
@@ -1795,7 +1795,7 @@ eyre = "0.6"
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result, bail};
 use std::fs;
 use std::path::Path;
@@ -1856,7 +1856,7 @@ struct Record {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use anyhow::Result;
 use thiserror::Error;
 
@@ -1918,7 +1918,7 @@ struct Config {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result};
 use std::fmt;
 
@@ -1991,7 +1991,7 @@ fn format_error(e: &anyhow::Error) -> String {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use anyhow::{Context, Result, Chain};
 
 fn complex_operation() -> Result<()> {
@@ -2034,7 +2034,7 @@ fn log_error_with_backtrace(error: &anyhow::Error) {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::process;
 
 #[derive(Debug, Clone, Copy)]
@@ -2126,7 +2126,7 @@ tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt"] }
 ```
 
-```rust
+```rust,ignore
 use tracing::{info, debug, warn, error, span, Level};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 
@@ -2186,7 +2186,7 @@ fn process_with_span() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tracing_subscriber::fmt::{self, format::FmtSpan};
 use tracing_subscriber::layer::SubscriberExt;
 
@@ -2223,7 +2223,7 @@ fn init_json_logger() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use serde::Serialize;
 use serde_json::json;
 
@@ -2291,7 +2291,7 @@ struct Match {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use tracing::Level;
 
 #[derive(Debug, Clone, Copy)]
@@ -2361,7 +2361,7 @@ fn set_log_level(level: &str) -> Result<(), String> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{self, Write};
 
@@ -2451,7 +2451,7 @@ fn print_with_mode(msg: &str, mode: &OutputMode) {
 
 下面是一个功能完整的文件搜索工具，整合了前面讨论的所有概念：
 
-```rust
+```rust,ignore
 //! fsearch - 一个高性能的文件搜索工具
 //!
 //! 功能特点：
@@ -3329,7 +3329,7 @@ cargo binstall fd-find
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use clap::{Command, CommandFactory, Parser};
 use clap_complete::{generate, Generator, Shell};
 use std::io;
@@ -3387,7 +3387,7 @@ myapp --generate powershell > $PROFILE.CurrentUserAllHosts
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use clap::Command;
 use clap_mangen::Man;
 use std::fs;
@@ -3421,7 +3421,7 @@ sudo cp myapp.1 /usr/local/share/man/man1/
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 #[derive(Parser)]
 #[command(name = "myapp")]
 #[command(alias = "ma")]  // 命令别名

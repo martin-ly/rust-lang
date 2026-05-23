@@ -174,7 +174,7 @@ pub trait PotentiallyUndecidable {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 pub trait StreamParser {
     type Output<'a> where Self: 'a;
     type Error;
@@ -227,7 +227,7 @@ pub trait StateMachine {
 
 特殊化允许为更具体的类型实现提供覆盖更一般实现的机制。这是一个长期讨论的语言特性，RFC 1210 定义了其基础设计。
 
-```rust
+```rust,ignore
 // 一般实现
 impl<T> Trait for T {
     default fn method(&self) { /* 默认实现 */ }
@@ -282,7 +282,7 @@ impl Trait for String        // 最具体：仅适用于 String
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 问题：这两个实现是否重叠？
 impl<T> Trait for Vec<T> { }
 impl<T> Trait for T where T: AsRef<[U]>, U: Display { }
@@ -293,7 +293,7 @@ impl<T> Trait for T where T: AsRef<[U]>, U: Display { }
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 impl<T> Container for T {
     default type Item = T;
 }
@@ -307,7 +307,7 @@ impl Container for Vec<u32> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 trait Foo {
     type Bar: Default;
 }
@@ -327,7 +327,7 @@ impl Foo for String {
 
 特殊化的语义一致性要求程序的行为与使用的具体实现无关：
 
-```rust
+```rust,ignore
 // 语义一致性的概念
 fn use_trait<T: Trait>(t: T) {
     // 无论使用哪个实现， observable behavior 应该一致
@@ -358,7 +358,7 @@ impl Trait for String {
 
 效应系统（Effect Systems）是一种类型系统扩展，用于跟踪和约束程序可能产生的副作用。这在函数式编程语言（如 Koka、Eff）中已有成熟应用。
 
-```rust
+```rust,ignore
 // 效应系统的概念性语法（非实际 Rust）
 fn pure_function(x: i32) -> i32 { /* 无效应 */ }
 
@@ -401,7 +401,7 @@ Rust 中已经存在几种隐式的效应：
 
 效应多态允许编写对效应参数化的代码：
 
-```rust
+```rust,ignore
 // 概念性示例：效应多态的 map 函数
 fn map<T, U, E>(
     vec: Vec<T>,
@@ -501,7 +501,7 @@ Rust 中效应系统的研究挑战：
 
 Const Generics 是向依赖类型过渡的重要一步：
 
-```rust
+```rust,ignore
 // 当前的 Const Generics
 struct Vector<T, const N: usize> {
     data: [T; N],
@@ -555,7 +555,7 @@ impl True for Assert<true> {}
 
 线性类型（Linear Types）要求每个值必须且只能使用一次。仿射类型（Affine Types）是线性类型的松弛版本，允许值不被使用（但最多使用一次）。
 
-```rust
+```rust,ignore
 // 线性类型的概念
 linear fn consume(value: LinearResource) -> Output;
 // value 必须被使用，且只能使用一次
@@ -587,7 +587,7 @@ fn use_handle(handle: FileHandle) -> FileHandle {
 
 更细粒度的资源控制：
 
-```rust
+```rust,ignore
 // 资源分级的概念
 
 // 无限使用（Copy）
@@ -629,7 +629,7 @@ Rust 的所有权系统已经是仿射类型的实现。扩展方向包括：
 
 模态逻辑（Modal Logic）的概念可以扩展到类型系统，用于表达时序和空间属性。
 
-```rust
+```rust,ignore
 // 模态类型的概念
 
 // □A（必然 A）：在所有可能世界中都成立
@@ -656,7 +656,7 @@ fn runtime(n: usize) -> ◇Vec<u8> {
 
 时序类型用于表达值在时间上的属性：
 
-```rust
+```rust,ignore
 // 时序类型的概念
 
 // 在 Rust 异步编程中的应用
@@ -676,7 +676,7 @@ struct Counter {
 
 空间类型用于表达值在内存或地址空间中的属性：
 
-```rust
+```rust,ignore
 // 空间类型的概念
 
 // 表示堆上的值
@@ -702,7 +702,7 @@ struct SharedBuffer;
 
 精炼类型通过谓词细化现有类型，增加额外的约束。
 
-```rust
+```rust,ignore
 // 精炼类型的概念（以 Liquid Haskell 风格）
 
 // {v: i32 | v >= 0} 表示非负整数

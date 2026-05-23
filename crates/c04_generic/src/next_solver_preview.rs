@@ -8,10 +8,8 @@
 //! RUSTFLAGS="-Znext-solver=globally" cargo +nightly check -p c04_generic
 //! ```
 //!
-//! **来源**: [Rust Project Goals 2026 — Next-generation trait solver]
-//! (https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
-//! · [rustc-next-trait-solver 源码]
-//! (https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
+//! **来源**: [Rust Project Goals 2026 — Next-generation trait solver](https://rust-lang.github.io/rust-project-goals/2026/flagships.html)
+//! · [rustc-next-trait-solver 源码](https://github.com/rust-lang/rust/tree/master/compiler/rustc_next_trait_solver)
 //! · [来源: Rust Official Docs]
 
 // ============================================================================

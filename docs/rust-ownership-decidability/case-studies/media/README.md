@@ -76,7 +76,7 @@
 
 ### 2.1 音频播放
 
-```rust
+```rust,ignore
 use rodio::{Decoder, OutputStream, Sink};
 use std::fs::File;
 use std::io::BufReader;
@@ -100,7 +100,7 @@ fn play_audio(path: &str) -> Result<(), Box<dyn std::error::Error>> {
 
 ### 2.2 音频解码（Symphonia）
 
-```rust
+```rust,ignore
 use symphonia::core::audio::{AudioBufferRef, SampleBuffer};
 use symphonia::core::codecs::{DecoderOptions, CODEC_TYPE_NULL};
 use symphonia::core::formats::FormatOptions;
@@ -169,7 +169,7 @@ fn decode_audio(path: &str) -> Result<Vec<f32>, Box<dyn std::error::Error>> {
 
 ### 2.3 数字信号处理
 
-```rust
+```rust,ignore
 use fundsp::hacker32::*;
 
 fn create_effect_chain() -> impl AudioUnit32 {
@@ -189,7 +189,7 @@ fn create_effect_chain() -> impl AudioUnit32 {
 
 ### 3.1 使用FFmpeg
 
-```rust
+```rust,ignore
 use ffmpeg_next as ffmpeg;
 use ffmpeg::format::{input, Pixel};
 use ffmpeg::media::Type;
@@ -243,7 +243,7 @@ fn decode_video(path: &str) -> Result<(), Box<dyn std::error::Error>> {
 
 ### 4.1 RTMP服务器
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::{mpsc, RwLock};
 use std::collections::HashMap;
@@ -264,7 +264,7 @@ impl StreamHub {
 
 ### 4.2 WebRTC
 
-```rust
+```rust,ignore
 use webrtc::api::APIBuilder;
 use webrtc::peer_connection::configuration::RTCConfiguration;
 use webrtc::peer_connection::RTCPeerConnection;
@@ -294,7 +294,7 @@ async fn create_peer_connection() -> Result<Arc<RTCPeerConnection>, Box<dyn std:
 
 ### 5.1 低延迟音频采集
 
-```rust
+```rust,ignore
 use cpal::traits::{DeviceTrait, HostTrait, StreamTrait};
 use cpal::SampleFormat;
 use std::sync::mpsc;
@@ -331,7 +331,7 @@ fn capture_audio() -> Result<mpsc::Receiver<Vec<f32>>, Box<dyn std::error::Error
 
 ## 6. 完整示例：媒体播放器
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::mpsc;
 
@@ -424,7 +424,7 @@ unsafe fn process_samples_avx2(input: &[f32], output: &mut [f32], gain: f32) {
 
 ### 7.2 零拷贝处理
 
-```rust
+```rust,ignore
 use std::io::Read;
 
 fn process_large_file_mmap(path: &str) -> Result<(), Box<dyn std::error::Error>> {

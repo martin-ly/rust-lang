@@ -281,7 +281,7 @@ mod tests {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_crate::*;
 
@@ -296,7 +296,7 @@ fn test_integration() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-````rust
+````rust,ignore
 /// 计算两个数的和
 ///
 /// # Examples
@@ -315,7 +315,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 #[tokio::test]
 async fn test_async_function() {
     let result = async_function().await;
@@ -603,7 +603,7 @@ fn test_sliding_window_processing() {
 ### ControlFlow 在测试验证管道中的应用
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 测试验证管道，收集所有失败项
@@ -624,7 +624,7 @@ fn validate_test_results(results: &[TestResult]) -> ControlFlow<Vec<TestFailure>
 ### LazyLock 在测试固件管理中的应用
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局测试数据库连接（延迟初始化）

@@ -213,7 +213,7 @@ impl<S: Service> Service for Logging<S> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // crate_a 提供 trait
 pub trait Service { fn do_work(&self) -> i32; }
 

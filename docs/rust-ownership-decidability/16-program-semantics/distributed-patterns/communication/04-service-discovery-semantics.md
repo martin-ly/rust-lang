@@ -109,7 +109,7 @@ $$
 ### 3.1 服务注册模式
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 服务注册 trait
 trait ServiceRegistry {
     // 注册服务实例
@@ -144,7 +144,7 @@ enum ServiceChange {
 ### 3.2 自注册 vs 第三方注册
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 自注册模式 (Self-Registration)
 struct SelfRegistration<R: ServiceRegistry> {
     registry: R,
@@ -202,7 +202,7 @@ impl<R: ServiceRegistry> SidecarRegistration<R> {
 ### 4.1 客户端发现
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 客户端负载均衡
 trait LoadBalancer {
     fn select<'a>(&self, instances: &'a [ServiceInstance]) -> Option<&'a ServiceInstance>;
@@ -259,7 +259,7 @@ impl<R: ServiceRegistry, L: LoadBalancer> ClientSideDiscovery<R, L> {
 ### 4.2 服务端发现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 服务端发现（代理模式）
 struct ServerSideDiscovery {
     proxy: ReverseProxy,
@@ -310,7 +310,7 @@ impl ServerSideDiscovery {
 ### 5.2 一致性级别
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 enum ConsistencyLevel {
     Strong,      // 强一致性：读取最新
     Bounded,     // 有界陈旧：读取不超过 N 秒前的数据
@@ -357,7 +357,7 @@ impl ServiceRegistry for ConsistentRegistry {
 ### 6.1 健康检查策略
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 enum HealthCheckStrategy {
     // 推送模式：服务主动报告健康
     Push { interval: Duration },
@@ -397,7 +397,7 @@ impl HealthChecker {
 ### 6.2 故障转移
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 struct FailoverDiscovery<R> {
     primary: R,
     secondaries: Vec<R>,
@@ -472,7 +472,7 @@ impl<R: ServiceRegistry> FailoverDiscovery<R> {
 ### 8.1 基于 etcd 的服务发现
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use etcd_client::{Client, GetOptions, WatchOptions};
 
 struct EtcdServiceRegistry {

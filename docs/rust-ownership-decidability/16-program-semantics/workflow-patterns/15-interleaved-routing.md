@@ -325,7 +325,7 @@ Interleaved ::= A1 ||| A2 ||| A3
 ### 基础实现
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 use std::future::Future;
 use std::pin::Pin;
@@ -454,7 +454,7 @@ pub async fn interleaved_example() {
 ### 顺序执行器
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 基于 Tokio 的 Mutex 实现
 pub struct SequentialExecutor<T, R> {
     tasks: Vec<Box<dyn Fn(T) -> Pin<Box<dyn Future<Output = R> + Send>> + Send>>,
@@ -506,7 +506,7 @@ pub async fn sequential_executor_example() {
 ### 优先级交错
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 优先级交错：按优先级而非随机
 pub struct PriorityInterleaved<T, R> {
     tasks: Vec<(u32, Task<T, R>)>, // (priority, task)

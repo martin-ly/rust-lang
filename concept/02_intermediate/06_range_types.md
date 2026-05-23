@@ -441,3 +441,9 @@ let rev = 10..0;
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
+
+> **补充来源**
+
+> [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
+> [来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]
+> [来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]

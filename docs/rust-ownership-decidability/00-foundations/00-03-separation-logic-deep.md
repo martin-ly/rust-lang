@@ -756,7 +756,7 @@ list(x, xs) =
 
 **Prepend**:
 
-```rust
+```rust,ignore
 // {list(x, xs)}
 let new_head = Box::new((v, x));
 // {new_head |-> (v, x) * list(x, xs)}
@@ -765,7 +765,7 @@ let new_head = Box::new((v, x));
 
 **Length (Iterative)**:
 
-```rust
+```rust,ignore
 fn length(mut head: *const Node) -> usize {
   let mut count = 0;
   let mut current = head;
@@ -790,7 +790,7 @@ fn length(mut head: *const Node) -> usize {
 
 #### 5.1.3 List Reversal
 
-```rust
+```rust,ignore
 fn reverse(mut head: *mut Node) -> *mut Node {
   let mut prev: *mut Node = ptr::null_mut();
   let mut curr = head;
@@ -837,7 +837,7 @@ bst(x, lo, hi) =
 
 **Tree Search**:
 
-```rust
+```rust,ignore
 fn search(root: *const Node, key: i32) -> bool {
   let mut curr = root;
 
@@ -858,7 +858,7 @@ fn search(root: *const Node, key: i32) -> bool {
 
 **Tree Insertion**:
 
-```rust
+```rust,ignore
 // {bst(root, lo, hi) and lo < key < hi}
 fn insert(root: *mut *mut Node, key: i32) {
   if root.is_null() {
@@ -923,7 +923,7 @@ This section presents 12+ common errors in separation logic reasoning, each with
 
 **Why It Fails**: The precondition `x |-> 0 * x |-> 0` is false (disjointness violation). More subtly:
 
-```rust
+```rust,ignore
 // {x |-> 0 * y |-> x}
 x := 1
 // Trying to derive {x |-> 1 * y |-> x} but x has changed!
@@ -992,7 +992,7 @@ After `drop(x)`, we have `emp` - no heap ownership. Dereferencing `raw` (which e
 
 **The Error**: Similar to dangling pointer, but with explicit heap manipulation.
 
-```rust
+```rust,ignore
 fn use_after_free() {
   let ptr = alloc(1);
   *ptr = 42;
@@ -1021,7 +1021,7 @@ After deallocation, we lose all permission to access that memory.
 
 **The Error**: Freeing the same memory twice.
 
-```rust
+```rust,ignore
 fn double_free() {
   let x = alloc(1);
   // {x |-> _}
@@ -1041,7 +1041,7 @@ The second `free(x)` requires precondition `x |-> _`, but after the first free, 
 **Rust Prevention**:
 Rust's ownership system prevents this by consuming the pointer on first drop:
 
-```rust
+```rust,ignore
 let x = Box::new(42);
 drop(x);
 drop(x);  // Compile error: x already moved
@@ -1053,7 +1053,7 @@ drop(x);  // Compile error: x already moved
 
 **The Error**: Losing the last reference to allocated memory.
 
-```rust
+```rust,ignore
 fn memory_leak() {
   let x = Box::new(42);
   // {x |-> 42}
@@ -1194,7 +1194,7 @@ Qed.
 
 **The Error**: Attempting to weaken an invariant unsoundly.
 
-```rust
+```rust,ignore
 fn bad_weakening() {
   let mut x = Box::new(42);
   // Invariant: x |-> 42 and x > 0
@@ -1251,7 +1251,7 @@ View shifts must respect invariant masks. Opening an invariant temporarily remov
 
 **The Error**: Not accounting for invariant masks in atomic operations.
 
-```rust
+```rust,ignore
 // Atomic operation in concurrent setting
 // Incorrect: ignoring mask changes during CAS
 fn bad_atomic() {
@@ -1618,7 +1618,7 @@ A Rust `Vec<T>` consists of:
 - `len`: Number of initialized elements
 - `cap`: Total capacity
 
-```rust
+```rust,ignore
 pub struct Vec<T> {
     buf: RawVec<T>,
     len: usize,
@@ -1651,7 +1651,7 @@ Definition vec_inv {Sigma} (gamma : gname) (v : val) (xs : list val) : iProp Sig
 
 #### 9.3.1 New
 
-```rust
+```rust,ignore
 fn new() -> Vec<T>
 ```
 
@@ -1680,7 +1680,7 @@ Qed.
 
 #### 9.3.2 Push
 
-```rust
+```rust,ignore
 fn push(&mut self, value: T)
 ```
 
@@ -1738,7 +1738,7 @@ Qed.
 
 #### 9.3.3 Pop
 
-```rust
+```rust,ignore
 fn pop(&mut self) -> Option<T>
 ```
 
@@ -1792,7 +1792,7 @@ Qed.
 
 #### 9.3.4 Index
 
-```rust
+```rust,ignore
 fn index(&self, i: usize) -> &T
 ```
 
@@ -1839,7 +1839,7 @@ Qed.
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 pub struct Iter<'a, T> {
     ptr: *const T,
     end: *const T,

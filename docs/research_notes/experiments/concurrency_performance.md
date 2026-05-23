@@ -367,7 +367,7 @@ fn main() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 use std::time::Instant;
@@ -431,7 +431,7 @@ fn unbounded_channel_benchmark() -> u128 {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use tokio::time::Instant;
 use std::time::Duration;
 

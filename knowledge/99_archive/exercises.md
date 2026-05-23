@@ -1,4 +1,5 @@
 # Rust 编程练习集
+> **相关概念**: [Rc](../../concept/02_intermediate/03_memory_management.md)
 
 > **Bloom 层级**: 理解
 
@@ -20,7 +21,7 @@
 
 **要求**: 修复以下代码，使其能够编译通过。
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("hello");
     take_ownership(s);
@@ -108,7 +109,7 @@ fn main() {
 
 **要求**: 为函数添加正确的生命周期标注。
 
-```rust
+```rust,compile_fail
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
 }
@@ -147,7 +148,7 @@ fn main() {
 
 **要求**: 实现一个 `Person` 结构体，包含姓名和年龄字段。
 
-```rust
+```rust,compile_fail
 struct Person {
     // 实现这里
 }
@@ -207,7 +208,7 @@ fn main() {
 
 **要求**: 实现一个函数，返回字符串的第一个单词。
 
-```rust
+```rust,compile_fail
 fn first_word(s: &str) -> &str {
     // 实现这里
 }
@@ -257,7 +258,7 @@ fn main() {
 
 **要求**: 使用迭代器计算一组数字中所有偶数的平方和。
 
-```rust
+```rust,compile_fail
 fn sum_of_even_squares(numbers: &[i32]) -> i32 {
     // 实现这里，使用迭代器方法链
 }
@@ -297,7 +298,7 @@ fn main() {
 
 **要求**: 统计一段文本中每个单词出现的次数。
 
-```rust
+```rust,compile_fail
 use std::collections::HashMap;
 
 fn word_count(text: &str) -> HashMap<String, u32> {
@@ -345,7 +346,7 @@ fn main() {
 
 **要求**: 创建一个可以生成前 N 个斐波那契数的迭代器。
 
-```rust
+```rust,compile_fail
 struct Fibonacci {
     // 实现这里
 }
@@ -413,7 +414,7 @@ fn main() {
 
 **要求**: 实现一个函数，接收整数向量，返回有序且不包含重复元素的向量。
 
-```rust
+```rust,compile_fail
 fn sort_and_deduplicate(nums: Vec<i32>) -> Vec<i32> {
     // 实现这里
 }
@@ -452,7 +453,7 @@ fn main() {
 
 **要求**: 创建一个存储学生成绩的系统，支持按分数范围查询学生。
 
-```rust
+```rust,compile_fail
 use std::collections::BTreeMap;
 
 struct GradeBook {
@@ -489,7 +490,7 @@ fn main() {
 <details>
 <summary>💡 解答</summary>
 
-```rust
+```rust,compile_fail
 use std::collections::BTreeMap;
 
 struct GradeBook {
@@ -542,7 +543,7 @@ fn main() {
 
 **要求**: 函数应适用于任何有序类型。
 
-```rust
+```rust,compile_fail
 fn binary_search<T: Ord>(arr: &[T], target: &T) -> Option<usize> {
     // 实现这里
 }
@@ -598,7 +599,7 @@ fn main() {
 
 **要求**: 创建一个可以表示不同错误情况的枚举，并实现 Error 特质。
 
-```rust
+```rust,compile_fail
 use std::error::Error;
 use std::fmt;
 
@@ -758,7 +759,7 @@ fn main() {
 
 **要求**: 定义 Graph 特质，使用关联类型表示节点和边。
 
-```rust
+```rust,compile_fail
 trait Graph {
     type Node;
     type Edge;
@@ -837,7 +838,7 @@ fn main() {
 
 **要求**: 实现 Add、Sub、Mul 等运算符。
 
-```rust
+```rust,compile_fail
 use std::ops::{Add, Sub, Mul};
 
 #[derive(Debug, Clone, Copy, PartialEq)]
@@ -929,7 +930,7 @@ fn main() {
 
 **要求**: 多个线程同时递增计数器，最终值正确。
 
-```rust
+```rust,compile_fail
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -990,7 +991,7 @@ fn main() {
 
 **要求**: 同时请求多个 URL，收集所有响应。
 
-```rust
+```rust,compile_fail
 use reqwest;
 
 async fn fetch_urls(urls: &[&str]) -> Vec<Result<String, reqwest::Error>> {
@@ -1011,7 +1012,7 @@ async fn main() {
 <details>
 <summary>💡 解答</summary>
 
-```rust
+```rust,compile_fail
 use futures::future::join_all;
 
 async fn fetch_urls(urls: &[&str]) -> Vec<Result<String, reqwest::Error>> {
@@ -1048,7 +1049,7 @@ async fn main() {
 
 **要求**: 多个生产者向单个消费者发送消息。
 
-```rust
+```rust,compile_fail
 use std::sync::mpsc;
 use std::thread;
 use std::time::Duration;
@@ -1111,7 +1112,7 @@ fn main() {
 
 **要求**: 实现一个缓存，支持并发读取和独占写入。
 
-```rust
+```rust,compile_fail
 use std::sync::RwLock;
 use std::collections::HashMap;
 use std::sync::Arc;
@@ -1207,7 +1208,7 @@ fn main() {
 
 **要求**: 实现一个工作队列，线程等待任务可用。
 
-```rust
+```rust,compile_fail
 use std::sync::{Mutex, Condvar, Arc};
 use std::thread;
 use std::collections::VecDeque;
@@ -1322,7 +1323,7 @@ fn main() {
 
 **要求**: 实现 new、push、pop、get、len 等基本操作。
 
-```rust
+```rust,compile_fail
 use std::alloc::{self, Layout};
 use std::ptr::{self, NonNull};
 
@@ -1450,7 +1451,7 @@ fn main() {
 
 **要求**: 使用多个 Mutex 分片，提高并发性能。
 
-```rust
+```rust,compile_fail
 use std::sync::Mutex;
 use std::collections::hash_map::DefaultHasher;
 use std::hash::{Hash, Hasher};
@@ -1542,7 +1543,7 @@ fn main() {
 
 **要求**: 支持 spawn 任务和基本的 waker 机制。
 
-```rust
+```rust,compile_fail
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll, Waker, RawWaker, RawWakerVTable};
@@ -1586,7 +1587,7 @@ fn main() {
 <details>
 <summary>💡 解答</summary>
 
-```rust
+```rust,compile_fail
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll, Waker, RawWaker, RawWakerVTable};

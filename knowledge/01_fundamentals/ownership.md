@@ -420,7 +420,7 @@ fn takes_and_gives_back(a_string: String) -> String {
 
 2. **需要转移所有权时，明确使用函数名表达意图**
 
-   ```rust
+   ```rust,ignore
    // 好的命名
    fn consume_string(s: String) { /* ... */ }
    fn process_and_return(s: String) -> String { /* ... */ }
@@ -428,7 +428,7 @@ fn takes_and_gives_back(a_string: String) -> String {
 
 3. **在大型结构体上注意所有权转移的成本**
 
-   ```rust
+   ```rust,ignore
    // 如果结构体很大，考虑使用借用
    fn process_large(data: &LargeStruct) { /* ... */ }
    ```
@@ -531,7 +531,7 @@ fn print_name_ref(s: &String) {
 
 下面的代码有编译错误，请修复它：
 
-```rust
+```rust,compile_fail
 fn main() {
     let s1 = String::from("Hello");
     let s2 = s1;
@@ -595,7 +595,7 @@ fn process(s: String) -> String {
 
 实现一个函数 `double_string`，它接收一个 `String`，返回一个新的 `String`，内容是原字符串重复两次：
 
-```rust
+```rust,compile_fail
 fn main() {
     let s = String::from("Hello");
     let doubled = double_string(s);

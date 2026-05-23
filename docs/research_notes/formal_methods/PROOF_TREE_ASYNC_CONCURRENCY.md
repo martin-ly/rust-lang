@@ -199,7 +199,7 @@ Start ─────────→ Polling ───────────�
 
 **Send 边界**:
 
-```rust
+```rust,ignore
 fn spawn<F, R>(f: F) -> JoinHandle<R>
 where
     F: FnOnce() -> R + Send + 'static,
@@ -214,7 +214,7 @@ where
 
 **反例**:
 
-```rust
+```rust,ignore
 let rc = Rc::new(42);
 // async { *rc } 不能 spawn 到线程池
 // 因为 Rc 不是 Send
@@ -294,7 +294,7 @@ impl Future for MyFuture {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::task;
 

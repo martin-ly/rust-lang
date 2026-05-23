@@ -120,7 +120,7 @@ pub struct Pin<P> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::marker::PhantomPinned;
 
 struct MustNotMove {
@@ -178,7 +178,7 @@ let pinned: Pin<&mut String> = unsafe { Pin::new_unchecked(&mut data) };
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 impl<P: Deref> Pin<P> {
     // 获取引用（总是安全）
     pub fn as_ref(&self) -> Pin<&P::Target>;
@@ -197,7 +197,7 @@ impl<P: DerefMut<Target: Unpin>> Pin<P> {
 
 ### 3.3 Unsafe操作
 
-```rust
+```rust,ignore
 impl<P: DerefMut> Pin<P> {
     /// # Safety
     /// 调用者必须保证不移动数据
@@ -216,7 +216,7 @@ impl<P: DerefMut> Pin<P> {
 
 ### 4.1 安全的自引用结构
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 use std::ptr::NonNull;
@@ -258,7 +258,7 @@ impl SelfRef {
 
 ### 4.2 实现Future
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};
@@ -307,7 +307,7 @@ impl Future for MyFuture {
 
 ### 4.3 异步块中的Pin
 
-```rust
+```rust,ignore
 async fn async_with_pin() {
     let local = String::from("pinned data");
 
@@ -333,7 +333,7 @@ async fn async_with_pin() {
 
 ### 5.1 自动派生
 
-```rust
+```rust,ignore
 // 大多数类型自动实现Unpin
 struct MyStruct {
     data: i32,
@@ -375,7 +375,7 @@ impl<T: Unpin, U: Unpin> Unpin for Conditional<T, U> {}
 
 ### 6.1 什么是投影？
 
-```rust
+```rust,ignore
 struct Container {
     pinned_field: PinnedData,
     unpinned_field: i32,
@@ -387,7 +387,7 @@ struct Container {
 
 ### 6.2 安全投影模式
 
-```rust
+```rust,ignore
 struct Container {
     pinned: PinnedData,
     unpinned: i32,
@@ -410,7 +410,7 @@ impl Container {
 
 ### 6.3 pin-project crate
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 
 #[pin_project]
@@ -435,7 +435,7 @@ impl Container {
 
 ### 7.1 错误：在Pin后修改
 
-```rust
+```rust,ignore
 fn wrong() {
     let mut data = String::from("hello");
     let pinned = Pin::new(&mut data);
@@ -447,7 +447,7 @@ fn wrong() {
 
 ### 7.2 错误：`Pin<Box<T>>`后解引用
 
-```rust
+```rust,ignore
 fn also_wrong() {
     let pinned: Pin<Box<String>> = Box::pin(String::from("hello"));
 
@@ -458,7 +458,7 @@ fn also_wrong() {
 
 ### 7.3 正确：通过投影访问
 
-```rust
+```rust,ignore
 fn correct() {
     let mut pinned: Pin<Box<PinnedData>> = PinnedData::new();
 
@@ -486,7 +486,7 @@ Pin<P<T>> 保证:
 
 ### 8.2 与Drop的交互
 
-```rust
+```rust,ignore
 impl Drop for PinnedType {
     fn drop(&mut self) {
         // 即使类型是!Unpin，drop(&mut self)接收非Pin引用

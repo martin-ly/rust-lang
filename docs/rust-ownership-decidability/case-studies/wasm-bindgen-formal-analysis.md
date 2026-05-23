@@ -70,7 +70,7 @@ wasm-bindgen功能：
 ### 定义 TYPEMAP-2 ( 复杂类型 )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub struct Point { x: f64, y: f64 }
 ```
@@ -94,7 +94,7 @@ $$
 ### 定义 MEM-2 ( 所有权转移 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 impl Point {
     #[wasm_bindgen(constructor)]
@@ -119,14 +119,14 @@ $$
 ### 定义 EXPORT-1 ( 导出语法 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub fn add(a: i32, b: i32) -> i32 { a + b }
 ```
 
 ### 定义 EXPORT-2 ( 异步导出 )
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
     // async operation
@@ -139,7 +139,7 @@ pub async fn fetch_data(url: String) -> Result<JsValue, JsValue> {
 
 ### 定义 IMPORT-1 ( 内联导入 )
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 extern "C" {
     #[wasm_bindgen(js_namespace = console)]
@@ -149,7 +149,7 @@ extern "C" {
 
 ### 定义 IMPORT-2 ( 自定义类型 )
 
-```rust
+```rust,ignore
 #[wasm_bindgen]
 extern "C" {
     pub type HTMLElement;
@@ -185,7 +185,7 @@ $$
 
 ### 示例1: 基础导出
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen]
@@ -217,7 +217,7 @@ pub fn greet(name: &str) -> String {
 
 ### 示例2: DOM操作
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use web_sys::{Document, Element, HtmlElement, Window};
 
@@ -237,7 +237,7 @@ pub fn run() -> Result<(), JsValue> {
 
 ### 示例3: 异步HTTP
 
-```rust
+```rust,ignore
 use wasm_bindgen::prelude::*;
 use wasm_bindgen_futures::JsFuture;
 use web_sys::{Request, RequestInit, Response};

@@ -172,7 +172,7 @@ retry = 3
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -230,7 +230,7 @@ fn main() -> ! {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![cfg_attr(test, no_main)]
 
@@ -364,7 +364,7 @@ harness = false
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 //! 类型状态模式的状态机
 
 use crate::error::Error;

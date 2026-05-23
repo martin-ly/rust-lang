@@ -53,7 +53,7 @@ jsonwebtoken提供:
 
 > JWT = Base64(Header) + "." + Base64(Claims) + "." + Signature
 
-```rust
+```rust,ignore
 pub struct TokenData<T> {
     pub claims: T,      // 自定义声明
     pub header: Header, // 算法元数据
@@ -70,7 +70,7 @@ pub struct TokenData<T> {
 
 > 可配置多种验证规则。
 
-```rust
+```rust,ignore
 let validation = Validation::new(Algorithm::HS256);
 validation.sub = Some("user123".to_string());  // 主题验证
 validation.aud = Some(HashSet::from(["my_app"])); // 受众验证
@@ -86,7 +86,7 @@ validation.aud = Some(HashSet::from(["my_app"])); // 受众验证
 
 > 不明算法拒绝验证。
 
-```rust
+```rust,ignore
 validation.algorithms = vec![Algorithm::EdDSA];  // 仅允许EdDSA
 // 如果token使用HS256，验证失败
 ```
@@ -97,7 +97,7 @@ validation.algorithms = vec![Algorithm::EdDSA];  // 仅允许EdDSA
 
 > 默认拒绝无签名算法。
 
-```rust
+```rust,ignore
 // 防止攻击: {"alg": "none"}
 validation.required_spec_claims.insert("alg".to_string());
 ```
@@ -112,7 +112,7 @@ validation.required_spec_claims.insert("alg".to_string());
 
 > exp(过期)和nbf(生效前)自动验证。
 
-```rust
+```rust,ignore
 #[derive(Serialize, Deserialize)]
 struct Claims {
     exp: usize,  // 过期时间戳
@@ -131,7 +131,7 @@ struct Claims {
 
 ### 反例 6.1 (密钥混淆)
 
-```rust
+```rust,ignore
 // 危险: RS256使用公钥验证，但误用私钥
 let token = decode::<Claims>(
     token,
@@ -149,7 +149,7 @@ let token = decode::<Claims>(
 
 ### 反例 6.2 (忽略验证)
 
-```rust
+```rust,ignore
 // 危险: 禁用所有验证
 let mut validation = Validation::default();
 validation.validate_exp = false;

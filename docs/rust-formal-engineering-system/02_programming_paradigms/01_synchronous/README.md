@@ -141,7 +141,7 @@ fn atomic_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::{Barrier, Condvar};
 use std::thread;
 use std::time::Duration;
@@ -195,7 +195,7 @@ fn condvar_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 // 使用 scope 允许线程借用非 'static 数据

@@ -108,7 +108,7 @@ Unsafe Fields 模型:
 
 在现有 Rust 中，一旦进入 `unsafe` 块，编译器就放弃对所有操作的检查。但一个结构体中通常**只有部分字段**涉及不安全的内存操作：
 
-```rust
+```rust,ignore
 // 当前 Rust: 进入 unsafe 块后，所有操作都"不受保护"
 struct IoBuffer {
     raw_ptr: *mut u8,      // 需要 unsafe
@@ -154,7 +154,7 @@ impl IoBuffer {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 pub struct KernelBuffer {
     // 安全字段: 正常访问
     pub len: usize,
@@ -172,7 +172,7 @@ pub struct KernelBuffer {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 impl KernelBuffer {
     // 安全方法: 访问安全字段
     pub fn len(&self) -> usize {
@@ -199,7 +199,7 @@ impl KernelBuffer {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 fn process_buffer(buf: &KernelBuffer) {
     // 解构时，unsafe field 需要显式处理
     let KernelBuffer { len, capacity, .. } = buf;

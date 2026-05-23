@@ -5,6 +5,7 @@
 # Rust 2024 Edition RPIT Lifetime Capture 迁移指南
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Rust 2024 Edition RPIT Lifetime Capture 迁移指南](#rust-2024-edition-rpit-lifetime-capture-迁移指南)
@@ -30,6 +31,7 @@
   - [参考资源](#参考资源)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -68,6 +70,7 @@ fn example(x: &str) -> impl Iterator<Item = char> {
 在新版中，编译器**自动捕获**所有输入生命周期，上述代码无需显式标注 `'a` 即可编译。
 
 ## 影响分析
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 对现有代码的影响
@@ -84,7 +87,7 @@ fn example(x: &str) -> impl Iterator<Item = char> {
 
 #### 示例 1：自动捕获简化代码
 
-```rust
+```rust,ignore
 // Rust 2021：需要显式标注
 fn get_words<'a>(text: &'a str) -> impl Iterator<Item = &'a str> + 'a {
     text.split_whitespace()
@@ -98,7 +101,7 @@ fn get_words(text: &str) -> impl Iterator<Item = &str> {
 
 #### 示例 2：可能的兼容性问题
 
-```rust
+```rust,ignore
 // Rust 2021：返回的迭代器不绑定到输入生命周期
 fn make_iter<'a>(_x: &'a str) -> impl Iterator<Item = i32> {
     vec![1, 2, 3].into_iter()
@@ -124,9 +127,11 @@ fn precise_example<'a, 'b>(
 ```
 
 ## 迁移步骤
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 步骤 1：升级到 Edition 2024
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 在 `Cargo.toml` 中设置：
@@ -137,6 +142,7 @@ edition = "2024"
 ```
 
 ### 步骤 2：运行编译器检查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```bash
@@ -146,6 +152,7 @@ cargo check
 观察是否有生命周期相关的编译错误。
 
 ### 步骤 3：处理常见错误
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### 错误类型 A：生命周期过严
@@ -183,6 +190,7 @@ fn get_ref(x: &str) -> impl std::fmt::Display {
 ```
 
 ### 步骤 4：使用精确捕获优化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 对于需要精细控制生命周期捕获的场景，使用 `use<...>` 语法：
@@ -200,6 +208,7 @@ where
 ```
 
 ## 最佳实践
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 1. **优先依赖自动捕获**：大多数情况下，编译器的默认行为是正确的
@@ -208,6 +217,7 @@ where
 4. **更新文档**：如果返回类型的生命周期约束发生变化，更新相关文档
 
 ## 参考资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust Edition Guide: RPIT Lifetime Capture](https://doc.rust-lang.org/edition-guide/rust-2024/rpit-lifetime-capture.html)
@@ -227,6 +237,7 @@ where
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -303,4 +314,3 @@ where
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

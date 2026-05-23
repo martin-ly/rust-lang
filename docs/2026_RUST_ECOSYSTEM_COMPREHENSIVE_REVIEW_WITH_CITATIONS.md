@@ -103,7 +103,7 @@
 
 **性能优势**（官方示例）：
 
-```rust
+```rust,ignore
 // 使用array_windows - 编译器可推断窗口大小
 s.as_bytes().array_windows().any(|[a1, b1, b2, a2]| ...)
 

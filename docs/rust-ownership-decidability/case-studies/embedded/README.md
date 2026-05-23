@@ -77,7 +77,7 @@
 嵌入式系统通常没有完整的操作系统支持，因此Rust程序需要在 `no_std` 环境下运行。
 这意味着无法使用标准库(std)，只能使用核心库(core)。
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -122,7 +122,7 @@ fn main() -> ! {
 
 嵌入式系统的内存极其有限（通常只有几KB到几百KB），Rust的所有权系统在这种情况下特别有价值：
 
-```rust
+```rust,ignore
 use heapless::Vec;
 
 /// 传感器数据缓冲区 - 编译期确定大小，无运行时分配
@@ -345,7 +345,7 @@ _stack_start = ORIGIN(CCMRAM) + LENGTH(CCMRAM);
 
 `embedded-hal` 提供了一套通用的硬件抽象接口：
 
-```rust
+```rust,ignore
 use embedded_hal::{
     digital::{InputPin, OutputPin, StatefulOutputPin},
     spi::{SpiBus, SpiDevice},
@@ -392,7 +392,7 @@ impl<PIN: OutputPin> Led<PIN> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::{
     gpio::{self, Edge, Input, Output, PushPull, Speed},
     pac,
@@ -434,7 +434,7 @@ fn gpio_example() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::{
     pac,
     prelude::*,
@@ -509,7 +509,7 @@ impl UartDriver<pac::USART1> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use embedded_hal::spi::{Mode, Phase, Polarity};
 use stm32f4xx_hal::{
     pac::SPI1,
@@ -577,7 +577,7 @@ impl SpiDevice {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::{
     pac::I2C1,
     prelude::*,
@@ -645,7 +645,7 @@ where
 
 RTIC (Real-Time Interrupt-driven Concurrency) 是基于中断的并发框架：
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -764,7 +764,7 @@ mod app {
 
 Embassy是现代化的异步嵌入式框架：
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
@@ -868,7 +868,7 @@ async fn main(spawner: Spawner) {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 /// Embassy中的任务优先级配置
 use embassy_executor::SpawnError;
 
@@ -933,7 +933,7 @@ async fn safe_sensor_read() -> u16 {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use heapless::{Vec, String, FnvIndexMap, Pool};
 
 /// 编译期确定的静态缓冲区
@@ -996,7 +996,7 @@ impl<const N: usize> LogBuffer<N> {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use heapless::pool::Pool;
 use core::mem::MaybeUninit;
 
@@ -1065,7 +1065,7 @@ impl MemoryManager {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 栈使用监控
 pub struct StackMonitor;
 
@@ -1155,7 +1155,7 @@ pub fn setup_mpu_stack_guard() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use cortex_m::interrupt::{self, Mutex};
 use core::cell::RefCell;
 
@@ -1205,7 +1205,7 @@ fn process_interrupts() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use cortex_m::interrupt::{self, CriticalSection};
 use critical_section::with;
 
@@ -1263,7 +1263,7 @@ mod rtic_critical {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use heapless::spsc::Queue;
 use core::sync::atomic::{AtomicUsize, Ordering};
 
@@ -1360,7 +1360,7 @@ impl AtomicFlags {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use embassy_net::tcp::TcpSocket;
 use heapless::String;
 
@@ -1532,7 +1532,7 @@ impl<'a, 'b> MqttClient<'a, 'b> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 /// CoAP消息类型
 #[repr(u8)]
 #[derive(Clone, Copy)]
@@ -1638,7 +1638,7 @@ impl CoapClient {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// LoRaWAN区域配置
 #[derive(Clone, Copy)]
 pub enum LoraRegion {
@@ -1800,7 +1800,7 @@ where
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use stm32f4xx_hal::pac::PWR;
 use cortex_m::peripheral::SCB;
 
@@ -1899,7 +1899,7 @@ impl PowerManager {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use embassy_time::{Duration, Instant, Timer};
 use core::sync::atomic::{AtomicU32, Ordering};
 
@@ -2051,7 +2051,7 @@ impl LowPowerScheduler {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 #![feature(type_alias_impl_trait)]
@@ -2562,7 +2562,7 @@ async fn main(spawner: Spawner) {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use rtt_target::{rtt_init_print, rprintln, rdbg};
 
 fn init_rtt() {
@@ -2597,7 +2597,7 @@ fn log_examples() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use cortex_m::{iprintln, ITM};
 use cortex_m::peripheral::ITM as ITM_Periph;
 
@@ -2647,7 +2647,7 @@ fn configure_itm() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use heapless::spsc::Queue;
 use core::fmt::Write;
 

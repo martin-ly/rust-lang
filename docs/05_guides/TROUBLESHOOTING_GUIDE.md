@@ -147,7 +147,7 @@ error[E0382]: borrow of moved value: `x`
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ❌ 错误
 let x = String::from("hello");
 let y = x;  // x 被移动
@@ -180,7 +180,7 @@ error[E0597]: `x` does not live long enough
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ❌ 错误
 fn get_ref() -> &str {
     let s = String::from("hello");
@@ -247,7 +247,7 @@ thread 'main' panicked at 'index out of bounds'
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ❌ 错误
 let arr = [1, 2, 3];
 let value = arr[10];  // panic!
@@ -273,7 +273,7 @@ if let Some(value) = arr.get(10) {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ❌ 可能导致死锁
 let mutex1 = Arc::new(Mutex::new(0));
 let mutex2 = Arc::new(Mutex::new(0));
@@ -297,7 +297,7 @@ let mutex2 = Arc::new(Mutex::new(0));
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ❌ 循环引用
 use std::rc::Rc;
 use std::cell::RefCell;
@@ -377,7 +377,7 @@ error: timeout while waiting for connection
 
 **解决方案**:
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 // 设置超时
@@ -404,7 +404,7 @@ error: failed to resolve hostname
 
 **解决方案**:
 
-```rust
+```rust,ignore
 use std::net::TcpStream;
 
 // Rust 1.93+ (musl 1.2.5) 改进了 DNS 解析
@@ -419,7 +419,7 @@ let stream = TcpStream::connect("example.com:80").await?;
 
 **如果仍遇到问题，可以添加重试机制**:
 
-```rust
+```rust,ignore
 use std::net::TcpStream;
 use std::time::Duration;
 
@@ -487,7 +487,7 @@ error: future cannot be sent between threads safely
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ✅ 确保 Future 是 Send
 #[tokio::test]
 async fn test_async() {
@@ -506,7 +506,7 @@ async fn test_async() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 println!("调试信息: {:?}", value);
 ```
 
@@ -514,7 +514,7 @@ println!("调试信息: {:?}", value);
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 let value = dbg!(calculate_value());
 ```
 
@@ -534,7 +534,7 @@ lldb ./target/debug/my_app
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use tracing::{info, error, warn};
 
 info!("信息: {}", value);
@@ -700,7 +700,7 @@ let result = items.iter().try_for_each(|&n| {
 
 **问题**: `LazyLock` 初始化时 panic
 
-```rust
+```rust,ignore
 // ❌ 问题代码：初始化可能失败
 static CONFIG: LazyLock<Config> = LazyLock::new(|| {
     Config::from_env().unwrap()  // panic if env not set
@@ -721,7 +721,7 @@ pub fn get_config() -> Option<&'static Config> {
 
 **问题**: 数组长度不足导致 empty iterator
 
-```rust
+```rust,ignore
 // ❌ 问题代码：未检查长度
 fn process(data: &[i32]) -> Vec<i32> {
     data.array_windows::<5>()  // 如果 data.len() < 5，返回空
@@ -745,7 +745,7 @@ fn process(data: &[i32]) -> Vec<i32> {
 
 **问题**: 编译器无法推断 ControlFlow 类型参数
 
-```rust
+```rust,ignore
 // ❌ 问题代码：类型不明确
 fn search(items: &[i32]) -> ControlFlow<_, ()> {
     for &item in items {

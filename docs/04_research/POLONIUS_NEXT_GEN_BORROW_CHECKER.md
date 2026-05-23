@@ -103,7 +103,7 @@ timeline
 
 当前的 NLL (Non-Lexical Lifetimes) 已经比词法生命周期精确得多，但仍存在**误报 (false positives)**：
 
-```rust
+```rust,ignore
 // NLL 下编译失败的代码（Polonius 预期可通过）
 fn nll_limitation() {
     let mut vec = vec![1, 2, 3];

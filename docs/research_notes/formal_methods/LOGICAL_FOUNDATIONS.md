@@ -252,7 +252,7 @@ e ::= x | λx:τ.e | e e
 
 **高阶类型**:
 
-```rust
+```rust,ignore
 // Rust中的高阶函数对应高阶逻辑
 fn map<F, T, U>(f: F, v: Vec<T>) -> Vec<U>
 where F: Fn(T) -> U

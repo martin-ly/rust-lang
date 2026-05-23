@@ -89,7 +89,7 @@
 ### 2.1 依赖选择标准
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 依赖评估检查表
 pub struct DependencyCriteria {
     /// 维护活跃度

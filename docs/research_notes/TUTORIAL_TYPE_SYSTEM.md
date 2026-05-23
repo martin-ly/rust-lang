@@ -202,7 +202,7 @@ enum Result<T, E> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let msg1 = Message::Quit;
 let msg2 = Message::Move { x: 10, y: 20 };
 let msg3 = Message::Write(String::from("hello"));
@@ -258,7 +258,7 @@ fn value_in_cents(coin: Coin) -> u8 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 完整match
 match some_option {
     Some(value) => println!("{}", value),
@@ -355,7 +355,7 @@ let mixed = Point2 { x: 5, y: 4.0 };
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Option<T>定义
 enum Option<T> {
     Some(T),
@@ -407,7 +407,7 @@ impl Summary for NewsArticle {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 接受实现Summary的参数
 pub fn notify(item: &impl Summary) {
     println!("Breaking news! {}", item.summarize());
@@ -427,7 +427,7 @@ pub fn notify<T: Summary + Display>(item: &T) { }
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 复杂约束用where更清晰
 fn some_function<T, U>(t: &T, u: &U) -> i32
 where
@@ -440,7 +440,7 @@ where
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 pub trait Iterator {
     type Item;  // 关联类型
 
@@ -497,7 +497,7 @@ fn takes_long_type(f: Thunk) { }
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 fn bar() -> ! {  // !表示never type
     panic!();
 }
@@ -518,7 +518,7 @@ let guess: u32 = match guess.trim().parse() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Sized trait自动为固定大小类型实现
 fn generic<T: Sized>(t: T) { }
 
@@ -721,7 +721,7 @@ let r = &mut x;
 ### Send与Sync
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // T: Send - 可安全跨线程转移
 // T: Sync - 可安全跨线程共享
 

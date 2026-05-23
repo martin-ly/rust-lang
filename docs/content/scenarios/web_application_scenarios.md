@@ -63,7 +63,7 @@ graph TD
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post, put, delete},
     Router, Json, extract::Path,

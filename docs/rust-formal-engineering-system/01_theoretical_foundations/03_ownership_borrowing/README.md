@@ -252,7 +252,7 @@ fn arc_mutex_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Send 和 Sync 的形式化定义
 // Send: 可以安全地在线程间转移所有权
 // Sync: 可以安全地在线程间共享引用（&T 是 Send）

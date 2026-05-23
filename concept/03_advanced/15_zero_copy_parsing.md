@@ -34,6 +34,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -44,6 +45,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 零拷贝原理
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -82,6 +84,7 @@
 ---
 
 ### 1.2 生命周期约束
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -125,6 +128,7 @@
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 bytes crate
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -158,6 +162,7 @@ bytes::Bytes:
 ---
 
 ### 2.2 zerocopy crate
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -199,6 +204,7 @@ zerocopy:
 ---
 
 ### 2.3 memmap2
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -238,6 +244,7 @@ zerocopy:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 rkyv
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -274,6 +281,7 @@ rkyv — 零拷贝反序列化:
 ---
 
 ### 3.2 flatbuffers / capnp
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -314,6 +322,7 @@ FlatBuffers / Cap'n Proto:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```mermaid
@@ -338,6 +347,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -460,6 +470,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -624,4 +635,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

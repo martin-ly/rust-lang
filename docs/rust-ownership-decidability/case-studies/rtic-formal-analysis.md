@@ -61,7 +61,7 @@ RTIC (Real-Time Interrupt-driven Concurrency) 是Rust的实时并发框架：
 ### 定义 RTIC-R1 ( 共享资源 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[app(device = stm32f4xx_hal::pac)]
 mod app {
     #[shared]
@@ -93,7 +93,7 @@ $$
 ### 定义 RTIC-R2 ( 资源锁 )
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 ctx.shared.counter.lock(|counter| {
     *counter += 1;
 });
@@ -245,7 +245,7 @@ $$
 ### 示例1: 基本结构
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[app(device = stm32f4::pac, peripherals = true)]
 mod app {
     use rtic::app;
@@ -285,7 +285,7 @@ mod app {
 ### 示例2: 定时器任务
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #[app(device = stm32f4::pac)]
 mod app {
     #[task(local = [tick: u32 = 0])]
@@ -310,7 +310,7 @@ mod app {
 ### 示例3: 中断驱动任务
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #[app(device = stm32f4::pac)]
 mod app {
     #[shared]
@@ -342,7 +342,7 @@ mod app {
 ### 示例4: 资源锁
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[app(device = stm32f4::pac)]
 mod app {
     #[shared]

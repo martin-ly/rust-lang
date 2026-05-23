@@ -98,7 +98,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 决策条件: 长事务 + 最终一致性
 // Rust实现示例
 
@@ -182,7 +182,7 @@ impl ChoreographedSaga {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 决策条件: 读写负载分离 + 复杂查询
 
 // 命令端 (写模型)
@@ -251,7 +251,7 @@ impl Projector for OrderProjector {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 决策条件: 容错要求高 + 防止级联故障
 
 use std::sync::atomic::{AtomicU8, Ordering};

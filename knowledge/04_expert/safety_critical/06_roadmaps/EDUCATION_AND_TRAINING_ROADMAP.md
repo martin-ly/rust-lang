@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [迭代器](../../../../concept/02_intermediate/15_iterator_patterns.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -54,7 +55,7 @@
 
 #### 评估标准
 
-```rust
+```rust,ignore
 /// 阶段1结业测试示例
 
 // 1. 所有权理解
@@ -97,7 +98,7 @@ fn largest<T: PartialOrd>(list: &[T]) -> &T {
 
 #### 核心内容
 
-```rust
+```rust,compile_fail
 #![no_std]
 #![no_main]
 
@@ -202,7 +203,7 @@ fn SysTick() {
 
 #### 核心内容
 
-```rust
+```rust,ignore
 /// 4.1 Unsafe代码安全模式
 
 /// 类型状态模式

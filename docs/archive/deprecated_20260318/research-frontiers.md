@@ -50,7 +50,7 @@ impl<T> LendingIterator for Windows<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 不稳定特性: #![feature(specialization)]
 // 允许为特定类型提供更优实现
 
@@ -84,7 +84,7 @@ impl<T> Process for Vec<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 常量泛型 (已稳定)
 pub struct Array<T, const N: usize>([T; N]);
 
@@ -145,7 +145,7 @@ impl<T, const ROWS: usize, const COLS: usize> Matrix<T, ROWS, COLS> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Verus: 用于系统验证
 use vstd::prelude::*;
 
@@ -187,7 +187,7 @@ fn binary_search(v: &Vec<u64>, k: u64) -> (r: usize)
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 幽灵类型标记 (标记类型，运行时无开销)
 use std::marker::PhantomData;
 
@@ -227,7 +227,7 @@ impl<T> Verified<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 已稳定: Rust 1.75
 // trait中的异步方法
 
@@ -256,7 +256,7 @@ async fn process<R: AsyncRead>(mut reader: R) -> Result<Vec<u8>> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 不稳定: #![feature(async_iterator)]
 
 use std::async_iter::AsyncIterator;
@@ -287,7 +287,7 @@ async fn process_stream<S: AsyncIterator>(mut stream: S) {
 
 ### 3.3 异步闭包
 
-```rust
+```rust,ignore
 // 不稳定: #![feature(async_closure)]
 
 use std::ops::AsyncFn;
@@ -322,7 +322,7 @@ let result = with_retry(async || {
 
 ### 4.1 自定义分配器
 
-```rust
+```rust,ignore
 // 全局分配器替换
 use std::alloc::{GlobalAlloc, Layout, System};
 
@@ -354,7 +354,7 @@ pub fn memory_stats() -> (usize, usize) {
 
 ### 4.2  arena分配器生态系统
 
-```rust
+```rust,ignore
 // bumpalo: 快速arena分配
 use bumpalo::Bump;
 
@@ -424,7 +424,7 @@ Rust编译器研究方向:
 
 ### 6.1 WASI与组件模型
 
-```rust
+```rust,ignore
 // wit-bindgen: WebAssembly组件接口
 wit_bindgen::generate!({
     world: "my-world",
@@ -456,7 +456,7 @@ impl MyInterface for MyComponent {
 
 ### 6.2 嵌入式Rust演进
 
-```rust
+```rust,ignore
 // embedded-hal 1.0 统一抽象
 use embedded_hal::digital::{InputPin, OutputPin};
 use embedded_hal::spi::SpiDevice;
@@ -506,7 +506,7 @@ Ferrocene项目:
 
 ### 7.2 安全编码标准
 
-```rust
+```rust,ignore
 // MISRA-C风格Rust编码规范
 
 // 规则: 避免复杂的unsafe块

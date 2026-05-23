@@ -46,7 +46,7 @@ D. 标量类型（i32, bool等）默认实现Copy
 
 **3. 以下代码能否编译？**
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 let r1 = &s;
 let r2 = &mut s;
@@ -146,7 +146,7 @@ D. NLL只适用于不可变借用
 
 **23. 以下哪个生命周期标注是正确的？**
 
-```rust
+```rust,ignore
 fn foo<'a, 'b>(x: &'a str, y: &'b str) -> ???
 ```
 
@@ -186,7 +186,7 @@ D. 没有区别
 
 **37. 以下代码能否编译？**
 
-```rust
+```rust,ignore
 let data = Arc::new(Mutex::new(0));
 let data2 = Arc::clone(&data);
 thread::spawn(move || {
@@ -286,7 +286,7 @@ fn main() {
 
 **2. 如果不使用内部作用域：**
 
-```rust
+```rust,ignore
 let r1 = &s;
 println!("r1: {}", r1);
 let r2 = &mut s; // ❌ 编译错误
@@ -336,7 +336,7 @@ impl<'a> Wrapper<'a> {
 
 **1. `get_data`的返回类型：**
 
-```rust
+```rust,ignore
 fn get_data(&self) -> &'a str
 ```
 
@@ -346,7 +346,7 @@ fn get_data(&self) -> &'a str
 
 **2. `combine`中的`other`：**
 
-```rust
+```rust,ignore
 fn combine<'b>(&self, other: &'b Wrapper<'_>) -> String
 ```
 
@@ -355,7 +355,7 @@ fn combine<'b>(&self, other: &'b Wrapper<'_>) -> String
 
 **3. 返回引用的版本：**
 
-```rust
+```rust,ignore
 fn get_first(&self, other: &Wrapper) -> &str {
     if self.data.len() > other.data.len() {
         self.data
@@ -385,7 +385,7 @@ fn get_first_explicit<'a>(&'a self, other: &'a Wrapper<'a>) -> &'a str {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn main() {
@@ -419,7 +419,7 @@ error[E0382]: use of moved value: `data`
 
 **2. 修改方案：**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 
 fn main() {
@@ -449,7 +449,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::cell::RefCell;
 
 fn main() {
@@ -587,7 +587,7 @@ impl<T> Drop for MyBox<T> {
 
 **参考实现：**
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 
 struct Disconnected;

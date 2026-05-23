@@ -441,7 +441,7 @@ _________________________________
 ...
 
 #### 接口
-```rust
+```rust,ignore
 pub fn function_name(arg: Type) -> Result<Output, Error>;
 ```
 

@@ -88,7 +88,7 @@ const F5: u64 = factorial(5);  // 编译时常量
 
 > const泛型实现状态机。
 
-```rust
+```rust,ignore
 struct State<const S: StateID>;
 
 impl State<INIT> {
@@ -104,7 +104,7 @@ impl State<INIT> {
 
 ### 反例 5.1 (泛型滥用)
 
-```rust
+```rust,ignore
 // 过多const参数降低可读性
 struct Matrix<T, const R: usize, const C: usize, const D: usize>;
 ```

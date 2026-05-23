@@ -182,7 +182,7 @@ Inductive ty : Type :=
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 // 仿射类型: 最多使用一次
 fn affine_example() {
     let resource = String::from("data");
@@ -531,7 +531,7 @@ where
 ### 6.2 编译错误的理论解释
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 错误代码
 fn bad<'a>(x: &'a str, y: &str) -> &'a str {
     if x.len() > y.len() { x } else { y }

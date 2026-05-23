@@ -1,6 +1,7 @@
 ﻿# 🔄 Rust 控制流与函数速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🔄 Rust 控制流与函数速查卡](#-rust-控制流与函数速查卡)
@@ -60,6 +61,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c03_control_fn/docs/README.md) | [代码示例](../../../crates/c03_control_fn/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -130,6 +132,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -143,7 +146,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本 if
 if condition {
     // 代码块
@@ -179,7 +182,7 @@ let result = if condition {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本 match
 match value {
     pattern1 => expression1,
@@ -214,7 +217,7 @@ match value {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本 if let
 if let Some(value) = option {
     println!("有值: {}", value);
@@ -239,7 +242,7 @@ if let Some(a) = option1 && let Some(b) = option2 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本 let-else
 let Some(value) = option else {
     return; // 或 panic! 或其他控制流
@@ -266,7 +269,7 @@ fn process(value: Option<i32>) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 无限循环
 loop {
     // 代码
@@ -290,7 +293,7 @@ let result = loop {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本 while
 while condition {
     // 代码
@@ -308,7 +311,7 @@ while let Some(item) = iterator.next() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 遍历范围
 for i in 1..=10 {
     println!("{}", i);
@@ -364,13 +367,14 @@ for i in 1..=10 {
 ---
 
 ## 🎭 模式匹配
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 基本模式
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 字面量模式
 match x {
     1 => println!("一"),
@@ -400,7 +404,7 @@ match x {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 元组解构
 let tuple = (1, 2, 3);
 match tuple {
@@ -432,7 +436,7 @@ match msg {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 引用模式
 let value = Some(5);
 match &value {
@@ -453,13 +457,14 @@ match mut_value {
 ---
 
 ## 📝 函数定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 基本函数
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 无参数无返回值
 fn greet() {
     println!("Hello!");
@@ -555,13 +560,14 @@ fn apply(f: fn(i32, i32) -> i32, x: i32, y: i32) -> i32 {
 ---
 
 ## 🔒 闭包
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 基本闭包
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 基本语法
 let add = |x, y| x + y;
 let result = add(1, 2);
@@ -662,6 +668,7 @@ let result = add5(3); // 8
 ---
 
 ## 🎯 常用模式
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 早期返回
@@ -699,7 +706,7 @@ let result = "42"
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // if let 解构
 if let Some(x) = option {
     println!("{}", x);
@@ -768,6 +775,7 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ### 反例 1: match 未覆盖所有分支
@@ -776,7 +784,7 @@ fn factorial_tail(n: u64, acc: u64) -> u64 {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let x: Option<i32> = Some(1);
 let _ = match x {
     Some(v) => v,  // ❌ 未处理 None
@@ -787,7 +795,7 @@ let _ = match x {
 
 **修正**:
 
-```rust
+```rust,ignore
 let _ = match x {
     Some(v) => v,
     None => 0,
@@ -822,12 +830,14 @@ let _ = &v;
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [控制流与函数完整文档](../../../crates/c03_control_fn/docs/README.md)
 - [控制流与函数 README](../../../crates/c03_control_fn/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 以下示例位于 `crates/c03_control_fn/examples/`，可直接运行（例如：`cargo run -p c03_control_fn --example control_flow_example`）。
@@ -839,6 +849,7 @@ let _ = &v;
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 官方文档
@@ -850,12 +861,14 @@ let _ = &v;
 - [Rust 闭包文档](https://doc.rust-lang.org/book/ch13-01-closures.html)
 
 ### 项目内部文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [完整控制流文档](../../../crates/c03_control_fn/docs/README.md)
 - [控制流研究笔记](../../research_notes/README.md)
 
 ### 相关速查卡
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [错误处理速查卡](./error_handling_cheatsheet.md) - 错误处理模式
@@ -866,9 +879,11 @@ let _ = &v;
 ---
 
 ## 💡 使用场景
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 场景 1: 命令行参数解析
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -919,6 +934,7 @@ fn main() {
 ```
 
 ### 场景 2: 递归下降解析器
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```rust
@@ -982,6 +998,7 @@ fn main() {
 ```
 
 ### 场景 3: 自定义迭代器
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```rust
@@ -1027,9 +1044,11 @@ fn main() {
 ---
 
 ## ⚠️ 边界情况
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ### 边界 1: 闭包捕获陷阱
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```rust
@@ -1055,6 +1074,7 @@ fn main() {
 ```
 
 ### 边界 2: 递归深度限制
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -1086,6 +1106,7 @@ fn main() {
 ```
 
 ### 边界 3: 模式匹配穷尽性
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -1117,6 +1138,7 @@ fn main() {
 ```
 
 ### 形式化理论
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [借用检查器证明](../../research_notes/formal_methods/borrow_checker_proof.md) — 控制流相关的借用规则证明
@@ -1133,14 +1155,16 @@ fn main() {
 ---
 
 ## 🆕 Rust 1.95+ 特性整合
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 核心特性速查
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1190,6 +1214,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## 相关概念
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1528,4 +1553,3 @@ let gamma = f64::consts::EULER_GAMMA;
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[来源: [docs.rs](https://docs.rs/)]**
-

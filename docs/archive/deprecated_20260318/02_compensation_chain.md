@@ -122,7 +122,7 @@ Compensating(k) → o₁..oₖ₋₁ 已补偿 ∧ oₖ..oₙ 待补偿
 
 ## 4. Rust 实现示例
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 // 可补偿操作特质

@@ -1,4 +1,5 @@
 # FFI (Foreign Function Interface)
+> **相关概念**: [FFI](../../../concept/03_advanced/09_ffi_advanced.md)
 
 > **Bloom 层级**: 理解
 
@@ -52,7 +53,7 @@
 
 #### 1.2 操作定义
 
-```rust
+```rust,ignore
 // Rust 调用 C 函数
 extern "C" {
     fn abs(input: i32) -> i32;  // C 标准库的 abs
@@ -262,7 +263,7 @@ Rust 函数被 C 调用:
 
 修复：
 
-```rust
+```rust,ignore
 pub extern "C" fn safe_rust_function() -> c_int {
     match std::panic::catch_unwind(|| {
         may_panic()
@@ -284,7 +285,7 @@ pub extern "C" fn safe_rust_function() -> c_int {
 
 #### 5.1 Minimal（最小正例）
 
-```rust
+```rust,compile_fail
 use std::os::raw::c_int;
 
 // 声明 C 函数
@@ -303,7 +304,7 @@ fn main() {
 
 与 C 库交互，处理字符串和所有权：
 
-```rust
+```rust,ignore
 use std::ffi::{CStr, CString};
 use std::os::raw::{c_char, c_int};
 
@@ -344,7 +345,7 @@ fn get_version_safe() -> Result<String, String> {
 
 安全的 Rust wrapper  around C 库：
 
-```rust
+```rust,ignore
 use std::ffi::c_void;
 use std::ptr::NonNull;
 
@@ -400,7 +401,7 @@ impl !Sync for Context {}
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
     let slice = unsafe { std::slice::from_raw_parts(data, len) };
@@ -413,7 +414,7 @@ pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
 
 **修复方案**:
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn process(data: *const u8, len: usize) -> i32 {
     let result = std::panic::catch_unwind(|| {
@@ -472,7 +473,7 @@ struct Config {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 extern "C" {
     fn create_buffer() -> *mut u8;
     fn use_buffer(buf: *mut u8);
@@ -488,7 +489,7 @@ fn bad() {
 
 **修复方案** — 明确所有权：
 
-```rust
+```rust,ignore
 pub struct Buffer {
     ptr: *mut u8,
 }
@@ -737,7 +738,7 @@ C ABI 是操作系统层面的事实标准：
 
 **题 1**: 修复以下 FFI 代码中的安全问题：
 
-```rust
+```rust,ignore
 extern "C" {
     fn get_data() -> *const u8;
     fn get_len() -> usize;
@@ -761,7 +762,7 @@ fn use_data() -> Vec<u8> {
 
 **修复**:
 
-```rust
+```rust,ignore
 fn use_data() -> Option<Vec<u8>> {
     let ptr = unsafe { get_data() };
     if ptr.is_null() {
@@ -784,7 +785,7 @@ fn use_data() -> Option<Vec<u8>> {
 
 **题 2**: 解释为什么以下代码是危险的，并修复：
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn process_string(s: *mut c_char) {
     let c_str = unsafe { CStr::from_ptr(s) };
@@ -805,7 +806,7 @@ pub extern "C" fn process_string(s: *mut c_char) {
 
 **修复**:
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn process_string(s: *mut c_char) -> c_int {
     if s.is_null() {

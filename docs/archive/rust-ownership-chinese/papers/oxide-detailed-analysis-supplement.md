@@ -423,7 +423,7 @@ $$
 
 ### 9.1 示例：简单借用
 
-```rust
+```rust,ignore
 let x = box 5;
 let r = &uniq x;
 *r

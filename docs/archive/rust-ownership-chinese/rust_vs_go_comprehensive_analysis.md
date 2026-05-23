@@ -748,7 +748,7 @@ func ReadWithFallback(path string) string {
 
 ### 6.2 并发代码对比
 
-```rust
+```rust,ignore
 // ============================================
 // Rust 并发示例
 // ============================================
@@ -1252,7 +1252,7 @@ func stateMachineWorkflowDemo() {
 
 ### 7.3 Saga分布式事务模式
 
-```rust
+```rust,ignore
 // ============================================
 // Rust Saga 模式实现 (Orchestration)
 // 可判定性: ⚠️ 运行时补偿事务

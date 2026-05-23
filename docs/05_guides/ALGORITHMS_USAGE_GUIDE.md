@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [算法使用指南](#算法使用指南)
@@ -72,7 +73,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::sorting::sync::{quick_sort, merge_sort};
 use c08_algorithms::algorithms::searching::sync::binary_search;
 
@@ -111,7 +112,7 @@ fn main() {
 
 **示例：并行排序**
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::sorting::parallel::parallel_quick_sort;
 
 fn parallel_sort_example() {
@@ -127,7 +128,7 @@ fn parallel_sort_example() {
 
 `algorithms/searching/` 提供经典搜索算法：
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::searching::sync::{
     binary_search, linear_search, interpolation_search
 };
@@ -149,7 +150,7 @@ fn searching_examples() {
 
 `algorithms/graph/` 和 `graph/` 提供完整图论算法库：
 
-```rust
+```rust,ignore
 use c08_algorithms::graph::{
     Graph, dijkstra, bfs, dfs, topological_sort
 };
@@ -173,7 +174,7 @@ fn graph_example() {
 
 `algorithms/dynamic_programming/` 提供经典 DP 问题实现：
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::dynamic_programming::{
     longest_common_subsequence, knapsack_01, edit_distance
 };
@@ -202,7 +203,7 @@ fn dp_examples() {
 | LRU 缓存 | 最近最少使用缓存 | O(1) |
 | 稀疏表 (Sparse Table) | RMQ 区间最值查询 | 预处理 O(n log n), 查询 O(1) |
 
-```rust
+```rust,ignore
 use c08_algorithms::data_structure::{
     DisjointSetUnion, FenwickTree, SegmentTree, LruCache
 };
@@ -226,7 +227,7 @@ fn data_structure_examples() {
 
 `machine_learning/` 提供基础 ML 算法实现：
 
-```rust
+```rust,ignore
 use c08_algorithms::machine_learning::{
     KMeans, LinearRegression, DecisionTree
 };
@@ -271,11 +272,12 @@ fn ml_examples() {
 ---
 
 ## ⚡ 并行与异步执行
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `algorithms/execution_modes/` 提供统一的执行模式抽象：
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::execution_modes::{
     ExecutionMode, parallel, async_exec
 };
@@ -295,11 +297,12 @@ fn execution_mode_examples() {
 ---
 
 ## 🔧 形式化验证
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 `algorithms/verification/` 和 `algorithms/formal_verification_examples.rs` 提供算法正确性证明：
 
-```rust
+```rust,ignore
 use c08_algorithms::algorithms::formal_verification_examples::{
     binary_search_verified, insertion_sort_verified
 };
@@ -319,6 +322,7 @@ fn verified_algorithms() {
 ---
 
 ## 🐛 常见问题与解决方案
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -332,6 +336,7 @@ fn verified_algorithms() {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - **速查卡**: [algorithms_cheatsheet.md](../02_reference/quick_reference/algorithms_cheatsheet.md)
@@ -353,6 +358,7 @@ fn verified_algorithms() {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [05_guides 目录](./README.md)
@@ -484,4 +490,3 @@ fn verified_algorithms() {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

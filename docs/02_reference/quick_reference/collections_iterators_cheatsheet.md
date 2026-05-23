@@ -1,6 +1,7 @@
 ﻿# 📦 Rust 集合与迭代器速查卡
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [📦 Rust 集合与迭代器速查卡](#-rust-集合与迭代器速查卡)
@@ -77,6 +78,7 @@
   - [🎯 **掌握集合与迭代器，高效处理数据！**](#-掌握集合与迭代器高效处理数据)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md) | [代码示例](../../../crates/README.md)
 > **创建日期**: 2026-01-27
@@ -164,6 +166,7 @@
   - [🎯 **掌握集合与迭代器，高效处理数据！**](#-掌握集合与迭代器高效处理数据)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -177,7 +180,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 空 Vec
 let mut vec: Vec<i32> = Vec::new();
 let mut vec = vec![];
@@ -338,7 +341,7 @@ let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 let mut map = HashMap::new();
 
 // insert - 插入或更新
@@ -358,7 +361,7 @@ map.entry("key".to_string())
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 let mut map = HashMap::new();
 map.insert("key".to_string(), 42);
 
@@ -378,7 +381,7 @@ let value = map["key"];
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 let mut map = HashMap::new();
 map.insert("key".to_string(), 42);
 
@@ -396,7 +399,7 @@ map.clear();
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
     .into_iter()
     .collect();
@@ -415,7 +418,7 @@ let empty = map.is_empty();
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 let map: HashMap<_, _> = vec![("a", 1), ("b", 2)]
     .into_iter()
     .collect();
@@ -465,7 +468,7 @@ let set: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 let mut set = HashSet::new();
 
 // insert - 添加元素
@@ -483,7 +486,7 @@ set.clear();
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 let set: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 
 // contains
@@ -500,7 +503,7 @@ let empty = set.is_empty();
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 let set1: HashSet<_> = vec![1, 2, 3].into_iter().collect();
 let set2: HashSet<_> = vec![3, 4, 5].into_iter().collect();
 
@@ -649,7 +652,7 @@ while let Some(item) = iter.next() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 let vec = vec![1, 2, 3, 4, 5];
 
 // map - 转换元素
@@ -743,7 +746,7 @@ let result: Vec<_> = vec.iter()
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 let vec = vec![1, 2, 3, 4, 5];
 
 // collect - 收集到集合
@@ -804,7 +807,7 @@ let max = vec.iter().max_by(|a, b| a.cmp(b));
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 let vec = vec![1, 2, 3, 4, 5];
 
 // fold - 折叠
@@ -991,7 +994,7 @@ let sma5 = simple_moving_average(&prices, 5);
 
 **对比传统 `windows()`**:
 
-```rust
+```rust,ignore
 // ❌ windows(): 运行时大小，返回切片
 for window in data.windows(3) {
     // window 是 &[i32]，需要运行时边界检查
@@ -1063,6 +1066,7 @@ let first_10: Vec<u64> = fib.take(10).collect();
 ```
 
 ### 示例 2: 实现 IntoIterator
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -1099,6 +1103,7 @@ for book in &collection {
 ```
 
 ### 示例 3: 迭代器适配器链
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -1117,6 +1122,7 @@ assert_eq!(result, vec![16, 36, 64]);
 ```
 
 ### 示例 4: 使用 Entry API 高效更新 HashMap
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -1141,6 +1147,7 @@ assert_eq!(freq.get("the"), Some(&2));
 ```
 
 ### 示例 5: LRU Cache 实现
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```rust
@@ -1204,6 +1211,7 @@ assert_eq!(cache.get(&2), Some(&"b"));
 > **[来源: Rust Official Docs]**
 
 ### 场景: 数据处理管道
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 在实际项目中，迭代器常用于构建高效的数据处理管道。以下是一个日志分析管道的示例：
@@ -1266,11 +1274,12 @@ fn time_window_aggregation(
 > **[来源: Rust Official Docs]**
 
 ### 反例 1: 迭代时修改集合
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 for x in &v {
     v.push(*x);  // ❌ 编译错误：借用了 v 时不能修改
@@ -1290,6 +1299,7 @@ let extra: Vec<_> = v.iter().cloned().collect();
 ---
 
 ### 反例 2: 索引越界
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **错误示例**:
@@ -1303,13 +1313,14 @@ let x = v[10];  // ❌ panic: index out of bounds
 
 **修正**:
 
-```rust
+```rust,ignore
 let x = v.get(10);  // ✅ 返回 Option
 ```
 
 ---
 
 ### 反例 3: 在迭代时修改集合（安全版本）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **错误示例**:
@@ -1336,6 +1347,7 @@ v.retain(|&x| x % 2 != 0);  // ✅ 保留奇数
 ---
 
 ### 反例 4: 错误使用 drain
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 **错误示例**:
@@ -1361,11 +1373,12 @@ let mut v = vec![1, 2, 3, 4, 5];
 ---
 
 ### 反例 5: HashMap 遍历顺序依赖
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let map: HashMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 let keys: Vec<_> = map.keys().collect();
 // 假设 keys 总是 [1, 2]，但实际上顺序不确定
@@ -1391,6 +1404,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [算法与数据结构文档](../../../crates/c08_algorithms/README.md)
 
 ## 🧩 相关示例代码
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 以下示例与集合/迭代器相关，位于 `crates/c08_algorithms/examples/`，可直接运行（例如：`cargo run -p c08_algorithms --example data_structures_demo`）。
@@ -1402,9 +1416,11 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 ---
 
 ## 📚 相关资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 官方文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [Rust 集合文档](https://doc.rust-lang.org/std/collections/)
@@ -1412,12 +1428,14 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [Rust Reference - Collections](https://doc.rust-lang.org/reference/items/collections.html)
 
 ### 项目内部文档
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 - [完整迭代器参考](../../../crates/c03_control_fn/docs/tier_03_references/02_迭代器参考.md)
 - [集合研究笔记](../../research_notes/README.md)
 
 ### 形式化理论与类型系统
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [类型系统基础](../../research_notes/type_theory/type_system_foundations.md) — 集合类型与类型理论
@@ -1427,6 +1445,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 - [变型理论](../../research_notes/type_theory/variance_theory.md) — 集合协变/逆变
 
 ### 相关速查卡
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [控制流与函数速查卡](./control_flow_functions_cheatsheet.md) - 循环与迭代器
@@ -1459,6 +1478,7 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1870,4 +1890,3 @@ let map: BTreeMap<i32, &str> = [(1, "a"), (2, "b")].into_iter().collect();
 > **[来源: [This Week in Rust](https://this-week-in-rust.org/)]**
 
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
-

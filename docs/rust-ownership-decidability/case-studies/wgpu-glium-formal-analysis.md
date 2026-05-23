@@ -50,7 +50,7 @@ GPU渲染库:
 
 > Wgpu管线状态编译时验证。
 
-```rust
+```rust,ignore
 let pipeline = device.create_render_pipeline(&RenderPipelineDescriptor {
     layout: Some(&pipeline_layout),
     vertex: VertexState {
@@ -73,7 +73,7 @@ let pipeline = device.create_render_pipeline(&RenderPipelineDescriptor {
 
 > BufferUsage限制操作类型。
 
-```rust
+```rust,ignore
 let buffer = device.create_buffer(&BufferDescriptor {
     size: 1024,
     usage: BufferUsages::VERTEX | BufferUsages::COPY_DST,
@@ -92,7 +92,7 @@ let buffer = device.create_buffer(&BufferDescriptor {
 
 > 资源必须存活到命令完成。
 
-```rust
+```rust,ignore
 let buffer = device.create_buffer(...);
 let mut encoder = device.create_command_encoder(...);
 encoder.copy_buffer_to_buffer(&buffer, ...);  // 引用buffer
@@ -111,7 +111,7 @@ queue.submit(std::iter::once(encoder.finish()));
 
 > CommandEncoder使用后消耗。
 
-```rust
+```rust,ignore
 let mut encoder = device.create_command_encoder(...);
 // 录制命令...
 let cmd_buffer = encoder.finish();  // encoder消耗
@@ -126,7 +126,7 @@ queue.submit([cmd_buffer]);
 
 ### 反例 6.1 (资源过早释放)
 
-```rust
+```rust,ignore
 // 危险: buffer在提交前释放
 {
     let buffer = device.create_buffer(...);
@@ -142,7 +142,7 @@ queue.submit([encoder.finish()]);
 
 ### 反例 6.2 (未同步读写)
 
-```rust
+```rust,ignore
 // 同一缓冲区同时读写，数据竞争
 encoder.copy_buffer_to_buffer(&buffer, 0, &buffer, 512, 512);
 ```

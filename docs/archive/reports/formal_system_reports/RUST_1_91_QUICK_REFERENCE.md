@@ -56,7 +56,7 @@ fn example() {
 
 **示例**:
 
-```rust
+```rust,ignore
 // Rust 1.91 改进了模式匹配的绑定顺序
 match value {
     Some(x) if condition(x) => {

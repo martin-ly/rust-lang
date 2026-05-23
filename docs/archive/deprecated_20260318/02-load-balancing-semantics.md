@@ -196,7 +196,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::hash::{Hash, Hasher};
 use std::sync::atomic::{AtomicUsize, Ordering};
@@ -598,7 +598,7 @@ impl LoadBalancer for LeastConnectionsBalancer {
 
 ### 4.2 自适应负载均衡
 
-```rust
+```rust,ignore
 /// 自适应负载均衡器（基于响应时间）
 pub struct AdaptiveLoadBalancer {
     backends: Arc<RwLock<Vec<Backend>>>,
@@ -699,7 +699,7 @@ impl LoadBalancer for AdaptiveLoadBalancer {
 
 ### 4.3 健康检查集成
 
-```rust
+```rust,ignore
 use tokio::time::{interval, Duration};
 
 /// 健康检查配置

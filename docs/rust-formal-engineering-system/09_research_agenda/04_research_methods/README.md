@@ -79,7 +79,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 形式化验证工具链
 
 // 1. MIRI：检测未定义行为
@@ -107,7 +107,7 @@ fn double(x: i32) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 研究问题：验证 Vec<T> 的 push 操作内存安全
 
 // 1. 形式化建模
@@ -168,7 +168,7 @@ mod verification_tests {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 研究问题：验证类型系统的子类型关系
 
 // 形式化定义

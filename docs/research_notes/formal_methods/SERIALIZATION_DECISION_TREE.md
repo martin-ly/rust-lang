@@ -84,7 +84,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基本使用
 use serde::{Serialize, Deserialize};
 

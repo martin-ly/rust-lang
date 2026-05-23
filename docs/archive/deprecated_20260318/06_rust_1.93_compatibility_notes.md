@@ -79,7 +79,7 @@ if !ptr.is_null() {
 
 **解决方案**：
 
-```rust
+```rust,ignore
 // ❌ 无效：在 trait 方法上使用 #[test]
 trait Foo {
     #[test]  // 1.93 将报错
@@ -243,7 +243,7 @@ libc = "0.2.146"  # 或更新版本
 
 ### 版本检测宏
 
-```rust
+```rust,ignore
 //! Rust 1.93 兼容性检查工具
 
 /// 编译时 Rust 版本检查
@@ -460,7 +460,7 @@ mod tests {
 
 ### 迁移辅助工具
 
-```rust
+```rust,ignore
 //! Rust 1.93 迁移辅助脚本
 
 use std::fs;

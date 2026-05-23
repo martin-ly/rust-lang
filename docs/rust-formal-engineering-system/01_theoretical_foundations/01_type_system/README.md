@@ -169,7 +169,7 @@ fn invariance(x: &mut &'static str) {
 
 ### 类型推导
 
-```rust
+```rust,ignore
 // Hindley-Milner 类型推导的 Rust 实现
 // 编译器自动推断最一般的类型
 

@@ -183,7 +183,7 @@ P 在任何时候都成立，但只能在原子操作时短暂"打开"。
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 // Mutex 保护的不变量
 lazy_static! {
     static ref COUNTER: Mutex<i32> = Mutex::new(0);
@@ -257,7 +257,7 @@ Sync T  ≡  &T 可以跨线程共享 (共享资源安全)
 
 ### 7.1 代码
 
-```rust
+```rust,ignore
 struct Node<T> {
     data: T,
     next: AtomicPtr<Node<T>>,

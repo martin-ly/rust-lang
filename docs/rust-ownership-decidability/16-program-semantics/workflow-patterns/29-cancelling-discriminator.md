@@ -314,7 +314,7 @@ $$
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 
@@ -370,7 +370,7 @@ where
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use futures::stream::FuturesUnordered;
 use futures::StreamExt;
 use tokio::task::{AbortHandle, JoinSet};
@@ -427,7 +427,7 @@ where
 
 > **[来源: tokio - docs.rs/tokio]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use tokio::task::AbortHandle;
 
@@ -647,7 +647,7 @@ $$
 
 **场景**: 多个 API 提供商并行查询，使用最先返回的 2 个结果
 
-```rust
+```rust,ignore
 providers:
   - Provider A (priority: 1)
   - Provider B (priority: 2)
@@ -663,7 +663,7 @@ strategy: 取最快 2 个响应，取消剩余请求
 
 **场景**: 从多个数据库分片查询同一数据，取第一个有效结果
 
-```rust
+```rust,ignore
 shards: ["shard_1", "shard_2", "shard_3", "shard_4", "shard_5"]
 threshold: 1
 behavior: 第一个返回有效数据的分片即满足要求
@@ -674,7 +674,7 @@ behavior: 第一个返回有效数据的分片即满足要求
 
 **场景**: 微服务架构中，调用多个服务实例，使用最先响应的实例
 
-```rust
+```rust,ignore
 service_instances: ["instance_a", "instance_b", "instance_c"]
 threshold: 1
 health_check: 取消无响应实例的调用
@@ -690,7 +690,7 @@ health_check: 取消无响应实例的调用
 
 在指定时间内未达到阈值则返回当前结果：
 
-```rust
+```rust,ignore
 pub async fn cancelling_disc_with_timeout<T, R>(
     disc: Arc<CancellingDiscriminator>,
     timeout_duration: Duration,
@@ -705,7 +705,7 @@ pub async fn cancelling_disc_with_timeout<T, R>(
 
 高优先级分支不被取消：
 
-```rust
+```rust,ignore
 pub fn cancel_with_priority_protection(
     &mut self,
     protected_priority: u32,
@@ -726,7 +726,7 @@ pub fn cancel_with_priority_protection(
 
 取消一个实例时级联取消依赖实例：
 
-```rust
+```rust,ignore
 pub fn cascading_cancel(
     &mut self,
     id: usize,

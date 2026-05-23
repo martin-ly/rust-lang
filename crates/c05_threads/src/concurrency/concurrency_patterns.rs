@@ -480,6 +480,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_fan_out_fan_in() {
         let fan_out_fan_in = FanOutFanIn::new(2, |x: i32| x * x);
         let inputs = vec![1, 2, 3, 4];

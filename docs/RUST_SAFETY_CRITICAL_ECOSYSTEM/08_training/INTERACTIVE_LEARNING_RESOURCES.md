@@ -135,7 +135,7 @@ docker run -it rust:1.81-slim
 ### 2.3 实验项目
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 //! 在线实验: 安全LED闪烁器
 //! 平台: https://wokwi.com/
 

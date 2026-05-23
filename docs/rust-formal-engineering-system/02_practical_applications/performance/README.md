@@ -121,7 +121,7 @@ struct PackedLayout {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 使用标准库的 SIMD 支持
 #![feature(portable_simd)]
 use std::simd::Simd;
@@ -185,7 +185,7 @@ fn blocked_access(matrix: &mut [[f64; N]; N], block_size: usize) {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 内联小函数
 #[inline(always)]
 fn hot_path(x: i32) -> i32 {
@@ -215,7 +215,7 @@ fn error_handler(e: &str) {
 
 ### 无锁数据结构
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use crossbeam::queue::ArrayQueue;
 
@@ -259,7 +259,7 @@ fn lock_free_queue_demo() {
 
 ### 基准测试
 
-```rust
+```rust,ignore
 // 使用 criterion 进行统计上可靠的基准测试
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 

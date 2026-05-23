@@ -29,6 +29,7 @@
   - [参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 
@@ -122,7 +123,7 @@ PeerId = multihash(public_key)
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use libp2p::{
     identity, PeerId, Swarm, Transport,
     tcp::TcpConfig, noise, yamux,
@@ -157,7 +158,7 @@ fn create_node() -> Result<Swarm<Ping>, Box<dyn std::error::Error>> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use libp2p::gossipsub::{
     Gossipsub, GossipsubConfig, GossipsubEvent, MessageAuthenticity,
     IdentTopic,
@@ -206,7 +207,7 @@ match event {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use libp2p::kad::{
     Kademlia, KademliaConfig, KademliaEvent, QueryResult, Quorum, Record,
 };

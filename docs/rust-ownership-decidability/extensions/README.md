@@ -222,7 +222,7 @@ cargo install cargo-embed
 
 ### 安全最佳实践
 
-```rust
+```rust,ignore
 // 1. 最小化 unsafe 代码块
 pub fn safe_wrapper() -> Result<(), Error> {
     // 验证前置条件

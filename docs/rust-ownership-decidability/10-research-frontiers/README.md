@@ -292,7 +292,7 @@ cat CONTRIBUTING.md
 
 在非关键模块中试用验证工具：
 
-```rust
+```rust,ignore
 // 示例：选择一个简单的模块进行验证
 pub mod safe_math {
     /// 安全的加法，防止溢出

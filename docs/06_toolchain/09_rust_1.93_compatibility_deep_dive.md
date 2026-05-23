@@ -45,6 +45,7 @@
   - [Rust 1.95+ 更新](#rust-195-更新)
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -100,7 +101,7 @@ rustc -Z wasm-emscripten-eh=false -Z build-std ...
 
 **无效位置示例**：
 
-```rust
+```rust,ignore
 // ❌ 1.93 报错：trait 方法上
 trait MyTrait {
     #[test]
@@ -150,7 +151,7 @@ mod tests {
 
 **示例**：
 
-```rust
+```rust,ignore
 struct NotWellFormed<T: ?Sized>(T);  // 可能有问题
 
 // 1.93 可能报错：类型不满足 well-formed
@@ -180,7 +181,7 @@ let _ = unsafe { *ptr };  // ❌ 1.93 默认 deny，编译失败
 
 **正确做法**：
 
-```rust
+```rust,ignore
 if !ptr.is_null() {
     let _ = unsafe { *ptr };
 }
@@ -193,7 +194,7 @@ if let Some(val) = unsafe { ptr.as_ref() } {
 
 **临时放宽**（不推荐）：
 
-```rust
+```rust,ignore
 #[allow(deref_nullptr)]
 fn legacy_code() { ... }
 ```
@@ -212,7 +213,7 @@ fn legacy_code() { ... }
 
 **错误示例**：
 
-```rust
+```rust,ignore
 // ❌ 未来不兼容
 fn my_print(fmt: *const u8, ...) {  // ... 在非 extern 中
     // ...
@@ -221,7 +222,7 @@ fn my_print(fmt: *const u8, ...) {  // ... 在非 extern 中
 
 **正确用法**：
 
-```rust
+```rust,ignore
 // ✅ 在 extern 块中声明
 extern "system" {
     fn printf(format: *const u8, ...);
@@ -264,7 +265,7 @@ enum LargeDiscriminant {
 
 **示例**：
 
-```rust
+```rust,ignore
 #[repr(transparent)]
 struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 ```
@@ -287,6 +288,7 @@ struct Wrapper(OtherReprC);  // 若 OtherReprC 为 repr(C) 且被忽略
 ---
 
 ## 形式化分析
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ### 类型系统影响分析
@@ -373,9 +375,10 @@ pub mod lifetime_formalization {
 ---
 
 ## 完整兼容性修复代码
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 //! Rust 1.93 兼容性修复完整指南
 
 /// 1. deref_nullptr 修复
@@ -694,6 +697,7 @@ mod tests {
 ---
 
 ## Rust 1.95+ 更新
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -980,4 +984,3 @@ Rust 1.95+ 重要更新：
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

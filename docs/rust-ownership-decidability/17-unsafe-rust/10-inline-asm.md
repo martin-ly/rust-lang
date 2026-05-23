@@ -58,7 +58,7 @@ unsafe {
 ### 1.2 完整结构
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 unsafe {
     asm!(
         "assembly template",      // 汇编模板
@@ -79,7 +79,7 @@ unsafe {
 ### 2.1 寄存器约束
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let mut x: u64 = 5;
 
 unsafe {
@@ -96,7 +96,7 @@ assert_eq!(x, 10);
 ### 2.2 具体寄存器
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let mut ax: u16 = 0;
 
 unsafe {
@@ -110,7 +110,7 @@ unsafe {
 ### 2.3 内存操作数
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let mut arr: [u64; 4] = [1, 2, 3, 4];
 
 unsafe {
@@ -131,7 +131,7 @@ assert_eq!(arr[1], 12);
 ### 3.1 简单输入输出
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn add(a: u64, b: u64) -> u64 {
     let result: u64;
 
@@ -151,7 +151,7 @@ fn add(a: u64, b: u64) -> u64 {
 ### 3.2 读写同一变量
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 fn multiply_by_2(x: u64) -> u64 {
     let mut x = x;
 
@@ -169,7 +169,7 @@ fn multiply_by_2(x: u64) -> u64 {
 ### 3.3 多个输出
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn div_rem(dividend: u64, divisor: u64) -> (u64, u64) {
     let mut quotient: u64;
     let mut remainder: u64;
@@ -195,7 +195,7 @@ fn div_rem(dividend: u64, divisor: u64) -> (u64, u64) {
 ### 4.1 获取 CPU ID
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 fn cpuid(leaf: u32) -> (u32, u32, u32, u32) {
     let mut eax: u32;
     let mut ebx: u32;
@@ -224,7 +224,7 @@ fn main() {
 ### 4.2 RDTSC (读取时间戳计数器)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn rdtsc() -> u64 {
     let low: u32;
     let high: u32;
@@ -255,7 +255,7 @@ where
 ### 4.3 原子操作实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 fn atomic_add(ptr: *mut u64, val: u64) -> u64 {
     let result: u64;
 
@@ -280,7 +280,7 @@ fn atomic_add(ptr: *mut u64, val: u64) -> u64 {
 ### 5.1 安全注意事项
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ⚠️ 汇编代码不经过 Rust 安全检查
 // - 不检查数组越界
 // - 不检查空指针
@@ -303,7 +303,7 @@ fn safe_asm_op(arr: &mut [u64], index: usize) {
 ### 5.2 平台差异
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // x86_64 汇编
 #[cfg(target_arch = "x86_64")]
 fn arch_specific() {
@@ -324,7 +324,7 @@ fn arch_specific() {
 ### 5.3 选项说明
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 unsafe {
     asm!(
         "instruction",

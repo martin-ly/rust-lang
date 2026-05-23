@@ -201,7 +201,7 @@ API 网关形式化语义:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::time::Duration;
@@ -548,7 +548,7 @@ impl LoadBalancerExecutor {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use jsonwebtoken::{decode, encode, Algorithm, DecodingKey, EncodingKey, Header, Validation};
 use serde::{Deserialize, Serialize};
 
@@ -715,7 +715,7 @@ where
 
 ### 4.3 协议转换
 
-```rust
+```rust,ignore
 use tonic::transport::Channel;
 use prost::Message;
 

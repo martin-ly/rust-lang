@@ -1,4 +1,5 @@
 # Generic Const Expressions (泛型常量表达式)
+> **相关概念**: [常量](../../../concept/01_foundation/04_type_system.md)
 
 > **Bloom 层级**: 理解
 
@@ -62,7 +63,7 @@ Generic Const Expressions 允许在泛型参数中使用**更复杂的常量表�
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 当前限制: 只能使用简单的常量参数
 struct Array<T, const N: usize> {
     data: [T; N],
@@ -103,7 +104,7 @@ struct Array<T, const N: usize> {
 
 **generic_const_exprs（不稳定）**:
 
-```rust
+```rust,ignore
 struct Matrix<T, const N: usize, const M: usize>
 where
     [T; N * M]: Sized,  // ✅ 使用表达式 N * M
@@ -169,7 +170,7 @@ graph TD
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 #![allow(incomplete_features)]
 
@@ -243,7 +244,7 @@ where
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 使用更复杂的表达式
@@ -270,7 +271,7 @@ let arr: PowerOfTwoArray<i32, 3> = PowerOfTwoArray { data: [0; 8] };  // 2^3 = 8
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 编译时阶乘
@@ -301,7 +302,7 @@ where
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 use std::ops::{Add, Mul};
@@ -354,7 +355,7 @@ let c = a * b;  // Matrix<i32, 2, 2>
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 编译时验证数组大小
@@ -384,7 +385,7 @@ let same: [i32; 5] = safe_convert(arr);  // ✅ 编译通过
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // B树节点，编译时确定分支因子
@@ -436,7 +437,7 @@ let node: BTreeNode<i32, String, 4> = BTreeNode::new();
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // ❌ 错误: 表达式不能包含类型参数
@@ -462,7 +463,7 @@ where
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #![feature(generic_const_exprs)]
 
 // 递归深度有限制
@@ -486,7 +487,7 @@ where
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 方案1: 当前 workaround (使用宏)
 macro_rules! define_matrix {
     ($n:expr, $m:expr) => {
@@ -606,7 +607,7 @@ generic_const_exprs 允许的操作:
 
 2. **以下代码有什么问题？**
 
-```rust
+```rust,ignore
 struct Bad<T, const N: usize>
 where
     [T; std::mem::size_of::<T>()]: Sized,

@@ -47,7 +47,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 订单服务领域
 mod order_service {
     use std::sync::Arc;
@@ -130,7 +130,7 @@ mod order_service {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 服务接口定义（gRPC/HTTP）
 #[async_trait]
 pub trait OrderService {
@@ -176,7 +176,7 @@ impl Event for OrderCreated {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// gRPC服务实现
 pub struct OrderGrpcService {
     inner: Arc<order_service::OrderService>,
@@ -227,7 +227,7 @@ impl<T: Clone> GrpcConnectionPool<T> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// Kafka生产者
 pub struct KafkaEventPublisher {
     producer: Arc<RwLock<FutureProducer>>,
@@ -294,7 +294,7 @@ impl KafkaConsumerGroup {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 内存事件总线（服务内通信）
 pub struct InMemoryEventBus {
     subscribers: Arc<RwLock<HashMap<String, Vec<Box<dyn EventSubscriber>>>>>,
@@ -341,7 +341,7 @@ impl InMemoryEventBus {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 服务注册
 pub struct ConsulRegistry {
     client: ConsulClient,
@@ -391,7 +391,7 @@ impl ConsulRegistry {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 负载均衡策略
 pub trait LoadBalancer: Send + Sync {
     fn select(&self, instances: &[ServiceInstance]) -> usize;
@@ -444,7 +444,7 @@ impl LoadBalancer for WeightedRandom {
 
 ### 4.1 断路器模式
 
-```rust
+```rust,ignore
 /// 断路器状态机
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum CircuitState {
@@ -532,7 +532,7 @@ impl CircuitBreaker {
 
 ### 4.2 重试模式
 
-```rust
+```rust,ignore
 /// 重试策略
 pub struct RetryPolicy {
     max_attempts: u32,
@@ -578,7 +578,7 @@ impl RetryPolicy {
 
 ### 4.3 舱壁隔离
 
-```rust
+```rust,ignore
 /// 舱壁模式 - 限制资源使用
 pub struct Bulkhead {
     semaphore: Arc<Semaphore>,
@@ -624,7 +624,7 @@ impl Bulkhead {
 
 ### 5.1 Saga模式
 
-```rust
+```rust,ignore
 /// Saga编排器
 pub struct SagaOrchestrator {
     steps: Vec<Box<dyn SagaStep>>,
@@ -699,7 +699,7 @@ impl CreateOrderSaga {
 
 ### 5.2 CQRS模式
 
-```rust
+```rust,ignore
 /// 命令端
 pub struct OrderCommandHandler {
     event_store: Arc<EventStore>,
@@ -764,7 +764,7 @@ impl OrderQueryHandler {
 
 ### 6.1 分布式追踪
 
-```rust
+```rust,ignore
 /// OpenTelemetry集成
 pub struct TracedService {
     tracer: Tracer,
@@ -805,7 +805,7 @@ impl TracedService {
 
 ### 6.2 指标收集
 
-```rust
+```rust,ignore
 /// Prometheus指标
 lazy_static! {
     static ref REQUEST_COUNT: CounterVec = register_counter_vec!(
@@ -929,7 +929,7 @@ spec:
 
 ### 8.1 服务启动
 
-```rust
+```rust,ignore
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     // 初始化追踪

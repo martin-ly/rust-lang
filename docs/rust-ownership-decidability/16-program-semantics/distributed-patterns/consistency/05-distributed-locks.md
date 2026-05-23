@@ -116,7 +116,7 @@ Redlock 算法:
   - 异步时钟假设
 ```
 
-```rust
+```rust,ignore
 use redis::{Client, Commands, RedisResult};
 
 struct Redlock {
@@ -232,7 +232,7 @@ async fn critical_section(redlock: &Redlock) {
 ### 3.2 续租机制
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 锁续租（Watchdog 模式）
 struct LockGuard {
     redlock: Arc<Redlock>,
@@ -299,7 +299,7 @@ impl Drop for LockGuard {
 ### 4.1 etcd 分布式锁
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use etcd_client::{Client, Compare, CompareOp, Txn, TxnOp};
 
 struct EtcdDistributedLock {
@@ -370,7 +370,7 @@ impl EtcdDistributedLock {
 ### 4.2 ZooKeeper 分布式锁
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use zookeeper::{Acl, CreateMode, WatchedEvent, Watcher, ZkError, ZooKeeper};
 
 struct ZkDistributedLock {
@@ -463,7 +463,7 @@ impl Drop for ZkLockGuard {
 ### 5.1 读写锁语义
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 分布式读写锁
 struct DistributedRwLock {
     read_locks: Vec<String>,
@@ -585,7 +585,7 @@ impl Drop for RwLockGuard {
 ### 7.1 锁使用准则
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 1. 始终使用超时
 trait LockWithTimeout {
     async fn lock_with_timeout(

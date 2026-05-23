@@ -64,7 +64,7 @@ DashMap特点：
 ### 定义 SHARD-1 ( 分片结构 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 DashMap<K, V, S> {
     shards: [RwLock<HashMap<K, V, S>>; N],
     hasher: S,
@@ -101,21 +101,21 @@ $$
 ### 定义 READ-1 ( 获取 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 map.get(&key) -> Option<Ref<K, V>>
 ```
 
 ### 定义 WRITE-1 ( 插入 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 map.insert(key, value) -> Option<V>
 ```
 
 ### 定义 WRITE-2 ( 条件修改 )
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 map.entry(key).and_modify(|v| *v += 1).or_insert(0);
 ```
 
@@ -127,7 +127,7 @@ map.entry(key).and_modify(|v| *v += 1).or_insert(0);
 ### 定义 ITER-1 ( 快照迭代 )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 for (k, v) in map.iter() { }
 ```
 
@@ -155,7 +155,7 @@ $$
 ### 定义 REF-1 ( Ref类型 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 Ref<K, V> {
     key: &K,
     value: &V,
@@ -166,7 +166,7 @@ Ref<K, V> {
 ### 定义 REF-2 ( RefMut类型 )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 RefMut<K, V> {
     key: &K,
     value: &mut V,
@@ -235,7 +235,7 @@ $$
 
 ### 示例1: 并发计数器
 
-```rust
+```rust,ignore
 use dashmap::DashMap;
 use std::sync::Arc;
 
@@ -265,7 +265,7 @@ async fn concurrent_counter() {
 
 ### 示例2: 缓存实现
 
-```rust
+```rust,ignore
 use dashmap::DashMap;
 use std::hash::Hash;
 
@@ -302,7 +302,7 @@ impl<K: Eq + Hash, V: Clone> Cache<K, V> {
 
 ### 示例3: 条件更新
 
-```rust
+```rust,ignore
 use dashmap::DashMap;
 
 fn conditional_update(map: &DashMap<String, i32>, key: &str) {

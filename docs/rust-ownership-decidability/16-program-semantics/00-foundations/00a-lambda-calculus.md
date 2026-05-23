@@ -95,7 +95,7 @@ FV(M N) = FV(M) ∪ FV(N)
 
 **Rust 示例**:
 
-```rust
+```rust,ignore
 fn example() {
     let y = 10;  // y 是自由变量（相对于内部闭包）
     let f = |x| {  // x 是绑定变量
@@ -123,7 +123,7 @@ fn example() {
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 // 以下三个闭包在语义上等价
 let f1 = |x| x + 1;
 let f2 = |y| y + 1;
@@ -205,7 +205,7 @@ f({ println!("evaluated!"); 2 + 3 });  // 立即打印 "evaluated!"
 
 **Rust 对应**:
 
-```rust
+```rust,ignore
 // τ₁ → τ₂ 对应 fn(T1) -> T2 或 Fn(T1) -> T2
 fn example(x: i32) -> bool { x > 0 }  // Int → Bool
 
@@ -347,7 +347,7 @@ M → M'                               (cong-λ)
 ### 5.1 闭包即 λ抽象
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // Rust 闭包 = λ演算中的抽象 + 环境
 let env = 10;
 let closure = |x| x + env;  // λx.x+env，其中 env 来自环境

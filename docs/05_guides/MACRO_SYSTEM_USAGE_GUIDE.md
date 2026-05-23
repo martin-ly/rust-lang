@@ -169,7 +169,7 @@ let v = vec![1, 2, 3];
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 
 #[proc_macro]
@@ -232,7 +232,7 @@ macro_rules! repeat {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 macro_rules! conditional {
     ($condition:expr => $then:expr) => {
         if $condition {
@@ -255,7 +255,7 @@ macro_rules! conditional {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 
 #[proc_macro_attribute]
@@ -275,7 +275,7 @@ fn my_function() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, DeriveInput};
@@ -308,7 +308,7 @@ println!("{}", s.method());  // "MyStruct"
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn my_function_macro(input: TokenStream) -> TokenStream {
     // 处理输入
@@ -359,7 +359,7 @@ test_case!(test_2, 2, 4);
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 macro_rules! builder {
     ($name:ident { $($field:ident: $type:ty),* }) => {
         struct $name {
@@ -403,7 +403,7 @@ let config = Config::new()
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 匹配不同数量的参数
 macro_rules! calculate {
     // 单个值
@@ -439,7 +439,7 @@ macro_rules! sum {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 解析键值对
 macro_rules! hashmap {
     // 空 map
@@ -475,7 +475,7 @@ let map = hashmap! {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 macro_rules! platform_specific {
     // 根据平台选择代码
     (linux: $linux_code:block, windows: $windows_code:block, macos: $macos_code:block) => {
@@ -511,7 +511,7 @@ platform_specific! {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // lib.rs - 过程宏 crate
 use proc_macro::TokenStream;
 use quote::quote;
@@ -595,7 +595,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::quote;
 use syn::{parse_macro_input, ItemFn};
@@ -638,7 +638,7 @@ pub fn timed(attr: TokenStream, item: TokenStream) -> TokenStream {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use proc_macro2::TokenTree;
 use quote::quote;
@@ -809,7 +809,7 @@ cargo expand --test my_test
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #![feature(trace_macros)]
 
 trace_macros!(true);
@@ -855,7 +855,7 @@ const_assert!(std::mem::size_of::<usize>() == 8);
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 在过程宏中使用 eprintln!
 #[proc_macro_derive(MyDerive)]
 pub fn my_derive(input: TokenStream) -> TokenStream {
@@ -885,7 +885,7 @@ pub fn my_derive(input: TokenStream) -> TokenStream {
 ### 2. 文档
 > **[来源: [crates.io](https://crates.io/)]**
 
-````rust
+````rust,ignore
 /// 创建一个 Vec，支持多种初始化语法
 ///
 /// # Examples
@@ -1033,7 +1033,7 @@ macro_rules! sliding_window_match {
 ### LazyLock 在宏编译缓存中的应用
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 宏展开结果缓存（延迟初始化）
@@ -1051,7 +1051,7 @@ pub fn get_cached_expansion(macro_name: &str) -> Option<TokenStream> {
 ### ControlFlow 在宏错误处理中的应用
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 宏验证管道

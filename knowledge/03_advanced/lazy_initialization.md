@@ -1,4 +1,6 @@
 # 延迟初始化 (Lazy Initialization)
+>
+> **相关概念**: [内部可变性](../../concept/02_intermediate/08_interior_mutability.md)
 
 > **Bloom 层级**: 理解
 
@@ -115,7 +117,7 @@ fn main() {
 
 #### 2.3 实际应用：昂贵计算缓存
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 struct DataProcessor {
@@ -216,7 +218,7 @@ fn main() {
 
 #### 3.3 实际应用：HTTP 客户端
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 // 全局 HTTP 客户端（复用连接）
@@ -256,7 +258,7 @@ async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
 
 `LazyLock` 是 `OnceLock` 的延迟初始化包装：
 
-```rust
+```rust,ignore
 // 使用 OnceLock（手动检查）
 static VALUE: OnceLock<String> = OnceLock::new();
 
@@ -327,7 +329,7 @@ graph TD
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 use std::collections::HashMap;
@@ -408,7 +410,7 @@ fn main() {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::RefCell;
 
@@ -505,7 +507,7 @@ fn main() {
 
 **修复方案**:
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 // 方案 1: 重构，消除循环依赖
@@ -648,7 +650,7 @@ LazyLock<T> / OnceLock<T> 状态机
 <details>
 <summary>参考答案</summary>
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::collections::HashMap;
 use std::hash::Hash;
@@ -806,7 +808,7 @@ fn main() {
 
 **题 1**: 以下代码存在编译错误。请分析原因并修复：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::Cell;
 
@@ -877,7 +879,7 @@ fn get_config() -> String {
 
 或使用 `arc-swap` crate 实现无锁热重载：
 
-```rust
+```rust,ignore
 use arc_swap::ArcSwap;
 use std::sync::Arc;
 

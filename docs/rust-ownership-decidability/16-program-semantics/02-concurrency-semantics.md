@@ -163,7 +163,7 @@ $$
 | **依赖** | 逻辑独立即可 | 需要物理硬件支持 |
 | **语义复杂性** | 高（同步、竞态） | 中（负载均衡、调度） |
 
-```rust
+```rust,ignore
 // 并发示例：多任务交错执行（单核亦可）
 use std::thread;
 use std::sync::mpsc;
@@ -231,7 +231,7 @@ $$
    - 线程间传递的数据类型正确
    - 同步原语的正确使用
 
-```rust
+```rust,ignore
 // Rust 在编译时防止数据竞争
 fn data_race_prevention() {
     let mut data = vec![1, 2, 3];
@@ -414,7 +414,7 @@ $$
 - **资源回收**: 线程栈和内核资源在线程结束后回收
 - **结果传递**: 线程的返回值通过 `Result` 传递
 
-```rust
+```rust,ignore
 fn thread_join_semantics() {
     use std::sync::atomic::{AtomicUsize, Ordering};
 
@@ -551,7 +551,7 @@ $$
 \text{Channel} : T \to \text{Sender}\langle T \rangle \times \text{Receiver}\langle T \rangle \quad \text{where } \text{Send}(T)
 $$
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -723,7 +723,7 @@ unsafe impl Sync for MySyncType {}
 
 标记类型为 `!Send` 或 `!Sync` 是显式的安全声明：
 
-```rust
+```rust,ignore
 use std::marker::PhantomData;
 use std::rc::Rc;
 
@@ -950,7 +950,7 @@ $$
 \text{WriteLock} : \text{RwLock}\langle T \rangle \to \text{RwLockWriteGuard}\langle T \rangle \quad \text{（独占访问）}
 $$
 
-```rust
+```rust,ignore
 fn write_lock_semantics() {
     let data = RwLock::new(0);
 
@@ -970,7 +970,7 @@ fn write_lock_semantics() {
 
 RwLock 不支持直接的锁升级（读锁 -> 写锁），需要显式释放和重新获取：
 
-```rust
+```rust,ignore
 fn lock_upgrade_semantics() {
     let data = RwLock::new(vec![1, 2, 3]);
 
@@ -1015,7 +1015,7 @@ fn lock_downgrade_semantics() {
 | `std::sync::RwLock` | 实现相关 | 依赖 OS 实现 |
 | `parking_lot::RwLock` | 写偏好 | 防止写者饥饿 |
 
-```rust
+```rust,ignore
 // parking_lot 提供更公平的锁
 use parking_lot::RwLock;
 
@@ -1079,7 +1079,7 @@ fn wait_semantics() {
 
 条件变量支持两种通知方式：
 
-```rust
+```rust,ignore
 use std::sync::{Condvar, Mutex};
 
 fn notify_semantics() {
@@ -1103,7 +1103,7 @@ fn notify_semantics() {
 
 条件变量可能产生虚假唤醒，必须使用循环检查：
 
-```rust
+```rust,ignore
 fn spurious_wakeup_handling() {
     let pair = Arc::new((Mutex::new(false), Condvar::new()));
 
@@ -1211,7 +1211,7 @@ fn barrier_sync_semantics() {
 
 屏障可以重置用于多阶段同步：
 
-```rust
+```rust,ignore
 fn phased_execution() {
     let barrier = Arc::new(Barrier::new(3));
 
@@ -1241,7 +1241,7 @@ fn phased_execution() {
 
 屏障的返回值可以标识"领导者"线程：
 
-```rust
+```rust,ignore
 use std::sync::BarrierWaitResult;
 
 fn leader_election() {
@@ -1426,7 +1426,7 @@ $$
 \end{aligned}
 $$
 
-```rust
+```rust,ignore
 fn acquire_release_semantics() {
     use std::sync::atomic::{AtomicBool, AtomicI32, Ordering};
 
@@ -1462,7 +1462,7 @@ $$
 \text{SeqCst} : \text{TotalOrder} \quad \text{（所有线程看到一致的操作顺序）}
 $$
 
-```rust
+```rust,ignore
 fn seq_cst_semantics() {
     use std::sync::atomic::{fence, AtomicI32, Ordering};
 
@@ -1497,7 +1497,7 @@ $$
 e_1 \prec e_2 \iff \text{visible}(e_1, e_2)
 $$
 
-```rust
+```rust,ignore
 fn happens_before_demo() {
     use std::sync::atomic::{AtomicI32, Ordering};
 
@@ -1723,7 +1723,7 @@ use std::hash::Hash;
 
 ABA 问题是无锁算法中的经典问题：
 
-```rust
+```rust,ignore
 // ABA 问题示例
 // 线程1：读取 A
 // 线程2：A -> B -> A
@@ -1800,7 +1800,7 @@ $$
 \text{ParIter} : \text{Iterator}\langle T \rangle \to \text{ParallelIterator}\langle T \rangle
 $$
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn par_iter_semantics() {
@@ -1827,7 +1827,7 @@ fn par_iter_semantics() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 fn chunking_semantics() {
     let data: Vec<i32> = (0..1000).collect();
 
@@ -1853,7 +1853,7 @@ fn chunking_semantics() {
 
 工作窃取调度器动态平衡负载：
 
-```rust
+```rust,ignore
 // Rayon 使用工作窃取调度器
 // 每个线程有自己的工作队列
 // 空闲线程从繁忙线程"窃取"工作
@@ -1888,7 +1888,7 @@ $$
 \forall x \in \text{Data}. \text{ReadOnly}(x) \implies \text{SafeParallel}(\text{read}(x))
 $$
 
-```rust
+```rust,ignore
 fn readonly_parallel_semantics() {
     let data = vec![1, 2, 3, 4, 5];
 
@@ -1907,7 +1907,7 @@ fn readonly_parallel_semantics() {
 
 写操作需要互斥或分片：
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn exclusive_write_semantics() {
@@ -1934,7 +1934,7 @@ fn exclusive_write_semantics() {
 
 #### 5.2.3 归约操作语义
 
-```rust
+```rust,ignore
 fn reduction_semantics() {
     let data: Vec<i32> = (0..1000).collect();
 
@@ -1972,7 +1972,7 @@ $$
 \text{Scope} : \text{ThreadSet} \times \text{Lifetime} \to \text{JoinGuard}
 $$
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn scoped_thread_semantics() {
@@ -1999,7 +1999,7 @@ fn scoped_thread_semantics() {
 
 #### 6.1.2 跨作用域借用语义
 
-```rust
+```rust,ignore
 fn cross_scope_borrowing() {
     let data = vec![1, 2, 3];
     let results: Vec<_> = thread::scope(|s| {
@@ -2022,7 +2022,7 @@ fn cross_scope_borrowing() {
 
 #### 6.1.3 Rayon 并行模式
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn rayon_parallel_patterns() {
@@ -2093,7 +2093,7 @@ fn pipeline_semantics() {
 
 #### 6.2.2 背压语义
 
-```rust
+```rust,ignore
 fn backpressure_semantics() {
     use std::sync::mpsc::sync_channel;
 
@@ -2118,7 +2118,7 @@ fn backpressure_semantics() {
 
 #### 6.2.3 流控制语义
 
-```rust
+```rust,ignore
 fn flow_control_semantics() {
     use std::sync::mpsc;
 
@@ -2158,7 +2158,7 @@ fn flow_control_semantics() {
 
 #### 6.3.1 多读单写语义
 
-```rust
+```rust,ignore
 use std::sync::RwLock;
 use std::thread;
 
@@ -2210,7 +2210,7 @@ impl<T> ReadOptimized<T> {
 
 #### 6.3.3 公平性语义
 
-```rust
+```rust,ignore
 use parking_lot::RwLock;  // 更公平的实现
 
 fn fairness_semantics() {
@@ -2252,7 +2252,7 @@ fn panic_propagation_semantics() {
 
 #### 7.1.2 恐慌恢复语义
 
-```rust
+```rust,ignore
 fn panic_recovery_semantics() {
     let result = panic::catch_unwind(|| {
         // 可能恐慌的代码
@@ -2271,7 +2271,7 @@ fn panic_recovery_semantics() {
 
 #### 7.1.3 作用域线程恐慌
 
-```rust
+```rust,ignore
 fn scoped_thread_panic() {
     let result = thread::scope(|s| {
         s.spawn(|| {
@@ -2293,7 +2293,7 @@ fn scoped_thread_panic() {
 
 #### 7.2.1 锁超时语义
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 use std::time::Duration;
 
@@ -2392,7 +2392,7 @@ fn cooperative_cancellation() {
 
 #### 7.3.2 协作取消语义
 
-```rust
+```rust,ignore
 // 使用 select! 实现取消
 fn select_cancellation() {
     use std::sync::mpsc;
@@ -2493,7 +2493,7 @@ fn arc_mutex_semantics() {
 
 #### 8.1.2 读写分离语义
 
-```rust
+```rust,ignore
 // 读写锁优化读多写少场景
 use std::sync::{Arc, RwLock};
 
@@ -2576,7 +2576,7 @@ fn channel_dataflow() {
 
 #### 8.2.2 Actor 消息流
 
-```rust
+```rust,ignore
 // 简化 Actor 模型实现
 use std::sync::mpsc::{self, Sender, Receiver};
 use std::thread;
@@ -2707,7 +2707,7 @@ fn event_driven_dataflow() {
 
 #### 9.1.1 固定线程池语义
 
-```rust
+```rust,ignore
 use rayon::ThreadPoolBuilder;
 
 fn fixed_thread_pool_semantics() {
@@ -2727,7 +2727,7 @@ fn fixed_thread_pool_semantics() {
 
 #### 9.1.2 动态线程池语义
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 use std::thread;
 use std::collections::VecDeque;
@@ -2771,7 +2771,7 @@ impl ThreadPool {
 
 #### 9.1.3 工作队列语义
 
-```rust
+```rust,ignore
 // 工作窃取队列
 use crossbeam::deque::{Worker, Stealer};
 
@@ -3014,7 +3014,7 @@ mod loom_tests {
 
 #### 10.2.3 性能分析
 
-```rust
+```rust,ignore
 // 使用 criterion 进行并发基准测试
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use rayon::prelude::*;

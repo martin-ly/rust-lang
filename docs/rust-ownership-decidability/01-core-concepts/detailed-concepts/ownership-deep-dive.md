@@ -312,7 +312,7 @@ fn main() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Copy trait 的定义
 pub trait Copy: Clone {
     // 没有方法，是标记 trait
@@ -340,7 +340,7 @@ pub trait Clone {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // 场景 1: 小型固定大小类型 → 使用 Copy
 #[derive(Copy, Clone)]
 struct Pixel {
@@ -495,7 +495,7 @@ fn main() {
 
 **规则 4.2** (结构体字段释放顺序): 字段按照声明顺序的**相反**顺序释放。
 
-```rust
+```rust,ignore
 struct Container {
     first: Printer,
     second: Printer,
@@ -520,7 +520,7 @@ fn main() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use std::mem;
 
 fn main() {
@@ -589,7 +589,7 @@ fn main() {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案 1: 使用引用
 let name = &person.name;
 println!("{}", person.age);  // ✅
@@ -647,7 +647,7 @@ fn main() {
 
 **解决方案**: 使用 `std::thread::panicking()` 检查状态：
 
-```rust
+```rust,ignore
 impl Drop for SafeDrop {
     fn drop(&mut self) {
         if std::thread::panicking() {
@@ -888,7 +888,7 @@ func main() {
 ### 7.1 基准测试: Move vs Clone
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn bench_move(c: &mut Criterion) {
@@ -947,7 +947,7 @@ clone_string    time:   [15.234 ns]  # 涉及堆分配
 ### 7.3 Drop 的性能影响
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 场景: 处理大量临时对象
 fn process_items(items: Vec<Item>) {
     for item in items {
@@ -968,7 +968,7 @@ fn process_items_optimized(items: Vec<Item>) {
 ### 7.4 Copy 类型的优化效果
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // ❌ 使用非 Copy 类型
 #[derive(Clone)]
 struct Point {
@@ -995,7 +995,7 @@ fn process_points(points: &[Point]) -> Vec<Point> {
 ### 7.5 内存池与自定义分配器
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use bumpalo::Bump;
 
 fn process_with_arena(arena: &Bump) {
@@ -1016,7 +1016,7 @@ fn process_with_arena(arena: &Bump) {
 ### 8.1 所有权与并发
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn spawn_worker(data: Vec<u8>) -> thread::JoinHandle<Vec<u8>> {
@@ -1055,7 +1055,7 @@ fn main() {
 
 Polonius 是下一代 Rust 借用检查器，支持更复杂的模式：
 
-```rust
+```rust,ignore
 // Polonius 将允许此代码编译
 fn polonius_example() {
     let mut x = 5;

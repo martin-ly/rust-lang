@@ -49,7 +49,7 @@ static_assertions提供:
 
 > 编译时验证类型相同。
 
-```rust
+```rust,ignore
 assert_type_eq_all!(TypeA, TypeB, TypeC);
 // 编译错误如果类型不同
 ```
@@ -64,7 +64,7 @@ assert_type_eq_all!(TypeA, TypeB, TypeC);
 
 > 验证类型大小符合预期。
 
-```rust
+```rust,ignore
 assert_eq_size!(Vec<u8>, String);  // 都是24字节
 assert_eq_size!([u8; 4], u32);      // 都是4字节
 ```
@@ -79,7 +79,7 @@ assert_eq_size!([u8; 4], u32);      // 都是4字节
 
 > 验证类型实现特定trait。
 
-```rust
+```rust,ignore
 assert_impl_all!(String: Send, Sync, Clone);
 assert_not_impl_any!(Rc<u8>: Send, Sync);
 ```
@@ -92,7 +92,7 @@ assert_not_impl_any!(Rc<u8>: Send, Sync);
 
 ### 反例 5.1 (条件编译)
 
-```rust
+```rust,ignore
 // 在不同平台大小可能不同
 assert_eq_size!(usize, u64);  // 在32位平台失败
 ```

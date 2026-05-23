@@ -313,7 +313,6 @@ mod tests {
     }
 
     #[test]
-    #[test]
     fn test_coin_change_greedy_sync() {
         let coins = vec![1, 5, 10, 25];
         let r1 = coin_change_greedy_sync(coins.clone(), 41);
@@ -329,7 +328,6 @@ mod tests {
         assert_eq!(r2.iter().sum::<i64>(), 41);
     }
 
-    #[test]
     #[test]
     fn test_fractional_knapsack() {
         let items = vec![

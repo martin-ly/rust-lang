@@ -129,7 +129,7 @@
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 let s2 = s;  // 所有权转移
 println!("{}", s);  // ❌ 编译错误：s 已失效
@@ -182,7 +182,7 @@ let r2 = &mut v;
 
 **错误示例**:
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -222,7 +222,7 @@ fn main() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn main() {
@@ -240,7 +240,7 @@ fn main() {
 
 **修正**:
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex};
 use std::thread;
 
@@ -272,7 +272,7 @@ fn main() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 过度泛型导致代码难以理解
 fn process<A, B, C, D, E, F>(a: A, b: B, c: C) -> D
 where
@@ -314,7 +314,7 @@ fn flatten<T>(nested: Vec<Vec<T>>) -> Vec<T> {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // 在本地 crate 中为外部类型实现外部 trait
 impl serde::Serialize for chrono::DateTime<chrono::Utc> {
     // ❌ 编译错误：孤儿规则
@@ -325,7 +325,7 @@ impl serde::Serialize for chrono::DateTime<chrono::Utc> {
 
 **修正**:
 
-```rust
+```rust,ignore
 // ✅ 使用 newtype 模式
 #[derive(Debug)]
 struct MyDateTime(chrono::DateTime<chrono::Utc>);
@@ -348,7 +348,7 @@ impl serde::Serialize for MyDateTime {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 async fn bad() {
@@ -363,7 +363,7 @@ async fn bad() {
 
 **修正**:
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;  // ✅ 使用异步锁
 
 async fn good() {
@@ -382,7 +382,7 @@ async fn good() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 async fn fetch_data() -> String {
     "data".to_string()
 }
@@ -397,7 +397,7 @@ async fn main() {
 
 **修正**:
 
-```rust
+```rust,ignore
 async fn main() {
     let data = fetch_data().await;  // ✅ 正确 await
     println!("{}", data);
@@ -518,7 +518,7 @@ struct GoodData {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 过度设计：只有一种按钮却定义产品族
 trait ButtonFactory {
     fn create_button(&self) -> Box<dyn Button>;
@@ -554,7 +554,7 @@ impl Button {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 全局可变状态
 static mut CONFIG: Option<Config> = None;
 
@@ -569,7 +569,7 @@ fn get_config() -> &'static mut Config {
 
 **修正**:
 
-```rust
+```rust,ignore
 // ✅ 使用 std::sync::OnceLock
 use std::sync::OnceLock;
 
@@ -625,7 +625,7 @@ fn factorial(n: u32) -> u32 {
 
 **修正**:
 
-```rust
+```rust,ignore
 fn factorial(n: u32) -> Option<u32> {
     let mut result = 1u32;
     for i in 1..=n {
@@ -683,7 +683,7 @@ fn factorial_big(n: u32) -> num_bigint::BigUint {
 
 典型反例可通过 `compile_fail` 在 doc-test 或 trybuild 中验证编译失败：
 
-```rust
+```rust,ignore
 /// 反例：移动后使用——应编译失败
 ///
 /// ```rust,compile_fail

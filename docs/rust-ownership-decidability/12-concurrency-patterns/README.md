@@ -133,7 +133,7 @@ README → 12-02 → 12-03 → 12-05 → 12-01 → 12-06 → 12-04 → 12-07
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 形式化定理演示: Send + Sync = Safe Shared State
 fn demonstrate_send_sync_safety<T: Send + Sync>() {
     let shared: Arc<Mutex<T>> = Arc::new(Mutex::new(initial));
@@ -180,7 +180,7 @@ fn cas_loop(counter: &AtomicUsize) {
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 类型系统的线程安全检查
 fn check_thread_safety<T: Send + Sync>(_: T) {}
 
@@ -212,7 +212,7 @@ static LOCK_ORDER: AtomicUsize = AtomicUsize::new(0);
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // Actor 消息定义
 enum DatabaseMessage {
     Query { sql: String, respond_to: OneshotSender<Result<Row, Error>> },
@@ -255,7 +255,7 @@ async fn send_with_backpressure<T>(
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 无锁队列的 CAS 操作
 pub fn push(&self, value: T) {
     let new_node = Box::into_raw(Box::new(Node::new(value)));
@@ -305,7 +305,7 @@ pub fn push(&self, value: T) {
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 自适应背压控制
 pub struct AdaptiveBackpressure {
     current_limit: AtomicUsize,
@@ -350,7 +350,7 @@ impl AdaptiveBackpressure {
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 并行归约与 SIMD 结合
 pub fn parallel_simd_sum(data: &[f64]) -> f64 {
     data.par_chunks(4096)
@@ -394,7 +394,7 @@ pub fn parallel_simd_sum(data: &[f64]) -> f64 {
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // 形式化定理演示: 并行迭代器安全
 fn demonstrate_par_iter_safety<T: Send + Sync>() {
     let data = vec![1, 2, 3, 4, 5];
@@ -442,7 +442,7 @@ impl ParallelIterator for StepRange {
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // Raft 共识的简化实现
 #[derive(Clone, Debug)]
 pub enum NodeState {
@@ -528,7 +528,7 @@ Theorem CIRCUIT-STABILITY: 熔断器在CLOSED/OPEN状态稳定
 
 **关键代码示例**:
 
-```rust
+```rust,ignore
 // CAP策略验证
 let config = CAPConfig::new(
     CAPStrategy::ConsistencyPartitionTolerance,
@@ -602,7 +602,7 @@ cargo test --all
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use parking_lot::deadlock;
 
 // 启用死锁检测
@@ -671,7 +671,7 @@ cargo build --features parking_lot/deadlock_detection
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 async fn bad() {
     std::thread::sleep(Duration::from_secs(1));
@@ -687,7 +687,7 @@ async fn good() {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 async fn bad(data: Arc<Mutex<Data>>) {
     let guard = data.lock().await;
@@ -708,7 +708,7 @@ async fn good(data: Arc<Mutex<Data>>) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // ❌ 非取消安全
 async fn bad(sender: &mpsc::Sender<i32>) {
     sender.send(1).await.unwrap();
@@ -829,7 +829,7 @@ async fn good(sender: &mpsc::Sender<i32>) {
 
 Rust 1.94 为 `LazyCell` 和 `LazyLock` 引入了新的访问方法，简化了延迟初始化模式：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::cell::LazyCell;
 
@@ -867,7 +867,7 @@ impl AppState {
 
 ### Peekable::next_if_map（异步迭代器适用）
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 // 在异步流处理中的条件消费

@@ -276,7 +276,7 @@
 
 **决策**：需异步运行时 → 库支持（tokio）；$\mathit{SuppB} = \mathrm{Lib}$。
 
-```rust
+```rust,ignore
 // Cargo.toml: tokio = { version = "1", features = ["full"] }
 use tokio::net::TcpListener;
 async fn serve() {

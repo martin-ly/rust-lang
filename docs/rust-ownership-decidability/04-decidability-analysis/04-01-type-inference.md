@@ -357,7 +357,7 @@ $$
 
 编码为Rust类型约束:
 
-```rust
+```rust,ignore
 // 编码布尔变量为类型变量
 trait True {}
 trait False {}

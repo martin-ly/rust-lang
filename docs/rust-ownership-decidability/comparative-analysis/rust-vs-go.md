@@ -205,7 +205,7 @@ func main() {
 
 Rust 提供多种并发模型，最常用的是基于 async/await 的：
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use tokio::time::{sleep, Duration};
 
@@ -383,7 +383,7 @@ func init() {
 
 Rust 标准库最小化运行时：
 
-```rust
+```rust,ignore
 // Rust "运行时" 仅包含：
 1. 栈溢出检查
 2.  panic 处理
@@ -395,7 +395,7 @@ Rust 标准库最小化运行时：
 
 **可选的运行时（Tokio）：**
 
-```rust
+```rust,ignore
 #[tokio::main]  // 宏展开设置运行时
 async fn main() {
     // 异步运行时在此处启动
@@ -690,7 +690,7 @@ func main() {
 
 #### Rust (Axum)
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Router, Json, extract::Path,
@@ -757,7 +757,7 @@ func (r *UserRepository) GetUser(id int64) (*User, error) {
 
 #### Rust (sqlx)
 
-```rust
+```rust,ignore
 use sqlx::sqlite::SqlitePool;
 
 struct UserRepository {
@@ -830,7 +830,7 @@ func main() {
    - 需要内存安全保证
    - 防止数据竞争
 
-```rust
+```rust,ignore
 // Rust 典型场景：高性能代理
 #[tokio::main]
 async fn main() {
@@ -873,7 +873,7 @@ async fn main() {
 
 #### FFI 集成示例
 
-```rust
+```rust,ignore
 // Rust 库暴露 C 接口给 Go
 #[no_mangle]
 pub extern "C" fn process_data(data: *const u8, len: usize) -> i32 {

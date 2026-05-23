@@ -155,7 +155,7 @@ msg.id 唯一 → 消费者收到 msg 一次且仅一次
 ## 4. Rust 实现示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // Outbox 表结构
 #[derive(Debug, Clone)]
 pub struct OutboxMessage {

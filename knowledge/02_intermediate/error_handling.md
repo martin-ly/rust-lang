@@ -1,4 +1,6 @@
 # 错误处理 (Error Handling)
+>
+> **相关概念**: [错误处理](../../concept/02_intermediate/04_error_handling.md)
 
 > **Bloom 层级**: 理解
 
@@ -78,7 +80,7 @@ enum Result<T, E> {
 
 **`Option` 与 `Result` 的桥接**：
 
-```rust
+```rust,ignore
 // Option → Result: 为空时提供错误信息
 opt.ok_or("missing value")           // Result<T, &str>
 opt.ok_or_else(|| compute_error())   // 延迟计算错误
@@ -202,7 +204,7 @@ graph TD
 
 **`?` 运算符的脱糖**：
 
-```rust
+```rust,ignore
 // 源码:
 fn read_file(path: &str) -> Result<String, io::Error> {
     let content = std::fs::read_to_string(path)?;
@@ -263,7 +265,7 @@ fn main() {
 
 使用 `thiserror` 构建应用错误类型：
 
-```rust
+```rust,ignore
 use thiserror::Error;
 use std::io;
 
@@ -293,7 +295,7 @@ fn load_config(path: &str) -> Result<Config, AppError> {
 
 `main` 函数返回 `Result` + `anyhow` 上下文：
 
-```rust
+```rust,compile_fail
 use anyhow::{Context, Result};
 
 fn main() -> Result<()> {
@@ -347,7 +349,7 @@ fn parse_user_input(input: &str) -> Result<i32, String> {
 
 **错误代码**:
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 struct MyError;
 
@@ -391,7 +393,7 @@ fn may_fail() -> Result<(), MyError> {
 
 **错误代码**:
 
-```rust
+```rust,compile_fail
 fn open_file(path: &str) -> Option<File> {
     File::open(path).ok()  // ❌ 丢弃了错误原因！
 }
@@ -408,7 +410,7 @@ fn main() {
 
 **修复方案**:
 
-```rust
+```rust,compile_fail
 fn open_file(path: &str) -> Result<File, io::Error> {
     File::open(path)  // ✅ 保留完整错误信息
 }
@@ -670,7 +672,7 @@ fn process_data(path: &str) -> Result<Vec<i32>, DataError> {
 
 **题 2**: 以下代码试图实现自定义错误类型但编译失败。请修复：
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 enum AppError {
     Io(std::io::Error),
@@ -718,7 +720,7 @@ fn load_port(path: &str) -> Result<u16, AppError> {
 
 或使用 `thiserror`:
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]

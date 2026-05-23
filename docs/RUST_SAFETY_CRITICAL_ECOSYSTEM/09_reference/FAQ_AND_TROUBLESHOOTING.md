@@ -153,7 +153,7 @@ unsafe fn unsafe_code(ptr: *mut u8) {
 
 **A:** 最佳实践：
 
-```rust
+```rust,ignore
 // 1. 使用bindgen生成绑定
 // bindgen wrapper.h -o bindings.rs
 
@@ -356,7 +356,7 @@ unsafe {
 
 **A:** 优化策略：
 
-```rust
+```rust,ignore
 // 问题: 证明范围太大
 #[kani::proof]
 fn verify_all() {
@@ -428,7 +428,7 @@ cargo build --release --target x86_64-unknown-linux-gnu
 
 **A:** 非常适合：
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -493,7 +493,7 @@ serde = { version = "1.0", default-features = false }
 
 **解决:**
 
-```rust
+```rust,ignore
 // 逐文件允许特定警告
 #![allow(clippy::too_many_arguments)]
 

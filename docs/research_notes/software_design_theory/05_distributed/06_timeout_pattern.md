@@ -152,7 +152,7 @@ Timeout → system_continues
 ## 4. Rust 实现示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 pub struct TimeoutConfig {

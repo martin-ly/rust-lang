@@ -376,7 +376,6 @@ mod tests {
     }
 
     #[test]
-    #[test]
     fn test_counting_and_radix_u32_sync() {
         let v = vec![5u32, 1, 3, 3, 0, 9, 255, 128, 128, 2];
         let c = counting_sort_sync_u32(&v);
@@ -394,7 +393,6 @@ mod tests {
         assert_eq!(c, cp);
     }
 
-    #[test]
     #[test]
     fn test_shell_and_bucket() {
         let mut v = vec![9, 1, 8, 2, 7, 3, 6, 4, 5];

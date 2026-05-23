@@ -36,7 +36,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Tell模式 (Fire-and-Forget)
 // 不等待响应，异步执行
 actor.do_send(OrderCreated { id, items });
@@ -61,7 +61,7 @@ let result = tokio::time::timeout(
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Actor主动发送消息给其他Actor
 struct OrderActor {
     inventory: Addr<InventoryActor>,
@@ -102,7 +102,7 @@ impl Handler<CreateOrder> for OrderActor {
 ### 2.1 监督者模式
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use bastion::prelude::*;
 
 // 创建监督树
@@ -144,7 +144,7 @@ async fn worker_actor(ctx: BastionContext) -> Result<()> {
 ### 2.2 Circuit Breaker模式
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 
 struct CircuitBreakerActor {
@@ -211,7 +211,7 @@ impl Handler<CallRequest> for CircuitBreakerActor {
 ### 3.1 负载均衡路由
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 struct LoadBalancerActor {
     workers: Vec<Addr<WorkerActor>>,
     current: AtomicUsize,
@@ -253,7 +253,7 @@ impl Handler<Task> for LoadBalancerActor {
 ### 3.2 一致性哈希路由
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 struct ShardedActorSystem {
     shards: HashMap<u64, Addr<ShardActor>>,
     hasher: DefaultHasher,
@@ -290,7 +290,7 @@ impl Handler<UserCommand> for ShardedActorSystem {
 ### 4.1 有限状态机 (FSM)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 enum OrderState {
     Created,
     PendingPayment,
@@ -336,7 +336,7 @@ impl Actor for OrderActor {
 ### 4.2 Event Sourcing
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 struct EventSourcedActor {
     id: String,
     events: Vec<Event>,
@@ -382,7 +382,7 @@ impl EventSourcedActor {
 ### 5.1 Pub-Sub模式
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 struct PubSubActor {
     subscribers: HashMap<String, Vec<Addr<SubscriberActor>>>,
 }
@@ -408,7 +408,7 @@ impl PubSubActor {
 ### 5.2 请求管道
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 管道: A -> B -> C -> D
 struct PipelineStage<T, R> {
     next: Option<Addr<PipelineStage<R, FinalResult>>>,

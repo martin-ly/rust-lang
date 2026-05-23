@@ -57,7 +57,7 @@ FFI绑定工具:
 | struct T | T |
 | void* | *mut c_void |
 
-```rust
+```rust,ignore
 // 自动生成
 extern "C" {
     pub fn open(path: *const c_char, flags: c_int) -> c_int;
@@ -70,7 +70,7 @@ extern "C" {
 
 > 所有FFI调用标记为unsafe。
 
-```rust
+```rust,ignore
 // 原始指针需安全检查
 unsafe {
     let fd = open(path.as_ptr(), O_RDONLY);
@@ -87,7 +87,7 @@ unsafe {
 
 > 仅pub且#[no_mangle]函数导出。
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub extern "C" fn mylib_init() -> *mut Context {
     Box::into_raw(Box::new(Context::new()))
@@ -104,7 +104,7 @@ pub extern "C" fn mylib_init() -> *mut Context {
 
 > Rust Box转换为原始指针传递所有权。
 
-```rust
+```rust,ignore
 // Rust侧
 pub extern "C" fn create() -> *mut T {
     Box::into_raw(Box::new(T))
@@ -143,7 +143,7 @@ pub struct Point {
 
 ### 反例 6.1 (panic跨越边界)
 
-```rust
+```rust,ignore
 // 危险: panic可能中止进程
 #[no_mangle]
 pub extern "C" fn may_panic() {
@@ -161,7 +161,7 @@ pub extern "C" fn safe() -> i32 {
 
 ### 反例 6.2 (生命周期逃逸)
 
-```rust
+```rust,ignore
 // 危险: 返回借用
 pub extern "C" fn get_name() -> *const c_char {
     let s = String::from("test");

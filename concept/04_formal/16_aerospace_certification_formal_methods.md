@@ -49,6 +49,7 @@
     - [10.3 缺少 CompCert 级认证编译器](#103-缺少-compcert-级认证编译器)
   - [十一、来源与延伸阅读](#十一来源与延伸阅读)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -1125,4 +1126,3 @@ graph TD
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
-

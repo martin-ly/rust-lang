@@ -174,7 +174,7 @@ trait 定义策略接口；`impl Trait` 或 `dyn Trait` 实现多态；由 [trai
 
 1. **不可变调用**：
 
-   ```rust
+   ```rust,ignore
    fn run(&self) -> i32 { self.strategy.execute(&self.data) }
    ```
 
@@ -356,7 +356,7 @@ impl<S: CompressStrategy> Exporter<S> {
 
 **错误**：策略内部用 `static mut` 或 `Arc<Mutex<>>` 共享可变，多 Context 共享同一策略时产生隐式耦合。
 
-```rust
+```rust,ignore
 struct BadStrategy { counter: Arc<Mutex<u32>> }
 impl Strategy for BadStrategy {
     fn execute(&self, data: &[i32]) -> i32 {

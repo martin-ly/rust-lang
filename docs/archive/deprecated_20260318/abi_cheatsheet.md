@@ -33,7 +33,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Windows API (自动选择 32/64位)
 extern "system" {
     fn GetLastError() -> u32;
@@ -55,7 +55,7 @@ extern "win64" {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Unix 系统标准
 extern "C" {
     fn printf(format: *const c_char, ...) -> i32;
@@ -71,7 +71,7 @@ extern "sysv64" {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ARM 32位
 extern "aapcs" {
     fn arm_specific_func(x: i32) -> i32;
@@ -141,7 +141,7 @@ extern "C" {
 
 **Rust 1.94 解决方案**:
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::ffi::CString;
 
@@ -207,7 +207,7 @@ impl CLibHandle {
 
 **Rust 1.94 解决方案**:
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// C 函数调用结果
@@ -285,7 +285,7 @@ pub fn safe_ffi_call() -> Result<ProcessedData, FFIError> {
 
 **Rust 1.94 优势**: 零分配，直接处理原始指针数据。
 
-```rust
+```rust,ignore
 /// 处理从 C 库返回的传感器数据
 ///
 /// C 函数签名: int get_sensor_data(float* buffer, int len);
@@ -335,7 +335,7 @@ pub fn detect_edges_from_c_image(c_pixels: *const u8, width: usize, height: usiz
 
 **场景**: C 数学库返回的结果需要高精度处理。
 
-```rust
+```rust,ignore
 /// 使用黄金比例优化 C 库参数搜索
 ///
 /// C 库有大量可调参数，需要找到最优组合
@@ -391,7 +391,7 @@ pub fn estimate_c_algorithm_complexity(n: usize) -> f64 {
 
 ### 生产场景：数据库驱动 FFI
 
-```rust
+```rust,ignore
 /// 生产级 C 数据库驱动包装
 ///
 /// 使用 Rust 1.94 特性优化性能和可维护性

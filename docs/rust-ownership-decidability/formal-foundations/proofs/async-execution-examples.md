@@ -40,7 +40,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll, Waker, RawWaker, RawWakerVTable};
@@ -216,7 +216,7 @@ where
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::{Arc, Mutex};
@@ -327,7 +327,7 @@ unsafe fn drop_waker(data: *const ()) {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use crossbeam::deque::{Worker, Stealer};
 
@@ -425,7 +425,7 @@ impl WorkStealingExecutor {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 use std::task::{Context, Poll};
@@ -486,7 +486,7 @@ impl Future for SelfReferencingFuture {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -547,7 +547,7 @@ impl Future for ManualPinFuture {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 use std::future::Future;
 
@@ -614,7 +614,7 @@ impl Future for SafeResource {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use pin_project::pin_project;
 
@@ -656,7 +656,7 @@ impl<F: Future> Future for MustComplete<F> {
 ### 5.1 异步信号量
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::collections::VecDeque;
 use tokio::sync::Semaphore;

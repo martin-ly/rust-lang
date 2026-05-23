@@ -69,7 +69,7 @@ DOI: 10.1016/0304-3975(87)90045-4
 
 **Rust对齐**
 
-```rust
+```rust,ignore
 // 线性逻辑在Rust中的体现
 
 // A ⊸ B: 线性蕴含 (所有权转移)
@@ -131,7 +131,7 @@ enum Choice<A, B> {
 
 **Rust实现**
 
-```rust
+```rust,ignore
 // 仿射类型: 使用0次或1次
 let x: String = String::from("hello");
 // 选择1: 使用
@@ -226,7 +226,7 @@ fn nll_example() {
 
 **Rust演进**
 
-```rust
+```rust,ignore
 // Clarke等人的所有权概念
 // Rust的完整实现
 
@@ -282,7 +282,7 @@ DOI: 10.1109/LICS.2002.1029817
 
 **Rust对应**
 
-```rust
+```rust,ignore
 // 分离逻辑在unsafe代码验证中的应用
 
 // {x ↦ _}
@@ -329,7 +329,7 @@ fn update(a: &mut i32, b: &mut i32) {
 
 **Rust并发**
 
-```rust
+```rust,ignore
 // 并发分离逻辑在Rust中的体现
 
 // 线程1拥有data1，线程2拥有data2
@@ -432,7 +432,7 @@ Tree Borrows (改进):
 
 **验证示例**
 
-```rust
+```rust,ignore
 // Stacked Borrows检测的错误
 fn stacked_borrows_violation() {
     let mut x = 5;
@@ -497,7 +497,7 @@ DOI: 10.1145/3547639
 
 **验证方法**
 
-```rust
+```rust,ignore
 // Creusot规范示例
 #[requires(x > 0)]
 #[ensures(result > x)]
@@ -528,7 +528,7 @@ impl<T> Vec<T> {
 
 **规范语言**
 
-```rust
+```rust,ignore
 // Prusti合约
 #[pure]
 #[requires(x > 0)]

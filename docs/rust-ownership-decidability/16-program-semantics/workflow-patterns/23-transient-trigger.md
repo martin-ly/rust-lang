@@ -300,7 +300,7 @@ $$
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 > **[来源: TRPL Ch. 16 - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::mpsc::{self, TryRecvError};
 use tokio::sync::oneshot;
@@ -387,7 +387,7 @@ impl std::error::Error for TransientTriggerError {}
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: Rustonomicon - Ownership]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::Arc;
@@ -502,7 +502,7 @@ impl std::error::Error for TriggerError {}
 > **[来源: Rust Standard Library - std::sync::atomic]**
 > **[来源: Tokio Documentation]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::Arc;
 use tokio::sync::oneshot;
@@ -656,7 +656,7 @@ $$
 
 **场景**: 工业机械控制中的紧急停止
 
-```rust
+```rust,ignore
 /// 紧急停止按钮 - 瞬态语义
 /// 按钮按下时，如果系统未在监听，停止信号丢失
 /// 实际实现中通常结合持久化日志记录事件
@@ -672,7 +672,7 @@ pub struct EStopButton {
 
 **场景**: 电商平台的限时优惠推送
 
-```rust
+```rust,ignore
 /// 限时优惠 - 仅在用户在线时推送
 /// 离线用户不会收到历史优惠
 let (offer, rx) = LimitedTimeOffer::new();
@@ -687,7 +687,7 @@ if user.is_online() {
 
 **场景**: IoT 传感器超过阈值时的瞬时警报
 
-```rust
+```rust,ignore
 /// 温度传感器瞬态警报
 fn check_temperature(temp: f32) -> Option<Alert> {
     if temp > 100.0 {
@@ -713,7 +713,7 @@ fn check_temperature(temp: f32) -> Option<Alert> {
 
 按优先级顺序处理瞬态信号：
 
-```rust
+```rust,ignore
 struct PriorityTrigger<T> {
     priority: u8,
     trigger: oneshot::Receiver<T>,

@@ -93,7 +93,7 @@ fn happens_before_example() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// 顺序一致性是最强的内存序
 /// 所有线程以相同的顺序看到所有操作
 fn sequential_consistency_example() {
@@ -126,7 +126,7 @@ fn sequential_consistency_example() {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::Ordering;
 
 /// ## Ordering::Relaxed
@@ -220,7 +220,7 @@ fn seq_cst_example() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{
     AtomicUsize, AtomicU64, AtomicU32, AtomicU16, AtomicU8,
     AtomicIsize, AtomicI64, AtomicI32, AtomicI16, AtomicI8,
@@ -339,7 +339,7 @@ impl<T> Drop for AtomicBox<T> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, AtomicI64, Ordering};
 
 /// 原子计数器实现
@@ -931,7 +931,7 @@ impl<T> HelpingStack<T> {
 
 Rust 1.94 引入的 `LazyLock::get()` 和相关方法提供了一种无锁的延迟初始化模式，与传统的 `std::sync::Once` 相比具有更好的可组合性：
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use std::sync::atomic::{AtomicPtr, Ordering};
 
@@ -1003,7 +1003,7 @@ fn concurrent_access() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use crossbeam::epoch::{self, Atomic, Owned, Shared};
 use std::sync::atomic::Ordering;
@@ -1238,7 +1238,7 @@ mod tests {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicPtr, Ordering};
 use std::ptr::null_mut;
 

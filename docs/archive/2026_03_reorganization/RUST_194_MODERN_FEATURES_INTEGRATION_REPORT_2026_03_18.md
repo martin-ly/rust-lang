@@ -38,7 +38,7 @@
 
 多个 crate 使用了旧的 `windows()` 方法，而不是 Rust 1.94 新增的 `array_windows()`：
 
-```rust
+```rust,ignore
 // 旧代码 (c05_threads)
 for window in data.windows(3) {
     let sum: f64 = window.iter().sum();
@@ -52,7 +52,7 @@ for window in data.windows(3) {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 新代码
 for window in data.array_windows::<3>() {
     let sum: f64 = window.iter().sum();
@@ -94,7 +94,7 @@ for window in data.array_windows::<3>() {
 
 使用 `as` 进行类型转换可能导致溢出或数据丢失：
 
-```rust
+```rust,ignore
 // 旧代码 (c02_type_system, c05_threads, c06_async)
 pub fn char_to_usize(c: char) -> usize {
     c as usize  // 可能溢出，不检查
@@ -108,7 +108,7 @@ let code_point = ch as usize;  // 同样问题
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 新代码
 pub fn char_to_usize(c: char) -> usize {
     usize::try_from(c).unwrap_or(0)  // 安全转换，溢出时返回默认值
@@ -143,7 +143,7 @@ let code_point = usize::try_from(ch).unwrap_or(0);
 
 冗长的 `if let Some(x) = ...` 模式：
 
-```rust
+```rust,ignore
 // 旧代码 (c01_ownership, c03_control_fn)
 if let Some(inner) = self.inner.as_ref() {
     inner
@@ -160,7 +160,7 @@ if let Some(&first_char) = self.input.peek() {
 
 #### 优化后的代码
 
-```rust
+```rust,ignore
 // 新代码
 let Some(inner) = self.inner.as_ref() else {
     panic!("...")
@@ -232,7 +232,7 @@ let Some(&first_char) = self.input.peek() else {
 
 无法在不消耗 Result/Option 的情况下查看值：
 
-```rust
+```rust,ignore
 // 旧代码
 match String::from_utf8(bytes) {
     Ok(s) => {
@@ -245,7 +245,7 @@ match String::from_utf8(bytes) {
 
 #### 优化后的代码
 
-```rust
+```rust,ignore
 // 新代码
 String::from_utf8(bytes)
     .inspect(|s| eprintln!("[DEBUG] Created ZeroCopyString: {}", s))
@@ -277,7 +277,7 @@ String::from_utf8(bytes)
 
 **修复前**:
 
-```rust
+```rust,ignore
 macros.insert(
     name.into(),
     MacroInfo {
@@ -291,7 +291,7 @@ macros.insert(
 
 **修复后**:
 
-```rust
+```rust,ignore
 macros.insert(
     name.into(),
     MacroInfo {

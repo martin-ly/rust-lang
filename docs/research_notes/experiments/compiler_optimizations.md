@@ -322,7 +322,7 @@ fn dead_code_elimination() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 测试函数
 fn compute_sum(n: u32) -> u64 {
     let mut sum = 0u64;
@@ -349,7 +349,7 @@ criterion_main!(benches);
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 不使用内联
 fn add(a: i32, b: i32) -> i32 {
     a + b

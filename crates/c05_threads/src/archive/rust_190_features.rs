@@ -460,6 +460,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg_attr(miri, ignore)]
     fn test_advanced_concurrency() {
         AdvancedConcurrency::improved_thread_pool();
         AdvancedConcurrency::lockfree_data_structures();

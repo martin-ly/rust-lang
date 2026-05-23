@@ -49,7 +49,7 @@
 >
 > **[来源: Rust Reference]** · **[来源: Wikipedia - Rust (programming language)]** · **[来源: Rustonomicon]** · **[来源: TRPL]** · **[来源: RFCs - github.com/rust-lang/rfcs]** · **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 反例: Move后继续使用原变量
 fn use_after_move() {
     let s1 = String::from("hello");
@@ -171,7 +171,7 @@ fn wrong_early_release() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 反例: 同时存在可变和共享借用
 fn mutable_and_shared_borrow() {
     let mut data = vec![1, 2, 3];
@@ -248,7 +248,7 @@ fn fixed_copy_value() {
 ### 2.2 多个可变借用反例
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 反例: 多个可变借用
 fn multiple_mutable_borrows() {
     let mut data = vec![1, 2, 3];
@@ -294,7 +294,7 @@ fn multiple_mutable_borrows() {
 ### 3.1 生命周期不足反例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 反例: 返回悬垂引用
 fn dangling_reference() -> &String {
     let s = String::from("hello");
@@ -353,7 +353,7 @@ fn borrow_with_lifetime<'a>(input: &'a String) -> &'a str {
 ### 3.2 生命周期不匹配反例
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 反例: 生命周期不匹配
 struct Parser {
     text: String,
@@ -411,7 +411,7 @@ struct SelfReferential {
 ### 4.1 Rc跨线程反例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -477,7 +477,7 @@ fn arc_across_threads() {
 ### 5.1 "Clone是免费的"
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 谬误: 频繁Clone没有成本
 fn expensive_clones() {
     let data = vec![0; 1_000_000];  // 大向量
@@ -500,7 +500,7 @@ fn efficient_borrow() {
 ### 5.2 "RefCell可以替代所有借用"
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 谬误: 用RefCell避免所有借用规则
 fn overusing_refcell() {
     let data = RefCell::new(vec![1, 2, 3]);

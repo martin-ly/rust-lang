@@ -238,7 +238,6 @@ mod tests {
     use super::*;
 
     #[test]
-    #[test]
     fn test_lcs_sync() {
         let a = b"ABCBDAB".to_vec();
         let b = b"BDCABA".to_vec();
@@ -254,8 +253,6 @@ mod tests {
     }
 
     #[test]
-    #[test]
-    #[test]
     fn test_knapsack_sync() {
         let weights = vec![2, 2, 6, 5, 4];
         let values = vec![6, 3, 5, 4, 6];
@@ -270,7 +267,6 @@ mod tests {
         assert_eq!(knapsack_01_parallel(&weights, &values, 10), 15);
     }
 
-    #[test]
     #[test]
     fn test_lis_len() {
         let a = vec![10, 9, 2, 5, 3, 7, 101, 18];

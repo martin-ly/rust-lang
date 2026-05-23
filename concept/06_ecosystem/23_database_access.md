@@ -35,6 +35,7 @@
   - [六、来源与延伸阅读](#六来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -45,6 +46,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 SQLx — 编译期检查
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -85,6 +87,7 @@ SQLx:
 ---
 
 ### 1.2 Diesel — 类型安全 ORM
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -128,6 +131,7 @@ Diesel:
 ---
 
 ### 1.3 SeaORM — 异步 ORM
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -178,6 +182,7 @@ SeaORM:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 2.1 原始 SQL
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -211,6 +216,7 @@ SeaORM:
 ---
 
 ### 2.2 查询构建器
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -246,6 +252,7 @@ SeaORM:
 ---
 
 ### 2.3 迁移管理
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -287,6 +294,7 @@ SeaORM:
 > [来源: [Tokio Docs]]
 
 ### 3.1 连接池
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -323,6 +331,7 @@ SeaORM:
 ---
 
 ### 3.2 事务
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -372,6 +381,7 @@ SeaORM:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 4.1 反命题树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -395,6 +405,7 @@ graph TD
 ---
 
 ### 4.2 边界极限
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -514,6 +525,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```rust
@@ -690,4 +702,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

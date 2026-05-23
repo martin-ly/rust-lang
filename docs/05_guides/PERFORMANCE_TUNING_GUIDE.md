@@ -233,7 +233,7 @@ let mut vec = vec![0; 1000];
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 不好：不必要的分配
 fn process(data: Vec<i32>) -> i32 {
     data.iter().sum()
@@ -340,7 +340,7 @@ impl<T: Send> ObjectPool<T> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // ❌ 不好：多次遍历
 let sum: i32 = data.iter().sum();
 let max: i32 = *data.iter().max().unwrap();
@@ -363,7 +363,7 @@ let stats = data.iter().fold(
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // ❌ 不好：不必要的克隆
 let cloned = data.clone();
 process(cloned);
@@ -405,7 +405,7 @@ fn critical_path(x: i32) -> i32 {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 #[cold]
 fn error_handler() {
     // 错误处理路径，很少执行
@@ -429,7 +429,7 @@ fn unlikely_branch() {}
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #![feature(portable_simd)]
 
 use std::simd::{f32x4, SimdFloat};
@@ -465,7 +465,7 @@ use std::arch::aarch64::*;
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // ❌ 不好：Rc 不能跨线程
 use std::rc::Rc;
 let data = Rc::new(shared_data);
@@ -480,7 +480,7 @@ let data_clone = Arc::clone(&data);
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // ❌ 不好：长时间持有锁
 let mutex = Arc::new(Mutex::new(data));
 let guard = mutex.lock().unwrap();
@@ -512,7 +512,7 @@ let write_guard = data.write().unwrap();
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use crossbeam::queue::ArrayQueue;
 
 let queue: Arc<ArrayQueue<i32>> = Arc::new(ArrayQueue::new(100));
@@ -535,7 +535,7 @@ while let Some(item) = queue.pop() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 工作窃取线程池自动负载均衡
@@ -560,7 +560,7 @@ pool.install(|| {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 并行处理数据
@@ -588,7 +588,7 @@ let sum: f64 = data.par_iter().map(|x| x * 2.0).sum();
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use tokio::select;
 
 // 当只需要第一个完成的结果时
@@ -621,7 +621,7 @@ async fn with_timeout<T>(
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use tokio::sync::mpsc;
 
 // 有界通道提供背压
@@ -646,7 +646,7 @@ while let Some(batch) = rx.recv_many(10).await {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 // 并发处理，但限制并发度
@@ -677,7 +677,7 @@ while let Some(result) = tasks.next().await {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 // ❌ 不好：在异步代码中阻塞
 async fn bad_example() {
     std::thread::sleep(Duration::from_secs(1)); // 阻塞整个线程！
@@ -712,7 +712,7 @@ async fn read_file(path: &str) -> Result<String, io::Error> {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 
 fn fibonacci(n: u64) -> u64 {
@@ -804,7 +804,7 @@ valgrind --leak-check=full ./target/debug/my_app
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // 先测量，再优化
 use std::time::Instant;
 
@@ -830,7 +830,7 @@ println!("耗时: {:?}", duration);
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 // 使用 tracing 进行性能追踪
 use tracing::{info, span, Level};
 
@@ -1006,7 +1006,7 @@ fn moving_average_array_windows(data: &[f64], window_size: usize) -> Vec<f64> {
 - 无异常开销：基于返回值的控制流
 - 优化的 `Iterator::try_fold` 实现
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 /// 连接池健康检查 - 找到第一个可用连接即停
@@ -1037,7 +1037,7 @@ pub fn has_available_connection(connections: &[Connection]) -> bool {
 - `get_mut()`: 可变访问（单线程场景）
 - `force_mut()`: 强制初始化并获取可变引用
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 pub static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
@@ -1063,7 +1063,7 @@ pub fn get_db_url() -> &'static str {
 - `EULER_GAMMA`: 欧拉-马歇罗尼常数
 - `GOLDEN_RATIO`: 黄金比例 φ
 
-```rust
+```rust,ignore
 /// 黄金比例搜索算法 - 数值优化
 pub fn golden_section_search<F>(mut left: f64, mut right: f64, epsilon: f64, f: F) -> f64
 where

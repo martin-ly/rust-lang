@@ -31,6 +31,7 @@
   - [五、来源与延伸阅读](#五来源与延伸阅读)
     - [编译验证示例](#编译验证示例)
   - [相关概念文件](#相关概念文件)
+  - [权威来源索引](#权威来源索引)
 
 ---
 
@@ -41,6 +42,7 @@
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 1.1 无类型 Lambda 演算
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```text
@@ -82,6 +84,7 @@ Lambda 演算语法:
 ---
 
 ### 1.2 类型化 Lambda 演算
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```text
@@ -121,6 +124,7 @@ Lambda 演算语法:
 ---
 
 ### 1.3 Rust 闭包与 Lambda
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```text
@@ -167,6 +171,7 @@ Rust 闭包:
 > [来源: [TRPL](https://doc.rust-lang.org/book/)]
 
 ### 2.1 Church 编码
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```text
@@ -202,6 +207,7 @@ Church 编码:
 ---
 
 ### 2.2 Y 组合子
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ```text
@@ -249,6 +255,7 @@ Y 组合子:
 > [来源: [Rust Reference](https://doc.rust-lang.org/reference/)]
 
 ### 3.1 反命题树
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -270,6 +277,7 @@ graph TD
 ---
 
 ### 3.2 边界极限
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```text
@@ -387,6 +395,7 @@ fn main() {
 ```
 
 ### 编译验证示例
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```rust
@@ -568,4 +577,3 @@ fn main() {
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

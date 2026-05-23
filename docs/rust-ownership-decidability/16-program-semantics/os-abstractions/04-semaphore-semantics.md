@@ -208,7 +208,7 @@ impl Semaphore {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 use std::sync::Arc;
 use tokio::task;
@@ -507,7 +507,7 @@ mod modern_impl {
 ### 6.2 Rust 实现
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, Semaphore as StdSemaphore};
 use std::thread;
 

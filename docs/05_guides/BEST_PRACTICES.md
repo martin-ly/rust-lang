@@ -121,6 +121,7 @@
   - [思维导图：Rust 最佳实践体系](#思维导图rust-最佳实践体系)
   - [决策树：错误处理策略选择](#决策树错误处理策略选择)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -185,7 +186,7 @@ fn good_process(data: &[i32]) -> i32 {
 
 **✅ 最佳实践**: 使用新类型模式、枚举而非魔法数字、Option 而非 null
 
-```rust
+```rust,ignore
 // 新类型模式
 pub struct UserId(u64);
 pub struct OrderId(u64);
@@ -220,7 +221,7 @@ fn find_user(id: UserId) -> Option<User> {
 
 **✅ 最佳实践**: 使用 Result 和 ? 操作符、自定义错误类型、有意义的错误信息
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 #[derive(Error, Debug)]
@@ -293,7 +294,7 @@ fn process_string(s: Cow<str>) -> String {
 
 **✅ 最佳实践**: 迭代器链、collect 指定类型、enumerate 获取索引
 
-```rust
+```rust,ignore
 // 迭代器链 - 零成本抽象
 let sum: i32 = data.iter()
     .filter(|&&x| x > 0)
@@ -351,7 +352,7 @@ fn error_handler() {
 
 **✅ 最佳实践**: 实现 Error + Display、thiserror 等
 
-```rust
+```rust,ignore
 use thiserror::Error;
 use std::fmt;
 
@@ -389,7 +390,7 @@ impl std::error::Error for CustomError {}
 
 **✅ 最佳实践**: ? 操作符、map_err 转换
 
-```rust
+```rust,ignore
 fn process_file(path: &str) -> Result<Vec<u8>, AppError> {
     // ? 操作符自动转换错误类型
     let content = std::fs::read(path)?;
@@ -448,7 +449,7 @@ mod tests {
 
 **✅ 最佳实践**: tests/ 目录、完整工作流测试
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_crate::*;
 
@@ -494,7 +495,7 @@ fn test_concurrent_access() {
 
 **✅ 最佳实践**: /// 示例块、可运行示例
 
-```rust
+```rust,ignore
 /// 计算两个数的和
 ///
 /// # Examples
@@ -529,7 +530,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 **✅ 最佳实践**: Arguments、Returns、Examples 块
 
-```rust
+```rust,ignore
 /// 处理用户输入并返回处理结果
 ///
 /// # Arguments
@@ -586,7 +587,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
         cargo add my_crate
         ```
 
-        ```rust
+        ```rust,ignore
         use my_crate::Client;
 
         let client = Client::new();
@@ -612,7 +613,7 @@ pub fn process(input: &str, options: &Options) -> Result<ProcessResult, ProcessE
 
 **✅ 最佳实践**: 空值检查、长度限制、类型校验
 
-```rust
+```rust,ignore
 use validator::{Validate, ValidationError};
 
 #[derive(Debug, Validate)]
@@ -640,7 +641,7 @@ fn process_input(input: &UserInput) -> Result<(), ValidationError> {
 
 **✅ 最佳实践**: RAII、Drop 实现、避免泄漏
 
-```rust
+```rust,ignore
 pub struct ResourceHandle {
     handle: *mut c_void,
 }
@@ -758,7 +759,7 @@ fn get_count() -> usize {
 
 **✅ 最佳实践**: async fn、.await、避免阻塞
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 async fn fetch_data(url: &str) -> Result<String, reqwest::Error> {
@@ -794,7 +795,7 @@ async fn cpu_intensive_task(data: Vec<u8>) -> Vec<u8> {
 
 **✅ 最佳实践**: Result 传播、`Box<dyn Error>`
 
-```rust
+```rust,ignore
 use std::error::Error;
 
 async fn complex_operation() -> Result<(), Box<dyn Error + Send + Sync>> {
@@ -827,7 +828,7 @@ enum AsyncError {
 
 **✅ 最佳实践**: pub mod、分层结构
 
-```rust
+```rust,ignore
 // lib.rs
 pub mod core {
     pub mod engine;
@@ -962,6 +963,7 @@ cargo clippy -- -D warnings
 ```
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [Rust 项目最佳实践指南](#rust-项目最佳实践指南)
@@ -1066,6 +1068,7 @@ cargo clippy -- -D warnings
   - [思维导图：Rust 最佳实践体系](#思维导图rust-最佳实践体系)
   - [决策树：错误处理策略选择](#决策树错误处理策略选择)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ### 11.2 rustfmt
 
@@ -1110,7 +1113,7 @@ mockall = "0.12"
 
 **✅ 最佳实践**: criterion、benches/ 目录
 
-```rust
+```rust,ignore
 // benches/my_benchmark.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
@@ -1158,7 +1161,7 @@ cargo valgrind --bin my_app
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::fmt;
 use std::str::FromStr;
 
@@ -1196,7 +1199,7 @@ impl FromStr for UserId {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 #[derive(Debug, Clone)]
 pub struct Config {
     host: String,
@@ -1263,7 +1266,7 @@ let config = Config::builder()
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // 状态标记类型
 pub struct Idle;
 pub struct Running {
@@ -1330,6 +1333,7 @@ println!("运行时长: {:?}", stopped.duration());
 ---
 
 ## 14. 使用场景
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 场景1: 新项目启动
@@ -1376,6 +1380,7 @@ println!("运行时长: {:?}", stopped.duration());
 ---
 
 ## 15. 形式化链接
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 链接类型 | 目标文档 |
@@ -1394,6 +1399,7 @@ println!("运行时长: {:?}", stopped.duration());
 ---
 
 ## 相关资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方资源
@@ -1425,6 +1431,7 @@ println!("运行时长: {:?}", stopped.duration());
 - [C06 异步](../../crates/c06_async/docs/00_MASTER_INDEX.md)
 
 ## Rust 1.95+ 最佳实践（深度指南）
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.95.0+
@@ -1506,7 +1513,7 @@ fn bad_example(data: &[i32], n: usize) -> Vec<i32> {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // ✅ 推荐：使用 ControlFlow 构建验证管道
@@ -1540,7 +1547,7 @@ fn validate_and_process(input: &UserInput) -> ControlFlow<ValidationError, Proce
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // ✅ 推荐：使用 ControlFlow 进行短路搜索
 fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection> {
     match connections.iter().try_fold(
@@ -1569,7 +1576,7 @@ fn find_first_valid_connection(connections: &[Connection]) -> Option<&Connection
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 static CONFIG: LazyLock<AppConfig> = LazyLock::new(|| {
@@ -1604,7 +1611,7 @@ impl DatabasePool {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 // ✅ 推荐：单线程延迟初始化 + 可变更新
@@ -1723,7 +1730,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // array_windows - 零开销窗口迭代
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)
@@ -1761,6 +1768,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ## 🆕 新增最佳实践
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **最后更新**: 2026-05-08
@@ -1768,6 +1776,7 @@ let gamma = f64::consts::EULER_GAMMA;
 ---
 
 ### 1. isqrt - 整数平方根运算
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 #### 什么时候使用 isqrt？
@@ -1834,6 +1843,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 ---
 
 ### 2. HashMap::get_disjoint_mut - 安全并行访问
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 #### 什么时候使用 get_disjoint_mut？
@@ -1848,7 +1858,7 @@ fn bad_distance(p1: (i64, i64), p2: (i64, i64)) -> i64 {
 
 #### 最佳实践：并发状态管理
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 
 // ✅ 推荐：使用 get_disjoint_mut 进行并行状态更新
@@ -1910,7 +1920,7 @@ pub fn update_multiple_configs(updates: &[(&str, &str)]) -> Result<(), String> {
 
 #### 常见模式
 
-```rust
+```rust,ignore
 // 模式 1: 两键交换
 let [Some(a), Some(b)] = map.get_disjoint_mut(["key1", "key2"]) else {
     return;
@@ -1940,11 +1950,12 @@ fn upsert_and_update(map: &mut HashMap<String, i32>, insert_key: &str, update_ke
 ---
 
 ### 3. async Fn Trait - 异步抽象改进
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 #### 最佳实践：清晰的异步 Trait 定义
 
-```rust
+```rust,ignore
 // ✅ Rust 1.85/Edition 2024: 更自然的异步 trait 定义
 pub trait DataProcessor {
     async fn process(&self, data: Vec<u8>) -> Result<ProcessedData, Error>;
@@ -1997,7 +2008,7 @@ where
 
 #### 与 ControlFlow 结合
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 // ✅ 推荐：异步验证管道
@@ -2022,11 +2033,12 @@ where
 ---
 
 ### 4. Vec::pop_if - 条件弹出
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 #### 最佳实践：栈和队列操作
 
-```rust
+```rust,ignore
 // ✅ 推荐：使用 pop_if 进行条件弹出
 pub struct TaskQueue {
     tasks: Vec<Task>,
@@ -2089,6 +2101,7 @@ impl<K: Eq, V> LRUCache<K, V> {
 ---
 
 ### 5. 综合性能优化检查清单
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 #### isqrt 优化
@@ -2112,11 +2125,12 @@ impl<K: Eq, V> LRUCache<K, V> {
 ---
 
 ### 6. 版本兼容性与迁移指南
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 #### 从 1.95+ 迁移到新版本
 
-```rust
+```rust,ignore
 // 1.95+ 代码：浮点平方根
 fn old_sqrt(n: u64) -> u64 {
     (n as f64).sqrt() as u64
@@ -2160,9 +2174,10 @@ trait NewProcessor {
 ---
 
 ### 7. 快速参考卡片
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // isqrt - 整数平方根
 let sqrt = n.isqrt();  // 精确计算，无浮点误差
 
@@ -2227,6 +2242,7 @@ fn process_with_control_flow(data: &[i64]) -> ControlFlow<Error, Vec<i64>> {
 ---
 
 ## 思维导图：Rust 最佳实践体系
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```mermaid
@@ -2251,6 +2267,7 @@ graph TD
 ---
 
 ## 决策树：错误处理策略选择
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```mermaid
@@ -3029,4 +3046,3 @@ graph TD
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

@@ -1,4 +1,5 @@
 # 交互式学习资源
+> **相关概念**: [Rc](../../../../concept/02_intermediate/03_memory_management.md)
 
 > **Bloom 层级**: 理解
 
@@ -107,7 +108,7 @@ docker run -it rust:1.81-slim
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,compile_fail
 //! 在线实验: 安全LED闪烁器
 //! 平台: https://wokwi.com/
 

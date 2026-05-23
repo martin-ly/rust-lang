@@ -420,7 +420,7 @@ fn anti_pattern() {
 
 **反例**:
 
-```rust
+```rust,ignore
 // ❌ 2024 Edition: 编译错误
 // static mut COUNTER: u32 = 0;
 // unsafe { COUNTER += 1; }  // deny-by-default
@@ -515,7 +515,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 // 1.95+ 新增模块
 use core::range::RangeInclusive;
 
@@ -549,7 +549,7 @@ fn range_contains_benchmark() {
 
 **What not (反例)**:
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 // ❌ 错误：RangeInclusive 是包含端点的，容易与半开区间混淆
@@ -691,7 +691,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 enum Message {
     Request { id: u64, payload: Option<String> },
@@ -751,7 +751,7 @@ fn handle_state(state: ConnectionState) -> &'static str {
 
 **What not (反例)**:
 
-```rust
+```rust,ignore
 // ❌ 旧方式：嵌套 if let 导致箭头代码
 fn old_way(msg: Message) -> String {
     match msg {
@@ -799,7 +799,7 @@ fn old_way(msg: Message) -> String {
 
 **反例：混淆两者的使用场景**:
 
-```rust
+```rust,ignore
 // ✅ let chains：用于 if/while 条件
 fn let_chains_example(opt: Option<i32>) {
     if let Some(x) = opt && x > 0 {
@@ -890,7 +890,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 // 2021 Edition：隐式捕获所有输入生命周期
 // fn foo<'a, 'b>(x: &'a str, y: &'b str) -> impl Iterator<Item = char> {
 //     x.chars().chain(y.chars())
@@ -925,7 +925,7 @@ fn process<T: Clone, U>(data: T, _config: U) -> impl Clone + use<T> {
 
 **What not (反例)**:
 
-```rust
+```rust,ignore
 // ❌ 错误：在 2021 Edition 中使用 use<> 语法
 // #![edition = "2021"]
 // fn bad() -> impl Sized + use<> {}  // 编译错误
@@ -981,7 +981,7 @@ graph LR
 
 **预研代码**（需要 nightly）:
 
-```rust
+```rust,ignore
 #![feature(async_fn_in_dyn_trait)]
 
 trait DataSource {
@@ -1084,7 +1084,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // 1.95+ 之前的 CAS 循环（样板代码多）
@@ -1136,7 +1136,7 @@ fn toggle_flag(flag: &AtomicBool) -> bool {
 
 **What not (反例)**:
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 // ❌ 错误：update 闭包中不能访问外部可变状态
@@ -1413,7 +1413,7 @@ RTN 允许在 trait bound 中标注返回类型属性。
 
 **预研语法**:
 
-```rust
+```rust,ignore
 #![feature(return_type_notation)]
 
 // 问题：不知道 fetch 返回的 Future 是否 Send
@@ -1446,7 +1446,7 @@ where
 
 **迁移策略**:
 
-```rust
+```rust,ignore
 // 旧代码 (async-std)
 // use async_std::task;
 // task::spawn(async { ... });
@@ -1659,7 +1659,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 use core::range::RangeInclusive;
 
 // 区间覆盖检查
@@ -1934,7 +1934,7 @@ graph TD
 
 **How**:
 
-```rust
+```rust,ignore
 // 1.95+ cfg_select!
 use core::macros::cfg_select;
 
@@ -2194,7 +2194,7 @@ fn comparison() {
 
 **What not (反例)**:
 
-```rust
+```rust,ignore
 // ❌ 错误：绝对不能在可能为 null 的指针上使用
 fn dangerous(raw: *const u8) -> &u8 {
     unsafe { raw.as_ref_unchecked() }  // UB if raw is null!

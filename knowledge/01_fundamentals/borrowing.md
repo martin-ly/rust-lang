@@ -234,7 +234,7 @@ fn main() {
 
 **❌ 错误示例**：
 
-```rust
+```rust,ignore
 fn dangle() -> &String {  // 返回引用
     let s = String::from("hello");
     &s  // 返回局部变量的引用
@@ -310,7 +310,7 @@ fn analyze(data: &[i32]) -> i32 {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 let mut data = vec![1, 2, 3];
 {
     let first = &mut data[0];
@@ -323,7 +323,7 @@ let second = &data[1];  // ✅ 可以再次借用
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // ✅ 接受 &str 而非 &String
 fn first_word(s: &str) -> &str { ... }
 
@@ -342,7 +342,7 @@ first_word("literal");
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 let first = &v[0];
 // ❌ v.push(4);  // 编译错误！push 可能重新分配内存
@@ -354,7 +354,7 @@ v.push(4);  // ✅ 引用使用完后再修改
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 let mut s = String::from("hello");
 let r = &s;  // ❌ 不可变引用无法修改
 // r.push_str(" world");  // 错误！
@@ -367,7 +367,7 @@ r.push_str(" world");
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误
 fn bad() -> &String {
     let s = String::from("hi");
@@ -431,7 +431,7 @@ fn make_uppercase(s: &mut String) {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,compile_fail
 fn main() {
     let mut s = String::from("hello");
     let r1 = &s;

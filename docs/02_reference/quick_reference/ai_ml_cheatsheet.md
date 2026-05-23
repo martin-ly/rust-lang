@@ -51,6 +51,7 @@
   - [**最后更新**: 2026-05-08 (AI/ML 场景深度整合)](#最后更新-2026-05-08-aiml-场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -83,7 +84,7 @@ burn = "0.20"
 burn-ndarray = "0.20"
 ```
 
-```rust
+```rust,ignore
 use burn::tensor::{Tensor, backend::NdArray};
 
 fn main() {
@@ -109,6 +110,7 @@ fn main() {
 ```
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [🤖 Rust AI/ML 速查卡](#-rust-aiml-速查卡)
@@ -150,6 +152,7 @@ fn main() {
   - [**最后更新**: 2026-05-08 (AI/ML 场景深度整合)](#最后更新-2026-05-08-aiml-场景深度整合)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ### 示例 2: 简单神经网络
 
@@ -157,7 +160,7 @@ fn main() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use burn::{
     module::Module,
     nn::{Linear, ReLU, Softmax},
@@ -197,7 +200,7 @@ impl<B: burn::tensor::backend::Backend> Net<B> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use burn::tensor::{Tensor, backend::NdArray};
 
 fn inference<B: burn::tensor::backend::Backend>(
@@ -234,7 +237,7 @@ candle-core = "0.8"
 candle-nn = "0.8"
 ```
 
-```rust
+```rust,ignore
 use candle_core::{Device, Result, Tensor};
 
 fn main() -> Result<()> {
@@ -262,7 +265,7 @@ fn main() -> Result<()> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use candle_core::{Device, Result};
 use candle_nn::VarBuilder;
 use hf_hub::{api::sync::Api, Repo, RepoType};
@@ -302,7 +305,7 @@ fn load_model(model_id: &str) -> Result<()> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use llm::Model;
 
 fn llm_inference() -> anyhow::Result<()> {
@@ -358,6 +361,7 @@ fn llm_inference() -> anyhow::Result<()> {
 ---
 
 ## 与 C01–C12 关联
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 | 模块 | AI/ML 中的关联 |
@@ -371,13 +375,14 @@ fn llm_inference() -> anyhow::Result<()> {
 ---
 
 ## 🎯 使用场景
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 场景 1: 图像分类服务
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 使用 Candle 构建图像分类微服务
 use candle_core::{Device, Tensor};
 use candle_nn::Module;
@@ -401,7 +406,7 @@ impl ImageClassifier {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 使用 Burn 实现流式文本生成
 use burn::tensor::backend::Backend;
 
@@ -424,6 +429,7 @@ async fn stream_generate<B: Backend>(
 ---
 
 ## 📐 形式化方法链接
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 理论基础
@@ -448,6 +454,7 @@ async fn stream_generate<B: Backend>(
 ---
 
 ## 🚫 反例速查
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 反例 1: 混淆不同框架的 API
@@ -456,7 +463,7 @@ async fn stream_generate<B: Backend>(
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ Burn 与 Candle 的 Tensor 创建方式不同，不可混用
 use burn::tensor::Tensor as BurnTensor;
 use candle_core::Tensor as CandleTensor;
@@ -472,7 +479,7 @@ fn bad() {
 
 **修正**: 选定一个框架后统一使用其 API，或通过 trait 抽象隔离。
 
-```rust
+```rust,ignore
 // ✅ 使用 trait 抽象
 pub trait TensorOps {
     fn add(&self, other: &Self) -> Self;
@@ -491,7 +498,7 @@ impl<B: Backend, const D: usize> TensorOps for Tensor<B, D> { ... }
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 大模型推理在 CPU 上运行，未考虑 GPU 加速
 use candle_core::Device;
 
@@ -506,7 +513,7 @@ fn slow_inference() {
 
 **修正**: 使用 `Device::Cuda(0)` 或 `llm` 的量化模型。
 
-```rust
+```rust,ignore
 // ✅ 选择合适后端
 use candle_core::Device;
 
@@ -593,7 +600,7 @@ struct TensorCache {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 // ❌ 未处理空张量
 fn normalize(tensor: &Tensor) -> Tensor {
     tensor / tensor.sum()  // 空张量 sum 为 0，导致除零
@@ -604,7 +611,7 @@ fn normalize(tensor: &Tensor) -> Tensor {
 
 **修正**: 添加边界检查。
 
-```rust
+```rust,ignore
 // ✅ 边界检查
 fn normalize(tensor: &Tensor) -> Option<Tensor> {
     let sum = tensor.sum().into_scalar();
@@ -619,6 +626,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 ---
 
 ## 相关文档
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - [AI+Rust 生态指南](../../05_guides/AI_RUST_ECOSYSTEM_GUIDE.md)
@@ -626,6 +634,7 @@ fn normalize(tensor: &Tensor) -> Option<Tensor> {
 - [Burn](https://burn.dev/) | [Candle](https://github.com/huggingface/candle) | [llm](https://docs.rs/llm)
 
 ## 相关示例代码
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 AI/ML 示例代码位于指南与外部仓库，可直接参考：
@@ -637,6 +646,7 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 ---
 
 ## Rust 1.95+ 在 AI/ML 中的深度应用
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **适用版本**: Rust 1.95.0+ | **实际场景**: 机器学习推理与训练
@@ -651,7 +661,7 @@ AI/ML 示例代码位于指南与外部仓库，可直接参考：
 
 **Rust 1.95+ 解决方案**:
 
-```rust
+```rust,ignore
 /// 时间窗口特征提取（零分配）
 pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
     signal.array_windows::<10>()
@@ -680,7 +690,7 @@ pub fn extract_time_window_features(signal: &[f32]) -> Vec<WindowFeatures> {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局模型缓存（延迟初始化）
@@ -710,7 +720,7 @@ pub fn batch_classify(images: Vec<Vec<f32>>) -> Vec<Vec<f32>> {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 type TrainResult<T> = ControlFlow<TrainError, T>;
@@ -740,7 +750,7 @@ pub fn training_step<B: Backend>(
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 黄金分割搜索最优学习率
 pub fn golden_section_lr_search<F>(
     evaluate: F,
@@ -768,7 +778,7 @@ pub fn harmonic_lr_schedule(initial_lr: f64, epoch: usize) -> f64 {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 pub struct RecommendationService {
     user_model: LazyLock<UserEmbeddingModel>,
     item_model: LazyLock<ItemEmbeddingModel>,
@@ -830,6 +840,7 @@ impl RecommendationService {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [quick_reference 目录](./README.md)
@@ -1084,4 +1095,3 @@ impl RecommendationService {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

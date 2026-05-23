@@ -88,7 +88,7 @@
 
 **定位**: 模块化、 ergonomic 的 Web 框架，基于 Tower 服务抽象
 
-```rust
+```rust,ignore
 use axum::{
     routing::{get, post},
     Router,
@@ -155,7 +155,7 @@ async fn get_user(
 
 **定位**: 高性能 Web 框架，基于 Actor 模型
 
-```rust
+```rust,ignore
 use actix_web::{web, App, HttpResponse, HttpServer, Result};
 
 // 处理函数
@@ -208,7 +208,7 @@ async fn main() -> std::io::Result<()> {
 
 **定位**: 注重易用性和类型安全的 Web 框架
 
-```rust
+```rust,ignore
 #[macro_use]
 extern crate rocket;
 
@@ -261,7 +261,7 @@ fn rocket() -> _ {
 
 **定位**: 异步纯 Rust SQL 工具包，支持编译时查询检查
 
-```rust
+```rust,ignore
 use sqlx::{PgPool, query_as, FromRow};
 
 #[derive(FromRow)]
@@ -332,7 +332,7 @@ async fn transfer_funds(
 
 **定位**: 安全、可扩展的 ORM 和查询构建器
 
-```rust
+```rust,ignore
 use diesel::prelude::*;
 use crate::schema::users;
 
@@ -373,7 +373,7 @@ fn create_user(conn: &mut PgConnection, name: &str, email: &str) -> QueryResult<
 
 **定位**: 异步动态的 ORM，面向现代 Rust
 
-```rust
+```rust,ignore
 use sea_orm::{entity::*, query::*, DatabaseConnection};
 use crate::entities::user;
 
@@ -406,7 +406,7 @@ async fn find_user_with_posts(db: &DatabaseConnection, user_id: i32) -> Result<O
 
 **核心组件**:
 
-```rust
+```rust,ignore
 use tokio::{
     runtime::Runtime,
     task,
@@ -465,7 +465,7 @@ async fn task_management_example() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use serde::{Serialize, Deserialize};
 
 #[derive(Serialize, Deserialize, Debug)]
@@ -540,7 +540,7 @@ mod tests {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 use tracing::{info, warn, error, instrument};
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 

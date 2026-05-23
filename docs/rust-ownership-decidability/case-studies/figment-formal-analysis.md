@@ -91,7 +91,7 @@ Figment 是一个 Rust 生态中的配置管理库，由 Sergio Benitez（Rocket
 
 在应用程序开发中，配置管理通常面临以下挑战：
 
-```rust
+```rust,ignore
 // ❌ 传统方式的痛点
 // 1. 硬编码默认值
 const PORT: u16 = 8080;
@@ -114,7 +114,7 @@ if port > 65535 {
 
 Figment 通过统一的配置模型解决这些问题：
 
-```rust
+```rust,ignore
 // ✅ Figment 方式
 #[derive(Deserialize)]
 struct AppConfig {
@@ -160,7 +160,7 @@ let config: AppConfig = Figment::new()
 
 Provider 是 Figment 的核心抽象，定义配置数据的来源：
 
-```rust
+```rust,ignore
 /// Provider trait 的核心定义
 pub trait Provider {
     /// 提供数据的元数据描述
@@ -199,7 +199,7 @@ Figment 内置了多种常用 Provider：
 
 **嵌套环境变量示例**:
 
-```rust
+```rust,ignore
 // 环境变量: APP_DATABASE__URL=postgres://localhost/db
 // 双下划线表示嵌套层级
 
@@ -220,7 +220,7 @@ let figment = Figment::new()
 
 Figment 使用后进优先（Last-Write-Wins）策略合并配置源：
 
-```rust
+```rust,ignore
 /// 后进优先合并原理
 let figment = Figment::new()
     .merge(Toml::file("defaults.toml"))  // 优先级: 1 (最低)
@@ -249,7 +249,7 @@ let figment = Figment::new()
 
 对于嵌套对象，Figment 执行深度合并而非简单替换：
 
-```rust
+```rust,ignore
 // defaults.toml
 [database]
 host = "localhost"
@@ -267,7 +267,7 @@ host = "prod.db.example.com"
 
 **合并算法伪代码**:
 
-```rust
+```rust,ignore
 fn merge_deep(base: Value, override: Value) -> Value {
     match (base, override) {
         // 都是对象，递归合并
@@ -293,7 +293,7 @@ fn merge_deep(base: Value, override: Value) -> Value {
 
 数组在合并时有特殊行为：**整个数组被替换，而非数组合并**：
 
-```rust
+```rust,ignore
 // config.toml
 hosts = ["localhost:8080"]
 
@@ -351,7 +351,7 @@ log_level = "normal"
 
 Figment 提供多种方式选择当前 Profile：
 
-```rust
+```rust,ignore
 use figment::{Figment, Profile};
 use figment::providers::{Toml, Env};
 
@@ -374,7 +374,7 @@ let figment = Figment::new()
 
 **Profile 继承机制**:
 
-```rust
+```rust,ignore
 // 使用 .select() 时，Figment 会:
 // 1. 优先使用选定 Profile 的配置
 // 2. 对于缺失的键，回退到 default Profile
@@ -400,7 +400,7 @@ let figment = Figment::new()
 
 Figment 的核心提取机制基于 serde：
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 #[derive(Deserialize, Debug)]
@@ -441,7 +441,7 @@ let config: AppConfig = figment.extract()?;
 
 Figment 提供详细的错误信息：
 
-```rust
+```rust,ignore
 use figment::Error;
 
 match figment.extract::<AppConfig>() {
@@ -470,7 +470,7 @@ match figment.extract::<AppConfig>() {
 
 结合 serde 和自定义验证：
 
-```rust
+```rust,ignore
 use serde::{Deserialize, Deserializer};
 use validator::{Validate, ValidationError};
 
@@ -513,7 +513,7 @@ config.validate()?;  // 运行 validator 验证
 
 Figment 的 Env Provider 提供强大的环境变量处理能力：
 
-```rust
+```rust,ignore
 use figment::providers::Env;
 
 // 基本用法：带前缀的环境变量
@@ -529,7 +529,7 @@ let figment = Figment::new()
 
 灵活的前缀和过滤策略：
 
-```rust
+```rust,ignore
 use figment::providers::Env;
 
 // 方式1: 简单前缀
@@ -554,7 +554,7 @@ let env = Env::prefixed("APP_")
 
 通过分隔符实现嵌套配置映射：
 
-```rust
+```rust,ignore
 // 环境变量定义
 // APP_DATABASE__URL=postgres://localhost/mydb
 // APP_DATABASE__POOL__SIZE=20
@@ -597,7 +597,7 @@ let figment = Figment::new()
 
 Figment 原生支持三种主流配置格式：
 
-```rust
+```rust,ignore
 use figment::providers::{Json, Yaml, Toml};
 
 let figment = Figment::new()
@@ -666,7 +666,7 @@ description: |
 
 虽然 Figment 本身不提供文件监听，但可结合 `notify` crate 实现：
 
-```rust
+```rust,ignore
 use notify::{Watcher, RecursiveMode, watcher};
 use std::sync::mpsc::channel;
 use std::time::Duration;
@@ -741,7 +741,7 @@ impl<T: for<'de> Deserialize<'de> + Send + Sync + 'static> ReloadableConfig<T> {
 
 实现 Provider trait 可创建自定义配置源：
 
-```rust
+```rust,ignore
 use figment::{Provider, Error, Profile};
 use figment::value::{Dict, Map};
 
@@ -804,7 +804,7 @@ let figment = Figment::new()
 
 更完整的远程配置 Provider 示例：
 
-```rust
+```rust,ignore
 use reqwest;
 use serde_json::Value as JsonValue;
 
@@ -931,7 +931,7 @@ let figment = Figment::new()
 
 Figment 最初为 Rocket 设计，集成最为原生：
 
-```rust
+```rust,ignore
 use rocket::figment::{Figment, Profile};
 use rocket::figment::providers::{Toml, Env};
 
@@ -978,7 +978,7 @@ url = "postgres://prod-db.example.com/rocket_db"
 
 在 Axum 中使用 Figment：
 
-```rust
+```rust,ignore
 use axum::{routing::get, Router, extract::State};
 use std::sync::Arc;
 use figment::{Figment, Provider};
@@ -1071,7 +1071,7 @@ async fn main() {
 
 推荐的配置分层结构：
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 // 顶层配置
@@ -1126,7 +1126,7 @@ impl Default for ServerConfig {
 
 敏感信息的安全处理方案：
 
-```rust
+```rust,ignore
 use std::env;
 use figment::providers::Env;
 
@@ -1153,7 +1153,7 @@ name = "myapp"
 
 **使用密钥管理服务**（如 AWS Secrets Manager、Azure Key Vault）：
 
-```rust
+```rust,ignore
 /// 密钥管理 Provider
 struct SecretsManagerProvider {
     client: aws_sdk_secretsmanager::Client,
@@ -1189,7 +1189,7 @@ impl Provider for SecretsManagerProvider {
 
 合理的默认值设计模式：
 
-```rust
+```rust,ignore
 use serde::Deserialize;
 
 #[derive(Deserialize, Clone, Debug)]
@@ -1238,7 +1238,7 @@ enum SslMode {
 
 以下是一个生产级应用的完整配置实现：
 
-```rust
+```rust,ignore
 //! 生产级配置管理示例
 //!
 //! 演示 Figment 在复杂场景下的完整使用方式
@@ -1827,7 +1827,7 @@ Figment 内部数据 → serde Deserializer → 目标类型 T: Deserialize
 
 > 对于嵌套对象，Figment 执行深度递归合并；对于数组，执行完全替换。
 
-```rust
+```rust,ignore
 // 对象：深度合并
 {a: {b: 1, c: 2}} + {a: {c: 3, d: 4}} = {a: {b: 1, c: 3, d: 4}}
 

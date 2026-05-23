@@ -77,7 +77,7 @@
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 //! Polars 数据处理完整示例
 
 use polars::prelude::*;
@@ -324,7 +324,7 @@ pub fn benchmark() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! DataFusion 分布式查询引擎
 
 use datafusion::prelude::*;
@@ -442,7 +442,7 @@ async fn main() -> Result<(), DataFusionError> {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! 实时流处理管道
 
 use tokio::sync::mpsc;
@@ -636,7 +636,7 @@ impl<T: Send + 'static> BackpressureProcessor<T> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! Kafka 流处理集成
 
 use rdkafka::config::ClientConfig;
@@ -726,7 +726,7 @@ impl KafkaProcessor {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 //! 嵌入式键值存储（基于 RocksDB）
 
 use rocksdb::{DB, Options, WriteBatch, IteratorMode};
@@ -823,7 +823,7 @@ impl From<Box<bincode::ErrorKind>> for StoreError {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 //! 简化列式存储引擎
 
 use arrow::array::{Array, ArrayRef, Int64Array, Float64Array, StringArray};
@@ -957,7 +957,7 @@ impl ColumnStore {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 //! Apache Arrow 数据处理
 
 use arrow::array::{Int64Array, Float64Array, StringArray, ArrayRef};
@@ -1020,7 +1020,7 @@ impl ArrowProcessor {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 //! Parquet 列式存储
 
 use parquet::file::properties::WriterProperties;
@@ -1088,7 +1088,7 @@ use parquet::basic::ZstdLevel;
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 //! ETL 管道实现
 
 use serde::{Serialize, Deserialize};
@@ -1259,7 +1259,7 @@ where
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 //! 实时指标计算引擎
 
 use std::collections::HashMap;
@@ -1379,7 +1379,7 @@ fn current_time_ms() -> u64 {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 //! 数据工程内存优化
 
 use std::sync::Arc;
@@ -1412,7 +1412,7 @@ struct ProcessedData<'a> { value: &'a str }
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 //! 数据并行处理
 
 use rayon::prelude::*;
@@ -1438,7 +1438,7 @@ where
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 //! 健壮的错误处理
 
 use thiserror::Error;

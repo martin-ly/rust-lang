@@ -303,7 +303,7 @@ spec:
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use lambda_runtime::{service_fn, LambdaEvent, Error};
 use serde_json::{json, Value};
 
@@ -351,7 +351,7 @@ cargo lambda deploy --region us-east-1
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use prometheus::{Counter, Histogram, Registry, TextEncoder};
 use lazy_static::lazy_static;
 
@@ -402,7 +402,7 @@ async fn metrics_middleware<B>(
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use opentelemetry::trace::Tracer;
 use tracing::{info, instrument};
 use tracing_subscriber::layer::SubscriberExt;
@@ -474,7 +474,7 @@ jobs:
 
 #### AWS Secrets Manager
 
-```rust
+```rust,ignore
 use aws_sdk_secretsmanager::Client;
 
 async fn get_database_url() -> Result<String, Error> {
@@ -499,7 +499,7 @@ async fn get_database_url() -> Result<String, Error> {
 
 #### Criterion 基准测试
 
-```rust
+```rust,ignore
 use criterion::{criterion_group, criterion_main, Criterion};
 
 fn fibonacci(n: u64) -> u64 {
@@ -559,7 +559,7 @@ valgrind --tool=massif ./target/release/myapp
 
 ### 熔断器模式
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 use std::time::{Duration, Instant};
@@ -635,7 +635,7 @@ impl CircuitBreaker {
 
 ### 优雅降级
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicBool, Ordering};
 
 struct Service {

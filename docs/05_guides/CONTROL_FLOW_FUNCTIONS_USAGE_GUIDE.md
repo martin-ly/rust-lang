@@ -9,6 +9,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [控制流与函数使用指南](#控制流与函数使用指南)
@@ -29,13 +30,14 @@
   - [🔗 相关文档](#-相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
 > **[来源: Rust Official Docs]**
 
 - [控制流与函数使用指南](#控制流与函数使用指南)
-  - [� 目录](#-目录)
+  - [📑 目录](#-目录)
   - [📋 目录](#-目录-1)
   - [📋 概述](#-概述)
   - [🚀 快速开始](#-快速开始)
@@ -52,6 +54,7 @@
   - [🔗 相关文档](#-相关文档)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -70,7 +73,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use c03_control_fn::control_flow_patterns::{
     MatchPatterns, LetChainPatterns, LoopPatterns
 };
@@ -106,7 +109,7 @@ fn main() {
 
 **示例：let chains**
 
-```rust
+```rust,ignore
 use c03_control_fn::control_flow_patterns::LetChainPatterns;
 
 fn process_nested_options() {
@@ -129,7 +132,7 @@ fn process_nested_options() {
 
 `control_struct/` 和 `items/` 模块展示函数定义的高级特性：
 
-```rust
+```rust,ignore
 use c03_control_fn::control_struct::define::{ControlFlowBuilder, ConditionalExecutor};
 
 // 构建复杂的条件执行链
@@ -149,7 +152,7 @@ fn conditional_execution() {
 
 `closure/` 模块深入解析闭包的捕获机制与类型系统：
 
-```rust
+```rust,ignore
 use c03_control_fn::closure::design::{ClosureDesigner, CaptureStrategy};
 
 fn closure_patterns() {
@@ -172,7 +175,7 @@ fn closure_patterns() {
 
 `pattern_matching/` 模块提供穷尽性检查和复杂模式：
 
-```rust
+```rust,ignore
 use c03_control_fn::pattern_matching::define::{
     PatternMatcher, DestructuringPattern, GuardPattern
 };
@@ -194,7 +197,7 @@ fn advanced_matching() {
 
 `if_let_guards_deep_dive/` 模块是 Rust 1.95 核心特性的深度解析：
 
-```rust
+```rust,ignore
 use c03_control_fn::if_let_guards_deep_dive::{
     IfLetGuardsSyntax, IfLetGuardsPatterns, IfLetGuardsMigrationGuide
 };
@@ -211,7 +214,7 @@ fn demonstrate_if_let_guards() {
 
 **if let guards 核心用法:**
 
-```rust
+```rust,ignore
 enum Message {
     Text(String),
     Image { url: String, size: u64 },
@@ -242,7 +245,7 @@ fn process_message(msg: Message, current_user: Option<User>) {
 
 `coroutine/` 和 `generator/` 模块提供异步控制流和生成器模式（部分为 nightly 特性）：
 
-```rust
+```rust,ignore
 use c03_control_fn::coroutine::CoroutineExample;
 use c03_control_fn::generator::GeneratorExample;
 
@@ -273,11 +276,12 @@ fn async_control_flow() {
 ---
 
 ## 🔧 错误处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 `error_handling/` 模块提供控制流中的错误处理模式：
 
-```rust
+```rust,ignore
 use c03_control_fn::error_handling::define::{
     ControlFlowResult, ErrorPropagation
 };
@@ -296,6 +300,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 ---
 
 ## 🐛 常见问题与解决方案
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -308,6 +313,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 ---
 
 ## 🔗 相关文档
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - **速查卡**: [control_flow_functions_cheatsheet.md](../02_reference/quick_reference/control_flow_functions_cheatsheet.md)
@@ -329,6 +335,7 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [05_guides 目录](./README.md)
@@ -454,4 +461,3 @@ fn robust_control_flow() -> ControlFlowResult<()> {
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

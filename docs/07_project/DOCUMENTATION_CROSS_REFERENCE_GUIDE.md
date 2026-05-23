@@ -779,7 +779,7 @@ graph TB
 ### 链接完整性检查
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! 文档链接完整性检查伪代码
 struct LinkValidator {
     /// 验证双向链接

@@ -29,6 +29,7 @@
 > [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.1 Wikipedia 权威定义
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Wikipedia: Macro (computer science)]** A macro (short for "macroinstruction") is a rule or pattern that specifies how a certain input sequence should be mapped to a replacement output sequence according to a defined procedure. The mapping process that instantiates a macro use into a specific sequence is known as macro expansion.
@@ -40,6 +41,7 @@
 > [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.2 TRPL 官方定义
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[TRPL: Ch19.5]** Macros are a way of writing code that writes other code, which is known as metaprogramming. In Appendix C, we discuss the derive attribute, which generates an implementation of various traits for you. We've also used the `println!` and `vec!` macros throughout the book. All of these macros expand to produce more code than the code you've written manually.
@@ -51,6 +53,7 @@
 > [来源: [Rust Reference] · [TRPL] · [RFCs]
 >
 ### 1.3 形式化定义
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 宏对应**编译期元编程**（compile-time metaprogramming），在语法树层面操作：
@@ -81,6 +84,7 @@ Rust 宏 hygiene:
 > [来源: [Rust Reference — Macros]]
 
 ### 2.1 宏类型对比矩阵
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 | **维度** | **macro_rules!** | **Derive 宏** | **属性宏** | **函数宏** |
@@ -94,6 +98,7 @@ Rust 宏 hygiene:
 | **编译期执行** | ✅ 展开阶段 | ✅ 展开阶段 | ✅ 展开阶段 | ✅ 展开阶段 |
 
 ### 2.2 Rust 宏 vs 其他语言元编程对比
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 | **语言** | **机制** | **卫生性** | **类型安全** | **操作层面** |
@@ -105,6 +110,7 @@ Rust 宏 hygiene:
 | **Nim** | 宏 + 模板 | ✅ 卫生 | ✅ 编译期执行 | AST |
 
 ### 2.3 宏展开在编译管道中的位置
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 ```text
@@ -143,6 +149,7 @@ Rust 宏 hygiene:
 > **[Kohlbecker et al. 1986 — Hygienic Macro Expansion, POPL]** Scheme's hygienic macro system, implemented via implicit identifier renaming (gensym), is the direct theoretical ancestor of Rust's macro hygiene. ✅ 已验证
 
 ### 3.1 Hygienic Macro 的形式化
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[Wikipedia: Hygienic macro]** Hygienic macros are macros whose expansion is guaranteed not to cause the accidental capture of identifiers. ✅ 已验证
@@ -226,6 +233,7 @@ fn main() {
 > **[TRPL: Ch19.5]** `macro_rules!` performs compile-time pattern matching on token trees, with fragment specifiers matching syntactic categories (`expr`, `ty`, `ident`) rather than semantic types. ✅ 已验证
 
 ### 3.2 声明宏的模式匹配语义
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -299,6 +307,7 @@ graph TD
 > **过渡说明**: 以下决策树将 L3 理论（卫生性、编译期展开）和 L2 概念（四种宏类型）转化为 L1 工程实践中的可执行判断。每个节点对应一个具体的编程困境，每条边对应一个形式化保证或工程约束。
 
 ### 5.1 "宏 vs 泛型/函数？" 决策树
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 ```mermaid
@@ -327,6 +336,7 @@ graph TD
 > [来源: [TRPL: Ch19.5](https://doc.rust-lang.org/book/ch19-06-macros.html)]
 
 ### 5.2 反命题决策树一："宏和函数等价"
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **命题来源**: 初学者常误认为宏只是"内联的函数"，二者可以互换。
@@ -356,6 +366,7 @@ graph TD
 > [来源: [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/book/)]
 
 ### 5.3 反命题决策树二："宏可以执行任意计算"
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **命题来源**: 因宏在"编译期执行"，易误解为宏具备完整的编译期计算能力。
@@ -385,6 +396,7 @@ graph TD
 > [来源: [RFC 1584](https://rust-lang.github.io/rfcs/1584-macros.html)]
 
 ### 5.4 反命题决策树三："过程宏总是类型安全的"
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **命题来源**: 因过程宏生成的是 Rust 代码，直觉上认为"生成的代码自然会通过类型检查"。
@@ -416,6 +428,7 @@ graph TD
 > **[RFC 1566: Procedural Macros]** Procedural macros operate on `TokenStream` before type checking, implementing a restricted compiler-plugin model for derive, attribute, and function-like macros. ✅ 已验证
 
 ### 5.5 宏与类型系统的交互边界
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 宏系统与类型系统之间存在严格的**阶段隔离**：宏展开在类型检查之前完成，这决定了宏无法执行任何需要类型信息的操作。
@@ -441,6 +454,7 @@ fn main() {
 ```
 
 ### 5.6 反命题决策树四："宏和编译器插件等价"
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **命题来源**: 因过程宏可以操作语法树，常被误认为具有编译器插件的完整能力（如访问符号表、修改任意编译阶段）。
@@ -470,6 +484,7 @@ graph TD
 > [来源: [Rust Reference: Procedural Macros](https://doc.rust-lang.org/reference/procedural-macros.html)]
 
 ### 5.7 反命题决策树五："过程宏可以修改任意代码"
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **命题来源**: 因过程宏能生成和替换代码，初学者常误以为它可以像文本编辑器一样"查找替换"任意代码。
@@ -515,6 +530,7 @@ graph TD
 > **[TRPL: Ch19.5]** 对比：C 预处理器 #define 不卫生，如 SQUARE(a+b) 展开为 a+b*a+b 导致运算优先级错误；Rust 的卫生宏避免此类问题。✅ 已验证
 
 ### 6.1 宏卫生性定理
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 ```text
@@ -532,6 +548,7 @@ graph TD
 > [来源: [Rust Reference: Hygiene] · [TRPL: Ch19.5]]
 
 ### 6.2 定理一致性矩阵（带 ⟹ 推理链）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 | 编号 | 前提 ⟹ 结论 | 类型 | 依赖定理 | 失效条件 | 典型场景 |
@@ -567,6 +584,7 @@ graph TD
 > [来源: [Rust Reference — Macros]]
 
 ### 7.1 正确示例：`macro_rules!` 声明宏
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -588,6 +606,7 @@ fn main() {
 ```
 
 ### 7.2 正确示例：Derive 过程宏框架
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 rust,ignore
@@ -627,6 +646,7 @@ fn main() {
 ```
 
 ### 7.4 反例：宏的递归溢出
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 rust,compile_fail
@@ -779,6 +799,7 @@ graph TD
 > **设计原理**: 以下六步遵循"先问为什么，再问是什么，最后问怎么做"的认知科学顺序。每一步回答一个具体困惑，并自然引出下一步的更深层次问题。
 
 ### 步骤 1："为什么重复代码不好？"
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **直觉困惑**: "复制粘贴最快，为什么要学宏这么复杂的东西？"
@@ -819,6 +840,7 @@ let v2 = make_vec![3, 4];
 ---
 
 ### 步骤 2："泛型能替代宏吗？"
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **直觉困惑**: "泛型也能抽象代码，为什么还需要宏？"
@@ -850,6 +872,7 @@ print_all!(1, "hello", 3.14);  // 三个不同类型参数
 ---
 
 ### 步骤 3："宏在哪一步展开？"
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **直觉困惑**: "宏展开后是不是跟普通代码一样走完整编译流程？"
@@ -930,6 +953,7 @@ macro_rules! say_hello {
 ---
 
 ### 步骤 5："hygienic 是什么意思？"
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **直觉困惑**: " hygienic 翻译成'卫生的'，这和宏有什么关系？"
@@ -977,6 +1001,7 @@ alpha-等价保持:
 ---
 
 ### 步骤 6："宏的调试技巧？"
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **直觉困惑**: "宏出错了，编译器只告诉我宏调用处有问题，怎么看到展开后的代码？"
@@ -1053,6 +1078,7 @@ macro_rules! assert_impl {
 > **[Quasiquotation 理论]** 形式化过渡路径：代码生成 → 语法树变换 → 准引用 (Quasiquotation) → 元类型论。💡 原创分析
 
 ### 8.1 国际课程与论文对齐
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 来源 | 核心内容 | 与本文件对应 |
@@ -1076,6 +1102,7 @@ macro_rules! assert_impl {
 > **层次一致性标注**：本节内容属于 L3 宏系统的工程实践延伸，涵盖过程宏生态 crate 的使用、声明宏高级语法、编译期计算替代趋势，以及宏系统的演进方向。需在理解 §三形式化根基与 §七示例反例后阅读。
 
 ### 1. `proc_macro2` 与 `syn` / `quote` crate 的最佳实践
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 > **[syn/quote 文档]** 现代 Rust 过程宏开发的黄金三角是 `proc_macro2` + `syn` + `quote`：`proc_macro2` 提供可测试的 Token 抽象，`syn` 提供声明式语法树解析，`quote` 提供准引用（quasiquote）代码生成。✅ 已验证
@@ -1220,6 +1247,7 @@ fn process_tokens(ts: proc_macro::TokenStream) -> proc_macro::TokenStream {
 ---
 
 ### 2. `macro_rules!` 的重复模式完整语法
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 > **[Rust Reference: Repetition]** `macro_rules!` 的重复模式使用 `$($name:kind)` 后跟分隔符和重复计数器。分隔符可以是任意 token（逗号、分号、竖线等），重复计数器为 `*`（零或多）、`+`（一或多）、`?`（零或一，Rust 1.32+）。✅ 已验证
@@ -1327,6 +1355,7 @@ fn main() {
 ---
 
 ### 3. 编译期计算（`const fn` + `const generics`）替代宏的趋势
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **[Rust Reference: const fn]** `const fn` 允许在编译期执行计算，生成编译期常量。许多过去必须用 `macro_rules!` 实现的场景（如数组长度计算、类型大小断言）现在可以用纯 Rust 函数完成。✅ 已验证
@@ -1433,6 +1462,7 @@ fn main() {
 ---
 
 ### 4. `concat!` / `stringify!` / `include_str!` 等内置宏
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[Rust Reference: Built-in Macros]** Rust 标准库提供一组编译期内置宏，它们在展开阶段执行特定操作（字符串拼接、文件包含、环境变量读取等），是元编程的基础工具。✅ 已验证
@@ -1534,6 +1564,7 @@ fn platform_specific() {
 ---
 
 ### 5. 属性宏修改函数体的完整示例
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[Rust Reference: Procedural Macros]** 属性宏（attribute macro）接收两部分输入：属性参数 `TokenStream` 与被装饰 item 的 `TokenStream`。宏可以解析、修改或完全替换该 item，最终返回新的 `TokenStream` 交由编译器继续处理。✅ 已验证
@@ -2054,6 +2085,7 @@ macro_rules! trace_fn {
 ---
 
 ### 6. `macro_rules!` 与 `macro` 关键字（声明宏 2.0）的演进对比
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[RFC 1584: Macros]** `macro` 关键字（声明宏 2.0）旨在解决 `macro_rules!` 的诸多限制：更好的作用域控制、模块路径支持、可见性修饰符，以及更像函数的语法。✅ 已验证
@@ -2990,4 +3022,3 @@ mod internal {
 > **[来源: [Rust RFCs](https://rust-lang.github.io/rfcs/)]**
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

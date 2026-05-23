@@ -230,7 +230,7 @@ wp(while b do C, Q) = μZ. (¬b → Q) ∧ (b → wp(C, Z))
 
 **所有权转移**:
 
-```rust
+```rust,ignore
 let y = x;
 ```
 
@@ -242,7 +242,7 @@ wp(let y = x, Q) = owns(x, v) * Q[v/y, ⊥/x]
 
 **借用**:
 
-```rust
+```rust,ignore
 let r = &x;
 ```
 
@@ -514,7 +514,7 @@ I = x ≤ 10 ∧ x ≥ 0
 
 **示例**:
 
-```rust
+```rust,ignore
 {x: i32 | x > 0}  // 正整数类型
 ```
 
@@ -538,7 +538,7 @@ I = x ≤ 10 ∧ x ≥ 0
 
 **Creusot**:
 
-```rust
+```rust,ignore
 #[requires(x > 0)]
 #[ensures(result > x)]
 fn increment(x: u32) -> u32 {
@@ -548,7 +548,7 @@ fn increment(x: u32) -> u32 {
 
 **Prusti**:
 
-```rust
+```rust,ignore
 #[pure]
 #[requires(x > 0)]
 #[ensures(ret > 0)]

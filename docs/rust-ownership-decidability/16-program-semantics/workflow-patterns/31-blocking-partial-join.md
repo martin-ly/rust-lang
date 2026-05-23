@@ -280,7 +280,7 @@ $$
 ### 5.1 基础实现
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::{Barrier, Semaphore};
 
@@ -376,7 +376,7 @@ impl<T: Send + 'static> BlockingPartialJoin<T> {
 ### 5.2 带错误处理的高级实现
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use thiserror::Error;
 use tokio::task::JoinHandle;
@@ -500,7 +500,7 @@ impl<T: Send + Clone + 'static> ResilientBlockingPartialJoin<T> {
 ### 5.3 微服务调用完整示例
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::time::{sleep, Duration};
 
@@ -681,7 +681,7 @@ $$
 
 **场景**: 2PC/3PC 事务协议中，等待多数节点响应后继续，但阻塞等待所有节点
 
-```rust
+```rust,ignore
 nodes:
   - coordinator sends prepare to 5 nodes
   - waits for 3 acknowledgments to proceed
@@ -693,7 +693,7 @@ nodes:
 
 **场景**: 分布式存储系统中写入多个副本
 
-```rust
+```rust,ignore
 replicas:
   - write to 5 replicas
   - return success when 3 acknowledge
@@ -705,7 +705,7 @@ replicas:
 
 **场景**: 编译系统并行编译多个模块
 
-```rust
+```rust,ignore
 modules:
   - compile 10 modules in parallel
   - link when 7 critical modules finish
@@ -722,7 +722,7 @@ modules:
 
 引入超时机制，避免无限阻塞：
 
-```rust
+```rust,ignore
 struct TimeoutBlockingPartialJoin<T> {
     threshold: usize,
     total: usize,

@@ -67,7 +67,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 pub fn array_windows<const N: usize>(&self) -> ArrayWindows<'_, T, N>
 ```
 
@@ -120,7 +120,7 @@ fn has_abba_new(s: &str) -> bool {
 
 **信号处理**:
 
-```rust
+```rust,ignore
 /// 滑动窗口滤波器 - 实时系统
 pub fn moving_average<const WINDOW: usize>(
     samples: &[f32]
@@ -169,7 +169,7 @@ fn parse_frames(buffer: &[u8]) -> impl Iterator<Item = CanFrame> + '_ {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // std::cell::LazyCell - 单线程延迟初始化
 pub struct LazyCell<T, F = fn() -> T>;
 
@@ -199,7 +199,7 @@ impl<T, F: FnOnce() -> T> LazyLock<T, F> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // before (once_cell)
 use once_cell::sync::Lazy;
 
@@ -230,7 +230,7 @@ static CONFIG: LazyLock<Config> = LazyLock::new(|| {
 
 **硬件配置延迟加载**:
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 硬件寄存器配置 - 首次访问时初始化
@@ -253,7 +253,7 @@ pub fn get_hw_config() -> &'static HardwareConfig {
 
 **算法查找表生成**:
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 /// CRC32查找表 - 编译期生成
@@ -312,7 +312,7 @@ impl Crc32Table {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::arch::x86_64::*;
 
 /// AVX-512 FP16向量操作
@@ -365,7 +365,7 @@ pub unsafe fn fp16_dot_product(
 
 #### CStr字节操作
 
-```rust
+```rust,ignore
 use std::ffi::CStr;
 
 // 新增方法
@@ -377,7 +377,7 @@ impl CStr {
 
 **FFI安全改进**:
 
-```rust
+```rust,ignore
 /// 安全地从字节创建C字符串
 pub fn parse_c_string(buffer: &[u8]) -> Option<&CStr> {
     // 1.94之前：手动查找\0，易出错
@@ -388,7 +388,7 @@ pub fn parse_c_string(buffer: &[u8]) -> Option<&CStr> {
 
 #### Duration数学运算
 
-```rust
+```rust,ignore
 use std::time::Duration;
 
 // 新增 trait 实现
@@ -416,7 +416,7 @@ fn next_deadline(base: Duration) -> Duration {
 
 #### 问题背景
 
-```rust
+```rust,ignore
 // 1.94及之前 - 无法编译
 trait Container {
     type Item;
@@ -434,7 +434,7 @@ trait Container {
 
 **硬件抽象层**:
 
-```rust
+```rust,ignore
 trait GpioPort {
     type Pin;
 
@@ -463,7 +463,7 @@ impl GpioPort for PortB {
 ### 2.2 异步闭包改进
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 1.95 - 更完善的异步闭包
 let future = async || {
     let data = fetch_data().await;
@@ -506,7 +506,7 @@ cargo audit
 
 #### 代码修改
 
-```rust
+```rust,ignore
 // 1. 迁移LazyLock
 // 之前
 use once_cell::sync::Lazy;

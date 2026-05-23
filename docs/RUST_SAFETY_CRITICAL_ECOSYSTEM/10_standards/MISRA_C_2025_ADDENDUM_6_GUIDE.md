@@ -323,7 +323,7 @@ MISRA C:2025 总规则数: 143
 ### Clippy配置 (MISRA风格)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // .clippy.toml or clippy.toml
 
 # 避免隐式转换 (对应MISRA数值转换规则)

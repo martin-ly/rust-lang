@@ -137,7 +137,7 @@ let b = Box::new(42);
 
 **示例 - Points-To 的演变**:
 
-```rust
+```rust,ignore
 // 创建
 let b = Box::new(42);
 // 断言: b ↦ 42
@@ -320,7 +320,7 @@ fn ownership_chain() {
 
 **示例 - 权限转换**:
 
-```rust
+```rust,ignore
 fn permission_flow() {
     // 独占所有权
     let mut data = Box::new(5);
@@ -403,7 +403,7 @@ a ⋅ b = a + b  如果 a + b ≤ 1
 
 **示例 - 资源代数的Rust实现**:
 
-```rust
+```rust,ignore
 // Verus中的资源代数示例
 
 // 定义一个简单的资源: 计数器
@@ -479,7 +479,7 @@ acc(x.f) * acc(y.f) 要求 x ≠ y
 
 **Prusti示例**:
 
-```rust
+```rust,ignore
 // Prusti 使用 Viper 后端
 use prusti_contracts::*;
 
@@ -496,7 +496,7 @@ fn increment(x: &mut MyStruct) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 // Verus中的资源代数示例
 use vstd::prelude::*;
 
@@ -696,7 +696,7 @@ Rust应用:
 ### 9.2 幽灵状态
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 幽灵状态在Rust验证中的应用
 
 // 幽灵变量: 只在规范中存在，运行时无成本

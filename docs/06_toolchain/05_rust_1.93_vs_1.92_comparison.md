@@ -411,7 +411,7 @@ static GLOBAL: TrackingAllocator = TrackingAllocator;
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // Rust 1.92 - 需要重复整个 asm! 块
 #[cfg(target_feature = "sse2")]
 unsafe fn optimized_add_sse2(a: f32, b: f32) -> f32 {
@@ -442,7 +442,7 @@ unsafe fn optimized_add_sse2(a: f32, b: f32) -> f32 {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Rust 1.93 - 可以在单个语句上使用 cfg
 unsafe fn optimized_add(a: f32, b: f32) -> f32 {
     let result;
@@ -472,7 +472,7 @@ unsafe fn optimized_add(a: f32, b: f32) -> f32 {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // Rust 1.93 - 多个条件编译的 asm! 语句
 unsafe fn platform_specific_operation() {
     asm!(
@@ -518,7 +518,7 @@ unsafe fn platform_specific_operation() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 let mut uninit = MaybeUninit::<String>::uninit();
@@ -540,7 +540,7 @@ MaybeUninit::write_copy_of_slice(&mut dst, &src);
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // 安全地初始化数组
@@ -585,7 +585,7 @@ let v = unsafe { Vec::from_raw_parts(ptr, len, capacity) };
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 let mut deque = VecDeque::from([1, 2, 3, 4, 5]);
@@ -809,7 +809,7 @@ fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // Rust 1.93 - 使用 cfg 属性的内联汇编
 #[cfg(target_arch = "x86_64")]
 unsafe fn cpu_id() -> (u32, u32, u32, u32) {
@@ -935,7 +935,7 @@ fn main() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 // Rust 1.93 允许在 asm! 的单个语句上使用 cfg
 
 #[cfg(target_arch = "x86_64")]
@@ -978,7 +978,7 @@ pub fn has_feature(feature: &str) -> bool {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // Rust 1.93 新增：write_copy_of_slice
@@ -1022,7 +1022,7 @@ fn use_maybe_uninit() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::collections::VecDeque;
 
 // Rust 1.93 新增：pop_front_if 和 pop_back_if
@@ -1192,7 +1192,7 @@ libc = "0.2.146"  # 或更新版本
 
 **解决方案**：Rust 1.93 已解决，确保使用系统分配器避免重入：
 
-```rust
+```rust,ignore
 use std::alloc::System;
 
 unsafe impl GlobalAlloc for MyAllocator {
@@ -1260,7 +1260,7 @@ unsafe impl GlobalAlloc for MyAllocator {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! Rust 1.93 新 API 完整使用指南
 
 use std::mem::MaybeUninit;

@@ -645,7 +645,7 @@ P U Q - P直到Q
 
 **Rust生命周期**:
 
-```rust
+```rust,ignore
 fn borrow<'a>(x: &'a T) -> &'a U
 ```
 
@@ -692,7 +692,7 @@ swap(x, y)
 
 **插入操作**:
 
-```rust
+```rust,ignore
 fn insert(head: &mut Box<Node>, val: i32) {
     let new_node = Box::new(Node { val, next: None });
     new_node.next = Some(std::mem::replace(head, new_node));

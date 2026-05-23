@@ -75,7 +75,7 @@ let r = &x as *const i32;  // 从引用创建原始指针
 | `*const T` | 否 | 只读访问、C 兼容性 |
 | `*mut T` | 是 | 读写访问、内存修改 |
 
-```rust
+```rust,ignore
 let x = 5;
 const_ptr: *const i32 = &x;      // 不可变原始指针
 mut_ptr: *mut i32 = &mut y;       // 可变原始指针
@@ -211,7 +211,7 @@ unsafe {
 
 **修正版本**:
 
-```rust
+```rust,ignore
 let x = String::from("hello");
 let ptr = &x as *const String;
 
@@ -270,7 +270,7 @@ unsafe {
 ### 4.3 对齐检查
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 let x = 5u32;
 let ptr = &x as *const u32;
 
@@ -303,7 +303,7 @@ assert!(ptr.is_aligned_to(4));  // u32 对齐到 4 字节
 
 1. **与 C 代码交互 (FFI)**
 
-```rust
+```rust,ignore
 extern "C" {
     fn c_function() -> *const c_char;
 }
@@ -321,7 +321,7 @@ struct Node<T> {
 
 1. **性能关键代码**
 
-```rust
+```rust,ignore
 // 避免边界检查
 unsafe {
     *ptr.add(index) = value;
@@ -373,7 +373,7 @@ impl<T> SafeSlice<T> {
 ### 6.2 模式 2: 可选的 unsafe 优化
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 pub fn get_unchecked(&self, index: usize) -> &T {
     debug_assert!(index < self.len);
     unsafe { &*self.ptr.add(index) }
@@ -412,7 +412,7 @@ fn float_to_bits_safe(f: f32) -> u32 {
 ### 7.1 常见 UB
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // ❌ UB 1: 解引用空指针
 let ptr: *const i32 = std::ptr::null();
 unsafe { *ptr; }
@@ -444,7 +444,7 @@ unsafe {
 ### 7.2 安全使用检查清单
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 unsafe {
     // 解引用前检查:
     // ✓ 指针非空
@@ -468,7 +468,7 @@ unsafe {
 ## 8. 实战: 实现自定义迭代器
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 /// 基于原始指针的数组迭代器
 pub struct PtrIter<T> {
     ptr: *const T,

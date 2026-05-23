@@ -57,7 +57,7 @@ Tokio-Util提供:
 ### 定义 2.1 (Encoder)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub trait Encoder<Item> {
     type Error;
 
@@ -71,7 +71,7 @@ pub trait Encoder<Item> {
 
 > 成功编码后，dst包含完整的编码消息。
 
-```rust
+```rust,ignore
 impl Encoder<MyMessage> for MyCodec {
     fn encode(&mut self, msg: MyMessage, dst: &mut BytesMut)
         -> Result<(), Self::Error>
@@ -92,7 +92,7 @@ impl Encoder<MyMessage> for MyCodec {
 ### 定义 2.2 (Decoder)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub trait Decoder {
     type Item;
     type Error;
@@ -112,7 +112,7 @@ pub trait Decoder {
 - `Ok(None)`: 需要更多数据
 - `Err(e)`: 协议错误
 
-```rust
+```rust,ignore
 impl Decoder for MyCodec {
     fn decode(&mut self, src: &mut BytesMut)
         -> Result<Option<MyMessage>, MyError>
@@ -135,7 +135,7 @@ impl Decoder for MyCodec {
 
 > tokio-util的缓冲和限流实现背压。
 
-```rust
+```rust,ignore
 use tokio_util::sync::PollSender;
 
 // PollSender在channel满时返回Pending
@@ -153,7 +153,7 @@ let sender = PollSender::new(tx);
 
 > tokio_util::time提供精确的超时控制。
 
-```rust
+```rust,ignore
 use tokio_util::time::{timeout, Duration};
 
 // 超时精确到毫秒级
@@ -170,7 +170,7 @@ let result = timeout(Duration::from_secs(5), async {
 
 ### 反例 5.1 (Decoder状态丢失)
 
-```rust
+```rust,ignore
 // 错误: decode_eof不实现
 decoder.decode(&mut buf)?;
 
@@ -187,7 +187,7 @@ decoder.decode_eof(&mut buf)?;
 
 ### 反例 5.2 (Codec线程安全)
 
-```rust
+```rust,ignore
 // Codec不是Send/Sync，不能跨任务共享
 let codec = MyCodec::new();
 

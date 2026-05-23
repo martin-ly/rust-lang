@@ -202,7 +202,7 @@ Patterns:
 ### 2.3 类型系统
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Actor类型 (伪代码)
 type Actor<M, S> = {
     mailbox: Mailbox<M>,
@@ -352,7 +352,7 @@ $$
 ### 4.3 位置透明
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 本地Actor
 let local_actor = ctx.actor_of::<MyActor>("local").unwrap();
 
@@ -374,7 +374,7 @@ remote_actor.tell(msg, None);  // 透明序列化/网络传输
 ### 5.1 回调地狱风险
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 不好的Actor代码 (类似回调地狱)
 impl Handler<GetUser> for UserService {
     type Result = ResponseFuture<User>;
@@ -434,7 +434,7 @@ Actor B接收: [msg1, msg3, msg2]  (网络延迟)
 ### 6.1 Typed Actors
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 使用类型系统确保消息安全
 trait Actor<M> {
     fn handle(&mut self, msg: M);
@@ -455,7 +455,7 @@ impl Actor<UserMsg> for UserActor {
 ### 6.2 流式Actor
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // Actor作为Stream生产者
 impl StreamHandler<Data> for SensorActor {
     fn handle(&mut self, item: Data, ctx: &mut Context<Self>) {
@@ -477,7 +477,7 @@ impl StreamHandler<Data> for SensorActor {
 ### 6.3 函数式Actor
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 无状态函数式Actor
 fn counter_actor() -> impl Actor<CounterMsg> {
     let mut count = 0;

@@ -1152,7 +1152,7 @@ Abstract Interpretation Miri                  UB 检测
 
 **映射示例**:
 
-```rust
+```rust,ignore
 // Rust 代码
 fn swap<T>(x: &mut T, y: &mut T) {
     let tmp = *x;
@@ -1219,7 +1219,7 @@ $$
 
 **Unsafe 契约形式化**:
 
-```rust
+```rust,ignore
 // 契约: ptr 必须指向已分配的 T
 //       ptr 必须有效对齐
 //       ptr 不能被别名违反

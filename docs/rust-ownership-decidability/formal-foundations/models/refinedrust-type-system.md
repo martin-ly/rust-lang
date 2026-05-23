@@ -115,7 +115,7 @@ MIR (Mid-level IR)
 
 **标准类型 vs 细化类型**：
 
-```rust
+```rust,ignore
 // 标准类型: i32
 // 细化类型: {v: i32 | v > 0}
 
@@ -147,7 +147,7 @@ e ::= v | x | e₁ + e₂ | e₁ = e₂ | ...  (* 表达式 *)
 
 **所有权传递细化信息**：
 
-```rust
+```rust,ignore
 // 值所有权传递细化
 let x: {v: i32 | v > 0} = 42;
 let y = x;  // y: {v: i32 | v > 0}
@@ -160,7 +160,7 @@ fn get_positive(v: &{v: i32 | v > 0}) -> i32 {
 
 **可变引用的特殊处理**：
 
-```rust
+```rust,ignore
 fn increase(x: &mut {v: i32 | v > 0}) {
     *x += 1;  // 后置条件: {v: i32 | v > 1}
 }
@@ -172,7 +172,7 @@ fn increase(x: &mut {v: i32 | v > 0}) {
 
 **生命周期约束**：
 
-```rust
+```rust,ignore
 // 标准 Rust
 fn borrow<'a>(x: &'a i32) -> &'a i32
 
@@ -485,7 +485,7 @@ Loan(ℓ, k, τ, v)
 
 RefinedRust 类型检查器：
 
-```rust
+```rust,ignore
 // 输入: MIR + 细化注解
 // 输出: 类型约束集合
 
@@ -549,7 +549,7 @@ Qed.
 
 **Vec::push 验证**：
 
-```rust
+```rust,ignore
 #[refinedrust::spec]
 fn push(&mut self, value: T)
     requires self.len < self.capacity
@@ -565,7 +565,7 @@ fn push(&mut self, value: T)
 
 **链表不变式**：
 
-```rust
+```rust,ignore
 #[refinedrust::invariant]
 struct List<T> {
     // 链表长度等于实际元素数

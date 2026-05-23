@@ -578,7 +578,7 @@ $$\{P * R\} \text{ release}(R) \{P * I(R)\}$$
 
 对应 Rust `Mutex<T>`：
 
-```rust
+```rust,ignore
 // acquire: lock() 获取资源
 let guard = mutex.lock().unwrap();  // {I(R)} lock() {R}
 // 使用资源...
@@ -1721,7 +1721,7 @@ $$
 
 可变借用通过**预言变量**模拟：
 
-```rust
+```rust,ignore
 // Rust
 let r = &mut x;
 *r = new_val;

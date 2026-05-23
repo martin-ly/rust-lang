@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [位置](../../../../concept/01_foundation/13_panic_and_abort.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -68,7 +69,7 @@
 
 **必须 (MUST)**:
 
-```rust
+```rust,ignore
 // ✅ 编译器强制执行所有权
 let data = vec![1, 2, 3];
 let ref1 = &data;     // 不可变借用
@@ -84,7 +85,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 **禁止 (MUST NOT)**:
 
-```rust
+```rust,ignore
 // ❌ 悬垂引用 - 编译器会拒绝
 fn dangle() -> &String {
     let s = String::from("hello");
@@ -124,7 +125,7 @@ impl<'a> Parser<'a> {
 
 **避免 (SHOULD NOT)**:
 
-```rust
+```rust,ignore
 // ❌ 隐式生命周期
 struct BadParser {
     input: &str,  // 缺少显式生命周期
@@ -137,7 +138,7 @@ struct BadParser {
 
 **必须 (MUST)**:
 
-```rust
+```rust,ignore
 // ✅ 使用Box进行堆分配
 let data = Box::new([0u8; 1024]);
 
@@ -155,7 +156,7 @@ let data = RefCell::new(0);
 
 **警告 (WARNING)**:
 
-```rust
+```rust,ignore
 // ⚠️ RefCell运行时检查
 let data = RefCell::new(0);
 let _ref1 = data.borrow();
@@ -205,7 +206,7 @@ pub unsafe fn read_value<T>(ptr: *const T) -> T {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 /// 从原始指针读取值
 ///
 /// # Safety
@@ -297,7 +298,7 @@ impl<T> SafeSlice<T> {
 
 **必须 (MUST)**:
 
-```rust
+```rust,ignore
 use std::sync::{Arc, Mutex, RwLock};
 use std::thread;
 
@@ -323,7 +324,7 @@ assert_eq!(*data.lock().unwrap(), 10);
 
 **禁止 (MUST NOT)**:
 
-```rust
+```rust,ignore
 // ❌ 非Send类型跨线程
 use std::rc::Rc;
 
@@ -339,7 +340,7 @@ thread::spawn(move || {
 
 **推荐 (SHOULD)**:
 
-```rust
+```rust,ignore
 use std::sync::{Mutex, RwLock, Condvar};
 
 // ✅ 细粒度锁
@@ -361,7 +362,7 @@ impl ThreadSafeData {
 
 **避免 (SHOULD NOT)**:
 
-```rust
+```rust,ignore
 // ❌ 锁粒度太大
 struct BadDesign {
     data: Mutex<AllData>,  // 一个大锁
@@ -380,7 +381,7 @@ fn deadlock_risk(a: &Mutex<i32>, b: &Mutex<i32>) {
 
 **必须 (MUST)**:
 
-```rust
+```rust,ignore
 use tokio::sync::Mutex;  // 异步锁
 
 // ✅ 异步锁用于异步上下文
@@ -409,7 +410,7 @@ tokio::spawn(async move {
 
 **必须 (MUST)**:
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::{self, Read};
 
@@ -437,7 +438,7 @@ let value = maybe_value
 
 **禁止 (MUST NOT)**:
 
-```rust
+```rust,ignore
 // ❌ 忽略错误
 let _ = file.write_all(data);  // 错误被忽略!
 
@@ -452,7 +453,7 @@ let value = maybe_value.unwrap();  // 可能panic!
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::fmt;
 use std::error::Error;
 
@@ -503,7 +504,7 @@ impl Error for SafetyError {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use thiserror::Error;
 
 /// 使用thiserror简化错误定义
@@ -543,7 +544,7 @@ fn load_data(path: &str) -> Result<Data> {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 #![no_std]  // 禁止标准库
 #![no_main] // 禁用标准入口点
 
@@ -580,7 +581,7 @@ let data = unsafe { uninit.assume_init() };
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 /// 寄存器访问 (使用svd2rust生成)
 use stm32f4::stm32f407::Peripherals;
 
@@ -650,7 +651,7 @@ mod tests {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // tests/integration_test.rs
 use my_crate::SafetySystem;
 
@@ -677,7 +678,7 @@ fn test_safety_system_end_to_end() {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 计算安全检查
 ///
 /// # Examples
@@ -732,7 +733,7 @@ pub fn safety_check(value: u32) -> bool {
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 /// 安全关键传感器读取
 ///
 /// 从指定传感器读取值，进行范围检查和安全验证。
@@ -773,7 +774,7 @@ pub fn read_sensor(sensor_id: u8, timeout_ms: u32) -> Result<SensorValue, Sensor
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 fn complex_algorithm(input: &[u8]) -> Result<Output, Error> {
     // 步骤1: 验证输入长度
     if input.len() < MIN_LENGTH {

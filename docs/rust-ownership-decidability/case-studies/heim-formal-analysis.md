@@ -51,7 +51,7 @@ heim提供:
 
 > 进程列表以Stream形式提供，支持背压。
 
-```rust
+```rust,ignore
 use heim::process::processes;
 
 let mut stream = processes().await?;
@@ -71,7 +71,7 @@ while let Some(process) = stream.next().await {
 
 > 通过Process句柄而非PID引用进程。
 
-```rust
+```rust,ignore
 let process = get_process(pid).await?;
 // process是句柄，不受PID重用影响
 let cpu = process.cpu_time().await?;
@@ -111,7 +111,7 @@ let cpu = process.cpu_time().await?;
 
 ### 反例 6.1 (频繁采样)
 
-```rust
+```rust,ignore
 // 过于频繁的系统调用
 loop {
     let mem = heim::memory::memory().await?;  // 每秒多次

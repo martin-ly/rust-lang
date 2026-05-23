@@ -7,6 +7,7 @@
 > **定理链编号**: T-020 特质一致性 → 模式可组合性
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [设计模式使用指南](#设计模式使用指南)
@@ -70,6 +71,7 @@
   - [权威来源索引](#权威来源索引)
   - [思维导图：Rust 设计模式体系](#思维导图rust-设计模式体系)
   - [决策树：设计模式选择](#决策树设计模式选择)
+  - [权威来源索引](#权威来源索引-1)
 
 **模块**: C09 Design Patterns
 **创建日期**: 2025-12-11
@@ -144,6 +146,7 @@
   - [权威来源索引](#权威来源索引)
   - [思维导图：Rust 设计模式体系](#思维导图rust-设计模式体系)
   - [决策树：设计模式选择](#决策树设计模式选择)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -245,7 +248,7 @@ fn create_product(t: ProductType) -> Box<dyn Product> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 struct Config {
     host: String,
     port: u16,
@@ -624,7 +627,7 @@ fn render_ui(factory: &dyn GUIFactory) {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 #[derive(Debug, Clone)]
 struct HttpRequest {
     method: String,
@@ -707,7 +710,7 @@ let request = HttpRequestBuilder::post()
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use std::clone::Clone;
 
 // 原型 trait
@@ -1887,7 +1890,7 @@ impl Document {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 策略 trait
 trait PaymentStrategy {
     fn pay(&self, amount: f64) -> Result<String, String>;
@@ -2271,7 +2274,7 @@ impl Connection<Connected> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 非消耗型 Builder（使用 &mut self）
 struct RequestBuilder {
     url: Option<String>,
@@ -2471,7 +2474,7 @@ where
 | 滑动窗口 | windows(n) | rray_windows::<N>() | 零分配，15-30% 性能提升 |
 | 责任链 | Result | ControlFlow | 语义清晰 |
 | 单例 | LazyLock 直接访问 | LazyLock::get() | 热路径优化 |
-| 策略模式 | 硬编码常量 | 
+| 策略模式 | 硬编码常量 |
 64::consts::* | 标准库提供 |
 
 **最后更新**: 2026-05-08 (深度整合 Rust 1.95+ 设计模式应用)
@@ -2523,6 +2526,7 @@ where
 ---
 
 ## 思维导图：Rust 设计模式体系
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```mermaid
@@ -2547,6 +2551,7 @@ graph TD
 ---
 
 ## 决策树：设计模式选择
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ```mermaid
@@ -2585,7 +2590,6 @@ graph TD
 > **[来源: Rust API Guidelines]**
 > **[来源: Gang of Four - Design Patterns]**
 > **[来源: ACM - Software Design Patterns]**
-
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 > **[来源: POPL - Programming Languages Research]**
@@ -3494,4 +3498,3 @@ graph TD
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

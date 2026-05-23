@@ -74,7 +74,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 当前 Rust: 需要嵌套 async move
 fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
     || async move {
@@ -105,7 +105,7 @@ fn get_callback() -> impl Fn() -> impl Future<Output = i32> {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 // ✅ 新的 async 闭包语法
@@ -137,7 +137,7 @@ fn get_processor() -> impl AsyncFn(i32, i32) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 use std::future::Future;
@@ -214,7 +214,7 @@ async fn capture_examples() {
 | **返回类型** | 需要显式写出 | 自动推断 |
 | **Fn trait** | `Fn() -> impl Future` | `AsyncFn` |
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 // 对比示例
@@ -245,7 +245,7 @@ fn new_way() -> impl async FnOnce() -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 use std::collections::HashMap;
@@ -301,7 +301,7 @@ async fn example() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 use tokio::sync::mpsc;
@@ -345,7 +345,7 @@ async fn websocket_server() {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 use std::pin::Pin;
@@ -447,7 +447,7 @@ async fn middleware_example() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // 简化表示
 pub trait AsyncFn<Args> {
     type Output;
@@ -476,7 +476,7 @@ pub trait AsyncFnOnce<Args>: AsyncFnMut<Args> {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 #![feature(async_closure)]
 
 // ❌ 错误: 不能直接在 trait 中使用

@@ -260,7 +260,7 @@ println!("{} {}", r1, r2); // 读者还在用
 
 **A**: 悬垂引用是指引用指向已经被释放的内存。Rust通过生命周期检查在编译时防止。
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 fn dangling() -> &String {
     let s = String::from("hello");
@@ -403,7 +403,7 @@ let arc2 = Arc::clone(&arc);
 - 只包含标量值
 - 或者包含其他Copy类型
 
-```rust
+```rust,ignore
 // Copy类型
 i32, f64, bool, char, (i32, i32), [i32; 4]
 
@@ -438,7 +438,7 @@ let v2 = v.clone();  // Vec<i32>
 
 **A**: 缩小不可变借用的作用域：
 
-```rust
+```rust,ignore
 // ❌ 错误
 let mut x = 5;
 let r1 = &x;
@@ -519,7 +519,7 @@ assert_eq!(s, "world");
 
 **A**: 标记编译时已知大小的类型。
 
-```rust
+```rust,ignore
 // 自动实现Sized的类型
 i32, f64, [i32; 5], String
 
@@ -545,7 +545,7 @@ fn bar<T: ?Sized>(x: &T) {}  // 允许DST
 - `impl Trait`: 静态分发，编译时确定具体类型
 - `dyn Trait`: 动态分发，运行时确定（有虚表开销）
 
-```rust
+```rust,ignore
 // 静态分发，无运行时开销
 fn foo(x: impl Trait) {}
 
@@ -561,7 +561,7 @@ fn bar(x: &dyn Trait) {}
 
 **A**: 描述复合类型如何继承组成部分的子类型关系。
 
-```rust
+```rust,ignore
 // 协变: T <: U → Box<T> <: Box<U>
 Box<&'static str> <: Box<&'a str>
 
@@ -599,7 +599,7 @@ const X: i32 = 5;  // 'static
 
 **A**: Trait中定义的占位类型，由实现者指定。
 
-```rust
+```rust,ignore
 trait Iterator {
     type Item;  // 关联类型
     fn next(&mut self) -> Option<Self::Item>;
@@ -624,7 +624,7 @@ impl Iterator for Vec<i32> {
 
 **A**: 允许关联类型有泛型参数。
 
-```rust
+```rust,ignore
 trait Container {
     type Item<'a>;  // GAT
     fn get(&self, index: usize) -> Option<Self::Item<'_>>;
@@ -665,7 +665,7 @@ const X: i32 = add(1, 2);  // 编译时常量
 
 **A**: 为特定类型提供泛型的特殊实现。
 
-```rust
+```rust,ignore
 // 通用实现
 trait Trait {
     fn method(&self);
@@ -719,7 +719,7 @@ assert_eq!(size_of::<Option<&i32>>(), size_of::<&i32>());
 2. 只有一个输入生命周期 → 赋给输出
 3. `&self`存在 → `self`的生命周期赋给输出
 
-```rust
+```rust,ignore
 // 省略前
 fn foo<'a>(x: &'a str) -> &'a str { x }
 
@@ -775,7 +775,7 @@ fn take_str<'a>(s: &'a str) {}
 
 **A**: 当编译器无法确定返回引用与哪个参数关联时。
 
-```rust
+```rust,ignore
 // ❌ 编译错误 - 不知道返回的引用来自x还是y
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
@@ -930,7 +930,7 @@ where
 
 **等价定义**: `T: Sync ⇔ &T: Send`
 
-```rust
+```rust,ignore
 // Rc既不是Send也不是Sync
 use std::rc::Rc;
 let data: Rc<i32> = Rc::new(5);
@@ -988,7 +988,7 @@ let cell = Cell::new(0);
 3. 避免嵌套锁
 4. 使用作用域锁
 
-```rust
+```rust,ignore
 // 良好实践：使用作用域
 {
     let guard = mutex.lock().unwrap();
@@ -1004,7 +1004,7 @@ let cell = Cell::new(0);
 
 **A**: 编译器将async函数转换为状态机。
 
-```rust
+```rust,ignore
 async fn foo() {
     println!("A");
     bar().await;  // 挂起点
@@ -1029,7 +1029,7 @@ enum FooFuture {
 
 **A**: `Pin`保证值不会被移动，用于自引用结构。
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 
 async fn self_referential() {
@@ -1053,7 +1053,7 @@ async fn self_referential() {
 - `thread::spawn`: 创建OS线程，成本高
 - `tokio::spawn`: 创建任务，调度到线程池
 
-```rust
+```rust,ignore
 // OS线程
 thread::spawn(|| {
     // 独立线程执行
@@ -1078,7 +1078,7 @@ tokio::spawn(async {
 
 **A**: 标记可以安全移动的类型。大多数类型都是`Unpin`。
 
-```rust
+```rust,ignore
 // 自动Unpin
 i32, String, Vec<T>
 
@@ -1094,7 +1094,7 @@ async fn, Pin<&mut T>
 
 **A**: 等待多个Future，哪个先完成就执行哪个。
 
-```rust
+```rust,ignore
 tokio::select! {
     result = task1 => println!("task1 done: {:?}", result),
     result = task2 => println!("task2 done: {:?}", result),
@@ -1110,7 +1110,7 @@ tokio::select! {
 
 **A**: `.await`前释放锁：
 
-```rust
+```rust,ignore
 // ❌ 危险
 let guard = mutex.lock().unwrap();
 some_async().await;  // 可能死锁
@@ -1201,7 +1201,7 @@ let guard = tokio_mutex.lock().await;
 
 **A**: 长事务问题。将大事务分解为多个小事务，每个有补偿操作。
 
-```rust
+```rust,ignore
 // 编排式
 let saga = Saga::new()
     .step(reserve_inventory, compensate_inventory)

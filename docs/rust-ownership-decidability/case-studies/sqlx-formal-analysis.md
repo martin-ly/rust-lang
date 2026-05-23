@@ -75,7 +75,7 @@ SQLx是Rust的异步SQL框架，提供:
 ### 定义 2.1 (query!宏)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let users = sqlx::query!("SELECT id, name FROM users")
     .fetch_all(&pool)
     .await?;
@@ -106,7 +106,7 @@ let users = sqlx::query!("SELECT id, name FROM users")
 
 **示例**:
 
-```rust
+```rust,ignore
 // 编译错误: column "email" does not exist
 sqlx::query!("SELECT email FROM users");
 
@@ -126,7 +126,7 @@ sqlx::query!("SELECT name FROM users");
 
 **证明**:
 
-```rust
+```rust,ignore
 let row = sqlx::query!("SELECT id, name FROM users WHERE id = $1", 1i32)
     .fetch_one(&pool)
     .await?;
@@ -155,7 +155,7 @@ let row = sqlx::query!("SELECT id, name FROM users WHERE id = $1", 1i32)
 ### 定义 3.1 (Pool)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub struct Pool<DB: Database> {
     // 连接队列
     // 状态管理
@@ -169,7 +169,7 @@ pub struct Pool<DB: Database> {
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<DB: Database> Pool<DB> {
     pub async fn acquire(&self) -> Result<PoolConnection<DB>, Error> {
         // 1. 检查空闲连接
@@ -202,7 +202,7 @@ impl<DB: Database> Pool<DB> {
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<DB: Database> Drop for PoolConnection<DB> {
     fn drop(&mut self) {
         if self.live {
@@ -231,7 +231,7 @@ impl<DB: Database> Drop for PoolConnection<DB> {
 ### 定义 4.1 (FromRow)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 trait FromRow<'r, R: Row> {
     fn from_row(row: &'r R) -> Result<Self, Error>;
 }
@@ -244,7 +244,7 @@ trait FromRow<'r, R: Row> {
 
 **示例**:
 
-```rust
+```rust,ignore
 #[derive(sqlx::FromRow)]
 struct User {
     id: i32,
@@ -281,7 +281,7 @@ let users: Vec<User> = sqlx::query_as!(User, "SELECT id, name FROM users")
 
 **证明**:
 
-```rust
+```rust,ignore
 let mut rows = sqlx::query!("SELECT * FROM large_table").fetch(&pool);
 
 while let Some(row) = rows.try_next().await? {
@@ -309,7 +309,7 @@ while let Some(row) = rows.try_next().await? {
 ### 定义 5.1 (Transaction)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 pub struct Transaction<'c, DB: Database> {
     connection: &'c mut PoolConnection<DB>,
     open: bool,
@@ -323,7 +323,7 @@ pub struct Transaction<'c, DB: Database> {
 
 **实现**:
 
-```rust
+```rust,ignore
 async fn transfer(pool: &Pool<Postgres>) -> Result<(), Error> {
     let mut tx = pool.begin().await?;
 
@@ -352,7 +352,7 @@ async fn transfer(pool: &Pool<Postgres>) -> Result<(), Error> {
 
 **实现**:
 
-```rust
+```rust,ignore
 let mut tx = pool.begin().await?;
 
 // 外层操作
@@ -383,7 +383,7 @@ tx.commit().await?;
 ### 定义 6.1 (Migration)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 sqlx::migrate!("./migrations")
     .run(&pool)
     .await?;
@@ -410,7 +410,7 @@ sqlx::migrate!("./migrations")
 ### 反例 7.1 (SQL注入)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 危险! 不要这样做
 let query = format!("SELECT * FROM users WHERE name = '{}'", user_input);
 sqlx::query(&query).fetch_all(&pool).await?;
@@ -424,7 +424,7 @@ sqlx::query!("SELECT * FROM users WHERE name = $1", user_input)
 ### 反例 7.2 (忘记await)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 错误: 没有await
 let result = sqlx::query!("SELECT * FROM users").fetch_all(&pool);
 // result 是 Future，不是实际结果
@@ -436,7 +436,7 @@ let result = sqlx::query!("SELECT * FROM users").fetch_all(&pool).await?;
 ### 反例 7.3 (连接泄漏)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 长时间持有连接
 let conn = pool.acquire().await?;
 // 执行慢操作...

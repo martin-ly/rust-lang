@@ -60,7 +60,7 @@
 
 Raft 通过选举领导者来实现共识。
 
-```rust
+```rust,ignore
 // Raft 节点状态
 #[derive(Debug, Clone, Copy, PartialEq)]
 pub enum NodeState {
@@ -178,7 +178,7 @@ impl RaftNode {
 ### 使用示例
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 创建 3 节点集群
 let mut nodes: Vec<RaftNode> = (0..3)
     .map(|id| RaftNode::new(NodeId(id)))
@@ -208,7 +208,7 @@ if nodes[0].is_leader() {
 
 最强的单个对象一致性，所有操作看起来是原子的。
 
-```rust
+```rust,ignore
 // 线性一致性保证
 // 如果操作 A 在操作 B 开始前完成，
 // 那么所有节点都看到 A 在 B 之前
@@ -244,7 +244,7 @@ impl LinearizableStore {
 
 弱一致性，保证如果没有更新，最终所有副本一致。
 
-```rust
+```rust,ignore
 // Gossip 协议实现
 pub struct GossipNode {
     id: NodeId,
@@ -287,7 +287,7 @@ impl GossipNode {
 ### 所有权与分布式状态
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 消息传递避免共享状态
 pub enum Message {
     RequestVote { term: Term, candidate_id: NodeId },
@@ -319,7 +319,7 @@ pub async fn node_loop(mut node: RaftNode, mut rx: mpsc::Receiver<Message>) {
 ### 错误处理
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[derive(Debug, thiserror::Error)]
 pub enum ConsensusError {
     #[error("Not leader")]

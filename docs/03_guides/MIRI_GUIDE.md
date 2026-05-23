@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [Miri 使用指南：检测 Rust 未定义行为（UB）](#miri-使用指南检测-rust-未定义行为ub)
@@ -35,6 +36,7 @@
   - [七、学习路径建议](#七学习路径建议)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 一、什么是 Miri？
 >
@@ -140,7 +142,7 @@ cargo miri test
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn use_uninit() -> i32 {
     let x: i32;
@@ -167,7 +169,7 @@ but the data is uninitialized
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn mutable_alias() {
     let mut x = 5;
@@ -202,7 +204,7 @@ error: Undefined Behavior: no item granting read access ...
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn modify_via_shared() {
     let x = 42;
@@ -253,7 +255,7 @@ fn valid_pointer() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn misaligned_access() {
     let bytes = [0u8; 8];
@@ -314,6 +316,7 @@ fn valid_discriminant() {
 ```
 
 ### 示例 8：双重释放
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ```rust
@@ -336,9 +339,10 @@ fn single_free() {
 ```
 
 ### 示例 9：数据竞争（实验性检测）
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误代码
 fn data_race() {
     use std::thread;
@@ -367,6 +371,7 @@ fn no_data_race() {
 ```
 
 ### 示例 10：Strict Provenance 违规（指针<->整数转换）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ```rust
@@ -390,6 +395,7 @@ fn proper_ptr_provenance() {
 ---
 
 ## 四、Stacked Borrows vs Tree Borrows
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 Rust 有两种内存别名模型：
@@ -400,6 +406,7 @@ Rust 有两种内存别名模型：
 | **Tree Borrows** | 更宽松，更符合实际代码直觉 | `MIRIFLAGS="-Zmiri-tree-borrows" cargo miri test` |
 
 ### 何时使用 Tree Borrows？
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 - 代码使用复杂的自引用结构
@@ -411,6 +418,7 @@ Rust 有两种内存别名模型：
 ---
 
 ## 五、在 CI 中集成 Miri
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ```yaml
@@ -438,6 +446,7 @@ jobs:
 ---
 
 ## 六、常见陷阱与解决方案
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 | 问题 | 原因 | 解决方案 |
@@ -451,6 +460,7 @@ jobs:
 ---
 
 ## 七、学习路径建议
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 1. **入门**：对现有 `unsafe` 代码运行 `cargo miri test`
@@ -480,6 +490,7 @@ jobs:
 ---
 
 ## 相关概念
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 - [上级目录](../README.md)
@@ -611,4 +622,3 @@ jobs:
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
-

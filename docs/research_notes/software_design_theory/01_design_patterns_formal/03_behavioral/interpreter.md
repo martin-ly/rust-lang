@@ -150,7 +150,7 @@ $$\mathsf{match}\,e\,\mathsf{with}\,\{\ldots\}\text{ 覆盖 }E\text{ 所有变�
 
 1. **枚举定义**：
 
-   ```rust
+   ```rust,ignore
    enum Expr { Const(i32), Add(Box<Expr>, Box<Expr>), ... }
    ```
 

@@ -385,7 +385,7 @@ fn cyclic_barrier_example() {
 ### 5.2 并行排序示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use std::thread;
 

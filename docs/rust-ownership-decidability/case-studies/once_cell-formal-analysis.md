@@ -87,7 +87,7 @@ $$
 
 > init函数恰好执行一次，即使有多个并发调用者。
 
-```rust
+```rust,ignore
 static CONFIG: OnceLock<Config> = OnceLock::new();
 
 pub fn get_config() -> &'static Config {
@@ -110,7 +110,7 @@ pub fn get_config() -> &'static Config {
 
 > 初始化panic后，OnceLock可重新初始化。
 
-```rust
+```rust,ignore
 let cell: OnceCell<i32> = OnceCell::new();
 
 // 第一次初始化panic
@@ -131,7 +131,7 @@ let result = cell.get_or_init(|| 42);
 
 > OnceLock使用Acquire-Release保证可见性。
 
-```rust
+```rust,ignore
 // 初始化线程(Release)
 value = init();
 state.store(INITIALIZED, Release);
@@ -164,7 +164,7 @@ if state.load(Acquire) == INITIALIZED {
 
 ### 反例 6.1 (递归初始化)
 
-```rust
+```rust,ignore
 static CELL: OnceCell<i32> = OnceCell::new();
 
 CELL.get_or_init(|| {
@@ -175,7 +175,7 @@ CELL.get_or_init(|| {
 
 ### 反例 6.2 (async初始化)
 
-```rust
+```rust,ignore
 // 错误: OnceLock不支持async初始化
 static CLIENT: OnceLock<Client> = OnceLock::new();
 

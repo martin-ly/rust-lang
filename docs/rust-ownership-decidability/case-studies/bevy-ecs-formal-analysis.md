@@ -73,7 +73,7 @@ Bevy ECS提供:
 ### 定义 2.1 (ECS核心类型)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 实体: 轻量级ID
 pub struct Entity {
     id: u32,
@@ -108,7 +108,7 @@ trait System: Send + Sync + 'static {
 ### 定义 2.2 (Archetype)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct Archetype {
     id: ArchetypeId,
     components: SparseSet<ComponentId, Column>,
@@ -148,7 +148,7 @@ health: [h1, h2, h3, ...]
 ### 定义 3.1 (Query)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn movement_system(
     mut query: Query<(&mut Position, &Velocity), With<Player>>,
 ) {
@@ -165,7 +165,7 @@ fn movement_system(
 
 **证明**:
 
-```rust
+```rust,ignore
 // 编译错误: Camera没有Position
 fn system(query: Query<&Position, With<Camera>>) { }
 
@@ -190,7 +190,7 @@ fn bad_system(query: Query<(&mut Position, &Position)>) { }
 
 **实现**:
 
-```rust
+```rust,ignore
 // OK: 访问不同组件
 fn system1(query: Query<&mut Position>) { }
 fn system2(query: Query<&mut Velocity>) { }
@@ -215,7 +215,7 @@ fn system4(query: Query<&Position>) { }
 ### 定义 4.1 (Stage)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 app.add_system(movement.before(collision))
    .add_system(collision)
    .add_system(render.after(collision));
@@ -228,7 +228,7 @@ app.add_system(movement.before(collision))
 
 **证明**:
 
-```rust
+```rust,ignore
 // 非法: A -> B -> C -> A
 app.add_system(a.before(b))
    .add_system(b.before(c))
@@ -247,7 +247,7 @@ app.add_system(a.before(b))
 
 **证明**:
 
-```rust
+```rust,ignore
 // System 1: 只读Health
 fn read_health(query: Query<&Health>) { }
 
@@ -276,7 +276,7 @@ fn write_position(query: Query<&mut Position>) { }
 
 **实现**:
 
-```rust
+```rust,ignore
 pub struct Time {
     delta: Duration,
 }
@@ -306,7 +306,7 @@ fn system(time: Res<Time>) {
 
 **实现**:
 
-```rust
+```rust,ignore
 // 发送
 events.send(DamageEvent { amount: 10 });
 
@@ -338,7 +338,7 @@ fn damage_system(mut events: EventReader<DamageEvent>) {
 
 **证明**:
 
-```rust
+```rust,ignore
 fn system(world: &mut World) {
     let mut query = world.query::<&Position>();
 
@@ -359,7 +359,7 @@ fn system(world: &mut World) {
 
 **实现**:
 
-```rust
+```rust,ignore
 fn system(mut commands: Commands, query: Query<Entity>) {
     for entity in query.iter() {
         commands.entity(entity).despawn();  // 延迟执行
@@ -378,7 +378,7 @@ fn system(mut commands: Commands, query: Query<Entity>) {
 ### 反例 8.1 (迭代中修改)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 fn bad_system(world: &mut World) {
     let mut query = world.query::<Entity>();
     for entity in query.iter(world) {
@@ -397,7 +397,7 @@ fn good_system(mut commands: Commands, query: Query<Entity>) {
 ### 反例 8.2 (Query冲突)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn bad_system(query: Query<(&mut Position, &mut Position)>) {
     // 编译错误: 重复可变借用
 }
@@ -406,7 +406,7 @@ fn bad_system(query: Query<(&mut Position, &mut Position)>) {
 ### 反例 8.3 (忘记标记组件)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 struct MyData;  // 需要 #[derive(Component)]
 
 // 正确

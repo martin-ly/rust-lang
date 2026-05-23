@@ -132,7 +132,7 @@ cargo prusti --version
 
 **基本使用**:
 
-```rust
+```rust,ignore
 use prusti_contracts::*;
 
 #[requires(x > 0)]
@@ -188,7 +188,7 @@ cargo kani --version
 
 **基本使用**:
 
-```rust
+```rust,ignore
 #[kani::proof]
 fn test_abs() {
     let x: i32 = kani::any();
@@ -260,7 +260,7 @@ harness = false
 
 **基本使用**:
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion};
 
 fn fibonacci(n: u64) -> u64 {
@@ -525,7 +525,7 @@ proptest = "1.0"
 
 **基本使用**:
 
-```rust
+```rust,ignore
 use proptest::prelude::*;
 
 proptest! {

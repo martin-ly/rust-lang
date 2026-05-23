@@ -421,7 +421,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 > **[来源: PLDI - Programming Language Design]**
 
-````rust
+````rust,ignore
 /// 函数说明
 ///
 /// # Examples
@@ -660,7 +660,7 @@ tokio = { version = "1.0", features = ["full"] }
 
 ### 核心特性速查
 
-```rust
+```rust,ignore
 // array_windows - 零分配滑动窗口
 data.array_windows::<3>()
     .map(|[a, b, c]| a + b + c)

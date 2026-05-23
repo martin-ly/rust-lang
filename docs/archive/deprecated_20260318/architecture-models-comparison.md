@@ -111,7 +111,7 @@ Clean Architecture层次 (内层 → 外层):
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 内层: 实体 (无外部依赖)
 // src/domain/entity.rs
 pub struct User {
@@ -234,7 +234,7 @@ pub async fn create_user(
 
 ### 5.1 事件溯源模式
 
-```rust
+```rust,ignore
 // 事件定义
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub enum BankAccountEvent {
@@ -349,7 +349,7 @@ Actor边界:
 
 ### 6.2 Actor与DDD结合
 
-```rust
+```rust,ignore
 // 聚合根Actor
 pub struct OrderActor {
     order_id: OrderId,

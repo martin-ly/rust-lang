@@ -146,7 +146,7 @@ assert_eq!(std::mem::align_of::<S>(), 4);
 2. **原子性**: 某些原子操作要求对齐
 3. **硬件限制**: 某些架构不支持未对齐访问
 
-```rust
+```rust,ignore
 // 未对齐访问示例 (可能慢或崩溃)
 let arr: [u8; 4] = [0, 0, 0, 0];
 let ptr = arr.as_ptr().add(1) as *const u32;  // 地址 1，未对齐到 4
@@ -184,7 +184,7 @@ Offset:  0   1   2   3   4   5   6   7   8   9   10  11
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // 优化前: 12 bytes
 struct Bad {
     a: u8,  // 1 + 3 pad
@@ -258,7 +258,7 @@ struct DefaultLayout {
 - 与 C 结构体布局兼容
 - FFI 必需
 
-```rust
+```rust,ignore
 #[repr(C)]
 struct CLayout {
     a: u8,  // offset 0
@@ -275,7 +275,7 @@ assert_eq!(mem::size_of::<CLayout>(), 8);
 - 可能未对齐访问
 - 需要 unsafe
 
-```rust
+```rust,ignore
 #[repr(packed)]
 struct Packed {
     a: u8,
@@ -292,7 +292,7 @@ let b = unsafe { std::ptr::addr_of!(p.b).read_unaligned() };
 ### 4.4 `#[repr(align(N))]` - 自定义对齐
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 #[repr(align(64))]
 struct CacheAligned {
     data: [u8; 64],
@@ -336,7 +336,7 @@ struct Phantom<T>(std::marker::PhantomData<T>);
 ### 5.2 ZST 的行为
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let a = ZeroSized;
 let b = ZeroSized;
 
@@ -371,7 +371,7 @@ struct MyVec<T> {
 
 1. **状态机类型**:
 
-```rust
+```rust,ignore
 struct Connection<S> {
     _state: PhantomData<S>,
 }
@@ -390,7 +390,7 @@ struct Disconnected;
 
 大小在编译时未知的类型，必须通过指针访问。
 
-```rust
+```rust,ignore
 // DST 类型
 str              // 字符串切片
 [T]              // 切片
@@ -402,7 +402,7 @@ dyn Trait        // trait 对象
 
 DST 的指针是"胖指针"，包含地址和元数据。
 
-```rust
+```rust,ignore
 // 瘦指针 (thin pointer)
 let x: &i32 = &42;  // 只有地址
 
@@ -414,7 +414,7 @@ let t: &dyn Debug = &42;      // 地址 + vtable 指针
 ### 6.3 自定义 DST
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 通过组合创建 DST
 struct MySlice<T> {
     header: u32,
@@ -504,7 +504,7 @@ typedef struct {
 } CStruct;
 ```
 
-```rust
+```rust,ignore
 // Rust 映射
 #[repr(C)]
 pub struct RustStruct {

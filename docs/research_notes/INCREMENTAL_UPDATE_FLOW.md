@@ -207,7 +207,7 @@ fn lub_coercion_example() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 研究场景：验证 Rust 1.93 的性能改进
 // 形式化问题：新实现是否保持语义等价
 

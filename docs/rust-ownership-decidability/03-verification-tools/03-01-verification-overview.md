@@ -88,7 +88,7 @@
 ### 3.1 Creusot
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Creusot示例: 预言变量
 #[requires(true)]
 #[ensures(result >= 0)]
@@ -110,7 +110,7 @@ fn abs(x: i32) -> i32 {
 ### 3.2 Prusti
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // Prusti示例: 前置/后置条件
 #[requires(x >= 0)]
 #[ensures(result >= x)]
@@ -155,7 +155,7 @@ fn max(x: i32, y: i32) -> i32 {
 ### 3.4 Verus
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // Verus示例: 系统验证
 use vstd::prelude::*;
 
@@ -182,7 +182,7 @@ verus! {
 ### 3.5 Kani
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Kani: 有界模型检测
 #[kani::proof]
 fn check_abs() {

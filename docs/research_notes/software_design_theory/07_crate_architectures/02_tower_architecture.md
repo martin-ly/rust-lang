@@ -17,7 +17,7 @@ Tower 的设计哲学可以概括为：**请求即函数，中间件即高阶函
 
 `Service` trait 是 Tower 的基石。它将任意请求-响应交互抽象为具有显式 backpressure 信号的状态机。
 
-```rust
+```rust,ignore
 pub trait Service<Request> {
     /// 成功响应的类型
     type Response;
@@ -45,7 +45,7 @@ pub trait Service<Request> {
 - **限流器**：`poll_ready` 检查令牌桶是否有剩余令牌
 - **缓冲区**：`poll_ready` 检查缓冲区是否有空位
 
-```rust
+```rust,ignore
 // 背压传播示例：限流器的 poll_ready
 impl<S, Request> Service<Request> for RateLimit<S>
 where
@@ -115,7 +115,7 @@ Tower 的 `Layer` 组合天然满足**幺半群 (Monoid)** 的代数公理：
 | **结合律** | (a⊕b)⊕c = a⊕(b⊕c) | `ServiceBuilder` 按顺序应用，语义等价 |
 | **单位元** | ∃e∈M, e⊕a = a⊕e = a | `Identity` layer 透传所有请求 |
 
-```rust
+```rust,ignore
 use tower::layer::util::Identity;
 use tower::Layer;
 
@@ -153,7 +153,7 @@ graph LR
     style Tr fill:#e1f5fe
 ```
 
-```rust
+```rust,ignore
 use tower::{ServiceBuilder, ServiceExt};
 use tower::timeout::TimeoutLayer;
 use tower::retry::RetryLayer;
@@ -231,7 +231,7 @@ Tower 的零成本承诺建立在 Rust 类型系统的三个支柱之上：
 ### 5.1 关联类型消除输出类型歧义
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // Service 的 Response 和 Error 由实现者决定
 impl Service<HttpRequest> for MyHandler {
     type Response = HttpResponse;
@@ -247,7 +247,7 @@ impl Service<HttpRequest> for MyHandler {
 ### 5.2 无装箱的 ServiceStack
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // Tower 的层组合在编译期完全展开
 // 以下类型的内存布局是确定的、连续的
 let stack = ServiceBuilder::new()
@@ -276,7 +276,7 @@ let stack = ServiceBuilder::new()
 
 Tower 的中间件经常需要生成自引用的 `Future`（如超时 Future 需要引用计时器状态）。`pin-project` 和 Rust 的 `Pin` 类型保证了这些 Future 在异步执行期间的安全移动语义。
 
-```rust
+```rust,ignore
 use pin_project::pin_project;
 
 #[pin_project]
@@ -334,7 +334,7 @@ Tower 的 `Service` 是其 Rust 模拟：
 
 以下示例展示自定义重试层、超时层和限流层的组合使用：
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::task::{Context, Poll};

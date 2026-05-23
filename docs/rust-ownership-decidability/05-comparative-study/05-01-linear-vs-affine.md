@@ -127,7 +127,7 @@ t ::= x | λx.t | t₁ t₂ | let x = t₁ in t₂ | drop x
 ### 3.1 资源使用模式
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // Rust (仿射类型) - 允许忽略资源
 fn affine_example() {
     let file = File::open("data.txt").unwrap();  // 资源创建
@@ -264,7 +264,7 @@ Rust选择仿射类型的原因:
 ### 6.2 向线性的接近
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // Rust可以通过lint接近线性行为
 
 #![deny(unused_variables)]  // 禁止未使用变量

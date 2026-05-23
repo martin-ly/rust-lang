@@ -201,7 +201,7 @@ mod tests {
 
 **代码示例：**
 
-```rust
+```rust,ignore
 // tests/user_api_integration.rs
 use my_app::{AppConfig, Database, UserService};
 use std::sync::Arc;
@@ -423,7 +423,7 @@ impl Validator {
 
 **代码示例：**
 
-```rust
+```rust,ignore
 // benches/sorting_benchmark.rs
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use my_algorithm::{bubble_sort, quick_sort, merge_sort};
@@ -521,7 +521,7 @@ criterion = { version = "0.5", features = ["async_tokio"] }
 
 **代码示例：**
 
-```rust
+```rust,ignore
 // fuzz/fuzz_targets/parser.rs
 #![no_main]
 
@@ -597,7 +597,7 @@ cargo fuzz run parser crash-abc123
 
 **代码示例：**
 
-```rust
+```rust,ignore
 // 使用 proptest 进行属性测试
 use proptest::prelude::*;
 
@@ -698,7 +698,7 @@ impl ReferenceStateMachine for MyStateMachine {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 基础异步测试
 #[tokio::test]
 async fn test_async_function() {
@@ -752,7 +752,7 @@ async fn test_timer_behavior() {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use mockall::{mock, predicate::*};
 use mockall_double::double;
 
@@ -835,7 +835,7 @@ pub struct UserService {
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use insta::{assert_snapshot, with_settings};
 use serde::Serialize;
 
@@ -913,7 +913,7 @@ cargo insta reject
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use criterion::{Criterion, BenchmarkGroup, measurement::WallTime};
 use criterion::async_executor::FuturesExecutor;
 
@@ -1145,7 +1145,7 @@ jobs:
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 // benches/regression_tests.rs
 use criterion::{criterion_group, criterion_main, Criterion};
 
@@ -1219,7 +1219,7 @@ crates/
 
 **命名约定：**
 
-```rust
+```rust,ignore
 // 测试函数命名
 #[test]
 fn test_<被测功能>_<场景>_<预期结果>() {
@@ -1240,7 +1240,7 @@ mod tests {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // tests/common/fixtures.rs
 use once_cell::sync::Lazy;
 use std::collections::HashMap;
@@ -1310,7 +1310,7 @@ pub fn generate_test_users(count: usize) -> Vec<User> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 // 模式 1: 基本异步测试
 #[tokio::test]
 async fn basic_async_test() {
@@ -1389,7 +1389,7 @@ async fn test_shared_state() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// # 测试说明
 ///
 /// ## 正常场景

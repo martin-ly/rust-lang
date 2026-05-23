@@ -58,7 +58,7 @@ Rayon特点：
 ### 定义 PAR-ITER-1 ( ParallelIterator )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 vec.par_iter()
     .map(|x| x * x)
     .filter(|x| *x > 10)
@@ -95,7 +95,7 @@ $$
 ### 定义 JOIN-1 ( 并行递归 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 fn fib(n: u32) -> u32 {
     if n < 2 { return n; }
     let (a, b) = rayon::join(
@@ -130,7 +130,7 @@ $$
 ### 定义 SCOPE-1 ( scope创建 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 rayon::scope(|s| {
     s.spawn(|s| { /* work 1 */ });
     s.spawn(|s| { /* work 2 */ });
@@ -203,7 +203,7 @@ $$
 
 ### 示例1: 并行排序
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn parallel_sort<T: Ord + Send>(data: &mut [T]) {
@@ -222,7 +222,7 @@ where
 
 ### 示例2: 并行归约
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 fn parallel_sum(data: &[i32]) -> i32 {
@@ -254,7 +254,7 @@ fn parallel_histogram(text: &str) -> HashMap<char, usize> {
 
 ### 示例3: 分治算法
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 // 并行矩阵乘法

@@ -317,7 +317,7 @@ pub enum SecurityAction {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 /// 简单的入侵检测系统
 pub struct IntrusionDetector {
     pattern_db: Vec<AttackPattern>,
@@ -489,7 +489,7 @@ jobs:
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 /// 安全指标收集
 pub struct SecurityMetrics {
     pub vulnerability_count: AtomicU64,

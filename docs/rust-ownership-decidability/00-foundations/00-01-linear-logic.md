@@ -223,7 +223,7 @@ println!("{}", data);
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // Rust中的线性类型概念映射
 
 // 线性函数: 消耗参数所有权
@@ -474,7 +474,7 @@ fn transform(data: Vec<u8>) -> Vec<u8> {
 
 **反例 1: 双重释放 (如果无Drop保护)**:
 
-```rust
+```rust,ignore
 // 假设没有Drop trait的假想情况
 fn double_free_risk() {
     let ptr = allocate_memory();
@@ -488,7 +488,7 @@ fn double_free_risk() {
 
 **反例 2: 使用已移动的值**:
 
-```rust
+```rust,ignore
 fn use_after_move() {
     let s = String::from("hello");
     let t = s;  // s 被移动
@@ -498,7 +498,7 @@ fn use_after_move() {
 
 **反例 3: 悬垂引用**:
 
-```rust
+```rust,ignore
 fn dangling_reference() -> &String {  // 编译错误！
     let s = String::from("hello");
     &s  // s 在函数结束时被释放

@@ -60,7 +60,7 @@ impl Future for TimerFuture {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 // async fn 定义异步函数
@@ -172,7 +172,7 @@ fn pin_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use futures::stream::{self, Stream, StreamExt};
 
 // Stream 是异步的迭代器
@@ -210,7 +210,7 @@ async fn stream_combinators() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Tokio：最常用的异步运行时
 #[tokio::main]
 async fn main() {
@@ -266,7 +266,7 @@ async fn async_channels() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 use tokio::select;
 
@@ -321,7 +321,7 @@ fn cancellation_demo() {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use tokio::sync::Semaphore;
 
 // 限制并发数

@@ -166,7 +166,7 @@ enum ConnectionState {
 
 **实现**:
 
-```rust
+```rust,ignore
 async fn serve_connection<I, S>(
     io: I,
     service: S,
@@ -216,7 +216,7 @@ async fn serve_connection<I, S>(
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 trait Service<Request> {
     type Response;
     type Error;
@@ -249,7 +249,7 @@ $$
 
 **Layer组合**:
 
-```rust
+```rust,ignore
 // 添加超时层
 let service = Timeout::new(inner_service, Duration::from_secs(30));
 
@@ -349,7 +349,7 @@ $$
 
 **Body Trait**:
 
-```rust
+```rust,ignore
 trait Body {
     type Data: Buf;
     type Error;
@@ -392,7 +392,7 @@ trait Body {
 ### 定义 5.1 (连接池)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 struct Pool<K, V> {
     // 空闲连接
     idle: HashMap<K, Vec<V>>,
@@ -408,7 +408,7 @@ struct Pool<K, V> {
 
 **算法**:
 
-```rust
+```rust,ignore
 fn get_connection(&mut self, key: K) -> Option<V> {
     // 查找空闲连接
     if let Some(connections) = self.idle.get_mut(&key) {
@@ -446,7 +446,7 @@ fn put_connection(&mut self, key: K, conn: V) {
 ### 定义 5.2 (超时语义)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 enum TimeoutState {
     Init,
     Connecting(Instant),
@@ -463,7 +463,7 @@ enum TimeoutState {
 
 **取消机制**:
 
-```rust
+```rust,ignore
 async fn request(&self, req: Request<Body>) -> Result<Response<Body>> {
     let fut = self.send_request(req);
 
@@ -498,7 +498,7 @@ async fn request(&self, req: Request<Body>) -> Result<Response<Body>> {
 
 **实现**:
 
-```rust
+```rust,ignore
 fn parse_request(buf: &[u8]) -> ParseResult {
     // 直接解析字节缓冲区，不复制
     let method = parse_method(buf)?;
@@ -549,7 +549,7 @@ fn parse_request(buf: &[u8]) -> ParseResult {
 
 **所有权转移**:
 
-```rust
+```rust,ignore
 async fn serve_request(req: Request<Body>) -> Response<Body> {
     // req的所有权进入此函数
     let body = req.into_body();  // 转移Body所有权
@@ -584,14 +584,14 @@ async fn serve_request(req: Request<Body>) -> Response<Body> {
 
 1. **IO抽象**:
 
-   ```rust
+   ```rust,ignore
    impl<T: AsyncRead + AsyncWrite + Unpin>
        Server<T> for HyperServer
    ```
 
 2. **任务调度**:
 
-   ```rust
+   ```rust,ignore
    tokio::spawn(serve_connection(conn, service));
    ```
 
@@ -615,7 +615,7 @@ async fn serve_request(req: Request<Body>) -> Response<Body> {
 ### 反例 8.1 (Body未完全消费)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 async fn handler(req: Request<Body>) -> Response<Body> {
     // 错误: 直接丢弃Body
     Response::new(Body::empty())
@@ -634,7 +634,7 @@ async fn handler(req: Request<Body>) -> Response<Body> {
 ### 反例 8.2 (错误的Keep-Alive处理)
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 错误: 不检查Connection头部
 loop {
     let req = read_request(&mut conn).await?;
@@ -646,7 +646,7 @@ loop {
 
 **正确做法**:
 
-```rust
+```rust,ignore
 loop {
     let req = read_request(&mut conn).await?;
     let resp = handle(req).await;
@@ -659,7 +659,7 @@ loop {
 ### 错误处理 8.3 (超时与资源清理)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 潜在问题: 超时后Body未清理
 let result = timeout(Duration::from_secs(5), handle_request(req)).await;
 

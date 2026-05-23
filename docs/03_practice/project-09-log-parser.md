@@ -7,6 +7,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [实践项目 09: 日志分析器](#实践项目-09-日志分析器)
@@ -19,6 +20,7 @@
   - [完整参考实现位于: `examples/log-parser/`](#完整参考实现位于-exampleslog-parser)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 项目目标
 >
@@ -44,9 +46,10 @@
 > **[来源: Rust Official Docs]**
 
 ### 流式处理
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::io::{BufRead, BufReader};
 use std::fs::File;
 
@@ -65,6 +68,7 @@ fn process_log_file(path: &str) -> std::io::Result<()> {
 ---
 
 ## 参考实现
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 完整参考实现位于: `examples/log-parser/`
@@ -128,4 +132,3 @@ fn process_log_file(path: &str) -> std::io::Result<()> {
 ---
 
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
-

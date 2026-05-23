@@ -44,7 +44,7 @@
 - Tokio（异步运行时）：`https://tokio.rs/`
 - tonic（Rust gRPC）：`https://github.com/hyperium/tonic`
 
-````rust
+````rust,ignore
 //! 分布式工作流执行引擎
 //!
 //! 该引擎是一个完整的、具有高可用性和弹性的分布式工作流处理系统，
@@ -2568,7 +2568,7 @@ pub struct WorkflowManagerConfig {
 
     /// 调度器配置
     pub scheduler_config: Schedul
-```rust
+```rust,ignore
 erConfig,
 
     /// 指标配置
@@ -4283,7 +4283,7 @@ pub mod cli {
         // 解析工作流定义
         let definition: WorkflowDefinition = if file_path.extension().and_then(|e| e.to_str()) == Some("yaml") ||
                                               file_path.extension().
-```rust
+```rust,ignore
 and_then(|e| e.to_str()) == Some("yml") {
             serde_yaml::from_str(&contents)?
         } else {
@@ -6562,7 +6562,7 @@ pub mod helpers {
 3. **命令行工具**：方便用户通过命令行管理工作流。
 4. **gRPC服务**：支持gRPC通信。
 
-````rust
+````rust,ignore
 // 工作流引擎的核心模型
 pub mod model {
     use super::*;
@@ -8565,7 +8565,7 @@ pub mod storage {
                 Some(row) => {
                     let definition: WorkflowDefinition = serde_json::from_value(row.get("definition"))
                         .map_err(|e| WorkflowError::SerializationError(format!("反序列化工作
-```rust
+```rust,ignore
 流定义失败: {}", e)))?;
                     Ok(definition)
                 },
@@ -10819,7 +10819,7 @@ pub mod node {
 
         async fn select_node(&self, capabilities: &[String], exclude: &[String]) -> Result<Option<Arc<dyn Node>>, WorkflowError> {
             let nodes = self.nodes.read();
-```rust
+```rust,ignore
             // 过滤符合要求的节点
             let mut candidates = Vec::new();
 
@@ -12454,7 +12454,7 @@ pub mod scheduler {
 
         /// 节点管理器
         node
-```rust
+```rust,ignore
 _manager: Arc<dyn node::NodeManager>,
 
         /// 事件总线
@@ -15182,7 +15182,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 以下是一个可能的解决方案：
 
-```rust
+```rust,ignore
 pub struct DistributedEventBus {
     local_subscribers: Arc<RwLock<HashMap<String, Vec<Box<dyn Fn(Event) -> BoxFuture<'static, ()> + Send + Sync>>>>>,
     redis_client: redis::Client,
@@ -15344,7 +15344,7 @@ impl DistributedEventBus {
 
 确实缺少了与前端可视化框架（如D3.js）的集成部分。以下是一个可能的解决方案，通过WebSocket实时推送工作流状态更新：
 
-```rust
+```rust,ignore
 pub struct VisualizationWebSocketServer {
     visualization_engine: Arc<VisualizationEngine>,
     event_bus: Arc<DistributedEventBus>,
@@ -15761,7 +15761,7 @@ function createWorkflowVisualization(containerId, workflowId, executionId) {
 ### array_windows 在流程模式检测中的应用
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 检测工作流中的重复模式
 fn detect_loop_patterns(events: &[WorkflowEvent]) -> Vec<LoopPattern> {
     events.array_windows::<4>()
@@ -15784,7 +15784,7 @@ fn detect_loop_patterns(events: &[WorkflowEvent]) -> Vec<LoopPattern> {
 ### LazyLock 在模型缓存中的应用
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// BPMN 模型缓存（延迟加载）
@@ -15802,7 +15802,7 @@ pub fn get_cached_model(model_id: &str) -> Option<BpmnModel> {
 ### 数学常量在流程优化中的应用
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 /// 使用黄金比例确定最优并行度
 pub fn calculate_optimal_parallelism(workload: usize) -> usize {
     let phi = f64::consts::GOLDEN_RATIO;

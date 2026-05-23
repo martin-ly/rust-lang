@@ -413,7 +413,7 @@ $$
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 use std::pin::Pin;
 use std::sync::atomic::{AtomicBool, Ordering};
@@ -508,7 +508,7 @@ pub async fn discriminator_select<T>(
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use tokio::time::{timeout, Duration};
 
 /// 带超时的鉴别器
@@ -604,7 +604,7 @@ async fn query_database(source: &str, latency_ms: u64) -> QueryResult {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 use tokio::sync::Mutex;
 

@@ -58,7 +58,7 @@ Slog提供:
 ### 定义 2.1 (Drain Trait)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub trait Drain {
     type Ok;
     type Err;
@@ -89,7 +89,7 @@ pub trait Drain {
 
 > 多个filter可组合成复杂规则。
 
-```rust
+```rust,ignore
 let drain = slog_term::CompactFormat::new(decorator).build()
     .filter_level(Level::Info)  // 最低级别
     .filter(|r| r.module().starts_with("my_app"))  // 模块过滤
@@ -106,7 +106,7 @@ let drain = slog_term::CompactFormat::new(decorator).build()
 
 > key-value对在编译时验证类型。
 
-```rust
+```rust,ignore
 info!(log, "message";
     "key" => value,  // 类型检查
     "count" => 42,
@@ -116,7 +116,7 @@ info!(log, "message";
 
 **vs String格式化**:
 
-```rust
+```rust,ignore
 // 不安全: 运行时错误
 println!("count: {}", "not a number");
 
@@ -134,7 +134,7 @@ info!(log, "count"; "value" => 42i32);
 
 > async_drain防止I/O阻塞。
 
-```rust
+```rust,ignore
 let drain = slog_async::Async::new(drain)
     .chan_size(1024)  // 缓冲区大小
     .overflow_strategy(OverflowStrategy::Block)
@@ -157,7 +157,7 @@ let drain = slog_async::Async::new(drain)
 
 > 子Logger继承父Logger的上下文。
 
-```rust
+```rust,ignore
 let app_log = logger.new(o!(
     "app" => "my_app",
     "version" => "1.0",
@@ -177,7 +177,7 @@ let req_log = app_log.new(o!(
 
 ### 反例 6.1 (Key冲突)
 
-```rust
+```rust,ignore
 // 子logger覆盖父logger的key
 let log = logger.new(o!("key" => "parent"));
 let child = log.new(o!("key" => "child"));
@@ -186,7 +186,7 @@ let child = log.new(o!("key" => "child"));
 
 ### 反例 6.2 (缓冲区溢出)
 
-```rust
+```rust,ignore
 let drain = slog_async::Async::new(drain)
     .chan_size(10)
     .overflow_strategy(OverflowStrategy::Drop)

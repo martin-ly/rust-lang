@@ -166,7 +166,7 @@ cargo test
 
 1. **使用 ControlFlow 模式**
 
-   ```rust
+   ```rust,ignore
    use std::ops::ControlFlow;
 
    // 在迭代中使用提前返回

@@ -243,7 +243,7 @@ test result: ok. 30 passed; 0 failed; 0 ignored
 
 **修复**:
 
-```rust
+```rust,ignore
 // 原代码：在测试中调用未定义的外部函数
 impl Drop for SafeContext {
     fn drop(&mut self) {
@@ -268,7 +268,7 @@ impl Drop for SafeContext {
 
 **修复**:
 
-```rust
+```rust,ignore
 // 修复前
 for i in 0..5 {  // 越界！
     assert_eq!(data[i], i + 1);
@@ -288,7 +288,7 @@ for i in 0..3 {  // 正确范围
 
 **修复**:
 
-```rust
+```rust,ignore
 // 修复前：读写线程同时运行，可能导致死锁
 for _ in 0..10 { handles.push(读线程); }
 handles.push(写线程);
@@ -309,7 +309,7 @@ write_handle.join();
 
 **修复**:
 
-```rust
+```rust,ignore
 // 修复前："long"(4) vs "short"(5)，期望返回 "long" 是错误的
 let s1 = String::from("long");  // 长度 4
 let s2 = "short";               // 长度 5

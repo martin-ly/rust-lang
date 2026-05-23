@@ -117,7 +117,7 @@ assert!(!has_abba_pattern("abcd"));
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 
 let cell: LazyCell<String> = LazyCell::new(|| {
@@ -143,7 +143,7 @@ let value: &mut String = LazyCell::force_mut(&cell);
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 static CONFIG: LazyLock<String> = LazyLock::new(|| {
@@ -169,7 +169,7 @@ std::thread::spawn(|| {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 欧拉-马歇罗尼常数
 const GAMMA: f64 = f64::consts::EULER_GAMMA; // ≈ 0.57721566
 
@@ -183,7 +183,7 @@ let phi_f32 = f32::consts::GOLDEN_RATIO;
 
 ### 黄金分割搜索
 
-```rust
+```rust,ignore
 fn golden_section_search<F>(f: F, a: f64, b: f64, eps: f64) -> f64
 where
     F: Fn(f64) -> f64,
@@ -210,7 +210,7 @@ where
 
 ### 调和级数估算
 
-```rust
+```rust,ignore
 fn harmonic_approximation(n: usize) -> f64 {
     let gamma = f64::consts::EULER_GAMMA;
     gamma + (n as f64).ln() + 1.0 / (2.0 * n as f64)
@@ -223,7 +223,7 @@ fn harmonic_approximation(n: usize) -> f64 {
 
 ### next_if_map
 
-```rust
+```rust,ignore
 use std::iter::Peekable;
 
 let mut iter = vec![1, 2, 3, 4, 5].into_iter().peekable();
@@ -244,7 +244,7 @@ assert_eq!(result, None);
 
 ### 词法分析器示例
 
-```rust
+```rust,ignore
 struct Lexer<I: Iterator<Item = char>> {
     chars: Peekable<I>,
 }
@@ -294,7 +294,7 @@ let code = c as usize; // 简单但需注意溢出
 
 ### 应用场景
 
-```rust
+```rust,ignore
 // 字符统计
 fn char_frequency(text: &str) -> HashMap<char, usize> {
     let mut freq = HashMap::new();
@@ -324,7 +324,7 @@ impl CharMapper {
 
 ### 综合示例：数据处理器
 
-```rust
+```rust,ignore
 use std::cell::LazyCell;
 use std::sync::LazyLock;
 use std::collections::HashMap;
@@ -408,7 +408,7 @@ impl DataProcessor {
 
 ### array_windows
 
-```rust
+```rust,ignore
 // 零分配滑动窗口
 let sums: Vec<i32> = data.array_windows::<3>()
     .map(|&[a, b, c]| a + b + c)
@@ -417,7 +417,7 @@ let sums: Vec<i32> = data.array_windows::<3>()
 
 ### ControlFlow
 
-```rust
+```rust,ignore
 use std::ops::ControlFlow;
 
 fn find_first_match(items: &[T]) -> ControlFlow<T, ()> {
@@ -432,7 +432,7 @@ fn find_first_match(items: &[T]) -> ControlFlow<T, ()> {
 
 ### LazyLock
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 static CONFIG: LazyLock<Config> = LazyLock::new(|| Config::load());
@@ -445,7 +445,7 @@ pub fn get_config() -> Option<&'static Config> {
 
 ### 数学常量
 
-```rust
+```rust,ignore
 let phi = f64::consts::GOLDEN_RATIO;      // 黄金比例
 let gamma = f64::consts::EULER_GAMMA;     // 欧拉常数
 let ln2 = f64::consts::LN_2;              // ln(2)

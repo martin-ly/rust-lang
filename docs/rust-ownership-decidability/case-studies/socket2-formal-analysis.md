@@ -94,7 +94,7 @@ pub enum Type {
 
 > Socket拥有底层文件描述符。
 
-```rust
+```rust,ignore
 pub struct Socket {
     inner: sys::Socket,  // 原始socket
 }
@@ -114,7 +114,7 @@ $$
 
 > Socket在drop时自动关闭文件描述符。
 
-```rust
+```rust,ignore
 impl Drop for Socket {
     fn drop(&mut self) {
         unsafe {
@@ -134,7 +134,7 @@ impl Drop for Socket {
 
 > SockAddr封装不同地址类型。
 
-```rust
+```rust,ignore
 pub enum SockAddr {
     Inet(SocketAddrV4),
     Inet6(SocketAddrV6),
@@ -158,7 +158,7 @@ pub enum SockAddr {
 
 > Socket选项通过类型API设置，防止非法值。
 
-```rust
+```rust,ignore
 impl Socket {
     pub fn set_reuse_address(&self, reuse: bool) -> Result<()>;
     pub fn set_nonblocking(&self, nonblocking: bool) -> Result<()>;
@@ -174,7 +174,7 @@ impl Socket {
 
 ### 反例 6.1 (忘记绑定)
 
-```rust
+```rust,ignore
 let socket = Socket::new(Domain::IPV4, Type::STREAM, None)?;
 // 错误: 未绑定直接监听
 socket.listen(128)?;  // 可能失败或行为未定义
@@ -186,7 +186,7 @@ socket.listen(128)?;
 
 ### 反例 6.2 (协议不匹配)
 
-```rust
+```rust,ignore
 let socket = Socket::new(Domain::IPV4, Type::DGRAM, None)?;
 // 错误: UDP socket尝试连接TCP地址
 socket.connect(&tcp_addr)?;  // 运行时错误

@@ -83,7 +83,7 @@
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 pub struct Vec<T> {
     ptr: NonNull<T>,      // 堆内存指针
     len: usize,           // 当前元素数
@@ -150,7 +150,7 @@ $$
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn new() -> Vec<T>
 ```
 
@@ -169,7 +169,7 @@ $$
 ### 定义 3.2 (Vec::with_capacity)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn with_capacity(capacity: usize) -> Vec<T>
 ```
 
@@ -187,7 +187,7 @@ $$
 ### 定义 3.3 (Index操作)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn index(&self, index: usize) -> &T
 ```
 
@@ -214,7 +214,7 @@ Rust提供两种索引方式:
 
 1. **运行时检查** (`[]` 操作符):
 
-   ```rust
+   ```rust,ignore
    let x = v[i];  // 运行时检查 i < v.len()
    ```
 
@@ -222,7 +222,7 @@ Rust提供两种索引方式:
 
 2. **不安全索引** (`get_unchecked`):
 
-   ```rust
+   ```rust,ignore
    unsafe { v.get_unchecked(i) }  // 无检查，unsafe
    ```
 
@@ -238,7 +238,7 @@ Rust提供两种索引方式:
 
 当 `len == cap` 时，`push` 触发扩容:
 
-```rust
+```rust,ignore
 fn grow(&mut self) {
     let new_cap = if self.cap == 0 { 1 } else { self.cap * 2 };
     let new_ptr = alloc(new_cap * size_of::<T>());
@@ -359,7 +359,7 @@ v.push(4);  // 可能触发扩容
 
 Vec实现 `Drop` trait:
 
-```rust
+```rust,ignore
 impl<T> Drop for Vec<T> {
     fn drop(&mut self) {
         // 1. 逐元素调用drop
@@ -510,7 +510,7 @@ let r: &i32;
 ### 定义 6.2 (Vec迭代器)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 impl<T> Vec<T> {
     fn iter(&self) -> Iter<T>;       // 共享迭代
     fn iter_mut(&mut self) -> IterMut<T>;  // 可变迭代
@@ -591,7 +591,7 @@ std::cout << *it;  // 使用已失效迭代器! 未定义行为
 
 **Rust代码 (编译错误)**:
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 let it = v.iter();
 v.push_back(4);  // 编译错误: cannot borrow `v` as mutable
@@ -603,7 +603,7 @@ for x in it {
 
 **Rust正确做法**:
 
-```rust
+```rust,ignore
 let mut v = vec![1, 2, 3];
 {
     let it = v.iter();

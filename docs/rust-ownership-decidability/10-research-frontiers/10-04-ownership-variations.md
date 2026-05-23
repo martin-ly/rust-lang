@@ -103,7 +103,7 @@
 
 Rust 的生命周期参数本质上就是区域：
 
-```rust
+```rust,ignore
 // 生命周期作为区域参数
 fn borrow<'a, T>(x: &'a T) -> &'a T {
     // 'a 是一个区域参数
@@ -154,7 +154,7 @@ Rust 使用约束基础的区域推断：
 4. 验证解的有效性
 ```
 
-```rust
+```rust,ignore
 // 区域推断示例
 fn example(x: &i32, y: &i32) -> &i32 {
     if *x > 0 { x } else { y }
@@ -261,7 +261,7 @@ path_sensitive_live(B, P, Path) :-
 
 #### Polonius 优势
 
-```rust
+```rust,ignore
 // Polonius 可以接受的模式（当前借用检查器拒绝）
 fn polonius_friendly() {
     let mut x = 0;
@@ -368,7 +368,7 @@ fn path_sensitive(condition: bool) {
 
 幽灵借用（Ghost Borrow）是一种仅在验证时存在的借用：
 
-```rust
+```rust,ignore
 // 幽灵借用的概念（非实际 Rust）
 
 #[ghost]
@@ -418,7 +418,7 @@ Rust 当前：
     - 一个 &raw T（原始指针，unsafe 使用）
 ```
 
-```rust
+```rust,ignore
 // 唯一引用（Unique Reference）的概念
 // 类似于 &mut，但允许延迟写入
 
@@ -514,7 +514,7 @@ fn two_phase_borrow() {
 
 分离堆（Disjoint Heap）并发模型基于内存分离：
 
-```rust
+```rust,ignore
 // 分离堆并发的概念
 
 // 线程 1 拥有堆 A
@@ -548,7 +548,7 @@ fn disjoint_heap() {
 
 基于能力的并发（Capability-based Concurrency）使用权限控制访问：
 
-```rust
+```rust,ignore
 // 基于能力的访问控制
 
 pub struct Capability<T> {
@@ -595,7 +595,7 @@ impl<T> Capability<T> {
 
 会话类型（Session Types）用于验证通信协议：
 
-```rust
+```rust,ignore
 // 会话类型的概念
 
 // 定义协议
@@ -684,7 +684,7 @@ fn affine_types() {
 
 相关类型（Relevant Types）要求值至少使用一次：
 
-```rust
+```rust,ignore
 // 相关类型的概念（非实际 Rust）
 
 #[relevant]
@@ -709,7 +709,7 @@ fn use_relevant() {
 
 有序类型（Ordered Types）要求值按特定顺序使用：
 
-```rust
+```rust,ignore
 // 有序类型的概念
 
 protocol FileIO {
@@ -732,7 +732,7 @@ fn file_io() {
 
 唯一类型（Unique Types）确保值只有一个引用：
 
-```rust
+```rust,ignore
 // 唯一类型的概念
 
 unique struct UniqueResource {
@@ -764,7 +764,7 @@ fn unique_usage() {
 
 分级所有权（Graded Ownership）允许更细粒度的所有权控制：
 
-```rust
+```rust,ignore
 // 分级所有权的概念
 
 // 所有权等级
@@ -826,7 +826,7 @@ unsafe fn unsafe_context() {
 
 时间所有权（Temporal Ownership）跟踪所有权的时间属性：
 
-```rust
+```rust,ignore
 // 时间所有权的概念
 
 #[temporal(created_at = now(), expires_after = Duration::from_secs(60))]
@@ -853,7 +853,7 @@ impl SessionToken {
 
 空间所有权（Spatial Ownership）跟踪值在内存空间中的位置：
 
-```rust
+```rust,ignore
 // 空间所有权的概念
 
 #[spatial(region = "heap")]
@@ -887,7 +887,7 @@ impl<T> HeapValue<T> {
 
 扩展 RAII（Resource Acquisition Is Initialization）模式：
 
-```rust
+```rust,ignore
 // RAII 扩展模式
 
 // 作用域守卫
@@ -935,7 +935,7 @@ fn use_scope_guard() {
 
 细粒度的资源跟踪：
 
-```rust
+```rust,ignore
 // 资源跟踪系统
 
 pub struct ResourceTracker<T> {
@@ -969,7 +969,7 @@ impl<T> ResourceTracker<T> {
 
 延迟初始化（Lazy Initialization）的所有权模式：
 
-```rust
+```rust,ignore
 use once_cell::sync::OnceCell;
 
 pub struct LazyInitialized<T> {
@@ -1079,7 +1079,7 @@ Rust 所有权的形式化操作语义：
 
 使用所有权变体设计自定义智能指针：
 
-```rust
+```rust,ignore
 // 独占智能指针
 pub struct Unique<T> {
     ptr: NonNull<T>,
@@ -1127,7 +1127,7 @@ impl<T> Unique<T> {
 
 使用所有权实现类型状态：
 
-```rust
+```rust,ignore
 // 类型状态：确保正确的使用顺序
 
 pub struct Connection<State> {
@@ -1178,7 +1178,7 @@ impl Connection<Authenticated> {
 
 在 FFI 边界使用所有权保证安全：
 
-```rust
+```rust,ignore
 // 安全的 FFI 包装
 
 pub struct SafeHandle {

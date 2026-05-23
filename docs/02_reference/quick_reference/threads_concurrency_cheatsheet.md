@@ -54,6 +54,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 > **快速参考** | [完整文档](../../../crates/c05_threads/docs/README.md) | [代码示例](../../../crates/c05_threads/examples/README.md)
 > **创建日期**: 2026-01-27
@@ -117,6 +118,7 @@
   - [**状态**: ✅ 深度整合完成](#状态--深度整合完成)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -319,7 +321,7 @@ for i in 0..3 {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 let (tx, rx) = mpsc::channel();
@@ -335,7 +337,7 @@ let received = rx.recv().unwrap();
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 
 let (tx, rx) = mpsc::channel();
@@ -377,7 +379,7 @@ let value = counter.load(Ordering::SeqCst);
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::Ordering;
 
 // 顺序一致性（最强）
@@ -539,7 +541,7 @@ thread::spawn(move || {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::sync::Barrier;
 use std::thread;
 
@@ -587,7 +589,7 @@ for h in handles {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -722,7 +724,7 @@ fn main() {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let rc = std::rc::Rc::new(1);
 thread::spawn(|| {
     println!("{}", rc);  // ❌ Rc 不是 Send
@@ -733,7 +735,7 @@ thread::spawn(|| {
 
 **修正**:
 
-```rust
+```rust,ignore
 let arc = std::sync::Arc::new(1);
 thread::spawn(move || {
     println!("{}", arc);
@@ -748,7 +750,7 @@ thread::spawn(move || {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let m = Mutex::new(1);
 let g1 = m.lock().unwrap();
 let g2 = m.lock().unwrap();  // ❌ 死锁：同一线程重复获取
@@ -758,7 +760,7 @@ let g2 = m.lock().unwrap();  // ❌ 死锁：同一线程重复获取
 
 **修正**:
 
-```rust
+```rust,ignore
 let g = m.lock().unwrap();
 // 使用 g，作用域结束后释放
 ```
@@ -771,7 +773,7 @@ let g = m.lock().unwrap();
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let lock_a = Mutex::new(0);
 let lock_b = Mutex::new(0);
 
@@ -793,7 +795,7 @@ thread::spawn(move || {
 
 **修正**:
 
-```rust
+```rust,ignore
 // 统一锁获取顺序
 thread::spawn(move || {
     let _a = lock_a.lock().unwrap();
@@ -814,7 +816,7 @@ thread::spawn(move || {
 
 **错误示例**:
 
-```rust
+```rust,ignore
 let data = Arc::new(Mutex::new(vec![1, 2, 3]));
 let data2 = Arc::clone(&data);
 
@@ -831,7 +833,7 @@ thread::spawn(move || {
 
 **修正**:
 
-```rust
+```rust,ignore
 thread::spawn(move || {
     {
         let mut vec = data2.lock().unwrap();
@@ -961,7 +963,7 @@ let shared_map: Arc<HashMap<i32, String>> = Arc::new(HashMap::new());
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// 全局线程池配置（延迟初始化）

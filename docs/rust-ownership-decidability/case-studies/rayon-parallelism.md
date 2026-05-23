@@ -64,7 +64,7 @@
 
 Rayon是一个数据并行库，允许将串行迭代器转换为并行迭代器：
 
-```rust
+```rust,ignore
 // 串行
 let sum: i32 = data.iter().map(|x| x * x).sum();
 
@@ -167,7 +167,7 @@ $$
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 trait Iterator {
     type Item;
     fn next(&mut self) -> Option<Self::Item>;
@@ -190,7 +190,7 @@ $$
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 fn par_iter<I>(iter: I) -> impl ParallelIterator<Item = I::Item>
 where I: IntoIterator,
       I::Item: Send
@@ -231,7 +231,7 @@ Thread 2: [aₖ₊₁, ..., a₂ₖ] → 处理
 
 **归约操作**的结合性保证最终结果与顺序无关:
 
-```rust
+```rust,ignore
 let sum = data.par_iter().sum();  // 归约操作是结合的
 ```
 
@@ -248,7 +248,7 @@ let sum = data.par_iter().sum();  // 归约操作是结合的
 ### 定义 4.1 (join操作)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 fn join<A, B, RA, RB>(oper_a: A, oper_b: B) -> (RA, RB)
 where A: FnOnce() -> RA + Send,
       B: FnOnce() -> RB + Send,
@@ -360,7 +360,7 @@ $$
 ### 算法 5.1 (工作窃取算法)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 impl Worker {
     fn execute(&self) {
         loop {
@@ -538,7 +538,7 @@ let data: Vec<Rc<i32>> = vec![Rc::new(1), Rc::new(2)];
 
 **关键API约束**:
 
-```rust
+```rust,ignore
 // par_iter要求元素是Send
 data.par_iter() where T: Send
 
@@ -602,7 +602,7 @@ $$
 
 **注意**: 如果闭包有副作用(如修改共享状态)，则结果可能非确定。
 
-```rust
+```rust,ignore
 // 非确定性的例子
 let counter = AtomicU32::new(0);
 data.par_iter().for_each(|_| {

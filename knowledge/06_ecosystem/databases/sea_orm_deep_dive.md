@@ -90,7 +90,7 @@ Sea-ORM 适用场景:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 实体 (Entity) - 对应数据库表
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
 #[sea_orm(table_name = "posts")]
@@ -166,7 +166,7 @@ sea-orm-cli generate entity \
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use sea_orm::entity::prelude::*;
 
 #[derive(Clone, Debug, PartialEq, DeriveEntityModel)]
@@ -195,7 +195,7 @@ impl ActiveModelBehavior for ActiveModel {}
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // user.rs - 用户实体
 #[derive(DeriveEntityModel)]
 #[sea_orm(table_name = "users")]
@@ -248,7 +248,7 @@ impl Related<super::user::Entity> for Entity {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #[derive(DeriveEntityModel)]
 #[sea_orm(table_name = "order_items")]
 pub struct Model {
@@ -270,7 +270,7 @@ pub struct Model {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{ActiveModelTrait, Set};
 
 // 插入单条记录
@@ -304,7 +304,7 @@ user::Entity::insert_many(users)
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{EntityTrait, QueryFilter, ColumnTrait};
 
 // 查询所有
@@ -336,7 +336,7 @@ let num_pages = paginator.num_pages().await?;
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{ActiveModelTrait, Set, ModelTrait};
 
 // 方式1: 通过 ActiveModel
@@ -361,7 +361,7 @@ user::Entity::update_many()
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{ModelTrait, EntityTrait};
 
 // 删除单条
@@ -389,7 +389,7 @@ user::Entity::delete_many()
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{EntityTrait, Related};
 
 // 加载用户及其所有文章
@@ -417,7 +417,7 @@ let result: Vec<(user::Model, Vec<(post::Model, Vec<comment::Model>)>)> =
 >
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 先查询用户
 let user: user::Model = user::Entity::find_by_id(1)
     .one(&db)
@@ -440,7 +440,7 @@ let posts: Vec<post::Model> = user.find_related(post::Entity)
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{Database, DatabaseOptions, ConnectOptions};
 use std::time::Duration;
 
@@ -459,7 +459,7 @@ let db = Database::connect(opt).await?;
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use sea_orm::{QuerySelect, QueryOrder};
 
 // 只选择需要的列

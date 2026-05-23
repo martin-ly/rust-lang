@@ -8,6 +8,7 @@
 ---
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [学习路径规划文档](#学习路径规划文档)
@@ -71,6 +72,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 📋 目录
 >
@@ -137,6 +139,7 @@
   - [**最后更新**: 2026-05-08 (Rust 1.95+ 持续更新)](#最后更新-2026-05-08-rust-195-持续更新)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ---
 
@@ -399,6 +402,7 @@
 ---
 
 ## 💻 学习路径代码示例
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 路径 1 代码示例：基础语法实践
@@ -450,7 +454,7 @@ fn main() {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 use tokio::time::{sleep, Duration};
 
 // 异步函数示例
@@ -493,6 +497,7 @@ fn main() {
 ---
 
 ## 🎯 学习建议
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 ### 1. 理论与实践结合
@@ -530,6 +535,7 @@ fn main() {
 ---
 
 ## 📚 推荐学习资源
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 官方资源
@@ -549,6 +555,7 @@ fn main() {
 - [最佳实践指南](../05_guides/BEST_PRACTICES.md)
 
 ### 社区资源
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 - [Rust 社区论坛](https://users.rust-lang.org/)
@@ -556,6 +563,7 @@ fn main() {
 - [Rust 周报](https://this-week-in-rust.org/)
 
 ### Coursera 在线课程
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 #### Rust Programming Specialization (Duke University)
@@ -591,9 +599,11 @@ fn main() {
 ---
 
 ## 🔄 学习路径调整
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 ### 根据目标调整
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - **Web 开发**: 重点学习 C06、C10、C12
@@ -602,6 +612,7 @@ fn main() {
 - **嵌入式**: 重点学习 C01、C02、C11
 
 ### 根据时间调整
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - **时间紧张**: 选择核心模块（C01-C03, C05-C06）
@@ -611,9 +622,11 @@ fn main() {
 ---
 
 ## 📈 学习效果评估
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 自我评估
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - 能够独立编写 Rust 代码
@@ -622,6 +635,7 @@ fn main() {
 - 能够设计和实现项目
 
 ### 项目评估
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - 完成基础项目（CLI 工具）
@@ -632,9 +646,11 @@ fn main() {
 ---
 
 ## 👤 四类学习者详细学习路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 ### 路径 A: 初学者（零编程基础）
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 **目标**: 从零开始掌握 Rust 基础，建立编程思维
@@ -679,6 +695,7 @@ fn main() {
 ---
 
 ### 路径 B: 有经验的开发者（其他语言背景）
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 **目标**: 快速迁移到 Rust，掌握所有权和类型系统
@@ -736,6 +753,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ### 路径 C: 研究者（形式化方法方向）
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 **目标**: 深入理解 Rust 的形式化基础，掌握证明技术
@@ -784,6 +802,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ### 路径 D: 维护者/贡献者（Rust 生态方向）
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 **目标**: 参与 Rust 开源项目，理解编译器和标准库
@@ -822,9 +841,11 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ## 📚 相关文档
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 ### 学习支持
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [项目架构指南](../07_project/PROJECT_ARCHITECTURE_GUIDE.md)
@@ -833,6 +854,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 - [快速参考卡片](../02_reference/quick_reference/README.md)
 
 ### 形式化研究（研究者路径）
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 - [形式化方法研究](../research_notes/formal_methods/README.md)
@@ -849,11 +871,13 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ## Rust 1.95+ 学习路径
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 > **适用版本**: Rust 1.95.0+
 
 ### 1.95+ 新特性学习要点
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | 学习难度 | 推荐顺序 |
@@ -868,6 +892,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 | `use<..>` precise capturing | ⭐⭐⭐ | 第8周 |
 
 ### 本轮新增模块学习路径
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 | 模块 | 定位 | 前置要求 | 推荐路径 | 文档位置 |
@@ -913,6 +938,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ```
 
 ### 学习资源
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [Rust 1.95+ 迁移指南](../archive/deprecated_20260318/05_guides/RUST_194_MIGRATION_GUIDE.md)
@@ -923,12 +949,14 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ## Rust 1.95+ 持续更新更新
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 > **适用版本**: Rust 1.95.0+ (Edition 2024)
 > **更新日期**: 2026-03-14
 
 ### 本文档的Rust 1.95+更新要点
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 本文档已针对 **Rust 1.95+** 进行深度整合，确保所有概念、示例和最佳实践与最新Rust版本保持一致。
@@ -974,6 +1002,7 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
 - [01_learning 目录](./README.md)
@@ -1233,4 +1262,3 @@ fn process_data(data: &[i32]) -> Vec<i32> {
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 > **[来源: [crates.io](https://crates.io/)]**
-

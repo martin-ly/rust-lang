@@ -155,7 +155,7 @@ Query_Consistency(q) ∈ {Strong, Eventual, Bounded_Staleness}
 ## 4. Rust 实现示例
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 命令端
 pub struct CommandHandler<S, E> {
     state: S,

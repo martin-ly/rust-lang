@@ -226,7 +226,7 @@ struct HttpRequest<'a> { method: &'a str, url: &'a str, headers: Vec<(&'a str, &
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 fn borrow_lifecycle() {
     let s = String::from("hello");
 
@@ -251,7 +251,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 fn shared_borrow_semantics() {
     let data = vec![1, 2, 3, 4, 5];
 
@@ -544,7 +544,7 @@ impl Connection<Authenticated> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 trait ConnectionState {}
 impl ConnectionState for Disconnected {}
 impl ConnectionState for Connected {}
@@ -577,7 +577,7 @@ impl ConnectionManager<Disconnected> {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 struct NoMethod;
 struct NoUrl;
 struct Ready;
@@ -858,7 +858,7 @@ impl Observer for ConcreteObserver {
 
 #### 4.3.1 双重分发语义
 
-```rust
+```rust,ignore
 trait Visitor {
     fn visit_binary(&mut self, expr: &BinaryExpr);
     fn visit_literal(&mut self, expr: &Literal);
@@ -936,7 +936,7 @@ fn mpmc_semantics() {
 
 #### 5.1.2 生产者-消费者语义
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::thread;
 
@@ -1005,7 +1005,7 @@ fn mutex_protection_semantics() {
 
 #### 5.2.2 RwLock 读写语义
 
-```rust
+```rust,ignore
 use std::sync::{Arc, RwLock};
 
 fn rwlock_semantics() {
@@ -1037,7 +1037,7 @@ fn rwlock_semantics() {
 
 #### 5.3.1 原子操作语义
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicI32, AtomicBool, Ordering};
 use std::thread;
 
@@ -1061,7 +1061,7 @@ fn atomic_operation_semantics() {
 
 #### 5.3.2 内存序语义
 
-```rust
+```rust,ignore
 fn memory_ordering_semantics() {
     use std::sync::atomic::Ordering;
 
@@ -1166,7 +1166,7 @@ impl Profile { fn get_score(&self) -> i32 { self.score } }
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use futures::stream::{self, StreamExt};
 
 async fn stream_processing() {
@@ -1204,7 +1204,7 @@ async fn backpressure_control() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 async fn cancellation_pattern() {
     use tokio::select;
 
@@ -1263,7 +1263,7 @@ $$
 \text{Pattern} : \text{Type}_1 \times \cdots \times \text{Type}_n \to \text{Type}_{\text{result}}
 $$
 
-```rust
+```rust,ignore
 // Iterator 作为类型构造子
 struct IteratorPattern<T, I> { inner: I, _marker: PhantomData<T> }
 
@@ -1287,7 +1287,7 @@ trait Functor {
 ### 7.2 模式作为效果
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 效果系统语义
 struct State<S, A> {
     run: Box<dyn Fn(S) -> (A, S)>,
@@ -1341,7 +1341,7 @@ fn nested_patterns() {
 ### 8.2 模式链式组合
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 fn pattern_chains() {
     let data = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 

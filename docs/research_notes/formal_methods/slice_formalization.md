@@ -311,7 +311,7 @@ fn mutable_slice() {
 ### 示例4: 生命周期检查
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 fn dangling_slice() -> &str {
     let s = String::from("hello");
     &s[..]  // 错误：s在函数结束时释放

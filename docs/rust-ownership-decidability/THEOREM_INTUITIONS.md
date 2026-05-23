@@ -220,7 +220,7 @@ let y: i32 = x + 1;  // y 必须是 i32
 
 **没有这个定理会怎样？**：
 
-```rust
+```rust,ignore
 let x: i32 = some_function();
 // 如果保持性不成立，some_function 可能返回一个字符串！
 ```
@@ -347,7 +347,7 @@ Theorem progress :
 
 **类比：计算过程**
 
-```rust
+```rust,ignore
 let x = 5 + 3;  // 可以求值：5 + 3 = 8
 let y = x * 2;  // 可以求值：8 * 2 = 16
 y               // 已经是值：16

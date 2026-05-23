@@ -107,7 +107,7 @@ $$
 ### 3.1 同步 RPC
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use std::time::Duration;
 use serde::{Serialize, Deserialize};
 
@@ -145,7 +145,7 @@ trait SyncRpcClient {
 ### 3.2 异步 RPC
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use std::future::Future;
 
 // 异步 RPC 语义
@@ -181,7 +181,7 @@ async fn async_rpc_example(client: &impl AsyncRpcClient) {
 ### 3.3 流式 RPC
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 双向流式 RPC (gRPC 风格)
 trait StreamingRpc {
     type Request;
@@ -248,7 +248,7 @@ RPC 失败语义:
 ### 4.2 幂等性语义
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // 幂等 RPC: 多次调用效果相同
 #[derive(Clone)]
 struct IdempotentRpc<T> {
@@ -299,7 +299,7 @@ impl IdempotentKey for TransferRequest {
 ### 4.3 断路器模式
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 enum CircuitState {
@@ -371,7 +371,7 @@ rpc RouteChat (stream RouteNote) returns (stream RouteNote);
 ### 5.2 Rust gRPC 语义 (tonic)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 use tonic::{Request, Response, Status, Streaming};
 use tokio_stream::wrappers::ReceiverStream;
 

@@ -58,7 +58,7 @@ Tokio-Stream特点：
 ### 定义 STREAM-1 ( 核心trait )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 trait Stream {
     type Item;
     fn poll_next(self: Pin<&mut Self>, cx: &mut Context<'_>) -> Poll<Option<Self::Item>>;
@@ -90,7 +90,7 @@ $$
 ### 定义 COMBINATOR-1 ( Map )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 stream.map(|x| x * 2)
 ```
 
@@ -101,14 +101,14 @@ $$
 ### 定义 COMBINATOR-2 ( Filter )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 stream.filter(|x| x > 0)
 ```
 
 ### 定义 COMBINATOR-3 ( Fold )
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 stream.fold(0, |acc, x| async move { acc + x }).await
 ```
 
@@ -120,7 +120,7 @@ stream.fold(0, |acc, x| async move { acc + x }).await
 ### 定义 BACKPRESSURE-1 ( Buffer )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 stream.buffered(10)
 ```
 
@@ -131,7 +131,7 @@ $$
 ### 定义 BACKPRESSURE-2 ( Throttle )
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 stream.throttle(Duration::from_millis(100))
 ```
 
@@ -152,14 +152,14 @@ $$
 ### 定义 TIMEOUT-1 ( 流超时 )
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 stream.timeout(Duration::from_secs(5))
 ```
 
 ### 定义 LIMIT-1 ( 数量限制 )
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 stream.take(100)
 ```
 
@@ -171,14 +171,14 @@ stream.take(100)
 ### 定义 MERGE-1 ( 合并流 )
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 stream1.merge(stream2)
 ```
 
 ### 定义 SELECT-1 ( 选择 )
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 select! {
     Some(v) = stream1.next() => handle1(v),
     Some(v) = stream2.next() => handle2(v),
@@ -214,7 +214,7 @@ $$
 
 ### 示例1: 基础流处理
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 use tokio::time::{self, Duration};
 
@@ -234,7 +234,7 @@ async fn process_stream() {
 
 ### 示例2: 数据库流
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 use sqlx::Row;
 
@@ -257,7 +257,7 @@ async fn fetch_users_stream(pool: &sqlx::PgPool) {
 
 ### 示例3: 背压处理
 
-```rust
+```rust,ignore
 use tokio_stream::StreamExt;
 use std::time::Duration;
 
@@ -285,7 +285,7 @@ async fn expensive_operation(i: i32) -> i32 {
 
 ### 示例4: 流合并
 
-```rust
+```rust,ignore
 use tokio_stream::{StreamExt, StreamMap};
 
 async fn merged_streams() {

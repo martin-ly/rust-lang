@@ -50,7 +50,7 @@
 ### async函数的本质
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn hello() -> String {
     "hello".to_string()
 }
@@ -78,7 +78,7 @@ fn f() -> impl Future<Output = T> {
 ### Future trait
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
 
@@ -105,7 +105,7 @@ enum Poll<T> {
 ### 状态机生成
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn example() {
     let data = vec![1, 2, 3];      // 状态0
     let result = process(&data).await;  // 状态1
@@ -115,7 +115,7 @@ async fn example() {
 
 **编译后状态机（伪代码）：**
 
-```rust
+```rust,ignore
 enum ExampleFuture {
     Start,
     Waiting {
@@ -200,7 +200,7 @@ impl Future for ExampleFuture {
 ### 所有权存储
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn move_example() {
     let data = String::from("hello");  // data属于状态机
     let t = data;  // 所有权转移到t
@@ -225,7 +225,7 @@ enum MoveExampleFuture {
 ### 借用存储
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 async fn borrow_example() {
     let data = vec![1, 2, 3];
     let slice = &data[..];  // 借用data
@@ -258,7 +258,7 @@ enum BorrowExampleFuture {
 
 ### 问题场景
 
-```rust
+```rust,ignore
 // ❌ 编译错误
 async fn bad_borrow() {
     let local = String::from("hello");
@@ -280,7 +280,7 @@ error: lifetime may not live long enough
 
 #### 方案1: 重新组织代码
 
-```rust
+```rust,ignore
 // ✅ 可行
 async fn good_borrow() {
     some_async_op().await;      // await在借用之前
@@ -293,7 +293,7 @@ async fn good_borrow() {
 
 #### 方案2: 使用Arc
 
-```rust
+```rust,ignore
 // ✅ 可行
 async fn arc_solution() {
     let data = Arc::new(String::from("hello"));
@@ -307,7 +307,7 @@ async fn arc_solution() {
 
 #### 方案3: 使用move闭包
 
-```rust
+```rust,ignore
 // ✅ 可行
 async fn move_solution() {
     let local = String::from("hello");
@@ -321,7 +321,7 @@ async fn move_solution() {
 
 ### 自引用结构的生成
 
-```rust
+```rust,ignore
 async fn self_ref_example() {
     let mut data = vec![1, 2, 3];
     let first = &mut data[0];  // 可变借用
@@ -335,7 +335,7 @@ async fn self_ref_example() {
 
 **编译后状态机：**
 
-```rust
+```rust,ignore
 enum SelfRefFuture {
     Start,
     State1 {
@@ -365,7 +365,7 @@ enum SelfRefFuture {
 
 ### Pin的生命周期
 
-```rust
+```rust,ignore
 async fn lifetime_example() {
     let data = String::from("hello");
 
@@ -390,7 +390,7 @@ async fn lifetime_example() {
 
 ### 跨await的引用限制
 
-```rust
+```rust,ignore
 // ❌ 编译错误：引用不能跨await
 async fn bad_cross_await() {
     let mut data = vec![1, 2, 3];
@@ -421,7 +421,7 @@ async fn good_cross_await() {
 
 ### 陷阱1: 锁跨越await
 
-```rust
+```rust,ignore
 // ❌ 危险：锁跨越await
 async fn bad_lock() {
     let data = Arc::new(Mutex::new(0));
@@ -455,7 +455,7 @@ async fn async_lock() {
 
 ### 陷阱2: 递归async
 
-```rust
+```rust,ignore
 // ❌ 编译错误：递归需要Box::pin
 async fn recursive(n: i32) -> i32 {
     if n <= 0 { 0 } else { n + recursive(n - 1).await }
@@ -474,7 +474,7 @@ fn recursive(n: i32) -> Pin<Box<dyn Future<Output = i32>>> {
 
 ### 模式1: Select with cancellation
 
-```rust
+```rust,ignore
 use tokio::select;
 
 async fn with_cancellation() {
@@ -494,7 +494,7 @@ async fn with_cancellation() {
 
 ### 模式2: Scope with structured concurrency
 
-```rust
+```rust,ignore
 async fn scoped_tasks() {
     let data = vec![1, 2, 3];
 

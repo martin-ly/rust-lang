@@ -157,7 +157,7 @@ fn separation_logic_example() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 状态机双模拟概念
 #[derive(Clone, Debug, PartialEq)]
 enum State {

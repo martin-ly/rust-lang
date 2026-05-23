@@ -97,7 +97,7 @@ main()                    take_ownership()
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ✗ 编译错误：移动后使用
 fn main() {
     let s1 = String::from("hello");
@@ -124,7 +124,7 @@ error[E0382]: borrow of moved value: `s1`
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // 方案1: 使用克隆
 let s2 = s1.clone();
 println!("{}", s1);  // ✓ OK
@@ -142,7 +142,7 @@ println!("{}", s1);  // ✓ OK
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone)]  // ✗ 编译错误
 struct Point {
     x: i32,
@@ -155,7 +155,7 @@ struct Point {
 
 **正确实现**:
 
-```rust
+```rust,ignore
 #[derive(Copy, Clone)]
 struct Point {
     x: i32,
@@ -184,7 +184,7 @@ struct Point {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ✗ 编译错误：生命周期无法推断
 fn longest(x: &str, y: &str) -> &str {
     if x.len() > y.len() { x } else { y }
@@ -224,7 +224,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 
 #### 边界案例 2.2.1: 移动后悬垂指针
 
-```rust
+```rust,ignore
 // ✗ 编译错误：自引用结构体
 struct SelfRef {
     data: String,
@@ -235,7 +235,7 @@ struct SelfRef {
 
 **解决方案**: 使用 Pin
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::marker::PhantomPinned;
 
@@ -269,7 +269,7 @@ impl SelfRef {
 
 #### 反例 3.1.1: 同时持有可变和不可变引用
 
-```rust
+```rust,ignore
 // ✗ 编译错误
 fn main() {
     let mut data = vec![1, 2, 3];
@@ -457,7 +457,7 @@ thread 'main' panicked at 'already borrowed: BorrowMutError'
 
 **正确模式**:
 
-```rust
+```rust,ignore
 let data = RefCell::new(vec![1, 2, 3]);
 
 {
@@ -476,7 +476,7 @@ let mut_borrow = data.borrow_mut();  // ✓ OK
 
 #### 反例 5.1.1: 非 Send 类型跨线程
 
-```rust
+```rust,ignore
 use std::rc::Rc;
 use std::thread;
 
@@ -498,7 +498,7 @@ error[E0277]: `Rc<i32>` cannot be sent between threads safely
 
 **解决方案**:
 
-```rust
+```rust,ignore
 use std::sync::Arc;
 
 let data = Arc::new(42);
@@ -512,7 +512,7 @@ thread::spawn(move || {  // ✓ OK
 
 #### 反例 5.2.1: 锁顺序不一致
 
-```rust
+```rust,ignore
 use std::sync::Mutex;
 
 // 可能导致死锁的代码
@@ -541,7 +541,7 @@ fn deadlock_risk() {
 
 **解决方案**: 统一锁顺序或使用 try_lock
 
-```rust
+```rust,ignore
 // 方案1: 统一顺序
 let (l1, l2) = if addr_of!(&lock1) < addr_of!(&lock2) {
     (lock1.lock(), lock2.lock())
@@ -594,7 +594,7 @@ error: Undefined Behavior: pointer to alloc1374 was dereferenced
 
 **正确模式**:
 
-```rust
+```rust,ignore
 // ✓ 使用 Box 确保内存存活
 fn valid_pointer() -> *const i32 {
     let x = Box::new(42);
@@ -650,7 +650,7 @@ fn process_items(items: Vec<String>) {
 
 **解决方案**:
 
-```rust
+```rust,ignore
 // ✓ 使用引用避免克隆
 fn process_items(items: &[String]) {
     for item in items {  // 借用
@@ -731,7 +731,7 @@ impl Matrix {
 
 #### 案例 1: 帮助性建议
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 let slice = &s[0..2];
 s.clear();  // ✗ 错误

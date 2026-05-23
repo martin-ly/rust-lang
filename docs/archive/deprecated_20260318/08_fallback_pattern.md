@@ -123,7 +123,7 @@ P(available) ≥ P(Op_primary succeeds) + P(Op_primary fails) × P(Op_fallback s
 
 ## 4. Rust 实现示例
 
-```rust
+```rust,ignore
 // 降级策略特质
 #[async_trait]
 pub trait FallbackStrategy {

@@ -215,7 +215,7 @@ def sum (vec : List Int) : Int :=
 
 ### 3.3 条件借用
 
-```rust
+```rust,ignore
 fn get_or_default(v: &mut Vec<i32>, idx: usize) -> &mut i32 {
     if idx < v.len() {
         &mut v[idx]

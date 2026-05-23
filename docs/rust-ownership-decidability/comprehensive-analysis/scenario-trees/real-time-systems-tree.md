@@ -213,7 +213,7 @@
 ### 4.2 确定性编程模式
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 // RTIC确定性示例
 #[rtic::app(device = stm32f4xx_hal::pac)]
 mod app {
@@ -261,7 +261,7 @@ mod app {
 ### 4.3 无锁数据结构
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 实时系统中的无锁队列
 use crossbeam::queue::ArrayQueue;
 
@@ -359,7 +359,7 @@ Rust优势:
 ### 7.1 汽车制动系统
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // 简化ABS控制逻辑
 struct AbsController {
     wheel_speeds: [f32; 4],
@@ -396,7 +396,7 @@ impl AbsController {
 ### 7.2 无人机飞控
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 姿态控制回路
 struct FlightController {
     attitude: Attitude,      // 当前姿态

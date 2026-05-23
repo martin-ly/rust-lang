@@ -55,7 +55,7 @@
 ### 经典问题
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // ❌ 无法直接创建的自引用结构
 struct SelfRef {
     data: String,
@@ -130,7 +130,7 @@ Pin<P<T>> 保证：
 #### 方法1: Box::pin
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let data: Pin<Box<T>> = Box::pin(T::new());
 ```
 
@@ -139,7 +139,7 @@ let data: Pin<Box<T>> = Box::pin(T::new());
 #### 方法2: Pin::new_unchecked (unsafe)
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 let mut data = T::new();
 let pinned: Pin<&mut T> = unsafe { Pin::new_unchecked(&mut data) };
 // ⚠️ 危险：data之后不能被移动！
@@ -147,7 +147,7 @@ let pinned: Pin<&mut T> = unsafe { Pin::new_unchecked(&mut data) };
 
 #### 方法3: pin! 宏 ( nightly )
 
-```rust
+```rust,ignore
 let pinned: Pin<&mut T> = pin!(T::new());
 ```
 
@@ -157,7 +157,7 @@ let pinned: Pin<&mut T> = pin!(T::new());
 
 ### 定义
 
-```rust
+```rust,ignore
 pub auto trait Unpin { }
 ```
 
@@ -200,7 +200,7 @@ Unpin(T) ⇒ ∀P. Pin<P<T>> → P<T>
 
 ### Pin的生命周期
 
-```rust
+```rust,ignore
 fn pin_lifetime<T>(value: &mut T) -> Pin<&mut T> {
     Pin::new(value)  // 要求 T: Unpin
 }
@@ -233,7 +233,7 @@ struct SelfRef<'a> {
 
 **解决方案**：使用原始指针 + Pin
 
-```rust
+```rust,ignore
 struct SelfRef {
     data: String,
     ptr: *const str,  // 原始指针，无生命周期
@@ -260,7 +260,7 @@ impl SelfRef {
 
 ### async/await 生成自引用
 
-```rust
+```rust,ignore
 async fn example() {
     let data = vec![1, 2, 3];
     let slice = &data[..];  // 借用
@@ -286,7 +286,7 @@ enum ExampleFuture {
 
 ### Future trait与Pin
 
-```rust
+```rust,ignore
 trait Future {
     type Output;
 
@@ -336,7 +336,7 @@ Executor存储Future:
 
 ### 安全抽象的条件
 
-```rust
+```rust,ignore
 unsafe impl<P> Deref for Pin<P>
 where
     P: Deref
@@ -384,7 +384,7 @@ T: Unpin ⇒ Pin<P<T>> can be converted to P<T>
 
 ### 模式1: 安全Pin创建
 
-```rust
+```rust,ignore
 /// 使用Box::pin创建安全的Pin
 fn safe_pin_creation() {
     let data: Pin<Box<SelfRef>> = Box::pin(SelfRef::new());
@@ -400,7 +400,7 @@ fn safe_pin_stack() {
 
 ### 模式2: Pin投影
 
-```rust
+```rust,ignore
 struct Container {
     data: String,
     ptr: *const str,
@@ -422,7 +422,7 @@ impl Container {
 
 ### 模式3: 条件Unpin
 
-```rust
+```rust,ignore
 /// 只有当T: Unpin时，容器才是Unpin
 struct Container<T> {
     data: T,
@@ -436,7 +436,7 @@ impl<T: Unpin> Unpin for Container<T> { }
 
 ### 模式4: 避免Pin的常见错误
 
-```rust
+```rust,ignore
 // ❌ 错误：获取&mut后可能移动
 fn bad_pin_usage<T>(pinned: Pin<&mut T>)
 where

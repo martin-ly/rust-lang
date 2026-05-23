@@ -183,7 +183,7 @@ Rust unifies these models through its ownership system, providing compile-time g
 
 **Formal Definition 1.2.1 (Send Trait)**:
 
-```rust
+```rust,ignore
 pub unsafe auto trait Send {
     // Marker trait: T: Send means T can be transferred across thread boundaries
 }
@@ -197,7 +197,7 @@ pub unsafe auto trait Send {
 
 **Formal Definition 1.2.2 (Sync Trait)**:
 
-```rust
+```rust,ignore
 pub unsafe auto trait Sync {
     // Marker trait: T: Sync means &T can be shared between threads
 }
@@ -220,7 +220,7 @@ If `T: Send + Sync`, then `Arc<T>` provides safe shared mutable state through in
 - `Arc<T>` provides shared ownership with reference counting
 - Combined: Multiple threads can hold `Arc<T>` and access `T` through `Mutex<T>` or `RwLock<T>`
 
-```rust
+```rust,ignore
 // Safe shared state pattern
 use std::sync::{Arc, Mutex};
 
@@ -399,7 +399,7 @@ fn demonstrate_send_sync_safety() {
 
 **Counter-Example (what would be unsafe)**:
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 // This would be UNSAFE if Cell were Sync (which it's not)
@@ -514,7 +514,7 @@ fn counter_example_not_send() {
    - Only one thread can access `T` at a time
    - So `T` only needs to be `Send` (movable between threads)
 
-```rust
+```rust,ignore
 // Demonstrating Sync compositionality
 fn demonstrate_sync_composition<T: Sync>() {
     // These are Sync when T: Sync
@@ -722,7 +722,7 @@ fn deadlock_example() {
 
 **Solution**: Lock Ordering
 
-```rust
+```rust,ignore
 // SOLUTION: Always acquire locks in the same order
 fn deadlock_solution() {
     let resource_x = Arc::new(Mutex::new("X"));
@@ -757,7 +757,7 @@ fn deadlock_solution() {
 
 **Problem**: If a thread panics while holding a mutex, the mutex becomes "poisoned"
 
-```rust
+```rust,ignore
 // COUNTER-EXAMPLE: Panic in critical section poisons the mutex
 fn poisoning_example() {
     let mutex = Arc::new(Mutex::new(vec![1, 2, 3]));
@@ -788,7 +788,7 @@ fn poisoning_example() {
 
 **Solution**: Poison Handling
 
-```rust
+```rust,ignore
 // SOLUTION: Handle poisoning gracefully
 fn poisoning_solution() {
     let mutex = Arc::new(Mutex::new(vec![1, 2, 3]));
@@ -817,7 +817,7 @@ fn poisoning_solution() {
 
 **Problem**: Holding a synchronous mutex across an await point
 
-```rust
+```rust,ignore
 // COUNTER-EXAMPLE: Holding std::sync::Mutex across await
 use std::sync::Mutex;
 use tokio::sync::Mutex as AsyncMutex;
@@ -1067,7 +1067,7 @@ fn rwlock_semantics() {
 
 There is no safe way to upgrade a read lock to a write lock because it would cause deadlock.
 
-```rust
+```rust,ignore
 // COUNTER-EXAMPLE: Attempted upgrade (hypothetical, doesn't exist in std)
 fn upgrade_counterexample() {
     let lock = RwLock::new(42);
@@ -1149,7 +1149,7 @@ fn reader_starvation_example() {
 
 **Solution**: Use fair locks or writer-preference locks
 
-```rust
+```rust,ignore
 // Using parking_lot's fair RwLock
 fn fair_rwlock() {
     use parking_lot::RwLock;
@@ -1409,7 +1409,7 @@ impl<T> TaggedPointer<T> {
 
 **Problem**: Independent atomic variables on the same cache line cause unnecessary cache coherence traffic.
 
-```rust
+```rust,ignore
 // COUNTER-EXAMPLE: False sharing
 use std::sync::atomic::{AtomicUsize, Ordering};
 use std::thread;
@@ -1481,7 +1481,7 @@ fn no_false_sharing() {
 
 **Problem**: In lock-free data structures, when do we free memory?
 
-```rust
+```rust,ignore
 // SOLUTION: Hazard pointers (simplified)
 use std::sync::atomic::{AtomicPtr, Ordering, AtomicUsize};
 use std::ptr;
@@ -1804,7 +1804,7 @@ fn request_response_example() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::sync::mpsc;
 use std::time::Duration;
 
@@ -2053,7 +2053,7 @@ fn wrong_ordering_relaxed() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // COUNTER-EXAMPLE: Using Acquire when Release needed
 fn wrong_ordering_producer() {
     use std::sync::atomic::{AtomicBool, Ordering};
@@ -2322,7 +2322,7 @@ Queue owns item ──dequeue()──> Caller owns item
 2. **Single Reader Per Slot**: Each slot is read by exactly one successful dequeue operation
 3. **Sequential Access**: The CAS operations ensure that head/tail increments are atomic
 
-```rust
+```rust,ignore
 // Demonstrating ownership semantics
 fn queue_ownership_demo() {
     let queue = LockFreeQueue::new(16);
@@ -2384,7 +2384,7 @@ The `LockFreeQueue` implementation is safe (no data races, no use-after-free) wh
 
 **Cache Considerations**:
 
-```rust
+```rust,ignore
 // Improved version with cache line padding for head/tail
 use std::sync::atomic::AtomicUsize;
 
@@ -2406,7 +2406,7 @@ struct CachePaddedQueue<T> {
 
 **Memory Ordering Optimization**:
 
-```rust
+```rust,ignore
 // More relaxed ordering where safe
 impl<T> LockFreeQueue<T> {
     pub fn try_enqueue_relaxed(&self, item: T) -> Result<(), T> {
@@ -2447,7 +2447,7 @@ Rust 1.94 introduces several improvements to concurrency primitives:
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 
 /// Thread-safe lazy initialization with new Rust 1.94 methods

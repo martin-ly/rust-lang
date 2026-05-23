@@ -234,7 +234,7 @@ pub struct CachePaddedCounter {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 use std::iter::Peekable;
 
@@ -298,7 +298,7 @@ where
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 use std::sync::LazyLock;
 use rayon::prelude::*;
 
@@ -402,7 +402,7 @@ fn simd_add<const N: usize>(a: &[f32], b: &[f32], c: &mut [f32]) {
 }
 ```
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 
 /// 基础并行迭代
@@ -480,7 +480,7 @@ pub fn parallel_group_by(data: &[(String, i32)]) -> HashMap<String, Vec<i32>> {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 use rayon::join;
 
 /// 基础 Fork-Join
@@ -611,7 +611,7 @@ where
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 use rayon::slice::ParallelSliceMut;
 
 /// Rayon 内置并行排序
@@ -658,7 +658,7 @@ pub fn parallel_dedup<T: Eq + Send + Clone>(data: &mut Vec<T>) {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use rayon::iter::plumbing::{Consumer, Producer, ProducerCallback, UnindexedConsumer};
 use rayon::iter::{ParallelIterator, IndexedParallelIterator};
 
@@ -731,7 +731,7 @@ where
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 #![feature(portable_simd)]
 
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
@@ -797,7 +797,7 @@ pub fn auto_simd_add(a: &[f32], b: &[f32], c: &mut [f32]) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
 
 /// SIMD 点积
@@ -887,7 +887,7 @@ pub fn simd_clamp(data: &mut [f32], min: f32, max: f32) {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 use std::simd::{Simd, LaneCount, SupportedLaneCount};
 
 /// SIMD 矩阵乘法（基础版本）

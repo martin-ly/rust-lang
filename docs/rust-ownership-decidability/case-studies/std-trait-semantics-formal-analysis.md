@@ -114,7 +114,7 @@ $$
 
 **示例**:
 
-```rust
+```rust,ignore
 {
     let a = A;
     let b = B;
@@ -124,7 +124,7 @@ $$
 
 **结构体字段**:
 
-```rust
+```rust,ignore
 struct S { a: A, b: B, c: C }
 // drop顺序: c, b, a (按声明相反)
 ```
@@ -149,7 +149,7 @@ drop(v);
 
 **双重drop防止**:
 
-```rust
+```rust,ignore
 impl Drop for MyType {
     fn drop(&mut self) {
         if self.already_dropped { return; }
@@ -172,7 +172,7 @@ impl Drop for MyType {
 ### 定义 3.1 (Clone trait)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub trait Clone: Sized {
     fn clone(&self) -> Self;
     fn clone_from(&mut self, source: &Self) { ... }
@@ -246,7 +246,7 @@ $$
 ### 定义 4.1 (Send与Sync)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 pub unsafe auto trait Send { }
 pub unsafe auto trait Sync { }
 ```
@@ -327,7 +327,7 @@ struct MyType {
 ### 定义 5.1 (Any trait)
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 pub trait Any: 'static {
     fn type_id(&self) -> TypeId;
 }
@@ -346,7 +346,7 @@ $$
 
 **用途**:
 
-```rust
+```rust,ignore
 fn handle_error(err: Box<dyn Any>) {
     if let Some(e) = err.downcast_ref::<MyError>() {
         // 处理 MyError
@@ -366,7 +366,7 @@ fn handle_error(err: Box<dyn Any>) {
 
 **实现**:
 
-```rust
+```rust,ignore
 fn downcast_ref<T: Any>(&self) -> Option<&T> {
     if self.type_id() == TypeId::of::<T>() {
         Some(unsafe { self.downcast_ref_unchecked() })
@@ -438,7 +438,7 @@ drop(v);
 ### 反例 7.2 (Rc跨线程)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let rc = Rc::new(42);
 thread::spawn(move || {
     // *rc;  // 编译错误! Rc不是Send

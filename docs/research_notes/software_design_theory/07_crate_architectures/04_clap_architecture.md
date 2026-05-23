@@ -63,7 +63,7 @@ graph TB
 ### 2.1 Builder API：命令式构造
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use clap::{Command, Arg, ArgAction};
 
 let cmd = Command::new("myapp")
@@ -92,7 +92,7 @@ let verbose: u8 = matches.get_count("verbose");
 ### 2.2 Derive API：声明式定义
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 use std::path::PathBuf;
 
@@ -119,7 +119,7 @@ fn main() {
 
 Derive 宏在编译期展开为三个核心 trait 实现：`Parser`（入口）、`IntoApp`（构建 `Command`）、`FromArgMatches`（从匹配结果提取值）。生成的代码与手写 Builder API 在运行时完全等价，所有属性都被静态编码为 `Command::new().arg(...)` 的调用链。
 
-```rust
+```rust,ignore
 // 宏展开后的核心结构（概念性）：
 #[automatically_derived]
 impl clap::IntoApp for Cli {
@@ -171,7 +171,7 @@ graph LR
 ### 3.2 syn 解析与 quote 生成
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // clap_derive 内部工作流程（概念性源码）
 use proc_macro::TokenStream;
 use syn::DeriveInput;
@@ -199,7 +199,7 @@ pub fn derive_parser(input: TokenStream) -> TokenStream {
 ### 3.3 从 struct 字段到 Arg 的语义映射
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 
 #[derive(Parser)]
@@ -241,7 +241,7 @@ Clap 深度利用 Rust 的类型系统实现参数解析的类型安全，将字
 ### 4.1 `FromStr` Trait 与参数解析
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use std::num::NonZeroU32;
 use clap::Parser;
 
@@ -270,7 +270,7 @@ fn parse_size(s: &str) -> Result<usize, String> {
 ### 4.2 `ArgMatches` 的泛型提取
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use clap::{ArgMatches, ValueEnum};
 
 // get_one::<T> 编译期确定返回类型，无需运行时类型检查
@@ -296,7 +296,7 @@ struct LoggingArgs {
 ### 4.3 编译期 Flag 验证
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 
 #[derive(Parser)]
@@ -360,7 +360,7 @@ graph TB
 ### 5.1 Subcommand Derive
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 use clap::{Parser, Subcommand};
 use std::path::PathBuf;
 
@@ -406,7 +406,7 @@ fn main() {
 ### 5.2 嵌套子命令与全局参数
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 use clap::{Parser, Subcommand};
 
 #[derive(Parser)]
@@ -447,7 +447,7 @@ Clap 将 CLI 验证分为两个层次：**解析时验证**（parse-time validat
 ### 6.1 解析时验证器
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 
 #[derive(Parser)]
@@ -475,7 +475,7 @@ struct ValidatedCli {
 ### 6.2 错误处理与帮助生成
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 
 #[derive(Parser)]
@@ -506,7 +506,7 @@ enum Environment { Dev, Staging, Production }
 ### 6.3 自定义错误处理
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 use clap::Parser;
 
 #[derive(Parser)]

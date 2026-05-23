@@ -87,7 +87,7 @@ parking_lot 是 Rust 生态中性能最优的同步原语库，相比标准库:
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 pub struct Mutex<T> {
     // 只需一个 AtomicU8!
     state: AtomicU8,
@@ -149,7 +149,7 @@ Unlocked ────────────► Locked
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 fn lock(&self) {
     // 快速路径: 尝试从未锁定变为锁定
     if self.state.compare_exchange(0, 1, Acquire, Relaxed).is_ok() {
@@ -164,7 +164,7 @@ fn lock(&self) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 fn lock_slow(&self) {
     loop {
         let state = self.state.load(Relaxed);
@@ -198,7 +198,7 @@ fn lock_slow(&self) {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 fn unlock(&self) {
     let state = self.state.swap(0, Release);
 
@@ -247,7 +247,7 @@ fn unlock(&self) {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 pub struct RwLock<T> {
     // 使用单个 usize!
     state: AtomicUsize,
@@ -291,7 +291,7 @@ $$
 
 **溢出检测**:
 
-```rust
+```rust,ignore
 fn read(&self) -> RwLockReadGuard<T> {
     let state = self.state.fetch_add(READER, Acquire);
 
@@ -315,7 +315,7 @@ fn read(&self) -> RwLockReadGuard<T> {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 pub const fn new() -> Self { /* 默认策略 */ }
 pub const fn with_fairness(fair: bool) -> Self { }
 pub const fn write_preferred() -> Self { }
@@ -363,7 +363,7 @@ $$
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 pub struct Condvar {
     // 复杂的内部状态管理等待队列
     inner: sys::Condvar,
@@ -378,7 +378,7 @@ pub struct Condvar {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>> {
     // 1. 将当前线程加入等待队列
     self.push_waiter(current_thread());
@@ -409,7 +409,7 @@ fn wait<'a, T>(&self, guard: MutexGuard<'a, T>) -> LockResult<MutexGuard<'a, T>>
 
 **FIFO队列保证**:
 
-```rust
+```rust,ignore
 fn notify_one(&self) {
     if let Some(thread) = self.pop_waiter() {
         thread.unpark();
@@ -463,7 +463,7 @@ fn notify_one(&self) {
 
 **快速路径**:
 
-```rust
+```rust,ignore
 if self.state.compare_exchange(0, 1, Acquire, Relaxed).is_ok() {
     return;
 }
@@ -488,7 +488,7 @@ if self.state.compare_exchange(0, 1, Acquire, Relaxed).is_ok() {
 
 **慢速路径**:
 
-```rust
+```rust,ignore
 loop {
     if can_acquire_lock() {
         return;
@@ -529,7 +529,7 @@ loop {
 
 **公平模式实现**:
 
-```rust
+```rust,ignore
 pub const fn new_fair() -> Self {
     Mutex {
         state: Atomic::new(0),
@@ -640,7 +640,7 @@ unsafe fn lock_contended(&self) {
 ### 反例 8.1 (中毒检测缺失)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 标准库: 检测panic中毒
 let guard = mutex.lock();
 // 如果另一个线程panic，mutex会被"中毒"
@@ -659,7 +659,7 @@ let guard = mutex.lock();  // 总是成功，即使之前有panic
 ### 反例 8.2 (过度优化风险)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 错误: 假设计锁总是很快
 for _ in 0..1_000_000 {
     let _g = mutex.lock();  // 在循环中频繁lock/unlock
@@ -676,7 +676,7 @@ for _ in 0..1_000_000 {
 ### 限制 8.3 (不支持静态初始化器)
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 标准库
 static MUTEX: Mutex<i32> = Mutex::new(0);
 

@@ -57,7 +57,7 @@ IndexMap提供:
 ### 定义 2.1 (IndexMap结构)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct IndexMap<K, V, S = RandomState> {
     core: IndexMapCore<K, V>,
     hash_builder: S,
@@ -97,7 +97,7 @@ $$
 
 > entries向量保持插入顺序。
 
-```rust
+```rust,ignore
 let mut map = IndexMap::new();
 map.insert("a", 1);  // entries[0]
 map.insert("b", 2);  // entries[1]
@@ -131,7 +131,7 @@ for (k, v) in &map {
 
 > remove需要O(n)移动entries维护顺序。
 
-```rust
+```rust,ignore
 pub fn remove(&mut self, key: &Q) -> Option<V> {
     let idx = self.indices.remove(key)?;  // O(1)
     // 需要移动entries[idx+1..]填补空缺
@@ -172,7 +172,7 @@ pub fn remove(&mut self, key: &Q) -> Option<V> {
 
 ### 反例 5.1 (误用retain)
 
-```rust
+```rust,ignore
 // retain可能改变顺序期望
 map.retain(|k, v| {
     *v > 10  // 过滤条件
@@ -182,7 +182,7 @@ map.retain(|k, v| {
 
 ### 反例 5.2 (容量规划)
 
-```rust
+```rust,ignore
 // IndexMap内存开销更高
 let map: IndexMap<i32, i32> = IndexMap::with_capacity(1000);
 // 需要2倍于HashMap的内存

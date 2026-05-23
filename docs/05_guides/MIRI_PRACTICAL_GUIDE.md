@@ -214,7 +214,7 @@ error: Undefined Behavior: pointer to alloc1402 was dereferenced after this allo
 
 Miri 通过追踪每个内存位置的访问线程和同步关系来检测数据竞争。
 
-```rust
+```rust,ignore
 use std::thread;
 
 // ❌ 错误示例：Data Race

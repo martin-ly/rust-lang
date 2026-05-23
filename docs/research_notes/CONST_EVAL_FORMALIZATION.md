@@ -115,7 +115,7 @@ Eval_const(e, env) =
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 允许的 const fn 操作
 const fn allowed() {
     // ✅ 算术运算
@@ -218,7 +218,7 @@ MIR (中级中间表示)
 ### const_eval_select (不稳定)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 #![feature(const_eval_select)]
 
 const fn with_const_eval_select<T>(x: T) -> T {

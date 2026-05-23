@@ -101,7 +101,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ### 2.2 生命周期省略规则 (Elision)
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 // 规则1: 单个输入引用
 fn first_word(s: &str) -> &str  // 隐式: fn first_word<'a>(s: &'a str) -> &'a str
 
@@ -120,7 +120,7 @@ fn get_static() -> &'static str  // 整个程序期间有效
 ### 2.3 'static 生命周期
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 // 'static 是 Rust 中最长的生命周期
 // 表示数据在程序的整个执行期间都有效
 
@@ -172,7 +172,7 @@ Box::leak(Box::new(5))     // 泄漏的内存是 'static
 ### 3.2 约束示例
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 fn example<'a, 'b>(x: &'a i32, y: &'b i32) -> &'a i32 {
     x
 }
@@ -223,7 +223,7 @@ impl<'a> Book<'a> {
 ### 4.2 生命周期省略在结构体中的限制
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 // 错误：结构体不能省略生命周期
 struct Wrapper {  // 编译错误!
     data: &str,
@@ -370,7 +370,7 @@ error(P, L) :- loan_live_at(P, L), loan_invalidated_at(L, P).
 ### 8.1 悬垂引用
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 // 错误示例
 fn dangling() -> &i32 {
     let x = 5;
@@ -393,7 +393,7 @@ fn get_static_str() -> &'static str {
 ### 8.2 生命周期不够长
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 错误示例
 fn main() {
     let r;

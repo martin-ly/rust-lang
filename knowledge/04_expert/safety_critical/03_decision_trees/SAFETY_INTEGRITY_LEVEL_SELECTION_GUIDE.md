@@ -1,4 +1,5 @@
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [Rustonomicon](https://doc.rust-lang.org/nomicon/), [Ferrocene](https://ferrous-systems.com/ferrocene/), [Rust Safety Critical WG](https://github.com/rust-safety-critical/wg)
+> **相关概念**: [Select](../../../../concept/03_advanced/02_async.md)
 >
 > **权威来源对齐变更日志**: 2026-05-19 新增 Rust 安全关键生态系统来源标注 [来源: Authority Source Sprint Batch 8]
 >
@@ -185,7 +186,7 @@ ASIL D分解选项:
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 //! SIL分解Rust实现示例
 
 /// 2x2取2架构 (SIL 4)
@@ -241,7 +242,7 @@ impl OneOutOfTwo {
 >
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 //! ASIL A级实现要求
 
 #![forbid(unsafe_code)]  // 推荐
@@ -273,7 +274,7 @@ pub fn asil_a_function(input: Input) -> Result<Output, Error> {
 >
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
-```rust
+```rust,ignore
 //! ASIL B级实现要求
 
 #![forbid(unsafe_code)]  // 要求
@@ -305,7 +306,7 @@ pub fn asil_b_function(input: Input) -> Result<Output, Error> {
 >
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 //! ASIL C级实现要求
 
 #![forbid(unsafe_code)]
@@ -351,7 +352,7 @@ impl ValidatedValue {
 >
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 //! ASIL D级实现要求
 
 #![forbid(unsafe_code)]

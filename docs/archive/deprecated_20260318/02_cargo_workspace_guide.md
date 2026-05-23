@@ -1077,7 +1077,7 @@ anyhow = { workspace = true }
 
 **crates/api/src/lib.rs**:
 
-```rust
+```rust,ignore
 //! API layer for the application
 //!
 //! Provides HTTP client and request/response types.
@@ -1203,7 +1203,7 @@ serde_json = { workspace = true }
 
 **crates/web/src/main.rs**:
 
-```rust
+```rust,ignore
 //! Web service entry point
 
 use axum::{
@@ -1447,7 +1447,7 @@ uuid = { version = "1.0", features = ["v4", "serde"] }
 
 **shared/models/src/lib.rs**:
 
-```rust
+```rust,ignore
 //! Shared data models across microservices
 
 use chrono::{DateTime, Utc};

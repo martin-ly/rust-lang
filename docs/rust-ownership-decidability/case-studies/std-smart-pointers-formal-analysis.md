@@ -77,7 +77,7 @@ Rust智能指针提供高级内存管理:
 ### 定义 2.1 (Box)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct Box<T: ?Sized>(Unique<T>);
 ```
 
@@ -110,7 +110,7 @@ let b2 = b;  // 移动所有权
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<T: ?Sized> Deref for Box<T> {
     type Target = T;
 
@@ -169,7 +169,7 @@ enum List<T> {
 ### 定义 3.1 (Rc)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct Rc<T: ?Sized> {
     ptr: NonNull<RcInner<T>>,
     phantom: PhantomData<RcInner<T>>,
@@ -189,7 +189,7 @@ struct RcInner<T: ?Sized> {
 
 **证明**:
 
-```rust
+```rust,ignore
 let rc1 = Rc::new(42);
 let rc2 = rc1.clone();  // 引用计数+1
 let rc3 = rc2.clone();  // 引用计数+1
@@ -210,7 +210,7 @@ let rc3 = rc2.clone();  // 引用计数+1
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T: ?Sized> !Send for Rc<T> {}
 impl<T: ?Sized> !Sync for Rc<T> {}
 ```
@@ -233,7 +233,7 @@ impl<T: ?Sized> !Sync for Rc<T> {}
 
 **证明**:
 
-```rust
+```rust,ignore
 struct Node {
     value: i32,
     next: Option<Rc<RefCell<Node>>>,
@@ -267,7 +267,7 @@ node1.borrow_mut().next = Some(node2.clone());
 
 **证明**:
 
-```rust
+```rust,ignore
 unsafe impl<T: ?Sized + Sync + Send> Send for Arc<T> {}
 unsafe impl<T: ?Sized + Sync + Send> Sync for Arc<T> {}
 ```
@@ -287,7 +287,7 @@ unsafe impl<T: ?Sized + Sync + Send> Sync for Arc<T> {}
 
 **证明**:
 
-```rust
+```rust,ignore
 impl<T> Clone for Arc<T> {
     fn clone(&self) -> Arc<T> {
         let old_size = self.inner().strong.fetch_add(1, Relaxed);
@@ -321,7 +321,7 @@ impl<T> Drop for Arc<T> {
 ### 定义 5.1 (Cell)
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 pub struct Cell<T: ?Sized> {
     value: UnsafeCell<T>,
 }
@@ -334,7 +334,7 @@ pub struct Cell<T: ?Sized> {
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<T: Copy> Cell<T> {
     pub fn get(&self) -> T {
         unsafe { *self.value.get() }
@@ -359,7 +359,7 @@ impl<T: Copy> Cell<T> {
 ### 定义 5.2 (RefCell)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 pub struct RefCell<T: ?Sized> {
     borrow: Cell<BorrowFlag>,
     value: UnsafeCell<T>,
@@ -373,7 +373,7 @@ pub struct RefCell<T: ?Sized> {
 
 **实现**:
 
-```rust
+```rust,ignore
 impl<T: ?Sized> RefCell<T> {
     pub fn borrow(&self) -> Ref<T> {
         match self.try_borrow() {
@@ -447,7 +447,7 @@ Stack          Heap
 ### 反例 8.1 (Rc多线程)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 let rc = Rc::new(42);
 thread::spawn(move || {
     println!("{}", *rc);  // 编译错误! Rc不是Send
@@ -463,7 +463,7 @@ thread::spawn(move || {
 ### 反例 8.2 (RefCell panic)
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 let cell = RefCell::new(42);
 let r1 = cell.borrow();
 let r2 = cell.borrow_mut();  // panic! 已有不可变借用

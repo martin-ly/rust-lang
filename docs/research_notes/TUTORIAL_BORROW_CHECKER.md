@@ -121,7 +121,7 @@ void thread2() { counter++; }
 
 Rust在编译时阻止这些问题：
 
-```rust
+```rust,ignore
 // Rust: 编译错误!
 fn bad() -> &String {
     let buffer = String::from("hello");
@@ -256,7 +256,7 @@ r2.push_str("!");
 
 可变借用允许修改数据，如果同时有两个可变借用：
 
-```rust
+```rust,ignore
 // 如果这被允许(实际上不是)
 let r1 = &mut vec;
 let r2 = &mut vec;
@@ -276,7 +276,7 @@ Rust阻止这种情况，保证内存安全。
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 let mut s = String::from("hello");
 
 let r1 = &s;      // 不可变借用
@@ -398,7 +398,7 @@ fn main() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 这不能编译!
 struct SelfRef {
     data: String,
@@ -419,7 +419,7 @@ struct SelfRef {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 let s = String::from("hello");
 let s2 = s;
 println!("{}", s);  // 错误! s已被移动
@@ -433,7 +433,7 @@ println!("{}", s);  // OK
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 let mut s = String::from("hello");
 let r = &s;
 s.push_str(" world");  // 错误! s被借用
@@ -449,7 +449,7 @@ s.push_str(" world");  // OK
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 fn bad() -> &String {
     let s = String::from("hello");
     &s  // 错误! s在函数结束时释放
@@ -564,7 +564,7 @@ let mut r1 = cell.borrow_mut();  // 运行时检查的可变借用
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 // C语言中的错误
 int* ptr = malloc(sizeof(int));
 free(ptr);
@@ -653,7 +653,7 @@ fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
 ### 错误1: 借用冲突
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 let mut x = 5;
 let r1 = &x;
 let r2 = &mut x;  // 错误！r1还在用
@@ -670,7 +670,7 @@ let r2 = &mut x;  // OK
 ### 错误2: 悬垂引用
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 fn dangling() -> &String {
     let s = String::from("hello");
     &s  // 错误！s在函数结束时被释放

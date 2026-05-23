@@ -75,7 +75,7 @@ syn = { version = "2.0", features = ["full"] }
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use proc_macro2::TokenStream as TokenStream2;
 use quote::quote;
@@ -103,7 +103,7 @@ pub fn derive_my_trait(input: TokenStream) -> TokenStream {
 
 创建一个为结构体生成 Builder 模式的 Derive 宏：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use proc_macro2::Span;
 use quote::{quote, format_ident};
@@ -203,7 +203,7 @@ pub fn derive_builder(input: TokenStream) -> TokenStream {
 
 **使用示例：**
 
-```rust
+```rust,ignore
 use my_proc_macros::Builder;
 
 #[derive(Builder)]
@@ -235,7 +235,7 @@ fn main() {
 
 创建支持多种序列化格式的 Derive 宏：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::{parse_macro_input, Data, DeriveInput, Fields, Meta, NestedMeta};
@@ -391,7 +391,7 @@ fn generate_binary_deserialize(fields: &[FieldInfo], struct_name: &syn::Ident) -
 
 为枚举生成实用方法的 Derive 宏：
 
-```rust
+```rust,ignore
 #[proc_macro_derive(EnumUtils, attributes(enum_utils))]
 pub fn derive_enum_utils(input: TokenStream) -> TokenStream {
     let input = parse_macro_input!(input as DeriveInput);
@@ -465,7 +465,7 @@ pub fn derive_enum_utils(input: TokenStream) -> TokenStream {
 
 创建类似 Actix-web 的路由属性宏：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use quote::{quote, format_ident};
 use syn::{parse_macro_input, ItemFn, Lit, Meta, NestedMeta, ReturnType, Type};
@@ -535,7 +535,7 @@ pub fn route(args: TokenStream, input: TokenStream) -> TokenStream {
 
 创建带有设置和清理的测试属性宏：
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn integration_test(args: TokenStream, input: TokenStream) -> TokenStream {
     let args = parse_macro_input!(args as syn::AttributeArgs);
@@ -600,7 +600,7 @@ pub fn integration_test(args: TokenStream, input: TokenStream) -> TokenStream {
 
 创建自动记录函数入口和出口的属性宏：
 
-```rust
+```rust,ignore
 #[proc_macro_attribute]
 pub fn logged(_args: TokenStream, input: TokenStream) -> TokenStream {
     let input_fn = parse_macro_input!(input as ItemFn);
@@ -641,7 +641,7 @@ pub fn logged(_args: TokenStream, input: TokenStream) -> TokenStream {
 
 创建类型安全的 SQL 查询宏：
 
-```rust
+```rust,ignore
 use proc_macro::TokenStream;
 use proc_macro2::TokenTree;
 use quote::quote;
@@ -709,7 +709,7 @@ fn validate_sql(query: &str) {
 
 创建运行时验证宏：
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn validate(input: TokenStream) -> TokenStream {
     let tokens: Vec<_> = input.into_iter().collect();
@@ -770,7 +770,7 @@ pub fn validate(input: TokenStream) -> TokenStream {
 
 ### JSON 字面量宏
 
-```rust
+```rust,ignore
 #[proc_macro]
 pub fn json(input: TokenStream) -> TokenStream {
     let input = proc_macro2::TokenStream::from(input);
@@ -811,7 +811,7 @@ pub fn json(input: TokenStream) -> TokenStream {
 
 ### 自定义解析器
 
-```rust
+```rust,ignore
 use syn::parse::{Parse, ParseStream};
 use syn::{Ident, Token, Type, Expr};
 
@@ -871,7 +871,7 @@ pub fn define_route(input: TokenStream) -> TokenStream {
 
 ### Token 流转换
 
-```rust
+```rust,ignore
 use proc_macro2::{TokenStream, TokenTree};
 
 fn transform_async_trait(tokens: TokenStream) -> TokenStream {
@@ -899,7 +899,7 @@ fn transform_async_trait(tokens: TokenStream) -> TokenStream {
 
 ### 编译期错误报告
 
-```rust
+```rust,ignore
 use proc_macro::Diagnostic;
 use proc_macro::Level;
 
@@ -960,7 +960,7 @@ pub fn derive_validate(input: TokenStream) -> TokenStream {
 
 ### 使用 syn::Error
 
-```rust
+```rust,ignore
 use syn::Error;
 
 fn parse_field_attrs(attrs: &[syn::Attribute]) -> Result<FieldConfig, Error> {
@@ -1059,7 +1059,7 @@ fn test_compile_errors() {
 
 **tests/ui/invalid_builder.rs:**
 
-```rust
+```rust,ignore
 use my_macros::Builder;
 
 #[derive(Builder)]
@@ -1080,7 +1080,7 @@ error: Builder derive only supports named fields
 
 ### 调试技巧
 
-```rust
+```rust,ignore
 use std::fs::File;
 use std::io::Write;
 

@@ -384,7 +384,7 @@ $$
 
 **源（Rust MIR）**：
 
-```rust
+```rust,ignore
 bb1:  // 循环头
   switchInt(cond) -> [0: bb3, otherwise: bb2]
 
@@ -398,7 +398,7 @@ bb3:  // 循环后
 
 **目标（LLBC/函数式）**：
 
-```rust
+```rust,ignore
 // 翻译成递归函数
 fn loop_body(s: State) -> ((), State) {
   if eval(cond, s) {
@@ -502,7 +502,7 @@ fn sum(vec: &Vec<i32>) -> i32 {
 
 **LLBC翻译**：
 
-```rust
+```rust,ignore
 fn sum(vec: &Vec<i32>) -> State -> i32 × State {
     // 借用作为状态读取函数
     let v = read(vec);

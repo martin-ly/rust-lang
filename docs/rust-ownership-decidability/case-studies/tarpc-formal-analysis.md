@@ -51,7 +51,7 @@ tarpc提供:
 
 ### 定义 2.1 (Service Trait)
 
-```rust
+```rust,ignore
 #[tarpc::service]
 trait World {
     async fn hello(name: String) -> String;
@@ -77,7 +77,7 @@ trait World {
 
 > RPC调用类型在编译时验证。
 
-```rust
+```rust,ignore
 // 客户端
 let client = WorldClient::new(config).spawn();
 let response = client.hello(context::current(), "World".into()).await?;
@@ -104,7 +104,7 @@ $$
 
 > 请求上下文自动传递。
 
-```rust
+```rust,ignore
 async fn hello(self, ctx: context::Context, name: String) -> String {
     // ctx包含:
     // - deadline
@@ -124,7 +124,7 @@ async fn hello(self, ctx: context::Context, name: String) -> String {
 
 > 基于Tokio channel的背压。
 
-```rust
+```rust,ignore
 Channel::builder(
     tokio::net::TcpStream::connect(addr).await?
 )
@@ -140,7 +140,7 @@ Channel::builder(
 
 ### 反例 6.1 (忘记处理Cancel)
 
-```rust
+```rust,ignore
 async fn long_operation(&self) -> Result<()> {
     sleep(10).await;  // 客户端可能已取消
     // 资源可能泄漏

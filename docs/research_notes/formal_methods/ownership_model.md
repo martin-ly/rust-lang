@@ -1505,7 +1505,7 @@ $$
 
 **Rust 示例** (Rust 1.94):
 
-```rust
+```rust,ignore
 use std::cell::{RefCell, Ref};
 
 fn demonstrate_try_map() {
@@ -2044,7 +2044,7 @@ $$\text{Program} \in \text{Safe Rust} \rightarrow \text{SpatialSafe} \land \text
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 fn use_after_move() {
     let s1 = String::from("hello");
     let s2 = s1;  // 所有权从 s1 移动到 s2
@@ -2068,7 +2068,7 @@ fn use_after_move() {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 fn double_mutable_borrow() {
     let mut v = vec![1, 2, 3];
 
@@ -2098,7 +2098,7 @@ fn double_mutable_borrow() {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 fn dangling_reference() -> &'static String {
     let s = String::from("temporary");
     &s  // 错误：返回局部变量的引用
@@ -2125,7 +2125,7 @@ fn dangling_reference() -> &'static String {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 fn mixed_borrow_violation() {
     let mut data = vec![1, 2, 3];
 
@@ -2151,7 +2151,7 @@ fn mixed_borrow_violation() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 struct Person {
     name: String,
     age: u32,
@@ -2187,7 +2187,7 @@ fn partial_move() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 fn iterator_invalidation() {
     let mut vec = vec![1, 2, 3];
 
@@ -2259,7 +2259,7 @@ fn self_referential_move() {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use std::thread;
 
 fn data_race() {
@@ -2600,7 +2600,7 @@ fn main() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 fn scope_example() {
     let s = String::from("hello");
     {

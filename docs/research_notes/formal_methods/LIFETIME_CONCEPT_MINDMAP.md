@@ -341,21 +341,21 @@ NLL
 ### 7.1 模式1: 相同生命周期
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 fn longest<'a>(x: &'a str, y: &'a str) -> &'a str
 ```
 
 ### 7.2 模式2: 独立生命周期
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn parse<'a, 'b>(input: &'a str, config: &'b Config) -> &'a str
 ```
 
 ### 7.3 模式3: 返回self引用
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 impl<'a> Parser<'a> {
     fn input(&self) -> &'a str { self.input }
 }

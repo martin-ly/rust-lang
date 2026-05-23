@@ -165,7 +165,7 @@ fn process_batch<S: ProcessStrategy>(data: Vec<i32>, strategy: &S) -> Vec<i32> {
 
 **需求**：请求处理 → 发事件 → 多订阅者（日志、通知、库存）。
 
-```rust
+```rust,ignore
 // 异步 + broadcast channel
 let (tx, _) = tokio::sync::broadcast::channel::<OrderEvent>(32);
 tokio::spawn(async move {
@@ -181,7 +181,7 @@ tokio::spawn(async move {
 
 **需求**：对像素块并行处理。
 
-```rust
+```rust,ignore
 use rayon::prelude::*;
 let processed: Vec<u8> = pixels
     .par_chunks_mut(chunk_size)
@@ -196,7 +196,7 @@ let processed: Vec<u8> = pixels
 
 **需求**：订单服务调用库存服务、支付服务。
 
-```rust
+```rust,ignore
 trait InventoryService { fn reserve(&self, req: ReserveDto) -> Result<(), String>; }
 trait PaymentService { fn charge(&self, req: ChargeDto) -> Result<(), String>; }
 struct OrderOrchestrator<I: InventoryService, P: PaymentService> {
@@ -295,7 +295,7 @@ fn main() {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Cargo.toml: rayon = "1.10"
 fn main() {
     use rayon::prelude::*;

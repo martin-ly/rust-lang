@@ -315,7 +315,7 @@ $$
 
 **伪代码表示**:
 
-```rust
+```rust,ignore
 #[no_mangle]
 unsafe extern "C" fn Reset_Handler() -> ! {
     // 1. 初始化数据段 (.data)
@@ -424,7 +424,7 @@ $$
 
 **反例 (顺序错误)**:
 
-```rust
+```rust,ignore
 // 错误顺序：先调用main再初始化数据
 unsafe fn Wrong_Reset() -> ! {
     main();  // 使用未初始化的静态变量！
@@ -630,7 +630,7 @@ $$
 
 **检测机制**:
 
-```rust
+```rust,ignore
 // 栈底哨兵 (链接脚本中定义)
 __stack_bottom = ORIGIN(RAM) + LENGTH(RAM);
 
@@ -767,7 +767,7 @@ $$
 
 **向量表映射**:
 
-```rust
+```rust,ignore
 #[repr(C)]
 pub struct VectorTable {
     pub initial_sp: u32,
@@ -821,7 +821,7 @@ $$
 
 未定义的中断使用默认处理程序：
 
-```rust
+```rust,ignore
 #[no_mangle]
 pub unsafe extern "C" fn DefaultHandler() {
     loop {
@@ -886,7 +886,7 @@ $$
 
 **诊断信息提取**:
 
-```rust
+```rust,ignore
 #[exception]
 fn HardFault(ef: &ExceptionFrame) -> ! {
     // 获取CFSR寄存器内容
@@ -1038,7 +1038,7 @@ Rust的 `#[no_mangle]` 和链接器脚本确保符号解析正确。
 
 **性质3 (控制流安全)**:
 
-```rust
+```rust,ignore
 #[entry]
 fn main() -> ! {
     // 返回类型 ! (never type) 确保不返回
@@ -1072,7 +1072,7 @@ $$
 
 初始化代码：
 
-```rust
+```rust,ignore
 let count = (&_edata as usize - &_sdata as usize) / 4;
 ptr::copy_nonoverlapping(&_sidata, &mut _sdata, count);
 ```
@@ -1118,7 +1118,7 @@ $$
 
 cortex-m-rt使用编译器属性保证对齐：
 
-```rust
+```rust,ignore
 #[repr(C, align(1024))]
 pub struct VectorTable { ... }
 ```
@@ -1196,7 +1196,7 @@ $$
 
 **所有权转移规则**:
 
-```rust
+```rust,ignore
 // cortex-m-rt提供的外设获取
 let dp = Peripherals::take().unwrap();  // 获取所有外设的所有权
 let gpioa = dp.GPIOA;                    // 转移GPIOA所有权
@@ -1233,7 +1233,7 @@ $$
 
 `Peripherals::take()` 使用静态原子标志确保只被调用一次：
 
-```rust
+```rust,ignore
 static mut TAKEN: bool = false;
 
 pub fn take() -> Option<Self> {
@@ -1252,7 +1252,7 @@ pub fn take() -> Option<Self> {
 
 Rust的所有权系统防止外设别名：
 
-```rust
+```rust,ignore
 let dp = Peripherals::take().unwrap();
 let gpioa = dp.GPIOA;
 let gpioa2 = dp.GPIOA;  // 编译错误：值已移动
@@ -1276,7 +1276,7 @@ $$
 
 **内部可变性模式**:
 
-```rust
+```rust,ignore
 use core::cell::RefCell;
 use cortex_m::interrupt::Mutex;
 
@@ -1317,7 +1317,7 @@ $$
 
 **安全共享要求**:
 
-```rust
+```rust,ignore
 // 安全：使用原子类型
 static FLAG: AtomicBool = AtomicBool::new(false);
 
@@ -1338,7 +1338,7 @@ static mut UNSAFE_DATA: u32 = 0;  // 需要unsafe，容易出错
 
 **临界区语义**:
 
-```rust
+```rust,ignore
 pub fn free<F, R>(f: F) -> R
 where F: FnOnce(&CriticalSection) -> R
 {
@@ -1391,7 +1391,7 @@ $$
 
 **实现机制**:
 
-```rust
+```rust,ignore
 // 进入临界区：禁用所有中断
 asm!("cpsid i");
 
@@ -1404,7 +1404,7 @@ asm!("cpsie i");  // 如果之前是启用的
 
 **嵌套临界区**:
 
-```rust
+```rust,ignore
 interrupt::free(|cs1| {
     // 第一次禁用中断
     interrupt::free(|cs2| {
@@ -1439,7 +1439,7 @@ $$
 
 实现保存了进入时的PRIMASK状态：
 
-```rust
+```rust,ignore
 let primask = register::primask::read();  // 保存
 // ...
 if primask.is_active() {  // 恢复
@@ -1483,7 +1483,7 @@ Idle        Critical
 
 **使用模式**:
 
-```rust
+```rust,ignore
 // 模式1：保护共享数据
 static SHARED: Mutex<u32> = Mutex::new(0);
 
@@ -1523,7 +1523,7 @@ $$
 
 **Rust中的原子类型**:
 
-```rust
+```rust,ignore
 use core::sync::atomic::{AtomicU32, Ordering};
 
 static COUNTER: AtomicU32 = AtomicU32::new(0);
@@ -1549,7 +1549,7 @@ COUNTER.compare_exchange(old, new, Ordering::SeqCst, Ordering::Relaxed);
 
 **内存序语义**:
 
-```rust
+```rust,ignore
 // Release-Acquire同步
 // 线程A
 DATA.store(42, Ordering::Relaxed);
@@ -1588,7 +1588,7 @@ $$
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 #[entry]
 fn main() -> ! {
     fn recurse(n: u32) {
@@ -1636,7 +1636,7 @@ fn safe_recurse(n: u32, max_depth: u32) {
 
 > **[来源: Wikipedia - Asynchronous I/O]**
 
-```rust
+```rust,ignore
 #[entry]
 fn main() -> ! {
     // 在栈上分配100KB数组
@@ -1661,7 +1661,7 @@ _stack_size = 0x10000;                /* 64KB栈空间 */
 
 **修复方案**:
 
-```rust
+```rust,ignore
 // 使用静态分配
 static mut HUGE_BUFFER: [u8; 100_000] = [0; 100_000];
 
@@ -1681,7 +1681,7 @@ fn main() -> ! {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 #[no_mangle]
 static mut COUNTER: u32;  // 未初始化！
 
@@ -1706,7 +1706,7 @@ $$
 
 **修复方案**:
 
-```rust
+```rust,ignore
 #[no_mangle]
 static mut COUNTER: u32 = 0;  // 正确初始化
 
@@ -1722,7 +1722,7 @@ static COUNTER: AtomicU32 = AtomicU32::new(0);
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 低优先级任务占用资源，阻塞高优先级任务
 static RESOURCE: Mutex<RefCell<u32>> = Mutex::new(RefCell::new(0));
 
@@ -1837,7 +1837,7 @@ _stack_top = 0x20000000 + LENGTH(RAM)
 
 **验证目标**:
 
-```rust
+```rust,ignore
 // 验证数据段复制正确性
 #[kani::proof]
 fn verify_data_copy() {
@@ -1874,7 +1874,7 @@ fn verify_bss_zero() {
 
 **属性检查**:
 
-```rust
+```rust,ignore
 // 验证向量表对齐
 #[kani::proof]
 fn verify_vector_alignment() {
@@ -1916,7 +1916,7 @@ cargo +nightly miri test
 
 **常见问题检测**:
 
-```rust
+```rust,ignore
 // 错误：未对齐访问
 unsafe {
     let ptr = 0x20000001 as *mut u32;
@@ -2001,7 +2001,7 @@ address     size  symbol
 
 **RTIC的额外保证**:
 
-```rust
+```rust,ignore
 #[app(device = stm32f4::Peripherals)]
 const APP: () = {
     struct Resources {
@@ -2103,7 +2103,7 @@ const APP: () = {
 
 **原则1: 最小权限原则**:
 
-```rust
+```rust,ignore
 // 不要一次性获取所有外设
 // 坏做法
 let dp = Peripherals::take().unwrap();
@@ -2118,7 +2118,7 @@ run_application(gpioa, usart1);
 
 **原则2: 早期错误检测**:
 
-```rust
+```rust,ignore
 // 使用const断言验证配置
 const_assert!(STACK_SIZE >= 4096);
 const_assert!(HEAP_SIZE <= RAM_SIZE / 2);
@@ -2126,7 +2126,7 @@ const_assert!(HEAP_SIZE <= RAM_SIZE / 2);
 
 **原则3: 防御性编程**:
 
-```rust
+```rust,ignore
 // 检查外设是否可用
 fn critical_operation(periph: &mut Periph) -> Result<(), Error> {
     if !periph.is_ready() {
@@ -2143,7 +2143,7 @@ fn critical_operation(periph: &mut Periph) -> Result<(), Error> {
 
 **策略1: 硬件Watchdog**:
 
-```rust
+```rust,ignore
 use cortex_m::peripheral::Peripherals;
 
 fn init_watchdog(dp: &mut Peripherals) {
@@ -2163,7 +2163,7 @@ fn feed_watchdog(dp: &mut Peripherals) {
 
 **策略2: 错误分类处理**:
 
-```rust
+```rust,ignore
 #[derive(Debug)]
 enum Error {
     Recoverable(&'static str),   // 可恢复
@@ -2188,7 +2188,7 @@ fn handle_error(e: Error) -> ! {
 
 **策略3: 状态监控**:
 
-```rust
+```rust,ignore
 // 使用心跳LED指示系统健康
 static mut HEARTBEAT_COUNT: u32 = 0;
 
@@ -2213,7 +2213,7 @@ fn check_health() -> bool {
 
 **技巧1: 使用ITM/SWO输出**:
 
-```rust
+```rust,ignore
 use cortex_m::peripheral::ITM;
 
 fn log_message(itm: &mut ITM, msg: &str) {
@@ -2225,7 +2225,7 @@ fn log_message(itm: &mut ITM, msg: &str) {
 
 **技巧2: HardFault诊断**:
 
-```rust
+```rust,ignore
 use cortex_m_rt::{entry, exception};
 use cortex_m::peripheral::scb::Exception;
 
@@ -2255,7 +2255,7 @@ fn HardFault(ef: &ExceptionFrame) -> ! {
 
 **技巧3: 栈使用监控**:
 
-```rust
+```rust,ignore
 // 在栈底填充已知模式
 static mut STACK_CANARY: u32 = 0xDEADBEEF;
 
@@ -2271,7 +2271,7 @@ fn check_stack_usage() -> u32 {
 
 **技巧4: 断点调试**:
 
-```rust
+```rust,ignore
 // 在关键位置插入软件断点
 unsafe { core::arch::asm!("bkpt #0"); }
 ```

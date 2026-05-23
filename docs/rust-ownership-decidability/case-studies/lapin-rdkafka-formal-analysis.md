@@ -50,7 +50,7 @@
 | NACK(requeue) | 拒绝重入队 | 可重试 |
 | NACK(drop) | 丢弃 | 死信 |
 
-```rust
+```rust,ignore
 let options = BasicConsumeOptions {
     no_ack: false,  // 手动确认
     ..Default::default()
@@ -63,7 +63,7 @@ let options = BasicConsumeOptions {
 
 > 控制未确认消息数量。
 
-```rust
+```rust,ignore
 channel
     .basic_qos(10, BasicQosOptions::default())  // 最多10条未确认
     .await?;
@@ -79,7 +79,7 @@ channel
 
 > 消费者组内分区自动分配。
 
-```rust
+```rust,ignore
 let consumer: StreamConsumer = ClientConfig::new()
     .set("group.id", "my_group")
     .set("enable.auto.commit", "false")  // 手动提交
@@ -92,7 +92,7 @@ let consumer: StreamConsumer = ClientConfig::new()
 
 > 业务处理后提交偏移。
 
-```rust
+```rust,ignore
 consumer.commit_message(&message, CommitMode::Async)?;
 ```
 
@@ -106,7 +106,7 @@ consumer.commit_message(&message, CommitMode::Async)?;
 
 > 手动确认保证至少一次投递。
 
-```rust
+```rust,ignore
 // 处理完成后再确认
 deliveries.for_each(|delivery| async move {
     let delivery = delivery.expect("error");
@@ -123,7 +123,7 @@ deliveries.for_each(|delivery| async move {
 
 ### 反例 5.1 (先确认后处理)
 
-```rust
+```rust,ignore
 // 危险: 消息可能丢失
 channel.basic_ack(tag, opts).await?;
 process(message).await;  // 失败则消息丢失
@@ -135,7 +135,7 @@ channel.basic_ack(tag, opts).await?;
 
 ### 反例 5.2 (自动提交)
 
-```rust
+```rust,ignore
 // 危险: 自动提交可能丢失消息
 .set("enable.auto.commit", "true")
 

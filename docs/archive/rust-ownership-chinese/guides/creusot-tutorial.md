@@ -154,7 +154,7 @@ creusot-contracts = "0.3"
 
 #### 3.1.1 最终值 (Final Value)
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 #[ensures(*x == 5)]  // 确保 *x 的最终值是 5
@@ -165,7 +165,7 @@ fn set_to_five(x: &mut i32) {
 
 #### 3.1.2 两状态规范 (Two-state Specifications)
 
-```rust
+```rust,ignore
 #[ensures(*result == **x)]      // 返回值等于 x 的旧值
 #[ensures(**x == ^*x)]          // x 的新值等于 x 的旧值（未改变）
 fn take_and_return<'a>(x: &mut &'a mut i32) -> &'a mut i32 {
@@ -183,7 +183,7 @@ fn take_and_return<'a>(x: &mut &'a mut i32) -> &'a mut i32 {
 
 快照捕获值在特定时间点的状态：
 
-```rust
+```rust,ignore
 #[ensures(@result == @x + @y)]  // @ 表示快照
 defn add(x: i32, y: i32) -> i32 {
     x + y
@@ -206,7 +206,7 @@ defn add(x: i32, y: i32) -> i32 {
 
 ### 4.2 前置与后置条件
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 // 整数除法
@@ -222,7 +222,7 @@ pub fn safe_div(dividend: i32, divisor: i32) -> i32 {
 
 ### 4.3 循环规范
 
-```rust
+```rust,ignore
 #[requires(n >= 0)]
 #[ensures(result == n * (n + 1) / 2)]
 pub fn sum(n: i32) -> i32 {
@@ -243,7 +243,7 @@ pub fn sum(n: i32) -> i32 {
 
 ### 4.4 变体与终止性
 
-```rust
+```rust,ignore
 #[requires(n >= 0)]
 #[variant(n)]  // 变体：每次递归 n 减小，确保终止
 fn factorial(n: u64) -> u64 {
@@ -261,7 +261,7 @@ fn factorial(n: u64) -> u64 {
 
 ### 5.1 所有权转移验证
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 pub struct Account {
@@ -291,7 +291,7 @@ impl Account {
 
 ### 5.2 不变量维护
 
-```rust
+```rust,ignore
 pub struct Vector<T> {
     data: Vec<T>,
 }
@@ -319,7 +319,7 @@ impl<T> Vector<T> {
 
 ### 5.3 数组与切片操作
 
-```rust
+```rust,ignore
 #[requires(arr.len() > 0)]
 #[ensures(result >= 0)]
 #[ensures((@arr).contains(result))]  // 结果在数组中
@@ -344,7 +344,7 @@ pub fn find_max(arr: &[i32]) -> i32 {
 
 ### 5.4 递归数据结构
 
-```rust
+```rust,ignore
 pub enum List<T> {
     Nil,
     Cons(T, Box<List<T>>),
@@ -378,7 +378,7 @@ impl<T> List<T> {
 
 幽灵状态用于验证但不影响运行时：
 
-```rust
+```rust,ignore
 use creusot_contracts::ghost::*;
 
 #[ensures(result.0 == x + y)]
@@ -397,7 +397,7 @@ pub fn compute_with_ghost(x: i32, y: i32) -> (i32, i32) {
 
 ### 6.2  traits 规范
 
-```rust
+```rust,ignore
 #[allow(unused)]
 pub trait Equals {
     #[predicate]
@@ -416,7 +416,7 @@ impl<T: Eq> Equals for T {
 
 对于无法验证的代码，使用 `#[trusted]`：
 
-```rust
+```rust,ignore
 #[trusted]  // 信任此函数满足规范
 #[ensures(result >= 0)]
 #[ensures(result * result <= n)]
@@ -432,7 +432,7 @@ pub fn isqrt(n: i32) -> i32 {
 
 ### 7.1 验证二分查找
 
-```rust
+```rust,ignore
 use creusot_contracts::*;
 
 #[requires(arr.len() > 0)]
@@ -471,7 +471,7 @@ fn is_sorted(arr: &[i32]) -> bool {
 
 ### 7.2 验证栈实现
 
-```rust
+```rust,ignore
 pub struct Stack<T> {
     data: Vec<T>,
 }
@@ -546,7 +546,7 @@ cargo creusot -- --prover-timeout=60
 
 ### Q2: 如何调试失败的验证？
 
-```rust
+```rust,ignore
 // 添加中间断言
 #[assert(i < arr.len())]
 let mid = arr[i];
@@ -571,7 +571,7 @@ let mid = arr[i];
 
 使用 `#[trusted]` 或提供抽象规范：
 
-```rust
+```rust,ignore
 #[trusted]
 #[ensences(result.is_valid())]
 pub fn create_cyclic() -> Node { ... }

@@ -252,7 +252,7 @@ debug = true
 
 #### src/lib.rs
 
-```rust
+```rust,ignore
 //! 高性能日志分析器库
 //!
 //! 提供日志解析、分析和报告生成功能
@@ -620,7 +620,7 @@ mod tests {
 
 #### src/cli.rs
 
-```rust
+```rust,ignore
 //! 命令行参数解析
 
 use crate::{FilterConfig, LogAnalyzerError, LogLevel, OutputFormat, Result};
@@ -894,7 +894,7 @@ mod tests {
 
 #### src/parser.rs
 
-```rust
+```rust,ignore
 //! 日志文件解析器
 //!
 //! 支持内存映射文件解析，提供高性能的日志条目提取
@@ -1224,7 +1224,7 @@ mod tests {
 
 #### src/analyzer.rs
 
-```rust
+```rust,ignore
 //! 日志分析器
 //!
 //! 提供日志统计分析、过滤和模式匹配功能
@@ -1629,7 +1629,7 @@ mod tests {
 
 #### src/reporter.rs
 
-```rust
+```rust,ignore
 //! 报告生成器
 //!
 //! 支持多种输出格式：JSON、CSV、表格
@@ -2048,7 +2048,7 @@ mod tests {
 
 #### src/main.rs
 
-```rust
+```rust,ignore
 //! 高性能日志分析器
 //!
 //! 使用方法:
@@ -2352,7 +2352,7 @@ fn format_duration(duration: chrono::Duration) -> String {
 
 #### tests/integration_tests.rs
 
-```rust
+```rust,ignore
 //! 集成测试
 
 use log_analyzer::{
@@ -2574,7 +2574,7 @@ fn test_large_file_performance() {
 
 #### benches/parser_benchmark.rs
 
-```rust
+```rust,ignore
 use criterion::{black_box, criterion_group, criterion_main, Criterion, BenchmarkId};
 use log_analyzer::parser::{LogReader, DefaultLogParser, JsonLogParser};
 use std::io::Write;
@@ -3240,7 +3240,7 @@ strip = true
 
 #### src/lib.rs
 
-```rust
+```rust,ignore
 //! 用户管理服务库
 //!
 //! 提供用户管理、认证和授权的 RESTful API
@@ -3264,7 +3264,7 @@ pub const NAME: &str = env!("CARGO_PKG_NAME");
 
 #### src/config.rs
 
-```rust
+```rust,ignore
 //! 应用配置管理
 
 use secrecy::{ExposeSecret, Secret};
@@ -3495,7 +3495,7 @@ mod tests {
 
 #### src/error.rs
 
-```rust
+```rust,ignore
 //! 错误类型定义
 
 use axum::{
@@ -3581,7 +3581,7 @@ pub type Result<T> = std::result::Result<T, AppError>;
 
 #### src/models/mod.rs
 
-```rust
+```rust,ignore
 //! 数据模型模块
 
 pub mod auth;
@@ -3593,7 +3593,7 @@ pub use user::*;
 
 #### src/models/user.rs
 
-```rust
+```rust,ignore
 //! 用户数据模型
 
 use chrono::{DateTime, Utc};
@@ -3784,7 +3784,7 @@ mod tests {
 
 #### src/models/auth.rs
 
-```rust
+```rust,ignore
 //! 认证相关数据模型
 
 use serde::{Deserialize, Serialize};
@@ -3869,7 +3869,7 @@ pub struct ChangePasswordRequest {
 
 #### src/repositories/mod.rs
 
-```rust
+```rust,ignore
 //! 数据仓库模块
 
 pub mod user;
@@ -3879,7 +3879,7 @@ pub use user::UserRepository;
 
 #### src/repositories/user.rs
 
-```rust
+```rust,ignore
 //! 用户数据仓库
 
 use crate::{
@@ -4128,7 +4128,7 @@ impl UserRepository {
 
 #### src/services/mod.rs
 
-```rust
+```rust,ignore
 //! 服务层模块
 
 pub mod auth;
@@ -4140,7 +4140,7 @@ pub use user::UserService;
 
 #### src/services/auth.rs
 
-```rust
+```rust,ignore
 //! 认证服务
 
 use crate::{
@@ -4458,7 +4458,7 @@ fn verify_password(password: &str, hash: &str) -> Result<bool> {
 
 #### src/services/user.rs
 
-```rust
+```rust,ignore
 //! 用户服务
 
 use crate::{
@@ -4635,7 +4635,7 @@ impl UserService {
 
 #### src/handlers/mod.rs
 
-```rust
+```rust,ignore
 //! 处理器模块
 
 pub mod auth;
@@ -4647,7 +4647,7 @@ pub use user::*;
 
 #### src/handlers/auth.rs
 
-```rust
+```rust,ignore
 //! 认证处理器
 
 use crate::{
@@ -4794,7 +4794,7 @@ pub async fn change_password(
 
 #### src/handlers/user.rs
 
-```rust
+```rust,ignore
 //! 用户处理器
 
 use crate::{
@@ -4945,7 +4945,7 @@ pub async fn delete_user(
 
 #### src/middleware/mod.rs
 
-```rust
+```rust,ignore
 //! 中间件模块
 
 pub mod auth;
@@ -4957,7 +4957,7 @@ pub use rate_limit::*;
 
 #### src/middleware/auth.rs
 
-```rust
+```rust,ignore
 //! 认证中间件
 
 use crate::{
@@ -5026,7 +5026,7 @@ impl axum::extract::FromRequestParts<crate::state::AppState> for RequireAuth {
 
 #### src/middleware/rate_limit.rs
 
-```rust
+```rust,ignore
 //! 速率限制中间件
 
 use crate::error::{AppError, Result};
@@ -5087,7 +5087,7 @@ use axum::extract::State;
 
 #### src/state.rs
 
-```rust
+```rust,ignore
 //! 应用状态
 
 use crate::{
@@ -5152,7 +5152,7 @@ impl AppState {
 
 #### src/router.rs
 
-```rust
+```rust,ignore
 //! 路由配置
 
 use crate::{
@@ -5278,7 +5278,7 @@ async fn ready_check() -> axum::Json<serde_json::Value> {
 
 #### src/main.rs
 
-```rust
+```rust,ignore
 //! 用户管理服务入口
 
 use std::sync::Arc;
@@ -5528,7 +5528,7 @@ volumes:
 
 #### tests/integration_tests.rs
 
-```rust
+```rust,ignore
 //! 集成测试
 
 use std::net::SocketAddr;
@@ -6036,7 +6036,7 @@ SECTIONS
 
 #### build.rs
 
-```rust
+```rust,ignore
 use std::env;
 use std::fs::File;
 use std::io::Write;
@@ -6087,7 +6087,7 @@ fn main() {
 
 #### src/lib.rs
 
-```rust
+```rust,ignore
 //! IoT 传感器数据采集固件
 //!
 //! # 特性
@@ -6183,7 +6183,7 @@ impl defmt::Format for DeviceState {
 
 #### src/config.rs
 
-```rust
+```rust,ignore
 //! 设备配置
 
 use serde::{Deserialize, Serialize};
@@ -6305,7 +6305,7 @@ impl DeviceConfig {
 
 #### src/sensor.rs
 
-```rust
+```rust,ignore
 //! 传感器模块
 
 use crate::config::SensorConfig;
@@ -6472,7 +6472,7 @@ impl SensorManager for MockSensor {
 
 #### src/storage.rs
 
-```rust
+```rust,ignore
 //! 存储模块
 //!
 //! 使用闪存存储传感器数据，支持环形缓冲区
@@ -6620,7 +6620,7 @@ impl<F: AsyncNorFlash> ConfigStorage<F> {
 
 #### src/network.rs
 
-```rust
+```rust,ignore
 //! 网络模块
 //!
 //! 提供 MQTT 连接和数据上报功能
@@ -6798,7 +6798,7 @@ macro_rules! format {
 
 #### src/ota.rs
 
-```rust
+```rust,ignore
 //! OTA 固件更新模块
 //!
 //! 支持安全的固件空中升级
@@ -7033,7 +7033,7 @@ impl<F: AsyncNorFlash> OtaManager<F> {
 
 #### src/tasks/mod.rs
 
-```rust
+```rust,ignore
 //! 任务模块
 
 pub mod network_task;
@@ -7047,7 +7047,7 @@ pub use storage_task::storage_task;
 
 #### src/tasks/sensor_task.rs
 
-```rust
+```rust,ignore
 //! 传感器采集任务
 
 use crate::{
@@ -7100,7 +7100,7 @@ pub async fn sensor_task(config: DeviceConfig) {
 
 #### src/tasks/storage_task.rs
 
-```rust
+```rust,ignore
 //! 存储任务
 
 use crate::{
@@ -7162,7 +7162,7 @@ pub async fn storage_task<F: AsyncNorFlash>(mut storage: StorageManager<F>, conf
 
 #### src/tasks/network_task.rs
 
-```rust
+```rust,ignore
 //! 网络任务
 
 use crate::{
@@ -7285,7 +7285,7 @@ pub async fn network_task<F: AsyncNorFlash>(
 
 #### src/main.rs
 
-```rust
+```rust,ignore
 //! IoT 传感器固件主程序
 
 #![no_std]

@@ -226,7 +226,7 @@ A/B 测试:
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::collections::HashMap;
 use std::net::SocketAddr;
 use std::sync::Arc;
@@ -605,7 +605,7 @@ impl Clone for SidecarProxy {
 
 ### 4.2 mTLS 实现
 
-```rust
+```rust,ignore
 use rustls::{Certificate, PrivateKey, ServerConfig, ClientConfig};
 use rustls::internal::msgs::enums::AlertDescription;
 use std::sync::Arc;
@@ -720,7 +720,7 @@ impl MtlsManager {
 
 ### 4.3 可观测性集成
 
-```rust
+```rust,ignore
 use opentelemetry::trace::{Span, SpanKind, Tracer};
 use opentelemetry::KeyValue;
 use tracing::{info, warn, error};

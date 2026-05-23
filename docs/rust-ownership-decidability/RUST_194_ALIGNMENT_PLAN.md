@@ -315,7 +315,7 @@
 
 **Rust 概念**：
 
-```rust
+```rust,ignore
 // Reborrow 允许从 &mut T 获取 &T
 trait Reborrow<'a, 'b: 'a> {
     fn reborrow(&'a mut self) -> &'b T;

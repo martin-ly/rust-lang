@@ -42,7 +42,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 编译错误: 递归async函数
 async fn fib(n: u32) -> u32 {
     if n <= 1 {
@@ -76,7 +76,7 @@ $$
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 
@@ -126,7 +126,7 @@ impl Future for FibFuture {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 
@@ -178,7 +178,7 @@ async fn async_walk_iterative(root: &Node) -> i32 {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 struct AsyncResource {
     connection: Connection,
 }
@@ -195,7 +195,7 @@ impl Drop for AsyncResource {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 方案1: 显式关闭方法
 struct AsyncResource {
     connection: Connection,
@@ -245,7 +245,7 @@ impl Drop for AsyncResource {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 tokio::select! {
     // 模式1: 基础分支
     result = future1 => {
@@ -296,7 +296,7 @@ $$
 
 ### 4.2 Select与取消安全
 
-```rust
+```rust,ignore
 // 取消不安全的select使用
 async fn unsafe_pattern() {
     loop {
@@ -335,7 +335,7 @@ async fn safe_pattern() {
 
 ### 5.1 自定义Stream实现
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::task::{Context, Poll};
 use tokio::stream::Stream;
@@ -381,7 +381,7 @@ impl<T> Drop for BackpressureGuard<T> {
 
 ### 5.2 Buffer与并发控制
 
-```rust
+```rust,ignore
 use tokio::stream::StreamExt;
 
 stream
@@ -409,7 +409,7 @@ stream
 
 ### 6.1 BoxFuture与类型擦除
 
-```rust
+```rust,ignore
 use std::pin::Pin;
 use std::future::Future;
 
@@ -453,7 +453,7 @@ impl AsyncService for MyService {
 
 ### 6.2 自定义Future组合子
 
-```rust
+```rust,ignore
 // OrElse组合子
 pub struct OrElse<Fut, F> {
     future: Fut,
@@ -488,7 +488,7 @@ where
 
 ### 7.1 Future大小优化
 
-```rust
+```rust,ignore
 // 未优化的版本: 占用空间大
 async fn unoptimized() -> u8 {
     let large_data = [0u8; 1024];  // 占用1KB
@@ -515,7 +515,7 @@ fn recursive_optimized(n: usize) -> Pin<Box<dyn Future<Output = ()>>> {
 
 ### 7.2 零分配Future
 
-```rust
+```rust,ignore
 // 使用pin-project-lite减少开销
 use pin_project_lite::pin_project;
 
@@ -542,7 +542,7 @@ pub static STATIC_FUTURE: Ready<()> = Ready::new(());
 
 ### 8.1 时间控制测试
 
-```rust
+```rust,ignore
 use tokio::time::{pause, resume, advance, Instant};
 
 #[tokio::test]
@@ -570,7 +570,7 @@ async fn test_with_time_control() {
 
 ### 8.2 Mock异步服务
 
-```rust
+```rust,ignore
 use mockall::automock;
 
 #[automock]

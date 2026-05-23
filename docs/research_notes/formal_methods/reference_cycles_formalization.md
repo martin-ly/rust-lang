@@ -475,7 +475,7 @@ fn main() {
 ### 2. 双向链表使用Weak
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 struct Node<T> {
     value: T,
     prev: Option<Weak<RefCell<Node<T>>>>,
@@ -486,7 +486,7 @@ struct Node<T> {
 ### 3. 图结构使用Weak或ID
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // 选项1: Weak引用
 struct GraphNode {
     edges: Vec<Weak<RefCell<GraphNode>>>,

@@ -86,7 +86,7 @@
 - 零成本抽象原则
 - 显式优于隐式
 
-```rust
+```rust,ignore
 // 非惯用方式
 fn process(input: Option<String>) -> String {
     match input {
@@ -207,7 +207,7 @@ fn get_user_email(db: &Database, user_id: u64) -> Option<String> {
 
 提供默认值，但不panic。
 
-```rust
+```rust,ignore
 let config_timeout: Option<u64> = None;
 
 // 使用固定默认值
@@ -229,7 +229,7 @@ let timeout: u64 = config_timeout.unwrap_or_default();
 
 将Option转换为Result，为None时提供错误。
 
-```rust
+```rust,ignore
 fn find_user(db: &Database, id: u64) -> Result<User, String> {
     db.get_user(id).ok_or_else(|| format!("User {} not found", id))
 }
@@ -489,7 +489,7 @@ open_file(std::path::PathBuf::from("/etc/passwd")); // PathBuf
 
 `Borrow<T>`强调语义等价性，常用于HashMap键。
 
-```rust
+```rust,ignore
 use std::borrow::Borrow;
 use std::collections::HashMap;
 
@@ -515,7 +515,7 @@ let value = get_value(&map, "key");
 
 `ToOwned`从借用创建拥有值。
 
-```rust
+```rust,ignore
 use std::borrow::ToOwned;
 
 fn ensure_owned<T: ToOwned + ?Sized>(borrowed: &T) -> T::Owned {
@@ -679,7 +679,7 @@ let result: Vec<i32> = (0..100)
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 // 消费器（产生最终结果）
 let sum: i32 = (1..=10).sum();
 let product: i32 = (1..=5).product();
@@ -730,7 +730,7 @@ let map: HashMap<i32, i32> = data
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // fold（有初始值）
 let sum = [1, 2, 3, 4].iter().fold(0, |acc, &x| acc + x);
 

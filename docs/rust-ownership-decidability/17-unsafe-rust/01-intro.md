@@ -154,7 +154,7 @@ fn main() {
 ### 2.3 实现 Unsafe Trait
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 unsafe trait Send {
     // Send 标记 trait，实现者保证可以安全跨线程传输
 }
@@ -272,7 +272,7 @@ unsafe {
 
 **最佳实践**: 保持 unsafe 块尽可能小。
 
-```rust
+```rust,ignore
 // 不好的做法 - 整个函数都是 unsafe
 unsafe fn bad_split_at_mut(slice: &mut [i32], mid: usize) -> (&mut [i32], &mut [i32]) {
     // ... 很多代码
@@ -317,7 +317,7 @@ unsafe {
 ### 4.3 Unsafe Trait
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 // unsafe trait: 实现者必须保证不变量
 /// # Safety
 /// 实现者必须保证类型可以安全地跨线程发送 (无数据竞争)
@@ -497,7 +497,7 @@ unsafe {
 ### 6.2 调试技巧
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // 使用 debug_assert! 验证条件
 debug_assert!(!ptr.is_null(), "指针不应为空");
 debug_assert!(ptr.is_aligned(), "指针应对齐");

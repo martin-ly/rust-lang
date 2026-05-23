@@ -177,7 +177,7 @@ $$\mathit{handle}(h, r) \text{ 不处理 } \implies \mathit{next}(h) \neq \mathr
 
 1. **递归处理**：
 
-   ```rust
+   ```rust,ignore
    fn handle(&self, req: &Request) -> bool {
        if self.can_handle(req) { true }
        else if let Some(ref n) = self.next { n.handle(req) }

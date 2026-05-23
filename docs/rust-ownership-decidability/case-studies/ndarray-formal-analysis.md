@@ -73,7 +73,7 @@ pub trait Dimension: Clone {
 
 > 静态维度在编译时验证。
 
-```rust
+```rust,ignore
 let a = Array2::<f64>::zeros((3, 4));  // 2D数组
 // 类型: ArrayBase<OwnedRepr<f64>, Ix2>
 
@@ -88,7 +88,7 @@ let v = Array1::<f64>::zeros(5);
 
 > IxDyn支持运行时维度。
 
-```rust
+```rust,ignore
 let a = ArrayD::<f64>::zeros(vec![2, 3, 4]);
 // 维度数运行时确定
 ```
@@ -103,7 +103,7 @@ let a = ArrayD::<f64>::zeros(vec![2, 3, 4]);
 
 > 视图保证数据存在性。
 
-```rust
+```rust,ignore
 let a = Array2::from_shape_fn((3, 4), |(i, j)| (i * 4 + j) as f64);
 let view = a.slice(s![1..3, ..]);  // 子视图
 
@@ -127,7 +127,7 @@ $$
 
 > ndarray实现NumPy广播语义。
 
-```rust
+```rust,ignore
 let a = Array2::<f64>::ones((3, 4));
 let b = Array1::<f64>::ones(4);  // 会在第0维广播
 
@@ -150,7 +150,7 @@ let c = &a + &b;  // 形状: (3, 4)
 
 > 迭代遵循内存布局顺序。
 
-```rust
+```rust,ignore
 // C-order (row-major)
 let a = Array2::from_shape_vec((2, 3), vec![1,2,3,4,5,6])?;
 // 内存: [1,2,3,4,5,6]
@@ -169,14 +169,14 @@ let a = Array2::from_shape_vec((2, 3).f(), vec![1,2,3,4,5,6])?;
 
 ### 反例 6.1 (视图越界)
 
-```rust
+```rust,ignore
 let a = Array2::<f64>::zeros((3, 4));
 let slice = a.slice(s![0..10, ..]);  // 运行时panic
 ```
 
 ### 反例 6.2 (布局不匹配)
 
-```rust
+```rust,ignore
 // C库通常期望连续内存
 let a = Array2::<f64>::zeros((3, 4));
 let view = a.slice(s![.., 0..2]);

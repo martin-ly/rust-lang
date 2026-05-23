@@ -123,7 +123,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 //! Rust 1.89→1.93 版本演进示例代码
 
 /// 1.90 LLD 链接器配置演进

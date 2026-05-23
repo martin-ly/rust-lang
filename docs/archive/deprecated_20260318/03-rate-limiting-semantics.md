@@ -231,7 +231,7 @@
 
 ### 4.1 核心限流框架
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::Arc;
 use std::time::{Duration, Instant};
@@ -559,7 +559,7 @@ impl RateLimiter for FixedWindow {
 
 ### 4.2 分布式限流实现
 
-```rust
+```rust,ignore
 use redis::AsyncCommands;
 
 /// Redis 分布式限流器
@@ -722,7 +722,7 @@ impl DistributedTokenBucket {
 
 ### 4.3 自适应限流
 
-```rust
+```rust,ignore
 /// 自适应限流器（基于延迟反馈）
 pub struct AdaptiveRateLimiter {
     /// 基础限流器
@@ -815,7 +815,7 @@ impl AdaptiveRateLimiter {
 
 ### 4.4 多级限流
 
-```rust
+```rust,ignore
 /// 多级限流器
 pub struct TieredRateLimiter {
     /// 全局限流器（所有请求）

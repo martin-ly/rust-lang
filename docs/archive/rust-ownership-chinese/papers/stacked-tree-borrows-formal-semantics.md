@@ -313,7 +313,7 @@ $$
 
 **CSE（公共子表达式消除）**：
 
-```rust
+```rust,ignore
 // 源代码
 let x = *ptr;
 let y = *ptr;  // 可以消除第二次读取？
@@ -326,7 +326,7 @@ let y = *ptr;  // 可以消除第二次读取？
 
 **循环不变量外提**：
 
-```rust
+```rust,ignore
 // 源代码
 for i in 0..n {
     let x = *ptr;  // 可以外提？

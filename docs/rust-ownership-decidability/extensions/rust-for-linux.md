@@ -145,7 +145,7 @@ make rust/bindings/patched
 
 **rust_hello.rs:**
 
-```rust
+```rust,ignore
 //! Hello World 内核模块示例
 
 use kernel::prelude::*;
@@ -198,7 +198,7 @@ config RUST_HELLO
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 use kernel::prelude::*;
 use kernel::module;
 use kernel::module_param;
@@ -249,7 +249,7 @@ impl kernel::Module for RustParam {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 //! Rust 字符设备驱动示例
 
 use kernel::prelude::*;
@@ -360,7 +360,7 @@ impl kernel::Module for RustCharDev {
 
 > **[来源: IEEE - Programming Language Standards]**
 
-```rust
+```rust,ignore
 use kernel::ioctl;
 
 // 定义 ioctl 命令
@@ -434,7 +434,7 @@ impl kernel::file::Operations for RustIoctlDev {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 //! Rust 块设备驱动 - RAM 磁盘
 
 use kernel::prelude::*;
@@ -564,7 +564,7 @@ impl kernel::Module for RustRamDisk {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 //! Rust 网络设备驱动示例
 
 use kernel::prelude::*;
@@ -677,7 +677,7 @@ cd my-ebpf
 
 **eBPF 程序 (my-ebpf-ebpf/src/main.rs):**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -730,7 +730,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 **用户空间程序 (my-ebpf/src/main.rs):**
 
-```rust
+```rust,ignore
 use aya::{include_bytes_aligned, Ebpf};
 use aya::programs::{Xdp, XdpFlags};
 use aya_log::EbpfLogger;
@@ -783,7 +783,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -818,7 +818,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 
@@ -889,7 +889,7 @@ fn panic(_info: &core::panic::PanicInfo) -> ! {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 #![no_std]
 #![no_main]
 

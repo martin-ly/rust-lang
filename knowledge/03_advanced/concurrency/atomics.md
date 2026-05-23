@@ -1,4 +1,6 @@
 # Rust 原子操作 (Atomic Operations)
+>
+> **相关概念**: [原子操作](../../../concept/03_advanced/11_atomics_and_memory_ordering.md)
 
 > **Bloom 层级**: 理解
 
@@ -56,7 +58,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 static COUNTER: AtomicUsize = AtomicUsize::new(0);
@@ -359,7 +361,7 @@ static FLAG_B: AtomicBool = AtomicBool::new(false);
 
 CAS 是无锁算法的核心原语，提供**原子性的条件更新**：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 /// 使用 CAS 实现无锁栈的 Push 操作（简化版）
@@ -418,7 +420,7 @@ impl<T> LockFreeStack<T> {
 
 常见的原子修改操作：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicUsize, Ordering};
 
 let value = AtomicUsize::new(10);
@@ -446,7 +448,7 @@ let result = value.compare_exchange(
 
 > **Rust 1.95 新增**: `Atomic*::update` 和 `try_update` 方法封装了 CAS 循环，简化常见模式：
 
-```rust
+```rust,ignore
 use std::sync::atomic::{AtomicU32, Ordering};
 
 let counter = AtomicU32::new(5);
@@ -561,14 +563,14 @@ impl<T> SpinLock<T> {
 
 1. **默认使用最弱的内存序**：从 `Relaxed` 开始，仅在必要时增强
 
-   ```rust
+   ```rust,ignore
    // 好的做法：计数器用 Relaxed
    counter.fetch_add(1, Ordering::Relaxed);
    ```
 
 2. **成对使用 Acquire/Release**：确保同步语义完整
 
-   ```rust
+   ```rust,ignore
    // 生产者用 Release
    data.store(value, Ordering::Release);
    ready.store(true, Ordering::Release);
@@ -580,7 +582,7 @@ impl<T> SpinLock<T> {
 
 3. **CAS 使用退避策略**：在高竞争场景避免无限自旋
 
-   ```rust
+   ```rust,ignore
    let mut backoff = 1;
    loop {
        match atomic.compare_exchange(...) {
@@ -595,7 +597,7 @@ impl<T> SpinLock<T> {
 
 4. **使用 `compare_exchange_weak` 在循环中**：在 ARM 等架构上更高效
 
-   ```rust
+   ```rust,ignore
    while atomic.compare_exchange_weak(
        expected, new, success, failure
    ).is_err() {
@@ -618,7 +620,7 @@ impl<T> SpinLock<T> {
 
 1. **忘记 Unsafe Rust**：原子操作常与 `UnsafeCell`、原始指针配合使用
 
-   ```rust
+   ```rust,ignore
    // 错误：无法直接获得可变引用
    let value = atomic.load(Ordering::Relaxed);
    value += 1; // 这不是原子操作！
@@ -626,7 +628,7 @@ impl<T> SpinLock<T> {
 
 2. **混合使用不同的内存序**：可能导致数据竞争
 
-   ```rust
+   ```rust,ignore
    // 危险：生产者用 Relaxed
    data.store(42, Ordering::Relaxed);
 
@@ -636,7 +638,7 @@ impl<T> SpinLock<T> {
 
 3. **ABA 问题**：指针重用导致 CAS 误判
 
-   ```rust
+   ```rust,ignore
    // 危险：如果指针被释放并重新分配相同地址
    if head.compare_exchange(ptr_a, ptr_b, ...).is_ok() {
        // ptr_a 可能已经被释放并重新分配了！
@@ -652,7 +654,7 @@ impl<T> SpinLock<T> {
 
 5. **过度优化内存序**：过早优化可能导致微妙的 bug
 
-   ```rust
+   ```rust,ignore
    // 除非确定性能瓶颈，否则信号标志用 SeqCst 更安全
    static FLAG: AtomicBool = AtomicBool::new(false);
    ```
@@ -764,7 +766,7 @@ impl<T> OnceCell<T> {
 <details>
 <summary>点击查看答案</summary>
 
-```rust
+```rust,ignore
 pub fn get_or_init<F>(&self, f: F) -> &T
 where
     F: FnOnce() -> T,
@@ -1040,7 +1042,7 @@ fn consumer() {
 
 **修复**:
 
-```rust
+```rust,ignore
 fn producer() {
     DATA.store(42, Ordering::Relaxed);
     FLAG.store(true, Ordering::Release); // Release 保证之前的写可见
@@ -1056,7 +1058,7 @@ fn consumer() {
 
 **题 2**: 以下 CAS 循环有性能问题，请优化：
 
-```rust
+```rust,ignore
 fn increment(counter: &AtomicUsize) {
     loop {
         let current = counter.load(Ordering::Relaxed);
@@ -1081,7 +1083,7 @@ fn increment(counter: &AtomicUsize) {
 
 **修复**:
 
-```rust
+```rust,ignore
 fn increment(counter: &AtomicUsize) {
     let mut current = counter.load(Ordering::Relaxed);
     loop {

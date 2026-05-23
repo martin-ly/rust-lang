@@ -53,7 +53,7 @@ nom提供:
 ### 定义 2.1 (IResult)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 type IResult<I, O, E = Error<I>> = Result<(I, O), Err<E>>;
 // (剩余输入, 输出值) 或 错误
 ```
@@ -63,7 +63,7 @@ type IResult<I, O, E = Error<I>> = Result<(I, O), Err<E>>;
 
 > 解析器返回剩余输入供后续解析。
 
-```rust
+```rust,ignore
 fn pair_parser(input: &str) -> IResult<&str, (u32, u32)> {
     let (input, n1) = u32_parser(input)?;
     let (input, _) = space_parser(input)?;
@@ -82,7 +82,7 @@ fn pair_parser(input: &str) -> IResult<&str, (u32, u32)> {
 
 > `tuple`组合子顺序执行解析器。
 
-```rust
+```rust,ignore
 let parser = tuple((u32_parser, space_parser, u32_parser));
 // 类型: (u32, (), u32)
 ```
@@ -93,7 +93,7 @@ let parser = tuple((u32_parser, space_parser, u32_parser));
 
 > `alt`尝试多个解析器，返回第一个成功。
 
-```rust
+```rust,ignore
 let parser = alt((hex_parser, decimal_parser, binary_parser));
 // 优先级: 从左到右
 ```
@@ -119,7 +119,7 @@ let parser = alt((hex_parser, decimal_parser, binary_parser));
 
 > 解析返回原始输入的子切片。
 
-```rust
+```rust,ignore
 fn take_until_parser(input: &str) -> IResult<&str, &str> {
     take_until(":")(input)
     // 返回&str是input的子切片
@@ -136,7 +136,7 @@ fn take_until_parser(input: &str) -> IResult<&str, &str> {
 
 > nom区分完整错误和不完整输入。
 
-```rust
+```rust,ignore
 pub enum Err<E> {
     Incomplete(Needed),  // 需要更多输入
     Error(E),            // 解析错误
@@ -152,7 +152,7 @@ pub enum Err<E> {
 
 ### 反例 6.1 (递归深度)
 
-```rust
+```rust,ignore
 // 递归解析可能导致栈溢出
 fn expr(input: &str) -> IResult<&str, Expr> {
     alt((
@@ -170,7 +170,7 @@ let parser = recursive(|expr| {
 
 ### 反例 6.2 (UTF8边界)
 
-```rust
+```rust,ignore
 // 字节解析可能破坏UTF8边界
 fn bad_parser(input: &str) -> IResult<&str, &str> {
     take(3usize)(input)  // 可能截断多字节字符

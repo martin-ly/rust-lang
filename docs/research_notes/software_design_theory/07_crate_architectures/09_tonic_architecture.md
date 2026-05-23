@@ -85,7 +85,7 @@ service Greeter {
 
 `tonic-build` 生成：
 
-```rust
+```rust,ignore
 #[async_trait]
 pub trait Greeter: Send + Sync + 'static {
     async fn say_hello(
@@ -111,7 +111,7 @@ pub trait Greeter: Send + Sync + 'static {
 
 Tonic 的 server 内部将每个 gRPC 方法实现包装为 Tower `Service`：
 
-```rust
+```rust,ignore
 impl<S, ReqBody, ResBody> Service<http::Request<ReqBody>>
     for GrpcService<S>
 where
@@ -138,7 +138,7 @@ where
 ### 3.3 `Streaming<T>` — 流类型的方向安全
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 pub struct Streaming<T> {
     inner: crate::codec::Streaming<T>,
 }
@@ -152,7 +152,7 @@ impl<T> Streaming<T> {
 
 `Streaming<T>` 在服务端表示**客户端发送的输入流**，在客户端表示**服务端发送的输出流**。类型系统保证了流的方向：
 
-```rust
+```rust,ignore
 // 服务端：接收客户端流
 async fn client_streaming(
     &self,
@@ -182,7 +182,7 @@ async fn bidirectional(
 ### 4.1 构建脚本集成
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // build.rs
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     tonic_build::configure()
@@ -206,7 +206,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 ### 4.2 生成的 Client 使用
 > **[来源: [docs.rs](https://docs.rs/)]**
 
-```rust
+```rust,ignore
 use myapp::greeter_client::GreeterClient;
 use myapp::HelloRequest;
 
@@ -231,7 +231,7 @@ println!("RESPONSE={:?}", response.into_inner().message);
 ### 5.1 Interceptor 作为同步函数
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 fn auth_interceptor(req: Request<()>) -> Result<Request<()>, Status> {
     let token = req
         .metadata()
@@ -264,7 +264,7 @@ graph LR
     METHOD --> RESPONSE["响应"]
 ```
 
-```rust
+```rust,ignore
 // 使用 Tower Layer 实现异步拦截
 use tower::{Layer, Service};
 
@@ -302,7 +302,7 @@ impl<S> Layer<S> for AsyncAuthLayer {
 ### 6.2 双向流实现示例
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
-```rust
+```rust,ignore
 #[async_trait]
 impl Chat for MyChatService {
     type ChatStreamStream = Pin<Box<dyn Stream<Item = Result<Message, Status>> + Send>>;
@@ -352,7 +352,7 @@ Tonic 基于 Hyper 的 HTTP/2 实现，单一 TCP 连接上可同时承载多个
 
 `prost`（Tonic 使用的 Protobuf 库）采用零拷贝解析策略：对于 `bytes` 和 `string` 字段，直接从输入缓冲区借用，而非拷贝到新的堆分配。这在大消息体传输中显著降低内存压力。
 
-```rust
+```rust,ignore
 // prost 生成的代码中，bytes 字段是 Bytes 类型（引用计数切片）
 pub struct FileChunk {
     pub data: ::prost::bytes::Bytes,  // 零拷贝引用

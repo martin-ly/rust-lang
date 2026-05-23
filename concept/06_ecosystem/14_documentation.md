@@ -207,7 +207,7 @@ pub fn documented() {}
 ### 2.2 Intra-doc Links
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust,ignore
+```rust
 /// 使用 [`MyStruct`] 进行演示。
 ///
 /// 也可以使用 [完整路径](crate::module::MyStruct)。
@@ -617,4 +617,3 @@ graph TD
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
-

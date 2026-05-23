@@ -77,7 +77,7 @@
 
 在Rust支持const generics之前（Rust 1.51之前），开发者无法在泛型参数中使用整数值。这给需要编译期大小确定的场景带来了挑战：
 
-```rust
+```rust,ignore
 // Rust 1.51之前 - 无法直接这样写
 struct Buffer<const N: usize> {
     data: [u8; N],
@@ -161,7 +161,7 @@ Peano公理:
 
 在Rust类型系统中：
 
-```rust
+```rust,ignore
 // Peano表示（概念性）
 struct Z;                    // 零
 struct S<N>(PhantomData<N>); // 后继
@@ -179,7 +179,7 @@ type Three = S<Two>; // S<S<S<Z>>>
 
 在Rust类型系统中，类型可以携带"值"信息：
 
-```rust
+```rust,ignore
 // 类型可以编码数值
 struct UTerm;                      // 0
 struct UInt<U, B>(PhantomData<(U, B)>); // 2*U + B
@@ -226,7 +226,7 @@ U5 = UInt<UInt<UInt<UTerm, B1>, B0>, B1>  // 101
 
 无符号整数使用二进制表示：
 
-```rust
+```rust,ignore
 use typenum::{UTerm, UInt, B0, B1};
 
 // 基本构建块
@@ -264,7 +264,7 @@ let _: U64 = U64::default(); // 数字64的类型
 
 有符号整数使用符号+幅度表示：
 
-```rust
+```rust,ignore
 use typenum::{PInt, NInt, UTerm};
 use typenum::consts::{P1, P2, P5, N1, N2, N5};
 
@@ -285,7 +285,7 @@ let _: N5 = N5::default(); // -5
 
 Typenum提供了直观的类型别名：
 
-```rust
+```rust,ignore
 // 直接使用数值作为类型名
 use typenum::consts::{U0, U1, U2, U3, U4, U5, U6, U7, U8, U9};
 use typenum::consts::{U10, U20, U50, U100, U256, U512, U1024};
@@ -311,7 +311,7 @@ use_size::<U1024>();
 
 Typenum支持完整的算术运算：
 
-```rust
+```rust,ignore
 use typenum::{Sum, Diff, Prod, Quot, Min, Max};
 use typenum::consts::{U2, U3, U5, U6, U8, U9};
 
@@ -361,7 +361,7 @@ type MaxResult = Max<U5, U3>; // U5
 
 类型级比较产生布尔类型：
 
-```rust
+```rust,ignore
 use typenum::{Gr, Le, Eq, Ge, Lt, Ne};
 use typenum::consts::{B0, B1};
 use typenum::consts::{U3, U5};
@@ -391,7 +391,7 @@ check_size::<U5, U3>();
 
 支持完整的位运算：
 
-```rust
+```rust,ignore
 use typenum::{BitAnd, BitOr, BitXor, Shleft, Shright};
 use typenum::consts::{U1, U2, U3, U4, U5, U6, U7, U8};
 
@@ -422,7 +422,7 @@ type ShrResult = Shright<U8, U2>; // 8 >> 2 = 2 = U2
 
 二进制加法的类型级实现：
 
-```rust
+```rust,ignore
 // 概念性实现
 trait Add<R> {
     type Output;
@@ -460,7 +460,7 @@ U3 = UInt<UInt<UTerm, B1>, B1>  // 11
 
 使用二进制乘法算法：
 
-```rust
+```rust,ignore
 // 概念性实现
 trait Mul<R> {
     type Output;
@@ -517,7 +517,7 @@ trait Div<R> {
 
 与generic-array结合使用：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::{U16, U32, U64};
 
@@ -543,7 +543,7 @@ process_buffer(&small);
 
 编译期检查矩阵维度：
 
-```rust
+```rust,ignore
 use typenum::{Prod, Sum};
 use generic_array::GenericArray;
 
@@ -583,7 +583,7 @@ let c: Matrix<f32, U3, U5> = a * b; // OK
 
 使用类型级数字作为配置参数：
 
-```rust
+```rust,ignore
 use typenum::Unsigned;
 
 // 编译期配置的环形缓冲区
@@ -645,7 +645,7 @@ type LargeBuffer<T> = RingBuffer<T, U1024>;
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 // Typenum方式（类型级运算）
 fn typenum_array<N>() -> GenericArray<u8, Prod<N, N>>
 where N: Unsigned {
@@ -694,7 +694,7 @@ fn const_array<const N: usize>() -> [u8; N * N] {
 
 SHA-256使用typenum定义块大小：
 
-```rust
+```rust,ignore
 use generic_array::GenericArray;
 use typenum::consts::{U64, U32, U8};
 
@@ -742,7 +742,7 @@ impl Sha256 {
 
 维度分析系统：
 
-```rust
+```rust,ignore
 use typenum::{Prod, Quot, Exp, P1, P2, N1, Z0};
 
 // 基本维度
@@ -788,7 +788,7 @@ fn add_velocities(a: Quantity<f64, P1, Z0, N1>, b: Quantity<f64, P1, Z0, N1>)
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 use typenum::*;
 
 // 维度系统
@@ -841,7 +841,7 @@ fn main() {
 ### 9.2 固定大小缓冲区
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 use generic_array::{GenericArray, ArrayLength};
 use typenum::Unsigned;
 
@@ -909,7 +909,7 @@ fn main() {
 ### 9.3 编译期配置系统
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 use typenum::*;
 
 // 编译期配置参数
@@ -1004,7 +1004,7 @@ Quot<A, B>::USIZE = a / b (b > 0)
 
 **验证**:
 
-```rust
+```rust,ignore
 use typenum::{Sum, Prod, Diff, Quot};
 use typenum::consts::{U3, U5, U8, U15};
 
@@ -1034,7 +1034,7 @@ assert_eq!(<Quot<U15, U5> as Unsigned>::USIZE, 3);
 2. 类型运算在编译期完成
 3. 最终代码中只保留常量值
 
-```rust
+```rust,ignore
 // 源代码
 fn buffer_size<N: Unsigned>() -> usize {
     N::USIZE
@@ -1089,7 +1089,7 @@ Typenum为这些运算提供了完备的类型级实现，运算结果仍然是U
 
 复杂类型运算会增加编译时间：
 
-```rust
+```rust,ignore
 // 简单运算 - 编译快
 type Simple = Sum<U8, U16>;
 
@@ -1108,7 +1108,7 @@ type Complex = Quot<Prod<Sum<U100, U200>, U3>, U2>;
 
 类型错误时错误信息可能难以理解：
 
-```rust
+```rust,ignore
 // 当类型不匹配时
 fn use_size<N: IsEqual<U8>>() {}
 
@@ -1120,7 +1120,7 @@ use_size::<U16>(); // 错误消息包含复杂的类型表达式
 
 深层类型递归可能触及编译器递归限制：
 
-```rust
+```rust,ignore
 // 非常大的数字可能导致递归深度超限
 type VeryLarge = UInt<...>; // 嵌套层数过多
 
@@ -1133,7 +1133,7 @@ type VeryLarge = UInt<...>; // 嵌套层数过多
 
 **反例**: 在类型级别进行过于复杂的计算
 
-```rust
+```rust,ignore
 // 不推荐：过于复杂的类型级计算
 type Complex = Sum<
     Prod<Sum<U100, Sum<U200, U300>>, U4>,

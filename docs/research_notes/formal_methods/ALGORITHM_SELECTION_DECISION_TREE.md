@@ -89,7 +89,7 @@ graph TD
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 // 标准库排序 - 使用 Timsort
 let mut data = vec![3, 1, 4, 1, 5, 9, 2, 6];
 data.sort();  // 不稳定排序
@@ -192,7 +192,7 @@ fn range_query() {
 | 拓扑排序 | Kahn/DFS | O(V + E) | 任务调度 |
 | 强连通分量 | Tarjan/Kosaraju | O(V + E) | 社区发现 |
 
-```rust
+```rust,ignore
 use petgraph::graph::Graph;
 use petgraph::algo::{dijkstra, floyd_warshall};
 

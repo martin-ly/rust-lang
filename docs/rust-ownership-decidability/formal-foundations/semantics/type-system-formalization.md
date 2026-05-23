@@ -442,7 +442,7 @@ Impl ::= impl<ᾱ> Trait<τ̄> for τ₀ where Q̄ {
 
 Rust 支持高阶 Trait 约束（Higher-Ranked Trait Bounds, HRTB）：
 
-```rust
+```rust,ignore
 fn foo<F>() where F: for<'a> Fn(&'a T) -> &'a U
 ```
 

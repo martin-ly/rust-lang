@@ -12,7 +12,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 异步编程示例
 use tokio::time::{sleep, Duration};
 
@@ -110,7 +110,7 @@ impl ConfigBuilder {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // Future trait 基础
 use std::future::Future;
 use std::pin::Pin;

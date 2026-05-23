@@ -92,7 +92,7 @@ Quinn提供:
 
 > 0-RTT数据有重放风险，应用层需处理。
 
-```rust
+```rust,ignore
 // 0-RTT数据应在幂等操作中使用
 connection.send_datagram(data)?;  // 可能被重放
 
@@ -110,7 +110,7 @@ let (mut send, mut recv) = connection.open_bi().await?;
 
 > Quinn支持多种拥塞控制算法。
 
-```rust
+```rust,ignore
 let config = ServerConfig::with_crypto(Arc::new(crypto));
 // 内置: CUBIC, BBR, NewReno
 ```
@@ -123,7 +123,7 @@ let config = ServerConfig::with_crypto(Arc::new(crypto));
 
 ### 反例 6.1 (流泄漏)
 
-```rust
+```rust,ignore
 // 忘记关闭流可能导致资源泄漏
 let (mut send, _recv) = conn.open_bi().await?;
 send.write_all(b"data").await?;

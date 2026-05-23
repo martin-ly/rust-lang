@@ -5,6 +5,7 @@
 # C++ 互操作指南（cxx + bindgen）
 
 ## 📑 目录
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 >
 - [C++ 互操作指南（cxx + bindgen）](#c-互操作指南cxx--bindgen)
@@ -21,6 +22,7 @@
   - [参考](#参考)
   - [相关概念](#相关概念)
   - [权威来源索引](#权威来源索引)
+  - [权威来源索引](#权威来源索引-1)
 
 ## 概述
 >
@@ -44,9 +46,10 @@ Rust 与 C++ 的互操作主要有两条技术路线：
 - **安全保证**: cxx 编译器自动生成桥接代码，禁止不安全的指针传递
 
 ### 工作流程
+>
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
-```rust
+```rust,ignore
 // src/lib.rs
 #[cxx::bridge]
 mod ffi {
@@ -92,9 +95,10 @@ std::unique_ptr<Canvas> create_canvas() {
 ```
 
 ### build.rs
+>
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
 
-```rust
+```rust,ignore
 fn main() {
     cxx_build::bridge("src/lib.rs")
         .file("src/wrapper.cpp")
@@ -103,9 +107,11 @@ fn main() {
 ```
 
 ## bindgen
+>
 > **[来源: [Rustonomicon](https://doc.rust-lang.org/nomicon/)]**
 
 ### 工作流程
+>
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
 1. 编写 `wrapper.h`，包含需要绑定的 C/C++ 头文件
@@ -113,7 +119,7 @@ fn main() {
 3. 手动编写安全封装层（Raw FFI -> Safe Rust API）
 4. 链接原生库
 
-```rust
+```rust,ignore
 // build.rs
 use std::env;
 use std::path::PathBuf;
@@ -134,7 +140,7 @@ fn main() {
 }
 ```
 
-```rust
+```rust,ignore
 // src/lib.rs
 include!(concat!(env!("OUT_DIR"), "/bindings.rs"));
 
@@ -153,6 +159,7 @@ pub mod safe_wrapper {
 ```
 
 ## cxx vs bindgen 对比
+>
 > **[来源: [Rust Cookbook](https://rust-lang-nursery.github.io/rust-cookbook/)]**
 
 | 特性 | cxx | bindgen |
@@ -165,11 +172,12 @@ pub mod safe_wrapper {
 | 适用场景 | 新的 C++/Rust 混合项目 | 绑定现有的大型 C 库 |
 
 ## 项目中的使用
+>
 > **[来源: [crates.io](https://crates.io/)]**
 
 本项目在 `c13_embedded` crate 中提供了 cxx 互操作的概念演示：
 
-```rust
+```rust,ignore
 use c13_embedded::cxx_interop;
 
 cxx_interop::explain_cxx_bridge();
@@ -179,6 +187,7 @@ cxx_interop::explain_bindgen_workflow();
 启用 `cxx-interop` feature 后可尝试真实 cxx 桥接（需要 C++ 编译器）。
 
 ## 参考
+>
 > **[来源: [docs.rs](https://docs.rs/)]**
 
 - [cxx 文档](https://cxx.rs/)
@@ -199,6 +208,7 @@ cxx_interop::explain_bindgen_workflow();
 ---
 
 ## 相关概念
+>
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
 - [上级目录](../README.md)
@@ -277,4 +287,3 @@ cxx_interop::explain_bindgen_workflow();
 > **[来源: [The Rust Programming Language](https://doc.rust-lang.org/book/)]**
 
 > **[来源: [Rust Standard Library](https://doc.rust-lang.org/std/)]**
-

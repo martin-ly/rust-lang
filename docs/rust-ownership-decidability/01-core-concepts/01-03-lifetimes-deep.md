@@ -473,7 +473,7 @@ fn main() {
 - &'static T 可以赋值给 &'a T（'static: 'a）
 ```
 
-```rust
+```rust,ignore
 // 协变示例 1：不可变引用
 fn covariant_example() {
     let s: &'static str = "hello";  // 'static 生命周期
@@ -540,7 +540,7 @@ fn wrapper_covariance<'a>(w: Wrapper<&'static str>) -> Wrapper<&'a str> {
 - 函数参数位置通常是逆变的
 ```
 
-```rust
+```rust,ignore
 // 逆变示例 1：函数参数
 fn contravariant_fn<'a>() {
     let f: fn(&'a str) = |s| println!("{}", s);
@@ -600,7 +600,7 @@ F<T₁> <: F<T₂> ⇒ T₁ = T₂
 - 内部可变性需要不变
 ```
 
-```rust
+```rust,ignore
 use std::cell::Cell;
 
 // 不变示例 1：Cell
@@ -631,7 +631,7 @@ fn invariant_raw() {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 // 反例：如果 Cell 是协变的，会发生什么？
 fn broken_variance<'a>() {
     let x: Cell<&'a str> = Cell::new("temporary");
@@ -673,7 +673,7 @@ S 对 T 的变型 = F₁ 的变型 ⊓ F₂ 的变型
   - 不变 ⊓ 任何 = 不变
 ```
 
-```rust
+```rust,ignore
 // 变型推导示例
 struct Covariant<T>(T);           // T 协变
 struct Invariant<T>(Cell<T>);     // T 不变
@@ -727,7 +727,7 @@ T <: U ⊢ &'a T <: &'a U
 - 可变引用对两者都是不变的（必须精确匹配）
 ```
 
-```rust
+```rust,ignore
 // 子类型示例
 fn subtyping_examples<'a: 'b, 'b>() {
     // 协变生命周期
@@ -756,7 +756,7 @@ T₂ <: T₁ ∧ U₁ <: U₂ ⊢ fn(T₁) -> U₁ <: fn(T₂) -> U₂
 - 返回位置协变（可以返回更具体的类型）
 ```
 
-```rust
+```rust,ignore
 // 函数子类型示例
 trait Animal { fn name(&self) -> &str; }
 trait Dog: Animal { fn bark(&self); }
@@ -874,7 +874,7 @@ where
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// 错误：变型违反示例
 ///
 /// 这个例子展示了为什么 Rust 不允许逆向生命周期子类型转换
@@ -989,7 +989,7 @@ trait Dog: Animal { fn bark(&self); }
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 /// 错误：trait 对象生命周期省略陷阱
 ///
 /// trait 对象默认有 'static 生命周期约束
@@ -1021,7 +1021,7 @@ fn trait_object_lifetime_bound<'a>() {
 
 > **[来源: Wikipedia - Type System]**
 
-```rust
+```rust,ignore
 /// 错误：尝试创建自引用结构体
 ///
 /// 自引用是 Rust 中最难的生命周期问题之一
@@ -1082,7 +1082,7 @@ impl SelfRefFixed {
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 错误：生命周期省略规则误解
 ///
 /// Rust 的生命周期省略规则有特定的适用条件
@@ -1122,7 +1122,7 @@ fn explicit_vs_elided<'a>(x: &'a str, y: &'a str) -> &'a str {
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 /// 错误：高阶生命周期约束违反
 ///
 /// for<'a> 要求对所有生命周期都成立
@@ -1388,7 +1388,7 @@ mod iterator_lifetime_failure {
 
 > **[来源: Rust Standard Library - doc.rust-lang.org/std]**
 
-```rust
+```rust,ignore
 /// 错误：Stream 生命周期问题
 ///
 /// 异步流的生命周期约束比迭代器更复杂
@@ -1434,7 +1434,7 @@ mod stream_lifetime_failure {
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 /// 错误：Scoped 线程生命周期问题
 ///
 /// crossbeam::scope 要求仔细处理生命周期
@@ -1480,7 +1480,7 @@ mod scoped_thread_failure {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// 错误：Crossbeam scope 高级生命周期问题
 ///
 /// 复杂场景下的 scope 生命周期限制
@@ -1698,7 +1698,7 @@ impl SelfReferential {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 /// 使用 ouroboros crate 简化自引用
 ///
 /// ouroboros 提供宏来自动生成安全的自引用结构体
@@ -1854,7 +1854,7 @@ fn use_lending_iterator() {
 
 > **[来源: RFCs - github.com/rust-lang/rfcs]**
 
-```rust
+```rust,ignore
 /// 为 Lending Iterator 提供适配器
 pub trait LendingIteratorExt: LendingIterator {
     fn map<F, R>(self, f: F) -> Map<Self, F>
@@ -1994,7 +1994,7 @@ impl<T> Container<T> {
 
 > **[来源: PLDI - Programming Language Design]**
 
-```rust
+```rust,ignore
 /// T: 'a 表示 T 必须至少活 'a 那么长
 ///
 /// 这意味着 T 中不能包含比 'a 短的引用
@@ -2045,7 +2045,7 @@ where
 
 > **[来源: Wikipedia - Memory Safety]**
 
-```rust
+```rust,ignore
 /// trait 对象的生命周期边界
 fn trait_object_bounds<'a>() {
     // Box<dyn Trait> 默认是 Box<dyn Trait + 'static>
@@ -2132,7 +2132,7 @@ impl<'arena, T: 'arena> ArenaBox<'arena, T> {
 
 > **[来源: Wikipedia - Concurrency]**
 
-```rust
+```rust,ignore
 /// Arena 生命周期分析：
 ///
 /// 'arena ───────────────────────────────────────
@@ -2371,7 +2371,7 @@ unsafe impl Sync for BumpArena {}
 
 > **[来源: Wikipedia - Rust (programming language)]**
 
-```rust
+```rust,ignore
 /// 带生命周期的类型安全 Arena
 ///
 /// 确保分配的引用不会超过 Arena 的生命周期
@@ -2459,7 +2459,7 @@ struct Point {
 4. 因此，分配的引用在 Arena drop 后无法使用 ∎
 ```
 
-```rust
+```rust,ignore
 /// Arena 生命周期边界示例
 fn arena_lifetime_bounds<'a>(arena: &mut ScopedArena<'a>) -> &'a str {
     let local = String::from("local");
@@ -2499,7 +2499,7 @@ fn nested_arena_lifetimes() {
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 /// Arena 中的自引用结构
 ///
 /// 使用 Arena 分配自引用结构更安全，因为：
@@ -2564,7 +2564,7 @@ fn graph_in_arena() {
 
 #### 7.4.1 Arena 性能特征
 
-```rust
+```rust,ignore
 /// Arena vs 堆分配性能对比
 ///
 /// Arena 优势：
@@ -2607,7 +2607,7 @@ fn benchmark_arena() {
 
 #### 7.4.2 常见使用模式
 
-```rust
+```rust,ignore
 /// 模式 1：解析器使用 Arena
 mod parser_arena {
     use super::*;

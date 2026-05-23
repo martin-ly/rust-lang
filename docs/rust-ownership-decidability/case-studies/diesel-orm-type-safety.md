@@ -67,7 +67,7 @@
 
 Diesel是一个类型安全的Rust ORM，它在编译时验证SQL查询的正确性：
 
-```rust
+```rust,ignore
 // 编译错误: 列不存在
 dsl::users.filter(dsl::nonexistent_column.eq("value"));
 
@@ -132,7 +132,7 @@ $$
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 table! {
     users (id) {
         id -> Integer,
@@ -164,7 +164,7 @@ $$
 
 **Diesel编码**:
 
-```rust
+```rust,ignore
 mod schema {
     table! { users (...) }
     table! { posts (...) }
@@ -234,7 +234,7 @@ $$
 
 > **[来源: POPL - Programming Languages Research]**
 
-```rust
+```rust,ignore
 let query = users.filter(id.eq(1)).select(name);
 ```
 
@@ -313,7 +313,7 @@ pub mod users {
 
 引用列时，Rust类型检查器验证标识符存在:
 
-```rust
+```rust,ignore
 // 编译时错误: no `nonexistent` in `users`
 users::nonexistent
 ```
@@ -344,7 +344,7 @@ $$
 
 Diesel为每个列定义 `Expression` trait:
 
-```rust
+```rust,ignore
 impl Expression for id {
     type SqlType = Integer;
 }
@@ -356,14 +356,14 @@ impl Expression for name {
 
 `eq` 方法要求参数类型与列的SqlType匹配:
 
-```rust
+```rust,ignore
 fn eq<T>(self, other: T) -> Eq<Self, T>
 where T: AsExpression<Self::SqlType>
 ```
 
 因此:
 
-```rust
+```rust,ignore
 // 错误: 期望 Integer，实际 &str
 users.filter(id.eq("string"))  // 编译错误
 
@@ -386,7 +386,7 @@ users.filter(id.eq(1))  // OK
 
 外键约束表示为类型级别的关联:
 
-```rust
+```rust,ignore
 #[derive(Associations)]
 #[belongs_to(User)]
 struct Post {
@@ -408,7 +408,7 @@ $$
 ### 定义 5.2 (连接类型)
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 fn inner_join<T>(self, other: T) -> InnerJoin<Self, T>
 where T: Table
 ```
@@ -437,7 +437,7 @@ $$
 
 连接条件使用 `on` 子句:
 
-```rust
+```rust,ignore
 users.inner_join(posts.on(posts::user_id.eq(users::id)))
 ```
 
@@ -460,7 +460,7 @@ users.inner_join(posts.on(posts::user_id.eq(users::id)))
 ### 定义 6.1 (变更集类型)
 > **[来源: [Rust By Example](https://doc.rust-lang.org/rust-by-example/)]**
 
-```rust
+```rust,ignore
 #[derive(AsChangeset)]
 struct UserChangeset {
     name: Option<String>,
@@ -483,7 +483,7 @@ $$
 
 `AsChangeset` 宏为每个字段生成赋值:
 
-```rust
+```rust,ignore
 // 生成的代码
 fn as_changeset(&self) -> Vec<Box<dyn Expression>> {
     let mut changes = vec![];
@@ -520,7 +520,7 @@ $$
 
 可空列映射到 `Option<T>`:
 
-```rust
+```rust,ignore
 table! {
     users {
         email -> Nullable<Text>,

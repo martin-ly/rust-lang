@@ -96,7 +96,7 @@
 
 > **[来源: Rust Reference - doc.rust-lang.org/reference]**
 
-```rust
+```rust,ignore
 // 要求: Rust {{ rust_version }}+ | Edition {{ edition }}
 // 文件: crates/{{ crate }}/src/rust_{{ version }}_features.rs
 
@@ -107,7 +107,7 @@
 
 > **[来源: TRPL - The Rust Programming Language]**
 
-```rust
+```rust,ignore
 {{ advanced_example }}
 ```
 
@@ -115,7 +115,7 @@
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 {{ production_example }}
 ```
 
@@ -178,7 +178,7 @@ default = []
 
 从 {{ prev_version }} 迁移到 {{ current_version }}:
 
-```rust
+```rust,ignore
 // 旧代码 ({{ prev_version }})
 {{ old_code }}
 
@@ -225,7 +225,7 @@ default = []
 ### 常见陷阱
 > **[来源: [crates.io](https://crates.io/)]**
 
-```rust
+```rust,ignore
 // ❌ 错误用法
 {{ wrong_usage }}
 
@@ -247,7 +247,7 @@ default = []
 ## 🧪 测试用例
 > **[来源: [Rust Reference](https://doc.rust-lang.org/reference/)]**
 
-```rust
+```rust,ignore
 #[cfg(test)]
 mod tests {
     use super::*;

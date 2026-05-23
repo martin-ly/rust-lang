@@ -78,7 +78,7 @@ $$
 \text{ConstOp} ::= \text{算术} \mid \text{逻辑} \mid \text{控制流} \mid \text{不可变借用} \mid \text{const 调用}
 $$
 
-```rust
+```rust,ignore
 // ✅ 允许的操作
 const fn allowed_operations(x: i32) -> i32 {
     // 算术运算
@@ -114,7 +114,7 @@ $$
 \text{NonConstOp} ::= \text{I/O} \mid \text{堆分配} \mid \text{可变静态} \mid \text{非 const 调用}
 $$
 
-```rust
+```rust,ignore
 // ❌ 禁止的操作
 const fn forbidden_operations() {
     // I/O
@@ -221,7 +221,7 @@ $$
 \quad\text{(T-CONSTARR)}
 $$
 
-```rust
+```rust,ignore
 // 示例：常量泛型
 struct Array<T, const N: usize>([T; N]);
 
@@ -252,7 +252,7 @@ $$
 \end{cases}
 $$
 
-```rust
+```rust,ignore
 #![feature(const_eval_select)]
 
 use std::intrinsics::const_eval_select;

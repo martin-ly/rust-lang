@@ -147,7 +147,7 @@
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 安全的借用转换
 fn safe_borrow_conversion<T>(r: &T) -> *const T {
     r as *const T  // ✅ 总是安全
@@ -171,7 +171,7 @@ unsafe fn unsafe_deref<T>(ptr: *const T) -> &T {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 use std::mem::MaybeUninit;
 
 // 安全模式
@@ -199,7 +199,7 @@ fn safe_maybe_uninit<T>() -> T {
 >
 > **[来源: Rust Official Docs]**
 
-```rust
+```rust,ignore
 // 安全的切片转换
 unsafe fn slice_from_raw_parts<T>(
     data: *const T,
@@ -283,7 +283,7 @@ unsafe fn race_condition() {
 
 > **[来源: Rustonomicon - doc.rust-lang.org/nomicon]**
 
-```rust
+```rust,ignore
 struct SafeBuffer<T> {
     data: [MaybeUninit<T>; 1024],
     initialized: [bool; 1024],
@@ -323,7 +323,7 @@ impl<T> SafeBuffer<T> {
 
 > **[来源: ACM - Systems Programming Languages]**
 
-```rust
+```rust,ignore
 struct SafeWrapper<'a, T> {
     ptr: *const T,
     _marker: PhantomData<&'a T>,
