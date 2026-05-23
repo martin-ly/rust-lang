@@ -63,32 +63,32 @@ pub mod integer_types {
         /// # 示例
         /// ```rust
         /// let value: i8 = 100;
-        /// let max: i8 = i8::MAX;  // 127
-        /// let min: i8 = i8::MIN;  // -128
+        /// let max: i8 = i8::MAX; // 127
+        /// let min: i8 = i8::MIN; // -128
         /// ```
         pub fn i8_operations() {
             // 基本操作
             let a: i8 = 100;
             let b: i8 = 27;
-            
+
             // 算术运算
-            let sum = a + b;           // 127
-            let diff = a - b;          // 73
-            let quotient = a / b;      // 3
-            let remainder = a % b;     // 19
-            
+            let sum = a + b; // 127
+            let diff = a - b; // 73
+            let quotient = a / b; // 3
+            let remainder = a % b; // 19
+
             println!("i8 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值测试
             let max_val = i8::MAX;
             let min_val = i8::MIN;
             println!("  i8::MAX = {}", max_val);
             println!("  i8::MIN = {}", min_val);
-            
+
             // 类型转换
             let as_u8: u8 = a as u8;
             let as_i16: i16 = a as i16;
@@ -103,32 +103,32 @@ pub mod integer_types {
         pub fn i32_operations() {
             let a: i32 = 1_000_000;
             let b: i32 = 500_000;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let product = a * b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("i32 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} * {} = {}", a, b, product);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  i32::MAX = {}", i32::MAX);
             println!("  i32::MIN = {}", i32::MIN);
-            
+
             // 位运算
             let bitwise_and = a & b;
             let bitwise_or = a | b;
             let bitwise_xor = a ^ b;
             let left_shift = a << 2;
             let right_shift = a >> 2;
-            
+
             println!("  位运算结果:");
             println!("    {} & {} = {}", a, b, bitwise_and);
             println!("    {} | {} = {}", a, b, bitwise_or);
@@ -143,21 +143,21 @@ pub mod integer_types {
         pub fn i64_operations() {
             let a: i64 = 1_000_000_000_000;
             let b: i64 = 500_000_000_000;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let product = a * b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("i64 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} * {} = {}", a, b, product);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  i64::MAX = {}", i64::MAX);
             println!("  i64::MIN = {}", i64::MIN);
@@ -170,19 +170,19 @@ pub mod integer_types {
         pub fn i128_operations() {
             let a: i128 = 170_141_183_460_469_231_731_687_303_715_884_105_727;
             let b: i128 = 85_070_591_730_234_615_865_843_651_857_942_052_863;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("i128 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  i128::MAX = {}", i128::MAX);
             println!("  i128::MIN = {}", i128::MIN);
@@ -222,23 +222,23 @@ pub mod integer_types {
         pub fn u8_operations() {
             let a: u8 = 200;
             let b: u8 = 55;
-            
+
             // 算术运算
-            let sum = a + b;           // 255
-            let diff = a - b;          // 145
-            let quotient = a / b;      // 3
-            let remainder = a % b;     // 35
-            
+            let sum = a + b; // 255
+            let diff = a - b; // 145
+            let quotient = a / b; // 3
+            let remainder = a % b; // 35
+
             println!("u8 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  u8::MAX = {}", u8::MAX);
             println!("  u8::MIN = {}", u8::MIN);
-            
+
             // 字节操作
             let byte_value: u8 = 0b1010_1010;
             println!("  字节值: 0b{:08b}", byte_value);
@@ -252,21 +252,21 @@ pub mod integer_types {
         pub fn u32_operations() {
             let a: u32 = 2_000_000_000;
             let b: u32 = 1_000_000_000;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let product = a * b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("u32 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} * {} = {}", a, b, product);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  u32::MAX = {}", u32::MAX);
             println!("  u32::MIN = {}", u32::MIN);
@@ -278,21 +278,21 @@ pub mod integer_types {
         pub fn u64_operations() {
             let a: u64 = 9_000_000_000_000_000_000;
             let b: u64 = 4_500_000_000_000_000_000;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let product = a * b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("u64 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} * {} = {}", a, b, product);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  u64::MAX = {}", u64::MAX);
             println!("  u64::MIN = {}", u64::MIN);
@@ -305,19 +305,19 @@ pub mod integer_types {
         pub fn u128_operations() {
             let a: u128 = 340_282_366_920_938_463_463_374_607_431_768_211_455;
             let b: u128 = 170_141_183_460_469_231_731_687_303_715_884_105_727;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("u128 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  u128::MAX = {}", u128::MAX);
             println!("  u128::MIN = {}", u128::MIN);
@@ -330,21 +330,21 @@ pub mod integer_types {
         pub fn usize_operations() {
             let a: usize = 1_000_000;
             let b: usize = 500_000;
-            
+
             // 算术运算
             let sum = a + b;
             let diff = a - b;
             let product = a * b;
             let quotient = a / b;
             let remainder = a % b;
-            
+
             println!("usize 运算结果:");
             println!("  {} + {} = {}", a, b, sum);
             println!("  {} - {} = {}", a, b, diff);
             println!("  {} * {} = {}", a, b, product);
             println!("  {} / {} = {}", a, b, quotient);
             println!("  {} % {} = {}", a, b, remainder);
-            
+
             // 边界值
             println!("  usize::MAX = {}", usize::MAX);
             println!("  usize::MIN = {}", usize::MIN);
@@ -391,7 +391,8 @@ pub mod integer_types {
             let non_zero_i16 = NonZeroI16::new(1000).expect("创建NonZeroI16失败");
             let non_zero_i32 = NonZeroI32::new(1_000_000).expect("创建NonZeroI32失败");
             let non_zero_i64 = NonZeroI64::new(1_000_000_000_000).expect("创建NonZeroI64失败");
-            let non_zero_i128 = NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000).expect("创建NonZeroI128失败");
+            let non_zero_i128 = NonZeroI128::new(1_000_000_000_000_000_000_000_000_000_000)
+                .expect("创建NonZeroI128失败");
             let non_zero_isize = NonZeroIsize::new(1_000_000).expect("创建NonZeroIsize失败");
 
             println!("非零有符号整数:");
@@ -413,8 +414,11 @@ pub mod integer_types {
             let non_zero_u8 = NonZeroU8::new(200).expect("创建NonZeroU8失败");
             let non_zero_u16 = NonZeroU16::new(30000).expect("创建NonZeroU16失败");
             let non_zero_u32 = NonZeroU32::new(2_000_000_000).expect("创建NonZeroU32失败");
-            let non_zero_u64 = NonZeroU64::new(9_000_000_000_000_000_000).expect("创建NonZeroU64失败");
-            let non_zero_u128 = NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455).expect("创建NonZeroU128失败");
+            let non_zero_u64 =
+                NonZeroU64::new(9_000_000_000_000_000_000).expect("创建NonZeroU64失败");
+            let non_zero_u128 =
+                NonZeroU128::new(340_282_366_920_938_463_463_374_607_431_768_211_455)
+                    .expect("创建NonZeroU128失败");
             let non_zero_usize = NonZeroUsize::new(1_000_000).expect("创建NonZeroUsize失败");
 
             println!("非零无符号整数:");
@@ -447,15 +451,15 @@ pub mod integer_types {
         /// 注意：这种转换可能会导致数据丢失或溢出。
         pub fn explicit_conversion() {
             let i32_value: i32 = 1_000_000;
-            
+
             // 转换为更小的类型（可能丢失数据）
             let i8_value: i8 = i32_value as i8;
             let u8_value: u8 = i32_value as u8;
-            
+
             // 转换为更大的类型（安全）
             let i64_value: i64 = i32_value as i64;
             let u64_value: u64 = i32_value as u64;
-            
+
             println!("显式类型转换:");
             println!("  i32 {} -> i8 {}", i32_value, i8_value);
             println!("  i32 {} -> u8 {}", i32_value, u8_value);
@@ -469,22 +473,22 @@ pub mod integer_types {
         /// 转换失败时返回错误而不是panic。
         pub fn safe_conversion() {
             let i32_value: i32 = 1_000_000;
-            
+
             // 安全转换为更小的类型
             match i32_value.try_into::<i8>() {
                 Ok(value) => println!("安全转换 i32 {} -> i8 {}", i32_value, value),
                 Err(_) => println!("转换失败: i32 {} 无法安全转换为 i8", i32_value),
             }
-            
+
             match i32_value.try_into::<u8>() {
                 Ok(value) => println!("安全转换 i32 {} -> u8 {}", i32_value, value),
                 Err(_) => println!("转换失败: i32 {} 无法安全转换为 u8", i32_value),
             }
-            
+
             // 安全转换为更大的类型（总是成功）
             let i64_value: i64 = i32_value.try_into().expect("i32到i64转换失败");
             let u64_value: u64 = i32_value.try_into().expect("i32到u64转换失败");
-            
+
             println!("安全转换 i32 {} -> i64 {}", i32_value, i64_value);
             println!("安全转换 i32 {} -> u64 {}", i32_value, u64_value);
         }
@@ -495,11 +499,11 @@ pub mod integer_types {
         /// 编译器可以根据上下文自动推断整数类型。
         pub fn type_inference() {
             // 类型推断示例
-            let a = 42;        // 推断为 i32
-            let b = 42u8;      // 显式指定为 u8
-            let c = 42i64;     // 显式指定为 i64
-            let d = 42_u128;   // 显式指定为 u128，使用下划线分隔符
-            
+            let a = 42; // 推断为 i32
+            let b = 42u8; // 显式指定为 u8
+            let c = 42i64; // 显式指定为 i64
+            let d = 42_u128; // 显式指定为 u128，使用下划线分隔符
+
             println!("类型推断:");
             println!("  a = {} (类型: {})", a, std::any::type_name_of_val(&a));
             println!("  b = {} (类型: {})", b, std::any::type_name_of_val(&b));
@@ -522,19 +526,19 @@ pub mod integer_types {
         pub fn overflow_checking() {
             let a: i8 = 100;
             let b: i8 = 50;
-            
+
             // 检查加法溢出
             match a.checked_add(b) {
                 Some(result) => println!("{} + {} = {}", a, b, result),
                 None => println!("溢出: {} + {} 超出 i8 范围", a, b),
             }
-            
+
             // 检查乘法溢出
             match a.checked_mul(b) {
                 Some(result) => println!("{} * {} = {}", a, b, result),
                 None => println!("溢出: {} * {} 超出 i8 范围", a, b),
             }
-            
+
             // 检查减法溢出
             let c: i8 = -100;
             match c.checked_sub(b) {
@@ -550,15 +554,15 @@ pub mod integer_types {
         pub fn saturating_operations() {
             let a: i8 = 100;
             let b: i8 = 50;
-            
+
             // 饱和加法
             let saturating_sum = a.saturating_add(b);
             println!("饱和加法: {} + {} = {}", a, b, saturating_sum);
-            
+
             // 饱和乘法
             let saturating_product = a.saturating_mul(b);
             println!("饱和乘法: {} * {} = {}", a, b, saturating_product);
-            
+
             // 饱和减法
             let c: i8 = -100;
             let saturating_diff = c.saturating_sub(b);
@@ -572,15 +576,15 @@ pub mod integer_types {
         pub fn wrapping_operations() {
             let a: i8 = 100;
             let b: i8 = 50;
-            
+
             // 环绕加法
             let wrapping_sum = a.wrapping_add(b);
             println!("环绕加法: {} + {} = {}", a, b, wrapping_sum);
-            
+
             // 环绕乘法
             let wrapping_product = a.wrapping_mul(b);
             println!("环绕乘法: {} * {} = {}", a, b, wrapping_product);
-            
+
             // 环绕减法
             let c: i8 = -100;
             let wrapping_diff = c.wrapping_sub(b);
@@ -598,14 +602,14 @@ pub mod integer_types {
         /// 不同进制格式化
         pub fn radix_formatting() {
             let value: i32 = 255;
-            
+
             println!("不同进制格式化:");
             println!("  十进制: {}", value);
             println!("  二进制: 0b{:b}", value);
             println!("  八进制: 0o{:o}", value);
             println!("  十六进制: 0x{:x}", value);
             println!("  十六进制(大写): 0x{:X}", value);
-            
+
             // 带前导零的格式化
             println!("  二进制(8位): 0b{:08b}", value);
             println!("  十六进制(4位): 0x{:04X}", value);
@@ -614,7 +618,7 @@ pub mod integer_types {
         /// 对齐和填充
         pub fn alignment_and_padding() {
             let value: i32 = 42;
-            
+
             println!("对齐和填充:");
             println!("  左对齐(10位): '{:<10}'", value);
             println!("  右对齐(10位): '{:>10}'", value);
@@ -626,7 +630,7 @@ pub mod integer_types {
         /// 千位分隔符
         pub fn thousand_separator() {
             let value: i64 = 1_234_567_890;
-            
+
             println!("千位分隔符:");
             println!("  原始值: {}", value);
             println!("  带分隔符: {:,}", value);
@@ -647,9 +651,9 @@ pub mod performance_tests {
     /// 算术运算性能测试
     pub fn arithmetic_performance_test() {
         const ITERATIONS: usize = 1_000_000;
-        
+
         println!("整数类型性能测试 ({} 次迭代):", ITERATIONS);
-        
+
         // i8 性能测试
         let start = Instant::now();
         let mut sum_i8: i8 = 0;
@@ -658,7 +662,7 @@ pub mod performance_tests {
         }
         let i8_duration = start.elapsed();
         println!("  i8 运算时间: {:?}, 结果: {}", i8_duration, sum_i8);
-        
+
         // i32 性能测试
         let start = Instant::now();
         let mut sum_i32: i32 = 0;
@@ -667,7 +671,7 @@ pub mod performance_tests {
         }
         let i32_duration = start.elapsed();
         println!("  i32 运算时间: {:?}, 结果: {}", i32_duration, sum_i32);
-        
+
         // i64 性能测试
         let start = Instant::now();
         let mut sum_i64: i64 = 0;
@@ -676,11 +680,17 @@ pub mod performance_tests {
         }
         let i64_duration = start.elapsed();
         println!("  i64 运算时间: {:?}, 结果: {}", i64_duration, sum_i64);
-        
+
         // 性能比较
         println!("性能比较:");
-        println!("  i32 vs i8: {:.2}x", i8_duration.as_nanos() as f64 / i32_duration.as_nanos() as f64);
-        println!("  i64 vs i32: {:.2}x", i64_duration.as_nanos() as f64 / i32_duration.as_nanos() as f64);
+        println!(
+            "  i32 vs i8: {:.2}x",
+            i8_duration.as_nanos() as f64 / i32_duration.as_nanos() as f64
+        );
+        println!(
+            "  i64 vs i32: {:.2}x",
+            i64_duration.as_nanos() as f64 / i32_duration.as_nanos() as f64
+        );
     }
 
     /// 内存使用测试
@@ -707,7 +717,7 @@ pub mod performance_tests {
 /// 包括基本操作、类型转换、溢出处理、格式化等。
 pub fn demonstrate_all_integer_types() {
     println!("=== Rust 1.89 整数类型系统演示 ===\n");
-    
+
     // 有符号整数操作
     println!("1. 有符号整数操作:");
     integer_types::signed_integers::i8_operations();
@@ -718,7 +728,7 @@ pub fn demonstrate_all_integer_types() {
     println!();
     integer_types::signed_integers::i128_operations();
     println!();
-    
+
     // 无符号整数操作
     println!("2. 无符号整数操作:");
     integer_types::unsigned_integers::u8_operations();
@@ -731,14 +741,14 @@ pub fn demonstrate_all_integer_types() {
     println!();
     integer_types::unsigned_integers::usize_operations();
     println!();
-    
+
     // 非零整数操作
     println!("3. 非零整数操作:");
     integer_types::non_zero_integers::non_zero_signed_operations();
     println!();
     integer_types::non_zero_integers::non_zero_unsigned_operations();
     println!();
-    
+
     // 类型转换
     println!("4. 类型转换:");
     integer_types::type_conversion::explicit_conversion();
@@ -747,7 +757,7 @@ pub fn demonstrate_all_integer_types() {
     println!();
     integer_types::type_conversion::type_inference();
     println!();
-    
+
     // 溢出处理
     println!("5. 溢出处理:");
     integer_types::overflow_handling::overflow_checking();
@@ -756,7 +766,7 @@ pub fn demonstrate_all_integer_types() {
     println!();
     integer_types::overflow_handling::wrapping_operations();
     println!();
-    
+
     // 格式化
     println!("6. 格式化:");
     integer_types::formatting::radix_formatting();
@@ -765,14 +775,14 @@ pub fn demonstrate_all_integer_types() {
     println!();
     integer_types::formatting::thousand_separator();
     println!();
-    
+
     // 性能测试
     println!("7. 性能测试:");
     performance_tests::arithmetic_performance_test();
     println!();
     performance_tests::memory_usage_test();
     println!();
-    
+
     println!("=== 演示完成 ===");
 }
 

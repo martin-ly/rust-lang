@@ -79,11 +79,7 @@ pub fn advanced_generics_examples() {
 
     // 高阶生命周期约束 (HRTB)
     fn truncate_string(s: &str) -> &str {
-        if s.len() > 5 {
-            &s[..5]
-        } else {
-            s
-        }
+        if s.len() > 5 { &s[..5] } else { s }
     }
     higher_ranked_lifetime(&truncate_string);
 
@@ -286,11 +282,7 @@ where
 
 /// 变型示例 - 协变
 pub fn longest<'a>(x: &'a str, y: &'a str) -> &'a str {
-    if x.len() > y.len() {
-        x
-    } else {
-        y
-    }
+    if x.len() > y.len() { x } else { y }
 }
 
 /// 变型示例 - 逆变

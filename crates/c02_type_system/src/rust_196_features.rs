@@ -491,10 +491,9 @@ pub fn nonzero_range_demo() {
 /// **来源**: [Rust Standard Library: assert_matches]
 #[cfg(feature = "nightly")]
 pub fn assert_matches_demo() {
-    use std::assert_matches::assert_matches;
-    // 需要 nightly 或 1.96+
+    // assert_matches! 在 Rust 1.96+ 稳定；当前环境暂用 assert!(matches!()) 等价替代
     let result: Result<i32, &str> = Ok(42);
-    assert_matches!(result, Ok(n) if n > 0);
+    assert!(matches!(result, Ok(n) if n > 0));
 }
 
 // ==================== 测试 ====================

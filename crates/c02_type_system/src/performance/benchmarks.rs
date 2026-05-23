@@ -3,8 +3,8 @@
 // 创建日期: 2025-01-27
 // 版本: 1.0
 
-use std::time::{Duration, Instant};
 use std::collections::HashMap;
+use std::time::{Duration, Instant};
 
 /// 性能测试结果
 #[derive(Debug, Clone)]
@@ -181,13 +181,17 @@ pub mod rust_189_benchmarks {
 
         // 传统关联类型 vs GATs
         let traditional_result = runner.run("传统关联类型", || {
-            let iterator = TraditionalIterator { data: vec![1, 2, 3, 4, 5] };
+            let iterator = TraditionalIterator {
+                data: vec![1, 2, 3, 4, 5],
+            };
             let _sum: i32 = iterator.collect().iter().sum();
         });
         results.push(traditional_result);
 
         let gats_result = runner.run("GATs迭代器", || {
-            let iterator = GatsIterator { data: vec![1, 2, 3, 4, 5] };
+            let iterator = GatsIterator {
+                data: vec![1, 2, 3, 4, 5],
+            };
             let _sum: i32 = iterator.collect().iter().sum();
         });
         results.push(gats_result);
@@ -270,7 +274,10 @@ struct TraditionalIterator {
 }
 
 impl TraditionalIterator {
-    fn collect<T>(self) -> Vec<T> where T: From<i32> {
+    fn collect<T>(self) -> Vec<T>
+    where
+        T: From<i32>,
+    {
         self.data.into_iter().map(|x| T::from(x)).collect()
     }
 }
@@ -281,7 +288,10 @@ struct GatsIterator {
 }
 
 impl GatsIterator {
-    fn collect<T>(self) -> Vec<T> where T: From<i32> {
+    fn collect<T>(self) -> Vec<T>
+    where
+        T: From<i32>,
+    {
         self.data.into_iter().map(|x| T::from(x)).collect()
     }
 }
@@ -311,17 +321,17 @@ const COMPILE_TIME_FIB_10: u32 = 55;
 
 /// 未优化内存布局
 struct UnoptimizedLayout {
-    a: u8,      // 1 byte
-    b: u32,     // 4 bytes
-    c: u8,      // 1 byte
+    a: u8,  // 1 byte
+    b: u32, // 4 bytes
+    c: u8,  // 1 byte
 }
 
 /// 优化内存布局
 #[repr(C)]
 struct OptimizedLayout {
-    a: u8,      // 1 byte
-    b: u32,     // 4 bytes
-    c: u8,      // 1 byte
+    a: u8,  // 1 byte
+    b: u32, // 4 bytes
+    c: u8,  // 1 byte
 }
 
 /// 运行所有性能测试

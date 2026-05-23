@@ -26,7 +26,8 @@
 这些文件包含旧版本的特性实现，仅供参考。当前版本请使用 `rust_194_features.rs`。
 
 ---
-**注意**: 归档内容不再维护，可能存在与当前版本不兼容的代码。
+
+**注意**: 归档内容不再维护，可能存在与当前版本不兼容的代码
 ---
 
 > **权威来源**: [Rust Reference](https://doc.rust-lang.org/reference/), [The Rust Programming Language](https://doc.rust-lang.org/book/), [Rust Standard Library](https://doc.rust-lang.org/std/)
